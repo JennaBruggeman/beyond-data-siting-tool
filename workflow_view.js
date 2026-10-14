@@ -62,9 +62,9 @@ const S=[
  {id:'relax',lane:'get',row:9,kind:'output',t:'If you moved a limit',s:'shown separately; never mixed into the options',
   d:'What relaxing each limit would open up, and its price. The user\'s limit is never overridden.',
   give:[],uses:[],get:['the relax panel'],refs:['Q6 option b'],open:[]},
- {id:'next',need:'optional',dflt:'',ask:'',lane:'you',row:9,kind:'decision',t:'What next?',s:'adjust · change preferences · relax a limit · read · done',
-  d:'From the options the user can adjust one (size, position, technology) and keep it, change preferences, relax a limit, read more closely, or finish.',
-  give:['a choice'],uses:[],get:[],branches:['Adjust an option → computed again','Change preferences or relax a limit → back to preferences','Read and compare → scene, lens, sources','Done → leave with'],refs:['Q6 any option can be adjusted and kept'],open:[]},
+ {id:'next',need:'optional',dflt:'',ask:'',lane:'you',row:9,kind:'decision',t:'What next?',s:'adjust · add-ons · preferences · relax · read · done',
+  d:'From the options the user can adjust one (size, position, technology) and keep it, try add-ons on it to see what each would change, change preferences, relax a limit, read more closely, or finish.',
+  give:['a choice'],uses:[],get:[],branches:['Adjust an option → computed again','Try an add-on (solar, batteries, reused water, a borefield, a seasonal store…) → computed again, showing what changed and the rules in each city','Change preferences or relax a limit → back to preferences','Read and compare → scene, lens, sources','Done → leave with'],refs:['Q6 any option can be adjusted and kept'],open:[]},
  {id:'read',need:'optional',dflt:'A neutral view showing every party',ask:'See it as… a neighbour · the city · the operator · …',lane:'you',row:10,kind:'action',t:'Read and compare',s:'switch lens · open a number\'s sources · move around',
   d:'The user switches lens to see the same table from another party\'s view, opens any number to see its formula and sources, and moves around the scene.',
   give:['a lens','a number to open'],uses:[],get:[],refs:['Q7','Q14 constrained navigation'],open:[]},
@@ -84,7 +84,7 @@ const E=[
  ['city','q'],['q','start'],['start','find'],['find','card'],
  ['start','newex'],['newex','state','existing'],['state','place'],['newex','brings','new'],['brings','place'],['place','exch'],
  ['brings','pref'],['pref','compute','limits · emphasis'],['place','compute'],['compute','conds'],['conds','gen'],['gen','opts'],['gen','relax'],
- ['opts','next','','down'],['next','compute','adjust an option','loopC'],['next','pref','change or relax','loopL'],
+ ['opts','next','','down'],['next','compute','adjust or add-on','loopC'],['next','pref','change or relax','loopL'],
  ['next','read','read'],['read','scene'],['read','done','done'],['done','report'],['report','leave'],
 ];
 const N={}; S.forEach(s=>N[s.id]=s);

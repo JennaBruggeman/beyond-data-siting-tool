@@ -518,6 +518,68 @@ def d_account(sel):
     F.badge(x0 + 3 * cw - 2, y0 - 4, 'tradeoffs', sel, c); F.badge(px + 198, y0 - 4, 'ledger', sel, c)
     return F, 'Table', 'One trade-off table per option, rows in their own units and never summed; the ledger reads the same table party by party.'
 
-DIAGRAMS = {'heat_out': d_heat_out, 'heat_use': d_heat_use, 'sink': d_sink, 'power': d_power, 'water': d_water, 'sound': d_sound,
+
+def d_addons(sel):
+    F = Fig(720, 660); P = AX(310, 200, 2.75); c = fcol('addons'); W_ = GC['water']; H = GC['heat']; PW = GC['power']
+    def poly(L, st=FG, fill='none', sw=1, dash=''):
+        F.add(f'<polygon points="{pts(P, L)}" fill="{fill}" stroke="{st}" stroke-width="{sw}" {"stroke-dasharray=%s" % chr(34)+dash+chr(34) if dash else ""}/>')
+    def line(L, st=FG, sw=1, dash=''):
+        F.add(f'<polyline points="{pts(P, L)}" fill="none" stroke="{st}" stroke-width="{sw}" {"stroke-dasharray=%s" % chr(34)+dash+chr(34) if dash else ""}/>')
+    poly([(-24,-44,0),(116,-44,0),(116,62,0),(-24,62,0)], LN)
+    poly([(-24,62,0),(116,62,0),(116,72,0),(-24,72,0)], LN, 'url(#hatch)')
+    F.add(T(*[v + o for v, o in zip(P(110, 72, 0), (6, 12))], 'street', FA, 11))
+    # underground: borefield, BTES, aquifer, deep well
+    poly([(0,-42,0),(36,-42,0),(36,-14,0),(0,-14,0)], MU, 'none', .8, '4 3')
+    for i in range(5):
+        for j in range(4):
+            x, y = 4 + i * 7, -38 + j * 7; F.add(f'<circle cx="{P(x,y,0)[0]:.1f}" cy="{P(x,y,0)[1]:.1f}" r="1.6" fill="{MU}"/>')
+    for x in (4, 32): line([(x, -14, 0), (x, -14, -14)], MU, .8, '3 3')
+    poly([(4,-14,-14),(32,-14,-14),(32,-14,-4),(4,-14,-4)], H, H, .6, '2 3') if False else line([(4,-14,-14),(32,-14,-14)], H, 1.2, '2 3')
+    poly([(44,-40,0),(62,-40,0),(62,-20,0),(44,-20,0)], H, 'none', .9, '4 3')
+    for i in range(6):
+        for j in range(5):
+            x, y = 46 + i * 3, -38 + j * 4; F.add(f'<circle cx="{P(x,y,0)[0]:.1f}" cy="{P(x,y,0)[1]:.1f}" r="1.1" fill="{H}"/>')
+    for x, col in ((82, H), (100, W_)):
+        line([(x, -20, 0), (x, -20, -26)], col, 1.4)
+        F.add(f'<circle cx="{P(x,-20,0)[0]:.1f}" cy="{P(x,-20,0)[1]:.1f}" r="2.6" fill="{BG}" stroke="{col}"/>')
+    line([(82,-20,-26),(100,-20,-26)], MU, .8, '3 3')
+    line([(112, 30, 0), (112, 30, -42)], H, 1.4, '6 4')
+    F.add(f'<circle cx="{P(112,30,0)[0]:.1f}" cy="{P(112,30,0)[1]:.1f}" r="2.6" fill="{BG}" stroke="{H}"/>')
+    # site services
+    F.add(box(P, -16, 2, 0, 9, 5, 4, FG, PN, .9)); F.add(box(P, -16, 9, 0, 9, 5, 4, FG, PN, .9)); F.add(box(P, -16, 17, 0, 6, 4, 3, MU, PN, .8))
+    F.add(box(P, -16, 25, 0, 10, 7, 4, W_, PN, 1))
+    F.add(box(P, 46, 2, 0, 12, 5, 5, PW, PN, 1)); F.add(box(P, 46, 9, 0, 12, 5, 5, PW, PN, 1))
+    F.add(box(P, 46, 18, 0, 8, 8, 11, FG, PN, 1))
+    F.add(box(P, 50, 34, 0, 7, 7, 5, H, PN, 1))
+    # data centre with roof plant, PV and facade PV
+    F.add(box(P, 0, 0, 0, 40, 30, 20, FG, PN, 1.2))
+    for k in range(4): poly([(3, 3 + k * 6, 20.3), (22, 3 + k * 6, 20.3), (22, 7 + k * 6, 21.8), (3, 7 + k * 6, 21.8)], PW, '#1e2633', .9)
+    F.add(box(P, 26, 3, 20, 10, 6, 3, FG, PN)); F.add(box(P, 26, 12, 20, 10, 6, 3, FG, PN)); F.add(box(P, 28, 21, 20, 6, 5, 3, W_, PN, 1))
+    for zz in (5, 11): poly([(40, 4, zz), (40, 26, zz), (40, 26, zz + 4), (40, 4, zz + 4)], PW, '#1e2633', .8)
+    poly([(2, 30, 1), (12, 30, 1), (12, 30, 7), (2, 30, 7)], PW, 'none', .9, '3 2')
+    # neighbour and pipes
+    F.add(box(P, 66, 76, 0, 30, 16, 14, MU, PN, .9))
+    line([(80, 76, 0), (80, 66, -1), (-11, 66, -1), (-11, 32, 0)], W_, 1.3, '5 4')
+    line([(-24, 68, -1), (116, 68, -1)], W_, 1.8)
+    line([(20, 68, -1), (20, 30, 0)], W_, 1.3)
+    line([(54, 41, 0), (54, 64, -1), (72, 64, -1), (72, 76, 0)], H, 1.6)
+    line([(58, 5, 2), (64, 5, 2), (64, 60, 2)], PW, 1.2)
+    F.add(f'<path d="M{P(64,60,0)[0]:.1f},{P(64,60,0)[1]:.1f} v-26" stroke="{FG}" stroke-width="1.2"/>')
+    # tags
+    F.tag(*P(12, 14, 21), 'T', 'pv_roof', sel, c); F.tag(*P(5, 5, 21), 'T', 'pv_share', sel, c); F.tag(*P(20, 22, 21), 'T', 'pv_cost', sel, c)
+    F.tag(*P(31, 23, 23), 'T', 'blowdown_recovery', sel, c)
+    F.tag(*P(40, 15, 13), 'R', 'pv_facade', sel, c)
+    F.tag(*P(52, 4, 5), 'R', 'battery', sel, c); F.tag(*P(64, 40, 2), 'R', 'peak_relief', sel, c)
+    F.tag(*P(50, 22, 11), 'R', 'tes_volume', sel, c); F.tag(*P(53, 37, 5), 'R', 'absorption', sel, c)
+    F.tag(*P(7, 30, 4), 'L', 'ups_flex', sel, c)
+    F.tag(*P(-12, 4, 4), 'L', 'genset_test', sel, c); F.tag(*P(-13, 19, 3), 'L', 'hvo_swap', sel, c)
+    F.tag(*P(-11, 28, 4), 'L', 'treatment_energy', sel, c)
+    F.tag(*P(40, 66, -1), 'B', 'greywater_neighbours', sel, c); F.tag(*P(10, 68, -1), 'B', 'reclaimed_makeup', sel, c)
+    F.tag(*P(18, -28, 0), 'L', 'borefield', sel, c); F.tag(*P(18, -14, -14), 'L', 'ground_warming', sel, c)
+    F.tag(*P(53, -30, 0), 'R', 'btes', sel, c); F.tag(*P(91, -20, -26), 'R', 'ates', sel, c); F.tag(*P(112, 30, -30), 'R', 'deep_geo', sel, c)
+    return F, '3D site', 'One site with every add-on placed: solar on the roof and facade, batteries and the UPS, cleaner backup power, water tanks, cooling for the neighbour, reused water in from the street and the neighbour, and the ground below — a borefield, a seasonal store, an aquifer pair and a deep well.'
+
+DIAGRAMS = {'addons': None, 'heat_out': d_heat_out, 'heat_use': d_heat_use, 'sink': d_sink, 'power': d_power, 'water': d_water, 'sound': d_sound,
             'seen': d_seen, 'carbon': d_carbon, 'materials': d_materials, 'space': d_space, 'it': d_it, 'money': d_money,
             'rules': d_rules, 'people': d_people, 'time': d_time, 'ground': d_ground, 'account': d_account}
+DIAGRAMS['addons'] = d_addons

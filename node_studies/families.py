@@ -17,6 +17,7 @@ FAM = {
  'time':   ('Time', ['horizons','construction_time','risk_term']),
  'ground': ('Ground and climate', ['ground','weather']),
  'account':('Account', ['ledger','tradeoffs']),
+ 'addons': ('Add-ons: what if we added…', ['reclaimed_makeup','greywater_neighbours','treatment_energy','blowdown_recovery','pv_roof','pv_facade','pv_share','pv_cost','battery','ups_flex','peak_relief','genset_test','hvo_swap','borefield','ground_warming','btes','ates','deep_geo','tes_volume','absorption']),
 }
 ICON = {  # 24×24, stroked, no fill
  'heat_out':'M7 20c-2.5-3 2.5-5 0-8s2.5-5 0-8M12 20c-2.5-3 2.5-5 0-8s2.5-5 0-8M17 20c-2.5-3 2.5-5 0-8s2.5-5 0-8',
@@ -35,6 +36,7 @@ ICON = {  # 24×24, stroked, no fill
  'people':'M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20c0-3.2 2.7-5 6-5s6 1.8 6 5M16.5 11a2.5 2.5 0 1 0 0-5M16.5 15c2.8 0 4.5 1.8 4.5 5',
  'time':'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5.2l3.4 2',
  'ground':'M3 8c3-2 6 2 9 0s6-2 9 0M3 13h18M3 18h18M12 3v18',
+ 'addons':'M4 4h16v16H4zM12 8v8M8 12h8',
  'account':'M3.5 5h17v14h-17zM3.5 9.7h17M3.5 14.3h17M9.5 5v14',
 }
 def family_of(nid):
@@ -50,6 +52,7 @@ GROUP = {
  'senses': ('Sound and sight', '#b9a3cf', ['sound','seen']),
  'matter': ('Matter and carbon','#9fb38a', ['carbon','materials','it','ground']),
  'city':   ('City and process','#c8c2b8', ['space','money','rules','people','time','account']),
+ 'addons': ('Add-ons','#d8c9a3', ['addons']),
 }
 def group_of(fam):
     for g,(_,_,fs) in GROUP.items():

@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Beyond Data Tool Logic</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap">
 <style>
@@ -43,6 +44,14 @@ main{display:grid;grid-template-columns:1fr var(--aw,460px);min-height:0;positio
 .wire.cond{stroke:var(--k-condition);opacity:.9;stroke-width:1.1}
 .wire.party{stroke:var(--k-party);opacity:.85;stroke-width:1.1}
 .wire.value{stroke:var(--accent);stroke-dasharray:4 4;opacity:.9}
+.wire.addon{stroke:#d8c9a3;stroke-dasharray:2 3;opacity:.9}
+.node .plus{font-size:10px;fill:#d8c9a3;font-weight:600}
+.addl{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:10px}
+.addl li{border:1px solid var(--line-2);border-radius:6px;padding:8px 10px;font-size:12.5px}
+.addl li b{font-weight:600;font-size:13px}
+.addl .st{float:right;font-size:11px;border:1px solid var(--line-2);border-radius:999px;padding:0 7px;color:var(--muted)}
+.addl .st.excluded{color:var(--faint)} .addl .st.sized{color:var(--ok);border-color:var(--ok)} .addl .st.gate{color:var(--accent-2);border-color:var(--accent)}
+.addl .r{color:var(--muted);margin-top:4px}
 .wire.dim{opacity:.12}
 .node{cursor:pointer}
 .node rect.box{fill:var(--panel);stroke:var(--fc,var(--line-2));stroke-width:1;rx:5}
@@ -253,6 +262,7 @@ const G=JSON.parse(document.getElementById('guide').textContent); window.__G=G;
 const OL=D.options_logic||{steps:[],preferences:[]};
 D.nodes.push({id:'gen',kind:'gen',stage:'options',name:'Options',unit:'set, in no order',formula:'',inputs:[],conf:null});
 D.nodes.push({id:'relax',kind:'gen',stage:'options',name:'If you moved a limit',unit:'shown separately',formula:'',inputs:[],conf:null});
+D.nodes.push({id:'addons',kind:'gen',stage:'options',name:'Add-ons: what if we added…',unit:(D.addons||[]).length+' to try on any option',formula:'',inputs:[],conf:null});
 OL.preferences.forEach(p=>D.nodes.push({id:p.id,kind:'pref',stage:'options',name:p.name,unit:'set by the user',formula:p.note,inputs:[],conf:null}));
 (D.parties||[]).forEach(p=>D.nodes.push({id:'party_'+p.id,kind:'party',stage:'parties',name:p.name,unit:p.note,formula:p.note,inputs:[],conf:null,pid:p.id}));
 const N={}; D.nodes.forEach(n=>N[n.id]=n);
@@ -311,6 +321,7 @@ function layout(){
   // options column: generator, relax, then preferences below (values enter from below)
   posN.gen={x:colX.options,y:mid-40,w:NW,h:64};
   posN.relax={x:colX.options,y:mid+40,w:NW,h:NH};
+  posN.addons={x:colX.options,y:mid-150,w:NW,h:64};
   let py=mid+150; OL.preferences.forEach(p=>{posN[p.id]={x:colX.options,y:py,w:NW,h:NH}; py+=NH+GAP;});
   // account column around the generator
   const acc=cols.decide.slice().sort((a,b)=>(a.id==='tradeoffs'?0:1)-(b.id==='tradeoffs'?0:1)); let ay=mid-40; acc.forEach(n=>{posN[n.id]={x:colX.decide,y:ay,w:NW,h:n.id==='tradeoffs'?64:h}; ay+=(n.id==='tradeoffs'?64:h)+GAP*2;});
@@ -352,6 +363,7 @@ function drawNode(n){
   else { if(n.conf!=null) ring(g,18,cy,n.conf);
     el('path',{class:'glyph',d:glyphs[kind==='quantity'&&n.stage==='decide'?'decide':kind]||glyphs.quantity,transform:`translate(${n.conf!=null?13.5:12},${cy-4.5}) scale(0.7)`},g); }
   const t=el('text',{class:'name',x:34,y:mode==='example'&&kind==='quantity'?18:cy-2},g); t.textContent=clip(n.name,FM?22:24);
+  if(n.addon){ const pl=el('text',{class:'plus',x:p.w-30,y:13,'text-anchor':'end'},g); pl.textContent='+ add-on'; }
   const u=el('text',{class:'unit',x:34,y:mode==='example'&&kind==='quantity'?31:cy+12},g); u.textContent=clip(n.unit||n.source_text||'',30);
   if(mode==='example'&&kind==='quantity'){ const v=exVal(n.id); const tv=el('text',{class:'val',x:34,y:48},g); tv.textContent=v?clip(v[0],30):'—'; }
   if(!['input','pref'].includes(kind)) el('circle',{class:'port',cx:0,cy,r:3.5},g);
@@ -401,6 +413,7 @@ function drawAll(){
   // values enter from below
   OL.preferences.forEach((p,i)=>{ const a=posN[p.id], b=i===0?posN.relax:posN[OL.preferences[i-1].id]; el('path',{class:'wire value','data-from':p.id,'data-to':'gen',d:vpath(a,b)},gWires); });
   el('path',{class:'wire value','data-from':'relax','data-to':'gen',d:vpath(posN.relax,posN.gen)},gWires);
+  el('path',{class:'wire addon','data-from':'addons','data-to':'gen',d:`M${posN.addons.x+NW/2},${posN.addons.y+64} L${posN.gen.x+NW/2},${posN.gen.y}`},gWires);
   // generator → trade-off table → parties
   if(posN.tradeoffs){ el('path',{class:'wire','data-from':'gen','data-to':'tradeoffs',d:path(posN.gen,posN.tradeoffs)},gWires);
     cols.parties.forEach(n=>el('path',{class:'wire party','data-from':'tradeoffs','data-to':n.id,d:path(posN.tradeoffs,posN[n.id])},gWires)); }
@@ -445,7 +458,8 @@ function applyHighlight(){
     (c.parties||[]).forEach(p=>partyWire(c,p));
   } else if(N[selected]&&N[selected].kind==='party'){ const pid=N[selected].pid;
     D.conditions.forEach(c=>{ if((c.parties||[]).includes(pid)){ keep.add(c.id); partyWire(c,pid);} }); keep.add('tradeoffs');
-  } else if(N[selected]&&(N[selected].kind==='gen'||N[selected].kind==='pref')){ ['gen','relax','tradeoffs'].concat(OL.preferences.map(p=>p.id)).forEach(i=>keep.add(i)); cols.parties.forEach(n=>keep.add(n.id));
+  } else if(selected==='addons'){ keep.add('addons'); keep.add('gen'); D.nodes.filter(n=>n.addon).forEach(n=>keep.add(n.id));
+  } else if(N[selected]&&(N[selected].kind==='gen'||N[selected].kind==='pref')){ ['gen','relax','tradeoffs','addons'].concat(OL.preferences.map(p=>p.id)).forEach(i=>keep.add(i)); cols.parties.forEach(n=>keep.add(n.id));
   } else if(selected.startsWith('opp_')){ const o=D.opportunities.find(x=>x.id===selected)||OGROUPS.find(g=>g.o.id===selected).o; o.quantities.forEach(q=>{keep.add(q); ancestors(q).forEach(a=>keep.add(a));});
   } else { ancestors(selected).forEach(a=>keep.add(a)); descendants(selected).forEach(d=>keep.add(d));
     D.conditions.forEach(c=>{ if(c.quantities.includes(selected)){ keep.add(c.id); if(posN[selected]) el('path',{class:'wire cond',d:path(posN[selected],condPos[c.id])},gHi);} });
@@ -495,7 +509,7 @@ function renderInspector(){
     ${st?`<div class="box2">${esc(D.example.site.split(' (')[0])}, first attempt: <span class="pill ${st}">${vlabel(st)}</span></div>`:''}
     <dl><dt>to move it</dt><dd>${moveTags(c)}${c.constraint?'<br><small style="color:var(--accent-2)">a hard constraint: no price moves it</small>':''}</dd>
     <dt>parties</dt><dd>${chips((c.parties||[]).map(p=>'party_'+p),'p')}</dd>
-    <dt>judged on</dt><dd>${chips(c.quantities)}</dd></dl><div class="draftnote">What moves each condition, and who it touches, are Claude's proposals for J.B. to check.</div>`;
+    <dt>judged on</dt><dd>${chips(c.quantities)}</dd>${c.note?`<dt>rules</dt><dd>${esc(c.note)}</dd>`:''}${c.sources&&c.sources.length?`<dt>sources</dt><dd>${sourceList(c.sources)}</dd>`:''}</dl><div class="draftnote">What moves each condition, and who it touches, are Claude's proposals for J.B. to check.</div>`;
   } else if(selected.startsWith('opp_')){ const o=D.opportunities.find(x=>x.id===selected)||OGROUPS.find(g=>g.o.id===selected).o;
     h=`<div class="kind">Opportunity</div><h2>${esc(o.name)}</h2><div class="confrow">${ringSVG(oppConf(o))}<div><b>${oppConf(o)}</b> weakest sizing figure</div></div><dl><dt>sized by</dt><dd>${chips(o.quantities)}</dd></dl>`;
   } else { const n=N[selected];
@@ -503,6 +517,9 @@ function renderInspector(){
       h=`<div class="kind">Party</div><h2>${esc(n.name)}</h2><p style="color:var(--muted);margin:6px 0 0">${esc(n.formula)}</p><dl><dt>conditions</dt><dd>${chips(pc,'c')}</dd></dl>
       <p class="draftnote">In the tool, each option's trade-off table gives this party one row per concern: what it gains, what it gives up, in that row's own unit, never summed.</p>`;
     } else if(n.id==='gen'){ h=`<div class="kind">Options</div><h2>How options are made</h2><ol class="steps">${OL.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol><p class="draftnote">No option is ranked. Preferences shape what is explored, never what wins.</p>`;
+    } else if(n.id==='addons'){ const A=D.addons||[];
+      h=`<div class="kind">Options</div><h2>Add-ons: what if we added…</h2><p class="draft" style="margin-top:6px">Any option can try any add-on. Each changes rows of its trade-off table and carries its rule status in each city. Some are physically possible but blocked by a rule; that is shown as a limit that a change in policy would move, not hidden. Two are shown only to explain why they are out.</p><div class="draftnote">Draft wording (Claude) — for J.B. to rewrite. From research reports 15a–15d.</div>
+      <ol class="addl">${A.map(a=>`<li><span class="st ${a.status}">${esc({sized:'sized',screening:'screening',gate:'temperature gate',excluded:'left out'}[a.status]||a.status)}</span><b>${esc(a.name)}</b>${a.changes&&a.changes.length?`<div class="r">changes: ${esc(a.changes.join(' · '))}</div>`:''}${a.rules&&a.rules.vancouver?`<div class="r">Vancouver: ${esc(a.rules.vancouver)}<br>Edmonton: ${esc(a.rules.edmonton)}</div>`:''}${a.reason?`<div class="r">${esc(a.reason)}</div>`:''}${a.quantities&&a.quantities.length?`<div style="margin-top:6px">${chips(a.quantities)}</div>`:''}</li>`).join('')}</ol>`;
     } else if(n.id==='relax'){ h=`<div class="kind">Options</div><h2>If you moved a limit</h2><p style="color:var(--muted)">A user's limit is always respected. Separately, the tool shows what relaxing each limit would open and at what price. For example: accept a rezoning (about 15 months in Vancouver) and two more options appear, one recovering three times the heat. These options never appear among the results.</p>`;
     } else if(n.kind==='pref'){ h=`<div class="kind">The user's values</div><h2>${esc(n.name)}</h2><p style="color:var(--muted)">${esc(n.formula)}</p><p class="draftnote">Values enter from below, separately from the facts on the left.</p>`;
     } else {

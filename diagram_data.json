@@ -6,10 +6,10 @@
 "rule": "A quantity's confidence is the lowest of its inputs; a condition's is the lowest of its quantities; a match fails at its weakest link; burdens are recorded beside, never netted.",
 "counts": {
 "inputs": 13,
-"quantities": 103,
-"conditions": 77,
+"quantities": 123,
+"conditions": 82,
 "opportunities": 14,
-"sources": 228
+"sources": 270
 }
 },
 "stages": [
@@ -96,7 +96,8 @@
 "7 Security",
 "8 Social",
 "9 Environmental",
-"10 Experiential"
+"10 Experiential",
+"11 Add-ons"
 ],
 "nodes": [
 {
@@ -354,6 +355,7 @@
 "conf": 70,
 "status": "Edmonton open; Vancouver via licensed BCA extract — field list confirmed from BCA user guide (data/BCA_…User_Guide.pdf); extract itself pending Abacus access; City property-tax report has no area field (schema checked) — fallback is footprint × storeys",
 "direction": "",
+"addon": "",
 "inputs": [
 "parcel"
 ],
@@ -382,6 +384,7 @@
 "conf": 50,
 "status": "operator claim",
 "direction": "",
+"addon": "",
 "inputs": [
 "floor_area"
 ],
@@ -434,6 +437,7 @@
 "conf": 60,
 "status": "confirmed (RVO primary read)",
 "direction": "",
+"addon": "",
 "inputs": [
 "server_floor"
 ],
@@ -478,6 +482,7 @@
 "conf": 50,
 "status": "operator claim / public record",
 "direction": "",
+"addon": "",
 "inputs": [],
 "upstream": 50
 },
@@ -544,6 +549,7 @@
 "conf": 70,
 "status": "bounded above by measured whole-building energy (4 Vancouver sites); leased-share proxies: Equinix Americas 81% cabinet utilisation (power-limited), Digital Realty Toronto 96.4% occupancy; server utilisation still LBNL 21→35%",
 "direction": "",
+"addon": "",
 "inputs": [
 "it_load_claim",
 "it_load_outside"
@@ -581,6 +587,7 @@
 "conf": 80,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "it_load_actual"
 ],
@@ -617,6 +624,7 @@
 "conf": 80,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "it_load_actual",
 "pue"
@@ -662,6 +670,7 @@
 "conf": 70,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "cooling_type"
 ],
@@ -698,6 +707,7 @@
 "conf": 70,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "cooling_type"
 ],
@@ -774,6 +784,7 @@
 "conf": 70,
 "status": "calibrated on six cases: η 0.39–0.53 built/operating",
 "direction": "",
+"addon": "",
 "inputs": [
 "heat_temp",
 "receiver_temp"
@@ -835,6 +846,7 @@
 "conf": 90,
 "status": "in hand (measurement boundary defined 13 Oct 2026)",
 "direction": "",
+"addon": "",
 "inputs": [
 "heat_rejected",
 "liquid_capture"
@@ -904,6 +916,7 @@
 "conf": 70,
 "status": "calibrated: receiver-limited in 4 of 5 built cases",
 "direction": "",
+"addon": "",
 "inputs": [
 "heat_captured",
 "cop"
@@ -933,6 +946,7 @@
 "conf": 100,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "heat_delivered",
 "cop"
@@ -994,6 +1008,7 @@
 "conf": 90,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "heat_captured",
 "heat_rejected"
@@ -1023,6 +1038,7 @@
 "conf": 100,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [],
 "upstream": 100
 },
@@ -1057,6 +1073,7 @@
 "conf": 80,
 "status": "computed from government typical-year file (data/cwec_derived.json); approach temperatures are assumptions (60)",
 "direction": "place",
+"addon": "",
 "inputs": [
 "weather"
 ],
@@ -1093,6 +1110,7 @@
 "conf": 100,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [],
 "upstream": 100
 },
@@ -1119,6 +1137,7 @@
 "conf": 100,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "it_load_actual"
 ],
@@ -1155,6 +1174,7 @@
 "conf": 90,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [],
 "upstream": 90
 },
@@ -1181,6 +1201,7 @@
 "conf": 40,
 "status": "literature",
 "direction": "",
+"addon": "",
 "inputs": [
 "it_load_actual"
 ],
@@ -1209,6 +1230,7 @@
 "conf": 80,
 "status": "confirmed",
 "direction": "",
+"addon": "",
 "inputs": [],
 "upstream": 80
 },
@@ -1235,6 +1257,7 @@
 "conf": 100,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "heat_rejected",
 "cooling_type"
@@ -1264,6 +1287,7 @@
 "conf": 100,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "evaporation"
 ],
@@ -1292,6 +1316,7 @@
 "conf": 90,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "blowdown",
 "it_load_actual"
@@ -1321,6 +1346,7 @@
 "conf": 60,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "it_load_actual"
 ],
@@ -1357,6 +1383,7 @@
 "conf": 80,
 "status": "rainfall confirmed (government normals, data/normals_1991_2020_extract.json); C and storage sizing per CSA B805",
 "direction": "",
+"addon": "",
 "inputs": [
 "floor_area"
 ],
@@ -1409,6 +1436,7 @@
 "conf": 90,
 "status": "average intensities confirmed from the national inventory (both provinces, same basis, 1990–2024); Alberta displacement schedule from the regulator; BC marginal factor remains unpublished",
 "direction": "place",
+"addon": "",
 "inputs": [
 "it_load_actual",
 "hp_electricity"
@@ -1438,6 +1466,7 @@
 "conf": 90,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "backup_hours"
 ],
@@ -1466,6 +1495,7 @@
 "conf": 80,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "backup_hours"
 ],
@@ -1494,6 +1524,7 @@
 "conf": 90,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "cooling_type"
 ],
@@ -1530,6 +1561,7 @@
 "conf": 50,
 "status": "manufacturer LCA (EPEAT-verified)",
 "direction": "",
+"addon": "",
 "inputs": [
 "servers"
 ],
@@ -1558,6 +1590,7 @@
 "conf": 40,
 "status": "proxy",
 "direction": "",
+"addon": "",
 "inputs": [
 "floor_area"
 ],
@@ -1666,6 +1699,7 @@
 "conf": 50,
 "status": "method in hand; manufacturer-rated levels (AHRI 370 / ISO 9614 / ISO 8528-10) for a starter set; site schedule still needed",
 "direction": "",
+"addon": "",
 "inputs": [
 "plant_schedule",
 "receptors"
@@ -1695,6 +1729,7 @@
 "conf": 90,
 "status": "in hand; spectra available from Daikin AGZ (octave bands) and Olds NIA",
 "direction": "",
+"addon": "",
 "inputs": [
 "noise_level"
 ],
@@ -1731,6 +1766,7 @@
 "conf": 70,
 "status": "standard transferred",
 "direction": "",
+"addon": "",
 "inputs": [
 "lighting_plan"
 ],
@@ -1759,6 +1795,7 @@
 "conf": 90,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "floor_area",
 "massing"
@@ -1796,6 +1833,7 @@
 "conf": 80,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "offerable_area",
 "backup_hours"
@@ -1825,6 +1863,7 @@
 "conf": 80,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "offerable_area"
 ],
@@ -1869,6 +1908,7 @@
 "conf": 60,
 "status": "derived",
 "direction": "",
+"addon": "",
 "inputs": [
 "spare_cooling",
 "offerable_area"
@@ -1898,6 +1938,7 @@
 "conf": 20,
 "status": "judged",
 "direction": "",
+"addon": "",
 "inputs": [
 "floor_area"
 ],
@@ -1926,6 +1967,7 @@
 "conf": 70,
 "status": "confirmed (primary report read)",
 "direction": "",
+"addon": "",
 "inputs": [],
 "upstream": 70
 },
@@ -1952,6 +1994,7 @@
 "conf": 70,
 "status": "confirmed (RVO primary and HRE)",
 "direction": "",
+"addon": "",
 "inputs": [
 "receiver_demand",
 "area"
@@ -1981,6 +2024,7 @@
 "conf": 70,
 "status": "confirmed",
 "direction": "",
+"addon": "",
 "inputs": [
 "heat_density",
 "plot_ratio"
@@ -2010,6 +2054,7 @@
 "conf": 70,
 "status": "confirmed",
 "direction": "",
+"addon": "",
 "inputs": [
 "linear_heat_density"
 ],
@@ -2118,6 +2163,7 @@
 "conf": 40,
 "status": "proxy",
 "direction": "",
+"addon": "",
 "inputs": [
 "receivers"
 ],
@@ -2154,6 +2200,7 @@
 "conf": 80,
 "status": "confirmed (CEUD 2023 end-use split; StatCan 2021 fuel split, primary)",
 "direction": "",
+"addon": "",
 "inputs": [
 "heat_delivered"
 ],
@@ -2206,6 +2253,7 @@
 "conf": 60,
 "status": "transferred",
 "direction": "",
+"addon": "",
 "inputs": [
 "heat_delivered",
 "heat_temp"
@@ -2275,6 +2323,7 @@
 "conf": 70,
 "status": "confirmed (peer-reviewed full texts; Norwegian/Romanian climates transferred)",
 "direction": "",
+"addon": "",
 "inputs": [
 "heat_delivered",
 "heat_temp"
@@ -2304,6 +2353,7 @@
 "conf": 70,
 "status": "peer-reviewed, transferred",
 "direction": "",
+"addon": "",
 "inputs": [
 "heat_delivered",
 "heat_temp"
@@ -2349,6 +2399,7 @@
 "conf": 70,
 "status": "peer-reviewed (mealworm) and government-commissioned (BSF)",
 "direction": "",
+"addon": "",
 "inputs": [
 "heat_temp"
 ],
@@ -2377,6 +2428,7 @@
 "conf": 40,
 "status": "design paper only",
 "direction": "",
+"addon": "",
 "inputs": [
 "servers"
 ],
@@ -2421,6 +2473,7 @@
 "conf": 70,
 "status": "confirmed",
 "direction": "",
+"addon": "",
 "inputs": [
 "spare_capacity"
 ],
@@ -2465,6 +2518,7 @@
 "conf": 90,
 "status": "confirmed (both current)",
 "direction": "",
+"addon": "",
 "inputs": [
 "ev_stalls"
 ],
@@ -2493,6 +2547,7 @@
 "conf": 80,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "heat_delivered",
 "ground"
@@ -2522,6 +2577,7 @@
 "conf": 80,
 "status": "confirmed",
 "direction": "",
+"addon": "",
 "inputs": [
 "stored_heat"
 ],
@@ -2582,6 +2638,7 @@
 "conf": 80,
 "status": "flow gap",
 "direction": "",
+"addon": "",
 "inputs": [
 "sewer_flow"
 ],
@@ -2610,6 +2667,7 @@
 "conf": 50,
 "status": "industry estimate",
 "direction": "",
+"addon": "",
 "inputs": [
 "it_load_actual"
 ],
@@ -2638,6 +2696,7 @@
 "conf": 60,
 "status": "manufacturer",
 "direction": "",
+"addon": "",
 "inputs": [
 "servers"
 ],
@@ -2666,6 +2725,7 @@
 "conf": 70,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "servers"
 ],
@@ -2694,6 +2754,7 @@
 "conf": 80,
 "status": "confirmed",
 "direction": "",
+"addon": "",
 "inputs": [
 "noise_level",
 "receiver_radius"
@@ -2763,6 +2824,7 @@
 "conf": 70,
 "status": "computed from CWEC + STRATEGO method + NRCan 61% space-heat share; building-stock mix not applied",
 "direction": "",
+"addon": "",
 "inputs": [
 "receiver_demand",
 "weather"
@@ -2872,6 +2934,7 @@
 "conf": 60,
 "status": "derived",
 "direction": "",
+"addon": "",
 "inputs": [
 "heat_delivered",
 "crf"
@@ -2966,6 +3029,7 @@
 "conf": 60,
 "status": "derived; Edmonton: pricing principle confirmed from the City report (90), tariff pending",
 "direction": "",
+"addon": "",
 "inputs": [],
 "upstream": 60
 },
@@ -2982,6 +3046,7 @@
 "conf": 60,
 "status": "derived",
 "direction": "",
+"addon": "",
 "inputs": [
 "price_floor",
 "price_ceiling"
@@ -3011,6 +3076,7 @@
 "conf": 100,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [],
 "upstream": 100
 },
@@ -3045,6 +3111,7 @@
 "conf": 70,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "crf",
 "hp_electricity",
@@ -3083,6 +3150,7 @@
 "conf": 70,
 "status": "in hand",
 "direction": "",
+"addon": "",
 "inputs": [
 "lcoh",
 "window"
@@ -3112,6 +3180,7 @@
 "conf": 70,
 "status": "confirmed (full text, Energy 151:430–441, Table 2 p.434)",
 "direction": "",
+"addon": "",
 "inputs": [],
 "upstream": 70
 },
@@ -3242,6 +3311,7 @@
 "conf": 70,
 "status": "confirmed (full texts)",
 "direction": "",
+"addon": "",
 "inputs": [],
 "upstream": 70
 },
@@ -3284,6 +3354,7 @@
 "conf": 70,
 "status": "confirmed",
 "direction": "",
+"addon": "",
 "inputs": [
 "price_ceiling",
 "deprivation"
@@ -3337,6 +3408,7 @@
 "conf": 70,
 "status": "confirmed (textbook, 2010–2017 USD data; local CAD/ft² industry)",
 "direction": "",
+"addon": "",
 "inputs": [],
 "upstream": 70
 },
@@ -3419,6 +3491,7 @@
 "conf": 80,
 "status": "primary sources found (13 Oct 2026)",
 "direction": "",
+"addon": "",
 "inputs": [],
 "upstream": 80
 },
@@ -3453,6 +3526,7 @@
 "conf": 90,
 "status": "confirmed",
 "direction": "place",
+"addon": "",
 "inputs": [],
 "upstream": 90
 },
@@ -3607,6 +3681,7 @@
 "conf": 90,
 "status": "confirmed (regulator and utility documents read in full); MW headroom at a downtown Vancouver parcel is explicitly nil for new feeder positions from fiscal 2027 until the WES is in service (July 2032) — the tool reports this as a hard timing constraint, not a judgement",
 "direction": "place",
+"addon": "",
 "inputs": [],
 "upstream": 90
 },
@@ -3633,6 +3708,7 @@
 "conf": 100,
 "status": "rule",
 "direction": "",
+"addon": "",
 "inputs": [
 "receivers",
 "offerable_area"
@@ -3678,6 +3754,7 @@
 "conf": 90,
 "status": "confirmed",
 "direction": "",
+"addon": "",
 "inputs": [
 "crossing_type"
 ],
@@ -3730,6 +3807,7 @@
 "conf": 90,
 "status": "confirmed (regulator text read in full, data/AUC_Rule_012_2024-09-30.pdf)",
 "direction": "place",
+"addon": "",
 "inputs": [
 "noise_level"
 ],
@@ -3782,6 +3860,7 @@
 "conf": 90,
 "status": "BC and Alberta both confirmed from the regulator (data/); Alberta open loop = Water Act authorization with a temperature-impact assessment — a pass/partial condition, not a veto",
 "direction": "place",
+"addon": "",
 "inputs": [
 "ground"
 ],
@@ -3810,6 +3889,7 @@
 "conf": 90,
 "status": "BC confirmed",
 "direction": "place",
+"addon": "",
 "inputs": [],
 "upstream": 90
 },
@@ -3844,6 +3924,7 @@
 "conf": 90,
 "status": "confirmed",
 "direction": "place",
+"addon": "",
 "inputs": [
 "distribution_cost"
 ],
@@ -3880,6 +3961,7 @@
 "conf": 90,
 "status": "confirmed",
 "direction": "",
+"addon": "",
 "inputs": [],
 "upstream": 90
 },
@@ -3922,6 +4004,7 @@
 "conf": 60,
 "status": "derived",
 "direction": "",
+"addon": "",
 "inputs": [
 "capex_split",
 "window",
@@ -3953,6 +4036,7 @@
 "conf": 100,
 "status": "logic defined",
 "direction": "",
+"addon": "",
 "inputs": [],
 "upstream": 100
 },
@@ -3979,6 +4063,7 @@
 "conf": 80,
 "status": "Vancouver in hand (government export); Edmonton pending AWWID",
 "direction": "place",
+"addon": "",
 "inputs": [
 "parcel"
 ],
@@ -4007,6 +4092,7 @@
 "conf": 70,
 "status": "confirmed (textbook method)",
 "direction": "",
+"addon": "",
 "inputs": [
 "spare_capacity",
 "build_cost"
@@ -4036,6 +4122,7 @@
 "conf": 90,
 "status": "confirmed (utility filing, public appendix)",
 "direction": "place",
+"addon": "",
 "inputs": [
 "flexible_load",
 "spare_capacity"
@@ -4073,6 +4160,7 @@
 "conf": 80,
 "status": "observation (J.B. to set the confidence level for 'seen on site'; proposed 80 for existence, no capacity)",
 "direction": "",
+"addon": "",
 "inputs": [
 "plant_schedule"
 ],
@@ -4101,6 +4189,7 @@
 "conf": 80,
 "status": "observation; never a guide to coverage gaps — only what a passer-by sees and how it feels",
 "direction": "",
+"addon": "",
 "inputs": [
 "visibility"
 ],
@@ -4162,6 +4251,7 @@
 "conf": 40,
 "status": "rules in hand for Vancouver; flow at a parcel and all Edmonton figures are gaps",
 "direction": "place",
+"addon": "",
 "inputs": [
 "sewer_flow"
 ],
@@ -4206,6 +4296,7 @@
 "conf": 40,
 "status": "rules in hand; capacity is site-specific and unmodelled",
 "direction": "place",
+"addon": "",
 "inputs": [
 "parcel"
 ],
@@ -4224,6 +4315,7 @@
 "conf": 0,
 "status": "gap: NRCan values pending",
 "direction": "place",
+"addon": "",
 "inputs": [
 "massing"
 ],
@@ -4276,6 +4368,7 @@
 "conf": 80,
 "status": "in hand",
 "direction": "place",
+"addon": "",
 "inputs": [],
 "upstream": 80
 },
@@ -4334,6 +4427,7 @@
 "conf": 90,
 "status": "in hand (2026 tariffs)",
 "direction": "place",
+"addon": "",
 "inputs": [
 "parcel"
 ],
@@ -4378,6 +4472,7 @@
 "conf": 70,
 "status": "Vancouver in hand; Edmonton partial",
 "direction": "place",
+"addon": "",
 "inputs": [
 "parcel"
 ],
@@ -4422,6 +4517,7 @@
 "conf": 20,
 "status": "precedents in hand; stock at a parcel needs the parcel tables (N1–N7)",
 "direction": "place",
+"addon": "",
 "inputs": [
 "parcel",
 "massing"
@@ -4467,6 +4563,7 @@
 "conf": 60,
 "status": "Vancouver in hand; Edmonton to recheck",
 "direction": "place",
+"addon": "",
 "inputs": [
 "receptors",
 "parcel"
@@ -4520,6 +4617,7 @@
 "conf": 20,
 "status": "rationale sourced; local exchange-point locations a gap",
 "direction": "place",
+"addon": "",
 "inputs": [
 "parcel"
 ],
@@ -4588,6 +4686,7 @@
 "conf": 80,
 "status": "in hand; Parkland P/D and Edmonton IH to confirm",
 "direction": "place",
+"addon": "",
 "inputs": [
 "parcel"
 ],
@@ -4712,6 +4811,7 @@
 "conf": 80,
 "status": "Vancouver and Edmonton fees and durations in hand; Edmonton arterial-road assessment rates not retrieved",
 "direction": "place",
+"addon": "",
 "inputs": [
 "zoning_status",
 "floor_area"
@@ -4749,6 +4849,7 @@
 "conf": 40,
 "status": "Alberta partly in hand; BC to source",
 "direction": "place",
+"addon": "",
 "inputs": [
 "licence_flag",
 "grid_headroom"
@@ -4778,6 +4879,7 @@
 "conf": 0,
 "status": "gap: census download pending",
 "direction": "",
+"addon": "",
 "inputs": [
 "receptors",
 "area"
@@ -4807,6 +4909,7 @@
 "conf": 40,
 "status": "transferred coefficient",
 "direction": "",
+"addon": "",
 "inputs": [
 "floor_area"
 ],
@@ -4867,11 +4970,784 @@
 "conf": 60,
 "status": "in hand (transferred); local derivation possible for Edmonton",
 "direction": "",
+"addon": "",
 "inputs": [
 "zoning_status",
 "lead_time"
 ],
 "upstream": 60
+},
+{
+"id": "reclaimed_makeup",
+"kind": "quantity",
+"stage": "opportunity",
+"name": "Reclaimed water as cooling make-up",
+"formula": "V_rec = s × make-up, with make-up = evaporation × C ÷ (C − 1)",
+"coef": "C (cycles of concentration) 2–4 typical, up to 6 (FEMP/EPA); 4–6 run on treated municipal wastewater (US DOE-funded study, 2012; power-plant scale); s = share substituted, user-set 0–1; operator precedents 0.74–0.99 (Microsoft, operator claim); data-centre site water 0.32–0.36 L/kWh (LBNL 2024, denominator to confirm); Metro Vancouver will consider supplying reclaimed water case by case for industrial uses (UT-019, 2023); EPCOR Gold Bar already supplies treated water to industry (operator claim, no volumes); no Canadian data-centre case found",
+"unit": "L/yr",
+"sources": [
+"femp_ct",
+"lbnl2024",
+"mv_ut019",
+"msft_water2026"
+],
+"source_roles": [
+{
+"id": "femp_ct",
+"term": "Reclaimed water as cooling make-up",
+"role": "data",
+"conf": 60,
+"verified": true
+},
+{
+"id": "lbnl2024",
+"term": "Reclaimed water as cooling make-up",
+"role": "data",
+"conf": 60,
+"verified": true
+},
+{
+"id": "mv_ut019",
+"term": "Reclaimed water as cooling make-up",
+"role": "data",
+"conf": 60,
+"verified": true
+},
+{
+"id": "msft_water2026",
+"term": "Reclaimed water as cooling make-up",
+"role": "data",
+"conf": 60,
+"verified": true
+}
+],
+"conf": 60,
+"status": "screening; Vancouver and Edmonton supply volumes and prices not found",
+"direction": "",
+"addon": "reclaimed",
+"inputs": [
+"evaporation",
+"blowdown",
+"water_supply"
+],
+"upstream": 50
+},
+{
+"id": "greywater_neighbours",
+"kind": "quantity",
+"stage": "opportunity",
+"name": "Greywater available from neighbours",
+"formula": "V_gw = residents within reach × 98 L/person/day × 365; used = min(V_gw × recovery, make-up)",
+"coef": "98 L/person/day residential greywater (National Academies 2016, US data); treatment recovery share not found (gap); cross-property sharing: no BC or Alberta rule text found",
+"unit": "L/yr",
+"sources": [
+"nasem2016"
+],
+"source_roles": [
+{
+"id": "nasem2016",
+"term": "Greywater available from neighbours",
+"role": "data",
+"conf": 45,
+"verified": false
+}
+],
+"conf": 45,
+"status": "screening; recovery rate a gap",
+"direction": "",
+"addon": "greywater",
+"inputs": [
+"people_affected"
+],
+"upstream": 0
+},
+{
+"id": "treatment_energy",
+"kind": "quantity",
+"stage": "opportunity",
+"name": "Electricity to treat reused water",
+"formula": "E = m³ treated × e",
+"coef": "e = 0.75–1.1 kWh/m³ greywater membrane bioreactor; 0.94–1.28 mixed wastewater (Arden et al. 2021, US EPA authors); ~4.6 kWh/m³ in one small blackwater plant (university report, low confidence); viable only where water + sewer cost ≥ US$2.38/m³ (greywater) or US$1.85/m³ (mixed) (Arden 2021, US 2020 dollars)",
+"unit": "kWh/yr",
+"sources": [
+"arden2021"
+],
+"source_roles": [
+{
+"id": "arden2021",
+"term": "Electricity to treat reused water",
+"role": "data",
+"conf": 60,
+"verified": true
+}
+],
+"conf": 60,
+"status": "in hand (US values)",
+"direction": "",
+"addon": "greywater",
+"inputs": [
+"reclaimed_makeup",
+"greywater_neighbours"
+],
+"upstream": 0
+},
+{
+"id": "blowdown_recovery",
+"kind": "quantity",
+"stage": "opportunity",
+"name": "Blowdown recovered",
+"formula": "make-up × 0.84; blowdown × 0.47; + 3,541 kWh/yr per skid",
+"coef": "one US federal test (GSA GPG-052, NREL evaluation, 2023): blowdown −53 %, make-up −16 %, cycles 2.8 → 4.9; US$46.8k installed; hard water, single site",
+"unit": "L/yr",
+"sources": [
+"gsa_gpg052",
+"femp_ct"
+],
+"source_roles": [
+{
+"id": "gsa_gpg052",
+"term": "Blowdown recovered",
+"role": "data",
+"conf": 50,
+"verified": false
+},
+{
+"id": "femp_ct",
+"term": "Blowdown recovered",
+"role": "data",
+"conf": 50,
+"verified": false
+}
+],
+"conf": 50,
+"status": "single test site",
+"direction": "",
+"addon": "blowdown",
+"inputs": [
+"blowdown"
+],
+"upstream": 50
+},
+{
+"id": "pv_roof",
+"kind": "quantity",
+"stage": "opportunity",
+"name": "Solar on the data centre roof",
+"formula": "kWp = roof area × 0.66 × (1 − plant share) × 0.70 × 0.16–0.20; MWh = kWp × yield",
+"coef": "yield 1,009 kWh/kWp·yr Vancouver, 1,245 Edmonton at latitude tilt, ±10 %, losses included (NRCan 2006, Table 1) — an upper bound for 15° flat-roof arrays until NRCan horizontal values are retrieved (D9); module density 0.16 kWp/m² (2014 median) to 0.20 (current) (NREL); module cover 0.70 of a flat roof at 15° tilt; 66 % of large roofs suitable (NREL 2016); roof share taken by plant from the cooling module",
+"unit": "kWp; MWh/yr",
+"sources": [
+"nrcan_pv2006",
+"nrel_rooftop2016",
+"nrel_bench2023"
+],
+"source_roles": [
+{
+"id": "nrcan_pv2006",
+"term": "Solar on the data centre roof",
+"role": "data",
+"conf": 70,
+"verified": true
+},
+{
+"id": "nrel_rooftop2016",
+"term": "Solar on the data centre roof",
+"role": "data",
+"conf": 70,
+"verified": true
+},
+{
+"id": "nrel_bench2023",
+"term": "Solar on the data centre roof",
+"role": "data",
+"conf": 70,
+"verified": true
+}
+],
+"conf": 70,
+"status": "in hand; NRCan horizontal and vertical values to retrieve",
+"direction": "",
+"addon": "pv",
+"inputs": [
+"massing",
+"plant_schedule"
+],
+"upstream": 70
+},
+{
+"id": "pv_facade",
+"kind": "quantity",
+"stage": "opportunity",
+"name": "Solar on the facade",
+"formula": "MWh = south facade area × module density × yield × 0.4–0.6",
+"coef": "vertical BIPV needs 1.7–2.5 × the area of rooftop PV for the same energy (IEA PVPS summary of Yang et al. 2026) → factor 0.4–0.6, interim until NRCan vertical values; no Canadian BIPV cost found",
+"unit": "MWh/yr",
+"sources": [
+"ieapvps_bipv",
+"nrcan_pv2006"
+],
+"source_roles": [
+{
+"id": "ieapvps_bipv",
+"term": "Solar on the facade",
+"role": "data",
+"conf": 40,
+"verified": false
+},
+{
+"id": "nrcan_pv2006",
+"term": "Solar on the facade",
+"role": "data",
+"conf": 40,
+"verified": false
+}
+],
+"conf": 40,
+"status": "interim factor",
+"direction": "",
+"addon": "pv_facade",
+"inputs": [
+"massing"
+],
+"upstream": 40
+},
+{
+"id": "pv_share",
+"kind": "quantity",
+"stage": "test",
+"name": "Share of the data centre's power from its own solar",
+"formula": "pv_MWh ÷ (IT load × PUE × 8,760)",
+"coef": "worked check (roof areas assumed, not sourced): 1 MW IT site 1.4–4.8 %; 10 MW site 0.28–0.96 %; PV is a small share at data-centre densities; avoided carbon BC 22.8 tCO2e/GWh (2025), Alberta 335 g/kWh (2024 generation intensity)",
+"unit": "%",
+"sources": [
+"nrcan_pv2006",
+"bc_ef2026",
+"ab_ghgperf"
+],
+"source_roles": [
+{
+"id": "nrcan_pv2006",
+"term": "Share of the data centre's power from its own solar",
+"role": "data",
+"conf": 70,
+"verified": true
+},
+{
+"id": "bc_ef2026",
+"term": "Share of the data centre's power from its own solar",
+"role": "data",
+"conf": 70,
+"verified": true
+},
+{
+"id": "ab_ghgperf",
+"term": "Share of the data centre's power from its own solar",
+"role": "data",
+"conf": 70,
+"verified": true
+}
+],
+"conf": 70,
+"status": "derived",
+"direction": "",
+"addon": "pv",
+"inputs": [
+"pv_roof",
+"pv_facade",
+"it_load_actual",
+"pue"
+],
+"upstream": 40
+},
+{
+"id": "pv_cost",
+"kind": "quantity",
+"stage": "test",
+"name": "Solar installed cost",
+"formula": "kWp × 1,000 × rate by size",
+"coef": "CAD 2.00–3.20/W under 100 kW; 1.90–2.40 for 100–250 kW; 1.68–2.22 above 250 kW (NRCan/IEA PVPS Canada 2024); O&M ≈ US$21/kW·yr, 30-yr life, 0.5–0.7 %/yr degradation (NREL, US)",
+"unit": "CAD/W",
+"sources": [
+"nrcan_pvcost2024",
+"nrel_bench2023"
+],
+"source_roles": [
+{
+"id": "nrcan_pvcost2024",
+"term": "Solar installed cost",
+"role": "data",
+"conf": 70,
+"verified": true
+},
+{
+"id": "nrel_bench2023",
+"term": "Solar installed cost",
+"role": "data",
+"conf": 70,
+"verified": true
+}
+],
+"conf": 70,
+"status": "in hand",
+"direction": "",
+"addon": "pv",
+"inputs": [
+"pv_roof"
+],
+"upstream": 70
+},
+{
+"id": "battery",
+"kind": "quantity",
+"stage": "opportunity",
+"name": "Battery storage",
+"formula": "MWh = MW × hours (1–8, default 4); area m² = kWh ÷ 34 (19–49)",
+"coef": "round-trip 85 %, life 15 yr, O&M 2.5 % of capital per yr (NREL ATB 2024); US$385/kWh installed LFP at 100 MW 4 h, 2021 — a floor for urban 1–10 MW (PNNL 2022); 34 ± 15 kWh/m² across built sites (Reber 2023); fire-code basis in BC/AB (NFPA 855 adoption) unconfirmed",
+"unit": "MW; MWh; m²",
+"sources": [
+"atb2024_batt",
+"pnnl2022",
+"reber2023"
+],
+"source_roles": [
+{
+"id": "atb2024_batt",
+"term": "Battery storage",
+"role": "data",
+"conf": 70,
+"verified": true
+},
+{
+"id": "pnnl2022",
+"term": "Battery storage",
+"role": "data",
+"conf": 70,
+"verified": true
+},
+{
+"id": "reber2023",
+"term": "Battery storage",
+"role": "data",
+"conf": 70,
+"verified": true
+}
+],
+"conf": 70,
+"status": "in hand; urban costs a gap",
+"direction": "",
+"addon": "battery",
+"inputs": [
+"it_load_actual"
+],
+"upstream": 50
+},
+{
+"id": "ups_flex",
+"kind": "quantity",
+"stage": "opportunity",
+"name": "UPS batteries offered to the grid",
+"formula": "flexible MWh = IT load × UPS minutes ÷ 60 × 0.5 (half held for outages)",
+"coef": "UPS runtime 1–2 min (hyperscale), ~5 min (colocation), 10–15 min (financial) — vendor figures, operator claim; useful for fast frequency response, not for 4-hour peaks",
+"unit": "MWh; minutes",
+"sources": [
+"aeso_or"
+],
+"source_roles": [
+{
+"id": "aeso_or",
+"term": "UPS batteries offered to the grid",
+"role": "data",
+"conf": 45,
+"verified": false
+}
+],
+"conf": 45,
+"status": "operator claims only",
+"direction": "",
+"addon": "ups",
+"inputs": [
+"it_load_actual",
+"flexible_load"
+],
+"upstream": 40
+},
+{
+"id": "peak_relief",
+"kind": "quantity",
+"stage": "test",
+"name": "Peak relief and what it earns",
+"formula": "MW = min(battery MW, MWh × √RTE ÷ event hours); $ = programme rate × kW",
+"coef": "BC Hydro: Demand Response for Business $50/kW-season, events ≤4 h, Nov–Mar, diesel and fossil generators prohibited; Energy Storage Incentive ≤80 % of eligible cost, new non-exporting batteries ≥25 kW, 10-yr contract (an existing UPS does not qualify); LGS demand charge $13.83/kW·month; AESO reserves need ≥5 MW (supplemental) or ≥10 MW (spinning), smaller sites via an aggregator",
+"unit": "MW; $/yr",
+"sources": [
+"bch_drb",
+"bch_esi",
+"aeso_or"
+],
+"source_roles": [
+{
+"id": "bch_drb",
+"term": "Peak relief and what it earns",
+"role": "data",
+"conf": 75,
+"verified": true
+},
+{
+"id": "bch_esi",
+"term": "Peak relief and what it earns",
+"role": "data",
+"conf": 75,
+"verified": true
+},
+{
+"id": "aeso_or",
+"term": "Peak relief and what it earns",
+"role": "data",
+"conf": 75,
+"verified": true
+}
+],
+"conf": 75,
+"status": "in hand",
+"direction": "",
+"addon": "battery",
+"inputs": [
+"battery",
+"ups_flex",
+"electricity_price"
+],
+"upstream": 40
+},
+{
+"id": "genset_test",
+"kind": "quantity",
+"stage": "characterise",
+"name": "Generator testing emissions",
+"formula": "energy = units × kW × test hours at load; × emission factors",
+"coef": "testing ≈14.5 h/yr per unit, ~4 h at full load (AUC 27938-D01-2023, Amazon 25.6 MW, derived); Vancouver noise by-law exemption caps tests ≈15 h/yr; uncontrolled diesel 14.6 g NOx, 0.43 g PM, 706 g CO2 per kWh (AP-42 Table 3.4-1, upper bound for modern engines); Alberta exempts standby generators from environmental approval",
+"unit": "t CO2; kg NOx, PM",
+"sources": [
+"auc_27938",
+"ap42_34"
+],
+"source_roles": [
+{
+"id": "auc_27938",
+"term": "Generator testing emissions",
+"role": "data",
+"conf": 65,
+"verified": true
+},
+{
+"id": "ap42_34",
+"term": "Generator testing emissions",
+"role": "data",
+"conf": 65,
+"verified": true
+}
+],
+"conf": 65,
+"status": "in hand (upper bounds)",
+"direction": "",
+"addon": "genset",
+"inputs": [
+"generator_co2",
+"generator_nox_pm",
+"backup_hours"
+],
+"upstream": 65
+},
+{
+"id": "hvo_swap",
+"kind": "quantity",
+"stage": "characterise",
+"name": "Renewable diesel in the generators",
+"formula": "Δ lifecycle CO2e = fuel energy × (CI diesel − CI renewable diesel)",
+"coef": "BC approved fuel codes −7 to 131 g CO2e/MJ (RLCF-012, Apr 2026); stack CO2, NOx and PM stay about the same; fossil diesel reference CI to retrieve",
+"unit": "g CO2e/MJ",
+"sources": [
+"bc_rlcf012"
+],
+"source_roles": [
+{
+"id": "bc_rlcf012",
+"term": "Renewable diesel in the generators",
+"role": "data",
+"conf": 55,
+"verified": false
+}
+],
+"conf": 55,
+"status": "reference CI missing",
+"direction": "",
+"addon": "genset",
+"inputs": [
+"genset_test"
+],
+"upstream": 55
+},
+{
+"id": "borefield",
+"kind": "quantity",
+"stage": "opportunity",
+"name": "Borefield as the data centre's heat sink",
+"formula": "L = heat to ground (W) ÷ q; boreholes = L ÷ 150 m; area = boreholes × 36 m²",
+"coef": "q = 12 W/m ground-only to 19 W/m with a dry cooler (derived from Zurmuhl et al. 2018, a 14.5 kW data centre, Ithaca, k 3.27 W/m·K); Edmonton design k 1.9 W/m·K (Alberta Geological Survey) → ~7–11 W/m (scaling is an assumption); ≈2 ha of borefield per MW rejected; 40 MW ≈ 0.8 km²; screening only — CSA C448 sizing and a thermal response test required; no Vancouver ground data found",
+"unit": "m of borehole; m²",
+"sources": [
+"zurmuhl2018",
+"ags_edmonton",
+"bc_gwpr",
+"ab_gshe2018"
+],
+"source_roles": [
+{
+"id": "zurmuhl2018",
+"term": "Borefield as the data centre's heat sink",
+"role": "data",
+"conf": 40,
+"verified": false
+},
+{
+"id": "ags_edmonton",
+"term": "Borefield as the data centre's heat sink",
+"role": "data",
+"conf": 40,
+"verified": false
+},
+{
+"id": "bc_gwpr",
+"term": "Borefield as the data centre's heat sink",
+"role": "data",
+"conf": 40,
+"verified": false
+},
+{
+"id": "ab_gshe2018",
+"term": "Borefield as the data centre's heat sink",
+"role": "data",
+"conf": 40,
+"verified": false
+}
+],
+"conf": 40,
+"status": "screening; no standard for continuous rejection",
+"direction": "",
+"addon": "borefield",
+"inputs": [
+"heat_rejected",
+"ground"
+],
+"upstream": 40
+},
+{
+"id": "ground_warming",
+"kind": "quantity",
+"stage": "test",
+"name": "Ground warming over 20 years",
+"formula": "from the share of heat put in vs taken out",
+"coef": "+4.7 K over 20 yr ground-only, +1.2 K with a dry cooler (Zurmuhl 2018, small field); about +3 K in 3 yr where 4.8 × more heat went in than out (Kindaichi 2018, field measurement) — a borefield only lasts if neighbours take heat back out in winter",
+"unit": "K",
+"sources": [
+"zurmuhl2018",
+"kindaichi2018"
+],
+"source_roles": [
+{
+"id": "zurmuhl2018",
+"term": "Ground warming over 20 years",
+"role": "data",
+"conf": 55,
+"verified": false
+},
+{
+"id": "kindaichi2018",
+"term": "Ground warming over 20 years",
+"role": "data",
+"conf": 55,
+"verified": false
+}
+],
+"conf": 55,
+"status": "small-field evidence",
+"direction": "",
+"addon": "borefield",
+"inputs": [
+"borefield"
+],
+"upstream": 40
+},
+{
+"id": "btes",
+"kind": "quantity",
+"stage": "opportunity",
+"name": "Seasonal ground store for neighbours",
+"formula": "heat out = η × heat stored; boreholes = charge W ÷ 47–83 W/m ÷ 35–55 m",
+"coef": "η 0.45 steady state (simulated), 0.32–0.56 measured years 3–10, 0.06–0.21 in years 1–2 (Drake Landing, Okotoks); a 0.9 MW data-centre design: 240 boreholes, 55 m deep, 3 m apart, 1,863 m², waste-heat use 77 → 96 %, ~17-yr payback (Li et al. 2021); heat-pump COP for the lift not given (gap)",
+"unit": "MWh/yr",
+"sources": [
+"drake_landing",
+"li2021_dcbtes"
+],
+"source_roles": [
+{
+"id": "drake_landing",
+"term": "Seasonal ground store for neighbours",
+"role": "data",
+"conf": 60,
+"verified": true
+},
+{
+"id": "li2021_dcbtes",
+"term": "Seasonal ground store for neighbours",
+"role": "data",
+"conf": 60,
+"verified": true
+}
+],
+"conf": 60,
+"status": "in hand; COP a gap",
+"direction": "",
+"addon": "btes",
+"inputs": [
+"heat_captured",
+"stored_heat",
+"receiver_demand"
+],
+"upstream": 40
+},
+{
+"id": "ates",
+"kind": "quantity",
+"stage": "opportunity",
+"name": "Aquifer heat store (open loop)",
+"formula": "flow = MW × 3.6 ÷ (4.18 × ΔT); heat out ≈ 0.6 × heat in",
+"coef": "172 m³/h per MW at ΔT 5 K (assumption); injection ≤25 °C typical (Netherlands limit; no BC/AB limit found) — air-cooled data-centre heat (25–35 °C) may exceed it; recovery 0.6 (0.4–0.85), ≈ €300/kW at 2 MW (Barth et al. 2026); BC: water licence (WSA); Alberta: Water Act approval or licence + professional report",
+"unit": "m³/h; MWh/yr",
+"sources": [
+"barth2026",
+"bc_gwpr",
+"ab_gshe2018"
+],
+"source_roles": [
+{
+"id": "barth2026",
+"term": "Aquifer heat store (open loop)",
+"role": "data",
+"conf": 45,
+"verified": false
+},
+{
+"id": "bc_gwpr",
+"term": "Aquifer heat store (open loop)",
+"role": "data",
+"conf": 45,
+"verified": false
+},
+{
+"id": "ab_gshe2018",
+"term": "Aquifer heat store (open loop)",
+"role": "data",
+"conf": 45,
+"verified": false
+}
+],
+"conf": 45,
+"status": "screening",
+"direction": "",
+"addon": "ates",
+"inputs": [
+"ground",
+"heat_captured"
+],
+"upstream": 45
+},
+{
+"id": "deep_geo",
+"kind": "quantity",
+"stage": "opportunity",
+"name": "Deep geothermal heat",
+"formula": "MWth = flow × c × (T_res − T_return)",
+"coef": "Edmonton: ~90 °C at 2.5 km, 30–80 kg/s → 2.1–5.6 MWth average per well pair, $4.7–8 M per well (Majorowicz & Grasby 2021); licensed by the AER (Directive 089, 2025); competes with data-centre heat as a district source rather than cooling the data centre; Vancouver: not plausible for power, direct use unproven",
+"unit": "MWth",
+"sources": [
+"majorowicz2021",
+"aer_d089"
+],
+"source_roles": [
+{
+"id": "majorowicz2021",
+"term": "Deep geothermal heat",
+"role": "data",
+"conf": 55,
+"verified": false
+},
+{
+"id": "aer_d089",
+"term": "Deep geothermal heat",
+"role": "data",
+"conf": 55,
+"verified": false
+}
+],
+"conf": 55,
+"status": "Edmonton only",
+"direction": "",
+"addon": "deep_geo",
+"inputs": [
+"receiver_demand"
+],
+"upstream": 40
+},
+{
+"id": "tes_volume",
+"kind": "quantity",
+"stage": "opportunity",
+"name": "Hot or chilled water tank",
+"formula": "litres per kWh = 3,600 ÷ (4.18 × ΔT) ÷ 0.85",
+"coef": "144 L/kWh at ΔT 6 K, 29 L/kWh at 30 K (physics); ice ≈ 10.5 kg per kWh; usable share 0.85 and tank heights are assumptions; costs too wide to use (IRENA range)",
+"unit": "m³",
+"sources": [],
+"source_roles": [],
+"conf": 75,
+"status": "physics; costs a gap",
+"direction": "",
+"addon": "tes",
+"inputs": [
+"heat_captured",
+"demand_profile"
+],
+"upstream": 40
+},
+{
+"id": "absorption",
+"kind": "quantity",
+"stage": "opportunity",
+"name": "Cooling for neighbours from waste heat",
+"formula": "cooling = recovered heat × COP, if temperature allows",
+"coef": "single-effect absorption needs ≥90 °C, COP 0.6–0.7; two-stage 70–80 °C, COP <0.4 (Energies 2026); data-centre heat 25–35 °C air-cooled (no), 50–60 °C liquid-cooled (only with a heat-pump lift)",
+"unit": "kW cooling",
+"sources": [
+"absorption2026"
+],
+"source_roles": [
+{
+"id": "absorption2026",
+"term": "Cooling for neighbours from waste heat",
+"role": "data",
+"conf": 65,
+"verified": true
+}
+],
+"conf": 65,
+"status": "in hand",
+"direction": "",
+"addon": "absorption",
+"inputs": [
+"heat_temp",
+"heat_captured"
+],
+"upstream": 50
 }
 ],
 "edges": [
@@ -5374,6 +6250,158 @@
 {
 "from": "lead_time",
 "to": "construction_time"
+},
+{
+"from": "evaporation",
+"to": "reclaimed_makeup"
+},
+{
+"from": "blowdown",
+"to": "reclaimed_makeup"
+},
+{
+"from": "water_supply",
+"to": "reclaimed_makeup"
+},
+{
+"from": "people_affected",
+"to": "greywater_neighbours"
+},
+{
+"from": "reclaimed_makeup",
+"to": "treatment_energy"
+},
+{
+"from": "greywater_neighbours",
+"to": "treatment_energy"
+},
+{
+"from": "blowdown",
+"to": "blowdown_recovery"
+},
+{
+"from": "massing",
+"to": "pv_roof"
+},
+{
+"from": "plant_schedule",
+"to": "pv_roof"
+},
+{
+"from": "massing",
+"to": "pv_facade"
+},
+{
+"from": "pv_roof",
+"to": "pv_share"
+},
+{
+"from": "pv_facade",
+"to": "pv_share"
+},
+{
+"from": "it_load_actual",
+"to": "pv_share"
+},
+{
+"from": "pue",
+"to": "pv_share"
+},
+{
+"from": "pv_roof",
+"to": "pv_cost"
+},
+{
+"from": "it_load_actual",
+"to": "battery"
+},
+{
+"from": "it_load_actual",
+"to": "ups_flex"
+},
+{
+"from": "flexible_load",
+"to": "ups_flex"
+},
+{
+"from": "battery",
+"to": "peak_relief"
+},
+{
+"from": "ups_flex",
+"to": "peak_relief"
+},
+{
+"from": "electricity_price",
+"to": "peak_relief"
+},
+{
+"from": "generator_co2",
+"to": "genset_test"
+},
+{
+"from": "generator_nox_pm",
+"to": "genset_test"
+},
+{
+"from": "backup_hours",
+"to": "genset_test"
+},
+{
+"from": "genset_test",
+"to": "hvo_swap"
+},
+{
+"from": "heat_rejected",
+"to": "borefield"
+},
+{
+"from": "ground",
+"to": "borefield"
+},
+{
+"from": "borefield",
+"to": "ground_warming"
+},
+{
+"from": "heat_captured",
+"to": "btes"
+},
+{
+"from": "stored_heat",
+"to": "btes"
+},
+{
+"from": "receiver_demand",
+"to": "btes"
+},
+{
+"from": "ground",
+"to": "ates"
+},
+{
+"from": "heat_captured",
+"to": "ates"
+},
+{
+"from": "receiver_demand",
+"to": "deep_geo"
+},
+{
+"from": "heat_captured",
+"to": "tes_volume"
+},
+{
+"from": "demand_profile",
+"to": "tes_volume"
+},
+{
+"from": "heat_temp",
+"to": "absorption"
+},
+{
+"from": "heat_captured",
+"to": "absorption"
 }
 ],
 "conditions": [
@@ -5395,7 +6423,9 @@
 "operator",
 "receiver"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "t_quality",
@@ -5413,7 +6443,9 @@
 "operator",
 "receiver"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "t_form",
@@ -5432,7 +6464,9 @@
 "operator",
 "receiver"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "t_conversion",
@@ -5451,7 +6485,9 @@
 "operator",
 "receiver"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "t_reliability",
@@ -5469,7 +6505,9 @@
 "operator",
 "receiver"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "t_cooling_change",
@@ -5487,7 +6525,9 @@
 "operator",
 "receiver"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "t_metering",
@@ -5505,7 +6545,9 @@
 "operator",
 "receiver"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "t_sink",
@@ -5527,7 +6569,9 @@
 "utility",
 "nations"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "s_distance",
@@ -5547,7 +6591,9 @@
 "city",
 "neighbours"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "s_density",
@@ -5565,7 +6611,9 @@
 "receiver",
 "city"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "s_route",
@@ -5587,7 +6635,9 @@
 "city",
 "neighbours"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "s_network",
@@ -5607,7 +6657,9 @@
 "city",
 "neighbours"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "s_exit",
@@ -5624,7 +6676,9 @@
 "operator",
 "host"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "s_room",
@@ -5642,7 +6696,9 @@
 "operator",
 "host"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "s_building_type",
@@ -5660,7 +6716,9 @@
 "operator",
 "host"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "s_usable",
@@ -5679,7 +6737,9 @@
 "city",
 "public"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "s_adjacency",
@@ -5699,7 +6759,9 @@
 "city",
 "neighbours"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "s_burden_reach",
@@ -5720,7 +6782,9 @@
 "city",
 "neighbours"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "s_conversion",
@@ -5740,7 +6804,9 @@
 "operator",
 "climate"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "tm_profile",
@@ -5759,7 +6825,9 @@
 "receiver",
 "future"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "tm_overlap",
@@ -5778,7 +6846,9 @@
 "receiver",
 "future"
 ],
-"constraint": true
+"constraint": true,
+"note": "",
+"sources": []
 },
 {
 "id": "tm_storage",
@@ -5796,7 +6866,9 @@
 "receiver",
 "future"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "tm_horizons",
@@ -5814,7 +6886,9 @@
 "receiver",
 "future"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "tm_growth",
@@ -5832,7 +6906,9 @@
 "receiver",
 "future"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "tm_lead",
@@ -5852,7 +6928,9 @@
 "receiver",
 "future"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "tm_termination",
@@ -5871,7 +6949,9 @@
 "future",
 "operator"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "e_window",
@@ -5893,7 +6973,9 @@
 "utility",
 "ratepayers"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "e_capex",
@@ -5913,7 +6995,9 @@
 "utility",
 "ratepayers"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "e_payback",
@@ -5934,7 +7018,9 @@
 "utility",
 "ratepayers"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "e_risk",
@@ -5953,7 +7039,9 @@
 "utility",
 "ratepayers"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "e_split_incentive",
@@ -5972,7 +7060,9 @@
 "utility",
 "ratepayers"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "e_reserved_cost",
@@ -5993,7 +7083,9 @@
 "utility",
 "ratepayers"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "e_passthrough",
@@ -6011,7 +7103,9 @@
 "ratepayers",
 "utility"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "e_savings",
@@ -6030,7 +7124,9 @@
 "utility",
 "ratepayers"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "e_flex_value",
@@ -6050,7 +7146,9 @@
 "ratepayers",
 "operator"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "e_power_price",
@@ -6069,7 +7167,9 @@
 "utility",
 "ratepayers"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "e_interconnection",
@@ -6085,7 +7185,9 @@
 "parties": [
 "operator"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "o_control",
@@ -6105,7 +7207,9 @@
 "utility",
 "city"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "o_chain",
@@ -6126,7 +7230,9 @@
 "utility",
 "city"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "o_common",
@@ -6146,7 +7252,9 @@
 "utility",
 "city"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "o_data",
@@ -6166,7 +7274,9 @@
 "utility",
 "city"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "r_zoning",
@@ -6188,7 +7298,9 @@
 "neighbours",
 "nations"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "r_utility",
@@ -6207,7 +7319,9 @@
 "nations",
 "city"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "r_grid",
@@ -6227,7 +7341,9 @@
 "operator",
 "ratepayers"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "r_noise",
@@ -6247,7 +7363,9 @@
 "city",
 "operator"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "r_incentives",
@@ -6266,7 +7384,9 @@
 "operator",
 "ratepayers"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "r_critical",
@@ -6284,7 +7404,9 @@
 "operator",
 "public"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "r_code",
@@ -6303,7 +7425,9 @@
 "public",
 "operator"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "r_consult",
@@ -6321,7 +7445,9 @@
 "city",
 "operator"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "sec_crossing",
@@ -6338,7 +7464,9 @@
 "public",
 "operator"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "sec_zones",
@@ -6355,7 +7483,9 @@
 "public",
 "operator"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "sec_rating",
@@ -6372,7 +7502,9 @@
 "public",
 "operator"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "sec_info",
@@ -6389,7 +7521,9 @@
 "public",
 "operator"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "sec_ops",
@@ -6407,7 +7541,9 @@
 "public",
 "operator"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "soc_need",
@@ -6427,7 +7563,9 @@
 "city",
 "future"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "soc_winners",
@@ -6447,7 +7585,9 @@
 "city",
 "future"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "soc_residents",
@@ -6466,7 +7606,9 @@
 "city",
 "future"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "soc_dependency",
@@ -6486,7 +7628,9 @@
 "city",
 "future"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "soc_enforce",
@@ -6505,7 +7649,9 @@
 "city",
 "future"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "soc_afford",
@@ -6523,7 +7669,9 @@
 "neighbours",
 "future"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "soc_legibility",
@@ -6540,7 +7688,9 @@
 "public",
 "neighbours"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "soc_access",
@@ -6560,7 +7710,9 @@
 "city",
 "future"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "soc_record",
@@ -6579,7 +7731,9 @@
 "city",
 "future"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "soc_fix",
@@ -6595,7 +7749,9 @@
 "parties": [
 "city"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "soc_watched",
@@ -6615,7 +7771,9 @@
 "city",
 "future"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "soc_people",
@@ -6632,7 +7790,9 @@
 "neighbours",
 "future"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "soc_jobs",
@@ -6649,7 +7809,9 @@
 "workers",
 "city"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "env_carbon",
@@ -6668,7 +7830,9 @@
 "parties": [
 "climate"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "env_water",
@@ -6689,7 +7853,9 @@
 "neighbours",
 "climate"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "env_embodied",
@@ -6706,7 +7872,9 @@
 "parties": [
 "climate"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "env_burdens",
@@ -6726,7 +7894,9 @@
 "climate",
 "neighbours"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "x_edge",
@@ -6744,7 +7914,9 @@
 "neighbours",
 "public"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "x_sound",
@@ -6761,7 +7933,9 @@
 "neighbours",
 "public"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "x_light",
@@ -6778,7 +7952,9 @@
 "neighbours",
 "public"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "x_agree",
@@ -6796,7 +7972,9 @@
 "neighbours",
 "city"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "x_visible",
@@ -6814,7 +7992,9 @@
 "neighbours",
 "public"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
 },
 {
 "id": "x_cover",
@@ -6832,7 +8012,140 @@
 "neighbours",
 "public"
 ],
-"constraint": false
+"constraint": false,
+"note": "",
+"sources": []
+},
+{
+"id": "a_reuse_rules",
+"heading": "11 Add-ons",
+"name": "Water reuse is allowed for this source and use",
+"test": "city × source (rain, reclaimed, greywater, blackwater) × use (cooling make-up) is permitted",
+"quantities": [
+"reclaimed_makeup",
+"greywater_neighbours",
+"blowdown_recovery",
+"rainwater"
+],
+"move": [
+"policy",
+"time"
+],
+"parties": [
+"operator",
+"city",
+"neighbours"
+],
+"constraint": false,
+"note": "Vancouver 2019 by-law: rainwater and clear-water waste may supply cooling-tower make-up; greywater and blackwater may not be collected (Art. 2.7.1.2); the 2025 by-law adds residential greywater systems (NSF 350) — non-residential status to confirm. Alberta: single-property reuse limited to toilets and subsurface irrigation (P-17-01, archived), other uses by variance; Alberta Health 2021 lists cooling towers with treatment targets. Taking someone else's treated wastewater needs Water Act authorisation in Alberta and falls under the Municipal Wastewater Regulation in BC.",
+"sources": [
+"van_vbbl2019_27",
+"ab_p1701",
+"ab_health2021",
+"bc_mwr",
+"mv_ut019"
+]
+},
+{
+"id": "a_pv_export",
+"heading": "11 Add-ons",
+"name": "Solar fits the generation rules",
+"test": "size and export within the provincial programme",
+"quantities": [
+"pv_roof",
+"pv_facade",
+"self_gen_rules"
+],
+"move": [
+"policy",
+"choice"
+],
+"parties": [
+"operator",
+"utility",
+"ratepayers"
+],
+"constraint": false,
+"note": "BC Hydro RS 2289 (from 1 Jul 2026): up to 100 kW AC, exports credited 10 ¢/kWh; larger needs interconnection study. Alberta: micro-generation ≤ 5 MW and ≤ the site's annual use, retail credit under 150 kW, pool price above.",
+"sources": [
+"bch_rs2289",
+"auc_microgen"
+]
+},
+{
+"id": "a_ground_land",
+"heading": "11 Add-ons",
+"name": "There is ground for a borefield",
+"test": "borefield area ≤ land available on or next to the parcel (parking, parks, streets)",
+"quantities": [
+"borefield",
+"btes",
+"ground_warming"
+],
+"move": [
+"choice",
+"infra",
+"policy"
+],
+"parties": [
+"operator",
+"city",
+"neighbours"
+],
+"constraint": false,
+"note": "≈2 ha per MW rejected to ground alone; Alberta setbacks 1 m from buildings, 3 m from property lines, 15 m from water wells; BC closed-loop wells need a registered driller and a construction report; boreholes under streets or parks need City agreement (rules not found).",
+"sources": [
+"zurmuhl2018",
+"ab_gshe2018",
+"bc_gwpr"
+]
+},
+{
+"id": "a_absorption_temp",
+"heading": "11 Add-ons",
+"name": "The heat is hot enough to make cooling",
+"test": "heat temperature ≥ the absorption chiller's minimum",
+"quantities": [
+"absorption",
+"heat_temp"
+],
+"move": [
+"physics",
+"choice"
+],
+"parties": [
+"operator",
+"neighbours"
+],
+"constraint": true,
+"note": "Air-cooled heat cannot drive absorption cooling; liquid-cooled heat can only with a heat-pump lift or a low-COP two-stage machine.",
+"sources": [
+"absorption2026"
+]
+},
+{
+"id": "a_storage_fire",
+"heading": "11 Add-ons",
+"name": "Battery storage meets fire rules on an urban site",
+"test": "code path and separation for a battery system are confirmed",
+"quantities": [
+"battery"
+],
+"move": [
+"time",
+"policy",
+"money"
+],
+"parties": [
+"operator",
+"city",
+"neighbours"
+],
+"constraint": false,
+"note": "Whether NFPA 855 is referenced by the BC or Alberta building and fire codes was not confirmed; Technical Safety BC withdrew its storage bulletin in March 2025.",
+"sources": [
+"reber2023"
+]
 }
 ],
 "opportunities": [
@@ -6978,7 +8291,7 @@
 "heatPhys": "Heat ≈ electricity drawn; Q = V × 1.16 × ΔT (Green Grid WP29); ISO/IEC 30134-6 ERF (Formulas sheet)",
 "horizons": "Horizons: servers ~6 yr; plant 15–25; shell up to 40; network 40–50 (handoff rule 7); control in colocation (Greene; Monstadt and Saltzman) (handoff §3)",
 "iso9613": "ISO 9613-2:2024; screen Lp ≈ Lw − 20·log10(r) − 8; NoiseModelling (open source) (Formulas sheet)",
-"lbnl2024": "Shehabi et al., LBNL 2024 US Data Center Energy Usage Report: 2-socket server 600 W (2023); idle 36%; colocation utilisation 21→35% — https://eta-publications.lbl.gov/publications/2024-lbnl-data-center-energy-usage-report",
+"lbnl2024": "Shehabi et al., 2024 United States Data Center Energy Usage Report, LBNL-2001637, Lawrence Berkeley National Laboratory, Dec 2024 — https://climate.mit.edu/sites/default/files/2025-02/lbnl-2024-united-states-data-center-energy-usage-report.pdf",
 "lorenz": "Lorenz COP, η 0.50–0.60 (Reinholdt et al. 2018; Pieper et al. 2020); air 25–35 °C, liquid 50–60 °C (Alissa; Wahlroos) (Formulas sheet)",
 "neu9552": "False Creek NEU By-law 9552 Sch. C: energy charge $65.172/MWh; credit for heat returned = 50% → $32.59/MWh — https://bylaws.vancouver.ca/9552c.PDF",
 "neuReport": "NEU rates report RTS 18251 (Oct 2025): 47 buildings, 667,000 m²; 71% renewable; gas $2.23/GJ; RNG rider — https://council.vancouver.ca/20251112/documents/spec1d.pdf",
@@ -7178,7 +8491,48 @@
 "edmRezComplexity": "City of Edmonton, Rezoning Application Complexity (updated 1 Jan 2024) — https://www.edmonton.ca/documents/PDF/ApplicationComplexity-Rezoning.pdf",
 "edmOSL2026": "City of Edmonton, 2026 Fire Hall Off-Site Levy Rates (OSL Steering Committee, 23 Apr 2026; rates held at 2024–2025 levels)",
 "ddeRates2025": "City of Edmonton, Downtown District Energy 2025–2026 Rate Filing, Attachment 4 to IIS02765, Utility Committee 23 Jun 2025",
-"ddeBizCase2025": "City of Edmonton, DDEI Business Case — Phase 1A and 2 Development, Attachment 3 to IIS02765, Utility Committee 23 Jun 2025"
+"ddeBizCase2025": "City of Edmonton, DDEI Business Case — Phase 1A and 2 Development, Attachment 3 to IIS02765, Utility Committee 23 Jun 2025",
+"femp_ct": "US DOE FEMP, Best Management Practice #10: Cooling Tower Management (2013, modified 2026); EPA WaterSense at Work §6.3 — https://www.energy.gov/node/849241",
+"arden2021": "Arden et al., Onsite Non-potable Reuse for Large Buildings, Water Research 191:116635 (2021) — https://pasteur.epa.gov/uploads/10.23719/1519028/Arden%20et%20al.%2C%202021.pdf",
+"gsa_gpg052": "US GSA Green Proving Ground, Blowdown Recovery System for Cooling Towers, Findings GPG-052 (Aug 2023; NREL evaluation) — https://www.gsa.gov/system/files/GPG%20Findings-052-Blowdown%20Recovery-14Sep23.pdf",
+"mv_ut019": "Metro Vancouver, Interim Reclaimed Water Policy UT-019 (29 Sep 2023) — https://metrovancouver.org/boards/Policies/interim-reclaimed-water.pdf",
+"bc_mwr": "BC Municipal Wastewater Regulation, B.C. Reg. 87/2012, s.104 and Table 13 (reclaimed water categories) — https://free.bcpublications.ca/civix/document/id/complete/statreg/87_2012",
+"ab_health2021": "Alberta Health, Public Health Guidelines for Water Reuse and Stormwater Use (2021) — https://open.alberta.ca/dataset/6a57d29c-d437-4dd9-94e3-d96bedc01bb4/resource/d533afcb-2933-43da-9199-eea030148c00/download/health-public-health-guidelines-water-reuse-stormwater-use-2021.pdf",
+"ab_p1701": "Alberta STANDATA P-17-01-NPC15, Reclaimed water systems — single property (Jan 2017, archived) — https://open.alberta.ca/dataset/42295e2f-cf70-44e4-bac9-7a027c4a0c5e/resource/50a4b829-e50b-40fb-9883-351b9a2b1e0f/download/p-17-01-reclaimedwatersystemssingleproperty.pdf",
+"nasem2016": "National Academies, Using Graywater and Stormwater to Enhance Local Water Supplies (2016), Ch. 3 — https://www.nationalacademies.org/read/21866/chapter/5",
+"van_vbbl2019_27": "City of Vancouver Building By-law 2019 (consol. 25 Jul 2023), Div. B, Art. 2.7.1.2 non-potable water systems — https://free.bcpublications.ca/civix/document/id/public/vpbl2019/734749594",
+"mv_bylaw299": "Metro Vancouver Sewer Use Bylaw 299 (consolidated) — https://metrovancouver.org/boards/Bylaws/GVSDD_Bylaw_299_Consolidated.pdf",
+"msft_water2026": "Microsoft blog, Inside Microsoft's two-decade push to cut water intensity (24 Jun 2026) — operator claim — https://blogs.microsoft.com/blog/2026/06/24/inside-microsofts-two-decade-push-to-cut-water-intensity-while-scaling-for-growth/",
+"nrcan_pv2006": "Pelland, Poissant, McKenney et al., The Development of Photovoltaic Resource Maps for Canada, CANMET (NRCan) 2006-046, Table 1 — https://natural-resources.canada.ca/sites/www.nrcan.gc.ca/files/canmetenergy/files/pubs/2006-046_OP-J_411-SOLRES_PV+map.pdf",
+"nrel_rooftop2016": "Gagnon et al., Rooftop Solar PV Technical Potential in the United States, NREL/TP-6A20-65298 (2016) — https://nrel.gov/docs/fy16osti/65298.pdf",
+"nrel_bench2023": "Ramasamy et al., U.S. Solar PV System and Energy Storage Cost Benchmarks Q1 2023, NREL/TP-7A40-87303 — https://www.nrel.gov/docs/fy23osti/87303.pdf",
+"ieapvps_bipv": "IEA PVPS Task 15 summary of Yang et al. (2026), BIPV yield and economic feasibility, Energy and Buildings, doi:10.1016/j.enbuild.2026.118031 — https://iea-pvps.org/key-topics/journal-article-multi-objective-assessment-of-bipv-yield-complementarity-and-economic-feasibility/",
+"nrcan_pvcost2024": "NRCan / IEA PVPS National Survey Report of PV Power Applications in Canada 2024 (installed CAD/W by size) — see sources/15b",
+"bch_rs2289": "BC Hydro, Self-generation (Rate Schedule 2289, from 1 Jul 2026; RS 1289 net metering closed) — https://app.bchydro.com/accounts-billing/electrical-connections/customer-generation/self-generation.html",
+"auc_microgen": "AUC, Micro-generation notice submission guideline (2026), quoting Micro-generation Regulation s.1(1)(h) — https://media.auc.ab.ca/prd-wp-uploads/regulatory_documents/Reference/MicrogenerationNoticeSubmissionGuideline2026.pdf",
+"bc_ef2026": "Government of BC, Electricity emission intensity factors (updated 26 May 2026) — https://www2.gov.bc.ca/gov/content/environment/climate-change/data/electricity",
+"ab_ghgperf": "Government of Alberta, Alberta's greenhouse gas emissions reduction performance — https://www.alberta.ca/albertas-greenhouse-gas-emissions-reduction-performance",
+"est_wind2009": "James, Bahaj, Anwar, Myers, Domestic small-scale wind field trial report, Energy Saving Trust (2009) — read from a vendor-hosted copy; official copy to retrieve (eprints.soton.ac.uk/353113)",
+"zurmuhl2018": "Zurmuhl et al., Hybrid geothermal heat pumps for cooling telecommunications data centers, Stanford Geothermal Workshop 2018 — https://pangea.stanford.edu/ERE/pdf/IGAstandard/SGW/2018/Zurmuhl.pdf",
+"kindaichi2018": "Kindaichi & Nishina, Renewable Energy 127 (2018) 182–194, doi:10.1016/j.renene.2018.04.065 — https://ideas.repec.org/a/eee/renene/v127y2018icp182-194.html",
+"drake_landing": "Drake Landing Solar Community, Okotoks AB: measured BTES performance (Sibbitt et al. 2012; Mudasar et al., CSME 2020) — see sources/15c",
+"li2021_dcbtes": "Li et al. (2021), borehole thermal energy storage for a 0.9 MW data centre (peer-reviewed design study) — see sources/15c",
+"ags_edmonton": "Alberta Geological Survey, ground thermal properties near Edmonton (Hastings Lake test; design k 1.9 W/m·K, 6.1 °C) — see sources/15c",
+"majorowicz2021": "Majorowicz & Grasby, Deep Geothermal Heating Potential for the Communities of the Western Canadian Sedimentary Basin, Energies 14(3):706 (2021) — https://www.mdpi.com/1996-1073/14/3/706",
+"aer_d089": "Alberta Energy Regulator, Directive 089: Geothermal Resource Development (7 Feb 2025) — https://static.aer.ca/prd/documents/directives/Directive-089.pdf",
+"bc_gwpr": "BC Groundwater Protection Regulation, B.C. Reg. 39/2016 (closed-loop geoexchange wells) — https://free.bcpublications.ca/civix/document/id/complete/statreg/39_2016",
+"ab_gshe2018": "Alberta, Directive for Water Wells and Ground Source Heat Exchange Systems (2018) — data/AB_Directive_Water_Wells_GSHE_2018.pdf",
+"barth2026": "Barth, Schefel, Blum, Menberg, Potential of aquifer thermal energy storage (ATES) for data centres in Germany, Geothermal Energy 14:11 (2026) — https://publikationen.bibliothek.kit.edu/1000192638/179927510",
+"atb2024_batt": "NREL Annual Technology Baseline 2024, Commercial Battery Storage — https://atb.nrel.gov/electricity/2024/commercial_battery_storage",
+"pnnl2022": "PNNL, Energy Storage Grand Challenge Cost and Performance Assessment 2022 (PNNL-33283) — https://www.sandia.gov/app/uploads/sites/256/2024/02/ESGC-Cost-Performance-Report-2022-PNNL-33283.pdf",
+"reber2023": "Reber, Jarvis, Marshak, Beyond energy density: flow battery design driven by safety and location, RSC (2023), Table 1 — https://pubs.rsc.org/en/content/articlehtml/2023/ya/d3ya00208j",
+"bch_esi": "BC Hydro, Energy Storage System Incentive — https://www.bchydro.com/powersmart/business/programs/large-demand-response/energy-storage-system-incentive.html",
+"bch_drb": "BC Hydro, Demand Response for Business customer manual — https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/power-smart/business/programs/demand-response-for-business-customer-manual.pdf",
+"aeso_or": "AESO, Operating reserve (ancillary services) — https://aeso.ca/market/ancillary-services/operating-reserve/",
+"auc_27938": "AUC Decision 27938-D01-2023, Amazon Data Services Canada (10 Mar 2023) — https://efiling-webapi.auc.ab.ca/Document/Get/784765",
+"ap42_34": "US EPA, AP-42 5th ed., Vol. I, §3.4, Table 3.4-1 (Apr 2025) — https://www.epa.gov/system/files/documents/2025-04/c03s04_april2025.pdf",
+"bc_rlcf012": "BC Low Carbon Fuels, Approved Carbon Intensities – Current (RLCF-012, rev. 30 Apr 2026) — https://www2.gov.bc.ca/assets/gov/farming-natural-resources-and-industry/electricity-alternative-energy/transportation/renewable-low-carbon-fuels/rlcf012_approved_carbon_intensities_current_29apr2026final.pdf",
+"absorption2026": "Absorption chiller temperatures and COP (Energies 19(9):2147, 2026) — https://www.mdpi.com/1996-1073/19/9/2147"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -7713,6 +9067,7 @@
 "set aside options that break a user limit — and keep them for the \"if you moved this limit\" panel",
 "drop options worse than another on every row for every party (not a trade-off)",
 "pick as many as the user asked for, as different as possible on the rows the user emphasised",
+"let the user add or remove add-ons on any option (rainwater, reclaimed water, greywater, blackwater, solar, batteries, cleaner backup power, borefield, seasonal store, aquifer store, deep geothermal, water tanks, cooling for neighbours) and show what each changes",
 "show them side by side, in no order, each with its full trade-off table"
 ],
 "preferences": [
@@ -7738,5 +9093,315 @@
 }
 ]
 },
-"verdict_note": "Condition states (met / with a change / not met / not applicable or declined / cannot judge / not judged) describe single conditions only. There is no match verdict: decided 13 Oct 2026 — the tool lays out trade-offs by party and does not rank or score options. Wording is suggested for J.B. to accept."
+"verdict_note": "Condition states (met / with a change / not met / not applicable or declined / cannot judge / not judged) describe single conditions only. There is no match verdict: decided 13 Oct 2026 — the tool lays out trade-offs by party and does not rank or score options. Wording is suggested for J.B. to accept.",
+"addons": [
+{
+"id": "rainwater",
+"name": "Rainwater for cooling",
+"family": "water",
+"status": "sized",
+"quantities": [
+"rainwater"
+],
+"rules": {
+"vancouver": "allowed (cooling-tower make-up)",
+"edmonton": "variance needed"
+},
+"changes": [
+"water from the city ↓",
+"tank space ↑"
+]
+},
+{
+"id": "reclaimed",
+"name": "Treated city wastewater for cooling",
+"family": "water",
+"status": "screening",
+"quantities": [
+"reclaimed_makeup"
+],
+"rules": {
+"vancouver": "case by case (Metro Vancouver UT-019)",
+"edmonton": "precedent at Gold Bar; Water Act authorisation"
+},
+"changes": [
+"potable water ↓",
+"treatment cost ↑"
+]
+},
+{
+"id": "greywater",
+"name": "Greywater recycling",
+"family": "water",
+"status": "screening",
+"quantities": [
+"greywater_neighbours",
+"treatment_energy"
+],
+"rules": {
+"vancouver": "barred as a source in the 2019 by-law; 2025 residential only — to confirm",
+"edmonton": "variance needed"
+},
+"changes": [
+"water ↓",
+"electricity ↑",
+"space ↑"
+]
+},
+{
+"id": "blackwater",
+"name": "Blackwater treatment on site",
+"family": "water",
+"status": "screening",
+"quantities": [
+"treatment_energy"
+],
+"rules": {
+"vancouver": "barred as a source in the 2019 by-law",
+"edmonton": "variance needed"
+},
+"changes": [
+"water ↓",
+"electricity ↑",
+"space ↑",
+"approvals ↑"
+]
+},
+{
+"id": "blowdown",
+"name": "Recover blowdown",
+"family": "water",
+"status": "screening",
+"quantities": [
+"blowdown_recovery"
+],
+"rules": {
+"vancouver": "internal process",
+"edmonton": "internal process"
+},
+"changes": [
+"make-up ↓ 16 %",
+"sewer discharge ↓ 53 %"
+]
+},
+{
+"id": "pv",
+"name": "Solar on the roof",
+"family": "power",
+"status": "sized",
+"quantities": [
+"pv_roof",
+"pv_share",
+"pv_cost"
+],
+"rules": {
+"vancouver": "RS 2289 ≤100 kW AC",
+"edmonton": "micro-generation ≤5 MW"
+},
+"changes": [
+"grid power ↓ a few %",
+"roof space ↓",
+"carbon ↓ (small in BC)"
+]
+},
+{
+"id": "pv_facade",
+"name": "Solar on the facade",
+"family": "power",
+"status": "screening",
+"quantities": [
+"pv_facade"
+],
+"rules": {
+"vancouver": "as above",
+"edmonton": "as above"
+},
+"changes": [
+"grid power ↓",
+"facade appearance changes"
+]
+},
+{
+"id": "battery",
+"name": "Battery storage",
+"family": "power",
+"status": "sized",
+"quantities": [
+"battery",
+"peak_relief"
+],
+"rules": {
+"vancouver": "fire code path unconfirmed",
+"edmonton": "fire code path unconfirmed"
+},
+"changes": [
+"grid peak ↓",
+"space ↑",
+"earnings from programmes"
+]
+},
+{
+"id": "ups",
+"name": "Offer UPS batteries to the grid",
+"family": "power",
+"status": "screening",
+"quantities": [
+"ups_flex"
+],
+"rules": {
+"vancouver": "no BC programme found",
+"edmonton": "AESO reserves ≥5 MW or via aggregator"
+},
+"changes": [
+"fast grid support",
+"no new space"
+]
+},
+{
+"id": "genset",
+"name": "Cleaner backup power",
+"family": "carbon",
+"status": "sized",
+"quantities": [
+"genset_test",
+"hvo_swap"
+],
+"rules": {
+"vancouver": "testing within noise exemption",
+"edmonton": "standby exempt from approval"
+},
+"changes": [
+"diesel carbon ↓",
+"NOx and PM ↓ only with batteries or fuel cells"
+]
+},
+{
+"id": "borefield",
+"name": "Borefield heat sink",
+"family": "ground",
+"status": "screening",
+"quantities": [
+"borefield",
+"ground_warming"
+],
+"rules": {
+"vancouver": "registered driller; report",
+"edmonton": "setbacks (2018 directive)"
+},
+"changes": [
+"dry-cooler noise ↓",
+"land ≈2 ha per MW",
+"ground warms unless heat is taken out"
+]
+},
+{
+"id": "btes",
+"name": "Seasonal ground store for neighbours",
+"family": "heat_use",
+"status": "sized",
+"quantities": [
+"btes"
+],
+"rules": {
+"vancouver": "as borefield",
+"edmonton": "as borefield"
+},
+"changes": [
+"winter heat ↑",
+"land ↑",
+"first years weak"
+]
+},
+{
+"id": "ates",
+"name": "Aquifer heat store",
+"family": "ground",
+"status": "screening",
+"quantities": [
+"ates"
+],
+"rules": {
+"vancouver": "water licence",
+"edmonton": "Water Act approval or licence"
+},
+"changes": [
+"winter heat ↑",
+"licence time ↑"
+]
+},
+{
+"id": "deep_geo",
+"name": "Deep geothermal",
+"family": "ground",
+"status": "screening",
+"quantities": [
+"deep_geo"
+],
+"rules": {
+"vancouver": "not plausible",
+"edmonton": "AER Directive 089"
+},
+"changes": [
+"competes with data-centre heat"
+]
+},
+{
+"id": "tes",
+"name": "Hot or chilled water tank",
+"family": "heat_use",
+"status": "sized",
+"quantities": [
+"tes_volume"
+],
+"rules": {
+"vancouver": "—",
+"edmonton": "—"
+},
+"changes": [
+"peaks shifted",
+"space ↑"
+]
+},
+{
+"id": "absorption",
+"name": "Cooling for neighbours",
+"family": "heat_use",
+"status": "gate",
+"quantities": [
+"absorption"
+],
+"rules": {
+"vancouver": "temperature gate",
+"edmonton": "temperature gate"
+},
+"changes": [
+"cooling to neighbours (liquid-cooled only)"
+]
+},
+{
+"id": "wind",
+"name": "Small wind",
+"family": "power",
+"status": "excluded",
+"quantities": [],
+"rules": {},
+"changes": [],
+"reason": "Building-mounted turbines in UK urban and suburban trials made ≤200 kWh/yr each, load factor ≤3 % (Energy Saving Trust 2009; Energy Policy 2010); shown so users can see why it is out.",
+"sources": [
+"est_wind2009"
+]
+},
+{
+"id": "biomass",
+"name": "Biomass or renewable gas",
+"family": "carbon",
+"status": "excluded",
+"quantities": [],
+"rules": {},
+"changes": [],
+"reason": "Adds combustion to the urban airshed (Metro Vancouver requires dispersion modelling for biomass boilers), the data centre already has surplus heat, and renewable gas is a fuel-accounting choice with limited supply (sources/15d §5).",
+"sources": []
+}
+],
+"addons_note": "Add-ons answer \"what would happen if we added X to this option\". Each changes rows of the trade-off table and carries its rule status per city; \"excluded\" add-ons are shown with the reason. From sources/15a–15d (14 Oct 2026)."
 }

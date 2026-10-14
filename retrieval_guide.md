@@ -96,3 +96,13 @@ People and the urban rationale
 - Community-impact studies beyond JLARC 2024 and Bresnihan & Brodie 2021 (Libertson, Velkova & Palm on "energy gentrification"; Dutch and Irish planning studies).
 - A primary list of existing data centres by address in Vancouver (for cumulative effects).
 - Energy poverty at small-area level: CUSP's tool has left energypoverty.ca; Efficiency Canada's 2021 map (geography unconfirmed) or a StatCan custom table.
+
+### Add-ons (14 Oct) — sources the research could not open (full lists in sources/15a–15d)
+- ☐ **A1 Vancouver Building By-law 2025, Book II §2.7** (non-potable water: which sources and uses are now allowed for non-residential buildings) — https://vancouver.ca/files/cov/2025-vbbl-book-II-insert-pages.pdf
+- ☐ **A2 NRCan municipal PV potential CSV** (same as D9; rows Vancouver, Edmonton, Parkland County) — https://ftp.maps.canada.ca/pub/nrcan_rncan/Solar-energy_Energie-solaire/photovoltaic_canada_photovoltaique/municip_potentiel-potential.csv
+- ☐ **A3 BC Hydro Rate Schedule 2289 tariff text** (self-generation size and export rules) — https://app.bchydro.com/toolbar/about/strategies-plans-regulatory/tariffs-terms-conditions/electric-tariff.html
+- ☐ **A4 Alberta alternative solutions guide for small-system water reuse and stormwater use** — https://open.alberta.ca/publications/notice-alternative-solutions-guide-small-system-water-reuse-stormwater-use
+- ☐ **A5 CSA C448 (ground source heat pump design) and VDI 4640 Part 2** — paywalled; try UBC Library
+- ☐ **A6 PNNL-33283 Tables 4.2–4.4** (battery costs at 1 MW and 10 MW) — https://www.sandia.gov/app/uploads/sites/256/2024/02/ESGC-Cost-Performance-Report-2022-PNNL-33283.pdf
+- ☐ **A7 Alberta Carbon Offset Emission Factors Handbook v3.3** (electricity displacement factor) — https://open.alberta.ca/publications/carbon-offset-emission-factors-handbook-version-3
+- ☐ **A8 Energy-storage fire rules**: whether NFPA 855 is referenced by the BC and Alberta building and fire codes (BC Codes site; NFPA 855 free read-only at nfpa.org)
