@@ -316,3 +316,148 @@ What this settles:
 - Current application: an amendment to the Edmonton Energy Technology Park (EETP) Area Structure Plan "to allow for data centres and power generation facilities to be included as permitted uses in the Medium Industrial Precinct". Public feedback open 28 Sep – 25 Oct 2026 on Engaged Edmonton.
 - The page links the Alberta government's list of major proposed projects, including data centres.
 - The section "How Are Data Centre Decisions Made?" was cut off in the screenshot and has not been read. Needed: a full save of the page (or a screenshot of that section).
+
+---
+
+## 10. Second pass (14 Oct)
+
+All pages fetched 14 Oct 2026. Every URL below came from a web search result. The fetch tool summarises pages and caps quotes at about 125 characters, so some clauses below are **paraphrased** (marked "paraphrase"). Check wording against the official PDF before quoting in thesis text. Bylaw 12800 pages (webdocs.edmonton.ca) are the **repealed** pre-2024 bylaw; they are cited only as context or where s. 7.20(4.1) makes them govern legacy Direct Control zones.
+
+### 10.1 s. 5.120 Site Performance Standards (gap 5, item 1)
+
+Source: https://zoningbylaw.edmonton.ca/part-5-general-development-regulations/5120-site-performance-standards — SOURCED.
+
+**Main finding: s. 5.120 contains no numeric limits for noise, vibration, odour, emissions, dust or heat, and does not mention generators.** It is a qualitative, permit-condition section. It does not vary by zone; it varies by type of development. Structure as rendered:
+
+- **Subsection 1 (Non-Industrial development only).** 1.1: "Non-Industrial development must comply with the following:"
+  - 1.1.1 exterior finishing materials to the Development Planner's satisfaction (paraphrase).
+  - 1.1.2: "All mechanical equipment, except for Solar Collectors, must be concealed by screening" or integrated into the building, in a way compatible with its architectural character (second half paraphrase).
+  - 1.1.3 screening exemption for air conditioners/heat pumps serving small residential buildings (paraphrase).
+  - 1.1.4: "Venting systems for Parkades must be oriented away from Abutting Sites" (and from amenity and pedestrian areas, paraphrase).
+  - 1.1.5 no fences of hazardous materials such as barbed wire (paraphrase).
+- **Subsection 2 (Nuisance mitigation; applies to any non-Residential Use or Home Based Business).** 2.1: where a use "may create a Nuisance", determined at Development Permit application, mitigation must be provided to the Development Planner's satisfaction (paraphrase). Listed measures: 2.1.1 screening (walls, berms); 2.1.2 lighting controls (e.g. full cut-off); 2.1.3 "structural soundproofing or limiting the use of outdoor speakers and amplification systems"; 2.1.4 ventilation systems or filters treating emissions before venting; 2.1.5 other similar measures. 2.2: the Development Planner may impose these as permit conditions (paraphrase).
+- **Subsection 3 (outdoor lighting).** 3.1.1 limit glare and direct light away from surrounding Sites; 3.1.2 generally directed downward; 3.1.3 adequate lighting at entrances, parking, Pathways; 3.1.4: "not interfere with the function of traffic control devices" (others paraphrase).
+- Subsections 4–6: residential waste areas, vehicle parking in residential zones, drainage easements. Not relevant.
+
+**"Nuisance"** (s. 8.20): "Nuisance means the external impact caused by an activity that is reasonably likely to interfere with the use" "and enjoyment of an individual's property" … "Typical examples include emission of noise, smoke, dust, vapour, odour, heat, light, fumes" "or unsightly or unsafe conditions, or use of toxic or hazardous materials." Source: https://zoningbylaw.edmonton.ca/part-8-definitions/820-general-definitions — SOURCED.
+
+**What this means for a data centre's generators and heat-rejection plant (INTERPRETATION):**
+- In industrial zones (BE, IM, IH, EET*, EI*), s. 5.120(1.1.2) screening does **not** apply because subsection 1 is limited to "Non-Industrial development". Whether a data centre counts as Industrial development turns on the use classification (§2.4). If classed as Office or a utility in a non-industrial zone, 1.1.2 would apply. UNVERIFIED.
+- Zone-level screening rules fill this gap in some zones: BE 5.2 (mechanical/electrical equipment screened), EIB 6.2 (cooling towers screened), IBES 7.25 (rooftop equipment screened), EETM 6.2.4–6.2.5 (concealed). **IM and IH zone pages do not mention mechanical equipment** (IM section 5 checked this pass).
+- s. 5.120(2) applies everywhere to a non-Residential use. The bylaw gives no decibel threshold; noise conditions are set case by case. The Minor/Major Industrial threshold (§2.1) is itself framed by Nuisance "beyond the boundaries of the Site".
+- PU 5.7 exempts Major Utility from s. 5.120 subsection 1 (from §1 above), consistent with subsection 1 being the non-industrial rule.
+- **Numeric noise limits live outside Bylaw 20001.** The City noise page (https://edmonton.ca/city_government/bylaws/noise) names a "City of Edmonton Noise Bylaw" and the "Community Standards Bylaw" but gives **no bylaw number and no decibel limits** on the page. Search results point to Community Standards Bylaw 14600 (https://edmonton.ca/sites/default/files/public-files/C14600.pdf) — **not fetched; UNVERIFIED** whether it holds numeric limits for stationary equipment. Provincial emission rules for generators (Alberta EPEA approvals, AUC Rule 012 noise for power plants) were **not researched** and are out of scope of the zoning bylaw. UNVERIFIED.
+- Risk / environmental assessment: s. 5.120 has none. The zone pages (IM 5.5, IH 5.3) let the Development Planner require a Risk Assessment, Environmental Impact Assessment or Environmental Assessment Information "in compliance with Section 7.140". s. 7.140 not read.
+
+### 10.2 s. 5.70 Measuring Height and Grade; rooftop equipment (gap 5, item 2)
+
+Source: https://zoningbylaw.edmonton.ca/570-measuring-height-and-grade — SOURCED (mostly paraphrase; verify wording).
+
+**How Height is measured**
+- 1.1 hip/gable roof: from Grade to the midpoint between eave end and roof top. "The Height of a building with a hip or gable roof is measured from Grade" (rest paraphrase).
+- 1.3 mansard/gambrel: Grade to midpoint between deck line and roof top.
+- **1.4 flat roof: Grade to the midpoint of the highest parapet, between top of roof deck and top of parapet.** This is the case for a typical data hall.
+- 1.5 other roof forms: Development Planner selects a method.
+- 1.6 platform structures: lowest adjacent ground to top of structure.
+
+**Exemptions (the key point for rooftop plant)**
+- 1.7 a roof may extend up to **1.7 m** above the zone maximum Height.
+- 1.8 a flat-roof parapet may extend up to **0.4 m** above the zone maximum (prevails over 1.7).
+- **1.9: no Height limit in any Zone** for: chimney stacks (free-standing or roof-mounted); steeples, domes, etc.; elevator housing and roof stairways; "water or other tanks"; **"ventilating equipment, plumbing stacks, and mechanical penthouse"** (1.9.5); skylights; fire walls; antenna structures and satellite dishes; masts, flagpoles; other similar architectural features.
+- 1.10 rooftop access enclosures +3.0 m in residential zones ≤ 12.0 m (not relevant).
+- **Not in s. 5.70:** any roof-edge setback, maximum percentage of roof area, or maximum projection height for exempt equipment. So rooftop chillers, dry coolers and exhaust stacks appear **not to count toward Height and have no stated limit** (INTERPRETATION; whether a dry cooler or condenser array is "ventilating equipment" or a "mechanical penthouse" is the Development Planner's call — UNVERIFIED).
+- Related: s. 5.10(12.1) "Rooftop mounted Solar Collectors may project a maximum of 1.5 m in Height" (read via the Part 5 index page, https://zoningbylaw.edmonton.ca/part-5-general-development-regulations). Context of that clause (above roof or above Height) not checked. UNVERIFIED.
+
+**Grade (2.1–2.4):** Development Planner picks the method that best ensures compatibility; default 2.1.1 averages pre-construction elevations at the Site corners. 2.2: an alternative method may be used, but the permit "must be a Discretionary Development" (paraphrase). 2.3 grading plan required for new construction.
+
+**For the tool:** model Height to top of parapet midpoint (flat roof), allow +0.4 m parapet, and treat rooftop mechanical as exempt (flag "per s. 5.70(1.9), Development Planner discretion"). Zone-level screening rules (§10.1) still apply.
+
+### 10.3 IM Medium Industrial (s. 2.130) (gap 1, item 3)
+
+Source: https://zoningbylaw.edmonton.ca/part-2-standard-zones-and-overlays/industrial-zones/2130-im-medium-industrial-zone — re-fetched.
+
+**Use list (Section 2) — now rendered, SOURCED:**
+- Industrial: 2.1 Crematorium; 2.2 Indoor Self Storage; **2.3 "Major Industrial, limited to those existing as of January 1, 2024"**; **2.4 Minor Industrial**; 2.5 Natural Resource Development.
+- Commercial: 2.6 Custom Manufacturing; 2.7 Indoor Sales and Service, limited to 2.7.1 those existing as of 1 Jan 2024 and 2.7.2 animal hospitals and shelters; **2.8 Office**; 2.9 Outdoor Sales and Service; 2.10 Vehicle Support Service.
+- Community: 2.11 Special Event. Basic Service: 2.12 Emergency Service; **2.13 Minor Utility**; 2.14 Recycling Drop-off Centre; 2.15 Transit Facility. Agricultural: 2.16 Urban Agriculture. Signs: 2.17–2.22.
+- **Major Utility is not listed in IM** (matches the Matrix, §8).
+
+**Use-specific limits:**
+- **Major Industrial:** the only limit is in 2.3 itself. Section 3 has no Major Industrial clause. s. 7.20(1.8.11): a Use "existing as of January 1, 2024" means it "is existing with a valid Development Permit as of January 1, 2024." So **a new data centre classed as Major Industrial is not available in IM**; it needs IH, EETC, or rezoning/DC. SOURCED (interpretation of consequence is ours).
+- **Minor Industrial (3.2):** 3.2.1 indoor display, office, technical or administrative support areas ≤ 33 % of the Minor Industrial floor area (paraphrase); 3.2.1.1 cap lifted where "more than 50% of the Site area is used for outdoor industrial activities"; 3.2.2–3.2.2.1 temporary employee sleeping accommodation as Accessory, not a permanent dwelling.
+- Purpose statement: "Any Nuisance conditions associated with such developments are minimal."
+- Section 5: 5.2 screening of storage/waste/service areas (with IH/IM exceptions); 5.3: "The maximum Height of screening specified in Subsection 5.2 is 3.7 m, except for trees or shrubs."; 5.5 Risk Assessment / EIA / Environmental Assessment Information may be required under s. 7.140. **No mechanical-equipment clause.**
+
+**Table 4.1 (height, FAR, coverage, setbacks): STILL NOT RENDERED.** The page goes from Section 3 directly to 5.1. **UNVERIFIED — needs the official PDF.**
+- Context only (repealed bylaw, NOT the in-force value): Bylaw 12800 s. 420.4 IM had max FAR 2.0 (420.4(1)), setback 3.0 m to a public roadway other than a Lane and 6.0 m abutting a Residential Zone (420.4(2)), max Height 18.0 m (420.4(4)), no site-coverage rule shown. Source: https://webdocs.edmonton.ca/zoningbylaw/ZoningBylaw/Part2/Industrial/420_(IM)_Medium_Industrial_Zone.htm. The City's 2023 overview says IM scope "remains similar to the current Medium Industrial zone" (*Overview of the New Zoning Bylaw*, p. 15, https://pub-edmonton.escribemeetings.com/filestream.ashx?DocumentId=168554) but gives **no** IM numbers. Do not put 18.0 m / 2.0 in the tool as IM values until the PDF confirms them.
+- Blocked: *New Zoning Bylaw with Rationale* (Appendix 2), https://www.edmonton.ca/sites/default/files/public-files/New-Zoning-Bylaw-with-Rationale.pdf?cb=1701821228 (robots.txt). Student could download this; it likely contains the IM table as proposed (draft, not in-force).
+
+### 10.4 Use lists for IH, CG, CB, EETIM, EETM, EETL; EETC envelope (gap 3, item 4)
+
+**IH (s. 2.140)** — re-fetched; Section 2 **still not rendered** (only the heading "Industrial Uses" appears). Section 3.1 covers Major and Minor Industrial together (33 % office cap, 3.1.1–3.1.1.1; temporary sleeping accommodation, 3.1.2–3.1.2.1); 3.2 Natural Resource Development; 3.3 Signs; **no Major Utility clause**. The City Land Use Matrix (§8) gives Major Industrial 1A, Minor Industrial 1A, Minor Utility 1, Major Utility 1 in IH, and the 2023 City overview (p. 16) says "Major Utilities, Minor Utilities and Natural Resources Developments" are additional permitted uses in IH. Use status therefore SOURCED via Matrix + Council document; exact list wording UNVERIFIED (needs PDF).
+
+**CG (s. 2.100)** — print page (https://zoningbylaw.edmonton.ca/bylaw-pdf-print, offset read) renders only the Section 3 regulations (3.1–3.19). The only Industrial Use regulated is 3.10 Indoor Self Storage; Basic Service uses regulated are Health Care Facilities, Recycling Drop-Off Centres, Transit Facilities. Table 4.1: "4.1.1. Maximum Height 16.0 m"; 4.1.2 Hotels 30.0 m; "4.1.3. Maximum total Floor Area Ratio 3.5"; 4.1.4 Residential FAR 2.0. Combined with the Matrix (§8: no industrial or utility use in CG), **data centre NL** except via the Office path (Office is 1 in CG). Section 2 list wording still UNVERIFIED.
+
+**CB (s. 2.110)** — not re-rendered this pass; the Matrix (§8) already settles it: no industrial or utility use; Office 1. **NL** (except Office path).
+
+**EETIM (s. 3.56), EETM (s. 3.54), EETL (s. 3.53)** — re-fetched; **Sections 2–3 (Permitted/Discretionary lists) still not rendered** on all three. Only heading text ("Commercial Uses") and Section 4 use-specific regulations show:
+- EETIM 4.3: "Major Utilities must be greater than or equal to 300.0 m from a municipal boundary." (So Major Utility is listed in EETIM; the City's LDA26-0225 page calls it discretionary, §2.3.) 4.1 Specialty Food Services ≤ 120 m² public space / 100 occupants; 4.2 certain commercial uses on lots abutting Anthony Henday Drive.
+- EETM 4.4: Major Utilities "Does not include sanitary landfill Sites or nuclear power facilities"; ≥ 300.0 m from a municipal boundary. 4.1 Commercial Uses only on highway/arterial/service/collector frontages, corner sites, or beside an existing Commercial Use.
+- EETL: 4.1 same commercial location rule; no utility or industrial clause rendered.
+- **Context only — repealed Bylaw 12800 lists (the zones were carried into 20001 but use names changed; NOT in-force):**
+  - EETIM (12800 s. 970.11): Permitted included "General Industrial", "Industrial Logistics", "Industrial Manufacturing", "Minor Impact Utility Services", "Special Industrial Uses"; Discretionary included "Major Impact Utility Services, excluding sanitary landfill Sites or nuclear power facilities"; max Height 18.0 m (variance to 22.0 m for Industrial Manufacturing); FAR 2.0. https://webdocs.edmonton.ca/zoningbylaw/ZoningBylaw/Part2/Special_Areas/970.11_(EETIM)_Special_Area_Edmonton_Energy_and_Technology_Park.htm
+  - EETM (12800 s. 970.9): Permitted included "General Industrial Uses", "Industrial Manufacturing", "Minor Impact Utility Services"; Discretionary included "Special Industrial Uses", "Major Impact Utility Services". https://webdocs.edmonton.ca/zoningbylaw/ZoningBylaw/Part2/Special_Areas/970_9_(EETM)_Edmonton_Energy_and_Technology_Park_Manufacturing_Zone.htm
+  - EETL (12800 s. 970.8): Permitted included "General Industrial Uses", "Industrial Logistics", "Minor Impact Utility Services", "Special Industrial Uses"; no Major Impact Utility listed. https://webdocs.edmonton.ca/InfraPlan/zoningbylaw/ZoningBylaw/Part2/Special_Areas/970_8_(EETL)_Edmonton_Energy_and_Technology_Park_Logistics_Zone.htm
+  - How these map to 20001 names (e.g. General Industrial → Minor Industrial?) is **UNVERIFIED**. The 20001 lists need the PDF.
+
+**EETC (s. 3.52) height/FAR** — re-fetched. Section 5 renders as "5.1. Development must comply with Table 5.1:" with only two rows: 5.1.1 "Minimum Site area" 1.0 ha; 5.1.2 "Minimum Setback where a Lot line Abuts a Street" 3.0 m. 5.2: the Development Planner may require a greater Setback for components that "may interfere with the safety or amenity of developments upon" Abutting Sites, having regard to separation distances required by Alberta Environment and Protected Areas (paraphrase). **No height or FAR row is rendered.** Possible reading: EETC sets **no** maximum height or FAR. UNVERIFIED — the table may be partly unrendered, as on IM; confirm in the PDF.
+
+### 10.5 Direct Control: DC1 and DC2 (gap 6, item 5)
+
+Bylaw 20001 has a single Direct Control tool (s. 7.80, §4.1). The City's 2023 overview (DocumentId=168554, p. 32): "The distinction between DC1 and DC2 is proposed to be removed"; "Existing Direct Control zones will not be rezoned". So DC1/DC2 in the open data are **legacy** zones passed under Bylaw 12800 (or 5996).
+
+**s. 7.20(4) — how legacy DC zones are read (SOURCED,** https://zoningbylaw.edmonton.ca/part-7-administrative-and-interpretive-clauses/general/720-general-rules-interpretation**):**
+- 4.1: "For the purpose of any Direct Control Zone passed on or before December 31, 2023:" 4.1.1 listed Uses are interpreted under "Land Use Bylaw 5996 as it appeared on June 13, 2001, or Zoning Bylaw 12800 as it appeared on December 31, 2023, whichever is applicable"; 4.1.2 section references go to the bylaw "that was in effect on the date on which the Direct Control Zone was approved by Council"; 4.1.3 zone/overlay references go to the version "that was in effect on December 31, 2023."
+- 4.2: DC zones passed on or after 1 Jan 2024 follow the bylaw in effect at Council approval (sections) and at the permit decision (zones/overlays).
+- 4.3: an existing DC zone "must not be interpreted to provide any additional rights than are otherwise contemplated" in it.
+- **Consequence for the tool:** a DC2 listing "General Industrial Uses" or "Major Impact Utility Services" must be read with **12800** definitions, not 20001 ones.
+
+**DC1 — Bylaw 12800 s. 710 Direct Development Control Provision** (https://webdocs.edmonton.ca/zoningbylaw/ZoningBylaw/Part2/Direct/710_(DC1)_Direct_Development_Control_Provision.htm; amended Charter Bylaw 19724, 8 Jun 2021):
+- 710.1: "The purpose of this Provision is to provide for detailed, sensitive control of the Use" (rest of sentence not captured).
+- 710.2: applied only "where specified by an approved Statutory Plan in effect at the time of passage", or "to those historical resources that have been designated by the Minister or by Council".
+- 710.3.1 / 710.4.1: Uses and regulations come from the approved Statutory Plan (ARP); 710.4.5: "All regulations in this Bylaw shall apply".
+- In short: **plan-driven** (ARP areas, heritage). City webdocs index: "These documents are for individual sites usually associated with Area Re-development (ARP) plans" (https://webdocs.edmonton.ca/zoningbylaw/DC1_Direct_Development_Control_Provisions.htm).
+
+**DC2 — Bylaw 12800 s. 720 Site Specific Development Control Provision** (https://webdocs.edmonton.ca/zoningbylaw/ZoningBylaw/Part2/Direct/720_(DC2)_Site_Specific_Development_Control_Provision.htm):
+- 720.1: "to provide for direct control over a specific proposed development" "where any other Zone would be inappropriate or inadequate."
+- 720.2.1: only for a specific proposed development where it "exceeds the development provisions of the closest equivalent conventional Zone"; needs regulations so "land Use conflicts with neighbouring properties are minimized"; the Site "has unique characteristics"; or "the ongoing operation of the proposed development requires specific regulations."
+- 720.3.1–3.2: applicant-drafted provision with legal description, Use Class Opportunities and Development Regulations; a Site plan is appended and "all development in the Provision shall be in accordance with the Site plan."
+- 720.3.3: "All Regulations in the Zoning Bylaw shall apply" unless "specifically excluded or modified".
+- In short: **project-driven**, one bylaw per site, often with an appended plan. This confirms the Tier C handling in §4.3.
+- Not found: appeal rules for DC zones (s. 7.80 / MGA s. 685(4)) — UNVERIFIED.
+
+### 10.6 Needs the official PDF (Bylaw 20001)
+
+1. **IM Table 4.1** — max Height, FAR, site coverage, all setbacks; any 4.2 variance clause.
+2. **IH Section 2** use list wording (status already from Matrix).
+3. **CG and CB Section 2** use list wording (status already from Matrix).
+4. **EETIM, EETM, EETL Sections 2–3** Permitted and Discretionary lists — the key unknown for EETP (which list holds Minor Industrial / Major Industrial / Major Utility).
+5. **EETC Table 5.1** — confirm whether height and FAR are genuinely absent.
+6. **Verbatim wording** of s. 5.120 (subsections 1–3) and s. 5.70 (1.4, 1.7–1.9), since this pass read them in paraphrase; plus diagrams for 5.70.
+7. s. 5.10(12.1) solar-collector projection, in context.
+8. s. 7.140 (Risk Assessment / EIA content) and s. 7.100(6) (height variances).
+9. s. 7.80 in full (DC appeal and approval process).
+
+**Other documents for the student to download (blocked or not fetched):**
+- *New Zoning Bylaw with Rationale* (Appendix 2, draft): https://www.edmonton.ca/sites/default/files/public-files/New-Zoning-Bylaw-with-Rationale.pdf?cb=1701821228 (robots.txt).
+- Community Standards Bylaw 14600 (noise): https://edmonton.ca/sites/default/files/public-files/C14600.pdf (not fetched; check for decibel limits on stationary equipment).
+
+### 10.7 Sources added in this pass (accessed 14 Oct 2026)
+
+25. s. 5.120 Site Performance Standards. https://zoningbylaw.edmonton.ca/part-5-general-development-regulations/5120-site-performance-standards
+26. s. 5.70 Measuring Height and Grade. https://zoningbylaw.edmonton.ca/570-measuring-height-and-grade
+27. Part 5 index. https://zoningbylaw.edmonton.ca/part-5-general-development-regulations
+28. City of Edmonton, *Overview of the New Zoning Bylaw* (Council document, eScribe). https://pub-edmonton.escribemeetings.com/filestream.ashx?DocumentId=168554
+29. City of Edmonton, Noise page. https://edmonton.ca/city_government/bylaws/noise
+30. Bylaw 12800 (repealed; context and legacy DC interpretation): s. 420 IM https://webdocs.edmonton.ca/zoningbylaw/ZoningBylaw/Part2/Industrial/420_(IM)_Medium_Industrial_Zone.htm ; s. 970.8 EETL, 970.9 EETM, 970.11 EETIM (URLs in §10.4); s. 710 DC1 and s. 720 DC2 (URLs in §10.5); DC1 index https://webdocs.edmonton.ca/zoningbylaw/DC1_Direct_Development_Control_Provisions.htm ; DC2 index https://webdocs.edmonton.ca/InfraPlan/zoningbylaw/ZoningBylaw/Part4/DC2_Site_Specific_Development_Control_Provisions.htm
+31. Re-fetched this pass: IM, IH, EETC, EETIM, EETM, EETL, s. 7.20, s. 8.20, bylaw print page (sources 4, 5, 7, 9, 10, 18).
