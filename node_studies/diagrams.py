@@ -224,7 +224,8 @@ def d_water(sel):
     F.badge(158, 190, 'surface_water_sink', sel, c)
     F.badge(180, 190, 'licence_flag', sel, c)
     F.badge(180, 270, 'water_behind_electricity', sel, c)
-    return F, '2D flow diagram', 'Water comes in from three sources and leaves two ways; the water used to make the electricity is counted upstream.'
+    whatif(F, [('City wastewater', 'place', ['reclaimed_makeup']), ('Neighbours\' greywater', 'place', ['greywater_neighbours']), ('Treatment on site', 'technology', ['treatment_energy']), ('Recover blowdown', 'technology', ['blowdown_recovery'])], sel, c)
+    return F, '2D flow diagram', 'Water comes in from three sources and leaves two ways; the water used to make the electricity is counted upstream. Underneath, what could be added.'
 
 # ---------- 4. What the heat becomes (3D neighbourhood) ----------
 def d_heat_use(sel):
@@ -267,10 +268,26 @@ def d_heat_use(sel):
     F.add(f'<rect x="328" y="470" width="292" height="52" rx="4" fill="{PN}" stroke="{FG}"/>' + T(340, 490, 'Hourly demand', FG, 12, w=400))
     F.add(f'<polyline points="470,512 490,500 510,486 530,494 550,482 570,498 590,506 606,510" fill="none" stroke="{H}"/>')
     F.badge(620, 470, 'demand_profile', sel, c)
+    F.H = 532
+    whatif(F, [('Seasonal ground store', 'opportunity', ['btes']), ('Hot or chilled water tank', 'opportunity', ['tes_volume']), ('Cooling for neighbours', 'opportunity', ['absorption'])], sel, c)
     return F, '3D neighbourhood', 'Within a search radius, the pipe reaches the buildings that can take the heat; a greenhouse is one possible receiver, and the heat could also serve other uses or be stored for winter.'
 
 
 # ====================== remaining families ======================
+
+KINDLAB = {'opportunity': 'gives the place', 'place': 'the place gives', 'technology': 'its own choice'}
+def whatif(F, items, sel, c, y=None, x0=20, x1=620):
+    """A strip of "what if we added…" panels under a mechanism diagram; numbers as badges on each panel."""
+    y = F.H + 8 if y is None else y
+    head(F, x0, y + 14, 'what if we added…')
+    n = len(items); gap = 12; w = (x1 - x0 - gap * (n - 1)) / n; top = y + 24
+    for i, (title, kind, qs) in enumerate(items):
+        x = x0 + i * (w + gap)
+        F.add(f'<rect x="{x:.1f}" y="{top}" width="{w:.1f}" height="46" rx="4" fill="{PN}" stroke="{FG}" stroke-dasharray="5 3"/>' + T(x + 10, top + 20, title, FG, 11.5, w=400) + T(x + 10, top + 36, KINDLAB[kind], MU, 10))
+        for k, q in enumerate(qs):
+            F.badge(x + w - k * 21, top, q, sel, c)
+    F.H = top + 60
+
 def panel(F, x, y, w, h, t, sub='', st=FG, sz=12):
     F.add(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="4" fill="{PN}" stroke="{st}"/>' + T(x + 12, y + (20 if sub else h / 2 + 4), t, FG, sz, w=400) + (T(x + 12, y + 36, sub, MU, 10.5) if sub else ''))
 def arrow(F, d, col=MU, w=1.2, dash=''):
@@ -325,6 +342,7 @@ def d_power(sel):
     F.badge(x0 + w + 5, 310, 'backup_hours', sel, c)
     F.badge(620, 50, 'rooftop_solar', sel, c); F.badge(620, 128, 'self_gen_rules', sel, c)
     F.badge(598, 206, 'ev_stalls', sel, c); F.badge(620, 206, 'ev_area', sel, c); F.badge(620, 284, 'interconnection', sel, c)
+    whatif(F, [('Solar on the roof', 'technology', ['pv_roof', 'pv_share', 'pv_cost']), ('Solar on the facade', 'technology', ['pv_facade']), ('Battery for the grid', 'opportunity', ['battery', 'peak_relief']), ('UPS to the grid', 'opportunity', ['ups_flex'])], sel, c)
     return F, '2D one-line and stacked column', 'Power comes from the grid through a substation; at the data centre it splits into IT load, cooling and losses, and capacity held in reserve; around the site sit solar, generation rules, EV charging and the networks it serves.'
 
 def d_seen(sel):
@@ -364,6 +382,7 @@ def d_carbon(sel):
     F.badge(490, base - 150, 'embodied_building', sel, c)
     F.add(f'<rect x="530" y="{base-30}" width="60" height="30" fill="url(#hatch)" stroke="{FG}"/>' + T(560, base + 20, 'air, not carbon', FG, 11.5, 'middle', 400) + T(560, base + 36, 'NOx and particles', MU, 10.5, 'middle'))
     F.badge(590, base - 30, 'generator_nox_pm', sel, c)
+    whatif(F, [('Count generator testing', 'technology', ['genset_test']), ('Renewable diesel', 'technology', ['hvo_swap'])], sel, c)
     return F, '2D stacked columns', 'The yearly carbon of running the data centre, the one-off carbon of building it, and the air pollution from generators kept apart because it is not carbon.'
 
 def d_materials(sel):
@@ -500,6 +519,7 @@ def d_ground(sel):
     F.add(f'<rect x="306" y="{G}" width="8" height="160" fill="{BG}" stroke="{FG}"/>' + T(322, G + 140, 'well', MU, 10.5))
     F.tag(90, 56, 'L', 'weather', sel, c)
     F.at(310, G + 150, 380, G + 150, 'ground', sel, c)
+    whatif(F, [('Borefield as heat sink', 'place', ['borefield', 'ground_warming']), ('Aquifer heat store', 'place', ['ates']), ('Deep geothermal', 'place', ['deep_geo'])], sel, c)
     return F, '2D ground section', 'The climate above (a typical year, hour by hour) and the ground below: layers, the water table, and a well that could use the ground to store or shed heat.'
 
 def d_account(sel):
@@ -519,67 +539,6 @@ def d_account(sel):
     return F, 'Table', 'One trade-off table per option, rows in their own units and never summed; the ledger reads the same table party by party.'
 
 
-def d_addons(sel):
-    F = Fig(720, 660); P = AX(310, 200, 2.75); c = fcol('addons'); W_ = GC['water']; H = GC['heat']; PW = GC['power']
-    def poly(L, st=FG, fill='none', sw=1, dash=''):
-        F.add(f'<polygon points="{pts(P, L)}" fill="{fill}" stroke="{st}" stroke-width="{sw}" {"stroke-dasharray=%s" % chr(34)+dash+chr(34) if dash else ""}/>')
-    def line(L, st=FG, sw=1, dash=''):
-        F.add(f'<polyline points="{pts(P, L)}" fill="none" stroke="{st}" stroke-width="{sw}" {"stroke-dasharray=%s" % chr(34)+dash+chr(34) if dash else ""}/>')
-    poly([(-24,-44,0),(116,-44,0),(116,62,0),(-24,62,0)], LN)
-    poly([(-24,62,0),(116,62,0),(116,72,0),(-24,72,0)], LN, 'url(#hatch)')
-    F.add(T(*[v + o for v, o in zip(P(110, 72, 0), (6, 12))], 'street', FA, 11))
-    # underground: borefield, BTES, aquifer, deep well
-    poly([(0,-42,0),(36,-42,0),(36,-14,0),(0,-14,0)], MU, 'none', .8, '4 3')
-    for i in range(5):
-        for j in range(4):
-            x, y = 4 + i * 7, -38 + j * 7; F.add(f'<circle cx="{P(x,y,0)[0]:.1f}" cy="{P(x,y,0)[1]:.1f}" r="1.6" fill="{MU}"/>')
-    for x in (4, 32): line([(x, -14, 0), (x, -14, -14)], MU, .8, '3 3')
-    poly([(4,-14,-14),(32,-14,-14),(32,-14,-4),(4,-14,-4)], H, H, .6, '2 3') if False else line([(4,-14,-14),(32,-14,-14)], H, 1.2, '2 3')
-    poly([(44,-40,0),(62,-40,0),(62,-20,0),(44,-20,0)], H, 'none', .9, '4 3')
-    for i in range(6):
-        for j in range(5):
-            x, y = 46 + i * 3, -38 + j * 4; F.add(f'<circle cx="{P(x,y,0)[0]:.1f}" cy="{P(x,y,0)[1]:.1f}" r="1.1" fill="{H}"/>')
-    for x, col in ((82, H), (100, W_)):
-        line([(x, -20, 0), (x, -20, -26)], col, 1.4)
-        F.add(f'<circle cx="{P(x,-20,0)[0]:.1f}" cy="{P(x,-20,0)[1]:.1f}" r="2.6" fill="{BG}" stroke="{col}"/>')
-    line([(82,-20,-26),(100,-20,-26)], MU, .8, '3 3')
-    line([(112, 30, 0), (112, 30, -42)], H, 1.4, '6 4')
-    F.add(f'<circle cx="{P(112,30,0)[0]:.1f}" cy="{P(112,30,0)[1]:.1f}" r="2.6" fill="{BG}" stroke="{H}"/>')
-    # site services
-    F.add(box(P, -16, 2, 0, 9, 5, 4, FG, PN, .9)); F.add(box(P, -16, 9, 0, 9, 5, 4, FG, PN, .9)); F.add(box(P, -16, 17, 0, 6, 4, 3, MU, PN, .8))
-    F.add(box(P, -16, 25, 0, 10, 7, 4, W_, PN, 1))
-    F.add(box(P, 46, 2, 0, 12, 5, 5, PW, PN, 1)); F.add(box(P, 46, 9, 0, 12, 5, 5, PW, PN, 1))
-    F.add(box(P, 46, 18, 0, 8, 8, 11, FG, PN, 1))
-    F.add(box(P, 50, 34, 0, 7, 7, 5, H, PN, 1))
-    # data centre with roof plant, PV and facade PV
-    F.add(box(P, 0, 0, 0, 40, 30, 20, FG, PN, 1.2))
-    for k in range(4): poly([(3, 3 + k * 6, 20.3), (22, 3 + k * 6, 20.3), (22, 7 + k * 6, 21.8), (3, 7 + k * 6, 21.8)], PW, '#1e2633', .9)
-    F.add(box(P, 26, 3, 20, 10, 6, 3, FG, PN)); F.add(box(P, 26, 12, 20, 10, 6, 3, FG, PN)); F.add(box(P, 28, 21, 20, 6, 5, 3, W_, PN, 1))
-    for zz in (5, 11): poly([(40, 4, zz), (40, 26, zz), (40, 26, zz + 4), (40, 4, zz + 4)], PW, '#1e2633', .8)
-    poly([(2, 30, 1), (12, 30, 1), (12, 30, 7), (2, 30, 7)], PW, 'none', .9, '3 2')
-    # neighbour and pipes
-    F.add(box(P, 66, 76, 0, 30, 16, 14, MU, PN, .9))
-    line([(80, 76, 0), (80, 66, -1), (-11, 66, -1), (-11, 32, 0)], W_, 1.3, '5 4')
-    line([(-24, 68, -1), (116, 68, -1)], W_, 1.8)
-    line([(20, 68, -1), (20, 30, 0)], W_, 1.3)
-    line([(54, 41, 0), (54, 64, -1), (72, 64, -1), (72, 76, 0)], H, 1.6)
-    line([(58, 5, 2), (64, 5, 2), (64, 60, 2)], PW, 1.2)
-    F.add(f'<path d="M{P(64,60,0)[0]:.1f},{P(64,60,0)[1]:.1f} v-26" stroke="{FG}" stroke-width="1.2"/>')
-    # tags
-    F.tag(*P(12, 14, 21), 'T', 'pv_roof', sel, c); F.tag(*P(5, 5, 21), 'T', 'pv_share', sel, c); F.tag(*P(20, 22, 21), 'T', 'pv_cost', sel, c)
-    F.tag(*P(31, 23, 23), 'T', 'blowdown_recovery', sel, c)
-    F.tag(*P(40, 15, 13), 'R', 'pv_facade', sel, c)
-    F.tag(*P(52, 4, 5), 'R', 'battery', sel, c); F.tag(*P(64, 40, 2), 'R', 'peak_relief', sel, c)
-    F.tag(*P(50, 22, 11), 'R', 'tes_volume', sel, c); F.tag(*P(53, 37, 5), 'R', 'absorption', sel, c)
-    F.tag(*P(7, 30, 4), 'L', 'ups_flex', sel, c)
-    F.tag(*P(-12, 4, 4), 'L', 'genset_test', sel, c); F.tag(*P(-13, 19, 3), 'L', 'hvo_swap', sel, c)
-    F.tag(*P(-11, 28, 4), 'L', 'treatment_energy', sel, c)
-    F.tag(*P(40, 66, -1), 'B', 'greywater_neighbours', sel, c); F.tag(*P(10, 68, -1), 'B', 'reclaimed_makeup', sel, c)
-    F.tag(*P(18, -28, 0), 'L', 'borefield', sel, c); F.tag(*P(18, -14, -14), 'L', 'ground_warming', sel, c)
-    F.tag(*P(53, -30, 0), 'R', 'btes', sel, c); F.tag(*P(91, -20, -26), 'R', 'ates', sel, c); F.tag(*P(112, 30, -30), 'R', 'deep_geo', sel, c)
-    return F, '3D site', 'One site with every add-on placed: solar on the roof and facade, batteries and the UPS, cleaner backup power, water tanks, cooling for the neighbour, reused water in from the street and the neighbour, and the ground below — a borefield, a seasonal store, an aquifer pair and a deep well.'
-
-DIAGRAMS = {'addons': None, 'heat_out': d_heat_out, 'heat_use': d_heat_use, 'sink': d_sink, 'power': d_power, 'water': d_water, 'sound': d_sound,
+DIAGRAMS = {'heat_out': d_heat_out, 'heat_use': d_heat_use, 'sink': d_sink, 'power': d_power, 'water': d_water, 'sound': d_sound,
             'seen': d_seen, 'carbon': d_carbon, 'materials': d_materials, 'space': d_space, 'it': d_it, 'money': d_money,
             'rules': d_rules, 'people': d_people, 'time': d_time, 'ground': d_ground, 'account': d_account}
-DIAGRAMS['addons'] = d_addons

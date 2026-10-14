@@ -164,28 +164,28 @@ NEW = [
    ['absorption2026'], 65, 'in hand', 'absorption'),
 ]
 CONDS = [
- dict(id='a_reuse_rules', heading='11 Add-ons', name='Water reuse is allowed for this source and use',
+ dict(id='a_reuse_rules', heading='11 What if we added', name='Water reuse is allowed for this source and use',
       test='city × source (rain, reclaimed, greywater, blackwater) × use (cooling make-up) is permitted',
       quantities=['reclaimed_makeup', 'greywater_neighbours', 'blowdown_recovery', 'rainwater'], move=['policy', 'time'],
       parties=['operator', 'city', 'neighbours'], constraint=False,
       note='Vancouver 2019 by-law: rainwater and clear-water waste may supply cooling-tower make-up; greywater and blackwater may not be collected (Art. 2.7.1.2); the 2025 by-law adds residential greywater systems (NSF 350) — non-residential status to confirm. Alberta: single-property reuse limited to toilets and subsurface irrigation (P-17-01, archived), other uses by variance; Alberta Health 2021 lists cooling towers with treatment targets. Taking someone else\'s treated wastewater needs Water Act authorisation in Alberta and falls under the Municipal Wastewater Regulation in BC.',
       sources=['van_vbbl2019_27', 'ab_p1701', 'ab_health2021', 'bc_mwr', 'mv_ut019']),
- dict(id='a_pv_export', heading='11 Add-ons', name='Solar fits the generation rules',
+ dict(id='a_pv_export', heading='11 What if we added', name='Solar fits the generation rules',
       test='size and export within the provincial programme', quantities=['pv_roof', 'pv_facade', 'self_gen_rules'],
       move=['policy', 'choice'], parties=['operator', 'utility', 'ratepayers'], constraint=False,
       note='BC Hydro RS 2289 (from 1 Jul 2026): up to 100 kW AC, exports credited 10 ¢/kWh; larger needs interconnection study. Alberta: micro-generation ≤ 5 MW and ≤ the site\'s annual use, retail credit under 150 kW, pool price above.',
       sources=['bch_rs2289', 'auc_microgen']),
- dict(id='a_ground_land', heading='11 Add-ons', name='There is ground for a borefield',
+ dict(id='a_ground_land', heading='11 What if we added', name='There is ground for a borefield',
       test='borefield area ≤ land available on or next to the parcel (parking, parks, streets)', quantities=['borefield', 'btes', 'ground_warming'],
       move=['choice', 'infra', 'policy'], parties=['operator', 'city', 'neighbours'], constraint=False,
       note='≈2 ha per MW rejected to ground alone; Alberta setbacks 1 m from buildings, 3 m from property lines, 15 m from water wells; BC closed-loop wells need a registered driller and a construction report; boreholes under streets or parks need City agreement (rules not found).',
       sources=['zurmuhl2018', 'ab_gshe2018', 'bc_gwpr']),
- dict(id='a_absorption_temp', heading='11 Add-ons', name='The heat is hot enough to make cooling',
+ dict(id='a_absorption_temp', heading='11 What if we added', name='The heat is hot enough to make cooling',
       test='heat temperature ≥ the absorption chiller\'s minimum', quantities=['absorption', 'heat_temp'],
       move=['physics', 'choice'], parties=['operator', 'neighbours'], constraint=True,
       note='Air-cooled heat cannot drive absorption cooling; liquid-cooled heat can only with a heat-pump lift or a low-COP two-stage machine.',
       sources=['absorption2026']),
- dict(id='a_storage_fire', heading='11 Add-ons', name='Battery storage meets fire rules on an urban site',
+ dict(id='a_storage_fire', heading='11 What if we added', name='Battery storage meets fire rules on an urban site',
       test='code path and separation for a battery system are confirmed', quantities=['battery'],
       move=['time', 'policy', 'money'], parties=['operator', 'city', 'neighbours'], constraint=False,
       note='Whether NFPA 855 is referenced by the BC or Alberta building and fire codes was not confirmed; Technical Safety BC withdrew its storage bulletin in March 2025.',
@@ -222,5 +222,39 @@ r['meta']['addons_note'] = 'Add-ons answer "what would happen if we added X to t
 ol = r['meta']['options_logic']
 step = 'let the user add or remove add-ons on any option (rainwater, reclaimed water, greywater, blackwater, solar, batteries, cleaner backup power, borefield, seasonal store, aquifer store, deep geothermal, water tanks, cooling for neighbours) and show what each changes'
 if step not in ol['steps']: ol['steps'].insert(4, step)
+
+# --- 14 Oct (J.B.): sort the "what if" items by which way the exchange runs ---
+KIND = {  # opportunity = the data centre gives the place; place = the place gives the data centre; technology = the data centre's own choice
+ 'btes': 'opportunity', 'absorption': 'opportunity', 'battery': 'opportunity', 'ups_flex': 'opportunity', 'peak_relief': 'opportunity', 'tes_volume': 'opportunity',
+ 'reclaimed_makeup': 'place', 'greywater_neighbours': 'place', 'borefield': 'place', 'ground_warming': 'place', 'ates': 'place', 'deep_geo': 'place',
+ 'pv_roof': 'technology', 'pv_facade': 'technology', 'pv_share': 'technology', 'pv_cost': 'technology', 'blowdown_recovery': 'technology',
+ 'treatment_energy': 'technology', 'genset_test': 'technology', 'hvo_swap': 'technology'}
+STAGE = {'opportunity': 'opportunity', 'place': 'place', 'technology': 'characterise'}
+KEEP_TEST = {'peak_relief', 'ground_warming', 'pv_share', 'pv_cost'}
+for q in r['quantities']:
+    if q['id'] in KIND:
+        k = KIND[q['id']]; q['trial'] = k; q.pop('addon', None)
+        q['stage'] = 'test' if q['id'] in KEEP_TEST else STAGE[k]
+        if k == 'place': q['direction'] = 'place'
+OG = r['opportunity_quantities']
+def addto(g, ids):
+    OG.setdefault(g, [])
+    for i in ids:
+        if i not in OG[g]: OG[g].append(i)
+addto('Seasonal storage in the ground', ['btes'])
+addto('Reserved capacity and batteries to the grid', ['battery', 'ups_flex'])
+addto('Cooling for neighbours', ['absorption', 'heat_temp'])
+addto('District heat to a network', ['tes_volume'])
+CATK = {'rainwater': 'technology', 'reclaimed': 'place', 'greywater': 'place', 'blackwater': 'technology', 'blowdown': 'technology', 'pv': 'technology',
+        'pv_facade': 'technology', 'battery': 'opportunity', 'ups': 'opportunity', 'genset': 'technology', 'borefield': 'place', 'btes': 'opportunity',
+        'ates': 'place', 'deep_geo': 'place', 'tes': 'opportunity', 'absorption': 'opportunity', 'wind': 'technology', 'biomass': 'technology'}
+for a in CAT: a['kind'] = CATK[a['id']]
+r['meta'].pop('addons', None); r['meta'].pop('addons_note', None)
+r['meta']['try_menu'] = CAT
+r['meta']['try_menu_note'] = 'What would happen if we added X: any option can try these. Each is sorted by which way the exchange runs — an opportunity (the data centre gives the place), something the place gives the data centre, or the data centre\'s own technology choice. Sources: sources/15a–15d (14 Oct 2026).'
+ol = r['meta']['options_logic']
+ol['steps'] = [s for s in ol['steps'] if not s.startswith('let the user add or remove add-ons')]
+step2 = 'let the user try things on any option — "what if we added…" — whether an opportunity for the place (a seasonal heat store, cooling for neighbours, batteries for the grid), something the place offers (reclaimed water, neighbours\' greywater, the ground), or a technology choice (solar, water recovery, cleaner backup power) — and show what each changes and the rules in each city'
+if step2 not in ol['steps']: ol['steps'].insert(4, step2)
 json.dump(r, open(P, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print(len(NEW), 'quantities,', len(CONDS), 'conditions,', len(CAT), 'add-ons')

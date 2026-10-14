@@ -35,7 +35,7 @@ INPUTS = {
 }
 
 # Conditions grouped by heading, in heading order
-HEADINGS = ['1 Technical', '2 Spatial', '3 Temporal', '4 Economic', '5 Organizational', '6 Regulatory', '7 Security', '8 Social', '9 Environmental', '10 Experiential', '11 Add-ons']
+HEADINGS = ['1 Technical', '2 Spatial', '3 Temporal', '4 Economic', '5 Organizational', '6 Regulatory', '7 Security', '8 Social', '9 Environmental', '10 Experiential', '11 What if we added']
 
 # Worked example: 555 W Hastings, match = recovered heat → host building + downtown network
 EX = {
@@ -105,7 +105,7 @@ SIDE = {'cooling_type':'dc','plant_schedule':'dc','spare_cooling':'dc','lighting
 for k, (name, desc, src, conf) in INPUTS.items():
     nodes.append({'id': k, 'kind': 'input', 'stage': 'input', 'side': SIDE.get(k, 'place'), 'name': name, 'formula': desc, 'coef': '', 'unit': '', 'sources': [], 'source_text': src, 'conf': conf, 'status': 'read or asked', 'inputs': []})
 for q in r['quantities']:
-    nodes.append({'id': q['id'], 'kind': 'quantity', 'stage': q['stage'], 'name': q['name'], 'formula': q['formula'], 'coef': q.get('coef', ''), 'unit': q['unit'], 'sources': q['sources'], 'source_roles': q.get('source_roles', []), 'conf': q['conf'], 'status': q['status'], 'direction': q.get('direction', ''), 'addon': q.get('addon', ''), 'inputs': [i for i in q['inputs'] if i != '*']})
+    nodes.append({'id': q['id'], 'kind': 'quantity', 'stage': q['stage'], 'name': q['name'], 'formula': q['formula'], 'coef': q.get('coef', ''), 'unit': q['unit'], 'sources': q['sources'], 'source_roles': q.get('source_roles', []), 'conf': q['conf'], 'status': q['status'], 'direction': q.get('direction', ''), 'trial': q.get('trial', ''), 'inputs': [i for i in q['inputs'] if i != '*']})
     for i in q['inputs']:
         if i == '*':
             continue
@@ -143,8 +143,8 @@ out = {
     'lifecycle': r['meta'].get('lifecycle', []),
     'options_logic': r['meta'].get('options_logic', {}),
     'verdict_note': r['meta'].get('verdict_states_note', ''),
-    'addons': r['meta'].get('addons', []),
-    'addons_note': r['meta'].get('addons_note', ''),
+    'try_menu': r['meta'].get('try_menu', []),
+    'try_menu_note': r['meta'].get('try_menu_note', ''),
 }
 json.dump(out, open(os.path.join(here, 'diagram_data.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 dangling = [e for e in edges if not any(n['id'] == e['from'] for n in nodes)]

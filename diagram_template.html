@@ -262,7 +262,7 @@ const G=JSON.parse(document.getElementById('guide').textContent); window.__G=G;
 const OL=D.options_logic||{steps:[],preferences:[]};
 D.nodes.push({id:'gen',kind:'gen',stage:'options',name:'Options',unit:'set, in no order',formula:'',inputs:[],conf:null});
 D.nodes.push({id:'relax',kind:'gen',stage:'options',name:'If you moved a limit',unit:'shown separately',formula:'',inputs:[],conf:null});
-D.nodes.push({id:'addons',kind:'gen',stage:'options',name:'Add-ons: what if we added…',unit:(D.addons||[]).length+' to try on any option',formula:'',inputs:[],conf:null});
+D.nodes.push({id:'addons',kind:'gen',stage:'options',name:'What if we added…',unit:(D.try_menu||[]).length+' things to try on an option',formula:'',inputs:[],conf:null});
 OL.preferences.forEach(p=>D.nodes.push({id:p.id,kind:'pref',stage:'options',name:p.name,unit:'set by the user',formula:p.note,inputs:[],conf:null}));
 (D.parties||[]).forEach(p=>D.nodes.push({id:'party_'+p.id,kind:'party',stage:'parties',name:p.name,unit:p.note,formula:p.note,inputs:[],conf:null,pid:p.id}));
 const N={}; D.nodes.forEach(n=>N[n.id]=n);
@@ -363,7 +363,7 @@ function drawNode(n){
   else { if(n.conf!=null) ring(g,18,cy,n.conf);
     el('path',{class:'glyph',d:glyphs[kind==='quantity'&&n.stage==='decide'?'decide':kind]||glyphs.quantity,transform:`translate(${n.conf!=null?13.5:12},${cy-4.5}) scale(0.7)`},g); }
   const t=el('text',{class:'name',x:34,y:mode==='example'&&kind==='quantity'?18:cy-2},g); t.textContent=clip(n.name,FM?22:24);
-  if(n.addon){ const pl=el('text',{class:'plus',x:p.w-30,y:13,'text-anchor':'end'},g); pl.textContent='+ add-on'; }
+  if(n.trial){ const pl=el('text',{class:'plus',x:p.w-30,y:13,'text-anchor':'end'},g); pl.textContent='+ what if'; }
   const u=el('text',{class:'unit',x:34,y:mode==='example'&&kind==='quantity'?31:cy+12},g); u.textContent=clip(n.unit||n.source_text||'',30);
   if(mode==='example'&&kind==='quantity'){ const v=exVal(n.id); const tv=el('text',{class:'val',x:34,y:48},g); tv.textContent=v?clip(v[0],30):'—'; }
   if(!['input','pref'].includes(kind)) el('circle',{class:'port',cx:0,cy,r:3.5},g);
@@ -458,7 +458,7 @@ function applyHighlight(){
     (c.parties||[]).forEach(p=>partyWire(c,p));
   } else if(N[selected]&&N[selected].kind==='party'){ const pid=N[selected].pid;
     D.conditions.forEach(c=>{ if((c.parties||[]).includes(pid)){ keep.add(c.id); partyWire(c,pid);} }); keep.add('tradeoffs');
-  } else if(selected==='addons'){ keep.add('addons'); keep.add('gen'); D.nodes.filter(n=>n.addon).forEach(n=>keep.add(n.id));
+  } else if(selected==='addons'){ keep.add('addons'); keep.add('gen'); D.nodes.filter(n=>n.trial).forEach(n=>keep.add(n.id));
   } else if(N[selected]&&(N[selected].kind==='gen'||N[selected].kind==='pref')){ ['gen','relax','tradeoffs','addons'].concat(OL.preferences.map(p=>p.id)).forEach(i=>keep.add(i)); cols.parties.forEach(n=>keep.add(n.id));
   } else if(selected.startsWith('opp_')){ const o=D.opportunities.find(x=>x.id===selected)||OGROUPS.find(g=>g.o.id===selected).o; o.quantities.forEach(q=>{keep.add(q); ancestors(q).forEach(a=>keep.add(a));});
   } else { ancestors(selected).forEach(a=>keep.add(a)); descendants(selected).forEach(d=>keep.add(d));
@@ -517,9 +517,10 @@ function renderInspector(){
       h=`<div class="kind">Party</div><h2>${esc(n.name)}</h2><p style="color:var(--muted);margin:6px 0 0">${esc(n.formula)}</p><dl><dt>conditions</dt><dd>${chips(pc,'c')}</dd></dl>
       <p class="draftnote">In the tool, each option's trade-off table gives this party one row per concern: what it gains, what it gives up, in that row's own unit, never summed.</p>`;
     } else if(n.id==='gen'){ h=`<div class="kind">Options</div><h2>How options are made</h2><ol class="steps">${OL.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol><p class="draftnote">No option is ranked. Preferences shape what is explored, never what wins.</p>`;
-    } else if(n.id==='addons'){ const A=D.addons||[];
-      h=`<div class="kind">Options</div><h2>Add-ons: what if we added…</h2><p class="draft" style="margin-top:6px">Any option can try any add-on. Each changes rows of its trade-off table and carries its rule status in each city. Some are physically possible but blocked by a rule; that is shown as a limit that a change in policy would move, not hidden. Two are shown only to explain why they are out.</p><div class="draftnote">Draft wording (Claude) — for J.B. to rewrite. From research reports 15a–15d.</div>
-      <ol class="addl">${A.map(a=>`<li><span class="st ${a.status}">${esc({sized:'sized',screening:'screening',gate:'temperature gate',excluded:'left out'}[a.status]||a.status)}</span><b>${esc(a.name)}</b>${a.changes&&a.changes.length?`<div class="r">changes: ${esc(a.changes.join(' · '))}</div>`:''}${a.rules&&a.rules.vancouver?`<div class="r">Vancouver: ${esc(a.rules.vancouver)}<br>Edmonton: ${esc(a.rules.edmonton)}</div>`:''}${a.reason?`<div class="r">${esc(a.reason)}</div>`:''}${a.quantities&&a.quantities.length?`<div style="margin-top:6px">${chips(a.quantities)}</div>`:''}</li>`).join('')}</ol>`;
+    } else if(n.id==='addons'){ const A=D.try_menu||[]; const KL={opportunity:['Opportunities','the data centre gives the place'],place:['From the place','the place gives the data centre'],technology:['Technology choices','the data centre\'s own systems']};
+      const li=a=>`<li><span class="st ${a.status}">${esc({sized:'sized',screening:'screening',gate:'temperature gate',excluded:'left out'}[a.status]||a.status)}</span><b>${esc(a.name)}</b>${a.changes&&a.changes.length?`<div class="r">changes: ${esc(a.changes.join(' · '))}</div>`:''}${a.rules&&a.rules.vancouver?`<div class="r">Vancouver: ${esc(a.rules.vancouver)}<br>Edmonton: ${esc(a.rules.edmonton)}</div>`:''}${a.reason?`<div class="r">${esc(a.reason)}</div>`:''}${a.quantities&&a.quantities.length?`<div style="margin-top:6px">${chips(a.quantities)}</div>`:''}</li>`;
+      h=`<div class="kind">Options</div><h2>What if we added…</h2><p class="draft" style="margin-top:6px">Any option can try these. Each changes rows of its trade-off table and carries its rule status in each city. They are sorted by which way the exchange runs. Some are possible but blocked by a rule; that shows as a limit a change in policy would move, not hidden. Two are listed only to explain why they are out.</p><div class="draftnote">Draft wording (Claude) — for J.B. to rewrite. From research reports 15a–15d.</div>
+      ${['opportunity','place','technology'].map(k=>`<div class="kind" style="margin-top:16px">${KL[k][0]} · <span style="text-transform:none;letter-spacing:0;font-weight:300">${KL[k][1]}</span></div><ol class="addl">${A.filter(a=>a.kind===k).map(li).join('')}</ol>`).join('')}`;
     } else if(n.id==='relax'){ h=`<div class="kind">Options</div><h2>If you moved a limit</h2><p style="color:var(--muted)">A user's limit is always respected. Separately, the tool shows what relaxing each limit would open and at what price. For example: accept a rezoning (about 15 months in Vancouver) and two more options appear, one recovering three times the heat. These options never appear among the results.</p>`;
     } else if(n.kind==='pref'){ h=`<div class="kind">The user's values</div><h2>${esc(n.name)}</h2><p style="color:var(--muted)">${esc(n.formula)}</p><p class="draftnote">Values enter from below, separately from the facts on the left.</p>`;
     } else {

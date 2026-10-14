@@ -323,7 +323,7 @@
     "set aside options that break a user limit — and keep them for the \"if you moved this limit\" panel",
     "drop options worse than another on every row for every party (not a trade-off)",
     "pick as many as the user asked for, as different as possible on the rows the user emphasised",
-    "let the user add or remove add-ons on any option (rainwater, reclaimed water, greywater, blackwater, solar, batteries, cleaner backup power, borefield, seasonal store, aquifer store, deep geothermal, water tanks, cooling for neighbours) and show what each changes",
+    "let the user try things on any option — \"what if we added…\" — whether an opportunity for the place (a seasonal heat store, cooling for neighbours, batteries for the grid), something the place offers (reclaimed water, neighbours' greywater, the ground), or a technology choice (solar, water recovery, cleaner backup power) — and show what each changes and the rules in each city",
     "show them side by side, in no order, each with its full trade-off table"
    ],
    "preferences": [
@@ -349,7 +349,7 @@
     }
    ]
   },
-  "addons": [
+  "try_menu": [
    {
     "id": "rainwater",
     "name": "Rainwater for cooling",
@@ -365,7 +365,8 @@
     "changes": [
      "water from the city ↓",
      "tank space ↑"
-    ]
+    ],
+    "kind": "technology"
    },
    {
     "id": "reclaimed",
@@ -382,7 +383,8 @@
     "changes": [
      "potable water ↓",
      "treatment cost ↑"
-    ]
+    ],
+    "kind": "place"
    },
    {
     "id": "greywater",
@@ -401,7 +403,8 @@
      "water ↓",
      "electricity ↑",
      "space ↑"
-    ]
+    ],
+    "kind": "place"
    },
    {
     "id": "blackwater",
@@ -420,7 +423,8 @@
      "electricity ↑",
      "space ↑",
      "approvals ↑"
-    ]
+    ],
+    "kind": "technology"
    },
    {
     "id": "blowdown",
@@ -437,7 +441,8 @@
     "changes": [
      "make-up ↓ 16 %",
      "sewer discharge ↓ 53 %"
-    ]
+    ],
+    "kind": "technology"
    },
    {
     "id": "pv",
@@ -457,7 +462,8 @@
      "grid power ↓ a few %",
      "roof space ↓",
      "carbon ↓ (small in BC)"
-    ]
+    ],
+    "kind": "technology"
    },
    {
     "id": "pv_facade",
@@ -474,7 +480,8 @@
     "changes": [
      "grid power ↓",
      "facade appearance changes"
-    ]
+    ],
+    "kind": "technology"
    },
    {
     "id": "battery",
@@ -493,7 +500,8 @@
      "grid peak ↓",
      "space ↑",
      "earnings from programmes"
-    ]
+    ],
+    "kind": "opportunity"
    },
    {
     "id": "ups",
@@ -510,7 +518,8 @@
     "changes": [
      "fast grid support",
      "no new space"
-    ]
+    ],
+    "kind": "opportunity"
    },
    {
     "id": "genset",
@@ -528,7 +537,8 @@
     "changes": [
      "diesel carbon ↓",
      "NOx and PM ↓ only with batteries or fuel cells"
-    ]
+    ],
+    "kind": "technology"
    },
    {
     "id": "borefield",
@@ -547,7 +557,8 @@
      "dry-cooler noise ↓",
      "land ≈2 ha per MW",
      "ground warms unless heat is taken out"
-    ]
+    ],
+    "kind": "place"
    },
    {
     "id": "btes",
@@ -565,7 +576,8 @@
      "winter heat ↑",
      "land ↑",
      "first years weak"
-    ]
+    ],
+    "kind": "opportunity"
    },
    {
     "id": "ates",
@@ -582,7 +594,8 @@
     "changes": [
      "winter heat ↑",
      "licence time ↑"
-    ]
+    ],
+    "kind": "place"
    },
    {
     "id": "deep_geo",
@@ -598,7 +611,8 @@
     },
     "changes": [
      "competes with data-centre heat"
-    ]
+    ],
+    "kind": "place"
    },
    {
     "id": "tes",
@@ -615,7 +629,8 @@
     "changes": [
      "peaks shifted",
      "space ↑"
-    ]
+    ],
+    "kind": "opportunity"
    },
    {
     "id": "absorption",
@@ -631,7 +646,8 @@
     },
     "changes": [
      "cooling to neighbours (liquid-cooled only)"
-    ]
+    ],
+    "kind": "opportunity"
    },
    {
     "id": "wind",
@@ -644,7 +660,8 @@
     "reason": "Building-mounted turbines in UK urban and suburban trials made ≤200 kWh/yr each, load factor ≤3 % (Energy Saving Trust 2009; Energy Policy 2010); shown so users can see why it is out.",
     "sources": [
      "est_wind2009"
-    ]
+    ],
+    "kind": "technology"
    },
    {
     "id": "biomass",
@@ -655,10 +672,11 @@
     "rules": {},
     "changes": [],
     "reason": "Adds combustion to the urban airshed (Metro Vancouver requires dispersion modelling for biomass boilers), the data centre already has surplus heat, and renewable gas is a fuel-accounting choice with limited supply (sources/15d §5).",
-    "sources": []
+    "sources": [],
+    "kind": "technology"
    }
   ],
-  "addons_note": "Add-ons answer \"what would happen if we added X to this option\". Each changes rows of the trade-off table and carries its rule status per city; \"excluded\" add-ons are shown with the reason. From sources/15a–15d (14 Oct 2026)."
+  "try_menu_note": "What would happen if we added X: any option can try these. Each is sorted by which way the exchange runs — an opportunity (the data centre gives the place), something the place gives the data centre, or the data centre's own technology choice. Sources: sources/15a–15d (14 Oct 2026)."
  },
  "quantities": [
   {
@@ -4945,7 +4963,7 @@
   {
    "id": "reclaimed_makeup",
    "name": "Reclaimed water as cooling make-up",
-   "stage": "opportunity",
+   "stage": "place",
    "unit": "L/yr",
    "formula": "V_rec = s × make-up, with make-up = evaporation × C ÷ (C − 1)",
    "inputs": [
@@ -4992,12 +5010,13 @@
    ],
    "conf": 60,
    "status": "screening; Vancouver and Edmonton supply volumes and prices not found",
-   "addon": "reclaimed"
+   "trial": "place",
+   "direction": "place"
   },
   {
    "id": "greywater_neighbours",
    "name": "Greywater available from neighbours",
-   "stage": "opportunity",
+   "stage": "place",
    "unit": "L/yr",
    "formula": "V_gw = residents within reach × 98 L/person/day × 365; used = min(V_gw × recovery, make-up)",
    "inputs": [
@@ -5018,12 +5037,13 @@
    ],
    "conf": 45,
    "status": "screening; recovery rate a gap",
-   "addon": "greywater"
+   "trial": "place",
+   "direction": "place"
   },
   {
    "id": "treatment_energy",
    "name": "Electricity to treat reused water",
-   "stage": "opportunity",
+   "stage": "characterise",
    "unit": "kWh/yr",
    "formula": "E = m³ treated × e",
    "inputs": [
@@ -5045,12 +5065,12 @@
    ],
    "conf": 60,
    "status": "in hand (US values)",
-   "addon": "greywater"
+   "trial": "technology"
   },
   {
    "id": "blowdown_recovery",
    "name": "Blowdown recovered",
-   "stage": "opportunity",
+   "stage": "characterise",
    "unit": "L/yr",
    "formula": "make-up × 0.84; blowdown × 0.47; + 3,541 kWh/yr per skid",
    "inputs": [
@@ -5079,12 +5099,12 @@
    ],
    "conf": 50,
    "status": "single test site",
-   "addon": "blowdown"
+   "trial": "technology"
   },
   {
    "id": "pv_roof",
    "name": "Solar on the data centre roof",
-   "stage": "opportunity",
+   "stage": "characterise",
    "unit": "kWp; MWh/yr",
    "formula": "kWp = roof area × 0.66 × (1 − plant share) × 0.70 × 0.16–0.20; MWh = kWp × yield",
    "inputs": [
@@ -5122,12 +5142,12 @@
    ],
    "conf": 70,
    "status": "in hand; NRCan horizontal and vertical values to retrieve",
-   "addon": "pv"
+   "trial": "technology"
   },
   {
    "id": "pv_facade",
    "name": "Solar on the facade",
-   "stage": "opportunity",
+   "stage": "characterise",
    "unit": "MWh/yr",
    "formula": "MWh = south facade area × module density × yield × 0.4–0.6",
    "inputs": [
@@ -5156,7 +5176,7 @@
    ],
    "conf": 40,
    "status": "interim factor",
-   "addon": "pv_facade"
+   "trial": "technology"
   },
   {
    "id": "pv_share",
@@ -5201,7 +5221,7 @@
    ],
    "conf": 70,
    "status": "derived",
-   "addon": "pv"
+   "trial": "technology"
   },
   {
    "id": "pv_cost",
@@ -5235,7 +5255,7 @@
    ],
    "conf": 70,
    "status": "in hand",
-   "addon": "pv"
+   "trial": "technology"
   },
   {
    "id": "battery",
@@ -5277,7 +5297,7 @@
    ],
    "conf": 70,
    "status": "in hand; urban costs a gap",
-   "addon": "battery"
+   "trial": "opportunity"
   },
   {
    "id": "ups_flex",
@@ -5304,7 +5324,7 @@
    ],
    "conf": 45,
    "status": "operator claims only",
-   "addon": "ups"
+   "trial": "opportunity"
   },
   {
    "id": "peak_relief",
@@ -5348,7 +5368,7 @@
    ],
    "conf": 75,
    "status": "in hand",
-   "addon": "battery"
+   "trial": "opportunity"
   },
   {
    "id": "genset_test",
@@ -5384,7 +5404,7 @@
    ],
    "conf": 65,
    "status": "in hand (upper bounds)",
-   "addon": "genset"
+   "trial": "technology"
   },
   {
    "id": "hvo_swap",
@@ -5410,12 +5430,12 @@
    ],
    "conf": 55,
    "status": "reference CI missing",
-   "addon": "genset"
+   "trial": "technology"
   },
   {
    "id": "borefield",
    "name": "Borefield as the data centre's heat sink",
-   "stage": "opportunity",
+   "stage": "place",
    "unit": "m of borehole; m²",
    "formula": "L = heat to ground (W) ÷ q; boreholes = L ÷ 150 m; area = boreholes × 36 m²",
    "inputs": [
@@ -5461,7 +5481,8 @@
    ],
    "conf": 40,
    "status": "screening; no standard for continuous rejection",
-   "addon": "borefield"
+   "trial": "place",
+   "direction": "place"
   },
   {
    "id": "ground_warming",
@@ -5495,7 +5516,8 @@
    ],
    "conf": 55,
    "status": "small-field evidence",
-   "addon": "borefield"
+   "trial": "place",
+   "direction": "place"
   },
   {
    "id": "btes",
@@ -5531,12 +5553,12 @@
    ],
    "conf": 60,
    "status": "in hand; COP a gap",
-   "addon": "btes"
+   "trial": "opportunity"
   },
   {
    "id": "ates",
    "name": "Aquifer heat store (open loop)",
-   "stage": "opportunity",
+   "stage": "place",
    "unit": "m³/h; MWh/yr",
    "formula": "flow = MW × 3.6 ÷ (4.18 × ΔT); heat out ≈ 0.6 × heat in",
    "inputs": [
@@ -5574,12 +5596,13 @@
    ],
    "conf": 45,
    "status": "screening",
-   "addon": "ates"
+   "trial": "place",
+   "direction": "place"
   },
   {
    "id": "deep_geo",
    "name": "Deep geothermal heat",
-   "stage": "opportunity",
+   "stage": "place",
    "unit": "MWth",
    "formula": "MWth = flow × c × (T_res − T_return)",
    "inputs": [
@@ -5608,7 +5631,8 @@
    ],
    "conf": 55,
    "status": "Edmonton only",
-   "addon": "deep_geo"
+   "trial": "place",
+   "direction": "place"
   },
   {
    "id": "tes_volume",
@@ -5625,7 +5649,7 @@
    "source_roles": [],
    "conf": 75,
    "status": "physics; costs a gap",
-   "addon": "tes"
+   "trial": "opportunity"
   },
   {
    "id": "absorption",
@@ -5652,7 +5676,7 @@
    ],
    "conf": 65,
    "status": "in hand",
-   "addon": "absorption"
+   "trial": "opportunity"
   }
  ],
  "conditions": [
@@ -7116,7 +7140,7 @@
   },
   {
    "id": "a_reuse_rules",
-   "heading": "11 Add-ons",
+   "heading": "11 What if we added",
    "name": "Water reuse is allowed for this source and use",
    "test": "city × source (rain, reclaimed, greywater, blackwater) × use (cooling make-up) is permitted",
    "quantities": [
@@ -7146,7 +7170,7 @@
   },
   {
    "id": "a_pv_export",
-   "heading": "11 Add-ons",
+   "heading": "11 What if we added",
    "name": "Solar fits the generation rules",
    "test": "size and export within the provincial programme",
    "quantities": [
@@ -7172,7 +7196,7 @@
   },
   {
    "id": "a_ground_land",
-   "heading": "11 Add-ons",
+   "heading": "11 What if we added",
    "name": "There is ground for a borefield",
    "test": "borefield area ≤ land available on or next to the parcel (parking, parks, streets)",
    "quantities": [
@@ -7200,7 +7224,7 @@
   },
   {
    "id": "a_absorption_temp",
-   "heading": "11 Add-ons",
+   "heading": "11 What if we added",
    "name": "The heat is hot enough to make cooling",
    "test": "heat temperature ≥ the absorption chiller's minimum",
    "quantities": [
@@ -7223,7 +7247,7 @@
   },
   {
    "id": "a_storage_fire",
-   "heading": "11 Add-ons",
+   "heading": "11 What if we added",
    "name": "Battery storage meets fire rules on an urban site",
    "test": "code path and separation for a battery system are confirmed",
    "quantities": [
@@ -7251,7 +7275,8 @@
    "heat_delivered",
    "homes_heated",
    "window",
-   "distribution_cost"
+   "distribution_cost",
+   "tes_volume"
   ],
   "Hospital or campus anchor": [
    "heat_delivered",
@@ -7261,7 +7286,8 @@
   "Seasonal storage in the ground": [
    "stored_heat",
    "storage_footprint",
-   "licence_flag"
+   "licence_flag",
+   "btes"
   ],
   "Aquaculture / insects / algae": [
    "aquaculture_tonnes",
@@ -7280,7 +7306,9 @@
    "spare_capacity",
    "flexible_load",
    "backup_hours",
-   "lrmc_bc"
+   "lrmc_bc",
+   "battery",
+   "ups_flex"
   ],
   "EV charging hub": [
    "ev_stalls",
@@ -7317,6 +7345,10 @@
   ],
   "Sewage heat as comparator source": [
    "sewage_heat"
+  ],
+  "Cooling for neighbours": [
+   "absorption",
+   "heat_temp"
   ]
  },
  "new_sources": {
