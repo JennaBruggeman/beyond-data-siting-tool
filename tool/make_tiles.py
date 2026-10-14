@@ -98,6 +98,19 @@ def vancouver():
                 ext=[min(k[0] for k in ks) * T, min(k[1] for k in ks) * T, (max(k[0] for k in ks) + 1) * T, (max(k[1] for k in ks) + 1) * T],
                 zones=zl, overview=ov,
                 sources=['City of Vancouver Open Data: property parcel polygons; property tax report 2026; building footprints 2009 (heights as of 2009)'])
+    # designated floodplain (City of Vancouver Open Data, supplied by J.B. 14 Oct 2026)
+    fp = os.path.join(D, 'vancouver_designated_floodplain.csv')
+    if os.path.exists(fp):
+        csv.field_size_limit(10**9); CAT = {'Designated Floodplain (FCL 4.6m)': 'designated', 'Still Creek Floodplain': 'still', 'Wave Effect Zone': 'wave', 'Fraser Risk Today 1/500 Storm': 'today'}
+        fl = []
+        for r in csv.DictReader(open(fp, encoding='utf-8-sig'), delimiter=';'):
+            g = shape(json.loads(r['Geom'])); parts = [g] if g.geom_type == 'Polygon' else list(g.geoms)
+            for pg in parts:
+                pg = Polygon([P(x, y) for x, y in pg.exterior.coords], [[P(x, y) for x, y in h.coords] for h in pg.interiors]).simplify(1.0)
+                if pg.is_empty or pg.geom_type != 'Polygon': continue
+                fl.append([CAT.get(r['Name'], 'other'), [ring_enc(list(pg.exterior.coords), 0, 0)] + [ring_enc(list(h.coords), 0, 0) for h in pg.interiors]])
+        meta['flood'] = fl
+        meta['sources'].append('City of Vancouver Open Data: designated floodplain (FCL 4.6 m, Still Creek, wave effect zone, Fraser risk today)')
     write(os.path.join(OUT, 'van', 'meta.json'), meta)
     sh = collections.defaultdict(list)
     for tc, (a, k) in addr.items(): sh[shard_key(a)].append(f'{a}\t{k[0]}_{k[1]}\t{tc}')

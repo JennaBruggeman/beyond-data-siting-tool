@@ -190,6 +190,7 @@ async function loadMeta(city){
   m.ov={}; for(const k in by) m.ov[k]=pathOf(by[k]);
   m.ovRaw=m.overview.map(([zi,a])=>{const r=decodeRing(a,0,0,m.Q);return {zi,r,bb:bbox(r)};}); delete m.overview;
   m.tileset=new Set(m.tiles.map(t=>t[0]+'_'+t[1]));
+  m.fl=(m.flood||[]).map(([cat,rs])=>{const rings=rs.map(a=>decodeRing(a,0,0,m.Q)); return {cat,rings,bb:bbox(rings[0]),path:pathOf(rings)};}); delete m.flood;
   S.meta[city]=m; return m;
 }
 async function loadTile(city,key){
@@ -232,6 +233,7 @@ function paint(){
     }
     $('#st').textContent=waiting?`Loading ${waiting} area${waiting>1?'s':''}…`:'Click a parcel';
   } else $('#st').textContent='Zoom in or search an address to pick a parcel';
+  if(detail&&m.fl&&m.fl.length){ ctx.setLineDash([6/s,4/s]); for(const f of m.fl){ if(f.cat==='wave') continue; ctx.strokeStyle=f.cat==='designated'?'rgba(127,178,196,.85)':'rgba(127,178,196,.45)'; ctx.lineWidth=lw(f.cat==='designated'?1.4:.9); ctx.stroke(f.path); } ctx.setLineDash([]); }
   if(S.sel&&S.sel.city===S.city){ ctx.strokeStyle='#CC746C'; ctx.lineWidth=lw(2.4);
     if(S.sel.ring){ ctx.stroke(pathOf([S.sel.ring])); }
     if(S.sel.pt){ const r=lw(7); ctx.beginPath(); ctx.arc(S.sel.pt[0],S.sel.pt[1],r,0,7); ctx.stroke(); }
@@ -302,7 +304,7 @@ function card(){
     <h3>Data centre here?</h3><p><span class="pill ${st.k}">${esc(st.t)}</span> <span class="sub">zone ${esc(zone)}${zcls?' · '+esc(zcls):''}</span></p><p class="draft">${st.d}</p>${st.env?`<p class="sub">${esc(st.env)}</p>`:''}${srcs(st.src)}
     <h3>The lot</h3><dl><dt>Lot area</dt><dd>${fmt(ar)} m²</dd><dt>Ownership</dt><dd>${strata>0?esc(strata)+' strata units — many owners':esc(legal==='LAND'?'one titled lot':legal||'—')}</dd>
     <dt>Land value</dt><dd>${money(lv)}</dd><dt>Building value</dt><dd>${money(iv)}</dd><dt>Year built</dt><dd>${yb||'—'}</dd>
-    <dt>Floodplain</dt><dd class="gap">not loaded yet — the City's floodplain layer is still to be retrieved</dd></dl>
+    <dt>Floodplain</dt><dd>${floodText(s)}</dd></dl>
     <h3>What stands on it</h3>${bl.length?`<dl><dt>Buildings</dt><dd>${bl.length} footprint${bl.length>1?'s':''}, ${fmt(foot)} m² in plan</dd><dt>Tallest</dt><dd>${hmax!=null?hmax.toFixed(1)+' m above ground':'—'}</dd></dl><div class="src">Heights as of 2009; newer buildings are missing.</div>`:'<p class="sub">No building in the 2009 footprints (empty then, or built since).</p>'}
     ${srcs(['van_data'])}`;
   } else {
@@ -320,6 +322,14 @@ function card(){
   $('#side').innerHTML=h; wireStart();
 }
 
+function inFeat(x,y,f){ const b=f.bb; if(x<b[0]||x>b[2]||y<b[1]||y>b[3]) return false; let n=0; for(const r of f.rings) if(pip(x,y,r)) n++; return n%2===1; }
+function floodText(s){ const m=S.meta.van; if(!m.fl||!m.fl.length||!s.ring) return '<span class="gap">not loaded</span>';
+  const pts=[centroid(s.ring)]; for(let i=0;i<s.ring.length;i+=2) pts.push([s.ring[i],s.ring[i+1]]);
+  const hit=c=>{ let all=0,any=0; for(const p of pts){ const h=m.fl.some(f=>f.cat===c&&inFeat(p[0],p[1],f)); if(h) any++; } return any===0?0:(any===pts.length?2:1); };
+  const d=hit('designated'), sc=hit('still'), w=hit('wave'), t=hit('today'); const part=v=>v===1?' (partly)':'';
+  const out=[]; if(d) out.push(`In the designated floodplain${part(d)}: flood construction level 4.6 m. Switchgear and electrical rooms may not sit below it unless flood-protected — this mostly rules against a basement data centre.`);
+  if(sc) out.push(`In the Still Creek floodplain${part(sc)}, which has its own mapped flood levels.`); if(w) out.push(`In the wave effect zone${part(w)}: waves add to the flood hazard in an extreme storm.`); if(t) out.push(`Also inside today's 1-in-500-year Fraser River storm extent${part(t)}, before sea-level rise.`);
+  return out.length?out.map(x=>`<span class="draft">${x}</span>`).join('<br>')+'<div class="src">City of Vancouver designated floodplain; Flood Plain Standards F014; VBBL Div. C 2.2.9</div>':'Outside the designated floodplain'; }
 /* ---------- what is being built (decided by J.B., 14 Oct) ---------- */
 function seg(name,opts,val){ return `<div class="seg" role="group" data-q="${name}">${opts.map(([v,l])=>`<button data-v="${v}" aria-pressed="${v===val}">${esc(l)}</button>`).join('')}</div>`; }
 function startStep(st){
