@@ -281,10 +281,38 @@ Each feature carries `agreement_no` (the DC number), `dc2_sub_area` (Area A/1/2�
 ## 7. Gaps (all UNVERIFIED until closed)
 
 1. **IM envelope.** Table 4.1 (height, FAR, setbacks) does not render online. It is needed from the official PDF or the City. IM is the most common industrial zone after BE.
-2. **Use-list headings.** Whether standard-zone lists are "Permitted" could not be confirmed, and neither could the 2.x/3.x Permitted/Discretionary split in special areas. Source: the official PDF or the City's Land Use Matrix (both blocked).
+2. **Use-list headings.** (Standard zones now RESOLVED by the Land Use Matrix, §8.) Whether standard-zone lists are "Permitted" could not be confirmed, and neither could the 2.x/3.x Permitted/Discretionary split in special areas. Source: the official PDF or the City's Land Use Matrix (both blocked).
 3. **Use lists not rendered:** IH, CG, CB, EETIM, EETM, EETL. EETC height/FAR also not rendered.
 4. **City classification of a data centre outside EETP.** There is no formal interpretation. The EETP engagement statement is the only City statement found. The City's "Data Centre Development" page was blocked and may contain more. Ask the City (Development Planner) whether it applies s. 7.20(3.3.2) to data centres, i.e. whether they are always Discretionary.
 5. **Not extracted:** s. 5.120 performance standards, s. 5.70 height measurement, s. 7.100(6), overlays, Main Streets rules.
 6. **Direct Control.** No DC1/DC2/DC provision was read. The legacy-code features (NSRVES, TC-MU, CPMU, RCRL, RCRM, CPT, A7, RTCR, BMR) also need checking.
 7. **Consolidation date.** The online bylaw gives none, and the amendment dates were not shown. Record "as viewed 14 Oct 2026" plus open-data date_ext 2026/10/12.
 8. **Applicant documents for LDA26-0225** were not read. Anything taken from them must be labelled an applicant/operator claim.
+
+---
+
+## 8. Confirmed from the City's Land Use & Zoning Matrix (October 2026), supplied by J.B. 14 Oct
+
+Source: City of Edmonton, *Zoning Bylaw 20001 Land Use & Zoning Matrix: Uses in Standard Zones*, October 2026 (PDF dated 2 Oct 2026), p. 6. Saved locally as data/raw/edm/land_use_zoning_matrix.pdf. The City states it is "created for convenience only"; the bylaw governs. Read from the page image (colour-coded cells), not from extracted text.
+
+Codes: 1 = Permitted; 1A = Permitted with use-specific regulations or limitations; 2 = Discretionary; 2A = Discretionary with use-specific regulations; blank = not a Permitted or Discretionary use in the zone.
+
+| Use (candidate for a data centre) | BE | IM | IH | UI | PU | A | FD | Residential, MU, MUN, CN, CG, CB |
+|---|---|---|---|---|---|---|---|---|
+| Major Industrial | – | 1A | 1A | – | – | – | – | – |
+| Minor Industrial | 1A | 1A | 1A | 1A | – | – | 2A | – |
+| Minor Utility | 1 | 1 | 1 | 1 | 1 | 2 | 2 | – |
+| Major Utility | – | – | 1 | – | 1A | – | – | – |
+| Office (only relevant if the City read a data centre as office — UNVERIFIED interpretation) | 1 | 1A | – | 1 | – | – | – | 1A in RS, RSF, RSM, RM, RL, MUN, CN; 1 in MU, CG, CB |
+
+What this settles:
+- The matrix confirms the standard-zone use lists are Permitted (1/1A), resolving gap 2 for standard zones. The special-area Permitted/Discretionary split is still unconfirmed.
+- Major Industrial in IM carries limitations (1A); this matches the s. 7.20 note in this file that Major Industrial in IM applies only where it existed on 1 Jan 2024 — check the IM zone text for the exact wording.
+- No standard residential, mixed-use or commercial zone lists any industrial or utility use. A data centre unit in a mixed-use or commercial building would rely on the Office path (an interpretation the City has not made) or a rezoning or Direct Control.
+- s. 7.20(3.3.2) still applies: where the Development Planner finds a proposal fits no definition well, it is treated as Discretionary regardless of this table.
+
+## 9. City "Data Centre Development" page (screenshot supplied by J.B., viewed 14 Oct 2026)
+
+- Current application: an amendment to the Edmonton Energy Technology Park (EETP) Area Structure Plan "to allow for data centres and power generation facilities to be included as permitted uses in the Medium Industrial Precinct". Public feedback open 28 Sep – 25 Oct 2026 on Engaged Edmonton.
+- The page links the Alberta government's list of major proposed projects, including data centres.
+- The section "How Are Data Centre Decisions Made?" was cut off in the screenshot and has not been read. Needed: a full save of the page (or a screenshot of that section).
