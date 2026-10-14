@@ -47,6 +47,8 @@ main{display:grid;grid-template-columns:1fr minmax(320px,440px);min-height:0}
 .scale b{display:block;height:4px;border:1px solid var(--muted);border-top:0;margin-top:2px}
 aside{border-left:1px solid var(--line);background:var(--panel);overflow:auto;padding:18px 18px 40px;min-width:0}
 .kind{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+aside .x{float:right;background:transparent;border:1px solid var(--line-2);border-radius:6px;padding:2px 9px;cursor:pointer;color:var(--muted);font-size:12.5px}
+aside .x:hover{border-color:var(--accent);color:var(--fg)}
 aside h2{font-size:19px;font-weight:400;margin:4px 0 2px;line-height:1.3;text-wrap:balance}
 aside h3{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:22px 0 8px;padding-top:14px;border-top:1px solid var(--line)}
 .sub{color:var(--muted);font-size:13px}
@@ -300,7 +302,7 @@ function card(){
   if(s.city==='van'){
     const [addr,zone,zcls,legal,strata,yb,lv,iv,ar]=a; z=zone; st=vanStatus(zone);
     const bl=s.blds||[]; const hmax=bl.length?Math.max(...bl.map(b=>b.h)):null; const foot=bl.reduce((t,b)=>t+b.a,0);
-    h=`<div class="kind">Site · Vancouver</div><h2>${esc(addr||'No civic address')}</h2><div class="sub">Tax coordinate ${esc(s.id)}</div>
+    h=`<button class="x" id="clr" title="Clear the selected site (Esc)">× Clear</button><div class="kind">Site · Vancouver</div><h2>${esc(addr||'No civic address')}</h2><div class="sub">Tax coordinate ${esc(s.id)}</div>
     <h3>Data centre here?</h3><p><span class="pill ${st.k}">${esc(st.t)}</span> <span class="sub">zone ${esc(zone)}${zcls?' · '+esc(zcls):''}</span></p><p class="draft">${st.d}</p>${st.env?`<p class="sub">${esc(st.env)}</p>`:''}${srcs(st.src)}
     <h3>The lot</h3><dl><dt>Lot area</dt><dd>${fmt(ar)} m²</dd><dt>Ownership</dt><dd>${strata>0?esc(strata)+' strata units — many owners':esc(legal==='LAND'?'one titled lot':legal||'—')}</dd>
     <dt>Land value</dt><dd>${money(lv)}</dd><dt>Building value</dt><dd>${money(iv)}</dd><dt>Year built</dt><dd>${yb||'—'}</dd>
@@ -310,7 +312,7 @@ function card(){
   } else {
     const [addr,zone,zmap,zsrc,lot,gross,y0,y1,val,cls,nb,n]=a; z=zmap||zone; st=edmStatus(z);
     const bl=s.blds||[]; const he=bl.filter(b=>b.h>0).map(b=>b.h);
-    h=`<div class="kind">Site · Edmonton</div><h2>${esc(addr||'No civic address')}</h2><div class="sub">${esc(nb||'')}${n>1?` · ${n} assessment accounts`:''}</div>
+    h=`<button class="x" id="clr" title="Clear the selected site (Esc)">× Clear</button><div class="kind">Site · Edmonton</div><h2>${esc(addr||'No civic address')}</h2><div class="sub">${esc(nb||'')}${n>1?` · ${n} assessment accounts`:''}</div>
     <h3>Data centre here?</h3><p><span class="pill ${st.k}">${esc(st.t)}</span> <span class="sub">zone ${esc(z)}${zone&&zmap&&zone.split(' ')[0]!==zmap.split(' ')[0]?` (record says ${esc(zone)})`:''}</span></p><p class="draft">${st.d}</p>${st.env?`<p class="sub">${esc(st.env)}</p>`:''}${srcs(st.src)}
     <h3>The lot</h3><dl><dt>Lot area</dt><dd>${fmt(lot)} m²</dd><dt>Floor area</dt><dd>${gross?fmt(gross)+' m² (assessment)':'—'}</dd><dt>Assessed value</dt><dd>${money(val)}</dd>
     <dt>Year built</dt><dd>${y0?(y0===y1?y0:y0+'–'+y1):'—'}</dd><dt>Use</dt><dd>${esc((cls||[]).join(', ')||'—')}</dd><dt>Floodplain</dt><dd class="gap">not yet looked at for Edmonton</dd></dl>
@@ -319,8 +321,11 @@ function card(){
     ${srcs(['edm_data'])}`;
   }
   h+=startStep(st);
-  $('#side').innerHTML=h; wireStart();
+  $('#side').innerHTML=h; wireStart(); $('#clr').onclick=clearSel;
 }
+function clearSel(){ S.sel=null; $('#q').value=''; $('#res').hidden=true; try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} intro(); draw(); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&S.sel&&document.activeElement!==$('#q')) clearSel(); });
+$('#q').addEventListener('search',()=>{ if(!$('#q').value&&S.sel) clearSel(); });
 
 function inFeat(x,y,f){ const b=f.bb; if(x<b[0]||x>b[2]||y<b[1]||y>b[3]) return false; let n=0; for(const r of f.rings) if(pip(x,y,r)) n++; return n%2===1; }
 function floodText(s){ const m=S.meta.van; if(!m.fl||!m.fl.length||!s.ring) return '<span class="gap">not loaded</span>';
@@ -388,10 +393,17 @@ async function search(){
   const v=$('#q').value.trim(); const res=$('#res');
   if(v.length<3){ res.hidden=true; return; }
   const q=toks(v); const k=/^\d/.test(q[0])?q[0][0]:'x'; const rows=await shard(S.city,k);
+  const num=/^\d/.test(q[0])?q[0]:null, words=num?q.slice(1):q, seen=new Set();
+  const streetOK=t=>words.every(w=>t.some(x=>x.startsWith(w)));
   const hits=[]; for(const r of rows){ if(!r._t) r._t=toks(r[0]); const t=r._t;
-    if(/^\d/.test(q[0])&&t[0]!==q[0]&&!(q.length===1&&t[0].startsWith(q[0]))) continue;
-    if(q.every((w,i)=>(i===0&&/^\d/.test(w))||t.some(x=>x.startsWith(w)))){ hits.push(r); if(hits.length>=8) break; } }
-  res.innerHTML=hits.length?hits.map((r,i)=>`<li role="option" data-i="${i}" aria-selected="${i===0}">${esc(r[0])}</li>`).join(''):`<li class="none">No match in ${S.city==='van'?'Vancouver':'Edmonton'} — try the number and street, e.g. ${S.city==='van'?'"555 W Hastings"':'"10220 104 Ave"'}</li>`;
+    if(num&&t[0]!==num&&!(q.length===1&&t[0].startsWith(num))) continue;
+    if(streetOK(t)&&!seen.has(r[0])){ seen.add(r[0]); hits.push(r); if(hits.length>=8) break; } }
+  let note='';
+  if(!hits.length&&num&&words.length){ const n=+num, all=[];
+    for(const k2 of '123456789'){ for(const r of await shard(S.city,k2)){ if(!r._t) r._t=toks(r[0]); if(streetOK(r._t.slice(1))&&!seen.has(r[0])){ seen.add(r[0]); all.push([Math.abs(+r._t[0]-n),r]); } } }
+    all.sort((a,b)=>a[0]-b[0]); for(const [,r] of all.slice(0,5)) hits.push(r);
+    if(hits.length) note=`<li class="none">No ${esc(v)} in the City's ${S.city==='van'?'tax':'assessment'} records — the address may belong to a larger lot under another number. Nearest on that street:</li>`; }
+  res.innerHTML=hits.length?note+hits.map((r,i)=>`<li role="option" data-i="${i}" aria-selected="${i===0}">${esc(r[0])}</li>`).join(''):`<li class="none">No match in ${S.city==='van'?'Vancouver':'Edmonton'} — try the number and street, e.g. ${S.city==='van'?'"555 W Hastings"':'"10220 104 Ave"'}</li>`;
   res.hidden=false;
   res.querySelectorAll('li[data-i]').forEach(li=>li.onclick=()=>{ const r=hits[+li.dataset.i]; res.hidden=true; $('#q').value=r[0]; select({city:S.city,tile:r[1],id:r[2]}); });
 }

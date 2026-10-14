@@ -112,10 +112,24 @@ def vancouver():
         meta['flood'] = fl
         meta['sources'].append('City of Vancouver Open Data: designated floodplain (FCL 4.6 m, Still Creek, wave effect zone, Fraser risk today)')
     write(os.path.join(OUT, 'van', 'meta.json'), meta)
+    # every civic address in the full tax report (all records, both ends of a number range), not one per lot
+    tile_of = {tc: k for tc, (a, k) in addr.items()}
+    for k, t in tiles.items():
+        for tc in t['A']: tile_of.setdefault(tc, k)
+    lines = set()
+    for tc, (a, k) in addr.items(): lines.add(f'{a}\t{k[0]}_{k[1]}\t{tc}')
+    raw = os.path.join(D, 'raw', 'van', 'property-tax-report.csv')
+    if os.path.exists(raw):
+        for r in csv.DictReader(open(raw, encoding='utf-8-sig'), delimiter=';'):
+            tc = r['LAND_COORDINATE']; k = tile_of.get(tc); st = (r['STREET_NAME'] or '').strip()
+            if not k or not st: continue
+            for n in {r['FROM_CIVIC_NUMBER'].strip(), r['TO_CIVIC_NUMBER'].strip()} - {''}:
+                lines.add(f'{n} {st}\t{k[0]}_{k[1]}\t{tc}')
     sh = collections.defaultdict(list)
-    for tc, (a, k) in addr.items(): sh[shard_key(a)].append(f'{a}\t{k[0]}_{k[1]}\t{tc}')
-    for s, lines in sh.items():
-        open(os.path.join(OUT, 'van', f's_{s}.tsv'), 'w', encoding='utf-8').write('\n'.join(sorted(lines)))
+    for l in lines: sh[shard_key(l)].append(l)
+    for s, ls in sh.items():
+        open(os.path.join(OUT, 'van', f's_{s}.tsv'), 'w', encoding='utf-8').write('\n'.join(sorted(ls)))
+    print('van addresses', len(lines))
     print('van tiles', len(tiles), 'overview polys', len(ov))
 
 # ---------------- Edmonton ----------------
@@ -129,6 +143,8 @@ def edmonton():
         g = grp.setdefault(pid, dict(acc=[], lat=float(r['lat']), lon=float(r['lon']), addr='', zoning=r['zoning'], zmap=r['zone_from_map'], zsrc=r['zoning_source'],
                                       lot=r['parcel_area_m2'] or r['lot_size_m2'], gross=0.0, yb=[], val=0, cls=set(), nb=r['neighbourhood'], ward=r['ward']))
         g['acc'].append(r['account'])
+        g.setdefault('alladdr', set())
+        if (r['house_number'] + ' ' + r['street']).strip(): g['alladdr'].add((r['house_number'] + ' ' + r['street']).strip())
         a = (r['house_number'] + ' ' + r['street']).strip()
         if a and (not g['addr'] or not r['suite']): g['addr'] = a
         g['gross'] += num(r['gross_area_m2']) or 0
@@ -136,7 +152,7 @@ def edmonton():
         g['val'] += num(r['assessed_value']) or 0
         for cl in (r['class1'], r['class2'], r['class3']):
             if cl: g['cls'].add(cl.title())
-    addr = {}
+    addr = {}; extra = []
     for pid, g in grp.items():
         x, y = P(g['lon'], g['lat']); k = tkey(x, y, T); t = tiles[k]
         t['E'].append([pid, round((x - k[0] * T) * Q), round((y - k[1] * T) * Q)])
@@ -145,6 +161,7 @@ def edmonton():
                        min(g['yb']) if g['yb'] else None, max(g['yb']) if g['yb'] else None, round(g['val']) or None,
                        sorted(g['cls']), g['nb'], len(g['acc'])]
         if g['addr']: addr[pid] = (g['addr'], k)
+        for a2 in g.get('alladdr', ()): extra.append((a2, k, pid))
     print('edm parcel points', len(grp))
     bj = json.load(open(os.path.join(D, 'edmonton_rooflines_est.geojson'), encoding='utf-8'))
     for f in bj['features']:
@@ -170,7 +187,9 @@ def edmonton():
                 sources=['City of Edmonton Open Data: property information and assessment 2026; assessment parcel points; zoning bylaw geographical data (12 Oct 2026); rooflines (heights estimated from gross area ÷ footprint × 4 m — ESTIMATE)'])
     write(os.path.join(OUT, 'edm', 'meta.json'), meta)
     sh = collections.defaultdict(list)
-    for pid, (a, k) in addr.items(): sh[shard_key(a)].append(f'{a}\t{k[0]}_{k[1]}\t{pid}')
+    L = {f'{a}\t{k[0]}_{k[1]}\t{pid}' for pid, (a, k) in addr.items()} | {f'{a}\t{k[0]}_{k[1]}\t{pid}' for a, k, pid in extra}
+    for l in L: sh[shard_key(l)].append(l)
+    print('edm addresses', len(L))
     for s, lines in sh.items():
         open(os.path.join(OUT, 'edm', f's_{s}.tsv'), 'w', encoding='utf-8').write('\n'.join(sorted(lines)))
     print('edm tiles', len(tiles), 'zone polys', len(ov))
