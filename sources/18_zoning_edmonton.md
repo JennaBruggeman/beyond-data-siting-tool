@@ -472,3 +472,36 @@ Saved locally as data/raw/edm/data_centre_development_page.pdf. Read from page i
 - **Grid and power:** AESO decides grid connections; the Alberta AI Data Centre Strategy gives priority to developers that build their own power plants; AER regulates fuel sources; AUC approves power plants, transmission lines and back-up generators.
 - **Water:** EPCOR reviews requests to connect under its existing municipal water licence; otherwise a new Water Act licence (AER for power plants, Alberta Environment and Protected Areas for data centres).
 - **Parts of a data centre (City's framing):** energy source, power generation and distribution, data centre facility.
+
+## 12. Official Bylaw 20001 PDF (supplied by J.B., 14 Oct 2026)
+
+Source: City of Edmonton, *Charter Bylaw 20001 – To adopt a new Zoning Bylaw…*, 1,058 pp., PDF dated 3 Jan 2024 (as adopted; **not a consolidation** — amendments since 1 Jan 2024 are not in it. The Land Use Matrix of October 2026 (§8) is the current check for use lists). Saved locally as data/raw/edm/bylaw/Bylaw20001.pdf.
+
+**IM — Medium Industrial Zone (s. 2.130)** — closes gap 1.
+- Permitted uses include "2.3. Major Industrial, limited to those existing as of January 1, 2024", "2.4. Minor Industrial", "2.8. Office" (max 300 m² per establishment, s. 3.5.1), "2.13. Minor Utility".
+- Minor Industrial (s. 3.2.1): office, display, technical or administrative support areas max 33 % of the Minor Industrial floor area.
+- Table 4.1: **max height 18.0 m; max FAR 2.0**; setbacks: street 3.0 m, alley 0 m, abutting a non-industrial zone 6.0 m, abutting an industrial zone 0 m.
+- s. 5.1–5.3: parking, loading, storage, service areas not in required setbacks; storage/service areas not between building and street, screened (max 3.7 m) unless facing IH/IM.
+- s. 5.5: a Risk Assessment, Environmental Impact Assessment or Environmental Assessment Information may be required (s. 7.140).
+
+**IH — Heavy Industrial Zone (s. 2.140)**
+- Permitted: Major Industrial; Minor Industrial only if existing on 1 Jan 2024; Major Utility; Minor Utility.
+- Table 4.1: min site 1.0 ha; **max height 30.0 m; max FAR 2.0**; street setback 3.0 m; alley 0 m.
+- s. 4.2: the Development Planner may vary maximum height "to accommodate building features that are necessary to the operation of a proposed development."
+
+**Definitions (s. 8.10)** — what decides Major vs Minor Industrial for a data centre.
+- Both cover development used primarily for, among others, "handling, storing, or shipping equipment, goods, and materials" or "training, research and development laboratories".
+- **Major Industrial** "includes at least 1 of the following features: the creation of Nuisances that extend beyond the boundaries of the Site … due to noise, odour, light, airborne emissions, dust, heavy commercial vehicle traffic …; or the use of materials or processing operations that require separation from other developments, due to risk of toxic emissions or fire and explosion hazards."
+- **Minor Industrial**: "Any resulting Nuisance is less impactful than those permitted under the Major Industrial Use." Examples include warehouses and research facilities.
+- **For the tool:** in Edmonton the use class follows from the data centre's own effects — generator and heat-rejection noise reaching past the lot line, generator emissions, and fuel or battery hazards needing separation push it to Major Industrial (IH only, or rezoning). A data centre whose sound stays within the site and which has no hazard separation could argue Minor Industrial (BE, IM, IH-existing, UI). The City's page (§11) says large-scale data centres are Major Industrial. Link: the sound family's lot-line result and the fuel/battery quantities feed this condition. (Interpretation — Development Planner decides; s. 7.20(3.3.2) may make it Discretionary.)
+
+**s. 5.70 height (confirmed)**
+- Flat roof measured to the midpoint of the parapet; parapet top max 0.4 m over the zone height (1.8); pitched roof top max 1.7 m over (1.7).
+- s. 5.70(1.9): no height limit in any zone for "water or other tanks", "ventilating equipment, plumbing stacks, and mechanical penthouse", "free-standing or roof mounted chimney stacks", antennas and similar. So rooftop heat rejection and generator stacks need not fit under the zone height (whether dry coolers count as "ventilating equipment" is the Development Planner's call — UNVERIFIED).
+
+**s. 5.120 site performance standards (confirmed)**
+- 1.1.2: mechanical equipment must be screened or inside the building — applies to non-industrial development only.
+- 2.1–2.2: where a non-residential use may create a Nuisance, mitigation (walls, berms, fences, landscaping; soundproofing; emission treatment) "to the satisfaction of the Development Planner", which may be made a permit condition. No numeric limits; numeric noise limits are in Community Standards Bylaw 14600 (already in the register).
+- 3: outdoor lighting directed downward, minimise glare onto surrounding sites.
+
+Still open: EETIM/EETM/EETL use lists and EETC height/FAR (special areas; the as-adopted PDF can be searched for these next), and Direct Control provisions.
