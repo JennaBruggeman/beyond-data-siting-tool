@@ -3481,11 +3481,11 @@
    "id": "noise_limit",
    "name": "Local noise limit",
    "unit": "dBA",
-   "formula": "Edmonton 65 day / 50 night at residential line (instantaneous); Vancouver by zone pair, continuous (int→quiet 60/50); AUC Rule 012 Leq 40–56 + tonal +5",
+   "formula": "Edmonton Bylaw 14600 at the property line, no averaging period stated: residential 65 day / 50 night, non-residential 75 / 60 (s.19–22); Vancouver by zone pair, continuous: quiet→quiet 55/45, activity→quiet 60/55, other 70/65; AUC Rule 012 Leq 40–56 + tonal +5 for the grid connection and any tethered generation",
    "inputs": [
     "noise_level"
    ],
-   "coef": "AUC Rule 012 (30 Sep 2024 consolidation; Bulletin 2026-03 of 17 Apr 2026 added guidance only) Table 1 basic sound level, night-time dBA Leq, all 15 cells confirmed: Category 1 (≥500 m from heavily travelled road/rail): 40 / 43 / 46 / 48 / 53 for 1–8 / 9–160 / 161–400 / 401–1,000 (suburban) / >1,000 (urban) dwellings per quarter section (451 m radius); Category 2 (30–500 m): 45 / 48 / 51 / 51 / 53; Category 3 (<30 m or frequent flyovers): 50 / 53 / 56 / 56 / 56; daytime = +10 dBA; minimum night BSL 40; Class A (seasonal/ambient) and B (temporary) adjustments may add; receptor = any dwelling within 1.5 km of the property boundary, else a point at 1.5 km; cumulative with other energy-related facilities; no-net-increase rule (s.2.8) for areas already at the limit. Note: Rule 012 binds AUC-regulated facilities (substations, generation); a data centre itself falls under Edmonton Bylaw 14600 — the rule applies to its grid connection and any generation it tethers to; 13 Oct 2026: Vancouver zone pairs confirmed — quiet→quiet 55/45, activity→quiet 60/55, intermediate/activity→other 70/65; no standing variance for operating noise (111 E 5th amended the by-law's schedule instead); 13 Oct 2026: Vancouver zone pairs confirmed — quiet→quiet 55/45, activity→quiet 60/55, intermediate/activity→other 70/65; no standing variance for operating noise (111 E 5th amended the by-law's schedule instead); 13 Oct 2026: Vancouver zone pairs confirmed — quiet→quiet 55/45, activity→quiet 60/55, intermediate/activity→other 70/65; no standing variance for operating noise (111 E 5th amended the by-law's schedule instead)",
+   "coef": "AUC Rule 012 (30 Sep 2024 consolidation; Bulletin 2026-03 of 17 Apr 2026 added guidance only) Table 1 basic sound level, night-time dBA Leq, all 15 cells confirmed: Category 1 (≥500 m from heavily travelled road/rail): 40 / 43 / 46 / 48 / 53 for 1–8 / 9–160 / 161–400 / 401–1,000 (suburban) / >1,000 (urban) dwellings per quarter section (451 m radius); Category 2 (30–500 m): 45 / 48 / 51 / 51 / 53; Category 3 (<30 m or frequent flyovers): 50 / 53 / 56 / 56 / 56; daytime = +10 dBA; minimum night BSL 40; Class A (seasonal/ambient) and B (temporary) adjustments may add; receptor = any dwelling within 1.5 km of the property boundary, else a point at 1.5 km; cumulative with other energy-related facilities; no-net-increase rule (s.2.8) for areas already at the limit. Note: Rule 012 binds AUC-regulated facilities (substations, generation); a data centre itself falls under Edmonton Bylaw 14600 — the rule applies to its grid connection and any generation it tethers to; 13 Oct 2026: Vancouver zone pairs confirmed — quiet→quiet 55/45, activity→quiet 60/55, intermediate/activity→other 70/65; no standing variance for operating noise (111 E 5th amended the by-law's schedule instead); 14 Oct 2026: Edmonton Bylaw 14600 (consolidated 22 Oct 2024) read in full — s.19 residential day 65 dB(A) at the property line 7 a.m.–10 p.m., with allowances 70/2 h, 75/1 h, 80/30 min, 85/15 min per day; s.20 residential night 50; s.21 non-residential day 75 (allowances 80/2 h, 85/1 h); s.22 non-residential night 60; no averaging period stated (read as instantaneous); s.14 a disturbance can be an offence whether or not a level is measured or exceeded; s.16 construction 7 a.m.–9 p.m. (Sun/holidays 9 a.m.–7 p.m.)",
    "sources": [
     "bylaw14600",
     "bylaw6555",
@@ -3498,7 +3498,7 @@
    "source_roles": [
     {
      "id": "bylaw14600",
-     "term": "Edmonton 65 / 50 dBA at the line",
+     "term": "Edmonton 65/50 (residential), 75/60 (non-residential) dB(A) at the property line, s.19–22",
      "role": "rule",
      "conf": 90,
      "verified": true
