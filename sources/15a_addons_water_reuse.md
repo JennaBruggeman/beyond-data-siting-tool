@@ -214,3 +214,11 @@ Conversions that I did myself (gal→L, °F, unit arithmetic) are marked "(my co
 - EPCOR Drainage Services Bylaw 18100 appendices (discharge limits): https://www.edmonton.ca/residential_neighbourhoods/Bylaws/C18100.pdf
 - Mytton 2021, full text (npj Clean Water, open access) — only the abstract was read: doi 10.1038/s41545-021-00101-w
 - Arden et al. 2021 Supplementary Information (Fig. 5 cost curves as numbers): https://pasteur.epa.gov/uploads/10.23719/1519028/Arden%20et%20al.%2C%202021.pdf
+
+**Update 14 Oct — gap 1 closed.** Vancouver Building By-law 2025, Book II insert pages (By-law 14343 eff. 15 Sep 2025, amended by 14488 eff. 1 Jan 2026), read from the PDF supplied by J.B.:
+- Art. 2.7.1.2.(1): a non-potable system "shall collect only a) rainwater, b) clear-water waste, c) greywater as permitted by Sentence (3), or d) a combination thereof."
+- Art. 2.7.1.2.(2): it "shall not collect … e) greywater not permitted by Sentence (3), or f) blackwater."
+- Art. 2.7.1.2.(3): greywater only if it "conforms to NSF/ANSI 350 … Class R (single-family residential), and the treated water is used within the same dwelling unit from which the greywater is collected."
+- Table 2.7.1.3: rainwater and clear-water waste — Column A: water closets, urinals, trap primers; Column B: irrigation, clothes washers, vehicle wash, "make-up water for hydronic systems, make-up water for cooling towers, adiabatic cooling systems, and tempering of discharge." Greywater (2.7.1.2.(3)) — water closets, urinals and clothes washers only. Groundwater, perimeter drainage, blackwater — not permitted.
+- Result for the tool: in Vancouver, greywater from neighbours and blackwater cannot supply a data centre's cooling under the by-law (a policy move, not physics). Rainwater and clear-water waste can. Resolves the conflict with the other chat's research.
+- Errata v4.00 (consolidated 5 May 2026) does not touch Section 2.7.

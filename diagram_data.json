@@ -9,7 +9,7 @@
 "quantities": 123,
 "conditions": 82,
 "opportunities": 15,
-"sources": 270
+"sources": 271
 }
 },
 "stages": [
@@ -8037,8 +8037,9 @@
 "neighbours"
 ],
 "constraint": false,
-"note": "Vancouver 2019 by-law: rainwater and clear-water waste may supply cooling-tower make-up; greywater and blackwater may not be collected (Art. 2.7.1.2); the 2025 by-law adds residential greywater systems (NSF 350) — non-residential status to confirm. Alberta: single-property reuse limited to toilets and subsurface irrigation (P-17-01, archived), other uses by variance; Alberta Health 2021 lists cooling towers with treatment targets. Taking someone else's treated wastewater needs Water Act authorisation in Alberta and falls under the Municipal Wastewater Regulation in BC.",
+"note": "Vancouver Building By-law 2025, Book II (as amended to 1 Jan 2026), Art. 2.7.1.2–2.7.1.3: rainwater and clear-water waste may supply cooling-tower make-up and adiabatic cooling (Table 2.7.1.3, Column B); greywater only from NSF/ANSI 350 Class R single-family systems, reused in the same dwelling unit for toilets, urinals and clothes washers — not for cooling; blackwater may not be collected. Alberta: single-property reuse limited to toilets and subsurface irrigation (P-17-01, archived), other uses by variance; Alberta Health 2021 lists cooling towers with treatment targets. Taking someone else's treated wastewater needs Water Act authorisation in Alberta and falls under the Municipal Wastewater Regulation in BC.",
 "sources": [
+"van_vbbl2025_27",
 "van_vbbl2019_27",
 "ab_p1701",
 "ab_health2021",
@@ -8543,7 +8544,8 @@
 "auc_27938": "AUC Decision 27938-D01-2023, Amazon Data Services Canada (10 Mar 2023) — https://efiling-webapi.auc.ab.ca/Document/Get/784765",
 "ap42_34": "US EPA, AP-42 5th ed., Vol. I, §3.4, Table 3.4-1 (Apr 2025) — https://www.epa.gov/system/files/documents/2025-04/c03s04_april2025.pdf",
 "bc_rlcf012": "BC Low Carbon Fuels, Approved Carbon Intensities – Current (RLCF-012, rev. 30 Apr 2026) — https://www2.gov.bc.ca/assets/gov/farming-natural-resources-and-industry/electricity-alternative-energy/transportation/renewable-low-carbon-fuels/rlcf012_approved_carbon_intensities_current_29apr2026final.pdf",
-"absorption2026": "Absorption chiller temperatures and COP (Energies 19(9):2147, 2026) — https://www.mdpi.com/1996-1073/19/9/2147"
+"absorption2026": "Absorption chiller temperatures and COP (Energies 19(9):2147, 2026) — https://www.mdpi.com/1996-1073/19/9/2147",
+"van_vbbl2025_27": "City of Vancouver Building By-law 2025, Book II (Plumbing Systems) insert pages, By-law 14343 effective 15 Sep 2025 as amended by By-law 14488 effective 1 Jan 2026, Div. B, Art. 2.7.1.2–2.7.1.3 and Table 2.7.1.3 — https://vancouver.ca/files/cov/2025-vbbl-book-II-insert-pages.pdf (convenience copy)"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -9152,7 +9154,7 @@
 "treatment_energy"
 ],
 "rules": {
-"vancouver": "barred as a source in the 2019 by-law; 2025 residential only — to confirm",
+"vancouver": "not for cooling: 2025 by-law allows greywater only within one single-family dwelling (Art. 2.7.1.2(3))",
 "edmonton": "variance needed"
 },
 "changes": [

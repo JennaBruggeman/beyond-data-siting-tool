@@ -940,6 +940,7 @@ Source ids added 9–11 Oct are listed first with their citations; ids from the 
 - `ap42_34` — US EPA, AP-42 5th ed., Vol. I, §3.4, Table 3.4-1 (Apr 2025) — https://www.epa.gov/system/files/documents/2025-04/c03s04_april2025.pdf
 - `bc_rlcf012` — BC Low Carbon Fuels, Approved Carbon Intensities – Current (RLCF-012, rev. 30 Apr 2026) — https://www2.gov.bc.ca/assets/gov/farming-natural-resources-and-industry/electricity-alternative-energy/transportation/renewable-low-carbon-fuels/rlcf012_approved_carbon_intensities_current_29apr2026final.pdf
 - `absorption2026` — Absorption chiller temperatures and COP (Energies 19(9):2147, 2026) — https://www.mdpi.com/1996-1073/19/9/2147
+- `van_vbbl2025_27` — City of Vancouver Building By-law 2025, Book II (Plumbing Systems) insert pages, By-law 14343 effective 15 Sep 2025 as amended by By-law 14488 effective 1 Jan 2026, Div. B, Art. 2.7.1.2–2.7.1.3 and Table 2.7.1.3 — https://vancouver.ca/files/cov/2025-vbbl-book-II-insert-pages.pdf (convenience copy)
 
 Source ids from the first register (hunts 1–8; full reports in sources/01–08):
 
