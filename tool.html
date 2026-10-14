@@ -1,0 +1,528 @@
+<title>Beyond Data Tool</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#17181a; --panel:#1e2023; --panel-2:#24272b; --line:#30343a; --line-2:#3c4148;
+  --fg:#e9e6e1; --muted:#9d9a94; --faint:#6b6964;
+  --accent:#CC746C; --accent-2:#e39a93;
+  --ok:#8fb996; --mid:#CC746C; --bad:#b24f49; --na:#6b6964; --cannot:#8aa3bd;
+  --font:"Open Sans",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:300 14px/1.5 var(--font)}
+.wrap{max-width:1380px;margin:0 auto;padding-block:0 48px;padding-inline:16px}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:12px 0;border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:2}
+header h1{font-size:15px;font-weight:600;margin:0;white-space:nowrap}
+header h1 span{font-weight:300;color:var(--muted);margin-left:8px}
+.seg{display:inline-flex;border:1px solid var(--line-2);border-radius:999px;overflow:hidden;flex-wrap:wrap}
+.seg button{background:transparent;border:0;padding:5px 12px;cursor:pointer;color:var(--muted);font:inherit;font-size:13px}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#1a1212;font-weight:600}
+.seg button.bt{border-left:1px solid var(--line-2)} .seg button.bt:first-of-type{border-left:0}
+.seg button.bt[aria-pressed="true"]{background:var(--cannot);color:#111}
+.fit{display:grid;grid-template-columns:1fr;gap:8px}
+.fit .row{display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:12px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
+.fit .row:last-child{border-bottom:0}
+.fit .k{color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.fit .v{font-variant-numeric:tabular-nums}
+.fit .ok{color:var(--ok)} .fit .near{color:var(--accent-2)} .fit .off{color:var(--bad)}
+.fit .s{color:var(--muted);font-size:12px}
+@media (max-width:700px){.fit .row{grid-template-columns:1fr 1fr}}
+.seg button:focus-visible,input:focus-visible{outline:2px solid var(--accent-2);outline-offset:1px}
+header .ver{margin-left:auto;font-size:12px;color:var(--muted);min-width:0}
+@media (max-width:900px){header .ver{flex-basis:100%;margin-left:0}}
+.grid>*{min-width:0}
+.grid{display:grid;grid-template-columns:300px 1fr;gap:28px;margin-top:20px}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+h2{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:26px 0 10px}
+h2:first-child{margin-top:0}
+.site{padding:14px 16px;border:1px solid var(--line-2);border-radius:8px;background:var(--panel)}
+.site b{font-weight:600;display:block;font-size:15px}
+.site .m{color:var(--muted);font-size:13px;margin-top:4px}
+.inp{display:grid;grid-template-columns:1fr;gap:8px}
+.in{padding:9px 11px;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+.in .n{font-weight:400;font-size:13px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.in .n small{color:var(--muted);font-weight:300}
+.in .b{color:var(--muted);font-size:12px;margin-top:2px}
+.in .r{display:flex;gap:6px;align-items:center;margin-top:6px;font-size:12px;color:var(--muted)}
+.in input{width:76px;background:var(--bg);border:1px solid var(--line-2);border-radius:4px;color:var(--fg);padding:2px 6px;font:inherit;font-size:12.5px;font-variant-numeric:tabular-nums}
+.tag{display:inline-block;border:1px solid var(--line-2);border-radius:3px;padding:0 5px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);vertical-align:middle}
+.tag.claim{border-color:var(--accent);color:var(--accent-2)}
+.tag.assume{border-color:var(--cannot);color:var(--cannot)}
+.conf{display:inline-block;min-width:26px;text-align:center;border:1px solid var(--line-2);border-radius:4px;font-size:11px;padding:0 3px;color:var(--muted);font-variant-numeric:tabular-nums}
+.verdict{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding:16px 18px;border:1px solid var(--line-2);border-radius:10px;background:var(--panel)}
+.verdict .big{font-size:22px;font-weight:600;line-height:1.2}
+.verdict .big.pass{color:var(--ok)} .verdict .big.partial{color:var(--accent-2)} .verdict .big.fail{color:var(--bad)} .verdict .big.cannot{color:var(--cannot)}
+.verdict .why{color:var(--muted)}
+.verdict .why b{color:var(--fg);font-weight:400}
+.counts{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;font-size:12.5px;color:var(--muted)}
+.pill{display:inline-block;padding:0 9px;border-radius:999px;font-size:11.5px;font-weight:600;color:#161616;white-space:nowrap}
+.pill.pass{background:var(--ok)} .pill.partial{background:var(--mid)} .pill.fail{background:var(--bad)} .pill.na,.pill.unassessed{background:var(--line-2);color:var(--fg)} .pill.cannot{background:var(--cannot)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:6px 8px;border-bottom:1px solid var(--line-2)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.v{font-weight:400;white-space:nowrap;font-variant-numeric:tabular-nums}
+td.b{color:var(--muted);font-size:12.5px}
+td.c{text-align:right}
+tr.stage td{padding-top:14px;color:var(--accent-2);font-size:11px;letter-spacing:.12em;text-transform:uppercase;border-bottom:0;font-weight:600}
+.tw{overflow-x:auto}
+.cond td:first-child{width:26%}
+.hd td{padding-top:14px;color:var(--muted);font-size:11px;letter-spacing:.12em;text-transform:uppercase;border-bottom:0;font-weight:600}
+.ledger td{font-size:12.5px}
+.note{color:var(--muted);font-size:12.5px;margin:8px 0 0}
+.note b{color:var(--fg);font-weight:400}
+.claims{margin-top:10px;padding:10px 12px;border-left:3px solid var(--accent);background:var(--panel);border-radius:0 6px 6px 0;font-size:12.5px;color:var(--muted)}
+details summary{cursor:pointer;color:var(--muted);font-size:12.5px}
+</style>
+
+<div class="wrap">
+<header>
+  <h1>Beyond Data <span>first attempt · one match at a time</span></h1>
+  <div class="seg" id="sites" role="group" aria-label="Test site"></div>
+  <span class="ver">register 2026-10-13 · calibrated on built cases (see calibration report) · ranges, not points · operator figures marked <span class="tag claim">claim</span> · assumptions not in the register marked <span class="tag assume">assumed</span></span>
+</header>
+<div class="grid">
+  <div>
+    <h2>Site and match</h2>
+    <div class="site" id="siteBox"></div>
+    <h2>Inputs <small style="color:var(--muted);font-weight:300;letter-spacing:0;text-transform:none">· edit a range and the run updates</small></h2>
+    <div class="inp" id="inputs"></div>
+  </div>
+  <div>
+    <h2 id="h-verdict">Verdict</h2>
+    <div class="verdict" id="verdict"></div>
+    <h2 id="h-conds">Conditions</h2>
+    <div class="tw" id="w-conds"><table class="cond" id="conds"></table></div>
+    <h2>Quantities</h2>
+    <div class="tw"><table id="quant"></table></div>
+    <h2 id="h-ledger">Ledger · who owns, pays, receives and bears</h2>
+    <div class="tw" id="w-ledger"><table class="ledger" id="ledger"></table></div>
+    <h2 id="h-opps">Opportunities sized from this run</h2>
+    <div class="tw" id="w-opps"><table id="opps"></table></div>
+    <div class="claims" id="claims"></div>
+  </div>
+</div>
+</div>
+
+<script>
+(function(){
+/* ---------- range helpers: every figure is [lo, hi] ---------- */
+const R=(a,b)=>[Math.min(a,b),Math.max(a,b)];
+const mul=(a,b)=>R(a[0]*b[0],a[1]*b[1]);
+const div=(a,b)=>R(a[0]/b[1],a[1]/b[0]);
+const add=(a,b)=>[a[0]+b[0],a[1]+b[1]];
+const sub=(a,b)=>[a[0]-b[1],a[1]-b[0]];
+const sc=(a,k)=>[a[0]*k,a[1]*k];
+const fmt=(x,d=1)=>{ if(x==null||!isFinite(x))return '—'; const a=Math.abs(x); const dd=a>=100?0:a>=10?(d>1?1:d):d; return x.toLocaleString('en-CA',{maximumFractionDigits:dd,minimumFractionDigits:0}); };
+const rng=(r,u='',d=1)=>{ if(r[0]===r[1])return `${fmt(r[0],d)}${u}`; if(!isFinite(r[1])) return isFinite(r[0])?`${fmt(r[0],d)}${u} to never`:'never'; return `${fmt(r[0],d)}–${fmt(r[1],d)}${u}`; };
+const minc=(...c)=>Math.min(...c.filter(x=>x!=null));
+
+/* ---------- register constants (id · value · source · confidence) ---------- */
+const K={
+  util:[0.20,0.6],        // 0.20 implied by the Telia Helsinki snapshot (ERF 0.75, PUE 1.152); LBNL 0.21→0.35; Fan 0.6
+  pue:[1.4,1.6],          // assumed for an in-building colocation; 60
+  capture_air:[0.5,0.8],  // glycol/air loop share captured, judged; 40
+  capture_water:[0.9,1.0],// water-cooled chiller condenser loop; judged; 40
+  eta:[0.40,0.50],        // Lorenz efficiency calibrated on built cases: Odense 0.49/0.46, Telia 0.39, Laval 0.53 (calibrate.py)
+  source_drop:[10,12],    // source cooled through the evaporator: Odense 27→15 (12 K), Telia 32→20 (12 K), ReUseHeat 25→18 (7 K)
+  dea_cop:{1:3.1,3:3.6,10:4.7}, // DEA Aug 2026 waste-heat HP annual COP to 70/35; 80
+  dea_capex:[0.95,1.13],  // M€ per MW_heat (DEA Aug 2026); 80
+  eur_cad:1.5,            // ASSUMED exchange rate, not in register
+  crf:0.0872,             // 6 % over 20 yr; arithmetic
+  om:2100,                // € per MW·yr fixed O&M (DEA); 80
+  flh:[4000,6000],        // ASSUMED full-load hours of the heat pump per year
+  elec:[80,120],          // ASSUMED delivered electricity price $/MWh (not in register; BC and AB)
+  hh:{BC:{space:33.1,dhw:19.4,gas:0.60},AB:{space:76.9,dhw:28.2,gas:0.90}}, // GJ/household CEUD 2023; gas share StatCan 2021; 80
+  grid:{BC:18.1,AB:346.1}, // g CO2e/kWh consumption, NIR 2026 Annex 7 (2024); 80
+  egdf:0.4588,            // t/MWh Alberta displacement 2026 with line loss (EGDF v3.3); 90
+  gas_g_m3:1962,          // g CO2 per m³ (EGDF Table 5); 90
+  gas_GJ_m3:0.0378,       // ASSUMED higher heating value of natural gas, GJ/m³ (not in register)
+  boiler:0.85,            // boiler efficiency used for the gas-equivalent ceiling; 60
+  lw_chiller:[96,100],    // dBA, scroll chiller 450–850 kW (Daikin, AHRI 370); 50
+  lw_dry:[94,94],         // dBA Kelvion printout, unit total unresolved; 40
+  term_risk:'14 of 19 heat-pump-based recoveries terminated; no large delivery lost (Lygnerud & Werner 2018)', // 70
+  cwec:{BC:{fc18:7109,fc24:8645,m:[0.166,0.139,0.132,0.089,0.049,0.018,0.003,0.003,0.025,0.081,0.124,0.17],djf:0.475,jja:0.025,pk:3.9,hdd:2781},
+        AB:{fc18:7614,fc24:8412,m:[0.163,0.137,0.126,0.074,0.04,0.02,0.012,0.02,0.04,0.079,0.125,0.166],djf:0.465,jja:0.051,pk:3.3,hdd:5126}},
+  space_share:{BC:0.46,AB:0.63},
+};
+
+/* ---------- the three test sites: inputs as the register holds them ---------- */
+const SITES=[
+{ id:'hc', group:'test', name:'555 W Hastings St (Harbour Centre), Vancouver', prov:'BC', city:'Vancouver',
+  match:'Recovered heat → the host tower (retrofit to a 45 °C loop); the downtown steam network is outside the calibrated range',
+  summary:'Existing carrier hotel in a 1977 office tower; three colocation tenants; P1 chiller room (2019 permit); BC Hydro primary-service upgrade 2022.',
+  inputs:{
+    floor_area:{v:[73225,73225],u:'m²',basis:'measured GFA, City energy report 2025',conf:80},
+    it_claim:{v:[3.7,3.7],u:'MW',basis:'VAN5 1.6 + VAN-2 2.14 MW nameplate; VAN1 unstated — operator pages',conf:50,claim:true},
+    ceiling_mw:{v:[3.72,3.72],u:'MW',basis:'whole-tower non-heat energy 32.5 GWh ÷ 8,760 h (City energy report 2025) — the data centre cannot exceed the tower',conf:80},
+    cooling:{v:'air',label:'glycol in-row, rooftop dry coolers, P1 chiller room',basis:'operator claim + permit record (BP-2019 chiller room)',conf:70,claim:true},
+    heat_temp:{v:[25,35],u:'°C',basis:'air-cooled class (Alissa; Wahlroos)',conf:70},
+    sink:{v:[45,35],label:'host loop 45 / 35 °C after retrofit; Creative Energy Core is a STEAM system — a steam-raising heat pump is outside the calibrated η range and the steam temperature is not in the register',basis:'host retrofit judged; steam branch not run',conf:60},
+    host_heat:{v:[4.88,4.88],u:'GWh/yr',basis:'host heat energy, City energy report 2025 (0.24 GJ/m²)',conf:80},
+    network_demand:{v:null,basis:'downtown steam network demand not public',conf:0},
+    ceiling_price:{v:[38.6,66.6],u:'$/MWh',basis:'FortisBC Rate 3 gas-equivalent $38.6 (host boiler); Creative Energy 2026 interim steam tiers $39.6–66.6 (BCUC G-5-26) as the upper comparator; TELUS Garden TES customer rate $105–126/MWh (BCUC C-1-13) shows what a regulated recovered-heat service charges all-in',conf:90},
+    receptor_m:{v:[30,60],u:'m',basis:'mixed-use towers across W Hastings and Seymour; judged from plan',conf:40},
+    noise_limit:{v:[45,55],u:'dBA',basis:'By-law 6555 at the property line: 55 day / 45 night (quiet receiving zone)',conf:90},
+    roof_area:{v:[2400,2400],u:'m²',basis:'tower roof, judged from footprint',conf:40},
+    network_km:{v:[0.05,0.3],u:'km',basis:'steam main in W Hastings; connection length judged',conf:40},
+  },
+  facts:{ connection:'existing BC Hydro primary service (2022 upgrade, DB-2022-01818)', zoning:'existing use; no change of occupancy', network:'Creative Energy steam network under W Hastings (franchise)', who_pays:'no precedent on record for this site', visibility:'seen: tower, lobby, loading bays; closed: floor 9 halls, P1; documents only: BC Hydro vista', standoff:'data hall on floor 9, chiller at P1: public zone at grade', licence:'none — air-to-water recovery, no groundwater', watched:'J.B. to confirm', community:'no proceeding on record for this use', crossing:'host: inside one envelope; network: pipe under W Hastings (Encroachment By-law 4243)' } },
+{ id:'e5', group:'test', name:'111 E 5th Ave (RTS 19744), Vancouver', prov:'BC', city:'Vancouver',
+  match:'Recovered heat → the False Creek Neighbourhood Energy Utility (condition 1.10–1.11 of the rezoning)',
+  summary:'Proposed data centre, rezoning I-1A → CD-1 to add Bulk Data Storage; 3 levels above and 2 below; referred back to staff 21 Jul 2026. Heat recovery to the NEU is a material condition of the use.',
+  inputs:{
+    floor_area:{v:[8302,11623],u:'m²',basis:'site 2,767.3 m² × FSR 3.0 (applicant) to 4.2 (staff), RTS 19744 p.4, 10, 28',conf:90},
+    it_claim:{v:[40,40],u:'MW',basis:'"anticipated load of up to 40 MW" — applicant figure reported by staff (RTS 19744 p.17)',conf:50,claim:true},
+    ceiling_mw:{v:null,basis:'not built; no measured ceiling',conf:0},
+    cooling:{v:'air',label:'not specified; rooftop mechanical with screening; VBBL recirculation rule',basis:'RTS 19744 p.5, 26',conf:40},
+    heat_temp:{v:[25,35],u:'°C',basis:'cooling type unknown: this run takes the air class 25–35; set 50–60 for a liquid-cooled run',conf:40},
+    sink:{v:[70,35],label:'NEU hot water (supply/return assumed 70 / 35 °C)',basis:'NEU temperatures not in the register — assumed',conf:40,assume:true},
+    host_heat:{v:[0,0],u:'GWh/yr',basis:'new build; host demand is the data centre itself (existing office 0 heat, all-electric)',conf:80},
+    network_demand:{v:[44,59],u:'GWh/yr',basis:'NEU 667,000 m² (RTS 18251) × 0.24–0.32 GJ/m² measured office heat intensity — proxy; NEU load not in the register',conf:40},
+    ceiling_price:{v:[32.59,38.6],u:'$/MWh',basis:'NEU returned-heat credit $32.59 (By-law 9552 Sch. C, 50 % of $65.17); gas-equivalent $38.6 as the upper comparator',conf:90},
+    receptor_m:{v:[20,40],u:'m',basis:'residential and mixed use across E 5th and Quebec; judged',conf:40},
+    noise_limit:{v:[45,55],u:'dBA',basis:'By-law 6555: intermediate→quiet 60 day / 50 night; residential adjacency 55 / 45 — zone pair to confirm',conf:70},
+    roof_area:{v:[2000,2700],u:'m²',basis:'site 2,767 m², rooftop mechanical screened',conf:60},
+    network_km:{v:[0.1,0.5],u:'km',basis:'NEU main location not in the register; connection length judged',conf:20},
+  },
+  facts:{ connection:'new BC Hydro primary service required (cond. 1.16); headroom, queue and Call for Demand outcome not public', zoning:'CD-1 rezoning referred back to staff 21 Jul 2026 — decision pending', network:'NEU connection is condition 1.10; delivery is a material condition of the use (1.11)', who_pays:'applicant: "costs of constructing and installing the waste heat infrastructure are not borne by the City, the NEU, or recovered from the NEU through rates" (cond. 1.11)', visibility:'site visit 11 Oct 2026 (atlas V02): civic front, lane carries louvres and surveillance; existing building', standoff:'ground-floor café proposed; colonnade signed private property', licence:'none — no groundwater involved', watched:'dome and mast cameras, "24 hour video surveillance" signs in the lane — J.B. to write', community:'579 submissions; 289 online: 3 support / 275 oppose / 11 mixed (RTS 19744 p.7, 24)', crossing:'pipe to the NEU under a street — Encroachment By-law 4243' } },
+{ id:'ky', group:'test', name:'Kyndryl Acheson, 9672 279 St, Parkland County (Edmonton region)', prov:'AB', city:'Edmonton',
+  match:'Recovered heat → nearest receivers (industrial neighbours in Acheson; no network)',
+  summary:'Windowless precast hall ≈114 × 62 m; all plant on the south side; FortisAlberta territory, so Alta Reg 117/2026 and the AESO list apply and EPCOR constraints do not.',
+  inputs:{
+    floor_area:{v:[7068,7068],u:'m²',basis:'114 × 62 m footprint (OSM, site visit) × 1 storey',conf:60},
+    it_claim:{v:[3.5,3.5],u:'MW',basis:'two 550-ton water-cooled chillers ≈ 3.9 MW thermal (Baxtel) ÷ 1.1 cooling-to-IT ratio — derived from a directory claim',conf:40,claim:true},
+    ceiling_mw:{v:null,basis:'no measured energy; no benchmarking in Parkland County',conf:0},
+    cooling:{v:'water',label:'water-cooled chillers; pipe racks into the south wall',basis:'Baxtel claim; cooling plant seen on site',conf:50,claim:true},
+    heat_temp:{v:[30,35],u:'°C',basis:'condenser-water class, judged',conf:40},
+    sink:{v:[60,40],label:'industrial space heat 60 / 40 °C (assumed receiver)',basis:'receiver type assumed — no receiver identified',conf:20,assume:true},
+    host_heat:{v:[0,0],u:'GWh/yr',basis:'host is the data centre',conf:80},
+    network_demand:{v:null,basis:'no network; receivers not identified (Parkland County parcel table not in hand)',conf:0},
+    ceiling_price:{v:[10.7,11],u:'$/MWh',basis:'Alberta DERS gas $1.458/GJ, ATCO North $1.062/GJ → ≈ $11/MWh heat at 85 %',conf:90},
+    receptor_m:{v:[300,1500],u:'m',basis:'industrial park; dwellings beyond 300 m — judged; AUC receptor rule 1.5 km',conf:40},
+    noise_limit:{v:[40,50],u:'dBA',basis:'Edmonton Bylaw 14600 does not apply (Parkland County); AUC Rule 012 Table 1 night 40–50 by density as the comparator',conf:70},
+    roof_area:{v:[7068,7068],u:'m²',basis:'flat roof = footprint',conf:60},
+    network_km:{v:[0.5,3],u:'km',basis:'no network; distance to the nearest heated building judged',conf:20},
+  },
+  facts:{ connection:'existing; dual utility feeds (claim); FortisAlberta 25 kV on 279 St; below the 75 MW "large" threshold of Alta Reg 117/2026', zoning:'existing use', network:'none; Edmonton DDE is downtown, ~25 km', who_pays:'no record', visibility:'all plant in open view from the private drive; berm screens the yard at grade, not the stacks (atlas E03)', standoff:'chain-link with barbed wire; cameras on corners, walls and poles; setback from 96 Ave', licence:'none — no groundwater involved', watched:'J.B. to write', community:'no proceeding on record', crossing:'pipe along a private drive and a county road' } },
+];
+/* ---------- built cases: the tool run on published inputs, with the published outcome beside it ---------- */
+const PUB=(lo,hi,status,src)=>({v:[lo,hi],status,src});
+const BUILT=[
+{ id:'odense', group:'built', name:'Odense — Meta → Fjernvarme Fyn (2020, first full year)', prov:null, city:'Odense',
+  match:'Data-centre heat → Tietgenbyens Varmecentral → Odense district heating (utility-owned heat pumps, heat given free)',
+  summary:'The only case with a utility-settled year of heat and heat-pump electricity for the data centre alone. IT load is not published; the run starts from the metered DC-side heat.',
+  inputs:{
+    heat_captured_meas:{v:[49.9,49.9],u:'GWh/yr',basis:'230 TJ DH output (63.9 GWh) − 14,020 MWh heat-pump electricity = DC-side heat, Fjernvarme Fyn Årsberetning 2020 p.9, 13 (REPORTED, utility settlement)',conf:80},
+    cooling:{v:'water',label:'water loop from the data centre, 27 → 15 °C at the heat pumps',basis:'Inspirationskatalog 2022 p.10 (utility)',conf:70,claim:false},
+    heat_temp:{v:[27,27],u:'°C',basis:'source in 27 °C (Inspirationskatalog 2022 p.10)',conf:70},
+    sink:{v:[75,40],label:'district heating 40 → 75 °C',basis:'Inspirationskatalog 2022 p.10',conf:70},
+    ceiling_price:{v:null,basis:'heat given free; Fjernvarme Fyn pays the whole 215 M DKK investment (CA-EED slide 11; Inspirationskatalog p.11)',conf:0},
+  },
+  published:{ cop:PUB(4.5,4.5,'REPORTED (utility, annual)','Årsberetning 2020 p.9: "COP på 4,5"; 2021–22 all-in 4.2 incl. pumps'), heat_delivered:PUB(63.9,63.9,'REPORTED (utility, 230 TJ)','Årsberetning 2020 p.9'), hp_electricity:PUB(14.02,14.02,'REPORTED','Årsberetning 2020 p.13'), flh:PUB(2662,2662,'DERIVED from 63.9 GWh ÷ 24 MW','ramp-up year; design 5,000–7,000 h') } },
+{ id:'telia', group:'built', name:'Telia Helsinki → Helen (snapshot 29 May 2024)', prov:null, city:'Helsinki',
+  match:'One 5 MW cooling module → 6.5 MW to Helen district heating (operator-owned heat pumps)',
+  summary:'A one-day operator snapshot, not a settlement figure: the only published ERF on the ISO basis. The hall is partly built out, which is what the utilisation figure shows.',
+  inputs:{
+    it_claim:{v:[24,24],u:'MW',basis:'24 MW IT capacity, 100 MW total (Telia PDF p.4)',conf:50,claim:true},
+    pue:{v:[1.152,1.152],basis:'PUE 1.152 on the day (Telia PDF p.6)',conf:50,claim:true},
+    capture:{v:[0.75,0.75],basis:'ERF 0.75 on the day (Telia PDF p.6) — the captured share of E_DC',conf:50,claim:true},
+    cooling:{v:'water',label:'liquid loop 20 °C in / 32 °C return',basis:'Telia PDF p.5',conf:50,claim:true},
+    heat_temp:{v:[32,32],u:'°C',basis:'loop return 32 °C, cooled to 20 °C',conf:50},
+    sink:{v:[80,40],label:'DH 75–85 °C supply; return not stated — 40 °C assumed',basis:'Telia PDF p.5; return assumed',conf:40,assume:true},
+    ceiling_price:{v:null,basis:'price not stated',conf:0},
+  },
+  published:{ it_load_actual:PUB(4.76,4.76,'DERIVED from the snapshot','4.11 MW ÷ ERF 0.75 ÷ PUE 1.152 (one day)'), cop:PUB(3.9,3.9,'OPERATOR CLAIM (snapshot)','Telia PDF p.6'), heat_delivered_mw:PUB(5.56,5.65,'OPERATOR CLAIM (snapshot)','4.11 MW waste heat + 1.45 MW electricity; printed total 5.65'), erf:PUB(0.75,0.75,'OPERATOR CLAIM','Telia PDF p.6') } },
+{ id:'mantsala', group:'built', name:'Mäntsälä — Yandex → Nivos (2018)', prov:null, city:'Mäntsälä',
+  match:'Exhaust-air heat → 4 MW heat pump → town district heating (paid; price not public)',
+  summary:'A ~15 MW facility heating most of a small town. The town is the limit: 20 GWh was 54 % of its demand in 2018, 75 % by 2022.',
+  inputs:{
+    it_claim:{v:[15,15],u:'MW',basis:'"tehotarve on noin 15 MW" — facility power demand, phase 1 (Nivos 2016/2019)',conf:50,claim:true},
+    pue:{v:[1,1],basis:'15 MW is the whole facility, so PUE is already inside it',conf:60},
+    cooling:{v:'air',label:'exhaust air ~37 °C',basis:'Nivos',conf:50,claim:true},
+    heat_temp:{v:[37,37],u:'°C',basis:'"noin 37-asteista" (Nivos)',conf:50},
+    sink:{v:[80,45],label:'80 °C to the network; return not stated — 45 °C assumed',basis:'Nivos; return assumed',conf:40,assume:true},
+    network_demand:{v:[37,40],u:'GWh/yr',basis:'20 GWh = 54 % of demand (Sitra 2019) → ~37 GWh; up to 75 % by 2022 (Nivos)',conf:60},
+    ceiling_price:{v:null,basis:'price to Yandex not stated; consumer price cut 11 % (Sitra)',conf:0},
+  },
+  published:{ heat_matched:PUB(20,30,'REPORTED (Sitra 2018; NIB programme figure)','20 GWh in 2018; 30 GWh/yr programme'), cop:PUB(4,4.5,'OPERATOR/UTILITY CLAIM "potentially above 4.0"','EU Smart Cities Marketplace 2023'), flh:PUB(5000,5000,'DERIVED 20 GWh ÷ 4 MW','') } },
+{ id:'heerlen', group:'built', name:'Heerlen — APG data centre → Mijnwater 5GDHC (RVO 2018)', prov:null, city:'Heerlen',
+  match:'Server heat at 28 °C → low-temperature network loop (16 / 28 °C), building-side heat pumps',
+  summary:'A small facility feeding a whole low-temperature network: the one case that ran source-limited. No heat pump at the data centre — the network takes the heat at 28 °C.',
+  inputs:{
+    it_claim:{v:[0.52,0.52],u:'MW',basis:'"Vermogen datacenter: 520 kW" (RVO/Nederland ICT 2018 p.14)',conf:60},
+    pue:{v:[1,1],basis:'520 kW is the facility figure',conf:60},
+    cooling:{v:'water',label:'water loop to the Mijnwater network',basis:'RVO 2018',conf:60},
+    heat_temp:{v:[28,28],u:'°C',basis:'network warm side 28 °C',conf:60},
+    sink:{v:[28,16],label:'network 16 / 28 °C — no lift at the source',basis:'RVO 2018 p.14',conf:60},
+    ceiling_price:{v:null,basis:'not stated',conf:0},
+  },
+  published:{ heat_captured:PUB(2.47,2.47,'REPORTED "8.900 GJ warmte onttrokken"','RVO 2018 p.14; period read as annual'), utilisation:PUB(0.54,0.54,'DERIVED','2,472 MWh ÷ (520 kW × 8,760 h)') } },
+{ id:'telusgarden', group:'built', name:'TELUS Garden, Vancouver — TELUS data centre → FAES thermal energy system (BCUC C-1-13, design)', prov:'BC', city:'Vancouver',
+  match:'Data-centre cooling heat → water-to-water heat pumps → office, 425 homes and retail on the block; Creative Energy steam for peaks',
+  summary:'The Vancouver precedent, with regulator-reviewed design figures and no published actuals (the annual-load report was rescinded in 2015). A base-load offer against a block\'s demand.',
+  inputs:{
+    heat_captured_meas:{v:[12.26,12.26],u:'GWh/yr',basis:'"A year round base load of 1,400 kW of heat is available on a 24/7 basis" (C-1-13 p.15) × 8,760 h — MODELLED',conf:60},
+    cooling:{v:'water',label:'heat exchangers and water-to-water heat pumps',basis:'C-1-13 p.15',conf:70},
+    heat_temp:{v:[25,30],u:'°C',basis:'not stated; condenser-water class assumed',conf:30,assume:true},
+    sink:{v:[50,40],label:'building hot-water loop; temperatures not stated — 50 / 40 °C assumed',basis:'assumed',conf:30,assume:true},
+    host_heat:{v:[5.194,5.194],u:'GWh/yr',basis:'development heating load 5,194 MWh/yr (C-1-13 p.16)',conf:80},
+    ceiling_price:{v:[105,126],u:'$/MWh',basis:'customer rate BC Hydro residential + 5–10 % (G-155-12: $0.105–0.126/kWh 2014–18) — all-in TES rate; DC heat supplied free',conf:90},
+  },
+  published:{ heat_matched:PUB(4.88,4.88,'MODELLED (94 % of 5,194 MWh)','C-1-13 p.16'), capex:PUB(3.2,3.2,'REPORTED waste-heat option $3.2 M (vs geo-exchange $6.8 M)','C-1-13 p.17 — recovery option only; TES total $7.9 M') } },
+{ id:'tallaght', group:'built', name:'Tallaght, Dublin — AWS → Heat Works (year 1, 2023)', prov:null, city:'Dublin',
+  match:'Data-centre heat at ~25 °C → 3 MW two-stage heat pump → 70 / 55 °C network (council-owned; heat free)',
+  summary:'A first metered year on a network still filling: the heat pump ran about 1,260 full-load hours. COP is not published, so only the COP range can be shown.',
+  inputs:{
+    heat_captured_meas:{v:[2.6,2.9],u:'GWh/yr',basis:'3,770 MWh distributed ÷ COP ÷ (COP − 1) factor 1.3–1.45 — DERIVED; IT load not published',conf:40},
+    cooling:{v:'water',label:'water loop ~25 °C, return ~15 °C',basis:'GDECA 2023; AWS blog (operator)',conf:50,claim:true},
+    heat_temp:{v:[25,25],u:'°C',basis:'"circa 25C" (GDECA)',conf:50},
+    sink:{v:[70,55],label:'network 70 / 55 °C in operation (design 70 / 50)',basis:'ENABLE DHC D2.2 p.7',conf:70},
+    ceiling_price:{v:null,basis:'heat free from AWS; customer tariff fixed + kWh, values not stated',conf:0},
+  },
+  published:{ heat_delivered:PUB(3.77,3.77,'METERED (owner statement; meter location not stated)','Codema; ENABLE DHC D2.2 p.5'), flh:PUB(1257,1257,'DERIVED 3,770 MWh ÷ 3 MW','year 1') } },
+{ id:'laval', group:'built', name:'Université Laval — Colosse → campus loop (2010–)', prov:null, city:'Québec',
+  match:'Supercomputer heat → water-to-water heat pumps → 40 °C campus heating water',
+  summary:'A low-lift campus case with a reported COP near 7 — the top of what the calibration allows.',
+  inputs:{
+    heat_captured_meas:{v:[1.0,1.0],u:'GWh/yr',basis:'1,150,000 kWh/yr recovered (UL 2021 p.10) read as heat-pump output; DC-side ≈ ÷ 1.17 at COP 7 — DERIVED',conf:50},
+    cooling:{v:'water',label:'chilled-water loop',basis:'UL 2021 p.9',conf:60},
+    heat_temp:{v:[15,18],u:'°C',basis:'chilled-water return; not stated — assumed',conf:30,assume:true},
+    sink:{v:[40,30],label:'heating water 40 °C; return assumed 30',basis:'UL 2021 p.9; return assumed',conf:40,assume:true},
+    ceiling_price:{v:null,basis:'internal to the university',conf:0},
+  },
+  published:{ cop:PUB(7,7,'REPORTED "de l\'ordre de 7"','UL 2021 p.9'), heat_delivered:PUB(1.15,1.15,'REPORTED','UL 2021 p.10') } },
+];
+BUILT.forEach(b=>{ const d={floor_area:{v:null,basis:'not needed for this check',conf:0},it_claim:{v:null,basis:'IT load not published',conf:0},ceiling_mw:{v:null,basis:'',conf:0},host_heat:{v:[0,0],u:'GWh/yr',basis:'',conf:0},network_demand:{v:null,basis:'',conf:0},receptor_m:{v:null,basis:'',conf:0},noise_limit:{v:null,basis:'',conf:0},roof_area:{v:null,basis:'',conf:0},network_km:{v:null,basis:'',conf:0}}; for(const k in d) if(!(k in b.inputs)) b.inputs[k]=d[k]; b.facts={}; SITES.push(b); });
+
+/* ---------- engine ---------- */
+function run(S, I){
+  const p=S.prov, W=K.cwec[p], Q={};
+  const q=(id,name,v,u,basis,conf,extra)=>{Q[id]={id,name,v,u,basis,conf,...(extra||{})}; return Q[id];};
+  // size
+  if(I.floor_area.v) q('floor_area','Gross floor area',I.floor_area.v,'m²',I.floor_area.basis,I.floor_area.conf);
+  const pue=I.pue&&I.pue.v?I.pue.v:K.pue;
+  let it=null, itc=0, hr;
+  if(I.it_claim.v){ it=mul(I.it_claim.v,K.util); let itb=`claim ${rng(I.it_claim.v,' MW')} × utilisation ${rng(K.util)} (Telia snapshot 0.20; LBNL; Fan)`; itc=minc(I.it_claim.conf,70);
+    if(I.ceiling_mw.v){ it=[Math.min(it[0],I.ceiling_mw.v[1]),Math.min(it[1],I.ceiling_mw.v[1])]; itb+=`; capped by the measured ceiling ${rng(I.ceiling_mw.v,' MW')}`; itc=Math.max(itc,70); }
+    q('it_load_actual','IT load, actual',it,'MW average',itb,itc,{claim:true});
+    hr=sc(mul(it,pue),8.76); q('heat_rejected','Heat rejected',hr,'GWh/yr',`IT × PUE ${rng(pue,'',2)}${I.pue&&I.pue.v?' (published)':' (assumed)'} × 8,760 h`,minc(itc,60)); }
+  const cap=I.capture&&I.capture.v?I.capture.v:(I.cooling.v==='water'?K.capture_water:K.capture_air); q('liquid_capture','Share of heat captured in liquid',cap,'',I.capture&&I.capture.v?I.capture.basis:(I.cooling.v==='water'?'condenser loop, judged':'glycol/air loop share, judged'),I.capture&&I.capture.v?I.capture.conf:40);
+  const lm=(a,b)=>{a+=273.15;b+=273.15;return Math.abs(a-b)<1e-9?a:(a-b)/Math.log(a/b)};
+  const TH=lm(I.sink.v[0],I.sink.v[1]);
+  const lor=(src,drop,eta)=>{const TL=lm(src,src-drop);return eta*TH/(TH-TL)};
+  const copL=R(lor(I.heat_temp.v[0],K.source_drop[1],K.eta[0]),lor(I.heat_temp.v[1],K.source_drop[0],K.eta[1]));
+  const mw=it?(it[0]+it[1])/2:(I.heat_captured_meas?I.heat_captured_meas.v[1]/8.76:1); const dea=mw<2?K.dea_cop[1]:mw<6?K.dea_cop[3]:K.dea_cop[10];
+  const noLift=I.sink.v[0]<=I.heat_temp.v[1]+1;
+  const cop=noLift?[Infinity,Infinity]:[Math.min(copL[0],8),Math.min(copL[1],8)]; // capped at 8: the highest realised COP among the calibration cases is ~7 (Laval, 15 → 40 °C)
+  if(noLift) q('cop','Heat-pump COP',[NaN,NaN],'','no lift: the network takes the heat at source temperature (5GDHC); no heat pump at the boundary',I.sink.conf,{text:'no heat pump'}); else q('cop','Heat-pump COP',cop,'',`full Lorenz: η ${rng(K.eta)} × T_lm,sink (${I.sink.v[0]}/${I.sink.v[1]} °C) ÷ (T_lm,sink − T_lm,source), source ${rng(I.heat_temp.v,' °C',0)} cooled ${rng(K.source_drop,' K',0)}; η calibrated on Odense (realised 4.5 / 4.2), Telia (3.9), Laval (~7); DEA catalogue ${dea} at this size for comparison${copL[1]>8?'; Lorenz gives up to '+fmt(copL[1])+', capped at 8 (highest realised among cases ≈ 7, Laval)':''}`,minc(I.heat_temp.conf,I.sink.conf,70));
+  let hc; if(I.heat_captured_meas&&I.heat_captured_meas.v){ hc=I.heat_captured_meas.v; q('heat_captured','Heat captured at the boundary (E_reuse)',hc,'GWh/yr',I.heat_captured_meas.basis,I.heat_captured_meas.conf); }
+  else { hc=mul(hr,cap); q('heat_captured','Heat captured at the boundary (E_reuse)',hc,'GWh/yr','heat rejected × capture; metered by flow × ΔT at the data-centre boundary before any heat pump (ISO/IEC 30134-6 cl.5–6; EU Reg. 2024/1364)',minc(Q.heat_rejected.conf,Q.liquid_capture.conf)); }
+  if(I.sink.v[0]<=I.heat_temp.v[1]+1){ /* no lift needed: the network takes the heat as it is */ }
+  const cf=noLift?[1,1]:[cop[1]/(cop[1]-1),cop[0]/(cop[0]-1)]; const hd=mul(hc,cf); q('heat_delivered','Heat available after heat pump (network side)',hd,'GWh/yr',`E_reuse × COP ÷ (COP − 1) [factor ${rng(cf,'',2)}] — the figure utilities meter and bill (Stockholm Exergi; Fjernvarme Fyn ≈ 1.3 ×)`,minc(Q.heat_captured.conf,Q.cop.conf));
+  q('heat_delivered_mw','… as average power',sc(hd,1/8.76),'MW','GWh ÷ 8,760 h',Q.heat_delivered.conf);
+  const hpe=noLift?[0,0]:div(hd,cop); q('hp_electricity','Heat-pump electricity',hpe,'GWh/yr',noLift?'none at the boundary':'Q_out ÷ COP',Q.heat_delivered.conf);
+  if(it) q('erf','Energy reuse factor (ISO/IEC 30134-6)',cap,'','E_reuse ÷ E_DC; with all data-centre energy ending as rejected heat this equals the captured share; heat-pump uplift and electricity excluded; Telia Helsinki reports 0.75 on this basis',Q.heat_captured.conf);
+  if(W) q('free_cooling','Free-cooling hours',[W.fc18,W.fc24],'h/yr',`CWEC ${S.city} Intl at 18–24 °C inlet, computed`,80);
+  if(W){
+  // carbon: heat-pump electricity vs displaced gas, two factors reported
+  const gas_g_kWh=K.gas_g_m3/(K.gas_GJ_m3*277.78)/K.boiler; // g per kWh of delivered heat
+  const disp=sc(hd,gas_g_kWh); const hpco=sc(hpe,K.grid[p]); const net=sub(disp,hpco);
+  let cb=`displaced gas ${rng(sc(disp,1),' t',0)} (1,962 g/m³, HHV ${K.gas_GJ_m3} GJ/m³ assumed, boiler 85 %) − heat-pump electricity × ${K.grid[p]} g/kWh (NIR 2026 Annex 7, ${p} 2024 consumption)`;
+  if(p==='AB'){ const net2=sub(disp,sc(hpe,K.egdf*1000)); cb+=`; with the Alberta displacement factor ${K.egdf} t/MWh (2026, line loss) the net is ${rng(net2,' t',0)}`; }
+  q('carbon_net','Carbon displaced, net',net,'t CO2e/yr',cb,minc(Q.hp_electricity.conf,60),{assume:true}); }
+  // prospect
+  const hh=K.hh[p]||K.hh.BC; if(W){ const homes=div(sc(hd,3600),[hh.space+hh.dhw,hh.space+hh.dhw]); q('homes_heated','Homes the available heat could serve',homes,'homes',`available heat ÷ ${(hh.space+hh.dhw).toFixed(1)} GJ per household (CEUD 2023, ${p}); gas-using share ${Math.round(hh.gas*100)} % (StatCan 2021) is the displacement target; a sizing, not a delivery — the receiver limits what is delivered`,minc(Q.heat_delivered.conf,80)); }
+  const rd=I.host_heat.v; q('receiver_demand','Receiver heat demand',I.network_demand.v?add(rd,I.network_demand.v):rd,'GWh/yr',`host ${rng(rd,' GWh/yr')} (${I.host_heat.basis})${I.network_demand.v?`; network ${rng(I.network_demand.v,' GWh/yr')} (${I.network_demand.basis})`:`; ${I.network_demand.basis}`}`,I.network_demand.v?minc(I.host_heat.conf,I.network_demand.conf):I.host_heat.conf);
+  { const dem=Q.receiver_demand.v; const taken=dem[1]>0?[Math.min(hd[0],dem[0]),Math.min(hd[1],dem[1])]:[NaN,NaN];
+    q('heat_matched','Heat the receiver takes (the match)',taken,'GWh/yr',dem[1]>0?`min(available, receiver demand) — built cases are receiver-limited: Mäntsälä 15–23 % of a 15 MW DC's output, Westville 1 % of 35 MW, TELUS Garden 40 % of the 1.4 MW offer`:'no receiver identified',dem[1]>0?minc(Q.heat_delivered.conf,Q.receiver_demand.conf):0); }
+  // profile: share of a flat output with no taker, by month
+  const flat=1/12; const surplus=W?W.m.reduce((a,s)=>a+Math.max(0,flat-s),0):NaN; if(W) q('profile_surplus','Share of a flat output with no taker',[surplus,surplus],'',`Σ max(0, 1/12 − monthly HDD16 share) from CWEC; DJF ${Math.round(W.djf*100)} %, JJA ${Math.round(W.jja*100)} %; peak ÷ minimum month ${W.pk}`,70);
+  // test: price
+  const capex=sc(mul(K.dea_capex,sc(hd,1/8.76)),K.eur_cad*1e6); // CAD for the heat-pump plant sized to average delivered MW
+  const capexPerMWh=div(sc(mul(K.dea_capex,[K.eur_cad*1e6*K.crf,K.eur_cad*1e6*K.crf]),1),K.flh); // $/MWh
+  const omPerMWh=div([K.om*K.eur_cad,K.om*K.eur_cad],K.flh);
+  const elecPerMWh=div(K.elec,cop);
+  const lcoh=add(add(capexPerMWh,omPerMWh),elecPerMWh);
+  q('price_floor','Operator floor (levelised cost of heat)',lcoh,'$/MWh',`DEA capex ${rng(K.dea_capex)} M€/MW × ${K.eur_cad} CAD/€ (assumed) × CRF 6 %/20 yr ÷ ${rng(K.flh,' h',0)} full-load hours (assumed) + O&M + electricity ${rng(K.elec,' $/MWh',0)} (assumed) ÷ COP; no Canadian operator floor is public`,minc(Q.cop.conf,60),{assume:true});
+  q('flh','Heat-pump full-load hours (assumed)',K.flh,'h/yr','assumed 4,000–6,000; built cases: ramp-up years 1,300–2,700, mature 4,400–7,100',60,{assume:true});
+  if(!I.ceiling_price.v){ q('price_ceiling','Buyer ceiling',[NaN,NaN],'$/MWh',I.ceiling_price.basis,0,{text:'not stated'}); return Q; }
+  q('price_ceiling','Buyer ceiling',I.ceiling_price.v,'$/MWh',I.ceiling_price.basis,I.ceiling_price.conf);
+  q('ownership','Ownership model',[0,0],'','two models seen in built cases: (A) utility owns and pays for the heat pump and the data centre gives heat free — Odense, Tallaght, Equinix PA10, Markham, TELUS Garden; (B) supplier owns the heat pump and is paid an avoided-cost price — Stockholm Exergi, Mäntsälä. Under (A) the operator floor is zero and the test is whether the utility\'s all-in cost per MWh (the floor above) beats its alternative (the ceiling); under (B) the floor must be paid',80,{text:'A or B'});
+  const win=[Math.max(lcoh[0],I.ceiling_price.v[0]),Math.min(lcoh[1],I.ceiling_price.v[1])];
+  q('window','Price window',win[0]<=win[1]?win:[NaN,NaN],'$/MWh',win[0]<=win[1]?'where floor and ceiling overlap':'floor above ceiling — no price both sides can accept',minc(Q.price_floor.conf,I.ceiling_price.conf));
+  const margin=sub(I.ceiling_price.v,add(omPerMWh,elecPerMWh)); const capexMW=sc(K.dea_capex,K.eur_cad*1e6);
+  const pb=[margin[1]>0?capexMW[0]/(margin[1]*K.flh[1]):Infinity, margin[0]>0?capexMW[1]/(margin[0]*K.flh[0]):Infinity];
+  q('payback','Simple payback at the buyer ceiling',pb,'yr',`capex per MW ${rng(sc(capexMW,1e-6),' M$')} ÷ ((ceiling − running cost ${rng(add(omPerMWh,elecPerMWh),' $/MWh',0)}) × full-load hours); independent of size`,minc(Q.price_floor.conf,I.ceiling_price.conf));
+  q('capex','Heat-pump plant capital',sc(capex,1e-6),'M$',`${rng(K.dea_capex)} M€/MW_heat (DEA) × average delivered MW × ${K.eur_cad}`,minc(Q.heat_delivered.conf,80),{assume:true});
+  // noise screen
+  const lw=I.cooling.v==='water'?K.lw_chiller:K.lw_dry; const lp=I.receptor_m.v?[lw[0]-20*Math.log10(I.receptor_m.v[1])-8, lw[1]-20*Math.log10(I.receptor_m.v[0])-8]:null;
+  if(I.receptor_m.v) q('noise_screen','Sound level at the nearest receptor (screen)',lp,'dBA',`Lw ${rng(lw,' dBA',0)} (${I.cooling.v==='water'?'chiller, Daikin AHRI 370':'dry cooler, Kelvion printout'}) − 20·log10(r ${rng(I.receptor_m.v,' m',0)}) − 8; free field, no barrier, one unit`,minc(I.receptor_m.conf,50));
+  if(I.noise_limit.v) q('noise_limit','Local noise limit',I.noise_limit.v,'dBA',I.noise_limit.basis,I.noise_limit.conf);
+  if(W&&I.roof_area.v) q('rainwater','Harvestable rainwater',sc(I.roof_area.v,(p==='BC'?1.160:0.423)*0.8),'m³/yr',`roof ${rng(I.roof_area.v,' m²',0)} × ${p==='BC'?'1,160':'423'} mm (Normals 1991–2020) × 0.8 runoff (CSA B805 method)`,minc(I.roof_area.conf,80));
+  if(W) q('storage','Seasonal store to carry the summer surplus',sc(hd,surplus*1000),'MWh',`surplus share × heat delivered; pit footprint ≈ 20.15 × V^0.61 (DEA) at 47–97 kWh/m³`,minc(Q.heat_delivered.conf,70));
+  return Q;
+}
+
+/* ---------- conditions: judged where the run can; the rest say so ---------- */
+const STATES={pass:'works',partial:'with a change',fail:"doesn't work",na:'not applicable or declined',cannot:'cannot judge',unassessed:'not judged'};
+function judge(S,I,Q){
+  const J={}; const j=(id,state,why,conf)=>J[id]={state,why,conf};
+  const F=S.facts;
+  // technical
+  { const over=Q.receiver_demand.v[1]>0&&Q.heat_delivered.v[0]>Q.receiver_demand.v[1]; const share=Q.receiver_demand.v[1]>0?[Q.receiver_demand.v[0]/Q.heat_delivered.v[1],Math.min(1,Q.receiver_demand.v[1]/Q.heat_delivered.v[0])]:null;
+    j('t_quantity', Q.receiver_demand.v[1]===0?'cannot':Q.heat_delivered.v[0]>=Q.receiver_demand.v[1]?'pass':Q.heat_delivered.v[1]>=Q.receiver_demand.v[0]?'partial':'fail',
+    Q.receiver_demand.v[1]===0?'no receiver identified — nothing to compare the heat against':`delivered ${rng(Q.heat_delivered.v,' GWh/yr')} vs receiver ${rng(Q.receiver_demand.v,' GWh/yr')}${over?` — supply exceeds the receiver; only ${rng(sc(share,100),' %',0)} of the heat finds a taker`:''}${I.network_demand.v?'':' — the host alone; network demand unknown'}`, minc(Q.heat_delivered.conf,Q.receiver_demand.conf)); }
+  j('t_quality', I.heat_temp.v[1]>=I.sink.v[0]?'pass':'partial', `source ${rng(I.heat_temp.v,' °C',0)} below sink ${I.sink.v[0]} °C: heat pump at COP ${rng(Q.cop.v)} needed`, Q.cop.conf);
+  j('t_form','pass',I.cooling.v==='water'?'heat already in water (condenser loop)':'heat in a glycol loop; air share lost unless ducted',I.cooling.conf);
+  j('t_conversion','pass',`heat pump ${rng(Q.capex.v,' M$')} and ${rng(Q.hp_electricity.v,' GWh/yr')} electricity stated`,Q.capex.conf);
+  j('t_cooling_change', I.cooling.v==='water'?'na':'partial', I.cooling.v==='water'?'no change needed to reach the heat':'a liquid-cooling refresh is the window to attach capture',40);
+  // spatial
+  j('s_network', F.network.startsWith('none')?'fail':'pass',F.network,80);
+  j('s_distance', S.id==='ky'?'cannot':'pass', S.id==='ky'?'no receiver table for Parkland County in hand — nearest heated building not located':`connection ${rng(I.network_km.v,' km')}; ${F.crossing}`, I.network_km.conf);
+  j('s_route','pass',F.crossing,80);
+  j('s_room',S.id==='e5'?'cannot':'partial',S.id==='e5'?'plant room not in the rezoning drawings held':`heat-pump plant needs ${fmt(30*(Q.heat_delivered_mw.v[1]))}–${fmt(100*(Q.heat_delivered_mw.v[1]))} m² (DEA 30–100 m²/MW); not located on site`,40);
+  // temporal
+  j('tm_overlap','partial',`${Math.round(Q.profile_surplus.v[0]*100)} % of a flat output has no taker in summer without storage (${rng(Q.storage.v,' MWh',0)}) or a year-round receiver`,70);
+  j('tm_freecool', I.cooling.v==='water'?'pass':'partial', I.cooling.v==='water'?`condenser loop carries heat in all ${Q.free_cooling.v[0]} free-cooling hours`:`${Q.free_cooling.v[0]} h/yr of air-side free cooling compete with capture from the air stream`,60);
+  j('tm_storage','partial',`${rng(Q.storage.v,' MWh',0)} of seasonal store would carry the summer surplus; pit footprint ≈ ${fmt(20.15*Math.pow(Q.storage.v[1]*1000/70,0.61),0)} m² at 70 kWh/m³ — not located`,Q.storage.conf);
+  j('e_passthrough', S.id==='e5'?'pass':'cannot', S.id==='e5'?'condition 1.11: not recovered from the NEU through rates':'no rule on record',S.id==='e5'?90:0);
+  j('tm_termination','partial',K.term_risk+' — this match is in the fragile class (small, heat-pump based)',70);
+  j('tm_horizons', S.id==='e5'?'cannot':'partial', S.id==='e5'?'lease and plant terms not set':'servers ~6 yr, plant 15–25, network 40–50; tenants on leases; term of supply not set',60);
+  // economic
+  j('e_window', isNaN(Q.window.v[0])?'fail':Q.price_floor.v[1]<=Q.price_ceiling.v[0]?'pass':'partial',
+    isNaN(Q.window.v[0])?`floor ${rng(Q.price_floor.v,' $/MWh',0)} is above the ceiling ${rng(Q.price_ceiling.v,' $/MWh',0)} — under either ownership model the heat costs more than the alternative`:`overlap at ${rng(Q.window.v,' $/MWh',0)} only; under model A (utility-owned, heat free — the pattern in five of seven built cases) the utility's all-in cost must beat its alternative; under model B the operator must be paid at least the floor`, Q.window.conf);
+  j('e_payback', !isFinite(Q.payback.v[0])?'fail':Q.payback.v[0]<=5&&Q.payback.v[1]<=10?'pass':'partial',`${rng(Q.payback.v,' yr')} at the buyer ceiling${!isFinite(Q.payback.v[1])?' — at the low end of the ceiling the running cost alone exceeds the price':''}`,Q.payback.conf);
+  j('e_capital', F.who_pays.startsWith('no')?'cannot':'pass',F.who_pays,F.who_pays.startsWith('no')?0:90);
+  j('e_risk','partial','both sides carry termination risk; no Canadian precedent for the premium',60);
+  j('e_flex_value', S.prov==='BC'?'cannot':'cannot', S.prov==='BC'?'flexible MW × $300/kW·yr (IRP App. F) — spare capacity at the site unknown':'no Alberta long-run marginal capacity value in the register',20);
+  // organisational
+  j('o_control', S.id==='e5'?'pass':'partial', S.id==='e5'?'single applicant for building and data centre':'landlord, three tenants and the network: no single party controls the loop',60);
+  j('o_contract', F.network.startsWith('none')?'na':'cannot',F.network.startsWith('none')?'no network to contract with':'network owner\'s willingness not on record',20);
+  // regulatory
+  j('r_zoning', F.zoning.includes('pending')?'cannot':'pass',F.zoning,90);
+  j('r_grid', F.connection.includes('not public')?'cannot':'pass',F.connection,90);
+  j('r_noise', Q.noise_screen.v[0]<=Q.noise_limit.v[0]?'pass':'partial',`screen ${rng(Q.noise_screen.v,' dBA',0)} vs limit ${rng(Q.noise_limit.v,' dBA',0)} — ${Q.noise_screen.v[0]<=Q.noise_limit.v[0]?'below the limit even free-field':'free-field screen exceeds; enclosure, barrier or measurement needed'}`,Q.noise_screen.conf);
+  j('r_licence','na',F.licence,90);
+  j('r_utility', S.prov==='BC'?'partial':'cannot', S.prov==='BC'?'heat sales may fall under BCUC regulation unless exempt — to confirm for this match':'Alberta heat-sale regulation to check',40);
+  // security / social / environmental / experiential
+  j('sec_crossing','pass',F.crossing.includes('inside')?'pipes and cables; people stay in the host envelope':'pipes under a street; no people crossing',80);
+  j('sec_standoff','pass',F.standoff,80);
+  j('soc_response', F.community.startsWith('no')?'na':'pass',F.community,F.community.startsWith('no')?90:90);
+  j('soc_benefit','partial','parties named in the ledger; residents absent from every record for this match',60);
+  j('env_carbon', Q.carbon_net.v[0]>0?'pass':Q.carbon_net.v[1]>0?'partial':'fail',`net ${rng(Q.carbon_net.v,' t/yr',0)} on the average factor`,Q.carbon_net.conf);
+  j('env_water','pass',`rainwater ${rng(Q.rainwater.v,' m³/yr',0)} harvestable; no evaporative cooling recorded`,Q.rainwater.conf);
+  j('x_visible','pass',F.visibility,80);
+  j('soc_watched','unassessed',F.watched,20);
+  return J;
+}
+// map the register's condition ids to the judge ids above (the rest stay "not judged")
+const CMAP={t_quantity:'t_quantity',t_quality:'t_quality',t_form:'t_form',t_conversion:'t_conversion',t_cooling_change:'t_cooling_change',s_distance:'s_distance',s_route:'s_route',s_network:'s_network',s_room:'s_room',tm_profile:'tm_overlap',tm_overlap:'tm_freecool',tm_storage:'tm_storage',tm_horizons:'tm_horizons',tm_termination:'tm_termination',e_window:'e_window',e_capex:'e_capital',e_payback:'e_payback',e_risk:'e_risk',e_passthrough:'e_passthrough',e_flex_value:'e_flex_value',o_control:'o_control',o_chain:'o_contract',r_zoning:'r_zoning',r_utility:'r_utility',r_grid:'r_grid',r_noise:'r_noise',r_licence:'r_licence',sec_crossing:'sec_crossing',sec_zones:'sec_standoff',soc_winners:'soc_benefit',soc_record:'soc_response',soc_watched:'soc_watched',env_carbon:'env_carbon',env_water:'env_water',x_visible:'x_visible'};
+const CONDS=[{"id": "t_quantity", "heading": "1 Technical", "name": "Quantity", "test": "heat_delivered ≥ receiver_demand (or share of it)"}, {"id": "t_quality", "heading": "1 Technical", "name": "Quality (temperature grade)", "test": "heat_temp ≥ receiver need, or COP acceptable after lift"}, {"id": "t_form", "heading": "1 Technical", "name": "Form", "test": "heat in water vs air; power voltage; materials reusable vs recyclable"}, {"id": "t_conversion", "heading": "1 Technical", "name": "Conversion step and its cost", "test": "heat pump / storage / treatment energy and capex stated"}, {"id": "t_reliability", "heading": "1 Technical", "name": "Reliability and backup", "test": "receiver firmness need vs backup_hours and uptime priority"}, {"id": "t_cooling_change", "heading": "1 Technical", "name": "Change in cooling", "test": "liquid cooling planned → window to attach"}, {"id": "t_metering", "heading": "1 Technical", "name": "Metering at the boundary", "test": "ERE control volume definable"}, {"id": "s_distance", "heading": "2 Spatial", "name": "Distance", "test": "receiver within receiver_radius"}, {"id": "s_density", "heading": "2 Spatial", "name": "Heat density", "test": "heat_density ≥ class threshold; linear density ≥ 1.5 GJ/m"}, {"id": "s_route", "heading": "2 Spatial", "name": "Route and right of way", "test": "crossings counted; ROW agreement; distribution_cost within window"}, {"id": "s_network", "heading": "2 Spatial", "name": "Existing network nearby", "test": "service area within radius"}, {"id": "s_exit", "heading": "2 Spatial", "name": "Exit point", "test": "judged, diagrammatic"}, {"id": "s_room", "heading": "2 Spatial", "name": "Room for equipment", "test": "plant and storage footprint fits"}, {"id": "s_building_type", "heading": "2 Spatial", "name": "Building type and control", "test": "standalone vs floors in a tower"}, {"id": "s_usable", "heading": "2 Spatial", "name": "Usable space", "test": "roofs, walls, setbacks, ground floor, reserved halls"}, {"id": "s_adjacency", "heading": "2 Spatial", "name": "Adjacency", "test": "site visit"}, {"id": "s_burden_reach", "heading": "2 Spatial", "name": "Burden reach", "test": "noise and light distance to sensitive neighbours"}, {"id": "tm_profile", "heading": "3 Temporal", "name": "Profile match", "test": "hourly demand_profile vs near-flat supply"}, {"id": "tm_overlap", "heading": "3 Temporal", "name": "Free-cooling overlap", "test": "free-cooling hours vs heating season"}, {"id": "tm_storage", "heading": "3 Temporal", "name": "Storage to bridge", "test": "stored_heat covers mismatch at 30–70%"}, {"id": "tm_horizons", "heading": "3 Temporal", "name": "Time horizons", "test": "connection life > several server refreshes; lease term"}, {"id": "tm_growth", "heading": "3 Temporal", "name": "Growth", "test": "reserved capacity shrinks as fill-up proceeds"}, {"id": "tm_lead", "heading": "3 Temporal", "name": "Lead time", "test": "studies, approvals, construction"}, {"id": "tm_termination", "heading": "3 Temporal", "name": "Termination risk", "test": "what happens when the source stops"}, {"id": "e_window", "heading": "4 Economic", "name": "Price window", "test": "floor ≤ price ≤ ceiling"}, {"id": "e_capex", "heading": "4 Economic", "name": "Who pays capital", "test": "each part assigned"}, {"id": "e_payback", "heading": "4 Economic", "name": "Payback", "test": "IRR and LCoH within thresholds"}, {"id": "e_risk", "heading": "4 Economic", "name": "Risk premium", "test": "both sides"}, {"id": "e_split_incentive", "heading": "4 Economic", "name": "Split incentive", "test": "tenants on flat rates"}, {"id": "e_reserved_cost", "heading": "4 Economic", "name": "Reserved capacity costs the operator", "test": "cost per watt rises with emptiness"}, {"id": "e_passthrough", "heading": "4 Economic", "name": "Costs passed to ratepayers and taxpayers", "test": "named in ledger"}, {"id": "e_savings", "heading": "4 Economic", "name": "What the receiver saves", "test": "replaced fuel by city"}, {"id": "e_flex_value", "heading": "4 Economic", "name": "Value of flexibility to the grid", "test": "flexible MW × utility long-run marginal capacity cost vs operator's cost of offering it"}, {"id": "o_control", "heading": "5 Organizational", "name": "Who controls each part", "test": "landlord / tenants / utility"}, {"id": "o_chain", "heading": "5 Organizational", "name": "Contract chain", "test": "network owner willing; long contracts"}, {"id": "o_common", "heading": "5 Organizational", "name": "Common ownership", "test": "same owner for host and receiver (proposal: university or city as tenant and receiver)"}, {"id": "o_data", "heading": "5 Organizational", "name": "Data-sharing agreement", "test": "meters and sensors"}, {"id": "r_zoning", "heading": "6 Regulatory", "name": "Zoning and permits", "test": "use or connection permitted; conditions (RTS 19744)"}, {"id": "r_utility", "heading": "6 Regulatory", "name": "Utility regulation", "test": "BCUC for heat; EV exempt in BC; Alberta to check"}, {"id": "r_grid", "heading": "6 Regulatory", "name": "Grid connection", "test": "cap, queue, sharing terms"}, {"id": "r_noise", "heading": "6 Regulatory", "name": "Noise limits", "test": "noise_level ≤ noise_limit"}, {"id": "r_incentives", "heading": "6 Regulatory", "name": "Mandates and incentives", "test": "move the window"}, {"id": "r_critical", "heading": "6 Regulatory", "name": "Critical-infrastructure law", "test": "access affected (unverified)"}, {"id": "r_code", "heading": "6 Regulatory", "name": "Building code for public uses (proposal)", "test": "SUGGESTED (J.B. to accept): the offered floor can hold a public occupancy (assembly or care) beside the data centre, which Vancouver permits label \"Bulk Data Storage (F2)\": separation, exits and occupant load under the applicable code's multiple-occupancy rules (BCBC/NBC Part 3 — article not yet verified; no code source in the register)"}, {"id": "sec_crossing", "heading": "7 Security", "name": "Crossing type", "test": "pipes/cables/data vs people"}, {"id": "sec_zones", "heading": "7 Security", "name": "Security zones and standoff", "test": "public zone possible; 10–45 m standoff"}, {"id": "sec_rating", "heading": "7 Security", "name": "Rating as proxy", "test": "TIA-942 Rated-1 to 4"}, {"id": "sec_info", "heading": "7 Security", "name": "Information security", "test": "metering reveals load"}, {"id": "sec_ops", "heading": "7 Security", "name": "Operational", "test": "sharing batteries or generators affects uptime"}, {"id": "soc_need", "heading": "8 Social", "name": "Real need", "test": "deprivation and census nearby"}, {"id": "soc_winners", "heading": "8 Social", "name": "Who benefits and who bears", "test": "named, not summed"}, {"id": "soc_residents", "heading": "8 Social", "name": "Residents as a party", "test": "present in ledger"}, {"id": "soc_dependency", "heading": "8 Social", "name": "Dependency", "test": "receiver dependent on the source"}, {"id": "soc_enforce", "heading": "8 Social", "name": "Promises enforceable", "test": "condition in permit; monitoring"}, {"id": "soc_afford", "heading": "8 Social", "name": "Affordability", "test": "heat cost share ≤ 6% of income"}, {"id": "soc_legibility", "heading": "8 Social", "name": "Legibility", "test": "site visit"}, {"id": "soc_access", "heading": "8 Social", "name": "Public access safe", "test": "crossing type and zones"}, {"id": "soc_record", "heading": "8 Social", "name": "Community response on record", "test": "submissions, proceedings"}, {"id": "soc_fix", "heading": "8 Social", "name": "Not a technological fix", "test": "judged"}, {"id": "soc_watched", "heading": "8 Social", "name": "Surveillance as experienced", "test": "watched area reaches past the lot line; felt sense of not being able to pause (one person's account, labelled)"}, {"id": "env_carbon", "heading": "9 Environmental", "name": "Carbon displaced", "test": "both factors reported"}, {"id": "env_water", "heading": "9 Environmental", "name": "Water", "test": "WUE, evaporation, source, stress"}, {"id": "env_embodied", "heading": "9 Environmental", "name": "Embodied carbon", "test": "new equipment and networks"}, {"id": "env_burdens", "heading": "9 Environmental", "name": "Burdens beside", "test": "noise, light, air, refrigerants"}, {"id": "x_edge", "heading": "10 Experiential", "name": "What the edge shows", "test": "site visit"}, {"id": "x_sound", "heading": "10 Experiential", "name": "What can be heard", "test": "site visit vs noise_level"}, {"id": "x_light", "heading": "10 Experiential", "name": "Light, day and night", "test": "site visit vs light_at_window"}, {"id": "x_agree", "heading": "10 Experiential", "name": "Documents and site visit agree", "test": "reciprocal only where both agree"}, {"id": "x_visible", "heading": "10 Experiential", "name": "What is visible and what is hidden", "test": "visibility ledger per element; documents-only elements flagged"}];
+
+function verdict(J){
+  const order=['fail','cannot','partial','pass']; let worst='pass', blocker=null;
+  for(const st of order){ const hit=Object.entries(J).filter(([k,v])=>v.state===st); if(hit.length){worst=st;blocker=hit;break;} }
+  return {state:worst,blockers:blocker||[]};
+}
+
+/* ---------- render ---------- */
+const $=s=>document.querySelector(s); const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+let cur=SITES[0]; const edits={};
+function inputsFor(S){ const I=JSON.parse(JSON.stringify(S.inputs)); const e=edits[S.id]||{}; for(const k in e) I[k].v=e[k]; return I; }
+function renderSite(S,I){
+  $('#siteBox').innerHTML=`<b>${esc(S.name)}</b><div class="m">${esc(S.match)}</div><div class="m" style="margin-top:8px">${esc(S.summary)}</div>`;
+  const nm={ownership:'Ownership model',floor_area:'Gross floor area',it_claim:'IT load, operator claim',ceiling_mw:'Measured ceiling on load',cooling:'Cooling type',heat_temp:'Heat temperature',sink:'Receiver temperature',host_heat:'Host heat demand',network_demand:'Network heat demand',ceiling_price:'Buyer ceiling price',receptor_m:'Nearest noise receptor',noise_limit:'Noise limit',roof_area:'Roof area',network_km:'Connection length',pue:'PUE',capture:'Captured share',heat_captured_meas:'Heat captured, measured'};
+  $('#inputs').innerHTML=Object.entries(I).filter(([k,x])=>!(S.group==='built'&&x.v==null&&!x.basis)).map(([k,x])=>{
+    const tag=x.claim?' <span class="tag claim">claim</span>':x.assume?' <span class="tag assume">assumed</span>':'';
+    let body;
+    if(x.v==null) body=`<div class="r">not in hand — ${esc(x.basis)}</div>`;
+    else if(typeof x.v==='string'||k==='sink') body=`<div class="r">${esc(x.label)}</div>`;
+    else body=`<div class="r"><input type="number" step="any" data-k="${k}" data-i="0" value="${x.v[0]}" aria-label="${nm[k]||k} low"> – <input type="number" step="any" data-k="${k}" data-i="1" value="${x.v[1]}" aria-label="${nm[k]||k} high"> ${esc(x.u||'')}</div>`;
+    return `<div class="in"><div class="n"><span>${nm[k]||k}${tag}</span><span class="conf">${x.conf}</span></div><div class="b">${x.v==null?'':esc(x.basis)}</div>${body}</div>`;
+  }).join('');
+  $('#inputs').querySelectorAll('input').forEach(el=>el.addEventListener('change',e=>{ const k=e.target.dataset.k,i=+e.target.dataset.i; const v=(edits[S.id]=edits[S.id]||{})[k]||[...I[k].v]; v[i]=+e.target.value; edits[S.id][k]=R(v[0],v[1]); render(); }));
+}
+function renderQuant(S,Q){
+  const groups=[['Size',['floor_area','it_load_actual']],['Characterise',['heat_rejected','liquid_capture','heat_captured','cop','heat_delivered','heat_delivered_mw','hp_electricity','erf','free_cooling','carbon_net','rainwater']],['Prospect',['receiver_demand','heat_matched','profile_surplus','storage']],['Test',['ownership','flh','price_floor','price_ceiling','window','capex','payback','noise_screen','noise_limit']]];
+  const pub=S.published||{};
+  $('#quant').innerHTML=`<tr><th>quantity</th><th>value</th>${S.group==='built'?'<th>published</th>':''}<th>how</th><th>conf</th></tr>`+groups.map(([g,ids])=>{ const have=ids.filter(id=>Q[id]); if(!have.length)return ''; return `<tr class="stage"><td colspan="5">${g}</td></tr>`+have.map(id=>{const x=Q[id]; const tag=x.claim?' <span class="tag claim">claim</span>':x.assume?' <span class="tag assume">assumed</span>':''; const vv=x.text?x.text:(id==='window'&&isNaN(x.v[0])?'none':rng(x.v,x.u?' '+x.u:'',id==='erf'||id==='liquid_capture'||id==='profile_surplus'?2:1)); const pc=S.group==='built'?`<td class="v">${pub[id]?rng(pub[id].v,x.u?' '+x.u:'',2):''}</td>`:''; return `<tr><td>${esc(x.name)}${tag}</td><td class="v">${vv}</td>${pc}<td class="b">${esc(x.basis)}</td><td class="c"><span class="conf">${x.conf}</span></td></tr>`;}).join(''); }).join('');
+}
+function fitLabel(pub,comp){ // published range vs computed range
+  const [pl,ph]=pub, [cl,ch]=comp; if(!isFinite(cl)||!isFinite(ch)) return ['—','s'];
+  if(ph>=cl&&pl<=ch) return ['inside the computed range','ok'];
+  const d=pl>ch?(pl-ch)/ph:(cl-ph)/ph; return [d<0.15?`${Math.round(d*100)} % outside`:`${Math.round(d*100)} % outside`, d<0.15?'near':'off'];
+}
+function renderBuilt(S,I,Q){
+  ['h-conds','w-conds','h-ledger','w-ledger','h-opps','w-opps'].forEach(id=>$('#'+id).hidden=true); $('#h-verdict').textContent='Published outcome against the tool';
+  const rows=Object.entries(S.published).map(([k,pb])=>{ const x=Q[k]; let comp=x?x.v:null; let compTxt=x?(x.text||rng(x.v,x.u?' '+x.u:'',2)):'not computed';
+    if(k==='flh'){ comp=K.flh; compTxt=rng(K.flh,' h',0); } if(k==='utilisation'){ comp=K.util; compTxt=rng(K.util,'',2); } if(k==='capex'&&x){ compTxt=rng(x.v,' M$'); }
+    const name={cop:'COP',heat_delivered:'Heat after the heat pump',heat_delivered_mw:'Heat after the heat pump',hp_electricity:'Heat-pump electricity',flh:'Full-load hours',it_load_actual:'IT load, actual',erf:'ERF',heat_matched:'Heat the receiver takes',heat_captured:'Heat captured (E_reuse)',utilisation:'Utilisation of nameplate',capex:'Capital for recovery'}[k]||k;
+    const u={cop:'',heat_delivered:' GWh/yr',heat_delivered_mw:' MW',hp_electricity:' GWh/yr',flh:' h',it_load_actual:' MW',erf:'',heat_matched:' GWh/yr',heat_captured:' GWh/yr',utilisation:'',capex:' M$'}[k]||'';
+    const [lab,cls]=comp?fitLabel(pb.v,comp):['—','s'];
+    return `<div class="row"><div><div class="k">${name}</div><div class="s">${esc(pb.status)} · ${esc(pb.src)}</div></div><div><div class="k">published</div><div class="v">${rng(pb.v,u,2)}</div></div><div><div class="k">tool</div><div class="v">${compTxt}</div></div><div class="${cls}">${lab}</div></div>`; }).join('');
+  $('#verdict').innerHTML=`<div class="fit" style="grid-column:1/-1">${rows}<div class="note">Published figures carry their own status; the tool's ranges come from the same engine as the test sites, with this case's published inputs where they exist and the register's bands where they do not. "Inside" means the published value falls within the computed range — a necessary check, not a proof.</div></div>`;
+  $('#verdict').style.gridTemplateColumns='1fr';
+}
+function render(){
+  const S=cur, I=inputsFor(S), Q=run(S,I);
+  if(S.group==='built'){ renderSite(S,I); renderBuilt(S,I,Q); renderQuant(S,Q); $('#claims').innerHTML=''; return; }
+  ['h-conds','w-conds','h-ledger','w-ledger','h-opps','w-opps'].forEach(id=>$('#'+id).hidden=false); $('#h-verdict').textContent='Verdict'; $('#verdict').style.gridTemplateColumns='';
+  const J=judge(S,I,Q), V=verdict(J); renderSite(S,I);
+  // (site and inputs rendered by renderSite)
+  void 0; if(false) Object.entries(I).map(([k,x])=>{
+    const nm={ownership:'Ownership model',floor_area:'Gross floor area',it_claim:'IT load, operator claim',ceiling_mw:'Measured ceiling on load',cooling:'Cooling type',heat_temp:'Heat temperature',sink:'Receiver temperature',host_heat:'Host heat demand',network_demand:'Network heat demand',ceiling_price:'Buyer ceiling price',receptor_m:'Nearest noise receptor',noise_limit:'Noise limit',roof_area:'Roof area',network_km:'Connection length'}[k]||k;
+    const tag=x.claim?' <span class="tag claim">claim</span>':x.assume?' <span class="tag assume">assumed</span>':'';
+    let body;
+    if(x.v==null) body=`<div class="r">not in hand — ${esc(x.basis)}</div>`;
+    else if(typeof x.v==='string') body=`<div class="r">${esc(x.label)}</div>`;
+    else if(k==='sink') body=`<div class="r">${esc(x.label)}</div>`;
+    else body=`<div class="r"><input type="number" step="any" data-k="${k}" data-i="0" value="${x.v[0]}" aria-label="${nm} low"> – <input type="number" step="any" data-k="${k}" data-i="1" value="${x.v[1]}" aria-label="${nm} high"> ${esc(x.u||'')}</div>`;
+    return '';
+  });
+  // verdict
+  const nameOf=k=>{const c=CONDS.find(c=>CMAP[c.id]===k); return c?c.name:k;};
+  const list=st=>Object.entries(J).filter(([k,v])=>v.state===st).map(([k,v])=>`<b>${esc(nameOf(k))}</b> — ${esc(v.why)}`).join('<br>');
+  let bl=list(V.state);
+  if(V.state==='cannot'&&list('partial')) bl+=`<br><br><span style="color:var(--fg)">Once those are settled, it works with a change:</span><br>${list('partial')}`;
+  const counts={}; CONDS.forEach(c=>{const s=(J[CMAP[c.id]]||{state:'unassessed'}).state; counts[s]=(counts[s]||0)+1;});
+  $('#verdict').innerHTML=`<div class="big ${V.state}">${STATES[V.state]}</div><div><div class="why">${V.state==='pass'?'every judged condition passes':V.state==='fail'?'blocked by:':V.state==='cannot'?'the run cannot finish until:':'works if:'}<br>${bl}</div><div class="counts">${Object.entries(STATES).map(([s,l])=>`<span><span class="pill ${s}">${counts[s]||0}</span> ${l}</span>`).join('')}</div><div class="note">The worst condition decides; burdens are listed beside benefits and never netted. "Not judged" is the first attempt's own gap, not the site's.</div></div>`;
+  // conditions
+  let h='', last='';
+  CONDS.forEach(c=>{ const r=J[CMAP[c.id]]||{state:'unassessed',why:'',conf:null}; if(c.heading!==last){h+=`<tr class="hd"><td colspan="4">${esc(c.heading)}</td></tr>`;last=c.heading;} h+=`<tr><td>${esc(c.name)}<div class="b" style="color:var(--faint);font-size:11.5px">${esc(c.test)}</div></td><td><span class="pill ${r.state}">${STATES[r.state]}</span></td><td class="b">${esc(r.why)}</td><td class="c">${r.conf!=null?`<span class="conf">${r.conf}</span>`:''}</td></tr>`; });
+  $('#conds').innerHTML=`<tr><th>condition</th><th>state</th><th>why</th><th>conf</th></tr>`+h;
+  // quantities
+  renderQuant(S,Q);
+  if(false){ const groups=[['Size',['floor_area','it_load_actual']],['Characterise',['heat_rejected','liquid_capture','heat_captured','cop','heat_delivered','heat_delivered_mw','hp_electricity','erf','free_cooling','carbon_net','rainwater']],['Prospect',['receiver_demand','heat_matched','profile_surplus','storage']],['Test',['ownership','price_floor','price_ceiling','window','capex','payback','noise_screen','noise_limit']]];
+  }
+  // ledger
+  const net=S.facts.network.startsWith('none');
+  const rows=[
+   ['Operator / tenant','capture loop, heat pump (unless the network takes it)','sells heat at the floor or above; lower cooling cost','termination risk; metering reveals load','a buyer at ≥ floor'],
+   ['Host / landlord','space for plant; retrofit to a lower sink temperature','cheaper heat than gas if the window holds','noise and plant in the building; lease complexity','a lease that outlives server refreshes'],
+   [net?'(no network)':'Network owner', net?'—':'pipe, metering, often the heat pump (Fortum/Exergi pattern)', net?'—':'low-carbon supply at or below its alternative', net?'—':'supply stops when the source stops', net?'—':'a floor below its own alternative'],
+   ['City','encroachment permit; conditions in the permit','carbon reduction counted on the average factor','enforcement of promises','monitoring in the permit'],
+   ['Residents nearby','—','heat only if a network reaches them','noise, light, traffic during works','a seat at the table — absent in every record here'],
+   ['Ratepayers / taxpayers','—','—','costs passed through unless the permit forbids it (111 E 5th forbids)','a stated rule'],
+  ];
+  $('#ledger').innerHTML=`<tr><th>party</th><th>pays for / owns</th><th>receives</th><th>bears</th><th>needs</th></tr>`+rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')+`<tr><td colspan="5" class="b">Derived from the Nordic contract pattern (Energiforsk 2020:681; Fortum; Exergi) and the Vancouver condition 1.11; confidence 50. Nothing in this table is summed.</td></tr>`;
+  // opportunities
+  const hh=K.hh[S.prov];
+  $('#opps').innerHTML=`<tr><th>opportunity</th><th>sized</th><th>how</th></tr>`+[
+    ['District heat to a network',`${rng(Q.homes_heated.v,' homes',0)}`,`heat delivered ÷ ${(hh.space+hh.dhw).toFixed(1)} GJ; ${Math.round(hh.gas*100)} % of homes use gas`],
+    ['Hospital or campus anchor',`${rng(Q.heat_delivered.v,' GWh/yr')} year-round`,'needs a receiver with summer load; none identified here'],
+    ['Seasonal storage in the ground',`${rng(Q.storage.v,' MWh',0)}`,'summer surplus to carry; groundwater licence not triggered unless open loop'],
+    ['Rainwater and condensate',`${rng(Q.rainwater.v,' m³/yr',0)}`,'roof × rainfall × 0.8'],
+    ['Reserved capacity to the grid','cannot size','spare capacity at the site unknown — the operator\'s figure is the gap'],
+  ].map(r=>`<tr><td>${r[0]}</td><td class="v">${r[1]}</td><td class="b">${r[2]}</td></tr>`).join('');
+  // claims and assumptions list
+  const cl=Object.values(I).filter(x=>x.claim).map(x=>x.basis), as=[`exchange rate ${K.eur_cad} CAD/€`,`heat-pump full-load hours ${rng(K.flh,' h',0)}`,`electricity ${rng(K.elec,' $/MWh',0)}`,`source cooled ${K.source_drop} K in the heat pump`,`gas HHV ${K.gas_GJ_m3} GJ/m³`,`PUE ${rng(K.pue)}`].concat(Object.values(I).filter(x=>x.assume).map(x=>x.basis));
+  $('#claims').innerHTML=`<b style="color:var(--fg);font-weight:400">Operator and directory figures used as claims:</b> ${cl.map(esc).join('; ')}.<br><b style="color:var(--fg);font-weight:400">Assumptions not in the register</b> (each marked <span class="tag assume">assumed</span> above): ${as.map(esc).join('; ')}.`;
+}
+$('#sites').innerHTML=SITES.map((s,i)=>`<button data-i="${i}" aria-pressed="${i===0}"${s.group==='built'?' class="bt"':''}>${esc(s.name.split(' (')[0].split(' —')[0].split(',')[0])}</button>`).join('');
+$('#sites').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{cur=SITES[+b.dataset.i]; $('#sites').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b)); render(); window.scrollTo({top:0});}));
+render();
+window.__run=(i)=>{const S=SITES[i],I=inputsFor(S);const Q=run(S,I);return {Q,J:judge(S,I,Q)}};
+})();
+</script>

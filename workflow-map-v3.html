@@ -1,0 +1,517 @@
+<title>Beyond Data Workflow Map</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap">
+<style>
+/* Layout: rows are real jobs; along each row run that person's tasks in order. The ground is dark; the nodes are white cards so the wires read as ink on a drawing. Tool attachments carry the studio red; sources are rated on one blue ramp; opportunity kinds take six validated hues with an icon and a label so colour never works alone. */
+:root{
+  --bg:#1c1b19; --row:#242320; --card:#fbfaf8; --card-fg:#222120; --card-muted:#6e6a66; --card-line:#dcd8d3;
+  --fg:#ece8e3; --muted:#a39e98; --line:#3b3936; --line-soft:#2d2b28;
+  --accent:#CC746C; --accent-ink:#b85e56; --accent-soft:#f7e4e1;
+  --wire:#6d6862; --wire-soft:#4a4743;
+  --c0:#ffffff; --c20:#cde2fb; --c40:#9ec5f4; --c60:#5598e7; --c80:#256abf; --c100:#104281;
+  --k-energy:#d95926; --k-economic:#199e70; --k-social:#c98500; --k-space:#d55181; --k-water:#008300; --k-materials:#9085e9;
+  --font:"Open Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;font-size:14px;line-height:1.5;display:flex;flex-direction:column;min-height:100%}
+*{box-sizing:border-box}
+h1,h2,h3{font-weight:300;margin:0;text-wrap:balance}
+a{color:var(--accent)}
+button{font:inherit;color:inherit;background:none;border:1px solid var(--line);border-radius:2px;padding:4px 10px;cursor:pointer}
+button:hover{border-color:var(--fg)}
+button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+header{padding:12px 16px 10px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 24px;align-items:flex-end;background:var(--bg);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+header h1{font-size:20px;letter-spacing:.01em}
+header h1 span{color:var(--accent)}
+header .sub{color:var(--muted);font-size:12px;margin-top:2px;max-width:72ch}
+.ctrl{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ctrl button svg{width:13px;height:13px;vertical-align:-2px;margin-right:5px;stroke:currentColor;fill:none;stroke-width:1.4}
+main{flex:1;display:grid;grid-template-columns:1fr minmax(0,400px);min-height:0}
+#canvasWrap{position:relative;overflow:hidden;min-width:0;cursor:grab;background:
+  radial-gradient(var(--line-soft) 1px,transparent 1px) 0 0/22px 22px,var(--bg)}
+#canvasWrap.drag{cursor:grabbing}
+svg#graph{display:block;width:100%;height:100%;min-height:560px}
+.row-bg{fill:var(--row);stroke:var(--line)}
+.row-bg.focus{stroke:var(--accent)}
+.row-name{font-size:12.5px;font-weight:400;fill:var(--fg)}
+.row-meta{font-size:10.5px;fill:var(--muted)}
+.row-ico{stroke:var(--fg);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.step{cursor:pointer}
+.step rect.box{fill:var(--card);stroke:var(--card);stroke-width:1}
+.step:hover rect.box{stroke:var(--fg)}
+.step.sel rect.box{stroke:var(--accent);stroke-width:2}
+.step text.name{font-size:11.5px;font-weight:400;fill:var(--card-fg)}
+.step text.conf{font-size:9.5px;font-weight:600;fill:var(--card-fg);font-variant-numeric:tabular-nums}
+.step .tab{fill:var(--accent)}
+.step .tab.assist{fill:var(--card);stroke:var(--accent);stroke-dasharray:3 2}
+.step text.tabtxt{font-size:8.5px;letter-spacing:.06em;text-transform:uppercase}
+.ring .seg{stroke:var(--card);stroke-width:1}
+.ring .track{fill:none;stroke:var(--card-line);stroke-width:1}
+.srcnode rect.box{fill:var(--card);stroke:var(--card)}
+.srcnode text{font-size:9.5px;fill:var(--card-fg)}
+.srcnode text.c{font-weight:600;font-variant-numeric:tabular-nums}
+.srcnode text.s{fill:var(--card-muted)}
+.srcnode .dot{stroke:var(--card-line);stroke-width:.8}
+.toolnode rect{fill:var(--accent-soft);stroke:var(--accent)}
+.toolnode text{font-size:10px;fill:var(--card-fg)}
+.toolnode text.k{font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;fill:var(--accent-ink)}
+.wire{fill:none;stroke:var(--wire);stroke-width:1.1}
+.wire.hand{stroke-dasharray:4 3}
+.wire.hi{stroke:var(--accent);stroke-width:1.8}
+.wire.opp{stroke-dasharray:1.5 3}
+.wire.src{stroke:var(--wire-soft)}
+.wire.tool{stroke:var(--accent)}
+.opp{cursor:pointer}
+.opp rect.box{fill:var(--card);stroke:var(--card)}
+.opp.sel rect.box,.opp:hover rect.box{stroke:var(--accent);stroke-width:2}
+.opp text.name{font-size:11px;fill:var(--card-fg)}
+.opp text.kind{font-size:9px;letter-spacing:.08em;text-transform:uppercase;fill:var(--card-muted)}
+.opp .kico{fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.col-title{font-size:11px;letter-spacing:.1em;text-transform:uppercase;fill:var(--muted)}
+.dim{opacity:.18}
+#panel{border-left:1px solid var(--line);background:var(--row);overflow:auto;min-width:0;padding:18px 20px 40px}
+#panel .empty{color:var(--muted)}
+#panel h2{font-size:18px;margin-bottom:2px}
+#panel .of{color:var(--muted);font-size:12px}
+#panel .of svg{width:14px;height:14px;vertical-align:-2px;margin-right:6px;stroke:var(--muted);fill:none;stroke-width:1.3}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;align-items:center}
+.chip{font-size:11px;border:1px solid var(--line);border-radius:999px;padding:2px 9px;color:var(--muted)}
+.chip.acc{border-color:var(--accent);color:var(--accent)}
+.chip.kind{color:var(--fg)}
+.chip.kind i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:0}
+.bigring{display:inline-grid;place-items:center;width:64px;height:64px}
+.bigring svg{width:64px;height:64px;grid-area:1/1}
+.bigring b{grid-area:1/1;font-weight:600;font-size:15px;font-variant-numeric:tabular-nums}
+.confrow{display:flex;gap:14px;align-items:center;margin:8px 0 4px}
+.confrow .t{font-size:12px;color:var(--muted)}
+.sec{margin-top:18px;padding-top:12px;border-top:1px solid var(--line)}
+.sec h3{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:400}
+dl{display:grid;grid-template-columns:92px 1fr;gap:4px 12px;margin:0}
+dt{color:var(--muted);font-size:12px}
+dd{margin:0;min-width:0}
+.tool{border-left:2px solid var(--accent);padding-left:12px}
+.srcrow{display:grid;grid-template-columns:30px 1fr;gap:8px;padding:6px 0;border-bottom:1px solid var(--line-soft);align-items:start}
+.srcrow .n{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;font-variant-numeric:tabular-nums;font-size:10px;font-weight:600;color:#fff}
+.srcrow .n.low{color:var(--fg);border:1px solid var(--line)}
+.srcrow .t{font-size:12.5px}
+.srcrow .m{font-size:11px;color:var(--muted)}
+.srcrow .m a{word-break:break-all}
+.link{display:grid;grid-template-columns:14px 1fr;gap:6px;padding:3px 0;font-size:12.5px}
+.link .n{color:var(--muted);font-size:11.5px}
+.link button{padding:0 4px;border:none;color:var(--accent)}
+.steps-list button{display:block;text-align:left;border:none;padding:2px 0;color:var(--fg)}
+.steps-list button:hover{color:var(--accent)}
+footer{border-top:1px solid var(--line);padding:10px 16px 14px;font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 28px;background:var(--bg)}
+footer .key{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.sw{display:inline-block;width:18px;height:9px;border:1px solid var(--muted);vertical-align:middle;margin-right:5px}
+.sw.t{background:var(--accent);border-color:var(--accent)}
+.sw.ta{border:1px dashed var(--accent)}
+.sw.card{background:var(--card);border-color:var(--card)}
+.sw.o{border-style:dotted}
+.ramp{display:inline-flex;gap:2px;vertical-align:middle;margin:0 6px}
+.ramp i{width:14px;height:10px;display:inline-block;border:1px solid var(--line)}
+.kd{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.hint{position:absolute;left:12px;bottom:10px;font-size:11px;color:var(--muted);background:var(--bg);padding:2px 6px;border:1px solid var(--line-soft);border-radius:2px;pointer-events:none}
+#loadWrap input{font-size:12px;max-width:180px}
+@media (max-width:860px){
+  main{grid-template-columns:1fr;grid-template-rows:minmax(420px,55vh) auto}
+  #panel{border-left:none;border-top:1px solid var(--line)}
+  svg#graph{min-height:420px}
+}
+@media (prefers-reduced-motion:no-preference){.step rect.box,.wire,.dim{transition:opacity .2s,stroke .15s}}
+</style>
+
+<header>
+  <div class="title">
+    <h1>Beyond Data <span>workflow map</span></h1>
+    <div class="sub">Each row is a real job and the tasks that person does today. Red tabs mark where the tool attaches; the ring on each task is its sources, one segment each, shaded by confidence; the opportunities on the right wire into the jobs they concern. Working draft, 9 Oct 2026.</div>
+  </div>
+  <div class="ctrl" id="levelCtrl"><span class="lbl">View</span><button data-level="all" class="on">All jobs</button><button data-level="row">One job, expanded</button></div>
+  <div class="ctrl" id="rowCtrl"><span class="lbl">Job</span></div>
+  <div class="ctrl" id="loadWrap"><span class="lbl">Data</span><input type="file" id="jsonFile" accept="application/json" aria-label="Load a workflow JSON file"><button id="dlJson">Copy JSON</button></div>
+</header>
+
+<main>
+  <div id="canvasWrap">
+    <svg id="graph" role="img" aria-label="Rows of jobs with their tasks, tool attachments, sources and opportunities"></svg>
+    <div class="hint">drag to pan · scroll to zoom · click a task, a source or an opportunity · click a job name to expand it</div>
+  </div>
+  <aside id="panel"><div class="empty">Click a task to see how it is done today, where the tool attaches, and the sources behind it. Click a job name to expand that row.</div></aside>
+</main>
+
+<footer>
+  <div class="key"><span class="lbl">Marks</span><span><i class="sw card"></i>a task someone does today</span><span><i class="sw t"></i>tool automates, or is new here</span><span><i class="sw ta"></i>tool assists</span><span><i class="sw o"></i>opportunity wired into a job</span><span>dashed wire: hand-over between jobs</span></div>
+  <div class="key"><span class="lbl">Confidence ring</span><span>one segment per source<span class="ramp"><i style="background:var(--c0)"></i><i style="background:var(--c20)"></i><i style="background:var(--c40)"></i><i style="background:var(--c60)"></i><i style="background:var(--c80)"></i><i style="background:var(--c100)"></i></span>0 gap · 20 judged · 40 proxy · 50 operator claim · 60 derived · 70 peer-reviewed, transferred · 80 government data · 90 regulation or tariff read · 100 arithmetic. The number is the weakest source.</span></div>
+  <div class="key"><span class="lbl">Opportunity kinds</span><span><i class="kd" style="background:var(--k-energy)"></i>energy</span><span><i class="kd" style="background:var(--k-economic)"></i>economic</span><span><i class="kd" style="background:var(--k-social)"></i>social</span><span><i class="kd" style="background:var(--k-space)"></i>space</span><span><i class="kd" style="background:var(--k-water)"></i>water</span><span><i class="kd" style="background:var(--k-materials)"></i>materials</span></div>
+</footer>
+
+<script id="data" type="application/json">
+{
+ "sources":{
+  "rts19744":{"t":"City of Vancouver RTS 19744 (30 Jun 2026): 111 E 5th, 'up to 40 MW'; cond. 1.11 heat recovery a material condition at the applicant's sole cost; 579 submissions","c":90,"status":"confirmed, re-checked","url":"https://council.vancouver.ca/20260714/documents/rr1.pdf","ref":"pp.14–18, 25"},
+  "lbnl2024":{"t":"Shehabi et al., LBNL 2024 US Data Center Energy Usage Report: 2-socket server 600 W (2023); idle 36%; colocation utilisation 21→35%","c":80,"status":"confirmed","url":"https://eta-publications.lbl.gov/publications/2024-lbnl-data-center-energy-usage-report","ref":"Fig 3.1–3.6"},
+  "rvo2018":{"t":"RVO, Kansenkaart Warmte uit Datacenters (2018): 4.38 MWh per m² server floor per year; receiver radii at 5-year payback; 1,000 GJ/ha","c":70,"status":"to retrieve","ref":"handoff §5–6"},
+  "edmParcel":{"t":"Edmonton Property Information: total_gross_area, zoning, year_built per parcel; Rooflines 2019: building height","c":80,"status":"confirmed","url":"https://data.edmonton.ca/d/dkk9-cj3x","ref":"dkk9-cj3x; jpxi-a9a5"},
+  "vanFoot":{"t":"Vancouver building footprints 2009 (LiDAR) and 2015; height fields unverified; gross floor area by parcel not yet found","c":60,"status":"unverified","url":"https://opendata.vancouver.ca/explore/dataset/building-footprints-2009/information/"},
+  "opClaims":{"t":"Operator capacity claims for the 13 sites (Cologix 4 MW VAN4, 2 MW VAN2; eStruxture 2.4 MW; Qu 2.5–3 MW; Hut 8 0.6–1 MW)","c":50,"status":"operator claim","ref":"sources/01"},
+  "permits":{"t":"Permit records: DP-2022-00689 (175 W Cordova, air-cooled chillers, transformer replacement); Edmonton permits API (RTUs 'AC only' at 4130 95 St; Hall 7 & 8 expansion at 17204 114 Ave)","c":90,"status":"confirmed","url":"https://www.shapeyourcity.ca/175-w-cordova-st"},
+  "fieldlog":{"t":"GP1 field log: paired meter and body readings at 13 sites","c":80,"status":"in hand","ref":"Field log sheet"},
+  "heatPhys":{"t":"Heat ≈ electricity drawn; Q = V × 1.16 × ΔT (Green Grid WP29); ISO/IEC 30134-6 ERF","c":100,"status":"in hand","ref":"Formulas sheet"},
+  "lorenz":{"t":"Lorenz COP, η 0.50–0.60 (Reinholdt et al. 2018; Pieper et al. 2020); air 25–35 °C, liquid 50–60 °C (Alissa; Wahlroos)","c":70,"status":"in hand","ref":"Formulas sheet"},
+  "femp":{"t":"US DOE FEMP BMP #10: evaporation ≤ Q ÷ h_fg (~1.5 L/kWh); blowdown = E ÷ (C−1); WUE (ISO 30134-9)","c":100,"status":"in hand","ref":"Formulas sheet"},
+  "ashrae":{"t":"ASHRAE TC 9.9 inlet 18–27 °C; free-cooling hours by bin from CWEC hourly weather","c":80,"status":"in hand; CWEC files blocked","ref":"Formulas sheet"},
+  "cwec":{"t":"CWEC 2020 hourly weather, Vancouver Intl and Edmonton Intl; ECCC normals (HDD)","c":0,"status":"blocked (ECCC FTP, normals pages)","url":"https://climate.weather.gc.ca/prods_servs/engineering_e.html"},
+  "gridBC":{"t":"BC 2025 consumption-based grid factor 22.8 tCO2e/GWh (2024: 9.9)","c":80,"status":"confirmed","url":"https://www2.gov.bc.ca/gov/content/environment/climate-change/data/electricity"},
+  "gridAB":{"t":"Alberta 335 g CO2e/kWh (2024, generation-based), citing NIR 2026 Table A7-10","c":80,"status":"confirmed; NIR table unverified","url":"https://www.alberta.ca/albertas-greenhouse-gas-emissions-reduction-performance"},
+  "marginal":{"t":"Long-run marginal grid factor for BC and Alberta","c":0,"status":"gap (Alberta offset displacement factor 0.52–0.55 as a lead; BC none)","url":"https://open.alberta.ca/publications/methodology-for-the-electricity-displacement-factor"},
+  "eccc":{"t":"ECCC Emission Factors v4.0: diesel 2,681 g CO2/L; IPCC GWPs; AP-42 §3.4 NOx/PM","c":90,"status":"in hand","ref":"Formulas sheet"},
+  "iso9613":{"t":"ISO 9613-2:2024; screen Lp ≈ Lw − 20·log10(r) − 8; NoiseModelling (open source)","c":80,"status":"in hand","ref":"Formulas sheet"},
+  "rule012":{"t":"AUC Rule 012 (eff. 30 Sep 2024): Table 1 night 40–56 dBA Leq; s.4.5 dBC−dBA ≥ 20 and tone 20–250 Hz → +5 dBA; data centres not a 'facility'","c":90,"status":"confirmed (interior Table 1 rows to re-check)","url":"https://media.auc.ab.ca/prd-consultation/sites/2/2023/11/2024-09-30-Rule012.pdf","ref":"s.2.1; s.4.5; s.1.1(2)"},
+  "bylaw14600":{"t":"Edmonton Bylaw 14600 ss.19–22: 65 dBA day / 50 night at the residential property line; no Leq or continuous-noise provision","c":90,"status":"confirmed","url":"https://edmonton.ca/sites/default/files/public-files/C14600.pdf"},
+  "bylaw6555":{"t":"Vancouver By-law 6555 (cons. 14 Jul 2026): continuous >3 min in 15; intermediate→quiet 60 day / 50 night; dBC only for amplified music","c":90,"status":"confirmed","url":"https://bylaws.vancouver.ca/6555c.PDF","ref":"ss.1, 2.1–2.4, 3.1(a)"},
+  "synapseNIA":{"t":"Synapse NIA (OpenCycle, Rev 1, 24 Mar 2026): R01 72.4 dBA pre-mitigation vs PSL 53.0; peer review found 30 issues","c":50,"status":"consultant claim","url":"https://www.olds.ca/media/egilzm3p/30732_x0011_tp-31-noise-impact-assessment_000011.pdf"},
+  "soundPower":{"t":"Plant sound power for typical urban colocation equipment (chillers, dry coolers, generators)","c":0,"status":"gap"},
+  "wes":{"t":"BC Hydro West End Substation CPCN (10 Nov 2025): downtown 'no room to add more capacity'; 400 MVA in service July 2032","c":90,"status":"confirmed","url":"https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/corporate/regulatory-planning-documents/regulatory-filings/project/2025-11-10-bch-cpcn-west-end-substation-proj-initial-app.pdf","ref":"s.2.1–2.4"},
+  "queue":{"t":"BC Hydro Load Interconnection Queue Business Practice v1.5: queue 'not publicly available'","c":90,"status":"confirmed","url":"https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/accounts-billing/electrical-connections/business-practice-load-interconnection-queue-mgmt.pdf","ref":"s.3.2"},
+  "cfd":{"t":"BC Hydro 2026 Call for Demand RFA: 100 + 300 MW; 10–145 MW per project; ≥10% premium; curtailment; heat-recovery-ready inside the 10% environmental weight","c":90,"status":"confirmed","url":"https://app.bchydro.com/content/dam/BCHydro/customer-portal/documents/accounts-billing/electrical-connections/2026-cfd-request-for-applications.pdf","ref":"s.9.2 Table 1; Sch. 2–3"},
+  "aeso":{"t":"AESO: 1,200 MW interim limit fully allocated (GLDC 970; Keephills I 230); Edmonton load ≈ 1,400 MW; Phase 2A BYOG 1,600 MW proposed (Jun 2026)","c":90,"status":"confirmed, re-checked","url":"https://www.aeso.ca/grid/connecting-to-the-grid/large-load-projects"},
+  "woodcroft":{"t":"EPCOR Woodcroft Deficiency Report (Rev 1, 12 Sep 2025): N-1 firm 76 MVA; peak 66.2 → 76.3 MVA by 2032","c":90,"status":"confirmed","url":"https://www.aeso.ca/assets/Uploads/projects/2582/EDTI-Distribution-Deficiency-Report-2025-Updated.pdf","ref":"Tables 10–12"},
+  "irp":{"t":"BC Hydro 2025 IRP body (BCUC proceeding 1391)","c":0,"status":"blocked (HTTP 403)"},
+  "neu9552":{"t":"False Creek NEU By-law 9552 Sch. C: energy charge $65.172/MWh; credit for heat returned = 50% → $32.59/MWh","c":90,"status":"confirmed, re-checked","url":"https://bylaws.vancouver.ca/9552c.PDF","ref":"Sch. C Parts 2–4"},
+  "fortum":{"t":"Fortum Avoin kaukolämpö purchase prices from 1 May 2026: €11 (≥16.1 °C) to €50/MWh (≤−8 °C)","c":90,"status":"confirmed, re-checked","url":"https://www.fortum.com/fi/lammitys-ja-jaahdytys/yritykset-ja-taloyhtiot/kaukolampoa-yrityksille/avoin-kaukolampo/avoin-kaukolampo-ostohinnat"},
+  "exergi":{"t":"Stockholm Exergi: 'indikativt 2 MSEK årligen för 1 MW vid 5 000 timmar' → 400 SEK/MWh; supply normally 68 °C","c":50,"status":"utility claim","url":"https://www.stockholmexergi.se/wp-content/uploads/2023/05/Produktblad_tjanster_Oppen-Fjarrvarme.pdf"},
+  "fortis":{"t":"FortisBC Rate 3 (1 Jul 2026): variable ≈ $9.12/GJ → ≈ $38.6/MWh heat at 85%; BC carbon tax zero since 1 Apr 2025","c":60,"status":"confirmed + derived","url":"https://www.cdn.fortisbc.com/libraries/docs/default-source/about-us-documents/regulatory-affairs-documents/gas-utility/rateschedule_3.pdf"},
+  "abgas":{"t":"Alberta DERS gas Oct 2026 $1.458/GJ; ATCO North Mid-Use $1.062/GJ → ≈ $11/MWh heat","c":60,"status":"confirmed + derived","url":"https://www.ucahelps.alberta.ca/regulated-rates.aspx"},
+  "parssinen":{"t":"Pärssinen et al. 2019: heat-pump capex €60 k / €575 k (2 MW) / €5.5 M; DH pays marginal cost − €5/MWh; payback 1.8–5.1 yr","c":70,"status":"confirmed (open access)","url":"https://acris.aalto.fi/ws/portalfiles/portal/29723097/ELEC_parssinen_et_al_waste_heat_sustainability.pdf"},
+  "crf":{"t":"CRF = i / (1 − (1+i)^−n) (NREL ATB); LCoH (IEA SHC Task 54); TCO (Barroso ch. 8)","c":100,"status":"in hand","ref":"Formulas sheet"},
+  "persson":{"t":"Persson et al. 2019 distribution cost: C1 = 212 €/m, C2 = 4,464 €/m²","c":70,"status":"confirmed (open access)","url":"https://vbn.aau.dk/ws/files/330989757/1_s2.0_S0360544219306097_main.pdf"},
+  "lygnerud":{"t":"Lygnerud & Werner 2018: ~6% of recoveries lost per year; risk premium 'lower than often presumed'","c":40,"status":"blocked (paywall; abstract only)","ref":"doi 10.1016/j.energy.2018.03.047"},
+  "g9425":{"t":"BCUC Order G-94-25: Creative Energy's $38.5 M capex schedule rejected; developer bears costs above $15 M (C-1-20)","c":90,"status":"confirmed","url":"https://www.ordersdecisions.bcuc.com/bcuc/orders/en/522707/1/document.do"},
+  "neuReport":{"t":"NEU rates report RTS 18251 (Oct 2025): 47 buildings, 667,000 m²; 71% renewable; gas $2.23/GJ; RNG rider","c":90,"status":"confirmed","url":"https://council.vancouver.ca/20251112/documents/spec1d.pdf"},
+  "energize":{"t":"Energize Vancouver (By-law 13472): ≥4,645 m² report; disclosure opt-in; enforcement paused 21 May 2026","c":40,"status":"confirmed; data not retrieved","url":"https://vancouver.ca/files/cov/vancouver-annual-greenhouse-gas-and-energy-limits-by-law-faq.pdf"},
+  "edmBench":{"t":"Edmonton building benchmarking: voluntary; dashboard pending","c":40,"status":"confirmed","url":"https://www.edmonton.ca/programs_services/environmental/building-energy-benchmarking-program"},
+  "ceud":{"t":"NRCan Comprehensive Energy Use Database intensities (BC, Alberta)","c":0,"status":"blocked (robots)"},
+  "ratio":{"t":"Canadian summer/winter heat-demand ratio","c":0,"status":"gap; compute from CWEC + degree-days (Blatchford gives 46,789 MWh/yr, 34,543 kW peak)"},
+  "hotmaps":{"t":"Hotmaps CM excess-heat transport method (CC BY 4.0); THERMOS","c":70,"status":"to retrieve","ref":"handoff §6"},
+  "drake":{"t":"Drake Landing BTES efficiency measured 0.06 → 0.54 over ten years (Mesquita et al. 2017)","c":80,"status":"confirmed","url":"https://proceedings.ises.org/paper/swc2017/swc2017-0033-Mesquita.pdf"},
+  "wsa":{"t":"BC Water Sustainability Regulation Sch. A items 4 and 9: licence required for open-loop cooling and heat exchange","c":90,"status":"confirmed (King's Printer)","url":"https://free.bcpublications.ca/civix/document/id/complete/statreg/36_2016"},
+  "gwells":{"t":"BC GWELLS (>100,000 wells; aquifer summaries); Alberta AWWID; AGS corridor atlas INF 140 and OFR 2017-05","c":70,"status":"confirmed (fields unverified)","url":"https://apps.nrs.gov.bc.ca/gwells/"},
+  "abDirective":{"t":"Alberta Water Wells and Ground Source Heat Exchange Systems Directive (open-loop / ATES rule)","c":0,"status":"blocked (HTTP 520)","url":"https://open.alberta.ca/publications/9781460141588"},
+  "sewers":{"t":"Vancouver 'Sewer mains' (type); Edmonton 'Drainage_Pipe Segments' (no diameter)","c":40,"status":"confirmed, partial","url":"https://data.edmonton.ca/d/bh8y-pn5j"},
+  "ess":{"t":"BC ESS / JIBC group lodging 3.5 m² per person; Edmonton shelter standard 2 m between beds; Health Canada cleaner-air spaces MERV 13+, 2–3 ACH","c":80,"status":"in hand","ref":"Formulas sheet"},
+  "solar":{"t":"Vancouver Solar Access Guidelines (2024, am. 2026): fall-equinox shadows 10:00–16:00","c":90,"status":"in hand","ref":"Formulas sheet"},
+  "cimd":{"t":"StatCan Canadian Index of Multiple Deprivation 2021 (DA level); Census 2021 DA boundaries","c":80,"status":"confirmed","url":"https://open.canada.ca/data/en/dataset/ec6dc8e7-2fa0-4e49-8969-38541ca0a34d"},
+  "synapseDec":{"t":"AUC Decision 30732-D01-2026 (Synapse, Olds): denied on siting; ~700 homes within 800 m; noise not decisive","c":90,"status":"confirmed","url":"https://prd-api-efiling20.auc.ab.ca/Anonymous/DownloadPublicDocumentAsync/861007"},
+  "horizons":{"t":"Horizons: servers ~6 yr; plant 15–25; shell up to 40; network 40–50 (handoff rule 7); control in colocation (Greene; Monstadt and Saltzman)","c":70,"status":"in hand","ref":"handoff §3"},
+  "seattle":{"t":"Seattle Ordinance 124727: 10-year term + two 10-year renewals; fee $12,247/yr; right-of-way only, no heat price","c":90,"status":"confirmed","url":"https://seattle.legistar.com/LegislationDetail.aspx?ID=2214898&GUID=92301835-7E2A-43DD-97A6-2CDC3A52711F"},
+  "agreements":{"t":"Heat-pump ownership, duration and price basis at Stockholm, Tallaght, Odense","c":0,"status":"gap; none published"},
+  "floor":{"t":"Operator floor price at any Canadian site","c":0,"status":"gap; user session"},
+  "title":{"t":"Ownership: LTSA title $11.06 per search; BC Assessment lookup (no owner names); Alberta SPIN2","c":20,"status":"not retrieved"},
+  "dell":{"t":"Dell carbon-footprint PDFs: R740 26.3 kg, R540 25.4 kg (2U); R650 21.25 kg (1U); Danczak 2018 rare earths; Graedel 2011 copper","c":60,"status":"manufacturer / in hand","url":"https://i.dell.com/sites/csdocuments/corpcomm_docs/en/carbon-footprint-poweredge-r740.pdf"},
+  "clf":{"t":"Carbon Leadership Forum WBLCA benchmark 461 kgCO2e/m² — no data-centre benchmark","c":40,"status":"proxy","ref":"matrix MA-20"},
+  "nonComp":{"t":"Non-compensatory method: Munda; Cinelli et al. 2014; Rowley et al. 2012; handoff rule 1","c":100,"status":"in hand","ref":"handoff §3"},
+  "cases":{"t":"GP1 Cases sheet: Manor Farm, Grange Castle, Synapse, 111 E 5th, Colt LON6, Tallaght, Stockholm; Odense and Mäntsälä figures to source","c":60,"status":"in hand; many cells 'confirm'","ref":"Cases sheet"},
+  "brief":{"t":"ARCH 540 A2 brief: evaluation cases (typical, boundary, missing information, repeated runs)","c":100,"status":"in hand"},
+  "bins":{"t":"GP1 Bins sheet: 19 receivers noted; 22 precedents (mostly operator claims); policy levers","c":40,"status":"in hand","ref":"Bins sheet"},
+  "rule9":{"t":"Handoff rule 9: diagrammatic only; nothing beyond public planning records","c":100,"status":"rule","ref":"handoff §3"},
+  "testimony":{"t":"GP1 Testimony sheet; RTS 19744 and AUC 30732 submission counts","c":80,"status":"in hand"}
+ },
+ "roles":[
+  {"id":"planner","name":"Municipal planner","org":"City of Vancouver; City of Edmonton","blurb":"Receives the application, refers it out, runs consultation, writes the staff report, recommends conditions.",
+   "steps":[
+    {"id":"pl1","name":"Receive and check the application","asis":"Reads the rezoning or permit file; checks use against zoning (111 E 5th: I-1A → CD-1 to add Bulk Data Storage Use).","inputs":"Application; zoning bylaw.","output":"File opened; use question framed.","time":"Days.","errors":"The stated load is the applicant's figure and is reported as such.","src":["rts19744"],"tool":{"mode":"assist","text":"The tool's sizing estimate (from the parcel) sits beside the applicant's figure, labelled, so the planner sees the gap before referring out.","rep":"3D massing on the parcel with the range and the claim."}},
+    {"id":"pl2","name":"Refer to engineering: energy, water, noise","asis":"Sends the file to the NEU and engineering for heat-recovery viability, cooling-water recirculation (VBBL), and to a noise reviewer.","inputs":"The consultant reports.","output":"Engineering comments.","time":"Weeks.","errors":"Each reviewer sees one burden or one benefit; nobody sees them side by side.","src":["rts19744","solar"],"tool":{"mode":"automate","text":"One screen: heat quantity and temperature, water, noise and carbon from the same sizing, each with its source.","rep":"A match sheet: one row per element with its range and confidence."},"hands":["de1","ac1"]},
+    {"id":"pl3","name":"Run public consultation","asis":"Notification, open house, online comment form, phone and email (579 submissions; 275 of 289 online opposed).","inputs":"Boards; staff summary.","output":"Submission counts and themes.","time":"Weeks to months; referrals back for more.","errors":"Counts voices, not exposure; the technical reports are unreadable to most residents.","src":["rts19744","testimony","cimd"],"tool":{"mode":"new","text":"The resident view: an address instead of a load; sound at the window; who bears and who receives on one map.","rep":"Choropleth of deprivation with the noise contour and heat radius over it."},"hands":["re2"]},
+    {"id":"pl4","name":"Write the staff report and conditions","asis":"Drafts conditions (heat delivery as a material condition at the applicant's sole cost; BC Hydro primary service; DCL $0).","inputs":"Engineering comments; consultation.","output":"Referral report with conditions.","time":"Weeks.","errors":"Conditions are written without a receiver or a price; 'heat recovery ready' can satisfy them.","src":["rts19744","nonComp"],"tool":{"mode":"automate","text":"The verdict card: each condition pass / partial / fail with its reason, the blocker named, burdens recorded beside. 'No' is a valid output.","rep":"Verdict card per match."},"hands":["pl5"]},
+    {"id":"pl5","name":"Council or hearing","asis":"Council hears, approves, refuses or refers back (111 E 5th referred back 21 Jul 2026).","inputs":"Report; submissions.","output":"Decision.","time":"Months.","errors":"Weighted judgment; burdens and benefits netted in the room.","src":["rts19744","synapseDec"],"tool":null,"hands":["rs3"]}
+   ]},
+  {"id":"de","name":"District-energy engineer","org":"Creative Energy; False Creek NEU; EPCOR (Edmonton downtown); Blatchford","blurb":"Assesses a heat source, checks reach and demand, sizes the connection, makes the business case, files with the regulator, contracts.",
+   "steps":[
+    {"id":"de1","name":"Assess the source: temperature, quantity, constancy","asis":"Asks the operator for load and cooling type; estimates recoverable heat; judges constancy (data centres are the most constant source and among the least permanent).","inputs":"Operator figures; cooling design.","output":"Source profile.","time":"Weeks.","errors":"Temperature often missing; nameplate used as actual.","src":["heatPhys","lorenz","lbnl2024","opClaims"],"tool":{"mode":"automate","text":"Heat quantity as a range from the sizing, temperature from cooling type (two runs if unknown), Lorenz COP for the lift.","rep":"Temperature-cascade section, to scale, with a range bar beneath."}},
+    {"id":"de2","name":"Check network reach and demand","asis":"Maps the service area, candidate buildings and their heat demand; checks density.","inputs":"Service area; benchmarking data; floor areas.","output":"Candidate receivers; load estimate.","time":"Months.","errors":"Vancouver demand data is opt-in; Edmonton has none; seasonal mismatch ignored.","src":["rvo2018","persson","hotmaps","energize","edmBench","ceud","ratio"],"tool":{"mode":"automate","text":"Radius search by receiver type; demand from disclosed data where it exists, else intensity × footprint, tagged as proxy; minimum heat density; distribution cost by Persson.","rep":"Map layer: receiver radii from the parcel; buildings shaded by demand confidence; service area outlined."}},
+    {"id":"de3","name":"Size the heat pump, storage and connection","asis":"Selects heat-pump lift and capacity; considers seasonal storage; routes the connection.","inputs":"Source profile; demand profile; ground.","output":"Plant sizing.","time":"Months.","errors":"Summer surplus has nowhere to go without storage; ground data rarely on the same sheet.","src":["lorenz","drake","parssinen"],"tool":{"mode":"assist","text":"Heat-pump output and storage volume (ρ c V ΔT × efficiency 30–70%) from the same inputs; the hydrogeologist's layer alongside.","rep":"Storage drawn as a block under the parcel; heat pump as a stage in the cascade section."},"hands":["hy1"]},
+    {"id":"de4","name":"Business case: what to pay for heat","asis":"Avoided fuel cost vs the price the operator will accept; capex recovery; risk of losing the source.","inputs":"Tariffs; capex; operator's floor (never disclosed).","output":"A price offer.","time":"Months.","errors":"The floor is assumed; the risk term is folklore.","src":["neu9552","fortum","exergi","fortis","abgas","parssinen","crf","lygnerud","floor"],"tool":{"mode":"automate","text":"Price window: floor from annualised capture capex minus cooling savings, bounded by revealed purchase prices; ceiling from published gas and district-energy tariffs; overlap = economic condition passes.","rep":"Two ranges on one price axis (CAD/MWh of heat), floor grey, ceiling red."}},
+    {"id":"de5","name":"Regulatory filing","asis":"Files capex and rates with BCUC or the AUC (G-94-25: Creative Energy's $38.5 M schedule rejected).","inputs":"Business case.","output":"Order.","time":"A year or more.","errors":"Ratepayer protection can reject the capex that would make the heat deal work.","src":["g9425","neuReport"],"tool":null},
+    {"id":"de6","name":"Heat-supply agreement","asis":"Term, price basis, who owns the heat pump, termination; nothing published anywhere.","inputs":"Lease horizon; plant life; network life.","output":"Contract.","time":"Months.","errors":"Where many European deals die; a connection must outlast several server refreshes.","src":["horizons","seattle","agreements"],"tool":{"mode":"assist","text":"Horizons drawn on one axis (server 6, plant 15–25, shell 40, network 40–50, lease) with the contract across them; control by typology.","rep":"Timeline bars."},"hands":["op4"]}
+   ]},
+  {"id":"ec","name":"Applicant's energy consultant","org":"e.g. Hoare Lea at Manor Farm; DCE at Grange Castle","blurb":"Takes the client's load, designs cooling, writes the energy statement, accounts for water, refrigerants and carbon.",
+   "steps":[
+    {"id":"ec1","name":"Take IT load and PUE from the client","asis":"Load, redundancy and PUE target from the operator's brief (Manor Farm PUE < 1.30).","inputs":"Client brief.","output":"Design load.","time":"Days.","errors":"Nameplate; utilisation never stated.","src":["lbnl2024","opClaims"],"tool":{"mode":"assist","text":"The outside-in estimate as a check on the brief; utilisation band made explicit.","rep":"Range bar beside the design load."}},
+    {"id":"ec2","name":"Cooling design and free-cooling hours","asis":"Air vs liquid; dry coolers vs towers; hours of free cooling from weather bins.","inputs":"ASHRAE envelopes; weather file.","output":"Cooling schedule; supply temperature.","time":"Weeks.","errors":"Weather files hard to get; approach temperatures assumed.","src":["ashrae","cwec","lorenz"],"tool":{"mode":"automate","text":"Free-cooling hours from CWEC bins for each city; cooling type sets the heat temperature downstream.","rep":"Hours-by-month chart, both cities."}},
+    {"id":"ec3","name":"Energy statement: heat recovery 'ready'","asis":"A paragraph on heat recovery; coils could give 20–30 °C in future (Grange Castle); no receiver named.","inputs":"Cooling design.","output":"Energy statement.","time":"Weeks.","errors":"'Ready' earns points without a receiver or a temperature anyone can use.","src":["heatPhys","cfd"],"tool":{"mode":"automate","text":"ERF against the German benchmark and the actual receivers in reach, so 'ready' becomes a quantity, a temperature and a named receiver.","rep":"Match sheet row with the ERF and the receiver list."},"hands":["pl2"]},
+    {"id":"ec4","name":"Water, refrigerants and generators","asis":"Make-up water, blowdown, refrigerant charge and leak rate, generator testing hours and emissions.","inputs":"Equipment schedules.","output":"Figures in the statement.","time":"Weeks.","errors":"Water behind the electricity never counted; testing hours rarely published (Manor Farm 564 h/yr).","src":["femp","eccc"],"tool":{"mode":"automate","text":"Evaporation ≤ Q ÷ h_fg; blowdown; WUE; refrigerant CO2e = charge × 3% × GWP; generator CO2 and NOx from AP-42.","rep":"Flow diagram for water; schedule for emissions."}},
+    {"id":"ec5","name":"Carbon accounting","asis":"Scope 1 and 2 on the annual-average grid factor.","inputs":"Electricity; fuel.","output":"tCO2e.","time":"Days.","errors":"No marginal factor; the two provinces are 15× apart and the same building reads differently.","src":["gridBC","gridAB","marginal"],"tool":{"mode":"automate","text":"Average and long-run marginal side by side; allocation rule for heat-pump electricity shown two ways.","rep":"Twin bars per city; marginal bar hatched where it is an assumption."}}
+   ]},
+  {"id":"ac","name":"Acoustic consultant","org":"applicant's consultant (OpenCycle at Synapse); municipal peer reviewer (Englobe for Olds)","blurb":"Builds the plant list, surveys receptors, models propagation, compares to the limit, proposes mitigation, writes the NIA.",
+   "steps":[
+    {"id":"ac1","name":"Plant list and sound power","asis":"Chillers, dry coolers, generators, fans from the schedules; manufacturer sound-power data.","inputs":"Equipment schedules.","output":"Source list.","time":"Days.","errors":"Typical sound power for urban colocation plant is not public.","src":["soundPower","permits"],"tool":{"mode":"assist","text":"A default plant list from the sizing (kW of cooling → number and class of units) with typical sound power, flagged as proxy until a schedule exists.","rep":"Schedule with a proxy flag."}},
+    {"id":"ac2","name":"Receptor survey","asis":"Nearest dwellings, distances, category (road proximity), background levels.","inputs":"Site visit; maps.","output":"Receptor list.","time":"Days.","errors":"'Heavily travelled road' claims unsupported (Olds peer review).","src":["rule012","fieldlog"],"tool":{"mode":"automate","text":"Dwellings within 1.5 km from footprints; category from road layers; the field log's sidewalk reading as a calibration point.","rep":"Map of receptors with distances."}},
+    {"id":"ac3","name":"Propagation model","asis":"ISO 9613-2 in commercial software; low-frequency 'for information only'.","inputs":"Sources; receptors; terrain.","output":"dBA at each receptor.","time":"Weeks.","errors":"Calculation errors found in peer review; tonal components under-reported.","src":["iso9613","synapseNIA"],"tool":{"mode":"automate","text":"Screen (Lp ≈ Lw − 20 log r − 8) first, full ISO 9613-2 in NoiseModelling where a schedule exists; dBC − dBA flag.","rep":"Map contour of dBA at night."}},
+    {"id":"ac4","name":"Compare with the limit","asis":"Rule 012 PSL in Alberta; Bylaw 14600 at the property line; By-law 6555 by zone pair in Vancouver.","inputs":"Modelled levels; the rule.","output":"Compliance table.","time":"Days.","errors":"The limits differ in kind: Edmonton instantaneous, Vancouver continuous, Rule 012 Leq with a tonal penalty.","src":["rule012","bylaw14600","bylaw6555"],"tool":{"mode":"automate","text":"Each receptor against the local rule, with the rule's text and section cited; recorded beside the match, never netted.","rep":"Threshold table."},"hands":["pl2"]},
+    {"id":"ac5","name":"Mitigation and the NIA report","asis":"Barriers, attenuators, relocation; the report goes to the regulator; residents read it last.","inputs":"Model.","output":"NIA.","time":"Weeks.","errors":"Residents get a number, not a sound.","src":["synapseNIA"],"tool":{"mode":"new","text":"The resident picks a point on the map and hears plant noise scaled relative to a reference (traffic, a fridge). Relative only: a speaker cannot reproduce a calibrated level.","rep":"'Listen here' button on the contour map."},"hands":["re3"]}
+   ]},
+  {"id":"gr","name":"Grid-connection engineer","org":"BC Hydro; AESO; EPCOR Distribution","blurb":"Receives the request, checks eligibility and the queue, runs the impact study, makes the offer with its date and terms.",
+   "steps":[
+    {"id":"gr1","name":"Receive the connection request","asis":"Load, location, redundancy; ≥10 MW in BC goes to the competitive Call; ≥75 MW in Alberta to the large-load process.","inputs":"Request.","output":"Queue position (confidential in BC).","time":"Weeks.","errors":"No public map of where capacity exists.","src":["queue","cfd","aeso"],"tool":{"mode":"assist","text":"Connection size from the sizing; the eligibility route named (Call stream, large-load process, or ordinary service).","rep":"Status card."}},
+    {"id":"gr2","name":"Check regional and substation headroom","asis":"System impact study against the long-term plan and the local substation.","inputs":"LTP; substation ratings; deficiency reports.","output":"Headroom or constraint.","time":"Months.","errors":"Downtown Vancouver: 'no room to add more capacity' until 2032; Edmonton: interim cap allocated; Woodcroft deficit by 2032 before any large load.","src":["wes","aeso","woodcroft","irp"],"tool":{"mode":"assist","text":"A status card per city from the public record, with the governing document, its date and the next milestone. The tool stops here and names the study it would need.","rep":"Status card with 'stop: project-specific study required'."}},
+    {"id":"gr3","name":"Offer with date and curtailment terms","asis":"Connection date; price premium; curtailment hours (Call: ≥10% of load, 36 events, 144 h/yr).","inputs":"Study.","output":"Offer.","time":"Months to years.","errors":"Heat recovery scored at a fraction of 10%; a site with no receiver can score it.","src":["cfd"],"tool":{"mode":"assist","text":"Curtailment hours and UPS/battery flexibility shown as a capacity the site could offer back.","rep":"Stacked bar: IT load, overhead, reserved capacity, flexible share."},"hands":["op1"]}
+   ]},
+  {"id":"op","name":"Data-centre operator / facilities lead","org":"Cologix; eStruxture; Qu; Hut 8; TELUS; Westbank as applicant","blurb":"Plans capacity, runs the plant, reviews any crossing of the perimeter, manages leases and tenants, refreshes hardware, publishes figures.",
+   "steps":[
+    {"id":"op1","name":"Capacity planning and the published figure","asis":"Nameplate design capacity (2–4 MW typical downtown); actual utilisation internal.","inputs":"Business plan.","output":"A capacity claim on the website.","time":"Ongoing.","errors":"The claim is what everyone downstream uses; the Hut 8 '900 ft²' figure shows how loose these are.","src":["opClaims","permits","lbnl2024"],"tool":{"mode":"assist","text":"The outside-in estimate compared with the claim; the operator can enter the real load privately in a user session to confirm the range.","rep":"Range bar with the claim as a grey tick."}},
+    {"id":"op2","name":"Plant operation: cooling mode, generator testing","asis":"Seasonal cooling modes; monthly generator tests; refrigerant maintenance.","inputs":"BMS; weather.","output":"Operating data (rarely shared).","time":"Continuous.","errors":"Operating data is organisational, not technical; sharing it is a decision.","src":["ashrae","eccc"],"tool":{"mode":"assist","text":"Testing hours and cooling hours as inputs the operator can supply; defaults from the literature otherwise, tagged.","rep":"Schedule."}},
+    {"id":"op3","name":"Security review of any crossing","asis":"Internal; yes or no, unexplained; tenants' compliance teams weigh in.","inputs":"The proposal.","output":"A position.","time":"Unknown.","errors":"Invisible to planners and residents; the public record holds only the fence line.","src":["rule9"],"tool":{"mode":"unchanged","text":"Stays with the operator. The tool separates pipe-or-cable crossings from people crossings and scores the second 'judged, harder'. Diagrammatic only.","rep":"Diagram of the perimeter with two kinds of crossing; no plan of a real facility."}},
+    {"id":"op4","name":"Leases, tenants and who controls the heat exit","asis":"Landlord controls shell, plant and heat exit; tenants control servers and load; lease terms private.","inputs":"Leases.","output":"Control map (unwritten).","time":"Per lease.","errors":"Nobody's explicit job to write it down.","src":["horizons","title"],"tool":{"mode":"assist","text":"Party table: owns / controls / pays / receives / bears / needs, filled by typology and corrected in a user session.","rep":"Party table; red cells where a party bears without receiving."}},
+    {"id":"op5","name":"Hardware refresh and disposal","asis":"IT asset manager and an ITAD contractor; ~6-year cycle; drives shredded or wiped.","inputs":"Asset register.","output":"Disposal records.","time":"Per cycle.","errors":"Server mass and rare-earth content rarely recorded.","src":["dell","clf"],"tool":{"mode":"automate","text":"Servers ≈ IT load ÷ W per server; e-waste = servers × mass ÷ lifespan; rare earth per drive; copper contrast.","rep":"Schedule: kg per year with each line's source."}}
+   ]},
+  {"id":"hy","name":"Hydrogeologist / geoexchange engineer","org":"consultant to the utility or developer; province as licensing gate","blurb":"Reads well records and aquifer maps, sizes ground storage, applies for the licence, writes the memo.",
+   "steps":[
+    {"id":"hy1","name":"Well records and aquifer mapping","asis":"GWELLS in BC; AWWID and AGS atlases in Alberta; sewer trunks for sewage heat.","inputs":"Databases.","output":"Ground profile.","time":"Weeks.","errors":"Databases downloadable but field lists unverified; Edmonton sewers lack diameters.","src":["gwells","sewers"],"tool":{"mode":"assist","text":"Wells, aquifer extent and sewer mains drawn under the parcel from open data.","rep":"Map layer."}},
+    {"id":"hy2","name":"Size seasonal storage","asis":"Borehole or aquifer storage; efficiency 30–70%; Drake Landing as the Canadian benchmark.","inputs":"Summer surplus; ground properties.","output":"Storage volume.","time":"Weeks.","errors":"Efficiency climbs over years (0.06 → 0.54 at Drake Landing).","src":["drake"],"tool":{"mode":"automate","text":"Q = ρ c V ΔT × efficiency, shown as a range over the efficiency band.","rep":"Storage block under the parcel."},"hands":["de3"]},
+    {"id":"hy3","name":"Licence","asis":"BC: water licence required for open-loop heat exchange (WSR Sch. A item 9). Alberta: Directive; open-loop rule unresolved.","inputs":"Design.","output":"Application.","time":"Months.","errors":"Alberta rule unread (document blocked).","src":["wsa","abDirective"],"tool":{"mode":"automate","text":"Licence flag by province, with the regulation cited.","rep":"Flag on the map layer."}}
+   ]},
+  {"id":"em","name":"Emergency manager","org":"municipal emergency management; BC ESS","blurb":"Plans for heat waves, smoke, floods and outages; identifies spaces that could shelter people and sizes them.",
+   "steps":[
+    {"id":"em1","name":"Identify refuge, cooling and clean-air spaces","asis":"Community centres and libraries; a hardened building with backup power is never on the list.","inputs":"Hazard plan; building inventory.","output":"Candidate list.","time":"Annual.","errors":"Data centres are not asked.","src":["ess"],"tool":{"mode":"new","text":"Offerable rooms from the sizing (staffed space, meet-me rooms) with backup hours from the generator fuel.","rep":"3D massing with offerable floors highlighted."}},
+    {"id":"em2","name":"Size by standard","asis":"3.5 m² sleeping area per person; 2 m between beds; MERV 13+ and 2–3 ACH for smoke.","inputs":"Floor area; airflow.","output":"People sheltered.","time":"Days.","errors":"Never computed for a data centre.","src":["ess"],"tool":{"mode":"automate","text":"people = usable area ÷ 3.5 m²; volume served = cleaned airflow ÷ (2–3 ACH).","rep":"Number on the floor of the massing."},"hands":["op3"]}
+   ]},
+  {"id":"re","name":"Resident / neighbour","org":"ratepayers, taxpayers, heat customers; the people who bear the burdens","blurb":"Hears of the proposal, reads what they can, tries to understand noise and security, writes a submission, attends the hearing.",
+   "steps":[
+    {"id":"re1","name":"Hear of the proposal","asis":"Notification card, sign on the site, neighbour.","inputs":"Notice.","output":"Awareness.","time":"Weeks before the hearing.","errors":"Technical reports are unreadable without training.","src":["rts19744"],"tool":{"mode":"new","text":"Enter an address: the tool shows the site, the verdict in plain words and what reaches this address.","rep":"Relabelled view of the whole tool."}},
+    {"id":"re2","name":"Try to understand what reaches here","asis":"Noise as a number in an appendix; security as a fence; heat as a promise.","inputs":"Staff report; applicant boards.","output":"Questions.","time":"Evenings.","errors":"No way to hear the noise or see who gets the heat.","src":["bylaw6555","bylaw14600","cimd"],"tool":{"mode":"new","text":"Sound at the window (relative); the perimeter and what a crossing changes on this street; who bears and who receives on one map.","rep":"Contour map with 'listen here'; choropleth; perimeter diagram."}},
+    {"id":"re3","name":"Write a submission and attend the hearing","asis":"Online form, phone, email; testimony at the AUC (919 interveners at Synapse).","inputs":"What they understood.","output":"Submission.","time":"The hearing.","errors":"The record counts them; it rarely answers them.","src":["testimony","synapseDec"],"tool":{"mode":"assist","text":"The verdict card in plain words, with the blocker named, to cite in a submission.","rep":"Verdict card, resident wording."},"hands":["pl5"]}
+   ]},
+  {"id":"rs","name":"Researcher (GP1 / studio)","org":"Jenna; AI studio with Xun Liu","blurb":"Observes sites from public space, sizes them from outside, scouts new receivers, checks the rules against the cases, revises them.",
+   "steps":[
+    {"id":"rs1","name":"Observe from public space","asis":"13 sites, camera and sound meter; paired meter and body readings.","inputs":"The street.","output":"Field log; photographs.","time":"One visit per site.","errors":"Only what is visible.","src":["fieldlog"],"tool":{"mode":"unchanged","text":"Stays with a person. The field log is an input; the tool shows where observation disagrees with the record.","rep":"Photo cards pinned to the site."},"hands":["ac2"]},
+    {"id":"rs2","name":"Size the facility from outside","asis":"Nobody does this today; the first attempt for the mid review.","inputs":"Footprint, storeys, visible plant; RVO coefficient; LBNL per-server W.","output":"IT load as a range; heat as a range.","time":"Minutes once built.","errors":"Two-to-one range on heat where cooling type is unknown.","src":["rvo2018","lbnl2024","edmParcel","vanFoot","permits"],"tool":{"mode":"new","text":"Parcel → footprint × storeys → server floor → IT load range → heat range; compared with the claim and, at 111 E 5th, the one public figure.","rep":"3D block massing with a range slider."},"hands":["pl1","de1","ec1","op1"]},
+    {"id":"rs3","name":"Check the rules against the cases","asis":"Step T4 of the method: does the rule predict what happened at Manor Farm, Grange Castle, Synapse, 111 E 5th, Odense, Mäntsälä?","inputs":"Cases sheet; outcomes.","output":"A miss, a rule change, a commit.","time":"Term-long.","errors":"Few cases have measured heat; many cells say 'confirm'.","src":["cases","brief","nonComp"],"tool":{"mode":"new","text":"Run the tool on each case; compare predicted verdict and blocker with the outcome; log the change. Plus the brief's evaluation cases, including repeated runs.","rep":"Case table; red where predicted and actual disagree."}},
+    {"id":"rs4","name":"Scout new receivers","asis":"The matrix's noted receivers and precedents; mostly operator claims.","inputs":"Bins sheet; precedent search.","output":"Candidate pairings.","time":"Ongoing.","errors":"Temperature often too low for the use named.","src":["bins"],"tool":{"mode":"new","text":"Cards pairing an element with a receiver, against the site's temperature, quantity and space, with the precedent's status.","rep":"Note cards."},"hands":["de2"]}
+   ]}
+ ],
+ "opportunities":[
+  {"id":"o1","name":"District heat to a network","kind":"energy","to":["de2","de4","pl4"],"element":"CH-36 Heat; CH-04 reuse","precedent":"Stockholm Data Parks; Tallaght; Odense (utility and government records)","c":80},
+  {"id":"o2","name":"Hospital or campus as anchor receiver","kind":"energy","to":["de2"],"element":"CH-04 reuse (all-year demand, long-term owner)","precedent":"Milton Keynes (trade press); QMUL (operator claim)","c":40},
+  {"id":"o3","name":"Seasonal storage in the ground","kind":"energy","to":["hy2","de3"],"element":"SL-23 ground; CH-41 storage","precedent":"Drake Landing (peer-reviewed, measured)","c":80},
+  {"id":"o4","name":"Land-based aquaculture; insect protein; algae","kind":"economic","to":["rs4","de1"],"element":"CH-36 Heat; WA-26 water loop; AE-13 CO2","precedent":"Hima Seafood, Norwegian Lobster Farm, Vattenfall Boden, Data4 Marcoussis (operator claims; trade press)","c":40},
+  {"id":"o5","name":"Warming centre; refuge; clean-air room","kind":"social","to":["em1","em2","op3"],"element":"CH-36 Heat; FS-21 hardened building; AE-19 filters; PW-06 UPS","precedent":"BC ESS and Health Canada standards (government); no data-centre precedent","c":60},
+  {"id":"o6","name":"Reserved capacity and batteries to the grid","kind":"energy","to":["gr3","op2"],"element":"PW-27 reserved capacity; PW-08 batteries; PW-16 flexibility","precedent":"Microsoft Dublin UPS frequency response (operator); Emerald AI Phoenix (preprint)","c":40},
+  {"id":"o7","name":"EV charging hub on the reserved feed","kind":"energy","to":["gr3"],"element":"PW-07 connection; PW-27 reserved capacity","precedent":"none found","c":20},
+  {"id":"o8","name":"Meanwhile uses on land held for growth","kind":"space","to":["pl4","op4"],"element":"TR-09 space held for growth","precedent":"none specific","c":20},
+  {"id":"o9","name":"Rainwater, condensate and water reuse","kind":"water","to":["ec4","hy1"],"element":"WA-04 rainwater; WA-29 discharge","precedent":"Quincy Water Reuse Utility (US EPA case study)","c":60},
+  {"id":"o10","name":"Material bank: copper at decommissioning","kind":"materials","to":["op5"],"element":"WE-04 decommissioning; WE-11 e-waste","precedent":"Graedel 2011 (peer-reviewed rates); quantities per m² still needed","c":50},
+  {"id":"o11","name":"Distributed servers as heaters in housing","kind":"social","to":["rs4","de2"],"element":"IT-03 servers, spread out","precedent":"Qarnot Bordeaux; heata trial (operator claims)","c":40},
+  {"id":"o12","name":"A new district with the data centre as heat plant","kind":"economic","to":["pl4","de2"],"element":"CH-04 reuse; planning body as developer","precedent":"OPDC London £36 M fund (government); Blatchford as the local model","c":60}
+ ]
+}
+</script>
+
+<script>
+(function(){
+const NS="http://www.w3.org/2000/svg";
+let DATA=JSON.parse(document.getElementById('data').textContent);
+let level='all', focusRow=null, selected=null, selType=null, view={x:16,y:12,k:1};
+const svg=document.getElementById('graph'), wrap=document.getElementById('canvasWrap'), panel=document.getElementById('panel');
+const EMPTY='<div class="empty">Click a task to see how it is done today, where the tool attaches, and the sources behind it. Click a job name to expand that row.</div>';
+
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function txt(parent,x,y,s,cls,anchor){const t=el('text',{x,y,class:cls},parent);if(anchor)t.setAttribute('text-anchor',anchor);t.textContent=s;return t;}
+function wrapTxt(parent,x,y,s,cls,maxChars,lh,maxLines){const words=String(s).split(' '),lines=[];let cur='';words.forEach(w=>{if((cur+' '+w).trim().length>maxChars){lines.push(cur.trim());cur=w;}else cur+=' '+w;});if(cur.trim())lines.push(cur.trim());lines.slice(0,maxLines||2).forEach((l,i)=>txt(parent,x,y+i*lh,l,cls));return Math.min(lines.length,maxLines||2);}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function srcOf(id){return DATA.sources[id]||{t:id,c:0,status:'missing from the sources list'};}
+function stepConf(st){const cs=(st.src||[]).map(id=>srcOf(id).c);return cs.length?Math.min(...cs):0;}
+function allSteps(){const out=[];DATA.roles.forEach(r=>r.steps.forEach(s=>{s.role=r.id;out.push(s);}));return out;}
+function findStep(id){for(const r of DATA.roles)for(const s of r.steps)if(s.id===id){s.role=r.id;return s;}return null;}
+function roleOf(id){return DATA.roles.find(r=>r.id===id);}
+function modeWord(m){return {automate:'tool automates',assist:'tool assists',unchanged:'stays with a person',new:'new: nobody does it today'}[m]||m;}
+function shortMode(m){return {automate:'automates',assist:'assists',unchanged:'person',new:'new'}[m]||m;}
+
+
+// ---------- icons (24-box, stroke paths) ----------
+const ICON={
+ planner:'M5 4h11l3 3v13H5z M9 4v4h7 M8 13h8 M8 17h5',
+ de:'M3 12h6a3 3 0 0 0 3-3V6 M12 12h9 M12 12v6a3 3 0 0 0 3 3h6 M6 9v6',
+ ec:'M12 3v11 M9 14.5a3 3 0 1 0 6 0 M9 7h3 M9 10h3',
+ ac:'M4 10v4 M8 7v10 M12 4v16 M16 7v10 M20 10v4',
+ gr:'M13 2L5 14h6l-1 8 8-12h-6z',
+ op:'M4 4h16v5H4z M4 11h16v5H4z M4 18h16v3H4z M7 6.5h.01 M7 13.5h.01',
+ hy:'M12 3s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11z M9 15a3 3 0 0 0 3 3',
+ em:'M3 11l9-7 9 7 M5 10v10h14V10 M10 20v-5h4v5',
+ re:'M4 11l8-7 8 7 M6 10v10h12V10 M10 20v-6h4v6 M3 21h18',
+ rs:'M5 7h3l2-2h4l2 2h3v12H5z M12 10a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7',
+ energy:'M12 3s-5 6-5 10a5 5 0 0 0 10 0c0-4-5-10-5-10z',
+ economic:'M4 18l5-6 4 3 7-8 M4 21h16',
+ social:'M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M2 20a6 6 0 0 1 12 0 M12 20a6 6 0 0 1 10 0',
+ space:'M4 20V9l8-5 8 5v11 M4 20h16 M10 20v-5h4v5',
+ water:'M12 3s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11z',
+ materials:'M12 3l8 4.5v9L12 21l-8-4.5v-9z M12 12l8-4.5 M12 12v9 M12 12L4 7.5'
+};
+const KIND_VAR={energy:'var(--k-energy)',economic:'var(--k-economic)',social:'var(--k-social)',space:'var(--k-space)',water:'var(--k-water)',materials:'var(--k-materials)'};
+function iconSvg(name,cls){return `<svg viewBox="0 0 24 24" class="${cls||''}"><path d="${ICON[name]||ICON.planner}"/></svg>`;}
+function icon(parent,name,x,y,size,cls){const g=el('g',{transform:`translate(${x},${y}) scale(${size/24})`,class:cls||'row-ico'},parent);el('path',{d:ICON[name]||ICON.planner},g);return g;}
+function confVar(c){return c>=100?'var(--c100)':c>=80?'var(--c80)':c>=60?'var(--c60)':c>=40?'var(--c40)':c>=20?'var(--c20)':'var(--c0)';}
+function ring(parent,cx,cy,r,srcIds,label){
+  const g=el('g',{class:'ring'},parent);
+  const n=srcIds.length;
+  el('circle',{cx,cy,r,class:'track'},g);
+  if(!n){return g;}
+  const w=r*0.55;
+  srcIds.forEach((id,i)=>{
+    const c=srcOf(id).c;
+    const a0=-Math.PI/2+i*2*Math.PI/n, a1=-Math.PI/2+(i+1)*2*Math.PI/n;
+    const ro=r, ri=r-w;
+    const p=(a,rr)=>[cx+rr*Math.cos(a),cy+rr*Math.sin(a)];
+    const [x0,y0]=p(a0,ro),[x1,y1]=p(a1,ro),[x2,y2]=p(a1,ri),[x3,y3]=p(a0,ri);
+    const large=(a1-a0)>Math.PI?1:0;
+    const d=n===1?`M${cx+ro},${cy} A${ro},${ro} 0 1 1 ${cx-ro},${cy} A${ro},${ro} 0 1 1 ${cx+ro},${cy} M${cx+ri},${cy} A${ri},${ri} 0 1 0 ${cx-ri},${cy} A${ri},${ri} 0 1 0 ${cx+ri},${cy}`
+      :`M${x0},${y0} A${ro},${ro} 0 ${large} 1 ${x1},${y1} L${x2},${y2} A${ri},${ri} 0 ${large} 0 ${x3},${y3} Z`;
+    const seg=el('path',{d,class:'seg',fill:confVar(c),'fill-rule':'evenodd'},g);
+    const t=el('title',{},seg);t.textContent=`${c} · ${srcOf(id).t}`;
+  });
+  if(label!=null)txt(g,cx,cy+3.2,label,'conf','middle');
+  return g;
+}
+
+// ---------- layout ----------
+const G={labelW:160,stepW:176,stepH:56,gapX:26,rowH:100,top:34,oppW:220,oppGap:60};
+function layoutAll(){
+  allSteps();
+  const maxSteps=Math.max(...DATA.roles.map(r=>r.steps.length));
+  DATA.roles.forEach((r,i)=>{r.y=G.top+i*G.rowH;r.h=G.rowH-10;r.steps.forEach((s,j)=>{s.x=G.labelW+j*(G.stepW+G.gapX);s.y=r.y+16;s.w=G.stepW;s.h=G.stepH;});});
+  const oppX=G.labelW+maxSteps*(G.stepW+G.gapX)+G.oppGap;
+  DATA.opportunities.forEach((o,i)=>{o.x=oppX;o.y=G.top+i*58;o.w=G.oppW;o.h=48;});
+  DATA.W=oppX+G.oppW+20;DATA.H=Math.max(G.top+DATA.roles.length*G.rowH,G.top+DATA.opportunities.length*58)+10;
+}
+function layoutRow(r){
+  allSteps();
+  const stepW=200,gapX=70,srcW=160;
+  r.steps.forEach((s,j)=>{s.x=20+j*(stepW+gapX);s.y=150;s.w=stepW;s.h=60;
+    s.toolBox={x:s.x,y:70,w:stepW,h:68};
+    s.srcBoxes=(s.src||[]).map((id,k)=>({id,x:s.x+(stepW-srcW)/2,y:290+k*48,w:srcW,h:40}));
+  });
+  const n=r.steps.length;
+  const opps=DATA.opportunities.filter(o=>o.to.some(t=>r.steps.find(s=>s.id===t)));
+  opps.forEach((o,i)=>{o.x=20+n*(stepW+gapX)+20;o.y=150+i*58;o.w=G.oppW;o.h=48;});
+  DATA.W=20+n*(stepW+gapX)+(opps.length?G.oppW+40:0);
+  DATA.H=290+Math.max(1,...r.steps.map(s=>(s.src||[]).length))*48+30;
+  return opps;
+}
+function wire(x1,y1,x2,y2){const dx=Math.max(30,Math.abs(x2-x1)/2);return `M${x1},${y1} C${x1+dx},${y1} ${x2-dx},${y2} ${x2},${y2}`;}
+
+// ---------- draw ----------
+function draw(){
+  svg.innerHTML='';
+  const root=el('g',{id:'root',transform:`translate(${view.x},${view.y}) scale(${view.k})`},svg);
+  if(level==='row'&&focusRow)drawRow(root,roleOf(focusRow));else drawAll(root);
+}
+function stepNode(parent,s,big){
+  const g=el('g',{class:'step'+(selected===s.id?' sel':''),tabindex:0,role:'button','aria-label':s.name},parent);
+  el('rect',{x:s.x,y:s.y,width:s.w,height:s.h,rx:3,class:'box'},g);
+  wrapTxt(g,s.x+10,s.y+(big?20:18),s.name,'name',big?26:23,14,2);
+  ring(g,s.x+s.w-22,s.y+s.h/2,big?17:15,s.src||[],stepConf(s));
+  if(s.tool&&s.tool.mode!=='unchanged'){const m=s.tool.mode;el('rect',{x:s.x+s.w-56,y:s.y-6,width:50,height:11,rx:2,class:'tab '+m},g);txt(g,s.x+s.w-31,s.y+2.5,shortMode(m),'tabtxt','middle').setAttribute('fill',m==='assist'?'var(--accent)':'var(--bg)');}
+  g.addEventListener('click',ev=>{ev.stopPropagation();select('step',s.id);});
+  g.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();select('step',s.id);}});
+  return g;
+}
+function drawAll(root){
+  layoutAll();
+  const wires=el('g',{},root);
+  const rowW=DATA.W-G.oppW-G.oppGap+10;
+  DATA.roles.forEach(r=>{
+    const g=el('g',{},root);
+    el('rect',{x:0,y:r.y,width:rowW,height:r.h,rx:3,class:'row-bg'+(focusRow===r.id?' focus':'')},g);
+    const lab=el('g',{class:'step',tabindex:0,role:'button','aria-label':'Expand '+r.name},g);
+    el('rect',{x:0,y:r.y,width:G.labelW-10,height:r.h,fill:'transparent'},lab);
+    icon(lab,r.id,12,r.y+10,22);
+    wrapTxt(lab,40,r.y+22,r.name,'row-name',18,14,2);
+    txt(lab,12,r.y+r.h-12,`${r.steps.length} tasks · ${r.steps.filter(s=>s.tool&&s.tool.mode!=='unchanged').length} with the tool`,'row-meta');
+    lab.addEventListener('click',ev=>{ev.stopPropagation();focusRow=r.id;level='row';setLevel();selected=null;fit();draw();showRole(r);});
+    r.steps.forEach((s,j)=>{if(j>0){const p=r.steps[j-1];el('path',{d:wire(p.x+p.w,p.y+p.h/2,s.x,s.y+s.h/2),class:'wire'},wires);}});
+  });
+  allSteps().forEach(s=>(s.hands||[]).forEach(h=>{const t=findStep(h);if(!t)return;const hi=selected===s.id||selected===h;
+    const down=t.y>s.y; const x1=s.x+s.w/2,y1=down?s.y+s.h:s.y,x2=t.x+t.w/2,y2=down?t.y:t.y+t.h;
+    el('path',{d:`M${x1},${y1} C${x1},${(y1+y2)/2} ${x2},${(y1+y2)/2} ${x2},${y2}`,class:'wire hand'+(hi?' hi':'')+(selected&&!hi?' dim':'')},wires);}));
+  txt(root,DATA.opportunities[0].x,G.top-10,'Opportunities, from the matrix','col-title');
+  DATA.opportunities.forEach(o=>{
+    const g=el('g',{class:'opp'+(selected===o.id?' sel':''),tabindex:0,role:'button','aria-label':o.name},root);
+    el('rect',{x:o.x,y:o.y,width:o.w,height:o.h,rx:3,class:'box'},g);
+    el('rect',{x:o.x,y:o.y,width:4,height:o.h,fill:KIND_VAR[o.kind]||'var(--wire)'},g);
+    icon(g,o.kind,o.x+10,o.y+8,16,'kico').setAttribute('stroke',KIND_VAR[o.kind]||'var(--wire)');
+    wrapTxt(g,o.x+32,o.y+17,o.name,'name',30,13,2);
+    txt(g,o.x+32,o.y+o.h-6,o.kind+' · precedent '+o.c,'kind');
+    o.to.forEach(t=>{const s=findStep(t);if(!s)return;const hi=selected===o.id||selected===t;el('path',{d:wire(s.x+s.w,s.y+s.h/2,o.x,o.y+o.h/2),class:'wire opp'+(hi?' hi':'')+(selected&&!hi?' dim':'')},wires);});
+    g.addEventListener('click',ev=>{ev.stopPropagation();select('opp',o.id);});
+  });
+  allSteps().forEach(s=>stepNode(root,s,false));
+}
+function drawRow(root,r){
+  const opps=layoutRow(r);
+  const wires=el('g',{},root);
+  icon(root,r.id,20,8,22);txt(root,50,22,r.name,'row-name');wrapTxt(root,50,38,r.org+' · '+r.blurb,'row-meta',120,12,2);
+  txt(root,20,64,'where the tool attaches','col-title');
+  txt(root,20,280,'sources of truth, with confidence','col-title');
+  r.steps.forEach((s,j)=>{
+    if(j>0){const p=r.steps[j-1];el('path',{d:wire(p.x+p.w,p.y+p.h/2,s.x,s.y+s.h/2),class:'wire'},wires);}
+    if(s.tool&&s.tool.mode!=='unchanged'){const b=s.toolBox;const g=el('g',{class:'toolnode'},root);el('rect',{x:b.x,y:b.y,width:b.w,height:b.h,rx:3},g);txt(g,b.x+10,b.y+14,modeWord(s.tool.mode),'k');wrapTxt(g,b.x+10,b.y+30,s.tool.text,'',36,13,3);el('path',{d:`M${b.x+b.w/2},${b.y+b.h} L${s.x+s.w/2},${s.y}`,class:'wire tool'},wires);}
+    s.srcBoxes.forEach(sb=>{const src=srcOf(sb.id);const g=el('g',{class:'srcnode step'+(selected===sb.id?' sel':''),tabindex:0,role:'button','aria-label':src.t},root);el('rect',{x:sb.x,y:sb.y,width:sb.w,height:sb.h,rx:2,class:'box'},g);el('circle',{cx:sb.x+16,cy:sb.y+14,r:9,class:'dot',fill:confVar(src.c)},g);txt(g,sb.x+16,sb.y+17.5,src.c,'c','middle').setAttribute('fill',src.c>=60?'#fff':'var(--card-fg)');wrapTxt(g,sb.x+32,sb.y+14,src.t,'',26,11,2);txt(g,sb.x+8,sb.y+34,String(src.status).slice(0,34),'s');el('path',{d:`M${sb.x+sb.w/2},${sb.y} L${s.x+s.w/2},${s.y+s.h}`,class:'wire src'},wires);g.addEventListener('click',ev=>{ev.stopPropagation();select('src',sb.id);});});
+    (s.hands||[]).forEach((h,k)=>{const t=findStep(h);if(!t)return;const rr=roleOf(t.role);const g=el('g',{class:'step',tabindex:0,role:'button'},root);const y=s.y+s.h+14+k*12;txt(g,s.x,y,`→ ${rr.name}: ${t.name}`,'row-meta').setAttribute('fill','var(--accent)');g.addEventListener('click',ev=>{ev.stopPropagation();focusRow=rr.id;fit();select('step',t.id);});});
+  });
+  if(opps.length)txt(root,opps[0].x,140,'Opportunities into this job','col-title');
+  opps.forEach(o=>{const g=el('g',{class:'opp'+(selected===o.id?' sel':''),tabindex:0,role:'button'},root);el('rect',{x:o.x,y:o.y,width:o.w,height:o.h,rx:3,class:'box'},g);el('rect',{x:o.x,y:o.y,width:4,height:o.h,fill:KIND_VAR[o.kind]||'var(--wire)'},g);icon(g,o.kind,o.x+10,o.y+8,16,'kico').setAttribute('stroke',KIND_VAR[o.kind]||'var(--wire)');wrapTxt(g,o.x+32,o.y+17,o.name,'name',30,13,2);txt(g,o.x+32,o.y+o.h-6,o.kind+' · precedent '+o.c,'kind');
+    o.to.forEach(t=>{const s=r.steps.find(x=>x.id===t);if(!s)return;el('path',{d:wire(s.x+s.w,s.y+s.h/2,o.x,o.y+o.h/2),class:'wire opp'+(selected===o.id||selected===t?' hi':'')},wires);});
+    g.addEventListener('click',ev=>{ev.stopPropagation();select('opp',o.id);});});
+  r.steps.forEach(s=>stepNode(root,s,true));
+}
+
+// ---------- panel ----------
+function select(type,id){selected=id;selType=type;draw();if(type==='step')showStep(findStep(id));else if(type==='opp')showOpp(DATA.opportunities.find(o=>o.id===id));else if(type==='src')showSrc(id);}
+function srcRow(id){const s=srcOf(id);return `<div class="srcrow"><div class="n${s.c<60?' low':''}" style="background:${s.c>=20?confVar(s.c):'transparent'}">${s.c}</div><div><div class="t">${esc(s.t)}</div><div class="m">${esc(s.status)}${s.ref?' · '+esc(s.ref):''}${s.url?' · <a href="'+esc(s.url)+'" target="_blank" rel="noopener">source</a>':''}</div></div></div>`;}
+function showRole(r){panel.innerHTML=`<div class="of">${iconSvg(r.id)}${esc(r.org)}</div><h2>${esc(r.name)}</h2><p>${esc(r.blurb)}</p><div class="sec"><h3>Tasks, in order</h3><div class="steps-list">${r.steps.map(s=>`<button data-step="${s.id}">${esc(s.name)} <span style="color:var(--muted);font-size:11.5px">· ${s.tool?shortMode(s.tool.mode):'no tool'} · ${stepConf(s)}</span></button>`).join('')}</div></div>`;bind();}
+function showStep(s){
+  const r=roleOf(s.role), c=stepConf(s);
+  const weakest=(s.src||[]).map(id=>({id,c:srcOf(id).c})).sort((a,b)=>a.c-b.c)[0];
+  const opps=DATA.opportunities.filter(o=>o.to.includes(s.id));
+  const feeders=allSteps().filter(x=>(x.hands||[]).includes(s.id));
+  panel.innerHTML=`<div class="of">${iconSvg(r.id)}${esc(r.name)} · ${esc(r.org)}</div><h2>${esc(s.name)}</h2>
+   <div class="chips">${s.tool?`<span class="chip ${s.tool.mode==='unchanged'?'':'acc'}">${modeWord(s.tool.mode)}</span>`:'<span class="chip">no tool here</span>'}</div>
+   <div class="confrow"><span class="bigring" id="bigring"></span><span class="t">${(s.src||[]).length} source${(s.src||[]).length===1?'':'s'}; the weakest is ${weakest?esc(srcOf(weakest.id).t.split(':')[0]):'none'} at ${c}.</span></div>
+   <div class="sec"><h3>As it is done today</h3><dl><dt>How</dt><dd>${esc(s.asis)}</dd><dt>Inputs</dt><dd>${esc(s.inputs)}</dd><dt>Output</dt><dd>${esc(s.output)}</dd><dt>Time</dt><dd>${esc(s.time)}</dd><dt>Errors enter</dt><dd>${esc(s.errors)}</dd></dl></div>
+   ${s.tool?`<div class="sec tool"><h3>Where the tool attaches</h3><dl><dt>Change</dt><dd>${modeWord(s.tool.mode)}</dd><dt>What it does</dt><dd>${esc(s.tool.text)}</dd><dt>In the tool</dt><dd>${esc(s.tool.rep)}</dd></dl></div>`:''}
+   <div class="sec"><h3>Sources of truth</h3>${(s.src||[]).map(srcRow).join('')}</div>
+   ${(s.hands&&s.hands.length)||feeders.length?`<div class="sec"><h3>Hand-overs</h3>${feeders.map(f=>`<div class="link"><span>←</span><span><button data-step="${f.id}">${esc(f.name)}</button> <span class="n">${esc(roleOf(f.role).name)}</span></span></div>`).join('')}${(s.hands||[]).map(h=>{const t=findStep(h);return t?`<div class="link"><span>→</span><span><button data-step="${t.id}">${esc(t.name)}</button> <span class="n">${esc(roleOf(t.role).name)}</span></span></div>`:''}).join('')}</div>`:''}
+   ${opps.length?`<div class="sec"><h3>Opportunities that connect here</h3>${opps.map(o=>`<div class="link"><span>·</span><span><button data-opp="${o.id}">${esc(o.name)}</button> <span class="n">${esc(o.kind)}</span></span></div>`).join('')}</div>`:''}`;
+  const br=document.getElementById('bigring');if(br){const sv=el('svg',{viewBox:'0 0 64 64'});ring(sv,32,32,30,s.src||[],null);br.appendChild(sv);const b=document.createElement('b');b.textContent=c;br.appendChild(b);}
+  bind();
+}
+function showOpp(o){
+  panel.innerHTML=`<div class="of">${iconSvg(o.kind)}Opportunity</div><h2>${esc(o.name)}</h2>
+   <div class="chips"><span class="chip kind"><i style="background:${KIND_VAR[o.kind]||'var(--wire)'}"></i>${esc(o.kind)}</span><span class="chip">precedent confidence ${o.c}</span></div>
+   <dl><dt>Element</dt><dd>${esc(o.element)}</dd><dt>Precedent</dt><dd>${esc(o.precedent)}</dd></dl>
+   <div class="sec"><h3>Connects into</h3>${o.to.map(t=>{const s=findStep(t);return s?`<div class="link"><span>→</span><span><button data-step="${s.id}">${esc(s.name)}</button> <span class="n">${esc(roleOf(s.role).name)}</span></span></div>`:''}).join('')}</div>`;
+  bind();
+}
+function showSrc(id){const s=srcOf(id);const users=allSteps().filter(x=>(x.src||[]).includes(id));panel.innerHTML=`<div class="of">Source of truth</div><h2>${esc(s.t)}</h2><div class="chips"><span class="chip acc">confidence ${s.c}</span><span class="chip">${esc(s.status)}</span></div>${s.ref?`<dl><dt>Reference</dt><dd>${esc(s.ref)}</dd></dl>`:''}${s.url?`<p><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.url)}</a></p>`:''}<div class="sec"><h3>Used by</h3>${users.map(u=>`<div class="link"><span>·</span><span><button data-step="${u.id}">${esc(u.name)}</button> <span class="n">${esc(roleOf(u.role).name)}</span></span></div>`).join('')}</div>`;bind();}
+function bind(){panel.querySelectorAll('[data-step]').forEach(b=>b.addEventListener('click',()=>{const s=findStep(b.dataset.step);if(level==='row'&&s.role!==focusRow){focusRow=s.role;setLevel();fit();}select('step',s.id);}));panel.querySelectorAll('[data-opp]').forEach(b=>b.addEventListener('click',()=>select('opp',b.dataset.opp)));}
+
+// ---------- controls ----------
+function setLevel(){document.querySelectorAll('#levelCtrl button').forEach(b=>b.classList.toggle('on',b.dataset.level===level));buildRows();}
+document.querySelectorAll('#levelCtrl button').forEach(b=>b.addEventListener('click',()=>{level=b.dataset.level;if(level==='row'&&!focusRow)focusRow=DATA.roles[0].id;setLevel();selected=null;fit();draw();panel.innerHTML=level==='row'?'':EMPTY;if(level==='row')showRole(roleOf(focusRow));}));
+function buildRows(){const c=document.getElementById('rowCtrl');c.querySelectorAll('button').forEach(b=>b.remove());DATA.roles.forEach(r=>{const b=document.createElement('button');b.innerHTML=iconSvg(r.id)+esc(r.name);b.classList.toggle('on',focusRow===r.id&&level==='row');b.addEventListener('click',()=>{focusRow=r.id;level='row';setLevel();selected=null;fit();draw();showRole(r);});c.appendChild(b);});}
+document.getElementById('jsonFile').addEventListener('change',ev=>{const f=ev.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{DATA=JSON.parse(rd.result);selected=null;focusRow=null;level='all';setLevel();fit();draw();panel.innerHTML='<div class="empty">Loaded '+esc(f.name)+': '+DATA.roles.length+' jobs, '+allSteps().length+' tasks, '+Object.keys(DATA.sources).length+' sources, '+DATA.opportunities.length+' opportunities.</div>';}catch(e){panel.innerHTML='<div class="empty">That file is not valid JSON: '+esc(e.message)+'</div>';}};rd.readAsText(f);});
+document.getElementById('dlJson').addEventListener('click',ev=>{const clean=JSON.parse(JSON.stringify(DATA,(k,v)=>['x','y','w','h','role','toolBox','srcBoxes','W','H'].includes(k)?undefined:v));const s=JSON.stringify(clean,null,1);const b=ev.currentTarget;navigator.clipboard.writeText(s).then(()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy JSON',1500);}).catch(()=>{const ta=document.createElement('textarea');ta.value=s;ta.style.width='100%';ta.style.height='60vh';panel.innerHTML='';panel.appendChild(ta);ta.select();});});
+
+let dragging=false,start=null;
+wrap.addEventListener('pointerdown',e=>{if(e.target.closest('.step, .opp, .srcnode'))return;dragging=true;start={x:e.clientX-view.x,y:e.clientY-view.y};wrap.classList.add('drag');wrap.setPointerCapture(e.pointerId);});
+wrap.addEventListener('pointermove',e=>{if(!dragging)return;view.x=e.clientX-start.x;view.y=e.clientY-start.y;svg.querySelector('#root').setAttribute('transform',`translate(${view.x},${view.y}) scale(${view.k})`);});
+wrap.addEventListener('pointerup',()=>{dragging=false;wrap.classList.remove('drag');});
+wrap.addEventListener('wheel',e=>{e.preventDefault();const r=wrap.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;const k=Math.min(2.5,Math.max(.3,view.k*(e.deltaY<0?1.1:0.91)));view.x=mx-(mx-view.x)*k/view.k;view.y=my-(my-view.y)*k/view.k;view.k=k;svg.querySelector('#root').setAttribute('transform',`translate(${view.x},${view.y}) scale(${view.k})`);},{passive:false});
+svg.addEventListener('click',()=>{if(selected){selected=null;draw();panel.innerHTML=level==='row'?'':EMPTY;if(level==='row')showRole(roleOf(focusRow));}});
+
+function fit(){const r=wrap.getBoundingClientRect();if(level==='row'&&focusRow)layoutRow(roleOf(focusRow));else layoutAll();const k=Math.min(1,(r.width-32)/DATA.W,(r.height-32)/DATA.H);view={x:16,y:12,k:Math.max(.3,k)};}
+setLevel();fit();draw();
+window.addEventListener('resize',()=>{fit();draw();});
+})();
+</script>
