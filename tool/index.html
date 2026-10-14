@@ -1,0 +1,407 @@
+<meta charset="utf-8">
+<title>Beyond Data</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap">
+<style>
+/* Beyond Data — the tool, round 1: city → parcel → site card → what is being built. Dark-only by decision (J.B., 9 Oct). */
+:root{
+  color-scheme:dark;
+  --bg:#17181a; --panel:#1e2023; --panel-2:#24272b; --line:#30343a; --line-2:#3c4148;
+  --fg:#e9e6e1; --muted:#9d9a94; --faint:#6b6964;
+  --accent:#CC746C; --accent-2:#e39a93; --place:#86ada7; --water:#7fb2c4;
+  --font:"Open Sans",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:300 14px/1.5 var(--font);overflow:hidden}
+*{box-sizing:border-box}
+button,input,select{font:inherit;color:inherit}
+.app{display:grid;grid-template-rows:auto 1fr;height:100%}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--panel);position:relative;z-index:3}
+header h1{font-size:15px;font-weight:600;letter-spacing:.02em;margin:0;white-space:nowrap}
+header h1 span{font-weight:300;color:var(--muted);margin-left:8px}
+.seg{display:inline-flex;border:1px solid var(--line-2);border-radius:999px;overflow:hidden}
+.seg button{background:transparent;border:0;padding:5px 12px;cursor:pointer;color:var(--muted);font-size:13px}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#1a1212;font-weight:600}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent-2);outline-offset:1px}
+.search{position:relative;flex:1 1 220px;max-width:360px}
+.search input{width:100%;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;padding:6px 10px}
+.results{position:absolute;left:0;right:0;top:calc(100% + 4px);background:var(--panel);border:1px solid var(--line-2);border-radius:6px;list-style:none;margin:0;padding:4px;max-height:280px;overflow:auto}
+.results li{padding:6px 8px;border-radius:4px;cursor:pointer;font-size:13px}
+.results li:hover,.results li[aria-selected="true"]{background:var(--panel-2)}
+.results li.none{color:var(--muted);cursor:default}
+header select{background:var(--bg);border:1px solid var(--line-2);border-radius:6px;padding:6px 8px;max-width:100%}
+.tb{display:inline-flex;gap:4px;margin-left:auto}
+.tb button{background:var(--panel-2);border:1px solid var(--line-2);border-radius:6px;width:30px;height:30px;cursor:pointer}
+.tb button:hover{border-color:var(--accent)}
+main{display:grid;grid-template-columns:1fr minmax(320px,440px);min-height:0}
+#map{position:relative;overflow:hidden;cursor:grab;min-width:0;touch-action:none}
+#map.drag{cursor:grabbing}
+#map canvas{display:block;width:100%;height:100%}
+.legend{position:absolute;left:12px;bottom:12px;background:rgba(30,32,35,.92);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:12px;max-width:calc(100% - 24px)}
+.legend div{display:flex;align-items:center;gap:8px;margin:2px 0}
+.legend i{display:inline-block;width:18px;height:10px;border-radius:2px;flex:none}
+.legend summary{cursor:pointer;font-weight:400;margin-bottom:4px}
+.legend .src{color:var(--faint);font-size:11px;margin-top:6px;max-width:300px}
+.status{position:absolute;right:12px;top:12px;background:rgba(30,32,35,.92);border:1px solid var(--line);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--muted)}
+.scale{position:absolute;right:12px;bottom:12px;font-size:11px;color:var(--muted);text-align:right}
+.scale b{display:block;height:4px;border:1px solid var(--muted);border-top:0;margin-top:2px}
+aside{border-left:1px solid var(--line);background:var(--panel);overflow:auto;padding:18px 18px 40px;min-width:0}
+.kind{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+aside h2{font-size:19px;font-weight:400;margin:4px 0 2px;line-height:1.3;text-wrap:balance}
+aside h3{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:22px 0 8px;padding-top:14px;border-top:1px solid var(--line)}
+.sub{color:var(--muted);font-size:13px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:8px 0 0;font-size:13px}
+dt{color:var(--muted)} dd{margin:0;font-variant-numeric:tabular-nums;min-width:0}
+.pill{display:inline-block;border-radius:999px;padding:1px 9px;font-size:12px;font-weight:400;border:1px solid var(--line-2)}
+.pill.yes{border-color:var(--place);color:var(--place)} .pill.case{border-color:#cdb07a;color:#cdb07a} .pill.site{border-color:var(--muted);color:var(--muted)} .pill.no{border-color:var(--faint);color:var(--muted)}
+.draft{color:var(--accent-2)}
+.draftnote{font-size:11px;color:var(--faint);margin-top:6px}
+.src{font-size:12px;color:var(--faint)} .src a{color:var(--muted)}
+.gap{color:var(--faint);font-style:italic}
+.q{margin:14px 0 0}
+.q .lab{font-size:13px;margin-bottom:6px}
+.q .seg{flex-wrap:wrap;border-radius:8px}
+.q .seg button{font-size:13px;padding:6px 12px}
+.q small{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{background:transparent;border:1px solid var(--line-2);border-radius:999px;padding:4px 10px;font-size:12.5px;cursor:pointer;color:var(--muted)}
+.chips button[aria-pressed="true"]{border-color:var(--accent);color:var(--fg)}
+.next{margin-top:20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.next button{background:var(--accent);color:#1a1212;border:0;border-radius:6px;padding:8px 14px;font-weight:600;cursor:pointer}
+.next button[disabled]{background:var(--panel-2);color:var(--faint);cursor:not-allowed}
+.intro p{margin:8px 0}
+.intro ol{padding-left:18px;margin:8px 0}
+a{color:var(--accent-2)}
+@media (max-width:760px){
+  main{grid-template-columns:1fr;grid-template-rows:minmax(260px,1fr) auto}
+  aside{border-left:0;border-top:1px solid var(--line);max-height:52vh}
+  .tb{display:none}
+  header{gap:8px 10px;padding:8px 12px}
+  header h1 span{display:none}
+  header select{flex:1 1 100%}
+  .search{flex:1 1 100%;max-width:none;order:3}
+  .legend{left:8px;bottom:8px;padding:6px 8px}
+}
+</style>
+
+<div class="app">
+<header>
+  <h1>Beyond Data <span>the tool</span></h1>
+  <div class="seg" role="group" aria-label="City"><button id="c-van" aria-pressed="true">Vancouver</button><button id="c-edm" aria-pressed="false">Edmonton</button></div>
+  <div class="search"><input id="q" type="search" placeholder="Search an address" autocomplete="off" aria-label="Search an address" aria-controls="res"><ul id="res" class="results" role="listbox" hidden></ul></div>
+  <select id="ask" aria-label="What brings you here?">
+    <option value="design">What could go here?</option>
+    <option value="evaluate">I have a proposal</option>
+    <option value="load">Where could a data centre of this size go?</option>
+    <option value="near">What would it mean near me?</option>
+  </select>
+  <div class="tb"><button id="zin" title="Zoom in" aria-label="Zoom in">+</button><button id="zout" title="Zoom out" aria-label="Zoom out">−</button><button id="home" title="Whole city" aria-label="Whole city">⌂</button></div>
+</header>
+<main>
+  <div id="map"><canvas id="cv" aria-label="Map of parcels; zones shaded by whether a data centre is an allowed use"></canvas>
+    <div class="status" id="st">Loading…</div>
+    <div class="legend" id="lg"></div>
+    <div class="scale" id="sc"></div>
+  </div>
+  <aside id="side" aria-live="polite"></aside>
+</main>
+</div>
+
+<script>
+(function(){
+'use strict';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>n==null?'—':Math.round(n).toLocaleString('en-CA');
+const money=n=>n==null?'—':'$'+Math.round(n).toLocaleString('en-CA');
+const SRC={
+ van_s2:['Zoning and Development By-law, s. 2 (Bulk Data Storage)','https://bylaws.vancouver.ca/zoning/Sec02.pdf'],
+ van_i2:['I-2 District Schedule','https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-I-2.pdf'],
+ van_i1c:['I-1C District Schedule','https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-1c.pdf'],
+ van_i3:['I-3 District Schedule (June 2026)','https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-3.pdf'],
+ van_fc2:['FC-2 District Schedule (June 2026)','https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-fc-2.pdf'],
+ van_cd1:['CD-1 by-laws','https://cd1-bylaws.vancouver.ca/'],
+ van_landuse:['Land Uses by Zoning District (June 2026, reference only)','https://bylaws.vancouver.ca/zoning/land-uses-by-zoning-district.pdf'],
+ van_rts:['Referral report RTS 19744, 111 E 5th Ave (14 Jul 2026)','https://council.vancouver.ca/20260714/documents/rr1.pdf'],
+ van_data:['City of Vancouver Open Data: parcels, property tax report 2026, building footprints 2009','https://opendata.vancouver.ca/'],
+ edm_matrix:['Land Use & Zoning Matrix (Oct 2026)','https://www.edmonton.ca/sites/default/files/public-files/Edmonton-Zoning-Bylaw-Land-Use-and-Zoning-Matrix.pdf'],
+ edm_bl:['Zoning Bylaw 20001','https://www.edmonton.ca/sites/default/files/public-files/assets/Bylaws/Bylaw20001.pdf'],
+ edm_dc:['City of Edmonton: Data Centre Development','https://www.edmonton.ca/business_economy/economic_investment/data-centre-development'],
+ edm_data:['City of Edmonton Open Data: property assessment 2026, parcel points, zoning, rooflines','https://data.edmonton.ca/'],
+};
+const srcs=ids=>'<div class="src">Sources: '+ids.map(i=>`<a href="${SRC[i][1]}" target="_blank" rel="noopener">${esc(SRC[i][0])}</a>`).join(' · ')+'</div>';
+
+/* ---------- zoning rules (from research notes 17, 18; register) ---------- */
+const VAN_ENV={
+ 'I-2':'Floor area up to 3.0 × the lot. Height 18.3 m (the City may allow 30.5–36.5 m). Rear yard 3.1 m. No data storage at the ground floor except entrances.',
+ 'I-1C':'Floor area up to 6.0 × the lot, at least a third of it industrial-type uses. Height 46.5 m (21.0 m near street edges; up to 50.3 m).',
+ 'I-3':'Only in sub-area A. Floor area up to 3.0 × the lot (the extra 2.0 does not apply to storage uses). Height 18.3 m (City may allow 30.5 m). Side yard 7.6 m, rear 3.1 m. Buildings at most 61 m wide and deep. Ground floor 6.0 m floor-to-floor; no data storage at the ground floor.',
+ 'FC-2':'Floor area from 1.0 to 5.0 × the lot depending on sub-area (6.5 at the City\'s discretion). Height 10.7–22.9 m (City may allow up to 51.8 m). No side yards. No data storage at grade.',
+};
+function vanStatus(z){
+  z=(z||'').trim();
+  if(VAN_ENV[z]) return {k:'case',t:'Case by case',d:`"Bulk Data Storage" is a conditional use in ${esc(z)}: the City decides on a development permit.`,env:VAN_ENV[z],src:['van_s2',{'I-2':'van_i2','I-1C':'van_i1c','I-3':'van_i3','FC-2':'van_fc2'}[z]]};
+  if(/^CD-1/.test(z)) return {k:'site',t:'Site-specific',d:'Comprehensive Development zoning: this parcel has its own by-law. Read it to see whether a data centre is allowed; otherwise treat it as a rezoning.',src:['van_cd1']};
+  if(!z||z==='?') return {k:'site',t:'No zoning recorded',d:'The tax record carries no zoning district for this parcel.',src:['van_data']};
+  if(/^(DD|FCCDD|CWD|BCPED|DEOD)$/.test(z)) return {k:'site',t:'Not yet reviewed',d:'This area is governed by an Official Development Plan, which the research has not yet reviewed. Whether a data centre is allowed here is unknown in the tool for now.',src:['van_landuse']};
+  const ref=/^(I-1|I-1A|I-1B|I-4|IC-|M-|MC-|C-|FC-1|R|RT|RM|RA|FM|FSD|HA)/.test(z);
+  return {k:'no',t:'Rezoning needed',d:'"Bulk Data Storage" is not listed for this district'+(ref?' in the City\'s land-use table (a reference document; the district schedule governs)':'')+'. A data centre here would need a rezoning — the 111 E 5th Ave referral is the current test case.',src:['van_s2','van_landuse','van_rts']};
+}
+const EDM_ENV={
+ IH:'Height 30.0 m (the City may vary it for operating features). Floor area up to 2.0 × the lot. Minimum site 1.0 ha. Street setback 3.0 m.',
+ IM:'Height 18.0 m. Floor area up to 2.0 × the lot. Setbacks 3.0 m from a street, 6.0 m next to a non-industrial zone, none to other industrial lots.',
+ BE:'Height 16.0 m. Floor area up to 1.6 × the lot.',
+};
+function edmStatus(zraw){
+  const z=String(zraw||'').trim().split(/\s+/)[0].toUpperCase();
+  const minorNote='A large data centre is treated by the City as Major Industrial. A smaller one whose noise, emissions and fuel or battery hazards stay inside the site could be argued as Minor Industrial — the Development Planner decides.';
+  if(z==='IH') return {k:'yes',t:'Allowed',d:'Major Industrial is a permitted use in IH, which is where the City says large-scale data centres belong.',env:EDM_ENV.IH,src:['edm_matrix','edm_bl','edm_dc']};
+  if(z==='IM') return {k:'case',t:'Smaller only',d:'Minor Industrial is permitted; Major Industrial only where it existed on 1 January 2024. '+minorNote+' A large data centre here needs a rezoning to IH.',env:EDM_ENV.IM,src:['edm_matrix','edm_bl','edm_dc']};
+  if(z==='BE'||z==='UI') return {k:'case',t:'Smaller only',d:'Minor Industrial is permitted in '+z+'; Major Industrial is not. '+minorNote,env:EDM_ENV[z]||'',src:['edm_matrix','edm_dc']};
+  if(z==='FD') return {k:'case',t:'Case by case',d:'Minor Industrial is discretionary, with limits, in Future Urban Development.',src:['edm_matrix']};
+  if(/^DC/.test(z)) return {k:'site',t:'Site-specific',d:'Direct Control: this site has its own provisions. Read them to see what is allowed; otherwise treat it as a rezoning.',src:['edm_bl']};
+  const STD=['RS','RSF','RSM','RM','RL','RR','MUN','MU','CN','CG','CB','A','NA','PSN','PS','PU','AG'];
+  if(!STD.includes(z)) return {k:'site',t:'Special area',d:'A special area or legacy zone ('+esc(z)+') with its own use lists; these are not yet loaded into the tool.',src:['edm_bl']};
+  return {k:'no',t:'Rezoning needed',d:'No industrial use is listed in this standard zone. A data centre here would need a rezoning, sometimes a plan amendment, and a Council public hearing.',src:['edm_matrix','edm_dc']};
+}
+const COL={yes:['rgba(134,173,167,.42)','#86ada7'],case:['rgba(205,176,122,.30)','#cdb07a'],site:['rgba(157,154,148,.16)','#6b6964'],no:[null,'#30343a']};
+
+/* ---------- state ---------- */
+const S={city:'van',meta:{},tiles:{},loading:{},sel:null,view:null,answers:{built:'new',extent:'whole',floor:'',host:{}}};
+const cv=$('#cv'), ctx=cv.getContext('2d'), mapEl=$('#map');
+let W=0,H=0,DPR=1;
+
+function decodeRing(a,ox,oy,q){ const n=a.length/2, r=new Float64Array(a.length); let x=0,y=0;
+  for(let i=0;i<n;i++){ x+=a[2*i]; y+=a[2*i+1]; r[2*i]=ox+x/q; r[2*i+1]=oy+y/q; } return r; }
+function bbox(r){ let a=1e9,b=1e9,c=-1e9,d=-1e9; for(let i=0;i<r.length;i+=2){ const x=r[i],y=r[i+1]; if(x<a)a=x; if(y<b)b=y; if(x>c)c=x; if(y>d)d=y; } return [a,b,c,d]; }
+function pathOf(rings){ const p=new Path2D(); for(const r of rings){ p.moveTo(r[0],r[1]); for(let i=2;i<r.length;i+=2) p.lineTo(r[i],r[i+1]); p.closePath(); } return p; }
+function pip(x,y,r){ let c=false; for(let i=0,j=r.length-2;i<r.length;j=i,i+=2){ const xi=r[i],yi=r[i+1],xj=r[j],yj=r[j+1]; if(((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi)) c=!c; } return c; }
+function area(r){ let s=0; for(let i=0,j=r.length-2;i<r.length;j=i,i+=2) s+=(r[j]+r[i])*(r[j+1]-r[i+1]); return Math.abs(s/2); }
+function centroid(r){ let x=0,y=0,n=r.length/2; for(let i=0;i<r.length;i+=2){x+=r[i];y+=r[i+1];} return [x/n,y/n]; }
+const statusOf=z=>S.city==='van'?vanStatus(z):edmStatus(z);
+
+async function getJSON(u){ const r=await fetch(u); if(!r.ok) throw new Error(u+' '+r.status); return r.json(); }
+async function loadMeta(city){
+  if(S.meta[city]) return S.meta[city];
+  const m=await getJSON(`tiles/${city}/meta.json`);
+  m.zstat=m.zones.map(z=>(city==='van'?vanStatus(z):edmStatus(z)).k);
+  const by={yes:[],case:[],site:[],no:[]};
+  for(const [zi,a] of m.overview){ by[m.zstat[zi]].push(decodeRing(a,0,0,m.Q)); }
+  m.ov={}; for(const k in by) m.ov[k]=pathOf(by[k]);
+  m.ovRaw=m.overview.map(([zi,a])=>{const r=decodeRing(a,0,0,m.Q);return {zi,r,bb:bbox(r)};}); delete m.overview;
+  m.tileset=new Set(m.tiles.map(t=>t[0]+'_'+t[1]));
+  S.meta[city]=m; return m;
+}
+async function loadTile(city,key){
+  const id=city+':'+key; if(S.tiles[id]||S.loading[id]) return S.tiles[id];
+  S.loading[id]=getJSON(`tiles/${city}/t_${key}.json`).then(t=>{
+    const m=S.meta[city], q=m.Q, [ox,oy]=t.o;
+    const T={key,A:t.A,par:[],pts:[],bld:[]};
+    if(t.P) for(const [pid,a] of t.P){ const r=decodeRing(a,ox,oy,q); T.par.push({id:pid,r,bb:bbox(r)}); }
+    if(t.E) for(const [pid,x,y] of t.E) T.pts.push({id:pid,x:ox+x/q,y:oy+y/q});
+    for(const [h,a] of t.B){ const r=decodeRing(a,ox,oy,q); T.bld.push({h,r,c:centroid(r),a:area(r)}); }
+    T.pPath=pathOf(T.par.map(p=>p.r)); T.bPath=pathOf(T.bld.map(b=>b.r));
+    S.tiles[id]=T; delete S.loading[id]; draw(); return T;
+  }).catch(e=>{ delete S.loading[id]; console.warn(e); });
+  return S.loading[id];
+}
+
+/* ---------- view ---------- */
+function resize(){ const b=mapEl.getBoundingClientRect(); DPR=Math.min(window.devicePixelRatio||1,2); W=b.width; H=b.height; cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR); draw(); }
+function homeView(){ const m=S.meta[S.city]; const [a,b,c,d]=m.ext; const s=Math.min(W/(c-a),H/(d-b))*0.95; S.view={cx:(a+c)/2,cy:(b+d)/2,s}; }
+const toWorld=(px,py)=>[S.view.cx+(px-W/2)/S.view.s, S.view.cy-(py-H/2)/S.view.s];
+const DETAIL={van:0.12,edm:0.2};
+function visibleTiles(){ const m=S.meta[S.city], T=m.T; const [x0,y1]=toWorld(0,0),[x1,y0]=toWorld(W,H); const out=[];
+  for(let i=Math.floor(x0/T);i<=Math.floor(x1/T);i++) for(let j=Math.floor(y0/T);j<=Math.floor(y1/T);j++){ const k=i+'_'+j; if(m.tileset.has(k)) out.push(k); } return out; }
+let raf=0; function draw(){ if(!raf) raf=requestAnimationFrame(()=>{raf=0; paint();}); }
+function paint(){
+  const m=S.meta[S.city]; if(!m||!S.view) return;
+  const {cx,cy,s}=S.view;
+  ctx.setTransform(DPR,0,0,DPR,0,0); ctx.fillStyle='#17181a'; ctx.fillRect(0,0,W,H);
+  ctx.setTransform(s*DPR,0,0,-s*DPR,(W/2-cx*s)*DPR,(H/2+cy*s)*DPR);
+  const lw=px=>px/s;
+  const fa=s>=DETAIL[S.city]?0.4:1;
+  for(const k of ['no','site','case','yes']){ const [f,st]=COL[k]; if(f){ ctx.globalAlpha=fa; ctx.fillStyle=f; ctx.fill(m.ov[k],'evenodd'); ctx.globalAlpha=1; } if(S.city==='edm'||s<DETAIL[S.city]){ ctx.strokeStyle=k==='no'?'#26292e':st; ctx.lineWidth=lw(k==='no'?.5:.8); ctx.stroke(m.ov[k]); } }
+  const detail=s>=DETAIL[S.city];
+  if(detail){
+    const keys=visibleTiles(); let waiting=0;
+    for(const k of keys){ const T=S.tiles[S.city+':'+k]; if(!T){ waiting++; loadTile(S.city,k); continue; }
+      if(T.par.length){ ctx.strokeStyle='#4a4f57'; ctx.lineWidth=lw(.6); ctx.stroke(T.pPath); }
+      ctx.fillStyle='rgba(233,230,225,.07)'; ctx.fill(T.bPath); ctx.strokeStyle='rgba(233,230,225,.38)'; ctx.lineWidth=lw(.7); ctx.stroke(T.bPath);
+      if(T.pts.length && s>0.6){ ctx.fillStyle='#9d9a94'; const r=lw(1.6); for(const p of T.pts) ctx.fillRect(p.x-r,p.y-r,2*r,2*r); }
+    }
+    $('#st').textContent=waiting?`Loading ${waiting} area${waiting>1?'s':''}…`:'Click a parcel';
+  } else $('#st').textContent='Zoom in or search an address to pick a parcel';
+  if(S.sel&&S.sel.city===S.city){ ctx.strokeStyle='#CC746C'; ctx.lineWidth=lw(2.4);
+    if(S.sel.ring){ ctx.stroke(pathOf([S.sel.ring])); }
+    if(S.sel.pt){ const r=lw(7); ctx.beginPath(); ctx.arc(S.sel.pt[0],S.sel.pt[1],r,0,7); ctx.stroke(); }
+    if(S.sel.blds){ ctx.fillStyle='rgba(204,116,108,.22)'; ctx.fill(pathOf(S.sel.blds.map(b=>b.r))); }
+  }
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  const nice=[10,20,50,100,200,500,1000,2000,5000]; const target=110/s; const L=nice.find(v=>v>=target)||5000;
+  $('#sc').innerHTML=`${L>=1000?L/1000+' km':L+' m'}<b style="width:${Math.round(L*s)}px;margin-left:auto"></b>`;
+}
+function zoomAt(px,py,f){ const [wx,wy]=toWorld(px,py); const s=Math.max(0.01,Math.min(40,S.view.s*f)); S.view.s=s; S.view.cx=wx-(px-W/2)/s; S.view.cy=wy+(py-H/2)/s; draw(); }
+function flyTo(x,y,s){ S.view={cx:x,cy:y,s:s||Math.max(S.view.s,1.6)}; draw(); }
+
+/* ---------- interaction ---------- */
+let drag=null, moved=false; const ptrs=new Map(); let pinch=null;
+mapEl.addEventListener('pointerdown',e=>{ mapEl.setPointerCapture(e.pointerId); ptrs.set(e.pointerId,[e.offsetX,e.offsetY]); moved=false;
+  if(ptrs.size===2){ const [a,b]=[...ptrs.values()]; pinch={d:Math.hypot(a[0]-b[0],a[1]-b[1]),s:S.view.s}; } else drag=[e.offsetX,e.offsetY,S.view.cx,S.view.cy]; });
+mapEl.addEventListener('pointermove',e=>{ if(!ptrs.has(e.pointerId)) return; ptrs.set(e.pointerId,[e.offsetX,e.offsetY]);
+  if(pinch&&ptrs.size===2){ const [a,b]=[...ptrs.values()]; const d=Math.hypot(a[0]-b[0],a[1]-b[1]); const f=pinch.s*d/pinch.d/S.view.s; zoomAt((a[0]+b[0])/2,(a[1]+b[1])/2,f); moved=true; return; }
+  if(!drag) return; const dx=e.offsetX-drag[0], dy=e.offsetY-drag[1]; if(Math.abs(dx)+Math.abs(dy)>4){ moved=true; mapEl.classList.add('drag'); }
+  S.view.cx=drag[2]-dx/S.view.s; S.view.cy=drag[3]+dy/S.view.s; draw(); });
+const up=e=>{ ptrs.delete(e.pointerId); if(ptrs.size<2) pinch=null; if(!ptrs.size){ mapEl.classList.remove('drag'); if(drag&&!moved) pick(e.offsetX,e.offsetY); drag=null; } };
+mapEl.addEventListener('pointerup',up); mapEl.addEventListener('pointercancel',e=>{ptrs.delete(e.pointerId);drag=null;pinch=null;});
+mapEl.addEventListener('wheel',e=>{ e.preventDefault(); zoomAt(e.offsetX,e.offsetY,Math.exp(-e.deltaY*0.0015)); },{passive:false});
+$('#zin').onclick=()=>zoomAt(W/2,H/2,1.8); $('#zout').onclick=()=>zoomAt(W/2,H/2,1/1.8); $('#home').onclick=()=>{homeView();draw();};
+
+async function pick(px,py){
+  const [x,y]=toWorld(px,py); const m=S.meta[S.city];
+  if(S.view.s<DETAIL[S.city]){ flyTo(x,y,Math.max(DETAIL[S.city]*4,0.8)); return; }
+  const k=Math.floor(x/m.T)+'_'+Math.floor(y/m.T);
+  const near=[]; for(let di=-1;di<=1;di++) for(let dj=-1;dj<=1;dj++){ const kk=(Math.floor(x/m.T)+di)+'_'+(Math.floor(y/m.T)+dj); if(m.tileset.has(kk)) near.push(kk); }
+  const tiles=(await Promise.all(near.map(kk=>loadTile(S.city,kk)))).filter(Boolean);
+  if(S.city==='van'){
+    let best=null; for(const T of tiles) for(const p of T.par){ const b=p.bb; if(x<b[0]||x>b[2]||y<b[1]||y>b[3]) continue; if(pip(x,y,p.r)){ const a=area(p.r); if(!best||a<best.a) best={p,T,a}; } }
+    if(best) return select({city:'van',tile:best.T.key,id:best.p.id,ring:best.p.r});
+  } else {
+    let best=null, lim=Math.max(30,14/S.view.s);
+    for(const T of tiles) for(const p of T.pts){ const d=Math.hypot(p.x-x,p.y-y); if(d<lim&&(!best||d<best.d)) best={p,T,d}; }
+    if(best) return select({city:'edm',tile:best.T.key,id:best.p.id,pt:[best.p.x,best.p.y]});
+  }
+  showZone(x,y);
+}
+function showZone(x,y){ const m=S.meta[S.city]; let hit=null; for(const o of m.ovRaw){ const b=o.bb; if(x<b[0]||x>b[2]||y<b[1]||y>b[3]) continue; if(pip(x,y,o.r)){ hit=o; break; } }
+  if(!hit) return; const z=m.zones[hit.zi], st=statusOf(z);
+  $('#side').innerHTML=`<div class="kind">Zone</div><h2>${esc(z)}</h2><p><span class="pill ${st.k}">${esc(st.t)}</span></p><p class="draft">${st.d}</p>${st.env?`<p class="sub">${esc(st.env)}</p>`:''}${srcs(st.src)}<p class="sub" style="margin-top:14px">No parcel record here. Click closer to a lot or building.</p>`; }
+
+/* ---------- site card ---------- */
+async function select(sel){
+  const T=S.tiles[sel.city+':'+sel.tile]||await loadTile(sel.city,sel.tile); if(!T) return;
+  sel.a=T.A[sel.id];
+  if(sel.city==='van'){ if(!sel.ring){ const p=T.par.find(p=>p.id===sel.id); if(p) sel.ring=p.r; }
+    sel.blds=sel.ring?T.bld.filter(b=>pip(b.c[0],b.c[1],sel.ring)):[];
+  } else { if(!sel.pt){ const p=T.pts.find(p=>p.id===sel.id); if(p) sel.pt=[p.x,p.y]; }
+    sel.blds=sel.pt?T.bld.filter(b=>pip(sel.pt[0],sel.pt[1],b.r)):[];
+    if(!sel.blds.length&&sel.pt){ const n=T.bld.map(b=>[b,Math.hypot(b.c[0]-sel.pt[0],b.c[1]-sel.pt[1])]).filter(v=>v[1]<25).sort((a,b)=>a[1]-b[1]); if(n.length) sel.blds=[n[0][0]]; }
+  }
+  S.sel=sel; if(sel.city!==S.city) await setCity(sel.city,true);
+  const c=sel.ring?centroid(sel.ring):sel.pt; if(c&&(S.view.s<1.2||Math.abs(c[0]-S.view.cx)*S.view.s>W/2||Math.abs(c[1]-S.view.cy)*S.view.s>H/2)) flyTo(c[0],c[1],Math.max(S.view.s,2));
+  try{ const tk=sel.tile.replace(/-/g,'m'); history.replaceState(null,'','#'+sel.city+'-'+tk+'-'+sel.id); }catch(e){}
+  card(); draw();
+}
+function card(){
+  const s=S.sel, a=s.a||[];
+  let h='', st, z;
+  if(s.city==='van'){
+    const [addr,zone,zcls,legal,strata,yb,lv,iv,ar]=a; z=zone; st=vanStatus(zone);
+    const bl=s.blds||[]; const hmax=bl.length?Math.max(...bl.map(b=>b.h)):null; const foot=bl.reduce((t,b)=>t+b.a,0);
+    h=`<div class="kind">Site · Vancouver</div><h2>${esc(addr||'No civic address')}</h2><div class="sub">Tax coordinate ${esc(s.id)}</div>
+    <h3>Data centre here?</h3><p><span class="pill ${st.k}">${esc(st.t)}</span> <span class="sub">zone ${esc(zone)}${zcls?' · '+esc(zcls):''}</span></p><p class="draft">${st.d}</p>${st.env?`<p class="sub">${esc(st.env)}</p>`:''}${srcs(st.src)}
+    <h3>The lot</h3><dl><dt>Lot area</dt><dd>${fmt(ar)} m²</dd><dt>Ownership</dt><dd>${strata>0?esc(strata)+' strata units — many owners':esc(legal==='LAND'?'one titled lot':legal||'—')}</dd>
+    <dt>Land value</dt><dd>${money(lv)}</dd><dt>Building value</dt><dd>${money(iv)}</dd><dt>Year built</dt><dd>${yb||'—'}</dd>
+    <dt>Floodplain</dt><dd class="gap">not loaded yet — the City's floodplain layer is still to be retrieved</dd></dl>
+    <h3>What stands on it</h3>${bl.length?`<dl><dt>Buildings</dt><dd>${bl.length} footprint${bl.length>1?'s':''}, ${fmt(foot)} m² in plan</dd><dt>Tallest</dt><dd>${hmax!=null?hmax.toFixed(1)+' m above ground':'—'}</dd></dl><div class="src">Heights as of 2009; newer buildings are missing.</div>`:'<p class="sub">No building in the 2009 footprints (empty then, or built since).</p>'}
+    ${srcs(['van_data'])}`;
+  } else {
+    const [addr,zone,zmap,zsrc,lot,gross,y0,y1,val,cls,nb,n]=a; z=zmap||zone; st=edmStatus(z);
+    const bl=s.blds||[]; const he=bl.filter(b=>b.h>0).map(b=>b.h);
+    h=`<div class="kind">Site · Edmonton</div><h2>${esc(addr||'No civic address')}</h2><div class="sub">${esc(nb||'')}${n>1?` · ${n} assessment accounts`:''}</div>
+    <h3>Data centre here?</h3><p><span class="pill ${st.k}">${esc(st.t)}</span> <span class="sub">zone ${esc(z)}${zone&&zmap&&zone.split(' ')[0]!==zmap.split(' ')[0]?` (record says ${esc(zone)})`:''}</span></p><p class="draft">${st.d}</p>${st.env?`<p class="sub">${esc(st.env)}</p>`:''}${srcs(st.src)}
+    <h3>The lot</h3><dl><dt>Lot area</dt><dd>${fmt(lot)} m²</dd><dt>Floor area</dt><dd>${gross?fmt(gross)+' m² (assessment)':'—'}</dd><dt>Assessed value</dt><dd>${money(val)}</dd>
+    <dt>Year built</dt><dd>${y0?(y0===y1?y0:y0+'–'+y1):'—'}</dd><dt>Use</dt><dd>${esc((cls||[]).join(', ')||'—')}</dd><dt>Floodplain</dt><dd class="gap">not yet looked at for Edmonton</dd></dl>
+    <div class="src">Edmonton parcels are points; lot outlines are not open data. Zone ${zsrc==='record'?'from the assessment record':'read from the zoning map'}.</div>
+    <h3>What stands on it</h3>${bl.length?`<dl><dt>Buildings</dt><dd>${bl.length} footprint${bl.length>1?'s':''}, ${fmt(bl.reduce((t,b)=>t+b.a,0))} m² in plan</dd><dt>Height</dt><dd>${he.length?'≈'+Math.max(...he).toFixed(0)+' m — ESTIMATE (floor area ÷ footprint × 4 m)':'—'}</dd></dl>`:'<p class="sub">No footprint at this point.</p>'}
+    ${srcs(['edm_data'])}`;
+  }
+  h+=startStep(st);
+  $('#side').innerHTML=h; wireStart();
+}
+
+/* ---------- what is being built (decided by J.B., 14 Oct) ---------- */
+function seg(name,opts,val){ return `<div class="seg" role="group" data-q="${name}">${opts.map(([v,l])=>`<button data-v="${v}" aria-pressed="${v===val}">${esc(l)}</button>`).join('')}</div>`; }
+function startStep(st){
+  const A=S.answers, hb=(S.sel.blds||[]).length>0;
+  let h=`<h3>What is being built?</h3>
+  <div class="q"><div class="lab">New or existing building?</div>${seg('built',[['new','New'],['existing','Existing']],A.built)}${A.built==='existing'&&!hb?'<small>No building recorded on this lot — check the parcel.</small>':''}</div>
+  <div class="q"><div class="lab">Whole building or part of one?</div>${seg('extent',[['whole','Whole building'],['part','Part of one']],A.extent)}
+  ${A.built==='new'&&A.extent==='part'?'<small class="draft">The options will compare positions in the building — basement, ground, upper floor, roof — so you do not have to choose one.</small>':''}</div>`;
+  if(A.built==='existing'&&A.extent==='part'){
+    h+=`<div class="q"><div class="lab">Which floor?</div>${seg('floor',[['basement','Basement'],['ground','Ground'],['upper','Upper floor'],['roof','Roof']],A.floor)}</div>
+    <div class="q"><div class="lab">About the building <span class="sub">— "don't know" is fine</span></div>`+
+    [['owner','Who are you?',[['owner','Owner'],['tenant','Tenant'],['dk',"Don't know"]]],
+     ['uses','What else is in the building?',[['homes','Homes'],['offices','Offices'],['shops','Shops'],['industry','Industry'],['dk',"Don't know"]]],
+     ['heat','How is it heated?',[['hydronic','Hot-water system'],['gas','Gas boilers'],['elec','Electric baseboard'],['de','District energy'],['dk',"Don't know"]]],
+     ['walls','Does the space touch an outside wall?',[['yes','Yes'],['no','No'],['dk',"Don't know"]]]]
+    .map(([k,l,o])=>`<div style="margin-top:10px"><div class="sub" style="margin-bottom:4px">${esc(l)}</div><div class="chips" data-h="${k}">${o.map(([v,t])=>`<button data-v="${v}" aria-pressed="${(A.host[k]||'')===v}">${esc(t)}</button>`).join('')}</div></div>`).join('')+
+    `<small style="margin-top:8px">More (room for heat rejection, electrical service, floor height, floor strength) sits in "Specify the building" for operators and planners.</small></div>`;
+  }
+  h+=`<div class="q"><div class="sub">Or a special case: <a href="#" data-sp="modular">a modular unit</a> · <a href="#" data-sp="infra">beside existing infrastructure</a> · <a href="#" data-sp="expand">expanding an existing data centre</a></div>${A.special?`<small>Chosen: ${esc({modular:'a modular or containerised unit',infra:'at existing infrastructure (substation, sewage plant, district energy plant, telecom exchange)',expand:'expanding an existing data centre'}[A.special])} — <a href="#" data-sp="">clear</a></small>`:''}</div>
+  <div class="next"><button disabled title="Round 2 of the build">What fits here →</button><span class="sub">Next build round: the zoning envelope, space for the plant, room for servers and the largest size that fits.</span></div>
+  <div class="draftnote">Wording is Claude's draft for J.B. to rewrite. Decisions: starting step (J.B., 14 Oct).</div>`;
+  return h;
+}
+function wireStart(){
+  document.querySelectorAll('#side .seg[data-q] button').forEach(b=>b.onclick=()=>{ const q=b.parentNode.dataset.q; S.answers[q]=b.dataset.v; card(); });
+  document.querySelectorAll('#side .chips[data-h] button').forEach(b=>b.onclick=()=>{ const k=b.parentNode.dataset.h; S.answers.host[k]=S.answers.host[k]===b.dataset.v?'':b.dataset.v; card(); });
+  document.querySelectorAll('#side [data-sp]').forEach(a=>a.onclick=e=>{ e.preventDefault(); S.answers.special=a.dataset.sp||''; card(); });
+}
+
+/* ---------- intro and legend ---------- */
+function intro(){ legend();
+  $('#side').innerHTML=`<div class="intro"><div class="kind">${S.city==='van'?'Vancouver':'Edmonton'}</div><h2>Pick a site</h2>
+  <p class="draft">Click a parcel, or search an address. The tool shows what is on the lot, whether a data centre is an allowed use there, and then asks what is being built.</p>
+  <p class="sub">Shaded areas are zones where a data centre is allowed or allowed case by case; outlined grey areas have their own site-specific rules. Everywhere else a data centre would need a rezoning — the tool still works there and shows what that would take.</p>
+  <ol class="sub"><li>Choose a city</li><li>Click a parcel</li><li>Say what is being built — or leave the defaults</li></ol>
+  <div class="draftnote">Draft wording (Claude) — for J.B. to rewrite.</div>${srcs([S.city==='van'?'van_data':'edm_data'])}</div>`;
+}
+function legend(){ const m=S.meta[S.city];
+  const L=S.city==='van'?[['case','Case by case (I-2, I-1C, I-3 A, FC-2)'],['site','Site-specific (CD-1), or not yet reviewed (downtown plan areas)'],['no','Rezoning needed']]:[['yes','Allowed (IH)'],['case','Smaller only, or case by case (IM, BE, UI, FD)'],['site','Site-specific (Direct Control, special areas)'],['no','Rezoning needed']];
+  const op=document.querySelector('#lg details'); const open=op?op.open:window.innerWidth>760;
+  $('#lg').innerHTML=`<details${open?' open':''}><summary>Is a data centre an allowed use?</summary>`+L.map(([k,t])=>`<div><i style="background:${COL[k][0]||'transparent'};border:1px solid ${COL[k][1]}"></i>${esc(t)}</div>`).join('')+`<div class="src">${esc(m.sources[0])}</div></details>`;
+}
+
+/* ---------- address search ---------- */
+const shards={};
+async function shard(city,k){ const id=city+k; if(!shards[id]) shards[id]=fetch(`tiles/${city}/s_${k}.tsv`).then(r=>r.ok?r.text():'').then(t=>t?t.split('\n').map(l=>l.split('\t')):[]); return shards[id]; }
+let qTimer=0;
+$('#q').addEventListener('input',()=>{ clearTimeout(qTimer); qTimer=setTimeout(search,180); });
+$('#q').addEventListener('keydown',e=>{ const items=[...document.querySelectorAll('#res li[data-i]')]; if(!items.length) return; let i=items.findIndex(li=>li.getAttribute('aria-selected')==='true');
+  if(e.key==='ArrowDown'){ e.preventDefault(); i=Math.min(items.length-1,i+1); } else if(e.key==='ArrowUp'){ e.preventDefault(); i=Math.max(0,i-1); } else if(e.key==='Enter'){ e.preventDefault(); (items[i]||items[0]).click(); return; } else return;
+  items.forEach((li,j)=>li.setAttribute('aria-selected',j===i)); });
+const ABBR={AVENUE:'AVE',STREET:'ST',WEST:'W',EAST:'E',NORTH:'N',SOUTH:'S',NORTHWEST:'NW',SOUTHWEST:'SW',NORTHEAST:'NE',SOUTHEAST:'SE',ROAD:'RD',DRIVE:'DR',BOULEVARD:'BLVD',CRESCENT:'CRES',PLACE:'PL',COURT:'CRT',TRAIL:'TR',LANE:'LN',WAY:'WY'};
+const normTok=t=>ABBR[t]||t;
+const toks=s=>s.toUpperCase().replace(/[.,#]/g,' ').split(/\s+/).filter(Boolean).map(normTok);
+async function search(){
+  const v=$('#q').value.trim(); const res=$('#res');
+  if(v.length<3){ res.hidden=true; return; }
+  const q=toks(v); const k=/^\d/.test(q[0])?q[0][0]:'x'; const rows=await shard(S.city,k);
+  const hits=[]; for(const r of rows){ if(!r._t) r._t=toks(r[0]); const t=r._t;
+    if(/^\d/.test(q[0])&&t[0]!==q[0]&&!(q.length===1&&t[0].startsWith(q[0]))) continue;
+    if(q.every((w,i)=>(i===0&&/^\d/.test(w))||t.some(x=>x.startsWith(w)))){ hits.push(r); if(hits.length>=8) break; } }
+  res.innerHTML=hits.length?hits.map((r,i)=>`<li role="option" data-i="${i}" aria-selected="${i===0}">${esc(r[0])}</li>`).join(''):`<li class="none">No match in ${S.city==='van'?'Vancouver':'Edmonton'} — try the number and street, e.g. ${S.city==='van'?'"555 W Hastings"':'"10220 104 Ave"'}</li>`;
+  res.hidden=false;
+  res.querySelectorAll('li[data-i]').forEach(li=>li.onclick=()=>{ const r=hits[+li.dataset.i]; res.hidden=true; $('#q').value=r[0]; select({city:S.city,tile:r[1],id:r[2]}); });
+}
+document.addEventListener('click',e=>{ if(!e.target.closest('.search')) $('#res').hidden=true; });
+
+/* ---------- city ---------- */
+async function setCity(city,keepSel){
+  S.city=city; $('#c-van').setAttribute('aria-pressed',city==='van'); $('#c-edm').setAttribute('aria-pressed',city==='edm');
+  $('#st').textContent='Loading…'; await loadMeta(city); homeView();
+  legend(); if(!keepSel){ S.sel=null; intro(); } draw();
+}
+$('#c-van').onclick=()=>setCity('van'); $('#c-edm').onclick=()=>setCity('edm');
+window.addEventListener('resize',resize);
+
+(async function init(){
+  resize();
+  const h=(location.hash||'').slice(1).match(/^(van|edm)-(m?\d+)_(m?\d+)-(.+)$/);
+  const city=h?h[1]:'van';
+  await setCity(city);
+  if(h){ const tile=h[2].replace('m','-')+'_'+h[3].replace('m','-'); await select({city,tile,id:h[4]}); }
+})();
+})();
+</script>
