@@ -363,7 +363,7 @@ function drawNode(n){
   else { if(n.conf!=null) ring(g,18,cy,n.conf);
     el('path',{class:'glyph',d:glyphs[kind==='quantity'&&n.stage==='decide'?'decide':kind]||glyphs.quantity,transform:`translate(${n.conf!=null?13.5:12},${cy-4.5}) scale(0.7)`},g); }
   const t=el('text',{class:'name',x:34,y:mode==='example'&&kind==='quantity'?18:cy-2},g); t.textContent=clip(n.name,FM?22:24);
-  if(n.trial){ const pl=el('text',{class:'plus',x:p.w-30,y:13,'text-anchor':'end'},g); pl.textContent='+ what if'; }
+  if(n.trial){ const pl=el('text',{class:'plus',x:p.w-6,y:-4,'text-anchor':'end'},g); pl.textContent='+ what if'; }
   const u=el('text',{class:'unit',x:34,y:mode==='example'&&kind==='quantity'?31:cy+12},g); u.textContent=clip(n.unit||n.source_text||'',30);
   if(mode==='example'&&kind==='quantity'){ const v=exVal(n.id); const tv=el('text',{class:'val',x:34,y:48},g); tv.textContent=v?clip(v[0],30):'—'; }
   if(!['input','pref'].includes(kind)) el('circle',{class:'port',cx:0,cy,r:3.5},g);
@@ -522,6 +522,9 @@ function renderInspector(){
       h=`<div class="kind">Options</div><h2>What if we added…</h2><p class="draft" style="margin-top:6px">Any option can try these. Each changes rows of its trade-off table and carries its rule status in each city. They are sorted by which way the exchange runs. Some are possible but blocked by a rule; that shows as a limit a change in policy would move, not hidden. Two are listed only to explain why they are out.</p><div class="draftnote">Draft wording (Claude) — for J.B. to rewrite. From research reports 15a–15d.</div>
       ${['opportunity','place','technology'].map(k=>`<div class="kind" style="margin-top:16px">${KL[k][0]} · <span style="text-transform:none;letter-spacing:0;font-weight:300">${KL[k][1]}</span></div><ol class="addl">${A.filter(a=>a.kind===k).map(li).join('')}</ol>`).join('')}`;
     } else if(n.id==='relax'){ h=`<div class="kind">Options</div><h2>If you moved a limit</h2><p style="color:var(--muted)">A user's limit is always respected. Separately, the tool shows what relaxing each limit would open and at what price. For example: accept a rezoning (about 15 months in Vancouver) and two more options appear, one recovering three times the heat. These options never appear among the results.</p>`;
+      const PR=D.limit_presets||[]; if(PR.length){ const byP={}; PR.forEach(x=>(byP[x.place]=byP[x.place]||[]).push(x));
+        h+=`<h3 style="margin-top:16px">Rules from elsewhere</h3><p class="draft" style="margin-top:4px">A limit can also be moved by trying another place's rule here. Each shows what it would change and who it favours; none is applied unless the user asks.</p><div class="draftnote">Draft wording (Claude) — for J.B. to rewrite. From research notes 19–21.</div>`;
+        Object.keys(byP).forEach(pl=>{ h+=`<div class="kind" style="margin-top:14px">${esc(pl)}</div><ol class="addl">`+byP[pl].map(x=>`<li><b>${esc(x.name)}</b><div class="r">${esc(x.limit)}: ${esc(x.value)}</div><div class="r">favours ${esc(x.favours)} · costs ${esc(x.costs)}</div><div class="r" style="color:var(--muted)">${esc(x.status)}</div></li>`).join('')+'</ol>'; }); }
     } else if(n.kind==='pref'){ h=`<div class="kind">The user's values</div><h2>${esc(n.name)}</h2><p style="color:var(--muted)">${esc(n.formula)}</p><p class="draftnote">Values enter from below, separately from the facts on the left.</p>`;
     } else {
       const v=mode==='example'?exVal(n.id):null;

@@ -31,6 +31,10 @@ INPUTS = {
     'spare_cooling': ('Spare cooling', 'cooling capacity beyond IT load', 'operator claim or judged', 40),
     'area': ('Area considered', 'hectares around the parcel', 'tool radius setting', 100),
     'plot_ratio': ('Plot ratio', 'built area ÷ land area', 'parcels and footprints', 70),
+    'start_case': ('What is being built', 'new or existing · whole or part · which floor · or a special case', 'asked first (J.B., 14 Oct); quick-path default: new, whole building', 100),
+    'host_building': ('Host building', 'part of an existing building: owner or tenant, other uses, heating system, walls and orientation, room for heat rejection, electrical service, floor height, floor load', 'asked; "don\'t know" gives a labelled assumption', 50),
+    'zone': ('Zone', 'zoning district and sub-area', 'Vancouver property-tax report zoning field; Edmonton zoning map (11,549 polygons); sub-area maps from the schedules', 80),
+    'flood_area': ('Floodplain', 'whether the parcel is in the designated floodplain', 'City of Vancouver designated-floodplain layer', 80),
     'sewer_flow': ('Sewer flow', 'm³/day in the main past the parcel', 'sewer-mains layer gives type and material only; flow by request', 20),
 }
 
@@ -101,7 +105,7 @@ EX['values'].update({'it_load_actual': ('0.7–2.2 MW average', "≥3.7 MW claim
 EX['match'] = 'Recovered heat → the host tower (retrofit to a 45 °C loop); the downtown steam network is outside the calibrated range'
 
 nodes, edges = [], []
-SIDE = {'cooling_type':'dc','plant_schedule':'dc','spare_cooling':'dc','lighting_plan':'dc'}
+SIDE = {'cooling_type':'dc','plant_schedule':'dc','spare_cooling':'dc','lighting_plan':'dc','start_case':'dc','host_building':'place'}
 for k, (name, desc, src, conf) in INPUTS.items():
     nodes.append({'id': k, 'kind': 'input', 'stage': 'input', 'side': SIDE.get(k, 'place'), 'name': name, 'formula': desc, 'coef': '', 'unit': '', 'sources': [], 'source_text': src, 'conf': conf, 'status': 'read or asked', 'inputs': []})
 for q in r['quantities']:
@@ -145,6 +149,9 @@ out = {
     'verdict_note': r['meta'].get('verdict_states_note', ''),
     'try_menu': r['meta'].get('try_menu', []),
     'try_menu_note': r['meta'].get('try_menu_note', ''),
+    'limit_presets': r['meta'].get('limit_presets', []),
+    'limit_presets_note': r['meta'].get('limit_presets_note', ''),
+    'start_step': r['meta'].get('start_step', {}),
 }
 json.dump(out, open(os.path.join(here, 'diagram_data.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 dangling = [e for e in edges if not any(n['id'] == e['from'] for n in nodes)]

@@ -156,4 +156,18 @@ RAT.update({
  'deep_geo': 'Deep geothermal heat is possible under Edmonton, not Vancouver; it would compete with the data centre\'s heat rather than help it.',
  'tes_volume': 'A hot or chilled water tank shifts heat or cooling between hours; this sizes the tank.',
  'absorption': 'Waste heat can make cooling for neighbours only if it is hot enough; air-cooled heat is not.',
+ # siting (14 Oct)
+ 'start_case': 'Whether the data centre is new or goes into an existing building, all of it or part, and on which floor: the first thing that changes every answer after it.',
+ 'host_building': 'When the data centre takes part of an existing building, that building decides what it can share and who it affects: its owner, its other uses, how it is heated, its walls, its power and its floors.',
+ 'zone': 'The zone and sub-area of the parcel; every allowance and limit in the city\'s by-law hangs on it.',
+ 'envelope': 'The most the zoning lets anyone build here: floor area, height, setbacks. A data centre has to fit inside it with all its plant.',
+ 'component_space': 'A data centre is mostly plant: electrical yard, batteries, generators and fuel, heat rejection. This is the room they take before any servers go in.',
+ 'hall_area': 'What is left for servers once the plant, support space and any ground-floor use the zone asks for are taken out.',
+ 'size_fit': 'The largest data centre the site or floor can hold, as a range; it is what a first-time user sees instead of having to know what a megawatt is.',
+ 'floor_load_need': 'Racks and batteries are heavy; an office floor is built for far less than a slab on the ground.',
+ 'fuel_on_site': 'Backup generators need fuel kept on site, and the fire code limits how much can sit in a basement or on an upper floor.',
+ 'flood_exposure': 'Electrical plant below the flood level is not allowed in the floodplain unless protected; this mostly decides against basements in low areas.',
+ 'flood_area': 'Whether the parcel lies in the designated floodplain at all.',
+ 'vibration_rank': 'Plant on an upper floor shakes the structure that neighbours live and work in; on a slab on grade it is easiest to isolate.',
+ 'service_class': 'Above certain loads the utility supplies power differently, with more feeders, transmission or bigger clearances; that changes cost, time and space.',
 })

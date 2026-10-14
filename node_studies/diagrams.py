@@ -539,6 +539,63 @@ def d_account(sel):
     return F, 'Table', 'One trade-off table per option, rows in their own units and never summed; the ledger reads the same table party by party.'
 
 
+def d_siting(sel):
+    F = Fig(680, 470); c = fcol('siting'); H = GC['heat']; PW = GC['power']; G = 360
+    def R(x, y, w, h, st=FG, fill=PN, sw=1.0, dash=''):
+        da = f' stroke-dasharray="{dash}"' if dash else ''
+        F.add(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{fill}" stroke="{st}" stroke-width="{sw}"{da}/>')
+    def L(x1, y1, x2, y2, st=FG, sw=1.0, dash=''):
+        da = f' stroke-dasharray="{dash}"' if dash else ''
+        F.add(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{st}" stroke-width="{sw}"{da}/>')
+    # --- left: a new building on a lot (section) ---
+    head(F, 40, 58, 'New building on a lot')
+    F.add(T(340, 26, 'Start: new or existing?  ·  whole building or part?  ·  which floor?', FG, 11.5, 'middle', 400))
+    L(40, G, 330, G, FG, 1.2); L(50, G - 6, 50, G + 6, MU); L(320, G - 6, 320, G + 6, MU)
+    F.add(f'<rect x="50" y="{G}" width="270" height="34" fill="url(#hatch)" stroke="none"/>')
+    R(72, 150, 228, G - 150, MU, 'none', .9, '6 4')
+    L(72, 112, 300, 112, MU, .8, '2 4'); F.add(T(296, 106, 'height at the City\'s discretion', FA, 10, 'end'))
+    F.add(T(76, 166, 'envelope', FA, 10))
+    R(92, 330, 138, 30, FG, 'url(#hatch)'); F.add(T(161, 349, 'other use · entrances', FG, 10, 'middle'))
+    for k in range(3):
+        y = 246 + k * 28; R(92, y, 138, 28, FG, PN)
+        for j in range(6): R(102 + j * 20, y + 8, 12, 16, MU, 'none', .7)
+    R(92, G, 138, 28, FG, '#1b1d20'); F.add(T(161, G + 18, 'plant below grade', FA, 10, 'middle'))
+    for x0 in (102, 162):
+        R(x0, 232, 50, 14, FG, PN)
+        for j in range(3): arrow(F, f'M{x0 + 12 + j * 13},{228} L{x0 + 12 + j * 13},{212}', H, 1.1)
+    R(240, 340, 18, 20, PW, PN); F.add(icon('power', 241, 342, .66, PW, 1.2))
+    R(262, 336, 22, 24, FG, PN); R(288, 348, 12, 12, FG, PN)
+    L(249, 340, 249, 300, PW, 1.2, '3 3'); L(249, 300, 330, 300, PW, 1.2, '3 3'); F.add(T(330, 294, 'utility', FA, 10, 'end'))
+    # --- right: part of an existing building (section) ---
+    head(F, 390, 58, 'Part of an existing building')
+    L(380, G, 650, G, FG, 1.2)
+    R(420, 90, 140, G - 90, FG, PN)
+    for y in range(120, G, 30): L(420, y, 560, y, L2, .8)
+    F.add(T(412, 135, 'homes', FA, 10, 'end')); F.add(T(412, 225, 'offices', FA, 10, 'end'))
+    R(470, 76, 40, 14, A2, 'none', 1.1, '4 3'); F.add(T(412, 86, 'roof', FA, 10, 'end'))
+    R(420, 180, 80, 30, A2, 'none', 1.3, '4 3'); F.add(T(412, 199, 'upper floor', FA, 10, 'end'))
+    R(420, 330, 80, 30, A2, 'none', 1.3, '4 3'); F.add(T(412, 343, 'ground', FA, 10, 'end'))
+    R(420, G, 140, 32, FG, '#1b1d20'); R(440, G + 4, 80, 24, A2, 'none', 1.3, '4 3'); F.add(T(412, G + 20, 'basement', FA, 10, 'end'))
+    R(530, G + 10, 22, 16, FG, PN)
+    L(390, 353, 650, 353, GC['water'], 1.1, '7 4'); F.add(T(646, 346, 'flood level', GC['water'], 10, 'end'))
+    for x0 in (436, 470):
+        F.add(f'<path d="M{x0},{214} q4,4 0,8 q-4,4 0,8" fill="none" stroke="{MU}" stroke-width=".9"/>')
+    # --- callouts ---
+    F.badge(122, 22, 'start_case', sel, c)
+    F.badge(560, 90, 'host_building', sel, c)
+    F.tag(72, 150, 'L', 'zone', sel, c)
+    F.tag(72, 205, 'L', 'envelope', sel, c)
+    F.tag(92, 260, 'L', 'size_fit', sel, c)
+    F.tag(92, 300, 'L', 'hall_area', sel, c)
+    F.tag(249, 340, 'B', 'service_class', sel, c)
+    F.tag(273, 360, 'B', 'component_space', sel, c)
+    F.tag(470, 392, 'B', 'flood_exposure', sel, c)
+    F.tag(541, 384, 'B', 'fuel_on_site', sel, c)
+    F.tag(470, 222, 'R', 'vibration_rank', sel, c)
+    F.tag(500, 196, 'R', 'floor_load_need', sel, c)
+    F.tag(620, 353, 'R', 'flood_area', sel, c)
+    return F, '2D sections', 'Two starting cases. Left, a new building: the zoning envelope, plant on the roof, in the yard and below grade, the data hall in between, and — in Vancouver — another use at the ground floor. Right, part of an existing building: the same data centre on the roof, an upper floor, the ground floor or the basement, each meeting a different floor load, fuel limit, flood level and set of neighbours.'
+
 DIAGRAMS = {'heat_out': d_heat_out, 'heat_use': d_heat_use, 'sink': d_sink, 'power': d_power, 'water': d_water, 'sound': d_sound,
-            'seen': d_seen, 'carbon': d_carbon, 'materials': d_materials, 'space': d_space, 'it': d_it, 'money': d_money,
+            'seen': d_seen, 'carbon': d_carbon, 'materials': d_materials, 'space': d_space, 'siting': d_siting, 'it': d_it, 'money': d_money,
             'rules': d_rules, 'people': d_people, 'time': d_time, 'ground': d_ground, 'account': d_account}

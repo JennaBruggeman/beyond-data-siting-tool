@@ -10,6 +10,7 @@ FAM = {
  'carbon': ('Carbon and air', ['grid_co2','generator_co2','generator_nox_pm','refrigerant_co2e','embodied_it','embodied_building','genset_test','hvo_swap']),
  'materials':('Materials', ['copper_tonnes','ewaste','rare_earth']),
  'space':  ('Space', ['parcel','massing','area','plot_ratio','floor_area','server_floor','offerable_area','existing_building','storage_footprint','clean_air_volume']),
+ 'siting': ('Siting: what fits where', ['start_case','host_building','zone','envelope','component_space','hall_area','size_fit','floor_load_need','fuel_on_site','flood_exposure','flood_area','vibration_rank','service_class']),
  'it':     ('The machines', ['servers','cooling_type','plant_schedule','spare_cooling']),
  'money':  ('Money', ['distribution_cost','price_floor','price_ceiling','window','crf','lcoh','payback','capex_split','affordability','build_cost','row_cost','cfd_score']),
  'rules':  ('Rules and process', ['zoning_status','rezoning_price','consultation','crossing_type','standoff','ev_exemption']),
@@ -29,6 +30,7 @@ ICON = {  # 24×24, stroked, no fill
  'carbon':'M7 18.5h10.5a4 4 0 0 0 .3-8 6 6 0 0 0-11.6 1.3A3.4 3.4 0 0 0 7 18.5z',
  'materials':'M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9',
  'space':'M4 4h16v16H4zM4 13h9v7M13 4v9',
+ 'siting':'M3 20.5h18M6 20.5V6.5h9v14M15 10.5h4v10M6 11h9M6 15.5h9M9 4v2.5',
  'it':'M5 3.5h14v5.5H5zM5 9h14v5.5H5zM5 14.5h14V20H5zM8 6.2h1.5M8 11.7h1.5M8 17.2h1.5',
  'money':'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM15 9.2c-.8-1.4-6-1.6-6 .8 0 2.6 6 1.4 6 4 0 2.4-5.2 2.2-6 .8M12 6.5v11',
  'rules':'M6 3h9l4 4v14H6zM15 3v4h4M9 11.5h7M9 15.5h5',
@@ -49,7 +51,7 @@ GROUP = {
  'water':  ('Water',           '#7fb2c4', ['water']),
  'senses': ('Sound and sight', '#b9a3cf', ['sound','seen']),
  'matter': ('Matter and carbon','#9fb38a', ['carbon','materials','it','ground']),
- 'city':   ('City and process','#c8c2b8', ['space','money','rules','people','time','account']),
+ 'city':   ('City and process','#c8c2b8', ['space','siting','money','rules','people','time','account']),
 }
 def group_of(fam):
     for g,(_,_,fs) in GROUP.items():
