@@ -405,3 +405,5 @@ Access date for all: 14 Oct 2026 unless noted.
 10. **Generator enclosures and containers** for 2–3 MW sets have no dimension source.
 11. **2N definition** has no public standard text (Uptime defines N, N+1, Tier IV only).
 12. **Security:** EN 50600 protection-class content is not public. Generic allowances (guard room, fence setback) remain UNVERIFIED by design.
+
+**Update 14 Oct:** NBC 2020 Table 4.1.5.3 read from the official PDF (note 24). Office 2.4 / 4.8 kPa and equipment/service rooms 3.6 kPa confirmed; the office row excludes computer rooms, and data halls must be designed for actual equipment loads (4.1.5.1.(1)). Gap 1 closed; data-hall values remain NEEDS STANDARD.

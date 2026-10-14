@@ -176,3 +176,5 @@ Not used: Chicago Public Schools spec 26 05 48 (transformer isolation table extr
 5. **CSA B139.1.1 (stationary engines) and CSA C282 Clause 7.3 (fuel supply)** — paywalled; via UBC Library/CSA OnDemand if available.
 6. **Vancouver Fire By-law** current text — not located in search; obtain from vancouver.ca.
 7. Mak & Su (2001) full text — via UBC Library (SAGE).
+
+**Update 14 Oct:** NFC 2020 Part 4 read from the official PDF (note 24). Table 4.3.13.4.-B values, the 230 L definition, the 2 h room, 100 % containment and 550 mm clearance are confirmed for 2020; status changed from UNVERIFIED to SOURCED.
