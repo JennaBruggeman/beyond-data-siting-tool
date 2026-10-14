@@ -29,7 +29,7 @@ header select{background:var(--bg);border:1px solid var(--line-2);border-radius:
 .tb{display:inline-flex;gap:4px;margin-left:auto}
 .tb button{background:var(--panel-2);border:1px solid var(--line-2);border-radius:6px;width:30px;height:30px;cursor:pointer;color:var(--fg)}
 .tb button:hover{border-color:var(--accent)}
-main{display:grid;grid-template-columns:1fr 390px;min-height:0}
+main{display:grid;grid-template-columns:1fr var(--aw,460px);min-height:0;position:relative}
 #canvas{position:relative;overflow:hidden;background:var(--bg);cursor:grab;min-width:0}
 #canvas.drag{cursor:grabbing}
 #canvas svg{width:100%;height:100%;display:block}
@@ -125,6 +125,20 @@ aside .tag.hard{border-color:var(--accent);color:var(--accent-2)}
 .pill.pass{background:var(--ok)} .pill.partial{background:var(--mid)} .pill.fail{background:var(--bad)} .pill.unassessed,.pill.na{background:var(--line-2);color:var(--fg)} .pill.cannot{background:var(--k-input)}
 #tip{position:absolute;pointer-events:none;background:var(--panel-2);border:1px solid var(--line-2);border-radius:6px;padding:6px 9px;font-size:12px;max-width:280px;display:none;z-index:3}
 [hidden]{display:none!important}
+#resizer{position:absolute;top:0;bottom:0;width:9px;cursor:col-resize;z-index:4;right:calc(var(--aw,460px) - 4px)}
+#resizer::after{content:"";position:absolute;left:4px;top:0;bottom:0;width:1px;background:transparent}
+#resizer:hover::after,#resizer.drag::after{background:var(--accent)}
+main.full #resizer{display:none}
+.mech.zoomable{cursor:zoom-in}
+.mech .zh{font-size:11px;color:var(--faint)}
+#zoom{position:fixed;inset:0;z-index:20;background:rgba(10,10,11,.86);display:grid;place-items:center;padding:24px 16px}
+#zoom .zb{background:var(--panel);border:1px solid var(--line-2);border-radius:10px;width:min(1180px,100%);max-height:100%;overflow:auto;padding:16px 20px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px}
+#zoom .zd svg{width:100%;height:auto;display:block}
+#zoom .zt{display:flex;align-items:center;gap:10px;grid-column:1/-1} #zoom .zt b{font-size:16px;font-weight:600} #zoom .zt button{margin-left:auto;background:var(--panel-2);border:1px solid var(--line-2);color:var(--fg);border-radius:6px;padding:4px 12px;cursor:pointer}
+#zoom ol{list-style:none;padding:0;margin:0;font-size:13px} #zoom li{margin:0 0 8px;cursor:pointer} #zoom li.on{color:var(--accent-2)} #zoom li em{font-style:normal;color:var(--faint);font-size:11.5px}
+#zoom li.on .gn{background:var(--accent);border-color:var(--accent);color:#17181a}
+@media (max-width:900px){#resizer{display:none} #zoom .zb{grid-template-columns:1fr}}
+
 /* family diagrams, side panel and Guide */
 .ctag.on .ld{stroke:var(--accent)} .ctag.on .dot{fill:var(--accent)} .ctag.on .tg{fill:var(--accent);stroke:var(--accent)} .ctag.on text{fill:#17181a}
 .mech{margin:14px 0 0;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px}
@@ -224,6 +238,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
   <div id="canvas"><svg id="svg" role="img" aria-label="Tool logic: what the data centre brings and what the place offers feed quantities across process stages; conditions say what it would take to move each; the user's count, limits and emphasis shape a set of options; each option's trade-off table fans out to the parties who gain and give up; a lifecycle strip runs underneath."></svg><div id="tip"></div></div>
   <div id="flow" hidden></div>
   <div id="guidev" hidden></div>
+  <div id="resizer" role="separator" aria-orientation="vertical" aria-label="Resize the side panel" tabindex="0"></div>
   <aside id="inspector"></aside>
 </main>
 </div>
@@ -8106,7 +8121,7 @@ function roleList(rs){ return '<div class="roles">'+rs.map(x=>{const t=D.sources
 function moveTags(c){ return (c.move||[]).map(m=>`<span class="tag ${m==='physics'?'hard':''}" title="${esc(MC[m]?MC[m].note:'')}">${esc(MC[m]?MC[m].name:m)}</span>`).join(''); }
 function exchangeOf(id){ return (D.exchanges||[]).filter(e=>e.dc_to_place.includes(id)||e.place_to_dc.includes(id)).map(e=>`${e.name} — ${e.place_to_dc.includes(id)?'the place gives the data centre':'the data centre gives the place'}`); }
 function famBlock(id){ const f=G.node_family[id]; if(!f) return ''; const F=G.families[f];
-  return `<figure class="mech">${F.svg}<figcaption><span>${esc(F.kind)}</span><a data-guide="${f}">open in the Guide</a></figcaption></figure>
+  return `<figure class="mech zoomable" data-fam="${f}" title="Click to enlarge">${F.svg}<figcaption><span>${esc(F.kind)} · <span class="zh">click to enlarge</span></span><a data-guide="${f}">open in the Guide</a></figcaption></figure>
   <p class="why draft">${esc(G.rationale[id]||'')}</p><div class="draftnote">Why it is here — draft wording (Claude), for J.B. to rewrite.</div>`; }
 function famKind(id){ const f=G.node_family[id]; if(!f) return ''; const F=G.families[f]; return `<span class="famk"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="${F.icon}" fill="none" stroke="${F.colour}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>${esc(F.name)}</span>`; }
 function renderInspector(){
@@ -8157,8 +8172,31 @@ function renderInspector(){
   }
   insp.innerHTML=h; bindGo();
   insp.querySelectorAll('.mech .ctag').forEach(tg=>tg.classList.toggle('on',tg.dataset.q===selected));
-  insp.querySelectorAll('[data-guide]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault(); window.__openGuide&&window.__openGuide(a.dataset.guide,selected);}));
+  insp.querySelectorAll('[data-guide]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault(); e.stopPropagation(); window.__openGuide&&window.__openGuide(a.dataset.guide,selected);}));
+  insp.querySelectorAll('.mech.zoomable').forEach(m=>m.addEventListener('click',()=>openZoom(m.dataset.fam,selected)));
 }
+/* enlarged diagram */
+function openZoom(f,q){ const F=G.families[f]; let z=document.getElementById('zoom'); if(!z){ z=document.createElement('div'); z.id='zoom'; document.body.appendChild(z);} 
+  const NN={}; D.nodes.forEach(n=>NN[n.id]=n);
+  z.innerHTML=`<div class="zb" role="dialog" aria-label="${esc(F.name)}"><div class="zt"><svg viewBox="0 0 24 24" width="20" height="20"><path d="${F.icon}" fill="none" stroke="${F.colour}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>${esc(F.name)}</b><span class="tag">${esc(F.kind)}</span><button>Close</button></div><div class="zd">${F.svg}<p class="draft" style="font-size:13px">${esc(F.caption)}</p></div><ol>${F.key.map(([n,k])=>`<li data-q="${k}"><span class="gn">${n}</span>${esc((NN[k]||{}).name||k)} <em>${esc((NN[k]||{}).unit||'')}</em></li>`).join('')}</ol></div>`;
+  const mark=k=>{ z.querySelectorAll('.ctag').forEach(t=>t.classList.toggle('on',t.dataset.q===k)); z.querySelectorAll('li').forEach(l=>l.classList.toggle('on',l.dataset.q===k)); };
+  mark(q); z.hidden=false;
+  z.querySelectorAll('li').forEach(l=>l.onclick=()=>mark(l.dataset.q)); z.querySelectorAll('.ctag').forEach(t=>{t.style.cursor='pointer'; t.addEventListener('click',()=>mark(t.dataset.q));});
+  const close=()=>{z.hidden=true;}; z.querySelector('.zt button').onclick=close; z.onclick=e=>{ if(e.target===z) close(); };
+  document.addEventListener('keydown',function k(e){ if(e.key==='Escape'){close(); document.removeEventListener('keydown',k);} });
+  z.querySelector('.zt button').focus();
+}
+/* resizable side panel */
+(function(){ const r=document.getElementById('resizer'), m=document.querySelector('main'); let w=460;
+  try{ const s=parseInt(localStorage.getItem('bd_aw')); if(s) w=s; }catch(e){}
+  const set=v=>{ w=Math.max(320,Math.min(v,Math.round(window.innerWidth*0.7))); m.style.setProperty('--aw',w+'px'); };
+  set(w);
+  r.addEventListener('pointerdown',e=>{ r.setPointerCapture(e.pointerId); r.classList.add('drag');
+    const mv=ev=>set(m.getBoundingClientRect().right-ev.clientX);
+    const up=()=>{ r.classList.remove('drag'); r.removeEventListener('pointermove',mv); r.removeEventListener('pointerup',up); try{localStorage.setItem('bd_aw',w)}catch(e){} };
+    r.addEventListener('pointermove',mv); r.addEventListener('pointerup',up); });
+  r.addEventListener('keydown',e=>{ if(e.key==='ArrowLeft') set(w+30); if(e.key==='ArrowRight') set(w-30); });
+})();
 function bindGo(){ insp.querySelectorAll('[data-go]').forEach(c=>c.addEventListener('click',()=>{select(c.dataset.go); centreOn(c.dataset.go);})); }
 function centreOn(id){ const p=posN[id]||condPos[id]; if(!p)return; vb.x=p.x+p.w/2-vb.w/2; vb.y=p.y+p.h/2-vb.h/2; setVB(); }
 
