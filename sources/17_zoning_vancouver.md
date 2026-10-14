@@ -135,3 +135,38 @@ Related definitions (Section 2, June 2026) that a tool must *not* confuse with B
 9. **Parcel dataset:** the property tax dataset's field names and code formats are UNVERIFIED.
 10. **"Data centre" as Bulk Data Storage vs General Office (DEICT)** is an interpretation based on definitions and staff practice. Confirm with City zoning staff, e.g. through a zoning enquiry.
 11. **Not covered:** site coverage limits (none found in the I-schedules reviewed); NBC/BCBC, noise by-law and Vancouver Building By-law constraints.
+
+---
+
+## Update 14 Oct: in-force I-3 and FC-2 schedules (June 2026), supplied by J.B.
+
+Sources: City of Vancouver, Zoning and Development By-law, *I-3 District Schedule* (June 2026) and *FC-2 District Schedule* (June 2026). https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-3.pdf ; https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-fc-2.pdf . Saved locally in data/raw/van/. These replace the April 2022 drafts used above; I-3 and FC-2 rows are now SOURCED for the items below.
+
+### I-3 (sub-area A only)
+- Use: "Bulk Data Storage, only in sub-area A" — Conditional, regulations 2.2.1, 2.2.11.
+- s. 2.2.11: "Bulk data storage is not permitted at the ground floor, except for entrances."
+- FSR (s. 3.1.1.1): max 3.00. Bulk data storage is a transportation and storage use, so it falls in allocation (a), up to 3.00. The extra 2.00 FSR in s. 3.1.1.2 is **not** available to transportation and storage uses (it lists manufacturing, outright service, utility and communication, wholesale, and office). So the ceiling for a data centre is 3.00 FSR.
+- Height (s. 3.1.2.1): 18.3 m; may be increased to 30.5 m (s. 3.1.2.10, discretionary).
+- Front yard 0.6 m; front setback 3.7 m for portions 18.3–30.5 m, 6.1 m above 30.5 m.
+- Side yard 7.6 m; side setback 10.7 m for portions 18.3–30.5 m, 12.2 m above 30.5 m.
+- Rear yard 3.1 m.
+- **Maximum building depth 61.0 m and maximum building width 61.0 m** (ss. 3.1.2.7–8) — a hard limit on data-hall footprint.
+- Floor-to-floor (s. 3.1.2.9, new buildings): first floor at least 6.0 m; floors above at least 4.0 m.
+
+### FC-2 (all sub-areas; bulk data storage is not restricted by sub-area)
+- Use: "Bulk Data Storage" — Conditional, regulations 2.2.1, 2.2.4.
+- s. 2.2.4: "Dwelling uses, office uses and bulk data storage are not permitted at grade, except for entrances."
+- First floor floor-to-floor at least 6.0 m in new buildings (Director may decrease).
+
+| Sub-area | FSR available to bulk data storage | Max height (discretionary max) | Yards |
+|---|---|---|---|
+| A | 3.00 ("all other uses combined", s. 3.1.1.1(d)) within 7.00 total | 22.9 m (51.8 m) | front 0.6 m, side not permitted, rear 0.6 m |
+| B | 5.00 non-dwelling (s. 3.1.1.2(a)); up to 6.50 total at discretion (s. 3.1.1.3) | 22.9 m (51.8 m) | same |
+| C1 | 1.00 non-dwelling (1.50 at discretion) | 10.7 m (18.3 m) | same |
+| C2 | 1.00 non-dwelling | 10.7 m (51.8 m) | same |
+| D | 3.00 (s. 3.3.1.5); up to 7.50 at discretion if conditions in s. 3.3.1.6 are met — conditions not fully read (UNVERIFIED whether bulk data storage can use the bonus) | 10.7 m (51.8 m) | same |
+| E | 3.00 (transportation and storage uses, s. 3.4.1.2(a)) | not yet read (UNVERIFIED) | not yet read |
+
+Notes for the tool:
+- In both districts the ground floor cannot be data storage. A data centre here is a stacked building with another use (or entrances) at grade — this is itself an urban mixed-use outcome the tool should show.
+- Sub-area boundaries are on Map 1 of each schedule only; the tool needs them digitised (or a manual lookup for the few parcels in each district).
