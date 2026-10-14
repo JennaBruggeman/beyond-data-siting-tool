@@ -45,7 +45,7 @@ main{display:grid;grid-template-columns:1fr 390px;min-height:0}
 .wire.value{stroke:var(--accent);stroke-dasharray:4 4;opacity:.9}
 .wire.dim{opacity:.12}
 .node{cursor:pointer}
-.node rect.box{fill:var(--panel);stroke:var(--line-2);stroke-width:1;rx:5}
+.node rect.box{fill:var(--panel);stroke:var(--fc,var(--line-2));stroke-width:1;rx:5}
 .node:hover rect.box{stroke:var(--fg)}
 .node.sel rect.box{stroke:var(--accent);stroke-width:1.6}
 .node.dim{opacity:.22}
@@ -54,8 +54,9 @@ main{display:grid;grid-template-columns:1fr 390px;min-height:0}
 .node text.name{font-size:12px;fill:var(--fg);font-weight:400}
 .node text.unit{font-size:10px;fill:var(--muted)}
 .node text.val{font-size:10.5px;fill:var(--accent-2);font-weight:400}
-.node.input rect.box{stroke:var(--k-input)}
-.node.input.place rect.box{stroke:var(--k-place)}
+.node.input:not(.fam) rect.box{stroke:var(--k-input)}
+.node.input.place:not(.fam) rect.box{stroke:var(--k-place)}
+.ficon{fill:none;stroke:var(--fc);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .node .side{fill:var(--k-place)}
 .node.party rect.box{stroke:var(--k-party);fill:var(--panel-2)}
 .node.gen rect.box{stroke:var(--fg);stroke-width:1.4;fill:var(--panel-2)}
@@ -124,6 +125,42 @@ aside .tag.hard{border-color:var(--accent);color:var(--accent-2)}
 .pill.pass{background:var(--ok)} .pill.partial{background:var(--mid)} .pill.fail{background:var(--bad)} .pill.unassessed,.pill.na{background:var(--line-2);color:var(--fg)} .pill.cannot{background:var(--k-input)}
 #tip{position:absolute;pointer-events:none;background:var(--panel-2);border:1px solid var(--line-2);border-radius:6px;padding:6px 9px;font-size:12px;max-width:280px;display:none;z-index:3}
 [hidden]{display:none!important}
+/* family diagrams, side panel and Guide */
+.ctag.on .ld{stroke:var(--accent)} .ctag.on .dot{fill:var(--accent)} .ctag.on .tg{fill:var(--accent);stroke:var(--accent)} .ctag.on text{fill:#17181a}
+.mech{margin:14px 0 0;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px}
+.mech svg{width:100%;height:auto;display:block} .mech figcaption{font-size:11.5px;color:var(--faint);margin-top:4px;display:flex;justify-content:space-between;gap:8px}
+.mech a,.glink{color:var(--accent-2);cursor:pointer;text-decoration:none} .mech a:hover,.glink:hover{text-decoration:underline}
+.why{margin:10px 0 0;font-size:13px}
+.famk{display:flex;align-items:center;gap:6px}
+#guidev{overflow:hidden;background:var(--bg);min-width:0;min-height:0}
+main.full{grid-template-columns:1fr} main.full aside{display:none}
+.gwrap{display:grid;grid-template-columns:230px minmax(0,1fr) 340px;height:100%}
+.gwrap>*{overflow:auto;min-height:0}
+.gnav{border-right:1px solid var(--line);padding:14px 10px;background:var(--panel)}
+.gnav h3{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:14px 6px 4px;display:flex;align-items:center;gap:8px}
+.gnav h3 i{display:inline-block;width:18px;height:3px;border-radius:2px}
+.gnav button{display:flex;align-items:center;gap:9px;width:100%;text-align:left;background:none;border:0;border-radius:5px;padding:5px 8px;color:var(--muted);font-size:13px;cursor:pointer}
+.gnav button:hover{color:var(--fg)} .gnav button[aria-current="true"]{background:var(--panel-2);color:var(--fg)}
+.gnav button em{font-style:normal;margin-left:auto;color:var(--faint);font-size:11.5px}
+.gmain{padding:18px 22px 40px;min-width:0}
+.gmain h2{font-size:18px;font-weight:600;margin:4px 0 2px;display:flex;align-items:center;gap:10px}
+.gmain .gk{font-size:11px;border:1px solid var(--line-2);border-radius:999px;padding:1px 9px;color:var(--muted);font-weight:300;margin-left:auto}
+.gmain .mech{padding:12px;max-width:900px}
+.gmain .cap{max-width:72ch;font-size:13.5px;margin:10px 0 0}
+.gside{border-left:1px solid var(--line);padding:16px 18px 40px;background:var(--panel);min-width:0}
+.gside ol{list-style:none;padding:0;margin:10px 0 0}
+.gside li{margin:0 0 12px;font-size:13px;cursor:pointer;border-radius:6px;padding:6px 8px;margin-left:-8px}
+.gside li:hover{background:var(--panel-2)} .gside li.on{background:var(--panel-2);outline:1px solid var(--accent)}
+.gside li b{font-weight:400} .gside li em{font-style:normal;color:var(--faint);font-size:11.5px}
+.gn{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;border:1px solid var(--line-2);font-size:10.5px;font-weight:600;margin-right:7px;vertical-align:1px}
+.gside li.on .gn{background:var(--accent);border-color:var(--accent);color:#17181a}
+.gside .glink{font-size:12px;margin-left:25px}
+.parts{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:12px;max-width:760px}
+.parts li{display:grid;grid-template-columns:28px 1fr;gap:4px 10px;font-size:13.5px} .parts b{font-weight:600}
+@media (max-width:1100px){#guidev{overflow:auto} .gwrap{height:auto} .gwrap>*{overflow:visible} .gwrap{grid-template-columns:200px minmax(0,1fr)} .gside{grid-column:1/-1;border-left:0;border-top:1px solid var(--line)}}
+@media (max-width:900px){main.full{grid-template-rows:1fr}}
+@media (max-width:700px){.gwrap{grid-template-columns:1fr} .gnav{border-right:0;border-bottom:1px solid var(--line)}}
+
 /* user workflow view */
 #flow{overflow:auto;background:var(--bg);min-width:0;padding:8px 0 24px}
 #flow svg{display:block}
@@ -169,6 +206,7 @@ aside .tag.hard{border-color:var(--accent);color:var(--accent-2)}
   <div class="seg view" role="group" aria-label="View">
     <button id="v-logic" aria-pressed="true">Tool logic</button>
     <button id="v-flow" aria-pressed="false">User workflow</button>
+    <button id="v-guide" aria-pressed="false">Guide</button>
   </div>
   <div class="seg logic-only" role="group" aria-label="Mode">
     <button id="m-structure" aria-pressed="true">Structure</button>
@@ -185,14 +223,17 @@ aside .tag.hard{border-color:var(--accent);color:var(--accent-2)}
 <main>
   <div id="canvas"><svg id="svg" role="img" aria-label="Tool logic: what the data centre brings and what the place offers feed quantities across process stages; conditions say what it would take to move each; the user's count, limits and emphasis shape a set of options; each option's trade-off table fans out to the parties who gain and give up; a lifecycle strip runs underneath."></svg><div id="tip"></div></div>
   <div id="flow" hidden></div>
+  <div id="guidev" hidden></div>
   <aside id="inspector"></aside>
 </main>
 </div>
 
 <script type="application/json" id="data">/*DATA*/</script>
+<script type="application/json" id="guide">/*GUIDE*/</script>
 <script>
 (function(){
 const D=JSON.parse(document.getElementById('data').textContent);
+const G=JSON.parse(document.getElementById('guide').textContent); window.__G=G;
 // synthetic nodes: options generator, preferences, parties
 const OL=D.options_logic||{steps:[],preferences:[]};
 D.nodes.push({id:'gen',kind:'gen',stage:'options',name:'Options',unit:'set, in no order',formula:'',inputs:[],conf:null});
@@ -285,14 +326,17 @@ function ring(g,cx,cy,conf,r=9){ el('circle',{class:'ring-track',cx,cy,r},g); if
 function clip(s,n){s=String(s||'');return s.length>n?s.slice(0,n-1)+'…':s}
 function drawNode(n){
   const p=posN[n.id]; if(!p)return; const kind=n.kind;
-  const cls=['node',kind]; if(kind==='input') cls.push(n.side||'place'); if(n.conf===0) cls.push('gap');
+  const fam=G.node_family[n.id], FM=fam?G.families[fam]:null;
+  const cls=['node',kind]; if(kind==='input') cls.push(n.side||'place'); if(n.conf===0) cls.push('gap'); if(FM) cls.push('fam');
   const g=el('g',{class:cls.join(' '),'data-id':n.id,transform:`translate(${p.x},${p.y})`},gNodes);
+  if(FM) g.style.setProperty('--fc',FM.colour);
   el('rect',{class:'box',width:p.w,height:p.h},g);
-  if(n.direction==='place'&&kind==='quantity') el('rect',{class:'side',x:0,y:4,width:3,height:p.h-8,rx:1.5},g);
+  if((n.direction==='place'&&kind==='quantity')||(kind==='input'&&(n.side||'place')==='place')) el('rect',{class:'side',x:0,y:4,width:3,height:p.h-8,rx:1.5},g);
   const cy=p.h/2;
-  if(n.conf!=null) ring(g,18,cy,n.conf);
-  el('path',{class:'glyph',d:glyphs[kind==='quantity'&&n.stage==='decide'?'decide':kind]||glyphs.quantity,transform:`translate(${n.conf!=null?13.5:12},${cy-4.5}) scale(0.7)`},g);
-  const t=el('text',{class:'name',x:34,y:mode==='example'&&kind==='quantity'?18:cy-2},g); t.textContent=clip(n.name,24);
+  if(FM){ el('path',{class:'ficon',d:FM.icon,transform:`translate(9,${cy-9}) scale(0.75)`},g); if(n.conf!=null) ring(g,p.w-15,cy,n.conf,7); }
+  else { if(n.conf!=null) ring(g,18,cy,n.conf);
+    el('path',{class:'glyph',d:glyphs[kind==='quantity'&&n.stage==='decide'?'decide':kind]||glyphs.quantity,transform:`translate(${n.conf!=null?13.5:12},${cy-4.5}) scale(0.7)`},g); }
+  const t=el('text',{class:'name',x:34,y:mode==='example'&&kind==='quantity'?18:cy-2},g); t.textContent=clip(n.name,FM?22:24);
   const u=el('text',{class:'unit',x:34,y:mode==='example'&&kind==='quantity'?31:cy+12},g); u.textContent=clip(n.unit||n.source_text||'',30);
   if(mode==='example'&&kind==='quantity'){ const v=exVal(n.id); const tv=el('text',{class:'val',x:34,y:48},g); tv.textContent=v?clip(v[0],30):'—'; }
   if(!['input','pref'].includes(kind)) el('circle',{class:'port',cx:0,cy,r:3.5},g);
@@ -412,12 +456,18 @@ function sourceList(ids){ if(!ids||!ids.length)return ''; return '<ul class="src
 function roleList(rs){ return '<div class="roles">'+rs.map(x=>{const t=D.sources[x.id]||x.id; const short=esc(t.split(/ — https?:/)[0].split(/[:(,]/)[0].slice(0,48)); return `<div class="role"><span class="rconf" title="confidence ${x.conf}">${x.conf}</span><div><b>${esc(x.term)}</b><br><span>${short} · ${esc(x.role)}${x.verified?'':' · <em>placement unverified</em>'}</span></div></div>`;}).join('')+'</div>'; }
 function moveTags(c){ return (c.move||[]).map(m=>`<span class="tag ${m==='physics'?'hard':''}" title="${esc(MC[m]?MC[m].note:'')}">${esc(MC[m]?MC[m].name:m)}</span>`).join(''); }
 function exchangeOf(id){ return (D.exchanges||[]).filter(e=>e.dc_to_place.includes(id)||e.place_to_dc.includes(id)).map(e=>`${e.name} — ${e.place_to_dc.includes(id)?'the place gives the data centre':'the data centre gives the place'}`); }
+function famBlock(id){ const f=G.node_family[id]; if(!f) return ''; const F=G.families[f];
+  return `<figure class="mech">${F.svg}<figcaption><span>${esc(F.kind)}</span><a data-guide="${f}">open in the Guide</a></figcaption></figure>
+  <p class="why draft">${esc(G.rationale[id]||'')}</p><div class="draftnote">Why it is here — draft wording (Claude), for J.B. to rewrite.</div>`; }
+function famKind(id){ const f=G.node_family[id]; if(!f) return ''; const F=G.families[f]; return `<span class="famk"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="${F.icon}" fill="none" stroke="${F.colour}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>${esc(F.name)}</span>`; }
 function renderInspector(){
   if(!selected){ insp.innerHTML=`<div class="empty"><div class="kind">How to read this</div>
   <p class="draft">The diagram shows how the tool thinks, left to right. On the far left are two kinds of input: what the data centre brings and what the place offers it. Reciprocity runs both ways. Boxes are the quantities the tool computes. Boxes with a green-grey edge are things the place gives the data centre. The ring shows how far the tool can trust a figure (full = arithmetic, three-quarters = a regulation or government data, half = an operator's claim). A dashed box is a figure the tool does not have yet.</p>
   <p class="draft">Each condition says what it would take to move it: a different option, money, time and process, a change in policy, city-scale infrastructure, or nothing at all (physics). Only that last kind is a hard constraint. There is no verdict. The user sets how many options they want, their limits and what to explore, and those values come in from below. The tool returns that many options in no order, each with a trade-off table that fans out to the parties who gain and give up. What relaxing a limit would open is shown separately. The lifecycle strip underneath shows how the trade-offs shift across the building's life.</p>
   <div class="draftnote">Draft wording (Claude) — for J.B. to rewrite.</div>
   <div class="key"><i style="border-color:var(--k-input)"></i><span>what the data centre brings</span><i style="border-color:var(--k-place)"></i><span>what the place offers</span><i style="border-color:var(--line-2)"></i><span>quantity, with formula and sources</span><i style="border-color:var(--k-condition)"></i><span>condition, with what moves it</span><i style="border-color:var(--accent);border-style:dashed"></i><span>the user's values</span><i style="border-color:var(--k-party)"></i><span>party</span></div>
+  <div class="kind" style="margin-top:16px">Outline colour: family group</div><div class="key">${Object.values(G.groups).map(g=>`<i style="border-color:${g.colour}"></i><span>${esc(g.name)}</span>`).join('')}</div>
+  <p class="draftnote">Each node's icon names its family; the Guide tab explains every family with a diagram.</p>
   <p style="margin-top:14px">${D.meta.counts.inputs} inputs · ${D.meta.counts.quantities} quantities · ${D.meta.counts.conditions} conditions · ${(D.parties||[]).length} parties · ${D.meta.counts.sources} cited sources (register ${esc(D.meta.date)}).</p>
   ${mode==='example'?`<div class="box2"><div class="kind">Worked example — first attempt</div><b>${esc(D.example.site)}</b><br><span style="color:var(--muted)">${esc(D.example.match)}</span><br><br><span style="font-size:12.5px">${esc((D.example.values.tradeoffs||[''])[0])}</span><div class="draftnote">Condition states are the first attempt's; party rows are not yet computed.</div></div>`:''}
   </div>`; bindGo(); return; }
@@ -444,8 +494,9 @@ function renderInspector(){
       const v=mode==='example'?exVal(n.id):null;
       const uses=D.conditions.filter(c=>c.quantities.includes(n.id)).map(c=>c.id); const feeds=D.edges.filter(e=>e.from===n.id).map(e=>e.to); const opps=D.opportunities.filter(o=>o.quantities.includes(n.id)).map(o=>o.id);
       const ex=exchangeOf(n.id);
-      h=`<div class="kind">${n.kind==='input'?(n.side==='dc'?'Input · the data centre':'Input · the place'):'Quantity · '+esc(n.stage)}${n.direction==='place'&&n.kind==='quantity'?' · the place offers':''}</div><h2>${esc(n.name)}</h2>${n.unit?`<div style="color:var(--muted)">${esc(n.unit)}</div>`:''}
+      h=`<div class="kind" style="margin-bottom:6px">${famKind(n.id)}</div><div class="kind">${n.kind==='input'?(n.side==='dc'?'Input · the data centre':'Input · the place'):'Quantity · '+esc(n.stage)}${n.direction==='place'&&n.kind==='quantity'?' · the place offers':''}</div><h2>${esc(n.name)}</h2>${n.unit?`<div style="color:var(--muted)">${esc(n.unit)}</div>`:''}
       <div class="confrow">${ringSVG(n.conf)}<div><b>${n.conf}</b> own confidence${n.kind!=='input'&&n.upstream!=null&&n.upstream!==n.conf?` · <b>${n.upstream}</b> upstream`:''}<br><small>${esc(n.status)}</small></div></div>
+      ${famBlock(n.id)}
       ${v?`<div class="val"><b>${esc(v[0])}</b><span>${esc(v[1]||'')}${v[2]?' · '+v[2]:''}</span></div>`:(mode==='example'?'<div class="val" style="border-color:var(--line-2)"><span>no value yet for this site</span></div>':'')}
       <dl><dt>formula</dt><dd>${esc(n.formula)}</dd>${n.source_text?`<dt>from</dt><dd>${esc(n.source_text)}</dd>`:''}
       ${ex.length?`<dt>exchange</dt><dd>${ex.map(esc).join('<br>')}</dd>`:''}
@@ -456,6 +507,8 @@ function renderInspector(){
     }
   }
   insp.innerHTML=h; bindGo();
+  insp.querySelectorAll('.mech .ctag').forEach(tg=>tg.classList.toggle('on',tg.dataset.q===selected));
+  insp.querySelectorAll('[data-guide]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault(); window.__openGuide&&window.__openGuide(a.dataset.guide,selected);}));
 }
 function bindGo(){ insp.querySelectorAll('[data-go]').forEach(c=>c.addEventListener('click',()=>{select(c.dataset.go); centreOn(c.dataset.go);})); }
 function centreOn(id){ const p=posN[id]||condPos[id]; if(!p)return; vb.x=p.x+p.w/2-vb.w/2; vb.y=p.y+p.h/2-vb.h/2; setVB(); }
@@ -475,4 +528,7 @@ if(location.hash==='#example') setMode('example');
 </script>
 <script>
 /*WORKFLOW*/
+</script>
+<script>
+/*GUIDEVIEW*/
 </script>

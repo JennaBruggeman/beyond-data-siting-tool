@@ -159,5 +159,6 @@ function setView(v){ const w=v==='flow'; vbL.setAttribute('aria-pressed',!w); vb
   if(w){ if(!built) build(); render(); try{history.replaceState(null,'','#workflow')}catch(e){} }
   else { const ex=document.getElementById('m-example').getAttribute('aria-pressed')==='true'; window.__bd&&window.__bd.setMode(ex?'example':'structure'); try{history.replaceState(null,'',location.pathname+location.search)}catch(e){} } }
 vbL.onclick=()=>setView('logic'); vbW.onclick=()=>setView('flow');
+window.__flow={show:()=>{ if(!built) build(); render(); }};
 if(location.hash==='#workflow') setView('flow');
 })();
