@@ -63,6 +63,7 @@ input[type=search]{background:var(--panel);border:1px solid var(--line-2);border
   <div class="legend"><span><i style="background:var(--accent)"></i>Benchmark — public or filed record</span><span><i style="background:transparent;border:1px solid var(--muted);border-radius:50%"></i>Reference — operator claim or doubt</span><span><i style="background:rgba(230,227,223,.10)"></i>Range the tool's size chain can produce</span><span><i style="background:transparent;border-top:1px dashed var(--muted);height:0;margin-bottom:3px"></i>Tool's whole-building check (benchmark min–max)</span></div></div>
 
  <h2>Sites</h2>
+ <p class="sub draft">Benchmark: IT load and floor area for the same building, from a public or filed record; these test the tool. Reference: the same pair, but from an operator or in doubt. Context: no comparable pair, because the MW is total power or undefined (“not IT”), the area is hall only (“hall”), or one is missing (“none”). Context sites still give storeys, heights, floor-to-floor and hall shares; open a row to see every figure.</p>
  <div class="controls">
   <div class="seg" id="tierSeg" role="group" aria-label="Tier"><button data-v="all" aria-pressed="true">All</button><button data-v="benchmark" aria-pressed="false">Benchmark</button><button data-v="reference" aria-pressed="false">Reference</button><button data-v="context" aria-pressed="false">Context</button></div>
   <div class="seg" id="regSeg" role="group" aria-label="Region"></div>
@@ -133,12 +134,20 @@ function render(){ if(!D) return; const q=$('#q').value.trim().toLowerCase();
   const nf=rows.reduce((t,s)=>t+s.facts.length,0), jb=Object.values(checks).filter(c=>c&&c.status).length;
   $('#foot').textContent=`${rows.length} sites, ${nf} facts shown. ${db?`${jb} facts checked by J.B. so far.`:'Your checks save when the page is opened signed in to claude.ai.'}`;
 }
-function rowHTML(s){ const h=s.headline, st=s.facts.find(x=>x.field==='storeys');
+const numv=f=>{ const v=f&&(f.value_m2!=null?f.value_m2:f.value); return typeof v==='number'?v:null; };
+function raw(s){ // first MW and area facts as stated, for sites with no comparable pair
+  const m=s.facts.find(x=>x.field==='it_mw'&&typeof x.value==='number')||s.facts.find(x=>x.field==='other'&&typeof x.value==='number'&&/^MW$/i.test(x.unit||'')&&!/BESS|UPS|generat|gas plant|per (data hall|suite|building)/i.test(x.measures||'')), g=s.facts.find(x=>x.field==='gfa_m2'&&numv(x)!=null), w=s.facts.find(x=>x.field==='white_space_m2'&&numv(x)!=null), a=g||w;
+  const isIT=m&&/\bIT\b|critical/i.test(m.measures||'')&&!/not (labelled|defined|explicitly|stated)|unclear|undefined/i.test(m.measures||'');
+  return {mw:m?m.value:null, mwTag:m?(isIT?'':'not IT'):'', area:a?numv(a):null, areaTag:a===w&&!g?'hall':''}; }
+const tag=t=>t?` <span class="faint">${t}</span>`:'';
+function rowHTML(s){ const h=s.headline, st=s.facts.find(x=>x.field==='storeys'), r=h?null:raw(s);
+  const mw=h?fmt(h.mw)+tag(h.mw_basis==='IT'?'':h.mw_basis==='total'?'total':'not IT'):r.mw!=null?fmt(r.mw)+tag(r.mwTag):'<span class="faint">none</span>';
+  const ar=h?fmt(h.area_m2):r.area!=null?fmt(r.area)+tag(r.areaTag):'<span class="faint">none</span>';
+  const per=h&&h.mw_basis==='IT'?fmt(h.m2_per_mw):'<span class="faint" title="Not comparable: the MW is not IT load, or the area is hall only, or one is missing">n/c</span>';
   return `<div class="row" data-id="${esc(s.id)}"><button aria-expanded="${open.has(s.id)}">
    <span class="nm">${esc(s.name)}<small>${esc(s.operator||'')}${s.status?' · '+esc(s.status):''}${st?' · '+esc(st.value)+(typeof st.value==='number'?' storeys':''):''}</small></span>
    <span class="sub">${esc(s.city)}, ${esc(s.country)}</span>
-   <span class="num">${h?fmt(h.mw)+(h.mw_basis==='IT'?'':' <span class="faint">'+esc(h.mw_basis)+'</span>'):'—'}</span>
-   <span class="num">${h?fmt(h.area_m2):'—'}</span><span class="num">${h?fmt(h.m2_per_mw):'—'}</span>
+   <span class="num">${mw}</span><span class="num">${ar}</span><span class="num">${per}</span>
    <span class="tier ${s.tier}">${s.tier}</span></button>${open.has(s.id)?detail(s):''}</div>`; }
 function detail(s){ const h=s.headline;
   return `<div class="detail">${h&&h.note?`<p class="note">${esc(h.note)}</p>`:''}${s.notes?`<p class="note">${esc(s.notes)}</p>`:''}
