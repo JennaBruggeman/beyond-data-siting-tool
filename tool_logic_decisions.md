@@ -76,5 +76,6 @@ Running record of decisions J.B. has made about the tool's logic, in the order m
 - **Built (meta):** mechanisms (physical · through the grid · shared space · shared service, with line styles), evidence types (operating · measured · operator claim · modelled · proposed · speculative), commitment states (only existing and committed count as delivered), futures, and "results from elsewhere" (Montreal, Lausanne, global wastewater, EV coordination, Quincy) labelled by evidence type, unverified, never used as a parcel's numbers.
 - **Diagram:** condition panels show "if it cannot be judged → next"; quantity panels show each exchange's mechanism; "If you moved a limit" lists results from elsewhere; the user workflow text updated (gates first, mapped receivers and rival sources, mechanism and firmness, next actions, four futures).
 - **Data for the map (pending):** Statistics Canada ODSRF v2 (2026), ODHF (2020), ODEF v2.1 (2022) — the cloud cannot reach the hosts; to fetch from J.B.'s computer. Network service areas (NEU, Creative Energy, Blatchford, Edmonton DDE) not yet found as data; drawn as labelled approximate areas until found.
-- **Not yet verified:** NPC 2.6.1.12 storage temperature (intent page read only); the five papers behind "results from elsewhere".
+- **Verified 14 Oct:** hot-water storage ≥ 60 °C, recirculation ≥ 49 °C (VBBL 2025 Book II 2.6.1.12.(1), 2.6.1.1.(3), already on file); Alberta text to confirm.
+- **Not yet verified:** the five papers behind "results from elsewhere".
 - All new wording is Claude's draft for J.B.
