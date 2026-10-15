@@ -407,3 +407,12 @@ Access date for all: 14 Oct 2026 unless noted.
 12. **Security:** EN 50600 protection-class content is not public. Generic allowances (guard room, fence setback) remain UNVERIFIED by design.
 
 **Update 14 Oct:** NBC 2020 Table 4.1.5.3 read from the official PDF (note 24). Office 2.4 / 4.8 kPa and equipment/service rooms 3.6 kPa confirmed; the office row excludes computer rooms, and data halls must be designed for actual equipment loads (4.1.5.1.(1)). Gap 1 closed; data-hall values remain NEEDS STANDARD.
+
+## Addendum 15 Oct 2026: size-chain check
+
+- **Floor-to-floor, multi-storey data halls (planning records):**
+  - HK Town Planning Board, MPC Paper A/KC/480 (45-51 Tai Lin Pai Rd, Kwai Chung): typical floor 6 m; para 11.4: the Tier III data centre "requires a floor-to-floor height of 6m". 22 storeys incl. 2 basements; GFA ≤ 24,954.6 m²; site ≈2,189 m². No MW stated. SOURCED (planning paper; justification is the applicant's). https://www.tpb.gov.hk/uploads/page/meetings/MPC/A_KC_480/A_KC_480_MainPaper.pdf
+  - HK TPB, MPC Paper A/KC/510B (KCTL 145): para 1.6 data hall and M&E floors (4/F and up) 5.5 m; 1/F–3/F 6.0 m (cable and M&E); G/F 11 m (transformer, loading). 19 storeys incl. 2 basements; GFA ≈10,992 m²; site ≈964 m². No MW stated. SOURCED (planning paper). https://www.tpb.gov.hk/uploads/page/meetings/20251010/A_KC_510_MainPaper.pdf
+  - With Burlington (≈6.0 m), three built/proposed cases put data-hall floors at 5.5–6.0 m. Vancouver's 4.0 m (I-3 s. 3.1.2.9) is a zoning minimum, not a data-hall height.
+- **Rack density 2025:** Uptime *Global Data Center Survey 2025* (density and cloud results, Sep 2025; 709 respondents to the density question; fielded 3 Apr–22 May 2025) gives no average kW per rack; "one-fifth" of owner/operators say their highest density is ≥ 30 kW. INDUSTRY SURVEY. The 2024 average (8 kW) remains the latest stated average.
+- **Checked, no usable figures:** Tower Hamlets PA/18/03088 (GIA ≤ 27,637 m², 60–65 m, no MW or hall area); Slough data-centre consents list (no MW or hall areas); Stevenage 17/00549/FPM (single-storey extension, 4.1 m).
