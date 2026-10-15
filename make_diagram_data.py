@@ -68,7 +68,7 @@ EX = {
         'grid_co2': ('BC 18.1 g/kWh (consumption, 2024); heat-pump electricity 3–12 GWh/yr adds ≈ 54–217 t/yr at the average factor (BC marginal factor unpublished)', 'NIR 2026 Annex 7', 90),
         'rainwater': ('≈ 2,200 m³/yr from a 2,400 m² roof', '1,160 mm × roof area × 0.8', 70),
         'noise_level': ('rooftop dry coolers and P1 chiller; receptors: mixed-use towers across W Hastings and Seymour', 'permit record + site; no measurement', 50),
-        'noise_limit': ('permit note: air-conditioning units ≤ 55 dB day / 45 night (City practice on field-review permits); by-law limit depends on the zone pair — downtown (DD) schedule not yet checked: quiet→quiet 55/45, activity→quiet 60/55, intermediate or activity→other 70/65', 'Noise Control By-law 6555 ss. 2.1–2.3; permit records (sources/11)', 60),
+        'noise_limit': ('DD is in the Activity Zone (By-law 6555 Sch. A; outside the B.1 outline): 70 dBA day / 65 night at receptors in activity or intermediate zones, 60 / 55 at a quiet zone; the City\'s permit note for air-conditioning units is stricter, 55 / 45', 'Noise Control By-law 6555 ss. 2.3, Sch. A, B.1; permit records (sources/11)', 80),
         'receivers': ('host tower (4.9 GWh heat/yr); 515 W Hastings (SFU + data halls, adjacent); downtown steam network (Creative Energy)', 'City energy report 2025; permits', 80),
         'receiver_demand': ('host 4.9 GWh/yr; network: tens of GWh', 'measured for the host; network demand not public', 60),
         'demand_profile': ('DJF 47% of annual, JJA 2.5%; peak ÷ min month 3.9', 'CWEC + STRATEGO + CEUD 46% space heat', 70),

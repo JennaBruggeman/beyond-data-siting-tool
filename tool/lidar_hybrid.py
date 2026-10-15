@@ -65,4 +65,6 @@ def tile(name):
 if __name__ == '__main__':
     names = sys.argv[2:] or [os.path.basename(f)[:-4] for f in sorted(glob.glob(os.path.join(IN, '*.npz')))]
     for n in names:
-        if os.path.exists(os.path.join(IN, n + '.npz')): print(n, 'footprints, standing, gone, new =', tile(n))
+        if not os.path.exists(os.path.join(IN, n + '.npz')): continue
+        try: print(n, 'footprints, standing, gone, new =', tile(n))
+        except Exception as e: print(n, 'SKIPPED:', e)

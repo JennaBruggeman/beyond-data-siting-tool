@@ -18,9 +18,9 @@ SRC = {
  'vanNEU2025': 'City of Vancouver, Southeast False Creek Neighbourhood Energy Utility (web page, modified 21 May 2025): 70% renewable, mostly sewage heat recovery; 6.6 MW sewage heat recovery added; 100% renewable by 2030 — https://vancouver.ca/home-property-development/southeast-false-creek-neighbourhood-energy-utility.aspx',
  'blatchfordDESS': 'City of Edmonton / Blatchford, District energy sharing system overview (undated, uploaded 2016): ambient-temperature loop, geo-exchange and sewer heat exchange, heat pumps in buildings — https://blatchfordedmonton.ca/wp-content/uploads/2016/05/Blatchford-district-energy-sharing-system-overview.pdf',
  'npc2612': 'City of Vancouver Building By-law 2025, Book II (Plumbing), Div. B 2.6.1.12.(1): storage-type service water heaters operate at not lower than 60 °C; 2.6.1.1.(3): recirculated hot water not less than 49 °C at any point (convenience copy, By-law 14343 as amended by 14488) — data/raw/codes/vbbl2025_bookII_insert.pdf; Edmonton: National Plumbing Code 2020 as adopted in Alberta, sentence text to confirm',
- 'odrsf': 'Statistics Canada, Open Database of Sport and Recreational Facilities v2 (ODSRF), 21-26-0002, product 2021001, released 24 Sep 2026, ~249,000 records (pools, arenas, rinks, community centres…; type, year_built, ownership, geometry) — https://www150.statcan.gc.ca/n1/pub/21-26-0002/2021001/zip/odsrf_v2_gpkg.zip (not yet downloaded)',
- 'odhf': 'Statistics Canada, Open Database of Healthcare Facilities (published 17 Apr 2020; coverage Nov 2019–Mar 2020): hospitals, nursing and residential care, ambulatory — https://www150.statcan.gc.ca/n1/pub/13-26-0001/2020001/ODHF.zip (not yet downloaded)',
- 'odef': 'Statistics Canada, Open Database of Educational Facilities v2.1 (published 28 Nov 2022; archived) — https://www150.statcan.gc.ca/n1/pub/37-26-0001/2022001/ODEF_v2.1.zip (not yet downloaded)',
+ 'odrsf': 'Statistics Canada, Open Database of Sport and Recreational Facilities v2 (ODSRF), 21-26-0002, product 2021001, released 24 Sep 2026, ~249,000 records (pools, arenas, rinks, community centres…; type, year_built, ownership, geometry) — https://www150.statcan.gc.ca/n1/pub/21-26-0002/2021001/zip/odsrf_v2_gpkg.zip (downloaded 15 Oct 2026; data/raw/receivers)',
+ 'odhf': 'Statistics Canada, Open Database of Healthcare Facilities (published 17 Apr 2020; coverage Nov 2019–Mar 2020): hospitals, nursing and residential care, ambulatory — https://www150.statcan.gc.ca/n1/pub/13-26-0001/2020001/ODHF.zip (downloaded 15 Oct 2026; data/raw/receivers)',
+ 'odef': 'Statistics Canada, Open Database of Educational Facilities v2.1 (published 28 Nov 2022; archived) — https://www150.statcan.gc.ca/n1/pub/37-26-0001/2022001/ODEF_v2.1.zip (downloaded 15 Oct 2026; data/raw/receivers)',
  'learningSeries': 'J.B., Beyond Data learning series (manuscript, Oct 2026), critique 14 Oct 2026 — a learning aid; figures it reports are unverified until the papers are read',
  'roudbari2025': 'Shafiee Roudbari, Kantor, Parakkal Menon, Eicker 2025, Energy 335:137902 — https://doi.org/10.1016/j.energy.2025.137902 (not yet read)',
  'ravi2026': 'Ravi et al. 2026, Applied Energy 402:127049 — https://doi.org/10.1016/j.apenergy.2025.127049 (abstract and EPFL pages checked by the atlas chat 15 Oct)',
@@ -191,6 +191,45 @@ ol['steps'].insert(1, G); ol['steps'].append(F)
 for q in r['quantities']:
     if q['id'] == 'grid_co2' and 'BASIS' not in q.get('coef', ''):
         q['coef'] += '; BASIS used across the tool (proposed 15 Oct by Claude and the atlas chat, J.B. to confirm): consumption intensity, since the tool counts electricity used — BC 18.1, Alberta 346.1 g CO2e/kWh (NIR 2026, 2024); average factors, BC marginal factor unpublished'
+
+# --- 15 Oct: retrievals folded in (sources/25) ---
+r['new_sources'].update({
+ 'vanNMH': 'City of Vancouver Open Data, Non-market housing (export 15 Oct 2026): 641 projects with status, occupancy year, operator, unit counts — data/raw/van/non-market-housing.json',
+ 'van9552': 'City of Vancouver Energy Utility System By-law 9552, consolidated to By-law 14524 (effective 1 Jan 2026): Schedule A service area; s. 2.1 compulsory use; s. 5.2(a)(v) cooling-system heat recovery allowed; Schedule C charges and 50% credit for returned heat — data/raw/van/9552c.pdf',
+ 'van6555': 'City of Vancouver Noise Control By-law 6555 (consolidated): Schedules A (activity), B and B.1 (intermediate); ss. 2.1–2.3 continuous-sound limits — data/raw/van/6555c.pdf',
+ 'neuTraced': 'NEU service area traced 15 Oct 2026 from By-law 9552 Schedule A (300 dpi render; boundary extracted from the bold line; georeferenced to street centrelines from City parcel addresses — Cambie, Alberta, Ontario, Main, Glen, Clark; W 3rd, W 4th, W 7th, E 5th, E 6th; one scale, north up; residuals up to ±45 m) — data/networks/van_neu_9552_traced.geojson. Approximate: parcels within ~50 m of the line are reported as on the edge.',
+ 'src25': 'Beyond Data research note 25: receivers, service areas, noise zones, Canadian precedents (sources/25_receivers_networks_precedents.md)',
+ 'bcucTelus': 'BCUC Order C-1-13 (4 Feb 2013), G-155-12, G-2-15 (9 Jan 2015): TELUS Garden thermal energy system (FortisBC Alternative Energy Services) — https://www.ordersdecisions.bcuc.com/bcuc/orders/en/118621/1/document.do',
+ 'equinixTR5': 'Equinix press release 5 Jun 2024 and blog 24 Apr 2025: TR5 heat to Markham District Energy (operator claim) — https://investor.equinix.com/news-events/press-releases/detail/1044/help-us-heat-our-neighbors---equinix-makes-data-center',
+ 'qcRejets2026': 'Gouvernement du Québec (MELCCFP), Valorisation des rejets thermiques: S. Gagnon, Vecteur Environnement, Mar 2026 (Humano District Sherbrooke; QScale Lévis) — https://cdn-contenu.quebec.ca/cdn-contenu/environnement/rejets-thermiques/developpper-ia-decarboner-quebec.pdf',
+ 'telehouse2026': 'Telehouse Canada release, Business Wire, 12 May 2026: liquid-cooling heat into Enwave\'s loop (operator claim) — https://www.businesswire.com/news/home/20260512456773/en',
+})
+for q in r['quantities']:
+    if q['id'] == 'receivers_nearby':
+        q['coef'] = q['coef'].split(' Map records:')[0] + ' Map records (15 Oct 2026, tool/receivers_*.json): Vancouver 353 — 27 recreation centres, 1 arena, 20 hospitals, 103 care homes, 202 schools (StatCan ODSRF v2 records no separate Vancouver pools; recreation-centre contents not recorded) — plus 641 non-market housing projects (City open data); Edmonton 475 — 161 recreation centres, 23 pools, 22 indoor arenas, 13 hospitals, 2 care homes, 254 schools. 72 health records have no location and are counted, not placed. Arena ice plants are heat sources as well as receivers.'
+        q['sources'] = sorted(set(q['sources']) | {'vanNMH', 'src25'}); q['conf'] = 70; q['status'] = 'data in hand (15 Oct); Vancouver pools and Edmonton care homes thin in the national records'
+        q['source_roles'] = [dict(id=s, term=q['name'], role='data', conf=70, verified=True) for s in q['sources']]
+    if q['id'] == 'noise_limit' and 'Schedule A' not in q['coef']:
+        q['coef'] += '; Vancouver zones (By-law 6555 Sch. A/B/B.1, read 15 Oct): activity = MC-1, MC-2, DD, M-1, M-1A, M-1B, M-2, IC-1–3, I-1, I-1A–C, I-2, I-3, I-4, CWD, DEOD and listed CD-1s; intermediate = C-1, C-2, C-2A–C, C-2C1, C-3A, C-5, C-5A, C-6, C-7, C-8, FC-1, FC-2, FCCDD, BCPED, HA-1, HA-1A, HA-2–4, R3-1–3, R4-1, R5-1–4, RR-3A–C and the B.1 outline (north False Creek shore); quiet = all else. From an activity zone: to quiet 60/55, to intermediate or activity 70/65 dBA day/night'
+        q['sources'] = sorted(set(q['sources']) | {'van6555'})
+    if q['id'] == 'competing_sources' and 'compulsory' not in q['coef']:
+        q['coef'] += '. NEU By-law 9552 (2026): inside its service area, new buildings and major alterations must take NEU heat unless the City Engineer finds it not practical or economical (s. 2.1); heat returned to the network is credited at 50% of $65.172/MWh'
+        q['coef'] += '. Traced service area (2.3 km², ±45 m): 111 E 5th Ave lies inside, 70–130 m from the line — consistent with RTS 19744 making NEU heat delivery a material condition of that data centre'
+        q['sources'] = sorted(set(q['sources']) | {'van9552', 'neuTraced'})
+CONDS2 = [dict(id='r_de_compulsory', heading='6 Regulatory', name='Inside a compulsory district-energy area',
+   test='parcel inside a service area where new buildings must connect (Vancouver NEU, By-law 9552 s. 2.1): the data centre becomes a customer; heat sent back is credited at half the energy charge',
+   quantities=['competing_sources', 'receivers_nearby'], move=['policy', 'money'], parties=['operator', 'city', 'utility', 'receiver'], constraint=False,
+   note='Section 5.2(a)(v) allows equipment that recovers waste heat from a building\'s cooling system. The 50% credit ($32.59/MWh) is the City\'s posted price for returned heat — one end of the price window.',
+   sources=['van9552'], next_action='check the parcel against Schedule A; ask the City Engineer whether service is required')]
+r['conditions'] = [c for c in r['conditions'] if c['id'] not in {x['id'] for x in CONDS2}] + CONDS2
+PREC = [
+ dict(id='telus', place='Vancouver, TELUS Garden', what='data-centre heat through heat exchangers and water-to-water heat pumps into the development\'s thermal energy system; steam for peak and backup', figures='"a year round base load of 1,400 kW of heat"; forecast 5,194 MWh/yr heating; designed for 94% of annual heating demand', evidence='proposed', status='approved by the regulator 2013, rates 2015; current operation unverified', sources=['bcucTelus']),
+ dict(id='tr5', place='Markham, Equinix TR5', what='data-centre heat to Markham District Energy (homes, hotel, university, shopping, hot water, two pools)', figures='network "over 14 million square feet"; no MW figures published', evidence='claim', status='heat pump commissioned from late 2023 (operator)', sources=['equinixTR5']),
+ dict(id='humano', place='Sherbrooke, Humano District', what='servers in a former convent\'s mechanical room heat a loop that preheats hot water and feeds heat pumps', figures='50 dwellings + 143 apartments; "plus de 400 tonnes d\'équivalent CO2 par année"', evidence='operating', status='operating more than a year (Québec government, Mar 2026)', sources=['qcRejets2026']),
+ dict(id='qscale', place='Lévis, QScale', what='data-centre heat to a greenhouse complex through heat pumps', figures='"parc de serres de 12 hectares"; "23 000 tonnes d\'équivalent CO2 par année"', evidence='proposed', status='under construction (Québec government, Mar 2026)', sources=['qcRejets2026']),
+ dict(id='telehouse', place='Toronto, Telehouse → Enwave', what='direct-to-chip heat into Enwave\'s closed loop, to help heat municipal drinking water', figures='no heat quantities; up to 80% captured by liquid (claim)', evidence='claim', status='heat flow unverified', sources=['telehouse2026']),
+]
+m['model_results'] = [x for x in m['model_results'] if x['id'] not in {p['id'] for p in PREC}] + PREC
 m['date'] = '2026-10-15'
 json.dump(r, open(P, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print(len(NEW), 'quantities,', len(CONDS), 'conditions; next actions on', sum(1 for c in r['conditions'] if c.get('next_action')), 'conditions')

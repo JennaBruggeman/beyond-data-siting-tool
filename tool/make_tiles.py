@@ -63,7 +63,7 @@ def vancouver():
     c = CITY['van']; P = proj(c); T = c['T']
     tiles = collections.defaultdict(lambda: dict(P=[], B=[], A={}))
     gj = json.load(open(os.path.join(D, 'vancouver_parcels_2026.geojson'), encoding='utf-8'))
-    zone_polys = collections.defaultdict(list); addr = {}
+    zone_polys = collections.defaultdict(list); addr = {}; ALLP = []
     for f in gj['features']:
         pr = f['properties']; tc = pr.get('tax_coord') or ''
         for poly in to_local(shape(f['geometry']), P):
@@ -78,7 +78,7 @@ def vancouver():
                               round(pr['land_value']) if pr.get('land_value') else None, round(pr['improvement_value']) if pr.get('improvement_value') else None,
                               round(pr.get('area_m2') or poly.area)]
                 if pr.get('address'): addr[tc] = (pr['address'], k)
-            zone_polys[pr.get('zoning') or '?'].append(poly)
+            zone_polys[pr.get('zoning') or '?'].append(poly); ALLP.append(poly)
     print('van parcels in', len(tiles), 'tiles')
     # buildings: 2009 footprints, with City LiDAR 2022 measured heights where processed (data/lidar2022, from tool/lidar_hybrid.py)
     # flag: 0 = 2009 height only; 1 = LiDAR 2022 height; 2 = new since 2009 (LiDAR outline); 3 = not found in 2022; 4 = partly changed
@@ -98,12 +98,18 @@ def vancouver():
             if poly.is_empty: continue
             cx, cy = poly.representative_point().coords[0]; k = tkey(cx, cy, T)
             tiles[k]['B'].append([h, ring_enc(list(poly.exterior.coords), k[0] * T, k[1] * T), fl])
+    # LiDAR tiles reach past the city limit (Burnaby, the river): keep a new outline only if it sits on a City parcel
+    from shapely.strtree import STRtree
+    from shapely.geometry import Point
+    PT = STRtree(ALLP); nout = 0
     for p90, hmax, area, ring in LN:
         poly = Polygon([P(x, y) for x, y in ring])
         if poly.is_empty: continue
-        cx, cy = poly.representative_point().coords[0]; k = tkey(cx, cy, T)
+        rp = poly.representative_point()
+        if not any(ALLP[i].intersects(rp) for i in PT.query(rp)): nout += 1; continue
+        cx, cy = rp.coords[0]; k = tkey(cx, cy, T)
         tiles[k]['B'].append([p90, ring_enc(list(poly.exterior.coords), k[0] * T, k[1] * T), 2])
-    print('lidar: footprints measured', len(LF), 'new', len(LN))
+    print('lidar: footprints measured', len(LF), 'new', len(LN) - nout, '(outside the City, dropped:', nout, ')')
     zl = sorted(zone_polys)
     zi = {z: i for i, z in enumerate(zl)}
     for k, t in tiles.items():
@@ -113,7 +119,7 @@ def vancouver():
     meta = dict(city='van', lat0=c['lat0'], lon0=c['lon0'], T=T, Q=Q, tiles=[list(k) for k in ks],
                 ext=[min(k[0] for k in ks) * T, min(k[1] for k in ks) * T, (max(k[0] for k in ks) + 1) * T, (max(k[1] for k in ks) + 1) * T],
                 zones=zl, overview=ov,
-                sources=['City of Vancouver Open Data: property parcel polygons; property tax report 2026; building footprints 2009 (heights as of 2009)'])
+                sources=['City of Vancouver Open Data: property parcel polygons; property tax report 2026; building footprints 2009', 'City of Vancouver LiDAR 2022 (148 one-kilometre tiles, classified points): building heights and buildings new or gone since 2009, processed 14–15 Oct 2026'], lidar=True)
     # designated floodplain (City of Vancouver Open Data, supplied by J.B. 14 Oct 2026)
     fp = os.path.join(D, 'vancouver_designated_floodplain.csv')
     if os.path.exists(fp):
