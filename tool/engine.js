@@ -112,13 +112,13 @@ function fitsView(){
   ${f.downtown?`<dt>Grid</dt><dd class="draft">Downtown: no new feeder positions from fiscal 2027 until the new West End substation (expected July 2032).</dd>`:''}
   ${pos==='upper'?`<dt>Floor strength</dt><dd class="draft">Office floors above grade are designed for 2.4 kPa; equipment rooms need at least 3.6 kPa, and data halls their actual load — likely strengthening.</dd>`:''}
   </dl>${src('pue')}${src('plant')}${src('fuel')}${src('svc')}${f.downtown?src('grid2'):''}${pos==='upper'?src('floor'):''}
-  <div class="next"><button id="toRecv">Who could take the heat →</button></div>
+  <div class="next"><button id="toRecv">What it exchanges →</button><span class="sub">Heat, energy, water, materials and people, each in 3D.</span></div>
   <div class="draftnote">Draft wording (Claude) for J.B. Every range carries the register's confidence; nothing here is a design.</div>`;
   $('#side').innerHTML=h;
-  $('#back').onclick=()=>{ BD.S.view2=null; BD.card(); BD.draw(); };
+  $('#back').onclick=()=>{ BD.S.view2=null; BD.scene3d&&BD.scene3d.hide(); BD.card(); BD.draw(); };
   $('#mw').oninput=e=>{ $('#mwv').textContent=e.target.value; };
   $('#mw').onchange=e=>{ A.mw=+e.target.value; fitsView(); };
-  $('#toRecv').onclick=()=>recvView();
+  $('#toRecv').onclick=()=>tabView('heat');
   BD.draw();
 }
 
@@ -130,7 +130,7 @@ function netsAt(f,d){ return d.nets.map(n=>{ const inside=BD.pip(f.c[0],f.c[1],n
 async function recvView(){
   const f=siteFacts(); BD.S.view2='recv'; const d=await loadRecv(f.city); const near=nearby(f,d), nets=netsAt(f,d);
   const by={}; near.forEach(p=>(by[p.t]=by[p.t]||[]).push(p));
-  let h=`<button class="x" id="back">← What fits</button><div class="kind">Who could take the heat</div><h2>Within reach of the site</h2>
+  let h=tabBar('heat')+`<h2>Who could take the heat</h2>
   <p class="draft">Candidates, not commitments: places whose type of demand could use low-grade heat, within the distance at which a pipe has paid back elsewhere. Each still has to pass its own tests.</p>`;
   if(nets.length) h+=nets.map(n=>`<h3>District energy</h3><p><b>${esc(n.n)}</b> — ${n.edge<50?'<span class="draft">on the edge of its service area (within the ±45 m of the tracing) — check the schedule for this lot</span>':n.inside?'<span class="draft">inside its service area</span>':`${kmOrM(n.edge)} outside its service area`}</p><p class="sub">${esc(n.note)}</p>${src('neu')}`).join('');
   if(f.downtown) h+=`<h3>Downtown steam</h3><p class="sub">Creative Energy's steam network serves more than 200 downtown buildings (BCUC G-310-21A). Its service area is not published as a map, so it is not drawn. Steam needs far hotter heat than a data centre gives off.</p>`;
@@ -141,8 +141,9 @@ async function recvView(){
     h+=`<div style="margin-top:10px"><b>${esc(TYPE[t])}</b> <span class="sub">${L.length} within ${kmOrM(L[0].reach)}${L[0].guide?' (no published reach for this type — the housing figure is used as a guide)':''}${t==='arena'?' · an ice plant is also a heat source':''}</span>
     <ul style="margin:4px 0 0;padding-left:18px;font-size:13px">${L.slice(0,5).map(p=>`<li>${esc(p.n||'—')} <span class="sub">${kmOrM(p.dist)}${p.u?` · ${p.u} homes`:''}${p.s&&FIRM[p.s]?` · ${FIRM[p.s]}`:''}</span></li>`).join('')}${L.length>5?`<li class="sub">and ${L.length-5} more</li>`:''}</ul></div>`; }
   h+=`${src('reach')}${src('recv')}<p class="sub" style="margin-top:10px">${f.city==='van'?'Vancouver pools and rinks are not separate records in the national database; recreation centres may contain them. Private housing and offices are not mapped yet.':'Edmonton care homes and most hospitals have no location in the national record; private housing and offices are not mapped yet.'}</p>
-  <div class="next"><button id="toOpts">Three options →</button></div><div class="draftnote">Draft wording (Claude) for J.B.</div>`;
-  $('#side').innerHTML=h; $('#back').onclick=()=>fitsView(); $('#toOpts').onclick=()=>optionsView(); BD.draw();
+  <div class="draftnote">Draft wording (Claude) for J.B.</div>`;
+  $('#side').innerHTML=h; wireTabs(); BD.draw();
+  const A=BD.S.answers; show3d('heat',{site:f,near,nets,plantRecover:plantPerMW(true)[1]*(A.mw||1)});
 }
 
 /* ---------- round 3: three options, trade-off tables by party ---------- */
@@ -206,7 +207,7 @@ async function optionsView(){
    ['Workers',[['Operating jobs',o=>rng(o.r.jobs[0],o.r.jobs[1],'')+' (Virginia ratio, transferred)']]],
   ];
   const fut=o=>[['As planned','the table above'],['Tenant changes cooling',o.recover?'back to air: heat offered drops to none':'to liquid: heat could be offered'],['Tenant leaves',o.recover?'receivers fall back on their own heating at full peak':'nothing depends on it'],['Receiver leaves',o.recover?'all heat goes back to the dry coolers — keep their full size':'—']].map(([a,b])=>`<div><b>${a}</b> <span class="sub">${b}</span></div>`).join('');
-  let h=`<button class="x" id="back">← Receivers</button><div class="kind">Three options</div><h2>Side by side, in no order</h2>
+  let h=tabBar('opts')+`<h2>Three options, side by side, in no order</h2>
   <p class="draft">Each option gains something and gives something up. Read across a row to compare; nothing is added up and nothing wins.</p>
   <div class="opts">${opts.map(o=>`<div class="opt"><div class="kind">${o.id.toUpperCase()}</div><b>${esc(o.name)}</b><div class="sub">${esc(o.gives)}</div></div>`).join('')}</div>
   <div class="tt"><table><thead><tr><th></th>${opts.map(o=>`<th>${o.id.toUpperCase()}</th>`).join('')}</tr></thead><tbody>`;
@@ -217,7 +218,7 @@ async function optionsView(){
   <div class="legend2">${state('met')}met ${state('chg')}met with a change ${state('not')}not met ${state('cj')}cannot judge yet</div>
   ${src('pue')}${src('lf')}${src('cap')}${src('cop')}${src('homes')}${src('grid')}${net?src('neu'):''}${src('noise')}${src('jobs')}
   <div class="draftnote">Draft wording and option names (Claude) for J.B. Ranges carry the register's confidence; "cannot judge" names what is missing.</div>`;
-  $('#side').innerHTML=h; document.body.classList.add('wide'); $('#back').onclick=()=>{ document.body.classList.remove('wide'); recvView(); }; BD.draw();
+  $('#side').innerHTML=h; document.body.classList.add('wide'); wireTabs(); BD.scene3d&&BD.scene3d.hide(); BD.draw();
 }
 
 /* ---------- map layer: receivers, reach, networks ---------- */
@@ -238,5 +239,104 @@ BD.paintRecv=function(ctx,s,lw){
 BD.legendRecv=function(){ return `<div style="margin-top:6px"><i style="border:1px dashed #d1a35e"></i>District energy service area (traced)</div>
  <div><i style="background:#c8c2b8;width:8px;height:8px"></i>Non-market housing <i style="background:#a7b4d6;width:8px;height:8px;margin-left:6px"></i>School</div>
  <div><i style="background:#b9a3cf;width:8px;height:8px;border-radius:50%"></i>Care, hospital <i style="background:#7fb2c4;width:8px;height:8px;border-radius:50%;margin-left:6px"></i>Recreation, pool <i style="background:#9fb38a;width:8px;height:8px;border-radius:50%;margin-left:6px"></i>Arena</div>`; };
-BD.fitsView=fitsView; BD.recvView=recvView; BD.optionsView=optionsView;
+
+/* ---------- the exchange tabs (J.B., 15 Oct): heat · energy · water · materials · social · options; each with a 3D view ---------- */
+const TABS=[['heat','Heat'],['energy','Energy'],['water','Water'],['materials','Materials'],['social','People'],['opts','Options']];
+function tabBar(cur){ BD.S.tab=cur; return `<button class="x" id="back">← What fits</button><div class="kind">What it exchanges · ${BD.S.answers.mw||''} MW of servers</div><div class="tabs" role="tablist">${TABS.map(([k,l])=>`<button role="tab" data-tab="${k}" aria-selected="${k===cur}">${l}</button>`).join('')}</div>`; }
+function wireTabs(){ document.querySelectorAll('#side .tabs button').forEach(b=>b.onclick=()=>tabView(b.dataset.tab)); $('#back').onclick=()=>{ document.body.classList.remove('wide'); BD.scene3d&&BD.scene3d.hide(); fitsView(); }; }
+function tabView(k){ document.body.classList.remove('wide'); BD.S.view2='tab'; ({heat:recvView,energy:energyView,water:waterView,materials:materialsView,social:socialView,opts:optionsView}[k])(); }
+function show3d(tab,data){ if(!BD.scene3d) return; BD.scene3d.show(tab,data).catch(e=>{ const n=document.getElementById('st'); if(n) n.textContent='3D view could not load: '+e.message; }); }
+function roofArea(f){ const A=BD.S.answers; if(A.built==='new'&&BD.S.sel.ring) return BD.area(BD.S.sel.ring)*0.86*0.86; return f.plate||f.foot||0; }
+const SRC3={
+ elec:'register: electricity_price (BC Hydro LGS rates from 1 Jul 2026; AESO pool 2025)', pv:'register: pv_roof (NRCan 2006 yield, upper bound for flat arrays; NREL module density and roof suitability)',
+ batt:'register: battery (NREL ATB 2024; Reber 2023 34 ± 15 kWh/m²)', ups:'register: ups_flex (vendor runtimes — operator claims)', dr:'register: peak_relief (BC Hydro Demand Response for Business; AESO reserves)',
+ ev:'register: ev_stalls, ev_area (charger ratings; Vancouver and Edmonton parking dimensions)', gen:'register: genset_test (AUC 27938-D01-2023, derived; AP-42 Table 3.4-1 upper bounds)', ctl:'register: workload_control (Crozier & Liska 2025)',
+ evap:'register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)', wbe:'register: water_behind_electricity (US thermoelectric ~1.25 L/kWh; hydro ~16.8 L/kWh)', rain:'register: rainwater (ECCC Normals 1991–2020; CSA B805 method; runoff coefficient 0.8 assumed)',
+ reuse:'register: a_reuse_rules, reclaimed_makeup (VBBL 2025; Metro Vancouver UT-019; EPCOR)', wprice:'register: water_supply (City of Vancouver 2026 rates)', sewer:'register: sewer_sink (Bylaw 299 limits; KWL 2014)',
+ srv:'LBNL 2024: about 600 W per server (register: servers)', ew:'register: ewaste (server masses 21.25–26.3 kg, 6-year refresh)', cu:'register: copper_tonnes (Copper Development Association 2023 — industry figure)',
+ eit:'register: embodied_it (Dell R760 life-cycle assessment 2025 — manufacturer)', eb:'register: embodied_building (461 kg CO₂e/m² median; no data-centre benchmark)',
+ snd:'register: noise_level (screen Lp = Lw − 20 log r − 8; Trane RTAF 333–1,010 kW, Eurovent: Lw 91–101 dBA per unit)', lf:'register: lf_flag (AUC Rule 012 s. 4.5)', light:'register: light_at_window (CIE 150:2017; Edmonton Bylaw 20001 s. 5.120(3); Vancouver: no lux limit)',
+ so:'register: standoff (Ontario GO-ITS 25.18, transferred)', watch:'register: watched_area (field observation, labelled as one person\'s)', ppl:'register: people_affected (census download pending — a gap)',
+};
+const s3=k=>`<div class="src">${esc(SRC3[k])}</div>`;
+function energyView(){
+  const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=[fac[0]*8760*R.lf,fac[1]*8760*R.lf];
+  const roof=roofArea(f), plant=plantPerMW(false)[1]*mw, share=Math.min(0.9,roof?plant/roof:0);
+  const kwp=[roof*0.66*(1-share)*0.70*0.16,roof*0.66*(1-share)*0.70*0.20], yld=f.city==='van'?1009:1245, pvMWh=kwp.map(v=>v*yld/1000);
+  const co2=MWh.map(v=>v*R.grid[f.city]/1000);
+  const cost=f.city==='van'?[MWh[0]*1000*0.0679+fac[0]*1000*13.83*12,MWh[1]*1000*0.0679+fac[1]*1000*13.83*12]:null;
+  const ups=[mw*1/60*0.5,mw*5/60*0.5], gen=[fac[0]*1000*4,fac[1]*1000*4];
+  let h=tabBar('energy')+`<h2>Power in, power offered</h2><p class="draft">The data centre is the grid's customer first. What it could offer back is flexibility — and only whoever runs the computing can give that.</p>
+  <h3>What it draws</h3><dl><dt>Power at the meter</dt><dd>${rng(fac[0],fac[1],'MW')}</dd><dt>Electricity a year</dt><dd>${rng(MWh[0]/1000,MWh[1]/1000,'GWh')} at an average load of 60% of peak</dd>
+  ${cost?`<dt>Cost a year</dt><dd>about $${(cost[0]/1e6).toFixed(1)}–${(cost[1]/1e6).toFixed(1)} million if served on BC Hydro's large general service (6.79 ¢/kWh + $13.83/kW a month); very large loads move to transmission rates</dd>`:`<dt>Price</dt><dd>Alberta pool averaged $43.68/MWh in 2025, plus EPCOR distribution and transmission charges</dd>`}
+  <dt>Carbon of that electricity</dt><dd>${rng(co2[0],co2[1],'t CO₂e/yr')} at ${R.grid[f.city]} g/kWh (average, consumption)</dd>
+  <dt>Grid connection</dt><dd>${f.downtown?`${state('not')}no new downtown feeder positions before the West End substation (expected July 2032)`:`${state('cj')}needs the utility's answer to a load application; the grid can add 12–36 months`}</dd></dl>${s3('elec')}${src('grid')}${f.downtown?src('grid2'):''}
+  <h3>Solar on its own roof</h3><dl><dt>Roof</dt><dd>${fmt(roof)} m², of which plant takes about ${Math.round(share*100)}%</dd><dt>Panels</dt><dd>${rng(kwp[0],kwp[1],'kWp')} → ${rng(pvMWh[0],pvMWh[1],'MWh/yr')}</dd><dt>Share of its own use</dt><dd>${rng(pvMWh[0]/MWh[1]*100,pvMWh[1]/MWh[0]*100,'%')} — a small share at data-centre densities</dd></dl>${s3('pv')}
+  <h3>What it could offer the grid</h3><dl>
+  <dt>Who decides</dt><dd>${state('cj')}only whoever runs the computing; in a shared (colocation) building that is each tenant. Training runs can pause at checkpoints; live services cannot.</dd>
+  <dt>The batteries it already has</dt><dd>${rng(ups[0],ups[1],'MWh')} for minutes (1–5 min of runtime, half kept for outages) — fast grid support, not a 4-hour peak; BC Hydro's storage incentive excludes an existing UPS</dd>
+  <dt>A battery added for the grid</dt><dd>1 MW for 4 h takes ${fmt(4000/49)}–${fmt(4000/19)} m²; BC Hydro pays $50/kW a season for winter peak relief (fossil generators excluded)</dd>
+  <dt>EV charging, if 1 MW were set aside</dt><dd>${fmt(500/19.2)}–${fmt(500/7.4)} Level 2 stalls (7.4–19.2 kW at a 0.5 diversity), about ${fmt(500/19.2*22)}–${fmt(500/7.4*22)} m² of parking</dd></dl>${s3('ctl')}${s3('ups')}${s3('batt')}${s3('dr')}${s3('ev')}
+  <h3>Standby generators</h3><dl><dt>Testing</dt><dd>about 4 full-load hours a year: ${rng(gen[0]*0.706/1000,gen[1]*0.706/1000,'t CO₂')} and ${rng(gen[0]*14.6/1000,gen[1]*14.6/1000,'kg NOₓ')} a year (uncontrolled-engine upper bound)</dd></dl>${s3('gen')}
+  <div class="draftnote">Draft wording (Claude) for J.B. Ranges carry the register's confidence.</div>`;
+  $('#side').innerHTML=h; wireTabs(); BD.draw();
+  show3d('energy',{site:f,plant,pvKwp:kwp[1],battM2:4000/34,grid:f.downtown?'downtown grid: no new feeders before 2032':''});
+}
+function waterView(){
+  const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=[fac[0]*8760*R.lf,fac[1]*8760*R.lf];
+  const towers=A.cooling==='towers'; const evap=MWh.map(v=>v*1000*1.5/1000); // m³: ≤ 1.5 L/kWh of heat
+  const mk=[evap[1]*(1+1/(6-1)),evap[1]*(1+1/(2-1))], bd=[evap[1]/(6-1),evap[1]/(2-1)];
+  const roof=roofArea(f), mm=f.city==='van'?1159.5:422.5, rain=roof*mm/1000*0.8;
+  const wbe=[MWh[0]*1000*1.25/1000,MWh[1]*1000*16.8/1000];
+  let h=tabBar('water')+`<h2>Water in, water out</h2><p class="draft">A data centre can use almost no water on site, or a great deal — it depends on how it rejects heat. The water behind its electricity is a separate question.</p>
+  <div class="q"><div class="lab">How it rejects heat</div><div class="seg" data-c="1"><button data-v="dry" aria-pressed="${!towers}">Dry coolers</button><button data-v="towers" aria-pressed="${towers}">Cooling towers</button></div></div>
+  <h3>On site</h3><dl>${towers?`<dt>Evaporated</dt><dd>up to ${fmt(evap[1])} m³/yr (at most 1.5 L per kWh of heat)</dd><dt>Make-up water</dt><dd>${fmt(mk[0])}–${fmt(mk[1])} m³/yr at 2–6 cycles of concentration</dd><dt>Blowdown to the sewer</dt><dd>${fmt(bd[0])}–${fmt(bd[1])} m³/yr</dd>${f.city==='van'?`<dt>Water bill</dt><dd>about $${fmt(mk[0]/2.832*4.091)}–$${fmt(mk[1]/2.832*5.128)} a year for the make-up water alone (2026 rates, per 2.832 m³ unit)</dd>`:''}`:`<dt>Evaporated</dt><dd>none for cooling — dry coolers reject heat to the air; their fans are the trade (sound, roof space)</dd>`}
+  <dt>Rain on the roof</dt><dd>about ${fmt(rain)} m³/yr from ${fmt(roof)} m² at ${mm} mm a year</dd></dl>${s3('evap')}${f.city==='van'?s3('wprice'):''}${s3('rain')}
+  <h3>Behind its electricity</h3><dl><dt>Water used to make its power</dt><dd>${fmt(wbe[0])}–${fmt(wbe[1])} m³/yr (thermal plants ~1.25 L/kWh; hydro reservoirs ~16.8 L/kWh — mostly evaporation from reservoirs)</dd></dl>${s3('wbe')}
+  <h3>Other sources and their rules</h3><dl><dt>Reclaimed water</dt><dd>${f.city==='van'?'Metro Vancouver considers supply to industry case by case; no rate':'EPCOR supplied 4,226 ML of reclaimed water to industry in 2024 (Gold Bar)'}</dd>
+  <dt>Neighbours' greywater</dt><dd>${f.city==='van'?'not allowed as a cooling source under the Building By-law; residential systems only (2025)':'needs a variance in Alberta'}</dd>
+  <dt>The sewer as a heat sink</dt><dd>warm water to the sewer must stay below 40 °C at the plant; heat taken from sewage needs a letter of support, first come first served</dd></dl>${s3('reuse')}${s3('sewer')}
+  <div class="draftnote">Draft wording (Claude) for J.B.</div>`;
+  $('#side').innerHTML=h; wireTabs(); document.querySelectorAll('#side .seg[data-c] button').forEach(b=>b.onclick=()=>{ A.cooling=b.dataset.v; waterView(); }); BD.draw();
+  show3d('water',{site:f,plant:plantPerMW(false)[1]*mw,rain,towers,evap:towers?fmt(evap[1])+' m³/yr':''});
+}
+function materialsView(){
+  const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, racks=mw*1000/R.kWPerRack, servers=mw*1000/0.6;
+  const ew=[servers*21.25/6/1000,servers*26.3/6/1000], cu=[mw*20,mw*40], eit=[servers*4.177*0.10/6,servers*4.177*0.15/6], eb=f.gross[1]*0.461;
+  let h=tabBar('materials')+`<h2>What it is made of, and how often</h2><p class="draft">The building can last decades; the servers inside are replaced about every six years. That rhythm is where its materials go.</p>
+  <h3>The equipment</h3><dl><dt>Racks</dt><dd>about ${fmt(racks)} at 8 kW each</dd><dt>Servers</dt><dd>about ${fmt(servers)} at 600 W each</dd>
+  <dt>Electronic waste</dt><dd>${rng(ew[0],ew[1],'t/yr')} of servers alone, on a six-year refresh</dd><dt>Copper</dt><dd>${fmt(cu[0])}–${fmt(cu[1])} t in the facility (industry figure)</dd>
+  <dt>Embodied carbon, servers</dt><dd>${rng(eit[0],eit[1],'t CO₂e/yr')} — the manufacturing share (10–15%) of one manufacturer's server assessment, spread over six years; uncertainty is large</dd></dl>${s3('srv')}${s3('ew')}${s3('cu')}${s3('eit')}
+  <h3>The building</h3><dl>${A.built==='existing'?`<dt>Reuse</dt><dd>an existing building keeps its structure; precedents: 515 W Hastings offices (2023), Edmonton office and warehouse conversions</dd><dt>Watch for</dt><dd>floor strength, floor-to-floor height and room for plant</dd>`:`<dt>Embodied carbon, building</dt><dd>about ${fmt(eb)} t CO₂e for ${fmt(f.gross[1])} m² at 461 kg/m² — a general building median; no data-centre benchmark exists</dd>`}
+  <dt>Lifespans</dt><dd>servers ~6 years · cooling and heat pumps 15–25 · shell up to 40 · pipe network 40–50</dd></dl>${A.built==='existing'?'':s3('eb')}
+  <div class="draftnote">Draft wording (Claude) for J.B.</div>`;
+  $('#side').innerHTML=h; wireTabs(); BD.draw();
+  show3d('materials',{site:f,racks});
+}
+function socialView(){
+  const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, fac=mw*R.pue[1]; const n=Math.max(1,Math.ceil(fac));
+  const lw=[91+10*Math.log10(n),101+10*Math.log10(n)];
+  const lim=f.city==='van'?(/^(MC-1|MC-2|DD|M-1|M-1A|M-1B|M-2|IC-1|IC-2|IC-3|I-1|I-1A|I-1B|I-1C|I-2|I-3|I-4|CWD|DEOD)$/.test(f.zone)?55:/^(C-|FC-|FCCDD|BCPED|HA-|R3-|R4-|R5-|RR-3)/.test(f.zone)?50:45):50;
+  const dist=lw.map(L=>Math.pow(10,(L-8-lim)/20));
+  // neighbours within that distance (buildings from the loaded tiles)
+  const S=BD.S; let within=[0,0];
+  for(const id in S.tiles){ if(!id.startsWith(S.city+':')) continue; for(const b of S.tiles[id].bld){ if(b.f===3||(f.blds||[]).includes(b)) continue; const r=Math.hypot(b.c[0]-f.c[0],b.c[1]-f.c[1]); if(r<=dist[0]) within[0]++; if(r<=dist[1]) within[1]++; } }
+  const d=BD.recv[f.city]||{pts:[]}; const homes=d.pts.filter(p=>p.t==='housing'&&Math.hypot(p.x-f.c[0],p.y-f.c[1])<=200).reduce((t,p)=>t+(p.u||0),0);
+  const key='bd-notes-'+S.city+'-'+S.sel.id; let notes=''; try{ notes=localStorage.getItem(key)||''; }catch(e){}
+  let h=tabBar('social')+`<h2>What neighbours would hear, see and feel</h2><p class="draft">Described as experienced, not scored. Measured where the data allows; your site observations sit beside it, labelled as yours.</p>
+  <h3>Sound</h3><dl><dt>Cooling plant</dt><dd>about ${n} unit${n>1?'s':''} rated ${rng(lw[0],lw[1],'dBA')} together (low-noise to standard)</dd>
+  <dt>Night limit</dt><dd>${lim} dBA at a ${f.city==='van'?'quiet-zone home':'home'}</dd><dt>Reached at</dt><dd>${fmt(dist[0])}–${fmt(dist[1])} m from the plant, before walls, barriers or enclosures</dd>
+  <dt>Buildings inside that distance</dt><dd>${within[0]}–${within[1]} — in the 3D view, red: over the limit even with low-noise units; accent: over only with standard units</dd>
+  <dt>Low hum</dt><dd>a tonal low-frequency sound adds 5 dBA in Alberta's rule — the kind neighbours describe most</dd></dl>${s3('snd')}${s3('lf')}${src('noise')}
+  <h3>The edge</h3><dl><dt>Standoff</dt><dd>new facilities keep about 10 m between the building and the public (45 m enhanced) — a fence, bollards or a blank setback, as experienced from the street</dd>
+  <dt>Ground floor</dt><dd>${f.ground?'this zone keeps the ground floor for other uses: it could meet the street':'nothing in the zone requires another use at grade'}</dd>
+  <dt>Watched area</dt><dd>${state('cj')}seen only on site: cameras and signs visible from public space, recorded as one person's account</dd>
+  <dt>Light at night</dt><dd>${f.city==='van'?'Vancouver sets no lux limit':'Edmonton requires light directed downward and away (no number)'}; the international reference is 10 lx before and 2 lx after curfew at a window</dd></dl>${s3('so')}${s3('watch')}${s3('light')}
+  <h3>Who is near</h3><dl><dt>Non-market homes within 200 m</dt><dd>${fmt(homes)} (City list; private housing not counted)</dd><dt>People within reach</dt><dd>${state('cj')}census population not yet loaded</dd><dt>Work</dt><dd>${rng(Math.max(1,mw*f.m2MW[0]/R.hallShare[1]/R.jobsM2),mw*f.m2MW[1]/R.hallShare[0]/R.jobsM2,'')} operating jobs (Virginia ratio, transferred)</dd></dl>${s3('ppl')}${src('jobs')}
+  <h3>Your observations on site</h3><textarea id="notes" rows="5" style="width:100%;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;padding:8px;color:var(--fg)" placeholder="What did you hear, see and feel at the edge? Time of day, where you stood.">${esc(notes)}</textarea><div class="src">Kept in this browser only; shown as your observation, never as a measurement.</div>
+  <div class="draftnote">Draft wording (Claude) for J.B. Sound is a screening estimate: manufacturer-rated levels, no barriers, ground or buildings.</div>`;
+  $('#side').innerHTML=h; wireTabs(); $('#notes').oninput=e=>{ try{ localStorage.setItem(key,e.target.value); }catch(err){} }; BD.draw();
+  show3d('social',{site:f,plant:plantPerMW(false)[1]*mw,noise:{lw,limit:lim}});
+}
+BD.fitsView=fitsView; BD.recvView=recvView; BD.optionsView=optionsView; BD.tabView=tabView;
 })();

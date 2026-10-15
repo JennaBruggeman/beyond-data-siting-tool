@@ -85,6 +85,9 @@ a{color:var(--accent-2)}
 .tt tr.party td{color:var(--fg);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding-top:12px;border-bottom:1px solid var(--line-2)}
 .st{display:inline-block;width:8px;height:8px;transform:rotate(45deg);margin-right:6px;vertical-align:1px;border:1px solid var(--muted)}
 .st-met{background:#8fb996;border-color:#8fb996}.st-chg{background:#CC746C;border-color:#CC746C}.st-not{background:#b24f49;border-color:#b24f49}.st-cj{background:transparent}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;margin:10px 0 4px;border-bottom:1px solid var(--line)}
+.tabs button{background:transparent;border:0;border-bottom:2px solid transparent;padding:6px 8px;font-size:12.5px;color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent)}
 .legend2{font-size:12px;color:var(--muted);margin-top:10px}
 body.wide main{grid-template-columns:1fr minmax(320px,680px)}
 @media (max-width:760px){
@@ -305,7 +308,7 @@ async function select(sel){
     sel.blds=sel.pt?T.bld.filter(b=>pip(sel.pt[0],sel.pt[1],b.r)):[];
     if(!sel.blds.length&&sel.pt){ const n=T.bld.map(b=>[b,Math.hypot(b.c[0]-sel.pt[0],b.c[1]-sel.pt[1])]).filter(v=>v[1]<25).sort((a,b)=>a[1]-b[1]); if(n.length) sel.blds=[n[0][0]]; }
   }
-  S.sel=sel; S.view2=null; document.body.classList.remove('wide'); if(sel.city!==S.city) await setCity(sel.city,true);
+  S.sel=sel; S.view2=null; window.BD&&BD.scene3d&&BD.scene3d.hide(); document.body.classList.remove('wide'); if(sel.city!==S.city) await setCity(sel.city,true);
   const c=sel.ring?centroid(sel.ring):sel.pt; if(c&&(S.view.s<1.2||Math.abs(c[0]-S.view.cx)*S.view.s>W/2||Math.abs(c[1]-S.view.cy)*S.view.s>H/2)) flyTo(c[0],c[1],Math.max(S.view.s,2));
   try{ const tk=sel.tile.replace(/-/g,'m'); history.replaceState(null,'','#'+sel.city+'-'+tk+'-'+sel.id); }catch(e){}
   card(); draw();
@@ -338,7 +341,7 @@ function card(){
   h+=startStep(st);
   $('#side').innerHTML=h; wireStart(); $('#clr').onclick=clearSel; const fb=$('#fits'); if(fb) fb.onclick=()=>BD.fitsView();
 }
-function clearSel(){ S.sel=null; S.view2=null; document.body.classList.remove('wide'); $('#q').value=''; $('#res').hidden=true; try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} intro(); draw(); }
+function clearSel(){ S.sel=null; S.view2=null; window.BD&&BD.scene3d&&BD.scene3d.hide(); document.body.classList.remove('wide'); $('#q').value=''; $('#res').hidden=true; try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} intro(); draw(); }
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&S.sel&&document.activeElement!==$('#q')) clearSel(); });
 $('#q').addEventListener('search',()=>{ if(!$('#q').value&&S.sel) clearSel(); });
 
@@ -433,7 +436,7 @@ async function setCity(city,keepSel){
 $('#c-van').onclick=()=>setCity('van'); $('#c-edm').onclick=()=>setCity('edm');
 window.addEventListener('resize',resize); if(window.ResizeObserver) new ResizeObserver(()=>resize()).observe(mapEl);
 
-window.BD={S,$,esc,fmt,getJSON,pathOf,draw,centroid,pip,statusOf,card:()=>card()};
+window.BD={S,$,esc,fmt,getJSON,pathOf,draw,centroid,pip,area,statusOf,card:()=>card()};
 (async function init(){
   resize();
   const h=(location.hash||'').slice(1).match(/^(van|edm)-(m?\d+)_(m?\d+)-(.+)$/);
@@ -444,3 +447,4 @@ window.BD={S,$,esc,fmt,getJSON,pathOf,draw,centroid,pip,statusOf,card:()=>card()
 })();
 </script>
 <script src="engine.js"></script>
+<script src="scene3d.js"></script>
