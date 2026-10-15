@@ -74,6 +74,19 @@ dt{color:var(--muted)} dd{margin:0;font-variant-numeric:tabular-nums;min-width:0
 .intro p{margin:8px 0}
 .intro ol{padding-left:18px;margin:8px 0}
 a{color:var(--accent-2)}
+.opts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}
+.opt{border:1px solid var(--line-2);border-radius:6px;padding:8px;font-size:12.5px;min-width:0}
+.opt b{font-weight:400}
+.tt{overflow-x:auto;margin-top:8px}
+.tt table{border-collapse:collapse;width:100%;font-size:12px;font-variant-numeric:tabular-nums}
+.tt th{font-weight:600;color:var(--muted);text-align:left;padding:4px 6px;border-bottom:1px solid var(--line-2)}
+.tt td{padding:5px 6px;border-bottom:1px solid var(--line);vertical-align:top;min-width:90px}
+.tt td:first-child{color:var(--muted);min-width:110px}
+.tt tr.party td{color:var(--fg);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding-top:12px;border-bottom:1px solid var(--line-2)}
+.st{display:inline-block;width:8px;height:8px;transform:rotate(45deg);margin-right:6px;vertical-align:1px;border:1px solid var(--muted)}
+.st-met{background:#8fb996;border-color:#8fb996}.st-chg{background:#CC746C;border-color:#CC746C}.st-not{background:#b24f49;border-color:#b24f49}.st-cj{background:transparent}
+.legend2{font-size:12px;color:var(--muted);margin-top:10px}
+body.wide main{grid-template-columns:1fr minmax(320px,680px)}
 @media (max-width:760px){
   main{grid-template-columns:1fr;grid-template-rows:minmax(260px,1fr) auto}
   aside{border-left:0;border-top:1px solid var(--line);max-height:52vh}
@@ -193,7 +206,7 @@ async function loadMeta(city){
   m.ovRaw=m.overview.map(([zi,a])=>{const r=decodeRing(a,0,0,m.Q);return {zi,r,bb:bbox(r)};}); delete m.overview;
   m.tileset=new Set(m.tiles.map(t=>t[0]+'_'+t[1]));
   m.fl=(m.flood||[]).map(([cat,rs])=>{const rings=rs.map(a=>decodeRing(a,0,0,m.Q)); return {cat,rings,bb:bbox(rings[0]),path:pathOf(rings)};}); delete m.flood;
-  S.meta[city]=m; return m;
+  S.meta[city]=m; if(window.BD&&BD.loadRecv) BD.loadRecv(city); return m;
 }
 async function loadTile(city,key){
   const id=city+':'+key; if(S.tiles[id]||S.loading[id]) return S.tiles[id];
@@ -236,6 +249,7 @@ function paint(){
     $('#st').textContent=waiting?`Loading ${waiting} area${waiting>1?'s':''}…`:'Click a parcel';
   } else $('#st').textContent='Zoom in or search an address to pick a parcel';
   if(detail&&m.fl&&m.fl.length){ ctx.setLineDash([6/s,4/s]); for(const f of m.fl){ if(f.cat==='wave') continue; ctx.strokeStyle=f.cat==='designated'?'rgba(127,178,196,.85)':'rgba(127,178,196,.45)'; ctx.lineWidth=lw(f.cat==='designated'?1.4:.9); ctx.stroke(f.path); } ctx.setLineDash([]); }
+  if(window.BD&&BD.paintRecv) BD.paintRecv(ctx,s,lw);
   if(S.sel&&S.sel.city===S.city){ ctx.strokeStyle='#CC746C'; ctx.lineWidth=lw(2.4);
     if(S.sel.ring){ ctx.stroke(pathOf([S.sel.ring])); }
     if(S.sel.pt){ const r=lw(7); ctx.beginPath(); ctx.arc(S.sel.pt[0],S.sel.pt[1],r,0,7); ctx.stroke(); }
@@ -291,7 +305,7 @@ async function select(sel){
     sel.blds=sel.pt?T.bld.filter(b=>pip(sel.pt[0],sel.pt[1],b.r)):[];
     if(!sel.blds.length&&sel.pt){ const n=T.bld.map(b=>[b,Math.hypot(b.c[0]-sel.pt[0],b.c[1]-sel.pt[1])]).filter(v=>v[1]<25).sort((a,b)=>a[1]-b[1]); if(n.length) sel.blds=[n[0][0]]; }
   }
-  S.sel=sel; if(sel.city!==S.city) await setCity(sel.city,true);
+  S.sel=sel; S.view2=null; document.body.classList.remove('wide'); if(sel.city!==S.city) await setCity(sel.city,true);
   const c=sel.ring?centroid(sel.ring):sel.pt; if(c&&(S.view.s<1.2||Math.abs(c[0]-S.view.cx)*S.view.s>W/2||Math.abs(c[1]-S.view.cy)*S.view.s>H/2)) flyTo(c[0],c[1],Math.max(S.view.s,2));
   try{ const tk=sel.tile.replace(/-/g,'m'); history.replaceState(null,'','#'+sel.city+'-'+tk+'-'+sel.id); }catch(e){}
   card(); draw();
@@ -322,9 +336,9 @@ function card(){
     ${srcs(['edm_data'])}`;
   }
   h+=startStep(st);
-  $('#side').innerHTML=h; wireStart(); $('#clr').onclick=clearSel;
+  $('#side').innerHTML=h; wireStart(); $('#clr').onclick=clearSel; const fb=$('#fits'); if(fb) fb.onclick=()=>BD.fitsView();
 }
-function clearSel(){ S.sel=null; $('#q').value=''; $('#res').hidden=true; try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} intro(); draw(); }
+function clearSel(){ S.sel=null; S.view2=null; document.body.classList.remove('wide'); $('#q').value=''; $('#res').hidden=true; try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} intro(); draw(); }
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&S.sel&&document.activeElement!==$('#q')) clearSel(); });
 $('#q').addEventListener('search',()=>{ if(!$('#q').value&&S.sel) clearSel(); });
 
@@ -355,7 +369,7 @@ function startStep(st){
     `<small style="margin-top:8px">More (room for heat rejection, electrical service, floor height, floor strength) sits in "Specify the building" for operators and planners.</small></div>`;
   }
   h+=`<div class="q"><div class="sub">Or a special case: <a href="#" data-sp="modular">a modular unit</a> · <a href="#" data-sp="infra">beside existing infrastructure</a> · <a href="#" data-sp="expand">expanding an existing data centre</a></div>${A.special?`<small>Chosen: ${esc({modular:'a modular or containerised unit',infra:'at existing infrastructure (substation, sewage plant, district energy plant, telecom exchange)',expand:'expanding an existing data centre'}[A.special])} — <a href="#" data-sp="">clear</a></small>`:''}</div>
-  <div class="next"><button disabled title="Round 2 of the build">What fits here →</button><span class="sub">Next build round: the zoning envelope, space for the plant, room for servers and the largest size that fits.</span></div>
+  <div class="next"><button id="fits">What fits here →</button><span class="sub">The envelope, room for servers and plant, and the largest size that fits.</span></div>
   <div class="draftnote">Wording is Claude's draft for J.B. to rewrite. Decisions: starting step (J.B., 14 Oct).</div>`;
   return h;
 }
@@ -376,7 +390,7 @@ function intro(){ legend();
 function legend(){ const m=S.meta[S.city];
   const L=S.city==='van'?[['case','Case by case (I-2, I-1C, I-3 A, FC-2)'],['site','Site-specific (CD-1), or not yet reviewed (downtown plan areas)'],['no','Rezoning needed']]:[['yes','Allowed (IH)'],['case','Smaller only, or case by case (IM, BE, UI, FD)'],['site','Site-specific (Direct Control, special areas)'],['no','Rezoning needed']];
   const op=document.querySelector('#lg details'); const open=op?op.open:window.innerWidth>760;
-  $('#lg').innerHTML=`<details${open?' open':''}><summary>Is a data centre an allowed use?</summary>`+L.map(([k,t])=>`<div><i style="background:${COL[k][0]||'transparent'};border:1px solid ${COL[k][1]}"></i>${esc(t)}</div>`).join('')+`<div class="src">${esc(m.sources[0])}</div></details>`;
+  $('#lg').innerHTML=`<details${open?' open':''}><summary>Is a data centre an allowed use?</summary>`+L.map(([k,t])=>`<div><i style="background:${COL[k][0]||'transparent'};border:1px solid ${COL[k][1]}"></i>${esc(t)}</div>`).join('')+(window.BD&&BD.legendRecv?BD.legendRecv():'')+`<div class="src">${esc(m.sources[0])}</div></details>`;
 }
 
 /* ---------- address search ---------- */
@@ -417,8 +431,9 @@ async function setCity(city,keepSel){
   legend(); if(!keepSel){ S.sel=null; intro(); } draw();
 }
 $('#c-van').onclick=()=>setCity('van'); $('#c-edm').onclick=()=>setCity('edm');
-window.addEventListener('resize',resize);
+window.addEventListener('resize',resize); if(window.ResizeObserver) new ResizeObserver(()=>resize()).observe(mapEl);
 
+window.BD={S,$,esc,fmt,getJSON,pathOf,draw,centroid,pip,statusOf,card:()=>card()};
 (async function init(){
   resize();
   const h=(location.hash||'').slice(1).match(/^(van|edm)-(m?\d+)_(m?\d+)-(.+)$/);
@@ -428,3 +443,4 @@ window.addEventListener('resize',resize);
 })();
 })();
 </script>
+<script src="engine.js"></script>
