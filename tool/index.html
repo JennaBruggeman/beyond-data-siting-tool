@@ -202,8 +202,8 @@ async function loadTile(city,key){
     const T={key,A:t.A,par:[],pts:[],bld:[]};
     if(t.P) for(const [pid,a] of t.P){ const r=decodeRing(a,ox,oy,q); T.par.push({id:pid,r,bb:bbox(r)}); }
     if(t.E) for(const [pid,x,y] of t.E) T.pts.push({id:pid,x:ox+x/q,y:oy+y/q});
-    for(const [h,a] of t.B){ const r=decodeRing(a,ox,oy,q); T.bld.push({h,r,c:centroid(r),a:area(r)}); }
-    T.pPath=pathOf(T.par.map(p=>p.r)); T.bPath=pathOf(T.bld.map(b=>b.r));
+    for(const [h,a,f] of t.B){ const r=decodeRing(a,ox,oy,q); T.bld.push({h,r,f:f||0,c:centroid(r),a:area(r)}); }
+    T.pPath=pathOf(T.par.map(p=>p.r)); T.bPath=pathOf(T.bld.filter(b=>b.f!==3).map(b=>b.r)); T.gPath=pathOf(T.bld.filter(b=>b.f===3).map(b=>b.r));
     S.tiles[id]=T; delete S.loading[id]; draw(); return T;
   }).catch(e=>{ delete S.loading[id]; console.warn(e); });
   return S.loading[id];
@@ -230,7 +230,7 @@ function paint(){
     const keys=visibleTiles(); let waiting=0;
     for(const k of keys){ const T=S.tiles[S.city+':'+k]; if(!T){ waiting++; loadTile(S.city,k); continue; }
       if(T.par.length){ ctx.strokeStyle='#4a4f57'; ctx.lineWidth=lw(.6); ctx.stroke(T.pPath); }
-      ctx.fillStyle='rgba(233,230,225,.07)'; ctx.fill(T.bPath); ctx.strokeStyle='rgba(233,230,225,.38)'; ctx.lineWidth=lw(.7); ctx.stroke(T.bPath);
+      ctx.fillStyle='rgba(233,230,225,.07)'; ctx.fill(T.bPath); ctx.strokeStyle='rgba(233,230,225,.38)'; ctx.lineWidth=lw(.7); ctx.stroke(T.bPath); if(T.gPath){ ctx.setLineDash([3/s,3/s]); ctx.strokeStyle='rgba(233,230,225,.18)'; ctx.stroke(T.gPath); ctx.setLineDash([]); }
       if(T.pts.length && s>0.6){ ctx.fillStyle='#9d9a94'; const r=lw(1.6); for(const p of T.pts) ctx.fillRect(p.x-r,p.y-r,2*r,2*r); }
     }
     $('#st').textContent=waiting?`Loading ${waiting} area${waiting>1?'s':''}…`:'Click a parcel';
@@ -301,13 +301,14 @@ function card(){
   let h='', st, z;
   if(s.city==='van'){
     const [addr,zone,zcls,legal,strata,yb,lv,iv,ar]=a; z=zone; st=vanStatus(zone);
-    const bl=s.blds||[]; const hmax=bl.length?Math.max(...bl.map(b=>b.h)):null; const foot=bl.reduce((t,b)=>t+b.a,0);
+    const all=s.blds||[], gone=all.filter(b=>b.f===3), bl=all.filter(b=>b.f!==3); const hmax=bl.length?Math.max(...bl.map(b=>b.h)):null; const foot=bl.reduce((t,b)=>t+b.a,0);
+    const lid=bl.some(b=>b.f===1||b.f===2||b.f===4), nw=bl.filter(b=>b.f===2).length;
     h=`<button class="x" id="clr" title="Clear the selected site (Esc)">× Clear</button><div class="kind">Site · Vancouver</div><h2>${esc(addr||'No civic address')}</h2><div class="sub">Tax coordinate ${esc(s.id)}</div>
     <h3>Data centre here?</h3><p><span class="pill ${st.k}">${esc(st.t)}</span> <span class="sub">zone ${esc(zone)}${zcls?' · '+esc(zcls):''}</span></p><p class="draft">${st.d}</p>${st.env?`<p class="sub">${esc(st.env)}</p>`:''}${srcs(st.src)}
     <h3>The lot</h3><dl><dt>Lot area</dt><dd>${fmt(ar)} m²</dd><dt>Ownership</dt><dd>${strata>0?esc(strata)+' strata units — many owners':esc(legal==='LAND'?'one titled lot':legal||'—')}</dd>
     <dt>Land value</dt><dd>${money(lv)}</dd><dt>Building value</dt><dd>${money(iv)}</dd><dt>Year built</dt><dd>${yb||'—'}</dd>
     <dt>Floodplain</dt><dd>${floodText(s)}</dd></dl>
-    <h3>What stands on it</h3>${bl.length?`<dl><dt>Buildings</dt><dd>${bl.length} footprint${bl.length>1?'s':''}, ${fmt(foot)} m² in plan</dd><dt>Tallest</dt><dd>${hmax!=null?hmax.toFixed(1)+' m above ground':'—'}</dd></dl><div class="src">Heights as of 2009; newer buildings are missing.</div>`:'<p class="sub">No building in the 2009 footprints (empty then, or built since).</p>'}
+    <h3>What stands on it</h3>${bl.length?`<dl><dt>Buildings</dt><dd>${bl.length} footprint${bl.length>1?'s':''}, ${fmt(foot)} m² in plan</dd><dt>Tallest</dt><dd>${hmax!=null?hmax.toFixed(1)+' m above ground':'—'}</dd>${nw?`<dt>Since 2009</dt><dd>${nw} new building${nw>1?'s':''} found in 2022</dd>`:''}</dl><div class="src">${lid?'Heights measured from the City\'s LiDAR 2022 (90th percentile of roof points above ground); outlines from the 2009 footprints, new buildings outlined from the LiDAR.':'Heights as of 2009; LiDAR 2022 not yet processed for this area.'}</div>`:`<p class="sub">${lid||S.meta.van.lidar?'No building found here in the City\'s LiDAR 2022.':'No building in the 2009 footprints (empty then, or built since).'}</p>`}${gone.length?`<p class="sub">${gone.length} building${gone.length>1?'s':''} from 2009 not found in 2022 (demolished or rebuilt) — shown dashed.</p>`:''}
     ${srcs(['van_data'])}`;
   } else {
     const [addr,zone,zmap,zsrc,lot,gross,y0,y1,val,cls,nb,n]=a; z=zmap||zone; st=edmStatus(z);

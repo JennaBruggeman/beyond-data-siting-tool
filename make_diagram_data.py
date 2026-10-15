@@ -23,7 +23,7 @@ INPUTS = {
     'cooling_type': ('Cooling type', 'air / glycol-dry cooler / chilled water / liquid', 'permits (public record), operator page (claim), site visit', 70),
     'weather': ('Weather file', 'CWEC typical year, hourly', 'ECCC CWEC 2020 (Vancouver Intl, Edmonton Intl)', 80),
     'plant_schedule': ('Plant on site', 'generators, chillers, dry coolers, transformers — what, where', 'permits, filed noise reports, site visit', 70),
-    'receivers': ('Receivers nearby', 'buildings and uses within reach', 'City energy report, BCA use codes, OSM, site visit', 60),
+    'receivers': ('Receivers nearby', 'buildings and uses within reach', 'City energy report (4 buildings read), BCUC network decisions, Statistics Canada facility databases (to download), site visit', 60),
     'receiver_temp': ('Receiver temperature', '°C the receiver needs', 'receiver type (DH 70/35, floor heat 35–45, RAS 12–15, greenhouse 38–82)', 70),
     'receptors': ('Noise receptors', 'nearest dwellings and their distance', 'City parcels, site visit', 80),
     'lighting_plan': ('Lighting', 'exterior lighting as seen', 'site visit', 60),
@@ -118,7 +118,7 @@ conds = []
 for h in HEADINGS:
     for c in r['conditions']:
         if c['heading'] == h:
-            conds.append({'id': c['id'], 'heading': h, 'name': c['name'], 'test': c['test'], 'quantities': c['quantities'], 'move': c.get('move', []), 'parties': c.get('parties', []), 'constraint': c.get('constraint', False), 'note': c.get('note', ''), 'sources': c.get('sources', [])})
+            conds.append({'id': c['id'], 'heading': h, 'name': c['name'], 'test': c['test'], 'quantities': c['quantities'], 'move': c.get('move', []), 'parties': c.get('parties', []), 'constraint': c.get('constraint', False), 'note': c.get('note', ''), 'sources': c.get('sources', []), 'next_action': c.get('next_action', '')})
 opps = [{'name': k, 'quantities': v} for k, v in r['opportunity_quantities'].items()]
 
 # upstream confidence
@@ -152,6 +152,11 @@ out = {
     'limit_presets': r['meta'].get('limit_presets', []),
     'limit_presets_note': r['meta'].get('limit_presets_note', ''),
     'start_step': r['meta'].get('start_step', {}),
+    'mechanisms': r['meta'].get('mechanisms', []),
+    'evidence_types': r['meta'].get('evidence_types', []),
+    'commitment_states': r['meta'].get('commitment_states', []),
+    'futures': r['meta'].get('futures', []),
+    'model_results': r['meta'].get('model_results', []),
 }
 json.dump(out, open(os.path.join(here, 'diagram_data.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 dangling = [e for e in edges if not any(n['id'] == e['from'] for n in nodes)]

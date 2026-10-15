@@ -156,6 +156,7 @@
     "dc_to_place": [
      "heat_captured",
      "heat_delivered",
+     "hourly_overlap",
      "stored_heat"
     ],
     "place_to_dc": [
@@ -163,7 +164,8 @@
      "ground",
      "sewer_sink",
      "surface_water_sink"
-    ]
+    ],
+    "mechanism": "physical"
    },
    {
     "id": "power",
@@ -178,7 +180,8 @@
      "grid_headroom",
      "rooftop_solar",
      "self_gen_rules"
-    ]
+    ],
+    "mechanism": "grid"
    },
    {
     "id": "water",
@@ -189,7 +192,8 @@
     ],
     "place_to_dc": [
      "water_supply"
-    ]
+    ],
+    "mechanism": "physical"
    },
    {
     "id": "space",
@@ -201,7 +205,8 @@
      "existing_building",
      "zoning_status",
      "row_cost"
-    ]
+    ],
+    "mechanism": "space"
    },
    {
     "id": "materials",
@@ -213,7 +218,8 @@
     ],
     "place_to_dc": [
      "existing_building"
-    ]
+    ],
+    "mechanism": "physical"
    },
    {
     "id": "sound",
@@ -223,7 +229,8 @@
     ],
     "place_to_dc": [
      "ambient_cover"
-    ]
+    ],
+    "mechanism": "physical"
    }
   ],
   "lifecycle": [
@@ -320,12 +327,14 @@
   "options_logic": {
    "steps": [
     "build every combination the tool knows (size, position on the parcel or another parcel, adjacency, technology, both cities, in or out of town)",
+    "report the gates first — grid connection (r_grid) and zoning use (z_use): a blocked gate is named before any exchange is weighed, and the exchanges still show as \"if the gate moved\"",
     "set aside options that break a user limit — and keep them for the \"if you moved this limit\" panel",
     "drop options worse than another on every row for every party (not a trade-off)",
     "compare positions in the building as options where the user has not fixed one (basement · ground · upper floor · roof), each with its floor load, fuel, flood, vibration and street-front rows",
     "pick as many as the user asked for, as different as possible on the rows the user emphasised",
     "let the user try things on any option — \"what if we added…\" — whether an opportunity for the place (a seasonal heat store, cooling for neighbours, batteries for the grid), something the place offers (reclaimed water, neighbours' greywater, the ground), or a technology choice (solar, water recovery, cleaner backup power) — and show what each changes and the rules in each city",
-    "show them side by side, in no order, each with its full trade-off table"
+    "show them side by side, in no order, each with its full trade-off table",
+    "run each option through the four futures (as planned · tenant changes cooling · tenant leaves · receiver leaves) and show what changes"
    ],
    "preferences": [
     {
@@ -938,7 +947,174 @@
     "Phasing is a timeline option inside any case."
    ],
    "decided": "J.B., 14 Oct 2026"
-  }
+  },
+  "mechanisms": [
+   {
+    "id": "physical",
+    "name": "Physical transfer",
+    "line": "solid",
+    "means": "a pipe, cable or duct carries the resource from one party to another",
+    "examples": "heat to a network; reclaimed water to cooling"
+   },
+   {
+    "id": "grid",
+    "name": "Through the grid",
+    "line": "dotted",
+    "means": "two loads coordinated by prices or signals through a utility; nothing passes between them directly",
+    "examples": "shifting computing; smart charging; V2G; demand response"
+   },
+   {
+    "id": "space",
+    "name": "Shared space",
+    "line": "long dash",
+    "means": "another party uses rooms, roof, land or edge",
+    "examples": "public room at the edge; roof for solar"
+   },
+   {
+    "id": "service",
+    "name": "Shared service",
+    "line": "dash-dot",
+    "means": "staff, monitoring, backup supply or maintenance shared",
+    "examples": "backup power to a shelter; shared loading"
+   }
+  ],
+  "evidence_types": [
+   {
+    "id": "operating",
+    "name": "operating",
+    "means": "built and running, reported by a regulator, utility or independent party"
+   },
+   {
+    "id": "measured",
+    "name": "measured",
+    "means": "metered or surveyed values"
+   },
+   {
+    "id": "claim",
+    "name": "operator claim",
+    "means": "what the operator or vendor says; shown as a claim"
+   },
+   {
+    "id": "modelled",
+    "name": "modelled",
+    "means": "a calculation or simulation under stated assumptions"
+   },
+   {
+    "id": "proposed",
+    "name": "proposed",
+    "means": "filed, planned or announced, not built"
+   },
+   {
+    "id": "speculative",
+    "name": "speculative",
+    "means": "a design inference by the tool or J.B.; no source states it"
+   }
+  ],
+  "evidence_note": "Evidence type says what kind of thing a figure or case is; the confidence ring says how much to trust the number. Both show.",
+  "commitment_states": [
+   {
+    "id": "existing",
+    "name": "existing",
+    "counts": true
+   },
+   {
+    "id": "committed",
+    "name": "committed",
+    "counts": true
+   },
+   {
+    "id": "planned",
+    "name": "planned",
+    "counts": false
+   },
+   {
+    "id": "proposed",
+    "name": "proposed",
+    "counts": false
+   },
+   {
+    "id": "possible",
+    "name": "possible",
+    "counts": false
+   }
+  ],
+  "futures": [
+   {
+    "id": "planned",
+    "name": "As planned"
+   },
+   {
+    "id": "cooling",
+    "name": "Tenant changes cooling"
+   },
+   {
+    "id": "tenant_leaves",
+    "name": "Tenant leaves"
+   },
+   {
+    "id": "receiver_leaves",
+    "name": "Receiver leaves"
+   }
+  ],
+  "next_action_note": "Every condition the tool cannot judge names the next step that would let it judge — a research to-do, not a verdict.",
+  "model_results": [
+   {
+    "id": "roudbari",
+    "place": "Montreal, Concordia Loyola",
+    "what": "data-centre heat about 800 m away to campus heating",
+    "figures": "74% of heating demand in one selected solution; −95% of included emissions; +11% annual cost (as reported by the learning series; the series says \"a campus building\" in ch. 2 and \"campus\" in ch. 17)",
+    "evidence": "modelled",
+    "status": "unverified — paper not yet read",
+    "sources": [
+     "roudbari2025"
+    ]
+   },
+   {
+    "id": "ravi",
+    "place": "Lausanne, EPFL",
+    "what": "2 MW data centre as heat and flexibility prosumer",
+    "figures": "up to 40% of district-heating demand; up to 60% of rejected heat used; PV self-consumption \"up to 90%\" (ch. 4) or \"raised by up to 28%\" (ch. 10) — inconsistent in the series",
+    "evidence": "modelled",
+    "status": "unverified — paper not yet read",
+    "sources": [
+     "ravi2026"
+    ]
+   },
+   {
+    "id": "wang",
+    "place": "98 countries",
+    "what": "treated wastewater to cooling; heat back to treatment plants",
+    "figures": "1.3 bn m³ water, 84 Mt CO₂e, US$95.4 bn per year (global optimised scenario)",
+    "evidence": "modelled",
+    "status": "unverified; not transferable to a parcel",
+    "sources": [
+     "wang2026"
+    ]
+   },
+   {
+    "id": "zhang",
+    "place": "simulated network",
+    "what": "3 data centres, 1,400 EVs, coordinated pricing",
+    "figures": "> 20% less load fluctuation; ~15% less line occupancy",
+    "evidence": "modelled",
+    "status": "unverified — paper not yet read; series says both \"distribution\" and \"transmission\"",
+    "sources": [
+     "zhang2025"
+    ]
+   },
+   {
+    "id": "quincy",
+    "place": "Quincy, WA",
+    "what": "industrial water reuse utility (Microsoft and the City)",
+    "figures": "US$31 M; designed to offset ~138 million gallons/yr; operating since 2021",
+    "evidence": "operating",
+    "status": "unverified — EPA page not yet read",
+    "sources": [
+     "epaQuincy"
+    ]
+   }
+  ],
+  "model_results_note": "Results from other places shown as precedent ranges with their evidence type; never used as defaults for a parcel."
  },
  "quantities": [
   {
@@ -6412,6 +6588,290 @@
    "status": "sourced thresholds",
    "siting": true,
    "direction": "place"
+  },
+  {
+   "id": "receivers_nearby",
+   "name": "Receivers within reach",
+   "stage": "prospect",
+   "unit": "list: type, distance, demand, temperature, evidence",
+   "formula": "every candidate receiver whose straight-line distance ≤ its type's reach (receiver_radius); each carries its demand (disclosed, else floor area × intensity), the temperature its type needs, its profile, and where the record came from",
+   "inputs": [
+    "parcel",
+    "receiver_radius",
+    "receiver_demand",
+    "receiver_temp"
+   ],
+   "coef": "types: hot-water district network · ambient (low-temperature) network · steam network · pool · ice rink (also a source) · school · hospital or care home · housing · office · greenhouse · wastewater plant. Pools: water ≤ 37 °C by regulation, 25–28 °C recommended for competition pools (BC 2025). Ambient networks (Blatchford) take heat near ground temperature and lift it in each building. Hot water stored for taps must be hot enough to limit Legionella (NPC 2.6.1.12; the temperature is not yet read). Map records: City buildings in the energy report (4 read), BCUC network decisions (6), Statistics Canada facility databases (recreation v2 2026, health 2020, education v2.1 2022 — not yet downloaded)",
+   "sources": [
+    "rvo2018",
+    "bcPools2025",
+    "blatchfordDESS",
+    "npc2612",
+    "vanEnergyReport",
+    "receiversBCUC",
+    "odrsf",
+    "odhf",
+    "odef"
+   ],
+   "source_roles": [
+    {
+     "id": "rvo2018",
+     "term": "Receivers within reach",
+     "role": "data",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "bcPools2025",
+     "term": "Receivers within reach",
+     "role": "data",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "blatchfordDESS",
+     "term": "Receivers within reach",
+     "role": "data",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "npc2612",
+     "term": "Receivers within reach",
+     "role": "data",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "vanEnergyReport",
+     "term": "Receivers within reach",
+     "role": "data",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "receiversBCUC",
+     "term": "Receivers within reach",
+     "role": "data",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "odrsf",
+     "term": "Receivers within reach",
+     "role": "data",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "odhf",
+     "term": "Receivers within reach",
+     "role": "data",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "odef",
+     "term": "Receivers within reach",
+     "role": "data",
+     "conf": 40,
+     "verified": false
+    }
+   ],
+   "conf": 40,
+   "status": "logic defined; map data pending download (cloud cannot reach the open-data hosts; via J.B.'s computer)",
+   "exchange": true
+  },
+  {
+   "id": "competing_sources",
+   "name": "Other sources for the same receiver",
+   "stage": "prospect",
+   "unit": "list: source, capacity, status",
+   "formula": "sources already serving, or planned for, each receiver: sewage heat recovery, wastewater plants, ice-rink refrigeration, other data centres, ground loops; a receiver whose demand is already met by a low-carbon source is a weaker match, not a missing one",
+   "inputs": [
+    "receivers_nearby",
+    "sewage_heat"
+   ],
+   "coef": "Vancouver NEU: 70% renewable, mostly sewage heat recovery, 6.6 MW added, 100% renewable target 2030 (City page, May 2025); Blatchford (Edmonton): ambient loop on geo-exchange and sewer heat. Ice rinks reject refrigeration heat — a source as well as a receiver",
+   "sources": [
+    "vanNEU2025",
+    "blatchfordDESS"
+   ],
+   "source_roles": [
+    {
+     "id": "vanNEU2025",
+     "term": "Other sources for the same receiver",
+     "role": "data",
+     "conf": 60,
+     "verified": true
+    },
+    {
+     "id": "blatchfordDESS",
+     "term": "Other sources for the same receiver",
+     "role": "data",
+     "conf": 60,
+     "verified": true
+    }
+   ],
+   "conf": 60,
+   "status": "two networks sourced; others per receiver",
+   "exchange": true
+  },
+  {
+   "id": "displaced_source",
+   "name": "What the receiver uses now",
+   "stage": "test",
+   "unit": "fuel · kg CO₂e/MWh of heat",
+   "formula": "the heat source a match would replace: from the host-building question (gas boilers · hot-water system · electric baseboard · district energy) or the network's supply mix; carbon change = displaced heat × its factor − heat-pump electricity × grid factor, which can be zero or negative where the displaced source is already low-carbon",
+   "inputs": [
+    "host_building",
+    "competing_sources",
+    "grid_co2",
+    "hp_electricity"
+   ],
+   "coef": "factors from grid_co2 (NIR 2026) and the network's own reported mix; a network share described as \"renewable\" is the operator's word and is shown as such",
+   "sources": [
+    "nir2026",
+    "vanNEU2025"
+   ],
+   "source_roles": [
+    {
+     "id": "nir2026",
+     "term": "What the receiver uses now",
+     "role": "data",
+     "conf": 60,
+     "verified": true
+    },
+    {
+     "id": "vanNEU2025",
+     "term": "What the receiver uses now",
+     "role": "data",
+     "conf": 60,
+     "verified": true
+    }
+   ],
+   "conf": 60,
+   "status": "logic defined; factors per network to source",
+   "exchange": true
+  },
+  {
+   "id": "hourly_overlap",
+   "name": "Hour-by-hour match",
+   "stage": "test",
+   "unit": "% of receiver demand met · MWh surplus · MW backup",
+   "formula": "for each hour of the typical year: delivered = min(heat available, receiver demand); report the share of the receiver's annual demand met, the heat still rejected (surplus), and the receiver's peak that must be met without the data centre",
+   "inputs": [
+    "heat_delivered",
+    "demand_profile",
+    "load_factor",
+    "stored_heat"
+   ],
+   "coef": "annual totals overstate the match: Vancouver heat demand is 47% in Dec–Feb and 2.5% in Jun–Aug (CWEC, computed); the data centre's heat is near-flat",
+   "sources": [
+    "cwec",
+    "stratego"
+   ],
+   "source_roles": [
+    {
+     "id": "cwec",
+     "term": "Hour-by-hour match",
+     "role": "data",
+     "conf": 70,
+     "verified": true
+    },
+    {
+     "id": "stratego",
+     "term": "Hour-by-hour match",
+     "role": "data",
+     "conf": 70,
+     "verified": true
+    }
+   ],
+   "conf": 70,
+   "status": "computable from data in hand",
+   "exchange": true
+  },
+  {
+   "id": "workload_control",
+   "name": "Who controls the computing",
+   "stage": "characterise",
+   "unit": "operator · tenants · mixed",
+   "formula": "flexible load is offered only by whoever runs the workloads: a single-owner or hyperscale operator can shift its own computing; in colocation the building operator controls power and cooling, not the tenants' computing, so flexibility needs each tenant's agreement",
+   "inputs": [
+    "it_load_claim"
+   ],
+   "coef": "business model from operator pages (claims) and permits; the learning-series EV and workload papers are models of single-operator fleets",
+   "sources": [
+    "learningSeries"
+   ],
+   "source_roles": [
+    {
+     "id": "learningSeries",
+     "term": "Who controls the computing",
+     "role": "data",
+     "conf": 50,
+     "verified": false
+    }
+   ],
+   "conf": 50,
+   "status": "logic defined; per-site model from operator pages",
+   "exchange": true
+  },
+  {
+   "id": "commitment",
+   "name": "How firm the exchange is",
+   "stage": "decide",
+   "unit": "existing · committed · planned · proposed · possible",
+   "formula": "existing = operating; committed = in a contract, permit condition or funded budget; planned = in a utility filing or adopted plan; proposed = an applicant or operator says so; possible = the tool found it and nobody has proposed it. Only existing and committed count as delivered",
+   "inputs": [
+    "receivers_nearby"
+   ],
+   "coef": "states and rule set 14 Oct 2026 (learning-series critique); promised heat that is only possible is shown, never counted",
+   "sources": [
+    "learningSeries"
+   ],
+   "source_roles": [
+    {
+     "id": "learningSeries",
+     "term": "How firm the exchange is",
+     "role": "data",
+     "conf": 100,
+     "verified": true
+    }
+   ],
+   "conf": 100,
+   "status": "rule",
+   "exchange": true
+  },
+  {
+   "id": "futures",
+   "name": "Futures",
+   "stage": "decide",
+   "unit": "one table per future",
+   "formula": "rerun the match in four futures: (1) as planned; (2) the tenant changes cooling — air ↔ liquid changes heat temperature, capture share and flexibility; (3) the tenant leaves — the receiver's backup carries its full peak and the building's reusable parts are listed; (4) the receiver leaves — all heat goes back to rejection, so full rejection capacity stays",
+   "inputs": [
+    "horizons",
+    "heat_temp",
+    "liquid_capture",
+    "hourly_overlap",
+    "risk_term"
+   ],
+   "coef": "lifespans from horizons (servers ~6 years, plant 15–25, network 40–50); closure cases in meta.lifecycle",
+   "sources": [
+    "learningSeries"
+   ],
+   "source_roles": [
+    {
+     "id": "learningSeries",
+     "term": "Futures",
+     "role": "data",
+     "conf": 60,
+     "verified": true
+    }
+   ],
+   "conf": 60,
+   "status": "logic defined",
+   "exchange": true
   }
  ],
  "conditions": [
@@ -6433,7 +6893,8 @@
     "operator",
     "receiver"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "engineering figure from the operator or a study (temperature, flow, capture)"
   },
   {
    "id": "t_quality",
@@ -6451,7 +6912,8 @@
     "operator",
     "receiver"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "engineering figure from the operator or a study (temperature, flow, capture)"
   },
   {
    "id": "t_form",
@@ -6470,7 +6932,8 @@
     "operator",
     "receiver"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "engineering figure from the operator or a study (temperature, flow, capture)"
   },
   {
    "id": "t_conversion",
@@ -6489,7 +6952,8 @@
     "operator",
     "receiver"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "engineering figure from the operator or a study (temperature, flow, capture)"
   },
   {
    "id": "t_reliability",
@@ -6507,7 +6971,8 @@
     "operator",
     "receiver"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "engineering figure from the operator or a study (temperature, flow, capture)"
   },
   {
    "id": "t_cooling_change",
@@ -6525,7 +6990,8 @@
     "operator",
     "receiver"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "engineering figure from the operator or a study (temperature, flow, capture)"
   },
   {
    "id": "t_metering",
@@ -6543,7 +7009,8 @@
     "operator",
     "receiver"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "engineering figure from the operator or a study (temperature, flow, capture)"
   },
   {
    "id": "s_distance",
@@ -6563,7 +7030,8 @@
     "city",
     "neighbours"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "route survey and utility locates; confirm the receiver's location and size"
   },
   {
    "id": "s_density",
@@ -6581,7 +7049,8 @@
     "receiver",
     "city"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "route survey and utility locates; confirm the receiver's location and size"
   },
   {
    "id": "s_route",
@@ -6603,7 +7072,8 @@
     "city",
     "neighbours"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "route survey and utility locates; confirm the receiver's location and size"
   },
   {
    "id": "s_network",
@@ -6623,7 +7093,8 @@
     "city",
     "neighbours"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "route survey and utility locates; confirm the receiver's location and size"
   },
   {
    "id": "s_exit",
@@ -6640,7 +7111,8 @@
     "operator",
     "host"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "route survey and utility locates; confirm the receiver's location and size"
   },
   {
    "id": "s_room",
@@ -6658,7 +7130,8 @@
     "operator",
     "host"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "route survey and utility locates; confirm the receiver's location and size"
   },
   {
    "id": "s_building_type",
@@ -6676,7 +7149,8 @@
     "operator",
     "host"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "route survey and utility locates; confirm the receiver's location and size"
   },
   {
    "id": "s_usable",
@@ -6695,7 +7169,8 @@
     "city",
     "public"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "route survey and utility locates; confirm the receiver's location and size"
   },
   {
    "id": "s_adjacency",
@@ -6715,7 +7190,8 @@
     "city",
     "neighbours"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "route survey and utility locates; confirm the receiver's location and size"
   },
   {
    "id": "s_burden_reach",
@@ -6736,7 +7212,8 @@
     "city",
     "neighbours"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "route survey and utility locates; confirm the receiver's location and size"
   },
   {
    "id": "tm_profile",
@@ -6745,6 +7222,7 @@
    "test": "hourly demand_profile vs near-flat supply",
    "quantities": [
     "demand_profile",
+    "hourly_overlap",
     "load_factor"
    ],
    "move": [
@@ -6755,7 +7233,8 @@
     "receiver",
     "future"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "hourly or monthly demand data from the receiver"
   },
   {
    "id": "tm_overlap",
@@ -6774,7 +7253,8 @@
     "receiver",
     "future"
    ],
-   "constraint": true
+   "constraint": true,
+   "next_action": "hourly or monthly demand data from the receiver"
   },
   {
    "id": "tm_storage",
@@ -6792,7 +7272,8 @@
     "receiver",
     "future"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "hourly or monthly demand data from the receiver"
   },
   {
    "id": "tm_horizons",
@@ -6810,7 +7291,8 @@
     "receiver",
     "future"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "hourly or monthly demand data from the receiver"
   },
   {
    "id": "tm_growth",
@@ -6828,7 +7310,8 @@
     "receiver",
     "future"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "hourly or monthly demand data from the receiver"
   },
   {
    "id": "tm_lead",
@@ -6848,7 +7331,8 @@
     "receiver",
     "future"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "hourly or monthly demand data from the receiver"
   },
   {
    "id": "tm_termination",
@@ -6867,7 +7351,8 @@
     "future",
     "operator"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "hourly or monthly demand data from the receiver"
   },
   {
    "id": "e_window",
@@ -6889,7 +7374,8 @@
     "utility",
     "ratepayers"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "cost model at low / central / high (pipe, plant, prices)"
   },
   {
    "id": "e_capex",
@@ -6909,7 +7395,8 @@
     "utility",
     "ratepayers"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "cost model at low / central / high (pipe, plant, prices)"
   },
   {
    "id": "e_payback",
@@ -6930,7 +7417,8 @@
     "utility",
     "ratepayers"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "cost model at low / central / high (pipe, plant, prices)"
   },
   {
    "id": "e_risk",
@@ -6949,7 +7437,8 @@
     "utility",
     "ratepayers"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "cost model at low / central / high (pipe, plant, prices)"
   },
   {
    "id": "e_split_incentive",
@@ -6968,7 +7457,8 @@
     "utility",
     "ratepayers"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "cost model at low / central / high (pipe, plant, prices)"
   },
   {
    "id": "e_reserved_cost",
@@ -6989,7 +7479,8 @@
     "utility",
     "ratepayers"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "cost model at low / central / high (pipe, plant, prices)"
   },
   {
    "id": "e_passthrough",
@@ -7007,7 +7498,8 @@
     "ratepayers",
     "utility"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "cost model at low / central / high (pipe, plant, prices)"
   },
   {
    "id": "e_savings",
@@ -7026,7 +7518,8 @@
     "utility",
     "ratepayers"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "cost model at low / central / high (pipe, plant, prices)"
   },
   {
    "id": "o_control",
@@ -7046,7 +7539,8 @@
     "utility",
     "city"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "name a party willing to own, run and pay for the connection"
   },
   {
    "id": "o_chain",
@@ -7067,7 +7561,8 @@
     "utility",
     "city"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "name a party willing to own, run and pay for the connection"
   },
   {
    "id": "o_common",
@@ -7087,7 +7582,8 @@
     "utility",
     "city"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "name a party willing to own, run and pay for the connection"
   },
   {
    "id": "o_data",
@@ -7107,7 +7603,8 @@
     "utility",
     "city"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "name a party willing to own, run and pay for the connection"
   },
   {
    "id": "r_zoning",
@@ -7129,7 +7626,8 @@
     "neighbours",
     "nations"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "ask the authority (City, BCUC or AUC, utility) — cite the rule"
   },
   {
    "id": "r_utility",
@@ -7148,7 +7646,8 @@
     "nations",
     "city"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "ask the authority (City, BCUC or AUC, utility) — cite the rule"
   },
   {
    "id": "r_grid",
@@ -7168,7 +7667,8 @@
     "operator",
     "ratepayers"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "the utility's capacity answer for this parcel (load application); in downtown Vancouver none before 2032"
   },
   {
    "id": "r_noise",
@@ -7188,7 +7688,8 @@
     "city",
     "operator"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "ask the authority (City, BCUC or AUC, utility) — cite the rule"
   },
   {
    "id": "r_incentives",
@@ -7207,7 +7708,8 @@
     "operator",
     "ratepayers"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "ask the authority (City, BCUC or AUC, utility) — cite the rule"
   },
   {
    "id": "r_critical",
@@ -7225,7 +7727,8 @@
     "operator",
     "public"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "ask the authority (City, BCUC or AUC, utility) — cite the rule"
   },
   {
    "id": "r_code",
@@ -7245,7 +7748,8 @@
     "public",
     "operator"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "ask the authority (City, BCUC or AUC, utility) — cite the rule"
   },
   {
    "id": "sec_crossing",
@@ -7262,7 +7766,8 @@
     "public",
     "operator"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "the operator's own assessment — not public, and the tool does not ask for it"
   },
   {
    "id": "sec_zones",
@@ -7279,7 +7784,8 @@
     "public",
     "operator"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "the operator's own assessment — not public, and the tool does not ask for it"
   },
   {
    "id": "sec_rating",
@@ -7296,7 +7802,8 @@
     "public",
     "operator"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "the operator's own assessment — not public, and the tool does not ask for it"
   },
   {
    "id": "sec_info",
@@ -7313,7 +7820,8 @@
     "public",
     "operator"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "the operator's own assessment — not public, and the tool does not ask for it"
   },
   {
    "id": "sec_ops",
@@ -7331,7 +7839,8 @@
     "public",
     "operator"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "the operator's own assessment — not public, and the tool does not ask for it"
   },
   {
    "id": "soc_need",
@@ -7351,7 +7860,8 @@
     "city",
     "future"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "consultation record or a conversation with the people named"
   },
   {
    "id": "soc_winners",
@@ -7371,7 +7881,8 @@
     "city",
     "future"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "consultation record or a conversation with the people named"
   },
   {
    "id": "soc_residents",
@@ -7390,7 +7901,8 @@
     "city",
     "future"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "consultation record or a conversation with the people named"
   },
   {
    "id": "soc_dependency",
@@ -7410,7 +7922,8 @@
     "city",
     "future"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "consultation record or a conversation with the people named"
   },
   {
    "id": "soc_enforce",
@@ -7429,7 +7942,8 @@
     "city",
     "future"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "consultation record or a conversation with the people named"
   },
   {
    "id": "soc_afford",
@@ -7447,7 +7961,8 @@
     "neighbours",
     "future"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "consultation record or a conversation with the people named"
   },
   {
    "id": "soc_legibility",
@@ -7464,7 +7979,8 @@
     "public",
     "neighbours"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "consultation record or a conversation with the people named"
   },
   {
    "id": "soc_access",
@@ -7484,7 +8000,8 @@
     "city",
     "future"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "consultation record or a conversation with the people named"
   },
   {
    "id": "soc_record",
@@ -7503,7 +8020,8 @@
     "city",
     "future"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "consultation record or a conversation with the people named"
   },
   {
    "id": "soc_fix",
@@ -7519,17 +8037,19 @@
    "parties": [
     "city"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "consultation record or a conversation with the people named"
   },
   {
    "id": "env_carbon",
    "heading": "9 Environmental",
    "name": "Carbon displaced",
-   "test": "both factors reported",
+   "test": "against the source it displaces; both grid factors reported; can be zero or negative",
    "quantities": [
     "grid_co2",
     "hp_electricity",
-    "generator_co2"
+    "generator_co2",
+    "displaced_source"
    ],
    "move": [
     "infra",
@@ -7538,7 +8058,8 @@
    "parties": [
     "climate"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "the displaced source and its factor; the network's reported mix"
   },
   {
    "id": "env_water",
@@ -7559,7 +8080,8 @@
     "neighbours",
     "climate"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "the displaced source and its factor; measured water use"
   },
   {
    "id": "env_embodied",
@@ -7576,7 +8098,8 @@
    "parties": [
     "climate"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "the displaced source and its factor; measured water use"
   },
   {
    "id": "env_burdens",
@@ -7596,7 +8119,8 @@
     "climate",
     "neighbours"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "the displaced source and its factor; measured water use"
   },
   {
    "id": "x_edge",
@@ -7614,7 +8138,8 @@
     "neighbours",
     "public"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "site visit at the times that matter (night, generator test)"
   },
   {
    "id": "x_sound",
@@ -7631,7 +8156,8 @@
     "neighbours",
     "public"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "site visit at the times that matter (night, generator test)"
   },
   {
    "id": "x_light",
@@ -7648,7 +8174,8 @@
     "neighbours",
     "public"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "site visit at the times that matter (night, generator test)"
   },
   {
    "id": "x_agree",
@@ -7666,7 +8193,8 @@
     "neighbours",
     "city"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "site visit at the times that matter (night, generator test)"
   },
   {
    "id": "x_visible",
@@ -7684,7 +8212,8 @@
     "neighbours",
     "public"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "site visit at the times that matter (night, generator test)"
   },
   {
    "id": "soc_watched",
@@ -7704,7 +8233,8 @@
     "city",
     "future"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "consultation record or a conversation with the people named"
   },
   {
    "id": "e_flex_value",
@@ -7724,7 +8254,8 @@
     "ratepayers",
     "operator"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "cost model at low / central / high (pipe, plant, prices)"
   },
   {
    "id": "t_sink",
@@ -7746,7 +8277,8 @@
     "utility",
     "nations"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "engineering figure from the operator or a study (temperature, flow, capture)"
   },
   {
    "id": "s_conversion",
@@ -7766,7 +8298,8 @@
     "operator",
     "climate"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "route survey and utility locates; confirm the receiver's location and size"
   },
   {
    "id": "e_power_price",
@@ -7785,7 +8318,8 @@
     "utility",
     "ratepayers"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "cost model at low / central / high (pipe, plant, prices)"
   },
   {
    "id": "e_interconnection",
@@ -7801,7 +8335,8 @@
    "parties": [
     "operator"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "cost model at low / central / high (pipe, plant, prices)"
   },
   {
    "id": "r_consult",
@@ -7819,7 +8354,8 @@
     "city",
     "operator"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "ask the authority (City, BCUC or AUC, utility) — cite the rule"
   },
   {
    "id": "soc_people",
@@ -7836,7 +8372,8 @@
     "neighbours",
     "future"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "consultation record or a conversation with the people named"
   },
   {
    "id": "soc_jobs",
@@ -7853,7 +8390,8 @@
     "workers",
     "city"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "consultation record or a conversation with the people named"
   },
   {
    "id": "x_cover",
@@ -7871,7 +8409,8 @@
     "neighbours",
     "public"
    ],
-   "constraint": false
+   "constraint": false,
+   "next_action": "site visit at the times that matter (night, generator test)"
   },
   {
    "id": "a_reuse_rules",
@@ -7902,7 +8441,8 @@
     "ab_health2021",
     "bc_mwr",
     "mv_ut019"
-   ]
+   ],
+   "next_action": "a supplier quote or a rule check for the addition"
   },
   {
    "id": "a_pv_export",
@@ -7928,7 +8468,8 @@
    "sources": [
     "bch_rs2289",
     "auc_microgen"
-   ]
+   ],
+   "next_action": "a supplier quote or a rule check for the addition"
   },
   {
    "id": "a_ground_land",
@@ -7956,7 +8497,8 @@
     "zurmuhl2018",
     "ab_gshe2018",
     "bc_gwpr"
-   ]
+   ],
+   "next_action": "a supplier quote or a rule check for the addition"
   },
   {
    "id": "a_absorption_temp",
@@ -7979,7 +8521,8 @@
    "note": "Air-cooled heat cannot drive absorption cooling; liquid-cooled heat can only with a heat-pump lift or a low-COP two-stage machine.",
    "sources": [
     "absorption2026"
-   ]
+   ],
+   "next_action": "a supplier quote or a rule check for the addition"
   },
   {
    "id": "a_storage_fire",
@@ -8003,7 +8546,8 @@
    "note": "Whether NFPA 855 is referenced by the BC or Alberta building and fire codes was not confirmed; Technical Safety BC withdrew its storage bulletin in March 2025.",
    "sources": [
     "reber2023"
-   ]
+   ],
+   "next_action": "a supplier quote or a rule check for the addition"
   },
   {
    "id": "z_use",
@@ -8032,7 +8576,8 @@
     "van_rts19744",
     "edm_matrix",
     "edm_dcpage"
-   ]
+   ],
+   "next_action": "ask the authority (City, BCUC or AUC, utility) — cite the rule"
   },
   {
    "id": "z_site_specific",
@@ -8055,7 +8600,8 @@
    "sources": [
     "van_cd1",
     "src18"
-   ]
+   ],
+   "next_action": "ask the authority (City, BCUC or AUC, utility) — cite the rule"
   },
   {
    "id": "z_edm_class",
@@ -8082,7 +8628,8 @@
    "sources": [
     "edm_bl20001",
     "edm_dcpage"
-   ]
+   ],
+   "next_action": "ask the authority (City, BCUC or AUC, utility) — cite the rule"
   },
   {
    "id": "z_envelope",
@@ -8109,7 +8656,8 @@
     "van_zdb_i3",
     "van_zdb_fc2",
     "edm_bl20001"
-   ]
+   ],
+   "next_action": "route survey and utility locates; confirm the receiver's location and size"
   },
   {
    "id": "z_plant_counts",
@@ -8134,7 +8682,8 @@
     "van_zdb_i2",
     "van_rts19744",
     "src22"
-   ]
+   ],
+   "next_action": "route survey and utility locates; confirm the receiver's location and size"
   },
   {
    "id": "z_ground_floor",
@@ -8158,7 +8707,8 @@
     "van_zdb_i2",
     "van_zdb_i3",
     "van_zdb_fc2"
-   ]
+   ],
+   "next_action": "route survey and utility locates; confirm the receiver's location and size"
   },
   {
    "id": "b_floor",
@@ -8180,7 +8730,8 @@
    "note": "An office upper floor (2.4 kPa) is the case most likely to need reinforcing; a slab on grade carries any load.",
    "sources": [
     "nbc2020_4153"
-   ]
+   ],
+   "next_action": "engineering figure from the operator or a study (temperature, flow, capture)"
   },
   {
    "id": "b_fuel",
@@ -8204,7 +8755,8 @@
    "sources": [
     "nfc2020_4313",
     "van_genroom"
-   ]
+   ],
+   "next_action": "ask the authority (City, BCUC or AUC, utility) — cite the rule"
   },
   {
    "id": "b_flood",
@@ -8226,7 +8778,8 @@
    "note": "Mostly a basement question in low areas such as False Creek Flats.",
    "sources": [
     "van_f014"
-   ]
+   ],
+   "next_action": "the displaced source and its factor; measured water use"
   },
   {
    "id": "b_vibration",
@@ -8248,7 +8801,8 @@
    "note": "The code limits airborne sound between units, not equipment vibration; a mixed-use position carries this row.",
    "sources": [
     "src23"
-   ]
+   ],
+   "next_action": "site visit at the times that matter (night, generator test)"
   },
   {
    "id": "p_service",
@@ -8275,7 +8829,149 @@
     "epcor_ccg",
     "src21",
     "edm_dcpage"
-   ]
+   ],
+   "next_action": "engineering figure from the operator or a study (temperature, flow, capture)"
+  },
+  {
+   "id": "t_mechanism",
+   "heading": "1 Technical",
+   "name": "The mechanism is named",
+   "test": "each exchange says whether it is a physical transfer, coordination through the grid, shared space or a shared service",
+   "quantities": [
+    "commitment"
+   ],
+   "move": [
+    "choice"
+   ],
+   "parties": [
+    "operator",
+    "receiver",
+    "utility"
+   ],
+   "constraint": false,
+   "note": "Coordination through the grid (smart charging, shifting work) is a service to the utility, not something the building delivers to a neighbour; it is drawn dotted and counted under Power.",
+   "next_action": "engineering figure from the operator or a study (temperature, flow, capture)"
+  },
+  {
+   "id": "s_competition",
+   "heading": "2 Spatial",
+   "name": "No other source already serves the receiver",
+   "test": "competing_sources for the receiver: none, spare demand left, or already met by a low-carbon source",
+   "quantities": [
+    "competing_sources",
+    "receivers_nearby"
+   ],
+   "move": [
+    "choice",
+    "infra"
+   ],
+   "parties": [
+    "receiver",
+    "utility",
+    "climate"
+   ],
+   "constraint": false,
+   "note": "Near the NEU the data centre competes with sewage heat recovery; the match may still work for the share the sewer cannot cover.",
+   "next_action": "ask the network operator what it already plans to supply"
+  },
+  {
+   "id": "tm_hourly",
+   "heading": "3 Temporal",
+   "name": "Supply meets demand hour by hour",
+   "test": "hourly_overlap: share of the receiver's demand met, surplus rejected, backup peak named",
+   "quantities": [
+    "hourly_overlap"
+   ],
+   "move": [
+    "money",
+    "physics"
+   ],
+   "parties": [
+    "receiver",
+    "operator"
+   ],
+   "constraint": false,
+   "next_action": "the receiver's monthly bills or meter data; otherwise the tool uses the typical-year profile and says so"
+  },
+  {
+   "id": "tm_receiver_leaves",
+   "heading": "3 Temporal",
+   "name": "Still works if the receiver leaves",
+   "test": "futures (4): full heat rejection kept on site; nothing in the data centre depends on the receiver",
+   "quantities": [
+    "futures"
+   ],
+   "move": [
+    "money"
+   ],
+   "parties": [
+    "operator",
+    "receiver",
+    "future"
+   ],
+   "constraint": false,
+   "next_action": "hourly or monthly demand data from the receiver"
+  },
+  {
+   "id": "tm_tenant_changes",
+   "heading": "3 Temporal",
+   "name": "Still works if the tenant changes",
+   "test": "futures (2) and (3): the receiver's backup carries its peak; the interface takes a different heat temperature",
+   "quantities": [
+    "futures"
+   ],
+   "move": [
+    "money",
+    "choice"
+   ],
+   "parties": [
+    "receiver",
+    "host",
+    "future"
+   ],
+   "constraint": false,
+   "next_action": "hourly or monthly demand data from the receiver"
+  },
+  {
+   "id": "o_workload",
+   "heading": "5 Organizational",
+   "name": "Whoever runs the computing agrees to shift it",
+   "test": "workload_control: operator, or tenants who have opted in",
+   "quantities": [
+    "workload_control"
+   ],
+   "move": [
+    "time",
+    "choice"
+   ],
+   "parties": [
+    "operator",
+    "utility"
+   ],
+   "constraint": false,
+   "next_action": "the operator's business model (single owner, hyperscale, colocation)"
+  },
+  {
+   "id": "o_committed",
+   "heading": "5 Organizational",
+   "name": "The exchange is committed, not only possible",
+   "test": "commitment is existing or committed; otherwise shown as a possibility with what would commit it",
+   "quantities": [
+    "commitment"
+   ],
+   "move": [
+    "time",
+    "policy"
+   ],
+   "parties": [
+    "receiver",
+    "city",
+    "neighbours",
+    "future"
+   ],
+   "constraint": false,
+   "note": "Guards against a heat promise that wins approval and is never built (see Promises enforceable).",
+   "next_action": "a contract, permit condition or budget line"
   }
  ],
  "opportunity_quantities": {
@@ -8617,7 +9313,20 @@
   "src20": "Beyond Data research note 20: Frankfurt, German EnEfG, EU EED (sources/20_precedent_frankfurt_germany_eu.md)",
   "src21": "Beyond Data research note 21: Calgary and Alberta precedents (sources/21_precedent_calgary_alberta.md)",
   "src22": "Beyond Data research note 22: Vancouver floors, flood, water (sources/22_vancouver_floors_flood_water.md)",
-  "src23": "Beyond Data research note 23: fuel and vibration (sources/23_fuel_and_vibration.md)"
+  "src23": "Beyond Data research note 23: fuel and vibration (sources/23_fuel_and_vibration.md)",
+  "bcPools2025": "BC Ministry of Health, Health Protection Branch, B.C. Guidelines for Pool Operations v3 (2025), s. 5.2 and 5.6 (Pool Regulation ss. 10(2)(b), 16(b)): pool water ≤ 37 °C, hot tubs ≤ 40 °C; competitive pools 25–28 °C recommended — https://islandhealth.ca/sites/default/files/environment/documents/bc-guidelines-for-pool-operations-v3-april-2025.pdf",
+  "vanNEU2025": "City of Vancouver, Southeast False Creek Neighbourhood Energy Utility (web page, modified 21 May 2025): 70% renewable, mostly sewage heat recovery; 6.6 MW sewage heat recovery added; 100% renewable by 2030 — https://vancouver.ca/home-property-development/southeast-false-creek-neighbourhood-energy-utility.aspx",
+  "blatchfordDESS": "City of Edmonton / Blatchford, District energy sharing system overview (undated, uploaded 2016): ambient-temperature loop, geo-exchange and sewer heat exchange, heat pumps in buildings — https://blatchfordedmonton.ca/wp-content/uploads/2016/05/Blatchford-district-energy-sharing-system-overview.pdf",
+  "npc2612": "NRC, National Plumbing Code of Canada, Sentence 2.6.1.12.(1) intent (hot-water storage temperature against Legionella) — https://codes-guides.nrc.ca/IA/15NPC/intents-intentions/i005590-eng.html (sentence text and temperature not yet read)",
+  "odrsf": "Statistics Canada, Open Database of Sport and Recreational Facilities v2 (ODSRF), 21-26-0002, product 2021001, released 24 Sep 2026, ~249,000 records (pools, arenas, rinks, community centres…; type, year_built, ownership, geometry) — https://www150.statcan.gc.ca/n1/pub/21-26-0002/2021001/zip/odsrf_v2_gpkg.zip (not yet downloaded)",
+  "odhf": "Statistics Canada, Open Database of Healthcare Facilities (published 17 Apr 2020; coverage Nov 2019–Mar 2020): hospitals, nursing and residential care, ambulatory — https://www150.statcan.gc.ca/n1/pub/13-26-0001/2020001/ODHF.zip (not yet downloaded)",
+  "odef": "Statistics Canada, Open Database of Educational Facilities v2.1 (published 28 Nov 2022; archived) — https://www150.statcan.gc.ca/n1/pub/37-26-0001/2022001/ODEF_v2.1.zip (not yet downloaded)",
+  "learningSeries": "J.B., Beyond Data learning series (manuscript, Oct 2026), critique 14 Oct 2026 — a learning aid; figures it reports are unverified until the papers are read",
+  "roudbari2025": "Shafiee Roudbari, Kantor, Parakkal Menon, Eicker 2025, Energy 335:137902 — https://doi.org/10.1016/j.energy.2025.137902 (not yet read)",
+  "ravi2026": "Ravi et al. 2026, Applied Energy 402:127049 — https://doi.org/10.1016/j.apenergy.2025.127049 (not yet read)",
+  "wang2026": "Wang et al. 2026, Environmental Science and Ecotechnology 31:100702 — https://doi.org/10.1016/j.ese.2026.100702 (not yet read)",
+  "zhang2025": "Zhang et al. 2025, Applied Energy 377:124697 (not yet read)",
+  "epaQuincy": "US EPA, Water Reuse Case Study: Quincy, Washington — https://www.epa.gov/waterreuse/water-reuse-case-study-quincy-washington (not yet read)"
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ; ATCO North Mid-Use $1.062/GJ → ≈ $11/MWh heat — https://www.ucahelps.alberta.ca/regulated-rates.aspx",

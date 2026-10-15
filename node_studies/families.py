@@ -1,9 +1,9 @@
 # Node families for icons and inspector schematics. Assignment is Claude's proposal for J.B. to check.
 FAM = {
  'heat_out': ('Heat out of the data centre', ['heat_rejected','heat_temp','liquid_capture','cop','heat_captured','heat_delivered','hp_electricity','erf','heat_in_water','free_cooling_hours']),
- 'heat_use': ('What the heat becomes', ['receivers','receiver_temp','receiver_radius','heat_density','linear_heat_density','receiver_demand','homes_heated','greenhouse_area','aquaculture_tonnes','algae_kg','insect_check','distributed_servers_homes','stored_heat','demand_profile','btes','tes_volume','absorption']),
+ 'heat_use': ('What the heat becomes', ['receivers','receivers_nearby','competing_sources','hourly_overlap','receiver_temp','receiver_radius','heat_density','linear_heat_density','receiver_demand','homes_heated','greenhouse_area','aquaculture_tonnes','algae_kg','insect_check','distributed_servers_homes','stored_heat','demand_profile','btes','tes_volume','absorption']),
  'sink':     ('Cooling the place offers', ['sewer_flow','sewer_sink','sewage_heat','surface_water_sink']),
- 'power':  ('Power', ['it_load_outside','it_load_claim','it_load_actual','pue','spare_capacity','backup_hours','flexible_load','load_factor','grid_headroom','lead_time','electricity_price','self_gen_rules','rooftop_solar','ev_stalls','ev_area','reserved_cost','lrmc_bc','interconnection','pv_roof','pv_facade','pv_share','pv_cost','battery','ups_flex','peak_relief']),
+ 'power':  ('Power', ['it_load_outside','it_load_claim','it_load_actual','pue','spare_capacity','backup_hours','flexible_load','load_factor','grid_headroom','lead_time','electricity_price','self_gen_rules','rooftop_solar','ev_stalls','ev_area','reserved_cost','lrmc_bc','interconnection','workload_control','pv_roof','pv_facade','pv_share','pv_cost','battery','ups_flex','peak_relief']),
  'water':  ('Water', ['evaporation','blowdown','wue','water_behind_electricity','rainwater','water_supply','licence_flag','surface_water_sink','reclaimed_makeup','greywater_neighbours','treatment_energy','blowdown_recovery']),
  'sound':  ('Sound', ['receptors','noise_level','lf_flag','noise_limit','ambient_cover']),
  'seen':   ('Light, shadow and sight', ['lighting_plan','light_at_window','shadow','visibility','watched_area']),
@@ -17,7 +17,7 @@ FAM = {
  'people': ('People', ['people_affected','deprivation','jobs','refuge_people','cooling_centre_people']),
  'time':   ('Time', ['horizons','construction_time','risk_term']),
  'ground': ('Ground and climate', ['ground','weather','borefield','ground_warming','ates','deep_geo']),
- 'account':('Account', ['ledger','tradeoffs']),
+ 'account':('Account', ['ledger','tradeoffs','commitment','futures']),
 }
 ICON = {  # 24×24, stroked, no fill
  'heat_out':'M7 20c-2.5-3 2.5-5 0-8s2.5-5 0-8M12 20c-2.5-3 2.5-5 0-8s2.5-5 0-8M17 20c-2.5-3 2.5-5 0-8s2.5-5 0-8',

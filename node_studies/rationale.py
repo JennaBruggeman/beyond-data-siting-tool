@@ -170,4 +170,12 @@ RAT.update({
  'flood_area': 'Whether the parcel lies in the designated floodplain at all.',
  'vibration_rank': 'Plant on an upper floor shakes the structure that neighbours live and work in; on a slab on grade it is easiest to isolate.',
  'service_class': 'Above certain loads the utility supplies power differently, with more feeders, transmission or bigger clearances; that changes cost, time and space.',
+ # exchange logic (14 Oct, from the learning-series critique)
+ 'receivers_nearby': 'Who around the parcel could actually take the heat, how far away they are, how much they need and how hot: the list the match is made from.',
+ 'competing_sources': 'Some receivers already have a waste-heat source, like the sewer heat behind the NEU. A data centre then competes for the same demand rather than filling an empty one.',
+ 'displaced_source': 'What the receiver heats with today. The carbon saved depends on what is replaced, and it can be nothing if that source is already low-carbon.',
+ 'hourly_overlap': 'Heat comes off a data centre all year; buildings need most of it in winter. Matching hour by hour shows how much is used, how much is still thrown away, and what backup the receiver keeps.',
+ 'workload_control': 'Only whoever runs the computing can shift it. In a shared (colocation) data centre that is the tenants, not the building operator.',
+ 'commitment': 'Whether an exchange is running, signed, planned, proposed or only possible. Only running or signed exchanges count as delivered.',
+ 'futures': 'The same option run four ways: as planned, the tenant changes its cooling, the tenant leaves, the receiver leaves. A good support still works in all four.',
 })

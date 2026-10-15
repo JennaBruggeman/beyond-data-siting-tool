@@ -106,3 +106,11 @@ People and the urban rationale
 - ☐ **A6 PNNL-33283 Tables 4.2–4.4** (battery costs at 1 MW and 10 MW) — https://www.sandia.gov/app/uploads/sites/256/2024/02/ESGC-Cost-Performance-Report-2022-PNNL-33283.pdf
 - ☐ **A7 Alberta Carbon Offset Emission Factors Handbook v3.3** (electricity displacement factor) — https://open.alberta.ca/publications/carbon-offset-emission-factors-handbook-version-3
 - ☐ **A8 Energy-storage fire rules**: whether NFPA 855 is referenced by the BC and Alberta building and fire codes (BC Codes site; NFPA 855 free read-only at nfpa.org)
+
+## R. Receivers and rival sources for the map (14 Oct) — fetched from J.B.'s computer when linked
+1. Statistics Canada ODSRF v2 (sport and recreation, 2026): https://www150.statcan.gc.ca/n1/pub/21-26-0002/2021001/zip/odsrf_v2_gpkg.zip
+2. Statistics Canada ODHF (health, 2020): https://www150.statcan.gc.ca/n1/pub/13-26-0001/2020001/ODHF.zip
+3. Statistics Canada ODEF v2.1 (education, 2022): https://www150.statcan.gc.ca/n1/pub/37-26-0001/2022001/ODEF_v2.1.zip
+4. City of Vancouver open data — non-market housing; community centres; schools (opendata.vancouver.ca, blocked from the cloud).
+5. District-energy service areas: NEU, Creative Energy, River District, Sen̓áȟw (Vancouver); Downtown District Energy and Blatchford (Edmonton) — service-area maps from the utilities or BCUC filings.
+6. Wastewater plants (Iona, Lions Gate, Annacis; Gold Bar) — locations from Metro Vancouver and EPCOR pages.

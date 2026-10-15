@@ -80,14 +80,30 @@ def vancouver():
                 if pr.get('address'): addr[tc] = (pr['address'], k)
             zone_polys[pr.get('zoning') or '?'].append(poly)
     print('van parcels in', len(tiles), 'tiles')
+    # buildings: 2009 footprints, with City LiDAR 2022 measured heights where processed (data/lidar2022, from tool/lidar_hybrid.py)
+    # flag: 0 = 2009 height only; 1 = LiDAR 2022 height; 2 = new since 2009 (LiDAR outline); 3 = not found in 2022; 4 = partly changed
+    LF, LN = {}, []
+    import glob
+    for fn in glob.glob(os.path.join(D, 'lidar2022', '*.json')):
+        r = json.load(open(fn)); LF.update({int(k): v for k, v in r['fp'].items()}); LN += r['new']
     bj = json.load(open(os.path.join(D, 'vancouver_footprints_2009.geojson'), encoding='utf-8'))
     for f in bj['features']:
-        pr = f['properties']
+        pr = f['properties']; lv = LF.get(pr.get('id'))
+        if lv is None: h, fl = round(pr.get('hgt_agl') or 0, 1), 0
+        elif lv[2] >= 0.3: h, fl = lv[0], 1
+        elif lv[2] < 0.1: h, fl = round(pr.get('hgt_agl') or 0, 1), 3
+        else: h, fl = lv[0], 4
         for poly in to_local(shape(f['geometry']), P):
             poly = poly.simplify(0.3)
             if poly.is_empty: continue
             cx, cy = poly.representative_point().coords[0]; k = tkey(cx, cy, T)
-            tiles[k]['B'].append([round(pr.get('hgt_agl') or 0, 1), ring_enc(list(poly.exterior.coords), k[0] * T, k[1] * T)])
+            tiles[k]['B'].append([h, ring_enc(list(poly.exterior.coords), k[0] * T, k[1] * T), fl])
+    for p90, hmax, area, ring in LN:
+        poly = Polygon([P(x, y) for x, y in ring])
+        if poly.is_empty: continue
+        cx, cy = poly.representative_point().coords[0]; k = tkey(cx, cy, T)
+        tiles[k]['B'].append([p90, ring_enc(list(poly.exterior.coords), k[0] * T, k[1] * T), 2])
+    print('lidar: footprints measured', len(LF), 'new', len(LN))
     zl = sorted(zone_polys)
     zi = {z: i for i, z in enumerate(zl)}
     for k, t in tiles.items():
