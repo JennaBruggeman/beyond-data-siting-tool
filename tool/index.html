@@ -239,7 +239,11 @@ async function loadTile(city,key){
 
 /* ---------- view ---------- */
 function resize(){ const b=mapEl.getBoundingClientRect(); DPR=Math.min(window.devicePixelRatio||1,2); W=b.width; H=b.height; cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR); draw(); }
-function homeView(){ const m=S.meta[S.city]; const [a,b,c,d]=m.ext; const s=Math.min(W/(c-a),H/(d-b))*0.95; S.view={cx:(a+c)/2,cy:(b+d)/2,s}; }
+function homeView(){ const m=S.meta[S.city]; const [a,b,c,d]=m.ext; const s=Math.min(W/(c-a),H/(d-b))*0.95; S.view={cx:(a+c)/2,cy:(b+d)/2,s,auto:true}; }
+// the canvas bitmap must match the map's size; if the page opened at a small or zero size (e.g. a frame still laying out), fix it at paint time
+function syncSize(){ const cw=mapEl.clientWidth, ch=mapEl.clientHeight, d=Math.min(window.devicePixelRatio||1,2); if(cw<2||ch<2) return false;
+  if(Math.abs(cw-W)>0.5||Math.abs(ch-H)>0.5||d!==DPR||cv.width!==Math.round(cw*d)||cv.height!==Math.round(ch*d)){ W=cw; H=ch; DPR=d; cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR); if(S.view&&S.view.auto&&S.meta[S.city]) homeView(); }
+  return true; }
 const toWorld=(px,py)=>[S.view.cx+(px-W/2)/S.view.s, S.view.cy-(py-H/2)/S.view.s];
 const DETAIL={van:0.12,edm:0.2};
 function visibleTiles(){ const m=S.meta[S.city], T=m.T; const [x0,y1]=toWorld(0,0),[x1,y0]=toWorld(W,H); const out=[];
@@ -247,6 +251,7 @@ function visibleTiles(){ const m=S.meta[S.city], T=m.T; const [x0,y1]=toWorld(0,
 let raf=0; function draw(){ if(!raf) raf=requestAnimationFrame(()=>{raf=0; paint();}); }
 function paint(){
   const m=S.meta[S.city]; if(!m||!S.view) return;
+  if(!syncSize()){ setTimeout(draw,100); return; }
   const {cx,cy,s}=S.view;
   ctx.setTransform(DPR,0,0,DPR,0,0); ctx.fillStyle='#17181a'; ctx.fillRect(0,0,W,H);
   ctx.setTransform(s*DPR,0,0,-s*DPR,(W/2-cx*s)*DPR,(H/2+cy*s)*DPR);
@@ -274,8 +279,8 @@ function paint(){
   const nice=[10,20,50,100,200,500,1000,2000,5000]; const target=110/s; const L=nice.find(v=>v>=target)||5000;
   $('#sc').innerHTML=`${L>=1000?L/1000+' km':L+' m'}<b style="width:${Math.round(L*s)}px;margin-left:auto"></b>`;
 }
-function zoomAt(px,py,f){ const [wx,wy]=toWorld(px,py); const s=Math.max(0.01,Math.min(40,S.view.s*f)); S.view.s=s; S.view.cx=wx-(px-W/2)/s; S.view.cy=wy+(py-H/2)/s; draw(); }
-function flyTo(x,y,s){ S.view={cx:x,cy:y,s:s||Math.max(S.view.s,1.6)}; draw(); }
+function zoomAt(px,py,f){ S.view.auto=false; const [wx,wy]=toWorld(px,py); const s=Math.max(0.01,Math.min(40,S.view.s*f)); S.view.s=s; S.view.cx=wx-(px-W/2)/s; S.view.cy=wy+(py-H/2)/s; draw(); }
+function flyTo(x,y,s){ S.view={cx:x,cy:y,s:s||Math.max(S.view.s,1.6),auto:false}; draw(); }
 
 /* ---------- interaction ---------- */
 let drag=null, moved=false; const ptrs=new Map(); let pinch=null;
@@ -284,7 +289,7 @@ mapEl.addEventListener('pointerdown',e=>{ mapEl.setPointerCapture(e.pointerId); 
 mapEl.addEventListener('pointermove',e=>{ if(!ptrs.has(e.pointerId)) return; ptrs.set(e.pointerId,[e.offsetX,e.offsetY]);
   if(pinch&&ptrs.size===2){ const [a,b]=[...ptrs.values()]; const d=Math.hypot(a[0]-b[0],a[1]-b[1]); const f=pinch.s*d/pinch.d/S.view.s; zoomAt((a[0]+b[0])/2,(a[1]+b[1])/2,f); moved=true; return; }
   if(!drag) return; const dx=e.offsetX-drag[0], dy=e.offsetY-drag[1]; if(Math.abs(dx)+Math.abs(dy)>4){ moved=true; mapEl.classList.add('drag'); }
-  S.view.cx=drag[2]-dx/S.view.s; S.view.cy=drag[3]+dy/S.view.s; draw(); });
+  S.view.auto=false; S.view.cx=drag[2]-dx/S.view.s; S.view.cy=drag[3]+dy/S.view.s; draw(); });
 const up=e=>{ ptrs.delete(e.pointerId); if(ptrs.size<2) pinch=null; if(!ptrs.size){ mapEl.classList.remove('drag'); if(drag&&!moved) pick(e.offsetX,e.offsetY); drag=null; } };
 mapEl.addEventListener('pointerup',up); mapEl.addEventListener('pointercancel',e=>{ptrs.delete(e.pointerId);drag=null;pinch=null;});
 mapEl.addEventListener('wheel',e=>{ e.preventDefault(); zoomAt(e.offsetX,e.offsetY,Math.exp(-e.deltaY*0.0015)); },{passive:false});
@@ -446,7 +451,8 @@ async function setCity(city,keepSel){
   legend(); if(!keepSel){ S.sel=null; intro(); } draw();
 }
 $('#c-van').onclick=()=>setCity('van'); $('#c-edm').onclick=()=>setCity('edm');
-window.addEventListener('resize',resize); if(window.ResizeObserver) new ResizeObserver(()=>resize()).observe(mapEl);
+window.addEventListener('resize',draw); if(window.ResizeObserver) new ResizeObserver(()=>draw()).observe(mapEl);
+window.addEventListener('load',draw); document.addEventListener('visibilitychange',()=>{ if(!document.hidden) draw(); });
 
 window.BD={S,$,esc,fmt,getJSON,pathOf,draw,centroid,pip,area,statusOf,card:()=>card()};
 (async function init(){
