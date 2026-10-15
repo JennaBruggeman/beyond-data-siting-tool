@@ -224,7 +224,7 @@ async function loadMeta(city){
   S.meta[city]=m; if(window.BD&&BD.loadRecv) BD.loadRecv(city); return m;
 }
 async function loadTile(city,key){
-  const id=city+':'+key; if(S.tiles[id]||S.loading[id]) return S.tiles[id];
+  const id=city+':'+key; if(S.tiles[id]) return S.tiles[id]; if(S.loading[id]) return S.loading[id];
   S.loading[id]=getJSON(`tiles/${city}/t_${key}.json`).then(t=>{
     const m=S.meta[city], q=m.Q, [ox,oy]=t.o;
     const T={key,A:t.A,par:[],pts:[],bld:[]};
@@ -266,7 +266,7 @@ function paint(){
       ctx.fillStyle='rgba(233,230,225,.07)'; ctx.fill(T.bPath); ctx.strokeStyle='rgba(233,230,225,.38)'; ctx.lineWidth=lw(.7); ctx.stroke(T.bPath); if(T.gPath){ ctx.setLineDash([3/s,3/s]); ctx.strokeStyle='rgba(233,230,225,.18)'; ctx.stroke(T.gPath); ctx.setLineDash([]); }
       if(T.pts.length && s>0.6){ ctx.fillStyle='#9d9a94'; const r=lw(1.6); for(const p of T.pts) ctx.fillRect(p.x-r,p.y-r,2*r,2*r); }
     }
-    $('#st').textContent=waiting?`Loading ${waiting} area${waiting>1?'s':''}…`:'Click a parcel';
+    $('#st').textContent=waiting?`Loading ${waiting} area${waiting>1?'s':''}…`:(S.city==='edm'?'Click a building or lot (Edmonton has lot points, not outlines)':'Click a parcel');
   } else $('#st').textContent='Zoom in or search an address to pick a parcel';
   if(detail&&m.fl&&m.fl.length){ ctx.setLineDash([6/s,4/s]); for(const f of m.fl){ if(f.cat==='wave') continue; ctx.strokeStyle=f.cat==='designated'?'rgba(127,178,196,.85)':'rgba(127,178,196,.45)'; ctx.lineWidth=lw(f.cat==='designated'?1.4:.9); ctx.stroke(f.path); } ctx.setLineDash([]); }
   if(window.BD&&BD.paintRecv) BD.paintRecv(ctx,s,lw);
@@ -305,8 +305,12 @@ async function pick(px,py){
     let best=null; for(const T of tiles) for(const p of T.par){ const b=p.bb; if(x<b[0]||x>b[2]||y<b[1]||y>b[3]) continue; if(pip(x,y,p.r)){ const a=area(p.r); if(!best||a<best.a) best={p,T,a}; } }
     if(best) return select({city:'van',tile:best.T.key,id:best.p.id,ring:best.p.r});
   } else {
-    let best=null, lim=Math.max(30,14/S.view.s);
-    for(const T of tiles) for(const p of T.pts){ const d=Math.hypot(p.x-x,p.y-y); if(d<lim&&(!best||d<best.d)) best={p,T,d}; }
+    // Edmonton has parcel points, not lot outlines. Clicking a building picks the point inside it (or the nearest one to it);
+    // clicking open ground picks the nearest point within reach.
+    let best=null, bld=null;
+    for(const T of tiles) for(const b of T.bld){ if(b.f===3) continue; if(pip(x,y,b.r)&&(!bld||b.a<bld.a)) bld=b; }
+    if(bld){ for(const T of tiles) for(const p of T.pts){ const inside=pip(p.x,p.y,bld.r), d=Math.hypot(p.x-bld.c[0],p.y-bld.c[1])*(inside?0.01:1); if(d<150&&(!best||d<best.d)) best={p,T,d}; } }
+    if(!best){ const lim=Math.max(60,20/S.view.s); for(const T of tiles) for(const p of T.pts){ const d=Math.hypot(p.x-x,p.y-y); if(d<lim&&(!best||d<best.d)) best={p,T,d}; } }
     if(best) return select({city:'edm',tile:best.T.key,id:best.p.id,pt:[best.p.x,best.p.y]});
   }
   showZone(x,y);
