@@ -17,7 +17,7 @@ const R={
  hallShare:[0.48,0.72],               // hall_area: Burlington plan set (internally inconsistent: 48% or 72%); single-storey and operator cases 51–87% not used for multi-storey
  m2PerMW:[290,630],                   // built Canadian halls, operator claims: eStruxture VAN-1 ≈290, Hut 8 Vault ≈557, Qu EDM1 ≈584, Cologix VAN2 ≈619, VAN5 ≈627 (sources/16 §2.7)
  m2PerMWModel:[186,2325],             // LBNL prototypes (Sun et al. 2021), shown as outer bounds only
- grossPerMW:[291,1580],               // check: whole building per MW — 111 E 5th ≤291 (council), Ark UP4 550 (committee), Cologix VAN4 ≈1,580 (operator)
+ grossPerMW:[505,1109],               // check: whole building per MW IT — min–max of the 10 benchmark buildings in bench/benchmarks.json (public or filed records; test_size_chain.py keeps this in sync)
  cases:{van:[{mw:1.6,n:'Cologix VAN5'},{mw:2.4,n:'eStruxture VAN-1'},{mw:40,n:'111 E 5th (proposed)'}], edm:[{mw:2.5,n:'Qu EDM1'}]}, // operator or applicant figures
  steps:[0.1,0.2,0.3,0.5,0.75,1,1.5,2,2.5,3,4,5,6,8,10,12,15,20,25,30,40],
  plant:{ups:[2.0,2.4],batt:[2.2,2.2],dry:[24.5,24.5],hp:[3.4,3.4],cdu:[0.6,0.6]}, // component_space, manufacturer claims, equipment only
@@ -67,14 +67,14 @@ function siteFacts(){
   f.c=s.ring?BD.centroid(s.ring):s.pt;
   f.downtown=city==='van'&&/^(DD|CWD|DEOD|BCPED|HA-1|HA-1A|HA-2)$/.test(f.zone);
   // gross floor area available to the data centre
-  const env=f.env||(city==='van'?R.envVan['I-2']:R.envEdm.IM); f.envAssumed=!f.env; f.envH=env.h;
+  const env=f.env||(city==='van'?R.envVan['I-2']:R.envEdm.IM); f.envAssumed=!f.env; f.envH=env.h; f.envU=env;
   // storeys within the height limit: 6.0 m ground floor, then 6.0 m (fewer) or 5.5 m (more) data-hall floors
   const nF=[1+Math.max(0,Math.floor((env.h-R.ftf.ground)/R.ftf.up[1])), 1+Math.max(0,Math.floor((env.h-R.ftf.ground)/R.ftf.up[0]))];
   f.hallS=null; f.hallL=null;
   if(A.built==='new'){
     const g=[f.lot*env.fsr[0],f.lot*env.fsr[1]]; f.floors=nF[1]; f.floorsR=nF;
     // the zone's floor area is reachable only if that many storeys fit: at most the whole lot on every storey
-    const G=[Math.min(g[0],f.lot*nF[0]),Math.min(g[1],f.lot*nF[1])];
+    const G=[Math.min(g[0],f.lot*nF[0]),Math.min(g[1],f.lot*nF[1])]; f.g=g; f.G=G;
     f.fullCover=g[1]>f.lot*nF[0]*0.999; f.heightCut=g[0]>f.lot*nF[0]*1.001;
     if(A.extent==='part'){ f.gross=[G[0]/nF[0],G[1]/nF[1]].sort((a,b)=>a-b); f.how=`one floor of a new building: the zone's floor area ÷ ${nF[0]===nF[1]?nF[0]:nF[0]+'–'+nF[1]} storeys`; f.hallGross=f.gross.slice(); }
     else {
@@ -82,7 +82,7 @@ function siteFacts(){
       if(env.ground){
         // two readings of "no bulk data storage at grade": strict — the ground floor holds none of the data centre;
         // lenient — support rooms (electrical, generators, loading) may sit there. Which applies is for the City to confirm.
-        const sc=[0,1].map(i=>({G:G[i],gr:G[i]/nF[i],up:G[i]-G[i]/nF[i]}));
+        const sc=[0,1].map(i=>({G:G[i],gr:G[i]/nF[i],up:G[i]-G[i]/nF[i]})); f.sc=sc;
         f.ground=[Math.min(...sc.map(s=>s.gr)),Math.max(...sc.map(s=>s.gr))];
         f.hallS=[Math.min(...sc.map(s=>s.up*R.hallShare[0])),Math.max(...sc.map(s=>s.up*R.hallShare[1]))];
         f.hallL=[Math.min(...sc.map(s=>Math.min(s.up,s.G*R.hallShare[0]))),Math.max(...sc.map(s=>Math.min(s.up,s.G*R.hallShare[1])))];
@@ -105,6 +105,42 @@ function siteFacts(){
   return f;
 }
 function plantPerMW(recover){ const p=R.plant; let lo=p.ups[0]+p.batt[0]+p.dry[0], hi=p.ups[1]+p.batt[1]+p.dry[1]; if(recover){ lo+=p.hp[0]+p.cdu[0]; hi+=p.hp[1]+p.cdu[1]; } return [lo,hi]; }
+
+
+/* ---------- show the math: every step with the site's own numbers, checkable with a calculator ---------- */
+const n0=v=>Math.round(v).toLocaleString('en-CA'), n1=v=>v<10?(+v).toFixed(2):v<100?(+v).toFixed(1):n0(v);
+const mathBox=(lines,note)=>`<details class="math"><summary>Show the math</summary><ol>${lines.map(l=>`<li>${l}</li>`).join('')}</ol>${note?`<div class="src">${note}</div>`:''}</details>`;
+function mathFits(f){
+  const A=BD.S.answers, L=[];
+  const hs=R.hallShare, m=R.m2PerMW;
+  if(A.built==='new'&&f.G){
+    const e=f.envU, fsr=e.fsr[0]===e.fsr[1]?e.fsr[0]:e.fsr[0]+'–'+e.fsr[1];
+    L.push(`Lot area: <b>${n0(f.lot)} m²</b> (City parcel data).`);
+    L.push(`Zone floor-space ratio ${fsr}${f.envAssumed?' (as if rezoned)':''}: ${n0(f.lot)} × ${fsr} = <b>${n0(f.g[1])} m²</b>.`);
+    L.push(`Storeys under the ${e.h} m height limit: first floor 6.0 m, then data-hall floors of 6.0 or 5.5 m. (${e.h} − 6.0) ÷ 6.0 = ${((e.h-6)/6).toFixed(2)}, whole floors ${Math.floor((e.h-6)/6)}, plus the first floor = <b>${f.floorsR[0]}</b>; with 5.5 m floors, ${((e.h-6)/5.5).toFixed(2)} → ${Math.floor((e.h-6)/5.5)} + 1 = <b>${f.floorsR[1]}</b>.`);
+    L.push(`Most floor area those storeys can hold, if each covers the whole lot: ${n0(f.lot)} × ${f.floorsR[0]} = ${n0(f.lot*f.floorsR[0])} m²${f.floorsR[1]!==f.floorsR[0]?` (or × ${f.floorsR[1]} = ${n0(f.lot*f.floorsR[1])} m²)`:''}. The smaller of this and step 2: <b>${rng(f.gross[0],f.gross[1],'m²')}</b>.`);
+    if(f.sc){ f.sc.forEach((s,i)=>{ if(i===1&&f.floorsR[1]===f.floorsR[0]) return; const tag=f.floorsR[1]!==f.floorsR[0]?` <i>(${f.floorsR[i]} storeys)</i>`:'';
+      L.push(`Ground floor (no data storage at grade)${tag}: floor area ÷ storeys = ${n0(s.G)} ÷ ${f.floorsR[i]} = <b>${n0(s.gr)} m²</b>. Floors above: ${n0(s.G)} − ${n0(s.gr)} = <b>${n0(s.up)} m²</b>.`);
+      L.push(`Data hall, strict reading${tag} (only the floors above, and only part of them is hall): ${n0(s.up)} × ${hs[0]} = ${n0(s.up*hs[0])} m², up to ${n0(s.up)} × ${hs[1]} = <b>${n0(s.up*hs[1])} m²</b>.`);
+      L.push(`Data hall, lenient reading${tag} (support rooms on the ground floor, so the hall share applies to the whole building, but the hall still fits only on the floors above): smaller of ${n0(s.G)} × ${hs[0]} and ${n0(s.up)} = ${n0(Math.min(s.up,s.G*hs[0]))} m², up to smaller of ${n0(s.G)} × ${hs[1]} and ${n0(s.up)} = <b>${n0(Math.min(s.up,s.G*hs[1]))} m²</b>.`); });
+    } else L.push(`Data hall: ${n0(f.hallGross[0])} × ${hs[0]} = ${n0(f.hall[0])} m², up to ${n0(f.hallGross[1])} × ${hs[1]} = <b>${n0(f.hall[1])} m²</b>.`);
+  } else {
+    L.push(`Floor area: ${esc(f.how)} = <b>${rng(f.gross[0],f.gross[1],'m²')}</b>.`);
+    L.push(`Data hall: ${n0(f.hallGross[0])} × ${hs[0]} = ${n0(f.hallS[0])} m², up to ${n0(f.hallGross[1])} × ${hs[1]} = <b>${n0(f.hallS[1])} m²</b>.`);
+  }
+  L.push(`Servers: the smallest hall laid out loosely, ${n0(f.hall[0])} ÷ ${m[1]} m² per MW = <b>${n1(f.mw[0])} MW</b>; the largest hall laid out densely, ${n0(f.hall[1])} ÷ ${m[0]} = <b>${n1(f.mw[1])} MW</b>${f.mw[1]>=40?' (capped at 40 MW, the tool\'s range)':''}.`);
+  if(f.mwCheck) L.push(`Check: ${n0(f.gross[1])} ÷ ${n0(R.grossPerMW[1])} = ${n1(f.gross[1]/R.grossPerMW[1])} MW; ${n0(f.gross[1])} ÷ ${n0(R.grossPerMW[0])} = ${n1(f.gross[1]/R.grossPerMW[0])} MW${f.gross[0]!==f.gross[1]?' (shown for the larger floor area)':''}.`);
+  return mathBox(L,`Hall share ${hs[0]}–${hs[1]}: Burlington plan set. ${m[0]}–${m[1]} m² of hall per MW: five built Canadian halls (operator claims). ${n0(R.grossPerMW[0])}–${n0(R.grossPerMW[1])} m² of building per MW: ten benchmark buildings in the precedent catalogue.`);
+}
+function mathNeeds(mw,fac,f){
+  const pl=plantPerMW(false), plR=plantPerMW(true), p=R.plant;
+  return mathBox([
+    `Average power at the meter: ${mw} MW × PUE ${R.pue[0]} = ${n1(fac[0])} MW; × ${R.pue[1]} = <b>${n1(fac[1])} MW</b>.`,
+    `Plant space, dry coolers: (UPS ${p.ups[0]}–${p.ups[1]} + batteries ${p.batt[0]} + dry coolers ${p.dry[0]}) = ${pl[0].toFixed(1)}–${pl[1].toFixed(1)} m² per MW; × ${mw} = <b>${n0(pl[0]*mw)}–${n0(pl[1]*mw)} m²</b>.`,
+    `With heat recovery, add heat pumps ${p.hp[0]} + CDUs ${p.cdu[0]} = ${plR[0].toFixed(1)}–${plR[1].toFixed(1)} m² per MW; × ${mw} = <b>${n0(plR[0]*mw)}–${n0(plR[1]*mw)} m²</b>.`,
+    `Standby fuel: ${n1(fac[0])}–${n1(fac[1])} MW × 1,000 (kW) × ${R.fuelHours} h × ${R.fuelLkWh} L per kWh = <b>${n0(fac[0]*1000*R.fuelHours*R.fuelLkWh)}–${n0(fac[1]*1000*R.fuelHours*R.fuelLkWh)} L</b>.`
+  ],'PUE: LBNL 2023, Uptime 2025. Plant areas: manufacturer claims, equipment only. Fuel rate: manufacturer claim at full load.');
+}
 
 /* ---------- round 2: what fits here ---------- */
 function fitsView(){
@@ -136,7 +172,7 @@ function fitsView(){
   <h3>Largest data centre that fits</h3><p style="font-size:22px;font-weight:300;margin:4px 0">${rng(f.mw[0],f.mw[1],'MW')} <span class="sub">of servers</span></p>
   ${f.mwL?`<p class="sub">${rng(f.mwS[0],f.mwS[1],'MW')} on the strict reading; ${rng(f.mwL[0],f.mwL[1],'MW')} if support may sit on the ground floor.</p>`:''}
   <p class="sub">${fmt(f.m2MW[0])}–${fmt(f.m2MW[1])} m² of hall per MW, as five built Canadian halls report (operator claims, mostly 5–10 kW per rack). Denser liquid-cooled halls fit more; LBNL's models span 186–2,325.</p>
-  ${f.mwCheck?`<p class="sub">Check against whole buildings: this floor area at 291–1,580 m² of building per MW (111 E 5th, Ark UP4, Cologix VAN4) gives ${rng(f.mwCheck[0],f.mwCheck[1],'MW')}.</p>`:''}${src('size')}
+  ${f.mwCheck?`<p class="sub">Check against whole buildings: ten built or approved data centres with public records use ${fmt(R.grossPerMW[0])}–${fmt(R.grossPerMW[1])} m² of building per MW of IT. This floor area at those rates gives ${rng(f.mwCheck[0],f.mwCheck[1],'MW')}.</p>`:''}${src('size')}${mathFits(f)}
   <div class="q"><div class="lab">Size to test: <b id="mwv">${mw}</b> MW of servers · <span id="mwn" class="sub">${esc(near(mw))}${over(mw)}</span></div>
    <div class="mwtrack"><div class="band" style="left:${pos01(f.mw[0])}%;width:${Math.max(1,pos01(f.mw[1])-pos01(f.mw[0]))}%" title="what fits here"></div>
    ${cases.map((c,i)=>`<div class="tick${i%2?' alt':''}" style="left:${pos01(c.mw)}%"><span>${esc(c.n)}</span></div>`).join('')}
@@ -150,7 +186,7 @@ function fitsView(){
   <dt>Electrical service</dt><dd>${esc(svc)}</dd>
   ${f.downtown?`<dt>Grid</dt><dd class="draft">Downtown: no new feeder positions from fiscal 2027 until the new West End substation (expected July 2032).</dd>`:''}
   ${pos==='upper'?`<dt>Floor strength</dt><dd class="draft">Office floors above grade are designed for 2.4 kPa; equipment rooms need at least 3.6 kPa, and data halls their actual load — likely strengthening.</dd>`:''}
-  </dl>${src('pue')}${src('plant')}${src('fuel')}${src('svc')}${f.downtown?src('grid2'):''}${pos==='upper'?src('floor'):''}
+  </dl>${src('pue')}${src('plant')}${src('fuel')}${src('svc')}${f.downtown?src('grid2'):''}${pos==='upper'?src('floor'):''}${mathNeeds(mw,fac,f)}
   <div class="next"><button id="toRecv">What it exchanges →</button><span class="sub">Heat, energy, water, materials and people, each in 3D.</span></div>
   <div class="draftnote">Draft wording (Claude) for J.B. Every range carries the register's confidence; nothing here is a design.</div>`;
   $('#side').innerHTML=h;

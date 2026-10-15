@@ -123,3 +123,12 @@ Running record of decisions J.B. has made about the tool's logic, in the order m
 - Slider: steps 0.1–40 MW, log-spaced; bar for what fits; ticks for Cologix VAN5, eStruxture VAN-1, 111 E 5th (Vancouver), Qu EDM1 (Edmonton); starts at the low end of what fits; label compares to the nearest case.
 - Register: repeated coefficient notes removed (9 quantities); add_exchange.py now drops exact repeats.
 - J.B. to review: all new red wording; the strict/lenient split; full-coverage caveat.
+
+## 15 Oct 2026 — precedent catalogue, benchmark test, show the math (tool v10)
+
+- bench/: 89 sites, 538 sourced facts from four research passes (UK/Ireland, Australia/Europe/Asia, Canada, US) plus cases already in sources/16. Tiers: 10 benchmark (IT MW + gross area, public or filed record), 11 reference (operator claim or doubt), 68 context.
+- Claude re-fetched 16 core quotes (8 sites): 15 matched; Lafayette's 66 MW IT was not re-found (moved to reference).
+- Catalogue says: 505–1,109 m² of building per MW IT (benchmarks, median 706); 250–674 m² of hall per MW (built, operator); hall share 20–92% (middle half 49–80%); data-hall floors 5.5–6.0 m.
+- bench/test_size_chain.py reads engine.js and checks: every benchmark falls inside the tool's range (10/10; they sit 8–71% up the range, median ≈38%, so the top of the range is optimistic); coefficients within the catalogue; check line in sync. The check line moved from 291–1,580 to the benchmark 505–1,109.
+- Show the math: size chain and "what that size needs" now print each step with the site's numbers.
+- Catalogue page published (db capability: J.B.'s "matches source" checks are stored in collection `checks`, readable by Claude).

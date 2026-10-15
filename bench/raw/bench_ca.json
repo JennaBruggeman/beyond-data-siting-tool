@@ -1,0 +1,2093 @@
+[
+ {
+  "id": "estruxture-van1",
+  "name": "eStruxture VAN-1",
+  "operator": "eStruxture",
+  "address": "55 East 7th Avenue",
+  "city": "Vancouver",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 2.4,
+    "unit": "MW",
+    "measures": "critical IT load (operator)",
+    "quote": "2.4Mw critical IT load",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN1_EN-V5.pdf?hsLang=en",
+    "where": "datasheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": "Up to 4 halls and 2.4 MW of critical IT load",
+    "unit": "",
+    "measures": "hall count",
+    "quote": "Up to 4 halls and 2.4 MW of critical IT load",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN1_EN-V5.pdf?hsLang=en",
+    "where": "datasheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 10000,
+    "unit": "ft²",
+    "measures": "total space (gross, operator term)",
+    "quote": "10,000 sq. ft. total space",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN1_EN-V5.pdf?hsLang=en",
+    "where": "datasheet",
+    "evidence": "operator claim",
+    "value_m2": 929.0
+   },
+   {
+    "field": "white_space_m2",
+    "value": 7500,
+    "unit": "ft²",
+    "measures": "cabinet space",
+    "quote": "7,500 sq. ft. of cabinet space",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN1_EN-V5.pdf?hsLang=en",
+    "where": "datasheet",
+    "evidence": "operator claim",
+    "value_m2": 696.8
+   },
+   {
+    "field": "storeys",
+    "value": 3,
+    "unit": "floors",
+    "measures": "building floors (office + infrastructure)",
+    "quote": "Single building with 3 floors of office and infrastructure space",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN1_EN-V5.pdf?hsLang=en",
+    "where": "datasheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "grid_mva",
+    "value": 2.5,
+    "unit": "MVA",
+    "measures": "dedicated unit substation rating",
+    "quote": "a dedicated 2.5MVA unit substation",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN1_EN-V5.pdf?hsLang=en",
+    "where": "datasheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "cooling",
+    "value": "40 Ton mechanical Loop1, N+1 250 Ton Mechanical Loop2",
+    "unit": "",
+    "measures": "mechanical loops",
+    "quote": "40 Ton mechanical Loop1, N+1 250 Ton Mechanical Loop2",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN1_EN-V5.pdf?hsLang=en",
+    "where": "datasheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "rack_kw",
+    "value": 30,
+    "unit": "kW/cabinet",
+    "measures": "max cabinet density",
+    "quote": "Supports up to 30kW/cabinet power loads",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN1_EN-V5.pdf?hsLang=en",
+    "where": "datasheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gensets",
+    "value": "≥28 h fuel; count not stated",
+    "unit": "",
+    "measures": "fuel autonomy",
+    "quote": "Minimum of 28 hours on site fuel storage at full load",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN1_EN-V5.pdf?hsLang=en",
+    "where": "datasheet",
+    "evidence": "operator claim"
+   }
+  ],
+  "verified_existing": "matches: 7,500 ft² cabinet space = 696.8 m²; 2.4 MW critical IT load. Fetched via the ?hsLang=en variant of the same V5 datasheet URL.",
+  "notes": "The 697 m² figure is 'cabinet space', not 'white space' in the operator's wording. Cooling note: 01_sites file also records 'rear door radiator cooling' and free cooling; not re-quoted this pass. A 2023 datasheet also exists at https://www.estruxture.com/wp-content/uploads/2024/04/eStruxture_Datasheet_VAN1_EN-1-2023.pdf (not fetched)."
+ },
+ {
+  "id": "qu-edm1",
+  "name": "Qu Data Centres EDM1",
+  "operator": "Qu Data Centres",
+  "address": "not published by operator ('Edmonton, Alberta, Canada'); 10200 102 Ave from aggregators, unverified",
+  "city": "Edmonton",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 2.5,
+    "unit": "MW",
+    "measures": "'Capacity' – not stated whether IT or total",
+    "quote": "2.5MW Capacity",
+    "url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM1-Spec-Sheet.pdf?hsLang=en",
+    "where": "spec sheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 18000,
+    "unit": "ft²",
+    "measures": "building area",
+    "quote": "18,000 ft² Building",
+    "url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM1-Spec-Sheet.pdf?hsLang=en",
+    "where": "spec sheet",
+    "evidence": "operator claim",
+    "value_m2": 1672.3
+   },
+   {
+    "field": "white_space_m2",
+    "value": 15712,
+    "unit": "ft²",
+    "measures": "raised floor area",
+    "quote": "15712 ft² Raise Floor",
+    "url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM1-Spec-Sheet.pdf?hsLang=en",
+    "where": "spec sheet",
+    "evidence": "operator claim",
+    "value_m2": 1459.7
+   },
+   {
+    "field": "cooling",
+    "value": "248 Tons of N+1 cooling",
+    "unit": "",
+    "measures": "cooling capacity, type not stated",
+    "quote": "248 Tons of N+1 cooling",
+    "url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM1-Spec-Sheet.pdf?hsLang=en",
+    "where": "spec sheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gensets",
+    "value": "3 × 1 MW, N+1",
+    "unit": "",
+    "measures": "standby generators",
+    "quote": "N+1 1MW Generators (x3) with fuel storage",
+    "url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM1-Spec-Sheet.pdf?hsLang=en",
+    "where": "spec sheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "rack_kw",
+    "value": "~5-10",
+    "unit": "kW/rack",
+    "measures": "rack density",
+    "quote": "~5-10kW per rack",
+    "url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM1-Spec-Sheet.pdf?hsLang=en",
+    "where": "spec sheet",
+    "evidence": "operator claim"
+   }
+  ],
+  "verified_existing": "matches: 15,712 ft² raised floor = 1,459.7 m²; '2.5MW Capacity'. Note: the bare URL given in the brief was refused by the fetch tool (provenance rule); the identical file was fetched at the ?hsLang=en variant found by search.",
+  "notes": "'Capacity' is not defined as IT load. 'Raise Floor' is the sheet's spelling. Fuel: 'Onsite fuel for 24hr run time at full load'."
+ },
+ {
+  "id": "qu-edm2",
+  "name": "Qu Data Centres EDM2",
+  "operator": "Qu Data Centres",
+  "address": "not published on sheet; 17204 114 Ave NW per earlier notes (permits under Rogers)",
+  "city": "Edmonton",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": "2.5 (Tier II) / 3 (Tier III)",
+    "unit": "MW",
+    "measures": "'power capacity', two figures by tier, not defined as IT",
+    "quote": "2.5MW Tier II | 3MW Tier III",
+    "url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM2-Spec-Sheet.pdf?hsLang=en",
+    "where": "spec sheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 35000,
+    "unit": "ft²",
+    "measures": "building, phases 1 & 2",
+    "quote": "Phase 1 & 2– 35,000 ft² Building",
+    "url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM2-Spec-Sheet.pdf?hsLang=en",
+    "where": "spec sheet",
+    "evidence": "operator claim",
+    "value_m2": 3251.6
+   },
+   {
+    "field": "white_space_m2",
+    "value": 19000,
+    "unit": "ft²",
+    "measures": "raised floor phase 1",
+    "quote": "Phase 1 – 19,000 ft² Raised Floor",
+    "url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM2-Spec-Sheet.pdf?hsLang=en",
+    "where": "spec sheet",
+    "evidence": "operator claim",
+    "value_m2": 1765.2
+   },
+   {
+    "field": "white_space_m2",
+    "value": 14196,
+    "unit": "ft²",
+    "measures": "raised floor phase 2",
+    "quote": "Phase 2 – 14,196 ft² Raised Floor",
+    "url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM2-Spec-Sheet.pdf?hsLang=en",
+    "where": "spec sheet",
+    "evidence": "operator claim",
+    "value_m2": 1318.9
+   },
+   {
+    "field": "cooling",
+    "value": "1450 Tons of N+1 cooling",
+    "unit": "",
+    "measures": "cooling capacity",
+    "quote": "1450 Tons of N+1 cooling",
+    "url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM2-Spec-Sheet.pdf?hsLang=en",
+    "where": "spec sheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gensets",
+    "value": "Ph1 3 × 1 MW; Ph2 2 × 1 MW",
+    "unit": "",
+    "measures": "standby generators",
+    "quote": "Phase 1 N+1 1MW Generators (x3) with fuel storage",
+    "url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM2-Spec-Sheet.pdf?hsLang=en",
+    "where": "spec sheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "rack_kw",
+    "value": "~5-10",
+    "unit": "kW/rack",
+    "measures": "rack density",
+    "quote": "Medium and high-density power designed for ~5-10kW per rack",
+    "url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM2-Spec-Sheet.pdf?hsLang=en",
+    "where": "spec sheet",
+    "evidence": "operator claim"
+   }
+  ],
+  "verified_existing": "new to benchmark (was in 01 notes)",
+  "notes": "Raised floor sum 33,196 ft² vs 35,000 ft² building — raised floor ≈95% of stated building, so 'Building' may exclude support space or be a different measure. 1450 tons cooling is large relative to 2.5–3 MW; unexplained."
+ },
+ {
+  "id": "hut8-vancouver-vault",
+  "name": "Hut 8 Vancouver Vault",
+  "operator": "Hut 8",
+  "address": "1700-666 Burrard St (facility section); FAQ says 900 W Hastings St",
+  "city": "Vancouver",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 0.693,
+    "unit": "MW",
+    "measures": "IT load supported by chillers at capacity, N (stated as 693 kW)",
+    "quote": "Five 50-tonne Chillers, supporting 693 (N) kW IT Load at capacity",
+    "url": "https://canada.hut8.com/centers/vancouver-vault",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": 1,
+    "unit": "MW",
+    "measures": "designed power capacity (not IT)",
+    "quote": "1 MW designed power capacity",
+    "url": "https://canada.hut8.com/centers/vancouver-vault",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 6210,
+    "unit": "ft²",
+    "measures": "facility area",
+    "quote": "6 ,210 sq. ft. facility",
+    "url": "https://canada.hut8.com/centers/vancouver-vault",
+    "where": "facility page (stray space in source)",
+    "evidence": "operator claim",
+    "value_m2": 576.9
+   },
+   {
+    "field": "white_space_m2",
+    "value": 4155,
+    "unit": "ft²",
+    "measures": "whitespace for IT",
+    "quote": "4,155 sq. ft. of total whitespace for IT",
+    "url": "https://canada.hut8.com/centers/vancouver-vault",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 386.0
+   },
+   {
+    "field": "gensets",
+    "value": "1 × 600 kW",
+    "unit": "",
+    "measures": "generator",
+    "quote": "600 kW generator supplying backup power to the complex",
+    "url": "https://canada.hut8.com/centers/vancouver-vault",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": 560,
+    "unit": "kW",
+    "measures": "UPS capacity",
+    "quote": "560 kW UPS capacity",
+    "url": "https://canada.hut8.com/centers/vancouver-vault",
+    "where": "facility page",
+    "evidence": "operator claim"
+   }
+  ],
+  "verified_existing": "matches: 4,155 ft² (386.0 m²) whitespace, 6,210 ft² facility, 693 kW IT load.",
+  "notes": "Address conflict on page unresolved. Tier I design. Fuel '>48 hours'."
+ },
+ {
+  "id": "hut8-van1",
+  "name": "Hut 8 Vancouver (VAN1)",
+  "operator": "Hut 8",
+  "address": "900 W Hastings St",
+  "city": "Vancouver",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 0.329,
+    "unit": "MW",
+    "measures": "IT load supported by CRAC at capacity, N (stated 329 kW)",
+    "quote": "Total 118-tonne CRAC units, supporting 329 (N) kW IT Load at capacity",
+    "url": "https://canada.hut8.com/centers/colocation-vancouver",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": 0.6,
+    "unit": "MW",
+    "measures": "designed power capacity",
+    "quote": "0.6 MW designed power capacity",
+    "url": "https://canada.hut8.com/centers/colocation-vancouver",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 900,
+    "unit": "ft²",
+    "measures": "facility area",
+    "quote": "900 sq. ft. facility",
+    "url": "https://canada.hut8.com/centers/colocation-vancouver",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 83.6
+   },
+   {
+    "field": "gensets",
+    "value": "2 generators, 435 kW",
+    "unit": "",
+    "measures": "backup",
+    "quote": "435 kW supplied by 2 generators providing backup power to the complex",
+    "url": "https://canada.hut8.com/centers/colocation-vancouver",
+    "where": "facility page",
+    "evidence": "operator claim"
+   }
+  ],
+  "verified_existing": "new (in 01 notes)",
+  "notes": "900 ft² for 329 kW IT (≈3.9 kW/m²) is implausible; likely a typo or excludes most space. Do not use for calibration without confirmation."
+ },
+ {
+  "id": "cologix-van2",
+  "name": "Cologix VAN2",
+  "operator": "Cologix",
+  "address": "1050 West Pender Street",
+  "city": "Vancouver",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "other",
+    "value": 150,
+    "unit": "W/ft² (unit implied)",
+    "measures": "design power density",
+    "quote": "Puissance prévue : 150 par p.c. (configurations à plus haute densité disponibles)",
+    "url": "https://www.cologix.com/pdf/Vancouver-VAN2-SpecSheet-French.pdf",
+    "where": "French spec sheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "grid_mva",
+    "value": 2,
+    "unit": "MW",
+    "measures": "redundant utility feeds (not IT load)",
+    "quote": "Arrivées électriques redondantes : 2 MW",
+    "url": "https://www.cologix.com/pdf/Vancouver-VAN2-SpecSheet-French.pdf",
+    "where": "French spec sheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "it_mw",
+    "value": 2,
+    "unit": "MW",
+    "measures": "'2 MW' – undefined on web page",
+    "quote": "2 MW",
+    "url": "https://cologix.com/data-centers/vancouver/van2/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "white_space_m2",
+    "value": 15000,
+    "unit": "ft²",
+    "measures": "'Surface Vancouver 2' (not defined as white space)",
+    "quote": "Surface Vancouver 2 : 15 000 p.c.",
+    "url": "https://www.cologix.com/pdf/Vancouver-VAN2-SpecSheet-French.pdf",
+    "where": "French spec sheet",
+    "evidence": "operator claim",
+    "value_m2": 1393.5
+   },
+   {
+    "field": "other",
+    "value": 15000,
+    "unit": "ft²",
+    "measures": "web page area",
+    "quote": "15K SQFT",
+    "url": "https://cologix.com/data-centers/vancouver/van2/",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 1393.5
+   },
+   {
+    "field": "storeys",
+    "value": 22,
+    "unit": "storeys",
+    "measures": "host office tower",
+    "quote": "Nombre de niveaux : 22 étages",
+    "url": "https://www.cologix.com/pdf/Vancouver-VAN2-SpecSheet-French.pdf",
+    "where": "French spec sheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": 1500,
+    "unit": "kW",
+    "measures": "UPS 2 × 750 kW",
+    "quote": "Alimentation noninterruptible (UPS) : 2 Mitsubishi de 750 kW chacun",
+    "url": "https://www.cologix.com/pdf/Vancouver-VAN2-SpecSheet-French.pdf",
+    "where": "French spec sheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "cooling",
+    "value": "180 t N+1",
+    "unit": "",
+    "measures": "refrigeration capacity",
+    "quote": "Capacité de réfrigération : 180 tonnes (N+1)",
+    "url": "https://www.cologix.com/pdf/Vancouver-VAN2-SpecSheet-French.pdf",
+    "where": "French spec sheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": "12.5 kV primary",
+    "unit": "",
+    "measures": "utility service voltage",
+    "quote": "Électricité : Primaire 12,5 kV",
+    "url": "https://www.cologix.com/pdf/Vancouver-VAN2-SpecSheet-French.pdf",
+    "where": "French spec sheet",
+    "evidence": "operator claim"
+   }
+  ],
+  "verified_existing": "matches: design '150 par p.c.' (W/ft² implied; unit not printed).",
+  "notes": "Spec sheet's 2 MW is 'redundant electrical feeds', not IT load. 15,000 ft² × 150 W/ft² = 2.25 MW (derived, not stated). The 22 storeys are the office tower, not the DC."
+ },
+ {
+  "id": "cologix-van4",
+  "name": "Cologix VAN4",
+  "operator": "Cologix",
+  "address": "175 West Cordova Street",
+  "city": "Vancouver",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 4,
+    "unit": "MW",
+    "measures": "colocation capacity (not defined as IT)",
+    "quote": "4 MW of colocation capacity",
+    "url": "https://cologix.com/data-centers/vancouver/van4/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 68000,
+    "unit": "ft²",
+    "measures": "building area across four floors",
+    "quote": "68K SQFT across four floors",
+    "url": "https://cologix.com/data-centers/vancouver/van4/",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 6317.4
+   },
+   {
+    "field": "storeys",
+    "value": 4,
+    "unit": "floors",
+    "measures": "floors",
+    "quote": "68K SQFT across four floors",
+    "url": "https://cologix.com/data-centers/vancouver/van4/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "rack_kw",
+    "value": "3-10",
+    "unit": "kW/cabinet",
+    "measures": "design load",
+    "quote": "Load design 3-10 kW per cabinet",
+    "url": "https://cologix.com/data-centers/vancouver/van4/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "cooling",
+    "value": "Pumped refrigerant and air-cooled chilled water",
+    "unit": "",
+    "measures": "cooling type",
+    "quote": "Pumped refrigerant and air-cooled chilled water",
+    "url": "https://cologix.com/data-centers/vancouver/van4/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   }
+  ],
+  "verified_existing": "matches: 68,000 ft² = 6,317.4 m²; 4 MW.",
+  "notes": "FAQ also says '68,000 square feet of space'. DP-2022-00689 (air-cooled chillers, transformers) logged in 01 notes, not re-fetched. Height ≈24.7 m per Shape Your City (not re-fetched)."
+ },
+ {
+  "id": "cologix-van5",
+  "name": "Cologix VAN5",
+  "operator": "Cologix",
+  "address": "555 West Hastings St (Harbour Centre)",
+  "city": "Vancouver",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 1.6,
+    "unit": "MW",
+    "measures": "'power' (not defined as IT)",
+    "quote": "delivers an additional 10.8K SQFT and 1.6 MW of power",
+    "url": "https://cologix.com/data-centers/vancouver/van5/",
+    "where": "intro",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": 10800,
+    "unit": "ft²",
+    "measures": "area across two suites — NOT labelled white space",
+    "quote": "10,800 SQFT across two suites in the Harbour Centre",
+    "url": "https://cologix.com/data-centers/vancouver/van5/",
+    "where": "facility section",
+    "evidence": "operator claim",
+    "value_m2": 1003.4
+   },
+   {
+    "field": "cooling",
+    "value": "Glycol-cooled DX with rooftop dry coolers",
+    "unit": "",
+    "measures": "cooling",
+    "quote": "Glycol-cooled DX air conditioners with rooftop dry coolers",
+    "url": "https://cologix.com/data-centers/vancouver/van5/",
+    "where": "cooling",
+    "evidence": "operator claim"
+   }
+  ],
+  "verified_existing": "changed in labelling: 10,800 ft² (1,003.4 m²) and 1.6 MW still stated, but the page does NOT call it white space ('across two suites'). Page meta description says '1 MW of power' (conflict).",
+  "notes": "Recategorise 1,003 m² as suite area (unknown whether gross or white space)."
+ },
+ {
+  "id": "estruxture-cal1",
+  "name": "eStruxture CAL-1",
+  "operator": "eStruxture",
+  "address": "7007 54 Street SE",
+  "city": "Calgary",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 9,
+    "unit": "MW",
+    "measures": "'total power' (not defined as IT)",
+    "quote": "9MW total power, upgradable to 13MW",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_CAL-1_Data_Sheet__2022.pdf",
+    "where": "datasheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 65000,
+    "unit": "ft²",
+    "measures": "total space",
+    "quote": "65,000 sq. ft. of total space",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_CAL-1_Data_Sheet__2022.pdf",
+    "where": "Specifications",
+    "evidence": "operator claim",
+    "value_m2": 6038.7
+   },
+   {
+    "field": "white_space_m2",
+    "value": 33700,
+    "unit": "ft²",
+    "measures": "IT space (Key Facts)",
+    "quote": "33,700 sq. ft. of IT space",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_CAL-1_Data_Sheet__2022.pdf",
+    "where": "Key Facts",
+    "evidence": "operator claim",
+    "value_m2": 3130.8
+   },
+   {
+    "field": "white_space_m2",
+    "value": 33000,
+    "unit": "ft²",
+    "measures": "cabinet space (Specifications)",
+    "quote": "33,000 sq. ft. of cabinet space",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_CAL-1_Data_Sheet__2022.pdf",
+    "where": "Specifications",
+    "evidence": "operator claim",
+    "value_m2": 3065.8
+   },
+   {
+    "field": "grid_mva",
+    "value": "2 × 13.2 kV lines, 8 MW each",
+    "unit": "",
+    "measures": "utility lines",
+    "quote": "Dual 13.2KV lines from the same substation. Each line has a maximum capacity of 8MW",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_CAL-1_Data_Sheet__2022.pdf",
+    "where": "datasheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "floor_to_floor_m",
+    "value": "Hall A 25 ft; Hall B 19 ft",
+    "unit": "ft",
+    "measures": "ceiling heights (7.62 m / 5.79 m)",
+    "quote": "Data Hall A 25 ft",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_CAL-1_Data_Sheet__2022.pdf",
+    "where": "datasheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "cooling",
+    "value": "Hall A 8×165 kW; Hall B 20×250 kW, N+1",
+    "unit": "",
+    "measures": "air units",
+    "quote": "Data Hall B 20x250 kW units in N+1 configuration",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_CAL-1_Data_Sheet__2022.pdf",
+    "where": "datasheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "rack_kw",
+    "value": 30,
+    "unit": "kW/cabinet",
+    "measures": "max",
+    "quote": "Supports up to 30kW/cabinet power loads",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_CAL-1_Data_Sheet__2022.pdf",
+    "where": "datasheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gensets",
+    "value": "3 × 3 MW MTU + 1 × 3 MW Kohler = 12 MW",
+    "unit": "MW",
+    "measures": "standby generating capability after approval",
+    "quote": "the power plant would have a combined generating capability of 12 MW",
+    "url": "https://efiling-webapi.auc.ab.ca/Document/Get/724790",
+    "where": "Decision 27603-D01-2022, para 3",
+    "evidence": "public record"
+   },
+   {
+    "field": "other",
+    "value": "not grid connected (power plant)",
+    "unit": "",
+    "measures": "generator plant",
+    "quote": "The power plant is not connected to the transmission or distribution system.",
+    "url": "https://efiling-webapi.auc.ab.ca/Document/Get/724790",
+    "where": "para 2",
+    "evidence": "public record"
+   }
+  ],
+  "verified_existing": "matches: 65,000 ft² total (6,038.7 m²); 33,700 / 33,000 ft² IT/cabinet (3,130.8 / 3,065.8 m²); 9 MW total power. Datasheet also states '4 x 3MW Diesel generators'.",
+  "notes": "'9MW total power' is not IT load. Earlier note spelling 'upgrdable' — fetched text reads 'upgradable'; check PDF visually if verbatim spelling matters. AUC decision dated 4 Oct 2022 (para 14)."
+ },
+ {
+  "id": "estruxture-van2",
+  "name": "eStruxture VAN-2",
+  "operator": "eStruxture",
+  "address": "555 West Hastings Street, Suite 2605",
+  "city": "Vancouver",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 2.14,
+    "unit": "MW",
+    "measures": "web page: critical IT load; datasheet: 'total power capacity'",
+    "quote": "2.14 MW of critical IT load",
+    "url": "https://www.estruxture.com/data-centers/vancouver/van-2",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": 2.14,
+    "unit": "MW",
+    "measures": "datasheet wording",
+    "quote": "2.14MW total power capacity",
+    "url": "https://www.estruxture.com/wp-content/uploads/2024/04/eStruxture_Datasheet_VAN2_EN-1-2023.pdf",
+    "where": "datasheet 2023",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 14500,
+    "unit": "ft²",
+    "measures": "total space",
+    "quote": "14,500 sq. ft. of total space",
+    "url": "https://www.estruxture.com/wp-content/uploads/2024/04/eStruxture_Datasheet_VAN2_EN-1-2023.pdf",
+    "where": "datasheet 2023",
+    "evidence": "operator claim",
+    "value_m2": 1347.1
+   },
+   {
+    "field": "other",
+    "value": 11000,
+    "unit": "ft²",
+    "measures": "mechanical space",
+    "quote": "11,000 sq. ft. of mechanical space",
+    "url": "https://www.estruxture.com/wp-content/uploads/2024/04/eStruxture_Datasheet_VAN2_EN-1-2023.pdf",
+    "where": "datasheet 2023",
+    "evidence": "operator claim",
+    "value_m2": 1021.9
+   },
+   {
+    "field": "storeys",
+    "value": 8,
+    "unit": "floors",
+    "measures": "host building (multi-tenant)",
+    "quote": "8 floor multi-tenant building",
+    "url": "https://www.estruxture.com/wp-content/uploads/2024/04/eStruxture_Datasheet_VAN2_EN-1-2023.pdf",
+    "where": "datasheet 2023",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "cooling",
+    "value": "Total 422 RT",
+    "unit": "",
+    "measures": "cooling capacity",
+    "quote": "Total 422 RT",
+    "url": "https://www.estruxture.com/wp-content/uploads/2024/04/eStruxture_Datasheet_VAN2_EN-1-2023.pdf",
+    "where": "datasheet 2023",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "rack_kw",
+    "value": 10,
+    "unit": "kW/cabinet",
+    "measures": "max",
+    "quote": "Up to 10kW/cabinet",
+    "url": "https://www.estruxture.com/wp-content/uploads/2024/04/eStruxture_Datasheet_VAN2_EN-1-2023.pdf",
+    "where": "datasheet 2023",
+    "evidence": "operator claim"
+   }
+  ],
+  "verified_existing": "",
+  "notes": "Same building as Cologix VAN1/VAN5 (Harbour Centre). Fuel: datasheet '48 Hours' vs web page '24 hours'. MW term differs between sources."
+ },
+ {
+  "id": "estruxture-van3",
+  "name": "eStruxture VAN-3",
+  "operator": "eStruxture",
+  "address": "4590 Canada Way",
+  "city": "Burnaby",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 10,
+    "unit": "MW",
+    "measures": "datasheet: total power",
+    "quote": "2 data halls and 10MW total power",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN3_EN-2.pdf?hsLang=en",
+    "where": "datasheet, Space configuration",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "it_mw",
+    "value": 13,
+    "unit": "MW",
+    "measures": "web page: critical power",
+    "quote": "13MW of critical power",
+    "url": "https://www.estruxture.com/data-centers/vancouver/van-3",
+    "where": "key features",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 55000,
+    "unit": "ft²",
+    "measures": "total space",
+    "quote": "55,000 sq. ft. of total space",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN3_EN-2.pdf?hsLang=en",
+    "where": "datasheet",
+    "evidence": "operator claim",
+    "value_m2": 5109.7
+   },
+   {
+    "field": "white_space_m2",
+    "value": 25000,
+    "unit": "ft²",
+    "measures": "cabinet space",
+    "quote": "25,000 sq. ft. of cabinet space",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN3_EN-2.pdf?hsLang=en",
+    "where": "datasheet",
+    "evidence": "operator claim",
+    "value_m2": 2322.6
+   },
+   {
+    "field": "storeys",
+    "value": "1 (warehouse) + 2-storey office",
+    "unit": "",
+    "measures": "building form",
+    "quote": "Single story warehouse and two-story office space",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN3_EN-2.pdf?hsLang=en",
+    "where": "datasheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "rack_kw",
+    "value": 30,
+    "unit": "kW/cabinet",
+    "measures": "datasheet max (web page says 150kW+)",
+    "quote": "Up to 30kW/cabinet",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN3_EN-2.pdf?hsLang=en",
+    "where": "datasheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "grid_mva",
+    "value": "25 kV service",
+    "unit": "",
+    "measures": "utility voltage",
+    "quote": "25KV utility service",
+    "url": "https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN3_EN-2.pdf?hsLang=en",
+    "where": "datasheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "cooling",
+    "value": "High-density air and liquid cooling; N+1 free cooling",
+    "unit": "",
+    "measures": "web page",
+    "quote": "N+1 free cooling design",
+    "url": "https://www.estruxture.com/data-centers/vancouver/van-3",
+    "where": "facility page",
+    "evidence": "operator claim"
+   }
+  ],
+  "verified_existing": "",
+  "notes": "Datasheet (10 MW total power, 30 kW/cab) vs web page (13 MW critical, 150 kW+/cab) conflict — web page likely later upgrade; undated."
+ },
+ {
+  "id": "estruxture-cal2",
+  "name": "eStruxture CAL-2",
+  "operator": "eStruxture",
+  "address": "149 High Plains Place, Rocky View County, AB T4A 0W7",
+  "city": "Rocky View County (Calgary region)",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 26,
+    "unit": "MW",
+    "measures": "'total capacity'",
+    "quote": "with a total capacity of 26MW",
+    "url": "https://www.estruxture.com/data-centers/calgary/cal-2",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 106000,
+    "unit": "ft²",
+    "measures": "total space",
+    "quote": "106,000 sq. ft of total space",
+    "url": "https://www.estruxture.com/data-centers/calgary/cal-2",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 9847.7
+   },
+   {
+    "field": "rack_kw",
+    "value": "20 (features) / 30 (FAQ)",
+    "unit": "kW/cabinet",
+    "measures": "conflicting",
+    "quote": "Power density up to 20kW a cabinet",
+    "url": "https://www.estruxture.com/data-centers/calgary/cal-2",
+    "where": "facility page",
+    "evidence": "operator claim"
+   }
+  ],
+  "verified_existing": "",
+  "notes": "AUC Decision 27614-D01-2022 (4 × 3 MW gensets) logged in 16_dc_components_sizing.md; NOT re-fetched this pass. Fuel 24 h."
+ },
+ {
+  "id": "estruxture-cal3",
+  "name": "eStruxture CAL-3",
+  "operator": "eStruxture",
+  "address": "Rocky View County (no street address on page)",
+  "city": "Rocky View County (Calgary region)",
+  "country": "Canada",
+  "status": "under construction",
+  "year": "2026 (scheduled)",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 90,
+    "unit": "MW",
+    "measures": "'total capacity'",
+    "quote": "with a total capacity of 90MW",
+    "url": "https://www.estruxture.com/data-centers/calgary/cal-3",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "white_space_m2",
+    "value": 8625,
+    "unit": "ft²",
+    "measures": "EACH data hall (hall count not stated)",
+    "quote": "Each data hall: ≈ 8,625 sq. ft.",
+    "url": "https://www.estruxture.com/data-centers/calgary/cal-3",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 801.3
+   },
+   {
+    "field": "rack_kw",
+    "value": "125+",
+    "unit": "kW/cabinet",
+    "measures": "max",
+    "quote": "Power density up to 125kW+ a cabinet",
+    "url": "https://www.estruxture.com/data-centers/calgary/cal-3",
+    "where": "facility page",
+    "evidence": "operator claim"
+   }
+  ],
+  "verified_existing": "",
+  "notes": "No total area and no hall count → no usable MW/area pair. 'scheduled to launch in the fall of 2026'."
+ },
+ {
+  "id": "estruxture-mtl1",
+  "name": "eStruxture MTL-1",
+  "operator": "eStruxture",
+  "address": "800 Rue du Square Victoria",
+  "city": "Montréal",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 5,
+    "unit": "MW",
+    "measures": "'total capacity' (not defined as IT)",
+    "quote": "with a total capacity of 5MW",
+    "url": "https://www.estruxture.com/data-centers/montreal/mtl1",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": 25000,
+    "unit": "ft²",
+    "measures": "'colocation space'/'flexible capacity' — gross vs white space not stated",
+    "quote": "over 25,000 square feet of colocation space",
+    "url": "https://www.estruxture.com/data-centers/montreal/mtl1",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 2322.6
+   }
+  ],
+  "verified_existing": "",
+  "notes": "Fuel conflict on page: 22 h vs 24 h. Chilled water."
+ },
+ {
+  "id": "estruxture-mtl2",
+  "name": "eStruxture MTL-2",
+  "operator": "eStruxture",
+  "address": "7001 Rue Saint-Jacques",
+  "city": "Montréal",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 30,
+    "unit": "MW",
+    "measures": "'total capacity' (not defined as IT)",
+    "quote": "a total capacity of 30MW",
+    "url": "https://www.estruxture.com/data-centers/montreal/mtl2",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": 187000,
+    "unit": "ft²",
+    "measures": "'colocation space'/'flexible capacity' — gross vs white space not stated",
+    "quote": "over 187,000 square feet of colocation space",
+    "url": "https://www.estruxture.com/data-centers/montreal/mtl2",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 17372.9
+   }
+  ],
+  "verified_existing": "",
+  "notes": "Raised-floor cold air supply; free cooling design."
+ },
+ {
+  "id": "estruxture-mtl4",
+  "name": "eStruxture MTL-4",
+  "operator": "eStruxture",
+  "address": "17500 Trans Canada Hwy",
+  "city": "Kirkland",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 16.5,
+    "unit": "MW",
+    "measures": "'total capacity' (not defined as IT)",
+    "quote": "16.5 MW total power facility",
+    "url": "https://www.estruxture.com/data-centers/montreal/mtl4",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": 100000,
+    "unit": "ft²",
+    "measures": "'colocation space'/'flexible capacity' — gross vs white space not stated",
+    "quote": "100,000 sq. ft. of flexible capacity",
+    "url": "https://www.estruxture.com/data-centers/montreal/mtl4",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 9290.3
+   }
+  ],
+  "verified_existing": "",
+  "notes": "Page also says 'a total capacity of 16MW' (conflict)."
+ },
+ {
+  "id": "cologix-van3",
+  "name": "Cologix VAN3",
+  "operator": "Cologix",
+  "address": "2828 Natal Street",
+  "city": "Vancouver",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 5,
+    "unit": "MW",
+    "measures": "capacity (not defined as IT unless stated)",
+    "quote": "5 MW of capacity for high-density customer needs",
+    "url": "https://cologix.com/data-centers/vancouver/van3/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 42000,
+    "unit": "ft²",
+    "measures": "facility area (gross/white not stated)",
+    "quote": "VAN3 delivers an additional 42K SQFT and 5 MW of power to the Vancouver market.",
+    "url": "https://cologix.com/data-centers/vancouver/van3/",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 3901.9
+   }
+  ],
+  "verified_existing": "",
+  "notes": "Up to 4 kW per cabinet; hot aisle containment."
+ },
+ {
+  "id": "cologix-mtl8",
+  "name": "Cologix MTL8",
+  "operator": "Cologix",
+  "address": "7350 Frederick-Banting Street",
+  "city": "Montréal",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 21,
+    "unit": "MW",
+    "measures": "'Power' (not defined as IT unless stated)",
+    "quote": "21 MW",
+    "url": "https://cologix.com/data-centers/montreal/mtl8/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 206000,
+    "unit": "ft²",
+    "measures": "data centre space",
+    "quote": "206K SQFT of customizable, purpose-built data center space",
+    "url": "https://cologix.com/data-centers/montreal/mtl8/",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 19138.0
+   }
+  ],
+  "verified_existing": "",
+  "notes": "DX with free cooling; up to 30 kW density."
+ },
+ {
+  "id": "cologix-mtl9",
+  "name": "Cologix MTL9",
+  "operator": "Cologix",
+  "address": "2525 Rue Canadien",
+  "city": "Drummondville",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 25,
+    "unit": "MW",
+    "measures": "'Power capacity' (not defined as IT unless stated)",
+    "quote": "25 MW",
+    "url": "https://cologix.com/data-centers/montreal/mtl9/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 120000,
+    "unit": "ft²",
+    "measures": "facility area",
+    "quote": "MTL9 is a 120K SQFT build-to-suit Scalelogix facility",
+    "url": "https://cologix.com/data-centers/montreal/mtl9/",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 11148.4
+   }
+  ],
+  "verified_existing": "",
+  "notes": "36-inch raised floor, dual sub-levels; DX with free cooling."
+ },
+ {
+  "id": "cologix-mtl10",
+  "name": "Cologix MTL10",
+  "operator": "Cologix",
+  "address": "530 Rue Bériault",
+  "city": "Longueuil",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 35,
+    "unit": "MW",
+    "measures": "critical power (not defined as IT unless stated)",
+    "quote": "35 MW of critical power",
+    "url": "https://cologix.com/data-centers/montreal/mtl10/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 180000,
+    "unit": "ft²",
+    "measures": "facility area",
+    "quote": "180K+ SQFT purpose-built facility, Cologix owned",
+    "url": "https://cologix.com/data-centers/montreal/mtl10/",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 16722.5
+   }
+  ],
+  "verified_existing": "",
+  "notes": "36-inch raised floor, dual sub-levels; DX with free cooling."
+ },
+ {
+  "id": "cologix-tor3",
+  "name": "Cologix TOR3",
+  "operator": "Cologix",
+  "address": "905 King Street West",
+  "city": "Toronto",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 2,
+    "unit": "MW",
+    "measures": "A/B power (not defined as IT unless stated)",
+    "quote": "2 MW A/B",
+    "url": "https://cologix.com/data-centers/toronto/tor3/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 20000,
+    "unit": "ft²",
+    "measures": "facility area",
+    "quote": "an additional 20K SQFT and 2 MW of power",
+    "url": "https://cologix.com/data-centers/toronto/tor3/",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 1858.1
+   }
+  ],
+  "verified_existing": "",
+  "notes": "150 W/ft² design; same building as TOR2; in-row cooling, chillers + cooling tower."
+ },
+ {
+  "id": "cologix-tor4",
+  "name": "Cologix TOR4",
+  "operator": "Cologix",
+  "address": "105 Clegg Road, Building B",
+  "city": "Markham",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 11,
+    "unit": "MW",
+    "measures": "'power' (not defined as IT unless stated)",
+    "quote": "11 MW of power",
+    "url": "https://cologix.com/data-centers/toronto/tor4/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 50000,
+    "unit": "ft²",
+    "measures": "facility area",
+    "quote": "Purpose-built, 50K SQFT facility, on a 3.4-acre campus",
+    "url": "https://cologix.com/data-centers/toronto/tor4/",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 4645.1
+   },
+   {
+    "field": "site_area_m2",
+    "value": 3.4,
+    "unit": "acres",
+    "measures": "campus land",
+    "quote": "Purpose-built, 50K SQFT facility, on a 3.4-acre campus",
+    "url": "https://cologix.com/data-centers/toronto/tor4/",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 13759.0
+   }
+  ],
+  "verified_existing": "",
+  "notes": "Meta description: '8 MW of power' for future 'TOR4-S' (different/future). 2 data halls; CRAC with containment."
+ },
+ {
+  "id": "cologix-cgy1",
+  "name": "Cologix CGY1",
+  "operator": "Cologix",
+  "address": "840 7th Avenue SW",
+  "city": "Calgary",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 0.4,
+    "unit": "MW",
+    "measures": "'Power' (stated 400 kW) (not defined as IT unless stated)",
+    "quote": "400kW",
+    "url": "https://cologix.com/data-centers/calgary/cgy1/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "white_space_m2",
+    "value": 3700,
+    "unit": "ft²",
+    "measures": "DC space",
+    "quote": "3.7K SQFT of DC space",
+    "url": "https://cologix.com/data-centers/calgary/cgy1/",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 343.7
+   }
+  ],
+  "verified_existing": "",
+  "notes": "Also 1.1K SQFT office. Multi-storey mixed-use host building."
+ },
+ {
+  "id": "cologix-tor5",
+  "name": "Cologix TOR5",
+  "operator": "Cologix",
+  "address": "105 Clegg Road",
+  "city": "Markham",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "grid_mva",
+    "value": 3,
+    "unit": "MW",
+    "measures": "utility supply",
+    "quote": "3MW hydro power",
+    "url": "https://cologix.com/data-centers/toronto/tor5/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": 2.2,
+    "unit": "MW",
+    "measures": "installed UPS (N+1), 3 × 1100 kW",
+    "quote": "2.2 MW UPS (N+1)",
+    "url": "https://cologix.com/data-centers/toronto/tor5/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 40000,
+    "unit": "ft²",
+    "measures": "total building",
+    "quote": "40K+ SQFT",
+    "url": "https://cologix.com/data-centers/toronto/tor5/",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 3716.1
+   },
+   {
+    "field": "white_space_m2",
+    "value": 22000,
+    "unit": "ft²",
+    "measures": "customer space",
+    "quote": "22K+ SQFT",
+    "url": "https://cologix.com/data-centers/toronto/tor5/",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 2043.9
+   },
+   {
+    "field": "storeys",
+    "value": 1,
+    "unit": "floor",
+    "measures": "",
+    "quote": "Purpose-built, one floor facility.",
+    "url": "https://cologix.com/data-centers/toronto/tor5/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gensets",
+    "value": "4 × 1.5 MW, N+1",
+    "unit": "",
+    "measures": "",
+    "quote": "4 x 1.5 MW; N+1 generator system",
+    "url": "https://cologix.com/data-centers/toronto/tor5/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   }
+  ],
+  "verified_existing": "",
+  "notes": "No IT MW stated; meta description '8MW power' conflicts with body. Use UPS 2.2 MW only as an upper-bound proxy, labelled."
+ },
+ {
+  "id": "cologix-mtl11",
+  "name": "Cologix MTL11",
+  "operator": "Cologix",
+  "address": "875 Rue Saint-Antoine",
+  "city": "Montréal",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "other",
+    "value": 1,
+    "unit": "MW",
+    "measures": "'Power' — page also lists a 1 MW generator; ambiguous",
+    "quote": "1 MW",
+    "url": "https://cologix.com/data-centers/montreal/mtl11/",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 25000,
+    "unit": "ft²",
+    "measures": "facility",
+    "quote": "25K+ SQFT",
+    "url": "https://cologix.com/data-centers/montreal/mtl11/",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 2322.6
+   },
+   {
+    "field": "white_space_m2",
+    "value": 5000,
+    "unit": "ft²",
+    "measures": "raised floor and cabinet space",
+    "quote": "5K SQFT raised floor and cabinet space",
+    "url": "https://cologix.com/data-centers/montreal/mtl11/",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 464.5
+   }
+  ],
+  "verified_existing": "",
+  "notes": "Weak pair: '1 MW' may be the generator ('1 MW Caterpillar model 3512'). 600 tons cooling. Do not treat 1 MW as IT."
+ },
+ {
+  "id": "qscale-q01",
+  "name": "QScale Q01 campus",
+  "operator": "QScale",
+  "address": "Lévis, QC (campus street address not on page; 2280 Albert-Dion St is company footer address)",
+  "city": "Lévis",
+  "country": "Canada",
+  "status": "operating (phases); Building B under construction",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 114,
+    "unit": "MW",
+    "measures": "protected customer IT load (campus)",
+    "quote": "114 MW of protected customer IT load",
+    "url": "https://www.qscale.com/q01-campus",
+    "where": "campus page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": 142,
+    "unit": "MW",
+    "measures": "total power capacity (campus)",
+    "quote": "142-megawatt power capacity",
+    "url": "https://www.qscale.com/q01-campus",
+    "where": "campus page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "grid_mva",
+    "value": 266,
+    "unit": "MVA",
+    "measures": "substation, 2N 120 kV",
+    "quote": "266MVA 2N 120kV Electrical Substation",
+    "url": "https://www.qscale.com/q01-campus",
+    "where": "campus page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 930000,
+    "unit": "ft²",
+    "measures": "total building space (campus)",
+    "quote": "Total building space: ~930,000 sq. ft.",
+    "url": "https://www.qscale.com/q01-campus",
+    "where": "campus page",
+    "evidence": "operator claim",
+    "value_m2": 86399.8
+   },
+   {
+    "field": "white_space_m2",
+    "value": 313000,
+    "unit": "ft²",
+    "measures": "white space total (~39,000 per phase)",
+    "quote": "White space: ~39,000 sq. ft. per phase, total ~313,000 sq. ft.",
+    "url": "https://www.qscale.com/q01-campus",
+    "where": "campus page",
+    "evidence": "operator claim",
+    "value_m2": 29078.6
+   },
+   {
+    "field": "rack_kw",
+    "value": "600+",
+    "unit": "kW/cabinet",
+    "measures": "max",
+    "quote": "Supports over 600 kW per cabinet",
+    "url": "https://www.qscale.com/q01-campus",
+    "where": "campus page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "heat_reuse",
+    "value": "greenhouse agriculture",
+    "unit": "",
+    "measures": "waste-heat use",
+    "quote": "heating for sustainable initiatives such as greenhouse agriculture",
+    "url": "https://www.qscale.com/q01-campus",
+    "where": "campus page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "it_mw",
+    "value": 60,
+    "unit": "MW",
+    "measures": "IT capacity of Building B",
+    "quote": "will add 60 MW of IT capacity",
+    "url": "https://www.qscale.com/news/q01-building-b-60mw-ai-ready-infrastructure",
+    "where": "news release 4 Jun 2026",
+    "evidence": "operator claim"
+   }
+  ],
+  "verified_existing": "",
+  "notes": "Campus-scale (multiple phases); 930,000 ft² for 114 MW IT ≈ 758 m²/MW gross (derived). PUE claim ≤1.2."
+ },
+ {
+  "id": "vantage-qc1",
+  "name": "Vantage Montreal I (QC1)",
+  "operator": "Vantage Data Centers",
+  "address": "not stated on page",
+  "city": "Montréal",
+  "country": "Canada",
+  "status": "operating / expanding",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 11,
+    "unit": "MW",
+    "measures": "critical IT load",
+    "quote": "11MW of critical IT load",
+    "url": "https://vantage-dc.com/data-center-locations/north-america/montreal-i-canada/",
+    "where": "location page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 60000,
+    "unit": "ft²",
+    "measures": "building/gross area",
+    "quote": "60,000 square feet of space",
+    "url": "https://vantage-dc.com/data-center-locations/north-america/montreal-i-canada/",
+    "where": "location page",
+    "evidence": "operator claim",
+    "value_m2": 5574.2
+   },
+   {
+    "field": "site_area_m2",
+    "value": 5,
+    "unit": "acres",
+    "measures": "site/campus",
+    "quote": "5 acre site",
+    "url": "https://vantage-dc.com/data-center-locations/north-america/montreal-i-canada/",
+    "where": "location page",
+    "evidence": "operator claim",
+    "value_m2": 20234.0
+   }
+  ],
+  "verified_existing": "",
+  "notes": "Multi-storey; outside-air economisation up to 80% of year."
+ },
+ {
+  "id": "vantage-qc4",
+  "name": "Vantage Montreal II (QC4) campus",
+  "operator": "Vantage Data Centers",
+  "address": "not stated on page",
+  "city": "Montréal",
+  "country": "Canada",
+  "status": "operating / expanding",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 50,
+    "unit": "MW",
+    "measures": "critical IT load",
+    "quote": "50MW of critical IT load",
+    "url": "https://vantage-dc.com/data-center-locations/north-america/montreal-ii-canada/",
+    "where": "location page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 320000,
+    "unit": "ft²",
+    "measures": "building/gross area",
+    "quote": "320,000 gross square feet",
+    "url": "https://vantage-dc.com/data-center-locations/north-america/montreal-ii-canada/",
+    "where": "location page",
+    "evidence": "operator claim",
+    "value_m2": 29729.0
+   },
+   {
+    "field": "site_area_m2",
+    "value": 10,
+    "unit": "acres",
+    "measures": "site/campus",
+    "quote": "10 acre campus",
+    "url": "https://vantage-dc.com/data-center-locations/north-america/montreal-ii-canada/",
+    "where": "location page",
+    "evidence": "operator claim",
+    "value_m2": 40469.0
+   }
+  ],
+  "verified_existing": "",
+  "notes": "Gallery caption says '48MW of capacity once fully developed' (conflict). Indirect air cooling; geothermal for technical spaces. Figures are at full build-out."
+ },
+ {
+  "id": "vantage-qc2",
+  "name": "Vantage Québec City (QC2) campus",
+  "operator": "Vantage Data Centers",
+  "address": "not stated on page",
+  "city": "Québec City",
+  "country": "Canada",
+  "status": "operating / expanding",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 86,
+    "unit": "MW",
+    "measures": "critical IT load",
+    "quote": "86MW of critical IT load",
+    "url": "https://vantage-dc.com/data-center-locations/north-america/quebec-city-canada/",
+    "where": "location page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 925000,
+    "unit": "ft²",
+    "measures": "building/gross area",
+    "quote": "925K square feet",
+    "url": "https://vantage-dc.com/data-center-locations/north-america/quebec-city-canada/",
+    "where": "location page",
+    "evidence": "operator claim",
+    "value_m2": 85935.3
+   },
+   {
+    "field": "site_area_m2",
+    "value": 30,
+    "unit": "acres",
+    "measures": "site/campus",
+    "quote": "30 acre campus",
+    "url": "https://vantage-dc.com/data-center-locations/north-america/quebec-city-canada/",
+    "where": "location page",
+    "evidence": "operator claim",
+    "value_m2": 121406.0
+   }
+  ],
+  "verified_existing": "",
+  "notes": "Page says four data centres in overview but 'three' in a caption. Campus at full build-out."
+ },
+ {
+  "id": "vantage-qc6",
+  "name": "Vantage Montreal III (QC6)",
+  "operator": "Vantage Data Centers",
+  "address": "island of Montréal near Hwy 40 / YUL (no address)",
+  "city": "Montréal",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 30,
+    "unit": "MW",
+    "measures": "critical IT load",
+    "quote": "30MW of critical IT load",
+    "url": "https://vantage-dc.com/data-center-locations/north-america/montreal-iii-canada/",
+    "where": "location page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": 428,
+    "unit": "W/ft²",
+    "measures": "average density (area not stated)",
+    "quote": "average densities of 428W/SF",
+    "url": "https://vantage-dc.com/data-center-locations/north-america/montreal-iii-canada/",
+    "where": "location page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "site_area_m2",
+    "value": 8,
+    "unit": "acres",
+    "measures": "campus",
+    "quote": "8 acre campus",
+    "url": "https://vantage-dc.com/data-center-locations/north-america/montreal-iii-canada/",
+    "where": "location page",
+    "evidence": "operator claim",
+    "value_m2": 32375.0
+   },
+   {
+    "field": "storeys",
+    "value": 1,
+    "unit": "storey",
+    "measures": "",
+    "quote": "This single-story data center",
+    "url": "https://vantage-dc.com/data-center-locations/north-america/montreal-iii-canada/",
+    "where": "location page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "grid_mva",
+    "value": 45,
+    "unit": "MW",
+    "measures": "dedicated substation",
+    "quote": "Dedicated 45MW substation on campus",
+    "url": "https://vantage-dc.com/data-center-locations/north-america/montreal-iii-canada/",
+    "where": "location page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "cooling",
+    "value": "closed-loop chilled water, air-cooled chillers",
+    "unit": "",
+    "measures": "",
+    "quote": "closed-loop chilled water system generated through air-cooled chillers",
+    "url": "https://vantage-dc.com/data-center-locations/north-america/montreal-iii-canada/",
+    "where": "location page",
+    "evidence": "operator claim"
+   }
+  ],
+  "verified_existing": "",
+  "notes": "No floor area stated; 30 MW ÷ 428 W/ft² ≈ 70,000 ft² is a derivation only, not a stated figure."
+ },
+ {
+  "id": "stack-tor01",
+  "name": "STACK TOR01 campus (A, B, C)",
+  "operator": "STACK Infrastructure",
+  "address": "not stated ('7 miles from downtown Toronto')",
+  "city": "Toronto",
+  "country": "Canada",
+  "status": "operating / under construction (B, C)",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 8,
+    "unit": "MW",
+    "measures": "TOR01A capacity (critical/total not specified per building)",
+    "quote": "TOR01A: 8MW",
+    "url": "https://www.stackinfra.com/locations/americas/toronto/tor01/",
+    "where": "location page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 89000,
+    "unit": "ft²",
+    "measures": "TOR01A",
+    "quote": "89,000 SQ FT",
+    "url": "https://www.stackinfra.com/locations/americas/toronto/tor01/",
+    "where": "location page",
+    "evidence": "operator claim",
+    "value_m2": 8268.4
+   },
+   {
+    "field": "it_mw",
+    "value": 24,
+    "unit": "MW",
+    "measures": "TOR01B capacity (critical/total not specified per building; campus total called critical)",
+    "quote": "TOR01B: 24MW, 216,916 SQ FT (20,152 sq. m.)",
+    "url": "https://www.stackinfra.com/wp-content/uploads/2024/10/TOR01B-C-Brochure_Web.pdf",
+    "where": "TOR01B/C brochure, Facility Overview",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 216916,
+    "unit": "ft²",
+    "measures": "TOR01B (operator gives 20,152 m²)",
+    "quote": "TOR01B: 24MW, 216,916 SQ FT (20,152 sq. m.)",
+    "url": "https://www.stackinfra.com/wp-content/uploads/2024/10/TOR01B-C-Brochure_Web.pdf",
+    "where": "Facility Overview",
+    "evidence": "operator claim",
+    "value_m2": 20152
+   },
+   {
+    "field": "it_mw",
+    "value": 24,
+    "unit": "MW",
+    "measures": "TOR01C",
+    "quote": "TOR01C: 24MW, 212,118 SQ FT (19,706 sq. m.)",
+    "url": "https://www.stackinfra.com/wp-content/uploads/2024/10/TOR01B-C-Brochure_Web.pdf",
+    "where": "Facility Overview",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 212118,
+    "unit": "ft²",
+    "measures": "TOR01C (operator gives 19,706 m²)",
+    "quote": "TOR01C: 24MW, 212,118 SQ FT (19,706 sq. m.)",
+    "url": "https://www.stackinfra.com/wp-content/uploads/2024/10/TOR01B-C-Brochure_Web.pdf",
+    "where": "Facility Overview",
+    "evidence": "operator claim",
+    "value_m2": 19706
+   },
+   {
+    "field": "other",
+    "value": 56,
+    "unit": "MW",
+    "measures": "campus total critical capacity",
+    "quote": "total critical capacity of 56MW",
+    "url": "https://www.stackinfra.com/locations/americas/toronto/tor01/",
+    "where": "location page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "site_area_m2",
+    "value": 19,
+    "unit": "acres",
+    "measures": "campus (7.5 ha)",
+    "quote": "19 Acres (7.5 Hectares)",
+    "url": "https://www.stackinfra.com/wp-content/uploads/2025/08/TOR01-Campus-Brochure.pdf",
+    "where": "campus brochure p.2",
+    "evidence": "operator claim",
+    "value_m2": 75000
+   },
+   {
+    "field": "cooling",
+    "value": "closed-loop water; N+1 345-ton air-cooled chillers",
+    "unit": "",
+    "measures": "",
+    "quote": "N+1 345-ton air-cooled chillers with quick restart",
+    "url": "https://www.stackinfra.com/wp-content/uploads/2024/10/TOR01B-C-Brochure_Web.pdf",
+    "where": "High-Density Flexibility",
+    "evidence": "operator claim"
+   }
+  ],
+  "verified_existing": "",
+  "notes": "Three building-level MW/area pairs. Campus brochure total '592,000 SQ. FT.' vs sum of buildings ≈518,000 ft² (conflict). 'Building sq ft' measure (gross vs other) not defined."
+ },
+ {
+  "id": "hut8-kel1",
+  "name": "Hut 8 KEL1",
+  "operator": "Hut 8",
+  "address": "Kelowna (no street address on page)",
+  "city": "Kelowna",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 1,
+    "unit": "MW",
+    "measures": "IT load supported by chillers (stated as '>1 MW') — lower bound only",
+    "quote": "Two 200-tonne chillers, supporting >1 MW IT load at capacity",
+    "url": "https://canada.hut8.com/centers/british-columbia",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 30000,
+    "unit": "ft²",
+    "measures": "facility/building",
+    "quote": "30,000 sq.ft.",
+    "url": "https://canada.hut8.com/centers/british-columbia",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 2787.1
+   },
+   {
+    "field": "white_space_m2",
+    "value": 16125,
+    "unit": "ft²",
+    "measures": "whitespace",
+    "quote": "16,125 sq.ft.",
+    "url": "https://canada.hut8.com/centers/british-columbia",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 1498.1
+   }
+  ],
+  "verified_existing": "",
+  "notes": "'3 MW designed capacity'; 2 × 1,500 kW generators; Tier III designed. '30,000' labelled 'Total building size'."
+ },
+ {
+  "id": "hut8-vaughan",
+  "name": "Hut 8 Vaughan",
+  "operator": "Hut 8",
+  "address": "27 Buttermill Ave",
+  "city": "Vaughan",
+  "country": "Canada",
+  "status": "operating",
+  "year": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 1,
+    "unit": "MW",
+    "measures": "IT load at capacity (stated as '>1MW') — lower bound only",
+    "quote": "> 1MW IT Load at capacity",
+    "url": "https://canada.hut8.com/centers/vaughan",
+    "where": "facility page",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 15000,
+    "unit": "ft²",
+    "measures": "facility/building",
+    "quote": "1 5,000 sq. ft. facility",
+    "url": "https://canada.hut8.com/centers/vaughan",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 1393.5
+   },
+   {
+    "field": "white_space_m2",
+    "value": 6900,
+    "unit": "ft²",
+    "measures": "whitespace",
+    "quote": "6,900 sq. ft. of total whitespace for IT",
+    "url": "https://canada.hut8.com/centers/vaughan",
+    "where": "facility page",
+    "evidence": "operator claim",
+    "value_m2": 641.0
+   }
+  ],
+  "verified_existing": "",
+  "notes": "Facility figure has a stray space ('1 5,000'); 1000 kVA power capacity; 3 generators 1,125 kW total."
+ },
+ {
+  "id": "van-111-e-5th",
+  "name": "111 E 5th Ave / 2060 Quebec St data centre rezoning (RTS 19744)",
+  "operator": "Westbank Corp. for 111 E 5th Property Inc.",
+  "address": "111 East 5th Avenue and 2060 Quebec Street",
+  "city": "Vancouver",
+  "country": "Canada",
+  "status": "proposed (referred back to staff 21 Jul 2026)",
+  "year": "2026",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 40,
+    "unit": "MW",
+    "measures": "'anticipated load' — applicant figure reported by staff; not defined as IT",
+    "quote": "The rezoning application identifies a data centre with an anticipated load of up to 40 MW",
+    "url": "https://council.vancouver.ca/20260714/documents/rr1.pdf",
+    "where": "p.17, Appendix B cond. 1.11",
+    "evidence": "applicant claim"
+   },
+   {
+    "field": "site_area_m2",
+    "value": 2767.3,
+    "unit": "m²",
+    "measures": "site area",
+    "quote": "Site Area 2,767.3 sq. m (29,787sq. ft.)",
+    "url": "https://council.vancouver.ca/20260714/documents/rr1.pdf",
+    "where": "p.29 Appendix F (page no. inferred)",
+    "evidence": "public record"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 11622.6,
+    "unit": "m²",
+    "measures": "proposed floor area (staff estimate FSR 4.0–4.2)",
+    "quote": "11,622.6 sq. m (125,104.6 sq. ft.)",
+    "url": "https://council.vancouver.ca/20260714/documents/rr1.pdf",
+    "where": "p.29 Appendix F",
+    "evidence": "public record"
+   },
+   {
+    "field": "other",
+    "value": 8301,
+    "unit": "m²",
+    "measures": "existing floor area",
+    "quote": "8,301 sq. m (89,361 sq. ft.)",
+    "url": "https://council.vancouver.ca/20260714/documents/rr1.pdf",
+    "where": "p.29 Appendix F",
+    "evidence": "public record"
+   },
+   {
+    "field": "height_m",
+    "value": 20,
+    "unit": "m",
+    "measures": "max building height",
+    "quote": "Building height must not exceed 20 m.",
+    "url": "https://council.vancouver.ca/20260714/documents/rr1.pdf",
+    "where": "p.11 Appendix A s.7.1",
+    "evidence": "public record"
+   },
+   {
+    "field": "storeys",
+    "value": "3 above + 2 below grade",
+    "unit": "",
+    "measures": "repurposed office",
+    "quote": "(three levels above grade and two levels below grade)",
+    "url": "https://council.vancouver.ca/20260714/documents/rr1.pdf",
+    "where": "p.3 Purpose",
+    "evidence": "public record"
+   },
+   {
+    "field": "heat_reuse",
+    "value": "False Creek NEU",
+    "unit": "",
+    "measures": "waste heat condition",
+    "quote": "Successful waste heat recovery and delivery to the NEU is a material condition of the proposed use.",
+    "url": "https://council.vancouver.ca/20260714/documents/rr1.pdf",
+    "where": "p.17 Appendix B",
+    "evidence": "public record"
+   },
+   {
+    "field": "other",
+    "value": "primary BC Hydro service",
+    "unit": "",
+    "measures": "utility service",
+    "quote": "BC Hydro service to the site to be primary, and all required electrical plants to be provided within private property.",
+    "url": "https://council.vancouver.ca/20260714/documents/rr1.pdf",
+    "where": "p.19 Appendix B cond. 1.16",
+    "evidence": "public record"
+   }
+  ],
+  "verified_existing": "",
+  "notes": "Only Canadian site found where a public authority document states both a MW figure and floor area; the MW is the applicant's figure. Page numbers inferred from footers by fetch tool. Jobs, generators, cooling type not stated."
+ }
+]
