@@ -93,7 +93,7 @@ NEW = [
  Q('pv_share', 'Share of the data centre\'s power from its own solar', 'test', '%',
    'pv_MWh ÷ (IT load × PUE × 8,760)',
    ['pv_roof', 'pv_facade', 'it_load_actual', 'pue'],
-   'worked check (roof areas assumed, not sourced): 1 MW IT site 1.4–4.8 %; 10 MW site 0.28–0.96 %; PV is a small share at data-centre densities; avoided carbon BC 22.8 tCO2e/GWh (2025), Alberta 335 g/kWh (2024 generation intensity)',
+   'worked check (roof areas assumed, not sourced): 1 MW IT site 1.4–4.8 %; 10 MW site 0.28–0.96 %; PV is a small share at data-centre densities; avoided carbon at the tool basis, NIR 2026 consumption intensity (2024): BC 18.1, Alberta 346.1 g CO2e/kWh (average factors)',
    ['nrcan_pv2006', 'bc_ef2026', 'ab_ghgperf'], 70, 'derived', 'pv'),
  Q('pv_cost', 'Solar installed cost', 'test', 'CAD/W',
    'kWp × 1,000 × rate by size',

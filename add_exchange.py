@@ -69,7 +69,7 @@ NEW = [
    'flexible load is offered only by whoever runs the workloads: a single-owner or hyperscale operator can shift its own computing; in colocation the building operator controls power and cooling, not the tenants\' computing, so flexibility needs each tenant\'s agreement',
    ['it_load_claim'],
    'business model from operator pages (claims) and permits; the learning-series EV and workload papers are models of single-operator fleets',
-   ['learningSeries', 'crozier2025'], 50, 'logic defined; per-site model from operator pages; Crozier & Liska 2025: no published flexible share — inference is inflexible, checkpointed training can pause'),
+   ['crozier2025'], 50, 'logic defined; per-site model from operator pages; Crozier & Liska 2025: no published flexible share — inference is inflexible, checkpointed training can pause'),
  Q('commitment', 'How firm the exchange is', 'decide', 'existing · committed · planned · proposed · possible',
    'existing = operating; committed = in a contract, permit condition or funded budget; planned = in a utility filing or adopted plan; proposed = an applicant or operator says so; possible = the tool found it and nobody has proposed it. Only existing and committed count as delivered',
    ['receivers_nearby'],
@@ -188,6 +188,9 @@ G = 'report the gates first — grid connection (r_grid) and zoning use (z_use):
 F = 'run each option through the four futures (as planned · tenant changes cooling · tenant leaves · receiver leaves) and show what changes'
 ol['steps'] = [s for s in ol['steps'] if s not in (G, F)]
 ol['steps'].insert(1, G); ol['steps'].append(F)
-m['date'] = '2026-10-14'
+for q in r['quantities']:
+    if q['id'] == 'grid_co2' and 'BASIS' not in q.get('coef', ''):
+        q['coef'] += '; BASIS used across the tool (proposed 15 Oct by Claude and the atlas chat, J.B. to confirm): consumption intensity, since the tool counts electricity used — BC 18.1, Alberta 346.1 g CO2e/kWh (NIR 2026, 2024); average factors, BC marginal factor unpublished'
+m['date'] = '2026-10-15'
 json.dump(r, open(P, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print(len(NEW), 'quantities,', len(CONDS), 'conditions; next actions on', sum(1 for c in r['conditions'] if c.get('next_action')), 'conditions')

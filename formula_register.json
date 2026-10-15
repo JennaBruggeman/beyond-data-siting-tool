@@ -1,7 +1,7 @@
 {
  "meta": {
   "title": "Beyond Data formula register",
-  "date": "2026-10-14",
+  "date": "2026-10-15",
   "confidence_scale": "100 arithmetic/physics · 90 regulation, tariff or standard read directly · 80 government dataset or statistic · 70 peer-reviewed coefficient transferred from another context · 60 derived with stated assumption · 50 operator or industry claim · 40 proxy · 20 judged · 0 gap",
   "rule": "A quantity's confidence is the lowest of its inputs; a condition's is the lowest of its quantities; a match fails at its weakest link; burdens are recorded beside, never netted.",
   "verified": "Independent re-verification 9–10 Oct 2026: 258 items re-opened; 195 confirmed, 37 confirmed with wording/page notes, 10 mismatches corrected, 6 not on page (citations fixed), 1 unreachable. See verification_report.md. Hunt 9 (public proxies) and hunt 10 (J.B. full-text uploads) folded in 10 Oct: see sources/09 and sources/10.",
@@ -2126,7 +2126,7 @@
     "it_load_actual",
     "hp_electricity"
    ],
-   "coef": "NIR 2026 Annex 7 (same basis for both provinces, main-activity producers): Alberta generation intensity 334.8 g CO2e/kWh in 2024 (preliminary), consumption intensity 346.1 — down from 506.5 / 521.5 in 2021 and 947.7 / 1,030.8 in 1990; BC generation 16.7, consumption 18.1 g/kWh in 2024 (15.5 / 16.9 in 2021); Canada 102.2 / 110.6; earlier register values (BC 22.8 consumption-based with imports, 2025; AB 335 generation, 2024) now superseded by the NIR series for citation; Alberta Electricity Grid Displacement Factor, handbook v3.3 (Aug 2026) Table 1, vintage schedule: 0.4901 (2024), 0.4602 (2025), 0.4303 (2026), 0.4005 (2027), 0.3706 (2028), 0.3407 (2029) tCO2e/MWh for displacement by renewables; with line loss (increased or reduced grid use): 0.5226, 0.4907, 0.4588, 0.4271, 0.3952, 0.3633; 2030 onward aligns with the High Performance Benchmark; projects before 2024 use 0.52 / 0.55 (Table 2, 2018–2020 data); identical in v3.1 (Feb 2023) and v3.2 (Aug 2025); natural-gas combustion (Table 5, commercial/institutional): 1,962 g CO2 /m³ + 0.037 g CH4 + 0.035 g N2O; BC publishes no marginal factor; 13 Oct 2026 deep dive: no official BC marginal or incremental factor exists (BC 2025 methodology is consumption-based, net-import); 13 Oct 2026 deep dive: no official BC marginal or incremental factor exists (BC 2025 methodology is consumption-based, net-import); 13 Oct 2026 deep dive: no official BC marginal or incremental factor exists (BC 2025 methodology is consumption-based, net-import)",
+   "coef": "NIR 2026 Annex 7 (same basis for both provinces, main-activity producers): Alberta generation intensity 334.8 g CO2e/kWh in 2024 (preliminary), consumption intensity 346.1 — down from 506.5 / 521.5 in 2021 and 947.7 / 1,030.8 in 1990; BC generation 16.7, consumption 18.1 g/kWh in 2024 (15.5 / 16.9 in 2021); Canada 102.2 / 110.6; earlier register values (BC 22.8 consumption-based with imports, 2025; AB 335 generation, 2024) now superseded by the NIR series for citation; Alberta Electricity Grid Displacement Factor, handbook v3.3 (Aug 2026) Table 1, vintage schedule: 0.4901 (2024), 0.4602 (2025), 0.4303 (2026), 0.4005 (2027), 0.3706 (2028), 0.3407 (2029) tCO2e/MWh for displacement by renewables; with line loss (increased or reduced grid use): 0.5226, 0.4907, 0.4588, 0.4271, 0.3952, 0.3633; 2030 onward aligns with the High Performance Benchmark; projects before 2024 use 0.52 / 0.55 (Table 2, 2018–2020 data); identical in v3.1 (Feb 2023) and v3.2 (Aug 2025); natural-gas combustion (Table 5, commercial/institutional): 1,962 g CO2 /m³ + 0.037 g CH4 + 0.035 g N2O; BC publishes no marginal factor; 13 Oct 2026 deep dive: no official BC marginal or incremental factor exists (BC 2025 methodology is consumption-based, net-import); 13 Oct 2026 deep dive: no official BC marginal or incremental factor exists (BC 2025 methodology is consumption-based, net-import); 13 Oct 2026 deep dive: no official BC marginal or incremental factor exists (BC 2025 methodology is consumption-based, net-import); BASIS used across the tool (proposed 15 Oct by Claude and the atlas chat, J.B. to confirm): consumption intensity, since the tool counts electricity used — BC 18.1, Alberta 346.1 g CO2e/kWh (NIR 2026, 2024); average factors, BC marginal factor unpublished",
    "sources": [
     "gridBC",
     "gridAB",
@@ -5676,7 +5676,7 @@
     "it_load_actual",
     "pue"
    ],
-   "coef": "worked check (roof areas assumed, not sourced): 1 MW IT site 1.4–4.8 %; 10 MW site 0.28–0.96 %; PV is a small share at data-centre densities; avoided carbon BC 22.8 tCO2e/GWh (2025), Alberta 335 g/kWh (2024 generation intensity)",
+   "coef": "worked check (roof areas assumed, not sourced): 1 MW IT site 1.4–4.8 %; 10 MW site 0.28–0.96 %; PV is a small share at data-centre densities; avoided carbon at the tool basis, NIR 2026 consumption intensity (2024): BC 18.1, Alberta 346.1 g CO2e/kWh (average factors)",
    "sources": [
     "nrcan_pv2006",
     "bc_ef2026",
@@ -6824,17 +6824,9 @@
    ],
    "coef": "business model from operator pages (claims) and permits; the learning-series EV and workload papers are models of single-operator fleets",
    "sources": [
-    "learningSeries",
     "crozier2025"
    ],
    "source_roles": [
-    {
-     "id": "learningSeries",
-     "term": "Who controls the computing",
-     "role": "data",
-     "conf": 50,
-     "verified": false
-    },
     {
      "id": "crozier2025",
      "term": "Who controls the computing",

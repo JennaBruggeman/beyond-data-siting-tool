@@ -87,3 +87,10 @@ Running record of decisions J.B. has made about the tool's logic, in the order m
 - **Spelling:** Sen̓áḵw (as in sources/14), corrected in the handoff and retrieval guide.
 - **For J.B. to decide:** one grid-carbon basis for both the atlas and the register (register: NIR 2026 — BC 16.7 generation / 18.1 consumption; AB 334.8 / 346.1 g/kWh, 2024; atlas: BC 22.8 / AB 335).
 - **To add beside sources/13 (from the atlas chat; to source before use):** TELUS Garden, Equinix TR5, Humano Sherbrooke, QScale Lévis (greenhouses, Québec government document), Enwave Toronto. No EV-charging precedent found.
+
+## 15 Oct — atlas chat's read of the diagram (v17), checked here
+- **homes_heated (example):** relabelled "heat available for the equivalent of 800–2,400 homes — available, not heated" (the host takes 4.9 GWh). The figures stand: the example's heat_delivered is 12–34 GWh ÷ 14.58 MWh; the atlas chat's 5–30 GWh is a different input.
+- **grid_co2 (example):** 3–12 GWh heat-pump electricity is the example's own hp_electricity (12–34 GWh ÷ COP 3.0–3.6), so 50–200 t was consistent; restated at the consumption basis as ≈ 54–217 t/yr, average factor.
+- **noise_limit (example):** corrected — 55/45 is the City's permit note for air-conditioning units, not the by-law limit for this site; the by-law limit depends on the zone pair, and the schedule for downtown (DD) is not yet checked.
+- **Grid basis:** applied consumption intensity everywhere (BC 18.1, AB 346.1 g/kWh, NIR 2026, 2024) — proposed by Claude and the atlas chat; **J.B. to confirm**. pv_share no longer uses 22.8 / 335.
+- **workload_control:** source now Crozier & Liska 2025 only.

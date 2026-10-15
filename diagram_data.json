@@ -1,7 +1,7 @@
 {
 "meta": {
 "title": "Beyond Data — tool logic",
-"date": "2026-10-14",
+"date": "2026-10-15",
 "scale": "100 arithmetic/physics · 90 regulation, tariff or standard read directly · 80 government dataset or statistic · 70 peer-reviewed coefficient transferred from another context · 60 derived with stated assumption · 50 operator or industry claim · 40 proxy · 20 judged · 0 gap",
 "rule": "A quantity's confidence is the lowest of its inputs; a condition's is the lowest of its quantities; a match fails at its weakest link; burdens are recorded beside, never netted.",
 "counts": {
@@ -1459,7 +1459,7 @@
 "stage": "characterise",
 "name": "Grid carbon",
 "formula": "E × EF_average and E × EF_long-run marginal, both reported",
-"coef": "NIR 2026 Annex 7 (same basis for both provinces, main-activity producers): Alberta generation intensity 334.8 g CO2e/kWh in 2024 (preliminary), consumption intensity 346.1 — down from 506.5 / 521.5 in 2021 and 947.7 / 1,030.8 in 1990; BC generation 16.7, consumption 18.1 g/kWh in 2024 (15.5 / 16.9 in 2021); Canada 102.2 / 110.6; earlier register values (BC 22.8 consumption-based with imports, 2025; AB 335 generation, 2024) now superseded by the NIR series for citation; Alberta Electricity Grid Displacement Factor, handbook v3.3 (Aug 2026) Table 1, vintage schedule: 0.4901 (2024), 0.4602 (2025), 0.4303 (2026), 0.4005 (2027), 0.3706 (2028), 0.3407 (2029) tCO2e/MWh for displacement by renewables; with line loss (increased or reduced grid use): 0.5226, 0.4907, 0.4588, 0.4271, 0.3952, 0.3633; 2030 onward aligns with the High Performance Benchmark; projects before 2024 use 0.52 / 0.55 (Table 2, 2018–2020 data); identical in v3.1 (Feb 2023) and v3.2 (Aug 2025); natural-gas combustion (Table 5, commercial/institutional): 1,962 g CO2 /m³ + 0.037 g CH4 + 0.035 g N2O; BC publishes no marginal factor; 13 Oct 2026 deep dive: no official BC marginal or incremental factor exists (BC 2025 methodology is consumption-based, net-import); 13 Oct 2026 deep dive: no official BC marginal or incremental factor exists (BC 2025 methodology is consumption-based, net-import); 13 Oct 2026 deep dive: no official BC marginal or incremental factor exists (BC 2025 methodology is consumption-based, net-import)",
+"coef": "NIR 2026 Annex 7 (same basis for both provinces, main-activity producers): Alberta generation intensity 334.8 g CO2e/kWh in 2024 (preliminary), consumption intensity 346.1 — down from 506.5 / 521.5 in 2021 and 947.7 / 1,030.8 in 1990; BC generation 16.7, consumption 18.1 g/kWh in 2024 (15.5 / 16.9 in 2021); Canada 102.2 / 110.6; earlier register values (BC 22.8 consumption-based with imports, 2025; AB 335 generation, 2024) now superseded by the NIR series for citation; Alberta Electricity Grid Displacement Factor, handbook v3.3 (Aug 2026) Table 1, vintage schedule: 0.4901 (2024), 0.4602 (2025), 0.4303 (2026), 0.4005 (2027), 0.3706 (2028), 0.3407 (2029) tCO2e/MWh for displacement by renewables; with line loss (increased or reduced grid use): 0.5226, 0.4907, 0.4588, 0.4271, 0.3952, 0.3633; 2030 onward aligns with the High Performance Benchmark; projects before 2024 use 0.52 / 0.55 (Table 2, 2018–2020 data); identical in v3.1 (Feb 2023) and v3.2 (Aug 2025); natural-gas combustion (Table 5, commercial/institutional): 1,962 g CO2 /m³ + 0.037 g CH4 + 0.035 g N2O; BC publishes no marginal factor; 13 Oct 2026 deep dive: no official BC marginal or incremental factor exists (BC 2025 methodology is consumption-based, net-import); 13 Oct 2026 deep dive: no official BC marginal or incremental factor exists (BC 2025 methodology is consumption-based, net-import); 13 Oct 2026 deep dive: no official BC marginal or incremental factor exists (BC 2025 methodology is consumption-based, net-import); BASIS used across the tool (proposed 15 Oct by Claude and the atlas chat, J.B. to confirm): consumption intensity, since the tool counts electricity used — BC 18.1, Alberta 346.1 g CO2e/kWh (NIR 2026, 2024); average factors, BC marginal factor unpublished",
 "unit": "tCO2e/yr",
 "sources": [
 "gridBC",
@@ -5307,7 +5307,7 @@
 "stage": "test",
 "name": "Share of the data centre's power from its own solar",
 "formula": "pv_MWh ÷ (IT load × PUE × 8,760)",
-"coef": "worked check (roof areas assumed, not sourced): 1 MW IT site 1.4–4.8 %; 10 MW site 0.28–0.96 %; PV is a small share at data-centre densities; avoided carbon BC 22.8 tCO2e/GWh (2025), Alberta 335 g/kWh (2024 generation intensity)",
+"coef": "worked check (roof areas assumed, not sourced): 1 MW IT site 1.4–4.8 %; 10 MW site 0.28–0.96 %; PV is a small share at data-centre densities; avoided carbon at the tool basis, NIR 2026 consumption intensity (2024): BC 18.1, Alberta 346.1 g CO2e/kWh (average factors)",
 "unit": "%",
 "sources": [
 "nrcan_pv2006",
@@ -6534,17 +6534,9 @@
 "coef": "business model from operator pages (claims) and permits; the learning-series EV and workload papers are models of single-operator fleets",
 "unit": "operator · tenants · mixed",
 "sources": [
-"learningSeries",
 "crozier2025"
 ],
 "source_roles": [
-{
-"id": "learningSeries",
-"term": "Who controls the computing",
-"role": "data",
-"conf": 50,
-"verified": false
-},
 {
 "id": "crozier2025",
 "term": "Who controls the computing",
@@ -10254,7 +10246,7 @@
 40
 ],
 "grid_co2": [
-"BC 16.7 g/kWh; HP electricity adds 50–200 t/yr",
+"BC 18.1 g/kWh (consumption, 2024); heat-pump electricity 3–12 GWh/yr adds ≈ 54–217 t/yr at the average factor (BC marginal factor unpublished)",
 "NIR 2026 Annex 7",
 90
 ],
@@ -10269,9 +10261,9 @@
 50
 ],
 "noise_limit": [
-"By-law 6555: 55 dBA day / 45 night at the property line (air-conditioning note on permits)",
-"City by-law",
-90
+"permit note: air-conditioning units ≤ 55 dB day / 45 night (City practice on field-review permits); by-law limit depends on the zone pair — downtown (DD) schedule not yet checked: quiet→quiet 55/45, activity→quiet 60/55, intermediate or activity→other 70/65",
+"Noise Control By-law 6555 ss. 2.1–2.3; permit records (sources/11)",
+60
 ],
 "receivers": [
 "host tower (4.9 GWh heat/yr); 515 W Hastings (SFU + data halls, adjacent); downtown steam network (Creative Energy)",
@@ -10289,8 +10281,8 @@
 70
 ],
 "homes_heated": [
-"800–2,400 BC homes (space + hot water), of which 60% gas-using",
-"heat_delivered ÷ 52.5 GJ",
+"heat available for the equivalent of 800–2,400 BC homes (space + hot water) — available, not heated: the host takes 4.9 GWh, the rest needs the network",
+"12–34 GWh ÷ 52.5 GJ (14.58 MWh) per home",
 70
 ],
 "price_floor": [
