@@ -43,3 +43,12 @@ Vancouver: condition cannot be stated as MW headroom; "post-2031/32 substation c
 - Alberta Data Centre Regulation (AR 117/2026) — not fetched
 - NIR 2026 Part 3 Alberta table — not fetched
 - 2026 Call for Demand results; AESO final BYOG process — not found as of 6 Oct 2026
+
+## Addendum 15 Oct 2026: facts checked for booklet Sheet 2 (Energy)
+
+| Fact as proposed | Finding | Source | Status |
+|---|---|---|---|
+| BC Hydro 2026 Call "curtailment terms" | Stage 1 minimum: applicant "willing and able to ensure that the Project will curtail its electricity demand upon 24 hours' notice"; "no less than 10% percent of the electricity or load requested"; "no fewer than 144 hours of curtailment per 12-month period" (Sch. 3, Stage 1(c), pp. 30–31). Curtailment availability also scored (Stage 2, p. 31). This is reducing demand, NOT giving power back to the grid. | BC Hydro, 2026 Call for Demand RFA, https://app.bchydro.com/content/dam/BCHydro/customer-portal/documents/accounts-billing/electrical-connections/2026-cfd-request-for-applications.pdf | VERIFIED (public record) |
+| Microsoft Dublin batteries giving grid services | Microsoft feature, 7 Jul 2022: datacentre UPS batteries "certified, tested and approved for connection to the grid"; participation in EirGrid's grid-services market "through" Enel X; role described as "later this year" (2022). No MW given; service type described only as grid stabilisation / ancillary services; operation after 2022 not confirmed. | https://news.microsoft.com/innovation-stories/ireland-wind-farm-datacenter-ups/ | OPERATOR CLAIM (planned 2022) |
+| Edmonton cold-snap grid alert, 13 Jan 2024 | AESO, 13 Jan 2024: Grid Alert 3:30–8:40 p.m., "extreme cold and high electricity demand"; Emergency Alert with the Government of Alberta asking Albertans to "reduce their electricity use to essential needs only". Release gives both "100 MW drop" and "200 MW reduction within minutes" (inconsistent). Province-wide, not Edmonton-specific. Official follow-up: Alberta MSA, January and April 2024 Event Report (not read). | https://aeso.ca/aeso/media/aeso-thanks-albertans-for-quick-response-to-call-for-power-conservation/ ; https://www.albertamsa.ca/assets/Documents/January-and-April-2024-Event-Report.pdf | VERIFIED (date, alert); MW figure conflicting |
+| Alberta "large-load cap" | Already in this file: AESO interim limit of 1,200 MW (4 Jun 2025), fully allocated (P2936 GLDC 970 MW; P3083 Keephills Phase I 230 MW). Province-wide; neither project is in the City of Edmonton. | rows above | VERIFIED |
