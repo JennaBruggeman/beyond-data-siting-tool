@@ -26,7 +26,9 @@ function setup(){
   document.getElementById('v3map').onclick=()=>hide();
   const fit=()=>{ const b=wrap.getBoundingClientRect(); if(!b.width) return; ren.setSize(b.width,b.height,false); cam.aspect=b.width/b.height; cam.updateProjectionMatrix(); };
   new ResizeObserver(fit).observe(wrap); fit();
-  (function loop(){ requestAnimationFrame(loop); if(wrap.style.display==='none') return; ctl.update(); ren.render(scene,cam); placeLabels(); })();
+  (function loop(){ requestAnimationFrame(loop); if(wrap.style.display==='none') return; ctl.update();
+    if(R.multi){ const b=wrap.getBoundingClientRect(), w=b.width/3; ren.setScissorTest(true); R.multi.forEach((s,i)=>{ ren.setViewport(i*w,0,w,b.height); ren.setScissor(i*w,0,w,b.height); cam.aspect=w/b.height; cam.updateProjectionMatrix(); ren.render(s,cam); }); ren.setScissorTest(false); }
+    else { ren.setViewport(0,0,wrap.clientWidth,wrap.clientHeight); cam.aspect=wrap.clientWidth/Math.max(1,wrap.clientHeight); cam.updateProjectionMatrix(); ren.render(scene,cam); placeLabels(); } })();
 }
 const lab=[]; function label(text,pos,col){ const d=document.createElement('div'); d.textContent=text; d.style.cssText=`position:absolute;white-space:nowrap;transform:translate(-50%,-120%);color:${col||'#9d9a94'};text-shadow:0 0 3px #17181a,0 0 3px #17181a`; labels.appendChild(d); lab.push({d,pos}); return d; }
 function placeLabels(){ const b=wrap.getBoundingClientRect(); for(const l of lab){ if(l.d.style.display==='none'&&!l.vis) continue; const v=l.pos.clone().project(R.cam); const on=v.z<1&&Math.abs(v.x)<1.1&&Math.abs(v.y)<1.1&&l.vis!==false; l.d.style.display=on?'':'none'; l.d.style.left=((v.x+1)/2*b.width)+'px'; l.d.style.top=((1-v.y)/2*b.height)+'px'; } }
@@ -88,15 +90,24 @@ function build(site){
 
 /* ---------- overlays per tab ---------- */
 function clearOverlay(){ if(R.ov){ R.scene.remove(R.ov); } R.ov=new three.Group(); R.scene.add(R.ov); for(const l of lab) l.vis=false; lab.splice(0); labels.innerHTML=''; if(R.nb) R.nb.children.forEach(g=>{ g.userData.edge.material.color.setHex(C.edge); g.userData.edge.material.opacity=0.28; }); }
-function plantOnRoof(m2,col){ // generic roof units 12 × 2.4 m, rows along the footprint's long side
-  if(!state.foot||m2<=0) return; const T=three, bb=bbox(state.foot); const w=12, d=2.4, gap=1.6; const n=Math.max(1,Math.ceil(m2/(w*d)));
-  const cx=(bb[0]+bb[2])/2, cy=(bb[1]+bb[3])/2, cols=Math.max(1,Math.floor((bb[2]-bb[0])*0.7/(w+gap)));
-  for(let i=0;i<n&&i<60;i++){ const r=Math.floor(i/cols), c=i%cols; const x=cx-(cols-1)*(w+gap)/2+c*(w+gap), y=cy+((bb[3]-bb[1])*0.25)-r*(d+gap*2); R.ov.add(box(x,y,w,d,2.2,state.roof,col,0.9)); }
+/* roof packing: generic units placed only where they fit inside the roof outline, along its long side */
+function roofSlots(w,d,gap){ const bb=bbox(state.foot), long=(bb[2]-bb[0])>=(bb[3]-bb[1]); const uw=long?w:d, ud=long?d:w; const out=[];
+  for(let y=bb[1]+ud/2+1;y<=bb[3]-ud/2-1;y+=ud+gap) for(let x=bb[0]+uw/2+1;x<=bb[2]-uw/2-1;x+=uw+gap){
+    const cs=[[x-uw/2,y-ud/2],[x+uw/2,y-ud/2],[x+uw/2,y+ud/2],[x-uw/2,y+ud/2]]; if(cs.every(([a,b])=>BD.pip(a,b,state.foot))) out.push({x,y,uw,ud}); }
+  return out; }
+function plantOnRoof(m2,col,name){ // generic heat-rejection units 12 × 2.4 m (dry-cooler size class), count from the register's m² per MW
+  state.used=[]; if(!state.foot||m2<=0) return; let s=roofSlots(12,2.4,2.0), w=12;
+  if(!s.length){ s=roofSlots(6,2.4,1.5); w=6; }
+  const n=Math.max(1,Math.ceil(m2/(w*2.4))); const put=s.slice(0,n);
+  for(const u of put) R.ov.add(box(u.x,u.y,u.uw,u.ud,2.2,state.roof,col,0.9));
+  state.used=put; const short=n-put.length;
+  if(put.length){ const c=put[Math.floor(put.length/2)]; label(`${name||'cooling units'} ×${put.length}${short>0?` (+${short} do not fit on the roof)`:''}`,V(c.x,c.y,state.roof+5),'#'+col.toString(16).padStart(6,'0')); }
+  else label(`${name||'cooling units'}: none fit on the roof (${n} needed) — yard or another roof`,V(state.c[0],state.c[1],state.roof+5),'#'+col.toString(16).padStart(6,'0'));
 }
 function marker(x,y,col,h){ R.ov.add(line([V(x,y,0),V(x,y,h||14)],col)); const s=new three.Mesh(new three.SphereGeometry(1.6,8,6),new three.MeshBasicMaterial({color:col})); s.position.copy(V(x,y,h||14)); R.ov.add(s); }
 function heat(d){
   const roofC=state.foot?BD.centroid(state.foot):state.c, src=V(roofC[0],roofC[1],state.roof+3);
-  plantOnRoof(d.plantRecover||0,C.heat);
+  plantOnRoof(d.plantRecover||0,C.heat,'dry coolers + heat pumps');
   for(const [rad] of [[1000],[1200],[1500]]) R.ov.add(line(ringPts(state.c[0],state.c[1],rad,0.5,160),C.heat,true,0.35));
   (d.nets||[]).forEach(n=>{ const p=[]; for(let i=0;i<n.r.length;i+=2) p.push(V(n.r[i],n.r[i+1],0.6)); R.ov.add(line(p,C.heat,true,0.9)); const c=BD.centroid(n.r); label(n.n+' (traced)',V(c[0],c[1],2),'#d1a35e'); });
   const COL={housing:C.city,school:C.power,care:C.senses,hospital:C.senses,rec:C.water,pool:C.water,arena:C.mat};
@@ -104,10 +115,11 @@ function heat(d){
   label('heat out',src.clone().add(new three.Vector3(0,6,0)),'#d1a35e');
 }
 function energy(d){
-  plantOnRoof(d.plant||0,C.power);
-  // solar on the rest of the roof (flat panels, faint)
-  if(state.foot&&d.pvKwp){ const bb=bbox(state.foot); const w=(bb[2]-bb[0])*0.6, h=(bb[3]-bb[1])*0.3; const cx=(bb[0]+bb[2])/2, cy=bb[1]+(bb[3]-bb[1])*0.25;
-    for(let i=0;i<6;i++) R.ov.add(box(cx,cy-h/2+i*h/6,w,h/8,0.3,state.roof+0.6,C.power,0.7)); label(`solar ≈ ${Math.round(d.pvKwp)} kWp`,V(cx,cy,state.roof+4),'#a7b4d6'); }
+  plantOnRoof(d.plant||0,C.power,'dry coolers');
+  // solar panels on the roof that the plant leaves free (rows 2 m deep with 1.5 m gaps)
+  if(state.foot&&d.pvKwp){ const used=state.used||[]; const free=roofSlots(6,2,1.5).filter(p=>!used.some(u=>Math.abs(u.x-p.x)<(u.uw+p.uw)/2+1&&Math.abs(u.y-p.y)<(u.ud+p.ud)/2+1));
+    for(const p of free.slice(0,400)) R.ov.add(box(p.x,p.y,p.uw,p.ud,0.25,state.roof+0.4,C.power,0.55));
+    if(free.length){ const c=free[Math.floor(free.length/2)]; label(`solar panels ≈ ${Math.round(d.pvKwp)} kWp`,V(c.x,c.y,state.roof+3),'#a7b4d6'); } }
   // service drop (generic, not a real entry point) and battery container at grade
   if(state.foot){ const bb=bbox(state.foot); const x=bb[0]-6, y=(bb[1]+bb[3])/2;
     R.ov.add(line([V(x,y,0),V(x,y,30)],C.power)); label('utility service (generic)',V(x,y,32),'#a7b4d6');
@@ -115,7 +127,7 @@ function energy(d){
   label(d.grid||'',V(state.c[0],state.c[1],state.roof+22),'#e9e6e1');
 }
 function water(d){
-  plantOnRoof(d.plant||0,C.water);
+  plantOnRoof(d.plant||0,C.water,d.towers?'cooling towers':'dry coolers');
   if(!state.foot) return; const bb=bbox(state.foot), cx=(bb[0]+bb[2])/2, cy=(bb[1]+bb[3])/2;
   for(let i=0;i<5;i++){ const x=bb[0]+(bb[2]-bb[0])*(0.15+0.17*i); R.ov.add(line([V(x,bb[1]-1,state.roof+12),V(x,bb[1]-1,state.roof+1)],C.water,true,0.7)); }
   label(`rain on the roof ≈ ${Math.round(d.rain)} m³/yr`,V(cx,bb[1],state.roof+16),'#7fb2c4');
@@ -134,7 +146,7 @@ function materials(d){
   R.ov.add(box(bb[2]+10,bb[1]-6,10,2.5,3,0,C.mat,0.9)); label('loading, e-waste out',V(bb[2]+10,bb[1]-6,5),'#9fb38a');
 }
 function social(d){
-  plantOnRoof(d.plant||0,C.senses);
+  plantOnRoof(d.plant||0,C.senses,'cooling units (sound sources)');
   if(state.foot){ const bb=bbox(state.foot); const c=BD.centroid(state.foot);
     // standoff band as experienced at the edge (generic distance from the register, not a security plan)
     const r10=Math.hypot(bb[2]-bb[0],bb[3]-bb[1])/2+10; R.ov.add(line(ringPts(c[0],c[1],r10,0.4,96),C.senses,true,0.6)); label('10 m standoff (Ontario standard, transferred)',V(c[0]+r10*0.7,c[1]+r10*0.7,2),'#b9a3cf'); }
@@ -146,11 +158,30 @@ function social(d){
   for(const [rad] of [[50],[100],[200]]) R.ov.add(line(ringPts(state.c[0],state.c[1],rad,0.5,120),C.senses,true,0.3));
 }
 const FN={heat,energy,water,materials,social};
-async function show(tab,data){
+/* three options side by side: one camera, three scenes sharing the site (J.B., 15 Oct) */
+async function showOptions(opts,data){
+  await ensure(); if(!R) setup(); wrap.style.display=''; const site=data.site;
+  if(!state.site||state.key!==BD.S.sel.id+'|'+JSON.stringify(BD.S.answers)){ build(site); state.key=BD.S.sel.id+'|'+JSON.stringify(BD.S.answers); }
+  clearOverlay(); R.scene.remove(R.ov);
+  const base=R.scene.children.slice();
+  if(R.cap) R.cap.forEach(c=>c.remove()); R.cap=[];
+  R.multi=opts.map((o,i)=>{ const s=new three.Scene(); base.forEach(ch=>s.add(ch.clone())); R.ov=new three.Group(); s.add(R.ov);
+    plantOnRoof(o.plant,o.recover?C.heat:0x9d9a94,''); for(const l of lab) l.d.remove(); lab.splice(0);
+    const roofC=state.foot?BD.centroid(state.foot):state.c, src=V(roofC[0],roofC[1],state.roof+3);
+    if(!o.recover){ for(const u of (state.used||[]).slice(0,8)){ const a=V(u.x,u.y,state.roof+3); R.ov.add(line(arc(a,a.clone().add(new three.Vector3(0,18,0)),3,8),0x9d9a94,true,0.9)); } }
+    else if(o.to==='net'&&data.net){ const n=data.net, p=[]; for(let k=0;k<n.r.length;k+=2) p.push(V(n.r[k],n.r[k+1],0.6)); R.ov.add(line(p,C.heat,true,0.9)); const c=BD.centroid(n.r); R.ov.add(line(arc(src,V(c[0],c[1],2),80),C.heat,false,0.9)); }
+    else (data.near||[]).slice(0,o.n||8).forEach(p=>{ R.ov.add(line(arc(src,V(p.x,p.y,12),Math.min(120,p.dist*0.12)),C.heat,true,0.85)); marker(p.x,p.y,C.heat,12); });
+    const d=document.createElement('div'); d.style.cssText=`position:absolute;top:44px;left:calc(${i*33.333}% + 12px);width:calc(33.333% - 24px);font:300 12px/1.4 "Open Sans",system-ui,sans-serif;color:#e9e6e1;pointer-events:none`;
+    d.innerHTML=`<div style="font-size:11px;letter-spacing:.12em;color:#9d9a94;font-weight:600">${o.id.toUpperCase()}</div><div>${o.name}</div><div style="color:#9d9a94">${o.caption}</div>`; wrap.appendChild(d); R.cap.push(d);
+    return s; });
+  for(let i=1;i<3;i++){ const d=document.createElement('div'); d.style.cssText=`position:absolute;top:0;bottom:0;left:${i*33.333}%;border-left:1px solid #30343a;pointer-events:none`; wrap.appendChild(d); R.cap.push(d); }
+  { const sp=state.span; R.cam.position.set(sp*4.6,sp*4.2+state.roof*1.4,sp*5.4); R.ctl.target.set(0,state.roof*0.4,0); } document.getElementById('v3note').textContent='Same site, same view: drag to orbit all three';
+}
+async function show(tab,data){ R&&(R.multi=null); if(R&&R.cap){ R.cap.forEach(c=>c.remove()); R.cap=[]; }
   await ensure(); if(!R) setup(); wrap.style.display='';
   const site=data.site; if(!state.site||state.key!==BD.S.sel.id+'|'+JSON.stringify(BD.S.answers)){ build(site); state.key=BD.S.sel.id+'|'+JSON.stringify(BD.S.answers); }
   clearOverlay(); (FN[tab]||(()=>{}))(data);
 }
-function hide(){ if(wrap) wrap.style.display='none'; }
-BD.scene3d={show,hide,ensure};
+function hide(){ if(wrap) wrap.style.display='none'; if(R){ R.multi=null; if(R.cap){ R.cap.forEach(c=>c.remove()); R.cap=[]; } } }
+BD.scene3d={show,showOptions,hide,ensure};
 })();
