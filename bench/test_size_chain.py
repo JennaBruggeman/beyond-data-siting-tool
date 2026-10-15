@@ -41,6 +41,7 @@ ws = S['white_share']; check(ws['min'] <= share[0] and share[1] <= ws['max'], 'h
 b = S['gross_per_it_mw_benchmark']; check((gpm[0], gpm[1]) == (b['min'], b['max']), 'whole-building check line', f"tool {gpm[0]:.0f}–{gpm[1]:.0f}; benchmarks {b['min']}–{b['max']} m²/MW (n={b['n']}, median {b['median']})")
 implied = (m2[0] / share[1], m2[1] / share[0])
 check(implied[0] <= b['min'] and b['max'] <= implied[1], 'chain covers all benchmarks', f"tool implies {implied[0]:.0f}–{implied[1]:.0f} m² of building per MW; benchmarks {b['min']}–{b['max']}")
+hd = arr('m2PerMWHigh'); check(w['min'] <= hd[0] and hd[1] <= m2[0], 'high-density option', f"tool {hd[0]:.0f}–{hd[1]:.0f} m²/MW; densest built halls {w['min']}; typical starts at {m2[0]:.0f}")
 ff = [x['m'] for x in S['floor_to_floor'] if x['m'] < 8]  # Talavera's 8.6 m is a ground floor, not a hall floor
 check(min(ff) <= up[0] and up[1] <= max(ff), 'data-hall floor height', f"tool {up[0]}–{up[1]} m; built and proposed hall floors {min(ff)}–{max(ff)} m (n={len(ff)})")
 print('\n3. For information (not pass/fail): small sites and conversions, any tier with a stated MW')

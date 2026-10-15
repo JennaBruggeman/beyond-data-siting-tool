@@ -140,3 +140,10 @@ Running record of decisions J.B. has made about the tool's logic, in the order m
 - Re-checked by Claude: 3060 Raymond (the 6 MW "critical load" equals the stated maximum facility use, so IT is unclear → reference); Vantage LHR12 (30 MW "data centre capacity", not stated as IT → reference).
 - Small sites and conversions (information only, test section 3): 10 of 15 inside the tool's range; denser than the tool: eStruxture VAN-1 (387 m²/MW, operator), 111 E 5th (291, "up to", applicant), 3060 Raymond (378, IT unclear); less dense: 365 Main (2,452, aggregator copy), eStruxture MTL-3 (1,858, operator conflict). Small sites scatter more widely than large ones; the two Vancouver cases sit above the tool's top.
 - Tool wording no longer names a benchmark count.
+
+## 15 Oct 2026 — v12: high-density option, small-site note, Precedents tab
+
+- Defaults kept: 290–630 m² of hall per MW, 48–72% hall share (they match built and approved buildings; benchmarks sit ≈40% up the range).
+- New "Hall layout" switch: High-density, liquid-cooled uses 250–290 m²/MW (NEXTDC S3, QScale ≈250, operator claims; 290 = VAN-1). Tested against the catalogue.
+- Small-site note (red draft) when floor area < 3,000 m²: small buildings can exceed the range because most of the floor becomes hall (VAN-1 ≈75%). VAN-1 exceeded the range through hall share, not hall density.
+- Precedents tab (first tab): log-log chart of real buildings with this site's range as a bar, the tool's band and the benchmark lines; the eight closest-in-size buildings with source links; catalogue summary. Data: tool/precedents.json, written by bench/make_benchmarks.py.

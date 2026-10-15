@@ -16,6 +16,7 @@ const R={
  ftf:{ground:6.0, up:[5.5,6.0]},     // ground: zoning minimum (I-2/I-3) and Burlington; data-hall floors 5.5–6.0 m: Burlington ≈6.0, HK TPB A/KC/510B 5.5, A/KC/480 6.0 (15 Oct check; zoning's 4.0 m is a minimum, not a hall height)
  hallShare:[0.48,0.72],               // hall_area: Burlington plan set (internally inconsistent: 48% or 72%); single-storey and operator cases 51–87% not used for multi-storey
  m2PerMW:[290,630],                   // built Canadian halls, operator claims: eStruxture VAN-1 ≈290, Hut 8 Vault ≈557, Qu EDM1 ≈584, Cologix VAN2 ≈619, VAN5 ≈627 (sources/16 §2.7)
+ m2PerMWHigh:[250,290],               // high-density / liquid-cooled option: NEXTDC S3 250 and QScale Q01 255 (operator claims, AI-ready halls); 290 = densest built Canadian hall (VAN-1)
  m2PerMWModel:[186,2325],             // LBNL prototypes (Sun et al. 2021), shown as outer bounds only
  grossPerMW:[505,1109],               // check: whole building per MW IT — min–max of the 10 benchmark buildings in bench/benchmarks.json (public or filed records; test_size_chain.py keeps this in sync)
  cases:{van:[{mw:1.6,n:'Cologix VAN5'},{mw:2.4,n:'eStruxture VAN-1'},{mw:40,n:'111 E 5th (proposed)'}], edm:[{mw:2.5,n:'Qu EDM1'}]}, // operator or applicant figures
@@ -96,7 +97,7 @@ function siteFacts(){
       f.how=A.extent==='part'?`one floor ≈ the largest footprint on the lot (${fmt(f.plate)} m²)`:`footprint ${fmt(f.foot)} m² × about ${st} storeys (height ${f.hmax.toFixed(1)} m ÷ 4 m — an assumption)`; f.hallGross=f.gross.slice(); }
   }
   if(!f.hallS){ f.hallS=[f.hallGross[0]*R.hallShare[0],f.hallGross[1]*R.hallShare[1]]; }
-  const m2MW=R.m2PerMW, toMW=h=>[Math.min(40,h[0]/m2MW[1]),Math.min(40,h[1]/m2MW[0])];
+  const m2MW=A.density==='high'?R.m2PerMWHigh:R.m2PerMW; f.density=A.density==='high'?'high':'typical'; const toMW=h=>[Math.min(40,h[0]/m2MW[1]),Math.min(40,h[1]/m2MW[0])];
   f.mwS=toMW(f.hallS); f.mwL=f.hallL?toMW(f.hallL):null;
   f.hall=f.hallL?[f.hallS[0],Math.max(f.hallS[1],f.hallL[1])]:f.hallS.slice();
   f.mw=[f.mwS[0],f.mwL?Math.max(f.mwS[1],f.mwL[1]):f.mwS[1]]; f.m2MW=m2MW;
@@ -112,7 +113,7 @@ const n0=v=>Math.round(v).toLocaleString('en-CA'), n1=v=>v<10?(+v).toFixed(2):v<
 const mathBox=(lines,note)=>`<details class="math"><summary>Show the math</summary><ol>${lines.map(l=>`<li>${l}</li>`).join('')}</ol>${note?`<div class="src">${note}</div>`:''}</details>`;
 function mathFits(f){
   const A=BD.S.answers, L=[];
-  const hs=R.hallShare, m=R.m2PerMW;
+  const hs=R.hallShare, m=f.m2MW;
   if(A.built==='new'&&f.G){
     const e=f.envU, fsr=e.fsr[0]===e.fsr[1]?e.fsr[0]:e.fsr[0]+'–'+e.fsr[1];
     L.push(`Lot area: <b>${n0(f.lot)} m²</b> (City parcel data).`);
@@ -130,7 +131,7 @@ function mathFits(f){
   }
   L.push(`Servers: the smallest hall laid out loosely, ${n0(f.hall[0])} ÷ ${m[1]} m² per MW = <b>${n1(f.mw[0])} MW</b>; the largest hall laid out densely, ${n0(f.hall[1])} ÷ ${m[0]} = <b>${n1(f.mw[1])} MW</b>${f.mw[1]>=40?' (capped at 40 MW, the tool\'s range)':''}.`);
   if(f.mwCheck) L.push(`Check: ${n0(f.gross[1])} ÷ ${n0(R.grossPerMW[1])} = ${n1(f.gross[1]/R.grossPerMW[1])} MW; ${n0(f.gross[1])} ÷ ${n0(R.grossPerMW[0])} = ${n1(f.gross[1]/R.grossPerMW[0])} MW${f.gross[0]!==f.gross[1]?' (shown for the larger floor area)':''}.`);
-  return mathBox(L,`Hall share ${hs[0]}–${hs[1]}: Burlington plan set. ${m[0]}–${m[1]} m² of hall per MW: five built Canadian halls (operator claims). ${n0(R.grossPerMW[0])}–${n0(R.grossPerMW[1])} m² of building per MW: benchmark buildings in the precedent catalogue.`);
+  return mathBox(L,`Hall share ${hs[0]}–${hs[1]}: Burlington plan set. ${m[0]}–${m[1]} m² of hall per MW: ${f.density==='high'?'high-density halls (NEXTDC S3, QScale; operator claims) to the densest built Canadian hall':'five built Canadian halls (operator claims)'}. ${n0(R.grossPerMW[0])}–${n0(R.grossPerMW[1])} m² of building per MW: benchmark buildings in the precedent catalogue.`);
 }
 function mathNeeds(mw,fac,f){
   const pl=plantPerMW(false), plR=plantPerMW(true), p=R.plant;
@@ -171,7 +172,10 @@ function fitsView(){
   <dt>Share of floor</dt><dd>48–72% (Burlington plan set; its own figures disagree)</dd></dl>${src('hall')}
   <h3>Largest data centre that fits</h3><p style="font-size:22px;font-weight:300;margin:4px 0">${rng(f.mw[0],f.mw[1],'MW')} <span class="sub">of servers</span></p>
   ${f.mwL?`<p class="sub">${rng(f.mwS[0],f.mwS[1],'MW')} on the strict reading; ${rng(f.mwL[0],f.mwL[1],'MW')} if support may sit on the ground floor.</p>`:''}
-  <p class="sub">${fmt(f.m2MW[0])}–${fmt(f.m2MW[1])} m² of hall per MW, as five built Canadian halls report (operator claims, mostly 5–10 kW per rack). Denser liquid-cooled halls fit more; LBNL's models span 186–2,325.</p>
+  <div class="q"><div class="lab">Hall layout</div><div class="seg" id="dens" role="group" aria-label="Hall layout"><button data-v="typical" aria-pressed="${f.density==='typical'}">Typical, air-cooled</button><button data-v="high" aria-pressed="${f.density==='high'}">High-density, liquid-cooled</button></div></div>
+  <p class="sub">${f.density==='high'?`${fmt(f.m2MW[0])}–${fmt(f.m2MW[1])} m² of hall per MW: two AI-ready halls report about 250 (NEXTDC S3, QScale; operator claims), and the densest built Canadian hall is 290. <span class="draft">Dense racks usually need liquid cooling to the chip, which also changes the heat: it leaves warmer and more of it can be captured (see Heat).</span>`:`${fmt(f.m2MW[0])}–${fmt(f.m2MW[1])} m² of hall per MW, as five built Canadian halls report (operator claims, mostly 5–10 kW per rack). LBNL's models span 186–2,325.`}</p>
+  ${f.gross[1]<3000?`<p class="sub draft">Small buildings can hold more than this range. With little room for anything else, most of the floor becomes hall: eStruxture VAN-1 puts about 75% of its 929 m² into hall and holds 2.4 MW (operator claim).</p>`:''}
+  <p class="sub"><a href="#" id="toPrec">Compare with real buildings →</a></p>
   ${f.mwCheck?`<p class="sub">Check against whole buildings: the benchmark buildings in the precedent catalogue (built or approved, public records) use ${fmt(R.grossPerMW[0])}–${fmt(R.grossPerMW[1])} m² of building per MW of IT. This floor area at those rates gives ${rng(f.mwCheck[0],f.mwCheck[1],'MW')}.</p>`:''}${src('size')}${mathFits(f)}
   <div class="q"><div class="lab">Size to test: <b id="mwv">${mw}</b> MW of servers · <span id="mwn" class="sub">${esc(near(mw))}${over(mw)}</span></div>
    <div class="mwtrack"><div class="band" style="left:${pos01(f.mw[0])}%;width:${Math.max(1,pos01(f.mw[1])-pos01(f.mw[0]))}%" title="what fits here"></div>
@@ -194,6 +198,8 @@ function fitsView(){
   $('#mw').oninput=e=>{ const v=ST[+e.target.value]; $('#mwv').textContent=v; $('#mwn').textContent=near(v)+over(v); e.target.setAttribute('aria-valuetext',v+' MW'); };
   $('#mw').onchange=e=>{ A.mw=ST[+e.target.value]; fitsView(); };
   $('#toRecv').onclick=()=>tabView('heat');
+  $('#toPrec').onclick=e=>{ e.preventDefault(); tabView('prec'); };
+  document.querySelectorAll('#dens button').forEach(b=>b.onclick=()=>{ A.density=b.dataset.v; A.mw=null; fitsView(); });
   BD.draw();
 }
 
@@ -318,10 +324,10 @@ BD.legendRecv=function(){ return `<div style="margin-top:6px"><i style="border:1
  <div><i style="background:#b9a3cf;width:8px;height:8px;border-radius:50%"></i>Care, hospital <i style="background:#7fb2c4;width:8px;height:8px;border-radius:50%;margin-left:6px"></i>Recreation, pool <i style="background:#9fb38a;width:8px;height:8px;border-radius:50%;margin-left:6px"></i>Arena</div>`; };
 
 /* ---------- the exchange tabs (J.B., 15 Oct): heat · energy · water · materials · social · options; each with a 3D view ---------- */
-const TABS=[['heat','Heat'],['energy','Energy'],['water','Water'],['materials','Materials'],['social','People'],['opts','Options']];
-function tabBar(cur){ BD.S.tab=cur; return `<button class="x" id="back">← What fits</button><div class="kind">What it exchanges · ${BD.S.answers.mw||''} MW of servers</div><div class="tabs" role="tablist">${TABS.map(([k,l])=>`<button role="tab" data-tab="${k}" aria-selected="${k===cur}">${l}</button>`).join('')}</div>`; }
+const TABS=[['prec','Precedents'],['heat','Heat'],['energy','Energy'],['water','Water'],['materials','Materials'],['social','People'],['opts','Options']];
+function tabBar(cur){ BD.S.tab=cur; return `<button class="x" id="back">← What fits</button><div class="kind">${cur==='prec'?'Real buildings':'What it exchanges'} · ${BD.S.answers.mw||''} MW of servers</div><div class="tabs" role="tablist">${TABS.map(([k,l])=>`<button role="tab" data-tab="${k}" aria-selected="${k===cur}">${l}</button>`).join('')}</div>`; }
 function wireTabs(){ document.querySelectorAll('#side .tabs button').forEach(b=>b.onclick=()=>tabView(b.dataset.tab)); $('#back').onclick=()=>{ document.body.classList.remove('wide'); BD.scene3d&&BD.scene3d.hide(); fitsView(); }; }
-function tabView(k){ document.body.classList.remove('wide'); BD.S.view2='tab'; ({heat:recvView,energy:energyView,water:waterView,materials:materialsView,social:socialView,opts:optionsView}[k])(); }
+function tabView(k){ document.body.classList.remove('wide'); BD.S.view2='tab'; ({heat:recvView,energy:energyView,water:waterView,materials:materialsView,social:socialView,opts:optionsView,prec:precView}[k])(); }
 function show3d(tab,data){ if(!BD.scene3d) return; BD.scene3d.show(tab,data).catch(e=>{ const n=document.getElementById('st'); if(n) n.textContent='3D view could not load: '+e.message; }); }
 function roofArea(f){ const A=BD.S.answers; if(A.built==='new'&&BD.S.sel.ring) return BD.area(BD.S.sel.ring)*0.86*0.86; return f.plate||f.foot||0; }
 const SRC3={
@@ -414,6 +420,44 @@ function socialView(){
   <div class="draftnote">Draft wording (Claude) for J.B. Sound is a screening estimate: manufacturer-rated levels, no barriers, ground or buildings.</div>`;
   $('#side').innerHTML=h; wireTabs(); $('#notes').oninput=e=>{ try{ localStorage.setItem(key,e.target.value); }catch(err){} }; BD.draw();
   show3d('social',{site:f,plant:plantPerMW(false)[1]*mw,noise:{lw,limit:lim}});
+}
+
+/* ---------- precedents: real buildings against this site's range ---------- */
+let PREC=null;
+async function precView(){
+  const f=siteFacts(), A=BD.S.answers;
+  BD.scene3d&&BD.scene3d.hide(); document.body.classList.add('wide');
+  $('#side').innerHTML=tabBar('prec')+'<p class="sub">Loading real buildings…</p>'; wireTabs();
+  if(!PREC){ try{ PREC=await BD.getJSON('precedents.json'); }catch(e){ $('#side').innerHTML=tabBar('prec')+'<p class="sub">Could not load the precedents.</p>'; wireTabs(); return; } }
+  const P=PREC, S=P.summary, gpm=S.gross_per_it_mw_benchmark, G=f.gross[1]||f.gross[0]||0;
+  const pts=P.sites.filter(s=>s.mw&&s.area&&s.tier!=='context'&&s.mw_basis!=='total');
+  const W=640,H=380,ml=50,mr=12,mt=12,mb=42, x0=Math.log10(300),x1=Math.log10(250000),y0=Math.log10(0.2),y1=Math.log10(400);
+  const X=v=>ml+(Math.log10(v)-x0)/(x1-x0)*(W-ml-mr), Y=v=>H-mb-(Math.log10(v)-y0)/(y1-y0)*(H-mt-mb);
+  const cy=v=>Math.max(mt,Math.min(H-mb,v));
+  const m=f.m2MW, hs=R.hallShare, chain=[m[0]/hs[1],m[1]/hs[0]];
+  const band=(lo,hi)=>`M${X(300)},${cy(Y(300/lo))} L${X(250000)},${cy(Y(250000/lo))} L${X(250000)},${cy(Y(250000/hi))} L${X(300)},${cy(Y(300/hi))} Z`;
+  const ln=k=>`M${X(300)},${cy(Y(300/k))} L${X(250000)},${cy(Y(250000/k))}`;
+  let g=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Floor area against IT load for real data centres, with this site's range"><defs><clipPath id="pc"><rect x="${ml}" y="${mt}" width="${W-ml-mr}" height="${H-mt-mb}"/></clipPath></defs>`;
+  [1000,10000,100000].forEach(v=>{ g+=`<line x1="${X(v)}" x2="${X(v)}" y1="${mt}" y2="${H-mb}" stroke="var(--line)"/><text x="${X(v)}" y="${H-mb+15}" fill="var(--faint)" font-size="11" text-anchor="middle">${v.toLocaleString('en-CA')}</text>`; });
+  [1,10,100].forEach(v=>{ g+=`<line x1="${ml}" x2="${W-mr}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${ml-6}" y="${Y(v)+4}" fill="var(--faint)" font-size="11" text-anchor="end">${v}</text>`; });
+  g+=`<text x="${(ml+W-mr)/2}" y="${H-6}" fill="var(--muted)" font-size="11" text-anchor="middle">building floor area, m² (log)</text><text x="12" y="${(mt+H-mb)/2}" fill="var(--muted)" font-size="11" text-anchor="middle" transform="rotate(-90 12 ${(mt+H-mb)/2})">MW of servers (log)</text>`;
+  g+=`<g clip-path="url(#pc)"><path d="${band(chain[0],chain[1])}" fill="var(--fg)" opacity=".07"/><path d="${ln(gpm.min)}" stroke="var(--muted)" stroke-dasharray="4 4" fill="none"/><path d="${ln(gpm.max)}" stroke="var(--muted)" stroke-dasharray="4 4" fill="none"/>`;
+  pts.forEach(p=>{ const b=p.tier==='benchmark'; g+=`<circle cx="${X(p.area)}" cy="${Y(p.mw)}" r="${b?4.5:4}" fill="${b?'var(--accent)':'none'}" stroke="${b?'var(--accent)':'var(--muted)'}" stroke-width="1.2"><title>${esc(p.name)}: ${f1(p.mw)} MW${p.mw_basis==='IT'?' IT':' (not stated as IT)'}, ${fmt(p.area)} m²</title></circle>`; });
+  if(G>0&&f.mw[1]>0){ const x=X(Math.max(300,G)); g+=`<line x1="${x}" x2="${x}" y1="${Y(Math.max(0.2,f.mw[0]))}" y2="${Y(Math.max(0.2,f.mw[1]))}" stroke="var(--fg)" stroke-width="5" stroke-linecap="round" opacity=".9"/><text x="${x+8}" y="${Y(Math.max(0.2,f.mw[1]))+4}" fill="var(--fg)" font-size="11">this site</text>`; }
+  g+='</g></svg>';
+  const near=P.sites.filter(s=>s.mw&&s.area&&s.tier!=='context').map(s=>({s,d:Math.abs(Math.log(s.area/Math.max(G,1)))})).sort((a,b)=>a.d-b.d).slice(0,8).map(x=>x.s);
+  const row=s=>`<tr><td>${esc(s.name)}<div class="src">${esc(s.city)}, ${esc(s.country)}${s.conversion?' · conversion':''} · ${s.tier}</div></td><td class="r">${f1(s.mw)}${s.mw_basis==='IT'?'':'<div class="src">not stated as IT</div>'}</td><td class="r">${fmt(s.area)}</td><td class="r">${fmt(Math.round(s.area/s.mw))}</td><td>${s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener">source</a>`:''}<div class="src">${esc(s.evidence||'')}</div></td></tr>`;
+  let h=tabBar('prec')+`<h3>Real buildings against this site</h3>
+  <p class="sub draft">Each dot is a real data centre with a published floor area and power. The shaded band is every result the tool's size chain can give; the bar is this site's range (${rng(f.mw[0],f.mw[1],'MW')} on ${rng(f.gross[0],f.gross[1],'m²')}). Filled dots are public or filed records; open dots are operator claims or figures in doubt.</p>
+  <div class="chart" style="overflow-x:auto">${g}</div>
+  <div class="legend2"><span><i style="background:var(--accent);border-radius:50%"></i>Benchmark</span><span><i style="border:1px solid var(--muted);border-radius:50%"></i>Reference</span><span><i style="background:var(--fg);opacity:.15"></i>Tool's range</span><span><i style="border-top:1px dashed var(--muted);height:0"></i>${gpm.min}–${fmt(gpm.max)} m² of building per MW (benchmarks)</span></div>
+  <h3>Closest in size</h3><div class="tt"><table><thead><tr><th>Building</th><th class="r">MW</th><th class="r">Floor m²</th><th class="r">m² per MW</th><th></th></tr></thead><tbody>${near.map(row).join('')}</tbody></table></div>
+  <dl><dt>Benchmarks</dt><dd>${gpm.n} buildings, ${gpm.min}–${fmt(gpm.max)} m² of building per MW of IT (typical ${gpm.median})</dd>
+  <dt>Built halls</dt><dd>${S.white_per_it_mw.min}–${S.white_per_it_mw.max} m² of hall per MW (n=${S.white_per_it_mw.n}, operator figures)</dd>
+  <dt>Hall share</dt><dd>${Math.round(S.white_share.min*100)}–${Math.round(S.white_share.max*100)}% of floor; middle half ${Math.round(S.white_share.p25*100)}–${Math.round(S.white_share.p75*100)}% (n=${S.white_share.n})</dd></dl>
+  <div class="src">Precedent catalogue, ${P.sites.length} sites, gathered 15 Oct 2026; every figure with its quote and source in the full catalogue: <a href="https://claude.ai/artifact/FiJybvptz72wxZ6GPQjdC7" target="_blank" rel="noopener">open</a>. Operator figures are claims.</div>
+  <div class="draftnote">Draft wording (Claude) for J.B.</div>`;
+  $('#side').innerHTML=h; wireTabs();
 }
 BD.fitsView=fitsView; BD.recvView=recvView; BD.optionsView=optionsView; BD.tabView=tabView;
 })();

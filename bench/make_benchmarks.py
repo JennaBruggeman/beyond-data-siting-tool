@@ -163,3 +163,19 @@ json.dump(out, open(os.path.join(H, 'benchmarks.json'), 'w', encoding='utf-8'), 
 print(json.dumps(out['summary'], indent=1))
 from collections import Counter
 print(Counter(s['tier'] for s in sites), 'facts', sum(len(s['facts']) for s in sites))
+
+# slim copy for the tool's Precedents tab: headline pair (or first stated figures), tier, source link
+def firstf(s, flds):
+    for x in s['facts']:
+        if x['field'] in flds and isinstance(x.get('value_m2', x['value']), (int, float)): return x
+slim = []
+for s in sites:
+    h = s.get('headline'); mwf = firstf(s, ('it_mw',)); af = firstf(s, ('gfa_m2',))
+    if h: mw, basis, area = h['mw'], h['mw_basis'], h['area_m2']
+    else:
+        mw = mwf['value'] if mwf else None; area = af.get('value_m2', af['value']) if af else None
+        basis = 'IT' if mwf and 'IT' in (mwf.get('measures') or '') and 'not' not in (mwf.get('measures') or '').lower() else 'unclear'
+    src = mwf or af or (s['facts'][0] if s['facts'] else {})
+    slim.append(dict(name=s['name'], city=s['city'], country=s['country'], tier=s['tier'], status=s.get('status'), conversion=bool(s.get('conversion')),
+                     mw=mw, mw_basis=basis, area=area, url=src.get('url'), evidence=src.get('evidence')))
+json.dump(dict(summary=out['summary'], sites=slim), open(os.path.join(os.path.dirname(H), 'tool', 'precedents.json'), 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
