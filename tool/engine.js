@@ -13,9 +13,13 @@ const R={
  envVan:{ 'I-2':{fsr:[3,3],h:18.3,hx:'30.5–36.5',ground:true}, 'I-1C':{fsr:[6,6],h:46.5,hx:'50.3',ground:false},
           'I-3':{fsr:[3,3],h:18.3,hx:'30.5',ground:true,w:61}, 'FC-2':{fsr:[1,5],h:22.9,hx:'51.8',ground:true} },
  envEdm:{ IH:{fsr:[2,2],h:30}, IM:{fsr:[2,2],h:18}, BE:{fsr:[1.6,1.6],h:16} },
- ftf:[6.0,4.0],                       // floor-to-floor ground / above, VBBL-zoned I-3 minimums (envelope)
- hallShare:[0.48,0.72],               // hall_area: Burlington calibration, one case
- m2PerRack:[3.7,13.9], kWPerRack:8,   // size_fit: LBNL prototypes; Uptime 2024 survey average (industry)
+ ftf:{ground:6.0, up:[5.5,6.0]},     // ground: zoning minimum (I-2/I-3) and Burlington; data-hall floors 5.5–6.0 m: Burlington ≈6.0, HK TPB A/KC/510B 5.5, A/KC/480 6.0 (15 Oct check; zoning's 4.0 m is a minimum, not a hall height)
+ hallShare:[0.48,0.72],               // hall_area: Burlington plan set (internally inconsistent: 48% or 72%); single-storey and operator cases 51–87% not used for multi-storey
+ m2PerMW:[290,630],                   // built Canadian halls, operator claims: eStruxture VAN-1 ≈290, Hut 8 Vault ≈557, Qu EDM1 ≈584, Cologix VAN2 ≈619, VAN5 ≈627 (sources/16 §2.7)
+ m2PerMWModel:[186,2325],             // LBNL prototypes (Sun et al. 2021), shown as outer bounds only
+ grossPerMW:[291,1580],               // check: whole building per MW — 111 E 5th ≤291 (council), Ark UP4 550 (committee), Cologix VAN4 ≈1,580 (operator)
+ cases:{van:[{mw:1.6,n:'Cologix VAN5'},{mw:2.4,n:'eStruxture VAN-1'},{mw:40,n:'111 E 5th (proposed)'}], edm:[{mw:2.5,n:'Qu EDM1'}]}, // operator or applicant figures
+ steps:[0.1,0.2,0.3,0.5,0.75,1,1.5,2,2.5,3,4,5,6,8,10,12,15,20,25,30,40],
  plant:{ups:[2.0,2.4],batt:[2.2,2.2],dry:[24.5,24.5],hp:[3.4,3.4],cdu:[0.6,0.6]}, // component_space, manufacturer claims, equipment only
  pue:[1.4,1.55], lf:0.6, capture:[0.48,0.75], cop:[3.0,3.6],
  fuelLkWh:0.263, fuelHours:12, fuelLimit:{low:20000,first:200000},
@@ -26,8 +30,8 @@ const R={
  jobsM2:464.5,                        // 5,000 ft² per operating job, JLARC 2024 (transferred)
 };
 const SRC2={
- env:'formula register: envelope (zone schedules; sources 17, 18)', hall:'register: hall_area (one calibration case, confidence 50)',
- size:'register: size_fit (LBNL prototypes 3.7–13.9 m² per rack; Uptime 2024 average 8 kW per rack, industry survey)',
+ env:'formula register: envelope (zone schedules; sources 17, 18)', hall:'register: hall_area (one calibration case, confidence 50); ground-floor rule: I-2 s. 2.2.7; floor heights: Burlington plans, HK TPB A/KC/480, A/KC/510B',
+ size:'register: size_fit (built halls: eStruxture VAN-1, Hut 8 Vault, Qu EDM1, Cologix VAN2, VAN5 — operator claims; LBNL prototypes, Sun et al. 2021; whole-building check: 111 E 5th RTS 19744, Ark UP4 committee report, Cologix VAN4 operator)',
  plant:'register: component_space (manufacturer claims, equipment only; clearances and switchgear rooms not sourced)',
  pue:'register: pue (LBNL 2023; Uptime 2025 industry survey)', lf:'register: load_factor (Fan et al. 2007)',
  cap:'register: liquid_capture (LBNL 2014, NREL — direct-to-chip 48–75%; air-cooled: no primary figure)',
@@ -64,21 +68,40 @@ function siteFacts(){
   f.downtown=city==='van'&&/^(DD|CWD|DEOD|BCPED|HA-1|HA-1A|HA-2)$/.test(f.zone);
   // gross floor area available to the data centre
   const env=f.env||(city==='van'?R.envVan['I-2']:R.envEdm.IM); f.envAssumed=!f.env; f.envH=env.h;
-  const floorsNew=1+Math.max(0,Math.floor((env.h-R.ftf[0])/R.ftf[1]));
+  // storeys within the height limit: 6.0 m ground floor, then 6.0 m (fewer) or 5.5 m (more) data-hall floors
+  const nF=[1+Math.max(0,Math.floor((env.h-R.ftf.ground)/R.ftf.up[1])), 1+Math.max(0,Math.floor((env.h-R.ftf.ground)/R.ftf.up[0]))];
+  f.hallS=null; f.hallL=null;
   if(A.built==='new'){
-    const g=[f.lot*env.fsr[0],f.lot*env.fsr[1]]; f.floors=floorsNew;
-    if(A.extent==='part'){ f.gross=[g[0]/floorsNew,g[1]/floorsNew]; f.how=`one floor of a new building: the zone's floor area ÷ ${floorsNew} storeys`; }
-    else { f.gross=g; f.how=`lot ${fmt(f.lot)} m² × floor-space ratio ${env.fsr[0]===env.fsr[1]?env.fsr[0]:env.fsr[0]+'–'+env.fsr[1]}`; }
-    if(env.ground&&A.extent!=='part'){ f.ground=[g[0]/floorsNew,g[1]/floorsNew]; f.hallGross=[g[0]-f.ground[0],g[1]-f.ground[1]]; } else f.hallGross=f.gross.slice();
+    const g=[f.lot*env.fsr[0],f.lot*env.fsr[1]]; f.floors=nF[1]; f.floorsR=nF;
+    // the zone's floor area is reachable only if that many storeys fit: at most the whole lot on every storey
+    const G=[Math.min(g[0],f.lot*nF[0]),Math.min(g[1],f.lot*nF[1])];
+    f.fullCover=g[1]>f.lot*nF[0]*0.999; f.heightCut=g[0]>f.lot*nF[0]*1.001;
+    if(A.extent==='part'){ f.gross=[G[0]/nF[0],G[1]/nF[1]].sort((a,b)=>a-b); f.how=`one floor of a new building: the zone's floor area ÷ ${nF[0]===nF[1]?nF[0]:nF[0]+'–'+nF[1]} storeys`; f.hallGross=f.gross.slice(); }
+    else {
+      f.gross=[Math.min(G[0],G[1]),Math.max(G[0],G[1])]; f.how=`lot ${fmt(f.lot)} m² × floor-space ratio ${env.fsr[0]===env.fsr[1]?env.fsr[0]:env.fsr[0]+'–'+env.fsr[1]}`;
+      if(env.ground){
+        // two readings of "no bulk data storage at grade": strict — the ground floor holds none of the data centre;
+        // lenient — support rooms (electrical, generators, loading) may sit there. Which applies is for the City to confirm.
+        const sc=[0,1].map(i=>({G:G[i],gr:G[i]/nF[i],up:G[i]-G[i]/nF[i]}));
+        f.ground=[Math.min(...sc.map(s=>s.gr)),Math.max(...sc.map(s=>s.gr))];
+        f.hallS=[Math.min(...sc.map(s=>s.up*R.hallShare[0])),Math.max(...sc.map(s=>s.up*R.hallShare[1]))];
+        f.hallL=[Math.min(...sc.map(s=>Math.min(s.up,s.G*R.hallShare[0]))),Math.max(...sc.map(s=>Math.min(s.up,s.G*R.hallShare[1])))];
+        f.hallGross=[Math.min(...sc.map(s=>s.up)),Math.max(...sc.map(s=>s.up))];
+      } else f.hallGross=f.gross.slice();
+    }
   } else {
     if(!blds.length){ f.gross=[0,0]; f.hallGross=[0,0]; f.how='no building recorded on this lot'; }
     else if(city==='edm'&&a[5]){ const g=a[5]; f.gross=A.extent==='part'?[g/Math.max(1,Math.round(f.hmax/4)),g/Math.max(1,Math.round(f.hmax/4))]:[g,g]; f.how=A.extent==='part'?'one floor: assessed floor area ÷ estimated storeys':'assessed floor area (City of Edmonton)'; f.hallGross=f.gross.slice(); }
     else { const st=Math.max(1,Math.floor(f.hmax/4.0)); f.floors=st; f.gross=A.extent==='part'?[f.plate,f.plate]:[f.foot*st,f.foot*st];
       f.how=A.extent==='part'?`one floor ≈ the largest footprint on the lot (${fmt(f.plate)} m²)`:`footprint ${fmt(f.foot)} m² × about ${st} storeys (height ${f.hmax.toFixed(1)} m ÷ 4 m — an assumption)`; f.hallGross=f.gross.slice(); }
   }
-  f.hall=[f.hallGross[0]*R.hallShare[0],f.hallGross[1]*R.hallShare[1]];
-  const m2MW=[R.m2PerRack[0]/R.kWPerRack*1000,R.m2PerRack[1]/R.kWPerRack*1000];
-  f.mw=[Math.min(40,f.hall[0]/m2MW[1]),Math.min(40,f.hall[1]/m2MW[0])]; f.m2MW=m2MW;
+  if(!f.hallS){ f.hallS=[f.hallGross[0]*R.hallShare[0],f.hallGross[1]*R.hallShare[1]]; }
+  const m2MW=R.m2PerMW, toMW=h=>[Math.min(40,h[0]/m2MW[1]),Math.min(40,h[1]/m2MW[0])];
+  f.mwS=toMW(f.hallS); f.mwL=f.hallL?toMW(f.hallL):null;
+  f.hall=f.hallL?[f.hallS[0],Math.max(f.hallS[1],f.hallL[1])]:f.hallS.slice();
+  f.mw=[f.mwS[0],f.mwL?Math.max(f.mwS[1],f.mwL[1]):f.mwS[1]]; f.m2MW=m2MW;
+  // check against whole buildings: total floor area ÷ built building-area-per-MW
+  f.mwCheck=A.built==='new'&&A.extent!=='part'?[f.gross[0]/R.grossPerMW[1],f.gross[1]/R.grossPerMW[0]]:null;
   return f;
 }
 function plantPerMW(recover){ const p=R.plant; let lo=p.ups[0]+p.batt[0]+p.dry[0], hi=p.ups[1]+p.batt[1]+p.dry[1]; if(recover){ lo+=p.hp[0]+p.cdu[0]; hi+=p.hp[1]+p.cdu[1]; } return [lo,hi]; }
@@ -86,7 +109,13 @@ function plantPerMW(recover){ const p=R.plant; let lo=p.ups[0]+p.batt[0]+p.dry[0
 /* ---------- round 2: what fits here ---------- */
 function fitsView(){
   const f=siteFacts(), A=BD.S.answers; BD.S.view2='fits';
-  if(!A.mw||A.mw>f.mw[1]||A.mw<Math.min(0.1,f.mw[0])) A.mw=+Math.max(0.1,Math.sqrt(Math.max(0.01,f.mw[0]*f.mw[1]))).toFixed(1);
+  const ST=R.steps, snap=v=>ST.reduce((b,s)=>Math.abs(Math.log(s/v))<Math.abs(Math.log(b/v))?s:b,ST[0]);
+  // start at the low end of what fits (snapped to a step), not a hidden midpoint
+  if(!A.mw||!ST.includes(A.mw)||A.mwSite!==BD.S.sel.id){ A.mw=snap(Math.max(0.1,f.mw[0])); A.mwSite=BD.S.sel.id; }
+  const pos01=v=>{ v=Math.max(ST[0],Math.min(ST[ST.length-1],v)); let i=0; while(i<ST.length-2&&ST[i+1]<v) i++; return (i+Math.log(v/ST[i])/Math.log(ST[i+1]/ST[i]))/(ST.length-1)*100; };
+  const cases=(R.cases[f.city]||[]);
+  const near=v=>{ const c=cases.slice().sort((a,b)=>Math.abs(Math.log(a.mw/v))-Math.abs(Math.log(b.mw/v)))[0]; if(!c) return ''; const r=v/c.mw; return r>0.85&&r<1.18?`about the size of ${c.n} (${c.mw} MW)`:`${r.toFixed(r<10?1:0)} × ${c.n} (${c.mw} MW)`; };
+  const over=v=>v>f.mw[1]?' — larger than this floor area holds even at the densest built layout':'';
   const mw=A.mw, fac=[mw*R.pue[0],mw*R.pue[1]], pl=plantPerMW(false), plR=plantPerMW(true);
   const fuel=[fac[0]*1000*R.fuelHours*R.fuelLkWh,fac[1]*1000*R.fuelHours*R.fuelLkWh];
   const pos=A.built==='existing'&&A.extent==='part'?A.floor:'';
@@ -97,15 +126,25 @@ function fitsView(){
   let h=`<button class="x" id="back">← Site</button><div class="kind">What fits here</div><h2>${esc(f.city==='van'?BD.S.sel.a[0]:BD.S.sel.a[0])}</h2>
   <p class="draft">How much data centre this ${A.built==='new'?'lot':'building'} could hold, as ranges, before anyone decides what to do with its heat.</p>`;
   if(f.envAssumed&&A.built==='new') h+=`<p class="sub"><span class="pill ${f.status.k}">${esc(f.status.t)}</span> No data-centre envelope in zone ${esc(f.zone)}. <span class="draft">Shown as if rezoned to ${f.city==='van'?'I-2 (floor area 3.0 × lot, 18.3 m)':'IM (floor area 2.0 × lot, 18 m)'}, the nearest common data-centre zone — an assumption for comparison, not a prediction.</span></p>`;
-  h+=`<h3>Floor area</h3><dl><dt>Available</dt><dd>${rng(f.gross[0],f.gross[1],'m²')}</dd><dt>How</dt><dd>${esc(f.how)}</dd>
-  ${f.ground?`<dt>Ground floor</dt><dd>${rng(f.ground[0],f.ground[1],'m²')} kept for other uses — this zone allows no data storage at grade</dd>`:''}
-  ${f.floors&&A.built==='new'?`<dt>Storeys</dt><dd>about ${f.floors} (6.0 m ground, 4.0 m above, within ${f.envH} m)</dd>`:''}</dl>${src('env')}
-  <h3>Room for servers</h3><dl><dt>Data hall</dt><dd>${rng(f.hall[0],f.hall[1],'m²')}</dd><dt>Share of floor</dt><dd>48–72% (one built case)</dd></dl>${src('hall')}
+  const st=f.floorsR?(f.floorsR[0]===f.floorsR[1]?f.floorsR[0]:f.floorsR[0]+'–'+f.floorsR[1]):f.floors;
+  h+=`<h3>Floor area</h3><dl><dt>Available</dt><dd>${f.fullCover?'up to ':''}${rng(f.gross[0],f.gross[1],'m²')}${f.fullCover?` <span class="draft">— only if the building covers the whole lot; yards and setbacks not yet read for this zone</span>`:''}</dd><dt>How</dt><dd>${esc(f.how)}${f.heightCut?' <span class="draft">(the height limit holds fewer storeys than this floor area needs, so the figure is cut to what fits)</span>':''}</dd>
+  ${f.ground?`<dt>Ground floor</dt><dd>${rng(f.ground[0],f.ground[1],'m²')} — this zone allows no data storage at grade</dd>`:''}
+  ${f.floorsR&&A.built==='new'?`<dt>Storeys</dt><dd>about ${st} (6.0 m ground; 5.5–6.0 m for each data-hall floor, as built and proposed halls show; within ${f.envH} m)</dd>`:''}</dl>${src('env')}
+  <h3>Room for servers</h3><dl>${f.hallL?`<dt>Data hall</dt><dd>${rng(f.hallS[0],f.hallS[1],'m²')} <span class="draft">if the ground floor holds none of the data centre</span></dd>
+  <dt></dt><dd>${rng(f.hallL[0],f.hallL[1],'m²')} <span class="draft">if support rooms (electrical, generators, loading) may sit on the ground floor — for the City to confirm</span></dd>`:`<dt>Data hall</dt><dd>${rng(f.hall[0],f.hall[1],'m²')}</dd>`}
+  <dt>Share of floor</dt><dd>48–72% (Burlington plan set; its own figures disagree)</dd></dl>${src('hall')}
   <h3>Largest data centre that fits</h3><p style="font-size:22px;font-weight:300;margin:4px 0">${rng(f.mw[0],f.mw[1],'MW')} <span class="sub">of servers</span></p>
-  <p class="sub">${fmt(f.m2MW[0])}–${fmt(f.m2MW[1])} m² of hall per MW at about 8 kW per rack. Denser liquid-cooled racks would fit more.</p>${src('size')}
-  <div class="q"><div class="lab">Size to test: <b id="mwv">${mw}</b> MW of servers</div><input id="mw" type="range" min="0.1" max="${Math.max(0.2,f.mw[1]).toFixed(1)}" step="0.1" value="${mw}" style="width:100%" aria-label="Size to test, MW"></div>
+  ${f.mwL?`<p class="sub">${rng(f.mwS[0],f.mwS[1],'MW')} on the strict reading; ${rng(f.mwL[0],f.mwL[1],'MW')} if support may sit on the ground floor.</p>`:''}
+  <p class="sub">${fmt(f.m2MW[0])}–${fmt(f.m2MW[1])} m² of hall per MW, as five built Canadian halls report (operator claims, mostly 5–10 kW per rack). Denser liquid-cooled halls fit more; LBNL's models span 186–2,325.</p>
+  ${f.mwCheck?`<p class="sub">Check against whole buildings: this floor area at 291–1,580 m² of building per MW (111 E 5th, Ark UP4, Cologix VAN4) gives ${rng(f.mwCheck[0],f.mwCheck[1],'MW')}.</p>`:''}${src('size')}
+  <div class="q"><div class="lab">Size to test: <b id="mwv">${mw}</b> MW of servers · <span id="mwn" class="sub">${esc(near(mw))}${over(mw)}</span></div>
+   <div class="mwtrack"><div class="band" style="left:${pos01(f.mw[0])}%;width:${Math.max(1,pos01(f.mw[1])-pos01(f.mw[0]))}%" title="what fits here"></div>
+   ${cases.map((c,i)=>`<div class="tick${i%2?' alt':''}" style="left:${pos01(c.mw)}%"><span>${esc(c.n)}</span></div>`).join('')}
+   <input id="mw" type="range" min="0" max="${ST.length-1}" step="1" value="${ST.indexOf(mw)}" aria-label="Size to test, MW" aria-valuetext="${mw} MW"></div>
+   <div class="mwscale">${[0.1,1,10,40].map(v=>`<span style="left:${pos01(v)}%">${v}${v===40?' MW':''}</span>`).join('')}</div>
+   <div class="src">Bar under the track: what fits here. Ticks: built or proposed sites, operator or applicant figures. Steps widen as size grows.</div></div>
   <h3>What that size needs</h3><dl>
-  <dt>Power drawn</dt><dd>${rng(fac[0],fac[1],'MW')} at the meter (servers × PUE 1.4–1.55)</dd>
+  <dt>Average power drawn</dt><dd>${rng(fac[0],fac[1],'MW')} at the meter (servers × PUE 1.4–1.55; PUE is a yearly average, so peak demand is higher)</dd>
   <dt>Plant space</dt><dd>${rng(pl[0]*mw,pl[1]*mw,'m²')} with dry coolers; ${rng(plR[0]*mw,plR[1]*mw,'m²')} with heat recovery — equipment only, before clearances</dd>
   <dt>Standby fuel</dt><dd>${rng(fuel[0],fuel[1],'L')} for 12 h; a ${pos==='ground'?'first-storey':'basement or upper-storey'} room may hold ${fmt(fuelLim)} L${fuel[1]>fuelLim?' — <span class="draft">more than one room or an outdoor tank</span>':''}</dd>
   <dt>Electrical service</dt><dd>${esc(svc)}</dd>
@@ -116,8 +155,8 @@ function fitsView(){
   <div class="draftnote">Draft wording (Claude) for J.B. Every range carries the register's confidence; nothing here is a design.</div>`;
   $('#side').innerHTML=h;
   $('#back').onclick=()=>{ BD.S.view2=null; BD.scene3d&&BD.scene3d.hide(); BD.card(); BD.draw(); };
-  $('#mw').oninput=e=>{ $('#mwv').textContent=e.target.value; };
-  $('#mw').onchange=e=>{ A.mw=+e.target.value; fitsView(); };
+  $('#mw').oninput=e=>{ const v=ST[+e.target.value]; $('#mwv').textContent=v; $('#mwn').textContent=near(v)+over(v); e.target.setAttribute('aria-valuetext',v+' MW'); };
+  $('#mw').onchange=e=>{ A.mw=ST[+e.target.value]; fitsView(); };
   $('#toRecv').onclick=()=>tabView('heat');
   BD.draw();
 }

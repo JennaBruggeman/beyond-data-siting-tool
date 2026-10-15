@@ -231,5 +231,9 @@ PREC = [
 ]
 m['model_results'] = [x for x in m['model_results'] if x['id'] not in {p['id'] for p in PREC}] + PREC
 m['date'] = '2026-10-15'
+# the patch scripts append notes each time they run; drop exact repeats of a '; '-separated note (15 Oct check)
+for _q in (r['quantities'] if isinstance(r['quantities'], list) else r['quantities'].values()):
+    if isinstance(_q, dict) and isinstance(_q.get('coef'), str):
+        _q['coef'] = '; '.join(dict.fromkeys(_q['coef'].split('; ')))
 json.dump(r, open(P, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print(len(NEW), 'quantities,', len(CONDS), 'conditions; next actions on', sum(1 for c in r['conditions'] if c.get('next_action')), 'conditions')

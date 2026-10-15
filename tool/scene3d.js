@@ -72,7 +72,7 @@ function build(site){
   const dc=new T.Group(); const A=S.answers;
   let roof=0, foot=null;
   if(A.built==='new'&&sel.ring){
-    foot=inset(sel.ring,0.86); const H=site.floors?6+(site.floors-1)*4:18; roof=H;
+    foot=inset(sel.ring,0.86); const H=site.floors?Math.min(site.envH||99,6+(site.floors-1)*5.75):18; roof=H;
     if(A.extent==='part'){ const g=prism(foot,H,0,C.face,C.edge,0.5); dc.add(g); const fl=prism(foot,6,0,0x2a2224,C.acc,1); dc.add(fl); roof=6; }
     else { dc.add(prism(foot,H,0,0x221d1e,C.acc,1)); }
   } else if(site.blds.length){

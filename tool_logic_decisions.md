@@ -111,3 +111,15 @@ Running record of decisions J.B. has made about the tool's logic, in the order m
 - **Numbers per tab** come from the register (electricity price, PV, UPS, battery, demand response, EV, generator testing; evaporation, blowdown, rain, water behind electricity, reuse rules; servers, e-waste, copper, embodied carbon; sound screen, low-frequency flag, standoff, light, homes nearby, jobs). Embodied carbon of servers uses the manufacturing share (10–15%) of the Dell assessment, not the whole-life total.
 - **Assumptions to review (J.B.):** one cooling unit per MW of facility power for sound (Lw 91–101 dBA each); sound coloured against a quiet-zone home limit for every neighbour (neighbour zones not yet read); roof = 0.86² of the lot for a new building; runoff coefficient 0.8; field notes kept in the viewer's browser only.
 - **15 Oct, v8:** roof equipment now packed only where it fits inside the roof outline, along its long side, and labelled (dry coolers, + heat pumps, cooling towers, sound sources); units that don't fit are counted ("+n do not fit — yard or another roof"); solar panels fill the roof the plant leaves free. **Options tab (J.B.): three 3D views side by side** — one camera orbits all three; A shows plant venting to the air, B arcs to nearby receivers, C arcs to the network (if inside its area) or to more receivers.
+
+## 15 Oct 2026 — v9: size chain corrected after logic test
+
+- Logic test (110 4th Ave W): old low end 1.7 MW implied 4,826 m² of building per MW, outside every built case (291–1,580). Cause: LBNL's loosest room (13.9 m²/rack, a 56 m² server room) paired with an independent 8 kW/rack.
+- Area per MW now the five built Canadian halls, 290–630 m² of hall per MW (operator claims). LBNL 186–2,325 shown as outer bounds only.
+- Storeys: data-hall floors 5.5–6.0 m (Burlington; HK TPB A/KC/480, A/KC/510B). Zoning's 4.0 m is a minimum. 18.3 m → 3 storeys. Floor area capped at lot × storeys; "up to" when that needs full lot coverage (I-2 yards unread).
+- Ground floor: two readings shown — strict (ground holds none of the data centre) and lenient (support rooms at grade). City to confirm.
+- Whole-building check line added: floor area ÷ 291–1,580 m²/MW.
+- "Power drawn" → "Average power drawn" (PUE is a yearly ratio).
+- Slider: steps 0.1–40 MW, log-spaced; bar for what fits; ticks for Cologix VAN5, eStruxture VAN-1, 111 E 5th (Vancouver), Qu EDM1 (Edmonton); starts at the low end of what fits; label compares to the nearest case.
+- Register: repeated coefficient notes removed (9 quantities); add_exchange.py now drops exact repeats.
+- J.B. to review: all new red wording; the strict/lenient split; full-coverage caveat.
