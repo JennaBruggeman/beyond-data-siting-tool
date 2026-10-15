@@ -112,5 +112,5 @@ People and the urban rationale
 2. Statistics Canada ODHF (health, 2020): https://www150.statcan.gc.ca/n1/pub/13-26-0001/2020001/ODHF.zip
 3. Statistics Canada ODEF v2.1 (education, 2022): https://www150.statcan.gc.ca/n1/pub/37-26-0001/2022001/ODEF_v2.1.zip
 4. City of Vancouver open data — non-market housing; community centres; schools (opendata.vancouver.ca, blocked from the cloud).
-5. District-energy service areas: NEU, Creative Energy, River District, Sen̓áȟw (Vancouver); Downtown District Energy and Blatchford (Edmonton) — service-area maps from the utilities or BCUC filings.
+5. District-energy service areas: NEU, Creative Energy, River District, Sen̓áḵw (Vancouver); Downtown District Energy and Blatchford (Edmonton) — service-area maps from the utilities or BCUC filings.
 6. Wastewater plants (Iona, Lions Gate, Annacis; Gold Bar) — locations from Metro Vancouver and EPCOR pages.

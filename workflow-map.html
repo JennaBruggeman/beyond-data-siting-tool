@@ -263,7 +263,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "quantities": 139,
 "conditions": 100,
 "opportunities": 15,
-"sources": 312
+"sources": 316
 }
 },
 "stages": [
@@ -6788,7 +6788,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "coef": "business model from operator pages (claims) and permits; the learning-series EV and workload papers are models of single-operator fleets",
 "unit": "operator · tenants · mixed",
 "sources": [
-"learningSeries"
+"learningSeries",
+"crozier2025"
 ],
 "source_roles": [
 {
@@ -6797,10 +6798,17 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "data",
 "conf": 50,
 "verified": false
+},
+{
+"id": "crozier2025",
+"term": "Who controls the computing",
+"role": "data",
+"conf": 50,
+"verified": false
 }
 ],
 "conf": 50,
-"status": "logic defined; per-site model from operator pages",
+"status": "logic defined; per-site model from operator pages; Crozier & Liska 2025: no published flexible share — inference is inflexible, checkpointed training can pause",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -10395,10 +10403,14 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "odef": "Statistics Canada, Open Database of Educational Facilities v2.1 (published 28 Nov 2022; archived) — https://www150.statcan.gc.ca/n1/pub/37-26-0001/2022001/ODEF_v2.1.zip (not yet downloaded)",
 "learningSeries": "J.B., Beyond Data learning series (manuscript, Oct 2026), critique 14 Oct 2026 — a learning aid; figures it reports are unverified until the papers are read",
 "roudbari2025": "Shafiee Roudbari, Kantor, Parakkal Menon, Eicker 2025, Energy 335:137902 — https://doi.org/10.1016/j.energy.2025.137902 (not yet read)",
-"ravi2026": "Ravi et al. 2026, Applied Energy 402:127049 — https://doi.org/10.1016/j.apenergy.2025.127049 (not yet read)",
-"wang2026": "Wang et al. 2026, Environmental Science and Ecotechnology 31:100702 — https://doi.org/10.1016/j.ese.2026.100702 (not yet read)",
-"zhang2025": "Zhang et al. 2025, Applied Energy 377:124697 (not yet read)",
-"epaQuincy": "US EPA, Water Reuse Case Study: Quincy, Washington — https://www.epa.gov/waterreuse/water-reuse-case-study-quincy-washington (not yet read)"
+"ravi2026": "Ravi et al. 2026, Applied Energy 402:127049 — https://doi.org/10.1016/j.apenergy.2025.127049 (abstract and EPFL pages checked by the atlas chat 15 Oct)",
+"wang2026": "Wang et al. 2026, Environmental Science and Ecotechnology 31:100702 — https://doi.org/10.1016/j.ese.2026.100702 (full text checked by the atlas chat 15 Oct)",
+"zhang2025": "Zhang et al., Applied Energy 377:124697 (DOI year 2024) — https://doi.org/10.1016/j.apenergy.2024.124697 (abstract checked by the atlas chat 15 Oct)",
+"epaQuincy": "US EPA, Water Reuse Case Study: Quincy, Washington — https://www.epa.gov/waterreuse/water-reuse-case-study-quincy-washington (checked by the atlas chat 15 Oct)",
+"oltmanns2020": "Oltmanns et al. 2020, Energy Science & Engineering — https://doi.org/10.1002/ese3.633 (checked by the atlas chat 15 Oct)",
+"socci2024": "Socci et al. 2024, Energy 313:134013 (checked by the atlas chat 15 Oct)",
+"crozier2025": "Crozier & Liska 2025, Current Sustainable/Renewable Energy Reports 12(1) art. 12, open-access review: no single flexible share; price signals alone do not create flexibility; UPS rarely offered; inference inflexible; checkpointed training can pause (checked by the atlas chat 15 Oct)",
+"wangX2022": "Xihao Wang et al. 2022, Sustainability 14(11):6814 — EV charging and interconnected data centres, simulated (found by the atlas chat 15 Oct)"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -11669,11 +11681,11 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "model_results": [
 {
 "id": "roudbari",
-"place": "Montreal, Concordia Loyola",
-"what": "data-centre heat about 800 m away to campus heating",
-"figures": "74% of heating demand in one selected solution; −95% of included emissions; +11% annual cost (as reported by the learning series; the series says \"a campus building\" in ch. 2 and \"campus\" in ch. 17)",
+"place": "Montreal (per the learning series)",
+"what": "data-centre heat to campus heating",
+"figures": "74% of heating demand, −95% emissions, +11% annual cost — as reported by the learning series only; the abstract names no site and no figures",
 "evidence": "modelled",
-"status": "unverified — paper not yet read",
+"status": "unverified — full text needed (UBC Library)",
 "sources": [
 "roudbari2025"
 ]
@@ -11681,21 +11693,21 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 {
 "id": "ravi",
 "place": "Lausanne, EPFL",
-"what": "2 MW data centre as heat and flexibility prosumer",
-"figures": "up to 40% of district-heating demand; up to 60% of rejected heat used; PV self-consumption \"up to 90%\" (ch. 4) or \"raised by up to 28%\" (ch. 10) — inconsistent in the series",
+"what": "real data centre inside EPFL's heating plant, 2 → 4 MW; modelled as heat and flexibility prosumer",
+"figures": "up to 40% of the campus heat demand (an EPFL slide pairs this with 10 MW); 28% = increase in buffering potential for variable renewables; 60% of rejected heat and 18.2 MWh unverified; the series' \"90% PV self-consumption\" appears nowhere",
 "evidence": "modelled",
-"status": "unverified — paper not yet read",
+"status": "checked by the atlas chat 15 Oct (abstract or open full text); not re-read in this session",
 "sources": [
 "ravi2026"
 ]
 },
 {
 "id": "wang",
-"place": "98 countries",
+"place": "98 countries; Shenzhen example (real WWTP data, simulated data centre)",
 "what": "treated wastewater to cooling; heat back to treatment plants",
-"figures": "1.3 bn m³ water, 84 Mt CO₂e, US$95.4 bn per year (global optimised scenario)",
+"figures": "~1,300 million m³ water (not labelled annual), 84 Mt CO₂e, US$95.4 bn excluding the social cost of carbon; a \"first-order\" global estimate",
 "evidence": "modelled",
-"status": "unverified; not transferable to a parcel",
+"status": "checked by the atlas chat 15 Oct (abstract or open full text); not re-read in this session; not transferable to a parcel",
 "sources": [
 "wang2026"
 ]
@@ -11703,21 +11715,43 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 {
 "id": "zhang",
 "place": "simulated network",
-"what": "3 data centres, 1,400 EVs, coordinated pricing",
-"figures": "> 20% less load fluctuation; ~15% less line occupancy",
+"what": "coordinated data-centre workloads and EV charging, priced",
+"figures": "> 20% less load fluctuation; ~15% less line occupancy (3 DCs and 1,400 EVs not confirmed from the abstract)",
 "evidence": "modelled",
-"status": "unverified — paper not yet read; series says both \"distribution\" and \"transmission\"",
+"status": "checked by the atlas chat 15 Oct (abstract or open full text); not re-read in this session",
 "sources": [
 "zhang2025"
 ]
 },
 {
+"id": "oltmanns",
+"place": "TU Darmstadt, Lichtenberg II",
+"what": "45 °C hot-water-cooled HPC, heat to nearby buildings",
+"figures": "20–50% of waste heat usable; up to 720 t CO₂/yr",
+"evidence": "modelled",
+"status": "checked by the atlas chat 15 Oct (abstract or open full text); not re-read in this session",
+"sources": [
+"oltmanns2020"
+]
+},
+{
+"id": "socci",
+"place": "Italy (city not named)",
+"what": "100–500 kW data centre into a gas-CHP third-generation network",
+"figures": "waste heat 12–59% of the supply mix; gas −11 to −58%",
+"evidence": "modelled",
+"status": "checked by the atlas chat 15 Oct (abstract or open full text); not re-read in this session",
+"sources": [
+"socci2024"
+]
+},
+{
 "id": "quincy",
 "place": "Quincy, WA",
-"what": "industrial water reuse utility (Microsoft and the City)",
-"figures": "US$31 M; designed to offset ~138 million gallons/yr; operating since 2021",
+"what": "industrial water reuse utility treating cooling-tower blowdown (lime softening → UF → softening → RO → storage → blending; brine to evaporation ponds)",
+"figures": "US$31 M; \"an estimated 138 million gallons of water per year\"; operating since 30 Jun 2021; as of 2022 only Microsoft connected",
 "evidence": "operating",
-"status": "unverified — EPA page not yet read",
+"status": "checked by the atlas chat 15 Oct (abstract or open full text); not re-read in this session; the saving is an estimate",
 "sources": [
 "epaQuincy"
 ]
@@ -11996,7 +12030,7 @@ function renderInspector(){
       const PR=D.limit_presets||[]; if(PR.length){ const byP={}; PR.forEach(x=>(byP[x.place]=byP[x.place]||[]).push(x));
         h+=`<h3 style="margin-top:16px">Rules from elsewhere</h3><p class="draft" style="margin-top:4px">A limit can also be moved by trying another place's rule here. Each shows what it would change and who it favours; none is applied unless the user asks.</p><div class="draftnote">Draft wording (Claude) — for J.B. to rewrite. From research notes 19–21.</div>`;
         Object.keys(byP).forEach(pl=>{ h+=`<div class="kind" style="margin-top:14px">${esc(pl)}</div><ol class="addl">`+byP[pl].map(x=>`<li><b>${esc(x.name)}</b><div class="r">${esc(x.limit)}: ${esc(x.value)}</div><div class="r">favours ${esc(x.favours)} · costs ${esc(x.costs)}</div><div class="r" style="color:var(--muted)">${esc(x.status)}</div></li>`).join('')+'</ol>'; }); }
-      const MR=D.model_results||[]; if(MR.length){ h+=`<h3 style="margin-top:16px">Results from elsewhere</h3><p class="draft" style="margin-top:4px">What studies and built cases elsewhere report, labelled by kind of evidence. Shown for comparison; never used as this parcel's numbers.</p><div class="draftnote">Draft wording (Claude). Figures as reported by the learning series; papers not yet read.</div><ol class="addl">`+MR.map(x=>`<li><span class="st">${esc(x.evidence)}</span><b>${esc(x.place)}</b><div class="r">${esc(x.what)}</div><div class="r">${esc(x.figures)}</div><div class="r" style="color:var(--muted)">${esc(x.status)}</div></li>`).join('')+'</ol>'; }
+      const MR=D.model_results||[]; if(MR.length){ h+=`<h3 style="margin-top:16px">Results from elsewhere</h3><p class="draft" style="margin-top:4px">What studies and built cases elsewhere report, labelled by kind of evidence. Shown for comparison; never used as this parcel's numbers.</p><div class="draftnote">Draft wording (Claude). Figures checked against abstracts or open full texts by the atlas chat (15 Oct); Montreal still unverified.</div><ol class="addl">`+MR.map(x=>`<li><span class="st">${esc(x.evidence)}</span><b>${esc(x.place)}</b><div class="r">${esc(x.what)}</div><div class="r">${esc(x.figures)}</div><div class="r" style="color:var(--muted)">${esc(x.status)}</div></li>`).join('')+'</ol>'; }
     } else if(n.kind==='pref'){ h=`<div class="kind">The user's values</div><h2>${esc(n.name)}</h2><p style="color:var(--muted)">${esc(n.formula)}</p><p class="draftnote">Values enter from below, separately from the facts on the left.</p>`;
     } else {
       const v=mode==='example'?exVal(n.id):null;

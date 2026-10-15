@@ -96,7 +96,7 @@ Generated 14 Oct 2026 from `formula_register.json` (the diagram reads the JSON; 
 | `hvo_swap` | Renewable diesel in the generators | g CO2e/MJ | Δ lifecycle CO2e = fuel energy × (CI diesel − CI renewable diesel) | genset_test | BC approved fuel codes −7 to 131 g CO2e/MJ (RLCF-012, Apr 2026); stack CO2, NOx and PM stay about the same; fossil diesel reference CI to retrieve | bc_rlcf012 | 55 | 55 | reference CI missing | — (input to others) |
 | `fuel_on_site` | Fuel kept on site | L | generator capacity × runtime hours × fuel per kWh, against the limit per storage room for the storey it sits on | start_case, backup_hours | NFC 2020 Table 4.3.13.4.-B (Class II): first storey 200 000 L per room; basement or above the first storey 20 000 L (tanks > 2 500 L) or 45 000 L (tanks > 20 000 L); tanks > 230 L in a dedicated 2 h room; fuel use ≈0.263 L/kWh (one Cat model, manufacturer claim) ≈6.3 m³ per MW per 24 h; Uptime ≥ 12 h on site; whether data-centre standby counts as "emergency generators" is for the authority to decide | nfc2020_4313, cat3516c, src16, src23 | 60 | 60 | code limits sourced; fuel rate is a manufacturer claim | Edmonton: effects stay inside the site (Minor) or reach beyond it (Major); Fuel fits the storey's limit |
 | `vibration_rank` | Vibration to neighbours | ranked: slab on grade → long-span upper floor | qualitative rank of how hard plant vibration is to isolate at each position in the building | start_case, host_building | NBC/VBBL apparent STC 47 between dwellings and other spaces (STC 55 by elevator shafts) — airborne only, no equipment-vibration limit; isolator deflection rises with floor span (US government spec citing ASHRAE); ASHRAE Applications ch. 49 not read | src23 | 40 | 40 | ranked, no dB values | Neighbours above and below are not disturbed |
-| `workload_control` | Who controls the computing | operator · tenants · mixed | flexible load is offered only by whoever runs the workloads: a single-owner or hyperscale operator can shift its own computing; in colocation the building operator controls power and cooling, not the tenants' computing, so flexibility needs each tenant's agreement | it_load_claim | business model from operator pages (claims) and permits; the learning-series EV and workload papers are models of single-operator fleets | learningSeries | 50 | 50 | logic defined; per-site model from operator pages | Whoever runs the computing agrees to shift it |
+| `workload_control` | Who controls the computing | operator · tenants · mixed | flexible load is offered only by whoever runs the workloads: a single-owner or hyperscale operator can shift its own computing; in colocation the building operator controls power and cooling, not the tenants' computing, so flexibility needs each tenant's agreement | it_load_claim | business model from operator pages (claims) and permits; the learning-series EV and workload papers are models of single-operator fleets | learningSeries, crozier2025 | 50 | 50 | logic defined; per-site model from operator pages; Crozier & Liska 2025: no published flexible share — inference is inflexible, checkpointed training can pause | Whoever runs the computing agrees to shift it |
 
 ### Prospect the surroundings
 
@@ -757,6 +757,8 @@ source_roles (added 12 Oct 2026): for each source, the term of the formula it su
 | `displaced_source` | `vanNEU2025` | What the receiver uses now | data | 60 |  |
 | `hourly_overlap` | `cwec` | Hour-by-hour match | data | 70 |  |
 | `hourly_overlap` | `stratego` | Hour-by-hour match | data | 70 |  |
+| `workload_control` | `learningSeries` | Who controls the computing | data | 50 | unverified |
+| `workload_control` | `crozier2025` | Who controls the computing | data | 50 | unverified |
 
 ### Own confidence vs sources (for review)
 
@@ -1065,10 +1067,14 @@ Source ids added 9–11 Oct are listed first with their citations; ids from the 
 - `odef` — Statistics Canada, Open Database of Educational Facilities v2.1 (published 28 Nov 2022; archived) — https://www150.statcan.gc.ca/n1/pub/37-26-0001/2022001/ODEF_v2.1.zip (not yet downloaded)
 - `learningSeries` — J.B., Beyond Data learning series (manuscript, Oct 2026), critique 14 Oct 2026 — a learning aid; figures it reports are unverified until the papers are read
 - `roudbari2025` — Shafiee Roudbari, Kantor, Parakkal Menon, Eicker 2025, Energy 335:137902 — https://doi.org/10.1016/j.energy.2025.137902 (not yet read)
-- `ravi2026` — Ravi et al. 2026, Applied Energy 402:127049 — https://doi.org/10.1016/j.apenergy.2025.127049 (not yet read)
-- `wang2026` — Wang et al. 2026, Environmental Science and Ecotechnology 31:100702 — https://doi.org/10.1016/j.ese.2026.100702 (not yet read)
-- `zhang2025` — Zhang et al. 2025, Applied Energy 377:124697 (not yet read)
-- `epaQuincy` — US EPA, Water Reuse Case Study: Quincy, Washington — https://www.epa.gov/waterreuse/water-reuse-case-study-quincy-washington (not yet read)
+- `ravi2026` — Ravi et al. 2026, Applied Energy 402:127049 — https://doi.org/10.1016/j.apenergy.2025.127049 (abstract and EPFL pages checked by the atlas chat 15 Oct)
+- `wang2026` — Wang et al. 2026, Environmental Science and Ecotechnology 31:100702 — https://doi.org/10.1016/j.ese.2026.100702 (full text checked by the atlas chat 15 Oct)
+- `zhang2025` — Zhang et al., Applied Energy 377:124697 (DOI year 2024) — https://doi.org/10.1016/j.apenergy.2024.124697 (abstract checked by the atlas chat 15 Oct)
+- `epaQuincy` — US EPA, Water Reuse Case Study: Quincy, Washington — https://www.epa.gov/waterreuse/water-reuse-case-study-quincy-washington (checked by the atlas chat 15 Oct)
+- `oltmanns2020` — Oltmanns et al. 2020, Energy Science & Engineering — https://doi.org/10.1002/ese3.633 (checked by the atlas chat 15 Oct)
+- `socci2024` — Socci et al. 2024, Energy 313:134013 (checked by the atlas chat 15 Oct)
+- `crozier2025` — Crozier & Liska 2025, Current Sustainable/Renewable Energy Reports 12(1) art. 12, open-access review: no single flexible share; price signals alone do not create flexibility; UPS rarely offered; inference inflexible; checkpointed training can pause (checked by the atlas chat 15 Oct)
+- `wangX2022` — Xihao Wang et al. 2022, Sustainability 14(11):6814 — EV charging and interconnected data centres, simulated (found by the atlas chat 15 Oct)
 
 Source ids from the first register (hunts 1–8; full reports in sources/01–08):
 

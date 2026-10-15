@@ -182,3 +182,8 @@ Sizing coefficients found: LBNL 2024 per-server power 600 W (2023) → 782 W (20
 - §8: "Referred back 21 July 2026" — Council reconvened 21 Jul and referred the report back to staff per the 23 Jul agenda; the minutes PDF could not be parsed to confirm the motion text. Keep, but cite the 23 Jul agenda item 6.
 - §3 rule 5: Hut 8 VAN1 "900 ft²" is as published and implausible; treat as a flagged claim.
 - Gagnon et al. 2022 title is "Short-run marginal emission rates omit important impacts of electric-sector interventions".
+
+## Added 15 Oct (atlas chat)
+- How the value of reused heat splits between operator, utility and residents: no study found; every receiver in the core cases is an institution. A gap the thesis could fill.
+- Canadian precedents to source: TELUS Garden, Equinix TR5, Humano Sherbrooke, QScale Lévis, Enwave Toronto.
+- Shafiee Roudbari 2025 full text (UBC Library).

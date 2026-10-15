@@ -23,10 +23,14 @@ SRC = {
  'odef': 'Statistics Canada, Open Database of Educational Facilities v2.1 (published 28 Nov 2022; archived) — https://www150.statcan.gc.ca/n1/pub/37-26-0001/2022001/ODEF_v2.1.zip (not yet downloaded)',
  'learningSeries': 'J.B., Beyond Data learning series (manuscript, Oct 2026), critique 14 Oct 2026 — a learning aid; figures it reports are unverified until the papers are read',
  'roudbari2025': 'Shafiee Roudbari, Kantor, Parakkal Menon, Eicker 2025, Energy 335:137902 — https://doi.org/10.1016/j.energy.2025.137902 (not yet read)',
- 'ravi2026': 'Ravi et al. 2026, Applied Energy 402:127049 — https://doi.org/10.1016/j.apenergy.2025.127049 (not yet read)',
- 'wang2026': 'Wang et al. 2026, Environmental Science and Ecotechnology 31:100702 — https://doi.org/10.1016/j.ese.2026.100702 (not yet read)',
- 'zhang2025': 'Zhang et al. 2025, Applied Energy 377:124697 (not yet read)',
- 'epaQuincy': 'US EPA, Water Reuse Case Study: Quincy, Washington — https://www.epa.gov/waterreuse/water-reuse-case-study-quincy-washington (not yet read)',
+ 'ravi2026': 'Ravi et al. 2026, Applied Energy 402:127049 — https://doi.org/10.1016/j.apenergy.2025.127049 (abstract and EPFL pages checked by the atlas chat 15 Oct)',
+ 'wang2026': 'Wang et al. 2026, Environmental Science and Ecotechnology 31:100702 — https://doi.org/10.1016/j.ese.2026.100702 (full text checked by the atlas chat 15 Oct)',
+ 'zhang2025': 'Zhang et al., Applied Energy 377:124697 (DOI year 2024) — https://doi.org/10.1016/j.apenergy.2024.124697 (abstract checked by the atlas chat 15 Oct)',
+ 'oltmanns2020': 'Oltmanns et al. 2020, Energy Science & Engineering — https://doi.org/10.1002/ese3.633 (checked by the atlas chat 15 Oct)',
+ 'socci2024': 'Socci et al. 2024, Energy 313:134013 (checked by the atlas chat 15 Oct)',
+ 'crozier2025': 'Crozier & Liska 2025, Current Sustainable/Renewable Energy Reports 12(1) art. 12, open-access review: no single flexible share; price signals alone do not create flexibility; UPS rarely offered; inference inflexible; checkpointed training can pause (checked by the atlas chat 15 Oct)',
+ 'wangX2022': 'Xihao Wang et al. 2022, Sustainability 14(11):6814 — EV charging and interconnected data centres, simulated (found by the atlas chat 15 Oct)',
+ 'epaQuincy': 'US EPA, Water Reuse Case Study: Quincy, Washington — https://www.epa.gov/waterreuse/water-reuse-case-study-quincy-washington (checked by the atlas chat 15 Oct)',
 }
 
 def Q(id, name, stage, unit, formula, inputs, coef, sources, conf, status, direction=''):
@@ -65,7 +69,7 @@ NEW = [
    'flexible load is offered only by whoever runs the workloads: a single-owner or hyperscale operator can shift its own computing; in colocation the building operator controls power and cooling, not the tenants\' computing, so flexibility needs each tenant\'s agreement',
    ['it_load_claim'],
    'business model from operator pages (claims) and permits; the learning-series EV and workload papers are models of single-operator fleets',
-   ['learningSeries'], 50, 'logic defined; per-site model from operator pages'),
+   ['learningSeries', 'crozier2025'], 50, 'logic defined; per-site model from operator pages; Crozier & Liska 2025: no published flexible share — inference is inflexible, checkpointed training can pause'),
  Q('commitment', 'How firm the exchange is', 'decide', 'existing · committed · planned · proposed · possible',
    'existing = operating; committed = in a contract, permit condition or funded budget; planned = in a utility filing or adopted plan; proposed = an applicant or operator says so; possible = the tool found it and nobody has proposed it. Only existing and committed count as delivered',
    ['receivers_nearby'],
@@ -170,13 +174,15 @@ m['futures'] = [
  dict(id='tenant_leaves', name='Tenant leaves'), dict(id='receiver_leaves', name='Receiver leaves')]
 m['next_action_note'] = 'Every condition the tool cannot judge names the next step that would let it judge — a research to-do, not a verdict.'
 m['model_results'] = [
- dict(id='roudbari', place='Montreal, Concordia Loyola', what='data-centre heat about 800 m away to campus heating', figures='74% of heating demand in one selected solution; −95% of included emissions; +11% annual cost (as reported by the learning series; the series says "a campus building" in ch. 2 and "campus" in ch. 17)', evidence='modelled', status='unverified — paper not yet read', sources=['roudbari2025']),
- dict(id='ravi', place='Lausanne, EPFL', what='2 MW data centre as heat and flexibility prosumer', figures='up to 40% of district-heating demand; up to 60% of rejected heat used; PV self-consumption "up to 90%" (ch. 4) or "raised by up to 28%" (ch. 10) — inconsistent in the series', evidence='modelled', status='unverified — paper not yet read', sources=['ravi2026']),
- dict(id='wang', place='98 countries', what='treated wastewater to cooling; heat back to treatment plants', figures='1.3 bn m³ water, 84 Mt CO₂e, US$95.4 bn per year (global optimised scenario)', evidence='modelled', status='unverified; not transferable to a parcel', sources=['wang2026']),
- dict(id='zhang', place='simulated network', what='3 data centres, 1,400 EVs, coordinated pricing', figures='> 20% less load fluctuation; ~15% less line occupancy', evidence='modelled', status='unverified — paper not yet read; series says both "distribution" and "transmission"', sources=['zhang2025']),
- dict(id='quincy', place='Quincy, WA', what='industrial water reuse utility (Microsoft and the City)', figures='US$31 M; designed to offset ~138 million gallons/yr; operating since 2021', evidence='operating', status='unverified — EPA page not yet read', sources=['epaQuincy']),
+ dict(id='roudbari', place='Montreal (per the learning series)', what='data-centre heat to campus heating', figures='74% of heating demand, −95% emissions, +11% annual cost — as reported by the learning series only; the abstract names no site and no figures', evidence='modelled', status='unverified — full text needed (UBC Library)', sources=['roudbari2025']),
+ dict(id='ravi', place='Lausanne, EPFL', what='real data centre inside EPFL\'s heating plant, 2 → 4 MW; modelled as heat and flexibility prosumer', figures='up to 40% of the campus heat demand (an EPFL slide pairs this with 10 MW); 28% = increase in buffering potential for variable renewables; 60% of rejected heat and 18.2 MWh unverified; the series\' "90% PV self-consumption" appears nowhere', evidence='modelled', status='checked by the atlas chat 15 Oct (abstract or open full text); not re-read in this session', sources=['ravi2026']),
+ dict(id='wang', place='98 countries; Shenzhen example (real WWTP data, simulated data centre)', what='treated wastewater to cooling; heat back to treatment plants', figures='~1,300 million m³ water (not labelled annual), 84 Mt CO₂e, US$95.4 bn excluding the social cost of carbon; a "first-order" global estimate', evidence='modelled', status='checked by the atlas chat 15 Oct (abstract or open full text); not re-read in this session; not transferable to a parcel', sources=['wang2026']),
+ dict(id='zhang', place='simulated network', what='coordinated data-centre workloads and EV charging, priced', figures='> 20% less load fluctuation; ~15% less line occupancy (3 DCs and 1,400 EVs not confirmed from the abstract)', evidence='modelled', status='checked by the atlas chat 15 Oct (abstract or open full text); not re-read in this session', sources=['zhang2025']),
+ dict(id='oltmanns', place='TU Darmstadt, Lichtenberg II', what='45 °C hot-water-cooled HPC, heat to nearby buildings', figures='20–50% of waste heat usable; up to 720 t CO₂/yr', evidence='modelled', status='checked by the atlas chat 15 Oct (abstract or open full text); not re-read in this session', sources=['oltmanns2020']),
+ dict(id='socci', place='Italy (city not named)', what='100–500 kW data centre into a gas-CHP third-generation network', figures='waste heat 12–59% of the supply mix; gas −11 to −58%', evidence='modelled', status='checked by the atlas chat 15 Oct (abstract or open full text); not re-read in this session', sources=['socci2024']),
+ dict(id='quincy', place='Quincy, WA', what='industrial water reuse utility treating cooling-tower blowdown (lime softening → UF → softening → RO → storage → blending; brine to evaporation ponds)', figures='US$31 M; "an estimated 138 million gallons of water per year"; operating since 30 Jun 2021; as of 2022 only Microsoft connected', evidence='operating', status='checked by the atlas chat 15 Oct (abstract or open full text); not re-read in this session; the saving is an estimate', sources=['epaQuincy']),
 ]
-m['model_results_note'] = 'Results from other places shown as precedent ranges with their evidence type; never used as defaults for a parcel.'
+m['model_results_note'] = 'Results from other places shown as precedent ranges with their evidence type; never used as defaults for a parcel. Every receiver in these cases is an institution, and the operators are single-owner campus or hyperscale sites; no study found measures how the value of reused heat splits between operator, utility and residents (atlas chat, 15 Oct).'
 ol = m['options_logic']
 G = 'report the gates first — grid connection (r_grid) and zoning use (z_use): a blocked gate is named before any exchange is weighed, and the exchanges still show as "if the gate moved"'
 F = 'run each option through the four futures (as planned · tenant changes cooling · tenant leaves · receiver leaves) and show what changes'

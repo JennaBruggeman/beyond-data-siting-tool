@@ -79,3 +79,11 @@ Running record of decisions J.B. has made about the tool's logic, in the order m
 - **Verified 14 Oct:** hot-water storage ≥ 60 °C, recirculation ≥ 49 °C (VBBL 2025 Book II 2.6.1.12.(1), 2.6.1.1.(3), already on file); Alberta text to confirm.
 - **Not yet verified:** the five papers behind "results from elsewhere".
 - All new wording is Claude's draft for J.B.
+
+## 15 Oct — reply from the atlas chat (J.B.'s other account), folded in
+- **Corrected (Claude's errors in the critique):** 0.39–0.53 is the heat pump's Lorenz η in built cases, not a capture share; capture is liquid_capture (direct-to-chip 48–75 %, cold plate ≤ 94 %, hot-water 80 %, air-cooled no primary figure). "19:1" is space heating only; total heat demand peak-to-minimum month is 3.9 Vancouver, 3.3 Edmonton.
+- **Results from elsewhere updated** from the atlas chat's paper check (abstracts or open full texts; not re-read here): Ravi's 28 % is buffering potential, not PV self-consumption, and the "90 %" appears nowhere; Wang's US$95.4 bn excludes the social cost of carbon; Zhang's DOI year is 2024; Quincy treats cooling-tower blowdown; Oltmanns and Socci added; Montreal still unverified (full text via UBC Library). "Wang 2022" found (Xihao Wang et al., Sustainability 2022). Crozier & Liska added to workload_control.
+- **Gap for the thesis (atlas chat):** every receiver in the core cases is an institution; no study measures how heat-reuse value splits between operator, utility and residents. The cases are single-operator campus or hyperscale; the atlas sites are mostly 2–3 MW colocation.
+- **Spelling:** Sen̓áḵw (as in sources/14), corrected in the handoff and retrieval guide.
+- **For J.B. to decide:** one grid-carbon basis for both the atlas and the register (register: NIR 2026 — BC 16.7 generation / 18.1 consumption; AB 334.8 / 346.1 g/kWh, 2024; atlas: BC 22.8 / AB 335).
+- **To add beside sources/13 (from the atlas chat; to source before use):** TELUS Garden, Equinix TR5, Humano Sherbrooke, QScale Lévis (greenhouses, Québec government document), Enwave Toronto. No EV-charging precedent found.
