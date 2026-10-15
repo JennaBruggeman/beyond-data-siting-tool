@@ -187,3 +187,8 @@ Sizing coefficients found: LBNL 2024 per-server power 600 W (2023) → 782 W (20
 - How the value of reused heat splits between operator, utility and residents: no study found; every receiver in the core cases is an institution. A gap the thesis could fill.
 - Canadian precedents to source: TELUS Garden, Equinix TR5, Humano Sherbrooke, QScale Lévis, Enwave Toronto.
 - Shafiee Roudbari 2025 full text (UBC Library).
+
+## 15 Oct 2026 — Edmonton lot polygons
+- City of Edmonton open data: no lot (parcel) polygons found; assessment gives one point per property (288,738 records, 19,140 with no building, i.e. vacant). Email to opendata@edmonton.ca still to send.
+- Alberta title mapping (lot polygons) is AltaLIS data, licensed. A copy is served by Edmonton Public Schools' GIS server ("Titled Lots Current", credit "Altalis", no licence stated, current to 1 Sep 2025). NOT used: no licence to reuse. Ask UBC Library (Jeremy Buhler) whether UBC holds an AltaLIS academic licence; ask the City.
+- Interim (tool v15): click picks the point in the clicked building, else nearest within 60 m, else nearest record in the same zone polygon within 400 m (with a note).

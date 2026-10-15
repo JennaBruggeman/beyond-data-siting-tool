@@ -311,7 +311,10 @@ async function pick(px,py){
     for(const T of tiles) for(const b of T.bld){ if(b.f===3) continue; if(pip(x,y,b.r)&&(!bld||b.a<bld.a)) bld=b; }
     if(bld){ for(const T of tiles) for(const p of T.pts){ const inside=pip(p.x,p.y,bld.r), d=Math.hypot(p.x-bld.c[0],p.y-bld.c[1])*(inside?0.01:1); if(d<150&&(!best||d<best.d)) best={p,T,d}; } }
     if(!best){ const lim=Math.max(60,20/S.view.s); for(const T of tiles) for(const p of T.pts){ const d=Math.hypot(p.x-x,p.y-y); if(d<lim&&(!best||d<best.d)) best={p,T,d}; } }
-    if(best) return select({city:'edm',tile:best.T.key,id:best.p.id,pt:[best.p.x,best.p.y]});
+    // big open lots (vacant land, yards): the record's point can sit far from the click — take the nearest point in the same zone polygon, up to 400 m
+    if(!best){ const m2=S.meta[S.city]; let zp=null; for(const o of m2.ovRaw){ const bb=o.bb; if(x<bb[0]||x>bb[2]||y<bb[1]||y>bb[3]) continue; if(pip(x,y,o.r)){ zp=o; break; } }
+      if(zp) for(const T of tiles) for(const p of T.pts){ const d=Math.hypot(p.x-x,p.y-y); if(d<400&&(!best||d<best.d)&&pip(p.x,p.y,zp.r)) best={p,T,d,far:true}; } }
+    if(best){ const r=select({city:'edm',tile:best.T.key,id:best.p.id,pt:[best.p.x,best.p.y]}); if(best.far){ await r; const n=document.createElement('p'); n.className='sub draft'; n.textContent=`Nearest lot record in this zone, ${Math.round(best.d)} m from where you clicked. Edmonton gives lots as points, so check the address is the lot you meant.`; const h=$('#side h2'); if(h) h.after(n); } return r; }
   }
   showZone(x,y);
 }
