@@ -53,7 +53,7 @@ input[type=search]{background:var(--panel);border:1px solid var(--line-2);border
 <div class="wrap">
  <h1>Precedent Catalogue</h1>
  <p class="sub draft">Real data centres with public figures, gathered to check the Beyond Data tool's size estimates against buildings that exist or have been approved. Every figure carries its source, the exact words it came from, and who said it.</p>
- <p class="faint">Draft wording (Claude) for J.B. Gathered 15 Oct 2026. Operator figures are claims. Quotes were read through a summarising fetch tool; a quote marked “not re-checked” has not been confirmed against the document.</p>
+ <p class="faint">Draft wording (Claude) for J.B. Gathered 15 Oct 2026 in two rounds (the second aimed at small urban sites and conversions). Operator figures are claims. Quotes were read through a summarising fetch tool; a quote marked “not re-checked” has not been confirmed against the document.</p>
 
  <h2>What the catalogue says about the tool</h2>
  <div class="stats" id="stats"></div>
@@ -145,7 +145,7 @@ function rowHTML(s){ const h=s.headline, st=s.facts.find(x=>x.field==='storeys')
   const ar=h?fmt(h.area_m2):r.area!=null?fmt(r.area)+tag(r.areaTag):'<span class="faint">none</span>';
   const per=h&&h.mw_basis==='IT'?fmt(h.m2_per_mw):'<span class="faint" title="Not comparable: the MW is not IT load, or the area is hall only, or one is missing">n/c</span>';
   return `<div class="row" data-id="${esc(s.id)}"><button aria-expanded="${open.has(s.id)}">
-   <span class="nm">${esc(s.name)}<small>${esc(s.operator||'')}${s.status?' · '+esc(s.status):''}${st?' · '+esc(st.value)+(typeof st.value==='number'?' storeys':''):''}</small></span>
+   <span class="nm">${esc(s.name)}<small>${esc(s.operator||'')}${s.status?' · '+esc(s.status):''}${s.conversion?' · conversion'+(s.original_use?' of '+esc(s.original_use):''):''}${st?' · '+esc(st.value)+(typeof st.value==='number'?' storeys':''):''}</small></span>
    <span class="sub">${esc(s.city)}, ${esc(s.country)}</span>
    <span class="num">${mw}</span><span class="num">${ar}</span><span class="num">${per}</span>
    <span class="tier ${s.tier}">${s.tier}</span></button>${open.has(s.id)?detail(s):''}</div>`; }

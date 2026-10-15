@@ -19,9 +19,16 @@ and shown next to the original."""
 import json, os, statistics as st
 H = os.path.dirname(os.path.abspath(__file__))
 sites = []
-for f in ['ukie', 'world', 'ca', 'us']:
-    for s in json.load(open(os.path.join(H, 'raw', f'bench_{f}.json'), encoding='utf-8')):
-        s['region'] = {'ukie': 'UK and Ireland', 'world': 'Australia, Europe, Asia', 'ca': 'Canada', 'us': 'United States'}[f]
+REG = {'ukie': 'UK and Ireland', 'world': 'Australia, Europe, Asia', 'ca': 'Canada', 'us': 'United States',
+       '2_us': 'United States', '2_eu': 'UK and Ireland', '2_ca': 'Canada', '2_ap': 'Australia, Europe, Asia'}
+DUP = {'van-111-e-5th-rr2026': 'van-111-e-5th'}  # round 2 re-found a site: its facts join the existing entry
+for f in ['ukie', 'world', 'ca', 'us', '2_us', '2_eu', '2_ca', '2_ap']:
+    fn = f'bench_{f}.json' if not f.startswith('2_') else f'bench2_{f[2:]}.json'
+    for s in json.load(open(os.path.join(H, 'raw', fn), encoding='utf-8')):
+        s['region'] = REG[f]; s['round'] = 2 if f.startswith('2_') else 1
+        if s.get('country') in ('France', 'Germany', 'Netherlands', 'Finland') and f == '2_eu': s['region'] = 'Australia, Europe, Asia'
+        if s['id'] in DUP:
+            t = next(x for x in sites if x['id'] == DUP[s['id']]); t['facts'] += s['facts']; t['notes'] = (t.get('notes') or '') + ' Round 2: ' + (s.get('notes') or ''); continue
         sites.append(s)
 
 # cases already in sources/16 (C5, C10) and the floor-height addendum, not re-gathered by the research passes
@@ -83,6 +90,15 @@ HL = {
  'telehouse-south':            (18, 'IT', 31000, 'gross', 'building', 'reference', 'Operator documents conflict (15 MW / 31,999 m² in 2020).'),
  'estruxture-van2':            (2.14, 'unclear', 1347.1, 'gross', 'building', 'context', 'Web page says critical IT; datasheet says total.'),
  'estruxture-cal1':            (9, 'total', 6038.7, 'gross', 'building', 'context', '"total power".'),
+ 'colt-les-ulis-dh10plus':     (12.8, 'IT', 7590, 'gross', 'building', 'benchmark', 'French "surface de plancher"; the architect\'s notice gives 7,761 m². Data halls and electrical rooms on R+1 and R+2. Suburban business park.'),
+ 'colovore-3060-raymond':      (6, 'unclear', 2268.9, 'gross', 'building', 'reference', '"critical load of six MW" and "an estimated maximum of 6 MW" for the facility are the same figure, so it may be total load, not IT. Conversion of a two-storey industrial building.'),
+ 'vantage-lhr12-chandos-rd-ph2': (30, 'unclear', 16362, 'gross', 'building', 'reference', '"data centre capacity", not stated as IT; 5 MW per data-hall floor, six floors. A separate 8,827 m² GIA generator building is not counted.'),
+ 'microsoft-dub06-grange-castle': (17.6, 'unclear', 21350, 'gross', 'building', 'reference', '"data capacity" (applicant); the document\'s totals conflict.'),
+ 'hk-sunevision-mega-fanling': (10, 'IT', 12006.8, 'gross', 'building', 'reference', 'Operator filing. Area is the warehouse at lease, before conversion.'),
+ 'sf-365-main':                (8.6, 'IT', 21089, 'gross', 'building', 'reference', 'Operator factsheet read from an aggregator\'s copy; unverified until read on Digital Realty\'s own site. Conversion of an industrial building.'),
+ 'chicago-400-s-lasalle':      (22, 'IT', 27917.4, 'gross', 'building', 'reference', 'Operator flyer read from an aggregator\'s copy; unverified. Office conversion.'),
+ 'tor-uoft-mclennan-dc':       (0.35, 'IT', 450, 'gross', 'room', 'reference', 'A server room inside a teaching building (university governance report). Room scale.'),
+ 'bou-estruxture-mtl3':        (1, 'IT', 1858.1, 'gross', 'building', 'reference', 'Operator datasheet also gives 8,200 ft².'),
  'nextdc-s4-horsley-park':     (294, 'total', 61695, 'gross', 'building', 'context', '"maximum power capacity"; operator site says 365 MW IT.'),
 }
 TOL = 'Claude re-fetched this quote on 15 Oct 2026 and it matched.'
@@ -91,6 +107,8 @@ RECHECK = {('sequoia-santa-clara', 'it_mw'), ('sequoia-santa-clara', 'gfa_m2'), 
            ('slough-manor-farm', 'it_mw'), ('slough-manor-farm', 'gfa_m2'), ('iver-woodlands-park', 'it_mw'), ('iver-woodlands-park', 'gfa_m2'),
            ('globalswitch-house-e14', 'it_mw'), ('globalswitch-house-e14', 'gfa_m2'), ('globalswitch-house-e14', 'storeys'), ('lafayette-santa-clara', 'gfa_m2')}
 NOTFOUND = {('lafayette-santa-clara', 'it_mw')}
+RECHECK |= {('colt-les-ulis-dh10plus', 'it_mw'), ('colt-les-ulis-dh10plus', 'gfa_m2'), ('colovore-3060-raymond', 'it_mw'), ('colovore-3060-raymond', 'gfa_m2'),
+            ('colovore-3060-raymond', 'storeys'), ('vantage-lhr12-chandos-rd-ph2', 'it_mw'), ('vantage-lhr12-chandos-rd-ph2', 'gfa_m2'), ('vantage-lhr12-chandos-rd-ph2', 'storeys')}
 
 for s in sites:
     for i, x in enumerate(s['facts']):
@@ -113,7 +131,7 @@ def first(s, fld):
     for x in s['facts']:
         if x['field'] == fld and isinstance(x.get('value_m2', x['value']), (int, float)):
             return x.get('value_m2', x['value'])
-SHARE_SKIP = {'qscale-q01', 'kao-harlow-campus', 'qu-edm2'}  # campus or phase mismatch between white and gross
+SHARE_SKIP = {'qscale-q01', 'kao-harlow-campus', 'qu-edm2', 'sg-equinix-sg4-7-tai-seng', 'bby-6700-southridge', 'lbnl-crt', 'ncar-nwsc'}  # campus or phase mismatch; mixed office or research buildings
 shares = []
 for s in sites:
     w, g = first(s, 'white_space_m2'), first(s, 'gfa_m2')

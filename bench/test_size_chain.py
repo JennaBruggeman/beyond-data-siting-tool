@@ -43,5 +43,12 @@ implied = (m2[0] / share[1], m2[1] / share[0])
 check(implied[0] <= b['min'] and b['max'] <= implied[1], 'chain covers all benchmarks', f"tool implies {implied[0]:.0f}–{implied[1]:.0f} m² of building per MW; benchmarks {b['min']}–{b['max']}")
 ff = [x['m'] for x in S['floor_to_floor'] if x['m'] < 8]  # Talavera's 8.6 m is a ground floor, not a hall floor
 check(min(ff) <= up[0] and up[1] <= max(ff), 'data-hall floor height', f"tool {up[0]}–{up[1]} m; built and proposed hall floors {min(ff)}–{max(ff)} m (n={len(ff)})")
+print('\n3. For information (not pass/fail): small sites and conversions, any tier with a stated MW')
+for s in B['sites']:
+    h = s.get('headline')
+    if not h or s['tier'] == 'context' or not (h['area_m2'] < 25000 or s.get('conversion')): continue
+    g = h['area_m2']; lo, hi = g * share[0] / m2[1], g * share[1] / m2[0]
+    where = 'inside' if lo <= h['mw'] <= hi else ('denser than the tool allows' if h['mw'] > hi else 'less dense than the tool allows')
+    print(f"  {s['name'][:46]:46} {s['tier']:9} {h['mw']:>6} MW {h['mw_basis']:7} {g:>8,.0f} m²  tool {lo:.1f}–{hi:.1f}  {where}{'  (conversion)' if s.get('conversion') else ''}")
 print(f"\n{fails} failed")
 sys.exit(1 if fails else 0)

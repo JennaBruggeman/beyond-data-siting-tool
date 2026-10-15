@@ -1,0 +1,621 @@
+[
+ {
+  "id": "hk-sunevision-mega-fanling",
+  "name": "MEGA Fanling",
+  "operator": "SUNeVision (iAdvantage)",
+  "address": "No. 11 On Chuen Street, Fanling, NT (Fanling Sheung Shui Town Lot No. 2)",
+  "city": "Hong Kong",
+  "country": "Hong Kong SAR, China",
+  "status": "operating",
+  "year": "2022 (first phase operational June 2022)",
+  "conversion": true,
+  "original_use": "six-storey warehouse",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 10,
+    "unit": "MW",
+    "measures": "total IT power capacity of the single-user data centre project (as stated)",
+    "quote": "total IT power capacity of 10MW",
+    "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2021/0707/2021070701052.pdf",
+    "where": "p.1",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 129240,
+    "unit": "sq ft",
+    "measures": "gross floor area of the leased warehouse building (pre-conversion building)",
+    "quote": "with a gross floor area of approximately 129,240 square feet",
+    "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2021/0707/2021070701034.pdf",
+    "where": "p.7",
+    "evidence": "operator claim",
+    "value_m2": 12006.8
+   },
+   {
+    "field": "storeys",
+    "value": 6,
+    "unit": "storeys",
+    "measures": "storeys of existing warehouse building",
+    "quote": "a six-storey warehouse building in Fanling, New Territories, Hong Kong",
+    "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2021/0707/2021070701034.pdf",
+    "where": "p.1",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": "warehouse to data centre conversion",
+    "unit": "",
+    "measures": "conversion scope",
+    "quote": "will be upgraded by iAdvantage from a warehouse building into a bespoke single-user data centre premises for the customer",
+    "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2021/0707/2021070701034.pdf",
+    "where": "p.4",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": "phased delivery, first phase RFS 2022",
+    "unit": "",
+    "measures": "phasing",
+    "quote": "The Group will deliver the order of the Project in phases.",
+    "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2021/0707/2021070701052.pdf",
+    "where": "p.1",
+    "evidence": "operator claim"
+   }
+  ],
+  "notes": "Both sources are SUNeVision announcements filed on HKEXnews (7 July 2021), so they are listed-company disclosures, labelled operator claim. IT MW + GFA pair: 10 MW IT / 129,240 sq ft GFA. The GFA is the warehouse building's GFA in the lease announcement; the data-centre GFA after conversion is not stated. value_m2 was converted from sq ft by the compiler (x0.09290304); the source figure is sq ft. Lease runs 1 June 2023 to 31 Oct 2034 (p.2). Trade press (DCD) also reports 10MW; it is not used as a source."
+ },
+ {
+  "id": "hk-sunevision-mega-gateway",
+  "name": "MEGA Gateway (TWTL 428)",
+  "operator": "SUNeVision (iAdvantage)",
+  "address": "Tsuen Wan Town Lot 428, Tsuen Wan, NT (street address not stated in sources)",
+  "city": "Hong Kong",
+  "country": "Hong Kong SAR, China",
+  "status": "operating",
+  "year": "2023 (opened Q1 2023)",
+  "conversion": false,
+  "original_use": "not stated",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 20,
+    "unit": "MW",
+    "measures": "'power capacity' added to the portfolio; source does not say IT or total",
+    "quote": "adding approximately 200,000 square feet GFA and 20MW to the Company's data centre portfolio",
+    "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2023/0221/2023022100793.pdf",
+    "where": "p.3",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 200000,
+    "unit": "sq ft",
+    "measures": "GFA of the site/data centre",
+    "quote": "the new site TWTL 428 in Tsuen Wan with approximately 200,000 square feet of gross floor area",
+    "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2020/0904/2020090401220.pdf",
+    "where": "p.5",
+    "evidence": "operator claim",
+    "value_m2": 18580.6
+   },
+   {
+    "field": "grid_mva",
+    "value": "on-site 132kV substation",
+    "unit": "",
+    "measures": "dedicated utility substation (no MVA stated)",
+    "quote": "on-premise and dedicated-use 132kV substation",
+    "url": "https://www.media-outreach.com/news/hong-kong/2023/03/28/210219/sunevision-celebrates-grand-opening-of-its-hyperscale-data-centre-mega-gateway/",
+    "where": "press release body",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": "en-bloc purpose-built",
+    "unit": "",
+    "measures": "building type per operator",
+    "quote": "en-bloc data centre purpose-built for customisation and flexibility",
+    "url": "https://www.media-outreach.com/news/hong-kong/2023/03/28/210219/sunevision-celebrates-grand-opening-of-its-hyperscale-data-centre-mega-gateway/",
+    "where": "press release body",
+    "evidence": "operator claim"
+   }
+  ],
+  "notes": "MW + GFA pair: 20 MW (IT vs total not stated) / ~200,000 sq ft GFA. The SUNeVision press release (28 Mar 2023, distributed via Media OutReach) also gives '20MW power capacity' and '200,000 square feet GFA'. It is not clear whether this is a new build or a redevelopment or conversion of an existing building: the operator says 'purpose-built' and the HKEX filings call it a 'new site'. Storeys, height and site area were not found. value_m2 was converted from sq ft by the compiler."
+ },
+ {
+  "id": "sg-equinix-sg4-7-tai-seng",
+  "name": "Equinix SG4 (7 Tai Seng Drive)",
+  "operator": "Equinix (owner: Mapletree Industrial Trust)",
+  "address": "7 Tai Seng Drive, Singapore 535218",
+  "city": "Singapore",
+  "country": "Singapore",
+  "status": "operating",
+  "year": "2019 (upgrade completed 3 July 2019)",
+  "conversion": true,
+  "original_use": "7-storey warehouse building",
+  "facts": [
+   {
+    "field": "gfa_m2",
+    "value": 256600,
+    "unit": "sq ft",
+    "measures": "GFA of the upgraded data centre building",
+    "quote": "With a gross floor area of about 256,600 square feet, the seven-storey data centre",
+    "url": "https://links.sgx.com/1.0.0/corporate-announcements/M3WI4W1UR1VRHNE1/582622_20191022_2QFY19%20Results_Press%20Release.pdf",
+    "where": "p.3",
+    "evidence": "operator claim",
+    "value_m2": 23838.9
+   },
+   {
+    "field": "storeys",
+    "value": 7,
+    "unit": "storeys",
+    "measures": "storeys",
+    "quote": "the seven-storey data centre",
+    "url": "https://links.sgx.com/1.0.0/corporate-announcements/M3WI4W1UR1VRHNE1/582622_20191022_2QFY19%20Results_Press%20Release.pdf",
+    "where": "p.3",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "white_space_m2",
+    "value": 45424,
+    "unit": "sq ft",
+    "measures": "colocation space (initial spec sheet, Q2 2018)",
+    "quote": "45,424 ft2 (4,220 m2)",
+    "url": "https://cdn.baxtel.com/data-center/equinix-singapore-sg4/files/SG4_IBX_Site_Spec_01.03.2019.pdf",
+    "where": "p.1 spec table",
+    "evidence": "operator claim",
+    "value_m2": 4220
+   },
+   {
+    "field": "other",
+    "value": "conversion",
+    "unit": "",
+    "measures": "original building",
+    "quote": "7-story warehouse building",
+    "url": "https://cdn.baxtel.com/data-center/equinix-singapore-sg4/files/SG4_IBX_Site_Spec_01.03.2019.pdf",
+    "where": "p.1",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "cooling",
+    "value": "N+1 water-cooled chillers; N+20% CRACs",
+    "unit": "",
+    "measures": "cooling plant",
+    "quote": "N+1 water-cooled chillers",
+    "url": "https://cdn.baxtel.com/data-center/equinix-singapore-sg4/files/SG4_IBX_Site_Spec_01.03.2019.pdf",
+    "where": "p.1",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gensets",
+    "value": "N+2 MV genset ring",
+    "unit": "",
+    "measures": "backup generation",
+    "quote": "N+2 MV genset ring",
+    "url": "https://cdn.baxtel.com/data-center/equinix-singapore-sg4/files/SG4_IBX_Site_Spec_01.03.2019.pdf",
+    "where": "p.1",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": "2.86 kVA/cabinet initial; 4.39 kVA ultimate",
+    "unit": "kVA per cabinet",
+    "measures": "design power density",
+    "quote": "2.86 kVA per cabinet (initial)",
+    "url": "https://cdn.baxtel.com/data-center/equinix-singapore-sg4/files/SG4_IBX_Site_Spec_01.03.2019.pdf",
+    "where": "p.1",
+    "evidence": "operator claim"
+   }
+  ],
+  "notes": "No MW was found in any primary source. The MIT release (SGX filing) gives the GFA. The Equinix 'SG4 IBX Site Spec v010319 Q218' is an Equinix document, but the copy used is mirrored on cdn.baxtel.com, an aggregator; the original Equinix URL was not found. From these, colocation space is 4,220 m², about 17.7% of GFA, and probably reflects only the initial phase. The MIT 27 Apr 2018 release on acquiring and upgrading 7 Tai Seng Drive could not be fetched (client error), so the pre-conversion GFA is unverified. value_m2 for the GFA was converted from sq ft by the compiler."
+ },
+ {
+  "id": "hk-a-kc-481-wah-sing",
+  "name": "Proposed data centre, 13-17 Wah Sing Street (A/KC/481)",
+  "operator": "Master Green Limited (applicant)",
+  "address": "13-17 Wah Sing Street, Kwai Chung, NT",
+  "city": "Hong Kong",
+  "country": "Hong Kong SAR, China",
+  "status": "unknown",
+  "year": "2021 (application)",
+  "conversion": false,
+  "original_use": "industrial building built 1969 (to be redeveloped)",
+  "facts": [
+   {
+    "field": "site_area_m2",
+    "value": 1777.608,
+    "unit": "m2",
+    "measures": "site area",
+    "quote": "About 约 1,777.608 sq. m 平方米",
+    "url": "https://www.tpb.gov.hk/sc/plan_application/Attachment/20210928/s16_A_KC_481_0_gist.pdf",
+    "where": "gist p.1",
+    "evidence": "applicant claim",
+    "value_m2": 1777.608
+   },
+   {
+    "field": "gfa_m2",
+    "value": 20264.7,
+    "unit": "m2",
+    "measures": "total GFA (non-domestic PR 11.4)",
+    "quote": "the total gross floor area of about 20,264.7m2",
+    "url": "https://www.tpb.gov.hk/sc/plan_application/Attachment/20210928/s16_A_KC_481_0_gist.pdf",
+    "where": "supporting planning statement (unnumbered page); gist p.1",
+    "evidence": "applicant claim",
+    "value_m2": 20264.7
+   },
+   {
+    "field": "storeys",
+    "value": 20,
+    "unit": "storeys",
+    "measures": "incl. G/F and 1 basement",
+    "quote": "20-storey data centre building ( including G/F and 1 level of basement car park )",
+    "url": "https://www.tpb.gov.hk/sc/plan_application/Attachment/20210928/s16_A_KC_481_0_gist.pdf",
+    "where": "planning statement (unnumbered)",
+    "evidence": "applicant claim"
+   },
+   {
+    "field": "height_m",
+    "value": 105,
+    "unit": "m",
+    "measures": "maximum building height (also not more than 120 mPD)",
+    "quote": "Not more than 不多於 105 m 米",
+    "url": "https://www.tpb.gov.hk/sc/plan_application/Attachment/20210928/s16_A_KC_481_0_gist.pdf",
+    "where": "gist p.2",
+    "evidence": "applicant claim"
+   },
+   {
+    "field": "other",
+    "value": "PR relaxation 9.5 to 11.4",
+    "unit": "",
+    "measures": "plot ratio sought",
+    "quote": "from 9.5 to 11.4(+ 20 %)",
+    "url": "https://www.tpb.gov.hk/sc/plan_application/Attachment/20210928/s16_A_KC_481_0_gist.pdf",
+    "where": "planning statement",
+    "evidence": "applicant claim"
+   },
+   {
+    "field": "grid_mva",
+    "value": "132kV substation on site",
+    "unit": "",
+    "measures": "utility substation (no MVA stated)",
+    "quote": "132kV S . S . + ASSOCIATED PLANT ROOM",
+    "url": "https://www.tpb.gov.hk/sc/plan_application/Attachment/20210928/s16_A_KC_481_0_gist.pdf",
+    "where": "schematic section (unnumbered)",
+    "evidence": "applicant claim"
+   },
+   {
+    "field": "other",
+    "value": "10 data halls (DATA HALL 01-10)",
+    "unit": "",
+    "measures": "hall count from drawings; no areas",
+    "quote": "DATA HALL 01",
+    "url": "https://www.tpb.gov.hk/sc/plan_application/Attachment/20210928/s16_A_KC_481_0_gist.pdf",
+    "where": "schematic section",
+    "evidence": "applicant claim"
+   }
+  ],
+  "notes": "No MW was found in the gist or planning statement. The decision was not verified because the TPB application page (tpb.gov.hk/en/plan_application/A_KC_481.html) was blocked (permission not granted in time) and the MPC paper was not located. This is a redevelopment of a 1969 industrial building, not a conversion. It is a good tall, tight-lot datapoint: about 11.4 PR and 20 storeys on 1,778 m². The site-area quote has garbled Chinese characters from PDF extraction."
+ },
+ {
+  "id": "hk-gov-data-centre-complex-csw",
+  "name": "Government Data Centre Complex (Project 120KA)",
+  "operator": "HKSAR Government (OGCIO)",
+  "address": "King Lam Street, Cheung Sha Wan, Kowloon",
+  "city": "Hong Kong",
+  "country": "Hong Kong SAR, China",
+  "status": "operating",
+  "year": "2021 (planned completion Q3 2021)",
+  "conversion": false,
+  "original_use": "not stated",
+  "facts": [
+   {
+    "field": "site_area_m2",
+    "value": 1400,
+    "unit": "m2",
+    "measures": "site area",
+    "quote": "occupying an area of about 1 400 square metres (m2)",
+    "url": "https://www.legco.gov.hk/yr17-18/english/fc/pwsc/papers/p18-07e.pdf",
+    "where": "Encl.1 p.1",
+    "evidence": "public record",
+    "value_m2": 1400
+   },
+   {
+    "field": "gfa_m2",
+    "value": 13800,
+    "unit": "m2",
+    "measures": "construction floor area (CFA), not GFA",
+    "quote": "construction floor area (CFA) of about 13 800 m2",
+    "url": "https://www.legco.gov.hk/yr17-18/english/fc/pwsc/papers/p18-07e.pdf",
+    "where": "Encl.1 p.1",
+    "evidence": "public record",
+    "value_m2": 13800
+   },
+   {
+    "field": "gfa_m2",
+    "value": 12400,
+    "unit": "m2",
+    "measures": "建築樓面面積 (building/construction floor area), 2014 proposal",
+    "quote": "建築樓面面積約 12 400 平方米 (building floor area about 12,400 m2)",
+    "url": "https://www.legco.gov.hk/yr14-15/chinese/panels/itb/papers/itb20141208cb4-201-3-c.pdf",
+    "where": "para 5(a)(i)",
+    "evidence": "public record",
+    "value_m2": 12400
+   },
+   {
+    "field": "storeys",
+    "value": 13,
+    "unit": "storeys",
+    "measures": "storeys",
+    "quote": "The 13-storey building will include the following facilities",
+    "url": "https://www.legco.gov.hk/yr17-18/english/fc/pwsc/papers/p18-07e.pdf",
+    "where": "Encl.1 p.1",
+    "evidence": "public record"
+   },
+   {
+    "field": "other",
+    "value": 1400,
+    "unit": "racks",
+    "measures": "data hall rack capacity",
+    "quote": "around 1 400 racks",
+    "url": "https://www.legco.gov.hk/yr17-18/english/fc/pwsc/papers/p18-07e.pdf",
+    "where": "Encl.1 para 1(a)(i)",
+    "evidence": "public record"
+   },
+   {
+    "field": "other",
+    "value": 1.6,
+    "unit": "PUE",
+    "measures": "target PUE",
+    "quote": "目標能源使用效率值約為 1.6 (target PUE about 1.6)",
+    "url": "https://www.legco.gov.hk/yr14-15/chinese/panels/itb/papers/itb20141208cb4-201-3-c.pdf",
+    "where": "para 13",
+    "evidence": "public record"
+   },
+   {
+    "field": "cooling",
+    "value": "hot/cold aisle; water-cooled chiller",
+    "unit": "",
+    "measures": "cooling",
+    "quote": "resilient and energy efficient cooling system providing hot/cold aisle solutions",
+    "url": "https://www.legco.gov.hk/yr17-18/english/fc/pwsc/papers/p18-07e.pdf",
+    "where": "Encl.1 para 1(b)(ii)",
+    "evidence": "public record"
+   }
+  ],
+  "notes": "No MW was found; the 2014 and 2018 LegCo papers state no power figures. The CFA was 12,400 m² in the 2014 ITB panel paper and 13,800 m² in the 2018 PWSC paper. The English 2014 background brief could not be fetched (robots disallowed). The location is given as King Lam Street in 2018, and the extraction of the 2014 Chinese paper suggested another street name, which is unverified. It is a purpose-built small-lot tower: about 1,400 m² site and 13 storeys, a floor area ratio of about 9.9 by CFA."
+ },
+ {
+  "id": "au-17-23-talavera-rd-conversion",
+  "name": "Data centre conversion, 17-23 Talavera Road (DA LDA2010/671)",
+  "operator": "GIDDIS Pty Ltd (applicant); possibly Macquarie Telecom Intellicentre 2 (unverified)",
+  "address": "17-23 Talavera Road, Macquarie Park NSW",
+  "city": "Sydney",
+  "country": "Australia",
+  "status": "approved",
+  "year": "2011 (approved 29/04/2011)",
+  "conversion": true,
+  "original_use": "two-storey commercial/office building (IT company offices)",
+  "facts": [
+   {
+    "field": "gfa_m2",
+    "value": 4779.4,
+    "unit": "m2",
+    "measures": "total GFA after alterations and additions (incl. 958.7 m2 new)",
+    "quote": "A total of 4779.4m2 gross floor area (includes new floor area of 958.7m2",
+    "url": "https://apps.planningportal.nsw.gov.au/prweb/PRRestService/DocMgmt/v1/PublicDocuments/DATA-WORKATTACH-FILE%20PEC-DPE-EP-WORK%20PPS-2011SYE006!20190614T174549.985%20GMT",
+    "where": "JRPP business paper p.10",
+    "evidence": "public record",
+    "value_m2": 4779.4
+   },
+   {
+    "field": "site_area_m2",
+    "value": 20030,
+    "unit": "m2",
+    "measures": "site area",
+    "quote": "The site has an area of approximately 20,030m2",
+    "url": "https://apps.planningportal.nsw.gov.au/prweb/PRRestService/DocMgmt/v1/PublicDocuments/DATA-WORKATTACH-FILE%20PEC-DPE-EP-WORK%20PPS-2011SYE006!20190614T174549.985%20GMT",
+    "where": "p.2",
+    "evidence": "public record",
+    "value_m2": 20030
+   },
+   {
+    "field": "other",
+    "value": "FSR 0.23:1",
+    "unit": "",
+    "measures": "floor space ratio",
+    "quote": "This equates to a floor space ratio of 0.23:1.",
+    "url": "https://apps.planningportal.nsw.gov.au/prweb/PRRestService/DocMgmt/v1/PublicDocuments/DATA-WORKATTACH-FILE%20PEC-DPE-EP-WORK%20PPS-2011SYE006!20190614T174549.985%20GMT",
+    "where": "p.10",
+    "evidence": "public record"
+   },
+   {
+    "field": "height_m",
+    "value": 17.2,
+    "unit": "m",
+    "measures": "max height of addition",
+    "quote": "The maximum height of the proposed addition will not exceed 17.2m.",
+    "url": "https://apps.planningportal.nsw.gov.au/prweb/PRRestService/DocMgmt/v1/PublicDocuments/DATA-WORKATTACH-FILE%20PEC-DPE-EP-WORK%20PPS-2011SYE006!20190614T174549.985%20GMT",
+    "where": "p.10",
+    "evidence": "public record"
+   },
+   {
+    "field": "storeys",
+    "value": "2 + 2-storey addition",
+    "unit": "",
+    "measures": "existing 2 storeys plus a 2-storey addition",
+    "quote": "2 storey addition to the existing building;",
+    "url": "https://apps.planningportal.nsw.gov.au/prweb/PRRestService/DocMgmt/v1/PublicDocuments/DATA-WORKATTACH-FILE%20PEC-DPE-EP-WORK%20PPS-2011SYE006!20190614T174549.985%20GMT",
+    "where": "p.3",
+    "evidence": "public record"
+   },
+   {
+    "field": "jobs",
+    "value": 15,
+    "unit": "persons",
+    "measures": "normal operational staffing",
+    "quote": "In its normal operational mode the data centre will employ fifteen (15) people.",
+    "url": "https://apps.planningportal.nsw.gov.au/prweb/PRRestService/DocMgmt/v1/PublicDocuments/DATA-WORKATTACH-FILE%20PEC-DPE-EP-WORK%20PPS-2011SYE006!20190614T174549.985%20GMT",
+    "where": "p.3",
+    "evidence": "applicant claim"
+   },
+   {
+    "field": "other",
+    "value": "office to data centre",
+    "unit": "",
+    "measures": "original use",
+    "quote": "The building on the site has been used as an office premises for an IT company.",
+    "url": "https://apps.planningportal.nsw.gov.au/prweb/PRRestService/DocMgmt/v1/PublicDocuments/DATA-WORKATTACH-FILE%20PEC-DPE-EP-WORK%20PPS-2011SYE006!20190614T174549.985%20GMT",
+    "where": "p.9",
+    "evidence": "public record"
+   }
+  ],
+  "notes": "No MW was found in the JRPP business paper. The panel record is PPS-2011SYE006 on the NSW Planning Portal (planning-panel/alts-addition-building-and-commence-use-data-centre). The operator link to Macquarie IC2 rests only on the filename of a Macquarie ASX PDF ('Completion-of-Sale-and-Leaseback-of-17-23-Talavera-Road-2.pdf', about Intellicentre 2); the document itself states no address, so this is unverified. The site is a low-FSR suburban business park, not a tight lot, but it is a clear conversion datapoint. This is a different building from the catalogue's IC3 Super West."
+ },
+ {
+  "id": "au-22-oriordan-st-alexandria",
+  "name": "22 O'Riordan Street Alexandria Data Centre (SSD-77274467)",
+  "operator": "not stated on portal (trade press names Markham; not verified)",
+  "address": "22 O'Riordan Street, Alexandria NSW",
+  "city": "Sydney",
+  "country": "Australia",
+  "status": "proposed",
+  "year": "SEARs issued; EIS in preparation",
+  "conversion": false,
+  "original_use": "existing structures to be demolished (use not stated)",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 38,
+    "unit": "MW",
+    "measures": "'power capacity' (IT vs total not stated)",
+    "quote": "Construction and operation of a data centre with a power capacity of 38 MW including a demolition,",
+    "url": "https://www.planningportal.nsw.gov.au/major-projects/projects/22-oriordan-street-alexandria-data-centre",
+    "where": "project description",
+    "evidence": "applicant claim"
+   },
+   {
+    "field": "storeys",
+    "value": "3-5",
+    "unit": "storeys",
+    "measures": "storeys, with commercial ground floor",
+    "quote": "3-5 storey data centre building including commercial ground floor level",
+    "url": "https://www.planningportal.nsw.gov.au/major-projects/projects/22-oriordan-street-alexandria-data-centre",
+    "where": "project description",
+    "evidence": "applicant claim"
+   }
+  ],
+  "notes": "This is an inner-city tight-lot site in Alexandria with a commercial ground floor, but no GFA is published yet. The scoping report and SEARs attachments are listed on the portal without retrievable links. It sits slightly above the 30 MW target. Trade press (DCD) names the applicant as Markham; that was used only to locate the record and is not verified."
+ },
+ {
+  "id": "jp-attokyo-center3-fuchu",
+  "name": "AT TOKYO Center 3 (アット東京 第3センター)",
+  "operator": "AT TOKYO Corporation (株式会社アット東京)",
+  "address": "Fuchu-shi, Tokyo (東京都府中市)",
+  "city": "Tokyo (Fuchu)",
+  "country": "Japan",
+  "status": "operating",
+  "year": "2008 (竣工 May 2008)",
+  "conversion": false,
+  "original_use": "purpose-built data centre",
+  "facts": [
+   {
+    "field": "gfa_m2",
+    "value": 19136.26,
+    "unit": "m2",
+    "measures": "延床面積 (total floor area)",
+    "quote": "延床面積 19,136.26 ㎡ (total floor area)",
+    "url": "https://www.kankyo.metro.tokyo.lg.jp/documents/d/kankyo/toplevel-certification-files-r4_at-tokyo-data-center-3",
+    "where": "建物諸元 (as of Dec 2022)",
+    "evidence": "public record",
+    "value_m2": 19136.26
+   },
+   {
+    "field": "site_area_m2",
+    "value": 6353.81,
+    "unit": "m2",
+    "measures": "敷地面積 (site area)",
+    "quote": "敷地面積 6,353.81 ㎡ (site area)",
+    "url": "https://www.kankyo.metro.tokyo.lg.jp/documents/d/kankyo/toplevel-certification-files-r4_at-tokyo-data-center-3",
+    "where": "建物諸元",
+    "evidence": "public record",
+    "value_m2": 6353.81
+   },
+   {
+    "field": "storeys",
+    "value": "10 above + 1 below",
+    "unit": "",
+    "measures": "階数",
+    "quote": "地上 10 階 地下 1 階 (10 storeys above ground, 1 basement)",
+    "url": "https://www.kankyo.metro.tokyo.lg.jp/documents/d/kankyo/toplevel-certification-files-r4_at-tokyo-data-center-3",
+    "where": "建物諸元",
+    "evidence": "public record"
+   }
+  ],
+  "notes": "No MW was found. This is a Tokyo Metropolitan Government top-level-facility certification sheet (public record). The site is suburban Fuchu, not central Tokyo, and is included as a mid-size multi-storey datapoint (FAR about 3.0). The certification sheet for AT TOKYO Chuo 2 Center (Koto-ku) gives 延床面積 41,319 ㎡ on a 16,097 ㎡ site with 11 storeys, but it is over 25,000 m², has no MW and is not entered here (URL: kankyo.metro.tokyo.lg.jp/documents/d/kankyo/toplevel-certification-files-r3_at-tokyo-chuo-data-center-2)."
+ },
+ {
+  "id": "jp-idcf-tokyo-fuchu",
+  "name": "IDC Frontier Tokyo Fuchu Data Center",
+  "operator": "IDC Frontier",
+  "address": "Fuchu, Tokyo (street address not stated)",
+  "city": "Tokyo (Fuchu)",
+  "country": "Japan",
+  "status": "operating",
+  "year": "2020 (開業 Dec 2020)",
+  "conversion": false,
+  "original_use": "not stated",
+  "facts": [
+   {
+    "field": "grid_mva",
+    "value": 50,
+    "unit": "MW",
+    "measures": "受電容量 (utility receiving capacity), NOT IT load",
+    "quote": "受電容量 50MW (power receiving capacity 50 MW)",
+    "url": "https://www.idcf.jp/pdf/inquiry/download/datacenter/pdf/fuchu.pdf",
+    "where": "spec sheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 45000,
+    "unit": "m2",
+    "measures": "延床面積 (total floor area), approximate",
+    "quote": "延床面積 約45,000㎡ (total floor area approx. 45,000 m2)",
+    "url": "https://www.idcf.jp/pdf/inquiry/download/datacenter/pdf/fuchu.pdf",
+    "where": "spec sheet",
+    "evidence": "operator claim",
+    "value_m2": 45000
+   },
+   {
+    "field": "storeys",
+    "value": 7,
+    "unit": "floors",
+    "measures": "floors with 25 server rooms",
+    "quote": "全7フロア/25部屋分の (7 floors in total / 25 rooms)",
+    "url": "https://www.idcf.jp/pdf/inquiry/download/datacenter/pdf/fuchu.pdf",
+    "where": "spec sheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": 4000,
+    "unit": "racks",
+    "measures": "rack count",
+    "quote": "約4,000ラック (approx. 4,000 racks)",
+    "url": "https://www.idcf.jp/pdf/inquiry/download/datacenter/pdf/fuchu.pdf",
+    "where": "spec sheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "cooling",
+    "value": "central heat source",
+    "unit": "",
+    "measures": "cooling",
+    "quote": "冷却方式 中央熱源方式 (central heat-source cooling)",
+    "url": "https://www.idcf.jp/pdf/inquiry/download/datacenter/pdf/fuchu.pdf",
+    "where": "spec sheet",
+    "evidence": "operator claim"
+   }
+  ],
+  "notes": "This is out of the target range (45,000 m², suburban) and is included only as a reference pair of receiving MW and floor area: 50 MW utility receiving / about 45,000 m². The 50 MW is receiving (utility) capacity, not IT load. Design density is about 7 kVA/rack average and 15 kVA maximum."
+ }
+]

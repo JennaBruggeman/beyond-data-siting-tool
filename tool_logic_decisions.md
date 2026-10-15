@@ -132,3 +132,11 @@ Running record of decisions J.B. has made about the tool's logic, in the order m
 - bench/test_size_chain.py reads engine.js and checks: every benchmark falls inside the tool's range (10/10; they sit 8–71% up the range, median ≈38%, so the top of the range is optimistic); coefficients within the catalogue; check line in sync. The check line moved from 291–1,580 to the benchmark 505–1,109.
 - Show the math: size chain and "what that size needs" now print each step with the site's numbers.
 - Catalogue page published (db capability: J.B.'s "matches source" checks are stored in collection `checks`, readable by Claude).
+
+## 15 Oct 2026 — catalogue round 2: small urban sites and conversions
+
+- Four targeted passes (US, UK/Europe, Canada, Asia-Pacific): 41 new sites, 130 in all, 762 facts. Planning records for small sites rarely state IT MW; most small and conversion pairs are operator claims.
+- One new benchmark: Colt Les Ulis DH10+ (12.8 MW IT, 7,590 m² surface de plancher; MRAe opinion re-checked by Claude). Benchmarks now 11; range unchanged 505–1,109 m²/MW (median 680).
+- Re-checked by Claude: 3060 Raymond (the 6 MW "critical load" equals the stated maximum facility use, so IT is unclear → reference); Vantage LHR12 (30 MW "data centre capacity", not stated as IT → reference).
+- Small sites and conversions (information only, test section 3): 10 of 15 inside the tool's range; denser than the tool: eStruxture VAN-1 (387 m²/MW, operator), 111 E 5th (291, "up to", applicant), 3060 Raymond (378, IT unclear); less dense: 365 Main (2,452, aggregator copy), eStruxture MTL-3 (1,858, operator conflict). Small sites scatter more widely than large ones; the two Vancouver cases sit above the tool's top.
+- Tool wording no longer names a benchmark count.

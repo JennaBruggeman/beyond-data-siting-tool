@@ -1,0 +1,647 @@
+[
+ {
+  "id": "colovore-3060-raymond",
+  "name": "3060 Raymond Street Data Center (Colovore)",
+  "operator": "Colovore, LLC (project sponsor)",
+  "address": "3060 Raymond St., Santa Clara, CA 95054",
+  "city": "Santa Clara",
+  "country": "USA",
+  "status": "approved",
+  "year": "2023 (IS/MND dated March 6, 2023)",
+  "conversion": true,
+  "original_use": "Two-storey industrial building (c. 1974 per operator); occupied since 2014 by a wholesale computer/networking equipment distributor",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 6,
+    "unit": "MW",
+    "measures": "Critical load (UPS/battery-backed) = facility critical load; IS also gives 6 MW as estimated maximum facility use",
+    "quote": "Batteries would provide enough energy to cover the critical load of six MW in the event of a power failure.",
+    "url": "https://files.ceqanet.lci.ca.gov/286028-1/attachment/A4G4-RZy-2RJofrDvyjtrnsbDaXq_gsM0rNeV-cpJXIjoJPQFrU5Zmd2AYrCIXa08LkOcFIYHwV2qyZj0",
+    "where": "IS/MND p. 7",
+    "evidence": "applicant claim"
+   },
+   {
+    "field": "other",
+    "value": 6,
+    "unit": "MW",
+    "measures": "Estimated maximum facility electricity use (same 6 MW figure, described as facility maximum)",
+    "quote": "The facility would use an estimated maximum of 6 MW for a maximum load of 144,000 kilowatt-hours (kWh) daily.",
+    "url": "https://files.ceqanet.lci.ca.gov/286028-1/attachment/A4G4-RZy-2RJofrDvyjtrnsbDaXq_gsM0rNeV-cpJXIjoJPQFrU5Zmd2AYrCIXa08LkOcFIYHwV2qyZj0",
+    "where": "IS/MND p. 8",
+    "evidence": "applicant claim"
+   },
+   {
+    "field": "grid_mva",
+    "value": 9,
+    "unit": "MW",
+    "measures": "Utility supply capacity after upsizing (two SVP feeds); stated in MW not MVA",
+    "quote": "upsizing the power supply from 1.6 megawatt (MW) to 9 MW (provided by two new 4.5 MW feeds from SVP)",
+    "url": "https://files.ceqanet.lci.ca.gov/286028-1/attachment/A4G4-RZy-2RJofrDvyjtrnsbDaXq_gsM0rNeV-cpJXIjoJPQFrU5Zmd2AYrCIXa08LkOcFIYHwV2qyZj0",
+    "where": "IS/MND p. 4",
+    "evidence": "applicant claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 24422,
+    "unit": "sq ft",
+    "value_m2": 2268.9,
+    "measures": "Existing building floor area (retained and refinished); not explicitly labelled gross",
+    "quote": "The exterior of the existing 24,422 square foot building would be refinished",
+    "url": "https://files.ceqanet.lci.ca.gov/286028-1/attachment/A4G4-RZy-2RJofrDvyjtrnsbDaXq_gsM0rNeV-cpJXIjoJPQFrU5Zmd2AYrCIXa08LkOcFIYHwV2qyZj0",
+    "where": "IS/MND p. 4",
+    "evidence": "applicant claim"
+   },
+   {
+    "field": "storeys",
+    "value": 2,
+    "unit": "storeys",
+    "measures": "Existing building",
+    "quote": "a two-story industrial building and parking lot",
+    "url": "https://files.ceqanet.lci.ca.gov/286028-1/attachment/A4G4-RZy-2RJofrDvyjtrnsbDaXq_gsM0rNeV-cpJXIjoJPQFrU5Zmd2AYrCIXa08LkOcFIYHwV2qyZj0",
+    "where": "IS/MND p. 2",
+    "evidence": "public record"
+   },
+   {
+    "field": "site_area_m2",
+    "value": 1.35,
+    "unit": "acres",
+    "value_m2": 5463.3,
+    "measures": "Parcel at 3060 Raymond (project site is ~1.7 ac over two parcels)",
+    "quote": "The approximately 1.7-acre project site comprises two parcels: one 1.35-acre parcel at 3060 Raymond Street",
+    "url": "https://files.ceqanet.lci.ca.gov/286028-1/attachment/A4G4-RZy-2RJofrDvyjtrnsbDaXq_gsM0rNeV-cpJXIjoJPQFrU5Zmd2AYrCIXa08LkOcFIYHwV2qyZj0",
+    "where": "IS/MND p. 1",
+    "evidence": "public record"
+   },
+   {
+    "field": "gensets",
+    "value": "5 x 2,000 kW",
+    "unit": "kW",
+    "measures": "Backup diesel generators (conflict: p. 34 says 2,922 kW each)",
+    "quote": "installation of five 2,000-kilowatt (kW) back-up generators",
+    "url": "https://files.ceqanet.lci.ca.gov/286028-1/attachment/A4G4-RZy-2RJofrDvyjtrnsbDaXq_gsM0rNeV-cpJXIjoJPQFrU5Zmd2AYrCIXa08LkOcFIYHwV2qyZj0",
+    "where": "IS/MND p. 4",
+    "evidence": "applicant claim"
+   },
+   {
+    "field": "cooling",
+    "value": "air-cooled chillers, closed loop",
+    "unit": "",
+    "measures": "Heat rejection",
+    "quote": "The project would include five air cooled chillers on a closed cooling loop on the south side of the data center building.",
+    "url": "https://files.ceqanet.lci.ca.gov/286028-1/attachment/A4G4-RZy-2RJofrDvyjtrnsbDaXq_gsM0rNeV-cpJXIjoJPQFrU5Zmd2AYrCIXa08LkOcFIYHwV2qyZj0",
+    "where": "IS/MND p. 7",
+    "evidence": "applicant claim"
+   },
+   {
+    "field": "height_m",
+    "value": "not exceeding existing building",
+    "unit": "",
+    "measures": "No numeric height; new equipment within existing parapet height",
+    "quote": "This new equipment would not exceed the maximum height of the existing building, including the existing parapet.",
+    "url": "https://files.ceqanet.lci.ca.gov/286028-1/attachment/A4G4-RZy-2RJofrDvyjtrnsbDaXq_gsM0rNeV-cpJXIjoJPQFrU5Zmd2AYrCIXa08LkOcFIYHwV2qyZj0",
+    "where": "IS/MND p. 11",
+    "evidence": "applicant claim"
+   },
+   {
+    "field": "jobs",
+    "value": 7,
+    "unit": "FTE",
+    "measures": "Operational employees (vs up to 35 for existing industrial use)",
+    "quote": "up to 7 full-time employees would be required for operation of the data center,",
+    "url": "https://files.ceqanet.lci.ca.gov/286028-1/attachment/A4G4-RZy-2RJofrDvyjtrnsbDaXq_gsM0rNeV-cpJXIjoJPQFrU5Zmd2AYrCIXa08LkOcFIYHwV2qyZj0",
+    "where": "IS/MND p. 8",
+    "evidence": "applicant claim"
+   },
+   {
+    "field": "other",
+    "value": "22 -> 6",
+    "unit": "parking spaces",
+    "measures": "Parking reduced to code minimum",
+    "quote": "the on-site parking would be reduced to the minimum requirement of 6 total spaces,",
+    "url": "https://files.ceqanet.lci.ca.gov/286028-1/attachment/A4G4-RZy-2RJofrDvyjtrnsbDaXq_gsM0rNeV-cpJXIjoJPQFrU5Zmd2AYrCIXa08LkOcFIYHwV2qyZj0",
+    "where": "IS/MND p. 4",
+    "evidence": "applicant claim"
+   }
+  ],
+  "notes": "Best small-conversion pair found: 6 MW critical / 24,422 sf (2,269 m2) -> ~2.6 kW/m2 of gross. Internal conflicts in the IS: generators 2,000 kW (pp. 4, 7) vs 2,922 kW (p. 34); chillers five (pp. iii, 7) vs six 427-ton (Table 1 p. 4, p. 11). Notice of availability lists applicant Arc Tee, Inc. and owner Ellis Partners. Operator's own news page gives 29,000 sq ft and 9 MW (operator claim, https://www.colovore.com/news/colovore-plans-9mw-liquid-cooled-data-center-in-santa-clara) - conflicts with IS 24,422 sf; the 9 MW appears to be the utility supply, not critical load. CEQAnet project page: https://ceqanet.lci.ca.gov/2023030248. Quotes extracted via a text tool from the PDF; page numbers are the document's printed pages - spot-check before citing."
+ },
+ {
+  "id": "el-segundo-444-n-nash",
+  "name": "444 North Nash Street Data Center",
+  "operator": "not stated in the IS/MND excerpt read",
+  "address": "444 N. Nash St., El Segundo, CA",
+  "city": "El Segundo",
+  "country": "USA",
+  "status": "operating",
+  "year": "IS/MND 2022 (generator amendment); expansion approved 2013",
+  "conversion": true,
+  "original_use": "Warehouse and office building (1950s)",
+  "facts": [
+   {
+    "field": "gfa_m2",
+    "value": 116756,
+    "unit": "sq ft",
+    "value_m2": 10847.0,
+    "measures": "Existing data centre floor area before the approved 2013 expansion",
+    "quote": "approximately 116,756-SF data center with 70 surface parking spaces",
+    "url": "https://files.ceqanet.lci.ca.gov/282858-1/attachment/s2sV8BFiu_1gU9sCdzl7IMA8Qg07fySY8eOOjA3L4avsHXggl8tOuz4AE0fePqB_qrDdATf1YzRHff8u0",
+    "where": "IS/MND p. 7",
+    "evidence": "public record"
+   },
+   {
+    "field": "other",
+    "value": 180422,
+    "unit": "sq ft",
+    "value_m2": 16761.7,
+    "measures": "Floor area after the approved (EA-971) expansion; 38,861 sf northerly portion not yet built at 2022",
+    "quote": "expanded from 116,756-SF to 180,422-SF",
+    "url": "https://files.ceqanet.lci.ca.gov/282858-1/attachment/s2sV8BFiu_1gU9sCdzl7IMA8Qg07fySY8eOOjA3L4avsHXggl8tOuz4AE0fePqB_qrDdATf1YzRHff8u0",
+    "where": "IS/MND p. 13",
+    "evidence": "public record"
+   },
+   {
+    "field": "other",
+    "value": "warehouse/office, 1950s",
+    "unit": "",
+    "measures": "Original use",
+    "quote": "originally constructed as a warehouse and office building in the 1950's",
+    "url": "https://files.ceqanet.lci.ca.gov/282858-1/attachment/s2sV8BFiu_1gU9sCdzl7IMA8Qg07fySY8eOOjA3L4avsHXggl8tOuz4AE0fePqB_qrDdATf1YzRHff8u0",
+    "where": "IS/MND p. 13",
+    "evidence": "public record"
+   },
+   {
+    "field": "site_area_m2",
+    "value": 6.14,
+    "unit": "acres",
+    "value_m2": 24847.7,
+    "measures": "Whole property (project site for generators is a 0.5-acre portion)",
+    "quote": "a 0.5-acre portion of an approximately 6.14-acre property",
+    "url": "https://files.ceqanet.lci.ca.gov/282858-1/attachment/s2sV8BFiu_1gU9sCdzl7IMA8Qg07fySY8eOOjA3L4avsHXggl8tOuz4AE0fePqB_qrDdATf1YzRHff8u0",
+    "where": "IS/MND p. 14",
+    "evidence": "public record"
+   },
+   {
+    "field": "gensets",
+    "value": "7 x 2,500 kW + 1 x 550 kW existing; up to 15 total proposed",
+    "unit": "kW",
+    "measures": "Emergency diesel generators (Table 2-3)",
+    "quote": "2,500 kW each 7 5 12",
+    "url": "https://files.ceqanet.lci.ca.gov/282858-1/attachment/s2sV8BFiu_1gU9sCdzl7IMA8Qg07fySY8eOOjA3L4avsHXggl8tOuz4AE0fePqB_qrDdATf1YzRHff8u0",
+    "where": "IS/MND Table 2-3, p. 15",
+    "evidence": "applicant claim"
+   }
+  ],
+  "notes": "No IT MW found in the portions read (text extraction stopped around the energy section, p. 55, mid-sentence 'The Project's electrical demand is expected to be'); the figure may be on p. 55 of the PDF - check manually. Screen wall height conflict 35 ft (s.2.4.3) vs 30 ft (s.4.1c). Operator not named in the excerpt read. CEQAnet: https://ceqanet.lci.ca.gov/2022110041; earlier expansion MND https://ceqanet.lci.ca.gov/2012121003 ('a 63,666 gross sf expansion to the existing data center located at 444 North Nash Street')."
+ },
+ {
+  "id": "santa-clara-2970-corvin",
+  "name": "Terremark Data Center (2970 Corvin Drive)",
+  "operator": "Terremark (per CEQA title)",
+  "address": "2970 Corvin Drive, Santa Clara, CA 95051",
+  "city": "Santa Clara",
+  "country": "USA",
+  "status": "unknown",
+  "year": "2010 (MND)",
+  "conversion": true,
+  "original_use": "Light industrial building",
+  "facts": [
+   {
+    "field": "gfa_m2",
+    "value": 43300,
+    "unit": "sq ft",
+    "value_m2": 4022.7,
+    "measures": "Existing building to be converted",
+    "quote": "conversion of the existing, approximately 43,300sf light industrial building located at 2970 Corvin Drive",
+    "url": "https://ceqanet.lci.ca.gov/2010072077",
+    "where": "CEQAnet project description",
+    "evidence": "public record"
+   },
+   {
+    "field": "site_area_m2",
+    "value": 1.93,
+    "unit": "acres",
+    "value_m2": 7810.4,
+    "measures": "Total acres (CEQAnet record field)",
+    "quote": "1.93",
+    "url": "https://ceqanet.lci.ca.gov/2010072077",
+    "where": "CEQAnet record, Total Acres field",
+    "evidence": "public record"
+   }
+  ],
+  "notes": "Conversion with gross area only; no MW on CEQAnet record. MND attachments not hosted (pre-dates attachment hosting); obtain from City of Santa Clara Planning. Build status not verified."
+ },
+ {
+  "id": "santa-clara-drt-duane-alfred",
+  "name": "Digital Realty Trust Data Center (Duane Ave / Alfred St)",
+  "operator": "Digital Realty Trust (per CEQA title)",
+  "address": "APN 224-42-009, near Duane Ave & Alfred St, Santa Clara, CA 95054 (street number not given)",
+  "city": "Santa Clara",
+  "country": "USA",
+  "status": "unknown",
+  "year": "2010 (MND)",
+  "conversion": true,
+  "original_use": "Vacant building (prior use not stated)",
+  "facts": [
+   {
+    "field": "gfa_m2",
+    "value": 49858,
+    "unit": "sq ft",
+    "value_m2": 4632.0,
+    "measures": "Existing vacant building to be re-used; footprint unchanged",
+    "quote": "re-use of a vacant 49,858 square-foot building as a data center with four server rooms.",
+    "url": "https://ceqanet.lci.ca.gov/2010092051",
+    "where": "CEQAnet project description",
+    "evidence": "public record"
+   },
+   {
+    "field": "site_area_m2",
+    "value": 2.4,
+    "unit": "acres",
+    "value_m2": 9712.5,
+    "measures": "Total acres (CEQAnet record field)",
+    "quote": "2.40",
+    "url": "https://ceqanet.lci.ca.gov/2010092051",
+    "where": "CEQAnet record, Total Acres field",
+    "evidence": "public record"
+   },
+   {
+    "field": "other",
+    "value": 4,
+    "unit": "server rooms",
+    "measures": "Number of server rooms",
+    "quote": "with four server rooms",
+    "url": "https://ceqanet.lci.ca.gov/2010092051",
+    "where": "CEQAnet project description",
+    "evidence": "public record"
+   }
+  ],
+  "notes": "Conversion with gross area only; no MW. Attachments not hosted; request from City of Santa Clara. Street address not on record."
+ },
+ {
+  "id": "chicago-400-s-lasalle",
+  "name": "Chicago Byte Exchange (400 S. LaSalle, former CBOE building)",
+  "operator": "Legacy Investing",
+  "address": "400 S LaSalle St, Chicago, IL 60605",
+  "city": "Chicago",
+  "country": "USA",
+  "status": "under construction",
+  "year": "RFS Q4 2026 (operator)",
+  "conversion": true,
+  "original_use": "Office/exchange building (former Chicago Board Options Exchange HQ - identified from trade press only, not from the flyer)",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 22,
+    "unit": "MW",
+    "measures": "Critical power, total (expandable); phased 10 IT MW Q4'26 + 12 IT MW Q2'27",
+    "quote": "Total Megawatts: 22 MW expandable",
+    "url": "https://cdn.baxtel.com/data-center/chicago/files/Legacy_Chicago_Flyer_-_11.5.2025__1_.pdf",
+    "where": "Flyer (1 p.), Critical Power",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "grid_mva",
+    "value": 33,
+    "unit": "MW",
+    "measures": "Utility capacity (expandable to 50 MW after new substation)",
+    "quote": "Capacity 33 MW via seven (7) diverse routed utility service feeds",
+    "url": "https://cdn.baxtel.com/data-center/chicago/files/Legacy_Chicago_Flyer_-_11.5.2025__1_.pdf",
+    "where": "Flyer, Utility",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 300500,
+    "unit": "sq ft",
+    "value_m2": 27917.4,
+    "measures": "Building size (flyer does not say gross)",
+    "quote": "+/-300,500 sq.ft.",
+    "url": "https://cdn.baxtel.com/data-center/chicago/files/Legacy_Chicago_Flyer_-_11.5.2025__1_.pdf",
+    "where": "Flyer, building summary",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "white_space_m2",
+    "value": 100000,
+    "unit": "sq ft",
+    "value_m2": 9290.3,
+    "measures": "Total data hall space (Hall 1 30,000; Hall 2 21,000; Hall 3 22,000 sf listed)",
+    "quote": "Over 100,000 SF of total data hall space",
+    "url": "https://cdn.baxtel.com/data-center/chicago/files/Legacy_Chicago_Flyer_-_11.5.2025__1_.pdf",
+    "where": "Flyer",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "storeys",
+    "value": "6 + basement",
+    "unit": "floors",
+    "measures": "",
+    "quote": "Six (6) + Basement",
+    "url": "https://cdn.baxtel.com/data-center/chicago/files/Legacy_Chicago_Flyer_-_11.5.2025__1_.pdf",
+    "where": "Flyer",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "floor_to_floor_m",
+    "value": "18-46",
+    "unit": "ft",
+    "measures": "Slab-to-slab height range (clear 15-32 ft)",
+    "quote": "18 - 46 ft.",
+    "url": "https://cdn.baxtel.com/data-center/chicago/files/Legacy_Chicago_Flyer_-_11.5.2025__1_.pdf",
+    "where": "Flyer",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gensets",
+    "value": "15 x 2.4 MW (36 MW), N+1",
+    "unit": "MW",
+    "measures": "Backup generators",
+    "quote": "36 MW - fifteen (15) 2.4 MW units",
+    "url": "https://cdn.baxtel.com/data-center/chicago/files/Legacy_Chicago_Flyer_-_11.5.2025__1_.pdf",
+    "where": "Flyer",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "cooling",
+    "value": "direct-to-chip; closed chilled water loops",
+    "unit": "",
+    "measures": "",
+    "quote": "Designed for direct to-chip cooling; closed chilled water loops",
+    "url": "https://cdn.baxtel.com/data-center/chicago/files/Legacy_Chicago_Flyer_-_11.5.2025__1_.pdf",
+    "where": "Flyer",
+    "evidence": "operator claim"
+   }
+  ],
+  "notes": "Slightly above target (22 MW, ~27,900 m2) but an urban office conversion with IT MW + building area + data hall area: hall share ~33% of stated building area; ~0.79 kW IT per m2 of building. CAVEAT: operator flyer, but the copy read is hosted on baxtel's CDN (third-party aggregator) - locate the operator-hosted original before citing. Building history not stated in the flyer."
+ },
+ {
+  "id": "sf-365-main",
+  "name": "365 Main Street (SFO12)",
+  "operator": "Digital Realty",
+  "address": "365 Main St, San Francisco, CA",
+  "city": "San Francisco",
+  "country": "USA",
+  "status": "operating",
+  "year": "factsheet 2023 (file code 2308)",
+  "conversion": true,
+  "original_use": "Military tank assembly plant",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 8.6,
+    "unit": "MW",
+    "measures": "Critical IT power load (UPS capacity also 8,600 kW)",
+    "quote": "8.6 MW of critical IT power load",
+    "url": "https://static.datacentermap.com/company/digital-realty-trust/datacenter771/DS_Digital_Realty_2308_SFO12_Property_Factsheet_EN.pdf",
+    "where": "Factsheet intro",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "grid_mva",
+    "value": 15,
+    "unit": "MW",
+    "measures": "Utility power capacity (15,000 kW; not defined further)",
+    "quote": "Utility Power Capacity: 15,000 (kW)",
+    "url": "https://static.datacentermap.com/company/digital-realty-trust/datacenter771/DS_Digital_Realty_2308_SFO12_Property_Factsheet_EN.pdf",
+    "where": "Factsheet, Technical Overview",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 227000,
+    "unit": "sq ft",
+    "value_m2": 21089.0,
+    "measures": "Building size (not labelled gross)",
+    "quote": "6 Levels; 227,000 sq.ft.",
+    "url": "https://static.datacentermap.com/company/digital-realty-trust/datacenter771/DS_Digital_Realty_2308_SFO12_Property_Factsheet_EN.pdf",
+    "where": "Factsheet, Technical Overview",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "storeys",
+    "value": 6,
+    "unit": "levels",
+    "measures": "",
+    "quote": "6 Levels; 227,000 sq.ft.",
+    "url": "https://static.datacentermap.com/company/digital-realty-trust/datacenter771/DS_Digital_Realty_2308_SFO12_Property_Factsheet_EN.pdf",
+    "where": "Factsheet, Technical Overview",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "gensets",
+    "value": "8,600 kW total",
+    "unit": "kW",
+    "measures": "Generator power capacity; unit count not stated",
+    "quote": "Generator Power Capacity: 8,600 (kW)",
+    "url": "https://static.datacentermap.com/company/digital-realty-trust/datacenter771/DS_Digital_Realty_2308_SFO12_Property_Factsheet_EN.pdf",
+    "where": "Factsheet",
+    "evidence": "operator claim"
+   },
+   {
+    "field": "other",
+    "value": "tank assembly plant",
+    "unit": "",
+    "measures": "Original use",
+    "quote": "Originally built as a military tank assembly plant,",
+    "url": "https://static.datacentermap.com/company/digital-realty-trust/datacenter771/DS_Digital_Realty_2308_SFO12_Property_Factsheet_EN.pdf",
+    "where": "Factsheet",
+    "evidence": "operator claim"
+   }
+  ],
+  "notes": "Pair: 8.6 MW critical IT / 227,000 sf (21,089 m2) -> ~0.41 kW/m2 - low density typical of an older multi-storey urban conversion. CAVEAT: the operator-hosted original (https://go2.digitalrealty.com/rs/087-YZJ-646/images/DS_Digital_Realty_2308_SFO12_Property_Factsheet_EN.pdf) was blocked to the fetch tool (robots.txt); the content was read from an identically named copy on datacentermap's static server before that was known. Treat as UNVERIFIED until Jenna opens the operator URL herself."
+ },
+ {
+  "id": "slac-srcf",
+  "name": "Stanford Research Computing Facility (SRCF)",
+  "operator": "Stanford University (on SLAC/DOE land)",
+  "address": "SLAC National Accelerator Laboratory, east of Cooling Tower 1701, Menlo Park, CA",
+  "city": "Menlo Park",
+  "country": "USA",
+  "status": "operating",
+  "year": "2012 (NEPA CX signed 5/2/2012)",
+  "conversion": false,
+  "original_use": "",
+  "facts": [
+   {
+    "field": "it_mw",
+    "value": 3,
+    "unit": "MW",
+    "measures": "'data center potential' - not defined as IT vs total",
+    "quote": "capable of providing 3 MW of data center potential",
+    "url": "https://www.energy.gov/sites/default/files/CX-008184.pdf",
+    "where": "CX determination SS-SC-12-03, project description",
+    "evidence": "public record"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 21500,
+    "unit": "sq ft",
+    "value_m2": 1997.4,
+    "measures": "New two-storey computer facility",
+    "quote": "construction of a new computer facility (21,500 square feet)",
+    "url": "https://www.energy.gov/sites/default/files/CX-008184.pdf",
+    "where": "CX determination SS-SC-12-03, project description",
+    "evidence": "public record"
+   },
+   {
+    "field": "storeys",
+    "value": 2,
+    "unit": "storeys",
+    "measures": "Ground floor electrical/receiving; 2nd floor server room + mechanical",
+    "quote": "two-story facility",
+    "url": "https://www.energy.gov/sites/default/files/CX-008184.pdf",
+    "where": "CX determination SS-SC-12-03",
+    "evidence": "public record"
+   },
+   {
+    "field": "site_area_m2",
+    "value": 2,
+    "unit": "acres",
+    "value_m2": 8093.7,
+    "measures": "Approximate project site",
+    "quote": "The project site (approximately 2 acres) is located east of Cooling Tower 1701.",
+    "url": "https://www.energy.gov/sites/default/files/CX-008184.pdf",
+    "where": "CX determination SS-SC-12-03",
+    "evidence": "public record"
+   }
+  ],
+  "notes": "Not urban (research campus) but a clean small public-record pair: 3 MW / 21,500 sf (1,997 m2) -> ~1.5 kW/m2 gross. MW basis not stated. SRCF II expansion (CX-024752, 9/10/2021, https://www.energy.gov/sites/default/files/2021-11/CX-024752.pdf): 'an additional 3MW of data center potential' and 'approximately 17,000 of additional computer lab facility' (unit omitted in the record; presumably sq ft, ~1,579 m2 - unverified), two-storey."
+ },
+ {
+  "id": "lbnl-crt",
+  "name": "Computational Research and Theory (CRT) Facility, LBNL",
+  "operator": "Lawrence Berkeley National Laboratory / UC (NERSC)",
+  "address": "LBNL, adjacent to Blackberry Gate, Berkeley, CA",
+  "city": "Berkeley",
+  "country": "USA",
+  "status": "operating",
+  "year": "2008 Regents approval (built later)",
+  "conversion": false,
+  "original_use": "",
+  "facts": [
+   {
+    "field": "other",
+    "value": 7.5,
+    "unit": "MW",
+    "measures": "Initial power capacity serving HPC AND office loads (total, not IT-only); expansion potential 17 MW",
+    "quote": "The facility will include an initial power capacity of 7.5 MW to serve the initial high performance computing and office loads.",
+    "url": "https://regents.universityofcalifornia.edu/regmeet/may08/gb2.pdf",
+    "where": "UC Regents Committee on Grounds item, p. 4",
+    "evidence": "public record"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 126300,
+    "unit": "gsf",
+    "value_m2": 11733.6,
+    "measures": "Gross building area (73,000 asf)",
+    "quote": "a new building of approximately 126,300 gsf (73,000 asf).",
+    "url": "https://regents.universityofcalifornia.edu/regmeet/may08/gb2.pdf",
+    "where": "p. 4",
+    "evidence": "public record"
+   },
+   {
+    "field": "white_space_m2",
+    "value": 32000,
+    "unit": "asf",
+    "value_m2": 2972.9,
+    "measures": "HPC space (assignable)",
+    "quote": "32,000 asf of high performance computing space.",
+    "url": "https://regents.universityofcalifornia.edu/regmeet/may08/gb2.pdf",
+    "where": "p. 4",
+    "evidence": "public record"
+   },
+   {
+    "field": "storeys",
+    "value": 3,
+    "unit": "storeys",
+    "measures": "Steel frame; two-storey office over HPC",
+    "quote": "three-story steel framed structure",
+    "url": "https://regents.universityofcalifornia.edu/regmeet/may08/gb2.pdf",
+    "where": "p. 4",
+    "evidence": "public record"
+   },
+   {
+    "field": "site_area_m2",
+    "value": 2.25,
+    "unit": "acres",
+    "value_m2": 9105.4,
+    "measures": "Project parcel",
+    "quote": "The proposed project site is a 2.25-acre University-owned parcel adjacent to the Blackberry Gate.",
+    "url": "https://regents.universityofcalifornia.edu/regmeet/may08/gb2.pdf",
+    "where": "p. 3",
+    "evidence": "public record"
+   }
+  ],
+  "notes": "Mixed HPC + office building; MW is total initial capacity incl. office. HPC share of gross = 32,000/126,300 = 25%. CEQA NOP (https://ceqanet.lci.ca.gov/2007072106) gives an earlier ~150,000 gsf scheme - conflict with the 126,300 gsf Regents figure (design changed). Page numbers inferred from running headers."
+ },
+ {
+  "id": "ncar-nwsc",
+  "name": "NCAR-Wyoming Supercomputing Center (NWSC)",
+  "operator": "UCAR/NCAR (NSF)",
+  "address": "NW corner of Prosperity Dr & Logistics Dr, Cheyenne, WY",
+  "city": "Cheyenne",
+  "country": "USA",
+  "status": "operating",
+  "year": "EA March 2010",
+  "conversion": false,
+  "original_use": "",
+  "facts": [
+   {
+    "field": "other",
+    "value": "6-8 per raised floor",
+    "unit": "MW",
+    "measures": "TOTAL electrical load per raised-floor space (computing + supporting mechanical), not IT-only; initial module has two raised floors",
+    "quote": "Each raised floor space would be sized to accommodate approximately 6-8 Megawatts (MW) of total electrical load",
+    "url": "https://nsf-gov-resources.nsf.gov/files/ncar-wyoming-ea-mar-2010.pdf",
+    "where": "EA s.2.1, p. 3",
+    "evidence": "public record"
+   },
+   {
+    "field": "gfa_m2",
+    "value": 100000,
+    "unit": "gsf",
+    "value_m2": 9290.3,
+    "measures": "Per core-and-shell module (design allows two modules)",
+    "quote": "Each module would contain approximately 100,000 gross square feet",
+    "url": "https://nsf-gov-resources.nsf.gov/files/ncar-wyoming-ea-mar-2010.pdf",
+    "where": "EA s.2.1, p. 3",
+    "evidence": "public record"
+   },
+   {
+    "field": "white_space_m2",
+    "value": 24000,
+    "unit": "sq ft",
+    "value_m2": 2229.7,
+    "measures": "Two raised-floor spaces of ~12,000 sf each per module (24,000 sf is arithmetic from the quote)",
+    "quote": "two computer raised floor spaces of approximately 12,000 square feet each",
+    "url": "https://nsf-gov-resources.nsf.gov/files/ncar-wyoming-ea-mar-2010.pdf",
+    "where": "EA s.2.1, p. 3",
+    "evidence": "public record"
+   },
+   {
+    "field": "site_area_m2",
+    "value": 24,
+    "unit": "acres",
+    "value_m2": 97124.6,
+    "measures": "Site",
+    "quote": "built on a 24-acre site",
+    "url": "https://nsf-gov-resources.nsf.gov/files/ncar-wyoming-ea-mar-2010.pdf",
+    "where": "EA s.2.2, p. 7",
+    "evidence": "public record"
+   },
+   {
+    "field": "gensets",
+    "value": "up to 10 diesel + 1 life-safety",
+    "unit": "",
+    "measures": "Backup generators",
+    "quote": "supply up to ten diesel back-up emergency power generators",
+    "url": "https://nsf-gov-resources.nsf.gov/files/ncar-wyoming-ea-mar-2010.pdf",
+    "where": "EA s.2.1, p. 3",
+    "evidence": "public record"
+   }
+  ],
+  "notes": "Not urban; included as a public-record white-space vs gross pair: raised floor 24,000 sf per 100,000 gsf module = 24% hall share; 12-16 MW TOTAL load per module (derived by doubling 6-8 MW - not stated as such). Single-storey assumed but storeys/height not found in the portion read."
+ }
+]
