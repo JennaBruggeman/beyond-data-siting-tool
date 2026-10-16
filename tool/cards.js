@@ -77,6 +77,13 @@ function heatEcon(f,p){ const R=E().R, city=f.city, cop=R.cop;
   return o; }
 BD.heatEcon=heatEcon;
 const STATUS={within:['within break-even','#8fb996'],depends:['depends on pipe cost','#cdb07a'],beyond:['beyond break-even','#6b6964'],unknown:['demand not yet known','#9d9a94']};
+/* receiver list grouped by kind (J.B., 16 Oct: "a lot of repetition"): the kind, the shared connection difficulty and the column labels are said
+   once per group; a row shows only what differs — name, size, route, and a status word unless it is the greyed "beyond break-even". */
+function groupRows(shown){ const by={}; shown.forEach(p=>(by[p.t]=by[p.t]||[]).push(p)); const ord=['housing','school','hospital','care','rec','pool','arena'];
+  return ord.filter(t=>by[t]).map(t=>{ const L=by[t].slice(0,40), more=by[t].length-L.length; const dk=[...new Set(L.map(p=>p.diff.t))], same=dk.length===1;
+    const nW=L.filter(p=>p.econ.status==='within').length, nB=L.filter(p=>p.beyond).length;
+    return `<h3 class="gh">${esc(TYPE[t])} <span class="src">${by[t].length} building${by[t].length>1?'s':''}${nW?` · ${nW} within break-even`:''}${nB?` · ${nB} beyond (grey)`:''}${same?` · connection: ${esc(dk[0].toLowerCase())}`:''}</span></h3>
+    <table class="idx gr"><thead><tr><th></th><th class="r">${t==='housing'?'homes':'floor, est.'}</th><th class="r">route</th><th></th></tr></thead><tbody>${L.map(p=>`<tr class="${p.beyond?'grey':''} rowlink" data-rid="${p.id}"><td>${esc(p.n||'(unnamed)')}${p.beyond?'':`<div>${stPill(p.econ.status)}</div>`}${same?'':`<div class="src" style="color:${DCOL[p.diff.k]}">${esc(p.diff.t)}</div>`}</td><td class="r">${p.u?fmt(p.u):p.fa?fmt(p.fa)+' m²':'—'}</td><td class="r">${fmt(p.econ.route)} m</td><td class="r chev">›</td></tr>`).join('')}${more>0?`<tr><td colspan="4" class="src">and ${more} more further away</td></tr>`:''}</tbody></table>`; }).join(''); }
 const stPill=k=>`<span class="cls" style="border-color:${STATUS[k][1]};color:${STATUS[k][1]}">${STATUS[k][0]}</span>`;
 /* how hard to connect (J.B., 16 Oct): Ready / Needs a heat-pump lift / Needs a building retrofit / Not yet known */
 function difficulty(f,p,nets){ const nIn=nets.find(n=>BD.pip(p.x,p.y,n.r)), inNet=!!nIn&&nIn.src==='van9552';
@@ -121,12 +128,12 @@ async function heatIndex(){
   ${otherNets(f.city)}
   ${f.city==='van'?`<p class="sub">City policy: the Energy Centre Guidelines (2012) name waste heat — from commercial and industrial operations and sewage lines — as the generally preferred low-carbon source for neighbourhood energy (RTS 9772, Appendix A, 4.1). A guideline, not a requirement to buy it.</p>`:''}
   <label class="tgl"><input type="checkbox" id="showB" ${showB?'checked':''}> Show buildings beyond break-even (greyed, with what would close the gap)</label>
-  <table class="idx"><tbody>${shown.slice(0,60).map(p=>`<tr class="${p.beyond?'grey':''}"><td>${esc(p.n||TYPE[p.t])}<div class="src">${esc(TYPE[p.t])}${p.u?' · '+p.u+' homes':''}</div></td><td class="r">${fmt(p.econ.route)} m<div class="src">route</div></td><td>${stPill(p.econ.status)}<br><span class="cls" style="border-color:${DCOL[p.diff.k]};color:${DCOL[p.diff.k]};margin-top:3px">${esc(p.diff.t)}</span></td><td class="r"><a href="#" class="ex" data-rid="${p.id}">Explore ›</a></td></tr>`).join('')}${shown.length>60?`<tr><td colspan="4" class="src">and ${shown.length-60} more further away</td></tr>`:''}</tbody></table>
+  ${groupRows(shown)}
   <p class="sub" style="margin-top:10px"><a href="#" id="hmath">How the heat figure is worked out ›</a> · <a href="#" id="carriers">How far is too far, for each thing it could share ›</a></p>
   <div class="draftnote">Draft wording (Claude) for J.B. Sources are in each card.</div>`;
   $('#side').innerHTML=h; e.wireTabs(); BD.draw();
   $('#showB').onchange=ev=>{ A.showBeyond=ev.target.checked; heatIndex(); };
-  document.querySelectorAll('#side [data-rid]').forEach(a=>a.onclick=ev=>{ ev.preventDefault(); openConnection('heat',+a.dataset.rid); });
+  document.querySelectorAll('#side [data-rid]').forEach(a=>a.onclick=ev=>{ if(ev.target.closest&&ev.target.closest('a')&&!ev.target.closest('a').dataset.rid) return; ev.preventDefault(); openConnection('heat',+a.dataset.rid); });
   const nb=document.querySelector('#side [data-net]'); if(nb) nb.onclick=ev=>{ ev.preventDefault(); netCard(f,nets); };
   $('#hmath').onclick=ev=>{ ev.preventDefault(); heatMathCard(f,r); };
   $('#carriers').onclick=ev=>{ ev.preventDefault(); carriersCard(f); };

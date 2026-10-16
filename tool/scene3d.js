@@ -194,7 +194,7 @@ function heat(d){
     if(d.selected!=null&&d.selected!==p.id) { /* dim the others when one connection is open */ }
     const hi=d.selected!=null&&d.selected===p.id; const curve=arc(src,top,Math.min(140,p.dist*0.12));
     R.ov.add(line(curve,hi?C.acc:ccol,beyond?3:true,hi?1:beyond?0.45:0.85));
-    label(`${p.n||TYPE[p.t]}${nb?'':' (location only)'}${beyond?' · beyond break-even':''}`,top.clone().add(new T.Vector3(0,10,0)),hi?'#e39a93':beyond?'#6b6964':hex(col),{prio:hi?10:beyond?2:4,from:top});
+    label(`${p.n||TYPE[p.t]}${nb?'':' (location only)'}`,top.clone().add(new T.Vector3(0,10,0)),hi?'#e39a93':beyond?'#6b6964':hex(col),{prio:hi?10:beyond?2:4,from:top});
     shown++; }
   if(d.route&&d.route.length>1){ R.ov.add(line(d.route.map(q=>V(q[0],q[1],0.8)),C.acc,false,1)); const mid=d.route[Math.floor(d.route.length/2)]; label('pipe route along the streets',V(mid[0],mid[1],6),'#e39a93',{prio:9}); }
   label('heat out',src.clone().add(new T.Vector3(0,12,0)),'#d1a35e',{prio:8,from:src});
