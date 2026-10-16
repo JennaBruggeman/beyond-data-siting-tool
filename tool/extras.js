@@ -5,7 +5,7 @@
 'use strict';
 const BD=window.BD, E=()=>BD.eng; const {$,esc,fmt}=BD;
 BD.views=BD.views||{};
-const VERSION={n:17,date:'15 Oct 2026'};
+const VERSION={n:18,date:'15 Oct 2026'};
 const draft=t=>`<span class="draft">${t}</span>`;
 
 /* ---------- worked examples ---------- */
@@ -182,7 +182,8 @@ function citiesView(){
    ['Equal to the heating of',rng(v.homes[0],v.homes[1],'homes'),rng(d.homes[0],d.homes[1],'homes'),`a home uses ${R.homeMWh.van} MWh a year in BC, ${R.homeMWh.edm} in Alberta (NRCan CEUD 2023)`,'record'],
    ['Heat-pump carbon',rng(v.hpco2[0],v.hpco2[1],'t CO₂e/yr'),rng(d.hpco2[0],d.hpco2[1],'t CO₂e/yr'),'heat-pump electricity × grid carbon','physics'],
    ['Busiest to quietest heating month','about 3.9 : 1','about 3.3 : 1','total heat demand (CWEC)','peer'],
-   ['Solar yield','1,009 kWh per kWp a year','1,245 kWh per kWp a year','NRCan','peer'],
+   ['Solar yield, roof','892–1,007 kWh per kWp a year','944–1,244 kWh per kWp a year','NRCan municipal values (flat to latitude tilt)','record'],
+   ['Solar yield, south wall','716 kWh per kWp a year','989 kWh per kWp a year','NRCan municipal values (vertical)','record'],
    ['Rain','about 1,160 mm a year','about 420 mm a year','ECCC Normals 1991–2020','record'],
    ['Night noise limit next to homes','45–55 dBA by zone (By-law 6555)','50 dBA (Bylaw 14600)','city by-laws','record'],
    ['Getting power','2026 Call: must curtail ≥10% of load on 24 h notice, ≥144 h a year; downtown feeders frozen to 2032','AESO interim limit of 1,200 MW for new large loads, fully allocated','BC Hydro 2026 RFA; AESO 2025','record'],

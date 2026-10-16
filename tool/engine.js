@@ -380,7 +380,7 @@ const s3=k=>`<div class="src">${badge(k==='lf'?'lf2':k)}${esc(SRC3[k])}</div>`;
 function energyView(){
   const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=[fac[0]*8760*R.lf,fac[1]*8760*R.lf];
   const roof=roofArea(f), plant=plantPerMW(false)[1]*mw, share=Math.min(0.9,roof?plant/roof:0);
-  const kwp=[roof*0.66*(1-share)*0.70*0.16,roof*0.66*(1-share)*0.70*0.20], yld=f.city==='van'?1009:1245, pvMWh=kwp.map(v=>v*yld/1000);
+  const kwp=[roof*0.66*(1-share)*0.70*0.16,roof*0.66*(1-share)*0.70*0.20], yld=f.city==='van'?[892,1007]:[944,1244], pvMWh=kwp.map((v,i)=>v*yld[i]/1000);
   const co2=MWh.map(v=>v*R.grid[f.city]/1000);
   const cost=f.city==='van'?[MWh[0]*1000*0.0679+fac[0]*1000*13.83*12,MWh[1]*1000*0.0679+fac[1]*1000*13.83*12]:null;
   const ups=[mw*1/60*0.5,mw*5/60*0.5], gen=[fac[0]*1000*4,fac[1]*1000*4];
@@ -401,7 +401,7 @@ function energyView(){
     `Electricity a year: ${n1(fac[0])} MW × 8,760 h × ${R.lf} = ${n0(MWh[0])} MWh; ${n1(fac[1])} MW × 8,760 × ${R.lf} = <b>${n0(MWh[1])} MWh</b>.`,
     cost?`Cost: energy ${n0(MWh[0])} MWh × 1,000 × $0.0679 + demand ${n1(fac[0])} MW × 1,000 × $13.83 × 12 = $${n0(cost[0])}; high end $${n0(cost[1])}.`:'Cost: Alberta pool price plus EPCOR charges; no single-rate estimate.',
     `Carbon: ${n0(MWh[0])}–${n0(MWh[1])} MWh × ${R.grid[f.city]} g/kWh ÷ 1,000 = <b>${rng(co2[0],co2[1],'t CO₂e')}</b>.`,
-    `Solar: roof ${n0(roof)} m² × 0.66 usable × (1 − ${share.toFixed(2)} plant) × 0.70 packing × 0.16–0.20 kW/m² = ${n1(kwp[0])}–${n1(kwp[1])} kWp; × ${yld} kWh per kWp a year = <b>${rng(pvMWh[0],pvMWh[1],'MWh')}</b>; ÷ the building's use = ${(pvMWh[0]/MWh[1]*100).toFixed(2)}–${(pvMWh[1]/MWh[0]*100).toFixed(2)}%.`,
+    `Solar: roof ${n0(roof)} m² × 0.66 usable × (1 − ${share.toFixed(2)} plant) × 0.70 packing × 0.16–0.20 kW/m² = ${n1(kwp[0])}–${n1(kwp[1])} kWp; × ${fmt(yld[0])}–${fmt(yld[1])} kWh per kWp a year (flat to latitude tilt, NRCan) = <b>${rng(pvMWh[0],pvMWh[1],'MWh')}</b>; ÷ the building's use = ${(pvMWh[0]/MWh[1]*100).toFixed(2)}–${(pvMWh[1]/MWh[0]*100).toFixed(2)}%.`,
     `UPS batteries: ${mw} MW × 1–5 min ÷ 60 × 0.5 kept for outages = <b>${n1(ups[0])}–${n1(ups[1])} MWh</b>.`,
     `Generator testing: ${n1(fac[0])}–${n1(fac[1])} MW × 1,000 × 4 h = ${n0(gen[0])}–${n0(gen[1])} kWh; × 0.706 kg CO₂/kWh = ${n1(gen[0]*0.706/1000)}–${n1(gen[1]*0.706/1000)} t; × 14.6 g NOₓ/kWh = ${n0(gen[0]*14.6/1000)}–${n0(gen[1]*14.6/1000)} kg.`],
     'PUE: LBNL 2023, Uptime 2025. Load factor: Fan et al. 2007. Rates: BC Hydro LGS 2026. Solar: NRCan yields, NREL densities. Generator factors: AP-42 Table 3.4-1 (upper bounds).')}

@@ -272,7 +272,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "quantities": 139,
 "conditions": 101,
 "opportunities": 15,
-"sources": 369
+"sources": 372
 }
 },
 "stages": [
@@ -4199,31 +4199,31 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "test",
 "name": "EV charging regulatory status",
-"formula": "BC: exempt from UCA Part 3 (MO M104, 2019; G-66-19); Alberta: no rule yet (AUC 2021 inquiry, no final decision)",
+"formula": "BC: exempt from UCA Part 3 (MO M104, 2019; G-66-19). Alberta: no rule yet — the AUC found parties agreed EV charging is \"not defined clearly in legislation\" and that its status is \"unclear\"; most saw no need for more oversight (AUC Distribution System Inquiry, 2021)",
 "coef": "",
 "unit": "flag",
 "sources": [
 "m104",
-"gowlingEV2021"
+"aucDSI2021"
 ],
 "source_roles": [
 {
 "id": "m104",
-"term": "all coefficients",
-"role": "coefficient",
+"term": "BC exemption",
+"role": "rule",
 "conf": 90,
 "verified": true
 },
 {
-"id": "gowlingEV2021",
-"term": "Alberta status (law-firm summary)",
+"id": "aucDSI2021",
+"term": "Alberta: status unclear, no added oversight (pp. 60, 68–69)",
 "role": "rule",
-"conf": 50,
+"conf": 90,
 "verified": true
 }
 ],
 "conf": 90,
-"status": "BC confirmed; Alberta from a secondary source — AUC report to read",
+"status": "both cities confirmed from primary sources",
 "direction": "place",
 "trial": "",
 "inputs": [],
@@ -4663,9 +4663,10 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "place",
 "name": "Rules for generation beside the data centre",
 "formula": "export cap and compensation by province; connection priority for paired generation (Alberta)",
-"coef": "BC: RS 2289 from 1 Jul 2026, export up to 100 kW per phase at $0.10/kWh; community generation up to 2 MW. Alberta: micro-generation ≤5 MW (retail credit <150 kW, wholesale above); data centres paired with dedicated new generation or storage go to the front of the connection line (Alta Reg 117/2026, government summary)",
+"coef": "BC: RS 2289 from 1 Jul 2026, export up to 100 kW per phase (or ≤100 kW nameplate) at $0.10/kWh, same or adjacent parcel; RS 2289 applies only at distribution voltage, so a data centre supplied at 60 kV or higher (RS 1830) cannot use it; community generation up to 2 MW. Alberta: micro-generation ≤5 MW (retail credit <150 kW, wholesale above); data centres paired with dedicated new generation or storage go to the front of the connection line (Alta Reg 117/2026, government summary)",
 "unit": "rule",
 "sources": [
+"bchTariff2026",
 "bchRS2289",
 "abMicrogen",
 "abGridPage",
@@ -4707,6 +4708,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "rule",
 "conf": 50,
 "verified": true
+},
+{
+"id": "bchTariff2026",
+"term": "RS 2289 tariff text",
+"role": "rule",
+"conf": 90,
+"verified": true
 }
 ],
 "conf": 80,
@@ -4722,9 +4730,10 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "place",
 "name": "Price of power at the site",
 "formula": "tariff for the customer class: BC Hydro LGS or Transmission (RS 1830); Alberta pool price + EPCOR (Edmonton) or FortisAlberta (Parkland) distribution and transmission",
-"coef": "BC LGS (1 Jul 2026): $13.83/kW, 6.79 ¢/kWh, 29.99 ¢/day; RS 1830: $12.178/kVA, 4.914 ¢/kWh; loads >150 MW pay full incremental cost; 300 MW AI + 100 MW DC allocation. Alberta: pool $43.68/MWh (2025), $62.78 (2024); EPCOR DAS-TOUP and SAS-TOUP; FortisAlberta Rate 63; Rate of Last Resort not available to these loads. Replaces the first attempt's assumed $80–120/MWh",
+"coef": "BC LGS (RS 1600–1611, effective 1 Apr 2026): $13.83/kW, 6.79 ¢/kWh, 29.99 ¢/day; RS 1830 (supply at 60 kV or higher, effective 1 Apr 2026): $12.178/kVA, 4.914 ¢/kWh; loads >150 MW pay full incremental cost; 300 MW AI + 100 MW DC allocation. Alberta: pool $43.68/MWh (2025), $62.78 (2024); EPCOR DAS-TOUP and SAS-TOUP; FortisAlberta Rate 63; Rate of Last Resort not available to these loads. Replaces the first attempt's assumed $80–120/MWh",
 "unit": "$/MWh + $/kW",
 "sources": [
+"bchTariff2026",
 "bchLGS",
 "bcIEAF",
 "aesoStats2025",
@@ -4764,6 +4773,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "id": "fortisAB2026",
 "term": "Parkland delivery charges",
 "role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "bchTariff2026",
+"term": "LGS and RS 1830 prices (tariff text)",
+"role": "coefficient",
 "conf": 90,
 "verified": true
 }
@@ -5504,20 +5520,21 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Solar on the data centre roof",
 "formula": "kWp = roof area × 0.66 × (1 − plant share) × 0.70 × 0.16–0.20; MWh = kWp × yield",
-"coef": "yield 1,009 kWh/kWp·yr Vancouver, 1,245 Edmonton at latitude tilt, ±10 %, losses included (NRCan 2006, Table 1) — an upper bound for 15° flat-roof arrays until NRCan horizontal values are retrieved (D9); module density 0.16 kWp/m² (2014 median) to 0.20 (current) (NREL); module cover 0.70 of a flat roof at 15° tilt; 66 % of large roofs suitable (NREL 2016); roof share taken by plant from the cooling module",
+"coef": "yield, annual kWh/kWp (NRCan municipal values, ±10%, losses in a 0.75 performance ratio): Vancouver 892 horizontal to 1007 at latitude tilt; Edmonton 944 to 1244. A flat-roof array at about 15° tilt lies between the two, so the tool uses horizontal as the low end and latitude tilt as the high end. Edmonton yields about 6–24% more than Vancouver per kWp. Module density 0.16 kWp/m² (2014 median) to 0.20 (current) (NREL); module cover 0.70 of a flat roof at 15° tilt; 66% of large roofs suitable (NREL 2016); roof share taken by plant from the cooling module",
 "unit": "kWp; MWh/yr",
 "sources": [
-"nrcan_pv2006",
+"nrcanPVmunic",
 "nrel_rooftop2016",
 "nrel_bench2023",
-"vanRoofBulletin2022"
+"vanRoofBulletin2022",
+"edmZB510"
 ],
 "source_roles": [
 {
-"id": "nrcan_pv2006",
-"term": "Solar on the data centre roof",
-"role": "data",
-"conf": 70,
+"id": "nrcanPVmunic",
+"term": "annual yield by orientation",
+"role": "coefficient",
+"conf": 80,
 "verified": true
 },
 {
@@ -5540,10 +5557,17 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "rule",
 "conf": 90,
 "verified": true
+},
+{
+"id": "edmZB510",
+"term": "Edmonton collector projection rules",
+"role": "rule",
+"conf": 90,
+"verified": true
 }
 ],
 "conf": 70,
-"status": "in hand; NRCan horizontal and vertical values to retrieve",
+"status": "in hand (NRCan municipal values, 15 Oct 2026)",
 "direction": "",
 "trial": "technology",
 "inputs": [
@@ -5557,37 +5581,37 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "characterise",
 "name": "Solar on the facade",
-"formula": "MWh = south facade area × module density × yield × 0.4–0.6",
-"coef": "vertical BIPV needs 1.7–2.5 × the area of rooftop PV for the same energy (IEA PVPS summary of Yang et al. 2026) → factor 0.4–0.6, interim until NRCan vertical values; no Canadian BIPV cost found",
+"formula": "MWh = south facade area × module density × vertical yield",
+"coef": "vertical (south-facing, 90°) yield, annual kWh/kWp: Vancouver 716, Edmonton 989 (NRCan municipal values). Vertical gives 71% of the latitude-tilt yield in Vancouver and 80% in Edmonton; in Edmonton a south wall yields more than a flat roof (989 vs 944), because of low winter sun. Replaces the interim 0.4–0.6 factor. No Canadian BIPV cost found",
 "unit": "MWh/yr",
 "sources": [
-"ieapvps_bipv",
-"nrcan_pv2006"
+"nrcanPVmunic",
+"ieapvps_bipv"
 ],
 "source_roles": [
 {
-"id": "ieapvps_bipv",
-"term": "Solar on the facade",
-"role": "data",
-"conf": 40,
-"verified": false
+"id": "nrcanPVmunic",
+"term": "vertical yield",
+"role": "coefficient",
+"conf": 80,
+"verified": true
 },
 {
-"id": "nrcan_pv2006",
-"term": "Solar on the facade",
-"role": "data",
-"conf": 40,
-"verified": false
+"id": "ieapvps_bipv",
+"term": "context",
+"role": "check",
+"conf": 50,
+"verified": true
 }
 ],
-"conf": 40,
-"status": "interim factor",
+"conf": 70,
+"status": "in hand (NRCan vertical values, 15 Oct 2026)",
 "direction": "",
 "trial": "technology",
 "inputs": [
 "massing"
 ],
-"upstream": 40
+"upstream": 70
 },
 {
 "id": "pv_share",
@@ -5635,7 +5659,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "it_load_actual",
 "pue"
 ],
-"upstream": 40
+"upstream": 50
 },
 {
 "id": "pv_cost",
@@ -10337,12 +10361,11 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 ],
 "edm": [
 "no_rule",
-"no statute or regulation found that classifies EV charging; AUC 2021 inquiry reportedly made no final decision (secondary sources; the AUC report would not open)"
+"not defined clearly in legislation; status unclear; most parties saw no need for more oversight (AUC Distribution System Inquiry, 2021, pp. 60, 68)"
 ],
 "sources": [
 "m104",
-"gowlingEV2021",
-"rlcAUC2021"
+"aucDSI2021"
 ]
 },
 {
@@ -11009,7 +11032,10 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "edmZB570": "Edmonton Zoning Bylaw 20001 s. 5.70: roof up to 1.7 m above maximum height; flat-roof parapet 0.4 m; no height limit for listed items (mechanical penthouse, tanks, \"other similar architectural features\") — solar collectors not named (checked by Claude) — https://zoningbylaw.edmonton.ca/570-measuring-height-and-grade",
 "edmZB7120": "Edmonton Zoning Bylaw 20001 s. 7.120 cl. 3.7: no development permit for \"A Solar Collector that complies with the regulations of this Bylaw\" on a building not on the historic inventory or register (checked by Claude); the Solar Collectors regulation (s. 5.10) did not load — https://zoningbylaw.edmonton.ca/part-7-administrative-and-interpretive-clauses/development-permits/7120-no-development-permit",
 "edmZB510": "Edmonton Zoning Bylaw 20001 s. 5.10 cl. 11 (read by Claude from the bylaw PDF, data/raw/edm/bylaw): rooftop collectors may project 1.5 m from the roof and up to 1.5 m above the maximum height \"in a residential Zone\"; must not extend beyond the eave or roof edge; wall-mounted 1.5 m into a setback, 0.6 m from the lot line. Non-residential zones: no projection limit stated — City to confirm — https://zoningbylaw.edmonton.ca/part-5-general-development-regulations/510-accessory-uses-buildings-and-structures",
-"abEUA2026": "Electric Utilities Act, SA 2003, c E-5.1, current consolidation in force since 6 Feb 2026 (CanLII, read by Claude 15 Oct 2026; amended by 2022 c 8 = Bill 22): s. 1(1)(vv.1) \"self-supply\"; s. 2(1)(b) the Act does not apply to self-supply \"consumed solely on that property by that owner or tenant\"; s. 18(2) \"All electric energy entering or leaving the interconnected electric system must be exchanged through the power pool\" unless ss. 39(1.1) or 105(1.1) or regulations provide otherwise. So surplus leaving the site goes through the power pool or the micro-generation rules; there is no separate export right — https://www.canlii.org/en/ab/laws/stat/sa-2003-c-e-5.1/latest/sa-2003-c-e-5.1.html"
+"abEUA2026": "Electric Utilities Act, SA 2003, c E-5.1, current consolidation in force since 6 Feb 2026 (CanLII, read by Claude 15 Oct 2026; amended by 2022 c 8 = Bill 22): s. 1(1)(vv.1) \"self-supply\"; s. 2(1)(b) the Act does not apply to self-supply \"consumed solely on that property by that owner or tenant\"; s. 18(2) \"All electric energy entering or leaving the interconnected electric system must be exchanged through the power pool\" unless ss. 39(1.1) or 105(1.1) or regulations provide otherwise. So surplus leaving the site goes through the power pool or the micro-generation rules; there is no separate export right — https://www.canlii.org/en/ab/laws/stat/sa-2003-c-e-5.1/latest/sa-2003-c-e-5.1.html",
+"nrcanPVmunic": "NRCan, Photovoltaic potential and solar resource maps of Canada — municipal values (CSV, J.B. download 15 Oct 2026; Canadian Forest Service with CanmetENERGY; CERES 1974–1993 insolation, 144 stations; performance ratio 0.75; \"within about 10%\" of lifetime averages). Annual kWh/kWp — Vancouver: horizontal 892, latitude tilt 1007, vertical 716; Edmonton: horizontal 944, latitude tilt 1244, vertical 989; Spruce Grove (proxy for Parkland County / Acheson): horizontal 942, latitude 1232 — https://natural-resources.canada.ca/energy-sources/renewable-energy/photovoltaic-potential-solar-resource-maps-canada",
+"aucDSI2021": "AUC, Distribution System Inquiry — Final Report, Proceeding 24116, 19 Feb 2021 (read by Claude 15 Oct 2026): p. 60 \"The question arose during the inquiry whether any regulatory oversight was required of EV charging stations that provide public access to charging services. Most parties were of the view that no additional regulatory oversight is required at this time\"; p. 68 \"most parties agree that EV charging stations, similar to electricity storage, are not defined clearly in legislation and their regulatory status within the evolving electricity system is unclear\"; p. 69 no party suggested charging owners have \"any significant monopolistic advantages\" — https://media.auc.ab.ca/prd-wp-uploads/2021/12/24116_X_Distribution-System-Inquiry-Final-Report_000839.pdf",
+"bchTariff2026": "BC Hydro Electric Tariff (PDF, J.B. download 15 Oct 2026; read by Claude): RS 1600/1601/1610/1611 Large General Service, Revision 16, effective 1 Apr 2026 (BCUC G-76-25): 29.99 ¢/day, $13.83/kW of billing demand, 6.79 ¢/kWh, for ≥150 kW or >550,000 kWh a year; RS 1830 Transmission Service, Revision 3, effective 1 Apr 2026: supply at 60 kV or higher, $12.178/kVA, 4.914 ¢/kWh; RS 2289 Self-Generation Service, original, effective 1 Jul 2026 (G-64-26): only for customers taking service at distribution voltage; clean or renewable facility ≤100 kW nameplate or ≤100 kW per phase net injection, on the same or an adjacent parcel; BC Hydro pays 10 ¢/kWh for net generation, credit balance paid out each 30 April; RS 4100 Public EV Charging (BC Hydro's own stations), effective 1 Apr 2026: Level 2 31.30 ¢/kWh, fast 40.29 ¢/kWh — https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/corporate/tariff-filings/electric-tariff/bchydro-electric-tariff.pdf"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -11728,7 +11754,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "pv_cost"
 ],
 "rules": {
-"vancouver": "export ≤100 kW per phase (RS 2289); extra height at the Director of Planning's discretion (s. 10.1.1(d); bulletin, Nov 2022)",
+"vancouver": "export ≤100 kW per phase at 10 ¢/kWh (RS 2289), only for sites supplied at distribution voltage — not for a large data centre on transmission service (RS 1830); extra height at the Director of Planning's discretion (s. 10.1.1(d); bulletin, Nov 2022)",
 "edmonton": "no development permit for a compliant solar collector (ZB 20001 s. 7.120 cl. 3.7); collectors must stay inside the roof edge; the 1.5 m height allowance is written for residential zones only, so industrial zones are not addressed — City to confirm (s. 5.10 cl. 11); self-supply exempt only when used on the property (EUA s. 2(1)(b), consolidated 2026); anything leaving the site goes through the power pool (s. 18(2)) or micro-generation ≤5 MW"
 },
 "changes": [
@@ -11742,7 +11768,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "edmonton": "allowed"
 },
 "rule_sources": [
-"bchRS2289",
+"bchTariff2026",
 "vanRoofBulletin2022",
 "edmZB7120",
 "edmZB510",
@@ -11766,7 +11792,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "pv_facade"
 ],
 "rules": {
-"vancouver": "as above",
+"vancouver": "export ≤100 kW per phase at 10 ¢/kWh (RS 2289), only for sites supplied at distribution voltage — not for a large data centre on transmission service (RS 1830); extra height at the Director of Planning's discretion (s. 10.1.1(d); bulletin, Nov 2022)",
 "edmonton": "no development permit for a compliant solar collector (ZB 20001 s. 7.120 cl. 3.7); collectors must stay inside the roof edge; the 1.5 m height allowance is written for residential zones only, so industrial zones are not addressed — City to confirm (s. 5.10 cl. 11); self-supply exempt only when used on the property (EUA s. 2(1)(b), consolidated 2026); anything leaving the site goes through the power pool (s. 18(2)) or micro-generation ≤5 MW"
 },
 "changes": [
@@ -11784,7 +11810,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "onyxMAD01"
 ],
 "rule_sources": [
-"bchRS2289",
+"bchTariff2026",
 "vanRoofBulletin2022",
 "edmZB7120",
 "edmZB510",

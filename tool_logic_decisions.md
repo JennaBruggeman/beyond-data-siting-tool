@@ -183,3 +183,11 @@ Running record of decisions J.B. has made about the tool's logic, in the order m
 - Add-ons labelled too (solar 1 MW rooftop Melbourne and 600 kWp facade Madrid — claims; borefield Epic Systems — US DOE; HVO backup — vendor claim; etc.).
 - Correction: the Bennett Jones summary says Bill 22 permits export of surplus self-supply; the bill as introduced exempts only self-supply consumed on the property and has no export clause. Enacted text still to read.
 - Edmonton solar: no development permit for a compliant collector (s. 7.120 cl. 3.7); s. 5.70 does not list collectors among items with no height limit; s. 5.10 collector rules would not load — to read by hand. AUC 2021 inquiry report would not open; EV status stays "no rule yet" from secondary sources.
+
+## 15 Oct 2026 — v18: retrievals folded in
+
+- Solar: NRCan municipal values replace the 2006 table. Roof yield is now a range from horizontal to latitude tilt (Vancouver 892–1,007, Edmonton 944–1,244 kWh/kWp a year); south wall 716 / 989. In Edmonton a south wall out-yields a flat roof. Facade factor 0.4–0.6 retired.
+- Alberta EV charging: AUC Distribution System Inquiry final report read (pp. 60, 68–69) — parties agreed EV charging is "not defined clearly in legislation" and its status "unclear"; most saw no need for added oversight. Label stays "no rule yet", now from the primary source.
+- Alberta export: Electric Utilities Act consolidation (in force 6 Feb 2026) — self-supply exempt only when consumed on the property (s. 2(1)(b)); energy leaving the site goes through the power pool (s. 18(2)).
+- BC Hydro tariff: LGS and RS 1830 prices confirmed (effective 1 Apr 2026). RS 2289 is only for customers at distribution voltage, so a data centre on transmission service (60 kV or higher) cannot sell solar under it. RS 4100 (BC Hydro public EV charging) prices noted.
+- Census: the files received are census subdivisions (whole municipalities), not dissemination areas; the DA file is still needed for "people affected".
