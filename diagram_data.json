@@ -9,7 +9,7 @@
 "quantities": 139,
 "conditions": 101,
 "opportunities": 15,
-"sources": 500
+"sources": 501
 }
 },
 "stages": [
@@ -1410,7 +1410,8 @@
 "aesoP2A2026",
 "aesoBYOG2026",
 "aesoP2Aupd2026",
-"aesoDCupd2025"
+"aesoDCupd2025",
+"alta117_2026"
 ],
 "source_roles": [
 {
@@ -1447,6 +1448,13 @@
 "role": "pending build",
 "conf": 70,
 "verified": true
+},
+{
+"id": "alta117_2026",
+"term": "research pass 16 Oct 2026 (regulation)",
+"role": "pending build",
+"conf": 70,
+"verified": true
 }
 ],
 "conf": 40,
@@ -1459,7 +1467,7 @@
 "upstream": 40,
 "city": {
 "van": 2,
-"edm": 4,
+"edm": 5,
 "both": 0,
 "gen": 0
 }
@@ -11982,10 +11990,11 @@
 ],
 "edm": [
 "approval",
-"AESO proposal (Jun 2026, not final), loads ≥75 MW: bring own gas generation 1:1; bridging load (≤40%, ≤3 yr) fully interruptible; in an emergency data centres shed before other firm load. Under 75 MW or on distribution: no flexibility term found"
+"Data Centre Regulation (Alta Reg 117/2026), ≥75 MW from transmission: may tether to new generation or storage covering its peak; in mandatory load shed, large data centres cut before all others; bridged load (≤3 yr) cut first when supply is short. AESO process (proposal, Jun 2026): first intake gas only, bridging ≤40%. Under 75 MW or on distribution: no flexibility term found"
 ],
 "sources": [
 "cfd",
+"alta117_2026",
 "aesoBYOG2026",
 "aesoP2Aupd2026"
 ]
@@ -12850,7 +12859,8 @@
 "aesoP2A2026": "AESO Engage, Phase 2A: Large Load Integration | BYOG Process (page last updated 8 Sep 2026; J.B. PDF print 16 Oct 2026, read by OCR): Phase 1 rolled out 4 Jun 2025 with a 1,200 MW interim large-load connection limit and an allocation process; Phase 2A develops a connection process for large loads that self-supply on site, enable net new transmission-connected generation, or need MW allocations (\"bring your own generation\"); Proposed BYOG Process posted 26 Jun 2026; at 8 Sep 2026 the process was still being finalized, with application intake expected in fall 2026; a final proposal waits on a data-centre regulation enabled by Bill 8 (fall 2025). Working group included eStruxture, IREN, Beacon AI Centers and generators — https://aesoengage.aeso.ca/pre-engagement-phase-ii-large-load-integration",
 "aesoBYOG2026": "AESO, Large Load Integration Phase 2A — Proposed BYOG Process (26 Jun 2026, proposal, not final). Applies to transmission-connected loads asking for 75 MW or more of demand transmission service (DTS), site-aggregated; excludes loads under 75 MW, distribution-connected load and storage. First intake gas-fired generation only, \"net new\"; tethering ratio: generator output at 25 °C, 40% humidity equals DTS contract capacity. Data centres must show municipal zoning or area-structure-plan approval and accept the data-centre connection requirements. DTS commitment fee $15k/MW (refundable). Bridging before the generator runs: at most 20/30/40% of the DTS request by generator milestone, 1,600 MW across all intakes, up to 3 years; bridging load is fully interruptible, reduced before all other non-firm load to avoid a shortfall, curtailment scheme TBD (pro rata, rotation or combination); suspended for failing to curtail — https://aesoengage.aeso.ca/pre-engagement-phase-ii-large-load-integration",
 "aesoP2Aupd2026": "AESO, Large Load Integration Phase 2A BYOG Process Update, stakeholder session deck (18 Jun 2026, updated 24 Jun 2026). About 20 GW of data-centre load requested each quarter since Q2 2025 (19.2 GW Q2 2026). Phase 2 is modular: 2A BYOG, 2B ISO tariff, 2C \"Grid Partners\" (flexible load structures, operating procedures, market products), not yet set. Load management: data centres prioritized above other loads for reduction under supply-related conditions; in standard operation, if firm load shed is needed in an emergency, data centres reduce before all other firm loads; procedures (pro rata, blocks, rotations) to be developed. 74.9 MW applications rose from 9 (Jun 2025) to 18 (Jun 2026) in the 25–75 MW band; AESO may lower the 75 MW threshold. Distribution-connected large loads bypass BYOG; AESO has limited tools for them. Final process was planned for late July–early August 2026 — https://aesoengage.aeso.ca/pre-engagement-phase-ii-large-load-integration",
-"aesoDCupd2025": "AESO Update on Data Centres (Sep 2025): over 20,000 MW of data-centre load on the AESO project list; Phase 1 qualified 15 projects / 5 developers / 4,800 MW and assigned 1,200 MW to 3 projects / 2 developers, contracts pending execution (deadline extended to Oct 2025 for the provincial levy engagement); draft technical connection requirements for transmission-connected data centres posted 22 Aug 2025, final requirements planned Nov 2025 — https://aesoengage.aeso.ca/pre-engagement-phase-ii-large-load-integration"
+"aesoDCupd2025": "AESO Update on Data Centres (Sep 2025): over 20,000 MW of data-centre load on the AESO project list; Phase 1 qualified 15 projects / 5 developers / 4,800 MW and assigned 1,200 MW to 3 projects / 2 developers, contracts pending execution (deadline extended to Oct 2025 for the provincial levy engagement); draft technical connection requirements for transmission-connected data centres posted 22 Aug 2025, final requirements planned Nov 2025 — https://aesoengage.aeso.ca/pre-engagement-phase-ii-large-load-integration",
+"alta117_2026": "Data Centre Regulation, Alta Reg 117/2026 under the Electric Utilities Act (King's Printer extract, current as of 9 Jun 2026; J.B. PDF 16 Oct 2026). s. 1: data centre includes hosting/cloud, digital asset mining, AI/ML, content delivery. s. 2: \"large data centre\" = maximum demand directly from the transmission system of 75 MW or more, or a lower threshold the AESO sets for reliability. s. 3: AESO may aggregate integrated data centres on the same or adjacent parcels with the same owner or affiliate. s. 5: a large data centre may be \"tethered\" to new or added generating units or energy storage able to supply at least its maximum demand, reliably and predictably (the Regulation does not limit the fuel; AESO's first intake does). s. 6: tethered requests processed first. s. 7: AESO may require site control, municipal zoning approvals, financing, permits or water licences. s. 8: no service above the tethered supply. s. 9: bridged service before the supply runs only once the plant is approved by the AUC, max 3 years, AESO may cap each and all bridged loads and suspend for unmet criteria. s. 10: inadequate supply — bridged data centres reduced before all other market participants; mandatory load shed — large data centres reduced before all others. s. 12: review by 31 May 2030, expires 31 May 2035 — https://open.alberta.ca/publications/2026_117"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -14781,6 +14791,7 @@
 "title": "Conditions on large loads (curtailment, own generation)",
 "ids": [
 "cfd",
+"alta117_2026",
 "aesoBYOG2026",
 "aesoP2Aupd2026",
 "aesoDCupd2025"
@@ -15000,7 +15011,8 @@
 "aesoP2A2026": "system operator",
 "aesoBYOG2026": "system operator",
 "aesoP2Aupd2026": "system operator",
-"aesoDCupd2025": "system operator"
+"aesoDCupd2025": "system operator",
+"alta117_2026": "regulation"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -15127,7 +15139,8 @@
 "aesoP2A2026": "claude",
 "aesoBYOG2026": "claude",
 "aesoP2Aupd2026": "claude",
-"aesoDCupd2025": "claude"
+"aesoDCupd2025": "claude",
+"alta117_2026": "claude"
 },
 "source_city": {
 "abgas": "edm",
@@ -15628,7 +15641,8 @@
 "aesoP2A2026": "edm",
 "aesoBYOG2026": "edm",
 "aesoP2Aupd2026": "edm",
-"aesoDCupd2025": "edm"
+"aesoDCupd2025": "edm",
+"alta117_2026": "edm"
 },
 "city_gaps": {
 "van": [

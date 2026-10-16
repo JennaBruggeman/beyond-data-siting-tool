@@ -188,7 +188,7 @@ function citiesView(){
    ['Solar yield, south wall','716 kWh per kWp a year','989 kWh per kWp a year','NRCan municipal values (vertical)','record'],
    ['Rain','about 1,160 mm a year','about 420 mm a year','ECCC Normals 1991–2020','record'],
    ['Night noise limit next to homes','45–55 dBA by zone (By-law 6555)','50 dBA (Bylaw 14600)','city by-laws','record'],
-   ['Getting power','2026 Call: must curtail ≥10% of load on 24 h notice, ≥144 h a year; downtown feeders frozen to 2032','AESO interim limit of 1,200 MW for new large loads, fully allocated; loads ≥75 MW proposed to bring their own gas generation, with bridging load fully interruptible (proposal, Jun 2026)','BC Hydro 2026 RFA; AESO 2025, 2026','record'],
+   ['Getting power','2026 Call: must curtail ≥10% of load on 24 h notice, ≥144 h a year; downtown feeders frozen to 2032','AESO interim limit of 1,200 MW for new large loads, fully allocated; data centres ≥75 MW may tether to their own new generation or storage, and are cut first in mandatory load shedding','BC Hydro 2026 RFA; Alta Reg 117/2026; AESO 2025, 2026','record'],
    ['Where heat could go','NEU: compulsory connection inside its area; heat sent back credited at 50%','Blatchford: compulsory connection inside its service area (Bylaw C17943 s. 6); service areas not yet traced in the tool','By-law 9552; Bylaw C17943','record'],
    ['Electricity price','BC Hydro large general service 6.79 ¢/kWh + $13.83/kW a month','Alberta pool averaged $43.68/MWh in 2025, plus wires charges','BC Hydro 2026; AESO 2025','record'],
   ];
