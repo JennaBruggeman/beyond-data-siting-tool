@@ -143,3 +143,27 @@ People and the urban rationale
 
 ## 9. Edmonton parity (J.B., 16 Oct: both cities need the same operations)
 Vancouver has it, Edmonton does not yet: non-market housing receivers; library list; cooling/warming-centre list; water-system permits (cooling towers, rainwater systems); a real data-centre reference with public figures; sewer-heat programme; rainwater sizing rule; wastewater plant addresses (Edmonton has Gold Bar placed). Edmonton has, Vancouver does not: better floor-area coverage for schools (parcel data).
+
+## 10. Retrieval list after the parity audit (16 Oct 2026, evening)
+Done today: AESO BYOG proposal, Phase 2A update, Sep 2025 update; Alta Reg 117/2026; Zoning Bylaw 20001 (shadow s. 7.140(9), floodplain s. 2.250, IH uses); AESO 2025 Annual Market Statistics; Edmonton General Building Permits. Fuel LCA Model manual received but holds no values.
+
+A. Changes Edmonton results (parity audit section A)
+- ☐ R-fuel: Alberta Renewable Fuels Standard Regulation (kings-printer.alberta.ca); Clean Fuel Regulations SOR/2022-140 (laws-lois.justice.gc.ca); BC Renewable and Low Carbon Fuel Requirements annual summary (gov.bc.ca); BC Low Carbon Fuels (General) Regulation (bclaws.gov.bc.ca); RLCF-012 link resent so Claude can open it.
+- ☐ R-power: EPCOR Distribution rate schedule for large commercial (Edmonton delivery charges on top of the pool price).
+- ☐ R-hardness: EPCOR Edmonton annual water-quality report; Metro Vancouver annual drinking-water quality report (hardness, mg/L CaCO3).
+- ☐ R-mix: Canada Energy Regulator, Provincial and Territorial Energy Profiles, BC and Alberta (generation by source) — for water behind the electricity.
+- ☐ R-engines: Metro Vancouver air-quality bylaw provisions for stationary diesel engines; Alberta Environment rules for stationary engines.
+- ☐ R-fire: Vancouver Fire By-law 12472 (fuel storage limits).
+- ☐ R-river: Alberta Water Act licensing and any thermal limit for the North Saskatchewan River.
+- ☐ R-smoke: wildfire-smoke days or PM2.5 records, Vancouver and Edmonton.
+- ☐ R-income: Census 2021 after-tax household income, Vancouver and Edmonton CMAs.
+- ☐ R-percap: Metro Vancouver and EPCOR per-capita water use.
+- ☐ R-temps (ask): Blatchford and DDE supply and return temperatures.
+
+B. Edmonton parity (section 9): non-market housing; library list; warming and cooling centres; cooling-tower and rainwater registry; EPCOR sewer-heat programme; rainwater sizing rule; an Edmonton field visit for surveillance as experienced (exterior only).
+
+C. Vancouver parity: light at the window (City lighting rules, or ask); generator-testing emissions (Metro Vancouver); seasonal ground storage and deep geothermal (BC geology, ground temperatures, Geoscience BC / NRCan geothermal maps).
+
+D. Still open from before: Metro Vancouver plant addresses; City non-potable water systems map; rainwater tank cost; Canadian RAS costs; utility capacity maps; greenhouse area by region (P4); CSA C448 (optional); G5 ask the City (ground floor); in-person asks (Blatchford loop, pipe cost per metre, Gold Bar reclaimed water).
+
+E. Meeting: BC Assessment, Jeremy Buhler, Mon 19 Oct, 1 pm.
