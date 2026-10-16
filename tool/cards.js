@@ -79,11 +79,20 @@ BD.heatEcon=heatEcon;
 const STATUS={within:['within break-even','#8fb996'],depends:['depends on pipe cost','#cdb07a'],beyond:['beyond break-even','#6b6964'],unknown:['demand not yet known','#9d9a94']};
 /* receiver list grouped by kind (J.B., 16 Oct: "a lot of repetition"): the kind, the shared connection difficulty and the column labels are said
    once per group; a row shows only what differs — name, size, route, and a status word unless it is the greyed "beyond break-even". */
-function groupRows(shown){ const by={}; shown.forEach(p=>(by[p.t]=by[p.t]||[]).push(p)); const ord=['housing','school','hospital','care','rec','pool','arena'];
-  return ord.filter(t=>by[t]).map(t=>{ const L=by[t].slice(0,40), more=by[t].length-L.length; const dk=[...new Set(L.map(p=>p.diff.t))], same=dk.length===1;
-    const nW=L.filter(p=>p.econ.status==='within').length, nB=L.filter(p=>p.beyond).length;
-    return `<h3 class="gh">${esc(TYPE[t])} <span class="src">${by[t].length} building${by[t].length>1?'s':''}${nW?` · ${nW} within break-even`:''}${nB?` · ${nB} beyond (grey)`:''}${same?` · connection: ${esc(dk[0].toLowerCase())}`:''}</span></h3>
-    <table class="idx gr"><thead><tr><th></th><th class="r">${t==='housing'?'homes':'floor, est.'}</th><th class="r">route</th><th></th></tr></thead><tbody>${L.map(p=>`<tr class="${p.beyond?'grey':''} rowlink" data-rid="${p.id}"><td>${esc(p.n||'(unnamed)')}${p.beyond?'':`<div>${stPill(p.econ.status)}</div>`}${same?'':`<div class="src" style="color:${DCOL[p.diff.k]}">${esc(p.diff.t)}</div>`}</td><td class="r">${p.u?fmt(p.u):p.fa?fmt(p.fa)+' m²':'—'}</td><td class="r">${fmt(p.econ.route)} m</td><td class="r chev">›</td></tr>`).join('')}${more>0?`<tr><td colspan="4" class="src">and ${more} more further away</td></tr>`:''}</tbody></table>`; }).join(''); }
+function groupRows(all,showB){ const by={}; all.forEach(p=>(by[p.t]=by[p.t]||[]).push(p)); const ord=['housing','school','hospital','care','rec','pool','arena'];
+  // J.B., 16 Oct: "a lot of information that doesn't do anything" — rows only where they say something different; the rest is summed in one line
+  return ord.filter(t=>by[t]).map(t=>{ const G=by[t], act=G.filter(p=>!p.beyond), bey=G.filter(p=>p.beyond);
+    const nW=G.filter(p=>p.econ.status==='within').length, nD=G.filter(p=>p.econ.status==='depends').length, nU=G.filter(p=>p.econ.status==='unknown').length;
+    const cnt={}; G.forEach(p=>cnt[p.diff.t]=(cnt[p.diff.t]||0)+1); const mode=Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0];
+    const head=`<h3 class="gh">${esc(TYPE[t])} <span class="src">${G.length} building${G.length>1?'s':''}${nW?` · ${nW} within break-even`:''}${nD?` · ${nD} depend on pipe cost`:''}${nU?` · ${nU} demand not known`:''}${bey.length?` · ${bey.length} beyond`:''} · connection: ${esc(mode[0].toLowerCase())}${mode[1]<G.length?` (${mode[1]})`:''}</span></h3>`;
+    const unit=t==='housing'?'homes':'floor, est.';
+    const row=p=>`<tr class="${p.beyond?'grey':''} rowlink" data-rid="${p.id}"><td>${esc(p.n||'(unnamed)')}${p.beyond?'':`<div>${stPill(p.econ.status)}</div>`}${p.diff.t!==mode[0]?`<div class="src" style="color:${DCOL[p.diff.k]}">${esc(p.diff.t)}</div>`:''}</td><td class="r">${p.u?fmt(p.u):p.fa?fmt(p.fa)+' m²':'—'}</td><td class="r">${fmt(p.econ.route)} m</td><td class="r chev">›</td></tr>`;
+    const A=act.slice(0,15), B=showB?bey.slice(0,15):[];
+    let sum='';
+    if(bey.length){ const r=bey.map(p=>p.econ.route), tot=bey.reduce((x,p)=>x+(p.u||0),0), near=bey.slice().sort((a,b)=>a.econ.route-b.econ.route)[0];
+      sum=`<p class="sub">${bey.length} beyond break-even${t==='housing'&&tot?`, ${fmt(tot)} homes in all`:''}, routes ${fmt(Math.min(...r))}–${fmt(Math.max(...r))} m.${near.econ.close&&near.econ.close.length?` For the nearest, what would close the gap: ${esc(near.econ.close[0])}.`:''}${showB?'':' Tick the box above to list them.'}</p>`; }
+    const rows=A.concat(B);
+    return head+(rows.length?`<table class="idx gr"><thead><tr><th></th><th class="r">${unit}</th><th class="r">route</th><th></th></tr></thead><tbody>${rows.map(row).join('')}${act.length>A.length?`<tr><td colspan="4" class="src">and ${act.length-A.length} more further away</td></tr>`:''}${showB&&bey.length>B.length?`<tr><td colspan="4" class="src">and ${bey.length-B.length} more beyond, further away</td></tr>`:''}</tbody></table>`:'')+sum; }).join(''); }
 const stPill=k=>`<span class="cls" style="border-color:${STATUS[k][1]};color:${STATUS[k][1]}">${STATUS[k][0]}</span>`;
 /* how hard to connect (J.B., 16 Oct): Ready / Needs a heat-pump lift / Needs a building retrofit / Not yet known */
 function difficulty(f,p,nets){ const nIn=nets.find(n=>BD.pip(p.x,p.y,n.r)), inNet=!!nIn&&nIn.src==='van9552';
@@ -116,7 +125,7 @@ async function heatIndex(){
   const d=await e.loadRecv(f.city), nets=e.netsAt(f,d); await routeTree(f);
   const all=d.pts.map(p=>Object.assign({},p,{dist:Math.hypot(p.x-f.c[0],p.y-f.c[1])})).filter(p=>p.dist<=1500).sort((a,b)=>a.dist-b.dist);
   all.forEach(p=>{ p.econ=heatEcon(f,p); p.beyond=p.econ.status==='beyond'; p.diff=difficulty(f,p,nets); });
-  const showB=A.showBeyond!==false; const shown=all.filter(p=>showB||!p.beyond);
+  const showB=A.showBeyond===true;
   const r=e.calc({mw,recover:true,to:'near'},f,all,nets); const inside=nets.find(n=>n.inside);
   const nB=all.filter(p=>p.beyond).length, nW=all.filter(p=>p.econ.status==='within').length;
   let h=e.tabBar('heat')+`<h2>Who could take the heat</h2>
@@ -137,8 +146,8 @@ async function heatIndex(){
     <p class="src">City of Edmonton DESS design guide v8 (2025); Bylaw 17943 and 2026 rates; Utility Advisor 2023; 2021–2024 business plan; Buffa et al. 2019; Edmonton CWEC typical year. Research-agent reads, to check. The design guide's 8 °C winter supply and 4 °C return do not match its own 5 °C design difference; both are shown as written.</p>`; })()}
   ${otherNets(f.city)}
   ${f.city==='van'?`<p class="sub">City policy: the Energy Centre Guidelines (2012) name waste heat — from commercial and industrial operations and sewage lines — as the generally preferred low-carbon source for neighbourhood energy (RTS 9772, Appendix A, 4.1). A guideline, not a requirement to buy it.</p>`:''}
-  <label class="tgl"><input type="checkbox" id="showB" ${showB?'checked':''}> Show buildings beyond break-even (greyed, with what would close the gap)</label>
-  ${groupRows(shown)}
+  <label class="tgl"><input type="checkbox" id="showB" ${showB?'checked':''}> List buildings beyond break-even too (greyed)</label>
+  ${groupRows(all,showB)}
   <p class="sub" style="margin-top:10px"><a href="#" id="hmath">How the heat figure is worked out ›</a> · <a href="#" id="carriers">How far is too far, for each thing it could share ›</a></p>
   <div class="draftnote">Draft wording (Claude) for J.B. Sources are in each card.</div>`;
   $('#side').innerHTML=h; e.wireTabs(); BD.draw();
@@ -147,7 +156,7 @@ async function heatIndex(){
   const nb=document.querySelector('#side [data-net]'); if(nb) nb.onclick=ev=>{ ev.preventDefault(); netCard(f,nets); };
   $('#hmath').onclick=ev=>{ ev.preventDefault(); heatMathCard(f,r); };
   $('#carriers').onclick=ev=>{ ev.preventDefault(); carriersCard(f); };
-  BD._heat={f,all:shown,nets};
+  const shown=all.filter(p=>showB||!p.beyond); BD._heat={f,all:shown,nets};
   e.show3d('heat',{site:f,all:shown,nets,lim:30});
 }
 

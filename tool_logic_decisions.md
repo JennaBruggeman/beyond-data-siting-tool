@@ -223,3 +223,6 @@ Running record of decisions J.B. has made about the tool's logic, in the order m
 
 ## Ambient loop: Blatchford (16 Oct 2026, J.B.: "yes u can model it")
 Blatchford's District Energy Sharing System is an ambient loop (8–32 °C supply, design guide v8, 2025), so server heat can enter through a heat exchanger with no heat pump at the data centre, including air-cooled heat. The Edmonton heat tab shows it when Blatchford is within reach: heat offered (IT energy as the upper bound), when it is wanted (CWEC: 75–89% of hours below a 12–18 °C balance point; June–August 6.5% of heating need), scale against the 2021 plan's 3,031 MWh delivered 2020–24, money not yet known, and the open questions (outside heat accepted? winter capacity? summer heat). Not a verdict: shown as an observation with its unknowns.
+
+## Receiver list condensed (16 Oct 2026, J.B.: "a lot of information that doesn't do anything")
+Rows are listed only for buildings within reach of break-even or whose demand is unknown (up to 15 per kind). Buildings beyond break-even are summed in one line per kind: how many, homes in all, the range of route lengths, and what would close the gap for the nearest; the box lists them on request (off by default). The connection difficulty shared by most of a kind goes in the header with its count; a row shows it only when it differs.
