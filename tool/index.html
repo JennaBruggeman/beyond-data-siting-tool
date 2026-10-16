@@ -158,6 +158,27 @@ body.wide main{grid-template-columns:minmax(320px,680px) 1fr}
 .fbbtn{background:var(--accent);color:#1a1212;border:0;border-radius:6px;padding:7px 14px;cursor:pointer;font:inherit}
 @media (max-width:600px){.trow{grid-template-columns:110px 1fr 80px}.rrow{grid-template-columns:70px 1fr 84px}}
 .idx.gr th{font-weight:400;color:#9d9a94;font-size:11px;text-align:left}.idx.gr th.r{text-align:right}.rowlink{cursor:pointer}.rowlink:hover td{background:#26292e}.chev{color:#CC746C;width:14px}h3.gh{margin-top:16px}h3.gh .src{display:inline;margin-left:6px;text-transform:none;letter-spacing:0}
+
+/* the guided path (flow.js) */
+#welcome{position:fixed;inset:0;z-index:50;background:rgba(10,11,12,.62);display:flex;align-items:center;justify-content:center;padding:16px}
+#welcome .wcard{width:min(520px,100%);max-height:calc(100% - 32px);overflow:auto;background:var(--panel);border:1px solid var(--line-2);border-radius:10px;padding:22px 24px 18px;box-shadow:0 18px 50px rgba(0,0,0,.45)}
+#welcome h2{font-size:21px;font-weight:300;margin:6px 0 10px;line-height:1.3;text-wrap:balance} #welcome p{margin:0 0 12px;line-height:1.5}
+.wsteps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 12px;margin:4px 0 18px;padding:0;list-style:none;color:var(--muted);font-size:12.5px} .wsteps span{color:var(--faint);margin-right:6px;font-variant-numeric:tabular-nums}
+.flowbar .path{justify-content:flex-start;gap:14px} .flowbar .path button{flex:0 0 auto} .flowbar .path button[aria-current] span{margin-right:6px}
+.wbtns{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px} .wbtns button,.flowfoot button,.rbtns button{border-radius:6px;padding:8px 14px;cursor:pointer;font:inherit;font-size:13px}
+.wbtns .pri,.flowfoot .pri,.rbtns .pri{background:var(--accent);color:#1a1212;border:0;font-weight:600} .wbtns .sec,.flowfoot .sec{background:transparent;border:1px solid var(--line-2);color:var(--fg)}
+.flowfoot .pri[disabled]{background:var(--line-2);color:var(--muted);cursor:default}
+#wList{margin:4px 0 10px}
+.flowbar{margin:0 0 10px} .flowbar .fsub{font-size:12px;color:var(--muted);margin:2px 0 0}
+.path button[disabled]{color:var(--faint);cursor:default;opacity:.6}
+.flowfoot{position:sticky;bottom:-40px;z-index:4;display:flex;justify-content:space-between;align-items:center;gap:8px;margin:24px -18px -40px;padding:12px 18px 16px;background:var(--panel);border-top:1px solid var(--line)}
+.flowfoot button{max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body.flow #side .next, body.flow #side .tabs, body.flow #side .ctx, body.flow #side p:has(> #toPrec), body.flow #side .examples{display:none}
+.rbtns{display:flex;gap:8px;margin:6px 0 4px}
+.report h2.rg{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-2);font-weight:600;margin:26px 0 4px;padding-top:12px;border-top:1px solid var(--line)}
+.report h3{font-size:14px;letter-spacing:0;text-transform:none;color:var(--fg);font-weight:400;border-top:0;margin:14px 0 4px;padding-top:0}
+.report .rl{margin:0 0 6px;color:var(--fg)} dl.rd{grid-template-columns:minmax(120px,38%) 1fr;font-size:12.5px} dl.rd dt{color:var(--muted)} dl.rd dd{margin:0}
+.report .rt{overflow-x:auto} .report table{font-size:12px} ul.rr{margin:4px 0;padding-left:18px;font-size:12.5px;color:var(--muted)}
 </style>
 
 <div class="app">
@@ -543,3 +564,4 @@ window.BD={S,$,esc,fmt,getJSON,pathOf,draw,centroid,pip,area,statusOf,lowD,loadT
 <script src="compare.js"></script>
 <script src="extras.js"></script>
 <script src="scene3d.js"></script>
+<script src="flow.js"></script>

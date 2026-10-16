@@ -81,23 +81,42 @@ async function oppIndex(){ BD._O=await BD.opps(); await loadEV(); await loadWP()
       h+=`<div class="addrow"><div>${esc(n)} ${L.readiness?BD.rdPill(L.readiness):''}<div class="src">${GATES.map(g=>`<span title="${esc(g+': '+G[g][1])}" style="color:${GS[G[g][0]][1]}">${g}</span>`).join(' · ')}</div></div><div><button class="btn" data-op="${esc(n)}">Explore ›</button></div></div>`; } }
   h+=`<div class="draftnote">Each gate's reason is on hover and in the card.</div>`;
   $('#side').innerHTML=h; e.wireTabs(); document.querySelectorAll('#side [data-op]').forEach(b=>b.onclick=()=>oppCard(b.dataset.op)); BD.draw(); e.show3d('model',{site:c.f}); }
+function ladderHTML(L){ return Array.isArray(L.rules)&&L.rules.length?`<table class="cl">${L.rules.map(x=>`<tr><td>${esc(x.rung)}</td><td>Vancouver ${BD.rsPill(x.van[0])}<small>${esc(x.van[1]||'')}</small>Edmonton ${BD.rsPill(x.edm[0])}<small>${esc(x.edm[1]||'')}</small></td></tr>`).join('')}</table>`:'<p class="sub">not yet read</p>'; }
+function oppBody(n,c){ const {L,G}=gates(n,c);
+  return `<h3>At this site, gate by gate</h3><table class="cl">${GATES.map(g=>`<tr><td>${g}</td><td>${gp(G[g][0])}<small>${esc(G[g][1])}</small></td></tr>`).join('')}</table>
+  <h3>Rules, rung by rung</h3>${ladderHTML(L)}
+  <h3>Not yet known</h3><p class="sub">${esc((L.unknowns||[]).join('; ')||'—')}</p><h3>How proven</h3><p class="sub">${esc(L.basis||'')}</p>${L.visual?`<p class="sub">Drawn as: ${esc(L.visual)}</p>`:''}
+  <h3>Sources</h3>${BD.srcList((L.sources||[]).concat(...(Array.isArray(L.rules)?L.rules.map(x=>x.sources||[]):[]),['vanUses2026','edmUses2026']))}`; }
+function opp3d(n,c){ const M=c.M, d={site:c.f,boxes:[]}; if(M&&M.F&&M.ring){ const F=M.F;
+
+    if(n==='EV charging hub'&&BD.plant){ const k={name:'stalls',L:5.5,W:2.5,H:0.1,wall:[0.5,0.5],gap:[0,6.6]}; const lotR=M.inset?BD.geo.clip(M.ring,M.inset):M.ring; const forbid=[].concat(M.foot?[M.foot]:[],M.loading?[M.loading]:[],(M.plant&&M.plant.boxes||[]).filter(b=>b.kind==='yard').map(b=>b.clear)); const [a,b,c2,d2]=BD.plant.localBounds(F,lotR); BD.plant.pack(F,lotR,forbid,a,b,c2,d2,k,120,false).forEach(p=>d.boxes.push({ring:BD.geo.rectW(F,p.u-p.L/2,p.u+p.L/2,p.v-p.W/2,p.v+p.W/2),h:0.1,base:0,label:''})); if(d.boxes.length) d.boxes[0].label=`${d.boxes.length} stalls on the open lot`; else d.note='No open ground is left for stalls in this setup. A smaller footprint (setup card 2) or an adjacent lot would make room.'; }
+    if(n==='Greenhouse'&&M.foot&&!M.existing){ d.boxes.push({ring:BD.geo.offset(M.serverFoot||M.foot,-3),h:4,base:0.4,label:'rooftop greenhouse (where the plant leaves room; shown at grade)'}); }
+    if(n==='Warming centre, refuge, clean-air room'&&M.foot){ d.boxes.push({ring:BD.geo.offset(M.foot,-0.5),h:5.5,base:0.2,label:'ground-floor public room'}); }
+    if(n==='Meanwhile uses on land held for growth'){ const lotR=M.inset?BD.geo.clip(M.ring,M.inset):M.ring; d.boxes.push({ring:lotR,h:0.05,base:0.1,label:`open land: ${fmt(c.free)} m²`}); } }
+  E().show3d('opp',d); }
 function oppCard(n){ const c=ctx(), {L,G}=gates(n,c), i=ORDER.findIndex(o=>o.n===n), it=ORDER[i];
   const prev=ORDER[(i-1+ORDER.length)%ORDER.length], next=ORDER[(i+1)%ORDER.length];
   const ladder=Array.isArray(L.rules)&&L.rules.length?`<table class="cl">${L.rules.map(x=>`<tr><td>${esc(x.rung)}</td><td>Vancouver ${BD.rsPill(x.van[0])}<small>${esc(x.van[1]||'')}</small>Edmonton ${BD.rsPill(x.edm[0])}<small>${esc(x.edm[1]||'')}</small></td></tr>`).join('')}</table>`:'<p class="sub">No rule ladder yet.</p>';
   BD.drawer.open(`<div class="kind">Opportunity · ${esc(it.fam)} · ${i+1} of ${ORDER.length}</div><h2>${esc(n)}</h2><p>${gp(summary(G))} ${L.readiness?BD.rdPill(L.readiness):''}</p>
-  <h3>At this site, gate by gate</h3><table class="cl">${GATES.map(g=>`<tr><td>${g}</td><td>${gp(G[g][0])}<small>${esc(G[g][1])}</small></td></tr>`).join('')}</table>
-  <h3>Rules, rung by rung</h3>${ladder}
-  <h3>Not yet known</h3><p class="sub">${esc((L.unknowns||[]).join('; ')||'—')}</p><h3>How proven</h3><p class="sub">${esc(L.basis||'')}</p>${L.visual?`<p class="sub">Drawn as: ${esc(L.visual)}</p>`:''}
-  <h3>Sources</h3>${BD.srcList((L.sources||[]).concat(...(Array.isArray(L.rules)?L.rules.map(x=>x.sources||[]):[]),['vanUses2026','edmUses2026']))}
+  ${oppBody(n,c)}
   <div class="navb"><button class="sec" id="opv">‹ ${esc(prev.n)}</button><button class="sec" id="opn">${esc(next.n)} ›</button></div><div class="draftnote">"Possible here" means every gate the tool can test passes; it is not a recommendation.</div>`,
   el=>{ $('#opv').onclick=()=>oppCard(prev.n); $('#opn').onclick=()=>oppCard(next.n); });
-  // its own 3D: what the opportunity would occupy, generic
-  const M=c.M, d={site:c.f,boxes:[]}; if(M&&M.F&&M.ring){ const F=M.F;
-    if(n==='EV charging hub'&&BD.plant){ const k={name:'stalls',L:5.5,W:2.5,H:0.1,wall:[0.5,0.5],gap:[0,6.6]}; const lotR=M.inset?BD.geo.clip(M.ring,M.inset):M.ring; const forbid=[].concat(M.foot?[M.foot]:[],M.loading?[M.loading]:[],(M.plant&&M.plant.boxes||[]).filter(b=>b.kind==='yard').map(b=>b.clear)); const [a,b,c2,d2]=BD.plant.localBounds(F,lotR); BD.plant.pack(F,lotR,forbid,a,b,c2,d2,k,120,false).forEach(p=>d.boxes.push({ring:BD.geo.rectW(F,p.u-p.L/2,p.u+p.L/2,p.v-p.W/2,p.v+p.W/2),h:0.1,base:0,label:''})); if(d.boxes.length) d.boxes[0].label=`${d.boxes.length} stalls on the open lot`; else d.note='No open ground is left for stalls in this setup. A smaller footprint (setup card 2) or an adjacent lot would make room.'; }
-    if(n==='Greenhouse'&&M.foot&&!M.existing){ d.boxes.push({ring:BD.geo.offset(M.foot,-3),h:4,base:M.H,label:'rooftop greenhouse (where the plant leaves room)'}); }
-    if(n==='Warming centre, refuge, clean-air room'&&M.foot){ d.boxes.push({ring:BD.geo.offset(M.foot,-0.5),h:5.5,base:0.2,label:'ground-floor public room'}); }
-    if(n==='Meanwhile uses on land held for growth'){ const lotR=M.inset?BD.geo.clip(M.ring,M.inset):M.ring; d.boxes.push({ring:lotR,h:0.05,base:0.1,label:`open land: ${fmt(c.free)} m²`}); } }
-  E().show3d('opp',d); }
+  opp3d(n,c); }
+/* the guided path (J.B., 16 Oct: "force u to walk through ... each opportunity and show the visualization for each"): one opportunity per step, only those not ruled out here */
+async function oppPrep(){ BD._O=await BD.opps(); await loadEV(); await loadWP(); if(BD._PR===undefined){ try{ const r=await fetch('public_rooms_van.json'); BD._PR=r.ok?await r.json():null; }catch(e){ BD._PR=null; } } }
+function oppScreen(){ const c=ctx(); return ORDER.map(o=>{ const {G}=gates(o.n,c); return Object.assign({},o,{s:summary(G),G}); }); }
+const SUMW={yes:'Possible here: every gate the tool can test passes.',chg:'Possible with a change: no gate fails outright.',nk:'Not ruled out: no gate fails, but some are not yet known.',no:'Not here.'};
+function oppStep(n,i,total){ const c=ctx(), e=c.e, {L,G}=gates(n,c), it=ORDER.find(o=>o.n===n), s=summary(G); BD.S.view2='tab';
+  $('#side').innerHTML=e.tabBar('opp')+`<div class="kind">Opportunity ${i} of ${total} · ${esc(it.fam)}</div><h2>${esc(n)}</h2>
+  <p>${gp(s)} ${L.readiness?BD.rdPill(L.readiness):''}</p><p class="lead">${s==='yes'?'<span class="k">Possible here</span>: every gate the tool can test passes.':s==='chg'?'<span class="k">Possible with a change</span>: no gate fails outright.':'<span class="k">Not ruled out</span>: no gate fails, but some are not yet known.'}</p>
+  ${oppBody(n,c)}`;
+  e.wireTabs(); BD.draw(); opp3d(n,c); }
+function oppRest(list){ const c=ctx(), e=c.e; BD.S.view2='tab';
+  const no=list.filter(o=>o.s==='no');
+  $('#side').innerHTML=e.tabBar('opp')+`<h2>Not here</h2><p class="lead">${no.length?`<span class="k">${no.length} of ${list.length}</span> opportunities fail at least one gate at this site.`:'No opportunity fails outright here.'}</p>
+  ${no.map(o=>{ const g=GATES.filter(k=>o.G[k][0]==='no'); return `<div class="addrow"><div>${esc(o.n)}<div class="src">${g.map(k=>`<span style="color:${GS.no[1]}">${k}</span>: ${esc(o.G[k][1])}`).join(' · ')}</div></div></div>`; }).join('')}`;
+  e.wireTabs(); BD.draw(); e.show3d('model',{site:c.f}); }
+Object.assign(BD,{oppPrep,oppScreen,oppStep,oppRest,oppGates:GS});
 BD.oppCard=oppCard;
 BD.tabOverride=Object.assign(BD.tabOverride||{},{opps2:oppIndex});
 })();

@@ -249,7 +249,7 @@ function card(step){
     const uh=$('#uh'); if(uh) uh.onchange=()=>{ A.userH=uh.value?+uh.value:null; changed(step); };
     const fl=$('#flip'); if(fl) fl.onclick=e=>{ e.preventDefault(); A.flip=!A.flip; changed(step); };
     const sb=$('#sb'); if(sb) sb.onclick=()=>card(step-1);
-    $('#sn').onclick=()=>{ if(step<5) card(step+1); else { A.setupDone=true; BD.drawer.close(); BD.fitsView(); } };
+    $('#sn').onclick=()=>{ if(step<5) card(step+1); else { A.setupDone=true; BD.drawer.close(); if(BD.flow&&BD.flow.on) BD.flow.next(); else BD.fitsView(); } };
   });
   BD.showModel&&BD.showModel();
 }

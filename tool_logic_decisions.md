@@ -235,3 +235,11 @@ The building is now the largest plain rectangle, in the lot's own frame, that si
 
 ## Equipment, not a building (16 Oct 2026, J.B.: "its not a massing tool… its more about capacity")
 No building is drawn for a new data centre. The 3D shows the lot, the zoning's buildable area as a grey dashed outline, a flat red outline of the floor the chosen size needs ("any shape"; MW × 460 m² of hall per MW ÷ 0.6 hall share, spread over the storeys; with m² and ft²), the racks inside it, and the plant at real sizes (roof units drawn at roof height). Capacity ("what fits") is still worked out on the full buildable area, so the drawing never feeds back into the numbers.
+
+## One guided path (J.B., 16 Oct 2026)
+- A welcome card opens at once: a worked example, or my own site.
+- Everyone walks the same steps: site, set-up, what fits, real buildings, heat, electricity, water, materials, people, each opportunity not ruled out here, the ones not possible here, three options, over time, two cities, report.
+- Back goes to any step already reached; there is no skipping ahead. Picking another parcel restarts at its set-up; changing an answer drops what later steps showed.
+- Only opportunities not ruled out get a step (J.B.'s choice); the rest are listed once with the gate that fails.
+- Real buildings, Over time and Two cities are folded into the steps (J.B.'s choice).
+- The report is built from what each step showed when it was passed, and downloads as HTML or PDF.

@@ -374,7 +374,7 @@ const STEPS=[['site','Site'],['fits','What fits'],['ex','Exchanges',[['heat','He
 const CONTEXT=[['prec','Real buildings'],['cities','Two cities']];
 function stepOf(k){ for(const s of STEPS) if(s[2]&&s[2].some(t=>t[0]===k)) return s[0]; return k==='report'?'report':null; }
 function stepNav(cur){ const st=stepOf(cur)||cur; return `<nav class="path" aria-label="Steps">${STEPS.map(([k,l],i)=>`<button data-step="${k}" ${k===st?'aria-current="step"':''}><span>${i+1}</span>${l}</button>`).join('')}</nav>`; }
-function tabBar(cur){ BD.S.tab=cur; const st=stepOf(cur), S=STEPS.find(s=>s[0]===st);
+function tabBar(cur){ BD.S.tab=cur; if(BD.flow&&BD.flow.on) return BD.tabExtra?BD.tabExtra(cur):''; const st=stepOf(cur), S=STEPS.find(s=>s[0]===st);
   return stepNav(cur)+(S&&S[2]?`<div class="tabs" role="tablist">${S[2].map(([k,l])=>`<button role="tab" data-tab="${k}" aria-selected="${k===cur}">${l}</button>`).join('')}</div>`:'')
    +(CONTEXT.some(c=>c[0]===cur)?`<div class="tabs" role="tablist">${CONTEXT.map(([k,l])=>`<button role="tab" data-tab="${k}" aria-selected="${k===cur}">${l}</button>`).join('')}</div>`:'')
    +`<p class="ctx">${BD.S.answers.mw?BD.S.answers.mw+' MW of servers · ':''}<a href="#" data-tab="prec">Real buildings</a> · <a href="#" data-tab="cities">Two cities</a></p>`+(BD.tabExtra?BD.tabExtra(cur):''); }
@@ -390,7 +390,7 @@ function goStep(k){ const S=STEPS.find(s=>s[0]===k); document.body.classList.rem
   if(S&&S[2]) tabView(S[2][0][0]); }
 /* every other view: turn each h3 and what follows it into a closed section showing its answer (J.B., 16 Oct: the toolbar and sections on every view) */
 function nameOf(row){ const d=row.querySelector('div')||row; for(const c of d.childNodes){ if(c.nodeType===3&&c.textContent.trim()) return c.textContent.trim(); } const t=(d.innerText||'').split('\n')[0]; return t.replace(/\s*(Explore|Add|Open)\s*›.*$/,'').trim(); }
-function answerOf(nodes){ const tx=el=>{ const c=el.cloneNode(true); c.querySelectorAll('button,.btn').forEach(x=>x.remove()); return (c.innerText||c.textContent||'').replace(/\s*(Explore|Add|Remove|Open)\s*›/g,'').replace(/physics · land · rules · demand · time · money/g,'').replace(/\s+/g,' ').trim(); };
+function answerOf(nodes){ const tx=el=>{ const c=el.cloneNode(true); c.querySelectorAll&&c.querySelectorAll('td,th,small,li,dd,dt,.cls').forEach(x=>x.append(' ')); c.querySelectorAll('button,.btn').forEach(x=>x.remove()); return (c.innerText||c.textContent||'').replace(/\s*(Explore|Add|Remove|Open)\s*›/g,'').replace(/physics · land · rules · demand · time · money/g,'').replace(/\s+/g,' ').trim(); };
   const rows=[]; nodes.forEach(n=>{ if(n.nodeType!==1) return; if(n.matches('.addrow')) rows.push(n); n.querySelectorAll&&n.querySelectorAll('.addrow').forEach(r=>rows.push(r)); });
   if(rows.length>1){ const names=rows.map(nameOf).filter(Boolean); const t=names.join('; '); return [`${names.length}: `+(t.length>120?t.slice(0,t.lastIndexOf(';',120)>0?t.lastIndexOf(';',120):120)+'…':t),false]; }
   const cut=t=>{ t=t.replace(/\s*Draft wording \(Claude\)[^.]*\.?/g,'').trim(); if(t.length<=130) return t; const i=t.slice(0,130).lastIndexOf(' '); return t.slice(0,i>60?i:130)+'…'; };
@@ -403,8 +403,8 @@ function answerOf(nodes){ const tx=el=>{ const c=el.cloneNode(true); c.querySele
 function collapseSections(root){ if(!root||root.querySelector('details.sec')) return; const kids=[...root.children]; let i=0;
   const h2=kids.findIndex(k=>k.tagName==='H2'); if(h2>=0){ const nx=kids[h2+1]; if(nx&&nx.tagName==='P'&&nx.classList.contains('draft')){ nx.classList.remove('draft'); nx.classList.add('lead'); } }
   const view=(BD.S.tab||BD.S.view2||'v'); let n=0;
-  for(i=0;i<kids.length;i++){ const h=kids[i]; if(h.tagName!=='H3'||h.closest('details')) continue;
-    const body=[]; let j=i+1; while(j<kids.length&&kids[j].tagName!=='H3'&&!kids[j].classList.contains('draftnote')&&!(kids[j].tagName==='DIV'&&kids[j].classList.contains('navb'))) { body.push(kids[j]); j++; }
+  for(i=0;i<kids.length;i++){ const h=kids[i]; if(h.tagName!=='H3'||h.closest('details')||/^sources?$/i.test(h.textContent.trim())) continue;
+    const body=[]; let j=i+1; while(j<kids.length&&kids[j].tagName!=='H3'&&!kids[j].classList.contains('draftnote')&&!(kids[j].tagName==='DIV'&&kids[j].classList.contains('navb'))&&!kids[j].classList.contains('flowfoot')) { body.push(kids[j]); j++; }
     const title=(h.childNodes[0]&&h.childNodes[0].nodeType===3?h.childNodes[0].textContent:h.innerText).trim(); if(!title){ continue; } const t2=title.charAt(0).toUpperCase()+title.slice(1).toLowerCase();
     const extra=[...h.querySelectorAll('span')].map(s=>s.innerText.trim()).filter(Boolean).join(' ');
     let [ans,red]=answerOf(body); if(extra) ans=extra.replace(/^·\s*/,'')+(ans?' — '+ans:'');
@@ -418,7 +418,7 @@ BD.collapseSections=collapseSections;
 /* fine print behind a button, across the whole tool (J.B., 16 Oct: "a source button that opens the fine print") */
 function finePrint(c){ if(!c) return; const L=[];
   c.querySelectorAll(':scope > .src, :scope > p.src, :scope > .cmp > p.src, :scope > div > p.src').forEach(e=>{ if(!e.closest('details.fp')&&!e.closest('td,tr,summary')) L.push(e); });
-  [...c.querySelectorAll(':scope > h3')].filter(h=>/^sources?$/i.test(h.textContent.trim())).forEach(h=>{ let n=h.nextElementSibling; h.remove(); while(n&&n.tagName!=='H3'&&!n.classList.contains('draftnote')&&!n.classList.contains('navb')){ const nx=n.nextElementSibling; L.push(n); n=nx; } });
+  [...c.querySelectorAll(':scope > h3')].filter(h=>/^sources?$/i.test(h.textContent.trim())).forEach(h=>{ let n=h.nextElementSibling; h.remove(); while(n&&n.tagName!=='H3'&&!n.classList.contains('draftnote')&&!n.classList.contains('navb')&&!n.classList.contains('flowfoot')&&!n.classList.contains('flowbar')){ const nx=n.nextElementSibling; L.push(n); n=nx; } });
   if(!L.length) return; const d=document.createElement('details'); d.className='fp'; d.innerHTML=`<summary>Sources${L.length>1?' ('+L.length+')':''}</summary><div></div>`; const b=d.lastChild; L.forEach(e=>b.appendChild(e)); c.appendChild(d); }
 function finePrintAll(root){ if(!root) return; root.querySelectorAll('details.sec > .b').forEach(finePrint); finePrint(root); trimLong(root); }
 /* long paragraphs (J.B., 16 Oct: "nobody wants to read them"): show the first sentence; the rest behind "more" */
@@ -443,7 +443,7 @@ BD.stepNav=stepNav; BD.goStep=goStep; BD.sec=sec; BD.wireSecs=wireSecs;
 // the path on every site view: the site card and What fits get the same bar (clicks handled once, by delegation)
 document.addEventListener('click',ev=>{ const b=ev.target.closest&&ev.target.closest('#side .path button'); if(!b) return; ev.preventDefault(); goStep(b.dataset.step); });
 (function watchSide(){ const side=document.getElementById('side'); if(!side){ return setTimeout(watchSide,200); }
-  new MutationObserver(()=>{ if(!BD.S||!BD.S.sel||side.querySelector('.path')) return; const st=BD.S.view2==='fits'?'fits':BD.S.view2?null:'site'; if(st){ side.insertAdjacentHTML('afterbegin',stepNav(st)); collapseSections(side); finePrintAll(side); } }).observe(side,{childList:true}); })();
+  new MutationObserver(()=>{ if(!BD.S||!BD.S.sel||side.querySelector('.path')) return; const st=BD.S.view2==='fits'?'fits':BD.S.view2?null:'site'; if(st){ if(!(BD.flow&&BD.flow.on)) side.insertAdjacentHTML('afterbegin',stepNav(st)); collapseSections(side); finePrintAll(side); } }).observe(side,{childList:true}); })();
 function wireTabs(){ const sd=document.getElementById('side'); if(sd&&BD.S.tab!=='heat') collapseSections(sd); setTimeout(()=>finePrintAll(sd),0); document.querySelectorAll('#side .tabs button, #side .ctx a[data-tab]').forEach(b=>b.onclick=ev=>{ ev.preventDefault(); tabView(b.dataset.tab); }); wireSecs(document.getElementById('side')); if(BD.tabExtraWire) BD.tabExtraWire(); const bk=$('#back'); if(bk) bk.onclick=()=>{ document.body.classList.remove('wide'); BD.scene3d&&BD.scene3d.hide(); fitsView(); }; }
 function tabView(k){ document.body.classList.remove('wide'); BD.S.view2='tab'; if(BD.drawer&&BD.drawer.isOpen()) BD.drawer.close(); if(BD.tabOverride&&BD.tabOverride[k]) return BD.tabOverride[k](); ({heat:recvView,energy:energyView,water:waterView,materials:materialsView,social:socialView,opts:optionsView,prec:precView}[k]||(BD.views&&BD.views[k]))(); }
 function show3d(tab,data){ if(!BD.scene3d) return; BD.scene3d.show(tab,data).catch(e=>{ const n=document.getElementById('st'); if(n) n.textContent='3D view could not load: '+e.message; }); }

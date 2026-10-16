@@ -220,6 +220,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 .fneed.required{fill:var(--accent-2)} .fneed.auto{fill:var(--k-place)} .fneed.expert{fill:var(--k-input)}
 .fnode.need-required .shape{stroke-width:2}
 .fnode.need-optional .shape,.fnode.need-expert .shape{stroke-dasharray:5 4}
+#flow .k,#inspector .k{color:var(--accent)}
 #flow.quick .fnode.need-expert{opacity:.18}
 #flow.quick .fwire.xp{opacity:.15}
 .needpill{display:inline-block;border:1px solid var(--line-2);border-radius:999px;padding:0 8px;font-size:11px;color:var(--muted);white-space:nowrap}
@@ -16722,87 +16723,75 @@ const LANES=[['you','You do','what the user does and decides'],['tool','The tool
 const LW=300, LG=90, LX0=130, TOP=86, ROWH=96, NH=58;
 const laneX={}; LANES.forEach((l,i)=>laneX[l[0]]=LX0+i*(LW+LG));
 
-/* kind: action | decision | tool | output. row = vertical slot. */
+/* kind: action | decision | tool | output. row = vertical slot.
+   The guided path (J.B., 16 Oct 2026): one way through, Back allowed to any step reached, no skipping ahead. */
+const DEC='Decided (J.B., 16 Oct): one guided path; Back allowed, no skipping';
 const S=[
- {id:'city',need:'required',dflt:'',ask:'Vancouver or Edmonton?',lane:'you',row:0,kind:'action',t:'Choose a city',s:'Vancouver or Edmonton',
-  d:'The user starts in the 3D city, drawn as a dark line drawing, and picks which city to work in. Both cities are carried at the same depth.',
-  give:['a city'],uses:['parcels, zoning, values and building heights for that city'],get:['the city at city scale'],refs:['Q12 both cities equally','Q14 screen style'],open:['Edmonton lot outlines are not yet available (points only); zone outlines pending (N4c, N4d).']},
- {id:'q',need:'optional',dflt:'Design for a site — clicking a parcel starts here',ask:'What brings you here? I have a proposal · What could go here? · Where could a data centre of this size go? · What would it mean near me?',lane:'you',row:1,kind:'decision',t:'Which question?',s:'evaluate · design · site a load · my address',
-  d:'The user picks the question they came with. The tool behaves the same underneath; the question sets where it starts and which party\'s view opens first. Asking what the data centre could give the neighbourhood digitally gets a stated answer: out of scope.',
-  give:['one of four questions'],uses:[],get:['the start screen for that question'],
-  branches:['Evaluate a proposal: a real or planned data centre on a known parcel','Design for a site: the user picks a parcel and the tool sizes the data centre','Site a load: the user gives a size and the tool looks for parcels','From my address: a resident sees what options near them would mean'],
-  refs:['Modes by question asked (12–13 Oct)','Q4 digital services out of scope'],open:['Whether "from my address" opens the residents\' lens by default — Claude\'s proposal.']},
- {id:'start',need:'required',dflt:'',ask:'Click a parcel, or type an address.',lane:'you',row:2,kind:'action',t:'Point to a start',s:'a parcel · a proposal · a load · an address',
-  d:'Depending on the question: click a parcel in the 3D city, enter a proposal on a parcel, type a load in MW, or type an address.',
-  give:['a parcel, a proposal, a load (0.1–40 MW) or an address'],uses:[],get:[],refs:['Q1 0.1–40 MW designed; hyperscale only as context','Decided (J.B., 14 Oct): a shared link opens on the parcel'],open:[]},
- {id:'find',lane:'tool',row:2,kind:'tool',t:'Find the site or sites',s:'look up the parcel, or search parcels for the load',
-  d:'For a parcel or address, the tool looks up its record. For a load, it searches parcels that could hold it and passes them to the options step as positions.',
-  give:[],uses:['parcel outlines and tax records (Vancouver N1–N2)','property and assessment records (Edmonton N4, N4b)','building heights (Vancouver 2009 footprints)','zoning rules for a data centre in each city'],get:[],refs:['sources/14 deep dive (zoning)'],open:['Vancouver heights are as of 2009; newer buildings are missing.']},
- {id:'card',lane:'get',row:2,kind:'output',t:'Site card',s:'zoning, value, buildings, neighbours — with sources',
-  d:'A short card for the site: its zone and sub-area, whether a data centre is allowed there (in Vancouver only I-2, I-1C, I-3 A and FC-2, case by case; in Edmonton IH, or IM where it existed), what it would take to rezone, whether it is in the floodplain, the building on it and its neighbours. Each line opens its source.',
-  give:[],uses:[],get:['the site card','the site highlighted at neighbourhood scale'],refs:['Q11 summaries are J.B.\'s templates'],open:[]},
- {id:'newex',need:'required',dflt:'New, whole building — unless the parcel holds a known data centre',ask:'New or existing building? · Whole building or part of one? · (part of an existing building) Which floor?',lane:'you',row:3,kind:'decision',t:'What is being built?',s:'new or existing · whole or part · which floor',
-  d:'Two plain questions, and a third only when it applies. A new building is sized from the zoning envelope; part of an existing building is sized from the floor offered. Below them sit three special cases. In a new mixed-use building the position (basement, ground, upper floor, roof) is not asked: the options compare it. Phasing is a timeline option, not a starting case.',
-  give:['new or existing','whole or part','which floor (part of an existing building)','host building: owner or tenant, other uses, heating system, walls and orientation, room for heat rejection, electrical service, floor height, floor load — each with "don\'t know"'],uses:[],get:[],
-  branches:['New, whole building → sized from the zoning envelope','New, part of a mixed-use building → positions compared as options','Existing, whole building (conversion) → floor loads and floor heights decide','Existing, part of a building → which floor; host-building questions','Special: modular unit · at existing infrastructure · expanding an existing data centre (at its next window)'],
-  refs:['Decided (J.B., 14 Oct): starting step','Q2 new and existing'],open:['The host-building questions sit in the expert layer except owner/tenant, other uses, heating and walls — Claude\'s proposal.']},
- {id:'state',lane:'tool',row:3,kind:'tool',t:'Work out what fits',s:'envelope or host floor → plant → hall → size',
-  d:'For a new building, the tool reads the zone\'s envelope (floor area, height, setbacks, widths), takes out space for the plant (electrical yard, batteries, generators and fuel, heat rejection, heat recovery), and what the zone keeps for other uses, and turns the hall that is left into a size range. For part of a building it starts from the floor offered and checks its floor load, the fuel limit for that storey, the flood level and the neighbours above and below. For an existing data centre it records the plant now there and its next window.',
-  give:[],uses:['district schedules (Vancouver I-2, I-1C, I-3, FC-2) and Bylaw 20001 (Edmonton BE, IM, IH)','component sizes (note 16)','NBC 2020 floor loads, NFC 2020 fuel limits','Vancouver flood construction level'],get:[],refs:['sources/16–18, 22–24'],open:['Plant sizes per MW are manufacturer claims, equipment only, without clearances.']},
- {id:'fits',lane:'get',row:3,kind:'output',t:'What fits here',s:'envelope, plant, hall and largest size — as ranges',
-  d:'A plain view of the building or floor: how much the zoning allows, how much of it the plant takes, what is left for servers, and the largest data centre that fits, as a range. Where something does not fit (a basement below the flood level, too much fuel for an upper floor, an office floor too weak), it says what would move it.',
-  give:[],uses:[],get:['the fit view','what would move each limit'],refs:[],open:[]},
- {id:'brings',need:'expert',dflt:'Ranges that fit the parcel, e.g. size 1–10 MW, cooling type open',ask:'Specify the data centre (for operators and planners)',lane:'you',row:4,kind:'action',t:'What the data centre brings',s:'size, cooling, plant, lighting — or ranges',
-  d:'Behind a "Specify the data centre" panel, for operators and planners. A resident never has to open it. Anything left open is carried as a range that fits the parcel, not a guess, and the results say so.',
-  give:['size (MW)','cooling type','plant schedule','spare cooling','lighting plan'],uses:[],get:[],refs:['Q3 reciprocity both ways (inputs split by side)'],open:[]},
- {id:'place',lane:'tool',row:4,kind:'tool',t:'Read what the place offers',s:'gates first · receivers and rival sources mapped · grid, water, rules',
-  d:'The tool reads the place side from data: heat sinks and receivers nearby, the grid and its carbon, the price of power, water supply, existing buildings to reuse, traffic noise as cover, and the rules that apply. Gates come first: if the grid connection or the zoning use is blocked, that is said before any exchange is weighed. Receivers within reach are mapped by type (networks, pools, schools, care, housing, greenhouses), with the sources that already serve them, such as the sewer heat behind the NEU; each record shows where it came from.',
-  give:[],uses:['the place-side quantities in the register','receivers_nearby, competing_sources (14 Oct)','city and provincial sources (sources/14)'],get:[],refs:['Q3','register v5 "The place" stage'],open:['Whether users can correct place-side data. Claude\'s proposal: no edits; they can flag a figure and see its source.']},
- {id:'exch',lane:'get',row:4,kind:'output',t:'Two-way exchange panel',s:'six exchanges, both directions; mechanism and firmness; gaps marked',
-  d:'Heat, power, water, space, materials and sound, each shown in two directions: what the data centre could give the place, and what the place gives the data centre. Each names its mechanism: a physical transfer (solid line), coordination through the grid (dotted), shared space or a shared service. Each says how firm it is: existing, committed, planned, proposed or only possible; only existing and committed count as delivered. Missing figures are shown as gaps, not filled.',
-  give:[],uses:[],get:['the exchange panel'],refs:['Q3'],open:[]},
- {id:'pref',need:'optional',dflt:'3 options, no limits, spread across all rows',ask:'What matters to you? Tap any: noise at night · heat for neighbours · carbon · cost · no rezoning · the ground floor for the street. Tap again to make it a must.',lane:'you',row:5,kind:'decision',t:'Set preferences',s:'what matters to you · musts',
-  d:'Preferences work like a design brief, not a score. In plain words, a user taps what matters to them; that sets the emphasis (which rows the options differ on). Tapping again makes it a must, which sets a limit. Exact limits (≤ 45 dB at the nearest bedroom at night) and the number of options sit in the expert panel.',
-  give:['what matters (taps → emphasis)','musts (second tap → limits)','expert: number of options, exact limits'],uses:[],get:[],refs:['Q6 options and preferences','Q6 limits shown, never silent','Q7 parties'],open:['Default of three options — Claude\'s proposal.','The list of plain-language concerns, and how each maps to rows — to draft with J.B.']},
- {id:'compute',lane:'tool',row:6,kind:'tool',t:'Compute and test',s:'characterise → prospect → opportunities → test',
-  d:'The tool works through the stages in the tool-logic tab, carrying every figure as a range with its sources.',
-  give:[],uses:['every quantity in the formula register','calibration against seven built cases'],get:[],refs:['Tool-logic tab','calibration_report.md'],open:[]},
- {id:'conds',lane:'tool',row:7,kind:'tool',t:'Conditions',s:'what would move each one',
-  d:'Each condition carries what it would take to move it: a different option, money, time and process, a change in policy, city-scale infrastructure, or nothing at all. Only physics is a hard constraint. Where a condition cannot be judged, it names the next step that would let it: a route survey, hourly data, a cost model, a partner.',
-  give:[],uses:['every condition in the register'],get:[],refs:['Constraints vs trade-offs (12–13 Oct)'],open:['The move and party tags are Claude\'s proposals for J.B. to check.']},
- {id:'gen',lane:'tool',row:8,kind:'tool',t:'Make the options',s:'set aside, drop the dominated, spread',
-  d:'The tool sets aside options that break a limit or physics, drops any option that is worse than another on every row for every party, and picks the rest to differ as much as possible on the emphasised rows. No score, no weights, no ranking.',
-  give:[],uses:['sizes, positions, adjacencies and technologies'],get:[],refs:['Q6'],open:[]},
- {id:'opts',lane:'get',row:8,kind:'output',t:'Options, side by side',s:'in no order; one trade-off table each, by party',
-  d:'The options appear side by side in no order. Each has the full trade-off table: rows in their own units, gains and losses by party, a typical mature year, and a lifecycle strip underneath. Each option is also run through four futures: as planned, the tenant changes its cooling, the tenant leaves, the receiver leaves. If fewer options exist than were asked for, the tool says why. Where the user left something open, the results say so in plain words, e.g. "Size not given: showing 1–10 MW, what this parcel could hold."',
-  give:[],uses:[],get:['n options','a trade-off table per option','a lifecycle strip per option'],refs:['Q6','Q8 typical year + lifecycle','Q9 own units'],open:[]},
- {id:'relax',lane:'get',row:9,kind:'output',t:'If you moved a limit',s:'shown separately; never mixed into the options',
-  d:'What relaxing each limit would open up, and its price — including trying another place\'s rule here (Fairfax setbacks, Germany\'s heat-reuse quota, Calgary\'s generation threshold…). Results from elsewhere (Montreal, Lausanne, Quincy…) sit here too, labelled modelled or operating, never used as this parcel\'s numbers. The user\'s limit is never overridden.',
-  give:[],uses:[],get:['the relax panel'],refs:['Q6 option b'],open:[]},
- {id:'next',need:'optional',dflt:'',ask:'',lane:'you',row:9,kind:'decision',t:'What next?',s:'adjust · add-ons · preferences · relax · read · done',
-  d:'From the options the user can adjust one (size, position, technology) and keep it, try add-ons on it to see what each would change, change preferences, relax a limit, read more closely, or finish.',
-  give:['a choice'],uses:[],get:[],branches:['Adjust an option → computed again','Try an add-on (solar, batteries, reused water, a borefield, a seasonal store…) → computed again, showing what changed and the rules in each city','Change preferences or relax a limit → back to preferences','Read and compare → scene, lens, sources','Done → leave with'],refs:['Q6 any option can be adjusted and kept'],open:[]},
- {id:'read',need:'optional',dflt:'A neutral view showing every party',ask:'See it as… a neighbour · the city · the operator · …',lane:'you',row:10,kind:'action',t:'Read and compare',s:'switch lens · open a number\'s sources · move around',
-  d:'The user switches lens to see the same table from another party\'s view, opens any number to see its formula and sources, and moves around the scene.',
-  give:['a lens','a number to open'],uses:[],get:[],refs:['Q7','Q14 constrained navigation'],open:[]},
- {id:'scene',lane:'get',row:10,kind:'output',t:'3D scene',s:'city · neighbourhood · building · eye-level views',
-  d:'The scene at three zoom levels plus curated views from the sidewalk. Plant on generated options is shown plainly; on real sites it is shown as seen, documented or withheld. Navigation is orbit, pan, zoom and fly-to, not free flight.',
-  give:[],uses:[],get:['the scene','eye-level views','sources for each figure'],refs:['Q13','Q14','style_studies.html'],open:[]},
- {id:'done',need:'optional',dflt:'',ask:'',lane:'you',row:11,kind:'action',t:'Finish',s:'',
-  d:'The user ends the session with what they need to take away.',give:[],uses:[],get:[],refs:[],open:[]},
- {id:'report',lane:'tool',row:11,kind:'tool',t:'Assemble the package',s:'J.B.\'s templates + sourced numbers',
-  d:'The tool fills J.B.\'s sentence templates with numbers and lays out the report. It never composes new sentences at run time.',
-  give:[],uses:['J.B.\'s templates','the options and their tables','the sources'],get:[],refs:['Q10','Q11'],open:[]},
- {id:'leave',lane:'get',row:11,kind:'output',t:'Leave with',s:'scenario link · report · scene image',
-  d:'A link that reopens the exact scenario, a report of a few pages (options side by side, rows, sources), and an image of the 3D scene.',
-  give:[],uses:[],get:['scenario link','report (a few pages)','scene image'],refs:['Q10'],open:['The report and image need the artifact\'s file-saving capability; to check at build time.']},
+ {id:'open',need:'required',dflt:'',ask:'',lane:'you',row:0,kind:'action',t:'Open the tool',s:'the welcome card appears at once',
+  d:'The tool opens on a welcome card over the map: one sentence on what it does, the six stages, and two buttons.',
+  give:[],uses:[],get:[],refs:[DEC],open:[]},
+ {id:'welcome',lane:'get',row:0,kind:'output',t:'Welcome card',s:'what it does · six stages · two buttons',
+  d:'Site, What fits, Exchanges, Opportunities, Options, Report. "See a worked example" or "Start with my own site", and a link to what the tool cannot tell you.',
+  give:[],uses:[],get:['the six stages, named once'],refs:[DEC],open:[]},
+ {id:'which',need:'required',dflt:'',ask:'See a worked example · Start with my own site',lane:'you',row:1,kind:'decision',t:'Worked example or own site?',s:'three examples, or pick a parcel',
+  d:'A worked example loads its site and set-up answers and starts at the set-up step. Own site starts at Pick a site.',
+  give:['one of two'],uses:[],get:[],branches:['Vancouver industrial lot (1425 Clark Dr, I-2, new building)','Edmonton industrial lot (12603 123 Street NW, IH, new building)','An existing downtown tower (555 W Hastings, one upper floor)','My own site → Pick a site'],refs:[DEC],open:[]},
+ {id:'site',need:'required',dflt:'',ask:'Click a parcel or search an address.',lane:'you',row:2,kind:'action',t:'1 · Pick a site',s:'a city, then a parcel or an address',
+  d:'Next stays off until a parcel is picked. Picking another parcel later sends the path back to its set-up.',
+  give:['a city','a parcel or an address'],uses:[],get:[],refs:[DEC],open:[]},
+ {id:'find',lane:'tool',row:2,kind:'tool',t:'Look up the parcel',s:'record, zone, buildings, heights',
+  d:'Parcel outline, tax or assessment record, zone and whether a data centre is an allowed use, buildings and their heights.',
+  give:[],uses:['Vancouver parcels and tax report; LiDAR 2022 heights','Edmonton assessment records, Altalis lot outlines, City 3D buildings','zone use tables (Vancouver By-law; Bylaw 20001)'],get:[],refs:[],open:[]},
+ {id:'card',lane:'get',row:2,kind:'output',t:'Site card',s:'allowed use · lot · what stands on it',
+  d:'Closed sections, each showing its one-line answer; sources behind a button.',give:[],uses:[],get:['the site card'],refs:['Decided (J.B., 16 Oct): sections closed, answer showing'],open:[]},
+ {id:'setup',need:'required',dflt:'Labelled defaults: new whole building, most the zone allows, air inside, dry coolers on the roof, generators in the yard',ask:'Five cards: what is being built · footprint · height · cooling · standby',lane:'you',row:3,kind:'decision',t:'1 · Set up the site',s:'five cards, or keep the defaults',
+  d:'Five cards in a drawer beside the panel. Each answer redraws the 3D. "Keep the defaults" moves on with the labelled defaults.',
+  give:['new or existing; whole or part','footprint','height or storeys','cooling inside and outside','standby generators'],uses:[],get:[],refs:['Decided (J.B., 16 Oct): five cards in sequence'],open:[]},
+ {id:'size',lane:'tool',row:3,kind:'tool',t:'Size the building and plant',s:'envelope → plant → floor the servers need',
+  d:'Reads the zone envelope, takes out loading and plant, and sizes the floor the servers need from the chosen size (about 767 m² of floor per MW).',
+  give:[],uses:['zone schedules','component sizes (register)'],get:[],refs:['Decided (J.B., 16 Oct): equipment only, not a building'],open:[]},
+ {id:'s3d',lane:'get',row:3,kind:'output',t:'Equipment in 3D',s:'the lot, the floor needed, plant at real size',
+  d:'No building is drawn: a grey outline of what the zoning allows, a red outline of the floor the servers need, and the plant at real size.',give:[],uses:[],get:['the 3D view'],refs:['Decided (J.B., 16 Oct): equipment only'],open:[]},
+ {id:'fits',need:'required',dflt:'The size is set to the smallest that fits',ask:'Size slider',lane:'you',row:4,kind:'action',t:'2 · What fits, then real buildings',s:'read the range; choose a size',
+  d:'The largest data centre that fits, as a range, then the same site against real data centres with published floor area and power.',
+  give:['a size (MW)'],uses:[],get:[],refs:['Decided (J.B., 16 Oct): Real buildings folded into What fits'],open:[]},
+ {id:'fitc',lane:'tool',row:4,kind:'tool',t:'Work out what fits',s:'floor area × hall share ÷ m² per MW',
+  d:'Floor area the zone allows, the share that can be hall, and the hall area per MW from built halls, carried as ranges.',give:[],uses:['hall area per MW (five built Canadian halls, operator claims)','precedent catalogue'],get:[],refs:[],open:[]},
+ {id:'fito',lane:'get',row:4,kind:'output',t:'What fits · Real buildings',s:'range, then the site among real ones',
+  d:'Two screens: the size range with what limits it, then a chart of real data centres with this site\'s range on it.',give:[],uses:[],get:['size range','precedent chart'],refs:[],open:[]},
+ {id:'ex',need:'required',dflt:'',ask:'Next, five times',lane:'you',row:5,kind:'action',t:'3 · Walk the exchanges',s:'Heat → Electricity → Water → Materials → People',
+  d:'One screen each, in a fixed order. Each opens with its finding, then closed sections; its 3D view opens with it.',
+  give:['Next or Back'],uses:[],get:[],refs:[DEC],open:[]},
+ {id:'exc',lane:'tool',row:5,kind:'tool',t:'Compute each exchange',s:'receivers, grid, water, materials, neighbours',
+  d:'Heat offered and who could take it; power drawn and what could be offered back; water by cooling type; servers and materials over time; sound, sight and people nearby. Each compared with real data centres.',
+  give:[],uses:['every quantity in the formula register, as ranges with sources'],get:[],refs:['Tool-logic tab'],open:[]},
+ {id:'exo',lane:'get',row:5,kind:'output',t:'Five exchange screens',s:'finding first; 3D for each',
+  d:'Heat shows receivers and routes; Electricity the grid side; Water the cooling plant; Materials the racks and trucks; People sound and sight from homes and streets.',give:[],uses:[],get:['five screens, each with its 3D'],refs:[],open:[]},
+ {id:'op',need:'required',dflt:'',ask:'Next, once per opportunity',lane:'you',row:6,kind:'action',t:'4 · Walk the opportunities',s:'one at a time, then the rest in one list',
+  d:'Only opportunities not ruled out at this site get a step of their own: possible here, possible with a change, or not ruled out but not yet known. Those that fail a gate are listed together, each with the gate that fails.',
+  give:['Next or Back'],uses:[],get:[],refs:['Decided (J.B., 16 Oct): only the possible ones, one by one'],open:['Several opportunities draw only the site model in 3D; their own drawings are still to make.']},
+ {id:'opc',lane:'tool',row:6,kind:'tool',t:'Screen fifteen opportunities',s:'physics · land · rules · demand · time · money',
+  d:'Each opportunity gets a state per gate at this site, with its reason. No score; the states are not added up.',give:[],uses:['opportunity recipes and rule ladders (register)','zone use tables','EV stations, water permits, public rooms'],get:[],refs:[],open:[]},
+ {id:'opo',lane:'get',row:6,kind:'output',t:'One card per opportunity',s:'gates, rules, unknowns, how proven; 3D',
+  d:'Each card: the gates, the rules rung by rung, what is not yet known, how proven, and what it would occupy on the site in 3D.',give:[],uses:[],get:['a card per opportunity','the list of those not possible here'],refs:[],open:[]},
+ {id:'ot',need:'required',dflt:'',ask:'Next',lane:'you',row:7,kind:'action',t:'5 · Options, then over time',s:'read across; nothing wins',
+  d:'The three options side by side, then what changes over fifty years.',give:['Next or Back'],uses:[],get:[],refs:['Decided (J.B., 16 Oct): Over time folded into Options'],open:[]},
+ {id:'gen',lane:'tool',row:7,kind:'tool',t:'Generate three options',s:'smaller air-cooled · chosen size with heat · largest that fits',
+  d:'The tool makes three options from the site and the chosen size and fills one trade-off table, grouped by party. No score, no weights, no ranking.',give:[],uses:['the site, the size range and the exchanges'],get:[],refs:['Q6'],open:[]},
+ {id:'opts',lane:'get',row:7,kind:'output',t:'Three options · Over time',s:'trade-offs by party; four futures; lifespans',
+  d:'Three 3D views side by side, the table by party, four futures, and the lifespans of each part.',give:[],uses:[],get:['three options','the over-time chart'],refs:['Q8'],open:[]},
+ {id:'rep',need:'required',dflt:'',ask:'Download HTML · Download PDF',lane:'you',row:8,kind:'action',t:'6 · Two cities, then the report',s:'read, then download',
+  d:'The same data centre in both cities, then the report. Back returns to any step already passed.',give:['Download HTML or PDF'],uses:[],get:[],refs:['Decided (J.B., 16 Oct): Two cities folded into the report; PDF and HTML'],open:[]},
+ {id:'asm',lane:'tool',row:8,kind:'tool',t:'Assemble the report',s:'from what each step showed',
+  d:'Each step\'s finding, its sections\' answers and its tables are kept as the step is passed. The report is those, in order, with a baseline and the sources. It composes no new sentences.',
+  give:[],uses:['what each step showed'],get:[],refs:['Q10','Q11'],open:['Changing an answer drops what later steps showed, so the report is never out of date; those steps must be passed again.']},
+ {id:'leave',lane:'get',row:8,kind:'output',t:'Report',s:'on screen · HTML · PDF',
+  d:'Baseline; each stage in order; the three options table by party; two cities; what the tool cannot tell you; sources.',give:[],uses:[],get:['the report on screen','an HTML file','a PDF'],refs:[],open:[]},
 ];
 const E=[
- ['city','q'],['q','start'],['start','find'],['find','card'],
- ['start','newex'],['newex','state'],['state','fits'],['state','place'],['newex','brings','expert'],['brings','place'],['place','exch'],
- ['brings','pref'],['pref','compute','limits · emphasis'],['place','compute'],['compute','conds'],['conds','gen'],['gen','opts'],['gen','relax'],
- ['opts','next','','down'],['next','compute','adjust or add-on','loopC'],['next','pref','change or relax','loopL'],
- ['next','read','read'],['read','scene'],['read','done','done'],['done','report'],['report','leave'],
+ ['open','welcome'],['open','which'],['which','site','own site'],['which','setup','worked example','skipR'],['site','find'],['find','card'],['site','setup'],
+ ['setup','size'],['size','s3d'],['setup','fits'],['fits','fitc'],['fitc','fito'],['fits','ex'],['ex','exc'],['exc','exo'],['ex','op'],['op','opc'],['opc','opo'],
+ ['op','ot'],['ot','gen'],['gen','opts'],['ot','rep'],['rep','asm'],['asm','leave'],['rep','setup','Back','loopL'],
 ];
 const N={}; S.forEach(s=>N[s.id]=s);
 const NEEDL={required:'required',optional:'optional',auto:'tool decides',expert:'expert panel'};
@@ -16811,11 +16800,9 @@ let built=false, sel=null;
 function box(s){ return {x:laneX[s.lane], y:TOP+s.row*ROWH, w:LW, h:NH}; }
 function build(){
   const bar=document.createElement('div'); bar.className='fbar';
-  bar.innerHTML='<span>Show</span><div class="seg" role="group" aria-label="Path"><button id="p-quick" aria-pressed="true">Quick path</button><button id="p-all" aria-pressed="false">Everything</button></div><span class="fnote">Quick path: what a first-time user meets. Two clicks are required; everything else has a default.</span>';
+  bar.innerHTML='<span class="fnote">One path for everyone: Next moves on, Back returns to any step already reached, nothing can be skipped.</span>';
   flow.appendChild(bar);
-  const setPath=q=>{flow.classList.toggle('quick',q); bar.querySelector('#p-quick').setAttribute('aria-pressed',q); bar.querySelector('#p-all').setAttribute('aria-pressed',!q);};
-  bar.querySelector('#p-quick').onclick=()=>setPath(true); bar.querySelector('#p-all').onclick=()=>setPath(false); setPath(true);
-  const W=LX0*2+3*LW+2*LG, H=TOP+12*ROWH+10;
+  const W=LX0*2+3*LW+2*LG, H=TOP+(Math.max(...S.map(s=>s.row))+1)*ROWH+10;
   const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,style:'width:100%;min-width:900px;max-width:1400px;height:auto',role:'img','aria-label':'User workflow: three lanes — what the user does, what the tool does, what the user gets — from choosing a city and question, through preferences and options, to leaving with a link, report and image. Loops return from "What next?" to preferences or to computing again.'},flow);
   const defs=el('defs',{},svg);
   [['ah','var(--muted)'],['ahA','var(--accent)']].forEach(([id,c])=>{const m=el('marker',{id,viewBox:'0 0 8 8',refX:7,refY:4,markerWidth:7,markerHeight:7,orient:'auto-start-reverse'},defs); el('path',{d:'M0,0 L8,4 L0,8 z',fill:c},m);});
@@ -16828,6 +16815,7 @@ function build(){
     const A=box(N[a]), B=box(N[b]); let d, lx, ly, cls='fwire';
     if(kind==='loopL'){ const x=A.x-26; d=`M${A.x},${A.y+NH/2} H${x} V${B.y+NH/2} H${B.x}`; lx=x-6; ly=(A.y+B.y)/2+NH/2; cls+=' loop'; }
     else if(kind==='loopC'){ const x=A.x+LW+LG/2+10; d=`M${A.x+LW},${A.y+NH*0.35} H${x} V${B.y+NH/2} H${B.x}`; lx=x+4; ly=(A.y+B.y)/2+NH/2; cls+=' loop'; }
+    else if(kind==='skipR'){ const x=A.x+LW+22; d=`M${A.x+LW},${A.y+NH/2} H${x} V${B.y+NH*0.3} H${B.x+LW}`; lx=x+6; ly=A.y+NH/2+4; }
     else if(kind==='down'){ const gy=A.y+NH+(ROWH-NH)/2, cx=B.x+LW+LG/2-6; d=`M${A.x+30},${A.y+NH} V${gy} H${cx} V${B.y+NH/2} H${B.x+LW}`; }
     else if(N[a].row===N[b].row){ if(B.x>A.x){ d=`M${A.x+LW},${A.y+NH/2} H${B.x}`; } else { d=`M${A.x},${A.y+NH/2} H${B.x+LW}`; } lx=(A.x+LW+B.x)/2; ly=A.y+NH/2-6; label&&(kind='mid'); }
     else if(N[a].lane===N[b].lane){ d=`M${A.x+LW/2},${A.y+NH} V${B.y}`; lx=A.x+LW/2+8; ly=(A.y+NH+B.y)/2+4; }
@@ -16855,16 +16843,14 @@ function pick(id){ sel=id; flow.querySelectorAll('.fnode').forEach(g=>g.classLis
   flow.querySelectorAll('.fwire').forEach(p=>p.classList.toggle('hi',p.dataset.a===id||p.dataset.b===id)); render(); }
 function render(){
   if(!sel){ insp.innerHTML=`<div class="empty"><div class="kind">User workflow</div><h2>How a session runs</h2>
-   <p class="draft">A first-time user needs two clicks: a city and a parcel. Everything else either has a default, is decided by the tool from the data, or sits in an expert panel for operators and planners. Results always say what was left open.</p>
-   <p class="draft">Read top to bottom. The left lane is what the user does and decides, the middle lane is what the tool works out from its sources, and the right lane is what the user sees or takes away. Hexagons are decisions. Dashed red lines are the loops back: after seeing the options, a user can adjust one, change their preferences or relax a limit, and the tool works again.</p>
-   <div class="draftnote">Draft wording (Claude) — for J.B. to rewrite.</div>
+   <p>Everyone walks the same path: <span class="k">site, what fits, five exchanges, the opportunities that could work here, three options, a report</span>. Back is allowed; skipping ahead is not.</p><p>Left: what the user does. Middle: what the tool works out. Right: what appears. The red loop is Back.</p>
    <div class="key"><i style="border-color:var(--fg);border-radius:3px"></i><span>step the user takes</span><i style="border-color:var(--accent);border-radius:3px"></i><span>decision the user makes</span><i style="border-color:var(--line-2);border-radius:3px;background:var(--panel-2)"></i><span>what the tool does</span><i style="border-color:var(--k-opp)"></i><span>what the user gets</span></div>
    <div class="key"><span class="needpill required">required</span><span>the user must do it</span><span class="needpill optional">optional</span><span>skip it and a default applies</span><span class="needpill auto">tool decides</span><span>from the data; can be changed</span><span class="needpill expert">expert panel</span><span>hidden unless opened</span></div>
    <p style="margin-top:14px;color:var(--muted)">Click any box for its inputs, outputs, the decisions it rests on and what is still open. The tool-logic tab shows what happens inside the middle lane.</p></div>`; return; }
   const s=N[sel]; const L=LANES.find(l=>l[0]===s.lane)[1];
   insp.innerHTML=`<div class="kind">${esc(L)} · ${esc({action:'step',decision:'decision',tool:'tool',output:'output'}[s.kind])}</div><h2>${esc(s.t)}</h2>
    ${s.need?`<div class="box2"><span class="needpill ${s.need}">${esc(NEEDL[s.need])}</span> <span style="color:var(--muted);font-size:12.5px">${esc(NEEDD[s.need])}</span>${s.dflt?`<div style="margin-top:8px;font-size:13px"><span style="color:var(--muted)">if skipped:</span> ${esc(s.dflt)}</div>`:''}${s.ask?`<div style="margin-top:8px;font-size:13px"><span style="color:var(--muted)">on screen:</span> <span class="draft">“${esc(s.ask)}”</span></div>`:''}</div>`:''}
-   <p class="draft" style="margin-top:10px">${esc(s.d)}</p><div class="draftnote">Draft wording (Claude) — for J.B. to rewrite.</div>
+   <p style="margin-top:10px">${esc(s.d)}</p>
    <dl>${s.branches?`<dt>choices</dt><dd>${list(s.branches)}</dd>`:''}${s.give.length?`<dt>user gives</dt><dd>${list(s.give)}</dd>`:''}${s.uses.length?`<dt>tool uses</dt><dd>${list(s.uses)}</dd>`:''}${s.get.length?`<dt>user gets</dt><dd>${list(s.get)}</dd>`:''}
    ${(()=>{const i=E.filter(e=>e[1]===sel).map(e=>N[e[0]].t), o=E.filter(e=>e[0]===sel).map(e=>N[e[1]].t+(e[2]?' ('+e[2]+')':'')); return (i.length?`<dt>from</dt><dd>${esc(i.join(' · '))}</dd>`:'')+(o.length?`<dt>leads to</dt><dd>${esc(o.join(' · '))}</dd>`:'');})()}
    ${s.refs.length?`<dt>rests on</dt><dd>${s.refs.map(r=>`<span class="tag">${esc(r)}</span>`).join('')}</dd>`:''}
