@@ -226,3 +226,6 @@ Blatchford's District Energy Sharing System is an ambient loop (8–32 °C suppl
 
 ## Receiver list condensed (16 Oct 2026, J.B.: "a lot of information that doesn't do anything")
 Rows are listed only for buildings within reach of break-even or whose demand is unknown (up to 15 per kind). Buildings beyond break-even are summed in one line per kind: how many, homes in all, the range of route lengths, and what would close the gap for the nearest; the box lists them on request (off by default). The connection difficulty shared by most of a kind goes in the header with its count; a row shows it only when it differs.
+
+## The path and closed sections (16 Oct 2026, J.B.: "tabs that open (but present closed)… make the path through the tool clear")
+Five steps across the top of the panel on every site view: 1 Site, 2 What fits, 3 Exchanges (Heat, Electricity, Water, Materials, People), 4 Could become (Opportunities, Three options, Over time), 5 Report (PDF and HTML, to be built). Real buildings and Two cities are context links under the steps. Views open with the finding (red = emphasis), then sections that start closed but show their one-line answer; opening state is kept for the session. Piloted on Heat; other views to follow once J.B. approves the pattern.

@@ -368,8 +368,32 @@ BD.legendRecv=function(){ return `<div style="margin-top:6px"><i style="border:1
 
 /* ---------- the exchange tabs (J.B., 15 Oct): heat · energy · water · materials · social · options; each with a 3D view ---------- */
 const TABS=[['prec','Precedents'],['heat','Heat'],['energy','Energy'],['water','Water'],['materials','Materials'],['social','People'],['opps2','Opportunities'],['opts','Options'],['time','Over time'],['cities','Two cities']];
-function tabBar(cur){ BD.S.tab=cur; return `<button class="x" id="back">← What fits</button><div class="kind">${cur==='prec'?'Real buildings':'What it exchanges'} · ${BD.S.answers.mw||''} MW of servers</div><div class="tabs" role="tablist">${TABS.map(([k,l])=>`<button role="tab" data-tab="${k}" aria-selected="${k===cur}">${l}</button>`).join('')}</div>${BD.tabExtra?BD.tabExtra(cur):''}`; }
-function wireTabs(){ document.querySelectorAll('#side .tabs button').forEach(b=>b.onclick=()=>tabView(b.dataset.tab)); if(BD.tabExtraWire) BD.tabExtraWire(); $('#back').onclick=()=>{ document.body.classList.remove('wide'); BD.scene3d&&BD.scene3d.hide(); fitsView(); }; }
+/* the path through the tool (J.B., 16 Oct: "make the path through the tool clear"): five steps, sub-views only inside a step; context at the end */
+const STEPS=[['site','Site'],['fits','What fits'],['ex','Exchanges',[['heat','Heat'],['energy','Electricity'],['water','Water'],['materials','Materials'],['social','People']]],
+  ['become','Could become',[['opps2','Opportunities'],['opts','Three options'],['time','Over time']]],['report','Report']];
+const CONTEXT=[['prec','Real buildings'],['cities','Two cities']];
+function stepOf(k){ for(const s of STEPS) if(s[2]&&s[2].some(t=>t[0]===k)) return s[0]; return k==='report'?'report':null; }
+function stepNav(cur){ const st=stepOf(cur)||cur; return `<nav class="path" aria-label="Steps">${STEPS.map(([k,l],i)=>`<button data-step="${k}" ${k===st?'aria-current="step"':''}><span>${i+1}</span>${l}</button>`).join('')}</nav>`; }
+function tabBar(cur){ BD.S.tab=cur; const st=stepOf(cur), S=STEPS.find(s=>s[0]===st);
+  return stepNav(cur)+(S&&S[2]?`<div class="tabs" role="tablist">${S[2].map(([k,l])=>`<button role="tab" data-tab="${k}" aria-selected="${k===cur}">${l}</button>`).join('')}</div>`:'')
+   +(CONTEXT.some(c=>c[0]===cur)?`<div class="tabs" role="tablist">${CONTEXT.map(([k,l])=>`<button role="tab" data-tab="${k}" aria-selected="${k===cur}">${l}</button>`).join('')}</div>`:'')
+   +`<p class="ctx">${BD.S.answers.mw||''} MW of servers · <a href="#" data-tab="prec">Real buildings</a> · <a href="#" data-tab="cities">Two cities</a></p>`+(BD.tabExtra?BD.tabExtra(cur):''); }
+/* a section that starts closed but shows its answer (J.B., 16 Oct: "tabs that open (but present closed)"); the open state is kept for the session */
+BD.openSecs=BD.openSecs||new Set();
+function sec(id,title,answer,body,o){ o=o||{}; const open=BD.openSecs.has(id)||o.open;
+  return `<details class="sec" data-sec="${id}" ${open?'open':''}><summary><span class="t">${title}</span>${answer?`<span class="a${o.finding?' f':''}">${answer}</span>`:''}</summary><div class="b">${body}</div></details>`; }
+function wireSecs(root){ (root||document).querySelectorAll('details.sec').forEach(d=>d.addEventListener('toggle',()=>{ if(d.open) BD.openSecs.add(d.dataset.sec); else BD.openSecs.delete(d.dataset.sec); })); }
+function goStep(k){ const S=STEPS.find(s=>s[0]===k); document.body.classList.remove('wide');
+  if(k==='site'){ BD.S.view2=null; BD.scene3d&&BD.scene3d.hide(); BD.card(); BD.draw(); return; }
+  if(k==='fits'){ BD.scene3d&&BD.scene3d.hide(); fitsView(); return; }
+  if(k==='report'){ return (BD.views&&BD.views.report)?BD.views.report():tabView('heat'); }
+  if(S&&S[2]) tabView(S[2][0][0]); }
+BD.stepNav=stepNav; BD.goStep=goStep; BD.sec=sec; BD.wireSecs=wireSecs;
+// the path on every site view: the site card and What fits get the same bar (clicks handled once, by delegation)
+document.addEventListener('click',ev=>{ const b=ev.target.closest&&ev.target.closest('#side .path button'); if(!b) return; ev.preventDefault(); goStep(b.dataset.step); });
+(function watchSide(){ const side=document.getElementById('side'); if(!side){ return setTimeout(watchSide,200); }
+  new MutationObserver(()=>{ if(!BD.S||!BD.S.sel||side.querySelector('.path')) return; const st=BD.S.view2==='fits'?'fits':BD.S.view2?null:'site'; if(st) side.insertAdjacentHTML('afterbegin',stepNav(st)); }).observe(side,{childList:true}); })();
+function wireTabs(){ document.querySelectorAll('#side .tabs button, #side .ctx a[data-tab]').forEach(b=>b.onclick=ev=>{ ev.preventDefault(); tabView(b.dataset.tab); }); wireSecs(document.getElementById('side')); if(BD.tabExtraWire) BD.tabExtraWire(); const bk=$('#back'); if(bk) bk.onclick=()=>{ document.body.classList.remove('wide'); BD.scene3d&&BD.scene3d.hide(); fitsView(); }; }
 function tabView(k){ document.body.classList.remove('wide'); BD.S.view2='tab'; if(BD.drawer&&BD.drawer.isOpen()) BD.drawer.close(); if(BD.tabOverride&&BD.tabOverride[k]) return BD.tabOverride[k](); ({heat:recvView,energy:energyView,water:waterView,materials:materialsView,social:socialView,opts:optionsView,prec:precView}[k]||(BD.views&&BD.views[k]))(); }
 function show3d(tab,data){ if(!BD.scene3d) return; BD.scene3d.show(tab,data).catch(e=>{ const n=document.getElementById('st'); if(n) n.textContent='3D view could not load: '+e.message; }); }
 function roofArea(f){ const A=BD.S.answers; if(A.built==='new'&&BD.S.sel.ring) return BD.area(BD.S.sel.ring)*0.86*0.86; return f.plate||f.foot||0; }

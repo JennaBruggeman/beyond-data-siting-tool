@@ -128,28 +128,42 @@ async function heatIndex(){
   const showB=A.showBeyond===true;
   const r=e.calc({mw,recover:true,to:'near'},f,all,nets); const inside=nets.find(n=>n.inside);
   const nB=all.filter(p=>p.beyond).length, nW=all.filter(p=>p.econ.status==='within').length;
-  let h=e.tabBar('heat')+`<h2>Who could take the heat</h2>
-  <p class="draft">Buildings within 1.5 km whose kind of demand could use low-grade heat. Each row opens its connection: what it takes, what it costs, who gains and who gives up.</p>
-  <div class="hfig"><div><b>${e.rng(r.avail[0]/1000,r.avail[1]/1000,'GWh/yr')}</b><span>heat this size could offer (liquid-cooled, heat pump)</span></div><div><b>${e.rng(r.homes[0],r.homes[1],'')}</b><span>homes' heating, as an equal (provincial average)</span></div>
-  <div><b>${all.length}</b><span>candidate buildings within 1.5 km</span></div><div><b>${nW} · ${nB}</b><span>within · beyond break-even (housing, and other buildings where floor area could be estimated)</span></div></div>
-  ${(()=>{ const R=e.R, v=ECON.gas[f.city], pe=ECON.elec[f.city], nb=v-pe/R.cop[1], nw=v-pe/R.cop[0]; return `<p class="sub">${draft(nb<=0?`At Alberta prices (gas $${(v/3.6).toFixed(2)}/GJ, power $${pe.toFixed(2)}/MWh) the heat pump's electricity costs more than the gas the heat would replace ($${nw.toFixed(1)} to $${nb.toFixed(1)} per MWh of heat), so no route pays back at any distance. Each card says what would have to change.`:`At BC prices (gas $${(v/3.6).toFixed(2)}/GJ, power $${pe.toFixed(2)}/MWh) the heat is worth $${nw.toFixed(1)}–${nb.toFixed(1)} per MWh after the heat pump; each card works out its own break-even distance.`)}</p>`; })()}
-  ${inside?`<p class="sub"><b style="font-weight:400">${esc(inside.n)}</b> — this lot is inside its service area${inside.src==='van9552'?': heat sent back is credited (By-law 9552)':inside.kind==='planned'?' — a planned area, not yet built (approximate)':' (approximate; connection terms not yet read)'}. <a href="#" data-net="1">Explore ›</a></p>`:nets.length?`<p class="sub">${esc(nets[0].n)} is ${Math.round(nets[0].edge)} m from this lot. <a href="#" data-net="1">Explore ›</a></p>`:''}
+  // 16 Oct (J.B.): answer first; every part closed but showing its answer
+  const R0=e.R, gv=ECON.gas[f.city], pe0=ECON.elec[f.city], netB=gv-pe0/R0.cop[1];
+  const bl=f.city==='edm'?nets.find(n=>/Blatchford/.test(n.n)):null;
+  const nearNet=inside||nets.slice().sort((x,y)=>x.edge-y.edge)[0];
+  const nDep=all.filter(p=>p.econ.status==='depends').length;
+  const lead=netB<=0?`At ${f.city==='edm'?'Alberta':'BC'} prices no route pays back at any distance.${bl?` Blatchford's low-temperature loop, ${bl.inside?'around this lot':fmt(bl.edge)+' m away'}, is the exception to look at.`:''}`
+    :nW?`${nW} of ${all.length} buildings within 1.5 km could take the heat within break-even.${nDep?` ${nDep} more depend on the pipe cost.`:''}`
+    :`None of the ${all.length} buildings within 1.5 km pays back at today's prices${nDep?`; ${nDep} depend on the pipe cost`:''}.${inside?` The lot is inside the ${inside.n.replace(/ \(.*/,'')}.`:''}`;
+  const PL={housing:['non-market housing building','non-market housing buildings'],school:['school','schools'],care:['care home','care homes'],hospital:['hospital','hospitals'],rec:['recreation centre','recreation centres'],pool:['pool','pools'],arena:['arena','arenas']};
+  const kinds=[...new Set(all.map(p=>p.t))].map(t=>{ const n=all.filter(p=>p.t===t).length; return `${n} ${(PL[t]||[t,t])[n===1?0:1]}`; }).join(', ');
+  const recvAns=[kinds||'none found',nW?`${nW} within break-even`:'none within break-even',nDep?`${nDep} depend on pipe cost`:'',nB?`${nB} beyond`:''].filter(Boolean).join('; ');
+  let h=e.tabBar('heat')+`<h2>Who could take the heat</h2><p class="lead">${lead}</p>`
+  +BD.sec('h-offer','Heat this size could offer',`${e.rng(r.avail[0]/1000,r.avail[1]/1000,'GWh a year')} with liquid cooling and a heat pump; none to reuse with air cooling`,
+     `<div class="hfig"><div><b>${e.rng(r.avail[0]/1000,r.avail[1]/1000,'GWh/yr')}</b><span>heat this size could offer (liquid-cooled, heat pump)</span></div><div><b>${e.rng(r.homes[0],r.homes[1],'')}</b><span>homes' heating, as an equal (provincial average)</span></div></div><p class="sub"><a href="#" id="hmath">How the heat figure is worked out ›</a></p>`)
+  +BD.sec('h-price','What the heat is worth here',netB<=0?'less than nothing: the heat pump costs more to run than the gas it replaces':`$${(gv-pe0/R0.cop[0]).toFixed(1)}–${(gv-pe0/R0.cop[1]).toFixed(1)} per MWh after the heat pump`,
+     `\n  ${(()=>{ const R=e.R, v=ECON.gas[f.city], pe=ECON.elec[f.city], nb=v-pe/R.cop[1], nw=v-pe/R.cop[0]; return `<p class="sub">${draft(nb<=0?`At Alberta prices (gas $${(v/3.6).toFixed(2)}/GJ, power $${pe.toFixed(2)}/MWh) the heat pump's electricity costs more than the gas the heat would replace ($${nw.toFixed(1)} to $${nb.toFixed(1)} per MWh of heat), so no route pays back at any distance. Each card says what would have to change.`:`At BC prices (gas $${(v/3.6).toFixed(2)}/GJ, power $${pe.toFixed(2)}/MWh) the heat is worth $${nw.toFixed(1)}–${nb.toFixed(1)} per MWh after the heat pump; each card works out its own break-even distance.`)}</p>`; })()}
+  <p class="sub"><a href="#" id="carriers">How far is too far, for each thing it could share ›</a></p>`,{finding:netB<=0})
+  +BD.sec('h-cmp','Compared with other data centres','the same servers, conventional here, at two real data centres and on both worked-example lots','<div id="cmpSlot"></div>')
+  +BD.sec('h-nets','Heat networks nearby',nearNet?(inside?`inside the ${esc(inside.n.replace(/ \(.*/,''))}`:`nearest: ${esc(nearNet.n.replace(/ \(.*/,''))}, ${fmt(nearNet.edge)} m`):'none within 1.2 km',
+     `\n  ${inside?`<p class="sub"><b style="font-weight:400">${esc(inside.n)}</b> — this lot is inside its service area${inside.src==='van9552'?': heat sent back is credited (By-law 9552)':inside.kind==='planned'?' — a planned area, not yet built (approximate)':' (approximate; connection terms not yet read)'}. <a href="#" data-net="1">Explore ›</a></p>`:nets.length?`<p class="sub">${esc(nets[0].n)} is ${Math.round(nets[0].edge)} m from this lot. <a href="#" data-net="1">Explore ›</a></p>`:''}
   ${f.city==='edm'?`<p class="sub">${draft('Downtown District Energy is drawn from the City\'s phases map (May 2025), approximate.')} Downtown District Energy: Phase 1 serves the Winspear Centre, Century Place and Chancery Hall; Phase 1A would add City Hall, the Citadel Theatre and the Stanley A. Milner Library (2025–26 rate filing); later phases are shown only as a building map (business case, Figure 2). Blatchford: connection is compulsory inside its service area (Bylaw C17943 s. 6); the map (Schedule A) is not yet traced.</p>`:''}
-  ${(()=>{ const bl=f.city==='edm'&&nets.find(n=>/Blatchford/.test(n.n)); if(!bl) return ''; const R=e.R, itG=mw*8760*R.lf/1000;
+  ${otherNets(f.city)}
+  ${f.city==='van'?`<p class="sub">City policy: the Energy Centre Guidelines (2012) name waste heat — from commercial and industrial operations and sewage lines — as the generally preferred low-carbon source for neighbourhood energy (RTS 9772, Appendix A, 4.1). A guideline, not a requirement to buy it.</p>`:''}
+  `)
+  +(bl?BD.sec('h-loop','An ambient loop: Blatchford',`${bl.inside?'around this lot':fmt(bl.edge)+' m away'}; server heat could go in without a heat pump. Size, price and permission are open questions`,`\n  ${(()=>{ const bl=f.city==='edm'&&nets.find(n=>/Blatchford/.test(n.n)); if(!bl) return ''; const R=e.R, itG=mw*8760*R.lf/1000;
     // ambient loop (J.B., 16 Oct: "yes u can model it"): sources blatchfordDG2025, blatchfordSHX2026, blatchfordBP2021; hours from the Edmonton CWEC file (computed)
-    return `<h3>An ambient loop within reach</h3><p class="sub">${draft(`Blatchford, ${bl.inside?'this lot is inside its service area':fmt(bl.edge)+' m away'}. A City-owned network for the Blatchford neighbourhood (planned for up to 30,000 people). Its pipes carry water at only 8–32 °C; every building has its own heat pump and draws heat from the loop. Today the loop is fed by 570 boreholes 150 m deep; sewer heat is in design.`)}</p>
+    return `<p class="sub">${draft(`Blatchford, ${bl.inside?'this lot is inside its service area':fmt(bl.edge)+' m away'}. A City-owned network for the Blatchford neighbourhood (planned for up to 30,000 people). Its pipes carry water at only 8–32 °C; every building has its own heat pump and draws heat from the loop. Today the loop is fed by 570 boreholes 150 m deep; sewer heat is in design.`)}</p>
     <dl><dt>What the data centre could put in</dt><dd>up to ${itG.toFixed(1)} GWh a year of server heat through a heat exchanger, with no heat pump at the data centre: even air-cooled heat (25–35 °C) is warmer than the loop</dd>
     <dt>When it is wanted</dt><dd>Edmonton is below 12–18 °C in 75–89% of the hours of a typical year; June to August carry only 6.5% of the year's heating need, so summer heat still goes to the data centre's own coolers, which keep their full size (CWEC, computed)</dd>
     <dt>Scale</dt><dd>no actual figures have been published for 2024–2026; the latest public numbers are forecasts made in 2021 and 2023. Small so far: 181 customers forecast for 2024 and 292 for 2025 (Utility Advisor, 2023), over 100 homes connected (operator, 2025); the 2021 plan forecast 3,031 MWh delivered in total from 2020 to 2024 (to check against the original), about ${Math.max(1,Math.round(3031/(itG*1000)*100))}% of one year of this data centre's heat. Demand grows as the neighbourhood builds out</dd>
     <dt>Money</dt><dd>customers pay $0.0358 per kWh for loop energy in 2025–26 (frozen by Council), plus fixed charges; no price is published for heat supplied into the loop. The utility ran a forecast revenue shortfall of $1.3 million for 2024. On the data-centre side, no heat pump to buy or run</dd>
     <dt>Summer</dt><dd>the utility says it already sends surplus summer heat into the borefield for winter (operator statement, no measured data); how much more it could take is not known</dd><dt>A built case</dt><dd>FGZ Friesenberg, Zürich (2014): a data centre feeds an 8–28 °C network through a heat exchanger, with boreholes as seasonal storage; the warm pipe reaches about 30 °C in summer after the data centre (Buffa et al. 2019, peer-reviewed; the 27 GWh a year is from a factsheet, not stated as measured)</dd><dt>Not yet known</dt><dd>whether the utility takes heat from an outside source (nothing in the bylaw, plans or the City's 2024 district energy report mentions it); how much the loop can take in winter</dd></dl>
     <p class="src">City of Edmonton DESS design guide v8 (2025); Bylaw 17943 and 2026 rates; Utility Advisor 2023; 2021–2024 business plan; Buffa et al. 2019; Edmonton CWEC typical year. Research-agent reads, to check. The design guide's 8 °C winter supply and 4 °C return do not match its own 5 °C design difference; both are shown as written.</p>`; })()}
-  ${otherNets(f.city)}
-  ${f.city==='van'?`<p class="sub">City policy: the Energy Centre Guidelines (2012) name waste heat — from commercial and industrial operations and sewage lines — as the generally preferred low-carbon source for neighbourhood energy (RTS 9772, Appendix A, 4.1). A guideline, not a requirement to buy it.</p>`:''}
-  <label class="tgl"><input type="checkbox" id="showB" ${showB?'checked':''}> List buildings beyond break-even too (greyed)</label>
-  ${groupRows(all,showB)}
-  <p class="sub" style="margin-top:10px"><a href="#" id="hmath">How the heat figure is worked out ›</a> · <a href="#" id="carriers">How far is too far, for each thing it could share ›</a></p>
-  <div class="draftnote">Draft wording (Claude) for J.B. Sources are in each card.</div>`;
+  `,{finding:true}):'')
+  +BD.sec('h-recv','Buildings that could take it',recvAns,
+     `<label class="tgl"><input type="checkbox" id="showB" ${showB?'checked':''}> List buildings beyond break-even too (greyed)</label>${groupRows(all,showB)}`);
   $('#side').innerHTML=h; e.wireTabs(); BD.draw();
   $('#showB').onchange=ev=>{ A.showBeyond=ev.target.checked; heatIndex(); };
   document.querySelectorAll('#side [data-rid]').forEach(a=>a.onclick=ev=>{ if(ev.target.closest&&ev.target.closest('a')&&!ev.target.closest('a').dataset.rid) return; ev.preventDefault(); openConnection('heat',+a.dataset.rid); });
@@ -241,3 +255,10 @@ BD.carriersCard=carriersCard;
 
 BD.tabOverride=Object.assign(BD.tabOverride||{},{heat:heatIndex});
 })();
+
+/* step 5, Report (J.B., 16 Oct: PDF and HTML; baseline, comparisons, gains and losses for each party, trade-offs, what is not known) — placeholder until built */
+BD.views=BD.views||{};
+BD.views.report=function(){ const e=BD.eng; BD.S.view2='tab'; document.body.classList.remove('wide');
+  document.getElementById('side').innerHTML=e.tabBar('report')+`<h2>Report</h2><p class="lead">The report for this site is being built.</p>
+  <p class="sub">It will gather, in this order: the site and settings; the baseline (the lot today and a conventional data centre on it); this design against the six references; each exchange with gains and losses for each party in their own units; the three options and four futures; and everything not yet known, with every source and its check status. Nothing is added up or ranked. It will download as a PDF and as an HTML page.</p>`;
+  e.wireTabs(); BD.draw(); };
