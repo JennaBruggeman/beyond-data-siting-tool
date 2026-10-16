@@ -423,7 +423,13 @@
 "inputs": [
 "parcel"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 3,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "server_floor",
@@ -452,7 +458,13 @@
 "inputs": [
 "floor_area"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "it_load_outside",
@@ -505,7 +517,13 @@
 "inputs": [
 "server_floor"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 4
+}
 },
 {
 "id": "it_load_claim",
@@ -548,7 +566,13 @@
 "direction": "",
 "trial": "",
 "inputs": [],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 2,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "it_load_actual",
@@ -618,7 +642,13 @@
 "it_load_claim",
 "it_load_outside"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 0,
+"gen": 5
+}
 },
 {
 "id": "servers",
@@ -655,7 +685,13 @@
 "inputs": [
 "it_load_actual"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 2
+}
 },
 {
 "id": "heat_rejected",
@@ -693,7 +729,13 @@
 "it_load_actual",
 "pue"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 2
+}
 },
 {
 "id": "heat_temp",
@@ -738,7 +780,13 @@
 "inputs": [
 "cooling_type"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 1,
+"gen": 1
+}
 },
 {
 "id": "liquid_capture",
@@ -775,7 +823,13 @@
 "inputs": [
 "cooling_type"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 2
+}
 },
 {
 "id": "cop",
@@ -853,7 +907,13 @@
 "heat_temp",
 "receiver_temp"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 7
+}
 },
 {
 "id": "heat_captured",
@@ -915,7 +975,13 @@
 "heat_rejected",
 "liquid_capture"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 5
+}
 },
 {
 "id": "heat_delivered",
@@ -985,7 +1051,13 @@
 "heat_captured",
 "cop"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 0,
+"gen": 5
+}
 },
 {
 "id": "hp_electricity",
@@ -1015,7 +1087,13 @@
 "heat_delivered",
 "cop"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "erf",
@@ -1077,7 +1155,13 @@
 "heat_captured",
 "heat_rejected"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 5
+}
 },
 {
 "id": "heat_in_water",
@@ -1104,7 +1188,13 @@
 "direction": "",
 "trial": "",
 "inputs": [],
-"upstream": 100
+"upstream": 100,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "free_cooling_hours",
@@ -1141,7 +1231,13 @@
 "inputs": [
 "weather"
 ],
-"upstream": 80
+"upstream": 80,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 2
+}
 },
 {
 "id": "pue",
@@ -1176,7 +1272,13 @@
 "direction": "",
 "trial": "",
 "inputs": [],
-"upstream": 100
+"upstream": 100,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 2
+}
 },
 {
 "id": "spare_capacity",
@@ -1205,7 +1307,13 @@
 "inputs": [
 "it_load_actual"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "backup_hours",
@@ -1240,7 +1348,13 @@
 "direction": "",
 "trial": "",
 "inputs": [],
-"upstream": 90
+"upstream": 90,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 2
+}
 },
 {
 "id": "flexible_load",
@@ -1270,7 +1384,13 @@
 "inputs": [
 "it_load_actual"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 2,
+"edm": 0,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "load_factor",
@@ -1297,7 +1417,13 @@
 "direction": "",
 "trial": "",
 "inputs": [],
-"upstream": 80
+"upstream": 80,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "evaporation",
@@ -1351,7 +1477,13 @@
 "heat_rejected",
 "cooling_type"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 2,
+"edm": 0,
+"both": 0,
+"gen": 2
+}
 },
 {
 "id": "blowdown",
@@ -1380,7 +1512,13 @@
 "inputs": [
 "evaporation"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "wue",
@@ -1410,7 +1548,13 @@
 "blowdown",
 "it_load_actual"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "water_behind_electricity",
@@ -1439,7 +1583,13 @@
 "inputs": [
 "it_load_actual"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "rainwater",
@@ -1476,7 +1626,13 @@
 "inputs": [
 "floor_area"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 1,
+"gen": 1
+}
 },
 {
 "id": "grid_co2",
@@ -1530,7 +1686,13 @@
 "it_load_actual",
 "hp_electricity"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 1,
+"edm": 2,
+"both": 1,
+"gen": 0
+}
 },
 {
 "id": "generator_co2",
@@ -1559,7 +1721,13 @@
 "inputs": [
 "backup_hours"
 ],
-"upstream": 90
+"upstream": 90,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 1,
+"gen": 0
+}
 },
 {
 "id": "generator_nox_pm",
@@ -1588,7 +1756,13 @@
 "inputs": [
 "backup_hours"
 ],
-"upstream": 80
+"upstream": 80,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 1,
+"gen": 0
+}
 },
 {
 "id": "refrigerant_co2e",
@@ -1617,7 +1791,13 @@
 "inputs": [
 "cooling_type"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 1,
+"gen": 0
+}
 },
 {
 "id": "embodied_it",
@@ -1655,7 +1835,13 @@
 "inputs": [
 "servers"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 3
+}
 },
 {
 "id": "embodied_building",
@@ -1685,7 +1871,13 @@
 "inputs": [
 "floor_area"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 2
+}
 },
 {
 "id": "noise_level",
@@ -1827,7 +2019,13 @@
 "plant_schedule",
 "receptors"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 15
+}
 },
 {
 "id": "lf_flag",
@@ -1856,7 +2054,13 @@
 "inputs": [
 "noise_level"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "light_at_window",
@@ -1893,7 +2097,13 @@
 "inputs": [
 "lighting_plan"
 ],
-"upstream": 60
+"upstream": 60,
+"city": {
+"van": 0,
+"edm": 1,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "shadow",
@@ -1923,7 +2133,13 @@
 "floor_area",
 "massing"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "refuge_people",
@@ -1961,7 +2177,13 @@
 "offerable_area",
 "backup_hours"
 ],
-"upstream": 20
+"upstream": 20,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 2,
+"gen": 0
+}
 },
 {
 "id": "clean_air_volume",
@@ -1990,7 +2212,13 @@
 "inputs": [
 "offerable_area"
 ],
-"upstream": 20
+"upstream": 20,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 1,
+"gen": 0
+}
 },
 {
 "id": "cooling_centre_people",
@@ -2052,7 +2280,13 @@
 "spare_cooling",
 "offerable_area"
 ],
-"upstream": 20
+"upstream": 20,
+"city": {
+"van": 1,
+"edm": 1,
+"both": 2,
+"gen": 1
+}
 },
 {
 "id": "offerable_area",
@@ -2081,7 +2315,13 @@
 "inputs": [
 "floor_area"
 ],
-"upstream": 20
+"upstream": 20,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "receiver_radius",
@@ -2108,7 +2348,13 @@
 "direction": "",
 "trial": "",
 "inputs": [],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "heat_density",
@@ -2138,7 +2384,13 @@
 "receiver_demand",
 "area"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "linear_heat_density",
@@ -2168,7 +2420,13 @@
 "heat_density",
 "plot_ratio"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "distribution_cost",
@@ -2269,7 +2527,13 @@
 "inputs": [
 "linear_heat_density"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 3,
+"edm": 2,
+"both": 0,
+"gen": 5
+}
 },
 {
 "id": "receiver_demand",
@@ -2410,7 +2674,13 @@
 "inputs": [
 "receivers"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 6,
+"edm": 4,
+"both": 2,
+"gen": 3
+}
 },
 {
 "id": "homes_heated",
@@ -2447,7 +2717,13 @@
 "inputs": [
 "heat_delivered"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 1,
+"gen": 1
+}
 },
 {
 "id": "greenhouse_area",
@@ -2525,7 +2801,13 @@
 "heat_delivered",
 "heat_temp"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 1,
+"edm": 2,
+"both": 0,
+"gen": 4
+}
 },
 {
 "id": "aquaculture_tonnes",
@@ -2611,7 +2893,13 @@
 "heat_delivered",
 "heat_temp"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 1,
+"both": 0,
+"gen": 7
+}
 },
 {
 "id": "algae_kg",
@@ -2641,7 +2929,13 @@
 "heat_delivered",
 "heat_temp"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "insect_check",
@@ -2686,7 +2980,13 @@
 "inputs": [
 "heat_temp"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 3
+}
 },
 {
 "id": "distributed_servers_homes",
@@ -2715,7 +3015,13 @@
 "inputs": [
 "servers"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "ev_stalls",
@@ -2800,7 +3106,13 @@
 "inputs": [
 "spare_capacity"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 2,
+"edm": 1,
+"both": 0,
+"gen": 5
+}
 },
 {
 "id": "ev_area",
@@ -2845,7 +3157,13 @@
 "inputs": [
 "ev_stalls"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 1,
+"edm": 2,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "stored_heat",
@@ -2875,7 +3193,13 @@
 "heat_delivered",
 "ground"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "storage_footprint",
@@ -2920,7 +3244,13 @@
 "inputs": [
 "stored_heat"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 1,
+"gen": 2
+}
 },
 {
 "id": "sewage_heat",
@@ -2981,7 +3311,13 @@
 "inputs": [
 "sewer_flow"
 ],
-"upstream": 20
+"upstream": 20,
+"city": {
+"van": 4,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "copper_tonnes",
@@ -3010,7 +3346,13 @@
 "inputs": [
 "it_load_actual"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "ewaste",
@@ -3095,7 +3437,13 @@
 "inputs": [
 "servers"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 1,
+"edm": 4,
+"both": 2,
+"gen": 1
+}
 },
 {
 "id": "rare_earth",
@@ -3124,7 +3472,13 @@
 "inputs": [
 "servers"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "deprivation",
@@ -3154,7 +3508,13 @@
 "noise_level",
 "receiver_radius"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "demand_profile",
@@ -3248,7 +3608,13 @@
 "receiver_demand",
 "weather"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 2,
+"edm": 2,
+"both": 2,
+"gen": 3
+}
 },
 {
 "id": "price_floor",
@@ -3358,7 +3724,13 @@
 "heat_delivered",
 "crf"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 0,
+"gen": 10
+}
 },
 {
 "id": "price_ceiling",
@@ -3474,7 +3846,13 @@
 "direction": "",
 "trial": "",
 "inputs": [],
-"upstream": 60
+"upstream": 60,
+"city": {
+"van": 6,
+"edm": 5,
+"both": 1,
+"gen": 1
+}
 },
 {
 "id": "window",
@@ -3494,7 +3872,13 @@
 "price_floor",
 "price_ceiling"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "crf",
@@ -3521,7 +3905,13 @@
 "direction": "",
 "trial": "",
 "inputs": [],
-"upstream": 100
+"upstream": 100,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "lcoh",
@@ -3560,7 +3950,13 @@
 "hp_electricity",
 "heat_delivered"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 2
+}
 },
 {
 "id": "payback",
@@ -3598,7 +3994,13 @@
 "lcoh",
 "window"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 2
+}
 },
 {
 "id": "risk_term",
@@ -3625,7 +4027,13 @@
 "direction": "",
 "trial": "",
 "inputs": [],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "capex_split",
@@ -3756,7 +4164,13 @@
 "direction": "",
 "trial": "",
 "inputs": [],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 2,
+"edm": 0,
+"both": 0,
+"gen": 12
+}
 },
 {
 "id": "affordability",
@@ -3802,7 +4216,13 @@
 "price_ceiling",
 "deprivation"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 1,
+"gen": 2
+}
 },
 {
 "id": "build_cost",
@@ -3853,7 +4273,13 @@
 "direction": "",
 "trial": "",
 "inputs": [],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 0,
+"gen": 3
+}
 },
 {
 "id": "horizons",
@@ -3936,7 +4362,13 @@
 "direction": "",
 "trial": "",
 "inputs": [],
-"upstream": 80
+"upstream": 80,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 0,
+"gen": 7
+}
 },
 {
 "id": "lead_time",
@@ -3971,7 +4403,13 @@
 "direction": "place",
 "trial": "",
 "inputs": [],
-"upstream": 90
+"upstream": 90,
+"city": {
+"van": 1,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "grid_headroom",
@@ -4126,7 +4564,13 @@
 "direction": "place",
 "trial": "",
 "inputs": [],
-"upstream": 90
+"upstream": 90,
+"city": {
+"van": 5,
+"edm": 6,
+"both": 0,
+"gen": 6
+}
 },
 {
 "id": "crossing_type",
@@ -4156,7 +4600,13 @@
 "receivers",
 "offerable_area"
 ],
-"upstream": 20
+"upstream": 20,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "standoff",
@@ -4201,7 +4651,13 @@
 "inputs": [
 "crossing_type"
 ],
-"upstream": 20
+"upstream": 20,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 3
+}
 },
 {
 "id": "noise_limit",
@@ -4255,7 +4711,13 @@
 "inputs": [
 "noise_level"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 3,
+"edm": 2,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "licence_flag",
@@ -4324,7 +4786,13 @@
 "inputs": [
 "ground"
 ],
-"upstream": 80
+"upstream": 80,
+"city": {
+"van": 2,
+"edm": 4,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "ev_exemption",
@@ -4359,7 +4827,13 @@
 "direction": "place",
 "trial": "",
 "inputs": [],
-"upstream": 90
+"upstream": 90,
+"city": {
+"van": 1,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "row_cost",
@@ -4420,7 +4894,13 @@
 "inputs": [
 "distribution_cost"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 2,
+"edm": 1,
+"both": 0,
+"gen": 2
+}
 },
 {
 "id": "cfd_score",
@@ -4455,7 +4935,13 @@
 "direction": "",
 "trial": "",
 "inputs": [],
-"upstream": 90
+"upstream": 90,
+"city": {
+"van": 2,
+"edm": 0,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "ledger",
@@ -4503,7 +4989,13 @@
 "risk_term",
 "deprivation"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 2,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "tradeoffs",
@@ -4530,7 +5022,13 @@
 "direction": "",
 "trial": "",
 "inputs": [],
-"upstream": 100
+"upstream": 100,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "ground",
@@ -4559,7 +5057,13 @@
 "inputs": [
 "parcel"
 ],
-"upstream": 80
+"upstream": 80,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "reserved_cost",
@@ -4589,7 +5093,13 @@
 "spare_capacity",
 "build_cost"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "lrmc_bc",
@@ -4619,7 +5129,13 @@
 "flexible_load",
 "spare_capacity"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "visibility",
@@ -4768,7 +5284,13 @@
 "inputs": [
 "plant_schedule"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 3,
+"edm": 2,
+"both": 1,
+"gen": 10
+}
 },
 {
 "id": "watched_area",
@@ -4797,7 +5319,13 @@
 "inputs": [
 "visibility"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 1,
+"gen": 0
+}
 },
 {
 "id": "sewer_sink",
@@ -4883,7 +5411,13 @@
 "inputs": [
 "sewer_flow"
 ],
-"upstream": 20
+"upstream": 20,
+"city": {
+"van": 5,
+"edm": 3,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "surface_water_sink",
@@ -4928,7 +5462,13 @@
 "inputs": [
 "parcel"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 1,
+"gen": 1
+}
 },
 {
 "id": "rooftop_solar",
@@ -4947,7 +5487,13 @@
 "inputs": [
 "massing"
 ],
-"upstream": 0
+"upstream": 0,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "self_gen_rules",
@@ -5038,7 +5584,13 @@
 "direction": "place",
 "trial": "",
 "inputs": [],
-"upstream": 80
+"upstream": 80,
+"city": {
+"van": 3,
+"edm": 5,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "electricity_price",
@@ -5107,7 +5659,13 @@
 "inputs": [
 "parcel"
 ],
-"upstream": 80
+"upstream": 80,
+"city": {
+"van": 3,
+"edm": 3,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "water_supply",
@@ -5152,7 +5710,13 @@
 "inputs": [
 "parcel"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 2,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "existing_building",
@@ -5198,7 +5762,13 @@
 "parcel",
 "massing"
 ],
-"upstream": 20
+"upstream": 20,
+"city": {
+"van": 2,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "ambient_cover",
@@ -5244,7 +5814,13 @@
 "receptors",
 "parcel"
 ],
-"upstream": 60
+"upstream": 60,
+"city": {
+"van": 1,
+"edm": 2,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "interconnection",
@@ -5329,7 +5905,13 @@
 "inputs": [
 "parcel"
 ],
-"upstream": 20
+"upstream": 20,
+"city": {
+"van": 2,
+"edm": 2,
+"both": 0,
+"gen": 4
+}
 },
 {
 "id": "zoning_status",
@@ -5456,7 +6038,13 @@
 "zone",
 "start_case"
 ],
-"upstream": 80
+"upstream": 80,
+"city": {
+"van": 8,
+"edm": 5,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "rezoning_price",
@@ -5582,7 +6170,13 @@
 "zoning_status",
 "floor_area"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 6,
+"edm": 7,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "consultation",
@@ -5620,7 +6214,13 @@
 "licence_flag",
 "grid_headroom"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 1,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "people_affected",
@@ -5650,7 +6250,13 @@
 "receptors",
 "area"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "jobs",
@@ -5679,7 +6285,13 @@
 "inputs": [
 "floor_area"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "construction_time",
@@ -5741,7 +6353,13 @@
 "zoning_status",
 "lead_time"
 ],
-"upstream": 60
+"upstream": 60,
+"city": {
+"van": 1,
+"edm": 2,
+"both": 0,
+"gen": 2
+}
 },
 {
 "id": "reclaimed_makeup",
@@ -5836,7 +6454,13 @@
 "blowdown",
 "water_supply"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 2,
+"edm": 1,
+"both": 0,
+"gen": 6
+}
 },
 {
 "id": "greywater_neighbours",
@@ -5865,7 +6489,13 @@
 "inputs": [
 "people_affected"
 ],
-"upstream": 45
+"upstream": 45,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "treatment_energy",
@@ -5895,7 +6525,13 @@
 "reclaimed_makeup",
 "greywater_neighbours"
 ],
-"upstream": 45
+"upstream": 45,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "blowdown_recovery",
@@ -5948,7 +6584,13 @@
 "inputs": [
 "blowdown"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 4
+}
 },
 {
 "id": "pv_roof",
@@ -6010,7 +6652,13 @@
 "massing",
 "plant_schedule"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 1,
+"edm": 1,
+"both": 1,
+"gen": 2
+}
 },
 {
 "id": "pv_facade",
@@ -6047,7 +6695,13 @@
 "inputs": [
 "massing"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 1,
+"gen": 1
+}
 },
 {
 "id": "pv_share",
@@ -6095,7 +6749,13 @@
 "it_load_actual",
 "pue"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 1,
+"edm": 1,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "pv_cost",
@@ -6132,7 +6792,13 @@
 "inputs": [
 "pv_roof"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 2
+}
 },
 {
 "id": "battery",
@@ -6234,7 +6900,13 @@
 "inputs": [
 "it_load_actual"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 1,
+"edm": 3,
+"both": 2,
+"gen": 5
+}
 },
 {
 "id": "ups_flex",
@@ -6264,7 +6936,13 @@
 "it_load_actual",
 "flexible_load"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 0,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "peak_relief",
@@ -6327,7 +7005,13 @@
 "ups_flex",
 "electricity_price"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 3,
+"edm": 2,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "genset_test",
@@ -6366,7 +7050,13 @@
 "generator_nox_pm",
 "backup_hours"
 ],
-"upstream": 65
+"upstream": 65,
+"city": {
+"van": 0,
+"edm": 1,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "hvo_swap",
@@ -6395,7 +7085,13 @@
 "inputs": [
 "genset_test"
 ],
-"upstream": 55
+"upstream": 55,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "borefield",
@@ -6449,7 +7145,13 @@
 "heat_rejected",
 "ground"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 1,
+"edm": 2,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "ground_warming",
@@ -6486,7 +7188,13 @@
 "inputs": [
 "borefield"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 2
+}
 },
 {
 "id": "btes",
@@ -6525,7 +7233,13 @@
 "stored_heat",
 "receiver_demand"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 0,
+"edm": 1,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "ates",
@@ -6571,7 +7285,13 @@
 "ground",
 "heat_captured"
 ],
-"upstream": 45
+"upstream": 45,
+"city": {
+"van": 1,
+"edm": 1,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "deep_geo",
@@ -6608,7 +7328,13 @@
 "inputs": [
 "receiver_demand"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 0,
+"edm": 1,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "tes_volume",
@@ -6628,7 +7354,13 @@
 "heat_captured",
 "demand_profile"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "absorption",
@@ -6658,7 +7390,13 @@
 "heat_temp",
 "heat_captured"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "envelope",
@@ -6744,7 +7482,13 @@
 "parcel",
 "zone"
 ],
-"upstream": 75
+"upstream": 75,
+"city": {
+"van": 6,
+"edm": 2,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "component_space",
@@ -6926,7 +7670,13 @@
 "start_case",
 "cooling_type"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 5,
+"edm": 2,
+"both": 2,
+"gen": 11
+}
 },
 {
 "id": "hall_area",
@@ -6981,7 +7731,13 @@
 "component_space",
 "host_building"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 3,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "size_fit",
@@ -7060,7 +7816,13 @@
 "floor_load_need",
 "service_class"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 2,
+"edm": 1,
+"both": 0,
+"gen": 4
+}
 },
 {
 "id": "floor_load_need",
@@ -7098,7 +7860,13 @@
 "host_building",
 "start_case"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 2
+}
 },
 {
 "id": "fuel_on_site",
@@ -7152,7 +7920,13 @@
 "start_case",
 "backup_hours"
 ],
-"upstream": 60
+"upstream": 60,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 4
+}
 },
 {
 "id": "flood_exposure",
@@ -7198,7 +7972,13 @@
 "flood_area",
 "start_case"
 ],
-"upstream": 70
+"upstream": 70,
+"city": {
+"van": 3,
+"edm": 0,
+"both": 0,
+"gen": 0
+}
 },
 {
 "id": "vibration_rank",
@@ -7228,7 +8008,13 @@
 "start_case",
 "host_building"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "service_class",
@@ -7274,7 +8060,13 @@
 "it_load_actual",
 "parcel"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 1,
+"edm": 1,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "receivers_nearby",
@@ -7386,7 +8178,13 @@
 "receiver_demand",
 "receiver_temp"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 4,
+"edm": 1,
+"both": 1,
+"gen": 5
+}
 },
 {
 "id": "competing_sources",
@@ -7426,7 +8224,13 @@
 "receivers_nearby",
 "sewage_heat"
 ],
-"upstream": 20
+"upstream": 20,
+"city": {
+"van": 2,
+"edm": 1,
+"both": 1,
+"gen": 0
+}
 },
 {
 "id": "displaced_source",
@@ -7466,7 +8270,13 @@
 "grid_co2",
 "hp_electricity"
 ],
-"upstream": 20
+"upstream": 20,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 1,
+"gen": 0
+}
 },
 {
 "id": "hourly_overlap",
@@ -7506,7 +8316,13 @@
 "load_factor",
 "stored_heat"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 2
+}
 },
 {
 "id": "workload_control",
@@ -7535,7 +8351,13 @@
 "inputs": [
 "it_load_claim"
 ],
-"upstream": 50
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "commitment",
@@ -7564,7 +8386,13 @@
 "inputs": [
 "receivers_nearby"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 },
 {
 "id": "futures",
@@ -7597,7 +8425,13 @@
 "hourly_overlap",
 "risk_term"
 ],
-"upstream": 40
+"upstream": 40,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
 }
 ],
 "edges": [
@@ -14056,5 +14890,529 @@
 "abGreenhouse2023": "claude",
 "bcGreenhouse2011": "claude",
 "vanWaterPermits": "claude"
+},
+"source_city": {
+"abgas": "edm",
+"aeso": "edm",
+"ashrae": "gen",
+"bins": "gen",
+"bylaw14600": "edm",
+"bylaw6555": "van",
+"cfd": "van",
+"cimd": "gen",
+"clf": "gen",
+"crf": "gen",
+"dell": "gen",
+"drake": "gen",
+"edmBench": "edm",
+"edmParcel": "edm",
+"energize": "van",
+"ess": "both",
+"exergi": "gen",
+"femp": "gen",
+"floor": "gen",
+"fortis": "van",
+"fortum": "gen",
+"g9425": "van",
+"gridAB": "edm",
+"gridBC": "van",
+"heatPhys": "gen",
+"horizons": "gen",
+"iso9613": "gen",
+"lbnl2024": "gen",
+"lorenz": "gen",
+"neu9552": "van",
+"neuReport": "van",
+"nonComp": "gen",
+"opClaims": "gen",
+"parssinen": "gen",
+"persson": "gen",
+"queue": "van",
+"rts19744": "van",
+"rule9": "gen",
+"solar": "van",
+"woodcroft": "edm",
+"wsa": "van",
+"sunLuo2021": "gen",
+"doeFederal": "gen",
+"fan2007": "gen",
+"cie150": "gen",
+"healthCanada2026": "gen",
+"statcanHousehold": "gen",
+"nrcanTrends": "gen",
+"manitobaGH": "gen",
+"iesoGH": "gen",
+"giacomelli": "gen",
+"rootZone": "gen",
+"ntnuRAS": "gen",
+"faoTrout": "gen",
+"dfoRAS": "gen",
+"gurreri2023": "gen",
+"schon2024": "gen",
+"liu2011": "gen",
+"wsuEV": "gen",
+"vanDCFC": "van",
+"silber2024": "gen",
+"vanParking": "van",
+"edmParking": "edm",
+"m104": "van",
+"dea": "gen",
+"wilsonWorrall": "gen",
+"kwlSewer": "van",
+"cda2023": "gen",
+"stratego": "gen",
+"vbblHDD": "van",
+"hiltunen2020": "gen",
+"wahlroos2017": "gen",
+"cusp": "gen",
+"statcanSHS": "gen",
+"tt2025": "gen",
+"bchTransmission": "van",
+"aesoPerf": "edm",
+"goits": "gen",
+"gcpsg015": "gen",
+"tia942": "gen",
+"bylaw4243": "van",
+"edmULA": "edm",
+"daikinCAT624": "gen",
+"climavenetaIFX": "gen",
+"kelvionLF": "gen",
+"mtuDS2250": "gen",
+"catTM9338": "gen",
+"cumminsS1443": "gen",
+"stulz": "gen",
+"oldsNIA": "gen",
+"burlingtonNIA": "gen",
+"rvo2018": "gen",
+"necbHDD": "edm",
+"lukeRAS": "gen",
+"dreyer2021": "gen",
+"oekoBSF": "gen",
+"traneRTAF": "gen",
+"energiforsk2020": "gen",
+"dkPriceCap": "gen",
+"bcaExtract": "van",
+"edmBylaw20001": "edm",
+"rts06419": "van",
+"dellR760": "gen",
+"lbnlBench": "gen",
+"quebecRejets": "gen",
+"lygnerud": "gen",
+"wahlroos2018": "gen",
+"ayuso2023": "gen",
+"ion2022": "gen",
+"nistad2020": "gen",
+"barroso2018": "gen",
+"gwells": "van",
+"dlrQ2_2025": "gen",
+"enmaxMap": "gen",
+"oebCCIM": "gen",
+"torontoHydroMap": "gen",
+"hqZones": "gen",
+"woodcroftDDR": "edm",
+"aesoLargeLoad": "edm",
+"goaGrid": "edm",
+"cfdPage": "van",
+"cwec": "gen",
+"eccc": "both",
+"vanTax": "van",
+"vanFoot": "van",
+"vanPermits": "van",
+"vanEnergyReport": "van",
+"vanSewer": "van",
+"atlasCloud": "gen",
+"aesoList": "edm",
+"altaReg117": "gen",
+"abEGDF": "edm",
+"ceud": "both",
+"abDirective": "edm",
+"abGSHE": "edm",
+"abGuide": "edm",
+"rule012": "edm",
+"bchIRP2025": "van",
+"wes": "van",
+"edmDDE": "edm",
+"fieldJB": "both",
+"eqix10k": "gen",
+"nir2026": "both",
+"ceG526": "van",
+"fjfAars2020": "gen",
+"fjfAars2124": "gen",
+"dfKatalog2022": "gen",
+"teliaHKI2024": "gen",
+"nivosMantsala": "gen",
+"exergiAR2023": "gen",
+"tallaghtD22": "gen",
+"engiePA10": "gen",
+"rvoCases2018": "gen",
+"bytes2heat": "gen",
+"bcucC113": "van",
+"ulavalCVD": "gen",
+"equinixTR5": "gen",
+"iso30134_6": "gen",
+"euReg2024_1364": "gen",
+"skatOverskud": "gen",
+"dkPrisloftFAQ": "gen",
+"nrelRSF": "gen",
+"van3575s2": "van",
+"vanDistricts": "van",
+"rts19744p4": "gen",
+"vanRezoneTime": "van",
+"vanFees2026": "van",
+"vanDCL": "van",
+"vanACC": "van",
+"vanCAC": "van",
+"vanPermitTimes": "van",
+"edm20001": "edm",
+"edmLDA26": "edm",
+"edmRezone": "edm",
+"parklandLUB": "gen",
+"abConsult": "edm",
+"gvsddUT008": "van",
+"gvsdd299": "gen",
+"neuSewage": "van",
+"edm18100": "edm",
+"bcWSRfees": "van",
+"thermalLimits": "both",
+"enwaveDLWC": "gen",
+"neuConnect": "van",
+"bchRS2289": "van",
+"abMicrogen": "edm",
+"abGridPage": "edm",
+"bchLGS": "van",
+"bcIEAF": "van",
+"aesoStats2025": "edm",
+"epcorDASSAS": "edm",
+"fortisAB2026": "edm",
+"bocFX2025": "gen",
+"uptime2025": "gen",
+"lbnlCapture": "gen",
+"vanWater2026": "van",
+"epcorReclaimed": "edm",
+"mvReclaimed": "van",
+"vanOfficeConv": "van",
+"edmPermits": "edm",
+"van6555zones": "van",
+"lbnlLife": "gen",
+"tenK_life": "gen",
+"ashraeLife": "gen",
+"en253Life": "gen",
+"jlarc2024": "gen",
+"ieaEnergyAI": "gen",
+"dlrContracts": "gen",
+"velkova2019": "gen",
+"census2021DA": "van",
+"statcanEP2024": "both",
+"panFang2025": "gen",
+"malecki2002": "gen",
+"satya2017": "gen",
+"isedPrinciples": "gen",
+"bchCfDRfA": "van",
+"receiversBCUC": "van",
+"edmReceivers": "edm",
+"edmFees2026": "edm",
+"edmBL19340": "edm",
+"edmBL14380": "edm",
+"blatchford2023": "edm",
+"edmDES2022": "edm",
+"edmProcTimes": "edm",
+"edmRezComplexity": "edm",
+"edmOSL2026": "edm",
+"ddeRates2025": "edm",
+"ddeBizCase2025": "edm",
+"femp_ct": "gen",
+"arden2021": "gen",
+"gsa_gpg052": "gen",
+"mv_ut019": "van",
+"bc_mwr": "van",
+"ab_health2021": "edm",
+"ab_p1701": "edm",
+"nasem2016": "gen",
+"van_vbbl2019_27": "van",
+"mv_bylaw299": "van",
+"msft_water2026": "gen",
+"nrcan_pv2006": "gen",
+"nrel_rooftop2016": "gen",
+"nrel_bench2023": "gen",
+"ieapvps_bipv": "gen",
+"nrcan_pvcost2024": "gen",
+"bch_rs2289": "van",
+"auc_microgen": "edm",
+"bc_ef2026": "van",
+"ab_ghgperf": "edm",
+"est_wind2009": "gen",
+"zurmuhl2018": "gen",
+"kindaichi2018": "gen",
+"drake_landing": "edm",
+"li2021_dcbtes": "gen",
+"ags_edmonton": "edm",
+"majorowicz2021": "gen",
+"aer_d089": "edm",
+"bc_gwpr": "van",
+"ab_gshe2018": "edm",
+"barth2026": "gen",
+"atb2024_batt": "gen",
+"pnnl2022": "gen",
+"reber2023": "gen",
+"bch_esi": "van",
+"bch_drb": "van",
+"aeso_or": "edm",
+"auc_27938": "edm",
+"ap42_34": "gen",
+"bc_rlcf012": "van",
+"absorption2026": "gen",
+"van_vbbl2025_27": "van",
+"van_zdb_s2": "van",
+"van_zdb_i2": "van",
+"van_zdb_i1c": "van",
+"van_zdb_i3": "van",
+"van_zdb_fc2": "van",
+"van_rts19744": "van",
+"van_cd1": "van",
+"van_f014": "van",
+"van_floodplain": "van",
+"edm_bl20001": "edm",
+"edm_matrix": "edm",
+"edm_dcpage": "edm",
+"nbc2020_4153": "gen",
+"nfc2020_4313": "gen",
+"van_genroom": "van",
+"bch_primary": "van",
+"epcor_ccg": "edm",
+"lbnl_proto2021": "gen",
+"hillingdon_up4": "gen",
+"cat3516c": "gen",
+"src16": "gen",
+"src17": "van",
+"src18": "edm",
+"src19": "gen",
+"src20": "gen",
+"src21": "edm",
+"src22": "van",
+"src23": "gen",
+"bcPools2025": "van",
+"vanNEU2025": "van",
+"blatchfordDESS": "edm",
+"npc2612": "both",
+"odrsf": "gen",
+"odhf": "gen",
+"odef": "gen",
+"learningSeries": "gen",
+"roudbari2025": "gen",
+"ravi2026": "gen",
+"wang2026": "gen",
+"zhang2025": "gen",
+"epaQuincy": "gen",
+"oltmanns2020": "gen",
+"socci2024": "gen",
+"crozier2025": "gen",
+"wangX2022": "gen",
+"vanNMH": "van",
+"van9552": "van",
+"van6555": "van",
+"src25": "gen",
+"bcucTelus": "van",
+"qcRejets2026": "gen",
+"telehouse2026": "gen",
+"neuTraced": "both",
+"vanRoofBulletin2022": "van",
+"gowlingEV2021": "both",
+"bennettBill22": "edm",
+"codemaTallaght": "gen",
+"seaiTallaght": "gen",
+"rvoDatacenters": "gen",
+"equinixAM3": "gen",
+"stavangerBTES2023": "gen",
+"epicDOE": "gen",
+"ubcoBorefield2021": "gen",
+"cordisModerator": "gen",
+"mainovaWestville": "gen",
+"opdcOldOak": "gen",
+"greenMountainHima": "gen",
+"whiteDCeel": "gen",
+"data4algae": "gen",
+"riseMealworm": "gen",
+"goteborgGH": "gen",
+"quebecQScale": "gen",
+"canaanMB": "gen",
+"lrzCoolMUC": "gen",
+"wilde2017": "gen",
+"yuan2023": "gen",
+"qarnotCordis": "gen",
+"heataCentrica": "gen",
+"msCircular": "gen",
+"googleFervo": "gen",
+"iurc46276": "gen",
+"enelxDLR": "gen",
+"fluenceStGhislain": "gen",
+"lclHVO": "gen",
+"msSweden2021": "gen",
+"xealLaitent": "gen",
+"loudounWater": "gen",
+"msWaterFacts": "gen",
+"equinixME1": "gen",
+"onyxMAD01": "gen",
+"vanRR1_2026": "van",
+"parisPool": "gen",
+"abBill22": "edm",
+"rlcAUC2021": "edm",
+"edmZB570": "edm",
+"edmZB7120": "edm",
+"edmZB510": "edm",
+"abEUA2026": "gen",
+"nrcanPVmunic": "both",
+"aucDSI2021": "edm",
+"bchTariff2026": "van",
+"vbbl2025_272": "van",
+"abAltSol2021": "edm",
+"pnnl2022fig43": "gen",
+"alissa2025lca": "gen",
+"bchEIC2026": "van",
+"mfrDryCooler": "gen",
+"evapcoLayout2026": "gen",
+"bacS3000": "gen",
+"bacLayout2023": "gen",
+"mfrAdiabatic": "gen",
+"mfrGenset": "gen",
+"nfpa37clear": "van",
+"mfrBESS": "gen",
+"nfpa855tia": "both",
+"abESSstandata": "edm",
+"pspcLegionella": "gen",
+"vanCTseminar2021": "van",
+"vanParking5": "van",
+"edmZB580": "edm",
+"edmZB5120": "edm",
+"edmZB2120": "edm",
+"vanZDBs10": "van",
+"vanR3R4R5": "van",
+"edmZBres": "edm",
+"vanUses2026": "van",
+"edmUses2026": "edm",
+"vbbl2025_2713scope": "van",
+"thGlobalSwitch2025": "gen",
+"abpHuntstown": "gen",
+"abpCruiserath": "gen",
+"drieeEtix2010": "gen",
+"spencerBldg": "van",
+"bahnhofPionen": "gen",
+"lpc50Hudson": "gen",
+"arupManx2013": "gen",
+"fairfaxDC2024": "gen",
+"loudounDC": "gen",
+"amsterdamDC2020": "gen",
+"maekawaISO": "gen",
+"fhwaBarrier": "gen",
+"cumminsF1493": "gen",
+"yorkClearance2024": "gen",
+"persson2019": "gen",
+"nproCosts": "gen",
+"cambridgeApp5": "gen",
+"vanNEU2018": "van",
+"edmDDEcapital": "edm",
+"isoplusEPD": "gen",
+"vanNEUlevy2025": "van",
+"vanNEUguide": "van",
+"torontoDER2016": "gen",
+"statcanHeat2011": "both",
+"irwdCulver2018": "gen",
+"cec2023pump": "gen",
+"gsaBlowdown2023": "gen",
+"epcorGoldBar": "edm",
+"vanSewerCap2025": "van",
+"mvWDP2021": "van",
+"epcorDrainage2023": "edm",
+"bchExtension2026": "van",
+"bchDG100": "van",
+"aesoConnect": "edm",
+"epcorDTtc2025": "edm",
+"bcUCAs1": "van",
+"aucCoaldale2025": "edm",
+"vanQuebecSt2020": "van",
+"inlL2_2015": "gen",
+"uclaWorkplace": "gen",
+"dunskyNRCan2024": "gen",
+"bchDR2026": "van",
+"abGreenhouse2017": "edm",
+"faoRAS2022": "gen",
+"fortisBC2026": "van",
+"atcoGas2026": "edm",
+"bcCarbonTax2025": "both",
+"epraBC": "both",
+"armaElectronics": "edm",
+"cfsPlus": "both",
+"call2recycle": "edm",
+"itsp40006": "edm",
+"vbbl2025_63215": "van",
+"nfcAB2023": "edm",
+"abEUAdef2026": "edm",
+"nfpa855_2026": "both",
+"uptimeTiers": "gen",
+"r2Van2026": "van",
+"r2Edm2026": "edm",
+"cologixVAN1_2026": "van",
+"cologixVAN4_2026": "van",
+"vanStreets2026": "van",
+"edmRoads2026": "edm",
+"vanI2_2026": "van",
+"mvWWTP2026": "van",
+"epcorGoldBar2026": "edm",
+"statcanGH2021": "both",
+"blatchfordBP2021": "edm",
+"abWells2026": "edm",
+"ceedcIEF2026": "both",
+"ceud2023com": "both",
+"vanNES2012": "van",
+"rdeService2026": "van",
+"estarMedian2018": "gen",
+"vanNESmap2020": "van",
+"rdeTech2018": "van",
+"bcucCE2026": "van",
+"edmDDEmap2025": "edm",
+"nrcanEV2026": "both",
+"uofaGHG2025": "edm",
+"vanRainPrivate2026": "van",
+"vanPublicRooms2026": "van",
+"majdabadi2026": "edm",
+"bcucG25224": "van",
+"bcucG526": "van",
+"bcucG34522A": "van",
+"bcucG17926": "van",
+"uofaEERMP2021": "edm",
+"abGreenhouse2023": "edm",
+"bcGreenhouse2011": "van",
+"vanWaterPermits": "van"
+},
+"city_gaps": {
+"van": [
+"lf_flag",
+"light_at_window",
+"aquaculture_tonnes",
+"ups_flex",
+"genset_test",
+"btes",
+"deep_geo"
+],
+"edm": [
+"it_load_claim",
+"it_load_actual",
+"heat_delivered",
+"flexible_load",
+"evaporation",
+"shadow",
+"sewage_heat",
+"price_floor",
+"capex_split",
+"build_cost",
+"horizons",
+"cfd_score",
+"ledger",
+"ground",
+"lrmc_bc",
+"people_affected",
+"hvo_swap",
+"hall_area",
+"flood_exposure"
+]
 }
 }

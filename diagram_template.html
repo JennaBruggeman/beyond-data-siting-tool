@@ -231,6 +231,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
   body{overflow:auto}
 }
 @media (prefers-reduced-motion:no-preference){ .node rect.box,.wire,.cond rect.box{transition:opacity .15s,stroke .15s} }
+.citysw{margin-left:14px;display:inline-flex;gap:0}.citysw button{border-radius:0}.citysw button:first-child{border-radius:4px 0 0 4px}.citysw button:last-child{border-radius:0 4px 4px 0}.node.citygap .box{stroke-dasharray:4 3;opacity:.75}.ctag{font-size:9px;fill:#cdb07a;letter-spacing:.02em}.gapnote{color:#cdb07a}
 </style>
 
 <div class="app">
@@ -244,6 +245,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
   <div class="seg logic-only" role="group" aria-label="Mode">
     <button id="m-structure" aria-pressed="true">Structure</button>
     <button id="m-example" aria-pressed="false">Worked example</button>
+    <span class="citysw"><button id="c-van" aria-pressed="false">Vancouver</button><button id="c-edm" aria-pressed="false">Edmonton</button><button id="c-both" aria-pressed="true">Both</button></span>
   </div>
   <input id="q" class="logic-only" type="search" placeholder="Find a quantity, condition, party or source" aria-label="Search">
   <select id="heading" class="logic-only" aria-label="Filter conditions by heading"><option value="">All headings</option></select>
@@ -360,10 +362,14 @@ const glyphs={
 };
 function ring(g,cx,cy,conf,r=9){ el('circle',{class:'ring-track',cx,cy,r},g); if(conf>0) el('path',{class:'ring-fill',d:arc(cx,cy,r,conf/100)},g); }
 function clip(s,n){s=String(s||'');return s.length>n?s.slice(0,n-1)+'…':s}
+let city='both'; const SC=D.source_city||{};
+const CN={van:'Vancouver',edm:'Edmonton'};
+function cityGap(n){ const c=n.city; if(!c) return ''; const v=c.van+c.both>0, e=c.edm+c.both>0; if(!(v||e)) return ''; if(city==='van'&&!v) return 'no Vancouver source yet'; if(city==='edm'&&!e) return 'no Edmonton source yet'; if(city==='both'&&!(v&&e)) return v?'Vancouver only':'Edmonton only'; return ''; }
 function drawNode(n){
   const p=posN[n.id]; if(!p)return; const kind=n.kind;
   const fam=G.node_family[n.id], FM=fam?G.families[fam]:null;
   const cls=['node',kind]; if(kind==='input') cls.push(n.side||'place'); if(n.conf===0) cls.push('gap'); if(FM) cls.push('fam');
+  const cg=kind==='quantity'?cityGap(n):''; if(cg) cls.push('citygap');
   const g=el('g',{class:cls.join(' '),'data-id':n.id,transform:`translate(${p.x},${p.y})`},gNodes);
   if(FM) g.style.setProperty('--fc',FM.colour);
   el('rect',{class:'box',width:p.w,height:p.h},g);
@@ -374,6 +380,7 @@ function drawNode(n){
     el('path',{class:'glyph',d:glyphs[kind==='quantity'&&n.stage==='decide'?'decide':kind]||glyphs.quantity,transform:`translate(${n.conf!=null?13.5:12},${cy-4.5}) scale(0.7)`},g); }
   const t=el('text',{class:'name',x:34,y:mode==='example'&&kind==='quantity'?18:cy-2},g); t.textContent=clip(n.name,FM?22:24);
   if(n.trial){ const pl=el('text',{class:'plus',x:p.w-6,y:-4,'text-anchor':'end'},g); pl.textContent='+ what if'; }
+  if(cg){ const ct=el('text',{class:'ctag',x:p.w-26,y:p.h-5,'text-anchor':'end'},g); ct.textContent=cg; }
   const u=el('text',{class:'unit',x:34,y:mode==='example'&&kind==='quantity'?31:cy+12},g); u.textContent=clip(n.unit||n.source_text||'',30);
   if(mode==='example'&&kind==='quantity'){ const v=exVal(n.id); const tv=el('text',{class:'val',x:34,y:48},g); tv.textContent=v?clip(v[0],30):'—'; }
   if(!['input','pref'].includes(kind)) el('circle',{class:'port',cx:0,cy,r:3.5},g);
@@ -500,6 +507,11 @@ function select(id){ selected=id; applyHighlight(); renderInspector(); }
 const esc=s=>String(s==null?'':s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 function ringSVG(conf,r=14){ const c=r+3; return `<svg width="${2*c}" height="${2*c}" aria-hidden="true"><circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="var(--line-2)" stroke-width="4"/>${conf>0?`<path d="${arc(c,c,r,conf/100)}" fill="none" stroke="var(--accent)" stroke-width="4"/>`:''}</svg>`; }
 function chips(ids,cls){ return ids.map(i=>{const n=N[i]||C[i]||D.opportunities.find(o=>o.id===i); return n?`<span class="chip ${cls||''}" data-go="${i}">${esc(n.name)}</span>`:`<code>${esc(i)}</code>`;}).join(''); }
+function citySources(n){ const g={van:[],edm:[],both:[],gen:[]}; n.sources.forEach(k=>g[SC[k]||'gen'].push(k)); const gap=cityGap(n);
+  const part=(lab,ids)=>ids.length?`<dt>${lab}</dt><dd>${sourceList(ids)}</dd>`:'';
+  if(city==='both') return part('Vancouver',g.van)+part('Edmonton',g.edm)+part('both cities',g.both)+part('general',g.gen)+(gap?`<dt>gap</dt><dd class="gapnote">${esc(gap)}: the other city's source is still to find</dd>`:'');
+  const mine=city==='van'?g.van:g.edm, other=city==='van'?g.edm:g.van;
+  return part(CN[city],mine)+part('both cities',g.both)+part('general',g.gen)+(gap?`<dt>gap</dt><dd class="gapnote">${esc(gap)}</dd>`:'')+(other.length?`<dt>${city==='van'?'Edmonton':'Vancouver'}</dt><dd class="sub">${other.length} source${other.length>1?'s':''} for the other city (switch to see)</dd>`:''); }
 function sourceList(ids){ if(!ids||!ids.length)return ''; return '<ul class="srcs">'+ids.map(s=>{const t=D.sources[s]; if(!t)return `<li><code>${esc(s)}</code></li>`; const m=t.match(/https?:\/\/\S+/); const txt=esc(t.replace(/\s*—?\s*https?:\/\/\S+/,'')); return `<li>${txt}${m?` <a href="${m[0]}" target="_blank" rel="noopener">link</a>`:''}</li>`;}).join('')+'</ul>'; }
 function roleList(rs){ return '<div class="roles">'+rs.map(x=>{const t=D.sources[x.id]||x.id; const short=esc(t.split(/ — https?:/)[0].split(/[:(,]/)[0].slice(0,48)); return `<div class="role"><span class="rconf" title="confidence ${x.conf}">${x.conf}</span><div><b>${esc(x.term)}</b><br><span>${short} · ${esc(x.role)}${x.verified?'':' · <em>placement unverified</em>'}</span></div></div>`;}).join('')+'</div>'; }
 function moveTags(c){ return (c.move||[]).map(m=>`<span class="tag ${m==='physics'?'hard':''}" title="${esc(MC[m]?MC[m].note:'')}">${esc(MC[m]?MC[m].name:m)}</span>`).join(''); }
@@ -519,7 +531,7 @@ function renderInspector(){
   <div class="kind" style="margin-top:16px">Opportunity labels</div><p style="font-size:12.5px;margin:6px 0 0">How proven: ${['built_here','built_elsewhere','pilot','speculative','unknown'].map(x=>rdPill(x)).join(' ')}</p><p style="font-size:12.5px;margin:6px 0 0">Rules: ${['allowed','approval','not_allowed','no_rule','unknown'].map(x=>rsPill(x)).join(' ')}</p><p class="glink" data-go="labels" style="margin-top:6px">How opportunities are labelled ›</p>
   ${D.research_pass&&D.research_pass.groups?`<div class="kind" style="margin-top:16px">Sources of truth</div><p class="glink" data-go="research" style="margin-top:6px">Research pass ${esc(D.research_pass.date)}: ${Object.keys(D.source_kinds||{}).length} sources by carrier and gate ›</p>`:''}
   <p style="margin-top:14px">${D.meta.counts.inputs} inputs · ${D.meta.counts.quantities} quantities · ${D.meta.counts.conditions} conditions · ${(D.parties||[]).length} parties · ${D.meta.counts.sources} cited sources (register ${esc(D.meta.date)}).</p>
-  ${mode==='example'?`<div class="box2"><div class="kind">Worked example — first attempt</div><b>${esc(D.example.site)}</b><br><span style="color:var(--muted)">${esc(D.example.match)}</span><br><br><span style="font-size:12.5px">${esc((D.example.values.tradeoffs||[''])[0])}</span><div class="draftnote">Condition states are the first attempt's; party rows are not yet computed.</div></div>`:''}
+  ${mode==='example'&&city==='edm'?`<div class="box2"><span class="gapnote">The worked example is in Vancouver (555 W Hastings). An Edmonton worked example is not built yet.</span></div>`:''}${mode==='example'?`<div class="box2"><div class="kind">Worked example — first attempt</div><b>${esc(D.example.site)}</b><br><span style="color:var(--muted)">${esc(D.example.match)}</span><br><br><span style="font-size:12.5px">${esc((D.example.values.tradeoffs||[''])[0])}</span><div class="draftnote">Condition states are the first attempt's; party rows are not yet computed.</div></div>`:''}
   </div>`; bindGo(); return; }
   let h='';
   if(selected.startsWith('life_')){ const ph=LIFE.find(p=>'life_'+p.id===selected);
@@ -581,7 +593,7 @@ function renderInspector(){
       ${n.source_roles&&n.source_roles.length>1?`<dt>by source</dt><dd>${roleList(n.source_roles)}</dd>`:''}
       ${n.inputs&&n.inputs.length?`<dt>inputs</dt><dd>${chips(n.inputs,'i')}</dd>`:''}${feeds.length?`<dt>feeds</dt><dd>${chips(feeds)}</dd>`:''}${uses.length?`<dt>conditions</dt><dd>${chips(uses,'c')}</dd>`:''}${opps.length?`<dt>opportunities</dt><dd>${chips(opps,'o')}</dd>`:''}
       ${n.coef?`<dt>notes</dt><dd><details><summary>coefficients and working, ${n.coef.length} characters</summary><p>${esc(n.coef)}</p></details></dd>`:''}
-      ${n.sources&&n.sources.length?`<dt>sources</dt><dd>${sourceList(n.sources)}</dd>`:''}</dl>`;
+      ${n.sources&&n.sources.length?citySources(n):''}</dl>`;
     }
   }
   insp.innerHTML=h; bindGo();
@@ -618,6 +630,8 @@ function centreOn(id){ const p=posN[id]||condPos[id]; if(!p)return; vb.x=p.x+p.w
 function setMode(m){ mode=m; document.getElementById('m-structure').setAttribute('aria-pressed',m==='structure'); document.getElementById('m-example').setAttribute('aria-pressed',m==='example'); drawAll(); renderInspector(); }
 document.getElementById('m-structure').onclick=()=>setMode('structure');
 document.getElementById('m-example').onclick=()=>setMode('example');
+function setCity(c){ city=c; ['van','edm','both'].forEach(k=>document.getElementById('c-'+k).setAttribute('aria-pressed',k===c)); drawAll(); renderInspector(); }
+['van','edm','both'].forEach(k=>document.getElementById('c-'+k).onclick=()=>setCity(k));
 document.getElementById('q').addEventListener('input',e=>{query=e.target.value; applyFilter();});
 const hs=document.getElementById('heading'); D.headings.forEach(h=>{const o=document.createElement('option');o.value=h;o.textContent=h;hs.appendChild(o);});
 hs.addEventListener('change',e=>{hfilter=e.target.value; applyFilter();});

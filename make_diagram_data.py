@@ -164,6 +164,24 @@ out = {
     'source_kinds': r['meta'].get('source_kinds', {}),
     'source_check': r['meta'].get('source_check', {}),
 }
+# city of each source (J.B., 16 Oct: one diagram, a Vancouver / Edmonton / Both switch; same nodes, sources and maths differ by city).
+# Classified from each source's own text by place names; 'gen' = general (physics, studies, other places), used in both cities.
+SRC_ALL = {**r.get('old_sources', {}), **r['new_sources']}
+RX_V = re.compile(r"Vancouver|\bVBBL\b|BC Hydro|FortisBC|British Columbia|\bBC\b|BCUC|Creative Energy|River District|By-law 9552|\bNEU\b|Cologix VAN|Metro Vancouver")
+RX_E = re.compile(r"Edmonton|Alberta|\bAB\b|EPCOR|AESO|Blatchford|Bylaw 20001|Bylaw C17943|Gold Bar|\bAUC\b")
+def src_city(k):
+    t = json.dumps(SRC_ALL.get(k, ''), ensure_ascii=False); v, e = bool(RX_V.search(t)), bool(RX_E.search(t))
+    return 'both' if v and e else 'van' if v else 'edm' if e else 'gen'
+out['source_city'] = {k: src_city(k) for k in out['sources']}
+for n in out['nodes']:
+    if n.get('kind') != 'quantity': continue
+    c = {'van': 0, 'edm': 0, 'both': 0, 'gen': 0}
+    for k in n.get('sources', []): c[src_city(k)] += 1
+    n['city'] = c
+gap_v = [n['id'] for n in out['nodes'] if n.get('city') and n['city']['edm'] and not (n['city']['van'] or n['city']['both'])]
+gap_e = [n['id'] for n in out['nodes'] if n.get('city') and n['city']['van'] and not (n['city']['edm'] or n['city']['both'])]
+out['city_gaps'] = {'van': gap_v, 'edm': gap_e}
+print('city gaps: no Vancouver source', len(gap_v), '· no Edmonton source', len(gap_e))
 json.dump(out, open(os.path.join(here, 'diagram_data.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 dangling = [e for e in edges if not any(n['id'] == e['from'] for n in nodes)]
 print('nodes', len(nodes), 'edges', len(edges), 'conditions', len(conds), 'dangling', dangling)
