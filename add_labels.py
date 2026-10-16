@@ -81,6 +81,7 @@ O = {
    'basis': 'Programmes exist (BC Hydro 2026 Call for Demand; AESO operating reserve); no case of a data centre taking part is in the register yet.',
    'sources': ['cfd', 'aeso_or'],
    'rules': [{'rung': 'Utility programme', 'van': ['allowed', 'BC Hydro 2026 Call: curtail ≥10% on 24 h notice, ≥144 h a year'], 'edm': ['allowed', 'AESO operating reserve ≥5 MW, or through an aggregator'], 'sources': ['cfd', 'aeso_or']},
+             {'rung': 'Condition on large loads', 'van': ['approval', 'BC Hydro 2026 Call: curtailable ≥10% on 24 h notice, ≥144 h a year'], 'edm': ['approval', 'AESO proposal (Jun 2026, not final), loads ≥75 MW: bring own gas generation 1:1; bridging load (≤40%, ≤3 yr) fully interruptible; in an emergency data centres shed before other firm load. Under 75 MW or on distribution: no flexibility term found'], 'sources': ['cfd']},  # AESO sources attached in add_research_pass.py
              {'rung': 'UPS batteries to the grid', 'van': ['no_rule', 'no BC programme found'], 'edm': ['allowed', 'AESO reserves ≥5 MW or via aggregator'], 'sources': ['aeso_or']},
              {'rung': 'Fire code (battery room)', 'van': ['unknown', 'code path unconfirmed'], 'edm': ['unknown', 'code path unconfirmed'], 'sources': []}],
    'unknowns': ['data-centre participation precedent', 'battery fire-code path'], 'visual': 'daily power curve with the share given back'},
