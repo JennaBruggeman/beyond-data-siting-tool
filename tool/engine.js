@@ -341,7 +341,7 @@ async function optionsView(){
   ${src('pue')}${src('lf')}${src('cap')}${src('cop')}${src('homes')}${src('grid')}${net?src('neu'):''}${src('noise')}${src('jobs')}
   <div class="draftnote">Draft wording and option names (Claude) for J.B. Ranges carry the register's confidence; "not yet known" names what is missing.</div>`;
   $('#side').innerHTML=h; document.body.classList.add('wide'); wireTabs(); BD.draw();
-  if(BD.scene3d) BD.scene3d.showOptions(opts.map(o=>({id:o.id,name:o.name,recover:o.recover,to:o.to,n:o.id==='c'?14:6,plant:plantPerMW(o.recover)[1]*o.mw,
+  if(BD.scene3d) BD.scene3d.showOptions(opts.map(o=>({id:o.id,mw:o.mw,name:o.name,recover:o.recover,to:o.to,n:o.id==='c'?14:6,plant:plantPerMW(o.recover)[1]*o.mw,
     caption:o.mw.toFixed(1)+' MW · '+(o.recover?rng(o.r.avail[0]/1000,o.r.avail[1]/1000,'GWh heat offered'):'heat to the air')})),{site:f,near,net:nets.find(n=>n.inside)}).catch(e=>console.warn(e));
 }
 

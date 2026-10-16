@@ -245,8 +245,13 @@ async function show(tab,data){ await ensure(); if(!R) setup(); R.multi=null; if(
 /* three options side by side: one camera, three scenes sharing the site model (J.B., 15 Oct) */
 async function showOptions(opts,data){
   await show('model',{site:data.site}); clearOverlay(); R.scene.remove(R.ov);
-  const base=R.scene.children.slice(); if(R.cap) R.cap.forEach(c=>c.remove()); R.cap=[];
-  R.multi=opts.map((o,i)=>{ const s=new T.Scene(); base.forEach(ch=>s.add(ch.clone())); R.ov=new T.Group(); s.add(R.ov);
+  if(R.cap) R.cap.forEach(c=>c.remove()); R.cap=[];
+  // each option gets its own building and plant, sized for its own servers (J.B., 16 Oct: "the geometry looks the same in A, B and C")
+  const A=BD.S.answers, mw0=A.mw, site=data.site||(BD.eng?BD.eng.siteFacts():null), built=[];
+  for(const o of opts){ A.mw=o.mw; if(BD.modelReset) BD.modelReset(); buildSite(site); clearOverlay(); R.scene.remove(R.ov);
+    built.push({kids:R.scene.children.slice(),st:state}); }
+  A.mw=mw0; if(BD.modelReset) BD.modelReset();
+  R.multi=opts.map((o,i)=>{ const s=new T.Scene(); built[i].kids.forEach(ch=>s.add(ch)); state=built[i].st; R.ov=new T.Group(); s.add(R.ov);
     const c=roofC(), src=V(c[0],c[1],state.roof+3);
     if(!o.recover){ for(const b of Object.values(state.plantGroups||{}).flat().slice(0,8)){ const cc=BD.centroid(b.ring); const a=V(cc[0],cc[1],b.base+b.h); R.ov.add(line(arc(a,a.clone().add(new T.Vector3(0,18,0)),3,8),0x9d9a94,true,0.9)); } }
     else if(o.to==='net'&&data.net){ const n=data.net, p=[]; for(let k=0;k<n.r.length;k+=2) p.push(V(n.r[k],n.r[k+1],0.6)); R.ov.add(line(p,C.heat,true,0.9)); const cc=BD.centroid(n.r); R.ov.add(line(arc(src,V(cc[0],cc[1],2),80),C.heat,false,0.9)); }
@@ -254,6 +259,7 @@ async function showOptions(opts,data){
     const d=document.createElement('div'); d.style.cssText=`position:absolute;top:44px;left:calc(${i*33.333}% + 12px);width:calc(33.333% - 24px);font:300 12px/1.4 "Open Sans",system-ui,sans-serif;color:#e9e6e1;pointer-events:none`;
     d.innerHTML=`<div style="font-size:11px;letter-spacing:.12em;color:#9d9a94;font-weight:600">${o.id.toUpperCase()}</div><div>${esc(o.name)}</div><div style="color:#9d9a94">${esc(o.caption)}</div>`; wrap.appendChild(d); R.cap.push(d);
     return s; });
+  state=built[1].st; state.key=null;
   for(let i=1;i<3;i++){ const d=document.createElement('div'); d.style.cssText=`position:absolute;top:0;bottom:0;left:${i*33.333}%;border-left:1px solid #30343a;pointer-events:none`; wrap.appendChild(d); R.cap.push(d); }
   { const sp=state.span; R.cam.position.set(sp*3.0,sp*2.6+state.roof*1.4,sp*3.4); R.ctl.target.set(0,state.roof*0.4,0); } note('Same site, same view: drag to orbit all three'); key(''); }
 function hide(){ if(wrap) wrap.style.display='none'; if(R){ R.multi=null; if(R.cap){ R.cap.forEach(c=>c.remove()); R.cap=[]; } } }
