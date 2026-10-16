@@ -275,7 +275,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "quantities": 139,
 "conditions": 101,
 "opportunities": 15,
-"sources": 503
+"sources": 504
 }
 },
 "stages": [
@@ -5560,7 +5560,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "coef": "2025 IRP App. F: energy $97/MWh (F2025$; UEC at POI $77 from the 2024 Call for Power levelized bid, + firm transmission 3, network upgrades 6, integration 8, losses 5, time-of-delivery −3); capacity $300/kW-yr point estimate (range 150–400); distribution and non-bulk transmission $110/kW-yr; dual-fuel dwellings cut Lower Mainland peak demand ~75% vs all-electric (Fig. 2-7)",
 "unit": "$/MWh; $/kW·yr",
 "sources": [
-"bchIRP2025"
+"bchIRP2025",
+"aesoAMS2025"
 ],
 "source_roles": [
 {
@@ -5568,6 +5569,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "term": "all coefficients",
 "role": "coefficient",
 "conf": 90,
+"verified": true
+},
+{
+"id": "aesoAMS2025",
+"term": "research pass 16 Oct 2026 (system operator)",
+"role": "pending build",
+"conf": 70,
 "verified": true
 }
 ],
@@ -5583,7 +5591,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "city": {
 "van": 1,
 "edm": 0,
-"both": 0,
+"both": 1,
 "gen": 0
 }
 },
@@ -13144,7 +13152,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "aesoDCupd2025": "AESO Update on Data Centres (Sep 2025): over 20,000 MW of data-centre load on the AESO project list; Phase 1 qualified 15 projects / 5 developers / 4,800 MW and assigned 1,200 MW to 3 projects / 2 developers, contracts pending execution (deadline extended to Oct 2025 for the provincial levy engagement); draft technical connection requirements for transmission-connected data centres posted 22 Aug 2025, final requirements planned Nov 2025 — https://aesoengage.aeso.ca/pre-engagement-phase-ii-large-load-integration",
 "alta117_2026": "Data Centre Regulation, Alta Reg 117/2026 under the Electric Utilities Act (King's Printer extract, current as of 9 Jun 2026; J.B. PDF 16 Oct 2026). s. 1: data centre includes hosting/cloud, digital asset mining, AI/ML, content delivery. s. 2: \"large data centre\" = maximum demand directly from the transmission system of 75 MW or more, or a lower threshold the AESO sets for reliability. s. 3: AESO may aggregate integrated data centres on the same or adjacent parcels with the same owner or affiliate. s. 5: a large data centre may be \"tethered\" to new or added generating units or energy storage able to supply at least its maximum demand, reliably and predictably (the Regulation does not limit the fuel; AESO's first intake does). s. 6: tethered requests processed first. s. 7: AESO may require site control, municipal zoning approvals, financing, permits or water licences. s. 8: no service above the tethered supply. s. 9: bridged service before the supply runs only once the plant is approved by the AUC, max 3 years, AESO may cap each and all bridged loads and suspend for unmet criteria. s. 10: inadequate supply — bridged data centres reduced before all other market participants; mandatory load shed — large data centres reduced before all others. s. 12: review by 31 May 2030, expires 31 May 2035 — https://open.alberta.ca/publications/2026_117",
 "edm7140sun": "Edmonton Zoning Bylaw 20001 (Charter Bylaw 20001 as adopted, effective 1 Jan 2024; City PDF, OCR text, J.B. download 14 Oct 2026; later amendments not checked), s. 7.140 Special Information Requirements, subs. 9 Sun Shadow Impact Study: the Development Planner MAY require one only where the development is a Discretionary Development (9.1); prepared by an Alberta P.Eng. or architect (9.2.1); shadows every 3 hours between sunrise and sunset, Mountain Standard Time, on 21 Mar, 21 Jun, 21 Sep and 21 Dec (9.2.3); impact judged as the difference between the maximum massing the zone allows and the proposed massing (9.3.1); may refuse or require redesign (9.3.2–9.3.3). No shadow clause found in the standard industrial zones (BE, IM, IH); shadow clauses appear for towers in RL and MU (in compliance with 7.140), UI height variances, and special areas (HOR, CMU, AED, RTCC, ALA); 3.50 Energy and Technology Park mentions shading only as tree planting. Search of the full text for shad/shadow/sun — https://zoningbylaw.edmonton.ca/",
-"edmFPO2250": "Edmonton Zoning Bylaw 20001 (as adopted, effective 1 Jan 2024; later amendments not checked), s. 2.250 FPO Floodplain Protection Overlay: applies to the lands mapped in its Appendix I (floodplains of the North Saskatchewan River and tributaries), and to the whole lot if the boundary crosses it (2.2); the applicant must submit an Alberta P.Eng. or architect certificate that the development complies with the floodplain policies of the applicable statutory plans (3.1); the Development Planner may require the geodetic elevation of the building and of its lowest opening, and confirmation that habitable rooms, electrical panels, heating units and operable windows are flood-proofed, plus basement and site drainage (3.2); conditions must follow the certificate (3.4). The bylaw sets no flood construction level of its own (Vancouver: FCL 4.6 m) — the level comes from the statutory plans or provincial flood mapping — https://zoningbylaw.edmonton.ca/"
+"edmFPO2250": "Edmonton Zoning Bylaw 20001 (as adopted, effective 1 Jan 2024; later amendments not checked), s. 2.250 FPO Floodplain Protection Overlay: applies to the lands mapped in its Appendix I (floodplains of the North Saskatchewan River and tributaries), and to the whole lot if the boundary crosses it (2.2); the applicant must submit an Alberta P.Eng. or architect certificate that the development complies with the floodplain policies of the applicable statutory plans (3.1); the Development Planner may require the geodetic elevation of the building and of its lowest opening, and confirmation that habitable rooms, electrical panels, heating units and operable windows are flood-proofed, plus basement and site drainage (3.2); conditions must follow the certificate (3.4). The bylaw sets no flood construction level of its own (Vancouver: FCL 4.6 m) — the level comes from the statutory plans or provincial flood mapping — https://zoningbylaw.edmonton.ca/",
+"aesoAMS2025": "AESO 2025 Annual Market Statistics (Mar 2026; J.B. PDF 16 Oct 2026), Table 1: Alberta pool price, daily average $/MWh — 2016 18.28, 2017 22.19, 2018 50.35, 2019 54.88, 2020 46.72, 2021 101.93, 2022 162.46, 2023 133.63, 2024 62.78, 2025 43.68 (lowest in eight years); 2025 on-peak 52.15, off-peak 26.74; 2025 estimated gas unit marginal cost 16.71 (7 GJ/MWh) to 48.68 (12 GJ/MWh), carbon cost 0.42–24.32; gas 1.61 $/GJ. Inflation-adjusted (2025 $) 10-year average 2016–2025 $78/MWh vs $113 for 2000–2009 (Figure 5). Average Alberta Internal Load 10,316 MW (+2.0%); all-time winter peak 12,785 MW, December 2025; operating reserve costs $218 M (−19.6%). Alberta is an energy-only market: the pool price is the hourly marginal price, not a long-run marginal cost like BC Hydro's IRP figure, so the two are compared as what a MWh is worth to each system, not as the same measure — https://www.aeso.ca/assets/Annual-Market-Stats-2025.pdf"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -15298,7 +15307,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "aesoDCupd2025": "system operator",
 "alta117_2026": "regulation",
 "edm7140sun": "bylaw",
-"edmFPO2250": "bylaw"
+"edmFPO2250": "bylaw",
+"aesoAMS2025": "system operator"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -15428,7 +15438,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "aesoDCupd2025": "claude",
 "alta117_2026": "claude",
 "edm7140sun": "claude",
-"edmFPO2250": "claude"
+"edmFPO2250": "claude",
+"aesoAMS2025": "claude"
 },
 "source_city": {
 "abgas": "edm",
@@ -15932,7 +15943,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "aesoDCupd2025": "edm",
 "alta117_2026": "edm",
 "edm7140sun": "edm",
-"edmFPO2250": "both"
+"edmFPO2250": "both",
+"aesoAMS2025": "both"
 },
 "city_gaps": {
 "van": [
@@ -15944,7 +15956,6 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "edm": [
 "price_floor",
 "build_cost",
-"lrmc_bc",
 "hvo_swap"
 ]
 }
