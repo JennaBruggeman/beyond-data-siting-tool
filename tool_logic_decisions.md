@@ -174,3 +174,12 @@ Running record of decisions J.B. has made about the tool's logic, in the order m
 - "What if we added" entries carry a rule state per city; their readiness is not labelled yet.
 - New sources: Vancouver roof-mounted energy bulletin (Nov 2022); Gowling 2021 on EV charging and Bennett Jones 2024 on Bill 22 — both law-firm summaries, labelled secondary until the AUC report and the Act are read.
 - Diagram: opportunity bands show the readiness tag; "Opportunities · how labelled" opens the label key and an overview table; each opportunity shows its rule ladder. Tool wording "cannot judge" → "not yet known".
+
+## 15 Oct 2026 — precedent search settles "how proven"
+
+- Four research passes, primary sources preferred, operator and vendor pages labelled as claims; Claude re-opened a sample (EPA Quincy, Codema Tallaght, IURC 46276, RVO, Bill 22, Edmonton ZB 20001 s. 5.70 and 7.120, Green Mountain, Göteborg Energi). add_precedents.py, run after add_labels.py; 41 sources added.
+- Opportunities: built here 2 (district heat via TELUS Garden; sewage heat comparator) · built elsewhere 6 (campus anchor; new district — Westville, Frankfurt; ground storage — Equinix Amsterdam ATES; fish farming — operator claims only; grid flexibility — Indiana regulator order for Google, Irish UPS frequency response; water reuse — EPA Quincy blowdown, Loudoun reclaimed water) · pilot 2 (greenhouse — Göteborg 130 m², QScale Lévis under construction; servers as heaters — Qarnot EU project, Heata trial) · speculative 5 (refuge; EV hub; meanwhile uses; material bank; cooling for neighbours).
+- None of the data-centre pairings is operating in Alberta; in BC only TELUS Garden. Canada: QScale Lévis greenhouse (under construction), Manitoba 3 MW greenhouse proof of concept (operator claim), Université Laval.
+- Add-ons labelled too (solar 1 MW rooftop Melbourne and 600 kWp facade Madrid — claims; borefield Epic Systems — US DOE; HVO backup — vendor claim; etc.).
+- Correction: the Bennett Jones summary says Bill 22 permits export of surplus self-supply; the bill as introduced exempts only self-supply consumed on the property and has no export clause. Enacted text still to read.
+- Edmonton solar: no development permit for a compliant collector (s. 7.120 cl. 3.7); s. 5.70 does not list collectors among items with no height limit; s. 5.10 collector rules would not load — to read by hand. AUC 2021 inquiry report would not open; EV status stays "no rule yet" from secondary sources.
