@@ -166,3 +166,11 @@ Running record of decisions J.B. has made about the tool's logic, in the order m
 - Sound: each neighbour's limit comes from its own zone (Vancouver quiet / intermediate / activity; Edmonton 50 dBA next to residential, otherwise 60).
 - Edmonton Heat tab: Blatchford district energy is compulsory to connect (Bylaw C17943 s. 6; s. 8 net-zero exemption).
 - Still blocked: Edmonton district energy service area maps (need tracing), census population, I-2 sub-area B mapping, the City's answer on strict vs lenient ground floor.
+
+## 15 Oct 2026 — opportunity labels (agreed with J.B.)
+
+- "Cannot judge" retired. Three labels, never combined: how proven the idea is when paired with a data centre (built here · built elsewhere · pilot · speculative · not yet known), what the rules say rung by rung (allowed · allowed with approval · not allowed · no rule yet · not yet known · not applicable), and what we know (known · not yet known — needs X).
+- All 15 opportunities labelled in the register (add_labels.py, run after add_exchange.py); 12 are provisional — from the register's sources only, precedent search still to do. Built here: district heat (TELUS Garden, BCUC C-1-13), sewage heat (NEU, comparator). Built elsewhere: campus anchor (Université Laval).
+- "What if we added" entries carry a rule state per city; their readiness is not labelled yet.
+- New sources: Vancouver roof-mounted energy bulletin (Nov 2022); Gowling 2021 on EV charging and Bennett Jones 2024 on Bill 22 — both law-firm summaries, labelled secondary until the AUC report and the Act are read.
+- Diagram: opportunity bands show the readiness tag; "Opportunities · how labelled" opens the label key and an overview table; each opportunity shows its rule ladder. Tool wording "cannot judge" → "not yet known".

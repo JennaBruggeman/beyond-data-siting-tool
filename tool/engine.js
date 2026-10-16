@@ -293,7 +293,7 @@ function noiseRow(f){
   const t=act?'activity zone: 55 dBA at night at a quiet-zone home, 65 at a mixed or industrial neighbour':mid?'intermediate zone: 50 dBA at night at a quiet-zone home, 65 at a mixed or industrial neighbour':'quiet zone (or not listed): 45 dBA at night at a quiet-zone home, 55 elsewhere';
   return ['Night limit at the neighbour',t,'noise'];
 }
-function state(k){ return `<span class="st st-${k}" title="${esc({met:'met',chg:'met with a change',not:'not met',cj:'cannot judge'}[k])}"></span>`; }
+function state(k){ return `<span class="st st-${k}" title="${esc({met:'met',chg:'met with a change',not:'not met',cj:'not yet known'}[k])}"></span>`; }
 async function optionsView(){
   const f=siteFacts(); BD.S.view2='opts'; const d=await loadRecv(f.city); const near=nearby(f,d), nets=netsAt(f,d);
   const opts=optionSet(f,near,nets).map(o=>Object.assign(o,{r:calc(o,f,near,nets)}));
@@ -331,9 +331,9 @@ async function optionsView(){
     for(const [lab,fn] of rr){ const c=opts.map(o=>fn(o)); h+=c.every(x=>x===c[0])?`<tr><td>${esc(lab)}</td><td colspan="${opts.length}">${c[0]}</td></tr>`:`<tr><td>${esc(lab)}</td>${c.map(x=>`<td>${x}</td>`).join('')}</tr>`; } }
   h+=`</tbody></table></div>
   <h3>Four futures</h3><div class="opts">${opts.map(o=>`<div class="opt"><div class="kind">${o.id.toUpperCase()}</div>${fut(o)}</div>`).join('')}</div>
-  <div class="legend2">${state('met')}met ${state('chg')}met with a change ${state('not')}not met ${state('cj')}cannot judge yet</div>
+  <div class="legend2">${state('met')}met ${state('chg')}met with a change ${state('not')}not met ${state('cj')}not yet known</div>
   ${src('pue')}${src('lf')}${src('cap')}${src('cop')}${src('homes')}${src('grid')}${net?src('neu'):''}${src('noise')}${src('jobs')}
-  <div class="draftnote">Draft wording and option names (Claude) for J.B. Ranges carry the register's confidence; "cannot judge" names what is missing.</div>`;
+  <div class="draftnote">Draft wording and option names (Claude) for J.B. Ranges carry the register's confidence; "not yet known" names what is missing.</div>`;
   $('#side').innerHTML=h; document.body.classList.add('wide'); wireTabs(); BD.draw();
   if(BD.scene3d) BD.scene3d.showOptions(opts.map(o=>({id:o.id,name:o.name,recover:o.recover,to:o.to,n:o.id==='c'?14:6,plant:plantPerMW(o.recover)[1]*o.mw,
     caption:o.mw.toFixed(1)+' MW · '+(o.recover?rng(o.r.avail[0]/1000,o.r.avail[1]/1000,'GWh heat offered'):'heat to the air')})),{site:f,near,net:nets.find(n=>n.inside)}).catch(e=>console.warn(e));

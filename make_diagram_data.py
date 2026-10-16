@@ -119,7 +119,8 @@ for h in HEADINGS:
     for c in r['conditions']:
         if c['heading'] == h:
             conds.append({'id': c['id'], 'heading': h, 'name': c['name'], 'test': c['test'], 'quantities': c['quantities'], 'move': c.get('move', []), 'parties': c.get('parties', []), 'constraint': c.get('constraint', False), 'note': c.get('note', ''), 'sources': c.get('sources', []), 'next_action': c.get('next_action', '')})
-opps = [{'name': k, 'quantities': v} for k, v in r['opportunity_quantities'].items()]
+OL_ = r['meta'].get('opportunity_labels', {})
+opps = [{'name': k, 'quantities': v, **({'labels': OL_[k]} if k in OL_ else {})} for k, v in r['opportunity_quantities'].items()]
 
 # upstream confidence
 def upstream(i, seen=frozenset()):
@@ -157,6 +158,8 @@ out = {
     'commitment_states': r['meta'].get('commitment_states', []),
     'futures': r['meta'].get('futures', []),
     'model_results': r['meta'].get('model_results', []),
+    'label_systems': r['meta'].get('label_systems', {}),
+    'try_menu_readiness_note': r['meta'].get('try_menu_readiness_note', ''),
 }
 json.dump(out, open(os.path.join(here, 'diagram_data.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 dangling = [e for e in edges if not any(n['id'] == e['from'] for n in nodes)]
