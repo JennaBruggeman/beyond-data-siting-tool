@@ -42,6 +42,16 @@ for r in json.load(open(os.path.join(H, '..', 'data', 'raw', 'van', 'non-market-
     st = (r.get('project_status') or '').lower()
     out['van'].append(dict(t='housing', n=r.get('name') or '', lon=round(g['coordinates'][0], 6), lat=round(g['coordinates'][1], 6), src='vanNMH', u=int(u), s=st, y=r.get('occupancy_year') or ''))
 
+# central heating plants from the CEEDC district-energy inventory (SFU; J.B. download 16 Oct 2026), matched by name to points already located
+# from open data. CEEDC coordinates are not used (they do not match the facilities). Figures as reported, year in brackets.
+CEEDC = {'van': {'Vancouver General Hospital': 'campus heating plant listed in the CEEDC district-energy inventory; no capacity or temperatures published (reported 2017)',
+                 "Children'S And Women'S Health Centre Of British Columbia": 'campus heating plant listed in the CEEDC district-energy inventory; no capacity or temperatures published (reported 2022)'},
+         'edm': {'University of Alberta': 'campus district energy: steam at 205 °C, 590 MW; chilled water at 5 °C, 145 MW; 80 buildings (CEEDC district-energy inventory, reported 2017)'}}
+for k, m in CEEDC.items():
+    hit = set()
+    for x in out[k]:
+        if x['n'] in m: x['de'] = m[x['n']]; x['src2'] = 'ceedcIEF2026'; hit.add(x['n'])
+    print('ceedc', k, sorted(hit), 'missing', sorted(set(m) - hit))
 NETS = {'van': [dict(n='Neighbourhood Energy Utility (NEU)', op='City of Vancouver', kind='compulsory', src='van9552',
           ring=json.load(open(os.path.join(H, '..', 'data', 'networks', 'van_neu_9552_traced.geojson')))['geometry']['coordinates'][0],
           note='Traced from By-law 9552 Schedule A (±45 m). New buildings and major alterations inside must take NEU heat unless the City Engineer finds it not practical or economical (s. 2.1). Heat sent back is credited at 50% of $65.172/MWh. About 70% renewable, mostly sewage heat recovery; network at 65 °C minimum, 45 °C maximum return.')],
