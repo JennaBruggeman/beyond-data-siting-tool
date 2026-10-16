@@ -36,7 +36,7 @@ const LIMITS=[
  'Grid: no utility publishes substation headroom for these cities. The tool says what is known (downtown Vancouver feeder freeze to 2032; Alberta\'s 1,200 MW interim limit, fully allocated) and otherwise "needs the utility\'s answer".',
  'Heat: receivers are candidates by type, not customers. Their monthly heat demand, current heating and willingness are not known; heat "available" is not heat "used".',
  'Edmonton: heights are measured from the City\'s 3D buildings for about 95% of outlines and estimated (floor area ÷ footprint × 4 m) for the rest; district energy areas are not yet traced; floodplain not yet checked. Lot outlines come from Alberta title mapping (© Altalis) via Edmonton Public Schools GIS, current to 1 Sep 2025, used for academic research.',
- 'People: census population is not loaded; sound is a screening estimate without walls or barriers; the watched edge is recorded only by site visit.',
+ 'People: census counts (2021) are spread evenly within each dissemination area, so near a boundary they are estimates; sound is a screening estimate without walls or barriers; the watched edge is recorded only by site visit.',
  'Operator figures (spec sheets, websites) are claims and are labelled as such. Industry surveys are labelled as surveys.',
  'Security: the tool shows generic equipment only and nothing that would help defeat a facility\'s security.',
 ];

@@ -369,8 +369,8 @@
      "rainwater"
     ],
     "rules": {
-     "vancouver": "allowed (cooling-tower make-up)",
-     "edmonton": "variance needed"
+     "vancouver": "allowed: rainwater may be used as cooling-tower make-up (VBBL 2025 Table 2.7.1.3); operating permit and professional design",
+     "edmonton": "alternative solution from the City needed; City must support and oversee monitoring (Alberta notice, 2021)"
     },
     "changes": [
      "water from the city ↓",
@@ -385,6 +385,10 @@
     "readiness_basis": "Microsoft, Netherlands and Ireland, partial (operator claim, no figures).",
     "readiness_sources": [
      "msWaterFacts"
+    ],
+    "rule_sources": [
+     "vbbl2025_272",
+     "abAltSol2021"
     ]
    },
    {
@@ -412,6 +416,10 @@
     "readiness_basis": "Loudoun Water reclaimed-water supply to data centres for cooling (utility).",
     "readiness_sources": [
      "loudounWater"
+    ],
+    "rule_sources": [
+     "mv_ut019",
+     "abAltSol2021"
     ]
    },
    {
@@ -424,8 +432,8 @@
      "treatment_energy"
     ],
     "rules": {
-     "vancouver": "not for cooling: 2025 by-law allows greywater only within one single-family dwelling (Art. 2.7.1.2(3))",
-     "edmonton": "variance needed"
+     "vancouver": "not for cooling: greywater only as NSF 350 Class R, reused in the same dwelling unit (VBBL 2025 Art. 2.7.1.2(3))",
+     "edmonton": "alternative solution needed (Alberta notice, 2021)"
     },
     "changes": [
      "water ↓",
@@ -439,7 +447,11 @@
     },
     "readiness": "speculative",
     "readiness_basis": "None found; a data centre has too few occupants to make much greywater.",
-    "readiness_sources": []
+    "readiness_sources": [],
+    "rule_sources": [
+     "vbbl2025_272",
+     "abAltSol2021"
+    ]
    },
    {
     "id": "blackwater",
@@ -450,8 +462,8 @@
      "treatment_energy"
     ],
     "rules": {
-     "vancouver": "not a permitted source (2025 by-law, Art. 2.7.1.2(2)(f))",
-     "edmonton": "variance needed"
+     "vancouver": "not permitted (VBBL 2025 Art. 2.7.1.2(2)(f))",
+     "edmonton": "alternative solution needed; Alberta Environment authorisation likely (Alberta notice, 2021)"
     },
     "changes": [
      "water ↓",
@@ -466,7 +478,11 @@
     },
     "readiness": "speculative",
     "readiness_basis": "None found.",
-    "readiness_sources": []
+    "readiness_sources": [],
+    "rule_sources": [
+     "vbbl2025_272",
+     "abAltSol2021"
+    ]
    },
    {
     "id": "blowdown",
@@ -2724,9 +2740,10 @@
    "inputs": [
     "it_load_actual"
    ],
-   "coef": "Emerald AI Phoenix 25% for 3 h (preprint); Call for Demand curtailment ≥10%, 4 h, 36 events",
+   "coef": "Emerald AI Phoenix 25% for 3 h (preprint); Call for Demand curtailment ≥10%, 4 h, 36 events; 2026 Call: 15 applications, close to 800 MW requested; results expected after the government transition (BC Hydro, Oct 2026)",
    "sources": [
-    "cfd"
+    "cfd",
+    "bchEIC2026"
    ],
    "conf": 40,
    "status": "literature",
@@ -3033,10 +3050,11 @@
    "inputs": [
     "servers"
    ],
-   "coef": "Dell R760 LCA (2025): 4,177 kg CO2e total (US), manufacturing ≈10–15%; R740 PCF 8,640 ± 8,480 kg",
+   "coef": "Dell R760 LCA (2025): 4,177 kg CO2e total (US), manufacturing ≈10–15%; R740 PCF 8,640 ± 8,480 kg Alissa et al. 2025: making the servers is 8.8% of life-cycle GHG on a US-average grid but about 82% on renewable power — in Vancouver (18 g/kWh) the servers' making is the largest carbon item; in Edmonton (346 g/kWh) running them is.",
    "sources": [
     "dell",
-    "dellR760"
+    "dellR760",
+    "alissa2025lca"
    ],
    "conf": 50,
    "status": "manufacturer LCA (EPEAT-verified)",
@@ -3066,12 +3084,13 @@
    "inputs": [
     "floor_area"
    ],
-   "coef": "461 kg/m² median, no DC benchmark; 13 Oct 2026: still no per-m² data-centre benchmark; Alissa et al. 2025 (Nature) LCA spreadsheets on Zenodo to read (J.B. D10 / Claude)",
+   "coef": "461 kg CO2e/m² median for general buildings (no data-centre per-m² benchmark exists). Alissa et al. 2025 (Microsoft data, air-cooled): the building is 0.6% of a data centre's life-cycle GHG on a US-average grid and about 5% on renewable power — so the building shell is small either way; servers and electricity dominate",
    "sources": [
-    "clf"
+    "clf",
+    "alissa2025lca"
    ],
    "conf": 40,
-   "status": "proxy",
+   "status": "proxy per m²; share confirmed from Alissa et al. 2025",
    "stage": "characterise",
    "source_roles": [
     {
@@ -6162,21 +6181,21 @@
     "receptors",
     "area"
    ],
-   "coef": "Census Profile 2021 at DA level and DA boundaries (J.B. retrievals P1–P3)",
+   "coef": "2021 census counts by dissemination area, spread evenly within each area onto a 100 m grid and summed within 200 m, 500 m and the sound distance: people, households, 65+, under 15, renter households, households spending 30%+ on shelter, people in low income (LIM-AT % × population). Randomly rounded; suppressed values count as 0",
    "sources": [
     "census2021DA"
    ],
    "source_roles": [
     {
      "id": "census2021DA",
-     "term": "population by DA",
+     "term": "counts by dissemination area",
      "role": "data",
      "conf": 80,
      "verified": true
     }
    ],
-   "conf": 0,
-   "status": "gap: census download pending"
+   "conf": 70,
+   "status": "in hand (tool v18, 16 Oct 2026)"
   },
   {
    "id": "jobs",
@@ -6583,8 +6602,9 @@
    "inputs": [
     "it_load_actual"
    ],
-   "coef": "round-trip 85 %, life 15 yr, O&M 2.5 % of capital per yr (NREL ATB 2024); US$385/kWh installed LFP at 100 MW 4 h, 2021 — a floor for urban 1–10 MW (PNNL 2022); 34 ± 15 kWh/m² across built sites (Reber 2023); fire-code basis in BC/AB (NFPA 855 adoption) unconfirmed",
+   "coef": "round-trip 85% (NREL ATB 2024); PNNL 2022 LFP, 2021 US$ installed: 1 MW 518.59/kWh (2 h) and 448.34 (4 h), 10 MW 461.15 and 410.70 — about 10% above the 100 MW figure of 385; 2030: 340.46 (1 MW 4 h), 311.11 (10 MW 4 h); RTE 83% at the transformer, 2,400 cycles at 80% DOD, 16-year life; 34 ± 15 kWh/m² across built sites (Reber 2023); fire-code basis in BC/AB (NFPA 855 adoption) unconfirmed",
    "sources": [
+    "pnnl2022fig43",
     "atb2024_batt",
     "pnnl2022",
     "reber2023"
@@ -6613,7 +6633,7 @@
     }
    ],
    "conf": 70,
-   "status": "in hand; urban costs a gap",
+   "status": "in hand (1 and 10 MW costs, 16 Oct 2026); fire code a gap",
    "trial": "opportunity"
   },
   {
@@ -10121,7 +10141,7 @@
   "ieaEnergyAI": "IEA, Energy and AI (2025): 'a data centre can be operational in two to three years' — https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai",
   "dlrContracts": "Digital Realty 10-K FY2024, Item 1: 0–1 MW colocation 'Contract length generally 2-5 years'; >1 MW 'generally 5-10+ years' (OPERATOR FILING) — https://www.sec.gov/Archives/edgar/data/1297996/000155837025001424/dlr-20241231x10k.htm",
   "velkova2019": "Velkova 2019, 'Data centers as impermanent infrastructures', Culture Machine 18: operators 'tend to limit their lifespan to six years only'; Ericsson Vaudreuil QC shut down less than a year after inauguration — https://culturemachine.net/vol-18-the-nature-of-data-centers/data-centers-as-impermanent/",
-  "census2021DA": "Statistics Canada, Census Profile 2021, 98-401-X2021006 (dissemination areas; BC file 006_BC_CB, Prairies 006_Prairies); DA boundary file 92-169-X — https://www150.statcan.gc.ca/n1/en/catalogue/98-401-X2021006",
+  "census2021DA": "Statistics Canada, Census Profile 2021, dissemination areas (98-401-X2021006, BC and Prairies files) and 2021 DA cartographic boundaries (92-160-X, lda_000b21a_e); J.B. downloads 16 Oct 2026; selected counts extracted on J.B.'s computer for CD 5915 (Greater Vancouver, 3,590 DAs, population 2,642,825) and CD 4811 (Division No. 11, 1,952 DAs) — https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/download-telecharger.cfm?Lang=E",
   "statcanEP2024": "Statistics Canada 46-28-0001 (20 Feb 2024), Estimation of Energy Poverty Rates Using the 2021 Census: energy bills ≥10 % of after-tax income; Canada 5.6 %, BC 4.9 %, Alberta 7.3 %; provincial only. CUSP's tool is no longer at energypoverty.ca (observed 13 Oct 2026) — https://www150.statcan.gc.ca/n1/pub/46-28-0001/2024001/article/00001-eng.htm",
   "panFang2025": "Pan Fang & Greenstein 2025, 'Where the cloud rests: the economic geography of data centers', Strategy Science 10(4) (abstract): third-party firms favour urban settings and are 'sensitive to buyer demand for proximity'; cloud providers have 'a lower propensity for locating in urban areas'",
   "malecki2002": "Malecki 2002, Economic Geography 78(4):399–424 (abstract): 'a global bias of Internet backbone networks toward world cities', tempered by urban areas 'that serve as interconnection points'",
@@ -10283,7 +10303,12 @@
   "abEUA2026": "Electric Utilities Act, SA 2003, c E-5.1, current consolidation in force since 6 Feb 2026 (CanLII, read by Claude 15 Oct 2026; amended by 2022 c 8 = Bill 22): s. 1(1)(vv.1) \"self-supply\"; s. 2(1)(b) the Act does not apply to self-supply \"consumed solely on that property by that owner or tenant\"; s. 18(2) \"All electric energy entering or leaving the interconnected electric system must be exchanged through the power pool\" unless ss. 39(1.1) or 105(1.1) or regulations provide otherwise. So surplus leaving the site goes through the power pool or the micro-generation rules; there is no separate export right — https://www.canlii.org/en/ab/laws/stat/sa-2003-c-e-5.1/latest/sa-2003-c-e-5.1.html",
   "nrcanPVmunic": "NRCan, Photovoltaic potential and solar resource maps of Canada — municipal values (CSV, J.B. download 15 Oct 2026; Canadian Forest Service with CanmetENERGY; CERES 1974–1993 insolation, 144 stations; performance ratio 0.75; \"within about 10%\" of lifetime averages). Annual kWh/kWp — Vancouver: horizontal 892, latitude tilt 1007, vertical 716; Edmonton: horizontal 944, latitude tilt 1244, vertical 989; Spruce Grove (proxy for Parkland County / Acheson): horizontal 942, latitude 1232 — https://natural-resources.canada.ca/energy-sources/renewable-energy/photovoltaic-potential-solar-resource-maps-canada",
   "aucDSI2021": "AUC, Distribution System Inquiry — Final Report, Proceeding 24116, 19 Feb 2021 (read by Claude 15 Oct 2026): p. 60 \"The question arose during the inquiry whether any regulatory oversight was required of EV charging stations that provide public access to charging services. Most parties were of the view that no additional regulatory oversight is required at this time\"; p. 68 \"most parties agree that EV charging stations, similar to electricity storage, are not defined clearly in legislation and their regulatory status within the evolving electricity system is unclear\"; p. 69 no party suggested charging owners have \"any significant monopolistic advantages\" — https://media.auc.ab.ca/prd-wp-uploads/2021/12/24116_X_Distribution-System-Inquiry-Final-Report_000839.pdf",
-  "bchTariff2026": "BC Hydro Electric Tariff (PDF, J.B. download 15 Oct 2026; read by Claude): RS 1600/1601/1610/1611 Large General Service, Revision 16, effective 1 Apr 2026 (BCUC G-76-25): 29.99 ¢/day, $13.83/kW of billing demand, 6.79 ¢/kWh, for ≥150 kW or >550,000 kWh a year; RS 1830 Transmission Service, Revision 3, effective 1 Apr 2026: supply at 60 kV or higher, $12.178/kVA, 4.914 ¢/kWh; RS 2289 Self-Generation Service, original, effective 1 Jul 2026 (G-64-26): only for customers taking service at distribution voltage; clean or renewable facility ≤100 kW nameplate or ≤100 kW per phase net injection, on the same or an adjacent parcel; BC Hydro pays 10 ¢/kWh for net generation, credit balance paid out each 30 April; RS 4100 Public EV Charging (BC Hydro's own stations), effective 1 Apr 2026: Level 2 31.30 ¢/kWh, fast 40.29 ¢/kWh — https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/corporate/tariff-filings/electric-tariff/bchydro-electric-tariff.pdf"
+  "bchTariff2026": "BC Hydro Electric Tariff (PDF, J.B. download 15 Oct 2026; read by Claude): RS 1600/1601/1610/1611 Large General Service, Revision 16, effective 1 Apr 2026 (BCUC G-76-25): 29.99 ¢/day, $13.83/kW of billing demand, 6.79 ¢/kWh, for ≥150 kW or >550,000 kWh a year; RS 1830 Transmission Service, Revision 3, effective 1 Apr 2026: supply at 60 kV or higher, $12.178/kVA, 4.914 ¢/kWh; RS 2289 Self-Generation Service, original, effective 1 Jul 2026 (G-64-26): only for customers taking service at distribution voltage; clean or renewable facility ≤100 kW nameplate or ≤100 kW per phase net injection, on the same or an adjacent parcel; BC Hydro pays 10 ¢/kWh for net generation, credit balance paid out each 30 April; RS 4100 Public EV Charging (BC Hydro's own stations), effective 1 Apr 2026: Level 2 31.30 ¢/kWh, fast 40.29 ¢/kWh — https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/corporate/tariff-filings/electric-tariff/bchydro-electric-tariff.pdf",
+  "vbbl2025_272": "Vancouver Building By-law 2025, Book II, Div. B, Art. 2.7.1.2–2.7.1.3 and Table 2.7.1.3 (read by Claude 16 Oct 2026): a non-potable system may collect only rainwater, clear-water waste and Class R greywater used in the same dwelling unit; blackwater, groundwater, road runoff and perimeter drainage are not permitted; treated rainwater and clear-water waste may be used for \"make-up water for cooling towers, adiabatic cooling systems\"; operating permit (2.7.5.3) and professional design (2.7.6.1) required — https://vancouver.ca/files/cov/2025-vbbl-book-II-insert-pages.pdf",
+  "abAltSol2021": "Government of Alberta, Notice: Alternative Solutions Guide for Small System Water Reuse and Stormwater Use (Jan 2021; read by Claude 16 Oct 2026): reuse beyond toilet and urinal flushing or sub-surface irrigation needs an alternative solution from the local authority having jurisdiction; the municipality must support it and oversee monitoring; Water Act / EPEA authorisation from Alberta Environment may be needed; projects serving more than one property are led by Alberta Environment — https://open.alberta.ca/publications/notice-alternative-solutions-guide-small-system-water-reuse-stormwater-use",
+  "pnnl2022fig43": "PNNL-33283 (Viswanathan et al., Aug 2022), Figure 4.3 p. 24, Li-ion LFP total installed cost, 2021 (US$/kWh): 1 MW 2 h 518.59, 4 h 448.34; 10 MW 2 h 461.15, 4 h 410.70; 2030: 1 MW 4 h 340.46, 10 MW 4 h 311.11; fixed O&M 1 MW 4 h $5.05/kW-yr; RTE 83%, 2,400 cycles at 80% DOD, 16-year calendar life (read by Claude 16 Oct 2026; J.B. download) — https://www.sandia.gov/app/uploads/sites/256/2024/02/ESGC-Cost-Performance-Report-2022-PNNL-33283.pdf",
+  "alissa2025lca": "Alissa et al. 2025, Nature 641:331–338, LCA tool workbooks (Zenodo 14268168; J.B. download): per virtual core per year on the 2021 US grid, air-cooled — building 0.6% of life-cycle GHG, servers 8.8%, use phase 90.4%; with 100% renewable electricity the total falls to 10.7% of that and servers become 82% of what remains (building 5%). Building figures come from a Microsoft bill of materials; no per-m² value is given (read by Claude 16 Oct 2026) — https://zenodo.org/records/14268168",
+  "bchEIC2026": "BC Hydro, Emerging industries connections (page saved by J.B., Oct 2026; read by Claude): the 2026 Call for Demand for AI and data centres is closed — \"15 applications representing close to 800 megawatts (MW) in total load request\"; process enabled by Bill 31; feasibility results delivered 24 Aug, supplemental applications due 9 Sep, withdrawal deadline 16 Sep; with a provincial election called, results are expected after the government transition later in 2026 — https://app.bchydro.com/accounts-billing/electrical-connections/large-load/emerging-industries-connections.html"
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ; ATCO North Mid-Use $1.062/GJ → ≈ $11/MWh heat — https://www.ucahelps.alberta.ca/regulated-rates.aspx",

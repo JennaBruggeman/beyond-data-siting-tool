@@ -191,3 +191,12 @@ Running record of decisions J.B. has made about the tool's logic, in the order m
 - Alberta export: Electric Utilities Act consolidation (in force 6 Feb 2026) — self-supply exempt only when consumed on the property (s. 2(1)(b)); energy leaving the site goes through the power pool (s. 18(2)).
 - BC Hydro tariff: LGS and RS 1830 prices confirmed (effective 1 Apr 2026). RS 2289 is only for customers at distribution voltage, so a data centre on transmission service (60 kV or higher) cannot sell solar under it. RS 4100 (BC Hydro public EV charging) prices noted.
 - Census: the files received are census subdivisions (whole municipalities), not dissemination areas; the DA file is still needed for "people affected".
+
+## 16 Oct 2026 — v18 continued: census, water rules, battery costs, LCA shares
+
+- People tab: 2021 census by dissemination area (both regions, extracted on J.B.'s computer) spread evenly over each area onto a 100 m grid; the tab sums people, households, 65+, under 15, renters, shelter-cost burden and low income within 200 m, 500 m and the sound distance. Indigenous identity was not carried into the tool.
+- Water: VBBL 2025 Table 2.7.1.3 — rainwater and clear-water waste may be cooling-tower make-up in Vancouver; greywater only within a single dwelling; blackwater not permitted. Alberta: any reuse beyond toilets or sub-surface irrigation needs an alternative solution from the City, which must support and oversee it.
+- Battery: PNNL 2022 LFP at 1 MW 448 and 10 MW 411 US$/kWh (4 h, 2021), about 10% above the 100 MW figure.
+- Embodied carbon: Alissa et al. 2025 — the building is under 1% of life-cycle GHG on a US-average grid (about 5% on renewable power); making servers is 9% on that grid but about 82% on renewable power. In Vancouver the servers' making dominates; in Edmonton running them does.
+- BC Hydro 2026 Call: 15 applications, close to 800 MW requested; results after the government transition.
+- Parkland County (Acheson) dropped: a case study for J.B., not a tool site.

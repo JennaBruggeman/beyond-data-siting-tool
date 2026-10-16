@@ -46,7 +46,7 @@ const SRC2={
 // evidence kind for each source line (shown as a small badge): record = public record or regulator; peer = peer-reviewed or government lab;
 // survey = industry survey; claim = operator or manufacturer claim; physics = physical relation; transfer = figure from elsewhere; assume = assumption
 const EV={env:'record',hall:'filed',size:'claim',plant:'claim',pue:'survey',lf:'peer',cap:'peer',cop:'peer',fuel:'record',svc:'record',homes:'record',grid:'record',neu:'record',reach:'transfer',recv:'record',jobs:'transfer',noise:'record',grid2:'record',floor:'record',
- elec:'record',pv:'peer',batt:'peer',ups:'claim',dr:'record',ev:'claim',gen:'record',ctl:'peer',evap:'physics',wbe:'peer',rain:'record',reuse:'record',wprice:'record',sewer:'record',srv:'peer',ew:'claim',cu:'claim',eit:'claim',eb:'peer',snd:'claim',lf2:'record',light:'record',so:'transfer',watch:'assume',ppl:'assume'};
+ elec:'record',pv:'peer',batt:'peer',ups:'claim',dr:'record',ev:'claim',gen:'record',ctl:'peer',evap:'physics',wbe:'peer',rain:'record',reuse:'record',wprice:'record',sewer:'record',srv:'peer',ew:'claim',cu:'claim',eit:'claim',eb:'peer',snd:'claim',lf2:'record',light:'record',so:'transfer',watch:'assume',ppl:'record'};
 const EVL={record:'public record',filed:'filed plans or application',peer:'research or government lab',survey:'industry survey',claim:'operator or maker claim',physics:'physics',transfer:'transferred from elsewhere',assume:'assumption or gap'};
 const badge=k=>{ const e=EV[k]; return e?`<span class="evb ev-${e}" title="${EVL[e]}">${EVL[e]}</span> `:''; };
 const src=k=>`<div class="src">${badge(k)}${esc(SRC2[k])}</div>`;
@@ -374,7 +374,7 @@ const SRC3={
  srv:'LBNL 2024: about 600 W per server (register: servers)', ew:'register: ewaste (server masses 21.25–26.3 kg, 6-year refresh)', cu:'register: copper_tonnes (Copper Development Association 2023 — industry figure)',
  eit:'register: embodied_it (Dell R760 life-cycle assessment 2025 — manufacturer)', eb:'register: embodied_building (461 kg CO₂e/m² median; no data-centre benchmark)',
  snd:'register: noise_level (screen Lp = Lw − 20 log r − 8; Trane RTAF 333–1,010 kW, Eurovent: Lw 91–101 dBA per unit)', lf:'register: lf_flag (AUC Rule 012 s. 4.5)', light:'register: light_at_window (CIE 150:2017; Edmonton Bylaw 20001 s. 5.120(3); Vancouver: no lux limit)',
- so:'register: standoff (Ontario GO-ITS 25.18, transferred)', watch:'register: watched_area (field observation, labelled as one person\'s)', ppl:'register: people_affected (census download pending — a gap)',
+ so:'register: standoff (Ontario GO-ITS 25.18, transferred)', watch:'register: watched_area (field observation, labelled as one person\'s)', ppl:'Statistics Canada, Census 2021 Profile by dissemination area (98-401-X2021006) and DA boundaries; counts spread evenly within each area',
 };
 const s3=k=>`<div class="src">${badge(k==='lf'?'lf2':k)}${esc(SRC3[k])}</div>`;
 function energyView(){
@@ -454,7 +454,11 @@ function materialsView(){
   $('#side').innerHTML=h; wireTabs(); BD.draw();
   show3d('materials',{site:f,racks});
 }
+const CENSUS={};
+function censusNear(city,c,r){ const d=CENSUS[city]; if(!d||d==='loading') return null; const C=d.cell, t=[0,0,0,0,0,0,0];
+  for(const q of d.cells){ const x=(q[0]+0.5)*C-c[0], y=(q[1]+0.5)*C-c[1]; if(x*x+y*y<=r*r) for(let i=0;i<7;i++) t[i]+=q[i+2]; } return t; }
 function socialView(){
+  if(!CENSUS[BD.S.city]){ const city=BD.S.city; CENSUS[city]='loading'; fetch('census_'+city+'.json').then(r=>r.json()).then(d=>{ CENSUS[city]=d; if(BD.S.tab==='social'&&BD.S.city===city) socialView(); }).catch(()=>{ CENSUS[city]=null; }); }
   const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, fac=mw*R.pue[1]; const n=Math.max(1,Math.ceil(fac));
   const lw=[91+10*Math.log10(n),101+10*Math.log10(n)];
   const lim=f.city==='van'?(/^(MC-1|MC-2|DD|M-1|M-1A|M-1B|M-2|IC-1|IC-2|IC-3|I-1|I-1A|I-1B|I-1C|I-2|I-3|I-4|CWD|DEOD)$/.test(f.zone)?55:/^(C-|FC-|FCCDD|BCPED|HA-|R3-|R4-|R5-|RR-3)/.test(f.zone)?50:45):50;
@@ -483,7 +487,7 @@ function socialView(){
   <dt>Ground floor</dt><dd>${f.ground?'this zone keeps the ground floor for other uses: it could meet the street':'nothing in the zone requires another use at grade'}</dd>
   <dt>Watched area</dt><dd>${state('cj')}seen only on site: cameras and signs visible from public space, recorded as one person's account</dd>
   <dt>Light at night</dt><dd>${f.city==='van'?'Vancouver sets no lux limit':'Edmonton requires light directed downward and away (no number)'}; the international reference is 10 lx before and 2 lx after curfew at a window</dd></dl>${s3('so')}${s3('watch')}${s3('light')}
-  <h3>Who is near</h3><dl><dt>Non-market homes within 200 m</dt><dd>${fmt(homes)} (City list; private housing not counted)</dd><dt>People within reach</dt><dd>${state('cj')}census population not yet loaded</dd><dt>Work</dt><dd>${rng(Math.max(1,mw*f.m2MW[0]/R.hallShare[1]/R.jobsM2),mw*f.m2MW[1]/R.hallShare[0]/R.jobsM2,'')} operating jobs (Virginia ratio, transferred)</dd></dl>${s3('ppl')}${src('jobs')}
+  <h3>Who is near</h3><dl><dt>Non-market homes within 200 m</dt><dd>${fmt(homes)} (City list; private housing not counted)</dd>${peopleRows(f,dist)}<dt>Work</dt><dd>${rng(Math.max(1,mw*f.m2MW[0]/R.hallShare[1]/R.jobsM2),mw*f.m2MW[1]/R.hallShare[0]/R.jobsM2,'')} operating jobs (Virginia ratio, transferred)</dd></dl>${s3('ppl')}${src('jobs')}
   ${mathBox([
     `Cooling units: power at the meter ${n1(fac)} MW, about one unit per MW → <b>${n}</b> unit${n>1?'s':''} (an assumption).`,
     `Together: Lw per unit 91 (low-noise) to 101 dBA (standard) + 10 × log₁₀(${n}) = <b>${n1(lw[0])}–${n1(lw[1])} dBA</b>.`,
@@ -494,6 +498,14 @@ function socialView(){
   <div class="draftnote">Draft wording (Claude) for J.B. Sound is a screening estimate: manufacturer-rated levels, no barriers, ground or buildings.</div>`;
   $('#side').innerHTML=h; wireTabs(); $('#notes').oninput=e=>{ try{ localStorage.setItem(key,e.target.value); }catch(err){} }; BD.draw();
   show3d('social',{site:f,plant:plantPerMW(false)[1]*mw,noise:{lw,limit:lim,limitFor}});
+}
+
+function peopleRows(f,dist){
+  const c=CENSUS[f.city]; if(c==='loading'||c===undefined) return `<dt>People within reach</dt><dd>loading the census…</dd>`; if(!c) return `<dt>People within reach</dt><dd>${state('cj')}census could not load</dd>`;
+  const rs=[[200,'within 200 m'],[500,'within 500 m'],[Math.min(600,Math.round(dist[1])),'inside the sound distance ('+fmt(Math.min(600,dist[1]))+' m)']];
+  const rows=rs.map(([r,l])=>{ const t=censusNear(f.city,f.c,r); const p=t[0]; const pc=(a,b)=>b>0?Math.round(100*a/b)+'%':'—';
+    return `<dt>${l}</dt><dd>about ${fmt(Math.round(p/10)*10)} people in ${fmt(Math.round(t[3]/5)*5)} households · ${pc(t[1],p)} aged 65+ · ${pc(t[2],p)} under 15 · ${pc(t[4],t[3])} of households rent · ${pc(t[5],t[3])} spend 30%+ of income on shelter · ${pc(t[6],p)} in low income</dd>`; }).join('');
+  return rows+`<dt>How counted</dt><dd>2021 census, spread evenly over each dissemination area and summed by 100 m cell — an estimate, rounded</dd>`;
 }
 
 /* ---------- precedents: real buildings against this site's range ---------- */
