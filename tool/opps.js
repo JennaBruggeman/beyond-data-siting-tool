@@ -75,11 +75,11 @@ function evNear(f){ const E2=(BD._EVc||{})[f.city]; if(!E2) return null; const m
 async function loadWP(){ if(BD._WP!==undefined) return; try{ const r=await fetch('water_permits_van.json'); BD._WP=r.ok?await r.json():null; }catch(e){ BD._WP=null; } }
 function wpNear(f,t,R){ const W=BD._WP; if(!W||f.city!=='van') return null; const m=BD.S.meta.van, k=Math.cos(m.lat0*Math.PI/180)*111320; let n=0,d=1e9; for(const [la,lo,ty] of W.pts){ if(ty!==t) continue; const q=Math.hypot((lo-m.lon0)*k-f.c[0],(la-m.lat0)*110540-f.c[1]); if(q<=R) n++; d=Math.min(d,q); } return {n,d}; }
 async function oppIndex(){ BD._O=await BD.opps(); await loadEV(); await loadWP(); if(BD._PR===undefined){ try{ const r=await fetch('public_rooms_van.json'); BD._PR=r.ok?await r.json():null; }catch(e){ BD._PR=null; } } const c=ctx(), e=c.e; BD.S.view2='tab';
-  let h=e.tabBar('opps2')+`<h2>What else it could do here</h2><p class="draft">Every opportunity the register knows, in a fixed order by family. Each is tested at this site gate by gate; a gate that is not met says why. Nothing is ranked.</p>
+  let h=e.tabBar('opps2')+`<h2>What else it could do here</h2><p class="draft">Every opportunity, <span class="k">tested gate by gate</span> at this site. Nothing is ranked.</p>
   <div class="legend2">${Object.keys(GS).map(k=>gp(k)).join(' ')}</div>`;
   for(const [fam,list] of FAM){ h+=`<h3>${esc(fam)}</h3>`; for(const n of list){ const {L,G}=gates(n,c); const s=summary(G);
       h+=`<div class="addrow"><div>${esc(n)} ${L.readiness?BD.rdPill(L.readiness):''}<div class="src">${GATES.map(g=>`<span title="${esc(g+': '+G[g][1])}" style="color:${GS[G[g][0]][1]}">${g}</span>`).join(' · ')}</div></div><div><button class="btn" data-op="${esc(n)}">Explore ›</button></div></div>`; } }
-  h+=`<div class="draftnote">Draft wording (Claude) for J.B. Each gate's reason is on hover and in the card.</div>`;
+  h+=`<div class="draftnote">Each gate's reason is on hover and in the card.</div>`;
   $('#side').innerHTML=h; e.wireTabs(); document.querySelectorAll('#side [data-op]').forEach(b=>b.onclick=()=>oppCard(b.dataset.op)); BD.draw(); e.show3d('model',{site:c.f}); }
 function oppCard(n){ const c=ctx(), {L,G}=gates(n,c), i=ORDER.findIndex(o=>o.n===n), it=ORDER[i];
   const prev=ORDER[(i-1+ORDER.length)%ORDER.length], next=ORDER[(i+1)%ORDER.length];
@@ -89,7 +89,7 @@ function oppCard(n){ const c=ctx(), {L,G}=gates(n,c), i=ORDER.findIndex(o=>o.n==
   <h3>Rules, rung by rung</h3>${ladder}
   <h3>Not yet known</h3><p class="sub">${esc((L.unknowns||[]).join('; ')||'—')}</p><h3>How proven</h3><p class="sub">${esc(L.basis||'')}</p>${L.visual?`<p class="sub">Drawn as: ${esc(L.visual)}</p>`:''}
   <h3>Sources</h3>${BD.srcList((L.sources||[]).concat(...(Array.isArray(L.rules)?L.rules.map(x=>x.sources||[]):[]),['vanUses2026','edmUses2026']))}
-  <div class="navb"><button class="sec" id="opv">‹ ${esc(prev.n)}</button><button class="sec" id="opn">${esc(next.n)} ›</button></div><div class="draftnote">Draft wording (Claude) for J.B. "Possible here" means every gate the tool can test passes; it is not a recommendation.</div>`,
+  <div class="navb"><button class="sec" id="opv">‹ ${esc(prev.n)}</button><button class="sec" id="opn">${esc(next.n)} ›</button></div><div class="draftnote">"Possible here" means every gate the tool can test passes; it is not a recommendation.</div>`,
   el=>{ $('#opv').onclick=()=>oppCard(prev.n); $('#opn').onclick=()=>oppCard(next.n); });
   // its own 3D: what the opportunity would occupy, generic
   const M=c.M, d={site:c.f,boxes:[]}; if(M&&M.F&&M.ring){ const F=M.F;

@@ -66,7 +66,7 @@ BD.plant={
  /* after the footprint: put units on the roof and in the yard, and report what does not fit */
  roof(m){
   const A=BD.S.answers, P=m.plant, F=m.F; if(!P||!F||!m.foot) return; const s=P.s;
-  const roofRing=m.foot, roofH=m.existing?m.H:m.H;
+  const roofRing=m.foot, roofH=m.existing?(m.roofH||m.H):m.H;
   const [ru0,ru1,rv0,rv1]=localBounds(F,roofRing);
   const put=(k,count,base,where)=>{ if(!count||!k) return 0; let got=[];
     if(where==='roof') got=pack(F,roofRing,[],ru0,ru1,rv0,rv1,k,count,false);

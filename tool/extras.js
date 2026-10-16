@@ -29,16 +29,17 @@ BD.afterIntro=function(){
 };
 
 /* ---------- what this tool can't tell you; data dates; versions ---------- */
+const K=t=>`<span class="k">${t}</span>`;
+const LIMITS_LEAD=`Ranges, not designs: screening figures from published sources, ${K('not a substitute for an engineer, a utility study or a permit review')}.`;
 const LIMITS=[
- 'It estimates ranges, not designs. Every number is a screening figure from published sources; none replaces an engineer, a utility study or a permit review.',
- 'Zoning: the tool reads zone schedules as written. Whether support rooms may sit on a ground floor where "bulk data storage" is barred (Vancouver I-2, I-3, FC-2) is for the City to confirm; both readings are shown. Yards and setbacks for I-2 are not yet read, so floor area is "up to".',
- 'Size: real data centres sit in the lower half of the tool\'s range (precedent catalogue). Small downtown buildings can exceed it. Only 11 buildings worldwide publish both IT load and floor area in a public record.',
- 'Grid: no utility publishes substation headroom for these cities. The tool says what is known (downtown Vancouver feeder freeze to 2032; Alberta\'s 1,200 MW interim limit, fully allocated) and otherwise "needs the utility\'s answer".',
- 'Heat: receivers are candidates by type, not customers. Their monthly heat demand, current heating and willingness are not known; heat "available" is not heat "used".',
- 'Edmonton: heights are measured from the City\'s 3D buildings for about 95% of outlines and estimated (floor area ÷ footprint × 4 m) for the rest; district energy areas are not yet traced; floodplain not yet checked. Lot outlines come from Alberta title mapping (© Altalis) via Edmonton Public Schools GIS, current to 1 Sep 2025, used for academic research.',
- 'People: census counts (2021) are spread evenly within each dissemination area, so near a boundary they are estimates; sound is a screening estimate without walls or barriers; the watched edge is recorded only by site visit.',
- 'Operator figures (spec sheets, websites) are claims and are labelled as such. Industry surveys are labelled as surveys.',
- 'Security: the tool shows generic equipment only and nothing that would help defeat a facility\'s security.',
+ ['Zoning',`Read as written. ${K('Support rooms on a ground floor')} where "bulk data storage" is barred (Vancouver I-2, I-3, FC-2): the City to confirm; both readings shown. I-2 yards not yet read, so floor area is ${K('"up to"')}.`],
+ ['Size',`Real data centres sit in the ${K('lower half')} of the range; small downtown buildings can exceed it. ${K('Only 11 buildings')} worldwide publish both IT load and floor area.`],
+ ['Grid',`${K('No utility publishes substation headroom.')} Known: downtown Vancouver feeder freeze to 2032; Alberta's 1,200 MW interim limit, fully allocated. Otherwise "needs the utility's answer".`],
+ ['Heat',`Receivers are ${K('candidates by type, not customers')}. Demand, current heating and willingness are unknown: heat available is not heat used.`],
+ ['Edmonton',`Heights from the City's 3D buildings (about 95%), the rest estimated from floor area. ${K('District energy areas not yet traced; floodplain not yet checked.')} Lots © Altalis via Edmonton Public Schools GIS, to 1 Sep 2025, academic use.`],
+ ['People',`Census 2021 spread evenly within each area, so ${K('estimates near boundaries')}. Sound is ${K('screening only')}, no walls or barriers. The watched edge needs a site visit.`],
+ ['Claims',`Operator figures are ${K('labelled as claims')}; industry surveys as surveys.`],
+ ['Security',`${K('Generic equipment only')}; nothing that would help defeat a facility's security.`],
 ];
 const DATA=[
  ['Vancouver parcels','City of Vancouver Open Data, property parcel polygons','Oct 2026'],
@@ -69,11 +70,11 @@ const CHANGES=[
 ];
 function aboutView(){
   $('#side').innerHTML=`<button class="x" id="back">← Back</button><div class="kind">About this tool</div><h2>What this tool can't tell you</h2>
-  <ul class="lim">${LIMITS.map(t=>`<li>${draft(esc(t))}</li>`).join('')}</ul>
+  <p>${LIMITS_LEAD}</p><dl class="lim">${LIMITS.map(([l,t])=>`<dt>${l}</dt><dd>${t}</dd>`).join('')}</dl>
   <h3>Data and their dates</h3><div class="tt"><table><thead><tr><th>Layer</th><th>Source</th><th>As of</th></tr></thead><tbody>${DATA.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
   <h3>Versions</h3><div class="tt"><table><tbody>${CHANGES.map(r=>`<tr><td>v${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join('')}</tbody></table></div>
   <h3>Evidence badges</h3><p class="sub">Each source line carries a badge: <span class="evb ev-record">public record</span> <span class="evb ev-peer">research or government lab</span> <span class="evb ev-survey">industry survey</span> <span class="evb ev-claim">operator or maker claim</span> <span class="evb ev-physics">physics</span> <span class="evb ev-transfer">transferred from elsewhere</span> <span class="evb ev-assume">assumption or gap</span></p>
-  <div class="draftnote">Draft wording (Claude) for J.B. Version ${VERSION.n}, ${VERSION.date}.</div>`;
+  <div class="draftnote">Version ${VERSION.n}, ${VERSION.date}.</div>`;
   $('#back').onclick=()=>BD.intro();
 }
 BD.views.about=aboutView;
@@ -134,7 +135,7 @@ function sensView(){
   <p class="sub">Not varied: the zone's floor-space ratio and height (read from the schedule) and the lot area (City record).</p>
   <h3>Heat offered at ${mw} MW of servers</h3>${bars(ht,'GWh/yr')}
   <p class="sub">Not varied: the 60% average load (one source, no range) — every heat figure scales with it directly.</p>
-  <div class="draftnote">Draft wording (Claude) for J.B.</div>`;
+  `;
   $('#back').onclick=()=>BD.fitsView();
 }
 BD.views.sens=sensView;
@@ -161,11 +162,11 @@ function timeView(){
   });
   g+='</svg>';
   $('#side').innerHTML=e.tabBar('time')+`<h2>What changes, and when</h2>
-  <p class="draft">The pipe and the grid connection outlast many generations of servers and several tenants. Each red tick is a moment when the heat could change: new servers may be cooled differently, and a tenant may leave at the end of a contract.</p>
+  <p class="draft">Pipes and grid connections <span class="k">outlast the servers and the tenants</span>. Each red tick is a point where the heat could change.</p>
   <div class="chart" style="overflow-x:auto">${g}</div>
   <h3>Four futures</h3><dl><dt>Tenant changes cooling</dt><dd>${draft('liquid to air: heat offered drops to none; air to liquid: heat could be offered')}</dd><dt>Tenant leaves</dt><dd>${draft('receivers fall back on their own heating at full peak; the grid connection and pipe stay')}</dd><dt>Receiver leaves</dt><dd>${draft('all heat goes back to the dry coolers, so they must stay full size')}</dd><dt>Network arrives</dt><dd>${draft('a district network reaching the site could take what neighbours cannot')}</dd></dl>
   <div class="src"><span class="evb ev-peer">research or government lab</span> register: horizons (LBNL 2024 server life; company filings; ASHRAE plant medians; EN 253 pipe life; Digital Realty contracts — operator; Stockholm Exergi heat contracts — operator).</div>
-  <div class="draftnote">Draft wording (Claude) for J.B.</div>`;
+  `;
   e.wireTabs(); document.body.classList.add('wide'); BD.draw();
 }
 BD.views.time=timeView;
@@ -193,10 +194,10 @@ function citiesView(){
    ['Electricity price','BC Hydro large general service 6.79 ¢/kWh + $13.83/kW a month','Alberta pool averaged $43.68/MWh in 2025, plus wires charges','BC Hydro 2026; AESO 2025','record'],
   ];
   $('#side').innerHTML=e.tabBar('cities')+`<h2>The same data centre in two cities</h2>
-  <p class="draft">${mw} MW of servers, built the same way, in Vancouver and in Edmonton. The building does not change; the grid, the climate and the rules do.</p>
+  <p class="draft">${mw} MW, built the same way in both cities. <span class="k">Only the grid, climate and rules change.</span></p>
   <div class="tt"><table><thead><tr><th></th><th>Vancouver</th><th>Edmonton</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r[0])}<div class="src">${e.badge?'' :''}<span class="evb ev-${r[4]}">${esc({record:'public record',physics:'physics',peer:'research or government lab'}[r[4]])}</span> ${esc(r[3])}</div></td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}</tbody></table></div>
   <p class="sub">${draft(`The same heat is worth about twice as many homes' heating in Vancouver as in Edmonton, because Alberta homes use about twice the heat; but each MWh of heat-pump electricity carries about ${Math.round(R.grid.edm/R.grid.van)} times the carbon in Alberta.`)}</p>
-  <div class="draftnote">Draft wording (Claude) for J.B. Size from the slider; set a size on the What fits page.</div>`;
+  <div class="draftnote">Size from the slider; set a size on the What fits page.</div>`;
   document.body.classList.add('wide'); e.wireTabs(); BD.draw();
 }
 BD.views.cities=citiesView;
@@ -219,7 +220,7 @@ async function siteReport(){
 <div class="small">BEYOND DATA · SITE REPORT · ${date} · tool version ${VERSION.n}</div><h1>${esc(a[0]||'Site')}</h1><div class="acc">${f.city==='van'?'Vancouver':'Edmonton'}</div>
 <h2>In numbers</h2><table>${rows.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table>
 <h2>Sources</h2><p class="small">Zone schedules (Vancouver Zoning and Development By-law; Edmonton Zoning Bylaw 20001). Hall share: Burlington plan set. Hall area per MW: five built Canadian halls (operator claims). PUE: LBNL 2023, Uptime 2025. Load factor: Fan et al. 2007. Capture: LBNL 2014, NREL. COP: DEA 2026; Fjernvarme Fyn 2020 (observed). Homes: NRCan CEUD 2023. Grid carbon: NIR 2026. Receivers: Statistics Canada ODSRF, ODHF, ODEF; City of Vancouver non-market housing.${f.city==='edm'&&sel.ring?' Lot outline: Alberta title mapping (© Altalis) via Edmonton Public Schools GIS, current to 1 Sep 2025; academic use.':''}</p>
-<h2>Read with</h2><p class="small">Ranges, not designs. Operator figures are claims. Heat available is not heat used: receivers' demand, current heating and willingness are not known. Draft wording (Claude) for J.B.</p></body></html>`;
+<h2>Read with</h2><p class="small">Ranges, not designs. Operator figures are claims. Heat available is not heat used: receivers' demand, current heating and willingness are not known. </p></body></html>`;
   const dl=BD.dl; if(!dl) return alertBox('Downloads are not available in this view.');
   try{ await dl.save({filename:`site-report-${(a[0]||'site').replace(/[^A-Za-z0-9]+/g,'-').toLowerCase()}.html`,data:new Blob([html],{type:'text/html'})}); }catch(err){ alertBox('The report was not saved'+(err&&err.code?` (${err.code})`:'')+'.'); }
 }

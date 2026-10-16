@@ -22,7 +22,7 @@ function setup(){
   const bar=document.createElement('div'); bar.style.cssText='position:absolute;left:12px;top:12px;right:12px;display:flex;gap:6px;z-index:3;flex-wrap:wrap;pointer-events:none';
   bar.innerHTML='<button id="v3map" style="pointer-events:auto;background:rgba(30,32,35,.92);border:1px solid #3c4148;border-radius:6px;padding:4px 10px;color:#e9e6e1;cursor:pointer;font-size:12px">← Map</button><span id="v3note" style="background:rgba(30,32,35,.92);border:1px solid #30343a;border-radius:6px;padding:4px 10px;font-size:12px;color:#9d9a94;max-width:640px"></span>';
   const key=document.createElement('div'); key.id='v3key'; key.style.cssText='position:absolute;left:12px;bottom:12px;background:rgba(30,32,35,.92);border:1px solid #30343a;border-radius:6px;padding:6px 10px;font:300 11.5px/1.5 "Open Sans",system-ui,sans-serif;color:#9d9a94;z-index:3;max-width:320px';
-  wrap.appendChild(labels); wrap.appendChild(bar); wrap.appendChild(key); wrap.appendChild(tip); map.appendChild(wrap);
+  wrap.appendChild(labels); wrap.appendChild(bar); wrap.appendChild(key); wrap.appendChild(tip); map.appendChild(wrap); for(const ev of ['pointerdown','pointerup','wheel']) wrap.addEventListener(ev,e=>e.stopPropagation()); // the 2D map captures the pointer on pointerdown, which swallowed clicks on ← Map
   const ren=new T.WebGLRenderer({antialias:true,preserveDrawingBuffer:true}); ren.setPixelRatio(Math.min(window.devicePixelRatio||1,2)); ren.setClearColor(C.bg);
   wrap.insertBefore(ren.domElement,labels); ren.domElement.style.cssText='display:block;width:100%;height:100%';
   const scene=new T.Scene(); const cam=new T.PerspectiveCamera(35,1,1,40000);
@@ -124,8 +124,8 @@ function buildSite(site){
   if(M&&M.plant&&M.plant.yard) dc.add(ringLine(BD.geo.clip(M.ring,M.plant.yard),0.3,C.grey,2,0.6));
   // the building
   let roof=0, foot=null;
-  if(M&&M.existing){ for(const b of (sel.blds||[]).filter(b=>b.f!==3)) dc.add(prism(b.r,Math.max(2,b.h),0,0x221d1e,C.acc,0.9,0.85)); foot=M.foot; roof=M.H;
-    if(A.extent==='part'){ const big=M.foot; const lvl={basement:-4,ground:0,upper:Math.max(4,Math.min(roof-8,roof*0.6)),roof:roof-0.5}[A.floor||'ground']; dc.add(prism(big,4,lvl,0x3a2626,C.acc,1)); } }
+  if(M&&M.existing){ for(const b of (sel.blds||[]).filter(b=>b.f!==3)) dc.add(prism(b.r,Math.max(2,b.h),0,0x221d1e,C.acc,0.9,0.85)); foot=M.foot; roof=M.roofH||M.H;
+    if(A.extent==='part'){ const big=M.foot, rh=M.roofH||roof; const lvl={basement:-4,ground:0,upper:Math.max(4,Math.min(rh-8,rh*0.6)),roof:rh-0.5}[A.floor||'ground']; dc.add(prism(big,4,lvl,0x3a2626,C.acc,1)); } }
   else if(M&&M.foot&&M.footArea>5){ foot=M.foot; roof=M.H; const nF=M.nF[0];
     // equipment only (J.B., 16 Oct: "its not a massing tool"): no building; the floor the servers need is a flat outline, any shape
     dc.add(ringLine(foot,0.2,C.grey,3,0.35)); const sf=M.serverFoot||foot; dc.add(ringLine(sf,0.25,C.acc,2,0.9)); dc.add(prism(sf,0.15,0,0x2a2224,C.acc,0.35,0.0)); foot=sf;
@@ -133,7 +133,7 @@ function buildSite(site){
   else if(sel.pt){ foot=new Float64Array(circlePts(sel.pt[0],sel.pt[1],25,0,8).flatMap(v=>[v.x+site.c[0],-v.z+site.c[1]])); roof=18; dc.add(prism(foot,roof,0,0x221d1e,C.acc,1)); }
   state.foot=foot; state.roof=roof;
   // plant: generic units at the size and clearance the register gives; dashed outline = clearance
-  if(M&&M.plant){ const P=M.plant; const grp={};
+  if(M&&M.plant){ const P=state.equipOnly?{...M.plant,boxes:M.plant.boxes.map(b=>b.kind==='roof'?{...b,base:0,atGrade:1}:b)}:M.plant; const grp={}; // no building drawn, so roof units sit on the ground plane rather than float at roof height
     for(const b of P.boxes){ const col=b.name.indexOf('generator')>=0?C.grey:C.edge; dc.add(prism(b.ring,b.h,b.base,0x26292e,col,0.85)); dc.add(ringLine(b.clear,b.base+0.06,col,1.2,0.45)); (grp[b.name+'|'+b.kind]=grp[b.name+'|'+b.kind]||[]).push(b); }
     state.plantGroups=grp;
     // seen or hidden (J.B., 16 Oct): a screen around the roof plant, housings over each unit, or a louvred plant floor
@@ -162,7 +162,7 @@ function clearOverlay(){ if(R.ov) R.scene.remove(R.ov); R.ov=new T.Group(); R.sc
   if(state.shell){ state.shell.children[0].material.opacity=0.55; } if(state.racks) state.racks.obj.material.opacity=0.35; }
 function roofC(){ return state.foot?BD.centroid(state.foot):state.c; }
 function plantLabels(col){ const G=state.plantGroups||{}; for(const k in G){ const L=G[k], [name,where]=k.split('|'); const b=L[Math.floor(L.length/2)], c=BD.centroid(b.ring);
-    const top=V(c[0],c[1],b.base+b.h), at=top.clone().add(new T.Vector3(0,9+(where==='roof'?4:0),0)); label(`${name} ×${L.length} · ${where}`,at,col?hex(col):'#e9e6e1',{prio:6,from:top}); } }
+    const top=V(c[0],c[1],b.base+b.h), at=top.clone().add(new T.Vector3(0,9+(where==='roof'?4:0),0)); label(`${name} ×${L.length} · ${where}${b.atGrade?' (shown at grade)':''}`,at,col?hex(col):'#e9e6e1',{prio:6,from:top}); } }
 function baseLabels(){ const M=state.M; if(!M) return;
   if(state.foot&&!M.existing){ const c=roofC(); const fl=M.sizedTo?M.sizedTo.floor:M.footArea*M.nF[0]; label(`${BD.S.answers.mw?BD.S.answers.mw+' MW needs ':''}≈ ${BD.fmt(Math.round(fl/100)*100)} m² (${BD.fmt(Math.round(fl*10.7639/1000)*1000)} ft²) of floor · any shape`,V(c[0],c[1],8),'#e9e6e1',{prio:9,from:V(c[0],c[1],0.3)}); }
   if(M.loading){ const c=BD.centroid(M.loading); label(`${M.loadingNeed.cls}s ×${M.loadingNeed.n}`,V(c[0],c[1],10),'#9fb38a',{prio:5,from:V(c[0],c[1],0.4)}); }

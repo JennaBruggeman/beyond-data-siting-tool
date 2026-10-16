@@ -33,7 +33,7 @@ header select{background:var(--bg);border:1px solid var(--line-2);border-radius:
 .tb{display:inline-flex;gap:4px;margin-left:auto}
 .tb button{background:var(--panel-2);border:1px solid var(--line-2);border-radius:6px;width:30px;height:30px;cursor:pointer}
 .tb button:hover{border-color:var(--accent)}
-main{display:grid;grid-template-columns:1fr minmax(320px,440px);min-height:0}
+main{display:grid;grid-template-columns:minmax(320px,440px) 1fr;min-height:0} main>aside{order:-1}
 #map{position:relative;overflow:hidden;cursor:grab;min-width:0;touch-action:none}
 #map.drag{cursor:grabbing}
 #map canvas{display:block;width:100%;height:100%}
@@ -45,7 +45,7 @@ main{display:grid;grid-template-columns:1fr minmax(320px,440px);min-height:0}
 .status{position:absolute;right:12px;top:12px;background:rgba(30,32,35,.92);border:1px solid var(--line);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--muted)}
 .scale{position:absolute;right:12px;bottom:12px;font-size:11px;color:var(--muted);text-align:right}
 .scale b{display:block;height:4px;border:1px solid var(--muted);border-top:0;margin-top:2px}
-aside{border-left:1px solid var(--line);background:var(--panel);overflow:auto;padding:18px 18px 40px;min-width:0}
+aside{border-right:1px solid var(--line);background:var(--panel);overflow:auto;padding:18px 18px 40px;min-width:0}
 .kind{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
 aside .x{float:right;background:transparent;border:1px solid var(--line-2);border-radius:6px;padding:2px 9px;cursor:pointer;color:var(--muted);font-size:12.5px}
 aside .x:hover{border-color:var(--accent);color:var(--fg)}
@@ -56,7 +56,8 @@ dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:8px 0 0;font-
 dt{color:var(--muted)} dd{margin:0;font-variant-numeric:tabular-nums;min-width:0}
 .pill{display:inline-block;border-radius:999px;padding:1px 9px;font-size:12px;font-weight:400;border:1px solid var(--line-2)}
 .pill.yes{border-color:var(--place);color:var(--place)} .pill.case{border-color:#cdb07a;color:#cdb07a} .pill.site{border-color:var(--muted);color:var(--muted)} .pill.no{border-color:var(--faint);color:var(--muted)}
-.draft{color:var(--accent-2)}
+.draft{color:var(--fg)} button.mo{background:none;border:0;padding:0 2px;color:var(--muted);font:inherit;font-size:11.5px;text-decoration:underline dotted;cursor:pointer} button.mo:hover{color:var(--fg)} .k{color:var(--accent-2)}
+dl.lim{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:8px 0;font-size:12.5px;line-height:1.45} dl.lim dt{color:var(--fg)} dl.lim dd{margin:0;color:var(--muted)}
 .draftnote{font-size:11px;color:var(--faint);margin-top:6px}
 .src{font-size:12px;color:var(--faint)} .src a{color:var(--muted)}
 .gap{color:var(--faint);font-style:italic}
@@ -118,7 +119,7 @@ a{color:var(--accent-2)}
 .sec>.b>h3:first-child{margin-top:0}
 .fp{margin:8px 0 0}.fp>summary{list-style:none;cursor:pointer;display:inline-block;font-size:11.5px;color:var(--muted);border:1px solid var(--line-2);border-radius:999px;padding:1px 9px}
 .fp>summary::-webkit-details-marker{display:none}.fp[open]>summary{color:var(--fg)}.fp>div{margin-top:6px;font-size:11.5px;color:var(--muted)}.fp>div .src,.fp>div p{color:var(--muted)}
-.lead{font-size:14px;line-height:1.5;color:var(--accent-2);margin:4px 0 12px}
+.lead{font-size:14px;line-height:1.5;color:var(--fg);margin:4px 0 12px}
 @media (prefers-reduced-motion:reduce){.sec>summary::after{transition:none}}
 .tabs button{background:transparent;border:0;border-bottom:2px solid transparent;padding:6px 8px;font-size:12.5px;color:var(--muted);cursor:pointer}
 .tabs button[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent)}
@@ -126,10 +127,10 @@ a{color:var(--accent-2)}
 .legend2 span{display:inline-flex;align-items:center;gap:6px;margin-right:14px} .legend2 i{display:inline-block;width:10px;height:10px}
 #side .chart svg{display:block;width:100%;min-width:420px;height:auto;font-family:inherit}
 .tt td.r,.tt th.r{text-align:right;min-width:60px}
-body.wide main{grid-template-columns:1fr minmax(320px,680px)}
+body.wide main{grid-template-columns:minmax(320px,680px) 1fr}
 @media (max-width:760px){
   main{grid-template-columns:1fr;grid-template-rows:minmax(260px,1fr) auto}
-  aside{border-left:0;border-top:1px solid var(--line);max-height:52vh}
+  aside{border-right:0;border-top:1px solid var(--line);max-height:52vh} main>aside{order:0}
   .tb{display:none}
   header{gap:8px 10px;padding:8px 12px}
   header h1 span{display:none}
@@ -459,7 +460,7 @@ function startStep(st){
   }
   h+=`<div class="q"><div class="sub">Or a special case: <a href="#" data-sp="modular">a modular unit</a> · <a href="#" data-sp="infra">beside existing infrastructure</a> · <a href="#" data-sp="expand">expanding an existing data centre</a></div>${A.special?`<small>Chosen: ${esc({modular:'a modular or containerised unit',infra:'at existing infrastructure (substation, sewage plant, district energy plant, telecom exchange)',expand:'expanding an existing data centre'}[A.special])} — <a href="#" data-sp="">clear</a></small>`:''}</div>
   <div class="next"><button id="fits">What fits here →</button><span class="sub">The envelope, room for servers and plant, and the largest size that fits.</span></div>
-  <div class="draftnote">Wording is Claude's draft for J.B. to rewrite. Decisions: starting step (J.B., 14 Oct).</div>`;
+  `;
   return h;
 }
 function wireStart(){
@@ -472,10 +473,9 @@ function wireStart(){
 function intro(){ introBase(); if(window.BD&&BD.afterIntro) BD.afterIntro(); }
 function introBase(){ legend();
   $('#side').innerHTML=`<div class="intro"><div class="kind">${S.city==='van'?'Vancouver':'Edmonton'}</div><h2>Pick a site</h2>
-  <p class="draft">Click a parcel, or search an address. The tool shows what is on the lot, whether a data centre is an allowed use there, and then asks what is being built.</p>
-  <p class="sub">Shaded areas are zones where a data centre is allowed or allowed case by case; outlined grey areas have their own site-specific rules. Everywhere else a data centre would need a rezoning — the tool still works there and shows what that would take.</p>
-  <ol class="sub"><li>Choose a city</li><li>Click a parcel</li><li>Say what is being built — or leave the defaults</li></ol>
-  <div class="draftnote">Draft wording (Claude) — for J.B. to rewrite.</div>${srcs(S.city==='van'?['van_data']:['edm_data','edm_lots'])}</div>`;
+  <p class="draft">Click a parcel or search an address.</p>
+    <ol class="sub"><li>Choose a city</li><li>Click a parcel</li><li>Say what is being built — or leave the defaults</li></ol>
+  ${srcs(S.city==='van'?['van_data']:['edm_data','edm_lots'])}</div>`;
 }
 function legend(){ const m=S.meta[S.city];
   const L=S.city==='van'?[['case','Case by case (I-2, I-1C, I-3 A, FC-2)'],['site','Site-specific (CD-1), or not yet reviewed (downtown plan areas)'],['low','Small-scale housing (R1-1, RT): rezoning needed'],['no','Rezoning needed']]:[['yes','Allowed (IH)'],['case','Smaller only, or case by case (IM, BE, UI, FD)'],['site','Site-specific (Direct Control, special areas)'],['low','Small-scale housing (RS, RSF, RR): rezoning needed'],['no','Rezoning needed']];

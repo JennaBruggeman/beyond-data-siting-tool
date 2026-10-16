@@ -218,7 +218,7 @@ function fitsView(){
   ${pos==='upper'?`<dt>Floor strength</dt><dd class="draft">Office floors above grade are designed for 2.4 kPa; equipment rooms need at least 3.6 kPa, and data halls their actual load — likely strengthening.</dd>`:''}
   </dl>${src('pue')}${src('plant')}${src('fuel')}${src('svc')}${f.downtown?src('grid2'):''}${pos==='upper'?src('floor'):''}${mathNeeds(mw,fac,f)}
   <div class="next"><button id="toRecv">What it exchanges →</button><span class="sub">Heat, energy, water, materials and people, each in 3D.</span></div>
-  <div class="draftnote">Draft wording (Claude) for J.B. Every range carries the register's confidence; nothing here is a design.</div>`;
+  <div class="draftnote">Every range carries the register's confidence; nothing here is a design.</div>`;
   $('#side').innerHTML=h;
   $('#back').onclick=()=>{ BD.S.view2=null; BD.scene3d&&BD.scene3d.hide(); BD.card(); BD.draw(); };
   $('#mw').oninput=e=>{ const v=ST[+e.target.value]; $('#mwv').textContent=v; $('#mwn').textContent=near(v)+over(v); e.target.setAttribute('aria-valuetext',v+' MW'); };
@@ -265,7 +265,7 @@ async function recvView(){
   { const EC=BD.ECON; if(EC){ const v=EC.gas[f.city], pe=EC.elec[f.city], nb=v-pe/R.cop[1], nw=v-pe/R.cop[0];
     h+=`<p class="sub"><span class="draft">${esc(`The search circles are Dutch payback distances (RVO 2018: five years at Dutch prices), used only to say where to look. `+(nb<=0?`At ${f.city==='edm'?'Alberta':'BC'} prices the heat pump's electricity costs more than the gas the heat would replace ($${nw.toFixed(1)} to $${nb.toFixed(1)} per MWh), so no route pays back at any distance; each card shows what would have to change.`:`At ${f.city==='van'?'BC':'Alberta'} prices the heat is worth $${nw.toFixed(1)}–${nb.toFixed(1)} per MWh after the heat pump; each receiver's own break-even distance is on its card.`))}</span></p>`; } }
   h+=`${src('reach')}${src('recv')}<p class="sub" style="margin-top:10px">${f.city==='van'?'Vancouver pools and rinks are not separate records in the national database; recreation centres may contain them. Private housing and offices are not mapped yet.':'Edmonton care homes and most hospitals have no location in the national record; private housing and offices are not mapped yet.'}</p>
-  <div class="draftnote">Draft wording (Claude) for J.B.</div>`;
+  `;
   $('#side').innerHTML=h; wireTabs(); BD.draw();
   const A=BD.S.answers; show3d('heat',{site:f,near,nets,plantRecover:plantPerMW(true)[1]*(A.mw||1)});
 }
@@ -332,7 +332,7 @@ async function optionsView(){
   ];
   const fut=o=>[['As planned','the table above'],['Tenant changes cooling',o.recover?'back to air: heat offered drops to none':'to liquid: heat could be offered'],['Tenant leaves',o.recover?'receivers fall back on their own heating at full peak':'nothing depends on it'],['Receiver leaves',o.recover?'all heat goes back to the dry coolers — keep their full size':'—']].map(([a,b])=>`<div><b>${a}</b> <span class="sub">${b}</span></div>`).join('');
   let h=tabBar('opts')+`<h2>Three options, side by side, in no order</h2>
-  <p class="draft">Each option gains something and gives something up. Read across a row to compare; nothing is added up and nothing wins.</p>
+  <p class="draft">Each option gains and gives up something. <span class="k">Nothing is added up; nothing wins.</span></p>
   <div class="opts">${opts.map(o=>`<div class="opt"><div class="kind">${o.id.toUpperCase()}</div><b>${esc(o.name)}</b><div class="sub">${esc(o.gives)}</div></div>`).join('')}</div>
   <div class="tt"><table><thead><tr><th></th>${opts.map(o=>`<th>${o.id.toUpperCase()}</th>`).join('')}</tr></thead><tbody>`;
   for(const [party,rr] of rows){ h+=`<tr class="party"><td colspan="${opts.length+1}">${esc(party)}</td></tr>`;
@@ -341,7 +341,7 @@ async function optionsView(){
   <h3>Four futures</h3><div class="opts">${opts.map(o=>`<div class="opt"><div class="kind">${o.id.toUpperCase()}</div>${fut(o)}</div>`).join('')}</div>
   <div class="legend2">${state('met')}met ${state('chg')}met with a change ${state('not')}not met ${state('cj')}not yet known</div>
   ${src('pue')}${src('lf')}${src('cap')}${src('cop')}${src('homes')}${src('grid')}${net?src('neu'):''}${src('noise')}${src('jobs')}
-  <div class="draftnote">Draft wording and option names (Claude) for J.B. Ranges carry the register's confidence; "not yet known" names what is missing.</div>`;
+  <div class="draftnote">Ranges carry the register's confidence; "not yet known" names what is missing.</div>`;
   $('#side').innerHTML=h; document.body.classList.add('wide'); wireTabs(); BD.draw();
   if(BD.scene3d) BD.scene3d.showOptions(opts.map(o=>({id:o.id,mw:o.mw,name:o.name,recover:o.recover,to:o.to,n:o.id==='c'?14:6,plant:plantPerMW(o.recover)[1]*o.mw,
     caption:o.mw.toFixed(1)+' MW · '+(o.recover?rng(o.r.avail[0]/1000,o.r.avail[1]/1000,'GWh heat offered'):'heat to the air')})),{site:f,near,net:nets.find(n=>n.inside)}).catch(e=>console.warn(e));
@@ -377,7 +377,7 @@ function stepNav(cur){ const st=stepOf(cur)||cur; return `<nav class="path" aria
 function tabBar(cur){ BD.S.tab=cur; const st=stepOf(cur), S=STEPS.find(s=>s[0]===st);
   return stepNav(cur)+(S&&S[2]?`<div class="tabs" role="tablist">${S[2].map(([k,l])=>`<button role="tab" data-tab="${k}" aria-selected="${k===cur}">${l}</button>`).join('')}</div>`:'')
    +(CONTEXT.some(c=>c[0]===cur)?`<div class="tabs" role="tablist">${CONTEXT.map(([k,l])=>`<button role="tab" data-tab="${k}" aria-selected="${k===cur}">${l}</button>`).join('')}</div>`:'')
-   +`<p class="ctx">${BD.S.answers.mw||''} MW of servers · <a href="#" data-tab="prec">Real buildings</a> · <a href="#" data-tab="cities">Two cities</a></p>`+(BD.tabExtra?BD.tabExtra(cur):''); }
+   +`<p class="ctx">${BD.S.answers.mw?BD.S.answers.mw+' MW of servers · ':''}<a href="#" data-tab="prec">Real buildings</a> · <a href="#" data-tab="cities">Two cities</a></p>`+(BD.tabExtra?BD.tabExtra(cur):''); }
 /* a section that starts closed but shows its answer (J.B., 16 Oct: "tabs that open (but present closed)"); the open state is kept for the session */
 BD.openSecs=BD.openSecs||new Set();
 function sec(id,title,answer,body,o){ o=o||{}; const open=BD.openSecs.has(id)||o.open;
@@ -420,7 +420,22 @@ function finePrint(c){ if(!c) return; const L=[];
   c.querySelectorAll(':scope > .src, :scope > p.src, :scope > .cmp > p.src, :scope > div > p.src').forEach(e=>{ if(!e.closest('details.fp')&&!e.closest('td,tr,summary')) L.push(e); });
   [...c.querySelectorAll(':scope > h3')].filter(h=>/^sources?$/i.test(h.textContent.trim())).forEach(h=>{ let n=h.nextElementSibling; h.remove(); while(n&&n.tagName!=='H3'&&!n.classList.contains('draftnote')&&!n.classList.contains('navb')){ const nx=n.nextElementSibling; L.push(n); n=nx; } });
   if(!L.length) return; const d=document.createElement('details'); d.className='fp'; d.innerHTML=`<summary>Sources${L.length>1?' ('+L.length+')':''}</summary><div></div>`; const b=d.lastChild; L.forEach(e=>b.appendChild(e)); c.appendChild(d); }
-function finePrintAll(root){ if(!root) return; root.querySelectorAll('details.sec > .b').forEach(finePrint); finePrint(root); }
+function finePrintAll(root){ if(!root) return; root.querySelectorAll('details.sec > .b').forEach(finePrint); finePrint(root); trimLong(root); }
+/* long paragraphs (J.B., 16 Oct: "nobody wants to read them"): show the first sentence; the rest behind "more" */
+function trimLong(root){ root.querySelectorAll('p,li,dd').forEach(el=>{
+  if(el.dataset.tl||el.closest('details.fp,summary,.math,dl.lim,.lead')||el.querySelector('button,input,select,p,li')) return; el.dataset.tl=1;
+  if(el.textContent.trim().split(/\s+/).length<=24) return;
+  // candidate cut points in top-level text: sentence end first, then a dash, colon or bracket, then a middle dot or comma
+  let host=el; while(host.firstElementChild&&host.firstElementChild.tagName==='SPAN'&&host.firstElementChild.textContent.length>0.8*host.textContent.length) host=host.firstElementChild;
+  const C=[]; let seen=0; const wc=t=>t.trim().split(/\s+/).filter(Boolean).length;
+  for(const nd of [...host.childNodes]){ const t=nd.textContent||'';
+    if(nd.nodeType===3){ const re=/([.;])(?=\s+\S)|(\s[—–:](?=\s))|(\s\()|(\s·)|(,)(?=\s)/g; let m; while((m=re.exec(t))){ const w=seen+wc(t.slice(0,m.index)); const r=m[1]?0:m[2]?1:m[3]?1:m[4]?2:3; const at=m[1]?m.index+1:m[3]||m[4]?m.index:m[2]?m.index:m.index+1; C.push({nd,at,w,r}); } }
+    seen+=wc(t); }
+  let cut=null; for(const [r,lo,hi] of [[0,5,30],[1,8,26],[2,8,26],[3,10,24]]){ const c=C.find(c=>c.r===r&&c.w>=lo&&c.w<=hi); if(c){ cut=[c.nd,c.at]; break; } }
+  if(!cut) return; const [nd,i]=cut; const rest=nd.splitText(i); const sp=document.createElement('span'); sp.className='more'; sp.hidden=true;
+  let x=rest; while(x){ const nx=x.nextSibling; sp.appendChild(x); x=nx; } host.appendChild(sp);
+  const b=document.createElement('button'); b.type='button'; b.className='mo'; b.textContent='more'; b.onclick=ev=>{ ev.stopPropagation(); sp.hidden=!sp.hidden; b.textContent=sp.hidden?'more':'less'; };
+  el.append(' ',b); }); }
 BD.finePrintAll=finePrintAll;
 (function watchDrawer(){ const dr=document.getElementById('drawer'); if(!dr) return setTimeout(watchDrawer,300); let busy=false;
   new MutationObserver(()=>{ if(busy) return; busy=true; try{ const inner=dr.querySelector('.dc')||dr; finePrintAll(inner); } finally{ busy=false; } }).observe(dr,{childList:true,subtree:false}); })();
@@ -452,7 +467,7 @@ function energyView(){
   const co2=MWh.map(v=>v*R.grid[f.city]/1000);
   const cost=f.city==='van'?[MWh[0]*1000*0.0679+fac[0]*1000*13.83*12,MWh[1]*1000*0.0679+fac[1]*1000*13.83*12]:null;
   const ups=[mw*1/60*0.5,mw*5/60*0.5], gen=[fac[0]*1000*4,fac[1]*1000*4];
-  let h=tabBar('energy')+`<h2>Power in, power offered</h2><p class="draft">The data centre is the grid's customer first. What it could offer back is flexibility — and only whoever runs the computing can give that.</p>
+  let h=tabBar('energy')+`<h2>Power in, power offered</h2><p class="draft">A customer first. What it can give back is <span class="k">flexibility</span>, and only the operator can give it.</p>
   <h3>What it draws</h3><dl><dt>Power at the meter</dt><dd>${rng(fac[0],fac[1],'MW')}</dd><dt>Electricity a year</dt><dd>${rng(MWh[0]/1000,MWh[1]/1000,'GWh')} at an average load of 60% of peak</dd>
   ${cost?`<dt>Cost a year</dt><dd>about $${(cost[0]/1e6).toFixed(1)}–${(cost[1]/1e6).toFixed(1)} million if served on BC Hydro's large general service (6.79 ¢/kWh + $13.83/kW a month); very large loads move to transmission rates</dd>`:`<dt>Price</dt><dd>Alberta pool averaged $43.68/MWh in 2025, plus EPCOR distribution and transmission charges</dd>`}
   <dt>Carbon of that electricity</dt><dd>${rng(co2[0],co2[1],'t CO₂e/yr')} at ${R.grid[f.city]} g/kWh (average, consumption)</dd>
@@ -473,7 +488,7 @@ function energyView(){
     `UPS batteries: ${mw} MW × 1–5 min ÷ 60 × 0.5 kept for outages = <b>${n1(ups[0])}–${n1(ups[1])} MWh</b>.`,
     `Generator testing: ${n1(fac[0])}–${n1(fac[1])} MW × 1,000 × 4 h = ${n0(gen[0])}–${n0(gen[1])} kWh; × 0.706 kg CO₂/kWh = ${n1(gen[0]*0.706/1000)}–${n1(gen[1]*0.706/1000)} t; × 14.6 g NOₓ/kWh = ${n0(gen[0]*14.6/1000)}–${n0(gen[1]*14.6/1000)} kg.`],
     'PUE: LBNL 2023, Uptime 2025. Load factor: Fan et al. 2007. Rates: BC Hydro LGS 2026. Solar: NRCan yields, NREL densities. Generator factors: AP-42 Table 3.4-1 (upper bounds).')}
-  <div class="draftnote">Draft wording (Claude) for J.B. Ranges carry the register's confidence.</div>`;
+  <div class="draftnote">Ranges carry the register's confidence.</div>`;
   $('#side').innerHTML=h; wireTabs(); BD.draw();
   show3d('energy',{site:f,gridNote:f.downtown?'Downtown: no new feeder positions before the West End substation (expected July 2032).':''});
 }
@@ -486,7 +501,7 @@ function waterView(){
   const mk=[evap[1]*(1+1/(6-1)),evap[1]*(1+1/(2-1))], bd=[evap[1]/(6-1),evap[1]/(2-1)];
   const roof=roofArea(f), mm=f.city==='van'?1159.5:422.5, rain=roof*mm/1000*0.8;
   const wbe=[MWh[0]*1000*1.25/1000,MWh[1]*1000*16.8/1000];
-  let h=tabBar('water')+`<h2>Water in, water out</h2><p class="draft">A data centre can use almost no water on site, or a great deal — it depends on how it rejects heat. The water behind its electricity is a separate question.</p>
+  let h=tabBar('water')+`<h2>Water in, water out</h2><p class="draft">From almost none to a great deal: <span class="k">it depends on the cooling</span>.</p>
   <div class="q"><div class="lab">How it rejects heat</div><div class="seg" data-c="1"><button data-v="dry" aria-pressed="${A.outside!=='towers'&&A.outside!=='hybrid'}">Dry coolers</button><button data-v="towers" aria-pressed="${towers}">Cooling towers</button><button data-v="hybrid" aria-pressed="${A.outside==='hybrid'}">Hybrid</button></div></div>
   <h3>On site</h3><dl>${towers||hybrid?`<dt>Evaporated</dt><dd>up to ${fmt(evap[1])} m³/yr (at most 1.5 L per kWh of heat${hybrid?`, wet only in the ${fmt(WET[f.city][0])} hours a typical year is above 18 °C in ${f.city==='van'?'Vancouver':'Edmonton'} (${(WET[f.city][1]*100).toFixed(1)}%; CWEC, computed)`:''})</dd><dt>Make-up water</dt><dd>${fmt(mk[0])}–${fmt(mk[1])} m³/yr at 2–6 cycles of concentration</dd><dt>Blowdown to the sewer</dt><dd>${fmt(bd[0])}–${fmt(bd[1])} m³/yr</dd>${f.city==='van'?`<dt>Water bill</dt><dd>about $${fmt(mk[0]/2.832*4.091)}–$${fmt(mk[1]/2.832*5.128)} a year for the make-up water alone (2026 rates, per 2.832 m³ unit)</dd>`:''}`:`<dt>Evaporated</dt><dd>none for cooling — dry coolers reject heat to the air; their fans are the trade (sound, roof space)</dd>`}
   <dt>Rain on the roof</dt><dd>about ${fmt(rain)} m³/yr from ${fmt(roof)} m² at ${mm} mm a year</dd></dl>${s3('evap')}${f.city==='van'?s3('wprice'):''}${s3('rain')}
@@ -500,14 +515,14 @@ function waterView(){
     `Rain: roof ${n0(roof)} m² × ${mm} mm ÷ 1,000 × 0.8 runoff = <b>${n0(rain)} m³</b>.`,
     `Water behind the electricity: ${n0(MWh[0])} MWh × 1.25 L/kWh = ${n0(wbe[0])} m³; ${n0(MWh[1])} MWh × 16.8 L/kWh = <b>${n0(wbe[1])} m³</b>.`].filter(Boolean),
     'Evaporation: physics (latent heat). Cycles: FEMP/EPA. Rain: ECCC Normals 1991–2020; runoff 0.8 assumed. Water behind electricity: US thermoelectric and hydro averages.')}
-  <div class="draftnote">Draft wording (Claude) for J.B.</div>`;
+  `;
   $('#side').innerHTML=h; wireTabs(); document.querySelectorAll('#side .seg[data-c] button').forEach(b=>b.onclick=()=>{ A.outside=b.dataset.v; BD.modelReset&&BD.modelReset(); waterView(); }); BD.draw();
   show3d('water',{site:f,rain,towers:towers||A.outside==='hybrid',evap:towers?fmt(evap[1])+' m³/yr':''});
 }
 function materialsView(){
   const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, racks=mw*1000/R.kWPerRack, servers=mw*1000/0.6;
   const ew=[servers*21.25/6/1000,servers*26.3/6/1000], cu=[mw*20,mw*40], eit=[servers*4.177*0.10/6,servers*4.177*0.15/6], eb=f.gross[1]*0.461;
-  let h=tabBar('materials')+`<h2>What it is made of, and how often</h2><p class="draft">The building can last decades; the servers inside are replaced about every six years. That rhythm is where its materials go.</p>
+  let h=tabBar('materials')+`<h2>What it is made of, and how often</h2><p class="draft">The building lasts decades; <span class="k">the servers are replaced every five to six years</span>.</p>
   <h3>The equipment</h3><dl><dt>Racks</dt><dd>about ${fmt(racks)} at 8 kW each</dd><dt>Servers</dt><dd>about ${fmt(servers)} at 600 W each</dd>
   <dt>Electronic waste</dt><dd>${rng(ew[0],ew[1],'t/yr')} of servers alone, on a six-year refresh</dd><dt>Copper</dt><dd>${fmt(cu[0])}–${fmt(cu[1])} t in the facility (industry figure)</dd>
   <dt>Embodied carbon, servers</dt><dd>${rng(eit[0],eit[1],'t CO₂e/yr')} — the manufacturing share (10–15%) of one manufacturer's server assessment, spread over six years; uncertainty is large</dd></dl>${s3('srv')}${s3('ew')}${s3('cu')}${s3('eit')}
@@ -521,7 +536,7 @@ function materialsView(){
     `Embodied carbon, servers: ${n0(servers)} × 4.177 t × 10–15% manufacturing ÷ 6 years = <b>${rng(eit[0],eit[1],'t CO₂e/yr')}</b>.`,
     A.built==='existing'?'':`Embodied carbon, building: ${n0(f.gross[1])} m² × 0.461 t/m² = <b>${n0(eb)} t CO₂e</b>.`].filter(Boolean),
     'Servers: LBNL 2024. Waste: server masses, 6-year refresh. Copper: Copper Development Association (industry). Embodied: Dell R760 LCA (manufacturer); building median 461 kg/m².')}
-  <div class="draftnote">Draft wording (Claude) for J.B.</div>`;
+  `;
   $('#side').innerHTML=h; wireTabs(); BD.draw();
   show3d('materials',{site:f});
 }
@@ -566,7 +581,7 @@ function socialView(){
     `Jobs: ${mw} MW × ${n0(f.m2MW[0])}–${n0(f.m2MW[1])} m² hall per MW ÷ hall share ${R.hallShare[1]}–${R.hallShare[0]} ÷ ${R.jobsM2} m² per job = ${n1(Math.max(1,mw*f.m2MW[0]/R.hallShare[1]/R.jobsM2))}–<b>${n1(mw*f.m2MW[1]/R.hallShare[0]/R.jobsM2)}</b>.`],
     'Sound: Lp = Lw − 20 log r − 8 (hemispherical spreading); unit ratings from manufacturer data (Trane, Eurovent). Limits: Noise Control By-law 6555 / Bylaw 14600. Jobs: Virginia JLARC 2024, transferred.')}
   <h3>Your observations on site</h3><textarea id="notes" rows="5" style="width:100%;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;padding:8px;color:var(--fg)" placeholder="What did you hear, see and feel at the edge? Time of day, where you stood.">${esc(notes)}</textarea><div class="src">Kept in this browser only; shown as your observation, never as a measurement.</div>
-  <div class="draftnote">Draft wording (Claude) for J.B. Sound is a screening estimate: manufacturer-rated levels, no barriers, ground or buildings.</div>`;
+  <div class="draftnote">Sound is a screening estimate: manufacturer-rated levels, no barriers, ground or buildings.</div>`;
   $('#side').innerHTML=h; wireTabs(); $('#notes').oninput=e=>{ try{ localStorage.setItem(key,e.target.value); }catch(err){} }; BD.draw();
   const pb=(f.M&&f.M.plant&&f.M.plant.boxes)||[]; const psrc=pb.length?[pb.reduce((t,b)=>t+BD.centroid(b.ring)[0],0)/pb.length,pb.reduce((t,b)=>t+BD.centroid(b.ring)[1],0)/pb.length]:null;
   BD._noise={lw,limit:lim,limitFor,dist,src:psrc};
@@ -607,7 +622,7 @@ async function precView(){
   const near=P.sites.filter(s=>s.mw&&s.area&&s.tier!=='context').map(s=>({s,d:Math.abs(Math.log(s.area/Math.max(G,1)))})).sort((a,b)=>a.d-b.d).slice(0,8).map(x=>x.s);
   const row=s=>`<tr><td>${esc(s.name)}<div class="src">${esc(s.city)}, ${esc(s.country)}${s.conversion?' · conversion':''} · ${s.tier}</div></td><td class="r">${f1(s.mw)}${s.mw_basis==='IT'?'':'<div class="src">not stated as IT</div>'}</td><td class="r">${fmt(s.area)}</td><td class="r">${fmt(Math.round(s.area/s.mw))}</td><td>${s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener">source</a>`:''}<div class="src">${esc(s.evidence||'')}</div></td></tr>`;
   let h=tabBar('prec')+`<h3>Real buildings against this site</h3>
-  <p class="sub draft">Each dot is a real data centre with a published floor area and power. The shaded band is every result the tool's size chain can give; the bar is this site's range (${rng(f.mw[0],f.mw[1],'MW')} on ${rng(f.gross[0],f.gross[1],'m²')}). Filled dots are public or filed records; open dots are operator claims or figures in doubt.</p>
+  <p class="sub draft">Dots: real data centres (filled: public record; open: claim). Band: the tool's range. Bar: <span class="k">this site, ${rng(f.mw[0],f.mw[1],'MW')} on ${rng(f.gross[0],f.gross[1],'m²')}</span>.</p>
   <div class="chart" style="overflow-x:auto">${g}</div>
   <div class="legend2"><span><i style="background:var(--accent);border-radius:50%"></i>Benchmark</span><span><i style="border:1px solid var(--muted);border-radius:50%"></i>Reference</span><span><i style="background:var(--fg);opacity:.15"></i>Tool's range</span><span><i style="border-top:1px dashed var(--muted);height:0"></i>${gpm.min}–${fmt(gpm.max)} m² of building per MW (benchmarks)</span></div>
   <h3>Closest in size</h3><div class="tt"><table><thead><tr><th>Building</th><th class="r">MW</th><th class="r">Floor m²</th><th class="r">m² per MW</th><th></th></tr></thead><tbody>${near.map(row).join('')}</tbody></table></div>
@@ -615,7 +630,7 @@ async function precView(){
   <dt>Built halls</dt><dd>${S.white_per_it_mw.min}–${S.white_per_it_mw.max} m² of hall per MW (n=${S.white_per_it_mw.n}, operator figures)</dd>
   <dt>Hall share</dt><dd>${Math.round(S.white_share.min*100)}–${Math.round(S.white_share.max*100)}% of floor; middle half ${Math.round(S.white_share.p25*100)}–${Math.round(S.white_share.p75*100)}% (n=${S.white_share.n})</dd></dl>
   <div class="src">Precedent catalogue, ${P.sites.length} sites, gathered 15 Oct 2026; every figure with its quote and source in the full catalogue: <a href="https://claude.ai/artifact/FiJybvptz72wxZ6GPQjdC7" target="_blank" rel="noopener">open</a>. Operator figures are claims.</div>
-  <div class="draftnote">Draft wording (Claude) for J.B.</div>`;
+  `;
   $('#side').innerHTML=h; wireTabs();
 }
 BD.eng={R,siteFacts,plantPerMW,calc,rng,f1,n0,n1,mathBox,tabBar,wireTabs,show3d,nearby,netsAt,loadRecv,badge,src,s3,rangeBar,state,roofArea,optionSet};

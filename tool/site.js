@@ -118,7 +118,7 @@ function model(){
   const nF=h=>[1+Math.max(0,Math.floor((h-ftf.ground)/ftf.up[1])),1+Math.max(0,Math.floor((h-ftf.ground)/ftf.up[0]))];
   if(A.built==='existing'){
     const hmax=blds.length?Math.max(...blds.map(b=>b.h)):0; m.existing=true; m.H=hmax; m.nF=[Math.max(1,Math.floor(hmax/4)),Math.max(1,Math.floor(hmax/4))];
-    m.foot=blds.length?blds.reduce((x,b)=>b.a>x.a?b:x).r:null; m.feet=blds.map(b=>({r:b.r,h:b.h})); m.footArea=blds.reduce((t,b)=>t+b.a,0);
+    { const big=blds.length?blds.reduce((x,b)=>b.a>x.a?b:x):null; m.foot=big?big.r:null; m.roofH=big?big.h:0; } // the roof the plant sits on is the largest part's own roof, at its own height m.feet=blds.map(b=>({r:b.r,h:b.h})); m.footArea=blds.reduce((t,b)=>t+b.a,0);
   } else {
     let H=Z.hOutright, hn='outright';
     if(A.hmode==='cond'&&Z.hx&&!A.userH){ H=Z.hx[0]; hn='conditional'; }
@@ -163,7 +163,7 @@ BD.model=model; BD.modelReset=()=>{ cache.key=null; };
 
 /* ---------- the drawer (decision A, 16 Oct): over the map, beside the panel ---------- */
 const css=document.createElement('style'); css.textContent=`
-#drawer{position:absolute;top:0;right:0;bottom:0;width:min(440px,92%);background:var(--panel);border-left:1px solid var(--line-2);z-index:8;overflow:auto;padding:16px 18px 28px;box-shadow:-8px 0 24px rgba(0,0,0,.35)}
+#drawer{position:absolute;top:0;left:0;bottom:0;width:min(440px,92%);background:var(--panel);border-right:1px solid var(--line-2);z-index:8;overflow:auto;padding:16px 18px 28px;box-shadow:8px 0 24px rgba(0,0,0,.35)}
 #drawer[hidden]{display:none}
 #drawer .dx{float:right;background:transparent;border:1px solid var(--line-2);border-radius:6px;padding:2px 9px;cursor:pointer;color:var(--muted);font-size:12.5px}
 #drawer h2{font-size:18px;font-weight:400;margin:4px 0 6px;line-height:1.3}
@@ -239,7 +239,7 @@ function card(step){
   }
   if(m.warn.length) h+=m.warn.map(w=>`<div class="warnbox">${esc(w)}</div>`).join('');
   h+=liveBox();
-  h+=`<div class="navb">${step>1?'<button class="sec" id="sb">← Back</button>':''}<button class="pri" id="sn">${step<5?'Next →':'What fits here →'}</button><span class="sub">or keep the defaults</span></div><div class="draftnote">Draft wording (Claude) for J.B. Decisions: five cards (J.B., 16 Oct).</div>`;
+  h+=`<div class="navb">${step>1?'<button class="sec" id="sb">← Back</button>':''}<button class="pri" id="sn">${step<5?'Next →':'What fits here →'}</button><span class="sub">or keep the defaults</span></div>`;
   BD.drawer.open(h,el=>{
     el.querySelectorAll('.choice[data-q] button').forEach(b=>b.onclick=()=>{ A[b.parentNode.dataset.q]=b.dataset.v; changed(step); });
     el.querySelectorAll('.steps button').forEach(b=>b.onclick=()=>card(+b.dataset.step));
@@ -266,6 +266,6 @@ BD.setupHTML=function(st){ setDefaults(); const A=BD.S.answers, m=model(); if(!m
    [5,'Standby',A.gens==='none'?'no generators':`generators in the ${A.genAt}`]];
   return `<h3>The site as set up</h3>${m.Z.warn?`<div class="warnbox">${m.Z.warn}</div>`:''}${rows.map(r=>`<div class="sumrow"><span>${r[1]}</span><span>${esc(r[2])}</span><a href="#" data-setup="${r[0]}">Change ›</a></div>`).join('')}
   <div class="next"><button id="fits">What fits here →</button><button id="setup1" style="background:transparent;border:1px solid var(--line-2);color:var(--fg)">Set up step by step</button></div>
-  <div class="draftnote">Labelled defaults are used until you change them. Draft wording (Claude) for J.B.</div>`; };
+  <div class="draftnote">Labelled defaults are used until you change them. </div>`; };
 BD.setupWire=function(){ document.querySelectorAll('#side [data-setup]').forEach(a=>a.onclick=e=>{ e.preventDefault(); card(+a.dataset.setup); }); const s1=$('#setup1'); if(s1) s1.onclick=()=>card(1); };
 })();

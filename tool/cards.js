@@ -133,9 +133,9 @@ async function heatIndex(){
   const bl=f.city==='edm'?nets.find(n=>/Blatchford/.test(n.n)):null;
   const nearNet=inside||nets.slice().sort((x,y)=>x.edge-y.edge)[0];
   const nDep=all.filter(p=>p.econ.status==='depends').length;
-  const lead=netB<=0?`At ${f.city==='edm'?'Alberta':'BC'} prices no route pays back at any distance.${bl?` Blatchford's low-temperature loop, ${bl.inside?'around this lot':fmt(bl.edge)+' m away'}, is the exception to look at.`:''}`
-    :nW?`${nW} of ${all.length} buildings within 1.5 km could take the heat within break-even.${nDep?` ${nDep} more depend on the pipe cost.`:''}`
-    :`None of the ${all.length} buildings within 1.5 km pays back at today's prices${nDep?`; ${nDep} depend on the pipe cost`:''}.${inside?` The lot is inside the ${inside.n.replace(/ \(.*/,'')}.`:''}`;
+  const lead=netB<=0?`At ${f.city==='edm'?'Alberta':'BC'} prices <span class="k">no route pays back at any distance</span>.${bl?` Blatchford's low-temperature loop, ${bl.inside?'around this lot':fmt(bl.edge)+' m away'}, is <span class="k">the exception to look at</span>.`:''}`
+    :nW?`<span class="k">${nW} of ${all.length} buildings</span> within 1.5 km could take the heat within break-even.${nDep?` ${nDep} more depend on the pipe cost.`:''}`
+    :`<span class="k">None of the ${all.length} buildings</span> within 1.5 km pays back at today's prices${nDep?`; ${nDep} depend on the pipe cost`:''}.${inside?` The lot is inside the ${inside.n.replace(/ \(.*/,'')}.`:''}`;
   const PL={housing:['non-market housing building','non-market housing buildings'],school:['school','schools'],care:['care home','care homes'],hospital:['hospital','hospitals'],rec:['recreation centre','recreation centres'],pool:['pool','pools'],arena:['arena','arenas']};
   const kinds=[...new Set(all.map(p=>p.t))].map(t=>{ const n=all.filter(p=>p.t===t).length; return `${n} ${(PL[t]||[t,t])[n===1?0:1]}`; }).join(', ');
   const recvAns=[kinds||'none found',nW?`${nW} within break-even`:'none within break-even',nDep?`${nDep} depend on pipe cost`:'',nB?`${nB} beyond`:''].filter(Boolean).join('; ');
@@ -211,7 +211,7 @@ async function openConnection(kind,id){ await opps(); const H=BD._heat; if(!H) r
   <h3>Conditions</h3><ul class="lim"><li>${draft('The receiver\'s monthly demand: most heat is needed in winter (about '+(city==='van'?'3.9':'3.3')+' : 1 between the busiest and quietest month).')}</li><li>${draft('Its heating system and supply temperature.')}</li><li>${draft('A heat contract longer than the server refresh; heat contracts in Stockholm run 10 years + 5.')}</li><li>${draft('If the receiver leaves, all heat goes back to the dry coolers — they keep their full size.')}</li></ul>
   <h3>How proven</h3><p class="sub">${L.readiness?rdPill(L.readiness)+' ':''}${esc(L.basis||'')}</p>
   <h3>Sources</h3>${srcList(ECON.src.concat(L.sources||[]))}
-  <div class="draftnote">Draft wording (Claude) for J.B. Ranges, not a design or a quote.</div>`;
+  <div class="draftnote">Ranges, not a design or a quote.</div>`;
   BD.drawer.open(h,el=>{ el.querySelectorAll('#payer button').forEach(b=>b.onclick=()=>{ A.payer=b.dataset.v; openConnection(kind,id); }); });
   const rp=routePath(p); E().show3d('heat',{site:f,all:H.all,nets:H.nets,lim:30,selected:id,route:rp?rp.pts:null});
 }
@@ -233,7 +233,7 @@ function chart(x){ const W=380,Hh=190,ml=48,mr=10,mt=10,mb=30, D=1600; const vma
 
 function netCard(f,nets){ const n=nets[0]; if(!n) return; const L=(OPPS.opportunities||{})['District heat to a network']||{};
   BD.drawer.open(`<div class="kind">Heat · district energy</div><h2>${esc(n.n)}</h2><p class="sub">${esc(n.note||'')}</p><p>${n.inside?'This lot is inside the service area.':`${fmt(n.edge)} m from this lot.`}</p>
-  <h3>Rules</h3>${ladder(L)}<h3>How proven</h3><p class="sub">${L.readiness?rdPill(L.readiness)+' ':''}${esc(L.basis||'')}</p><h3>Sources</h3>${srcList((L.sources||[]).concat(['vanNEUlevy2025','vanNEUguide']))}<div class="draftnote">Draft wording (Claude) for J.B.</div>`); }
+  <h3>Rules</h3>${ladder(L)}<h3>How proven</h3><p class="sub">${L.readiness?rdPill(L.readiness)+' ':''}${esc(L.basis||'')}</p><h3>Sources</h3>${srcList((L.sources||[]).concat(['vanNEUlevy2025','vanNEUguide']))}`); }
 function heatMathCard(f,r){ const e=E(), R=e.R, mw=BD.S.answers.mw||1, it=r.itMWh;
   BD.drawer.open(`<div class="kind">Heat · how it is worked out</div><h2>Heat this size could offer</h2><dl><dt>Heat after the heat pump</dt><dd>${e.rng(r.avail[0]/1000,r.avail[1]/1000,'GWh/yr')}</dd><dt>Equal to the heating of</dt><dd>${e.rng(r.homes[0],r.homes[1],'homes')}</dd><dt>Heat-pump electricity</dt><dd>${e.rng(r.hp[0]/1000,r.hp[1]/1000,'GWh/yr')} → ${e.rng(r.co2[0],r.co2[1],'t CO₂e/yr')}</dd></dl>
   ${e.mathBox([`Server electricity: ${mw} MW × 8,760 h × ${R.lf} = <b>${e.n0(it)} MWh</b>.`,`Captured into liquid: × ${R.capture[0]}–${R.capture[1]} = ${e.n0(it*R.capture[0])}–<b>${e.n0(it*R.capture[1])} MWh</b>.`,`Heat out = captured × COP ÷ (COP − 1), COP ${R.cop[0]}–${R.cop[1]}: <b>${e.n0(r.avail[0])}–${e.n0(r.avail[1])} MWh</b>.`,`Heat-pump electricity = heat ÷ COP: <b>${e.n0(r.hp[0])}–${e.n0(r.hp[1])} MWh</b>.`,`Homes: ÷ ${R.homeMWh[f.city]} MWh a home.`])}
@@ -250,7 +250,7 @@ function carriersCard(f){ const city=f.city;
   ];
   BD.drawer.open(`<div class="kind">Distance</div><h2>How far is too far</h2><p class="sub">${draft('Each thing a data centre could share travels differently. Distance costs money gradually; some lines cost a rule all at once.')}</p>
   <table class="cl">${rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}<small>Step changes: ${esc(r[2])}</small></td></tr>`).join('')}</table>
-  <h3>Sources</h3>${srcList(rows.flatMap(r=>r[3]))}<div class="draftnote">Draft wording (Claude) for J.B.</div>`); }
+  <h3>Sources</h3>${srcList(rows.flatMap(r=>r[3]))}`); }
 BD.carriersCard=carriersCard;
 
 BD.tabOverride=Object.assign(BD.tabOverride||{},{heat:heatIndex});
