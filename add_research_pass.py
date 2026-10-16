@@ -129,6 +129,8 @@ NEW = {
  'abGreenhouse2023': ('government survey', 'claude', 'Alberta Agriculture and Irrigation (E. A. Laate), Economics of production and marketing greenhouse crops in Alberta 2023 (J.B. upload 16 Oct 2026): 53 growers, 909,443 m² surveyed; Alberta greenhouse area about 2.30 million m²; average investment $105.06 (lettuce) to $478.16 (tree seedlings) per m²; natural gas cost $3.99–12.47 per m² by crop (Table 23); about 85% of growers heat with natural gas, 9% propane (2019–20); forced-air furnaces most common, 30% hot-water and steam boilers; Alberta gas averaged $4.30/GJ (net farm, Jan 2021–Dec 2023) — https://open.alberta.ca'),
  'bcGreenhouse2011': ('government report', 'claude', 'BC Jobs Plan, Special Report on the Greenhouse Sector (BC Ministries of Agriculture, Energy and others, report dated 24 Jan 2012; J.B. upload 16 Oct 2026): energy about 15% of operating costs (Statistics Canada 2011); most heat from natural gas, over half of production area also uses wood biomass; from May to October 90% of greenhouse natural gas is used to produce CO2, not heat, about 50% of annual gas; vegetable greenhouses 13,000–20,000 GJ/ha/yr (industry estimate, down from 22,500–28,000 in 2005); BC carbon tax a cost pressure. Industry estimates, 2011'),
  'vanWaterPermits': ('city open data', 'claude', 'City of Vancouver Open Data, Issued operating permits — water systems (J.B. download 16 Oct 2026): 1,245 permits (1,099 active): cooling towers 672 (625 active with locations), decorative water features, building water treatment systems, rainwater harvesting/alternative water systems 44 (36 active); with renewal dates and Legionella pneumophila and other water-quality results. Shown in the tool as counts and distances only — https://opendata.vancouver.ca'),
+ 'quEDM1_2026': ('operator claim', 'claude', 'Qu Data Centres, EDM1 Facility Overview spec sheet (J.B. download 16 Oct 2026): Edmonton, Financial Core District; 18,000 ft² building (≈1,672 m²), 15,712 ft² raised floor (≈1,460 m²); 2.5 MW capacity; 248 tons of N+1 cooling (≈0.87 MW); ~5–10 kW per rack; no PUE and no heat recovery stated (claims). Security, fuel, generator and carrier details on the sheet deliberately not carried into the register or tool — https://qudatacentres.com/hubfs/location-spec-sheets/EDM1-Spec-Sheet.pdf'),
+ 'quEDM2_2026': ('operator claim', 'claude', 'Qu Data Centres, EDM2 Facility Overview spec sheet (J.B. download 16 Oct 2026): Edmonton; Uptime Institute Tier III certified (claim); raised floor phase 1 19,000 ft² + phase 2 14,196 ft², building 35,000 ft² (≈3,252 m²); 2.5 MW Tier II / 3 MW Tier III; 1,450 tons of N+1 cooling (≈5.1 MW); ~5–10 kW per rack; no PUE and no heat recovery stated (claims). Security, fuel, generator and carrier details deliberately not carried — https://qudatacentres.com/hubfs/location-spec-sheets/EDM2-Spec-Sheet.pdf'),
  'r2Van2026': ('certification directory', 'claude', 'SERI R2 certified facility directory, search within 100 miles of Vancouver (J.B. screenshot 16 Oct 2026): five active R2v3 facilities — FCM Recycling Inc., Delta BC (11 mi); Quantum Lifecycle Partners LP, Surrey BC (12 mi); CSI Electronics Processing Centre Ltd., Surrey BC (24 mi); 1PC LLC, Bellingham WA (45 mi); e-Cycle Solutions Inc., Chilliwack BC (54 mi). Directory listing, not an endorsement — https://www.sustainableelectronics.org/find-an-r2-certified-facility/'),
  'r2Edm2026': ('certification directory', 'claude', 'SERI R2 certified facility directory, search within 50 miles of Edmonton (J.B. screenshot 16 Oct 2026): two active R2v3 facilities — 1579568 Alberta Ltd. o/a Hi-Tech Recyclers, 10235 184 St NW, Edmonton (6 mi); Quantum Lifecycle Partners LP, 250 Aurum Road NE, Edmonton (8 mi). Directory listing, not an endorsement — https://www.sustainableelectronics.org/find-an-r2-certified-facility/'),
  'itsp40006': ('government', 'agent', 'Canadian Centre for Cyber Security ITSP.40.006, IT Media Sanitization (supersedes ITSG-06; cites NIST SP 800-88 Rev. 1); Government of Alberta Secure Digital Media Sanitization Standard v2.0 (2023) uses NIST terms — https://www.cyber.gc.ca/en/guidance/it-media-sanitization-itsp40006'),
@@ -140,6 +142,10 @@ m['source_check'] = {**m.get('source_check', {}), **{k: v[1] for k, v in NEW.ite
 
 # attach to existing quantities
 ATT = {
+ # parity fixes (J.B., 16 Oct): sources already in the register that answer the other city's side of a node
+ 'it_load_claim': ['quEDM1_2026', 'quEDM2_2026'], 'ground': ['abWells2026'], 'hall_area': ['edm_bl20001'], 'capex_split': ['blatchfordBP2021', 'blatchford2023'], 'ledger': ['blatchfordBP2021'],
+ 'sewage_heat': ['blatchfordBP2021', 'epcorGoldBar2026'], 'horizons': ['edmParcel'], 'cfd_score': ['aeso', 'abGridPage'],
+ 'lf_flag': ['bylaw6555'], 'ups_flex': ['bch_drb'],
  'component_space': ['cologixVAN1_2026', 'cologixVAN4_2026', 'uptimeTiers', 'nfpa855_2026', 'mfrDryCooler', 'evapcoLayout2026', 'bacS3000', 'bacLayout2023', 'mfrAdiabatic', 'mfrGenset', 'nfpa37clear', 'mfrBESS', 'nfpa855tia', 'vanParking5', 'edmZB580'],
  'size_fit': ['evapcoLayout2026', 'vanParking5', 'edmZB580'],
  'battery': ['nfpa855_2026', 'mfrBESS', 'nfpa855tia', 'nfcAB2023', 'abESSstandata', 'bchDG100', 'epcorDTtc2025'],
@@ -159,7 +165,7 @@ ATT = {
  'peak_relief': ['bchDR2026', 'aesoStats2025'],
  'demand_profile': ['bchDR2026', 'aesoStats2025', 'inlL2_2015'],
  'greenhouse_area': ['abGreenhouse2017', 'vanUses2026', 'edmUses2026'],
- 'aquaculture_tonnes': ['faoRAS2022', 'edmUses2026'],
+ 'aquaculture_tonnes': ['faoRAS2022', 'edmUses2026', 'vanUses2026'],
  'price_ceiling': ['fortisBC2026', 'atcoGas2026', 'bcCarbonTax2025'],
  'ewaste': ['r2Van2026', 'r2Edm2026', 'epraBC', 'armaElectronics', 'cfsPlus', 'call2recycle', 'itsp40006'],
  'zoning_status': ['vanUses2026', 'edmUses2026', 'vanR3R4R5', 'edmZBres'],
@@ -171,7 +177,7 @@ for qid, ids in ATT.items():
     q = Q[qid]
     q['sources'] = list(dict.fromkeys(q['sources'] + ids))
     have = {x['id'] for x in q.get('source_roles', [])}
-    q['source_roles'] = q.get('source_roles', []) + [{'id': i, 'term': 'research pass 16 Oct 2026 (' + m['source_kinds'][i] + ')', 'role': 'pending build', 'conf': 50 if m['source_check'][i] == 'agent' else 70, 'verified': m['source_check'][i] == 'claude'} for i in ids if i not in have]
+    q['source_roles'] = q.get('source_roles', []) + [{'id': i, 'term': 'research pass 16 Oct 2026 (' + m['source_kinds'].get(i, 'earlier source') + ')', 'role': 'pending build' if i in m['source_kinds'] else 'parity: the other city', 'conf': 50 if m['source_check'].get(i) == 'agent' else 70, 'verified': m['source_check'].get(i, 'claude') == 'claude'} for i in ids if i not in have]
 
 # grouped view for the diagram: carrier → gate → sources
 G = lambda gate, title, ids, note='': {'gate': gate, 'title': title, 'ids': ids, 'note': note}

@@ -275,7 +275,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "quantities": 139,
 "conditions": 101,
 "opportunities": 15,
-"sources": 491
+"sources": 493
 }
 },
 "stages": [
@@ -802,7 +802,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "sources": [
 "opClaims",
 "rts19744",
-"vanPermits"
+"vanPermits",
+"quEDM1_2026",
+"quEDM2_2026"
 ],
 "source_roles": [
 {
@@ -825,6 +827,20 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "site fact",
 "conf": 80,
 "verified": true
+},
+{
+"id": "quEDM1_2026",
+"term": "research pass 16 Oct 2026 (operator claim)",
+"role": "pending build",
+"conf": 70,
+"verified": true
+},
+{
+"id": "quEDM2_2026",
+"term": "research pass 16 Oct 2026 (operator claim)",
+"role": "pending build",
+"conf": 70,
+"verified": true
 }
 ],
 "conf": 50,
@@ -835,7 +851,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "upstream": 50,
 "city": {
 "van": 2,
-"edm": 0,
+"edm": 2,
 "both": 0,
 "gen": 1
 }
@@ -2302,7 +2318,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "coef": "AUC Rule 012 s.4.5; NANR45 curve",
 "unit": "—",
 "sources": [
-"rule012"
+"rule012",
+"bylaw6555"
 ],
 "source_roles": [
 {
@@ -2310,6 +2327,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "term": "all coefficients",
 "role": "coefficient",
 "conf": 90,
+"verified": true
+},
+{
+"id": "bylaw6555",
+"term": "research pass 16 Oct 2026 (earlier source)",
+"role": "parity: the other city",
+"conf": 70,
 "verified": true
 }
 ],
@@ -2322,7 +2346,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 ],
 "upstream": 50,
 "city": {
-"van": 0,
+"van": 1,
 "edm": 1,
 "both": 0,
 "gen": 0
@@ -3091,7 +3115,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "faoTrout",
 "dfoRAS",
 "faoRAS2022",
-"edmUses2026"
+"edmUses2026",
+"vanUses2026"
 ],
 "source_roles": [
 {
@@ -3149,6 +3174,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "pending build",
 "conf": 50,
 "verified": false
+},
+{
+"id": "vanUses2026",
+"term": "research pass 16 Oct 2026 (rule)",
+"role": "pending build",
+"conf": 50,
+"verified": false
 }
 ],
 "conf": 70,
@@ -3161,7 +3193,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 ],
 "upstream": 50,
 "city": {
-"van": 0,
+"van": 1,
 "edm": 1,
 "both": 0,
 "gen": 7
@@ -3531,7 +3563,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kwlSewer",
 "neuReport",
 "rts06419",
-"vanSewer"
+"vanSewer",
+"blatchfordBP2021",
+"epcorGoldBar2026"
 ],
 "source_roles": [
 {
@@ -3568,6 +3602,20 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "data",
 "conf": 80,
 "verified": true
+},
+{
+"id": "blatchfordBP2021",
+"term": "research pass 16 Oct 2026 (municipal utility plan)",
+"role": "pending build",
+"conf": 70,
+"verified": true
+},
+{
+"id": "epcorGoldBar2026",
+"term": "research pass 16 Oct 2026 (utility)",
+"role": "pending build",
+"conf": 70,
+"verified": true
 }
 ],
 "conf": 80,
@@ -3580,7 +3628,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "upstream": 20,
 "city": {
 "van": 4,
-"edm": 0,
+"edm": 2,
 "both": 0,
 "gen": 1
 }
@@ -4323,7 +4371,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "rts19744",
 "tallaghtD22",
 "wahlroos2017",
-"wahlroos2018"
+"wahlroos2018",
+"blatchfordBP2021",
+"blatchford2023"
 ],
 "source_roles": [
 {
@@ -4423,6 +4473,20 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "data",
 "conf": 70,
 "verified": true
+},
+{
+"id": "blatchfordBP2021",
+"term": "research pass 16 Oct 2026 (municipal utility plan)",
+"role": "pending build",
+"conf": 70,
+"verified": true
+},
+{
+"id": "blatchford2023",
+"term": "research pass 16 Oct 2026 (earlier source)",
+"role": "parity: the other city",
+"conf": 70,
+"verified": true
 }
 ],
 "conf": 70,
@@ -4433,7 +4497,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "upstream": 70,
 "city": {
 "van": 2,
-"edm": 0,
+"edm": 2,
 "both": 0,
 "gen": 12
 }
@@ -4563,7 +4627,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "barroso2018",
 "ashraeLife",
 "en253Life",
-"dlrContracts"
+"dlrContracts",
+"edmParcel"
 ],
 "source_roles": [
 {
@@ -4621,6 +4686,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "data",
 "conf": 50,
 "verified": true
+},
+{
+"id": "edmParcel",
+"term": "research pass 16 Oct 2026 (earlier source)",
+"role": "parity: the other city",
+"conf": 70,
+"verified": true
 }
 ],
 "conf": 80,
@@ -4631,7 +4703,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "upstream": 80,
 "city": {
 "van": 1,
-"edm": 0,
+"edm": 1,
 "both": 0,
 "gen": 7
 }
@@ -5178,7 +5250,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "unit": "%",
 "sources": [
 "cfd",
-"bchCfDRfA"
+"bchCfDRfA",
+"aeso",
+"abGridPage"
 ],
 "source_roles": [
 {
@@ -5194,6 +5268,20 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "rule",
 "conf": 90,
 "verified": true
+},
+{
+"id": "aeso",
+"term": "research pass 16 Oct 2026 (earlier source)",
+"role": "parity: the other city",
+"conf": 70,
+"verified": true
+},
+{
+"id": "abGridPage",
+"term": "research pass 16 Oct 2026 (earlier source)",
+"role": "parity: the other city",
+"conf": 70,
+"verified": true
 }
 ],
 "conf": 90,
@@ -5204,7 +5292,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "upstream": 90,
 "city": {
 "van": 2,
-"edm": 0,
+"edm": 2,
 "both": 0,
 "gen": 0
 }
@@ -5220,7 +5308,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "sources": [
 "horizons",
 "rts19744",
-"g9425"
+"g9425",
+"blatchfordBP2021"
 ],
 "source_roles": [
 {
@@ -5243,6 +5332,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "rule",
 "conf": 90,
 "verified": true
+},
+{
+"id": "blatchfordBP2021",
+"term": "research pass 16 Oct 2026 (municipal utility plan)",
+"role": "pending build",
+"conf": 70,
+"verified": true
 }
 ],
 "conf": 60,
@@ -5258,7 +5354,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "upstream": 50,
 "city": {
 "van": 2,
-"edm": 0,
+"edm": 1,
 "both": 0,
 "gen": 1
 }
@@ -5305,7 +5401,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "coef": "City of Vancouver: 333 wells in export; depth median 59 ft (p10 16, p90 210); static level median 11 ft; yield sparse (114 values, p90 100 USgpm); 2 open-loop geoexchange wells; Edmonton: AWWID (retrieval guide F6), not yet in hand",
 "unit": "ft, USgpm, m²/d",
 "sources": [
-"gwells"
+"gwells",
+"abWells2026"
 ],
 "source_roles": [
 {
@@ -5313,6 +5410,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "term": "all coefficients",
 "role": "coefficient",
 "conf": 80,
+"verified": true
+},
+{
+"id": "abWells2026",
+"term": "research pass 16 Oct 2026 (government database)",
+"role": "pending build",
+"conf": 70,
 "verified": true
 }
 ],
@@ -5326,7 +5430,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "upstream": 80,
 "city": {
 "van": 1,
-"edm": 0,
+"edm": 1,
 "both": 0,
 "gen": 0
 }
@@ -6518,9 +6622,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 ],
 "upstream": 70,
 "city": {
-"van": 1,
+"van": 0,
 "edm": 0,
-"both": 0,
+"both": 1,
 "gen": 0
 }
 },
@@ -7183,7 +7287,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "coef": "UPS runtime 1–2 min (hyperscale), ~5 min (colocation), 10–15 min (financial) — vendor figures, operator claim; useful for fast frequency response, not for 4-hour peaks",
 "unit": "MWh; minutes",
 "sources": [
-"aeso_or"
+"aeso_or",
+"bch_drb"
 ],
 "source_roles": [
 {
@@ -7192,6 +7297,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "data",
 "conf": 45,
 "verified": false
+},
+{
+"id": "bch_drb",
+"term": "research pass 16 Oct 2026 (earlier source)",
+"role": "parity: the other city",
+"conf": 70,
+"verified": true
 }
 ],
 "conf": 45,
@@ -7204,7 +7316,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 ],
 "upstream": 40,
 "city": {
-"van": 0,
+"van": 1,
 "edm": 1,
 "both": 0,
 "gen": 0
@@ -7956,7 +8068,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "van_zdb_i3",
 "van_zdb_fc2",
 "van_zdb_i2",
-"src16"
+"src16",
+"edm_bl20001"
 ],
 "source_roles": [
 {
@@ -7986,6 +8099,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "data",
 "conf": 50,
 "verified": false
+},
+{
+"id": "edm_bl20001",
+"term": "research pass 16 Oct 2026 (earlier source)",
+"role": "parity: the other city",
+"conf": 70,
+"verified": true
 }
 ],
 "conf": 50,
@@ -8000,7 +8120,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "upstream": 40,
 "city": {
 "van": 3,
-"edm": 0,
+"edm": 1,
 "both": 0,
 "gen": 1
 }
@@ -12907,7 +13027,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "uofaEERMP2021": "University of Alberta, Envision Energy Reduction Master Plan 2022–30 (Nov 2021; J.B. upload 16 Oct 2026): targets for 2030 — energy intensity 15% below 2019/20, 350,000 GJe total reduction and 25,000 t CO2e from 2022, 2,500 kW renewable and 495 kW alternative energy installed; integrates with the Master Energy Plan for the District Energy System serving the Greater Campus Area; building measures include waste heat recovery (air and water) and micro-steam CHP turbines; laboratories use about 2.5× the energy of office or classroom space; programme of $3.56 M, 375,600 GJe, 30,450 t CO2e (savings valued at 2020/21 utility costs)",
 "abGreenhouse2023": "Alberta Agriculture and Irrigation (E. A. Laate), Economics of production and marketing greenhouse crops in Alberta 2023 (J.B. upload 16 Oct 2026): 53 growers, 909,443 m² surveyed; Alberta greenhouse area about 2.30 million m²; average investment $105.06 (lettuce) to $478.16 (tree seedlings) per m²; natural gas cost $3.99–12.47 per m² by crop (Table 23); about 85% of growers heat with natural gas, 9% propane (2019–20); forced-air furnaces most common, 30% hot-water and steam boilers; Alberta gas averaged $4.30/GJ (net farm, Jan 2021–Dec 2023) — https://open.alberta.ca",
 "bcGreenhouse2011": "BC Jobs Plan, Special Report on the Greenhouse Sector (BC Ministries of Agriculture, Energy and others, report dated 24 Jan 2012; J.B. upload 16 Oct 2026): energy about 15% of operating costs (Statistics Canada 2011); most heat from natural gas, over half of production area also uses wood biomass; from May to October 90% of greenhouse natural gas is used to produce CO2, not heat, about 50% of annual gas; vegetable greenhouses 13,000–20,000 GJ/ha/yr (industry estimate, down from 22,500–28,000 in 2005); BC carbon tax a cost pressure. Industry estimates, 2011",
-"vanWaterPermits": "City of Vancouver Open Data, Issued operating permits — water systems (J.B. download 16 Oct 2026): 1,245 permits (1,099 active): cooling towers 672 (625 active with locations), decorative water features, building water treatment systems, rainwater harvesting/alternative water systems 44 (36 active); with renewal dates and Legionella pneumophila and other water-quality results. Shown in the tool as counts and distances only — https://opendata.vancouver.ca"
+"vanWaterPermits": "City of Vancouver Open Data, Issued operating permits — water systems (J.B. download 16 Oct 2026): 1,245 permits (1,099 active): cooling towers 672 (625 active with locations), decorative water features, building water treatment systems, rainwater harvesting/alternative water systems 44 (36 active); with renewal dates and Legionella pneumophila and other water-quality results. Shown in the tool as counts and distances only — https://opendata.vancouver.ca",
+"quEDM1_2026": "Qu Data Centres, EDM1 Facility Overview spec sheet (J.B. download 16 Oct 2026): Edmonton, Financial Core District; 18,000 ft² building (≈1,672 m²), 15,712 ft² raised floor (≈1,460 m²); 2.5 MW capacity; 248 tons of N+1 cooling (≈0.87 MW); ~5–10 kW per rack; no PUE and no heat recovery stated (claims). Security, fuel, generator and carrier details on the sheet deliberately not carried into the register or tool — https://qudatacentres.com/hubfs/location-spec-sheets/EDM1-Spec-Sheet.pdf",
+"quEDM2_2026": "Qu Data Centres, EDM2 Facility Overview spec sheet (J.B. download 16 Oct 2026): Edmonton; Uptime Institute Tier III certified (claim); raised floor phase 1 19,000 ft² + phase 2 14,196 ft², building 35,000 ft² (≈3,252 m²); 2.5 MW Tier II / 3 MW Tier III; 1,450 tons of N+1 cooling (≈5.1 MW); ~5–10 kW per rack; no PUE and no heat recovery stated (claims). Security, fuel, generator and carrier details deliberately not carried — https://qudatacentres.com/hubfs/location-spec-sheets/EDM2-Spec-Sheet.pdf"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -15037,7 +15159,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "uofaEERMP2021": "institution plan",
 "abGreenhouse2023": "government survey",
 "bcGreenhouse2011": "government report",
-"vanWaterPermits": "city open data"
+"vanWaterPermits": "city open data",
+"quEDM1_2026": "operator claim",
+"quEDM2_2026": "operator claim"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -15155,7 +15279,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "uofaEERMP2021": "claude",
 "abGreenhouse2023": "claude",
 "bcGreenhouse2011": "claude",
-"vanWaterPermits": "claude"
+"vanWaterPermits": "claude",
+"quEDM1_2026": "claude",
+"quEDM2_2026": "claude"
 },
 "source_city": {
 "abgas": "edm",
@@ -15367,7 +15493,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "ieaEnergyAI": "gen",
 "dlrContracts": "gen",
 "velkova2019": "gen",
-"census2021DA": "van",
+"census2021DA": "both",
 "statcanEP2024": "both",
 "panFang2025": "gen",
 "malecki2002": "gen",
@@ -15647,37 +15773,27 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "uofaEERMP2021": "edm",
 "abGreenhouse2023": "edm",
 "bcGreenhouse2011": "van",
-"vanWaterPermits": "van"
+"vanWaterPermits": "van",
+"quEDM1_2026": "edm",
+"quEDM2_2026": "edm"
 },
 "city_gaps": {
 "van": [
-"lf_flag",
 "light_at_window",
-"aquaculture_tonnes",
-"ups_flex",
 "genset_test",
 "btes",
 "deep_geo"
 ],
 "edm": [
-"it_load_claim",
 "it_load_actual",
 "heat_delivered",
 "flexible_load",
 "evaporation",
 "shadow",
-"sewage_heat",
 "price_floor",
-"capex_split",
 "build_cost",
-"horizons",
-"cfd_score",
-"ledger",
-"ground",
 "lrmc_bc",
-"people_affected",
 "hvo_swap",
-"hall_area",
 "flood_exposure"
 ]
 }

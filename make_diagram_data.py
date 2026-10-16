@@ -168,7 +168,7 @@ out = {
 # Classified from each source's own text by place names; 'gen' = general (physics, studies, other places), used in both cities.
 SRC_ALL = {**r.get('old_sources', {}), **r['new_sources']}
 RX_V = re.compile(r"Vancouver|\bVBBL\b|BC Hydro|FortisBC|British Columbia|\bBC\b|BCUC|Creative Energy|River District|By-law 9552|\bNEU\b|Cologix VAN|Metro Vancouver")
-RX_E = re.compile(r"Edmonton|Alberta|\bAB\b|EPCOR|AESO|Blatchford|Bylaw 20001|Bylaw C17943|Gold Bar|\bAUC\b")
+RX_E = re.compile(r"Prairies|Edmonton|Alberta|\bAB\b|EPCOR|AESO|Blatchford|Bylaw 20001|Bylaw C17943|Gold Bar|\bAUC\b")
 def src_city(k):
     t = json.dumps(SRC_ALL.get(k, ''), ensure_ascii=False); v, e = bool(RX_V.search(t)), bool(RX_E.search(t))
     return 'both' if v and e else 'van' if v else 'edm' if e else 'gen'
