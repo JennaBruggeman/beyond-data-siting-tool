@@ -231,6 +231,10 @@ PREC = [
 ]
 m['model_results'] = [x for x in m['model_results'] if x['id'] not in {p['id'] for p in PREC}] + PREC
 m['date'] = '2026-10-15'
+# 15 Oct (heat-chain test): observed COPs widen the tool's range from 3.0–3.6 to 3.0–4.5
+_cop = next((q for q in r['quantities'] if q.get('id') == 'cop'), None)
+if _cop is not None and 'Fjernvarme Fyn' not in (_cop.get('coef') or ''):
+    _cop['coef'] = (_cop.get('coef') or '') + '; observed: Meta Odense heat pumps 27 → 70 °C, COP 4.5 in 2020 (14,020 MWh electricity, 230 TJ heat) and about 3.9 combined 2022–24 (Fjernvarme Fyn annual reports); tool range 3.0–4.5'
 # the patch scripts append notes each time they run; drop exact repeats of a '; '-separated note (15 Oct check)
 for _q in (r['quantities'] if isinstance(r['quantities'], list) else r['quantities'].values()):
     if isinstance(_q, dict) and isinstance(_q.get('coef'), str):

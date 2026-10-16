@@ -154,7 +154,7 @@ function social(d){
   // red: over the night limit even with low-noise units; accent: over only with standard units (the choice of equipment decides)
   if(R.nb&&d.noise){ const pc=state.foot?BD.centroid(state.foot):state.c; for(const g of R.nb.children){ const b=g.userData.b; const r=Math.max(5,Math.hypot(b.c[0]-pc[0],b.c[1]-pc[1])); const m=g.userData.edge.material;
       const lo=d.noise.lw[0]-20*Math.log10(r)-8, hi=d.noise.lw[1]-20*Math.log10(r)-8;
-      if(lo>d.noise.limit){ m.color.setHex(C.bad); m.opacity=0.95; } else if(hi>d.noise.limit){ m.color.setHex(C.acc); m.opacity=0.85; } } }
+      const lim=d.noise.limitFor?d.noise.limitFor(b):d.noise.limit; if(lo>lim){ m.color.setHex(C.bad); m.opacity=0.95; } else if(hi>lim){ m.color.setHex(C.acc); m.opacity=0.85; } } }
   for(const [rad] of [[50],[100],[200]]) R.ov.add(line(ringPts(state.c[0],state.c[1],rad,0.5,120),C.senses,true,0.3));
 }
 const FN={heat,energy,water,materials,social};

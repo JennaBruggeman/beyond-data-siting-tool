@@ -147,3 +147,22 @@ Running record of decisions J.B. has made about the tool's logic, in the order m
 - New "Hall layout" switch: High-density, liquid-cooled uses 250–290 m²/MW (NEXTDC S3, QScale ≈250, operator claims; 290 = VAN-1). Tested against the catalogue.
 - Small-site note (red draft) when floor area < 3,000 m²: small buildings can exceed the range because most of the floor becomes hall (VAN-1 ≈75%). VAN-1 exceeded the range through hall share, not hall density.
 - Precedents tab (first tab): log-log chart of real buildings with this site's range as a bar, the tool's band and the benchmark lines; the eight closest-in-size buildings with source links; catalogue summary. Data: tool/precedents.json, written by bench/make_benchmarks.py.
+
+## 15 Oct 2026 — v13–v16: map fixes, Edmonton lots
+
+- Map stretching fixed (canvas sized at paint time). Edmonton picking fixed (tile still loading; 30 m pick radius too small).
+- Edmonton lot outlines from the EPSB "Titled Lots Current" layer (Altalis title mapping; academic use approved by Xun, by email). Lot picked first, so empty lots can be chosen. Raw file and lot tiles kept out of git; Altalis credit shown on the card.
+
+## 15 Oct 2026 — v17: explain, check, compare
+
+- Show the math on Heat, Energy, Water, Materials and People (each step with the site's numbers).
+- Evidence badges on every figure: record, filed, peer-reviewed, survey, operator claim, physics, transferred, assumption.
+- Range bars; glossary on hover; three worked examples on the intro (1425 Clark Dr, 12603 123 Street NW, 555 W Hastings).
+- New pages: What matters most (sensitivity bars), Over time (50 years), Two cities, About and limits (data dates, versions), Feedback (db collection `feedback`). Site report download (downloads capability).
+- Screening layer: colours every parcel by the middle-case size that fits (0–1, 1–5, 5–10, 10–20, 20–40 MW). Middle case only; not a ranking.
+- COP for heat recovery widened from the previous range to 3.0–4.5: observed at Meta Odense (4.5 in 2020; ≈3.9 in 2022–24). bench/test_heat_chain.py checks the heat chain against Odense / Fjernvarme Fyn and Telia figures. J.B. to accept or revert.
+- Edmonton heights now measured from the City's 3D buildings (305,926 outlines, f = 5); measured ≈1.4× the old floor-area estimates. 14,327 outlines keep the estimate. tool/edm_heights.py, run after make_tiles.py edm.
+- Yards now reduce the footprint: I-2 rear 3.1 m; I-3 front 0.6, sides 7.6, rear 3.1; FC-2 front and rear 0.6; Edmonton IM front 3.0.
+- Sound: each neighbour's limit comes from its own zone (Vancouver quiet / intermediate / activity; Edmonton 50 dBA next to residential, otherwise 60).
+- Edmonton Heat tab: Blatchford district energy is compulsory to connect (Bylaw C17943 s. 6; s. 8 net-zero exemption).
+- Still blocked: Edmonton district energy service area maps (need tracing), census population, I-2 sub-area B mapping, the City's answer on strict vs lenient ground floor.

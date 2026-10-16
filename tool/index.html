@@ -112,6 +112,25 @@ body.wide main{grid-template-columns:1fr minmax(320px,680px)}
   .search{flex:1 1 100%;max-width:none;order:3}
   .legend{left:8px;bottom:8px;padding:6px 8px}
 }
+
+/* extras (v17) */
+.evb{display:inline-block;font-size:10px;letter-spacing:.02em;border:1px solid var(--line-2);border-radius:8px;padding:0 6px;margin-right:4px;color:var(--muted);white-space:nowrap}
+.ev-record,.ev-filed{border-color:#7f9a7a;color:#9fb38a}.ev-filed{border-style:dotted}.ev-peer{border-color:#7a8fa8;color:#a7b4d6}.ev-survey,.ev-claim{border-color:#9a6f6a;color:var(--accent)}.ev-physics{border-color:#6f7680;color:var(--fg)}.ev-transfer,.ev-assume{border-style:dashed}
+.rbar{margin:6px 0 4px;font-size:11.5px}.rrow{display:grid;grid-template-columns:86px 1fr 92px;gap:8px;align-items:center;margin:3px 0}
+.rlab{color:var(--muted)}.rval{color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}.rtrack{position:relative;height:8px;background:var(--line);border-radius:4px}
+.rfill{position:absolute;top:0;height:8px;background:var(--accent);border-radius:4px}.rfill.ghost{background:transparent;border:1px dashed var(--muted);height:6px}
+.rscale{position:relative;height:12px;color:var(--faint);font-size:10px}.rscale i{position:absolute;font-style:normal;transform:translateX(-50%)}.rscale i:first-child{transform:none}.rscale i:last-child{transform:translateX(-100%)}
+.examples{margin-top:18px;border-top:1px solid var(--line);padding-top:6px}.ex{display:block;width:100%;text-align:left;background:var(--panel-2);border:1px solid var(--line-2);border-radius:6px;padding:8px 10px;margin:6px 0;color:var(--fg);cursor:pointer;font:inherit}
+.ex b{font-weight:400;display:block}.ex span{color:var(--muted);font-size:12px}.ex:hover{border-color:var(--accent)}
+.lim{padding-left:18px;margin:6px 0}.lim li{margin:6px 0;font-size:13px}
+.gl{border-bottom:1px dotted var(--muted);cursor:help}
+.torn{margin:8px 0}.trow{display:grid;grid-template-columns:150px 1fr 92px;gap:8px;align-items:center;margin:8px 0;font-size:12.5px}.ttrack{position:relative;height:12px;background:var(--line);border-radius:3px}
+.tfill{position:absolute;top:0;height:12px;background:var(--accent);opacity:.8;border-radius:3px}.tbase{position:absolute;top:-3px;width:2px;height:18px;background:var(--fg)}.tval{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+.fbin{display:block;width:100%;margin:4px 0 10px;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;padding:7px 9px;color:var(--fg);font:inherit}
+.scrbtn{position:absolute;right:12px;bottom:40px;z-index:5;background:var(--panel);border:1px solid var(--line-2);color:var(--muted);border-radius:6px;padding:5px 10px;font:inherit;font-size:12px;cursor:pointer}.scrbtn[aria-pressed=true]{border-color:var(--accent);color:var(--fg)}
+.scrleg{position:absolute;right:12px;bottom:76px;z-index:5;width:250px;background:var(--panel);border:1px solid var(--line-2);border-radius:8px;padding:10px 12px;font-size:12px}.scrleg i{display:inline-block;width:14px;height:10px;margin-right:6px;vertical-align:-1px}
+.fbbtn{background:var(--accent);color:#1a1212;border:0;border-radius:6px;padding:7px 14px;cursor:pointer;font:inherit}
+@media (max-width:600px){.trow{grid-template-columns:110px 1fr 80px}.rrow{grid-template-columns:70px 1fr 84px}}
 </style>
 
 <div class="app">
@@ -371,7 +390,7 @@ function card(){
     <h3>The lot</h3><dl><dt>Lot area</dt><dd>${fmt(lot)} m²</dd><dt>Floor area</dt><dd>${gross?fmt(gross)+' m² (assessment)':'—'}</dd><dt>Assessed value</dt><dd>${money(val)}</dd>
     <dt>Year built</dt><dd>${y0?(y0===y1?y0:y0+'–'+y1):'—'}</dd><dt>Use</dt><dd>${esc((cls||[]).join(', ')||'—')}</dd><dt>Floodplain</dt><dd class="gap">not yet looked at for Edmonton</dd></dl>
     <div class="src">${s.ring?`Lot outline ${fmt(area(s.ring))} m² measured: Alberta title mapping, © Altalis, via Edmonton Public Schools GIS (current to 1 Sep 2025); academic use.${s.lotIds&&s.lotIds.length>1?` ${s.lotIds.length} assessment records on this lot; showing the largest.`:''}`:'No lot outline found for this record; shown as a point.'} Lot area from the assessment record. Zone ${zsrc==='record'?'from the assessment record':'read from the zoning map'}.</div>
-    <h3>What stands on it</h3>${bl.length?`<dl><dt>Buildings</dt><dd>${bl.length} footprint${bl.length>1?'s':''}, ${fmt(bl.reduce((t,b)=>t+b.a,0))} m² in plan</dd><dt>Height</dt><dd>${he.length?'≈'+Math.max(...he).toFixed(0)+' m — ESTIMATE (floor area ÷ footprint × 4 m)':'—'}</dd></dl>`:`<p class="sub">${s.ring?'No building on this lot.':'No footprint at this point.'}</p>`}
+    <h3>What stands on it</h3>${bl.length?`<dl><dt>Buildings</dt><dd>${bl.length} footprint${bl.length>1?'s':''}, ${fmt(bl.reduce((t,b)=>t+b.a,0))} m² in plan</dd><dt>Height</dt><dd>${he.length?(bl.some(b=>b.f===5)?Math.max(...he).toFixed(1)+' m — measured from the City\'s 3D buildings (highest point − ground)':'≈'+Math.max(...he).toFixed(0)+' m — ESTIMATE (floor area ÷ footprint × 4 m)'):'—'}</dd></dl>`:`<p class="sub">${s.ring?'No building on this lot.':'No footprint at this point.'}</p>`}
     ${srcs(s.ring?['edm_data','edm_lots']:['edm_data'])}`;
   }
   h+=startStep(st);
@@ -419,7 +438,8 @@ function wireStart(){
 }
 
 /* ---------- intro and legend ---------- */
-function intro(){ legend();
+function intro(){ introBase(); if(window.BD&&BD.afterIntro) BD.afterIntro(); }
+function introBase(){ legend();
   $('#side').innerHTML=`<div class="intro"><div class="kind">${S.city==='van'?'Vancouver':'Edmonton'}</div><h2>Pick a site</h2>
   <p class="draft">Click a parcel, or search an address. The tool shows what is on the lot, whether a data centre is an allowed use there, and then asks what is being built.</p>
   <p class="sub">Shaded areas are zones where a data centre is allowed or allowed case by case; outlined grey areas have their own site-specific rules. Everywhere else a data centre would need a rezoning — the tool still works there and shows what that would take.</p>
@@ -473,7 +493,7 @@ $('#c-van').onclick=()=>setCity('van'); $('#c-edm').onclick=()=>setCity('edm');
 window.addEventListener('resize',draw); if(window.ResizeObserver) new ResizeObserver(()=>draw()).observe(mapEl);
 window.addEventListener('load',draw); document.addEventListener('visibilitychange',()=>{ if(!document.hidden) draw(); });
 
-window.BD={S,$,esc,fmt,getJSON,pathOf,draw,centroid,pip,area,statusOf,card:()=>card()};
+window.BD={S,$,esc,fmt,getJSON,pathOf,draw,centroid,pip,area,statusOf,card:()=>card(),select:sel=>select(sel),intro:()=>intro(),clearSel:()=>clearSel(),setCity:(c,k)=>setCity(c,k)};
 (async function init(){
   resize();
   const h=(location.hash||'').slice(1).match(/^(van|edm)-(m?\d+)_(m?\d+)-(.+)$/);
@@ -484,4 +504,5 @@ window.BD={S,$,esc,fmt,getJSON,pathOf,draw,centroid,pip,area,statusOf,card:()=>c
 })();
 </script>
 <script src="engine.js"></script>
+<script src="extras.js"></script>
 <script src="scene3d.js"></script>
