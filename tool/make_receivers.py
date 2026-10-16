@@ -46,7 +46,7 @@ for r in json.load(open(os.path.join(H, '..', 'data', 'raw', 'van', 'non-market-
 # from open data. CEEDC coordinates are not used (they do not match the facilities). Figures as reported, year in brackets.
 CEEDC = {'van': {'Vancouver General Hospital': 'campus heating plant listed in the CEEDC district-energy inventory; no capacity or temperatures published (reported 2017)',
                  "Children'S And Women'S Health Centre Of British Columbia": 'campus heating plant listed in the CEEDC district-energy inventory; no capacity or temperatures published (reported 2022)'},
-         'edm': {'University of Alberta': 'campus district energy: steam at 205 °C, 590 MW; chilled water at 5 °C, 145 MW; 80 buildings (CEEDC district-energy inventory, reported 2017)'}}
+         'edm': {'University of Alberta': 'campus district energy: steam at 205 °C, 590 MW; chilled water at 5 °C, 145 MW; 80 buildings (CEEDC district-energy inventory, reported 2017). It also serves customers in the Greater Campus Area; its fuel was 136,705 t CO2e in 2023–24, and the University is weighing a conversion to low-temperature hot water (Operational GHG Emissions Reduction Plan, 2025). A lower-temperature network would need less lift from server heat'}}
 for k, m in CEEDC.items():
     hit = set()
     for x in out[k]:
