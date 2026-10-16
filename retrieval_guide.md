@@ -123,3 +123,14 @@ People and the urban rationale
 - ☐ **G4 District-energy service-area maps** — Edmonton Downtown District Energy and Blatchford (for tracing; the lot-based approximation came out far too small), Creative Energy, River District, Sen̓áḵw (Vancouver). Same as R5.
 - ☐ **G5 Ask, not fetch: City of Vancouver on the ground floor** — may a data centre use the ground floor (strict vs lenient reading)?
 - ☑ Edmonton Zoning Bylaw 20001 s. 5.10 cl. 11 (solar collectors) — read from the bylaw PDF already in data/raw/edm/bylaw.
+
+## 7. Added 16 Oct 2026 (research pass for the build) — blocked or not found; yours to fetch only if wanted
+- **R7 Vancouver Building By-law 2025 Book I (vol. 1)**, Part 6 Art. 6.3.2.15 cooling-tower setbacks and the referenced-documents table (does it cite NFPA 855?) — https://vancouver.ca/files/cov/vbbl-2025-volume-1-v4-01.pdf (proxy-blocked here; a download into Claude Link is enough)
+- **R8 BC Building Code 2024** referenced-documents table (NFPA 855?) — https://www2.gov.bc.ca/assets/gov/farming-natural-resources-and-industry/construction-industry/building-codes-and-standards/revisions-and-mo/bcbc-revision-3/bcbc-revision-4/bcbc_2024_web_version_20240409.pdf
+- **R9 National Fire Code – 2023 Alberta Edition** (NRC publications; same question) — through UBC Library if the NRC page will not open
+- **R10 Alberta Electric Utilities Act** consolidation, definition of "electric distribution system" — https://kings-printer.alberta.ca/documents/Acts/E05P1.pdf (King's Printer blocks automated reads)
+- **R11 Uptime Institute Tier Standard: Topology** (free with registration) — for N+1 / 2N practice; or ask Xun whether the ASHRAE datacom book is in the Library
+- **R12 R2 and e-Stewards directories** — search by hand for Metro Vancouver and Edmonton; screenshot the result lists (dynamic pages) — https://www.sustainableelectronics.org/find-an-r2-certified-facility/ and https://e-stewards.org/find-a-recycler/
+- **R13 Open data**: Vancouver "public streets" (centrelines) and Edmonton "road centreline" datasets, as GeoJSON — https://opendata.vancouver.ca and https://data.edmonton.ca
+- Optional: FortisBC Rate Schedule 2/3 tariff pages (the rate sheet text came through jumbled).
+- Not found anywhere public, to ask in person if useful: Canadian district-heating pipe cost per metre (City of Vancouver NEU staff, EPCOR DDE); EPCOR Gold Bar reclaimed-water terms; sewer review timelines.

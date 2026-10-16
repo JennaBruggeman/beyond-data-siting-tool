@@ -1,0 +1,200 @@
+# 16 Oct 2026: research pass after the tool feedback round (six research agents + Claude spot checks).
+# Adds sources (tagged by kind), attaches them to existing quantities, and writes meta.research_pass:
+# the sources grouped by carrier and gate for the diagram's "Sources of truth" view.
+# Idempotent. Run after add_lca_battery_census.py.
+# check: 'claude' = quote re-read by Claude on the page or local file; 'agent' = read by a research agent, quote to be checked.
+import json, os
+h = os.path.dirname(os.path.abspath(__file__)); P = os.path.join(h, 'formula_register.json')
+r = json.load(open(P, encoding='utf-8'))
+S = r['new_sources']; m = r['meta']
+
+# id: (kind, check, text — URL)
+NEW = {
+ # ---------------- equipment (generic; manufacturer data used only to set ranges) ----------------
+ 'mfrDryCooler': ('manufacturer claim', 'agent', 'Dry coolers, generic ranges from manufacturer data sheets (Alfa Laval VDM / SOLAR Max leaflets; EVAPCO eco-Air 270B; Vertiv drycooler manual; LU-VE, Güntner pages): about 20–2,700 kW per unit; length 1.6–12 m, width 1.15–2.5 m, height 1.45–2.9 m; 160 kg to 10.6 t operating. Ratings at standard conditions, not data-centre conditions — https://www.evapco.com/sites/evapco.com/files/2020-05/eco-Air-Coolers%20270B%20Dry%20Cooling.pdf'),
+ 'evapcoLayout2026': ('manufacturer claim', 'claude', 'EVAPCO, eco-Air Equipment Layout Manual (2026), Table 1 minimum clearances (ft): V-coil 10–20 ft long — end-to-wall 3, side-to-wall 5, end-to-end 6, side-to-side 10; double stack 39 ft — 4 / 10 / 8 / 20; "The top of the unit must be equal to or higher than the structure"; louvres ≥50% net free area; if entering air rises more than 5 °F heat rejection "may be reduced by more than 50%" — https://www.evapco.com/media/1644929'),
+ 'bacS3000': ('manufacturer claim', 'agent', 'BAC Series 3000 cooling tower engineering data (2023): 293–1,394 nominal tons per cell (≈1.3–6.1 MW, Claude conversion at 15,000 BTU/h per tower ton); cell 2.6 × 5.5 m, 3.0 m high to 4.3 × 7.3 m, 6.8 m high; 6.9–22.8 t operating — https://baltimoreaircoil.com:443/download_api_endpoint/6026/C015_PAHBvi_3000_ED_20231020.pdf'),
+ 'bacLayout2023': ('manufacturer claim', 'agent', 'BAC Layout Guidelines (2023): air inlet 1.5–2.7 m from a wall for a single cell at grade, more in a well; envelope air velocity below 300 fpm; four or more cells referred to the manufacturer; fan discharge level with or above adjacent walls — https://baltimoreaircoil.com:443/download_api_endpoint/5888/J74_PAHBvi_LayoutGuidelines_20230719.pdf'),
+ 'mfrAdiabatic': ('manufacturer claim', 'agent', 'Adiabatic / hybrid coolers (EVAPCO 270B adiabatic models; BAC TrilliumSeries): about 0.7–1.4 MW per unit, up to 12 m long, 1.8–2.8 m wide, 2.5 m high, 2–10.6 t; same clearance table as dry coolers; "They cannot be elevated in lieu of spacing" — https://baltimoreaircoil.com/download_api_endpoint/1938/trillium_brochure_20200327.pdf'),
+ 'mfrGenset': ('manufacturer claim', 'agent', 'Standby diesel generator sets in enclosures (Cat 3516C enclosure sheet; Cummins S-1443): about 2 MW — 13.9 × 2.7 m, 3.9–5.0 m high; 0.6–1 MW — 6.6–8.6 × 2.5 m, 3.5–3.7 m high; sub-base fuel tank optional; ≥1 m clearance around each set (Cummins T-030). No 3 MW sheet found; no numeric stack-height guidance — https://powersuite.cummins.com/PS5/PS5Content/SiteContent/en/Binary_Asset/pdf/Commercial/Diesel/s-1443.pdf'),
+ 'nfpa37clear': ('standard (US)', 'agent', 'NFPA 37 s. 4.1.4 as reprinted by the NC Office of State Fire Marshal: engines outdoors at least 5 ft (1.5 m) from wall openings and from structures with combustible walls; reducible with a 1-hour wall or a tested enclosure. US standard, edition not stated; Vancouver bulletin 2000-015 points to CSA C282 (paywalled, not read) — https://ncosfm.gov/fuel-gas/3013-3rd-party-listing-requirement-generator-clearance-reduction-1/open'),
+ 'mfrBESS': ('manufacturer claim', 'agent', 'Battery energy storage, generic: 20 ft container ≈5 MWh / ≈2.5 MW, 6.06 × 2.44 × 2.90 m, ≈42 t (StarCharge, Sungrow data sheets); cabinet ≈3.9 MWh / 1–1.9 MW, 8.8 × 1.65 × 2.8 m, 38 t (Megapack 2 XL sheet filed with the CT Siting Council) — https://starcharge.com/am/wp-content/uploads/sites/3/2025/03/5MWh-Datasheet-1-1.pdf'),
+ 'nfpa855tia': ('standard (US)', 'agent', 'NFPA 855-2023 as amended by TIA 23-1 and 23-2: ESS units separated by at least 3 ft (0.9 m), less with fire testing; rooftop units 3 ft apart, ≥5 ft from roof edge; Hydro One (Ontario utility standard) quotes §9.5.2.6.1: 10 ft (3 m) to lot lines, public ways and buildings, reducible to 3 ft. NFPA 855 is not referenced in the National Fire Code 2020 (Claude checked the local text: 35 NFPA standards cited, 855 not among them) or the BC Fire Code 2024 amendments; BCBC 2024, NFC-AE 2023 and VBBL 2025 Book I not checked — https://docinfofiles.nfpa.org/files/AboutTheCodes/855/TIA_855_23_1.pdf'),
+ 'abESSstandata': ('code interpretation', 'agent', 'Alberta STANDATA 21-ECV-064-900-ESS/19-BCB-010 (REV1): residential energy storage — relies on CSA C22.1 Rule 64 and UL 9540/9540A, 1 m between systems and from windows and doors; dwellings only — https://open.alberta.ca/'),
+ 'pspcLegionella': ('government', 'agent', 'PSPC, Legionella control, Chapter 3 (federal property): "minimum separation distance shall be 10 metres between the cooling tower and any air intake"; drift eliminators — https://tpsgc-pwgsc.gc.ca/biens-property/legionella/chapitre-chapter-3-eng.html'),
+ 'vanCTseminar2021': ('government (presentation)', 'agent', 'City of Vancouver, operating permits seminar slides (Nov 2021): cooling towers 7.6 m from outdoor air intakes, 3 m from doors, operable windows and occupiable outdoor space, 2.15 m above sidewalks. VBBL Art. 6.3.2.15 text not yet read, so unconfirmed against the by-law — https://vancouver.ca/files/cov/cp-seminar-operating-permits-storm-sumps-nov-4-2021-chris-radziminski.pdf'),
+ # ---------------- site and zoning ----------------
+ 'vanParking5': ('rule', 'claude', 'Vancouver Parking By-law 6059, s. 5 (May 2026): Class B space "at least 10.2 metres long, 3.4 metres wide, and 3.8 metres high"; Class C "23.1 … 3.6 … 4.3"; Class C aisle 14.0 m; access by a 6.1 m aisle from the lane where there is one (5.4.1); row 5.2.5 Class B: one space for the first 465 m² plus one for the next 1,860 m² and one per further 2,325 m²; Class C one space for 2,000–5,000 m² of manufacturing, storage warehouse or wholesale, two above 5,000; uses not listed are set by the Director of Planning from a similar use (5.1.4) — data centres are not listed — https://bylaws.vancouver.ca/parking/sec05.pdf'),
+ 'edmZB580': ('rule', 'claude', 'Edmonton Zoning Bylaw 20001, s. 5.80 subs. 7: loading space 9.0 m long, 3.0 m wide (3.1/3.3 m with obstructions), 4.0 m clearance; wholly on site; no backing onto streets or alleys; number for non-residential uses — under 2,500 m² 0, 2,500–7,500 m² 1, over 7,500 m² 2 — https://zoningbylaw.edmonton.ca/part-5-general-development-regulations/580-parking-access-site-circulation-and-bike-parking'),
+ 'edmZB5120': ('rule', 'claude', 'Edmonton Zoning Bylaw 20001, s. 5.120 subs. 1.1: "Non-Industrial development must comply with the following": 1.1.2 "All mechanical equipment, except for Solar Collectors, must be concealed by screening" or incorporated in the building. Does not apply to industrial development — https://zoningbylaw.edmonton.ca/part-5-general-development-regulations/5120-site-performance-standards'),
+ 'edmZB2120': ('rule', 'agent', 'Edmonton Zoning Bylaw 20001, BE zone s. 2.120 subs. 5.2: "All mechanical and electrical equipment, transformers, ducts, cooling towers … must be screened from view from Abutting Streets and Sites in non-industrial Zones." IM and IH have no mechanical clause (outdoor storage and service areas screened, IM screens ≤3.7 m); Blatchford, CMUV and JAMSC special areas require rooftop equipment concealed — https://zoningbylaw.edmonton.ca/part-2-standard-zones-and-overlays/industrial-zones/2120-be-business-employment-zone'),
+ 'vanZDBs10': ('rule', 'agent', 'Vancouver Zoning and Development By-law s. 10.1.1 (May 2026): the Director of Planning may let "mechanical equipment … and any related screening materials" and roof energy technologies exceed maximum height. I-2, I-3, I-1C, FC-2, M-1, C-2 have no roof screening clause; IC-2 s. 4.2.4 (Burrard sites) and 2.2.1(e) require screening from streets and R districts — https://bylaws.vancouver.ca/zoning/zoning-by-law-section-10.pdf'),
+ 'vanR3R4R5': ('rule', 'agent', 'Vancouver R3, R4 and R5 district schedules (low-, mid-, high-rise apartments; approved by Council Oct 2025; heights 27.5, 47.0, 84.0 m per the City rezoning guide, 5 Jan 2026). R1-1 "Residential Inclusive" and RT- districts are the small-scale housing districts ("retaining the single lot character") — https://vancouver.ca/files/cov/r-3-4-5-rezoning-guide.pdf'),
+ 'edmZBres': ('rule', 'agent', 'Edmonton Zoning Bylaw 20001 residential zones: RS and RSF small scale (up to 3 storeys); RSM small-medium transition (3–4 storeys); RM medium (4–8); RL large (9–20); RR rural residential — https://zoningbylaw.edmonton.ca/part-2-standard-zones-and-overlays'),
+ 'vanUses2026': ('rule', 'agent', 'Vancouver Zoning By-law s. 2 definitions and district schedules (2026): no stand-alone EV charging use — Parking Area/Garage "may include the retail sale of electricity for the purpose of charging motor vehicles" (Parking Uses conditional in I-1C, I-2, I-3, FC-2, M-1, IC-2, C-2); Urban Farm – Class B (may be in a greenhouse) conditional in all seven; no aquaculture term; Community Centre conditional in I-2, I-3, FC-2, M-1, C-2; Bulk Data Storage conditional in I-2 (not at ground floor except entrances), I-1C, FC-2, I-3 sub-area A — https://bylaws.vancouver.ca/zoning/zoning-by-law-section-2.pdf'),
+ 'edmUses2026': ('rule', 'agent', 'Edmonton Zoning Bylaw 20001 s. 8.10 use definitions: no EV charging use; Urban Agriculture ("hydroponic or aquaponic systems, and vertical farms") permitted in MU, IM, BE, CB, within or on a building (MU ≤600 m²); Community Service incl. shelters permitted in MU and BE (BE ≤500 m² except shelters); Minor Utility includes "district heating plants" (IM, BE); Major Utility includes "cooling plants" — https://zoningbylaw.edmonton.ca/part-8-definitions/810-use-definitions'),
+ 'vbbl2025_2713scope': ('rule', 'claude', 'VBBL 2025 Book II Art. 2.7.1.3: (1) treated non-potable water may serve Column A or B uses; (2) "An alternate water source system shall use treated non-potable water in lieu of potable water for all of the uses set out in Column A" (water closets, urinals, trap primers); cooling-tower make-up is a Column B (optional) use for rainwater and clear-water waste. Book II does not itself say which buildings must install a system (Claude read the local text) — https://vancouver.ca/files/cov/2025-vbbl-book-II-insert-pages.pdf'),
+ # ---------------- visibility ----------------
+ 'thGlobalSwitch2025': ('planning document', 'agent', 'Tower Hamlets Strategic Development Committee, PA/24/01932 Global Switch House, 23 Apr 2025: about 10.7 m roof screen "screening the bulk of the plant from view"; flues visible through a ~10.5 m mesh screen; 32 generators enclosed inside the extension; conditions on plant noise and on grilles, louvres, vents and external plant — https://towerhamlets.moderngov.co.uk/mgConvert2PDF.aspx?ID=252350'),
+ 'abpHuntstown': ('planning document', 'agent', 'An Bord Pleanála ABP-313583 (Huntstown, Dublin): 58 generators behind "a circa 6.5 metres high louvred screen wall" and berms; condition 18 bars plant above the parapet — https://www.pleanala.ie/anbordpleanala/media/abp/cases/orders/313/d313583.pdf'),
+ 'abpCruiserath': ('planning document', 'agent', 'An Bord Pleanála PL06F.248544 (Cruiserath, Dublin 15): roof-level screened plant; parapet condition bars air handling equipment and tanks above the parapet; flue-stack finishes set by condition — https://www.pleanala.ie/anbordpleanala/media/abp/cases/orders/248/d248544.pdf'),
+ 'drieeEtix2010': ('government', 'agent', 'DRIEE Île-de-France inspection report, Etix data centre in a former postal building, Pantin (2010): 26 generators in dedicated soundproofed containers on the roof terrace; chillers with integrated dry coolers on the roof — https://georisques.gouv.fr/webappReport/ws/installations/document/affef3ad33a04701bf35d5b8240b2eb1'),
+ 'spencerBldg': ('consultant claim', 'agent', 'Smith + Andersen, Spencer Building (515 W Hastings, Vancouver) powered-shell sheet: air-cooled chillers and generators "utilizing the limited roof space available"; no screening information; City permit not found — https://www.smithandandersen.com/sites/default/files/project_profiles/2026-08/Spencer%20Building%20Powered%20Shell%2025770.pdf'),
+ 'bahnhofPionen': ('operator claim', 'agent', 'Bahnhof, Pionen (Stockholm): the facility, generators included, is blasted into bedrock under Vita Bergen; only the entrance is visible — https://www.bahnhof.se/filestorage/userfiles/file/Pionen-PDF.pdf'),
+ 'lpc50Hudson': ('government', 'agent', 'NYC Landmarks Preservation Commission permit COFA-19-24537 (50 Hudson St): "installing mechanical units set behind a louvered screen" judged not visible from the street; not documented as a data centre — https://s-media.nyc.gov/agencies/lpc/Permits/PermitFiles/COFA-19-24537.pdf'),
+ 'arupManx2013': ('consultant document', 'agent', 'Arup plant noise assessment, Manx Telecom hosting centre, Isle of Man (13/00726/REM): dry cooler screened by "A solid screen 3m high having a surface mass of 12kg/m²"; limits 45 dB LAeq,1hr at the school, 30 dB at nearest homes — https://planningportal.im/md/docs/1314840.md'),
+ 'fairfaxDC2024': ('government', 'agent', 'Fairfax County, data centre zoning amendment (adopted 10 Sep 2024; news release and May 2024 staff report): "all equipment must be enclosed or screened by a wall or similar barrier"; generators 300 ft from homes; noise studies before and after. Adopted ordinance text not opened — https://www.fairfaxcounty.gov/news/board-supervisors-approve-new-data-center-zoning-ordinance-amendment'),
+ 'loudounDC': ('government', 'agent', 'Loudoun County zoning rewrite summary: "fully-screened mechanical equipment", soundproofing roof or ground plant, facade treatment on all sides. Summary page, no section numbers — https://www.loudoun.gov/5956'),
+ 'amsterdamDC2020': ('government', 'agent', 'Amsterdam, siting policy for data centres 2020–2030 (first revision): data-centre buildings only "intensief gestapeld" (intensively stacked); underground encouraged; no roof-plant or screening rule — https://odnzkg.nl/wp-content/uploads/2026/07/Vestigingsbeleid-datacenters-2020-2030-Amsterdam-Duurzaam-Digitaal-eerste-herziening.pdf'),
+ 'maekawaISO': ('peer-reviewed + standard summary', 'agent', 'Barrier attenuation: Maekawa–Tatge IL = 10 log10(3 + 20N), N = 2δ/λ (Bugaru et al., Computation 9:129, 2021); ISO 9613-2:1996 Dz capped at 20 dB for single and 25 dB for double diffraction (SoundPLAN appendix filed with the Italian environment ministry; CadnaA documentation). ISO text and Maekawa 1968 not read (paywalled) — https://www.mdpi.com/2079-3197/9/12/129/html'),
+ 'fhwaBarrier': ('government (US)', 'agent', 'FHWA noise barrier inventory to 2010, US$/ft²: concrete 30, block 25, wood 20, metal 18, absorptive 28, berm 7; WSDOT current average $51.61/ft². Highway walls, not rooftop screens; dollar basis not confirmed — https://www.fhwa.dot.gov/ENVIRonment/noise/noise_barriers/inventory/summary/stable710.cfm'),
+ 'cumminsF1493': ('manufacturer claim', 'agent', 'Cummins enclosures F-1493: 1,000 kW set at 7 m — 90 dB(A) weather housing, 80 Level I, 76 Level II acoustic (≈10–15 dB, Claude inference) — https://www.cummins.com/sites/default/files/2018-08/F-1493-Enclosures-en.pdf'),
+ 'yorkClearance2024': ('manufacturer claim', 'agent', 'York/JCI (2024): a 12 ft wall 6 ft from an air-cooled chiller cut capacity by more than 4.5% and raised power by more than 6%; thin walls no taller than the unit negligible — https://www.york.com/insights/2024/chiller-clearances-vs-efficiency'),
+ # ---------------- construction and connection ----------------
+ 'persson2019': ('peer-reviewed', 'agent', 'Persson, Wiechers, Möller & Werner 2019, Energy 176:604–622: district-heating trench cost I/L = C1 + C2·da, average C1 = 212 €/m, C2 = 4,464 €/m² (2015 €; ≈€658/m at da 0.1 m, Claude arithmetic); inner-city vs outer-city split only in a figure not read — https://vbn.aau.dk/ws/files/330989757/1_s2.0_S0360544219306097_main.pdf'),
+ 'nproCosts': ('vendor claim', 'agent', 'npro.energy cost overview (from Logstor pipe prices and the KWW catalogue, "without any guarantee"): insulated pipe pair €/m — DN100 pipe 160 + installation 700 unpaved / 1,500 paved; DN200 320 + 950 / 2,130; DN300 560 + 1,120 / 2,690 — https://www.npro.energy/main/en/help/technology-costs'),
+ 'cambridgeApp5': ('government (US)', 'agent', 'City of Cambridge MA, net-zero LCESS Appendix 5: district pipe US$/ft — DN100 336, DN200 571, DN300 896 (2027 planning prices; inclusions not stated) — https://www.cambridgema.gov:443/-/media/Files/CDD/Climate/NetZero/LCESS/appendix5_webversion.pdf'),
+ 'vanNEU2018': ('government', 'agent', 'City of Vancouver NEU expansion report (21 Feb 2018): distribution capital "$13 to $37 million (2018$)", base case $29M; no length or cost per metre — https://council.vancouver.ca/20180221/documents/pspc3.pdf'),
+ 'edmDDEcapital': ('government', 'claude', 'City of Edmonton, DDE 2025–2026 rate filing (IIS02765; local copy): Phase 1 capital $35.9M covers the energy centre, distribution piping and energy transfer station together; Phase 1A $18.3M; no pipe length or per-metre cost (Claude searched the local PDFs, incl. the 2025 business case) — data/Edmonton_DDE_2025-2026_Rate_Filing.pdf'),
+ 'isoplusEPD': ('manufacturer EPD', 'agent', 'isoplus Suomi EPD, pre-insulated steel pipe: DN100 A1–A3 39.5 kg CO2e per metre of single pipe (A4 1.03, A5 0.21); DN20 ×0.22, DN400 ×6.2. Supply and return ≈ double; trench excluded — https://api.environdec.com/api/v1/EPDLibrary/Files/697db282-a3b1-41da-888c-08dcd3ea77d2/Data'),
+ 'vanNEUlevy2025': ('rule (utility tariff)', 'claude', 'City of Vancouver, False Creek NEU 2025 rates (report 25 Nov 2024): connection levy $112,611 per energy transfer station plus "$133 per kW of the peak heat energy demand", "to recover the direct costs of connection (service connection and energy transfer station)"; proposed 2026 $123,873 + $146/kW — https://council.vancouver.ca/20241203/documents/spec1e.pdf'),
+ 'vanNEUguide': ('rule (guideline)', 'agent', 'City of Vancouver NEU connectivity guidelines: building-side supply 60 °C, return ≤45 °C, ΔT ≥15 °C; ETS room ≥6 × 3 m under 13,940 m², 6 × 4 m to 23,230 m², 2.7 m headroom; ETS owned by the NEU — https://guidelines.vancouver.ca/guidelines-neighbourhood-energy-utility-connectivity-requirements.pdf'),
+ 'torontoDER2016': ('government', 'agent', 'City of Toronto, District Energy Ready Guideline (Oct 2016), design supply/return °C: radiant floor 45/35; radiators and fan coils 60/45; convectors 70/55; make-up air 65/45 (new buildings) — https://www.toronto.ca/wp-content/uploads/2017/12/8c27-District-Energy-Ready-Guideline_October-2016.pdf'),
+ 'statcanHeat2011': ('government', 'agent', 'Statistics Canada, Households and the Environment 2011, main heating equipment: Canada forced air 57%, baseboard 27%, hot-water/steam boiler 5%; BC 52 / 28 / 6 (use with caution); Alberta forced air 94%. No apartment split — https://www150.statcan.gc.ca/n1/pub/11-526-s/2013002/t001-eng.htm'),
+ 'irwdCulver2018': ('utility (US)', 'agent', 'Irvine Ranch Water District, Culver Dr recycled-water pipeline bid (2018): low bid $707,777 for ≈1,240 LF of 8–12-inch purple pipe (≈US$1,870/m all items, Claude arithmetic); one US project — https://www.irwd.com/images/pdf/doing-business/engineering/2018/BID_SUMMARY_-_Culver_Dr_RW_Pipeline.pdf'),
+ 'cec2023pump': ('government-commissioned', 'agent', 'California Energy Commission CEC-500-2023-026 (UCLA, 2023): pressurisation energy 222 kWh per acre-foot (≈0.18 kWh/m³, Claude conversion) — https://www.energy.ca.gov/sites/default/files/2023-05/CEC-500-2023-026.pdf'),
+ 'epaQuincy': ('government (US)', 'agent', 'US EPA water reuse case study, Quincy WA: data-centre cooling water treated by lime softening, UF and RO; Microsoft financed $31M; about 138 million US gal/yr saved — https://www.epa.gov/node/286187'),
+ 'gsaBlowdown2023': ('government (US)', 'agent', 'GSA Green Proving Ground, blowdown recovery (2023): $35,403 equipment + $11,422 install on a 1,150-ton plant; blowdown −53%, make-up −16%, cycles 2.8 → 4.9; payback 2.9–4.8 years — https://www.gsa.gov/system/files/GPG%20Findings-052-Blowdown%20Recovery-14Sep23.pdf'),
+ 'epcorGoldBar': ('utility (claim)', 'agent', 'EPCOR, Gold Bar operations: "membrane-based wastewater recycling facility which supplies local industry with reclaimed water" (Suncor named). Terms, price and openness to new customers not published — https://epcor.com/ca/en/ab/edmonton/operations/water-wastewater/gold-bar-wastewater-treatment-plant/gold-bar-operations.html'),
+ 'vanSewerCap2025': ('rule (policy)', 'agent', 'City of Vancouver, Sewer Capacity Development Review Policy (Council 29 Oct 2025): no-review threshold, then low-impact class, else "detailed technical review by the City Engineer"; model prepared by the City or the applicant; no timeline or cost-sharing stated — https://vancouver.ca/files/cov/sewer-capacity-development-review-policy.pdf'),
+ 'mvWDP2021': ('government', 'agent', 'Metro Vancouver waste discharge permit application (Dec 2021): "cooling water" and "boiler blow down" listed among non-domestic sources to describe; new industrial permit fee $1,000 — https://metrovancouver.org/services/liquid-waste/Documents/general-waste-discharge-application.pdf'),
+ 'epcorDrainage2023': ('utility', 'agent', 'EPCOR Water and Drainage Customer Connection Guide (May 2023) and One Water planning memos (Mar 2025): EPCOR reviews stamped plans and issues an approval letter with costs; "Details of any required sewer construction would be reviewed at the Development Permit stage"; no timelines — https://www.epcor.com:443/products-services/new-connections/Documents/Water-Drainage-Customer-Connection-Guide.pdf'),
+ 'bchExtension2026': ('rule (tariff)', 'claude', 'BC Hydro Electric Tariff, T&C s. 8.3 and 11.5 (local copy, effective 2025–26): Extension Fee = extension cost + customer share of system improvement + service connection − BC Hydro maximum contribution; system improvement under $1M not charged; at ≥1 MVA the customer pays the part above $1M per MVA and above $10M; maximum contribution, General Service $521 per kW of estimated billing demand; minimum underground three-phase service connection $1,520 (≤200 A) to $2,950 (≤400 A) — data/raw/bchydro/tariff.txt'),
+ 'bchDG100': ('utility', 'agent', 'BC Hydro DG technical interconnection requirements ≤100 kW, Rev 3 (15 Jul 2026): covers "customer‑owned generators and energy storage systems" up to 100 kW net injection per phase; CSA C22.3 No. 9 and UL 1741; application and field-verification reviews. Larger (to 35 kV) per the 2010 requirements, which do not mention storage — https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/distribution/standards/ds-dgi-100kw-and-below-requirements.pdf'),
+ 'aesoConnect': ('system operator', 'agent', 'AESO Connection Process Quick Reference Guide v2.1 (2021): stages 0–6; generation and storage indicative weeks — Stage 1 14, Stage 2 39, Stage 3 55, Stage 4 30; only where transmission is needed — https://www.aeso.ca/assets/Uploads/connection-process/Connection-Process-Quick-Reference-Guide.pdf'),
+ 'epcorDTtc2025': ('rule (utility terms)', 'agent', 'EPCOR Distribution & Transmission terms and conditions (1 Jan 2025): "Generating Facility" includes storage; Distribution Interconnection Agreement required; customer pays "all interconnection costs as determined by EDTI"; exporters must be Power Pool participants; micro-generation <5 MW — https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2025-01_distribution-connection-services-terms-and-conditions.pdf'),
+ 'bcUCAs1': ('rule (statute)', 'claude', 'BC Utilities Commission Act s. 1 "public utility" — includes supplying electricity "to or for the public or a corporation for compensation"; excludes "a person not otherwise a public utility who provides the service or commodity only to the person or the person\'s employees or tenants, if the service or commodity is not resold to or used by others"; s. 88(3) exemptions with the minister\'s approval. Supplying a neighbour for pay falls inside unless exempted (reading, not legal advice) — https://free.bcpublications.ca/civix/document/id/complete/statreg/96473_01'),
+ 'aucCoaldale2025': ('regulator decision', 'claude', 'AUC Decision 29294-D01-2025 (Coaldale Renewables / McCain, 3 Jun 2025): under EUA s. 2(1)(b) "the lands must, at a minimum, be contiguous"; lines crossing a highway to the customer "are an attempt to self-distribute and are not permitted". Permission to appeal granted in part (Sep 2025, per law-firm commentary); outcome not verified — https://prd-api-efiling20.auc.ab.ca/Anonymous/DownloadPublicDocumentAsync/836696'),
+ 'vanQuebecSt2020': ('government', 'agent', 'City of Vancouver memo to Council (15 May 2020), NEU Mount Pleasant expansion on Quebec St 3rd–6th Ave: start 19 May, completion "anticipated in fall 2020" (≈5 months) — https://vancouver.ca/files/cov/05-15-2020-quebec-st-phase-3.pdf'),
+ # ---------------- time and money ----------------
+ 'inlL2_2015': ('government (US lab)', 'agent', 'INL/EXT-15-36313 (2015), public Level 2 use: starts concentrate at the start of the work day; drivers "rarely initiate their away-from-home charging before 6 a.m. or after 7 p.m."; DC fast charging leans to the end of the work day — https://inldigitallibrary.inl.gov/sites/sti/sti/6899530.pdf'),
+ 'uclaWorkplace': ('academic (industry data)', 'agent', 'Winn, Electric Vehicle Charging at Work (UCLA Luskin, ChargePoint data 2011–15): workplace session starts — 5–8 am 20.4%, 8–10 am 26.7%, 10–12 13.5%, 12–2 pm 15.2%, 2–6 pm 18.0%, 6 pm–12 am 5.4%, 12–5 am 0.9% — https://innovation.luskin.ucla.edu/sites/default/files/Full%20Report.pdf'),
+ 'dunskyNRCan2024': ('government-commissioned', 'agent', 'Dunsky for NRCan (Feb 2024), EV charging infrastructure for Canada, Table 12 installed cost per port (2022 CAD): DC fast $160k at 125 kW (2025), $240k at 175 kW (2030); Level 2 $15k (2025), $10k (2030); grid upgrades excluded; fleets charge overnight at depots — https://natural-resources.canada.ca/energy-efficiency/transportation-energy-efficiency/resource-library/electric-vehicle-charging-infrastructure-canada'),
+ 'bchDR2026': ('utility', 'agent', 'BC Hydro Demand Response for Business customer manual (Aug 2026): events Nov–Mar, weekdays 6 am–10 pm, ≤4 consecutive hours, ≤2 a day, ≤20 a season; BC Hydro peaks on weekday evenings (2021 demand report); records 5–6 pm (Dec 2022 winter, Jul 2026 summer) — https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/power-smart/business/programs/demand-response-for-business-customer-manual.pdf'),
+ 'aesoStats2025': ('system operator', 'agent', 'AESO 2025 Annual Market Statistics (Mar 2026): annual and winter peak 12,785 MW on 11 Dec 2025; winter season Nov–Apr; peak hour not reported — https://www.aeso.ca/assets/Annual-Market-Stats-2025.pdf'),
+ 'abGreenhouse2017': ('government', 'agent', 'Alberta Agriculture and Forestry AGDEX 821-59 (2018, 2017 survey): greenhouse capital investment per m² — cucumber $112.75, tomato $129.99, pepper $138.99, bedding plants $321.01 (surveyed existing operations, not new build) — https://open.alberta.ca/dataset/fbb2b0b5-53b9-4dbd-92b7-f37ec8ed9369/resource/d074794d-7ec0-4bef-bc93-99a57bbc2cf2/download/2017greenhousecop.pdf'),
+ 'faoRAS2022': ('intergovernmental', 'agent', 'Bregnballe, A guide to recirculation aquaculture (FAO/Eurofish 2022), pp. 53–54: total investment "between EUR 12 to EUR 20 (or more) per kg produced per year"; simple outdoor grow-out ≈€6/kg — https://www.fao.org/3/cc2390en/cc2390en.pdf'),
+ 'fortisBC2026': ('utility', 'agent', 'FortisBC rate sheet effective 1 Jul 2026 (Mainland): Rate 2 basic $1.4309/day, delivery $5.377/GJ, storage & transport $2.493/GJ, cost of gas $1.660/GJ; Rate 3 basic $4.3526/day, storage & transport $2.268/GJ. Extracted text was jumbled — check against the tariff — https://www.cdn.fortisbc.com/libraries/docs/default-source/about-us-documents/regulatory-affairs-documents/gas-utility/fei_biomethane_one_page_rate_sheet.pdf'),
+ 'atcoGas2026': ('utility + government', 'agent', 'ATCO Gas North delivery (1 Jan 2026): Low Use $0.997/day + $1.049/GJ; Mid Use $1.909/day + $1.045/GJ (riders excluded). Alberta regulated rate, ATCO area, 2026 $/GJ: Jan 3.331 … Oct 1.458 (Utilities Consumer Advocate) — https://ucahelps.alberta.ca/regulated-rates.aspx'),
+ 'bcCarbonTax2025': ('government', 'agent', 'BC: "The B.C. carbon tax was eliminated effective April 1, 2025"; federal fuel charge set to zero 1 Apr 2025 (CRA FCN16); BC output-based pricing for large industry continues (≥10,000 t/yr); Alberta TIER $95/t for 2025, 2026 price not verified from a primary source — https://www2.gov.bc.ca/gov/content/taxes/sales-taxes/motor-fuel-carbon-tax/carbon-tax-elimination'),
+ # ---------------- materials ----------------
+ 'epraBC': ('program operator', 'agent', 'EPRA BC / Return-It Electronics: accepts "Desktop computers (including those acting as servers)" and IT/telecom gear; loose batteries not accepted; Large Volume Generator pickup with a 3-pallet minimum; approved primary processors (Dec 2023): FCM Recycling (Delta), eCycle Solutions (Chilliwack), Quantum Lifecycle Partners and Hi Tech Recyclers (Edmonton) — https://www.recyclemyelectronics.ca/bc/what-can-i-recycle'),
+ 'armaElectronics': ('regulator', 'agent', 'Alberta Recycling Management Authority electronics program: "Blade (rack mount), desktop and floor standing servers" covered, for consumer, industrial or commercial use; registered processors incl. Hi-Tech Recyclers, Quantum Lifecycle Partners, YEG Electronics Recycling (Edmonton), Shanked Computer Recycling (Acheson), eCycle Solutions (Airdrie) — https://www.albertarecycling.ca/registry/stewardship/#processors'),
+ 'cfsPlus': ('government + affiliates (claims)', 'agent', 'Computers for Schools Plus (ISED): BC affiliate BC Technology for Learning Society / ReuseTechBC (Burnaby; Windows 11-capable devices); Alberta Computers for Schools (Edmonton, Calgary) takes servers (≥4 cores) and recycles servers, switches, UPSs and lead batteries — https://www.cfsalberta.ca/donate.php'),
+ 'call2recycle': ('program operator', 'agent', 'Call2Recycle Canada: dry-cell batteries up to 5 kg each (incl. sealed lead acid and Li-ion); larger UPS strings likely outside the program (inference); Alberta battery EPR from 1 Apr 2025 — https://call2recycle.ca/faq/'),
+ 'itsp40006': ('government', 'agent', 'Canadian Centre for Cyber Security ITSP.40.006, IT Media Sanitization (supersedes ITSG-06; cites NIST SP 800-88 Rev. 1); Government of Alberta Secure Digital Media Sanitization Standard v2.0 (2023) uses NIST terms — https://www.cyber.gc.ca/en/guidance/it-media-sanitization-itsp40006'),
+}
+for k, (kind, chk, txt) in NEW.items():
+    S[k] = txt
+m['source_kinds'] = {**m.get('source_kinds', {}), **{k: v[0] for k, v in NEW.items()}}
+m['source_check'] = {**m.get('source_check', {}), **{k: v[1] for k, v in NEW.items()}}
+
+# attach to existing quantities
+ATT = {
+ 'component_space': ['mfrDryCooler', 'evapcoLayout2026', 'bacS3000', 'bacLayout2023', 'mfrAdiabatic', 'mfrGenset', 'nfpa37clear', 'mfrBESS', 'nfpa855tia', 'vanParking5', 'edmZB580'],
+ 'size_fit': ['evapcoLayout2026', 'vanParking5', 'edmZB580'],
+ 'battery': ['mfrBESS', 'nfpa855tia', 'abESSstandata', 'bchDG100', 'epcorDTtc2025'],
+ 'storage_footprint': ['mfrBESS', 'nfpa855tia'],
+ 'visibility': ['edmZB5120', 'edmZB2120', 'vanZDBs10', 'thGlobalSwitch2025', 'abpHuntstown', 'abpCruiserath', 'drieeEtix2010', 'spencerBldg', 'bahnhofPionen', 'lpc50Hudson', 'fairfaxDC2024', 'loudounDC', 'amsterdamDC2020', 'yorkClearance2024'],
+ 'noise_level': ['maekawaISO', 'arupManx2013', 'cumminsF1493', 'fhwaBarrier'],
+ 'distribution_cost': ['persson2019', 'nproCosts', 'cambridgeApp5', 'vanNEU2018', 'edmDDEcapital', 'isoplusEPD', 'vanQuebecSt2020'],
+ 'row_cost': ['persson2019', 'nproCosts', 'vanQuebecSt2020'],
+ 'receiver_demand': ['vanNEUguide', 'torontoDER2016', 'statcanHeat2011', 'vanNEUlevy2025'],
+ 'reclaimed_makeup': ['irwdCulver2018', 'cec2023pump', 'epaQuincy', 'epcorGoldBar', 'vbbl2025_2713scope'],
+ 'blowdown_recovery': ['gsaBlowdown2023', 'epaQuincy'],
+ 'sewer_sink': ['vanSewerCap2025', 'mvWDP2021', 'epcorDrainage2023'],
+ 'interconnection': ['bchExtension2026', 'bchDG100', 'aesoConnect', 'epcorDTtc2025'],
+ 'self_gen_rules': ['bcUCAs1', 'aucCoaldale2025'],
+ 'licence_flag': ['bcUCAs1', 'aucCoaldale2025'],
+ 'ev_stalls': ['inlL2_2015', 'uclaWorkplace', 'dunskyNRCan2024', 'vanUses2026', 'edmUses2026'],
+ 'peak_relief': ['bchDR2026', 'aesoStats2025'],
+ 'demand_profile': ['bchDR2026', 'aesoStats2025', 'inlL2_2015'],
+ 'greenhouse_area': ['abGreenhouse2017', 'vanUses2026', 'edmUses2026'],
+ 'aquaculture_tonnes': ['faoRAS2022', 'edmUses2026'],
+ 'price_ceiling': ['fortisBC2026', 'atcoGas2026', 'bcCarbonTax2025'],
+ 'ewaste': ['epraBC', 'armaElectronics', 'cfsPlus', 'call2recycle', 'itsp40006'],
+ 'zoning_status': ['vanUses2026', 'edmUses2026', 'vanR3R4R5', 'edmZBres'],
+ 'cooling_centre_people': ['vanUses2026', 'edmUses2026'],
+ 'evaporation': ['pspcLegionella', 'vanCTseminar2021'],
+}
+Q = {q['id']: q for q in r['quantities']}
+for qid, ids in ATT.items():
+    q = Q[qid]
+    q['sources'] = list(dict.fromkeys(q['sources'] + ids))
+    have = {x['id'] for x in q.get('source_roles', [])}
+    q['source_roles'] = q.get('source_roles', []) + [{'id': i, 'term': 'research pass 16 Oct 2026 (' + m['source_kinds'][i] + ')', 'role': 'pending build', 'conf': 50 if m['source_check'][i] == 'agent' else 70, 'verified': m['source_check'][i] == 'claude'} for i in ids if i not in have]
+
+# grouped view for the diagram: carrier → gate → sources
+G = lambda gate, title, ids, note='': {'gate': gate, 'title': title, 'ids': ids, 'note': note}
+m['research_pass'] = {
+ 'date': '16 Oct 2026',
+ 'intro': 'Sources gathered for the next build (connection cards, plant sizing and placement, visibility, opportunity screening). Grouped by what moves and by the gate each source answers. Kind and check status are shown on each source; "to check" means a research agent read it and the quote still needs checking against the page.',
+ 'gates': ['physics', 'land', 'rules', 'demand', 'time', 'money'],
+ 'groups': [
+  {'carrier': 'Plant on the site', 'items': [
+   G('physics', 'Unit sizes and capacities (generic)', ['mfrDryCooler', 'bacS3000', 'mfrAdiabatic', 'mfrGenset', 'mfrBESS'], 'Manufacturer data used only to set generic ranges; no models named in the tool.'),
+   G('land', 'Clearances and spacing', ['evapcoLayout2026', 'bacLayout2023', 'nfpa37clear', 'nfpa855tia', 'abESSstandata'], 'NFPA 855 adoption in BC and Alberta not found; treated as reference, not code.'),
+   G('land', 'Loading and truck access', ['vanParking5', 'edmZB580']),
+   G('rules', 'Cooling-tower setbacks and permits', ['pspcLegionella', 'vanCTseminar2021']),
+  ]},
+  {'carrier': 'Seen and heard', 'items': [
+   G('rules', 'Screening and concealment rules', ['edmZB5120', 'edmZB2120', 'vanZDBs10', 'fairfaxDC2024', 'loudounDC', 'amsterdamDC2020']),
+   G('physics', 'Barriers and enclosures', ['maekawaISO', 'arupManx2013', 'cumminsF1493', 'yorkClearance2024']),
+   G('money', 'Screen and wall costs', ['fhwaBarrier'], 'Highway walls only; no public cost for rooftop acoustic enclosures found.'),
+   G('demand', 'Precedents: shown or hidden', ['thGlobalSwitch2025', 'abpHuntstown', 'abpCruiserath', 'drieeEtix2010', 'spencerBldg', 'bahnhofPionen', 'lpc50Hudson']),
+  ]},
+  {'carrier': 'Heat', 'items': [
+   G('money', 'Pipe cost per metre', ['persson2019', 'nproCosts', 'cambridgeApp5', 'vanNEU2018', 'edmDDEcapital'], 'No Canadian cost per metre found; European and US figures only.'),
+   G('money', 'Connection levy and transfer station', ['vanNEUlevy2025', 'vanNEUguide']),
+   G('physics', 'Receiver supply temperatures and heating types', ['torontoDER2016', 'statcanHeat2011']),
+   G('time', 'Street-work duration', ['vanQuebecSt2020']),
+   G('physics', 'Embodied carbon of pipe', ['isoplusEPD']),
+   G('money', 'What heat replaces: gas price and carbon', ['fortisBC2026', 'atcoGas2026', 'bcCarbonTax2025']),
+  ]},
+  {'carrier': 'Water', 'items': [
+   G('rules', 'What reused water may serve', ['vbbl2025_2713scope']),
+   G('money', 'Reclaimed pipe, pumping and treatment', ['irwdCulver2018', 'cec2023pump', 'epaQuincy', 'gsaBlowdown2023']),
+   G('demand', 'Reclaimed supply nearby', ['epcorGoldBar']),
+   G('rules', 'Sewer capacity and discharge', ['vanSewerCap2025', 'mvWDP2021', 'epcorDrainage2023']),
+  ]},
+  {'carrier': 'Electricity', 'items': [
+   G('money', 'Grid connection charges', ['bchExtension2026']),
+   G('rules', 'Batteries and generation that export', ['bchDG100', 'aesoConnect', 'epcorDTtc2025']),
+   G('rules', 'Selling power across the property line', ['bcUCAs1', 'aucCoaldale2025']),
+   G('time', 'Peak windows', ['bchDR2026', 'aesoStats2025']),
+  ]},
+  {'carrier': 'Opportunities next door', 'items': [
+   G('rules', 'Where receiving uses are allowed', ['vanUses2026', 'edmUses2026']),
+   G('land', 'Low-density homes', ['vanR3R4R5', 'edmZBres']),
+   G('time', 'EV charging by hour', ['inlL2_2015', 'uclaWorkplace']),
+   G('money', 'Chargers, greenhouses, fish farms', ['dunskyNRCan2024', 'abGreenhouse2017', 'faoRAS2022']),
+  ]},
+  {'carrier': 'Materials', 'items': [
+   G('demand', 'Where retired equipment can go', ['epraBC', 'armaElectronics', 'cfsPlus', 'call2recycle']),
+   G('rules', 'Drive sanitisation', ['itsp40006']),
+  ]},
+ ],
+ 'still_missing': [
+  'Redundancy practice (N+1, 2N) from Uptime / ASHRAE / TIA-942', 'Canadian district-heating pipe cost per metre', 'VBBL Art. 6.3.2.15 cooling-tower setbacks (by-law text)',
+  'NFPA 855 adoption in BCBC 2024, NFC-AE 2023, VBBL 2025', 'Rainwater cistern cost per m³', 'Truck cost and emissions per km; racks per truckload',
+  'Walking-distance norms for warming and cooling centres', 'Vancouver and Edmonton street-use permits and trenching rates', 'Street centreline datasets',
+  'Edmonton / Alberta cooling-tower rules', 'R2 and e-Stewards facilities (dynamic directories)', 'Alberta TIER 2026 price', 'EPCOR Gold Bar reclaimed-water terms',
+ ],
+}
+m['research_pass']['corrections'] = [
+ 'Edmonton s. 5.120 rooftop concealment applies to non-industrial development only; IM and IH have no mechanical screening clause; BE screens equipment from streets and non-industrial zones.',
+ 'VBBL 2.7.1.3(2) sets what an installed alternate water system must serve; it does not say which buildings must install one.',
+ 'Vancouver Parking By-law row 5.2.5 is labelled for laboratory, manufacturing, wholesale and similar uses (agent read it as transportation and storage); data centres are not listed, so the Director of Planning sets the rate.',
+]
+json.dump(r, open(P, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+print('added', len(NEW), 'sources; total', len(S))

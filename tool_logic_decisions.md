@@ -200,3 +200,10 @@ Running record of decisions J.B. has made about the tool's logic, in the order m
 - Embodied carbon: Alissa et al. 2025 — the building is under 1% of life-cycle GHG on a US-average grid (about 5% on renewable power); making servers is 9% on that grid but about 82% on renewable power. In Vancouver the servers' making dominates; in Edmonton running them does.
 - BC Hydro 2026 Call: 15 applications, close to 800 MW requested; results after the government transition.
 - Parkland County (Acheson) dropped: a case study for J.B., not a tool site.
+
+## 16 Oct 2026 — research pass for the build (sources only; nothing built)
+- 77 sources added (register 411), each tagged by kind and by check status ("checked" = re-read by Claude; "to check" = research agent read it). Diagram v28 adds a "Sources of truth" view grouped by carrier (plant on the site, seen and heard, heat, water, electricity, opportunities next door, materials) and by gate (physics, land, rules, demand, time, money); a group highlights the nodes that cite it. Subcategories are in that view only, so the main graph stays as it was.
+- Corrections: Edmonton s. 5.120 rooftop concealment is for non-industrial development only (IM, IH no mechanical clause; BE screens from streets and non-industrial zones). VBBL 2.7.1.3(2) governs what an installed alternate water system serves, not who must install one. Vancouver loading row 5.2.5 is manufacturing/wholesale-type uses; data centres are not listed, so the Director of Planning sets the rate.
+- Pipe cost: no Canadian per-metre figure; Edmonton DDE filings give only bundled capital ($35.9M Phase 1). European (Persson 2019; npro) and US (Cambridge) figures held, labelled.
+- NFPA 855: not cited in NFC 2020 or the BC Fire Code 2024 amendments; the other codes are on J.B.'s list (R7–R9).
+- Gaps still open: redundancy practice, cistern cost, truck cost and emissions, walking-distance norms, street permits, centrelines, Alberta cooling-tower rules, TIER 2026 price.

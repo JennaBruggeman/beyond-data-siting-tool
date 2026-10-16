@@ -160,6 +160,9 @@ out = {
     'model_results': r['meta'].get('model_results', []),
     'label_systems': r['meta'].get('label_systems', {}),
     'try_menu_readiness_note': r['meta'].get('try_menu_readiness_note', ''),
+    'research_pass': r['meta'].get('research_pass', {}),
+    'source_kinds': r['meta'].get('source_kinds', {}),
+    'source_check': r['meta'].get('source_check', {}),
 }
 json.dump(out, open(os.path.join(here, 'diagram_data.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 dangling = [e for e in edges if not any(n['id'] == e['from'] for n in nodes)]
