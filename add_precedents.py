@@ -56,6 +56,7 @@ SRC = {
  'parisPool': 'Ville de Paris, Butte-aux-Cailles pool (2017): heat recovered from a data centre warms the pool water — https://www.paris.fr/pages/un-bassin-nordique-pour-nager-en-toutes-saisons-3583/',
  # rules
  'abBill22': 'Alberta Bill 22 (2022), Electricity Statutes (Modernizing Alberta\'s Electricity Grid) Amendment Act, as introduced 22 Feb 2022: "self-supply" defined; EUA s. 2(1)(b) exempts self-supply "consumed solely on that property by that owner or tenant"; no clause allowing export of surplus (checked by Claude; enacted text not yet read) — https://docs.assembly.ab.ca/LADDAR_files/docs/bills/bill/legislature_30/session_3/20220222_bill-022.pdf',
+ 'abEUA2026': 'Electric Utilities Act, SA 2003, c E-5.1, current consolidation in force since 6 Feb 2026 (CanLII, read by Claude 15 Oct 2026; amended by 2022 c 8 = Bill 22): s. 1(1)(vv.1) "self-supply"; s. 2(1)(b) the Act does not apply to self-supply "consumed solely on that property by that owner or tenant"; s. 18(2) "All electric energy entering or leaving the interconnected electric system must be exchanged through the power pool" unless ss. 39(1.1) or 105(1.1) or regulations provide otherwise. So surplus leaving the site goes through the power pool or the micro-generation rules; there is no separate export right — https://www.canlii.org/en/ab/laws/stat/sa-2003-c-e-5.1/latest/sa-2003-c-e-5.1.html',
  'rlcAUC2021': 'SECONDARY (law-firm summary): Regulatory Law Chambers on the AUC Distribution System Inquiry final report: EV charging stations "are not clearly defined in legislation"; AUC report itself blocked to Claude — https://regulatorylawchambers.ca/2021-4-5-auc-distribution-system-inquiry-final-report-auc-proceeding-24116/',
  'edmZB570': 'Edmonton Zoning Bylaw 20001 s. 5.70: roof up to 1.7 m above maximum height; flat-roof parapet 0.4 m; no height limit for listed items (mechanical penthouse, tanks, "other similar architectural features") — solar collectors not named (checked by Claude) — https://zoningbylaw.edmonton.ca/570-measuring-height-and-grade',
  'edmZB510': 'Edmonton Zoning Bylaw 20001 s. 5.10 cl. 11 (read by Claude from the bylaw PDF, data/raw/edm/bylaw): rooftop collectors may project 1.5 m from the roof and up to 1.5 m above the maximum height "in a residential Zone"; must not extend beyond the eave or roof edge; wall-mounted 1.5 m into a setback, 0.6 m from the lot line. Non-residential zones: no projection limit stated — City to confirm — https://zoningbylaw.edmonton.ca/part-5-general-development-regulations/510-accessory-uses-buildings-and-structures',
@@ -63,7 +64,7 @@ SRC = {
 }
 r['new_sources'].update(SRC)
 # Bennett Jones summary conflicts with the bill text on export
-r['new_sources']['bennettBill22'] = r['new_sources']['bennettBill22'].replace('Act itself not yet read', 'CONFLICTS with the bill as introduced, which exempts only self-supply consumed on the property and has no export clause (abBill22)')
+r['new_sources']['bennettBill22'] = r['new_sources']['bennettBill22'].replace('Act itself not yet read', 'CONFLICTS with the bill as introduced, which exempts only self-supply consumed on the property and has no export clause (abBill22) and with the current consolidation (abEUA2026)')
 
 O = m['opportunity_labels']
 def setL(name, readiness, basis, sources, prov=False):
@@ -145,8 +146,8 @@ for t in m['try_menu']:
         a, b, s = RD[t['id']]; t['readiness'] = a; t['readiness_basis'] = b; t['readiness_sources'] = s
     if t['id'] in ('pv', 'pv_facade'):
         t['rules']['edmonton'] = ('no development permit for a compliant solar collector (ZB 20001 s. 7.120 cl. 3.7); collectors must stay inside the roof edge; the 1.5 m height allowance is written for residential zones only, so industrial zones are not addressed — City to confirm (s. 5.10 cl. 11); '
-                                  'self-supply exempt only when used on the property (Bill 22); export through micro-generation ≤5 MW')
-        t['rule_sources'] = ['bchRS2289', 'vanRoofBulletin2022', 'edmZB7120', 'edmZB510', 'edmZB570', 'abBill22', 'abMicrogen']
+                                  'self-supply exempt only when used on the property (EUA s. 2(1)(b), consolidated 2026); anything leaving the site goes through the power pool (s. 18(2)) or micro-generation ≤5 MW')
+        t['rule_sources'] = ['bchRS2289', 'vanRoofBulletin2022', 'edmZB7120', 'edmZB510', 'edmZB570', 'abEUA2026', 'abBill22', 'abMicrogen']
 m['try_menu_readiness_note'] = 'How proven each add-on is, paired with a data centre: from the precedent search of 15 Oct 2026. Operator and vendor pages are claims.'
 
 S = {**r.get('old_sources', {}), **r['new_sources']}

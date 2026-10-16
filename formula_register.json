@@ -507,7 +507,7 @@
     ],
     "rules": {
      "vancouver": "export ≤100 kW per phase (RS 2289); extra height at the Director of Planning's discretion (s. 10.1.1(d); bulletin, Nov 2022)",
-     "edmonton": "no development permit for a compliant solar collector (ZB 20001 s. 7.120 cl. 3.7); collectors must stay inside the roof edge; the 1.5 m height allowance is written for residential zones only, so industrial zones are not addressed — City to confirm (s. 5.10 cl. 11); self-supply exempt only when used on the property (Bill 22); export through micro-generation ≤5 MW"
+     "edmonton": "no development permit for a compliant solar collector (ZB 20001 s. 7.120 cl. 3.7); collectors must stay inside the roof edge; the 1.5 m height allowance is written for residential zones only, so industrial zones are not addressed — City to confirm (s. 5.10 cl. 11); self-supply exempt only when used on the property (EUA s. 2(1)(b), consolidated 2026); anything leaving the site goes through the power pool (s. 18(2)) or micro-generation ≤5 MW"
     },
     "changes": [
      "grid power ↓ a few %",
@@ -525,6 +525,7 @@
      "edmZB7120",
      "edmZB510",
      "edmZB570",
+     "abEUA2026",
      "abBill22",
      "abMicrogen"
     ],
@@ -544,7 +545,7 @@
     ],
     "rules": {
      "vancouver": "as above",
-     "edmonton": "no development permit for a compliant solar collector (ZB 20001 s. 7.120 cl. 3.7); collectors must stay inside the roof edge; the 1.5 m height allowance is written for residential zones only, so industrial zones are not addressed — City to confirm (s. 5.10 cl. 11); self-supply exempt only when used on the property (Bill 22); export through micro-generation ≤5 MW"
+     "edmonton": "no development permit for a compliant solar collector (ZB 20001 s. 7.120 cl. 3.7); collectors must stay inside the roof edge; the 1.5 m height allowance is written for residential zones only, so industrial zones are not addressed — City to confirm (s. 5.10 cl. 11); self-supply exempt only when used on the property (EUA s. 2(1)(b), consolidated 2026); anything leaving the site goes through the power pool (s. 18(2)) or micro-generation ≤5 MW"
     },
     "changes": [
      "grid power ↓",
@@ -566,6 +567,7 @@
      "edmZB7120",
      "edmZB510",
      "edmZB570",
+     "abEUA2026",
      "abBill22",
      "abMicrogen"
     ]
@@ -10213,7 +10215,7 @@
   "neuTraced": "NEU service area traced 15 Oct 2026 from By-law 9552 Schedule A (300 dpi render; boundary extracted from the bold line; georeferenced to street centrelines from City parcel addresses — Cambie, Alberta, Ontario, Main, Glen, Clark; W 3rd, W 4th, W 7th, E 5th, E 6th; one scale, north up; residuals up to ±45 m) — data/networks/van_neu_9552_traced.geojson. Approximate: parcels within ~50 m of the line are reported as on the edge.",
   "vanRoofBulletin2022": "City of Vancouver, Bulletin: Roof-mounted energy technologies and green roofs (effective 3 Feb 2009, amended 14 Nov 2022): solar panels may receive \"minor additional height\" at the Director of Planning's discretion (Zoning and Development By-law s. 10.1.1(d)); written rationale and drawings; no figure or edge setback stated — https://guidelines.vancouver.ca/bulletins/bulletin-roof-mounted-energy-technologies-and-green-roofs.pdf",
   "gowlingEV2021": "SECONDARY (law-firm summary): Gowling WLG, Regulation of electric vehicle charging services (2021): BC exempts EV charging from UCA Part 3 (BCUC G-66-19, pre-authorised by MO M104); Alberta unresolved — AUC Distribution System Inquiry final report (21 Feb 2021) made no final decision, p.60 \"most parties were of the view that no additional regulatory oversight is required at this time\"; AUC report itself not yet read — https://gowlingwlg.com/en/insights-resources/articles/2021/regulation-of-electric-vehicle-charging-services",
-  "bennettBill22": "SECONDARY (law-firm summary): Bennett Jones, Alberta's Electricity Statutes (Modernizing Alberta's Electricity Grid) Amendment Act (Bill 22; Royal Assent 31 May 2022; proclaimed 6 Mar 2024), 11 Mar 2024: self-supply and export of surplus electricity permitted when s. 2(1)(b) conditions are met; CONFLICTS with the bill as introduced, which exempts only self-supply consumed on the property and has no export clause (abBill22) — https://www.bennettjones.com/fr/Insights/Blogs/2024/03/Albertas-long-awaited-Electricity-Statutes-Modernizing-Albertas-Electricity-Grid-Amendment/pdf",
+  "bennettBill22": "SECONDARY (law-firm summary): Bennett Jones, Alberta's Electricity Statutes (Modernizing Alberta's Electricity Grid) Amendment Act (Bill 22; Royal Assent 31 May 2022; proclaimed 6 Mar 2024), 11 Mar 2024: self-supply and export of surplus electricity permitted when s. 2(1)(b) conditions are met; CONFLICTS with the bill as introduced, which exempts only self-supply consumed on the property and has no export clause (abBill22) and with the current consolidation (abEUA2026) — https://www.bennettjones.com/fr/Insights/Blogs/2024/03/Albertas-long-awaited-Electricity-Statutes-Modernizing-Albertas-Electricity-Grid-Amendment/pdf",
   "codemaTallaght": "Codema (Dublin energy agency), Tallaght District Heating Scheme: \"uses waste heat from the nearby Amazon data centre\"; \"Phase 1 of the scheme has been operational since 2023\"; 3,770 MWh in the first year; almost 1,100 t CO2 saved in 2023 (checked by Claude) — https://www.codema.ie/our-work/tallaght-district-heating-scheme/",
   "seaiTallaght": "SEAI case study, Tallaght District Heating: \"the planned addition of large thermal energy stores\" — https://seai.ie/case-studies/tallaght-district-heating",
   "rvoDatacenters": "RVO (Netherlands Enterprise Agency), Restwarmte — datacenters: Equinix exchanges heat and cold \"via een bodemenergiesysteem (WKO). De Universiteit van Amsterdam is daarvan de afnemer\"; a data centre on the Mijnwater network takes cold and returns heat (checked by Claude) — https://www.rvo.nl/onderwerpen/restwarmte/datacenters",
@@ -10254,7 +10256,8 @@
   "rlcAUC2021": "SECONDARY (law-firm summary): Regulatory Law Chambers on the AUC Distribution System Inquiry final report: EV charging stations \"are not clearly defined in legislation\"; AUC report itself blocked to Claude — https://regulatorylawchambers.ca/2021-4-5-auc-distribution-system-inquiry-final-report-auc-proceeding-24116/",
   "edmZB570": "Edmonton Zoning Bylaw 20001 s. 5.70: roof up to 1.7 m above maximum height; flat-roof parapet 0.4 m; no height limit for listed items (mechanical penthouse, tanks, \"other similar architectural features\") — solar collectors not named (checked by Claude) — https://zoningbylaw.edmonton.ca/570-measuring-height-and-grade",
   "edmZB7120": "Edmonton Zoning Bylaw 20001 s. 7.120 cl. 3.7: no development permit for \"A Solar Collector that complies with the regulations of this Bylaw\" on a building not on the historic inventory or register (checked by Claude); the Solar Collectors regulation (s. 5.10) did not load — https://zoningbylaw.edmonton.ca/part-7-administrative-and-interpretive-clauses/development-permits/7120-no-development-permit",
-  "edmZB510": "Edmonton Zoning Bylaw 20001 s. 5.10 cl. 11 (read by Claude from the bylaw PDF, data/raw/edm/bylaw): rooftop collectors may project 1.5 m from the roof and up to 1.5 m above the maximum height \"in a residential Zone\"; must not extend beyond the eave or roof edge; wall-mounted 1.5 m into a setback, 0.6 m from the lot line. Non-residential zones: no projection limit stated — City to confirm — https://zoningbylaw.edmonton.ca/part-5-general-development-regulations/510-accessory-uses-buildings-and-structures"
+  "edmZB510": "Edmonton Zoning Bylaw 20001 s. 5.10 cl. 11 (read by Claude from the bylaw PDF, data/raw/edm/bylaw): rooftop collectors may project 1.5 m from the roof and up to 1.5 m above the maximum height \"in a residential Zone\"; must not extend beyond the eave or roof edge; wall-mounted 1.5 m into a setback, 0.6 m from the lot line. Non-residential zones: no projection limit stated — City to confirm — https://zoningbylaw.edmonton.ca/part-5-general-development-regulations/510-accessory-uses-buildings-and-structures",
+  "abEUA2026": "Electric Utilities Act, SA 2003, c E-5.1, current consolidation in force since 6 Feb 2026 (CanLII, read by Claude 15 Oct 2026; amended by 2022 c 8 = Bill 22): s. 1(1)(vv.1) \"self-supply\"; s. 2(1)(b) the Act does not apply to self-supply \"consumed solely on that property by that owner or tenant\"; s. 18(2) \"All electric energy entering or leaving the interconnected electric system must be exchanged through the power pool\" unless ss. 39(1.1) or 105(1.1) or regulations provide otherwise. So surplus leaving the site goes through the power pool or the micro-generation rules; there is no separate export right — https://www.canlii.org/en/ab/laws/stat/sa-2003-c-e-5.1/latest/sa-2003-c-e-5.1.html"
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ; ATCO North Mid-Use $1.062/GJ → ≈ $11/MWh heat — https://www.ucahelps.alberta.ca/regulated-rates.aspx",

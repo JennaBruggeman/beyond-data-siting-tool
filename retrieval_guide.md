@@ -117,7 +117,7 @@ People and the urban rationale
 
 ## 6. Added 15 Oct 2026 (opportunity labels and precedent search)
 - ☐ **G1 AUC Distribution System Inquiry, final report (21 Feb 2021)** — the EV-charging finding (p. 60) is only known from law-firm summaries; the file would not open from here — https://efiling-webapi.auc.ab.ca/Document/Get/685017
-- ☐ **G2 Bill 22 (2022) as enacted, and the Electric Utilities Act consolidation, s. 2(1)(b) and s. 18(2)** — confirms whether surplus self-supply can be exported. Search the title on Alberta King's Printer (https://kings-printer.alberta.ca/) or CanLII (link not checked).
+- ☑ **G2 Bill 22 (2022) as enacted (15 Oct: read the current consolidation on CanLII — s. 2(1)(b) exempts on-site self-supply only; s. 18(2) everything leaving the site goes through the power pool), and the Electric Utilities Act consolidation, s. 2(1)(b) and s. 18(2)** — confirms whether surplus self-supply can be exported. Search the title on Alberta King's Printer (https://kings-printer.alberta.ca/) or CanLII (link not checked).
 - ☐ **G3 Vancouver I-2 district schedule, sub-area B map** — deeper yards; I-2 parcels currently use the outside-B yards. City of Vancouver zoning by-law district schedules (link not checked).
 - ☐ **G4 District-energy service-area maps** — Edmonton Downtown District Energy and Blatchford (for tracing; the lot-based approximation came out far too small), Creative Energy, River District, Sen̓áḵw (Vancouver). Same as R5.
 - ☐ **G5 Ask, not fetch: City of Vancouver on the ground floor** — may a data centre use the ground floor (strict vs lenient reading)?
