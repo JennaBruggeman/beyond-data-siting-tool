@@ -91,6 +91,16 @@ The grid carbon (18.1 vs 346.1 g/kWh) and household heat (14.58 vs 29.19 MWh) ar
 
 Still open from section A: A14 (COP by network temperature), A15 (check per-province heat density), and A17, A25, A26 (rescale with heating degree-days). These are diagram items not yet used in the tool's numbers.
 
+## Deep dive, 16 Oct 2026 (five research agents, official sources only; all marked "to check")
+
+Registered and attached: Clean Fuel Regulations (diesel baseline 93, reference CI 85.3 in 2026); BC base diesel 94.38 and 2024 renewable diesel average 23.06 at 31.2% of the diesel pool; Alberta RFS 2% renewable diesel, ≥25% lower GHG, no carbon-intensity limit; EPCOR 2026 delivery charges; water hardness (Edmonton ~178, Vancouver ~20 mg/L); Alberta generation mix (85% coal and gas in 2021); per-capita water use; 2021 median after-tax household income (Vancouver $79,500, Edmonton $84,000); Vancouver Fire By-law 14419 (no added fuel limits); NFC 2023 Alberta Edition fuel tables (read by Claude: identical to NFC 2020); Metro Vancouver Bylaw 1329 (emergency generators mostly exempt); Alberta 50 MW EPEA threshold for backup power; Alberta Water Act and the 3 °C guideline (1999, current version not confirmed); Vancouver lighting rules (no lux values); Blatchford sewer heat exchange (in design) and loop temperatures (8–32 °C supply); NEU 65 °C supply, 45 °C return; Alberta rainwater guidelines (2010); Edmonton ground 6.1 °C, k 1.9 W/m·K; no deep-geothermal assessment for Vancouver; wildfire smoke definitions and advisories.
+
+Tool changes: Edmonton heat-pump power now includes EPCOR's per-kWh transmission and reserve charges ($49.74/MWh, demand charges excluded in both cities); Edmonton water behind the electricity computed from the Alberta mix (about 1.6 L/kWh); hardness note on the water tab.
+
+Diagram parity: every quantity now has a source for each city except the operator floor price for heat, which has no Canadian figure for either.
+
+Not found: BC generation shares by source; Metro Vancouver residential litres per person; Downtown District Energy temperatures; an Alberta cooling-tower registry (none exists that could be found); Edmonton non-market housing with coordinates (only a contact list and 20 development sites); annual smoke-hour counts for either city.
+
 ## What happens next
 
 1. **Step 2, independent review:** someone other than me checks this sort, especially section C, since anything wrongly called shared stays hidden.

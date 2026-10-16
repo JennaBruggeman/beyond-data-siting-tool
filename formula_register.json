@@ -2082,7 +2082,30 @@
    "edm7140sun": "bylaw",
    "edmFPO2250": "bylaw",
    "aesoAMS2025": "system operator",
-   "edmPermitsDC2026": "municipal open data"
+   "edmPermitsDC2026": "municipal open data",
+   "cfr2022_140": "regulation",
+   "bcLCFtech2023": "regulation",
+   "bcRLCF007_2024": "government",
+   "abRFS2026": "government",
+   "ecccCFRmarket2024": "government",
+   "bcRLCF012b": "government",
+   "epcorDAS2026": "utility tariff",
+   "waterHardness2026": "utility report",
+   "cerProfiles2026": "regulator",
+   "waterUse2026": "utility report",
+   "censusIncome2021": "statistics",
+   "vanFire14419": "bylaw",
+   "mvBylaw1329": "regional bylaw",
+   "abDCenv2026": "government",
+   "abWaterAct2021": "government",
+   "vanLight2019": "bylaw",
+   "blatchfordSHX2026": "city utility",
+   "blatchfordDG2025": "city guideline",
+   "abRainwater2010": "government guideline",
+   "agsGround2009": "geological survey",
+   "vanDeepGeo": "geological survey",
+   "smoke2026": "government",
+   "nfcAB2023_4313": "rule"
   },
   "source_check": {
    "mfrDryCooler": "agent",
@@ -2214,7 +2237,30 @@
    "edm7140sun": "claude",
    "edmFPO2250": "claude",
    "aesoAMS2025": "claude",
-   "edmPermitsDC2026": "claude"
+   "edmPermitsDC2026": "claude",
+   "cfr2022_140": "agent",
+   "bcLCFtech2023": "agent",
+   "bcRLCF007_2024": "agent",
+   "abRFS2026": "agent",
+   "ecccCFRmarket2024": "agent",
+   "bcRLCF012b": "agent",
+   "epcorDAS2026": "agent",
+   "waterHardness2026": "agent",
+   "cerProfiles2026": "agent",
+   "waterUse2026": "agent",
+   "censusIncome2021": "agent",
+   "vanFire14419": "agent",
+   "mvBylaw1329": "agent",
+   "abDCenv2026": "agent",
+   "abWaterAct2021": "agent",
+   "vanLight2019": "agent",
+   "blatchfordSHX2026": "agent",
+   "blatchfordDG2025": "agent",
+   "abRainwater2010": "agent",
+   "agsGround2009": "agent",
+   "vanDeepGeo": "agent",
+   "smoke2026": "agent",
+   "nfcAB2023_4313": "claude"
   },
   "research_pass": {
    "date": "16 Oct 2026",
@@ -2986,7 +3032,8 @@
     "fjfAars2020",
     "lorenz",
     "teliaHKI2024",
-    "ulavalCVD"
+    "ulavalCVD",
+    "blatchfordDG2025"
    ],
    "conf": 70,
    "status": "calibrated on six cases: η 0.39–0.53 built/operating",
@@ -3040,6 +3087,13 @@
      "role": "check",
      "conf": 60,
      "verified": true
+    },
+    {
+     "id": "blatchfordDG2025",
+     "term": "research pass 16 Oct 2026 (city guideline)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
     }
    ]
   },
@@ -3568,7 +3622,8 @@
    ],
    "coef": "C cycles of concentration",
    "sources": [
-    "femp"
+    "femp",
+    "waterHardness2026"
    ],
    "conf": 100,
    "status": "in hand",
@@ -3580,6 +3635,13 @@
      "role": "coefficient",
      "conf": 100,
      "verified": true
+    },
+    {
+     "id": "waterHardness2026",
+     "term": "research pass 16 Oct 2026 (utility report)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
     }
    ]
   },
@@ -3619,7 +3681,8 @@
    ],
    "coef": "US thermoelectric ~1.25 L/kWh; hydro ~16.8 L/kWh; BC as a range",
    "sources": [
-    "femp"
+    "femp",
+    "cerProfiles2026"
    ],
    "conf": 60,
    "status": "in hand",
@@ -3631,6 +3694,13 @@
      "role": "coefficient",
      "conf": 60,
      "verified": true
+    },
+    {
+     "id": "cerProfiles2026",
+     "term": "research pass 16 Oct 2026 (regulator)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
     }
    ]
   },
@@ -3645,7 +3715,8 @@
    "coef": "CSA B805:22 method; ECCC Normals 1991–2020: Vancouver Intl precipitation 1,159.5 mm/yr (rain 1,119.2; Oct–Jan ≥124 mm/mo, Jul 34 mm); Edmonton City 422.5 mm/yr (Edmonton Airport 434.0; Jun–Aug 213 mm, Dec–Feb 43 mm, mostly snow); C runoff coefficient per CSA",
    "sources": [
     "femp",
-    "eccc"
+    "eccc",
+    "abRainwater2010"
    ],
    "conf": 80,
    "status": "rainfall confirmed (government normals, data/normals_1991_2020_extract.json); C and storage sizing per CSA B805",
@@ -3664,6 +3735,13 @@
      "role": "data",
      "conf": 80,
      "verified": true
+    },
+    {
+     "id": "abRainwater2010",
+     "term": "research pass 16 Oct 2026 (government guideline)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
     }
    ]
   },
@@ -3753,7 +3831,9 @@
    ],
    "coef": "NOx 0.024 lb/hp·h uncontrolled",
    "sources": [
-    "eccc"
+    "eccc",
+    "mvBylaw1329",
+    "abDCenv2026"
    ],
    "conf": 80,
    "status": "in hand",
@@ -3765,6 +3845,20 @@
      "role": "coefficient",
      "conf": 80,
      "verified": true
+    },
+    {
+     "id": "mvBylaw1329",
+     "term": "research pass 16 Oct 2026 (regional bylaw)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "abDCenv2026",
+     "term": "research pass 16 Oct 2026 (government)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
     }
    ]
   },
@@ -4035,7 +4129,8 @@
    "coef": "CIE 150:2017 via ILP GN01/20; Vancouver: no lux limit; Edmonton Bylaw 20001 s.5.120(3): glare minimised, light deflected away, directed downward — qualitative",
    "sources": [
     "cie150",
-    "edmBylaw20001"
+    "edmBylaw20001",
+    "vanLight2019"
    ],
    "conf": 70,
    "status": "standard transferred",
@@ -4054,6 +4149,13 @@
      "role": "rule",
      "conf": 90,
      "verified": true
+    },
+    {
+     "id": "vanLight2019",
+     "term": "research pass 16 Oct 2026 (bylaw)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
     }
    ]
   },
@@ -4135,7 +4237,8 @@
    ],
    "coef": "Health Canada 2020",
    "sources": [
-    "ess"
+    "ess",
+    "smoke2026"
    ],
    "conf": 80,
    "status": "in hand",
@@ -4147,6 +4250,13 @@
      "role": "coefficient",
      "conf": 80,
      "verified": true
+    },
+    {
+     "id": "smoke2026",
+     "term": "research pass 16 Oct 2026 (government)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
     }
    ]
   },
@@ -5036,7 +5146,8 @@
     "rts06419",
     "vanSewer",
     "blatchfordBP2021",
-    "epcorGoldBar2026"
+    "epcorGoldBar2026",
+    "blatchfordSHX2026"
    ],
    "conf": 80,
    "status": "flow gap",
@@ -5090,6 +5201,13 @@
      "role": "pending build",
      "conf": 70,
      "verified": true
+    },
+    {
+     "id": "blatchfordSHX2026",
+     "term": "research pass 16 Oct 2026 (city utility)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
     }
    ]
   },
@@ -5610,7 +5728,9 @@
    "coef": "IEA SHC Task 54; O&M 2,000 €/MW·yr",
    "sources": [
     "crf",
-    "hiltunen2020"
+    "hiltunen2020",
+    "epcorDAS2026",
+    "bchTariff2026"
    ],
    "conf": 70,
    "status": "in hand",
@@ -5627,6 +5747,20 @@
      "id": "hiltunen2020",
      "term": "O&M 2,000 €/MW·yr; capex",
      "role": "coefficient",
+     "conf": 70,
+     "verified": true
+    },
+    {
+     "id": "epcorDAS2026",
+     "term": "research pass 16 Oct 2026 (utility tariff)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "bchTariff2026",
+     "term": "research pass 16 Oct 2026 (earlier source)",
+     "role": "parity: the other city",
      "conf": 70,
      "verified": true
     }
@@ -5845,7 +5979,8 @@
    "sources": [
     "cusp",
     "statcanSHS",
-    "statcanEP2024"
+    "statcanEP2024",
+    "censusIncome2021"
    ],
    "conf": 70,
    "status": "confirmed",
@@ -5871,6 +6006,13 @@
      "role": "data",
      "conf": 80,
      "verified": true
+    },
+    {
+     "id": "censusIncome2021",
+     "term": "research pass 16 Oct 2026 (statistics)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
     }
    ]
   },
@@ -6960,7 +7102,8 @@
    "sources": [
     "bcWSRfees",
     "thermalLimits",
-    "enwaveDLWC"
+    "enwaveDLWC",
+    "abWaterAct2021"
    ],
    "source_roles": [
     {
@@ -6983,6 +7126,13 @@
      "role": "check",
      "conf": 80,
      "verified": true
+    },
+    {
+     "id": "abWaterAct2021",
+     "term": "research pass 16 Oct 2026 (government)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
     }
    ],
    "conf": 40,
@@ -7863,7 +8013,8 @@
    ],
    "coef": "98 L/person/day residential greywater (National Academies 2016, US data); treatment recovery share not found (gap); cross-property sharing: no BC or Alberta rule text found",
    "sources": [
-    "nasem2016"
+    "nasem2016",
+    "waterUse2026"
    ],
    "source_roles": [
     {
@@ -7871,6 +8022,13 @@
      "term": "Greywater available from neighbours",
      "role": "data",
      "conf": 45,
+     "verified": false
+    },
+    {
+     "id": "waterUse2026",
+     "term": "research pass 16 Oct 2026 (utility report)",
+     "role": "pending build",
+     "conf": 50,
      "verified": false
     }
    ],
@@ -7920,7 +8078,8 @@
     "gsa_gpg052",
     "femp_ct",
     "gsaBlowdown2023",
-    "epaQuincy"
+    "epaQuincy",
+    "waterHardness2026"
    ],
    "source_roles": [
     {
@@ -7947,6 +8106,13 @@
     {
      "id": "epaQuincy",
      "term": "research pass 16 Oct 2026 (government (US))",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "waterHardness2026",
+     "term": "research pass 16 Oct 2026 (utility report)",
      "role": "pending build",
      "conf": 50,
      "verified": false
@@ -8336,7 +8502,8 @@
    "coef": "testing ≈14.5 h/yr per unit, ~4 h at full load (AUC 27938-D01-2023, Amazon 25.6 MW, derived); Vancouver noise by-law exemption caps tests ≈15 h/yr; uncontrolled diesel 14.6 g NOx, 0.43 g PM, 706 g CO2 per kWh (AP-42 Table 3.4-1, upper bound for modern engines); Alberta exempts standby generators from environmental approval",
    "sources": [
     "auc_27938",
-    "ap42_34"
+    "ap42_34",
+    "mvBylaw1329"
    ],
    "source_roles": [
     {
@@ -8352,6 +8519,13 @@
      "role": "data",
      "conf": 65,
      "verified": true
+    },
+    {
+     "id": "mvBylaw1329",
+     "term": "research pass 16 Oct 2026 (regional bylaw)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
     }
    ],
    "conf": 65,
@@ -8369,7 +8543,13 @@
    ],
    "coef": "BC approved fuel codes −7 to 131 g CO2e/MJ (RLCF-012, Apr 2026); stack CO2, NOx and PM stay about the same; fossil diesel reference CI to retrieve",
    "sources": [
-    "bc_rlcf012"
+    "bc_rlcf012",
+    "cfr2022_140",
+    "bcLCFtech2023",
+    "bcRLCF007_2024",
+    "abRFS2026",
+    "ecccCFRmarket2024",
+    "bcRLCF012b"
    ],
    "source_roles": [
     {
@@ -8377,6 +8557,48 @@
      "term": "Renewable diesel in the generators",
      "role": "data",
      "conf": 55,
+     "verified": false
+    },
+    {
+     "id": "cfr2022_140",
+     "term": "research pass 16 Oct 2026 (regulation)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "bcLCFtech2023",
+     "term": "research pass 16 Oct 2026 (regulation)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "bcRLCF007_2024",
+     "term": "research pass 16 Oct 2026 (government)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "abRFS2026",
+     "term": "research pass 16 Oct 2026 (government)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "ecccCFRmarket2024",
+     "term": "research pass 16 Oct 2026 (government)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "bcRLCF012b",
+     "term": "research pass 16 Oct 2026 (government)",
+     "role": "pending build",
+     "conf": 50,
      "verified": false
     }
    ],
@@ -8448,7 +8670,8 @@
    "coef": "+4.7 K over 20 yr ground-only, +1.2 K with a dry cooler (Zurmuhl 2018, small field); about +3 K in 3 yr where 4.8 × more heat went in than out (Kindaichi 2018, field measurement) — a borefield only lasts if neighbours take heat back out in winter",
    "sources": [
     "zurmuhl2018",
-    "kindaichi2018"
+    "kindaichi2018",
+    "agsGround2009"
    ],
    "source_roles": [
     {
@@ -8463,6 +8686,13 @@
      "term": "Ground warming over 20 years",
      "role": "data",
      "conf": 55,
+     "verified": false
+    },
+    {
+     "id": "agsGround2009",
+     "term": "research pass 16 Oct 2026 (geological survey)",
+     "role": "pending build",
+     "conf": 50,
      "verified": false
     }
    ],
@@ -8485,7 +8715,8 @@
    "coef": "η 0.45 steady state (simulated), 0.32–0.56 measured years 3–10, 0.06–0.21 in years 1–2 (Drake Landing, Okotoks); a 0.9 MW data-centre design: 240 boreholes, 55 m deep, 3 m apart, 1,863 m², waste-heat use 77 → 96 %, ~17-yr payback (Li et al. 2021); heat-pump COP for the lift not given (gap)",
    "sources": [
     "drake_landing",
-    "li2021_dcbtes"
+    "li2021_dcbtes",
+    "agsGround2009"
    ],
    "source_roles": [
     {
@@ -8501,6 +8732,13 @@
      "role": "data",
      "conf": 60,
      "verified": true
+    },
+    {
+     "id": "agsGround2009",
+     "term": "research pass 16 Oct 2026 (geological survey)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
     }
    ],
    "conf": 60,
@@ -8563,7 +8801,8 @@
    "coef": "Edmonton: ~90 °C at 2.5 km, 30–80 kg/s → 2.1–5.6 MWth average per well pair, $4.7–8 M per well (Majorowicz & Grasby 2021); licensed by the AER (Directive 089, 2025); competes with data-centre heat as a district source rather than cooling the data centre; Vancouver: not plausible for power, direct use unproven",
    "sources": [
     "majorowicz2021",
-    "aer_d089"
+    "aer_d089",
+    "vanDeepGeo"
    ],
    "source_roles": [
     {
@@ -8578,6 +8817,13 @@
      "term": "Deep geothermal heat",
      "role": "data",
      "conf": 55,
+     "verified": false
+    },
+    {
+     "id": "vanDeepGeo",
+     "term": "research pass 16 Oct 2026 (geological survey)",
+     "role": "pending build",
+     "conf": 50,
      "verified": false
     }
    ],
@@ -9078,7 +9324,9 @@
     "nfc2020_4313",
     "cat3516c",
     "src16",
-    "src23"
+    "src23",
+    "vanFire14419",
+    "nfcAB2023_4313"
    ],
    "source_roles": [
     {
@@ -9107,6 +9355,20 @@
      "term": "Fuel kept on site",
      "role": "data",
      "conf": 60,
+     "verified": true
+    },
+    {
+     "id": "vanFire14419",
+     "term": "research pass 16 Oct 2026 (bylaw)",
+     "role": "pending build",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "nfcAB2023_4313",
+     "term": "research pass 16 Oct 2026 (rule)",
+     "role": "pending build",
+     "conf": 70,
      "verified": true
     }
    ],
@@ -12211,7 +12473,30 @@
   "edm7140sun": "Edmonton Zoning Bylaw 20001 (Charter Bylaw 20001 as adopted, effective 1 Jan 2024; City PDF, OCR text, J.B. download 14 Oct 2026; later amendments not checked), s. 7.140 Special Information Requirements, subs. 9 Sun Shadow Impact Study: the Development Planner MAY require one only where the development is a Discretionary Development (9.1); prepared by an Alberta P.Eng. or architect (9.2.1); shadows every 3 hours between sunrise and sunset, Mountain Standard Time, on 21 Mar, 21 Jun, 21 Sep and 21 Dec (9.2.3); impact judged as the difference between the maximum massing the zone allows and the proposed massing (9.3.1); may refuse or require redesign (9.3.2–9.3.3). No shadow clause found in the standard industrial zones (BE, IM, IH); shadow clauses appear for towers in RL and MU (in compliance with 7.140), UI height variances, and special areas (HOR, CMU, AED, RTCC, ALA); 3.50 Energy and Technology Park mentions shading only as tree planting. s. 2.140 IH lists permitted uses only (Major Industrial; Minor Industrial limited to those existing at 1 Jan 2024) and no discretionary uses, so the study cannot be required there; the bylaw names no data-centre use (Minor/Major Industrial definitions, Part 8), so the use class is for the Development Planner to determine. Search of the full text for shad/shadow/sun — https://zoningbylaw.edmonton.ca/",
   "edmFPO2250": "Edmonton Zoning Bylaw 20001 (as adopted, effective 1 Jan 2024; later amendments not checked), s. 2.250 FPO Floodplain Protection Overlay: applies to the lands mapped in its Appendix I (floodplains of the North Saskatchewan River and tributaries), and to the whole lot if the boundary crosses it (2.2); the applicant must submit an Alberta P.Eng. or architect certificate that the development complies with the floodplain policies of the applicable statutory plans (3.1); the Development Planner may require the geodetic elevation of the building and of its lowest opening, and confirmation that habitable rooms, electrical panels, heating units and operable windows are flood-proofed, plus basement and site drainage (3.2); conditions must follow the certificate (3.4). The bylaw sets no flood construction level of its own (Vancouver: FCL 4.6 m) — the level comes from the statutory plans or provincial flood mapping — https://zoningbylaw.edmonton.ca/",
   "aesoAMS2025": "AESO 2025 Annual Market Statistics (Mar 2026; J.B. PDF 16 Oct 2026), Table 1: Alberta pool price, daily average $/MWh — 2016 18.28, 2017 22.19, 2018 50.35, 2019 54.88, 2020 46.72, 2021 101.93, 2022 162.46, 2023 133.63, 2024 62.78, 2025 43.68 (lowest in eight years); 2025 on-peak 52.15, off-peak 26.74; 2025 estimated gas unit marginal cost 16.71 (7 GJ/MWh) to 48.68 (12 GJ/MWh), carbon cost 0.42–24.32; gas 1.61 $/GJ. Inflation-adjusted (2025 $) 10-year average 2016–2025 $78/MWh vs $113 for 2000–2009 (Figure 5). Average Alberta Internal Load 10,316 MW (+2.0%); all-time winter peak 12,785 MW, December 2025; operating reserve costs $218 M (−19.6%). Alberta is an energy-only market: the pool price is the hourly marginal price, not a long-run marginal cost like BC Hydro's IRP figure, so the two are compared as what a MWh is worth to each system, not as the same measure — https://www.aeso.ca/assets/Annual-Market-Stats-2025.pdf",
-  "edmPermitsDC2026": "City of Edmonton General Building Permits, full export 16 Oct 2026 (247,700 rows; J.B. download), job descriptions searched for data centre, data hall, server room: permit-declared construction values for data-centre work (value and floor area as entered on the permit; floor area may be the work area or the building; no MW stated): Rogers, 17204 114 Ave NW (DC2/IM), 2020, \"Hall 7 & 8 expansion\" in an empty warehouse, $4,000,000 over 9,519 m² ≈ $420/m²; Rogers, 10450 178 St NW (BE), 2025, expanding the internal data hall, $2,100,000 over 7,617 m² ≈ $276/m²; EPCOR Data Centre, office tower P1, 10423 101 St NW (CCA), 2011, $3,399,000 over 3,911 m² ≈ $869/m²; Alberta Pensions Administration new data centre in an office building, 5103 Windermere Blvd SW (DC2), 2009, $2,000,000 over 2,200 m² ≈ $909/m²; 17204 114 Ave NW addition with data centre and mechanical equipment, 2015, $850,000 (no area). No new purpose-built data centre appears; all are fit-outs or expansions in existing buildings. Permits naming backup generators left out (security rule) — https://data.edmonton.ca/d/24uj-dj8v"
+  "edmPermitsDC2026": "City of Edmonton General Building Permits, full export 16 Oct 2026 (247,700 rows; J.B. download), job descriptions searched for data centre, data hall, server room: permit-declared construction values for data-centre work (value and floor area as entered on the permit; floor area may be the work area or the building; no MW stated): Rogers, 17204 114 Ave NW (DC2/IM), 2020, \"Hall 7 & 8 expansion\" in an empty warehouse, $4,000,000 over 9,519 m² ≈ $420/m²; Rogers, 10450 178 St NW (BE), 2025, expanding the internal data hall, $2,100,000 over 7,617 m² ≈ $276/m²; EPCOR Data Centre, office tower P1, 10423 101 St NW (CCA), 2011, $3,399,000 over 3,911 m² ≈ $869/m²; Alberta Pensions Administration new data centre in an office building, 5103 Windermere Blvd SW (DC2), 2009, $2,000,000 over 2,200 m² ≈ $909/m²; 17204 114 Ave NW addition with data centre and mechanical equipment, 2015, $850,000 (no area). No new purpose-built data centre appears; all are fit-outs or expansions in existing buildings. Permits naming backup generators left out (security rule) — https://data.edmonton.ca/d/24uj-dj8v",
+  "cfr2022_140": "Clean Fuel Regulations SOR/2022-140 (consolidated to 30 Sep 2026; last amended 30 Sep 2024): s. 5(3) baseline carbon intensity of diesel 93 gCO2e/MJ (gasoline 95); s. 5(1) diesel limits 89.5 (2023) falling 1.5 a year to 79.0 (2030 and after); Schedule 1 reference CI, liquid class, 89.2 (2022–23) to 80.1 (2030+); a liquid low-CI fuel must be at most 90% of the reference CI. Applies in Alberta and BC. ECCC announced targeted amendments 9 Nov 2025 (not yet in the consolidation) — https://laws-lois.justice.gc.ca/eng/regulations/SOR-2022-140/FullText.html",
+  "bcLCFtech2023": "BC Low Carbon Fuels (Technical) Regulation B.C. Reg. 295/2023, Schedule 3 Table 1: base carbon intensity of diesel fuel 94.38 gCO2e/MJ (gasoline 93.67); General Regulation 282/2023: 30% reduction by 2030; BC requirements page (updated 6 Mar 2026): diesel target CI 79.28 (2024), 77.11 (2025), 74.94 (2026) to 66.07 (2030); renewable content in diesel 8% from 2025; from 1 Apr 2025 eligible renewable diesel must be produced in Canada (yearly targets from the government page, regulation copies read were older) — https://www2.gov.bc.ca/gov/content/industry/electricity-alternative-energy/transportation-energies/renewable-low-carbon-fuels/requirements",
+  "bcRLCF007_2024": "BC RLCF-007-2024, Renewable and Low Carbon Fuel Requirements Summary 2010–2024 (revised Mar 2026): 2024 HDRD 1,041.1 million L at a weighted average 23.06 gCO2e/MJ (2023: 694.9 ML at 23.21); biodiesel 131.5 ML at 0.30; renewable share of the BC diesel pool 31.2% (1,172.8 of 2,610.2 ML) — https://www2.gov.bc.ca/assets/gov/farming-natural-resources-and-industry/electricity-alternative-energy/transportation/renewable-low-carbon-fuels/information-bulletins/rlcf007-summary_2010-2024.pdf",
+  "abRFS2026": "Alberta Renewable Fuels Standard (Alta Reg 29/2010; regulation text blocked, values from Government of Alberta pages): minimum annual average 2% bio-based diesel in diesel and 5% renewable alcohol in gasoline; renewable fuels must show at least 25% lower life-cycle GHG than the petroleum equivalent (RFS resources page, 9 Oct 2026; fact sheet 12 Jan 2024). No carbon-intensity limit on the fuel pool, unlike BC — https://www.alberta.ca/renewable-fuels-standard-resources",
+  "ecccCFRmarket2024": "ECCC Clean Fuel Regulations credit market report (26 Jun 2024), national only: volume-weighted average CI of HDRD used for credits 76.4 gCO2e/MJ in 2022 (range 36.0–80.0) and 65.3 in 2023 (15.0–80.0); approved Fuel LCA Model CIs for HDRD median 36.0; no provincial CI breakdown (Alberta Category 2 credits 636,752 t in 2023) — https://www.canada.ca/en/environment-climate-change/services/managing-pollution/energy-production/fuel-regulations/clean-fuel-regulations/compliance/credit-market-report-june-2024.html",
+  "bcRLCF012b": "BC RLCF-012 Approved Carbon Intensities – Current (rev. 29 Apr 2026), read by agent: HDRD codes valid at 29 Apr 2026 range 7.58 (Tidewater Midstream) to 37.06 (Diamond Green Diesel) gCO2e/MJ; expired extremes −7.03 to 42.91; the list gives no facility location or feedstock, so no pathway can be confirmed as Alberta-made; Imperial Oil HDRD 15.06 and 19.46 (location not stated) — https://www2.gov.bc.ca/assets/gov/farming-natural-resources-and-industry/electricity-alternative-energy/transportation/renewable-low-carbon-fuels/rlcf012_approved_carbon_intensities_current_29apr2026.pdf",
+  "epcorDAS2026": "EPCOR Distribution & Transmission, 2026 interim rates (AUC Decision 30298-D01-2025, 10 Dec 2025), per day: DAS-TOU (150–5,000 kVA secondary) $43.46/site + $0.22878/kW, energy $0; transmission pass-through SAS-TOU $0.00253/kWh + capacity $0.12868 + demand $0.24154 + other $0.00107 per kW per day + operating reserve 8.09% × kWh × pool price (based on the proposed 2026 AESO tariff). Per-kWh adders ≈ $2.53/MWh + 8% of pool; demand-type ≈ $18/kW-month (agent calculation); riders not included — https://www.epcor.com/content/dam/epcor/documents/rates/system-access-service-tariffs/2026-01-system-access-service-tariff.pdf",
+  "waterHardness2026": "Treated drinking-water hardness (mg/L as CaCO3): EPCOR Edmonton 2021 Rossdale avg 170 (137–203), E.L. Smith 169 (143–201); Jan–May 2026 both plants 177.8 (146–204); Metro Vancouver 2025 annual report, treated: Capilano 20.5, Seymour 20.2, Coquitlam 2.4 — Edmonton water is about eight times harder — https://metrovancouver.org/services/water/Documents/water-quality-annual-report-volume-1-2025.pdf ; https://www.epcor.com/content/dam/epcor/documents/water-quality-reports/2026-05-edmonton-water-quality-monthly-summary.pdf",
+  "cerProfiles2026": "Canada Energy Regulator provincial energy profiles (modified 26 Mar 2026): Alberta 2021 generation 73.9 TWh, about 22% coal and 63% natural gas, wind 9%, hydro 3%, bioenergy 2% (coal phased out June 2024); BC 2021 generation 71.7 TWh, shares by source not given in text — capacity hydro 15,953 of 18,514 MW (≈86%) — https://www.cer-rec.gc.ca/en/data-analysis/energy-markets/province-territory-energy-profiles/alberta.html",
+  "waterUse2026": "Residential water use: Edmonton 176 L/person/day in 2019 (EPCOR 2021 discussion paper; 2015–19 average 185); all uses 251 L/person/day 2024 (EPCOR annual report). Metro Vancouver residential figure not found (consumption report gives all-use per capita in charts only); provincial residential 2021 BC 286, Alberta 195 L/person/day (StatCan Table 38-10-0271-01) — https://www150.statcan.gc.ca/n1/daily-quotidien/231114/cg-d002-eng.htm",
+  "censusIncome2021": "Statistics Canada 2021 Census, median after-tax household income 2020: Vancouver CMA $79,500, Edmonton CMA $84,000 (The Daily, 13 Jul 2022; Table 98-10-0058-01) — https://www150.statcan.gc.ca/n1/daily-quotidien/220713/dq220713d-eng.htm",
+  "vanFire14419": "City of Vancouver Fire By-law No. 14419 (in force 22 Jul 2025; replaces 12472), adopts the 2024 BC Fire Code; no added indoor quantity limits for flammable or combustible liquids; tank changes only (4.3.1.7, 4.3.16.1) and permits from the Fire Chief to install, remove or abandon any above- or underground storage tank (Div. C 1.2.1.5(2)) — https://bylaws.vancouver.ca/consolidated/14419.PDF",
+  "mvBylaw1329": "Metro Vancouver Non-Road Diesel Engine Emission Regulation Bylaw No. 1329, 2021: applies to non-road diesel engines of 25 hp or more, including stationary engines; emergency engines (incl. emergency generators) are exempt from Parts 3–6 and 9 (registration, fees, tier rules) but must be maintained to manufacturer procedures, keep exhaust away from building openings and air intakes, and keep records; no limit on testing hours. Bylaw 1082 has no engine-specific threshold — https://metrovancouver.org/boards/Bylaws/MVRD_Bylaw_1329.pdf",
+  "abDCenv2026": "Government of Alberta, Data Centres in Alberta: EPA regulatory role and environmental requirements (20 Jul 2026): an EPEA approval is required for a larger combustion power plant or a backup power generation system over 50 MW, with emission limits set case by case; Alberta reviews wastewater, stormwater and cooling-water blowdown. Federal Multi-Sector Air Pollutants Regulations cover gaseous-fuel spark-ignition engines only, not diesel — https://www.alberta.ca/system/files/epa-data-centre-regulatory-role-and-environmental-requirements.pdf",
+  "abWaterAct2021": "Alberta Water Act: a licence is needed to divert and use surface water and an approval for works or activities in a water body (fact sheets 2021); Surface Water Quality Guidelines for Use in Alberta (1999), temperature \"Not to be increased by more than 3°C above ambient\" (current 2018 guidelines failed to load, so not confirmed) — https://open.alberta.ca/dataset/e0074537-88f6-4cc4-af5c-808161fa9af8/resource/ea13d7b1-c155-4fad-8b85-4f12443352f2/download/5713.pdf",
+  "vanLight2019": "Vancouver Building By-law 2019, 10.2.2.10(2) (residential buildings and parts facing a lane): full cut-off or shielded luminaires over 600 lumens, mounted no higher than 4 m along side and back yards, dimmer and timer controls, minimize lighting of adjacent properties; Untidy Premises By-law 4548 s. 7: no outdoor light that casts light directly onto a neighbouring residential window and unreasonably disturbs; no lux values in either city — https://bylaws.vancouver.ca/4548c.pdf",
+  "blatchfordSHX2026": "Blatchford Renewable Energy (City of Edmonton company): sewer heat exchange from two existing combined sewers under east Blatchford, in planning and design; expansion adds 13.1 MW heating and 12.3 MW cooling; geoexchange field 570 boreholes × 150 m; federal SREPs $23.7 M toward a $79.2 M project (NRCan, 31 Jul 2024). EPCOR Bylaw 19627 allows non-contact cooling water into sanitary sewers with written approval — https://blatchfordutility.ca/district-energy-sharing/",
+  "blatchfordDG2025": "City of Edmonton, District Energy Sharing System Multi-Unit Lots Design Guide v8 (Jun 2025), Table 8: ambient loop supply between 8 °C (winter) and 32 °C (summer), return 4 °C (winter); design ΔT 5 °C (s. 6.1). Vancouver NEU Connectivity Guidelines rev. 1 (May 2026): network supply minimum 65 °C, building return max 45 °C — https://www.gov.edmonton.ab.ca/sites/default/files/public-files/documents/district-energy-sharing-system-multi-unit-lots-design-guide.pdf",
+  "abRainwater2010": "Alberta Guidelines for Residential Rainwater Harvesting Systems (2010): uses toilet and urinal flushing and sub-surface irrigation; size with 20% dead space; first flush 0.5–1.5 mm; residential only, commercial referred to federal reclaimed-water guidance; Alberta Health Public Health Guidelines for Water Reuse and Stormwater Use (Jan 2021) list cooling towers among end uses but listing is not approval — https://open.alberta.ca/dataset/0575ad25-9a1c-4adf-85d1-f002ede89f72/resource/94537319-0a46-42b1-aad0-be21016a8417/download/5917517-2010-alberta-guidelines-residential-rain-harvesting-systems.pdf",
+  "agsGround2009": "Alberta Geological Survey OFR 2009-09 (Hastings Lake, east of Edmonton): undisturbed ground 6.1 °C to about 25 m; in-situ conductivity 1.74–2.01 W/m·K, design 1.90. Vancouver: no city-specific measurement found; national map 6–12 °C (GSC OF 6914) — https://static.ags.aer.ca/files/document/OFR/OFR_2009_09.pdf",
+  "vanDeepGeo": "No published temperature-at-depth assessment for Vancouver / the Lower Mainland was found. Heat flow west of the Coast Plutonic Complex is low, about 44 mW/m² (Lewis, Judge & Souther 1978, abstract); GSC OF 6914 (Grasby et al. 2012) names southern BC volcanic belts (Garibaldi) as EGS targets; Geoscience BC Report 2015-11 covers volcanic-belt sites 100+ km away (Meager Creek 180–280 °C). Edmonton 90 °C at 2.5 km confirmed (Majorowicz & Grasby 2021, Table A1) — https://download-telecharger.services.geo.ca/pub/nrcan_rncan/publications/STPublications_PublicationsST/291/291488/gid_291488.pdf",
+  "smoke2026": "Wildfire smoke: Alberta counts a smoke day as daily PM2.5 above 15 µg/m³; northern Alberta stations had more than 100 smoke days in 2023 (Edmonton values only in a chart); Metro Vancouver had a 14-day wildfire smoke advisory in 2018 and two multi-day smoke advisories in 2023; smoke affected Metro Vancouver air in seven of the last ten years (2024 summary). No official annual smoke-hour counts for either city — https://www.alberta.ca/air-indicators-wildfire-smoke",
+  "nfcAB2023_4313": "National Fire Code – 2023 Alberta Edition (J.B. download 16 Oct 2026), Tables 4.3.13.4.-A and -B read by Claude: identical to NFC 2020 — Classes II and IIIA tanks for emergency generators, first storey 200 000 L per protected storage room (tanks > 2 500 L); basement and storeys above the first, 20 000 L (tanks > 2 500 L) or 45 000 L (tanks > 20 000 L). Vancouver: Fire By-law 14419 adds no quantity limits to the BC Fire Code, so the same tables govern in both cities — https://nrc-publications.canada.ca/"
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ; ATCO North Mid-Use $1.062/GJ → ≈ $11/MWh heat — https://www.ucahelps.alberta.ca/regulated-rates.aspx",
