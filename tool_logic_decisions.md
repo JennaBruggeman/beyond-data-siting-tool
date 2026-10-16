@@ -212,3 +212,8 @@ Running record of decisions J.B. has made about the tool's logic, in the order m
 - Opportunities tab: 15 opportunities in a fixed order by family; each gate (physics, land, rules, demand, time, money) is possible here, possible with a change, not here or not yet known, with its reason. Never ranked or scored.
 - I-2 sub-area B (I-2 District Schedule, June 2026): a choice on setup card 2 for I-2 lots; the tool does not map the sub-areas (Map 1). Outside B the discretionary height is 30.5 m (it said 30.5–36.5 before; 36.5 m is sub-area B only).
 - New sources: vanI2_2026, mvWWTP2026 (plant addresses not checked: the chat search used business listings), epcorGoldBar2026, statcanGH2021 (Canada only), blatchfordBP2021 (no third-party heat intake described).
+
+## 16 Oct 2026 — reciprocity is relative (J.B.)
+- J.B.: "reciprocity is relative" — every outcome is shown against references, never as an absolute. Decided (AskUserQuestion, 16 Oct): the Vancouver reference is both a real facility (public figures, operator claims, security details excluded) and a modelled one; the comparison appears on every card.
+- Proposed references (Claude, to confirm): (1) conventional here — same site, same size, air-cooled, dry coolers, no heat recovery, no add-ons; (2) Vancouver, real — Cologix VAN1 where its sheet publishes a figure; (3) Vancouver, modelled — same size, conventional, at the Vancouver worked-example site; (4) Edmonton — same size and design at the Edmonton worked-example site.
+- Also 16 Oct: receiver floor areas estimated from parcels and building heights (receiver_floor.py, run after make_receivers.py); Edmonton Downtown District Energy drawn from the City phases map; Vancouver EV stations from NRCan.
