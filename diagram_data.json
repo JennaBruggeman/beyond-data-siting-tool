@@ -9,7 +9,7 @@
 "quantities": 139,
 "conditions": 101,
 "opportunities": 15,
-"sources": 480
+"sources": 483
 }
 },
 "stages": [
@@ -11796,7 +11796,10 @@
 "bcucCE2026": "BCUC Advanced Search, \"Creative Energy Vancouver Platforms Inc\" (J.B. PDF 16 Oct 2026): 336 results, e.g. Order G-282-25 (core steam reconsideration of G-199-25A, 3 Dec 2025) and G-2-25 (2024 Long-Term Resource Plan, procedural, 10 Jan 2025). Filings not yet read — https://www.bcuc.com",
 "edmDDEmap2025": "City of Edmonton, Downtown District Energy Initiative phases technical map (May 2025; J.B. upload 16 Oct 2026): buildings by Phase 1, 1A, 2, 3, 4; proposed energy centre; district-energy mains below ground and through pedways/parkades, labelled e.g. \"500 H / 750 C\" (units not stated); \"Represents proposed design and growth ... and subject to change.\" Building outlines placed on City 3D footprints by fitting (mean overlap 0.44; Phase 1 within about 50 m of the Sir Winston Churchill Square parcels)",
 "nrcanEV2026": "NRCan Electric Charging and Alternative Fuelling Stations Locator, BC and Alberta exports (J.B. download 16 Oct 2026): 2,597 electric stations in BC (2,565 open, 32 temporarily unavailable); within the tool's Vancouver extent 544 open stations, 1,481 Level 2 ports, 203 DC fast ports. Alberta export: 949 stations (935 open); within the tool's Edmonton extent 211 open stations, 563 Level 2 ports, 70 DC fast ports — https://natural-resources.canada.ca (station locator)",
-"uofaGHG2025": "University of Alberta, Operational GHG Emissions Reduction Plan (final, April 2025; scanned, read by OCR; J.B. upload 16 Oct 2026): 2023–24 scope 1 and 2 emissions 234,719 t CO2e, of which District Energy System fuel 136,705 t; the DES supplies electricity, steam, chilled water and other utilities to North Campus and sells them to customers in the Greater Campus Area (Fig. 2-1); North Campus is 84.9% of emissions. Two DES decarbonization pathways examined: 1 maintain steam (CHP with carbon capture; hydrogen; electric steam boilers), 2 convert to low-temperature hot water (condensing boilers with carbon capture; natural gas and hydrogen; electricity) (pp. 33–34). No mention of outside or waste heat found"
+"uofaGHG2025": "University of Alberta, Operational GHG Emissions Reduction Plan (final, April 2025; scanned, read by OCR; J.B. upload 16 Oct 2026): 2023–24 scope 1 and 2 emissions 234,719 t CO2e, of which District Energy System fuel 136,705 t; the DES supplies electricity, steam, chilled water and other utilities to North Campus and sells them to customers in the Greater Campus Area (Fig. 2-1); North Campus is 84.9% of emissions. Two DES decarbonization pathways examined: 1 maintain steam (CHP with carbon capture; hydrogen; electric steam boilers), 2 convert to low-temperature hot water (condensing boilers with carbon capture; natural gas and hydrogen; electricity) (pp. 33–34). No mention of outside or waste heat found",
+"vanRainPrivate2026": "City of Vancouver, Rainwater management on private property (web page printed 16 Oct 2026; read by OCR): most new buildings must manage rainwater on site; up to 1.0 FSR on sites up to 1,000 m² follow the small-site pathway (detention tank 3,400–7,200 L by site area), otherwise the engineered pathway; permits opened after 1 Jan 2026 follow VBBL 2025 Book II, Div. B, Art. 2.4.2.5. Mentions a City map of existing non-potable water systems. No tank costs — https://vancouver.ca (rainwater management on private property)",
+"vanPublicRooms2026": "City of Vancouver Open Data: libraries (22 records, one an outreach office; dataset currency old) and community centres (27), names, addresses, points (J.B. downloads 16 Oct 2026). The City's Keeping Cool maps (2026) show library and community-centre cooling centres by icon only — https://opendata.vancouver.ca",
+"majdabadi2026": "Majdabadi, Irandoostshahrestani and Koohi-Fayegh (2026), Integration of air-source to ground-source heat pump systems: impact on borehole design and life-cycle cost in Canada, Geothermics 138, 103640, doi:10.1016/j.geothermics.2026.103640 (J.B. upload 16 Oct 2026): Table 3 borehole installation (drilling, loop, grouting) $54/m Edmonton, $51/m Toronto, $140/m Montreal (CAD 2025); dual-source designs cut borehole length by up to about 40%, with limited overall savings in Edmonton (Climate Zone 6); case building a mid-rise multifamily"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -13915,7 +13918,10 @@
 "bcucCE2026": "regulator search",
 "edmDDEmap2025": "city map",
 "nrcanEV2026": "government open data",
-"uofaGHG2025": "institution plan"
+"uofaGHG2025": "institution plan",
+"vanRainPrivate2026": "city web page",
+"vanPublicRooms2026": "city open data",
+"majdabadi2026": "peer-reviewed"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -14022,6 +14028,9 @@
 "bcucCE2026": "claude",
 "edmDDEmap2025": "claude",
 "nrcanEV2026": "claude",
-"uofaGHG2025": "claude"
+"uofaGHG2025": "claude",
+"vanRainPrivate2026": "claude",
+"vanPublicRooms2026": "claude",
+"majdabadi2026": "claude"
 }
 }
