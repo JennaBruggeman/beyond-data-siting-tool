@@ -58,6 +58,7 @@ SRC = {
  'abBill22': 'Alberta Bill 22 (2022), Electricity Statutes (Modernizing Alberta\'s Electricity Grid) Amendment Act, as introduced 22 Feb 2022: "self-supply" defined; EUA s. 2(1)(b) exempts self-supply "consumed solely on that property by that owner or tenant"; no clause allowing export of surplus (checked by Claude; enacted text not yet read) — https://docs.assembly.ab.ca/LADDAR_files/docs/bills/bill/legislature_30/session_3/20220222_bill-022.pdf',
  'rlcAUC2021': 'SECONDARY (law-firm summary): Regulatory Law Chambers on the AUC Distribution System Inquiry final report: EV charging stations "are not clearly defined in legislation"; AUC report itself blocked to Claude — https://regulatorylawchambers.ca/2021-4-5-auc-distribution-system-inquiry-final-report-auc-proceeding-24116/',
  'edmZB570': 'Edmonton Zoning Bylaw 20001 s. 5.70: roof up to 1.7 m above maximum height; flat-roof parapet 0.4 m; no height limit for listed items (mechanical penthouse, tanks, "other similar architectural features") — solar collectors not named (checked by Claude) — https://zoningbylaw.edmonton.ca/570-measuring-height-and-grade',
+ 'edmZB510': 'Edmonton Zoning Bylaw 20001 s. 5.10 cl. 11 (read by Claude from the bylaw PDF, data/raw/edm/bylaw): rooftop collectors may project 1.5 m from the roof and up to 1.5 m above the maximum height "in a residential Zone"; must not extend beyond the eave or roof edge; wall-mounted 1.5 m into a setback, 0.6 m from the lot line. Non-residential zones: no projection limit stated — City to confirm — https://zoningbylaw.edmonton.ca/part-5-general-development-regulations/510-accessory-uses-buildings-and-structures',
  'edmZB7120': 'Edmonton Zoning Bylaw 20001 s. 7.120 cl. 3.7: no development permit for "A Solar Collector that complies with the regulations of this Bylaw" on a building not on the historic inventory or register (checked by Claude); the Solar Collectors regulation (s. 5.10) did not load — https://zoningbylaw.edmonton.ca/part-7-administrative-and-interpretive-clauses/development-permits/7120-no-development-permit',
 }
 r['new_sources'].update(SRC)
@@ -143,9 +144,9 @@ for t in m['try_menu']:
     if t['id'] in RD:
         a, b, s = RD[t['id']]; t['readiness'] = a; t['readiness_basis'] = b; t['readiness_sources'] = s
     if t['id'] in ('pv', 'pv_facade'):
-        t['rules']['edmonton'] = ('no development permit for a compliant solar collector (ZB 20001 s. 7.120 cl. 3.7); height rule for collectors not yet read (s. 5.10); '
+        t['rules']['edmonton'] = ('no development permit for a compliant solar collector (ZB 20001 s. 7.120 cl. 3.7); collectors must stay inside the roof edge; the 1.5 m height allowance is written for residential zones only, so industrial zones are not addressed — City to confirm (s. 5.10 cl. 11); '
                                   'self-supply exempt only when used on the property (Bill 22); export through micro-generation ≤5 MW')
-        t['rule_sources'] = ['bchRS2289', 'vanRoofBulletin2022', 'edmZB7120', 'edmZB570', 'abBill22', 'abMicrogen']
+        t['rule_sources'] = ['bchRS2289', 'vanRoofBulletin2022', 'edmZB7120', 'edmZB510', 'edmZB570', 'abBill22', 'abMicrogen']
 m['try_menu_readiness_note'] = 'How proven each add-on is, paired with a data centre: from the precedent search of 15 Oct 2026. Operator and vendor pages are claims.'
 
 S = {**r.get('old_sources', {}), **r['new_sources']}
