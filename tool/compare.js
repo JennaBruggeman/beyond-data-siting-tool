@@ -18,7 +18,7 @@ function nums(mw,city,des,pue){ const R=E().R; const P=pue?[pue,pue]:R.pue;
   const hp=rec?[avail[0]/R.cop[1],avail[1]/R.cop[0]]:[0,0];
   const towers=des.outside==='towers'||des.outside==='hybrid';
   return {MWh,co2:MWh.map(v=>v*R.grid[city]/1000),avail,homes:avail.map(v=>v/R.homeMWh[city]),hpco2:hp.map(v=>v*R.grid[city]/1000),
-    evap:towers?MWh.map(v=>v*1.5*(des.outside==='hybrid'?0.5:1)):[0,0],rec}; }
+    evap:towers?MWh.map(v=>v*1.5*(des.outside==='hybrid'?{van:0.124,edm:0.104}[city]:1)):[0,0],rec}; }
 function refs(f){ const A=BD.S.answers, mw=A.mw||1, here={inside:A.inside||'air',outside:A.outside||'dry'}, conv={inside:'air',outside:'dry'};
   const S=SITES||{}; const other=f.city==='van'?'edm':'van';
   const mm={van:1159.5,edm:422.5};
@@ -42,7 +42,7 @@ const COLS={
  water:[['Water evaporated on site',r=>r.n.evap[1]?`up to ${fmt(r.n.evap[1])} m³/yr`:'none (dry coolers)'],['Rain on the roof',r=>r.site&&r.site.roof?`about ${fmt(r.site.roof*r.mm/1000*0.8)} m³/yr`:NIL]],
  materials:[['Electricity over 50 years',r=>r.noPue?NS:rg(r.n.MWh.map(v=>v*50/1e6),'TWh',1)]],
 };
-const WHY={heat:'Heat offered needs liquid cooling and a heat pump; air-cooled heat at 25–35 °C is shown as none to reuse.',energy:'Grid carbon: NIR 2026, 2024 consumption intensity in each province.',water:'Evaporation at most 1.5 L per kWh of heat (towers; hybrid taken as half). Rain at 80% capture, ECCC normals.',materials:'Materials embodied in each reference are not yet compared.'};
+const WHY={heat:'Heat offered needs liquid cooling and a heat pump; air-cooled heat at 25–35 °C is shown as none to reuse.',energy:'Grid carbon: NIR 2026, 2024 consumption intensity in each province.',water:'Evaporation at most 1.5 L per kWh of heat (towers); hybrids wet only above 18 °C, 12.4% of the year in Vancouver and 10.4% in Edmonton (CWEC, computed). Rain at 80% capture, ECCC normals.',materials:'Materials embodied in each reference are not yet compared.'};
 function block(tab,f){ const C=COLS[tab]; if(!C) return '';
   const L=refs(f);
   return `<div class="cmp"><div class="kind">Compared with</div><div class="tt"><table class="cmpt"><thead><tr><th></th>${C.map(c=>`<th>${esc(c[0])}</th>`).join('')}</tr></thead><tbody>

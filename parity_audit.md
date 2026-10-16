@@ -82,6 +82,15 @@ These are being worked one at a time with J.B.: `light_at_window`, `genset_test`
 
 The grid carbon (18.1 vs 346.1 g/kWh) and household heat (14.58 vs 29.19 MWh) are already per city.
 
+## Fixed on 16 Oct 2026 (with data in hand)
+
+- **A2 water (hybrids).** The tool assumed a hybrid cooler evaporates half of what a tower does, and the main water tab showed hybrids as using no water. Both are now computed per city from the CWEC weather files: wet only above about 18 °C, which is **12.4% of the year in Vancouver (1,085 h) and 10.4% in Edmonton (914 h)**. Towers keep the 1.5 L/kWh upper bound, which is physics (latent heat) and the same in both cities.
+- **A1 PUE.** Tested rather than changed. Free-cooling hours are close (air-side at 18 °C: 7,109 h Vancouver, 7,614 h Edmonton; a 30 °C dry-cooler loop: 7,675 h and 7,846 h), so one range stays for both cities. The evidence is now shown in the tool.
+- **A4 and A5 (reach and payback).** The tool already worked out each receiver's payback with each city's own gas and power prices; only the search circles were Dutch. The heat tab now says so for each city. At Alberta prices the heat pump's electricity costs more than the gas it replaces (−$5.5 to −$0.7 per MWh of heat), so no route pays back at any distance in Edmonton. At BC prices the heat is worth $10.9–18.4 per MWh.
+- **New, found while fixing.** The fixed connection cost on every Edmonton heat card was Vancouver's NEU levy ($112,611). No Edmonton charge is published, so the card now says Vancouver's figure is used for scale.
+
+Still open from section A: A14 (COP by network temperature), A15 (check per-province heat density), and A17, A25, A26 (rescale with heating degree-days). These are diagram items not yet used in the tool's numbers.
+
 ## What happens next
 
 1. **Step 2, independent review:** someone other than me checks this sort, especially section C, since anything wrongly called shared stays hidden.

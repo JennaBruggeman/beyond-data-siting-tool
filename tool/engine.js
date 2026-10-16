@@ -262,6 +262,8 @@ async function recvView(){
       `Homes: heat ÷ ${R.homeMWh[f.city]} MWh per home a year = ${n1(r.homes[0])}–<b>${n1(r.homes[1])}</b>.`,
       `Carbon: heat-pump electricity × ${R.grid[f.city]} g/kWh = ${n1(r.co2[0])}–<b>${n1(r.co2[1])} t CO₂e</b>.`],
       'Load factor: Fan et al. 2007. Capture: LBNL 2014, NREL (direct-to-chip). COP: DEA 2026 waste-heat heat pumps to 70 °C (3.0–3.6) and observed at Meta Odense (4.5, 2020). Homes: NRCan CEUD 2023. Grid: NIR 2026.')}`; }
+  { const EC=BD.ECON; if(EC){ const v=EC.gas[f.city], pe=EC.elec[f.city], nb=v-pe/R.cop[1], nw=v-pe/R.cop[0];
+    h+=`<p class="sub"><span class="draft">${esc(`The search circles are Dutch payback distances (RVO 2018: five years at Dutch prices), used only to say where to look. `+(nb<=0?`At ${f.city==='edm'?'Alberta':'BC'} prices the heat pump's electricity costs more than the gas the heat would replace ($${nw.toFixed(1)} to $${nb.toFixed(1)} per MWh), so no route pays back at any distance; each card shows what would have to change.`:`At ${f.city==='van'?'BC':'Alberta'} prices the heat is worth $${nw.toFixed(1)}–${nb.toFixed(1)} per MWh after the heat pump; each receiver's own break-even distance is on its card.`))}</span></p>`; } }
   h+=`${src('reach')}${src('recv')}<p class="sub" style="margin-top:10px">${f.city==='van'?'Vancouver pools and rinks are not separate records in the national database; recreation centres may contain them. Private housing and offices are not mapped yet.':'Edmonton care homes and most hospitals have no location in the national record; private housing and offices are not mapped yet.'}</p>
   <div class="draftnote">Draft wording (Claude) for J.B.</div>`;
   $('#side').innerHTML=h; wireTabs(); BD.draw();
@@ -417,13 +419,16 @@ function energyView(){
 }
 function waterView(){
   const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=[fac[0]*8760*R.lf,fac[1]*8760*R.lf];
-  const towers=A.outside==='towers'; const evap=MWh.map(v=>v*1000*1.5/1000); // m³: ≤ 1.5 L/kWh of heat
+  const towers=A.outside==='towers', hybrid=A.outside==='hybrid';
+  // hybrid coolers run wet only when the air is too warm for the loop (30 °C loop, 12 K approach → above 18 °C dry-bulb): CWEC hours per city (J.B. parity audit A2, 16 Oct 2026)
+  const WET={van:[1085,0.124],edm:[914,0.104]}, wet=hybrid?WET[f.city][1]:1;
+  const evap=MWh.map(v=>v*1000*1.5*wet/1000); // m³: ≤ 1.5 L/kWh of heat, × the wet share for hybrids
   const mk=[evap[1]*(1+1/(6-1)),evap[1]*(1+1/(2-1))], bd=[evap[1]/(6-1),evap[1]/(2-1)];
   const roof=roofArea(f), mm=f.city==='van'?1159.5:422.5, rain=roof*mm/1000*0.8;
   const wbe=[MWh[0]*1000*1.25/1000,MWh[1]*1000*16.8/1000];
   let h=tabBar('water')+`<h2>Water in, water out</h2><p class="draft">A data centre can use almost no water on site, or a great deal — it depends on how it rejects heat. The water behind its electricity is a separate question.</p>
   <div class="q"><div class="lab">How it rejects heat</div><div class="seg" data-c="1"><button data-v="dry" aria-pressed="${A.outside!=='towers'&&A.outside!=='hybrid'}">Dry coolers</button><button data-v="towers" aria-pressed="${towers}">Cooling towers</button><button data-v="hybrid" aria-pressed="${A.outside==='hybrid'}">Hybrid</button></div></div>
-  <h3>On site</h3><dl>${towers?`<dt>Evaporated</dt><dd>up to ${fmt(evap[1])} m³/yr (at most 1.5 L per kWh of heat)</dd><dt>Make-up water</dt><dd>${fmt(mk[0])}–${fmt(mk[1])} m³/yr at 2–6 cycles of concentration</dd><dt>Blowdown to the sewer</dt><dd>${fmt(bd[0])}–${fmt(bd[1])} m³/yr</dd>${f.city==='van'?`<dt>Water bill</dt><dd>about $${fmt(mk[0]/2.832*4.091)}–$${fmt(mk[1]/2.832*5.128)} a year for the make-up water alone (2026 rates, per 2.832 m³ unit)</dd>`:''}`:`<dt>Evaporated</dt><dd>none for cooling — dry coolers reject heat to the air; their fans are the trade (sound, roof space)</dd>`}
+  <h3>On site</h3><dl>${towers||hybrid?`<dt>Evaporated</dt><dd>up to ${fmt(evap[1])} m³/yr (at most 1.5 L per kWh of heat${hybrid?`, wet only in the ${fmt(WET[f.city][0])} hours a typical year is above 18 °C in ${f.city==='van'?'Vancouver':'Edmonton'} (${(WET[f.city][1]*100).toFixed(1)}%; CWEC, computed)`:''})</dd><dt>Make-up water</dt><dd>${fmt(mk[0])}–${fmt(mk[1])} m³/yr at 2–6 cycles of concentration</dd><dt>Blowdown to the sewer</dt><dd>${fmt(bd[0])}–${fmt(bd[1])} m³/yr</dd>${f.city==='van'?`<dt>Water bill</dt><dd>about $${fmt(mk[0]/2.832*4.091)}–$${fmt(mk[1]/2.832*5.128)} a year for the make-up water alone (2026 rates, per 2.832 m³ unit)</dd>`:''}`:`<dt>Evaporated</dt><dd>none for cooling — dry coolers reject heat to the air; their fans are the trade (sound, roof space)</dd>`}
   <dt>Rain on the roof</dt><dd>about ${fmt(rain)} m³/yr from ${fmt(roof)} m² at ${mm} mm a year</dd></dl>${s3('evap')}${f.city==='van'?s3('wprice'):''}${s3('rain')}
   <h3>Behind its electricity</h3><dl><dt>Water used to make its power</dt><dd>${fmt(wbe[0])}–${fmt(wbe[1])} m³/yr (thermal plants ~1.25 L/kWh; hydro reservoirs ~16.8 L/kWh — mostly evaporation from reservoirs)</dd></dl>${s3('wbe')}
   <h3>Other sources and their rules</h3><dl><dt>Reclaimed water</dt><dd>${f.city==='van'?'Metro Vancouver considers supply to industry case by case; no rate':'EPCOR supplied 4,226 ML of reclaimed water to industry in 2024 (Gold Bar)'}</dd>
