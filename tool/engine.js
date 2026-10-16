@@ -271,7 +271,7 @@ async function recvView(){
 /* ---------- round 3: three options, trade-off tables by party ---------- */
 function optionSet(f,near,nets){
   const top=f.mw[1], A=BD.S.answers, chosen=A.mw||top/2;
-  const net=nets.find(n=>n.inside&&n.edge>=50);
+  const net=nets.find(n=>n.inside&&n.edge>=50&&n.src==='van9552');
   const sizes=[Math.max(0.1,+(chosen/2).toFixed(1)),+chosen.toFixed(1),+Math.max(chosen,top).toFixed(1)];
   return [
    {id:'a',name:'Smaller, air-cooled',gives:'least plant and grid; heat goes to the air',mw:sizes[0],recover:false},
@@ -287,7 +287,7 @@ function calc(o,f,near,nets){
     r.avail=[cap[0]*R.cop[1]/(R.cop[1]-1),cap[1]*R.cop[0]/(R.cop[0]-1)];
     r.hp=[r.avail[0]/R.cop[1],r.avail[1]/R.cop[0]];
     r.homes=r.avail.map(v=>v/R.homeMWh[f.city]); r.co2=r.hp.map(v=>v*R.grid[f.city]/1000);
-    const net=nets.find(n=>n.inside&&n.edge>=50); if(o.to==='net'&&net) r.credit=r.avail.map(v=>v*R.neuCredit);
+    const net=nets.find(n=>n.inside&&n.edge>=50&&n.src==='van9552'); if(o.to==='net'&&net) r.credit=r.avail.map(v=>v*R.neuCredit);
   }
   r.fuel=[fac[0]*1000*R.fuelHours*R.fuelLkWh,fac[1]*1000*R.fuelHours*R.fuelLkWh];
   r.jobs=[Math.max(1,o.mw*f.m2MW[0]/R.hallShare[1]/R.jobsM2),Math.max(1,o.mw*f.m2MW[1]/R.hallShare[0]/R.jobsM2)];
