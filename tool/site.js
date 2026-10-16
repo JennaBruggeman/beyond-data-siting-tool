@@ -64,6 +64,19 @@ function frameOf(r){ const h=hull(r); let best=null;
   const cu=(u0+u1)/2, cv=(v0+v1)/2; const cx=cu*ux-cv*uy, cy=cu*uy+cv*ux;
   return {cx,cy,ux,uy,L:u1-u0,W:v1-v0, toW:(a,b)=>[cx+a*ux-b*uy, cy+a*uy+b*ux], toL:(x,y)=>[(x-cx)*ux+(y-cy)*uy, -(x-cx)*uy+(y-cy)*ux]}; }
 function rectW(F,a0,a1,b0,b1){ const p=[F.toW(a0,b0),F.toW(a1,b0),F.toW(a1,b1),F.toW(a0,b1)]; return new Float64Array(p.flat()); }
+/* the largest simple rectangle (in the lot frame) that sits wholly inside the lot, within a1..a2 × b1..b2 (J.B., 16 Oct: "i just want simple massing") */
+function inscribe(F,ring,a0,a1,b0,b1){ const ua=Math.min(a0,a1), ub=Math.max(a0,a1), va=Math.min(b0,b1), vb=Math.max(b0,b1), W=ub-ua, H=vb-va; if(W<=0||H<=0) return null;
+  const L=[]; for(let i=0;i<ring.length;i+=2) L.push(F.toL(ring[i],ring[i+1]));
+  const inLot=(u,v)=>{ const [x,y]=F.toW(u,v); return BD.pip(x,y,ring); };
+  const ok=(u0,u1,v0,v1)=>{ for(let k=0;k<=4;k++){ const t=k/4; if(!inLot(u0+(u1-u0)*t,v0)||!inLot(u0+(u1-u0)*t,v1)||!inLot(u0,v0+(v1-v0)*t)||!inLot(u1,v0+(v1-v0)*t)) return false; }
+    for(const [u,v] of L) if(u>u0+0.01&&u<u1-0.01&&v>v0+0.01&&v<v1-0.01) return false; return true; };
+  if(ok(ua,ub,va,vb)) return [ua,ub,va,vb];
+  for(let sc=0.95;sc>=0.2;sc-=0.05){ const w=W*sc, h=H*sc; let best=null;
+    for(let i=0;i<=8;i++) for(let j=0;j<=8;j++){ const u0=ua+(W-w)*i/8, v0=va+(H-h)*j/8; if(ok(u0,u0+w,v0,v0+h)){ best=[u0,u0+w,v0,v0+h]; break; } }
+    if(best) return best;
+    // also try keeping full depth or full width (long thin lots)
+    for(const [w2,h2] of [[W,h],[w,H]]) for(let i=0;i<=8;i++) for(let j=0;j<=8;j++){ const u0=ua+(W-w2)*i/8, v0=va+(H-h2)*j/8; if(ok(u0,u0+w2,v0,v0+h2)) return [u0,u0+w2,v0,v0+h2]; } }
+  return null; }
 function signedArea(r){ let s=0; for(let i=0,j=r.length-2;i<r.length;j=i,i+=2) s+=(r[j]*r[i+1]-r[i]*r[j+1]); return s/2; }
 function clip(subj,clipR){ // Sutherland–Hodgman: subject (any simple polygon) clipped by a convex polygon
   let c=clipR; if(signedArea(c)<0){ const t=[]; for(let i=c.length-2;i>=0;i-=2) t.push(c[i],c[i+1]); c=new Float64Array(t); }
@@ -80,8 +93,8 @@ BD.geo={frameOf,rectW,clip,hull};
    Edmonton Bylaw 20001 s. 5.80 subs. 7. Aisle: Vancouver's 6.1 m (s. 5.4.1) used in both cities as an assumption. */
 function loadingNeed(city,gfa){
   if(city==='van'){ const n=gfa<100?0:1+(gfa>465?1:0)+Math.max(0,Math.ceil((gfa-2325)/2325)); const nC=gfa<2000?0:gfa<=5000?1:2;
-    return {n,len:10.2,wid:3.4,ht:3.8,aisle:6.1,cls:'Class B',nC,
-      basis:`Class B spaces, ${n} for ${fmt(gfa)} m² (row 5.2.5 as the similar use; data centres are not listed, so the Director of Planning decides — s. 5.1.4). Each 10.2 × 3.4 m, 3.8 m clear; reached by a 6.1 m aisle (s. 5.4.1).${nC?` If the City reads a data centre as a storage warehouse, ${nC} Class C space${nC>1?'s':''} (23.1 × 3.6 m, 14.0 m aisle) would also be needed.`:''}`,src:'vanParking5'}; }
+    return {n,len:10.2,wid:3.4,ht:3.8,aisle:6.1,cls:'truck loading bay',nC,
+      basis:`${n} truck loading bays for ${fmt(gfa)} m² of floor. The Parking By-law calls this size Class B, its mid-size bay: 10.2 × 3.4 m with 3.8 m clearance (Class C is the 23.1 m bay for the largest trucks). The count uses row 5.2.5 as the similar use: data centres are not listed, so the Director of Planning decides (s. 5.1.4). Each bay is reached by a 6.1 m aisle (s. 5.4.1).${nC?` If the City reads a data centre as a storage warehouse, ${nC} Class C space${nC>1?'s':''} (23.1 × 3.6 m, 14.0 m aisle) would also be needed.`:''}`,src:'vanParking5'}; }
   const n=gfa<2500?0:gfa<=7500?1:2;
   return {n,len:9.0,wid:3.3,ht:4.0,aisle:6.1,cls:'loading space',
     basis:`${n} loading space${n===1?'':'s'} for ${fmt(gfa)} m² of floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site, with no backing onto streets or alleys (s. 5.80 subs. 7). Aisle: Vancouver's 6.1 m used as an assumption.`,src:'edmZB580'}; }
@@ -121,9 +134,9 @@ function model(){
     const gfaGuess=lotArea*Z.fsr[1];
     const LN=loadingNeed(city,gfaGuess); m.loadingNeed=LN;
     const rearEnd=fl>0?u1:u0, dir=fl>0?-1:1; let cur=rearEnd;
-    if(LN.n&&!A.loadIn&&A.foot!=='existing'){ const dep=LN.len+LN.aisle; const a0=cur, a1=cur+dir*dep; m.loading=rectW(F,Math.min(a0,a1),Math.max(a0,a1),v0,v1); m.loadDepth=dep; cur=a1;
-      m.loadSpaces=[]; const spanV=v1-v0, k=Math.min(LN.n,Math.max(1,Math.floor(spanV/(LN.wid+0.6))));
-      for(let i=0;i<k;i++){ const b0=v0+0.6+i*(LN.wid+0.6); const s0=rearEnd+dir*0, s1=rearEnd+dir*LN.len; m.loadSpaces.push(rectW(F,Math.min(s0,s1),Math.max(s0,s1),b0,b0+LN.wid)); }
+    if(LN.n&&!A.loadIn&&A.foot!=='existing'){ const dep=LN.len+LN.aisle; const a0=cur, a1=cur+dir*dep; { const q=inscribe(F,ring,a0,a1,v0,v1); m.loading=q?rectW(F,q[0],q[1],q[2],q[3]):clip(ring,rectW(F,Math.min(a0,a1),Math.max(a0,a1),v0,v1)); m.loadV=q?[q[2],q[3]]:[v0,v1]; } m.loadDepth=dep; cur=a1;
+      m.loadSpaces=[]; const lv0=m.loadV[0], spanV=m.loadV[1]-m.loadV[0], k=Math.min(LN.n,Math.max(1,Math.floor(spanV/(LN.wid+0.6))));
+      for(let i=0;i<k;i++){ const b0=lv0+0.6+i*(LN.wid+0.6); const s0=rearEnd+dir*0, s1=rearEnd+dir*LN.len; m.loadSpaces.push(rectW(F,Math.min(s0,s1),Math.max(s0,s1),b0,b0+LN.wid)); }
       if(k<LN.n) m.warn.push(`Only ${k} of ${LN.n} loading spaces fit across the lot.`); }
     m.plantYardStart=cur; m.dir=dir; m.v=[v0,v1]; m.uFront=fl>0?u0:u1;
     // footprint
@@ -134,7 +147,7 @@ function model(){
   if(BD.plant) BD.plant.place(m); // sizes units, may shorten the footprint to leave a plant yard, places roof and yard units
   if(!m.existing&&!m.foot&&m.uBuild){ let [a0,a1]=m.uBuild; if(m.plantYardDepth) a0=a0+m.dir*m.plantYardDepth;
     if(m.footMode==='cover'&&A.cover){ const want=lotArea*A.cover/100, wv=m.v[1]-m.v[0]; const len=Math.min(Math.abs(a1-a0),want/Math.max(wv,1)); a0=a1+Math.sign(a0-a1||1)*len; }
-    const r=rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); m.foot=clip(ring,r); m.footRect=r; }
+    const q=inscribe(F,ring,a0,a1,m.v[0],m.v[1]); if(q){ const r=rectW(F,q[0],q[1],q[2],q[3]); m.foot=r; m.footRect=r; m.simpleMass=true; } else { const r=rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); m.foot=clip(ring,r); m.footRect=r; } }
   if(m.foot&&!m.footArea) m.footArea=BD.area(m.foot);
   if(m.foot&&!m.existing&&m.footArea<20) m.warn.push('After setbacks, loading and plant there is almost no room left for a building on this lot.');
   if(BD.plant&&BD.plant.roof) BD.plant.roof(m);

@@ -229,3 +229,6 @@ Rows are listed only for buildings within reach of break-even or whose demand is
 
 ## The path and closed sections (16 Oct 2026, J.B.: "tabs that open (but present closed)… make the path through the tool clear")
 Five steps across the top of the panel on every site view: 1 Site, 2 What fits, 3 Exchanges (Heat, Electricity, Water, Materials, People), 4 Could become (Opportunities, Three options, Over time), 5 Report (PDF and HTML, to be built). Real buildings and Two cities are context links under the steps. Views open with the finding (red = emphasis), then sections that start closed but show their one-line answer; opening state is kept for the session. Piloted on Heat; other views to follow once J.B. approves the pattern.
+
+## Simple massing (16 Oct 2026, J.B.: "why are we making the shape be funny… i just want simple massing")
+The building is now the largest plain rectangle, in the lot's own frame, that sits wholly inside the lot and its setbacks (scaled down to the coverage when coverage is set), instead of the lot clipped by a rectangle (which made wedges and curves). The loading strip is fitted the same way, so it never sits outside the lot or under a neighbour. "Class B" is now described as a truck loading bay (the Parking By-law's mid-size bay, 10.2 × 3.4 m, 3.8 m clear).

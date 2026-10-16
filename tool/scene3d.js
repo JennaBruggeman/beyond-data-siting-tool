@@ -166,7 +166,7 @@ function plantLabels(col){ const G=state.plantGroups||{}; for(const k in G){ con
     const top=V(c[0],c[1],b.base+b.h), at=top.clone().add(new T.Vector3(0,9+(where==='roof'?4:0),0)); label(`${name} ×${L.length} · ${where}`,at,col?hex(col):'#e9e6e1',{prio:6,from:top}); } }
 function baseLabels(){ const M=state.M; if(!M) return;
   if(state.foot&&!M.existing){ const c=roofC(); label(`data centre · ${M.H.toFixed(1)} m, ${M.nF[0]===M.nF[1]?M.nF[0]:M.nF[0]+'–'+M.nF[1]} storeys`,V(c[0],c[1],state.roof+20),'#e9e6e1',{prio:9,from:V(c[0],c[1],state.roof)}); }
-  if(M.loading){ const c=BD.centroid(M.loading); label(`loading · ${M.loadingNeed.cls} ×${M.loadingNeed.n}`,V(c[0],c[1],10),'#9fb38a',{prio:5,from:V(c[0],c[1],0.4)}); }
+  if(M.loading){ const c=BD.centroid(M.loading); label(`${M.loadingNeed.cls}s ×${M.loadingNeed.n}`,V(c[0],c[1],10),'#9fb38a',{prio:5,from:V(c[0],c[1],0.4)}); }
   if(M.plant&&M.plant.yard){ const c=BD.centroid(M.plant.yard); label('plant yard',V(c[0],c[1],14),'#9d9a94',{prio:4,from:V(c[0],c[1],0.4)}); }
   if(state.indoorZ&&state.foot){ const c=roofC(); label('cooling plant indoors · louvred top floor',V(c[0],c[1],state.indoorZ+12),'#9d9a94',{prio:7,from:V(c[0],c[1],state.indoorZ+3)}); }
   if(state.screenRing){ const c=BD.centroid(state.screenRing); label('roof screen',V(c[0],c[1],state.roof+14),'#9d9a94',{prio:5}); } }
