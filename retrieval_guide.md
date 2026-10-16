@@ -134,3 +134,8 @@ People and the urban rationale
 - ✅ (16 Oct: Vancouver public streets and Edmonton Road Network received) **R13 Open data**: Vancouver "public streets" (centrelines) and Edmonton "road centreline" datasets, as GeoJSON — https://opendata.vancouver.ca and https://data.edmonton.ca
 - ✅ FortisBC Rate 2 and 3 (16 Oct: screenshots; Rate 2 delivery corrected to $5.877)
 - Not found anywhere public, to ask in person if useful: Canadian district-heating pipe cost per metre (City of Vancouver NEU staff, EPCOR DDE); EPCOR Gold Bar reclaimed-water terms; sewer review timelines.
+
+## 8. Status 16 Oct 2026 (end of day) and new suggestions
+- ✅ 16 Oct: F1 wells (nine reports), G3 I-2 sub-area B, D5 Blatchford (both plans), CEEDC district-energy inventory, NRCan CEUD commercial (BC, AB), ENERGY STAR Canadian medians (2018), City NES map (March 2020: Creative Energy, River District placed), RDE developer guidelines (2018), 2012 Neighbourhood Energy Strategy, BCUC Creative Energy search list.
+- Still open: P4 greenhouse area by region; Metro Vancouver plant addresses; G4 Edmonton Downtown District Energy outline; A5 CSA C448 (optional); G5 ask the City (ground floor); Creative Energy steam rates (BCUC filings, optional); asks in person (Blatchford loop temperatures, pipe cost per metre, Gold Bar reclaimed water); e-Stewards (optional).
+- Suggested (not yet fetched; links not checked): NRCan EV charging station open data; Alberta/BC greenhouse energy figures; Canadian RAS (aquaculture) costs; borefield cost per metre; rainwater tank cost; utility capacity maps if published; City warming/cooling centre lists.
