@@ -9,7 +9,7 @@
 "quantities": 139,
 "conditions": 101,
 "opportunities": 15,
-"sources": 528
+"sources": 533
 }
 },
 "stages": [
@@ -3444,7 +3444,12 @@
 "vanSewer",
 "blatchfordBP2021",
 "epcorGoldBar2026",
-"blatchfordSHX2026"
+"blatchfordSHX2026",
+"blatchfordRates2026",
+"blatchfordAdvisor2023",
+"edmDEstrategy2024",
+"buffa2019",
+"bfe2023dc"
 ],
 "source_roles": [
 {
@@ -3502,6 +3507,41 @@
 "role": "pending build",
 "conf": 50,
 "verified": false
+},
+{
+"id": "blatchfordRates2026",
+"term": "research pass 16 Oct 2026 (city utility)",
+"role": "pending build",
+"conf": 50,
+"verified": false
+},
+{
+"id": "blatchfordAdvisor2023",
+"term": "research pass 16 Oct 2026 (city report)",
+"role": "pending build",
+"conf": 50,
+"verified": false
+},
+{
+"id": "edmDEstrategy2024",
+"term": "research pass 16 Oct 2026 (city report)",
+"role": "pending build",
+"conf": 50,
+"verified": false
+},
+{
+"id": "buffa2019",
+"term": "research pass 16 Oct 2026 (peer-reviewed)",
+"role": "pending build",
+"conf": 50,
+"verified": false
+},
+{
+"id": "bfe2023dc",
+"term": "research pass 16 Oct 2026 (government report)",
+"role": "pending build",
+"conf": 50,
+"verified": false
 }
 ],
 "conf": 80,
@@ -3514,9 +3554,9 @@
 "upstream": 20,
 "city": {
 "van": 4,
-"edm": 3,
+"edm": 6,
 "both": 0,
-"gen": 1
+"gen": 3
 }
 },
 {
@@ -13135,7 +13175,12 @@
 "agsGround2009": "Alberta Geological Survey OFR 2009-09 (Hastings Lake, east of Edmonton): undisturbed ground 6.1 °C to about 25 m; in-situ conductivity 1.74–2.01 W/m·K, design 1.90. Vancouver: no city-specific measurement found; national map 6–12 °C (GSC OF 6914) — https://static.ags.aer.ca/files/document/OFR/OFR_2009_09.pdf",
 "vanDeepGeo": "No published temperature-at-depth assessment for Vancouver / the Lower Mainland was found. Heat flow west of the Coast Plutonic Complex is low, about 44 mW/m² (Lewis, Judge & Souther 1978, abstract); GSC OF 6914 (Grasby et al. 2012) names southern BC volcanic belts (Garibaldi) as EGS targets; Geoscience BC Report 2015-11 covers volcanic-belt sites 100+ km away (Meager Creek 180–280 °C). Edmonton 90 °C at 2.5 km confirmed (Majorowicz & Grasby 2021, Table A1) — https://download-telecharger.services.geo.ca/pub/nrcan_rncan/publications/STPublications_PublicationsST/291/291488/gid_291488.pdf",
 "smoke2026": "Wildfire smoke: Alberta counts a smoke day as daily PM2.5 above 15 µg/m³; northern Alberta stations had more than 100 smoke days in 2023 (Edmonton values only in a chart); Metro Vancouver had a 14-day wildfire smoke advisory in 2018 and two multi-day smoke advisories in 2023; smoke affected Metro Vancouver air in seven of the last ten years (2024 summary). No official annual smoke-hour counts for either city — https://www.alberta.ca/air-indicators-wildfire-smoke",
-"nfcAB2023_4313": "National Fire Code – 2023 Alberta Edition (J.B. download 16 Oct 2026), Tables 4.3.13.4.-A and -B read by Claude: identical to NFC 2020 — Classes II and IIIA tanks for emergency generators, first storey 200 000 L per protected storage room (tanks > 2 500 L); basement and storeys above the first, 20 000 L (tanks > 2 500 L) or 45 000 L (tanks > 20 000 L). Vancouver: Fire By-law 14419 adds no quantity limits to the BC Fire Code, so the same tables govern in both cities — https://nrc-publications.canada.ca/"
+"nfcAB2023_4313": "National Fire Code – 2023 Alberta Edition (J.B. download 16 Oct 2026), Tables 4.3.13.4.-A and -B read by Claude: identical to NFC 2020 — Classes II and IIIA tanks for emergency generators, first storey 200 000 L per protected storage room (tanks > 2 500 L); basement and storeys above the first, 20 000 L (tanks > 2 500 L) or 45 000 L (tanks > 20 000 L). Vancouver: Fire By-law 14419 adds no quantity limits to the BC Fire Code, so the same tables govern in both cities — https://nrc-publications.canada.ca/",
+"blatchfordRates2026": "Blatchford Renewable Energy rates: Bylaw 17943 consolidated 1 Jan 2024: infrastructure fee $1,947.03/unit residential, $22.24/m² commercial; fixed $1.88/unit/day townhouse, $12.84/kW peak/month multi-unit; variable $0.0325/kWh. 2025 and 2026 (frozen by Council 1 Dec 2025, citing federal policy changes): townhouse $2.07/unit/day + $0.0358/kWh; multi-unit $13.18/kW peak/month + $0.0358/kWh. The meter appears to measure heating and cooling energy drawn from the loop by the heat pump (operator equipment page; not stated outright). Bylaw 17943 (2022 consolidation, read by Claude): variable rate $0.0269/kWh — https://blatchfordutility.ca/2026-rates-blatchford-renewable-energy/",
+"blatchfordAdvisor2023": "Utility Advisor response to the Blatchford 2024 rate filing (25 Oct 2023, Utility Committee 3 Nov 2023, FCS02051): customers forecast 181 in 2024 (down from 217) and 292 in 2025; revenue shortfall $1,324,700 (2024) and $863,600 (2025); viability \"rides on increasing customers as quickly as possible\". Operator page (Jan 2025): over 100 homes connected. Earlier plan (2020–2023) had forecast 1,409 customers by 2023. The 2021–2024 plan table reads 3,031 MWh cumulative to 2024 in one extraction and up to 5,562 MWh in another; to check against the original. Borefield used for seasonal storage of summer heat (operator pages, no measured data) — https://pub-edmonton.escribemeetings.com/filestream.ashx?DocumentId=205403",
+"edmDEstrategy2024": "City of Edmonton, Implementing Edmonton District Energy Strategy (IIS02148, Urban Planning Committee 27 Feb 2024): seeks private-sector partner(s) through procurement; raises a private partner acquiring established City-owned systems such as Blatchford; lists expanding Blatchford as a next step; does not mention waste heat, data centres or ambient loops — https://pub-edmonton.escribemeetings.com/filestream.ashx?DocumentId=216461",
+"buffa2019": "Buffa et al. 2019, 5th generation district heating and cooling systems: a review of existing cases in Europe, Renewable and Sustainable Energy Reviews 104:504–522: FGZ Friesenberg, Zürich (2014), \"an HE is installed for direct heat recovery from a data center\" (p. 515), network supply 8–28 °C; in summer the warm pipe reaches about 30 °C after the data centre, limiting free cooling downstream; borehole count inconsistent in the paper (332 vs 153). FGZ factsheet (Swiss Federal Office of Energy support): data-centre waste heat 9 MW, 27 GWh/a, 450 boreholes as seasonal storage (18 GWh); not stated as measured — https://doi.org/10.1016/j.rser.2018.12.059",
+"bfe2023dc": "BFE/EnergieSchweiz 2023, Abwärmenutzung von Rechenzentren (Kulemann et al.): data-centre heat can enter a low-temperature network without a boost if taken out above 32 °C (p. 20); fictional 20 MW IT case: 48% of waste heat used with a 25 MW network, 12% with a 5 MW network (p. 24); data-centre waste heat has hardly had a price (p. 26); operators plan over 10–15 years, heat networks over 30–40 (p. 5). Canton of Zürich RRB 1340/2025: waste heat above 2 GWh must be offered to third parties at production cost — https://www.bfe.admin.ch/"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -15314,7 +15359,12 @@
 "agsGround2009": "geological survey",
 "vanDeepGeo": "geological survey",
 "smoke2026": "government",
-"nfcAB2023_4313": "rule"
+"nfcAB2023_4313": "rule",
+"blatchfordRates2026": "city utility",
+"blatchfordAdvisor2023": "city report",
+"edmDEstrategy2024": "city report",
+"buffa2019": "peer-reviewed",
+"bfe2023dc": "government report"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -15469,7 +15519,12 @@
 "agsGround2009": "agent",
 "vanDeepGeo": "agent",
 "smoke2026": "agent",
-"nfcAB2023_4313": "claude"
+"nfcAB2023_4313": "claude",
+"blatchfordRates2026": "agent",
+"blatchfordAdvisor2023": "agent",
+"edmDEstrategy2024": "agent",
+"buffa2019": "agent",
+"bfe2023dc": "agent"
 },
 "source_city": {
 "abgas": "edm",
@@ -15998,7 +16053,12 @@
 "agsGround2009": "both",
 "vanDeepGeo": "both",
 "smoke2026": "both",
-"nfcAB2023_4313": "both"
+"nfcAB2023_4313": "both",
+"blatchfordRates2026": "edm",
+"blatchfordAdvisor2023": "edm",
+"edmDEstrategy2024": "edm",
+"buffa2019": "gen",
+"bfe2023dc": "gen"
 },
 "city_gaps": {
 "van": [],
