@@ -151,8 +151,10 @@ function model(){
       // J.B., 16 Oct: "the server amount changes but the building doesnt shrink" — when a size is set, the building is only as big as that size needs:
       // floor = MW × 460 m² of hall per MW (built Canadian halls 290–630, operator claims) ÷ 0.6 hall share (48–72%), spread over the storeys; centred in the buildable rectangle
       if(A.mw&&m.footMode==='max'&&BD.eng){ const R=BD.eng.R, perMW=(R.m2PerMW[0]+R.m2PerMW[1])/2/((R.hallShare[0]+R.hallShare[1])/2), floors=Math.max(1,m.nF[0]), need=A.mw*perMW/floors, W=q[1]-q[0], H=q[3]-q[2];
-        if(need<W*H*0.98){ const k=Math.sqrt(need/(W*H)), cu=(q[0]+q[1])/2, cv=(q[2]+q[3])/2; let w=W*k, h=H*k; if(h<12){ h=Math.min(H,12); w=need/h; } q[0]=cu-w/2; q[1]=cu+w/2; q[2]=cv-h/2; q[3]=cv+h/2; m.sizedTo={mw:A.mw,floor:A.mw*perMW,perMW}; } }
-      const r=rectW(F,q[0],q[1],q[2],q[3]); m.foot=r; m.footRect=r; m.simpleMass=true; } else { const r=rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); m.foot=clip(ring,r); m.footRect=r; } }
+        if(need<W*H*0.98){ const k=Math.sqrt(need/(W*H)), cu=(q[0]+q[1])/2, cv=(q[2]+q[3])/2; let w=W*k, h=H*k; if(h<12){ h=Math.min(H,12); w=need/h; } m.serverFoot=rectW(F,cu-w/2,cu+w/2,cv-h/2,cv+h/2); m.sizedTo={mw:A.mw,floor:A.mw*perMW,perMW}; } }
+      // capacity is always worked out on the most the lot allows; the drawn floor is only the chosen size (no feedback into "what fits")
+      const rr=rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); m.foot=clip(ring,rr); m.footRect=rr; m.simpleMass=true;
+      if(!m.serverFoot) m.serverFoot=rectW(F,q[0],q[1],q[2],q[3]); } else { const r=rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); m.foot=clip(ring,r); m.footRect=r; } }
   if(m.foot&&!m.footArea) m.footArea=BD.area(m.foot);
   if(m.foot&&!m.existing&&m.footArea<20) m.warn.push('After setbacks, loading and plant there is almost no room left for a building on this lot.');
   if(BD.plant&&BD.plant.roof) BD.plant.roof(m);

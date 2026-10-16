@@ -232,3 +232,6 @@ Five steps across the top of the panel on every site view: 1 Site, 2 What fits, 
 
 ## Simple massing (16 Oct 2026, J.B.: "why are we making the shape be funny… i just want simple massing")
 The building is now the largest plain rectangle, in the lot's own frame, that sits wholly inside the lot and its setbacks (scaled down to the coverage when coverage is set), instead of the lot clipped by a rectangle (which made wedges and curves). The loading strip is fitted the same way, so it never sits outside the lot or under a neighbour. "Class B" is now described as a truck loading bay (the Parking By-law's mid-size bay, 10.2 × 3.4 m, 3.8 m clear).
+
+## Equipment, not a building (16 Oct 2026, J.B.: "its not a massing tool… its more about capacity")
+No building is drawn for a new data centre. The 3D shows the lot, the zoning's buildable area as a grey dashed outline, a flat red outline of the floor the chosen size needs ("any shape"; MW × 460 m² of hall per MW ÷ 0.6 hall share, spread over the storeys; with m² and ft²), the racks inside it, and the plant at real sizes (roof units drawn at roof height). Capacity ("what fits") is still worked out on the full buildable area, so the drawing never feeds back into the numbers.

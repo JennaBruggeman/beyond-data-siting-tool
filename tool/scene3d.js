@@ -127,10 +127,9 @@ function buildSite(site){
   if(M&&M.existing){ for(const b of (sel.blds||[]).filter(b=>b.f!==3)) dc.add(prism(b.r,Math.max(2,b.h),0,0x221d1e,C.acc,0.9,0.85)); foot=M.foot; roof=M.H;
     if(A.extent==='part'){ const big=M.foot; const lvl={basement:-4,ground:0,upper:Math.max(4,Math.min(roof-8,roof*0.6)),roof:roof-0.5}[A.floor||'ground']; dc.add(prism(big,4,lvl,0x3a2626,C.acc,1)); } }
   else if(M&&M.foot&&M.footArea>5){ foot=M.foot; roof=M.H; const nF=M.nF[0];
-    const g=prism(foot,roof,0,0x211c1d,C.acc,1,0.55); dc.add(g); state.shell=g;
-    const lv=[]; for(let i=1;i<nF;i++) lv.push(6+(i-1)*((roof-6)/Math.max(1,nF-1))); lv.forEach(z=>dc.add(ringLine(foot,z,C.acc,false,0.35)));
-    if(M.Z.ground) dc.add(ringLine(offsetRing(foot,-0.4),0.4,C.grey,1.2,0.6));
-    state.hallZ=M.Z.ground?6:0.3; }
+    // equipment only (J.B., 16 Oct: "its not a massing tool"): no building; the floor the servers need is a flat outline, any shape
+    dc.add(ringLine(foot,0.2,C.grey,3,0.35)); const sf=M.serverFoot||foot; dc.add(ringLine(sf,0.25,C.acc,2,0.9)); dc.add(prism(sf,0.15,0,0x2a2224,C.acc,0.35,0.0)); foot=sf;
+    roof=0; state.equipOnly=true; state.hallZ=0.3; }
   else if(sel.pt){ foot=new Float64Array(circlePts(sel.pt[0],sel.pt[1],25,0,8).flatMap(v=>[v.x+site.c[0],-v.z+site.c[1]])); roof=18; dc.add(prism(foot,roof,0,0x221d1e,C.acc,1)); }
   state.foot=foot; state.roof=roof;
   // plant: generic units at the size and clearance the register gives; dashed outline = clearance
@@ -149,7 +148,7 @@ function buildSite(site){
   R.cam.position.set(span*1.9,span*1.6+roof*1.3,span*2.2); R.ctl.target.set(0,roof*0.35,0); R.ctl.update(); state.span=span;
 }
 function racksFor(M){ const A=BD.S.answers, mw=A.mw||M.mwSized||1, racks=Math.round(mw*1000/8); const floors=Math.max(1,M.Z.ground?M.nF[0]-1:M.nF[0]); const per=Math.min(900,Math.ceil(racks/floors));
-  const F=M.F, foot=M.foot; const pts=[]; let n=0; const z0=state.hallZ||0.3;
+  const F=M.F, foot=M.serverFoot||M.foot; const pts=[]; let n=0; const z0=state.hallZ||0.3;
   const [u0,u1,v0,v1]=(()=>{ let a=1e9,b=-1e9,c=1e9,d=-1e9; for(let i=0;i<foot.length;i+=2){ const [u,v]=F.toL(foot[i],foot[i+1]); a=Math.min(a,u); b=Math.max(b,u); c=Math.min(c,v); d=Math.max(d,v); } return [a,b,c,d]; })();
   for(let v=v0+4; v<=v1-4-1.2 && n<per; v+=3.6) for(let u=u0+4; u<=u1-4-0.6 && n<per; u+=0.6){ const [x,y]=F.toW(u+0.3,v+0.6); if(!BD.pip(x,y,foot)) continue; pts.push([u,v]); n++; }
   const lp=[]; const h=2.0; for(const [u,v] of pts){ const c=[[u,v],[u+0.6,v],[u+0.6,v+1.2],[u,v+1.2]].map(([a,b])=>F.toW(a,b));
@@ -165,7 +164,7 @@ function roofC(){ return state.foot?BD.centroid(state.foot):state.c; }
 function plantLabels(col){ const G=state.plantGroups||{}; for(const k in G){ const L=G[k], [name,where]=k.split('|'); const b=L[Math.floor(L.length/2)], c=BD.centroid(b.ring);
     const top=V(c[0],c[1],b.base+b.h), at=top.clone().add(new T.Vector3(0,9+(where==='roof'?4:0),0)); label(`${name} ×${L.length} · ${where}`,at,col?hex(col):'#e9e6e1',{prio:6,from:top}); } }
 function baseLabels(){ const M=state.M; if(!M) return;
-  if(state.foot&&!M.existing){ const c=roofC(); label(`data centre · ${M.H.toFixed(1)} m, ${M.nF[0]===M.nF[1]?M.nF[0]:M.nF[0]+'–'+M.nF[1]} storeys`,V(c[0],c[1],state.roof+20),'#e9e6e1',{prio:9,from:V(c[0],c[1],state.roof)}); }
+  if(state.foot&&!M.existing){ const c=roofC(); const fl=M.sizedTo?M.sizedTo.floor:M.footArea*M.nF[0]; label(`${BD.S.answers.mw?BD.S.answers.mw+' MW needs ':''}≈ ${BD.fmt(Math.round(fl/100)*100)} m² (${BD.fmt(Math.round(fl*10.7639/1000)*1000)} ft²) of floor · any shape`,V(c[0],c[1],8),'#e9e6e1',{prio:9,from:V(c[0],c[1],0.3)}); }
   if(M.loading){ const c=BD.centroid(M.loading); label(`${M.loadingNeed.cls}s ×${M.loadingNeed.n}`,V(c[0],c[1],10),'#9fb38a',{prio:5,from:V(c[0],c[1],0.4)}); }
   if(M.plant&&M.plant.yard){ const c=BD.centroid(M.plant.yard); label('plant yard',V(c[0],c[1],14),'#9d9a94',{prio:4,from:V(c[0],c[1],0.4)}); }
   if(state.indoorZ&&state.foot){ const c=roofC(); label('cooling plant indoors · louvred top floor',V(c[0],c[1],state.indoorZ+12),'#9d9a94',{prio:7,from:V(c[0],c[1],state.indoorZ+3)}); }
@@ -179,7 +178,7 @@ function heightsNote(){ return BD.S.city==='van'?'Heights: City of Vancouver LiD
 
 function model(d){ plantLabels(); baseLabels(); const M=state.M, P=M&&M.plant;
   note((P&&P.miss&&P.miss.length?'Doesn\'t fit: '+P.miss.join('; ')+'. ':'')+heightsNote()+'. Neighbours drawn to 1.5 km.');
-  key(sw(C.acc,'the lot; the building the numbers assume')+sw(C.grey,'setbacks (yards) and plant yard',true)+sw(C.edge,'plant, generic: solid = unit, dashed = clearance')+sw(C.mat,'loading spaces; racks inside')); }
+  key(sw(C.acc,'the lot (grey dashed: what the zoning allows); red: the floor the servers need, any shape')+sw(C.grey,'setbacks (yards) and plant yard',true)+sw(C.edge,'plant, generic: solid = unit, dashed = clearance')+sw(C.mat,'loading spaces; racks inside')); }
 const TYPE={housing:'Non-market housing',school:'School',care:'Care home',hospital:'Hospital',rec:'Recreation centre',pool:'Pool',arena:'Indoor arena'};
 const TCOL={housing:C.city,school:C.power,care:C.senses,hospital:C.senses,rec:C.water,pool:C.water,arena:C.mat};
 function heat(d){
