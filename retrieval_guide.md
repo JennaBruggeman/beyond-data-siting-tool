@@ -167,3 +167,31 @@ C. Vancouver parity: light at the window (City lighting rules, or ask); generato
 D. Still open from before: Metro Vancouver plant addresses; City non-potable water systems map; rainwater tank cost; Canadian RAS costs; utility capacity maps; greenhouse area by region (P4); CSA C448 (optional); G5 ask the City (ground floor); in-person asks (Blatchford loop, pipe cost per metre, Gold Bar reclaimed water).
 
 E. Meeting: BC Assessment, Jeremy Buhler, Mon 19 Oct, 1 pm.
+
+## 11. Retrieval list, 16 Oct 2026 (late), after the deep dive and the Blatchford research
+Resolved since section 10: fuels (CFR, BC base CI and 2024 average, Alberta RFS values), EPCOR delivery charges, water hardness, Alberta generation mix, per-capita water, income, Vancouver Fire By-law 14419 and NFC(AE) fuel tables, Metro Vancouver Bylaw 1329, Alberta engine and Water Act rules, Vancouver lighting, Blatchford rates, scale and seasonal storage, ambient-loop precedents. Check of the business plan: our copy reads 3,031 MWh cumulative to 2024 (the agent's second reading of 5,562 is not in our copy).
+
+A. Documents the agents could not open (J.B. can)
+- ☐ B1 Council 1 Dec 2025, Blatchford rate item, Attachment 1 (likely the 2026 rate filing with actual customers and energy) — pub-edmonton.escribemeetings.com, search "Blatchford".
+- ☐ B2 2023–2026 Blatchford Renewable Energy Utility Budget and Plans — edmonton.ca.
+- ☐ B3 City of Edmonton District Energy Strategy (Aug 2022) and DESS design guide COE-IM-GUIDE-0008 — edmonton.ca.
+- ☐ F1 Alberta Renewable Fuels Standard Regulation, Alta Reg 29/2010 — kings-printer.alberta.ca.
+- ☐ W1 Environmental Quality Guidelines for Alberta Surface Waters (2018) — open.alberta.ca (confirms or replaces the 3 °C limit).
+- ☐ L1 Edmonton Public Library branches CSV — data.edmonton.ca dataset m6yw-37hg.
+- ☐ E1 CER BC energy profile, Figure 1 data (CSV) — generation by source.
+- ☐ S1 Alberta "Air indicators: wildfire smoke", Figure 3 — read Edmonton's smoke days per year from the chart.
+
+B. Ask (email or in person)
+- ☐ Blatchford Renewable Energy: the four questions (draft ready).
+- ☐ Downtown District Energy supply and return temperatures.
+- ☐ Pipe cost per metre; Gold Bar reclaimed water terms (EPCOR).
+- ☐ G5 City of Vancouver: may a data centre use the ground floor?
+- ☐ City of Edmonton: non-market housing locations (only a contact list is published).
+
+C. Fieldwork
+- ☐ One Edmonton data centre, exterior only (surveillance as experienced), as in Vancouver.
+
+D. Still open from before
+- ☐ Metro Vancouver treatment plant addresses; City non-potable water systems map; rainwater tank cost; Canadian RAS costs; utility capacity maps; greenhouse area by region (P4); Metro Vancouver residential litres per person (chart only); CSA C448 (optional).
+
+E. Meeting: BC Assessment, Jeremy Buhler, Mon 19 Oct, 1 pm.
