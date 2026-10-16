@@ -388,12 +388,48 @@ function goStep(k){ const S=STEPS.find(s=>s[0]===k); document.body.classList.rem
   if(k==='fits'){ BD.scene3d&&BD.scene3d.hide(); fitsView(); return; }
   if(k==='report'){ return (BD.views&&BD.views.report)?BD.views.report():tabView('heat'); }
   if(S&&S[2]) tabView(S[2][0][0]); }
+/* every other view: turn each h3 and what follows it into a closed section showing its answer (J.B., 16 Oct: the toolbar and sections on every view) */
+function nameOf(row){ const d=row.querySelector('div')||row; for(const c of d.childNodes){ if(c.nodeType===3&&c.textContent.trim()) return c.textContent.trim(); } const t=(d.innerText||'').split('\n')[0]; return t.replace(/\s*(Explore|Add|Open)\s*›.*$/,'').trim(); }
+function answerOf(nodes){ const tx=el=>{ const c=el.cloneNode(true); c.querySelectorAll('button,.btn').forEach(x=>x.remove()); return (c.innerText||c.textContent||'').replace(/\s*(Explore|Add|Remove|Open)\s*›/g,'').replace(/physics · land · rules · demand · time · money/g,'').replace(/\s+/g,' ').trim(); };
+  const rows=[]; nodes.forEach(n=>{ if(n.nodeType!==1) return; if(n.matches('.addrow')) rows.push(n); n.querySelectorAll&&n.querySelectorAll('.addrow').forEach(r=>rows.push(r)); });
+  if(rows.length>1){ const names=rows.map(nameOf).filter(Boolean); const t=names.join('; '); return [`${names.length}: `+(t.length>120?t.slice(0,t.lastIndexOf(';',120)>0?t.lastIndexOf(';',120):120)+'…':t),false]; }
+  const cut=t=>{ t=t.replace(/\s*Draft wording \(Claude\)[^.]*\.?/g,'').trim(); if(t.length<=130) return t; const i=t.slice(0,130).lastIndexOf(' '); return t.slice(0,i>60?i:130)+'…'; };
+  let red=false;
+  for(const n of nodes){ if(n.nodeType!==1) continue;
+    const fig=n.matches('.hfig')?n:n.querySelector&&n.querySelector('.hfig'); if(fig){ const d=fig.querySelector('div'); if(d){ const b=d.querySelector('b'), sp=d.querySelector('span'); return [cut((b?tx(b):'')+' '+(sp?tx(sp):'')),false]; } }
+    const dt=n.matches('dl')?n:n.querySelector&&n.querySelector('dl'); if(dt){ const a=dt.querySelector('dt'), b=dt.querySelector('dd'); if(a&&b){ red=!!b.querySelector('.draft'); return [cut(tx(a)+': '+tx(b)),red]; } }
+    if(n.matches('p,.sub,table,.addrow,.opt,.row,ul')){ const t=tx(n); if(t&&!/^Sources?:/i.test(t)){ red=n.matches('.draft')||!!(n.querySelector&&n.querySelector('.draft')); return [cut(t),red]; } } }
+  return ['',false]; }
+function collapseSections(root){ if(!root||root.querySelector('details.sec')) return; const kids=[...root.children]; let i=0;
+  const h2=kids.findIndex(k=>k.tagName==='H2'); if(h2>=0){ const nx=kids[h2+1]; if(nx&&nx.tagName==='P'&&nx.classList.contains('draft')){ nx.classList.remove('draft'); nx.classList.add('lead'); } }
+  const view=(BD.S.tab||BD.S.view2||'v'); let n=0;
+  for(i=0;i<kids.length;i++){ const h=kids[i]; if(h.tagName!=='H3'||h.closest('details')) continue;
+    const body=[]; let j=i+1; while(j<kids.length&&kids[j].tagName!=='H3'&&!kids[j].classList.contains('draftnote')&&!(kids[j].tagName==='DIV'&&kids[j].classList.contains('navb'))) { body.push(kids[j]); j++; }
+    const title=(h.childNodes[0]&&h.childNodes[0].nodeType===3?h.childNodes[0].textContent:h.innerText).trim(); if(!title){ continue; } const t2=title.charAt(0).toUpperCase()+title.slice(1).toLowerCase();
+    const extra=[...h.querySelectorAll('span')].map(s=>s.innerText.trim()).filter(Boolean).join(' ');
+    let [ans,red]=answerOf(body); if(extra) ans=extra.replace(/^·\s*/,'')+(ans?' — '+ans:'');
+    const id=view+'-'+(n++)+'-'+t2.slice(0,20);
+    const d=document.createElement('details'); d.className='sec'; d.dataset.sec=id; if(BD.openSecs.has(id)) d.open=true;
+    d.innerHTML=`<summary><span class="t">${esc(t2)}</span>${ans?`<span class="a${red?' f':''}">${esc(ans)}</span>`:''}</summary><div class="b"></div>`;
+    const b=d.querySelector('.b'); h.replaceWith(d); body.forEach(x=>b.appendChild(x)); i=j-1; }
+  root.querySelectorAll('.draftnote').forEach(x=>{ x.textContent=x.textContent.replace(/Draft wording(?: and [a-z ]+)? \(Claude\)[^.]*\.\s*/,'').trim(); if(!x.textContent) x.remove(); });
+  wireSecs(root); }
+BD.collapseSections=collapseSections;
+/* fine print behind a button, across the whole tool (J.B., 16 Oct: "a source button that opens the fine print") */
+function finePrint(c){ if(!c) return; const L=[];
+  c.querySelectorAll(':scope > .src, :scope > p.src, :scope > .cmp > p.src, :scope > div > p.src').forEach(e=>{ if(!e.closest('details.fp')&&!e.closest('td,tr,summary')) L.push(e); });
+  [...c.querySelectorAll(':scope > h3')].filter(h=>/^sources?$/i.test(h.textContent.trim())).forEach(h=>{ let n=h.nextElementSibling; h.remove(); while(n&&n.tagName!=='H3'&&!n.classList.contains('draftnote')&&!n.classList.contains('navb')){ const nx=n.nextElementSibling; L.push(n); n=nx; } });
+  if(!L.length) return; const d=document.createElement('details'); d.className='fp'; d.innerHTML=`<summary>Sources${L.length>1?' ('+L.length+')':''}</summary><div></div>`; const b=d.lastChild; L.forEach(e=>b.appendChild(e)); c.appendChild(d); }
+function finePrintAll(root){ if(!root) return; root.querySelectorAll('details.sec > .b').forEach(finePrint); finePrint(root); }
+BD.finePrintAll=finePrintAll;
+(function watchDrawer(){ const dr=document.getElementById('drawer'); if(!dr) return setTimeout(watchDrawer,300); let busy=false;
+  new MutationObserver(()=>{ if(busy) return; busy=true; try{ const inner=dr.querySelector('.dc')||dr; finePrintAll(inner); } finally{ busy=false; } }).observe(dr,{childList:true,subtree:false}); })();
 BD.stepNav=stepNav; BD.goStep=goStep; BD.sec=sec; BD.wireSecs=wireSecs;
 // the path on every site view: the site card and What fits get the same bar (clicks handled once, by delegation)
 document.addEventListener('click',ev=>{ const b=ev.target.closest&&ev.target.closest('#side .path button'); if(!b) return; ev.preventDefault(); goStep(b.dataset.step); });
 (function watchSide(){ const side=document.getElementById('side'); if(!side){ return setTimeout(watchSide,200); }
-  new MutationObserver(()=>{ if(!BD.S||!BD.S.sel||side.querySelector('.path')) return; const st=BD.S.view2==='fits'?'fits':BD.S.view2?null:'site'; if(st) side.insertAdjacentHTML('afterbegin',stepNav(st)); }).observe(side,{childList:true}); })();
-function wireTabs(){ document.querySelectorAll('#side .tabs button, #side .ctx a[data-tab]').forEach(b=>b.onclick=ev=>{ ev.preventDefault(); tabView(b.dataset.tab); }); wireSecs(document.getElementById('side')); if(BD.tabExtraWire) BD.tabExtraWire(); const bk=$('#back'); if(bk) bk.onclick=()=>{ document.body.classList.remove('wide'); BD.scene3d&&BD.scene3d.hide(); fitsView(); }; }
+  new MutationObserver(()=>{ if(!BD.S||!BD.S.sel||side.querySelector('.path')) return; const st=BD.S.view2==='fits'?'fits':BD.S.view2?null:'site'; if(st){ side.insertAdjacentHTML('afterbegin',stepNav(st)); collapseSections(side); finePrintAll(side); } }).observe(side,{childList:true}); })();
+function wireTabs(){ const sd=document.getElementById('side'); if(sd&&BD.S.tab!=='heat') collapseSections(sd); setTimeout(()=>finePrintAll(sd),0); document.querySelectorAll('#side .tabs button, #side .ctx a[data-tab]').forEach(b=>b.onclick=ev=>{ ev.preventDefault(); tabView(b.dataset.tab); }); wireSecs(document.getElementById('side')); if(BD.tabExtraWire) BD.tabExtraWire(); const bk=$('#back'); if(bk) bk.onclick=()=>{ document.body.classList.remove('wide'); BD.scene3d&&BD.scene3d.hide(); fitsView(); }; }
 function tabView(k){ document.body.classList.remove('wide'); BD.S.view2='tab'; if(BD.drawer&&BD.drawer.isOpen()) BD.drawer.close(); if(BD.tabOverride&&BD.tabOverride[k]) return BD.tabOverride[k](); ({heat:recvView,energy:energyView,water:waterView,materials:materialsView,social:socialView,opts:optionsView,prec:precView}[k]||(BD.views&&BD.views[k]))(); }
 function show3d(tab,data){ if(!BD.scene3d) return; BD.scene3d.show(tab,data).catch(e=>{ const n=document.getElementById('st'); if(n) n.textContent='3D view could not load: '+e.message; }); }
 function roofArea(f){ const A=BD.S.answers; if(A.built==='new'&&BD.S.sel.ring) return BD.area(BD.S.sel.ring)*0.86*0.86; return f.plate||f.foot||0; }

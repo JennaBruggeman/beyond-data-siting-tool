@@ -147,7 +147,12 @@ function model(){
   if(BD.plant) BD.plant.place(m); // sizes units, may shorten the footprint to leave a plant yard, places roof and yard units
   if(!m.existing&&!m.foot&&m.uBuild){ let [a0,a1]=m.uBuild; if(m.plantYardDepth) a0=a0+m.dir*m.plantYardDepth;
     if(m.footMode==='cover'&&A.cover){ const want=lotArea*A.cover/100, wv=m.v[1]-m.v[0]; const len=Math.min(Math.abs(a1-a0),want/Math.max(wv,1)); a0=a1+Math.sign(a0-a1||1)*len; }
-    const q=inscribe(F,ring,a0,a1,m.v[0],m.v[1]); if(q){ const r=rectW(F,q[0],q[1],q[2],q[3]); m.foot=r; m.footRect=r; m.simpleMass=true; } else { const r=rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); m.foot=clip(ring,r); m.footRect=r; } }
+    const q=inscribe(F,ring,a0,a1,m.v[0],m.v[1]); if(q){
+      // J.B., 16 Oct: "the server amount changes but the building doesnt shrink" — when a size is set, the building is only as big as that size needs:
+      // floor = MW × 460 m² of hall per MW (built Canadian halls 290–630, operator claims) ÷ 0.6 hall share (48–72%), spread over the storeys; centred in the buildable rectangle
+      if(A.mw&&m.footMode==='max'&&BD.eng){ const R=BD.eng.R, perMW=(R.m2PerMW[0]+R.m2PerMW[1])/2/((R.hallShare[0]+R.hallShare[1])/2), floors=Math.max(1,m.nF[0]), need=A.mw*perMW/floors, W=q[1]-q[0], H=q[3]-q[2];
+        if(need<W*H*0.98){ const k=Math.sqrt(need/(W*H)), cu=(q[0]+q[1])/2, cv=(q[2]+q[3])/2; let w=W*k, h=H*k; if(h<12){ h=Math.min(H,12); w=need/h; } q[0]=cu-w/2; q[1]=cu+w/2; q[2]=cv-h/2; q[3]=cv+h/2; m.sizedTo={mw:A.mw,floor:A.mw*perMW,perMW}; } }
+      const r=rectW(F,q[0],q[1],q[2],q[3]); m.foot=r; m.footRect=r; m.simpleMass=true; } else { const r=rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); m.foot=clip(ring,r); m.footRect=r; } }
   if(m.foot&&!m.footArea) m.footArea=BD.area(m.foot);
   if(m.foot&&!m.existing&&m.footArea<20) m.warn.push('After setbacks, loading and plant there is almost no room left for a building on this lot.');
   if(BD.plant&&BD.plant.roof) BD.plant.roof(m);
