@@ -214,7 +214,10 @@ function edmStatus(zraw){
   if(!STD.includes(z)) return {k:'site',t:'Special area',d:'A special area or legacy zone ('+esc(z)+') with its own use lists; these are not yet loaded into the tool.',src:['edm_bl']};
   return {k:'no',t:'Rezoning needed',d:'No industrial use is listed in this standard zone. A data centre here would need a rezoning, sometimes a plan amendment, and a Council public hearing.',src:['edm_matrix','edm_dc']};
 }
-const COL={yes:['rgba(134,173,167,.42)','#86ada7'],case:['rgba(205,176,122,.30)','#cdb07a'],site:['rgba(157,154,148,.16)','#6b6964'],no:[null,'#30343a']};
+const COL={yes:['rgba(134,173,167,.42)','#86ada7'],case:['rgba(205,176,122,.30)','#cdb07a'],site:['rgba(157,154,148,.16)','#6b6964'],low:['rgba(120,132,150,.13)','#4b5361'],no:[null,'#30343a']};
+// small-scale housing zones (J.B., 16 Oct): a distinct tint, still selectable. Vancouver R1-1 and RT- districts; Edmonton RS, RSF, RR (Bylaw 20001)
+const LOWD={van:/^(R1-1|RT-\d+[A-Z]?)$/, edm:/^(RS|RSF|RR)$/};
+const lowD=(city,z)=>LOWD[city].test(String(z||'').trim().split(/\s+/)[0].toUpperCase());
 
 /* ---------- state ---------- */
 const S={city:'van',meta:{},tiles:{},loading:{},sel:null,view:null,answers:{built:'new',extent:'whole',floor:'',host:{}}};
@@ -234,8 +237,8 @@ async function getJSON(u){ const r=await fetch(u); if(!r.ok) throw new Error(u+'
 async function loadMeta(city){
   if(S.meta[city]) return S.meta[city];
   const m=await getJSON(`tiles/${city}/meta.json`);
-  m.zstat=m.zones.map(z=>(city==='van'?vanStatus(z):edmStatus(z)).k);
-  const by={yes:[],case:[],site:[],no:[]};
+  m.zstat=m.zones.map(z=>{ const k=(city==='van'?vanStatus(z):edmStatus(z)).k; return k==='no'&&lowD(city,z)?'low':k; });
+  const by={yes:[],case:[],site:[],low:[],no:[]};
   for(const [zi,a] of m.overview){ by[m.zstat[zi]].push(decodeRing(a,0,0,m.Q)); }
   m.ov={}; for(const k in by) m.ov[k]=pathOf(by[k]);
   m.ovRaw=m.overview.map(([zi,a])=>{const r=decodeRing(a,0,0,m.Q);return {zi,r,bb:bbox(r)};}); delete m.overview;
@@ -279,7 +282,7 @@ function paint(){
   ctx.setTransform(s*DPR,0,0,-s*DPR,(W/2-cx*s)*DPR,(H/2+cy*s)*DPR);
   const lw=px=>px/s;
   const fa=s>=DETAIL[S.city]?0.4:1;
-  for(const k of ['no','site','case','yes']){ const [f,st]=COL[k]; if(f){ ctx.globalAlpha=fa; ctx.fillStyle=f; ctx.fill(m.ov[k],'evenodd'); ctx.globalAlpha=1; } if(S.city==='edm'||s<DETAIL[S.city]){ ctx.strokeStyle=k==='no'?'#26292e':st; ctx.lineWidth=lw(k==='no'?.5:.8); ctx.stroke(m.ov[k]); } }
+  for(const k of ['no','low','site','case','yes']){ const [f,st]=COL[k]; if(f){ ctx.globalAlpha=fa; ctx.fillStyle=f; ctx.fill(m.ov[k],'evenodd'); ctx.globalAlpha=1; } if(S.city==='edm'||s<DETAIL[S.city]){ ctx.strokeStyle=k==='no'?'#26292e':st; ctx.lineWidth=lw(k==='no'?.5:.8); ctx.stroke(m.ov[k]); } }
   const detail=s>=DETAIL[S.city];
   if(detail){
     const keys=visibleTiles(); let waiting=0;
@@ -367,6 +370,7 @@ async function select(sel){
   const c=sel.ring?centroid(sel.ring):sel.pt; if(c&&(S.view.s<1.2||Math.abs(c[0]-S.view.cx)*S.view.s>W/2||Math.abs(c[1]-S.view.cy)*S.view.s>H/2)) flyTo(c[0],c[1],Math.max(S.view.s,2));
   try{ const tk=sel.tile.replace(/-/g,'m'); history.replaceState(null,'','#'+sel.city+'-'+tk+'-'+sel.id); }catch(e){}
   card(); draw();
+  if(window.BD&&BD.setup&&!sel.quiet) BD.setup.start();
 }
 function card(){
   const s=S.sel, a=s.a||[];
@@ -393,10 +397,11 @@ function card(){
     <h3>What stands on it</h3>${bl.length?`<dl><dt>Buildings</dt><dd>${bl.length} footprint${bl.length>1?'s':''}, ${fmt(bl.reduce((t,b)=>t+b.a,0))} m² in plan</dd><dt>Height</dt><dd>${he.length?(bl.some(b=>b.f===5)?Math.max(...he).toFixed(1)+' m — measured from the City\'s 3D buildings (highest point − ground)':'≈'+Math.max(...he).toFixed(0)+' m — ESTIMATE (floor area ÷ footprint × 4 m)'):'—'}</dd></dl>`:`<p class="sub">${s.ring?'No building on this lot.':'No footprint at this point.'}</p>`}
     ${srcs(s.ring?['edm_data','edm_lots']:['edm_data'])}`;
   }
-  h+=startStep(st);
-  $('#side').innerHTML=h; wireStart(); $('#clr').onclick=clearSel; const fb=$('#fits'); if(fb) fb.onclick=()=>BD.fitsView();
+  if(lowD(s.city,z)) h+=`<p class="sub"><span class="pill site">Small-scale housing zone</span> <span class="draft">A zone of mostly houses and small multiplexes. A data centre would need a rezoning here, and there is little nearby demand for what it gives off; the tool still works here.</span></p>`;
+  h+=window.BD&&BD.setupHTML?BD.setupHTML(st):startStep(st);
+  $('#side').innerHTML=h; wireStart(); if(window.BD&&BD.setupWire) BD.setupWire(); $('#clr').onclick=clearSel; const fb=$('#fits'); if(fb) fb.onclick=()=>BD.fitsView();
 }
-function clearSel(){ S.sel=null; S.view2=null; window.BD&&BD.scene3d&&BD.scene3d.hide(); document.body.classList.remove('wide'); $('#q').value=''; $('#res').hidden=true; try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} intro(); draw(); }
+function clearSel(){ if(window.BD&&BD.drawer) BD.drawer.close(); S.sel=null; S.view2=null; window.BD&&BD.scene3d&&BD.scene3d.hide(); document.body.classList.remove('wide'); $('#q').value=''; $('#res').hidden=true; try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} intro(); draw(); }
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&S.sel&&document.activeElement!==$('#q')) clearSel(); });
 $('#q').addEventListener('search',()=>{ if(!$('#q').value&&S.sel) clearSel(); });
 
@@ -447,7 +452,7 @@ function introBase(){ legend();
   <div class="draftnote">Draft wording (Claude) — for J.B. to rewrite.</div>${srcs(S.city==='van'?['van_data']:['edm_data','edm_lots'])}</div>`;
 }
 function legend(){ const m=S.meta[S.city];
-  const L=S.city==='van'?[['case','Case by case (I-2, I-1C, I-3 A, FC-2)'],['site','Site-specific (CD-1), or not yet reviewed (downtown plan areas)'],['no','Rezoning needed']]:[['yes','Allowed (IH)'],['case','Smaller only, or case by case (IM, BE, UI, FD)'],['site','Site-specific (Direct Control, special areas)'],['no','Rezoning needed']];
+  const L=S.city==='van'?[['case','Case by case (I-2, I-1C, I-3 A, FC-2)'],['site','Site-specific (CD-1), or not yet reviewed (downtown plan areas)'],['low','Small-scale housing (R1-1, RT): rezoning needed'],['no','Rezoning needed']]:[['yes','Allowed (IH)'],['case','Smaller only, or case by case (IM, BE, UI, FD)'],['site','Site-specific (Direct Control, special areas)'],['low','Small-scale housing (RS, RSF, RR): rezoning needed'],['no','Rezoning needed']];
   const op=document.querySelector('#lg details'); const open=op?op.open:window.innerWidth>760;
   $('#lg').innerHTML=`<details${open?' open':''}><summary>Is a data centre an allowed use?</summary>`+L.map(([k,t])=>`<div><i style="background:${COL[k][0]||'transparent'};border:1px solid ${COL[k][1]}"></i>${esc(t)}</div>`).join('')+(window.BD&&BD.legendRecv?BD.legendRecv():'')+`<div class="src">${esc(m.sources[0])}</div></details>`;
 }
@@ -493,7 +498,7 @@ $('#c-van').onclick=()=>setCity('van'); $('#c-edm').onclick=()=>setCity('edm');
 window.addEventListener('resize',draw); if(window.ResizeObserver) new ResizeObserver(()=>draw()).observe(mapEl);
 window.addEventListener('load',draw); document.addEventListener('visibilitychange',()=>{ if(!document.hidden) draw(); });
 
-window.BD={S,$,esc,fmt,getJSON,pathOf,draw,centroid,pip,area,statusOf,card:()=>card(),select:sel=>select(sel),intro:()=>intro(),clearSel:()=>clearSel(),setCity:(c,k)=>setCity(c,k)};
+window.BD={S,$,esc,fmt,getJSON,pathOf,draw,centroid,pip,area,statusOf,lowD,loadTile:(c,k)=>loadTile(c,k),card:()=>card(),select:sel=>select(sel),intro:()=>intro(),clearSel:()=>clearSel(),setCity:(c,k)=>setCity(c,k)};
 (async function init(){
   resize();
   const h=(location.hash||'').slice(1).match(/^(van|edm)-(m?\d+)_(m?\d+)-(.+)$/);
@@ -504,5 +509,10 @@ window.BD={S,$,esc,fmt,getJSON,pathOf,draw,centroid,pip,area,statusOf,card:()=>c
 })();
 </script>
 <script src="engine.js"></script>
+<script src="site.js"></script>
+<script src="plant.js"></script>
+<script src="cards.js"></script>
+<script src="addons.js"></script>
+<script src="opps.js"></script>
 <script src="extras.js"></script>
 <script src="scene3d.js"></script>

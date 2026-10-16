@@ -1,0 +1,94 @@
+/* Beyond Data — opportunity screening (v19, 16 Oct 2026; J.B.: "flip through all possible opportunities and the tool will consider the
+   adjacencies and determine which ones are possible, and the conditions, sizes, times, money"). Each opportunity has a recipe of gates —
+   physics, land, rules, demand, time, money — and each gate gets one of four states at this site, with its reason:
+   possible here · possible with a change · not here · not yet known. Cards flip in a fixed order by family. Never a score. */
+(function(){
+'use strict';
+const BD=window.BD; const {$,esc,fmt}=BD; const E=()=>BD.eng;
+const draft=t=>`<span class="draft">${t}</span>`;
+const GS={yes:['possible here','#8fb996'],chg:['possible with a change','#cdb07a'],no:['not here','#b24f49'],nk:['not yet known','#9d9a94']};
+const gp=k=>`<span class="cls" style="border-color:${GS[k][1]};color:${GS[k][1]}">${GS[k][0]}</span>`;
+const GATES=['physics','land','rules','demand','time','money'];
+/* receiving uses by zone, from the use tables (research pass, 16 Oct): Vancouver Zoning By-law s. 2 and schedules; Edmonton Bylaw 20001 s. 8.10 */
+const VSEVEN=['I-1C','I-2','I-3','FC-2','M-1','IC-2','C-2'];
+const USE={
+ van:{farm:z=>VSEVEN.includes(z)?['chg','Urban Farm – Class B (may be in a greenhouse) is a conditional use in '+z]:['nk','not read for zone '+z],
+      community:z=>['I-2','I-3','FC-2','M-1','C-2'].includes(z)?['chg','Community Centre is a conditional use in '+z]:['I-1C','IC-2'].includes(z)?['no','Community Centre is not listed in '+z]:['nk','not read for zone '+z],
+      parking:z=>VSEVEN.includes(z)?['chg','Parking Uses (which may include selling electricity to charge vehicles) are conditional in '+z]:['nk','not read for zone '+z],
+      food:z=>['I-2','I-1C','FC-2','M-1','IC-2'].includes(z)?['yes','Food or Beverage Products Manufacturing – Class B is outright in '+z+' (no aquaculture term exists)']:['nk','no aquaculture term; food manufacturing not read for '+z]},
+ edm:{farm:z=>['MU','IM','BE','CB'].includes(z)?['yes','Urban Agriculture (incl. hydroponic and aquaponic systems, vertical farms) is permitted in '+z+', within or on a building']:['nk','not read for zone '+z],
+      community:z=>['MU','BE'].includes(z)?['yes','Community Service (incl. shelters) is permitted in '+z+(z==='BE'?', at most 500 m² except shelters':'')]:z==='IM'?['no','Community Service is not listed in IM']:['nk','not read for zone '+z],
+      parking:z=>['nk','no EV-charging use term in Bylaw 20001; Vehicle Support Service does not mention charging'],
+      food:z=>['MU','IM','BE','CB'].includes(z)?['yes','aquaponic systems fall under Urban Agriculture, permitted in '+z]:['nk','not read for zone '+z]}};
+function ladderWorst(L,city){ const rk=['not_allowed','no_rule','unknown','approval','allowed','na']; const rows=Array.isArray(L&&L.rules)?L.rules:[]; const c=city==='van'?'van':'edm'; const v=rows.map(x=>x[c][0]).sort((a,b)=>rk.indexOf(a)-rk.indexOf(b))[0];
+  return v==='allowed'||v==='na'?'yes':v==='approval'?'chg':v==='not_allowed'?'no':'nk'; }
+function ctx(){ const e=E(), f=e.siteFacts(), R=e.R, A=BD.S.answers, mw=A.mw||1, M=f.M; const d=BD.recv[f.city]||{pts:[],nets:[]};
+  const near=d.pts.map(p=>Object.assign({},p,{dist:Math.hypot(p.x-f.c[0],p.y-f.c[1])})); const nets=e.netsAt(f,d);
+  const r=e.calc({mw,recover:true,to:'near'},f,near,nets); const zone=f.zone, city=f.city; const lot=f.lot||0, foot=(M&&M.footArea)||0;
+  return {e,f,R,A,mw,M,near,nets,r,zone,city,lot,foot,free:Math.max(0,lot-foot-((M&&M.loading)?BD.area(M.loading):0)-((M&&M.plant&&M.plant.yard)?BD.area(M.plant.yard):0))}; }
+/* the fifteen, in families (fixed order) */
+const FAM=[['Heat',['District heat to a network','Hospital or campus anchor','New district with the data centre as heat plant','Greenhouse','Aquaculture / insects / algae','Seasonal storage in the ground','Sewage heat as comparator source','Distributed servers as heaters']],
+           ['Electricity',['Reserved capacity and batteries to the grid','EV charging hub']],['Water',['Rainwater, condensate and water reuse']],['Land and time',['Meanwhile uses on land held for growth']],
+           ['People',['Warming centre, refuge, clean-air room','Cooling for neighbours']],['Materials',['Material bank: copper']]];
+const ORDER=FAM.flatMap(([fam,l])=>l.map(n=>({fam,n})));
+function gates(n,c){ const L=(BD._O&&BD._O.opportunities||{})[n]||{}; const G={}; const {f,R,mw,near,nets,r,zone,city,free,lot}=c;
+  const liquid=(c.A.inside||'air')!=='air';
+  const heatPhys=liquid?['yes',`liquid cooling captures ${Math.round(R.capture[0]*100)}–${Math.round(R.capture[1]*100)}% of heat; a heat pump lifts it`]:['chg','air cooling: heat leaves at 25–35 °C; change to liquid cooling, or recover from exhaust air with a heat pump (no primary capture figure)'];
+  G.rules=[ladderWorst(L,city),Array.isArray(L.rules)&&L.rules.length?L.rules.map(x=>`${x.rung}: ${(city==='van'?x.van:x.edm)[1]||''}`).join('; '):'not yet read'];
+  const nearT=t=>near.filter(p=>p.t===t&&p.dist<=1200);
+  switch(n){
+   case 'District heat to a network': { const nn=nets.find(x=>x.inside)||nets[0]; G.physics=heatPhys; G.land=nn?(nn.inside?['yes',`inside ${nn.n}`]:['chg',`${fmt(nn.edge)} m from ${nn.n}: a pipe to it`]):['no','no district-energy network within 1.2 km in the tool'];
+     G.demand=nn?['yes',`${nn.n} takes heat${city==='van'?' and credits heat sent back at $32.59/MWh':''}`]:['no','no network to take it']; G.time=['nk','network expansion timing not published']; G.money=city==='van'?['yes','credit $32.59/MWh against heat-pump electricity of $15–23 per MWh of heat (BC Hydro 6.79 ¢ ÷ COP 3.0–4.5)']:['nk','Blatchford variable rate $0.0269/kWh; what it pays for heat in is not published']; break; }
+   case 'Hospital or campus anchor': { const h=nearT('hospital'); G.physics=heatPhys; G.land=h.length?['chg',`${h.length} hospital${h.length>1?'s':''} within 1.2 km: a pipe along the streets`]:['no','no hospital within 1.2 km']; G.demand=h.length?['nk','a hospital\'s demand and supply temperature are not published']:['no','—']; G.time=['nk','not known']; G.money=['nk','see the Heat card for its break-even distance']; break; }
+   case 'New district with the data centre as heat plant': { const hs=near.filter(p=>p.t==='housing'&&p.dist<=1200), u=hs.reduce((t,p)=>t+(p.u||0),0), dem=u*R.homeMWh[city]; G.physics=heatPhys; G.land=['chg','a new network in the streets (see Heat cards for cost per metre)'];
+     G.demand=u?[dem>=r.avail[0]*0.2?'yes':'chg',`${fmt(u)} non-market homes within 1.2 km would take about ${fmt(dem/1000)} GWh a year, against ${E().rng(r.avail[0]/1000,r.avail[1]/1000,'GWh')} offered (private housing not counted)`]:['nk',city==='edm'?'Edmonton housing is not in the receiver records':'no recorded housing within 1.2 km'];
+     G.time=['nk','who builds the network and when is not known']; G.money=['nk','who pays (the capital split) is not known']; break; }
+   case 'Greenhouse': { const u=USE[city].farm(zone); const q=[1.63,2.1]; const m2=[r.avail[0]*3.6/q[1],r.avail[1]*3.6/q[0]]; G.physics=['yes','root-zone heating at about 38 °C takes low-grade heat; pipe-rail heating at 82 °C needs a heat pump']; G.rules=u; G.land=free>500?['chg',`${fmt(free)} m² of the lot is left after the building, loading and plant; a rooftop greenhouse is the other place`]:['chg','little yard left: a rooftop greenhouse or a neighbour\'s lot'];
+     G.demand=['yes',`the heat offered could warm about ${fmt(m2[0])}–${fmt(m2[1])} m² of greenhouse at 1.63–2.1 GJ/m² a year (Ontario, Manitoba measured; no BC/AB figure)`]; G.time=['chg','greenhouses need most heat in winter nights, as data centres give it all year']; G.money=['nk','capital investment in Alberta greenhouses $113–321/m² (2017 survey, existing operations); new-build cost not sourced']; break; }
+   case 'Aquaculture / insects / algae': { const u=USE[city].food(zone); G.physics=['yes','fish tanks need 2.9–4.6 kWh of heat per kg of fish (make-up water to trout temperatures)']; G.rules=u; G.land=['nk','tank space depends on the species and system']; G.demand=['yes',`the heat offered could support about ${fmt(r.avail[0]/4.6)}–${fmt(r.avail[1]/2.9)} t of fish a year by heat alone (heat is rarely the limit)`]; G.time=['yes','tanks need heat all year, as data centres give it']; G.money=['nk','recirculating systems cost €12–20 per kg of yearly output (FAO 2022), European costs']; break; }
+   case 'Seasonal storage in the ground': G.physics=['yes','boreholes store summer heat for winter']; G.land=free>1000?['chg',`${fmt(free)} m² of yard left for a borefield`]:['chg','little yard left: a borefield under the building or a neighbour\'s land']; G.demand=['nk','needs a winter receiver']; G.time=['yes','moves heat from summer to winter']; G.money=['nk','borefield costs not sourced for BC/AB']; G.rules=city==='edm'?['chg','an Alberta water-well licence or registration (Directive 2018)']:G.rules; break;
+   case 'Sewage heat as comparator source': G.physics=['yes','sewage stays warm all year']; G.land=['nk','per-pipe flow near the parcel is not published']; G.demand=['yes','a rival source for the same receivers, not a receiver']; G.time=['yes','—']; G.money=['nk','—']; G.rules=city==='van'?['chg','Metro Vancouver gives access first come, first served, with a letter of support (UT-008)']:['nk','no EPCOR sewer-heat programme found; Blatchford\'s sewer heat was deferred']; break;
+   case 'Distributed servers as heaters': G.physics=['yes','servers in homes heat them directly']; G.land=['yes','no pipe; the computing moves']; G.demand=['nk','a home\'s winter demand; who hosts the servers']; G.time=['chg','heat only in the heating season; the computing must move in summer']; G.money=['nk','—']; break;
+   case 'Reserved capacity and batteries to the grid': G.physics=['yes','batteries and curtailable load can shave peaks']; G.land=['chg','a battery yard 3 m from lot lines and buildings (NFPA 855 as reference) — see the Energy add-on']; G.demand=['yes',city==='van'?'BC Hydro Demand Response for Business: $50/kW a season, Nov–Mar weekday events up to 4 h':'AESO operating reserves (not sized here)']; G.time=['yes',city==='van'?'winter weekday evenings, records at 5–6 pm':'winter peaks; hour not published']; G.money=['chg','PNNL 2021: $411–448/kWh (US$, 4 h) — rough']; break;
+   case 'EV charging hub': { const u=USE[city].parking(zone); const st=[500/19.2,500/7.4]; G.physics=['yes',`1 MW set aside serves about ${fmt(st[0])}–${fmt(st[1])} Level 2 stalls (7.4–19.2 kW, 0.5 diversity)`]; G.rules=u[0]==='nk'&&city==='edm'?['nk',u[1]+'; EV charging\'s regulatory status is "unclear" (AUC 2021)']:[u[0]==='chg'?'chg':u[0],u[1]+(city==='van'?'; EV charging is exempt from UCA Part 3 (MO M104)':'')];
+     const need=st[1]*22; G.land=free>=need?['yes',`${fmt(free)} m² free on the lot holds ${fmt(free/22)} stalls at about 22 m² each with aisle`]:['chg',`${fmt(free)} m² free on the lot holds ${fmt(free/22)} stalls; more needs an adjacent lot — which crosses the property line (a rule, not a distance)`];
+     G.demand=['nk','no charging demand data at the parcel']; G.time=['chg','workplace charging starts peak at 8–10 am (US data); winter evening grid peaks overlap with home charging, not workplace']; G.money=['nk','Level 2 about $15k a port, DC fast $160k at 125 kW (NRCan-commissioned, 2025 costs)']; break; }
+   case 'Rainwater, condensate and water reuse': { const roof=E().roofArea(f), rain=roof*(city==='van'?1159.5:422.5)/1000*0.8; G.physics=['yes',`about ${fmt(rain)} m³ of rain a year on the roof`]; G.land=['yes','a tank below grade']; G.demand=(c.A.outside||'dry')==='dry'?['no','dry coolers use no water; rain would go to toilets and irrigation only']:['yes','cooling-tower make-up']; G.time=['chg',city==='van'?'rain falls mostly October–January; cooling needs peak in summer':'rain falls mostly June–August, when cooling needs peak']; G.money=['nk','tank cost per m³ not sourced'];
+     G.rules=city==='van'?['yes','rainwater may be cooling-tower make-up (VBBL 2025 Table 2.7.1.3, Column B)']:['chg','an alternative solution from the City (Alberta notice, 2021)']; break; }
+   case 'Meanwhile uses on land held for growth': G.physics=['yes','—']; G.land=free>200?['yes',`${fmt(free)} m² of the lot is not built on in this setup`]:['no','the setup leaves almost no open land']; G.demand=['nk','who would use it']; G.time=['nk','how long the land is held']; G.money=['nk','—']; break;
+   case 'Warming centre, refuge, clean-air room': { const u=USE[city].community(zone); G.physics=['yes','spare heat and filtered air from the data centre']; G.rules=u; G.land=f.ground?['yes','this zone keeps the ground floor free of data storage: room for a public room']:['chg','a room taken from the building or a neighbour\'s building'];
+     G.demand=city==='edm'?['yes','Edmonton has 6.1–6.5 days a year at or below −20 °C (ECCC Normals 1991–2020)']:['chg','Vancouver: no days at −20 °C; about 5.7 days a year at humidex 30+, and wildfire smoke days (clean air)']; G.time=['yes','needed in cold snaps, heat waves and smoke events']; G.money=['nk','who runs it is not known']; break; }
+   case 'Cooling for neighbours': G.physics=['nk','a data centre rejects heat; giving cooling needs a chiller and a pipe']; G.land=['chg','a chilled-water pipe']; G.demand=['nk','—']; G.time=['nk','—']; G.money=['nk','—']; break;
+   case 'Material bank: copper': G.physics=['yes',`${fmt(mw*20)}–${fmt(mw*40)} t of copper in the facility (industry figure)`]; G.land=['yes','—']; G.demand=['nk','who would take the material and when']; G.time=['chg','released at refits and at the end of the building\'s life']; G.money=['nk','—']; G.rules=['yes','no rule needed']; break;
+  }
+  for(const g of GATES) if(!G[g]) G[g]=['nk','not yet known'];
+  return {L,G}; }
+function summary(G){ const ks=GATES.map(g=>G[g][0]); return ks.includes('no')?'no':ks.includes('nk')?'nk':ks.includes('chg')?'chg':'yes'; }
+/* the index, under a new Opportunities tab */
+async function oppIndex(){ BD._O=await BD.opps(); const c=ctx(), e=c.e; BD.S.view2='tab';
+  let h=e.tabBar('opps2')+`<h2>What else it could do here</h2><p class="draft">Every opportunity the register knows, in a fixed order by family. Each is tested at this site gate by gate; a gate that is not met says why. Nothing is ranked.</p>
+  <div class="legend2">${Object.keys(GS).map(k=>gp(k)).join(' ')}</div>`;
+  for(const [fam,list] of FAM){ h+=`<h3>${esc(fam)}</h3>`; for(const n of list){ const {L,G}=gates(n,c); const s=summary(G);
+      h+=`<div class="addrow"><div>${esc(n)} ${L.readiness?BD.rdPill(L.readiness):''}<div class="src">${GATES.map(g=>`<span title="${esc(g+': '+G[g][1])}" style="color:${GS[G[g][0]][1]}">${g}</span>`).join(' · ')}</div></div><div><button class="btn" data-op="${esc(n)}">Explore ›</button></div></div>`; } }
+  h+=`<div class="draftnote">Draft wording (Claude) for J.B. Each gate's reason is on hover and in the card.</div>`;
+  $('#side').innerHTML=h; e.wireTabs(); document.querySelectorAll('#side [data-op]').forEach(b=>b.onclick=()=>oppCard(b.dataset.op)); BD.draw(); e.show3d('model',{site:c.f}); }
+function oppCard(n){ const c=ctx(), {L,G}=gates(n,c), i=ORDER.findIndex(o=>o.n===n), it=ORDER[i];
+  const prev=ORDER[(i-1+ORDER.length)%ORDER.length], next=ORDER[(i+1)%ORDER.length];
+  const ladder=Array.isArray(L.rules)&&L.rules.length?`<table class="cl">${L.rules.map(x=>`<tr><td>${esc(x.rung)}</td><td>Vancouver ${BD.rsPill(x.van[0])}<small>${esc(x.van[1]||'')}</small>Edmonton ${BD.rsPill(x.edm[0])}<small>${esc(x.edm[1]||'')}</small></td></tr>`).join('')}</table>`:'<p class="sub">No rule ladder yet.</p>';
+  BD.drawer.open(`<div class="kind">Opportunity · ${esc(it.fam)} · ${i+1} of ${ORDER.length}</div><h2>${esc(n)}</h2><p>${gp(summary(G))} ${L.readiness?BD.rdPill(L.readiness):''}</p>
+  <h3>At this site, gate by gate</h3><table class="cl">${GATES.map(g=>`<tr><td>${g}</td><td>${gp(G[g][0])}<small>${esc(G[g][1])}</small></td></tr>`).join('')}</table>
+  <h3>Rules, rung by rung</h3>${ladder}
+  <h3>Not yet known</h3><p class="sub">${esc((L.unknowns||[]).join('; ')||'—')}</p><h3>How proven</h3><p class="sub">${esc(L.basis||'')}</p>${L.visual?`<p class="sub">Drawn as: ${esc(L.visual)}</p>`:''}
+  <h3>Sources</h3>${BD.srcList((L.sources||[]).concat(...(Array.isArray(L.rules)?L.rules.map(x=>x.sources||[]):[]),['vanUses2026','edmUses2026']))}
+  <div class="navb"><button class="sec" id="opv">‹ ${esc(prev.n)}</button><button class="sec" id="opn">${esc(next.n)} ›</button></div><div class="draftnote">Draft wording (Claude) for J.B. "Possible here" means every gate the tool can test passes; it is not a recommendation.</div>`,
+  el=>{ $('#opv').onclick=()=>oppCard(prev.n); $('#opn').onclick=()=>oppCard(next.n); });
+  // its own 3D: what the opportunity would occupy, generic
+  const M=c.M, d={site:c.f,boxes:[]}; if(M&&M.F&&M.ring){ const F=M.F;
+    if(n==='EV charging hub'&&BD.plant){ const k={name:'stalls',L:5.5,W:2.5,H:0.1,wall:[0.5,0.5],gap:[0,6.6]}; const lotR=M.inset?BD.geo.clip(M.ring,M.inset):M.ring; const forbid=[].concat(M.foot?[M.foot]:[],M.loading?[M.loading]:[],(M.plant&&M.plant.boxes||[]).filter(b=>b.kind==='yard').map(b=>b.clear)); const [a,b,c2,d2]=BD.plant.localBounds(F,lotR); BD.plant.pack(F,lotR,forbid,a,b,c2,d2,k,120,false).forEach(p=>d.boxes.push({ring:BD.geo.rectW(F,p.u-p.L/2,p.u+p.L/2,p.v-p.W/2,p.v+p.W/2),h:0.1,base:0,label:''})); if(d.boxes.length) d.boxes[0].label=`${d.boxes.length} stalls on the open lot`; else d.note='No open ground is left for stalls in this setup. A smaller footprint (setup card 2) or an adjacent lot would make room.'; }
+    if(n==='Greenhouse'&&M.foot&&!M.existing){ d.boxes.push({ring:BD.geo.offset(M.foot,-3),h:4,base:M.H,label:'rooftop greenhouse (where the plant leaves room)'}); }
+    if(n==='Warming centre, refuge, clean-air room'&&M.foot){ d.boxes.push({ring:BD.geo.offset(M.foot,-0.5),h:5.5,base:0.2,label:'ground-floor public room'}); }
+    if(n==='Meanwhile uses on land held for growth'){ const lotR=M.inset?BD.geo.clip(M.ring,M.inset):M.ring; d.boxes.push({ring:lotR,h:0.05,base:0.1,label:`open land: ${fmt(c.free)} m²`}); } }
+  E().show3d('opp',d); }
+BD.oppCard=oppCard;
+BD.tabOverride=Object.assign(BD.tabOverride||{},{opps2:oppIndex});
+})();

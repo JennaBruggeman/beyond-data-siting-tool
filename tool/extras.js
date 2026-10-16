@@ -5,7 +5,7 @@
 'use strict';
 const BD=window.BD, E=()=>BD.eng; const {$,esc,fmt}=BD;
 BD.views=BD.views||{};
-const VERSION={n:18,date:'15 Oct 2026'};
+const VERSION={n:19,date:'16 Oct 2026'};
 const draft=t=>`<span class="draft">${t}</span>`;
 
 /* ---------- worked examples ---------- */
@@ -14,7 +14,7 @@ const EXAMPLES=[
  {lab:'Edmonton industrial lot',sub:'12603 123 Street NW · IH · new building',sel:{city:'edm',tile:'-1_1',id:'883345'},ans:{built:'new',extent:'whole',floor:''}},
  {lab:'An existing downtown tower',sub:'555 W Hastings (Harbour Centre) · one upper floor',sel:{city:'van',tile:'0_2',id:'59013407'},ans:{built:'existing',extent:'part',floor:'upper'}},
 ];
-async function runExample(i){ const x=EXAMPLES[i]; Object.assign(BD.S.answers,x.ans,{mw:null}); if(BD.S.city!==x.sel.city) await BD.setCity(x.sel.city,true); await BD.select(Object.assign({},x.sel)); if(BD.S.sel) BD.fitsView(); }
+async function runExample(i){ const x=EXAMPLES[i]; Object.assign(BD.S.answers,x.ans,{mw:null}); if(BD.S.city!==x.sel.city) await BD.setCity(x.sel.city,true); await BD.select(Object.assign({quiet:true},x.sel)); if(BD.S.sel) BD.fitsView(); }
 BD.afterIntro=function(){
   const box=document.createElement('div'); box.className='examples';
   box.innerHTML=`<h3>Worked examples</h3><p class="sub">${draft('Three sites, one click each: a new building in each city, and a floor of an existing tower.')}</p>
@@ -56,6 +56,8 @@ const DATA=[
  ['Precedent catalogue','130 sites, gathered 15 Oct 2026','15 Oct 2026'],
 ];
 const CHANGES=[
+ ['19','16 Oct 2026','Five site-setup cards in a drawer; zone limits with their clauses, your own height and floor-space ratio, Edmonton h/f modifiers; footprint from setbacks, loading and plant yard; plant sized from the load with spares and placed only inside the usable lot; one 3D data-centre model for every tab; neighbours to 1.5 km; receivers on their buildings; small-scale housing zones tinted; NaN racks fixed.; Opportunities tab: all 15 opportunities by family, each tested gate by gate (physics, land, rules, demand, time, money) with its reason; I-2 sub-area B limits; Blatchford business plan and wastewater plants added as sources'],
+ ['18','16 Oct 2026','Census people near the site; solar yield range; labels agreed 15 Oct.'],
  ['17','15 Oct 2026','Show the math on every tab; evidence badges; range bars; worked examples; what matters most; over time; two cities; site report; feedback; COP range widened to observed values.'],
  ['16','15 Oct 2026','Edmonton lot outlines.'],
  ['14–15','15 Oct 2026','Edmonton picking by building, nearest point, or same zone.'],

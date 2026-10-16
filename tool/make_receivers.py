@@ -45,7 +45,9 @@ for r in json.load(open(os.path.join(H, '..', 'data', 'raw', 'van', 'non-market-
 NETS = {'van': [dict(n='Neighbourhood Energy Utility (NEU)', op='City of Vancouver', kind='compulsory', src='van9552',
           ring=json.load(open(os.path.join(H, '..', 'data', 'networks', 'van_neu_9552_traced.geojson')))['geometry']['coordinates'][0],
           note='Traced from By-law 9552 Schedule A (±45 m). New buildings and major alterations inside must take NEU heat unless the City Engineer finds it not practical or economical (s. 2.1). Heat sent back is credited at 50% of $65.172/MWh. About 70% renewable, mostly sewage heat recovery; network at 65 °C minimum, 45 °C maximum return.')],
-        'edm': []}
+        'edm': [dict(n='Blatchford District Energy Sharing System', op='City of Edmonton (Blatchford Renewable Energy)', kind='compulsory', src='blatchford2023',
+          ring=[list(c) for c in json.load(open(os.path.join(H, '..', 'data', 'networks', 'edm_blatchford_hull.geojson')))['geometry']['coordinates'][0]],
+          note='Approximate: the convex hull of the City property records in the Blatchford Area neighbourhood (±50 m), not traced from Bylaw C17943 Schedule A. Owners inside must connect each building (s. 6) unless the City Manager exempts a net-zero carbon building (s. 8); owners outside may apply (s. 7). Variable rate $0.0269/kWh for heating and cooling; infrastructure fee $1,845.78 per residential unit or $21.09/m² commercial (Schedule B, 2022 consolidation). It shares ambient-temperature energy, so data-centre heat would need no lift to join it (loop temperatures not yet read). Its 2021–2024 Business Plan names geoexchange, sewer heat and solar as sources and describes no intake of heat from others.')]}
 for k, v in out.items():
     json.dump(v, open(os.path.join(H, f'receivers_{k}.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
     os.makedirs(os.path.join(H, 'tiles', k), exist_ok=True)

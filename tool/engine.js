@@ -28,7 +28,8 @@ const R={
  grid:{van:18.1,edm:346.1},           // g CO2e/kWh, NIR 2026, consumption, 2024
  neuCredit:32.59,                     // $/MWh, By-law 9552 Sch. C
  reach:{pool:1000,housing:1200,greenhouse:1500}, reachGuide:1200,
- jobsM2:464.5,                        // 5,000 ft² per operating job, JLARC 2024 (transferred)
+ jobsM2:464.5, kWPerRack:8,            // Uptime 2024 average 8 kW per rack (industry survey; register size_fit)
+                        // 5,000 ft² per operating job, JLARC 2024 (transferred)
 };
 const SRC2={
  env:'formula register: envelope (zone schedules; sources 17, 18)', hall:'register: hall_area (one calibration case, confidence 50); ground-floor rule: I-2 s. 2.2.7; floor heights: Burlington plans, HK TPB A/KC/480, A/KC/510B',
@@ -56,7 +57,7 @@ function P(lon,lat){ const m=BD.S.meta[BD.S.city]; const k=Math.cos(m.lat0*Math.
 BD.recv={};
 async function loadRecv(city){ if(BD.recv[city]) return BD.recv[city];
   try{ const d=await BD.getJSON(`tiles/${city}/receivers.json`);
-    d.pts.forEach(p=>{ [p.x,p.y]=P(p.lon,p.lat); });
+    d.pts.forEach((p,i)=>{ [p.x,p.y]=P(p.lon,p.lat); p.id=i; });
     d.nets.forEach(n=>{ n.r=new Float64Array(n.ring.flatMap(([lo,la])=>P(lo,la))); n.path=BD.pathOf([n.r]); });
     BD.recv[city]=d; BD.draw(); return d; }catch(e){ console.warn(e); BD.recv[city]={pts:[],nets:[]}; return BD.recv[city]; } }
 BD.loadRecv=loadRecv;
@@ -74,9 +75,11 @@ function siteFacts(){
   f.c=s.ring?BD.centroid(s.ring):s.pt;
   f.downtown=city==='van'&&/^(DD|CWD|DEOD|BCPED|HA-1|HA-1A|HA-2)$/.test(f.zone);
   // gross floor area available to the data centre
-  const env=f.env||(city==='van'?R.envVan['I-2']:R.envEdm.IM); f.envAssumed=!f.env; f.envH=env.h; f.envU=env;
-  // storeys within the height limit: 6.0 m ground floor, then 6.0 m (fewer) or 5.5 m (more) data-hall floors
-  const nF=[1+Math.max(0,Math.floor((env.h-R.ftf.ground)/R.ftf.up[1])), 1+Math.max(0,Math.floor((env.h-R.ftf.ground)/R.ftf.up[0]))];
+  const M=BD.model?BD.model():null; f.M=M;
+  const env0=f.env||(city==='van'?R.envVan['I-2']:R.envEdm.IM);
+  const env=M&&M.Z?Object.assign({},env0,{fsr:M.Z.fsr,h:M.H||M.Z.hOutright,ground:M.Z.ground}):env0; f.envAssumed=M?M.Z.assumed:!f.env; f.envH=env.h; f.envU=env;
+  // storeys within the height limit: 6.0 m ground floor, then 6.0 m (fewer) or 5.5 m (more) data-hall floors (or as set in the site setup)
+  const nF=M&&M.nF&&A.built==='new'?M.nF.slice():[1+Math.max(0,Math.floor((env.h-R.ftf.ground)/R.ftf.up[1])), 1+Math.max(0,Math.floor((env.h-R.ftf.ground)/R.ftf.up[0]))];
   f.hallS=null; f.hallL=null;
   if(A.built==='new'){
     const g=[f.lot*env.fsr[0],f.lot*env.fsr[1]]; f.floors=nF[1]; f.floorsR=nF;
@@ -84,12 +87,14 @@ function siteFacts(){
     // footprint the yards leave: approximate the lot as a rectangle of its area, width w = area ÷ longest span
     let fp=f.lot; f.fpNote='';
     const ring=BD.S.sel&&BD.S.sel.ring, y=env.yards;
-    if(y&&ring){ let L=0; for(let i=0;i<ring.length;i+=2) for(let j=i+2;j<ring.length;j+=2) L=Math.max(L,Math.hypot(ring[i]-ring[j],ring[i+1]-ring[j+1]));
+    if(M&&M.foot&&M.footArea){ fp=Math.min(f.lot||M.footArea,M.footArea); f.fp=fp; f.fpNote='from the site setup: '+({max:'the most the zone allows, less setbacks'+(M.loading?', loading':'')+(M.plantYardDepth?' and the plant yard':''),existing:'matching the existing building',cover:'coverage '+A.cover+'% of the lot'}[M.footMode]||'set in the setup')+(M.yardNote?' ('+M.yardNote.toLowerCase().replace(/\.$/,'')+')':''); f.fpCalc=null; }
+    else if(y&&ring){ let L=0; for(let i=0;i<ring.length;i+=2) for(let j=i+2;j<ring.length;j+=2) L=Math.max(L,Math.hypot(ring[i]-ring[j],ring[i+1]-ring[j+1]));
       const a=BD.area(ring), w=Math.min(a/Math.max(L,1),L), d=a/Math.max(w,1);
       let fw=Math.max(0,w-2*y.side), fd=Math.max(0,d-y.front-y.rear); if(y.max){ fw=Math.min(fw,y.max); fd=Math.min(fd,y.max); }
       fp=Math.min(f.lot,fw*fd); f.fp=fp; f.fpNote=y.note; f.fpCalc={w,d,fw,fd}; }
-    const G=[Math.min(g[0],fp*nF[0]),Math.min(g[1],fp*nF[1])]; f.g=g; f.G=G;
-    f.fullCover=!f.fpNote&&g[1]>fp*nF[0]*0.999; f.heightCut=g[0]>fp*nF[0]*1.001; f.yardCut=!!f.fpNote&&g[1]>fp*nF[0]*1.001;
+    const ind=(M&&M.plant&&M.plant.indoor)||0; f.indoorPlant=ind;
+    const G=[Math.max(0,Math.min(g[0],fp*nF[0])-ind),Math.max(0,Math.min(g[1],fp*nF[1])-ind)]; f.g=g; f.G=G;
+    f.fullCover=(!f.fpNote||(M&&M.yardNote))&&g[1]>fp*nF[0]*0.999; f.heightCut=g[0]>fp*nF[0]*1.001; f.yardCut=!!f.fpNote&&g[1]>fp*nF[0]*1.001;
     if(A.extent==='part'){ f.gross=[G[0]/nF[0],G[1]/nF[1]].sort((a,b)=>a-b); f.how=`one floor of a new building: the zone's floor area ÷ ${nF[0]===nF[1]?nF[0]:nF[0]+'–'+nF[1]} storeys`; f.hallGross=f.gross.slice(); }
     else {
       f.gross=[Math.min(G[0],G[1]),Math.max(G[0],G[1])]; f.how=`lot ${fmt(f.lot)} m² × floor-space ratio ${env.fsr[0]===env.fsr[1]?env.fsr[0]:env.fsr[0]+'–'+env.fsr[1]}`;
@@ -136,7 +141,8 @@ function mathFits(f){
     L.push(`Lot area: <b>${n0(f.lot)} m²</b> (City parcel data).`);
     L.push(`Zone floor-space ratio ${fsr}${f.envAssumed?' (as if rezoned)':''}: ${n0(f.lot)} × ${fsr} = <b>${n0(f.g[1])} m²</b>.`);
     L.push(`Storeys under the ${e.h} m height limit: first floor 6.0 m, then data-hall floors of 6.0 or 5.5 m. (${e.h} − 6.0) ÷ 6.0 = ${((e.h-6)/6).toFixed(2)}, whole floors ${Math.floor((e.h-6)/6)}, plus the first floor = <b>${f.floorsR[0]}</b>; with 5.5 m floors, ${((e.h-6)/5.5).toFixed(2)} → ${Math.floor((e.h-6)/5.5)} + 1 = <b>${f.floorsR[1]}</b>.`);
-    if(f.fpNote){ const c=f.fpCalc; L.push(`Footprint after yards: lot ${n0(f.lot)} m² treated as ${n1(c.w)} m wide × ${n1(c.d)} m deep (width = area ÷ longest span). Less the yards: ${n1(c.fw)} × ${n1(c.fd)} = <b>${n0(f.fp)} m²</b>.`); }
+    if(f.fpNote&&!f.fpCalc) L.push(`Footprint ${esc(f.fpNote)}: <b>${n0(f.fp)} m²</b> (drawn in 3D).`);
+    if(f.fpNote&&f.fpCalc){ const c=f.fpCalc; L.push(`Footprint after yards: lot ${n0(f.lot)} m² treated as ${n1(c.w)} m wide × ${n1(c.d)} m deep (width = area ÷ longest span). Less the yards: ${n1(c.fw)} × ${n1(c.fd)} = <b>${n0(f.fp)} m²</b>.`); }
     const fpv=f.fp||f.lot; L.push(`Most floor area those storeys can hold: ${n0(fpv)} m² × ${f.floorsR[0]} = ${n0(fpv*f.floorsR[0])} m²${f.floorsR[1]!==f.floorsR[0]?` (or × ${f.floorsR[1]} = ${n0(fpv*f.floorsR[1])} m²)`:''}. The smaller of this and step 2: <b>${rng(f.gross[0],f.gross[1],'m²')}</b>.`);
     if(f.sc){ f.sc.forEach((s,i)=>{ if(i===1&&f.floorsR[1]===f.floorsR[0]) return; const tag=f.floorsR[1]!==f.floorsR[0]?` <i>(${f.floorsR[i]} storeys)</i>`:'';
       L.push(`Ground floor (no data storage at grade)${tag}: floor area ÷ storeys = ${n0(s.G)} ÷ ${f.floorsR[i]} = <b>${n0(s.gr)} m²</b>. Floors above: ${n0(s.G)} − ${n0(s.gr)} = <b>${n0(s.up)} m²</b>.`);
@@ -183,7 +189,7 @@ function fitsView(){
   if(f.envAssumed&&A.built==='new') h+=`<p class="sub"><span class="pill ${f.status.k}">${esc(f.status.t)}</span> No data-centre envelope in zone ${esc(f.zone)}. <span class="draft">Shown as if rezoned to ${f.city==='van'?'I-2 (floor area 3.0 × lot, 18.3 m)':'IM (floor area 2.0 × lot, 18 m)'}, the nearest common data-centre zone — an assumption for comparison, not a prediction.</span></p>`;
   const st=f.floorsR?(f.floorsR[0]===f.floorsR[1]?f.floorsR[0]:f.floorsR[0]+'–'+f.floorsR[1]):f.floors;
   h+=`<h3>Floor area</h3><dl><dt>Available</dt><dd>${f.fullCover?'up to ':''}${rng(f.gross[0],f.gross[1],'m²')}${f.fullCover?` <span class="draft">— only if the building covers the whole lot; yards and setbacks not yet read for this zone</span>`:''}</dd><dt>How</dt><dd>${esc(f.how)}${f.heightCut?` <span class="draft">(${f.yardCut?'the yards and height limit':'the height limit'} hold less than this floor area, so the figure is cut to what fits)</span>`:''}</dd>
-  ${f.fpNote?`<dt>Footprint</dt><dd>about ${fmt(f.fp)} m² after yards <span class="sub">— ${esc(f.fpNote)}; lot treated as a ${fmt(f.fpCalc.w)} × ${fmt(f.fpCalc.d)} m rectangle</span></dd>`:''}
+  ${f.fpNote?`<dt>Footprint</dt><dd>about ${fmt(f.fp)} m² <span class="sub">— ${esc(f.fpNote)}${f.fpCalc?`; lot treated as a ${fmt(f.fpCalc.w)} × ${fmt(f.fpCalc.d)} m rectangle`:''}</span></dd>`:''}
   ${f.ground?`<dt>Ground floor</dt><dd>${rng(f.ground[0],f.ground[1],'m²')} — this zone allows no data storage at grade</dd>`:''}
   ${f.floorsR&&A.built==='new'?`<dt>Storeys</dt><dd>about ${st} (6.0 m ground; 5.5–6.0 m for each data-hall floor, as built and proposed halls show; within ${f.envH} m)</dd>`:''}</dl>${src('env')}
   <h3>Room for servers</h3><dl>${f.hallL?`<dt>Data hall</dt><dd>${rng(f.hallS[0],f.hallS[1],'m²')} <span class="draft">if the ground floor holds none of the data centre</span></dd>
@@ -222,7 +228,7 @@ function fitsView(){
   $('#toSens').onclick=e=>{ e.preventDefault(); BD.views.sens(); };
   const rp=$('#toRep'); if(rp) rp.onclick=e=>{ e.preventDefault(); BD.siteReport(); };
   document.querySelectorAll('#dens button').forEach(b=>b.onclick=()=>{ A.density=b.dataset.v; A.mw=null; fitsView(); });
-  BD.draw();
+  BD.draw(); if(BD.showModel&&!(BD.drawer&&BD.drawer.isOpen())) BD.showModel();
 }
 
 /* ---------- who could take the heat ---------- */
@@ -359,14 +365,14 @@ BD.legendRecv=function(){ return `<div style="margin-top:6px"><i style="border:1
  <div><i style="background:#b9a3cf;width:8px;height:8px;border-radius:50%"></i>Care, hospital <i style="background:#7fb2c4;width:8px;height:8px;border-radius:50%;margin-left:6px"></i>Recreation, pool <i style="background:#9fb38a;width:8px;height:8px;border-radius:50%;margin-left:6px"></i>Arena</div>`; };
 
 /* ---------- the exchange tabs (J.B., 15 Oct): heat · energy · water · materials · social · options; each with a 3D view ---------- */
-const TABS=[['prec','Precedents'],['heat','Heat'],['energy','Energy'],['water','Water'],['materials','Materials'],['social','People'],['opts','Options'],['time','Over time'],['cities','Two cities']];
-function tabBar(cur){ BD.S.tab=cur; return `<button class="x" id="back">← What fits</button><div class="kind">${cur==='prec'?'Real buildings':'What it exchanges'} · ${BD.S.answers.mw||''} MW of servers</div><div class="tabs" role="tablist">${TABS.map(([k,l])=>`<button role="tab" data-tab="${k}" aria-selected="${k===cur}">${l}</button>`).join('')}</div>`; }
-function wireTabs(){ document.querySelectorAll('#side .tabs button').forEach(b=>b.onclick=()=>tabView(b.dataset.tab)); $('#back').onclick=()=>{ document.body.classList.remove('wide'); BD.scene3d&&BD.scene3d.hide(); fitsView(); }; }
-function tabView(k){ document.body.classList.remove('wide'); BD.S.view2='tab'; ({heat:recvView,energy:energyView,water:waterView,materials:materialsView,social:socialView,opts:optionsView,prec:precView}[k]||(BD.views&&BD.views[k]))(); }
+const TABS=[['prec','Precedents'],['heat','Heat'],['energy','Energy'],['water','Water'],['materials','Materials'],['social','People'],['opps2','Opportunities'],['opts','Options'],['time','Over time'],['cities','Two cities']];
+function tabBar(cur){ BD.S.tab=cur; return `<button class="x" id="back">← What fits</button><div class="kind">${cur==='prec'?'Real buildings':'What it exchanges'} · ${BD.S.answers.mw||''} MW of servers</div><div class="tabs" role="tablist">${TABS.map(([k,l])=>`<button role="tab" data-tab="${k}" aria-selected="${k===cur}">${l}</button>`).join('')}</div>${BD.tabExtra?BD.tabExtra(cur):''}`; }
+function wireTabs(){ document.querySelectorAll('#side .tabs button').forEach(b=>b.onclick=()=>tabView(b.dataset.tab)); if(BD.tabExtraWire) BD.tabExtraWire(); $('#back').onclick=()=>{ document.body.classList.remove('wide'); BD.scene3d&&BD.scene3d.hide(); fitsView(); }; }
+function tabView(k){ document.body.classList.remove('wide'); BD.S.view2='tab'; if(BD.drawer&&BD.drawer.isOpen()) BD.drawer.close(); if(BD.tabOverride&&BD.tabOverride[k]) return BD.tabOverride[k](); ({heat:recvView,energy:energyView,water:waterView,materials:materialsView,social:socialView,opts:optionsView,prec:precView}[k]||(BD.views&&BD.views[k]))(); }
 function show3d(tab,data){ if(!BD.scene3d) return; BD.scene3d.show(tab,data).catch(e=>{ const n=document.getElementById('st'); if(n) n.textContent='3D view could not load: '+e.message; }); }
 function roofArea(f){ const A=BD.S.answers; if(A.built==='new'&&BD.S.sel.ring) return BD.area(BD.S.sel.ring)*0.86*0.86; return f.plate||f.foot||0; }
 const SRC3={
- elec:'register: electricity_price (BC Hydro LGS rates from 1 Jul 2026; AESO pool 2025)', pv:'register: pv_roof (NRCan 2006 yield, upper bound for flat arrays; NREL module density and roof suitability)',
+ elec:'register: electricity_price (BC Hydro large general service rates from 1 Apr 2026; AESO pool 2025)', pv:'register: pv_roof (NRCan municipal PV potential values, kWh per kWp, horizontal to latitude tilt; NREL module density and roof suitability)',
  batt:'register: battery (NREL ATB 2024; Reber 2023 34 ± 15 kWh/m²)', ups:'register: ups_flex (vendor runtimes — operator claims)', dr:'register: peak_relief (BC Hydro Demand Response for Business; AESO reserves)',
  ev:'register: ev_stalls, ev_area (charger ratings; Vancouver and Edmonton parking dimensions)', gen:'register: genset_test (AUC 27938-D01-2023, derived; AP-42 Table 3.4-1 upper bounds)', ctl:'register: workload_control (Crozier & Liska 2025)',
  evap:'register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)', wbe:'register: water_behind_electricity (US thermoelectric ~1.25 L/kWh; hydro ~16.8 L/kWh)', rain:'register: rainwater (ECCC Normals 1991–2020; CSA B805 method; runoff coefficient 0.8 assumed)',
@@ -407,16 +413,16 @@ function energyView(){
     'PUE: LBNL 2023, Uptime 2025. Load factor: Fan et al. 2007. Rates: BC Hydro LGS 2026. Solar: NRCan yields, NREL densities. Generator factors: AP-42 Table 3.4-1 (upper bounds).')}
   <div class="draftnote">Draft wording (Claude) for J.B. Ranges carry the register's confidence.</div>`;
   $('#side').innerHTML=h; wireTabs(); BD.draw();
-  show3d('energy',{site:f,plant,pvKwp:kwp[1],battM2:4000/34,grid:f.downtown?'downtown grid: no new feeders before 2032':''});
+  show3d('energy',{site:f,gridNote:f.downtown?'Downtown: no new feeder positions before the West End substation (expected July 2032).':''});
 }
 function waterView(){
   const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=[fac[0]*8760*R.lf,fac[1]*8760*R.lf];
-  const towers=A.cooling==='towers'; const evap=MWh.map(v=>v*1000*1.5/1000); // m³: ≤ 1.5 L/kWh of heat
+  const towers=A.outside==='towers'; const evap=MWh.map(v=>v*1000*1.5/1000); // m³: ≤ 1.5 L/kWh of heat
   const mk=[evap[1]*(1+1/(6-1)),evap[1]*(1+1/(2-1))], bd=[evap[1]/(6-1),evap[1]/(2-1)];
   const roof=roofArea(f), mm=f.city==='van'?1159.5:422.5, rain=roof*mm/1000*0.8;
   const wbe=[MWh[0]*1000*1.25/1000,MWh[1]*1000*16.8/1000];
   let h=tabBar('water')+`<h2>Water in, water out</h2><p class="draft">A data centre can use almost no water on site, or a great deal — it depends on how it rejects heat. The water behind its electricity is a separate question.</p>
-  <div class="q"><div class="lab">How it rejects heat</div><div class="seg" data-c="1"><button data-v="dry" aria-pressed="${!towers}">Dry coolers</button><button data-v="towers" aria-pressed="${towers}">Cooling towers</button></div></div>
+  <div class="q"><div class="lab">How it rejects heat</div><div class="seg" data-c="1"><button data-v="dry" aria-pressed="${A.outside!=='towers'&&A.outside!=='hybrid'}">Dry coolers</button><button data-v="towers" aria-pressed="${towers}">Cooling towers</button><button data-v="hybrid" aria-pressed="${A.outside==='hybrid'}">Hybrid</button></div></div>
   <h3>On site</h3><dl>${towers?`<dt>Evaporated</dt><dd>up to ${fmt(evap[1])} m³/yr (at most 1.5 L per kWh of heat)</dd><dt>Make-up water</dt><dd>${fmt(mk[0])}–${fmt(mk[1])} m³/yr at 2–6 cycles of concentration</dd><dt>Blowdown to the sewer</dt><dd>${fmt(bd[0])}–${fmt(bd[1])} m³/yr</dd>${f.city==='van'?`<dt>Water bill</dt><dd>about $${fmt(mk[0]/2.832*4.091)}–$${fmt(mk[1]/2.832*5.128)} a year for the make-up water alone (2026 rates, per 2.832 m³ unit)</dd>`:''}`:`<dt>Evaporated</dt><dd>none for cooling — dry coolers reject heat to the air; their fans are the trade (sound, roof space)</dd>`}
   <dt>Rain on the roof</dt><dd>about ${fmt(rain)} m³/yr from ${fmt(roof)} m² at ${mm} mm a year</dd></dl>${s3('evap')}${f.city==='van'?s3('wprice'):''}${s3('rain')}
   <h3>Behind its electricity</h3><dl><dt>Water used to make its power</dt><dd>${fmt(wbe[0])}–${fmt(wbe[1])} m³/yr (thermal plants ~1.25 L/kWh; hydro reservoirs ~16.8 L/kWh — mostly evaporation from reservoirs)</dd></dl>${s3('wbe')}
@@ -430,8 +436,8 @@ function waterView(){
     `Water behind the electricity: ${n0(MWh[0])} MWh × 1.25 L/kWh = ${n0(wbe[0])} m³; ${n0(MWh[1])} MWh × 16.8 L/kWh = <b>${n0(wbe[1])} m³</b>.`].filter(Boolean),
     'Evaporation: physics (latent heat). Cycles: FEMP/EPA. Rain: ECCC Normals 1991–2020; runoff 0.8 assumed. Water behind electricity: US thermoelectric and hydro averages.')}
   <div class="draftnote">Draft wording (Claude) for J.B.</div>`;
-  $('#side').innerHTML=h; wireTabs(); document.querySelectorAll('#side .seg[data-c] button').forEach(b=>b.onclick=()=>{ A.cooling=b.dataset.v; waterView(); }); BD.draw();
-  show3d('water',{site:f,plant:plantPerMW(false)[1]*mw,rain,towers,evap:towers?fmt(evap[1])+' m³/yr':''});
+  $('#side').innerHTML=h; wireTabs(); document.querySelectorAll('#side .seg[data-c] button').forEach(b=>b.onclick=()=>{ A.outside=b.dataset.v; BD.modelReset&&BD.modelReset(); waterView(); }); BD.draw();
+  show3d('water',{site:f,rain,towers:towers||A.outside==='hybrid',evap:towers?fmt(evap[1])+' m³/yr':''});
 }
 function materialsView(){
   const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, racks=mw*1000/R.kWPerRack, servers=mw*1000/0.6;
@@ -452,7 +458,7 @@ function materialsView(){
     'Servers: LBNL 2024. Waste: server masses, 6-year refresh. Copper: Copper Development Association (industry). Embodied: Dell R760 LCA (manufacturer); building median 461 kg/m².')}
   <div class="draftnote">Draft wording (Claude) for J.B.</div>`;
   $('#side').innerHTML=h; wireTabs(); BD.draw();
-  show3d('materials',{site:f,racks});
+  show3d('materials',{site:f});
 }
 const CENSUS={};
 function censusNear(city,c,r){ const d=CENSUS[city]; if(!d||d==='loading') return null; const C=d.cell, t=[0,0,0,0,0,0,0];
@@ -497,7 +503,9 @@ function socialView(){
   <h3>Your observations on site</h3><textarea id="notes" rows="5" style="width:100%;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;padding:8px;color:var(--fg)" placeholder="What did you hear, see and feel at the edge? Time of day, where you stood.">${esc(notes)}</textarea><div class="src">Kept in this browser only; shown as your observation, never as a measurement.</div>
   <div class="draftnote">Draft wording (Claude) for J.B. Sound is a screening estimate: manufacturer-rated levels, no barriers, ground or buildings.</div>`;
   $('#side').innerHTML=h; wireTabs(); $('#notes').oninput=e=>{ try{ localStorage.setItem(key,e.target.value); }catch(err){} }; BD.draw();
-  show3d('social',{site:f,plant:plantPerMW(false)[1]*mw,noise:{lw,limit:lim,limitFor}});
+  const pb=(f.M&&f.M.plant&&f.M.plant.boxes)||[]; const psrc=pb.length?[pb.reduce((t,b)=>t+BD.centroid(b.ring)[0],0)/pb.length,pb.reduce((t,b)=>t+BD.centroid(b.ring)[1],0)/pb.length]:null;
+  BD._noise={lw,limit:lim,limitFor,dist,src:psrc};
+  if(BD.afterSocial) BD.afterSocial(); else show3d('social',{site:f,noise:BD._noise});
 }
 
 function peopleRows(f,dist){

@@ -207,3 +207,8 @@ Running record of decisions J.B. has made about the tool's logic, in the order m
 - Pipe cost: no Canadian per-metre figure; Edmonton DDE filings give only bundled capital ($35.9M Phase 1). European (Persson 2019; npro) and US (Cambridge) figures held, labelled.
 - NFPA 855: not cited in NFC 2020 or the BC Fire Code 2024 amendments; the other codes are on J.B.'s list (R7–R9).
 - Gaps still open: redundancy practice, cistern cost, truck cost and emissions, walking-distance norms, street permits, centrelines, Alberta cooling-tower rules, TIER 2026 price.
+
+## 16 Oct 2026 — v19 published (tool artifact version 21; diagram v29)
+- Opportunities tab: 15 opportunities in a fixed order by family; each gate (physics, land, rules, demand, time, money) is possible here, possible with a change, not here or not yet known, with its reason. Never ranked or scored.
+- I-2 sub-area B (I-2 District Schedule, June 2026): a choice on setup card 2 for I-2 lots; the tool does not map the sub-areas (Map 1). Outside B the discretionary height is 30.5 m (it said 30.5–36.5 before; 36.5 m is sub-area B only).
+- New sources: vanI2_2026, mvWWTP2026 (plant addresses not checked: the chat search used business listings), epcorGoldBar2026, statcanGH2021 (Canada only), blatchfordBP2021 (no third-party heat intake described).

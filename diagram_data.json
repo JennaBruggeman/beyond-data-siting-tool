@@ -9,7 +9,7 @@
 "quantities": 139,
 "conditions": 101,
 "opportunities": 15,
-"sources": 452
+"sources": 468
 }
 },
 "stages": [
@@ -1310,7 +1310,8 @@
 "sources": [
 "femp",
 "pspcLegionella",
-"vanCTseminar2021"
+"vanCTseminar2021",
+"vbbl2025_63215"
 ],
 "source_roles": [
 {
@@ -1333,6 +1334,13 @@
 "role": "pending build",
 "conf": 50,
 "verified": false
+},
+{
+"id": "vbbl2025_63215",
+"term": "research pass 16 Oct 2026 (rule)",
+"role": "pending build",
+"conf": 70,
+"verified": true
 }
 ],
 "conf": 100,
@@ -2178,7 +2186,9 @@
 "vanNEU2018",
 "edmDDEcapital",
 "isoplusEPD",
-"vanQuebecSt2020"
+"vanQuebecSt2020",
+"vanStreets2026",
+"edmRoads2026"
 ],
 "source_roles": [
 {
@@ -2236,6 +2246,20 @@
 "role": "pending build",
 "conf": 50,
 "verified": false
+},
+{
+"id": "vanStreets2026",
+"term": "research pass 16 Oct 2026 (government data)",
+"role": "pending build",
+"conf": 70,
+"verified": true
+},
+{
+"id": "edmRoads2026",
+"term": "research pass 16 Oct 2026 (government data)",
+"role": "pending build",
+"conf": 70,
+"verified": true
 }
 ],
 "conf": 70,
@@ -3002,7 +3026,9 @@
 "armaElectronics",
 "cfsPlus",
 "call2recycle",
-"itsp40006"
+"itsp40006",
+"r2Van2026",
+"r2Edm2026"
 ],
 "source_roles": [
 {
@@ -3046,6 +3072,20 @@
 "role": "pending build",
 "conf": 50,
 "verified": false
+},
+{
+"id": "r2Van2026",
+"term": "research pass 16 Oct 2026 (certification directory)",
+"role": "pending build",
+"conf": 70,
+"verified": true
+},
+{
+"id": "r2Edm2026",
+"term": "research pass 16 Oct 2026 (certification directory)",
+"role": "pending build",
+"conf": 70,
+"verified": true
 }
 ],
 "conf": 60,
@@ -4925,7 +4965,8 @@
 "altaReg117",
 "bennettBill22",
 "bcUCAs1",
-"aucCoaldale2025"
+"aucCoaldale2025",
+"abEUAdef2026"
 ],
 "source_roles": [
 {
@@ -4980,6 +5021,13 @@
 {
 "id": "aucCoaldale2025",
 "term": "research pass 16 Oct 2026 (regulator decision)",
+"role": "pending build",
+"conf": 70,
+"verified": true
+},
+{
+"id": "abEUAdef2026",
+"term": "research pass 16 Oct 2026 (rule (statute))",
 "role": "pending build",
 "conf": 70,
 "verified": true
@@ -6103,7 +6151,9 @@
 "nfpa855tia",
 "abESSstandata",
 "bchDG100",
-"epcorDTtc2025"
+"epcorDTtc2025",
+"nfcAB2023",
+"nfpa855_2026"
 ],
 "source_roles": [
 {
@@ -6161,6 +6211,20 @@
 "role": "pending build",
 "conf": 50,
 "verified": false
+},
+{
+"id": "nfcAB2023",
+"term": "research pass 16 Oct 2026 (rule)",
+"role": "pending build",
+"conf": 70,
+"verified": true
+},
+{
+"id": "nfpa855_2026",
+"term": "research pass 16 Oct 2026 (standard (US))",
+"role": "pending build",
+"conf": 70,
+"verified": true
 }
 ],
 "conf": 70,
@@ -6706,7 +6770,11 @@
 "mfrBESS",
 "nfpa855tia",
 "vanParking5",
-"edmZB580"
+"edmZB580",
+"uptimeTiers",
+"nfpa855_2026",
+"cologixVAN1_2026",
+"cologixVAN4_2026"
 ],
 "source_roles": [
 {
@@ -6817,6 +6885,34 @@
 {
 "id": "edmZB580",
 "term": "research pass 16 Oct 2026 (rule)",
+"role": "pending build",
+"conf": 70,
+"verified": true
+},
+{
+"id": "uptimeTiers",
+"term": "research pass 16 Oct 2026 (industry (certifier))",
+"role": "pending build",
+"conf": 70,
+"verified": true
+},
+{
+"id": "nfpa855_2026",
+"term": "research pass 16 Oct 2026 (standard (US))",
+"role": "pending build",
+"conf": 70,
+"verified": true
+},
+{
+"id": "cologixVAN1_2026",
+"term": "research pass 16 Oct 2026 (operator claim)",
+"role": "pending build",
+"conf": 70,
+"verified": true
+},
+{
+"id": "cologixVAN4_2026",
+"term": "research pass 16 Oct 2026 (operator claim)",
 "role": "pending build",
 "conf": 70,
 "verified": true
@@ -11606,10 +11702,10 @@
 "mfrGenset": "Standby diesel generator sets in enclosures (Cat 3516C enclosure sheet; Cummins S-1443): about 2 MW — 13.9 × 2.7 m, 3.9–5.0 m high; 0.6–1 MW — 6.6–8.6 × 2.5 m, 3.5–3.7 m high; sub-base fuel tank optional; ≥1 m clearance around each set (Cummins T-030). No 3 MW sheet found; no numeric stack-height guidance — https://powersuite.cummins.com/PS5/PS5Content/SiteContent/en/Binary_Asset/pdf/Commercial/Diesel/s-1443.pdf",
 "nfpa37clear": "NFPA 37 s. 4.1.4 as reprinted by the NC Office of State Fire Marshal: engines outdoors at least 5 ft (1.5 m) from wall openings and from structures with combustible walls; reducible with a 1-hour wall or a tested enclosure. US standard, edition not stated; Vancouver bulletin 2000-015 points to CSA C282 (paywalled, not read) — https://ncosfm.gov/fuel-gas/3013-3rd-party-listing-requirement-generator-clearance-reduction-1/open",
 "mfrBESS": "Battery energy storage, generic: 20 ft container ≈5 MWh / ≈2.5 MW, 6.06 × 2.44 × 2.90 m, ≈42 t (StarCharge, Sungrow data sheets); cabinet ≈3.9 MWh / 1–1.9 MW, 8.8 × 1.65 × 2.8 m, 38 t (Megapack 2 XL sheet filed with the CT Siting Council) — https://starcharge.com/am/wp-content/uploads/sites/3/2025/03/5MWh-Datasheet-1-1.pdf",
-"nfpa855tia": "NFPA 855-2023 as amended by TIA 23-1 and 23-2: ESS units separated by at least 3 ft (0.9 m), less with fire testing; rooftop units 3 ft apart, ≥5 ft from roof edge; Hydro One (Ontario utility standard) quotes §9.5.2.6.1: 10 ft (3 m) to lot lines, public ways and buildings, reducible to 3 ft. NFPA 855 is not referenced in the National Fire Code 2020 (Claude checked the local text: 35 NFPA standards cited, 855 not among them) or the BC Fire Code 2024 amendments; BCBC 2024, NFC-AE 2023 and VBBL 2025 Book I not checked — https://docinfofiles.nfpa.org/files/AboutTheCodes/855/TIA_855_23_1.pdf",
+"nfpa855tia": "NFPA 855-2023 as amended by TIA 23-1 and 23-2: ESS units separated by at least 3 ft (0.9 m), less with fire testing; rooftop units 3 ft apart, ≥5 ft from roof edge; Hydro One (Ontario utility standard) quotes §9.5.2.6.1: 10 ft (3 m) to lot lines, public ways and buildings, reducible to 3 ft. NFPA 855 is not referenced in the National Fire Code 2020 (Claude checked the local text: 35 NFPA standards cited, 855 not among them) or the BC Fire Code 2024 amendments; VBBL 2025 Book I, BCBC 2024 and NFC – 2023 Alberta Edition do not cite it either and have no energy-storage provisions (Claude checked the full texts, 16 Oct; J.B. downloads). So in both provinces battery spacing is not set by the building or fire code: it falls to the authority having jurisdiction, the electrical code and the listing (UL 9540/9540A) — https://docinfofiles.nfpa.org/files/AboutTheCodes/855/TIA_855_23_1.pdf",
 "abESSstandata": "Alberta STANDATA 21-ECV-064-900-ESS/19-BCB-010 (REV1): residential energy storage — relies on CSA C22.1 Rule 64 and UL 9540/9540A, 1 m between systems and from windows and doors; dwellings only — https://open.alberta.ca/",
 "pspcLegionella": "PSPC, Legionella control, Chapter 3 (federal property): \"minimum separation distance shall be 10 metres between the cooling tower and any air intake\"; drift eliminators — https://tpsgc-pwgsc.gc.ca/biens-property/legionella/chapitre-chapter-3-eng.html",
-"vanCTseminar2021": "City of Vancouver, operating permits seminar slides (Nov 2021): cooling towers 7.6 m from outdoor air intakes, 3 m from doors, operable windows and occupiable outdoor space, 2.15 m above sidewalks. VBBL Art. 6.3.2.15 text not yet read, so unconfirmed against the by-law — https://vancouver.ca/files/cov/cp-seminar-operating-permits-storm-sumps-nov-4-2021-chris-radziminski.pdf",
+"vanCTseminar2021": "City of Vancouver, operating permits seminar slides (Nov 2021): cooling towers 7.6 m from outdoor air intakes, 3 m from doors, operable windows and occupiable outdoor space, 2.15 m above sidewalks. confirmed against VBBL Art. 6.3.2.15 (see vbbl2025_63215) — https://vancouver.ca/files/cov/cp-seminar-operating-permits-storm-sumps-nov-4-2021-chris-radziminski.pdf",
 "vanParking5": "Vancouver Parking By-law 6059, s. 5 (May 2026): Class B space \"at least 10.2 metres long, 3.4 metres wide, and 3.8 metres high\"; Class C \"23.1 … 3.6 … 4.3\"; Class C aisle 14.0 m; access by a 6.1 m aisle from the lane where there is one (5.4.1); row 5.2.5 Class B: one space for the first 465 m² plus one for the next 1,860 m² and one per further 2,325 m²; Class C one space for 2,000–5,000 m² of manufacturing, storage warehouse or wholesale, two above 5,000; uses not listed are set by the Director of Planning from a similar use (5.1.4) — data centres are not listed — https://bylaws.vancouver.ca/parking/sec05.pdf",
 "edmZB580": "Edmonton Zoning Bylaw 20001, s. 5.80 subs. 7: loading space 9.0 m long, 3.0 m wide (3.1/3.3 m with obstructions), 4.0 m clearance; wholly on site; no backing onto streets or alleys; number for non-residential uses — under 2,500 m² 0, 2,500–7,500 m² 1, over 7,500 m² 2 — https://zoningbylaw.edmonton.ca/part-5-general-development-regulations/580-parking-access-site-circulation-and-bike-parking",
 "edmZB5120": "Edmonton Zoning Bylaw 20001, s. 5.120 subs. 1.1: \"Non-Industrial development must comply with the following\": 1.1.2 \"All mechanical equipment, except for Solar Collectors, must be concealed by screening\" or incorporated in the building. Does not apply to industrial development — https://zoningbylaw.edmonton.ca/part-5-general-development-regulations/5120-site-performance-standards",
@@ -11665,14 +11761,30 @@
 "bchDR2026": "BC Hydro Demand Response for Business customer manual (Aug 2026): events Nov–Mar, weekdays 6 am–10 pm, ≤4 consecutive hours, ≤2 a day, ≤20 a season; BC Hydro peaks on weekday evenings (2021 demand report); records 5–6 pm (Dec 2022 winter, Jul 2026 summer) — https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/power-smart/business/programs/demand-response-for-business-customer-manual.pdf",
 "abGreenhouse2017": "Alberta Agriculture and Forestry AGDEX 821-59 (2018, 2017 survey): greenhouse capital investment per m² — cucumber $112.75, tomato $129.99, pepper $138.99, bedding plants $321.01 (surveyed existing operations, not new build) — https://open.alberta.ca/dataset/fbb2b0b5-53b9-4dbd-92b7-f37ec8ed9369/resource/d074794d-7ec0-4bef-bc93-99a57bbc2cf2/download/2017greenhousecop.pdf",
 "faoRAS2022": "Bregnballe, A guide to recirculation aquaculture (FAO/Eurofish 2022), pp. 53–54: total investment \"between EUR 12 to EUR 20 (or more) per kg produced per year\"; simple outdoor grow-out ≈€6/kg — https://www.fao.org/3/cc2390en/cc2390en.pdf",
-"fortisBC2026": "FortisBC rate sheet effective 1 Jul 2026 (Mainland): Rate 2 basic $1.4309/day, delivery $5.377/GJ, storage & transport $2.493/GJ, cost of gas $1.660/GJ; Rate 3 basic $4.3526/day, storage & transport $2.268/GJ. Extracted text was jumbled — check against the tariff — https://www.cdn.fortisbc.com/libraries/docs/default-source/about-us-documents/regulatory-affairs-documents/gas-utility/fei_biomethane_one_page_rate_sheet.pdf",
+"fortisBC2026": "FortisBC business rates, Mainland and Vancouver Island, effective 1 Jul 2026 (J.B. screenshots 16 Oct 2026 of fortisbc.com): Rate 3 (commercial, institutional or small industrial, over 2,000 GJ a year, e.g. schools, offices) — basic $4.3526/day, delivery $5.377/GJ, storage and transport $2.268/GJ, cost of gas $1.660/GJ; Rate 2 — basic $1.4309/day, delivery $5.877/GJ, storage and transport $2.493/GJ, cost of gas $1.660/GJ (the earlier rate-sheet reading of $5.377 for Rate 2 was wrong) — https://www.fortisbc.com/accounts-billing/billing-rates/natural-gas-rates/business-rates",
 "atcoGas2026": "ATCO Gas North delivery (1 Jan 2026): Low Use $0.997/day + $1.049/GJ; Mid Use $1.909/day + $1.045/GJ (riders excluded). Alberta regulated rate, ATCO area, 2026 $/GJ: Jan 3.331 … Oct 1.458 (Utilities Consumer Advocate) — https://ucahelps.alberta.ca/regulated-rates.aspx",
 "bcCarbonTax2025": "BC: \"The B.C. carbon tax was eliminated effective April 1, 2025\"; federal fuel charge set to zero 1 Apr 2025 (CRA FCN16); BC output-based pricing for large industry continues (≥10,000 t/yr); Alberta TIER $95/t for 2025, 2026 price not verified from a primary source — https://www2.gov.bc.ca/gov/content/taxes/sales-taxes/motor-fuel-carbon-tax/carbon-tax-elimination",
 "epraBC": "EPRA BC / Return-It Electronics: accepts \"Desktop computers (including those acting as servers)\" and IT/telecom gear; loose batteries not accepted; Large Volume Generator pickup with a 3-pallet minimum; approved primary processors (Dec 2023): FCM Recycling (Delta), eCycle Solutions (Chilliwack), Quantum Lifecycle Partners and Hi Tech Recyclers (Edmonton) — https://www.recyclemyelectronics.ca/bc/what-can-i-recycle",
 "armaElectronics": "Alberta Recycling Management Authority electronics program: \"Blade (rack mount), desktop and floor standing servers\" covered, for consumer, industrial or commercial use; registered processors incl. Hi-Tech Recyclers, Quantum Lifecycle Partners, YEG Electronics Recycling (Edmonton), Shanked Computer Recycling (Acheson), eCycle Solutions (Airdrie) — https://www.albertarecycling.ca/registry/stewardship/#processors",
 "cfsPlus": "Computers for Schools Plus (ISED): BC affiliate BC Technology for Learning Society / ReuseTechBC (Burnaby; Windows 11-capable devices); Alberta Computers for Schools (Edmonton, Calgary) takes servers (≥4 cores) and recycles servers, switches, UPSs and lead batteries — https://www.cfsalberta.ca/donate.php",
 "call2recycle": "Call2Recycle Canada: dry-cell batteries up to 5 kg each (incl. sealed lead acid and Li-ion); larger UPS strings likely outside the program (inference); Alberta battery EPR from 1 Apr 2025 — https://call2recycle.ca/faq/",
-"itsp40006": "Canadian Centre for Cyber Security ITSP.40.006, IT Media Sanitization (supersedes ITSG-06; cites NIST SP 800-88 Rev. 1); Government of Alberta Secure Digital Media Sanitization Standard v2.0 (2023) uses NIST terms — https://www.cyber.gc.ca/en/guidance/it-media-sanitization-itsp40006"
+"itsp40006": "Canadian Centre for Cyber Security ITSP.40.006, IT Media Sanitization (supersedes ITSG-06; cites NIST SP 800-88 Rev. 1); Government of Alberta Secure Digital Media Sanitization Standard v2.0 (2023) uses NIST terms — https://www.cyber.gc.ca/en/guidance/it-media-sanitization-itsp40006",
+"vbbl2025_63215": "VBBL 2025 Book I, Div. B Art. 6.3.2.15 (J.B. download 16 Oct 2026; read by Claude): evaporative heat rejection discharge \"away from the building … not less than a) 2.15 m above sidewalks and driveways, b) 7.6 m from outdoor air intakes, c) 3 m horizontally or vertically from exterior doors and operable windows, and d) 3 m … from occupiable outdoor spaces\"; drift eliminator; drains and blow-downs to the building drainage system (Clause 2.4.2.1.(1)(e), Book II); operating permit per Book II Art. 2.2.11.6. NFPA 855 is not among the NFPA standards Book I cites — data/raw/codes/vbbl2025_v1.pdf",
+"nfcAB2023": "National Fire Code – 2023 Alberta Edition (NRC, 2026 print; J.B. download 16 Oct 2026; Claude searched the full text): no reference to NFPA 855 and no energy-storage-system provisions (battery rules cover industrial-truck charging only, 3.1.3.3) — data/raw/codes/nfc_ab2023.pdf",
+"abEUAdef2026": "Alberta Electric Utilities Act, consolidation current to 6 Feb 2026 (J.B. download): s. 1(1)(m) \"electric distribution system\" means \"the plant, works, equipment, systems and services necessary to distribute electricity in a service area\", excluding a generating unit, a transmission facility, and an energy storage resource in an energy storage facility unless approved under HEEA s. 25.1. Amendments not in force at that date include 2025 c8 (repeals and substitutes s. 18) — check the current version before quoting s. 18 — data/raw/E05P1_EUA.pdf",
+"nfpa855_2026": "NFPA 855, 2026 edition (Free Access reader; J.B. screenshots 16 Oct 2026, read by Claude): applies above the Table 1.3 thresholds (lithium-ion 20 kWh per fire area or outdoor installation); outdoor ESS \"separated by a minimum 10 ft (3 m)\" from lot lines, public ways, buildings, stored combustibles and other exposures (9.6.2.7.1), reducible to 3 ft (0.9 m) with a 1-hour freestanding barrier, fire and explosion testing, or a 2-hour enclosure (9.6.2.7.1.1–5); remote outdoor installations more than 100 ft (30.5 m) from exposures (9.5.1); vegetation cleared within 10 ft (9.6.2.1.1); rooftop units over 20 kWh: from the roof edge at least the system height and not less than 5 ft (1.5 m), at least 10 ft (3 m) from the fire-service access point, units 3 ft (0.9 m) apart, 5 ft walkways, 10 ft to exposures on the roof (9.6.3.1.1.2, 9.6.3.1.1.3, 9.6.3.1.3). Not cited by any BC or Alberta code (see nfpa855tia) — reference only — data/raw/codes/nfpa855_2026_screens.pdf",
+"uptimeTiers": "Uptime Institute, Tier Classification System web page (J.B. save, 16 Oct 2026): Tier I — basic capacity, no redundant components; Tier II — \"redundant capacity components for power and cooling\" (engine generators, energy storage, chillers, cooling units, UPS modules, pumps, heat rejection equipment, fuel tanks); Tier III — \"concurrently maintainable\", redundant distribution paths; Tier IV — \"several independent and physically isolated systems\", fault tolerant. The page does not use the terms N+1 or 2N; the tool's mapping (N+1 ≈ Tier II–III spares, 2N ≈ Tier IV) is Claude's reading — data/raw/codes/uptime_tiers.pdf",
+"r2Van2026": "SERI R2 certified facility directory, search within 100 miles of Vancouver (J.B. screenshot 16 Oct 2026): five active R2v3 facilities — FCM Recycling Inc., Delta BC (11 mi); Quantum Lifecycle Partners LP, Surrey BC (12 mi); CSI Electronics Processing Centre Ltd., Surrey BC (24 mi); 1PC LLC, Bellingham WA (45 mi); e-Cycle Solutions Inc., Chilliwack BC (54 mi). Directory listing, not an endorsement — https://www.sustainableelectronics.org/find-an-r2-certified-facility/",
+"r2Edm2026": "SERI R2 certified facility directory, search within 50 miles of Edmonton (J.B. screenshot 16 Oct 2026): two active R2v3 facilities — 1579568 Alberta Ltd. o/a Hi-Tech Recyclers, 10235 184 St NW, Edmonton (6 mi); Quantum Lifecycle Partners LP, 250 Aurum Road NE, Edmonton (8 mi). Directory listing, not an endorsement — https://www.sustainableelectronics.org/find-an-r2-certified-facility/",
+"cologixVAN1_2026": "Cologix VAN1 spec sheet (05-2026, J.B. download 16 Oct 2026): 555 W Hastings (Harbour Centre), Cologix a tenant in an office building; site capacity 400 kW; data-centre space 5,000 ft² (≈465 m²) in two suites; cooling \"N+1 chilled water cooling, N+1 dry cooler … N+1 IRC\"; generator and UPS \"N/N+1\"; PUE 1.2 (claim). An operator example of N+1 cooling in Vancouver. Security details on the sheet deliberately not carried into the register or tool — data/raw/cologix_van1_2026-05.pdf",
+"cologixVAN4_2026": "Cologix VAN4 spec sheet (05-2026, J.B. download 16 Oct 2026): 175 W Cordova St, a leased four-storey concrete-frame building, single tenant; site capacity 6.5 MW; data-centre space 40,000 ft² (≈3,716 m²), multiple halls per floor; cooling \"pumped refrigerant and air-cooled chilled water\"; generators and UPS \"5-to-make-4, distributed redundant\"; 6–8 kW per cabinet; PUE 1.5 (claim). Security, fuel and fibre-entry details on the sheet deliberately not carried into the register or tool — data/raw/cologix_van4_2026-05.pdf",
+"vanStreets2026": "City of Vancouver Open Data, Public streets (J.B. download 16 Oct 2026): 17,072 street centreline segments by hundred block with street use (residential, collector, arterial and others). Lanes are not included. Used to route pipes and to place sidewalk viewpoints — data/raw/van/public-streets.csv",
+"edmRoads2026": "City of Edmonton Open Data, Road Network (J.B. download 16 Oct 2026): 53,873 centrelines with type (road, alley, railway), segment type, functional class (local, collector, arterial classes A–D) and surface; the tool keeps roads and alleys (50,755 segments; ramps, overpasses and bridges dropped) for pipe routes and street viewpoints; gravel alleys are marked unpaved — data/raw/edm/Road_Network_20261016.csv",
+"vanI2_2026": "City of Vancouver Zoning and Development By-law, I-2 District Schedule (June 2026; J.B. upload 16 Oct 2026): sub-areas A and B in the False Creek Flats (s. 1.1, Map 1); outside B: height 18.3 m, up to 30.5 m with approval, rear yard 3.1 m, side yards only beside R districts (ss. 3.1.2.1–5); sub-area B: FSR 3.0 (4.0 with approval), height 18.3 m (36.5 m with approval), front 0.6 m, sides 7.6 m, rear 3.1 m, building at most 61.0 m wide and deep, first floor 6.1 m and upper floors 4.0 m floor to floor (ss. 3.2.1–3.2.2); Bulk Data Storage conditional, not at the ground floor except entrances (s. 2.2.7) — https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-2.pdf",
+"mvWWTP2026": "Metro Vancouver, Wastewater Treatment Plants and Processes (J.B. screenshot 16 Oct 2026): five plants — Iona Island, Lions Gate, Lulu Island, Annacis Island, Northwest Langley — and the sewerage area each serves; over 1 billion litres a day. Street addresses not yet checked against Metro Vancouver pages (a chat search gave business-listing addresses; Lulu Island differs, 13400 vs 13500 Gilbert Road) — https://metrovancouver.org/services/liquid-waste",
+"epcorGoldBar2026": "EPCOR, Gold Bar Wastewater Treatment Plant walking tour (J.B. screenshot 16 Oct 2026): plant on the North Saskatchewan River at 50 St NW and Goldbar Park Road NW; position taken from the City road network (Goldbar Park Road NW, Road_Network 16 Oct 2026) as approximate — https://www.epcor.com/ca/en/ab/edmonton/operations/water-wastewater/gold-bar-wastewater-treatment-plant/gold-bar-walking-tour.html",
+"statcanGH2021": "Statistics Canada Table 32-10-0360-01, Greenhouse products, Census of Agriculture 2021 (J.B. download 16 Oct 2026; Canada only): total greenhouse area in use 29,931,588 m² on 4,796 farms; fruits and vegetables 20,407,726 m². BC, Greater Vancouver and Alberta Division No. 11 rows not yet downloaded — https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3210036001",
+"blatchfordBP2021": "Blatchford Renewable Energy 2021–2024 Business Plan, City of Edmonton (J.B. upload 16 Oct 2026): the District Energy Sharing System uses geoexchange, sewer heat exchange and solar (p. 1); all buildings must connect for heating, cooling and hot water unless net-zero carbon (p. 2); a sewer-heat energy centre in the Blatchford Market area, drawing on the two combined sewer lines under the east side, was expected in 2023; connected floor area forecast 123,500 m² by 2024, all from the first energy centre; customers to pay at most a comparable fee to elsewhere in the city. No intake of heat from third-party sources is described — file BlatchfordRenewableEnergy2021-2024BusinessPlan2.pdf; City URL not yet checked"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -13371,13 +13483,17 @@
 "gate": "land",
 "title": "Clearances and spacing",
 "ids": [
+"nfpa855_2026",
+"uptimeTiers",
+"cologixVAN1_2026",
 "evapcoLayout2026",
 "bacLayout2023",
 "nfpa37clear",
 "nfpa855tia",
+"nfcAB2023",
 "abESSstandata"
 ],
-"note": "NFPA 855 adoption in BC and Alberta not found; treated as reference, not code."
+"note": "NFPA 855 is not cited by VBBL 2025, BCBC 2024, NFC 2020 or the NFC 2023 Alberta Edition. Used as reference, not code."
 },
 {
 "gate": "land",
@@ -13392,6 +13508,7 @@
 "gate": "rules",
 "title": "Cooling-tower setbacks and permits",
 "ids": [
+"vbbl2025_63215",
 "pspcLegionella",
 "vanCTseminar2021"
 ],
@@ -13579,7 +13696,8 @@
 "title": "Selling power across the property line",
 "ids": [
 "bcUCAs1",
-"aucCoaldale2025"
+"aucCoaldale2025",
+"abEUAdef2026"
 ],
 "note": ""
 },
@@ -13643,6 +13761,8 @@
 "gate": "demand",
 "title": "Where retired equipment can go",
 "ids": [
+"r2Van2026",
+"r2Edm2026",
 "epraBC",
 "armaElectronics",
 "cfsPlus",
@@ -13662,17 +13782,13 @@
 }
 ],
 "still_missing": [
-"Redundancy practice (N+1, 2N) from Uptime / ASHRAE / TIA-942",
 "Canadian district-heating pipe cost per metre",
-"VBBL Art. 6.3.2.15 cooling-tower setbacks (by-law text)",
-"NFPA 855 adoption in BCBC 2024, NFC-AE 2023, VBBL 2025",
 "Rainwater cistern cost per m³",
 "Truck cost and emissions per km; racks per truckload",
 "Walking-distance norms for warming and cooling centres",
 "Vancouver and Edmonton street-use permits and trenching rates",
-"Street centreline datasets",
 "Edmonton / Alberta cooling-tower rules",
-"R2 and e-Stewards facilities (dynamic directories)",
+"e-Stewards facilities (optional)",
 "Alberta TIER 2026 price",
 "EPCOR Gold Bar reclaimed-water terms"
 ],
@@ -13759,7 +13875,23 @@
 "armaElectronics": "regulator",
 "cfsPlus": "government + affiliates (claims)",
 "call2recycle": "program operator",
-"itsp40006": "government"
+"itsp40006": "government",
+"vbbl2025_63215": "rule",
+"nfcAB2023": "rule",
+"abEUAdef2026": "rule (statute)",
+"nfpa855_2026": "standard (US)",
+"uptimeTiers": "industry (certifier)",
+"r2Van2026": "certification directory",
+"r2Edm2026": "certification directory",
+"cologixVAN1_2026": "operator claim",
+"cologixVAN4_2026": "operator claim",
+"vanStreets2026": "government data",
+"edmRoads2026": "government data",
+"vanI2_2026": "bylaw",
+"mvWWTP2026": "regional government",
+"epcorGoldBar2026": "utility",
+"statcanGH2021": "statistics",
+"blatchfordBP2021": "municipal utility plan"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -13831,13 +13963,29 @@
 "aesoStats2025": "agent",
 "abGreenhouse2017": "agent",
 "faoRAS2022": "agent",
-"fortisBC2026": "agent",
+"fortisBC2026": "claude",
 "atcoGas2026": "agent",
 "bcCarbonTax2025": "agent",
 "epraBC": "agent",
 "armaElectronics": "agent",
 "cfsPlus": "agent",
 "call2recycle": "agent",
-"itsp40006": "agent"
+"itsp40006": "agent",
+"vbbl2025_63215": "claude",
+"nfcAB2023": "claude",
+"abEUAdef2026": "claude",
+"nfpa855_2026": "claude",
+"uptimeTiers": "claude",
+"r2Van2026": "claude",
+"r2Edm2026": "claude",
+"cologixVAN1_2026": "claude",
+"cologixVAN4_2026": "claude",
+"vanStreets2026": "claude",
+"edmRoads2026": "claude",
+"vanI2_2026": "claude",
+"mvWWTP2026": "claude",
+"epcorGoldBar2026": "claude",
+"statcanGH2021": "claude",
+"blatchfordBP2021": "claude"
 }
 }

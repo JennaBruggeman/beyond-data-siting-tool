@@ -1,0 +1,260 @@
+/* Beyond Data — energy, water, materials and people as indexes with cards; add-ons default off; the cooling choice; visible or hidden
+   (v19, 16 Oct 2026; J.B. feedback round, 16 Oct). Cards open in the drawer. No verdicts, no scores; every figure carries its source,
+   and what is not known says so. Security: generic equipment only; sight lines report only what is seen of the cooling plant and the
+   roof and facade from homes and the lot edge — never backup power, fuel, batteries or electrical gear, and never a viewshed. */
+(function(){
+'use strict';
+const BD=window.BD; const {$,esc,fmt}=BD; const E=()=>BD.eng;
+const draft=t=>`<span class="draft">${t}</span>`;
+const A=()=>BD.S.answers;
+const L=()=>BD.opps?null:null;
+let OP=null; (async()=>{ OP=await BD.opps(); })();
+const rd=id=>BD.rdPill?BD.rdPill(id):''; const rs=id=>BD.rsPill?BD.rsPill(id):''; const src=ids=>BD.srcList?BD.srcList(ids):'';
+const addon=id=>((OP&&OP.addons)||[]).find(a=>a.id===id)||{};
+const Q=id=>((OP&&OP.quantities)||{})[id]||{};
+function geoOffset(r,d){ const n=r.length/2, out=[]; let sa=0; for(let i=0,j=r.length-2;i<r.length;j=i,i+=2) sa+=(r[j]*r[i+1]-r[i]*r[j+1]); sa=sa>0?1:-1;
+  const nm=v=>{ const l=Math.hypot(v[0],v[1])||1; return [v[0]/l,v[1]/l]; };
+  for(let i=0;i<n;i++){ const p=[r[2*((i-1+n)%n)],r[2*((i-1+n)%n)+1]], q=[r[2*i],r[2*i+1]], s=[r[2*((i+1)%n)],r[2*((i+1)%n)+1]];
+    const n1=nm([q[1]-p[1],-(q[0]-p[0])]), n2=nm([s[1]-q[1],-(s[0]-q[0])]); const m=nm([n1[0]+n2[0],n1[1]+n2[1]]); const cos=m[0]*n1[0]+m[1]*n1[1]; const k=d*-sa/Math.max(0.35,cos); out.push(q[0]+m[0]*k,q[1]+m[1]*k); }
+  return new Float64Array(out); }
+BD.geo.offset=geoOffset;
+
+/* ---------- below the tab bar: the cooling assumption, always visible, with Change › (J.B., 16 Oct) ---------- */
+const INL={air:'air',plate:'liquid to the chip',immersion:'immersion'}, OUTL={dry:'dry coolers',towers:'cooling towers',hybrid:'hybrid coolers'}, ATL={roof:'on the roof',yard:'in the yard',split:'roof and yard'};
+BD.tabExtra=cur=>{ if(cur==='prec'||cur==='cities'||cur==='time') return ''; const a=A(); const def=(a.inside||'air')==='air'&&(a.outside||'dry')==='dry';
+  return `<div class="coolbar"><span class="kind" style="font-size:10px">Cooling${def?' · assumed':''}</span> ${esc(INL[a.inside||'air'])} inside, ${esc(OUTL[a.outside||'dry'])} ${esc(ATL[a.plantAt||'roof'])}${a.vis&&a.vis!=='reveal'?` · plant ${esc({screen:'screened',enclose:'enclosed',indoors:'indoors'}[a.vis])}`:''} <a href="#" id="coolChg">Change ›</a> <a href="#" id="visChg">Seen or hidden ›</a></div>`; };
+BD.tabExtraWire=()=>{ const c=$('#coolChg'); if(c) c.onclick=e=>{ e.preventDefault(); coolingCard(); }; const v=$('#visChg'); if(v) v.onclick=e=>{ e.preventDefault(); visCard(); }; };
+const css=document.createElement('style'); css.textContent=`.coolbar{font-size:12.5px;color:var(--muted);border:1px solid var(--line-2);border-radius:6px;padding:6px 9px;margin:8px 0 2px}.coolbar a{color:var(--accent-2);margin-left:6px}
+.cmp{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px}.cmp th{text-align:left;font-weight:600;color:var(--muted);font-size:11px;padding:4px;border-bottom:1px solid var(--line-2)}.cmp td{border-top:1px solid var(--line);padding:5px 4px;vertical-align:top}.cmp td:first-child{color:var(--muted);width:84px}.cmp th.on,.cmp td.on{background:rgba(204,116,108,.07)}
+.addrow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border-top:1px solid var(--line);padding:7px 0;font-size:12.5px}.addrow .btn{background:transparent;border:1px solid var(--line-2);border-radius:6px;padding:3px 10px;color:var(--fg);cursor:pointer;font:inherit;font-size:12px;white-space:nowrap}.addrow .btn.on{border-color:var(--accent);color:var(--accent-2)}
+.mbar svg{display:block;width:100%;height:auto}`; document.head.appendChild(css);
+function refresh(){ BD.modelReset&&BD.modelReset(); const t=BD.S.tab; if(t&&BD.tabView) BD.tabView(t); else if(BD.S.view2==='fits') BD.fitsView(); }
+
+/* ---------- the cooling card: inside and outside choices side by side ---------- */
+function coolingCard(){ const a=A(), R=E().R;
+  const ins=[['air','Air','25–35 °C','none captured into liquid; heat recovery needs a heat pump from warm exhaust air (no primary capture figure)','fans and coils in the hall','typical halls, 290–630 m² per MW (five built Canadian halls, operator claims)'],
+             ['plate','Liquid to the chip','warmer (temperature not yet sourced)',`${Math.round(R.capture[0]*100)}–${Math.round(R.capture[1]*100)}% of heat into liquid (LBNL 2014, NREL)`,'pumps and coolant distribution units, about 0.6 m² per MW (maker claim)','dense halls, 250–290 m² per MW (NEXTDC S3, QScale; operator claims)'],
+             ['immersion','Immersion','not yet sourced','not yet sourced','tanks of fluid instead of racks','not yet sourced']];
+  const outs=[['dry','Dry coolers','none on site','fans: about 91–101 dBA per unit (low-noise to standard, maker data)','about 24.5 m² of unit per MW, plus clearances','no water rules; Edmonton s. 5.120 screening applies to non-industrial sites'],
+              ['towers','Cooling towers','evaporates up to 1.5 L per kWh of heat; blowdown to the sewer','fans and falling water (rating not yet sourced for towers)','about 8 m² per MW, plus 2.7 m air-inlet clearance','Vancouver: operating permit and monthly Legionella testing (VBBL Book II 2.2.11.6); discharge 2.15 m above sidewalks, 7.6 m from air intakes, 3 m from doors, windows and outdoor spaces (Book I 6.3.2.15); Edmonton: not yet read'],
+              ['hybrid','Hybrid (adiabatic)','water on hot days only (share not yet sourced)','as dry coolers','12 × 2.8 m units, 0.67–1.37 MW each','Vancouver counts adiabatic coolers as cooling towers (VBBL Book II 1.4.1.2), so the same permit and setbacks apply']];
+  const row=(lab,arr,i,cur)=>`<tr><td>${lab}</td>${arr.map(x=>`<td class="${x[0]===cur?'on':''}">${esc(x[i])}</td>`).join('')}</tr>`;
+  const ci=a.inside||'air', co=a.outside||'dry';
+  BD.drawer.open(`<div class="kind">Cooling</div><h2>How it is cooled, and what each choice changes</h2>
+  <p class="sub">${draft('The default is the simplest pairing and is marked as assumed. Choosing here changes the plant drawn in 3D and every tab.')}</p>
+  <h3>Inside: the servers</h3><table class="cmp"><tr><th></th>${ins.map(x=>`<th class="${x[0]===ci?'on':''}">${x[1]}</th>`).join('')}</tr>${row('Heat leaves at',ins,2,ci)}${row('Captured',ins,3,ci)}${row('Inside',ins,4,ci)}${row('Hall',ins,5,ci)}
+  <tr><td></td>${ins.map(x=>`<td><button class="btn" data-in="${x[0]}" style="background:transparent;border:1px solid ${x[0]===ci?'var(--accent)':'var(--line-2)'};border-radius:6px;color:var(--fg);padding:2px 8px;cursor:pointer">${x[0]===ci?'Chosen':'Choose'}</button></td>`).join('')}</tr></table>
+  <h3>Outside: where the heat goes</h3><table class="cmp"><tr><th></th>${outs.map(x=>`<th class="${x[0]===co?'on':''}">${x[1]}</th>`).join('')}</tr>${row('Water',outs,2,co)}${row('Sound',outs,3,co)}${row('Space',outs,4,co)}${row('Rules',outs,5,co)}
+  <tr><td></td>${outs.map(x=>`<td><button data-out="${x[0]}" style="background:transparent;border:1px solid ${x[0]===co?'var(--accent)':'var(--line-2)'};border-radius:6px;color:var(--fg);padding:2px 8px;cursor:pointer">${x[0]===co?'Chosen':'Choose'}</button></td>`).join('')}</tr></table>
+  <h3>Free cooling</h3><p class="sub">${esc(Q('free_cooling_hours').coef||'Hours cool enough to reject heat without compressors: see the register (free_cooling_hours).')}</p>
+  <h3>Electricity</h3><p class="sub">The tool uses PUE 1.4–1.55 for every choice (LBNL 2023; Uptime 2025 survey); how much each choice moves it is not yet sourced. Operator example: Cologix VAN1 states PUE 1.2 with N+1 dry coolers (claim).</p>
+  <h3>Sources</h3>${src(['mfrDryCooler','evapcoLayout2026','bacS3000','mfrAdiabatic','vbbl2025_63215','edmZB5120','cologixVAN1_2026'])}<div class="draftnote">Draft wording (Claude) for J.B.</div>`,
+  el=>{ el.querySelectorAll('[data-in]').forEach(b=>b.onclick=()=>{ a.inside=b.dataset.in; refresh(); coolingCard(); }); el.querySelectorAll('[data-out]').forEach(b=>b.onclick=()=>{ a.outside=b.dataset.out; refresh(); coolingCard(); }); }); }
+BD.coolingCard=coolingCard;
+
+/* ---------- seen or hidden (J.B., 16 Oct): reveal / screen / enclose / indoors for the heat-rejection plant ---------- */
+function nearestHome(f){ const T=BD.scene3d&&BD.scene3d.state&&BD.scene3d.state(); return null; }
+function visCard(){ const a=A(), f=E().siteFacts(), M=f.M, P=M&&M.plant, k=P?P.s.k:null, cur=a.vis||'reveal';
+  // barrier: Maekawa–Tatge at 500 Hz (λ 0.686 m) for a screen 0.9 m taller than the unit, unit 2 m behind it, a listener 30 m away at the unit's base height
+  const lam=0.686, hS=(k?k.H:2.9)+0.9, a1=2, b1=30; const path=(Math.hypot(a1,hS-(k?k.H:2.9)/2)+Math.hypot(b1,hS))-(a1+b1); const N=2*path/lam; const IL=Math.min(20,10*Math.log10(3+20*N));
+  const ch=[['reveal','Leave it seen','the units as they are',`none beyond distance (see People)`,'clearances only','none','Edmonton s. 5.120: non-industrial sites must conceal mechanical equipment; IM and IH have no such rule; BE screens from streets and non-industrial zones. Vancouver industrial schedules: no roof screening rule','what it is, legible from the street: precedents leave flues visible through mesh (Global Switch, London)'],
+          ['screen','Screen it',`a wall about ${hS.toFixed(1)} m high around the roof plant (unit height + 0.9 m)`,`≈${IL.toFixed(0)} dB for a listener 30 m away at 500 Hz (Maekawa–Tatge; ISO 9613-2 caps a single screen at 20 dB); less at low frequency`,'the screen sits outside the clearances; units must stay level with or above the screen top or recirculate (EVAPCO)',`a 12 ft wall 6 ft from a chiller cut capacity over 4.5% and raised power over 6% (York, maker); highway walls cost US$18–30/ft² in 2010 (FHWA) — rooftop screen costs not found`,'Vancouver s. 10.1.1: the screening may exceed the height limit at the Director\'s discretion; Edmonton BE s. 5.2 requires it toward streets and non-industrial sites','hidden in form, still a large object on the roof; Dublin and London approvals ask for it (Huntstown louvred screen wall; Global Switch roof screen)'],
+          ['enclose','Enclose it','acoustic housings around each unit','not yet sourced for coolers; generator housings give about 10–15 dB over a weather housing (Cummins, maker)','louvres need at least 50% free area and slow air (EVAPCO); more height','a rise of more than 5 °F in entering air can cut heat rejection by more than half (EVAPCO); cost not found','as screening','reads as a box, not as plant'],
+          ['indoors','Bring it indoors',`a louvred plant floor of about ${P?fmt(P.indoor||((P.coolRoofIndoor||P.coolRoof||P.s.n)*(k.L+2*k.wall[0])*(k.W+k.gap[1]))):'—'} m²`,'acoustic louvres reduce 5–7 dB at 63–125 Hz and 18–19 dB at 1–2 kHz (EMTEC, maker): weakest at the low hum neighbours notice','taken from the floor area: Vancouver counts plant floor space above grade toward floor area (register: envelope)','air must reach the coolers through louvres (same EVAPCO limits)','no screening question; floor area and height rules instead','invisible: the Stockholm precedent sits in bedrock (Bahnhof Pionen, operator claim)']];
+  const row=(lab,i)=>`<tr><td>${lab}</td>${ch.map(x=>`<td class="${x[0]===cur?'on':''}">${esc(x[i])}</td>`).join('')}</tr>`;
+  BD.drawer.open(`<div class="kind">Seen or hidden</div><h2>Should the cooling plant be seen?</h2>
+  <p class="sub">${draft('Four ways to treat the heat-rejection plant. Each trades sound, space, efficiency, cost, code and what the building tells the street. No choice is ranked.')}</p>
+  <table class="cmp"><tr><th></th>${ch.map(x=>`<th class="${x[0]===cur?'on':''}">${x[1]}</th>`).join('')}</tr>${row('What',2)}${row('Sound',3)}${row('Space',4)}${row('Efficiency, cost',5)}${row('Code',6)}${row('Legibility',7)}
+  <tr><td></td>${ch.map(x=>`<td><button data-vis="${x[0]}" style="background:transparent;border:1px solid ${x[0]===cur?'var(--accent)':'var(--line-2)'};border-radius:6px;color:var(--fg);padding:2px 8px;cursor:pointer">${x[0]===cur?'Chosen':'Choose'}</button></td>`).join('')}</tr></table>
+  ${E().mathBox([`Screen height: unit ${(k?k.H:2.9)} m + 0.9 m = <b>${hS.toFixed(1)} m</b> (screens ideally 2–3 ft taller than the units — an acoustic consultant's memo, SM&W 2021).`,`Path difference δ = √(${a1}² + ${(hS-(k?k.H:2.9)/2).toFixed(2)}²) + √(${b1}² + ${hS.toFixed(1)}²) − ${a1+b1} = ${path.toFixed(3)} m; Fresnel number N = 2δ ÷ λ (0.686 m at 500 Hz) = ${N.toFixed(2)}.`,`Insertion loss = 10 log₁₀(3 + 20N) = <b>${IL.toFixed(1)} dB</b>, capped at 20 dB for one edge.`],'Maekawa–Tatge approximation (Bugaru et al. 2021); ISO 9613-2 caps via SoundPLAN and CadnaA documentation. Geometry is an illustration, not this site.')}
+  <h3>Sources</h3>${src(['maekawaISO','yorkClearance2024','evapcoLayout2026','fhwaBarrier','cumminsF1493','edmZB5120','edmZB2120','vanZDBs10','thGlobalSwitch2025','abpHuntstown','bahnhofPionen'])}
+  <div class="draftnote">Draft wording (Claude) for J.B. Generators, fuel and electrical equipment are not part of this choice.</div>`,
+  el=>el.querySelectorAll('[data-vis]').forEach(b=>b.onclick=()=>{ a.vis=b.dataset.vis; refresh(); visCard(); })); }
+BD.visCard=visCard;
+
+/* ---------- add-ons: off by default, each with Add › (J.B., 16 Oct) ---------- */
+function addRow(id,name,extra){ const a=A(), on=!!(a.add&&a.add[id]), x=addon(id); const rsv=x.rule_state||{};
+  return `<div class="addrow"><div>${esc(name||x.name||id)} ${x.readiness?rd(x.readiness):''}<div class="src">Vancouver ${rs(rsv.vancouver||'unknown')} Edmonton ${rs(rsv.edmonton||'unknown')}${extra?' · '+extra:''}</div></div><div><button class="btn${on?' on':''}" data-add="${id}">${on?'Added · card ›':'Add ›'}</button></div></div>`; }
+function wireAdds(){ document.querySelectorAll('#side [data-add]').forEach(b=>b.onclick=()=>{ const a=A(); a.add=a.add||{}; const id=b.dataset.add; if(!a.add[id]){ a.add[id]=true; refresh(); } setTimeout(()=>openAddon(id),50); }); }
+function openAddon(id){ if(id==='pv') return solarCard(); if(id==='battery') return batteryCard(); if(id==='rainwater') return rainCard(); return genericAddon(id); }
+function addOff(id){ const a=A(); if(a.add) delete a.add[id]; refresh(); BD.drawer.close(); }
+function genericAddon(id){ const x=addon(id), q=(x.quantities||[]).map(Q).filter(v=>v.name);
+  BD.drawer.open(`<div class="kind">Add-on</div><h2>${esc(x.name||id)}</h2><p>${x.readiness?rd(x.readiness):''}</p><p class="sub">${esc(x.readiness_basis||'')}</p>
+  <h3>What it changes</h3><p class="sub">${esc((x.changes||[]).join(' · '))}</p>
+  ${q.length?`<h3>How it is sized</h3>${q.map(v=>`<p class="sub"><b style="font-weight:400">${esc(v.name)}</b>: ${esc(v.formula)}<br>${esc(v.coef)}</p>`).join('')}`:''}
+  <h3>Rules</h3><table class="cl"><tr><td>Vancouver</td><td>${rs((x.rule_state||{}).vancouver||'unknown')}<small>${esc((x.rules||{}).vancouver||'')}</small></td></tr><tr><td>Edmonton</td><td>${rs((x.rule_state||{}).edmonton||'unknown')}<small>${esc((x.rules||{}).edmonton||'')}</small></td></tr></table>
+  <h3>Sources</h3>${src([].concat(x.readiness_sources||[],x.rule_sources||[],...q.map(v=>v.sources||[])))}<div class="navb"><button class="sec" id="aoff">Remove</button></div><div class="draftnote">Draft wording (Claude) for J.B.</div>`,el=>{ $('#aoff').onclick=()=>addOff(id); }); }
+/* solar: panels drawn where the roof is free of plant and clearances; the label is the drawn area (fixes v18's 100 vs 350 m²) */
+function pvLayout(f){ const M=f.M; if(!M||!M.foot||!BD.plant) return null; const F=M.F, P=M.plant;
+  const k={name:'panels',L:6,W:2,H:0.25,wall:[1,1],gap:[0.5,1.5]}; const forbid=(P&&P.boxes||[]).filter(b=>b.kind==='roof').map(b=>b.clear);
+  const [a,b,c,d]=BD.plant.localBounds(F,M.foot); const got=BD.plant.pack(F,M.foot,forbid,a,b,c,d,k,1200,false);
+  const slots=got.map(p=>BD.geo.rectW(F,p.u-p.L/2,p.u+p.L/2,p.v-p.W/2,p.v+p.W/2)); const m2=got.length*12; return {slots,m2,kwp:[m2*0.16,m2*0.20]}; }
+async function pvData(){ if(BD._pv) return BD._pv; try{ BD._pv=await BD.getJSON('nrcan_pv.json'); }catch(e){ BD._pv=null; } return BD._pv; }
+async function solarCard(){ const e=E(), f=e.siteFacts(), R=e.R, a=A(), mw=a.mw||1, city=f.city; const lay=pvLayout(f); const pv=await pvData(); const x=addon('pv');
+  const yl=pv?[pv[city].horizontal.reduce((s,v)=>s+v,0),pv[city].latitude.reduce((s,v)=>s+v,0)]:(city==='van'?[892,1007]:[944,1244]);
+  const kwp=lay?lay.kwp:[0,0], mwh=[kwp[0]*yl[0]/1000,kwp[1]*yl[1]/1000]; const use=mw*R.pue[0]*8760*R.lf, use2=mw*R.pue[1]*8760*R.lf;
+  const rate=k=>k<100?[2.0,3.2]:k<250?[1.9,2.4]:[1.68,2.22]; const cost=[kwp[0]*1000*rate(kwp[0])[0],kwp[1]*1000*rate(kwp[1])[1]];
+  const price=city==='van'?67.9:43.68; const save=mwh.map(v=>v*price); const pb=[cost[0]/Math.max(1,save[1]),cost[1]/Math.max(1,save[0])];
+  // south wall: footprint edges whose outward normal points south (y down), × building height — the whole wall, as an upper bound
+  let south=0; const M=f.M; if(M&&M.foot&&!M.existing){ const r=M.foot; let sa=0; for(let i=0,j=r.length-2;i<r.length;j=i,i+=2) sa+=(r[j]*r[i+1]-r[i]*r[j+1]); for(let i=0;i<r.length;i+=2){ const j=(i+2)%r.length; const dx=r[j]-r[i], dy=r[j+1]-r[i+1]; const ny=(sa>0?-dx:dx); if(ny<0) south+=Math.hypot(dx,dy)*Math.abs(ny)/Math.hypot(dx,dy); } south*=M.H; }
+  const vert=pv?pv[city].vertical.reduce((s,v)=>s+v,0):(city==='van'?716:989);
+  const chart=pv?monthly(pv[city]):'';
+  BD.drawer.open(`<div class="kind">Add-on · energy</div><h2>Solar on the roof</h2><p>${x.readiness?rd(x.readiness):''} <span class="sub">${esc(x.readiness_basis||'')}</span></p>
+  <h3>Sizing</h3><dl><dt>Panels</dt><dd>${lay?`${fmt(lay.m2)} m² in ${lay.slots.length} rows of 6 × 2 m, where the roof is free of plant and its clearances (1 m from the roof edge — an assumption)`:'no roof'}</dd><dt>Rated</dt><dd>${e.rng(kwp[0],kwp[1],'kWp')} at 0.16–0.20 kWp per m² of panel (NREL)</dd>
+  <dt>A year</dt><dd>${e.rng(mwh[0],mwh[1],'MWh')} (${fmt(yl[0])}–${fmt(yl[1])} kWh per kWp, flat to latitude tilt, NRCan)</dd><dt>Share of its own use</dt><dd>${e.rng(mwh[0]/use2*100,mwh[1]/use*100,'%')} — small at data-centre densities</dd></dl>
+  <h3>Month by month</h3>${chart}
+  <h3>The south wall instead</h3><p class="sub">${south?`About ${fmt(south)} m² of south-facing wall in total (the whole wall, as an upper bound); at ${vert} kWh per kWp vertical (NRCan), each 100 m² of panel at 0.16–0.20 kWp/m² gives about ${fmt(16*vert/1000)}–${fmt(20*vert/1000)} MWh a year. ${city==='edm'?'In Edmonton a south wall yields more per kWp than a flat roof (989 vs 944), because of the low winter sun.':'In Vancouver vertical gives about 71% of the latitude-tilt yield.'} No Canadian BIPV cost found.`:'Not computed for an existing building.'}</p>
+  <h3>Cost and payback</h3><dl><dt>Installed</dt><dd>$${fmt(cost[0])}–${fmt(cost[1])} at $${rate(kwp[0]).join('–')}/W (NRCan / IEA PVPS Canada 2024, by size)</dd><dt>Saved a year</dt><dd>$${fmt(save[0])}–${fmt(save[1])} at ${city==='van'?'BC Hydro\'s 6.79 ¢/kWh energy charge':'Alberta\'s 2025 pool average, $43.68/MWh'} (demand and wires charges not included)</dd>
+  <dt>Simple payback</dt><dd>${draft(`about ${fmt(pb[0])}–${fmt(pb[1])} years — rough; it ignores degradation (0.5–0.7%/yr), O&M (about US$21/kW a year) and any change in prices`)}</dd></dl>
+  <h3>Rules</h3><table class="cl"><tr><td>Vancouver</td><td>${rs((x.rule_state||{}).vancouver||'unknown')}<small>${esc((x.rules||{}).vancouver||'')}</small></td></tr><tr><td>Edmonton</td><td>${rs((x.rule_state||{}).edmonton||'unknown')}<small>${esc((x.rules||{}).edmonton||'')}</small></td></tr></table>
+  <h3>Who gains, who gives up</h3><dl><dt>The operator</dt><dd>a small cut in its electricity bill; gives up roof space it may want for plant</dd><dt>The grid</dt><dd>a little less daytime demand in summer, almost none in winter</dd><dt>Neighbours</dt><dd>nothing measurable found</dd></dl>
+  <h3>Sources</h3>${src(['nrcanPVmunic','nrel_rooftop2016','nrel_bench2023','nrcan_pvcost2024','vanRoofBulletin2022','edmZB510','bchTariff2026'].concat(x.rule_sources||[]))}<div class="navb"><button class="sec" id="aoff">Remove</button></div><div class="draftnote">Draft wording (Claude) for J.B.</div>`,el=>{ $('#aoff').onclick=()=>addOff('pv'); });
+}
+function monthly(m){ const W=380,H=150,ml=30,mb=22,mt=8, mx=Math.max(...m.latitude,...m.vertical), bw=(W-ml-6)/12; const Y=v=>H-mb-v/mx*(H-mt-mb);
+  let g=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Monthly solar yield, kWh per kWp">`;
+  [0,0.5,1].forEach(k=>{ g+=`<line x1="${ml}" x2="${W-6}" y1="${Y(mx*k)}" y2="${Y(mx*k)}" stroke="var(--line)"/><text x="${ml-4}" y="${Y(mx*k)+3}" fill="var(--faint)" font-size="9" text-anchor="end">${Math.round(mx*k)}</text>`; });
+  'JFMAMJJASOND'.split('').forEach((c,i)=>{ const x=ml+i*bw; g+=`<rect x="${x+2}" y="${Y(m.latitude[i])}" width="${bw/2-2}" height="${Y(0)-Y(m.latitude[i])}" fill="#a7b4d6" opacity=".7"/><rect x="${x+bw/2}" y="${Y(m.vertical[i])}" width="${bw/2-2}" height="${Y(0)-Y(m.vertical[i])}" fill="#9d9a94" opacity=".6"/><text x="${x+bw/2}" y="${H-8}" fill="var(--faint)" font-size="9" text-anchor="middle">${c}</text>`; });
+  return `<div class="mbar">${g}</svg></div><p class="src"><span style="color:#a7b4d6">■</span> latitude tilt <span style="color:#9d9a94">■</span> south wall, kWh per kWp a month (NRCan municipal values)</p>`; }
+/* battery for the grid: containers in the yard, 3 m from lot lines and buildings (NFPA 855, 2026, 9.6.2.7.1 — a reference standard here) */
+function battLayout(f){ const M=f.M; if(!M||!M.ring||!BD.plant) return null; const F=M.F, P=M.plant, a=A(); const mwh=(a.battMW||1)*(a.battH||4), n=Math.ceil(mwh/5.0);
+  const k={name:'battery containers',L:6.06,W:2.44,H:2.9,wall:[3,3],gap:[0.9,0.9]}; const lotR=M.inset?BD.geo.clip(M.ring,M.inset):M.ring;
+  const forbid=[].concat(M.foot?[geoOffset(M.foot,3)]:[],(P&&P.boxes||[]).filter(b=>b.kind==='yard').map(b=>b.clear),M.loading?[M.loading]:[]);
+  const [x0,x1,y0,y1]=BD.plant.localBounds(F,lotR); const got=BD.plant.pack(F,lotR,forbid,x0,x1,y0,y1,k,n,false);
+  return {n,mwh,boxes:got.map(p=>BD.plant.boxOf(F,p,k,0,'yard')),placed:got.length}; }
+function batteryCard(){ const e=E(), f=e.siteFacts(), a=A(); const lay=battLayout(f); const x=addon('battery'); const mw=a.battMW||1, h=a.battH||4, kwh=mw*h*1000;
+  const cost=[kwh*410.70*1.3978,kwh*448.34*1.3978];
+  BD.drawer.open(`<div class="kind">Add-on · energy</div><h2>A battery for the grid</h2><p>${x.readiness?rd(x.readiness):''} <span class="sub">${esc(x.readiness_basis||'')}</span></p>
+  <h3>Sizing</h3><div class="numin"><label>MW <input type="number" id="bmw" min="0.5" max="20" step="0.5" value="${mw}"></label><label>Hours <input type="number" id="bh" min="1" max="8" step="1" value="${h}"></label></div>
+  <dl><dt>Energy</dt><dd>${fmt(mw*h)} MWh → about ${lay?lay.n:'—'} containers of about 5 MWh (20 ft, maker data)</dd><dt>Placed</dt><dd>${lay?`${lay.placed} of ${lay.n} in the yard, 3 m from lot lines and buildings and 0.9 m apart${lay.placed<lay.n?' — '+draft('the rest do not fit; a smaller battery, or a roof (NFPA 855 sets edge and access distances there)'):''}`:'—'}</dd>
+  <dt>Area (check)</dt><dd>${fmt(kwh/49)}–${fmt(kwh/19)} m² at 19–49 kWh/m² across built sites (Reber 2023)</dd><dt>Cost</dt><dd>$${fmt(cost[0])}–${fmt(cost[1])}: PNNL's 2021 US$ figures for LFP at 10 MW and 1 MW, 4 h (410.70–448.34/kWh), converted at the 2025 rate — mixing years, a rough figure</dd>
+  <dt>What it earns</dt><dd>BC Hydro pays $50/kW a season for winter peak relief (Demand Response for Business; events Nov–Mar, weekdays, at most 4 hours)</dd></dl>
+  <h3>Rules</h3><table class="cl"><tr><td>Fire and spacing</td><td>no BC or Alberta code cites NFPA 855 (VBBL 2025, BCBC 2024, NFC 2023 Alberta Edition checked): spacing falls to the fire authority, the electrical code and the product listing. NFPA 855 (2026) is used here as the reference: 3 m to lot lines, public ways and buildings, reducible to 0.9 m with a barrier or testing.</td></tr>
+  <tr><td>Connecting</td><td>BC Hydro: storage with net injection up to 100 kW per phase under the DG requirements (Rev 3, 2026). Edmonton: storage is a "Generating Facility" in EPCOR's terms; the customer pays all interconnection costs.</td></tr></table>
+  <h3>Sources</h3>${src(['nfpa855_2026','nfcAB2023','mfrBESS','pnnl2022fig43','reber2023','bchDR2026','bchDG100','epcorDTtc2025'].concat(x.rule_sources||[]))}<div class="navb"><button class="sec" id="aoff">Remove</button></div><div class="draftnote">Draft wording (Claude) for J.B.</div>`,
+  el=>{ $('#aoff').onclick=()=>addOff('battery'); const up=()=>{ a.battMW=+$('#bmw').value||1; a.battH=+$('#bh').value||4; refresh(); batteryCard(); }; $('#bmw').onchange=up; $('#bh').onchange=up; }); }
+
+/* ---------- energy as an index ---------- */
+function energyIndex(){ const e=E(), f=e.siteFacts(), R=e.R, a=A(), mw=a.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=fac.map(v=>v*8760*R.lf); BD.S.view2='tab';
+  const cost=f.city==='van'?[MWh[0]*67.9+fac[0]*1000*13.83*12,MWh[1]*67.9+fac[1]*1000*13.83*12]:null; const co2=MWh.map(v=>v*R.grid[f.city]/1000);
+  let h=e.tabBar('energy')+`<h2>Power in, power offered</h2><p class="draft">The data centre is the grid's customer first. What it could offer back is mostly flexibility, and only whoever runs the computing can give it.</p>
+  <div class="hfig"><div><b>${e.rng(fac[0],fac[1],'MW')}</b><span>average power at the meter</span></div><div><b>${e.rng(MWh[0]/1000,MWh[1]/1000,'GWh')}</b><span>a year</span></div><div><b>${cost?'$'+(cost[0]/1e6).toFixed(1)+'–'+(cost[1]/1e6).toFixed(1)+'M':'pool + wires'}</b><span>${cost?'a year on BC Hydro large general service':'Alberta pool averaged $43.68/MWh in 2025'}</span></div><div><b>${e.rng(co2[0],co2[1],'t')}</b><span>CO₂e a year at ${R.grid[f.city]} g/kWh</span></div></div>
+  <h3>Connections</h3><div class="addrow"><div>Getting connected to the grid<div class="src">${f.downtown?'downtown: no new feeder positions before 2032':'needs the utility\'s answer to a load application'}</div></div><div><button class="btn" id="cGrid">Explore ›</button></div></div>
+  <div class="addrow"><div>Standby generators<div class="src">${a.gens==='none'?'none chosen':'testing, emissions, sound'}</div></div><div><button class="btn" id="cGen">Explore ›</button></div></div>
+  <div class="addrow"><div>Flexibility for the grid<div class="src">UPS batteries, curtailment, peak windows</div></div><div><button class="btn" id="cFlex">Explore ›</button></div></div>
+  <div class="addrow"><div>Power to a neighbouring lot (EV charging and others)<div class="src">the property line is a rule, not a distance</div></div><div><button class="btn" id="cNext">Explore ›</button></div></div>
+  <h3>Add-ons <span class="sub" style="text-transform:none;letter-spacing:0;font-weight:300">off until you add them</span></h3>${addRow('pv','Solar on the roof')}${addRow('pv_facade','Solar on the south wall')}${addRow('battery','A battery for the grid')}${addRow('ups')}${addRow('genset')}
+  <p class="sub" style="margin-top:8px"><a href="#" id="emath">How the power figures are worked out ›</a></p><div class="draftnote">Draft wording (Claude) for J.B. Sources are in each card.</div>`;
+  $('#side').innerHTML=h; e.wireTabs(); wireAdds(); BD.draw();
+  $('#cGrid').onclick=()=>gridCard(f); $('#cGen').onclick=()=>genCard(f); $('#cFlex').onclick=()=>flexCard(f); $('#cNext').onclick=()=>nextLotCard(f); $('#emath').onclick=ev=>{ ev.preventDefault(); powerMath(f); };
+  const d={site:f,gridNote:f.downtown?'Downtown: no new feeder positions before the West End substation (expected July 2032).':''};
+  if(a.add&&a.add.pv){ const l=pvLayout(f); if(l) d.pv={slots:l.slots,kwp:l.kwp[1],m2:l.m2}; }
+  if(a.add&&a.add.battery){ const b=battLayout(f); if(b) d.batt=b; }
+  e.show3d('energy',d); }
+function gridCard(f){ const a=A(), mw=a.mw||1, R=E().R, kw=mw*R.pue[1]*1000;
+  BD.drawer.open(`<div class="kind">Energy · connection</div><h2>Getting connected</h2>
+  ${f.city==='van'?`<dl><dt>Who pays</dt><dd>BC Hydro charges an Extension Fee: the cost of the extension, plus any share of system improvement, plus the service connection, less BC Hydro's contribution (Tariff T&C s. 8.3.4)</dd>
+  <dt>BC Hydro's share</dt><dd>up to $521 per kW of estimated billing demand for general service (s. 11.5) — about $${fmt(kw*521)} at ${fmt(kw)} kW</dd><dt>System improvement</dt><dd>free under $1 million; at 1 MVA or more the customer pays the part above $1 million per MVA and above $10 million (s. 8.3.2)</dd>
+  <dt>Downtown</dt><dd>${f.downtown?draft('no new feeder positions from fiscal 2027 until the West End substation, expected July 2032 (BC Hydro CPCN)'):'not in the downtown feeder freeze'}</dd><dt>Large loads</dt><dd>BC Hydro's 2026 call for AI and data centres drew 15 applications, about 800 MW; results after the government transition</dd></dl>`
+  :`<dl><dt>Distribution</dt><dd>EPCOR's terms: a Distribution Interconnection Agreement; the customer pays all interconnection costs, including studies</dd><dt>Transmission</dt><dd>where transmission is needed, AESO's connection process runs stages 0–6; indicative weeks for stages 1–4: 14, 39, 55, 30 (AESO guide 2021)</dd><dt>Large loads</dt><dd>Alberta's interim limit of 1,200 MW for new large loads is fully allocated (AESO 2025)</dd></dl>`}
+  <h3>Sources</h3>${src(f.city==='van'?['bchExtension2026','bchEIC2026','bchTariff2026']:['epcorDTtc2025','aesoConnect'])}<div class="draftnote">Draft wording (Claude) for J.B. The grid route is not drawn.</div>`); }
+function genCard(f){ const M=f.M, P=M&&M.plant, s=P&&P.s, R=E().R, a=A(), fac=(a.mw||1)*R.pue[1]*1000, gen=[fac*4*0.706/1000,fac*4*14.6/1000];
+  BD.drawer.open(`<div class="kind">Energy · standby</div><h2>Standby generators</h2>${s&&s.g?`<dl><dt>Units</dt><dd>${s.gN} sets of about ${s.g.mw} MW (${s.gNeed} needed + spares), generic</dd><dt>Placed</dt><dd>${P.placed.gr} on the roof, ${P.placed.gy} in the yard${P.miss.filter(m=>/generator/.test(m)).length?' — '+draft(P.miss.filter(m=>/generator/.test(m)).join('; ')):''}</dd><dt>Testing</dt><dd>about 4 full-load hours a year: up to ${fmt(gen[0])} t CO₂ and ${fmt(gen[1])} kg NOₓ (uncontrolled-engine upper bound, AP-42)</dd><dt>Sound</dt><dd>Vancouver exempts testing ≤ 1 h a month in daytime at ≤ 80 dBA; enclosures of about 10–15 dB over a weather housing (Cummins, maker)</dd></dl>`:'<p class="sub">No generators chosen.</p>'}
+  <h3>Sources</h3>${src(['mfrGenset','nfpa37clear','cumminsF1493'])}<div class="draftnote">Generic equipment only; fuel storage is not drawn or located.</div>`); }
+function flexCard(f){ const a=A(), mw=a.mw||1;
+  BD.drawer.open(`<div class="kind">Energy · flexibility</div><h2>Flexibility for the grid</h2><dl><dt>Who decides</dt><dd>${draft('only whoever runs the computing; in a shared building each tenant. Training runs can pause at checkpoints; live services cannot.')}</dd>
+  <dt>UPS batteries</dt><dd>${E().rng(mw/60*0.5,mw*5/60*0.5,'MWh')} for minutes — fast support, not a 4-hour peak</dd><dt>When it matters</dt><dd>${f.city==='van'?'BC Hydro peaks on winter weekday evenings (records at 5–6 pm); Demand Response for Business events run Nov–Mar, weekdays 6 am–10 pm, at most 4 hours':'Alberta peaks in winter (12,785 MW on 11 Dec 2025); AESO does not report the peak hour'}</dd></dl>
+  <h3>Sources</h3>${src(f.city==='van'?['bchDR2026']:['aesoStats2025'])}`); }
+function nextLotCard(f){ BD.drawer.open(`<div class="kind">Energy · across the property line</div><h2>Power to a neighbouring lot</h2><p class="sub">${draft('Running a cable next door is cheap; selling what flows through it is a rule.')}</p>
+  <dl><dt>BC</dt><dd>supplying electricity "to or for the public or a corporation for compensation" makes a public utility, unless the supply is only to the supplier, its employees or tenants (UCA s. 1) or exempted; EV charging is exempt from UCA Part 3 (MO M104, 2019)</dd>
+  <dt>Alberta</dt><dd>self-supply is allowed on one property; "the lands must, at a minimum, be contiguous" and lines crossing a highway "are an attempt to self-distribute" (AUC 2025); EV charging's status is "unclear" (AUC 2021)</dd></dl>
+  <h3>Sources</h3>${src(['bcUCAs1','m104','aucCoaldale2025','abEUAdef2026','aucDSI2021'])}<div class="draftnote">Draft wording (Claude) for J.B. Not legal advice.</div>`); }
+function powerMath(f){ const e=E(), R=e.R, mw=A().mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=fac.map(v=>v*8760*R.lf);
+  BD.drawer.open(`<div class="kind">Energy · how it is worked out</div><h2>The power figures</h2>${e.mathBox([`Power at the meter: ${mw} MW × PUE ${R.pue[0]}–${R.pue[1]} = <b>${e.rng(fac[0],fac[1],'MW')}</b>.`,`A year: × 8,760 h × ${R.lf} = <b>${e.n0(MWh[0])}–${e.n0(MWh[1])} MWh</b>.`,f.city==='van'?`Cost: energy × $0.0679/kWh + demand × $13.83/kW a month × 12.`:'Alberta: pool price plus EPCOR charges; no single-rate estimate.',`Carbon: × ${R.grid[f.city]} g/kWh (NIR 2026, consumption, 2024).`])}${e.s3('elec')}${e.src('pue')}${e.src('lf')}${e.src('grid')}`); }
+
+/* ---------- water as an index ---------- */
+function rainCard(){ const e=E(), f=e.siteFacts(), M=f.M; const roof=e.roofArea(f), mm=f.city==='van'?1159.5:422.5, wet=f.city==='van'?124:80, rain=roof*mm/1000*0.8, tank=roof*wet/1000*0.8; const x=addon('rainwater');
+  BD.drawer.open(`<div class="kind">Add-on · water</div><h2>Rainwater for cooling</h2><p>${x.readiness?rd(x.readiness):''} <span class="sub">${esc(x.readiness_basis||'')}</span></p>
+  <dl><dt>Rain on the roof</dt><dd>about ${fmt(rain)} m³ a year from ${fmt(roof)} m² at ${mm} mm (ECCC Normals 1991–2020) × 0.8 runoff (assumed)</dd><dt>Tank</dt><dd>${draft(`about ${fmt(tank)} m³, enough to hold one wet month (${wet} mm${f.city==='edm'?', summer':''}) — an assumption; the CSA B805 sizing method has not been read`)}; drawn below grade under the building</dd>
+  <dt>Who uses it</dt><dd>${A().outside==='dry'?draft('dry coolers use no water: rain would go to toilets and irrigation only'):'cooling-tower make-up'}</dd></dl>
+  <h3>Rules</h3><table class="cl"><tr><td>Vancouver</td><td>${rs((x.rule_state||{}).vancouver||'unknown')}<small>${esc((x.rules||{}).vancouver||'')}</small></td></tr><tr><td>Edmonton</td><td>${rs((x.rule_state||{}).edmonton||'unknown')}<small>${esc((x.rules||{}).edmonton||'')}</small></td></tr></table>
+  <h3>Sources</h3>${src(['vbbl2025_272','vbbl2025_2713scope','abAltSol2021'].concat(x.readiness_sources||[]))}<div class="navb"><button class="sec" id="aoff">Remove</button></div>`,el=>{ $('#aoff').onclick=()=>addOff('rainwater'); }); }
+function waterRule(id,name,lines,ids){ const x=addon(id); return {id,name:name||x.name,x,lines,ids}; }
+function waterIndex(){ const e=E(), f=e.siteFacts(), R=e.R, a=A(), mw=a.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=fac.map(v=>v*8760*R.lf); BD.S.view2='tab';
+  const towers=a.outside==='towers', evap=MWh[1]*1.5, mk=[evap*1.2,evap*2], bd=[evap/5,evap]; const roof=e.roofArea(f), mm=f.city==='van'?1159.5:422.5, rain=roof*mm/1000*0.8;
+  const items=[
+   waterRule('reclaimed','Reclaimed water from a treatment plant',f.city==='van'?'Metro Vancouver considers supply to industry case by case; no reclaimed-water network in Vancouver':'EPCOR Gold Bar supplies reclaimed water to industry through an existing pipe (Suncor named); terms not published',['epcorGoldBar','irwdCulver2018','cec2023pump']),
+   waterRule('blowdown','Blowdown to the sewer',towers?`${fmt(bd[0])}–${fmt(bd[1])} m³ a year`:'none with dry coolers',['vanSewerCap2025','mvWDP2021','epcorDrainage2023','gsaBlowdown2023']),
+   waterRule('greywater','Neighbours\' greywater',f.city==='van'?'not allowed: greywater only within the same dwelling (VBBL 2025)':'an alternative solution, led by the province, for multi-property projects',['vbbl2025_272','abAltSol2021']),
+   waterRule('blackwater','Blackwater','not permitted in buildings',['vbbl2025_272']),
+  ];
+  let h=e.tabBar('water')+`<h2>Water in, water out</h2><p class="draft">A data centre can use almost no water on site, or a great deal; it depends on how it rejects heat.</p>
+  <div class="hfig"><div><b>${towers?fmt(evap)+' m³':'none'}</b><span>evaporated a year, at most${towers?'':' (dry coolers)'}</span></div><div><b>${towers?fmt(mk[0])+'–'+fmt(mk[1])+' m³':'—'}</b><span>make-up water a year (2–6 cycles)</span></div><div><b>${fmt(rain)} m³</b><span>rain on the roof a year</span></div><div><b>${fmt(MWh[0]*1.25)}–${fmt(MWh[1]*16.8)} m³</b><span>water behind its electricity a year</span></div></div>
+  <h3>Connections</h3>${items.map(it=>`<div class="addrow"><div>${esc(it.name)} ${it.x.readiness?rd(it.x.readiness):''}<div class="src">${esc(it.lines)} · Vancouver ${rs((it.x.rule_state||{}).vancouver||'unknown')} Edmonton ${rs((it.x.rule_state||{}).edmonton||'unknown')}</div></div><div><button class="btn" data-wc="${it.id}">Explore ›</button></div></div>`).join('')}
+  <h3>Add-ons</h3>${addRow('rainwater','Rainwater for cooling')}
+  <div class="draftnote">Draft wording (Claude) for J.B. Water mains and sewer connections are not drawn.</div>`;
+  $('#side').innerHTML=h; e.wireTabs(); wireAdds(); BD.draw();
+  document.querySelectorAll('#side [data-wc]').forEach(b=>b.onclick=()=>{ const it=items.find(i=>i.id===b.dataset.wc); BD.drawer.open(`<div class="kind">Water · connection</div><h2>${esc(it.name)}</h2><p class="sub">${esc(it.lines)}</p><h3>Rules</h3><table class="cl"><tr><td>Vancouver</td><td>${rs((it.x.rule_state||{}).vancouver||'unknown')}<small>${esc((it.x.rules||{}).vancouver||'')}</small></td></tr><tr><td>Edmonton</td><td>${rs((it.x.rule_state||{}).edmonton||'unknown')}<small>${esc((it.x.rules||{}).edmonton||'')}</small></td></tr></table><h3>How proven</h3><p class="sub">${it.x.readiness?rd(it.x.readiness)+' ':''}${esc(it.x.readiness_basis||'')}</p><h3>Sources</h3>${src(it.ids.concat(it.x.rule_sources||[],it.x.readiness_sources||[]))}`); });
+  const d={site:f,rain,towers:towers||a.outside==='hybrid',evap:towers?fmt(evap)+' m³/yr':''};
+  if(a.add&&a.add.rainwater&&f.M&&f.M.foot){ const tank=roof*(f.city==='van'?124:80)/1000*0.8, c=BD.centroid(f.M.foot), s=Math.sqrt(tank/4); d.cistern=[{ring:new Float64Array([c[0]-s/2,c[1]-s/2,c[0]+s/2,c[1]-s/2,c[0]+s/2,c[1]+s/2,c[0]-s/2,c[1]+s/2]),h:4,base:-4.5}]; }
+  e.show3d('water',d); }
+
+/* ---------- materials as an index, with trucks, a 50-year slider and where equipment can go ---------- */
+function materialsIndex(){ const e=E(), f=e.siteFacts(), R=e.R, a=A(), mw=a.mw||1, racks=mw*1000/R.kWPerRack, servers=mw*1000/0.6; BD.S.view2='tab';
+  const ew=[servers*21.25/6/1000,servers*26.3/6/1000], yr=a.yr||25, refresh=Math.floor(yr/5.5), eit=[servers*4.177*0.10,servers*4.177*0.15];
+  let h=e.tabBar('materials')+`<h2>What it is made of, and how often</h2><p class="draft">The building can last decades; the servers inside are replaced about every five to six years. That rhythm is where its materials go.</p>
+  <div class="hfig"><div><b>${fmt(racks)}</b><span>racks at 8 kW each (Uptime 2024 average, survey)</span></div><div><b>${fmt(servers)}</b><span>servers at about 600 W (LBNL 2024)</span></div><div><b>${e.rng(ew[0],ew[1],'t')}</b><span>of servers retired a year, on a six-year refresh</span></div><div><b>${fmt(mw*20)}–${fmt(mw*40)} t</b><span>copper in the facility (industry figure)</span></div></div>
+  <h3>Over ${yr} years</h3><div class="numin"><label>Years <input type="range" id="yr" min="5" max="50" step="1" value="${yr}" style="width:200px"> <b id="yrv">${yr}</b></label></div>
+  <dl><dt>Server refreshes</dt><dd>${refresh} (every 5–6 years)</dd><dt>Servers retired</dt><dd>${e.rng(ew[0]*yr,ew[1]*yr,'t')}</dd><dt>Making those servers</dt><dd>${e.rng(eit[0]*refresh/1000,eit[1]*refresh/1000,'kt CO₂e')} (one maker's assessment, 10–15% manufacturing share; large uncertainty)</dd><dt>The shell</dt><dd>${yr<=40?'still standing (up to about 40 years)':'past the shell\'s usual life of about 40 years'}; cooling and heat pumps replaced ${Math.floor(yr/20)} time${Math.floor(yr/20)===1?'':'s'} (15–25 years)</dd></dl>
+  <h3>Where retired equipment can go</h3>
+  <div class="addrow"><div>Reuse: ${f.city==='van'?'BC Technology for Learning Society (Burnaby)':'Alberta Computers for Schools (Edmonton), which takes servers'}<div class="src">Computers for Schools Plus (ISED)</div></div><div><button class="btn" data-mc="reuse">Explore ›</button></div></div>
+  <div class="addrow"><div>Certified recyclers (R2v3)<div class="src">${f.city==='van'?'Delta, Surrey ×2, Chilliwack, Bellingham WA':'Edmonton ×2'}</div></div><div><button class="btn" data-mc="r2">Explore ›</button></div></div>
+  <div class="addrow"><div>The provincial program<div class="src">${f.city==='van'?'Return-It Electronics (EPRA BC): servers covered; 3-pallet pickup':'Alberta Recycling (ARMA): rack servers named'}</div></div><div><button class="btn" data-mc="epr">Explore ›</button></div></div>
+  <div class="addrow"><div>UPS batteries<div class="src">Call2Recycle: dry cells up to 5 kg only</div></div><div><button class="btn" data-mc="batt">Explore ›</button></div></div>
+  <div class="addrow"><div>Wiping drives before they leave<div class="src">ITSP.40.006 (federal), NIST SP 800-88</div></div><div><button class="btn" data-mc="wipe">Explore ›</button></div></div>
+  <h3>Trucks</h3><p class="sub">${draft('Servers arrive and leave through the loading spaces, drawn in 3D with one truck per space. How many racks a truck carries is not yet sourced, so trips per refresh are not counted.')}</p>
+  <div class="draftnote">Draft wording (Claude) for J.B.</div>`;
+  $('#side').innerHTML=h; e.wireTabs(); BD.draw();
+  const y=$('#yr'); y.oninput=()=>{ $('#yrv').textContent=y.value; }; y.onchange=()=>{ a.yr=+y.value; materialsIndex(); };
+  const C={reuse:['Reuse',['cfsPlus']],r2:['Certified recyclers',[f.city==='van'?'r2Van2026':'r2Edm2026']],epr:['The provincial program',[f.city==='van'?'epraBC':'armaElectronics']],batt:['UPS batteries',['call2recycle']],wipe:['Wiping drives',['itsp40006']]};
+  document.querySelectorAll('#side [data-mc]').forEach(b=>b.onclick=()=>{ const [t,ids]=C[b.dataset.mc]; const S=(OP&&OP.sources)||{}; BD.drawer.open(`<div class="kind">Materials · where it goes</div><h2>${esc(t)}</h2>${ids.map(i=>`<p class="sub">${esc((S[i]||'').replace(/\s*—\s*https?:\/\/\S+$/,''))}</p>`).join('')}<h3>Sources</h3>${src(ids)}<div class="draftnote">Directory and program listings, not endorsements.</div>`); });
+  const M=f.M, trucks=[]; if(M&&M.loadSpaces){ M.loadSpaces.slice(0,4).forEach(r=>{ const c=BD.centroid(r); const F=M.F; const [u,v]=F.toL(c[0],c[1]); trucks.push({ring:BD.geo.rectW(F,u-4.5,u+4.5,v-1.25,v+1.25),h:3.6}); }); }
+  e.show3d('materials',{site:f,trucks}); }
+
+/* ---------- people: stakeholders, sound, sight lines, the edge ---------- */
+function sightLines(f,G){ const M=f.M; if(!M||!M.plant||!BD.scene3d) return {lines:[],homes:[0,0],edge:[0,0]}; const st=BD.scene3d.state(); if(!st||!st.site) return {lines:[],homes:[0,0],edge:[0,0]};
+  const targets=M.plant.boxes.filter(b=>!/generator/.test(b.name)).slice(0,8).map(b=>{ const c=BD.centroid(b.ring); return [c[0],c[1],b.base+b.h]; });
+  if(!targets.length) return {lines:[],homes:[0,0],edge:[0,0]};
+  const S=BD.S, blds=[]; for(const id in S.tiles){ if(!id.startsWith(S.city+':')) continue; for(const b of S.tiles[id].bld){ if(b.f===3||(f.blds||[]).includes(b)) continue; const d=Math.hypot(b.c[0]-f.c[0],b.c[1]-f.c[1]); if(d<350) blds.push({b,d}); } }
+  const blocked=(p,q,self)=>{ const n=Math.ceil(Math.hypot(q[0]-p[0],q[1]-p[1])/3); for(let i=1;i<n;i++){ const t=i/n, x=p[0]+(q[0]-p[0])*t, y=p[1]+(q[1]-p[1])*t, z=p[2]+(q[2]-p[2])*t;
+      if(M.foot&&BD.pip(x,y,M.foot)&&z<M.H-0.05&&t<0.995) return true; for(const o of blds){ if(o.b===self) continue; const bb=o.b.bb||(o.b.bb=(()=>{ let a=1e9,b2=1e9,c=-1e9,d=-1e9; for(let k=0;k<o.b.r.length;k+=2){ a=Math.min(a,o.b.r[k]); b2=Math.min(b2,o.b.r[k+1]); c=Math.max(c,o.b.r[k]); d=Math.max(d,o.b.r[k+1]); } return [a,b2,c,d]; })()); if(x<bb[0]||x>bb[2]||y<bb[1]||y>bb[3]) continue; if(z<o.b.h&&BD.pip(x,y,o.b.r)) return true; } } return false; };
+  const homes=blds.filter(o=>o.b._cls==='quiet'||(o.b._cls==null&&lowRes(f,o.b))).sort((a,b)=>a.d-b.d).slice(0,60); const lines=[]; let seenH=0;
+  for(const o of homes){ const r=o.b.r; let best=null; for(let k=0;k<r.length;k+=2){ const d=Math.hypot(r[k]-f.c[0],r[k+1]-f.c[1]); if(!best||d<best[2]) best=[r[k],r[k+1],d]; } const eye=[best[0],best[1],Math.max(1.6,Math.min(o.b.h-1.5,12))];
+    let seen=false; for(const t of targets){ if(!blocked(eye,t,o.b)){ seen=true; lines.push({from:eye,to:t,seen:true}); break; } } if(!seen) lines.push({from:eye,to:targets[0],seen:false}); if(seen) seenH++; }
+  // the street: points every 15 m on the City's street centrelines within 200 m (Vancouver), a proxy for the sidewalk; elsewhere points 4 m outside the lot
+  const pts=[]; if(G){ for(const g of G.segs){ for(let i=2;i+3<g.length;i+=2){ const x0=g[i],y0=g[i+1],x1=g[i+2],y1=g[i+3]; const L=Math.hypot(x1-x0,y1-y0); for(let s=0;s<L;s+=15){ const t=s/L, x=x0+(x1-x0)*t, y=y0+(y1-y0)*t; if(Math.hypot(x-f.c[0],y-f.c[1])<=200) pts.push([x,y,1.6]); } } } }
+  else { const out=geoOffset(M.ring,4); for(let k=0;k<out.length;k+=2){ const j=(k+2)%out.length; const L=Math.hypot(out[j]-out[k],out[j+1]-out[k+1]); for(let s=0;s<L;s+=15){ const t=s/L; pts.push([out[k]+(out[j]-out[k])*t,out[k+1]+(out[j+1]-out[k+1])*t,1.6]); } } }
+  let seenE=0; const edge=pts.filter(p=>!blds.some(o=>BD.pip(p[0],p[1],o.b.r))); for(const p of edge){ let seen=false; for(const t of targets){ if(!blocked(p,t,null)){ seen=true; lines.push({from:p,to:t,seen:true}); break; } } if(seen) seenE++; }
+  return {lines,homes:[seenH,homes.length],edge:[seenE,edge.length]}; }
+function lowRes(f,b){ return false; }
+function peopleIndex(){ BD.afterSocial=peopleExtra; BD.tabOverride.social=null; BD.tabView('social'); BD.tabOverride.social=peopleIndex; }
+// runs after the engine's People tab renders (and again when the census arrives): the stakeholder index, cards and sight lines
+function peopleExtra(){ const e=E(); if(BD.S.tab!=='social'){ BD.afterSocial=null; return; }
+  const f=e.siteFacts(); const side=$('#side'); const d=BD.recv[f.city]||{pts:[]};
+  const near=d.pts.map(p=>Object.assign({},p,{dist:Math.hypot(p.x-f.c[0],p.y-f.c[1])})).filter(p=>p.dist<=400).sort((a,b)=>a.dist-b.dist);
+  const TYPE={housing:'Non-market housing',school:'School',care:'Care home',hospital:'Hospital',rec:'Recreation centre',pool:'Pool',arena:'Indoor arena'};
+  const box=document.createElement('div'); box.innerHTML=`<h3>Who is near, and what they would notice</h3>${near.length?near.slice(0,20).map(p=>`<div class="addrow"><div>${esc(p.n||TYPE[p.t])}<div class="src">${esc(TYPE[p.t])}${p.u?' · '+p.u+' homes':''} · ${fmt(p.dist)} m</div></div><div><button class="btn" data-pp="${p.id}">Explore ›</button></div></div>`).join(''):'<p class="sub">No recorded schools, care homes, hospitals, recreation or non-market housing within 400 m.</p>'}
+   <h3>What is seen from homes and the street</h3><p class="sub" id="sightTxt">Working out sight lines…</p><p class="src">Only the cooling plant and what is on the roof and the facade are tested; backup power, fuel, batteries and electrical equipment are never tested or drawn. Homes: neighbours in quiet (residential) zones within 350 m, from the corner nearest the site at a top-floor window. Street: points every 15 m on the street centrelines within 200 m at 1.6 m eye height (Vancouver; lanes not included); in Edmonton, points 4 m outside the lot.</p>`;
+  const old=side.querySelector('#ppl-extra'); if(old) old.remove(); box.id='ppl-extra'; const dn=side.querySelector('.draftnote:last-of-type'); if(dn) dn.before(box); else side.appendChild(box);
+  box.querySelectorAll('[data-pp]').forEach(b=>b.onclick=()=>{ const p=near.find(x=>x.id===+b.dataset.pp); personCard(f,p,TYPE); });
+  setTimeout(async()=>{ const G=await (BD.streets?BD.streets(f.city):null); const s=sightLines(f,G); s.street=!!G; const t=$('#sightTxt'); if(t) t.innerHTML=`Plant seen from <b style="font-weight:400">${s.homes[0]} of ${s.homes[1]}</b> nearby homes and from <b style="font-weight:400">${s.edge[0]} of ${s.edge[1]}</b> points ${s.street?'on the streets within 200 m (City centrelines, a proxy for the sidewalk)':'just outside the lot'}${A().vis&&A().vis!=='reveal'?` (with the plant ${esc({screen:'screened',enclose:'enclosed',indoors:'indoors'}[A().vis])}; the test does not yet model screens)`:''}. Drawn in 3D: solid lines are seen, dashed are blocked.`;
+    const pb=(f.M&&f.M.plant&&f.M.plant.boxes)||[]; const psrc=pb.length?[pb.reduce((t,b)=>t+BD.centroid(b.ring)[0],0)/pb.length,pb.reduce((t,b)=>t+BD.centroid(b.ring)[1],0)/pb.length]:null;
+    const n=Math.max(1,Math.ceil((A().mw||1)*e.R.pue[1])), lw=[91+10*Math.log10(n),101+10*Math.log10(n)];
+    const people=near.slice(0,20).map(p=>({x:p.x,y:p.y,n:p.n||TYPE[p.t],kind:TYPE[p.t],col:0xb9a3cf}));
+    const seenL=s.lines.filter(l=>l.seen), blk=s.lines.filter(l=>!l.seen); const draw=seenL.slice(0,40).concat(blk.slice(0,15));
+    BD.scene3d&&BD.scene3d.show('social',{site:f,noise:BD._noise||{lw,limit:50,src:psrc},sight:A().vis==='indoors'?[]:draw,people}); },400); }
+function personCard(f,p,TYPE){ const n=Math.max(1,Math.ceil((A().mw||1)*E().R.pue[1])), lw=[91+10*Math.log10(n),101+10*Math.log10(n)], r=Math.max(5,p.dist); const lp=lw.map(L=>L-20*Math.log10(r)-8);
+  BD.drawer.open(`<div class="kind">People · neighbour</div><h2>${esc(p.n||TYPE[p.t])}</h2><p class="sub">${esc(TYPE[p.t])}${p.u?' · '+p.u+' homes':''} · ${fmt(p.dist)} m from the site</p>
+  <dl><dt>Would hear</dt><dd>about ${Math.round(Math.max(0,lp[0]))}–${Math.round(lp[1])} dBA from the cooling plant, before walls, barriers or enclosures (screening estimate)</dd><dt>Would see</dt><dd>see the sight-line count on the People tab</dd><dt>Could gain</dt><dd>${p.t==='housing'||p.t==='school'||p.t==='care'||p.t==='rec'||p.t==='pool'?'heat, if it can take low-temperature heat (Heat tab)':'—'}${p.t==='rec'||p.t==='school'?'; a warming or cooling room, if the rules allow it (opportunities)':''}</dd><dt>Who they are</dt><dd>${draft('a record in a national or City list; how the people there would feel is for engagement, not the tool')}</dd></dl>
+  <h3>Sources</h3>${E().s3('snd')}${E().src('recv')}`); }
+BD.tabOverride=Object.assign(BD.tabOverride||{},{energy:energyIndex,water:waterIndex,materials:materialsIndex,social:peopleIndex});
+})();
