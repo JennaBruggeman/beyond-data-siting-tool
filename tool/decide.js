@@ -139,9 +139,9 @@ function show(i){ const A=BD.S.answers; const L=live(); at=Math.max(0,Math.min(L
    <div class="dch" role="radiogroup">${opts.map(x=>{ const s=feas(d.id,x.v).s; return `<button role="radio" data-v="${x.v}" aria-checked="${x.v===o.v}" class="${s==='no'?'nope':''}" title="${esc(FS[s][0])}">${s==='no'?'✕ ':''}${esc(x.t)}</button>`; }).join('')}</div>
    ${no?`<div class="dnope"><b>${F[2]} ${F[0]}</b><span>${esc(fs.why)}</span></div>`:(SVGONLY.has(d.id)?`<div class="dvis">${d.anim(o.v,m)}</div>`:'<div class="c3d"></div>')}
    ${!no?`<div class="dfeas" style="--fc:${F[1]}"><b>${F[2]} ${F[0]}</b>${fs.why?` <span>${esc(fs.why)}</span>`:''}</div>`:''}${!no&&d.extra?d.extra(A):''}
-   <div class="dud"><div><div class="dh up">Upsides</div><ul>${o.up.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div><div><div class="dh dn">Downsides</div><ul>${o.down.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div>
+   <div class="dud${no?' off':''}"><div><div class="dh up">Upsides</div><ul>${o.up.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div><div><div class="dh dn">Downsides</div><ul>${o.down.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div>
    ${CH[d.id]?'<div class="dchart" id="dchart"></div><p class="dcap" id="dcap"></p>':''}
-   <p class="dres">${no?'Not picked: the site stays as set up. ':''}${res}${m.warn&&m.warn.length?`<br><span class="dwarn">${esc(m.warn[0])}</span>`:''}</p>
+   <p class="dres">${no?'Nothing changes: the site stays as set up, ':''}${res}${m.warn&&m.warn.length?`<br><span class="dwarn">${esc(m.warn[0])}</span>`:''}</p>
    <div class="dnav"><button class="sec" id="dB">← ${at?'Back':'The site'}</button><button class="pri" id="dN">${at<L.length-1?'Next →':'What fits here →'}</button></div></div>`;
   const el=$('#side');
   el.querySelectorAll('.dch button').forEach(b=>b.onclick=()=>{ const v=b.dataset.v; if(feas(d.id,v).s==='no'){ pv[d.id]=v; show(at); return; } pv[d.id]=null; d.set(A,v); changed(); });

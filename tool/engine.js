@@ -390,11 +390,15 @@ function goStep(k){ const S=STEPS.find(s=>s[0]===k); document.body.classList.rem
   if(S&&S[2]) tabView(S[2][0][0]); }
 /* every other view: turn each h3 and what follows it into a closed section showing its answer (J.B., 16 Oct: the toolbar and sections on every view) */
 function nameOf(row){ const d=row.querySelector('div')||row; for(const c of d.childNodes){ if(c.nodeType===3&&c.textContent.trim()) return c.textContent.trim(); } const t=(d.innerText||'').split('\n')[0]; return t.replace(/\s*(Explore|Add|Open)\s*›.*$/,'').trim(); }
-function answerOf(nodes){ const tx=el=>{ const c=el.cloneNode(true); c.querySelectorAll&&c.querySelectorAll('td,th,small,li,dd,dt,.cls').forEach(x=>x.append(' ')); c.querySelectorAll('button,.btn').forEach(x=>x.remove()); return (c.innerText||c.textContent||'').replace(/\s*(Explore|Add|Remove|Open)\s*›/g,'').replace(/physics · land · rules · demand · time · money/g,'').replace(/\s+/g,' ').trim(); };
+function answerOf(nodes){ const tx=el=>{ const c=el.cloneNode(true); c.querySelectorAll&&c.querySelectorAll('td,th,small,li,dd,dt,.cls,.pill,.evb,.rd').forEach(x=>x.append(' ')); c.querySelectorAll('button,.btn').forEach(x=>x.remove()); return (c.innerText||c.textContent||'').replace(/\s*(Explore|Add|Remove|Open)\s*›/g,'').replace(/physics · land · rules · demand · time · money/g,'').replace(/\s+/g,' ').trim(); };
   const rows=[]; nodes.forEach(n=>{ if(n.nodeType!==1) return; if(n.matches('.addrow')) rows.push(n); n.querySelectorAll&&n.querySelectorAll('.addrow').forEach(r=>rows.push(r)); });
   if(rows.length>1){ const names=rows.map(nameOf).filter(Boolean); const t=names.join('; '); return [`${names.length}: `+(t.length>120?t.slice(0,t.lastIndexOf(';',120)>0?t.lastIndexOf(';',120):120)+'…':t),false]; }
   const cut=t=>{ t=t.replace(/\s*Draft wording \(Claude\)[^.]*\.?/g,'').trim(); if(t.length<=130) return t; const i=t.slice(0,130).lastIndexOf(' '); return t.slice(0,i>60?i:130)+'…'; };
   let red=false;
+  // a gate or rule table reads as counts or as "row: verdict" pairs, not as its cells run together
+  for(const n of nodes){ if(n.nodeType!==1||!n.matches('table.cl')) continue; const trs=[...n.querySelectorAll('tr')];
+    if(trs.length&&trs.every(r=>r.querySelectorAll('.cls').length===1)){ const ct={}; trs.forEach(r=>{ const k=r.querySelector('.cls').textContent.trim(); ct[k]=(ct[k]||0)+1; }); return [cut(Object.entries(ct).map(([k,v])=>`${v} ${k}`).join(', ')),false]; }
+    const c=n.cloneNode(true); c.querySelectorAll('small').forEach(x=>x.remove()); c.querySelectorAll('.cls,.pill').forEach(x=>x.append(',')); return [cut([...c.querySelectorAll('tr')].map(r=>{ const td=r.querySelectorAll('td'); return td.length>1?td[0].textContent.trim()+': '+tx(td[1]).replace(/,\s*$/,''):tx(r); }).join('; ')),false]; }
   for(const n of nodes){ if(n.nodeType!==1) continue;
     const fig=n.matches('.hfig')?n:n.querySelector&&n.querySelector('.hfig'); if(fig){ const d=fig.querySelector('div'); if(d){ const b=d.querySelector('b'), sp=d.querySelector('span'); return [cut((b?tx(b):'')+' '+(sp?tx(sp):'')),false]; } }
     const dt=n.matches('dl')?n:n.querySelector&&n.querySelector('dl'); if(dt){ const a=dt.querySelector('dt'), b=dt.querySelector('dd'); if(a&&b){ red=!!b.querySelector('.draft'); return [cut(tx(a)+': '+tx(b)),red]; } }
@@ -423,7 +427,7 @@ function finePrint(c){ if(!c) return; const L=[];
 function finePrintAll(root){ if(!root) return; root.querySelectorAll('details.sec > .b').forEach(finePrint); finePrint(root); trimLong(root); }
 /* long paragraphs (J.B., 16 Oct: "nobody wants to read them"): show the first sentence; the rest behind "more" */
 function trimLong(root){ root.querySelectorAll('p,li,dd').forEach(el=>{
-  if(el.dataset.tl||el.closest('details.fp,summary,.math,dl.lim,.lead')||el.querySelector('button,input,select,p,li')) return; el.dataset.tl=1;
+  if(el.dataset.tl||el.closest('details.fp,summary,.math,dl.lim,.lead,.dk')||el.querySelector('button,input,select,p,li')) return; el.dataset.tl=1;
   if(el.textContent.trim().split(/\s+/).length<=24) return;
   // candidate cut points in top-level text: sentence end first, then a dash, colon or bracket, then a middle dot or comma
   let host=el; while(host.firstElementChild&&host.firstElementChild.tagName==='SPAN'&&host.firstElementChild.textContent.length>0.8*host.textContent.length) host=host.firstElementChild;

@@ -107,7 +107,7 @@ async function oppPrep(){ BD._O=await BD.opps(); await loadEV(); await loadWP();
 function oppScreen(){ const c=ctx(); return ORDER.map(o=>{ const {G}=gates(o.n,c); return Object.assign({},o,{s:summary(G),G}); }); }
 const SUMW={yes:'Possible here: every gate the tool can test passes.',chg:'Possible with a change: no gate fails outright.',nk:'Not ruled out: no gate fails, but some are not yet known.',no:'Not here.'};
 function oppStep(n,i,total){ const c=ctx(), e=c.e, {L,G}=gates(n,c), it=ORDER.find(o=>o.n===n), s=summary(G); BD.S.view2='tab';
-  $('#side').innerHTML=e.tabBar('opp')+`<div class="kind">Opportunity ${i} of ${total} · ${esc(it.fam)}</div><h2>${esc(n)}</h2>
+  $('#side').innerHTML=e.tabBar('opp')+`<div class="kind">${esc(it.fam)} opportunity</div><h2>${esc(n)}</h2>
   <p>${gp(s)} ${L.readiness?BD.rdPill(L.readiness):''}</p><p class="lead">${s==='yes'?'<span class="k">Possible here</span>: every gate the tool can test passes.':s==='chg'?'<span class="k">Possible with a change</span>: no gate fails outright.':'<span class="k">Not ruled out</span>: no gate fails, but some are not yet known.'}</p>
   ${oppBody(n,c)}`;
   e.wireTabs(); BD.draw(); opp3d(n,c); }

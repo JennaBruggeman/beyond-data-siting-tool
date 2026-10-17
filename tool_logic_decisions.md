@@ -258,3 +258,13 @@ No building is drawn for a new data centre. The 3D shows the lot, the zoning's b
 - Once a parcel is picked, every step opens as one centred card over the map; the side panel collapses. "New parcel" clears the site and returns to the map.
 - Left: the 3D, turning slowly, seen from above, nearby buildings see-through; under it, the step's chart, large. Right: the words, choices and Next.
 - Each set-up option is checked against the parcel (possible, with a condition, not yet known, not possible and why); an impossible option shows its reason and no animation.
+
+## Design pass on the walk-through card (17 Oct 2026)
+- One header: step names always shown in the tabs; the group's place shown as a thin segmented bar, not a second text line. Kickers are sentence case, not tracked capitals.
+- Readable type in the card: body 14.5 px, lead 15.5 px, headings 22 px; small labels no smaller than 12.5 px.
+- Section tiles became rows (label left, answer right, two lines, ›). Gate tables summarise as counts ("2 possible here, 3 not yet known"); rule tables as "rung: verdict".
+- The cooling assumption moved from above the title to a quiet line above the buttons. Sources moved into "All the detail".
+- Buttons stay pinned at the bottom of the card. Long step names shorten to "Back" / "Next".
+- 3D key hidden behind a "Key" button; label collision boxes larger, so fewer labels overlap.
+- A not-possible option keeps its upsides and downsides, faded and marked "(elsewhere)".
+- A heading that repeats the address gives way to the step's name. Report is a centred 900 px column.

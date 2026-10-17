@@ -50,12 +50,12 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;',
 /* ---------- labels: leaders are vertical (orthogonal); overlapping labels give way by priority ---------- */
 const lab=[];
 function label(text,pos,col,o){ o=o||{}; const d=document.createElement('div'); d.textContent=text; d.style.cssText=`position:absolute;white-space:nowrap;transform:translate(-50%,-100%);color:${col||'#9d9a94'};text-shadow:0 0 3px #17181a,0 0 3px #17181a,0 0 2px #17181a;padding:0 2px`;
-  labels.appendChild(d); const L={d,pos,prio:o.prio||1,w:text.length*6.1+8}; lab.push(L);
+  labels.appendChild(d); const L={d,pos,prio:o.prio||1,w:text.length*6.5+14}; lab.push(L);
   if(o.from){ R.ov.add(line([o.from,pos.clone().add(new T.Vector3(0,-0.3,0))],o.leaderCol||C.faint,false,0.7)); } return L; }
 function placeLabels(){ const b=wrap.getBoundingClientRect(); const placed=[];
   const order=lab.slice().sort((a,c)=>c.prio-a.prio);
   for(const l of order){ const v=l.pos.clone().project(R.cam); if(!(v.z<1&&Math.abs(v.x)<1.05&&Math.abs(v.y)<1.05)){ l.d.style.display='none'; continue; }
-    const x=(v.x+1)/2*b.width, y=(1-v.y)/2*b.height; const box=[x-l.w/2,y-16,x+l.w/2,y];
+    const x=(v.x+1)/2*b.width, y=(1-v.y)/2*b.height; const box=[x-l.w/2,y-20,x+l.w/2,y+3];
     if(placed.some(p=>!(box[2]<p[0]||box[0]>p[2]||box[3]<p[1]||box[1]>p[3]))){ l.d.style.display='none'; continue; }
     placed.push(box); l.d.style.display=''; l.d.style.left=x+'px'; l.d.style.top=y+'px'; } }
 

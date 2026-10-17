@@ -174,6 +174,7 @@ body.wide main{grid-template-columns:minmax(320px,680px) 1fr}
 .flowfoot .pri[disabled]{background:var(--line-2);color:var(--muted);cursor:default}
 #wList{margin:4px 0 10px}
 .flowbar{margin:0 0 10px} .flowbar .fsub{font-size:12px;color:var(--muted);margin:2px 0 0}
+.path button .pl{display:none}
 .path button[disabled]{color:var(--faint);cursor:default;opacity:.6}
 .flowfoot{position:sticky;bottom:-40px;z-index:4;display:flex;justify-content:space-between;align-items:center;gap:8px;margin:24px -18px -40px;padding:12px 18px 16px;background:var(--panel);border-top:1px solid var(--line)}
 .flowfoot button{max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -270,6 +271,42 @@ body.wcon #wc{display:flex;position:fixed;top:56px;left:0;right:0;bottom:0;z-ind
 #wc #side .c3d{display:none}
 #wc #v3map,#wc #v3note{display:none}
 body.wcon #drawer{position:fixed;top:72px;bottom:24px;left:auto;right:24px;width:min(440px,40vw);z-index:46}
+/* design pass, 17 Oct: one header, readable type, quiet labels, rows instead of tiles, actions pinned */
+#wc #side{font-size:14.5px;line-height:1.55}
+#wc #side p,#wc #side li{max-width:62ch}
+#wc #side h2{font-size:22px;font-weight:300;line-height:1.3;margin:6px 0 8px;text-wrap:balance}
+#wc #side .lead{font-size:15.5px;line-height:1.5;color:var(--fg)}
+#wc .kind{font-size:12.5px;letter-spacing:0;text-transform:none;font-weight:400;color:var(--muted)}
+#wc .flowbar .path{gap:16px} #wc .flowbar .path button{font-size:13px;padding:6px 0 10px}
+#wc .flowbar .path button .pl{display:inline} #wc .flowbar .fst{display:none}
+#wc .fseg{display:flex;gap:3px;margin:10px 0 2px} #wc .fseg i{flex:1;height:3px;border-radius:2px;background:var(--line-2)} #wc .fseg i.done{background:#7d5a56} #wc .fseg i.on{background:var(--accent)}
+#wc #side:has(.dk) .fsub{display:none}
+.flowbar .fseg{display:none} #wc .flowbar .fseg{display:flex}
+#wc #side #back.x{display:none}
+#wc .tiles{grid-template-columns:1fr;gap:0;margin:10px 0 6px;border-top:1px solid var(--line)}
+#wc .tile{flex-direction:row;align-items:baseline;gap:14px;background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:10px 2px}
+#wc .tile:hover{background:rgba(255,255,255,.025)} #wc .tile:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2px}
+#wc .tile .tt{flex:0 0 34%;font-size:13px;color:var(--muted);line-height:1.4}
+#wc .tile .ta{flex:1;font-size:14px;line-height:1.45;-webkit-line-clamp:2}
+#wc .tile .ta *{display:inline!important;margin:0!important;padding:0!important;border:0!important;font-size:inherit!important}
+#wc .tile::after{content:'›';color:var(--faint);font-size:16px;align-self:center}
+#wc details.alld>summary{font-size:13.5px;padding:8px 0}
+#wc .coolbar{border:0;padding:12px 0 0;margin:14px 0 0;border-top:1px solid var(--line);font-size:13px}
+#wc .coolbar .kind{font-size:13px!important}
+#wc .coolbar a{text-decoration:none;color:var(--accent-2);margin-left:10px} #wc .coolbar a:hover{text-decoration:underline}
+#wc #side{padding-bottom:0} #wc #side .flowfoot{position:sticky;bottom:0;margin:24px -24px 0;background:var(--panel);z-index:2}
+#wc #side .dk .dnav{position:sticky;bottom:0;background:var(--panel);margin:16px -24px 0;padding:12px 24px 16px;border-top:1px solid var(--line);z-index:2}
+#wc .dch button{font-size:13.5px;padding:7px 13px}
+#wc .dud ul{font-size:14px;line-height:1.5} #wc .dh{font-size:12.5px;letter-spacing:0;text-transform:none;font-weight:600}
+#wc .dud.off{opacity:.5} #wc .dud.off .dh::after{content:' (elsewhere)';font-weight:400;color:var(--muted)}
+#wc .dres{font-size:14px} #wc .dnope span,#wc .dfeas{font-size:14px;line-height:1.5}
+#wc .dcap,#wc .wcchart .dcap{font-size:12.5px;color:var(--muted)}
+#wc #side .pill,#wc #side .cls{font-size:12px;padding:2px 8px}
+#wc.nov #side{max-width:900px;margin:0 auto;width:100%}
+#wc .report h2.rg{font-size:18px!important;letter-spacing:0;text-transform:none;font-weight:400;color:var(--fg);margin:30px 0 6px}
+body.wcon:not(.wckey) #v3key{display:none!important}
+#wc .keyb{position:absolute;left:12px;bottom:12px;z-index:4;background:rgba(30,32,35,.9);border:1px solid var(--line-2);color:var(--muted);border-radius:6px;padding:4px 10px;font:inherit;font-size:12.5px;cursor:pointer}
+body.wcon.wckey #wc .keyb{bottom:auto;top:12px} #wc .keyb:hover{color:var(--fg)}
 @media (max-width:900px){#wc .wcgrid{grid-template-columns:1fr;grid-template-rows:minmax(260px,45%) 1fr}#wc .wcvis{border-right:0;border-bottom:1px solid var(--line)}}
 </style>
 

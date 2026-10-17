@@ -32,7 +32,7 @@ function tip(node,t){ const tt=el('title',{},node); tt.textContent=t; return nod
 /* horizontal bars, each a value or a range; one unit per chart (one axis) */
 function bars(host,rows,unit,label){ const W=560, rh=34, top=26, H=top+rows.length*rh+30, L=170, Rr=W-90; const s=svg(host,W,H,label);
   const mx=Math.max(1e-9,...rows.map(r=>r.hi!=null?r.hi:r.v)); const X=v=>L+(Rr-L)*v/mx;
-  [0,0.5,1].forEach(t=>{ const x=X(mx*t); el('line',{x1:x,x2:x,y1:top-4,y2:H-24,stroke:C.line,'stroke-width':1},s); txt(s,x,H-8,f1(mx*t),{c:C.muted,s:10.5,a:'middle'}); });
+  [0,0.5,1].forEach(t=>{ const x=X(mx*t); el('line',{x1:x,x2:x,y1:top-4,y2:H-24,stroke:C.line,'stroke-width':1},s); txt(s,x,H-8,t===0?'0':f1(mx*t),{c:C.muted,s:11,a:'middle'}); });
   txt(s,W-6,14,unit,{c:C.muted,s:10.5,a:'end'});
   rows.forEach((r,i)=>{ const y=top+i*rh; const lo=r.lo!=null?r.lo:0, hi=r.hi!=null?r.hi:r.v; txt(s,L-10,y+16,r.label,{a:'end',s:12});
     const g=el('g',{},s); const w=Math.max(r.v===0&&r.hi==null?0:2,X(hi)-X(0));
