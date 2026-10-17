@@ -411,7 +411,10 @@ function showZone(x,y){ const m=S.meta[S.city]; let hit=null; for(const o of m.o
 async function select(sel){
   const T=S.tiles[sel.city+':'+sel.tile]||await loadTile(sel.city,sel.tile); if(!T) return;
   sel.a=T.A[sel.id];
-  if(sel.city==='van'){ if(!sel.ring){ const p=T.par.find(p=>p.id===sel.id); if(p) sel.ring=p.r; }
+  if(sel.city==='van'){ const mine=T.par.filter(p=>p.id===sel.id).map(p=>({r:p.r,a:area(p.r)})).filter(p=>p.a>10);
+    if(!sel.ring||area(sel.ring)<=10){ const big=mine.sort((x,y)=>y.a-x.a)[0]; if(big) sel.ring=big.r; }
+    // lot area: the tax report's figure, unless it is missing or under half the measured outline (e.g. 1 m² recorded for 750 Hornby St; 249 Vancouver parcels); then the outline that was picked, measured
+    { const meas=sel.ring?area(sel.ring):0, rec=+(sel.a&&sel.a[8])||0; const use=meas>10&&(!rec||rec<0.5*meas); sel.lotArea=use?Math.round(meas):rec; sel.lotSrc=use?'measured':'record'; sel.lotRec=rec; sel.lotParts=mine.length; }
     sel.blds=sel.ring?T.bld.filter(b=>pip(b.c[0],b.c[1],sel.ring)):[];
   } else { if(!sel.pt){ const p=T.pts.find(p=>p.id===sel.id); if(p) sel.pt=[p.x,p.y]; }
     if(!sel.ring){ const l=T.par.find(l=>l.ids&&l.ids.includes(sel.id)); if(l){ sel.ring=l.r; sel.lotIds=l.ids; } }
@@ -428,12 +431,12 @@ function card(){
   const s=S.sel, a=s.a||[];
   let h='', st, z;
   if(s.city==='van'){
-    const [addr,zone,zcls,legal,strata,yb,lv,iv,ar]=a; z=zone; st=vanStatus(zone);
+    const [addr,zone,zcls,legal,strata,yb,lv,iv,ar0]=a; const ar=s.lotArea||ar0; z=zone; st=vanStatus(zone);
     const all=s.blds||[], gone=all.filter(b=>b.f===3), bl=all.filter(b=>b.f!==3); const hmax=bl.length?Math.max(...bl.map(b=>b.h)):null; const foot=bl.reduce((t,b)=>t+b.a,0);
     const lid=bl.some(b=>b.f===1||b.f===2||b.f===4), nw=bl.filter(b=>b.f===2).length;
     h=`<button class="x" id="clr" title="Clear the selected site (Esc)">× Clear</button><div class="kind">Site · Vancouver</div><h2>${esc(addr||'No civic address')}</h2><div class="sub">Tax coordinate ${esc(s.id)}</div>
     <h3>Data centre here?</h3><p><span class="pill ${st.k}">${esc(st.t)}</span> <span class="sub">zone ${esc(zone)}${zcls?' · '+esc(zcls):''}</span></p><p class="draft">${st.d}</p>${st.env?`<p class="sub">${esc(st.env)}</p>`:''}${srcs(st.src)}
-    <h3>The lot</h3><dl><dt>Lot area</dt><dd>${fmt(ar)} m²</dd><dt>Ownership</dt><dd>${strata>0?esc(strata)+' strata units — many owners':esc(legal==='LAND'?'one titled lot':legal||'—')}</dd>
+    <h3>The lot</h3><dl><dt>Lot area</dt><dd>${fmt(ar)} m²${s.lotSrc==='measured'?` <span class="sub">(measured from the outline picked${s.lotParts>1?`, one of ${s.lotParts} parts of this parcel`:''}; the tax record says ${fmt(s.lotRec||0)} m²)</span>`:''}</dd><dt>Ownership</dt><dd>${strata>0?esc(strata)+' strata units — many owners':esc(legal==='LAND'?'one titled lot':legal||'—')}</dd>
     <dt>Land value</dt><dd>${money(lv)}</dd><dt>Building value</dt><dd>${money(iv)}</dd><dt>Year built</dt><dd>${yb||'—'}</dd>
     <dt>Floodplain</dt><dd>${floodText(s)}</dd></dl>
     <h3>What stands on it</h3>${bl.length?`<dl><dt>Buildings</dt><dd>${bl.length} footprint${bl.length>1?'s':''}, ${fmt(foot)} m² in plan</dd><dt>Tallest</dt><dd>${hmax!=null?hmax.toFixed(1)+' m above ground':'—'}</dd>${nw?`<dt>Since 2009</dt><dd>${nw} new building${nw>1?'s':''} found in 2022</dd>`:''}</dl><div class="src">${lid?'Heights measured from the City\'s LiDAR 2022 (90th percentile of roof points above ground); outlines from the 2009 footprints, new buildings outlined from the LiDAR.':'Heights as of 2009; LiDAR 2022 not yet processed for this area.'}</div>`:`<p class="sub">${lid||S.meta.van.lidar?'No building found here in the City\'s LiDAR 2022.':'No building in the 2009 footprints (empty then, or built since).'}</p>`}${gone.length?`<p class="sub">${gone.length} building${gone.length>1?'s':''} from 2009 not found in 2022 (demolished or rebuilt) — shown dashed.</p>`:''}
