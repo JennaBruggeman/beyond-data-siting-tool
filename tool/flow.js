@@ -30,7 +30,7 @@ function welcome(){ let w=$('#welcome'); if(w) w.remove(); w=document.createElem
   <div id="wList" hidden>${EXAMPLES.map((x,i)=>`<button class="ex" data-i="${i}"><b>${esc(x.lab)}</b><span>${esc(x.sub)}</span></button>`).join('')}</div>
   <p class="sub"><a href="#" id="wAbout">What this tool can't tell you</a></p></div>`;
   document.body.appendChild(w);
-  for(const ev of ['pointerdown','pointerup','wheel']) w.addEventListener(ev,e=>e.stopPropagation());
+  for(const ev of ['pointerdown','wheel']) w.addEventListener(ev,e=>e.stopPropagation());
   $('#wEx').onclick=()=>{ $('#wList').hidden=false; $('#wEx').setAttribute('aria-expanded','true'); const b=$('#wList .ex'); if(b) b.focus(); };
   $('#wOwn').onclick=()=>{ w.remove(); go(0); };
   $('#wAbout').onclick=e=>{ e.preventDefault(); w.remove(); BD.views.about&&BD.views.about(); };

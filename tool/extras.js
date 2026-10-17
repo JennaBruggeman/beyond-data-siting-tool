@@ -271,6 +271,6 @@ BD.views.feedback=feedbackView;
   const leg=document.createElement('div'); leg.className='scrleg'; leg.hidden=true;
   leg.innerHTML=`<b>Size that fits, middle case</b><div class="sub">MW of servers on a new building, where a data centre is allowed case by case. A quantity, not a ranking. Shown when zoomed in.</div>${BINS.map((b,i)=>`<div><i style="background:rgba(204,116,108,${ALPHA[i]})"></i>${b[0]}–${b[1]>40?40:b[1]} MW</div>`).join('')}<div class="src">Middle case: floor-space ratio × lot, hall share 0.6, 460 m² of hall per MW; yards not applied. Click a lot for its full range.</div>`;
   btn.onclick=()=>{ BD.screen=!BD.screen; btn.setAttribute('aria-pressed',BD.screen); leg.hidden=!BD.screen; BD.draw(); };
-  for(const el of [btn,leg]) for(const ev of ['pointerdown','pointerup','wheel']) el.addEventListener(ev,e=>e.stopPropagation());
+  for(const el of [btn,leg]) for(const ev of ['pointerdown','wheel']) el.addEventListener(ev,e=>e.stopPropagation());
   const map=document.getElementById('map'); if(map){ map.appendChild(btn); map.appendChild(leg); }
 })();

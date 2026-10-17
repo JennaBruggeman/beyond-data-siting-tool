@@ -179,7 +179,7 @@ const css=document.createElement('style'); css.textContent=`
 .live{border:1px solid var(--line-2);border-radius:6px;padding:8px 10px;margin:10px 0;font-size:12.5px}.live b{font-weight:400;font-size:16px}
 `; document.head.appendChild(css);
 const dr=document.createElement('div'); dr.id='drawer'; dr.hidden=true; dr.setAttribute('role','dialog'); dr.setAttribute('aria-label','Card');
-document.getElementById('map').appendChild(dr); for(const ev of ['pointerdown','pointerup','wheel']) dr.addEventListener(ev,e=>e.stopPropagation());
+document.getElementById('map').appendChild(dr); for(const ev of ['pointerdown','wheel']) dr.addEventListener(ev,e=>e.stopPropagation());
 BD.drawer={ open(html,wire){ dr.innerHTML=`<button class="dx" id="dxc" title="Close (Esc)">×</button>`+html; dr.hidden=false; dr.scrollTop=0; $('#dxc').onclick=()=>BD.drawer.close(); if(wire) wire(dr); },
   close(){ dr.hidden=true; dr.innerHTML=''; if(BD.onDrawerClose){ const f=BD.onDrawerClose; BD.onDrawerClose=null; f(); } }, el:dr, isOpen:()=>!dr.hidden };
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!dr.hidden){ e.stopPropagation(); BD.drawer.close(); } },true);

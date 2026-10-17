@@ -22,11 +22,11 @@ function setup(){
   const bar=document.createElement('div'); bar.style.cssText='position:absolute;left:12px;top:12px;right:12px;display:flex;gap:6px;z-index:3;flex-wrap:wrap;pointer-events:none';
   bar.innerHTML='<button id="v3map" style="pointer-events:auto;background:rgba(30,32,35,.92);border:1px solid #3c4148;border-radius:6px;padding:4px 10px;color:#e9e6e1;cursor:pointer;font-size:12px">← Map</button><span id="v3note" style="background:rgba(30,32,35,.92);border:1px solid #30343a;border-radius:6px;padding:4px 10px;font-size:12px;color:#9d9a94;max-width:640px"></span>';
   const key=document.createElement('div'); key.id='v3key'; key.style.cssText='position:absolute;left:12px;bottom:12px;background:rgba(30,32,35,.92);border:1px solid #30343a;border-radius:6px;padding:6px 10px;font:300 11.5px/1.5 "Open Sans",system-ui,sans-serif;color:#9d9a94;z-index:3;max-width:320px';
-  wrap.appendChild(labels); wrap.appendChild(bar); wrap.appendChild(key); wrap.appendChild(tip); map.appendChild(wrap); for(const ev of ['pointerdown','pointerup','wheel']) wrap.addEventListener(ev,e=>e.stopPropagation()); // the 2D map captures the pointer on pointerdown, which swallowed clicks on ← Map
+  wrap.appendChild(labels); wrap.appendChild(bar); wrap.appendChild(key); wrap.appendChild(tip); map.appendChild(wrap); for(const ev of ['pointerdown','wheel']) wrap.addEventListener(ev,e=>e.stopPropagation()); // the 2D map captures the pointer on pointerdown, which swallowed clicks on ← Map; pointerup must reach the document, where the orbit control listens for the release
   const ren=new T.WebGLRenderer({antialias:true,preserveDrawingBuffer:true}); ren.setPixelRatio(Math.min(window.devicePixelRatio||1,2)); ren.setClearColor(C.bg);
   wrap.insertBefore(ren.domElement,labels); ren.domElement.style.cssText='display:block;width:100%;height:100%';
   const scene=new T.Scene(); const cam=new T.PerspectiveCamera(35,1,1,40000);
-  const ctl=new T.OrbitControls(cam,ren.domElement); ctl.enableDamping=true; ctl.maxPolarAngle=Math.PI*0.48; ctl.maxDistance=9000;
+  const ctl=new T.OrbitControls(cam,ren.domElement); ctl.enableDamping=true; ctl.dampingFactor=0.15; ctl.maxPolarAngle=Math.PI*0.48; ctl.maxDistance=9000;
   R={ren,scene,cam,ctl};
   document.getElementById('v3map').onclick=()=>hide();
   const fit=()=>{ const b=wrap.getBoundingClientRect(); if(!b.width) return; ren.setSize(b.width,b.height,false); cam.aspect=b.width/b.height; cam.updateProjectionMatrix(); };
