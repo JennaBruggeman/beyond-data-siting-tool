@@ -17,6 +17,56 @@ const BASE=[
 const F=BD.flow={on:true,steps:BASE.slice(),i:0,max:0,notes:{},busy:false};
 document.body.classList.add('flow');
 
+/* behind the welcome card: a made-up city seen from a plane window (fisheye), with data centres sending heat, power and water to the buildings around them (J.B., 16 Oct: study G) */
+(function(){
+const ACC='#CC746C', AMB='#d1a35e', BLU='#7fb2c4', SAGE='#86ada7'; let seed=1; const rnd=()=>{ seed=(seed*16807)%2147483647; return (seed-1)/2147483646; }; let citySeed=3;
+function cityModel(N,keep){ const B=10, ST=3, P=B+ST, boxes=[]; seed=citySeed*7919+1; const I0=keep?-60:0, I1=keep?N+60:N, J1=keep?N*4:N;
+  for(let bi=I0;bi<I1;bi++) for(let bj=keep?-4:0;bj<J1;bj++){ const ox=bi*P, oy=bj*P; if(keep&&!keep(ox+B/2,oy+B/2)) continue; const cx=(bi-N*0.5)/N, cy=(bj-N*0.42)/N; const centre=Math.exp(-(cx*cx+cy*cy)*9)+0.25*Math.exp(-(((bi-N*0.5)/N+0.9)**2+((bj-N*1.4)/N)**2)*6)+0.3*Math.exp(-(((bi-N*0.5)/N-1.1)**2+((bj-N*2)/N)**2)*5);
+    if(rnd()<0.07){ boxes.push({x:ox,y:oy,w:B,d:B,h:0.2,park:1}); continue; }
+    const split=rnd(); const H2=B/2-0.5; const parts=split<0.3?[[0,0,B,B]]:split<0.65?[[0,0,H2,B],[B/2+0.5,0,H2,B]]:[[0,0,H2,H2],[B/2+0.5,0,H2,H2],[0,B/2+0.5,H2,H2],[B/2+0.5,B/2+0.5,H2,H2]];
+    for(const [a,b,w,d] of parts){ const h=1.5+rnd()*4+centre*rnd()*30*(rnd()<0.35?1:0.35); boxes.push({x:ox+a,y:oy+b,w,d,h}); } }
+  return {boxes,B,ST,P}; }
+function persp(c,W,H){ const N=34; const C0=[N*13*0.5,-30];
+  const M=cityModel(N,(x,y)=>{ const dx=x-C0[0], dy=y-C0[1]; if(dy<-20) return false; const d=Math.hypot(dx,dy); return d<2800&&Math.abs(dx)<dy*2.2+160; }), {boxes,B,ST,P}=M; seed=citySeed*31+5;
+  const dcs=[]; for(const [bi,bj] of [[5,2],[29,3],[13,6],[23,8],[-3,9],[38,10],[17,13],[6,17],[30,18],[-12,22],[47,24],[19,26],[9,34],[33,36]]){ const ox=bi*P, oy=bj*P; for(let k=boxes.length-1;k>=0;k--){ const q=boxes[k]; if(q.x>=ox&&q.x<ox+B&&q.y>=oy&&q.y<oy+B) boxes.splice(k,1); } const dc={x:ox,y:oy,w:B,d:B,h:3.2,dc:1}; boxes.push(dc); dcs.push(dc); }
+  const C=[N*P*0.5,-30,95], a=0.5; const fy=Math.cos(a), fz=-Math.sin(a), uy=Math.sin(a), uz=Math.cos(a);
+  const R=Math.hypot(W,H)/2, fe=R/(1.05); // equidistant: r = fe * theta
+  const cxs=W/2, cys=H*0.46;
+  const pr=(x,y,z)=>{ const dx=x-C[0], dy=y-C[1], dz=z-C[2]; const zc=dy*fy+dz*fz; const xc=dx, yc=dy*uy+dz*uz; const rr=Math.hypot(xc,yc); const th=Math.atan2(rr,zc); if(th>1.45) return null; const k=rr?fe*th/rr:0; return [cxs+xc*k, cys-yc*k, Math.hypot(dx,dy,dz)]; };
+  const seg=(p,q,n)=>{ const o=[]; for(let i=0;i<=n;i++){ const t=i/n; o.push(pr(p[0]+(q[0]-p[0])*t,p[1]+(q[1]-p[1])*t,p[2]+(q[2]-p[2])*t)); } return o; };
+  const fade=dd=>dd>2800?0:Math.max(0.12,Math.min(1,1.2-dd/600));
+  const path=pts=>{ c.beginPath(); let st=false; for(const p of pts){ if(!p){ st=false; continue; } if(!st){ c.moveTo(p[0],p[1]); st=true; } else c.lineTo(p[0],p[1]); } };
+  // the ground out to the horizon, then streets
+  { const X0g=-40000, X1g=40000, Y1g=40000; const ring=[...seg([X0g,-40,0],[X1g,-40,0],200),...seg([X1g,-40,0],[X1g,Y1g,0],200),...seg([X1g,Y1g,0],[X0g,Y1g,0],200),...seg([X0g,Y1g,0],[X0g,-40,0],200)].filter(Boolean); c.beginPath(); ring.forEach((p,i)=>i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1])); c.closePath(); c.fillStyle='#0f1012'; c.fill(); }
+  // haze along the horizon
+  const hz=pr(N*P*0.5,N*P*3,0); if(hz){ const gr=c.createLinearGradient(0,hz[1]-H*0.25,0,hz[1]+H*0.08); gr.addColorStop(0,'rgba(0,0,0,0)'); gr.addColorStop(0.75,'rgba(40,44,50,.35)'); gr.addColorStop(1,'rgba(0,0,0,0)'); c.fillStyle=gr; c.fillRect(0,0,W,H); }
+  c.lineWidth=.7; for(let i=-60;i<=N+60;i++){ const t=i*P-ST/2; const pts=seg([t,-40,0],[t,N*4*P,0],60); c.strokeStyle='rgba(60,64,70,.35)'; path(pts); c.stroke(); }
+  for(let j=-3;j<=N*4;j++){ const t=j*P-ST/2; const pts=seg([-60*P,t,0],[(N+60)*P,t,0],60); c.strokeStyle='rgba(60,64,70,.35)'; path(pts); c.stroke(); }
+  const quad=(pts4,fill,stroke,lw,al)=>{ const ring=[]; for(let i=0;i<4;i++){ const sg=seg(pts4[i],pts4[(i+1)%4],5); if(sg.some(v=>!v)) return; ring.push(...sg.slice(0,-1)); } c.globalAlpha=al; c.beginPath(); ring.forEach((p,i)=>i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1])); c.closePath(); c.fillStyle=fill; c.fill(); c.strokeStyle=stroke; c.lineWidth=lw; c.stroke(); c.globalAlpha=1; };
+  boxes.forEach(q=>q.dd=Math.hypot(q.x+q.w/2-C[0],q.y+q.d/2-C[1])); boxes.sort((p,q)=>q.dd-p.dd);
+  for(const q of boxes){ const {x,y,w,d,h}=q; const al=fade(q.dd); if(al<=0.02) continue; const e=q.dc?ACC:q.park?'#24302a':'#43464c';
+    if(q.park){ quad([[x,y,h],[x+w,y,h],[x+w,y+d,h],[x,y+d,h]],'#111513','#24302a',.6,al); continue; }
+    if(q.dd>1300){ quad([[x,y,h],[x+w,y,h],[x+w,y+d,h],[x,y+d,h]],'#17181b',e,.5,al); continue; }
+    // visible side faces: front (y), left/right (x) depending on camera
+    if(C[1]<y) quad([[x,y,0],[x+w,y,0],[x+w,y,h],[x,y,h]],'#121316',e,.6,al);
+    if(C[0]<x) quad([[x,y,0],[x,y+d,0],[x,y+d,h],[x,y,h]],'#0f1012',e,.6,al);
+    if(C[0]>x+w) quad([[x+w,y,0],[x+w,y+d,0],[x+w,y+d,h],[x+w,y,h]],'#0f1012',e,.6,al);
+    quad([[x,y,h],[x+w,y,h],[x+w,y+d,h],[x,y+d,h]],'#18191c',e,q.dc?1.3:.6,al); }
+  // exchanges
+  const KIND=[[ACC,6],[AMB,2],[BLU,2],[SAGE,2],['#a7b4d6',1]]; const kpick=()=>{ let t=rnd()*13; for(const [col,w] of KIND){ if((t-=w)<=0) return col; } return ACC; };
+  const tall=boxes.filter(q=>!q.dc&&!q.park);
+  for(const dc of dcs){ const S0=[dc.x+dc.w/2,dc.y+dc.d/2,dc.h+0.5];
+    const cand=tall.map(q=>[q,Math.hypot(q.x+q.w/2-S0[0],q.y+q.d/2-S0[1])]).filter(v=>v[1]<P*6&&v[1]>P*0.8).sort(()=>rnd()-.5).slice(0,13);
+    for(const [q,dd] of cand){ const T=[q.x+q.w/2,q.y+q.d/2,q.h]; const col=kpick(), back=rnd()<0.22, lift=6+dd*0.45; const [A,Bp]=back?[T,S0]:[S0,T];
+      const pts=[]; for(let i=0;i<=28;i++){ const t=i/28; pts.push(pr(A[0]+(Bp[0]-A[0])*t,A[1]+(Bp[1]-A[1])*t,A[2]+(Bp[2]-A[2])*t+lift*4*t*(1-t))); }
+      const al=fade(Math.hypot(T[0]-C[0],T[1]-C[1])); c.globalAlpha=al*(col===ACC?.9:.75); c.strokeStyle=col; c.lineWidth=col===ACC?1.3:1; if(back) c.setLineDash([1.5,3]); path(pts); c.stroke(); c.setLineDash([]);
+      const e=pr(...T); if(e){ c.fillStyle=col; c.beginPath(); c.arc(e[0],e[1],1.9,0,7); c.fill(); } c.globalAlpha=1; } }
+  // the window: soft vignette
+  const vg=c.createRadialGradient(W/2,H/2,Math.min(W,H)*0.35,W/2,H/2,Math.hypot(W,H)*0.55); vg.addColorStop(0,'rgba(11,12,13,0)'); vg.addColorStop(1,'rgba(11,12,13,.92)'); c.fillStyle=vg; c.fillRect(0,0,W,H);
+}
+BD.welcomeCity=function(cv){ const r=cv.getBoundingClientRect(), dpr=Math.min(2,window.devicePixelRatio||1); cv.width=Math.round(r.width*dpr); cv.height=Math.round(r.height*dpr); const c=cv.getContext('2d'); c.setTransform(dpr,0,0,dpr,0,0); c.fillStyle='#0b0c0d'; c.fillRect(0,0,r.width,r.height); persp(c,r.width,r.height); };
+})();
+
 /* ---------- welcome card: pops up on load ---------- */
 const EXAMPLES=[
  {lab:'Vancouver industrial lot',sub:'1425 Clark Dr · I-2 · new building',sel:{city:'van',tile:'2_1',id:'23060741'},ans:{built:'new',extent:'whole',floor:''}},
@@ -37,23 +87,7 @@ function welcome(){ let w=$('#welcome'); if(w) w.remove(); w=document.createElem
   w.querySelectorAll('.ex').forEach(b=>b.onclick=()=>{ w.remove(); runExample(+b.dataset.i); });
   setTimeout(()=>$('#wEx')&&$('#wEx').focus(),50); }
 BD.welcome=welcome;
-/* behind the welcome card: exchange lines arcing out from one lot, in the tool's colours (heat, water, place, people, grid) */
-function arcs(){ const W=Math.max(window.innerWidth,800), H=Math.max(window.innerHeight,600); let s=7;
-  const rnd=()=>{ s=(s*16807)%2147483647; return (s-1)/2147483646; };
-  const NS='http://www.w3.org/2000/svg', svg=document.createElementNS(NS,'svg'); svg.setAttribute('class','wbg'); svg.setAttribute('viewBox',`0 0 ${W} ${H}`); svg.setAttribute('preserveAspectRatio','xMidYMid slice'); svg.setAttribute('aria-hidden','true');
-  const C=[['#CC746C',9],['#e39a93',3],['#7fb2c4',5],['#86ada7',4],['#d1a35e',3],['#a7b4d6',3],['#55585d',40]];
-  const pick=()=>{ let t=rnd()*C.reduce((a,c)=>a+c[1],0); for(const [c,w] of C){ if((t-=w)<=0) return c; } return C[C.length-1][0]; };
-  const src=[W*0.3,H*0.74]; let h='';
-  // a faint ground grid of points, like parcels seen from far away
-  for(let i=0;i<220;i++){ const x=rnd()*W, y=H*0.35+rnd()*H*0.65; h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="0.9" fill="#3a3c40"/>`; }
-  const N=64; for(let i=0;i<N;i++){ let x,y,d; do{ x=W*(0.02+0.96*rnd()); y=H*(0.32+0.66*rnd()); d=Math.hypot(x-src[0],y-src[1]); }while(d<W*0.12);
-    const lift=d*(0.16+0.3*rnd()), mx=(src[0]+x)/2, my=Math.min(src[1],y)-lift; const col=pick(), grey=col==='#55585d';
-    const back=rnd()<0.25; const [x0,y0,x1,y1]=back?[x,y,src[0],src[1]]:[src[0],src[1],x,y];
-    const len=Math.round(d*1.6);
-    h+=`<path d="M${x0.toFixed(1)},${y0.toFixed(1)} Q${mx.toFixed(1)},${my.toFixed(1)} ${x1.toFixed(1)},${y1.toFixed(1)}" stroke="${col}" stroke-width="${grey?0.7:1.1}" stroke-opacity="${grey?0.55:0.75}" fill="none" ${rnd()<0.35?'stroke-dasharray="3 5"':''} style="--len:${len};animation-delay:${(i*35)}ms"/>`;
-    if(!grey) h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.2" fill="${col}" fill-opacity=".85"/>`; }
-  h+=`<rect x="${(src[0]-7).toFixed(1)}" y="${(src[1]-7).toFixed(1)}" width="14" height="14" fill="none" stroke="#CC746C" stroke-width="1.4"/>`;
-  svg.innerHTML=h; return svg; }
+function arcs(){ const cv=document.createElement('canvas'); cv.className='wbg'; cv.setAttribute('aria-hidden','true'); requestAnimationFrame(()=>{ try{ BD.welcomeCity(cv); cv.classList.add('on'); }catch(e){ console.warn(e); } }); let t; window.addEventListener('resize',()=>{ clearTimeout(t); t=setTimeout(()=>{ if(cv.isConnected) BD.welcomeCity(cv); },200); }); return cv; }
 async function runExample(i){ const x=EXAMPLES[i]; reset(); F.exPending=true; Object.assign(BD.S.answers,x.ans,{mw:null});
   try{ if(BD.S.city!==x.sel.city) await BD.setCity(x.sel.city,true); await BD.select(Object.assign({quiet:true},x.sel)); F.sel=selKey(); F.sig=sigOf(); } finally{ F.exPending=false; } if(BD.S.sel) go(1); }
 
