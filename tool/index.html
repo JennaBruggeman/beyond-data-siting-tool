@@ -270,7 +270,16 @@ body.wcon #wc{display:flex;position:fixed;top:56px;left:0;right:0;bottom:0;z-ind
 #wc.nov .wcvis{display:none} #wc.nov .wcgrid{grid-template-columns:1fr}
 #wc #side .c3d{display:none}
 #wc #v3map,#wc #v3note{display:none}
-body.wcon #drawer{position:fixed;top:72px;bottom:24px;left:auto;right:24px;width:min(440px,40vw);z-index:46}
+#wc .wcgrid > .wctx{grid-column:2;grid-row:1}
+#wc .wcgrid > #drawer{grid-column:2;grid-row:1;position:relative;inset:auto;width:auto;min-width:0;border:0;box-shadow:none;z-index:3;background:var(--panel);padding:18px 24px 28px;overflow:auto;font-size:14.5px;line-height:1.55}
+#wc #drawer .dx{display:none}
+#wc #drawer .dback{background:transparent;border:1px solid var(--line-2);color:var(--fg);border-radius:6px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer;margin:0 0 14px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#wc #drawer .dback:hover{border-color:var(--accent)}
+#wc #drawer h2{font-size:22px;font-weight:300;margin:4px 0 10px}
+#wc #drawer h3{font-size:13.5px;letter-spacing:0;text-transform:none;font-weight:600;color:var(--fg)}
+#wc #drawer .sub,#wc #drawer .src{font-size:13px} #wc #drawer dt,#wc #drawer dd{font-size:13.5px}
+#wc #drawer .secb{display:block}
+@media (max-width:900px){#wc .wcgrid > .wctx,#wc .wcgrid > #drawer{grid-column:1;grid-row:2}}
 /* design pass, 17 Oct: one header, readable type, quiet labels, rows instead of tiles, actions pinned */
 #wc #side{font-size:14.5px;line-height:1.55}
 #wc #side p,#wc #side li{max-width:62ch}

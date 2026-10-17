@@ -274,3 +274,8 @@ No building is drawn for a new data centre. The 3D shows the lot, the zoning's b
 - Each step says its point once, large (the lead line); the step's topic sits small above it.
 - Opportunities grouped by family: six cards instead of thirteen, plus "Not here" in each card. Rows show the status pill, readiness pill and the first unknowns or the gate that needs a change. Picking a row shows its detail, How it works and 3D. The path is now 19 steps, not 27.
 - A not-possible option greys out the 3D, with a line saying the 3D shows the site as set up.
+
+## Cards inside the card (17 Oct 2026)
+- J.B.: "the add-ons need to be their own card and each add-on opens another new card, because this right-hand toolbar is in the way."
+- While the walk-through card is open, the side drawer no longer opens over the map. Everything it showed (a step's section, the add-on list, each add-on, the cooling choice, Explore cards) opens in the card's right column, over the step, with "← <where it came from>". The 3D stays on the left and shows the add-on.
+- Clicking a row on a step opens that section as its own card (it used to expand "All the detail"). "What could be added" is the add-ons card; each add-on opens from it, and Back returns to the list.

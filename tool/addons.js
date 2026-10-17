@@ -74,7 +74,7 @@ BD.visCard=visCard;
 
 /* ---------- add-ons: off by default, each with Add › (J.B., 16 Oct) ---------- */
 function addRow(id,name,extra){ const a=A(), on=!!(a.add&&a.add[id]), x=addon(id); const rsv=x.rule_state||{};
-  return `<div class="addrow"><div>${esc(name||x.name||id)} ${x.readiness?rd(x.readiness):''}<div class="src">Vancouver ${rs(rsv.vancouver||'unknown')} Edmonton ${rs(rsv.edmonton||'unknown')}${extra?' · '+extra:''}</div></div><div><button class="btn${on?' on':''}" data-add="${id}">${on?'Added · card ›':'Add ›'}</button></div></div>`; }
+  return `<div class="addrow"><div>${esc(name||x.name||id)} ${x.readiness?rd(x.readiness):''}<div class="src">Vancouver ${rs(rsv.vancouver||'unknown')} Edmonton ${rs(rsv.edmonton||'unknown')}${extra?' · '+extra:''}</div></div><div><button class="btn${on?' on':''}" data-add="${id}">${on?'Added · open ›':'Add ›'}</button></div></div>`; }
 function wireAdds(){ document.querySelectorAll('#side [data-add]').forEach(b=>b.onclick=()=>{ const a=A(); a.add=a.add||{}; const id=b.dataset.add; if(!a.add[id]){ a.add[id]=true; refresh(); } setTimeout(()=>openAddon(id),50); }); }
 function openAddon(id){ if(id==='pv') return solarCard(); if(id==='battery') return batteryCard(); if(id==='rainwater') return rainCard(); return genericAddon(id); }
 function addOff(id){ const a=A(); if(a.add) delete a.add[id]; refresh(); BD.drawer.close(); }
