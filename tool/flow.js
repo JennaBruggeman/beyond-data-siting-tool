@@ -29,7 +29,7 @@ function welcome(){ let w=$('#welcome'); if(w) w.remove(); w=document.createElem
   <div class="wbtns"><button class="pri" id="wEx">See a worked example</button><button class="sec" id="wOwn">Start with my own site</button></div>
   <div id="wList" hidden>${EXAMPLES.map((x,i)=>`<button class="ex" data-i="${i}"><b>${esc(x.lab)}</b><span>${esc(x.sub)}</span></button>`).join('')}</div>
   <p class="sub"><a href="#" id="wAbout">What this tool can't tell you</a></p></div>`;
-  document.body.appendChild(w);
+  document.body.appendChild(w); w.insertBefore(arcs(),w.firstChild);
   for(const ev of ['pointerdown','wheel']) w.addEventListener(ev,e=>e.stopPropagation());
   $('#wEx').onclick=()=>{ $('#wList').hidden=false; $('#wEx').setAttribute('aria-expanded','true'); const b=$('#wList .ex'); if(b) b.focus(); };
   $('#wOwn').onclick=()=>{ w.remove(); go(0); };
@@ -37,6 +37,23 @@ function welcome(){ let w=$('#welcome'); if(w) w.remove(); w=document.createElem
   w.querySelectorAll('.ex').forEach(b=>b.onclick=()=>{ w.remove(); runExample(+b.dataset.i); });
   setTimeout(()=>$('#wEx')&&$('#wEx').focus(),50); }
 BD.welcome=welcome;
+/* behind the welcome card: exchange lines arcing out from one lot, in the tool's colours (heat, water, place, people, grid) */
+function arcs(){ const W=Math.max(window.innerWidth,800), H=Math.max(window.innerHeight,600); let s=7;
+  const rnd=()=>{ s=(s*16807)%2147483647; return (s-1)/2147483646; };
+  const NS='http://www.w3.org/2000/svg', svg=document.createElementNS(NS,'svg'); svg.setAttribute('class','wbg'); svg.setAttribute('viewBox',`0 0 ${W} ${H}`); svg.setAttribute('preserveAspectRatio','xMidYMid slice'); svg.setAttribute('aria-hidden','true');
+  const C=[['#CC746C',9],['#e39a93',3],['#7fb2c4',5],['#86ada7',4],['#d1a35e',3],['#a7b4d6',3],['#55585d',40]];
+  const pick=()=>{ let t=rnd()*C.reduce((a,c)=>a+c[1],0); for(const [c,w] of C){ if((t-=w)<=0) return c; } return C[C.length-1][0]; };
+  const src=[W*0.3,H*0.74]; let h='';
+  // a faint ground grid of points, like parcels seen from far away
+  for(let i=0;i<220;i++){ const x=rnd()*W, y=H*0.35+rnd()*H*0.65; h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="0.9" fill="#3a3c40"/>`; }
+  const N=64; for(let i=0;i<N;i++){ let x,y,d; do{ x=W*(0.02+0.96*rnd()); y=H*(0.32+0.66*rnd()); d=Math.hypot(x-src[0],y-src[1]); }while(d<W*0.12);
+    const lift=d*(0.16+0.3*rnd()), mx=(src[0]+x)/2, my=Math.min(src[1],y)-lift; const col=pick(), grey=col==='#55585d';
+    const back=rnd()<0.25; const [x0,y0,x1,y1]=back?[x,y,src[0],src[1]]:[src[0],src[1],x,y];
+    const len=Math.round(d*1.6);
+    h+=`<path d="M${x0.toFixed(1)},${y0.toFixed(1)} Q${mx.toFixed(1)},${my.toFixed(1)} ${x1.toFixed(1)},${y1.toFixed(1)}" stroke="${col}" stroke-width="${grey?0.7:1.1}" stroke-opacity="${grey?0.55:0.75}" fill="none" ${rnd()<0.35?'stroke-dasharray="3 5"':''} style="--len:${len};animation-delay:${(i*35)}ms"/>`;
+    if(!grey) h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.2" fill="${col}" fill-opacity=".85"/>`; }
+  h+=`<rect x="${(src[0]-7).toFixed(1)}" y="${(src[1]-7).toFixed(1)}" width="14" height="14" fill="none" stroke="#CC746C" stroke-width="1.4"/>`;
+  svg.innerHTML=h; return svg; }
 async function runExample(i){ const x=EXAMPLES[i]; reset(); F.exPending=true; Object.assign(BD.S.answers,x.ans,{mw:null});
   try{ if(BD.S.city!==x.sel.city) await BD.setCity(x.sel.city,true); await BD.select(Object.assign({quiet:true},x.sel)); F.sel=selKey(); F.sig=sigOf(); } finally{ F.exPending=false; } if(BD.S.sel) go(1); }
 
@@ -168,6 +185,6 @@ async function docPDF(D){ if(!window.jspdf) await load(PDFLIB[0]); if(!(window.j
   return doc.output('blob'); }
 
 /* start: the welcome card, unless a parcel link was opened (then straight to the set-up) */
-function boot(){ if(!BD.S||!BD.intro) return setTimeout(boot,200); if(BD.S.sel){ F.sel=selKey(); F.sig=sigOf(); F.i=1; F.max=1; decorate(); } else { decorate(); welcome(); } }
+function boot(){ if(!BD.S||!BD.intro) return setTimeout(boot,200); if(!BD.S.sel&&!BD.S.view2) BD.intro(); if(BD.S.sel){ F.sel=selKey(); F.sig=sigOf(); F.i=1; F.max=1; decorate(); } else { decorate(); welcome(); } }
 setTimeout(boot,400);
 })();
