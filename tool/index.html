@@ -249,6 +249,28 @@ details.alld{margin:4px 0 8px} details.alld > summary{cursor:pointer;color:var(-
 .dstart{animation:dstart 3s ease-in-out infinite}@keyframes dstart{0%,40%{opacity:.3}55%,100%{opacity:1}}
 @media (prefers-reduced-motion:reduce){.drise,.dfade,.dgrow,.dspin,.dpulse,.dbub,.dspray,.dfail,.dtake,.dcut,.dstart{animation:none}}
 
+
+/* the walk-through card (stage.js) */
+#wc{display:none}
+body.wcon main{grid-template-columns:1fr}
+body.wcon #wc{display:flex;position:fixed;top:56px;left:0;right:0;bottom:0;z-index:40;align-items:center;justify-content:center;background:rgba(11,12,13,.55);padding:20px}
+#wc .wcbox{width:min(1320px,100%);height:min(880px,100%);background:var(--panel);border:1px solid var(--line-2);border-radius:12px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+#wc .wchead{display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:1px solid var(--line)}
+#wc .wcnew{background:transparent;border:1px solid var(--line-2);color:var(--fg);border-radius:6px;padding:5px 12px;font:inherit;font-size:12.5px;cursor:pointer} #wc .wcnew:hover{border-color:var(--accent)}
+#wc .wcaddr{color:var(--muted);font-size:12.5px;letter-spacing:.04em}
+#wc .wcgrid{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(400px,1fr)}
+#wc .wcvis{display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--line)}
+#wc .wc3d{position:relative;flex:1;min-height:320px;background:#17181a;overflow:hidden}
+#wc .wcchart{padding:12px 16px 8px;border-top:1px solid var(--line);flex:0 0 auto;max-height:44%;overflow:auto}
+#wc .wcchart[hidden]{display:none} #wc .wcchart svg{max-height:250px;width:100%} #wc .wcchart .dchart{margin:0;border:0;padding:0;background:transparent} #wc .wcchart .dcap{margin:4px 0 0}
+#wc .wctx{min-height:0;overflow:auto}
+#wc #side{border:0;padding:18px 24px 24px;max-height:none;overflow:visible;background:transparent;min-width:0}
+#wc #side .flowfoot{bottom:-24px;margin:24px -24px -24px;padding:12px 24px 16px}
+#wc.nov .wcvis{display:none} #wc.nov .wcgrid{grid-template-columns:1fr}
+#wc #side .c3d{display:none}
+#wc #v3map,#wc #v3note{display:none}
+body.wcon #drawer{position:fixed;top:72px;bottom:24px;left:auto;right:24px;width:min(440px,40vw);z-index:46}
+@media (max-width:900px){#wc .wcgrid{grid-template-columns:1fr;grid-template-rows:minmax(260px,45%) 1fr}#wc .wcvis{border-right:0;border-bottom:1px solid var(--line)}}
 </style>
 
 <div class="app">

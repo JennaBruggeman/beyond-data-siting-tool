@@ -253,3 +253,8 @@ No building is drawn for a new data centre. The 3D shows the lot, the zoning's b
 - The set-up is now one decision per card: an animation of the option picked, its upsides and downsides, the choices as one row, and what fits as it stands. Next moves to the next decision.
 - What is being built has four options: a new building, a shared new building, a retrofit of an existing building, or leased space in a building (same answers underneath: new/existing × whole/part).
 - To do: the same card form for the exchanges, the opportunities, the options and the report.
+
+## The walk-through card (J.B., 17 Oct 2026)
+- Once a parcel is picked, every step opens as one centred card over the map; the side panel collapses. "New parcel" clears the site and returns to the map.
+- Left: the 3D, turning slowly, seen from above, nearby buildings see-through; under it, the step's chart, large. Right: the words, choices and Next.
+- Each set-up option is checked against the parcel (possible, with a condition, not yet known, not possible and why); an impossible option shows its reason and no animation.

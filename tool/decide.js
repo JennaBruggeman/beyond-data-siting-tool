@@ -149,7 +149,8 @@ function show(i){ const A=BD.S.answers; const L=live(); at=Math.max(0,Math.min(L
   const sto=$('#dsto'); if(sto) sto.onchange=()=>{ A.storeys=Math.max(1,Math.min(12,+sto.value||1)); changed(); };
   $('#dB').onclick=()=>{ pv[d.id]=null; if(at) show(at-1); else if(BD.flow&&BD.flow.on) BD.flow.back(); else BD.card(); };
   $('#dN').onclick=()=>{ pv[d.id]=null; if(at<live().length-1) show(at+1); else { A.setupDone=true; if(BD.flow&&BD.flow.on) BD.flow.next(); else BD.fitsView(); } };
-  if(CH[d.id]&&BD.viz){ try{ const cap=CH[d.id]($('#dchart'),d,opts); $('#dcap').textContent=cap||''; }catch(e){ console.warn(e); } }
+  if(CH[d.id]&&BD.viz){ try{ const cap=CH[d.id](el.querySelector('#dchart'),d,opts); el.querySelector('#dcap').textContent=cap||''; }catch(e){ console.warn(e); } }
+  if(BD.stage&&BD.stage.sync) BD.stage.sync();
   if(!no){ const p=BD.showModel?BD.showModel():null; const kind=DEMO[d.id]&&DEMO[d.id][o.v]; if(p&&p.then) p.then(()=>{ if(kind&&BD.scene3d&&BD.scene3d.demo) BD.scene3d.demo(kind); }); } }
 function changed(){ const A=BD.S.answers; A.mw=null; BD.modelReset(); const id=live()[at]&&live()[at].id; const j=live().findIndex(d=>d.id===id); show(j<0?at:j); }
 // the old five steps map onto cards: 1 built, 2 footprint, 3 height, 4 cooling, 5 standby

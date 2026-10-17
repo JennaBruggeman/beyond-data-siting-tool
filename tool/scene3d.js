@@ -247,7 +247,7 @@ function siteKey(){ const S=BD.S, M=BD.model?BD.model():null; return S.city+'|'+
 async function show(tab,data){ await ensure(); if(!R) setup(); R.multi=null; if(R.cap){ R.cap.forEach(c=>c.remove()); R.cap=[]; } wrap.style.display='';
   const site=data.site||(BD.eng?BD.eng.siteFacts():null); if(!site) return; await ensureTiles(site.c);
   const k=siteKey(); if(state.key!==k||!state.site){ buildSite(site); state.key=k; }
-  clearOverlay(); const prev=state.tab; state.tab=tab; if(tab!=='heat'&&prev==='heat') frameSite(); (FN[tab]||model)(data||{}); }
+  clearOverlay(); const prev=state.tab; state.tab=tab; if(tab!=='heat'&&prev==='heat') frameSite(); (FN[tab]||model)(data||{}); if(R.card) applyCard(); }
 /* three options side by side: one camera, three scenes sharing the site model (J.B., 15 Oct) */
 async function showOptions(opts,data){
   await show('model',{site:data.site}); clearOverlay(); R.scene.remove(R.ov);
@@ -284,6 +284,13 @@ function demo(kind){ if(!R||!state.M) return; const M=state.M, sel=BD.S.sel; if(
     else { const rh=M.roofH||M.H, A=BD.S.answers; const lvl={basement:-4,ground:0,upper:Math.max(4,Math.min(rh-8,rh*0.6)),roof:rh-0.5}[A.floor||'upper']; const p=prism(M.foot,4,lvl,0xCC746C,C.acc,1,0.35); g.add(p); label('one leased floor',V(c[0],c[1],lvl+12),'#e39a93',{prio:9});
       R.ticks.push(now=>{ const t=((now-t0)%2400)/2400; p.children[0].material.opacity=0.15+0.4*Math.abs(Math.sin(t*Math.PI)); }); } }
 }
-BD.scene3d={show,showOptions,hide,ensure,demo,snap:(x,y)=>R&&R.nbList?snap(x,y):null,state:()=>state,isOpen:()=>!!wrap&&wrap.style.display!=='none'};
+/* card mode (J.B., 17 Oct): the 3D sits in the centred card; it turns slowly, seen from higher up, and nearby buildings go see-through
+   so they no longer hide the site. Any drag stops the turning; it resumes after a few seconds untouched. */
+let idleT=null;
+function applyCard(){ if(!R) return; const on=!!R.card; R.ctl.autoRotate=on; R.ctl.autoRotateSpeed=0.55;
+  if(R.nbMesh){ const m=R.nbMesh.material; m.transparent=on; m.opacity=on?0.22:1; m.depthWrite=!on; m.needsUpdate=true; }
+  const fk=state.key+'|'+state.tab; if(on&&state.span&&!R.multi&&R.framed!==fk&&state.tab!=='heat'){ R.framed=fk; const sp=state.span*0.95, rf=state.roof||0; R.cam.position.set(sp*1.15,sp*2.1+rf*1.6,sp*1.35); R.ctl.target.set(0,rf*0.3,0); R.ctl.update(); } }
+function cardMode(on){ if(!R) return; R.card=!!on; if(!R.cardWired){ R.cardWired=true; R.ctl.addEventListener('start',()=>{ R.ctl.autoRotate=false; clearTimeout(idleT); }); R.ctl.addEventListener('end',()=>{ clearTimeout(idleT); idleT=setTimeout(()=>{ if(R.card) R.ctl.autoRotate=true; },6000); }); } applyCard(); }
+BD.scene3d={show,showOptions,hide,ensure,demo,cardMode,snap:(x,y)=>R&&R.nbList?snap(x,y):null,state:()=>state,isOpen:()=>!!wrap&&wrap.style.display!=='none'};
 BD.showModel=()=>{ if(!BD.S.sel) return Promise.resolve(); return show('model',{}).catch(e=>console.warn(e)); };
 })();
