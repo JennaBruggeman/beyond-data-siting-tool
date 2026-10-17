@@ -267,5 +267,5 @@ BD.setupHTML=function(st){ setDefaults(); const A=BD.S.answers, m=model(); if(!m
   return `<h3>The site as set up</h3>${m.Z.warn?`<div class="warnbox">${m.Z.warn}</div>`:''}${rows.map(r=>`<div class="sumrow"><span>${r[1]}</span><span>${esc(r[2])}</span><a href="#" data-setup="${r[0]}">Change ›</a></div>`).join('')}
   <div class="next"><button id="fits">What fits here →</button><button id="setup1" style="background:transparent;border:1px solid var(--line-2);color:var(--fg)">Set up step by step</button></div>
   <div class="draftnote">Labelled defaults are used until you change them. </div>`; };
-BD.setupWire=function(){ document.querySelectorAll('#side [data-setup]').forEach(a=>a.onclick=e=>{ e.preventDefault(); card(+a.dataset.setup); }); const s1=$('#setup1'); if(s1) s1.onclick=()=>card(1); };
+BD.setupWire=function(){ document.querySelectorAll('#side [data-setup]').forEach(a=>a.onclick=e=>{ e.preventDefault(); BD.setup.card(+a.dataset.setup); }); const s1=$('#setup1'); if(s1) s1.onclick=()=>BD.setup.start(); };
 })();

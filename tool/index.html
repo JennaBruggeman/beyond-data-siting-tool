@@ -208,6 +208,34 @@ body.flow #side .next, body.flow #side .tabs, body.flow #side .ctx, body.flow #s
 .xring{transform-box:fill-box;transform-origin:center;animation:xring 2.8s ease-out infinite} @keyframes xring{from{opacity:.9}to{opacity:.08}}
 @media (prefers-reduced-motion:reduce){.xflow,.xfan,.xspray,.xring{animation:none}.xspray{opacity:1}}
 @media (max-width:760px){#xp .xbody{grid-template-columns:1fr}}
+
+/* decision cards (decide.js) */
+#drawer.deck{width:min(920px,calc(100% - 24px));padding:20px 22px 18px}
+#drawer.deck .dk{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px;align-items:start}
+#drawer.deck .dvis{background:#17181a;border:1px solid var(--line);border-radius:8px;padding:8px;position:sticky;top:0}
+#drawer.deck .dvis svg{display:block;width:100%;height:auto;font-family:inherit}
+#drawer.deck h2{font-size:21px;font-weight:300;margin:6px 0 12px}
+.dbar{display:flex;gap:4px;margin:8px 0 4px}.dbar i{flex:1;height:3px;border-radius:2px;background:var(--line-2)}.dbar i.on{background:var(--accent)}.dbar i.done{background:var(--muted)}
+.dch{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}.dch button{background:transparent;border:1px solid var(--line-2);color:var(--fg);border-radius:999px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+.dch button[aria-checked="true"]{border-color:var(--accent);background:rgba(204,116,108,.12);color:var(--fg)}
+.dud{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:4px 0 10px}.dud ul{margin:4px 0 0;padding-left:16px;font-size:13px;line-height:1.5}.dud li{margin:0 0 4px}
+.dh{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}.dh.up{color:#8fb996}.dh.dn{color:var(--accent-2)}
+.dres{font-size:13px;margin:8px 0;padding-top:10px;border-top:1px solid var(--line)} .dwarn{color:var(--accent-2);font-size:12.5px}
+.dnav{display:flex;justify-content:space-between;margin-top:12px}.dnav button{border-radius:6px;padding:7px 14px;font:inherit;font-size:13px;cursor:pointer}.dnav .pri{background:var(--accent);color:#1a1212;border:0;font-weight:600}.dnav .sec{background:transparent;border:1px solid var(--line-2);color:var(--fg)}.dnav .sec[disabled]{opacity:.35}
+.dnum{display:block;font-size:12.5px;color:var(--muted);margin:-4px 0 10px}.dnum input[type=number]{width:70px;margin-left:6px;background:var(--bg);border:1px solid var(--line-2);border-radius:4px;padding:3px 6px;color:var(--fg)}
+.drise{transform-box:fill-box;transform-origin:bottom;animation:drise .7s ease-out both}@keyframes drise{from{transform:scaleY(0);opacity:0}to{transform:scaleY(1);opacity:1}}
+.dfade{animation:dfade .5s ease-out both}@keyframes dfade{from{opacity:0}to{opacity:1}}
+.dgrow{transform-box:fill-box;transform-origin:center;animation:dgrow .7s ease-out both}@keyframes dgrow{from{transform:scale(.3);opacity:0}}
+.dspin{stroke-dasharray:4 2;transform-box:fill-box;transform-origin:center;animation:xspin 1.2s linear infinite}
+.dpulse{animation:dpulse 2.2s ease-in-out infinite}@keyframes dpulse{50%{opacity:.35}}
+.dbub{animation:dbub 1.8s ease-in infinite}@keyframes dbub{from{transform:translateY(0);opacity:1}to{transform:translateY(-50px);opacity:0}}
+.dspray{animation:xpulse 3.2s ease-in-out infinite}
+.dfail{animation:dfail 3s ease-in-out infinite}@keyframes dfail{0%,30%{stroke:#e9e6e1}40%,100%{stroke:#55585d;stroke-dasharray:2 3}}
+.dtake{animation:dtake 3s ease-in-out infinite}@keyframes dtake{0%,40%{opacity:.35}55%,100%{opacity:1;stroke:#CC746C}}
+.dcut{animation:dcut 3s ease-in-out infinite}@keyframes dcut{0%,30%{stroke-dasharray:none}40%,100%{stroke-dasharray:4 6;opacity:.4}}
+.dstart{animation:dstart 3s ease-in-out infinite}@keyframes dstart{0%,40%{opacity:.3}55%,100%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.drise,.dfade,.dgrow,.dspin,.dpulse,.dbub,.dspray,.dfail,.dtake,.dcut,.dstart{animation:none}}
+@media (max-width:900px){#drawer.deck .dk{grid-template-columns:1fr}.dud{grid-template-columns:1fr}}
 </style>
 
 <div class="app">
@@ -596,5 +624,6 @@ window.BD={S,$,esc,fmt,getJSON,pathOf,draw,centroid,pip,area,statusOf,lowD,loadT
 <script src="compare.js"></script>
 <script src="extras.js"></script>
 <script src="scene3d.js"></script>
+<script src="decide.js"></script>
 <script src="explain.js"></script>
 <script src="flow.js"></script>

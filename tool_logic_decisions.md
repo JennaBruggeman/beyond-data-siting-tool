@@ -248,3 +248,8 @@ No building is drawn for a new data centre. The 3D shows the lot, the zoning's b
 - Every exchange step and every opportunity step has an optional "How it works" card: a few steps, each a schematic animation or a chart of this site's own figures, with the trade-off in a sentence.
 - Charts use the tool's numbers only (same model as the panel); drawings are schematic and say so. Chart colours validated for the dark panel; every mark is labelled; "Show the numbers" gives the table.
 - Pie (donut) charts only for parts of one whole (power split, receivers by kind); bars for comparisons, one unit per chart.
+
+## Decisions as cards (J.B., 17 Oct 2026)
+- The set-up is now one decision per card: an animation of the option picked, its upsides and downsides, the choices as one row, and what fits as it stands. Next moves to the next decision.
+- What is being built has four options: a new building, a shared new building, a retrofit of an existing building, or leased space in a building (same answers underneath: new/existing × whole/part).
+- To do: the same card form for the exchanges, the opportunities, the options and the report.
