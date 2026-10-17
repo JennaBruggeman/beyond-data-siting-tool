@@ -116,7 +116,7 @@ function oppRest(list){ const c=ctx(), e=c.e; BD.S.view2='tab';
   $('#side').innerHTML=e.tabBar('opp')+`<h2>Not here</h2><p class="lead">${no.length?`<span class="k">${no.length} of ${list.length}</span> opportunities fail at least one gate at this site.`:'No opportunity fails outright here.'}</p>
   ${no.map(o=>{ const g=GATES.filter(k=>o.G[k][0]==='no'); return `<div class="addrow"><div>${esc(o.n)}<div class="src">${g.map(k=>`<span style="color:${GS.no[1]}">${k}</span>: ${esc(o.G[k][1])}`).join(' · ')}</div></div></div>`; }).join('')}`;
   e.wireTabs(); BD.draw(); e.show3d('model',{site:c.f}); }
-Object.assign(BD,{oppPrep,oppScreen,oppStep,oppRest,oppGates:GS});
+Object.assign(BD,{oppPrep,oppScreen,oppStep,oppRest,oppGates:GS,oppGatesFor:n=>{ const c=ctx(), g=gates(n,c); return Object.assign(g,{s:summary(g.G),c,order:GATES,fam:(ORDER.find(o=>o.n===n)||{}).fam}); }});
 BD.oppCard=oppCard;
 BD.tabOverride=Object.assign(BD.tabOverride||{},{opps2:oppIndex});
 })();

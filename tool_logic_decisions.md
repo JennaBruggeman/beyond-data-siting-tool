@@ -243,3 +243,8 @@ No building is drawn for a new data centre. The 3D shows the lot, the zoning's b
 - Only opportunities not ruled out get a step (J.B.'s choice); the rest are listed once with the gate that fails.
 - Real buildings, Over time and Two cities are folded into the steps (J.B.'s choice).
 - The report is built from what each step showed when it was passed, and downloads as HTML or PDF.
+
+## How-it-works cards (J.B., 17 Oct 2026)
+- Every exchange step and every opportunity step has an optional "How it works" card: a few steps, each a schematic animation or a chart of this site's own figures, with the trade-off in a sentence.
+- Charts use the tool's numbers only (same model as the panel); drawings are schematic and say so. Chart colours validated for the dark panel; every mark is labelled; "Show the numbers" gives the table.
+- Pie (donut) charts only for parts of one whole (power split, receivers by kind); bars for comparisons, one unit per chart.

@@ -100,6 +100,7 @@ function foot(){ const st=F.steps[F.i], nx=F.steps[F.i+1], pv=F.steps[F.i-1]; co
   return `<div class="flowfoot">${pv?`<button class="sec" id="fBack">← ${esc(pv.t)}</button>`:'<span></span>'}${nx?`<button class="${st.k==='setup'?'sec':'pri'}" id="fNext" ${blocked?'disabled':''}>${blocked?'Pick a site first':st.k==='setup'?'Keep the defaults →':`Next: ${esc(nx.t)} →`}</button>`:''}</div>`; }
 function decorate(){ const sd=$('#side'); if(!sd||!F.on) return; F.busy=true;
   try{ sd.querySelectorAll(':scope > .flowbar, :scope > .flowfoot').forEach(x=>x.remove()); sd.insertAdjacentHTML('afterbegin',bar()); sd.insertAdjacentHTML('beforeend',foot());
+    { const st=F.steps[F.i], tk=BD.explain&&BD.explain.topicFor(st.k); if(tk&&!sd.querySelector('.xpbtn')){ const at=sd.querySelector('.lead')||sd.querySelector('h2'); if(at){ const b=document.createElement('button'); b.className='xpbtn'; b.innerHTML='How it works <span>›</span>'; b.onclick=()=>BD.explain.open(tk); at.after(b); } } }
     sd.querySelectorAll('.flowbar [data-fg]').forEach(b=>b.onclick=()=>{ const k=F.steps.findIndex(s=>s.g===b.dataset.fg); if(k>=0&&k<=F.max) go(k); });
     const bk=$('#fBack'); if(bk) bk.onclick=back; const nx=$('#fNext'); if(nx) nx.onclick=next; }
   finally{ setTimeout(()=>{ F.busy=false; },0); } }
@@ -218,6 +219,9 @@ async function docPDF(D){ if(!window.jspdf) await load(PDFLIB[0]); if(!(window.j
   const n=doc.getNumberOfPages(); for(let p=1;p<=n;p++){ doc.setPage(p); doc.setFontSize(7.5); doc.setTextColor(...grey); doc.text(`${p} / ${n}`,W-M,H-28,{align:'right'}); }
   return doc.output('blob'); }
 
+/* in the set-up drawer, the cooling card gets its "how it works" too */
+(function watchDr(){ const dr=document.getElementById('drawer'); if(!dr) return setTimeout(watchDr,300);
+  new MutationObserver(()=>{ const h=[...dr.querySelectorAll('h2')].find(x=>/^Cooling and where/.test(x.textContent)); if(h&&!dr.querySelector('.xpbtn')&&BD.explain){ const b=document.createElement('button'); b.className='xpbtn'; b.innerHTML='How the heat leaves <span>›</span>'; b.onclick=()=>BD.explain.open('cooling'); h.after(b); } }).observe(dr,{childList:true,subtree:true}); })();
 /* start: the welcome card, unless a parcel link was opened (then straight to the set-up) */
 function boot(){ if(!BD.S||!BD.intro) return setTimeout(boot,200); if(!BD.S.sel&&!BD.S.view2) BD.intro(); if(BD.S.sel){ F.sel=selKey(); F.sig=sigOf(); F.i=1; F.max=1; decorate(); } else { decorate(); welcome(); } }
 setTimeout(boot,400);
