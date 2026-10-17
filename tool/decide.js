@@ -85,27 +85,72 @@ const DECK=[
 ];
 const live=()=>DECK.filter(d=>!d.when||d.when(BD.S.answers));
 
-/* ---------- the card: rendered in the panel itself, with the live 3D as its picture (J.B., 17 Oct: one card, 3D as part of it) ---------- */
-const SVGONLY=new Set(['inside','spares']);   // decisions the 3D cannot show: a small schematic instead
-let at=0;
+/* ---------- is this option possible on this parcel? (J.B., 17 Oct: "if the parcel is empty, explain that this isn't possible") ----------
+   yes = possible here · chg = possible, with a condition · nk = not yet known · no = not possible here, with the reason */
+function site(){ const f=BD.eng.siteFacts(), sel=BD.S.sel, bl=(sel.blds||[]).filter(b=>b.f!==3), hmax=bl.length?Math.max(...bl.map(b=>b.h||0)):0;
+  return {f,bl,hmax,src:f.city==='van'?'City LiDAR 2022':'City 3D buildings',z:f.zone||'—',st:f.status||{k:'',t:''},env:f.env}; }
+const FEAS={
+ built:{
+  new:x=>x.st.k==='no'||x.st.k==='low'?{s:'chg',why:`Zone ${x.z} does not allow a data centre: a rezoning would come first.`}:x.st.k==='site'?{s:'chg',why:`Zone ${x.z} has site-specific rules; the tool uses I-2 limits as if rezoned, for comparison.`}:{s:'yes',why:`A data centre is ${x.st.t.toLowerCase()} in zone ${x.z}.`},
+  shared:x=>x.env&&x.env.ground?{s:'chg',why:`Zone ${x.z} keeps data storage off the ground floor, so a shared building, with another use at the street, is the form the zone points to. Whether homes or offices may go above has not been read.`}:{s:'nk',why:`Whether other uses may share a data-centre building in zone ${x.z} has not been read.`},
+  retrofit:x=>x.bl.length?{s:'yes',why:`${x.bl.length} building${x.bl.length>1?'s':''} on the lot, the tallest ${x.hmax.toFixed(0)} m (${x.src}). Whether its floors carry server loads is not checked here.`}:{s:'no',why:`No building is recorded on this lot (${x.src}), so there is nothing to retrofit.`},
+  lease:x=>!x.bl.length?{s:'no',why:`No building is recorded on this lot (${x.src}), so there is no space to lease.`}:x.hmax<8?{s:'chg',why:`The building is about ${x.hmax.toFixed(0)} m tall: one or two storeys, so a floor is most of it.`}:{s:'yes',why:`A building of about ${x.hmax.toFixed(0)} m stands here (${x.src}).`}},
+ floor:{
+  basement:x=>({s:'nk',why:'Whether the building has a basement is not recorded.'}),
+  upper:x=>x.hmax<8?{s:'no',why:`The building is about ${x.hmax.toFixed(0)} m tall: there is no upper floor.`}:{s:'yes',why:''},
+  ground:x=>x.env&&x.env.ground?{s:'no',why:`Zone ${x.z} keeps data storage off the ground floor.`}:{s:'yes',why:''}},
+ foot:{ existing:x=>x.bl.length?{s:'yes',why:''}:{s:'no',why:`No building is recorded on this lot (${x.src}) to match.`} },
+ inside:{ immersion:x=>({s:'nk',why:'How much of the heat immersion catches is not yet sourced.'}) },
+ outside:{ towers:x=>({s:'chg',why:x.f.city==='van'?'Needs an operating permit and monthly Legionella testing (VBBL).':'Needs water treatment and Legionella control.'}), hybrid:x=>x.f.city==='van'?{s:'chg',why:'Vancouver treats them like a cooling tower: the same permit.'}:{s:'yes',why:''} },
+ gens:{ roof:x=>({s:'chg',why:'Fuel on an upper storey is limited by the fire code (NFC 2020); the roof must carry the sets.'}) },
+};
+const feas=(id,v)=>{ const F=FEAS[id]&&FEAS[id][v]; return F?F(site()):{s:'yes',why:''}; };
+const FS={yes:['Possible here','#8fb996','✓'],chg:['Possible, with a condition','#cdb07a','~'],nk:['Not yet known','#9d9a94','?'],no:['Not possible here','#e39a93','✕']};
+
+/* what each option would mean here, worked out with the model itself (answers swapped in, then put back) */
+function tryAnswers(set,fn){ const A=BD.S.answers, keep=JSON.stringify(A); Object.assign(A,set,{mw:null}); BD.modelReset(); let r; try{ r=fn(); }catch(e){ r=null; } const back=JSON.parse(keep); for(const k of Object.keys(A)) delete A[k]; Object.assign(A,back); BD.modelReset(); return r; }
+const fitOf=set=>tryAnswers(set,()=>{ const f=BD.eng.siteFacts(), m=BD.model(); return {mw:f.mw,gross:f.gross,short:m&&m.plant?m.plant.short:'',warn:m?m.warn:[]}; });
+const setOf=(d,v)=>{ const o={}; const A0=BD.S.answers; const tmp=Object.assign({},A0); d.set(tmp,v); for(const k in tmp) if(tmp[k]!==A0[k]) o[k]=tmp[k]; return o; };
+const V=()=>BD.viz;
+const CH={
+ built:(h,d,opts)=>{ const rows=opts.map(o=>{ const fs=feas(d.id,o.v); if(fs.s==='no') return {label:o.t,v:0,c:V().C.other,note:'not possible here'}; const r=fitOf(setOf(d,o.v)); return {label:o.t,lo:r.mw[0],hi:r.mw[1],c:o.v===d.k(BD.S.answers)?V().C.heat:V().C.other}; });
+   V().bars(h,rows,'MW of servers','Servers that fit, by option'); return 'Servers that fit here, for each option. Grey bars are the options not picked; "none" means not possible here.'; },
+ foot:(h,d,opts)=>{ V().bars(h,opts.filter(o=>feas(d.id,o.v).s!=='no').map(o=>{ const r=fitOf(setOf(d,o.v)); return {label:o.t,lo:r.gross[0],hi:r.gross[1],c:o.v===d.k(BD.S.answers)?V().C.heat:V().C.other}; }),'m² of floor','Floor area, by option'); return 'Floor area for each choice.'; },
+ height:(h,d,opts)=>{ V().bars(h,opts.filter(o=>o.v!=='storeys').map(o=>{ const r=fitOf(setOf(d,o.v)); return {label:o.t,lo:r.mw[0],hi:r.mw[1],c:o.v===d.k(BD.S.answers)?V().C.heat:V().C.other}; }),'MW of servers','Servers that fit, by height'); return 'Servers that fit at each height.'; },
+ inside:(h)=>{ const R=BD.eng.R; V().bars(h,[{label:'Air',v:0,c:V().C.other,note:'heat leaves in air at 25–35 °C'},{label:'Liquid to the chip',lo:R.capture[0]*100,hi:R.capture[1]*100,c:V().C.heat},{label:'Immersion',v:0,c:V().C.other,note:'not yet sourced'}],'% of heat caught in liquid','Heat caught in liquid'); return 'Share of server heat caught in liquid, where it is easiest to reuse. Immersion: not yet sourced.'; },
+ outside:(h,d,opts)=>{ const A=BD.S.answers, mw=A.mw||(BD.model()&&BD.model().mwSized)||1; const rows=opts.map(o=>{ const s=BD.plant.sizeFor(mw,Object.assign({},A,{outside:o.v})); return {label:o.t,v:s.n*s.k.L*s.k.W,c:o.v===A.outside?V().C.heat:V().C.other,note:s.n+' units'}; });
+   V().bars(h,rows,'m² of units','Plant area, by system'); return `Area of the units alone for ${(+mw).toFixed(1)} MW (clearances add more). Water: dry none; towers evaporate up to 1.5 L per kWh of heat.`; },
+ plantAt:(h,d,opts)=>{ V().bars(h,opts.map(o=>{ const r=fitOf(setOf(d,o.v)); return {label:o.t,lo:r.mw[0],hi:r.mw[1],c:o.v===d.k(BD.S.answers)?V().C.heat:V().C.other,note:r.short||''}; }),'MW of servers','Servers that fit, by plant position'); return 'Plant in the yard takes floor area from the building.'; },
+ spares:(h,d,opts)=>{ const A=BD.S.answers, mw=A.mw||(BD.model()&&BD.model().mwSized)||1; V().bars(h,opts.map(o=>{ const s=BD.plant.sizeFor(mw,Object.assign({},A,{spares:o.v})); return {label:o.t,v:s.n,c:o.v===A.spares?V().C.heat:V().C.other}; }),'cooling units','Units, by spares'); return `Cooling units for ${(+mw).toFixed(1)} MW (the size the set-up is drawn at).`; },
+ gens:(h)=>{ const e=BD.eng, f=e.siteFacts(), A=BD.S.answers, r=e.calc({mw:A.mw||(BD.model()&&BD.model().mwSized)||1,recover:false},f,[],[]); V().bars(h,[{label:'Fuel for 12 h',lo:r.fuel[0],hi:r.fuel[1],c:V().C.power}],'litres','Fuel stored on site'); return 'Diesel kept on site to run the generators for 12 hours at full load.'; },
+};
+const DEMO={built:{new:'new',shared:'share',retrofit:'retrofit',lease:'lease'},floor:{basement:'lease',ground:'lease',upper:'lease',roof:'lease'},foot:{max:'new',existing:'new',cover:'new'},height:{out:'new',cond:'new',storeys:'new'}};
+
+/* ---------- the card: in the panel, with the live 3D as its picture ---------- */
+const SVGONLY=new Set(['inside','spares']);
+let at=0; const pv={};
 function show(i){ const A=BD.S.answers; const L=live(); at=Math.max(0,Math.min(L.length-1,i)); const d=L[at]; const m=BD.model(); if(!m) return;
-  const opts=d.opts(m), cur=d.k(A), o=opts.find(x=>x.v===cur)||opts[0]; const f=BD.eng.siteFacts();
+  const opts=d.opts(m), cur=d.k(A), pick=pv[d.id]&&opts.find(x=>x.v===pv[d.id])?pv[d.id]:cur, o=opts.find(x=>x.v===pick)||opts[0]; const fs=feas(d.id,o.v), F=FS[fs.s]; const f=BD.eng.siteFacts();
   if(BD.drawer&&BD.drawer.isOpen()) BD.drawer.close();
   const res=f.mw[1]<0.05?`${K('Nothing fits')} with these choices`:`${K(BD.eng.rng(f.mw[0],f.mw[1],'MW'))} of servers fit · ${BD.eng.rng(f.gross[0],f.gross[1],'m²')} floor`;
+  const no=fs.s==='no';
   $('#side').innerHTML=`<div class="dk"><div class="kind">Set up the site · ${at+1} of ${L.length}</div><div class="dbar">${L.map((x,j)=>`<i class="${j<at?'done':j===at?'on':''}"></i>`).join('')}</div>
-   ${SVGONLY.has(d.id)?`<div class="dvis">${d.anim(o.v,m)}</div>`:'<div class="c3d"></div>'}
    <h2>${esc(d.q)}</h2>
-   <div class="dch" role="radiogroup">${opts.map(x=>`<button role="radio" data-v="${x.v}" aria-checked="${x.v===o.v}">${esc(x.t)}</button>`).join('')}</div>${d.extra?d.extra(A):''}
+   <div class="dch" role="radiogroup">${opts.map(x=>{ const s=feas(d.id,x.v).s; return `<button role="radio" data-v="${x.v}" aria-checked="${x.v===o.v}" class="${s==='no'?'nope':''}" title="${esc(FS[s][0])}">${s==='no'?'✕ ':''}${esc(x.t)}</button>`; }).join('')}</div>
+   ${no?`<div class="dnope"><b>${F[2]} ${F[0]}</b><span>${esc(fs.why)}</span></div>`:(SVGONLY.has(d.id)?`<div class="dvis">${d.anim(o.v,m)}</div>`:'<div class="c3d"></div>')}
+   ${!no?`<div class="dfeas" style="--fc:${F[1]}"><b>${F[2]} ${F[0]}</b>${fs.why?` <span>${esc(fs.why)}</span>`:''}</div>`:''}${!no&&d.extra?d.extra(A):''}
    <div class="dud"><div><div class="dh up">Upsides</div><ul>${o.up.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div><div><div class="dh dn">Downsides</div><ul>${o.down.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div>
-   <p class="dres">${res}${m.warn&&m.warn.length?`<br><span class="dwarn">${esc(m.warn[0])}</span>`:''}</p>
+   ${CH[d.id]?'<div class="dchart" id="dchart"></div><p class="dcap" id="dcap"></p>':''}
+   <p class="dres">${no?'Not picked: the site stays as set up. ':''}${res}${m.warn&&m.warn.length?`<br><span class="dwarn">${esc(m.warn[0])}</span>`:''}</p>
    <div class="dnav"><button class="sec" id="dB">← ${at?'Back':'The site'}</button><button class="pri" id="dN">${at<L.length-1?'Next →':'What fits here →'}</button></div></div>`;
   const el=$('#side');
-  el.querySelectorAll('.dch button').forEach(b=>b.onclick=()=>{ d.set(A,b.dataset.v); changed(); });
+  el.querySelectorAll('.dch button').forEach(b=>b.onclick=()=>{ const v=b.dataset.v; if(feas(d.id,v).s==='no'){ pv[d.id]=v; show(at); return; } pv[d.id]=null; d.set(A,v); changed(); });
   const cov=$('#dcov'); if(cov){ cov.oninput=()=>{ $('#dcovv').textContent=cov.value+'%'; }; cov.onchange=()=>{ A.cover=+cov.value; changed(); }; }
   const sto=$('#dsto'); if(sto) sto.onchange=()=>{ A.storeys=Math.max(1,Math.min(12,+sto.value||1)); changed(); };
-  $('#dB').onclick=()=>{ if(at) show(at-1); else if(BD.flow&&BD.flow.on) BD.flow.back(); else BD.card(); };
-  $('#dN').onclick=()=>{ if(at<live().length-1) show(at+1); else { A.setupDone=true; if(BD.flow&&BD.flow.on) BD.flow.next(); else BD.fitsView(); } };
-  BD.showModel&&BD.showModel(); }
+  $('#dB').onclick=()=>{ pv[d.id]=null; if(at) show(at-1); else if(BD.flow&&BD.flow.on) BD.flow.back(); else BD.card(); };
+  $('#dN').onclick=()=>{ pv[d.id]=null; if(at<live().length-1) show(at+1); else { A.setupDone=true; if(BD.flow&&BD.flow.on) BD.flow.next(); else BD.fitsView(); } };
+  if(CH[d.id]&&BD.viz){ try{ const cap=CH[d.id]($('#dchart'),d,opts); $('#dcap').textContent=cap||''; }catch(e){ console.warn(e); } }
+  if(!no){ const p=BD.showModel?BD.showModel():null; const kind=DEMO[d.id]&&DEMO[d.id][o.v]; if(p&&p.then) p.then(()=>{ if(kind&&BD.scene3d&&BD.scene3d.demo) BD.scene3d.demo(kind); }); } }
 function changed(){ const A=BD.S.answers; A.mw=null; BD.modelReset(); const id=live()[at]&&live()[at].id; const j=live().findIndex(d=>d.id===id); show(j<0?at:j); }
 // the old five steps map onto cards: 1 built, 2 footprint, 3 height, 4 cooling, 5 standby
 const OLD={1:'built',2:'foot',3:'height',4:'inside',5:'gens'};

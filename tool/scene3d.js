@@ -38,7 +38,7 @@ function setup(){
     tip.innerHTML=hoverText(nb); tip.style.display=''; tip.style.left=Math.min(b.width-270,e.clientX-b.left+14)+'px'; tip.style.top=(e.clientY-b.top+14)+'px'; });
   ren.domElement.addEventListener('pointerleave',()=>{ tip.style.display='none'; });
   ren.domElement.addEventListener('click',e=>{ if(!R.onPick||!R.nbMesh) return; const b=ren.domElement.getBoundingClientRect(); mv.x=(e.clientX-b.left)/b.width*2-1; mv.y=-(e.clientY-b.top)/b.height*2+1; ray.setFromCamera(mv,cam); const hit=ray.intersectObject(R.nbMesh)[0]; if(hit){ const nb=R.nbList[whichB(hit.faceIndex)]; if(nb) R.onPick(nb); } });
-  (function loop(){ requestAnimationFrame(loop); if(wrap.style.display==='none') return; ctl.update();
+  (function loop(){ requestAnimationFrame(loop); if(wrap.style.display==='none') return; ctl.update(); if(R.ticks&&R.ticks.length){ const now=performance.now(); R.ticks.forEach(f=>{ try{ f(now); }catch(e){} }); }
     if(R.multi){ const b=wrap.getBoundingClientRect(), w=b.width/3; ren.setScissorTest(true); R.multi.forEach((s,i)=>{ ren.setViewport(i*w,0,w,b.height); ren.setScissor(i*w,0,w,b.height); cam.aspect=w/b.height; cam.updateProjectionMatrix(); ren.render(s,cam); }); ren.setScissorTest(false); }
     else { ren.setViewport(0,0,wrap.clientWidth,wrap.clientHeight); cam.aspect=wrap.clientWidth/Math.max(1,wrap.clientHeight); cam.updateProjectionMatrix(); ren.render(scene,cam); placeLabels(); } })();
 }
@@ -165,7 +165,7 @@ function racksFor(M){ const A=BD.S.answers, mw=A.mw||M.mwSized||1, racks=Math.ro
   return {obj:ls,n:pts.length,per,racks,floors}; }
 
 /* ---------- overlays ---------- */
-function clearOverlay(){ if(R.ov) R.scene.remove(R.ov); R.ov=new T.Group(); R.scene.add(R.ov); lab.splice(0); labels.innerHTML=''; resetTint(); R.onPick=null;
+function clearOverlay(){ if(R.ov) R.scene.remove(R.ov); R.ov=new T.Group(); R.scene.add(R.ov); R.ticks=[]; if(R.demoG){ R.scene.remove(R.demoG); R.demoG=null; } lab.splice(0); labels.innerHTML=''; resetTint(); R.onPick=null;
   if(state.shell){ state.shell.children[0].material.opacity=0.55; } if(state.racks) state.racks.obj.material.opacity=0.35; }
 function roofC(){ return state.foot?BD.centroid(state.foot):state.c; }
 function plantLabels(col){ const G=state.plantGroups||{}; for(const k in G){ const L=G[k], [name,where]=k.split('|'); const b=L[Math.floor(L.length/2)], c=BD.centroid(b.ring);
@@ -269,6 +269,21 @@ async function showOptions(opts,data){
   for(let i=1;i<3;i++){ const d=document.createElement('div'); d.style.cssText=`position:absolute;top:0;bottom:0;left:${i*33.333}%;border-left:1px solid #30343a;pointer-events:none`; wrap.appendChild(d); R.cap.push(d); }
   { const sp=state.span; R.cam.position.set(sp*3.0,sp*2.6+state.roof*1.4,sp*3.4); R.ctl.target.set(0,state.roof*0.4,0); } note('Same site, same view: drag to orbit all three'); key(''); }
 function hide(){ if(wrap) wrap.style.display='none'; if(R){ R.multi=null; if(R.cap){ R.cap.forEach(c=>c.remove()); R.cap=[]; } } }
-BD.scene3d={show,showOptions,hide,ensure,snap:(x,y)=>R&&R.nbList?snap(x,y):null,state:()=>state,isOpen:()=>!!wrap&&wrap.style.display!=='none'};
-BD.showModel=()=>{ if(!BD.S.sel) return; show('model',{}).catch(e=>console.warn(e)); };
+/* demos for the decision cards (J.B., 17 Oct): the option picked, animated on this site. Schematic massing, not a design. */
+function demo(kind){ if(!R||!state.M) return; const M=state.M, sel=BD.S.sel; if(R.demoG){ R.scene.remove(R.demoG); } const g=new T.Group(); R.demoG=g; R.scene.add(g); R.ticks=R.ticks||[];
+  const t0=performance.now(), loopMs=5200;
+  const ease=x=>x<0?0:x>1?1:1-Math.pow(1-x,3);
+  if((kind==='new'||kind==='share')&&M.foot){ const n=Math.max(1,M.nF?M.nF[0]:3), H=M.H||n*6, fh=H/n, data=kind==='share'?Math.max(1,Math.ceil((n-1)/2)):n, ground=kind==='share';
+    const fl=[]; for(let i=0;i<n;i++){ const isData=kind==='new'||(i>=(ground?1:0)&&i<(ground?1:0)+data); const p=prism(M.foot,fh*0.96,i*fh,isData?0x2a2224:0x23262a,isData?C.acc:C.grey,0.95,isData?0.5:0.35); p.visible=false; g.add(p); fl.push(p); }
+    if(kind==='share'){ const c=BD.centroid(M.foot); label('data-centre floors',V(c[0],c[1],fh*(ground?1:0)+fh*data*0.5),'#e39a93',{prio:9}); label(ground?'street use at grade · other uses above':'other uses above',V(c[0],c[1],H+6),'#9d9a94',{prio:8}); }
+    else { const c=BD.centroid(M.foot); label(`a new building · ${n} storeys · ${H.toFixed(1)} m`,V(c[0],c[1],H+6),'#e39a93',{prio:9}); }
+    R.ticks.push(now=>{ const t=((now-t0)%loopMs)/loopMs*1.6; fl.forEach((p,i)=>{ const k=ease((t*n-i)/1.1); p.visible=k>0.01; p.scale.set(1,Math.max(0.01,k),1); p.position.y=i*fh*(1-k)*0; }); }); }
+  if(kind==='retrofit'||kind==='lease'){ const bl=(sel.blds||[]).filter(b=>b.f!==3); const c=M.foot?BD.centroid(M.foot):state.c;
+    if(kind==='retrofit'){ const shells=bl.map(b=>{ const p=prism(b.r,Math.max(2,b.h)+0.4,0,0x3a2626,C.acc,1,0.0); g.add(p); return p; }); label('the building that stands here, fitted out',V(c[0],c[1],(M.roofH||M.H)+8),'#e39a93',{prio:9});
+      R.ticks.push(now=>{ const t=((now-t0)%2600)/2600; shells.forEach(p=>{ p.userData.edge.material.opacity=0.35+0.65*Math.abs(Math.sin(t*Math.PI)); }); }); }
+    else { const rh=M.roofH||M.H, A=BD.S.answers; const lvl={basement:-4,ground:0,upper:Math.max(4,Math.min(rh-8,rh*0.6)),roof:rh-0.5}[A.floor||'upper']; const p=prism(M.foot,4,lvl,0xCC746C,C.acc,1,0.35); g.add(p); label('one leased floor',V(c[0],c[1],lvl+12),'#e39a93',{prio:9});
+      R.ticks.push(now=>{ const t=((now-t0)%2400)/2400; p.children[0].material.opacity=0.15+0.4*Math.abs(Math.sin(t*Math.PI)); }); } }
+}
+BD.scene3d={show,showOptions,hide,ensure,demo,snap:(x,y)=>R&&R.nbList?snap(x,y):null,state:()=>state,isOpen:()=>!!wrap&&wrap.style.display!=='none'};
+BD.showModel=()=>{ if(!BD.S.sel) return Promise.resolve(); return show('model',{}).catch(e=>console.warn(e)); };
 })();

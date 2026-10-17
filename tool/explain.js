@@ -195,5 +195,6 @@ document.addEventListener('keydown',e=>{ if(!cur) return; if(e.key==='Escape'){ 
 
 /* which card goes with which step of the path */
 const FOR={heat:'heat',energy:'energy',water:'water',materials:'materials',social:'people'};
+BD.viz={bars,donut,lineChart,yearStrip,C};
 BD.explain={open,close,topicFor:k=>k.startsWith('opp:')?k:FOR[k]||null,TOPICS};
 })();
