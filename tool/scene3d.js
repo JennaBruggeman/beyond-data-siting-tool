@@ -86,8 +86,15 @@ function norm(v){ const l=Math.hypot(v[0],v[1])||1; return [v[0]/l,v[1]/l]; }
 function whichB(fi){ const s=R.nbFaceStart; let lo=0,hi=s.length-1; while(lo<hi){ const mid=(lo+hi+1)>>1; if(s[mid]<=fi) lo=mid; else hi=mid-1; } return lo; }
 function buildNeighbours(site){
   const S=BD.S, siteB=new Set(site.blds||[]); const pos=[], idx=[], lp=[], lc=[]; const list=[], faceStart=[]; let tri=0;
+  // a new building replaces whatever stands on the lot: drop every building whose centre, or half its corners, fall inside the lot (J.B., 16 Oct)
+  const ring=S.sel&&S.sel.ring, isNew=(S.answers.built||'new')!=='existing';
+  // a building is on the lot if its centre is inside, or any of its corners or edges reach 2 m inside the lot line (footprints and parcels do not line up exactly, so a 2 m margin keeps neighbours that only touch the line)
+  let inner=null; try{ if(ring&&BD.geo&&BD.geo.offset){ const a=BD.geo.offset(ring,-2), b=BD.geo.offset(ring,2); inner=BD.area(a)<BD.area(b)?a:b; } }catch(e){} if(inner&&inner.length<6) inner=null;
+  const X=(ax,ay,bx,by,cx,cy,dx,dy)=>{ const d=(bx-ax)*(dy-cy)-(by-ay)*(dx-cx); if(!d) return false; const t=((cx-ax)*(dy-cy)-(cy-ay)*(dx-cx))/d, u=((cx-ax)*(by-ay)-(cy-ay)*(bx-ax))/d; return t>0&&t<1&&u>0&&u<1; };
+  const onLot=b=>{ if(!ring) return false; if(BD.pip(b.c[0],b.c[1],ring)) return true; if(!inner) return false; const r=b.r, n=r.length/2, m=inner.length/2;
+    for(let i=0;i<n;i++){ if(BD.pip(r[2*i],r[2*i+1],inner)) return true; const j=(i+1)%n; for(let p=0;p<m;p++){ const q=(p+1)%m; if(X(r[2*i],r[2*i+1],r[2*j],r[2*j+1],inner[2*p],inner[2*p+1],inner[2*q],inner[2*q+1])) return true; } } return false; };
   const cE=new T.Color(C.edge);
-  for(const id in S.tiles){ if(!id.startsWith(S.city+':')) continue; for(const b of S.tiles[id].bld){ if(b.f===3||siteB.has(b)) continue;
+  for(const id in S.tiles){ if(!id.startsWith(S.city+':')) continue; for(const b of S.tiles[id].bld){ if(b.f===3||siteB.has(b)||(isNew&&onLot(b))) continue;
       const d=Math.hypot(b.c[0]-site.c[0],b.c[1]-site.c[1]); if(d>RAD) continue; const h=Math.max(2,b.h||0), r=b.r, n=r.length/2;
       const base=pos.length/3; faceStart.push(tri); const near=d<=NEAR; const op=near?0.30:d<900?0.16:0.09;
       for(let i=0;i<n;i++){ const x=r[2*i]-site.c[0], z=-(r[2*i+1]-site.c[1]); pos.push(x,0,z, x,h,z); }
