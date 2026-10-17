@@ -85,32 +85,32 @@ const DECK=[
 ];
 const live=()=>DECK.filter(d=>!d.when||d.when(BD.S.answers));
 
-/* ---------- the card ---------- */
+/* ---------- the card: rendered in the panel itself, with the live 3D as its picture (J.B., 17 Oct: one card, 3D as part of it) ---------- */
+const SVGONLY=new Set(['inside','spares']);   // decisions the 3D cannot show: a small schematic instead
 let at=0;
 function show(i){ const A=BD.S.answers; const L=live(); at=Math.max(0,Math.min(L.length-1,i)); const d=L[at]; const m=BD.model(); if(!m) return;
   const opts=d.opts(m), cur=d.k(A), o=opts.find(x=>x.v===cur)||opts[0]; const f=BD.eng.siteFacts();
-  const dr=BD.drawer.el; dr.classList.add('deck');
+  if(BD.drawer&&BD.drawer.isOpen()) BD.drawer.close();
   const res=f.mw[1]<0.05?`${K('Nothing fits')} with these choices`:`${K(BD.eng.rng(f.mw[0],f.mw[1],'MW'))} of servers fit · ${BD.eng.rng(f.gross[0],f.gross[1],'m²')} floor`;
-  BD.drawer.open(`<div class="dk"><div class="dvis">${d.anim(o.v,m)}</div><div class="dtx">
-   <div class="kind">Set up the site · ${at+1} of ${L.length}</div><div class="dbar">${L.map((x,j)=>`<i class="${j<at?'done':j===at?'on':''}"></i>`).join('')}</div>
+  $('#side').innerHTML=`<div class="dk"><div class="kind">Set up the site · ${at+1} of ${L.length}</div><div class="dbar">${L.map((x,j)=>`<i class="${j<at?'done':j===at?'on':''}"></i>`).join('')}</div>
+   ${SVGONLY.has(d.id)?`<div class="dvis">${d.anim(o.v,m)}</div>`:'<div class="c3d"></div>'}
    <h2>${esc(d.q)}</h2>
    <div class="dch" role="radiogroup">${opts.map(x=>`<button role="radio" data-v="${x.v}" aria-checked="${x.v===o.v}">${esc(x.t)}</button>`).join('')}</div>${d.extra?d.extra(A):''}
    <div class="dud"><div><div class="dh up">Upsides</div><ul>${o.up.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div><div><div class="dh dn">Downsides</div><ul>${o.down.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div>
    <p class="dres">${res}${m.warn&&m.warn.length?`<br><span class="dwarn">${esc(m.warn[0])}</span>`:''}</p>
-   <div class="dnav"><button class="sec" id="dB" ${at?'':'disabled'}>← Back</button><button class="pri" id="dN">${at<L.length-1?'Next →':'What fits here →'}</button></div></div></div>`,el=>{
-    el.querySelectorAll('.dch button').forEach(b=>b.onclick=()=>{ d.set(A,b.dataset.v); changed(); });
-    const cov=$('#dcov'); if(cov){ cov.oninput=()=>{ $('#dcovv').textContent=cov.value+'%'; }; cov.onchange=()=>{ A.cover=+cov.value; changed(); }; }
-    const sto=$('#dsto'); if(sto) sto.onchange=()=>{ A.storeys=Math.max(1,Math.min(12,+sto.value||1)); changed(); };
-    $('#dB').onclick=()=>show(at-1);
-    $('#dN').onclick=()=>{ if(at<live().length-1) show(at+1); else { A.setupDone=true; BD.drawer.close(); if(BD.flow&&BD.flow.on) BD.flow.next(); else BD.fitsView(); } };
-  });
+   <div class="dnav"><button class="sec" id="dB">← ${at?'Back':'The site'}</button><button class="pri" id="dN">${at<L.length-1?'Next →':'What fits here →'}</button></div></div>`;
+  const el=$('#side');
+  el.querySelectorAll('.dch button').forEach(b=>b.onclick=()=>{ d.set(A,b.dataset.v); changed(); });
+  const cov=$('#dcov'); if(cov){ cov.oninput=()=>{ $('#dcovv').textContent=cov.value+'%'; }; cov.onchange=()=>{ A.cover=+cov.value; changed(); }; }
+  const sto=$('#dsto'); if(sto) sto.onchange=()=>{ A.storeys=Math.max(1,Math.min(12,+sto.value||1)); changed(); };
+  $('#dB').onclick=()=>{ if(at) show(at-1); else if(BD.flow&&BD.flow.on) BD.flow.back(); else BD.card(); };
+  $('#dN').onclick=()=>{ if(at<live().length-1) show(at+1); else { A.setupDone=true; if(BD.flow&&BD.flow.on) BD.flow.next(); else BD.fitsView(); } };
   BD.showModel&&BD.showModel(); }
-function changed(){ const A=BD.S.answers; A.mw=null; BD.modelReset(); const id=live()[at]&&live()[at].id; if(BD.S.view2==='fits') BD.fitsView(); else BD.card(); const j=live().findIndex(d=>d.id===id); show(j<0?at:j); }
+function changed(){ const A=BD.S.answers; A.mw=null; BD.modelReset(); const id=live()[at]&&live()[at].id; const j=live().findIndex(d=>d.id===id); show(j<0?at:j); }
 // the old five steps map onto cards: 1 built, 2 footprint, 3 height, 4 cooling, 5 standby
 const OLD={1:'built',2:'foot',3:'height',4:'inside',5:'gens'};
 const orig=BD.setup.card;
 BD.setup.card=step=>{ const j=live().findIndex(d=>d.id===OLD[step]); show(j<0?0:j); };
 BD.setup.start=()=>show(0);
-const close0=BD.drawer.close; BD.drawer.close=function(){ BD.drawer.el.classList.remove('deck'); return close0.apply(this,arguments); };
 BD.deck={show,DECK};
 })();
