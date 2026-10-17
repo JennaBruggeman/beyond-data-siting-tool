@@ -111,12 +111,28 @@ function oppStep(n,i,total){ const c=ctx(), e=c.e, {L,G}=gates(n,c), it=ORDER.fi
   <p>${gp(s)} ${L.readiness?BD.rdPill(L.readiness):''}</p><p class="lead">${s==='yes'?'<span class="k">Possible here</span>: every gate the tool can test passes.':s==='chg'?'<span class="k">Possible with a change</span>: no gate fails outright.':'<span class="k">Not ruled out</span>: no gate fails, but some are not yet known.'}</p>
   ${oppBody(n,c)}`;
   e.wireTabs(); BD.draw(); opp3d(n,c); }
+/* one card per family (J.B., 17 Oct: thirteen opportunities in a row is too long): the family's opportunities as rows, the picked one's detail and 3D below */
+const FAMW={yes:'every gate the tool can test passes',chg:'no gate fails outright; one needs a change',nk:'no gate fails; some are not yet known'};
+const rowWhy=x=>{ if(x.s==='chg'){ const g=GATES.find(k=>x.G[k][0]==='chg'); return g?`${g}: ${x.G[g][1]}`:FAMW.chg; } if(x.s==='nk'){ const u=(x.L.unknowns||[]).slice(0,2); return u.length?'Not yet known: '+u.join('; '):FAMW.nk; } return FAMW.yes; };
+function oppFamily(fam,sel,scroll){ const c=ctx(), e=c.e; BD.S.view2='tab'; const list=((FAM.find(f=>f[0]===fam)||[])[1]||[]);
+  const items=list.map(n=>{ const g=gates(n,c); return {n,G:g.G,L:g.L,s:summary(g.G)}; }), ok=items.filter(x=>x.s!=='no'), no=items.filter(x=>x.s==='no');
+  const cur=ok.find(x=>x.n===sel)||ok[0]; const fl=fam.toLowerCase(), many=items.length>1;
+  const lead=ok.length?`<span class="k">${ok.length===items.length?(many?'All '+items.length:'The one'):ok.length+' of '+items.length}</span> ${fl} ${many?'opportunities are':'opportunity is'} not ruled out here.`:`<span class="k">${many?'None':'It'}</span> ${many?'of the '+fl+' opportunities is':'is not'} possible here.`;
+  $('#side').innerHTML=e.tabBar('opp')+`<h2>${esc(fam)}</h2><p class="lead">${lead}</p>
+  ${ok.length?`<div class="famrows" role="listbox" aria-label="${esc(fam)} opportunities">${ok.map(x=>`<div class="addrow famrow${x===cur?' on':''}" role="option" tabindex="0" aria-selected="${x===cur}" data-n="${esc(x.n)}"><div><span class="fn">${esc(x.n)}</span> ${gp(x.s)} ${x.L.readiness?BD.rdPill(x.L.readiness):''}<div class="src">${esc(rowWhy(x))}</div></div></div>`).join('')}</div>`:''}
+  ${no.length?`<div class="famno"><div class="fnh">Not here</div>${no.map(x=>{ const g=GATES.filter(k=>x.G[k][0]==='no'); return `<div class="addrow"><div>${esc(x.n)}<div class="src">${g.map(k=>`<span style="color:${GS.no[1]}">${k}</span>: ${esc(x.G[k][1])}`).join(' · ')}</div></div></div>`; }).join('')}</div>`:''}
+  ${cur?`<div class="famdet"><p class="famh">About <b>${esc(cur.n)}</b> <button class="xpbtn" id="famXp">How it works <span>›</span></button></p></div>${oppBody(cur.n,c)}`:''}`;
+  e.wireTabs(); BD.draw();
+  document.querySelectorAll('#side .famrow').forEach(r=>{ const go=()=>oppFamily(fam,r.dataset.n,true); r.onclick=go; r.onkeydown=ev=>{ if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); go(); } }; });
+  const xb=$('#famXp'); if(xb&&cur) xb.onclick=()=>BD.explain&&BD.explain.open('opp:'+cur.n);
+  if(cur) opp3d(cur.n,c); else e.show3d('model',{site:c.f});
+  if(scroll) setTimeout(()=>{ const h=document.querySelector('#side .famh'); if(h) h.scrollIntoView({block:'start',behavior:'smooth'}); },120); }
 function oppRest(list){ const c=ctx(), e=c.e; BD.S.view2='tab';
   const no=list.filter(o=>o.s==='no');
   $('#side').innerHTML=e.tabBar('opp')+`<h2>Not here</h2><p class="lead">${no.length?`<span class="k">${no.length} of ${list.length}</span> opportunities fail at least one gate at this site.`:'No opportunity fails outright here.'}</p>
   ${no.map(o=>{ const g=GATES.filter(k=>o.G[k][0]==='no'); return `<div class="addrow"><div>${esc(o.n)}<div class="src">${g.map(k=>`<span style="color:${GS.no[1]}">${k}</span>: ${esc(o.G[k][1])}`).join(' · ')}</div></div></div>`; }).join('')}`;
   e.wireTabs(); BD.draw(); e.show3d('model',{site:c.f}); }
-Object.assign(BD,{oppPrep,oppScreen,oppStep,oppRest,oppGates:GS,oppGatesFor:n=>{ const c=ctx(), g=gates(n,c); return Object.assign(g,{s:summary(g.G),c,order:GATES,fam:(ORDER.find(o=>o.n===n)||{}).fam}); }});
+Object.assign(BD,{oppPrep,oppScreen,oppStep,oppRest,oppFamily,oppFams:FAM.map(f=>f[0]),oppGates:GS,oppGatesFor:n=>{ const c=ctx(), g=gates(n,c); return Object.assign(g,{s:summary(g.G),c,order:GATES,fam:(ORDER.find(o=>o.n===n)||{}).fam}); }});
 BD.oppCard=oppCard;
 BD.tabOverride=Object.assign(BD.tabOverride||{},{opps2:oppIndex});
 })();

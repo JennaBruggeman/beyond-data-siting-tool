@@ -404,12 +404,14 @@ function answerOf(nodes){ const tx=el=>{ const c=el.cloneNode(true); c.querySele
     const dt=n.matches('dl')?n:n.querySelector&&n.querySelector('dl'); if(dt){ const a=dt.querySelector('dt'), b=dt.querySelector('dd'); if(a&&b){ red=!!b.querySelector('.draft'); return [cut(tx(a)+': '+tx(b)),red]; } }
     if(n.matches('p,.sub,table,.addrow,.opt,.row,ul')){ const t=tx(n); if(t&&!/^Sources?:/i.test(t)){ red=n.matches('.draft')||!!(n.querySelector&&n.querySelector('.draft')); return [cut(t),red]; } } }
   return ['',false]; }
+// plain-language section names (J.B., 17 Oct). Draft wording (Claude), for J.B. to rewrite.
+const TITLES={'Compared with other data centres':'How it compares','Connections':'What could connect','Add-ons':'What could be added','At this site, gate by gate':'Does it work here?','Rules, rung by rung':'What the rules say','How proven':'Where it has been done','The edge':'The street edge','Who is near':'Who is nearby'}; BD.TITLES=TITLES;
 function collapseSections(root){ if(!root||root.querySelector('details.sec')) return; const kids=[...root.children]; let i=0;
   const h2=kids.findIndex(k=>k.tagName==='H2'); if(h2>=0){ const nx=kids[h2+1]; if(nx&&nx.tagName==='P'&&nx.classList.contains('draft')){ nx.classList.remove('draft'); nx.classList.add('lead'); } }
   const view=(BD.S.tab||BD.S.view2||'v'); let n=0;
   for(i=0;i<kids.length;i++){ const h=kids[i]; if(h.tagName!=='H3'||h.closest('details')||/^sources?$/i.test(h.textContent.trim())) continue;
     const body=[]; let j=i+1; while(j<kids.length&&kids[j].tagName!=='H3'&&!kids[j].classList.contains('draftnote')&&!(kids[j].tagName==='DIV'&&kids[j].classList.contains('navb'))&&!kids[j].classList.contains('flowfoot')) { body.push(kids[j]); j++; }
-    const title=(h.childNodes[0]&&h.childNodes[0].nodeType===3?h.childNodes[0].textContent:h.innerText).trim(); if(!title){ continue; } const t2=title.charAt(0).toUpperCase()+title.slice(1).toLowerCase();
+    const title=(h.childNodes[0]&&h.childNodes[0].nodeType===3?h.childNodes[0].textContent:h.innerText).trim(); if(!title){ continue; } let t2=title.charAt(0).toUpperCase()+title.slice(1).toLowerCase(); t2=TITLES[t2]||t2;
     const extra=[...h.querySelectorAll('span')].map(s=>s.innerText.trim()).filter(Boolean).join(' ');
     let [ans,red]=answerOf(body); if(extra) ans=extra.replace(/^·\s*/,'')+(ans?' — '+ans:'');
     const id=view+'-'+(n++)+'-'+t2.slice(0,20);

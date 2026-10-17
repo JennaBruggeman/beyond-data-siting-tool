@@ -43,6 +43,8 @@ function on(){ const sd=$('#side'), b=build(); document.body.classList.add('wcon
   if(sd.parentNode!==$('#wcTx')) $('#wcTx').appendChild(sd);
   const a=BD.S.sel&&BD.S.sel.a; $('#wcAddr').textContent=a&&a[0]?a[0]:'';
   const k=stepKey(), no3=NO3D.has(k); b.classList.toggle('nov',no3);
+  if(k!=='setup') document.body.classList.remove('wcdim');
+  sd.querySelectorAll('details.sec > summary .t').forEach(t=>{ const n=BD.TITLES&&BD.TITLES[t.textContent.trim()]; if(n) t.textContent=n; });
   if(k!=='site'&&k!=='setup'&&!no3) tilesFor(sd); tidy(sd); if(no3) sd.querySelectorAll('details.sec').forEach(x=>x.open=true);
   const w=wrap(); if(w){ if(!no3){ if(w.parentNode!==$('#wc3d')) $('#wc3d').appendChild(w); } else if(w.parentNode!==map()) map().appendChild(w); }
   if(BD.scene3d&&BD.scene3d.cardMode) BD.scene3d.cardMode(!no3);

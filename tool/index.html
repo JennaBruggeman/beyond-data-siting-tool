@@ -304,6 +304,18 @@ body.wcon #drawer{position:fixed;top:72px;bottom:24px;left:auto;right:24px;width
 #wc #side .pill,#wc #side .cls{font-size:12px;padding:2px 8px}
 #wc.nov #side{max-width:900px;margin:0 auto;width:100%}
 #wc .report h2.rg{font-size:18px!important;letter-spacing:0;text-transform:none;font-weight:400;color:var(--fg);margin:30px 0 6px}
+/* the step's point once, in a large line; the step's topic sits small above it */
+#wc #side > h2:has(+ .lead){font-size:15px;font-weight:400;color:var(--muted);margin:8px 0 2px}
+#wc #side > h2 + .lead{font-size:21px;font-weight:300;line-height:1.38;margin:0 0 12px;text-wrap:balance;max-width:34ch}
+#wc #side .famrows{border-top:1px solid var(--line);margin:8px 0 14px}
+#wc #side .famrow{display:block;cursor:pointer;padding:10px 10px 10px 12px;border-top:0;border-bottom:1px solid var(--line);border-left:2px solid transparent}
+#wc #side .famrow:hover{background:rgba(255,255,255,.025)} #wc #side .famrow.on{border-left-color:var(--accent);background:rgba(204,116,108,.06)}
+#wc #side .famrow:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2px}
+#wc #side .famrow .fn{font-size:14.5px;margin-right:6px} #wc #side .famrow .src{font-size:12.5px;margin-top:3px}
+#wc #side .famno{margin:0 0 14px;opacity:.75} #wc #side .famno .fnh{font-size:12.5px;color:var(--muted);margin:0 0 2px} #wc #side .famno .addrow{font-size:13.5px}
+#wc #side .famh{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:15px;margin:6px 0 0;padding-top:12px;border-top:1px solid var(--line-2)} #wc #side .famh .xpbtn{margin:0}
+body.wcdim #wc3d canvas{opacity:.18;filter:grayscale(1);transition:opacity .3s} body.wcdim #wc3d #v3d > div{opacity:.25}
+body.wcdim #wc3d::after{content:attr(data-dim);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:70%;text-align:center;color:var(--fg);font-size:15px;line-height:1.5;z-index:5;pointer-events:none}
 body.wcon:not(.wckey) #v3key{display:none!important}
 #wc .keyb{position:absolute;left:12px;bottom:12px;z-index:4;background:rgba(30,32,35,.9);border:1px solid var(--line-2);color:var(--muted);border-radius:6px;padding:4px 10px;font:inherit;font-size:12.5px;cursor:pointer}
 body.wcon.wckey #wc .keyb{bottom:auto;top:12px} #wc .keyb:hover{color:var(--fg)}

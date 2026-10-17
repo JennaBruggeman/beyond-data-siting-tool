@@ -114,13 +114,13 @@ function decorate(){ const sd=$('#side'); if(!sd||!F.on) return; F.busy=true;
 function reset(){ F.steps=BASE.slice(); F.i=0; F.max=0; F.notes={}; F.sig=undefined; }
 async function expandOpps(){ const k=F.steps.findIndex(s=>s.k==='opps'); if(k<0) return;
   await BD.oppPrep(); const L=BD.oppScreen(); F.oppList=L; const ok=L.filter(o=>o.s!=='no');
-  const add=ok.map((o,j)=>({k:'opp:'+o.n,g:'opps',t:o.n,n:o.n,j:j+1,of:ok.length})).concat([{k:'opps-rest',g:'opps',t:'Not possible here'}]);
+  const add=BD.oppFams.map(f=>({k:'fam:'+f,g:'opps',t:f+' opportunities',fam:f}));
   F.steps.splice(k,1,...add); }
 async function go(i){ if(i<0||i>=F.steps.length) return; invalidate(); capture(); F.i=i; F.max=Math.max(F.max,i); document.body.classList.remove('wide');
   if(F.steps[i].k==='opps'){ await expandOpps(); }
   const st=F.steps[F.i]; if(BD.drawer&&BD.drawer.isOpen()&&st.k!=='setup') BD.drawer.close();
   try{ await show(st); }catch(e){ console.warn(e); }
-  decorate(); const sd=$('#side'); if(sd) sd.scrollTop=0; }
+  decorate(); const sd=$('#side'); if(sd) sd.scrollTop=0; const tx=document.getElementById('wcTx'); if(tx) tx.scrollTop=0; }
 function next(){ if(F.steps[F.i].k==='site'&&!BD.S.sel) return; go(F.i+1); }
 function back(){ go(F.i-1); }
 async function show(st){ const k=st.k;
@@ -128,6 +128,7 @@ async function show(st){ const k=st.k;
   if(k==='setup'){ BD.S.view2=null; BD.scene3d&&BD.scene3d.hide(); BD.card(); BD.setup.start(); return; }
   if(k==='fits'){ BD.scene3d&&BD.scene3d.hide(); BD.fitsView(); return; }
   if(k.startsWith('opp:')) return BD.oppStep(st.n,st.j,st.of);
+  if(k.startsWith('fam:')) return BD.oppFamily(st.fam);
   if(k==='opps-rest') return BD.oppRest(F.oppList||[]);
   if(k==='report') return reportView();
   BD.tabView(k); }
@@ -137,7 +138,7 @@ F.next=next; F.back=back; F.go=go; F.to=k=>{ const i=F.steps.findIndex(s=>s.k===
 const selKey=()=>BD.S.sel?BD.S.sel.city+':'+BD.S.sel.id:'';
 const sigOf=()=>{ const A=Object.assign({},BD.S.answers); delete A.mwSite; delete A.setupDone; return JSON.stringify(A); };
 function invalidate(){ const sig=sigOf(); if(F.sig!==undefined&&sig!==F.sig){ F.max=F.i; for(const s of F.steps.slice(F.i+1)) delete F.notes[s.k];
-    const k=F.steps.findIndex(s=>s.k.startsWith('opp:')||s.k==='opps-rest'); if(k>F.i) F.steps=F.steps.slice(0,k).concat(BASE.slice(BASE.findIndex(b=>b.k==='opps'))); }
+    const k=F.steps.findIndex(s=>s.k.startsWith('opp:')||s.k.startsWith('fam:')||s.k==='opps-rest'); if(k>F.i) F.steps=F.steps.slice(0,k).concat(BASE.slice(BASE.findIndex(b=>b.k==='opps'))); }
   F.sig=sig; }
 /* the start panel: short, with a way back to the examples */
 BD.afterIntro=function(){ const sd=$('#side'); if(!sd) return; sd.querySelectorAll('ol.sub').forEach(x=>x.remove());
@@ -148,12 +149,12 @@ function clean(el){ const c=el.cloneNode(true); c.querySelectorAll('button,.mo,s
 function tableData(t){ return [...t.rows].map(r=>({party:r.classList.contains('party'),head:r.parentElement.tagName==='THEAD',cells:[...r.cells].map(clean)})); }
 function capture(){ const st=F.steps[F.i]; const sd=$('#side'); if(!st||!sd||!BD.S.sel||st.k==='report'||st.k==='site') return;
   const h2=sd.querySelector('h2'); const lead=sd.querySelector('.lead')||sd.querySelector('p.draft');
-  const secs=[...sd.querySelectorAll('details.sec')].filter(d=>!d.closest('details.fp')).map(d=>{ const t=d.querySelector(':scope > summary .t'), a=d.querySelector(':scope > summary .a'); return [t?clean(t):'',a?clean(a):'']; }).filter(r=>r[0]);
+  const secs=[...sd.querySelectorAll('details.sec')].filter(d=>!d.closest('details.fp')).map(d=>{ const t=d.querySelector(':scope > summary .t'), a=d.querySelector(':scope > summary .a'); const tt=t?clean(t):''; return [(BD.TITLES&&BD.TITLES[tt])||tt,a?clean(a):'']; }).filter(r=>r[0]);
   sd.querySelectorAll('.sumrow').forEach(r=>{ const c=r.querySelectorAll('span'); if(c.length>=2) secs.push([clean(c[0]),clean(c[1])]); });
   const tables=[...sd.querySelectorAll('.tt table, table.cl')].filter(t=>!t.closest('details.fp')).map(tableData);
   const srcs=[...sd.querySelectorAll('details.fp')].map(d=>{ const c=d.cloneNode(true); const s=c.querySelector('summary'); if(s) s.remove(); return clean(c); }).filter(Boolean);
-  const rows=st.k==='opps-rest'?[...sd.querySelectorAll('.addrow')].map(r=>clean(r)):[];
-  const secs2=st.k.startsWith('opp:')?[]:secs.filter(r=>r[0]!=='Compared with other data centres');
+  const rows=st.k==='opps-rest'||st.k.startsWith('fam:')?[...sd.querySelectorAll('.famrow, .famno .addrow, :scope > .addrow')].map(r=>(r.closest('.famno')?'Not here: ':'')+clean(r)):[];
+  const secs2=st.k.startsWith('opp:')||st.k.startsWith('fam:')?[]:secs.filter(r=>r[0]!=='How it compares');
   F.notes[st.k]={t:st.t,g:st.g,title:h2?clean(h2):st.t,lead:lead?clean(lead):'',secs:secs2,tables,srcs,rows}; }
 
 /* ---------- step 6: the report, on screen and as HTML or PDF ---------- */

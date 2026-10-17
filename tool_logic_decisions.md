@@ -268,3 +268,9 @@ No building is drawn for a new data centre. The 3D shows the lot, the zoning's b
 - 3D key hidden behind a "Key" button; label collision boxes larger, so fewer labels overlap.
 - A not-possible option keeps its upsides and downsides, faded and marked "(elsewhere)".
 - A heading that repeats the address gives way to the step's name. Report is a centred 900 px column.
+
+## Pushing it further (17 Oct 2026)
+- Section names in plain language (Draft wording (Claude), for J.B. to rewrite): How it compares, What could connect, What could be added, Does it work here?, What the rules say, Where it has been done, The street edge, Who is nearby.
+- Each step says its point once, large (the lead line); the step's topic sits small above it.
+- Opportunities grouped by family: six cards instead of thirteen, plus "Not here" in each card. Rows show the status pill, readiness pill and the first unknowns or the gate that needs a change. Picking a row shows its detail, How it works and 3D. The path is now 19 steps, not 27.
+- A not-possible option greys out the 3D, with a line saying the 3D shows the site as set up.
