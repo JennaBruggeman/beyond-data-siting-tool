@@ -37,11 +37,11 @@ function bars(host,rows,unit,label){ const W=560, rh=34, top=26, H=top+rows.leng
   [0,0.5,1].forEach(t=>{ const x=X(mx*t); el('line',{x1:x,x2:x,y1:top-4,y2:H-24,stroke:C.line,'stroke-width':1},s); txt(s,x,H-8,t===0?'0':f1(mx*t),{c:C.muted,s:11,a:'middle'}); });
   txt(s,W-6,14,unit,{c:C.muted,s:10.5,a:'end'});
   rows.forEach((r,i)=>{ const y=top+i*rh; const lo=r.lo!=null?r.lo:0, hi=r.hi!=null?r.hi:r.v; txt(s,L-10,y+16,r.label,{a:'end',s:12});
-    const g=el('g',{},s); const w=Math.max(r.v===0&&r.hi==null?0:2,X(hi)-X(0));
+    const g=el('g',{},s); const w=Math.max((r.v===0||r.v==null)&&r.hi==null?0:2,X(hi||0)-X(0));
     if(r.lo!=null){ el('rect',{x:X(0),y:y+6,width:Math.max(2,X(lo)-X(0)),height:14,rx:3,fill:r.c,opacity:0.95},g); el('rect',{x:X(lo),y:y+6,width:Math.max(2,X(hi)-X(lo)),height:14,rx:3,fill:r.c,opacity:0.45},g); }
     else el('rect',{x:X(0),y:y+6,width:w,height:14,rx:3,fill:r.c},g);
-    txt(s,X(hi)+6,y+17,r.lo!=null?rg(r.lo,r.hi,''):(hi===0?'none':f1(hi)),{s:11.5,c:C.ink});
-    tip(g,`${r.label}: ${r.lo!=null?rg(r.lo,r.hi,unit):(hi===0?'none':f1(hi)+' '+unit)}${r.note?' — '+r.note:''}`); });
+    txt(s,X(hi||0)+6,y+17,r.txt?r.txt:r.lo!=null?rg(r.lo,r.hi,''):(hi===0?'none':f1(hi)),{s:11.5,c:C.ink});
+    tip(g,`${r.label}: ${r.txt?r.txt:r.lo!=null?rg(r.lo,r.hi,unit):(hi===0?'none':f1(hi)+' '+unit)}${r.note?' — '+r.note:''}`); });
   return s; }
 /* donut for parts of one whole; labels sit outside, so colour is never the only key */
 function donut(host,parts,centre,label){ const W=560,H=280,cx=150,cy=140,R0=100,R1=64; const s=svg(host,W,H,label); const tot=parts.reduce((t,p)=>t+p.v,0)||1; let a=-Math.PI/2;
