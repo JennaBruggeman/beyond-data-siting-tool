@@ -1,0 +1,1936 @@
+{
+ "arg": "1",
+ "errs": [
+  "console:Failed to load resource: net::ERR_FAILED",
+  "console:[GroupMarkerNotSet(crbug.com/242999)!:A0702000043E0000]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader (about:flags#enable-unsafe-swiftshader) flag to opt in to lower security guarantees for trusted content.",
+  "console:[.WebGL-0x291400141600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+  "console:[.WebGL-0x291400141600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+  "console:[.WebGL-0x291400141600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+  "console:[.WebGL-0x291400141600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+ ],
+ "runs": [
+  {
+   "cfg": {
+    "mw": 1,
+    "outside": "dry",
+    "spares": "n1"
+   },
+   "answers": {
+    "built": "new",
+    "extent": "whole",
+    "floor": "",
+    "host": {},
+    "mw": 1,
+    "foot": "max",
+    "cover": 70,
+    "hmode": "out",
+    "plantAt": "roof",
+    "outside": "dry",
+    "inside": "air",
+    "spares": "n1",
+    "gens": "yes",
+    "genAt": "yard",
+    "genSpares": "n1"
+   },
+   "facts": {
+    "city": "edm",
+    "zone": "IH",
+    "plate": 2976,
+    "foot": 5751.625,
+    "gross": [
+     29032,
+     29032
+    ],
+    "m2MW": [
+     290,
+     630
+    ]
+   },
+   "roof": 10676.21845,
+   "topics": {
+    "cooling": [
+     {
+      "h": "Almost all the power ends as heat",
+      "p": "Servers turn electricity into heat. With cooling and losses, a 1 MW data centre has about 1.4–1.6 MW of heat to get rid of, all the time.",
+      "titles": [
+       "Servers (IT): 68% of the power",
+       "Cooling, losses, lights: 32% (PUE 1.4–1.55)"
+      ],
+      "texts": [
+       "Servers (IT)",
+       "68% of the power",
+       "Cooling, losses, lights",
+       "32% (PUE 1.4–1.55)",
+       "1.48",
+       "PUE, middle"
+      ],
+      "src": [
+       "industry survey register: pue (LBNL 2023; Uptime 2025 industry survey)"
+      ]
+     },
+     {
+      "h": "Dry coolers",
+      "p": "A closed loop carries the heat to coils outside; fans blow air across them. No water, but they need the most space: 3 units for this size.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "dry cooler",
+       "fans pull air over the coil",
+       "warm air out; no water"
+      ],
+      "src": [
+       "operator or maker claim register: component_space (manufacturer claims, equipment only; clearances and switchgear rooms not sourced)"
+      ]
+     },
+     {
+      "h": "Cooling towers",
+      "p": "Warm water falls through the tower and part of it evaporates, which carries the heat away. Smaller and fewer, but it uses water, sends blowdown to the sewer and needs Legionella testing.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "cooling tower",
+       "vapour: water evaporates",
+       "make-up",
+       "blowdown to the sewer"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     },
+     {
+      "h": "Hybrid (adiabatic) coolers",
+      "p": "Dry most of the year. On hot days water is sprayed on the incoming air. In Edmonton that is about 10.4% of the year (914 hours above 18 °C).",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "hybrid cooler",
+       "dry most of the year",
+       "hot day: water sprayed on the inlet air",
+       "mostly in summer (placement schematic)",
+       "Jan",
+       "Apr",
+       "Jul",
+       "Oct",
+       "Dec",
+       "Hours with water on, Edmonton (typical year)"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     },
+     {
+      "h": "How much room each one takes",
+      "p": "Units for 1 MW, with one spare. Area is the units alone; clearances add more.",
+      "titles": [
+       "Dry coolers: 86 m² of units — 3 units",
+       "Hybrid coolers: 134 m² of units — 4 units",
+       "Cooling towers: 43 m² of units — 3 cells"
+      ],
+      "texts": [
+       "0",
+       "67",
+       "134",
+       "m² of units",
+       "Dry coolers",
+       "86",
+       "Hybrid coolers",
+       "134",
+       "Cooling towers",
+       "43"
+      ],
+      "src": [
+       "operator or maker claim register: component_space (manufacturer claims, equipment only; clearances and switchgear rooms not sourced)"
+      ]
+     },
+     {
+      "h": "How much water each one uses",
+      "p": "Evaporated on site in a year, at most. Dry coolers use none; towers evaporate up to 1.5 L per kWh of heat.",
+      "titles": [
+       "Dry coolers: none",
+       "Hybrid coolers: 1,271 m³ a year",
+       "Cooling towers: 12,220 m³ a year"
+      ],
+      "texts": [
+       "0",
+       "6,110",
+       "12,220",
+       "m³ a year",
+       "Dry coolers",
+       "none",
+       "Hybrid coolers",
+       "1,271",
+       "Cooling towers",
+       "12,220"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     }
+    ],
+    "heat": [
+     {
+      "h": "Catching the heat",
+      "p": "Air cooling leaves heat at 25–35 °C, too cool for most heating. Liquid cooling to the chip catches 48–75% of it in water.",
+      "titles": [
+       "Caught in liquid: 48–75 % of server heat",
+       "Left in the air: 25–52 % of server heat"
+      ],
+      "texts": [
+       "0",
+       "38",
+       "75",
+       "% of server heat",
+       "Caught in liquid",
+       "48–75",
+       "Left in the air",
+       "25–52"
+      ],
+      "src": [
+       "research or government lab register: liquid_capture (LBNL 2014, NREL — direct-to-chip 48–75%; air-cooled: no primary figure)"
+      ]
+     },
+     {
+      "h": "Lifting it with a heat pump",
+      "p": "A heat pump raises it to about 70 °C for a network. Each unit of electricity gives 3–4.5 units of heat.",
+      "titles": [
+       "Electricity in: 1.0 MWh",
+       "Heat out: 3.0–4.5 MWh"
+      ],
+      "texts": [
+       "data hall",
+       "heat pump",
+       "lifts 25–35 °C to ~70 °C",
+       "electricity in",
+       "to the network",
+       "homes,",
+       "schools,",
+       "pools",
+       "0",
+       "2.3",
+       "4.5",
+       "MWh",
+       "Electricity in",
+       "1.0",
+       "Heat out",
+       "3.0–4.5"
+      ],
+      "src": [
+       "research or government lab register: cop (DEA 2026 waste-heat heat pumps to 70 °C, 1–3 MW: 3.0–3.6; observed at Meta Odense, 27 → 70 °C: 4.5 in 2020, about 3.9 in 2022–24 — Fjernvarme Fyn annual reports)"
+      ]
+     },
+     {
+      "h": "What this size could offer",
+      "p": "About 3.2–5.9 GWh a year, the space and water heating of 111–203 homes in Edmonton. Offered is not used: the buildings still have to take it.",
+      "titles": [
+       "Vancouver: 222–406 homes",
+       "Edmonton: 111–203 homes"
+      ],
+      "texts": [
+       "0",
+       "203",
+       "406",
+       "homes",
+       "Vancouver",
+       "222–406",
+       "Edmonton",
+       "111–203"
+      ],
+      "src": [
+       "public record register: homes_heated (NRCan CEUD 2023)"
+      ]
+     },
+     {
+      "h": "Who is within 1.5 km",
+      "p": "6 buildings that could take heat, by kind. Distance and price decide which are worth a pipe.",
+      "titles": [
+       "Schools: 33%",
+       "Recreation, pools: 67%"
+      ],
+      "texts": [
+       "Schools",
+       "33%",
+       "Recreation, pools",
+       "67%",
+       "6",
+       "buildings"
+      ],
+      "src": [
+       "public record Statistics Canada ODSRF v2 (2026), ODHF (2020), ODEF v2.1 (2022); City of Vancouver non-market housing"
+      ]
+     }
+    ],
+    "energy": [
+     {
+      "h": "Where the power goes",
+      "p": "About 1.4–1.6 MW at the meter on average, 7.4–8.1 GWh a year. The grid sees it as a steady load.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "grid",
+       "substation",
+       "UPS, batteries",
+       "standby",
+       "generators",
+       "→ heat"
+      ],
+      "src": [
+       "industry survey register: pue (LBNL 2023; Uptime 2025 industry survey)",
+       "research or government lab register: load_factor (Fan et al. 2007)"
+      ]
+     },
+     {
+      "h": "The carbon of that power",
+      "p": "The same load carries about 19 times the carbon on Alberta's grid as on BC's.",
+      "titles": [
+       "Vancouver: 133–147 t CO₂e a year",
+       "Edmonton: 2,547–2,820 t CO₂e a year"
+      ],
+      "texts": [
+       "0",
+       "1,410",
+       "2,820",
+       "t CO₂e a year",
+       "Vancouver",
+       "133–147",
+       "Edmonton",
+       "2,547–2,820"
+      ],
+      "src": [
+       "public record register: grid_co2 (NIR 2026 Annex 7, consumption intensity 2024)"
+      ]
+     },
+     {
+      "h": "What the grid asks back",
+      "p": "Alberta's interim limit of 1,200 MW for new large loads is fully allocated; large data centres may bring their own generation.",
+      "titles": [
+       "Interim limit: 1,200 MW",
+       "Already allocated: 1,200 MW"
+      ],
+      "texts": [
+       "0",
+       "600",
+       "1,200",
+       "MW",
+       "Interim limit",
+       "1,200",
+       "Already allocated",
+       "1,200"
+      ],
+      "src": [
+       "public record register: peak_relief (BC Hydro Demand Response for Business; AESO reserves)"
+      ]
+     }
+    ],
+    "water": [
+     {
+      "h": "Where water is used",
+      "p": "Only evaporative cooling uses water on site: it evaporates in the tower, and the salts left behind are flushed to the sewer as blowdown.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "cooling plant",
+       "city water",
+       "evaporated",
+       "to the sewer",
+       "roof",
+       "rain could top it up"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     },
+     {
+      "h": "Each system, in a year",
+      "p": "At this size, at most. Dry coolers: none.",
+      "titles": [
+       "Dry coolers: none",
+       "Hybrid coolers: 1,271 m³ a year",
+       "Cooling towers: 12,220 m³ a year"
+      ],
+      "texts": [
+       "0",
+       "6,110",
+       "12,220",
+       "m³ a year",
+       "Dry coolers",
+       "none",
+       "Hybrid coolers",
+       "1,271",
+       "Cooling towers",
+       "12,220"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     },
+     {
+      "h": "Rain on the roof",
+      "p": "About 3,609 m³ falls on 10,676 m² of roof in a year. Set against a tower's use, it is 30%.",
+      "titles": [
+       "Rain on the roof: 3,609 m³ a year",
+       "Tower, evaporated: 12,220 m³ a year"
+      ],
+      "texts": [
+       "0",
+       "6,110",
+       "12,220",
+       "m³ a year",
+       "Rain on the roof",
+       "3,609",
+       "Tower, evaporated",
+       "12,220"
+      ],
+      "src": [
+       "public record register: rainwater (ECCC Normals 1991–2020; CSA B805 method; runoff coefficient 0.8 assumed)"
+      ]
+     },
+     {
+      "h": "Hard water, more flushing",
+      "p": "Edmonton's water is about 178 mg/L hard, Vancouver's about 20. Harder water means more blowdown for the same heat.",
+      "titles": [
+       "Vancouver: 20 mg/L as CaCO₃",
+       "Edmonton: 178 mg/L as CaCO₃"
+      ],
+      "texts": [
+       "0",
+       "89",
+       "178",
+       "mg/L as CaCO₃",
+       "Vancouver",
+       "20",
+       "Edmonton",
+       "178"
+      ],
+      "src": [
+       "public record register: a_reuse_rules, reclaimed_makeup (VBBL 2025; Metro Vancouver UT-019; EPCOR)"
+      ]
+     }
+    ],
+    "people": [
+     {
+      "h": "Sound spreads and fades",
+      "p": "Fans and pumps make a steady sound. It drops about 6 dB each time the distance doubles, over open ground without walls.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "plant",
+       "neighbour"
+      ],
+      "src": [
+       "operator or maker claim register: noise_level (screen Lp = Lw − 20 log r − 8; Trane RTAF 333–1,010 kW, Eurovent: Lw 91–101 dBA per unit)"
+      ]
+     },
+     {
+      "h": "How far it carries here",
+      "p": "About 2 units together (an assumption). The night limit of 50 dBA is reached at 63–200 m, low-noise to standard units.",
+      "titles": [],
+      "texts": [
+       "100 m",
+       "200 m",
+       "300 m",
+       "400 m",
+       "500 m",
+       "600 m",
+       "30",
+       "40",
+       "50",
+       "60",
+       "70",
+       "80",
+       "dBA",
+       "night limit, 50 dBA",
+       "low-noise",
+       "standard"
+      ],
+      "src": [
+       "operator or maker claim register: noise_level (screen Lp = Lw − 20 log r − 8; Trane RTAF 333–1,010 kW, Eurovent: Lw 91–101 dBA per unit)",
+       "public record Noise Control By-law 6555 ss. 2.1–2.3, Sch. A, B (Vancouver); Bylaw 14600 (Edmonton)"
+      ]
+     }
+    ],
+    "materials": [
+     {
+      "h": "The servers turn over",
+      "p": "The building lasts decades; the servers are replaced every five to six years. Each refresh is a truckload of equipment out and in.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "loading",
+       "old servers out",
+       "every 5–6 years",
+       "new servers in"
+      ],
+      "src": [
+       "research or government lab LBNL 2024: about 600 W per server (register: servers)",
+       "operator or maker claim register: ewaste (server masses 21.25–26.3 kg, 6-year refresh)"
+      ]
+     },
+     {
+      "h": "Each refresh, by weight",
+      "p": "About 1,667 servers at this size (about 600 W each): 35–44 tonnes each time.",
+      "titles": [
+       "Servers, one refresh: 35–44 tonnes",
+       "Copper in the facility: 20–40 tonnes — industry figure"
+      ],
+      "texts": [
+       "0",
+       "22",
+       "44",
+       "tonnes",
+       "Servers, one refresh",
+       "35–44",
+       "Copper in the facility",
+       "20–40"
+      ],
+      "src": [
+       "operator or maker claim register: ewaste (server masses 21.25–26.3 kg, 6-year refresh)",
+       "operator or maker claim register: copper_tonnes (Copper Development Association 2023 — industry figure)"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "cfg": {
+    "mw": 2,
+    "outside": "towers",
+    "spares": "n1"
+   },
+   "answers": {
+    "built": "new",
+    "extent": "whole",
+    "floor": "",
+    "host": {},
+    "mw": 2,
+    "foot": "max",
+    "cover": 70,
+    "hmode": "out",
+    "plantAt": "roof",
+    "outside": "towers",
+    "inside": "air",
+    "spares": "n1",
+    "gens": "yes",
+    "genAt": "yard",
+    "genSpares": "n1"
+   },
+   "facts": {
+    "city": "edm",
+    "zone": "IH",
+    "plate": 2976,
+    "foot": 5751.625,
+    "gross": [
+     29032,
+     29032
+    ],
+    "m2MW": [
+     290,
+     630
+    ]
+   },
+   "roof": 10676.21845,
+   "topics": {
+    "cooling": [
+     {
+      "h": "Almost all the power ends as heat",
+      "p": "Servers turn electricity into heat. With cooling and losses, a 2 MW data centre has about 2.8–3.1 MW of heat to get rid of, all the time.",
+      "titles": [
+       "Servers (IT): 68% of the power",
+       "Cooling, losses, lights: 32% (PUE 1.4–1.55)"
+      ],
+      "texts": [
+       "Servers (IT)",
+       "68% of the power",
+       "Cooling, losses, lights",
+       "32% (PUE 1.4–1.55)",
+       "1.48",
+       "PUE, middle"
+      ],
+      "src": [
+       "industry survey register: pue (LBNL 2023; Uptime 2025 industry survey)"
+      ]
+     },
+     {
+      "h": "Dry coolers",
+      "p": "A closed loop carries the heat to coils outside; fans blow air across them. No water, but they need the most space: 4 units for this size.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "dry cooler",
+       "fans pull air over the coil",
+       "warm air out; no water"
+      ],
+      "src": [
+       "operator or maker claim register: component_space (manufacturer claims, equipment only; clearances and switchgear rooms not sourced)"
+      ]
+     },
+     {
+      "h": "Cooling towers",
+      "p": "Warm water falls through the tower and part of it evaporates, which carries the heat away. Smaller and fewer, but it uses water, sends blowdown to the sewer and needs Legionella testing.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "cooling tower",
+       "vapour: water evaporates",
+       "make-up",
+       "blowdown to the sewer"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     },
+     {
+      "h": "Hybrid (adiabatic) coolers",
+      "p": "Dry most of the year. On hot days water is sprayed on the incoming air. In Edmonton that is about 10.4% of the year (914 hours above 18 °C).",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "hybrid cooler",
+       "dry most of the year",
+       "hot day: water sprayed on the inlet air",
+       "mostly in summer (placement schematic)",
+       "Jan",
+       "Apr",
+       "Jul",
+       "Oct",
+       "Dec",
+       "Hours with water on, Edmonton (typical year)"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     },
+     {
+      "h": "How much room each one takes",
+      "p": "Units for 2 MW, with one spare. Area is the units alone; clearances add more.",
+      "titles": [
+       "Dry coolers: 115 m² of units — 4 units",
+       "Hybrid coolers: 202 m² of units — 6 units",
+       "Cooling towers: 57 m² of units — 4 cells"
+      ],
+      "texts": [
+       "0",
+       "101",
+       "202",
+       "m² of units",
+       "Dry coolers",
+       "115",
+       "Hybrid coolers",
+       "202",
+       "Cooling towers",
+       "57"
+      ],
+      "src": [
+       "operator or maker claim register: component_space (manufacturer claims, equipment only; clearances and switchgear rooms not sourced)"
+      ]
+     },
+     {
+      "h": "How much water each one uses",
+      "p": "Evaporated on site in a year, at most. Dry coolers use none; towers evaporate up to 1.5 L per kWh of heat.",
+      "titles": [
+       "Dry coolers: none",
+       "Hybrid coolers: 2,542 m³ a year",
+       "Cooling towers: 24,440 m³ a year"
+      ],
+      "texts": [
+       "0",
+       "12,220",
+       "24,440",
+       "m³ a year",
+       "Dry coolers",
+       "none",
+       "Hybrid coolers",
+       "2,542",
+       "Cooling towers",
+       "24,440"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     }
+    ],
+    "heat": [
+     {
+      "h": "Catching the heat",
+      "p": "Air cooling leaves heat at 25–35 °C, too cool for most heating. Liquid cooling to the chip catches 48–75% of it in water.",
+      "titles": [
+       "Caught in liquid: 48–75 % of server heat",
+       "Left in the air: 25–52 % of server heat"
+      ],
+      "texts": [
+       "0",
+       "38",
+       "75",
+       "% of server heat",
+       "Caught in liquid",
+       "48–75",
+       "Left in the air",
+       "25–52"
+      ],
+      "src": [
+       "research or government lab register: liquid_capture (LBNL 2014, NREL — direct-to-chip 48–75%; air-cooled: no primary figure)"
+      ]
+     },
+     {
+      "h": "Lifting it with a heat pump",
+      "p": "A heat pump raises it to about 70 °C for a network. Each unit of electricity gives 3–4.5 units of heat.",
+      "titles": [
+       "Electricity in: 1.0 MWh",
+       "Heat out: 3.0–4.5 MWh"
+      ],
+      "texts": [
+       "data hall",
+       "heat pump",
+       "lifts 25–35 °C to ~70 °C",
+       "electricity in",
+       "to the network",
+       "homes,",
+       "schools,",
+       "pools",
+       "0",
+       "2.3",
+       "4.5",
+       "MWh",
+       "Electricity in",
+       "1.0",
+       "Heat out",
+       "3.0–4.5"
+      ],
+      "src": [
+       "research or government lab register: cop (DEA 2026 waste-heat heat pumps to 70 °C, 1–3 MW: 3.0–3.6; observed at Meta Odense, 27 → 70 °C: 4.5 in 2020, about 3.9 in 2022–24 — Fjernvarme Fyn annual reports)"
+      ]
+     },
+     {
+      "h": "What this size could offer",
+      "p": "About 6.5–12 GWh a year, the space and water heating of 222–405 homes in Edmonton. Offered is not used: the buildings still have to take it.",
+      "titles": [
+       "Vancouver: 445–811 homes",
+       "Edmonton: 222–405 homes"
+      ],
+      "texts": [
+       "0",
+       "406",
+       "811",
+       "homes",
+       "Vancouver",
+       "445–811",
+       "Edmonton",
+       "222–405"
+      ],
+      "src": [
+       "public record register: homes_heated (NRCan CEUD 2023)"
+      ]
+     },
+     {
+      "h": "Who is within 1.5 km",
+      "p": "6 buildings that could take heat, by kind. Distance and price decide which are worth a pipe.",
+      "titles": [
+       "Schools: 33%",
+       "Recreation, pools: 67%"
+      ],
+      "texts": [
+       "Schools",
+       "33%",
+       "Recreation, pools",
+       "67%",
+       "6",
+       "buildings"
+      ],
+      "src": [
+       "public record Statistics Canada ODSRF v2 (2026), ODHF (2020), ODEF v2.1 (2022); City of Vancouver non-market housing"
+      ]
+     }
+    ],
+    "energy": [
+     {
+      "h": "Where the power goes",
+      "p": "About 2.8–3.1 MW at the meter on average, 15–16 GWh a year. The grid sees it as a steady load.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "grid",
+       "substation",
+       "UPS, batteries",
+       "standby",
+       "generators",
+       "→ heat"
+      ],
+      "src": [
+       "industry survey register: pue (LBNL 2023; Uptime 2025 industry survey)",
+       "research or government lab register: load_factor (Fan et al. 2007)"
+      ]
+     },
+     {
+      "h": "The carbon of that power",
+      "p": "The same load carries about 19 times the carbon on Alberta's grid as on BC's.",
+      "titles": [
+       "Vancouver: 266–295 t CO₂e a year",
+       "Edmonton: 5,093–5,639 t CO₂e a year"
+      ],
+      "texts": [
+       "0",
+       "2,820",
+       "5,639",
+       "t CO₂e a year",
+       "Vancouver",
+       "266–295",
+       "Edmonton",
+       "5,093–5,639"
+      ],
+      "src": [
+       "public record register: grid_co2 (NIR 2026 Annex 7, consumption intensity 2024)"
+      ]
+     },
+     {
+      "h": "What the grid asks back",
+      "p": "Alberta's interim limit of 1,200 MW for new large loads is fully allocated; large data centres may bring their own generation.",
+      "titles": [
+       "Interim limit: 1,200 MW",
+       "Already allocated: 1,200 MW"
+      ],
+      "texts": [
+       "0",
+       "600",
+       "1,200",
+       "MW",
+       "Interim limit",
+       "1,200",
+       "Already allocated",
+       "1,200"
+      ],
+      "src": [
+       "public record register: peak_relief (BC Hydro Demand Response for Business; AESO reserves)"
+      ]
+     }
+    ],
+    "water": [
+     {
+      "h": "Where water is used",
+      "p": "Only evaporative cooling uses water on site: it evaporates in the tower, and the salts left behind are flushed to the sewer as blowdown.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "cooling plant",
+       "city water",
+       "evaporated",
+       "to the sewer",
+       "roof",
+       "rain could top it up"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     },
+     {
+      "h": "Each system, in a year",
+      "p": "At this size, at most. Dry coolers: none.",
+      "titles": [
+       "Dry coolers: none",
+       "Hybrid coolers: 2,542 m³ a year",
+       "Cooling towers: 24,440 m³ a year"
+      ],
+      "texts": [
+       "0",
+       "12,220",
+       "24,440",
+       "m³ a year",
+       "Dry coolers",
+       "none",
+       "Hybrid coolers",
+       "2,542",
+       "Cooling towers",
+       "24,440"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     },
+     {
+      "h": "Rain on the roof",
+      "p": "About 3,609 m³ falls on 10,676 m² of roof in a year. Set against a tower's use, it is 15%.",
+      "titles": [
+       "Rain on the roof: 3,609 m³ a year",
+       "Tower, evaporated: 24,440 m³ a year"
+      ],
+      "texts": [
+       "0",
+       "12,220",
+       "24,440",
+       "m³ a year",
+       "Rain on the roof",
+       "3,609",
+       "Tower, evaporated",
+       "24,440"
+      ],
+      "src": [
+       "public record register: rainwater (ECCC Normals 1991–2020; CSA B805 method; runoff coefficient 0.8 assumed)"
+      ]
+     },
+     {
+      "h": "Hard water, more flushing",
+      "p": "Edmonton's water is about 178 mg/L hard, Vancouver's about 20. Harder water means more blowdown for the same heat.",
+      "titles": [
+       "Vancouver: 20 mg/L as CaCO₃",
+       "Edmonton: 178 mg/L as CaCO₃"
+      ],
+      "texts": [
+       "0",
+       "89",
+       "178",
+       "mg/L as CaCO₃",
+       "Vancouver",
+       "20",
+       "Edmonton",
+       "178"
+      ],
+      "src": [
+       "public record register: a_reuse_rules, reclaimed_makeup (VBBL 2025; Metro Vancouver UT-019; EPCOR)"
+      ]
+     }
+    ],
+    "people": [
+     {
+      "h": "Sound spreads and fades",
+      "p": "Fans and pumps make a steady sound. It drops about 6 dB each time the distance doubles, over open ground without walls.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "plant",
+       "neighbour"
+      ],
+      "src": [
+       "operator or maker claim register: noise_level (screen Lp = Lw − 20 log r − 8; Trane RTAF 333–1,010 kW, Eurovent: Lw 91–101 dBA per unit)"
+      ]
+     },
+     {
+      "h": "How far it carries here",
+      "p": "About 3 units together (an assumption). The night limit of 50 dBA is reached at 77–245 m, low-noise to standard units.",
+      "titles": [],
+      "texts": [
+       "100 m",
+       "200 m",
+       "300 m",
+       "400 m",
+       "500 m",
+       "600 m",
+       "30",
+       "40",
+       "50",
+       "60",
+       "70",
+       "80",
+       "dBA",
+       "night limit, 50 dBA",
+       "low-noise",
+       "standard"
+      ],
+      "src": [
+       "operator or maker claim register: noise_level (screen Lp = Lw − 20 log r − 8; Trane RTAF 333–1,010 kW, Eurovent: Lw 91–101 dBA per unit)",
+       "public record Noise Control By-law 6555 ss. 2.1–2.3, Sch. A, B (Vancouver); Bylaw 14600 (Edmonton)"
+      ]
+     }
+    ],
+    "materials": [
+     {
+      "h": "The servers turn over",
+      "p": "The building lasts decades; the servers are replaced every five to six years. Each refresh is a truckload of equipment out and in.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "loading",
+       "old servers out",
+       "every 5–6 years",
+       "new servers in"
+      ],
+      "src": [
+       "research or government lab LBNL 2024: about 600 W per server (register: servers)",
+       "operator or maker claim register: ewaste (server masses 21.25–26.3 kg, 6-year refresh)"
+      ]
+     },
+     {
+      "h": "Each refresh, by weight",
+      "p": "About 3,333 servers at this size (about 600 W each): 71–88 tonnes each time.",
+      "titles": [
+       "Servers, one refresh: 71–88 tonnes",
+       "Copper in the facility: 40–80 tonnes — industry figure"
+      ],
+      "texts": [
+       "0",
+       "44",
+       "88",
+       "tonnes",
+       "Servers, one refresh",
+       "71–88",
+       "Copper in the facility",
+       "40–80"
+      ],
+      "src": [
+       "operator or maker claim register: ewaste (server masses 21.25–26.3 kg, 6-year refresh)",
+       "operator or maker claim register: copper_tonnes (Copper Development Association 2023 — industry figure)"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "cfg": {
+    "mw": 10,
+    "outside": "hybrid",
+    "spares": "2n"
+   },
+   "answers": {
+    "built": "new",
+    "extent": "whole",
+    "floor": "",
+    "host": {},
+    "mw": 10,
+    "foot": "max",
+    "cover": 70,
+    "hmode": "out",
+    "plantAt": "roof",
+    "outside": "hybrid",
+    "inside": "air",
+    "spares": "2n",
+    "gens": "yes",
+    "genAt": "yard",
+    "genSpares": "n1"
+   },
+   "facts": {
+    "city": "edm",
+    "zone": "IH",
+    "plate": 2976,
+    "foot": 5751.625,
+    "gross": [
+     29032,
+     29032
+    ],
+    "m2MW": [
+     290,
+     630
+    ]
+   },
+   "roof": 10676.21845,
+   "topics": {
+    "cooling": [
+     {
+      "h": "Almost all the power ends as heat",
+      "p": "Servers turn electricity into heat. With cooling and losses, a 10 MW data centre has about 14–16 MW of heat to get rid of, all the time.",
+      "titles": [
+       "Servers (IT): 68% of the power",
+       "Cooling, losses, lights: 32% (PUE 1.4–1.55)"
+      ],
+      "texts": [
+       "Servers (IT)",
+       "68% of the power",
+       "Cooling, losses, lights",
+       "32% (PUE 1.4–1.55)",
+       "1.48",
+       "PUE, middle"
+      ],
+      "src": [
+       "industry survey register: pue (LBNL 2023; Uptime 2025 industry survey)"
+      ]
+     },
+     {
+      "h": "Dry coolers",
+      "p": "A closed loop carries the heat to coils outside; fans blow air across them. No water, but they need the most space: 28 units for this size.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "dry cooler",
+       "fans pull air over the coil",
+       "warm air out; no water"
+      ],
+      "src": [
+       "operator or maker claim register: component_space (manufacturer claims, equipment only; clearances and switchgear rooms not sourced)"
+      ]
+     },
+     {
+      "h": "Cooling towers",
+      "p": "Warm water falls through the tower and part of it evaporates, which carries the heat away. Smaller and fewer, but it uses water, sends blowdown to the sewer and needs Legionella testing.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "cooling tower",
+       "vapour: water evaporates",
+       "make-up",
+       "blowdown to the sewer"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     },
+     {
+      "h": "Hybrid (adiabatic) coolers",
+      "p": "Dry most of the year. On hot days water is sprayed on the incoming air. In Edmonton that is about 10.4% of the year (914 hours above 18 °C).",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "hybrid cooler",
+       "dry most of the year",
+       "hot day: water sprayed on the inlet air",
+       "mostly in summer (placement schematic)",
+       "Jan",
+       "Apr",
+       "Jul",
+       "Oct",
+       "Dec",
+       "Hours with water on, Edmonton (typical year)"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     },
+     {
+      "h": "How much room each one takes",
+      "p": "Units for 10 MW, with double spare. Area is the units alone; clearances add more.",
+      "titles": [
+       "Dry coolers: 806 m² of units — 28 units",
+       "Hybrid coolers: 1,613 m² of units — 48 units",
+       "Cooling towers: 188 m² of units — 6 cells"
+      ],
+      "texts": [
+       "0",
+       "806",
+       "1,613",
+       "m² of units",
+       "Dry coolers",
+       "806",
+       "Hybrid coolers",
+       "1,613",
+       "Cooling towers",
+       "188"
+      ],
+      "src": [
+       "operator or maker claim register: component_space (manufacturer claims, equipment only; clearances and switchgear rooms not sourced)"
+      ]
+     },
+     {
+      "h": "How much water each one uses",
+      "p": "Evaporated on site in a year, at most. Dry coolers use none; towers evaporate up to 1.5 L per kWh of heat.",
+      "titles": [
+       "Dry coolers: none",
+       "Hybrid coolers: 12,709 m³ a year",
+       "Cooling towers: 122,202 m³ a year"
+      ],
+      "texts": [
+       "0",
+       "61,101",
+       "122,202",
+       "m³ a year",
+       "Dry coolers",
+       "none",
+       "Hybrid coolers",
+       "12,709",
+       "Cooling towers",
+       "122,202"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     }
+    ],
+    "heat": [
+     {
+      "h": "Catching the heat",
+      "p": "Air cooling leaves heat at 25–35 °C, too cool for most heating. Liquid cooling to the chip catches 48–75% of it in water.",
+      "titles": [
+       "Caught in liquid: 48–75 % of server heat",
+       "Left in the air: 25–52 % of server heat"
+      ],
+      "texts": [
+       "0",
+       "38",
+       "75",
+       "% of server heat",
+       "Caught in liquid",
+       "48–75",
+       "Left in the air",
+       "25–52"
+      ],
+      "src": [
+       "research or government lab register: liquid_capture (LBNL 2014, NREL — direct-to-chip 48–75%; air-cooled: no primary figure)"
+      ]
+     },
+     {
+      "h": "Lifting it with a heat pump",
+      "p": "A heat pump raises it to about 70 °C for a network. Each unit of electricity gives 3–4.5 units of heat.",
+      "titles": [
+       "Electricity in: 1.0 MWh",
+       "Heat out: 3.0–4.5 MWh"
+      ],
+      "texts": [
+       "data hall",
+       "heat pump",
+       "lifts 25–35 °C to ~70 °C",
+       "electricity in",
+       "to the network",
+       "homes,",
+       "schools,",
+       "pools",
+       "0",
+       "2.3",
+       "4.5",
+       "MWh",
+       "Electricity in",
+       "1.0",
+       "Heat out",
+       "3.0–4.5"
+      ],
+      "src": [
+       "research or government lab register: cop (DEA 2026 waste-heat heat pumps to 70 °C, 1–3 MW: 3.0–3.6; observed at Meta Odense, 27 → 70 °C: 4.5 in 2020, about 3.9 in 2022–24 — Fjernvarme Fyn annual reports)"
+      ]
+     },
+     {
+      "h": "What this size could offer",
+      "p": "About 32–59 GWh a year, the space and water heating of 1,111–2,026 homes in Edmonton. Offered is not used: the buildings still have to take it.",
+      "titles": [
+       "Vancouver: 2,225–4,056 homes",
+       "Edmonton: 1,111–2,026 homes"
+      ],
+      "texts": [
+       "0",
+       "2,028",
+       "4,056",
+       "homes",
+       "Vancouver",
+       "2,225–4,056",
+       "Edmonton",
+       "1,111–2,026"
+      ],
+      "src": [
+       "public record register: homes_heated (NRCan CEUD 2023)"
+      ]
+     },
+     {
+      "h": "Who is within 1.5 km",
+      "p": "6 buildings that could take heat, by kind. Distance and price decide which are worth a pipe.",
+      "titles": [
+       "Schools: 33%",
+       "Recreation, pools: 67%"
+      ],
+      "texts": [
+       "Schools",
+       "33%",
+       "Recreation, pools",
+       "67%",
+       "6",
+       "buildings"
+      ],
+      "src": [
+       "public record Statistics Canada ODSRF v2 (2026), ODHF (2020), ODEF v2.1 (2022); City of Vancouver non-market housing"
+      ]
+     }
+    ],
+    "energy": [
+     {
+      "h": "Where the power goes",
+      "p": "About 14–16 MW at the meter on average, 74–81 GWh a year. The grid sees it as a steady load.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "grid",
+       "substation",
+       "UPS, batteries",
+       "standby",
+       "generators",
+       "→ heat"
+      ],
+      "src": [
+       "industry survey register: pue (LBNL 2023; Uptime 2025 industry survey)",
+       "research or government lab register: load_factor (Fan et al. 2007)"
+      ]
+     },
+     {
+      "h": "The carbon of that power",
+      "p": "The same load carries about 19 times the carbon on Alberta's grid as on BC's.",
+      "titles": [
+       "Vancouver: 1,332–1,475 t CO₂e a year",
+       "Edmonton: 25,467–28,196 t CO₂e a year"
+      ],
+      "texts": [
+       "0",
+       "14,098",
+       "28,196",
+       "t CO₂e a year",
+       "Vancouver",
+       "1,332–1,475",
+       "Edmonton",
+       "25,467–28,196"
+      ],
+      "src": [
+       "public record register: grid_co2 (NIR 2026 Annex 7, consumption intensity 2024)"
+      ]
+     },
+     {
+      "h": "What the grid asks back",
+      "p": "Alberta's interim limit of 1,200 MW for new large loads is fully allocated; large data centres may bring their own generation.",
+      "titles": [
+       "Interim limit: 1,200 MW",
+       "Already allocated: 1,200 MW"
+      ],
+      "texts": [
+       "0",
+       "600",
+       "1,200",
+       "MW",
+       "Interim limit",
+       "1,200",
+       "Already allocated",
+       "1,200"
+      ],
+      "src": [
+       "public record register: peak_relief (BC Hydro Demand Response for Business; AESO reserves)"
+      ]
+     }
+    ],
+    "water": [
+     {
+      "h": "Where water is used",
+      "p": "Only evaporative cooling uses water on site: it evaporates in the tower, and the salts left behind are flushed to the sewer as blowdown.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "cooling plant",
+       "city water",
+       "evaporated",
+       "to the sewer",
+       "roof",
+       "rain could top it up"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     },
+     {
+      "h": "Each system, in a year",
+      "p": "At this size, at most. Dry coolers: none.",
+      "titles": [
+       "Dry coolers: none",
+       "Hybrid coolers: 12,709 m³ a year",
+       "Cooling towers: 122,202 m³ a year"
+      ],
+      "texts": [
+       "0",
+       "61,101",
+       "122,202",
+       "m³ a year",
+       "Dry coolers",
+       "none",
+       "Hybrid coolers",
+       "12,709",
+       "Cooling towers",
+       "122,202"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     },
+     {
+      "h": "Rain on the roof",
+      "p": "About 3,609 m³ falls on 10,676 m² of roof in a year. Set against a tower's use, it is 3%.",
+      "titles": [
+       "Rain on the roof: 3,609 m³ a year",
+       "Tower, evaporated: 122,202 m³ a year"
+      ],
+      "texts": [
+       "0",
+       "61,101",
+       "122,202",
+       "m³ a year",
+       "Rain on the roof",
+       "3,609",
+       "Tower, evaporated",
+       "122,202"
+      ],
+      "src": [
+       "public record register: rainwater (ECCC Normals 1991–2020; CSA B805 method; runoff coefficient 0.8 assumed)"
+      ]
+     },
+     {
+      "h": "Hard water, more flushing",
+      "p": "Edmonton's water is about 178 mg/L hard, Vancouver's about 20. Harder water means more blowdown for the same heat.",
+      "titles": [
+       "Vancouver: 20 mg/L as CaCO₃",
+       "Edmonton: 178 mg/L as CaCO₃"
+      ],
+      "texts": [
+       "0",
+       "89",
+       "178",
+       "mg/L as CaCO₃",
+       "Vancouver",
+       "20",
+       "Edmonton",
+       "178"
+      ],
+      "src": [
+       "public record register: a_reuse_rules, reclaimed_makeup (VBBL 2025; Metro Vancouver UT-019; EPCOR)"
+      ]
+     }
+    ],
+    "people": [
+     {
+      "h": "Sound spreads and fades",
+      "p": "Fans and pumps make a steady sound. It drops about 6 dB each time the distance doubles, over open ground without walls.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "plant",
+       "neighbour"
+      ],
+      "src": [
+       "operator or maker claim register: noise_level (screen Lp = Lw − 20 log r − 8; Trane RTAF 333–1,010 kW, Eurovent: Lw 91–101 dBA per unit)"
+      ]
+     },
+     {
+      "h": "How far it carries here",
+      "p": "About 16 units together (an assumption). The night limit of 50 dBA is reached at 179–565 m, low-noise to standard units.",
+      "titles": [],
+      "texts": [
+       "100 m",
+       "200 m",
+       "300 m",
+       "400 m",
+       "500 m",
+       "600 m",
+       "30",
+       "40",
+       "50",
+       "60",
+       "70",
+       "80",
+       "dBA",
+       "night limit, 50 dBA",
+       "low-noise",
+       "standard"
+      ],
+      "src": [
+       "operator or maker claim register: noise_level (screen Lp = Lw − 20 log r − 8; Trane RTAF 333–1,010 kW, Eurovent: Lw 91–101 dBA per unit)",
+       "public record Noise Control By-law 6555 ss. 2.1–2.3, Sch. A, B (Vancouver); Bylaw 14600 (Edmonton)"
+      ]
+     }
+    ],
+    "materials": [
+     {
+      "h": "The servers turn over",
+      "p": "The building lasts decades; the servers are replaced every five to six years. Each refresh is a truckload of equipment out and in.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "loading",
+       "old servers out",
+       "every 5–6 years",
+       "new servers in"
+      ],
+      "src": [
+       "research or government lab LBNL 2024: about 600 W per server (register: servers)",
+       "operator or maker claim register: ewaste (server masses 21.25–26.3 kg, 6-year refresh)"
+      ]
+     },
+     {
+      "h": "Each refresh, by weight",
+      "p": "About 16,667 servers at this size (about 600 W each): 354–438 tonnes each time.",
+      "titles": [
+       "Servers, one refresh: 354–438 tonnes",
+       "Copper in the facility: 200–400 tonnes — industry figure"
+      ],
+      "texts": [
+       "0",
+       "219",
+       "438",
+       "tonnes",
+       "Servers, one refresh",
+       "354–438",
+       "Copper in the facility",
+       "200–400"
+      ],
+      "src": [
+       "operator or maker claim register: ewaste (server masses 21.25–26.3 kg, 6-year refresh)",
+       "operator or maker claim register: copper_tonnes (Copper Development Association 2023 — industry figure)"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "cfg": {
+    "mw": 0.3,
+    "spares": "none"
+   },
+   "answers": {
+    "built": "new",
+    "extent": "whole",
+    "floor": "",
+    "host": {},
+    "mw": 0.3,
+    "foot": "max",
+    "cover": 70,
+    "hmode": "out",
+    "plantAt": "roof",
+    "outside": "hybrid",
+    "inside": "air",
+    "spares": "none",
+    "gens": "yes",
+    "genAt": "yard",
+    "genSpares": "n1"
+   },
+   "facts": {
+    "city": "edm",
+    "zone": "IH",
+    "plate": 2976,
+    "foot": 5751.625,
+    "gross": [
+     29032,
+     29032
+    ],
+    "m2MW": [
+     290,
+     630
+    ]
+   },
+   "roof": 10676.21845,
+   "topics": {
+    "cooling": [
+     {
+      "h": "Almost all the power ends as heat",
+      "p": "Servers turn electricity into heat. With cooling and losses, a 0.3 MW data centre has about 0.4–0.5 MW of heat to get rid of, all the time.",
+      "titles": [
+       "Servers (IT): 68% of the power",
+       "Cooling, losses, lights: 32% (PUE 1.4–1.55)"
+      ],
+      "texts": [
+       "Servers (IT)",
+       "68% of the power",
+       "Cooling, losses, lights",
+       "32% (PUE 1.4–1.55)",
+       "1.48",
+       "PUE, middle"
+      ],
+      "src": [
+       "industry survey register: pue (LBNL 2023; Uptime 2025 industry survey)"
+      ]
+     },
+     {
+      "h": "Dry coolers",
+      "p": "A closed loop carries the heat to coils outside; fans blow air across them. No water, but they need the most space: 1 units for this size.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "dry cooler",
+       "fans pull air over the coil",
+       "warm air out; no water"
+      ],
+      "src": [
+       "operator or maker claim register: component_space (manufacturer claims, equipment only; clearances and switchgear rooms not sourced)"
+      ]
+     },
+     {
+      "h": "Cooling towers",
+      "p": "Warm water falls through the tower and part of it evaporates, which carries the heat away. Smaller and fewer, but it uses water, sends blowdown to the sewer and needs Legionella testing.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "cooling tower",
+       "vapour: water evaporates",
+       "make-up",
+       "blowdown to the sewer"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     },
+     {
+      "h": "Hybrid (adiabatic) coolers",
+      "p": "Dry most of the year. On hot days water is sprayed on the incoming air. In Edmonton that is about 10.4% of the year (914 hours above 18 °C).",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "hybrid cooler",
+       "dry most of the year",
+       "hot day: water sprayed on the inlet air",
+       "mostly in summer (placement schematic)",
+       "Jan",
+       "Apr",
+       "Jul",
+       "Oct",
+       "Dec",
+       "Hours with water on, Edmonton (typical year)"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     },
+     {
+      "h": "How much room each one takes",
+      "p": "Units for 0.3 MW, with no spare. Area is the units alone; clearances add more.",
+      "titles": [
+       "Dry coolers: 29 m² of units — 1 units",
+       "Hybrid coolers: 34 m² of units — 1 units",
+       "Cooling towers: 14 m² of units — 1 cells"
+      ],
+      "texts": [
+       "0",
+       "17",
+       "34",
+       "m² of units",
+       "Dry coolers",
+       "29",
+       "Hybrid coolers",
+       "34",
+       "Cooling towers",
+       "14"
+      ],
+      "src": [
+       "operator or maker claim register: component_space (manufacturer claims, equipment only; clearances and switchgear rooms not sourced)"
+      ]
+     },
+     {
+      "h": "How much water each one uses",
+      "p": "Evaporated on site in a year, at most. Dry coolers use none; towers evaporate up to 1.5 L per kWh of heat.",
+      "titles": [
+       "Dry coolers: none",
+       "Hybrid coolers: 381 m³ a year",
+       "Cooling towers: 3,666 m³ a year"
+      ],
+      "texts": [
+       "0",
+       "1,833",
+       "3,666",
+       "m³ a year",
+       "Dry coolers",
+       "none",
+       "Hybrid coolers",
+       "381",
+       "Cooling towers",
+       "3,666"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     }
+    ],
+    "heat": [
+     {
+      "h": "Catching the heat",
+      "p": "Air cooling leaves heat at 25–35 °C, too cool for most heating. Liquid cooling to the chip catches 48–75% of it in water.",
+      "titles": [
+       "Caught in liquid: 48–75 % of server heat",
+       "Left in the air: 25–52 % of server heat"
+      ],
+      "texts": [
+       "0",
+       "38",
+       "75",
+       "% of server heat",
+       "Caught in liquid",
+       "48–75",
+       "Left in the air",
+       "25–52"
+      ],
+      "src": [
+       "research or government lab register: liquid_capture (LBNL 2014, NREL — direct-to-chip 48–75%; air-cooled: no primary figure)"
+      ]
+     },
+     {
+      "h": "Lifting it with a heat pump",
+      "p": "A heat pump raises it to about 70 °C for a network. Each unit of electricity gives 3–4.5 units of heat.",
+      "titles": [
+       "Electricity in: 1.0 MWh",
+       "Heat out: 3.0–4.5 MWh"
+      ],
+      "texts": [
+       "data hall",
+       "heat pump",
+       "lifts 25–35 °C to ~70 °C",
+       "electricity in",
+       "to the network",
+       "homes,",
+       "schools,",
+       "pools",
+       "0",
+       "2.3",
+       "4.5",
+       "MWh",
+       "Electricity in",
+       "1.0",
+       "Heat out",
+       "3.0–4.5"
+      ],
+      "src": [
+       "research or government lab register: cop (DEA 2026 waste-heat heat pumps to 70 °C, 1–3 MW: 3.0–3.6; observed at Meta Odense, 27 → 70 °C: 4.5 in 2020, about 3.9 in 2022–24 — Fjernvarme Fyn annual reports)"
+      ]
+     },
+     {
+      "h": "What this size could offer",
+      "p": "About 1.0–1.8 GWh a year, the space and water heating of 33–61 homes in Edmonton. Offered is not used: the buildings still have to take it.",
+      "titles": [
+       "Vancouver: 67–122 homes",
+       "Edmonton: 33–61 homes"
+      ],
+      "texts": [
+       "0",
+       "61",
+       "122",
+       "homes",
+       "Vancouver",
+       "67–122",
+       "Edmonton",
+       "33–61"
+      ],
+      "src": [
+       "public record register: homes_heated (NRCan CEUD 2023)"
+      ]
+     },
+     {
+      "h": "Who is within 1.5 km",
+      "p": "6 buildings that could take heat, by kind. Distance and price decide which are worth a pipe.",
+      "titles": [
+       "Schools: 33%",
+       "Recreation, pools: 67%"
+      ],
+      "texts": [
+       "Schools",
+       "33%",
+       "Recreation, pools",
+       "67%",
+       "6",
+       "buildings"
+      ],
+      "src": [
+       "public record Statistics Canada ODSRF v2 (2026), ODHF (2020), ODEF v2.1 (2022); City of Vancouver non-market housing"
+      ]
+     }
+    ],
+    "energy": [
+     {
+      "h": "Where the power goes",
+      "p": "About 0.4–0.5 MW at the meter on average, 2.2–2.4 GWh a year. The grid sees it as a steady load.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "grid",
+       "substation",
+       "UPS, batteries",
+       "standby",
+       "generators",
+       "→ heat"
+      ],
+      "src": [
+       "industry survey register: pue (LBNL 2023; Uptime 2025 industry survey)",
+       "research or government lab register: load_factor (Fan et al. 2007)"
+      ]
+     },
+     {
+      "h": "The carbon of that power",
+      "p": "The same load carries about 19 times the carbon on Alberta's grid as on BC's.",
+      "titles": [
+       "Vancouver: 40–44 t CO₂e a year",
+       "Edmonton: 764–846 t CO₂e a year"
+      ],
+      "texts": [
+       "0",
+       "423",
+       "846",
+       "t CO₂e a year",
+       "Vancouver",
+       "40–44",
+       "Edmonton",
+       "764–846"
+      ],
+      "src": [
+       "public record register: grid_co2 (NIR 2026 Annex 7, consumption intensity 2024)"
+      ]
+     },
+     {
+      "h": "What the grid asks back",
+      "p": "Alberta's interim limit of 1,200 MW for new large loads is fully allocated; large data centres may bring their own generation.",
+      "titles": [
+       "Interim limit: 1,200 MW",
+       "Already allocated: 1,200 MW"
+      ],
+      "texts": [
+       "0",
+       "600",
+       "1,200",
+       "MW",
+       "Interim limit",
+       "1,200",
+       "Already allocated",
+       "1,200"
+      ],
+      "src": [
+       "public record register: peak_relief (BC Hydro Demand Response for Business; AESO reserves)"
+      ]
+     }
+    ],
+    "water": [
+     {
+      "h": "Where water is used",
+      "p": "Only evaporative cooling uses water on site: it evaporates in the tower, and the salts left behind are flushed to the sewer as blowdown.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "cooling plant",
+       "city water",
+       "evaporated",
+       "to the sewer",
+       "roof",
+       "rain could top it up"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     },
+     {
+      "h": "Each system, in a year",
+      "p": "At this size, at most. Dry coolers: none.",
+      "titles": [
+       "Dry coolers: none",
+       "Hybrid coolers: 381 m³ a year",
+       "Cooling towers: 3,666 m³ a year"
+      ],
+      "texts": [
+       "0",
+       "1,833",
+       "3,666",
+       "m³ a year",
+       "Dry coolers",
+       "none",
+       "Hybrid coolers",
+       "381",
+       "Cooling towers",
+       "3,666"
+      ],
+      "src": [
+       "physics register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)"
+      ]
+     },
+     {
+      "h": "Rain on the roof",
+      "p": "About 3,609 m³ falls on 10,676 m² of roof in a year. Set against a tower's use, it is 98%.",
+      "titles": [
+       "Rain on the roof: 3,609 m³ a year",
+       "Tower, evaporated: 3,666 m³ a year"
+      ],
+      "texts": [
+       "0",
+       "1,833",
+       "3,666",
+       "m³ a year",
+       "Rain on the roof",
+       "3,609",
+       "Tower, evaporated",
+       "3,666"
+      ],
+      "src": [
+       "public record register: rainwater (ECCC Normals 1991–2020; CSA B805 method; runoff coefficient 0.8 assumed)"
+      ]
+     },
+     {
+      "h": "Hard water, more flushing",
+      "p": "Edmonton's water is about 178 mg/L hard, Vancouver's about 20. Harder water means more blowdown for the same heat.",
+      "titles": [
+       "Vancouver: 20 mg/L as CaCO₃",
+       "Edmonton: 178 mg/L as CaCO₃"
+      ],
+      "texts": [
+       "0",
+       "89",
+       "178",
+       "mg/L as CaCO₃",
+       "Vancouver",
+       "20",
+       "Edmonton",
+       "178"
+      ],
+      "src": [
+       "public record register: a_reuse_rules, reclaimed_makeup (VBBL 2025; Metro Vancouver UT-019; EPCOR)"
+      ]
+     }
+    ],
+    "people": [
+     {
+      "h": "Sound spreads and fades",
+      "p": "Fans and pumps make a steady sound. It drops about 6 dB each time the distance doubles, over open ground without walls.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "plant",
+       "neighbour"
+      ],
+      "src": [
+       "operator or maker claim register: noise_level (screen Lp = Lw − 20 log r − 8; Trane RTAF 333–1,010 kW, Eurovent: Lw 91–101 dBA per unit)"
+      ]
+     },
+     {
+      "h": "How far it carries here",
+      "p": "About 1 unit together (an assumption). The night limit of 50 dBA is reached at 45–141 m, low-noise to standard units.",
+      "titles": [],
+      "texts": [
+       "100 m",
+       "200 m",
+       "300 m",
+       "400 m",
+       "500 m",
+       "600 m",
+       "30",
+       "40",
+       "50",
+       "60",
+       "70",
+       "80",
+       "dBA",
+       "night limit, 50 dBA",
+       "low-noise",
+       "standard"
+      ],
+      "src": [
+       "operator or maker claim register: noise_level (screen Lp = Lw − 20 log r − 8; Trane RTAF 333–1,010 kW, Eurovent: Lw 91–101 dBA per unit)",
+       "public record Noise Control By-law 6555 ss. 2.1–2.3, Sch. A, B (Vancouver); Bylaw 14600 (Edmonton)"
+      ]
+     }
+    ],
+    "materials": [
+     {
+      "h": "The servers turn over",
+      "p": "The building lasts decades; the servers are replaced every five to six years. Each refresh is a truckload of equipment out and in.",
+      "titles": [],
+      "texts": [
+       "data hall",
+       "loading",
+       "old servers out",
+       "every 5–6 years",
+       "new servers in"
+      ],
+      "src": [
+       "research or government lab LBNL 2024: about 600 W per server (register: servers)",
+       "operator or maker claim register: ewaste (server masses 21.25–26.3 kg, 6-year refresh)"
+      ]
+     },
+     {
+      "h": "Each refresh, by weight",
+      "p": "About 500 servers at this size (about 600 W each): 11–13 tonnes each time.",
+      "titles": [
+       "Servers, one refresh: 11–13 tonnes",
+       "Copper in the facility: 6.0–12 tonnes — industry figure"
+      ],
+      "texts": [
+       "0",
+       "6.6",
+       "13",
+       "tonnes",
+       "Servers, one refresh",
+       "11–13",
+       "Copper in the facility",
+       "6.0–12"
+      ],
+      "src": [
+       "operator or maker claim register: ewaste (server masses 21.25–26.3 kg, 6-year refresh)",
+       "operator or maker claim register: copper_tonnes (Copper Development Association 2023 — industry figure)"
+      ]
+     }
+    ]
+   }
+  }
+ ]
+}

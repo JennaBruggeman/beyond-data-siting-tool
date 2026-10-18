@@ -1,0 +1,11 @@
+const {chromium}=require('/tmp/claude-0/-home-claude/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/scratchpad/node_modules/playwright'); const fs=require('fs'); const SP='/tmp/claude-0/-home-claude/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/scratchpad';
+(async()=>{ const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell',args:['--use-gl=swiftshader','--enable-webgl']});
+const p=await b.newPage({viewport:{width:1440,height:900}}); const errs=[]; p.on('pageerror',e=>errs.push(e.message));
+await p.route(/three\.min\.js/,r=>r.fulfill({body:fs.readFileSync(SP+'/node_modules/three/build/three.min.js'),contentType:'application/javascript'}));
+await p.route(/OrbitControls\.js/,r=>r.fulfill({body:fs.readFileSync(SP+'/node_modules/three/examples/js/controls/OrbitControls.js'),contentType:'application/javascript'}));
+await p.route(/fonts\.(googleapis|gstatic)|jspdf|autotable|d3/,r=>r.abort());
+await p.goto('http://localhost:8765/index.html#van-2_1-23060741'); await p.waitForTimeout(9000);
+const r=await p.evaluate(async()=>{ const w0=document.getElementById("welcome"); if(w0) w0.remove(); const S=BD.S,A=S.answers; A.built="existing"; BD.modelReset(); const m=BD.model(); const blds=(S.sel.blds||[]).filter(b=>b.f!==3); const P=m.plant||{}; const yb=(P.boxes||[]).filter(b=>b.kind==="yard"); 
+ const inside=(ring,r)=>{ let k=0,n=0; for(let i=0;i<ring.length;i+=2){ n++; if(BD.pip(ring[i],ring[i+1],r)) k++; } const c=BD.centroid(ring); return k+(BD.pip(c[0],c[1],r)?1:0); };
+ return {keys:Object.keys(P), n:yb.length, boxes:yb.map(b=>({name:b.name||b.label, hits:blds.map(x=>[Math.round(x.a),inside(b.ring||b.r,x.r)])}))}; });
+r.errs=errs; console.log(JSON.stringify(r,null,1)); await b.close(); })();

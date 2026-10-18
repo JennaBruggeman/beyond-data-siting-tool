@@ -1,0 +1,484 @@
+{
+ "arg": "0",
+ "errs": [],
+ "deck": [
+  {
+   "id": "built",
+   "text": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nSet up the site · 1 of 8\nWhat is being built?\nNew building\nShare a new building\nRetrofit an existing building\nLease space in a building\n✓ Possible here A data centre is case by case in zone I-2.\nUpsides\nSized to the zone: floor area, height, setbacks\nFloors can be built tall and strong for data halls (5.5–6.0 m floors)\nDownsides\nA development permit, and the time it takes\nNew construction carries embodied carbon (about 461 kg CO₂e per m² as a median for buildings; no data-centre figure)\n\n6.6–30 MW of servers fit · 13,068 m² floor\nOnly 8 of 9 loading spaces fit across the lot.\n\n← The site\nNext →",
+   "titles": []
+  },
+  {
+   "id": "foot",
+   "text": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nSet up the site · 2 of 8\nHow much of the lot does it cover?\nMost the zone allows\nMatch the existing building\nSet the coverage\n✓ Possible here\nUpsides\nThe most floor area, so the most that fits\nDownsides\nLeast open land left for other uses, rain, or a borefield\n\n6.6–30 MW of servers fit · 13,068 m² floor\nOnly 8 of 9 loading spaces fit across the lot.\n\n← Back\nNext →",
+   "titles": []
+  },
+  {
+   "id": "height",
+   "text": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nSet up the site · 3 of 8\nHow tall?\nOutright: 18.3 m\nWith approval: 30.5 m\nSet the storeys\n✓ Possible here\nUpsides\nNo discretion needed from the City\nDownsides\nFewer storeys of tall data-hall floors\n\n6.6–30 MW of servers fit · 13,068 m² floor\nOnly 8 of 9 loading spaces fit across the lot.\n\n← Back\nNext →",
+   "titles": []
+  },
+  {
+   "id": "inside",
+   "text": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nSet up the site · 4 of 8\nHow are the servers cooled?\nAir\nLiquid to the chip\nImmersion\nwarm air, 25–35 °C\nfans move air through the racks and coils\n✓ Possible here\nUpsides\nThe most common: 75% of operators use room air cooling (Uptime 2025 survey)\nSimple, well known\nDownsides\nHeat leaves at about 25–35 °C, too cool to reuse without a heat pump\n\n6.6–30 MW of servers fit · 13,068 m² floor\nOnly 8 of 9 loading spaces fit across the lot.\n\n← Back\nNext →",
+   "titles": []
+  },
+  {
+   "id": "outside",
+   "text": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nSet up the site · 5 of 8\nHow does the heat leave?\nDry coolers\nCooling towers\nHybrid coolers\n✓ Possible here\nUpsides\nNo water at all\nSimple closed loop\nDownsides\nThe most space: about 1.2 MW per 12 m unit\nFan noise, most on hot days\n\n6.6–30 MW of servers fit · 13,068 m² floor\nOnly 8 of 9 loading spaces fit across the lot.\n\n← Back\nNext →",
+   "titles": []
+  },
+  {
+   "id": "plantAt",
+   "text": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nSet up the site · 6 of 8\nWhere does the plant go?\nRoof\nYard\nSplit\n✓ Possible here\nUpsides\nKeeps the yard free\nDownsides\nNeeds roof space and structure\nSeen from above, and heard from upper windows\n\n6.6–30 MW of servers fit · 13,068 m² floor\nOnly 8 of 9 loading spaces fit across the lot.\n\n← Back\nNext →",
+   "titles": []
+  },
+  {
+   "id": "spares",
+   "text": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nSet up the site · 7 of 8\nHow many spare units?\nNone (N)\nOne spare (N+1)\nDouble (2N)\none unit fails\none spare takes over\n✓ Possible here\nUpsides\nOne unit can fail and the load is still carried (like Tier II–III)\nDownsides\nOne more unit on site\n\n6.6–30 MW of servers fit · 13,068 m² floor\nOnly 8 of 9 loading spaces fit across the lot.\n\n← Back\nNext →",
+   "titles": []
+  },
+  {
+   "id": "gens",
+   "text": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nSet up the site · 8 of 8\nWhat if the grid fails?\nGenerators in the yard\nGenerators on the roof\nNo generators\n✓ Possible here\nUpsides\nThe usual arrangement; carries the full load\nDownsides\nFuel stored on site (fire code limits)\nTest runs: Vancouver exempts up to 1 h a month in daytime, at most 80 dBA\n\n6.6–30 MW of servers fit · 13,068 m² floor\nOnly 8 of 9 loading spaces fit across the lot.\n\n← Back\nWhat fits here →",
+   "titles": []
+  }
+ ],
+ "answers": {
+  "built": "new",
+  "extent": "whole",
+  "floor": "",
+  "host": {},
+  "mw": 6,
+  "foot": "max",
+  "cover": 70,
+  "hmode": "out",
+  "plantAt": "roof",
+  "outside": "dry",
+  "inside": "air",
+  "spares": "n1",
+  "gens": "yes",
+  "genAt": "yard",
+  "genSpares": "n1",
+  "mwSite": "23060741"
+ },
+ "topics": {
+  "cooling": [
+   {
+    "h": "Almost all the power ends as heat",
+    "p": "Servers turn electricity into heat. With cooling and losses, a 6 MW data centre has about 8.4–9.3 MW of heat to get rid of, all the time.",
+    "titles": [
+     "Servers (IT): 68% of the power",
+     "Cooling, losses, lights: 32% (PUE 1.4–1.55)"
+    ],
+    "texts": [
+     "Servers (IT)",
+     "68% of the power",
+     "Cooling, losses, lights",
+     "32% (PUE 1.4–1.55)",
+     "1.48",
+     "PUE, middle"
+    ]
+   },
+   {
+    "h": "Dry coolers",
+    "p": "A closed loop carries the heat to coils outside; fans blow air across them. No water, but they need the most space: 9 units for this size.",
+    "titles": [],
+    "texts": [
+     "data hall",
+     "dry cooler",
+     "fans pull air over the coil",
+     "warm air out; no water"
+    ]
+   },
+   {
+    "h": "Cooling towers",
+    "p": "Warm water falls through the tower and part of it evaporates, which carries the heat away. Smaller and fewer, but it uses water, sends blowdown to the sewer and needs Legionella testing.",
+    "titles": [],
+    "texts": [
+     "data hall",
+     "cooling tower",
+     "vapour: water evaporates",
+     "make-up",
+     "blowdown to the sewer"
+    ]
+   },
+   {
+    "h": "Hybrid (adiabatic) coolers",
+    "p": "Dry most of the year. On hot days water is sprayed on the incoming air. In Vancouver that is about 12.4% of the year (1,085 hours above 18 °C).",
+    "titles": [],
+    "texts": [
+     "data hall",
+     "hybrid cooler",
+     "dry most of the year",
+     "hot day: water sprayed on the inlet air",
+     "mostly in summer (placement schematic)",
+     "Jan",
+     "Apr",
+     "Jul",
+     "Oct",
+     "Dec",
+     "Hours with water on, Vancouver (typical year)"
+    ]
+   },
+   {
+    "h": "How much room each one takes",
+    "p": "Units for 6 MW, with one spare. Area is the units alone; clearances add more.",
+    "titles": [
+     "Dry coolers: 259 m² of units — 9 units",
+     "Hybrid coolers: 504 m² of units — 15 units",
+     "Cooling towers: 94 m² of units — 3 cells"
+    ],
+    "texts": [
+     "0",
+     "252",
+     "504",
+     "m² of units",
+     "Dry coolers",
+     "259",
+     "Hybrid coolers",
+     "504",
+     "Cooling towers",
+     "94"
+    ]
+   },
+   {
+    "h": "How much water each one uses",
+    "p": "Evaporated on site in a year, at most. Dry coolers use none; towers evaporate up to 1.5 L per kWh of heat.",
+    "titles": [
+     "Dry coolers: none",
+     "Hybrid coolers: 9,092 m³ a year",
+     "Cooling towers: 73,321 m³ a year"
+    ],
+    "texts": [
+     "0",
+     "36,661",
+     "73,321",
+     "m³ a year",
+     "Dry coolers",
+     "none",
+     "Hybrid coolers",
+     "9,092",
+     "Cooling towers",
+     "73,321"
+    ]
+   }
+  ],
+  "heat": [
+   {
+    "h": "Catching the heat",
+    "p": "Air cooling leaves heat at 25–35 °C, too cool for most heating. Liquid cooling to the chip catches 48–75% of it in water.",
+    "titles": [
+     "Caught in liquid: 48–75 % of server heat",
+     "Left in the air: 25–52 % of server heat"
+    ],
+    "texts": [
+     "0",
+     "38",
+     "75",
+     "% of server heat",
+     "Caught in liquid",
+     "48–75",
+     "Left in the air",
+     "25–52"
+    ]
+   },
+   {
+    "h": "Lifting it with a heat pump",
+    "p": "A heat pump raises it to about 70 °C for a network. Each unit of electricity gives 3–4.5 units of heat.",
+    "titles": [
+     "Electricity in: 1.0 MWh",
+     "Heat out: 3.0–4.5 MWh"
+    ],
+    "texts": [
+     "data hall",
+     "heat pump",
+     "lifts 25–35 °C to ~70 °C",
+     "electricity in",
+     "to the network",
+     "homes,",
+     "schools,",
+     "pools",
+     "0",
+     "2.3",
+     "4.5",
+     "MWh",
+     "Electricity in",
+     "1.0",
+     "Heat out",
+     "3.0–4.5"
+    ]
+   },
+   {
+    "h": "What this size could offer",
+    "p": "About 19–35 GWh a year, the space and water heating of 1,335–2,433 homes in Vancouver. Offered is not used: the buildings still have to take it.",
+    "titles": [
+     "Vancouver: 1,335–2,433 homes",
+     "Edmonton: 667–1,215 homes"
+    ],
+    "texts": [
+     "0",
+     "1,217",
+     "2,433",
+     "homes",
+     "Vancouver",
+     "1,335–2,433",
+     "Edmonton",
+     "667–1,215"
+    ]
+   },
+   {
+    "h": "Who is within 1.5 km",
+    "p": "102 buildings that could take heat, by kind. Distance and price decide which are worth a pipe.",
+    "titles": [
+     "Non-market housing: 88%",
+     "Schools: 6%",
+     "Care, hospitals: 4%",
+     "Recreation, pools: 2%"
+    ],
+    "texts": [
+     "Non-market housing",
+     "88%",
+     "Schools",
+     "6%",
+     "Care, hospitals",
+     "4%",
+     "Recreation, pools",
+     "2%",
+     "102",
+     "buildings"
+    ]
+   }
+  ],
+  "energy": [
+   {
+    "h": "Where the power goes",
+    "p": "About 8.4–9.3 MW at the meter on average, 44–49 GWh a year. The grid sees it as a steady load.",
+    "titles": [],
+    "texts": [
+     "data hall",
+     "grid",
+     "substation",
+     "UPS, batteries",
+     "standby",
+     "generators",
+     "→ heat"
+    ]
+   },
+   {
+    "h": "The carbon of that power",
+    "p": "The same load carries about 19 times the carbon on Alberta's grid as on BC's.",
+    "titles": [
+     "Vancouver: 799–885 t CO₂e a year",
+     "Edmonton: 15,280–16,918 t CO₂e a year"
+    ],
+    "texts": [
+     "0",
+     "8,459",
+     "16,918",
+     "t CO₂e a year",
+     "Vancouver",
+     "799–885",
+     "Edmonton",
+     "15,280–16,918"
+    ]
+   },
+   {
+    "h": "What the grid asks back",
+    "p": "BC Hydro's 2026 Call asks large loads to cut at least 10% on 24 h notice, for at least 144 hours a year: about 1.6% of the year.",
+    "titles": [],
+    "texts": [
+     "Jan",
+     "Apr",
+     "Jul",
+     "Oct",
+     "Dec",
+     "Hours the grid may call a cut (at least 144 of 8,760)"
+    ]
+   }
+  ],
+  "water": [
+   {
+    "h": "Where water is used",
+    "p": "Only evaporative cooling uses water on site: it evaporates in the tower, and the salts left behind are flushed to the sewer as blowdown.",
+    "titles": [],
+    "texts": [
+     "data hall",
+     "cooling plant",
+     "city water",
+     "evaporated",
+     "to the sewer",
+     "roof",
+     "rain could top it up"
+    ]
+   },
+   {
+    "h": "Each system, in a year",
+    "p": "At this size, at most. Dry coolers: none.",
+    "titles": [
+     "Dry coolers: none",
+     "Hybrid coolers: 9,092 m³ a year",
+     "Cooling towers: 73,321 m³ a year"
+    ],
+    "texts": [
+     "0",
+     "36,661",
+     "73,321",
+     "m³ a year",
+     "Dry coolers",
+     "none",
+     "Hybrid coolers",
+     "9,092",
+     "Cooling towers",
+     "73,321"
+    ]
+   },
+   {
+    "h": "Rain on the roof",
+    "p": "About 4,003 m³ falls on 4,315 m² of roof in a year. Set against a tower's use, it is 5%.",
+    "titles": [
+     "Rain on the roof: 4,003 m³ a year",
+     "Tower, evaporated: 73,321 m³ a year"
+    ],
+    "texts": [
+     "0",
+     "36,661",
+     "73,321",
+     "m³ a year",
+     "Rain on the roof",
+     "4,003",
+     "Tower, evaporated",
+     "73,321"
+    ]
+   },
+   {
+    "h": "Hard water, more flushing",
+    "p": "Edmonton's water is about 178 mg/L hard, Vancouver's about 20. Harder water means more blowdown for the same heat.",
+    "titles": [
+     "Vancouver: 20 mg/L as CaCO₃",
+     "Edmonton: 178 mg/L as CaCO₃"
+    ],
+    "texts": [
+     "0",
+     "89",
+     "178",
+     "mg/L as CaCO₃",
+     "Vancouver",
+     "20",
+     "Edmonton",
+     "178"
+    ]
+   }
+  ],
+  "people": [
+   {
+    "h": "Sound spreads and fades",
+    "p": "Fans and pumps make a steady sound. It drops about 6 dB each time the distance doubles, over open ground without walls.",
+    "titles": [],
+    "texts": [
+     "data hall",
+     "plant",
+     "neighbour"
+    ]
+   },
+   {
+    "h": "How far it carries here",
+    "p": "About 9 units together (an assumption). The night limit of 55 dBA is reached at 75–238 m, low-noise to standard units.",
+    "titles": [],
+    "texts": [
+     "100 m",
+     "200 m",
+     "300 m",
+     "400 m",
+     "500 m",
+     "600 m",
+     "30",
+     "40",
+     "50",
+     "60",
+     "70",
+     "80",
+     "dBA",
+     "night limit, 55 dBA",
+     "low-noise",
+     "standard"
+    ]
+   }
+  ],
+  "materials": [
+   {
+    "h": "The servers turn over",
+    "p": "The building lasts decades; the servers are replaced every five to six years. Each refresh is a truckload of equipment out and in.",
+    "titles": [],
+    "texts": [
+     "data hall",
+     "loading",
+     "old servers out",
+     "every 5–6 years",
+     "new servers in"
+    ]
+   },
+   {
+    "h": "Each refresh, by weight",
+    "p": "About 10,000 servers at this size (about 600 W each): 213–263 tonnes each time.",
+    "titles": [
+     "Servers, one refresh: 213–263 tonnes",
+     "Copper in the facility: 120–240 tonnes — industry figure"
+    ],
+    "texts": [
+     "0",
+     "132",
+     "263",
+     "tonnes",
+     "Servers, one refresh",
+     "213–263",
+     "Copper in the facility",
+     "120–240"
+    ]
+   }
+  ]
+ },
+ "R": {
+  "pue": [
+   1.4,
+   1.55
+  ],
+  "lf": 0.6,
+  "capture": [
+   0.48,
+   0.75
+  ],
+  "cop": [
+   3,
+   4.5
+  ],
+  "grid": {
+   "van": 18.1,
+   "edm": 346.1
+  },
+  "homeMWh": {
+   "van": 14.58,
+   "edm": 29.19
+  },
+  "reach": {
+   "pool": 1000,
+   "housing": 1200,
+   "greenhouse": 1500
+  },
+  "reachGuide": 1200
+ },
+ "near": {
+  "n": 102,
+  "byType": {
+   "housing": 90,
+   "rec": 2,
+   "school": 6,
+   "care": 4
+  },
+  "within1500": {
+   "rec": 3,
+   "care": 6,
+   "school": 19,
+   "housing": 122
+  }
+ }
+}

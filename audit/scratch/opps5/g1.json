@@ -1,0 +1,202 @@
+{
+ "site": {
+  "city": "edm",
+  "zone": "IH",
+  "lot": 14516,
+  "answers": {
+   "built": "new",
+   "extent": "whole",
+   "floor": "",
+   "host": {},
+   "mw": null,
+   "foot": "max",
+   "cover": 70,
+   "hmode": "out",
+   "plantAt": "roof",
+   "outside": "dry",
+   "inside": "air",
+   "spares": "n1",
+   "gens": "yes",
+   "genAt": "yard",
+   "genSpares": "n1"
+  }
+ },
+ "air": {
+  "Greenhouse": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "nk",
+     "not read for zone IH"
+    ],
+    "physics": [
+     "yes",
+     "root-zone heating at about 38 °C takes low-grade heat; pipe-rail heating at 82 °C needs a heat pump"
+    ],
+    "land": [
+     "chg",
+     "little yard left: a rooftop greenhouse or a neighbour's lot"
+    ],
+    "demand": [
+     "yes",
+     "the heat offered could warm about 5,561–13,059 m² of greenhouse at 1.63–2.1 GJ/m² a year (Ontario, Manitoba measured); BC vegetable greenhouses use 1.3–2.0 GJ/m² a year of all energy (industry estimate, 2011). For scale: the City of Edmonton has 5 greenhouse farms, about 23,700 m², mostly potted plants; Division No. 11 about 108,000 m² (Census of Agriculture 2021)"
+    ],
+    "time": [
+     "chg",
+     "greenhouses need most heat in winter nights, as data centres give it all year; and in BC from May to October 90% of greenhouse gas is burned for its CO₂, not its heat — about half the year's gas — so server heat replaces only part of it (BC Greenhouse Sector report, 2011)"
+    ],
+    "money": [
+     "nk",
+     "Alberta greenhouses in 2023: investment $105–478 per m² by crop, natural gas $4–12 per m² a year (the heat a data centre could displace); about 85% heat with natural gas (Alberta Agriculture and Irrigation, 2023 survey of 53 growers). What a grower would pay for server heat is not published"
+    ]
+   }
+  },
+  "Sewage heat as comparator source": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "nk",
+     "no EPCOR sewer-heat programme found; Blatchford's sewer heat was deferred"
+    ],
+    "physics": [
+     "yes",
+     "sewage stays warm all year"
+    ],
+    "land": [
+     "nk",
+     "per-pipe flow near the parcel is not published"
+    ],
+    "demand": [
+     "yes",
+     "a rival source for the same receivers, not a receiver"
+    ],
+    "time": [
+     "yes",
+     "—"
+    ],
+    "money": [
+     "nk",
+     "—"
+    ]
+   }
+  },
+  "Cooling for neighbours": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "yes",
+     "Rules: physics gate first"
+    ],
+    "physics": [
+     "nk",
+     "a data centre rejects heat; giving cooling needs a chiller and a pipe"
+    ],
+    "land": [
+     "chg",
+     "a chilled-water pipe"
+    ],
+    "demand": [
+     "nk",
+     "—"
+    ],
+    "time": [
+     "nk",
+     "—"
+    ],
+    "money": [
+     "nk",
+     "—"
+    ]
+   }
+  }
+ },
+ "liquid": {
+  "Greenhouse": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "nk",
+     "not read for zone IH"
+    ],
+    "physics": [
+     "yes",
+     "root-zone heating at about 38 °C takes low-grade heat; pipe-rail heating at 82 °C needs a heat pump"
+    ],
+    "land": [
+     "chg",
+     "little yard left: a rooftop greenhouse or a neighbour's lot"
+    ],
+    "demand": [
+     "yes",
+     "the heat offered could warm about 5,561–13,059 m² of greenhouse at 1.63–2.1 GJ/m² a year (Ontario, Manitoba measured); BC vegetable greenhouses use 1.3–2.0 GJ/m² a year of all energy (industry estimate, 2011). For scale: the City of Edmonton has 5 greenhouse farms, about 23,700 m², mostly potted plants; Division No. 11 about 108,000 m² (Census of Agriculture 2021)"
+    ],
+    "time": [
+     "chg",
+     "greenhouses need most heat in winter nights, as data centres give it all year; and in BC from May to October 90% of greenhouse gas is burned for its CO₂, not its heat — about half the year's gas — so server heat replaces only part of it (BC Greenhouse Sector report, 2011)"
+    ],
+    "money": [
+     "nk",
+     "Alberta greenhouses in 2023: investment $105–478 per m² by crop, natural gas $4–12 per m² a year (the heat a data centre could displace); about 85% heat with natural gas (Alberta Agriculture and Irrigation, 2023 survey of 53 growers). What a grower would pay for server heat is not published"
+    ]
+   }
+  },
+  "Sewage heat as comparator source": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "nk",
+     "no EPCOR sewer-heat programme found; Blatchford's sewer heat was deferred"
+    ],
+    "physics": [
+     "yes",
+     "sewage stays warm all year"
+    ],
+    "land": [
+     "nk",
+     "per-pipe flow near the parcel is not published"
+    ],
+    "demand": [
+     "yes",
+     "a rival source for the same receivers, not a receiver"
+    ],
+    "time": [
+     "yes",
+     "—"
+    ],
+    "money": [
+     "nk",
+     "—"
+    ]
+   }
+  },
+  "Cooling for neighbours": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "yes",
+     "Rules: physics gate first"
+    ],
+    "physics": [
+     "nk",
+     "a data centre rejects heat; giving cooling needs a chiller and a pipe"
+    ],
+    "land": [
+     "chg",
+     "a chilled-water pipe"
+    ],
+    "demand": [
+     "nk",
+     "—"
+    ],
+    "time": [
+     "nk",
+     "—"
+    ],
+    "money": [
+     "nk",
+     "—"
+    ]
+   }
+  }
+ }
+}

@@ -1,0 +1,96 @@
+kwlSewer :: KWL for Metro Vancouver 2014, heat-seeking sewer model — https://www.canadianconsultingengineer.com/awards/pdfs/2014/F5_HeatSeekingSewerModel.pdf
+
+neuSewage :: City of Vancouver, NEU sewage heat recovery: '3.2 megawatts (MW) of sewage heat recovery capacity', expansion 'an additional 6.6 megawatts' (two 3.3 MW heat pumps, end of 2024) — https://vancouver.ca/home-property-development/sewage-heat-recovery-expansion-project.aspx
+
+gvsdd299 :: GVS&DD Sewer Use Bylaw 299, Sch. A 4(b),(c): prohibited 'Any Waste which will raise the temperature of Waste entering any Sewage Facility to 40 degrees Centigrade' and non-domestic waste at 65 °C — https://metrovancouver.org/boards/Bylaws/GVSDD_Bylaw_299_Consolidated.pdf
+
+gvsddUT008 :: Metro Vancouver (GVS&DD) Policy UT-008 Sewage Waste Heat Recovery (rev. 29 Jul 2022): access 'on a first-come first-served basis'; private applicants need a letter of support from the host municipality; heat user pays access costs; no $/GJ — https://metrovancouver.org/services/liquid-waste/Documents/sewage-waste-heat-recovery-policy.pdf
+
+vanSewerCap2025 :: City of Vancouver, Sewer Capacity Development Review Policy (Council 29 Oct 2025): no-review threshold, then low-impact class, else "detailed technical review by the City Engineer"; model prepared by the City or the applicant; no timeline or cost-sharing stated — https://vancouver.ca/files/cov/sewer-capacity-development-review-policy.pdf
+
+bchCfDRfA :: BC Hydro 2026 Call for Demand, Request for Applications: 300 MW AI + 100 MW storage data centres; projects 10–145 MW; scoring 30 % cost, 30 % data sovereignty, 20 % community (incl. brownfield), 10 % environment ('heat recovery ready', PUE, WUE), 10 % First Nations — https://app.bchydro.com/content/dam/BCHydro/customer-portal/documents/accounts-billing/electrical-connections/2026-cfd-request-for-applications.pdf
+
+cfd :: BC Hydro 2026 Call for Demand RFA: 100 + 300 MW; 10–145 MW per project; ≥10% premium; curtailment; heat-recovery-ready inside the 10% environmental weight — https://app.bchydro.com/content/dam/BCHydro/customer-portal/documents/accounts-billing/electrical-connections/2026-cfd-request-for-applications.pdf
+
+jlarc2024 :: Virginia JLARC Report 598, Data Centers in Virginia (Dec 2024): building 'usually takes about 12 to 18 months'; campus 'five or more years'; ~50 full-time workers per 250,000 sq ft ('one employee per 5,000 square feet'), about half contract; ~1,500 workers at peak construction; grid additions 12–36 months longer; 'One-third of data centers are currently located near residential areas'; residential bills +$14–37/month — https://jlarc.virginia.gov/pdfs/reports/Rpt598-2.pdf
+
+lbnlLife :: Shehabi et al. 2024 (LBNL) p.31: average server lifetime 'is 4.4 years, increasing to 5 years in 2020, and to 5.7 years by 2023' — https://climate.mit.edu/sites/default/files/2025-02/lbnl-2024-united-states-data-center-energy-usage-report.pdf
+
+tenK_life :: Company filings on server useful life: Microsoft FY2022 four → six years; Alphabet FY2023 servers four → six; Amazon six (2024), a subset back to five (2025, 'increased pace of technology development'); Meta 4–5 → 5.5 years (2025) — SEC filings (OPERATOR FILING)
+
+barroso2018 :: Barroso, Hölzle, Ranganathan 2018, The Datacenter as a Computer, 3rd ed., ch.6 Modeling Costs — full text (J.B. upload)
+
+ashraeLife :: ASHRAE Handbook HVAC Applications 2015, ch.37 Table 4 (median service life): centrifugal chiller >25 yr; cooling tower galvanized >22; air-cooled condenser 20; commercial water-to-air heat pump >24; base-mounted pump 20; shell-and-tube heat exchanger 24; transformer 30 — https://handbook.ashrae.org/Handbooks/A15/IP/A15_CH37/a15_ch37_ip.aspx
+
+dlrContracts :: Digital Realty 10-K FY2024, Item 1: 0–1 MW colocation 'Contract length generally 2-5 years'; >1 MW 'generally 5-10+ years' (OPERATOR FILING) — https://www.sec.gov/Archives/edgar/data/1297996/000155837025001424/dlr-20241231x10k.htm
+
+horizons :: Horizons: servers ~6 yr; plant 15–25; shell up to 40; network 40–50 (handoff rule 7); control in colocation (Greene; Monstadt and Saltzman) (handoff §3)
+
+vanWater2026 :: City of Vancouver 2026 metered rates (Sch. D): water high season $5.128, low season $4.091, sewer $7.960 per unit (1 unit = 2.83168466 m³); one rate for all metered uses — https://council.vancouver.ca/20251112/documents/spec1a.pdf
+
+epcorReclaimed :: EPCOR 2024 Edmonton Wastewater Quality Annual Report p.11: '4,226 ML (3.9%) of reclaimed water provided to industrial customers'; price and customers not stated — https://www.epcor.com/content/dam/epcor/documents/water-quality-reports/2024_edmonton_wastewater-quality_annual-report.pdf
+
+bcWSRfees :: BC Water Sustainability Fees, Rentals and Charges Tariff Regulation 37/2016, Sch.1–2: industrial 'cooling' application $1,000; 'heat exchange' annual rental $2.25 per 1,000 m³, minimum $200 — https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/37_2016
+
+thermalLimits :: Thermal discharge limits: BC Water Quality Guideline (temperature, 2001) marine '+ or - 1 degree Celsius change from natural ambient background', ≤0.5 °C/h; CCME marine ±1 °C; proposed Burrard Inlet objective 'No further increase in temperature' (Jul 2024); Alberta Surface Water Quality Guidelines 1999 'Not to be increased by more than 3°C above ambient' — https://www2.gov.bc.ca/assets/gov/environment/air-land-water/water/waterquality/water-quality-guidelines/approved-wqgs/temperature-or.pdf
+
+enwaveDLWC :: City of Toronto reports (2000; 21 Nov 2019) on Enwave Deep Lake Water Cooling: water drawn at 4 °C, returned at ≤13 °C; 50-year Energy Transfer Agreement to 2054; serves 'over 80 buildings … including data centers' (DLWC Expansion EA 2020) — https://www.toronto.ca/legdocs/mmis/2019/ie/bgrd/backgroundfile-140486.pdf
+
+bchRS2289 :: BC Hydro self-generation: RS 1289 net metering closing; from 1 Jul 2026 RS 2289 — export 'up to 100 kW per phase', excess purchased 'at 10 cents per kWh'; community generation up to 2 MW net injection — https://www.bchydro.com/toolbar/about/strategies-plans-regulatory/rate-design/self-generation-rate-updates.html
+
+abMicrogen :: Alberta micro-generation: capacity 'that does not exceed five (5) megawatts' (AUC); small (<150 kW) credited at retail, large at hourly wholesale; emissions ≤418 kg/MWh (alberta.ca, 2 Mar 2026) — https://www.alberta.ca/micro-generation
+
+abGridPage :: Government of Alberta, data centres — grid: 'projects that pair their demand with dedicated new generation or storage go to the front of the connection line'; interim allocation 1,200 MW, fully allocated — https://www.alberta.ca/datacentres/grid
+
+uptime2025 :: Uptime Institute Global Data Center Survey 2025 (INDUSTRY SURVEY): weighted average PUE 1.54 (n=681); facilities commissioned in the last five years 1.48; North America 1.49 — https://datacenter.uptimeinstitute.com/rs/711-RIA-145/images/2025.Annual.Survey.Report.pdf
+
+lbnlCapture :: Coles & Greenberg 2014 (LBNL), direct-to-chip liquid capture 'The best results ranged from 67 percent to 75 percent', 57–59 % at 30 °C supply; NREL/TP-2C00-62905: RackCDU 'up to 64% of server heat'; Heydari et al. 2024 Appl. Therm. Eng. 239:122122 cold plate 94 %; air-cooled capture: no primary figure — https://escholarship.org/content/qt0g50294h/qt0g50294h.pdf
+
+vanFees2026 :: City of Vancouver 2026 development and building permit fees (effective 1 Jan 2026), Schedule 2 s.3 new CD-1: elsewhere $94,500 + $1,590 per 100 m² (max $343,700) under 8,000 m²; Downtown/Broadway $226,300 + $1,590/100 m²; larger bands to $8,183,200; development permit 'all other uses' conditional $2,530 per 100 m² to 500 m² then $1,570 (max $366,600) — https://vancouver.ca/files/cov/vancouver-development-building-permit-fees.pdf
+
+vanDCL :: Vancouver DCL Bulletin (amended 25 Aug 2026), Table 1 rates from 10 Dec 2025: Industrial (I-2, M-1, M-1A, M-1B, M-2) $112.87/m²; Mixed Employment (IC-1–3, I-1, I-1A–C, I-3, I-4) $211.54/m²; no levy where floor area does not increase (s.6.1(a)) — https://guidelines.vancouver.ca/bulletins/bulletin-development-cost-levies.pdf
+
+vanACC :: Vancouver Amenity Cost Charges, RTS 18333 (6 Jul 2026) Table 5: Industrial $12.92/m², Mixed-Employment $24.22/m², Commercial $32.29/m², effective 30 Sep 2026, in addition to DCLs — https://council.vancouver.ca/20260714/documents/r4.pdf
+
+vanCAC :: Vancouver CAC Policy (amended 30 Sep 2026) s.8.2(c): rezonings submitted after 30 Sep 2026 that are 100 % commercial, industrial and institutional are exempt — https://guidelines.vancouver.ca/policy-community-amenity-contributions-for-rezonings.pdf
+
+vanRezoneTime :: City of Vancouver: typical CD-1 rezoning 'Target ~16 weeks to Letter of Response', 'Target ~15 months to decision' (process overview); 'about one year to process (from fee payment to public hearing)' (apply-to-rezone page, Jun 2026) — https://vancouver.ca/files/cov/rezoning-process-overview.pdf
+
+rts19744 :: City of Vancouver RTS 19744 (30 Jun 2026): 111 E 5th, 'up to 40 MW'; cond. 1.11 heat recovery a material condition at the applicant's sole cost; 579 submissions — https://council.vancouver.ca/20260714/documents/rr1.pdf
+
+abConsult :: Government of Alberta, data centres — Indigenous consultation: a project 'cannot receive its Water Act licence, its public lands disposition or its environmental approval' until consultation is complete; EPEA approval needed for backup generation over 50 MW (EPA fact sheet 20 Jul 2026) — https://www.alberta.ca/datacentres/indigenous
+
+census2021DA :: Statistics Canada, Census Profile 2021, dissemination areas (98-401-X2021006, BC and Prairies files) and 2021 DA cartographic boundaries (92-160-X, lda_000b21a_e); J.B. downloads 16 Oct 2026; selected counts extracted on J.B.'s computer for CD 5915 (Greater Vancouver, 3,590 DAs, population 2,642,825) and CD 4811 (Division No. 11, 1,952 DAs) — https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/download-telecharger.cfm?Lang=E
+
+panFang2025 :: Pan Fang & Greenstein 2025, 'Where the cloud rests: the economic geography of data centers', Strategy Science 10(4) (abstract): third-party firms favour urban settings and are 'sensitive to buyer demand for proximity'; cloud providers have 'a lower propensity for locating in urban areas'
+
+satya2017 :: Satyanarayanan 2017, 'The Emergence of Edge Computing', Computer (Jan): head-tracked VR needs latencies under 16 ms (p.32); 'End-to-end latency of a few tens of milliseconds is a safe but achievable goal' (p.32)
+
+malecki2002 :: Malecki 2002, Economic Geography 78(4):399–424 (abstract): 'a global bias of Internet backbone networks toward world cities', tempered by urban areas 'that serve as interconnection points'
+
+gridBC :: BC 2025 consumption-based grid factor 22.8 tCO2e/GWh (2024: 9.9) — https://www2.gov.bc.ca/gov/content/environment/climate-change/data/electricity
+
+bchLGS :: BC Hydro business rates (Large General Service RS 1600–1611, Revision 26, effective 1 Jul 2026): basic 29.99 ¢/day, demand $13.83/kW, energy 6.79 ¢/kWh; Transmission Service RS 1830 (fiscal 2027): $12.178/kVA, 4.914 ¢/kWh (RS 1823 cancelled 1 Apr 2026) — https://app.bchydro.com/accounts-billing/rates-energy-use/electricity-rates/business-rates.html
+
+aesoAMS2025 :: AESO 2025 Annual Market Statistics (Mar 2026; J.B. PDF 16 Oct 2026), Table 1: Alberta pool price, daily average $/MWh — 2016 18.28, 2017 22.19, 2018 50.35, 2019 54.88, 2020 46.72, 2021 101.93, 2022 162.46, 2023 133.63, 2024 62.78, 2025 43.68 (lowest in eight years); 2025 on-peak 52.15, off-peak 26.74; 2025 estimated gas unit marginal cost 16.71 (7 GJ/MWh) to 48.68 (12 GJ/MWh), carbon cost 0.42–24.32; gas 1.61 $/GJ. Inflation-adjusted (2025 $) 10-year average 2016–2025 $78/MWh vs $113 for 2000–2009 (Figure 5). Average Alberta Internal Load 10,316 MW (+2.0%); all-time winter peak 12,785 MW, Dece
+
+epcorDAS2026 :: EPCOR Distribution & Transmission, 2026 interim rates (AUC Decision 30298-D01-2025, 10 Dec 2025), per day: DAS-TOU (150–5,000 kVA secondary) $43.46/site + $0.22878/kW, energy $0; transmission pass-through SAS-TOU $0.00253/kWh + capacity $0.12868 + demand $0.24154 + other $0.00107 per kW per day + operating reserve 8.09% × kWh × pool price (based on the proposed 2026 AESO tariff). Per-kWh adders ≈ $2.53/MWh + 8% of pool; demand-type ≈ $18/kW-month (agent calculation); riders not included — https://www.epcor.com/content/dam/epcor/documents/rates/system-access-service-tariffs/2026-01-system-acces
+
+epcorSAS2026 :: MISSING
+
+boc :: MISSING
+
+fhwa :: MISSING
+
+neuConnect :: City of Vancouver NEU Connectivity Guidelines (May 2026 Rev.1): network 'minimum 65°C'; building supply 60 °C year-round; 'a maximum return water temperature of 45°C must be achieved under all conditions'; the NEU does not provide cooling; waste heat from building cooling may be accepted for a bill credit — https://guidelines.vancouver.ca/guidelines-neighbourhood-energy-utility-connectivity-requirements.pdf
+
+neuReport :: NEU rates report RTS 18251 (Oct 2025): 47 buildings, 667,000 m²; 71% renewable; gas $2.23/GJ; RNG rider — https://council.vancouver.ca/20251112/documents/spec1d.pdf
+
+van6555zones :: Vancouver Noise Control By-law 6555 (consol. 14 Jul 2026), continuous sound ss.2.1–2.3: quiet→quiet 55 day / 45 night; activity→quiet 60 / 55; intermediate/activity→other 70 / 65; 'background noise' credited only for commercial premises (s.3.1(b)); no ambient credit for equipment — https://bylaws.vancouver.ca/6555c.PDF
+
+edm18100 :: Edmonton Drainage Bylaw 18100 s.5.10(i): non-contact cooling water to the sanitary sewer only with prior written EWSI approval; no EPCOR sewer-heat programme found — https://www.edmonton.ca/residential_neighbourhoods/Bylaws/C18100.pdf
+
+mvReclaimed :: Metro Vancouver Interim Reclaimed Water Policy UT-019 (29 Sep 2023): industrial uses case-by-case; no rates — https://metrovancouver.org/boards/Policies/interim-reclaimed-water.pdf
+
+ieaEnergyAI :: IEA, Energy and AI (2025): 'a data centre can be operational in two to three years' — https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai
+

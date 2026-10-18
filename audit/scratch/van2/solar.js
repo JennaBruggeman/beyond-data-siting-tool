@@ -1,0 +1,17 @@
+const {chromium}=require('/tmp/claude-0/-home-claude/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/scratchpad/node_modules/playwright'); const fs=require('fs'); const SP='/tmp/claude-0/-home-claude/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/scratchpad';
+(async()=>{ const arg='van-2_1-23060741';
+const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell',args:['--use-gl=swiftshader','--enable-webgl']});
+const p=await b.newPage({viewport:{width:1440,height:900}}); const errs=[]; p.on('pageerror',e=>errs.push(e.message));
+await p.route(/three\.min\.js/,r=>r.fulfill({body:fs.readFileSync(SP+'/node_modules/three/build/three.min.js'),contentType:'application/javascript'}));
+await p.route(/OrbitControls\.js/,r=>r.fulfill({body:fs.readFileSync(SP+'/node_modules/three/examples/js/controls/OrbitControls.js'),contentType:'application/javascript'}));
+await p.route(/fonts\.(googleapis|gstatic)|jspdf|autotable|d3/,r=>r.abort());
+await p.goto('http://localhost:8765/index.html?x='+Date.now()+'#'+arg); await p.waitForTimeout(8000);
+await p.evaluate(()=>{ const w=document.getElementById('welcome'); if(w) w.remove(); BD.flow.max=999; BD.flow.go(1); }); await p.waitForTimeout(5000);
+const out={};
+const idx=await p.evaluate(()=>BD.flow.steps.map(s=>s.k));
+out.steps=idx;
+await p.evaluate(i=>BD.flow.go(i), idx.indexOf('energy')); await p.waitForTimeout(4000);
+out.info=await p.evaluate(()=>{ const f=BD.eng.siteFacts(); return {mw:BD.S.answers.mw, ring: BD.S.sel&&BD.S.sel.ring?BD.area(BD.S.sel.ring):null, roof:BD.eng.roofArea?BD.eng.roofArea(f):null, plate:f.plate, foot:f.foot, MH:f.M&&f.M.H, MF:f.M&&f.M.foot?BD.area(f.M.foot):null}; });
+const grab=async(fn)=>{ try{ await p.evaluate(fn); await p.waitForTimeout(3000); return await p.evaluate(()=>{ const d=document.querySelector('#drawer')||document.querySelector('.drawer'); return d?d.innerText:'(no drawer)'; }); }catch(e){ return 'ERR '+e.message; } };
+out.adds=await p.evaluate(()=>[...document.querySelectorAll('#side [data-add]')].map(b=>b.dataset.add)); out.solar=await grab(()=>document.querySelector('#side [data-add="pv"]').click()); out.fac=await grab(()=>document.querySelector('#side [data-add="pvwall"],#side [data-add="pv_facade"]')&&document.querySelector('#side [data-add="pvwall"],#side [data-add="pv_facade"]').click()); out.side=await p.evaluate(()=>document.getElementById('side').innerText);
+fs.writeFileSync('/mnt/user-data/outputs/audit/scratch/van2/solar.json',JSON.stringify({out,errs},null,1)); console.log('ok',errs.length); await b.close(); })();

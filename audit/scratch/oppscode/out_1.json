@@ -1,0 +1,549 @@
+{
+ "site": {
+  "city": "edm",
+  "zone": "IH",
+  "lot": 14516,
+  "fmw": [
+   22.119619047619047,
+   40
+  ],
+  "answers": {
+   "built": "new",
+   "extent": "whole",
+   "floor": "",
+   "host": {},
+   "mw": null,
+   "foot": "max",
+   "cover": 70,
+   "hmode": "out",
+   "plantAt": "roof",
+   "outside": "dry",
+   "inside": "air",
+   "spares": "n1",
+   "gens": "yes",
+   "genAt": "yard",
+   "genSpares": "n1"
+  },
+  "mwSized": 22.119619047619047,
+  "mwProv": true,
+  "footArea": 13075.186765970033,
+  "free": 0,
+  "ctxmw": 1,
+  "avail": [
+   3243.7028571428573,
+   5913
+  ],
+  "itMWh": 5256,
+  "roof": 10676.21845,
+  "capture": [
+   0.48,
+   0.75
+  ],
+  "homeMWh": {
+   "van": 14.58,
+   "edm": 29.19
+  },
+  "pue": [
+   1.4,
+   1.55
+  ],
+  "lf": 0.6,
+  "nets": [
+   {
+    "n": "Blatchford District Energy Sharing System",
+    "inside": false,
+    "edge": 442.9339420242615,
+    "src": "blatchford2023"
+   }
+  ],
+  "rkeys": [
+   "fac",
+   "itMWh",
+   "facMWh",
+   "plant",
+   "avail",
+   "hp",
+   "homes",
+   "co2",
+   "fuel",
+   "jobs"
+  ]
+ },
+ "rsample": {
+  "fac": [
+   1.4,
+   1.55
+  ],
+  "itMWh": 5256,
+  "facMWh": [
+   7358.4,
+   8146.799999999999
+  ],
+  "plant": [
+   32.7,
+   33.1
+  ],
+  "avail": [
+   3243.7028571428573,
+   5913
+  ],
+  "hp": [
+   720.8228571428572,
+   1971
+  ],
+  "homes": [
+   111.12377037145794,
+   202.5693730729702
+  ],
+  "co2": [
+   249.47679085714287,
+   682.1631000000001
+  ],
+  "fuel": [
+   4418.400000000001,
+   4891.8
+  ],
+  "jobs": [
+   1,
+   2.8256189451022604
+  ]
+ },
+ "g": {
+  "District heat to a network": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "nk",
+     "Utility rules: Alberta rule for selling heat not yet read; Blatchford: connection compulsory, net-zero buildings exempt (Bylaw C17943 s. 6, s. 8)"
+    ],
+    "physics": [
+     "chg",
+     "air cooling: heat leaves at 25–35 °C; change to liquid cooling, or recover from exhaust air with a heat pump (no primary capture figure)"
+    ],
+    "land": [
+     "chg",
+     "443 m from Blatchford District Energy Sharing System: a pipe to it"
+    ],
+    "demand": [
+     "nk",
+     "Blatchford District Energy Sharing System takes heat (whether it takes heat from others is not published)"
+    ],
+    "time": [
+     "nk",
+     "network expansion timing not published"
+    ],
+    "money": [
+     "nk",
+     "Blatchford variable rate $0.0269/kWh; what it pays for heat in is not published"
+    ]
+   }
+  },
+  "Hospital or campus anchor": {
+   "s": "no",
+   "G": {
+    "rules": [
+     "nk",
+     "Utility rules: not yet read"
+    ],
+    "physics": [
+     "chg",
+     "air cooling: heat leaves at 25–35 °C; change to liquid cooling, or recover from exhaust air with a heat pump (no primary capture figure)"
+    ],
+    "land": [
+     "no",
+     "no hospital within 1.2 km"
+    ],
+    "demand": [
+     "no",
+     "—"
+    ],
+    "time": [
+     "nk",
+     "not known"
+    ],
+    "money": [
+     "nk",
+     "see the Heat card for its break-even distance"
+    ]
+   }
+  },
+  "New district with the data centre as heat plant": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "chg",
+     "Zoning: rezoning"
+    ],
+    "physics": [
+     "chg",
+     "air cooling: heat leaves at 25–35 °C; change to liquid cooling, or recover from exhaust air with a heat pump (no primary capture figure)"
+    ],
+    "land": [
+     "chg",
+     "a new network in the streets (see Heat cards for cost per metre)"
+    ],
+    "demand": [
+     "nk",
+     "Edmonton housing is not in the receiver records"
+    ],
+    "time": [
+     "nk",
+     "who builds the network and when is not known"
+    ],
+    "money": [
+     "nk",
+     "who pays (the capital split) is not known"
+    ]
+   }
+  },
+  "Greenhouse": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "nk",
+     "not read for zone IH"
+    ],
+    "physics": [
+     "yes",
+     "root-zone heating at about 38 °C takes low-grade heat; pipe-rail heating at 82 °C needs a heat pump"
+    ],
+    "land": [
+     "chg",
+     "little yard left: a rooftop greenhouse or a neighbour's lot"
+    ],
+    "demand": [
+     "yes",
+     "the heat offered could warm about 5,561–13,059 m² of greenhouse at 1.63–2.1 GJ/m² a year (Ontario, Manitoba measured); BC vegetable greenhouses use 1.3–2.0 GJ/m² a year of all energy (industry estimate, 2011). For scale: the City of Edmonton has 5 greenhouse farms, about 23,700 m², mostly potted plants; Division No. 11 about 108,000 m² (Census of Agriculture 2021)"
+    ],
+    "time": [
+     "chg",
+     "greenhouses need most heat in winter nights, as data centres give it all year; and in BC from May to October 90% of greenhouse gas is burned for its CO₂, not its heat — about half the year's gas — so server heat replaces only part of it (BC Greenhouse Sector report, 2011)"
+    ],
+    "money": [
+     "nk",
+     "Alberta greenhouses in 2023: investment $105–478 per m² by crop, natural gas $4–12 per m² a year (the heat a data centre could displace); about 85% heat with natural gas (Alberta Agriculture and Irrigation, 2023 survey of 53 growers). What a grower would pay for server heat is not published"
+    ]
+   }
+  },
+  "Aquaculture / insects / algae": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "nk",
+     "not read for zone IH"
+    ],
+    "physics": [
+     "yes",
+     "fish tanks need 2.9–4.6 kWh of heat per kg of fish (make-up water to trout temperatures)"
+    ],
+    "land": [
+     "nk",
+     "tank space depends on the species and system"
+    ],
+    "demand": [
+     "yes",
+     "the heat offered could support about 705–2,039 t of fish a year by heat alone (heat is rarely the limit)"
+    ],
+    "time": [
+     "yes",
+     "tanks need heat all year, as data centres give it"
+    ],
+    "money": [
+     "nk",
+     "recirculating systems cost €12–20 per kg of yearly output (FAO 2022), European costs"
+    ]
+   }
+  },
+  "Seasonal storage in the ground": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "chg",
+     "an Alberta water-well licence or registration (Directive 2018)"
+    ],
+    "physics": [
+     "yes",
+     "boreholes store summer heat for winter"
+    ],
+    "land": [
+     "chg",
+     "little yard left: a borefield under the building or a neighbour's land"
+    ],
+    "demand": [
+     "nk",
+     "needs a winter receiver"
+    ],
+    "time": [
+     "yes",
+     "moves heat from summer to winter"
+    ],
+    "money": [
+     "chg",
+     "a borehole costs about $54 per metre installed in Edmonton (drilling, loop, grout; CAD 2025, Majdabadi et al. 2026); the number of metres depends on the heat stored, not sized here"
+    ]
+   }
+  },
+  "Sewage heat as comparator source": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "nk",
+     "no EPCOR sewer-heat programme found; Blatchford's sewer heat was deferred"
+    ],
+    "physics": [
+     "yes",
+     "sewage stays warm all year"
+    ],
+    "land": [
+     "nk",
+     "per-pipe flow near the parcel is not published"
+    ],
+    "demand": [
+     "yes",
+     "a rival source for the same receivers, not a receiver"
+    ],
+    "time": [
+     "yes",
+     "—"
+    ],
+    "money": [
+     "nk",
+     "—"
+    ]
+   }
+  },
+  "Distributed servers as heaters": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "nk",
+     "Building code: not yet read"
+    ],
+    "physics": [
+     "yes",
+     "servers in homes heat them directly"
+    ],
+    "land": [
+     "yes",
+     "no pipe; the computing moves"
+    ],
+    "demand": [
+     "nk",
+     "a home's winter demand; who hosts the servers"
+    ],
+    "time": [
+     "chg",
+     "heat only in the heating season; the computing must move in summer"
+    ],
+    "money": [
+     "nk",
+     "—"
+    ]
+   }
+  },
+  "Reserved capacity and batteries to the grid": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "nk",
+     "Utility programme: AESO operating reserve ≥5 MW, or through an aggregator; Condition on large loads: Data Centre Regulation (Alta Reg 117/2026), ≥75 MW from transmission: may tether to new generation or storage covering its peak; in mandatory load shed, large data centres cut before all others; bridged load (≤3 yr) cut first when supply is short. AESO process (proposal, Jun 2026): first intake gas only, bridging ≤40%. Under 75 MW or on distribution: no flexibility term found; UPS batteries to the grid: AESO reserves ≥5 MW or via aggregator; Fire code (battery room): code path unconfirmed"
+    ],
+    "physics": [
+     "yes",
+     "batteries and curtailable load can shave peaks"
+    ],
+    "land": [
+     "chg",
+     "a battery yard 3 m from lot lines and buildings (NFPA 855 as reference) — see the Energy add-on"
+    ],
+    "demand": [
+     "yes",
+     "AESO operating reserves (not sized here)"
+    ],
+    "time": [
+     "yes",
+     "winter peaks; hour not published"
+    ],
+    "money": [
+     "chg",
+     "PNNL 2021: $411–448/kWh (US$, 4 h) — rough"
+    ]
+   }
+  },
+  "EV charging hub": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "nk",
+     "no EV-charging use term in Bylaw 20001; Vehicle Support Service does not mention charging; EV charging's regulatory status is \"unclear\" (AUC 2021)"
+    ],
+    "physics": [
+     "yes",
+     "1 MW set aside serves about 26–68 Level 2 stalls (7.4–19.2 kW, 0.5 diversity)"
+    ],
+    "land": [
+     "chg",
+     "0 m² free on the lot holds 0 stalls; more needs an adjacent lot — which crosses the property line (a rule, not a distance)"
+    ],
+    "demand": [
+     "nk",
+     "no charging demand data at the parcel; 0 public charging stations already within 1 km, with 0 Level 2 ports and 0 DC fast ports (NRCan station locator, 16 Oct 2026)"
+    ],
+    "time": [
+     "chg",
+     "workplace charging starts peak at 8–10 am (US data); winter evening grid peaks overlap with home charging, not workplace"
+    ],
+    "money": [
+     "nk",
+     "Level 2 about $15k a port, DC fast $160k at 125 kW (NRCan-commissioned, 2025 costs)"
+    ]
+   }
+  },
+  "Rainwater, condensate and water reuse": {
+   "s": "no",
+   "G": {
+    "rules": [
+     "chg",
+     "an alternative solution from the City (Alberta notice, 2021)"
+    ],
+    "physics": [
+     "yes",
+     "about 3,609 m³ of rain a year on the roof"
+    ],
+    "land": [
+     "yes",
+     "a tank below grade"
+    ],
+    "demand": [
+     "no",
+     "dry coolers use no water; rain would go to toilets and irrigation only"
+    ],
+    "time": [
+     "chg",
+     "rain falls mostly June–August, when cooling needs peak"
+    ],
+    "money": [
+     "nk",
+     "tank cost per m³ not sourced"
+    ]
+   }
+  },
+  "Meanwhile uses on land held for growth": {
+   "s": "no",
+   "G": {
+    "rules": [
+     "nk",
+     "Permit: not yet read"
+    ],
+    "physics": [
+     "yes",
+     "—"
+    ],
+    "land": [
+     "no",
+     "the setup leaves almost no open land"
+    ],
+    "demand": [
+     "nk",
+     "who would use it"
+    ],
+    "time": [
+     "nk",
+     "how long the land is held"
+    ],
+    "money": [
+     "nk",
+     "—"
+    ]
+   }
+  },
+  "Warming centre, refuge, clean-air room": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "nk",
+     "not read for zone IH"
+    ],
+    "physics": [
+     "yes",
+     "spare heat and filtered air from the data centre"
+    ],
+    "land": [
+     "chg",
+     "a room taken from the building or a neighbour's building"
+    ],
+    "demand": [
+     "yes",
+     "Edmonton has 6.1–6.5 days a year at or below −20 °C (ECCC Normals 1991–2020)"
+    ],
+    "time": [
+     "yes",
+     "needed in cold snaps, heat waves and smoke events"
+    ],
+    "money": [
+     "nk",
+     "who runs it is not known"
+    ]
+   }
+  },
+  "Cooling for neighbours": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "yes",
+     "Rules: physics gate first"
+    ],
+    "physics": [
+     "nk",
+     "a data centre rejects heat; giving cooling needs a chiller and a pipe"
+    ],
+    "land": [
+     "chg",
+     "a chilled-water pipe"
+    ],
+    "demand": [
+     "nk",
+     "—"
+    ],
+    "time": [
+     "nk",
+     "—"
+    ],
+    "money": [
+     "nk",
+     "—"
+    ]
+   }
+  },
+  "Material bank: copper": {
+   "s": "nk",
+   "G": {
+    "rules": [
+     "yes",
+     "no rule needed"
+    ],
+    "physics": [
+     "yes",
+     "20–40 t of copper in the facility (industry figure)"
+    ],
+    "land": [
+     "yes",
+     "—"
+    ],
+    "demand": [
+     "nk",
+     "who would take the material and when"
+    ],
+    "time": [
+     "chg",
+     "released at refits and at the end of the building's life"
+    ],
+    "money": [
+     "nk",
+     "—"
+    ]
+   }
+  }
+ },
+ "errs": []
+}

@@ -1,0 +1,32 @@
+{
+ "arg": "0",
+ "errs": [],
+ "sens": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nWhat matters most\nWhich assumption moves the answer\n\nEach bar varies one assumption across its sourced range while the others stay at the middle. The longest bar is where better evidence would narrow the answer most. The tick is the middle case.\n\nLargest data centre that fits (this site)\nNot varied: the zone's floor-space ratio and height (read from the schedule) and the lot area (City record).\nHeat offered at 1 mw of servers\nNot varied: the 60% average load (one source, no range) — every heat figure scales with it directly.\n← Pick a site\nKeep the defaults →",
+ "sens5": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nWhat matters most\nWhich assumption moves the answer\n\nEach bar varies one assumption across its sourced range while the others stay at the middle. The longest bar is where better evidence would narrow the answer most. The tick is the middle case.\n\nLargest data centre that fits (this site)\nNot varied: the zone's floor-space ratio and height (read from the schedule) and the lot area (City record).\nHeat offered at 5 mw of servers\nNot varied: the 60% average load (one source, no range) — every heat figure scales with it directly.\n← Pick a site\nKeep the defaults →",
+ "cities": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nThe same data centre in two cities\n\n5 MW, built the same way in both cities. Only the grid, climate and rules change.\n\n\tVancouver\tEdmonton\nGrid carbon\npublic record NIR 2026, consumption intensity, 2024\n\t18.1 g/kWh\t346.1 g/kWh\nCarbon of its electricity\nphysics electricity × grid carbon\n\t666–737 t CO₂e/yr\t12,734–14,098 t CO₂e/yr\nHeat offered (liquid-cooled, heat pump)\nphysics same physics in both cities\n\t16–30 GWh/yr\t16–30 GWh/yr\nEqual to the heating of\npublic record a home uses 14.58 MWh a year in BC, 29.19 in Alberta (NRCan CEUD 2023)\n\t1,112–2,028 homes\t556–1,013 homes\nHeat-pump carbon\nphysics heat-pump electricity × grid carbon\n\t65–178 t CO₂e/yr\t1,247–3,411 t CO₂e/yr\nBusiest to quietest heating month\nresearch or government lab total heat demand (CWEC)\n\tabout 3.9 : 1\tabout 3.3 : 1\nSolar yield, roof\npublic record NRCan municipal values (flat to latitude tilt)\n\t892–1,007 kWh per kWp a year\t944–1,244 kWh per kWp a year\nSolar yield, south wall\npublic record NRCan municipal values (vertical)\n\t716 kWh per kWp a year\t989 kWh per kWp a year\nRain\npublic record ECCC Normals 1991–2020\n\tabout 1,160 mm a year\tabout 420 mm a year\nNight noise limit next to homes\npublic record city by-laws\n\t45–55 dBA by zone (By-law 6555)\t50 dBA (Bylaw 14600)\nGetting power\npublic record BC Hydro 2026 RFA; Alta Reg 117/2026; AESO 2025, 2026\n\t2026 Call: must curtail ≥10% of load on 24 h notice, ≥144 h a year; downtown feeders frozen to 2032\tAESO interim limit of 1,200 MW for new large loads, fully allocated; data centres ≥75 MW may tether to their own new generation or storage, and are cut first in mandatory load shedding\nWhere heat could go\npublic record By-law 9552; Bylaw C17943\n\tNEU: compulsory connection inside its area; heat sent back credited at 50%\tBlatchford: compulsory connection inside its service area (Bylaw C17943 s. 6); service areas not yet traced in the tool\nElectricity price\npublic record BC Hydro 2026; AESO 2025\n\tBC Hydro large general service 6.79 ¢/kWh + $13.83/kW a month\tAlberta pool averaged $43.68/MWh in 2025, plus wires charges\n\nThe same heat is worth about twice as many homes' heating in Vancouver as in Edmonton, because Alberta homes use about twice the heat; more\n\nSize from the slider; set a size on the What fits page.\n← Pick a site\nKeep the defaults →",
+ "time": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nWhat changes, and when\n\nPipes and grid connections outlast the servers and the tenants. Each red tick is a point where the heat could change.\n\n0 yr\n10 yr\n20 yr\n30 yr\n40 yr\n50 yr\nServers replaced\nevery 5–6 years\nColocation contract\n2–5 years, renewed or not\nHyperscale contract\n5–10+ years\nHeat contract (Stockholm)\n10 years + 5\nCooling and heat pumps\n15–25 years\nBuilding shell\nup to about 40 years\nPipe network\n30–50 years, by water temperature\nGrid connection\nstays with the land\nFour futures\nTenant changes cooling: liquid to air: heat offered drops to none; air to liquid: heat could be offered\n← Pick a site\nKeep the defaults →",
+ "about": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nAbout this tool\nWhat this tool can't tell you\n\nRanges, not designs: screening figures from published sources, not a substitute for an engineer, a utility study or a permit review.\n\nZoning\nRead as written. Support rooms on a ground floor where \"bulk data storage\" is barred (Vancouver I-2, I-3, FC-2): the City to confirm; both readings shown. I-2 yards not yet read, so floor area is \"up to\".\nSize\nReal data centres sit in the lower half of the range; small downtown buildings can exceed it. Only 11 buildings worldwide publish both IT load and floor area.\nGrid\nNo utility publishes substation headroom. Known: downtown Vancouver feeder freeze to 2032; Alberta's 1,200 MW interim limit, fully allocated. Otherwise \"needs the utility's answer\".\nHeat\nReceivers are candidates by type, not customers. Demand, current heating and willingness are unknown: heat available is not heat used.\nEdmonton\nHeights from the City's 3D buildings (about 95%), the rest estimated from floor area. District energy areas not yet traced; floodplain not yet checked. Lots © Altalis via Edmonton Public Schools GIS, to 1 Sep 2025, academic use.\nPeople\nCensus 2021 spread evenly within each area, so estimates near boundaries. Sound is screening only, no walls or barriers. The watched edge needs a site visit.\nClaims\nOperator figures are labelled as claims; industry surveys as surveys.\nSecurity\nGeneric equipment only; nothing that would help defeat a facility's security.\nData and their dates\nVersions\nEvidence badges\nEach source line carries a badge: public record research or government lab industry survey operator or maker claim physics…\nVersion 19, 16 Oct 2026.\n← Pick a site\nKeep the defaults →",
+ "R": {
+  "lf": 0.6,
+  "pue": [
+   1.4,
+   1.55
+  ],
+  "cap": [
+   0.48,
+   0.75
+  ],
+  "cop": [
+   3,
+   4.5
+  ],
+  "grid": {
+   "van": 18.1,
+   "edm": 346.1
+  },
+  "home": {
+   "van": 14.58,
+   "edm": 29.19
+  }
+ }
+}

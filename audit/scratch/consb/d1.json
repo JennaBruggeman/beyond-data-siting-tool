@@ -1,0 +1,142 @@
+{
+ "arg": "1",
+ "errs": [],
+ "deck": [
+  {
+   "id": "built",
+   "text": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nSet up the site · 1 of 8\nWhat is being built?\nNew building\nShare a new building\nRetrofit an existing building\nLease space in a building\n✓ Possible here A data centre is allowed in zone IH.\nUpsides\nSized to the zone: floor area, height, setbacks\nFloors can be built tall and strong for data halls (5.5–6.0 m floors)\nDownsides\nA development permit, and the time it takes\nNew construction carries embodied carbon (about 461 kg CO₂e per m² as a median for buildings; no data-centre figure)\n\n22–40 MW of servers fit · 29,032 m² floor\n\n← The site\nNext →",
+   "titles": [
+    "New building: 22–40 MW of servers",
+    "Share a new building: 4.4–14 MW of servers",
+    "Retrofit an existing building: 3.3–11 MW of servers",
+    "Lease space in a building: 0.7–2.2 MW of servers"
+   ],
+   "cap": "Servers that fit here, for each option. Grey bars are the options not picked; \"none\" means not possible here."
+  },
+  {
+   "id": "foot",
+   "text": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nSet up the site · 2 of 8\nHow much of the lot does it cover?\nMost the zone allows\nMatch the existing building\nSet the coverage\n✓ Possible here\nUpsides\nThe most floor area, so the most that fits\nDownsides\nLeast open land left for other uses, rain, or a borefield\n\n22–40 MW of servers fit · 29,032 m² floor\n\n← Back\nNext →",
+   "titles": [
+    "Most the zone allows: 29,032 m² of floor",
+    "Match the existing building: 14,880 m² of floor",
+    "Set the coverage: 23,181 m² of floor"
+   ],
+   "cap": "Floor area for each choice."
+  },
+  {
+   "id": "height",
+   "text": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nSet up the site · 3 of 8\nHow tall?\nOutright: 30 m\nSet the storeys\n✓ Possible here\nUpsides\nNo discretion needed from the City\nDownsides\nFewer storeys of tall data-hall floors\n\n22–40 MW of servers fit · 29,032 m² floor\n\n← Back\nNext →",
+   "titles": [
+    "Outright: 30 m: 22–40 MW of servers"
+   ],
+   "cap": "Servers that fit at each height."
+  },
+  {
+   "id": "inside",
+   "text": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nSet up the site · 4 of 8\nHow are the servers cooled?\nAir\nLiquid to the chip\nImmersion\nwarm air, 25–35 °C\nfans move air through the racks and coils\n✓ Possible here\nUpsides\nThe most common: 75% of operators use room air cooling (Uptime 2025 survey)\nSimple, well known\nDownsides\nHeat leaves at about 25–35 °C, too cool to reuse without a heat pump\n\n22–40 MW of servers fit · 29,032 m² floor\n\n← Back\nNext →",
+   "titles": [
+    "Air: none — heat leaves in air at 25–35 °C",
+    "Liquid to the chip: 48–75 % of heat caught in liquid",
+    "Immersion: none — not yet sourced"
+   ],
+   "cap": "Share of server heat caught in liquid, where it is easiest to reuse. Immersion: not yet sourced."
+  },
+  {
+   "id": "outside",
+   "text": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nSet up the site · 5 of 8\nHow does the heat leave?\nDry coolers\nCooling towers\nHybrid coolers\n✓ Possible here\nUpsides\nNo water at all\nSimple closed loop\nDownsides\nThe most space: about 1.2 MW per 12 m unit\nFan noise, most on hot days\n\n22–40 MW of servers fit · 29,032 m² floor\n\n← Back\nNext →",
+   "titles": [
+    "Dry coolers: 806 m² of units — 28 units",
+    "Cooling towers: 220 m² of units — 7 units",
+    "Hybrid coolers: 1,613 m² of units — 48 units"
+   ],
+   "cap": "Area of the units alone for 20.0 MW (clearances add more). Water: dry none; towers evaporate up to 1.5 L per kWh of heat."
+  },
+  {
+   "id": "plantAt",
+   "text": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nSet up the site · 6 of 8\nWhere does the plant go?\nRoof\nYard\nSplit\n✓ Possible here\nUpsides\nKeeps the yard free\nDownsides\nNeeds roof space and structure\nSeen from above, and heard from upper windows\n\n22–40 MW of servers fit · 29,032 m² floor\n\n← Back\nNext →",
+   "titles": [
+    "Roof: 22–40 MW of servers — Doesn't fit: 11 of 19 generators do not fit in the yard. Try for the generators: a smaller footprint (set the coverage in step 2) or the roof; or a smaller size.",
+    "Yard: 22–40 MW of servers — Doesn't fit: 17 of 19 generators do not fit in the yard. Try for the generators: a smaller footprint (set the coverage in step 2) or the roof; or a smaller size.",
+    "Split: 22–40 MW of servers — Doesn't fit: 18 of 19 generators do not fit in the yard. Try for the generators: a smaller footprint (set the coverage in step 2) or the roof; or a smaller size."
+   ],
+   "cap": "Plant in the yard takes floor area from the building."
+  },
+  {
+   "id": "spares",
+   "text": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nSet up the site · 7 of 8\nHow many spare units?\nNone (N)\nOne spare (N+1)\nDouble (2N)\none unit fails\none spare takes over\n✓ Possible here\nUpsides\nOne unit can fail and the load is still carried (like Tier II–III)\nDownsides\nOne more unit on site\n\n22–40 MW of servers fit · 29,032 m² floor\n\n← Back\nNext →",
+   "titles": [
+    "None (N): 27 cooling units",
+    "One spare (N+1): 28 cooling units",
+    "Double (2N): 54 cooling units"
+   ],
+   "cap": "Cooling units for 20.0 MW (the size the set-up is drawn at)."
+  },
+  {
+   "id": "gens",
+   "text": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nSet up the site · 8 of 8\nWhat if the grid fails?\nGenerators in the yard\nGenerators on the roof\nNo generators\n✓ Possible here\nUpsides\nThe usual arrangement; carries the full load\nDownsides\nFuel stored on site (fire code limits)\nTest runs: Vancouver exempts up to 1 h a month in daytime, at most 80 dBA\n\n22–40 MW of servers fit · 29,032 m² floor\n\n← Back\nWhat fits here →",
+   "titles": [
+    "Fuel for 12 h: 88,368–97,836 litres"
+   ],
+   "cap": "Diesel kept on site to run the generators for 12 hours at full load."
+  }
+ ],
+ "answers": {
+  "built": "new",
+  "extent": "whole",
+  "floor": "",
+  "host": {},
+  "mw": 20,
+  "foot": "max",
+  "cover": 70,
+  "hmode": "out",
+  "plantAt": "roof",
+  "outside": "dry",
+  "inside": "air",
+  "spares": "n1",
+  "gens": "yes",
+  "genAt": "yard",
+  "genSpares": "n1",
+  "mwSite": "883345"
+ },
+ "topics": {},
+ "R": {
+  "pue": [
+   1.4,
+   1.55
+  ],
+  "lf": 0.6,
+  "capture": [
+   0.48,
+   0.75
+  ],
+  "cop": [
+   3,
+   4.5
+  ],
+  "grid": {
+   "van": 18.1,
+   "edm": 346.1
+  },
+  "homeMWh": {
+   "van": 14.58,
+   "edm": 29.19
+  },
+  "reach": {
+   "pool": 1000,
+   "housing": 1200,
+   "greenhouse": 1500
+  },
+  "reachGuide": 1200
+ },
+ "near": {
+  "n": 6,
+  "byType": {
+   "rec": 4,
+   "school": 2
+  },
+  "within1500": {
+   "rec": 5,
+   "school": 3
+  }
+ }
+}

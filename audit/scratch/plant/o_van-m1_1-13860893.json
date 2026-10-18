@@ -1,0 +1,198 @@
+{
+ "arg": "van-m1_1-13860893",
+ "errs": [],
+ "answers": {
+  "built": "new",
+  "extent": "whole",
+  "floor": "",
+  "host": {},
+  "foot": "max",
+  "cover": 70,
+  "hmode": "out",
+  "plantAt": "roof",
+  "outside": "dry",
+  "inside": "air",
+  "spares": "n1",
+  "gens": "yes",
+  "genAt": "yard",
+  "genSpares": "n1"
+ },
+ "out": [
+  {
+   "lab": "default",
+   "mwSized": 12.301714285714285,
+   "prov": true,
+   "fitsMW": [
+    9.403911921372327,
+    40
+   ],
+   "hall": [
+    5924.464510464566,
+    12342.634396801179
+   ],
+   "gross": [
+    18513.95159520177,
+    18513.95159520177
+   ],
+   "fp": 6171.317198400589,
+   "lot": 8073,
+   "indoor": 0,
+   "yardDepth": 15.100000000000001,
+   "lines": [
+    "Sized for <b>12 MW</b> of servers (the low end of what fits; set a size on the What fits page): heat to reject ≈ 12 × PUE 1.55 = <b>19.1 MW</b> at peak.",
+    "17 dry coolers carry it; with spares, <b>18</b>. Placed: 18 on the roof, 0 in the yard.",
+    "Each unit about 12 × 2.4 m, 2.9 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D)."
+   ],
+   "gen": [
+    "10 generator sets of about 2 MW carry 19.1 MW; with spares, <b>11</b>. Placed: 0 on the roof, 11 in the yard.",
+    "Each about 13.9 × 2.7 m, 5 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance)."
+   ],
+   "short": ""
+  },
+  {
+   "lab": "yard",
+   "mwSized": 12.301714285714285,
+   "prov": true,
+   "fitsMW": [
+    6.1961742863083495,
+    28.04303017510244
+   ],
+   "hall": [
+    3903.58980037426,
+    8132.478750779708
+   ],
+   "gross": [
+    12198.718126169562,
+    12198.718126169562
+   ],
+   "fp": 4066.239375389854,
+   "lot": 8073,
+   "indoor": 0,
+   "yardDepth": 41.8,
+   "lines": [
+    "Sized for <b>12 MW</b> of servers (the low end of what fits; set a size on the What fits page): heat to reject ≈ 12 × PUE 1.55 = <b>19.1 MW</b> at peak.",
+    "17 dry coolers carry it; with spares, <b>18</b>. Placed: 0 on the roof, 18 in the yard.",
+    "Each unit about 12 × 2.4 m, 2.9 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D)."
+   ],
+   "gen": [
+    "10 generator sets of about 2 MW carry 19.1 MW; with spares, <b>11</b>. Placed: 0 on the roof, 8 in the yard.",
+    "Each about 13.9 × 2.7 m, 5 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance)."
+   ],
+   "short": "Doesn't fit: 3 of 11 generators do not fit in the yard. Try for the generators: a smaller footprint (set the coverage in step 2) or the roof; or a smaller size."
+  },
+  {
+   "lab": "split-towers",
+   "mwSized": 12.301714285714285,
+   "prov": true,
+   "fitsMW": [
+    8.238947681114405,
+    37.28834079814709
+   ],
+   "hall": [
+    5190.537039102075,
+    10813.618831462656
+   ],
+   "gross": [
+    16220.428247193984,
+    16220.428247193984
+   ],
+   "fp": 5406.809415731328,
+   "lot": 8073,
+   "indoor": 0,
+   "yardDepth": 24.8,
+   "lines": [
+    "Sized for <b>12 MW</b> of servers (the low end of what fits; set a size on the What fits page): heat to reject ≈ 12 × PUE 1.55 = <b>19.1 MW</b> at peak.",
+    "4 cooling tower cells carry it; with spares, <b>5</b>. Placed: 3 on the roof, 2 in the yard.",
+    "Each unit about 7.3 × 4.3 m, 6.8 m high, with 2.7–2.7 m to walls and 1.8–6 m between units (dashed in 3D)."
+   ],
+   "gen": [
+    "10 generator sets of about 2 MW carry 19.1 MW; with spares, <b>11</b>. Placed: 0 on the roof, 11 in the yard.",
+    "Each about 13.9 × 2.7 m, 5 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance)."
+   ],
+   "short": ""
+  },
+  {
+   "lab": "hybrid-indoors",
+   "mwSized": 12.301714285714285,
+   "prov": true,
+   "fitsMW": [
+    7.910883349943757,
+    35.80356688552131
+   ],
+   "hall": [
+    4983.856510464567,
+    10383.03439680118
+   ],
+   "gross": [
+    15574.551595201769,
+    15574.551595201769
+   ],
+   "fp": 6171.317198400589,
+   "lot": 8073,
+   "indoor": 2939.3999999999996,
+   "yardDepth": 15.100000000000001,
+   "lines": [
+    "Sized for <b>12 MW</b> of servers (the low end of what fits; set a size on the What fits page): heat to reject ≈ 12 × PUE 1.55 = <b>19.1 MW</b> at peak.",
+    "29 hybrid coolers carry it (at the low end of 0.67–1.37 MW a unit; 14 at the high end); with spares, <b>30</b>. Placed: 0 on the roof, 0 in the yard.",
+    "Each unit about 12 × 2.8 m, 2.5 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D)."
+   ],
+   "gen": [
+    "10 generator sets of about 2 MW carry 19.1 MW; with spares, <b>11</b>. Placed: 0 on the roof, 11 in the yard.",
+    "Each about 13.9 × 2.7 m, 5 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance)."
+   ],
+   "short": ""
+  },
+  {
+   "lab": "mw12",
+   "mwSized": 12,
+   "fitsMW": [
+    9.403911921372327,
+    40
+   ],
+   "hall": [
+    5924.464510464566,
+    12342.634396801179
+   ],
+   "gross": [
+    18513.95159520177,
+    18513.95159520177
+   ],
+   "fp": 6171.317198400589,
+   "lot": 8073,
+   "indoor": 0,
+   "yardDepth": 15.100000000000001,
+   "lines": [
+    "Sized for <b>12 MW</b> of servers: heat to reject ≈ 12 × PUE 1.55 = <b>18.6 MW</b> at peak.",
+    "16 dry coolers carry it; with spares, <b>17</b>. Placed: 17 on the roof, 0 in the yard.",
+    "Each unit about 12 × 2.4 m, 2.9 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D)."
+   ],
+   "gen": [
+    "10 generator sets of about 2 MW carry 18.6 MW; with spares, <b>11</b>. Placed: 0 on the roof, 11 in the yard.",
+    "Each about 13.9 × 2.7 m, 5 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance)."
+   ],
+   "short": ""
+  },
+  {
+   "lab": "existing",
+   "mwSized": 0.1,
+   "prov": true,
+   "fitsMW": [
+    0,
+    0
+   ],
+   "hall": [
+    0,
+    0
+   ],
+   "gross": [
+    0,
+    0
+   ],
+   "lot": 8073,
+   "lines": [],
+   "gen": [],
+   "short": "",
+   "existing": true
+  }
+ ]
+}

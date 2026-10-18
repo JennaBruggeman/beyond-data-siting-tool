@@ -1,0 +1,389 @@
+{
+ "out": {
+  "default": {
+   "mw": null,
+   "outside": "dry",
+   "roof": 10676.21845,
+   "footArea": 13075.186765970033,
+   "plate": 2976,
+   "foot": 5751.625,
+   "lot": 14516,
+   "Rainwater, condensate and water reuse": {
+    "s": "no",
+    "G": {
+     "rules": [
+      "chg",
+      "an alternative solution from the City (Alberta notice, 2021)"
+     ],
+     "physics": [
+      "yes",
+      "about 3,609 m³ of rain a year on the roof"
+     ],
+     "land": [
+      "yes",
+      "a tank below grade"
+     ],
+     "demand": [
+      "no",
+      "dry coolers use no water; rain would go to toilets and irrigation only"
+     ],
+     "time": [
+      "chg",
+      "rain falls mostly June–August, when cooling needs peak"
+     ],
+     "money": [
+      "nk",
+      "tank cost per m³ not sourced"
+     ]
+    }
+   },
+   "Material bank: copper": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "yes",
+      "no rule needed"
+     ],
+     "physics": [
+      "yes",
+      "20–40 t of copper in the facility (industry figure)"
+     ],
+     "land": [
+      "yes",
+      "—"
+     ],
+     "demand": [
+      "nk",
+      "who would take the material and when"
+     ],
+     "time": [
+      "chg",
+      "released at refits and at the end of the building's life"
+     ],
+     "money": [
+      "nk",
+      "—"
+     ]
+    }
+   },
+   "Distributed servers as heaters": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "nk",
+      "Building code: not yet read"
+     ],
+     "physics": [
+      "yes",
+      "servers in homes heat them directly"
+     ],
+     "land": [
+      "yes",
+      "no pipe; the computing moves"
+     ],
+     "demand": [
+      "nk",
+      "a home's winter demand; who hosts the servers"
+     ],
+     "time": [
+      "chg",
+      "heat only in the heating season; the computing must move in summer"
+     ],
+     "money": [
+      "nk",
+      "—"
+     ]
+    }
+   }
+  },
+  "towers": {
+   "mw": null,
+   "outside": "towers",
+   "roof": 10676.21845,
+   "footArea": 13075.186765970033,
+   "plate": 2976,
+   "foot": 5751.625,
+   "lot": 14516,
+   "Rainwater, condensate and water reuse": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "chg",
+      "an alternative solution from the City (Alberta notice, 2021)"
+     ],
+     "physics": [
+      "yes",
+      "about 3,609 m³ of rain a year on the roof"
+     ],
+     "land": [
+      "yes",
+      "a tank below grade"
+     ],
+     "demand": [
+      "yes",
+      "cooling-tower make-up"
+     ],
+     "time": [
+      "chg",
+      "rain falls mostly June–August, when cooling needs peak"
+     ],
+     "money": [
+      "nk",
+      "tank cost per m³ not sourced"
+     ]
+    }
+   },
+   "Material bank: copper": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "yes",
+      "no rule needed"
+     ],
+     "physics": [
+      "yes",
+      "20–40 t of copper in the facility (industry figure)"
+     ],
+     "land": [
+      "yes",
+      "—"
+     ],
+     "demand": [
+      "nk",
+      "who would take the material and when"
+     ],
+     "time": [
+      "chg",
+      "released at refits and at the end of the building's life"
+     ],
+     "money": [
+      "nk",
+      "—"
+     ]
+    }
+   },
+   "Distributed servers as heaters": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "nk",
+      "Building code: not yet read"
+     ],
+     "physics": [
+      "yes",
+      "servers in homes heat them directly"
+     ],
+     "land": [
+      "yes",
+      "no pipe; the computing moves"
+     ],
+     "demand": [
+      "nk",
+      "a home's winter demand; who hosts the servers"
+     ],
+     "time": [
+      "chg",
+      "heat only in the heating season; the computing must move in summer"
+     ],
+     "money": [
+      "nk",
+      "—"
+     ]
+    }
+   }
+  },
+  "hybrid": {
+   "mw": null,
+   "outside": "hybrid",
+   "roof": 10676.21845,
+   "footArea": 13075.186765970033,
+   "plate": 2976,
+   "foot": 5751.625,
+   "lot": 14516,
+   "Rainwater, condensate and water reuse": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "chg",
+      "an alternative solution from the City (Alberta notice, 2021)"
+     ],
+     "physics": [
+      "yes",
+      "about 3,609 m³ of rain a year on the roof"
+     ],
+     "land": [
+      "yes",
+      "a tank below grade"
+     ],
+     "demand": [
+      "yes",
+      "cooling-tower make-up"
+     ],
+     "time": [
+      "chg",
+      "rain falls mostly June–August, when cooling needs peak"
+     ],
+     "money": [
+      "nk",
+      "tank cost per m³ not sourced"
+     ]
+    }
+   },
+   "Material bank: copper": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "yes",
+      "no rule needed"
+     ],
+     "physics": [
+      "yes",
+      "20–40 t of copper in the facility (industry figure)"
+     ],
+     "land": [
+      "yes",
+      "—"
+     ],
+     "demand": [
+      "nk",
+      "who would take the material and when"
+     ],
+     "time": [
+      "chg",
+      "released at refits and at the end of the building's life"
+     ],
+     "money": [
+      "nk",
+      "—"
+     ]
+    }
+   },
+   "Distributed servers as heaters": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "nk",
+      "Building code: not yet read"
+     ],
+     "physics": [
+      "yes",
+      "servers in homes heat them directly"
+     ],
+     "land": [
+      "yes",
+      "no pipe; the computing moves"
+     ],
+     "demand": [
+      "nk",
+      "a home's winter demand; who hosts the servers"
+     ],
+     "time": [
+      "chg",
+      "heat only in the heating season; the computing must move in summer"
+     ],
+     "money": [
+      "nk",
+      "—"
+     ]
+    }
+   }
+  },
+  "existing": {
+   "mw": null,
+   "outside": "dry",
+   "roof": 2976,
+   "footArea": 2976,
+   "plate": 2976,
+   "foot": 5751.625,
+   "lot": 14516,
+   "Rainwater, condensate and water reuse": {
+    "s": "no",
+    "G": {
+     "rules": [
+      "chg",
+      "an alternative solution from the City (Alberta notice, 2021)"
+     ],
+     "physics": [
+      "yes",
+      "about 1,006 m³ of rain a year on the roof"
+     ],
+     "land": [
+      "yes",
+      "a tank below grade"
+     ],
+     "demand": [
+      "no",
+      "dry coolers use no water; rain would go to toilets and irrigation only"
+     ],
+     "time": [
+      "chg",
+      "rain falls mostly June–August, when cooling needs peak"
+     ],
+     "money": [
+      "nk",
+      "tank cost per m³ not sourced"
+     ]
+    }
+   },
+   "Material bank: copper": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "yes",
+      "no rule needed"
+     ],
+     "physics": [
+      "yes",
+      "20–40 t of copper in the facility (industry figure)"
+     ],
+     "land": [
+      "yes",
+      "—"
+     ],
+     "demand": [
+      "nk",
+      "who would take the material and when"
+     ],
+     "time": [
+      "chg",
+      "released at refits and at the end of the building's life"
+     ],
+     "money": [
+      "nk",
+      "—"
+     ]
+    }
+   },
+   "Distributed servers as heaters": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "nk",
+      "Building code: not yet read"
+     ],
+     "physics": [
+      "yes",
+      "servers in homes heat them directly"
+     ],
+     "land": [
+      "yes",
+      "no pipe; the computing moves"
+     ],
+     "demand": [
+      "nk",
+      "a home's winter demand; who hosts the servers"
+     ],
+     "time": [
+      "chg",
+      "heat only in the heating season; the computing must move in summer"
+     ],
+     "money": [
+      "nk",
+      "—"
+     ]
+    }
+   }
+  }
+ },
+ "errs": []
+}

@@ -1,0 +1,68 @@
+{
+ "F0": {
+  "gross": [
+   13067.879310555174,
+   13067.879310555174
+  ],
+  "mw": [
+   6.6376529831391355,
+   30.04110186334523
+  ],
+  "A": "{\"built\":\"new\",\"extent\":\"whole\",\"floor\":\"\",\"host\":{},\"mw\":6,\"foot\":\"max\",\"cover\":70,\"hmode\":\"out\",\"plantAt\":\"roof\",\"outside\":\"dry\",\"inside\":\"air\",\"spares\":\"n1\",\"gens\":\"yes\",\"genAt\":\"yard\",\"genSpares\":\"n1\",\"mwSite\":\"23060741\"}",
+  "notesFits": {
+   "t": "What fits",
+   "g": "fits",
+   "title": "What fits here",
+   "lead": "How much data centre this lot could hold, as ranges, before anyone decides what to do with its heat.",
+   "secs": [
+    [
+     "Floor area",
+     "Available: 13,068 m²"
+    ],
+    [
+     "Room for servers",
+     "Data hall: 4,182–6,273 m² if the ground floor holds none of the data centre"
+    ],
+    [
+     "Largest data centre that fits",
+     "6.6–30 MW of servers"
+    ],
+    [
+     "What that size needs",
+     "Average power drawn: 8.4–9.3 MW at the meter (servers × PUE 1.4–1.55; PUE is a yearly average, so peak demand is higher)"
+    ]
+   ],
+   "tables": [],
+   "srcs": [
+    "public record formula register: envelope (zone schedules; sources 17, 18)",
+    "filed plans or application register: hall_area (one calibration case, confidence 50); ground-floor rule: I-2 s. 2.2.7; floor heights: Burlington plans, HK TPB A/KC/480, A/KC/510B",
+    "operator or maker claim register: size_fit (built halls: eStruxture VAN-1, Hut 8 Vault, Qu EDM1, Cologix VAN2, VAN5 — operator claims; LBNL prototypes, Sun et al. 2021; whole-building check: 111 E 5th RTS 19744, Ark UP4 committee report, Cologix VAN4 operator)",
+    "industry survey register: pue (LBNL 2023; Uptime 2025 industry survey) operator or maker claim register: component_space (manufacturer claims, equipment only; clearances and switchgear rooms not sourced) public record register: fuel_on_site (NFC 2020 Table 4.3.13.4.-B; fuel rate a manufacturer claim; Uptime ≥ 12 h) public record register: service_class (BC Hydro primary guide; EPCOR connection guide)"
+   ],
+   "rows": []
+  }
+ },
+ "F1": {
+  "gross": [
+   12235.739310555175,
+   12235.739310555175
+  ],
+  "mw": [
+   6.21497869742485,
+   28.128136346103847
+  ],
+  "A": "{\"built\":\"new\",\"extent\":\"whole\",\"floor\":\"\",\"host\":{},\"mw\":6,\"foot\":\"max\",\"cover\":70,\"hmode\":\"out\",\"plantAt\":\"roof\",\"outside\":\"dry\",\"inside\":\"air\",\"spares\":\"n1\",\"gens\":\"yes\",\"genAt\":\"yard\",\"genSpares\":\"n1\",\"mwSite\":\"23060741\",\"vis\":\"indoors\"}"
+ },
+ "notes": [
+  "setup",
+  "fits",
+  "prec",
+  "heat",
+  "energy",
+  "water",
+  "materials",
+  "social"
+ ],
+ "rep": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nReport\n\nEverything this path showed for 1425 CLARK DR, Vancouver, in one place. Nothing is added up; nothing wins.\n\nDownloads are not available in this view.\n\nBaseline\nSite\n1425 CLARK DR, Vancouver\nZone\nI-2: Case by case\nLot\n5,845 m²\nFloor area available\n12,236 m²\nLargest that fits\n6.2–28 MW of servers\nSize tested\n6 MW of servers\nSet-up\nnew building, air cooling inside, dry coolers outside\nSite\nWhat is being built?\nWhat fits\nWhat fits here\n\nHow much data centre this lot could hold, as ranges, before anyone decides what to do with its heat.\n\nFloor area\nAvailable: 13,068 m²\nRoom for servers\nData hall: 4,182–6,273 m² if the ground floor holds none of the data centre\nLargest data centre that fits\n6.6–30 MW of servers\nWhat that size needs\nAverage power drawn: 8.4–9.3 MW at the meter (servers × PUE 1.4–1.55; PUE is a yearly average, so peak demand is higher)\nReal buildings\n\nDots: real data centres (filled: public record; open: claim). Band: the tool's range. Bar: this site, 6.6–30 MW on 13,068 m².\n\nReal buildings against this site\nDots: real data centres (filled: public record; open: claim). Band: the tool's range. Bar: this site, 6.6–30 MW on 13,068 m².\nClosest in size\nBenchmarks: 11 buildings, 505–1,109 m² of building per MW of IT (typical 680)\nExchanges\nWho could take the heat\n\nNone of the 150 buildings within 1.5 km pays back at today's prices.\n\nHeat this size could offer\n19–35 GWh a year with liquid cooling and a heat pump; none to reuse with air cooling\nWhat the heat is worth here\n$10.9–18.4 per MWh after the heat pump\nHeat networks nearby\nnearest: Neighbourhood Energy Utility, 263 m\nBuildings that could take it\n122 non-market housing buildings, 3 recreation centres, 19 schools, 6 care homes; none within break-even; 134 beyond\nPower in, power offered\n\nA customer first. What it can give back is flexibility, and only the operator can give it.\n\nWhat could connect\n4: Getting connected to the grid; Standby generators; Flexibility for the grid…\nWhat could be added\noff until you add them — 5: Solar on the roof; Solar on the south wall; A battery for the grid; Offer UPS batteries to the grid…\nWater in, water out\n\nFrom almost none to a great deal: it depends on the cooling.\n\nWhat could connect\n4: Reclaimed water from a treatment plant; Blowdown to the sewer; Neighbours' greywater; Blackwater\nWhat could be added\nRainwater for cooling built elsewhere Vancouver allowed Edmonton allowed with approval\nWhat it is made of, and how often\n\nThe building lasts decades; the servers are replaced every five to six years.\n\nOver 25 years\nServer refreshes: 4 (every 5–6 years)\nWhere retired equipment can go\n5: Reuse: BC Technology for Learning Society (Burnaby); Certified recyclers (R2v3); The provincial program; UPS batteries…\nTrucks\nOne truck per loading space in 3D. Trips per refresh: not yet sourced.\nWhat neighbours would hear, see and feel\n\nDescribed as experienced, not scored. Measured where the data allows; your site observations sit beside it, labelled as yours.\n\nSound\nCooling plant: about 10 units rated 101–111 dBA together (low-noise to standard)\nThe street edge\nStandoff: new facilities keep about 10 m between the building and the public (45 m enhanced) — a fence, bollards or a blank…\nWho is nearby\nNon-market homes within 200 m: 134 (City list; private housing not counted)\nYour observations on site\nRead with\n\nRanges, not designs. Operator figures are claims. Heat available is not heat used. \"Not yet known\" names what is missing.\n\nSources (11)\n← Two cities",
+ "errs": []
+}

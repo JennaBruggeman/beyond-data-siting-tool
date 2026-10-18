@@ -1,0 +1,389 @@
+{
+ "out": {
+  "default": {
+   "mw": null,
+   "outside": "dry",
+   "roof": 4315.28865,
+   "footArea": 4355.959770185058,
+   "plate": 1340.75,
+   "foot": 1956.125,
+   "lot": 5845,
+   "Rainwater, condensate and water reuse": {
+    "s": "no",
+    "G": {
+     "rules": [
+      "yes",
+      "rainwater may be cooling-tower make-up (VBBL 2025 Table 2.7.1.3, Column B); a new building on a site over 1,000 m² or above 1.0 FSR must also manage rainwater on site by the engineered pathway (VBBL 2025 Book II, Div. B, 2.4.2.5; City rainwater page)"
+     ],
+     "physics": [
+      "yes",
+      "about 4,003 m³ of rain a year on the roof"
+     ],
+     "land": [
+      "yes",
+      "a tank below grade; the City lists 36 rainwater-harvesting or alternative water systems with active operating permits, the nearest 720 m away"
+     ],
+     "demand": [
+      "no",
+      "dry coolers use no water; rain would go to toilets and irrigation only"
+     ],
+     "time": [
+      "chg",
+      "rain falls mostly October–January; cooling needs peak in summer"
+     ],
+     "money": [
+      "nk",
+      "tank cost per m³ not sourced"
+     ]
+    }
+   },
+   "Material bank: copper": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "yes",
+      "no rule needed"
+     ],
+     "physics": [
+      "yes",
+      "20–40 t of copper in the facility (industry figure)"
+     ],
+     "land": [
+      "yes",
+      "—"
+     ],
+     "demand": [
+      "nk",
+      "who would take the material and when"
+     ],
+     "time": [
+      "chg",
+      "released at refits and at the end of the building's life"
+     ],
+     "money": [
+      "nk",
+      "—"
+     ]
+    }
+   },
+   "Distributed servers as heaters": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "nk",
+      "Building code: not yet read"
+     ],
+     "physics": [
+      "yes",
+      "servers in homes heat them directly"
+     ],
+     "land": [
+      "yes",
+      "no pipe; the computing moves"
+     ],
+     "demand": [
+      "nk",
+      "a home's winter demand; who hosts the servers"
+     ],
+     "time": [
+      "chg",
+      "heat only in the heating season; the computing must move in summer"
+     ],
+     "money": [
+      "nk",
+      "—"
+     ]
+    }
+   }
+  },
+  "towers": {
+   "mw": null,
+   "outside": "towers",
+   "roof": 4315.28865,
+   "footArea": 4355.959770185058,
+   "plate": 1340.75,
+   "foot": 1956.125,
+   "lot": 5845,
+   "Rainwater, condensate and water reuse": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "yes",
+      "rainwater may be cooling-tower make-up (VBBL 2025 Table 2.7.1.3, Column B); a new building on a site over 1,000 m² or above 1.0 FSR must also manage rainwater on site by the engineered pathway (VBBL 2025 Book II, Div. B, 2.4.2.5; City rainwater page)"
+     ],
+     "physics": [
+      "yes",
+      "about 4,003 m³ of rain a year on the roof"
+     ],
+     "land": [
+      "yes",
+      "a tank below grade; the City lists 36 rainwater-harvesting or alternative water systems with active operating permits, the nearest 720 m away"
+     ],
+     "demand": [
+      "yes",
+      "cooling-tower make-up"
+     ],
+     "time": [
+      "chg",
+      "rain falls mostly October–January; cooling needs peak in summer"
+     ],
+     "money": [
+      "nk",
+      "tank cost per m³ not sourced"
+     ]
+    }
+   },
+   "Material bank: copper": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "yes",
+      "no rule needed"
+     ],
+     "physics": [
+      "yes",
+      "20–40 t of copper in the facility (industry figure)"
+     ],
+     "land": [
+      "yes",
+      "—"
+     ],
+     "demand": [
+      "nk",
+      "who would take the material and when"
+     ],
+     "time": [
+      "chg",
+      "released at refits and at the end of the building's life"
+     ],
+     "money": [
+      "nk",
+      "—"
+     ]
+    }
+   },
+   "Distributed servers as heaters": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "nk",
+      "Building code: not yet read"
+     ],
+     "physics": [
+      "yes",
+      "servers in homes heat them directly"
+     ],
+     "land": [
+      "yes",
+      "no pipe; the computing moves"
+     ],
+     "demand": [
+      "nk",
+      "a home's winter demand; who hosts the servers"
+     ],
+     "time": [
+      "chg",
+      "heat only in the heating season; the computing must move in summer"
+     ],
+     "money": [
+      "nk",
+      "—"
+     ]
+    }
+   }
+  },
+  "hybrid": {
+   "mw": null,
+   "outside": "hybrid",
+   "roof": 4315.28865,
+   "footArea": 4355.959770185058,
+   "plate": 1340.75,
+   "foot": 1956.125,
+   "lot": 5845,
+   "Rainwater, condensate and water reuse": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "yes",
+      "rainwater may be cooling-tower make-up (VBBL 2025 Table 2.7.1.3, Column B); a new building on a site over 1,000 m² or above 1.0 FSR must also manage rainwater on site by the engineered pathway (VBBL 2025 Book II, Div. B, 2.4.2.5; City rainwater page)"
+     ],
+     "physics": [
+      "yes",
+      "about 4,003 m³ of rain a year on the roof"
+     ],
+     "land": [
+      "yes",
+      "a tank below grade; the City lists 36 rainwater-harvesting or alternative water systems with active operating permits, the nearest 720 m away"
+     ],
+     "demand": [
+      "yes",
+      "cooling-tower make-up"
+     ],
+     "time": [
+      "chg",
+      "rain falls mostly October–January; cooling needs peak in summer"
+     ],
+     "money": [
+      "nk",
+      "tank cost per m³ not sourced"
+     ]
+    }
+   },
+   "Material bank: copper": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "yes",
+      "no rule needed"
+     ],
+     "physics": [
+      "yes",
+      "20–40 t of copper in the facility (industry figure)"
+     ],
+     "land": [
+      "yes",
+      "—"
+     ],
+     "demand": [
+      "nk",
+      "who would take the material and when"
+     ],
+     "time": [
+      "chg",
+      "released at refits and at the end of the building's life"
+     ],
+     "money": [
+      "nk",
+      "—"
+     ]
+    }
+   },
+   "Distributed servers as heaters": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "nk",
+      "Building code: not yet read"
+     ],
+     "physics": [
+      "yes",
+      "servers in homes heat them directly"
+     ],
+     "land": [
+      "yes",
+      "no pipe; the computing moves"
+     ],
+     "demand": [
+      "nk",
+      "a home's winter demand; who hosts the servers"
+     ],
+     "time": [
+      "chg",
+      "heat only in the heating season; the computing must move in summer"
+     ],
+     "money": [
+      "nk",
+      "—"
+     ]
+    }
+   }
+  },
+  "existing": {
+   "mw": null,
+   "outside": "dry",
+   "roof": 1340.75,
+   "footArea": 1340.75,
+   "plate": 1340.75,
+   "foot": 1956.125,
+   "lot": 5845,
+   "Rainwater, condensate and water reuse": {
+    "s": "no",
+    "G": {
+     "rules": [
+      "yes",
+      "rainwater may be cooling-tower make-up (VBBL 2025 Table 2.7.1.3, Column B); a new building on a site over 1,000 m² or above 1.0 FSR must also manage rainwater on site by the engineered pathway (VBBL 2025 Book II, Div. B, 2.4.2.5; City rainwater page)"
+     ],
+     "physics": [
+      "yes",
+      "about 1,244 m³ of rain a year on the roof"
+     ],
+     "land": [
+      "yes",
+      "a tank below grade; the City lists 36 rainwater-harvesting or alternative water systems with active operating permits, the nearest 720 m away"
+     ],
+     "demand": [
+      "no",
+      "dry coolers use no water; rain would go to toilets and irrigation only"
+     ],
+     "time": [
+      "chg",
+      "rain falls mostly October–January; cooling needs peak in summer"
+     ],
+     "money": [
+      "nk",
+      "tank cost per m³ not sourced"
+     ]
+    }
+   },
+   "Material bank: copper": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "yes",
+      "no rule needed"
+     ],
+     "physics": [
+      "yes",
+      "20–40 t of copper in the facility (industry figure)"
+     ],
+     "land": [
+      "yes",
+      "—"
+     ],
+     "demand": [
+      "nk",
+      "who would take the material and when"
+     ],
+     "time": [
+      "chg",
+      "released at refits and at the end of the building's life"
+     ],
+     "money": [
+      "nk",
+      "—"
+     ]
+    }
+   },
+   "Distributed servers as heaters": {
+    "s": "nk",
+    "G": {
+     "rules": [
+      "nk",
+      "Building code: not yet read"
+     ],
+     "physics": [
+      "yes",
+      "servers in homes heat them directly"
+     ],
+     "land": [
+      "yes",
+      "no pipe; the computing moves"
+     ],
+     "demand": [
+      "nk",
+      "a home's winter demand; who hosts the servers"
+     ],
+     "time": [
+      "chg",
+      "heat only in the heating season; the computing must move in summer"
+     ],
+     "money": [
+      "nk",
+      "—"
+     ]
+    }
+   }
+  }
+ },
+ "errs": []
+}

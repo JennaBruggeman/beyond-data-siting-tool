@@ -1,0 +1,15 @@
+const {chromium}=require('/tmp/claude-0/-home-claude/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/scratchpad/node_modules/playwright'); const fs=require('fs'); const SP='/tmp/claude-0/-home-claude/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/scratchpad';
+(async()=>{ const arg=process.argv[2];
+const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell',args:['--use-gl=swiftshader','--enable-webgl']});
+const p=await b.newPage({viewport:{width:1440,height:900}});
+await p.route(/three\.min\.js/,r=>r.fulfill({body:fs.readFileSync(SP+'/node_modules/three/build/three.min.js'),contentType:'application/javascript'}));
+await p.route(/OrbitControls\.js/,r=>r.fulfill({body:fs.readFileSync(SP+'/node_modules/three/examples/js/controls/OrbitControls.js'),contentType:'application/javascript'}));
+await p.route(/fonts\.(googleapis|gstatic)|jspdf|autotable|d3/,r=>r.abort());
+await p.goto('http://localhost:8765/index.html?x='+Date.now()); await p.waitForTimeout(8000);
+await p.click('#wEx'); await p.click('#wList .ex[data-i="'+arg+'"]'); await p.waitForTimeout(9000);
+const o=await p.evaluate(async()=>{ const f=BD.eng.siteFacts(); const d=await BD.eng.loadRecv(f.city); const all={},near={};
+ d.pts.forEach(q=>{ const dist=Math.hypot(q.x-f.c[0],q.y-f.c[1]); if(dist<=1500) all[q.t]=(all[q.t]||0)+1; });
+ BD.eng.nearby(f,d).filter(q=>q.dist<=1500).forEach(q=>near[q.t]=(near[q.t]||0)+1);
+ const pv=BD.eng.plantPerMW?BD.eng.plantPerMW(false):null;
+ return {city:f.city,all,near,R:{reach:BD.eng.R.reach,guide:BD.eng.R.reachGuide}}; });
+console.log(JSON.stringify(o)); await b.close(); })();

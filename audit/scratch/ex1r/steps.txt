@@ -1,0 +1,1454 @@
+===== STEP 0 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+Set up the site · 1 of 8
+What is being built?
+New building
+Share a new building
+Retrofit an existing building
+Lease space in a building
+✓ Possible here A data centre is allowed in zone IH.
+Upsides
+Sized to the zone: floor area, height, setbacks
+Floors can be built tall and strong for data halls (5.5–6.0 m floors)
+Downsides
+A development permit, and the time it takes
+New construction carries embodied carbon (about 461 kg CO₂e per m² as a median for buildings; no data-centre figure)
+
+22–40 MW of servers fit · 29,032 m² floor
+
+← The site
+Next →
+
+===== STEP 1 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+What fits here
+
+How much data centre this lot could hold, as ranges, before anyone decides what to do with its heat.
+
+Floor area
+Available: 29,032 m²
+Room for servers
+Data hall: 13,935–20,903 m²
+Largest data centre that fits
+22–40 MW of servers
+What that size needs
+Average power drawn: 28–31 MW at the meter (servers × PUE 1.4–1.55; PUE is a yearly average, so peak demand is higher)
+All the detail
+Floor area
+Available: 29,032 m²
+Available
+29,032 m²
+How
+lot 14,516 m² × floor-space ratio 2
+Footprint
+about 13,075 m² — from the site setup: the most the zone allows, less setbacks, loading and the plant yard
+Storeys
+about 5 (6.0 m ground; 5.5–6.0 m for each data-hall floor, as built and proposed halls show; within 30 m)
+Sources
+public record formula register: envelope (zone schedules; sources 17, 18)
+Room for servers
+Data hall: 13,935–20,903 m²
+Data hall
+13,935–20,903 m²
+Share of floor
+48–72% (Burlington plan set; its own figures disagree)
+Sources
+filed plans or application register: hall_area (one calibration case, confidence 50); ground-floor rule: I-2 s. 2.2.7; floor heights: Burlington plans, HK TPB A/KC/480, A/KC/510B
+Largest data centre that fits
+22–40 MW of servers
+
+22–40 MW of servers
+
+range
+22–40 MW
+real buildings
+26–57 MW
+0.1
+1
+10
+100 MW
+Hall layout
+Typical, air-cooled
+High-density, liquid-cooled
+
+290–630 m² of hall per MW, as five built Canadian halls report (operator claims, mostly 5–10 kW per rack). LBNL's models span 186–2,325.
+
+Check against whole buildings: the benchmark buildings in the precedent catalogue (built or approved, public records) use 505–1,109 m² of building per MW of IT. This floor area at those rates gives 26–57 MW. more
+
+Show the math
+Lot area: 14,516 m² (City parcel data).
+Zone floor-space ratio 2: 14,516 × 2 = 29,032 m².
+Storeys under the 30 m height limit: first floor 6.0 m, then data-hall floors of 6.0 or 5.5 m. (30 − 6.0) ÷ 6.0 = 4.00, whole floors 4, plus the first floor = 5; with 5.5 m floors, 4.36 → 4 + 1 = 5.
+Footprint from the site setup: the most the zone allows, less setbacks, loading and the plant yard: 13,075 m² (drawn in 3D).
+Most floor area those storeys can hold: 13,075 m² × 5 = 65,376 m². The smaller of this and step 2: 29,032 m².
+Data hall: 29,032 × 0.48 = 13,935 m², up to 29,032 × 0.72 = 20,903 m².
+Servers: the smallest hall laid out loosely, 13,935 ÷ 630 m² per MW = 22.1 MW; the largest hall laid out densely, 20,903 ÷ 290 = 40.0 MW (capped at 40 MW, the tool's range).
+Check: 29,032 ÷ 1,109 = 26.2 MW; 29,032 ÷ 505 = 57.5 MW.
+Hall share 0.48–0.72: Burlington plan set. 290–630 m² of hall per MW: five built Canadian halls (operator claims). 505–1,109 m² of building per MW: benchmark buildings in the precedent catalogue.
+Size to test: 20 MW of servers · 8.0 × Qu EDM1 (2.5 MW)
+Qu EDM1
+0.1
+1
+10
+40 MW
+Bar under the track: what fits here. Ticks: built or proposed sites, operator or applicant figures. Steps widen as size grows.
+Sources
+operator or maker claim register: size_fit (built halls: eStruxture VAN-1, Hut 8 Vault, Qu EDM1, Cologix VAN2, VAN5 — operator claims; LBNL prototypes, Sun et al. 2021; whole-building check: 111 E 5th RTS 19744, Ark UP4 committee report, Cologix VAN4 operator)
+What that size needs
+Average power drawn: 28–31 MW at the meter (servers × PUE 1.4–1.55; PUE is a yearly average, so peak demand is higher)
+Average power drawn
+28–31 MW at the meter (servers × PUE 1.4–1.55; PUE is a yearly average, so peak demand is higher)
+Plant space
+574–582 m² with dry coolers; 654–662 m² with heat recovery — equipment only, before clearances
+Standby fuel
+88,368–97,836 L for 12 h; a basement or upper-storey room may hold 20,000 L — more than one room or an outdoor tank
+Electrical service
+above 2,500 kVA: primary service, with transformer clearances and a 4.6 m access road
+Show the math
+Average power at the meter: 20 MW × PUE 1.4 = 28.0 MW; × 1.55 = 31.0 MW.
+Plant space, dry coolers: (UPS 2–2.4 + batteries 2.2 + dry coolers 24.5) = 28.7–29.1 m² per MW; × 20 = 574–582 m².
+With heat recovery, add heat pumps 3.4 + CDUs 0.6 = 32.7–33.1 m² per MW; × 20 = 654–662 m².
+Standby fuel: 28.0–31.0 MW × 1,000 (kW) × 12 h × 0.263 L per kWh = 88,368–97,836 L.
+PUE: LBNL 2023, Uptime 2025. Plant areas: manufacturer claims, equipment only. Fuel rate: manufacturer claim at full load.
+Sources (4)
+industry survey register: pue (LBNL 2023; Uptime 2025 industry survey)
+operator or maker claim register: component_space (manufacturer claims, equipment only; clearances and switchgear rooms not sourced)
+public record register: fuel_on_site (NFC 2020 Table 4.3.13.4.-B; fuel rate a manufacturer claim; Uptime ≥ 12 h)
+public record register: service_class (BC Hydro primary guide; EPCOR connection guide)
+Every range carries the register's confidence; nothing here is a design.
+← Set up the site
+Next: Real buildings →
+
+===== STEP 2 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+Real buildings against this site
+Dots: real data centres (filled: public record; open: claim). Band: the tool's range. Bar: this site, 22–40 MW on 29,032 m².
+
+Dots: real data centres (filled: public record; open: claim). Band: the tool's range. Bar: this site, 22–40 MW on 29,032 m².
+
+1,000
+10,000
+100,000
+1
+10
+100
+building floor area, m² (log)
+MW of servers (log)
+this site
+Benchmark
+Reference
+Tool's range
+505–1,109 m² of building per MW (benchmarks)
+Closest in size
+Benchmarks: 11 buildings, 505–1,109 m² of building per MW of IT (typical 680)
+Building	MW	Floor m²	m² per MW	
+Vantage Montreal II (QC4) campus
+Montréal, Canada · reference
+	50	29,729	595	source
+operator claim
+
+Chicago Byte Exchange (400 S. LaSalle, former CBOE building)
+Chicago, USA · conversion · reference
+	22	27,917	1,269	source
+operator claim
+
+NEXTDC S3 Sydney (DA-2019/79, PPS-2019SNH027)
+Sydney (Willoughby LGA), Australia · reference
+	80	30,703	384	source
+operator claim
+
+Telehouse South
+London (Tower Hamlets), UK · reference
+	18	31,000	1,722	source
+operator claim
+
+CoreSite SV9 Data Center
+Santa Clara, CA, USA · benchmark
+	35	23,226	664	source
+public record
+
+Manor Farm data centre + BESS
+Slough, UK · benchmark
+	72	36,368	505	source
+applicant claim
+
+Microsoft DUB06 altered data centre building (Grange Castle)
+Dublin (South Dublin County), Ireland · reference
+	18
+not stated as IT
+	21,350	1,213	source
+applicant claim
+
+365 Main Street (SFO12)
+San Francisco, USA · conversion · reference
+	8.6	21,089	2,452	source
+operator claim
+Benchmarks
+11 buildings, 505–1,109 m² of building per MW of IT (typical 680)
+Built halls
+250–674 m² of hall per MW (n=11, operator figures)
+Hall share
+20–92% of floor; middle half 48–77% (n=16)
+Sources
+Precedent catalogue, 130 sites, gathered 15 Oct 2026; every figure with its quote and source in the full catalogue: open. Operator figures are claims.
+← What fits
+Next: Heat →
+
+===== STEP 3 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+Who could take the heat
+
+At Alberta prices no route pays back at any distance. Blatchford's low-temperature loop, 443 m away, is the exception to look at.
+
+How it works
+›
+Heat this size could offer
+65–118 GWh a year with liquid cooling and a heat pump; none to reuse with air cooling
+What the heat is worth here
+less than nothing: the heat pump costs more to run than the gas it replaces
+How it compares
+the same servers, conventional here, at two real data centres and on both worked-example lots
+Heat networks nearby
+nearest: Blatchford District Energy Sharing System, 443 m
+An ambient loop: Blatchford
+443 m away; server heat could go in without a heat pump. Size, price and permission are open questions
+Buildings that could take it
+5 recreation centres, 3 schools; none within break-even; 7 beyond
+All the detail
+Heat this size could offer
+65–118 GWh a year with liquid cooling and a heat pump; none to reuse with air cooling
+65–118 GWh/yr
+heat this size could offer (liquid-cooled, heat pump)
+2,222–4,051
+homes' heating, as an equal (provincial average)
+
+How the heat figure is worked out ›
+
+What the heat is worth here
+less than nothing: the heat pump costs more to run than the gas it replaces
+
+At Alberta prices (gas $2.50/GJ, power $49.74/MWh) the heat pump's electricity costs more than the gas the heat would replace ($-7.6 to $-2.0 per MWh of heat), so no route pays back at any distance. Each card says what would have to change. more
+
+How far is too far, for each thing it could share ›
+
+How it compares
+the same servers, conventional here, at two real data centres and on both worked-example lots
+	Heat offered	Homes’ heating, as an equal	Nearest heat network
+This design	none to reuse	—	see below
+Conventional, this site	none to reuse	—	see below
+Cologix VAN4, Vancouver claim	none to reuse	—	—
+Qu EDM2, Edmonton claim	none to reuse	—	—
+Vancouver, modelled	none to reuse	—	Neighbourhood Energy Utility, 263 m
+Edmonton, same design	none to reuse	—	Blatchford District Energy Sharing System, 443 m
+Edmonton, conventional	none to reuse	—	Blatchford District Energy Sharing System, 443 m
+Sources
+
+Conventional: air-cooled, dry coolers, no heat recovery. Modelled Vancouver and Edmonton rows sit on the worked-example lots (1425 Clark Dr; 12603 123 Street Nw). VAN4: 6.5 MW site, PUE 1.5, air-cooled chilled water, no heat recovery stated. Qu EDM2: 3 MW, no PUE stated, so its energy is not computed. Hover a row for its basis. Heat offered needs liquid cooling and a heat pump; air-cooled heat at 25–35 °C is shown as none to reuse. Same 20 MW of servers in every row. The modelled rows use the tool's own formulas; VAN4 uses only what its spec sheet claims (Cologix, May 2026).
+
+Heat networks nearby
+nearest: Blatchford District Energy Sharing System, 443 m
+
+Blatchford District Energy Sharing System is 443 m from this lot. Explore ›
+
+Downtown District Energy is drawn from the City's phases map (May 2025), approximate. Downtown District Energy: Phase 1 serves the Winspear Centre, Century Place and Chancery Hall; Phase 1A would add City Hall, the Citadel Theatre and the Stanley A. Milner Library (2025–26 rate filing); later phases are shown only as a building map (business case, Figure 2). Blatchford: connection is compulsory inside its service area (Bylaw C17943 s. 6); the map (Schedule A) is not yet traced. more
+
+Other district-energy systems in the city (4; those not on the map have no location source yet)
+University of Alberta — on the map as the campus
+steam 205 °C supply, 590 MW; chilled water 5 °C, 145 MW; 80 buildings (2017)
+
+Boyle Renaissance District Energy
+no figures published (2017)
+
+Blatchford — on the map as its service area
+listed, no figures
+
+Edmonton Institution; Edmonton Institution for Women
+steam; no figures published (2018)
+CEEDC Innovative Energy Facilities inventory, district energy (SFU). Its coordinates do not match the facilities and it gives no service areas; systems marked on the map are located from other sources. Figures reported 2014–2023; some figures withheld as confidential. Steam at 205 °C cannot take server heat without a large lift; hot-water networks at 65–85 °C need a heat pump; returns at 50–65 °C set what it must beat.
+An ambient loop: Blatchford
+443 m away; server heat could go in without a heat pump. Size, price and permission are open questions
+
+Blatchford, 443 m away. A City-owned network for the Blatchford neighbourhood (planned for up to 30,000 people). Its pipes carry water at only 8–32 °C; every building has its own heat pump and draws heat from the loop. Today the loop is fed by 570 boreholes 150 m deep; sewer heat is in design. more
+
+What the data centre could put in
+up to 105.1 GWh a year of server heat through a heat exchanger, with no heat pump at the data centre: even air-cooled heat (25–35 °C) is warmer than the loop more
+When it is wanted
+Edmonton is below 12–18 °C in 75–89% of the hours of a typical year; June to August carry only 6.5% of the year's heating need, so summer heat still goes to the data centre's own coolers, which keep their full size (CWEC, computed) more
+Scale
+no actual figures have been published for 2024–2026; the latest public numbers are forecasts made in 2021 and 2023. Small so far: 181 customers forecast for 2024 and 292 for 2025 (Utility Advisor, 2023), over 100 homes connected (operator, 2025); the 2021 plan forecast 3,031 MWh delivered in total from 2020 to 2024 (to check against the original), about 3% of one year of this data centre's heat. Demand grows as the neighbourhood builds out more
+Money
+customers pay $0.0358 per kWh for loop energy in 2025–26 (frozen by Council), plus fixed charges; no price is published for heat supplied into the loop. The utility ran a forecast revenue shortfall of $1.3 million for 2024. On the data-centre side, no heat pump to buy or run more
+Summer
+the utility says it already sends surplus summer heat into the borefield for winter (operator statement, no measured data); how much more it could take is not known more
+A built case
+FGZ Friesenberg, Zürich (2014): a data centre feeds an 8–28 °C network through a heat exchanger, with boreholes as seasonal storage; the warm pipe reaches about 30 °C in summer after the data centre (Buffa et al. 2019, peer-reviewed; the 27 GWh a year is from a factsheet, not stated as measured) more
+Not yet known
+whether the utility takes heat from an outside source (nothing in the bylaw, plans or the City's 2024 district energy report mentions it); how much the loop can take in winter more
+Sources
+
+City of Edmonton DESS design guide v8 (2025); Bylaw 17943 and 2026 rates; Utility Advisor 2023; 2021–2024 business plan; Buffa et al. 2019; Edmonton CWEC typical year. Research-agent reads, to check. The design guide's 8 °C winter supply and 4 °C return do not match its own 5 °C design difference; both are shown as written.
+
+Buildings that could take it
+5 recreation centres, 3 schools; none within break-even; 7 beyond
+List buildings beyond break-even too (greyed)
+SCHOOL 3 buildings · 3 beyond · connection: not yet known (2)
+
+3 beyond break-even, routes 1,241–3,136 m. For the nearest, what would close the gap: gas at about $39.8/GJ instead of $2.50 (best case). Tick the box above to list them. more
+
+RECREATION CENTRE 5 buildings · 1 demand not known · 4 beyond · connection: not yet known
+	floor, est.	route	
+Prince Charles
+demand not yet known
+	—	1,663 m	›
+
+4 beyond break-even, routes 1,590–1,770 m. For the nearest, what would close the gap: gas at about $212.7/GJ instead of $2.50 (best case). Tick the box above to list them. more
+
+Cooling · assumed air inside, dry coolers on the roof Change › Seen or hidden ›
+← Real buildings
+Next: Electricity →
+
+===== STEP 4 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+Power in, power offered
+
+A customer first. What it can give back is flexibility, and only the operator can give it.
+
+How it works
+›
+28–31 MW
+average power at the meter
+147–163 GWh
+a year
+pool + wires
+Alberta pool averaged $43.68/MWh in 2025
+50,935–56,392 t
+CO₂e a year at 346.1 g/kWh
+How it compares
+the same servers, conventional here, at two real data centres and on both worked-example lots
+What could connect
+4: Getting connected to the grid; Standby generators; Flexibility for the grid…
+What could be added
+off until you add them — 5: Solar on the roof; Solar on the south wall; A battery for the grid; Offer UPS batteries to the grid…
+All the detail
+How it compares
+the same servers, conventional here, at two real data centres and on both worked-example lots
+	Electricity	Its grid carbon	Heat-pump carbon
+This design	147–163 GWh/yr	50,935–56,392 t CO₂e/yr	—
+Conventional, this site	147–163 GWh/yr	50,935–56,392 t CO₂e/yr	—
+Cologix VAN4, Vancouver claim	158 GWh/yr	2,854 t CO₂e/yr	—
+Qu EDM2, Edmonton claim	not stated	not stated	—
+Vancouver, modelled	147–163 GWh/yr	2,664–2,949 t CO₂e/yr	—
+Edmonton, same design	147–163 GWh/yr	50,935–56,392 t CO₂e/yr	—
+Edmonton, conventional	147–163 GWh/yr	50,935–56,392 t CO₂e/yr	—
+Sources
+
+Conventional: air-cooled, dry coolers, no heat recovery. Modelled Vancouver and Edmonton rows sit on the worked-example lots (1425 Clark Dr; 12603 123 Street Nw). VAN4: 6.5 MW site, PUE 1.5, air-cooled chilled water, no heat recovery stated. Qu EDM2: 3 MW, no PUE stated, so its energy is not computed. Hover a row for its basis. Grid carbon: NIR 2026, 2024 consumption intensity in each province. Same 20 MW of servers in every row. The modelled rows use the tool's own formulas; VAN4 uses only what its spec sheet claims (Cologix, May 2026).
+
+What could connect
+4: Getting connected to the grid; Standby generators; Flexibility for the grid…
+Getting connected to the grid
+needs the utility's answer to a load application
+Explore ›
+Standby generators
+testing, emissions, sound
+Explore ›
+Flexibility for the grid
+UPS batteries, curtailment, peak windows
+Explore ›
+Power to a neighbouring lot (EV charging and others)
+the property line is a rule, not a distance
+Explore ›
+What could be added
+off until you add them — 5: Solar on the roof; Solar on the south wall; A battery for the grid; Offer UPS batteries to the grid…
+Solar on the roof built elsewhere
+Vancouver allowed with approval Edmonton allowed
+Add ›
+Solar on the south wall built elsewhere
+Vancouver allowed with approval Edmonton allowed
+Add ›
+A battery for the grid pilot
+Vancouver not yet known Edmonton not yet known
+Add ›
+Offer UPS batteries to the grid built elsewhere
+Vancouver no rule yet Edmonton allowed
+Add ›
+Cleaner backup power built elsewhere
+Vancouver allowed Edmonton allowed
+Add ›
+
+How the power figures are worked out ›
+
+Sources are in each card.
+Cooling · assumed air inside, dry coolers on the roof Change › Seen or hidden ›
+← Heat
+Next: Water →
+
+===== STEP 5 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+Water in, water out
+
+From almost none to a great deal: it depends on the cooling.
+
+How it works
+›
+none
+evaporated a year, at most (dry coolers)
+—
+make-up water a year (2–6 cycles)
+3,609 m³
+rain on the roof a year
+about 260,698 m³
+water behind its electricity a year (Alberta 2021: 85% coal and gas at ~1.25 L/kWh, 3% hydro at ~16.8; CER profile, to check)
+
+Water hardness sets how often tower water must be bled off: Edmonton's treated water is about 178 mg/L as CaCO₃ (EPCOR, 2026), Vancouver's about 20 (Metro Vancouver, 2025), so the same tower runs fewer cycles and blows down more in Edmonton. more
+
+How it compares
+the same servers, conventional here, at two real data centres and on both worked-example lots
+What could connect
+4: Reclaimed water from a treatment plant; Blowdown to the sewer; Neighbours' greywater; Blackwater
+What could be added
+Rainwater for cooling built elsewhere Vancouver allowed Edmonton allowed with approval
+All the detail
+How it compares
+the same servers, conventional here, at two real data centres and on both worked-example lots
+	Water evaporated on site	Rain on the roof
+This design	none (dry coolers)	about 3,609 m³/yr
+Conventional, this site	none (dry coolers)	about 3,609 m³/yr
+Cologix VAN4, Vancouver claim	none (dry coolers)	—
+Qu EDM2, Edmonton claim	none (dry coolers)	—
+Vancouver, modelled	none (dry coolers)	about 4,003 m³/yr
+Edmonton, same design	none (dry coolers)	about 3,608 m³/yr
+Edmonton, conventional	none (dry coolers)	about 3,608 m³/yr
+Sources
+
+Conventional: air-cooled, dry coolers, no heat recovery. Modelled Vancouver and Edmonton rows sit on the worked-example lots (1425 Clark Dr; 12603 123 Street Nw). VAN4: 6.5 MW site, PUE 1.5, air-cooled chilled water, no heat recovery stated. Qu EDM2: 3 MW, no PUE stated, so its energy is not computed. Hover a row for its basis. Evaporation at most 1.5 L per kWh of heat (towers); hybrids wet only above 18 °C, 12.4% of the year in Vancouver and 10.4% in Edmonton (CWEC, computed). Rain at 80% capture, ECCC normals. Same 20 MW of servers in every row. The modelled rows use the tool's own formulas; VAN4 uses only what its spec sheet claims (Cologix, May 2026).
+
+What could connect
+4: Reclaimed water from a treatment plant; Blowdown to the sewer; Neighbours' greywater; Blackwater
+Reclaimed water from a treatment plant built elsewhere
+EPCOR Gold Bar supplies reclaimed water to industry through an existing pipe (Suncor named); terms not published · Vancouver allowed with approval Edmonton allowed with approval
+Explore ›
+Blowdown to the sewer built elsewhere
+none with dry coolers · Vancouver allowed Edmonton allowed
+Explore ›
+Neighbours' greywater speculative
+an alternative solution, led by the province, for multi-property projects · Vancouver not allowed Edmonton allowed with approval
+Explore ›
+Blackwater speculative
+not permitted in buildings · Vancouver not allowed Edmonton allowed with approval
+Explore ›
+What could be added
+Rainwater for cooling built elsewhere Vancouver allowed Edmonton allowed with approval
+Rainwater for cooling built elsewhere
+Vancouver allowed Edmonton allowed with approval
+Add ›
+Water mains and sewer connections are not drawn.
+Cooling · assumed air inside, dry coolers on the roof Change › Seen or hidden ›
+← Electricity
+Next: Materials →
+
+===== STEP 6 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+What it is made of, and how often
+
+The building lasts decades; the servers are replaced every five to six years.
+
+How it works
+›
+2,500
+racks at 8 kW each (Uptime 2024 average, survey)
+33,333
+servers at about 600 W (LBNL 2024)
+118–146 t
+of servers retired a year, on a six-year refresh
+400–800 t
+copper in the facility (industry figure)
+How it compares
+the same servers, conventional here, at two real data centres and on both worked-example lots
+Over 25 years
+Server refreshes: 4 (every 5–6 years)
+Where retired equipment can go
+5: Reuse: Alberta Computers for Schools (Edmonton), which takes servers; Certified recyclers (R2v3); The provincial program…
+Trucks
+One truck per loading space in 3D. Trips per refresh: not yet sourced.
+All the detail
+How it compares
+the same servers, conventional here, at two real data centres and on both worked-example lots
+	Electricity over 50 years
+This design	7.4–8.1 TWh
+Conventional, this site	7.4–8.1 TWh
+Cologix VAN4, Vancouver claim	7.9 TWh
+Qu EDM2, Edmonton claim	not stated
+Vancouver, modelled	7.4–8.1 TWh
+Edmonton, same design	7.4–8.1 TWh
+Edmonton, conventional	7.4–8.1 TWh
+Sources
+
+Conventional: air-cooled, dry coolers, no heat recovery. Modelled Vancouver and Edmonton rows sit on the worked-example lots (1425 Clark Dr; 12603 123 Street Nw). VAN4: 6.5 MW site, PUE 1.5, air-cooled chilled water, no heat recovery stated. Qu EDM2: 3 MW, no PUE stated, so its energy is not computed. Hover a row for its basis. Materials embodied in each reference are not yet compared. Same 20 MW of servers in every row. The modelled rows use the tool's own formulas; VAN4 uses only what its spec sheet claims (Cologix, May 2026).
+
+Over 25 years
+Server refreshes: 4 (every 5–6 years)
+Years  25
+Server refreshes
+4 (every 5–6 years)
+Servers retired
+2,951–3,653 t
+Making those servers
+56–84 kt CO₂e (one maker's assessment, 10–15% manufacturing share; large uncertainty)
+The shell
+still standing (up to about 40 years); cooling and heat pumps replaced 1 time (15–25 years)
+Where retired equipment can go
+5: Reuse: Alberta Computers for Schools (Edmonton), which takes servers; Certified recyclers (R2v3); The provincial program…
+Reuse: Alberta Computers for Schools (Edmonton), which takes servers
+Computers for Schools Plus (ISED)
+Explore ›
+Certified recyclers (R2v3)
+Edmonton ×2
+Explore ›
+The provincial program
+Alberta Recycling (ARMA): rack servers named
+Explore ›
+UPS batteries
+Call2Recycle: dry cells up to 5 kg only
+Explore ›
+Wiping drives before they leave
+ITSP.40.006 (federal), NIST SP 800-88
+Explore ›
+Trucks
+One truck per loading space in 3D. Trips per refresh: not yet sourced.
+
+One truck per loading space in 3D. Trips per refresh: not yet sourced.
+
+Cooling · assumed air inside, dry coolers on the roof Change › Seen or hidden ›
+← Water
+Next: People →
+
+===== STEP 7 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+What neighbours would hear, see and feel
+
+Described as experienced, not scored. Measured where the data allows; your site observations sit beside it, labelled as yours.
+
+How it works
+›
+Sound
+Cooling plant: about 31 units rated 106–116 dBA together (low-noise to standard)
+The street edge
+Standoff: new facilities keep about 10 m between the building and the public (45 m enhanced) — a fence, bollards or a blank…
+Who is nearby
+Non-market homes within 200 m: 0 (City list; private housing not counted)
+Your observations on site
+All the detail
+Sound
+Cooling plant: about 31 units rated 106–116 dBA together (low-noise to standard)
+Cooling plant
+about 31 units rated 106–116 dBA together (low-noise to standard)
+Night limit
+50 dBA next to homes, 60 dBA next to other uses
+Quiet-zone limit reached at
+249–786 m from the plant, before walls, barriers or enclosures
+Neighbours over their limit
+4–515 buildings (low-noise to standard units), each judged against the limit for its own zone: 50 dBA next to homes, 60 dBA next to other uses — 455 in quiet (residential) zones, 15 elsewhere, 45 with no parcel record (quiet limit used). In the 3D view, red: over even with low-noise units; accent: over only with standard units. more
+Low hum
+a tonal low-frequency sound adds 5 dBA in Alberta's rule — the kind neighbours describe most
+Sources (3)
+operator or maker claim register: noise_level (screen Lp = Lw − 20 log r − 8; Trane RTAF 333–1,010 kW, Eurovent: Lw 91–101 dBA per unit)
+public record register: lf_flag (AUC Rule 012 s. 4.5)
+public record Noise Control By-law 6555 ss. 2.1–2.3, Sch. A, B (Vancouver); Bylaw 14600 (Edmonton)
+The street edge
+Standoff: new facilities keep about 10 m between the building and the public (45 m enhanced) — a fence, bollards or a blank…
+Standoff
+new facilities keep about 10 m between the building and the public (45 m enhanced) — a fence, bollards or a blank setback, as experienced from the street more
+Ground floor
+nothing in the zone requires another use at grade
+Watched area
+seen only on site: cameras and signs visible from public space, recorded as one person's account
+Light at night
+Edmonton requires light directed downward and away (no number); the international reference is 10 lx before and 2 lx after curfew at a window
+Sources (3)
+transferred from elsewhere register: standoff (Ontario GO-ITS 25.18, transferred)
+assumption or gap register: watched_area (field observation, labelled as one person's)
+public record register: light_at_window (CIE 150:2017; Edmonton Bylaw 20001 s. 5.120(3); Vancouver: no lux limit)
+Who is nearby
+Non-market homes within 200 m: 0 (City list; private housing not counted)
+Non-market homes within 200 m
+0 (City list; private housing not counted)
+within 200 m
+about 90 people in 40 households · 11% aged 65+ · 19% under 15 · 48% of households rent · 29% spend 30%+ of income on shelter · 15% in low income more
+within 500 m
+about 910 people in 385 households · 11% aged 65+ · 19% under 15 · 57% of households rent · 33% spend 30%+ of income on shelter · 16% in low income more
+inside the sound distance (600 m)
+about 1,490 people in 620 households · 11% aged 65+ · 19% under 15 · 55% of households rent · 32% spend 30%+ of income on shelter · 16% in low income more
+How counted
+2021 census, spread evenly over each dissemination area and summed by 100 m cell — an estimate, rounded
+Work
+17–57 operating jobs (Virginia ratio, transferred)
+Show the math
+Cooling units: power at the meter 31.0 MW, about one unit per MW → 31 units (an assumption).
+Together: Lw per unit 91 (low-noise) to 101 dBA (standard) + 10 × log₁₀(31) = 106–116 dBA.
+Distance where the night limit is reached: r = 10^((Lw − 8 − 50) ÷ 20) = 249–786 m (free field over hard ground, no walls or barriers).
+Jobs: 20 MW × 290–630 m² hall per MW ÷ hall share 0.72–0.48 ÷ 464.5 m² per job = 17.3–56.5.
+Sound: Lp = Lw − 20 log r − 8 (hemispherical spreading); unit ratings from manufacturer data (Trane, Eurovent). Limits: Noise Control By-law 6555 / Bylaw 14600. Jobs: Virginia JLARC 2024, transferred.
+Sources (2)
+public record Statistics Canada, Census 2021 Profile by dissemination area (98-401-X2021006) and DA boundaries; counts spread evenly within each area
+transferred from elsewhere register: jobs (Virginia JLARC 2024, transferred; confidence 40)
+Your observations on site
+Sources
+Kept in this browser only; shown as your observation, never as a measurement.
+WHO IS NEAR, AND WHAT THEY WOULD NOTICE
+
+No recorded schools, care homes, hospitals, recreation or non-market housing within 400 m.
+
+WHAT IS SEEN FROM HOMES AND THE STREET
+
+Plant seen from 25 of 39 nearby homes and from 0 of 56 points on the streets within 200 m (City centrelines, a proxy for the sidewalk). Drawn in 3D: solid lines are seen, dashed are blocked.
+
+Sound is a screening estimate: manufacturer-rated levels, no barriers, ground or buildings.
+Sources
+
+Only the cooling plant and what is on the roof and the facade are tested; backup power, fuel, batteries and electrical equipment are never tested or drawn. Homes: neighbours in quiet (residential) zones within 350 m, from the corner nearest the site at a top-floor window. Street: points every 15 m on the street centrelines within 200 m at 1.6 m eye height (Vancouver; lanes not included); in Edmonton, points 4 m outside the lot.
+
+Cooling · assumed air inside, dry coolers on the roof Change › Seen or hidden ›
+← Materials
+Next: Opportunities →
+
+===== STEP 8 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+Heat
+
+7 of 8 heat opportunities are not ruled out here.
+
+District heat to a network not yet known built here
+Not yet known: receiver demand for each site; pipe route and its cost
+New district with the data centre as heat plant not yet known built elsewhere
+Not yet known: who pays for the network (capital split); heat density of a future district
+Greenhouse not yet known pilot
+Not yet known: a built precedent; land for the glasshouse
+Aquaculture / insects / algae not yet known built elsewhere
+Not yet known: a built precedent; food-safety rules
+Seasonal storage in the ground not yet known built elsewhere
+Not yet known: land for the borefield on or next to the parcel
+Sewage heat as comparator source not yet known built here
+no gate fails; some are not yet known
+Distributed servers as heaters not yet known pilot
+Not yet known: a built precedent
+Not here
+Hospital or campus anchor
+land: no hospital within 1.2 km · demand: —
+
+About
+District heat to a network
+How it works
+›
+
+Does it work here?
+2 possible with a change, 4 not yet known
+What the rules say
+Utility rules: Vancouver allowed with approval, Edmonton not yet known
+Not yet known
+receiver demand for each site; pipe route and its cost
+Where it has been done
+Vancouver: TELUS data centre heat to the TELUS Garden thermal energy system (BCUC Order C-1-13, 2013) — a development-scale…
+All the detail
+Does it work here?
+2 possible with a change, 4 not yet known
+physics	possible with a change
+air cooling: heat leaves at 25–35 °C; change to liquid cooling, or recover from exhaust air with a heat pump (no primary capture figure)
+
+land	possible with a change
+443 m from Blatchford District Energy Sharing System: a pipe to it
+
+rules	not yet known
+Utility rules: Alberta rule for selling heat not yet read; Blatchford: connection compulsory, net-zero buildings exempt (Bylaw C17943 s. 6, s. 8)
+
+demand	not yet known
+Blatchford District Energy Sharing System takes heat (whether it takes heat from others is not published)
+
+time	not yet known
+network expansion timing not published
+
+money	not yet known
+Blatchford variable rate $0.0269/kWh; what it pays for heat in is not published
+What the rules say
+Utility rules: Vancouver allowed with approval, Edmonton not yet known
+Utility rules	Vancouver allowed with approval
+heat sold to others is a BCUC-regulated thermal energy system (TELUS Garden: Order C-1-13); NEU credit for heat returned $32.59/MWh (By-law 9552 Sch. C)
+Edmonton not yet known
+Alberta rule for selling heat not yet read; Blatchford: connection compulsory, net-zero buildings exempt (Bylaw C17943 s. 6, s. 8)
+Not yet known
+receiver demand for each site; pipe route and its cost
+
+receiver demand for each site; pipe route and its cost
+
+Where it has been done
+Vancouver: TELUS data centre heat to the TELUS Garden thermal energy system (BCUC Order C-1-13, 2013) — a development-scale…
+
+Vancouver: TELUS data centre heat to the TELUS Garden thermal energy system (BCUC Order C-1-13, 2013) — a development-scale system, not a city network. Elsewhere: Tallaght, Dublin, Amazon data-centre heat, operating since 2023 (Codema); Meta Odense → Fjernvarme Fyn (COP 4.5, 2020); Mäntsälä. Precedent search 15 Oct 2026. more
+
+Drawn as: pipe route from the site to the network, homes within reach
+
+Sources
+BCUC Order C-1-13 (4 Feb 2013), G-155-12, G-2-15 (9 Jan 2015): TELUS Garden thermal energy system (FortisBC Alternative Energy Services) source
+BCUC Order C-1-13 with Reasons (Feb 2013), FortisBC Alternative Energy Services, TELUS Garden thermal energy system, pp.14–19: 'A year round base load of 1,400 kW of heat is available on a 24/7 basis' from the TELUS data centre; development load 5,194 MWh heating / 4,591 MWh cooling; 94 % of heating from recovery, steam peaking; TES capital $7.9 M, waste-heat option $3.2 M vs geo-exchange $6.8 M; 'free waste heat supply from the TELUS Data Centre'; customer rate BC Hydro residential + 5–10 % (G-155-12: $0.105–0.126/kWh 2014–18); annual actual-load report rescinded by G-2-15 source
+Codema (Dublin energy agency), Tallaght District Heating Scheme: "uses waste heat from the nearby Amazon data centre"; "Phase 1 of the scheme has been operational since 2023"; 3,770 MWh in the first year; almost 1,100 t CO2 saved in 2023 (checked by Claude) source
+Fjernvarme Fyn, Årsberetning 2020, p.9 production table and p.13: 'Varmepumperne tilknyttet Facebook har forbrugt 14.020 MWh el svarende til COP 4,5'; 230 TJ heat (Facebook heat pumps only, first full year) source
+Nivos (Mäntsälä utility) articles 2016/2019 and 9 Mar 2022; Sitra case 18 Oct 2019; NIB loan page 21 Oct 2019: DC power demand ~15 MW (phase 1), heat recovery nominal ~6 MW, 4.0 MW heat pump (2015), 20 GWh delivered 2018 = 54 % of town demand, 30 GWh/yr programme figure, exhaust ~37 °C → 80 °C, gas −70 %, DH price −11 % — utility/programme reports — https://nivos.fi/ajankohtaista/paikallisen-datakeskuksen-kanssa-yhteistyossa-luotu-ekosysteemi-lammittaa-mantsalassa/ ; source
+False Creek NEU By-law 9552 Sch. C: energy charge $65.172/MWh; credit for heat returned = 50% → $32.59/MWh source
+City of Edmonton, 2023–2026 Blatchford Renewable Energy Utility Budget and Plans (Dec 2022) source
+rulequote to checkVancouver Zoning By-law s. 2 definitions and district schedules (2026): no stand-alone EV charging use — Parking Area/Garage "may include the retail sale of electricity for the purpose of charging motor vehicles" (Parking Uses conditional in I-1C, I-2, I-3, FC-2, M-1, IC-2, C-2); Urban Farm – Class B (may be in a greenhouse) conditional in all seven; no aquaculture term; Community Centre conditional in I-2, I-3, FC-2, M-1, C-2; Bulk Data Storage conditional in I-2 (not at ground floor except entrances), I-1C, FC-2, I-3 sub-area A source
+rulequote to checkEdmonton Zoning Bylaw 20001 s. 8.10 use definitions: no EV charging use; Urban Agriculture ("hydroponic or aquaponic systems, and vertical farms") permitted in MU, IM, BE, CB, within or on a building (MU ≤600 m²); Community Service incl. shelters permitted in MU and BE (BE ≤500 m² except shelters); Minor Utility includes "district heating plants" (IM, BE); Major Utility includes "cooling plants" source
+Cooling · assumed air inside, dry coolers on the roof Change › Seen or hidden ›
+← People
+Next: Electricity opportunities →
+
+===== STEP 9 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+Electricity
+
+All 2 electricity opportunities are not ruled out here.
+
+Reserved capacity and batteries to the grid not yet known built elsewhere
+Not yet known: data-centre participation precedent; battery fire-code path
+EV charging hub not yet known speculative
+Not yet known: grid headroom at the parcel; a built precedent
+
+About
+Reserved capacity and batteries to the grid
+How it works
+›
+
+Does it work here?
+3 possible here, 2 possible with a change, 1 not yet known
+What the rules say
+Utility programme: Vancouver allowed, Edmonton allowed; Condition on large loads: Vancouver allowed with approval, Edmonton…
+Not yet known
+data-centre participation precedent; battery fire-code path
+Where it has been done
+Demand response: Google's contract with Indiana Michigan Power carries interruptible load and curtailment obligations (Indiana…
+All the detail
+Does it work here?
+3 possible here, 2 possible with a change, 1 not yet known
+physics	possible here
+batteries and curtailable load can shave peaks
+
+land	possible with a change
+a battery yard 3 m from lot lines and buildings (NFPA 855 as reference) — see the Energy add-on
+
+rules	not yet known
+Utility programme: AESO operating reserve ≥5 MW, or through an aggregator; Condition on large loads: Data Centre Regulation (Alta Reg 117/2026), ≥75 MW from transmission: may tether to new generation or storage covering its peak; in mandatory load shed, large data centres cut before all others; bridged load (≤3 yr) cut first when supply is short. AESO process (proposal, Jun 2026): first intake gas only, bridging ≤40%. Under 75 MW or on distribution: no flexibility term found; UPS batteries to the grid: AESO reserves ≥5 MW or via aggregator; Fire code (battery room): code path unconfirmed
+
+demand	possible here
+AESO operating reserves (not sized here)
+
+time	possible here
+winter peaks; hour not published
+
+money	possible with a change
+PNNL 2021: $411–448/kWh (US$, 4 h) — rough
+What the rules say
+Utility programme: Vancouver allowed, Edmonton allowed; Condition on large loads: Vancouver allowed with approval, Edmonton…
+Utility programme	Vancouver allowed
+BC Hydro 2026 Call: curtail ≥10% on 24 h notice, ≥144 h a year
+Edmonton allowed
+AESO operating reserve ≥5 MW, or through an aggregator
+
+Condition on large loads	Vancouver allowed with approval
+BC Hydro 2026 Call: curtailable ≥10% on 24 h notice, ≥144 h a year
+Edmonton allowed with approval
+Data Centre Regulation (Alta Reg 117/2026), ≥75 MW from transmission: may tether to new generation or storage covering its peak; in mandatory load shed, large data centres cut before all others; bridged load (≤3 yr) cut first when supply is short. AESO process (proposal, Jun 2026): first intake gas only, bridging ≤40%. Under 75 MW or on distribution: no flexibility term found
+
+UPS batteries to the grid	Vancouver no rule yet
+no BC programme found
+Edmonton allowed
+AESO reserves ≥5 MW or via aggregator
+
+Fire code (battery room)	Vancouver not yet known
+code path unconfirmed
+Edmonton not yet known
+code path unconfirmed
+Not yet known
+data-centre participation precedent; battery fire-code path
+
+data-centre participation precedent; battery fire-code path
+
+Where it has been done
+Demand response: Google's contract with Indiana Michigan Power carries interruptible load and curtailment obligations (Indiana…
+
+Demand response: Google's contract with Indiana Michigan Power carries interruptible load and curtailment obligations (Indiana regulator, Cause 46276; operation not confirmed). UPS batteries: Digital Realty, nine Irish data centres in EirGrid frequency response (operator claim). Battery: Google St. Ghislain, Belgium, 2.75 MW proof of concept (vendor claim). None found in BC or Alberta. Precedent search 15 Oct 2026. more
+
+Drawn as: daily power curve with the share given back
+
+Sources
+Indiana Utility Regulatory Commission, Cause 46276 order (Indiana Michigan Power / Google, Fort Wayne): "The Contract also contains demand response obligations designed to reduce I&M's peak load and capacity obligations"; specified interruptible load and curtailment parameters (checked by Claude) source
+OPERATOR CLAIM: Enel X case study, Digital Realty Ireland: nine data centres in EirGrid DS3 frequency response; "when the grid frequency drops below 50Hz, the data centre can safely draw some power from its batteries" source
+VENDOR CLAIM: Fluence 2022, Google St. Ghislain, Belgium: 2.75 MW / 5.5 MWh battery replacing diesel backup and in Elia's ancillary-services market; a "proof-of-concept" source
+BC Hydro 2026 Call for Demand RFA: 100 + 300 MW; 10–145 MW per project; ≥10% premium; curtailment; heat-recovery-ready inside the 10% environmental weight source
+AESO, Operating reserve (ancillary services) source
+regulationData Centre Regulation, Alta Reg 117/2026 under the Electric Utilities Act (King's Printer extract, current as of 9 Jun 2026; J.B. PDF 16 Oct 2026). s. 1: data centre includes hosting/cloud, digital asset mining, AI/ML, content delivery. s. 2: "large data centre" = maximum demand directly from the transmission system of 75 MW or more, or a lower threshold the AESO sets for reliability. s. 3: AESO may aggregate integrated data centres on the same or adjacent parcels with the same owner or affiliate. s. 5: a large data centre may be "tethered" to new or added generating units or energy storage able to supply at least its maximum demand, reliably and predictably (the Regulation does not limit the fuel; AESO's first intake does). s. 6: tethered requests processed first. s. 7: AESO may require site control, municipal zoning approvals, financing, permits or water licences. s. 8: no service above the tethered supply. s. 9: bridged service before the supply runs only once the plant is approved by the AUC, max 3 years, AESO may cap each and all bridged loads and suspend for unmet criteria. s. 10: inadequate supply — bridged data centres reduced before all other market participants; mandatory load shed — large data centres reduced before all others. s. 12: review by 31 May 2030, expires 31 May 2035 source
+system operatorAESO, Large Load Integration Phase 2A — Proposed BYOG Process (26 Jun 2026, proposal, not final). Applies to transmission-connected loads asking for 75 MW or more of demand transmission service (DTS), site-aggregated; excludes loads under 75 MW, distribution-connected load and storage. First intake gas-fired generation only, "net new"; tethering ratio: generator output at 25 °C, 40% humidity equals DTS contract capacity. Data centres must show municipal zoning or area-structure-plan approval and accept the data-centre connection requirements. DTS commitment fee $15k/MW (refundable). Bridging before the generator runs: at most 20/30/40% of the DTS request by generator milestone, 1,600 MW across all intakes, up to 3 years; bridging load is fully interruptible, reduced before all other non-firm load to avoid a shortfall, curtailment scheme TBD (pro rata, rotation or combination); suspended for failing to curtail source
+system operatorAESO, Large Load Integration Phase 2A BYOG Process Update, stakeholder session deck (18 Jun 2026, updated 24 Jun 2026). About 20 GW of data-centre load requested each quarter since Q2 2025 (19.2 GW Q2 2026). Phase 2 is modular: 2A BYOG, 2B ISO tariff, 2C "Grid Partners" (flexible load structures, operating procedures, market products), not yet set. Load management: data centres prioritized above other loads for reduction under supply-related conditions; in standard operation, if firm load shed is needed in an emergency, data centres reduce before all other firm loads; procedures (pro rata, blocks, rotations) to be developed. 74.9 MW applications rose from 9 (Jun 2025) to 18 (Jun 2026) in the 25–75 MW band; AESO may lower the 75 MW threshold. Distribution-connected large loads bypass BYOG; AESO has limited tools for them. Final process was planned for late July–early August 2026 source
+rulequote to checkVancouver Zoning By-law s. 2 definitions and district schedules (2026): no stand-alone EV charging use — Parking Area/Garage "may include the retail sale of electricity for the purpose of charging motor vehicles" (Parking Uses conditional in I-1C, I-2, I-3, FC-2, M-1, IC-2, C-2); Urban Farm – Class B (may be in a greenhouse) conditional in all seven; no aquaculture term; Community Centre conditional in I-2, I-3, FC-2, M-1, C-2; Bulk Data Storage conditional in I-2 (not at ground floor except entrances), I-1C, FC-2, I-3 sub-area A source
+rulequote to checkEdmonton Zoning Bylaw 20001 s. 8.10 use definitions: no EV charging use; Urban Agriculture ("hydroponic or aquaponic systems, and vertical farms") permitted in MU, IM, BE, CB, within or on a building (MU ≤600 m²); Community Service incl. shelters permitted in MU and BE (BE ≤500 m² except shelters); Minor Utility includes "district heating plants" (IM, BE); Major Utility includes "cooling plants" source
+Cooling · assumed air inside, dry coolers on the roof Change › Seen or hidden ›
+← Heat opportunities
+Next: Water opportunities →
+
+===== STEP 10 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+Water
+
+It is not possible here.
+
+Not here
+Rainwater, condensate and water reuse
+demand: dry coolers use no water; rain would go to toilets and irrigation only
+Cooling · assumed air inside, dry coolers on the roof Change › Seen or hidden ›
+← Back
+Next →
+
+===== STEP 11 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+Land and time
+
+It is not possible here.
+
+Not here
+Meanwhile uses on land held for growth
+land: the setup leaves almost no open land
+Cooling · assumed air inside, dry coolers on the roof Change › Seen or hidden ›
+← Water opportunities
+Next: People opportunities →
+
+===== STEP 12 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+People
+
+All 2 people opportunities are not ruled out here.
+
+Warming centre, refuge, clean-air room not yet known speculative
+Not yet known: who runs it; separation from the secure area
+Cooling for neighbours not yet known speculative
+Not yet known: heat temperature at the site
+
+About
+Warming centre, refuge, clean-air room
+How it works
+›
+
+Does it work here?
+3 possible here, 1 possible with a change, 2 not yet known
+What the rules say
+Building code: Vancouver not yet known, Edmonton not yet known
+Not yet known
+who runs it; separation from the secure area
+Where it has been done
+No case found of a data centre hosting a public warming, cooling or clean-air room or refuge. Nearest: Vancouver's 111 E 5th…
+All the detail
+Does it work here?
+3 possible here, 1 possible with a change, 2 not yet known
+physics	possible here
+spare heat and filtered air from the data centre
+
+land	possible with a change
+a room taken from the building or a neighbour's building
+
+rules	not yet known
+not read for zone IH
+
+demand	possible here
+Edmonton has 6.1–6.5 days a year at or below −20 °C (ECCC Normals 1991–2020)
+
+time	possible here
+needed in cold snaps, heat waves and smoke events
+
+money	not yet known
+who runs it is not known
+What the rules say
+Building code: Vancouver not yet known, Edmonton not yet known
+Building code	Vancouver not yet known
+assembly occupancy beside a data centre not yet read
+Edmonton not yet known
+not yet read
+Not yet known
+who runs it; separation from the secure area
+
+who runs it; separation from the secure area
+
+Where it has been done
+No case found of a data centre hosting a public warming, cooling or clean-air room or refuge. Nearest: Vancouver's 111 E 5th…
+
+No case found of a data centre hosting a public warming, cooling or clean-air room or refuge. Nearest: Vancouver's 111 E 5th rezoning requires "an active, high-quality public realm interface" (City report, proposed); the reverse — data-centre heat warming a public pool — is built in Paris (Butte-aux-Cailles, 2017). Precedent search 15 Oct 2026. more
+
+Drawn as: room inside the building with its own street entry
+
+Sources
+City of Vancouver referral report 30 Jun 2026 (111 E 5th Ave and 2060 Quebec St, CD-1, up to 40 MW): requires "an active, high-quality public realm interface"; waste heat to the NEU "a material condition of the proposed use" (proposed) source
+Ville de Paris, Butte-aux-Cailles pool (2017): heat recovered from a data centre warms the pool water source
+BC ESS / JIBC group lodging 3.5 m² per person; Edmonton shelter standard 2 m between beds; Health Canada cleaner-air spaces MERV 13+, 2–3 ACH (Formulas sheet)
+rulequote to checkVancouver Zoning By-law s. 2 definitions and district schedules (2026): no stand-alone EV charging use — Parking Area/Garage "may include the retail sale of electricity for the purpose of charging motor vehicles" (Parking Uses conditional in I-1C, I-2, I-3, FC-2, M-1, IC-2, C-2); Urban Farm – Class B (may be in a greenhouse) conditional in all seven; no aquaculture term; Community Centre conditional in I-2, I-3, FC-2, M-1, C-2; Bulk Data Storage conditional in I-2 (not at ground floor except entrances), I-1C, FC-2, I-3 sub-area A source
+rulequote to checkEdmonton Zoning Bylaw 20001 s. 8.10 use definitions: no EV charging use; Urban Agriculture ("hydroponic or aquaponic systems, and vertical farms") permitted in MU, IM, BE, CB, within or on a building (MU ≤600 m²); Community Service incl. shelters permitted in MU and BE (BE ≤500 m² except shelters); Minor Utility includes "district heating plants" (IM, BE); Major Utility includes "cooling plants" source
+Cooling · assumed air inside, dry coolers on the roof Change › Seen or hidden ›
+← Back
+Next: Materials opportunities →
+
+===== STEP 13 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+Materials
+
+The one materials opportunity is not ruled out here.
+
+Material bank: copper not yet known speculative
+Not yet known: who would take the material and when
+
+About
+Material bank: copper
+How it works
+›
+
+Does it work here?
+3 possible here, 2 not yet known, 1 possible with a change
+What the rules say
+Rules: Vancouver not applicable, Edmonton not applicable
+Not yet known
+who would take the material and when
+Where it has been done
+Corporate reuse exists (Microsoft Circular Centers: 83% reuse, 17% recycle of critical parts — operator claim), but recovered…
+All the detail
+Does it work here?
+3 possible here, 2 not yet known, 1 possible with a change
+physics	possible here
+400–800 t of copper in the facility (industry figure)
+
+land	possible here
+—
+
+rules	possible here
+no rule needed
+
+demand	not yet known
+who would take the material and when
+
+time	possible with a change
+released at refits and at the end of the building's life
+
+money	not yet known
+—
+What the rules say
+Rules: Vancouver not applicable, Edmonton not applicable
+Rules	Vancouver not applicable
+Edmonton not applicable
+Not yet known
+who would take the material and when
+
+who would take the material and when
+
+Where it has been done
+Corporate reuse exists (Microsoft Circular Centers: 83% reuse, 17% recycle of critical parts — operator claim), but recovered…
+
+Corporate reuse exists (Microsoft Circular Centers: 83% reuse, 17% recycle of critical parts — operator claim), but recovered material returns to company or global supply chains. No case of a data centre planned as a city material bank. Precedent search 15 Oct 2026. more
+
+Drawn as: over-time view of materials leaving at each refresh
+
+Sources
+OPERATOR CLAIM: Microsoft Azure blog, Circular Centers (Amsterdam 2020; Dublin, Boydton 2022): "83 percent reuse and 17 percent recycle of critical parts" source
+Copper Development Association 2023, copper in data centres, 20–40 t/MW source
+rulequote to checkVancouver Zoning By-law s. 2 definitions and district schedules (2026): no stand-alone EV charging use — Parking Area/Garage "may include the retail sale of electricity for the purpose of charging motor vehicles" (Parking Uses conditional in I-1C, I-2, I-3, FC-2, M-1, IC-2, C-2); Urban Farm – Class B (may be in a greenhouse) conditional in all seven; no aquaculture term; Community Centre conditional in I-2, I-3, FC-2, M-1, C-2; Bulk Data Storage conditional in I-2 (not at ground floor except entrances), I-1C, FC-2, I-3 sub-area A source
+rulequote to checkEdmonton Zoning Bylaw 20001 s. 8.10 use definitions: no EV charging use; Urban Agriculture ("hydroponic or aquaponic systems, and vertical farms") permitted in MU, IM, BE, CB, within or on a building (MU ≤600 m²); Community Service incl. shelters permitted in MU and BE (BE ≤500 m² except shelters); Minor Utility includes "district heating plants" (IM, BE); Major Utility includes "cooling plants" source
+Cooling · assumed air inside, dry coolers on the roof Change › Seen or hidden ›
+← People opportunities
+Next: Three options →
+
+===== STEP 14 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+Three options, side by side, in no order
+
+Each option gains and gives up something. Nothing is added up; nothing wins.
+
+A
+Smaller, air-cooled
+least plant and grid; heat goes to the air
+B
+Chosen size, heat to neighbours
+liquid-cooled servers and a heat pump; heat offered to buildings within reach
+C
+Largest that fits, heat to neighbours
+the most heat, more than nearby buildings may take
+	A	B	C
+THE OPERATOR
+Servers	10.0 MW	20.0 MW	40.0 MW
+Plant space	287–291 m² (equipment only)	654–662 m² (equipment only)	1,308–1,324 m² (equipment only)
+Standby fuel, 12 h	44,184–48,918 L	88,368–97,836 L	176,736–195,672 L
+Zoning path	Allowed
+THE UTILITY AND THE GRID
+Power drawn	14–16 MW	28–31 MW	56–62 MW
+Electricity a year	74–81 GWh	147–163 GWh	294–326 GWh
+Grid connection	needs the utility's answer to a load application
+RECEIVERS
+Heat offered after the heat pump	none — air-cooled heat at 25–35 °C goes to the air	65–118 GWh/yr	130–237 GWh/yr
+Equal to the heating of	—	2,222–4,051 homes (space and hot water, provincial average)	4,445–8,103 homes (space and hot water, provincial average)
+Within reach	—	6 candidates	6 candidates
+How much they would take	—	needs each receiver's monthly demand — a year of heat is mostly needed in winter (about 3.3 : 1 between the busiest and quietest month)	needs each receiver's monthly demand — a year of heat is mostly needed in winter (about 3.3 : 1 between the busiest and quietest month)
+Other source already serving	not known for these buildings
+Price for the heat	—	no published price; Edmonton's district energy prices at the gas-equivalent cost plus avoided boiler costs	no published price; Edmonton's district energy prices at the gas-equivalent cost plus avoided boiler costs
+THE CLIMATE
+Heat-pump electricity	—	14–39 GWh/yr → 4,990–13,643 t CO₂e/yr	29–79 GWh/yr → 9,979–27,287 t CO₂e/yr
+Against what it replaces	—	depends on how the receivers heat now (gas, electric, district)	depends on how the receivers heat now (gas, electric, district)
+NEIGHBOURS
+Night limit at the property line	50 dBA next to homes, 60 dBA next to other uses (Bylaw 14600)
+Generator testing	—
+WORKERS
+Operating jobs	8.7–28 (Virginia ratio, transferred)	17–57 (Virginia ratio, transferred)	35–113 (Virginia ratio, transferred)
+Four futures
+A
+As planned the table above
+Tenant changes cooling to liquid: heat could be offered
+Tenant leaves nothing depends on it
+Receiver leaves —
+B
+As planned the table above
+Tenant changes cooling back to air: heat offered drops to none
+Tenant leaves receivers fall back on their own heating at full peak
+Receiver leaves all heat goes back to the dry coolers — keep their full size
+C
+As planned the table above
+Tenant changes cooling back to air: heat offered drops to none
+Tenant leaves receivers fall back on their own heating at full peak
+Receiver leaves all heat goes back to the dry coolers — keep their full size
+met met with a change not met not yet known
+Sources (8)
+industry survey register: pue (LBNL 2023; Uptime 2025 industry survey)
+research or government lab register: load_factor (Fan et al. 2007)
+research or government lab register: liquid_capture (LBNL 2014, NREL — direct-to-chip 48–75%; air-cooled: no primary figure)
+research or government lab register: cop (DEA 2026 waste-heat heat pumps to 70 °C, 1–3 MW: 3.0–3.6; observed at Meta Odense, 27 → 70 °C: 4.5 in 2020, about 3.9 in 2022–24 — Fjernvarme Fyn annual reports)
+public record register: homes_heated (NRCan CEUD 2023)
+public record register: grid_co2 (NIR 2026 Annex 7, consumption intensity 2024)
+public record Noise Control By-law 6555 ss. 2.1–2.3, Sch. A, B (Vancouver); Bylaw 14600 (Edmonton)
+transferred from elsewhere register: jobs (Virginia JLARC 2024, transferred; confidence 40)
+Ranges carry the register's confidence; "not yet known" names what is missing.
+Cooling · assumed air inside, dry coolers on the roof Change › Seen or hidden ›
+← Back
+Next: Over time →
+
+===== STEP 15 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+What changes, and when
+
+Pipes and grid connections outlast the servers and the tenants. Each red tick is a point where the heat could change.
+
+0 yr
+10 yr
+20 yr
+30 yr
+40 yr
+50 yr
+Servers replaced
+every 5–6 years
+Colocation contract
+2–5 years, renewed or not
+Hyperscale contract
+5–10+ years
+Heat contract (Stockholm)
+10 years + 5
+Cooling and heat pumps
+15–25 years
+Building shell
+up to about 40 years
+Pipe network
+30–50 years, by water temperature
+Grid connection
+stays with the land
+Four futures
+Tenant changes cooling: liquid to air: heat offered drops to none; air to liquid: heat could be offered
+Tenant changes cooling
+liquid to air: heat offered drops to none; air to liquid: heat could be offered
+Tenant leaves
+receivers fall back on their own heating at full peak; the grid connection and pipe stay
+Receiver leaves
+all heat goes back to the dry coolers, so they must stay full size
+Network arrives
+a district network reaching the site could take what neighbours cannot
+Sources
+research or government lab register: horizons (LBNL 2024 server life; company filings; ASHRAE plant medians; EN 253 pipe life; Digital Realty contracts — operator; Stockholm Exergi heat contracts — operator).
+← Three options
+Next: Two cities →
+
+===== STEP 16 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+The same data centre in two cities
+
+20 MW, built the same way in both cities. Only the grid, climate and rules change.
+
+	Vancouver	Edmonton
+Grid carbon
+public record NIR 2026, consumption intensity, 2024
+	18.1 g/kWh	346.1 g/kWh
+Carbon of its electricity
+physics electricity × grid carbon
+	2,664–2,949 t CO₂e/yr	50,935–56,392 t CO₂e/yr
+Heat offered (liquid-cooled, heat pump)
+physics same physics in both cities
+	65–118 GWh/yr	65–118 GWh/yr
+Equal to the heating of
+public record a home uses 14.58 MWh a year in BC, 29.19 in Alberta (NRCan CEUD 2023)
+	4,450–8,111 homes	2,222–4,051 homes
+Heat-pump carbon
+physics heat-pump electricity × grid carbon
+	261–714 t CO₂e/yr	4,990–13,643 t CO₂e/yr
+Busiest to quietest heating month
+research or government lab total heat demand (CWEC)
+	about 3.9 : 1	about 3.3 : 1
+Solar yield, roof
+public record NRCan municipal values (flat to latitude tilt)
+	892–1,007 kWh per kWp a year	944–1,244 kWh per kWp a year
+Solar yield, south wall
+public record NRCan municipal values (vertical)
+	716 kWh per kWp a year	989 kWh per kWp a year
+Rain
+public record ECCC Normals 1991–2020
+	about 1,160 mm a year	about 420 mm a year
+Night noise limit next to homes
+public record city by-laws
+	45–55 dBA by zone (By-law 6555)	50 dBA (Bylaw 14600)
+Getting power
+public record BC Hydro 2026 RFA; Alta Reg 117/2026; AESO 2025, 2026
+	2026 Call: must curtail ≥10% of load on 24 h notice, ≥144 h a year; downtown feeders frozen to 2032	AESO interim limit of 1,200 MW for new large loads, fully allocated; data centres ≥75 MW may tether to their own new generation or storage, and are cut first in mandatory load shedding
+Where heat could go
+public record By-law 9552; Bylaw C17943
+	NEU: compulsory connection inside its area; heat sent back credited at 50%	Blatchford: compulsory connection inside its service area (Bylaw C17943 s. 6); service areas not yet traced in the tool
+Electricity price
+public record BC Hydro 2026; AESO 2025
+	BC Hydro large general service 6.79 ¢/kWh + $13.83/kW a month	Alberta pool averaged $43.68/MWh in 2025, plus wires charges
+
+The same heat is worth about twice as many homes' heating in Vancouver as in Edmonton, because Alberta homes use about twice the heat; but each MWh of heat-pump electricity carries about 19 times the carbon in Alberta. more
+
+Size from the slider; set a size on the What fits page.
+← Over time
+Next: Report →
+
+===== STEP 17 
+1Site
+2What fits
+3Exchanges
+4Opportunities
+5Options
+6Report
+Report
+
+Everything this path showed for 12603 123 STREET NW, Edmonton, in one place. Nothing is added up; nothing wins.
+
+Downloads are not available in this view.
+
+Baseline
+Site
+12603 123 STREET NW, Edmonton
+Zone
+IH: Allowed
+Lot
+14,516 m²
+Floor area available
+29,032 m²
+Largest that fits
+22–40 MW of servers
+Size tested
+20 MW of servers
+Set-up
+new building, air cooling inside, dry coolers outside
+Site
+What is being built?
+What fits
+What fits here
+
+How much data centre this lot could hold, as ranges, before anyone decides what to do with its heat.
+
+Floor area
+Available: 29,032 m²
+Room for servers
+Data hall: 13,935–20,903 m²
+Largest data centre that fits
+22–40 MW of servers
+What that size needs
+Average power drawn: 28–31 MW at the meter (servers × PUE 1.4–1.55; PUE is a yearly average, so peak demand is higher)
+Real buildings
+
+Dots: real data centres (filled: public record; open: claim). Band: the tool's range. Bar: this site, 22–40 MW on 29,032 m².
+
+Real buildings against this site
+Dots: real data centres (filled: public record; open: claim). Band: the tool's range. Bar: this site, 22–40 MW on 29,032 m².
+Closest in size
+Benchmarks: 11 buildings, 505–1,109 m² of building per MW of IT (typical 680)
+Exchanges
+Who could take the heat
+
+At Alberta prices no route pays back at any distance. Blatchford's low-temperature loop, 443 m away, is the exception to look at.
+
+Heat this size could offer
+65–118 GWh a year with liquid cooling and a heat pump; none to reuse with air cooling
+What the heat is worth here
+less than nothing: the heat pump costs more to run than the gas it replaces
+Heat networks nearby
+nearest: Blatchford District Energy Sharing System, 443 m
+An ambient loop: Blatchford
+443 m away; server heat could go in without a heat pump. Size, price and permission are open questions
+Buildings that could take it
+5 recreation centres, 3 schools; none within break-even; 7 beyond
+Power in, power offered
+
+A customer first. What it can give back is flexibility, and only the operator can give it.
+
+What could connect
+4: Getting connected to the grid; Standby generators; Flexibility for the grid…
+What could be added
+off until you add them — 5: Solar on the roof; Solar on the south wall; A battery for the grid; Offer UPS batteries to the grid…
+Water in, water out
+
+From almost none to a great deal: it depends on the cooling.
+
+What could connect
+4: Reclaimed water from a treatment plant; Blowdown to the sewer; Neighbours' greywater; Blackwater
+What could be added
+Rainwater for cooling built elsewhere Vancouver allowed Edmonton allowed with approval
+What it is made of, and how often
+
+The building lasts decades; the servers are replaced every five to six years.
+
+Over 25 years
+Server refreshes: 4 (every 5–6 years)
+Where retired equipment can go
+5: Reuse: Alberta Computers for Schools (Edmonton), which takes servers; Certified recyclers (R2v3); The provincial program…
+Trucks
+One truck per loading space in 3D. Trips per refresh: not yet sourced.
+What neighbours would hear, see and feel
+
+Described as experienced, not scored. Measured where the data allows; your site observations sit beside it, labelled as yours.
+
+Sound
+Cooling plant: about 31 units rated 106–116 dBA together (low-noise to standard)
+The street edge
+Standoff: new facilities keep about 10 m between the building and the public (45 m enhanced) — a fence, bollards or a blank…
+Who is nearby
+Non-market homes within 200 m: 0 (City list; private housing not counted)
+Your observations on site
+Opportunities
+Heat
+
+7 of 8 heat opportunities are not ruled out here.
+
+District heat to a network not yet known built here Not yet known: receiver demand for each site; pipe route and its cost
+New district with the data centre as heat plant not yet known built elsewhere Not yet known: who pays for the network (capital split); heat density of a future district
+Greenhouse not yet known pilot Not yet known: a built precedent; land for the glasshouse
+Aquaculture / insects / algae not yet known built elsewhere Not yet known: a built precedent; food-safety rules
+Seasonal storage in the ground not yet known built elsewhere Not yet known: land for the borefield on or next to the parcel
+Sewage heat as comparator source not yet known built here no gate fails; some are not yet known
+Distributed servers as heaters not yet known pilot Not yet known: a built precedent
+Not here: Hospital or campus anchorland: no hospital within 1.2 km · demand: —
+Electricity
+
+All 2 electricity opportunities are not ruled out here.
+
+Reserved capacity and batteries to the grid not yet known built elsewhere Not yet known: data-centre participation precedent; battery fire-code path
+EV charging hub not yet known speculative Not yet known: grid headroom at the parcel; a built precedent
+Water
+
+It is not possible here.
+
+Not here: Rainwater, condensate and water reusedemand: dry coolers use no water; rain would go to toilets and irrigation only
+Land and time
+
+It is not possible here.
+
+Not here: Meanwhile uses on land held for growthland: the setup leaves almost no open land
+People
+
+All 2 people opportunities are not ruled out here.
+
+Warming centre, refuge, clean-air room not yet known speculative Not yet known: who runs it; separation from the secure area
+Cooling for neighbours not yet known speculative Not yet known: heat temperature at the site
+Materials
+
+The one materials opportunity is not ruled out here.
+
+Material bank: copper not yet known speculative Not yet known: who would take the material and when
+Options
+Three options, side by side, in no order
+
+Each option gains and gives up something. Nothing is added up; nothing wins.
+
+Four futures
+	A	B	C
+The operator
+Servers	10.0 MW	20.0 MW	40.0 MW
+Plant space	287–291 m² (equipment only)	654–662 m² (equipment only)	1,308–1,324 m² (equipment only)
+Standby fuel, 12 h	44,184–48,918 L	88,368–97,836 L	176,736–195,672 L
+Zoning path	Allowed
+The utility and the grid
+Power drawn	14–16 MW	28–31 MW	56–62 MW
+Electricity a year	74–81 GWh	147–163 GWh	294–326 GWh
+Grid connection	needs the utility's answer to a load application
+Receivers
+Heat offered after the heat pump	none — air-cooled heat at 25–35 °C goes to the air	65–118 GWh/yr	130–237 GWh/yr
+Equal to the heating of	—	2,222–4,051 homes (space and hot water, provincial average)	4,445–8,103 homes (space and hot water, provincial average)
+Within reach	—	6 candidates	6 candidates
+How much they would take	—	needs each receiver's monthly demand — a year of heat is mostly needed in winter (about 3.3 : 1 between the busiest and quietest month)	needs each receiver's monthly demand — a year of heat is mostly needed in winter (about 3.3 : 1 between the busiest and quietest month)
+Other source already serving	not known for these buildings
+Price for the heat	—	no published price; Edmonton's district energy prices at the gas-equivalent cost plus avoided boiler costs	no published price; Edmonton's district energy prices at the gas-equivalent cost plus avoided boiler costs
+The climate
+Heat-pump electricity	—	14–39 GWh/yr → 4,990–13,643 t CO₂e/yr	29–79 GWh/yr → 9,979–27,287 t CO₂e/yr
+Against what it replaces	—	depends on how the receivers heat now (gas, electric, district)	depends on how the receivers heat now (gas, electric, district)
+Neighbours
+Night limit at the property line	50 dBA next to homes, 60 dBA next to other uses (Bylaw 14600)
+Generator testing	—
+Workers
+Operating jobs	8.7–28 (Virginia ratio, transferred)	17–57 (Virginia ratio, transferred)	35–113 (Virginia ratio, transferred)
+What changes, and when
+
+Pipes and grid connections outlast the servers and the tenants. Each red tick is a point where the heat could change.
+
+Four futures
+Tenant changes cooling: liquid to air: heat offered drops to none; air to liquid: heat could be offered
+Report
+The same data centre in two cities
+
+20 MW, built the same way in both cities. Only the grid, climate and rules change.
+
+	Vancouver	Edmonton
+Grid carbonpublic record NIR 2026, consumption intensity, 2024	18.1 g/kWh	346.1 g/kWh
+Carbon of its electricityphysics electricity × grid carbon	2,664–2,949 t CO₂e/yr	50,935–56,392 t CO₂e/yr
+Heat offered (liquid-cooled, heat pump)physics same physics in both cities	65–118 GWh/yr	65–118 GWh/yr
+Equal to the heating ofpublic record a home uses 14.58 MWh a year in BC, 29.19 in Alberta (NRCan CEUD 2023)	4,450–8,111 homes	2,222–4,051 homes
+Heat-pump carbonphysics heat-pump electricity × grid carbon	261–714 t CO₂e/yr	4,990–13,643 t CO₂e/yr
+Busiest to quietest heating monthresearch or government lab total heat demand (CWEC)	about 3.9 : 1	about 3.3 : 1
+Solar yield, roofpublic record NRCan municipal values (flat to latitude tilt)	892–1,007 kWh per kWp a year	944–1,244 kWh per kWp a year
+Solar yield, south wallpublic record NRCan municipal values (vertical)	716 kWh per kWp a year	989 kWh per kWp a year
+Rainpublic record ECCC Normals 1991–2020	about 1,160 mm a year	about 420 mm a year
+Night noise limit next to homespublic record city by-laws	45–55 dBA by zone (By-law 6555)	50 dBA (Bylaw 14600)
+Getting powerpublic record BC Hydro 2026 RFA; Alta Reg 117/2026; AESO 2025, 2026	2026 Call: must curtail ≥10% of load on 24 h notice, ≥144 h a year; downtown feeders frozen to 2032	AESO interim limit of 1,200 MW for new large loads, fully allocated; data centres ≥75 MW may tether to their own new generation or storage, and are cut first in mandatory load shedding
+Where heat could gopublic record By-law 9552; Bylaw C17943	NEU: compulsory connection inside its area; heat sent back credited at 50%	Blatchford: compulsory connection inside its service area (Bylaw C17943 s. 6); service areas not yet traced in the tool
+Electricity pricepublic record BC Hydro 2026; AESO 2025	BC Hydro large general service 6.79 ¢/kWh + $13.83/kW a month	Alberta pool averaged $43.68/MWh in 2025, plus wires charges
+Read with
+
+Ranges, not designs. Operator figures are claims. Heat available is not heat used. "Not yet known" names what is missing.
+
+Sources (18)
+
+public record formula register: envelope (zone schedules; sources 17, 18)
+
+filed plans or application register: hall_area (one calibration case, confidence 50); ground-floor rule: I-2 s. 2.2.7; floor heights: Burlington plans, HK TPB A/KC/480, A/KC/510B
+
+operator or maker claim register: size_fit (built halls: eStruxture VAN-1, Hut 8 Vault, Qu EDM1, Cologix VAN2, VAN5 — operator claims; LBNL prototypes, Sun et al. 2021; whole-building check: 111 E 5th RTS 19744, Ark UP4 committee report, Cologix VAN4 operator)
+
+industry survey register: pue (LBNL 2023; Uptime 2025 industry survey) operator or maker claim register: component_space (manufacturer claims, equipment only; clearances and switchgear rooms not sourced) public record register: fuel_on_site (NFC 2020 Table 4.3.13.4.-B; fuel rate a manufacturer claim; Uptime ≥ 12 h) public record register: service_class (BC Hydro primary guide; EPCOR connection guide)
+
+Precedent catalogue, 130 sites, gathered 15 Oct 2026; every figure with its quote and source in the full catalogue: open. Operator figures are claims.
+
+Conventional: air-cooled, dry coolers, no heat recovery. Modelled Vancouver and Edmonton rows sit on the worked-example lots (1425 Clark Dr; 12603 123 Street Nw). VAN4: 6.5 MW site, PUE 1.5, air-cooled chilled water, no heat recovery stated. Qu EDM2: 3 MW, no PUE stated, so its energy is not computed. Hover a row for its basis. Heat offered needs liquid cooling and a heat pump; air-cooled heat at 25–35 °C is shown as none to reuse. Same 20 MW of servers in every row. The modelled rows use the tool's own formulas; VAN4 uses only what its spec sheet claims (Cologix, May 2026).
+
+City of Edmonton DESS design guide v8 (2025); Bylaw 17943 and 2026 rates; Utility Advisor 2023; 2021–2024 business plan; Buffa et al. 2019; Edmonton CWEC typical year. Research-agent reads, to check. The design guide's 8 °C winter supply and 4 °C return do not match its own 5 °C design difference; both are shown as written.
+
+operator or maker claim register: noise_level (screen Lp = Lw − 20 log r − 8; Trane RTAF 333–1,010 kW, Eurovent: Lw 91–101 dBA per unit) public record register: lf_flag (AUC Rule 012 s. 4.5) public record Noise Control By-law 6555 ss. 2.1–2.3, Sch. A, B (Vancouver); Bylaw 14600 (Edmonton)
+
+transferred from elsewhere register: standoff (Ontario GO-ITS 25.18, transferred) assumption or gap register: watched_area (field observation, labelled as one person's) public record register: light_at_window (CIE 150:2017; Edmonton Bylaw 20001 s. 5.120(3); Vancouver: no lux limit)
+
+public record Statistics Canada, Census 2021 Profile by dissemination area (98-401-X2021006) and DA boundaries; counts spread evenly within each area transferred from elsewhere register: jobs (Virginia JLARC 2024, transferred; confidence 40)
+
+Kept in this browser only; shown as your observation, never as a measurement.
+
+Only the cooling plant and what is on the roof and the facade are tested; backup power, fuel, batteries and electrical equipment are never tested or drawn. Homes: neighbours in quiet (residential) zones within 350 m, from the corner nearest the site at a top-floor window. Street: points every 15 m on the street centrelines within 200 m at 1.6 m eye height (Vancouver; lanes not included); in Edmonton, points 4 m outside the lot.
+
+BCUC Order C-1-13 (4 Feb 2013), G-155-12, G-2-15 (9 Jan 2015): TELUS Garden thermal energy system (FortisBC Alternative Energy Services) source BCUC Order C-1-13 with Reasons (Feb 2013), FortisBC Alternative Energy Services, TELUS Garden thermal energy system, pp.14–19: 'A year round base load of 1,400 kW of heat is available on a 24/7 basis' from the TELUS data centre; development load 5,194 MWh heating / 4,591 MWh cooling; 94 % of heating from recovery, steam peaking; TES capital $7.9 M, waste-heat option $3.2 M vs geo-exchange $6.8 M; 'free waste heat supply from the TELUS Data Centre'; customer rate BC Hydro residential + 5–10 % (G-155-12: $0.105–0.126/kWh 2014–18); annual actual-load report rescinded by G-2-15 source Codema (Dublin energy agency), Tallaght District Heating Scheme: "uses waste heat from the nearby Amazon data centre"; "Phase 1 of the scheme has been operational since 2023"; 3,770 MWh in the first year; almost 1,100 t CO2 saved in 2023 (checked by Claude) source Fjernvarme Fyn, Årsberetning 2020, p.9 production table and p.13: 'Varmepumperne tilknyttet Facebook har forbrugt 14.020 MWh el svarende til COP 4,5'; 230 TJ heat (Facebook heat pumps only, first full year) source Nivos (Mäntsälä utility) articles 2016/2019 and 9 Mar 2022; Sitra case 18 Oct 2019; NIB loan page 21 Oct 2019: DC power demand ~15 MW (phase 1), heat recovery nominal ~6 MW, 4.0 MW heat pump (2015), 20 GWh delivered 2018 = 54 % of town demand, 30 GWh/yr programme figure, exhaust ~37 °C → 80 °C, gas −70 %, DH price −11 % — utility/programme reports — https://nivos.fi/ajankohtaista/paikallisen-datakeskuksen-kanssa-yhteistyossa-luotu-ekosysteemi-lammittaa-mantsalassa/ ; source False Creek NEU By-law 9552 Sch. C: energy charge $65.172/MWh; credit for heat returned = 50% → $32.59/MWh source City of Edmonton, 2023–2026 Blatchford Renewable Energy Utility Budget and Plans (Dec 2022) source rule quote to check Vancouver Zoning By-law s. 2 definitions and district schedules (2026): no stand-alone EV charging use — Parking Area/Garage "may include the retail sale of electricity for the purpose of charging motor vehicles" (Parking Uses conditional in I-1C, I-2, I-3, FC-2, M-1, IC-2, C-2); Urban Farm – Class B (may be in a greenhouse) conditional in all seven; no aquaculture term; Community Centre conditional in I-2, I-3, FC-2, M-1, C-2; Bulk Data Storage conditional in I-2 (not at ground floor except entrances), I-1C, FC-2, I-3 sub-area A source rule quote to check Edmonton Zoning Bylaw 20001 s. 8.10 use definitions: no EV charging use; Urban Agriculture ("hydroponic or aquaponic systems, and vertical farms") permitted in MU, IM, BE, CB, within or on a building (MU ≤600 m²); Community Service incl. shelters permitted in MU and BE (BE ≤500 m² except shelters); Minor Utility includes "district heating plants" (IM, BE); Major Utility includes "cooling plants" source
+
+Indiana Utility Regulatory Commission, Cause 46276 order (Indiana Michigan Power / Google, Fort Wayne): "The Contract also contains demand response obligations designed to reduce I&M's peak load and capacity obligations"; specified interruptible load and curtailment parameters (checked by Claude) source OPERATOR CLAIM: Enel X case study, Digital Realty Ireland: nine data centres in EirGrid DS3 frequency response; "when the grid frequency drops below 50Hz, the data centre can safely draw some power from its batteries" source VENDOR CLAIM: Fluence 2022, Google St. Ghislain, Belgium: 2.75 MW / 5.5 MWh battery replacing diesel backup and in Elia's ancillary-services market; a "proof-of-concept" source BC Hydro 2026 Call for Demand RFA: 100 + 300 MW; 10–145 MW per project; ≥10% premium; curtailment; heat-recovery-ready inside the 10% environmental weight source AESO, Operating reserve (ancillary services) source regulation Data Centre Regulation, Alta Reg 117/2026 under the Electric Utilities Act (King's Printer extract, current as of 9 Jun 2026; J.B. PDF 16 Oct 2026). s. 1: data centre includes hosting/cloud, digital asset mining, AI/ML, content delivery. s. 2: "large data centre" = maximum demand directly from the transmission system of 75 MW or more, or a lower threshold the AESO sets for reliability. s. 3: AESO may aggregate integrated data centres on the same or adjacent parcels with the same owner or affiliate. s. 5: a large data centre may be "tethered" to new or added generating units or energy storage able to supply at least its maximum demand, reliably and predictably (the Regulation does not limit the fuel; AESO's first intake does). s. 6: tethered requests processed first. s. 7: AESO may require site control, municipal zoning approvals, financing, permits or water licences. s. 8: no service above the tethered supply. s. 9: bridged service before the supply runs only once the plant is approved by the AUC, max 3 years, AESO may cap each and all bridged loads and suspend for unmet criteria. s. 10: inadequate supply — bridged data centres reduced before all other market participants; mandatory load shed — large data centres reduced before all others. s. 12: review by 31 May 2030, expires 31 May 2035 source system operator AESO, Large Load Integration Phase 2A — Proposed BYOG Process (26 Jun 2026, proposal, not final). Applies to transmission-connected loads asking for 75 MW or more of demand transmission service (DTS), site-aggregated; excludes loads under 75 MW, distribution-connected load and storage. First intake gas-fired generation only, "net new"; tethering ratio: generator output at 25 °C, 40% humidity equals DTS contract capacity. Data centres must show municipal zoning or area-structure-plan approval and accept the data-centre connection requirements. DTS commitment fee $15k/MW (refundable). Bridging before the generator runs: at most 20/30/40% of the DTS request by generator milestone, 1,600 MW across all intakes, up to 3 years; bridging load is fully interruptible, reduced before all other non-firm load to avoid a shortfall, curtailment scheme TBD (pro rata, rotation or combination); suspended for failing to curtail source system operator AESO, Large Load Integration Phase 2A BYOG Process Update, stakeholder session deck (18 Jun 2026, updated 24 Jun 2026). About 20 GW of data-centre load requested each quarter since Q2 2025 (19.2 GW Q2 2026). Phase 2 is modular: 2A BYOG, 2B ISO tariff, 2C "Grid Partners" (flexible load structures, operating procedures, market products), not yet set. Load management: data centres prioritized above other loads for reduction under supply-related conditions; in standard operation, if firm load shed is needed in an emergency, data centres reduce before all other firm loads; procedures (pro rata, blocks, rotations) to be developed. 74.9 MW applications rose from 9 (Jun 2025) to 18 (Jun 2026) in the 25–75 MW band; AESO may lower the 75 MW threshold. Distribution-connected large loads bypass BYOG; AESO has limited tools for them. Final process was planned for late July–early August 2026 source rule quote to check Vancouver Zoning By-law s. 2 definitions and district schedules (2026): no stand-alone EV charging use — Parking Area/Garage "may include the retail sale of electricity for the purpose of charging motor vehicles" (Parking Uses conditional in I-1C, I-2, I-3, FC-2, M-1, IC-2, C-2); Urban Farm – Class B (may be in a greenhouse) conditional in all seven; no aquaculture term; Community Centre conditional in I-2, I-3, FC-2, M-1, C-2; Bulk Data Storage conditional in I-2 (not at ground floor except entrances), I-1C, FC-2, I-3 sub-area A source rule quote to check Edmonton Zoning Bylaw 20001 s. 8.10 use definitions: no EV charging use; Urban Agriculture ("hydroponic or aquaponic systems, and vertical farms") permitted in MU, IM, BE, CB, within or on a building (MU ≤600 m²); Community Service incl. shelters permitted in MU and BE (BE ≤500 m² except shelters); Minor Utility includes "district heating plants" (IM, BE); Major Utility includes "cooling plants" source
+
+City of Vancouver referral report 30 Jun 2026 (111 E 5th Ave and 2060 Quebec St, CD-1, up to 40 MW): requires "an active, high-quality public realm interface"; waste heat to the NEU "a material condition of the proposed use" (proposed) source Ville de Paris, Butte-aux-Cailles pool (2017): heat recovered from a data centre warms the pool water source BC ESS / JIBC group lodging 3.5 m² per person; Edmonton shelter standard 2 m between beds; Health Canada cleaner-air spaces MERV 13+, 2–3 ACH (Formulas sheet) rule quote to check Vancouver Zoning By-law s. 2 definitions and district schedules (2026): no stand-alone EV charging use — Parking Area/Garage "may include the retail sale of electricity for the purpose of charging motor vehicles" (Parking Uses conditional in I-1C, I-2, I-3, FC-2, M-1, IC-2, C-2); Urban Farm – Class B (may be in a greenhouse) conditional in all seven; no aquaculture term; Community Centre conditional in I-2, I-3, FC-2, M-1, C-2; Bulk Data Storage conditional in I-2 (not at ground floor except entrances), I-1C, FC-2, I-3 sub-area A source rule quote to check Edmonton Zoning Bylaw 20001 s. 8.10 use definitions: no EV charging use; Urban Agriculture ("hydroponic or aquaponic systems, and vertical farms") permitted in MU, IM, BE, CB, within or on a building (MU ≤600 m²); Community Service incl. shelters permitted in MU and BE (BE ≤500 m² except shelters); Minor Utility includes "district heating plants" (IM, BE); Major Utility includes "cooling plants" source
+
+OPERATOR CLAIM: Microsoft Azure blog, Circular Centers (Amsterdam 2020; Dublin, Boydton 2022): "83 percent reuse and 17 percent recycle of critical parts" source Copper Development Association 2023, copper in data centres, 20–40 t/MW source rule quote to check Vancouver Zoning By-law s. 2 definitions and district schedules (2026): no stand-alone EV charging use — Parking Area/Garage "may include the retail sale of electricity for the purpose of charging motor vehicles" (Parking Uses conditional in I-1C, I-2, I-3, FC-2, M-1, IC-2, C-2); Urban Farm – Class B (may be in a greenhouse) conditional in all seven; no aquaculture term; Community Centre conditional in I-2, I-3, FC-2, M-1, C-2; Bulk Data Storage conditional in I-2 (not at ground floor except entrances), I-1C, FC-2, I-3 sub-area A source rule quote to check Edmonton Zoning Bylaw 20001 s. 8.10 use definitions: no EV charging use; Urban Agriculture ("hydroponic or aquaponic systems, and vertical farms") permitted in MU, IM, BE, CB, within or on a building (MU ≤600 m²); Community Service incl. shelters permitted in MU and BE (BE ≤500 m² except shelters); Minor Utility includes "district heating plants" (IM, BE); Major Utility includes "cooling plants" source
+
+industry survey register: pue (LBNL 2023; Uptime 2025 industry survey) research or government lab register: load_factor (Fan et al. 2007) research or government lab register: liquid_capture (LBNL 2014, NREL — direct-to-chip 48–75%; air-cooled: no primary figure) research or government lab register: cop (DEA 2026 waste-heat heat pumps to 70 °C, 1–3 MW: 3.0–3.6; observed at Meta Odense, 27 → 70 °C: 4.5 in 2020, about 3.9 in 2022–24 — Fjernvarme Fyn annual reports) public record register: homes_heated (NRCan CEUD 2023) public record register: grid_co2 (NIR 2026 Annex 7, consumption intensity 2024) public record Noise Control By-law 6555 ss. 2.1–2.3, Sch. A, B (Vancouver); Bylaw 14600 (Edmonton) transferred from elsewhere register: jobs (Virginia JLARC 2024, transferred; confidence 40)
+
+research or government lab register: horizons (LBNL 2024 server life; company filings; ASHRAE plant medians; EN 253 pipe life; Digital Realty contracts — operator; Stockholm Exergi heat contracts — operator).
+
+← Two cities

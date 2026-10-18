@@ -1,0 +1,22 @@
+const {chromium}=require('/tmp/claude-0/-home-claude/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/scratchpad/node_modules/playwright'); const fs=require('fs'); const SP='/tmp/claude-0/-home-claude/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/scratchpad';
+(async()=>{ const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell',args:['--use-gl=swiftshader','--enable-webgl']});
+const p=await b.newPage({viewport:{width:1440,height:900}}); const errs=[]; p.on('pageerror',e=>errs.push(e.message));
+await p.route(/three\.min\.js/,r=>r.fulfill({body:fs.readFileSync(SP+'/node_modules/three/build/three.min.js'),contentType:'application/javascript'}));
+await p.route(/OrbitControls\.js/,r=>r.fulfill({body:fs.readFileSync(SP+'/node_modules/three/examples/js/controls/OrbitControls.js'),contentType:'application/javascript'}));
+await p.route(/fonts\.(googleapis|gstatic)|jspdf|autotable|d3/,r=>r.abort());
+await p.goto('http://localhost:8765/index.html#van-2_1-23060741'); await p.waitForTimeout(9000);
+const r=await p.evaluate(async()=>{ const w=document.getElementById('welcome'); if(w) w.remove();
+ const out={}; const S=BD.S, A=S.answers;
+ const blds=(S.sel.blds||[]).filter(b=>b.f!==3); out.nb=blds.length; out.bareas=blds.map(b=>Math.round(b.a)); out.bh=blds.map(b=>b.h);
+ out.zone=S.sel.a[1]; out.lotArea=S.sel.lotArea; out.lotSrc=S.sel.lotSrc;
+ // new default
+ BD.modelReset(); let m=BD.model(); let f=BD.eng.siteFacts();
+ out.newDef={H:m.H,nF:m.nF,foot:Math.round(m.footArea),gross:f.gross,mw:f.mw,LN:{n:m.loadingNeed.n,basis:m.loadingNeed.basis},fsr:m.Z.fsr};
+ A.subB='1'; BD.modelReset(); m=BD.model(); f=BD.eng.siteFacts(); out.subB={fsr:m.Z.fsr,H:m.H,foot:Math.round(m.footArea),gross:f.gross,how:f.how}; A.subB='';
+ A.built='existing'; BD.modelReset(); m=BD.model(); f=BD.eng.siteFacts();
+ out.exist={footArea:Math.round(m.footArea),feet:m.feet?m.feet.length:null,engFoot:Math.round(f.foot),gross:f.gross,how:f.how,H:m.H,nF:m.nF};
+ BD.setup.card(2); out.step2=document.getElementById('drawer').innerText.slice(0,400);
+ out.summary=BD.setupHTML().replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').slice(0,500);
+ out.plantBoxes=m.plant&&m.plant.boxes?m.plant.boxes.filter(b=>b.kind==='yard').length:null;
+ return out; });
+r.errs=errs; console.log(JSON.stringify(r,null,1)); await b.close(); })();

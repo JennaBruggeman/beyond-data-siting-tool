@@ -1,0 +1,62 @@
+{
+ "arg": "0",
+ "errs": [],
+ "answers": {
+  "built": "new",
+  "extent": "whole",
+  "floor": "",
+  "host": {},
+  "mw": null,
+  "foot": "max",
+  "cover": 70,
+  "hmode": "out",
+  "plantAt": "roof",
+  "outside": "dry",
+  "inside": "air",
+  "spares": "n1",
+  "gens": "yes",
+  "genAt": "yard",
+  "genSpares": "n1"
+ },
+ "facts": {
+  "city": "van",
+  "roof": 4315.28865,
+  "H": 18.3,
+  "foot": [
+   3011.0000000000628,
+   2473.4999999999986,
+   3011,
+   2473.4999999999995,
+   3010.3485141751476,
+   2417.797961975104,
+   3089.0444424938914,
+   2416.8775417608495,
+   3089.5,
+   2472
+  ],
+  "plantRoof": 13,
+  "R": {
+   "pue": [
+    1.4,
+    1.55
+   ],
+   "lf": 0.6
+  }
+ },
+ "energy_dry": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nPower in, power offered\n\nA customer first. What it can give back is flexibility, and only the operator can give it.\n\n1.4–1.6 MW\naverage power at the meter\n7.4–8.1 GWh\na year\n$0.7–0.8M\na year on BC Hydro large general service\n133–147 t\nCO₂e a year at 18.1 g/kWh\nHow it compares\nthe same servers, conventional here, at two real data centres and on both worked-example lots\nWhat could connect\n4: Getting connected to the grid; Standby generators; Flexibility for the grid…\nWhat could be added\noff until you add them — 5: Solar on the roof; Solar on the south wall; A battery for the grid; Offer UPS batteries to the grid…\nSources are in each card.\nCooling · assumed air inside, dry coolers on the roof Change › Seen or hidden ›\n← Pick a site\nKeep the defaults →",
+ "pv_dry": "← Set up the site\nAdd-on · energy\nSolar on the roof\n\nbuilt elsewhere Equinix ME1 Melbourne, 1 MW rooftop (operator claim). None found in Canada.\n\nSizing\nPanels\n1,176 m² in 98 rows of 6 × 2 m, where the roof is free of plant and its clearances more\nRated\n188–235 kWp at 0.16–0.20 kWp per m² of panel (NREL)\nA year\n168–237 MWh (892–1,006 kWh per kWp, flat to latitude tilt, NRCan)\nShare of its own use\n2.1–3.2 % — small at data-centre densities\nMonth by month\n0\n62\n123\nJ\nF\nM\nA\nM\nJ\nJ\nA\nS\nO\nN\nD\nThe south wall instead\n\nAbout 1,448 m² of south-facing wall in total (the whole wall, as an upper bound); more\n\nCost and payback\nInstalled\n$357,504–564,480 at $1.9–2.4/W (NRCan / IEA PVPS Canada 2024, by size)\nSaved a year\n$11,396–16,066 at BC Hydro's 6.79 ¢/kWh energy charge (demand and wires charges not included)\nSimple payback\nabout 22–50 years — rough; it ignores degradation (0.5–0.7%/yr), O&M (about US$21/kW a year) and any change in prices\nRules\nVancouver\tallowed with approval\nexport ≤100 kW per phase at 10 ¢/kWh (RS 2289), only for sites supplied at distribution voltage — not for a large data centre on transmission service (RS 1830); extra height at the Director of Planning's discretion (s. 10.1.1(d); bulletin, Nov 2022)\n\nEdmonton\tallowed\nno development permit for a compliant solar collector (ZB 20001 s. 7.120 cl. 3.7); collectors must stay inside the roof edge; the 1.5 m height allowance is written for residential zones only, so industrial zones are not addressed — City to confirm (s. 5.10 cl. 11); self-supply exempt only when used on the property (EUA s. 2(1)(b), consolidated 2026); anything leaving the site goes through the power pool (s. 18(2)) or micro-generation ≤5 MW\nWho gains, who gives up\nThe operator\na small cut in its electricity bill; gives up roof space it may want for plant\nThe grid\na little less daytime demand in summer, almost none in winter\nNeighbours\nnothing measurable found\nRemove\nSources (2)",
+ "pvlay_dry": {
+  "mw": null
+ },
+ "water_dry": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nWater in, water out\n\nFrom almost none to a great deal: it depends on the cooling.\n\nnone\nevaporated a year, at most (dry coolers)\n—\nmake-up water a year (2–6 cycles)\n4,003 m³\nrain on the roof a year\n9,198–136,866 m³\nwater behind its electricity a year (BC generation shares by source not found; hydro is about 86% of capacity, so nearer the hydro end)\n\nWater hardness sets how often tower water must be bled off: Edmonton's treated water is about 178 mg/L as CaCO₃ more\n\nHow it compares\nthe same servers, conventional here, at two real data centres and on both worked-example lots\nWhat could connect\n4: Reclaimed water from a treatment plant; Blowdown to the sewer; Neighbours' greywater; Blackwater\nWhat could be added\nRainwater for cooling built elsewhere Vancouver allowed Edmonton allowed with approval\nWater mains and sewer connections are not drawn.\nCooling · assumed air inside, dry coolers on the roof Change › Seen or hidden ›\n← Pick a site\nKeep the defaults →",
+ "blowdown_dry": "← Solar on the roof\nWater · connection\nBlowdown to the sewer\n\nnone with dry coolers\n\nRules\nVancouver\tallowed\ninternal process\n\nEdmonton\tallowed\ninternal process\nHow proven\n\nbuilt elsewhere Quincy Water Reuse Utility, operating since 2021 (US EPA).\n\nSources",
+ "blackwater_dry": "← Blowdown to the sewer\nWater · connection\nBlackwater\n\nnot permitted in buildings\n\nRules\nVancouver\tnot allowed\nnot permitted (VBBL 2025 Art. 2.7.1.2(2)(f))\n\nEdmonton\tallowed with approval\nalternative solution needed; Alberta Environment authorisation likely (Alberta notice, 2021)\nHow proven\n\nspeculative None found.\n\nSources",
+ "energy_towers": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nPower in, power offered\n\nA customer first. What it can give back is flexibility, and only the operator can give it.\n\n1.4–1.6 MW\naverage power at the meter\n7.4–8.1 GWh\na year\n$0.7–0.8M\na year on BC Hydro large general service\n133–147 t\nCO₂e a year at 18.1 g/kWh\nHow it compares\nthe same servers, conventional here, at two real data centres and on both worked-example lots\nWhat could connect\n4: Getting connected to the grid; Standby generators; Flexibility for the grid…\nWhat could be added\noff until you add them — 5: Solar on the roof; Solar on the south wall; A battery for the grid; Offer UPS batteries to the grid…\nSources are in each card.\nCooling air inside, cooling towers on the roof Change › Seen or hidden ›\n← Pick a site\nKeep the defaults →",
+ "pv_towers": "← Blackwater\nAdd-on · energy\nSolar on the roof\n\nbuilt elsewhere Equinix ME1 Melbourne, 1 MW rooftop (operator claim). None found in Canada.\n\nSizing\nPanels\n1,608 m² in 134 rows of 6 × 2 m, where the roof is free of plant and its clearances more\nRated\n257–322 kWp at 0.16–0.20 kWp per m² of panel (NREL)\nA year\n229–324 MWh (892–1,006 kWh per kWp, flat to latitude tilt, NRCan)\nShare of its own use\n2.8–4.4 % — small at data-centre densities\nMonth by month\n0\n62\n123\nJ\nF\nM\nA\nM\nJ\nJ\nA\nS\nO\nN\nD\nThe south wall instead\n\nAbout 1,448 m² of south-facing wall in total (the whole wall, as an upper bound); more\n\nCost and payback\nInstalled\n$432,230–713,952 at $1.68–2.22/W (NRCan / IEA PVPS Canada 2024, by size)\nSaved a year\n$15,583–21,968 at BC Hydro's 6.79 ¢/kWh energy charge (demand and wires charges not included)\nSimple payback\nabout 20–46 years — rough; it ignores degradation (0.5–0.7%/yr), O&M (about US$21/kW a year) and any change in prices\nRules\nVancouver\tallowed with approval\nexport ≤100 kW per phase at 10 ¢/kWh (RS 2289), only for sites supplied at distribution voltage — not for a large data centre on transmission service (RS 1830); extra height at the Director of Planning's discretion (s. 10.1.1(d); bulletin, Nov 2022)\n\nEdmonton\tallowed\nno development permit for a compliant solar collector (ZB 20001 s. 7.120 cl. 3.7); collectors must stay inside the roof edge; the 1.5 m height allowance is written for residential zones only, so industrial zones are not addressed — City to confirm (s. 5.10 cl. 11); self-supply exempt only when used on the property (EUA s. 2(1)(b), consolidated 2026); anything leaving the site goes through the power pool (s. 18(2)) or micro-generation ≤5 MW\nWho gains, who gives up\nThe operator\na small cut in its electricity bill; gives up roof space it may want for plant\nThe grid\na little less daytime demand in summer, almost none in winter\nNeighbours\nnothing measurable found\nRemove\nSources (2)",
+ "pvlay_towers": {
+  "mw": null
+ },
+ "water_towers": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nWater in, water out\n\nFrom almost none to a great deal: it depends on the cooling.\n\n12,220 m³\nevaporated a year, at most\n14,664–24,440 m³\nmake-up water a year (2–6 cycles)\n4,003 m³\nrain on the roof a year\n9,198–136,866 m³\nwater behind its electricity a year (BC generation shares by source not found; hydro is about 86% of capacity, so nearer the hydro end)\n\nWater hardness sets how often tower water must be bled off: Edmonton's treated water is about 178 mg/L as CaCO₃ more\n\nHow it compares\nthe same servers, conventional here, at two real data centres and on both worked-example lots\nWhat could connect\n4: Reclaimed water from a treatment plant; Blowdown to the sewer; Neighbours' greywater; Blackwater\nWhat could be added\nRainwater for cooling built elsewhere Vancouver allowed Edmonton allowed with approval\nWater mains and sewer connections are not drawn.\nCooling air inside, cooling towers on the roof Change › Seen or hidden ›\n← Pick a site\nKeep the defaults →",
+ "blowdown_towers": "← Solar on the roof\nWater · connection\nBlowdown to the sewer\n\n2,444–12,220 m³ a year\n\nRules\nVancouver\tallowed\ninternal process\n\nEdmonton\tallowed\ninternal process\nHow proven\n\nbuilt elsewhere Quincy Water Reuse Utility, operating since 2021 (US EPA).\n\nSources",
+ "blackwater_towers": "← Blowdown to the sewer\nWater · connection\nBlackwater\n\nnot permitted in buildings\n\nRules\nVancouver\tnot allowed\nnot permitted (VBBL 2025 Art. 2.7.1.2(2)(f))\n\nEdmonton\tallowed with approval\nalternative solution needed; Alberta Environment authorisation likely (Alberta notice, 2021)\nHow proven\n\nspeculative None found.\n\nSources"
+}

@@ -1,0 +1,134 @@
+{
+ "new": {
+  "nF": [
+   3,
+   3
+  ],
+  "H": 18.3,
+  "Zground": true,
+  "fsr": [
+   3,
+   3
+  ],
+  "lot": 5845,
+  "mwSized": 8.906666666666666,
+  "prov": true,
+  "lines": [
+   "Sized for <b>8.9 MW</b> of servers (the low end of what fits; set a size on the What fits page): heat to reject ≈ 8.9 × PUE 1.55 = <b>13.8 MW</b> at peak.",
+   "12 dry coolers carry it; with spares, <b>13</b>. Placed: 13 on the roof, 0 in the yard.",
+   "Each unit about 12 × 2.4 m, 2.9 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
+   "<span class=\"src\">Dry coolers: a 12 m V-type unit, 12 × 2.4 m, about 2.9 m high; 24.5 m² of unit per MW of heat (register: component_space, manufacturer claims), so about 1.2 MW a unit — within the 71–1,372 kW range EVAPCO lists for units up to 12 m (manufacturer claim). Clearances for V-coil units 30–40 ft long: 0.9 m end to wall, 2.1 m side to wall, 1.8 m end to end, 4.3 m side to side; the top of the unit level with or above any wall around it (EVAPCO eco-Air layout manual, 2026).</span>"
+  ],
+  "gen": [
+   "7 generator sets of about 2 MW carry 13.8 MW; with spares, <b>8</b>. Placed: 0 on the roof, 4 in the yard.",
+   "Each about 13.9 × 2.7 m, 5 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).",
+   "<span class=\"src\">Standby generator sets in enclosures: about 2 MW — 13.9 × 2.7 m, up to 5.0 m high; 0.6–1 MW — up to 8.6 × 2.5 m, 3.7 m high (manufacturer data sheets, claims). 1 m clear around each set (Cummins application manual); 1.5 m from wall openings and combustible walls (NFPA 37 s. 4.1.4, a US standard; Vancouver points to CSA C282, not read).</span>"
+  ],
+  "short": "Doesn't fit: 4 of 8 generators do not fit in the yard. Try for the generators: a smaller footprint (set the coverage in step 2) or the roof; or a smaller size.",
+  "fmw": [
+   6.6376529831391355,
+   30.04110186334523
+  ],
+  "how": "lot 5,845 m² × floor-space ratio 3",
+  "fits": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nWhat fits here\n\nHow much data centre this lot could hold, as ranges, before anyone decides what to do with its heat.\n\nFloor area\nAvailable: 13,068 m²\nRoom for servers\nData hall: 4,182–6,273 m² if the ground floor holds none of the data centre\nLargest data centre that fits\n6.6–30 MW of servers\nWhat that size needs\nAverage power drawn: 8.4–9.3 MW at the meter (servers × PUE 1.4–1.55; PUE is a yearly average, so peak demand is higher)\nAll the detail\n← Set up the site\nNext: Real buildings →"
+ },
+ "retrofit": {
+  "nF": [
+   1,
+   1
+  ],
+  "H": 6.2,
+  "Zground": true,
+  "fsr": [
+   3,
+   3
+  ],
+  "lot": 5845,
+  "mwSized": 0.1,
+  "prov": true,
+  "lines": [
+   "Sized for <b>0.1 MW</b> of servers (the low end of what fits; set a size on the What fits page): heat to reject ≈ 0.1 × PUE 1.55 = <b>0.2 MW</b> at peak.",
+   "1 dry coolers carry it; with spares, <b>2</b>. Placed: 2 on the roof, 0 in the yard.",
+   "Each unit about 12 × 2.4 m, 2.9 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
+   "<span class=\"src\">Dry coolers: a 12 m V-type unit, 12 × 2.4 m, about 2.9 m high; 24.5 m² of unit per MW of heat (register: component_space, manufacturer claims), so about 1.2 MW a unit — within the 71–1,372 kW range EVAPCO lists for units up to 12 m (manufacturer claim). Clearances for V-coil units 30–40 ft long: 0.9 m end to wall, 2.1 m side to wall, 1.8 m end to end, 4.3 m side to side; the top of the unit level with or above any wall around it (EVAPCO eco-Air layout manual, 2026).</span>"
+  ],
+  "gen": [
+   "1 generator set of about 1 MW carry 0.2 MW; with spares, <b>2</b>. Placed: 0 on the roof, 2 in the yard.",
+   "Each about 8.6 × 2.5 m, 3.7 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).",
+   "<span class=\"src\">Standby generator sets in enclosures: about 2 MW — 13.9 × 2.7 m, up to 5.0 m high; 0.6–1 MW — up to 8.6 × 2.5 m, 3.7 m high (manufacturer data sheets, claims). 1 m clear around each set (Cummins application manual); 1.5 m from wall openings and combustible walls (NFPA 37 s. 4.1.4, a US standard; Vancouver points to CSA C282, not read).</span>"
+  ],
+  "short": "",
+  "fmw": [
+   1.4903809523809524,
+   4.8565862068965515
+  ],
+  "how": "footprint 1,956 m² × about 1 storeys (height 6.2 m ÷ 4 m — an assumption)",
+  "fits": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nWhat fits here\n\nHow much data centre this building could hold, as ranges, before anyone decides what to do with its heat.\n\nFloor area\nAvailable: 1,956 m²\nRoom for servers\nData hall: 939–1,408 m²\nLargest data centre that fits\n1.5–4.9 MW of servers\nWhat that size needs\nAverage power drawn: 2.1–2.3 MW at the meter (servers × PUE 1.4–1.55; PUE is a yearly average, so peak demand is higher)\nAll the detail\n← Set up the site\nNext: Real buildings →"
+ },
+ "lease": {
+  "nF": [
+   1,
+   1
+  ],
+  "H": 6.2,
+  "Zground": true,
+  "fsr": [
+   3,
+   3
+  ],
+  "lot": 5845,
+  "mwSized": 0.1,
+  "prov": true,
+  "lines": [
+   "Sized for <b>0.1 MW</b> of servers (the low end of what fits; set a size on the What fits page): heat to reject ≈ 0.1 × PUE 1.55 = <b>0.2 MW</b> at peak.",
+   "1 dry coolers carry it; with spares, <b>2</b>. Placed: 2 on the roof, 0 in the yard.",
+   "Each unit about 12 × 2.4 m, 2.9 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
+   "<span class=\"src\">Dry coolers: a 12 m V-type unit, 12 × 2.4 m, about 2.9 m high; 24.5 m² of unit per MW of heat (register: component_space, manufacturer claims), so about 1.2 MW a unit — within the 71–1,372 kW range EVAPCO lists for units up to 12 m (manufacturer claim). Clearances for V-coil units 30–40 ft long: 0.9 m end to wall, 2.1 m side to wall, 1.8 m end to end, 4.3 m side to side; the top of the unit level with or above any wall around it (EVAPCO eco-Air layout manual, 2026).</span>"
+  ],
+  "gen": [
+   "1 generator set of about 1 MW carry 0.2 MW; with spares, <b>2</b>. Placed: 0 on the roof, 2 in the yard.",
+   "Each about 8.6 × 2.5 m, 3.7 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).",
+   "<span class=\"src\">Standby generator sets in enclosures: about 2 MW — 13.9 × 2.7 m, up to 5.0 m high; 0.6–1 MW — up to 8.6 × 2.5 m, 3.7 m high (manufacturer data sheets, claims). 1 m clear around each set (Cummins application manual); 1.5 m from wall openings and combustible walls (NFPA 37 s. 4.1.4, a US standard; Vancouver points to CSA C282, not read).</span>"
+  ],
+  "short": "",
+  "fmw": [
+   1.0215238095238095,
+   3.328758620689655
+  ],
+  "how": "one floor ≈ the largest footprint on the lot (1,341 m²)",
+  "fits": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nWhat fits here\n\nHow much data centre this building could hold, as ranges, before anyone decides what to do with its heat.\n\nFloor area\nAvailable: 1,341 m²\nRoom for servers\nData hall: 644–965 m²\nLargest data centre that fits\n1.0–3.3 MW of servers\nWhat that size needs\nAverage power drawn: 1.4–1.6 MW at the meter (servers × PUE 1.4–1.55; PUE is a yearly average, so peak demand is higher)\nAll the detail\n← Set up the site\nNext: Real buildings →"
+ },
+ "new-hybrid-yard": {
+  "nF": [
+   3,
+   3
+  ],
+  "H": 18.3,
+  "Zground": true,
+  "fsr": [
+   3,
+   3
+  ],
+  "lot": 5845,
+  "mwSized": 8.906666666666666,
+  "prov": true,
+  "lines": [
+   "Sized for <b>8.9 MW</b> of servers (the low end of what fits; set a size on the What fits page): heat to reject ≈ 8.9 × PUE 1.55 = <b>13.8 MW</b> at peak.",
+   "21 hybrid coolers carry it (at the low end of 0.67–1.37 MW a unit; 11 at the high end); with spares, <b>22</b>. Placed: 0 on the roof, 22 in the yard.",
+   "Each unit about 12 × 2.8 m, 2.5 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
+   "<span class=\"src\">Hybrid (adiabatic) coolers: about 12 × 2.8 m, 2.5 m high, 0.67–1.37 MW a unit (EVAPCO 270B adiabatic models; BAC TrilliumSeries — manufacturer claims); the tool sizes for the low end. Same clearances as dry coolers; \"They cannot be elevated in lieu of spacing\" (EVAPCO).</span>"
+  ],
+  "gen": [
+   "7 generator sets of about 2 MW carry 13.8 MW; with spares, <b>8</b>. Placed: 0 on the roof, 5 in the yard.",
+   "Each about 13.9 × 2.7 m, 5 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).",
+   "<span class=\"src\">Standby generator sets in enclosures: about 2 MW — 13.9 × 2.7 m, up to 5.0 m high; 0.6–1 MW — up to 8.6 × 2.5 m, 3.7 m high (manufacturer data sheets, claims). 1 m clear around each set (Cummins application manual); 1.5 m from wall openings and combustible walls (NFPA 37 s. 4.1.4, a US standard; Vancouver points to CSA C282, not read).</span>"
+  ],
+  "short": "Doesn't fit: 3 of 8 generators do not fit in the yard. Try for the generators: a smaller footprint (set the coverage in step 2) or the roof; or a smaller size.",
+  "fmw": [
+   2.395555409102645,
+   10.841953360162833
+  ],
+  "how": "lot 5,845 m² × floor-space ratio 3",
+  "fits": "1Site\n2What fits\n3Exchanges\n4Opportunities\n5Options\n6Report\nWhat fits here\n\nHow much data centre this lot could hold, as ranges, before anyone decides what to do with its heat.\n\nFloor area\nAvailable: 4,716 m²\nRoom for servers\nData hall: 1,509–2,264 m² if the ground floor holds none of the data centre\nLargest data centre that fits\n2.4–11 MW of servers\nWhat that size needs\nAverage power drawn: 3.5–3.9 MW at the meter (servers × PUE 1.4–1.55; PUE is a yearly average, so peak demand is higher)\nAll the detail\n← Set up the site\nNext: Real buildings →"
+ }
+}

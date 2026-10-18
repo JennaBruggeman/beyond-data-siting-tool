@@ -1,0 +1,72 @@
+bartlett2025 :: Bartlett, C. (2025), Waste Heat Recovery and Utilization Potential from Data Centres in Alberta, MSc research project (Sustainable Energy Development), University of Calgary, supervisor G. Doluweera (J.B. upload 16 Oct 2026): modelled, not built — 11,879 MW of proposed data centres seeking AESO interconnection; immersion cooling with coolant outlet 60 °C, heat-exchanger efficiency 100%, transfer efficiency 68% (Luo et al. 2019) → 490 MWh of recoverable heat per MW of IT load per month; about 1,175 t CO2e/yr and $65,280/yr of natural gas displaced per MW (Alberta factors); "Alberta has few established district heating networks", naming the University of Alberta system and Calgary District Heating (6 of 15 million ft² served); cites Alberta's AI Data Centre Strategy (2024), pillar 2, which intends to "explore waste heat capture and utilization". No built Alberta data-centre heat-reuse case reported — https://ucalgary.scholaris.ca/server/api/core/bitstreams/8f66f77b-d1cd-4408-aad2-9cbb3076bcbc/content
+
+bcucC113 :: BCUC Order C-1-13 with Reasons (Feb 2013), FortisBC Alternative Energy Services, TELUS Garden thermal energy system, pp.14–19: 'A year round base load of 1,400 kW of heat is available on a 24/7 basis' from the TELUS data centre; development load 5,194 MWh heating / 4,591 MWh cooling; 94 % of heating from recovery, steam peaking; TES capital $7.9 M, waste-heat option $3.2 M vs geo-exchange $6.8 M; 'free waste heat supply from the TELUS Data Centre'; customer rate BC Hydro residential + 5–10 % (G-155-12: $0.105–0.126/kWh 2014–18); annual actual-load report rescinded by G-2-15 — https://www.ordersdecisions.bcuc.com/bcuc/orders/en/118621/1/document.do
+
+bcucTelus :: BCUC Order C-1-13 (4 Feb 2013), G-155-12, G-2-15 (9 Jan 2015): TELUS Garden thermal energy system (FortisBC Alternative Energy Services) — https://www.ordersdecisions.bcuc.com/bcuc/orders/en/118621/1/document.do
+
+bytes2heat :: DENEFF / IER Stuttgart, Bytes2Heat Best-Practice-Übersicht (2023): Telehouse FRANKY 35 MW DC → Westville 2,400 MWh/yr, 2 × 320 kWth HPs, 30 → 70 °C, 15-yr contract; ReUseHeat Braunschweig 300 kWth, COP 3.6 design, 25/18 → 70/40 °C, 1,750 MWh/yr, €460k; HLRS 270 MWh/yr — https://deneff.org/wp-content/uploads/2023/05/Bytes2Heat-Best-Practice-Uebersicht.pdf
+
+codemaTallaght :: Codema (Dublin energy agency), Tallaght District Heating Scheme: "uses waste heat from the nearby Amazon data centre"; "Phase 1 of the scheme has been operational since 2023"; 3,770 MWh in the first year; almost 1,100 t CO2 saved in 2023 (checked by Claude) — https://www.codema.ie/our-work/tallaght-district-heating-scheme/
+
+dfKatalog2022 :: Dansk Fjernvarme, Inspirationskatalog for store varmepumper 2022, pp.8–11 (Tietgenbyens Varmecentral): nominal 23.9 + 20.7 MW, nominal COP 4.4 / 4.9, source 27→15 °C, DH 40→75 °C, 5,000–7,000 full-load h, average COP 2021–22 4.2 'inklusive cirkulations- og distributionspumper', investment 215 M DKK, DH output ≈ 30 % above DC-side heat — trade-association catalogue written with the utility — https://danskfjernvarme.dk/media/eqbhcqlv/inspirationskatalog-for-store-varmepumper-2022.pdf
+
+dkPriceCap :: Forsyningstilsynet, 2025 surplus-heat price cap 95 DKK/GJ — https://forsyningstilsynet.dk/Media/638660516540345737/Udmeldelse%20af%20prisloft%20for%20overskudsvarme%202025.pdf
+
+en253Life :: Energiforsk 2022:872 (RISE): 'EN 253 (2019) states that the service life shall be 30 years at 120 °C'; 'If a service life of 50 years is desired, the temperatures must be below 115 °C' (p.32) — https://energiforsk.se/media/31455/liftetime-predictions-and-status-assessments-energiforskrapport-2022-872.pdf
+
+energiforsk2020 :: Energiforsk 2020:681, prosumer contract structures (Öppen Fjärrvärme) — https://energiforsk.se/media/28252/verktygslada-for-prosumtion-inom-fjarrvarme-energiforskrapport-2020-681.pdf pp.12–27
+
+engiePA10 :: Engie Solutions / SMIREC press releases 2022 and 21 Jun 2024 (Equinix PA10 → Plaine Commune Énergie): water recovered at 28 °C, up to 6.6 MW, 10,800 MWh/yr projected, €5.7 M investment, heat supplied free for 15 years — utility release — https://engie-solutions.com/sites/default/files/assets/2024-06/cp_mise_en_service_officielle_de_la_sous-station_equinix_vdef_v2.pdf
+
+equinixTR5 :: Equinix press release 5 Jun 2024 and blog 24 Apr 2025: TR5 heat to Markham District Energy (operator claim) — https://investor.equinix.com/news-events/press-releases/detail/1044/help-us-heat-our-neighbors---equinix-makes-data-center
+
+euReg2024_1364 :: Commission Delegated Regulation (EU) 2024/1364 (14 Mar 2024) under EED 2023/1791: data centres ≥ 500 kW IT report E_DC, E_IT (EN 50600-4-2), waste heat reused E_REUSE per EN 50600-4-6 (outside the boundary only, at the handoff), average waste-heat temperature T_WH at the computer-room exchanger; Annex III ERF = E_REUSE ÷ E_DC — https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1364
+
+exergi :: Stockholm Exergi: 'indikativt 2 MSEK årligen för 1 MW vid 5 000 timmar' → 400 SEK/MWh; supply normally 68 °C — https://www.stockholmexergi.se/wp-content/uploads/2023/05/Produktblad_tjanster_Oppen-Fjarrvarme.pdf
+
+exergiAR2023 :: Stockholm Exergi, Års- och hållbarhetsredovisning 2023 p.20 (117 GWh recovered from Stockholm Data Parks and Öppen Fjärrvärme in 2023); Covenant of Mayors case study 2023 (~EUR 190,000 per year per MW delivered); Energiforsk 2020:681 pp.12–17 (75 GWh from data halls 2018; Bahnhof Pionen 600 kW at 68 °C; meter owned by Exergi; hourly avoided-cost price) — https://www.stockholmexergi.se/wp-content/uploads/2024/03/Arsredovisning-2023_SV_240326_sidor.pdf
+
+femp :: US DOE FEMP BMP #10: evaporation ≤ Q ÷ h_fg (~1.5 L/kWh); blowdown = E ÷ (C−1); WUE (ISO 30134-9) (Formulas sheet)
+
+fjfAars2020 :: Fjernvarme Fyn, Årsberetning 2020, p.9 production table and p.13: 'Varmepumperne tilknyttet Facebook har forbrugt 14.020 MWh el svarende til COP 4,5'; 230 TJ heat (Facebook heat pumps only, first full year) — https://www.fjernvarmefyn.dk/media/1754/fjernvarme_fyn_aarsberetning_2020.pdf
+
+heatPhys :: Heat ≈ electricity drawn; Q = V × 1.16 × ΔT (Green Grid WP29); ISO/IEC 30134-6 ERF (Formulas sheet)
+
+iso30134_6 :: ISO/IEC 30134-6:2021 Energy reuse factor (read in the BIS identical-adoption text, Oct 2023): ERF = E_Reuse ÷ E_DC, 0–1; only energy reused outside the data-centre boundary counts (cl.4); heat pumps outside the boundary 'shall not be included in the calculation' (cl.5); measured 'at the logical boundary of the data centre at the handoff point' by flow and temperature rise (cl.6); Annex A.1.5.3: heat-pump output is not reusable energy as it contains the pump's electricity — https://services.bis.gov.in/tmp/LITD39622436_17102023_1.pdf
+
+lorenz :: Lorenz COP, η 0.50–0.60 (Reinholdt et al. 2018; Pieper et al. 2020); air 25–35 °C, liquid 50–60 °C (Alissa; Wahlroos) (Formulas sheet)
+
+mainovaWestville :: Mainova (utility) press release 8 Jul 2021: Westville, Frankfurt (about 1,300 homes), at least 60% of heat from the Telehouse data centre; "Der Beginn der Wärmelieferung ist ab Anfang 2023 vorgesehen" — https://www.mainova.de/resource/blob/76624/8658ad28e9ad7ddaf86445e6a84ff960/pm-08072021-rz-abwaermenutzung-westville-data.pdf
+
+mfrDryCooler :: Dry coolers, generic ranges from manufacturer data sheets (Alfa Laval VDM / SOLAR Max leaflets; EVAPCO eco-Air 270B; Vertiv drycooler manual; LU-VE, Güntner pages): about 20–2,700 kW per unit; length 1.6–12 m, width 1.15–2.5 m, height 1.45–2.9 m; 160 kg to 10.6 t operating. Ratings at standard conditions, not data-centre conditions — https://www.evapco.com/sites/evapco.com/files/2020-05/eco-Air-Coolers%20270B%20Dry%20Cooling.pdf
+
+neu9552 :: False Creek NEU By-law 9552 Sch. C: energy charge $65.172/MWh; credit for heat returned = 50% → $32.59/MWh — https://bylaws.vancouver.ca/9552c.PDF
+
+neuTraced :: NEU service area traced 15 Oct 2026 from By-law 9552 Schedule A (300 dpi render; boundary extracted from the bold line; georeferenced to street centrelines from City parcel addresses — Cambie, Alberta, Ontario, Main, Glen, Clark; W 3rd, W 4th, W 7th, E 5th, E 6th; one scale, north up; residuals up to ±45 m) — data/networks/van_neu_9552_traced.geojson. Approximate: parcels within ~50 m of the line are reported as on the edge.
+
+nivosMantsala :: Nivos (Mäntsälä utility) articles 2016/2019 and 9 Mar 2022; Sitra case 18 Oct 2019; NIB loan page 21 Oct 2019: DC power demand ~15 MW (phase 1), heat recovery nominal ~6 MW, 4.0 MW heat pump (2015), 20 GWh delivered 2018 = 54 % of town demand, 30 GWh/yr programme figure, exhaust ~37 °C → 80 °C, gas −70 %, DH price −11 % — utility/programme reports — https://nivos.fi/ajankohtaista/paikallisen-datakeskuksen-kanssa-yhteistyossa-luotu-ekosysteemi-lammittaa-mantsalassa/ ; https://www.nib.int/loan/nivos-energia-oy-22822
+
+parssinen :: Pärssinen et al. 2019: heat-pump capex €60 k / €575 k (2 MW) / €5.5 M; DH pays marginal cost − €5/MWh; payback 1.8–5.1 yr — https://acris.aalto.fi/ws/portalfiles/portal/29723097/ELEC_parssinen_et_al_waste_heat_sustainability.pdf
+
+quebecQScale :: Québec MELCCFP (waste-heat coordinator), Vecteur Environnement, Mar 2026: QScale Lévis heat to a 12 ha greenhouse park (Les fraises de l'île d'Orléans), under construction — https://cdn-contenu.quebec.ca/cdn-contenu/environnement/rejets-thermiques/developpper-ia-decarboner-quebec.pdf
+
+rvoCases2018 :: RVO / Nederland ICT, Restwarmte uit datacenters – succesvoorbeelden (Feb 2018) pp.12–15 and Berenschot (Mar 2018): APG Heerlen 520 kW DC, 8,900 GJ extracted, Mijnwater network 16/28 °C, ≈€1.5 M; Eindhoven and Hengelo kW-scale gas heat pumps to 55 °C — https://www.bouwstenen.nl/sites/default/files/uploads/Rapportage-Restwarmte-uit-datacenters.pdf
+
+seaiTallaght :: SEAI case study, Tallaght District Heating: "the planned addition of large thermal energy stores" — https://seai.ie/case-studies/tallaght-district-heating
+
+skatOverskud :: Skattestyrelsen, Juridisk vejledning E.A.4.6.10.2–3: electricity in heat pumps recovering surplus heat 'skal måles hver for sig'; the surplus-heat supplier is responsible for metering; heat measured at the heat-pump outlet with 3 × electricity deducted — https://www.tax.dk/jv-2024-1/ea/E_A_4_6_10_3.htm
+
+tallaghtD22 :: ENABLE DHC D2.2 Tallaght (2025) pp.5–8 and Codema project page: 3,770 MWh distributed in the first year (2023) from a 3 MW heat pump (Heat Works CLG, SDCC-owned); source ~25 °C, network 70/55 °C; heat supplied by AWS free; customer tariff fixed + kWh — https://enabledhc.ambienteitalia.it/wp-content/uploads/2025/06/D2.2-Tallaght.pdf ; https://www.codema.ie/our-work/tallaght-district-heating-scheme/
+
+teliaHKI2024 :: Telia, Helsinki Data Center cooling options for AI/GPU loads (operator PDF), pp.4–6: 24 MW IT / 100 MW total; module 5 MW cooling → 6.5 MW heat; snapshot 29 May 2024: 5.65 MW to DH (4.11 waste heat + 1.45 added), COP 3.9, PUE 1.152, ERF 0.75; loop 20 / 32 °C, DH 75–85 °C — OPERATOR CLAIM, one-day point measurement — https://www.telia.fi/dam/jcr:3e4b6c78-a106-4364-9a91-97e36e8a77c1/Telia-Helsinki-Datacenter-cooling-options-for-AI-GPU-loads.pdf
+
+ulavalCVD :: Université Laval, Étude de cas – Centre de valorisation des données (Sept 2021) pp.9–10, 14–15, 24: Colosse heat recovery 1,150,000 kWh/yr to the campus chilled-water loop, water-to-water heat pumps to 40 °C, COP 'de l'ordre de 7', 130,000 m³ gas/yr saved, PUE 1.28 measured over a year — https://transformation-numerique.ulaval.ca/wp-content/uploads/2023/05/etude-de-cas-centre-de-valorisation-des-donnes-universite-laval-septembre-2021.pdf
+
+van9552 :: City of Vancouver Energy Utility System By-law 9552, consolidated to By-law 14524 (effective 1 Jan 2026): Schedule A service area; s. 2.1 compulsory use; s. 5.2(a)(v) cooling-system heat recovery allowed; Schedule C charges and 50% credit for returned heat — data/raw/van/9552c.pdf
+
+vanNESmap2020 :: City of Vancouver, Established Neighbourhood Energy Systems in Vancouver (map, last updated March 2020; J.B. upload 16 Oct 2026): False Creek NEU (City; connection required, By-law 9552), Creative Energy downtown and south downtown, River District (East Fraser Lands), VGH and Children's and Women's campuses (PHSA), and on-site systems at Arbutus Centre, Marine Gateway, Marpole Village, MC2, Pearson Dogwood, Shannon Mews. "Boundaries are provided for illustrative purposes only." Vector shapes placed by fitting the NEU shape to the By-law 9552 trace; checked within about 150 m against hospital and River District positions — https://vancouver.ca (neighbourhood-energy-systems-established.pdf)
+
+wahlroos2017 :: Wahlroos et al. 2017, Energy 140:1228 — https://acris.aalto.fi/ws/portalfiles/portal/17305461/1_s2.0_S0360544217314548_main.pdf
+
+wahlroos2018 :: Wahlroos, Pärssinen, Rinne, Syri, Manner 2018, RSER 82:1749–1764, Future views on waste heat utilization — full text (J.B. upload)
+
