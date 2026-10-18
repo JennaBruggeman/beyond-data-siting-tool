@@ -365,3 +365,16 @@ Sources for every item: `audit/heat_items_sources_2026-10-18.md`.
 6. **"Lower-carbon" (M89):** the word is dropped. The connection card shows per MWh of heat: gas boiler ≈ 218 kg CO₂e against heat-pump electricity 4–6 kg (BC) or 77–115 kg (AB). Average grid; the data centre's own cooling is not counted.
 7. **Homes heated (M96):** 2018–22 average, 16.81 / 33.14 MWh per home (was 2023: 14.58 / 29.19).
 Also: negative money is shown as −$; the BC/Alberta price label now follows the city, not the sign. Register updated (homes_heated, demand_profile, price_ceiling, absorption, liquid_capture, heat_temp, grid_co2) with 9 new sources.
+
+## Batch 8 — receivers and networks (18 Oct 2026, J.B. "yes")
+- **M6 one record per site, own building only** (`tool/dedupe_receivers.py`; replaces receiver_floor.py's whole-parcel sum).
+  - Hospital records on one campus are merged: Vancouver 20 → 6 sites, Edmonton 13 → 8. Same-name duplicates are merged (Scona, Oliver, Fred Broadstock, Queen Elizabeth, Mill Creek pools; Evansdale, Delwood, Avonmore halls; Columbia College; Youngstown School). Merged names stay in "also listed as".
+  - Floor area = the building outline the point sits in (else the nearest within 40 m) × storeys at its tallest point; an upper estimate.
+  - Records with floor area: Vancouver 154 → 259; Edmonton 309 → 299 (it was a parcel sum before).
+  - Demand is shown as not yet known, with the reason, for:
+    - a connected complex under one outline over 30,000 m² (University of Alberta Hospital with Mazankowski and Stollery; NAIT; Commonwealth; Londonderry mall);
+    - schools that rent space (ODEF "Private Institution", 63 Vancouver / 54 Edmonton, or a school in a building 40 m or taller);
+    - a second record in a building already counted (an arena inside a recreation centre).
+  - Largest remaining: Vancouver General 41,138 m²; Grey Nuns 182,901 m² (one 18,290 m² outline × 10 storeys at 38.6 m; upper estimate).
+- **M7 categories:** Edmonton's 141 ODSRF "Community league hall" records become their own type (134 after merging), so "recreation centre" means the same in both cities (Vancouver 27, Edmonton 20). Outdoor pools are summer-only (4); Scona and Borden are listed both indoor and outdoor (2, "sources differ"); demand not yet known for both.
+- **M16 outside the NEU (By-law 9552 read):** s. 2.2 lets an owner "outside the boundaries, but in the vicinity" apply. The City Engineer must find the system capable and the service necessary or desirable, and the owner pays toward the extension. The credit (Sch. C Part 4) is netted on the connected building's own bill (s. 8.3). Gate is now "possible with a change", not "not yet known".

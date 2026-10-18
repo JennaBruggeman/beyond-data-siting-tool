@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SUPERSEDED 18 Oct 2026 by dedupe_receivers.py (per-building floor area, one record per site); kept for the record, do not run.
 """Estimate each non-housing receiver's floor area from the building tiles the tool already ships: the buildings on the parcel that holds the
 receiver point, each footprint × storeys at 4 m (height ÷ 4, at least 1), summed. Vancouver heights: City LiDAR 2022 (measured) or 2009 footprint
 data; Edmonton: City 3D buildings or floor area ÷ footprint estimate (as in the tiles). An estimate for the demand gate, labelled as such.

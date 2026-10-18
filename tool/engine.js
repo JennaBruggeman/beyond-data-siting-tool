@@ -257,7 +257,7 @@ function fitsView(){
 }
 
 /* ---------- who could take the heat ---------- */
-const TYPE={housing:'Non-market housing',school:'School',care:'Care home',hospital:'Hospital',rec:'Recreation centre',pool:'Pool',arena:'Indoor arena'};
+const TYPE={housing:'Non-market housing',school:'School',care:'Care home',hospital:'Hospital',rec:'Recreation centre',hall:'Community league hall',pool:'Pool',arena:'Indoor arena'};
 const FIRM={completed:'existing','under construction':'committed',approved:'planned',proposed:'proposed'};
 function nearby(f,d){ const out=[]; for(const p of d.pts){ const dist=Math.hypot(p.x-f.c[0],p.y-f.c[1]); const reach=R.reach[p.t]||R.reachGuide; if(dist<=reach) out.push(Object.assign({dist,reach,guide:!R.reach[p.t]},p)); } return out.sort((a,b)=>a.dist-b.dist); }
 function netsAt(f,d){ return d.nets.map(n=>{ const inside=BD.pip(f.c[0],f.c[1],n.r); const e=distToRing(f.c[0],f.c[1],n.r); return Object.assign({inside,edge:e},n); }).filter(n=>n.inside||n.edge<1200).sort((a,b)=>(b.inside-a.inside)||(a.edge-b.edge)); } // inside first, then nearest (verification sweep M16)
@@ -269,7 +269,7 @@ async function recvView(){
   if(nets.length) h+=nets.map(n=>`<h3>District energy</h3><p><b>${esc(n.n)}</b> — ${n.edge<50?`<span class="draft">on the edge of its service area (${n.src==='van9552'?'within the ±45 m of the tracing':'its boundary here is approximate'}) — check the schedule for this lot</span>`:n.inside?'<span class="draft">inside its service area</span>':`${kmOrM(n.edge)} outside its ${n.src==='van9552'?'':'approximate '}service area`}</p><p class="sub">${esc(n.note)}</p>${n.src==='van9552'?src('neu'):''}`).join('');
   if(f.city==='edm'){ const nb=String(((BD.S.sel||{}).a||[])[10]||''); h+=`<h3>District energy in Edmonton</h3><p class="sub">${/BLATCHFORD/.test(nb)?'<span class="draft">This lot is in the Blatchford neighbourhood.</span> ':''}Blatchford's district energy sharing system is compulsory inside its service area: owners must connect each building (Bylaw C17943 s. 6), unless the City Manager exempts a net-zero carbon building (s. 8). The service area exists only as a map (Schedule A), not yet traced in the tool. Downtown district energy phases are not yet traced either.</p><div class="src"><span class="evb ev-record">public record</span> City of Edmonton Bylaw C17943 (Blatchford District Energy Sharing System)</div>`; }
   if(f.downtown) h+=`<h3>Downtown steam</h3><p class="sub">Creative Energy's steam network serves more than 200 downtown buildings (BCUC G-310-21A). Its service area is not published as a map, so it is not drawn. Steam needs far hotter heat than a data centre gives off.</p>`;
-  const order=['housing','school','care','hospital','pool','rec','arena'];
+  const order=['housing','school','care','hospital','pool','rec','hall','arena'];
   h+=`<h3>Buildings within reach</h3>`;
   if(!near.length) h+=`<p class="sub">None of the recorded receiver types within reach.</p>`;
   for(const t of order){ const L=by[t]; if(!L) continue;
@@ -289,7 +289,7 @@ async function recvView(){
       'Load factor: Fan et al. 2007. Capture: LBNL 2014, NREL (direct-to-chip). COP: DEA 2026 waste-heat heat pumps to 70 °C (3.0–3.6) and observed at Meta Odense (4.5, 2020). Homes: NRCan CEUD residential, 2018–22 average. Grid: NIR 2026.')}`; }
   { const EC=BD.ECON; if(EC){ const v=EC.heatVal(f.city), pe=EC.elec[f.city], nb=v-pe/R.cop[1], nw=v-pe/R.cop[0];
     h+=`<p class="sub"><span class="draft">${esc(`The search circles are Dutch payback distances (RVO 2018: five years at Dutch prices), used only to say where to look. `+(nb<=0?`At ${f.city==='edm'?'Alberta':'BC'} prices the heat pump's electricity costs more than the gas the heat would replace ($${nw.toFixed(1)} to $${nb.toFixed(1)} per MWh), so no route pays back at any distance; each card shows what would have to change.`:`At ${f.city==='van'?'BC':'Alberta'} prices the heat is worth ${nw<0?`−$${(-nw).toFixed(1)} (COP 3.0: the heat pump's electricity costs more than the gas) to $${nb.toFixed(1)} (COP 4.5)`:`$${nw.toFixed(1)}–${nb.toFixed(1)}`} per MWh after the heat pump; each receiver's own break-even distance is on its card.`))}</span></p>`; } }
-  h+=`${src('reach')}${src('recv')}<p class="sub" style="margin-top:10px">${f.city==='van'?'Vancouver pools and rinks are not separate records in the national database; recreation centres may contain them. Private housing and offices are not mapped yet.':'Edmonton care homes and most hospitals have no location in the national record; private housing and offices are not mapped yet.'}</p>
+  h+=`${src('reach')}${src('recv')}<p class="sub" style="margin-top:10px">${f.city==='van'?'Vancouver pools and rinks are not separate records in the national database; recreation centres may contain them. Hospital records on one campus are shown as one site. Private housing and offices are not mapped yet.':'Edmonton care homes and most hospitals have no location in the national record; community league halls are shown apart from recreation centres (Vancouver has no such category); outdoor pools are marked summer-only; private housing and offices are not mapped yet.'}</p>
   `;
   $('#side').innerHTML=h; wireTabs(); BD.draw();
   const A=BD.S.answers; show3d('heat',{site:f,near,nets,plantRecover:plantPerMW(true)[1]*(A.mw||1)});
@@ -373,7 +373,7 @@ async function optionsView(){
 }
 
 /* ---------- map layer: receivers, reach, networks ---------- */
-const RC={housing:'#c8c2b8',school:'#a7b4d6',care:'#b9a3cf',hospital:'#b9a3cf',rec:'#7fb2c4',pool:'#7fb2c4',arena:'#9fb38a'};
+const RC={housing:'#c8c2b8',school:'#a7b4d6',care:'#b9a3cf',hospital:'#b9a3cf',rec:'#7fb2c4',hall:'#7fb2c4',pool:'#7fb2c4',arena:'#9fb38a'};
 BD.paintRecv=function(ctx,s,lw){
   const d=BD.recv[BD.S.city]; if(!d) return;
   for(const n of d.nets){ ctx.setLineDash([8/s,5/s]); ctx.strokeStyle='rgba(209,163,94,.85)'; ctx.lineWidth=lw(1.6); ctx.stroke(n.path); ctx.setLineDash([]); ctx.fillStyle='rgba(209,163,94,.06)'; ctx.fill(n.path); }
