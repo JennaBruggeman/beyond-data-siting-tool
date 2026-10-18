@@ -312,3 +312,18 @@ No building is drawn for a new data centre. The 3D shows the lot, the zoning's b
 - M43: blowdown-to-sewer row has its own rules (Metro Vancouver permit above 300 m³/30 days; EPCOR written approval), not the recovery add-on's.
 - M51: "case by case" zones show "Possible, with a condition" with the zone's reason.
 - Options table: "Power at full load" and "Power on average" (follows C1).
+
+## Sweep fixes, batch 4 (18 Oct 2026)
+- M38: fuel storage room limits from NFC 2020 Table 4.3.13.4.-B (checked on the code page in data/raw/codes): 200,000 L first storey; basement or upper storey 20,000 L (tanks 2,500–20,000 L) or 45,000 L (tanks over 20,000 L); both shown when no storey is chosen.
+- M39: generator testing uses every installed set (spares included), per the register's units × kW × hours; no longer called an upper bound.
+- M40: Edmonton standby generators: EPEA exemption only, AUC power-plant approval still required (AUC 27938-D01-2023); GoA says EPEA approval over 50 MW. Rule state "approval".
+- M48: rainwater source line: runoff 0.8 and tank assumed; CSA B805 not read.
+- M53: Edmonton BE setbacks applied from Bylaw 20001 Table 4.1: 6.0 m street (4.5 m on collector or local road; road class not read, 6.0 used), none to sites or alleys, 6.0 m beside residential (not applied).
+- M54: Edmonton IH lots under 1.0 ha flagged (s. 2.140, 4.1.1) as "Allowed use, lot under 1.0 ha" in the site facts (map colour unchanged).
+- M55: Vancouver I-2 sub-area B: data-centre FSR 3.0 (transportation and storage capped at 3.00, s. 3.2.1.1(a)(iv)); the 4.0 total needs other uses.
+- M56: FC-2 heights by sub-area stated (22.9 A/B, 10.7 C1/C2/D, 18.3 E); tool still uses 22.9 as sub-area is not read.
+- M57: I-3 sub-area A discretionary height to 45.7 m (s. 3.1.2.11).
+- M58/M59: ground-floor rule read from the zone (not the new-build case) and "not known" where the zone is not read.
+- M60: retrofit downside no longer claims an NBC load check.
+- M63: "Neighbours over their limit … within 600 m".
+- M65: Vancouver flood wording from VBBL 2025 s. 2.2.10.3(2)–(3) (read locally): services below FCL protected and accessible; no hazardous substances such as diesel below it.

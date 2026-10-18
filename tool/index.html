@@ -398,7 +398,7 @@ function vanStatus(z){
 const EDM_ENV={
  IH:'Height 30.0 m (the City may vary it for operating features). Floor area up to 2.0 × the lot. Minimum site 1.0 ha. Street setback 3.0 m.',
  IM:'Height 18.0 m. Floor area up to 2.0 × the lot. Setbacks 3.0 m from a street, 6.0 m next to a non-industrial zone, none to other industrial lots.',
- BE:'Height 16.0 m. Floor area up to 1.6 × the lot.',
+ BE:'Height 16.0 m. Floor area up to 1.6 × the lot. Setbacks 6.0 m from a street (4.5 m on a collector or local road), 6.0 m next to a residential zone, none to other sites or alleys.',
 };
 function edmStatus(zraw){
   const z=String(zraw||'').trim().split(/\s+/)[0].toUpperCase();
@@ -614,9 +614,9 @@ function floodText(s){ const m=S.meta.van; if(!m.fl||!m.fl.length||!s.ring) retu
   const pts=[centroid(s.ring)]; for(let i=0;i<s.ring.length;i+=2) pts.push([s.ring[i],s.ring[i+1]]);
   const hit=c=>{ let all=0,any=0; for(const p of pts){ const h=m.fl.some(f=>f.cat===c&&inFeat(p[0],p[1],f)); if(h) any++; } return any===0?0:(any===pts.length?2:1); };
   const d=hit('designated'), sc=hit('still'), w=hit('wave'), t=hit('today'); const part=v=>v===1?' (partly)':'';
-  const out=[]; if(d) out.push(`In the designated floodplain${part(d)}: flood construction level 4.6 m. Switchgear and electrical rooms may not sit below it unless flood-protected — this mostly rules against a basement data centre.`);
+  const out=[]; if(d) out.push(`In the designated floodplain${part(d)}: flood construction level 4.6 m. Switchgear, panels and other building services below it must be protected from flood damage and accessible during a flood, and hazardous substances such as diesel may not be stored below it (VBBL 2025 s. 2.2.10.3(2)–(3)).`);
   if(sc) out.push(`In the Still Creek floodplain${part(sc)}, which has its own mapped flood levels.`); if(w) out.push(`In the wave effect zone${part(w)}: waves add to the flood hazard in an extreme storm.`); if(t) out.push(`Also inside today's 1-in-500-year Fraser River storm extent${part(t)}, before sea-level rise.`);
-  return out.length?out.map(x=>`<span class="draft">${x}</span>`).join('<br>')+'<div class="src">City of Vancouver designated floodplain; Flood Plain Standards F014; VBBL Div. C 2.2.9</div>':'Outside the designated floodplain'; }
+  return out.length?out.map(x=>`<span class="draft">${x}</span>`).join('<br>')+'<div class="src">City of Vancouver designated floodplain; Flood Plain Standards F014; VBBL 2025 s. 2.2.10.3</div>':'Outside the designated floodplain'; }
 /* ---------- what is being built (decided by J.B., 14 Oct) ---------- */
 function seg(name,opts,val){ return `<div class="seg" role="group" data-q="${name}">${opts.map(([v,l])=>`<button data-v="${v}" aria-pressed="${v===val}">${esc(l)}</button>`).join('')}</div>`; }
 function startStep(st){
