@@ -100,7 +100,7 @@ const TOPICS={
  cooling:{t:'How the heat leaves the building', steps:x=>{ const {R,mw,size,water,WETS,f,city}=x; const it=1/PUEmid(R);
   const S={dry:size('dry'),towers:size('towers'),hybrid:size('hybrid')}; const area=k=>S[k].n*S[k].k.L*S[k].k.W;
   return [
-   {t:'Almost all the power ends as heat',p:`Servers turn electricity into heat. With cooling and losses, a ${mw} MW data centre has about ${K(rg(S.dry.Q*0.9,S.dry.Q,'MW'))} of heat to get rid of, all the time.`,
+   {t:'Almost all the power ends as heat',p:`Servers turn electricity into heat. With cooling and losses, a ${mw} MW data centre has about ${K(rg(S.dry.Q*0.9,S.dry.Q,'MW'))} of heat to get rid of at full load, and about ${rg(S.dry.Q*0.9*BD.eng.R.lf,S.dry.Q*BD.eng.R.lf,'MW')} averaged over a year. The cooling is sized for full load.`,
     v:h=>donut(h,[{label:'Servers (IT)',v:it,c:C.heat,show:Math.round(it*100)+'% of the power'},{label:'Cooling, losses, lights',v:1-it,c:C.other,show:Math.round((1-it)*100)+'% (PUE '+R.pue[0]+'–'+R.pue[1]+')'}],[PUEmid(R).toFixed(2),'PUE, middle'],'Share of electricity'),src:['pue']},
    {t:'Dry coolers',p:`A closed loop carries the heat to coils outside; ${K('fans')} blow air across them. ${K('No water')}, but they need the most space: ${S.dry.n} units for this size.`,v:anim('dry'),src:['plant']},
    {t:'Cooling towers',p:`Warm water falls through the tower and part of it ${K('evaporates')}, which carries the heat away. Smaller and fewer, but it ${K('uses water')}, sends blowdown to the sewer and needs Legionella testing.`,v:anim('towers'),src:['evap']},

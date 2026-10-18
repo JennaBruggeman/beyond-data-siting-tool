@@ -64,7 +64,28 @@ BD.loadRecv=loadRecv;
 function distToRing(x,y,r){ let best=1e12; for(let i=0,j=r.length-2;i<r.length;j=i,i+=2){ const ax=r[j],ay=r[j+1],bx=r[i],by=r[i+1]; const dx=bx-ax,dy=by-ay; const t=Math.max(0,Math.min(1,((x-ax)*dx+(y-ay)*dy)/(dx*dx+dy*dy||1))); best=Math.min(best,Math.hypot(x-ax-t*dx,y-ay-t*dy)); } return best; }
 
 /* ---------- the site in numbers ---------- */
-function siteFacts(){
+/* what fits must not depend on what was clicked before (verification sweep 17 Oct, C2). The cooling plant takes floor space, and it used to be
+   sized for whatever size was last chosen, so the range moved between visits. Now the range is worked out with the plant sized for the top of the
+   range itself (repeated until it settles); the size you pick still sizes the plant shown in the 3D and the equipment counts. */
+let stableKey=null, stableF=null, inStable=false;
+function stableFacts(){ const A=BD.S.answers, s=BD.S.sel; if(!s) return null;
+  const k=JSON.stringify([s.city,s.id,Object.assign({},A,{mw:null,mwSite:null})]); if(k===stableKey&&stableF) return stableF;
+  const keep=A.mw; inStable=true; let f=null, mw=null;
+  // the top of the range falls as the plant grows, so there is one size where plant and range agree: find it by halving (log scale, 0.1–40 MW)
+  try{ const at=m=>{ A.mw=m; BD.modelReset&&BD.modelReset(); return siteFactsRaw(); };
+    let lo=0.1, hi=40, fl=at(lo);
+    if(fl.mw[1]<=lo) { f=fl; mw=lo; }
+    else { const fh=at(hi); if(fh.mw[1]>=hi){ f=fh; mw=hi; }
+      else { for(let i=0;i<18;i++){ const m=Math.sqrt(lo*hi), fm=at(m); if(fm.mw[1]>=m){ lo=m; f=fm; mw=m; } else hi=m; if(hi/lo<1.01) break; }
+        if(!f){ f=at(lo); mw=lo; } } }
+    // plant comes in whole units, so the top can jump past the size it was sized for; above that size the plant no longer fits, so cap it there
+    if(f.mw[1]>mw&&mw<40){ f.mw=[Math.min(f.mw[0],mw),mw]; f.mwCapped=true; }
+    f.plantFor=mw; }
+  finally{ A.mw=keep; inStable=false; BD.modelReset&&BD.modelReset(); }
+  stableKey=k; stableF=f; return f; }
+function siteFacts(){ if(inStable) return siteFactsRaw(); const st=stableFacts(); if(!st) return siteFactsRaw();
+  return Object.assign({},st,{M:BD.model?BD.model():st.M}); }
+function siteFactsRaw(){
   const s=BD.S.sel, city=s.city, a=s.a||[], A=BD.S.answers;
   const blds=(s.blds||[]).filter(b=>b.f!==3);
   const f={city, lot:city==='van'?(s.lotArea||a[8]):a[4], zone:null, env:null, envNote:'', blds};
@@ -160,7 +181,7 @@ function mathFits(f){
 function mathNeeds(mw,fac,f){
   const pl=plantPerMW(false), plR=plantPerMW(true), p=R.plant;
   return mathBox([
-    `Average power at the meter: ${mw} MW × PUE ${R.pue[0]} = ${n1(fac[0])} MW; × ${R.pue[1]} = <b>${n1(fac[1])} MW</b>.`,
+    `Power at the meter at full load: ${mw} MW × PUE ${R.pue[0]} = ${n1(fac[0])} MW; × ${R.pue[1]} = <b>${n1(fac[1])} MW</b>. Averaged over a year (× ${R.lf}): <b>${n1(fac[0]*R.lf)}–${n1(fac[1]*R.lf)} MW</b>.`,
     `Plant space, dry coolers: (UPS ${p.ups[0]}–${p.ups[1]} + batteries ${p.batt[0]} + dry coolers ${p.dry[0]}) = ${pl[0].toFixed(1)}–${pl[1].toFixed(1)} m² per MW; × ${mw} = <b>${n0(pl[0]*mw)}–${n0(pl[1]*mw)} m²</b>.`,
     `With heat recovery, add heat pumps ${p.hp[0]} + CDUs ${p.cdu[0]} = ${plR[0].toFixed(1)}–${plR[1].toFixed(1)} m² per MW; × ${mw} = <b>${n0(plR[0]*mw)}–${n0(plR[1]*mw)} m²</b>.`,
     `Standby fuel: ${n1(fac[0])}–${n1(fac[1])} MW × 1,000 (kW) × ${R.fuelHours} h × ${R.fuelLkWh} L per kWh = <b>${n0(fac[0]*1000*R.fuelHours*R.fuelLkWh)}–${n0(fac[1]*1000*R.fuelHours*R.fuelLkWh)} L</b>.`
@@ -188,7 +209,7 @@ function fitsView(){
   <p class="draft">How much data centre this ${A.built==='new'?'lot':'building'} could hold, as ranges, before anyone decides what to do with its heat.</p>`;
   if(f.envAssumed&&A.built==='new') h+=`<p class="sub"><span class="pill ${f.status.k}">${esc(f.status.t)}</span> No data-centre envelope in zone ${esc(f.zone)}. <span class="draft">Shown as if rezoned to ${f.city==='van'?'I-2 (floor area 3.0 × lot, 18.3 m)':'IM (floor area 2.0 × lot, 18 m)'}, the nearest common data-centre zone — an assumption for comparison, not a prediction.</span></p>`;
   const st=f.floorsR?(f.floorsR[0]===f.floorsR[1]?f.floorsR[0]:f.floorsR[0]+'–'+f.floorsR[1]):f.floors;
-  h+=`<h3>Floor area</h3><dl><dt>Available</dt><dd>${f.fullCover?'up to ':''}${rng(f.gross[0],f.gross[1],'m²')}${f.fullCover?` <span class="draft">— only if the building covers the whole lot; yards and setbacks not yet read for this zone</span>`:''}</dd><dt>How</dt><dd>${esc(f.how)}${f.heightCut?` <span class="draft">(${f.yardCut?'the yards and height limit':'the height limit'} hold less than this floor area, so the figure is cut to what fits)</span>`:''}</dd>
+  h+=`<h3>Floor area</h3><dl><dt>Available</dt><dd>${f.fullCover?'up to ':''}${rng(f.gross[0],f.gross[1],'m²')}${f.fullCover?` <span class="draft">— only if the building covers the whole lot; yards and setbacks not yet read for this zone</span>`:''}</dd><dt>How</dt><dd>${esc(f.how)}${f.plantFor&&A.built==='new'?` · cooling plant sized for ${n1(f.plantFor)} MW, the top of this range`:''}${f.heightCut?` <span class="draft">(${f.yardCut?'the yards and height limit':'the height limit'} hold less than this floor area, so the figure is cut to what fits)</span>`:''}</dd>
   ${f.fpNote?`<dt>Footprint</dt><dd>about ${fmt(f.fp)} m² <span class="sub">— ${esc(f.fpNote)}${f.fpCalc?`; lot treated as a ${fmt(f.fpCalc.w)} × ${fmt(f.fpCalc.d)} m rectangle`:''}</span></dd>`:''}
   ${f.ground?`<dt>Ground floor</dt><dd>${rng(f.ground[0],f.ground[1],'m²')} — this zone allows no data storage at grade</dd>`:''}
   ${f.floorsR&&A.built==='new'?`<dt>Storeys</dt><dd>about ${st} (6.0 m ground; 5.5–6.0 m for each data-hall floor, as built and proposed halls show; within ${f.envH} m)</dd>`:''}</dl>${src('env')}
@@ -210,7 +231,7 @@ function fitsView(){
    <div class="mwscale">${[0.1,1,10,40].map(v=>`<span style="left:${pos01(v)}%">${v}${v===40?' MW':''}</span>`).join('')}</div>
    <div class="src">Bar under the track: what fits here. Ticks: built or proposed sites, operator or applicant figures. Steps widen as size grows.</div></div>
   <h3>What that size needs</h3><dl>
-  <dt>Average power drawn</dt><dd>${rng(fac[0],fac[1],'MW')} at the meter (servers × PUE 1.4–1.55; PUE is a yearly average, so peak demand is higher)</dd>
+  <dt>Power at full load</dt><dd>${rng(fac[0],fac[1],'MW')} at the meter (servers × PUE 1.4–1.55); this sizes the grid connection and the cooling plant</dd><dt>Power on average</dt><dd>${rng(fac[0]*R.lf,fac[1]*R.lf,'MW')} (about ${Math.round(R.lf*100)}% of full load over a year); this sets the yearly energy</dd>
   <dt>Plant space</dt><dd>${rng(pl[0]*mw,pl[1]*mw,'m²')} with dry coolers; ${rng(plR[0]*mw,plR[1]*mw,'m²')} with heat recovery — equipment only, before clearances</dd>
   <dt>Standby fuel</dt><dd>${rng(fuel[0],fuel[1],'L')} for 12 h; a ${pos==='ground'?'first-storey':'basement or upper-storey'} room may hold ${fmt(fuelLim)} L${fuel[1]>fuelLim?' — <span class="draft">more than one room or an outdoor tank</span>':''}</dd>
   <dt>Electrical service</dt><dd>${esc(svc)}</dd>
@@ -474,8 +495,8 @@ function energyView(){
   const cost=f.city==='van'?[MWh[0]*1000*0.0679+fac[0]*1000*13.83*12,MWh[1]*1000*0.0679+fac[1]*1000*13.83*12]:null;
   const ups=[mw*1/60*0.5,mw*5/60*0.5], gen=[fac[0]*1000*4,fac[1]*1000*4];
   let h=tabBar('energy')+`<h2>Power in, power offered</h2><p class="draft">A customer first. What it can give back is <span class="k">flexibility</span>, and only the operator can give it.</p>
-  <h3>What it draws</h3><dl><dt>Power at the meter</dt><dd>${rng(fac[0],fac[1],'MW')}</dd><dt>Electricity a year</dt><dd>${rng(MWh[0]/1000,MWh[1]/1000,'GWh')} at an average load of 60% of peak</dd>
-  ${cost?`<dt>Cost a year</dt><dd>about $${(cost[0]/1e6).toFixed(1)}–${(cost[1]/1e6).toFixed(1)} million if served on BC Hydro's large general service (6.79 ¢/kWh + $13.83/kW a month); very large loads move to transmission rates</dd>`:`<dt>Price</dt><dd>Alberta pool averaged $43.68/MWh in 2025, plus EPCOR distribution and transmission charges</dd>`}
+  <h3>What it draws</h3><dl><dt>Power at the meter</dt><dd>${rng(fac[0],fac[1],'MW')} at full load; about ${rng(fac[0]*R.lf,fac[1]*R.lf,'MW')} on average</dd><dt>Electricity a year</dt><dd>${rng(MWh[0]/1000,MWh[1]/1000,'GWh')}, at about ${Math.round(R.lf*100)}% of full load on average</dd>
+  ${cost?`<dt>Cost a year</dt><dd>about $${(cost[0]/1e6).toFixed(1)}–${(cost[1]/1e6).toFixed(1)} million if served on BC Hydro's large general service (6.79 ¢/kWh + $13.83/kW a month, the demand charge taken at full load, which is conservative); very large loads move to transmission rates</dd>`:`<dt>Price</dt><dd>Alberta pool averaged $43.68/MWh in 2025, plus EPCOR distribution and transmission charges</dd>`}
   <dt>Carbon of that electricity</dt><dd>${rng(co2[0],co2[1],'t CO₂e/yr')} at ${R.grid[f.city]} g/kWh (average, consumption)</dd>
   <dt>Grid connection</dt><dd>${f.downtown?`${state('not')}no new downtown feeder positions before the West End substation (expected July 2032)`:`${state('cj')}needs the utility's answer to a load application; the grid can add 12–36 months`}</dd></dl>${s3('elec')}${src('grid')}${f.downtown?src('grid2'):''}
   <h3>Solar on its own roof</h3><dl><dt>Roof</dt><dd>${fmt(roof)} m², of which plant takes about ${Math.round(share*100)}%</dd><dt>Panels</dt><dd>${rng(kwp[0],kwp[1],'kWp')} → ${rng(pvMWh[0],pvMWh[1],'MWh/yr')}</dd><dt>Share of its own use</dt><dd>${rng(pvMWh[0]/MWh[1]*100,pvMWh[1]/MWh[0]*100,'%')} — a small share at data-centre densities</dd></dl>${s3('pv')}

@@ -133,9 +133,13 @@ async function heatIndex(){
   const bl=f.city==='edm'?nets.find(n=>/Blatchford/.test(n.n)):null;
   const nearNet=inside||nets.slice().sort((x,y)=>x.edge-y.edge)[0];
   const nDep=all.filter(p=>p.econ.status==='depends').length;
+  // verification sweep 17 Oct (C4): count only buildings with a known heat demand; say how many have none yet
+  const unk=all.filter(p=>p.econ.status==='unknown'), nK=all.length-unk.length;
+  const PL1={housing:['non-market housing building','non-market housing buildings'],school:['school','schools'],care:['care home','care homes'],hospital:['hospital','hospitals'],rec:['recreation centre','recreation centres'],pool:['pool','pools'],arena:['arena','arenas']};
+  const unkTxt=unk.length?` ${unk.length} more (${[...new Set(unk.map(p=>p.t))].map(t=>{ const n=unk.filter(p=>p.t===t).length; return n+' '+(PL1[t]||[t,t])[n===1?0:1]; }).join(', ')}) have no demand figure yet.`:'';
   const lead=netB<=0?`At ${f.city==='edm'?'Alberta':'BC'} prices <span class="k">no route pays back at any distance</span>.${bl?` Blatchford's low-temperature loop, ${bl.inside?'around this lot':fmt(bl.edge)+' m away'}, is <span class="k">the exception to look at</span>.`:''}`
-    :nW?`<span class="k">${nW} of ${all.length} buildings</span> within 1.5 km could take the heat within break-even.${nDep?` ${nDep} more depend on the pipe cost.`:''}`
-    :`<span class="k">None of the ${all.length} buildings</span> within 1.5 km pays back at today's prices${nDep?`; ${nDep} depend on the pipe cost`:''}.${inside?` The lot is inside the ${inside.n.replace(/ \(.*/,'')}.`:''}`;
+    :nW?`<span class="k">${nW} of ${nK} buildings</span> with a known heat demand within 1.5 km could take the heat within break-even.${nDep?` ${nDep} more depend on the pipe cost.`:''}${unkTxt}`
+    :`<span class="k">None of the ${nK} buildings</span> with a known heat demand within 1.5 km pays back at today's prices${nDep?`; ${nDep} depend on the pipe cost`:''}.${unkTxt}${inside?` The lot is inside the ${inside.n.replace(/ \(.*/,'')}.`:''}`;
   const PL={housing:['non-market housing building','non-market housing buildings'],school:['school','schools'],care:['care home','care homes'],hospital:['hospital','hospitals'],rec:['recreation centre','recreation centres'],pool:['pool','pools'],arena:['arena','arenas']};
   const kinds=[...new Set(all.map(p=>p.t))].map(t=>{ const n=all.filter(p=>p.t===t).length; return `${n} ${(PL[t]||[t,t])[n===1?0:1]}`; }).join(', ');
   const recvAns=[kinds||'none found',nW?`${nW} within break-even`:'none within break-even',nDep?`${nDep} depend on pipe cost`:'',nB?`${nB} beyond`:''].filter(Boolean).join('; ');

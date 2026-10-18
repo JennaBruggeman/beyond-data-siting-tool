@@ -211,7 +211,7 @@ async function siteReport(){
    ['Zone',`${esc(f.zone||'—')} — ${esc(f.status.t)}`],['Floor area available',`${f.fullCover?'up to ':''}${rng(f.gross[0],f.gross[1],'m²')}`],
    ['Largest that fits',rng(f.mw[0],f.mw[1],'MW of servers')+(f.mwL?` (strict ${rng(f.mwS[0],f.mwS[1],'MW')}; lenient ${rng(f.mwL[0],f.mwL[1],'MW')})`:'')],
    ['Size tested',`${mw} MW of servers · ${f.density==='high'?'high-density, liquid-cooled halls':'typical air-cooled halls'}`],
-   ['Average power at the meter',rng(fac[0],fac[1],'MW')],['Heat offered (liquid-cooled, heat pump)',rng(r.avail[0]/1000,r.avail[1]/1000,'GWh/yr')],
+   ['Power at the meter at full load',rng(fac[0],fac[1],'MW')],['Heat offered (liquid-cooled, heat pump)',rng(r.avail[0]/1000,r.avail[1]/1000,'GWh/yr')],
    ['Equal to the heating of',rng(r.homes[0],r.homes[1],'homes')],['Heat-pump carbon',rng(r.co2[0],r.co2[1],'t CO₂e/yr')],
    ['Receivers within reach',`${near.length}${nets.length?' · '+nets.map(n=>esc(n.n)+(n.inside?' (inside)':' (nearby)')).join(', '):''}`],
   ];

@@ -405,8 +405,11 @@ function edmStatus(zraw){
   const minorNote='A large data centre is treated by the City as Major Industrial. A smaller one whose noise, emissions and fuel or battery hazards stay inside the site could be argued as Minor Industrial — the Development Planner decides.';
   if(z==='IH') return {k:'yes',t:'Allowed',d:'Major Industrial is a permitted use in IH, which is where the City says large-scale data centres belong.',env:EDM_ENV.IH,src:['edm_matrix','edm_bl','edm_dc']};
   if(z==='IM') return {k:'case',t:'Smaller only',d:'Minor Industrial is permitted; Major Industrial only where it existed on 1 January 2024. '+minorNote+' A large data centre here needs a rezoning to IH.',env:EDM_ENV.IM,src:['edm_matrix','edm_bl','edm_dc']};
-  if(z==='BE'||z==='UI') return {k:'case',t:'Smaller only',d:'Minor Industrial is permitted in '+z+'; Major Industrial is not. '+minorNote,env:EDM_ENV[z]||'',src:['edm_matrix','edm_dc']};
-  if(z==='FD') return {k:'case',t:'Case by case',d:'Minor Industrial is discretionary, with limits, in Future Urban Development.',src:['edm_matrix']};
+  if(z==='BE') return {k:'case',t:'Smaller only',d:'Minor Industrial is permitted in BE; Major Industrial is not. '+minorNote,env:EDM_ENV.BE,src:['edm_matrix','edm_dc']};
+  // verification sweep 17 Oct (C3), checked against Bylaw 20001 s. 2.210 and Appendix IV: UI's permitted uses list no industrial use
+  if(z==='UI') return {k:'no',t:'Rezoning needed',d:'No industrial use is permitted in UI. Minor Industrial appears only on the NAIT Main Campus (Appendix IV, Sub-Area 2), and there only as storage. A data centre here would need a rezoning.',src:['edm_bl','edm_dc']};
+  // FD s. 2.240: Minor Industrial only as temporary outdoor storage, no permanent structures
+  if(z==='FD') return {k:'no',t:'Rezoning needed',d:'In Future Urban Development, Minor Industrial is limited to temporary outdoor storage with no permanent structures, so a data centre would need a rezoning.',src:['edm_bl']};
   if(/^DC/.test(z)) return {k:'site',t:'Site-specific',d:'Direct Control: this site has its own provisions. Read them to see what is allowed; otherwise treat it as a rezoning.',src:['edm_bl']};
   const STD=['RS','RSF','RSM','RM','RL','RR','MUN','MU','CN','CG','CB','A','NA','PSN','PS','PU','AG'];
   if(!STD.includes(z)) return {k:'site',t:'Special area',d:'A special area or legacy zone ('+esc(z)+') with its own use lists; these are not yet loaded into the tool.',src:['edm_bl']};
