@@ -25,7 +25,8 @@ const R={
  pue:[1.4,1.55], lf:0.6, lwUnit:[98,101], // sound power per ~1 MW air-cooled unit: Trane RTAF size 280 (1,010 kW), low-noise 98 / standard 101 dB(A), brochure RTAF-SLB001-GB p.13 (sweep 17 Oct; checked 18 Oct)
   capture:[0.48,0.75], cop:[3.0,4.5], // COP: DEA 2026 waste-heat HPs to 70 °C 3.0–3.6; observed Meta Odense 27→70 °C: 4.5 (2020), ≈3.9 combined 2022–24 (Fjernvarme Fyn annual reports)
  fuelLkWh:0.263, fuelHours:12, fuelLimit:{low:20000,first:200000},
- homeMWh:{van:14.58,edm:29.19},       // CEUD 2023 space + water heating per household: BC 52.5 GJ, AB 105.1 GJ
+ homeMWh:{van:16.81,edm:33.14},       // CEUD residential space + water heating per household, 2018–22 average (2023, the warmest year, gave 14.58 / 29.19): BC 60.5 GJ, AB 119.3 GJ (J.B. 18 Oct, sweep M96)
+ monthRatio:{van:4.9,edm:5.0},       // busiest ÷ quietest month of heat demand: s × CWEC monthly HDD16 share + (1 − s) ÷ 12, s = space ÷ (space + water heating), CEUD residential 2018–22: BC 0.674, AB 0.761 (sweep M14; national 0.61 retired)
  grid:{van:18.1,edm:346.1},           // g CO2e/kWh, NIR 2026, consumption, 2024
  neuCredit:32.59,                     // $/MWh, By-law 9552 Sch. C
  reach:{pool:1000,housing:1200,greenhouse:1500}, reachGuide:1200,
@@ -39,7 +40,7 @@ const SRC2={
  pue:'register: pue (LBNL 2023; Uptime 2025 industry survey)', lf:'register: load_factor (Fan et al. 2007)',
  cap:'register: liquid_capture (LBNL 2014, NREL — direct-to-chip 48–75%; air-cooled: no primary figure)',
  cop:'register: cop (DEA 2026 waste-heat heat pumps to 70 °C, 1–3 MW: 3.0–3.6; observed at Meta Odense, 27 → 70 °C: 4.5 in 2020; from 2021 Fjernvarme Fyn reports Meta\'s heat pumps together with others, about 3.9 combined — Fjernvarme Fyn annual reports)', fuel:'register: fuel_on_site (NFC 2020 Table 4.3.13.4.-B; fuel rate a manufacturer claim; Uptime ≥ 12 h)',
- svc:'register: service_class (BC Hydro primary guide; EPCOR connection guide)', homes:'register: homes_heated (NRCan CEUD 2023)',
+ svc:'register: service_class (BC Hydro primary guide; EPCOR connection guide)', homes:'register: homes_heated (NRCan CEUD residential, 2018–22 average)',
  grid:'register: grid_co2 (NIR 2026 Annex 7, consumption intensity 2024)', neu:'By-law 9552 Sch. A, C, s. 2.1 (consolidated 1 Jan 2026); service area traced ±45 m',
  reach:'register: receiver_radius (RVO 2018, 5-year payback)', recv:'Statistics Canada ODSRF v2 (2026), ODHF (2020), ODEF v2.1 (2022); City of Vancouver non-market housing',
  jobs:'register: jobs (Virginia JLARC 2024, transferred; confidence 40)', noise:'Noise Control By-law 6555 ss. 2.1–2.3, Sch. A, B (Vancouver); Bylaw 14600 (Edmonton)',
@@ -285,9 +286,9 @@ async function recvView(){
       `Heat-pump electricity = heat out ÷ COP: ${n0(r.avail[0])} ÷ ${R.cop[1]} = ${n0(r.hp[0])} MWh; ${n0(r.avail[1])} ÷ ${R.cop[0]} = <b>${n0(r.hp[1])} MWh</b>.`,
       `Homes: heat ÷ ${R.homeMWh[f.city]} MWh per home a year = ${n1(r.homes[0])}–<b>${n1(r.homes[1])}</b>.`,
       `Carbon: heat-pump electricity × ${R.grid[f.city]} g/kWh = ${n1(r.co2[0])}–<b>${n1(r.co2[1])} t CO₂e</b>.`],
-      'Load factor: Fan et al. 2007. Capture: LBNL 2014, NREL (direct-to-chip). COP: DEA 2026 waste-heat heat pumps to 70 °C (3.0–3.6) and observed at Meta Odense (4.5, 2020). Homes: NRCan CEUD 2023. Grid: NIR 2026.')}`; }
+      'Load factor: Fan et al. 2007. Capture: LBNL 2014, NREL (direct-to-chip). COP: DEA 2026 waste-heat heat pumps to 70 °C (3.0–3.6) and observed at Meta Odense (4.5, 2020). Homes: NRCan CEUD residential, 2018–22 average. Grid: NIR 2026.')}`; }
   { const EC=BD.ECON; if(EC){ const v=EC.heatVal(f.city), pe=EC.elec[f.city], nb=v-pe/R.cop[1], nw=v-pe/R.cop[0];
-    h+=`<p class="sub"><span class="draft">${esc(`The search circles are Dutch payback distances (RVO 2018: five years at Dutch prices), used only to say where to look. `+(nb<=0?`At ${f.city==='edm'?'Alberta':'BC'} prices the heat pump's electricity costs more than the gas the heat would replace ($${nw.toFixed(1)} to $${nb.toFixed(1)} per MWh), so no route pays back at any distance; each card shows what would have to change.`:`At ${f.city==='van'?'BC':'Alberta'} prices the heat is worth $${nw.toFixed(1)}–${nb.toFixed(1)} per MWh after the heat pump; each receiver's own break-even distance is on its card.`))}</span></p>`; } }
+    h+=`<p class="sub"><span class="draft">${esc(`The search circles are Dutch payback distances (RVO 2018: five years at Dutch prices), used only to say where to look. `+(nb<=0?`At ${f.city==='edm'?'Alberta':'BC'} prices the heat pump's electricity costs more than the gas the heat would replace ($${nw.toFixed(1)} to $${nb.toFixed(1)} per MWh), so no route pays back at any distance; each card shows what would have to change.`:`At ${f.city==='van'?'BC':'Alberta'} prices the heat is worth ${nw<0?`−$${(-nw).toFixed(1)} (COP 3.0: the heat pump's electricity costs more than the gas) to $${nb.toFixed(1)} (COP 4.5)`:`$${nw.toFixed(1)}–${nb.toFixed(1)}`} per MWh after the heat pump; each receiver's own break-even distance is on its card.`))}</span></p>`; } }
   h+=`${src('reach')}${src('recv')}<p class="sub" style="margin-top:10px">${f.city==='van'?'Vancouver pools and rinks are not separate records in the national database; recreation centres may contain them. Private housing and offices are not mapped yet.':'Edmonton care homes and most hospitals have no location in the national record; private housing and offices are not mapped yet.'}</p>
   `;
   $('#side').innerHTML=h; wireTabs(); BD.draw();
@@ -342,10 +343,10 @@ async function optionsView(){
      ['Electricity a year',o=>rng(o.r.facMWh[0]/1000,o.r.facMWh[1]/1000,'GWh')],
      ['Grid connection',()=>f.downtown?`${state('chg')}downtown: no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures`:`${state('cj')}needs the utility's answer to a load application`]]],
    ['Receivers',[
-     ['Heat offered after the heat pump',o=>o.recover?rng(o.r.avail[0]/1000,o.r.avail[1]/1000,'GWh/yr'):`${state('not')}none — air-cooled heat at 25–35 °C goes to the air`],
+     ['Heat offered after the heat pump',o=>o.recover?rng(o.r.avail[0]/1000,o.r.avail[1]/1000,'GWh/yr'):`${state('cj')}not yet known — this option sends its heat to the air; air-cooled heat (25–47 °C) can be reused with heat pumps, but no source gives how much for a whole hall`],
      ['Equal to the heating of',o=>o.recover?rng(o.r.homes[0],o.r.homes[1],'homes')+' (space and hot water, provincial average)':'—'],
      ['Within reach',o=>o.to==='net'&&net?`${state(net.edge<50?'cj':'chg')}${esc(net.n)} — ${net.edge<50?'on the edge of the service area':'compulsory connection; heat sent back is credited'}`:o.recover?`${state('cj')}${near.length} within straight-line reach (Dutch five-year payback distances, used only to say where to look); the Heat step tests break-even at BC or Alberta prices`:'—'],
-     ['How much they would take',o=>o.recover?`${state('cj')}needs each receiver's monthly demand — a year of heat is mostly needed in winter (about ${f.city==='van'?'3.9':'3.3'} : 1 between the busiest and quietest month)`:'—'],
+     ['How much they would take',o=>o.recover?`${state('cj')}needs each receiver's monthly demand — a year of heat is mostly needed in winter (about ${R.monthRatio[f.city].toFixed(1)} : 1 between the busiest and quietest month)`:'—'],
      ['Other source already serving',()=>net&&net.src==='van9552'?`${state('chg')}the NEU runs mostly on sewage heat`:net?`${state('cj')}${esc(net.n.replace(/ \(.*/,''))}: its heat source is not stated in the tool`:`${state('cj')}not known for these buildings`],
      ['Price for the heat',o=>o.r.credit?`$${fmt(o.r.credit[0])}–$${fmt(o.r.credit[1])} a year at the NEU's credit ($32.59/MWh), if the NEU took all the heat offered (what it takes depends on its demand)`:o.recover?`${state('cj')}${f.city==='van'?'no published price outside the NEU':'no published price; Edmonton\'s district energy prices at the gas-equivalent cost plus avoided boiler costs'}`:'—']]],
    ['The climate',[

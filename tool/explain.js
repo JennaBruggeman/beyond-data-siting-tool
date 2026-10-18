@@ -116,7 +116,7 @@ const TOPICS={
  heat:{t:'Heat for the neighbours', steps:x=>{ const {R,mw,r,all15,f,city}=x; const k={housing:0,school:0,care:0,hospital:0,rec:0,pool:0,arena:0}; all15.forEach(p=>{ k[p.t]=(k[p.t]||0)+1; });
   const parts=[['Non-market housing','housing',C.heat],['Schools','school',C.water],['Care, hospitals','care',C.mat],['Recreation, pools','rec',C.place]].map(([l,t,c])=>({label:l,v:(k[t]||0)+(t==='care'?k.hospital||0:0)+(t==='rec'?(k.pool||0)+(k.arena||0):0),c})).filter(p=>p.v>0);
   return [
-   {t:'Catching the heat',p:`Air cooling leaves heat at ${K('25–35 °C')}, too cool for most heating. Liquid cooling to the chip catches ${K(Math.round(R.capture[0]*100)+'–'+Math.round(R.capture[1]*100)+'%')} of it in water.`,
+   {t:'Catching the heat',p:`Air cooling leaves heat at ${K('25–35 °C')}, too cool for most heating without a heat pump; how much an air-cooled hall can give is not yet known. Liquid cooling to the chip catches ${K(Math.round(R.capture[0]*100)+'–'+Math.round(R.capture[1]*100)+'%')} of it in water.`,
     v:h=>bars(h,[{label:'Caught in liquid',lo:R.capture[0]*100,hi:R.capture[1]*100,c:C.heat},{label:'Left in the air',lo:(1-R.capture[1])*100,hi:(1-R.capture[0])*100,c:C.other}],'% of server heat','Heat captured by liquid cooling'),src:['cap']},
    {t:'Lifting it with a heat pump',p:`A heat pump raises it to about 70 °C for a network. Each unit of electricity gives ${K(R.cop[0]+'–'+R.cop[1])} units of heat.`,v:anim('recover'),
     extra:h=>bars(h,[{label:'Electricity in',v:1,c:C.power},{label:'Heat out',lo:R.cop[0],hi:R.cop[1],c:C.heat}],'MWh','Heat pump output per MWh of electricity'),src:['cop']},

@@ -36,13 +36,13 @@ const NS='<span class="sub">not stated</span>';
 const rg=(a,u,d)=>{ const f=v=>d?v.toFixed(d):fmt(v); return a[0]===a[1]?`${f(a[0])}${u?' '+u:''}`:`${f(a[0])}–${f(a[1])}${u?' '+u:''}`; };
 const NIL='<span class="sub">—</span>';
 const COLS={
- heat:[['Heat offered',r=>r.id==='qu2'?NS:r.n.rec?rg(r.n.avail.map(v=>v/1000),'GWh/yr',0):'none to reuse'],['Homes’ heating, as an equal',r=>r.n.rec?rg(r.n.homes):'—'],
+ heat:[['Heat offered',r=>r.id==='qu2'?NS:r.n.rec?rg(r.n.avail.map(v=>v/1000),'GWh/yr',0):(['conv','van4','vanm','edmc'].includes(r.id)?'no heat recovery in this design':'not yet known (air-cooled)')],['Homes’ heating, as an equal',r=>r.n.rec?rg(r.n.homes):'—'],
        ['Nearest heat network',r=>!r.site?NIL:r.id==='here'||r.id==='conv'?'<span class="sub">see below</span>':(r.site.nets&&r.site.nets.length?`${esc(r.site.nets[0].n.replace(/ \(.*/,''))}, ${fmt(r.site.nets[0].edge)} m`:'none within 1.2 km')]],
  energy:[['Electricity',r=>r.noPue?NS:rg(r.n.MWh.map(v=>v/1000),'GWh/yr',0)],['Its grid carbon',r=>r.noPue?NS:rg(r.n.co2,'t CO₂e/yr')],['Heat-pump carbon',r=>r.n.rec?rg(r.n.hpco2,'t CO₂e/yr'):'—']],
  water:[['Water evaporated on site',r=>r.id==='qu2'?NS:r.id==='van4'?'<span class="sub">none stated (operator claim)</span>':r.n.evap[1]?`up to ${fmt(r.n.evap[1])} m³/yr`:'none (dry coolers)'],['Rain on the roof',r=>r.site&&r.site.roof?`about ${fmt(r.site.roof*r.mm/1000*0.8)} m³/yr`:NIL]],
  materials:[['Electricity over 50 years',r=>r.noPue?NS:rg(r.n.MWh.map(v=>v*50/1e6),'TWh',1)]],
 };
-const WHY={heat:'Heat offered needs liquid cooling and a heat pump; air-cooled heat at 25–35 °C is shown as none to reuse.',energy:'Grid carbon: NIR 2026, 2024 consumption intensity in each province.',water:'Evaporation at most 1.5 L per kWh of heat (towers); hybrids wet only above 18 °C, 12.4% of the year in Vancouver and 10.4% in Edmonton (CWEC, computed). Rain at 80% capture, ECCC normals.',materials:'Materials embodied in each reference are not yet compared.'};
+const WHY={heat:'Heat offered needs liquid cooling and a heat pump; air-cooled heat (25–35 °C) can be reused with heat pumps, but how much is not yet known, so no figure is shown.',energy:'Grid carbon: NIR 2026, 2024 consumption intensity in each province.',water:'Evaporation at most 1.5 L per kWh of heat (towers); hybrids wet only above 18 °C, 12.4% of the year in Vancouver and 10.4% in Edmonton (CWEC, computed). Rain at 80% capture, ECCC normals.',materials:'Materials embodied in each reference are not yet compared.'};
 function block(tab,f){ const C=COLS[tab]; if(!C) return '';
   const L=refs(f);
   return `<div class="cmp"><div class="tt"><table class="cmpt"><thead><tr><th></th>${C.map(c=>`<th>${esc(c[0])}</th>`).join('')}</tr></thead><tbody>

@@ -32,7 +32,7 @@ function refresh(){ BD.modelReset&&BD.modelReset(); const t=BD.S.tab; if(t&&BD.t
 
 /* ---------- the cooling card: inside and outside choices side by side ---------- */
 function coolingCard(){ const a=A(), R=E().R;
-  const ins=[['air','Air','25–35 °C','none captured into liquid; heat recovery needs a heat pump from warm exhaust air (no primary capture figure)','fans and coils in the hall','typical halls, 290–630 m² per MW (five built Canadian halls, operator claims)'],
+  const ins=[['air','Air','25–35 °C','none captured into liquid at the chip; heat pumps on the chilled-water loop or chiller condenser can recover it (Oró et al. 2019; Požgaj et al. 2025); how much for a whole hall is not yet known','fans and coils in the hall','typical halls, 290–630 m² per MW (five built Canadian halls, operator claims)'],
              ['plate','Liquid to the chip','warmer (temperature not yet sourced)',`${Math.round(R.capture[0]*100)}–${Math.round(R.capture[1]*100)}% of heat into liquid (LBNL 2014, NREL)`,'pumps and coolant distribution units, about 0.6 m² per MW (maker claim)','dense halls, 250–290 m² per MW (NEXTDC S3, QScale; operator claims)'],
              ['immersion','Immersion','not yet sourced','not yet sourced','tanks of fluid instead of racks','not yet sourced']];
   const outs=[['dry','Dry coolers','none on site','fans: about 98–101 dBA per unit of about 1 MW (low-noise to standard, maker data for an air-cooled unit)','about 24.5 m² of unit per MW, plus clearances','no water rules; Edmonton s. 5.120 screening applies to non-industrial sites'],

@@ -348,3 +348,20 @@ No building is drawn for a new data centre. The 3D shows the lot, the zoning's b
 - M99/M100/M101/M103/M105/M106/M107: register and limits wording (servers' making vs running is the tool's own inference; wells box wording; heat_temp air/liquid unverified; Meta COP after 2021 is combined; UPS minutes and generator 10–20 s labelled; Stockholm "10-year call-off contracts (reported)"; Telia ERF basis not stated; building shell life is an accounting write-off).
 - Batch 5 additions: M29 Vancouver utility-programme rung is BC Hydro Demand Response for Business (battery eligibility not stated), not the Call for Demand. Minor: jobs range no longer prints low above high; immersion capture bar "not yet sourced" instead of none; comparison MW not rounded to 0; "na" rules count as not yet known; Nat Bailey Stadium (outdoor) removed from receivers; Vancouver rainwater "with an operating permit and an engineer's design" (VBBL 2025 s. 2.7.5.3, 2.7.6.1, read locally).
 - Items needing J.B.: audit/decisions_for_JB.md.
+
+## Batch 7 — heat items 1–7 (18 Oct 2026, J.B. "go")
+Sources for every item: `audit/heat_items_sources_2026-10-18.md`.
+1. **Gas price (M2):** the commodity is averaged over the same 12 months in both cities (Nov 2025 – Oct 2026); the rest of each tariff stays at the current schedule.
+   - Vancouver: FortisBC cost of gas $2.230 → $1.660 (BCUC G-50-26), mean $1.8975 → $9.54/GJ in all. October 2026 "unchanged" is from a FortisBC release copy; the BCUC letter was not read (unverified).
+   - Edmonton: UCA regulated rate, mean $2.025 + ATCO delivery $1.045 → $3.07/GJ.
+   - Effect: at COP 4.5 Edmonton heat is now worth +$1.9/MWh (was negative); at COP 3.0 it is still −$3.6.
+2. **Break-even cap (M3):** a building buys min(its demand, heat offered). This flows into value, break-even distance, payback and "what would close the gap". Example: St Paul's at 1169 Richards takes 3,244–5,913 MWh of its 35,296 at 1 MW.
+3. **Month ratio (M14):** s = space ÷ (space + water), CEUD residential 2018–22 (BC 0.674, AB 0.761) → 4.9 : 1 Vancouver, 5.0 : 1 Edmonton (was 3.9 / 3.3). Edmonton is now the more seasonal city. Stored in R.monthRatio.
+4. **Air cooling (M15/M41 wording):**
+   - "None to reuse" is removed everywhere. Air cooling with chillers is "possible with a change: heat pumps on the chilled-water loop or chiller condenser" (Oró 2019; Požgaj 2025).
+   - The figure is "not yet known". Greenhouse, aquaculture and new-district sizes are labelled "if liquid-cooled", and their physics gate follows the cooling choice.
+   - Compare: designs without recovery say "no heat recovery in this design".
+5. **Cooling for neighbours:** temperature gate added. Liquid-cooled: adsorption possible (from about 45–65 °C; LRZ operator doc and a preprint, lower confidence); absorption needs 70–90 °C+ (Chen 2026). Air-cooled: heat pump first ("possible with a change").
+6. **"Lower-carbon" (M89):** the word is dropped. The connection card shows per MWh of heat: gas boiler ≈ 218 kg CO₂e against heat-pump electricity 4–6 kg (BC) or 77–115 kg (AB). Average grid; the data centre's own cooling is not counted.
+7. **Homes heated (M96):** 2018–22 average, 16.81 / 33.14 MWh per home (was 2023: 14.58 / 29.19).
+Also: negative money is shown as −$; the BC/Alberta price label now follows the city, not the sign. Register updated (homes_heated, demand_profile, price_ceiling, absorption, liquid_capture, heat_temp, grid_co2) with 9 new sources.
