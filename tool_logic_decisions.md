@@ -385,3 +385,7 @@ Also: negative money is shown as −$; the BC/Alberta price label now follows th
   - Independent academic institutions (Concordia, King's, MaKami) stay schools, for parity with BC's private degree-granting institutions.
   - Campus demand is "not yet known" (several buildings; the institution's own energy reports not read). BCIT Downtown and SFU Harbour Centre sit in towers.
   - The "Hospital or campus anchor" gate now counts both hospitals and campuses.
+- **M66 existing floor area (18 Oct 2026, J.B.: "we can't have wrong square footages").**
+  - City reporting map, Export data → Disclosed Data (316 buildings, reporting year 2025): owner-reported gross floor area is now used on 266 parcels (255 buildings), matched by address (`tool/make_gfa_reported.py` → `tool/gfa_van.js`). Not used where the reported area exceeds 1.2 × a 3 m-storey estimate (28 left out, e.g. 1255 Seymour).
+  - Elsewhere: each part × its own storeys (height ÷ 4 m), shown as a range of 0.48–1.23 × the estimate. Against the 255 reported buildings this method was 19% low to 109% high for the middle 80% (median +14%), so it is not always an overestimate.
+  - Buildings 40 m or taller: 727 by address, 131 with a reported area, 596 still estimated. BC Assessment Gross Building Area would cover them (licence: needs Jeremy Buhler's written OK).
