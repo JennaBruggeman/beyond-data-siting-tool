@@ -257,13 +257,13 @@ function fitsView(){
 const TYPE={housing:'Non-market housing',school:'School',care:'Care home',hospital:'Hospital',rec:'Recreation centre',pool:'Pool',arena:'Indoor arena'};
 const FIRM={completed:'existing','under construction':'committed',approved:'planned',proposed:'proposed'};
 function nearby(f,d){ const out=[]; for(const p of d.pts){ const dist=Math.hypot(p.x-f.c[0],p.y-f.c[1]); const reach=R.reach[p.t]||R.reachGuide; if(dist<=reach) out.push(Object.assign({dist,reach,guide:!R.reach[p.t]},p)); } return out.sort((a,b)=>a.dist-b.dist); }
-function netsAt(f,d){ return d.nets.map(n=>{ const inside=BD.pip(f.c[0],f.c[1],n.r); const e=distToRing(f.c[0],f.c[1],n.r); return Object.assign({inside,edge:e},n); }).filter(n=>n.inside||n.edge<1200); }
+function netsAt(f,d){ return d.nets.map(n=>{ const inside=BD.pip(f.c[0],f.c[1],n.r); const e=distToRing(f.c[0],f.c[1],n.r); return Object.assign({inside,edge:e},n); }).filter(n=>n.inside||n.edge<1200).sort((a,b)=>(b.inside-a.inside)||(a.edge-b.edge)); } // inside first, then nearest (verification sweep M16)
 async function recvView(){
   const f=siteFacts(); BD.S.view2='recv'; const d=await loadRecv(f.city); const near=nearby(f,d), nets=netsAt(f,d);
   const by={}; near.forEach(p=>(by[p.t]=by[p.t]||[]).push(p));
   let h=tabBar('heat')+`<h2>Who could take the heat</h2>
   <p class="draft">Candidates, not commitments: places whose type of demand could use low-grade heat, within the distance at which a pipe has paid back elsewhere. Each still has to pass its own tests.</p>`;
-  if(nets.length) h+=nets.map(n=>`<h3>District energy</h3><p><b>${esc(n.n)}</b> — ${n.edge<50?'<span class="draft">on the edge of its service area (within the ±45 m of the tracing) — check the schedule for this lot</span>':n.inside?'<span class="draft">inside its service area</span>':`${kmOrM(n.edge)} outside its service area`}</p><p class="sub">${esc(n.note)}</p>${src('neu')}`).join('');
+  if(nets.length) h+=nets.map(n=>`<h3>District energy</h3><p><b>${esc(n.n)}</b> — ${n.edge<50?`<span class="draft">on the edge of its service area (${n.src==='van9552'?'within the ±45 m of the tracing':'its boundary here is approximate'}) — check the schedule for this lot</span>`:n.inside?'<span class="draft">inside its service area</span>':`${kmOrM(n.edge)} outside its ${n.src==='van9552'?'':'approximate '}service area`}</p><p class="sub">${esc(n.note)}</p>${n.src==='van9552'?src('neu'):''}`).join('');
   if(f.city==='edm'){ const nb=String(((BD.S.sel||{}).a||[])[10]||''); h+=`<h3>District energy in Edmonton</h3><p class="sub">${/BLATCHFORD/.test(nb)?'<span class="draft">This lot is in the Blatchford neighbourhood.</span> ':''}Blatchford's district energy sharing system is compulsory inside its service area: owners must connect each building (Bylaw C17943 s. 6), unless the City Manager exempts a net-zero carbon building (s. 8). The service area exists only as a map (Schedule A), not yet traced in the tool. Downtown district energy phases are not yet traced either.</p><div class="src"><span class="evb ev-record">public record</span> City of Edmonton Bylaw C17943 (Blatchford District Energy Sharing System)</div>`; }
   if(f.downtown) h+=`<h3>Downtown steam</h3><p class="sub">Creative Energy's steam network serves more than 200 downtown buildings (BCUC G-310-21A). Its service area is not published as a map, so it is not drawn. Steam needs far hotter heat than a data centre gives off.</p>`;
   const order=['housing','school','care','hospital','pool','rec','arena'];
@@ -284,7 +284,7 @@ async function recvView(){
       `Homes: heat ÷ ${R.homeMWh[f.city]} MWh per home a year = ${n1(r.homes[0])}–<b>${n1(r.homes[1])}</b>.`,
       `Carbon: heat-pump electricity × ${R.grid[f.city]} g/kWh = ${n1(r.co2[0])}–<b>${n1(r.co2[1])} t CO₂e</b>.`],
       'Load factor: Fan et al. 2007. Capture: LBNL 2014, NREL (direct-to-chip). COP: DEA 2026 waste-heat heat pumps to 70 °C (3.0–3.6) and observed at Meta Odense (4.5, 2020). Homes: NRCan CEUD 2023. Grid: NIR 2026.')}`; }
-  { const EC=BD.ECON; if(EC){ const v=EC.gas[f.city], pe=EC.elec[f.city], nb=v-pe/R.cop[1], nw=v-pe/R.cop[0];
+  { const EC=BD.ECON; if(EC){ const v=EC.heatVal(f.city), pe=EC.elec[f.city], nb=v-pe/R.cop[1], nw=v-pe/R.cop[0];
     h+=`<p class="sub"><span class="draft">${esc(`The search circles are Dutch payback distances (RVO 2018: five years at Dutch prices), used only to say where to look. `+(nb<=0?`At ${f.city==='edm'?'Alberta':'BC'} prices the heat pump's electricity costs more than the gas the heat would replace ($${nw.toFixed(1)} to $${nb.toFixed(1)} per MWh), so no route pays back at any distance; each card shows what would have to change.`:`At ${f.city==='van'?'BC':'Alberta'} prices the heat is worth $${nw.toFixed(1)}–${nb.toFixed(1)} per MWh after the heat pump; each receiver's own break-even distance is on its card.`))}</span></p>`; } }
   h+=`${src('reach')}${src('recv')}<p class="sub" style="margin-top:10px">${f.city==='van'?'Vancouver pools and rinks are not separate records in the national database; recreation centres may contain them. Private housing and offices are not mapped yet.':'Edmonton care homes and most hospitals have no location in the national record; private housing and offices are not mapped yet.'}</p>
   `;
@@ -334,7 +334,7 @@ async function optionsView(){
      ['Servers',o=>o.mw.toFixed(1)+' MW'],
      ['Plant space',o=>rng(o.r.plant[0],o.r.plant[1],'m²')+' (equipment only)'],
      ['Standby fuel, 12 h',o=>rng(o.r.fuel[0],o.r.fuel[1],'L')],
-     ['Zoning path',()=>`${state(zState)}${esc(f.status.t)}${zs==='no'?' — about 15 months to a Vancouver decision':''}`]]],
+     ['Zoning path',()=>`${state(zState)}${esc(f.status.t)}${zs==='no'?(f.city==='van'?' — about 15 months to a Vancouver decision':' — the City targets 160 calendar days for a complex rezoning (about 5.5 months, after a pre-application meeting), then a Council public hearing'):''}`]]],
    ['The utility and the grid',[
      ['Power drawn',o=>rng(o.r.fac[0],o.r.fac[1],'MW')],
      ['Electricity a year',o=>rng(o.r.facMWh[0]/1000,o.r.facMWh[1]/1000,'GWh')],
@@ -344,7 +344,7 @@ async function optionsView(){
      ['Equal to the heating of',o=>o.recover?rng(o.r.homes[0],o.r.homes[1],'homes')+' (space and hot water, provincial average)':'—'],
      ['Within reach',o=>o.to==='net'&&net?`${state(net.edge<50?'cj':'chg')}${esc(net.n)} — ${net.edge<50?'on the edge of the service area':'compulsory connection; heat sent back is credited'}`:o.recover?`${state(near.length?'met':'not')}${near.length} candidate${near.length===1?'':'s'}`:'—'],
      ['How much they would take',o=>o.recover?`${state('cj')}needs each receiver's monthly demand — a year of heat is mostly needed in winter (about ${f.city==='van'?'3.9':'3.3'} : 1 between the busiest and quietest month)`:'—'],
-     ['Other source already serving',()=>net?`${state('chg')}the NEU runs mostly on sewage heat`:`${state('cj')}not known for these buildings`],
+     ['Other source already serving',()=>net&&net.src==='van9552'?`${state('chg')}the NEU runs mostly on sewage heat`:net?`${state('cj')}${esc(net.n.replace(/ \(.*/,''))}: its heat source is not stated in the tool`:`${state('cj')}not known for these buildings`],
      ['Price for the heat',o=>o.r.credit?`$${fmt(o.r.credit[0])}–$${fmt(o.r.credit[1])} a year at the NEU's credit ($32.59/MWh)`:o.recover?`${state('cj')}${f.city==='van'?'no published price outside the NEU':'no published price; Edmonton\'s district energy prices at the gas-equivalent cost plus avoided boiler costs'}`:'—']]],
    ['The climate',[
      ['Heat-pump electricity',o=>o.recover?rng(o.r.hp[0]/1000,o.r.hp[1]/1000,'GWh/yr')+' → '+rng(o.r.co2[0],o.r.co2[1],'t CO₂e/yr'):'—'],
@@ -536,7 +536,7 @@ function waterView(){
   <h3>Behind its electricity</h3><dl><dt>Water used to make its power</dt><dd>${fmt(wbe[0])}–${fmt(wbe[1])} m³/yr (thermal plants ~1.25 L/kWh; hydro reservoirs ~16.8 L/kWh — mostly evaporation from reservoirs)</dd></dl>${s3('wbe')}
   <h3>Other sources and their rules</h3><dl><dt>Reclaimed water</dt><dd>${f.city==='van'?'Metro Vancouver considers supply to industry case by case; no rate':'EPCOR supplied 4,226 ML of reclaimed water to industry in 2024 (Gold Bar)'}</dd>
   <dt>Neighbours' greywater</dt><dd>${f.city==='van'?'not allowed as a cooling source under the Building By-law; residential systems only (2025)':'needs a variance in Alberta'}</dd>
-  <dt>The sewer as a heat sink</dt><dd>warm water to the sewer must stay below 40 °C at the plant; heat taken from sewage needs a letter of support, first come first served</dd></dl>${s3('reuse')}${s3('sewer')}
+  <dt>The sewer as a heat sink</dt><dd>${f.city==='van'?'warm water must not raise waste entering any sewage facility to 40 °C or more, and a high-volume discharge (over 300 m³ in 30 days) needs a permit (Metro Vancouver Sewer Use Bylaw 299); heat taken from sewage needs a letter of support, first come first served':'non-contact cooling water may go to the sanitary sewer only with EPCOR\'s prior written approval (Drainage Services Bylaw 18100); no EPCOR programme for taking heat from sewage was found'}</dd></dl>${s3('reuse')}${s3('sewer')}
   ${mathBox([
     towers?`Evaporated, at most: ${n0(MWh[1])} MWh of heat × 1,000 × 1.5 L/kWh ÷ 1,000 = <b>${n0(evap[1])} m³</b> (latent heat sets ≈1.5 L per kWh as the ceiling).`:'Dry coolers: no water evaporated for cooling.',
     towers?`Make-up = evaporated × (1 + 1 ÷ (cycles − 1)): at 6 cycles × 1.2 = ${n0(mk[0])} m³; at 2 cycles × 2 = <b>${n0(mk[1])} m³</b>. Blowdown = evaporated ÷ (cycles − 1) = ${n0(bd[0])}–<b>${n0(bd[1])} m³</b>.`:'',

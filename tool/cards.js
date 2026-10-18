@@ -34,15 +34,16 @@ const ECON={
  eur:1.5782, usd:1.3978, // Bank of Canada annual averages 2025, CAD per unit
  pipe:[1038,2620],       // CAD per metre of trench, DN100 pipe pair: Persson et al. 2019 average (≈€658/m, 2015 €) to npro paved urban (€160 + €1,500); converted at the 2025 rates; no inflation adjustment
  pipeCheck:1541,         // City of Cambridge MA, DN100 US$336/ft (2027 planning prices)
- fixed:112611,           // City of Vancouver NEU connection levy 2025, fixed part per energy transfer station (+ $133/kW of peak, not included: peak demand is not known)
+ fixed:123873,           // City of Vancouver NEU connection levy, fixed part per energy transfer station, in force 1 Jan 2026 (By-law 9552 Sch. C Part 1, as amended by By-law 14524; $136,260 from 1 Jan 2027) (+ $146/kW of peak, not included: peak demand is not known)
  gas:{van:9.305*3.6,edm:(1.045+1.458)*3.6}, // $/MWh of gas energy displaced: FortisBC Rate 3, Mainland (delivery 5.165 + Rider 5 0.212 = 5.377; storage and transport 1.171 + Rider 6 0.188 + Rider 8 0.909 = 2.268; cost of gas 1.660 $/GJ; every per-GJ charge on the schedule; delivery eff. 1 Jan 2026, G-287-25; commodity pages eff. 1 Jul 2026, G-131-26; checked against the schedule PDF 18 Oct 2026; basic charge and municipal fee excluded); ATCO Mid Use delivery 1.045 + Alberta regulated rate Oct 2026 1.458 $/GJ (riders excluded)
  elec:{van:67.9,edm:+(43.68+2.53+0.0809*43.68).toFixed(2)}, // $/MWh, energy-type charges only, demand charges excluded in both: BC Hydro LGS energy charge 6.79 ¢/kWh (1 Apr 2026); Alberta pool average 2025 $43.68 + EPCOR SAS-TOU transmission energy $2.53/MWh + operating reserve 8.09% of pool (2026 interim rates, AUC 30298-D01-2025; agent-read, to check)
+ boiler:0.85,             // gas boiler efficiency: a MWh of heat displaces 1 ÷ 0.85 MWh of gas (register price_ceiling; verification sweep M1, 18 Oct 2026)
  neu:32.59,               // $/MWh credited for heat returned to the NEU (By-law 9552 Sch. C)
  years:5,                 // the 5-year payback the reach distances are based on (RVO 2018)
  co2pipe:2*(39.5+1.03+0.205), // kg CO2e per metre of route: supply and return DN100, A1–A5 (isoplus EPD); trench excluded
  src:['vanStreets2026','edmRoads2026','persson2019','nproCosts','cambridgeApp5','vanNEUlevy2025','fortisBC2026','atcoGas2026','bchTariff2026','isoplusEPD','vanQuebecSt2020','vanNEUguide','torontoDER2016','statcanHeat2011']
 };
-BD.ECON=ECON;
+BD.ECON=ECON; ECON.heatVal=city=>ECON.gas[city]/ECON.boiler; // $/MWh of heat the gas boiler would otherwise make
 /* routes along streets: Vancouver street centrelines (City open data, 16 Oct 2026); elsewhere an L along the grid, labelled as an estimate */
 const ST={};
 async function streets(city){ if(ST[city]!==undefined) return ST[city]; try{ const d=await BD.getJSON('streets_'+city+'.json'); const N=new Map(), adj=[], xy=[];
@@ -64,12 +65,12 @@ function routePath(p){ if(!RT||!p._route) return null; const G=RT.G, pts=[], cls
 BD.routeTree=routeTree; BD.routePath=routePath;
 function heatEcon(f,p){ const R=E().R, city=f.city, cop=R.cop;
   const route=routeOf(f,p); const ce=(CEUD[city]||{})[p.t]; const demand=p.t==='housing'&&p.u?p.u*R.homeMWh[city]:(p.fa&&ce?p.fa*ce[0]/3.6:null);
-  const v=ECON.gas[city], pe=ECON.elec[city]; const net=[v-pe/cop[0],v-pe/cop[1]]; // worst (COP 3.0), best (COP 4.5) $/MWh of heat after the heat pump's electricity
+  const v=ECON.heatVal(city), pe=ECON.elec[city]; const net=[v-pe/cop[0],v-pe/cop[1]]; // worst (COP 3.0), best (COP 4.5) $/MWh of heat after the heat pump's electricity
   const o={route,demand,v,pe,net,cost:[ECON.fixed+route*ECON.pipe[0],ECON.fixed+route*ECON.pipe[1]],co2:route*ECON.co2pipe/1000};
   if(demand){ const val=net.map(n=>ECON.years*demand*n); o.val=val; o.be=[(val[1]-ECON.fixed)/ECON.pipe[0],(val[0]-ECON.fixed)/ECON.pipe[1]]; // best case, worst case break-even route length
     o.status=o.be[0]<=0?'beyond':route<=Math.max(0,o.be[1])?'within':route<=o.be[0]?'depends':'beyond';
     o.payback=net[1]>0?[o.cost[0]/(demand*net[1]),net[0]>0?o.cost[1]/(demand*net[0]):Infinity]:[Infinity,Infinity];
-    if(o.status==='beyond'){ o.close=[]; const need=(ECON.fixed+route*ECON.pipe[0])/(ECON.years*demand)+pe/cop[1]; o.close.push(`gas at about $${(need/3.6).toFixed(1)}/GJ instead of $${(v/3.6).toFixed(2)} (best case)`);
+    if(o.status==='beyond'){ o.close=[]; const need=(ECON.fixed+route*ECON.pipe[0])/(ECON.years*demand)+pe/cop[1]; o.close.push(`gas at about $${(need*ECON.boiler/3.6).toFixed(1)}/GJ instead of $${(ECON.gas[city]/3.6).toFixed(2)} (best case)`);
       if(net[1]>0){ const yrs=(ECON.fixed+route*ECON.pipe[0])/(demand*net[1]); o.close.push(`about ${Math.ceil(yrs)} years to pay back instead of ${ECON.years}`); }
       else o.close.push(`electricity below about $${(v*cop[1]).toFixed(0)}/MWh for the heat pump (now about $${pe.toFixed(0)}, before ${city==='edm'?'wires':'demand'} charges)`);
       o.close.push('a receiver taking more heat, or a pipe already in the street'); } }
@@ -129,7 +130,7 @@ async function heatIndex(){
   const r=e.calc({mw,recover:true,to:'near'},f,all,nets); const inside=nets.find(n=>n.inside);
   const nB=all.filter(p=>p.beyond).length, nW=all.filter(p=>p.econ.status==='within').length;
   // 16 Oct (J.B.): answer first; every part closed but showing its answer
-  const R0=e.R, gv=ECON.gas[f.city], pe0=ECON.elec[f.city], netB=gv-pe0/R0.cop[1];
+  const R0=e.R, gv=ECON.heatVal(f.city), pe0=ECON.elec[f.city], netB=gv-pe0/R0.cop[1];
   const bl=f.city==='edm'?nets.find(n=>/Blatchford/.test(n.n)):null;
   const nearNet=inside||nets.slice().sort((x,y)=>x.edge-y.edge)[0];
   const nDep=all.filter(p=>p.econ.status==='depends').length;
@@ -147,7 +148,7 @@ async function heatIndex(){
   +BD.sec('h-offer','Heat this size could offer',`${e.rng(r.avail[0]/1000,r.avail[1]/1000,'GWh a year')} with liquid cooling and a heat pump; none to reuse with air cooling`,
      `<div class="hfig"><div><b>${e.rng(r.avail[0]/1000,r.avail[1]/1000,'GWh/yr')}</b><span>heat this size could offer (liquid-cooled, heat pump)</span></div><div><b>${e.rng(r.homes[0],r.homes[1],'')}</b><span>homes' heating, as an equal (provincial average)</span></div></div><p class="sub"><a href="#" id="hmath">How the heat figure is worked out ›</a></p>`)
   +BD.sec('h-price','What the heat is worth here',netB<=0?'less than nothing: the heat pump costs more to run than the gas it replaces':`$${(gv-pe0/R0.cop[0]).toFixed(1)}–${(gv-pe0/R0.cop[1]).toFixed(1)} per MWh after the heat pump`,
-     `\n  ${(()=>{ const R=e.R, v=ECON.gas[f.city], pe=ECON.elec[f.city], nb=v-pe/R.cop[1], nw=v-pe/R.cop[0]; return `<p class="sub">${draft(nb<=0?`At Alberta prices (gas $${(v/3.6).toFixed(2)}/GJ, power $${pe.toFixed(2)}/MWh) the heat pump's electricity costs more than the gas the heat would replace ($${nw.toFixed(1)} to $${nb.toFixed(1)} per MWh of heat), so no route pays back at any distance. Each card says what would have to change.`:`At BC prices (gas $${(v/3.6).toFixed(2)}/GJ, power $${pe.toFixed(2)}/MWh) the heat is worth $${nw.toFixed(1)}–${nb.toFixed(1)} per MWh after the heat pump; each card works out its own break-even distance.`)}</p>`; })()}
+     `\n  ${(()=>{ const R=e.R, g=ECON.gas[f.city], v=ECON.heatVal(f.city), pe=ECON.elec[f.city], nb=v-pe/R.cop[1], nw=v-pe/R.cop[0]; return `<p class="sub">${draft(nb<=0?`At Alberta prices (gas $${(g/3.6).toFixed(2)}/GJ, burnt in an 85% boiler, power $${pe.toFixed(2)}/MWh) the heat pump's electricity costs more than the gas the heat would replace ($${nw.toFixed(1)} to $${nb.toFixed(1)} per MWh of heat), so no route pays back at any distance. Each card says what would have to change.`:`At BC prices (gas $${(g/3.6).toFixed(2)}/GJ, burnt in an 85% boiler, power $${pe.toFixed(2)}/MWh) the heat is worth $${nw.toFixed(1)}–${nb.toFixed(1)} per MWh after the heat pump; each card works out its own break-even distance.`)}</p>`; })()}
   <p class="sub"><a href="#" id="carriers">How far is too far, for each thing it could share ›</a></p>`,{finding:netB<=0})
   +BD.sec('h-cmp','Compared with other data centres','the same servers, conventional here, at two real data centres and on both worked-example lots','<div id="cmpSlot"></div>')
   +BD.sec('h-nets','Heat networks nearby',nearNet?(inside?`inside the ${esc(inside.n.replace(/ \(.*/,''))}`:`nearest: ${esc(nearNet.n.replace(/ \(.*/,''))}, ${fmt(nearNet.edge)} m`):'none within 1.2 km',
@@ -198,7 +199,7 @@ async function openConnection(kind,id){ await opps(); const H=BD._heat; if(!H) r
      x.demand?`Five years of it: ${ECON.years} × ${fmt(x.demand)} × $${x.net[1].toFixed(1)} = <b>$${fmt(x.val[1])}</b> (best case); with COP 3.0, $${fmt(x.val[0])}.`:'',
      `Cost to connect: $${fmt(ECON.fixed)} + ${fmt(x.route)} m × $${fmt(ECON.pipe[0])}–${fmt(ECON.pipe[1])}/m = <b>$${fmt(x.cost[0])}–${fmt(x.cost[1])}</b>.`,
      x.demand?`Break-even route length: (five years of value − $${fmt(ECON.fixed)}) ÷ cost per metre = <b>${x.be[0]>0?fmt(x.be[0])+' m':'none'}</b> best case, <b>${x.be[1]>0?fmt(x.be[1])+' m':'none'}</b> worst case.`:''].filter(Boolean),
-     'Pipe: Persson et al. 2019 (average, 2015 €) and npro (paved urban), DN100, converted at the Bank of Canada 2025 averages (€1 = $1.5782; US$1 = $1.3978), no inflation adjustment. Connection: City of Vancouver NEU levy 2025 (fixed part; $133/kW of peak not included)'+(f.city==='edm'?' — no Edmonton connection charge is published, so Vancouver\'s is used for scale':'')+'. Gas: FortisBC 2026 rate sheet (to check) / ATCO 2026 and the Utilities Consumer Advocate. Electricity: BC Hydro tariff 2026 / AESO 2025 pool price plus EPCOR\'s per-kWh transmission and operating-reserve charges (2026 interim rates, to check); demand charges excluded in both cities.')}
+     'Pipe: Persson et al. 2019 (average, 2015 €) and npro (paved urban), DN100, converted at the Bank of Canada 2025 averages (€1 = $1.5782; US$1 = $1.3978), no inflation adjustment. Connection: City of Vancouver NEU connection levy 2026, By-law 9552 Sch. C (fixed part $123,873; $146/kW of peak not included)'+(f.city==='edm'?' — no Edmonton connection charge is published, so Vancouver\'s is used for scale':'')+'. Gas: FortisBC 2026 rate sheet (to check) / ATCO 2026 and the Utilities Consumer Advocate. Electricity: BC Hydro tariff 2026 / AESO 2025 pool price plus EPCOR\'s per-kWh transmission and operating-reserve charges (2026 interim rates, to check); demand charges excluded in both cities.')}
   <h3>Payback and distance</h3>${chart(x)}
   ${x.status==='beyond'&&x.close?`<p class="sub">${draft('What would close the gap:')} ${x.close.map(esc).join('; ')}.</p>`:''}
   ${x.payback&&isFinite(x.payback[0])?`<p class="sub">Simple payback: ${x.payback[0].toFixed(1)}${isFinite(x.payback[1])?'–'+x.payback[1].toFixed(1):'+'} years.</p>`:''}
