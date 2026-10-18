@@ -389,3 +389,12 @@ Also: negative money is shown as −$; the BC/Alberta price label now follows th
   - City reporting map, Export data → Disclosed Data (316 buildings, reporting year 2025): owner-reported gross floor area is now used on 266 parcels (255 buildings), matched by address (`tool/make_gfa_reported.py` → `tool/gfa_van.js`). Not used where the reported area exceeds 1.2 × a 3 m-storey estimate (28 left out, e.g. 1255 Seymour).
   - Elsewhere: each part × its own storeys (height ÷ 4 m), shown as a range of 0.48–1.23 × the estimate. Against the 255 reported buildings this method was 19% low to 109% high for the middle 80% (median +14%), so it is not always an overestimate.
   - Buildings 40 m or taller: 727 by address, 131 with a reported area, 596 still estimated. BC Assessment Gross Building Area would cover them (licence: needs Jeremy Buhler's written OK).
+
+## Batch 9 — plant, size and model (18 Oct 2026; sources in audit/plant_sources_2026-10-18.md)
+- **M31 cooling equipment by type.** Air cooling with "dry" outside is now laid out as air-cooled chillers with free-cooling coils: 12.1 × 2.2 m at about 1.06 MW, or 17.1 × 3.0 m at about 2.29 MW above 6 MW of heat (Trane TCA, claim). Liquid cooling keeps dry coolers. Set-up text says dry coolers can't make water cold enough in summer, and free cooling covers about 37% (Vancouver) / 63% (Edmonton) of hours (Claude's count from CWEC).
+- **M30 one basis.** Cooling space is per MW of heat (× PUE): chillers 17–26, dry coolers 19.5–30.5 m²/MW. The noise count uses the same units the plant lays out, spares included.
+- **M32 noise.** Lw per unit: chillers 98–101 dBA, dry coolers 98.5–102 dBA (manufacturer claims). Towers and hybrid coolers are labelled as using a stand-in.
+- **M34.** A plant shortfall ("Doesn't fit at 22.1 MW: 11 of 19 generators do not fit in the yard") is shown on the set-up card.
+- **M35/M72.** "The low end of what fits" is replaced by "a provisional size until one is set". Opportunities, Heat, connection cards and Solar use the same provisional size as the plant (rounded to 0.1 MW), not 1 MW. The report says when a size is provisional.
+- **M77.** Report steps recorded before an input change are marked "Recorded with earlier choices — open this step again to update it".
+- **M102.** Register pv_roof now matches the panel-row layout the card uses.

@@ -50,3 +50,6 @@ Everything else from the critical and major lists is fixed (see `tool_logic_deci
 - NEU sewage heat: the City page is quoted as "3.2 MW", but an earlier check found 2.5 MW (RTS 06419). Needs the City page re-read.
 - LRMC capacity range "150–400" vs "200–400" $/kW-yr (IRP Appendix F s. 1.2.2): the local copy doesn't include that table.
 - Edmonton parking stall 23.4 m²: the bylaw clause found may sit in a special area.
+
+## To do (kept open, J.B. 18 Oct 2026)
+- **Tower floor areas (M66, remaining):** 596 buildings 40 m or taller (by address) still use the estimate range. 131 now use the City's owner-reported area. Next: BC Assessment Gross Building Area, which needs Jeremy Buhler's written OK (meeting Mon 19 Oct, 1 pm).

@@ -90,7 +90,7 @@ function pvLayout(f){ const M=f.M; if(!M||!M.foot||!BD.plant) return null; const
   const [a,b,c,d]=BD.plant.localBounds(F,M.foot); const got=BD.plant.pack(F,M.foot,forbid,a,b,c,d,k,1200,false);
   const slots=got.map(p=>BD.geo.rectW(F,p.u-p.L/2,p.u+p.L/2,p.v-p.W/2,p.v+p.W/2)); const m2=got.length*12; return {slots,m2,kwp:[m2*0.16,m2*0.20]}; }
 async function pvData(){ if(BD._pv) return BD._pv; try{ BD._pv=await BD.getJSON('nrcan_pv.json'); }catch(e){ BD._pv=null; } return BD._pv; }
-async function solarCard(){ const e=E(), f=e.siteFacts(), R=e.R, a=A(), mw=a.mw||1, city=f.city; const lay=pvLayout(f); const pv=await pvData(); const x=addon('pv');
+async function solarCard(){ const e=E(), f=e.siteFacts(), R=e.R, a=A(), mw=a.mw||(f.M&&f.M.mwSized)||1, city=f.city; const lay=pvLayout(f); const pv=await pvData(); const x=addon('pv');
   const yl=pv?[pv[city].horizontal.reduce((s,v)=>s+v,0),pv[city].latitude.reduce((s,v)=>s+v,0)]:(city==='van'?[892,1007]:[944,1244]);
   const kwp=lay?lay.kwp:[0,0], mwh=[kwp[0]*yl[0]/1000,kwp[1]*yl[1]/1000]; const use=mw*R.pue[0]*8760*R.lf, use2=mw*R.pue[1]*8760*R.lf;
   const rate=k=>k<100?[2.0,3.2]:k<250?[1.9,2.4]:[1.68,2.22]; const cost=[kwp[0]*1000*rate(kwp[0])[0],kwp[1]*1000*rate(kwp[1])[1]];
@@ -252,11 +252,11 @@ function peopleExtra(){ const e=E(); if(BD.S.tab!=='social'){ BD.afterSocial=nul
   box.querySelectorAll('[data-pp]').forEach(b=>b.onclick=()=>{ const p=near.find(x=>x.id===+b.dataset.pp); personCard(f,p,TYPE); });
   setTimeout(async()=>{ const G=await (BD.streets?BD.streets(f.city):null); const s=sightLines(f,G); s.street=!!G; const t=$('#sightTxt'); if(t) t.innerHTML=`Plant seen from <b style="font-weight:400">${s.homes[0]} of ${s.homes[1]}</b> nearby homes and from <b style="font-weight:400">${s.edge[0]} of ${s.edge[1]}</b> points ${s.street?'on the streets within 200 m (City centrelines, a proxy for the sidewalk)':'just outside the lot'}${A().vis&&A().vis!=='reveal'?` (with the plant ${esc({screen:'screened',enclose:'enclosed',indoors:'indoors'}[A().vis])}; the test does not yet model screens)`:''}. Drawn in 3D: solid lines are seen, dashed are blocked.`;
     const pb=(f.M&&f.M.plant&&f.M.plant.boxes)||[]; const psrc=pb.length?[pb.reduce((t,b)=>t+BD.centroid(b.ring)[0],0)/pb.length,pb.reduce((t,b)=>t+BD.centroid(b.ring)[1],0)/pb.length]:null;
-    const n=Math.max(1,Math.ceil((A().mw||1)*e.R.pue[1])), lw=[e.R.lwUnit[0]+10*Math.log10(n),e.R.lwUnit[1]+10*Math.log10(n)];
+    const NL=e.noiseLw(A().mw||(f.M&&f.M.mwSized)||1), n=NL.n, lw=NL.lw;
     const people=near.slice(0,20).map(p=>({x:p.x,y:p.y,n:p.n||TYPE[p.t],kind:TYPE[p.t],col:0xb9a3cf}));
     const seenL=s.lines.filter(l=>l.seen), blk=s.lines.filter(l=>!l.seen); const draw=seenL.slice(0,40).concat(blk.slice(0,15));
     BD.scene3d&&BD.scene3d.show('social',{site:f,noise:BD._noise||{lw,limit:50,src:psrc},sight:A().vis==='indoors'?[]:draw,people}); },400); }
-function personCard(f,p,TYPE){ const n=Math.max(1,Math.ceil((A().mw||1)*E().R.pue[1])), lw=[E().R.lwUnit[0]+10*Math.log10(n),E().R.lwUnit[1]+10*Math.log10(n)], r=Math.max(5,p.dist); const lp=lw.map(L=>L-20*Math.log10(r)-8);
+function personCard(f,p,TYPE){ const NL=E().noiseLw(A().mw||(f.M&&f.M.mwSized)||1), n=NL.n, lw=NL.lw, r=Math.max(5,p.dist); const lp=lw.map(L=>L-20*Math.log10(r)-8);
   BD.drawer.open(`<div class="kind">People · neighbour</div><h2>${esc(p.n||TYPE[p.t])}</h2><p class="sub">${esc(TYPE[p.t])}${p.u?' · '+p.u+' homes':''} · ${fmt(p.dist)} m from the site</p>
   <dl><dt>Would hear</dt><dd>about ${Math.round(Math.max(0,lp[0]))}–${Math.round(lp[1])} dBA from the cooling plant, before walls, barriers or enclosures (screening estimate)</dd><dt>Would see</dt><dd>see the sight-line count on the People tab</dd><dt>Could gain</dt><dd>${p.t==='housing'||p.t==='school'||p.t==='care'||p.t==='rec'||p.t==='pool'?'heat, if it can take low-temperature heat (Heat tab)':'—'}${p.t==='rec'||p.t==='school'?'; a warming or cooling room, if the rules allow it (opportunities)':''}</dd><dt>Who they are</dt><dd>${draft('a record in a national or City list; how the people there would feel is for engagement, not the tool')}</dd></dl>
   <h3>Sources</h3>${E().s3('snd')}${E().src('recv')}`); }

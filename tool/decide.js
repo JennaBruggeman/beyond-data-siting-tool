@@ -67,7 +67,7 @@ const DECK=[
    {v:'plate',t:'Liquid to the chip',up:['48–75% of the heat caught in liquid (LBNL, NREL)','Warmer heat, easier to reuse'],down:['Plumbing to every server','The rest of the heat still needs air']},
    {v:'immersion',t:'Immersion',up:['Servers sit in fluid; few or no server fans'],down:['How much heat it catches is not yet sourced','Special tanks and fluids; heavy floors']}],set:(A,v)=>{ A.inside=v; },anim:v=>A_[v]()},
  {id:'outside',q:'How does the heat leave?',k:A=>A.outside||'dry',opts:()=>[
-   {v:'dry',t:'Dry coolers',up:['No water at all','Simple closed loop'],down:['The most space: about 1.2 MW per 12 m unit','Fan noise, most on hot days']},
+   {v:'dry',t:'Dry coolers',up:['No water at all','Simple closed loop'],down:['The most space: about 1.2 MW per 12 m unit','Fan noise, most on hot days','With air cooling they cannot make water cold enough in summer: air-cooled chillers take their place (free cooling about 37% of the year in Vancouver, 63% in Edmonton)']},
    {v:'towers',t:'Cooling towers',up:['Smallest and fewest units'],down:['Evaporates up to 1.5 L of water per kWh of heat','Blowdown to the sewer; operating permit and Legionella testing']},
    {v:'hybrid',t:'Hybrid coolers',up:['Water only on hot days: about 12% of the year in Vancouver, 10% in Edmonton'],down:['Uses water on the hottest days','Vancouver treats them like a cooling tower']}],set:(A,v)=>{ A.outside=v; },anim:v=>A_[v]()},
  {id:'plantAt',q:'Where does the plant go?',k:A=>A.plantAt||'roof',opts:()=>[
@@ -134,6 +134,7 @@ function show(i){ const A=BD.S.answers; const L=live(); at=Math.max(0,Math.min(L
   if(BD.drawer&&BD.drawer.isOpen()) BD.drawer.close();
   const res=f.mw[1]<0.05?`${K('Nothing fits')} with these choices`:`${K(BD.eng.rng(f.mw[0],f.mw[1],'MW'))} of servers fit · ${BD.eng.rng(f.gross[0],f.gross[1],'m²')} floor`;
   const no=fs.s==='no';
+  const MP=BD.model&&BD.model(), PM=MP&&MP.plant; const shortTxt=PM&&PM.miss&&PM.miss.length?`<br><span class="dwarn">Doesn't fit at ${MP.mwSized} MW: ${esc(PM.miss.join('; '))}</span>`:''; // sweep M34: a shortfall is shown on the card, not only in a chart tooltip
   $('#side').innerHTML=`<div class="dk"><div class="kind">Set up the site · ${at+1} of ${L.length}</div><div class="dbar">${L.map((x,j)=>`<i class="${j<at?'done':j===at?'on':''}"></i>`).join('')}</div>
    <h2>${esc(d.q)}</h2>
    <div class="dch" role="radiogroup">${opts.map(x=>{ const s=feas(d.id,x.v).s; return `<button role="radio" data-v="${x.v}" aria-checked="${x.v===o.v}" class="${s==='no'?'nope':''}" title="${esc(FS[s][0])}">${s==='no'?'✕ ':''}${esc(x.t)}</button>`; }).join('')}</div>
@@ -141,7 +142,7 @@ function show(i){ const A=BD.S.answers; const L=live(); at=Math.max(0,Math.min(L
    ${!no?`<div class="dfeas" style="--fc:${F[1]}"><b>${F[2]} ${F[0]}</b>${fs.why?` <span>${esc(fs.why)}</span>`:''}</div>`:''}${!no&&d.extra?d.extra(A):''}
    <div class="dud${no?' off':''}"><div><div class="dh up">Upsides</div><ul>${o.up.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div><div><div class="dh dn">Downsides</div><ul>${o.down.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div>
    ${CH[d.id]?'<div class="dchart" id="dchart"></div><p class="dcap" id="dcap"></p>':''}
-   <p class="dres">${no?'Nothing changes: the site stays as set up, ':''}${res}${m.warn&&m.warn.length?`<br><span class="dwarn">${esc(m.warn[0])}</span>`:''}</p>
+   <p class="dres">${no?'Nothing changes: the site stays as set up, ':''}${res}${shortTxt}${m.warn&&m.warn.length?`<br><span class="dwarn">${esc(m.warn[0])}</span>`:''}</p>
    <div class="dnav"><button class="sec" id="dB">← ${at?'Back':'The site'}</button><button class="pri" id="dN">${at<L.length-1?'Next →':'What fits here →'}</button></div></div>`;
   const el=$('#side');
   el.querySelectorAll('.dch button').forEach(b=>b.onclick=()=>{ const v=b.dataset.v; if(feas(d.id,v).s==='no'){ pv[d.id]=v; show(at); return; } pv[d.id]=null; d.set(A,v); changed(); });

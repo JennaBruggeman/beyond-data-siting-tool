@@ -137,7 +137,7 @@ function otherNets(city){ const L=OTHERNETS[city]||[]; if(!L.length) return '';
   return `<details class="sub"><summary>Other district-energy systems in the city (${L.length}; those not on the map have no location source yet)</summary><table class="idx"><tbody>${L.map(r=>`<tr><td>${esc(r[0])}<div class="src">${esc(r[1])}${r[2]!=='—'?' ('+r[2]+')':''}</div></td></tr>`).join('')}</tbody></table>
   <div class="src">CEEDC Innovative Energy Facilities inventory, district energy (SFU). Its coordinates do not match the facilities and it gives no service areas; systems marked on the map are located from other sources. Figures reported 2014–2023; some figures withheld as confidential. Steam at 205 °C cannot take server heat without a large lift; hot-water networks at 65–85 °C need a heat pump; returns at 50–65 °C set what it must beat.</div></details>`; }
 async function heatIndex(){
-  await opps(); const e=E(), f=e.siteFacts(), A=BD.S.answers, mw=A.mw||1; BD.S.view2='tab';
+  await opps(); const e=E(), f=e.siteFacts(), A=BD.S.answers, mw=A.mw||(f.M&&f.M.mwSized)||1; BD.S.view2='tab';
   const d=await e.loadRecv(f.city), nets=e.netsAt(f,d); await routeTree(f);
   const all=d.pts.map(p=>Object.assign({},p,{dist:Math.hypot(p.x-f.c[0],p.y-f.c[1])})).filter(p=>p.dist<=1500).sort((a,b)=>a.dist-b.dist);
   const r=e.calc({mw,recover:true,to:'near'},f,all,nets);
@@ -196,7 +196,7 @@ async function heatIndex(){
 
 /* ---------- a connection card ---------- */
 async function openConnection(kind,id){ await opps(); const H=BD._heat; if(!H) return; const p=H.all.find(x=>x.id===id); if(!p) return; const f=H.f, e=E(), R=e.R, x=p.econ, A=BD.S.answers;
-  const mw=A.mw||1, r=e.calc({mw,recover:true,to:'near'},f,[p],H.nets); const city=f.city;
+  const mw=A.mw||(f.M&&f.M.mwSized)||1, r=e.calc({mw,recover:true,to:'near'},f,[p],H.nets); const city=f.city;
   const L=OPPS.opportunities['New district with the data centre as heat plant']||OPPS.opportunities['District heat to a network']||{};
   const who=A.payer||'operator';
   const share=x.demand?[x.demand/r.avail[1],x.demand/r.avail[0]]:null; // share of the heat offered (low offer → higher share); above 100% means it would take all of it

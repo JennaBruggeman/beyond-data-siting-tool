@@ -155,17 +155,17 @@ function capture(){ const st=F.steps[F.i]; const sd=$('#side'); if(!st||!sd||!BD
   const srcs=[...sd.querySelectorAll('details.fp')].map(d=>{ const c=d.cloneNode(true); const s=c.querySelector('summary'); if(s) s.remove(); return clean(c); }).filter(Boolean);
   const rows=st.k==='opps-rest'||st.k.startsWith('fam:')?[...sd.querySelectorAll('.famrow, .famno .addrow, :scope > .addrow')].map(r=>(r.closest('.famno')?'Not here: ':'')+clean(r)):[];
   const secs2=st.k.startsWith('opp:')||st.k.startsWith('fam:')?[]:secs.filter(r=>r[0]!=='How it compares');
-  F.notes[st.k]={t:st.t,g:st.g,title:h2?clean(h2):st.t,lead:lead?clean(lead):'',secs:secs2,tables,srcs,rows}; }
+  F.notes[st.k]={t:st.t,g:st.g,title:h2?clean(h2):st.t,lead:lead?clean(lead):'',secs:secs2,tables,srcs,rows,sig:sigOf()}; }
 
 /* ---------- step 6: the report, on screen and as HTML or PDF ---------- */
 function facts(){ const e=BD.eng, f=e.siteFacts(), A=BD.S.answers, a=BD.S.sel.a||[], rng=e.rng;
   return [['Site',`${a[0]||'No civic address'}, ${f.city==='van'?'Vancouver':'Edmonton'}`],['Zone',`${f.zone||'—'}: ${f.status.t}`],['Lot',`${BD.fmt(f.lot||0)} m²`],
-   ['Floor area available',`${f.fullCover?'up to ':''}${rng(f.gross[0],f.gross[1],'m²')}`],['Largest that fits',rng(f.mw[0],f.mw[1],'MW of servers')],['Size tested',`${A.mw||1} MW of servers`],
-   ['Set-up',`${A.built==='existing'?'existing building':'new building'}, ${A.inside||'air'} cooling inside, ${A.outside||'dry'} coolers outside`]]; }
+   ['Floor area available',`${f.fullCover?'up to ':''}${rng(f.gross[0],f.gross[1],'m²')}`],['Largest that fits',rng(f.mw[0],f.mw[1],'MW of servers')],['Size tested',A.mw?`${A.mw} MW of servers`:`${(f.M&&f.M.mwSized)||1} MW of servers (provisional: no size set)`],
+   ['Set-up',`${A.built==='existing'?'existing building':'new building'}, ${A.inside||'air'} cooling inside, ${(A.outside||'dry')==='dry'?((A.inside||'air')==='air'?'air-cooled chillers':'dry coolers'):(A.outside==='towers'?'cooling towers':'hybrid coolers')} outside`]]; }
 const ORDERG=['site','fits','ex','opps','opts','report'];
 function reportData(){ const groups=[]; for(const [g,l] of GROUPS){ const items=F.steps.filter(s=>s.g===g&&F.notes[s.k]).map(s=>F.notes[s.k]); if(items.length) groups.push({g,l,items}); }
   const seen=new Set(), srcs=[]; for(const s of Object.values(F.notes).flatMap(n=>n.srcs)){ const key=s.toLowerCase().replace(/[^a-z0-9]/g,''); /* whole string: blocks sharing a preamble are kept (sweep M78) */ if(!seen.has(key)){ seen.add(key); srcs.push(s); } } return {facts:facts(),groups,srcs,date:new Date().toISOString().slice(0,10)}; }
-function stepHTML(n,wide){ let h=`<h3>${esc(n.title)}</h3>${n.lead?`<p class="rl">${esc(n.lead)}</p>`:''}`;
+function stepHTML(n,wide){ let h=`<h3>${esc(n.title)}</h3>${n.sig&&n.sig!==sigOf()?`<p class="rl"><b>Recorded with earlier choices</b> — the set-up has changed since; open this step again to update it (sweep M77).</p>`:''}${n.lead?`<p class="rl">${esc(n.lead)}</p>`:''}`;
   if(n.secs.length) h+=`<dl class="rd">${n.secs.map(([t,a])=>`<dt>${esc(t)}</dt><dd>${esc(a)}</dd>`).join('')}</dl>`;
   if(n.rows&&n.rows.length) h+=`<ul class="rr">${n.rows.map(r=>`<li>${esc(r)}</li>`).join('')}</ul>`;
   if(wide) for(const T of n.tables) h+=`<div class="rt"><table>${T.map(r=>r.party?`<tr class="party"><td colspan="9">${esc(r.cells[0])}</td></tr>`:`<tr>${r.cells.map(c=>r.head?`<th>${esc(c)}</th>`:`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</table></div>`;

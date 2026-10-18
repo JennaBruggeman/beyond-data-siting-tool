@@ -21,8 +21,9 @@ const R={
  grossPerMW:[505,1109],               // check: whole building per MW IT — min–max of the 11 benchmark buildings in bench/benchmarks.json (6 approved, 2 proposed, 1 refused, 1 under construction, 1 unknown; applicant or filed figures; test_size_chain.py keeps this in sync)
  cases:{van:[{mw:1.6,n:'Cologix VAN5'},{mw:2.4,n:'eStruxture VAN-1'},{mw:40,n:'111 E 5th (proposed)'}], edm:[{mw:2.5,n:'Qu EDM1'}]}, // operator or applicant figures
  steps:[0.1,0.2,0.3,0.5,0.75,1,1.5,2,2.5,3,4,5,6,8,10,12,15,20,25,30,40],
- plant:{ups:[2.0,2.4],batt:[2.2,2.2],dry:[24.5,24.5],hp:[3.4,3.4],cdu:[0.6,0.6]}, // component_space, manufacturer claims, equipment only
- pue:[1.4,1.55], lf:0.6, lwUnit:[98,101], // sound power per ~1 MW air-cooled unit: Trane RTAF size 280 (1,010 kW), low-noise 98 / standard 101 dB(A), brochure RTAF-SLB001-GB p.13 (sweep 17 Oct; checked 18 Oct)
+ plant:{ups:[2.0,2.4],batt:[2.2,2.2],dry:[19.5,30.5],chill:[17,26],hp:[3.4,3.4],cdu:[0.6,0.6]}, // m² per MW; ups, batt, hp, cdu per MW of servers; dry and chill per MW of HEAT (× PUE), sweep M30/M31 18 Oct: dry coolers (liquid cooling) 19.5–30.5 (EVAPCO, Thermokey, Mark), air-cooled chillers (air cooling) 17–26 (Trane TCA); manufacturer claims, equipment only, spare units added when the plant is laid out
+ pue:[1.4,1.55], lf:0.6, lwUnitDry:[98.5,102], // dry cooler, per unit at full fan speed: Güntner GFD 090.2D ≈ 2.5 MW, LWA 98.5 (Deerfield MA submittal); Thermokey 102 at 738 kW (manufacturer claims; sweep M32)
+ lwUnit:[98,101], // sound power per ~1 MW air-cooled unit: Trane RTAF size 280 (1,010 kW), low-noise 98 / standard 101 dB(A), brochure RTAF-SLB001-GB p.13 (sweep 17 Oct; checked 18 Oct)
   capture:[0.48,0.75], cop:[3.0,4.5], // COP: DEA 2026 waste-heat HPs to 70 °C 3.0–3.6; observed Meta Odense 27→70 °C: 4.5 (2020), ≈3.9 combined 2022–24 (Fjernvarme Fyn annual reports)
  fuelLkWh:0.263, fuelHours:12, fuelLimit:{low:20000,first:200000},
  homeMWh:{van:16.81,edm:33.14},       // CEUD residential space + water heating per household, 2018–22 average (2023, the warmest year, gave 14.58 / 29.19): BC 60.5 GJ, AB 119.3 GJ (J.B. 18 Oct, sweep M96)
@@ -159,7 +160,11 @@ function siteFactsRaw(){
   f.mwCheck=A.built==='new'&&A.extent!=='part'?[f.gross[0]/R.grossPerMW[1],f.gross[1]/R.grossPerMW[0]]:null;
   return f;
 }
-function plantPerMW(recover){ const p=R.plant; let lo=p.ups[0]+p.batt[0]+p.dry[0], hi=p.ups[1]+p.batt[1]+p.dry[1]; if(recover){ lo+=p.hp[0]+p.cdu[0]; hi+=p.hp[1]+p.cdu[1]; } return [lo,hi]; }
+function plantPerMW(recover){ const p=R.plant, air=!recover&&((BD.S.answers.inside||'air')==='air'), c=air?p.chill:p.dry; // heat per MW of servers = PUE
+  let lo=p.ups[0]+p.batt[0]+c[0]*R.pue[0], hi=p.ups[1]+p.batt[1]+c[1]*R.pue[1]; if(recover){ lo+=p.hp[0]+p.cdu[0]; hi+=p.hp[1]+p.cdu[1]; } return [lo,hi]; }
+function noiseLw(mw){ const CU=coolUnits(mw), LU=CU.name==='dry coolers'?R.lwUnitDry:R.lwUnit; return {n:CU.n,name:CU.name,lw:[LU[0]+10*Math.log10(CU.n),LU[1]+10*Math.log10(CU.n)]}; }
+/* cooling units for the noise count: the same units the plant lays out (sweep M30), spares included */
+function coolUnits(mw){ const A=BD.S.answers; if(BD.plant&&BD.plant.sizeFor){ const s=BD.plant.sizeFor(mw,A); return {n:s.n,name:s.k.name,mw:s.k.mw}; } return {n:Math.max(1,Math.ceil(mw*R.pue[1])),name:'cooling units',mw:1}; }
 
 
 /* ---------- range bars: a range drawn on a log scale 0.1–100 MW, so wide and narrow ranges look different ---------- */
@@ -588,8 +593,8 @@ function censusNear(city,c,r){ const d=CENSUS[city]; if(!d||d==='loading') retur
   for(const q of d.cells){ const x=(q[0]+0.5)*C-c[0], y=(q[1]+0.5)*C-c[1]; if(x*x+y*y<=r*r) for(let i=0;i<7;i++) t[i]+=q[i+2]; } return t; }
 function socialView(){
   if(!CENSUS[BD.S.city]){ const city=BD.S.city; CENSUS[city]='loading'; fetch('census_'+city+'.json').then(r=>r.json()).then(d=>{ CENSUS[city]=d; if(BD.S.tab==='social'&&BD.S.city===city) socialView(); }).catch(()=>{ CENSUS[city]=null; }); }
-  const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, fac=mw*R.pue[1]; const n=Math.max(1,Math.ceil(fac));
-  const lw=[R.lwUnit[0]+10*Math.log10(n),R.lwUnit[1]+10*Math.log10(n)];
+  const f=siteFacts(), A=BD.S.answers, mw=A.mw||(BD.model&&BD.model()&&BD.model().mwSized)||1, fac=mw*R.pue[1]; const CU=coolUnits(mw), n=CU.n, LU=CU.name==='dry coolers'?R.lwUnitDry:R.lwUnit;
+  const lw=[LU[0]+10*Math.log10(n),LU[1]+10*Math.log10(n)];
   const lim=f.city==='van'?(/^(MC-1|MC-2|DD|M-1|M-1A|M-1B|M-2|IC-1|IC-2|IC-3|I-1|I-1A|I-1B|I-1C|I-2|I-3|I-4|CWD|DEOD)$/.test(f.zone)?55:/^(C-|FC-|FCCDD|BCPED|HA-|R3-|R4-|R5-|RR-3)/.test(f.zone)?50:45):50;
   const dist=lw.map(L=>Math.pow(10,(L-8-lim)/20));
   // each neighbour gets the limit for ITS zone (By-law 6555 ss. 2.1–2.3: the limit depends on the source zone and the receiving zone)
@@ -608,7 +613,7 @@ function socialView(){
   const d=BD.recv[f.city]||{pts:[]}; const homes=d.pts.filter(p=>p.t==='housing'&&Math.hypot(p.x-f.c[0],p.y-f.c[1])<=200).reduce((t,p)=>t+(p.u||0),0);
   const key='bd-notes-'+S.city+'-'+S.sel.id; let notes=''; try{ notes=localStorage.getItem(key)||''; }catch(e){}
   let h=tabBar('social')+`<h2>What neighbours would hear, see and feel</h2><p class="draft">Described as experienced, not scored. Measured where the data allows; your site observations sit beside it, labelled as yours.</p>
-  <h3>Sound</h3><dl><dt>Cooling plant</dt><dd>about ${n} unit${n>1?'s':''} rated ${rng(lw[0],lw[1],'dBA')} together (low-noise to standard)</dd>
+  <h3>Sound</h3><dl><dt>Cooling plant</dt><dd>${n} ${CU.name} (as laid out, spares included), rated ${rng(lw[0],lw[1],'dBA')} together (${CU.name==='dry coolers'?'dry-cooler ratings at full fan speed, manufacturer claims':CU.name==='air-cooled chillers'?'air-cooled chiller ratings, low-noise to standard, manufacturer claim':'air-cooled chiller ratings used as a stand-in: no rating found for this kind'})</dd>
   <dt>Night limit</dt><dd>${f.city==='van'?`from this ${srcCls} zone: ${limQ} dBA at a quiet-zone neighbour, ${limO} dBA at any other`:'50 dBA next to homes, 60 dBA next to other uses'}</dd><dt>Quiet-zone limit reached at</dt><dd>${fmt(dist[0])}–${fmt(dist[1])} m from the plant, before walls, barriers or enclosures</dd>
   <dt>Neighbours over their limit</dt><dd>${within[0]}–${within[1]} buildings within 600 m (low-noise to standard units), each judged against the limit for its own zone: ${f.city==='van'?`${limQ} dBA in a quiet zone, ${limO} dBA elsewhere`:'50 dBA next to homes, 60 dBA next to other uses'}${within[1]?` — ${byCls.quiet} in quiet${f.city==='van'?' zones':' (residential) zones'}, ${byCls.other} elsewhere${byCls.unknown?`, ${byCls.unknown} with no parcel record (quiet limit used)`:''}`:''}. In the 3D view, red: over even with low-noise units; accent: over only with standard units.</dd>
   <dt>Low hum</dt><dd>a tonal low-frequency sound adds 5 dBA in Alberta's rule — the kind neighbours describe most</dd></dl>${s3('snd')}${s3('lf')}${src('noise')}
@@ -619,7 +624,7 @@ function socialView(){
   <h3>Who is near</h3><dl><dt>Non-market homes within 200 m</dt><dd>${f.city==='van'?`${fmt(homes)} (City list; private housing not counted)`:'not known: no non-market housing list is loaded for Edmonton'}</dd>${peopleRows(f,dist)}<dt>Work</dt><dd>${(()=>{ const lo=mw*f.m2MW[0]/R.hallShare[1]/R.jobsM2, hi=mw*f.m2MW[1]/R.hallShare[0]/R.jobsM2; return hi<1?'fewer than 1':rng(Math.max(1,lo),hi,''); })()} operating jobs (Virginia ratio, transferred)</dd></dl>${s3('ppl')}${src('jobs')}
   ${mathBox([
     `Cooling units: power at the meter ${n1(fac)} MW, about one unit per MW → <b>${n}</b> unit${n>1?'s':''} (an assumption).`,
-    `Together: Lw per unit of about 1 MW, ${R.lwUnit[0]} (low-noise) to ${R.lwUnit[1]} dBA (standard), + 10 × log₁₀(${n}) = <b>${n1(lw[0])}–${n1(lw[1])} dBA</b>.`,
+    `Together: Lw per unit ${LU[0]}–${LU[1]} dBA, + 10 × log₁₀(${n} units) = <b>${n1(lw[0])}–${n1(lw[1])} dBA</b>.`,
     `Distance where the night limit is reached: r = 10^((Lw − 8 − ${lim}) ÷ 20) = <b>${n0(dist[0])}–${n0(dist[1])} m</b> (free field over hard ground, no walls or barriers).`,
     `Jobs: ${mw} MW × ${n0(f.m2MW[0])}–${n0(f.m2MW[1])} m² hall per MW ÷ hall share ${R.hallShare[1]}–${R.hallShare[0]} ÷ ${R.jobsM2} m² per job = ${n1(mw*f.m2MW[0]/R.hallShare[1]/R.jobsM2)}–<b>${n1(mw*f.m2MW[1]/R.hallShare[0]/R.jobsM2)}</b>.`],
     'Sound: Lp = Lw − 20 log r − 8 (hemispherical spreading); unit ratings from manufacturer data (Trane, Eurovent). Limits: Noise Control By-law 6555 / Bylaw 14600. Jobs: Virginia JLARC 2024, transferred.')}
@@ -676,6 +681,6 @@ async function precView(){
   `;
   $('#side').innerHTML=h; wireTabs();
 }
-BD.eng={R,siteFacts,plantPerMW,calc,rng,f1,n0,n1,mathBox,tabBar,wireTabs,show3d,nearby,netsAt,loadRecv,badge,src,s3,rangeBar,state,roofArea,optionSet};
+BD.eng={R,siteFacts,plantPerMW,coolUnits,noiseLw,calc,rng,f1,n0,n1,mathBox,tabBar,wireTabs,show3d,nearby,netsAt,loadRecv,badge,src,s3,rangeBar,state,roofArea,optionSet};
 BD.fitsView=fitsView; BD.recvView=recvView; BD.optionsView=optionsView; BD.tabView=tabView;
 })();

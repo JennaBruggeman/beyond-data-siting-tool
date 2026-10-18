@@ -22,7 +22,7 @@ const USE={
       food:z=>['MU','IM','BE','CB'].includes(z)?['yes','aquaponic systems fall under Urban Agriculture, permitted in '+z]:['nk','not read for zone '+z]}};
 function ladderWorst(L,city){ const rk=['not_allowed','no_rule','unknown','approval','allowed','na']; const rows=Array.isArray(L&&L.rules)?L.rules:[]; const c=city==='van'?'van':'edm'; const v=rows.map(x=>x[c][0]).sort((a,b)=>rk.indexOf(a)-rk.indexOf(b))[0];
   return v==='allowed'?'yes':v==='approval'?'chg':v==='not_allowed'?'no':'nk'; } // 'na' (no rule read) is not yet known, not 'possible here' (sweep minor 43)
-function ctx(){ const e=E(), f=e.siteFacts(), R=e.R, A=BD.S.answers, mw=A.mw||1, M=f.M; const d=BD.recv[f.city]||{pts:[],nets:[]};
+function ctx(){ const e=E(), f=e.siteFacts(), R=e.R, A=BD.S.answers, M=f.M, mw=A.mw||(M&&M.mwSized)||1; /* sweep M72: the same provisional size the plant uses until a size is set */ const d=BD.recv[f.city]||{pts:[],nets:[]};
   const near=d.pts.map(p=>Object.assign({},p,{dist:Math.hypot(p.x-f.c[0],p.y-f.c[1])})); const nets=e.netsAt(f,d);
   const r=e.calc({mw,recover:true,to:'near'},f,near,nets); const zone=f.zone, city=f.city; const lot=f.lot||0, foot=(M&&M.footArea)||0;
   return {e,f,R,A,mw,M,near,nets,r,zone,city,lot,foot,free:Math.max(0,lot-foot-((M&&M.loading)?BD.area(M.loading):0)-((M&&M.plant&&M.plant.yard)?BD.area(M.plant.yard):0))}; }

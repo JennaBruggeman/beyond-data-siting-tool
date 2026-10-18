@@ -3368,7 +3368,7 @@
    "inputs": [
     "weather"
    ],
-   "coef": "CWEC 2020 edition (header CWEC2011 format, years 2000–2017), computed: Vancouver Intl air-side full free cooling 7,109 h at 18 °C inlet / 8,086 at 21 / 8,645 at 24 / 8,759 at 27; dry cooler to 30 °C liquid loop 7,675 h, to 40 °C 8,760. Edmonton Intl: air 7,614 / 8,046 / 8,412 / 8,661; dry cooler 7,846 / 8,754 / 8,760. Approach +1.5 °C air, +12 °C dry cooler (assumed). HDD18 from file: Vancouver 2,810, Edmonton 5,514 (design values 2,925 / 5,120)",
+   "coef": "18 Oct 2026 (sweep M30–M32; audit/plant_sources_2026-10-18.md): full free cooling for an air-cooled hall (13 °C supply, ~18 °C return, ~10 K approach) only at ≤8 °C outdoors: 3,284 h Vancouver, 5,522 h Edmonton in the CWEC year (Claude's count). CWEC 2020 edition (header CWEC2011 format, years 2000–2017), computed: Vancouver Intl air-side full free cooling 7,109 h at 18 °C inlet / 8,086 at 21 / 8,645 at 24 / 8,759 at 27; dry cooler to 30 °C liquid loop 7,675 h, to 40 °C 8,760. Edmonton Intl: air 7,614 / 8,046 / 8,412 / 8,661; dry cooler 7,846 / 8,754 / 8,760. Approach +1.5 °C air, +12 °C dry cooler (assumed). HDD18 from file: Vancouver 2,810, Edmonton 5,514 (design values 2,925 / 5,120)",
    "sources": [
     "ashrae",
     "cwec"
@@ -3974,7 +3974,7 @@
     "plant_schedule",
     "receptors"
    ],
-   "coef": "starter set: scroll chiller 450–850 kW Lw 96–100 dBA (Daikin, AHRI 370); Trane Sintesis Prime RTAF HSE 333–1,010 kW Lw 94–101 standard / 91–98 low-noise, plus size 245 (877 kW) printed as 107 / 103, out of line with its neighbours (brochure RTAF-SLB001-GB p.13; sound rows sit under the 'Eurovent performances' heading but are not labelled Eurovent; checked 18 Oct 2026); the tool takes the 1,010 kW unit (size 280), 98 low-noise / 101 standard, as one unit per MW; screw chiller 99–103 (ISO 9614); dry cooler: Kelvion 94 dBA printed under 'per fan' heading, 61 dBA @10 m — unit total unresolved; Güntner small unit Lw 67 dBA (permit submittal); standby diesel open 98–99 dBA @7 m (ISO 8528-10); enclosed: Cummins QuietSite L2 73–76, L1 78–87, weather-protective 89–91 dBA @7 m; CRAC 48–62 dBA @2 m (Stulz, 30–150 kW); transformer 62–63 dB (NEMA contour, unverified edition)",
+   "coef": "18 Oct 2026 (sweep M30–M32; audit/plant_sources_2026-10-18.md): unit count = the units the plant lays out (spares included); Lw per unit: air-cooled chillers 98–101 dBA (Trane RTAF, low-noise to standard), dry coolers 98.5–102 dBA at full fan speed (Güntner GFD ≈2.5 MW; Thermokey 738 kW); towers and hybrid coolers use the chiller ratings as a stand-in (labelled). starter set: scroll chiller 450–850 kW Lw 96–100 dBA (Daikin, AHRI 370); Trane Sintesis Prime RTAF HSE 333–1,010 kW Lw 94–101 standard / 91–98 low-noise, plus size 245 (877 kW) printed as 107 / 103, out of line with its neighbours (brochure RTAF-SLB001-GB p.13; sound rows sit under the 'Eurovent performances' heading but are not labelled Eurovent; checked 18 Oct 2026); the tool takes the 1,010 kW unit (size 280), 98 low-noise / 101 standard, as one unit per MW; screw chiller 99–103 (ISO 9614); dry cooler: Kelvion 94 dBA printed under 'per fan' heading, 61 dBA @10 m — unit total unresolved; Güntner small unit Lw 67 dBA (permit submittal); standby diesel open 98–99 dBA @7 m (ISO 8528-10); enclosed: Cummins QuietSite L2 73–76, L1 78–87, weather-protective 89–91 dBA @7 m; CRAC 48–62 dBA @2 m (Stulz, 30–150 kW); transformer 62–63 dB (NEMA contour, unverified edition)",
    "sources": [
     "iso9613",
     "daikinCAT624",
@@ -7208,7 +7208,7 @@
    "inputs": [
     "massing"
    ],
-   "coef": "NRCan municipal kWh/kWp values blocked — J.B. retrieval D9; a 0.1–40 MW load would use a roof's output on site",
+   "coef": "Superseded by pv_roof (18 Oct 2026). NRCan municipal kWh/kWp values blocked — J.B. retrieval D9; a 0.1–40 MW load would use a roof's output on site",
    "sources": [],
    "source_roles": [],
    "conf": 0,
@@ -8187,12 +8187,12 @@
    "name": "Solar on the data centre roof",
    "stage": "characterise",
    "unit": "kWp; MWh/yr",
-   "formula": "kWp = roof area × 0.66 × (1 − plant share) × 0.70 × 0.16–0.20; MWh = kWp × yield",
+   "formula": "kWp = panel area × 0.16–0.20 kWp/m²; panel area = 12 m² × the number of 6 × 2 m panel rows that fit on the roof outside the plant and its clearances (1 m from the roof edge, an assumption; rows 0.5 m apart along, 1.5 m across); MWh = kWp × yield (horizontal to latitude tilt)",
    "inputs": [
     "massing",
     "plant_schedule"
    ],
-   "coef": "yield, annual kWh/kWp (NRCan municipal values, ±10%, losses in a 0.75 performance ratio): Vancouver 892 horizontal to 1007 at latitude tilt; Edmonton 944 to 1244. A flat-roof array at about 15° tilt lies between the two, so the tool uses horizontal as the low end and latitude tilt as the high end. Edmonton yields about 6–24% more than Vancouver per kWp. Module density 0.16 kWp/m² (2014 median) to 0.20 (current) (NREL); module cover 0.70 of a flat roof at 15° tilt; 66% of large roofs suitable (NREL 2016); roof share taken by plant from the cooling module",
+   "coef": "18 Oct 2026 (sweep M102): the register now matches the layout the Solar card uses (addons.js pvLayout); the earlier roof area × 0.66 × (1 − plant share) × 0.70 formula is retired. yield, annual kWh/kWp (NRCan municipal values, ±10%, losses in a 0.75 performance ratio): Vancouver 892 horizontal to 1007 at latitude tilt; Edmonton 944 to 1244. A flat-roof array at about 15° tilt lies between the two, so the tool uses horizontal as the low end and latitude tilt as the high end. Edmonton yields about 6–24% more than Vancouver per kWp. Module density 0.16 kWp/m² (2014 median) to 0.20 (current) (NREL); module cover 0.70 of a flat roof at 15° tilt; 66% of large roofs suitable (NREL 2016); roof share taken by plant from the cooling module",
    "sources": [
     "nrcanPVmunic",
     "nrel_rooftop2016",
@@ -9031,7 +9031,7 @@
     "start_case",
     "cooling_type"
    ],
-   "coef": "Manufacturer claims per MW: UPS ≈2.0–2.4 m², Li-ion batteries ≈2.2 m² (5 min), air-cooled chillers 17–26 m², cooling towers ≈8 m², dry coolers ≈24.5 m², heat pumps ≈3.4 m² per MW heat, CDUs ≈0.6 m²; equipment only, without clearances; EPCOR transformer clearances 3.0 m door side / 2.0 m others; fuel room 2 h separation and 550 mm clearance (NFC 4.3.14); generator room 2 h (VBBL 3.6.2.8)",
+   "coef": "18 Oct 2026 (sweep M30–M32; audit/plant_sources_2026-10-18.md): cooling space is per MW of HEAT (servers × PUE), spares added when the plant is laid out; air cooling → air-cooled chillers with free-cooling coils, 17–26 m²/MW (Trane TCA; a dry cooler cannot cool water below outdoor air, and air-cooled halls need ≥13 °C chilled water, NREL/DOE FEMP 2024); liquid cooling → dry coolers, 19.5–30.5 m²/MW (EVAPCO, Thermokey, Mark; manufacturer claims). Manufacturer claims per MW: UPS ≈2.0–2.4 m², Li-ion batteries ≈2.2 m² (5 min), air-cooled chillers 17–26 m², cooling towers ≈8 m², dry coolers ≈24.5 m², heat pumps ≈3.4 m² per MW heat, CDUs ≈0.6 m²; equipment only, without clearances; EPCOR transformer clearances 3.0 m door side / 2.0 m others; fuel room 2 h separation and 550 mm clearance (NFC 4.3.14); generator room 2 h (VBBL 3.6.2.8)",
    "sources": [
     "src16",
     "epcor_ccg",
