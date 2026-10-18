@@ -44,6 +44,7 @@ FX: Bank of Canada 2026-10-05: 1 SEK = 0.1419 CAD; 1 EUR = 1.5974 CAD (https://w
 | FortisBC Rate 2 | Basic $1.4178/day; delivery $5.665; S&T $1.365; gas $1.660; riders same | …/rateschedule_2.pdf | CONFIRMED |
 | BC carbon tax | eliminated 1 Apr 2025 | https://www.ordersdecisions.bcuc.com/bcuc/orders/en/522700/1/document.do (G-88-25) | CONFIRMED |
 | Rate 3 variable | 9.12 $/GJ = 32.8 $/MWh fuel → 38.6 $/MWh heat at 85% | | DERIVED (Rider 6 excluded) |
+| Correction 18 Oct 2026 | Checked against the Rate 3 PDF (pages R-3.1 to R-3.3): all per-GJ charges total $9.305/GJ (delivery 5.377 incl. Rider 5; S&T 2.268 incl. Riders 6 and 8; gas 1.660). The tool and register now include Rider 6 → ≈ $39.4/MWh heat at 85% | | VERIFIED |
 | Rate 2 variable | 9.81 $/GJ → 41.6 $/MWh heat | | DERIVED |
 | BC Hydro LGS RS 1600 | basic 29.99 ¢/day; demand $13.83/kW; energy 6.79 ¢/kWh (no effective date on page) | https://app.bchydro.com/accounts-billing/rates-energy-use/electricity-rates/business-rates.html | UNVERIFIED |
 | BC Hydro RS 1823 → 1830 | 1823 closed end F2026; RS 1830 (effective 1 Apr 2024; energy charges consolidated 1 Apr 2026): demand $12.178/kVA; energy 4.914 ¢/kWh | https://app.bchydro.com/accounts-billing/rates-energy-use/electricity-rates/transmission_rate.html | CONFIRMED |

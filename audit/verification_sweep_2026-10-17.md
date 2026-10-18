@@ -1178,7 +1178,7 @@ Checked = items each unit examined. Flags = flags it raised (all severities).
 |---|---|---|
 | Fan et al. 2007 (M94) | Confirmed: the real data centre averaged 59.5% of "actual peak" (sum of each machine's measured maximum); its observed peak was 71.9%, so average ÷ observed peak ≈ 0.83 (Table 3, s. 4.3–4.5). | 0.6 kept; label changed to "average ÷ the servers' combined maximum power" in register, opps.json, extras. Tool calls servers × PUE "full load". |
 | 1 Uptime 75% | Confirmed: 75% of respondents use perimeter air cooling (Cooling Systems Survey 2025, n = 512, choose all that apply). | decide.js wording made exact. |
-| 2 FortisBC Rate 3 | Not settled: the rates page renders without its tables for the fetch tool, and the Rate 3 PDF link wasn't available to open. | Needs J.B. to open the Rate 3 PDF and paste the figures. |
+| 2 FortisBC Rate 3 | Checked against the schedule PDF J.B. downloaded: every per-GJ charge totals $9.305/GJ (incl. Riders 5, 6, 8). The tool was right; the research report had left out Rider 6. | Register and research note aligned to $9.305 (≈ $39.4/MWh heat at 85%). |
 | 3 By-law 4548 s. 7 | Confirmed: no outdoor light casting light directly onto a residential window across the street or adjacent **and** unreasonably disturbing the neighbour. | Tool and register now state it. |
 | 4 RVO 4.38 MWh/m² | Confirmed: per m² of server-room floor, not gross floor; IT vs total not stated; "an order of magnitude". | Register corrected. |
 | 5 Silber 2024 | Confirmed: SF 0.5 "in most cases" for fast-charging sites. Also confirmed the sweep's formula error: stalls = P ÷ (SF × P_charger). | EV stalls now 52–270 per MW (SF 1 to 0.5), with the transfer to Level 2 stated. |
