@@ -55,6 +55,11 @@ const badge=k=>{ const e=EV[k]; return e?`<span class="evb ev-${e}" title="${EVL
 const src=k=>`<div class="src">${badge(k)}${esc(SRC2[k])}</div>`;
 
 /* ---------- geometry helpers: lon/lat ↔ local metres (same projection as the tiles) ---------- */
+/* BC Hydro Downtown Vancouver Electricity Supply Study Area, West End Substation CPCN (10 Nov 2025) p. 2 fn 1: 'Vancouver's downtown peninsula together with the area east of the
+   peninsula as far as Nanaimo Street', which 'includes four City of Vancouver neighbourhoods: Downtown, West End, Strathcona, and Grandview-Woodland'. Drawn as the union of those
+   four City local areas (City open data, J.B. download 18 Oct 2026; data/networks/van_cpcn_study_area.geojson), simplified to about 3 m. Stanley Park is not a local area and is left out. */
+const CPCN_RING=[[-123.14775,49.28891],[-123.14169,49.29292],[-123.1381,49.29351],[-123.13469,49.29581],[-123.12271,49.2915],[-123.11227,49.29016],[-123.10424,49.28817],[-123.0939,49.29052],[-123.06778,49.2901],[-123.06262,49.28954],[-123.06242,49.29087],[-123.05649,49.29349],[-123.05659,49.26218],[-123.07747,49.26234],[-123.07742,49.26514],[-123.08095,49.26516],[-123.08171,49.26522],[-123.08895,49.26662],[-123.08957,49.26671],[-123.09612,49.26677],[-123.09644,49.26682],[-123.09686,49.26697],[-123.10067,49.26913],[-123.1006,49.27089],[-123.10004,49.27192],[-123.1,49.27275],[-123.1017,49.27297],[-123.11108,49.27293],[-123.12116,49.26954],[-123.12928,49.26953],[-123.13768,49.27532],[-123.14126,49.27829],[-123.14268,49.28133],[-123.14554,49.28436],[-123.14541,49.28714],[-123.14775,49.28891]]; let CPCN_R=null;
+function inCPCN(c){ if(!c) return false; if(!CPCN_R) CPCN_R=CPCN_RING.flatMap(([lo,la])=>P(lo,la)); return BD.pip(c[0],c[1],CPCN_R); }
 function P(lon,lat){ const m=BD.S.meta[BD.S.city]; const k=Math.cos(m.lat0*Math.PI/180)*111320; return [(lon-m.lon0)*k,(lat-m.lat0)*110540]; }
 BD.recv={};
 async function loadRecv(city){ if(BD.recv[city]) return BD.recv[city];
@@ -99,6 +104,7 @@ function siteFactsRaw(){
   f.foot=blds.reduce((t,b)=>t+b.a,0); f.hmax=blds.length?Math.max(...blds.map(b=>b.h)):0; f.plate=blds.length?Math.max(...blds.map(b=>b.a)):0;
   f.c=s.ring?BD.centroid(s.ring):s.pt;
   f.downtown=city==='van'&&/^(DD|CWD|DEOD|BCPED|HA-1|HA-1A|HA-2)$/.test(f.zone);
+  f.cpcn=city==='van'&&inCPCN(f.c); // BC Hydro's Downtown Vancouver Electricity Supply Study Area (sweep M23): the feeder limit applies here, not only in downtown zones
   // gross floor area available to the data centre
   const M=BD.model?BD.model():null; f.M=M;
   const env0=f.env||(city==='van'?R.envVan['I-2']:R.envEdm.IM);
@@ -239,9 +245,9 @@ function fitsView(){
   <dt>Plant space</dt><dd>${rng(pl[0]*mw,pl[1]*mw,'m²')} with dry coolers; ${rng(plR[0]*mw,plR[1]*mw,'m²')} with heat recovery — equipment only, before clearances</dd>
   <dt>Standby fuel</dt><dd>${A.gens==='none'?'none: no generators chosen':`${rng(fuel[0],fuel[1],'L')} for 12 h; ${pos==='ground'?`a first-storey storage room may hold ${fmt(R.fuelLimit.first)} L`:pos?`a basement or upper-storey storage room may hold ${fmt(R.fuelLimit.low)} L (tanks of 2,500–20,000 L) or 45,000 L (tanks over 20,000 L)`:`a protected storage room may hold ${fmt(R.fuelLimit.first)} L on the first storey, or in a basement or upper storey ${fmt(R.fuelLimit.low)} L (tanks of 2,500–20,000 L) or 45,000 L (tanks over 20,000 L)`} (NFC 2020 Table 4.3.13.4.-B)${fuel[1]>(pos==='ground'||!pos?R.fuelLimit.first:45000)?' — <span class="draft">more than one room or an outdoor tank</span>':''}`}</dd>
   <dt>Electrical service</dt><dd>${esc(svc)}</dd>
-  ${f.downtown?`<dt>Grid</dt><dd class="draft">Downtown: no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures.</dd>`:''}
+  ${f.cpcn?`<dt>Grid</dt><dd class="draft">Downtown supply area (downtown peninsula east to Nanaimo St): no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures.</dd>`:''}
   ${pos==='upper'?`<dt>Floor strength</dt><dd class="draft">Office floors above grade are designed for 2.4 kPa; equipment rooms need at least 3.6 kPa, and data halls their actual load — likely strengthening.</dd>`:''}
-  </dl>${src('pue')}${src('plant')}${src('fuel')}${src('svc')}${f.downtown?src('grid2'):''}${pos==='upper'?src('floor'):''}${mathNeeds(mw,fac,f)}
+  </dl>${src('pue')}${src('plant')}${src('fuel')}${src('svc')}${f.cpcn?src('grid2'):''}${pos==='upper'?src('floor'):''}${mathNeeds(mw,fac,f)}
   <div class="next"><button id="toRecv">What it exchanges →</button><span class="sub">Heat, energy, water, materials and people, each in 3D.</span></div>
   <div class="draftnote">Every range carries the register's confidence; nothing here is a design.</div>`;
   $('#side').innerHTML=h;
@@ -257,7 +263,7 @@ function fitsView(){
 }
 
 /* ---------- who could take the heat ---------- */
-const TYPE={housing:'Non-market housing',school:'School',care:'Care home',hospital:'Hospital',rec:'Recreation centre',hall:'Community league hall',pool:'Pool',arena:'Indoor arena'};
+const TYPE={housing:'Non-market housing',school:'School',campus:'University or college campus',care:'Care home',hospital:'Hospital',rec:'Recreation centre',hall:'Community league hall',pool:'Pool',arena:'Indoor arena'};
 const FIRM={completed:'existing','under construction':'committed',approved:'planned',proposed:'proposed'};
 function nearby(f,d){ const out=[]; for(const p of d.pts){ const dist=Math.hypot(p.x-f.c[0],p.y-f.c[1]); const reach=R.reach[p.t]||R.reachGuide; if(dist<=reach) out.push(Object.assign({dist,reach,guide:!R.reach[p.t]},p)); } return out.sort((a,b)=>a.dist-b.dist); }
 function netsAt(f,d){ return d.nets.map(n=>{ const inside=BD.pip(f.c[0],f.c[1],n.r); const e=distToRing(f.c[0],f.c[1],n.r); return Object.assign({inside,edge:e},n); }).filter(n=>n.inside||n.edge<1200).sort((a,b)=>(b.inside-a.inside)||(a.edge-b.edge)); } // inside first, then nearest (verification sweep M16)
@@ -269,7 +275,7 @@ async function recvView(){
   if(nets.length) h+=nets.map(n=>`<h3>District energy</h3><p><b>${esc(n.n)}</b> — ${n.edge<50?`<span class="draft">on the edge of its service area (${n.src==='van9552'?'within the ±45 m of the tracing':'its boundary here is approximate'}) — check the schedule for this lot</span>`:n.inside?'<span class="draft">inside its service area</span>':`${kmOrM(n.edge)} outside its ${n.src==='van9552'?'':'approximate '}service area`}</p><p class="sub">${esc(n.note)}</p>${n.src==='van9552'?src('neu'):''}`).join('');
   if(f.city==='edm'){ const nb=String(((BD.S.sel||{}).a||[])[10]||''); h+=`<h3>District energy in Edmonton</h3><p class="sub">${/BLATCHFORD/.test(nb)?'<span class="draft">This lot is in the Blatchford neighbourhood.</span> ':''}Blatchford's district energy sharing system is compulsory inside its service area: owners must connect each building (Bylaw C17943 s. 6), unless the City Manager exempts a net-zero carbon building (s. 8). The service area exists only as a map (Schedule A), not yet traced in the tool. Downtown district energy phases are not yet traced either.</p><div class="src"><span class="evb ev-record">public record</span> City of Edmonton Bylaw C17943 (Blatchford District Energy Sharing System)</div>`; }
   if(f.downtown) h+=`<h3>Downtown steam</h3><p class="sub">Creative Energy's steam network serves more than 200 downtown buildings (BCUC G-310-21A). Its service area is not published as a map, so it is not drawn. Steam needs far hotter heat than a data centre gives off.</p>`;
-  const order=['housing','school','care','hospital','pool','rec','hall','arena'];
+  const order=['housing','school','campus','care','hospital','pool','rec','hall','arena'];
   h+=`<h3>Buildings within reach</h3>`;
   if(!near.length) h+=`<p class="sub">None of the recorded receiver types within reach.</p>`;
   for(const t of order){ const L=by[t]; if(!L) continue;
@@ -341,7 +347,7 @@ async function optionsView(){
    ['The utility and the grid',[
      ['Power at full load',o=>rng(o.r.fac[0],o.r.fac[1],'MW')],['Power on average',o=>rng(o.r.fac[0]*R.lf,o.r.fac[1]*R.lf,'MW')],
      ['Electricity a year',o=>rng(o.r.facMWh[0]/1000,o.r.facMWh[1]/1000,'GWh')],
-     ['Grid connection',()=>f.downtown?`${state('chg')}downtown: no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures`:`${state('cj')}needs the utility's answer to a load application`]]],
+     ['Grid connection',()=>f.cpcn?`${state('chg')}downtown supply area (to Nanaimo St): no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures`:`${state('cj')}needs the utility's answer to a load application`]]],
    ['Receivers',[
      ['Heat offered after the heat pump',o=>o.recover?rng(o.r.avail[0]/1000,o.r.avail[1]/1000,'GWh/yr'):`${state('cj')}not yet known — this option sends its heat to the air; air-cooled heat (25–47 °C) can be reused with heat pumps, but no source gives how much for a whole hall`],
      ['Equal to the heating of',o=>o.recover?rng(o.r.homes[0],o.r.homes[1],'homes')+' (space and hot water, provincial average)':'—'],
@@ -373,7 +379,7 @@ async function optionsView(){
 }
 
 /* ---------- map layer: receivers, reach, networks ---------- */
-const RC={housing:'#c8c2b8',school:'#a7b4d6',care:'#b9a3cf',hospital:'#b9a3cf',rec:'#7fb2c4',hall:'#7fb2c4',pool:'#7fb2c4',arena:'#9fb38a'};
+const RC={housing:'#c8c2b8',school:'#a7b4d6',campus:'#a7b4d6',care:'#b9a3cf',hospital:'#b9a3cf',rec:'#7fb2c4',hall:'#7fb2c4',pool:'#7fb2c4',arena:'#9fb38a'};
 BD.paintRecv=function(ctx,s,lw){
   const d=BD.recv[BD.S.city]; if(!d) return;
   for(const n of d.nets){ ctx.setLineDash([8/s,5/s]); ctx.strokeStyle='rgba(209,163,94,.85)'; ctx.lineWidth=lw(1.6); ctx.stroke(n.path); ctx.setLineDash([]); ctx.fillStyle='rgba(209,163,94,.06)'; ctx.fill(n.path); }
@@ -503,7 +509,7 @@ function energyView(){
   <h3>What it draws</h3><dl><dt>Power at the meter</dt><dd>${rng(fac[0],fac[1],'MW')} at full load; about ${rng(fac[0]*R.lf,fac[1]*R.lf,'MW')} on average</dd><dt>Electricity a year</dt><dd>${rng(MWh[0]/1000,MWh[1]/1000,'GWh')}, at about ${Math.round(R.lf*100)}% of full load on average</dd>
   ${cost?`<dt>Cost a year</dt><dd>about $${(cost[0]/1e6).toFixed(1)}–${(cost[1]/1e6).toFixed(1)} million if served on BC Hydro's large general service (6.79 ¢/kWh + $13.83/kW a month, the demand charge taken at full load, which is conservative); very large loads move to transmission rates</dd>`:`<dt>Price</dt><dd>Alberta pool averaged $43.68/MWh in 2025, plus EPCOR distribution and transmission charges</dd>`}
   <dt>Carbon of that electricity</dt><dd>${rng(co2[0],co2[1],'t CO₂e/yr')} at ${R.grid[f.city]} g/kWh (average, consumption)</dd>
-  <dt>Grid connection</dt><dd>${f.downtown?`${state('chg')}downtown: no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures`:`${state('cj')}needs the utility's answer to a load application; in Virginia, Dominion Energy reports 12–36 months for this (JLARC 2024; a transferred figure, not BC or Alberta)`}</dd></dl>${s3('elec')}${src('grid')}${f.downtown?src('grid2'):''}
+  <dt>Grid connection</dt><dd>${f.cpcn?`${state('chg')}downtown supply area (to Nanaimo St): no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures`:`${state('cj')}needs the utility's answer to a load application; in Virginia, Dominion Energy reports 12–36 months for this (JLARC 2024; a transferred figure, not BC or Alberta)`}</dd></dl>${s3('elec')}${src('grid')}${f.cpcn?src('grid2'):''}
   <h3>Solar on its own roof</h3><dl><dt>Roof</dt><dd>${fmt(roof)} m², of which plant takes about ${Math.round(share*100)}%</dd><dt>Panels</dt><dd>${rng(kwp[0],kwp[1],'kWp')} → ${rng(pvMWh[0],pvMWh[1],'MWh/yr')}</dd><dt>Share of its own use</dt><dd>${rng(pvMWh[0]/MWh[1]*100,pvMWh[1]/MWh[0]*100,'%')} — a small share at data-centre densities</dd></dl>${s3('pv')}
   <h3>What it could offer the grid</h3><dl>
   <dt>Who decides</dt><dd>${state('cj')}only whoever runs the computing; in a shared (colocation) building that is each tenant. Training runs can pause at checkpoints; live services cannot.</dd>
@@ -522,7 +528,7 @@ function energyView(){
     'PUE: LBNL 2023, Uptime 2025. Load factor: Fan et al. 2007. Rates: BC Hydro LGS 2026. Solar: NRCan yields, NREL densities. Generator factors: AP-42 Table 3.4-1 (upper bounds).')}
   <div class="draftnote">Ranges carry the register's confidence.</div>`;
   $('#side').innerHTML=h; wireTabs(); BD.draw();
-  show3d('energy',{site:f,gridNote:f.downtown?'Downtown: no new feeder positions before the West End substation (expected July 2032).':''});
+  show3d('energy',{site:f,gridNote:f.cpcn?'Downtown supply area (to Nanaimo St): no new feeder positions before the West End substation (expected July 2032).':''});
 }
 function waterView(){
   const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=[fac[0]*8760*R.lf,fac[1]*8760*R.lf];

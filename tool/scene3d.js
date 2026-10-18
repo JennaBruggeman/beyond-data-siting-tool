@@ -186,8 +186,8 @@ function heightsNote(){ return BD.S.city==='van'?'Heights: City of Vancouver LiD
 function model(d){ plantLabels(); baseLabels(); const M=state.M, P=M&&M.plant;
   note((P&&P.miss&&P.miss.length?'Doesn\'t fit: '+P.miss.join('; ')+'. ':'')+heightsNote()+'. Neighbours drawn to 1.5 km.');
   key(sw(C.acc,'the lot (grey dashed: what the zoning allows); red: the floor the servers need, any shape')+sw(C.grey,'setbacks (yards) and plant yard',true)+sw(C.edge,'plant, generic: solid = unit, dashed = clearance')+sw(C.mat,'loading spaces; racks inside')); }
-const TYPE={housing:'Non-market housing',school:'School',care:'Care home',hospital:'Hospital',rec:'Recreation centre',hall:'Community league hall',pool:'Pool',arena:'Indoor arena'};
-const TCOL={housing:C.city,school:C.power,care:C.senses,hospital:C.senses,rec:C.water,hall:C.water,pool:C.water,arena:C.mat};
+const TYPE={housing:'Non-market housing',school:'School',campus:'University or college campus',care:'Care home',hospital:'Hospital',rec:'Recreation centre',hall:'Community league hall',pool:'Pool',arena:'Indoor arena'};
+const TCOL={housing:C.city,school:C.power,campus:C.power,care:C.senses,hospital:C.senses,rec:C.water,hall:C.water,pool:C.water,arena:C.mat};
 function heat(d){
   plantLabels(C.heat); baseLabels();
   const c=roofC(), src=V(c[0],c[1],state.roof+3);

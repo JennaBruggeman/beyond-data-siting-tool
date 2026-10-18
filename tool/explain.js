@@ -113,8 +113,8 @@ const TOPICS={
    {t:'How much water each one uses',p:`Evaporated on site in a year, at most. ${K('Dry coolers use none')}; towers evaporate up to 1.5 L per kWh of heat.`,
     v:h=>bars(h,[{label:'Dry coolers',v:0,c:C.heat},{label:'Hybrid coolers',v:water('hybrid'),c:C.power},{label:'Cooling towers',v:water('towers'),c:C.water}],'m³ a year','Water evaporated by system'),src:['evap']},
   ]; }},
- heat:{t:'Heat for the neighbours', steps:x=>{ const {R,mw,r,all15,f,city}=x; const k={housing:0,school:0,care:0,hospital:0,rec:0,hall:0,pool:0,arena:0}; all15.forEach(p=>{ k[p.t]=(k[p.t]||0)+1; });
-  const parts=[['Non-market housing','housing',C.heat],['Schools','school',C.water],['Care, hospitals','care',C.mat],['Recreation, halls, pools','rec',C.place]].map(([l,t,c])=>({label:l,v:(k[t]||0)+(t==='care'?k.hospital||0:0)+(t==='rec'?(k.pool||0)+(k.arena||0)+(k.hall||0):0),c})).filter(p=>p.v>0);
+ heat:{t:'Heat for the neighbours', steps:x=>{ const {R,mw,r,all15,f,city}=x; const k={housing:0,school:0,campus:0,care:0,hospital:0,rec:0,hall:0,pool:0,arena:0}; all15.forEach(p=>{ k[p.t]=(k[p.t]||0)+1; });
+  const parts=[['Non-market housing','housing',C.heat],['Schools, campuses','school',C.water],['Care, hospitals','care',C.mat],['Recreation, halls, pools','rec',C.place]].map(([l,t,c])=>({label:l,v:(k[t]||0)+(t==='care'?k.hospital||0:0)+(t==='school'?k.campus||0:0)+(t==='rec'?(k.pool||0)+(k.arena||0)+(k.hall||0):0),c})).filter(p=>p.v>0);
   return [
    {t:'Catching the heat',p:`Air cooling leaves heat at ${K('25–35 °C')}, too cool for most heating without a heat pump; how much an air-cooled hall can give is not yet known. Liquid cooling to the chip catches ${K(Math.round(R.capture[0]*100)+'–'+Math.round(R.capture[1]*100)+'%')} of it in water.`,
     v:h=>bars(h,[{label:'Caught in liquid',lo:R.capture[0]*100,hi:R.capture[1]*100,c:C.heat},{label:'Left in the air',lo:(1-R.capture[1])*100,hi:(1-R.capture[0])*100,c:C.other}],'% of server heat','Heat captured by liquid cooling'),src:['cap']},

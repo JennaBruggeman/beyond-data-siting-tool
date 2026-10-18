@@ -29,7 +29,7 @@ from shapely.geometry import Polygon, Point
 from shapely.strtree import STRtree
 H = os.path.dirname(os.path.abspath(__file__)); X = os.path.join(H, '..', 'data', 'raw', 'receivers', 'x')
 CITY = {'van': dict(lat0=49.25, lon0=-123.12, T=1500), 'edm': dict(lat0=53.54, lon0=-113.50, T=2500)}; Q = 2
-TYPES = {'school', 'hospital', 'care', 'rec', 'pool', 'arena', 'hall'}
+TYPES = {'school', 'hospital', 'care', 'rec', 'pool', 'arena', 'hall', 'campus'}
 STOP = {'hospital', 'health', 'care', 'centre', 'center', 'providence', 'the', 'of', 'and', 'st', 'saint', 'pavilion', 'building', 'extended', 'unit', 'bc', 'british', 'columbia', 'vancouver', 'edmonton', 'covenant', '-'}
 
 def dec(r, ox, oy):
@@ -40,6 +40,7 @@ def dec(r, ox, oy):
         pts.append((ox + x / Q, oy + y / Q))
     return pts
 def words(n): return {w for w in re.findall(r"[a-z]+", n.lower().replace("'s", '')) if w not in STOP and len(w) > 2}
+GEN = {'college', 'university', 'institute', 'technology', 'campus', 'school', 'art', 'design', 'community'}
 def norm(n): return re.sub(r'\s+', ' ', re.sub(r'(?i)\bswimming\b', '', n)).strip().lower()
 
 # ODSRF source classes, by (city, name)
@@ -74,6 +75,47 @@ for c, P in CITY.items():
             p.pop('seas', None)
             if out and len(out) == len(cls): p['seas'] = 'summer'
             elif out: p['seas'] = 'conflict'
+
+    # M86 campuses: public universities and colleges with their own grounds, from each province's official list
+    #   Vancouver: B.C. Locations of Post-Secondary Institutions (open.canada.ca 81558d54…; J.B. extract 18 Oct 2026), Institution Type 'Public Post-Secondary',
+    #     Location Description Main Campus / Campus / Shared Campus ('Centre' left out), point inside the City of Vancouver local areas (UBC's Point Grey campus is outside).
+    #   Edmonton: Alberta 'Types of publicly funded institutions' (alberta.ca, J.B. PDF 18 Oct 2026), the four public types (CARU, CCC, polytechnic, undergraduate
+    #     university) with a campus in Edmonton; independent academic institutions (Concordia, King's, MaKami) are not public in the BC sense and stay schools.
+    LA = None
+    if c == 'van':
+        from shapely.geometry import shape
+        from shapely.ops import unary_union
+        LA = unary_union([shape(f['geometry']) for f in json.load(open(os.path.join(H, '..', 'data', 'raw', 'van', 'local_areas', 'local-area-boundary_2026-10-18.geojson')))['features']])
+        rows = [r for r in csv.DictReader(open(os.path.join(H, '..', 'data', 'raw', 'receivers', 'bc_postsecondary_vancouver_extract_2026-10-18.csv')))
+                if r['Institution Type'] == 'Public Post-Secondary' and r['Location Description'] != 'Centre' and LA.contains(Point(float(r['Longitude']), float(r['Latitude'])))]
+        bypt = collections.defaultdict(list)
+        for r in rows: bypt[(float(r['Longitude']), float(r['Latitude']))].append(r)
+        CAMP = []
+        for (lo, la), g in bypt.items():
+            if len(g) > 1: n = f"{g[0]['Location']} (shared: {', '.join(r['Acronym'] for r in g)})"
+            else: n = f"{g[0]['Institution']} – {g[0]['Location']}"
+            CAMP.append(dict(t='campus', n=n, lon=lo, lat=la, src='bcPSI', inst=sorted({r['Institution'] for r in g})))
+    else:
+        CAMP = [dict(t='campus', n='MacEwan University – City Centre Campus', lon=-113.507548, lat=53.547271, src='abPSI', inst=['Grant MacEwan University'],
+                     loc='10700 104 Avenue NW (macewan.ca maps page), located by the City of Edmonton property record at that address')]
+        CONV = {'University of Alberta': 'University of Alberta – North Campus', 'Northern Alberta Institute of Technology': 'NAIT – Main Campus', 'Norquest College': 'NorQuest College'}
+        for p in pts:
+            if p['t'] == 'school' and p['n'] in CONV:
+                p['t'] = 'campus'; p.setdefault('aka', []); p['aka'] = sorted(set(p['aka']) | {p['n']}); p['n'] = CONV[p['n']]; p['src2'] = p.get('src2') or 'abPSI'
+    have = {p['n'] for p in pts}
+    for cp in CAMP:
+        if cp['n'] in have: continue
+        # an ODEF school record of the same institution within 400 m is the same place: fold it in
+        pts.append(cp)
+    camps = [p for p in pts if p['t'] == 'campus']
+    for p in list(pts):  # fold each ODEF school record of the same institution into the nearest campus within 400 m
+        if p['t'] != 'school': continue
+        best = None
+        for cp in camps:
+            dd = math.hypot(xy(p)[0] - xy(cp)[0], xy(p)[1] - xy(cp)[1])
+            same = any((words(i) & words(p['n'])) - GEN or norm(i) == norm(p['n']) for i in cp.get('inst', [cp['n'].split(' – ')[0]]))
+            if dd <= 400 and same and (best is None or dd < best[0]): best = (dd, cp)
+        if best: best[1]['aka'] = sorted(set(best[1].get('aka', [])) | {p['n']}); pts.remove(p)
 
     # M6 merge
     rec = [p for p in pts if p['t'] in TYPES]; other = [p for p in pts if p['t'] not in TYPES]
@@ -128,15 +170,17 @@ for c, P in CITY.items():
             else: hit = [min(hit, key=lambda x: B[x][0].area)]
             for x in hit: bl[x] = B[x]
         bl = {x: v for x, v in bl.items() if v[1] and v[1] > 0}
+        if m['t'] == 'campus': continue  # a campus has several buildings: demand stays not yet known (noDemand in cards.js)
         if not bl: n_none += 1; continue
         if any(v[0].area > 30000 for v in bl.values()): m['fx'] = 1; n_fx += 1; continue
-        if m['t'] == 'school' and max(v[1] for v in bl.values()) >= 40: m['ten'] = 1; n_ten += 1; continue
+        if m['t'] in ('school', 'campus') and max(v[1] for v in bl.values()) >= 40: m['ten'] = 1; n_ten += 1; continue
         mine = {x: v for x, v in bl.items() if x not in owner}
         shared = [owner[x] for x in bl if x in owner]
         if not mine: m['fs'] = shared[0]; n_fs += 1; continue
         for x in mine: owner[x] = m['n']
         m['fa'] = round(sum(g.area * max(1, round(h / 4)) for g, h in mine.values()))
         m['fh'] = round(max(h for g, h in mine.values()), 1); m['fm'] = len(mine); n_fa += 1
+    for m in merged: m.pop('inst', None)
     D['pts'] = other + merged
     json.dump(D, open(path, 'w'), ensure_ascii=False, separators=(',', ':'))
     json.dump(D['pts'], open(os.path.join(H, f'receivers_{c}.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
