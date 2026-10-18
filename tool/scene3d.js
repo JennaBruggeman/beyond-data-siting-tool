@@ -77,7 +77,7 @@ function bbox(r){ let a=1e9,b=1e9,c=-1e9,d=-1e9; for(let i=0;i<r.length;i+=2){ a
 function offsetRing(r,d){ // miter offset of a simple polygon (outward for d>0)
   const n=r.length/2, out=[]; const sa=(()=>{ let s=0; for(let i=0,j=r.length-2;i<r.length;j=i,i+=2) s+=(r[j]*r[i+1]-r[i]*r[j+1]); return s>0?1:-1; })();
   for(let i=0;i<n;i++){ const p=[r[2*((i-1+n)%n)],r[2*((i-1+n)%n)+1]], q=[r[2*i],r[2*i+1]], s=[r[2*((i+1)%n)],r[2*((i+1)%n)+1]];
-    const n1=norm([q[1]-p[1],-(q[0]-p[0])]), n2=norm([s[1]-q[1],-(s[0]-q[0])]); let m=norm([n1[0]+n2[0],n1[1]+n2[1]]); const cos=m[0]*n1[0]+m[1]*n1[1]; const k=d*-sa/Math.max(0.35,cos);
+    const n1=norm([q[1]-p[1],-(q[0]-p[0])]), n2=norm([s[1]-q[1],-(s[0]-q[0])]); let m=norm([n1[0]+n2[0],n1[1]+n2[1]]); const cos=m[0]*n1[0]+m[1]*n1[1]; const k=-d*-sa/Math.max(0.35,cos); /* sign fixed 18 Oct (sweep M75): it went inward for both windings */
     out.push(q[0]+m[0]*k,q[1]+m[1]*k); }
   return new Float64Array(out); }
 function norm(v){ const l=Math.hypot(v[0],v[1])||1; return [v[0]/l,v[1]/l]; }
@@ -171,7 +171,7 @@ function roofC(){ return state.foot?BD.centroid(state.foot):state.c; }
 function plantLabels(col){ const G=state.plantGroups||{}; for(const k in G){ const L=G[k], [name,where]=k.split('|'); const b=L[Math.floor(L.length/2)], c=BD.centroid(b.ring);
     const top=V(c[0],c[1],b.base+b.h), at=top.clone().add(new T.Vector3(0,9+(where==='roof'?4:0),0)); label(`${name} ×${L.length} · ${where}${b.atGrade?' (shown at grade)':''}`,at,col?hex(col):'#e9e6e1',{prio:6,from:top}); } }
 function baseLabels(){ const M=state.M; if(!M) return;
-  if(state.foot&&!M.existing){ const c=roofC(); const fl=M.sizedTo?M.sizedTo.floor:M.footArea*M.nF[0]; label(`${BD.S.answers.mw?BD.S.answers.mw+' MW needs ':''}≈ ${BD.fmt(Math.round(fl/100)*100)} m² (${BD.fmt(Math.round(fl*10.7639/1000)*1000)} ft²) of floor · any shape`,V(c[0],c[1],8),'#e9e6e1',{prio:9,from:V(c[0],c[1],0.3)}); }
+  if(state.foot&&!M.existing){ const c=roofC(); const fl=M.sizedTo?M.sizedTo.floor:M.footArea*Math.max(1,M.nF[0]-(M.Z&&M.Z.ground?1:0)); /* without a size: what the data-centre floors hold (not the ground floor where the zone keeps it) */ label(`${M.sizedTo?M.sizedTo.mw+' MW needs ':'data-centre floors hold '}≈ ${BD.fmt(Math.round(fl/100)*100)} m² (${BD.fmt(Math.round(fl*10.7639/1000)*1000)} ft²) of floor${M.sizedTo?' · any shape':''}`,V(c[0],c[1],8),'#e9e6e1',{prio:9,from:V(c[0],c[1],0.3)}); }
   if(M.loading){ const c=BD.centroid(M.loading); label(`${M.loadingNeed.cls}s ×${M.loadingNeed.n}`,V(c[0],c[1],10),'#9fb38a',{prio:5,from:V(c[0],c[1],0.4)}); }
   if(M.plant&&M.plant.yard){ const c=BD.centroid(M.plant.yard); label('plant yard',V(c[0],c[1],14),'#9d9a94',{prio:4,from:V(c[0],c[1],0.4)}); }
   if(state.indoorZ&&state.foot){ const c=roofC(); label('cooling plant indoors · louvred top floor',V(c[0],c[1],state.indoorZ+12),'#9d9a94',{prio:7,from:V(c[0],c[1],state.indoorZ+3)}); }

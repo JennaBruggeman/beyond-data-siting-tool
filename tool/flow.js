@@ -164,7 +164,7 @@ function facts(){ const e=BD.eng, f=e.siteFacts(), A=BD.S.answers, a=BD.S.sel.a|
    ['Set-up',`${A.built==='existing'?'existing building':'new building'}, ${A.inside||'air'} cooling inside, ${A.outside||'dry'} coolers outside`]]; }
 const ORDERG=['site','fits','ex','opps','opts','report'];
 function reportData(){ const groups=[]; for(const [g,l] of GROUPS){ const items=F.steps.filter(s=>s.g===g&&F.notes[s.k]).map(s=>F.notes[s.k]); if(items.length) groups.push({g,l,items}); }
-  const seen=new Set(), srcs=[]; for(const s of Object.values(F.notes).flatMap(n=>n.srcs)){ const key=s.toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,90); if(!seen.has(key)){ seen.add(key); srcs.push(s); } } return {facts:facts(),groups,srcs,date:new Date().toISOString().slice(0,10)}; }
+  const seen=new Set(), srcs=[]; for(const s of Object.values(F.notes).flatMap(n=>n.srcs)){ const key=s.toLowerCase().replace(/[^a-z0-9]/g,''); /* whole string: blocks sharing a preamble are kept (sweep M78) */ if(!seen.has(key)){ seen.add(key); srcs.push(s); } } return {facts:facts(),groups,srcs,date:new Date().toISOString().slice(0,10)}; }
 function stepHTML(n,wide){ let h=`<h3>${esc(n.title)}</h3>${n.lead?`<p class="rl">${esc(n.lead)}</p>`:''}`;
   if(n.secs.length) h+=`<dl class="rd">${n.secs.map(([t,a])=>`<dt>${esc(t)}</dt><dd>${esc(a)}</dd>`).join('')}</dl>`;
   if(n.rows&&n.rows.length) h+=`<ul class="rr">${n.rows.map(r=>`<li>${esc(r)}</li>`).join('')}</ul>`;

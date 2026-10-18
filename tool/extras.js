@@ -115,7 +115,7 @@ function sensView(){
   BD.scene3d&&BD.scene3d.hide(); const e=E(), f=e.siteFacts(), R=e.R, A=BD.S.answers, mw=A.mw||1;
   const up=f.hallGross[1], G=f.gross[1], mid=(a,b)=>(a+b)/2;
   const share=R.hallShare, m2=f.m2MW, sM=mid(...share), mM=mid(...m2), strict=!!f.hallL;
-  const MWof=(s,m,len)=>(len&&f.hallL?Math.min(up,G*s):up*s)/m;
+  const MWof=(s,m,len)=>Math.min(40,(len&&f.hallL?Math.min(up,G*s):up*s)/m); // the same 40 MW cap as What fits (sweep M76)
   const base=MWof(sM,mM,false);
   const sz=[
    {lab:'Hall area per MW',range:`${m2[0]}–${m2[1]} m² per MW`,lo:MWof(sM,m2[1]),hi:MWof(sM,m2[0]),base},
@@ -147,9 +147,9 @@ function timeView(){
    ['Servers replaced','every 5–6 years',[[0,50]],'tick',5.5],
    ['Colocation contract','2–5 years, renewed or not',[[0,5]],'span'],
    ['Hyperscale contract','5–10+ years',[[0,10]],'span'],
-   ['Heat contract (Stockholm)','10 years + 5',[[0,15]],'span'],
+   ['Heat contract (Stockholm)','10-year call-off contracts (reported)',[[0,10]],'span'],
    ['Cooling and heat pumps','15–25 years',[[0,25]],'span',null,[15,25]],
-   ['Building shell','up to about 40 years',[[0,40]],'span'],
+   ['Building shell','written off over 7–40 years in company accounts; physical life not published',[[0,40]],'span'],
    ['Pipe network','30–50 years, by water temperature',[[0,50]],'span',null,[30,50]],
    ['Grid connection','stays with the land',[[0,50]],'span'],
   ];

@@ -2971,10 +2971,10 @@
    "source_roles": [
     {
      "id": "lorenz",
-     "term": "air 25–35 °C; liquid 50–60 °C",
+     "term": "air 25–35 °C; liquid 50–60 °C (second-hand via Sethuramalingam; unverified, report 14)",
      "role": "coefficient",
      "conf": 70,
-     "verified": true
+     "verified": false
     },
     {
      "id": "vanPermits",
@@ -3282,7 +3282,7 @@
     "heat_captured",
     "heat_rejected"
    ],
-   "coef": "EnEfG benchmark 10% → 20%; first attempt used heat_delivered ÷ IT energy — corrected 13 Oct 2026: Telia Helsinki reports ERF 0.75 on this basis; German HPC centres 0.01–0.20 (arXiv 2411.16204, non-ISO denominator); NREL RSF reports ERE 0.91 \"calculated, not measured\"",
+   "coef": "EnEfG benchmark 10% → 20%; first attempt used heat_delivered ÷ IT energy — corrected 13 Oct 2026: Telia Helsinki reports ERF 0.75 (operator claim; basis not stated in the PDF); German HPC centres 0.01–0.20 (arXiv 2411.16204, non-ISO denominator); NREL RSF reports ERE 0.91 \"calculated, not measured\"",
    "sources": [
     "euReg2024_1364",
     "heatPhys",
@@ -3450,7 +3450,7 @@
    "unit": "h",
    "formula": "usable kWh ÷ load; fuel ÷ burn rate",
    "inputs": [],
-   "coef": "UPS 10–15 s; 24–48 h fuel typical",
+   "coef": "UPS runtime about 1–2 min (hyperscale), about 5 min (colocation), 10–15 min (financial); generators take over in 10–20 s (vendor claims, sources/15d); 12 h fuel minimum (Uptime) and 24–48 h typical (operator claims)",
    "sources": [
     "heatPhys",
     "opClaims"
@@ -3905,7 +3905,7 @@
    "inputs": [
     "servers"
    ],
-   "coef": "Dell R760 LCA (2025): 4,177 kg CO2e total (US), manufacturing ≈10–15%; R740 PCF 8,640 ± 8,480 kg Alissa et al. 2025: making the servers is 8.8% of life-cycle GHG on a US-average grid but about 82% on renewable power — in Vancouver (18 g/kWh) the servers' making is the largest carbon item; in Edmonton (346 g/kWh) running them is.",
+   "coef": "Dell R760 LCA (2025): 4,177 kg CO2e total (US), manufacturing ≈10–15%; R740 PCF 8,640 ± 8,480 kg Alissa et al. 2025: making the servers is 8.8% of life-cycle GHG on a US-average grid but about 82% on renewable power (their two cases only). The tool's own inference: on Vancouver's low-carbon grid, making the servers is of the same order as running them (at 1 MW the electricity is about 133–147 t/yr at 18.1 g/kWh); in Edmonton running them dominates.",
    "sources": [
     "dell",
     "dellR760",
@@ -4533,7 +4533,7 @@
    "inputs": [
     "receivers"
    ],
-   "coef": "CEUD intensities blocked; household 81.2 GJ (BC) / 121.8 (AB) × 0.61 space-heat share; measured heat intensity of the host buildings (City energy report): 555 W Hastings 0.24 GJ/m² → 4.9 GWh/yr, 1050 W Pender 0.32 → 2.5 GWh, 900 W Hastings 0.26 → 0.9 GWh, 111 E 5th 0 (all-electric); host heat demand is 15–22% of the building's own non-heat energy, so a data centre's host can absorb only a fraction of what it rejects; CEUD 2023 commercial/institutional intensity: BC 1.114 GJ/m² (all activity types), Alberta 2.007 GJ/m²; offices ≈32% of sector energy in both provinces, health care 18.9% BC / 14.2% AB; per-activity intensity not published — apportion by share × floor space or use the measured City report where a building is listed; 13 Oct 2026 receivers: NEU 667,000 m², 47 buildings (data centres named as a future heat source); Creative Energy Core >200 buildings; NE False Creek 48,100 MWh/yr; Sen̓áḵw 11,218 MWh/yr; River District ~33,600 MWh/yr at build-out; UBC ADES ~89 GWh; Edmonton DDE ≤50 buildings by 2050; Blatchford 13.1 MW heat / 12.3 MW cooling (earlier source); Blatchford 2023–2026 Budget and Plans (Dec 2022): full build-out 46,789 MWh/yr heating (peak 34,543 kW) and 43,747 MWh/yr cooling (peak 46,601 kW) — peak cooling above peak heating; Energy Centre One 1 MW heat and 1 MW cooling, expanding to 4.25 MW heat / 4 MW cooling; ~400,000 m² connected floor area by 2026; sewer heat exchange centre deferred because EPCOR's updated sewer-flow forecasts reduced the energy potential; building owners outside the service area (incl. NAIT) have asked to connect; loop temperatures not stated; Edmonton District Energy Strategy (Aug 2022; Urban Planning Committee 27 Feb 2024, IIS02148, Attachment 1): names \"process waste heat (data centres, for example)\" among low-carbon sources; priority opportunity areas — first: Bonnie Doon, The Quarters, Heritage Valley, Exhibition Lands; second: City Centre: Oliver, Mill Woods Town Centre; third: University/Garneau, Clareview Station and Fort Road, West Edmonton Mall/Misericordia, Century Park, Stadium (and others); Downtown District Energy Initiative anchored on City buildings (Chancery Hall, Century Place); policy options studied, not adopted: property-tax rebates, neighbourhood infrastructure fee, accelerated rezoning and permits for connecting buildings; no rates or temperatures given",
+   "coef": "CEUD intensities blocked; household 81.2 GJ (BC) / 121.8 (AB) × 0.61 space-heat share; measured heat intensity of the host buildings (City energy report): 555 W Hastings 0.24 GJ/m² → 4.9 GWh/yr, 1050 W Pender 0.32 → 2.5 GWh, 900 W Hastings 0.26 → 0.9 GWh, 111 E 5th 0 (all-electric); host heat demand is 15–22% of the building's own non-heat energy, so a data centre's host can absorb only a fraction of what it rejects; CEUD 2023 commercial/institutional intensity: BC 1.114 GJ/m² (all activity types), Alberta 2.007 GJ/m²; offices ≈32% of sector energy in both provinces, health care 18.9% BC / 14.2% AB; per-activity intensity not published — apportion by share × floor space or use the measured City report where a building is listed; 13 Oct 2026 receivers: NEU 667,000 m², 47 buildings (data centres named as a future heat source); Creative Energy Core >200 buildings; NE False Creek 48,100 MWh/yr; Sen̓áḵw 11,218 MWh/yr; River District ~33,600 MWh/yr at build-out; UBC ADES ~89 GWh; Edmonton DDE ≤50 buildings by 2050; Blatchford 13.1 MW heat / 12.3 MW cooling (earlier source); Blatchford 2023–2026 Budget and Plans (Dec 2022): full build-out 46,789 MWh/yr heating (peak 34,543 kW) and 43,747 MWh/yr cooling (peak 46,601 kW) — peak cooling above peak heating; Energy Centre One 1 MW heat and 1 MW cooling, expanding to 4.25 MW heat / 4 MW cooling; ~400,000 m² connected floor area by 2026; sewer heat exchange centre deferred because EPCOR's updated sewer-flow forecasts reduced the energy potential; building owners outside the service area (incl. NAIT) have asked to connect; loop temperatures not stated; Edmonton District Energy Strategy (Aug 2022; Urban Planning Committee 27 Feb 2024, IIS02148, Attachment 1): names \"process waste heat (data centres, for example)\" among low-carbon sources; priority opportunity areas (Strategy priority table, checked against data/Edmonton_District_Energy_Strategy_2022.pdf 18 Oct 2026) — first: Bonnie Doon, Heritage Valley, City Centre: Oliver, The Quarters, Exhibition Lands; second: Mill Woods Town Centre; third: City Centre: Chinatown, West Edmonton Mall/Misericordia, Stadium, University: Garneau, Clareview Station, Century Park; Downtown District Energy Initiative anchored on City buildings (Chancery Hall, Century Place); policy options studied, not adopted: property-tax rebates, neighbourhood infrastructure fee, accelerated rezoning and permits for connecting buildings; no rates or temperatures given",
    "sources": [
     "energize",
     "edmBench",
@@ -6798,7 +6798,7 @@
    "inputs": [
     "parcel"
    ],
-   "coef": "City of Vancouver: 333 wells in export; depth median 59 ft (p10 16, p90 210); static level median 11 ft; yield sparse (114 values, p90 100 USgpm); 2 open-loop geoexchange wells; Edmonton: AWWID (retrieval guide F6), not yet in hand",
+   "coef": "Wells in a latitude/longitude box around Vancouver, which also takes in parts of North Vancouver, Richmond and Burnaby (verification sweep 17 Oct; counts by municipality not re-checked): 333; depth median 59 ft (p10 16, p90 210); static level median 11 ft; yield sparse (114 values, p90 100 USgpm); 2 open-loop geoexchange wells (the sweep places both in Richmond; not re-checked); Edmonton: AWWID (retrieval guide F6), not yet in hand",
    "sources": [
     "gwells",
     "abWells2026"

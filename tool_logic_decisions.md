@@ -327,3 +327,22 @@ No building is drawn for a new data centre. The 3D shows the lot, the zoning's b
 - M60: retrofit downside no longer claims an NBC load check.
 - M63: "Neighbours over their limit … within 600 m".
 - M65: Vancouver flood wording from VBBL 2025 s. 2.2.10.3(2)–(3) (read locally): services below FCL protected and accessible; no hazardous substances such as diesel below it.
+
+## Sweep fixes, batch 5 (18 Oct 2026)
+- M67: existing buildings: all parts' footprints now count (the code sat inside a comment); yard plant avoids every part.
+- M70: Edmonton height labelled per part: tallest measured part (City 3D) and estimated parts shown separately.
+- M73: EV stalls "by area" with a note that the 3D packs whole rows.
+- M74: 3D floor label says "X MW needs" only when sized; otherwise "data-centre floors hold", without a ground floor the zone keeps.
+- M75: 10 m standoff ring now drawn outside the building (offset sign was inward for both windings).
+- M76: What-matters-most bars capped at 40 MW like What fits.
+- M78: report sources deduplicated on the whole string, so Energy, Water and Materials sources are kept.
+- M79: Qu EDM2 heat and water "not stated"; VAN4 water "none stated (operator claim)".
+- M81 (partly): EV stations labelled "public and private together" (the NRCan access code is not in the tool's file; filtering needs a re-download).
+- M82 (partly): route fallback wording no longer claims centrelines are missing.
+- M83: Edmonton ground storage: no Water Act authorization for a vertical closed loop above the base of groundwater protection; driller Class F; 3 m / 1 m setbacks (sources/15c, verified there).
+- M84: Vancouver I-2 bans keeping live animals (s. 2.2.1(b), 2.2.2(b), read locally): fish and insects out, algae possible; other zones "not read".
+- M88: Edmonton cold days defined by daily maximum.
+- M90/M91: benchmark wording (11 buildings: 6 approved, 2 proposed, 1 refused, 1 under construction, 1 unknown; checked in bench/benchmarks.json); precedent legend fill = tier.
+- M92: SFO12 and 400 S LaSalle labelled "operator claim, unverified (aggregator copy)"; "former CBOE building" dropped; 22 MW noted as expandable.
+- M97: Edmonton priority areas re-read from the Strategy table (Oliver first priority; Mill Woods the only second).
+- M99/M100/M101/M103/M105/M106/M107: register and limits wording (servers' making vs running is the tool's own inference; wells box wording; heat_temp air/liquid unverified; Meta COP after 2021 is combined; UPS minutes and generator 10–20 s labelled; Stockholm "10-year call-off contracts (reported)"; Telia ERF basis not stated; building shell life is an accounting write-off).

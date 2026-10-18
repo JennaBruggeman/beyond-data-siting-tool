@@ -118,7 +118,8 @@ function model(){
   const nF=h=>[1+Math.max(0,Math.floor((h-ftf.ground)/ftf.up[1])),1+Math.max(0,Math.floor((h-ftf.ground)/ftf.up[0]))];
   if(A.built==='existing'){
     const hmax=blds.length?Math.max(...blds.map(b=>b.h)):0; m.existing=true; m.H=hmax; m.nF=[Math.max(1,Math.floor(hmax/4)),Math.max(1,Math.floor(hmax/4))];
-    { const big=blds.length?blds.reduce((x,b)=>b.a>x.a?b:x):null; m.foot=big?big.r:null; m.roofH=big?big.h:0; } // the roof the plant sits on is the largest part's own roof, at its own height m.feet=blds.map(b=>({r:b.r,h:b.h})); m.footArea=blds.reduce((t,b)=>t+b.a,0);
+    { const big=blds.length?blds.reduce((x,b)=>b.a>x.a?b:x):null; m.foot=big?big.r:null; m.roofH=big?big.h:0; } // the roof the plant sits on is the largest part's own roof, at its own height
+    m.feet=blds.map(b=>({r:b.r,h:b.h})); m.footArea=blds.reduce((t,b)=>t+b.a,0); // all parts (sweep M67: these sat inside the comment)
   } else {
     let H=Z.hOutright, hn='outright';
     if(A.hmode==='cond'&&Z.hx&&!A.userH){ H=Z.hx[0]; hn='conditional'; }

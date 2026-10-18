@@ -18,7 +18,7 @@ const R={
  m2PerMW:[290,630],                   // built Canadian halls, operator claims: eStruxture VAN-1 ≈290, Hut 8 Vault ≈557, Qu EDM1 ≈584, Cologix VAN2 ≈619, VAN5 ≈627 (sources/16 §2.7)
  m2PerMWHigh:[250,290],               // high-density / liquid-cooled option: NEXTDC S3 250 and QScale Q01 255 (operator claims, AI-ready halls); 290 = densest built Canadian hall (VAN-1)
  m2PerMWModel:[186,2325],             // LBNL prototypes (Sun et al. 2021), shown as outer bounds only
- grossPerMW:[505,1109],               // check: whole building per MW IT — min–max of the 10 benchmark buildings in bench/benchmarks.json (public or filed records; test_size_chain.py keeps this in sync)
+ grossPerMW:[505,1109],               // check: whole building per MW IT — min–max of the 11 benchmark buildings in bench/benchmarks.json (6 approved, 2 proposed, 1 refused, 1 under construction, 1 unknown; applicant or filed figures; test_size_chain.py keeps this in sync)
  cases:{van:[{mw:1.6,n:'Cologix VAN5'},{mw:2.4,n:'eStruxture VAN-1'},{mw:40,n:'111 E 5th (proposed)'}], edm:[{mw:2.5,n:'Qu EDM1'}]}, // operator or applicant figures
  steps:[0.1,0.2,0.3,0.5,0.75,1,1.5,2,2.5,3,4,5,6,8,10,12,15,20,25,30,40],
  plant:{ups:[2.0,2.4],batt:[2.2,2.2],dry:[24.5,24.5],hp:[3.4,3.4],cdu:[0.6,0.6]}, // component_space, manufacturer claims, equipment only
@@ -38,7 +38,7 @@ const SRC2={
  plant:'register: component_space (manufacturer claims, equipment only; clearances and switchgear rooms not sourced)',
  pue:'register: pue (LBNL 2023; Uptime 2025 industry survey)', lf:'register: load_factor (Fan et al. 2007)',
  cap:'register: liquid_capture (LBNL 2014, NREL — direct-to-chip 48–75%; air-cooled: no primary figure)',
- cop:'register: cop (DEA 2026 waste-heat heat pumps to 70 °C, 1–3 MW: 3.0–3.6; observed at Meta Odense, 27 → 70 °C: 4.5 in 2020, about 3.9 in 2022–24 — Fjernvarme Fyn annual reports)', fuel:'register: fuel_on_site (NFC 2020 Table 4.3.13.4.-B; fuel rate a manufacturer claim; Uptime ≥ 12 h)',
+ cop:'register: cop (DEA 2026 waste-heat heat pumps to 70 °C, 1–3 MW: 3.0–3.6; observed at Meta Odense, 27 → 70 °C: 4.5 in 2020; from 2021 Fjernvarme Fyn reports Meta\'s heat pumps together with others, about 3.9 combined — Fjernvarme Fyn annual reports)', fuel:'register: fuel_on_site (NFC 2020 Table 4.3.13.4.-B; fuel rate a manufacturer claim; Uptime ≥ 12 h)',
  svc:'register: service_class (BC Hydro primary guide; EPCOR connection guide)', homes:'register: homes_heated (NRCan CEUD 2023)',
  grid:'register: grid_co2 (NIR 2026 Annex 7, consumption intensity 2024)', neu:'By-law 9552 Sch. A, C, s. 2.1 (consolidated 1 Jan 2026); service area traced ±45 m',
  reach:'register: receiver_radius (RVO 2018, 5-year payback)', recv:'Statistics Canada ODSRF v2 (2026), ODHF (2020), ODEF v2.1 (2022); City of Vancouver non-market housing',
@@ -226,7 +226,7 @@ function fitsView(){
   <p class="sub">${f.density==='high'?`${fmt(f.m2MW[0])}–${fmt(f.m2MW[1])} m² of hall per MW: two AI-ready halls report about 250 (NEXTDC S3, QScale; operator claims), and the densest built Canadian hall is 290. <span class="draft">Dense racks usually need liquid cooling to the chip, which also changes the heat: it leaves warmer and more of it can be captured (see Heat).</span>`:`${fmt(f.m2MW[0])}–${fmt(f.m2MW[1])} m² of hall per MW, as five built Canadian halls report (operator claims, mostly 5–10 kW per rack). LBNL's models span 186–2,325.`}</p>
   ${f.gross[1]<3000?`<p class="sub draft">Small buildings can hold more than this range. With little room for anything else, most of the floor becomes hall: eStruxture VAN-1 puts about 75% of its 929 m² into hall and holds 2.4 MW (operator claim).</p>`:''}
   <p class="sub"><a href="#" id="toPrec">Compare with real buildings →</a> · <a href="#" id="toSens">What matters most →</a>${BD.dl?' · <a href="#" id="toRep">Download a site report</a>':''}</p>
-  ${f.mwCheck?`<p class="sub">Check against whole buildings: the benchmark buildings in the precedent catalogue (built or approved, public records) use ${fmt(R.grossPerMW[0])}–${fmt(R.grossPerMW[1])} m² of building per MW of IT. This floor area at those rates gives ${rng(f.mwCheck[0],f.mwCheck[1],'MW')}.</p>`:''}${src('size')}${mathFits(f)}
+  ${f.mwCheck?`<p class="sub">Check against whole buildings: the 11 benchmark buildings in the precedent catalogue (mostly approved or proposed, from planning filings and applicant figures; none recorded as built) use ${fmt(R.grossPerMW[0])}–${fmt(R.grossPerMW[1])} m² of building per MW of IT. This floor area at those rates gives ${rng(f.mwCheck[0],f.mwCheck[1],'MW')}.</p>`:''}${src('size')}${mathFits(f)}
   <div class="q"><div class="lab">Size to test: <b id="mwv">${mw}</b> MW of servers · <span id="mwn" class="sub">${esc(near(mw))}${over(mw)}</span></div>
    <div class="mwtrack"><div class="band" style="left:${pos01(f.mw[0])}%;width:${Math.max(1,pos01(f.mw[1])-pos01(f.mw[0]))}%" title="what fits here"></div>
    ${cases.map((c,i)=>`<div class="tick${i%2?' alt':''}" style="left:${pos01(c.mw)}%"><span>${esc(c.n)}</span></div>`).join('')}
@@ -653,7 +653,7 @@ async function precView(){
   const near=P.sites.filter(s=>s.mw&&s.area&&s.tier!=='context').map(s=>({s,d:Math.abs(Math.log(s.area/Math.max(G,1)))})).sort((a,b)=>a.d-b.d).slice(0,8).map(x=>x.s);
   const row=s=>`<tr><td>${esc(s.name)}<div class="src">${esc(s.city)}, ${esc(s.country)}${s.conversion?' · conversion':''} · ${s.tier}</div></td><td class="r">${f1(s.mw)}${s.mw_basis==='IT'?'':'<div class="src">not stated as IT</div>'}</td><td class="r">${fmt(s.area)}</td><td class="r">${fmt(Math.round(s.area/s.mw))}</td><td>${s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener">source</a>`:''}<div class="src">${esc(s.evidence||'')}</div></td></tr>`;
   let h=tabBar('prec')+`<h3>Real buildings against this site</h3>
-  <p class="sub draft">Dots: real data centres (filled: public record; open: claim). Band: the tool's range. Bar: <span class="k">this site, ${rng(f.mw[0],f.mw[1],'MW')} on ${rng(f.gross[0],f.gross[1],'m²')}</span>.</p>
+  <p class="sub draft">Dots: real data centres (filled: benchmark tier; open: reference tier; each dot's evidence is on its card). Band: the tool's range. Bar: <span class="k">this site, ${rng(f.mw[0],f.mw[1],'MW')} on ${rng(f.gross[0],f.gross[1],'m²')}</span>.</p>
   <div class="chart" style="overflow-x:auto">${g}</div>
   <div class="legend2"><span><i style="background:var(--accent);border-radius:50%"></i>Benchmark</span><span><i style="border:1px solid var(--muted);border-radius:50%"></i>Reference</span><span><i style="background:var(--fg);opacity:.15"></i>Tool's range</span><span><i style="border-top:1px dashed var(--muted);height:0"></i>${gpm.min}–${fmt(gpm.max)} m² of building per MW (benchmarks)</span></div>
   <h3>Closest in size</h3><div class="tt"><table><thead><tr><th>Building</th><th class="r">MW</th><th class="r">Floor m²</th><th class="r">m² per MW</th><th></th></tr></thead><tbody>${near.map(row).join('')}</tbody></table></div>
