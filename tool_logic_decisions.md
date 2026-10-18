@@ -292,3 +292,23 @@ No building is drawn for a new data centre. The 3D shows the lot, the zoning's b
 - **NEU levy (M21).** $123,873 + $146/kW, in force 1 Jan 2026 (By-law 9552 Sch. C Part 1 via By-law 14524, read from data/raw/van/9552.txt); credit $65.172 × 50% = $32.59/MWh confirmed.
 - **Networks (M16–M18).** Networks are sorted inside first, then nearest, so every view names the nearest (1169 Richards: Creative Energy, 272 m, not the NEU at 733 m). The $32.59 credit and "possible here" only for a parcel inside the NEU; outside it, or for another network, demand and money are "not yet known". Blatchford money line uses $0.0358/kWh (2025–26, operator claim) instead of the 2022 $0.0269. "The NEU runs mostly on sewage heat" and the ±45 m / By-law 9552 source line only for the NEU.
 - **Vancouver rules on Edmonton parcels (M27, M44, M45, M49, M50, M46).** Rezoning time: Edmonton's 160-day target for a complex rezoning (City complexity sheet, data/), then a public hearing. "I-2 limits" → "IM limits" in Edmonton. Battery earnings: AESO reserve thresholds (5 MW supplemental, 10 MW spinning, or an aggregator; ISO Rules 205.5–205.6) in Edmonton; the BC line now says the programme doesn't state whether batteries qualify. Blackwater ban only in Vancouver. Sewer rules by city (Bylaw 299 wording corrected to "entering any sewage facility"; EPCOR Bylaw 18100 approval in Edmonton). Gold Bar: "Suncor named" and "existing pipe" removed; utility claim, customers not named.
+
+## Sweep fixes, batch 3 (18 Oct 2026)
+- M4: How-it-works heat card counts every receiver within 1.5 km, as the Heat step does.
+- M5: Options "Within reach" no longer marked met; says it is straight-line reach (Dutch distances), and that the Heat step tests break-even.
+- M8: Edmonton non-market homes "not known: no list loaded" instead of 0.
+- M9/M10: connection card gives floor area × CEUD for non-housing receivers; share of heat no longer prints low above high ("more than all the heat offered" where so).
+- M11: "electricity below about $X … before any route can start to pay back".
+- M12: simple payback labelled "on the connection levy and pipe only; heat pump, operation and demand charges not included".
+- M13: NEU yearly credit labelled "if the NEU took all the heat offered".
+- Connection card "value of the gas": gas $/GJ burnt in an 85% boiler = $/MWh of heat (follows the M1 fix).
+- M20: district-energy areas labelled NEU traced, others approximate (legend, 3D labels, limits, cities table).
+- M22: 65 °C attributed to the NEU guidelines, not By-law 9552 (guidelines not re-read).
+- M24: downtown grid: "no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; application not yet decided); temporary measures in between" (CPCN s. 2.2.2, local PDF); state "with a change", not "not". Parcels outside the checked zones no longer told they are "not in the freeze" (M23 boundary still to trace).
+- M25/M26: 12–36 months attributed to Dominion Energy via JLARC (transferred); AESO 2021 weeks labelled as generation and storage, not loads.
+- M28: UPS flexibility in kWh.
+- M33: heat-pump plant area: unit 3.4 m²/MW (claim) plus DEA whole-plant 100/50/30 m²/MW at 1/3/10 MW (sheet 40, local extract).
+- M37: no standby fuel shown when no generators are chosen.
+- M43: blowdown-to-sewer row has its own rules (Metro Vancouver permit above 300 m³/30 days; EPCOR written approval), not the recovery add-on's.
+- M51: "case by case" zones show "Possible, with a condition" with the zone's reason.
+- Options table: "Power at full load" and "Power on average" (follows C1).

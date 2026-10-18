@@ -34,9 +34,9 @@ const LIMITS_LEAD=`Ranges, not designs: screening figures from published sources
 const LIMITS=[
  ['Zoning',`Read as written. ${K('Support rooms on a ground floor')} where "bulk data storage" is barred (Vancouver I-2, I-3, FC-2): the City to confirm; both readings shown. I-2 yards not yet read, so floor area is ${K('"up to"')}.`],
  ['Size',`Real data centres sit in the ${K('lower half')} of the range; small downtown buildings can exceed it. ${K('Only 11 buildings')} worldwide publish both IT load and floor area.`],
- ['Grid',`${K('No utility publishes substation headroom.')} Known: downtown Vancouver feeder freeze to 2032; Alberta's 1,200 MW interim limit, fully allocated. Otherwise "needs the utility's answer".`],
+ ['Grid',`${K('No utility publishes substation headroom.')} Known: no new downtown Vancouver feeder positions from fiscal 2027 until the West End substation (expected 2032), with temporary measures in between; Alberta's 1,200 MW interim limit, fully allocated. Otherwise "needs the utility's answer".`],
  ['Heat',`Receivers are ${K('candidates by type, not customers')}. Demand, current heating and willingness are unknown: heat available is not heat used.`],
- ['Edmonton',`Heights from the City's 3D buildings (about 95%), the rest estimated from floor area. ${K('District energy areas not yet traced; floodplain not yet checked.')} Lots © Altalis via Edmonton Public Schools GIS, to 1 Sep 2025, academic use.`],
+ ['Edmonton',`Heights from the City's 3D buildings (about 95%), the rest estimated from floor area. ${K('District energy areas approximate (Blatchford from property records, Downtown from the City map), not traced from their bylaws; floodplain not yet checked.')} Lots © Altalis via Edmonton Public Schools GIS, to 1 Sep 2025, academic use.`],
  ['People',`Census 2021 spread evenly within each area, so ${K('estimates near boundaries')}. Sound is ${K('screening only')}, no walls or barriers. The watched edge needs a site visit.`],
  ['Claims',`Operator figures are ${K('labelled as claims')}; industry surveys as surveys.`],
  ['Security',`${K('Generic equipment only')}; nothing that would help defeat a facility's security.`],
@@ -189,8 +189,8 @@ function citiesView(){
    ['Solar yield, south wall','716 kWh per kWp a year','989 kWh per kWp a year','NRCan municipal values (vertical)','record'],
    ['Rain','about 1,160 mm a year','about 420 mm a year','ECCC Normals 1991–2020','record'],
    ['Night noise limit next to homes','45–55 dBA by zone (By-law 6555)','50 dBA (Bylaw 14600)','city by-laws','record'],
-   ['Getting power','2026 Call: must curtail ≥10% of load on 24 h notice, ≥144 h a year; downtown feeders frozen to 2032','AESO interim limit of 1,200 MW for new large loads, fully allocated; data centres ≥75 MW may tether to their own new generation or storage, and are cut first in mandatory load shedding','BC Hydro 2026 RFA; Alta Reg 117/2026; AESO 2025, 2026','record'],
-   ['Where heat could go','NEU: compulsory connection inside its area; heat sent back credited at 50%','Blatchford: compulsory connection inside its service area (Bylaw C17943 s. 6); service areas not yet traced in the tool','By-law 9552; Bylaw C17943','record'],
+   ['Getting power','2026 Call: must curtail ≥10% of load on 24 h notice, ≥144 h a year; no new downtown feeder positions from fiscal 2027 to about 2032, temporary measures in between','AESO interim limit of 1,200 MW for new large loads, fully allocated; data centres ≥75 MW may tether to their own new generation or storage, and are cut first in mandatory load shedding','BC Hydro 2026 RFA; Alta Reg 117/2026; AESO 2025, 2026','record'],
+   ['Where heat could go','NEU: compulsory connection inside its area; heat sent back credited at 50%','Blatchford: compulsory connection inside its service area (Bylaw C17943 s. 6); service area approximate in the tool (property-record hull, not Schedule A)','By-law 9552; Bylaw C17943','record'],
    ['Electricity price','BC Hydro large general service 6.79 ¢/kWh + $13.83/kW a month','Alberta pool averaged $43.68/MWh in 2025, plus wires charges','BC Hydro 2026; AESO 2025','record'],
   ];
   $('#side').innerHTML=e.tabBar('cities')+`<h2>The same data centre in two cities</h2>

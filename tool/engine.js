@@ -185,7 +185,7 @@ function mathNeeds(mw,fac,f){
     `Power at the meter at full load: ${mw} MW × PUE ${R.pue[0]} = ${n1(fac[0])} MW; × ${R.pue[1]} = <b>${n1(fac[1])} MW</b>. Averaged over a year (× ${R.lf}): <b>${n1(fac[0]*R.lf)}–${n1(fac[1]*R.lf)} MW</b>.`,
     `Plant space, dry coolers: (UPS ${p.ups[0]}–${p.ups[1]} + batteries ${p.batt[0]} + dry coolers ${p.dry[0]}) = ${pl[0].toFixed(1)}–${pl[1].toFixed(1)} m² per MW; × ${mw} = <b>${n0(pl[0]*mw)}–${n0(pl[1]*mw)} m²</b>.`,
     `With heat recovery, add heat pumps ${p.hp[0]} + CDUs ${p.cdu[0]} = ${plR[0].toFixed(1)}–${plR[1].toFixed(1)} m² per MW; × ${mw} = <b>${n0(plR[0]*mw)}–${n0(plR[1]*mw)} m²</b>.`,
-    `Standby fuel: ${n1(fac[0])}–${n1(fac[1])} MW × 1,000 (kW) × ${R.fuelHours} h × ${R.fuelLkWh} L per kWh = <b>${n0(fac[0]*1000*R.fuelHours*R.fuelLkWh)}–${n0(fac[1]*1000*R.fuelHours*R.fuelLkWh)} L</b>.`
+    BD.S.answers.gens==='none'?'Standby fuel: none (no generators chosen).':`Standby fuel: ${n1(fac[0])}–${n1(fac[1])} MW × 1,000 (kW) × ${R.fuelHours} h × ${R.fuelLkWh} L per kWh = <b>${n0(fac[0]*1000*R.fuelHours*R.fuelLkWh)}–${n0(fac[1]*1000*R.fuelHours*R.fuelLkWh)} L</b>.`
   ],'PUE: LBNL 2023, Uptime 2025. Plant areas: manufacturer claims, equipment only. Fuel rate: manufacturer claim at full load.');
 }
 
@@ -234,9 +234,9 @@ function fitsView(){
   <h3>What that size needs</h3><dl>
   <dt>Power at full load</dt><dd>${rng(fac[0],fac[1],'MW')} at the meter (servers × PUE 1.4–1.55); this sizes the grid connection and the cooling plant</dd><dt>Power on average</dt><dd>${rng(fac[0]*R.lf,fac[1]*R.lf,'MW')} (about ${Math.round(R.lf*100)}% of full load over a year); this sets the yearly energy</dd>
   <dt>Plant space</dt><dd>${rng(pl[0]*mw,pl[1]*mw,'m²')} with dry coolers; ${rng(plR[0]*mw,plR[1]*mw,'m²')} with heat recovery — equipment only, before clearances</dd>
-  <dt>Standby fuel</dt><dd>${rng(fuel[0],fuel[1],'L')} for 12 h; a ${pos==='ground'?'first-storey':'basement or upper-storey'} room may hold ${fmt(fuelLim)} L${fuel[1]>fuelLim?' — <span class="draft">more than one room or an outdoor tank</span>':''}</dd>
+  <dt>Standby fuel</dt><dd>${A.gens==='none'?'none: no generators chosen':`${rng(fuel[0],fuel[1],'L')} for 12 h; a ${pos==='ground'?'first-storey':'basement or upper-storey'} room may hold ${fmt(fuelLim)} L${fuel[1]>fuelLim?' — <span class="draft">more than one room or an outdoor tank</span>':''}`}</dd>
   <dt>Electrical service</dt><dd>${esc(svc)}</dd>
-  ${f.downtown?`<dt>Grid</dt><dd class="draft">Downtown: no new feeder positions from fiscal 2027 until the new West End substation (expected July 2032).</dd>`:''}
+  ${f.downtown?`<dt>Grid</dt><dd class="draft">Downtown: no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures.</dd>`:''}
   ${pos==='upper'?`<dt>Floor strength</dt><dd class="draft">Office floors above grade are designed for 2.4 kPa; equipment rooms need at least 3.6 kPa, and data halls their actual load — likely strengthening.</dd>`:''}
   </dl>${src('pue')}${src('plant')}${src('fuel')}${src('svc')}${f.downtown?src('grid2'):''}${pos==='upper'?src('floor'):''}${mathNeeds(mw,fac,f)}
   <div class="next"><button id="toRecv">What it exchanges →</button><span class="sub">Heat, energy, water, materials and people, each in 3D.</span></div>
@@ -333,19 +333,19 @@ async function optionsView(){
    ['The operator',[
      ['Servers',o=>o.mw.toFixed(1)+' MW'],
      ['Plant space',o=>rng(o.r.plant[0],o.r.plant[1],'m²')+' (equipment only)'],
-     ['Standby fuel, 12 h',o=>rng(o.r.fuel[0],o.r.fuel[1],'L')],
+     ['Standby fuel, 12 h',o=>BD.S.answers.gens==='none'?'none (no generators chosen)':rng(o.r.fuel[0],o.r.fuel[1],'L')],
      ['Zoning path',()=>`${state(zState)}${esc(f.status.t)}${zs==='no'?(f.city==='van'?' — about 15 months to a Vancouver decision':' — the City targets 160 calendar days for a complex rezoning (about 5.5 months, after a pre-application meeting), then a Council public hearing'):''}`]]],
    ['The utility and the grid',[
-     ['Power drawn',o=>rng(o.r.fac[0],o.r.fac[1],'MW')],
+     ['Power at full load',o=>rng(o.r.fac[0],o.r.fac[1],'MW')],['Power on average',o=>rng(o.r.fac[0]*R.lf,o.r.fac[1]*R.lf,'MW')],
      ['Electricity a year',o=>rng(o.r.facMWh[0]/1000,o.r.facMWh[1]/1000,'GWh')],
-     ['Grid connection',()=>f.downtown?`${state('not')}no new downtown feeders before 2032 — moved by city-scale infrastructure or time`:`${state('cj')}needs the utility's answer to a load application`]]],
+     ['Grid connection',()=>f.downtown?`${state('chg')}downtown: no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures`:`${state('cj')}needs the utility's answer to a load application`]]],
    ['Receivers',[
      ['Heat offered after the heat pump',o=>o.recover?rng(o.r.avail[0]/1000,o.r.avail[1]/1000,'GWh/yr'):`${state('not')}none — air-cooled heat at 25–35 °C goes to the air`],
      ['Equal to the heating of',o=>o.recover?rng(o.r.homes[0],o.r.homes[1],'homes')+' (space and hot water, provincial average)':'—'],
-     ['Within reach',o=>o.to==='net'&&net?`${state(net.edge<50?'cj':'chg')}${esc(net.n)} — ${net.edge<50?'on the edge of the service area':'compulsory connection; heat sent back is credited'}`:o.recover?`${state(near.length?'met':'not')}${near.length} candidate${near.length===1?'':'s'}`:'—'],
+     ['Within reach',o=>o.to==='net'&&net?`${state(net.edge<50?'cj':'chg')}${esc(net.n)} — ${net.edge<50?'on the edge of the service area':'compulsory connection; heat sent back is credited'}`:o.recover?`${state('cj')}${near.length} within straight-line reach (Dutch five-year payback distances, used only to say where to look); the Heat step tests break-even at BC or Alberta prices`:'—'],
      ['How much they would take',o=>o.recover?`${state('cj')}needs each receiver's monthly demand — a year of heat is mostly needed in winter (about ${f.city==='van'?'3.9':'3.3'} : 1 between the busiest and quietest month)`:'—'],
      ['Other source already serving',()=>net&&net.src==='van9552'?`${state('chg')}the NEU runs mostly on sewage heat`:net?`${state('cj')}${esc(net.n.replace(/ \(.*/,''))}: its heat source is not stated in the tool`:`${state('cj')}not known for these buildings`],
-     ['Price for the heat',o=>o.r.credit?`$${fmt(o.r.credit[0])}–$${fmt(o.r.credit[1])} a year at the NEU's credit ($32.59/MWh)`:o.recover?`${state('cj')}${f.city==='van'?'no published price outside the NEU':'no published price; Edmonton\'s district energy prices at the gas-equivalent cost plus avoided boiler costs'}`:'—']]],
+     ['Price for the heat',o=>o.r.credit?`$${fmt(o.r.credit[0])}–$${fmt(o.r.credit[1])} a year at the NEU's credit ($32.59/MWh), if the NEU took all the heat offered (what it takes depends on its demand)`:o.recover?`${state('cj')}${f.city==='van'?'no published price outside the NEU':'no published price; Edmonton\'s district energy prices at the gas-equivalent cost plus avoided boiler costs'}`:'—']]],
    ['The climate',[
      ['Heat-pump electricity',o=>o.recover?rng(o.r.hp[0]/1000,o.r.hp[1]/1000,'GWh/yr')+' → '+rng(o.r.co2[0],o.r.co2[1],'t CO₂e/yr'):'—'],
      ['Against what it replaces',o=>o.recover?`${state('cj')}depends on how the receivers heat now (gas, electric, district)`:'—']]],
@@ -384,7 +384,7 @@ BD.paintRecv=function(ctx,s,lw){
     for(const [rad,col] of [[1000,'rgba(127,178,196,.6)'],[1200,'rgba(200,194,184,.6)'],[1500,'rgba(159,179,138,.6)']]){ ctx.strokeStyle=col; ctx.beginPath(); ctx.arc(c[0],c[1],rad,0,7); ctx.stroke(); }
     ctx.setLineDash([]); }
 };
-BD.legendRecv=function(){ return `<div style="margin-top:6px"><i style="border:1px dashed #d1a35e"></i>District energy service area (traced)</div>
+BD.legendRecv=function(){ return `<div style="margin-top:6px"><i style="border:1px dashed #d1a35e"></i>District energy service area (NEU traced from its by-law; others approximate)</div>
  <div><i style="background:#c8c2b8;width:8px;height:8px"></i>Non-market housing <i style="background:#a7b4d6;width:8px;height:8px;margin-left:6px"></i>School</div>
  <div><i style="background:#b9a3cf;width:8px;height:8px;border-radius:50%"></i>Care, hospital <i style="background:#7fb2c4;width:8px;height:8px;border-radius:50%;margin-left:6px"></i>Recreation, pool <i style="background:#9fb38a;width:8px;height:8px;border-radius:50%;margin-left:6px"></i>Arena</div>`; };
 
@@ -499,7 +499,7 @@ function energyView(){
   <h3>What it draws</h3><dl><dt>Power at the meter</dt><dd>${rng(fac[0],fac[1],'MW')} at full load; about ${rng(fac[0]*R.lf,fac[1]*R.lf,'MW')} on average</dd><dt>Electricity a year</dt><dd>${rng(MWh[0]/1000,MWh[1]/1000,'GWh')}, at about ${Math.round(R.lf*100)}% of full load on average</dd>
   ${cost?`<dt>Cost a year</dt><dd>about $${(cost[0]/1e6).toFixed(1)}–${(cost[1]/1e6).toFixed(1)} million if served on BC Hydro's large general service (6.79 ¢/kWh + $13.83/kW a month, the demand charge taken at full load, which is conservative); very large loads move to transmission rates</dd>`:`<dt>Price</dt><dd>Alberta pool averaged $43.68/MWh in 2025, plus EPCOR distribution and transmission charges</dd>`}
   <dt>Carbon of that electricity</dt><dd>${rng(co2[0],co2[1],'t CO₂e/yr')} at ${R.grid[f.city]} g/kWh (average, consumption)</dd>
-  <dt>Grid connection</dt><dd>${f.downtown?`${state('not')}no new downtown feeder positions before the West End substation (expected July 2032)`:`${state('cj')}needs the utility's answer to a load application; the grid can add 12–36 months`}</dd></dl>${s3('elec')}${src('grid')}${f.downtown?src('grid2'):''}
+  <dt>Grid connection</dt><dd>${f.downtown?`${state('chg')}downtown: no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures`:`${state('cj')}needs the utility's answer to a load application; in Virginia, Dominion Energy reports 12–36 months for this (JLARC 2024; a transferred figure, not BC or Alberta)`}</dd></dl>${s3('elec')}${src('grid')}${f.downtown?src('grid2'):''}
   <h3>Solar on its own roof</h3><dl><dt>Roof</dt><dd>${fmt(roof)} m², of which plant takes about ${Math.round(share*100)}%</dd><dt>Panels</dt><dd>${rng(kwp[0],kwp[1],'kWp')} → ${rng(pvMWh[0],pvMWh[1],'MWh/yr')}</dd><dt>Share of its own use</dt><dd>${rng(pvMWh[0]/MWh[1]*100,pvMWh[1]/MWh[0]*100,'%')} — a small share at data-centre densities</dd></dl>${s3('pv')}
   <h3>What it could offer the grid</h3><dl>
   <dt>Who decides</dt><dd>${state('cj')}only whoever runs the computing; in a shared (colocation) building that is each tenant. Training runs can pause at checkpoints; live services cannot.</dd>
@@ -601,7 +601,7 @@ function socialView(){
   <dt>Ground floor</dt><dd>${f.ground?'this zone keeps the ground floor for other uses: it could meet the street':'nothing in the zone requires another use at grade'}</dd>
   <dt>Watched area</dt><dd>${state('cj')}seen only on site: cameras and signs visible from public space, recorded as one person's account</dd>
   <dt>Light at night</dt><dd>${f.city==='van'?'Vancouver sets no lux limit, but bars an outdoor light that shines directly onto a residential window across the street or next door and unreasonably disturbs the neighbour (Untidy Premises By-law 4548 s. 7)':'Edmonton requires light directed downward and away (no number)'}; the international reference is 10 lx before and 2 lx after curfew at a window</dd></dl>${s3('so')}${s3('watch')}${s3('light')}
-  <h3>Who is near</h3><dl><dt>Non-market homes within 200 m</dt><dd>${fmt(homes)} (City list; private housing not counted)</dd>${peopleRows(f,dist)}<dt>Work</dt><dd>${rng(Math.max(1,mw*f.m2MW[0]/R.hallShare[1]/R.jobsM2),mw*f.m2MW[1]/R.hallShare[0]/R.jobsM2,'')} operating jobs (Virginia ratio, transferred)</dd></dl>${s3('ppl')}${src('jobs')}
+  <h3>Who is near</h3><dl><dt>Non-market homes within 200 m</dt><dd>${f.city==='van'?`${fmt(homes)} (City list; private housing not counted)`:'not known: no non-market housing list is loaded for Edmonton'}</dd>${peopleRows(f,dist)}<dt>Work</dt><dd>${rng(Math.max(1,mw*f.m2MW[0]/R.hallShare[1]/R.jobsM2),mw*f.m2MW[1]/R.hallShare[0]/R.jobsM2,'')} operating jobs (Virginia ratio, transferred)</dd></dl>${s3('ppl')}${src('jobs')}
   ${mathBox([
     `Cooling units: power at the meter ${n1(fac)} MW, about one unit per MW → <b>${n}</b> unit${n>1?'s':''} (an assumption).`,
     `Together: Lw per unit of about 1 MW, ${R.lwUnit[0]} (low-noise) to ${R.lwUnit[1]} dBA (standard), + 10 × log₁₀(${n}) = <b>${n1(lw[0])}–${n1(lw[1])} dBA</b>.`,

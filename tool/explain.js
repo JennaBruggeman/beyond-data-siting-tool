@@ -19,7 +19,9 @@ function ctx(){ const e=BD.eng, f=e.siteFacts(), R=e.R, A=BD.S.answers, mw=A.mw|
   const size=o=>BD.plant.sizeFor(mw,Object.assign({},A,{outside:o}));
   const WETS={van:[1085,0.124],edm:[914,0.104]};
   const water=o=>{ const m=r.facMWh[1]*1.5; return o==='towers'?m:o==='hybrid'?m*WETS[f.city][1]:0; };
-  return {e,f,R,A,mw,r,near,nets,size,water,WETS,city:f.city==='van'?'Vancouver':'Edmonton'}; }
+  // every receiver within 1.5 km, as on the Heat step (verification sweep M4: e.nearby() cuts at each type's own reach)
+  const all15=(d.pts||[]).filter(p=>Math.hypot(p.x-f.c[0],p.y-f.c[1])<=1500);
+  return {e,f,R,A,mw,r,near,all15,nets,size,water,WETS,city:f.city==='van'?'Vancouver':'Edmonton'}; }
 
 /* ---------- drawing helpers ---------- */
 function el(t,a,p){ const n=document.createElementNS(NS,t); for(const k in a) n.setAttribute(k,a[k]); if(p) p.appendChild(n); return n; }
@@ -111,7 +113,7 @@ const TOPICS={
    {t:'How much water each one uses',p:`Evaporated on site in a year, at most. ${K('Dry coolers use none')}; towers evaporate up to 1.5 L per kWh of heat.`,
     v:h=>bars(h,[{label:'Dry coolers',v:0,c:C.heat},{label:'Hybrid coolers',v:water('hybrid'),c:C.power},{label:'Cooling towers',v:water('towers'),c:C.water}],'m³ a year','Water evaporated by system'),src:['evap']},
   ]; }},
- heat:{t:'Heat for the neighbours', steps:x=>{ const {R,mw,r,near,f,city}=x; const k={housing:0,school:0,care:0,hospital:0,rec:0,pool:0,arena:0}; near.filter(p=>p.dist<=1500).forEach(p=>{ k[p.t]=(k[p.t]||0)+1; });
+ heat:{t:'Heat for the neighbours', steps:x=>{ const {R,mw,r,all15,f,city}=x; const k={housing:0,school:0,care:0,hospital:0,rec:0,pool:0,arena:0}; all15.forEach(p=>{ k[p.t]=(k[p.t]||0)+1; });
   const parts=[['Non-market housing','housing',C.heat],['Schools','school',C.water],['Care, hospitals','care',C.mat],['Recreation, pools','rec',C.place]].map(([l,t,c])=>({label:l,v:(k[t]||0)+(t==='care'?k.hospital||0:0)+(t==='rec'?(k.pool||0)+(k.arena||0):0),c})).filter(p=>p.v>0);
   return [
    {t:'Catching the heat',p:`Air cooling leaves heat at ${K('25–35 °C')}, too cool for most heating. Liquid cooling to the chip catches ${K(Math.round(R.capture[0]*100)+'–'+Math.round(R.capture[1]*100)+'%')} of it in water.`,
