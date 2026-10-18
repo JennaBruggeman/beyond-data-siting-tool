@@ -2714,7 +2714,7 @@
    "inputs": [
     "server_floor"
    ],
-   "coef": "RVO 2018 p.4: 4.38 MWh/m² gross floor (BVO) per year, from CE Delft, validated with MJA3 (≈ 500 W/m² average); measured 33–62 W/ft² (US federal); modelled 100–500 W/ft²",
+   "coef": "RVO 2018 p.4: 4.38 MWh/m² per year per m² of server-room floor ('vloeroppervlak aan serverruimte', not gross floor), from CE Delft, validated with MJA3 (≈ 500 W/m² average); RVO does not say whether this is IT or total electricity, and calls it 'an order of magnitude, not an exact value' (checked 18 Oct 2026); measured 33–62 W/ft² (US federal); modelled 100–500 W/ft²",
    "sources": [
     "rvo2018",
     "lbnl2024",
@@ -2819,7 +2819,7 @@
     "it_load_claim",
     "it_load_outside"
    ],
-   "coef": "colocation server utilisation 0.21→0.35 (LBNL 2024); capacity utilisation 0.5 (LBNL); average ÷ peak ≈ 0.6 (Fan et al. 2007); leased share proxy: Digital Realty Toronto occupancy 96.4%, 55.8 MW white-space (Q2 2025 supplemental p.24) — occupancy ≠ utilisation; measured whole-building ceiling (City energy report): 555 W Hastings site EUI 1.84 GJ/m² → 37.4 GWh/yr total, 32.5 GWh non-heat ≈ 3.7 MW average for the whole 73,000 m² tower, data centre and offices together — so the ≥3.7 MW of operator nameplate claims cannot all be running at once; 1050 W Pender 11.2 GWh non-heat ≈ 1.3 MW avg; 900 W Hastings 0.57 MW; 111 E 5th 0.45 MW (no data centre yet); Equinix 10-K FY2024 (public filing, other operator): cabinet utilisation = cabinet space billed ÷ total cabinet capacity \"taking into consideration power limitations\" — Americas 81% (116,700 of 144,100 cabinets, 107 IBXs), EMEA 78%, Asia-Pacific 75%, company 78% (79% in 2023); MRR per cabinet Americas $2,550/month; new IBXs built for power and cooling twice that of earlier ones; Vancouver is a leased-only Equinix metro; Calgary CL1–3 and Kamloops KA1 (2020 acquisitions) listed in Schedule III; CALIBRATION: Telia Helsinki snapshot ERF 0.75 and PUE 1.152 with 4.11 MW waste heat imply 4.8 MW actual against 24 MW IT nameplate = 0.20 (one day, hall partly built out) — the low end of the band should be 0.20, not 0.35",
+   "coef": "colocation server utilisation 0.21→0.35 (LBNL 2024); capacity utilisation 0.5 (LBNL); average ÷ servers' combined maximum ≈ 0.6 (Fan et al. 2007, real data centre); leased share proxy: Digital Realty Toronto occupancy 96.4%, 55.8 MW white-space (Q2 2025 supplemental p.24) — occupancy ≠ utilisation; measured whole-building ceiling (City energy report): 555 W Hastings site EUI 1.84 GJ/m² → 37.4 GWh/yr total, 32.5 GWh non-heat ≈ 3.7 MW average for the whole 73,000 m² tower, data centre and offices together — so the ≥3.7 MW of operator nameplate claims cannot all be running at once; 1050 W Pender 11.2 GWh non-heat ≈ 1.3 MW avg; 900 W Hastings 0.57 MW; 111 E 5th 0.45 MW (no data centre yet); Equinix 10-K FY2024 (public filing, other operator): cabinet utilisation = cabinet space billed ÷ total cabinet capacity \"taking into consideration power limitations\" — Americas 81% (116,700 of 144,100 cabinets, 107 IBXs), EMEA 78%, Asia-Pacific 75%, company 78% (79% in 2023); MRR per cabinet Americas $2,550/month; new IBXs built for power and cooling twice that of earlier ones; Vancouver is a leased-only Equinix metro; Calgary CL1–3 and Kamloops KA1 (2020 acquisitions) listed in Schedule III; CALIBRATION: Telia Helsinki snapshot ERF 0.75 and PUE 1.152 with 4.11 MW waste heat imply 4.8 MW actual against 24 MW IT nameplate = 0.20 (one day, hall partly built out) — the low end of the band should be 0.20, not 0.35",
    "sources": [
     "dlrQ2_2025",
     "eqix10k",
@@ -2842,7 +2842,7 @@
     },
     {
      "id": "fan2007",
-     "term": "average ÷ peak ≈ 0.6",
+     "term": "average ÷ servers' combined maximum ≈ 0.6",
      "role": "coefficient",
      "conf": 70,
      "verified": true
@@ -3543,11 +3543,11 @@
   },
   {
    "id": "load_factor",
-   "name": "Load factor (average ÷ peak)",
+   "name": "Load factor (average ÷ the servers' combined maximum power)",
    "unit": "—",
-   "formula": "average ÷ peak",
+   "formula": "average ÷ sum of each server's measured maximum",
    "inputs": [],
-   "coef": "≈ 0.6 facility level (Fan et al. 2007); 8,760 h/yr",
+   "coef": "≈ 0.6: real data centre averaged 59.5% of 'actual peak' (sum of machine maxima); its observed peak was 71.9%, so average ÷ observed peak ≈ 0.83 (Fan et al. 2007, Table 3, s. 4.3–4.5; checked 18 Oct 2026); 8,760 h/yr",
    "sources": [
     "fan2007"
    ],
@@ -3966,7 +3966,7 @@
     "plant_schedule",
     "receptors"
    ],
-   "coef": "starter set: scroll chiller 450–850 kW Lw 96–100 dBA (Daikin, AHRI 370); Trane Sintesis Prime RTAF 333–1,010 kW Lw 94–101 standard / 91–98 low-noise (Eurovent); screw chiller 99–103 (ISO 9614); dry cooler: Kelvion 94 dBA printed under 'per fan' heading, 61 dBA @10 m — unit total unresolved; Güntner small unit Lw 67 dBA (permit submittal); standby diesel open 98–99 dBA @7 m (ISO 8528-10); enclosed: Cummins QuietSite L2 73–76, L1 78–87, weather-protective 89–91 dBA @7 m; CRAC 48–62 dBA @2 m (Stulz, 30–150 kW); transformer 62–63 dB (NEMA contour, unverified edition)",
+   "coef": "starter set: scroll chiller 450–850 kW Lw 96–100 dBA (Daikin, AHRI 370); Trane Sintesis Prime RTAF HSE 333–1,010 kW Lw 94–101 standard / 91–98 low-noise, plus size 245 (877 kW) printed as 107 / 103, out of line with its neighbours (brochure RTAF-SLB001-GB p.13; sound rows sit under the 'Eurovent performances' heading but are not labelled Eurovent; checked 18 Oct 2026); the tool takes the 1,010 kW unit (size 280), 98 low-noise / 101 standard, as one unit per MW; screw chiller 99–103 (ISO 9614); dry cooler: Kelvion 94 dBA printed under 'per fan' heading, 61 dBA @10 m — unit total unresolved; Güntner small unit Lw 67 dBA (permit submittal); standby diesel open 98–99 dBA @7 m (ISO 8528-10); enclosed: Cummins QuietSite L2 73–76, L1 78–87, weather-protective 89–91 dBA @7 m; CRAC 48–62 dBA @2 m (Stulz, 30–150 kW); transformer 62–63 dB (NEMA contour, unverified edition)",
    "sources": [
     "iso9613",
     "daikinCAT624",
@@ -4136,7 +4136,7 @@
    "inputs": [
     "lighting_plan"
    ],
-   "coef": "CIE 150:2017 via ILP GN01/20; Vancouver: no lux limit; Edmonton Bylaw 20001 s.5.120(3): glare minimised, light deflected away, directed downward — qualitative",
+   "coef": "CIE 150:2017 via ILP GN01/20; Vancouver: no lux limit; Untidy Premises By-law 4548 s. 7 bars an outdoor light casting light directly onto a residential window across the street or adjacent AND unreasonably disturbing the neighbour (qualitative; checked 18 Oct 2026); Edmonton Bylaw 20001 s.5.120(3): glare minimised, light deflected away, directed downward — qualitative",
    "sources": [
     "cie150",
     "edmBylaw20001",
@@ -4955,11 +4955,11 @@
    "id": "ev_stalls",
    "name": "EV charging stalls supported",
    "unit": "stalls",
-   "formula": "P_reserved × SF ÷ P_charger",
+   "formula": "P_reserved ÷ (SF × P_charger), SF 0.5–1 (corrected 18 Oct 2026: SF divides, it does not multiply)",
    "inputs": [
     "spare_capacity"
    ],
-   "coef": "Level 2 7.4–19.2 kW; DCFC 50–350 kW; SF 0.5",
+   "coef": "Level 2 7.4–19.2 kW; DCFC 50–350 kW; SF 0.5 is the value Silber, Scheubner and Märtz 2024 found for fast-charging sites (“in most cases”; checked 18 Oct 2026); for Level 2 it is a transfer, so the range runs to SF 1 (all at once)",
    "sources": [
     "wsuEV",
     "vanDCFC",
@@ -6612,7 +6612,7 @@
    "id": "row_cost",
    "name": "Street right-of-way cost",
    "unit": "CAD/yr",
-   "formula": "Vancouver Encroachment By-law 4243: $244.97 + $6.53/ft² over 150 ft²; Edmonton ULA permit, fees unstated",
+   "formula": "Vancouver Encroachment By-law 4243: $244.97 + $6.53/ft² over 150 ft²; Edmonton ULA permit, one-time: inspection $356.64 (no circulation) to $570.63 (under 20 m) or $1,560.31 (over 20 m) + $2.67 per m over 20 m, plus pavement degradation $2.59 per linear m (City of Edmonton ULA fee sheet, 2025 rates; checked 18 Oct 2026). Not comparable directly: Vancouver charges a yearly encroachment fee, Edmonton one-time permit fees",
    "inputs": [
     "distribution_cost"
    ],
@@ -6637,7 +6637,7 @@
     },
     {
      "id": "edmULA",
-     "term": "Edmonton ULA permit (fees unstated)",
+     "term": "Edmonton ULA permit, 2025 fee sheet (one-time fees)",
      "role": "rule",
      "conf": 90,
      "verified": true
@@ -8666,7 +8666,7 @@
     "heat_rejected",
     "ground"
    ],
-   "coef": "q = 12 W/m ground-only to 19 W/m with a dry cooler (derived from Zurmuhl et al. 2018, a 14.5 kW data centre, Ithaca, k 3.27 W/m·K); Edmonton design k 1.9 W/m·K (Alberta Geological Survey) → ~7–11 W/m (scaling is an assumption); ≈2 ha of borefield per MW rejected; 40 MW ≈ 0.8 km²; screening only — CSA C448 sizing and a thermal response test required; no Vancouver ground data found",
+   "coef": "q = 12 W/m (base design, 1,248 m) to 19 W/m (economic optimum, about 760 m), both for the ground-only heat-pump system; the dry-cooler hybrid only reused 760 m (derived by dividing the 14.5 kW cooling load by length, not the heat rejected to the ground, which also includes compressor work; Zurmuhl et al. 2018 s. 3.1, 4.2.1–4.2.2, a 14.5 kW data centre, Ithaca, k 3.27 W/m·K; checked 18 Oct 2026); Edmonton design k 1.9 W/m·K (Alberta Geological Survey) → ~7–11 W/m (scaling is an assumption); ≈2 ha of borefield per MW rejected; 40 MW ≈ 0.8 km²; screening only — CSA C448 sizing and a thermal response test required; no Vancouver ground data found",
    "sources": [
     "zurmuhl2018",
     "ags_edmonton",

@@ -63,7 +63,7 @@ const DECK=[
    .concat(Z.hx&&!BD.S.answers.userH?[{v:'cond',t:`With approval: ${Z.hx[0]===Z.hx[1]?Z.hx[0]:Z.hx[0]+'–'+Z.hx[1]} m`,up:['More storeys, more that fits'],down:['Depends on the City\'s discretion and a longer review']}]:[])
    .concat([{v:'storeys',t:'Set the storeys',up:['Test a specific building'],down:['May exceed what the zone allows (the tool warns)']}]); },set:(A,v)=>{ A.hmode=v; },anim:(v,m)=>A_.height(v,m),extra:A=>A.hmode==='storeys'?`<label class="dnum">Storeys <input type="number" id="dsto" min="1" max="12" value="${A.storeys||2}"></label>`:''},
  {id:'inside',q:'How are the servers cooled?',k:A=>A.inside||'air',opts:()=>[
-   {v:'air',t:'Air',up:['The most common: 75% of operators use room air cooling (Uptime 2025 survey)','Simple, well known'],down:['Heat leaves at about 25–35 °C, too cool to reuse without a heat pump']},
+   {v:'air',t:'Air',up:['The most common: 75% of operators surveyed use perimeter (room) air cooling, often alongside other types (Uptime Institute Cooling Systems Survey 2025, n = 512; industry survey)','Simple, well known'],down:['Heat leaves at about 25–35 °C, too cool to reuse without a heat pump']},
    {v:'plate',t:'Liquid to the chip',up:['48–75% of the heat caught in liquid (LBNL, NREL)','Warmer heat, easier to reuse'],down:['Plumbing to every server','The rest of the heat still needs air']},
    {v:'immersion',t:'Immersion',up:['Servers sit in fluid; few or no server fans'],down:['How much heat it catches is not yet sourced','Special tanks and fluids; heavy floors']}],set:(A,v)=>{ A.inside=v; },anim:v=>A_[v]()},
  {id:'outside',q:'How does the heat leave?',k:A=>A.outside||'dry',opts:()=>[

@@ -134,7 +134,7 @@ function sensView(){
   <h3>Largest data centre that fits (this site)</h3>${bars(sz,'MW')}
   <p class="sub">Not varied: the zone's floor-space ratio and height (read from the schedule) and the lot area (City record).</p>
   <h3>Heat offered at ${mw} MW of servers</h3>${bars(ht,'GWh/yr')}
-  <p class="sub">Not varied: the 60% average load (one source, no range) — every heat figure scales with it directly.</p>
+  <p class="sub">Not varied: the 60% average load (servers average about 60% of their combined maximum; one source, Fan et al. 2007, no range) — every heat figure scales with it directly.</p>
   `;
   $('#back').onclick=()=>BD.fitsView();
 }

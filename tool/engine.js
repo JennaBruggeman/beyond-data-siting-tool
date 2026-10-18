@@ -22,7 +22,8 @@ const R={
  cases:{van:[{mw:1.6,n:'Cologix VAN5'},{mw:2.4,n:'eStruxture VAN-1'},{mw:40,n:'111 E 5th (proposed)'}], edm:[{mw:2.5,n:'Qu EDM1'}]}, // operator or applicant figures
  steps:[0.1,0.2,0.3,0.5,0.75,1,1.5,2,2.5,3,4,5,6,8,10,12,15,20,25,30,40],
  plant:{ups:[2.0,2.4],batt:[2.2,2.2],dry:[24.5,24.5],hp:[3.4,3.4],cdu:[0.6,0.6]}, // component_space, manufacturer claims, equipment only
- pue:[1.4,1.55], lf:0.6, capture:[0.48,0.75], cop:[3.0,4.5], // COP: DEA 2026 waste-heat HPs to 70 °C 3.0–3.6; observed Meta Odense 27→70 °C: 4.5 (2020), ≈3.9 combined 2022–24 (Fjernvarme Fyn annual reports)
+ pue:[1.4,1.55], lf:0.6, lwUnit:[98,101], // sound power per ~1 MW air-cooled unit: Trane RTAF size 280 (1,010 kW), low-noise 98 / standard 101 dB(A), brochure RTAF-SLB001-GB p.13 (sweep 17 Oct; checked 18 Oct)
+  capture:[0.48,0.75], cop:[3.0,4.5], // COP: DEA 2026 waste-heat HPs to 70 °C 3.0–3.6; observed Meta Odense 27→70 °C: 4.5 (2020), ≈3.9 combined 2022–24 (Fjernvarme Fyn annual reports)
  fuelLkWh:0.263, fuelHours:12, fuelLimit:{low:20000,first:200000},
  homeMWh:{van:14.58,edm:29.19},       // CEUD 2023 space + water heating per household: BC 52.5 GJ, AB 105.1 GJ
  grid:{van:18.1,edm:346.1},           // g CO2e/kWh, NIR 2026, consumption, 2024
@@ -483,7 +484,7 @@ const SRC3={
  reuse:'register: a_reuse_rules, reclaimed_makeup (VBBL 2025; Metro Vancouver UT-019; EPCOR)', wprice:'register: water_supply (City of Vancouver 2026 rates)', sewer:'register: sewer_sink (Bylaw 299 limits; KWL 2014)',
  srv:'LBNL 2024: about 600 W per server (register: servers)', ew:'register: ewaste (server masses 21.25–26.3 kg, 6-year refresh)', cu:'register: copper_tonnes (Copper Development Association 2023 — industry figure)',
  eit:'register: embodied_it (Dell R760 life-cycle assessment 2025 — manufacturer)', eb:'register: embodied_building (461 kg CO₂e/m² median; no data-centre benchmark)',
- snd:'register: noise_level (screen Lp = Lw − 20 log r − 8; Trane RTAF 333–1,010 kW, Eurovent: Lw 91–101 dBA per unit)', lf:'register: lf_flag (AUC Rule 012 s. 4.5)', light:'register: light_at_window (CIE 150:2017; Edmonton Bylaw 20001 s. 5.120(3); Vancouver: no lux limit)',
+ snd:'register: noise_level (screen Lp = Lw − 20 log r − 8; Trane RTAF size 280, 1,010 kW: Lw 98 low-noise, 101 standard, one unit per MW)', lf:'register: lf_flag (AUC Rule 012 s. 4.5)', light:'register: light_at_window (CIE 150:2017; Edmonton Bylaw 20001 s. 5.120(3); Vancouver: no lux limit)',
  so:'register: standoff (Ontario GO-ITS 25.18, transferred)', watch:'register: watched_area (field observation, labelled as one person\'s)', ppl:'Statistics Canada, Census 2021 Profile by dissemination area (98-401-X2021006) and DA boundaries; counts spread evenly within each area',
 };
 const s3=k=>`<div class="src">${badge(k==='lf'?'lf2':k)}${esc(SRC3[k])}</div>`;
@@ -504,7 +505,7 @@ function energyView(){
   <dt>Who decides</dt><dd>${state('cj')}only whoever runs the computing; in a shared (colocation) building that is each tenant. Training runs can pause at checkpoints; live services cannot.</dd>
   <dt>The batteries it already has</dt><dd>${rng(ups[0],ups[1],'MWh')} for minutes (1–5 min of runtime, half kept for outages) — fast grid support, not a 4-hour peak; BC Hydro's storage incentive excludes an existing UPS</dd>
   <dt>A battery added for the grid</dt><dd>1 MW for 4 h takes ${fmt(4000/49)}–${fmt(4000/19)} m²; BC Hydro pays $50/kW a season for winter peak relief (fossil generators excluded)</dd>
-  <dt>EV charging, if 1 MW were set aside</dt><dd>${fmt(500/19.2)}–${fmt(500/7.4)} Level 2 stalls (7.4–19.2 kW at a 0.5 diversity), about ${fmt(500/19.2*22)}–${fmt(500/7.4*22)} m² of parking</dd></dl>${s3('ctl')}${s3('ups')}${s3('batt')}${s3('dr')}${s3('ev')}
+  <dt>EV charging, if 1 MW were set aside</dt><dd>${fmt(1000/19.2)}–${fmt(1000/(0.5*7.4))} Level 2 stalls (7.4–19.2 kW; from all charging at once to half at once, the share found for fast-charging sites, Silber et al. 2024), about ${fmt(1000/19.2*22)}–${fmt(1000/(0.5*7.4)*22)} m² of parking</dd></dl>${s3('ctl')}${s3('ups')}${s3('batt')}${s3('dr')}${s3('ev')}
   <h3>Standby generators</h3><dl><dt>Testing</dt><dd>about 4 full-load hours a year: ${rng(gen[0]*0.706/1000,gen[1]*0.706/1000,'t CO₂')} and ${rng(gen[0]*14.6/1000,gen[1]*14.6/1000,'kg NOₓ')} a year (uncontrolled-engine upper bound)</dd></dl>${s3('gen')}
   ${mathBox([
     `Power at the meter: ${mw} MW × PUE ${R.pue[0]}–${R.pue[1]} = <b>${rng(fac[0],fac[1],'MW')}</b>.`,
@@ -573,7 +574,7 @@ function censusNear(city,c,r){ const d=CENSUS[city]; if(!d||d==='loading') retur
 function socialView(){
   if(!CENSUS[BD.S.city]){ const city=BD.S.city; CENSUS[city]='loading'; fetch('census_'+city+'.json').then(r=>r.json()).then(d=>{ CENSUS[city]=d; if(BD.S.tab==='social'&&BD.S.city===city) socialView(); }).catch(()=>{ CENSUS[city]=null; }); }
   const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, fac=mw*R.pue[1]; const n=Math.max(1,Math.ceil(fac));
-  const lw=[91+10*Math.log10(n),101+10*Math.log10(n)];
+  const lw=[R.lwUnit[0]+10*Math.log10(n),R.lwUnit[1]+10*Math.log10(n)];
   const lim=f.city==='van'?(/^(MC-1|MC-2|DD|M-1|M-1A|M-1B|M-2|IC-1|IC-2|IC-3|I-1|I-1A|I-1B|I-1C|I-2|I-3|I-4|CWD|DEOD)$/.test(f.zone)?55:/^(C-|FC-|FCCDD|BCPED|HA-|R3-|R4-|R5-|RR-3)/.test(f.zone)?50:45):50;
   const dist=lw.map(L=>Math.pow(10,(L-8-lim)/20));
   // each neighbour gets the limit for ITS zone (By-law 6555 ss. 2.1–2.3: the limit depends on the source zone and the receiving zone)
@@ -599,11 +600,11 @@ function socialView(){
   <h3>The edge</h3><dl><dt>Standoff</dt><dd>new facilities keep about 10 m between the building and the public (45 m enhanced) — a fence, bollards or a blank setback, as experienced from the street</dd>
   <dt>Ground floor</dt><dd>${f.ground?'this zone keeps the ground floor for other uses: it could meet the street':'nothing in the zone requires another use at grade'}</dd>
   <dt>Watched area</dt><dd>${state('cj')}seen only on site: cameras and signs visible from public space, recorded as one person's account</dd>
-  <dt>Light at night</dt><dd>${f.city==='van'?'Vancouver sets no lux limit':'Edmonton requires light directed downward and away (no number)'}; the international reference is 10 lx before and 2 lx after curfew at a window</dd></dl>${s3('so')}${s3('watch')}${s3('light')}
+  <dt>Light at night</dt><dd>${f.city==='van'?'Vancouver sets no lux limit, but bars an outdoor light that shines directly onto a residential window across the street or next door and unreasonably disturbs the neighbour (Untidy Premises By-law 4548 s. 7)':'Edmonton requires light directed downward and away (no number)'}; the international reference is 10 lx before and 2 lx after curfew at a window</dd></dl>${s3('so')}${s3('watch')}${s3('light')}
   <h3>Who is near</h3><dl><dt>Non-market homes within 200 m</dt><dd>${fmt(homes)} (City list; private housing not counted)</dd>${peopleRows(f,dist)}<dt>Work</dt><dd>${rng(Math.max(1,mw*f.m2MW[0]/R.hallShare[1]/R.jobsM2),mw*f.m2MW[1]/R.hallShare[0]/R.jobsM2,'')} operating jobs (Virginia ratio, transferred)</dd></dl>${s3('ppl')}${src('jobs')}
   ${mathBox([
     `Cooling units: power at the meter ${n1(fac)} MW, about one unit per MW → <b>${n}</b> unit${n>1?'s':''} (an assumption).`,
-    `Together: Lw per unit 91 (low-noise) to 101 dBA (standard) + 10 × log₁₀(${n}) = <b>${n1(lw[0])}–${n1(lw[1])} dBA</b>.`,
+    `Together: Lw per unit of about 1 MW, ${R.lwUnit[0]} (low-noise) to ${R.lwUnit[1]} dBA (standard), + 10 × log₁₀(${n}) = <b>${n1(lw[0])}–${n1(lw[1])} dBA</b>.`,
     `Distance where the night limit is reached: r = 10^((Lw − 8 − ${lim}) ÷ 20) = <b>${n0(dist[0])}–${n0(dist[1])} m</b> (free field over hard ground, no walls or barriers).`,
     `Jobs: ${mw} MW × ${n0(f.m2MW[0])}–${n0(f.m2MW[1])} m² hall per MW ÷ hall share ${R.hallShare[1]}–${R.hallShare[0]} ÷ ${R.jobsM2} m² per job = ${n1(Math.max(1,mw*f.m2MW[0]/R.hallShare[1]/R.jobsM2))}–<b>${n1(mw*f.m2MW[1]/R.hallShare[0]/R.jobsM2)}</b>.`],
     'Sound: Lp = Lw − 20 log r − 8 (hemispherical spreading); unit ratings from manufacturer data (Trane, Eurovent). Limits: Noise Control By-law 6555 / Bylaw 14600. Jobs: Virginia JLARC 2024, transferred.')}

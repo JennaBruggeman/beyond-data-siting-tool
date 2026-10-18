@@ -1169,3 +1169,19 @@ Checked = items each unit examined. Flags = flags it raised (all severities).
 - **No fixes were applied.** Nothing in tool/ or the registers was edited.
 - **BC Assessment raw data** was not opened (licence).
 - Units with zero confirmed critical or major findings in this report (for example data-pv-weather, precedents-5, precedents-9, precedents-10, sources-11_, register-q8, register-c2, register-c5) still raised flags. Any of their flags not listed here were minor or notes (unverified), or were refuted, downgraded or sent to the web list.
+
+---
+
+## Web checks done with J.B. (18 Oct 2026)
+
+| # | Result | Change |
+|---|---|---|
+| Fan et al. 2007 (M94) | Confirmed: the real data centre averaged 59.5% of "actual peak" (sum of each machine's measured maximum); its observed peak was 71.9%, so average ÷ observed peak ≈ 0.83 (Table 3, s. 4.3–4.5). | 0.6 kept; label changed to "average ÷ the servers' combined maximum power" in register, opps.json, extras. Tool calls servers × PUE "full load". |
+| 1 Uptime 75% | Confirmed: 75% of respondents use perimeter air cooling (Cooling Systems Survey 2025, n = 512, choose all that apply). | decide.js wording made exact. |
+| 2 FortisBC Rate 3 | Not settled: the rates page renders without its tables for the fetch tool, and the Rate 3 PDF link wasn't available to open. | Needs J.B. to open the Rate 3 PDF and paste the figures. |
+| 3 By-law 4548 s. 7 | Confirmed: no outdoor light casting light directly onto a residential window across the street or adjacent **and** unreasonably disturbing the neighbour. | Tool and register now state it. |
+| 4 RVO 4.38 MWh/m² | Confirmed: per m² of server-room floor, not gross floor; IT vs total not stated; "an order of magnitude". | Register corrected. |
+| 5 Silber 2024 | Confirmed: SF 0.5 "in most cases" for fast-charging sites. Also confirmed the sweep's formula error: stalls = P ÷ (SF × P_charger). | EV stalls now 52–270 per MW (SF 1 to 0.5), with the transfer to Level 2 stated. |
+| 6 Edmonton ULA fees | Published (2025): inspection $356.64 / $570.63 / $1,560.31, + $2.67 per m over 20 m; pavement degradation $2.59 per m, one-time. | Register corrected (one-time vs Vancouver's yearly fee noted). |
+| 7, 10 Zurmuhl 2018 | Confirmed: 760 m is the ground-only economic optimum (base 1,248 m); the hybrid only reused 760 m; no W/m stated (derived). | Register label corrected. |
+| 8, 9 Trane RTAF | Confirmed: HSE table p.13; 1,010 kW (size 280) is 98 low-noise / 101 standard; size 245 printed 107 / 103, out of line with neighbours. | Per-unit sound power at ~1 MW now 98–101 (was 91–101) everywhere; register notes size 245. |
