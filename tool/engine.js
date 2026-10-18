@@ -60,6 +60,9 @@ const src=k=>`<div class="src">${badge(k)}${esc(SRC2[k])}</div>`;
    four City local areas (City open data, J.B. download 18 Oct 2026; data/networks/van_cpcn_study_area.geojson), simplified to about 3 m. Stanley Park is not a local area and is left out. */
 const CPCN_RING=[[-123.14775,49.28891],[-123.14169,49.29292],[-123.1381,49.29351],[-123.13469,49.29581],[-123.12271,49.2915],[-123.11227,49.29016],[-123.10424,49.28817],[-123.0939,49.29052],[-123.06778,49.2901],[-123.06262,49.28954],[-123.06242,49.29087],[-123.05649,49.29349],[-123.05659,49.26218],[-123.07747,49.26234],[-123.07742,49.26514],[-123.08095,49.26516],[-123.08171,49.26522],[-123.08895,49.26662],[-123.08957,49.26671],[-123.09612,49.26677],[-123.09644,49.26682],[-123.09686,49.26697],[-123.10067,49.26913],[-123.1006,49.27089],[-123.10004,49.27192],[-123.1,49.27275],[-123.1017,49.27297],[-123.11108,49.27293],[-123.12116,49.26954],[-123.12928,49.26953],[-123.13768,49.27532],[-123.14126,49.27829],[-123.14268,49.28133],[-123.14554,49.28436],[-123.14541,49.28714],[-123.14775,49.28891]]; let CPCN_R=null;
 function inCPCN(c){ if(!c) return false; if(!CPCN_R) CPCN_R=CPCN_RING.flatMap(([lo,la])=>P(lo,la)); return BD.pip(c[0],c[1],CPCN_R); }
+/* owner-reported gross floor area, City of Vancouver Annual Energy and Carbon Report (reporting year 2025; data/vancouver_energy_report.json), used for an
+   existing building when the report's building sits on this parcel (900 W Hastings does not: its 12,422 m² spans more than the 289 m² lot) */
+const GFA_REPORTED={'van|59013407':{gfa:73225,src:'City of Vancouver energy and carbon report, 2025, 555 W Hastings'},'van|59211964':{gfa:28176,src:'City of Vancouver energy and carbon report, 2025, 1050 W Pender'}};
 function P(lon,lat){ const m=BD.S.meta[BD.S.city]; const k=Math.cos(m.lat0*Math.PI/180)*111320; return [(lon-m.lon0)*k,(lat-m.lat0)*110540]; }
 BD.recv={};
 async function loadRecv(city){ if(BD.recv[city]) return BD.recv[city];
@@ -142,8 +145,13 @@ function siteFactsRaw(){
   } else {
     if(!blds.length){ f.gross=[0,0]; f.hallGross=[0,0]; f.how='no building recorded on this lot'; }
     else if(city==='edm'&&a[5]){ const g=a[5]; f.gross=A.extent==='part'?[g/Math.max(1,Math.round(f.hmax/4)),g/Math.max(1,Math.round(f.hmax/4))]:[g,g]; f.how=A.extent==='part'?'one floor: assessed floor area ÷ estimated storeys':'assessed floor area (City of Edmonton)'; f.hallGross=f.gross.slice(); }
-    else { const st=Math.max(1,Math.floor(f.hmax/4.0)); f.floors=st; f.gross=A.extent==='part'?[f.plate,f.plate]:[f.foot*st,f.foot*st];
-      f.how=A.extent==='part'?`one floor ≈ the largest footprint on the lot (${fmt(f.plate)} m²)`:`footprint ${fmt(f.foot)} m² × about ${st} storeys (height ${f.hmax.toFixed(1)} m ÷ 4 m — an assumption)`; f.hallGross=f.gross.slice(); }
+    else { const st=Math.max(1,Math.floor(f.hmax/4.0)); f.floors=st;
+      // sweep M66 (J.B. 18 Oct 2026): each building part × its own storeys, not the tallest part × every footprint (555 W Hastings: a 72 m² spire set 40 storeys for all)
+      const per=Math.round(blds.reduce((t,b)=>t+b.a*Math.max(1,Math.floor(b.h/4)),0)), rep=GFA_REPORTED[city+'|'+s.id];
+      if(A.extent==='part'){ f.gross=[f.plate,f.plate]; f.how=`one floor ≈ the largest footprint on the lot (${fmt(f.plate)} m²)`; }
+      else if(rep){ f.gross=[rep.gfa,rep.gfa]; f.gfaRep=rep; f.how=`${fmt(rep.gfa)} m² gross floor area reported by the owner (${rep.src}); the building-part estimate would give ${fmt(per)} m²`; }
+      else { f.gross=[per,per]; f.gfaUpper=true; f.how=`each building part's footprint × its own storeys (height ÷ 4 m), summed: ${fmt(per)} m² — an upper estimate: checked against owner-reported floor areas, it came out 37% high at 555 W Hastings and 85% high at 1050 W Pender`; }
+      f.hallGross=f.gross.slice(); }
   }
   if(!f.hallS){ f.hallS=[f.hallGross[0]*R.hallShare[0],f.hallGross[1]*R.hallShare[1]]; }
   const m2MW=A.density==='high'?R.m2PerMWHigh:R.m2PerMW; f.density=A.density==='high'?'high':'typical'; const toMW=h=>[Math.min(40,h[0]/m2MW[1]),Math.min(40,h[1]/m2MW[0])];
