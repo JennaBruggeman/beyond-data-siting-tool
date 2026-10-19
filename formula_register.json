@@ -2959,7 +2959,7 @@
    "inputs": [
     "cooling_type"
    ],
-   "coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): air-side return hot air 25–47 °C, chiller condenser 40–50 °C, chilled-water loop 10–20 °C (Yuan et al. 2025 Table 2; Oró et al. 2019); the tool keeps 25–35 °C as the typical air-cooled figure. Alissa p.332; Wahlroos p.1753; heat-rejection equipment per site from permits: rooftop condensers (1050 W Pender, 175 W Cordova), rooftop chiller (55 E 7th), P1 chiller room (555 W Hastings), L8 roof well (515 W Hastings); seen on site (J.B.): 55 E 7th lane deck with a Cummins generator enclosure and a packaged cooling unit piped into the building (rooftop chiller in BP-2019-00595 not photographed — keep both); 111 E 5th louvre bands and three rooftop vent stacks; Internet Centre two rooftop condensing units (corroborates the 2024 \"two RTUs, AC only\" permit); Qu EDM2 cooling units on a raised platform under a canopy, \"Munters\" casings (air-side or indirect evaporative suggested, not confirmed); Kyndryl Acheson cooling plant with pipe racks into the wall on the south side; Baxtel claim for Kyndryl: two 550-ton water-cooled chillers (≈3.9 MW thermal) — operator/directory claim | 19 Oct 2026: liquid-cooled measured design 24 °C supply, 35–40 °C return (NREL ESIF); 50–60 °C remains unverified (secondary).",
+   "coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): air-side return hot air 25–47 °C, chiller condenser 40–50 °C, chilled-water loop 10–20 °C (Yuan et al. 2025 Table 2; Oró et al. 2019); the tool keeps 25–35 °C as the typical air-cooled figure. Alissa p.332; Wahlroos p.1753; heat-rejection equipment per site from permits: rooftop condensers (1050 W Pender, 175 W Cordova), rooftop chiller (55 E 7th), P1 chiller room (555 W Hastings), L8 roof well (515 W Hastings); seen on site (J.B.): 55 E 7th lane deck with a Cummins generator enclosure and a packaged cooling unit piped into the building (rooftop chiller in BP-2019-00595 not photographed — keep both); 111 E 5th louvre bands and three rooftop vent stacks; Internet Centre two rooftop condensing units (corroborates the 2024 \"two RTUs, AC only\" permit); Qu EDM2 cooling units on a raised platform under a canopy, \"Munters\" casings (air-side or indirect evaporative suggested, not confirmed); Kyndryl Acheson cooling plant with pipe racks into the wall on the south side; Baxtel claim for Kyndryl: two 550-ton water-cooled chillers (≈3.9 MW thermal) — operator/directory claim | 19 Oct 2026: liquid-cooled measured design 24 °C supply, 35–40 °C return (NREL ESIF); 50–60 °C remains unverified (secondary). | 19 Oct 2026: liquid-cooled measured design 24 °C supply, 35–40 °C return (NREL ESIF); 50–60 °C remains unverified (secondary).",
    "sources": [
     "lorenz",
     "vanPermits",
@@ -3732,11 +3732,14 @@
     "envelope",
     "massing"
    ],
-   "coef": "ECCC Normals 1991–2020: Vancouver Intl precipitation 1,159.5 mm/yr (rain 1,119.2; Oct–Jan ≥124 mm/mo, Jul 34 mm); Edmonton City 422.5 mm/yr (Edmonton Airport 434.0; Jun–Aug 213 mm, Dec–Feb 43 mm, mostly snow); C = 0.8 assumed (CSA B805 not read); tank = one wet month, assumed",
+   "coef": "ECCC Normals 1991–2020: Vancouver Intl precipitation 1,159.5 mm/yr (rain 1,119.2; Oct–Jan ≥124 mm/mo, Jul 34 mm); Edmonton City 422.5 mm/yr (Edmonton Airport 434.0; Jun–Aug 213 mm, Dec–Feb 43 mm, mostly snow); C = 0.8 assumed (CSA B805 not read); tank = one wet month, assumed | 19 Oct 2026: storage CAD 667/m³ (Vancouver toolkit 2014) to 2,955 (US EPA 2013 with pumps and controls, US$ converted); 15–30 yr (warranties); cost per m³ used at 5.6% real against water + sewer rates",
    "sources": [
     "femp",
     "eccc",
-    "abRainwater2010"
+    "abRainwater2010",
+    "epaRain2013",
+    "vanISMP2014",
+    "femRain"
    ],
    "conf": 80,
    "status": "rainfall confirmed (government normals, data/normals_1991_2020_extract.json); C and tank size assumed",
@@ -3763,7 +3766,8 @@
      "conf": 50,
      "verified": false
     }
-   ]
+   ],
+   "revised": "2026-10-19"
   },
   {
    "id": "grid_co2",
@@ -3851,7 +3855,7 @@
    "inputs": [
     "backup_hours"
    ],
-   "coef": "NOx 0.024 lb/hp·h uncontrolled; Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read)",
+   "coef": "NOx 0.024 lb/hp·h uncontrolled; Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read)",
    "sources": [
     "eccc",
     "mvBylaw1329",
@@ -3952,7 +3956,7 @@
    "inputs": [
     "floor_area"
    ],
-   "coef": "Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; 461 kg CO2e/m² median for general buildings (no data-centre per-m² benchmark exists). Alissa et al. 2025 (Microsoft data, air-cooled): the building is 0.6% of a data centre's life-cycle GHG on a US-average grid and about 5% on renewable power — so the building shell is small either way; servers and electricity dominate",
+   "coef": "Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; 461 kg CO2e/m² median for general buildings (no data-centre per-m² benchmark exists). Alissa et al. 2025 (Microsoft data, air-cooled): the building is 0.6% of a data centre's life-cycle GHG on a US-average grid and about 5% on renewable power — so the building shell is small either way; servers and electricity dominate",
    "sources": [
     "clf",
     "alissa2025lca",
@@ -6248,7 +6252,7 @@
    "unit": "yr",
    "formula": "servers ~6; plant 15–25; shell ≤40; network 40–50; lease",
    "inputs": [],
-   "coef": "Servers: average life 4.4 → 5 → 5.7 years (2000–2019, 2020, 2023; LBNL 2024); filings moved server useful lives to 5–6 years (Microsoft, Alphabet, Meta; Amazon partly back to 5 in 2025); Barroso: servers depreciated over 3–4 years, facilities over 15–20; plant medians ~20–25 years (ASHRAE); district-heating pipes 30 years at 120 °C, 50 only below 115 °C (EN 253); contracts: colocation 2–5 years, scale 5–10+ (Digital Realty); heat contracts 10 + 5 (Stockholm Exergi); Tallaght plant 25–35 years; Seattle permit 10 + two 10-year renewals; Vancouver property-tax report flags holding sites (improvement ÷ land value); Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011",
+   "coef": "Servers: average life 4.4 → 5 → 5.7 years (2000–2019, 2020, 2023; LBNL 2024); filings moved server useful lives to 5–6 years (Microsoft, Alphabet, Meta; Amazon partly back to 5 in 2025); Barroso: servers depreciated over 3–4 years, facilities over 15–20; plant medians ~20–25 years (ASHRAE); district-heating pipes 30 years at 120 °C, 50 only below 115 °C (EN 253); contracts: colocation 2–5 years, scale 5–10+ (Digital Realty); heat contracts 10 + 5 (Stockholm Exergi); Tallaght plant 25–35 years; Seattle permit 10 + two 10-year renewals; Vancouver property-tax report flags holding sites (improvement ÷ land value); Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011",
    "sources": [
     "horizons",
     "vanTax",
@@ -7517,13 +7521,20 @@
    "inputs": [
     "parcel"
    ],
-   "coef": "Vancouver 2026: water $4.091–5.128 per unit + sewer $7.960 per unit (unit = 2.832 m³), no large-user rate; Metro Vancouver reclaimed water case-by-case, no rate. Edmonton: EPCOR supplied 4,226 ML of reclaimed water to industry in 2024 (price, customers not stated); commercial potable rates not extracted; Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016)",
+   "coef": "Vancouver 2026: water $4.091–5.128 per unit + sewer $7.960 per unit (unit = 2.832 m³), no large-user rate; Metro Vancouver reclaimed water case-by-case, no rate. Edmonton: EPCOR supplied 4,226 ML of reclaimed water to industry in 2024 (price, customers not stated); commercial potable rates not extracted; Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016) | 19 Oct 2026: Vancouver water + sewer $4.26–4.62/m³ (both on metered water); Edmonton 2026 commercial not read, placeholder $2.53–3.88/m³ from 2022–23 water and proposed 2025 wastewater and sanitary; reclaimed price not published in either region; US 20–100% of potable (grey literature)",
    "sources": [
     "vanWater2026",
     "mvReclaimed",
     "epcorReclaimed",
     "abNewLicenceLast",
-    "mvClimate2016"
+    "mvClimate2016",
+    "vanRates2026",
+    "epcorBylaw19626",
+    "epcorWW2024app",
+    "epcorWWpbr2025",
+    "mvUT019",
+    "ubcReclaimed2022",
+    "epaQuincy"
    ],
    "source_roles": [
     {
@@ -7577,7 +7588,7 @@
     "parcel",
     "massing"
    ],
-   "coef": "Precedents: 515 W Hastings office → Bulk Data Storage (2023); Edmonton office → data centre (2009, 2011), warehouse → data centre (Qu EDM2); Vancouver Downtown Office Conversion Policy addresses residential conversion only; no official vacancy statistics in either city; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening",
+   "coef": "Precedents: 515 W Hastings office → Bulk Data Storage (2023); Edmonton office → data centre (2009, 2011), warehouse → data centre (Qu EDM2); Vancouver Downtown Office Conversion Policy addresses residential conversion only; no official vacancy statistics in either city; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening",
    "sources": [
     "vanPermits",
     "edmPermits",
@@ -7679,7 +7690,7 @@
    "inputs": [
     "parcel"
    ],
-   "coef": "Why operators locate in cities: third-party (colocation) firms favour urban settings for buyer proximity (Pan Fang & Greenstein 2025); backbone networks are biased to cities that serve as interconnection points (Malecki 2002); edge latency targets of a few tens of ms, VR under 16 ms (Satyanarayanan 2017); internet exchange and customer proximity (JLARC 2024). Locations of internet exchange points in Vancouver and Edmonton not yet sourced; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown",
+   "coef": "Why operators locate in cities: third-party (colocation) firms favour urban settings for buyer proximity (Pan Fang & Greenstein 2025); backbone networks are biased to cities that serve as interconnection points (Malecki 2002); edge latency targets of a few tens of ms, VR under 16 ms (Satyanarayanan 2017); internet exchange and customer proximity (JLARC 2024). Locations of internet exchange points in Vancouver and Edmonton not yet sourced; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown",
    "sources": [
     "panFang2025",
     "malecki2002",
@@ -8595,7 +8606,7 @@
    "inputs": [
     "it_load_actual"
    ],
-   "coef": "round-trip 85% (NREL ATB 2024); PNNL 2022 LFP, 2021 US$ installed: 1 MW 518.59/kWh (2 h) and 448.34 (4 h), 10 MW 461.15 and 410.70 — about 10% above the 100 MW figure of 385; 2030: 340.46 (1 MW 4 h), 311.11 (10 MW 4 h); RTE 83% at the transformer, 2,400 cycles at 80% DOD, 16-year life; 34 ± 15 kWh/m² across built sites (Reber 2023); fire-code basis in BC/AB (NFPA 855 adoption) unconfirmed",
+   "coef": "round-trip 85% (NREL ATB 2024); PNNL 2022 LFP, 2021 US$ installed: 1 MW 518.59/kWh (2 h) and 448.34 (4 h), 10 MW 461.15 and 410.70 — about 10% above the 100 MW figure of 385; 2030: 340.46 (1 MW 4 h), 311.11 (10 MW 4 h); RTE 83% at the transformer, 2,400 cycles at 80% DOD, 16-year life; 34 ± 15 kWh/m² across built sites (Reber 2023); fire-code basis in BC/AB (NFPA 855 adoption) unconfirmed | 19 Oct 2026: cost range CAD 467–627/kWh (NREL 2025 US$334, 2024$, to PNNL 2022 1 MW 4 h US$448, 2021$; US$ × 1.3978, no inflation adjustment); O&M 2.5–4% of capex a year; 15 yr; cost per kW-year at 5.6% real compared with the programme value (Electricity card)",
    "sources": [
     "pnnl2022fig43",
     "atb2024_batt",
@@ -8608,7 +8619,9 @@
     "epcorDTtc2025",
     "nfcAB2023",
     "nfpa855_2026",
-    "cec2024ESS"
+    "cec2024ESS",
+    "nrelBatt2025",
+    "nrelATBcommBatt2024"
    ],
    "source_roles": [
     {
@@ -8740,13 +8753,14 @@
     "ups_flex",
     "electricity_price"
    ],
-   "coef": "BC Hydro: Demand Response for Business $50/kW-season, events ≤4 h, Nov–Mar, diesel and fossil generators prohibited; Energy Storage Incentive ≤80 % of eligible cost, new non-exporting batteries ≥25 kW, 10-yr contract (an existing UPS does not qualify); LGS demand charge $13.83/kW·month; AESO reserves need ≥5 MW (supplemental) or ≥10 MW (spinning), smaller sites via an aggregator",
+   "coef": "BC Hydro: Demand Response for Business $50/kW-season, events ≤4 h, Nov–Mar, diesel and fossil generators prohibited; Energy Storage Incentive ≤80 % of eligible cost, new non-exporting batteries ≥25 kW, 10-yr contract (an existing UPS does not qualify); LGS demand charge $13.83/kW·month; AESO reserves need ≥5 MW (supplemental) or ≥10 MW (spinning), smaller sites via an aggregator | 19 Oct 2026: ESI pays up to 80% of eligible cost (LGS, ≥25 kW, non-exporting, 10-yr); AESO reserve averages per MW-hour procured: active $43.71 (2024) / $34.75 (2025), standby $14.03 / $11.28 (Table 13, cost ÷ volume; not by product); all-hours value shown as an upper bound",
    "sources": [
     "bch_drb",
     "bch_esi",
     "aeso_or",
     "bchDR2026",
-    "aesoStats2025"
+    "aesoStats2025",
+    "bchESI2026"
    ],
    "source_roles": [
     {
@@ -8787,7 +8801,8 @@
    ],
    "conf": 75,
    "status": "in hand",
-   "trial": "opportunity"
+   "trial": "opportunity",
+   "revised": "2026-10-19"
   },
   {
    "id": "genset_test",
@@ -10986,6 +11001,76 @@
      "id": "aesoDC2025",
      "term": "open question",
      "role": "context",
+     "conf": 90,
+     "verified": true
+    }
+   ],
+   "added": "2026-10-19"
+  },
+  {
+   "id": "ev_repay",
+   "name": "EV port repaid by",
+   "unit": "kWh",
+   "formula": "kWh = port cost ÷ (public price − electricity cost)",
+   "inputs": [
+    "ev_stalls"
+   ],
+   "coef": "BC: $15,000 ÷ (28.28 − 6.79) ¢ ≈ 70,000 kWh (≈ 9,400 h at 7.4 kW); Alberta: no public rate found; utilisation not published (no Level 2 figure)",
+   "sources": [
+    "bcucG3026",
+    "nrcanEVinfra2024",
+    "bchTariff2026"
+   ],
+   "conf": 60,
+   "status": "derived 19 Oct 2026",
+   "stage": "test",
+   "source_roles": [
+    {
+     "id": "bcucG3026",
+     "term": "L2 28.28 ¢/kWh",
+     "role": "coefficient",
+     "conf": 90,
+     "verified": true
+    },
+    {
+     "id": "nrcanEVinfra2024",
+     "term": "$15k a port",
+     "role": "coefficient",
+     "conf": 70,
+     "verified": true
+    }
+   ],
+   "added": "2026-10-19"
+  },
+  {
+   "id": "pv_lcoe",
+   "name": "Rooftop solar cost per MWh",
+   "unit": "CAD/MWh",
+   "formula": "(CRF(5.6%, 30) × capex + O&M) ÷ MWh a year, against the energy charge it avoids",
+   "inputs": [
+    "pv_roof",
+    "pv_cost"
+   ],
+   "coef": "self-use offsets the energy charge (RS 2289: \"offset their consumption\"); demand charge not reduced (flat load); BC exports 10 ¢/kWh up to 100 kW per phase; Alberta micro-generation under 5 MW",
+   "sources": [
+    "bcucG6426",
+    "aesoMicrogen2025"
+   ],
+   "conf": 60,
+   "status": "derived 19 Oct 2026",
+   "stage": "test",
+   "source_roles": [
+    {
+     "id": "bcucG6426",
+     "term": "RS 2289 terms",
+     "role": "rule",
+     "conf": 90,
+     "verified": true
+    },
+    {
+     "id": "aesoMicrogen2025",
+     "term": "micro-generation credit",
+     "role": "rule",
      "conf": 90,
      "verified": true
     }
@@ -13349,7 +13434,7 @@
   "abGridPage": "Government of Alberta, data centres — grid: 'projects that pair their demand with dedicated new generation or storage go to the front of the connection line'; interim allocation 1,200 MW, fully allocated — https://www.alberta.ca/datacentres/grid",
   "bchLGS": "BC Hydro business rates (Large General Service RS 1600–1611, Revision 26, effective 1 Jul 2026): basic 29.99 ¢/day, demand $13.83/kW, energy 6.79 ¢/kWh; Transmission Service RS 1830 (fiscal 2027): $12.178/kVA, 4.914 ¢/kWh (RS 1823 cancelled 1 Apr 2026) — https://app.bchydro.com/accounts-billing/rates-energy-use/electricity-rates/business-rates.html",
   "bcIEAF": "BC Industrial Electricity Allocation Framework (updated 31 Mar 2026): '300MW for AI projects, 100MW for data centre projects'; data centre and AI projects ≥10 MW enter competitive selection; BC news release 2025ECS0044: loads over 150 MW pay 'the full cost of both incremental electricity generation and upgrades' — https://www2.gov.bc.ca/gov/content/industry/electricity-alternative-energy/electricity/industrial-electricity-allocation-framework",
-  "aesoStats2025": "AESO 2025 Annual Market Statistics (Mar 2026): annual and winter peak 12,785 MW on 11 Dec 2025; winter season Nov–Apr; peak hour not reported — https://www.aeso.ca/assets/Annual-Market-Stats-2025.pdf",
+  "aesoStats2025": "AESO, Annual Market Statistics 2025, Table 13 (p. 55): operating reserve volumes and costs by category; active procured 2025 5,928 GWh / $206 M, 2024 5,834 / $255 M; standby procured 709 / $8 M and 713 / $10 M — https://www.aeso.ca/assets/Annual-Market-Stats-2025.pdf",
   "epcorDASSAS": "EPCOR Distribution & Transmission 2026 interim tariffs (effective 1 Jan 2026): DAS-TOUP $67.45678/site/day + $0.13822/kW/day; SAS-TOUP $0.00250/kWh + capacity $0.13497/kW/day + demand $0.28126/kW/day + OR 7.99 % × pool price; DAS-CS (>5,000 kVA) closed to new service — https://www.epcor.com/content/dam/epcor/documents/rates/distribution-access-service-tariffs/2026-01-distribution-access-service-tariff.pdf",
   "fortisAB2026": "FortisAlberta rates effective 1 Oct 2026 (AUC 30274-D01-2025): Rate 63 Large General Service (>2,000 kW) transmission $0.214447 + $0.174184 /kW-day + $0.006228/kWh; distribution $27.080602 per contract km-day + $0.015170/kW-day + $15.998863/day — https://www.fortisalberta.com/docs/default-source/default-document-library/rates-options-and-riders-schedules-effective-october1-2026.pdf",
   "bocFX2025": "Bank of Canada annual average exchange rates: 1 EUR = 1.5782 CAD (2025), 1.4818 (2024) — https://www.bankofcanada.ca/rates/exchange/annual-average-exchange-rates/",
@@ -13471,7 +13556,7 @@
   "ravi2026": "Ravi et al. 2026, Applied Energy 402:127049 — https://doi.org/10.1016/j.apenergy.2025.127049 (abstract and EPFL pages checked by the atlas chat 15 Oct)",
   "wang2026": "Wang et al. 2026, Environmental Science and Ecotechnology 31:100702 — https://doi.org/10.1016/j.ese.2026.100702 (full text checked by the atlas chat 15 Oct)",
   "zhang2025": "Zhang et al., Applied Energy 377:124697 (DOI year 2024) — https://doi.org/10.1016/j.apenergy.2024.124697 (abstract checked by the atlas chat 15 Oct)",
-  "epaQuincy": "US EPA water reuse case study, Quincy WA: data-centre cooling water treated by lime softening, UF and RO; Microsoft financed $31M; about 138 million US gal/yr saved — https://www.epa.gov/node/286187",
+  "epaQuincy": "US EPA, Water reuse case study, Quincy WA reuse utility: operational 30 Jun 2021, $31 M operator-funded, 30-yr agreement, 138 M gal/yr potable saved — https://www.epa.gov/node/286187",
   "oltmanns2020": "Oltmanns et al. 2020, Energy Science & Engineering — https://doi.org/10.1002/ese3.633 (checked by the atlas chat 15 Oct)",
   "socci2024": "Socci et al. 2024, Energy 313:134013 (checked by the atlas chat 15 Oct)",
   "crozier2025": "Crozier & Liska 2025, Current Sustainable/Renewable Energy Reports 12(1) art. 12, open-access review: no single flexible share; price signals alone do not create flexibility; UPS rarely offered; inference inflexible; checkpointed training can pause (checked by the atlas chat 15 Oct)",
@@ -13781,7 +13866,23 @@
   "vanNEURates2026": "City of Vancouver, 2026 False Creek Neighbourhood Energy Utility customer rates, RTS 18251 (21 Oct 2025): levelised rate approach, commercial utility model with a return on invested capital — https://council.vancouver.ca/20251112/documents/spec1d.pdf",
   "nrelESIF2019": "Van Geet (NREL), Data Center Optimization Strategies: NREL ESIF Data Center Energy and Water Savings (Aug 2019): 24 °C cooling water supply, 35–40 °C return used to heat offices and lab space; ERE 0.929 (first year of TSC operation) — https://nrel.gov/docs/fy19osti/74464.pdf; NREL warm-water liquid cooling page: building needs at least 95 °F on the coldest day — https://www.nrel.gov/computational-science/warm-water-liquid-cooling",
   "vanNEConnect2013": "City of Vancouver, Neighbourhood Energy Connectivity Standards bulletin (Dec 2013), s. 4.3 maximum temperatures: radiant floor 45/35 °C, panels 60/45, baseboard 70/50, fan coils 70/50, make-up air 65/45, DHW 60 °C — https://guidelines.vancouver.ca/bulletins/bulletin-sustainability-neighbourhood-energy-connectivity-standards.pdf",
-  "upsiteASHRAE5": "Upsite Technologies blog, Major changes to ASHRAE's fifth edition of Thermal Guidelines, part 3 (industry blog; ASHRAE text not read): facility water classes W17/W27/W32/W40/W45/W+ by upper limit; makers design around 40 °C, few above 45 °C — https://www.upsite.com/blog/major-changes-to-ashraes-fifth-edition-of-thermal-guidelines-part-3-liquid-cooling-chapter-updates/"
+  "upsiteASHRAE5": "Upsite Technologies blog, Major changes to ASHRAE's fifth edition of Thermal Guidelines, part 3 (industry blog; ASHRAE text not read): facility water classes W17/W27/W32/W40/W45/W+ by upper limit; makers design around 40 °C, few above 45 °C — https://www.upsite.com/blog/major-changes-to-ashraes-fifth-edition-of-thermal-guidelines-part-3-liquid-cooling-chapter-updates/",
+  "nrelBatt2025": "Cole, Ramasamy, Turan, NREL TP-6A40-93281, Cost Projections for Utility-Scale Battery Storage: 2025 Update (Jun 2025): US$334/kWh (2024$) 4 h; fixed O&M 4% of capex a year; 15-yr life; 85% round trip — https://docs.nrel.gov/docs/fy25osti/93281.pdf",
+  "nrelATBcommBatt2024": "NREL ATB 2024, Commercial Battery Storage: fixed O&M 2.5% of capital cost; 15 yr; 85% — https://atb.nrel.gov/electricity/2024/commercial_battery_storage",
+  "bchESI2026": "BC Hydro Energy Storage Incentive customer manual (24 Sep 2026): lesser of $10,000/kW, $10,000 × kWh/4 or 80% of eligible cost; ≥ 25 kW; behind the meter, non-exporting; 10-yr contract; SGS/MGS/LGS eligible, not transmission — https://bchydro.com/content/dam/BCHydro/customer-portal/documents/power-smart/business/programs/esi-customer-program-manual.pdf",
+  "bcucG6426": "BCUC Order G-64-26 and Decision (24 Mar 2026): RS 1289 net metering closed 1 Jul 2026; RS 2289 net injection limit 100 kW per phase after the customer's load; 10 ¢/kWh for net generation — https://www.ordersdecisions.bcuc.com/bcuc/orders/en/523115/1/document.do",
+  "aesoMicrogen2025": "AESO, Connecting Microgeneration (17 Sep 2025): under 5 MW; small under 150 kW credited at the retail energy rate; large at the hourly pool price — https://www.aeso.ca/assets/Connecting-Microgeneration.pdf",
+  "bcucG3026": "BCUC Order G-30-26 (23 Feb 2026): BC Hydro public EV charging, Level 2 28.28 ¢/kWh; fast charging 39.70 ¢/kWh from 1 Apr 2026 (as proposed in the decision) — https://www.ordersdecisions.bcuc.com/bcuc/orders/en/523073/1/document.do",
+  "nrcanEVinfra2024": "Dunsky and ICCT for NRCan, Electric Vehicle Charging Infrastructure for Canada (Feb 2024), Table 12: Level 2 $15,000 a port, DC fast $160,000 at 125 kW (2025, 2022 $) — https://natural-resources.canada.ca/energy-efficiency/transportation-alternative-fuels/resource-library/electric-vehicle-charging-infrastructure-for-canada/25756",
+  "vanRates2026": "City of Vancouver, 2026 utility rates (Council 12 Nov 2025, spec1a Sch. D, spec1b Part V; metered rates page): water $4.091 (16 Oct–30 Apr) and $5.128 (1 May–15 Oct) per unit, sewer $7.960 per unit, all metered uses; 1 unit = 2.83168 m³ — https://vancouver.ca/home-property-development/metered-rates.aspx",
+  "epcorBylaw19626": "EPCOR Water Services Bylaw 19626, Sch. 1 Pt I (2022–23): commercial water $1.6122–0.9472/m³ by tier (tier mapping unclear in the extract) — https://epcor.com/content/dam/epcor/documents/supporting-documents/epcor_water-services_bylaw%E2%80%8B-19626.pdf",
+  "epcorWW2024app": "EPCOR 2024 rate application, Appendix A: commercial wastewater treatment 2025 $1.1486/0.8886/0.4636 per m³ (proposed; another table differs), sanitary $1.1212 (proposed) — https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2024_water-rate-application-appendix-a-summary-of-bylaw-and-key-changes.pdf",
+  "epcorWWpbr2025": "EPCOR 2025–27 Wastewater PBR application: Gold Bar reclaimed water to industrial customers (pp. 2, 21, 25); price and volume not stated — https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2025-2027-wastewater-pbr-application.pdf",
+  "mvUT019": "Metro Vancouver, Interim Reclaimed Water Policy UT-019 (29 Sep 2023): industrial uses listed; commits to set pricing; none published — https://metrovancouver.org/boards/Policies/interim-reclaimed-water.pdf",
+  "ubcReclaimed2022": "Patiño (UBC Sustainability Scholars for Metro Vancouver, 2022), Reclaimed water benefits and cost: US utilities price reuse at 20–100% of potable (2007 survey) — grey literature — https://www.sustain.ubc.ca/sites/default/files/2022-024_ReclaimedWaterBenefitsAndCost_Patino.pdf",
+  "epaRain2013": "US EPA 841-R-13-002 (2013), Rainwater harvesting: cistern US$1.50–3.00 per gallon; pumps, controls, treatment US$2–5 per gallon (p. 24) — https://www.epa.gov/sites/production/files/2015-11/documents/rainharvesting.pdf",
+  "vanISMP2014": "City of Vancouver, Integrated Stormwater Management BMP Toolkit Vol. II (2014), p. II-18: about $10,000 for a 15 m³ below-ground tank (Class D ±30%) — https://vancouver.ca/files/cov/integrated-stormwater-management-best-practice-toolkit-volume-2.pdf",
+  "femRain": "US DOE FEMP, Rainwater harvesting systems technology review: tanks and pipework warranted 15–30 years, pumps 2–10 — https://www.energy.gov/cmei/femp/rainwater-harvesting-systems-technology-review"
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ; ATCO North Mid-Use $1.062/GJ → ≈ $11/MWh heat — https://www.ucahelps.alberta.ca/regulated-rates.aspx",

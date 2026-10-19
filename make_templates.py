@@ -90,6 +90,7 @@ T = {
  'battery_code_path': (C, 'city neighbours', 'battery safety rules'), 'nations_named': (R, 'nations', 'whose lands these are'), 'city_commitments': (C, 'nations city', 'City commitments to the Nations'),
  'vibration_target': (C, 'neighbours', 'vibration limit (reference)'), 'embodied_rule': (C, 'climate city', 'embodied carbon rule'),
  'heat_value_split': (C, 'operator utility receiver', 'who keeps the value of the heat'), 'power_bill_effect': (R, 'ratepayers neighbours', 'effect on household power bills'),
+ 'ev_repay': (C, 'neighbours operator', 'how much an EV port must sell to repay itself'), 'pv_lcoe': (C, 'operator', 'what rooftop solar costs per MWh'),
 }
 ids = [n['id'] for n in D['nodes']]
 missing = [i for i in ids if i not in T]; extra = [i for i in T if i not in ids]

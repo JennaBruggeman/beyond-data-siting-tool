@@ -1394,6 +1394,21 @@
     "neighbours"
    ],
    "why": "effect on household power bills"
+  },
+  "ev_repay": {
+   "tier": "community",
+   "parties": [
+    "neighbours",
+    "operator"
+   ],
+   "why": "how much an EV port must sell to repay itself"
+  },
+  "pv_lcoe": {
+   "tier": "community",
+   "parties": [
+    "operator"
+   ],
+   "why": "what rooftop solar costs per MWh"
   }
  },
  "graph": {
@@ -2166,6 +2181,14 @@
    ],
    [
     "power_bill_effect",
+    "test"
+   ],
+   [
+    "ev_repay",
+    "test"
+   ],
+   [
+    "pv_lcoe",
     "test"
    ]
   ],
@@ -3165,10 +3188,22 @@
    [
     "grid_headroom",
     "power_bill_effect"
+   ],
+   [
+    "ev_stalls",
+    "ev_repay"
+   ],
+   [
+    "pv_roof",
+    "pv_lcoe"
+   ],
+   [
+    "pv_cost",
+    "pv_lcoe"
    ]
   ]
  },
  "resident_count": 41,
- "community_count": 115,
- "full_count": 184
+ "community_count": 117,
+ "full_count": 186
 }

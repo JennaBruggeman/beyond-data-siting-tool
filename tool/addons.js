@@ -89,6 +89,7 @@ function pvLayout(f){ const M=f.M; if(!M||!M.foot||!BD.plant) return null; const
   const k={name:'panels',L:6,W:2,H:0.25,wall:[1,1],gap:[0.5,1.5]}; const forbid=(P&&P.boxes||[]).filter(b=>b.kind==='roof').map(b=>b.clear);
   const [a,b,c,d]=BD.plant.localBounds(F,M.foot); const got=BD.plant.pack(F,M.foot,forbid,a,b,c,d,k,1200,false);
   const slots=got.map(p=>BD.geo.rectW(F,p.u-p.L/2,p.u+p.L/2,p.v-p.W/2,p.v+p.W/2)); const m2=got.length*12; return {slots,m2,kwp:[m2*0.16,m2*0.20]}; }
+BD.pvLayout=(f)=>pvLayout(f);
 async function pvData(){ if(BD._pv) return BD._pv; try{ BD._pv=await BD.getJSON('nrcan_pv.json'); }catch(e){ BD._pv=null; } return BD._pv; }
 async function solarCard(){ const e=E(), f=e.siteFacts(), R=e.R, a=A(), mw=a.mw||(f.M&&f.M.mwSized)||1, city=f.city; const lay=pvLayout(f); const pv=await pvData(); const x=addon('pv');
   const yl=pv?[pv[city].horizontal.reduce((s,v)=>s+v,0),pv[city].latitude.reduce((s,v)=>s+v,0)]:(city==='van'?[892,1007]:[944,1244]);
@@ -134,10 +135,11 @@ function batteryCard(){ const e=E(), f=e.siteFacts(), a=A(); const lay=battLayou
   el=>{ $('#aoff').onclick=()=>addOff('battery'); const up=()=>{ a.battMW=+$('#bmw').value||1; a.battH=+$('#bh').value||4; refresh(); batteryCard(); }; $('#bmw').onchange=up; $('#bh').onchange=up; }); }
 
 /* ---------- energy as an index ---------- */
-function energyIndex(){ const e=E(), f=e.siteFacts(), R=e.R, a=A(), mw=a.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=fac.map(v=>v*8760*R.lf); BD.S.view2='tab';
+function energyIndex(){ if(BD.loadEV&&!energyIndex.q){ energyIndex.q=BD.loadEV().then(()=>{ if(BD.S.view2==='tab') energyIndex(); }); } if(!BD._pv&&!energyIndex.p){ energyIndex.p=pvData().then(()=>{ if(BD.S.view2==='tab') energyIndex(); }); } const e=E(), f=e.siteFacts(), R=e.R, a=A(), mw=a.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=fac.map(v=>v*8760*R.lf); BD.S.view2='tab';
   const cost=f.city==='van'?[MWh[0]*67.9+fac[0]*1000*13.83*12,MWh[1]*67.9+fac[1]*1000*13.83*12]:null; const co2=MWh.map(v=>v*R.grid[f.city]/1000);
   let h=e.tabBar('energy')+`<h2>Power in, power offered</h2><p class="draft">A customer first. What it can give back is <span class="k">flexibility</span>, and only the operator can give it.</p>
   <div class="hfig"><div><b>${e.rng(fac[0],fac[1],'MW')}</b><span>power at the meter at full load (about ${e.rng(fac[0]*R.lf,fac[1]*R.lf,'MW')} on average)</span></div><div><b>${e.rng(MWh[0]/1000,MWh[1]/1000,'GWh')}</b><span>a year</span></div><div><b>${cost?'$'+(cost[0]/1e6).toFixed(1)+'–'+(cost[1]/1e6).toFixed(1)+'M':'pool + wires'}</b><span>${cost?'a year on BC Hydro large general service':'Alberta pool averaged $43.68/MWh in 2025'}</span></div><div><b>${e.rng(co2[0],co2[1],'t')}</b><span>CO₂e a year at ${R.grid[f.city]} g/kWh</span></div></div>
+  ${BD.xecon?BD.xecon.elecSecs(f):''}
   <h3>Connections</h3><div class="addrow"><div>Getting connected to the grid<div class="src">${f.cpcn?'downtown supply area (to Nanaimo St): no new feeder positions from fiscal 2027 to about 2032; temporary measures in between':'needs the utility\'s answer to a load application'}</div></div><div><button class="btn" id="cGrid">Explore ›</button></div></div>
   <div class="addrow"><div>Standby generators<div class="src">${a.gens==='none'?'none chosen':'testing, emissions, sound'}</div></div><div><button class="btn" id="cGen">Explore ›</button></div></div>
   <div class="addrow"><div>Flexibility for the grid<div class="src">UPS batteries, curtailment, peak windows</div></div><div><button class="btn" id="cFlex">Explore ›</button></div></div>
@@ -181,7 +183,7 @@ function rainCard(){ const e=E(), f=e.siteFacts(), M=f.M; const roof=e.roofArea(
 function waterRule(id,name,lines,ids,over){ const x=over?Object.assign({},addon(id),over):addon(id); return {id,name:name||x.name,x,lines,ids}; }
 // the sewer row is about discharge, not the recovery add-on (verification sweep M43; rules from sources/15a, Bylaw 299 and Bylaw 18100 not re-read)
 const SEWER_RULES={rule_state:{vancouver:'approval',edmonton:'approval'},rules:{vancouver:'a Metro Vancouver permit for a high-volume discharge, over 300 m³ in 30 days (Sewer Use Bylaw 299)',edmonton:'EPCOR\'s prior written approval for cooling water to the sanitary sewer (Drainage Services Bylaw 18100)'},readiness:null,readiness_basis:''};
-function waterIndex(){ const e=E(), f=e.siteFacts(), R=e.R, a=A(), mw=a.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=fac.map(v=>v*8760*R.lf); BD.S.view2='tab';
+function waterIndex(){ if(BD.loadWP&&!waterIndex.q){ waterIndex.q=BD.loadWP().then(()=>{ if(BD.S.view2==='tab') waterIndex(); }); } const e=E(), f=e.siteFacts(), R=e.R, a=A(), mw=a.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=fac.map(v=>v*8760*R.lf); BD.S.view2='tab';
   // hybrids: wet only above 18 °C (CWEC hours per city, computed; parity audit A2)
   const hyb=a.outside==='hybrid', WETS={van:[1085,0.124],edm:[914,0.104]}, towers=a.outside==='towers'||hyb, evap=MWh[1]*1.5*(hyb?WETS[f.city][1]:1), mk=[evap*1.2,evap*2], bd=[evap/5,evap]; const roof=e.roofArea(f), mm=f.city==='van'?1159.5:422.5, rain=roof*mm/1000*0.8;
   const items=[
@@ -193,6 +195,7 @@ function waterIndex(){ const e=E(), f=e.siteFacts(), R=e.R, a=A(), mw=a.mw||1, f
   let h=e.tabBar('water')+`<h2>Water in, water out</h2><p class="draft">From almost none to a great deal: <span class="k">it depends on the cooling</span>.</p>
   <div class="hfig"><div><b>${towers?fmt(evap)+' m³':'none'}</b><span>evaporated a year, at most${towers?(hyb?` (hybrid: wet ${(WETS[f.city][1]*100).toFixed(1)}% of the year, the ${fmt(WETS[f.city][0])} h above 18 °C; CWEC, computed)`:''):' (dry coolers)'}</span></div><div><b>${towers?fmt(mk[0])+'–'+fmt(mk[1])+' m³':'—'}</b><span>make-up water a year (2–6 cycles)</span></div><div><b>${fmt(rain)} m³</b><span>rain on the roof a year</span></div><div><b>${f.city==='edm'?'about '+fmt(MWh[1]*1.6)+' m³':fmt(MWh[0]*1.25)+'–'+fmt(MWh[1]*16.8)+' m³'}</b><span>water behind its electricity a year${f.city==='edm'?' (Alberta 2021: 85% coal and gas at ~1.25 L/kWh, 3% hydro at ~16.8; CER profile, to check)':' (BC generation shares by source not found; hydro is about 86% of capacity, so nearer the hydro end)'}</span></div></div>
   <p class="sub">${draft(`Water hardness sets how often tower water must be bled off: Edmonton's treated water is about 178 mg/L as CaCO₃ (EPCOR, 2026), Vancouver's about 20 (Metro Vancouver, 2025), so the same tower runs fewer cycles and blows down more in Edmonton.`)}</p>
+  ${BD.xecon?BD.xecon.waterSecs(f):''}
   <h3>Connections</h3>${items.map(it=>`<div class="addrow"><div>${esc(it.name)} ${it.x.readiness?rd(it.x.readiness):''}<div class="src">${esc(it.lines)} · Vancouver ${rs((it.x.rule_state||{}).vancouver||'unknown')} Edmonton ${rs((it.x.rule_state||{}).edmonton||'unknown')}</div></div><div><button class="btn" data-wc="${it.id}">Explore ›</button></div></div>`).join('')}
   <h3>Add-ons</h3>${addRow('rainwater','Rainwater for cooling')}
   <div class="draftnote">Water mains and sewer connections are not drawn.</div>`;
