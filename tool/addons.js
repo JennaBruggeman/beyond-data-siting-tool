@@ -80,7 +80,7 @@ function openAddon(id){ if(id==='pv') return solarCard(); if(id==='battery') ret
 function addOff(id){ const a=A(); if(a.add) delete a.add[id]; refresh(); BD.drawer.close(); }
 function genericAddon(id){ const x=addon(id), q=(x.quantities||[]).map(Q).filter(v=>v.name);
   BD.drawer.open(`<div class="kind">Add-on</div><h2>${esc(x.name||id)}</h2><p>${x.readiness?rd(x.readiness):''}</p><p class="sub">${esc(x.readiness_basis||'')}</p>
-  <h3>What it changes</h3><p class="sub">${esc((x.changes||[]).join(' · '))}</p>
+  ${x.reason?`<p class="sub">${esc(x.reason)}</p>`:''}<h3>What it changes</h3><p class="sub">${esc((x.changes||[]).join(' · '))}</p>
   ${q.length?`<h3>How it is sized</h3>${q.map(v=>`<p class="sub"><b style="font-weight:400">${esc(v.name)}</b>: ${esc(v.formula)}<br>${esc(v.coef)}</p>`).join('')}`:''}
   <h3>Rules</h3><table class="cl"><tr><td>Vancouver</td><td>${rs((x.rule_state||{}).vancouver||'unknown')}<small>${esc((x.rules||{}).vancouver||'')}</small></td></tr><tr><td>Edmonton</td><td>${rs((x.rule_state||{}).edmonton||'unknown')}<small>${esc((x.rules||{}).edmonton||'')}</small></td></tr></table>
   <h3>Sources</h3>${src([].concat(x.readiness_sources||[],x.rule_sources||[],...q.map(v=>v.sources||[])))}<div class="navb"><button class="sec" id="aoff">Remove</button></div>`,el=>{ $('#aoff').onclick=()=>addOff(id); }); }
@@ -145,7 +145,8 @@ function energyIndex(){ if(BD.loadEV&&!energyIndex.q){ energyIndex.q=BD.loadEV()
   <div class="addrow"><div>Standby generators<div class="src">${a.gens==='none'?'none chosen':'testing, emissions, sound'}</div></div><div><button class="btn" id="cGen">Explore ›</button></div></div>
   <div class="addrow"><div>Flexibility for the grid<div class="src">UPS batteries, curtailment, peak windows</div></div><div><button class="btn" id="cFlex">Explore ›</button></div></div>
   <div class="addrow"><div>Power to a neighbouring lot (EV charging and others)<div class="src">the property line is a rule, not a distance</div></div><div><button class="btn" id="cNext">Explore ›</button></div></div>
-  <h3>Add-ons <span class="sub" style="text-transform:none;letter-spacing:0;font-weight:300">off until you add them</span></h3>${addRow('pv','Solar on the roof')}${addRow('pv_facade','Solar on the south wall')}${addRow('battery','A battery for the grid')}${addRow('ups')}${addRow('genset')}
+  <h3>Add-ons <span class="sub" style="text-transform:none;letter-spacing:0;font-weight:300">off until you add them</span></h3>${addRow('pv','Solar on the roof')}${addRow('pv_facade','Solar on the south wall')}${addRow('battery','A battery for the grid')}${addRow('ups')}${addRow('genset')}${addRow('absorption','Cooling for neighbours (absorption or adsorption chiller)')}
+  ${(()=>{ const out=['wind','biomass'].map(id=>({id,x:addon(id)})).filter(o=>o.x&&o.x.reason); return out.length?`<h3>Left out, and why</h3>${out.map(o=>`<div class="addrow"><div>${esc(o.x.name)}<div class="src">${esc(o.x.reason.replace(/;? *shown so users can see why it is out\.?/,'.'))}</div>${(o.x.sources||[]).length?src(o.x.sources):''}</div></div>`).join('')}`:''; })()}
   <p class="sub" style="margin-top:8px"><a href="#" id="emath">How the power figures are worked out ›</a></p><div class="draftnote">Sources are in each card.</div>`;
   $('#side').innerHTML=h; e.wireTabs(); wireAdds(); BD.draw();
   $('#cGrid').onclick=()=>gridCard(f); $('#cGen').onclick=()=>genCard(f); $('#cFlex').onclick=()=>flexCard(f); $('#cNext').onclick=()=>nextLotCard(f); $('#emath').onclick=ev=>{ ev.preventDefault(); powerMath(f); };

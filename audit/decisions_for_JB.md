@@ -54,3 +54,12 @@ Everything else from the critical and major lists is fixed (see `tool_logic_deci
 ## To do (kept open, J.B. 18 Oct 2026)
 - **Tower floor areas (M66, remaining):** 596 buildings 40 m or taller (by address) still use the estimate range. 131 now use the City's owner-reported area. Next: BC Assessment Gross Building Area, which needs Jeremy Buhler's written OK (meeting Mon 19 Oct, 1 pm).
 - **After the Jeremy Buhler meeting (Mon 19 Oct, 1 pm), revisit (J.B. 19 Oct 2026):** tower floor areas (above); the four web checks — NEU sewage heat 3.2 vs 2.5 MW, LRMC capacity range, Edmonton parking stall 23.4 m², FortisBC October 2026 gas cost; and the two sweep items still open — M36 (top of the "fits" range uses a plant yard sized for the bottom) and M42 (absorption, small wind and biomass add-on cards never shown).
+
+## After the meeting (19 Oct 2026, done)
+- NEU sewage heat: 3.2 MW is the original 2010 capacity; +6.6 MW added 2024–25 (City NEU page). Register already says "3.2 + 6.6 MW"; no change. 9.8 MW total is a sum, not stated by a source.
+- LRMC capacity range: still UNVERIFIED (IRP Appendix F not posted; BCUC pages blocked twice). Left as is, flagged.
+- Edmonton parking stall: 2.6 × 5.5 m, 7.0 m aisle, city-wide (Bylaw 20001 s. 5.80, Tables 5.1.3 and 5.5.1) → 23.4 m² per stall with half an aisle; tool now uses 23.4 for Edmonton, 22 for Vancouver.
+- FortisBC cost of gas Oct 2026: $1.660/GJ (G-50-26 from 1 Apr; FortisBC release says unchanged 1 Oct — utility claim, no BCUC order found). No change.
+- M36: already fixed by the stable range (plant sized for the top of the range itself; checked: Clark Dr dry/roof 4.9–22.3 MW with plant for 22.3; hybrid/yard 2.4–9.0 with plant for 9.0).
+- M42: absorption add-on row added to the Energy card; small wind and biomass shown under "Left out, and why" with reasons and sources.
+- Details: audit/research_2026-10-19/J_four_checks.md
