@@ -329,6 +329,18 @@ body.wcon:not(.wckey) #v3key{display:none!important}
 #wc .keyb{position:absolute;left:12px;bottom:12px;z-index:4;background:rgba(30,32,35,.9);border:1px solid var(--line-2);color:var(--muted);border-radius:6px;padding:4px 10px;font:inherit;font-size:12.5px;cursor:pointer}
 body.wcon.wckey #wc .keyb{bottom:auto;top:12px} #wc .keyb:hover{color:var(--fg)}
 @media (max-width:900px){#wc .wcgrid{grid-template-columns:1fr;grid-template-rows:minmax(260px,45%) 1fr}#wc .wcvis{border-right:0;border-bottom:1px solid var(--line)}}
+
+/* tiers (19 Oct 2026) */
+.tiers{display:grid;gap:8px;margin:10px 0 6px}
+.tier{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"n p" "w p" "d c";gap:2px 14px;text-align:left;background:var(--panel-2);border:1px solid var(--line-2);border-radius:8px;padding:10px 12px;color:var(--fg);cursor:pointer;font:inherit}
+.tier b{grid-area:n;font-weight:400;font-size:15px}.tier span{grid-area:w;color:var(--muted);font-size:12.5px}.tier .tdo{grid-area:d;color:var(--faint)}
+.tier .tprev{grid-area:p;width:120px;height:auto;align-self:center}.tier .tcount{grid-area:c;font-size:11px;color:var(--faint);text-align:right}
+.tier:hover,.tier:focus-visible,.tier[aria-checked="true"]{border-color:var(--accent)}
+@media (max-width:480px){.tier{grid-template-columns:1fr;grid-template-areas:"n" "w" "d" "p" "c"}.tier .tcount{text-align:left}}
+.tierchip{display:flex;align-items:center;gap:8px;margin:2px 0 8px;font-size:12px;color:var(--muted)}
+.tierchip select{background:var(--panel-2);color:var(--fg);border:1px solid var(--line-2);border-radius:5px;padding:3px 6px;font:inherit;font-size:12px}
+.assumed{list-style:none;padding:0;margin:4px 0 12px}.assumed li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;align-items:baseline}
+.assumed .aq{color:var(--muted)}.assumed .aa{color:var(--fg)}.assumed a{color:var(--accent);font-size:12px}
 </style>
 
 <div class="app">
@@ -729,6 +741,7 @@ window.BD={S,$,esc,fmt,getJSON,pathOf,draw,centroid,pip,area,statusOf,lowD,loadT
 <script src="extras.js"></script>
 <script src="scene3d.js"></script>
 <script src="decide.js"></script>
+<script src="tiers.js"></script>
 <script src="explain.js"></script>
 <script src="flow.js"></script>
 <script src="stage.js"></script>

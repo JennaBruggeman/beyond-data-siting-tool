@@ -46,7 +46,7 @@ Not built yet. J.B. is sending ideas one at a time; build only after all are agr
 
 ## Build plan (19 Oct)
 1. Tier data: templates.json — every node tagged with parties and the lowest tier that shows it (done: resident 30, community 95, full 156; draft, judged).
-2. Tier step after the landing page; tier switch kept; residents' setup cut to where (and how big), other answers assumed, shown, changeable.
+2. (done 19 Oct, tool v90) Tier step after the landing page; tier switch kept; residents' setup cut to where (and how big), other answers assumed, shown, changeable.
 3. Diagram panel beside the results; opening a card lights its path; drawn at the tier's level; node click = formula, source, confidence.
 4. Cards filtered by tier, with "show more".
 5. Reports by tier.
@@ -68,3 +68,8 @@ Not built yet. J.B. is sending ideas one at a time; build only after all are agr
 - AESO (2026, email to The Energy Mix; recorded session): bridging load expected to raise pool prices and lower transmission costs. Not a published document.
 - LBNL (Jan 2025), Electricity rate designs for large loads: mechanisms (stranded assets, forecast error, avoided charges) and protections (minimum bills, exit fees, collateral, contributions); no quantified rate effect.
 - Reading for the tool: a typical in-city data centre (~2.5 MW) is far below the 75 MVA cases; no source shows a measurable household effect at that size. For very large loads the effect depends on policy and is about ±1.5% or less in BC Hydro's own modelling. Proposed resident node: "Effect on household power bills" — qualitative, by size and province, sourced as above.
+
+## Step 2 notes (19 Oct)
+- Residents' size text gives the floor the servers need (same figure as the 3D label), not the zone's largest building. At "as large as fits" it gives the zone's floor and the MW range by rack packing.
+- Sweep item: the engine caps size at 40 MW (Edmonton large lots hit it); the card says so.
+- Homes'-power comparison not shown: no BC household electricity figure sourced yet.
