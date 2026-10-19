@@ -28,7 +28,7 @@ Everything else from the critical and major lists is fixed (see `tool_logic_deci
 - **M77 Report baseline vs step notes.** They can differ if inputs change. **Drop step notes when inputs change.**
 - **M102 Solar register formula** is not what users see. **Change the register to the panel-row layout.**
 
-## Lots and data
+## Lots and data (done 18 Oct 2026 — see tool_logic_decisions.md Batches 10–11)
 - **M47 Rain on the roof** uses the lot outline, not the drawn footprint (0 m³ when there's no outline). **Use the drawn footprint.**
 - **M68 Edmonton lot picking** picks the record with the largest lot area, not the one clicked; no measured-outline fallback. **Pick by containment; same fallback as Vancouver.**
 - **M69 Vancouver multi-part parcels** and the "tax record" label. **Relabel the source; handle multi-part parcels.**

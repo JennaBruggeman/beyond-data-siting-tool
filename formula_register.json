@@ -3724,23 +3724,23 @@
    "id": "rainwater",
    "name": "Harvestable rainwater",
    "unit": "m³/yr",
-   "formula": "V = A × R × C",
+   "formula": "V = A × R × C; A = roof area: a new building's footprint as drawn from the site setup (else the footprint the yards leave), an existing building's roofs added together (M47, 18 Oct 2026)",
    "inputs": [
-    "floor_area"
+    "footprint"
    ],
-   "coef": "CSA B805:22 method; ECCC Normals 1991–2020: Vancouver Intl precipitation 1,159.5 mm/yr (rain 1,119.2; Oct–Jan ≥124 mm/mo, Jul 34 mm); Edmonton City 422.5 mm/yr (Edmonton Airport 434.0; Jun–Aug 213 mm, Dec–Feb 43 mm, mostly snow); C runoff coefficient per CSA",
+   "coef": "ECCC Normals 1991–2020: Vancouver Intl precipitation 1,159.5 mm/yr (rain 1,119.2; Oct–Jan ≥124 mm/mo, Jul 34 mm); Edmonton City 422.5 mm/yr (Edmonton Airport 434.0; Jun–Aug 213 mm, Dec–Feb 43 mm, mostly snow); C = 0.8 assumed (CSA B805 not read); tank = one wet month, assumed",
    "sources": [
     "femp",
     "eccc",
     "abRainwater2010"
    ],
    "conf": 80,
-   "status": "rainfall confirmed (government normals, data/normals_1991_2020_extract.json); C and storage sizing per CSA B805",
+   "status": "rainfall confirmed (government normals, data/normals_1991_2020_extract.json); C and tank size assumed",
    "stage": "characterise",
    "source_roles": [
     {
      "id": "femp",
-     "term": "V = A × R × C method (via CSA B805)",
+     "term": "V = A × R × C (general method; the femp source is the cooling-tower guide, CSA B805 not read)",
      "role": "method",
      "conf": 90,
      "verified": false
@@ -6486,7 +6486,7 @@
     "van6555zones"
    ],
    "conf": 90,
-   "status": "confirmed (regulator text read in full, data/AUC_Rule_012_2024-09-30.pdf)",
+   "status": "confirmed (regulator text read in full, data/AUC_Rule_012_2024-09-30.pdf); 18 Oct 2026 (M61/M62): Vancouver CD-1 districts placed by number from Sch. A (129), B (248) and G (4); B.1 outline from City open data 'Noise control areas' (Intermediate Zone, 2020; shape checked against the by-law map); 70, 125, 905 listed in both A and B, read as intermediate; G.1 not digitised (its CD-1s are in Sch. G). Edmonton 'zoned for use as residential' read with Bylaw 20001 s. 1.8.10: RS, RSF, RSM, RM, RL, RR and 28 special-area housing zones; mixed use (MU, MUN, CMUV) and Direct Control (DC, DC1, DC2) given the residential limit as an assumption and counted apart",
    "stage": "test",
    "source_roles": [
     {

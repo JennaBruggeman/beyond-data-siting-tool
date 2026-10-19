@@ -402,3 +402,13 @@ Also: negative money is shown as −$; the BC/Alberta price label now follows th
 ## Batch 10: sight lines (M64), 18 Oct 2026
 - M64: Vancouver lanes added (City of Vancouver Open Data "Lanes", 7,856 segments, updated 27 Jul 2026; J.B. approved download 18 Oct). Both cities now place street viewpoints on street and lane/alley centrelines; Edmonton unchanged. Lanes also join the Vancouver pipe-route network (Edmonton alleys already did). Lane surface not recorded: drawn as paved. 1425 Clark Dr: 128 → 150 street points, 26 → 27 see the plant.
 - Also downloaded: "Noise control areas" (3 outlines, City, modified 2020). Its "Intermediate Zone" outline matches the shape of By-law 6555 Schedule B.1 (north shore of False Creek, plus a small area at the south end of the Burrard/Granville bridges) — to be used for M62.
+
+## Batch 11: Lots & data (18 Oct 2026, J.B. "go ahead")
+- M47 Rain on the roof: new building = the footprint drawn from the site setup (else the yard-based footprint); existing = all roofs on the lot added together (before: lot outline × 0.86², 0 with no outline; existing used the largest roof only). Register: C = 0.8 and tank assumed, CSA B805 not read.
+- M81 EV stations: rebuilt from the NRCan files already held (make_ev.py): open and public only. Vancouver 505 (was 544; 39 private dropped), Edmonton 201 (9 private dropped). Tesla-only stations counted and named on the card (16 / 5).
+- M62 Vancouver noise zones: CD-1 by number from By-law 6555 Sch. A/B/G; B.1 outline from City open data (Intermediate Zone). Unlisted CD-1s are quiet zones, as the by-law reads (e.g. Coal Harbour CD-1 289, 316, 363). 70/125/905 in both lists → intermediate.
+- M61 Edmonton noise: explicit residential list (Bylaw 20001 s. 1.8.10 purposes); mixed use and Direct Control = residential limit, assumed, counted apart.
+- M71 Water lots: BURRARD INLET and FRASER RIVER NORTH ARM are not selectable as sites (shown as "Water lot").
+- M68 Edmonton lot picking: the record whose recorded lot area best fits the clicked outline (was the largest); record looked up in neighbouring tiles; lot area falls back to the measured outline when the record is missing or under half of it (as Vancouver).
+- M69 Vancouver lot area: all parts of the tax coordinate, measured from the City parcel outlines; buildings found across all parts; label no longer says "tax record".
+- M70 Edmonton heights: unmeasured estimates over 40 m (219) shown as "height not known" and drawn one storey. City 3D parts with no roofline outline added as buildings (edm_3d_unmatched.py, edm_3d_add.py): 75,041 parts → 54,249 buildings (≥ 10 m², ≥ 2.5 m), flag 7, outline = convex hull of the parts; includes the 243 m and 200 m downtown towers.

@@ -456,7 +456,7 @@ async function loadTile(city,key){
     // Edmonton lot outlines: Alberta title mapping (c) Altalis, via Edmonton Public Schools GIS; academic use (separate files, not in git)
     if(city==='edm'){ try{ const l=await getJSON(`tiles/edm/l_${key}.json`); const [lx,ly]=l.o; l.L.forEach(([a,ids],n)=>{ const r=decodeRing(a,lx,ly,q); T.par.push({id:'L'+key+'_'+n,r,bb:bbox(r),ids}); }); }catch(e){} }
     if(t.E) for(const [pid,x,y] of t.E) T.pts.push({id:pid,x:ox+x/q,y:oy+y/q});
-    for(const [h,a,f] of t.B){ const r=decodeRing(a,ox,oy,q); T.bld.push({h,r,f:f||0,c:centroid(r),a:area(r)}); }
+    for(const [h,a,f] of t.B){ const r=decodeRing(a,ox,oy,q); let hh=h, ff=f||0; if(city==='edm'&&ff===0&&h>40){ ff=6; hh=4; } /* M70: an unmeasured estimate over 40 m (up to 280 m on sheds) is not trusted: height not known, drawn one storey */ T.bld.push({h:hh,r,f:ff,c:centroid(r),a:area(r),hEst:ff===6?h:undefined}); }
     T.pPath=pathOf(T.par.map(p=>p.r)); T.bPath=pathOf(T.bld.filter(b=>b.f!==3).map(b=>b.r)); T.gPath=pathOf(T.bld.filter(b=>b.f===3).map(b=>b.r));
     S.tiles[id]=T; delete S.loading[id]; draw(); return T;
   }).catch(e=>{ delete S.loading[id]; console.warn(e); });
@@ -521,6 +521,10 @@ mapEl.addEventListener('pointerup',up); mapEl.addEventListener('pointercancel',e
 mapEl.addEventListener('wheel',e=>{ e.preventDefault(); zoomAt(e.offsetX,e.offsetY,Math.exp(-e.deltaY*0.0015)); },{passive:false});
 $('#zin').onclick=()=>zoomAt(W/2,H/2,1.8); $('#zout').onclick=()=>zoomAt(W/2,H/2,1/1.8); $('#home').onclick=()=>{homeView();draw();};
 
+/* M68: among the assessment records inside a lot outline, take the one whose recorded lot area best fits the outline
+   (before: the largest, which picked a 118,416 m² rail-yard record for a 14,435 m² lot). Records with no area go last. */
+const WATER_LOTS=new Set(['BURRARD INLET','FRASER RIVER NORTH ARM']); // M71: water lots in the City parcel file, by name
+function pickRec(ids,A,a){ const sc=id=>{ const r=+((A[id]||[])[4])||0; return r>0?Math.abs(Math.log(r/Math.max(a,1))):99; }; return ids.slice().sort((u,v)=>sc(u)-sc(v))[0]; }
 async function pick(px,py){
   const [x,y]=toWorld(px,py); const m=S.meta[S.city];
   if(S.view.s<DETAIL[S.city]){ flyTo(x,y,Math.max(DETAIL[S.city]*4,0.8)); return; }
@@ -528,7 +532,7 @@ async function pick(px,py){
   $('#st').textContent='Finding the lot…';
   // lots: try the tile under the click first (already on screen), then its neighbours
   if(S.city==='edm'&&m.tileset.has(k)){ const cT=await loadTile(S.city,k); if(cT){ let lot=null; for(const p of cT.par){ const b=p.bb; if(x<b[0]||x>b[2]||y<b[1]||y>b[3]) continue; if(pip(x,y,p.r)){ const a=area(p.r); if(!lot||a<lot.a) lot={p,T:cT,a}; } }
-    if(lot&&lot.p.ids.length){ const A=cT.A; const id=lot.p.ids.slice().sort((u,v)=>((A[v]||[])[4]||0)-((A[u]||[])[4]||0))[0]; const pt=cT.pts.find(q=>q.id===id); return select({city:'edm',tile:cT.key,id,ring:lot.p.r,pt:pt?[pt.x,pt.y]:null,lotIds:lot.p.ids}); } } }
+    if(lot&&lot.p.ids.length){ const A=cT.A; const id=pickRec(lot.p.ids,A,lot.a); const pt=cT.pts.find(q=>q.id===id); return select({city:'edm',tile:cT.key,id,ring:lot.p.r,pt:pt?[pt.x,pt.y]:null,lotIds:lot.p.ids}); } } }
   const near=[]; for(let di=-1;di<=1;di++) for(let dj=-1;dj<=1;dj++){ const kk=(Math.floor(x/m.T)+di)+'_'+(Math.floor(y/m.T)+dj); if(m.tileset.has(kk)) near.push(kk); }
   const tiles=(await Promise.all(near.map(kk=>loadTile(S.city,kk)))).filter(Boolean);
   if(S.city==='van'){
@@ -537,7 +541,7 @@ async function pick(px,py){
   } else {
     // lot outline first: the smallest lot holding the click; its assessment record is the one with the largest lot area inside it
     let lot=null; for(const T of tiles) for(const p of T.par){ const b=p.bb; if(x<b[0]||x>b[2]||y<b[1]||y>b[3]) continue; if(pip(x,y,p.r)){ const a=area(p.r); if(!lot||a<lot.a) lot={p,T,a}; } }
-    if(lot&&lot.p.ids.length){ const A=lot.T.A; const id=lot.p.ids.slice().sort((u,v)=>((A[v]||[])[4]||0)-((A[u]||[])[4]||0))[0]; const pt=lot.T.pts.find(q=>q.id===id); return select({city:'edm',tile:lot.T.key,id,ring:lot.p.r,pt:pt?[pt.x,pt.y]:null,lotIds:lot.p.ids}); }
+    if(lot&&lot.p.ids.length){ const A=lot.T.A; const id=pickRec(lot.p.ids,A,lot.a); const pt=lot.T.pts.find(q=>q.id===id); return select({city:'edm',tile:lot.T.key,id,ring:lot.p.r,pt:pt?[pt.x,pt.y]:null,lotIds:lot.p.ids}); }
     if(lot){ showZone(x,y); const n=document.createElement('p'); n.className='sub'; n.textContent=`Titled lot of ${Math.round(lot.a).toLocaleString('en-CA')} m² with no assessment record (often a road, lane, utility or unassessed parcel).`; $('#side').appendChild(n); return; }
     // Edmonton has parcel points, not lot outlines. Clicking a building picks the point inside it (or the nearest one to it);
     // clicking open ground picks the nearest point within reach.
@@ -559,14 +563,17 @@ function showZone(x,y){ const m=S.meta[S.city]; let hit=null; for(const o of m.o
 /* ---------- site card ---------- */
 async function select(sel){
   const T=S.tiles[sel.city+':'+sel.tile]||await loadTile(sel.city,sel.tile); if(!T) return;
-  sel.a=T.A[sel.id];
-  if(sel.city==='van'){ const mine=T.par.filter(p=>p.id===sel.id).map(p=>({r:p.r,a:area(p.r)})).filter(p=>p.a>10);
+  sel.a=T.A[sel.id]; if(!sel.a){ for(const id in S.tiles){ if(id.startsWith(sel.city+':')&&S.tiles[id].A[sel.id]){ sel.a=S.tiles[id].A[sel.id]; break; } } } // M68: record stored in a neighbouring tile
+  if(sel.city==='van'&&sel.a&&WATER_LOTS.has(sel.a[0])){ S.sel=null; $('#side').innerHTML=`<div class="kind">Water lot</div><h2>${esc(sel.a[0])}</h2><p class="sub">A parcel on the water (legal type ${esc(sel.a[3]||'—')}). It is not treated as a site.</p>`; draw(); return; } // M71
+  if(sel.city==='van'){ const mine=[]; for(const id in S.tiles){ if(!id.startsWith('van:')) continue; for(const p of S.tiles[id].par) if(p.id===sel.id){ const a=area(p.r); if(a>10&&!mine.some(q=>Math.abs(q.a-a)<0.5&&q.r[0]===p.r[0])) mine.push({r:p.r,a}); } }
     if(!sel.ring||area(sel.ring)<=10){ const big=mine.sort((x,y)=>y.a-x.a)[0]; if(big) sel.ring=big.r; }
     // lot area: the tax report's figure, unless it is missing or under half the measured outline (e.g. 1 m² recorded for 750 Hornby St; 249 Vancouver parcels); then the outline that was picked, measured
-    { const meas=sel.ring?area(sel.ring):0, rec=+(sel.a&&sel.a[8])||0; const use=meas>10&&(!rec||rec<0.5*meas); sel.lotArea=use?Math.round(meas):rec; sel.lotSrc=use?'measured':'record'; sel.lotRec=rec; sel.lotParts=mine.length; }
-    sel.blds=sel.ring?T.bld.filter(b=>pip(b.c[0],b.c[1],sel.ring)):[];
+    // M69: the lot is every part of this tax coordinate, measured from the City's parcel outlines (the stored figure was only the first part's area, not the tax report's)
+    { const meas=mine.reduce((t,p)=>t+p.a,0)||(sel.ring?area(sel.ring):0); sel.lotArea=Math.round(meas); sel.lotSrc='measured'; sel.lotRec=+(sel.a&&sel.a[8])||0; sel.lotParts=mine.length; sel.rings=mine.map(p=>p.r); }
+    { const R=sel.rings&&sel.rings.length?sel.rings:sel.ring?[sel.ring]:[]; sel.blds=[]; for(const id in S.tiles){ if(!id.startsWith('van:')) continue; for(const b of S.tiles[id].bld) if(R.some(r=>pip(b.c[0],b.c[1],r))&&!sel.blds.includes(b)) sel.blds.push(b); } }
   } else { if(!sel.pt){ const p=T.pts.find(p=>p.id===sel.id); if(p) sel.pt=[p.x,p.y]; }
     if(!sel.ring){ const l=T.par.find(l=>l.ids&&l.ids.includes(sel.id)); if(l){ sel.ring=l.r; sel.lotIds=l.ids; } }
+    { const rec=+(sel.a&&sel.a[4])||0, meas=sel.ring?area(sel.ring):0, use=meas>10&&(!rec||rec<0.5*meas); sel.lotArea=use?Math.round(meas):rec; sel.lotSrc=use?'measured':'record'; sel.lotRec=rec; } // M68: same fallback as Vancouver
     sel.blds=sel.ring?T.bld.filter(b=>pip(b.c[0],b.c[1],sel.ring)):sel.pt?T.bld.filter(b=>pip(sel.pt[0],sel.pt[1],b.r)):[];
     if(!sel.blds.length&&sel.pt&&!sel.ring){ const n=T.bld.map(b=>[b,Math.hypot(b.c[0]-sel.pt[0],b.c[1]-sel.pt[1])]).filter(v=>v[1]<25).sort((a,b)=>a[1]-b[1]); if(n.length) sel.blds=[n[0][0]]; }
   }
@@ -585,7 +592,7 @@ function card(){
     const lid=bl.some(b=>b.f===1||b.f===2||b.f===4), nw=bl.filter(b=>b.f===2).length;
     h=`<button class="x" id="clr" title="Clear the selected site (Esc)">× Clear</button><div class="kind">Site · Vancouver</div><h2>${esc(addr||'No civic address')}</h2><div class="sub">Tax coordinate ${esc(s.id)}</div>
     <h3>Data centre here?</h3><p><span class="pill ${st.k}">${esc(st.t)}</span> <span class="sub">zone ${esc(zone)}${zcls?' · '+esc(zcls):''}</span></p><p class="draft">${st.d}</p>${st.env?`<p class="sub">${esc(st.env)}</p>`:''}${srcs(st.src)}
-    <h3>The lot</h3><dl><dt>Lot area</dt><dd>${fmt(ar)} m²${s.lotSrc==='measured'?` <span class="sub">(measured from the outline picked${s.lotParts>1?`, one of ${s.lotParts} parts of this parcel`:''}; the tax record says ${fmt(s.lotRec||0)} m²)</span>`:''}</dd><dt>Ownership</dt><dd>${strata>0?esc(strata)+' strata units — many owners':esc(legal==='LAND'?'one titled lot':legal||'—')}</dd>
+    <h3>The lot</h3><dl><dt>Lot area</dt><dd>${fmt(ar)} m²${` <span class="sub">(measured from the City's parcel outline${s.lotParts>1?`s: ${s.lotParts} parts together`:''})</span>`}</dd><dt>Ownership</dt><dd>${strata>0?esc(strata)+' strata units — many owners':esc(legal==='LAND'?'one titled lot':legal||'—')}</dd>
     <dt>Land value</dt><dd>${money(lv)}</dd><dt>Building value</dt><dd>${money(iv)}</dd><dt>Year built</dt><dd>${yb||'—'}</dd>
     <dt>Floodplain</dt><dd>${floodText(s)}</dd></dl>
     <h3>What stands on it</h3>${bl.length?`<dl><dt>Buildings</dt><dd>${bl.length} footprint${bl.length>1?'s':''}, ${fmt(foot)} m² in plan</dd><dt>Tallest</dt><dd>${hmax!=null?hmax.toFixed(1)+' m above ground':'—'}</dd>${nw?`<dt>Since 2009</dt><dd>${nw} new building${nw>1?'s':''} found in 2022</dd>`:''}</dl><div class="src">${lid?'Heights measured from the City\'s LiDAR 2022 (90th percentile of roof points above ground); outlines from the 2009 footprints, new buildings outlined from the LiDAR.':'Heights as of 2009; LiDAR 2022 not yet processed for this area.'}</div>`:`<p class="sub">${lid||S.meta.van.lidar?'No building found here in the City\'s LiDAR 2022.':'No building in the 2009 footprints (empty then, or built since).'}</p>`}${gone.length?`<p class="sub">${gone.length} building${gone.length>1?'s':''} from 2009 not found in 2022 (demolished or rebuilt) — shown dashed.</p>`:''}
@@ -595,10 +602,10 @@ function card(){
     const bl=s.blds||[]; const he=bl.filter(b=>b.h>0).map(b=>b.h);
     h=`<button class="x" id="clr" title="Clear the selected site (Esc)">× Clear</button><div class="kind">Site · Edmonton</div><h2>${esc(addr||'No civic address')}</h2><div class="sub">${esc(nb||'')}${n>1?` · ${n} assessment accounts`:''}</div>
     <h3>Data centre here?</h3><p><span class="pill ${st.k}">${esc(st.t)}</span> <span class="sub">zone ${esc(z)}${zone&&zmap&&zone.split(' ')[0]!==zmap.split(' ')[0]?` (record says ${esc(zone)})`:''}</span></p><p class="draft">${st.d}</p>${st.env?`<p class="sub">${esc(st.env)}</p>`:''}${srcs(st.src)}
-    <h3>The lot</h3><dl><dt>Lot area</dt><dd>${fmt(lot)} m²</dd><dt>Floor area</dt><dd>${gross?fmt(gross)+' m² (assessment)':'—'}</dd><dt>Assessed value</dt><dd>${money(val)}</dd>
+    <h3>The lot</h3><dl><dt>Lot area</dt><dd>${fmt(s.lotArea||lot)} m²${s.lotSrc==='measured'?` <span class="sub">(measured from the lot outline; the assessment record says ${s.lotRec?fmt(s.lotRec)+' m²':'nothing'})</span>`:''}</dd><dt>Floor area</dt><dd>${gross?fmt(gross)+' m² (assessment)':'—'}</dd><dt>Assessed value</dt><dd>${money(val)}</dd>
     <dt>Year built</dt><dd>${y0?(y0===y1?y0:y0+'–'+y1):'—'}</dd><dt>Use</dt><dd>${esc((cls||[]).join(', ')||'—')}</dd><dt>Floodplain</dt><dd class="gap">not yet looked at for Edmonton</dd></dl>
     <div class="src">${s.ring?`Lot outline ${fmt(area(s.ring))} m² measured: Alberta title mapping, © Altalis, via Edmonton Public Schools GIS (current to 1 Sep 2025); academic use.${s.lotIds&&s.lotIds.length>1?` ${s.lotIds.length} assessment records on this lot; showing the largest.`:''}`:'No lot outline found for this record; shown as a point.'} Lot area from the assessment record. Zone ${zsrc==='record'?'from the assessment record':'read from the zoning map'}.</div>
-    <h3>What stands on it</h3>${bl.length?`<dl><dt>Buildings</dt><dd>${bl.length} footprint${bl.length>1?'s':''}, ${fmt(bl.reduce((t,b)=>t+b.a,0))} m² in plan</dd><dt>Height</dt><dd>${he.length?(()=>{ const hm=bl.filter(b=>b.f===5).map(b=>b.h), hx=bl.filter(b=>b.f!==5&&b.h).map(b=>b.h); /* label each by its own flag (sweep M70) */ return (hm.length?Math.max(...hm).toFixed(1)+' m — tallest measured part, City 3D buildings (highest point − ground)':'')+(hx.length?(hm.length?'; ':'')+'≈'+Math.max(...hx).toFixed(0)+' m — ESTIMATE for '+(hm.length?'the other parts':'this building')+' (floor area ÷ footprint × 4 m)':''); })():'—'}</dd></dl>`:`<p class="sub">${s.ring?'No building on this lot.':'No footprint at this point.'}</p>`}
+    <h3>What stands on it</h3>${bl.length?`<dl><dt>Buildings</dt><dd>${bl.length} footprint${bl.length>1?'s':''}, ${fmt(bl.reduce((t,b)=>t+b.a,0))} m² in plan</dd><dt>Height</dt><dd>${he.length?(()=>{ const hm=bl.filter(b=>b.f===5).map(b=>b.h), hx=bl.filter(b=>b.f!==5&&b.f!==6&&b.f!==7&&b.h).map(b=>b.h), hu=bl.filter(b=>b.f===6).length, h7=bl.filter(b=>b.f===7).map(b=>b.h); /* label each by its own flag (sweep M70) */ return ((hm.length?Math.max(...hm).toFixed(1)+' m — tallest measured part, City 3D buildings (highest point − ground)':'')+(hx.length?(hm.length?'; ':'')+'≈'+Math.max(...hx).toFixed(0)+' m — ESTIMATE for '+(hm.length?'the other parts':'this building')+' (floor area ÷ footprint × 4 m)':'')+(h7.length?'; '+Math.max(...h7).toFixed(1)+' m — measured, City 3D buildings (outline from the 3D model; no roofline outline)':'')+(hu.length?'; '+hu+' part'+(hu>1?'s':'')+' of height not known (the floor-area estimate was over 40 m with no 3D measurement; drawn as one storey)':'')).replace(/^; /,''); })():'—'}</dd></dl>`:`<p class="sub">${s.ring?'No building on this lot.':'No footprint at this point.'}</p>`}
     ${srcs(s.ring?['edm_data','edm_lots']:['edm_data'])}`;
   }
   if(lowD(s.city,z)) h+=`<p class="sub"><span class="pill site">Small-scale housing zone</span> <span class="draft">A zone of mostly houses and small multiplexes. A data centre would need a rezoning here, and there is little nearby demand for what it gives off; the tool still works here.</span></p>`;

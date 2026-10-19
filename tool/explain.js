@@ -143,7 +143,7 @@ const TOPICS={
     v:h=>bars(h,[{label:'Vancouver',v:20,c:C.water},{label:'Edmonton',v:178,c:C.heat}],'mg/L as CaCO₃','Water hardness'),src:['reuse']},
   ]; }},
  people:{t:'What neighbours hear', steps:x=>{ const {f,r,mw}=x; const NL=BD.eng.noiseLw(mw), n=NL.n, lw=NL.lw;
-  const z=f.zone||'', act=/^(MC-1|MC-2|DD|M-1|M-1A|M-1B|M-2|IC-1|IC-2|IC-3|I-1|I-1A|I-1B|I-1C|I-2|I-3|I-4|CWD|DEOD)$/.test(z), mid=/^(C-|FC-|FCCDD|BCPED|HA-|R3-|R4-|R5-|RR-3)/.test(z);
+  const zc=f.city==='van'?BD.eng.vZone(f.zone||'',f.c[0],f.c[1]):null, act=zc==='activity', mid=zc==='intermediate';
   const lim=f.city==='edm'?50:act?55:mid?50:45; const Lp=(L,d)=>L-20*Math.log10(d)-8; const dist=lw.map(L=>Math.pow(10,(L-8-lim)/20));
   const pts=[]; for(let d=10;d<=600;d+=10) pts.push([d,Lp((lw[0]+lw[1])/2,d)]);
   return [

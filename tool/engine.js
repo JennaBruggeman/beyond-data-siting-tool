@@ -96,7 +96,7 @@ function siteFacts(){ if(inStable) return siteFactsRaw(); const st=stableFacts()
 function siteFactsRaw(){
   const s=BD.S.sel, city=s.city, a=s.a||[], A=BD.S.answers;
   const blds=(s.blds||[]).filter(b=>b.f!==3);
-  const f={city, lot:city==='van'?(s.lotArea||a[8]):a[4], zone:null, env:null, envNote:'', blds};
+  const f={city, lot:s.lotArea||(city==='van'?a[8]:a[4]), zone:null, env:null, envNote:'', blds};
   if(city==='van'){ f.zone=(a[1]||'').trim(); f.env=R.envVan[f.zone]||null; }
   else { const z=String(a[2]||a[1]||'').trim().split(/\s+/)[0].toUpperCase(); f.zone=z; f.env=R.envEdm[z]||null; }
   f.status=BD.statusOf(f.zone);
@@ -336,9 +336,23 @@ function calc(o,f,near,nets){
   r.jobs=[Math.max(1,o.mw*f.m2MW[0]/R.hallShare[1]/R.jobsM2),Math.max(1,o.mw*f.m2MW[1]/R.hallShare[0]/R.jobsM2)];
   return r;
 }
+/* M61: Edmonton Bylaw 14600 ss. 19–22 "zoned for use as residential" (not defined there). Read with Zoning Bylaw 20001 s. 1.8.10: a residential Zone"s
+   Purpose is primarily Residential Uses — Part 2 residential zones plus Part 3 special-area zones whose Purpose is housing.
+   Mixed use (MU, MUN, CMUV) and Direct Control (DC, DC1, DC2) are not settled by the bylaws: the residential limit is assumed and counted apart. */
+const EDM_RES=new Set(["RS", "RSF", "RSM", "RM", "RL", "RR", "HDR", "RMU", "BRH", "BLMR", "BMR", "RCES", "RAES", "CCHD", "CCMD", "CCLD", "CCSD", "OLD", "ORH", "ORA", "SLD", "SRH", "SRA", "RTCR", "RTCMR", "RVRH", "PLD", "PRH", "ALA", "GLD", "GRH", "GLRA", "GLDF", "GMRA"]), EDM_MIX=new Set(["MU", "MUN", "CMUV", "DC", "DC1", "DC2"]);
+/* M62: Vancouver Noise Control By-law 6555 zones (consolidated to 14 Jul 2026). CD-1 districts by number from Sch. A (activity), B (intermediate), G (event: same limits as activity, s. 2.3).
+   70, 125 and 905 are listed in both A and B (sites in both, or a by-law error): read as intermediate. Sch. B.1 outline (intermediate, overrides activity) = City open data 'Noise control areas', Intermediate Zone (2020; shape matches B.1).
+   Sch. G.1 (event outline around the stadiums) is a map only: its CD-1s are covered by Sch. G. */
+const VZ={A:new Set(["1", "100", "111", "113", "117", "125", "128", "142", "156", "163", "164", "165", "169", "171", "172", "177", "182", "187", "198", "199", "200", "204", "205", "206", "229", "230", "231", "232", "233", "235", "237", "238", "243", "248", "249", "258", "265", "273", "278", "279", "286", "30", "321", "361", "3B", "411", "413", "414", "418", "419", "420", "422", "423", "426", "428", "432", "435", "439", "442", "443", "445", "446", "450", "453", "455", "458", "484", "491", "497", "502", "509", "514", "517", "530", "532", "546", "549", "551", "555", "557", "561", "562", "563", "570", "571", "575", "579", "58", "580", "587", "588", "608", "616", "633", "635", "653", "666", "667", "683", "686", "699", "70", "701", "702", "705", "709", "714", "722", "776", "789", "791", "80", "803", "814", "816", "818", "833", "834", "835", "837", "883", "887", "889", "892", "895", "905", "915", "918", "921"]),B:new Set(["103", "106", "125", "131", "132", "136", "137", "14", "140", "141", "148", "158", "162", "167", "170", "180", "183", "186", "189", "190", "194", "196", "201", "210", "219", "228", "234", "239", "245", "247", "25", "250", "251", "26", "266", "268", "27", "272", "276", "284", "285", "287", "29", "328", "34", "358", "38", "410", "415", "41A", "424", "425", "427", "429", "430", "433", "449", "454", "456", "46", "460", "462", "464", "468", "47", "471", "478", "479", "482", "483", "487", "489", "493", "494", "495", "496", "501", "503", "504", "506", "508", "51", "510", "511", "512", "513", "515", "516", "518", "522", "523", "524", "525", "526", "527", "529", "531", "533", "534", "535", "536", "537", "544", "547", "548", "55", "553", "556", "558", "565", "566", "567", "572", "577", "582", "584", "59", "590", "591", "596", "60", "602", "607", "610", "614", "618", "62", "620", "626", "627", "63", "630", "637", "638", "642", "643", "647", "648", "658", "659", "66", "662", "663", "665", "668", "671", "672", "677", "679", "68", "682", "684", "685", "694", "70", "700", "704", "706", "707", "708", "715", "716", "717", "718", "719", "720", "723", "728", "730", "731", "732", "733", "734", "735", "741", "742", "743", "745", "746", "749", "756", "759", "760", "761", "768", "770", "772", "775", "779", "78", "780", "781", "782", "783", "784", "785", "786", "787", "790", "792", "793", "794", "796", "801", "806", "809", "813", "817", "819", "820", "826", "830", "832", "839", "842", "843", "844", "845", "846", "847", "850", "851", "854", "855", "858", "859", "862", "865", "870", "871", "874", "876", "877", "878", "881", "896", "899", "902", "903", "905", "909", "910", "912", "914", "917", "919", "922", "924"]),G:new Set(["311", "519", "520", "593"]),B1:[[-915.9, 2514.7, -593.4, 2181.2, 601.9, 2434.8, 1104.9, 2688.3, 1100.3, 2504.1, 1311.9, 2500.7, 1315.5, 2570.9, 1311.6, 2686.6, 1287.9, 2839.2, 1292.1, 3231.6, 1136.3, 3229.6, 1000.6, 3259.4, 1037.5, 3387.7, 838.9, 3441.8, 846.8, 3412.0, 795.7, 3345.2, 781.6, 3322.3, 660.0, 3202.7, 630.8, 3232.5, 573.6, 3176.3, 615.4, 3138.5, 468.1, 2996.8, 431.3, 3032.9, 203.7, 2806.0, 125.8, 2883.2, 115.6, 2872.9, 105.3, 2857.2, 77.6, 2802.7, 39.1, 2842.0, -66.5, 2736.0, -148.9, 2703.3, -161.6, 2714.6, -190.5, 2685.1, -322.1, 2632.0, -353.1, 2663.4, -400.6, 2612.2, -410.8, 2593.9, -417.7, 2574.3, -424.6, 2538.3, -436.7, 2540.2, -458.9, 2546.4, -485.6, 2559.0, -514.2, 2579.2, -684.0, 2746.9, -915.9, 2514.7], [-1241.8, 2275.8, -903.4, 2013.1, -750.9, 2020.8, -739.2, 2172.6, -1064.4, 2578.1, -1305.2, 2550.9, -1241.8, 2275.8]]};
+const VACT=/^(MC-1|MC-2|DD|M-1|M-1A|M-1B|M-2|IC-1|IC-2|IC-3|I-1|I-1A|I-1B|I-1C|I-2|I-3|I-4|CWD|DEOD)$/, VMID=/^(C-|FC-|FCCDD|BCPED|HA-|R3-|R4-|R5-|RR-3)/;
+function vZone(z,x,y){ if(!z) return null; const m=/^CD-1 \((\w+)\)/.exec(z), cd=m&&m[1];
+  if(cd&&VZ.G.has(cd)) return 'activity';
+  if(x!=null&&VZ.B1.some(r=>BD.pip(x,y,r))) return 'intermediate';
+  if(cd) return VZ.B.has(cd)?'intermediate':VZ.A.has(cd)?'activity':'quiet';
+  return VACT.test(z)?'activity':VMID.test(z)?'intermediate':'quiet'; }
 function noiseRow(f){
   if(f.city==='edm') return ['Night limit at the property line','50 dBA next to homes, 60 dBA next to other uses (Bylaw 14600)','noise'];
-  const z=f.zone, act=/^(MC-1|MC-2|DD|M-1|M-1A|M-1B|M-2|IC-1|IC-2|IC-3|I-1|I-1A|I-1B|I-1C|I-2|I-3|I-4|CWD|DEOD)$/.test(z), mid=/^(C-|FC-|FCCDD|BCPED|HA-|R3-|R4-|R5-|RR-3)/.test(z);
+  const zc=vZone(f.zone,f.c[0],f.c[1]), act=zc==='activity', mid=zc==='intermediate';
   const t=act?'activity zone: 55 dBA at night at a quiet-zone home, 65 at a mixed or industrial neighbour':mid?'intermediate zone: 50 dBA at night at a quiet-zone home, 65 at a mixed or industrial neighbour':'quiet zone (or not listed): 45 dBA at night at a quiet-zone home, 55 elsewhere';
   return ['Night limit at the neighbour',t,'noise'];
 }
@@ -494,7 +508,8 @@ document.addEventListener('click',ev=>{ const b=ev.target.closest&&ev.target.clo
 function wireTabs(){ const sd=document.getElementById('side'); if(sd&&BD.S.tab!=='heat') collapseSections(sd); setTimeout(()=>finePrintAll(sd),0); document.querySelectorAll('#side .tabs button, #side .ctx a[data-tab]').forEach(b=>b.onclick=ev=>{ ev.preventDefault(); tabView(b.dataset.tab); }); wireSecs(document.getElementById('side')); if(BD.tabExtraWire) BD.tabExtraWire(); const bk=$('#back'); if(bk) bk.onclick=()=>{ document.body.classList.remove('wide'); BD.scene3d&&BD.scene3d.hide(); fitsView(); }; }
 function tabView(k){ document.body.classList.remove('wide'); BD.S.view2='tab'; if(BD.drawer&&BD.drawer.isOpen()) BD.drawer.close(); if(BD.tabOverride&&BD.tabOverride[k]) return BD.tabOverride[k](); ({heat:recvView,energy:energyView,water:waterView,materials:materialsView,social:socialView,opts:optionsView,prec:precView}[k]||(BD.views&&BD.views[k]))(); }
 function show3d(tab,data){ if(!BD.scene3d) return; BD.scene3d.show(tab,data).catch(e=>{ const n=document.getElementById('st'); if(n) n.textContent='3D view could not load: '+e.message; }); }
-function roofArea(f){ const A=BD.S.answers; if(A.built==='new'&&BD.S.sel.ring) return BD.area(BD.S.sel.ring)*0.86*0.86; return f.plate||f.foot||0; }
+/* M47: a new building's roof is the footprint drawn from the site setup (else the yard-based footprint); an existing one is every building on the lot */
+function roofArea(f){ const A=BD.S.answers; if(A.built==='new') return (f.M&&f.M.footArea)||f.fp||0; return f.foot||0; }
 const SRC3={
  elec:'register: electricity_price (BC Hydro large general service rates from 1 Apr 2026; AESO pool 2025)', pv:'register: pv_roof (NRCan municipal PV potential values, kWh per kWp, horizontal to latitude tilt; NREL module density and roof suitability)',
  batt:'register: battery (NREL ATB 2024; Reber 2023 34 ± 15 kWh/m²)', ups:'register: ups_flex (vendor runtimes — operator claims)', dr:'register: peak_relief (BC Hydro Demand Response for Business; AESO reserves)',
@@ -595,17 +610,17 @@ function socialView(){
   if(!CENSUS[BD.S.city]){ const city=BD.S.city; CENSUS[city]='loading'; fetch('census_'+city+'.json').then(r=>r.json()).then(d=>{ CENSUS[city]=d; if(BD.S.tab==='social'&&BD.S.city===city) socialView(); }).catch(()=>{ CENSUS[city]=null; }); }
   const f=siteFacts(), A=BD.S.answers, mw=A.mw||(BD.model&&BD.model()&&BD.model().mwSized)||1, fac=mw*R.pue[1]; const CU=coolUnits(mw), n=CU.n, LU=CU.name==='dry coolers'?R.lwUnitDry:R.lwUnit;
   const lw=[LU[0]+10*Math.log10(n),LU[1]+10*Math.log10(n)];
-  const lim=f.city==='van'?(/^(MC-1|MC-2|DD|M-1|M-1A|M-1B|M-2|IC-1|IC-2|IC-3|I-1|I-1A|I-1B|I-1C|I-2|I-3|I-4|CWD|DEOD)$/.test(f.zone)?55:/^(C-|FC-|FCCDD|BCPED|HA-|R3-|R4-|R5-|RR-3)/.test(f.zone)?50:45):50;
+  const lim=f.city==='van'?({activity:55,intermediate:50}[vZone(f.zone,f.c[0],f.c[1])]||45):50;
   const dist=lw.map(L=>Math.pow(10,(L-8-lim)/20));
   // each neighbour gets the limit for ITS zone (By-law 6555 ss. 2.1–2.3: the limit depends on the source zone and the receiving zone)
-  const S=BD.S; let within=[0,0], over=[0,0], byCls={quiet:0,other:0,unknown:0};
-  const vcls=z=>!z?null:/^(MC-1|MC-2|DD|M-1|M-1A|M-1B|M-2|IC-1|IC-2|IC-3|I-1|I-1A|I-1B|I-1C|I-2|I-3|I-4|CWD|DEOD)$/.test(z)?'activity':/^(C-|FC-|FCCDD|BCPED|HA-|R3-|R4-|R5-|RR-3)/.test(z)?'intermediate':'quiet';
-  const srcCls=f.city==='van'?vcls(f.zone)||'quiet':null;
+  const S=BD.S; let within=[0,0], over=[0,0], byCls={quiet:0,other:0,unknown:0,assumed:0};
+  const vcls=(z,x,y)=>vZone(z,x,y);
+  const srcCls=f.city==='van'?vcls(f.zone,f.c[0],f.c[1])||'quiet':null;
   const limQ={quiet:45,intermediate:50,activity:55}[srcCls]||45, limO={quiet:55,intermediate:65,activity:65}[srcCls]||55;
   const zoneOf=(T,x,y)=>{ let best=null; for(const p of T.par){ const bb=p.bb; if(x<bb[0]||x>bb[2]||y<bb[1]||y>bb[3]) continue; if(BD.pip(x,y,p.r)){ const id=p.ids?p.ids[0]:p.id; const a=T.A[id]; if(a){ best=f.city==='van'?a[1]:(a[2]||a[1]); break; } } } return best; };
   const limitFor=b=>{ if(b._lim!=null) return b._lim; let z=null; for(const id in S.tiles){ if(!id.startsWith(S.city+':')) continue; const T=S.tiles[id]; const bb=T.par.length?null:null; z=zoneOf(T,b.c[0],b.c[1]); if(z) break; }
-    let L; if(f.city==='van'){ const c=vcls(z); L=c===null?limQ:c==='quiet'?limQ:limO; b._cls=c===null?'unknown':c==='quiet'?'quiet':'other'; }
-    else { const res=z&&/^R/.test(String(z).split(" ")[0]); L=z==null?50:res?50:60; b._cls=z==null?'unknown':res?'quiet':'other'; }
+    let L; if(f.city==='van'){ const c=vcls(z,b.c[0],b.c[1]); L=c===null?limQ:c==='quiet'?limQ:limO; b._cls=c===null?'unknown':c==='quiet'?'quiet':'other'; }
+    else { const c0=z&&String(z).split(" ")[0], res=z&&EDM_RES.has(c0), mix=z&&EDM_MIX.has(c0); L=z==null||res||mix?50:60; b._cls=z==null?'unknown':res?'quiet':mix?'assumed':'other'; }
     b._lim=L; return L; };
   for(const id in S.tiles){ if(!id.startsWith(S.city+':')) continue; for(const b of S.tiles[id].bld){ if(b.f===3||(f.blds||[]).includes(b)) continue; const r=Math.max(5,Math.hypot(b.c[0]-f.c[0],b.c[1]-f.c[1])); if(r>600) continue;
       b._lim=null; const L=limitFor(b); const lo=lw[0]-20*Math.log10(r)-8, hi=lw[1]-20*Math.log10(r)-8;
@@ -615,7 +630,7 @@ function socialView(){
   let h=tabBar('social')+`<h2>What neighbours would hear, see and feel</h2><p class="draft">Described as experienced, not scored. Measured where the data allows; your site observations sit beside it, labelled as yours.</p>
   <h3>Sound</h3><dl><dt>Cooling plant</dt><dd>${n} ${CU.name} (as laid out, spares included), rated ${rng(lw[0],lw[1],'dBA')} together (${CU.name==='dry coolers'?'dry-cooler ratings at full fan speed, manufacturer claims':CU.name==='air-cooled chillers'?'air-cooled chiller ratings, low-noise to standard, manufacturer claim':'air-cooled chiller ratings used as a stand-in: no rating found for this kind'})</dd>
   <dt>Night limit</dt><dd>${f.city==='van'?`from this ${srcCls} zone: ${limQ} dBA at a quiet-zone neighbour, ${limO} dBA at any other`:'50 dBA next to homes, 60 dBA next to other uses'}</dd><dt>Quiet-zone limit reached at</dt><dd>${fmt(dist[0])}–${fmt(dist[1])} m from the plant, before walls, barriers or enclosures</dd>
-  <dt>Neighbours over their limit</dt><dd>${within[0]}–${within[1]} buildings within 600 m (low-noise to standard units), each judged against the limit for its own zone: ${f.city==='van'?`${limQ} dBA in a quiet zone, ${limO} dBA elsewhere`:'50 dBA next to homes, 60 dBA next to other uses'}${within[1]?` — ${byCls.quiet} in quiet${f.city==='van'?' zones':' (residential) zones'}, ${byCls.other} elsewhere${byCls.unknown?`, ${byCls.unknown} with no parcel record (quiet limit used)`:''}`:''}. In the 3D view, red: over even with low-noise units; accent: over only with standard units.</dd>
+  <dt>Neighbours over their limit</dt><dd>${within[0]}–${within[1]} buildings within 600 m (low-noise to standard units), each judged against the limit for its own zone: ${f.city==='van'?`${limQ} dBA in a quiet zone, ${limO} dBA elsewhere`:'50 dBA next to homes, 60 dBA next to other uses'}${within[1]?` — ${byCls.quiet} in quiet${f.city==='van'?' zones':' (residential) zones'}, ${byCls.other} elsewhere${byCls.assumed?`, ${byCls.assumed} in mixed-use or Direct Control zones (residential limit assumed: the bylaws do not settle these)`:''}${byCls.unknown?`, ${byCls.unknown} with no parcel record (quiet limit used)`:''}`:''}. In the 3D view, red: over even with low-noise units; accent: over only with standard units.</dd>
   <dt>Low hum</dt><dd>a tonal low-frequency sound adds 5 dBA in Alberta's rule — the kind neighbours describe most</dd></dl>${s3('snd')}${s3('lf')}${src('noise')}
   <h3>The edge</h3><dl><dt>Standoff</dt><dd>new facilities keep about 10 m between the building and the public (45 m enhanced) — a fence, bollards or a blank setback, as experienced from the street</dd>
   <dt>Ground floor</dt><dd>${f.envAssumed?'not known: this zone\'s rules are not yet read':(f.envU&&f.envU.ground)?'this zone keeps the ground floor free of data storage: it could meet the street':'nothing in the zone requires another use at grade'}</dd>
@@ -681,6 +696,6 @@ async function precView(){
   `;
   $('#side').innerHTML=h; wireTabs();
 }
-BD.eng={R,siteFacts,plantPerMW,coolUnits,noiseLw,calc,rng,f1,n0,n1,mathBox,tabBar,wireTabs,show3d,nearby,netsAt,loadRecv,badge,src,s3,rangeBar,state,roofArea,optionSet};
+BD.eng={R,vZone,siteFacts,plantPerMW,coolUnits,noiseLw,calc,rng,f1,n0,n1,mathBox,tabBar,wireTabs,show3d,nearby,netsAt,loadRecv,badge,src,s3,rangeBar,state,roofArea,optionSet};
 BD.fitsView=fitsView; BD.recvView=recvView; BD.optionsView=optionsView; BD.tabView=tabView;
 })();

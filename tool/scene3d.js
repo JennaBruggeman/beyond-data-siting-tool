@@ -42,7 +42,7 @@ function setup(){
     if(R.multi){ const b=wrap.getBoundingClientRect(), w=b.width/3; ren.setScissorTest(true); R.multi.forEach((s,i)=>{ ren.setViewport(i*w,0,w,b.height); ren.setScissor(i*w,0,w,b.height); cam.aspect=w/b.height; cam.updateProjectionMatrix(); ren.render(s,cam); }); ren.setScissorTest(false); }
     else { ren.setViewport(0,0,wrap.clientWidth,wrap.clientHeight); cam.aspect=wrap.clientWidth/Math.max(1,wrap.clientHeight); cam.updateProjectionMatrix(); ren.render(scene,cam); placeLabels(); } })();
 }
-function hoverText(nb){ const b=nb.b; let t=`<b style="font-weight:400">${nb.recv?esc(nb.recv.n||'Receiver'):'Building'}</b><br>${b.h?b.h.toFixed(0)+' m tall':''}${b.f===5?' (measured)':BD.S.city==='edm'&&b.f!==5?' (estimate)':''} · ${Math.round(nb.d)} m from the site`;
+function hoverText(nb){ const b=nb.b; let t=`<b style="font-weight:400">${nb.recv?esc(nb.recv.n||'Receiver'):'Building'}</b><br>${b.f===6?'height not known':b.h?b.h.toFixed(0)+' m tall':''}${b.f===5||b.f===7?' (measured)':BD.S.city==='edm'&&b.f!==6?' (estimate)':''} · ${Math.round(nb.d)} m from the site`;
   if(nb.recv) t+=`<br><span style="color:#9d9a94">${esc(nb.recvType||'')}${nb.recv.u?' · '+nb.recv.u+' homes':''}</span>`;
   if(nb.noise) t+=`<br><span style="color:#9d9a94">${esc(nb.noise)}</span>`; return t; }
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));

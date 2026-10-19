@@ -107,7 +107,7 @@ function model(){
   if(cache.key===key) return cache.m;
   const a=s.a||[], city=s.city, zraw=city==='van'?(a[1]||''):(a[2]||a[1]||'');
   const Z=zoneLimits(city,zraw);
-  const lotArea=city==='van'?(+(BD.S.sel.lotArea||a[8])||0):(+a[4]||0);
+  const lotArea=+(BD.S.sel.lotArea||(city==='van'?a[8]:a[4]))||0;
   let ring=s.ring; if(!ring&&s.pt){ const r=Math.sqrt(Math.max(lotArea,900))/2; ring=new Float64Array([s.pt[0]-r,s.pt[1]-r,s.pt[0]+r,s.pt[1]-r,s.pt[0]+r,s.pt[1]+r,s.pt[0]-r,s.pt[1]+r]); }
   const m={Z,city,lotArea,ring,notes:[],warn:[]};
   if(!ring){ cache={key,m}; return m; }
