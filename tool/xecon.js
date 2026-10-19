@@ -45,7 +45,10 @@ function roofShade(f,pts,z0){ if(!SUN||!SUN[f.city]||!pts||!pts.length) return n
   return SH[key]={loss,beam:bl/sun.beam_kwh,svf,obs:obs.length,n}; }
 BD.roofShade=roofShade;
 let SUB=null; fetch('substations.json').then(r=>r.ok?r.json():null).then(d=>{ SUB=d; }).catch(()=>{});
-function nearSub(f){ const L=SUB&&SUB.cities[f.city]; if(!L) return null; const d=L.map(p=>({d:Math.hypot(p[0]-f.c[0],p[1]-f.c[1]),y:p[3]})).sort((a,b)=>a.d-b.d); return {n:d[0],within2:d.filter(x=>x.d<=2000).length,years:[...new Set(L.map(p=>p[3]))].join(', ')}; }
+function nearSub(f){ if(!SUB) return null; const named=(SUB.named&&SUB.named[f.city]||[]).map(p=>({d:Math.hypot(p.x-f.c[0],p.y-f.c[1]),n:p.n,addr:p.addr,status:p.status,src:p.src,named:true}));
+  const old=(SUB.cities[f.city]||[]).filter(p=>!(SUB.named&&SUB.named[f.city]||[]).some(q=>Math.hypot(p[0]-q.x,p[1]-q.y)<300)).map(p=>({d:Math.hypot(p[0]-f.c[0],p[1]-f.c[1]),y:p[3]}));
+  const live=named.filter(x=>!/planned/.test(x.status)).concat(old).sort((a,b)=>a.d-b.d), plan=named.filter(x=>/planned/.test(x.status)).sort((a,b)=>a.d-b.d);
+  return {n:live[0],within2:live.filter(x=>x.d<=2000).length,plan:plan[0]||null,years:[...new Set((SUB.cities[f.city]||[]).map(p=>p[3]))].join(', ')}; }
 BD.nearSub=nearSub;
 /* ---------- electricity ---------- */
 function solar(f){ const lay=BD.pvLayout&&BD.pvLayout(f); if(!lay||!lay.kwp[1]) return null; const pv=BD._pv, c=f.city;
@@ -69,8 +72,10 @@ function battery(f){ const a=A(), mw=a.battMW||1, h=a.battH||4, kwh=mw*h*1000, k
 function evHub(f){ if(f.city!=='van') return {known:false}; const margin=(X.ev.l2-ECON().elec.van/10)/100; const kwh=X.ev.port/margin; return {known:true,margin,kwh,hours:kwh/X.ev.kw}; }
 
 function elecSecs(f){ const s=solar(f), b=battery(f), ev=evHub(f), Bst=solarBest(f); const sec=BD.sec; let h='<h3>What it is worth here</h3><p class="sub">The same rows as heat: how much, what it is worth, what it costs over its life, years to pay back, the best set-up found, the rules. Middle and range; '+(rate()*100).toFixed(1)+'% real cost of capital, as heat.</p>';
-  { const ns=nearSub(f); h+=sec('x-grid','The grid nearby',ns?`nearest transformer station about ${fmt(Math.round(ns.n.d/10)*10)} m away; ${ns.within2} within 2 km`:'transformer stations not loaded',
-    ns?`<dl><dt>Who is nearby</dt><dd>${ns.within2} transformer station${ns.within2===1?'':'s'} (substations) within 2 km, the nearest about ${fmt(Math.round(ns.n.d/10)*10)} m in a straight line</dd><dt>How current</dt><dd>NRCan CanVec 50K (Open Government Licence), files of 2019 from source maps of ${esc(ns.years)}: stations built since are missing and some shown may have changed${f.city==='van'?'. Planned: BC Hydro\'s West End substation at 1150 Nelson, expected July 2032 (CPCN 2025, not yet decided)':''}</dd><dt>What it means</dt><dd>a station's spare capacity is not published by either utility; distance alone does not say a connection is easy (see Getting connected)</dd></dl>`:''); }
+  { const ns=nearSub(f), nm=x=>x.named?`${esc(x.n)} (${esc(x.addr)}; ${esc(x.status)}; ${esc(x.src)})`:`an unnamed station from NRCan CanVec (source map ${esc(x.y)})`;
+    h+=sec('x-grid','The grid nearby',ns&&ns.n?`nearest substation about ${fmt(Math.round(ns.n.d/10)*10)} m away${ns.n.named?': '+esc(ns.n.n):''}; ${ns.within2} within 2 km`:'substations not loaded',
+    ns&&ns.n?`<dl><dt>Nearest</dt><dd>${nm(ns.n)}, about ${fmt(Math.round(ns.n.d/10)*10)} m in a straight line</dd><dt>Within 2 km</dt><dd>${ns.within2}</dd>${ns.plan?`<dt>Planned</dt><dd>${nm(ns.plan)}, about ${fmt(Math.round(ns.plan.d/10)*10)} m away</dd>`:''}
+     <dt>How current</dt><dd>named stations from utility and government pages (2023–2026), placed at the City-listed address; the rest from NRCan CanVec 50K (Open Government Licence; source maps of ${esc(ns.years)}), so stations built since may be missing. Neither utility publishes a full public map: BC Hydro's is paid (ICIS), AESO's 2026 system map names Edmonton's stations but gives no positions</dd><dt>What it means</dt><dd>spare capacity per station is not published by either utility; distance alone does not say a connection is easy (see Getting connected)</dd></dl>`:''); }
   if(s){ const b0=Bst[0], cur=Bst.find(x=>x.p===(A().plantAt||'roof'));
     h+=sec('x-pv','Solar on the roof',`${per(s.lc[0],'')}–${per(s.lc[1],'per MWh')} over its life, against $${s.v.toFixed(0)} the power it replaces costs`,
     `<dl><dt>How much</dt><dd>${E().rng(s.kwp[0],s.kwp[1],'kWp')} on ${fmt(s.m2)} m² of free roof: ${E().rng(s.mwh[0],s.mwh[1],'MWh a year')} (${fmt(s.yl[0])}–${fmt(s.yl[1])} kWh per kWp, NRCan)</dd>
