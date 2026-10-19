@@ -1,7 +1,7 @@
 /* Beyond Data — the side panel as an index, and connection cards in the drawer (v19, 16 Oct 2026; J.B.: decision A, the drawer over the map
    beside the panel). Each receiver row opens a card: what the exchange is, the numbers with the math, what has to be built (existing pipes),
    construction and who pays, payback and the break-even distance, how hard the receiver is to connect, rules per city, who gains and who
-   gives up, conditions, how proven, sources. Beyond-break-even receivers stay visible, greyed, with what would close the gap (option 2).
+   gives up, conditions, how proven, sources. Receivers that cost more than their heat is worth stay visible, greyed, with what would close the gap (option 2).
    Every figure has its source; nothing is ranked or scored. Wording is Claude's draft for J.B. */
 (function(){
 'use strict';
@@ -44,7 +44,13 @@ const ECON={
  elec:{van:67.9,edm:+(43.68+2.53+0.0809*43.68).toFixed(2)}, // $/MWh, energy-type charges only, demand charges excluded in both: BC Hydro LGS energy charge 6.79 ¢/kWh (1 Apr 2026); Alberta pool average 2025 $43.68 + EPCOR SAS-TOU transmission energy $2.53/MWh + operating reserve 8.09% of pool (2026 interim rates, AUC 30298-D01-2025; agent-read, to check)
  boiler:0.85,             // gas boiler efficiency: a MWh of heat displaces 1 ÷ 0.85 MWh of gas (register price_ceiling; verification sweep M1, 18 Oct 2026)
  neu:32.59,               // $/MWh credited for heat returned to the NEU (By-law 9552 Sch. C)
- years:5,                 // the 5-year payback the reach distances are based on (RVO 2018)
+ years:5,                 // RVO 2018 reach distances assume a 5-year payback: kept only as the reason for the 1.5 km search radius (J.B., 19 Oct: no 5-year line)
+ // payback method (J.B., 19 Oct 2026; audit/payback_method_2026-10-19.md): pipe, connection, heat pump and upkeep counted
+ hpCapex:[[1,1.13e6],[3,0.95e6]], // € per MW of heat, waste-heat heat pump, total investment (Danish Energy Agency technology data, sheet 40, Aug 2026, 2025 €); below 1 MW held at 1.13 (smaller units likely cost more: ReUseHeat 0.3 MW ≈ 1.53)
+ hpFLH:[4400,7100],       // full-load hours a year, mature years (Odense 2024 ≈ 4,365; Mäntsälä 5,000; STACK Oslo claim 7,143): sizes the heat pump from the heat sold
+ hpOMfix:2100, hpOMvar:3.07, // € per MW·yr and € per MWh, excluding electricity (DEA sheet 40)
+ life:{pipe:30,hp:25},    // years: pipe design life 30 yr at 120 °C (EN 253:2019, as quoted in Energiforsk 2022:872 s. 8.2; lower temperatures age slower); heat pump 25 yr (DEA)
+ rate:0.056,              // real cost of capital: weighted average for a BCUC-regulated private utility, 5.6% real (Squamish NEU feasibility, Compass/FVB 2010, p. 44)
  co2pipe:2*(39.5+1.03+0.205), // kg CO2e per metre of route: supply and return DN100, A1–A5 (isoplus EPD); trench excluded
  src:['vanStreets2026','edmRoads2026','persson2019','nproCosts','cambridgeApp5','vanNEUlevy2025','fortisBC2026','atcoGas2026','bchTariff2026','isoplusEPD','vanQuebecSt2020','vanNEUguide','torontoDER2016','statcanHeat2011']
 };
@@ -77,35 +83,51 @@ BD.routeTree=routeTree; BD.routePath=routePath;
 function heatEcon(f,p,offer){ const R=E().R, city=f.city, cop=R.cop; // offer: [low, high] MWh/yr of heat the chosen size could offer
   const route=routeOf(f,p); const ce=(CEUD[city]||{})[p.t]; const demand=p.t==='housing'&&p.u?p.u*R.homeMWh[city]:(p.fa&&ce&&!noDemand(p)?p.fa*ce[0]/3.6:null);
   const v=ECON.heatVal(city), pe=ECON.elec[city]; const net=[v-pe/cop[0],v-pe/cop[1]]; // worst (COP 3.0), best (COP 4.5) $/MWh of heat after the heat pump's electricity
-  const o={route,demand,v,pe,net,cost:[ECON.fixed+route*ECON.pipe[0],ECON.fixed+route*ECON.pipe[1]],co2:route*ECON.co2pipe/1000};
+  const o={route,demand,v,pe,net,cost:[ECON.fixed+route*ECON.pipe[0],ECON.fixed+route*ECON.pipe[1]],co2:route*ECON.co2pipe/1000}; o.pipeCost=o.cost.slice();
   if(demand){ const take=offer?[Math.min(demand,offer[0]),Math.min(demand,offer[1])]:[demand,demand]; o.take=take; o.capped=!!offer&&demand>offer[0]; // sweep M3, J.B. 18 Oct: a building can only buy the heat that is offered
-    const val=[ECON.years*take[0]*net[0],ECON.years*take[1]*net[1]]; o.val=val; o.be=[(val[1]-ECON.fixed)/ECON.pipe[0],(val[0]-ECON.fixed)/ECON.pipe[1]]; // best case, worst case break-even route length
-    o.status=o.be[0]<=0?'beyond':route<=Math.max(0,o.be[1])?'within':route<=o.be[0]?'depends':'beyond';
-    o.payback=net[1]>0?[o.cost[0]/(take[1]*net[1]),net[0]>0?o.cost[1]/(take[0]*net[0]):Infinity]:[Infinity,Infinity];
-    if(o.status==='beyond'){ o.close=[]; const need=(ECON.fixed+route*ECON.pipe[0])/(ECON.years*take[1])+pe/cop[1]; o.close.push(`gas at about $${(need*ECON.boiler/3.6).toFixed(1)}/GJ instead of $${(ECON.gas[city]/3.6).toFixed(2)} (best case)`);
-      if(net[1]>0){ const yrs=(ECON.fixed+route*ECON.pipe[0])/(take[1]*net[1]); o.close.push(`about ${Math.ceil(yrs)} years to pay back instead of ${ECON.years}`); }
-      else o.close.push(`electricity below about $${(v*cop[1]).toFixed(0)}/MWh for the heat pump before any route can start to pay back (now about $${pe.toFixed(0)}, before ${city==='edm'?'wires':'demand'} charges)`);
+    // heat pump sized from the heat sold: MW = MWh ÷ full-load hours (more hours → smaller, cheaper unit)
+    const cpm=mw=>{ const [[m1,c1],[m3,c3]]=ECON.hpCapex; return (mw<=m1?c1:mw>=m3?c3:c1+(c3-c1)*(mw-m1)/(m3-m1))*ECON.eur; };
+    const hpMW=[take[1]/ECON.hpFLH[1],take[0]/ECON.hpFLH[0]], hp=[hpMW[0]*cpm(hpMW[0]),hpMW[1]*cpm(hpMW[1])];
+    const om=[(ECON.hpOMfix*hpMW[0]+ECON.hpOMvar*take[1])*ECON.eur,(ECON.hpOMfix*hpMW[1]+ECON.hpOMvar*take[0])*ECON.eur];
+    const pipe=[ECON.fixed+route*ECON.pipe[0],ECON.fixed+route*ECON.pipe[1]];
+    o.hpMW=hpMW; o.hp=hp; o.om=om; o.pipeCost=pipe; o.cost=[pipe[0]+hp[0],pipe[1]+hp[1]];
+    const yr=[take[1]*net[1]-om[0],take[0]*net[0]-om[1]]; o.yr=yr; // money left each year: best, worst
+    o.payback=[yr[0]>0?o.cost[0]/yr[0]:Infinity,yr[1]>0?o.cost[1]/yr[1]:Infinity];
+    // middle case: every range at its midpoint (pipe, heat-pump efficiency, hours run)
+    const mCop=(cop[0]+cop[1])/2, mFLH=(ECON.hpFLH[0]+ECON.hpFLH[1])/2, mTake=(take[0]+take[1])/2, mMW=mTake/mFLH;
+    const mCost=ECON.fixed+route*(ECON.pipe[0]+ECON.pipe[1])/2+mMW*cpm(mMW), mYr=mTake*(v-pe/mCop)-(ECON.hpOMfix*mMW+ECON.hpOMvar*mTake)*ECON.eur;
+    o.payMid=mYr>0?mCost/mYr:Infinity;
+    // over the life of the parts at a utility's cost of capital: cost per MWh of heat against what the heat is worth
+    const crf=(i,n)=>i*Math.pow(1+i,n)/(Math.pow(1+i,n)-1), cP=crf(ECON.rate,ECON.life.pipe), cH=crf(ECON.rate,ECON.life.hp); o.crf=[cP,cH];
+    o.lcoh=[(cP*pipe[0]+cH*hp[0]+om[0])/take[1]+pe/cop[1],(cP*pipe[1]+cH*hp[1]+om[1])/take[0]+pe/cop[0]];
+    o.lcohMid=(cP*(ECON.fixed+route*(ECON.pipe[0]+ECON.pipe[1])/2)+cH*mMW*cpm(mMW)+(ECON.hpOMfix*mMW+ECON.hpOMvar*mTake)*ECON.eur)/mTake+pe/mCop;
+    // what the heat can carry in pipe and connection over the pipe's life (for the distance chart and break-even route)
+    o.val=[(yr[1]-cH*hp[1])/cP,(yr[0]-cH*hp[0])/cP]; // worst, best
+    o.be=[(o.val[1]-ECON.fixed)/ECON.pipe[0],(o.val[0]-ECON.fixed)/ECON.pipe[1]]; // best case, worst case break-even route length
+    o.status=o.lcoh[1]<=v?'within':o.lcoh[0]<=v?'depends':'beyond';
+    if(o.status==='beyond'){ o.close=[]; const need=o.lcoh[0]; o.close.push(`a heat price of about $${need.toFixed(0)}/MWh instead of $${v.toFixed(0)} (gas at about $${(need*ECON.boiler/3.6).toFixed(1)}/GJ instead of $${(ECON.gas[city]/3.6).toFixed(2)}; best case)`);
+      if(yr[0]<=0) o.close.push(`electricity below about $${((v-om[0]/take[1])*cop[1]).toFixed(0)}/MWh for the heat pump before any route can start to pay back (now about $${pe.toFixed(0)}, before ${city==='edm'?'wires':'demand'} charges)`);
       o.close.push('a receiver taking more heat, or a pipe already in the street'); } }
   else o.status='unknown';
   return o; }
 BD.heatEcon=heatEcon;
-const STATUS={within:['within break-even','#8fb996'],depends:['depends on pipe cost','#cdb07a'],beyond:['beyond break-even','#6b6964'],unknown:['demand not yet known','#9d9a94']};
+const STATUS={within:['costs less than the heat is worth','#8fb996'],depends:['depends on the costs','#cdb07a'],beyond:['costs more than the heat is worth','#6b6964'],unknown:['demand not yet known','#9d9a94']}; // over the parts' life, at a utility's cost of capital (J.B., 19 Oct)
 /* receiver list grouped by kind (J.B., 16 Oct: "a lot of repetition"): the kind, the shared connection difficulty and the column labels are said
-   once per group; a row shows only what differs — name, size, route, and a status word unless it is the greyed "beyond break-even". */
+   once per group; a row shows only what differs — name, size, route, and a status word unless it is the greyed "costs more". */
 function groupRows(all,showB){ const by={}; all.forEach(p=>(by[p.t]=by[p.t]||[]).push(p)); const ord=['housing','school','campus','hospital','care','rec','hall','pool','arena'];
   // J.B., 16 Oct: "a lot of information that doesn't do anything" — rows only where they say something different; the rest is summed in one line
   return ord.filter(t=>by[t]).map(t=>{ const G=by[t], act=G.filter(p=>!p.beyond), bey=G.filter(p=>p.beyond);
     const nW=G.filter(p=>p.econ.status==='within').length, nD=G.filter(p=>p.econ.status==='depends').length, nU=G.filter(p=>p.econ.status==='unknown').length;
     const cnt={}; G.forEach(p=>cnt[p.diff.t]=(cnt[p.diff.t]||0)+1); const mode=Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0];
-    const head=`<h3 class="gh">${esc(TYPE[t])} <span class="src">${G.length} building${G.length>1?'s':''}${nW?` · ${nW} within break-even`:''}${nD?` · ${nD} depend on pipe cost`:''}${nU?` · ${nU} demand not known`:''}${bey.length?` · ${bey.length} beyond`:''} · connection: ${esc(mode[0].toLowerCase())}${mode[1]<G.length?` (${mode[1]})`:''}</span></h3>`;
+    const head=`<h3 class="gh">${esc(TYPE[t])} <span class="src">${G.length} building${G.length>1?'s':''}${nW?` · ${nW} cost less than the heat is worth`:''}${nD?` · ${nD} depend on the costs`:''}${nU?` · ${nU} demand not known`:''}${bey.length?` · ${bey.length} cost more`:''} · connection: ${esc(mode[0].toLowerCase())}${mode[1]<G.length?` (${mode[1]})`:''}</span></h3>`;
     const unit=t==='housing'?'homes':'floor, est.';
     const row=p=>`<tr class="${p.beyond?'grey':''} rowlink" data-rid="${p.id}"><td>${esc(p.n||'(unnamed)')}${p.beyond?'':`<div>${stPill(p.econ.status)}</div>`}${p.diff.t!==mode[0]?`<div class="src" style="color:${DCOL[p.diff.k]}">${esc(p.diff.t)}</div>`:''}</td><td class="r">${p.u?fmt(p.u):p.fa?fmt(p.fa)+' m²':'—'}</td><td class="r">${fmt(p.econ.route)} m</td><td class="r chev">›</td></tr>`;
     const A=act.slice(0,15), B=showB?bey.slice(0,15):[];
     let sum='';
     if(bey.length){ const r=bey.map(p=>p.econ.route), tot=bey.reduce((x,p)=>x+(p.u||0),0), near=bey.slice().sort((a,b)=>a.econ.route-b.econ.route)[0];
-      sum=`<p class="sub">${bey.length} beyond break-even${t==='housing'&&tot?`, ${fmt(tot)} homes in all`:''}, routes ${fmt(Math.min(...r))}–${fmt(Math.max(...r))} m.${near.econ.close&&near.econ.close.length?` For the nearest, what would close the gap: ${esc(near.econ.close[0])}.`:''}${showB?'':' Tick the box above to list them.'}</p>`; }
+      sum=`<p class="sub">${bey.length} cost more than the heat is worth${t==='housing'&&tot?`, ${fmt(tot)} homes in all`:''}, routes ${fmt(Math.min(...r))}–${fmt(Math.max(...r))} m.${near.econ.close&&near.econ.close.length?` For the nearest, what would close the gap: ${esc(near.econ.close[0])}.`:''}${showB?'':' Tick the box above to list them.'}</p>`; }
     const rows=A.concat(B);
-    return head+(rows.length?`<table class="idx gr"><thead><tr><th></th><th class="r">${unit}</th><th class="r">route</th><th></th></tr></thead><tbody>${rows.map(row).join('')}${act.length>A.length?`<tr><td colspan="4" class="src">and ${act.length-A.length} more further away</td></tr>`:''}${showB&&bey.length>B.length?`<tr><td colspan="4" class="src">and ${bey.length-B.length} more beyond, further away</td></tr>`:''}</tbody></table>`:'')+sum; }).join(''); }
+    return head+(rows.length?`<table class="idx gr"><thead><tr><th></th><th class="r">${unit}</th><th class="r">route</th><th></th></tr></thead><tbody>${rows.map(row).join('')}${act.length>A.length?`<tr><td colspan="4" class="src">and ${act.length-A.length} more further away</td></tr>`:''}${showB&&bey.length>B.length?`<tr><td colspan="4" class="src">and ${bey.length-B.length} more that cost more, further away</td></tr>`:''}</tbody></table>`:'')+sum; }).join(''); }
 const stPill=k=>`<span class="cls" style="border-color:${STATUS[k][1]};color:${STATUS[k][1]}">${STATUS[k][0]}</span>`;
 /* how hard to connect (J.B., 16 Oct): Ready / Needs a heat-pump lift / Needs a building retrofit / Not yet known */
 function difficulty(f,p,nets){ const nIn=nets.find(n=>BD.pip(p.x,p.y,n.r)), inNet=!!nIn&&nIn.src==='van9552';
@@ -154,17 +176,19 @@ async function heatIndex(){
   const PL1={housing:['non-market housing building','non-market housing buildings'],school:['school','schools'],campus:['campus','campuses'],care:['care home','care homes'],hospital:['hospital','hospitals'],rec:['recreation centre','recreation centres'],hall:['community league hall','community league halls'],pool:['pool','pools'],arena:['arena','arenas']};
   const unkTxt=unk.length?` ${unk.length} more (${[...new Set(unk.map(p=>p.t))].map(t=>{ const n=unk.filter(p=>p.t===t).length; return n+' '+(PL1[t]||[t,t])[n===1?0:1]; }).join(', ')}) have no demand figure yet.`:'';
   const lead=netB<=0?`At ${f.city==='edm'?'Alberta':'BC'} prices <span class="k">no route pays back at any distance</span>.${bl?` Blatchford's low-temperature loop, ${bl.inside?'around this lot':fmt(bl.edge)+' m away'}, is <span class="k">the exception to look at</span>.`:''}`
-    :nW?`<span class="k">${nW} of ${nK} buildings</span> with a known heat demand within 1.5 km could take the heat within break-even.${nDep?` ${nDep} more ${nDep===1?'depends':'depend'} on the pipe cost.`:''}${unkTxt}`
-    :(()=>{ // J.B., 19 Oct: say how close it is, not only that it misses
-      const kn=all.filter(p=>p.econ.status!=='unknown'&&p.econ.payback&&isFinite(p.econ.payback[0])).sort((a,b)=>a.econ.payback[0]-b.econ.payback[0]), c=kn[0];
-      const yr=!c?'':c.econ.payback[0]>50?'more than 50 years':(c.econ.payback[1]<60&&isFinite(c.econ.payback[1])?`${Math.ceil(c.econ.payback[0])}–${Math.ceil(c.econ.payback[1])} years`:`about ${Math.ceil(c.econ.payback[0])} years at best`);
-      return `None of the ${nK} buildings with a known heat demand within 1.5 km pays back within ${ECON.years} years at today's prices${nDep?`; ${nDep} ${nDep===1?'depends':'depend'} on the pipe cost`:''}.`
-       +(c?` Closest to paying back: <span class="k">${/^[aeiou]/.test((PL1[c.t]||[c.t])[0])?'an':'a'} ${esc((PL1[c.t]||[c.t])[0])} ${fmt(Math.round(c.econ.route/10)*10)} m away by street, ${yr} to pay back</span>. What would bring it closer: a longer payback period, higher gas prices, a cheaper pipe route, or a pipe already in the street.`:'')
-       +`${unkTxt}${inside?` The lot is inside the ${inside.n.replace(/ \(.*/,'')}.`:''}`; })();
+    :(()=>{ // J.B., 19 Oct: no 5-year line; say how close it is, what is counted, and what would change it
+      const life=`over the pipe's ${ECON.life.pipe}-year life`;
+      const kn=all.filter(p=>p.econ.status!=='unknown'&&isFinite(p.econ.payMid)).sort((a,b)=>a.econ.payMid-b.econ.payMid), c=kn[0];
+      const yrs=x=>x>50?'more than 50':String(Math.round(x));
+      const best=c?`Closest to paying back: <span class="k">a ${esc((PL1[c.t]||[c.t])[0])} ${fmt(Math.round(c.econ.route/10)*10)} m away by street, about ${yrs(c.econ.payMid)} years</span>${c.econ.payMid<=50?` (${yrs(c.econ.payback[0])} to ${isFinite(c.econ.payback[1])?yrs(c.econ.payback[1]):'never'}, by cost and efficiency)`:''}.`:'';
+      const head=nW?`<span class="k">${nW} of ${nK} buildings</span> with a known heat demand within 1.5 km cost less to connect than their heat is worth ${life}.${nDep?` ${nDep} more ${nDep===1?'depends':'depend'} on the costs.`:''}`
+        :`None of the ${nK} buildings with a known heat demand within 1.5 km costs less to connect than its heat is worth ${life}${nDep?`; ${nDep} ${nDep===1?'depends':'depend'} on the costs`:''}.`;
+      return `${head} ${best}${nW?'':' What would bring it closer: higher gas prices, a cheaper pipe route, a pipe already in the street, or a cheaper heat pump.'}${unkTxt}${inside?` The lot is inside the ${inside.n.replace(/ \(.*/,'')}.`:''}`; })();
+  const counted=netB<=0?'':`<p class="sub">Counted: the pipe, the connection, a heat pump and its upkeep, at today's energy prices. Not counted: inflation, demand charges, and who pays. Buildings searched to 1.5 km, from a Dutch study of how far data-centre heat travels (RVO 2018).</p>`;
   const PL={housing:['non-market housing building','non-market housing buildings'],school:['school','schools'],campus:['campus','campuses'],care:['care home','care homes'],hospital:['hospital','hospitals'],rec:['recreation centre','recreation centres'],hall:['community league hall','community league halls'],pool:['pool','pools'],arena:['arena','arenas']};
   const kinds=[...new Set(all.map(p=>p.t))].map(t=>{ const n=all.filter(p=>p.t===t).length; return `${n} ${(PL[t]||[t,t])[n===1?0:1]}`; }).join(', ');
-  const recvAns=[kinds||'none found',nW?`${nW} within break-even`:'none within break-even',nDep?`${nDep} depend on pipe cost`:'',nB?`${nB} beyond`:''].filter(Boolean).join('; ');
-  let h=e.tabBar('heat')+`<h2>Who could take the heat</h2><p class="lead">${lead}</p>`
+  const recvAns=[kinds||'none found',nW?`${nW} cost less than the heat is worth`:'none costs less than the heat is worth',nDep?`${nDep} depend on the costs`:'',nB?`${nB} cost more`:''].filter(Boolean).join('; ');
+  let h=e.tabBar('heat')+`<h2>Who could take the heat</h2><p class="lead">${lead}</p>${counted}`
   +BD.sec('h-offer','Heat this size could offer',`${e.rng(r.avail[0]/1000,r.avail[1]/1000,'GWh a year')} with liquid cooling and a heat pump; with air cooling, heat pumps on the chilled-water loop could reuse some of it, but how much is not yet known`,
      `<div class="hfig"><div><b>${e.rng(r.avail[0]/1000,r.avail[1]/1000,'GWh/yr')}</b><span>heat this size could offer (liquid-cooled, heat pump)</span></div><div><b>${e.rng(r.homes[0],r.homes[1],'')}</b><span>homes' heating, as an equal (provincial average)</span></div></div><p class="sub"><a href="#" id="hmath">How the heat figure is worked out ›</a></p>`)
   +BD.sec('h-price','What the heat is worth here',netB<=0?'less than nothing: the heat pump costs more to run than the gas it replaces':(()=>{ const w=gv-pe0/R0.cop[0], b=gv-pe0/R0.cop[1]; return w<0?`−$${(-w).toFixed(1)} (COP 3.0) to $${b.toFixed(1)} (COP 4.5) per MWh after the heat pump`:`$${w.toFixed(1)}–${b.toFixed(1)} per MWh after the heat pump`; })(),
@@ -188,7 +212,7 @@ async function heatIndex(){
     <p class="src">City of Edmonton DESS design guide v8 (2025); Bylaw 17943 and 2026 rates; Utility Advisor 2023; 2021–2024 business plan; Buffa et al. 2019; Edmonton CWEC typical year. Research-agent reads, to check. The design guide's 8 °C winter supply and 4 °C return do not match its own 5 °C design difference; both are shown as written.</p>`; })()}
   `,{finding:true}):'')
   +BD.sec('h-recv','Buildings that could take it',recvAns,
-     `<label class="tgl"><input type="checkbox" id="showB" ${showB?'checked':''}> List buildings beyond break-even too (greyed)</label>${groupRows(all,showB)}`);
+     `<label class="tgl"><input type="checkbox" id="showB" ${showB?'checked':''}> List buildings that cost more than the heat is worth too (greyed)</label>${groupRows(all,showB)}`);
   $('#side').innerHTML=h; e.wireTabs(); BD.draw();
   $('#showB').onchange=ev=>{ A.showBeyond=ev.target.checked; heatIndex(); };
   document.querySelectorAll('#side [data-rid]').forEach(a=>a.onclick=ev=>{ if(ev.target.closest&&ev.target.closest('a')&&!ev.target.closest('a').dataset.rid) return; ev.preventDefault(); openConnection('heat',+a.dataset.rid); });
@@ -219,17 +243,21 @@ async function openConnection(kind,id){ await opps(); const H=BD._heat; if(!H) r
      x.demand?(p.t==='housing'?`Demand: ${p.u} homes × ${R.homeMWh[city]} MWh = <b>${fmt(x.demand)} MWh/yr</b>.`:`Demand (estimate): about ${fmt(p.fa)} m² of floor on its parcel (${p.fm} building${p.fm>1?'s':''}, footprint × storeys at 4 m, from the tool's building heights, at its tallest point, so an upper estimate where a building steps down) × ${(CEUD[city][p.t][0]/3.6).toFixed(3)} MWh/m² for space and water heating (${city==='van'?'BC':'Alberta'} ${CEUD[city][p.t][1]}, NRCan CEUD 2023) = <b>${fmt(x.demand)} MWh/yr</b>. A building's real use can be far from the provincial average.`):(ceudLine(city,p.t,p)||'Demand: not published for this building.'),
      `Net value: $${x.v.toFixed(1)}/MWh of gas − $${x.pe}/MWh ÷ COP (4.5 to 3.0) = <b>${sm(x.net[1])} to ${sm(x.net[0])}</b> per MWh.`,
      x.demand&&x.capped?`Heat it can buy: the smaller of its demand and the heat offered = ${fmt(x.take[0])}–${fmt(x.take[1])} MWh/yr.`:'',
-     x.demand?`Five years of it: ${ECON.years} × ${fmt(x.take[1])} × ${sm(x.net[1])} = <b>${sm(x.val[1],0)}</b> (best case); with COP 3.0, ${ECON.years} × ${fmt(x.take[0])} × ${sm(x.net[0])} = ${sm(x.val[0],0)}.`:'',
-     `Cost to connect: $${fmt(ECON.fixed)} + ${fmt(x.route)} m × $${fmt(ECON.pipe[0])}–${fmt(ECON.pipe[1])}/m = <b>$${fmt(x.cost[0])}–${fmt(x.cost[1])}</b>.`,
-     x.demand?`Break-even route length: (five years of value − $${fmt(ECON.fixed)}) ÷ cost per metre = <b>${x.be[0]>0?fmt(x.be[0])+' m':'none'}</b> best case, <b>${x.be[1]>0?fmt(x.be[1])+' m':'none'}</b> worst case.`:''].filter(Boolean),
-     'Pipe: Persson et al. 2019 (average, 2015 €) and npro (paved urban), DN100, converted at the Bank of Canada 2025 averages (€1 = $1.5782; US$1 = $1.3978), no inflation adjustment. Connection: City of Vancouver NEU connection levy 2026, By-law 9552 Sch. C (fixed part $123,873; $146/kW of peak not included)'+(f.city==='edm'?' — no Edmonton connection charge is published, so Vancouver\'s is used for scale':'')+'. Gas: FortisBC Rate 3 (checked 18 Oct 2026) / ATCO 2026 and the Utilities Consumer Advocate. Electricity: BC Hydro tariff 2026 / AESO 2025 pool price plus EPCOR\'s per-kWh transmission and operating-reserve charges (2026 interim rates, to check); demand charges excluded in both cities.')}
+     `Pipe and connection: $${fmt(ECON.fixed)} + ${fmt(x.route)} m × $${fmt(ECON.pipe[0])}–${fmt(ECON.pipe[1])}/m = <b>$${fmt(x.pipeCost[0])}–${fmt(x.pipeCost[1])}</b>.`,
+     x.demand?`Heat pump: sized from the heat sold, ${fmt(x.take[1])} MWh ÷ ${fmt(ECON.hpFLH[1])}–${fmt(ECON.hpFLH[0])} hours a year at full output = ${x.hpMW[0].toFixed(2)}–${x.hpMW[1].toFixed(2)} MW; × about €${(ECON.hpCapex[0][1]/1e6).toFixed(2)}–${(ECON.hpCapex[1][1]/1e6).toFixed(2)} M per MW (smaller units cost more per MW) = <b>$${fmt(x.hp[0])}–${fmt(x.hp[1])}</b>.`:'',
+     x.demand?`Upkeep: €${fmt(ECON.hpOMfix)} per MW a year + €${ECON.hpOMvar} per MWh, electricity excluded = <b>$${fmt(x.om[0])}–${fmt(x.om[1])} a year</b>.`:'',
+     x.demand?`Money left each year: heat sold × what each MWh is worth after the heat pump's electricity − upkeep = <b>${sm(x.yr[1],0)} to ${sm(x.yr[0],0)}</b>.`:'',
+     x.demand?`Years to pay back (simple, no interest): (pipe + connection + heat pump) ÷ money left each year = <b>${isFinite(x.payback[0])?x.payback[0].toFixed(1):'never'} to ${isFinite(x.payback[1])?x.payback[1].toFixed(1):'never'}</b>; middle case ${isFinite(x.payMid)?x.payMid.toFixed(1):'never'}. The range pairs the cheap pipe, efficient heat pump and long running hours against the costly pipe, less efficient heat pump and short running hours.`:'',
+     x.demand?`Over the parts' life: pipe ${ECON.life.pipe} years, heat pump ${ECON.life.hp}, at ${(ECON.rate*100).toFixed(1)}% a year real (a BC regulated utility's cost of capital). Cost per MWh of heat = (pipe × ${x.crf[0].toFixed(3)} + heat pump × ${x.crf[1].toFixed(3)} + upkeep) ÷ heat sold + electricity ÷ COP = <b>$${x.lcoh[0].toFixed(0)}–${x.lcoh[1].toFixed(0)}</b> (middle $${x.lcohMid.toFixed(0)}), against <b>$${x.v.toFixed(0)}</b> the heat is worth.`:'',
+     x.demand?`Break-even route length over the pipe's life: <b>${x.be[0]>0?fmt(x.be[0])+' m':'none'}</b> best case, <b>${x.be[1]>0?fmt(x.be[1])+' m':'none'}</b> worst case.`:''].filter(Boolean),
+     'Heat pump capital and upkeep: Danish Energy Agency technology data, sheet 40 (Aug 2026, 2025 €); running hours: Odense, Mäntsälä and STACK Oslo (claim). Pipe life: EN 253:2019, 30 years at 120 °C (as quoted in Energiforsk 2022:872). Cost of capital: Squamish NEU feasibility study (Compass, FVB, 2010), 5.6% real. Pipe: Persson et al. 2019 (average, 2015 €) and npro (paved urban), DN100, converted at the Bank of Canada 2025 averages (€1 = $1.5782; US$1 = $1.3978), no inflation adjustment. Connection: City of Vancouver NEU connection levy 2026, By-law 9552 Sch. C (fixed part $123,873; $146/kW of peak not included), used as a stand-in for the cost of connecting a building'+(f.city==='edm'?' — no Edmonton connection charge is published, so Vancouver\'s is used for scale':'')+'. Gas: FortisBC Rate 3 (checked 18 Oct 2026) / ATCO 2026 and the Utilities Consumer Advocate. Electricity: BC Hydro tariff 2026 / AESO 2025 pool price plus EPCOR\'s per-kWh transmission and operating-reserve charges (2026 interim rates, to check); demand charges excluded in both cities.')}
   <h3>Payback and distance</h3>${chart(x)}
   ${x.status==='beyond'&&x.close?`<p class="sub">${draft('What would close the gap:')} ${x.close.map(esc).join('; ')}.</p>`:''}
-  ${x.payback&&isFinite(x.payback[0])?`<p class="sub">Simple payback on the connection levy and pipe only: ${x.payback[0].toFixed(1)}${isFinite(x.payback[1])?'–'+x.payback[1].toFixed(1):'+'} years (heat pump, operation and demand charges not included).</p>`:''}
+  ${x.payback&&isFinite(x.payMid)?`<p class="sub">Years to pay back, counting the pipe, the connection, a heat pump and its upkeep: about ${x.payMid.toFixed(0)} (${x.payback[0].toFixed(0)} to ${isFinite(x.payback[1])?x.payback[1].toFixed(0):'never'}). Simple payback: no interest, today's prices. The pipe is designed to last ${ECON.life.pipe} years, the heat pump ${ECON.life.hp}.</p>`:''}
   <h3>What has to be built</h3><dl><dt>Pipe in the street</dt><dd>${H.nets.some(n=>BD.pip(p.x,p.y,n.r))?'this building is inside a district-energy service area: a network exists nearby, a branch is still needed':'no heat pipe known here — a new supply and return pair along the streets'}</dd>
   <dt>At the data centre</dt><dd>heat pump and pumps in the plant room: the unit alone is about 3.4 m² per MW of heat (manufacturer claim); a whole waste-heat heat-pump plant takes about 100 m² per MW at 1 MW, 50 at 3 MW and 30 at 10 MW (Danish Energy Agency technology catalogue, sheet 40)</dd>${p.de?`<dt>Its heating plant</dt><dd>${esc(p.de)}</dd>`:''}<dt>At the building</dt><dd>an energy transfer station: a room about 6 × 3 m in a building under 13,940 m² (City of Vancouver NEU guidelines)</dd>
   <dt>How hard to connect</dt><dd><span class="cls" style="border-color:${DCOL[p.diff.k]};color:${DCOL[p.diff.k]}">${esc(p.diff.t)}</span> ${esc(p.diff.why)}</dd></dl>
-  <h3>Building it</h3><dl><dt>Cost</dt><dd>$${fmt(x.cost[0])}–${fmt(x.cost[1])} (paved street, DN100 pair; a check: Cambridge MA plans $${fmt(ECON.pipeCheck)}/m)</dd>
+  <h3>Building it</h3><dl><dt>Cost</dt><dd>$${fmt(x.cost[0])}–${fmt(x.cost[1])} (pipe in a paved street, DN100 pair, the connection${x.hp?" and the heat pump":""}; a pipe check: Cambridge MA plans $${fmt(ECON.pipeCheck)}/m)</dd>
   <dt>Time</dt><dd>for scale: the NEU's Quebec St extension, about three blocks, ran from 19 May to an expected fall finish in 2020 (City of Vancouver memo)</dd>
   <dt>Disruption</dt><dd>a trench in the street under a street-use permit; lanes closed block by block${(()=>{ const rp=routePath(p); if(!rp) return ''; const c=Object.entries(rp.cls).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${fmt(v)} m ${k.toLowerCase()}`).join(', '); return c?`. Along this route: ${c} (City ${f.city==='van'?'street use':'functional'} classes)`:''; })()}</dd><dt>Embodied carbon</dt><dd>about ${fmt(x.co2)} t CO₂e for the pipe pair (EPD, pipe only; trench excluded)</dd>
   <dt>Who pays</dt><dd><div class="scn" id="payer">${[['operator','The data centre'],['receiver','The receiver'],['utility','The city or a utility']].map(([k,t])=>`<button data-v="${k}" aria-pressed="${who===k}">${t}</button>`).join('')}</div><span class="sub">${{operator:'The operator builds and owns the pipe and recovers it through the heat price; if the tenant leaves, the pipe may sit idle.',receiver:'The receiver pays to connect and owns the branch; it carries the risk if the data centre stops sending heat.',utility:'A city utility builds and owns the pipe as part of a network and can find other sources if the data centre leaves (the NEU model).'}[who]}</span></dd>
@@ -246,15 +274,15 @@ async function openConnection(kind,id){ await opps(); const H=BD._heat; if(!H) r
 BD.openConnection=openConnection;
 function ladder(L){ const rows=[]; (L.rules||[]).forEach(x=>rows.push(x)); if(!rows.length) return '<p class="sub">Not yet read for this connection.</p>';
   return `<table class="cl">${rows.map(x=>`<tr><td>${esc(x.rung)}</td><td>Vancouver ${rsPill(x.van[0])}<small>${esc(x.van[1]||'')}</small>Edmonton ${rsPill(x.edm[0])}<small>${esc(x.edm[1]||'')}</small></td></tr>`).join('')}</table>`; }
-/* the distance chart: cost to connect rises with route length; five years of value is flat; where they cross is break-even */
+/* the distance chart: cost to connect rises with route length; what the heat can pay for over the pipe's life (after the heat pump) is flat; where they cross is break-even */
 function chart(x){ const W=380,Hh=190,ml=48,mr=10,mt=10,mb=30, D=1600; const vmax=Math.max(x.cost[1]*1.1,ECON.fixed+D*ECON.pipe[1]*0.6,x.val?Math.max(...x.val)*1.2:0);
   const X=d=>ml+d/D*(W-ml-mr), Y=v=>Hh-mb-Math.max(0,v)/vmax*(Hh-mt-mb);
-  let g=`<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="Cost to connect against distance, with five years of heat value">`;
+  let g=`<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="Cost to connect against distance, with what the heat can pay for over the pipe's life">`;
   [0,400,800,1200,1600].forEach(d=>{ g+=`<line x1="${X(d)}" x2="${X(d)}" y1="${mt}" y2="${Hh-mb}" stroke="var(--line)"/><text x="${X(d)}" y="${Hh-mb+14}" fill="var(--faint)" font-size="10" text-anchor="middle">${d} m</text>`; });
   [0.5,1].forEach(k=>{ const v=vmax*k; g+=`<text x="${ml-4}" y="${Y(v)+3}" fill="var(--faint)" font-size="10" text-anchor="end">$${(v/1e6).toFixed(1)}M</text>`; });
   g+=`<path d="M${X(0)},${Y(ECON.fixed)} L${X(D)},${Y(ECON.fixed+D*ECON.pipe[0])} L${X(D)},${Y(ECON.fixed+D*ECON.pipe[1])} Z" fill="var(--fg)" opacity=".10"/>`;
   g+=`<line x1="${X(0)}" y1="${Y(ECON.fixed)}" x2="${X(D)}" y2="${Y(ECON.fixed+D*ECON.pipe[1])}" stroke="var(--muted)"/><line x1="${X(0)}" y1="${Y(ECON.fixed)}" x2="${X(D)}" y2="${Y(ECON.fixed+D*ECON.pipe[0])}" stroke="var(--muted)" stroke-dasharray="3 3"/>`;
-  if(x.val){ const [a,b]=x.val; g+=`<rect x="${X(0)}" y="${Y(Math.max(a,b))}" width="${X(D)-X(0)}" height="${Math.max(1,Y(Math.min(a,b))-Y(Math.max(a,b)))}" fill="#CC746C" opacity=".22"/><text x="${X(D)-4}" y="${Y(Math.max(a,b))-4}" fill="#e39a93" font-size="10" text-anchor="end">5 years of heat value</text>`; }
+  if(x.val){ const [a,b]=x.val; g+=`<rect x="${X(0)}" y="${Y(Math.max(a,b))}" width="${X(D)-X(0)}" height="${Math.max(1,Y(Math.min(a,b))-Y(Math.max(a,b)))}" fill="#CC746C" opacity=".22"/><text x="${X(D)-4}" y="${Y(Math.max(a,b))-4}" fill="#e39a93" font-size="10" text-anchor="end">what the heat can pay for over ${ECON.life.pipe} years</text>`; }
   g+=`<line x1="${X(Math.min(D,x.route))}" x2="${X(Math.min(D,x.route))}" y1="${mt}" y2="${Hh-mb}" stroke="#e9e6e1" stroke-width="1.5"/><text x="${X(Math.min(D,x.route))+4}" y="${mt+10}" fill="#e9e6e1" font-size="10">this route</text>`;
   g+=`<text x="${X(D)-4}" y="${Y(ECON.fixed+D*ECON.pipe[1])+12}" fill="var(--muted)" font-size="10" text-anchor="end">cost to connect</text></svg>`;
   return `<div class="cchart">${g}</div><p class="src">Where the shaded value meets the cost band is the break-even distance. ${x.val?'':'No value line: this building\'s demand is not known.'}</p>`; }

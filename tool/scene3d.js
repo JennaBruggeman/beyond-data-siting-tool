@@ -195,7 +195,7 @@ function heat(d){
   (d.nets||[]).forEach(n=>{ const p=[]; for(let i=0;i<n.r.length;i+=2) p.push(V(n.r[i],n.r[i+1],0.6)); R.ov.add(line(p,C.heat,true,0.9)); const cc=BD.centroid(n.r); label(n.n+(n.src==='van9552'?' (traced)':' (approximate)'),V(cc[0],cc[1],4),'#d1a35e',{prio:5}); });
   const all=(d.all||d.near||[]); const lim=d.lim||40; let shown=0;
   for(const p of all){ if(shown>=lim) break; const nb=snap(p.x,p.y); const col=TCOL[p.t]||C.heat; const beyond=!!p.beyond; const ccol=beyond?C.faint:col;
-    let top; if(nb){ nb.recv=p; nb.recvType=TYPE[p.t]+(beyond?' · beyond break-even':''); tintB(nb,ccol,beyond?0.6:1); top=V(nb.b.c[0],nb.b.c[1],nb.h); }
+    let top; if(nb){ nb.recv=p; nb.recvType=TYPE[p.t]+(beyond?' · costs more than the heat is worth':''); tintB(nb,ccol,beyond?0.6:1); top=V(nb.b.c[0],nb.b.c[1],nb.h); }
     else { top=V(p.x,p.y,8); const s=new T.Mesh(new T.SphereGeometry(1.8,8,6),new T.MeshBasicMaterial({color:ccol})); s.position.copy(top); R.ov.add(s); R.ov.add(line([V(p.x,p.y,0),top],ccol,false,0.6)); }
     if(d.selected!=null&&d.selected!==p.id) { /* dim the others when one connection is open */ }
     const hi=d.selected!=null&&d.selected===p.id; const curve=arc(src,top,Math.min(140,p.dist*0.12));
@@ -207,7 +207,7 @@ function heat(d){
   { const far=Math.min(1500,Math.max(300,...all.slice(0,lim).map(p=>p.dist||0))); frame(far); }
   R.onPick=nb=>{ if(nb.recv&&BD.openConnection) BD.openConnection('heat',nb.recv.id); };
   note('Receivers sit on the building that holds them; hover any building for its height and distance; click a receiver to open its card. '+heightsNote()+'.');
-  key(Object.entries(TYPE).map(([k,t])=>sw(TCOL[k],t)).join('')+sw(C.faint,'beyond break-even (shown, greyed)',true)+sw(C.heat,'district energy (NEU traced, others approximate) · reach rings',true));
+  key(Object.entries(TYPE).map(([k,t])=>sw(TCOL[k],t)).join('')+sw(C.faint,'costs more than the heat is worth (shown, greyed)',true)+sw(C.heat,'district energy (NEU traced, others approximate) · reach rings',true));
 }
 function energy(d){ plantLabels(C.power); baseLabels(); const M=state.M;
   if(d.pv&&d.pv.slots){ for(const p of d.pv.slots) R.ov.add(prism(p,0.25,state.roof+0.4,0x1f2430,C.power,0.6)); if(d.pv.slots.length){ const c=BD.centroid(d.pv.slots[Math.floor(d.pv.slots.length/2)]); label(`solar ≈ ${Math.round(d.pv.kwp)} kWp on ${Math.round(d.pv.m2)} m² of panels`,V(c[0],c[1],state.roof+12),'#a7b4d6',{prio:7,from:V(c[0],c[1],state.roof+0.6)}); } }
