@@ -195,3 +195,4 @@ D. Still open from before
 - ☐ Metro Vancouver treatment plant addresses; City non-potable water systems map; rainwater tank cost; Canadian RAS costs; utility capacity maps; greenhouse area by region (P4); Metro Vancouver residential litres per person (chart only); CSA C448 (optional).
 
 E. Meeting: BC Assessment, Jeremy Buhler, Mon 19 Oct, 1 pm.
+  - 19 Oct meeting (J.B.): calculated values per building are allowed, rounded to a sensible figure. UBC also holds the Residential Inventory Extract and site descriptions. Script written: tool/bca/bca_derive.py (runs on J.B.'s computer; writes heat demand per parcel to 2 significant figures, use group and heating group; prints counts only). Next: J.B. gets access, runs --inspect on each file, sends the column summary.
