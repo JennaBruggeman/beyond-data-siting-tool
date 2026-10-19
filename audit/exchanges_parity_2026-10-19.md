@@ -32,3 +32,9 @@ Research: audit/research_2026-10-19/G_electricity_exchange.md, H_water_exchange.
 ## Security rule revised (J.B., 19 Oct)
 - Substations and utility infrastructure from government or utility sources: shown and used. Generator and fuel data in permits and spec sheets: used in full. Kept by Claude, open to J.B.: no map positions of generators or fuel tanks at real, named data centres.
 - Substation data: NRCan CanVec "Mines, Energy and Communication Networks" (transformer stations; Open Government Licence) — directory robots-blocked for fetch; J.B. to download BC and AB files.
+
+## Substations (19 Oct, later)
+- NRCan CanVec 50K Res_MGT, BC and AB (files 24 Jul 2019; J.B. download): transformer_station points and areas → tool/substations.json (make_substations.py; within each city's extent + 3 km; point and area within 150 m merged). Vancouver 18, Edmonton 28. Source map years: 1986 (Vancouver), 1977 (Edmonton) — dated; newer stations missing, card says so.
+- Electricity card, "The grid nearby": nearest station and count within 2 km. Clark Dr ≈ 1,770 m (2 within 2 km); 555 W Hastings ≈ 1,080 m (1); Edmonton lot ≈ 2,110 m (0).
+- Spare capacity per station is not published by either utility.
+- BC upload arrived truncated (0.9 of 1.6 MB); restaged from J.B.'s Downloads.
