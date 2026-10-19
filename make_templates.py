@@ -105,6 +105,11 @@ out = {'date': '2026-10-19', 'status': 'draft: judged by Claude from each node\'
                  {'id': 'full', 'name': 'How it is worked out', 'who': 'engineers, architects, bylaw professionals', 'asks': 'every setup question'}],
        'rule': 'every node runs in every tier; a tier sets what is asked and shown; facts are never switched off',
        'nodes': {k: {'tier': t, 'parties': p.split(), 'why': r} for k, (t, p, r) in T.items()}}
+# graph for the tool's diagram thumbnail: stage columns and wires, from the same diagram data
+_D = json.load(open(os.path.join(H, 'diagram_data.json')))
+out['graph'] = {'stages': [[s['id'], s['name']] for s in _D['stages']],
+                'nodes': [[n['id'], n['stage']] for n in _D['nodes']],
+                'edges': [[e['from'], e['to']] for e in _D['edges']]}
 for tid in ('resident', 'community', 'full'):
     out[tid + '_count'] = sum(1 for v in T.values() if rank[v[0]] <= rank[tid])
 for path in (os.path.join(H, 'templates.json'), os.path.join(H, 'tool', 'templates.json')):

@@ -73,3 +73,5 @@ Not built yet. J.B. is sending ideas one at a time; build only after all are agr
 - Residents' size text gives the floor the servers need (same figure as the 3D label), not the zone's largest building. At "as large as fits" it gives the zone's floor and the MW range by rack packing.
 - Sweep item: the engine caps size at 40 MW (Edmonton large lots hit it); the card says so.
 - Homes'-power comparison not shown: no BC household electricity figure sourced yet.
+- Tier card shows a thumbnail of the real diagram (stage columns and wires from diagram_data.json, via templates.json 'graph'); this tier's parts lit. Link to the full diagram (private artifact: others can't open it until shared).
+- New 'Where?' card after the tier (own-site path): Vancouver and Edmonton side by side, each with its zoning bylaw and hours cold enough for full free cooling (CWEC, 3,284 / 5,522 h). Picking a city focuses the address search. Examples skip it (they set the city).

@@ -25,23 +25,46 @@ fetch('templates.json').then(r=>r.ok?r.json():null).then(d=>{ BD.TPL=d; }).catch
 BD.tierShows=(node,t)=>{ const T=BD.TPL; if(!T||!T.nodes[node]) return true; const rank={resident:0,community:1,full:2}; return rank[T.nodes[node].tier]<=rank[t||BD.tier()]; };
 
 /* ---------- the choice, inside the landing card ---------- */
-function preview(id){ const T=BD.TPL; if(!T) return ''; const rank={resident:0,community:1,full:2}; const ids=Object.keys(T.nodes); const n=ids.length, cols=23, r=2.4, g=7;
-  const on=ids.filter(k=>rank[T.nodes[k].tier]<=rank[id]).length;
-  const dots=ids.map((k,i)=>{ const x=6+(i%cols)*g, y=6+Math.floor(i/cols)*g, lit=rank[T.nodes[k].tier]<=rank[id]; return `<circle cx="${x}" cy="${y}" r="${r}" fill="${lit?'var(--accent)':'var(--line-2)'}"/>`; }).join('');
-  const W=12+(cols-1)*g, H=12+Math.ceil(n/cols-1)*g;
-  return `<svg class="tprev" viewBox="0 0 ${W} ${H}" role="img" aria-label="${on} of ${n} parts of the tool's logic shown">${dots}</svg><span class="tcount">${on} of ${n} parts shown</span>`; }
+// thumbnail of the real diagram: one column per stage, the same wires; this tier's parts lit, the rest faded
+let LAY=null;
+function layout(){ const G=BD.TPL&&BD.TPL.graph; if(!G) return null; if(LAY) return LAY;
+  const st=G.stages.map(x=>x[0]), col={}; st.forEach(c=>col[c]=[]); G.nodes.forEach(([id,sg])=>(col[sg]||(col[sg]=[])).push(id));
+  const ins={}; G.edges.forEach(([a,b])=>(ins[b]=ins[b]||[]).push(a)); const pos={}, MAXR=17, gy=5, sub=5, gap=16; let x=6;
+  st.forEach(c=>{ const L=col[c]; // order by the mean height of what feeds each node (fewer crossings); long stages wrap into sub-columns
+    const key=id=>{ const f=(ins[id]||[]).map(k=>pos[k]).filter(Boolean); return f.length?f.reduce((s,q)=>s+q[1],0)/f.length:1e3+L.indexOf(id); };
+    const nc=Math.ceil(L.length/MAXR), rows=Math.ceil(L.length/nc);
+    L.sort((a,b)=>key(a)-key(b)).forEach((id,i)=>pos[id]=[x+(i%nc)*sub,6+Math.floor(i/nc)*gy+(MAXR-rows)*gy/2]); x+=(nc-1)*sub+gap; });
+  const H=12+(MAXR-1)*gy, W=x-gap+6; return LAY={pos,W,H,edges:G.edges}; }
+function preview(id){ const T=BD.TPL, Y=layout(); if(!T||!Y) return ''; const rank={resident:0,community:1,full:2}; const lit=k=>T.nodes[k]&&rank[T.nodes[k].tier]<=rank[id];
+  const ids=Object.keys(T.nodes), n=ids.length, on=ids.filter(lit).length;
+  const wires=Y.edges.filter(([a,b])=>Y.pos[a]&&Y.pos[b]).map(([a,b])=>{ const [x1,y1]=Y.pos[a],[x2,y2]=Y.pos[b], on2=lit(a)&&lit(b); return `<path d="M${x1} ${y1}C${(x1+x2)/2} ${y1} ${(x1+x2)/2} ${y2} ${x2} ${y2}" fill="none" stroke="${on2?'var(--accent)':'var(--line-2)'}" stroke-opacity="${on2?.55:.35}" stroke-width=".5"/>`; }).join('');
+  const dots=ids.filter(k=>Y.pos[k]).map(k=>{ const [x,y]=Y.pos[k]; return `<circle cx="${x}" cy="${y}" r="1.6" fill="${lit(k)?'var(--accent)':'var(--line-2)'}"/>`; }).join('');
+  return `<svg class="tprev" viewBox="0 0 ${Y.W} ${Y.H}" role="img" aria-label="The tool's logic diagram: ${on} of ${n} parts shown in this choice">${wires}${dots}</svg><span class="tcount">${on} of ${n} parts shown</span>`; }
 function chooser(card,cont){
   card.innerHTML=`<div class="kind">Beyond Data</div><h2 id="wTitle">What do you want to know?</h2>
    <p class="sub">Every choice runs the same tool. It changes what you are asked and what you see. You can switch at any time.</p>
    <div class="tiers" role="radiogroup">${TIERS.map(t=>`<button class="tier" role="radio" aria-checked="${t.id===tier}" data-t="${t.id}"><b>${esc(t.name)}</b><span>${esc(t.who)}</span><span class="tdo">${esc(t.does)}</span>${preview(t.id)}</button>`).join('')}</div>
-   <p class="sub"><a href="#" id="tBack">← Back</a></p>`;
+   <p class="sub"><a href="#" id="tBack">← Back</a> · <a href="https://claude.ai/artifact/1qrPPrLsLqabEsDQriz6SZ" target="_blank" rel="noopener">See the full diagram</a> (opens in a new tab)</p>`;
   card.querySelectorAll('.tier').forEach(b=>b.onclick=()=>{ BD.setTier(b.dataset.t); cont(); });
   const bk=card.querySelector('#tBack'); if(bk) bk.onclick=e=>{ e.preventDefault(); const w=$('#welcome'); if(w) w.remove(); BD.welcome(); };
   const f=card.querySelector('.tier[aria-checked="true"]')||card.querySelector('.tier'); if(f) f.focus(); }
 function patchWelcome(w){ if(w.dataset.tiered) return; w.dataset.tiered='1'; const card=w.querySelector('.wcard'); if(!card) return;
-  const own=$('#wOwn'); if(own){ const go=own.onclick; own.onclick=()=>chooser(card,()=>go&&go()); }
+  const own=$('#wOwn'); if(own){ const go=own.onclick; own.onclick=()=>chooser(card,()=>whereCard(card,go)); }
   w.querySelectorAll('#wList .ex').forEach(b=>{ const go=b.onclick; b.onclick=()=>chooser(card,()=>go&&go()); }); }
 new MutationObserver(()=>{ const w=document.getElementById('welcome'); if(w) setTimeout(()=>patchWelcome(w),0); }).observe(document.body,{childList:true});
+
+/* ---------- where: both cities side by side, as equals ---------- */
+// hours at or below about 8 °C, when dry coolers alone can cool air-cooled servers: CWEC typical year, counted 18 Oct 2026 (audit/plant_sources_2026-10-18.md)
+const CITY=[{id:'van',name:'Vancouver',rules:'Zoning and Development By-law',cold:'about 3,300'},{id:'edm',name:'Edmonton',rules:'Zoning Bylaw 20001',cold:'about 5,500'}];
+function whereCard(card,go){
+  card.innerHTML=`<div class="kind">Beyond Data</div><h2 id="wTitle">Where?</h2>
+   <p class="sub">Each city has its own rules, climate and data. The tool treats them the same way.</p>
+   <div class="cities">${CITY.map(c=>`<button class="city" data-c="${c.id}"><b>${c.name}</b><span>${esc(c.rules)}</span><span>${c.cold} hours a year cold enough for outside air to do all the cooling (typical weather year)</span></button>`).join('')}</div>
+   <p class="sub">Then search an address or click a lot on the map.</p>
+   <p class="sub"><a href="#" id="cBack">← Back</a></p>`;
+  card.querySelectorAll('.city').forEach(b=>b.onclick=async()=>{ const c=b.dataset.c; if(BD.S.city!==c) await BD.setCity(c); go&&go(); setTimeout(()=>{ const q=$('#q'); if(q) q.focus(); },60); });
+  card.querySelector('#cBack').onclick=e=>{ e.preventDefault(); chooser(card,()=>whereCard(card,go)); };
+  const f=card.querySelector(`.city[data-c="${BD.S.city}"]`)||card.querySelector('.city'); if(f) f.focus(); }
 
 /* ---------- the switch, under the step bar ---------- */
 function tierChip(){ const sd=$('#side'); if(!sd) return; const fb=sd.querySelector(':scope > .flowbar'); if(!fb||sd.querySelector(':scope > .tierchip')) return;

@@ -332,11 +332,12 @@ body.wcon.wckey #wc .keyb{bottom:auto;top:12px} #wc .keyb:hover{color:var(--fg)}
 
 /* tiers (19 Oct 2026) */
 .tiers{display:grid;gap:8px;margin:10px 0 6px}
-.tier{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"n p" "w p" "d c";gap:2px 14px;text-align:left;background:var(--panel-2);border:1px solid var(--line-2);border-radius:8px;padding:10px 12px;color:var(--fg);cursor:pointer;font:inherit}
-.tier b{grid-area:n;font-weight:400;font-size:15px}.tier span{grid-area:w;color:var(--muted);font-size:12.5px}.tier .tdo{grid-area:d;color:var(--faint)}
-.tier .tprev{grid-area:p;width:120px;height:auto;align-self:center}.tier .tcount{grid-area:c;font-size:11px;color:var(--faint);text-align:right}
+.tier{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"n p" "w p" "d p" "d c";grid-template-rows:auto auto 1fr auto;gap:2px 14px;text-align:left;background:var(--panel-2);border:1px solid var(--line-2);border-radius:8px;padding:10px 12px;color:var(--fg);cursor:pointer;font:inherit}
+.tier b{grid-area:n;font-weight:400;font-size:15px}.tier span{grid-area:w;color:var(--muted);font-size:12.5px}.tier .tdo{grid-area:d;color:var(--faint);align-self:start;margin-top:4px}
+.tier .tprev{grid-area:p;width:150px;height:auto;align-self:center}.tier .tcount{grid-area:c;font-size:11px;color:var(--faint);text-align:right}
 .tier:hover,.tier:focus-visible,.tier[aria-checked="true"]{border-color:var(--accent)}
-@media (max-width:480px){.tier{grid-template-columns:1fr;grid-template-areas:"n" "w" "d" "p" "c"}.tier .tcount{text-align:left}}
+.cities{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 6px}.city{display:grid;gap:4px;text-align:left;background:var(--panel-2);border:1px solid var(--line-2);border-radius:8px;padding:12px;color:var(--fg);cursor:pointer;font:inherit}.city b{font-weight:400;font-size:15px}.city span{color:var(--muted);font-size:12.5px}.city:hover,.city:focus-visible{border-color:var(--accent)}
+@media (max-width:480px){.cities{grid-template-columns:1fr}.tier{grid-template-columns:1fr;grid-template-areas:"n" "w" "d" "p" "c"}.tier .tcount{text-align:left}}
 .tierchip{display:flex;align-items:center;gap:8px;margin:2px 0 8px;font-size:12px;color:var(--muted)}
 .tierchip select{background:var(--panel-2);color:var(--fg);border:1px solid var(--line-2);border-radius:5px;padding:3px 6px;font:inherit;font-size:12px}
 .assumed{list-style:none;padding:0;margin:4px 0 12px}.assumed li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;align-items:baseline}
