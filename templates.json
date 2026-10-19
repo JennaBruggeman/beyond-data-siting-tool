@@ -1,0 +1,1402 @@
+{
+ "date": "2026-10-19",
+ "status": "draft: judged by Claude from each node's meaning; no user testing yet; sensitivity test to follow",
+ "tiers": [
+  {
+   "id": "resident",
+   "name": "What it means for me",
+   "who": "residents and other laypeople",
+   "asks": "where, and maybe how big; other answers assumed, shown and changeable"
+  },
+  {
+   "id": "community",
+   "name": "What it means for the neighbourhood",
+   "who": "councillors, community groups, receivers, policy planners",
+   "asks": "every setup question"
+  },
+  {
+   "id": "full",
+   "name": "How it is worked out",
+   "who": "engineers, architects, bylaw professionals",
+   "asks": "every setup question"
+  }
+ ],
+ "rule": "every node runs in every tier; a tier sets what is asked and shown; facts are never switched off",
+ "nodes": {
+  "parcel": {
+   "tier": "resident",
+   "parties": [
+    "host",
+    "city",
+    "neighbours"
+   ],
+   "why": "where: the one thing a resident always gives"
+  },
+  "start_case": {
+   "tier": "resident",
+   "parties": [
+    "host",
+    "operator"
+   ],
+   "why": "new, shared, retrofit or leased: assumed for residents, shown and changeable"
+  },
+  "receivers": {
+   "tier": "community",
+   "parties": [
+    "receiver"
+   ],
+   "why": "who could take the heat"
+  },
+  "receiver_temp": {
+   "tier": "full",
+   "parties": [
+    "receiver"
+   ],
+   "why": "engineering input"
+  },
+  "receptors": {
+   "tier": "community",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "who is close enough to hear it"
+  },
+  "zone": {
+   "tier": "resident",
+   "parties": [
+    "city",
+    "neighbours"
+   ],
+   "why": "what the land is zoned for"
+  },
+  "cooling_type": {
+   "tier": "community",
+   "parties": [
+    "operator",
+    "neighbours"
+   ],
+   "why": "drives heat, water and sound; assumed for residents"
+  },
+  "weather": {
+   "tier": "full",
+   "parties": [],
+   "why": "data the tool reads"
+  },
+  "plant_schedule": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering input"
+  },
+  "lighting_plan": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering input"
+  },
+  "massing": {
+   "tier": "resident",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "how big it looks (moved to residents, 19 Oct)"
+  },
+  "spare_cooling": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering input"
+  },
+  "area": {
+   "tier": "full",
+   "parties": [],
+   "why": "data the tool reads"
+  },
+  "plot_ratio": {
+   "tier": "full",
+   "parties": [
+    "city"
+   ],
+   "why": "zoning detail"
+  },
+  "host_building": {
+   "tier": "community",
+   "parties": [
+    "host"
+   ],
+   "why": "the building it would sit in"
+  },
+  "flood_area": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "site risk to the facility"
+  },
+  "sewer_flow": {
+   "tier": "full",
+   "parties": [
+    "utility"
+   ],
+   "why": "engineering input"
+  },
+  "floor_area": {
+   "tier": "community",
+   "parties": [
+    "host",
+    "city"
+   ],
+   "why": "how big"
+  },
+  "server_floor": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "it_load_outside": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "it_load_claim": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "it_load_actual": {
+   "tier": "community",
+   "parties": [
+    "operator",
+    "utility",
+    "ratepayers"
+   ],
+   "why": "how much power it draws"
+  },
+  "servers": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "envelope": {
+   "tier": "community",
+   "parties": [
+    "city",
+    "neighbours"
+   ],
+   "why": "what the zone lets it be"
+  },
+  "component_space": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "hall_area": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "size_fit": {
+   "tier": "resident",
+   "parties": [
+    "host",
+    "city",
+    "neighbours"
+   ],
+   "why": "how big a data centre fits here"
+  },
+  "heat_rejected": {
+   "tier": "community",
+   "parties": [
+    "receiver",
+    "climate"
+   ],
+   "why": "the heat it gives off"
+  },
+  "heat_temp": {
+   "tier": "full",
+   "parties": [
+    "receiver"
+   ],
+   "why": "engineering"
+  },
+  "liquid_capture": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "cop": {
+   "tier": "full",
+   "parties": [
+    "receiver"
+   ],
+   "why": "engineering"
+  },
+  "heat_captured": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "heat_delivered": {
+   "tier": "community",
+   "parties": [
+    "receiver"
+   ],
+   "why": "heat that could be offered"
+  },
+  "hp_electricity": {
+   "tier": "full",
+   "parties": [
+    "receiver"
+   ],
+   "why": "engineering"
+  },
+  "erf": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "industry metric"
+  },
+  "heat_in_water": {
+   "tier": "full",
+   "parties": [],
+   "why": "engineering"
+  },
+  "free_cooling_hours": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "pue": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "industry metric"
+  },
+  "spare_capacity": {
+   "tier": "community",
+   "parties": [
+    "utility",
+    "ratepayers"
+   ],
+   "why": "power it could lend the grid"
+  },
+  "backup_hours": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "flexible_load": {
+   "tier": "community",
+   "parties": [
+    "utility",
+    "ratepayers"
+   ],
+   "why": "power it could shift off the peak"
+  },
+  "load_factor": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "evaporation": {
+   "tier": "resident",
+   "parties": [
+    "utility",
+    "public",
+    "neighbours"
+   ],
+   "why": "drinking water it would use"
+  },
+  "blowdown": {
+   "tier": "full",
+   "parties": [
+    "utility"
+   ],
+   "why": "engineering"
+  },
+  "wue": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "industry metric"
+  },
+  "water_behind_electricity": {
+   "tier": "community",
+   "parties": [
+    "climate"
+   ],
+   "why": "water used to make its power"
+  },
+  "rainwater": {
+   "tier": "community",
+   "parties": [
+    "utility"
+   ],
+   "why": "rain it could collect"
+  },
+  "grid_co2": {
+   "tier": "resident",
+   "parties": [
+    "climate",
+    "public"
+   ],
+   "why": "carbon from its electricity"
+  },
+  "generator_co2": {
+   "tier": "community",
+   "parties": [
+    "climate"
+   ],
+   "why": "carbon from backup generators"
+  },
+  "generator_nox_pm": {
+   "tier": "resident",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "air near the site"
+  },
+  "refrigerant_co2e": {
+   "tier": "full",
+   "parties": [
+    "climate"
+   ],
+   "why": "small, technical"
+  },
+  "embodied_it": {
+   "tier": "community",
+   "parties": [
+    "climate"
+   ],
+   "why": "carbon in the servers"
+  },
+  "embodied_building": {
+   "tier": "community",
+   "parties": [
+    "climate"
+   ],
+   "why": "carbon in the building"
+  },
+  "noise_level": {
+   "tier": "resident",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "what neighbours would hear"
+  },
+  "lf_flag": {
+   "tier": "resident",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "low hum"
+  },
+  "light_at_window": {
+   "tier": "resident",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "light at night"
+  },
+  "shadow": {
+   "tier": "resident",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "shade on neighbours"
+  },
+  "visibility": {
+   "tier": "resident",
+   "parties": [
+    "neighbours",
+    "public"
+   ],
+   "why": "what is seen from the street"
+  },
+  "watched_area": {
+   "tier": "resident",
+   "parties": [
+    "neighbours",
+    "public"
+   ],
+   "why": "cameras and fences"
+  },
+  "jobs": {
+   "tier": "resident",
+   "parties": [
+    "workers",
+    "public"
+   ],
+   "why": "work created"
+  },
+  "ground": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "treatment_energy": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "blowdown_recovery": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "pv_roof": {
+   "tier": "community",
+   "parties": [
+    "climate"
+   ],
+   "why": "its own solar"
+  },
+  "pv_facade": {
+   "tier": "community",
+   "parties": [
+    "climate",
+    "neighbours"
+   ],
+   "why": "solar on the facade"
+  },
+  "genset_test": {
+   "tier": "resident",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "generator tests: noise and exhaust"
+  },
+  "hvo_swap": {
+   "tier": "community",
+   "parties": [
+    "climate"
+   ],
+   "why": "cleaner generator fuel"
+  },
+  "fuel_on_site": {
+   "tier": "resident",
+   "parties": [
+    "neighbours",
+    "city"
+   ],
+   "why": "fuel kept on site: amount and type only, never location"
+  },
+  "vibration_rank": {
+   "tier": "resident",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "vibration"
+  },
+  "workload_control": {
+   "tier": "community",
+   "parties": [
+    "operator",
+    "public"
+   ],
+   "why": "who controls the computing"
+  },
+  "sewer_sink": {
+   "tier": "full",
+   "parties": [
+    "utility"
+   ],
+   "why": "engineering"
+  },
+  "surface_water_sink": {
+   "tier": "full",
+   "parties": [
+    "utility",
+    "nations"
+   ],
+   "why": "engineering"
+  },
+  "rooftop_solar": {
+   "tier": "community",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "solar on roofs nearby"
+  },
+  "self_gen_rules": {
+   "tier": "full",
+   "parties": [
+    "utility"
+   ],
+   "why": "rules detail"
+  },
+  "electricity_price": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "operator's cost"
+  },
+  "water_supply": {
+   "tier": "community",
+   "parties": [
+    "utility",
+    "public"
+   ],
+   "why": "water the city can supply"
+  },
+  "existing_building": {
+   "tier": "community",
+   "parties": [
+    "host",
+    "city"
+   ],
+   "why": "reusing a building"
+  },
+  "ambient_cover": {
+   "tier": "full",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "engineering"
+  },
+  "interconnection": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "operator's choice"
+  },
+  "reclaimed_makeup": {
+   "tier": "community",
+   "parties": [
+    "utility"
+   ],
+   "why": "reusing treated water"
+  },
+  "greywater_neighbours": {
+   "tier": "community",
+   "parties": [
+    "neighbours",
+    "utility"
+   ],
+   "why": "neighbours' greywater"
+  },
+  "borefield": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "ates": {
+   "tier": "full",
+   "parties": [
+    "operator",
+    "utility"
+   ],
+   "why": "engineering"
+  },
+  "deep_geo": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "flood_exposure": {
+   "tier": "community",
+   "parties": [
+    "city"
+   ],
+   "why": "flood risk"
+  },
+  "service_class": {
+   "tier": "full",
+   "parties": [
+    "utility"
+   ],
+   "why": "engineering"
+  },
+  "offerable_area": {
+   "tier": "community",
+   "parties": [
+    "host",
+    "public"
+   ],
+   "why": "space it could share"
+  },
+  "receiver_radius": {
+   "tier": "full",
+   "parties": [
+    "receiver"
+   ],
+   "why": "method"
+  },
+  "heat_density": {
+   "tier": "full",
+   "parties": [
+    "receiver"
+   ],
+   "why": "method"
+  },
+  "linear_heat_density": {
+   "tier": "full",
+   "parties": [
+    "receiver"
+   ],
+   "why": "method"
+  },
+  "distribution_cost": {
+   "tier": "full",
+   "parties": [
+    "receiver",
+    "utility"
+   ],
+   "why": "pipe cost detail"
+  },
+  "receiver_demand": {
+   "tier": "community",
+   "parties": [
+    "receiver"
+   ],
+   "why": "how much heat the receiver needs"
+  },
+  "deprivation": {
+   "tier": "community",
+   "parties": [
+    "neighbours",
+    "public"
+   ],
+   "why": "who lives in the affected area"
+  },
+  "people_affected": {
+   "tier": "resident",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "people within reach"
+  },
+  "receivers_nearby": {
+   "tier": "resident",
+   "parties": [
+    "receiver",
+    "neighbours"
+   ],
+   "why": "buildings nearby that could use the heat"
+  },
+  "competing_sources": {
+   "tier": "community",
+   "parties": [
+    "receiver",
+    "utility"
+   ],
+   "why": "other heat sources"
+  },
+  "refuge_people": {
+   "tier": "resident",
+   "parties": [
+    "public",
+    "neighbours"
+   ],
+   "why": "people a refuge could hold"
+  },
+  "clean_air_volume": {
+   "tier": "resident",
+   "parties": [
+    "public",
+    "neighbours"
+   ],
+   "why": "clean-air room"
+  },
+  "cooling_centre_people": {
+   "tier": "resident",
+   "parties": [
+    "public",
+    "neighbours"
+   ],
+   "why": "cooling room"
+  },
+  "homes_heated": {
+   "tier": "resident",
+   "parties": [
+    "receiver",
+    "neighbours",
+    "ratepayers"
+   ],
+   "why": "homes its heat could warm"
+  },
+  "greenhouse_area": {
+   "tier": "community",
+   "parties": [
+    "receiver",
+    "public"
+   ],
+   "why": "greenhouse"
+  },
+  "aquaculture_tonnes": {
+   "tier": "community",
+   "parties": [
+    "receiver"
+   ],
+   "why": "fish"
+  },
+  "algae_kg": {
+   "tier": "community",
+   "parties": [
+    "receiver"
+   ],
+   "why": "algae"
+  },
+  "insect_check": {
+   "tier": "full",
+   "parties": [
+    "receiver"
+   ],
+   "why": "check only"
+  },
+  "distributed_servers_homes": {
+   "tier": "community",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "servers as heaters in homes"
+  },
+  "ev_stalls": {
+   "tier": "resident",
+   "parties": [
+    "neighbours",
+    "public"
+   ],
+   "why": "EV charging nearby"
+  },
+  "ev_area": {
+   "tier": "community",
+   "parties": [
+    "city"
+   ],
+   "why": "space for charging"
+  },
+  "stored_heat": {
+   "tier": "community",
+   "parties": [
+    "receiver"
+   ],
+   "why": "heat stored for winter"
+  },
+  "storage_footprint": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "sewage_heat": {
+   "tier": "community",
+   "parties": [
+    "utility"
+   ],
+   "why": "a rival heat source"
+  },
+  "copper_tonnes": {
+   "tier": "community",
+   "parties": [
+    "future"
+   ],
+   "why": "materials to recover"
+  },
+  "ewaste": {
+   "tier": "community",
+   "parties": [
+    "future",
+    "public"
+   ],
+   "why": "electronic waste"
+  },
+  "rare_earth": {
+   "tier": "community",
+   "parties": [
+    "future",
+    "nations"
+   ],
+   "why": "rare earths"
+  },
+  "battery": {
+   "tier": "community",
+   "parties": [
+    "utility",
+    "ratepayers"
+   ],
+   "why": "batteries for the grid"
+  },
+  "ups_flex": {
+   "tier": "community",
+   "parties": [
+    "utility",
+    "ratepayers"
+   ],
+   "why": "backup batteries lent to the grid"
+  },
+  "btes": {
+   "tier": "community",
+   "parties": [
+    "receiver",
+    "neighbours"
+   ],
+   "why": "ground heat store for neighbours"
+  },
+  "tes_volume": {
+   "tier": "full",
+   "parties": [
+    "receiver"
+   ],
+   "why": "engineering"
+  },
+  "absorption": {
+   "tier": "community",
+   "parties": [
+    "neighbours",
+    "receiver"
+   ],
+   "why": "cooling for neighbours"
+  },
+  "demand_profile": {
+   "tier": "full",
+   "parties": [
+    "receiver"
+   ],
+   "why": "method"
+  },
+  "price_floor": {
+   "tier": "community",
+   "parties": [
+    "operator",
+    "receiver"
+   ],
+   "why": "lowest price the operator could take"
+  },
+  "price_ceiling": {
+   "tier": "community",
+   "parties": [
+    "receiver",
+    "ratepayers"
+   ],
+   "why": "most a buyer would pay"
+  },
+  "window": {
+   "tier": "community",
+   "parties": [
+    "operator",
+    "receiver"
+   ],
+   "why": "whether a price both accept exists"
+  },
+  "crf": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "finance method"
+  },
+  "lcoh": {
+   "tier": "community",
+   "parties": [
+    "receiver",
+    "ratepayers"
+   ],
+   "why": "cost of the heat"
+  },
+  "payback": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "investor's return"
+  },
+  "risk_term": {
+   "tier": "community",
+   "parties": [
+    "receiver",
+    "operator"
+   ],
+   "why": "what if the data centre leaves"
+  },
+  "capex_split": {
+   "tier": "community",
+   "parties": [
+    "operator",
+    "receiver",
+    "utility",
+    "city"
+   ],
+   "why": "who pays which part"
+  },
+  "affordability": {
+   "tier": "resident",
+   "parties": [
+    "neighbours",
+    "ratepayers"
+   ],
+   "why": "what heat would cost a household"
+  },
+  "build_cost": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "operator's cost"
+  },
+  "horizons": {
+   "tier": "community",
+   "parties": [
+    "future"
+   ],
+   "why": "how long each part lasts"
+  },
+  "lead_time": {
+   "tier": "community",
+   "parties": [
+    "utility"
+   ],
+   "why": "time to connect"
+  },
+  "grid_headroom": {
+   "tier": "community",
+   "parties": [
+    "utility",
+    "ratepayers"
+   ],
+   "why": "room on the grid"
+  },
+  "crossing_type": {
+   "tier": "full",
+   "parties": [
+    "utility"
+   ],
+   "why": "engineering"
+  },
+  "standoff": {
+   "tier": "resident",
+   "parties": [
+    "neighbours",
+    "public"
+   ],
+   "why": "fence and setback at the street"
+  },
+  "noise_limit": {
+   "tier": "resident",
+   "parties": [
+    "neighbours",
+    "city"
+   ],
+   "why": "the noise rule that protects neighbours"
+  },
+  "licence_flag": {
+   "tier": "community",
+   "parties": [
+    "utility",
+    "nations"
+   ],
+   "why": "water licence"
+  },
+  "ev_exemption": {
+   "tier": "full",
+   "parties": [
+    "utility"
+   ],
+   "why": "rules detail"
+  },
+  "row_cost": {
+   "tier": "community",
+   "parties": [
+    "city",
+    "public"
+   ],
+   "why": "cost of using the street"
+  },
+  "reserved_cost": {
+   "tier": "community",
+   "parties": [
+    "ratepayers",
+    "utility"
+   ],
+   "why": "cost of unused grid capacity"
+  },
+  "lrmc_bc": {
+   "tier": "community",
+   "parties": [
+    "ratepayers"
+   ],
+   "why": "cost of new power to BC"
+  },
+  "zoning_status": {
+   "tier": "resident",
+   "parties": [
+    "city",
+    "neighbours"
+   ],
+   "why": "is it allowed here"
+  },
+  "rezoning_price": {
+   "tier": "community",
+   "parties": [
+    "city",
+    "public"
+   ],
+   "why": "what a rezoning takes"
+  },
+  "consultation": {
+   "tier": "resident",
+   "parties": [
+    "neighbours",
+    "nations",
+    "public"
+   ],
+   "why": "how people get a say"
+  },
+  "construction_time": {
+   "tier": "resident",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "how long building takes"
+  },
+  "pv_share": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "pv_cost": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "operator's cost"
+  },
+  "peak_relief": {
+   "tier": "community",
+   "parties": [
+    "utility",
+    "ratepayers"
+   ],
+   "why": "easing the grid at peak"
+  },
+  "ground_warming": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "floor_load_need": {
+   "tier": "full",
+   "parties": [
+    "host"
+   ],
+   "why": "engineering"
+  },
+  "displaced_source": {
+   "tier": "community",
+   "parties": [
+    "receiver",
+    "climate"
+   ],
+   "why": "what the receiver uses now"
+  },
+  "hourly_overlap": {
+   "tier": "full",
+   "parties": [
+    "receiver"
+   ],
+   "why": "method"
+  },
+  "cfd_score": {
+   "tier": "full",
+   "parties": [],
+   "why": "counter-example for professionals"
+  },
+  "ledger": {
+   "tier": "community",
+   "parties": [
+    "operator",
+    "host",
+    "receiver",
+    "utility",
+    "city",
+    "neighbours",
+    "public"
+   ],
+   "why": "who gains and loses"
+  },
+  "tradeoffs": {
+   "tier": "resident",
+   "parties": [
+    "neighbours",
+    "public"
+   ],
+   "why": "the trade-offs, in each tier's words"
+  },
+  "commitment": {
+   "tier": "community",
+   "parties": [
+    "receiver",
+    "operator"
+   ],
+   "why": "how firm the exchange is"
+  },
+  "futures": {
+   "tier": "community",
+   "parties": [
+    "future",
+    "public"
+   ],
+   "why": "what it could become"
+  },
+  "property_tax": {
+   "tier": "community",
+   "parties": [
+    "city",
+    "public"
+   ],
+   "why": "tax it pays the city"
+  },
+  "tax_split": {
+   "tier": "resident",
+   "parties": [
+    "public",
+    "city"
+   ],
+   "why": "where its tax goes"
+  },
+  "untaxed_equipment": {
+   "tier": "full",
+   "parties": [
+    "city"
+   ],
+   "why": "tax detail"
+  },
+  "computing_served": {
+   "tier": "community",
+   "parties": [
+    "public"
+   ],
+   "why": "who the computing serves"
+  },
+  "afterlife": {
+   "tier": "community",
+   "parties": [
+    "future",
+    "public"
+   ],
+   "why": "what happens when it closes"
+  },
+  "heat_flux_site": {
+   "tier": "community",
+   "parties": [
+    "neighbours",
+    "climate"
+   ],
+   "why": "heat given off per m²"
+  },
+  "heat_plume_dT": {
+   "tier": "resident",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "warmer air near the cooling units"
+  },
+  "recirculation_flag": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "uhi_context": {
+   "tier": "resident",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "urban heat in the area"
+  },
+  "genset_emission_rate": {
+   "tier": "full",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "engineering"
+  },
+  "air_screen_1h": {
+   "tier": "full",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "method"
+  },
+  "no2_at_receptor": {
+   "tier": "full",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "method"
+  },
+  "air_vs_objective": {
+   "tier": "resident",
+   "parties": [
+    "neighbours",
+    "public"
+   ],
+   "why": "air at neighbours against the limits"
+  },
+  "air_permit_trigger": {
+   "tier": "community",
+   "parties": [
+    "city",
+    "neighbours"
+   ],
+   "why": "whether an air permit is needed"
+  },
+  "free_cooling_hours_2050s": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "homes_heated_2050s": {
+   "tier": "resident",
+   "parties": [
+    "receiver",
+    "neighbours"
+   ],
+   "why": "homes its heat could warm in the 2050s"
+  },
+  "water_restriction_rule": {
+   "tier": "resident",
+   "parties": [
+    "utility",
+    "public"
+   ],
+   "why": "what a drought would ask of it"
+  },
+  "restriction_history": {
+   "tier": "community",
+   "parties": [
+    "utility",
+    "public"
+   ],
+   "why": "recent water restrictions"
+  },
+  "importance_cat": {
+   "tier": "full",
+   "parties": [
+    "city"
+   ],
+   "why": "engineering"
+  },
+  "seismic_sa02": {
+   "tier": "full",
+   "parties": [
+    "city"
+   ],
+   "why": "engineering"
+  },
+  "refuge_after_quake": {
+   "tier": "resident",
+   "parties": [
+    "public",
+    "neighbours"
+   ],
+   "why": "whether it could shelter people after an earthquake"
+  },
+  "battery_code_path": {
+   "tier": "community",
+   "parties": [
+    "city",
+    "neighbours"
+   ],
+   "why": "battery safety rules"
+  },
+  "nations_named": {
+   "tier": "resident",
+   "parties": [
+    "nations"
+   ],
+   "why": "whose lands these are"
+  },
+  "city_commitments": {
+   "tier": "community",
+   "parties": [
+    "nations",
+    "city"
+   ],
+   "why": "City commitments to the Nations"
+  },
+  "vibration_target": {
+   "tier": "community",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "vibration limit (reference)"
+  },
+  "embodied_rule": {
+   "tier": "community",
+   "parties": [
+    "climate",
+    "city"
+   ],
+   "why": "embodied carbon rule"
+  },
+  "heat_value_split": {
+   "tier": "community",
+   "parties": [
+    "operator",
+    "utility",
+    "receiver"
+   ],
+   "why": "who keeps the value of the heat"
+  },
+  "power_bill_effect": {
+   "tier": "resident",
+   "parties": [
+    "ratepayers",
+    "neighbours"
+   ],
+   "why": "effect on household power bills"
+  }
+ },
+ "resident_count": 41,
+ "community_count": 115,
+ "full_count": 184
+}

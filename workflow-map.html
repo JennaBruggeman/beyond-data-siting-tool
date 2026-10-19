@@ -273,10 +273,10 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "rule": "A quantity's confidence is the lowest of its inputs; a condition's is the lowest of its quantities; a match fails at its weakest link; burdens are recorded beside, never netted.",
 "counts": {
 "inputs": 17,
-"quantities": 139,
+"quantities": 167,
 "conditions": 101,
 "opportunities": 15,
-"sources": 533
+"sources": 613
 }
 },
 "stages": [
@@ -738,8 +738,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "size",
 "name": "IT load, estimated from outside",
-"formula": "server_floor × density; density from RVO 4.38 MWh/m²·yr ÷ 8,760 h (≈ 500 W/m²) or measured 355–667 W/m² (US federal DCs) up to 1,076–5,382 W/m² (modelled large DCs)",
-"coef": "RVO 2018 p.4: 4.38 MWh/m² gross floor (BVO) per year, from CE Delft, validated with MJA3 (≈ 500 W/m² average); measured 33–62 W/ft² (US federal); modelled 100–500 W/ft²",
+"formula": "hall floor ÷ m² of hall per MW: 290–630 (typical) or about 250 (high density); IT MW = hall area ÷ that figure (M95, 19 Oct 2026: aligned to the tool)",
+"coef": "Tool: 290–630 m² of hall per MW (≈ 1,590–3,450 W/m²), five built Canadian halls, operator claims: eStruxture VAN-1 ≈ 290, Hut 8 Vault ≈ 557, Qu EDM1 ≈ 584, Cologix VAN2 ≈ 619, VAN5 ≈ 627 (sources/16 §2.7); high density ≈ 250 (NEXTDC S3, QScale, operator claims). Context, not used: RVO 2018 ≈ 500 W/m² of server-room floor ('an order of magnitude'); US federal measured 355–667 W/m² — older, lower-density rooms; LBNL models 186–2,325 m²/MW",
 "unit": "MW",
 "sources": [
 "rvo2018",
@@ -778,7 +778,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 }
 ],
 "conf": 60,
-"status": "confirmed (RVO primary read)",
+"status": "operator claims for the figure used (conf 60); government figures kept as context",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -862,8 +862,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "size",
 "name": "IT load, actual (range)",
-"formula": "nameplate claim × utilisation 0.20–0.60, bounded above by measured whole-building energy; or outside estimate × utilisation when no claim",
-"coef": "colocation server utilisation 0.21→0.35 (LBNL 2024); capacity utilisation 0.5 (LBNL); average ÷ peak ≈ 0.6 (Fan et al. 2007); leased share proxy: Digital Realty Toronto occupancy 96.4%, 55.8 MW white-space (Q2 2025 supplemental p.24) — occupancy ≠ utilisation; measured whole-building ceiling (City energy report): 555 W Hastings site EUI 1.84 GJ/m² → 37.4 GWh/yr total, 32.5 GWh non-heat ≈ 3.7 MW average for the whole 73,000 m² tower, data centre and offices together — so the ≥3.7 MW of operator nameplate claims cannot all be running at once; 1050 W Pender 11.2 GWh non-heat ≈ 1.3 MW avg; 900 W Hastings 0.57 MW; 111 E 5th 0.45 MW (no data centre yet); Equinix 10-K FY2024 (public filing, other operator): cabinet utilisation = cabinet space billed ÷ total cabinet capacity \"taking into consideration power limitations\" — Americas 81% (116,700 of 144,100 cabinets, 107 IBXs), EMEA 78%, Asia-Pacific 75%, company 78% (79% in 2023); MRR per cabinet Americas $2,550/month; new IBXs built for power and cooling twice that of earlier ones; Vancouver is a leased-only Equinix metro; Calgary CL1–3 and Kamloops KA1 (2020 acquisitions) listed in Schedule III; CALIBRATION: Telia Helsinki snapshot ERF 0.75 and PUE 1.152 with 4.11 MW waste heat imply 4.8 MW actual against 24 MW IT nameplate = 0.20 (one day, hall partly built out) — the low end of the band should be 0.20, not 0.35",
+"formula": "IT MW × 8,760 h × 0.6 for every yearly MWh in the tool (M95: aligned to the tool); the 0.20–0.60 utilisation band is context and is not applied",
+"coef": "colocation server utilisation 0.21→0.35 (LBNL 2024); capacity utilisation 0.5 (LBNL); average ÷ servers' combined maximum ≈ 0.6 (Fan et al. 2007, real data centre); leased share proxy: Digital Realty Toronto occupancy 96.4%, 55.8 MW white-space (Q2 2025 supplemental p.24) — occupancy ≠ utilisation; measured whole-building ceiling (City energy report): 555 W Hastings site EUI 1.84 GJ/m² → 37.4 GWh/yr total, 32.5 GWh non-heat ≈ 3.7 MW average for the whole 73,000 m² tower, data centre and offices together — so the ≥3.7 MW of operator nameplate claims cannot all be running at once; 1050 W Pender 11.2 GWh non-heat ≈ 1.3 MW avg; 900 W Hastings 0.57 MW; 111 E 5th 0.45 MW (no data centre yet); Equinix 10-K FY2024 (public filing, other operator): cabinet utilisation = cabinet space billed ÷ total cabinet capacity \"taking into consideration power limitations\" — Americas 81% (116,700 of 144,100 cabinets, 107 IBXs), EMEA 78%, Asia-Pacific 75%, company 78% (79% in 2023); MRR per cabinet Americas $2,550/month; new IBXs built for power and cooling twice that of earlier ones; Vancouver is a leased-only Equinix metro; Calgary CL1–3 and Kamloops KA1 (2020 acquisitions) listed in Schedule III; CALIBRATION: Telia Helsinki snapshot ERF 0.75 and PUE 1.152 with 4.11 MW waste heat imply 4.8 MW actual against 24 MW IT nameplate = 0.20 (one day, hall partly built out) — the low end of the band should be 0.20, not 0.35",
 "unit": "MW",
 "sources": [
 "dlrQ2_2025",
@@ -884,7 +884,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 },
 {
 "id": "fan2007",
-"term": "average ÷ peak ≈ 0.6",
+"term": "average ÷ servers' combined maximum ≈ 0.6",
 "role": "coefficient",
 "conf": 70,
 "verified": true
@@ -1034,20 +1034,22 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Heat temperature by cooling type",
 "formula": "air-cooled 25–35; liquid-cooled 50–60; two runs if unknown",
-"coef": "Alissa p.332; Wahlroos p.1753; heat-rejection equipment per site from permits: rooftop condensers (1050 W Pender, 175 W Cordova), rooftop chiller (55 E 7th), P1 chiller room (555 W Hastings), L8 roof well (515 W Hastings); seen on site (J.B.): 55 E 7th lane deck with a Cummins generator enclosure and a packaged cooling unit piped into the building (rooftop chiller in BP-2019-00595 not photographed — keep both); 111 E 5th louvre bands and three rooftop vent stacks; Internet Centre two rooftop condensing units (corroborates the 2024 \"two RTUs, AC only\" permit); Qu EDM2 cooling units on a raised platform under a canopy, \"Munters\" casings (air-side or indirect evaporative suggested, not confirmed); Kyndryl Acheson cooling plant with pipe racks into the wall on the south side; Baxtel claim for Kyndryl: two 550-ton water-cooled chillers (≈3.9 MW thermal) — operator/directory claim",
+"coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): air-side return hot air 25–47 °C, chiller condenser 40–50 °C, chilled-water loop 10–20 °C (Yuan et al. 2025 Table 2; Oró et al. 2019); the tool keeps 25–35 °C as the typical air-cooled figure. Alissa p.332; Wahlroos p.1753; heat-rejection equipment per site from permits: rooftop condensers (1050 W Pender, 175 W Cordova), rooftop chiller (55 E 7th), P1 chiller room (555 W Hastings), L8 roof well (515 W Hastings); seen on site (J.B.): 55 E 7th lane deck with a Cummins generator enclosure and a packaged cooling unit piped into the building (rooftop chiller in BP-2019-00595 not photographed — keep both); 111 E 5th louvre bands and three rooftop vent stacks; Internet Centre two rooftop condensing units (corroborates the 2024 \"two RTUs, AC only\" permit); Qu EDM2 cooling units on a raised platform under a canopy, \"Munters\" casings (air-side or indirect evaporative suggested, not confirmed); Kyndryl Acheson cooling plant with pipe racks into the wall on the south side; Baxtel claim for Kyndryl: two 550-ton water-cooled chillers (≈3.9 MW thermal) — operator/directory claim",
 "unit": "°C",
 "sources": [
 "lorenz",
 "vanPermits",
-"fieldJB"
+"fieldJB",
+"yuan2025",
+"oro2019"
 ],
 "source_roles": [
 {
 "id": "lorenz",
-"term": "air 25–35 °C; liquid 50–60 °C",
+"term": "air 25–35 °C; liquid 50–60 °C (second-hand via Sethuramalingam; unverified, report 14)",
 "role": "coefficient",
 "conf": 70,
-"verified": true
+"verified": false
 },
 {
 "id": "vanPermits",
@@ -1076,7 +1078,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "van": 1,
 "edm": 0,
 "both": 1,
-"gen": 1
+"gen": 3
 }
 },
 {
@@ -1085,11 +1087,15 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Share of heat captured in liquid",
 "formula": "0.5–0.8 cold plate; 1.0 immersion; air: judged",
-"coef": "13 Oct 2026: direct-to-chip 48–75 % (LBNL 2014; NREL), cold plate up to 94 % (Heydari 2024), hot-water cooled 80 % (Zimmermann 2012); air-cooled: no primary figure; the often-cited 97 % (Lu et al. 2011) describes electricity becoming heat, not capture — unverified at source. A water-cooled chiller plant rejects all heat to the condenser loop",
+"coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): air cooling — still no capture share for a whole air-cooled hall. Reuse is shown 'possible with a change' (heat pumps on the chilled-water loop or chiller condenser) and the figure 'not yet known'. Evidence: Oró et al. 2019 (return air up to 47 °C, condenser up to 50 °C; ERF on a primary-energy basis 25–45% / ~55%, not ISO ERF); Požgaj et al. 2025 (air-side 30% recovered by heat pumps in place of chillers, ERF 0.78–0.88, 108 kW hybrid); Ljungqvist et al. 2023 (theoretical upper limit with no heat pump, 0.50–0.66 at 13–18 °C); Yuan et al. 2025 review (Table 2 temperatures; its '50–70% recoverable' is cited to Singapore energy statistics — unsupported, not used). 13 Oct 2026: direct-to-chip 48–75 % (LBNL 2014; NREL), cold plate up to 94 % (Heydari 2024), hot-water cooled 80 % (Zimmermann 2012); air-cooled: no primary figure; the often-cited 97 % (Lu et al. 2011) describes electricity becoming heat, not capture — unverified at source. A water-cooled chiller plant rejects all heat to the condenser loop",
 "unit": "—",
 "sources": [
 "lorenz",
-"lbnlCapture"
+"lbnlCapture",
+"oro2019",
+"pozgaj2025",
+"ljungqvist2023",
+"yuan2025"
 ],
 "source_roles": [
 {
@@ -1119,7 +1125,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "van": 0,
 "edm": 0,
 "both": 0,
-"gen": 2
+"gen": 6
 }
 },
 {
@@ -1288,7 +1294,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Heat available after heat pump",
 "formula": "Q_out = E_reuse × COP ÷ (COP − 1) — network-side heat after the heat pump; the match takes min(Q_out, receiver demand)",
-"coef": "; CALIBRATION: delivered heat is receiver-limited, not source-limited, in every built case with a large data centre — Mäntsälä 20–30 GWh/yr from a ~15 MW DC (15–23 % of nameplate-continuous), Westville 2.4 GWh/yr from a 35 MW DC (1 %), TELUS Garden 4.9 of 12.3 GWh available (40 %); only Heerlen (520 kW DC into a 5GDHC network) ran source-limited at 54 %. Report this quantity as heat AVAILABLE after the heat pump; the match quantity is min(available, receiver demand); Odense DH output ≈ 1.3 × DC-side heat at COP 4.2 (Inspirationskatalog) matches COP ÷ (COP − 1)",
+"coef": "; CALIBRATION: delivered heat is receiver-limited, not source-limited, in every built case with a large data centre — Mäntsälä 20–30 GWh/yr from a ~15 MW DC (15–23 % of nameplate-continuous), Westville 2.4 GWh/yr PLANNED from a 35 MW DC (1 %; operation not yet sourced), TELUS Garden 4.9 of 12.3 GWh available (40 %; 2013 design forecast, Order C-1-13); only Heerlen (520 kW DC into a 5GDHC network) ran source-limited at 54 %. Report this quantity as heat AVAILABLE after the heat pump; the match quantity is min(available, receiver demand); Odense DH output ≈ 1.3 × DC-side heat at COP 4.2 (Inspirationskatalog) matches COP ÷ (COP − 1)",
 "unit": "MWh/yr",
 "sources": [
 "bcucC113",
@@ -1338,7 +1344,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 },
 {
 "id": "bytes2heat",
-"term": "Westville 2.4 GWh/yr from 35 MW (1 %)",
+"term": "Westville 2.4 GWh/yr PLANNED from 35 MW (1 %; operation not yet sourced)",
 "role": "check",
 "conf": 60,
 "verified": true
@@ -1416,7 +1422,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Energy reuse factor",
 "formula": "ERF = E_reuse ÷ E_DC (ISO/IEC 30134-6; EU 2024/1364 Annex III): heat captured at the boundary ÷ total data-centre energy (IT × PUE); 0–1; heat-pump uplift and heat-pump electricity excluded",
-"coef": "EnEfG benchmark 10% → 20%; first attempt used heat_delivered ÷ IT energy — corrected 13 Oct 2026: Telia Helsinki reports ERF 0.75 on this basis; German HPC centres 0.01–0.20 (arXiv 2411.16204, non-ISO denominator); NREL RSF reports ERE 0.91 \"calculated, not measured\"",
+"coef": "EnEfG benchmark 10% → 20%; first attempt used heat_delivered ÷ IT energy — corrected 13 Oct 2026: Telia Helsinki reports ERF 0.75 (operator claim; basis not stated in the PDF); German HPC centres 0.01–0.20 (arXiv 2411.16204, non-ISO denominator); NREL RSF reports ERE 0.91 \"calculated, not measured\"",
 "unit": "—",
 "sources": [
 "euReg2024_1364",
@@ -1517,7 +1523,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Free-cooling hours",
 "formula": "count hours with T_outdoor < threshold (18–27 °C inlet, approach +1.5 air-side or +12 dry cooler)",
-"coef": "CWEC 2020 edition (header CWEC2011 format, years 2000–2017), computed: Vancouver Intl air-side full free cooling 7,109 h at 18 °C inlet / 8,086 at 21 / 8,645 at 24 / 8,759 at 27; dry cooler to 30 °C liquid loop 7,675 h, to 40 °C 8,760. Edmonton Intl: air 7,614 / 8,046 / 8,412 / 8,661; dry cooler 7,846 / 8,754 / 8,760. Approach +1.5 °C air, +12 °C dry cooler (assumed). HDD18 from file: Vancouver 2,810, Edmonton 5,514 (design values 2,925 / 5,120)",
+"coef": "18 Oct 2026 (sweep M30–M32; audit/plant_sources_2026-10-18.md): full free cooling for an air-cooled hall (13 °C supply, ~18 °C return, ~10 K approach) only at ≤8 °C outdoors: 3,284 h Vancouver, 5,522 h Edmonton in the CWEC year (Claude's count). CWEC 2020 edition (header CWEC2011 format, years 2000–2017), computed: Vancouver Intl air-side full free cooling 7,109 h at 18 °C inlet / 8,086 at 21 / 8,645 at 24 / 8,759 at 27; dry cooler to 30 °C liquid loop 7,675 h, to 40 °C 8,760. Edmonton Intl: air 7,614 / 8,046 / 8,412 / 8,661; dry cooler 7,846 / 8,754 / 8,760. Approach +1.5 °C air, +12 °C dry cooler (assumed). HDD18 from file: Vancouver 2,810, Edmonton 5,514 (design values 2,925 / 5,120)",
 "unit": "h/yr",
 "sources": [
 "ashrae",
@@ -1582,12 +1588,12 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "verified": true
 }
 ],
-"conf": 100,
-"status": "in hand",
+"conf": 80,
+"status": "range in hand: an estimate (LBNL 2023) and an industry survey (Uptime 2025), not measured here; confidence 80, not 100 (M104, 19 Oct 2026)",
 "direction": "",
 "trial": "",
 "inputs": [],
-"upstream": 100,
+"upstream": 80,
 "city": {
 "van": 0,
 "edm": 0,
@@ -1636,7 +1642,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Backup duration",
 "formula": "usable kWh ÷ load; fuel ÷ burn rate",
-"coef": "UPS 10–15 s; 24–48 h fuel typical",
+"coef": "UPS runtime about 1–2 min (hyperscale), about 5 min (colocation), 10–15 min (financial); generators take over in 10–20 s (vendor claims, sources/15d); 12 h fuel minimum (Uptime) and 24–48 h typical (operator claims)",
 "unit": "h",
 "sources": [
 "heatPhys",
@@ -1751,9 +1757,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "id": "load_factor",
 "kind": "quantity",
 "stage": "characterise",
-"name": "Load factor (average ÷ peak)",
-"formula": "average ÷ peak",
-"coef": "≈ 0.6 facility level (Fan et al. 2007); 8,760 h/yr",
+"name": "Load factor (average ÷ the servers' combined maximum power)",
+"formula": "average ÷ sum of each server's measured maximum",
+"coef": "≈ 0.6: real data centre averaged 59.5% of 'actual peak' (sum of machine maxima); its observed peak was 71.9%, so average ÷ observed peak ≈ 0.83 (Fan et al. 2007, Table 3, s. 4.3–4.5; checked 18 Oct 2026); 8,760 h/yr",
 "unit": "—",
 "sources": [
 "fan2007"
@@ -1975,8 +1981,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "characterise",
 "name": "Harvestable rainwater",
-"formula": "V = A × R × C",
-"coef": "CSA B805:22 method; ECCC Normals 1991–2020: Vancouver Intl precipitation 1,159.5 mm/yr (rain 1,119.2; Oct–Jan ≥124 mm/mo, Jul 34 mm); Edmonton City 422.5 mm/yr (Edmonton Airport 434.0; Jun–Aug 213 mm, Dec–Feb 43 mm, mostly snow); C runoff coefficient per CSA",
+"formula": "V = A × R × C; A = roof area: a new building's footprint as drawn from the site setup (else the footprint the yards leave), an existing building's roofs added together (M47, 18 Oct 2026)",
+"coef": "ECCC Normals 1991–2020: Vancouver Intl precipitation 1,159.5 mm/yr (rain 1,119.2; Oct–Jan ≥124 mm/mo, Jul 34 mm); Edmonton City 422.5 mm/yr (Edmonton Airport 434.0; Jun–Aug 213 mm, Dec–Feb 43 mm, mostly snow); C = 0.8 assumed (CSA B805 not read); tank = one wet month, assumed",
 "unit": "m³/yr",
 "sources": [
 "femp",
@@ -1986,7 +1992,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "source_roles": [
 {
 "id": "femp",
-"term": "V = A × R × C method (via CSA B805)",
+"term": "V = A × R × C (general method; the femp source is the cooling-tower guide, CSA B805 not read)",
 "role": "method",
 "conf": 90,
 "verified": false
@@ -2007,13 +2013,14 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 }
 ],
 "conf": 80,
-"status": "rainfall confirmed (government normals, data/normals_1991_2020_extract.json); C and storage sizing per CSA B805",
+"status": "rainfall confirmed (government normals, data/normals_1991_2020_extract.json); C and tank size assumed",
 "direction": "",
 "trial": "",
 "inputs": [
-"floor_area"
+"envelope",
+"massing"
 ],
-"upstream": 70,
+"upstream": 75,
 "city": {
 "van": 0,
 "edm": 1,
@@ -2027,13 +2034,15 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Grid carbon",
 "formula": "E × EF_average and E × EF_long-run marginal, both reported",
-"coef": "NIR 2026 Annex 7 (same basis for both provinces, main-activity producers): Alberta generation intensity 334.8 g CO2e/kWh in 2024 (preliminary), consumption intensity 346.1 — down from 506.5 / 521.5 in 2021 and 947.7 / 1,030.8 in 1990; BC generation 16.7, consumption 18.1 g/kWh in 2024 (15.5 / 16.9 in 2021); Canada 102.2 / 110.6; earlier register values (BC 22.8 consumption-based with imports, 2025; AB 335 generation, 2024) now superseded by the NIR series for citation; Alberta Electricity Grid Displacement Factor, handbook v3.3 (Aug 2026) Table 1, vintage schedule: 0.4901 (2024), 0.4602 (2025), 0.4303 (2026), 0.4005 (2027), 0.3706 (2028), 0.3407 (2029) tCO2e/MWh for displacement by renewables; with line loss (increased or reduced grid use): 0.5226, 0.4907, 0.4588, 0.4271, 0.3952, 0.3633; 2030 onward aligns with the High Performance Benchmark; projects before 2024 use 0.52 / 0.55 (Table 2, 2018–2020 data); identical in v3.1 (Feb 2023) and v3.2 (Aug 2025); natural-gas combustion (Table 5, commercial/institutional): 1,962 g CO2 /m³ + 0.037 g CH4 + 0.035 g N2O; BC publishes no marginal factor; 13 Oct 2026 deep dive: no official BC marginal or incremental factor exists (BC 2025 methodology is consumption-based, net-import); BASIS used across the tool (proposed 15 Oct by Claude and the atlas chat, J.B. to confirm): consumption intensity, since the tool counts electricity used — BC 18.1, Alberta 346.1 g CO2e/kWh (NIR 2026, 2024); average factors, BC marginal factor unpublished",
+"coef": "18 Oct 2026 (J.B., item 6): displaced side shown per MWh of heat — gas boiler ≈ 218 kg CO2e (marketable natural gas, commercial/institutional: CO2 1,966 BC / 1,962 AB g/m³, CH4 0.037, N2O 0.035 g/m³; AR5 GWPs 28 / 265; HHV 38.39 MJ/m³ → 51.5 kg/GJ; ÷ 0.85) against heat-pump electricity = grid ÷ COP 4.5–3.0 (BC 4–6 kg, AB 77–115 kg); provincial average consumption intensity, not marginal; the data centre's own cooling electricity and upstream gas not counted. The word 'lower-carbon' is no longer used. NIR 2026 Annex 7 (same basis for both provinces, main-activity producers): Alberta generation intensity 334.8 g CO2e/kWh in 2024 (preliminary), consumption intensity 346.1 — down from 506.5 / 521.5 in 2021 and 947.7 / 1,030.8 in 1990; BC generation 16.7, consumption 18.1 g/kWh in 2024 (15.5 / 16.9 in 2021); Canada 102.2 / 110.6; earlier register values (BC 22.8 consumption-based with imports, 2025; AB 335 generation, 2024) now superseded by the NIR series for citation; Alberta Electricity Grid Displacement Factor, handbook v3.3 (Aug 2026) Table 1, vintage schedule: 0.4901 (2024), 0.4602 (2025), 0.4303 (2026), 0.4005 (2027), 0.3706 (2028), 0.3407 (2029) tCO2e/MWh for displacement by renewables; with line loss (increased or reduced grid use): 0.5226, 0.4907, 0.4588, 0.4271, 0.3952, 0.3633; 2030 onward aligns with the High Performance Benchmark; projects before 2024 use 0.52 / 0.55 (Table 2, 2018–2020 data); identical in v3.1 (Feb 2023) and v3.2 (Aug 2025); natural-gas combustion (Table 5, commercial/institutional): 1,962 g CO2 /m³ + 0.037 g CH4 + 0.035 g N2O; BC publishes no marginal factor; 13 Oct 2026 deep dive: no official BC marginal or incremental factor exists (BC 2025 methodology is consumption-based, net-import); BASIS used across the tool (proposed 15 Oct by Claude and the atlas chat, J.B. to confirm): consumption intensity, since the tool counts electricity used — BC 18.1, Alberta 346.1 g CO2e/kWh (NIR 2026, 2024); average factors, BC marginal factor unpublished",
 "unit": "tCO2e/yr",
 "sources": [
 "gridBC",
 "gridAB",
 "abEGDF",
-"nir2026"
+"nir2026",
+"ecccEF2026",
+"abEF2026"
 ],
 "source_roles": [
 {
@@ -2076,9 +2085,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "upstream": 50,
 "city": {
 "van": 1,
-"edm": 2,
+"edm": 3,
 "both": 1,
-"gen": 0
+"gen": 1
 }
 },
 {
@@ -2122,7 +2131,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Generator NOx and PM",
 "formula": "AP-42 factor × rated hp × hours",
-"coef": "NOx 0.024 lb/hp·h uncontrolled",
+"coef": "NOx 0.024 lb/hp·h uncontrolled; Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read)",
 "unit": "kg/yr",
 "sources": [
 "eccc",
@@ -2173,10 +2182,10 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Refrigerant leakage",
 "formula": "charge × 3%/yr × GWP",
-"coef": "IPCC GWPs; chillers 50–600 kg charge",
+"coef": "IPCC GWPs; chiller charge 10–2,000 kg and operating loss 2–15% of the initial charge a year, the lower end for developed countries (IPCC 2019 Refinement, Vol. 3 Ch. 7, Table 7.9, p. 7.32: default ranges, not measured here); the tool's 3%/yr sits near the lower end and its 50–600 kg per chiller inside the range",
 "unit": "tCO2e/yr",
 "sources": [
-"eccc"
+"ipcc2019v3ch7"
 ],
 "source_roles": [
 {
@@ -2187,19 +2196,19 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "verified": true
 }
 ],
-"conf": 90,
-"status": "in hand",
+"conf": 60,
+"status": "default ranges from the IPCC inventory guidelines (read 19 Oct 2026); no Canadian or manufacturer figure for these chillers (M98)",
 "direction": "",
 "trial": "",
 "inputs": [
 "cooling_type"
 ],
-"upstream": 70,
+"upstream": 60,
 "city": {
 "van": 0,
 "edm": 0,
-"both": 1,
-"gen": 0
+"both": 0,
+"gen": 1
 }
 },
 {
@@ -2208,7 +2217,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Embodied carbon, IT",
 "formula": "servers × kg CO2e per server ÷ lifespan",
-"coef": "Dell R760 LCA (2025): 4,177 kg CO2e total (US), manufacturing ≈10–15%; R740 PCF 8,640 ± 8,480 kg Alissa et al. 2025: making the servers is 8.8% of life-cycle GHG on a US-average grid but about 82% on renewable power — in Vancouver (18 g/kWh) the servers' making is the largest carbon item; in Edmonton (346 g/kWh) running them is.",
+"coef": "Dell R760 LCA (2025): 4,177 kg CO2e total (US), manufacturing ≈10–15%; R740 PCF 8,640 ± 8,480 kg Alissa et al. 2025: making the servers is 8.8% of life-cycle GHG on a US-average grid but about 82% on renewable power (their two cases only). The tool's own inference: on Vancouver's low-carbon grid, making the servers is of the same order as running them (at 1 MW the electricity is about 133–147 t/yr at 18.1 g/kWh); in Edmonton running them dominates.",
 "unit": "tCO2e/yr",
 "sources": [
 "dell",
@@ -2252,11 +2261,12 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Embodied carbon, building",
 "formula": "floor_area × kg CO2e/m²",
-"coef": "461 kg CO2e/m² median for general buildings (no data-centre per-m² benchmark exists). Alissa et al. 2025 (Microsoft data, air-cooled): the building is 0.6% of a data centre's life-cycle GHG on a US-average grid and about 5% on renewable power — so the building shell is small either way; servers and electricity dominate",
+"coef": "Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; 461 kg CO2e/m² median for general buildings (no data-centre per-m² benchmark exists). Alissa et al. 2025 (Microsoft data, air-cooled): the building is 0.6% of a data centre's life-cycle GHG on a US-average grid and about 5% on renewable power — so the building shell is small either way; servers and electricity dominate",
 "unit": "tCO2e",
 "sources": [
 "clf",
-"alissa2025lca"
+"alissa2025lca",
+"vanEmbodied"
 ],
 "source_roles": [
 {
@@ -2264,6 +2274,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "term": "all coefficients",
 "role": "coefficient",
 "conf": 40,
+"verified": true
+},
+{
+"id": "vanEmbodied",
+"term": "400 kg/m² benchmark",
+"role": "coefficient",
+"conf": 80,
 "verified": true
 }
 ],
@@ -2278,7 +2295,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "city": {
 "van": 0,
 "edm": 0,
-"both": 0,
+"both": 1,
 "gen": 2
 }
 },
@@ -2288,7 +2305,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Sound level at receptor",
 "formula": "screen Lp ≈ Lw − 20·log10(r) − 8; full ISO 9613-2 (NoiseModelling)",
-"coef": "starter set: scroll chiller 450–850 kW Lw 96–100 dBA (Daikin, AHRI 370); Trane Sintesis Prime RTAF 333–1,010 kW Lw 94–101 standard / 91–98 low-noise (Eurovent); screw chiller 99–103 (ISO 9614); dry cooler: Kelvion 94 dBA printed under 'per fan' heading, 61 dBA @10 m — unit total unresolved; Güntner small unit Lw 67 dBA (permit submittal); standby diesel open 98–99 dBA @7 m (ISO 8528-10); enclosed: Cummins QuietSite L2 73–76, L1 78–87, weather-protective 89–91 dBA @7 m; CRAC 48–62 dBA @2 m (Stulz, 30–150 kW); transformer 62–63 dB (NEMA contour, unverified edition)",
+"coef": "18 Oct 2026 (sweep M30–M32; audit/plant_sources_2026-10-18.md): unit count = the units the plant lays out (spares included); Lw per unit: air-cooled chillers 98–101 dBA (Trane RTAF, low-noise to standard), dry coolers 98.5–102 dBA at full fan speed (Güntner GFD ≈2.5 MW; Thermokey 738 kW); towers and hybrid coolers use the chiller ratings as a stand-in (labelled). starter set: scroll chiller 450–850 kW Lw 96–100 dBA (Daikin, AHRI 370); Trane Sintesis Prime RTAF HSE 333–1,010 kW Lw 94–101 standard / 91–98 low-noise, plus size 245 (877 kW) printed as 107 / 103, out of line with its neighbours (brochure RTAF-SLB001-GB p.13; sound rows sit under the 'Eurovent performances' heading but are not labelled Eurovent; checked 18 Oct 2026); the tool takes the 1,010 kW unit (size 280), 98 low-noise / 101 standard, as one unit per MW; screw chiller 99–103 (ISO 9614); dry cooler: Kelvion 94 dBA printed under 'per fan' heading, 61 dBA @10 m — unit total unresolved; Güntner small unit Lw 67 dBA (permit submittal); standby diesel open 98–99 dBA @7 m (ISO 8528-10); enclosed: Cummins QuietSite L2 73–76, L1 78–87, weather-protective 89–91 dBA @7 m; CRAC 48–62 dBA @2 m (Stulz, 30–150 kW); transformer 62–63 dB (NEMA contour, unverified edition)",
 "unit": "dBA",
 "sources": [
 "iso9613",
@@ -2479,7 +2496,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Light at neighbour's window",
 "formula": "vertical illuminance vs CIE 150 zone limit (E3 10 / 2 lx pre/post curfew)",
-"coef": "CIE 150:2017 via ILP GN01/20; Vancouver: no lux limit; Edmonton Bylaw 20001 s.5.120(3): glare minimised, light deflected away, directed downward — qualitative",
+"coef": "CIE 150:2017 via ILP GN01/20; Vancouver: no lux limit; Untidy Premises By-law 4548 s. 7 bars an outdoor light casting light directly onto a residential window across the street or adjacent AND unreasonably disturbing the neighbour (qualitative; checked 18 Oct 2026); Edmonton Bylaw 20001 s.5.120(3): glare minimised, light deflected away, directed downward — qualitative",
 "unit": "lx",
 "sources": [
 "cie150",
@@ -2573,12 +2590,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "opportunity",
 "name": "People sheltered",
-"formula": "usable area ÷ 3.5 m²; 2 m between beds",
-"coef": "BC ESS / JIBC; Edmonton shelter standard; cold need: Edmonton 6.1–6.5 days/yr with daily max ≤ −20 °C, extreme min −48 °C; Vancouver 0 days (ECCC Normals 1991–2020)",
+"formula": "usable area ÷ 3.5 m² per person; 0.75 m between beds (BC group lodging)",
+"coef": "BC ESS / JIBC group lodging: 3.5 m² per person, 0.75 m between beds (p. 35) — the earlier '2 m between beds' had no source (corrected 19 Oct 2026); Edmonton group-lodging spacing not read; cold need: Edmonton 6.1–6.5 days/yr with daily max ≤ −20 °C, extreme min −48 °C; Vancouver 0 days (ECCC Normals 1991–2020)",
 "unit": "people",
 "sources": [
 "ess",
-"eccc"
+"eccc",
+"jibcGroupLodging"
 ],
 "source_roles": [
 {
@@ -2594,6 +2612,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "data",
 "conf": 80,
 "verified": true
+},
+{
+"id": "jibcGroupLodging",
+"term": "3.5 m² per person; 0.75 m between beds",
+"role": "coefficient",
+"conf": 90,
+"verified": true
 }
 ],
 "conf": 80,
@@ -2604,9 +2629,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "offerable_area",
 "backup_hours"
 ],
-"upstream": 20,
+"upstream": 60,
 "city": {
-"van": 0,
+"van": 1,
 "edm": 0,
 "both": 2,
 "gen": 0
@@ -2647,7 +2672,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "inputs": [
 "offerable_area"
 ],
-"upstream": 20,
+"upstream": 60,
 "city": {
 "van": 0,
 "edm": 0,
@@ -2715,7 +2740,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "spare_cooling",
 "offerable_area"
 ],
-"upstream": 20,
+"upstream": 40,
 "city": {
 "van": 1,
 "edm": 1,
@@ -2728,11 +2753,12 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "prospect",
 "name": "Offerable floor area",
-"formula": "staffed spaces + meet-me rooms + space held for growth, judged",
-"coef": "",
+"formula": "ground floor where zoning bars data storage at grade + a support block (200–600 m², from plans); space held for growth shown apart (judged, 20)",
+"coef": "Vancouver I-2 s. 2.2.7, I-3 s. 2.2.11 (sub-area A), FC-2 s. 2.2.4 bar data storage at grade; Edmonton has no ground-floor rule",
 "unit": "m²",
 "sources": [
-"bins"
+"bins",
+"vanI2Ground"
 ],
 "source_roles": [
 {
@@ -2741,18 +2767,25 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "coefficient",
 "conf": 20,
 "verified": true
+},
+{
+"id": "vanI2Ground",
+"term": "ground floor kept for other uses",
+"role": "rule",
+"conf": 90,
+"verified": true
 }
 ],
-"conf": 20,
-"status": "judged",
+"conf": 60,
+"status": "ground floor by rule (90) in three Vancouver zones; support block from plans (60); growth space judged (20)",
 "direction": "",
 "trial": "",
 "inputs": [
 "floor_area"
 ],
-"upstream": 20,
+"upstream": 60,
 "city": {
-"van": 0,
+"van": 1,
 "edm": 0,
 "both": 0,
 "gen": 1
@@ -2819,7 +2852,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "receiver_demand",
 "area"
 ],
-"upstream": 40,
+"upstream": 60,
 "city": {
 "van": 0,
 "edm": 0,
@@ -2855,7 +2888,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "heat_density",
 "plot_ratio"
 ],
-"upstream": 40,
+"upstream": 60,
 "city": {
 "van": 0,
 "edm": 0,
@@ -2962,7 +2995,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "inputs": [
 "linear_heat_density"
 ],
-"upstream": 40,
+"upstream": 60,
 "city": {
 "van": 3,
 "edm": 2,
@@ -2975,8 +3008,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "prospect",
 "name": "Receiver heat demand",
-"formula": "disclosed data (Energize Vancouver, opt-in) else floor area × intensity",
-"coef": "CEUD intensities blocked; household 81.2 GJ (BC) / 121.8 (AB) × 0.61 space-heat share; measured heat intensity of the host buildings (City energy report): 555 W Hastings 0.24 GJ/m² → 4.9 GWh/yr, 1050 W Pender 0.32 → 2.5 GWh, 900 W Hastings 0.26 → 0.9 GWh, 111 E 5th 0 (all-electric); host heat demand is 15–22% of the building's own non-heat energy, so a data centre's host can absorb only a fraction of what it rejects; CEUD 2023 commercial/institutional intensity: BC 1.114 GJ/m² (all activity types), Alberta 2.007 GJ/m²; offices ≈32% of sector energy in both provinces, health care 18.9% BC / 14.2% AB; per-activity intensity not published — apportion by share × floor space or use the measured City report where a building is listed; 13 Oct 2026 receivers: NEU 667,000 m², 47 buildings (data centres named as a future heat source); Creative Energy Core >200 buildings; NE False Creek 48,100 MWh/yr; Sen̓áḵw 11,218 MWh/yr; River District ~33,600 MWh/yr at build-out; UBC ADES ~89 GWh; Edmonton DDE ≤50 buildings by 2050; Blatchford 13.1 MW heat / 12.3 MW cooling (earlier source); Blatchford 2023–2026 Budget and Plans (Dec 2022): full build-out 46,789 MWh/yr heating (peak 34,543 kW) and 43,747 MWh/yr cooling (peak 46,601 kW) — peak cooling above peak heating; Energy Centre One 1 MW heat and 1 MW cooling, expanding to 4.25 MW heat / 4 MW cooling; ~400,000 m² connected floor area by 2026; sewer heat exchange centre deferred because EPCOR's updated sewer-flow forecasts reduced the energy potential; building owners outside the service area (incl. NAIT) have asked to connect; loop temperatures not stated; Edmonton District Energy Strategy (Aug 2022; Urban Planning Committee 27 Feb 2024, IIS02148, Attachment 1): names \"process waste heat (data centres, for example)\" among low-carbon sources; priority opportunity areas — first: Bonnie Doon, The Quarters, Heritage Valley, Exhibition Lands; second: City Centre: Oliver, Mill Woods Town Centre; third: University/Garneau, Clareview Station and Fort Road, West Edmonton Mall/Misericordia, Century Park, Stadium (and others); Downtown District Energy Initiative anchored on City buildings (Chancery Hall, Century Place); policy options studied, not adopted: property-tax rebates, neighbourhood infrastructure fee, accelerated rezoning and permits for connecting buildings; no rates or temperatures given",
+"formula": "disclosed data (Energize Vancouver) else floor area × type intensity × heating share (space + water heating, CEUD 2023 by province)",
+"coef": "heating-only intensity, CEUD 2023: BC 0.57 / AB 1.40 GJ/m² overall; offices 0.45 / 1.13; heat is 48–63% of energy in BC, 62–83% in Alberta; hospitals from SCIEU 2024 (BC 1.90, AB 2.46 GJ/m² total); type medians NRCan ENERGY STAR; delivered fuel, not useful heat (boiler efficiency not yet sourced); 2023 a warm year",
 "unit": "GJ/yr",
 "sources": [
 "energize",
@@ -2993,7 +3026,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "vanNEUguide",
 "torontoDER2016",
 "statcanHeat2011",
-"vanNEUlevy2025"
+"vanNEUlevy2025",
+"energyStarCA",
+"scieu2024"
 ],
 "source_roles": [
 {
@@ -3100,21 +3135,35 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "pending build",
 "conf": 70,
 "verified": true
+},
+{
+"id": "energyStarCA",
+"term": "type medians",
+"role": "data",
+"conf": 80,
+"verified": true
+},
+{
+"id": "scieu2024",
+"term": "hospital and campus intensities",
+"role": "data",
+"conf": 80,
+"verified": true
 }
 ],
-"conf": 40,
+"conf": 60,
 "status": "proxy",
 "direction": "",
 "trial": "",
 "inputs": [
 "receivers"
 ],
-"upstream": 40,
+"upstream": 60,
 "city": {
 "van": 6,
 "edm": 4,
-"both": 2,
-"gen": 3
+"both": 3,
+"gen": 4
 }
 },
 {
@@ -3122,8 +3171,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "opportunity",
 "name": "Homes heated",
-"formula": "homes = Q_available ÷ (space-heat GJ/household [+ DHW GJ/household if year-round]); BC 33.1 (+19.4), AB 76.9 (+28.2) GJ",
-"coef": "CEUD 2023, provincial: BC 71.7 GJ/household/yr total, space heating 46.2% (33.1 GJ), water heating 27.1% (19.4 GJ), 0.464 GJ/m²; Alberta 121.8 GJ/household, space heating 63.1% (76.9 GJ), water heating 23.2% (28.2 GJ), 0.785 GJ/m² (replaces the 2021 StatCan 81.2 / 121.8 and the national 61% share); StatCan 25-10-0060 (2021, primary CSV): BC 81.2 GJ/household all energy; gas-using households 1,235,024 of 2,041,830 (60%) at 80.2 GJ gas each; electricity 32.5 GJ/household (40% of energy). Alberta 121.8 GJ; gas households 1,471,165 of 1,633,225 (90%) at 109.3 GJ; electricity 23.3 GJ (19%). Displacement target for a heat match = the gas-using share, not all households",
+"formula": "homes = Q_available ÷ (space + water heating GJ per household); BC 60.5 GJ (16.81 MWh), AB 119.3 GJ (33.14 MWh), CEUD residential 2018–22 average",
+"coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): 2018–22 average replaces 2023 (the lowest heating-degree-day year in both provinces; 2023 gave 14.58 / 29.19 MWh). BC per year 16.71, 17.07, 16.72, 16.79, 16.75 MWh; AB 34.85, 34.38, 33.22, 31.13, 32.13 (local res_bc_e_2.xls / res_ab_e_2.xls). Earlier: CEUD 2023, provincial: BC 71.7 GJ/household/yr total, space heating 46.2% (33.1 GJ), water heating 27.1% (19.4 GJ), 0.464 GJ/m²; Alberta 121.8 GJ/household, space heating 63.1% (76.9 GJ), water heating 23.2% (28.2 GJ), 0.785 GJ/m² (replaces the 2021 StatCan 81.2 / 121.8 and the national 61% share); StatCan 25-10-0060 (2021, primary CSV): BC 81.2 GJ/household all energy; gas-using households 1,235,024 of 2,041,830 (60%) at 80.2 GJ gas each; electricity 32.5 GJ/household (40% of energy). Alberta 121.8 GJ; gas households 1,471,165 of 1,633,225 (90%) at 109.3 GJ; electricity 23.3 GJ (19%). Displacement target for a heat match = the gas-using share, not all households",
 "unit": "homes",
 "sources": [
 "ceud",
@@ -3471,8 +3520,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "opportunity",
 "name": "EV charging stalls supported",
-"formula": "P_reserved × SF ÷ P_charger",
-"coef": "Level 2 7.4–19.2 kW; DCFC 50–350 kW; SF 0.5",
+"formula": "P_reserved ÷ (SF × P_charger), SF 0.5–1 (corrected 18 Oct 2026: SF divides, it does not multiply)",
+"coef": "Level 2 7.4–19.2 kW; DCFC 50–350 kW; SF 0.5 is the value Silber, Scheubner and Märtz 2024 found for fast-charging sites (“in most cases”; checked 18 Oct 2026); for Level 2 it is a transfer, so the range runs to SF 1 (all at once)",
 "unit": "stalls",
 "sources": [
 "wsuEV",
@@ -4029,7 +4078,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "test",
 "name": "Hourly heat-demand profile",
 "formula": "hourly HDD = max(0, 16 − T_out); space heat ∝ HDD in season; DHW constant; losses ~15%",
-"coef": "Vancouver HDD 2,925 (VBBL 2014 Table 1.1.3.1); Edmonton HDD18 5,120 (NECB 2020 Table C-1, same data set as NBC 2020 Table C-2); computed from CWEC: monthly share of annual HDD16 — Vancouver Dec 0.170, Jan 0.166 … Jul/Aug 0.003; DJF 0.475, JJA 0.025 (winter/summer 19:1); Edmonton DJF 0.465, JJA 0.051 (9:1). With space heat 61% and DHW/losses flat (STRATEGO), peak month ÷ minimum month = 3.9 Vancouver, 3.3 Edmonton; ECCC Normals 1991–2020 HDD18: Vancouver Intl 2,781; Edmonton City (Blatchford) 5,126 — matches NECB 5,120; Edmonton Intl Airport 5,697 (the CWEC file is the airport, so Edmonton parcels run ~10% fewer HDD than its typical year); provincial space-heat share from CEUD 2023: BC 0.46, AB 0.63 (replaces national 0.61 in the profile)",
+"coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): busiest ÷ quietest month = 4.9 Vancouver, 5.0 Edmonton, with s = space ÷ (space + water heating), CEUD residential 2018–22 (BC 0.674, AB 0.761): month = s × CWEC HDD16 share + (1 − s) ÷ 12; replaces 3.9 / 3.3 (national 0.61). Earlier: Vancouver HDD 2,925 (VBBL 2014 Table 1.1.3.1); Edmonton HDD18 5,120 (NECB 2020 Table C-1, same data set as NBC 2020 Table C-2); computed from CWEC: monthly share of annual HDD16 — Vancouver Dec 0.170, Jan 0.166 … Jul/Aug 0.003; DJF 0.475, JJA 0.025 (winter/summer 19:1); Edmonton DJF 0.465, JJA 0.051 (9:1). With space heat 61% and DHW/losses flat (STRATEGO), peak month ÷ minimum month = 3.9 Vancouver, 3.3 Edmonton; ECCC Normals 1991–2020 HDD18: Vancouver Intl 2,781; Edmonton City (Blatchford) 5,126 — matches NECB 5,120; Edmonton Intl Airport 5,697 (the CWEC file is the airport, so Edmonton parcels run ~10% fewer HDD than its typical year); provincial space-heat share from CEUD 2023: BC 0.46, AB 0.63 (replaces national 0.61 in the profile)",
 "unit": "MW",
 "sources": [
 "stratego",
@@ -4115,7 +4164,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "receiver_demand",
 "weather"
 ],
-"upstream": 40,
+"upstream": 60,
 "city": {
 "van": 2,
 "edm": 2,
@@ -4245,7 +4294,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "test",
 "name": "Buyer ceiling price",
 "formula": "fuel price ÷ boiler efficiency (0.85); or district-energy tariff; NEU returned-heat credit as revealed WTP",
-"coef": "Vancouver gas ≈ $38.6 (Rate 3, Rider 6 excluded; $39.4 with it); RNG ≈ $70.7; NEU credit $32.59; Creative Energy 2026 interim tiers $66.6 (first tier) to $39.6 (remainder) per MWh; Edmonton gas ≈ $10.7; Denmark 2025 surplus-heat price cap 95 DKK/GJ (≈342 DKK/MWh) as a regulated comparator; Edmonton Downtown District Energy Utility (City-owned, Bylaw 20914; EPCOR design-build-finance-operate; Phase 1 = Winspear-area plant serving Century Hall and Chancery Place, Phase 1A adds City Hall, Citadel Theatre, Milner Library): rates set on a 'Business as Usual' principle — customers pay on average what they would pay a traditional provider plus their avoided boiler maintenance and capital renewal (IIS02765 p.4), so the Edmonton buyer ceiling = gas-equivalent cost + avoided boiler costs; Phase 1/1A: capital $51 M, annual rate revenue $2.4 M vs operating cost $1.9 M on gas or $5.3 M on electric boilers; 30-yr NPV +$4 M gas vs −$25 M electric (84% GHG cut, 126,000 t, $198/tCO2); full build-out: no-decarbonization NPV +$106 M (10% GHG cut) vs max-decarbonization −$172 M (96% cut); no private building is obliged to connect and no capital is funded for private connections; 2025 budget $889k spend vs $336k revenue; the $/GJ tariff itself is in Attachment 4 (pending); Vancouver built case: TELUS Garden TES (FAES, BCUC C-1-13 / G-155-12) charges customers the BC Hydro residential benchmark + 5–10 % ($0.105–0.126/kWh proposed 2014–18 = $105–126/MWh) for recovered-heat service — an all-in regulated TES rate including distribution and capital, not a price for the heat itself; Edmonton Downtown District Energy regulated rates (first filing): 2025 $7.92 per kW peak capacity per month + $0.0294/kWh; 2026 $8.08 per kW·month + $0.0300/kWh (= $8.33/GJ variable); set at \"business as usual\" — what a building would pay for its own heating plus maintenance and replacement reserve; one rate class (Winspear Centre, Century Place, Chancery Place); Phase 1 fuel mainly natural gas; business case scenarios to 96% GHG reduction include waste heat recovery and geo-exchange",
+"coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): gas commodity averaged over the same 12 months in both cities (Nov 2025 – Oct 2026), rest of each tariff at the current schedule. Vancouver: FortisBC CCRC $2.230 (to 31 Mar 2026; BCUC L-9-25, L-27-25) and $1.660 (from 1 Apr 2026; G-50-26; Oct 2026 unchanged per FortisBC release copy, unverified) → mean $1.8975; all per-GJ $9.5425 → ≈ $40.4/MWh heat at 85%. Edmonton: UCA regulated rate (2.579, 3.390, 3.331, 2.422, 1.784, 1.874, 0.936, 2.076, 1.595, 1.729, 1.124, 1.458) → mean $2.025, + ATCO delivery $1.045 → ≈ $13.0/MWh heat. Earlier: Vancouver gas ≈ $39.4 (Rate 3, every per-GJ charge incl. Riders 5, 6 and 8: $9.305/GJ, checked against the schedule 18 Oct 2026; $38.6 without the Rider 6 true-up); RNG ≈ $70.7; NEU credit $32.59; Creative Energy 2026 interim tiers $66.6 (first tier) to $39.6 (remainder) per MWh; Edmonton gas ≈ $10.7; Denmark surplus-heat price cap 95 DKK/GJ (≈342 DKK/MWh) — HISTORICAL: abolished 1 Jul 2025; Edmonton Downtown District Energy Utility (City-owned, Bylaw 20914; EPCOR design-build-finance-operate; Phase 1 = Winspear-area plant serving Century Hall and Chancery Place, Phase 1A adds City Hall, Citadel Theatre, Milner Library): rates set on a 'Business as Usual' principle — customers pay on average what they would pay a traditional provider plus their avoided boiler maintenance and capital renewal (IIS02765 p.4), so the Edmonton buyer ceiling = gas-equivalent cost + avoided boiler costs; Phase 1/1A: capital $51 M, annual rate revenue $2.4 M vs operating cost $1.9 M on gas or $5.3 M on electric boilers; 30-yr NPV +$4 M gas vs −$25 M electric (84% GHG cut, 126,000 t, $198/tCO2); full build-out: no-decarbonization NPV +$106 M (10% GHG cut) vs max-decarbonization −$172 M (96% cut); no private building is obliged to connect and no capital is funded for private connections; 2025 budget $889k spend vs $336k revenue; the $/GJ tariff itself is in Attachment 4 (pending); Vancouver built case: TELUS Garden TES (FAES, BCUC C-1-13 / G-155-12) charges customers the BC Hydro residential benchmark + 5–10 % ($0.105–0.126/kWh proposed 2014–18 = $105–126/MWh) for recovered-heat service — an all-in regulated TES rate including distribution and capital, not a price for the heat itself; Edmonton Downtown District Energy regulated rates (first filing): 2025 $7.92 per kW peak capacity per month + $0.0294/kWh; 2026 $8.08 per kW·month + $0.0300/kWh (= $8.33/GJ variable); set at \"business as usual\" — what a building would pay for its own heating plus maintenance and replacement reserve; one rate class (Winspear Centre, Century Place, Chancery Place); Phase 1 fuel mainly natural gas; business case scenarios to 96% GHG reduction include waste heat recovery and geo-exchange",
 "unit": "CAD/MWh",
 "sources": [
 "abgas",
@@ -4260,7 +4309,10 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "ddeBizCase2025",
 "fortisBC2026",
 "atcoGas2026",
-"bcCarbonTax2025"
+"bcCarbonTax2025",
+"ucaRates2026",
+"bcucG5026",
+"dkHeatCap2025"
 ],
 "source_roles": [
 {
@@ -4346,6 +4398,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "pending build",
 "conf": 50,
 "verified": false
+},
+{
+"id": "dkHeatCap2025",
+"term": "Danish cap abolished 1 Jul 2025",
+"role": "context",
+"conf": 90,
+"verified": true
 }
 ],
 "conf": 60,
@@ -4355,10 +4414,10 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "inputs": [],
 "upstream": 60,
 "city": {
-"van": 6,
-"edm": 5,
+"van": 7,
+"edm": 6,
 "both": 1,
-"gen": 1
+"gen": 2
 }
 },
 {
@@ -4842,7 +4901,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "test",
 "name": "Time horizons",
 "formula": "servers ~6; plant 15–25; shell ≤40; network 40–50; lease",
-"coef": "Servers: average life 4.4 → 5 → 5.7 years (2000–2019, 2020, 2023; LBNL 2024); filings moved server useful lives to 5–6 years (Microsoft, Alphabet, Meta; Amazon partly back to 5 in 2025); Barroso: servers depreciated over 3–4 years, facilities over 15–20; plant medians ~20–25 years (ASHRAE); district-heating pipes 30 years at 120 °C, 50 only below 115 °C (EN 253); contracts: colocation 2–5 years, scale 5–10+ (Digital Realty); heat contracts 10 + 5 (Stockholm Exergi); Tallaght plant 25–35 years; Seattle permit 10 + two 10-year renewals; Vancouver property-tax report flags holding sites (improvement ÷ land value)",
+"coef": "Servers: average life 4.4 → 5 → 5.7 years (2000–2019, 2020, 2023; LBNL 2024); filings moved server useful lives to 5–6 years (Microsoft, Alphabet, Meta; Amazon partly back to 5 in 2025); Barroso: servers depreciated over 3–4 years, facilities over 15–20; plant medians ~20–25 years (ASHRAE); district-heating pipes 30 years at 120 °C, 50 only below 115 °C (EN 253); contracts: colocation 2–5 years, scale 5–10+ (Digital Realty); heat contracts 10 + 5 (Stockholm Exergi); Tallaght plant 25–35 years; Seattle permit 10 + two 10-year renewals; Vancouver property-tax report flags holding sites (improvement ÷ land value); Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011; Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4; Shared Services Canada closed 500+ of 720 federal data centres since 2011",
 "unit": "yr",
 "sources": [
 "horizons",
@@ -4853,7 +4912,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "ashraeLife",
 "en253Life",
 "dlrContracts",
-"edmParcel"
+"edmParcel",
+"statcanLives",
+"sscConsolidation"
 ],
 "source_roles": [
 {
@@ -4918,6 +4979,20 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "parity: the other city",
 "conf": 70,
 "verified": true
+},
+{
+"id": "statcanLives",
+"term": "economic lives",
+"role": "data",
+"conf": 80,
+"verified": true
+},
+{
+"id": "sscConsolidation",
+"term": "federal closures",
+"role": "data",
+"conf": 80,
+"verified": true
 }
 ],
 "conf": 80,
@@ -4930,7 +5005,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "van": 1,
 "edm": 1,
 "both": 0,
-"gen": 7
+"gen": 9
 }
 },
 {
@@ -5163,7 +5238,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "receivers",
 "offerable_area"
 ],
-"upstream": 20,
+"upstream": 60,
 "city": {
 "van": 0,
 "edm": 0,
@@ -5214,7 +5289,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "inputs": [
 "crossing_type"
 ],
-"upstream": 20,
+"upstream": 60,
 "city": {
 "van": 0,
 "edm": 0,
@@ -5268,7 +5343,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 }
 ],
 "conf": 90,
-"status": "confirmed (regulator text read in full, data/AUC_Rule_012_2024-09-30.pdf)",
+"status": "confirmed (regulator text read in full, data/AUC_Rule_012_2024-09-30.pdf); 18 Oct 2026 (M61/M62): Vancouver CD-1 districts placed by number from Sch. A (129), B (248) and G (4); B.1 outline from City open data 'Noise control areas' (Intermediate Zone, 2020; shape checked against the by-law map); 70, 125, 905 listed in both A and B, read as intermediate; G.1 not digitised (its CD-1s are in Sch. G). Edmonton 'zoned for use as residential' read with Bylaw 20001 s. 1.8.10: RS, RSF, RSM, RM, RL, RR and 28 special-area housing zones; mixed use (MU, MUN, CMUV) and Direct Control (DC, DC1, DC2) given the residential limit as an assumption and counted apart",
 "direction": "place",
 "trial": "",
 "inputs": [
@@ -5403,7 +5478,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "test",
 "name": "Street right-of-way cost",
-"formula": "Vancouver Encroachment By-law 4243: $244.97 + $6.53/ft² over 150 ft²; Edmonton ULA permit, fees unstated",
+"formula": "Vancouver Encroachment By-law 4243: $244.97 + $6.53/ft² over 150 ft²; Edmonton ULA permit, one-time: inspection $356.64 (no circulation) to $570.63 (under 20 m) or $1,560.31 (over 20 m) + $2.67 per m over 20 m, plus pavement degradation $2.59 per linear m (City of Edmonton ULA fee sheet, 2025 rates; checked 18 Oct 2026). Not comparable directly: Vancouver charges a yearly encroachment fee, Edmonton one-time permit fees",
 "coef": "",
 "unit": "CAD/yr",
 "sources": [
@@ -5423,7 +5498,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 },
 {
 "id": "edmULA",
-"term": "Edmonton ULA permit (fees unstated)",
+"term": "Edmonton ULA permit, 2025 fee sheet (one-time fees)",
 "role": "rule",
 "conf": 90,
 "verified": true
@@ -5457,7 +5532,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "inputs": [
 "distribution_cost"
 ],
-"upstream": 40,
+"upstream": 60,
 "city": {
 "van": 2,
 "edm": 1,
@@ -5623,7 +5698,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Ground and groundwater at the parcel",
 "formula": "nearest N wells (GWELLS well.csv by lat/long): finished depth, static water level, bedrock depth, yield, aquifer_id, lithology; pump-test transmissivity and hydraulic conductivity where a test exists; report the spread, never a point",
-"coef": "City of Vancouver: 333 wells in export; depth median 59 ft (p10 16, p90 210); static level median 11 ft; yield sparse (114 values, p90 100 USgpm); 2 open-loop geoexchange wells; Edmonton: AWWID (retrieval guide F6), not yet in hand",
+"coef": "Wells in a latitude/longitude box around Vancouver, which also takes in parts of North Vancouver, Richmond and Burnaby (verification sweep 17 Oct; counts by municipality not re-checked): 333; depth median 59 ft (p10 16, p90 210); static level median 11 ft; yield sparse (114 values, p90 100 USgpm); 2 open-loop geoexchange wells (the sweep places both in Richmond; not re-checked); Edmonton: AWWID (retrieval guide F6), not yet in hand",
 "unit": "ft, USgpm, m²/d",
 "sources": [
 "gwells",
@@ -6086,23 +6161,33 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "place",
 "name": "Solar from roofs nearby",
-"formula": "roof area × kWh/kWp (NRCan municipal values) × kWp/m²",
-"coef": "NRCan municipal kWh/kWp values blocked — J.B. retrieval D9; a 0.1–40 MW load would use a roof's output on site",
+"formula": "Σ roof footprint × 0.81 usable × yield (kWh/kWp, NRCan municipal) × kWp/m² × 0.70 over roofs within the radius",
+"coef": "≈ 128 kWh/m² of footprint a year (Vancouver) and 159 (Edmonton): NRCan CanmetENERGY 2024 usable-area and yield factors transferred (neither city in the sample); the data centre's own roof is pv_roof",
 "unit": "MWh/yr",
-"sources": [],
-"source_roles": [],
-"conf": 0,
-"status": "gap: NRCan values pending",
+"sources": [
+"nrcanPV2024"
+],
+"source_roles": [
+{
+"id": "nrcanPV2024",
+"term": "roof factors 0.81 / 0.70",
+"role": "coefficient",
+"conf": 70,
+"verified": true
+}
+],
+"conf": 70,
+"status": "factors read (round 2 confirmed); transferred to both cities",
 "direction": "place",
 "trial": "",
 "inputs": [
 "massing"
 ],
-"upstream": 0,
+"upstream": 70,
 "city": {
 "van": 0,
 "edm": 0,
-"both": 0,
+"both": 1,
 "gen": 0
 }
 },
@@ -6284,12 +6369,14 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "place",
 "name": "Water the place can supply",
 "formula": "potable at the metered rate; reclaimed where a utility offers it to industry",
-"coef": "Vancouver 2026: water $4.091–5.128 per unit + sewer $7.960 per unit (unit = 2.832 m³), no large-user rate; Metro Vancouver reclaimed water case-by-case, no rate. Edmonton: EPCOR supplied 4,226 ML of reclaimed water to industry in 2024 (price, customers not stated); commercial potable rates not extracted",
+"coef": "Vancouver 2026: water $4.091–5.128 per unit + sewer $7.960 per unit (unit = 2.832 m³), no large-user rate; Metro Vancouver reclaimed water case-by-case, no rate. Edmonton: EPCOR supplied 4,226 ML of reclaimed water to industry in 2024 (price, customers not stated); commercial potable rates not extracted; Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016); Alberta: 'A brand-new data centre licence stands last' (first in time) — matters only if the site holds its own licence; Vancouver 2050s: snowpack in the supply watersheds 292 → 123 cm (RCP8.5, Metro Vancouver 2016)",
 "unit": "$/m³; ML/yr",
 "sources": [
 "vanWater2026",
 "mvReclaimed",
-"epcorReclaimed"
+"epcorReclaimed",
+"abNewLicenceLast",
+"mvClimate2016"
 ],
 "source_roles": [
 {
@@ -6312,6 +6399,20 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "data",
 "conf": 80,
 "verified": true
+},
+{
+"id": "abNewLicenceLast",
+"term": "new licence stands last",
+"role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "mvClimate2016",
+"term": "2050s snowpack",
+"role": "data",
+"conf": 80,
+"verified": true
 }
 ],
 "conf": 70,
@@ -6323,8 +6424,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 ],
 "upstream": 70,
 "city": {
-"van": 2,
-"edm": 1,
+"van": 3,
+"edm": 2,
 "both": 0,
 "gen": 0
 }
@@ -6335,12 +6436,14 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "place",
 "name": "Existing building to convert",
 "formula": "parcels with buildings whose use and age suit conversion (from the parcel tables), less what policy steers to other uses",
-"coef": "Precedents: 515 W Hastings office → Bulk Data Storage (2023); Edmonton office → data centre (2009, 2011), warehouse → data centre (Qu EDM2); Vancouver Downtown Office Conversion Policy addresses residential conversion only; no official vacancy statistics in either city",
+"coef": "Precedents: 515 W Hastings office → Bulk Data Storage (2023); Edmonton office → data centre (2009, 2011), warehouse → data centre (Qu EDM2); Vancouver Downtown Office Conversion Policy addresses residential conversion only; no official vacancy statistics in either city; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening",
 "unit": "m² available",
 "sources": [
 "vanPermits",
 "edmPermits",
-"vanOfficeConv"
+"vanOfficeConv",
+"nbc2020Live",
+"voaComputerCentres"
 ],
 "source_roles": [
 {
@@ -6363,9 +6466,23 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "rule",
 "conf": 90,
 "verified": true
+},
+{
+"id": "nbc2020Live",
+"term": "floor load classes",
+"role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "voaComputerCentres",
+"term": "not readily adaptable after closure",
+"role": "context",
+"conf": 70,
+"verified": true
 }
 ],
-"conf": 20,
+"conf": 40,
 "status": "precedents in hand; stock at a parcel needs the parcel tables (N1–N7)",
 "direction": "place",
 "trial": "",
@@ -6373,12 +6490,12 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "parcel",
 "massing"
 ],
-"upstream": 20,
+"upstream": 40,
 "city": {
 "van": 2,
-"edm": 1,
+"edm": 2,
 "both": 0,
-"gen": 0
+"gen": 1
 }
 },
 {
@@ -6439,7 +6556,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "place",
 "name": "Closeness to networks and customers",
 "formula": "distance to the nearest interconnection point and to customers; latency targets of tens of milliseconds",
-"coef": "Why operators locate in cities: third-party (colocation) firms favour urban settings for buyer proximity (Pan Fang & Greenstein 2025); backbone networks are biased to cities that serve as interconnection points (Malecki 2002); edge latency targets of a few tens of ms, VR under 16 ms (Satyanarayanan 2017); internet exchange and customer proximity (JLARC 2024). Locations of internet exchange points in Vancouver and Edmonton not yet sourced",
+"coef": "Why operators locate in cities: third-party (colocation) firms favour urban settings for buyer proximity (Pan Fang & Greenstein 2025); backbone networks are biased to cities that serve as interconnection points (Malecki 2002); edge latency targets of a few tens of ms, VR under 16 ms (Satyanarayanan 2017); internet exchange and customer proximity (JLARC 2024). Locations of internet exchange points in Vancouver and Edmonton not yet sourced; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown",
 "unit": "km / ms",
 "sources": [
 "panFang2025",
@@ -6449,7 +6566,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "bchExtension2026",
 "bchDG100",
 "aesoConnect",
-"epcorDTtc2025"
+"epcorDTtc2025",
+"isocPulseIXP",
+"vanixPoints"
 ],
 "source_roles": [
 {
@@ -6507,20 +6626,34 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "pending build",
 "conf": 50,
 "verified": false
+},
+{
+"id": "isocPulseIXP",
+"term": "exchanges and participant counts",
+"role": "data",
+"conf": 50,
+"verified": true
+},
+{
+"id": "vanixPoints",
+"term": "connection points (not shown)",
+"role": "claim",
+"conf": 50,
+"verified": true
 }
 ],
-"conf": 20,
+"conf": 50,
 "status": "rationale sourced; local exchange-point locations a gap",
 "direction": "place",
 "trial": "",
 "inputs": [
 "parcel"
 ],
-"upstream": 20,
+"upstream": 50,
 "city": {
 "van": 2,
 "edm": 2,
-"both": 0,
+"both": 2,
 "gen": 4
 }
 },
@@ -6530,7 +6663,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "test",
 "name": "Zoning: allowed, conditional or rezoning",
 "formula": "look up the district: outright / conditional (development permit) / not listed (rezoning or text amendment)",
-"coef": "Vancouver: \"Bulk Data Storage\" (s. 2) is conditional in I-2, I-1C, I-3 sub-area A and FC-2 only; not permitted elsewhere, including all commercial and mixed-use districts; CD-1 site-specific. Edmonton: no named use; the City treats large-scale data centres as Major Industrial (permitted IH; IM only where existing 1 Jan 2024); Minor Industrial permitted in BE, IM, UI and IH-existing; Direct Control site-specific; s. 7.20(3.3.2) may make an ill-fitting use discretionary",
+"coef": "Vancouver: \"Bulk Data Storage\" (s. 2) is conditional in I-2, I-1C, I-3 sub-area A and FC-2 only; not permitted elsewhere, including all commercial and mixed-use districts; CD-1 site-specific. Edmonton: no named use; the City treats large-scale data centres as Major Industrial (permitted IH; IM only where existing 1 Jan 2024); Minor Industrial permitted in BE and IM, and in IH only where it existed on 1 Jan 2024; in UI only on the NAIT Main Campus (Appendix IV, Sub-Area 2), limited to storage; in FD only as temporary outdoor storage; Direct Control site-specific; s. 7.20(3.3.2) may make an ill-fitting use discretionary",
 "unit": "class",
 "sources": [
 "van_zdb_s2",
@@ -6794,12 +6927,17 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "test",
 "name": "Consultation and rights that apply",
-"formula": "list the approvals an option needs that trigger consultation; describe, never predict",
-"coef": "Alberta: Water Act licences, public-land dispositions and environmental approvals wait on consultation; EPEA approval for backup generation over 50 MW. BC: Water Sustainability Act licences, BCUC CPCNs, City of Vancouver UNDRIP Strategy — to source. BC Hydro's 2026 Call for Demand scores First Nations criteria at 10 %. The tool never speaks for the Nations",
+"formula": "list the approvals an option needs that trigger Crown consultation, and the City commitments that apply; describe, never predict",
+"coef": "BC: Water Sustainability Act licence (own water source) → Province may consult; on-site generation ≥ 50 MW or groundwater ≥ 75 L/s → EA reviewable (data centres not listed); new utility works needing a CPCN → BCUC reviews whether the Crown consulted; City land → UNDRIP Call 1.18 first right of refusal; Call 2.3 'include this in permitting decisions' (a commitment, not a legal duty); local governments have no constitutional duty to consult. Alberta: Water Act licence or public-land disposition → waits on consultation (ACO); power plant ≥ 1 MW → AUC application, Indigenous groups in the participant program only in Category A or by AUC call (Category C); a thermal plant < 10 MW on private land is Category B (not ordinarily included); Alberta's 2013 policy (amended 2020) applies to Crown decisions on provincial Crown lands and excludes access to private lands where Nations have no right of access, so a private urban site triggers it only through a Crown approval such as a water licence; no Alberta equivalent of the BC Declaration Act found",
 "unit": "process",
 "sources": [
 "abConsult",
-"bchCfDRfA"
+"bchCfDRfA",
+"vanUndrip",
+"bcDeclarationAct",
+"bcEAthresholds",
+"aucGuidance",
+"abConsultPolicy2013"
 ],
 "source_roles": [
 {
@@ -6815,20 +6953,55 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "rule",
 "conf": 90,
 "verified": true
+},
+{
+"id": "abConsultPolicy2013",
+"term": "Alberta policy scope",
+"role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "vanUndrip",
+"term": "City commitments",
+"role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "bcDeclarationAct",
+"term": "provincial law and local-government duty",
+"role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "bcEAthresholds",
+"term": "EA thresholds",
+"role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "aucGuidance",
+"term": "AUC categories A/B/C",
+"role": "rule",
+"conf": 90,
+"verified": true
 }
 ],
-"conf": 40,
-"status": "Alberta partly in hand; BC to source",
+"conf": 60,
+"status": "triggers read directly (90); whether an option meets one depends on land tenure, water source and on-site generation (60); Alberta 2013 policy read",
 "direction": "place",
 "trial": "",
 "inputs": [
 "licence_flag",
 "grid_headroom"
 ],
-"upstream": 40,
+"upstream": 60,
 "city": {
-"van": 1,
-"edm": 1,
+"van": 4,
+"edm": 3,
 "both": 0,
 "gen": 0
 }
@@ -6874,8 +7047,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "characterise",
 "name": "Work created",
-"formula": "floor area ÷ 5,000 ft² per operating job; construction peak separately",
-"coef": "Virginia JLARC 2024: about one full-time worker per 5,000 sq ft, about half contract; ~1,500 at peak construction for large campuses — transferred from Virginia hyperscale, use with caution at urban scale",
+"formula": "floor area ÷ 154–465 m² per operating job (range); construction peak separately",
+"coef": "Ark UP4, Hillingdon officer report (Planning Committee 4 Sep 2025, read 19 Oct 2026): development of 15,410 m² GIA (data centre, energy centre, ancillary building); para 7.3 cites 18,898 m² \"floorspace\" without a basis, so 15,410 is used; applicant estimate 2.29 technical + 3.45 client staff per MW(IT) = 161 jobs at 28 MW, which the applicant itself \"adjusts … down to between 50 and 100\" (para 7.6, applicant claim) → 154–308 m² per job, 1.8–3.6 jobs/MW; JLARC 2024 ≈ 465 m² (5,000 ft²) per worker; no Canadian or peer-reviewed figure",
 "unit": "FTE",
 "sources": [
 "jlarc2024"
@@ -6889,14 +7062,14 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "verified": true
 }
 ],
-"conf": 40,
-"status": "transferred coefficient",
+"conf": 50,
+"status": "range from two planning records (50); applicant figures are claims",
 "direction": "",
 "trial": "",
 "inputs": [
 "floor_area"
 ],
-"upstream": 40,
+"upstream": 50,
 "city": {
 "van": 0,
 "edm": 0,
@@ -7224,8 +7397,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "characterise",
 "name": "Solar on the data centre roof",
-"formula": "kWp = roof area × 0.66 × (1 − plant share) × 0.70 × 0.16–0.20; MWh = kWp × yield",
-"coef": "yield, annual kWh/kWp (NRCan municipal values, ±10%, losses in a 0.75 performance ratio): Vancouver 892 horizontal to 1007 at latitude tilt; Edmonton 944 to 1244. A flat-roof array at about 15° tilt lies between the two, so the tool uses horizontal as the low end and latitude tilt as the high end. Edmonton yields about 6–24% more than Vancouver per kWp. Module density 0.16 kWp/m² (2014 median) to 0.20 (current) (NREL); module cover 0.70 of a flat roof at 15° tilt; 66% of large roofs suitable (NREL 2016); roof share taken by plant from the cooling module",
+"formula": "kWp = panel area × 0.16–0.20 kWp/m²; panel area = 12 m² × the number of 6 × 2 m panel rows that fit on the roof outside the plant and its clearances (1 m from the roof edge, an assumption; rows 0.5 m apart along, 1.5 m across); MWh = kWp × yield (horizontal to latitude tilt)",
+"coef": "18 Oct 2026 (sweep M102): the register now matches the layout the Solar card uses (addons.js pvLayout); the earlier roof area × 0.66 × (1 − plant share) × 0.70 formula is retired. yield, annual kWh/kWp (NRCan municipal values, ±10%, losses in a 0.75 performance ratio): Vancouver 892 horizontal to 1007 at latitude tilt; Edmonton 944 to 1244. A flat-roof array at about 15° tilt lies between the two, so the tool uses horizontal as the low end and latitude tilt as the high end. Edmonton yields about 6–24% more than Vancouver per kWp. Module density 0.16 kWp/m² (2014 median) to 0.20 (current) (NREL); module cover 0.70 of a flat roof at 15° tilt; 66% of large roofs suitable (NREL 2016); roof share taken by plant from the cooling module",
 "unit": "kWp; MWh/yr",
 "sources": [
 "nrcanPVmunic",
@@ -7446,7 +7619,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "bchDG100",
 "epcorDTtc2025",
 "nfcAB2023",
-"nfpa855_2026"
+"nfpa855_2026",
+"cec2024ESS"
 ],
 "source_roles": [
 {
@@ -7518,6 +7692,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "pending build",
 "conf": 70,
 "verified": true
+},
+{
+"id": "cec2024ESS",
+"term": "CEC 2024 Section 64: placement, separation, certification",
+"role": "rule",
+"conf": 90,
+"verified": true
 }
 ],
 "conf": 70,
@@ -7531,7 +7712,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "city": {
 "van": 1,
 "edm": 3,
-"both": 2,
+"both": 3,
 "gen": 5
 }
 },
@@ -7790,7 +7971,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "place",
 "name": "Borefield as the data centre's heat sink",
 "formula": "L = heat to ground (W) ÷ q; boreholes = L ÷ 150 m; area = boreholes × 36 m²",
-"coef": "q = 12 W/m ground-only to 19 W/m with a dry cooler (derived from Zurmuhl et al. 2018, a 14.5 kW data centre, Ithaca, k 3.27 W/m·K); Edmonton design k 1.9 W/m·K (Alberta Geological Survey) → ~7–11 W/m (scaling is an assumption); ≈2 ha of borefield per MW rejected; 40 MW ≈ 0.8 km²; screening only — CSA C448 sizing and a thermal response test required; no Vancouver ground data found",
+"coef": "q = 12 W/m (base design, 1,248 m) to 19 W/m (economic optimum, about 760 m), both for the ground-only heat-pump system; the dry-cooler hybrid only reused 760 m (derived by dividing the 14.5 kW cooling load by length, not the heat rejected to the ground, which also includes compressor work; Zurmuhl et al. 2018 s. 3.1, 4.2.1–4.2.2, a 14.5 kW data centre, Ithaca, k 3.27 W/m·K; checked 18 Oct 2026); Edmonton design k 1.9 W/m·K (Alberta Geological Survey) → ~7–11 W/m (scaling is an assumption); ≈2 ha of borefield per MW rejected; 40 MW ≈ 0.8 km²; screening only — CSA C448 sizing and a thermal response test required; no Vancouver ground data found",
 "unit": "m of borehole; m²",
 "sources": [
 "zurmuhl2018",
@@ -7940,7 +8121,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stored_heat",
 "receiver_demand"
 ],
-"upstream": 40,
+"upstream": 50,
 "city": {
 "van": 0,
 "edm": 1,
@@ -8043,7 +8224,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "inputs": [
 "receiver_demand"
 ],
-"upstream": 40,
+"upstream": 55,
 "city": {
 "van": 0,
 "edm": 1,
@@ -8069,7 +8250,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "heat_captured",
 "demand_profile"
 ],
-"upstream": 40,
+"upstream": 50,
 "city": {
 "van": 0,
 "edm": 0,
@@ -8083,10 +8264,12 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "opportunity",
 "name": "Cooling for neighbours from waste heat",
 "formula": "cooling = recovered heat × COP, if temperature allows",
-"coef": "single-effect absorption needs ≥90 °C, COP 0.6–0.7; two-stage 70–80 °C, COP <0.4 (Energies 2026); data-centre heat 25–35 °C air-cooled (no), 50–60 °C liquid-cooled (only with a heat-pump lift)",
+"coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): absorption ≥70–90 °C (single-effect ≥90, two-stage 70–80; Chen et al. 2026); adsorption from about 45–65 °C (LRZ CoolMUC-2 from 45 °C, operator; Meyer et al. 2013, ~65 °C, preprint). Air-cooled 25–47 °C: heat pump first (possible with a change); liquid-cooled 50–60 °C: adsorption possible, absorption with a heat pump. Earlier: single-effect absorption needs ≥90 °C, COP 0.6–0.7; two-stage 70–80 °C, COP <0.4 (Energies 2026); data-centre heat 25–35 °C air-cooled (no), 50–60 °C liquid-cooled (only with a heat-pump lift)",
 "unit": "kW cooling",
 "sources": [
-"absorption2026"
+"absorption2026",
+"lrzCoolMUC",
+"meyer2013"
 ],
 "source_roles": [
 {
@@ -8110,7 +8293,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "van": 0,
 "edm": 0,
 "both": 0,
-"gen": 1
+"gen": 3
 }
 },
 {
@@ -8211,7 +8394,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "size",
 "name": "Space for the plant",
 "formula": "Σ components (electrical yard and switchgear, UPS and batteries, generators and fuel, heat rejection, heat recovery, fire suppression, loading) × IT load × redundancy",
-"coef": "Manufacturer claims per MW: UPS ≈2.0–2.4 m², Li-ion batteries ≈2.2 m² (5 min), air-cooled chillers 17–26 m², cooling towers ≈8 m², dry coolers ≈24.5 m², heat pumps ≈3.4 m² per MW heat, CDUs ≈0.6 m²; equipment only, without clearances; EPCOR transformer clearances 3.0 m door side / 2.0 m others; fuel room 2 h separation and 550 mm clearance (NFC 4.3.14); generator room 2 h (VBBL 3.6.2.8)",
+"coef": "18 Oct 2026 (sweep M30–M32; audit/plant_sources_2026-10-18.md): cooling space is per MW of HEAT (servers × PUE), spares added when the plant is laid out; air cooling → air-cooled chillers with free-cooling coils, 17–26 m²/MW (Trane TCA; a dry cooler cannot cool water below outdoor air, and air-cooled halls need ≥13 °C chilled water, NREL/DOE FEMP 2024); liquid cooling → dry coolers, 19.5–30.5 m²/MW (EVAPCO, Thermokey, Mark; manufacturer claims). Manufacturer claims per MW: UPS ≈2.0–2.4 m², Li-ion batteries ≈2.2 m² (5 min), air-cooled chillers 17–26 m², cooling towers ≈8 m², dry coolers ≈24.5 m², heat pumps ≈3.4 m² per MW heat, CDUs ≈0.6 m²; equipment only, without clearances; EPCOR transformer clearances 3.0 m door side / 2.0 m others; fuel room 2 h separation and 550 mm clearance (NFC 4.3.14); generator room 2 h (VBBL 3.6.2.8)",
 "unit": "m² per MW, by component",
 "sources": [
 "src16",
@@ -8925,7 +9108,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "receiver_demand",
 "receiver_temp"
 ],
-"upstream": 40,
+"upstream": 60,
 "city": {
 "van": 4,
 "edm": 1,
@@ -9063,7 +9246,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "load_factor",
 "stored_heat"
 ],
-"upstream": 40,
+"upstream": 50,
 "city": {
 "van": 0,
 "edm": 0,
@@ -9133,7 +9316,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "inputs": [
 "receivers_nearby"
 ],
-"upstream": 40,
+"upstream": 60,
 "city": {
 "van": 0,
 "edm": 0,
@@ -9172,10 +9355,1142 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "hourly_overlap",
 "risk_term"
 ],
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
+},
+{
+"id": "property_tax",
+"kind": "quantity",
+"stage": "test",
+"name": "Property tax to the city",
+"formula": "assessed value (land + taxable improvements) × combined class rate",
+"coef": "Vancouver Class 6 (Business & Other): 12.4672 per $1,000 in 2026, of which the City 7.09436; Edmonton non-residential: 25.22 + 3.97 education = 29.19 per $1,000 in 2026; servers and computing equipment are not municipally assessed in Alberta; in BC whether servers are assessed is not settled (0)",
+"unit": "$/yr",
+"sources": [
+"vanTaxRates2026",
+"edmTaxRates2026",
+"bcAssessClasses"
+],
+"source_roles": [
+{
+"id": "vanTaxRates2026",
+"term": "Class 6 rates",
+"role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "edmTaxRates2026",
+"term": "non-residential rates",
+"role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "bcAssessClasses",
+"term": "Class 6 residual",
+"role": "rule",
+"conf": 60,
+"verified": true
+}
+],
+"conf": 60,
+"status": "rates read (90); the improvement value of a new building is assumed from its cost (60)",
+"direction": "",
+"trial": "",
+"inputs": [
+"floor_area",
+"build_cost"
+],
+"upstream": 60,
+"city": {
+"van": 2,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
+},
+{
+"id": "tax_split",
+"kind": "quantity",
+"stage": "decide",
+"name": "Who receives the tax",
+"formula": "list the parties, not a sum: City / school (Province) / TransLink and BC Assessment (Vancouver); City / education (Province) (Edmonton); then the City's spending shares",
+"coef": "Vancouver: property tax ≈ 56% of City operating revenue, police the largest spending share; Edmonton: \"where taxes go\" page",
+"unit": "text",
+"sources": [
+"vanTaxRates2026",
+"vanBudget2026",
+"edmTaxRates2026"
+],
+"source_roles": [
+{
+"id": "vanBudget2026",
+"term": "spending shares",
+"role": "data",
+"conf": 90,
+"verified": true
+}
+],
+"conf": 90,
+"status": "read",
+"direction": "",
+"trial": "",
+"inputs": [
+"property_tax"
+],
+"upstream": 60,
+"city": {
+"van": 2,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
+},
+{
+"id": "untaxed_equipment",
+"kind": "quantity",
+"stage": "test",
+"name": "Equipment outside property tax",
+"formula": "per city, list what is and is not taxed: shell and land (assessed), computing equipment (Alberta: not municipally assessed; ≥ 75 MW provincial levy), BC servers (not settled)",
+"coef": "Alberta Data Centre Levy from 1 Jan 2026 for ≥ 75 MW: (E + F) × R; E = 45% of cost of equipment under 4 years, F = 15% of older; R 2% on grid power → about 0.9% of new equipment cost a year; paid to the Province, creditable against Alberta corporate tax; Vancouver: no equivalent",
+"unit": "text",
+"sources": [
+"abDataCentreLevy"
+],
+"source_roles": [
+{
+"id": "abDataCentreLevy",
+"term": "levy formula and threshold",
+"role": "rule",
+"conf": 90,
+"verified": true
+}
+],
+"conf": 90,
+"status": "levy read from the bill (90); MGA side waits on Assessment Bulletin 25-02 (50)",
+"direction": "",
+"trial": "",
+"inputs": [
+"it_load_actual"
+],
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
+},
+{
+"id": "computing_served",
+"kind": "quantity",
+"stage": "characterise",
+"name": "Who the computing serves",
+"formula": "up to four sourced statements, no score: federal data-residency rule; provincial rule; the local internet exchange and its size; residency ≠ sovereignty",
+"coef": "Federal: Protected B and above stored in Canada; BC: data residency removed 2021, sensitive data abroad needs an assessment; Alberta: no rule found; Vancouver exchanges 158 participants across three, Edmonton YEGIX 9",
+"unit": "text",
+"sources": [
+"gcDataResidency",
+"bcFoippaAbroad",
+"isocPulseIXP"
+],
+"source_roles": [
+{
+"id": "gcDataResidency",
+"term": "federal residency",
+"role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "bcFoippaAbroad",
+"term": "BC rule",
+"role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "isocPulseIXP",
+"term": "exchange sizes",
+"role": "data",
+"conf": 50,
+"verified": true
+}
+],
+"conf": 80,
+"status": "read",
+"direction": "",
+"trial": "",
+"inputs": [
+"interconnection"
+],
+"upstream": 50,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 1,
+"gen": 1
+}
+},
+{
+"id": "afterlife",
+"kind": "quantity",
+"stage": "decide",
+"name": "After the data centre",
+"formula": "at closure, three streams: shell (reuse or demolition), equipment (stewardship program or disposal, with data sanitization), plant and batteries",
+"coef": "Vacated first-generation centres \"tend to remain unoccupied and are not readily adaptable\" (UK VOA, 70); federal closures 500+ of 720; BC Recycling Regulation covers IT products (servers by interpretation, 60); Alberta designates computer equipment; large UPS batteries outside both consumer programs as read (gap); no official source on converting a data centre to another use",
+"unit": "text",
+"sources": [
+"voaComputerCentres",
+"sscConsolidation",
+"bcRecyclingIT",
+"abElectronicsReg"
+],
+"source_roles": [
+{
+"id": "voaComputerCentres",
+"term": "not readily adaptable",
+"role": "context",
+"conf": 70,
+"verified": true
+},
+{
+"id": "bcRecyclingIT",
+"term": "IT products in scope",
+"role": "rule",
+"conf": 60,
+"verified": true
+}
+],
+"conf": 60,
+"status": "shell evidence transferred from the UK; conversion evidence a gap",
+"direction": "",
+"trial": "",
+"inputs": [
+"horizons",
+"existing_building"
+],
+"upstream": 40,
+"city": {
+"van": 1,
+"edm": 1,
+"both": 0,
+"gen": 2
+}
+},
+{
+"id": "heat_flux_site",
+"kind": "quantity",
+"stage": "characterise",
+"name": "Heat given off per m² of site",
+"formula": "q = heat rejected at peak (W) ÷ site area (m²); shown beside the city value",
+"coef": "Vancouver grid-cell anthropogenic heat flux 119 (units assumed W/m²; Allen et al. 2011); Edmonton: no published value; US city-wide fluxes 10–75 W/m², about 1 °C of air warming per 100 W/m² at neighbourhood scale (cited in Sailor 2026); check: 10 MW over 1 ha → 1,000 W/m²",
+"unit": "W/m²",
+"sources": [
+"allen2011",
+"sailor2026"
+],
+"source_roles": [
+{
+"id": "allen2011",
+"term": "city heat flux",
+"role": "data",
+"conf": 70,
+"verified": true
+}
+],
+"conf": 70,
+"status": "arithmetic (100); city comparison value 70",
+"direction": "",
+"trial": "",
+"inputs": [
+"heat_rejected"
+],
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 1,
+"gen": 1
+}
+},
+{
+"id": "heat_plume_dT",
+"kind": "quantity",
+"stage": "characterise",
+"name": "Warmer air near the cooling units",
+"formula": "at the coil: ΔT = Q ÷ (ρ·cp·airflow); at a neighbour: ΔT ≈ Q ÷ (ρ·cp) × (χ/Q)(x), the plume factor from air_screen_1h; heat treated as a passive tracer (buoyant rise ignored)",
+"coef": "airflow from manufacturer data (claim, 50); screening estimate, not a measured air temperature. Measured (first field study, Phoenix, 36–169 MW): downwind air 0.7–0.9 °C warmer on average, up to 2.2 °C, detectable 100–500 m away; condenser discharge 8–14 °C above ambient. Placement: units on the roof warm street-level air less than units on walls (Berlin model: up to 0.6 K for wall units, smaller for rooftop; Jin et al. 2020). The effect is strongest at night: Phoenix AC waste heat added more than 1 °C at night at some locations, little by day (Salamanca et al. 2014). A land-surface preprint (+2 °C) is context only",
+"unit": "°C",
+"sources": [
+"sailor2026",
+"jin2020",
+"salamanca2014",
+"dcLstPreprint"
+],
+"source_roles": [
+{
+"id": "sailor2026",
+"term": "measured downwind warming",
+"role": "data",
+"conf": 70,
+"verified": true
+},
+{
+"id": "dcLstPreprint",
+"term": "context only",
+"role": "context",
+"conf": 40,
+"verified": false
+}
+],
+"conf": 60,
+"status": "physics at the coil (100); at a neighbour derived (60); field range peer-reviewed but transferred from large desert sites (70)",
+"direction": "",
+"trial": "",
+"inputs": [
+"heat_rejected",
+"plant_schedule"
+],
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 4
+}
+},
+{
+"id": "recirculation_flag",
+"kind": "quantity",
+"stage": "test",
+"name": "Warm air drawn back into the coolers",
+"formula": "flag when units sit at different fan heights, with gaps between banks, or beside a taller wall; no sizing formula",
+"coef": "wind alone cut a modelled bank's heat rejection to 83.5–89.5% of still-air (Duvenhage & Kröger 1996, peer-reviewed, numerical: cross wind starves up-wind fans; wind along the bank drives plume recirculation; higher fan platforms recirculate more); field cases 13.6% and 24% recirculation (1971, manufacturer engineers — claim); a hot roof warmed inlet air about 0.3 °C (Wray & Akbari 2008, 70); ASHRAE intake and exhaust chapter not yet read",
+"unit": "flag",
+"sources": [
+"duvenhageKroger1996",
+"gunterShipes1971",
+"wrayAkbari2008"
+],
+"source_roles": [
+{
+"id": "duvenhageKroger1996",
+"term": "wind and recirculation",
+"role": "coefficient",
+"conf": 70,
+"verified": true
+},
+{
+"id": "gunterShipes1971",
+"term": "field recirculation",
+"role": "claim",
+"conf": 50,
+"verified": true
+},
+{
+"id": "wrayAkbari2008",
+"term": "roof warming",
+"role": "context",
+"conf": 70,
+"verified": true
+}
+],
+"conf": 60,
+"status": "flag rule supported by one peer-reviewed model; no sizing formula",
+"direction": "",
+"trial": "",
+"inputs": [
+"plant_schedule"
+],
+"upstream": 60,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 3
+}
+},
+{
+"id": "uhi_context",
+"kind": "quantity",
+"stage": "place",
+"name": "Urban heat in the area",
+"formula": "one line per city: the City's heat policy and action, and the measured surface heat island",
+"coef": "Vancouver: heat mapping, 30% canopy by 2050; Edmonton: Cool Edmonton (Action 9), hot days about 1 → 16 a year by the 2050s; surface heat island Vancouver summer day 7.25 °C, Edmonton winter night 2.86 °C (Duan et al. 2026); near data centres in Phoenix, surface about 0.5 °C warmer within 1 km and less vegetation, with low-income and minority neighbours over-represented (Molla 2026, exploratory, no causality); neither city regulates heat rejected by equipment",
+"unit": "text",
+"sources": [
+"vanHeatPolicy",
+"edmHeatPolicy",
+"duan2026",
+"molla2026"
+],
+"source_roles": [
+{
+"id": "duan2026",
+"term": "surface heat island",
+"role": "data",
+"conf": 70,
+"verified": true
+}
+],
+"conf": 80,
+"status": "read",
+"direction": "",
+"trial": "",
+"inputs": [
+"parcel"
+],
+"upstream": 80,
+"city": {
+"van": 1,
+"edm": 1,
+"both": 1,
+"gen": 1
+}
+},
+{
+"id": "genset_emission_rate",
+"kind": "quantity",
+"stage": "characterise",
+"name": "Generator emission rate",
+"formula": "Q = emission factor (g/kWh) × generator kWe × load ÷ 3,600",
+"coef": "NOx 14.6 g/kWh uncontrolled (AP-42 upper bound, as genset_test); check: 2,000 kWe at full load → 8.1 g/s (29.2 kg/h); generic equipment only",
+"unit": "g/s",
+"sources": [
+"ap42_34"
+],
+"source_roles": [],
+"conf": 65,
+"status": "arithmetic on the genset_test factor",
+"direction": "",
+"trial": "",
+"inputs": [
+"genset_test"
+],
+"upstream": 65,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
+},
+{
+"id": "air_screen_1h",
+"kind": "quantity",
+"stage": "characterise",
+"name": "Air at a neighbour (screening)",
+"formula": "C(1 h) = 10⁶ × Q ÷ (π·u·σy·σz) × exp(−H² ÷ 2σz²); urban dispersion coefficients; u = 1 m/s, neutral class as a stated worst-case pick; preferred: AERSCREEN tables precomputed for three generic stacks",
+"coef": "AERSCREEN is the screening tool in both provinces (\"preferred\" in BC, \"recommended\" in Alberta); label: screening — a regulator would require AERSCREEN or refined modelling; dispersion coefficient table to be checked against the final ISC3 edition",
+"unit": "µg/m³",
+"sources": [
+"bcDispersion",
+"abModelGuideline"
+],
+"source_roles": [
+{
+"id": "bcDispersion",
+"term": "AERSCREEN preferred",
+"role": "method",
+"conf": 90,
+"verified": true
+},
+{
+"id": "abModelGuideline",
+"term": "AERSCREEN recommended",
+"role": "method",
+"conf": 90,
+"verified": true
+}
+],
+"conf": 60,
+"status": "derived with stated assumptions",
+"direction": "",
+"trial": "",
+"inputs": [
+"genset_emission_rate"
+],
+"upstream": 60,
+"city": {
+"van": 1,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
+},
+{
+"id": "no2_at_receptor",
+"kind": "quantity",
+"stage": "characterise",
+"name": "Nitrogen dioxide at a neighbour",
+"formula": "NO2 = NOx at the receptor × conversion ratio: 1.0 (Tier 1) to the ARM2 bounds 0.9–0.2; diesel in-stack ratio 0.083",
+"coef": "BC NO2 guidance (2022); Edmonton uses Tier 1 only until Alberta Model Guideline s. 7.3 is read",
+"unit": "µg/m³",
+"sources": [
+"bcNO2Guidance"
+],
+"source_roles": [
+{
+"id": "bcNO2Guidance",
+"term": "conversion tiers",
+"role": "rule",
+"conf": 90,
+"verified": true
+}
+],
+"conf": 90,
+"status": "rule read (BC); Alberta numbers not read",
+"direction": "",
+"trial": "",
+"inputs": [
+"air_screen_1h"
+],
+"upstream": 60,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 0,
+"gen": 0
+}
+},
+{
+"id": "air_vs_objective",
+"kind": "quantity",
+"stage": "test",
+"name": "Air against the limits",
+"formula": "C(avg) = C(1 h) × averaging ratio (24 h 0.60, annual 0.10) + background; test against the city objective AND the federal standard: \"passes screen\" or \"refined modelling needed\"; no score",
+"coef": "Vancouver: Metro Vancouver NO2 1-h 79 µg/m³, annual 22.6; PM2.5 24-h 25; Clark Drive background NO2 ≈ 82 µg/m³ (1-h metric), already over the regional objectives; Edmonton: Alberta NO2 1-h 300 µg/m³ (hour by hour, reading 60), PM2.5 24-h 29; federal NO2 1-h 79 (2025), PM2.5 27 → 23 (2030); Edmonton short-term background a gap",
+"unit": "pass / refine",
+"sources": [
+"aerscreenGuide",
+"mvAAQO",
+"abAAQO",
+"caaqs",
+"bcAirBackground",
+"mvAirSummary2024",
+"acaEdmonton"
+],
+"source_roles": [
+{
+"id": "mvAAQO",
+"term": "Vancouver objectives",
+"role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "abAAQO",
+"term": "Alberta objectives",
+"role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "caaqs",
+"term": "federal standards",
+"role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "aerscreenGuide",
+"term": "averaging ratios",
+"role": "method",
+"conf": 90,
+"verified": true
+}
+],
+"conf": 70,
+"status": "objectives read (90); background partial",
+"direction": "",
+"trial": "",
+"inputs": [
+"no2_at_receptor",
+"air_screen_1h"
+],
+"upstream": 60,
+"city": {
+"van": 3,
+"edm": 2,
+"both": 0,
+"gen": 2
+}
+},
+{
+"id": "air_permit_trigger",
+"kind": "quantity",
+"stage": "test",
+"name": "Air permit trigger",
+"formula": "Vancouver: daily NOx on a test day vs 5 kg/day (Bylaw 1082 s. 7(12)); Edmonton: emergency standby generators exempt from an EPEA approval",
+"coef": "a 2 MW generator at full load passes 5 kg of NOx in about 10 minutes (arithmetic, 60: whether s. 7(9) exempts engines outright is unsettled)",
+"unit": "rule",
+"sources": [
+"mvBylaw1082"
+],
+"source_roles": [
+{
+"id": "mvBylaw1082",
+"term": "5 kg/day",
+"role": "rule",
+"conf": 90,
+"verified": true
+}
+],
+"conf": 60,
+"status": "rule read; applicability unsettled",
+"direction": "",
+"trial": "",
+"inputs": [
+"genset_emission_rate"
+],
+"upstream": 60,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 0,
+"gen": 0
+}
+},
+{
+"id": "free_cooling_hours_2050s",
+"kind": "quantity",
+"stage": "characterise",
+"name": "Free-cooling hours in the 2050s",
+"formula": "same count as free_cooling_hours, run on the PCIC 2050s file (SSP2-4.5 and SSP5-8.5); shown beside today's value",
+"coef": "computed 19 Oct 2026 from the PCIC files (Vancouver Intl): hours ≤ 8 °C 3,284 now → 2,279 (SSP2-4.5) / 1,954 (SSP5-8.5); hours > 18 °C 1,085 → 1,879 / 2,218; peak 25.6 → 27.6 / 28.6 °C. Edmonton Intl: hours ≤ 8 °C 5,522 → 5,047 / 4,815; hours > 18 °C 914 → 1,259 / 1,479; hours ≥ 30 °C 0 → 22 / 71; peak 29.0 → 31.9 / 33.3 °C. Files shift averages (\"Heat waves or cold spells remain largely unchanged\")",
+"unit": "h/yr",
+"sources": [
+"pcicWx3"
+],
+"source_roles": [
+{
+"id": "pcicWx3",
+"term": "future weather",
+"role": "data",
+"conf": 80,
+"verified": true
+}
+],
+"conf": 80,
+"status": "computed from the PCIC files (both cities, Intl stations, same method)",
+"direction": "",
+"trial": "",
+"inputs": [
+"weather",
+"free_cooling_hours"
+],
+"upstream": 80,
+"city": {
+"van": 0,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
+},
+{
+"id": "homes_heated_2050s",
+"kind": "quantity",
+"stage": "opportunity",
+"name": "Homes heated in the 2050s",
+"formula": "homes = heat available ÷ (space heat × HDD(2050s) ÷ HDD(now) + hot water)",
+"coef": "space / hot-water split from CEUD 2023 (BC 46.2% / 27.1%; AB 63.1% / 23.2%); space heat assumed ∝ HDD, hot water unchanged; computed from PCIC (daily-mean HDD18): Vancouver 2,755 now → 2,198 (SSP2-4.5, −20%) / 2,038 (SSP5-8.5, −26%); Edmonton 5,389 → 4,659 (−14%) / 4,377 (−19%); published (RCP8.5, not like-for-like): Metro Vancouver −25%, Edmonton 5,657 → 4,331",
+"unit": "homes",
+"sources": [
+"pcicWx3",
+"mvClimate2016",
+"emrbClimate2023"
+],
+"source_roles": [
+{
+"id": "mvClimate2016",
+"term": "2050s HDD",
+"role": "data",
+"conf": 80,
+"verified": true
+},
+{
+"id": "emrbClimate2023",
+"term": "2050s HDD",
+"role": "data",
+"conf": 80,
+"verified": true
+}
+],
+"conf": 60,
+"status": "derived with a stated assumption",
+"direction": "",
+"trial": "",
+"inputs": [
+"homes_heated",
+"free_cooling_hours_2050s"
+],
+"upstream": 50,
+"city": {
+"van": 1,
+"edm": 1,
+"both": 1,
+"gen": 0
+}
+},
+{
+"id": "water_restriction_rule",
+"kind": "quantity",
+"stage": "test",
+"name": "Water restrictions in a drought",
+"formula": "per city, text only: what each restriction stage asks of evaporative cooling",
+"coef": "Vancouver: stages 1–3 do not restrict evaporative cooling; stage 4 asks industry for voluntary cuts; once-through cooling on City water banned at all times; towers need a permit and monthly Legionella reports. Edmonton: EPCOR stages target 5/10/15/25% cuts; stages 3–4 \"must\"; cooling towers reduced \"where possible\"; whether data-centre cooling is essential is not defined",
+"unit": "rule",
+"sources": [
+"mvDWCP",
+"vanOnceThrough",
+"epcorStages"
+],
+"source_roles": [
+{
+"id": "mvDWCP",
+"term": "stages",
+"role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "epcorStages",
+"term": "stages",
+"role": "rule",
+"conf": 90,
+"verified": true
+}
+],
+"conf": 90,
+"status": "text read (90); \"essential\" undefined (20)",
+"direction": "",
+"trial": "",
+"inputs": [
+"cooling_type"
+],
+"upstream": 70,
+"city": {
+"van": 2,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
+},
+{
+"id": "restriction_history",
+"kind": "quantity",
+"stage": "place",
+"name": "Recent water restrictions",
+"formula": "dated official events per city",
+"coef": "Vancouver: Stage 3 2015; Stage 2 2023 (4 Aug–15 Oct); 2026 Stage 3 from 8 Jun; Edmonton: one mandatory ban 29 Jan–2 Feb 2024 (plant failure, not drought); EPCOR: restrictions not every year",
+"unit": "list",
+"sources": [
+"mvStageHistory",
+"epcorStages"
+],
+"source_roles": [
+{
+"id": "mvStageHistory",
+"term": "stage history",
+"role": "data",
+"conf": 80,
+"verified": true
+}
+],
+"conf": 80,
+"status": "read",
+"direction": "",
+"trial": "",
+"inputs": [
+"parcel"
+],
+"upstream": 80,
+"city": {
+"van": 1,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
+},
+{
+"id": "importance_cat",
+"kind": "quantity",
+"stage": "test",
+"name": "Earthquake design category",
+"formula": "Normal (IE 1.0) by default; High (1.3) if likely used as a post-disaster shelter; post-disaster (1.5) if it serves as a communications facility, unless the authority exempts",
+"coef": "High raises seismic design forces 30% over Normal (ratio only, not cost); Vancouver's new seismic rules apply to permits from 15 Sep 2026; whether a data centre counts as a communications facility is for the authority (20)",
+"unit": "rule",
+"sources": [
+"nbcImportance",
+"vbbl2025Seismic"
+],
+"source_roles": [
+{
+"id": "nbcImportance",
+"term": "importance factors",
+"role": "rule",
+"conf": 90,
+"verified": true
+}
+],
+"conf": 90,
+"status": "table read (90); data-centre classification judged (20)",
+"direction": "",
+"trial": "",
+"inputs": [
+"refuge_people"
+],
+"upstream": 60,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
+},
+{
+"id": "seismic_sa02",
+"kind": "quantity",
+"stage": "place",
+"name": "Earthquake hazard",
+"formula": "Sa(0.2) for the city; replace with the NRCan calculator value for the parcel",
+"coef": "Vancouver 0.848, Edmonton 0.103 (proposed 2020 table; final table not read): Vancouver about 8×",
+"unit": "g",
+"sources": [
+"nrcSeismic2020"
+],
+"source_roles": [
+{
+"id": "nrcSeismic2020",
+"term": "Sa(0.2)",
+"role": "data",
+"conf": 70,
+"verified": true
+}
+],
+"conf": 70,
+"status": "proposed values",
+"direction": "",
+"trial": "",
+"inputs": [
+"parcel"
+],
+"upstream": 70,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 1,
+"gen": 0
+}
+},
+{
+"id": "refuge_after_quake",
+"kind": "quantity",
+"stage": "test",
+"name": "Refuge after an earthquake",
+"formula": "credible after an earthquake only if ALL: designed High or above; backup power serves the refuge space; group-lodging basics; local emergency services list it; otherwise \"everyday heat, cold and smoke events only\"",
+"coef": "BC: facilities \"will only be opened up if they are suitable and have power\"; Vancouver plans hubs around community centres (23 of 25); Edmonton opens warming spaces at −20 °C with wind chill for 3 days; neither city lists private or industrial buildings",
+"unit": "rule",
+"sources": [
+"jibcGroupLodging",
+"vanHubs",
+"edmWarming",
+"nbcImportance"
+],
+"source_roles": [
+{
+"id": "vanHubs",
+"term": "City hubs",
+"role": "data",
+"conf": 90,
+"verified": true
+},
+{
+"id": "edmWarming",
+"term": "warming trigger",
+"role": "rule",
+"conf": 90,
+"verified": true
+}
+],
+"conf": 60,
+"status": "derived from rules read",
+"direction": "",
+"trial": "",
+"inputs": [
+"importance_cat",
+"refuge_people",
+"backup_hours"
+],
+"upstream": 60,
+"city": {
+"van": 2,
+"edm": 1,
+"both": 0,
+"gen": 1
+}
+},
+{
+"id": "battery_code_path",
+"kind": "quantity",
+"stage": "test",
+"name": "Battery rules",
+"formula": "grid battery (ESS): certified; not above 23 m or below the lowest egress level unless in an electrical equipment vault; outdoors ≥ 3 m from egress and ≥ 1.5 m from openings unless UL 9540A-evaluated; UPS batteries are not an ESS and follow the general battery rules (ventilation, authorized access)",
+"coef": "CEC 2024 Section 64 (Rules 64-902, 64-926, 64-1002; Appendix B) in force BC 4 Mar 2025, Alberta 1 Apr 2025; no city fire bylaw adds battery rules in either city; NFPA 855 commercial thresholds stay reference only (unverified)",
+"unit": "rule",
+"sources": [
+"cec2024ESS"
+],
+"source_roles": [
+{
+"id": "cec2024ESS",
+"term": "Section 64 rules",
+"role": "rule",
+"conf": 90,
+"verified": true
+}
+],
+"conf": 90,
+"status": "rules read (90)",
+"direction": "",
+"trial": "",
+"inputs": [
+"battery"
+],
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 1,
+"gen": 0
+}
+},
+{
+"id": "nations_named",
+"kind": "quantity",
+"stage": "place",
+"name": "Nations whose lands these are",
+"formula": "the City's own wording, and links to each Nation's own referral page; no statement of any Nation's position",
+"coef": "Vancouver: xʷməθkʷəy̓əm (Musqueam), Sḵwx̱wú7mesh Úxwumixw (Squamish), səlilwətaɬ (Tsleil-Waututh), unceded territories; Edmonton: Treaty 6 territory and the Métis homeland, peoples named, not individual Nations (Confederacy of Treaty No. 6 lists 15)",
+"unit": "text",
+"sources": [
+"vanNationsNamed",
+"edmNationsNamed"
+],
+"source_roles": [
+{
+"id": "vanNationsNamed",
+"term": "naming",
+"role": "data",
+"conf": 90,
+"verified": true
+},
+{
+"id": "edmNationsNamed",
+"term": "naming",
+"role": "data",
+"conf": 90,
+"verified": true
+}
+],
+"conf": 90,
+"status": "read",
+"direction": "",
+"trial": "",
+"inputs": [
+"parcel"
+],
+"upstream": 80,
+"city": {
+"van": 1,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
+},
+{
+"id": "city_commitments",
+"kind": "quantity",
+"stage": "test",
+"name": "City commitments to Indigenous Nations",
+"formula": "commitments, not legal duties: Vancouver UNDRIP Strategy Calls 1.18, 2.1–2.3, 2.5, 3.10 and the Action Plan engagement framework (in progress); Edmonton Indigenous Framework roles and Urban Reserve Strategy",
+"coef": "Vancouver endorsed the Strategy 25 Oct 2022 and the Action Plan 25 Jun 2024; Edmonton has no land-use or rezoning commitment like Vancouver's (stated plainly)",
+"unit": "text",
+"sources": [
+"vanUndrip",
+"edmNationsNamed"
+],
+"source_roles": [
+{
+"id": "vanUndrip",
+"term": "Calls to Action",
+"role": "rule",
+"conf": 90,
+"verified": true
+}
+],
+"conf": 90,
+"status": "read",
+"direction": "",
+"trial": "",
+"inputs": [
+"consultation"
+],
+"upstream": 60,
+"city": {
+"van": 1,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
+},
+{
+"id": "vibration_target",
+"kind": "quantity",
+"stage": "test",
+"name": "Vibration limit at neighbours (reference)",
+"formula": "compare with reference criteria: 72 VdB homes at night, 75 institutions, 65 vibration-sensitive rooms",
+"coef": "US FTA criteria, transferred; neither city's noise bylaw mentions vibration; ISO standards set no neighbour limits",
+"unit": "VdB",
+"sources": [
+"ftaVibration"
+],
+"source_roles": [
+{
+"id": "ftaVibration",
+"term": "criteria",
+"role": "coefficient",
+"conf": 70,
+"verified": true
+}
+],
+"conf": 70,
+"status": "reference criteria transferred",
+"direction": "",
+"trial": "",
+"inputs": [
+"vibration_rank"
+],
 "upstream": 40,
 "city": {
 "van": 0,
 "edm": 0,
+"both": 0,
+"gen": 1
+}
+},
+{
+"id": "embodied_rule",
+"kind": "quantity",
+"stage": "test",
+"name": "Embodied carbon rule",
+"formula": "Vancouver: new buildings at most 2× the baseline (cap 800 kg CO2e/m² on the absolute path); Edmonton: no requirement for private buildings",
+"coef": "VBBL 2025; further 10% cut delayed",
+"unit": "rule",
+"sources": [
+"vanEmbodied"
+],
+"source_roles": [
+{
+"id": "vanEmbodied",
+"term": "rule",
+"role": "rule",
+"conf": 90,
+"verified": true
+}
+],
+"conf": 90,
+"status": "read",
+"direction": "",
+"trial": "",
+"inputs": [
+"embodied_building"
+],
+"upstream": 40,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 1,
+"gen": 0
+}
+},
+{
+"id": "heat_value_split",
+"kind": "quantity",
+"stage": "decide",
+"name": "Who keeps the value of the heat",
+"formula": "describe who controls each share (operator, utility, end users); no numeric split",
+"coef": "no study measures the split; peer-reviewed papers say it is negotiated and the utility holds the stronger hand; a numeric split stays a gap (0) — a gap the thesis could fill",
+"unit": "text",
+"sources": [
+"dkHeatCap2025"
+],
+"source_roles": [],
+"conf": 50,
+"status": "qualitative only",
+"direction": "",
+"trial": "",
+"inputs": [
+"price_floor",
+"price_ceiling",
+"capex_split"
+],
+"upstream": 50,
+"city": {
+"van": 0,
+"edm": 0,
+"both": 0,
+"gen": 1
+}
+},
+{
+"id": "power_bill_effect",
+"kind": "quantity",
+"stage": "test",
+"name": "Effect on household power bills",
+"formula": "by size and province, text only: a typical in-city data centre (≈ 2.5 MW) shows no measurable effect in any source; very large loads depend on provincial connection policy",
+"coef": "BC Hydro modelling (2026): one new 75–250 MVA customer changes all rates by +0.4 to +1.5% by F2036 with no threshold, 0 to −1.2% under threshold options; AESO (2025): whether large loads pay their fair share of transmission costs is still open; LBNL (2025): mechanisms and protections, no quantified effect",
+"unit": "text",
+"sources": [
+"bchTCIP2026",
+"aesoDC2025",
+"lbnlLargeLoad2025"
+],
+"source_roles": [
+{
+"id": "bchTCIP2026",
+"term": "rate impact by size",
+"role": "data",
+"conf": 70,
+"verified": true
+},
+{
+"id": "aesoDC2025",
+"term": "open question",
+"role": "context",
+"conf": 90,
+"verified": true
+}
+],
+"conf": 60,
+"status": "utility modelling of policy options (not decided); no source at in-city scale",
+"direction": "",
+"trial": "",
+"inputs": [
+"it_load_actual",
+"grid_headroom"
+],
+"upstream": 50,
+"city": {
+"van": 1,
+"edm": 1,
 "both": 0,
 "gen": 1
 }
@@ -9299,7 +10614,11 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "to": "water_behind_electricity"
 },
 {
-"from": "floor_area",
+"from": "envelope",
+"to": "rainwater"
+},
+{
+"from": "massing",
 "to": "rainwater"
 },
 {
@@ -10005,6 +11324,162 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 {
 "from": "risk_term",
 "to": "futures"
+},
+{
+"from": "floor_area",
+"to": "property_tax"
+},
+{
+"from": "build_cost",
+"to": "property_tax"
+},
+{
+"from": "property_tax",
+"to": "tax_split"
+},
+{
+"from": "it_load_actual",
+"to": "untaxed_equipment"
+},
+{
+"from": "interconnection",
+"to": "computing_served"
+},
+{
+"from": "horizons",
+"to": "afterlife"
+},
+{
+"from": "existing_building",
+"to": "afterlife"
+},
+{
+"from": "heat_rejected",
+"to": "heat_flux_site"
+},
+{
+"from": "heat_rejected",
+"to": "heat_plume_dT"
+},
+{
+"from": "plant_schedule",
+"to": "heat_plume_dT"
+},
+{
+"from": "plant_schedule",
+"to": "recirculation_flag"
+},
+{
+"from": "parcel",
+"to": "uhi_context"
+},
+{
+"from": "genset_test",
+"to": "genset_emission_rate"
+},
+{
+"from": "genset_emission_rate",
+"to": "air_screen_1h"
+},
+{
+"from": "air_screen_1h",
+"to": "no2_at_receptor"
+},
+{
+"from": "no2_at_receptor",
+"to": "air_vs_objective"
+},
+{
+"from": "air_screen_1h",
+"to": "air_vs_objective"
+},
+{
+"from": "genset_emission_rate",
+"to": "air_permit_trigger"
+},
+{
+"from": "weather",
+"to": "free_cooling_hours_2050s"
+},
+{
+"from": "free_cooling_hours",
+"to": "free_cooling_hours_2050s"
+},
+{
+"from": "homes_heated",
+"to": "homes_heated_2050s"
+},
+{
+"from": "free_cooling_hours_2050s",
+"to": "homes_heated_2050s"
+},
+{
+"from": "cooling_type",
+"to": "water_restriction_rule"
+},
+{
+"from": "parcel",
+"to": "restriction_history"
+},
+{
+"from": "refuge_people",
+"to": "importance_cat"
+},
+{
+"from": "parcel",
+"to": "seismic_sa02"
+},
+{
+"from": "importance_cat",
+"to": "refuge_after_quake"
+},
+{
+"from": "refuge_people",
+"to": "refuge_after_quake"
+},
+{
+"from": "backup_hours",
+"to": "refuge_after_quake"
+},
+{
+"from": "battery",
+"to": "battery_code_path"
+},
+{
+"from": "parcel",
+"to": "nations_named"
+},
+{
+"from": "consultation",
+"to": "city_commitments"
+},
+{
+"from": "vibration_rank",
+"to": "vibration_target"
+},
+{
+"from": "embodied_building",
+"to": "embodied_rule"
+},
+{
+"from": "price_floor",
+"to": "heat_value_split"
+},
+{
+"from": "price_ceiling",
+"to": "heat_value_split"
+},
+{
+"from": "capex_split",
+"to": "heat_value_split"
+},
+{
+"from": "it_load_actual",
+"to": "power_bill_effect"
+},
+{
+"from": "grid_headroom",
+"to": "power_bill_effect"
 }
 ],
 "conditions": [
@@ -12935,7 +14410,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "exergi": "Stockholm Exergi: 'indikativt 2 MSEK årligen för 1 MW vid 5 000 timmar' → 400 SEK/MWh; supply normally 68 °C — https://www.stockholmexergi.se/wp-content/uploads/2023/05/Produktblad_tjanster_Oppen-Fjarrvarme.pdf",
 "femp": "US DOE FEMP BMP #10: evaporation ≤ Q ÷ h_fg (~1.5 L/kWh); blowdown = E ÷ (C−1); WUE (ISO 30134-9) (Formulas sheet)",
 "floor": "Operator floor price at any Canadian site",
-"fortis": "FortisBC Rate 3 (1 Jul 2026): variable ≈ $9.12/GJ → ≈ $38.6/MWh heat at 85%; BC carbon tax zero since 1 Apr 2025 — https://www.cdn.fortisbc.com/libraries/docs/default-source/about-us-documents/regulatory-affairs-documents/gas-utility/rateschedule_3.pdf",
+"fortis": "FortisBC Rate 3 (delivery 1 Jan 2026, commodity 1 Jul 2026): variable $9.305/GJ incl. Riders 5, 6, 8 → ≈ $39.4/MWh heat at 85% (checked against the schedule 18 Oct 2026); BC carbon tax zero since 1 Apr 2025 — https://www.cdn.fortisbc.com/libraries/docs/default-source/about-us-documents/regulatory-affairs-documents/gas-utility/rateschedule_3.pdf",
 "fortum": "Fortum Avoin kaukolämpö purchase prices from 1 May 2026: €11 (≥16.1 °C) to €50/MWh (≤−8 °C) — https://www.fortum.com/fi/lammitys-ja-jaahdytys/yritykset-ja-taloyhtiot/kaukolampoa-yrityksille/avoin-kaukolampo/avoin-kaukolampo-ostohinnat",
 "g9425": "BCUC Order G-94-25: Creative Energy's $38.5 M capex schedule rejected; developer bears costs above $15 M (C-1-20) — https://www.ordersdecisions.bcuc.com/bcuc/orders/en/522707/1/document.do",
 "gridAB": "Alberta 335 g CO2e/kWh (2024, generation-based), citing NIR 2026 Table A7-10 — https://www.alberta.ca/albertas-greenhouse-gas-emissions-reduction-performance",
@@ -13335,14 +14810,14 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "vanNEU2018": "City of Vancouver NEU expansion report (21 Feb 2018): distribution capital \"$13 to $37 million (2018$)\", base case $29M; no length or cost per metre — https://council.vancouver.ca/20180221/documents/pspc3.pdf",
 "edmDDEcapital": "City of Edmonton, DDE 2025–2026 rate filing (IIS02765; local copy): Phase 1 capital $35.9M covers the energy centre, distribution piping and energy transfer station together; Phase 1A $18.3M; no pipe length or per-metre cost (Claude searched the local PDFs, incl. the 2025 business case) — data/Edmonton_DDE_2025-2026_Rate_Filing.pdf",
 "isoplusEPD": "isoplus Suomi EPD, pre-insulated steel pipe: DN100 A1–A3 39.5 kg CO2e per metre of single pipe (A4 1.03, A5 0.21); DN20 ×0.22, DN400 ×6.2. Supply and return ≈ double; trench excluded — https://api.environdec.com/api/v1/EPDLibrary/Files/697db282-a3b1-41da-888c-08dcd3ea77d2/Data",
-"vanNEUlevy2025": "City of Vancouver, False Creek NEU 2025 rates (report 25 Nov 2024): connection levy $112,611 per energy transfer station plus \"$133 per kW of the peak heat energy demand\", \"to recover the direct costs of connection (service connection and energy transfer station)\"; proposed 2026 $123,873 + $146/kW — https://council.vancouver.ca/20241203/documents/spec1e.pdf",
+"vanNEUlevy2025": "City of Vancouver, False Creek NEU connection levy now $123,873 per energy transfer station + $146 per kW of peak (By-law 9552 Sch. C Part 1, in force 1 Jan 2026 via By-law 14524; $136,260 + $161/kW from 1 Jan 2027; checked against data/raw/van/9552.txt 18 Oct 2026). Earlier: 2025 rates (report 25 Nov 2024): connection levy $112,611 per energy transfer station plus \"$133 per kW of the peak heat energy demand\", \"to recover the direct costs of connection (service connection and energy transfer station)\"; proposed 2026 $123,873 + $146/kW — https://council.vancouver.ca/20241203/documents/spec1e.pdf",
 "vanNEUguide": "City of Vancouver NEU connectivity guidelines: building-side supply 60 °C, return ≤45 °C, ΔT ≥15 °C; ETS room ≥6 × 3 m under 13,940 m², 6 × 4 m to 23,230 m², 2.7 m headroom; ETS owned by the NEU — https://guidelines.vancouver.ca/guidelines-neighbourhood-energy-utility-connectivity-requirements.pdf",
 "torontoDER2016": "City of Toronto, District Energy Ready Guideline (Oct 2016), design supply/return °C: radiant floor 45/35; radiators and fan coils 60/45; convectors 70/55; make-up air 65/45 (new buildings) — https://www.toronto.ca/wp-content/uploads/2017/12/8c27-District-Energy-Ready-Guideline_October-2016.pdf",
 "statcanHeat2011": "Statistics Canada, Households and the Environment 2011, main heating equipment: Canada forced air 57%, baseboard 27%, hot-water/steam boiler 5%; BC 52 / 28 / 6 (use with caution); Alberta forced air 94%. No apartment split — https://www150.statcan.gc.ca/n1/pub/11-526-s/2013002/t001-eng.htm",
 "irwdCulver2018": "Irvine Ranch Water District, Culver Dr recycled-water pipeline bid (2018): low bid $707,777 for ≈1,240 LF of 8–12-inch purple pipe (≈US$1,870/m all items, Claude arithmetic); one US project — https://www.irwd.com/images/pdf/doing-business/engineering/2018/BID_SUMMARY_-_Culver_Dr_RW_Pipeline.pdf",
 "cec2023pump": "California Energy Commission CEC-500-2023-026 (UCLA, 2023): pressurisation energy 222 kWh per acre-foot (≈0.18 kWh/m³, Claude conversion) — https://www.energy.ca.gov/sites/default/files/2023-05/CEC-500-2023-026.pdf",
 "gsaBlowdown2023": "GSA Green Proving Ground, blowdown recovery (2023): $35,403 equipment + $11,422 install on a 1,150-ton plant; blowdown −53%, make-up −16%, cycles 2.8 → 4.9; payback 2.9–4.8 years — https://www.gsa.gov/system/files/GPG%20Findings-052-Blowdown%20Recovery-14Sep23.pdf",
-"epcorGoldBar": "EPCOR, Gold Bar operations: \"membrane-based wastewater recycling facility which supplies local industry with reclaimed water\" (Suncor named). Terms, price and openness to new customers not published — https://epcor.com/ca/en/ab/edmonton/operations/water-wastewater/gold-bar-wastewater-treatment-plant/gold-bar-operations.html",
+"epcorGoldBar": "EPCOR, Gold Bar operations: \"membrane-based wastewater recycling facility which supplies local industry with reclaimed water\" (utility claim; customers not named; a refinery is named only in trade press, not citable). Terms, price and openness to new customers not published — https://epcor.com/ca/en/ab/edmonton/operations/water-wastewater/gold-bar-wastewater-treatment-plant/gold-bar-operations.html",
 "vanSewerCap2025": "City of Vancouver, Sewer Capacity Development Review Policy (Council 29 Oct 2025): no-review threshold, then low-impact class, else \"detailed technical review by the City Engineer\"; model prepared by the City or the applicant; no timeline or cost-sharing stated — https://vancouver.ca/files/cov/sewer-capacity-development-review-policy.pdf",
 "mvWDP2021": "Metro Vancouver waste discharge permit application (Dec 2021): \"cooling water\" and \"boiler blow down\" listed among non-domestic sources to describe; new industrial permit fee $1,000 — https://metrovancouver.org/services/liquid-waste/Documents/general-waste-discharge-application.pdf",
 "epcorDrainage2023": "EPCOR Water and Drainage Customer Connection Guide (May 2023) and One Water planning memos (Mar 2025): EPCOR reviews stamped plans and issues an approval letter with costs; \"Details of any required sewer construction would be reviewed at the Development Permit stage\"; no timelines — https://www.epcor.com:443/products-services/new-connections/Documents/Water-Drainage-Customer-Connection-Guide.pdf",
@@ -13376,7 +14851,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "r2Edm2026": "SERI R2 certified facility directory, search within 50 miles of Edmonton (J.B. screenshot 16 Oct 2026): two active R2v3 facilities — 1579568 Alberta Ltd. o/a Hi-Tech Recyclers, 10235 184 St NW, Edmonton (6 mi); Quantum Lifecycle Partners LP, 250 Aurum Road NE, Edmonton (8 mi). Directory listing, not an endorsement — https://www.sustainableelectronics.org/find-an-r2-certified-facility/",
 "cologixVAN1_2026": "Cologix VAN1 spec sheet (05-2026, J.B. download 16 Oct 2026): 555 W Hastings (Harbour Centre), Cologix a tenant in an office building; site capacity 400 kW; data-centre space 5,000 ft² (≈465 m²) in two suites; cooling \"N+1 chilled water cooling, N+1 dry cooler … N+1 IRC\"; generator and UPS \"N/N+1\"; PUE 1.2 (claim). An operator example of N+1 cooling in Vancouver. Security details on the sheet deliberately not carried into the register or tool — data/raw/cologix_van1_2026-05.pdf",
 "cologixVAN4_2026": "Cologix VAN4 spec sheet (05-2026, J.B. download 16 Oct 2026): 175 W Cordova St, a leased four-storey concrete-frame building, single tenant; site capacity 6.5 MW; data-centre space 40,000 ft² (≈3,716 m²), multiple halls per floor; cooling \"pumped refrigerant and air-cooled chilled water\"; generators and UPS \"5-to-make-4, distributed redundant\"; 6–8 kW per cabinet; PUE 1.5 (claim). Security, fuel and fibre-entry details on the sheet deliberately not carried into the register or tool — data/raw/cologix_van4_2026-05.pdf",
-"vanStreets2026": "City of Vancouver Open Data, Public streets (J.B. download 16 Oct 2026): 17,072 street centreline segments by hundred block with street use (residential, collector, arterial and others). Lanes are not included. Used to route pipes and to place sidewalk viewpoints — data/raw/van/public-streets.csv",
+"vanStreets2026": "City of Vancouver Open Data, Public streets (J.B. download 16 Oct 2026): 17,072 street centreline segments by hundred block with street use (residential, collector, arterial and others); plus Lanes (download 18 Oct 2026, updated by the City 27 Jul 2026): 7,856 lane centreline segments, surface not recorded. Used to route pipes and to place street viewpoints for sight lines — data/raw/van/public-streets.csv, data/raw/van/streets/lanes_2026-10-18.geojson",
 "edmRoads2026": "City of Edmonton Open Data, Road Network (J.B. download 16 Oct 2026): 53,873 centrelines with type (road, alley, railway), segment type, functional class (local, collector, arterial classes A–D) and surface; the tool keeps roads and alleys (50,755 segments; ramps, overpasses and bridges dropped) for pipe routes and street viewpoints; gravel alleys are marked unpaved — data/raw/edm/Road_Network_20261016.csv",
 "vanI2_2026": "City of Vancouver Zoning and Development By-law, I-2 District Schedule (June 2026; J.B. upload 16 Oct 2026): sub-areas A and B in the False Creek Flats (s. 1.1, Map 1); outside B: height 18.3 m, up to 30.5 m with approval, rear yard 3.1 m, side yards only beside R districts (ss. 3.1.2.1–5); sub-area B: FSR 3.0 (4.0 with approval), height 18.3 m (36.5 m with approval), front 0.6 m, sides 7.6 m, rear 3.1 m, building at most 61.0 m wide and deep, first floor 6.1 m and upper floors 4.0 m floor to floor (ss. 3.2.1–3.2.2); Bulk Data Storage conditional, not at the ground floor except entrances (s. 2.2.7) — https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-2.pdf",
 "mvWWTP2026": "Metro Vancouver, Wastewater Treatment Plants and Processes (J.B. screenshot 16 Oct 2026): five plants — Iona Island, Lions Gate, Lulu Island, Annacis Island, Northwest Langley — and the sewerage area each serves; over 1 billion litres a day. Street addresses not yet checked against Metro Vancouver pages (a chat search gave business-listing addresses; Lulu Island differs, 13400 vs 13500 Gilbert Road) — https://metrovancouver.org/services/liquid-waste",
@@ -13447,7 +14922,87 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "blatchfordAdvisor2023": "Utility Advisor response to the Blatchford 2024 rate filing (25 Oct 2023, Utility Committee 3 Nov 2023, FCS02051): customers forecast 181 in 2024 (down from 217) and 292 in 2025; revenue shortfall $1,324,700 (2024) and $863,600 (2025); viability \"rides on increasing customers as quickly as possible\". Operator page (Jan 2025): over 100 homes connected. Earlier plan (2020–2023) had forecast 1,409 customers by 2023. The 2021–2024 plan table reads 3,031 MWh cumulative to 2024 in one extraction and up to 5,562 MWh in another; to check against the original. Borefield used for seasonal storage of summer heat (operator pages, no measured data) — https://pub-edmonton.escribemeetings.com/filestream.ashx?DocumentId=205403",
 "edmDEstrategy2024": "City of Edmonton, Implementing Edmonton District Energy Strategy (IIS02148, Urban Planning Committee 27 Feb 2024): seeks private-sector partner(s) through procurement; raises a private partner acquiring established City-owned systems such as Blatchford; lists expanding Blatchford as a next step; does not mention waste heat, data centres or ambient loops — https://pub-edmonton.escribemeetings.com/filestream.ashx?DocumentId=216461",
 "buffa2019": "Buffa et al. 2019, 5th generation district heating and cooling systems: a review of existing cases in Europe, Renewable and Sustainable Energy Reviews 104:504–522: FGZ Friesenberg, Zürich (2014), \"an HE is installed for direct heat recovery from a data center\" (p. 515), network supply 8–28 °C; in summer the warm pipe reaches about 30 °C after the data centre, limiting free cooling downstream; borehole count inconsistent in the paper (332 vs 153). FGZ factsheet (Swiss Federal Office of Energy support): data-centre waste heat 9 MW, 27 GWh/a, 450 boreholes as seasonal storage (18 GWh); not stated as measured — https://doi.org/10.1016/j.rser.2018.12.059",
-"bfe2023dc": "BFE/EnergieSchweiz 2023, Abwärmenutzung von Rechenzentren (Kulemann et al.): data-centre heat can enter a low-temperature network without a boost if taken out above 32 °C (p. 20); fictional 20 MW IT case: 48% of waste heat used with a 25 MW network, 12% with a 5 MW network (p. 24); data-centre waste heat has hardly had a price (p. 26); operators plan over 10–15 years, heat networks over 30–40 (p. 5). Canton of Zürich RRB 1340/2025: waste heat above 2 GWh must be offered to third parties at production cost — https://www.bfe.admin.ch/"
+"bfe2023dc": "BFE/EnergieSchweiz 2023, Abwärmenutzung von Rechenzentren (Kulemann et al.): data-centre heat can enter a low-temperature network without a boost if taken out above 32 °C (p. 20); fictional 20 MW IT case: 48% of waste heat used with a 25 MW network, 12% with a 5 MW network (p. 24); data-centre waste heat has hardly had a price (p. 26); operators plan over 10–15 years, heat networks over 30–40 (p. 5). Canton of Zürich RRB 1340/2025: waste heat above 2 GWh must be offered to third parties at production cost — https://www.bfe.admin.ch/",
+"meyer2013": "Meyer, Ries, Solbrig, Wettig 2013, iDataCool: HPC with hot-water cooling and energy reuse, arXiv 1309.4887 (preprint, not peer-reviewed): adsorption chiller driven at ~65 °C, standby below ~55 °C — https://arxiv.org/pdf/1309.4887",
+"oro2019": "Oró, Taddeo, Salom 2019, Waste heat recovery from urban air cooled data centres to increase energy efficiency of district heating networks, Sustainable Cities and Society 45:522–542 (peer-reviewed; J.B. upload, read 18 Oct 2026): 1 MW air-cooled model, Barcelona; recovery from return air (up to 47 °C) or chiller condenser (up to 50 °C) with a heat pump to 90 °C; ERF on a primary-energy basis 25–45% / ~55% (not the ISO 30134-6 ERF) — https://doi.org/10.1016/j.scs.2018.12.012",
+"pozgaj2025": "Požgaj, Delač, Pavković, Medica-Viola 2025, Energy Efficiency Through Waste-Heat Recovery: Hybrid Data-Centre Cooling in District Heating Applications, Applied Sciences 16(1):323 (peer-reviewed; J.B. upload, read 18 Oct 2026): 108.5 kW HPC, Rijeka; ~30% of heat to air via chilled-water rack coolers (10–15 °C), recovered by heat pumps in place of the chillers; ERF 0.78–0.88 — https://doi.org/10.3390/app16010323",
+"ljungqvist2023": "Ljungqvist, Risberg, Toffolo, Vesterlund 2023, A realistic view on heat reuse from direct free air-cooled data centres, Energy Conversion and Management: X 20:100473 (peer-reviewed, open access; J.B. upload, read 18 Oct 2026): theoretical upper limit, no heat pump; ERF 0.50–0.66 at 30–50 °C exhaust, reuse at 13–18 °C, Luleå — https://doi.org/10.1016/j.ecmx.2023.100473",
+"yuan2025": "Yuan, Liu, Sun, Lin, Fan, Zhao, Kosonen 2025, Data center waste heat for district heating networks: A review, Renewable and Sustainable Energy Reviews 219:115863 (peer-reviewed; J.B. upload, read 18 Oct 2026): Table 2, air-side return hot air 25–47 °C, condenser coolant 40–50 °C; heat pumps essential for air-side heat — https://doi.org/10.1016/j.rser.2025.115863",
+"ecccEF2026": "ECCC, Emission factors and reference values, v4.0, Sep 2026 (from NIR 1990-2024, Tables A6.1-1, A6.1-3; HHV Table 8, 38.39 MJ/m³) — https://www.canada.ca/en/environment-climate-change/services/climate-change/pricing-pollution-how-it-will-work/output-based-pricing-system/federal-greenhouse-gas-offset-system/emission-factors-reference-values.html",
+"abEF2026": "Alberta Environment and Protected Areas, Carbon Offset Emission Factors Handbook v3.3, Aug 2026, Table 5 (natural gas, commercial/institutional: CO2 1,962, CH4 0.037, N2O 0.035 g/m³) — https://open.alberta.ca/publications/carbon-offset-emission-factors-handbook-version-3",
+"ucaRates2026": "Utilities Consumer Advocate (Alberta), regulated rates, Direct Energy Regulated Services (ATCO Gas), Nov 2025 – Oct 2026, $/GJ (read 18 Oct 2026) — https://ucahelps.alberta.ca/regulated-rates.aspx",
+"bcucG5026": "BCUC Order G-50-26 (12 Mar 2026): FortisBC Mainland Commodity Cost Recovery Charge $2.230 → $1.660/GJ from 1 Apr 2026; BCUC letters L-9-25 (12 Jun 2025) and L-27-25 (11 Sep 2025): unchanged at $2.230 — https://www.ordersdecisions.bcuc.com/bcuc/orders/en/523096/1/document.do",
+"ipcc2019v3ch7": "IPCC 2019 Refinement to the 2006 Guidelines for National Greenhouse Gas Inventories, Vol. 3 Ch. 7 (ODS substitutes), Table 7.9 (Updated), p. 7.32: chillers — charge 10 ≤ M ≤ 2,000 kg, lifetime 15–30 yr, operating emission 2 ≤ x ≤ 15 % of initial charge per year (lower values for developed countries) — https://www.ipcc-nggip.iges.or.jp/public/2019rf/pdf/3_Volume3/19R_V3_Ch07_ODS_Substitutes.pdf",
+"vanTaxRates2026": "City of Vancouver, RTS 18298, 2026 tax rates (Council 5 May 2026) and rates by-laws a2–a5: Class 6 Business & Other general purposes 7.09436 per $1,000; all taxing authorities 12.46720 (with DPRP adjustment) — https://council.vancouver.ca/20260505/documents/r2.pdf ; audit/research_2026-10-19/A",
+"vanBudget2026": "City of Vancouver 2026 Budget: property tax about 56% of operating revenue; police the largest spending share — https://vancouver.ca/files/cov/2026-budget.pdf",
+"bcAssessClasses": "BC Government, property assessment classes (Prescribed Classes of Property Regulation, last amended Sep 2024): Class 6 Business and Other is the residual class — https://www2.gov.bc.ca/gov/content/governments/local-governments/finance/requisition-taxation/local-government-taxation/property-assessment-classes",
+"edmTaxRates2026": "City of Edmonton 2026 property tax bylaw: non-residential municipal 0.0252216 and education 0.0039677 per $1 of assessed value ($25.22 + $3.97 = $29.19 per $1,000; units confirmed from the bylaw's own levy row, round 2) — audit/research_2026-10-19/A; https://www.edmonton.ca/city_government/budget_finances/where-taxes-go",
+"abDataCentreLevy": "Alberta Corporate Tax Act Part 9.1 'Data Centre Levy', ss. 92.2–92.5 (Bill 12, Financial Statutes Amendment Act, 2025 (No. 2); amended by Bill 17, 2026): data centres of 75 MW or greater; levy (E + F) × R, E = 45% of cost of computing equipment under 4 years, F = 15% of older; R 2% grid power, 1% new capacity, 0% off-grid; from 1 Jan 2026; paid to the Province, creditable against Alberta corporate tax; computing equipment assessable under the MGA is excluded from the levy base — https://docs.assembly.ab.ca/LADDAR_files/docs/bills/bill/legislature_31/session_2/20251023_bill-012.pdf ; https://docs.assembly.ab.ca/LADDAR_files/docs/bills/bill/legislature_31/session_2/20251023_bill-017.pdf (bill text read; consolidated Act and Assessment Bulletin 25-02 not read)",
+"gcDataResidency": "Government of Canada, Direction on the secure use of commercial cloud services / electronic data residency: Protected B, Protected C and Classified data stored in Canada (or GC premises abroad); GC white paper: 'Data residency does not mitigate against the application of foreign laws' — https://www.canada.ca/en/government/system/digital-government/digital-government-innovations/cloud-services/direction-electronic-data-residency.html",
+"bcFoippaAbroad": "BC FOIPPA manual, disclosure outside Canada: the 2021 amendment removed the data-residency rule; sensitive personal information stored outside Canada needs an assessment — https://www2.gov.bc.ca/gov/content/governments/services-for-government/policies-procedures/foippa-manual/disclosure-outside-canada",
+"isocPulseIXP": "Internet Society Pulse, IXP tracker, Canada: Vancouver VANIX 78, UNM-Exch Canada-West 64, CSIX 16 participants; Edmonton YEGIX 9; Calgary YYCIX 91 (operator-reported) — https://pulse.internetsociety.org/en/ixp-tracker/country/CA/",
+"statcanLives": "Statistics Canada, economic lives of assets: office buildings 27 yr, warehouses 25.4, other commercial construction 20.7, computers 4 — https://www150.statcan.gc.ca/n1/pub/15-206-x/2015039/t/tblc11-eng.htm",
+"sscConsolidation": "Shared Services Canada, data centre consolidation: more than 500 of the 720 legacy federal data centres closed since 2011 — https://www.canada.ca/en/shared-services/corporate/data-centre-consolidation.html",
+"voaComputerCentres": "UK Valuation Office Agency, Rating Manual s. 281 Computer centres, Practice note 1 s. 1 (2017): vacated first-generation centres 'tend to remain unoccupied and are not readily adaptable' — https://www.gov.uk/guidance/rating-manual-section-6-part-3-valuation-of-all-property-classes/section-281-computer-centres",
+"bcRecyclingIT": "BC Recycling Regulation Sch. 3 (current to 3 Feb 2026): IT products covered; exclusion only for computers attached to commercial or industrial equipment that is not itself a covered product; servers not named (reading them as covered: interpretation, 60) — https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/449_2004",
+"abElectronicsReg": "Alberta Electronics Designation Regulation 94/2004: computer equipment designated (read from a legislation summary, official text not read) — https://www.albertarecycling.ca/programs/electronics/",
+"allen2011": "Allen, Lindberg & Grimmond 2011, Global to city scale urban anthropogenic heat flux (Int. J. Climatology): Vancouver grid cell 119 (units assumed W/m²; not stated in the abstract); no Edmonton value — audit/research_2026-10-19/B",
+"duan2026": "Duan et al. 2026 (peer-reviewed): surface urban heat island, Vancouver summer daytime 7.25 °C, Edmonton winter night 2.86 °C (land-surface, not air, temperature) — audit/research_2026-10-19/B",
+"dcLstPreprint": "arXiv 2603.20897 (preprint, NOT peer-reviewed): data-centre sites ≈ +2 °C land-surface temperature on average, +1 °C detectable to 4.5 km — context only — https://arxiv.org/pdf/2603.20897",
+"vanHeatPolicy": "City of Vancouver, Council memo Planning for extreme heat (10 Mar 2022) and Climate Change Adaptation Strategy 2024–25 update: heat mapping, 30% canopy by 2050; no rule on heat rejected by equipment — https://vancouver.ca/files/cov/2022-03-10-council-memo-planning-for-extreme-heat.pdf",
+"edmHeatPolicy": "City of Edmonton, Climate Resilient Edmonton (2018) Action 9 'Cool Edmonton'; adaptation progress June 2026: hot days about 1 → 16 a year by the 2050s; no rule on heat rejected by equipment — https://www.edmonton.ca/sites/default/files/public-files/documents/june-2026-adaptation-plan-path-2-progress_0.pdf",
+"gunterShipes1971": "Gunter & Shipes 1971, Hot air recirculation by air coolers (AIChE-ASME conf.; authors from a manufacturer): field cases 13.6% and 24% recirculation, capacity down about 10% and 35% — CLAIM; equations not usable — audit/research_2026-10-19/B",
+"wrayAkbari2008": "Wray & Akbari 2008 (peer-reviewed): a hot roof raised rooftop condenser inlet air about 0.3 °C; removed by a cool roof coating — the roof, not the unit's exhaust — audit/research_2026-10-19/B round 2",
+"bcDispersion": "BC Ministry of Environment, Guidelines for Air Quality Dispersion Modelling in BC: AERSCREEN 'preferred' for screening — https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/bc_dispersion_modelling_guideline.pdf",
+"abModelGuideline": "Alberta Environment and Protected Areas, Air Quality Model Guideline (2021): AERSCREEN 'recommended'; averaging-time Eq. 1.1233 × hours^-0.2906 — https://open.alberta.ca/dataset/cefcad38-6d49-4cce-98f7-23b1741f85b7/resource/b4ed8dc9-3850-4e5f-a618-42b29c4ba2d4/download/aep-aqmg-air-quality-model-guideline-2021-09.pdf",
+"aerscreenGuide": "US EPA AERSCREEN User's Guide (2021) s. 1.1: 1-h to 3-h 1.00, 8-h 0.90, 24-h 0.60, annual 0.10 — https://gaftp.epa.gov/Air/aqmg/SCRAM/models/screening/aerscreen/aerscreen_userguide.pdf",
+"bcNO2Guidance": "BC Ministry of Environment, Modelling guidance for NO2 (July 2022): Tier 1 100% conversion; ARM2 bounds 0.2–0.9; diesel in-stack NO2/NOx 0.083 — https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/modelling_guidance_nitrogen_dioxide.pdf",
+"mvAAQO": "Metro Vancouver ambient air quality objectives (Nov 2024): NO2 1-h 79 µg/m³ (42 ppb), annual 22.6 µg/m³; PM2.5 24-h 25 µg/m³ (rolling) — https://metrovancouver.org/services/air-quality-climate-action/Documents/ambient-air-quality-objectives.pdf",
+"abAAQO": "Alberta Ambient Air Quality Objectives (2024): NO2 1-h 300 µg/m³; PM2.5 24-h 29 µg/m³ (statistical form for NO2 1-h not stated; hour-by-hour reading conf 60) — https://open.alberta.ca/dataset/09a63fe8-11ae-420e-9008-82aa4db4824a/resource/094dae9e-b6f9-4de9-86c7-a651019f3aab/download/epa-ambient-air-quality-objectives-and-guidelines-2024.pdf",
+"caaqs": "CCME Canadian Ambient Air Quality Standards: NO2 1-h 2025 standard 79 µg/m³ (42 ppb, 98th percentile, 3-yr average); PM2.5 24-h 27 µg/m³ (2020) → 23 (2030) — https://ccme.ca/en/air-quality-report",
+"mvBylaw1082": "Metro Vancouver Air Quality Management Bylaw 1082 (consolidated): s. 7(12) exempts discharges under 5 kg/day NOx; s. 7(9) engines (applicability unsettled) — https://metrovancouver.org/boards/Bylaws/MVRD_Bylaw_1082_Consolidated.pdf",
+"bcAirBackground": "BC State of Environment reports: Vancouver Clark Drive NO2 1-h metric 43.6 ppb (≈82 µg/m³), annual 15 ppb; PM2.5 24-h 27, annual 7 µg/m³ — https://www.env.gov.bc.ca/soe/indicators/air/print_ver/envreportbc_no2_April2026.pdf ; https://www.env.gov.bc.ca/soe/indicators/air/print_ver/envreportbc_pm25_June2025.pdf",
+"mvAirSummary2024": "Metro Vancouver annual air quality summary 2024: Clark Drive over both regional NO2 objectives — https://metrovancouver.org/services/air-quality-climate-action/Documents/annual-air-quality-summary-2024.pdf",
+"acaEdmonton": "Alberta Capital Airshed: Edmonton East NO2 annual mean 13.9 ppb (2023); no short-term percentile values found — audit/research_2026-10-19/B round 2",
+"pcicWx3": "PCIC future-shifted weather files v3 (PCIC-WX-3.0.1, 27 Jan 2025): based on CWEC 2020; 2040s–2080s; SSP1-2.6, 2-4.5, 5-8.5; 564 locations; shifts temperature, dew point, humidity, pressure; 'Heat waves or cold spells remain largely unchanged' (Sobie & Curry 2025, Data in Brief) — https://services.pacificclimate.org/wx-files/app/ ; https://zenodo.org/records/15151116 (Edmonton station in the set not yet confirmed)",
+"mvClimate2016": "Metro Vancouver Climate projections (2016), RCP8.5 2050s: HDD −25% (Table 16; summary says 29%), CDD 49 → 235, snowpack in supply watersheds 292 → 123 cm (−58%) — https://metrovancouver.org/services/air-quality-climate-action/Documents/climate-projections-for-metro-vancouver-2016.pdf",
+"emrbClimate2023": "Edmonton Metropolitan Region Board climate resilience study (2023), RCP8.5 2050s: HDD 5,657 → 4,331, CDD 12 → 144, days ≥ 30 °C 1 → 11 (10th–90th percentile ranges) — https://www.leduc.ca/wp-content/uploads/2025/07/CRVA-From-Risk-to-Resilience-EMRB-Climate-Resilience-Study-2023.pdf (not like-for-like with Metro Vancouver)",
+"mvDWCP": "Metro Vancouver Drinking Water Conservation Plan: stages 1–3 restrict lawn and outdoor uses; no stage restricts cooling towers or evaporative cooling; stage 4 asks industry for voluntary cuts — https://metrovancouver.org/services/water/Documents/drinking-water-conservation-plan.pdf ; City By-law 12086 https://bylaws.vancouver.ca/12086c.pdf",
+"vanOnceThrough": "City of Vancouver Water Works By-law 4848 s. 3.9–3.10 (By-law 11777): once-through cooling on City water prohibited from 1 Jan 2020; cooling towers need an operating permit and monthly Legionella reports — https://bylaws.vancouver.ca/consolidated/11777.pdf",
+"mvStageHistory": "Metro Vancouver: Stage 3 in 2015; Stage 1 extended to 31 Oct in 2022; Stage 2 4 Aug–15 Oct 2023; 2026 Stage 2 from 1 May, Stage 3 from 8 Jun, Stage 1 from 1 Sep; May 2026 report: 2023 'the most recent escalation to Stage 2' before 2026 — https://metrovancouver.org/boards/GVWD/WD-2026-05-29-ADD-I1.pdf",
+"epcorStages": "EPCOR water restrictions, business guides: stages 1–4 target 5/10/15/25% reduction; stages 1–2 'actions your business can take', 3–4 'must take'; cooling towers: optimise, reduce 'where possible'; non-essential continuous-flow processes limited (3–4); 'essential' not defined; only official event found: mandatory ban 29 Jan–2 Feb 2024 (plant failure) — https://www.epcor.com/ca/en/ab/edmonton/conservation/water-restrictions/business-guidance.html",
+"abNewLicenceLast": "Government of Alberta, data centres and water: 'A brand-new data centre licence stands last' (first in time, first in right) — https://www.alberta.ca/datacentres/water",
+"nbcImportance": "NBC 2020 / BCBC 2024 Table 4.1.2.1 importance categories: post-disaster buildings incl. telephone exchanges and communications facilities (authority may exempt); 'likely to be used as post-disaster shelters' = High; earthquake importance factor IE 1.0 Normal, 1.3 High, 1.5 post-disaster — audit/research_2026-10-19/D",
+"vbbl2025Seismic": "City of Vancouver, Guide to 2025 VBBL updates (22 Sep 2025): new seismic rules apply to permits issued on or after 15 Sep 2026; in-stream projects before 8 Mar 2027 may use the old rules — https://vancouver.ca/files/cov/guide-to-2025-vbbl-updates.pdf",
+"nrcSeismic2020": "NRC NBC 2020 public review (Jan 2020, Change 1405) proposed Sa(0.2): Vancouver 0.848, Edmonton 0.103 (final table not read; parcel values need the NRCan calculator) — https://nrc.canada.ca/sites/default/files/2020-01/NRC_CodesCanada_PublicReview_2020_NBC_NFC_NPC_NECB_combined.2020-01-28.pdf",
+"jibcGroupLodging": "JIBC / BC Emergency Support Services, Introduction to Group Lodging participant guide: 3.5 m² per person, 0.75 m between beds (p. 35); facilities 'will only be opened up if they are suitable and have power' (p. 44) — https://www.jibc.ca/sites/default/files/2020-05/EMD-EMRG-1612-Intro-to-GL-Participant-Guide-20150826.pdf",
+"vanHubs": "City of Vancouver Disaster Support Hubs: 25 hubs, 23 at community centres — https://vancouver.ca/home-property-development/disaster-support-hubs.aspx",
+"edmWarming": "City of Edmonton extreme weather (winter): warming response at −20 °C with wind chill for 3 days; City recreation centres and libraries — https://www.edmonton.ca/programs_services/emergency_preparedness/extreme-weather-winter",
+"cec2024ESS": "CSA C22.1:24 Canadian Electrical Code, Section 64 (read 19 Oct 2026, J.B. library copy): in force BC 4 Mar 2025, Alberta 1 Apr 2025 (Alberta Municipal Affairs notice, Apr 2025). Rule 64-1002: battery energy storage over 1 kWh must be certified (Rule 2-024), installed to the manufacturer's instructions, and — except in an electrical equipment vault — not where the floor is more than 23 m above grade or below the lowest level of egress. Rule 64-926: outdoor batteries at least 3 m from a means of egress and 1.5 m from windows, vents and doors, unless evaluated to ANSI/CAN/UL 9540A and installed to the manufacturer's instructions. Rule 64-902: plaque showing the system and its disconnects. Appendix B: the ESS definition does not include a UPS (covered by CSA C22.2 No. 107.3); batteries in general follow Rules 64-800–64-820 (ventilation if they vent gas, access by authorized persons only). 20 kWh / 80 kWh caps apply to residential occupancies only (Rule 64-1100). Neither Vancouver Fire By-law 14419 nor Edmonton Fire Rescue Services Bylaw 15309 (consolidated 1 Jan 2025, read) has battery or fuel provisions — data/raw/codes/CEC_2024_note.txt; data/raw/ab/ma_notice_CEC2024_2025-04.pdf; data/raw/edm/bylaw/C15309_fire_2025-01-01.pdf",
+"vanUndrip": "City of Vancouver UNDRIP Strategy (endorsed 25 Oct 2022; 79 Calls to Action; e.g. 1.18 first right of refusal on City land, 2.3 'include this in permitting decisions', 3.10 free, prior and informed consent) and Action Plan 2024–28 (endorsed 25 Jun 2024; 'early engagement threshold points', in progress) — https://council.vancouver.ca/20221025/documents/p1.pdf ; https://vancouver.ca/files/cov/undrip-action-plan-2024-2028.pdf",
+"bcDeclarationAct": "BC Declaration on the Rights of Indigenous Peoples Act (2019) s. 3; Interpretation Act amendment 23 Nov 2021; the Province's plan does not set local-government duties; 2014 provincial guide: local governments have no constitutional duty to consult but may have a statutory one; the Province's duty includes 'decisions that affect private land' — https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/19044 ; https://www2.gov.bc.ca/assets/gov/british-columbians-our-governments/local-governments/governance-powers/first_nations_engagement_guide.pdf",
+"bcEAthresholds": "BC Reviewable Projects Regulation (243/2019): power plants ≥ 50 MW, transmission ≥ 345 kV and ≥ 40 km, groundwater ≥ 75 L/s; data centres not listed — https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/243_2019",
+"aucGuidance": "AUC Guidance for proponents, participant involvement categories: A (Crown duty found for related approvals, or reserve/Settlement in radius) Indigenous groups included; B (e.g. thermal plants < 10 MW, private land with limited off-site impacts) not ordinarily included; C case by case; 'The ACO has no direct role in the AUC's regulatory process' — https://www.auc.ab.ca/guidance-for-proponents/ ; Rule 007 https://media.auc.ab.ca/prd-wp-uploads/regulatory_documents/Consultations/Rule007.pdf",
+"vanNationsNamed": "City of Vancouver names xʷməθkʷəy̓əm (Musqueam), Sḵwx̱wú7mesh Úxwumixw (Squamish) and səlilwətaɬ (Tsleil-Waututh) Nations, on unceded territories (UNDRIP Strategy pp. 3–4); each Nation's referral page: https://www.musqueam.bc.ca/departments/title-and-rights/iga/ ; https://www.squamish.net/divisions/territory-culture-services/rights-title/referrals/ ; https://twnation.ca/our-departments/treaty-lands-resources/",
+"edmNationsNamed": "City of Edmonton land acknowledgement: Treaty 6 territory and the Métis homeland; names peoples (incl. Nehiyaw/Cree, Dene, Anishinaabe/Saulteaux, Nakota Isga, Niitsitapi) not individual Nations; Confederacy of Treaty No. 6 lists 15 Nations (https://www.treatysix.org/nation-listing); Indigenous Framework roles Listener, Connector, Advocate, Partner; Urban Reserve Strategy approved 28 Jun 2021 — https://www.edmonton.ca/city_government/indigenous-relations-office",
+"nrcanPV2024": "NRCan CanmetENERGY (2024) PV potential summary report: usable roof factors 0.81 (area) and 0.70 (yield); with NRCan municipal yields ≈ 128 kWh/m² of footprint a year in Vancouver and 159 in Edmonton (factors transferred; neither city in the sample) — https://natural-resources.canada.ca/sites/nrcan/files/canmetenergy/files/pdf/PV_potential_summary_report_appendix-EN.pdf",
+"vanI2Ground": "Vancouver zoning I-2 s. 2.2.7, I-3 s. 2.2.11 (sub-area A) and FC-2 s. 2.2.4: data storage not permitted at grade (ground floor kept for other uses) — https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-I-2.pdf",
+"nbc2020Live": "NBC 2020 / BCBC 2024 Table 4.1.5.3: offices 4.8 kPa on ground-access floors and basements, 2.4 kPa on other floors; computer rooms excluded from the office row; no Canadian code value for computer rooms (US VA design manual ≈ 6.0 kPa, 125 psf — claim-level transfer); NBC 2023 Alberta Edition Table 4.1.5.3 read 19 Oct 2026 (J.B. copy, NR24-28-7-2023): same office values and the same computer-room exclusion — audit/research_2026-10-19/F",
+"energyStarCA": "NRCan ENERGY STAR Portfolio Manager, Canadian national median site EUI (GJ/m²): office 0.87, hospital 2.20, K-12 school 0.70, college/university 1.04, multifamily 0.82, ice rink 1.10 — https://portfoliomanager.energystar.gov:443/pdf/reference/Canadian%20National%20Median%20Table.pdf",
+"scieu2024": "Statistics Canada, SCIEU 2024 (The Daily, 26 Jun 2026): hospitals BC 1.90 / AB 2.46 GJ/m², universities 1.25 / 1.59, colleges 0.75 / 1.50 — https://www150.statcan.gc.ca/n1/daily-quotidien/260626/dq260626d-eng.htm",
+"ftaVibration": "US FTA Transit Noise and Vibration Impact Assessment Manual (2018): vibration criteria 72 VdB residences (night), 75 institutional, 65 vibration-sensitive rooms (values read from a 2021 FRA reproduction) — https://www.transit.dot.gov/sites/fta.dot.gov/files/docs/research-innovation/118131/transit-noise-and-vibration-impact-assessment-manual-fta-report-no-0123_0.pdf",
+"vanEmbodied": "City of Vancouver embodied carbon guidelines / VBBL 2025: benchmark 400 kg CO2e/m²; new buildings at most 2× the baseline (absolute path cap 800 kg/m²); further 10% cut delayed; Edmonton has no requirement for private buildings — https://vancouver.ca/files/cov/embodied-carbon-guidelines.pdf",
+"vanixPoints": "VANIX: six connection points in Vancouver; YEGIX: one Edmonton site (operator claims; locations not shown in the tool) — audit/research_2026-10-19/F",
+"bchTCIP2026": "BC Hydro, Transmission Customer Interconnection Policy, Workshop #2 (4 Mar 2026), slides 12–34: modelled F2036 rate impact on all ratepayers of one new 75–250 MVA customer: +0.4 to +1.5% with no threshold, 0 to −1.2% under threshold options; approaches for data centres 'emerging' — https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/corporate/regulatory-planning-documents/regulatory-matters/transmission-customer-interconnection-policy-workshop2-presentation-2026-03-04.pdf",
+"aesoDC2025": "AESO Update on Data Centres (Sep 2025): 'Are large loads paying their fair share of transmission costs?' an open Phase II question; 20,000+ MW of data-centre load on the project list; 'Load is outpacing generation' — data/raw/ab/aeso_dc_update_2025-09.txt",
+"lbnlLargeLoad2025": "LBNL (Jan 2025), Electricity rate designs for large loads: mechanisms (stranded assets, forecast error, avoided charges) and protections (minimum bills, exit fees, collateral, contributions); no quantified rate effect — https://eta-publications.lbl.gov/sites/default/files/2025-01/electricity_rate_designs_for_large_loads_evolving_practices_and_opportunities_final.pdf",
+"dkHeatCap2025": "Denmark: the 95 kr./GJ surplus-heat price cap (regulator notice 1 Nov 2024) was abolished from 1 Jul 2025 (Lov nr 738) — historical only — audit/research_2026-10-19/F round 2",
+"sailor2026": "Sailor, Samareh Abolhassani & Martin 2026, Data center waste heat as an emerging urban thermal hazard: first field measurements (ASME J. Engineering for Sustainable Buildings and Cities 7(2) 024501, peer-reviewed short communication; read 19 Oct 2026): vehicle traverses at four Phoenix facilities of 36–169 MW: downwind air up to 2.2 °C warmer, average 0.7–0.9 °C warmer than upwind; detectable 100–500 m from the perimeter depending on size, wind and layout; air-cooled condenser discharge 8–14 °C above ambient (cited); neighbourhood sensitivity about 1 °C per 100 W/m² (cited). Hot-desert summer, large facilities: transfer to a 2.5 MW in-city site with caution — doi 10.1115/1.4071922; data/raw/papers/sailor2026_dc_waste_heat.pdf",
+"abConsultPolicy2013": "Government of Alberta, Policy on Consultation with First Nations on Land and Natural Resource Management, 2013 (amended 1 Apr 2020; read 19 Oct 2026): applies to Crown decisions on land and natural resource management that may adversely impact Treaty rights or traditional uses on provincial Crown lands; 'Matters Not Subject to this Policy' include 'Accessing private lands to which First Nations do not have a right of access for exercising their Treaty rights and traditional uses'; proponents (industry, municipal governments) may be delegated procedural aspects; the consultation office assesses adequacy — data/raw/ab/ir-policy-consultation-first-nations-land-resources-2013-amended-2020.pdf",
+"duvenhageKroger1996": "Duvenhage & Kröger 1996, The influence of wind on the performance of forced draught air-cooled heat exchangers (J. Wind Eng. Ind. Aerodyn. 62, 259–277; peer-reviewed, numerical; read 19 Oct 2026): cross winds cut the air delivered by up-wind fans; winds along the bank's long axis raise hot-plume recirculation along its sides; a raised fan platform sees more wind and more up-wind recirculation; modelled system effectiveness 83.5% (cross wind, mostly lost fan flow; 3.1% from recirculation) and 89.5% (long-axis wind, mostly recirculation) — an industrial bank with a 10.7 m fan platform — data/raw/papers/duvenhage_kroger_1996.pdf",
+"molla2026": "Molla 2026, In my backyard? Digital heat islands and the environmental justice of AI infrastructure in Phoenix (Climate Physics and Atmospheric Science 3–4, 100016; peer-reviewed short communication; read 19 Oct 2026): 46 data-centre buildings; land-surface temperature 39.74 °C within 1 km vs 39.26 °C citywide (≈ +0.5 °C), NDVI 0.15 vs 0.17, disproportionate proximity to low-income and minority populations; exploratory, 'does not establish causality' — data/raw/papers/molla2026_digital_heat_islands.pdf",
+"jin2020": "Jin, Schubert, Salim & Schneider 2020, Impact of air conditioning systems on the outdoor thermal environment during summer in Berlin (Int. J. Environ. Res. Public Health 17, 4645; peer-reviewed, modelled): wall-mounted AC outdoor units raise near-surface air temperature up to 0.6 K, more at night and in urban areas; rooftop units have a smaller effect — data/raw/papers/jin2020_berlin_ac.pdf",
+"salamanca2014": "Salamanca et al. 2014, Anthropogenic heating of the urban environment due to air conditioning (J. Geophys. Res. Atmospheres; peer-reviewed, WRF + building energy model, 10-day Phoenix heat event; read 19 Oct 2026): AC waste heat's mean daytime effect near the surface was negligible, but at night it raised 2 m air temperature by more than 1 °C at some urban locations and increased cooling demand — data/raw/papers/salamanca2014_phoenix_ac.pdf"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -16325,12 +17880,99 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "blatchfordAdvisor2023": "edm",
 "edmDEstrategy2024": "edm",
 "buffa2019": "gen",
-"bfe2023dc": "gen"
+"bfe2023dc": "gen",
+"meyer2013": "gen",
+"oro2019": "gen",
+"pozgaj2025": "gen",
+"ljungqvist2023": "gen",
+"yuan2025": "gen",
+"ecccEF2026": "gen",
+"abEF2026": "edm",
+"ucaRates2026": "edm",
+"bcucG5026": "van",
+"ipcc2019v3ch7": "gen",
+"vanTaxRates2026": "van",
+"vanBudget2026": "van",
+"bcAssessClasses": "van",
+"edmTaxRates2026": "edm",
+"abDataCentreLevy": "edm",
+"gcDataResidency": "gen",
+"bcFoippaAbroad": "van",
+"isocPulseIXP": "both",
+"statcanLives": "gen",
+"sscConsolidation": "gen",
+"voaComputerCentres": "gen",
+"bcRecyclingIT": "van",
+"abElectronicsReg": "edm",
+"allen2011": "both",
+"duan2026": "both",
+"dcLstPreprint": "gen",
+"vanHeatPolicy": "van",
+"edmHeatPolicy": "edm",
+"gunterShipes1971": "gen",
+"wrayAkbari2008": "gen",
+"bcDispersion": "van",
+"abModelGuideline": "edm",
+"aerscreenGuide": "gen",
+"bcNO2Guidance": "van",
+"mvAAQO": "van",
+"abAAQO": "edm",
+"caaqs": "gen",
+"mvBylaw1082": "van",
+"bcAirBackground": "van",
+"mvAirSummary2024": "van",
+"acaEdmonton": "edm",
+"pcicWx3": "edm",
+"mvClimate2016": "van",
+"emrbClimate2023": "both",
+"mvDWCP": "van",
+"vanOnceThrough": "van",
+"mvStageHistory": "van",
+"epcorStages": "edm",
+"abNewLicenceLast": "edm",
+"nbcImportance": "gen",
+"vbbl2025Seismic": "van",
+"nrcSeismic2020": "both",
+"jibcGroupLodging": "van",
+"vanHubs": "van",
+"edmWarming": "edm",
+"cec2024ESS": "both",
+"vanUndrip": "van",
+"bcDeclarationAct": "van",
+"bcEAthresholds": "van",
+"aucGuidance": "edm",
+"vanNationsNamed": "van",
+"edmNationsNamed": "edm",
+"nrcanPV2024": "both",
+"vanI2Ground": "van",
+"nbc2020Live": "edm",
+"energyStarCA": "gen",
+"scieu2024": "both",
+"ftaVibration": "gen",
+"vanEmbodied": "both",
+"vanixPoints": "both",
+"bchTCIP2026": "van",
+"aesoDC2025": "edm",
+"lbnlLargeLoad2025": "gen",
+"dkHeatCap2025": "gen",
+"sailor2026": "gen",
+"abConsultPolicy2013": "edm",
+"duvenhageKroger1996": "gen",
+"molla2026": "gen",
+"jin2020": "gen",
+"salamanca2014": "gen"
 },
 "city_gaps": {
-"van": [],
+"van": [
+"untaxed_equipment",
+"free_cooling_hours_2050s"
+],
 "edm": [
-"price_floor"
+"offerable_area",
+"price_floor",
+"no2_at_receptor",
+"air_permit_trigger",
+"importance_cat"
 ]
 }
 }</script>

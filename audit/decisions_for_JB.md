@@ -53,3 +53,4 @@ Everything else from the critical and major lists is fixed (see `tool_logic_deci
 
 ## To do (kept open, J.B. 18 Oct 2026)
 - **Tower floor areas (M66, remaining):** 596 buildings 40 m or taller (by address) still use the estimate range. 131 now use the City's owner-reported area. Next: BC Assessment Gross Building Area, which needs Jeremy Buhler's written OK (meeting Mon 19 Oct, 1 pm).
+- **After the Jeremy Buhler meeting (Mon 19 Oct, 1 pm), revisit (J.B. 19 Oct 2026):** tower floor areas (above); the four web checks — NEU sewage heat 3.2 vs 2.5 MW, LRMC capacity range, Edmonton parking stall 23.4 m², FortisBC October 2026 gas cost; and the two sweep items still open — M36 (top of the "fits" range uses a plant yard sized for the bottom) and M42 (absorption, small wind and biomass add-on cards never shown).
