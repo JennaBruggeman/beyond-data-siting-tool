@@ -194,6 +194,14 @@ function bestHeat(f,all,offer){ const cand=all.filter(p=>p.econ&&p.econ.take&&p.
     out.push(Object.assign(best,{sink:sk,cop})); }
   return out; }
 BD.bestHeat=bestHeat;
+// for the opportunity gates (J.B., 19 Oct: gates follow the set-up): best group of one kind of receiver at a given size; cached per site, size and kind
+const HG={};
+function heatGroup(f,kinds,mw){ const k=f.city+'|'+f.c.join(',')+'|'+mw.toFixed(1)+'|'+kinds.join(','); if(k in HG) return HG[k];
+  if(!RT||RT.key!==f.city+'|'+f.c.join(',')) return null; const d=BD.recv[f.city]; if(!d) return null; const e=E();
+  const all=d.pts.map(p=>Object.assign({},p,{dist:Math.hypot(p.x-f.c[0],p.y-f.c[1])})).filter(p=>p.dist<=1500), nets=e.netsAt(f,d);
+  const r=e.calc({mw,recover:true,to:'near'},f,all,nets); const sub=all.filter(p=>kinds.includes(p.t)); sub.forEach(p=>{ p.econ=heatEcon(f,p,r.avail); });
+  const B=bestHeat(f,sub,r.avail[0]); HG[k]=B&&B[0]?B[0]:null; return HG[k]; }
+BD.heatGroup=heatGroup;
 function bestSec(f,B,base,mw,mwMax,Bmax){ if(!B||!B.length) return '';
   const b=B[0], b60=B[1], sm=x=>'$'+Math.round(x); const names=b.G.map(p=>p.n||TYPE[p.t]); const nm=names.slice(0,3).map(esc).join(', ')+(names.length>3?` and ${names.length-3} more`:'');
   const pays=b.mid.lcoh<=b.v, yrs=x=>!isFinite(x)?'never':x>50?'more than 50':String(Math.round(x));

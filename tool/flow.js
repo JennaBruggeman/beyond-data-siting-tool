@@ -114,7 +114,7 @@ function decorate(){ const sd=$('#side'); if(!sd||!F.on) return; F.busy=true;
 function reset(){ F.steps=BASE.slice(); F.i=0; F.max=0; F.notes={}; F.sig=undefined; }
 async function expandOpps(){ const k=F.steps.findIndex(s=>s.k==='opps'); if(k<0) return;
   await BD.oppPrep(); const L=BD.oppScreen(); F.oppList=L; const ok=L.filter(o=>o.s!=='no');
-  const add=BD.oppFams.map(f=>({k:'fam:'+f,g:'opps',t:f+' opportunities',fam:f}));
+  const add=[{k:'opps-best',g:'opps',t:'Set-ups that open the most'}].concat(BD.oppFams.map(f=>({k:'fam:'+f,g:'opps',t:f+' opportunities',fam:f})));
   F.steps.splice(k,1,...add); }
 async function go(i){ if(i<0||i>=F.steps.length) return; invalidate(); capture(); F.i=i; F.max=Math.max(F.max,i); document.body.classList.remove('wide');
   if(F.steps[i].k==='opps'){ await expandOpps(); }
@@ -130,6 +130,7 @@ async function show(st){ const k=st.k;
   if(k.startsWith('opp:')) return BD.oppStep(st.n,st.j,st.of);
   if(k.startsWith('fam:')) return BD.oppFamily(st.fam);
   if(k==='opps-rest') return BD.oppRest(F.oppList||[]);
+  if(k==='opps-best') return BD.oppBest();
   if(k==='report') return reportView();
   BD.tabView(k); }
 F.next=next; F.back=back; F.go=go; F.to=k=>{ const i=F.steps.findIndex(s=>s.k===k); if(i>=0) go(i); };

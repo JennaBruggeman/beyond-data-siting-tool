@@ -75,3 +75,8 @@ Not built yet. J.B. is sending ideas one at a time; build only after all are agr
 - Homes'-power comparison not shown: no BC household electricity figure sourced yet.
 - Tier card shows a thumbnail of the real diagram (stage columns and wires from diagram_data.json, via templates.json 'graph'); this tier's parts lit. Link to the full diagram (private artifact: others can't open it until shared).
 - New 'Where?' card after the tier (own-site path): Vancouver and Edmonton side by side, each with its zoning bylaw and hours cold enough for full free cooling (CWEC, 3,284 / 5,522 h). Picking a city focuses the address search. Examples skip it (they set the city).
+
+## Decisions 19 Oct (later)
+- Heat payback: no 5-year line; years and cost per MWh over the parts' life (audit/payback_method_2026-10-19.md).
+- Best set-up per exchange, on the exchange card; heat first (audit/heat_search_2026-10-19.md).
+- Set-ups that open the most opportunities: top 3 by count, shown as counts (J.B. chose this over "no order"); counts treat every opportunity the same and the card says so (audit/setup_search_2026-10-19.md).
