@@ -412,3 +412,11 @@ Also: negative money is shown as −$; the BC/Alberta price label now follows th
 - M68 Edmonton lot picking: the record whose recorded lot area best fits the clicked outline (was the largest); record looked up in neighbouring tiles; lot area falls back to the measured outline when the record is missing or under half of it (as Vancouver).
 - M69 Vancouver lot area: all parts of the tax coordinate, measured from the City parcel outlines; buildings found across all parts; label no longer says "tax record".
 - M70 Edmonton heights: unmeasured estimates over 40 m (219) shown as "height not known" and drawn one storey. City 3D parts with no roofline outline added as buildings (edm_3d_unmatched.py, edm_3d_add.py): 75,041 parts → 54,249 buildings (≥ 10 m², ≥ 2.5 m), flag 7, outline = convex hull of the parts; includes the 243 m and 200 m downtown towers.
+
+## Batch 12: Labels & register (19 Oct 2026, J.B. "yes")
+- M85: Greenhouse, Aquaculture, Sewage heat and Warming centre ladders now state the clauses read, zone by zone; the card gate joins the zone's use-table result with the ladder's other rungs (the warming centre's building-code rung no longer drops out) and shows the worst.
+- M87: District heat readiness → built elsewhere (Tallaght, Odense, Mäntsälä operating). TELUS Garden TES is operating (BCUC G-152-24, 2024; service since 2016) but no source read says data-centre heat is still recovered. New district readiness → speculative: Westville/'Franky' still being built in Sep 2024 (ZfK, trade press); 2,400 MWh/yr marked as the planned minimum; heat_delivered calibration notes marked planned / design forecast.
+- M93: CloudHQ Offenbach — the City page (German, read 19 Oct 2026) gives 108,000 m² Nutzfläche (usable floor area, not gross): moved to context. Gross benchmark now n = 10, p75 814 (was 964).
+- M95: register it_load_outside aligned to the tool (290–630 m² of hall per MW, Canadian operator claims; RVO and US federal densities kept as context); it_load_actual states the single 0.6 used.
+- M98: refrigerant_co2e sourced to IPCC 2019 Refinement Vol. 3 Ch. 7 Table 7.9 (chillers: 10–2,000 kg charge, 2–15%/yr loss, lower end for developed countries); confidence 90 → 60.
+- M104: PUE confidence 100 → 80.

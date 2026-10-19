@@ -2710,11 +2710,11 @@
    "id": "it_load_outside",
    "name": "IT load, estimated from outside",
    "unit": "MW",
-   "formula": "server_floor × density; density from RVO 4.38 MWh/m²·yr ÷ 8,760 h (≈ 500 W/m²) or measured 355–667 W/m² (US federal DCs) up to 1,076–5,382 W/m² (modelled large DCs)",
+   "formula": "hall floor ÷ m² of hall per MW: 290–630 (typical) or about 250 (high density); IT MW = hall area ÷ that figure (M95, 19 Oct 2026: aligned to the tool)",
    "inputs": [
     "server_floor"
    ],
-   "coef": "RVO 2018 p.4: 4.38 MWh/m² per year per m² of server-room floor ('vloeroppervlak aan serverruimte', not gross floor), from CE Delft, validated with MJA3 (≈ 500 W/m² average); RVO does not say whether this is IT or total electricity, and calls it 'an order of magnitude, not an exact value' (checked 18 Oct 2026); measured 33–62 W/ft² (US federal); modelled 100–500 W/ft²",
+   "coef": "Tool: 290–630 m² of hall per MW (≈ 1,590–3,450 W/m²), five built Canadian halls, operator claims: eStruxture VAN-1 ≈ 290, Hut 8 Vault ≈ 557, Qu EDM1 ≈ 584, Cologix VAN2 ≈ 619, VAN5 ≈ 627 (sources/16 §2.7); high density ≈ 250 (NEXTDC S3, QScale, operator claims). Context, not used: RVO 2018 ≈ 500 W/m² of server-room floor ('an order of magnitude'); US federal measured 355–667 W/m² — older, lower-density rooms; LBNL models 186–2,325 m²/MW",
    "sources": [
     "rvo2018",
     "lbnl2024",
@@ -2722,7 +2722,7 @@
     "doeFederal"
    ],
    "conf": 60,
-   "status": "confirmed (RVO primary read)",
+   "status": "operator claims for the figure used (conf 60); government figures kept as context",
    "stage": "size",
    "source_roles": [
     {
@@ -2814,7 +2814,7 @@
    "id": "it_load_actual",
    "name": "IT load, actual (range)",
    "unit": "MW",
-   "formula": "nameplate claim × utilisation 0.20–0.60, bounded above by measured whole-building energy; or outside estimate × utilisation when no claim",
+   "formula": "IT MW × 8,760 h × 0.6 for every yearly MWh in the tool (M95: aligned to the tool); the 0.20–0.60 utilisation band is context and is not applied",
    "inputs": [
     "it_load_claim",
     "it_load_outside"
@@ -3180,7 +3180,7 @@
     "heat_captured",
     "cop"
    ],
-   "coef": "; CALIBRATION: delivered heat is receiver-limited, not source-limited, in every built case with a large data centre — Mäntsälä 20–30 GWh/yr from a ~15 MW DC (15–23 % of nameplate-continuous), Westville 2.4 GWh/yr from a 35 MW DC (1 %), TELUS Garden 4.9 of 12.3 GWh available (40 %); only Heerlen (520 kW DC into a 5GDHC network) ran source-limited at 54 %. Report this quantity as heat AVAILABLE after the heat pump; the match quantity is min(available, receiver demand); Odense DH output ≈ 1.3 × DC-side heat at COP 4.2 (Inspirationskatalog) matches COP ÷ (COP − 1)",
+   "coef": "; CALIBRATION: delivered heat is receiver-limited, not source-limited, in every built case with a large data centre — Mäntsälä 20–30 GWh/yr from a ~15 MW DC (15–23 % of nameplate-continuous), Westville 2.4 GWh/yr PLANNED from a 35 MW DC (1 %; operation not yet sourced), TELUS Garden 4.9 of 12.3 GWh available (40 %; 2013 design forecast, Order C-1-13); only Heerlen (520 kW DC into a 5GDHC network) ran source-limited at 54 %. Report this quantity as heat AVAILABLE after the heat pump; the match quantity is min(available, receiver demand); Odense DH output ≈ 1.3 × DC-side heat at COP 4.2 (Inspirationskatalog) matches COP ÷ (COP − 1)",
    "sources": [
     "bcucC113",
     "bytes2heat",
@@ -3232,7 +3232,7 @@
     },
     {
      "id": "bytes2heat",
-     "term": "Westville 2.4 GWh/yr from 35 MW (1 %)",
+     "term": "Westville 2.4 GWh/yr PLANNED from 35 MW (1 %; operation not yet sourced)",
      "role": "check",
      "conf": 60,
      "verified": true
@@ -3405,8 +3405,8 @@
     "heatPhys",
     "uptime2025"
    ],
-   "conf": 100,
-   "status": "in hand",
+   "conf": 80,
+   "status": "range in hand: an estimate (LBNL 2023) and an industry survey (Uptime 2025), not measured here; confidence 80, not 100 (M104, 19 Oct 2026)",
    "stage": "characterise",
    "source_roles": [
     {
@@ -3888,12 +3888,12 @@
    "inputs": [
     "cooling_type"
    ],
-   "coef": "IPCC GWPs; chillers 50–600 kg charge",
+   "coef": "IPCC GWPs; chiller charge 10–2,000 kg and operating loss 2–15% of the initial charge a year, the lower end for developed countries (IPCC 2019 Refinement, Vol. 3 Ch. 7, Table 7.9, p. 7.32: default ranges, not measured here); the tool's 3%/yr sits near the lower end and its 50–600 kg per chiller inside the range",
    "sources": [
-    "eccc"
+    "ipcc2019v3ch7"
    ],
-   "conf": 90,
-   "status": "in hand",
+   "conf": 60,
+   "status": "default ranges from the IPCC inventory guidelines (read 19 Oct 2026); no Canadian or manufacturer figure for these chillers (M98)",
    "stage": "characterise",
    "source_roles": [
     {
@@ -12572,7 +12572,8 @@
   "ecccEF2026": "ECCC, Emission factors and reference values, v4.0, Sep 2026 (from NIR 1990-2024, Tables A6.1-1, A6.1-3; HHV Table 8, 38.39 MJ/m³) — https://www.canada.ca/en/environment-climate-change/services/climate-change/pricing-pollution-how-it-will-work/output-based-pricing-system/federal-greenhouse-gas-offset-system/emission-factors-reference-values.html",
   "abEF2026": "Alberta Environment and Protected Areas, Carbon Offset Emission Factors Handbook v3.3, Aug 2026, Table 5 (natural gas, commercial/institutional: CO2 1,962, CH4 0.037, N2O 0.035 g/m³) — https://open.alberta.ca/publications/carbon-offset-emission-factors-handbook-version-3",
   "ucaRates2026": "Utilities Consumer Advocate (Alberta), regulated rates, Direct Energy Regulated Services (ATCO Gas), Nov 2025 – Oct 2026, $/GJ (read 18 Oct 2026) — https://ucahelps.alberta.ca/regulated-rates.aspx",
-  "bcucG5026": "BCUC Order G-50-26 (12 Mar 2026): FortisBC Mainland Commodity Cost Recovery Charge $2.230 → $1.660/GJ from 1 Apr 2026; BCUC letters L-9-25 (12 Jun 2025) and L-27-25 (11 Sep 2025): unchanged at $2.230 — https://www.ordersdecisions.bcuc.com/bcuc/orders/en/523096/1/document.do"
+  "bcucG5026": "BCUC Order G-50-26 (12 Mar 2026): FortisBC Mainland Commodity Cost Recovery Charge $2.230 → $1.660/GJ from 1 Apr 2026; BCUC letters L-9-25 (12 Jun 2025) and L-27-25 (11 Sep 2025): unchanged at $2.230 — https://www.ordersdecisions.bcuc.com/bcuc/orders/en/523096/1/document.do",
+  "ipcc2019v3ch7": "IPCC 2019 Refinement to the 2006 Guidelines for National Greenhouse Gas Inventories, Vol. 3 Ch. 7 (ODS substitutes), Table 7.9 (Updated), p. 7.32: chillers — charge 10 ≤ M ≤ 2,000 kg, lifetime 15–30 yr, operating emission 2 ≤ x ≤ 15 % of initial charge per year (lower values for developed countries) — https://www.ipcc-nggip.iges.or.jp/public/2019rf/pdf/3_Volume3/19R_V3_Ch07_ODS_Substitutes.pdf"
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ; ATCO North Mid-Use $1.062/GJ → ≈ $11/MWh heat — https://www.ucahelps.alberta.ca/regulated-rates.aspx",

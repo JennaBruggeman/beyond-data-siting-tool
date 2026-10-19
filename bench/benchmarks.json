@@ -10,11 +10,11 @@
  },
  "summary": {
   "gross_per_it_mw_benchmark": {
-   "n": 11,
+   "n": 10,
    "min": 505,
-   "p25": 593,
+   "p25": 582,
    "median": 680,
-   "p75": 964,
+   "p75": 814,
    "max": 1109
   },
   "gross_per_it_mw_reference": {
@@ -3010,12 +3010,12 @@
     "mw": 112,
     "mw_basis": "IT",
     "area_m2": 108000,
-    "area_basis": "gross",
+    "area_basis": "usable (Nutzfläche)",
     "scope": "campus",
-    "note": "City page read only in machine translation; operator gives 108,371 m².",
+    "note": "M93, 19 Oct 2026: City page read in German states 108,000 m² Nutzfläche (usable floor area, smaller than gross), so it is not a gross benchmark; 112 MW IT load, 172 MW connection; 2021 figures, completion then planned for late 2022, current status not checked.",
     "m2_per_mw": 964
    },
-   "tier": "benchmark"
+   "tier": "context"
   },
   {
    "id": "cloudhq-offenbach-kettelerstrasse",

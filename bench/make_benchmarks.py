@@ -75,7 +75,7 @@ HL = {
  'sj04-microsoft-san-jose':    (76.8, 'IT', 58608, 'gross', 'campus', 'benchmark', 'Area = 2 × 29,304 m² per building (Claude\'s arithmetic). Applicant\'s figures, still under review.'),
  'slough-manor-farm':          (72, 'IT', 36368, 'gross', 'building', 'benchmark', '"around 72 MW" — appellant\'s design figure. GIA. Appeal allowed Jun 2026.'),
  'iver-woodlands-park':        (147, 'IT', 163000, 'gross', 'campus', 'benchmark', 'GEA "up to"; 3 buildings; appeal refused. Para 32 mentions 2,240 MW, unexplained.'),
- 'cloudhq-offenbach-laemmerspieler-weg': (112, 'IT', 108000, 'gross', 'campus', 'benchmark', 'City page read only in machine translation; operator gives 108,371 m².'),
+ 'cloudhq-offenbach-laemmerspieler-weg': (112, 'IT', 108000, 'usable (Nutzfläche)', 'campus', 'context', 'M93, 19 Oct 2026: City page read in German states 108,000 m² Nutzfläche (usable floor area, smaller than gross), so it is not a gross benchmark; 112 MW IT load, 172 MW connection; 2021 figures, completion then planned for late 2022, current status not checked.'),
  'ark-up4-hillingdon':         (28, 'IT', 15410, 'gross', 'campus', 'benchmark', 'GIA; report also gives 18,898 m².'),
  'globalswitch-house-e14':     (74, 'IT', 69829, 'gross', 'building', 'reference', 'Area = 63,541 existing + 6,288 new GIA (Claude\'s sum). Report does not say whether 74 MW is the whole building.'),
  'lafayette-santa-clara':      (66, 'IT', 53456, 'gross', 'building', 'reference', '66 MW not re-found when Claude re-checked the report on 15 Oct (only 99.8 MW maximum load). Moved to reference until checked.'),

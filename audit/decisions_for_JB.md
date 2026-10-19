@@ -38,7 +38,7 @@ Everything else from the critical and major lists is fixed (see `tool_logic_deci
 - **M61 / M62 Noise zones.** Edmonton residential detected by an "R" prefix; Vancouver CD-1 never matched. **Explicit lists from the bylaws.**
 - **M64 Sight lines.** Vancouver excludes lanes; Edmonton includes alleys. **Match the two.**
 
-## Labels and register
+## Labels and register (done 19 Oct 2026 — see tool_logic_decisions.md Batch 12)
 - **M85 Gate vs ladder.** Some cards show two zoning states. **Update the ladders to the clauses now read.**
 - **M87 Readiness.** TELUS Garden "built here" (operation not sourced); Westville "built elsewhere" (planned). **Downgrade both until operation is sourced.**
 - **M93 CloudHQ Offenbach** area basis. **Mark the basis unspecified.**
