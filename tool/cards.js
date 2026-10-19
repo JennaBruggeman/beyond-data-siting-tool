@@ -158,6 +158,59 @@ const OTHERNETS={van:[['Downtown steam (Creative Energy) — on the map, from th
 function otherNets(city){ const L=OTHERNETS[city]||[]; if(!L.length) return '';
   return `<details class="sub"><summary>Other district-energy systems in the city (${L.length}; those not on the map have no location source yet)</summary><table class="idx"><tbody>${L.map(r=>`<tr><td>${esc(r[0])}<div class="src">${esc(r[1])}${r[2]!=='—'?' ('+r[2]+')':''}</div></td></tr>`).join('')}</tbody></table>
   <div class="src">CEEDC Innovative Energy Facilities inventory, district energy (SFU). Its coordinates do not match the facilities and it gives no service areas; systems marked on the map are located from other sources. Figures reported 2014–2023; some figures withheld as confidential. Steam at 205 °C cannot take server heat without a large lift; hot-water networks at 65–85 °C need a heat pump; returns at 50–65 °C set what it must beat.</div></details>`; }
+/* ---------- best set-up for heat on this site (J.B., 19 Oct 2026: "show what site set-up and equipment would make the numbers more feasible") ----------
+   Searches what the tool can vary for heat and shows the set-up with the lowest cost per MWh (middle case), with its trade-offs. Not a verdict.
+   Levers: size (heat offered), which buildings share one pipe (a small branch network along the streets), the buildings' heating temperature.
+   Liquid cooling to the chip is assumed (the only cooling with a sourced heat figure). Sources: audit/heat_search_2026-10-19.md */
+const HS={src:{t:[37.5,24]}, // °C, liquid-cooled water from the servers and back to them: NREL ESIF, supply 24 °C, return 35–40 °C (Van Geet 2019)
+  sinks:[{id:'70',t:[70,50],lab:'baseboards or fan coils (70 °C supply, 50 °C return)'},{id:'60',t:[60,45],lab:'panel radiators (60 °C, 45 °C)'}], // City of Vancouver NE connectivity standards (Dec 2013) s. 4.3
+  eta:[0.40,0.50]}; // Lorenz efficiency for a built heat pump (register cop; calibrated at Odense, η 0.50 → 4.56 against 4.5 realised)
+function lorenzCOP(src,sink){ const K=273.15, lm=(a,b)=>Math.abs(a-b)<0.01?a+K:((a+K)-(b+K))/Math.log((a+K)/(b+K)); const Tk=lm(sink[0],sink[1]), Ts=lm(src[0],src[1]); return HS.eta.map(e=>e*Tk/(Tk-Ts)); }
+BD.lorenzCOP=lorenzCOP;
+// one pipe from the site to a group of buildings: shared street segments are dug once; a segment carrying several buildings is sized up
+// by continuity (diameter ∝ √flow, from the DN100 the tool assumes for one building) and priced by Persson & Werner (cost per metre = €212 + €4,464 × diameter)
+function groupCost(f,G){ if(!RT||RT.key!==f.city+'|'+f.c.join(',')) return null; const T=RT.T, Gr=RT.G; const seg=new Map(); let tail=0;
+  for(const p of G){ if(!p._route) return null; tail+=p._route.len-RT.ds-T.dist[p._route.n]; let n=p._route.n; while(n>=0&&n!==RT.s){ const pr=T.prev[n]; if(pr<0) break; const k=n; const e=seg.get(k)||{L:Math.hypot(Gr.xy[2*n]-Gr.xy[2*pr],Gr.xy[2*n+1]-Gr.xy[2*pr+1]),H:0,hmax:0}; e.H+=p.econ.take[1]; e.hmax=Math.max(e.hmax,p.econ.take[1]); seg.set(k,e); n=pr; } }
+  const per=d=>(212+4464*d)/(212+4464*0.1); let len=RT.ds+tail, w=RT.ds+tail; // w: metres weighted by size factor
+  const Htot=G.reduce((a,p)=>a+p.econ.take[1],0), Hmax=Math.max(...G.map(p=>p.econ.take[1]));
+  w=RT.ds*per(0.1*Math.sqrt(Htot/Hmax))+tail; // the stretch from the site to the street carries everything
+  for(const e of seg.values()){ len+=e.L; w+=e.L*per(0.1*Math.sqrt(e.H/e.hmax)); }
+  return {len,w}; }
+function scen(f,G,cop,offer){ const v=ECON.heatVal(f.city), pe=ECON.elec[f.city]; const gc=groupCost(f,G); if(!gc) return null;
+  let H=G.reduce((a,p)=>a+p.econ.take[1],0); if(offer) H=Math.min(H,offer); if(H<=0) return null;
+  const cpm=mw=>{ const [[m1,c1],[m3,c3]]=ECON.hpCapex; return (mw<=m1?c1:mw>=m3?c3:c1+(c3-c1)*(mw-m1)/(m3-m1))*ECON.eur; };
+  const fix=ECON.fixed*G.length, crf=(i,n)=>i*Math.pow(1+i,n)/(Math.pow(1+i,n)-1), cP=crf(ECON.rate,ECON.life.pipe), cH=crf(ECON.rate,ECON.life.hp);
+  const one=(pm,c,flh)=>{ const mw=H/flh, hp=mw*cpm(mw), om=(ECON.hpOMfix*mw+ECON.hpOMvar*H)*ECON.eur, pipe=fix+gc.w*pm, cap=pipe+hp, yr=H*(v-pe/c)-om;
+    return {lcoh:(cP*pipe+cH*hp+om)/H+pe/c, pay:yr>0?cap/yr:Infinity, cap, pipe, hp, mw}; };
+  const mid=one((ECON.pipe[0]+ECON.pipe[1])/2,(cop[0]+cop[1])/2,(ECON.hpFLH[0]+ECON.hpFLH[1])/2), lo=one(ECON.pipe[0],cop[1],ECON.hpFLH[1]), hi=one(ECON.pipe[1],cop[0],ECON.hpFLH[0]);
+  return {G,H,len:gc.len,v,mid,lo,hi,elec:H/((cop[0]+cop[1])/2)}; }
+function bestHeat(f,all,offer){ const cand=all.filter(p=>p.econ&&p.econ.take&&p._route); if(!cand.length) return null; const out=[];
+  for(const sk of HS.sinks){ const cop=lorenzCOP(HS.src.t,sk.t);
+    // start from the building with the lowest cost per MWh on its own, then add whichever building lowers the group's cost most
+    let best=null; for(const p of cand){ const r=scen(f,[p],cop,offer); if(r&&(!best||r.mid.lcoh<best.mid.lcoh)) best=r; }
+    if(!best) continue; let G=best.G.slice(), grew=true;
+    while(grew&&G.length<40){ grew=false; let nb=null; for(const p of cand){ if(G.includes(p)) continue; const r=scen(f,G.concat([p]),cop,offer); if(r&&r.mid.lcoh<(nb||best).mid.lcoh) nb=r; }
+      if(nb&&nb.mid.lcoh<best.mid.lcoh-0.05){ best=nb; G=nb.G.slice(); grew=true; } if(offer&&best.H>=offer) break; }
+    out.push(Object.assign(best,{sink:sk,cop})); }
+  return out; }
+BD.bestHeat=bestHeat;
+function bestSec(f,B,base,mw,mwMax,Bmax){ if(!B||!B.length) return '';
+  const b=B[0], b60=B[1], sm=x=>'$'+Math.round(x); const names=b.G.map(p=>p.n||TYPE[p.t]); const nm=names.slice(0,3).map(esc).join(', ')+(names.length>3?` and ${names.length-3} more`:'');
+  const pays=b.mid.lcoh<=b.v, yrs=x=>!isFinite(x)?'never':x>50?'more than 50':String(Math.round(x));
+  const sizeTxt=Bmax&&Bmax[0]&&Bmax[0].mid.lcoh<b.mid.lcoh-0.5?` At the largest size that fits (${mwMax.toFixed(1)} MW) the same search reaches ${sm(Bmax[0].mid.lcoh)} per MWh, with ${Bmax[0].G.length} buildings.`:'';
+  const ans=`${sm(b.mid.lcoh)} per MWh against ${sm(b.v)} the heat is worth: liquid cooling, one pipe to ${b.G.length} building${b.G.length>1?'s':''}${base?` (your set-up, one building at a time: ${sm(base)})`:''}`;
+  const body=`<p class="sub">The lowest cost per MWh the tool finds for heat on this lot, middle case. A search, not a recommendation.</p>
+   <dl><dt>Cooling</dt><dd>liquid to the chip: water leaves the servers at about 35–40 °C and returns at 24 °C (NREL's ESIF data centre, measured design)</dd>
+   <dt>Size</dt><dd>${mw.toFixed(1)} MW of servers</dd>
+   <dt>Who takes the heat</dt><dd>${nm}: about ${fmt(Math.round(b.H/100)*100)} MWh a year, through ${fmt(Math.round(b.len/10)*10)} m of pipe along the streets, shared where the routes overlap</dd>
+   <dt>Their heating</dt><dd>${esc(b.sink.lab)}: heat pump COP ${b.cop[0].toFixed(1)}–${b.cop[1].toFixed(1)}${b60?`. If they ran ${esc(b60.sink.lab)}: <span class="k">${sm(b60.mid.lcoh)} per MWh</span>`:''}</dd>
+   <dt>Cost per MWh of heat</dt><dd><span class="k">${sm(b.mid.lcoh)}</span> (${sm(b.lo.lcoh)}–${sm(b.hi.lcoh)}) against ${sm(b.v)} worth; ${pays?'it costs less than the heat is worth in the middle case':`a gap of ${sm(b.mid.lcoh-b.v)}`}</dd>
+   <dt>Years to pay back</dt><dd>${isFinite(b.mid.pay)?`about ${yrs(b.mid.pay)} (${yrs(b.lo.pay)} to ${yrs(b.hi.pay)})`:isFinite(b.lo.pay)?`never in the middle case; ${yrs(b.lo.pay)} at best`:'never: the heat pump\'s electricity and upkeep cost more than the gas the heat replaces'}</dd></dl>${sizeTxt?`<p class="sub">${sizeTxt}</p>`:''}
+   <h3>What it costs elsewhere</h3><ul class="lim"><li>Plumbing to every server; the rest of the heat still leaves by air</li><li>A heat pump of about ${b.mid.mw.toFixed(1)} MW in the plant room (about 100 m² per MW at 1 MW, 50 at 3 MW: Danish Energy Agency)</li><li>${fmt(Math.round(b.len/10)*10)} m of trench in the street: months of digging</li><li>About ${fmt(Math.round(b.elec/10)*10)} MWh a year more electricity for the heat pump</li><li>One contract per building; if the data centre leaves, every building falls back on its own heating</li></ul>
+   <p class="sub">With radiant floor heating (45 °C supply or lower) liquid-cooled heat could be used with little or no heat pump for much of the year: NREL's ESIF heats its own offices and labs this way (it needs at least 35 °C on the coldest day). Which buildings nearby heat this way is not known.</p>
+   <p class="src">Not searched yet: feeding an existing network, air cooling (its heat is not sourced), heat storage. How it works: heat pump COP by the Lorenz method (η 0.40–0.50, calibrated at Odense) from the servers' water to the building's heating; shared trench dug once; a pipe carrying several buildings' heat is sized up (diameter ∝ √heat) and priced by Persson &amp; Werner; one connection per building; one heat pump, cheaper per MW when larger (Danish Energy Agency); ${(ECON.rate*100).toFixed(1)}% real over ${ECON.life.pipe} and ${ECON.life.hp} years. The heat each building is offered is not reduced for the warmer source.</p>`;
+  return BD.sec('h-best','Best set-up found for heat',ans,body,{finding:true}); }
+
 async function heatIndex(){
   await opps(); const e=E(), f=e.siteFacts(), A=BD.S.answers, mw=A.mw||(f.M&&f.M.mwSized)||1; BD.S.view2='tab';
   const d=await e.loadRecv(f.city), nets=e.netsAt(f,d); await routeTree(f);
@@ -188,7 +241,9 @@ async function heatIndex(){
   const PL={housing:['non-market housing building','non-market housing buildings'],school:['school','schools'],campus:['campus','campuses'],care:['care home','care homes'],hospital:['hospital','hospitals'],rec:['recreation centre','recreation centres'],hall:['community league hall','community league halls'],pool:['pool','pools'],arena:['arena','arenas']};
   const kinds=[...new Set(all.map(p=>p.t))].map(t=>{ const n=all.filter(p=>p.t===t).length; return `${n} ${(PL[t]||[t,t])[n===1?0:1]}`; }).join(', ');
   const recvAns=[kinds||'none found',nW?`${nW} cost less than the heat is worth`:'none costs less than the heat is worth',nDep?`${nDep} depend on the costs`:'',nB?`${nB} cost more`:''].filter(Boolean).join('; ');
-  let h=e.tabBar('heat')+`<h2>Who could take the heat</h2><p class="lead">${lead}</p>${counted}`
+  const Bcur=bestHeat(f,all,r.avail[0]); let Bmax=null; const mwMax=f.mw?f.mw[1]:mw; if(mwMax>mw*1.05){ const rM=e.calc({mw:mwMax,recover:true,to:'near'},f,all,nets); const allM=all.map(p=>Object.assign({},p,{econ:heatEcon(f,p,rM.avail)})); Bmax=bestHeat(f,allM,rM.avail[0]); }
+  const baseBest=all.filter(p=>p.econ.lcohMid).reduce((m,p)=>Math.min(m,p.econ.lcohMid),Infinity);
+  let h=e.tabBar('heat')+`<h2>Who could take the heat</h2><p class="lead">${lead}</p>${counted}`+bestSec(f,Bcur,isFinite(baseBest)?baseBest:null,mw,mwMax,Bmax)
   +BD.sec('h-offer','Heat this size could offer',`${e.rng(r.avail[0]/1000,r.avail[1]/1000,'GWh a year')} with liquid cooling and a heat pump; with air cooling, heat pumps on the chilled-water loop could reuse some of it, but how much is not yet known`,
      `<div class="hfig"><div><b>${e.rng(r.avail[0]/1000,r.avail[1]/1000,'GWh/yr')}</b><span>heat this size could offer (liquid-cooled, heat pump)</span></div><div><b>${e.rng(r.homes[0],r.homes[1],'')}</b><span>homes' heating, as an equal (provincial average)</span></div></div><p class="sub"><a href="#" id="hmath">How the heat figure is worked out ›</a></p>`)
   +BD.sec('h-price','What the heat is worth here',netB<=0?'less than nothing: the heat pump costs more to run than the gas it replaces':(()=>{ const w=gv-pe0/R0.cop[0], b=gv-pe0/R0.cop[1]; return w<0?`−$${(-w).toFixed(1)} (COP 3.0) to $${b.toFixed(1)} (COP 4.5) per MWh after the heat pump`:`$${w.toFixed(1)}–${b.toFixed(1)} per MWh after the heat pump`; })(),

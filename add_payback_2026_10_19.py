@@ -25,5 +25,12 @@ q.update({'formula': 'simple payback = (pipe + connection + heat pump) ÷ (heat 
   'revised': '2026-10-19'})
 if 'receiver_radius' in Q:
     Q['receiver_radius']['note'] = 'used only as how far the tool looks; the 5-year payback behind it is no longer a test (19 Oct 2026)'
+S['nrelESIF2019'] = "Van Geet (NREL), Data Center Optimization Strategies: NREL ESIF Data Center Energy and Water Savings (Aug 2019): 24 °C cooling water supply, 35–40 °C return used to heat offices and lab space; ERE 0.929 (first year of TSC operation) — https://nrel.gov/docs/fy19osti/74464.pdf; NREL warm-water liquid cooling page: building needs at least 95 °F on the coldest day — https://www.nrel.gov/computational-science/warm-water-liquid-cooling"
+S['vanNEConnect2013'] = "City of Vancouver, Neighbourhood Energy Connectivity Standards bulletin (Dec 2013), s. 4.3 maximum temperatures: radiant floor 45/35 °C, panels 60/45, baseboard 70/50, fan coils 70/50, make-up air 65/45, DHW 60 °C — https://guidelines.vancouver.ca/bulletins/bulletin-sustainability-neighbourhood-energy-connectivity-standards.pdf"
+S['upsiteASHRAE5'] = "Upsite Technologies blog, Major changes to ASHRAE's fifth edition of Thermal Guidelines, part 3 (industry blog; ASHRAE text not read): facility water classes W17/W27/W32/W40/W45/W+ by upper limit; makers design around 40 °C, few above 45 °C — https://www.upsite.com/blog/major-changes-to-ashraes-fifth-edition-of-thermal-guidelines-part-3-liquid-cooling-chapter-updates/"
+if 'heat_temp' in Q:
+    q = Q['heat_temp']; q['sources'] = q.get('sources', []) + [x for x in ('nrelESIF2019', 'upsiteASHRAE5') if x not in q.get('sources', [])]
+    q['coef'] = (q.get('coef', '') + ' | 19 Oct 2026: liquid-cooled measured design 24 °C supply, 35–40 °C return (NREL ESIF); 50–60 °C remains unverified (secondary).').strip(' |')
+    q['revised'] = '2026-10-19'
 json.dump(d, open(P, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print('payback updated')
