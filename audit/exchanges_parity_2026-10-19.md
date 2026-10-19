@@ -23,3 +23,12 @@ Research: audit/research_2026-10-19/G_electricity_exchange.md, H_water_exchange.
 - AESO reserve value is an all-hours upper bound; product prices not published.
 - Whether a BC battery can draw the DR payment as well as the incentive is not stated.
 - Tank life from warranties; tank sized to one wet month (assumed, as before).
+
+## Roof shading (19 Oct, later)
+- J.B.: solar payback depends on the exact lot. Added shade from neighbours: beam by hour-by-month bins (NREL SAM 3D shade calculator approach) from each city's CWEC year (tool/sun.json from tool/make_sun.py; derived statistics only) and diffuse by sky view factor, SVF = 1 − mean sin² horizon angle over 36 directions (Antonanzas-Torres et al. 2018, after Ruiz-Arias et al. 2010). Neighbours taller than the roof within 500 m; loss applied to NRCan yield (flat-surface loss on tilted yield: an approximation).
+- CWEC check: horizontal GHI 1,263 kWh/m² Vancouver, 1,254 Edmonton.
+- Results: Clark Dr 0% (10 taller buildings, none in the sun's path); Edmonton lot 0%; 555 W Hastings roof at 42 m: about 5% (228 taller buildings, direct sun 4% blocked, sky 94% visible).
+
+## Security rule revised (J.B., 19 Oct)
+- Substations and utility infrastructure from government or utility sources: shown and used. Generator and fuel data in permits and spec sheets: used in full. Kept by Claude, open to J.B.: no map positions of generators or fuel tanks at real, named data centres.
+- Substation data: NRCan CanVec "Mines, Energy and Communication Networks" (transformer stations; Open Government Licence) — directory robots-blocked for fetch; J.B. to download BC and AB files.

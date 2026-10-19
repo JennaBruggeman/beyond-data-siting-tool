@@ -23,14 +23,36 @@ BD.XECON=X;
 const ECON=()=>BD.ECON, rate=()=>ECON().rate, money=x=>'$'+fmt(Math.round(x)), per=(x,u)=>`$${x>=100?fmt(Math.round(x)):x.toFixed(x<10?2:1)} ${u}`;
 const yrs=x=>!isFinite(x)||x<=0?'never':x>50?'more than 50':String(Math.round(x));
 
+/* roof shading from the buildings around the lot (J.B., 19 Oct 2026: solar payback depends on the exact lot).
+   Method as NREL SAM's 3D shade calculator: an hour-by-month table of beam shading from the sun's position and the 3D scene, plus one sky-diffuse
+   loss. Beam: a sample point is shaded in a bin when a neighbour taller than the roof stands in the sun's direction, high enough at that distance.
+   Diffuse: isotropic sky × sky view factor, SVF = 1 − mean sin² of the horizon angle over 36 directions (Antonanzas-Torres et al. 2018, after
+   Ruiz-Arias et al. 2010). Sun bins from each city's CWEC year (sun.json, make_sun.py). The loss is worked out on a flat surface and applied to
+   NRCan's yield per kWp (an approximation for tilted panels). Heights: Vancouver LiDAR 2022; Edmonton 3D model or estimates. */
+let SUN=null; fetch('sun.json').then(r=>r.ok?r.json():null).then(d=>{ SUN=d; }).catch(()=>{});
+const SH={};
+function rayEnter(px,py,dx,dy,r){ let t=Infinity; const n=r.length/2; for(let i=0;i<n;i++){ const j=(i+1)%n, ax=r[2*i],ay=r[2*i+1],bx=r[2*j],by=r[2*j+1]; const ex=bx-ax, ey=by-ay, den=dx*ey-dy*ex; if(Math.abs(den)<1e-9) continue; const u=((ax-px)*ey-(ay-py)*ex)/den, v=((ax-px)*dy-(ay-py)*dx)/den; if(u>0&&v>=0&&v<=1&&u<t) t=u; } return t; }
+function roofShade(f,pts,z0){ if(!SUN||!SUN[f.city]||!pts||!pts.length) return null; const key=f.city+'|'+f.c.join(',')+'|'+z0.toFixed(1)+'|'+pts.length; if(SH[key]) return SH[key];
+  const S=BD.S, lot=f.M&&f.M.ring, obs=[];
+  for(const id in S.tiles){ if(!id.startsWith(f.city+':')) continue; for(const b of S.tiles[id].bld){ if(b.f===3||!b.h||b.h<=z0) continue; const d=Math.hypot(b.c[0]-f.c[0],b.c[1]-f.c[1]); if(d>500) continue; if(lot&&BD.pip(b.c[0],b.c[1],lot)) continue; obs.push(b); } }
+  const sun=SUN[f.city], bins=sun.bins.filter(x=>x[2]>0); let beamLost=0, svfSum=0;
+  const P=pts.length>30?pts.filter((_,i)=>i%Math.ceil(pts.length/30)===0):pts;
+  for(const [px,py] of P){ // beam
+    for(const [mo,hr,alt,az,bh] of bins){ const dx=Math.sin(az*Math.PI/180), dy=Math.cos(az*Math.PI/180), ta=Math.tan(alt*Math.PI/180); let hit=false;
+      for(const b of obs){ const t=rayEnter(px,py,dx,dy,b.r); if(t<Infinity&&z0+t*ta<b.h){ hit=true; break; } } if(hit) beamLost+=bh; }
+    let s2=0; for(let k=0;k<36;k++){ const a=k*10*Math.PI/180, dx=Math.sin(a), dy=Math.cos(a); let g=0; for(const b of obs){ const t=rayEnter(px,py,dx,dy,b.r); if(t<Infinity&&t>0.5){ const e=Math.atan((b.h-z0)/t); if(e>g) g=e; } } s2+=Math.sin(g)**2; } svfSum+=1-s2/36; }
+  const n=P.length, bl=beamLost/n, svf=svfSum/n, tot=sun.beam_kwh+sun.diffuse_kwh, loss=(bl+sun.diffuse_kwh*(1-svf))/tot;
+  return SH[key]={loss,beam:bl/sun.beam_kwh,svf,obs:obs.length,n}; }
+BD.roofShade=roofShade;
 /* ---------- electricity ---------- */
 function solar(f){ const lay=BD.pvLayout&&BD.pvLayout(f); if(!lay||!lay.kwp[1]) return null; const pv=BD._pv, c=f.city;
   const yl=pv?[pv[c].horizontal.reduce((s,v)=>s+v,0),pv[c].latitude.reduce((s,v)=>s+v,0)]:(c==='van'?[892,1007]:[944,1244]);
-  const kwp=lay.kwp, mwh=[kwp[0]*yl[0]/1000,kwp[1]*yl[1]/1000], cw=X.pv.cost(kwp[1]), capex=[kwp[0]*1000*cw[0],kwp[1]*1000*cw[1]], om=[kwp[0]*X.pv.om,kwp[1]*X.pv.om];
+  const M=f.M, z0=((M&&(M.roofH||M.H))||4)+0.5, pts=lay.slots.map(r=>BD.centroid(r)), sh=roofShade(f,pts,z0), keepF=sh?1-sh.loss:1;
+  const kwp=lay.kwp, mwh=[kwp[0]*yl[0]/1000*keepF,kwp[1]*yl[1]/1000*keepF], cw=X.pv.cost(kwp[1]), capex=[kwp[0]*1000*cw[0],kwp[1]*1000*cw[1]], om=[kwp[0]*X.pv.om,kwp[1]*X.pv.om];
   const v=ECON().elec[c], k=crf(rate(),X.pv.life);
   const lc=[(k*kwp[1]*1000*cw[0]+om[1])/mwh[1],(k*kwp[0]*1000*cw[1]+om[0])/mwh[0]]; // best: cheap and high yield; worst
   const pay=[kwp[1]*1000*cw[0]/(mwh[1]*v-om[1]),kwp[0]*1000*cw[1]/(mwh[0]*v-om[0])];
-  return {kwp,mwh,capex,lc,v,pay,yl,m2:lay.m2}; }
+  return {kwp,mwh,capex,lc,v,pay,yl,m2:lay.m2,sh}; }
 function solarBest(f){ // the plant's position decides how much roof is free (plant on the roof takes roof)
   const a=A(), keep=a.plantAt; const out=[]; for(const p of ['roof','yard','split']){ a.plantAt=p; BD.modelReset&&BD.modelReset(); const s=solar(E().siteFacts()); if(s) out.push({p,s}); }
   a.plantAt=keep; BD.modelReset&&BD.modelReset(); E().siteFacts(); out.sort((x,y)=>y.s.kwp[1]-x.s.kwp[1]); return out; }
@@ -47,6 +69,7 @@ function elecSecs(f){ const s=solar(f), b=battery(f), ev=evHub(f), Bst=solarBest
   if(s){ const b0=Bst[0], cur=Bst.find(x=>x.p===(A().plantAt||'roof'));
     h+=sec('x-pv','Solar on the roof',`${per(s.lc[0],'')}–${per(s.lc[1],'per MWh')} over its life, against $${s.v.toFixed(0)} the power it replaces costs`,
     `<dl><dt>How much</dt><dd>${E().rng(s.kwp[0],s.kwp[1],'kWp')} on ${fmt(s.m2)} m² of free roof: ${E().rng(s.mwh[0],s.mwh[1],'MWh a year')} (${fmt(s.yl[0])}–${fmt(s.yl[1])} kWh per kWp, NRCan)</dd>
+     <dt>Shade from neighbours</dt><dd>${s.sh?`<span class="k">about ${Math.round(s.sh.loss*100)}% of the sun lost</span> to ${s.sh.obs} building${s.sh.obs===1?'':'s'} taller than the roof within 500 m (direct sun ${Math.round(s.sh.beam*100)}% blocked; ${Math.round(s.sh.svf*100)}% of the sky visible); taken off the yield above. Method: NREL SAM's hour-by-month shading, with sky view for diffuse light (CWEC typical year)`:'not worked out (sun data or neighbours not loaded): the yield assumes open sky'}</dd>
      <dt>Who takes it</dt><dd>the data centre itself, every hour: its own use is far larger. ${esc(X.pv.export[f.city])}</dd>
      <dt>What it is worth</dt><dd>$${s.v.toFixed(2)} per MWh it does not buy (${f.city==='van'?'BC Hydro Large General Service energy charge':'Alberta pool average 2025 plus EPCOR\'s per-kWh charges'}; demand charges not reduced: the panels do not lower the highest 15 minutes)</dd>
      <dt>What it costs</dt><dd>${money(s.capex[0])}–${money(s.capex[1])} to build (NRCan/IEA PVPS Canada 2024 by size), $${fmt(Math.round(X.pv.om))} per kW a year to run (NREL), ${X.pv.life} years</dd>
