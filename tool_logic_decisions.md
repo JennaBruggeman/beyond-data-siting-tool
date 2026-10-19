@@ -398,3 +398,7 @@ Also: negative money is shown as −$; the BC/Alberta price label now follows th
 - **M35/M72.** "The low end of what fits" is replaced by "a provisional size until one is set". Opportunities, Heat, connection cards and Solar use the same provisional size as the plant (rounded to 0.1 MW), not 1 MW. The report says when a size is provisional.
 - **M77.** Report steps recorded before an input change are marked "Recorded with earlier choices — open this step again to update it".
 - **M102.** Register pv_roof now matches the panel-row layout the card uses.
+
+## Batch 10: sight lines (M64), 18 Oct 2026
+- M64: Vancouver lanes added (City of Vancouver Open Data "Lanes", 7,856 segments, updated 27 Jul 2026; J.B. approved download 18 Oct). Both cities now place street viewpoints on street and lane/alley centrelines; Edmonton unchanged. Lanes also join the Vancouver pipe-route network (Edmonton alleys already did). Lane surface not recorded: drawn as paved. 1425 Clark Dr: 128 → 150 street points, 26 → 27 see the plant.
+- Also downloaded: "Noise control areas" (3 outlines, City, modified 2020). Its "Intermediate Zone" outline matches the shape of By-law 6555 Schedule B.1 (north shore of False Creek, plus a small area at the south end of the Burrard/Granville bridges) — to be used for M62.

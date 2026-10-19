@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Street centrelines → tool/streets_van.json and tool/streets_edm.json (local metres, the tiles' projection), for pipe routes along
 streets, cost by surface, and street viewpoints for sight lines.
-In: data/raw/van/public-streets.csv (City of Vancouver Open Data, Public streets; lanes not included) and
+In: data/raw/van/public-streets.csv (City of Vancouver Open Data, Public streets),
+    data/raw/van/streets/lanes_2026-10-18.geojson (City of Vancouver Open Data, Lanes; surface not recorded, drawn as paved) and
     data/raw/edm/Road_Network_20261016.csv (City of Edmonton Open Data, Road Network; roads and alleys, railways dropped).
 Both J.B. downloads, 16 Oct 2026."""
 import csv, json, math, os, re, collections, sys
@@ -23,7 +24,14 @@ for r in csv.DictReader(open(os.path.join(ROOT, 'data', 'raw', 'van', 'public-st
     for ln in ([g['coordinates']] if g['type'] == 'LineString' else g['coordinates'] if g['type'] == 'MultiLineString' else []):
         pts = [v for lo, la in ln for v in P(lo, la)]
         if len(pts) >= 4: segs.append([CL.index(u), 1] + pts)
-write('van', segs, CL, 'City of Vancouver Open Data, Public streets (downloaded 16 Oct 2026); lanes not included')
+CL.append('Lane'); nl = 0
+for ft in json.load(open(os.path.join(ROOT, 'data', 'raw', 'van', 'streets', 'lanes_2026-10-18.geojson')))['features']:
+    g = ft['geometry']
+    for ln in ([g['coordinates']] if g['type'] == 'LineString' else g['coordinates'] if g['type'] == 'MultiLineString' else []):
+        pts = [v for lo, la in ln for v in P(lo, la)]
+        if len(pts) >= 4: segs.append([CL.index('Lane'), 1] + pts); nl += 1
+print('van lanes', nl)
+write('van', segs, CL, 'City of Vancouver Open Data, Public streets (downloaded 16 Oct 2026) and Lanes (downloaded 18 Oct 2026; lane surface not recorded)')
 # Edmonton: class from centreline type and functional class; paved flag from the surface description (unpaved gravel alleys = 0)
 P = proj('edm'); CL = []; segs = []; cnt = collections.Counter()
 def cls(r):
