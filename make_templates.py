@@ -119,6 +119,16 @@ out['graph'] = {'stages': [[s['id'], s['name']] for s in _D['stages']],
                 'edges': [[e['from'], e['to']] for e in _D['edges']]}
 for tid in ('resident', 'community', 'full'):
     out[tid + '_count'] = sum(1 for v in T.values() if rank[v[0]] <= rank[tid])
+# node details for the tool's logic panel (step 3, 20 Oct 2026): what each part is, how it is worked out, how sure, from what
+def _cut(t, n):
+    t = (t or '').strip()
+    return t if len(t) <= n else t[:t.rfind(' ', 0, n)] + ' …'
+_L = {'nodes': {}, 'edges': [[e['from'], e['to']] for e in _D['edges']], 'stages': [[s['id'], s['name'], s.get('desc', s.get('note', ''))] for s in _D['stages']]}
+for n in _D['nodes']:
+    _L['nodes'][n['id']] = {'n': n['name'], 's': n['stage'], 'k': n.get('kind', 'quantity'), 'f': _cut(n.get('formula', ''), 300), 'c': _cut(n.get('coef', ''), 500),
+                            'u': n.get('unit', ''), 'q': n.get('conf'), 'st': n.get('status', ''), 'src': n.get('sources', []), 'st2': _cut(n.get('source_text', ''), 300),
+                            't': T[n['id']][0], 'p': T[n['id']][1].split(), 'w': T[n['id']][2]}
+json.dump(_L, open(os.path.join(H, 'tool', 'logic.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
 for path in (os.path.join(H, 'templates.json'), os.path.join(H, 'tool', 'templates.json')):
     json.dump(out, open(path, 'w'), ensure_ascii=False, indent=1)
 print({k: out[k + '_count'] for k in ('resident', 'community', 'full')})

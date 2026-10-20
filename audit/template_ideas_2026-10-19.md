@@ -47,9 +47,9 @@ Not built yet. J.B. is sending ideas one at a time; build only after all are agr
 ## Build plan (19 Oct)
 1. Tier data: templates.json — every node tagged with parties and the lowest tier that shows it (done: resident 30, community 95, full 156; draft, judged).
 2. (done 19 Oct, tool v90) Tier step after the landing page; tier switch kept; residents' setup cut to where (and how big), other answers assumed, shown, changeable.
-3. Diagram panel beside the results; opening a card lights its path; drawn at the tier's level; node click = formula, source, confidence.
-4. Cards filtered by tier, with "show more".
-5. Reports by tier.
+3. (done 20 Oct, overnight) Diagram panel beside the results; opening a card lights its path; drawn at the tier's level; node click = formula, source, confidence.
+4. (done 20 Oct, overnight) Cards filtered by tier, with "show more".
+5. (done 20 Oct, overnight) Reports by tier.
 6. Workflow map: same tiers from the same templates.json.
 7. Sensitivity test against the full template; J.B. sets cut-offs; adjust tiers.
 8. Full interface sweep.
@@ -80,3 +80,29 @@ Not built yet. J.B. is sending ideas one at a time; build only after all are agr
 - Heat payback: no 5-year line; years and cost per MWh over the parts' life (audit/payback_method_2026-10-19.md).
 - Best set-up per exchange, on the exchange card; heat first (audit/heat_search_2026-10-19.md).
 - Set-ups that open the most opportunities: top 3 by count, shown as counts (J.B. chose this over "no order"); counts treat every opportunity the same and the card says so (audit/setup_search_2026-10-19.md).
+
+## Steps 3–5 as built (20 Oct, overnight; J.B. to check in the morning)
+Files: tool/logic.js (new), tool/logic.json (new, from make_templates.py), stage.js, flow.js, index.html, make_tool_opps.py (opportunity parts in opps.json).
+
+Step 3, the logic panel
+- "The logic" button at the bottom right of the 3D view opens a panel under it (remembered per viewer). Eight stage columns, one dot per part drawn at the chosen tier.
+- What lights: a step lights its main parts; a section opened (tile or "All the detail") lights the parts behind it; a card (opportunity, add-on, connection, how-it-works) lights its own parts, even above the tier. Lit = the part and everything upstream of it; wires through parts the tier does not draw are joined up.
+- Click a dot or a name: how it is worked out, values, unit, how sure (confidence %), who it is shown to and why, sources.
+- Not on steps without the 3D view (Real buildings, Over time, Two cities, Report): the card is one column there.
+
+Step 4, show more
+- A section or row is shown at a tier if any part behind it is drawn at that tier (templates.json). Sections with no parts mapped are always shown.
+- Hidden ones are named under a dashed box: "N more here are shown to …: names. They still count in every result." "Show them" brings them back for this site.
+- Rows covered: add-ons, connections (grid, generators, flexibility, next lot), and opportunities in the family steps. A family step opens on the first opportunity shown at the tier.
+- Effect at the resident tier (Clark Dr): Heat 3 of 6 sections shown; Electricity 2 sections and 6 add-ons shown, 13 behind "show more"; Electricity opportunities 3 of 5.
+- The section-to-parts table in logic.js is Claude's judgement from the register (e.g. "The grid nearby" → grid headroom, lead time, interconnection). It decides what residents see first, so it needs J.B.'s check.
+
+Step 5, reports by tier
+- The report follows "Showing". Residents: plain (no tables), what affects neighbours, plus "Chosen for you" when the set-up was assumed. Neighbourhood: adds tables (options, gains and losses). Professionals: everything; each section ends with "Worked out from: …" (the parts behind it, first 14 named).
+- A "Left out at this level" list names what another level would add. Sections brought back with "Show more" stay in.
+- Lengths on the worked examples: residents about 7,300 characters (two pages), neighbourhood about 12,500, professionals about 18,900.
+
+Open questions for J.B.
+- Opportunities hidden from residents by the tags (e.g. "Reserved capacity and batteries", "Grid upgrades shared"): keep behind "show more", or always show every opportunity's name?
+- The section-to-parts table (logic.js SEC): check the resident choices.
+- Should the logic panel also appear on the steps without 3D?
