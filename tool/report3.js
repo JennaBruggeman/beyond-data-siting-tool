@@ -38,13 +38,15 @@ function page(D,no,title,finding,body){ const a=D.site; return `<svg xmlns="http
 /* ---------- the site in isometric, fitted to a box (the same drawing kit as the site sheet) ---------- */
 function siteIso(box,o){ o=o||{}; const S=BD.sheets, m=BD.model(); if(!S||!m||!m.F) return {s:'',a:{}}; const F=m.F, {ring2,pts,prism,fan}=S, STY=STYW;
   const lot=ring2(m.ring).map(([x,y])=>F.toL(x,y)); const C=Math.cos(Math.PI/6), Sn=0.5; let a=1e9,b=-1e9,c=1e9,d=-1e9; for(const [u,v] of lot){ const sx=(u-v)*C, sy=(u+v)*Sn; a=Math.min(a,sx); b=Math.max(b,sx); c=Math.min(c,sy); d=Math.max(d,sy); }
-  const Hb=m.existing?(m.roofH||m.H):m.H, top=Hb+8, padX=o.pad||0.18; const bw=box.x1-box.x0, bh=box.y1-box.y0;
+  const Hb=m.existing?(m.roofH||m.H):m.H, Hx=m.existing?Math.max(Hb,...((BD.S.sel&&BD.S.sel.blds)||[]).map(b=>b.h||0)):Hb, top=Hx+8, padX=o.pad||0.18; const bw=box.x1-box.x0, bh=box.y1-box.y0;
   const sc=Math.min(bw*(1-2*padX)/(b-a),(bh*0.82)/((d-c)+top)); const ox=(box.x0+box.x1)/2-((a+b)/2)*sc, oy=box.y0+bh*0.08+top*sc-c*sc+((bh*0.82)-((d-c)+top)*sc)/2;
   const P=(x,y,z)=>{ const [u,v]=F.toL(x,y); return [ox+(u-v)*C*sc, oy+(u+v)*Sn*sc-(z||0)*sc]; };
   const id='ic'+Math.round(box.x0)+'_'+Math.round(box.y0); let g=`<clipPath id="${id}"><rect x="${box.x0}" y="${box.y0}" width="${bw}" height="${bh}"/></clipPath><g clip-path="url(#${id})">`;
   if(o.grid!==false){ g+=`<g stroke="${K.grid}" stroke-width="0.4">`; for(let k=-80;k<120;k++){ const y=box.y0-400+k*12; g+=`<line x1="${box.x0}" y1="${y}" x2="${box.x1}" y2="${y+bw*Math.tan(Math.PI/6)}"/><line x1="${box.x0}" y1="${y+bw*Math.tan(Math.PI/6)}" x2="${box.x1}" y2="${y}"/>`; } g+=`</g>`; }
   const objs=[]; const city=BD.S.sel.city; const tiles=Object.entries(BD.S.tiles||{}).filter(([k])=>k.startsWith(city+':')).map(([,t])=>t);
   if(o.nb!==false) for(const t of tiles) for(const bl of t.bld||[]){ const [cx,cy]=bl.c; const q=P(cx,cy,0); if(q[0]<box.x0-30||q[0]>box.x1+30||q[1]<box.y0-30||q[1]>box.y1+60) continue; if(BD.pip(cx,cy,m.ring)) continue; const [u,v]=F.toL(cx,cy); objs.push({d:u+v,s:prism(P,bl.r,0,Math.max(3,Math.min(bl.h||4,90)),STY.nb)}); }
+  // sweep 20 Oct: an existing building is drawn at its measured height (the tower at 555 W Hastings was missing; only the leased floors showed)
+  if(m.existing) for(const bl of (BD.S.sel&&BD.S.sel.blds)||[]){ const [cx,cy]=bl.c, [u,v]=F.toL(cx,cy); objs.push({d:u+v-0.01,s:prism(P,bl.r,0,Math.max(3,bl.h||4),{l:'#ffffff',r:'#efefef',t:'#ffffff',e:K.ink,w:0.45})}); }
   g+=`<polygon points="${pts(ring2(m.ring).map(([x,y])=>P(x,y,0)))}" fill="${K.pink}" stroke="${K.ink}" stroke-width="0.4" stroke-dasharray="5 1.5 1 1.5"/>`;
   for(const l of m.loadSpaces||[]) g+=`<polygon points="${pts(ring2(l).map(([x,y])=>P(x,y,0)))}" fill="none" stroke="${K.dim}" stroke-width="0.3"/>`;
   const Bd=m.existing?m.foot:(m.sizedTo&&m.serverFoot?m.serverFoot:m.foot); const bq=ring2(Bd); const cen=q=>[q.reduce((s,p)=>s+p[0],0)/q.length,q.reduce((s,p)=>s+p[1],0)/q.length];
@@ -72,7 +74,7 @@ function hbars(x,y,w,rows,o){ o=o||{}; const lw=o.lw||110, bw=w-lw-(o.rw||95), m
     s+=T(x+lw+Math.max(a,b)+5,yy+6.5,r.t||'',{fs:6.6,c:K.ink}); yy+=o.step||17; }
   return {s,h:yy-y}; }
 function nice(max){ const p=Math.pow(10,Math.floor(Math.log10(max||1))); for(const m of [1,2,2.5,5,10]) if(m*p>=max) return m*p; return 10*p; }
-const tidy=t=>String(t||'').replace(/\s+\d+ more\b/g,'').replace(/\s+([.,;:)])/g,'$1').trim();
+const tidy=t=>String(t||'').replace(/\s*\d+ more \([^)]*\)[^.]*\./g,'').replace(/\s+\d+ more\b/g,'').replace(/\s+([.,;:)])/g,'$1').trim();
 function axisTicks(x0,x1,y,vals,fmtv){ return vals.map(v=>{ const x=x0+(x1-x0)*v.p; return `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+3}" stroke="${K.dim}" stroke-width="0.4"/>`+T(x,y+10,fmtv(v.v),{fs:5.6,c:K.mute,a:'middle'}); }).join(''); }
 
 /* ---------- the data, once ---------- */
@@ -81,7 +83,7 @@ async function collect(){ const e=E(), f=e.siteFacts(), A=BD.S.answers, m=BD.mod
   // every building within 3 km, costed for heat as if liquid-cooled (the heat step's own method)
   let heat=[]; try{ if(BD.routeTree) await BD.routeTree(f); heat=d.pts.map(p=>Object.assign({},p,{dist:Math.hypot(p.x-f.c[0],p.y-f.c[1])})).filter(p=>p.dist<=3000); heat.forEach(p=>{ p.econ=BD.heatEcon(f,p,rL.avail); }); }catch(err){ console.warn(err); }
   let best=null; try{ const B=BD.bestHeat?BD.bestHeat(f,heat.filter(p=>p.econ&&p.econ.take),rL.avail[0]):null; best=B&&B[0]; }catch(err){}
-  const EC=BD.ECON, cop=e.R.cop; const worth=c=>EC.heatVal(c)-EC.elec[c]/((cop[0]+cop[1])/2);
+  const EC=BD.ECON, cop=e.R.cop; const worth=c=>EC.heatVal(c); /* sweep 20 Oct: the gas a MWh of heat replaces, as the heat step compares it; the heat pump's electricity is already inside each cost per MWh (cards.js lcoh), so it is not taken off here too */
   const refs=BD.compareRefs?BD.compareRefs(f):[]; let prec=null; try{ prec=await (await fetch('precedents.json')).json(); }catch(err){}
   const D=BD.flow.reportData(); const fitMax=BD.fitMax?BD.fitMax():null;
   const opps=[]; for(const fm of BD.oppFams||[]) for(const n of BD.oppFamList(fm)){ const q=BD.oppGatesFor(n); if(q) opps.push({fam:fm,n,s:q.s,rd:q.L.readiness,L:q.L,G:q.G}); }
@@ -94,14 +96,14 @@ async function collect(){ const e=E(), f=e.siteFacts(), A=BD.S.answers, m=BD.mod
 
 /* ---------- pages ---------- */
 function pCover(D){ const {f,mw,r,rL,rec,heat,site}=D; const iso=siteIso({x0:M,y0:136,x1:PW-M,y1:500},{pipe:rec,air:!rec});
-  const within=heat.length, fac=[r.facMWh[0]/1000,r.facMWh[1]/1000];
+  const known=heat.filter(p=>p.econ&&p.econ.demand).length, within=heat.length, fac=[r.facMWh[0]/1000,r.facMWh[1]/1000];
   let s=`<rect width="${PW}" height="${PH}" fill="${K.bg}"/>${caps(M,34,'Beyond Data · site report')}${caps(PW-M,34,D.date,{a:'end'})}`;
   s+=T(M,82,site.addr,{fs:30,w:600})+T(M,102,`${site.city} · ${f.zone||''} · ${fmt(f.lot||0)} m² lot`,{fs:10,c:K.mute})+T(M,120,`Report level: ${D.level}`,{fs:8.5,c:K.red});
   s+=iso.s;
   // the lot's numbers
   const y=540; s+=rule(M,y-24,PW-M,K.ink,0.5);
   s+=big(M,y,`${r1(mw)} MW`,'servers',{sub:D.fitMax?`the most that fits here with its plant: ${D.fitMax.toFixed(1)} MW`:''})+big(M+138,y,rng(fac[0],fac[1],''),'GWh of electricity a year',{sub:`${rng(r.fac[0],r.fac[1],'MW',1)} at the meter at full load`});
-  s+=big(M+276,y,rec?rng(r.avail[0]/1000,r.avail[1]/1000,''):'none',rec?'GWh of heat offered a year':'heat recovered',{sub:rec?'after a heat pump':`liquid cooling would offer ${rng(rL.avail[0]/1000,rL.avail[1]/1000,'GWh')} a year`})+big(M+414,y,fmt(within),'buildings within 3 km',{sub:'that could take heat; by type, on the heat page'});
+  s+=big(M+276,y,rec?rng(r.avail[0]/1000,r.avail[1]/1000,''):'none',rec?'GWh of heat offered a year':'heat recovered',{sub:rec?'after a heat pump':`liquid cooling would offer ${rng(rL.avail[0]/1000,rL.avail[1]/1000,'GWh')} a year`})+big(M+414,y,fmt(known),'buildings within 3 km',{sub:`with a known heat demand${within>known?`; ${fmt(within-known)} more not yet known`:''}`});
   const p=para(M,598,'This report reads one lot for one data centre. It shows what fits, what moves in and out, who gains and who gives up, and what the lot could become. Every figure is a range from published sources, not a design or a quote; operators\' figures are their claims.',110,{fs:8.2});
   s+=p.s+T(M,598+p.h+6,'In the drawings: the data centre in red, its lot in pink with a dash-dot line; ochre, heat; blue, power and water; dashed, possible. Neighbours at their measured heights.',{fs:6.4,c:K.mute});
   { const st=templatesStrip(D,M,668,PW-2*M); s+=st.s; }
@@ -119,7 +121,7 @@ function pSite(D,no){ const {f,m,mw,prec,fitMax}=D, R2=BD.report2, pal=R2.PAL.w1
   s+=`<line x1="${px(mw)}" y1="${y-4}" x2="${px(mw)}" y2="${y+32}" stroke="${K.red}" stroke-width="1"/>`+T(px(mw),y-7,`this report: ${r1(mw)} MW`,{fs:6.2,c:K.red,a:'middle'});
   s+=`<line x1="${X0}" y1="${y+32}" x2="${X1}" y2="${y+32}" stroke="${K.dim}" stroke-width=".4"/>`+axisTicks(X0,X1,y+32,[0,0.25,0.5,0.75,1].map(p=>({p,v:p*top})),v=>fmt(v)); y+=62;
   // m² per MW against built data centres
-  const pr=prec&&prec.summary&&prec.summary.gross_per_it_mw_benchmark; const here=f.gross?((f.gross[0]+f.gross[1])/2)/Math.max(mw,0.1):null;
+  const pr=prec&&prec.summary&&prec.summary.gross_per_it_mw_benchmark; const here=m&&m.sizedTo&&m.sizedTo.floor?m.sizedTo.floor/Math.max(mw,0.1):(f.gross?((f.gross[0]+f.gross[1])/2)/Math.max(mw,0.1):null); /* sweep 20 Oct: the floor the servers need at this size (the 3D label's figure), not the zone's whole floor */
   if(pr){ s+=caps(X0,y,'Building area per MW, against built data centres'); y+=14; const lo=0, hi=nice(Math.max(pr.max,here||0)*1.05), q=v=>X0+(X1-X0)*(v-lo)/(hi-lo);
     s+=`<line x1="${q(pr.min)}" y1="${y+6}" x2="${q(pr.max)}" y2="${y+6}" stroke="${K.dim}" stroke-width=".6"/><rect x="${q(pr.p25)}" y="${y}" width="${q(pr.p75)-q(pr.p25)}" height="12" fill="${K.panel}" stroke="${K.dim}" stroke-width=".5"/><line x1="${q(pr.median)}" y1="${y}" x2="${q(pr.median)}" y2="${y+12}" stroke="${K.ink}" stroke-width="1"/>`;
     if(here){ s+=dot(q(Math.min(here,hi)),y+6,3.4,K.red)+T(q(Math.min(here,hi)),y-4,`this lot, about ${n0(here)} m²/MW`,{fs:6,c:K.red,a:'middle'}); }
@@ -131,7 +133,7 @@ function pSite(D,no){ const {f,m,mw,prec,fitMax}=D, R2=BD.report2, pal=R2.PAL.w1
   y+=6; const ld=D.lead('fits'); if(ld){ const p=para(X0,y,ld,52,{fs:7.2}); s+=p.s; y+=p.h+14; }
   const pl=D.lead('prec'); if(pl){ s+=caps(X0,y,'Real buildings'); y+=12; const p=para(X0,y,pl,52,{fs:7.2}); s+=p.s; y+=p.h+6; }
   for(const k of ['Closest in size']){ const v=D.note('prec',k); if(!v) continue; const L=wrap(v,52).slice(0,4); s+=T(X0,y,k,{fs:6.4,c:K.mute})+T(X0,y+9,L,{fs:6.6}); y+=9+L.length*9+6; }
-  { const yb=PH-130, Hb=m.existing?(m.roofH||m.H):m.H, fp=m.existing?(f.foot||0):((m.sizedTo&&m.footArea)||f.fp||0); s+=rule(M,yb-24,PW-M,K.ink,0.5);
+  { const yb=PH-130, Hb=m.existing?Math.max(m.roofH||m.H||0,...((BD.S.sel&&BD.S.sel.blds)||[]).map(b=>b.h||0)):m.H, fp=m.existing?(f.foot||0):((m.sizedTo&&m.footArea)||f.fp||0); s+=rule(M,yb-24,PW-M,K.ink,0.5);
     const cells=[[`${fmt(f.lot||0)} m²`,'lot'],[fp?`${fmt(Math.round(fp/10)*10)} m²`:'—','building footprint'],[Hb?`${r1(Hb)} m`:'—','building height'],[`${rng(D.r.plant[0],D.r.plant[1],'m²')}`,'plant space']];
     cells.forEach(([v,l],i)=>{ s+=big(M+i*138,yb,v,l,{fs:17}); }); }
   return page(D,no,'What fits','A data centre sized for this lot, with the room its plant, generators and loading need.',s); }
@@ -152,8 +154,8 @@ function pFlows(D,no){ const {r,rec,mw,refs,f,e}=D; let s='';
   s+=T(M,yN,wrap('All the electricity a data centre uses ends as heat. '+(rec?'With liquid cooling, part of it is caught warm enough for a heat pump to lift and pipe to buildings; the rest leaves by the coolers.':'Air-cooled, it all leaves by the chillers to the air; a liquid-cooled set-up could offer some of it to buildings.'),120),{fs:7.4});
   // everything else it takes in and gives off (not to scale)
   const here=refs.find(x=>x.id==='here'); const roof=e.roofArea(f)||0, mm={van:1159.5,edm:422.5}[f.city];
-  const ins=[['Water',here&&here.n.evap[1]?`up to ${fmt(here.n.evap[1])} m³ a year evaporated`:'little: dry coolers evaporate none'],['Rain on the roof',`about ${fmt(Math.round(roof*mm/1000*0.8/10)*10)} m³ a year could be caught`],['Land',`${fmt(f.lot||0)} m² lot`],['Equipment','servers replaced every 5–6 years']];
-  const outs=[['Sound','roof plant and generators; see page 6'],['Flexibility','load it could shift for the grid; see page 4'],['Materials','racks, drives and copper at each refresh'],['People','jobs, and a street edge']];
+  const ins=[['Water',here&&here.n.evap[1]?`up to ${fmt(here.n.evap[1])} m³ a year evaporated`:`little: ${BD.dryName()} evaporate none`],['Rain on the roof',`about ${fmt(Math.round(roof*mm/1000*0.8/10)*10)} m³ a year could be caught`],['Land',`${fmt(f.lot||0)} m² lot`],['Equipment','servers replaced every 5–6 years']];
+  const has=k=>(D.plan||[]).includes(k); const outs=[['Sound',`roof plant and generators${has('time')?'; see Over time, and next door':''}`],['Flexibility',`load it could shift for the grid${has('power')?'; see Power':''}`],['Materials','racks, drives and copper at each refresh'],['People','jobs, and a street edge']];
   let y=yN+30; s+=caps(M,y,'It also takes in')+caps(PW/2+10,y,'It also gives off or could give'); y+=14;
   for(let i=0;i<4;i++){ s+=dot(M+3,y-2.5,2.5,K.dim)+T(M+10,y,ins[i][0],{fs:7.2,w:400})+T(M+10,y+9,ins[i][1],{fs:6.4,c:K.mute}); s+=dot(PW/2+13,y-2.5,2.5,K.red)+T(PW/2+20,y,outs[i][0],{fs:7.2,w:400})+T(PW/2+20,y+9,outs[i][1],{fs:6.4,c:K.mute}); y+=26; }
   // grid carbon of that electricity, both cities, the same design
@@ -168,7 +170,7 @@ function pHeat(D,no){ const {heat,best,worth,f,rec,r,rL,m,note}=D; let s=''; con
    [a.roof,'Roof plant',`${PL.placed?PL.placed.cr:''} ${P_.k?P_.k.name:'coolers'}: ${rec?'reject what is not recovered':'carry all the heat to the air'}`],
    [a.side,'Heat pump',`lifts the warm water to heating temperatures, COP 3.0–4.5${rec?'':'; drawn as if liquid-cooled'}`],
    [a.pipe,'Twin pipe',best?`to ${best.G.length} building${best.G.length>1?'s':''}, ${fmt(Math.round(best.len/10)*10)} m along the streets`:'to buildings within reach'],
-   [a.pipeEnd,'Buildings',`${heat.length} within 3 km could take heat`]];
+   [a.pipeEnd,'Buildings',`${heat.filter(p=>p.econ&&p.econ.demand).length} within 3 km with a known heat demand`]];
   let ly=112; const LX=PW-M-140; steps.forEach(([pt,t,sub],i)=>{ if(!pt) return; const L=wrap(sub,32).slice(0,6); s+=num(pt[0],pt[1],i+1); s+=num(LX,ly-2.5,i+1)+T(LX+10,ly,t,{fs:7.6,w:600})+T(LX+10,ly+9,L,{fs:6.3,c:K.mute}); ly+=16+L.length*8.4; });
   // every building: distance by street against cost per MWh, with what heat is worth
   const pts0=heat.filter(p=>p.econ&&isFinite(p.econ.lcohMid)&&p.econ.route); const X0=M+26, X1=PW-M-120, Y0=420, Y1=640; const wv=worth(f.city); const wvT=Math.abs(wv)<0.5?'about $0':`$${wv.toFixed(0)}`;
@@ -178,14 +180,14 @@ function pHeat(D,no){ const {heat,best,worth,f,rec,r,rL,m,note}=D; let s=''; con
   s+=`<rect x="${X0}" y="${Y0}" width="${X1-X0}" height="${Y1-Y0}" fill="none" stroke="${K.line}" stroke-width=".5"/>`;
   s+=`<rect x="${X0}" y="${py(wv)}" width="${X1-X0}" height="${Y1-py(wv)}" fill="${K.heat}" opacity=".07"/>`;
   for(const p of pts0) s+=dot(px(p.econ.route),py(p.econ.lcohMid),p.t==='housing'||p.t==='apartment'?1.6:2.1,TYPEC[p.t]||K.dim);
-  s+=`<line x1="${X0}" y1="${py(wv)}" x2="${X1}" y2="${py(wv)}" stroke="${K.heat}" stroke-width="1"/>`+T(X1-4,py(wv)-4,`what the heat is worth: ${wvT}/MWh`,{fs:6.2,c:K.heat,a:'end',halo:true});
+  s+=`<line x1="${X0}" y1="${py(wv)}" x2="${X1}" y2="${py(wv)}" stroke="${K.heat}" stroke-width="1"/>`+T(X1-4,py(wv)-4,`what the heat is worth (the gas it replaces): ${wvT}/MWh`,{fs:6.2,c:K.heat,a:'end',halo:true});
   if(best){ const bx=px(best.len), by=py(best.mid.lcoh); s+=`<circle cx="${bx}" cy="${by}" r="5" fill="none" stroke="${K.red}" stroke-width="1"/>`+T(bx+8,by+3,`best set-up found: $${best.mid.lcoh.toFixed(0)}/MWh`,{fs:6.4,c:K.red,halo:true}); }
   s+=axisTicks(X0,X1,Y1,[0,0.25,0.5,0.75,1].map(p=>({p,v:p*xmax})),v=>fmt(v)+(v===xmax?' m':''));
   for(let v=ylo;v<=yhi*1.001;v*=10) for(const m of [1,3]){ const u=v*m; if(u>yhi*1.001) continue; s+=`<line x1="${X0}" y1="${py(u)}" x2="${X1}" y2="${py(u)}" stroke="${K.grid}" stroke-width=".4"/>`+T(X0-4,py(u)+2,`$${fmt(u)}`,{fs:5.6,c:K.mute,a:'end'}); }
   s+=T(X0-4,Y0-6,'$ per MWh (log scale)',{fs:5.6,c:K.mute,a:'start'});
   s+=T(X0,Y1+22,'Each dot is one building, by type. Below the line, a building\'s heat would pay for its pipe, connection and heat pump over their life. Middle case; each dot\'s range is on its card in the tool.',{fs:6.2,c:K.mute});
   // by type
-  const by={}; heat.forEach(p=>{ by[p.t]=(by[p.t]||0)+1; }); const types=Object.entries(by).sort((p,q)=>q[1]-p[1]).slice(0,8); let ty=Y0+4; const TX=PW-M-110;
+  const by={}; heat.forEach(p=>{ by[p.t]=(by[p.t]||0)+1; }); const types=Object.entries(by).sort((p,q)=>q[1]-p[1]).slice(0,12); let ty=Y0+4; const TX=PW-M-110;
   s+=caps(TX,Y0-4,'By type'); for(const [t,n] of types){ s+=dot(TX+3,ty+3,2.6,TYPEC[t]||K.dim)+T(TX+10,ty+5.5,`${TYPEN[t]||t}`,{fs:6.4})+T(PW-M,ty+5.5,fmt(n),{fs:6.4,a:'end'}); ty+=13; }
   const ld=D.lead('heat'); if(ld) s+=T(M,Y1+42,wrap(ld,120).slice(0,3),{fs:7.2});
   const fnd=best?`Best set-up found: $${best.mid.lcoh.toFixed(0)} per MWh of heat against ${wvT} it is worth.`:`${heat.length} buildings within 3 km could take heat.`;
@@ -201,7 +203,7 @@ function pPower(D,no){ const {r,refs,m,mw,f,note,opps}=D; let s=''; const iso=si
   // what it could give the grid: the electricity opportunities as tested here
   s+=caps(M,y,'What it could give the grid and neighbours, tested on this lot'); y+=12; const el=opps.filter(o=>o.fam==='Electricity');
   const ST={yes:['possible here',K.green],chg:['possible with a change',K.heat],nk:['not ruled out',K.dim],no:['not here',K.red]};
-  for(const o of el){ const st=ST[o.s]||ST.nk; s+=`<rect x="${M}" y="${y-6}" width="8" height="8" fill="${st[1]}"/>`+T(M+14,y+1,o.n,{fs:7.2})+T(M+230,y+1,st[0],{fs:6.6,c:K.mute}); const U=wrap((o.L.unknowns||[])[0]?'not yet known: '+(o.L.unknowns||[])[0]:'',48).slice(0,2); s+=T(M+330,y+1,U,{fs:6.2,c:K.mute}); y+=Math.max(15,U.length*8.3+6); }
+  for(const o of el){ const st=ST[o.s]||ST.nk; s+=`<rect x="${M}" y="${y-6}" width="8" height="8" fill="${st[1]}"/>`+T(M+14,y+1,o.n,{fs:7.2})+T(M+230,y+1,st[0],{fs:6.6,c:K.mute}); const fails=['physics','land','rules','demand','time','money'].filter(g=>(o.G[g]||[])[0]==='no'); const U=wrap(o.s==='no'&&fails.length?'fails: '+fails.map(g=>g+((o.G[g]||[])[1]?' ('+o.G[g][1]+')':'')).join('; '):(o.L.unknowns||[])[0]?'not yet known: '+(o.L.unknowns||[])[0]:'',48).slice(0,2); /* sweep 20 Oct: a ruled-out row gives its failing test, not an unknown */ s+=T(M+330,y+1,U,{fs:6.2,c:K.mute}); y+=Math.max(15,U.length*8.3+6); }
   y+=8; const ld=D.lead('energy'); if(ld) s+=T(M,y+6,wrap(ld,120).slice(0,3),{fs:7.2});
   return page(D,no,'Power',`A customer first: ${rng(r.fac[0],r.fac[1],'MW',1)} at the meter. What it gives back is flexibility, and only the operator can give it.`,s); }
 
@@ -220,13 +222,13 @@ function pWater(D,no){ const {refs,f,e,A}=D; let s=''; const mm={van:1159.5,edm:
   for(const k of ['Water the cooling buys','Rainwater for cooling','Reclaimed water']){ const v=D.note('water',k); if(!v) continue; s+=T(M,y,k,{fs:7.4,w:600})+T(M,y+10,wrap(v,58).slice(0,3),{fs:7}); y+=18+Math.min(3,wrap(v,58).length)*9; }
   y=Math.max(y,0)+10; s+=caps(M,y,'Water opportunities, tested on this lot'); y+=12; const ST={yes:['possible here',K.green],chg:['possible with a change',K.heat],nk:['not ruled out',K.dim],no:['not here',K.red]};
   for(const o of D.opps.filter(o=>o.fam==='Water')){ const st=ST[o.s]||ST.nk; s+=`<rect x="${M}" y="${y-6}" width="8" height="8" fill="${st[1]}"/>`+T(M+14,y+1,o.n,{fs:7.2})+T(M+260,y+1,st[0],{fs:6.6,c:K.mute}); y+=15; }
-  const here=refs.find(x=>x.id==='here'); return page(D,no,'Water',here&&here.n.evap[1]?`Up to ${fmt(here.n.evap[1])} m³ a year evaporated by the cooling.`:'Dry coolers evaporate no water; the roof could catch rain for other uses.',s); }
+  const here=refs.find(x=>x.id==='here'); return page(D,no,'Water',here&&here.n.evap[1]?`Up to ${fmt(here.n.evap[1])} m³ a year evaporated by the cooling.`:`${BD.dryName()[0].toUpperCase()+BD.dryName().slice(1)} evaporate no water; the roof could catch rain for other uses.`,s); }
 
 function pTime(D,no){ const {rec,EC}=D; let s=''; const X0=M+90, X1=PW-M, Y=130, yrs=50, px=v=>X0+(X1-X0)*v/yrs; const life=(EC&&EC.life)||{pipe:30,hp:20};
   s+=caps(M,Y-12,'Fifty years on one lot');
   const rows=[['The building',[[0,50]],K.faint],['The grid connection',[[0,50]],K.cold],[rec?'The heat pipe':'A heat pipe, if added',[[0,life.pipe]],K.heat],['The heat pump',[[0,life.hp]],K.warm]];
   let y=Y; for(const [l,spans,c] of rows){ s+=T(M,y+6,l,{fs:7}); for(const [a,b] of spans) s+=`<rect x="${px(a)}" y="${y}" width="${px(b)-px(a)}" height="8" fill="${c}" opacity="${c===K.faint?1:0.8}"/>`; y+=18; }
-  s+=T(M,y+6,'Servers',{fs:7}); for(let t=0;t<50;t+=5.5) s+=`<rect x="${px(t)}" y="${y}" width="${Math.max(1,px(Math.min(50,t+5.5))-px(t)-2)}" height="8" fill="none" stroke="${K.ink}" stroke-width=".6"/>`; s+=T(X1,y+18,'replaced every 5–6 years: 8–9 sets over the building\'s life',{fs:6.2,c:K.mute,a:'end'}); y+=34;
+  s+=T(M,y+6,'Servers',{fs:7}); for(let t=0;t<50;t+=5.5) s+=`<rect x="${px(t)}" y="${y}" width="${Math.max(1,px(Math.min(50,t+5.5))-px(t)-2)}" height="8" fill="none" stroke="${K.ink}" stroke-width=".6"/>`; s+=T(X1,y+18,'replaced every 5–6 years: 9–10 sets over 50 years',{fs:6.2,c:K.mute,a:'end'}); y+=34;
   s+=`<line x1="${X0}" y1="${y}" x2="${X1}" y2="${y}" stroke="${K.dim}" stroke-width=".4"/>`+axisTicks(X0,X1,y,[0,0.2,0.4,0.6,0.8,1].map(p=>({p,v:p*yrs})),v=>`${v} yr`); y+=30;
   s+=T(M,y,wrap('Each refresh is a decision: what leaves the building, and in what state. The pipe and the grid connection outlast the servers and the tenant; what feeds them when the tenant changes is not settled here.',118),{fs:7.6}); y+=40;
   s+=caps(M,y,'What it is made of'); y+=12; for(const k of ['Over 25 years','Where retired equipment can go']){ const v=D.note('materials',k); if(!v) continue; s+=T(M,y,k,{fs:7.4,w:600})+T(M+150,y,wrap(v,82).slice(0,3),{fs:7}); y+=12+Math.min(3,wrap(v,82).length)*9; }
@@ -288,12 +290,12 @@ async function pOptions(D,no){ const {e,f,near,nets,A}=D; const opts=e.optionSet
   const groups=[['Servers','MW',o=>[o.mw,o.mw]],['Electricity a year','GWh',o=>[o.r.facMWh[0]/1000,o.r.facMWh[1]/1000]],['Heat offered a year','GWh',o=>o.recover?[o.r.avail[0]/1000,o.r.avail[1]/1000]:[0,0]],['Plant space','m²',o=>[o.r.plant[0],o.r.plant[1]]]];
   let y=390; const OC=[K.faint,K.heat,K.ink];
   for(const [l,u,fn] of groups){ s+=caps(M,y,`${l}, ${u}`); y+=8; const rows=opts.map((o,i)=>{ const [a,b]=fn(o); return {l:`${o.id.toUpperCase()}`,v:a,hi:b,t:a||b?rng(a,b,'',u==='MW'?1:0):'none',c:OC[i]}; }); const hb=hbars(M,y,PW-2*M,rows,{lw:20,step:11}); s+=hb.s; y+=hb.h+12; }
-  s+=T(M,y+4,wrap('A is half the chosen size, air-cooled; B is the chosen size with heat to neighbours; C is the largest that fits. Each gains and gives up something: more heat offered means more plant, more electricity and more pipe in the street.',120),{fs:7});
+  s+=T(M,y+4,wrap(opts.map(o=>`${o.id.toUpperCase()}: ${o.name.toLowerCase()}`).join('; ')+'. Each gains and gives up something: more heat offered means more plant, more electricity and more pipe in the street.',120),{fs:7});
   return page(D,no,'Three options','Three ways to build on this lot: what each gains and what each gives up.',s); }
 
 function pCities(D,no){ const {refs,EC,worth,f}=D; let s=''; const here=refs.find(x=>x.id==='here'), ed=refs.find(x=>x.id==='edmd'), vm=refs.find(x=>x.id==='vanm');
   const van=f.city==='van'?here:vm, edm=f.city==='edm'?here:ed; if(!van||!edm) return '';
-  const pairs=[['Grid carbon of the electricity','t CO₂e a year',van.n.co2,edm.n.co2],['What a MWh of heat is worth','$ after the heat pump',[worth('van'),worth('van')],[worth('edm'),worth('edm')]],['Gas the heat replaces','$ per GJ',[EC.gas.van/3.6,EC.gas.van/3.6],[EC.gas.edm/3.6,EC.gas.edm/3.6]],['Electricity, energy charges','$ per MWh, demand charges left out',[EC.elec.van,EC.elec.van],[EC.elec.edm,EC.elec.edm]],['Hours at or below about 8 °C','a year, dry coolers alone (CWEC typical year)',[3300,3300],[5500,5500]],['Rain on the worked-example roof','m³ a year',[van.site&&van.site.roof?van.site.roof*1.1595*0.8:0,0],[edm.site&&edm.site.roof?edm.site.roof*0.4225*0.8:0,0]]];
+  const pairs=[['Grid carbon of the electricity','t CO₂e a year',van.n.co2,edm.n.co2],['What a MWh of heat is worth','$, the gas it replaces',[worth('van'),worth('van')],[worth('edm'),worth('edm')]],['Gas the heat replaces','$ per GJ',[EC.gas.van/3.6,EC.gas.van/3.6],[EC.gas.edm/3.6,EC.gas.edm/3.6]],['Electricity, energy charges','$ per MWh, demand charges left out',[EC.elec.van,EC.elec.van],[EC.elec.edm,EC.elec.edm]],['Hours at or below about 8 °C','a year, dry coolers alone (CWEC typical year)',[3300,3300],[5500,5500]],['Rain on the worked-example roof','m³ a year',[van.site&&van.site.roof?van.site.roof*1.1595*0.8:0,0],[edm.site&&edm.site.roof?edm.site.roof*0.4225*0.8:0,0]]];
   let y=128; const X0=M+200, X1=PW-M-90; const lab=(c,a)=>`${c} ${a[0]<0.5&&a[0]>-0.5&&a[1]===a[0]?'about 0':a[1]!==a[0]&&a[1]?rng(a[0],a[1],''):n0(a[0])}`;
   for(const [l,u,a,b] of pairs){ const mx=Math.max(a[1]||a[0],b[1]||b[0],1e-9); s+=T(M,y+6,l,{fs:7.4,w:400})+T(M,y+15,u,{fs:6,c:K.mute});
     const w1=Math.max(0,(X1-X0)*(a[1]||a[0])/mx), w2=Math.max(0,(X1-X0)*(b[1]||b[0])/mx); s+=`<rect x="${X0}" y="${y}" width="${w1}" height="8" fill="${K.cold}"/>`+T(X0+w1+4,y+7,lab('Vancouver',a),{fs:6.4});

@@ -208,7 +208,10 @@ const rowWhy=x=>{ if(x.s==='chg'){ const g=GATES.find(k=>x.G[k][0]==='chg'); ret
 function oppFamily(fam,sel,scroll){ const c=ctx(), e=c.e; BD.S.view2='tab'; const list=((FAM.find(f=>f[0]===fam)||[])[1]||[]);
   const items=list.map(n=>{ const g=gates(n,c); return {n,G:g.G,L:g.L,s:summary(g.G)}; }), ok=items.filter(x=>x.s!=='no'), no=items.filter(x=>x.s==='no');
   const cur=ok.find(x=>x.n===sel)||ok[0]; const fl=fam.toLowerCase(), many=items.length>1;
-  const lead=ok.length?`<span class="k">${ok.length===items.length?(many?'All '+items.length:'The one'):ok.length+' of '+items.length}</span> ${fl} ${many?'opportunities are':'opportunity is'} not ruled out here.`:`<span class="k">${many?'None':'It'}</span> ${many?'of the '+fl+' opportunities is':'is not'} possible here.`;
+  /* sweep 20 Oct: plain counts ("None of the 9 … is ruled out", not "All 9 … are not ruled out"); the single case names the opportunity */
+  const lead=ok.length===items.length?(many?`<span class="k">None</span> of the ${items.length} ${fl} opportunities is ruled out here.`:`<span class="k">${esc(items[0].n||items[0])}</span> is not ruled out here.`)
+   :ok.length?`<span class="k">${ok.length} of ${items.length}</span> ${fl} opportunities are not ruled out here.`
+   :many?`<span class="k">None</span> of the ${items.length} ${fl} opportunities is possible here.`:`<span class="k">${esc(items[0].n||items[0])}</span> is not possible here.`;
   $('#side').innerHTML=e.tabBar('opp')+`<h2>${esc(fam)}</h2><p class="lead">${lead}</p>
   ${ok.length?`<div class="famrows" role="listbox" aria-label="${esc(fam)} opportunities">${ok.map(x=>`<div class="addrow famrow${x===cur?' on':''}" role="option" tabindex="0" aria-selected="${x===cur}" data-n="${esc(x.n)}"><div><span class="fn">${esc(x.n)}</span> ${gp(x.s)} ${x.L.readiness?BD.rdPill(x.L.readiness):''}<div class="src">${esc(rowWhy(x))}</div></div></div>`).join('')}</div>`:''}
   ${no.length?`<div class="famno"><div class="fnh">Not here</div>${no.map(x=>{ const g=GATES.filter(k=>x.G[k][0]==='no'); return `<div class="addrow"><div>${esc(x.n)}<div class="src">${g.map(k=>`<span style="color:${GS.no[1]}">${k}</span>: ${esc(x.G[k][1])}`).join(' · ')}</div></div></div>`; }).join('')}</div>`:''}

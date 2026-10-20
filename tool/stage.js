@@ -31,6 +31,7 @@ function tidy(sd){ const a=BD.S.sel&&BD.S.sel.a&&BD.S.sel.a[0]; const h=sd.query
 function tilesFor(sd){
   // the rows: the step's sections become tiles with their answers; the sections themselves fold under "All the detail"
   if(!sd.querySelector('.dk')&&!sd.querySelector(':scope > .tiles')){ const all0=[...sd.querySelectorAll(':scope > details.sec, :scope > .tt + details.sec')].filter(x=>x.parentNode===sd), secs=all0.filter(x=>!x.hidden); /* sections hidden for this tier stay out of the tiles (logic.js) */
+    if(secs.length===1&&!secs[0].open) secs[0].open=true; /* sweep 20 Oct: a step with one section showed only its closed row (Set-ups that open the most) */
     if(secs.length>1){ const tiles=document.createElement('div'); tiles.className='tiles';
       tiles.innerHTML=secs.slice(0,6).map((x,i)=>{ const tt=x.querySelector(':scope > summary .t'), a=x.querySelector(':scope > summary .a'); return `<button class="tile${x.querySelector(':scope > summary .a.f')?' feat':''}" data-i="${i}"><span class="tt">${esc(tt?tt.textContent:'')}</span><span class="ta">${a?spaced(a.innerHTML):''}</span></button>`; }).join('');
       const all=document.createElement('details'); all.className='alld'; all.innerHTML='<summary>All the detail</summary>';

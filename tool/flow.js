@@ -140,7 +140,10 @@ async function expandOpps(){ const k=F.steps.findIndex(s=>s.k==='opps'); if(k<0)
   await BD.oppPrep(); const L=BD.oppScreen(); F.oppList=L; const ok=L.filter(o=>o.s!=='no');
   const add=[{k:'opps-best',g:'opps',t:'Set-ups that open the most'}].concat(BD.oppFams.map(f=>({k:'fam:'+f,g:'opps',t:f+' opportunities',fam:f})));
   F.steps.splice(k,1,...add); }
-async function go(i){ if(i<0||i>=F.steps.length) return; invalidate(); capture(); F.i=i; F.max=Math.max(F.max,i); document.body.classList.remove('wide');
+/* sweep 20 Oct 2026: a step whose every section is shown only in fuller templates is skipped there (residents: Real buildings, which was an empty page) */
+const SKIP={resident:new Set(['prec'])};
+async function go(i){ { const t=(BD.tier&&BD.tier())||'full', dir=i>=F.i?1:-1; while(i>0&&i<F.steps.length-1&&SKIP[t]&&SKIP[t].has(F.steps[i].k)) i+=dir; }
+  if(i<0||i>=F.steps.length) return; invalidate(); capture(); F.i=i; F.max=Math.max(F.max,i); document.body.classList.remove('wide');
   if(F.steps[i].k==='opps'){ await expandOpps(); }
   const st=F.steps[F.i]; if(BD.drawer&&BD.drawer.isOpen()&&st.k!=='setup') BD.drawer.close();
   try{ await show(st); }catch(e){ console.warn(e); }

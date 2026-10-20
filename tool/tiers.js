@@ -87,7 +87,7 @@ function sizeSet(which){ const A=BD.S.answers; A.mw=null; BD.modelReset&&BD.mode
 function residentCard(){ const A=BD.S.answers, m=BD.model&&BD.model(); if(!m) return;
   if(A.mw==null||!A.mwPick) sizeSet(A.mwPick||'typ');
   const f=BD.eng.siteFacts(), fm=BD.fitMax?BD.fitMax():null, hi=fm!=null?fm:0, L=live(); // largest size where everything fits (J.B. 20 Oct)
-  const rows=L.map((d,j)=>{ const opts=d.opts(BD.model()), cur=d.k(A), o=opts.find(x=>x.v===cur)||opts[0]; const ot=d.id==='outside'&&o.v==='dry'&&(A.inside||'air')==='air'?'Air-cooled chillers (dry coolers alone can\'t cool an air-cooled hall)':o.t; return `<li><span class="aq">${esc(d.q)}</span><span class="aa">${esc(ot)}</span><a href="#" data-j="${j}">Change</a></li>`; }).join('');
+  const rows=L.map((d,j)=>{ const opts=d.opts(BD.model()), cur=d.k(A), o=opts.find(x=>x.v===cur)||opts[0]; const ot=d.id==='outside'&&o.v==='dry'&&(A.inside||'air')==='air'?'Air-cooled chillers':o.t; return `<li><span class="aq">${esc(d.q)}</span><span class="aa">${esc(ot)}</span><a href="#" data-j="${j}">Change</a></li>`; }).join('');
   // the floor the servers need (same figure the 3D label shows), not the zone's largest building
   const M=BD.model(); const fl=M&&(M.sizedTo?M.sizedTo.floor:M.footArea?M.footArea*Math.max(1,M.nF[0]-(M.Z&&M.Z.ground?1:0)):0); const store=fl?`about ${BD.fmt(Math.round(fl/100)*100)} m² (${BD.fmt(Math.round(fl*10.7639/1000)*1000)} ft²) of floor`:''; const foot='';
   const nothing=hi<0.05, probs=BD.setupProblems?BD.setupProblems():[];

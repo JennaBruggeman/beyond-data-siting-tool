@@ -318,6 +318,11 @@ function optionSet(f,near,nets){
   const fm=BD.fitMax?BD.fitMax():null, top=fm!=null?fm:f.mw[1], A=BD.S.answers, chosen=Math.min(A.mw||top/2,top); /* largest = everything fits (J.B. 20 Oct) */
   const net=nets.find(n=>n.inside&&n.edge>=50&&n.src==='van9552');
   const sizes=[Math.max(0.1,+(chosen/2).toFixed(1)),+chosen.toFixed(1),+Math.max(chosen,top).toFixed(1)];
+  // sweep 20 Oct 2026: when the chosen size is already the largest that fits, B and C came out the same; then B keeps the size air-cooled and C recovers the heat
+  if(sizes[2]-sizes[1]<0.05) return [
+   {id:'a',name:'Smaller, air-cooled',gives:'least plant and grid; heat goes to the air',mw:sizes[0],recover:false},
+   {id:'b',name:'Largest that fits, air-cooled',gives:'the most servers; heat goes to the air',mw:sizes[1],recover:false},
+   {id:'c',name:'Largest that fits, '+(net?'heat to the network':'heat to neighbours'),gives:net?'the most heat, sent to '+net.n:'liquid-cooled servers and a heat pump; the most heat, more than nearby buildings may take',mw:sizes[2],recover:true,to:net?'net':'near'}];
   return [
    {id:'a',name:'Smaller, air-cooled',gives:'least plant and grid; heat goes to the air',mw:sizes[0],recover:false},
    {id:'b',name:'Chosen size, heat to neighbours',gives:'liquid-cooled servers and a heat pump; heat offered to buildings within reach',mw:sizes[1],recover:true,to:'near'},
@@ -387,7 +392,7 @@ async function optionsView(){
    ['Neighbours',[[noiseRow(f)[0],()=>noiseRow(f)[1]],['Generator testing',()=>f.city==='van'?'exempt if ≤ 1 h a month in daytime, ≤ 80 dBA':'—']]],
    ['Workers',[['Operating jobs',o=>rng(o.r.jobs[0],o.r.jobs[1],'')+' (Virginia ratio, transferred)']]],
   ];
-  const fut=o=>[['As planned','the table above'],['Tenant changes cooling',o.recover?'back to air: heat offered drops to none':'to liquid: heat could be offered'],['Tenant leaves',o.recover?'receivers fall back on their own heating at full peak':'nothing depends on it'],['Receiver leaves',o.recover?'all heat goes back to the dry coolers — keep their full size':'—']].map(([a,b])=>`<div><b>${a}</b> <span class="sub">${b}</span></div>`).join('');
+  const fut=o=>[['As planned','the table above'],['Tenant changes cooling',o.recover?'back to air: heat offered drops to none':'to liquid: heat could be offered'],['Tenant leaves',o.recover?'receivers fall back on their own heating at full peak':'nothing depends on it'],['Receiver leaves',o.recover?`all heat goes back to the ${BD.dryName()} — keep their full size`:'—']].map(([a,b])=>`<div><b>${a}</b> <span class="sub">${b}</span></div>`).join('');
   let h=tabBar('opts')+`<h2>Three options, side by side, in no order</h2>
   <p class="draft">Each option gains and gives up something.</p>
   <div class="opts">${opts.map(o=>`<div class="opt"><div class="kind">${o.id.toUpperCase()}</div><b>${esc(o.name)}</b><div class="sub">${esc(o.gives)}</div></div>`).join('')}</div>
@@ -454,7 +459,7 @@ function answerOf(nodes){ const tx=el=>{ const c=el.cloneNode(true); c.querySele
   let red=false;
   // a gate or rule table reads as counts or as "row: verdict" pairs, not as its cells run together
   for(const n of nodes){ if(n.nodeType!==1||!n.matches('table.cl')) continue; const trs=[...n.querySelectorAll('tr')];
-    if(trs.length&&trs.every(r=>r.querySelectorAll('.cls').length===1)){ const ct={}; trs.forEach(r=>{ const k=r.querySelector('.cls').textContent.trim(); ct[k]=(ct[k]||0)+1; }); return [cut(Object.entries(ct).map(([k,v])=>`${v} ${k}`).join(', ')),false]; }
+    if(trs.length&&trs.every(r=>r.querySelectorAll('.cls').length===1)){ const ct={}; trs.forEach(r=>{ const k=r.querySelector('.cls').textContent.trim(); ct[k]=(ct[k]||0)+1; }); const GW={'possible here':'pass','possible with a change':'pass with a change','not yet known':'not yet known','not here':'fail','not possible here':'fail'}; /* sweep 20 Oct: these count tests, not opportunities */ return [cut(Object.entries(ct).map(([k,v])=>`${v} ${v===1?'test':'tests'} ${GW[k]?(v===1?GW[k].replace(/^pass/,'passes').replace(/^fail/,'fails'):GW[k]):k}`).join(', ')),false]; }
     const c=n.cloneNode(true); c.querySelectorAll('small').forEach(x=>x.remove()); c.querySelectorAll('.cls,.pill').forEach(x=>x.append(',')); return [cut([...c.querySelectorAll('tr')].map(r=>{ const td=r.querySelectorAll('td'); return td.length>1?td[0].textContent.trim()+': '+tx(td[1]).replace(/,\s*$/,''):tx(r); }).join('; ')),false]; }
   for(const n of nodes){ if(n.nodeType!==1) continue;
     const fig=n.matches('.hfig')?n:n.querySelector&&n.querySelector('.hfig'); if(fig){ const d=fig.querySelector('div'); if(d){ const b=d.querySelector('b'), sp=d.querySelector('span'); return [cut((b?tx(b):'')+' '+(sp?tx(sp):'')),false]; } }
@@ -568,7 +573,7 @@ function waterView(){
   const wbe=[MWh[0]*1000*1.25/1000,MWh[1]*1000*16.8/1000];
   let h=tabBar('water')+`<h2>Water in, water out</h2><p class="draft">From almost none to a great deal: <span class="k">it depends on the cooling</span>.</p>
   <div class="q"><div class="lab">How it rejects heat</div><div class="seg" data-c="1"><button data-v="dry" aria-pressed="${A.outside!=='towers'&&A.outside!=='hybrid'}">Dry coolers</button><button data-v="towers" aria-pressed="${towers}">Cooling towers</button><button data-v="hybrid" aria-pressed="${A.outside==='hybrid'}">Hybrid</button></div></div>
-  <h3>On site</h3><dl>${towers||hybrid?`<dt>Evaporated</dt><dd>up to ${fmt(evap[1])} m³/yr (at most 1.5 L per kWh of heat${hybrid?`, wet only in the ${fmt(WET[f.city][0])} hours a typical year is above 18 °C in ${f.city==='van'?'Vancouver':'Edmonton'} (${(WET[f.city][1]*100).toFixed(1)}%; CWEC, computed)`:''})</dd><dt>Make-up water</dt><dd>${fmt(mk[0])}–${fmt(mk[1])} m³/yr at 2–6 cycles of concentration</dd><dt>Blowdown to the sewer</dt><dd>${fmt(bd[0])}–${fmt(bd[1])} m³/yr</dd>${f.city==='van'?`<dt>Water bill</dt><dd>about $${fmt(mk[0]/2.832*4.091)}–$${fmt(mk[1]/2.832*5.128)} a year for the make-up water alone (2026 rates, per 2.832 m³ unit)</dd>`:''}`:`<dt>Evaporated</dt><dd>none for cooling — dry coolers reject heat to the air; their fans are the trade (sound, roof space)</dd>`}
+  <h3>On site</h3><dl>${towers||hybrid?`<dt>Evaporated</dt><dd>up to ${fmt(evap[1])} m³/yr (at most 1.5 L per kWh of heat${hybrid?`, wet only in the ${fmt(WET[f.city][0])} hours a typical year is above 18 °C in ${f.city==='van'?'Vancouver':'Edmonton'} (${(WET[f.city][1]*100).toFixed(1)}%; CWEC, computed)`:''})</dd><dt>Make-up water</dt><dd>${fmt(mk[0])}–${fmt(mk[1])} m³/yr at 2–6 cycles of concentration</dd><dt>Blowdown to the sewer</dt><dd>${fmt(bd[0])}–${fmt(bd[1])} m³/yr</dd>${f.city==='van'?`<dt>Water bill</dt><dd>about $${fmt(mk[0]/2.832*4.091)}–$${fmt(mk[1]/2.832*5.128)} a year for the make-up water alone (2026 rates, per 2.832 m³ unit)</dd>`:''}`:`<dt>Evaporated</dt><dd>none for cooling — ${BD.dryName()} reject heat to the air; their fans are the trade (sound, roof space)</dd>`}
   <dt>Rain on the roof</dt><dd>about ${fmt(rain)} m³/yr from ${fmt(roof)} m² at ${mm} mm a year</dd></dl>${s3('evap')}${f.city==='van'?s3('wprice'):''}${s3('rain')}
   <h3>Behind its electricity</h3><dl><dt>Water used to make its power</dt><dd>${fmt(wbe[0])}–${fmt(wbe[1])} m³/yr (thermal plants ~1.25 L/kWh; hydro reservoirs ~16.8 L/kWh — mostly evaporation from reservoirs)</dd></dl>${s3('wbe')}
   <h3>Other sources and their rules</h3><dl><dt>Reclaimed water</dt><dd>${f.city==='van'?'Metro Vancouver considers supply to industry case by case; no rate':'EPCOR supplied 4,226 ML of reclaimed water to industry in 2024 (Gold Bar)'}</dd>
@@ -698,6 +703,8 @@ async function precView(){
   `;
   $('#side').innerHTML=h; wireTabs();
 }
+/* sweep 20 Oct 2026: air-cooled halls get air-cooled chillers, not dry coolers (plant.js, sweep M31); every 'dry coolers' a user reads says which */
+BD.dryName=()=>{ const A=BD.S.answers; return (A.inside||'air')==='air'&&(A.outside||'dry')==='dry'?'air-cooled chillers':'dry coolers'; };
 BD.eng={R,vZone,siteFacts,plantPerMW,coolUnits,noiseLw,calc,rng,f1,n0,n1,mathBox,tabBar,wireTabs,show3d,nearby,netsAt,loadRecv,badge,src,s3,rangeBar,state,roofArea,optionSet};
 BD.fitsView=fitsView; BD.recvView=recvView; BD.optionsView=optionsView; BD.tabView=tabView;
 })();

@@ -114,7 +114,7 @@ const setOf=(d,v)=>{ const o={}; const A0=BD.S.answers; const tmp=Object.assign(
 const V=()=>BD.viz;
 const CH={
  built:(h,d,opts)=>{ const rows=opts.map(o=>{ const fs=feas(d.id,o.v); if(fs.s==='no') return {label:o.t,v:0,c:V().C.other,note:'not possible here'}; const r=fitOf(setOf(d,o.v)); return {label:o.t,lo:r.mw[0],hi:r.mw[1],c:o.v===d.k(BD.S.answers)?V().C.heat:V().C.other}; });
-   V().bars(h,rows,'MW of servers','Servers that fit, by option'); return 'Servers that fit here, for each option. Grey bars are the options not picked; "none" means not possible here.'; },
+   V().bars(h,rows,'MW of servers','Servers that fit, by option'); return 'Servers that fit here on floor space alone, for each option (the plant, generators and loading come later and can lower it). Grey bars are the options not picked; "none" means not possible here.'; },
  foot:(h,d,opts)=>{ V().bars(h,opts.filter(o=>feas(d.id,o.v).s!=='no').map(o=>{ const r=fitOf(setOf(d,o.v)); return {label:o.t,lo:r.gross[0],hi:r.gross[1],c:o.v===d.k(BD.S.answers)?V().C.heat:V().C.other}; }),'m² of floor','Floor area, by option'); return 'Floor area for each choice.'; },
  height:(h,d,opts)=>{ V().bars(h,opts.filter(o=>o.v!=='storeys').map(o=>{ const r=fitOf(setOf(d,o.v)); return {label:o.t,lo:r.mw[0],hi:r.mw[1],c:o.v===d.k(BD.S.answers)?V().C.heat:V().C.other}; }),'MW of servers','Servers that fit, by height'); return 'Servers that fit at each height.'; },
  inside:(h)=>{ const R=BD.eng.R; V().bars(h,[{label:'Air',v:0,c:V().C.other,note:'heat leaves in air at 25–35 °C; heat pumps on the chilled-water loop can recover some, how much not yet known'},{label:'Liquid to the chip',lo:R.capture[0]*100,hi:R.capture[1]*100,c:V().C.heat},{label:'Immersion',v:null,txt:'not yet sourced',c:V().C.other,note:'not yet sourced'}],'% of heat caught in liquid','Heat caught in liquid'); return 'Share of server heat caught in liquid, where it is easiest to reuse. Immersion: not yet sourced.'; },
@@ -132,7 +132,7 @@ let at=0; const pv={};
 function show(i){ const A=BD.S.answers; const L=live(); at=Math.max(0,Math.min(L.length-1,i)); const d=L[at]; const m=BD.model(); if(!m) return;
   const opts=d.opts(m), cur=d.k(A), pick=pv[d.id]&&opts.find(x=>x.v===pv[d.id])?pv[d.id]:cur, o=opts.find(x=>x.v===pick)||opts[0]; const fs=feas(d.id,o.v), F=FS[fs.s]; const f=BD.eng.siteFacts();
   if(BD.drawer&&BD.drawer.isOpen()) BD.drawer.close();
-  const res=f.mw[1]<0.05?`${K('Nothing fits')} with these choices`:`${K(BD.eng.rng(f.mw[0],f.mw[1],'MW'))} of servers fit · ${BD.eng.rng(f.gross[0],f.gross[1],'m²')} floor`;
+  const res=f.mw[1]<0.05?`${K('Nothing fits')} with these choices`:`${K(BD.eng.rng(f.mw[0],f.mw[1],'MW'))} of servers on floor space alone, before the plant, generators and loading take their room · ${BD.eng.rng(f.gross[0],f.gross[1],'m²')} floor`;
   const no=fs.s==='no';
   const MP=BD.model&&BD.model(), PM=MP&&MP.plant; const shortTxt=PM&&PM.miss&&PM.miss.length?`<br><span class="dwarn">Doesn't fit at ${MP.mwSized} MW: ${esc(PM.miss.join('; '))}</span>`:''; // sweep M34: a shortfall is shown on the card, not only in a chart tooltip
   $('#side').innerHTML=`<div class="dk"><div class="kind">Set up the site · ${at+1} of ${L.length}</div><div class="dbar">${L.map((x,j)=>`<i class="${j<at?'done':j===at?'on':''}"></i>`).join('')}</div>
