@@ -39,8 +39,7 @@ q['revised'] = '2026-10-20'
 
 # backup power: who would need it most, the same three sources in both cities (J.B. 20 Oct: Edmonton equivalents first)
 q = Q['backup_neighbours']
-add = ("20 Oct 2026 (opps.js): who would need power most, within 1 km: care homes and hospitals (receivers; provincial licence lists to replace StatCan ODHF, "
-       "which lists few Edmonton care homes); buildings over 21 m from measured heights (Vancouver LiDAR 2022, Edmonton City 3D buildings) and over 39 m, read against "
+add = ("20 Oct 2026 (opps.js): who would need power most, within 1 km: care homes and hospitals (receivers: provincial licence lists, see receivers_nearby); buildings over 21 m from measured heights (Vancouver LiDAR 2022, Edmonton City 3D buildings) and over 39 m, read against "
        "BCBC 2024 / NBC(AE) 3.2.6.1 (residential top floor over 18 m: high building), 3.2.6.5 (firefighters' elevator), 3.2.7.9 (over 36 m: 2 h generator for elevators, "
        "fire pumps and smoke fans only); heights to the roof, so approximate. Main heating by CMA, SHEU 2019 Table 4.1: Vancouver furnace 39.25%, boiler 22.77% (M), "
        "electric baseboard or radiant 28.95%; Edmonton furnace 75.24%, boiler 19.21% (M), electric baseboard U (not published). BC Assessment's care beds, elevators and "
@@ -54,5 +53,17 @@ for qid in ('receiver_temp',):
         q = Q[qid]; add = "20 Oct 2026 (cards.js, 'How hard to connect'): household main heating by CMA replaces StatCan 2011 provincial: SHEU 2019 Table 4.1 (see backup_neighbours)"
         if add[:40] not in q.get('coef', ''): q['coef'] = (q.get('coef', '') + ' | ' + add).strip(' |')
         if 'sheu2019cma' not in q.setdefault('sources', []): q['sources'].append('sheu2019cma')
+q = Q['receivers_nearby']
+add = ("20 Oct 2026 (dedupe_receivers.py M87): care homes from each province's licence list replace StatCan ODHF care records. Vancouver: BC Residential Care "
+       "Facilities, all licensed types inside the City (100 homes, 3,853 licensed places). Edmonton: Alberta continuing-care compliance reporting June 2026, latest "
+       "visit per site since 1 Jul 2024, Continuing Care Home Types A and B and Group Homes (assisted living and lodges left out: BC's list has no assisted living); "
+       "159 placed by City assessment address (19 at the nearest house number within 20), 3 not placed (In and Out Home Care House #2, Shepherd's Care Kensington "
+       "Village, Salvation Army Grace Manor). ODHF care records with no listed home within 150 m kept (Vancouver 7, Edmonton 1)")
+if add[:40] not in q['coef']: q['coef'] += ' | ' + add
+for s_ in ('bcResCare', 'abCCcompliance2026'):
+    if s_ not in q['sources']: q['sources'].append(s_)
+q['revised'] = '2026-10-20'
+for s_ in ('bcResCare', 'abCCcompliance2026'):
+    if s_ not in Q['backup_neighbours']['sources']: Q['backup_neighbours']['sources'].append(s_)
 json.dump(d, open(P, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print('ok')

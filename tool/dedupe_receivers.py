@@ -117,6 +117,57 @@ for c, P in CITY.items():
             if dd <= 400 and same and (best is None or dd < best[0]): best = (dd, cp)
         if best: best[1]['aka'] = sorted(set(best[1].get('aka', [])) | {p['n']}); pts.remove(p)
 
+    # M87 care homes from each province's licence list (J.B. downloads 20 Oct 2026; StatCan ODHF listed 100 Vancouver care homes but only 2 in Edmonton).
+    #   Vancouver: BC Residential Care Facilities (gov.bc.ca open data, Open Government Licence – BC): every licensed residential care facility
+    #     (long-term care, community living, mental health, hospice, substance use, acquired brain injury) inside the City's local areas; capacity = the
+    #     sum of each type's maximum capacity; located by the list's own coordinates.
+    #   Edmonton: Alberta Continuing Care Accommodation Standards compliance reporting, June 2026 (Open Government Licence – Alberta): one record per
+    #     site (name + address), its latest visit; kept if visited since 1 Jul 2024; Continuing Care Home Type A and B and Group Homes (BC's list has
+    #     long-term care and group homes but not assisted living, so Alberta's assisted living and lodges are left out to match); capacity = units;
+    #     located at the City assessment record with the same house number and street, else the nearest house number on that street within 20.
+    #   Both: a StatCan ODHF care record with no listed home within 150 m is kept (rehabilitation centres, hospices the lists file elsewhere).
+    if True:
+        ln = []
+        if c == 'van':
+            for r in csv.DictReader(open(os.path.join(H, '..', 'data', 'raw', 'receivers', 'bc_residential_care_2026-10-20.csv'), encoding='utf-8-sig')):
+                if not r['LATITUDE']: continue
+                lo, la = float(r['LONGITUDE']), float(r['LATITUDE'])
+                if not LA.contains(Point(lo, la)): continue
+                kinds = [t for t in ('LONG_TERM_CARE', 'COMMUNITY_LIVING', 'MENTAL_HEALTH', 'HOSPICE', 'SUBSTANCE_USE', 'ACQUIRED_BRAIN_INJURY') if r[t] == 'Y']
+                cap = sum(int(r[t + '_MAX_CAP'] or 0) for t in kinds)
+                ln.append(dict(t='care', n=r['BUSINESS_NAME'].strip(), lon=round(lo, 6), lat=round(la, 6), src='bcCare', cap=cap,
+                               kind=', '.join(k.replace('_', ' ').lower() for k in kinds)))
+        else:
+            import pandas as pd
+            AB = {'AVENUE': 'AVE', 'STREET': 'ST', 'ROAD': 'RD', 'BOULEVARD': 'BLVD', 'DRIVE': 'DR', 'CRESCENT': 'CRES', 'PLACE': 'PL', 'COURT': 'CRT', 'CLOSE': 'CL', 'LANE': 'LN', 'TRAIL': 'TRL'}
+            stn = lambda s: ' '.join(AB.get(x, x) for x in re.sub(r'\b(NW|SW|NE|SE)\b', '', s.upper().replace('.', '')).split())
+            S = collections.defaultdict(list)
+            for r in csv.DictReader(open(os.path.join(H, '..', 'data', 'edmonton_properties_2026.csv'), encoding='utf-8')):
+                if r['lat'] and r['house_number'].isdigit(): S[stn(r['street'])].append((int(r['house_number']), float(r['lat']), float(r['lon'])))
+            d = pd.read_excel(os.path.join(H, '..', 'data', 'raw', 'receivers', 'ab_cc_compliance_2026-06.xlsx'))
+            e = d[d['City'].astype(str).str.upper().str.strip() == 'EDMONTON'].copy()
+            e['key'] = e['Site Name'].astype(str).str.upper().str.strip() + '|' + e['Address 1'].astype(str).str.upper().str.strip()
+            last = e.sort_values('Visit Date').groupby('key').tail(1)
+            last = last[(last['Visit Date'] >= '2024-07-01') & (last['Accommodation Type'].astype(str).str.startswith('Continuing Care Home') | (last['Accommodation Subtype'] == 'Group Home'))]
+            unplaced = []
+            for _, r in last.iterrows():
+                a = re.sub(r'^(\d+)\s*-\s*', r'\1 ', re.sub(r'^(\d+)\s*/\s*\d+', r'\1', str(r['Address 1']).upper().replace('.', '').strip()))
+                m = re.match(r'^(\d+)\s+(.*)$', a); L = S.get(stn(m.group(2))) if m else None
+                best = min(L, key=lambda t: abs(t[0] - int(m.group(1)))) if L else None
+                if not best or abs(best[0] - int(m.group(1))) > 20: unplaced.append(str(r['Site Name'])); continue
+                kind = 'continuing care home type ' + r['Accommodation Type'][-1].lower() if str(r['Accommodation Type']).startswith('Continuing') else 'group home'
+                ln.append(dict(t='care', n=str(r['Site Name']).strip().title(), lon=round(best[2], 6), lat=round(best[1], 6), src='abCare', cap=int(r['Units'] or 0), kind=kind,
+                               **({'loc': 'approx'} if best[0] != int(m.group(1)) else {})))
+            print(c, 'care homes not placed (address not found):', unplaced)
+        lxy = [xy(q) for q in ln]
+        keep = []
+        for p in pts:
+            if p['t'] == 'care' and p.get('src') in ('bcCare', 'abCare'): continue  # re-run: rebuilt below
+            if p['t'] == 'care' and p.get('src') == 'odhf' and any(math.hypot(xy(p)[0] - a, xy(p)[1] - b) < 150 for a, b in lxy): continue
+            keep.append(p)
+        pts[:] = keep + ln
+        print(c, 'care homes from the provincial list', len(ln), 'StatCan care records kept', sum(1 for p in keep if p['t'] == 'care'))
+
     # M6 merge
     rec = [p for p in pts if p['t'] in TYPES]; other = [p for p in pts if p['t'] not in TYPES]
     par = list(range(len(rec)))
