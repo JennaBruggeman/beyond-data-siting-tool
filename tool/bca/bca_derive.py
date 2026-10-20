@@ -9,8 +9,11 @@ no raw BCA field (floor area, units, class codes) is written out.
 Inputs (BC Assessment extracts via UBC Abacus; comma-delimited .txt; field positions from BCA's user guides):
   --nonres   Non-Residential Inventory Extract (User Guide v1.0, 2019): 2 jurisdiction, 3 roll, 6 storeys, 19 Gross Building Area ft²,
              20 Basement Area ft², 22 rental apartment units, 31 seniors housing units, 42 type of heating, 18 predominant manual class
-  --res      Residential Inventory Extract (User Guide 0.1): 2 jurisdiction, 3 roll, 4 manual class, 9 total finished area ft² (single-family),
-             35 Inc Unit of Measure Value, 36 its code (strata units)
+  --res      Residential Inventory Extract (External User Guide v1.1, 8 Jul 2021; checked 20 Oct 2026): 2 jurisdiction, 3 roll, 4 manual class,
+             9 total finished area ft² (single-family), 34 Inc Occupancy Code (2403 = strata parking), 35/36 unit of measure value and code
+             (STRPS = parking space). Since 2022 the extract comes as one file per assessment area (Vancouver = 09); --res takes one or more files
+  Non-residential positions checked against the Commercial Inventory Extract External User Guide v1.0 (20 Oct 2026): 12 co-op units,
+             19 gross building area, 20 basement area, 22 rental apartment units, 31 seniors housing units, 42 type of heating
   --desc     (optional) a site description file; first run with --inspect to see its columns, then pass --desc-roll and --desc-text
   --taxreport  City of Vancouver property tax report CSV (open data; FOLIO = BCA roll number, LAND_COORDINATE = the tool's parcel id)
 Output: bca_derived_van.json  {LAND_COORDINATE: {"h": heat MWh a year (2 significant figures), "g": use group, "t": heating group}}
@@ -71,7 +74,7 @@ def group_of(text, table):
 
 def main():
     a = argparse.ArgumentParser()
-    a.add_argument('--inspect'); a.add_argument('--nonres'); a.add_argument('--res'); a.add_argument('--desc')
+    a.add_argument('--inspect'); a.add_argument('--nonres'); a.add_argument('--res', nargs='+'); a.add_argument('--desc')
     a.add_argument('--desc-roll', type=int, default=3); a.add_argument('--desc-text', default=0)
     a.add_argument('--taxreport'); a.add_argument('--jur', default=None, help='the City of Vancouver jurisdiction code (required for a run; find it with --codes)')
     a.add_argument('--codes'); a.add_argument('--pos', type=int, default=2)
@@ -104,10 +107,10 @@ def main():
             fo = digits(r.get('FOLIO')); lc = (r.get('LAND_COORDINATE') or '').strip()
             if fo and lc: f2lc[fo] = lc
     def parcel(roll):
+        # BCA Roll_Number is 15 digits; its last 12 are the City's FOLIO (checked 20 Oct 2026, area 09 jurisdiction 200:
+        # 202,061 of 202,148 residential rows match exactly). Matching on fewer digits joins the wrong lot, so it is not tried.
         d = digits(roll)
-        for k in (d, d.lstrip('0'), d.zfill(12), d[:12], d.ljust(12, '0')):
-            if k in f2lc: return f2lc[k]
-        return None
+        return f2lc.get(d[-12:]) or f2lc.get(d)
     desc = {}
     if o.desc and o.folio:  # Data Advice: descriptions keyed by FOLIO_ID; the folio table gives each folio's jurisdiction and roll
         f2r = {}
@@ -131,7 +134,7 @@ def main():
             stat['nonres rows'] += 1; lc = parcel(txt(row, 3))
             if not lc: stat['nonres unmatched'] += 1; continue
             p = P[lc]; p['n'] += 1
-            homes = num(row, 22) + num(row, 31)
+            homes = num(row, 12) + num(row, 22) + num(row, 31)  # co-op, rental apartment and seniors units (guide positions 12, 22, 31)
             area = (num(row, 19) + num(row, 20)) * FT2
             g = group_of(desc.get(digits(txt(row, 3)), ''), GROUP_WORDS) or ('apartment' if homes else 'other')
             if homes: p['homes'] += homes
@@ -139,11 +142,14 @@ def main():
             h = group_of(txt(row, 42), HEAT_WORDS)
             if h: p['heat'][h] += 1
     if o.res:
-        for row in rows(o.res):
+      for rf in o.res:
+        for row in rows(rf):
             if txt(row, 2) != o.jur: continue
             stat['res rows'] += 1; lc = parcel(txt(row, 3))
             if not lc: stat['res unmatched'] += 1; continue
-            p = P[lc]; p['n'] += 1; p['homes'] += 1  # one row per dwelling (a strata unit or a house)
+            occ, uom = txt(row, 34), txt(row, 36)
+            if occ == '2403' or uom == 'STRPS': stat['res parking rows skipped'] += 1; continue  # strata parking (Inc Occupancy 2403, unit STRPS) is not a home
+            p = P[lc]; p['n'] += 1; p['homes'] += 1  # one row per dwelling (a strata unit, a house, a laneway house): guide v1.1 'a record for every building or part of a building'
     out = {}
     for lc, p in P.items():
         mwh = p['homes'] * HOME_MWH + sum(m2 * GJ.get(g if g in GJ else 'other', GJ['other']) / 3.6 for g, m2 in p['m2'].items())
