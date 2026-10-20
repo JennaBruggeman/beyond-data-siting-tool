@@ -1,5 +1,234 @@
 {
  "agg": {
+  "pue|fit": 0.11235955056179775,
+  "pue|floorMW": 0.07047983774769306,
+  "pue|elec": 0.10169491525423753,
+  "pue|co2": 0.10169491525423745,
+  "pue|plant": 0.08847736625514421,
+  "pue|noise": 0.6694678963061307,
+  "pue|jobs": 0.0,
+  "pue|heat": 0.0,
+  "pue|homes": 0.0,
+  "pue|best": 0.0,
+  "pue|cheapest": 0.0,
+  "capture|fit": 0.0,
+  "capture|floorMW": 0.0,
+  "capture|elec": 0.0,
+  "capture|co2": 0.0,
+  "capture|plant": 0.0,
+  "capture|noise": 0.0,
+  "capture|jobs": 0.0,
+  "capture|heat": 0.4317343173431736,
+  "capture|homes": 0.4317343173431736,
+  "capture|best": 0.2742114535519101,
+  "capture|cheapest": 0.29071398784041774,
+  "cop|fit": 0.0,
+  "cop|floorMW": 0.0,
+  "cop|elec": 0.0,
+  "cop|co2": 0.0,
+  "cop|plant": 0.0,
+  "cop|noise": 0.0,
+  "cop|jobs": 0.0,
+  "cop|heat": 0.1512915129151292,
+  "cop|homes": 0.15129151291512924,
+  "cop|best": 0.10316327133159629,
+  "cop|cheapest": 0.11171257136831485,
+  "hallShare|floorMW": 0.37174843036766486,
+  "hallShare|elec": 0.0,
+  "hallShare|co2": 0.0,
+  "hallShare|plant": 0.0,
+  "hallShare|noise": 0.0,
+  "hallShare|jobs": 0.37246963562753044,
+  "hallShare|heat": 0.0,
+  "hallShare|homes": 0.0,
+  "hallShare|best": 0.0,
+  "hallShare|cheapest": 0.0,
+  "m2PerMW|floorMW": 0.6894747521711023,
+  "m2PerMW|elec": 0.0,
+  "m2PerMW|co2": 0.0,
+  "m2PerMW|plant": 0.0,
+  "m2PerMW|noise": 0.0,
+  "m2PerMW|jobs": 0.688259109311741,
+  "m2PerMW|heat": 0.0,
+  "m2PerMW|homes": 0.0,
+  "m2PerMW|best": 0.0,
+  "m2PerMW|cheapest": 0.0,
+  "ftf|fit": 0.0,
+  "ftf|floorMW": 0.0,
+  "ftf|elec": 0.0,
+  "ftf|co2": 0.0,
+  "ftf|plant": 0.0,
+  "ftf|noise": 0.0,
+  "ftf|jobs": 0.0,
+  "ftf|heat": 0.0,
+  "ftf|homes": 0.0,
+  "ftf|best": 0.0,
+  "ftf|cheapest": 0.0,
+  "plant|fit": 0.0,
+  "plant|floorMW": 0.0,
+  "plant|elec": 0.0,
+  "plant|co2": 0.0,
+  "plant|plant": 0.3751714677640605,
+  "plant|noise": 0.0,
+  "plant|jobs": 0.0,
+  "plant|heat": 0.0,
+  "plant|homes": 0.0,
+  "plant|best": 0.0,
+  "plant|cheapest": 0.0,
+  "lw|fit": 0.0,
+  "lw|floorMW": 0.0,
+  "lw|elec": 0.0,
+  "lw|co2": 0.0,
+  "lw|plant": 0.0,
+  "lw|noise": 3.0,
+  "lw|jobs": 0.0,
+  "lw|heat": 0.0,
+  "lw|homes": 0.0,
+  "lw|best": 0.0,
+  "lw|cheapest": 0.0,
+  "homeMWh|fit": 0.0,
+  "homeMWh|floorMW": 0.0,
+  "homeMWh|elec": 0.0,
+  "homeMWh|co2": 0.0,
+  "homeMWh|plant": 0.0,
+  "homeMWh|noise": 0.0,
+  "homeMWh|jobs": 0.0,
+  "homeMWh|heat": 0.0,
+  "homeMWh|homes": 0.1529492455418382,
+  "homeMWh|best": 0.0,
+  "homeMWh|cheapest": 0.0,
+  "estimates|fit": 0.0,
+  "estimates|floorMW": 0.0,
+  "estimates|elec": 0.0,
+  "estimates|co2": 0.0,
+  "estimates|plant": 0.0,
+  "estimates|noise": 0.0,
+  "estimates|jobs": 0.0,
+  "estimates|heat": 0.0,
+  "estimates|homes": 0.0,
+  "estimates|best": 0.18188762380199863,
+  "estimates|cheapest": 0.12344196389066321,
+  "pipe|fit": 0.0,
+  "pipe|floorMW": 0.0,
+  "pipe|elec": 0.0,
+  "pipe|co2": 0.0,
+  "pipe|plant": 0.0,
+  "pipe|noise": 0.0,
+  "pipe|jobs": 0.0,
+  "pipe|heat": 0.0,
+  "pipe|homes": 0.0,
+  "pipe|best": 0.6677824317954738,
+  "pipe|cheapest": 0.5509640753869888,
+  "rate|fit": 0.0,
+  "rate|floorMW": 0.0,
+  "rate|elec": 0.0,
+  "rate|co2": 0.0,
+  "rate|plant": 0.0,
+  "rate|noise": 0.0,
+  "rate|jobs": 0.0,
+  "rate|heat": 0.0,
+  "rate|homes": 0.0,
+  "rate|best": 0.5042255233660313,
+  "rate|cheapest": 0.45168642530429437,
+  "hpFLH|fit": 0.0,
+  "hpFLH|floorMW": 0.0,
+  "hpFLH|elec": 0.0,
+  "hpFLH|co2": 0.0,
+  "hpFLH|plant": 0.0,
+  "hpFLH|noise": 0.0,
+  "hpFLH|jobs": 0.0,
+  "hpFLH|heat": 0.0,
+  "hpFLH|homes": 0.0,
+  "hpFLH|best": 0.2164577582360367,
+  "hpFLH|cheapest": 0.20345559963453141,
+  "inside|fit": 0.1538461538461538,
+  "inside|floorMW": 0.03737047920653232,
+  "inside|elec": 0.0,
+  "inside|co2": 0.0,
+  "inside|plant": 0.2534293552812073,
+  "inside|noise": 3.4499576192401378,
+  "inside|jobs": 0.0,
+  "inside|heat": 0.0,
+  "inside|homes": 0.0,
+  "inside|best": 0.0,
+  "inside|cheapest": 0.0,
+  "size|fit": 0.0,
+  "size|floorMW": 0.0,
+  "size|elec": 24.0,
+  "size|co2": 24.000000000000004,
+  "size|plant": 23.999999999999996,
+  "size|noise": 7.634279935629365,
+  "size|jobs": 4.05,
+  "size|heat": 23.999999999999996,
+  "size|homes": 23.999999999999996,
+  "size|best": 0.6615185829935893,
+  "size|cheapest": 0.5211103507894732,
+  "hallShare|fit": 0.40624999999999994,
+  "m2PerMW|fit": 1.0
+ },
+ "params": {
+  "pue": [
+   "pue",
+   "PUE 1.40 / 1.55"
+  ],
+  "capture": [
+   "liquid_capture",
+   "heat caught by liquid cooling 48% / 75%"
+  ],
+  "cop": [
+   "cop",
+   "heat pump COP 3.0 / 4.5"
+  ],
+  "hallShare": [
+   "hall_area",
+   "hall share of floor 48% / 72%"
+  ],
+  "m2PerMW": [
+   "server_floor",
+   "hall m\u00b2 per MW 290 / 630"
+  ],
+  "ftf": [
+   "envelope",
+   "upper floor heights 5.5 / 6.0 m"
+  ],
+  "plant": [
+   "component_space",
+   "plant m\u00b2 per MW, low / high ends"
+  ],
+  "lw": [
+   "plant_schedule",
+   "sound power per cooling unit, low-noise / standard"
+  ],
+  "homeMWh": [
+   "receiver_demand",
+   "a home's heat: 2023 (warmest year) / 2018\u201322 average"
+  ],
+  "estimates": [
+   "receiver_demand",
+   "assessment-estimated buildings: estimate \u00f7 1.7 / estimate"
+  ],
+  "pipe": [
+   "distribution_cost",
+   "pipe cost per metre, low / high"
+  ],
+  "rate": [
+   "crf",
+   "cost of capital 3% / 8% (5.6% base)"
+  ],
+  "hpFLH": [
+   "demand_profile",
+   "heat pump full-load hours 4,400 / 7,100"
+  ],
+  "inside": [
+   "cooling_type",
+   "cooling inside: air / liquid to the chip"
+  ],
+  "size": [
+   "size_fit",
+   "size: 2.5 MW (resident default) / largest that fits"
+  ]
+ },
+ "agg_three_examples": {
   "pue|fit": 0.1538461538461538,
   "pue|floorMW": 0,
   "pue|elec": 0.10169491525423759,
@@ -196,66 +425,5 @@
   "size|pays": 0,
   "size|opps": 0
  },
- "params": {
-  "pue": [
-   "pue",
-   "PUE 1.40 / 1.55"
-  ],
-  "capture": [
-   "liquid_capture",
-   "heat caught by liquid cooling 48% / 75%"
-  ],
-  "cop": [
-   "cop",
-   "heat pump COP 3.0 / 4.5"
-  ],
-  "hallShare": [
-   "hall_area",
-   "hall share of floor 48% / 72%"
-  ],
-  "m2PerMW": [
-   "server_floor",
-   "hall m\u00b2 per MW 290 / 630"
-  ],
-  "ftf": [
-   "envelope",
-   "upper floor heights 5.5 / 6.0 m"
-  ],
-  "plant": [
-   "component_space",
-   "plant m\u00b2 per MW, low / high ends"
-  ],
-  "lw": [
-   "plant_schedule",
-   "sound power per cooling unit, low-noise / standard"
-  ],
-  "homeMWh": [
-   "receiver_demand",
-   "a home's heat: 2023 (warmest year) / 2018\u201322 average"
-  ],
-  "estimates": [
-   "receiver_demand",
-   "assessment-estimated buildings: estimate \u00f7 1.7 / estimate"
-  ],
-  "pipe": [
-   "distribution_cost",
-   "pipe cost per metre, low / high"
-  ],
-  "rate": [
-   "crf",
-   "cost of capital 3% / 8% (5.6% base)"
-  ],
-  "hpFLH": [
-   "demand_profile",
-   "heat pump full-load hours 4,400 / 7,100"
-  ],
-  "inside": [
-   "cooling_type",
-   "cooling inside: air / liquid to the chip"
-  ],
-  "size": [
-   "size_fit",
-   "size: 2.5 MW (resident default) / largest that fits"
-  ]
- }
+ "statistic": "90th percentile of the swing across the sampled lots where a size fits (1,010 lots sampled; heat costs on every 10th lot)"
 }
