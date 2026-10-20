@@ -107,7 +107,7 @@ add('stormwater_volume', 'Stormwater held on the lot', 'm³', 'characterise', ['
 add('snowmelt_area', 'Sidewalk kept clear by its heat', 'm²', 'opportunity', ['heat_delivered'],
     'm² = heat offered (W) ÷ design heat per m²',
     'Edmonton design 430–700 W/m² (NRC CBD 160, 1974: sheltered to very exposed); ASHRAE 2015 lists no Canadian city; Seattle, the nearest listed (27 snowfall hours a year), is used for Vancouver: 420–647 W/m² at the 99% level (snow-free area ratio 0.5 to 1), about 36 kWh/m² a year at ratio 0.5; low-temperature fluid works (Holland MI 35 °C, Klamath Falls 38 °C); snow (ECCC normals 1991–2020): Vancouver 36.6 cm a year, 7.4 days with snowfall, 8.2 days with at least 1 cm on the ground; Edmonton 126.7 cm, 54.7 days, 145.1 days; no data-centre snowmelt built (gap)',
-    ['nrcCBD160', 'ashrae2015ch51', 'lundSnow', 'hollandSnow', 'ecccNormals2020', 'edmSidewalk', 'edmEncroach'], 60, 'derived 19 Oct 2026',
+    ['nrcCBD160', 'ashrae2015ch51', 'lundSnow', 'hollandSnow', 'ecccNormals2020', 'edmSidewalk', 'edmEncroach', 'edmFees2026'], 60, 'derived 19 Oct 2026',
     [role('nrcCBD160', '430–700 W/m²', 'coefficient', 70), role('ashrae2015ch51', 'Seattle 420–647 W/m²', 'coefficient', 70), role('hollandSnow', '35 °C waste heat', 'precedent', 60)])
 add('backup_neighbours', 'Backup power for neighbours in a blackout', 'rule', 'opportunity', ['backup_hours'],
     'only behind the data centre\'s own transfer switch, on a private line, with the utility\'s written approval; never through the utility\'s lines',
@@ -199,7 +199,7 @@ opp('Solar on neighbours\' roofs', {'readiness': 'speculative', 'provisional': F
 opp('Snowmelt on sidewalks and streets', {'readiness': 'speculative', 'provisional': False,
     'basis': 'Holland, Michigan melts about 690,000 ft² of sidewalks and streets with 35 °C power-plant waste heat (City claim); no data-centre snowmelt found. Research 19 Oct 2026.',
     'sources': ['hollandSnow'], 'rules': [
-     {'rung': 'Street', 'van': ['unknown', 'not yet read'], 'edm': ['approval', 'an encroachment agreement for structures in the road right-of-way ($300–500); owners must clear adjacent sidewalks'], 'sources': ['edmEncroach', 'edmSidewalk']}],
+     {'rung': 'Street', 'van': ['unknown', 'not yet read'], 'edm': ['approval', 'an encroachment agreement for structures in the road right-of-way (Bylaw 12513): application $300–500, then a fee; over 0.3 m or 5 m² the fee is the owner\'s assessed land value per m² × the area encroached (2026 fee schedule); whether pipes under a sidewalk count as an encroachment is not confirmed; owners must clear adjacent sidewalks'], 'sources': ['edmEncroach', 'edmFees2026', 'edmSidewalk']}],
     'unknowns': ['who owns pipes under a City sidewalk'], 'visual': 'heated sidewalk along the frontage'},
     ['snowmelt_area', 'heat_delivered'])
 opp('Stormwater held for the neighbourhood', {'readiness': 'built_here', 'provisional': False,

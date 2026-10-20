@@ -44,3 +44,5 @@ data/raw/codes holds BCBC 2024, NBC 2020, NFC 2020, NFC 2023 Alberta Edition, VB
 J.B. upload 19 Oct: Electric Utilities Act from CanLII, current to 6 Feb 2026, the same version as the local copy (no change). Potable Water Regulation 277/2003 read and added.
 
 J.B. uploads 19 Oct (late): Activities Designation Regulation (registration if passing on city water, approval if own source), ASHRAE 2015 ch. 51 (kept local, not shared), BC Hydro Tariff Supplement 6 (transmission refund rules, 1991 filing).
+
+J.B. upload 19 Oct (late): Edmonton 2026 Planning and Development Fee Schedules — already held (data/, edmFees2026, used for rezoning); its encroachment fees (Bylaw 12513) now added to the snowmelt card.
