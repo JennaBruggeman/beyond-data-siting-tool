@@ -1,0 +1,53 @@
+/* Restyle pass 1 (20 Oct 2026, J.B.: keep it dark but not fully dark; IBM Plex Sans; less "AI-esque").
+   An override layer on top of index.html's styles, so it can be compared or removed in one line.
+   Rules: warm graphite, not near-black; off-white body text, grey only for sources; red only for findings;
+   sentence-case labels, no tracked capitals; ruled rows instead of identical rounded cards; regular weight for reading. */
+:root{
+  --font:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --bg:#202124; --panel:#27292c; --panel-2:#2f3236; --line:#3b3e43; --line-2:#4a4e54;
+  --fg:#f2efea; --muted:#bdb9b2; --faint:#918d86;
+  --accent:#CC746C; --accent-2:#e7a39c;
+}
+body{font:400 14.5px/1.55 var(--font);background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font-family:var(--font)}
+h1,h2,h3,h4{font-family:var(--font);text-wrap:balance}
+aside h2,#side h2{font-weight:500;letter-spacing:-.005em}
+#side .lead,#drawer .lead,.lead{font-weight:400;font-size:17px!important;line-height:1.45!important}
+.tile > *:nth-child(n+3){color:var(--faint);align-self:center}
+
+/* labels: sentence case, no tracked capitals */
+.kind,aside h3,#side h3{text-transform:none!important;letter-spacing:0!important;font-size:13px!important;font-weight:500!important;color:var(--fg)!important}
+#side h3{margin-top:20px;padding-top:12px}
+.flowbar .fsub{font-size:12.5px;color:var(--muted)}
+#wc .wcaddr{letter-spacing:0;color:var(--fg)}
+
+/* reading text: one step up in size and contrast */
+.sub{color:var(--muted);font-size:13.5px}
+.src,.draftnote{color:var(--faint);font-size:12.5px}
+dt{color:var(--muted)}
+dl.lim{font-size:13px}
+
+/* tiles: ruled rows, not a grid of identical cards */
+.tiles{display:block;margin:4px 0 12px;border-top:1px solid var(--line)}
+.tile{display:grid;grid-template-columns:minmax(120px,34%) 1fr 12px;align-items:start;gap:12px;background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:11px 2px;width:100%}
+.tile:hover{background:rgba(255,255,255,.025);border-color:var(--line)}
+.tile .tt{font-size:13px;color:var(--fg);font-weight:500}
+.tile .ta{font-size:13.5px;color:var(--muted);-webkit-line-clamp:2}
+.tile.feat{border-left:2px solid var(--accent);padding-left:10px}
+
+/* pills and segmented controls: quieter shapes */
+.pill,.cls,.rd,.rs{border-radius:3px!important}
+.seg{border-radius:6px}
+.seg button[aria-pressed="true"]{color:#1d1715}
+
+/* buttons: one primary, flat secondaries */
+.wbtns .pri,.flowfoot .pri,.rbtns .pri,.dnav .pri{border-radius:4px;font-weight:500}
+.wbtns .sec,.flowfoot .sec,.dnav .sec,.btn{border-radius:4px}
+
+/* panels: flatter, less glow */
+#wc .wcbox,#welcome .wcard{border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+#wc .wc3d{background:#1b1c1f}
+.legend,.status{border-radius:4px}
+
+/* the "N more here" box and stuck box: plain rules, not boxes in boxes */
+.tmore{border-radius:0!important;border-left:2px solid var(--line-2)!important;border-top:0!important;border-right:0!important;border-bottom:0!important;background:transparent!important;padding:4px 0 4px 12px!important}
