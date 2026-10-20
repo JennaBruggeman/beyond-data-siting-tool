@@ -118,5 +118,5 @@ async function heatSheet(){ const e=BD.eng, f=e.siteFacts(), A=BD.S.answers, m=B
 // Barlow, embedded in each sheet (Latin subsets), so it renders the same on screen, in the web page and inside the PDF
 let FS=null; async function fontStyle(){ if(FS!==null) return FS; try{ const b=async n=>{ const a=new Uint8Array(await (await fetch('fonts/Barlow-'+n+'.sub.woff2')).arrayBuffer()); let s=''; for(let i=0;i<a.length;i+=0x8000) s+=String.fromCharCode.apply(null,a.subarray(i,i+0x8000)); return btoa(s); };
   const [l,r,sb]=await Promise.all([b('Light'),b('Regular'),b('SemiBold')]); FS=`<style>@font-face{font-family:Barlow;font-weight:300;src:url(data:font/woff2;base64,${l}) format('woff2')}@font-face{font-family:Barlow;font-weight:400;src:url(data:font/woff2;base64,${r}) format('woff2')}@font-face{font-family:Barlow;font-weight:600;src:url(data:font/woff2;base64,${sb}) format('woff2')}</style>`; }catch(e){ FS=''; } return FS; }
-BD.sheets={heatSheet,K};
+BD.sheets={heatSheet,K,STY,proj,prism,fan,fontStyle,ring2,pts};
 })();
