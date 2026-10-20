@@ -7,8 +7,8 @@
 'use strict';
 const BD=window.BD; const {$,esc,fmt}=BD; const E=()=>BD.eng;
 const PAL={
- screen:{ink:'#e9e6e1',mute:'#a8a49d',faint:'#5d5b57',acc:'#CC746C',fill:'rgba(204,116,108,.20)',plant:'#7d7a74',gen:'#b9b5ae',bg:'none',lot:'rgba(255,255,255,.03)'},
- print:{ink:'#222222',mute:'#6b6b6b',faint:'#c4c4c4',acc:'#CC746C',fill:'#f4dedb',plant:'#9a9a9a',gen:'#555555',bg:'#ffffff',lot:'#fafafa'}};
+ screen:{ink:'#e9e6e1',mute:'#a8a49d',faint:'#5d5b57',acc:'#CC746C',fill:'rgba(204,116,108,.20)',plant:'#7d7a74',gen:'#b9b5ae',bg:'none',lot:'rgba(255,255,255,.03)',ctx:'rgba(255,255,255,.07)',lotFill:'rgba(255,255,255,.02)',bfill:'rgba(204,116,108,.10)',equip:'rgba(255,255,255,.08)'},
+ print:{ink:'#222222',mute:'#6b6b6b',faint:'#c4c4c4',acc:'#CC746C',fill:'#f4dedb',plant:'#9a9a9a',gen:'#555555',bg:'#ffffff',lot:'#fafafa',ctx:'#ececeb',lotFill:'#ffffff',bfill:'#fbefed',equip:'#f2f2f2'}};
 const FONT=`font-family="Open Sans, Arial, sans-serif"`;
 const r1=v=>Math.round(v*10)/10;
 const rngT=(a,b,u)=>Math.abs(a-b)<1e-9*Math.max(1,a)?`${fmt(a)} ${u}`:`${fmt(a)}–${fmt(b)} ${u}`;
@@ -17,27 +17,45 @@ const txt=(x,y,s,o)=>{ o=o||{}; const L=Array.isArray(s)?s:[s]; return `<text x=
 
 /* ---------- the site plan, from the model (lot, setbacks, building, plant, generators, loading) ---------- */
 function ringPts(r){ const p=[]; for(let i=0;i<r.length;i+=2) p.push([r[i],r[i+1]]); return p; }
-function planSVG(m,pal,o){ o=o||{}; const W=o.w||520; if(!m||!m.ring) return ''; const P=m.plant||{boxes:[]};
+function planSVG(m,pal,o){ o=o||{}; const W=o.w||520; if(!m||!m.ring) return ''; const P=m.plant||{boxes:[]}; const small=W<400;
+  // drawn to plan conventions (J.B. 20 Oct: "this is beyond ugly"): line weight by meaning, neighbours for context, equipment symbols, labels in the drawing
   const all=ringPts(m.ring); let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9; for(const [x,y] of all){ x0=Math.min(x0,x); x1=Math.max(x1,x); y0=Math.min(y0,y); y1=Math.max(y1,y); }
-  const pad=Math.max(6,(x1-x0)*0.06); x0-=pad; x1+=pad; y0-=pad; y1+=pad; const s=(W-20)/(x1-x0), Hh=Math.round((y1-y0)*s)+20, H=Math.min(Hh,o.maxH||460), s2=Math.min(s,(H-20)/(y1-y0));
+  const pad=Math.max(14,(x1-x0)*0.18); x0-=pad; x1+=pad; y0-=pad; y1+=pad; const sx=(W-20)/(x1-x0), maxH=o.maxH||480; const s2=Math.min(sx,(maxH-20)/(y1-y0)); const H=Math.round((y1-y0)*s2)+20;
   const X=x=>10+(x-x0)*s2, Y=y=>10+(y1-y)*s2;
   const path=r=>'M'+ringPts(r).map(([x,y])=>`${X(x).toFixed(1)},${Y(y).toFixed(1)}`).join('L')+'Z';
-  let g=`<rect x="0" y="0" width="${W}" height="${H+46}" fill="${pal.bg}"/>`;
-  g+=`<path d="${path(m.ring)}" fill="${pal.lot}" stroke="${pal.ink}" stroke-width="1.2"/>`;
-  if(m.inset) g+=`<path d="${path(m.inset)}" fill="none" stroke="${pal.mute}" stroke-width=".8" stroke-dasharray="4 3"/>`;
-  if(m.existing&&m.feet) for(const f of m.feet) g+=`<path d="${path(f.r)}" fill="${pal.fill}" stroke="${pal.acc}" stroke-width=".8"/>`;
-  else { if(m.foot&&m.serverFoot&&m.sizedTo) g+=`<path d="${path(m.foot)}" fill="none" stroke="${pal.faint}" stroke-width=".8"/>`;
-    const b=m.sizedTo&&m.serverFoot?m.serverFoot:m.foot; if(b) g+=`<path d="${path(b)}" fill="${pal.fill}" stroke="${pal.acc}" stroke-width="1.4"/>`; }
-  if(m.loadSpaces) for(const l of m.loadSpaces) g+=`<path d="${path(l)}" fill="none" stroke="${pal.mute}" stroke-width=".8"/>`;
-  for(const b of P.boxes||[]){ const gen=/generator/.test(b.name); g+=`<path d="${path(b.ring)}" fill="${gen?pal.gen:(b.kind==='roof'?'none':pal.plant)}" stroke="${gen?pal.gen:pal.ink}" stroke-width=".7"/>`; }
+  const lw=v=>(v*(small?0.8:1)).toFixed(2);
+  let g=`<rect x="0" y="0" width="${W}" height="${H}" fill="${pal.bg}"/>`;
+  g+=`<clipPath id="pc${W}"><rect x="6" y="6" width="${W-12}" height="${H-12}"/></clipPath><g clip-path="url(#pc${W})">`;
+  // neighbours: building footprints already loaded for the map, light grey, no outline
+  const tiles=Object.entries((BD.S&&BD.S.tiles)||{}).filter(([k])=>k.startsWith((BD.S.sel&&BD.S.sel.city||'')+':')).map(([,t])=>t);
+  const lotP=m.ring; for(const t of tiles) for(const b of t.bld||[]){ const [cx,cy]=b.c||[0,0]; if(cx<x0||cx>x1||cy<y0||cy>y1) continue; if(BD.pip(cx,cy,lotP)) continue; g+=`<path d="${path(b.r)}" fill="${pal.ctx}" stroke="none"/>`; }
+  // the lot: property line (dash-dot) and the buildable line (fine dashes)
+  g+=`<path d="${path(m.ring)}" fill="${pal.lotFill}" stroke="${pal.ink}" stroke-width="${lw(.9)}" stroke-dasharray="10 3 2 3"/>`;
+  if(m.inset) g+=`<path d="${path(m.inset)}" fill="none" stroke="${pal.mute}" stroke-width="${lw(.5)}" stroke-dasharray="3 3"/>`;
+  // the building
+  if(m.existing&&m.feet) for(const f of m.feet) g+=`<path d="${path(f.r)}" fill="${pal.bfill}" stroke="${pal.ink}" stroke-width="${lw(.7)}"/>`;
+  const B=m.existing?m.foot:(m.sizedTo&&m.serverFoot?m.serverFoot:m.foot);
+  if(B) g+=`<path d="${path(B)}" fill="${pal.bfill}" stroke="${pal.acc}" stroke-width="${lw(1.8)}"/>`;
+  // equipment: coolers with their fans; generators with a cross; loading stalls numbered
+  const axes=r=>{ const p=ringPts(r); const a=p[0],b=p[1],d=p[3]||p[2]; const L1=Math.hypot(b[0]-a[0],b[1]-a[1]), L2=Math.hypot(d[0]-a[0],d[1]-a[1]); return L1>=L2?{o:a,u:[(b[0]-a[0])/L1,(b[1]-a[1])/L1],L:L1,v:[(d[0]-a[0])/L2,(d[1]-a[1])/L2],Wd:L2}:{o:a,u:[(d[0]-a[0])/L2,(d[1]-a[1])/L2],L:L2,v:[(b[0]-a[0])/L1,(b[1]-a[1])/L1],Wd:L1}; };
+  for(const b of P.boxes||[]){ const gen=/generator/.test(b.name), roof=b.kind==='roof';
+    if(gen){ const p=ringPts(b.ring); g+=`<path d="${path(b.ring)}" fill="${pal.equip}" stroke="${pal.ink}" stroke-width="${lw(.6)}"/><path d="M${X(p[0][0])},${Y(p[0][1])}L${X(p[2][0])},${Y(p[2][1])}M${X(p[1][0])},${Y(p[1][1])}L${X(p[3][0])},${Y(p[3][1])}" stroke="${pal.ink}" stroke-width="${lw(.35)}"/>`; continue; }
+    g+=`<path d="${path(b.ring)}" fill="${roof?'none':pal.equip}" stroke="${pal.ink}" stroke-width="${lw(.55)}"/>`;
+    const A=axes(b.ring), rr=A.Wd*0.36, n=Math.max(1,Math.floor(A.L/(A.Wd*0.95))); if(rr*s2>1.4) for(let i=0;i<n;i++){ const t=(i+0.5)*A.L/n; const cx=A.o[0]+A.u[0]*t+A.v[0]*A.Wd/2, cy=A.o[1]+A.u[1]*t+A.v[1]*A.Wd/2; g+=`<circle cx="${X(cx).toFixed(1)}" cy="${Y(cy).toFixed(1)}" r="${(rr*s2).toFixed(1)}" fill="none" stroke="${pal.ink}" stroke-width="${lw(.3)}"/>`; } }
+  (m.loadSpaces||[]).forEach((l,i)=>{ g+=`<path d="${path(l)}" fill="none" stroke="${pal.mute}" stroke-width="${lw(.5)}"/>`; if(!small){ const p=ringPts(l), cx=p.reduce((a,q)=>a+q[0],0)/p.length, cy=p.reduce((a,q)=>a+q[1],0)/p.length; g+=txt(X(cx),Y(cy)+3,String(i+1),{fill:pal.mute,size:8,anchor:'middle'}); } });
   for(const e of o.extra||[]) g+=e(X,Y,s2);
-  // north arrow and a scale bar
-  const sb=[5,10,20,50,100].find(v=>v*s2>60)||100; g+=`<g transform="translate(${W-34},26)"><path d="M0,-14 L5,4 L0,0 L-5,4 Z" fill="${pal.ink}"/>${txt(0,18,'N',{fill:pal.ink,size:10,anchor:'middle'})}</g>`;
-  g+=`<line x1="12" y1="${H+8}" x2="${12+sb*s2}" y2="${H+8}" stroke="${pal.ink}" stroke-width="2"/>${txt(12,H+22,`${sb} m`,{fill:pal.mute,size:10})}`;
-  // legend
-  const leg=[[pal.fill,pal.acc,m.existing?'the building':'the data centre'+(m.sizedTo?` (${r1(m.sizedTo.mw)} MW)`:'')],['none',pal.ink,'cooling plant on the roof'],[pal.plant,pal.ink,'cooling plant in the yard'],[pal.gen,pal.gen,'standby generators'],['none',pal.mute,'loading spaces']];
-  let lx=90, ly=H+2; g+=leg.map(([f,st,t])=>{ const wd=24+t.length*5.4; if(lx+wd>W-6){ lx=90; ly+=15; } const s0=`<rect x="${lx}" y="${ly}" width="12" height="9" fill="${f}" stroke="${st}"/>${txt(lx+16,ly+9,t,{fill:pal.mute,size:10})}`; lx+=wd; return s0; }).join('');
-  return `<svg viewBox="0 0 ${W} ${ly+16}" width="100%" role="img" aria-label="Site plan: the lot, the building, its plant and loading">${g}</svg>`; }
+  g+=`</g>`;
+  // labels in the drawing
+  const cen=r=>{ const p=ringPts(r); return [p.reduce((a,q)=>a+q[0],0)/p.length,p.reduce((a,q)=>a+q[1],0)/p.length]; };
+  const lab=(r,t,col)=>{ if(!r||small) return ''; const [cx,cy]=cen(r); return `<g>${txt(X(cx),Y(cy)+4,t,{fill:col||pal.ink,size:10.5,anchor:'middle',bold:true})}</g>`; };
+  if(B) g+=lab(B,m.existing?'Existing building':`Data centre${m.sizedTo?` · ${r1(m.sizedTo.mw)} MW`:''}`,pal.acc);
+  if(P.yard) g+=lab(P.yard,'Plant yard',pal.mute);
+  if(m.loading) g+=lab(m.loading,'Loading',pal.mute);
+  // north arrow and a graduated scale bar
+  g+=`<g transform="translate(${W-30},30)"><circle r="12" fill="${pal.bg==='none'?'none':pal.bg}" stroke="${pal.ink}" stroke-width=".6"/><path d="M0,-10 L4,4 L0,1.5 L-4,4 Z" fill="${pal.ink}"/>${txt(0,-15,'N',{fill:pal.ink,size:9,anchor:'middle'})}</g>`;
+  const sb=[5,10,20,25,50,100].find(v=>v*s2>(small?40:70))||100, q=sb/2; const sy=H-16, sx0=16;
+  g+=`<rect x="${sx0}" y="${sy}" width="${q*s2}" height="4" fill="${pal.ink}"/><rect x="${sx0+q*s2}" y="${sy}" width="${q*s2}" height="4" fill="${pal.bg==='none'?'none':pal.bg}" stroke="${pal.ink}" stroke-width=".6"/>`+txt(sx0,sy-4,'0',{fill:pal.mute,size:8.5,anchor:'middle'})+txt(sx0+q*s2,sy-4,String(q),{fill:pal.mute,size:8.5,anchor:'middle'})+txt(sx0+sb*s2,sy-4,`${sb} m`,{fill:pal.mute,size:8.5,anchor:'middle'});
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Site plan: the lot, the building, its plant and loading">${g}</svg>`; }
 
 /* ---------- a section through the building: storeys, roof plant, generators at grade, the zone's height limit ---------- */
 function sectionSVG(m,pal,o){ o=o||{}; const W=o.w||520, H=230; if(!m||!m.H) return ''; const P=m.plant||{}, s=P.s||{}; const Hb=m.existing?(m.roofH||m.H):m.H;
@@ -161,7 +179,7 @@ BD.views=BD.views||{}; BD.views.spec=specView;
 /* ---------- the report ---------- */
 const CSS_R=`.rp2 h2.rg{font-size:12px;letter-spacing:.08em;color:var(--accent);margin:28px 0 8px;border-top:1px solid var(--line);padding-top:14px;font-weight:600}
 .rp2 .rfig{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:10px 0 16px}.rp2 .rfig div{border-left:2px solid var(--accent);padding:2px 10px}.rp2 .rfig b{display:block;font-size:17px;font-weight:600}.rp2 .rfig span{font-size:12px;color:var(--muted)}
-.rp2 figure{margin:10px 0 16px}.rp2 figcaption{font-size:12px;color:var(--muted);margin-top:4px}.rp2 dl{display:grid;grid-template-columns:minmax(120px,30%) 1fr;gap:6px 14px;margin:6px 0 12px}.rp2 dt{color:var(--muted)}.rp2 dd{margin:0}
+.rp2 figure{margin:10px 0 16px}.rp2 figure.sheetfig svg{border:1px solid var(--line);border-radius:4px}.rp2 figcaption{font-size:12px;color:var(--muted);margin-top:4px}.rp2 dl{display:grid;grid-template-columns:minmax(120px,30%) 1fr;gap:6px 14px;margin:6px 0 12px}.rp2 dt{color:var(--muted)}.rp2 dd{margin:0}
 .rp2 table.ropp{width:100%;border-collapse:collapse;font-size:13px}.rp2 table.ropp td,.rp2 table.ropp th{text-align:left;padding:5px 8px 5px 0;border-bottom:1px solid var(--line);vertical-align:top;font-weight:400}.rp2 table.ropp th{color:var(--muted)}.rp2 tr.party td{color:var(--accent);font-weight:600;padding-top:12px}
 .rp2 .ropts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.rp2 .ropts>div{border:1px solid var(--line);border-radius:8px;padding:10px}
 .spcard{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:12px 0}.sph{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}.sph h3{margin:0;font-size:16px;font-weight:600;text-transform:none;letter-spacing:0;color:var(--fg)}#wc .spdg{grid-template-columns:1fr}#wc .spdg>div:last-child{max-width:320px}
@@ -171,6 +189,8 @@ const CSS_R=`.rp2 h2.rg{font-size:12px;letter-spacing:.08em;color:var(--accent);
 const NOTE_ORDER=[['fits','What fits'],['prec','Real buildings'],['heat','Heat'],['energy','Electricity'],['water','Water'],['materials','Materials'],['social','People'],['opts','Three options'],['time','Over time'],['cities','Two cities']];
 async function build(pal){ const c=await ctx(); const D=BD.flow.reportData(); const picks=BD.spec.list();
   const fig={plan:planSVG(c.m,pal),section:sectionSVG(c.m,pal),heat:heatFlow(c,pal),power:powerFlow(c,pal),water:waterFlow(c,pal)};
+  // the site sheets in the booklet's style (sheet.js); heat first, the others to follow once J.B. has seen it
+  try{ fig.sheetHeat=BD.sheets?await BD.sheets.heatSheet():''; }catch(e){ console.warn(e); fig.sheetHeat=''; }
   const opts=D.tier==='resident'?[]:await optionsBlock(c,pal); const spec=picks.map(n=>({n,html:specCardHTML(c,n,pal),flow:specFlow(n,pal,c),plan:oppPlanSVG(c,n,pal),data:specData(c,n)}));
   const key=[['Servers',`${r1(c.mw)} MW`],['Largest that fits',BD.fitMax?`${(BD.fitMax()||0).toFixed(1)} MW`:''],['Power at the meter',rngT(c.r.fac[0],c.r.fac[1],'MW')],['Heat offered',c.rec?rngT(c.r.avail[0]/1000,c.r.avail[1]/1000,'GWh/yr'):'none recovered (air)']];
   // the step notes, by tier; "worked out from" goes to the appendix
@@ -184,7 +204,7 @@ function bodyHTML(B,forDoc){ const {D,fig,opts,spec,key,items,appx}=B; const byK
   const sec=(t,h)=>`<h2 class="rg">${esc(t)}</h2>${h}`;
   let h=`<div class="rfig">${key.map(([k,v])=>`<div><b>${esc(v)}</b><span>${esc(k)}</span></div>`).join('')}</div>`;
   h+=sec('The site',`<figure>${fig.plan}<figcaption>Plan. The lot, the setbacks (dashed), the data centre and its plant as the tool lays them out.</figcaption></figure><figure>${fig.section}<figcaption>Section. Storeys, roof plant and the zone's height limit.</figcaption></figure><dl>${D.facts.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>${byK('fits').map(itemHTML).join('')}${byK('prec').map(itemHTML).join('')}`);
-  h+=sec('Heat',`<figure>${fig.heat}<figcaption>Heat: where it goes in this set-up.</figcaption></figure>${byK('heat').map(itemHTML).join('')}`);
+  h+=sec('Heat',`${fig.sheetHeat?`<figure class="sheetfig">${fig.sheetHeat}<figcaption>Site sheet 1, heat and cold: this lot as the tool models it.</figcaption></figure>`:''}<figure>${fig.heat}<figcaption>Heat: where it goes in this set-up.</figcaption></figure>${byK('heat').map(itemHTML).join('')}`);
   h+=sec('Electricity',`<figure>${fig.power}<figcaption>Power: from the grid to the servers.</figcaption></figure>${byK('energy').map(itemHTML).join('')}`);
   h+=sec('Water',`<figure>${fig.water}<figcaption>Water: in and out.</figcaption></figure>${byK('water').map(itemHTML).join('')}`);
   const rest=['materials','social'].flatMap(byK); if(rest.length) h+=sec('Materials and people',rest.map(itemHTML).join(''));
@@ -219,7 +239,7 @@ const LIB=['https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'
 const load=src=>new Promise((ok,no)=>{ const s=document.createElement('script'); s.src=src; s.onload=ok; s.onerror=()=>no(new Error('could not load the PDF library')); document.head.appendChild(s); });
 async function b64(url){ const b=await (await fetch(url)).arrayBuffer(); let s=''; const u=new Uint8Array(b); for(let i=0;i<u.length;i+=0x8000) s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000)); return btoa(s); }
 function svgPNG(svg,wpx){ return new Promise((ok,no)=>{ const m=/viewBox="0 0 ([\d.]+) ([\d.]+)"/.exec(svg); const vw=+m[1], vh=+m[2]; const sc=wpx/vw;
-  const s=svg.replace('<svg ',`<svg xmlns="http://www.w3.org/2000/svg" width="${vw*sc}" height="${vh*sc}" `).replace('width="100%"','');
+  const s=svg.replace('width="100%"','').replace('<svg ',`<svg ${/xmlns=/.test(svg.slice(0,300))?'':'xmlns="http://www.w3.org/2000/svg" '}width="${vw*sc}" height="${vh*sc}" `);
   const img=new Image(); img.onload=()=>{ const cv=document.createElement('canvas'); cv.width=Math.round(vw*sc); cv.height=Math.round(vh*sc); const x=cv.getContext('2d'); x.fillStyle='#fff'; x.fillRect(0,0,cv.width,cv.height); x.drawImage(img,0,0,cv.width,cv.height); ok({url:cv.toDataURL('image/jpeg',0.88),ar:vh/vw}); };
   img.onerror=()=>no(new Error('a diagram could not be drawn')); img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s); }); }
 const PMAP={'→':'to','←':'from','✓':'yes','✕':'no','›':'>','‹':'<'}; const T=t=>String(t||'').replace(/[→←✓✕›‹]/g,ch=>PMAP[ch]);
@@ -235,12 +255,13 @@ async function docPDF(B){ if(!window.jspdf) await load(LIB[0]); if(!window.jspdf
   const kv=rows=>{ if(!rows.length) return; doc.autoTable({body:rows.map(([k,v])=>[T(k),T(v)]),startY:y,margin:{left:M,right:M},theme:'plain',styles:{font:FN,fontSize:9,cellPadding:{top:3,bottom:3,left:0,right:8},textColor:ink,overflow:'linebreak'},columnStyles:{0:{cellWidth:150,textColor:mute}},didDrawCell:d=>{ if(d.section==='body'&&d.column.index===1){ doc.setDrawColor(...line); doc.setLineWidth(.4); doc.line(M,d.cell.y+d.cell.height,PW-M,d.cell.y+d.cell.height); } }}); y=doc.lastAutoTable.finalY+8; };
   const image=async(svg,cap,w)=>{ if(!svg) return; const im=await svgPNG(svg,1100); const ww=w||CW, hh=ww*im.ar; room(hh+20); doc.addImage(im.url,'JPEG',M,y,ww,hh); y+=hh+4; if(cap) text(cap,{size:8,color:mute,after:8}); };
   const item=n=>{ room(40); text(n.title,{size:11.5,bold:true,after:2}); if(n.lead) text(n.lead,{size:9.5,after:4}); kv(n.secs.map(([a,b])=>[a,b])); for(const r of n.rows||[]) text('–  '+r,{size:9,indent:6,after:1}); };
-  const byK=k=>B.items.filter(n=>n.k===k||n.k.startsWith(k+':'));
+  const byK=k=>B.items.filter(n=>n.k===k||n.k.startsWith(k+':')); const sheetPages=new Set();
   // cover
   text(`BEYOND DATA  ·  ${D.level.toUpperCase()}  ·  ${D.date}`,{size:8,color:mute,after:8}); text(D.facts[0][1],{size:24,after:2}); text(RHEAD[D.tier],{size:11,color:mute,after:14});
   { const w=(CW-30)/4; B.key.forEach(([k,v],i)=>{ const x=M+i*(w+10); doc.setDrawColor(...acc); doc.setLineWidth(1.6); doc.line(x,y,x,y+34); doc.setFont(FN,'bold'); doc.setFontSize(12); doc.setTextColor(...ink); doc.text(doc.splitTextToSize(T(v),w-10)[0],x+8,y+13); doc.setFont(FN,'normal'); doc.setFontSize(8); doc.setTextColor(...mute); doc.text(T(k),x+8,y+28); }); y+=50; }
   await image(B.fig.plan,'Plan. The lot, the setbacks (dashed), the data centre and its plant as the tool lays them out.');
   head('THE SITE'); await image(B.fig.section,'Section. Storeys, roof plant and the zone\'s height limit.'); kv(D.facts); byK('fits').forEach(item); byK('prec').forEach(item);
+  if(B.fig.sheetHeat){ const im=await svgPNG(B.fig.sheetHeat,1836); doc.addPage(); doc.addImage(im.url,'JPEG',0,0,PW,PW*im.ar); sheetPages.add(doc.getNumberOfPages()); doc.addPage(); y=M; }
   head('HEAT'); await image(B.fig.heat,'Heat: where it goes in this set-up.'); byK('heat').forEach(item);
   head('ELECTRICITY'); await image(B.fig.power,'Power: from the grid to the servers.'); byK('energy').forEach(item);
   head('WATER'); await image(B.fig.water,'Water: in and out.'); byK('water').forEach(item);
@@ -264,7 +285,7 @@ async function docPDF(B){ if(!window.jspdf) await load(LIB[0]); if(!window.jspdf
   head('READ WITH'); text('Ranges, not designs: screening figures from published sources, not a substitute for an engineer, a utility study or a permit review. Operator figures are claims. Heat offered is not heat used.',{size:9,color:mute});
   if(B.appx.length&&D.tier==='full'){ doc.addPage(); y=M; text('APPENDIX: WHAT EACH RESULT IS WORKED OUT FROM',{size:11,bold:true,color:acc,after:8}); B.appx.forEach(([k,v])=>{ text(k,{size:8.5,bold:true,after:1}); text(v,{size:7.5,color:mute,after:5}); }); }
   if(D.srcs.length){ doc.addPage(); y=M; text('SOURCES',{size:11,bold:true,color:acc,after:8}); D.srcs.forEach(s=>text(s,{size:7.5,color:mute,after:3})); }
-  const np=doc.getNumberOfPages(); for(let p=1;p<=np;p++){ doc.setPage(p); doc.setFont(FN,'normal'); doc.setFontSize(7.5); doc.setTextColor(...mute); doc.text(T(`Beyond Data · ${D.facts[0][1]}`),M,PH-28); doc.text(`${p} / ${np}`,PW-M,PH-28,{align:'right'}); }
+  const np=doc.getNumberOfPages(); for(let p=1;p<=np;p++){ if(sheetPages.has(p)) continue; doc.setPage(p); doc.setFont(FN,'normal'); doc.setFontSize(7.5); doc.setTextColor(...mute); doc.text(T(`Beyond Data · ${D.facts[0][1]}`),M,PH-28); doc.text(`${p} / ${np}`,PW-M,PH-28,{align:'right'}); }
   return doc.output('blob'); }
 BD.report2={planSVG,sectionSVG,flowSVG,heatFlow,powerFlow,waterFlow,build,docPDF,docHTML,PAL,SPEC};
 })();
