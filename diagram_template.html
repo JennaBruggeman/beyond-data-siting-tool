@@ -232,6 +232,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
   body{overflow:auto}
 }
 @media (prefers-reduced-motion:no-preference){ .node rect.box,.wire,.cond rect.box{transition:opacity .15s,stroke .15s} }
+.node.off{opacity:.13}.node.off .box{stroke-dasharray:3 3}.wire.off{opacity:.05}.tcount{margin-left:10px;font-size:12px;color:var(--muted)}.tpages{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0}.tpages span{font-size:11px;border:1px solid var(--line-2);border-radius:3px;padding:2px 6px;color:var(--muted)}.tpages span.on{border-color:var(--accent);color:var(--fg)}
 .citysw{margin-left:14px;display:inline-flex;gap:0}.citysw button{border-radius:0}.citysw button:first-child{border-radius:4px 0 0 4px}.citysw button:last-child{border-radius:0 4px 4px 0}.node.citygap .box{stroke-dasharray:4 3;opacity:.75}.ctag{font-size:9px;fill:#cdb07a;letter-spacing:.02em}.gapnote{color:#cdb07a}
 </style>
 
@@ -247,6 +248,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
     <button id="m-structure" aria-pressed="true">Structure</button>
     <button id="m-example" aria-pressed="false">Worked example</button>
     <span class="citysw"><button id="c-van" aria-pressed="false">Vancouver</button><button id="c-edm" aria-pressed="false">Edmonton</button><button id="c-both" aria-pressed="true">Both</button></span>
+    <span class="citysw tplsw" role="group" aria-label="Template"><button id="t-resident" aria-pressed="false" title="What it means for me">Residents</button><button id="t-community" aria-pressed="false" title="What it means for the neighbourhood">Neighbourhood</button><button id="t-full" aria-pressed="true" title="How it is worked out">Full</button></span><span id="tcount" class="tcount"></span>
   </div>
   <input id="q" class="logic-only" type="search" placeholder="Find a quantity, condition, party or source" aria-label="Search">
   <select id="heading" class="logic-only" aria-label="Filter conditions by heading"><option value="">All headings</option></select>
@@ -266,6 +268,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 </div>
 
 <script type="application/json" id="data">/*DATA*/</script>
+<script type="application/json" id="tpl">/*TEMPLATES*/</script>
 <script type="application/json" id="guide">/*GUIDE*/</script>
 <script>
 (function(){
@@ -364,6 +367,16 @@ const glyphs={
 function ring(g,cx,cy,conf,r=9){ el('circle',{class:'ring-track',cx,cy,r},g); if(conf>0) el('path',{class:'ring-fill',d:arc(cx,cy,r,conf/100)},g); }
 function clip(s,n){s=String(s||'');return s.length>n?s.slice(0,n-1)+'…':s}
 let city='both'; const SC=D.source_city||{};
+// templates (step 6, 20 Oct 2026): the same templates.json the tool reads; a part above the chosen template is drawn faint and dashed (it still runs)
+const TPL=JSON.parse(document.getElementById('tpl').textContent||'null')||{nodes:{},tiers:[],reports:{}}; let tier='full'; const TR={resident:0,community:1,full:2};
+const TNAME={resident:'What it means for me',community:'What it means for the neighbourhood',full:'How it is worked out'};
+const onTier=id=>{ const t=TPL.nodes[id]; return !t||TR[t.tier]<=TR[tier]; };
+function applyTier(){ [...gNodes.children].forEach(g=>g.classList.toggle('off',!onTier(g.dataset.id))); [...gWires.children].forEach(w=>w.classList.toggle('off',!onTier(w.dataset.from)||!onTier(w.dataset.to)));
+  const ids=Object.keys(TPL.nodes), on=ids.filter(onTier).length; const tc=document.getElementById('tcount'); if(tc) tc.textContent=`${on} of ${ids.length} parts shown`; }
+function tierBlock(){ const T=(TPL.tiers||[]).find(x=>x.id===tier)||{}; const pages=(TPL.reports||{})[tier]||[]; const all=(TPL.reports||{}).full||[];
+  return `<div class="kind" style="margin-top:16px">Template: ${esc(TNAME[tier]||tier)}</div><p style="font-size:12.5px;margin:6px 0">For ${esc(T.who||'')}. Asks: ${esc(T.asks||'')}. ${esc(TPL.rule||'')}.</p>
+   <div class="kind" style="margin-top:10px">Its report: ${pages.filter(p=>p.id!=='sources').length} sections</div><div class="tpages">${all.map(p=>`<span class="${pages.some(q=>q.id===p.id)?'on':''}" title="${esc(p.what)}">${esc(p.title)}</span>`).join('')}</div>
+   <p class="draftnote">Faint, dashed parts are shown only in a fuller template. Lit sections are in this template's report.</p>`; }
 const CN={van:'Vancouver',edm:'Edmonton'};
 function cityGap(n){ const c=n.city; if(!c) return ''; const v=c.van+c.both>0, e=c.edm+c.both>0; if(!(v||e)) return ''; if(city==='van'&&!v) return 'no Vancouver source yet'; if(city==='edm'&&!e) return 'no Edmonton source yet'; if(city==='both'&&!(v&&e)) return v?'Vancouver only':'Edmonton only'; return ''; }
 function drawNode(n){
@@ -446,7 +459,7 @@ function drawAll(){
   D.conditions.forEach(drawCond);
   drawLife();
   setVB();
-  applyHighlight(); applyFilter();
+  applyHighlight(); applyFilter(); applyTier();
 }
 
 /* ---------- pan / zoom ---------- */
@@ -531,6 +544,7 @@ function renderInspector(){
   <p class="draftnote">Each node's icon names its family; the Guide tab explains every family with a diagram.</p>
   <div class="kind" style="margin-top:16px">Opportunity labels</div><p style="font-size:12.5px;margin:6px 0 0">How proven: ${['built_here','built_elsewhere','pilot','speculative','unknown'].map(x=>rdPill(x)).join(' ')}</p><p style="font-size:12.5px;margin:6px 0 0">Rules: ${['allowed','approval','not_allowed','no_rule','unknown'].map(x=>rsPill(x)).join(' ')}</p><p class="glink" data-go="labels" style="margin-top:6px">How opportunities are labelled ›</p>
   ${D.research_pass&&D.research_pass.groups?`<div class="kind" style="margin-top:16px">Sources of truth</div><p class="glink" data-go="research" style="margin-top:6px">Research pass ${esc(D.research_pass.date)}: ${Object.keys(D.source_kinds||{}).length} sources by carrier and gate ›</p>`:''}
+  ${tierBlock()}
   <p style="margin-top:14px">${D.meta.counts.inputs} inputs · ${D.meta.counts.quantities} quantities · ${D.meta.counts.conditions} conditions · ${(D.parties||[]).length} parties · ${D.meta.counts.sources} cited sources (register ${esc(D.meta.date)}).</p>
   ${mode==='example'&&city==='edm'?`<div class="box2"><span class="gapnote">The worked example is in Vancouver (555 W Hastings). An Edmonton worked example is not built yet.</span></div>`:''}${mode==='example'?`<div class="box2"><div class="kind">Worked example — first attempt</div><b>${esc(D.example.site)}</b><br><span style="color:var(--muted)">${esc(D.example.match)}</span><br><br><span style="font-size:12.5px">${esc((D.example.values.tradeoffs||[''])[0])}</span><div class="draftnote">Condition states are the first attempt's; party rows are not yet computed.</div></div>`:''}
   </div>`; bindGo(); return; }
@@ -597,6 +611,7 @@ function renderInspector(){
       ${n.sources&&n.sources.length?citySources(n):''}</dl>`;
     }
   }
+  { const t=TPL.nodes[selected]; if(t) h+=`<div class="kind" style="margin-top:16px">Templates</div><p style="font-size:12.5px;margin:6px 0">Shown from: <b>${esc(TNAME[t.tier]||t.tier)}</b>${TR[t.tier]>0?` (and fuller)`:' (all three)'}. Affects: ${esc((t.parties||[]).join(', ')||'no party directly')}. Why: ${esc(t.why||'')}.${!onTier(selected)?' Not shown in the template chosen now; it still runs.':''}</p>${t.sens?`<p style="font-size:12.5px;margin:6px 0">Sensitivity test: ${esc(t.sens)}</p>`:''}`; }
   insp.innerHTML=h; bindGo();
   insp.querySelectorAll('.mech .ctag').forEach(tg=>tg.classList.toggle('on',tg.dataset.q===selected));
   insp.querySelectorAll('[data-guide]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault(); e.stopPropagation(); window.__openGuide&&window.__openGuide(a.dataset.guide,selected);}));
@@ -631,6 +646,8 @@ function centreOn(id){ const p=posN[id]||condPos[id]; if(!p)return; vb.x=p.x+p.w
 function setMode(m){ mode=m; document.getElementById('m-structure').setAttribute('aria-pressed',m==='structure'); document.getElementById('m-example').setAttribute('aria-pressed',m==='example'); drawAll(); renderInspector(); }
 document.getElementById('m-structure').onclick=()=>setMode('structure');
 document.getElementById('m-example').onclick=()=>setMode('example');
+function setTier(t){ tier=t; ['resident','community','full'].forEach(k=>document.getElementById('t-'+k).setAttribute('aria-pressed',k===t)); applyTier(); renderInspector(); }
+['resident','community','full'].forEach(k=>document.getElementById('t-'+k).onclick=()=>setTier(k));
 function setCity(c){ city=c; ['van','edm','both'].forEach(k=>document.getElementById('c-'+k).setAttribute('aria-pressed',k===c)); drawAll(); renderInspector(); }
 ['van','edm','both'].forEach(k=>document.getElementById('c-'+k).onclick=()=>setCity(k));
 document.getElementById('q').addEventListener('input',e=>{query=e.target.value; applyFilter();});

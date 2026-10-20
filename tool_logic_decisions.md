@@ -424,3 +424,11 @@ Also: negative money is shown as −$; the BC/Alberta price label now follows th
 ## Parked: the site report (20 Oct 2026, J.B.: "we can keep polishing this part over the coming weeks")
 - Done: three reports, one per template (make_templates.py `reports`), drawn in the tier chooser, on each cover and on the logic page; white1 booklet style; opportunity tests legible.
 - To come back to: empty space on pages 02, 04, 05; Edmonton section label overlap; depth differences between the community and full reports beyond the logic page; whether the three reports also go on the full tool-logic diagram (workflow map tiers, step 6).
+
+## To do later (J.B. 20 Oct 2026: "Leave the other stuff (put it in our to do notes)")
+- Mid review (Fri 23 Oct): pitch and 150-word text; a walkthrough of one or two worked examples in each template.
+- 1080 Gore Ave: treat as the New St Paul's Hospital, or leave out until it opens? (audit/bca_build_2026-10-20.md)
+- Shepherd's Care Kensington Village (Alberta care home not placed): find its address.
+- Site report polish (see "Parked: the site report").
+- Research gaps: EPCOR tiers; BC Reg 8/2026 and 123/2026; NFPA 1142; Edmonton encroachment guide; Alberta 2018 surface water guidelines; Vancouver DFPS map; truck trips per refresh; Edmonton warming and reception centres.
+- Open from steps 3–5: opportunities hidden from residents (keep behind "show more" or always name them?); the section-to-parts table (logic.js SEC); logic panel on steps without 3D.

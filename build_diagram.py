@@ -3,6 +3,9 @@ import os
 h=os.path.dirname(os.path.abspath(__file__))
 t=open(os.path.join(h,'diagram_template.html'),encoding='utf-8').read()
 t=t.replace('/*DATA*/',open(os.path.join(h,'diagram_data.json'),encoding='utf-8').read())
+import json as _j
+_T=_j.load(open(os.path.join(h,'templates.json'),encoding='utf-8')); _T.pop('graph',None)
+t=t.replace('/*TEMPLATES*/',_j.dumps(_T,ensure_ascii=False).replace('</','<\\/'))
 t=t.replace('/*WORKFLOW*/',open(os.path.join(h,'workflow_view.js'),encoding='utf-8').read())
 t=t.replace('/*GUIDE*/',open(os.path.join(h,'guide_data.json'),encoding='utf-8').read().replace('</','<\\/'))
 t=t.replace('/*GUIDEVIEW*/',open(os.path.join(h,'guide_view.js'),encoding='utf-8').read())

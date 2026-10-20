@@ -75,7 +75,8 @@
     "operator",
     "neighbours"
    ],
-   "why": "drives heat, water and sound; assumed for residents"
+   "why": "drives heat, water and sound; assumed for residents",
+   "sens": "moves size fit by up to 15%; moves noise level by up to 3.4 dB; moves component space by up to 25%"
   },
   "weather": {
    "tier": "full",
@@ -87,7 +88,8 @@
    "parties": [
     "operator"
    ],
-   "why": "engineering input"
+   "why": "engineering input",
+   "sens": "moves noise level by up to 3.0 dB"
   },
   "lighting_plan": {
    "tier": "full",
@@ -156,7 +158,8 @@
    "parties": [
     "operator"
    ],
-   "why": "engineering"
+   "why": "engineering",
+   "sens": "moves size fit by up to 66%; moves floor area by up to 69%; moves jobs by up to 69%"
   },
   "it_load_outside": {
    "tier": "full",
@@ -208,7 +211,8 @@
    "parties": [
     "operator"
    ],
-   "why": "engineering"
+   "why": "engineering",
+   "sens": "moves size fit by up to 33%; moves floor area by up to 37%; moves jobs by up to 37%"
   },
   "size_fit": {
    "tier": "resident",
@@ -239,14 +243,16 @@
    "parties": [
     "operator"
    ],
-   "why": "engineering"
+   "why": "engineering",
+   "sens": "moves heat delivered by up to 43%; moves homes heated by up to 43%"
   },
   "cop": {
    "tier": "full",
    "parties": [
     "receiver"
    ],
-   "why": "engineering"
+   "why": "engineering",
+   "sens": "moves heat delivered by up to 15%; moves homes heated by up to 15%; moves lcoh by up to 13%"
   },
   "heat_captured": {
    "tier": "full",
@@ -293,7 +299,8 @@
    "parties": [
     "operator"
    ],
-   "why": "industry metric"
+   "why": "industry metric",
+   "sens": "moves size fit by up to 15%; moves it load actual by up to 10%; moves grid co2 by up to 10%"
   },
   "spare_capacity": {
    "tier": "community",
@@ -682,14 +689,16 @@
     "receiver",
     "utility"
    ],
-   "why": "pipe cost detail"
+   "why": "pipe cost detail",
+   "sens": "moves lcoh by up to 22%"
   },
   "receiver_demand": {
    "tier": "community",
    "parties": [
     "receiver"
    ],
-   "why": "how much heat the receiver needs"
+   "why": "how much heat the receiver needs",
+   "sens": "moves homes heated by up to 15%"
   },
   "deprivation": {
    "tier": "community",
@@ -894,7 +903,8 @@
    "parties": [
     "receiver"
    ],
-   "why": "method"
+   "why": "method",
+   "sens": "moves lcoh by up to 22%"
   },
   "price_floor": {
    "tier": "community",
@@ -925,7 +935,8 @@
    "parties": [
     "operator"
    ],
-   "why": "finance method"
+   "why": "finance method",
+   "sens": "moves lcoh by up to 34%"
   },
   "lcoh": {
    "tier": "community",
@@ -3519,5 +3530,179 @@
  },
  "resident_count": 45,
  "community_count": 125,
- "full_count": 195
+ "full_count": 195,
+ "drivers": {
+  "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
+  "plain": {
+   "pue": "how much extra power cooling and losses take",
+   "liquid_capture": "how much of the servers' heat liquid cooling catches",
+   "cop": "how well the heat pump lifts the heat",
+   "hall_area": "how much of each floor is server hall",
+   "server_floor": "how much floor each MW of servers needs",
+   "plant_schedule": "whether the cooling units are low-noise or standard models",
+   "receiver_demand": "how much heat the buildings nearby use",
+   "distribution_cost": "what the pipe costs per metre",
+   "crf": "the cost of borrowing (3 to 8%)",
+   "demand_profile": "how many hours a year the heat pump runs",
+   "cooling_type": "how the servers are cooled (air or liquid)",
+   "component_space": "how much room the plant needs per MW",
+   "envelope": "floor heights",
+   "size_fit": "the size chosen"
+  },
+  "by_result": {
+   "size_fit": [
+    [
+     "server_floor",
+     0.657,
+     "%",
+     "main"
+    ],
+    [
+     "hall_area",
+     0.333,
+     "%",
+     "main"
+    ],
+    [
+     "pue",
+     0.154,
+     "%",
+     "also"
+    ],
+    [
+     "cooling_type",
+     0.154,
+     "%",
+     "also"
+    ]
+   ],
+   "it_load_actual": [
+    [
+     "pue",
+     0.102,
+     "%",
+     "also"
+    ]
+   ],
+   "grid_co2": [
+    [
+     "pue",
+     0.102,
+     "%",
+     "also"
+    ]
+   ],
+   "heat_delivered": [
+    [
+     "liquid_capture",
+     0.432,
+     "%",
+     "main"
+    ],
+    [
+     "cop",
+     0.151,
+     "%",
+     "also"
+    ]
+   ],
+   "homes_heated": [
+    [
+     "liquid_capture",
+     0.432,
+     "%",
+     "main"
+    ],
+    [
+     "receiver_demand",
+     0.153,
+     "%",
+     "also"
+    ],
+    [
+     "cop",
+     0.151,
+     "%",
+     "also"
+    ]
+   ],
+   "lcoh": [
+    [
+     "crf",
+     0.343,
+     "%",
+     "main"
+    ],
+    [
+     "demand_profile",
+     0.221,
+     "%",
+     "also"
+    ],
+    [
+     "distribution_cost",
+     0.218,
+     "%",
+     "also"
+    ],
+    [
+     "cop",
+     0.133,
+     "%",
+     "also"
+    ]
+   ],
+   "floor_area": [
+    [
+     "server_floor",
+     0.689,
+     "%",
+     "main"
+    ],
+    [
+     "hall_area",
+     0.372,
+     "%",
+     "main"
+    ]
+   ],
+   "jobs": [
+    [
+     "server_floor",
+     0.688,
+     "%",
+     "main"
+    ],
+    [
+     "hall_area",
+     0.372,
+     "%",
+     "main"
+    ]
+   ],
+   "noise_level": [
+    [
+     "cooling_type",
+     3.359,
+     "dB",
+     "main"
+    ],
+    [
+     "plant_schedule",
+     3.0,
+     "dB",
+     "main"
+    ]
+   ],
+   "component_space": [
+    [
+     "cooling_type",
+     0.253,
+     "%",
+     "main"
+    ]
+   ]
+  },
+  "source": "audit/sensitivity_2026-10-20.md"
+ }
 }

@@ -80,10 +80,18 @@ function rowNodes(r){ const a=r.querySelector('[data-add]'), o=r.querySelector('
   if(r.closest('.famno')){ const n=rowName(r); return {key:'op:'+n, ids:oppNodes(n), name:n}; }
   if(b&&ROWID[b.id]) return {key:'row:'+b.id, ids:known(ROWID[b.id]), name:rowName(r)};
   return null; }
+/* sensitivity rule (J.B. 20 Oct 2026, step 7): a part this template hides that moves a result shown here is named in plain words —
+   25% or more (3 dB of sound) as what most of the range comes from, 10–25% as also behind it (templates.json 'drivers', from audit/sensitivity_2026-10-20.md) */
+function drivers(d,ids,t){ d.querySelectorAll(':scope .drv').forEach(x=>x.remove()); const D=BD.TPL&&BD.TPL.drivers; if(!D||t==='full') return;
+  const main=new Map(), also=new Map(); for(const on of ids) for(const [pn,v,u,w] of (D.by_result[on]||[])){ if(shows([pn],t)) continue; const nm=D.plain[pn]||pn; (w==='main'?main:also).set(nm,1); }
+  for(const k of main.keys()) also.delete(k); if(!main.size&&!also.size) return;
+  const p=document.createElement('p'); p.className='src drv';
+  p.textContent=(main.size?`Most of this range comes from ${[...main.keys()].join(' and ')}.`:'')+(also.size?`${main.size?' ':''}Also behind it, shown in a fuller level: ${[...also.keys()].join('; ')}.`:'');
+  const body=d.querySelector(':scope > :not(summary)'); (body&&body.parentNode===d?d:d).appendChild(p); }
 function filter(sd){ sd=sd||$('#side'); if(!sd||!L||!BD.flow||!BD.flow.on) return; const step=stepKey(), t=tierNow(); if(!step||step==='site'||step==='setup'||step==='report') return;
   const hid=[];
   sd.querySelectorAll('details.sec').forEach(d=>{ if(d.closest('.dk,details.fp')) return; const title=titleOfSec(d); if(!title) return; const ids=secNodes(step,title); const k=step+':'+title;
-    d.dataset.tier=tierOf(ids)||''; const show=shows(ids,t)||revealed(k); d.hidden=!show; if(!show) hid.push({k,name:title,tier:tierOf(ids)}); });
+    d.dataset.tier=tierOf(ids)||''; const show=shows(ids,t)||revealed(k); d.hidden=!show; if(!show) hid.push({k,name:title,tier:tierOf(ids)}); else drivers(d,ids,t); });
   sd.querySelectorAll('.addrow').forEach(r=>{ if(r.closest('.dk,details.fp,.tmore')) return; const x=rowNodes(r); if(!x||!x.ids.length) return; r.dataset.tier=tierOf(x.ids)||'';
     const show=shows(x.ids,t)||revealed(x.key); r.hidden=!show; if(!show) hid.push({k:x.key,name:x.name.replace(/\s+(not yet known|built here|built elsewhere|pilot|speculative).*$/,''),tier:tierOf(x.ids)}); });
   // a family step opens on its first opportunity; if that one is hidden at this tier, open the first one shown instead
