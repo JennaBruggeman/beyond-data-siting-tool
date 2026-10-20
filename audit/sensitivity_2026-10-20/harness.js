@@ -1,11 +1,12 @@
 // Sensitivity test, one part at a time (screening in the spirit of Morris; J.B.'s step 7). Runs inside the tool page.
-window.SENS=async function(){
+window.SENS=async function(opt){ opt=opt||{heat:true};
   const e=BD.eng, R=e.R, EC=BD.ECON, A=BD.S.answers; const mid=a=>Array.isArray(a)?(a[0]+a[1])/2:a; const clone=o=>JSON.parse(JSON.stringify(o));
-  await BD.oppPrep(); const f0=e.siteFacts(); const d=await e.loadRecv(f0.city); if(BD.routeTree) await BD.routeTree(f0);
+  await BD.oppPrep(); const f0=e.siteFacts(); const d=await e.loadRecv(f0.city); if(opt.heat&&BD.routeTree) await BD.routeTree(f0);
   async function out(){ A._sens=Math.random(); BD.modelReset(); const f=e.siteFacts(), near=e.nearby(f,d), nets=e.netsAt(f,d); const mw=A.mw||1, rec=(A.inside||'air')!=='air';
     const r=e.calc({mw,recover:rec,to:'near'},f,near,nets), rL=e.calc({mw,recover:true,to:'near'},f,near,nets);
-    const cop=R.cop, worth=EC.heatVal(f.city)-EC.elec[f.city]/((cop[0]+cop[1])/2);
-    const pts=d.pts.filter(p=>Math.hypot(p.x-f.c[0],p.y-f.c[1])<=3000).map(p=>Object.assign({},p,{econ:BD.heatEcon(f,p,rL.avail)}));
+    const cop=R.cop, worth=EC.heatVal(f.city);
+    const pts=!opt.heat?[]:d.pts.filter(p=>Math.hypot(p.x-f.c[0],p.y-f.c[1])<=3000).map(p=>Object.assign({},p,{econ:BD.heatEcon(f,p,rL.avail)}));
+    if(!opt.heat){ let fit=null; try{ fit=BD.fitMax(); }catch(x){} BD.modelReset(); return {fit,floorMW:mid(f.mw),floorLo:f.mw[0],floorHi:f.mw[1],elec:mid(r.facMWh)/1000,co2:mid(r.facMWh)*R.grid[f.city]/1000,plant:mid(r.plant),noise:mid(e.noiseLw(mw).lw),jobs:mid(r.jobs),heat:mid(rL.avail)/1000,homes:mid(rL.homes)}; }
     const ok=pts.filter(p=>p.econ&&isFinite(p.econ.lcohMid)); let best=null; try{ const B=BD.bestHeat(f,pts.filter(p=>p.econ&&p.econ.take),rL.avail[0]); best=B&&B[0]; }catch(x){}
     let opp=null; try{ opp=BD.oppScreen().filter(o=>o.s!=='no').length; }catch(x){}
     let fit=null; try{ fit=BD.fitMax(); }catch(x){} BD.modelReset();
@@ -32,7 +33,7 @@ window.SENS=async function(){
    {k:'size',node:'size_fit',what:'size: 2.5 MW (resident default) / largest that fits',set:[()=>{A.mw=2.5;},async()=>{ A.mw=null; BD.modelReset(); const m=BD.fitMax(); A.mw=m; }]},
   ];
   restore(); const base=await out(); const res=[];
-  for(const p of P){ const row={k:p.k,node:p.node,what:p.what,lo:null,hi:null};
+  for(const p of P.filter(p=>opt.heat||!['capture','cop','homeMWh','estimates','pipe','rate','hpFLH'].includes(p.k))){ const row={k:p.k,node:p.node,what:p.what,lo:null,hi:null};
     for(const [i,s] of p.set.entries()){ restore(); try{ await s(); row[i?'hi':'lo']=await out(); }catch(x){ row.err=String(x); } }
     res.push(row); }
   restore(); return {site:(BD.S.sel.a||[])[0], city:f0.city, mw:A.mw, inside:A.inside, base, res}; };

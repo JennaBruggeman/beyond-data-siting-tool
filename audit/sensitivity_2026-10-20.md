@@ -68,3 +68,84 @@ Scope: 15 parts, the ones the engine computes with that have a sourced range or 
 
 - Proposal: at or above 25% (or 3 dB): name the part on the card as what most of the range comes from, in plain words; no new question. 10–25%: fold into the range and list it under what this template leaves out. Under 10%: no change.
 - Tier changes are J.B.'s call; none made.
+
+
+## Run on 1,010 sampled lots (20 Oct 2026, afternoon)
+
+The sample is every non-single-family zone in each city, spread from small to large lots: 501 in Vancouver, leaving out R1-1 and RS; 509 in Edmonton, leaving out RS, RSF, RSM and RR. The test went in four stages:
+
+1. **The walk.** Each lot was walked as a user would, rotating the three templates. If the set-up fit no size, "Find a set-up that fits" was tried.
+2. **The screen check.** Every step was checked for broken text, broken drawings, stuck steps and errors.
+3. **The sensitivity screen.** The same one-part-at-a-time test was run at the size the walk ended on. Heat costs were tested on every 10th lot only, because routing is slow.
+4. **The number checks.** Ranges in order, results finite, size within the floor, sound plausible.
+
+Files: lots/lots_van.jsonl, lots/lots_edm.jsonl, lots/sample.json, lots/lot_page.js, lots/analyse.py.
+
+### What it found
+
+- **Blank answers ignored the labelled defaults.** With no answer yet, "what is being built" was read as "not new", which gave every lot no floor. Fixed (engine.js, site.js), and the run was restarted on the fixed version.
+- **Records larger than the outline (Edmonton).** Some assessment records cover far more land than the lot outline found. An example is a 28,114 m² record on a 225 m² outline, likely strata or multi-lot properties. The tool sized on the record area but laid out on the outline. It now uses the outline and says why (index.html).
+- **3D errors.** On a few lots the 3D broke on Over time and Two cities: a label had no position, or a plant yard clipped to nothing. Fixed (scene3d.js).
+- **Best heat set-up showing "$NaN" or "$-Infinity".** This happened when a route could not be measured. Fixed (cards.js).
+- **One very large lot timed out.** An 80 ha A5 lot in Edmonton took over 4 minutes on one step. The size search itself takes about 1 s. Left open: a performance check.
+- **Small lots.** Most lots under 500 m² fit no data centre: Vancouver 256 of 299, Edmonton 96 of 165. Above 1,000 m², every Vancouver lot fits one. "Find a set-up that fits" rescued 150 Vancouver lots and 95 Edmonton lots that the defaults could not fit.
+
+### Swings across the lots where a size fits
+
+The swing is the range of each result as one part moves across its sourced range, as a share of the usual value. Sound is in dB, counts are counts. The rule on the cards now uses the **90th percentile** across lots, not the three worked examples. The main changes from the three-example run:
+
+- Pipe cost per metre moves the heat cost by up to 67% (90th percentile).
+- Heat caught by liquid cooling moves the heat cost by 29%.
+- The size that fits moves by 100% with floor per MW, and by 41% with the hall share.
+
+```
+capture    best heat set-up cost        n=  70 median 6%  p90 27%  max 31%
+capture    cheapest building cost       n=  71 median 4%  p90 29%  max 38%
+capture    heat offered                 n=  72 median 43%  p90 43%  max 43%
+capture    homes' worth of heat         n=  72 median 43%  p90 43%  max 43%
+cop        best heat set-up cost        n=  70 median 2%  p90 10%  max 12%
+cop        cheapest building cost       n=  71 median 8%  p90 11%  max 15%
+cop        heat offered                 n=  72 median 15%  p90 15%  max 15%
+cop        homes' worth of heat         n=  72 median 15%  p90 15%  max 15%
+estimates  best heat set-up cost        n=  70 median 0%  p90 18%  max 30%
+estimates  cheapest building cost       n=  71 median 0%  p90 12%  max 24%
+ftf        largest size that fits       n= 641 median 0%  p90 0%  max 51%
+ftf        size on floor space alone    n= 641 median 0%  p90 0%  max 69%
+hallShare  largest size that fits       n= 618 median 12%  p90 41%  max 307%
+hallShare  size on floor space alone    n= 641 median 29%  p90 37%  max 103%
+hallShare  jobs                         n= 641 median 37%  p90 37%  max 37%
+homeMWh    best heat set-up cost        n=  70 median 0%  p90 0%  max 6%
+homeMWh    cheapest building cost       n=  71 median 0%  p90 0%  max 5%
+homeMWh    homes' worth of heat         n=  72 median 14%  p90 15%  max 15%
+hpFLH      best heat set-up cost        n=  70 median 16%  p90 22%  max 24%
+hpFLH      cheapest building cost       n=  71 median 16%  p90 20%  max 21%
+inside     largest size that fits       n= 641 median 0%  p90 15%  max 400%
+inside     size on floor space alone    n= 641 median 0%  p90 4%  max 215%
+inside     sound power                  n= 641 median 0.8 dB  p90 3.4 dB  max 3.6 dB
+inside     plant space                  n= 641 median 25%  p90 25%  max 25%
+lw         sound power                  n= 641 median 3.0 dB  p90 3.0 dB  max 3.0 dB
+m2PerMW    largest size that fits       n= 608 median 44%  p90 100%  max 800%
+m2PerMW    size on floor space alone    n= 641 median 59%  p90 69%  max 215%
+m2PerMW    jobs                         n= 641 median 69%  p90 69%  max 69%
+pipe       best heat set-up cost        n=  70 median 33%  p90 67%  max 79%
+pipe       cheapest building cost       n=  71 median 28%  p90 55%  max 79%
+plant      plant space                  n= 641 median 38%  p90 38%  max 38%
+pue        carbon from electricity      n= 641 median 10%  p90 10%  max 10%
+pue        electricity a year           n= 641 median 10%  p90 10%  max 10%
+pue        largest size that fits       n= 641 median 0%  p90 11%  max 267%
+pue        size on floor space alone    n= 641 median 0%  p90 7%  max 43%
+pue        sound power                  n= 641 median 0.0 dB  p90 0.7 dB  max 2.4 dB
+pue        plant space                  n= 641 median 9%  p90 9%  max 9%
+rate       best heat set-up cost        n=  70 median 39%  p90 50%  max 54%
+rate       cheapest building cost       n=  71 median 36%  p90 45%  max 54%
+size       best heat set-up cost        n=  70 median 12%  p90 66%  max 92%
+size       cheapest building cost       n=  71 median 12%  p90 52%  max 75%
+size       carbon from electricity      n= 641 median 224%  p90 2400%  max 2400%
+size       electricity a year           n= 641 median 224%  p90 2400%  max 2400%
+size       heat offered                 n= 641 median 224%  p90 2400%  max 2400%
+size       homes' worth of heat         n= 641 median 224%  p90 2400%  max 2400%
+size       jobs                         n= 641 median 220%  p90 405%  max 1500%
+size       sound power                  n= 641 median 4.0 dB  p90 7.6 dB  max 7.6 dB
+size       plant space                  n= 641 median 224%  p90 2400%  max 2400%
+
+```
