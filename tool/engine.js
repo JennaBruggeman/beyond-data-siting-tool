@@ -387,7 +387,7 @@ async function optionsView(){
   ];
   const fut=o=>[['As planned','the table above'],['Tenant changes cooling',o.recover?'back to air: heat offered drops to none':'to liquid: heat could be offered'],['Tenant leaves',o.recover?'receivers fall back on their own heating at full peak':'nothing depends on it'],['Receiver leaves',o.recover?'all heat goes back to the dry coolers — keep their full size':'—']].map(([a,b])=>`<div><b>${a}</b> <span class="sub">${b}</span></div>`).join('');
   let h=tabBar('opts')+`<h2>Three options, side by side, in no order</h2>
-  <p class="draft">Each option gains and gives up something. <span class="k">Nothing is added up; nothing wins.</span></p>
+  <p class="draft">Each option gains and gives up something.</p>
   <div class="opts">${opts.map(o=>`<div class="opt"><div class="kind">${o.id.toUpperCase()}</div><b>${esc(o.name)}</b><div class="sub">${esc(o.gives)}</div></div>`).join('')}</div>
   <div class="tt"><table><thead><tr><th></th>${opts.map(o=>`<th>${o.id.toUpperCase()}</th>`).join('')}</tr></thead><tbody>`;
   for(const [party,rr] of rows){ h+=`<tr class="party"><td colspan="${opts.length+1}">${esc(party)}</td></tr>`;

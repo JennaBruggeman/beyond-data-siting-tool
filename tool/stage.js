@@ -36,7 +36,7 @@ function tilesFor(sd){
       const all=document.createElement('details'); all.className='alld'; all.innerHTML='<summary>All the detail</summary>';
       secs[0].before(tiles); tiles.after(all); for(const x of all0) all.appendChild(x);
       // anything else loose after the sections (notes, legends) goes into the fold too, except the step's buttons
-      let n=all.nextElementSibling; while(n&&!n.classList.contains('flowfoot')){ const nx=n.nextElementSibling; if(!n.classList.contains('xpbtn')&&!n.classList.contains('coolbar')&&!n.classList.contains('tmore')) all.appendChild(n); n=nx; }
+      let n=all.nextElementSibling; while(n&&!n.classList.contains('flowfoot')){ const nx=n.nextElementSibling; if(!n.classList.contains('xpbtn')&&!n.classList.contains('coolbar')&&!n.classList.contains('tmore')&&!n.classList.contains('fstuck')) all.appendChild(n); n=nx; }
       tiles.querySelectorAll('.tile').forEach(b=>b.onclick=()=>{ const s=secs[+b.dataset.i]; if(s) secCard(s, b.querySelector('.tt').textContent); }); } }
 }
 /* cards inside the card (J.B., 17 Oct: "the add-ons need to be their own card and each add-on opens another new card, because this right-hand toolbar is in the way").

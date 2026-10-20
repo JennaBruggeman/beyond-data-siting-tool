@@ -137,7 +137,8 @@ function bestSetups(){ const A=BD.S.answers, keep=JSON.parse(JSON.stringify(A)),
   try{ for(const c of combos){ Object.keys(A).forEach(k=>delete A[k]); Object.assign(A,JSON.parse(JSON.stringify(keep)));
       for(const id of ['inside','outside','plantAt','gens']){ const d=byId(id); if(d&&(!d.when||d.when(A))) d.set(A,c[id]); }
       A.mw=null; BD.modelReset&&BD.modelReset(); const f=E().siteFacts(); const hi=f.mw?f.mw[1]:0; if(!(hi>0.05)) continue;
-      const typ=Math.min(2.5,hi); A.mw=+(c.size==='large'?hi:c.size==='mid'?(typ+hi)/2:typ).toFixed(1); A.mwPick=c.size; BD.modelReset&&BD.modelReset();
+      const fm=BD.fitMax?BD.fitMax():null; if(fm==null) continue; const top=fm; /* a set-up is only counted at sizes where everything fits (J.B. 20 Oct) */
+      const typ=Math.min(2.5,top); A.mw=+(c.size==='large'?top:c.size==='mid'?(typ+top)/2:typ).toFixed(1); A.mwPick=c.size; BD.modelReset&&BD.modelReset();
       const L=oppScreen(), k=L.map(o=>o.s).join(''); const n=cnt(L);
       const ch=['inside','outside','plantAt','gens'].filter(id=>{ const d=byId(id); return d&&d.k(keep)!==d.k(A); }).length+(A.mw!==keep.mw?1:0);
       const gk=k+'|'+L.map(o=>GATES.map(g=>o.G[g][0]).join('')).join(''); const prev=out.get(gk); if(!prev||ch<prev.ch) out.set(gk,{k:gk,counts:n,list:L,ch,ans:JSON.parse(JSON.stringify(A)),mw:A.mw}); } }
@@ -164,7 +165,7 @@ BD.oppBest=oppBest; BD.bestSetups=bestSetups;
 function ladderHTML(L){ return Array.isArray(L.rules)&&L.rules.length?`<table class="cl">${L.rules.map(x=>`<tr><td>${esc(x.rung)}</td><td>Vancouver ${BD.rsPill(x.van[0])}<small>${esc(x.van[1]||'')}</small>Edmonton ${BD.rsPill(x.edm[0])}<small>${esc(x.edm[1]||'')}</small></td></tr>`).join('')}</table>`:'<p class="sub">not yet read</p>'; }
 function oppBody(n,c){ const {L,G}=gates(n,c);
   return `<h3>At this site, gate by gate</h3><table class="cl">${GATES.map(g=>`<tr><td>${g}</td><td>${gp(G[g][0])}<small>${esc(G[g][1])}</small></td></tr>`).join('')}</table>
-  <h3>Rules, rung by rung</h3>${ladderHTML(L)}
+  ${Array.isArray(L.rules)&&L.rules.length&&L.rules.every(x=>x.van[0]==='na'&&x.edm[0]==='na')?'':`<h3>Rules, rung by rung</h3>${ladderHTML(L)}`/* J.B. 20 Oct: no rules, no row */}
   <h3>Not yet known</h3><p class="sub">${esc((L.unknowns||[]).join('; ')||'—')}</p><h3>How proven</h3><p class="sub">${esc(L.basis||'')}</p>${L.visual?`<p class="sub">Drawn as: ${esc(L.visual)}</p>`:''}
   <h3>Sources</h3>${BD.srcList((L.sources||[]).concat(...(Array.isArray(L.rules)?L.rules.map(x=>x.sources||[]):[]),['vanUses2026','edmUses2026']))}`; }
 function opp3d(n,c){ const M=c.M, d={site:c.f,boxes:[]}; if(M&&M.F&&M.ring){ const F=M.F;
