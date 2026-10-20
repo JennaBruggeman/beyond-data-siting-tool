@@ -10734,7 +10734,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "opportunity",
 "name": "Own gas plant: heat with the power",
 "formula": "heat = electric output ÷ power-to-heat ratio; total efficiency 66–80%",
-"coef": "reciprocating engines 0.8–2.0 MW of heat per MW of power (27–41% electric, 77–80% total, HHV); gas turbines 0.9–1.7 (24–36%, 66–71%) (US EPA 2015, derived from Table 1-3). Rules: Clean Electricity Regulations, units ≥ 25 MW on fossil fuel, 65 t CO2/GWh from 2035 (held in abeyance in Alberta); Alberta TIER $95/t in 2026, sites ≥ 100,000 t a year; BC: waste discharge authorization above 5 MW of combustion; self-supply legal in BC (UCA s. 1(d)) and Alberta (EUA s. 2(1)(b), same property); Alberta Reg 117/2026 gives ≥ 75 MW data centres tethered to new generation connection priority (law-firm summaries; the regulation text was blocked)",
+"coef": "reciprocating engines 0.8–2.0 MW of heat per MW of power (27–41% electric, 77–80% total, HHV); gas turbines 0.9–1.7 (24–36%, 66–71%) (US EPA 2015, derived from Table 1-3). Rules: Clean Electricity Regulations, units ≥ 25 MW on fossil fuel, 65 t CO2/GWh from 2035 (held in abeyance in Alberta); Alberta TIER $95/t in 2026, sites ≥ 100,000 t a year; BC: waste discharge authorization above 5 MW of combustion; self-supply legal in BC (UCA s. 1(d)) and Alberta (EUA s. 2(1)(b), same property); Alberta Reg 117/2026 (read in full): data centres of 75 MW or more from the transmission system may be tethered to new generation or storage able to supply at least their maximum demand, located anywhere (no location is set) and of any fuel (the AESO's first intake is gas only, a proposal); tethered requests are processed first (s. 6); bridged service up to 3 years (s. 9); in a supply shortfall large data centres are cut before everyone else (s. 10); the AESO may require zoning approvals and water licences first (s. 7); the regulation expires 31 May 2035",
 "unit": "MW heat per MW electric",
 "sources": [
 "epaCHP2015",
@@ -10743,7 +10743,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "emaWDA",
 "bcUCAs1",
 "bjSelfSupply",
-"bjBYOG2026"
+"alta117_2026"
 ],
 "source_roles": [
 {
@@ -10761,11 +10761,11 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "verified": true
 },
 {
-"id": "bjBYOG2026",
-"term": "tethered ≥ 75 MW",
+"id": "alta117_2026",
+"term": "tethered ≥ 75 MW, s. 2, 5, 6",
 "role": "rule",
-"conf": 60,
-"verified": false
+"conf": 95,
+"verified": true
 }
 ],
 "conf": 70,
@@ -17120,7 +17120,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "technology",
 "rules": {
 "vancouver": "self-supply is legal (UCA s. 1(d)); a waste discharge authorization above 5 MW of combustion; Clean Electricity Regulations for units of 25 MW or more (65 t CO2/GWh from 2035); no explicit gas ban found",
-"edmonton": "Alberta Reg 117/2026: data centres of 75 MW or more tethered to new generation get connection priority (AESO first intake gas only, a proposal); TIER $95/t in 2026; Clean Electricity Regulations in abeyance in Alberta (law-firm summaries; the regulation text was blocked)"
+"edmonton": "Alberta Reg 117/2026: data centres of 75 MW or more tethered to new generation or storage get connection priority (s. 5–6; any fuel in the regulation, the AESO's first intake gas only, a proposal); TIER $95/t in 2026; Clean Electricity Regulations in abeyance in Alberta (federal–Alberta agreement)"
 },
 "rule_state": {
 "vancouver": "approval",
@@ -17138,7 +17138,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "bcUCAs1",
 "emaWDA",
 "sor2024_263",
-"bjBYOG2026",
+"alta117_2026",
 "caAbMOU2026"
 ],
 "sources": [
