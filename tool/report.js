@@ -8,6 +8,7 @@
 const BD=window.BD; const {$,esc,fmt}=BD; const E=()=>BD.eng;
 const PAL={
  screen:{ink:'#e9e6e1',mute:'#a8a49d',faint:'#5d5b57',acc:'#CC746C',fill:'rgba(204,116,108,.20)',plant:'#7d7a74',gen:'#b9b5ae',bg:'none',lot:'rgba(255,255,255,.03)',ctx:'rgba(255,255,255,.07)',lotFill:'rgba(255,255,255,.02)',bfill:'rgba(204,116,108,.10)',equip:'rgba(255,255,255,.08)'},
+ w1:{ink:'#1b1b1d',mute:'#616164',faint:'#bababc',acc:'#d4202b',fill:'#f5d1d5',plant:'#a8a8ab',gen:'#616164',bg:'#ffffff',lot:'#f5d1d5',ctx:'#ececec',lotFill:'#ffffff',bfill:'#f8dfe2',equip:'#f3f3f3'},
  v6:{ink:'#1d1e20',mute:'#5f5d58',faint:'#b9b6ae',acc:'#9b7946',fill:'#ebe2d2',plant:'#9a978f',gen:'#5f5d58',bg:'#f3f0ea',lot:'#f3f0ea',ctx:'#e3ded4',lotFill:'#f3f0ea',bfill:'#e9dfcd',equip:'#ebe7df'},
  print:{ink:'#222222',mute:'#6b6b6b',faint:'#c4c4c4',acc:'#CC746C',fill:'#f4dedb',plant:'#9a9a9a',gen:'#555555',bg:'#ffffff',lot:'#fafafa',ctx:'#ececeb',lotFill:'#ffffff',bfill:'#fbefed',equip:'#f2f2f2'}};
 const FONT=`font-family="Open Sans, Arial, sans-serif"`;

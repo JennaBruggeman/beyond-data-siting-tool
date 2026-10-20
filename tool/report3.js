@@ -7,8 +7,10 @@
 'use strict';
 const BD=window.BD; const {esc,fmt}=BD; const E=()=>BD.eng;
 const PW=612, PH=792, M=36;
-const K={bg:'#f3f0ea',grid:'#e3ded4',ink:'#1d1e20',mute:'#5f5d58',dim:'#9a978f',faint:'#b9b6ae',line:'#d6d1c7',red:'#c4756b',heat:'#9b7946',warm:'#c9ab7c',cold:'#5e8491',green:'#768466',panel:'#ebe7df'};
-const TYPEC={housing:'#9b7946',apartment:'#c9ab7c',office:'#5e8491',hotel:'#8fb0bb',commercial:'#9a978f',school:'#768466',campus:'#a6b08f',hospital:'#c4756b',care:'#dba69e',rec:'#6f8f9a',hall:'#c9c4ba',pool:'#7fa0ad',arena:'#8c8a85'};
+/* J.B.'s booklet, white1 (20 Oct 2026): white paper, black linework, greys, red #d4202b, the site on pink, green landscape, blue water, ochre */
+const K={bg:'#ffffff',grid:'#efefef',ink:'#1b1b1d',mute:'#616164',dim:'#a8a8ab',faint:'#bababc',line:'#dedede',red:'#d4202b',heat:'#bf8a00',warm:'#dbbe73',cold:'#1f78c7',green:'#2e9d4e',panel:'#f3f3f3',pink:'#f5d1d5'};
+const STYW={nb:{l:'#f6f6f6',r:'#e9e9e9',t:'#ffffff',e:'#a8a8ab',w:0.3},dc:{l:'#ec9aa1',r:'#e0707a',t:'#f2f2f2',e:'#1b1b1d',w:0.6},eq:{l:'#ffffff',r:'#e8e8e8',t:'#f7f7f7',e:'#1b1b1d',w:0.45},gen:{l:'#c6c6c7',r:'#a3a3a5',t:'#dedede',e:'#1b1b1d',w:0.4}};
+const TYPEC={housing:'#bf8a00',apartment:'#dbbe73',office:'#1f78c7',hotel:'#bcd5ed',commercial:'#a8a8ab',school:'#2e9d4e',campus:'#7dc291',hospital:'#d4202b',care:'#ec9aa1',rec:'#7b3fb4',hall:'#c6c6c7',pool:'#7fb3e0',arena:'#616164'};
 const TYPEN={housing:'non-market housing',apartment:'apartment',office:'office',hotel:'hotel',commercial:'commercial',school:'school',campus:'campus',hospital:'hospital',care:'care home',rec:'recreation centre',hall:'community hall',pool:'pool',arena:'arena'};
 const r1=v=>Math.round(v*10)/10, n0=v=>fmt(Math.round(v));
 const rng=(a,b,u,d)=>{ const f=v=>d?(+v).toFixed(d):fmt(Math.round(v)); return Math.abs(a-b)<1e-9?`${f(a)}${u?' '+u:''}`:`${f(a)}–${f(b)}${u?' '+u:''}`; };
@@ -19,7 +21,7 @@ const para=(x,y,t,n,o)=>{ const L=wrap(t,n||60); return {s:T(x,y,L,Object.assign
 const rule=(x1,y,x2,c,w)=>`<line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="${c||K.line}" stroke-width="${w||0.5}"/>`;
 const big=(x,y,v,l,o)=>{ o=o||{}; return T(x,y,v,{fs:o.fs||21,w:300,c:o.c||K.ink})+caps(x,y+11,l)+(o.sub?T(x,y+20,wrap(o.sub,o.n||32),{fs:6.2,c:K.mute}):''); };
 const dot=(x,y,r,c)=>`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${c}"/>`;
-const num=(x,y,n)=>`<circle cx="${x}" cy="${y}" r="6.2" fill="${K.red}"/>`+T(x,y+2.3,String(n),{fs:6.6,w:600,c:'#fff',a:'middle'});
+const num=(x,y,n)=>`<circle cx="${x}" cy="${y}" r="6" fill="#fff" stroke="${K.ink}" stroke-width=".7"/>`+T(x,y+2.3,String(n),{fs:6.6,w:400,c:K.ink,a:'middle'});
 // a small SVG (from report.js) placed inside a page at x, y, width w, its height from its own viewBox
 function nest(svg,x,y,w){ if(!svg) return {s:'',h:0}; const m=/viewBox="0 0 ([\d.]+) ([\d.]+)"/.exec(svg); if(!m) return {s:'',h:0}; const h=w*(+m[2])/(+m[1]);
   const s=svg.replace('width="100%"','').replace(/font-family="Open Sans, Arial, sans-serif"/g,'font-family="Barlow, Arial, sans-serif"').replace('<svg ',`<svg x="${x}" y="${y}" width="${w}" height="${h.toFixed(1)}" `); return {s,h}; }
@@ -34,7 +36,7 @@ function page(D,no,title,finding,body){ const a=D.site; return `<svg xmlns="http
  ${rule(M,PH-34,PW-M)}${T(M,PH-24,`${a.addr}, ${a.city} · ${D.level} · ${D.date}`,{fs:6,c:K.mute})}${T(PW-M,PH-24,no,{fs:6,c:K.mute,a:'end'})}</svg>`; }
 
 /* ---------- the site in isometric, fitted to a box (the same drawing kit as the site sheet) ---------- */
-function siteIso(box,o){ o=o||{}; const S=BD.sheets, m=BD.model(); if(!S||!m||!m.F) return {s:'',a:{}}; const F=m.F, {ring2,pts,prism,STY,fan}=S;
+function siteIso(box,o){ o=o||{}; const S=BD.sheets, m=BD.model(); if(!S||!m||!m.F) return {s:'',a:{}}; const F=m.F, {ring2,pts,prism,fan}=S, STY=STYW;
   const lot=ring2(m.ring).map(([x,y])=>F.toL(x,y)); const C=Math.cos(Math.PI/6), Sn=0.5; let a=1e9,b=-1e9,c=1e9,d=-1e9; for(const [u,v] of lot){ const sx=(u-v)*C, sy=(u+v)*Sn; a=Math.min(a,sx); b=Math.max(b,sx); c=Math.min(c,sy); d=Math.max(d,sy); }
   const Hb=m.existing?(m.roofH||m.H):m.H, top=Hb+8, padX=o.pad||0.18; const bw=box.x1-box.x0, bh=box.y1-box.y0;
   const sc=Math.min(bw*(1-2*padX)/(b-a),(bh*0.82)/((d-c)+top)); const ox=(box.x0+box.x1)/2-((a+b)/2)*sc, oy=box.y0+bh*0.08+top*sc-c*sc+((bh*0.82)-((d-c)+top)*sc)/2;
@@ -43,7 +45,7 @@ function siteIso(box,o){ o=o||{}; const S=BD.sheets, m=BD.model(); if(!S||!m||!m
   if(o.grid!==false){ g+=`<g stroke="${K.grid}" stroke-width="0.4">`; for(let k=-80;k<120;k++){ const y=box.y0-400+k*12; g+=`<line x1="${box.x0}" y1="${y}" x2="${box.x1}" y2="${y+bw*Math.tan(Math.PI/6)}"/><line x1="${box.x0}" y1="${y+bw*Math.tan(Math.PI/6)}" x2="${box.x1}" y2="${y}"/>`; } g+=`</g>`; }
   const objs=[]; const city=BD.S.sel.city; const tiles=Object.entries(BD.S.tiles||{}).filter(([k])=>k.startsWith(city+':')).map(([,t])=>t);
   if(o.nb!==false) for(const t of tiles) for(const bl of t.bld||[]){ const [cx,cy]=bl.c; const q=P(cx,cy,0); if(q[0]<box.x0-30||q[0]>box.x1+30||q[1]<box.y0-30||q[1]>box.y1+60) continue; if(BD.pip(cx,cy,m.ring)) continue; const [u,v]=F.toL(cx,cy); objs.push({d:u+v,s:prism(P,bl.r,0,Math.max(3,Math.min(bl.h||4,90)),STY.nb)}); }
-  g+=`<polygon points="${pts(ring2(m.ring).map(([x,y])=>P(x,y,0)))}" fill="${K.bg}" stroke="${K.mute}" stroke-width="0.4" stroke-dasharray="5 1.5 1 1.5"/>`;
+  g+=`<polygon points="${pts(ring2(m.ring).map(([x,y])=>P(x,y,0)))}" fill="${K.pink}" stroke="${K.ink}" stroke-width="0.4" stroke-dasharray="5 1.5 1 1.5"/>`;
   for(const l of m.loadSpaces||[]) g+=`<polygon points="${pts(ring2(l).map(([x,y])=>P(x,y,0)))}" fill="none" stroke="${K.dim}" stroke-width="0.3"/>`;
   const Bd=m.existing?m.foot:(m.sizedTo&&m.serverFoot?m.serverFoot:m.foot); const bq=ring2(Bd); const cen=q=>[q.reduce((s,p)=>s+p[0],0)/q.length,q.reduce((s,p)=>s+p[1],0)/q.length];
   { const [x,y]=cen(bq), [u,v]=F.toL(x,y); objs.push({d:u+v,s:prism(P,Bd,0,Hb,STY.dc)}); }
@@ -91,21 +93,22 @@ async function collect(){ const e=E(), f=e.siteFacts(), A=BD.S.answers, m=BD.mod
   return {secs,e,f,A,m,mw,rec,d,near,nets,r,rL,heat,best,EC,worth,refs,prec,D,fitMax,opps,site,font,note,lead,level:D.level,date:D.date,tier:D.tier,picks:BD.spec?BD.spec.list():[]}; }
 
 /* ---------- pages ---------- */
-function pCover(D){ const {f,mw,r,rL,rec,heat,site}=D; const iso=siteIso({x0:M,y0:140,x1:PW-M,y1:560},{pipe:rec,air:!rec});
+function pCover(D){ const {f,mw,r,rL,rec,heat,site}=D; const iso=siteIso({x0:M,y0:136,x1:PW-M,y1:500},{pipe:rec,air:!rec});
   const within=heat.length, fac=[r.facMWh[0]/1000,r.facMWh[1]/1000];
   let s=`<rect width="${PW}" height="${PH}" fill="${K.bg}"/>${caps(M,34,'Beyond Data · site report')}${caps(PW-M,34,D.date,{a:'end'})}`;
   s+=T(M,82,site.addr,{fs:30,w:600})+T(M,102,`${site.city} · ${f.zone||''} · ${fmt(f.lot||0)} m² lot`,{fs:10,c:K.mute})+T(M,120,`Report level: ${D.level}`,{fs:8.5,c:K.red});
   s+=iso.s;
   // the lot's numbers
-  const y=604; s+=rule(M,y-26,PW-M,K.ink,0.5);
+  const y=540; s+=rule(M,y-24,PW-M,K.ink,0.5);
   s+=big(M,y,`${r1(mw)} MW`,'servers',{sub:D.fitMax?`the most that fits here with its plant: ${D.fitMax.toFixed(1)} MW`:''})+big(M+138,y,rng(fac[0],fac[1],''),'GWh of electricity a year',{sub:`${rng(r.fac[0],r.fac[1],'MW',1)} at the meter at full load`});
   s+=big(M+276,y,rec?rng(r.avail[0]/1000,r.avail[1]/1000,''):'none',rec?'GWh of heat offered a year':'heat recovered',{sub:rec?'after a heat pump':`liquid cooling would offer ${rng(rL.avail[0]/1000,rL.avail[1]/1000,'GWh')} a year`})+big(M+414,y,fmt(within),'buildings within 3 km',{sub:'that could take heat; by type, on the heat page'});
-  const p=para(M,672,'This report reads one lot for one data centre. It shows what fits, what moves in and out, who gains and who gives up, and what the lot could become. Every figure is a range from published sources, not a design or a quote; operators\' figures are their claims.',110,{fs:8.2});
-  s+=p.s+T(M,672+p.h+6,'Lines in the drawings: brown, heat; slate blue, power; dashed, possible; the lot line, dash-dot. Neighbours at their measured heights.',{fs:6.4,c:K.mute});
+  const p=para(M,598,'This report reads one lot for one data centre. It shows what fits, what moves in and out, who gains and who gives up, and what the lot could become. Every figure is a range from published sources, not a design or a quote; operators\' figures are their claims.',110,{fs:8.2});
+  s+=p.s+T(M,598+p.h+6,'In the drawings: the data centre in red, its lot in pink with a dash-dot line; ochre, heat; blue, power and water; dashed, possible. Neighbours at their measured heights.',{fs:6.4,c:K.mute});
+  { const st=templatesStrip(D,M,668,PW-2*M); s+=st.s; }
   s+=rule(M,PH-34,PW-M)+T(M,PH-24,`Generated by the Beyond Data tool · ${D.site.city} · figures as of ${D.date}`,{fs:6,c:K.mute});
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${PW} ${PH}" width="100%" font-family="Barlow, Arial, sans-serif" role="img" aria-label="Cover">${D.font}${s}</svg>`; }
 
-function pSite(D,no){ const {f,m,mw,prec,fitMax}=D, R2=BD.report2, pal=R2.PAL.v6; let s='';
+function pSite(D,no){ const {f,m,mw,prec,fitMax}=D, R2=BD.report2, pal=R2.PAL.w1; let s='';
   const plan=nest(R2.planSVG(m,pal,{w:300,maxH:300}),M,112,262); s+=caps(M,108,'Plan')+plan.s;
   const sec=nest(R2.sectionSVG(m,pal,{w:440}),M,112+plan.h+18,262); s+=caps(M,112+plan.h+14,'Section')+sec.s;
   // how much fits: floor-only range, everything fits, the size chosen
@@ -240,21 +243,34 @@ function nearMap(D,x0,y0,w,h){ const {f,d}=D; if(h<120) return ''; const R=1000,
   for(const [t,c] of Object.entries(by).sort((a,b)=>(b[1][0]+b[1][1]+b[1][2])-(a[1][0]+a[1][1]+a[1][2]))){ s+=dot(X+3,y-2.5,2.4,TYPEC[t]||K.dim)+T(X+10,y,TYPEN[t]||t,{fs:6.6}); [c[0],c[0]+c[1],c[0]+c[1]+c[2]].forEach((v,i)=>{ s+=T(X+150+i*40,y,fmt(v),{fs:6.6,a:'end'}); }); y+=12; }
   s+=T(X,y+8,wrap('Buildings in the tool\'s heat lists (measured, licensed or assessed), counted within each distance. Homes in private houses are not listed.',56),{fs:6,c:K.mute});
   return s; }
+function gateMark(x,y,v){ const r=4.4;
+  if(v==='yes') return `<circle cx="${x}" cy="${y}" r="${r}" fill="${K.green}"/><path d="M${x-2},${y} l1.5,1.6 l2.8,-3.2" fill="none" stroke="#fff" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>`;
+  if(v==='chg') return `<circle cx="${x}" cy="${y}" r="${r}" fill="${K.bg}" stroke="${K.heat}" stroke-width="1.2"/><circle cx="${x}" cy="${y}" r="1.8" fill="${K.heat}"/>`;
+  if(v==='no') return `<circle cx="${x}" cy="${y}" r="${r}" fill="${K.red}"/><path d="M${x-1.8},${y-1.8} l3.6,3.6 M${x+1.8},${y-1.8} l-3.6,3.6" stroke="#fff" stroke-width="1.1" stroke-linecap="round"/>`;
+  if(v==='nk') return `<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="${K.dim}" stroke-width=".7" stroke-dasharray="1.6 1.2"/>`+T(x,y+2.2,'?',{fs:6,c:K.mute,a:'middle',w:600});
+  return `<line x1="${x-2.5}" y1="${y}" x2="${x+2.5}" y2="${y}" stroke="${K.faint}" stroke-width=".8"/>`; }
 function pOpps(D,no){ const {opps,picks}=D; let s=''; const fams=[...new Set(opps.map(o=>o.fam))]; const FC={Heat:K.heat,Electricity:K.cold,Water:'#7fa0ad','Land and time':K.green,People:K.red,Materials:K.mute};
-  const STS=[['yes','Possible here'],['chg','Possible with a change'],['nk','Not ruled out'],['no','Not here']]; const SC={yes:K.green,chg:K.heat,nk:K.dim,no:K.red};
-  const X0=M+70, XM=M+150, XG=M+318, X2=PW-M-110, Y0=140, Y1=640; const GK=['physics','land','rules','demand','time','money']; const oy=i=>Y0+(Y1-Y0)*(i+0.5)/opps.length; const famY={}, stY={};
-  fams.forEach((fm,i)=>{ const idx=opps.map((o,k)=>o.fam===fm?k:-1).filter(k=>k>=0); famY[fm]=(oy(idx[0])+oy(idx[idx.length-1]))/2; });
-  STS.forEach(([k],i)=>{ stY[k]=Y0+60+i*((Y1-Y0-120)/3); });
-  const curve=(x1,y1,x2,y2,c,w,op)=>`<path d="M${x1},${y1} C${(x1+x2)/2},${y1} ${(x1+x2)/2},${y2} ${x2},${y2}" fill="none" stroke="${c}" stroke-width="${w}" opacity="${op}"/>`;
-  opps.forEach((o,i)=>{ const y=oy(i), pk=picks.includes(o.n); s+=curve(X0+6,famY[o.fam],XM-4,y,FC[o.fam]||K.dim,1,0.6); s+=curve(XG+62,y,X2-6,stY[o.s]||stY.nk,SC[o.s]||K.dim,pk?1.4:0.8,pk?0.95:0.5);
-    s+=T(XM,y+2.5,o.n,{fs:6.6,w:pk?600:300,c:pk?K.red:K.ink}); GK.forEach((g,j)=>{ const v=(o.G[g]||[])[0]; const gx=XG+j*11; s+=v==='yes'?dot(gx,y,3,K.green):v==='chg'?dot(gx,y,3,K.heat):v==='no'?dot(gx,y,3,K.red):v==='nk'?`<circle cx="${gx}" cy="${y}" r="2.6" fill="none" stroke="${K.dim}" stroke-width=".7"/>`:`<line x1="${gx-2}" y1="${y}" x2="${gx+2}" y2="${y}" stroke="${K.faint}" stroke-width=".7"/>`; }); });
-  GK.forEach((g,j)=>{ s+=`<text transform="translate(${XG+j*11+2},${Y0-6}) rotate(-50)" font-size="5.6" fill="${K.mute}">${g}</text>`; });
-  fams.forEach(fm=>{ s+=`<circle cx="${X0}" cy="${famY[fm]}" r="6" fill="${FC[fm]||K.dim}"/>`+T(X0-10,famY[fm]+2.5,fm,{fs:7.6,w:600,a:'end'}); });
-  STS.forEach(([k,l])=>{ const n=opps.filter(o=>o.s===k).length; s+=`<circle cx="${X2}" cy="${stY[k]}" r="${4+n*0.8}" fill="${SC[k]}"/>`+T(X2+12+n*0.8,stY[k]-1,l,{fs:7.6,w:600})+T(X2+12+n*0.8,stY[k]+8,`${n} opportunit${n===1?'y':'ies'}`,{fs:6.2,c:K.mute}); });
-  s+=T(M,Y1+26,wrap(`Each line runs from a family of exchanges to an opportunity, then to how it stands on this lot. The dots are the six gates the tool tests: filled green passes, brown passes with a change, red fails, open not yet known, a dash does not apply. "Possible here" means every gate the tool can test passes: physics, land, rules, demand, time and money; it is not a recommendation.${picks.length?' In red: the ones chosen for the speculative pages that follow.':''}`,120),{fs:6.6,c:K.mute});
-  const n=opps.filter(o=>o.s!=='no').length; return page(D,no,'Opportunities',`${n} of ${opps.length} opportunities are not ruled out on this lot.`,s); }
-
-function pSpec(D,no,n){ const R2=BD.report2, pal=R2.PAL.v6, c={m:D.m,f:D.f,d:D.d}; const sd=R2.specData(c,n); let s='';
+  const GK=['physics','land','rules','demand','time','money']; const ST={yes:['Possible here',K.green],chg:['Possible with a change',K.heat],nk:['Not ruled out',K.mute],no:['Not here',K.red]};
+  // the key, first
+  let ky=112; s+=caps(M,ky,'How to read the dots: six tests on this lot'); ky+=14; const KEY=[['yes','passes'],['chg','passes with a change'],['nk','not yet known'],['no','fails'],['na','does not apply']];
+  let kx=M; for(const [v,l] of KEY){ s+=gateMark(kx+5,ky-2.5,v)+T(kx+14,ky,l,{fs:7}); kx+=14+l.length*3.6+18; }
+  // counts by outcome
+  let cx=M; ky+=22; for(const k of ['yes','chg','nk','no']){ const n=opps.filter(o=>o.s===k).length; s+=T(cx,ky+4,String(n),{fs:18,w:300,c:n?ST[k][1]:K.faint})+T(cx+(n>9?22:13),ky+4,ST[k][0].toLowerCase(),{fs:6.8,c:K.mute}); cx+=128; }
+  const X0=M+64, XM=M+92, XG=M+262, XS=XG+6*13+12, Y0=ky+44, Y1=PH-96; const oy=i=>Y0+(Y1-Y0)*(i+0.5)/opps.length; const famY={};
+  fams.forEach(fm=>{ const idx=opps.map((o,k)=>o.fam===fm?k:-1).filter(k=>k>=0); famY[fm]=(oy(idx[0])+oy(idx[idx.length-1]))/2; });
+  GK.forEach((g,j)=>{ s+=`<text transform="translate(${XG+j*13+2},${Y0-12}) rotate(-50)" font-size="5.8" fill="${K.mute}">${g}</text>`; });
+  s+=caps(XS,Y0-12,'On this lot');
+  opps.forEach((o,i)=>{ const y=oy(i), pk=picks.includes(o.n), st=ST[o.s]||ST.nk;
+    if(i%2===0) s+=`<rect x="${XM-4}" y="${y-(Y1-Y0)/opps.length/2}" width="${PW-M-XM+4}" height="${(Y1-Y0)/opps.length}" fill="${K.panel}" opacity=".55"/>`;
+    s+=`<path d="M${X0+6},${famY[o.fam]} C${(X0+XM)/2},${famY[o.fam]} ${(X0+XM)/2},${y} ${XM-6},${y}" fill="none" stroke="${FC[o.fam]||K.dim}" stroke-width="1" opacity=".6"/>`;
+    { const L=wrap(o.n,44).slice(0,2); s+=T(XM,y+2.4-(L.length-1)*4,L,{fs:6.6,lh:8,w:pk?600:300,c:pk?K.red:K.ink}); }
+    GK.forEach((g,j)=>{ s+=gateMark(XG+j*13,y,(o.G[g]||[])[0]); });
+    const by=v=>GK.filter(g=>(o.G[g]||[])[0]===v); const why=o.s==='no'?`fails: ${by('no').join(', ')}`:o.s==='nk'?`not yet known: ${by('nk').join(', ')}`:o.s==='chg'?`needs a change: ${by('chg').join(', ')}`:'every test passes';
+    s+=T(XS,y-0.6,st[0],{fs:6.8,w:600,c:st[1]})+T(XS,y+7.4,why,{fs:6,c:K.mute}); });
+  fams.forEach(fm=>{ s+=`<circle cx="${X0}" cy="${famY[fm]}" r="5" fill="${FC[fm]||K.dim}"/>`+T(X0-9,famY[fm]+2.5,fm,{fs:7.4,w:600,a:'end'}); });
+  s+=T(M,Y1+22,wrap(`Possible here means every test the tool can run passes; it is not a recommendation. An unknown is a question the tool cannot answer yet, not a failure.${picks.length?' In red: the opportunities chosen for the speculative pages that follow.':''}`,120),{fs:6.4,c:K.mute});
+  const n=opps.filter(o=>o.s!=='no').length; return page(D,no,'Opportunities',`${n} of ${opps.length} opportunities are not ruled out on this lot; ${opps.filter(o=>o.s==='yes').length} pass every test.`,s); }
+function pSpec(D,no,n){ const R2=BD.report2, pal=R2.PAL.w1, c={m:D.m,f:D.f,d:D.d}; const sd=R2.specData(c,n); let s='';
   const fl=nest(R2.specFlow(n,pal,c),(PW-380)/2,112,380); s+=fl.s; let y=112+fl.h+16;
   const pl=nest(R2.oppPlanSVG(c,n,pal),M,y,230); s+=caps(M,y-4,'Where')+pl.s;
   const X=M+250; let yy=y+4; s+=caps(X,yy,'What it could offer'); yy+=12;
@@ -277,7 +293,7 @@ async function pOptions(D,no){ const {e,f,near,nets,A}=D; const opts=e.optionSet
 
 function pCities(D,no){ const {refs,EC,worth,f}=D; let s=''; const here=refs.find(x=>x.id==='here'), ed=refs.find(x=>x.id==='edmd'), vm=refs.find(x=>x.id==='vanm');
   const van=f.city==='van'?here:vm, edm=f.city==='edm'?here:ed; if(!van||!edm) return '';
-  const pairs=[['Grid carbon of the electricity','t CO₂e a year',van.n.co2,edm.n.co2],['What a MWh of heat is worth','$ after the heat pump',[worth('van'),worth('van')],[worth('edm'),worth('edm')]],['Gas the heat replaces','$ per GJ',[EC.gas.van/3.6,EC.gas.van/3.6],[EC.gas.edm/3.6,EC.gas.edm/3.6]],['Electricity, energy charges','$ per MWh, demand charges left out',[EC.elec.van,EC.elec.van],[EC.elec.edm,EC.elec.edm]],['Rain on the worked-example roof','m³ a year',[van.site&&van.site.roof?van.site.roof*1.1595*0.8:0,0],[edm.site&&edm.site.roof?edm.site.roof*0.4225*0.8:0,0]]];
+  const pairs=[['Grid carbon of the electricity','t CO₂e a year',van.n.co2,edm.n.co2],['What a MWh of heat is worth','$ after the heat pump',[worth('van'),worth('van')],[worth('edm'),worth('edm')]],['Gas the heat replaces','$ per GJ',[EC.gas.van/3.6,EC.gas.van/3.6],[EC.gas.edm/3.6,EC.gas.edm/3.6]],['Electricity, energy charges','$ per MWh, demand charges left out',[EC.elec.van,EC.elec.van],[EC.elec.edm,EC.elec.edm]],['Hours at or below about 8 °C','a year, dry coolers alone (CWEC typical year)',[3300,3300],[5500,5500]],['Rain on the worked-example roof','m³ a year',[van.site&&van.site.roof?van.site.roof*1.1595*0.8:0,0],[edm.site&&edm.site.roof?edm.site.roof*0.4225*0.8:0,0]]];
   let y=128; const X0=M+200, X1=PW-M-90; const lab=(c,a)=>`${c} ${a[0]<0.5&&a[0]>-0.5&&a[1]===a[0]?'about 0':a[1]!==a[0]&&a[1]?rng(a[0],a[1],''):n0(a[0])}`;
   for(const [l,u,a,b] of pairs){ const mx=Math.max(a[1]||a[0],b[1]||b[0],1e-9); s+=T(M,y+6,l,{fs:7.4,w:400})+T(M,y+15,u,{fs:6,c:K.mute});
     const w1=Math.max(0,(X1-X0)*(a[1]||a[0])/mx), w2=Math.max(0,(X1-X0)*(b[1]||b[0])/mx); s+=`<rect x="${X0}" y="${y}" width="${w1}" height="8" fill="${K.cold}"/>`+T(X0+w1+4,y+7,lab('Vancouver',a),{fs:6.4});
@@ -288,11 +304,36 @@ function pCities(D,no){ const {refs,EC,worth,f}=D; let s=''; const here=refs.fin
   return page(D,no,'Two cities','The same data centre in Vancouver and Edmonton: the grid, the climate and the price of gas change what it gives.',s); }
 
 /* ---------- the report ---------- */
-async function pages(D){ const out=[]; let k=1; const nn=()=>String(k++).padStart(2,'0'); const t=D.tier;
-  out.push(pCover(D)); out.push(pSite(D,nn())); out.push(pFlows(D,nn())); out.push(pHeat(D,nn())); out.push(pPower(D,nn())); out.push(pWater(D,nn())); out.push(pTime(D,nn()));
-  out.push(pOpps(D,nn())); for(const n of D.picks) out.push(pSpec(D,nn(),n));
-  if(t!=='resident'){ out.push(await pOptions(D,nn())); const c=pCities(D,nn()); if(c) out.push(c); }
+const FALLBACK={resident:['cover','fits','flows','time','opps','spec','sources'],community:['cover','fits','flows','heat','power','water','time','opps','spec','options','cities','sources'],full:['cover','fits','flows','heat','power','water','time','opps','spec','options','cities','logic','sources']};
+const PAGES_T={cover:'The lot',fits:'What fits',flows:'What moves in and out',heat:'Heat',power:'Power',water:'Water',time:'Over time, and next door',opps:'Opportunities',spec:'Could become',options:'Three options',cities:'Two cities',logic:'How it is worked out',sources:'Sources'};
+function plan(t){ const R=BD.TPL&&BD.TPL.reports; return R&&R[t]?R[t].map(p=>p.id):FALLBACK[t]||FALLBACK.full; }
+async function pages(D){ const out=[]; let k=1; const nn=()=>String(k++).padStart(2,'0'); D.plan=plan(D.tier);
+  for(const id of D.plan){ if(id==='cover') out.push(pCover(D)); else if(id==='fits') out.push(pSite(D,nn())); else if(id==='flows') out.push(pFlows(D,nn())); else if(id==='heat') out.push(pHeat(D,nn()));
+    else if(id==='power') out.push(pPower(D,nn())); else if(id==='water') out.push(pWater(D,nn())); else if(id==='time') out.push(pTime(D,nn())); else if(id==='opps') out.push(pOpps(D,nn()));
+    else if(id==='spec'){ for(const n of D.picks) out.push(pSpec(D,nn(),n)); } else if(id==='options') out.push(await pOptions(D,nn())); else if(id==='cities'){ const c=pCities(D,nn()); if(c) out.push(c); } else if(id==='logic') out.push(pLogic(D,nn())); }
   return out.filter(Boolean); }
+// the three templates and their reports, drawn small: this one lit (cover and the logic page)
+function templatesStrip(D,x,y,w){ const T0=[['resident','What it means for me'],['community','What it means for the neighbourhood'],['full','How it is worked out']]; let s=caps(x,y,'Three reports, one for each template; this one in ink'); y+=12; const TT=T0;
+  const ids=Object.keys(PAGES_T); const cw=Math.min(28,(w-150)/ids.length);
+  ids.forEach((id,i)=>{ s+=`<text transform="translate(${x+150+i*cw+3},${y+4}) rotate(-40)" font-size="5.2" fill="${K.mute}">${esc(PAGES_T[id])}</text>`; }); y+=10;
+  for(const [t,nm] of TT){ const me=t===D.tier, L=plan(t); s+=T(x,y+6,nm,{fs:6.6,w:me?600:300,c:me?K.ink:K.mute});
+    ids.forEach((id,i)=>{ const on=L.includes(id), px=x+150+i*cw; s+=on?`<rect x="${px}" y="${y}" width="${cw*0.62}" height="8" fill="${me?K.ink:K.faint}"/>`:`<rect x="${px}" y="${y}" width="${cw*0.62}" height="8" fill="none" stroke="${K.line}" stroke-width=".5"/>`; });
+    s+=T(x+150+ids.length*cw+4,y+6.5,`${L.filter(i=>i!=='sources').length} sections`,{fs:6,c:me?K.ink:K.mute}); y+=13; }
+  return {s,h:y}; }
+function pLogic(D,no){ const G=BD.TPL&&BD.TPL.graph, N=BD.TPL&&BD.TPL.nodes; if(!G||!N) return ''; let s='';
+  const st=G.stages, col={}; st.forEach(([c])=>col[c]=[]); G.nodes.forEach(([id,sg])=>(col[sg]||(col[sg]=[])).push(id)); const ins={}; G.edges.forEach(([a,b])=>(ins[b]=ins[b]||[]).push(a));
+  const X0=M+4, X1=PW-M-4, Y0=150, Y1=560, cwid=(X1-X0)/st.length, pos={};
+  st.forEach(([c,name],j)=>{ const L=col[c]||[]; const key=id=>{ const f=(ins[id]||[]).map(k=>pos[k]).filter(Boolean); return f.length?f.reduce((a,q)=>a+q[1],0)/f.length:1e4+L.indexOf(id); }; const nc=Math.ceil(L.length/34), rows=Math.ceil(L.length/nc), gy=(Y1-Y0)/34;
+    L.sort((a,b)=>key(a)-key(b)).forEach((id,i)=>{ pos[id]=[X0+j*cwid+10+(i%nc)*12, Y0+Math.floor(i/nc)*gy+(34-rows)*gy/2]; });
+    s+=T(X0+j*cwid+6,Y0-22,wrap(name,16).slice(0,2),{fs:6.4,w:600}); s+=`<line x1="${X0+j*cwid}" y1="${Y0-30}" x2="${X0+j*cwid}" y2="${Y1+6}" stroke="${K.line}" stroke-width=".4"/>`; });
+  const TC={resident:K.ink,community:K.heat,full:K.faint}; const rank={resident:0,community:1,full:2};
+  for(const [a,b] of G.edges){ const p=pos[a], q=pos[b]; if(!p||!q) continue; s+=`<path d="M${p[0]},${p[1]} C${(p[0]+q[0])/2},${p[1]} ${(p[0]+q[0])/2},${q[1]} ${q[0]},${q[1]}" fill="none" stroke="${K.dim}" stroke-width=".35" opacity=".5"/>`; }
+  for(const [id,[x,y]] of Object.entries(pos)){ const t=(N[id]||{}).tier||'full'; s+=dot(x,y,2.2,TC[t]); }
+  let y=Y1+30; s+=caps(M,y,'Each dot is one part of the tool; colour is the first report that shows it'); y+=14; let x=M;
+  for(const [t,l] of [['resident','in all three reports'],['community','neighbourhood and full reports'],['full','full report only']]){ const n=Object.values(N).filter(v=>v.tier===t).length; s+=dot(x+3,y-2.5,3,TC[t])+T(x+10,y,`${l} (${n})`,{fs:7}); x+=170; }
+  y+=24; s+=T(M,y,wrap('Every part runs in every report; a report only changes what is shown. The full report lists, for each result, the parts it is worked out from (see the appendix). Lines are what feeds what.',120),{fs:7.2});
+  y+=40; const st2=templatesStrip(D,M,y,PW-2*M); s+=st2.s;
+  return page(D,no,'How it is worked out',`${Object.keys(N).length} parts in ${st.length} stages, from the lot to what could become.`,s); }
 async function view(){ BD.flow.capture&&BD.flow.capture(); BD.S.view2='tab'; BD.S.tab='report'; BD.scene3d&&BD.scene3d.hide(); document.body.classList.add('wide');
   const sd=document.getElementById('side'); sd.innerHTML='<h2>Report</h2><p class="sub">Drawing the report…</p>'; await BD.oppPrep(); const D=await collect(); const P=await pages(D);
   sd.innerHTML=`<h2>Report</h2><p class="lead">${esc(D.level)}: <span class="k">${esc(D.site.addr)}</span>, ${esc(D.site.city)}. ${P.length} pages.</p><p class="sub">Change “Showing” above for the report at another level.</p>
@@ -303,14 +344,14 @@ async function view(){ BD.flow.capture&&BD.flow.capture(); BD.S.view2='tab'; BD.
 const LIB='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
 const load=src=>new Promise((ok,no)=>{ const s=document.createElement('script'); s.src=src; s.onload=ok; s.onerror=()=>no(new Error('could not load the PDF library')); document.head.appendChild(s); });
 async function b64(url){ const b=new Uint8Array(await (await fetch(url)).arrayBuffer()); let s=''; for(let i=0;i<b.length;i+=0x8000) s+=String.fromCharCode.apply(null,b.subarray(i,i+0x8000)); return btoa(s); }
-function img(svg,wpx){ return new Promise((ok,no)=>{ const s=svg.replace('width="100%"',`width="${wpx}" height="${wpx*PH/PW}"`); const im=new Image(); im.onload=()=>{ const cv=document.createElement('canvas'); cv.width=wpx; cv.height=Math.round(wpx*PH/PW); const x=cv.getContext('2d'); x.fillStyle=K.bg; x.fillRect(0,0,cv.width,cv.height); x.drawImage(im,0,0,cv.width,cv.height); ok(cv.toDataURL('image/jpeg',0.9)); }; im.onerror=()=>no(new Error('a page could not be drawn')); im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s); }); }
+function img(svg,wpx){ return new Promise((ok,no)=>{ const s=svg.replace('width="100%"',`width="${wpx}" height="${wpx*PH/PW}"`); const im=new Image(); im.onload=()=>{ const cv=document.createElement('canvas'); cv.width=wpx; cv.height=Math.round(wpx*PH/PW); const x=cv.getContext('2d'); x.fillStyle='#ffffff'; x.fillRect(0,0,cv.width,cv.height); x.drawImage(im,0,0,cv.width,cv.height); ok(cv.toDataURL('image/jpeg',0.9)); }; im.onerror=()=>no(new Error('a page could not be drawn')); im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s); }); }
 async function pdf(D,P){ if(!window.jspdf) await load(LIB); const {jsPDF}=window.jspdf; const doc=new jsPDF({unit:'pt',format:'letter'});
   try{ const [l,sb]=await Promise.all([b64('fonts/Barlow-Light.ttf'),b64('fonts/Barlow-SemiBold.ttf')]); doc.addFileToVFS('BL.ttf',l); doc.addFont('BL.ttf','Barlow','normal'); doc.addFileToVFS('BS.ttf',sb); doc.addFont('BS.ttf','Barlow','bold'); }catch(e){}
   const FN=doc.getFontList().Barlow?'Barlow':'helvetica';
   for(let i=0;i<P.length;i++){ if(i) doc.addPage(); doc.addImage(await img(P[i],1836),'JPEG',0,0,PW,PH); }
   // the sources and the appendix as text (selectable)
   const tx=(t,o)=>{ o=o||{}; doc.setFont(FN,o.bold?'bold':'normal'); doc.setFontSize(o.size||7.5); doc.setTextColor(...(o.color||[95,93,88])); for(const ln of doc.splitTextToSize(String(t).replace(/[₂]/g,'2').replace(/[→]/g,'to'),PW-2*M)){ if(y>PH-50){ doc.addPage(); bgp(); y=60; } doc.text(ln,M,y); y+=(o.size||7.5)*1.4; } y+=o.after||0; };
-  const bgp=()=>{ doc.setFillColor(243,240,234); doc.rect(0,0,PW,PH,'F'); }; let y=60;
+  const bgp=()=>{ doc.setFillColor(255,255,255); doc.rect(0,0,PW,PH,'F'); }; let y=60;
   doc.addPage(); bgp(); tx('Read with',{size:13,bold:true,color:[29,30,32],after:6}); tx('Ranges, not designs: screening figures from published sources, not a substitute for an engineer, a utility study or a permit review. Operator figures are claims. Heat offered is not heat used.',{size:8.5,after:14});
   if(D.D.left.length){ tx('Left out at this level',{size:10,bold:true,color:[29,30,32],after:4}); tx(D.D.left.join(' · ')+'. They still count in every result.',{after:12}); }
   if(D.tier==='full'){ tx('What each result is worked out from',{size:10,bold:true,color:[29,30,32],after:4}); for(const G of D.D.groups) for(const n of G.items) for(const sct of n.secs) if(sct[2]&&sct[2].length) tx(`${n.title} · ${sct[0]}: ${sct[2].join(' · ')}`,{size:6.8,after:2}); y+=10; }
@@ -318,5 +359,5 @@ async function pdf(D,P){ if(!window.jspdf) await load(LIB); const {jsPDF}=window
   return doc.output('blob'); }
 BD.report3={collect,pages,pdf,view};
 BD.views=BD.views||{}; BD.views.report=view;
-{ const st=document.createElement('style'); st.textContent='.rpages{display:flex;flex-direction:column;gap:14px;margin:12px 0}.rpage{box-shadow:0 1px 6px rgba(0,0,0,.35);border-radius:2px;overflow:hidden;background:#f3f0ea}.rpage svg{display:block}'; document.head.appendChild(st); }
+{ const st=document.createElement('style'); st.textContent='.rpages{display:flex;flex-direction:column;gap:14px;margin:12px 0}.rpage{box-shadow:0 1px 6px rgba(0,0,0,.35);border-radius:2px;overflow:hidden;background:#fff}.rpage svg{display:block}'; document.head.appendChild(st); }
 })();

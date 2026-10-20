@@ -112,6 +112,24 @@ out = {'date': '2026-10-19', 'status': 'draft: judged by Claude from each node\'
                  {'id': 'full', 'name': 'How it is worked out', 'who': 'engineers, architects, bylaw professionals', 'asks': 'every setup question'}],
        'rule': 'every node runs in every tier; a tier sets what is asked and shown; facts are never switched off',
        'nodes': {k: {'tier': t, 'parties': p.split(), 'why': r} for k, (t, p, r) in T.items()}}
+# the report each template gets (J.B. 20 Oct 2026: "3 different reports for each of the templates, and this should be diagrammed in the template").
+# Pages in order; a page is shown in a template's report when that template shows what the page is about (same rank rule as the nodes).
+PAGES = [
+ ('cover', R, 'The lot', 'address, the site drawn, four numbers'),
+ ('fits', R, 'What fits', 'plan, section, how big'),
+ ('flows', R, 'What moves in and out', 'electricity, heat, water, carbon'),
+ ('heat', C, 'Heat', 'who could take it, at what cost'),
+ ('power', C, 'Power', 'the meter, generators, the grid'),
+ ('water', C, 'Water', 'evaporated against rain'),
+ ('time', R, 'Over time, and next door', '50 years; sound; who is within 1 km'),
+ ('opps', R, 'Opportunities', 'six tests for each'),
+ ('spec', R, 'Could become', 'one page for each one you chose'),
+ ('options', C, 'Three options', 'what each gains and gives up'),
+ ('cities', C, 'Two cities', 'the same design in both'),
+ ('logic', F, 'How it is worked out', 'every part of the tool, by stage'),
+ ('sources', R, 'Sources', 'as text'),
+]
+out['reports'] = {tid: [{'id': i, 'title': t, 'what': w} for i, r, t, w in PAGES if rank[r] <= rank[tid]] for tid in ('resident', 'community', 'full')}
 # graph for the tool's diagram thumbnail: stage columns and wires, from the same diagram data
 _D = json.load(open(os.path.join(H, 'diagram_data.json')))
 out['graph'] = {'stages': [[s['id'], s['name']] for s in _D['stages']],
