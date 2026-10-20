@@ -276,7 +276,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "quantities": 178,
 "conditions": 101,
 "opportunities": 21,
-"sources": 691
+"sources": 694
 }
 },
 "stages": [
@@ -10888,10 +10888,11 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "opportunity",
 "name": "Sidewalk kept clear by its heat",
 "formula": "m² = heat offered (W) ÷ design heat per m²",
-"coef": "Edmonton design 430–700 W/m² (NRC CBD 160, 1974: sheltered to very exposed); nearest published figure for a Vancouver-like climate is Portland OR, 271–350 W/m² (ASHRAE classes I–III, 1995 data via Lund), used as an analogue; low-temperature fluid works (Holland MI 35 °C, Klamath Falls 38 °C); snow (ECCC normals 1991–2020): Vancouver 36.6 cm a year, 7.4 days with snowfall, 8.2 days with at least 1 cm on the ground; Edmonton 126.7 cm, 54.7 days, 145.1 days; no data-centre snowmelt built (gap)",
+"coef": "Edmonton design 430–700 W/m² (NRC CBD 160, 1974: sheltered to very exposed); ASHRAE 2015 lists no Canadian city; Seattle, the nearest listed (27 snowfall hours a year), is used for Vancouver: 420–647 W/m² at the 99% level (snow-free area ratio 0.5 to 1), about 36 kWh/m² a year at ratio 0.5; low-temperature fluid works (Holland MI 35 °C, Klamath Falls 38 °C); snow (ECCC normals 1991–2020): Vancouver 36.6 cm a year, 7.4 days with snowfall, 8.2 days with at least 1 cm on the ground; Edmonton 126.7 cm, 54.7 days, 145.1 days; no data-centre snowmelt built (gap)",
 "unit": "m²",
 "sources": [
 "nrcCBD160",
+"ashrae2015ch51",
 "lundSnow",
 "hollandSnow",
 "ecccNormals2020",
@@ -10907,10 +10908,10 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "verified": true
 },
 {
-"id": "lundSnow",
-"term": "Portland 271–350 W/m²",
+"id": "ashrae2015ch51",
+"term": "Seattle 420–647 W/m²",
 "role": "coefficient",
-"conf": 50,
+"conf": 70,
 "verified": true
 },
 {
@@ -10921,7 +10922,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "verified": true
 }
 ],
-"conf": 50,
+"conf": 60,
 "status": "derived 19 Oct 2026",
 "direction": "",
 "trial": "",
@@ -10933,7 +10934,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "van": 0,
 "edm": 3,
 "both": 1,
-"gen": 2
+"gen": 3
 }
 },
 {
@@ -10996,10 +10997,11 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "test",
 "name": "First payer refunded when neighbours connect",
 "formula": "the customer who pays for an extension or substation is refunded a share when later customers connect to it",
-"coef": "BC Hydro distribution: automatic refund reviews at the 5th anniversary (fee $25k to under $1M), 5th and 10th ($1–4.99M), 5th, 10th and 15th (≥ $5M); BC Hydro transmission (TS 6): partial refund if later load exceeds 5% of capacity (workshop slides; tariff text not read). AESO: within 20 years later customers pay a share and the ISO may refund (no refund under $10,000); data centres pay their own upgrades (Alberta). EPCOR: refund if a new customer shares the extension in the initial term",
+"coef": "BC Hydro distribution: automatic refund reviews at the 5th anniversary (fee $25k to under $1M), 5th and 10th ($1–4.99M), 5th, 10th and 15th (≥ $5M); BC Hydro transmission (Tariff Supplement 6, read): a reinforcement payment is refunded if a later customer uses it within 5 years; later customers on a shared extension pay a share of replacement cost, and the first customer gets the depreciated value (3% a year), unless BC Hydro's added load is 5% of capacity or less. AESO: within 20 years later customers pay a share and the ISO may refund (no refund under $10,000); data centres pay their own upgrades (Alberta). EPCOR: refund if a new customer shares the extension in the initial term",
 "unit": "rule",
 "sources": [
 "bchDEP2025",
+"bchTS6",
 "bchTCIP2026",
 "aesoTariff4",
 "aesoTariff5",
@@ -11031,7 +11033,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 ],
 "upstream": 50,
 "city": {
-"van": 2,
+"van": 3,
 "edm": 4,
 "both": 0,
 "gen": 0
@@ -11089,7 +11091,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "opportunity",
 "name": "Firefighting water for neighbours",
 "formula": "a tank on the lot, non-potable, for the fire department after an earthquake; drinking water makes the operator a water supplier",
-"coef": "BCBC 2024 and NBC 3.2.5.7 (Alberta uses the NBC Alberta Edition, same clause per the NFC(AE) cross-reference): every building has water for firefighting; a sprinklered building is deemed to comply; where city supply is limited, a supply on site may be needed, sized for at least 30 minutes of fire-department hose streams (NFPA 1142 and the ISO fire flow guide named; volume not sized: standards not read). Vancouver: sprinklers rely on the mains; the seismic saltwater system (DFPS) covers downtown, part of Kitsilano and to VGH and takes about 80 years to complete. BC DWPR: a non-potable, unconnected, marked supply needs no permit; drinking water needs construction and operating permits. Alberta: drinking water piped to neighbours makes it a private utility waterworks (Potable Water Regulation s. 1(1)(l)); which approval it needs is in the Activities Designation Regulation, not read",
+"coef": "BCBC 2024 and NBC 3.2.5.7 (Alberta uses the NBC Alberta Edition, same clause per the NFC(AE) cross-reference): every building has water for firefighting; a sprinklered building is deemed to comply; where city supply is limited, a supply on site may be needed, sized for at least 30 minutes of fire-department hose streams (NFPA 1142 and the ISO fire flow guide named; volume not sized: standards not read). Vancouver: sprinklers rely on the mains; the seismic saltwater system (DFPS) covers downtown, part of Kitsilano and to VGH and takes about 80 years to complete. BC DWPR: a non-potable, unconnected, marked supply needs no permit; drinking water needs construction and operating permits. Alberta: drinking water piped to neighbours makes it a private utility waterworks (Potable Water Regulation s. 1(1)(l)); a registration if it only passes on city water, an approval if it draws its own source (Activities Designation Regulation)",
 "unit": "rule",
 "sources": [
 "bcbc2024_3257",
@@ -11097,7 +11099,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "bcab2005",
 "vanOEM2018",
 "bcDWPR",
-"abPWR277"
+"abPWR277",
+"abADR276"
 ],
 "source_roles": [
 {
@@ -11132,7 +11135,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "upstream": 70,
 "city": {
 "van": 4,
-"edm": 2,
+"edm": 3,
 "both": 0,
 "gen": 0
 }
@@ -15319,13 +15322,14 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 ],
 "edm": [
 "approval",
-"non-potable firefighting water: the building code clause is the same as BC (NBC Alberta Edition 3.2.5.7) and the Potable Water Regulation covers only drinking water; drinking water piped to neighbours would make it a private utility waterworks (Alta Reg 277/2003 s. 1(1)(l)), with an engineer-stamped design and an approval or registration (which, under the Activities Designation Regulation, not read)"
+"non-potable firefighting water: the building code clause is the same as BC (NBC Alberta Edition 3.2.5.7) and the Potable Water Regulation covers only drinking water; drinking water piped to neighbours would make it a private utility waterworks (Alta Reg 277/2003 s. 1(1)(l)) with an engineer-stamped design: a registration if it only passes on city water, an approval if it draws its own river water or ordinary groundwater (Alta Reg 276/2003 Sch. 1–2, Div. 5)"
 ],
 "sources": [
 "bcDWPR",
 "bcbc2024_3257",
 "nfcAB2023_5635",
-"abPWR277"
+"abPWR277",
+"abADR276"
 ]
 }
 ],
@@ -16027,7 +16031,10 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "euaS2": "Alberta Electric Utilities Act, SA 2003 c E-5.1 (office consolidation current as of 6 Feb 2026; local copy data/raw/codes/eua.txt), s. 1(1)(vv.1) self-supply = production on a property the person owns or rents where any of it is consumed on that property by that owner or tenant; s. 2(1)(b) the Act does not apply to self-supply consumed solely on that property by that owner or tenant",
 "bcbc2024_3257": "BC Building Code 2024, Div. B 3.2.5.7 and Note A-3.2.5.7.(1) (local copy data/raw/codes/bcbc2024.pdf): every building has an adequate water supply for firefighting; sprinklered or standpiped buildings are deemed to comply (except some mass timber); where municipal supply is limited, supplemental supply on site may be needed; on-site volume for at least 30 minutes of fire-department hose streams; ISO Needed Fire Flow Guide, NFPA 1142 and AWWA named as useful",
 "nfcAB2023_5635": "National Fire Code 2023 Alberta Edition, Div. B 5.6.3.5 (local copy data/raw/codes/nfc_ab2023.pdf): water supply for firefighting on construction sites, cross-referencing Note A-3.2.5.7 of the NBC(AE), the same building clause as BCBC 3.2.5.7 (NBC 2020 3.2.5.7 checked in data/raw/codes/nbc.txt)",
-"abPWR277": "Alberta Potable Water Regulation, Alta Reg 277/2003 (consolidated to 199/2025, current as of 27 Aug 2025; J.B. download 19 Oct 2026; data/raw/codes/ab_potable_water_reg_277_2003.pdf), s. 1(1)(l): a private utility is a waterworks system owned and operated by anyone other than a municipality, development owner or similar, except one serving only a single family dwelling or farmstead; s. 1(2): applies only to waterworks listed in the Activities Designation Regulation (not read); s. 4: designs stamped by a professional engineer"
+"abPWR277": "Alberta Potable Water Regulation, Alta Reg 277/2003 (consolidated to 199/2025, current as of 27 Aug 2025; J.B. download 19 Oct 2026; data/raw/codes/ab_potable_water_reg_277_2003.pdf), s. 1(1)(l): a private utility is a waterworks system owned and operated by anyone other than a municipality, development owner or similar, except one serving only a single family dwelling or farmstead; s. 1(2): applies only to waterworks listed in the Activities Designation Regulation (not read); s. 4: designs stamped by a professional engineer",
+"ashrae2015ch51": "ASHRAE Handbook — HVAC Applications 2015 (SI), ch. 51 Snow Melting and Freeze Protection (J.B. via UBC Library, 19 Oct 2026; data/raw/codes, not shared), Table 1 and Table 3: US cities only, no Canadian; Seattle, WA (27 snowfall hours a year): heat flux not exceeded in 99% of snowfall hours 420 W/m² (snow-free area ratio 0.5) and 647 W/m² (ratio 1); annual energy at ratio 0.5: 3.0 kWh/m² melting + 33.0 idling",
+"bchTS6": "BC Hydro Electric Tariff Supplement No. 6, Agreement for new transmission service customers (accepted for filing 1991; J.B. download 19 Oct 2026), App. 1 s. 5(e): a payment for system reinforcement is recalculated and the first customer refunded if a later customer uses it within 5 years; s. 10: later customers pay a share of the replacement cost of a common extension in proportion to contract demand, the first customer is paid its depreciated value (3% a year); for 7 years capacity is not excess if the first customer shows it needs it within 3 years; no payment if BC Hydro adds load of 5% of capacity or less, or if the first customer takes under 30% of its contract demand for 36 months — https://app.bchydro.com/content/dam/hydro/medialib/internet/documents/appcontent/your_account/Electric_Tariff_Supplement_Number_6.pdf",
+"abADR276": "Alberta Activities Designation Regulation, Alta Reg 276/2003 (CanLII, J.B. download 19 Oct 2026), Sch. 1 Div. 5 (approval): a waterworks system that is a private utility and draws surface water or groundwater other than high-quality groundwater; Sch. 2 Div. 5 (registration): a private utility using high-quality groundwater, or one that consists solely of a distribution system supplied with potable water from an approved or registered waterworks"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -19211,7 +19218,10 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "euaS2": "edm",
 "bcbc2024_3257": "van",
 "nfcAB2023_5635": "edm",
-"abPWR277": "edm"
+"abPWR277": "edm",
+"ashrae2015ch51": "gen",
+"bchTS6": "van",
+"abADR276": "edm"
 },
 "city_gaps": {
 "van": [
