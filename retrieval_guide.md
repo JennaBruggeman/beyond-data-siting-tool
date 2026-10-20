@@ -1,6 +1,6 @@
 # Retrieval guide — what J.B. fetches, and what Claude hunts next
 
-Updated 15 Oct 2026 (statuses and section 6); first written 13 Oct 2026, after the decision to treat Vancouver and Edmonton equally and the deep dive (sources/14). Sites listed for J.B. are ones that block automated reading or need a login, a licence or a click-through. Save everything into one folder (e.g. `sources_fetched/`) and attach it.
+Updated 19 Oct 2026 (section 12: the ten avenues); earlier 15 Oct 2026 (statuses and section 6); first written 13 Oct 2026, after the decision to treat Vancouver and Edmonton equally and the deep dive (sources/14). Sites listed for J.B. are ones that block automated reading or need a login, a licence or a click-through. Save everything into one folder (e.g. `sources_fetched/`) and attach it.
 
 Status: ☐ to do · ⏳ requested / in progress · ✅ done and folded into the register · ◇ optional.
 
@@ -196,3 +196,28 @@ D. Still open from before
 
 E. Meeting: BC Assessment, Jeremy Buhler, Mon 19 Oct, 1 pm.
   - 19 Oct meeting (J.B.): calculated values per building are allowed, rounded to a sensible figure. UBC also holds the Residential Inventory Extract and site descriptions. Script written: tool/bca/bca_derive.py (runs on J.B.'s computer; writes heat demand per parcel to 2 significant figures, use group and heating group; prints counts only). Next: J.B. gets access, runs --inspect on each file, sends the column summary.
+
+## 12. Retrieval list, 19 Oct 2026 (night), after building the ten avenues
+Received today and folded in: ECCC climate normals 1991–2020 (Vancouver Int'l, Edmonton Airport); North Saskatchewan River outline (EPSB, Altalis); Alta Reg 117/2026 (re-sent; already held); Electric Utilities Act (re-sent; same version as the local copy); Alberta Potable Water Regulation 277/2003. Found by Claude: RS 2290 credit 10 ¢/kWh (BCUC G-64-26).
+Already held locally (no need to fetch): BCBC 2024, NBC 2020, NFC 2020, NFC 2023 Alberta Edition, VBBL 2025 Books I and II, Electric Utilities Act, Alta Reg 117/2026 — data/raw/codes. Claude checks this folder before asking.
+Since section 11, also resolved: rainwater tank cost (Vancouver toolkit 2014, US EPA 2013).
+
+A. Changes results (yours to fetch)
+- ☐ H1 CanVec Hydro, BC (1:50K shapefile; or a Geospatial Data Extraction Tool cut around Vancouver) — the Vancouver shoreline, so "Cooling from the inlet" measures distance to the water. https://open.canada.ca/data/en/dataset/9d96e8c9-22fe-4ad2-b5e8-94a6991b744b → Prepackaged Shapefiles → Go to resource.
+- ☐ H2 Alberta Activities Designation Regulation (Alta Reg 276/2003, kings-printer.alberta.ca) — which approval a private drinking-water system for neighbours needs (Schedule 1 and 2, Division 5).
+- ☐ H3 NFPA 1142, chapter 4 (free read-only view at nfpa.org with an account) — how big a firefighting tank must be.
+- ☐ H4 ASHRAE Handbook, HVAC Applications, "Snow Melting and Freeze Protection" (UBC Library) — design watts per m² for Vancouver and Edmonton (the tool now uses NRC 1974 for Edmonton and Portland, Oregon for Vancouver).
+- ☐ H5 Edmonton encroachment agreements guide (edmonton.ca; blocked for Claude) — who owns heated pipes under a City sidewalk.
+- ☐ H6 BC Hydro Electric Tariff Supplement No. 6 (transmission connections) — the refund rule when later customers connect. https://app.bchydro.com/content/dam/hydro/medialib/internet/documents/appcontent/your_account/Electric_Tariff_Supplement_Number_6.pdf
+- ☐ H7 BC Data Centre and Hydrogen Production Facility Power Supply Regulation (BC Reg 8/2026) and the Water Sustainability Act (bclaws.gov.bc.ca; blocked for Claude) — whether the WSA covers sea water for cooling.
+- ☐ H8 EPCOR 2026 commercial water and wastewater rates (Edmonton water figures are still placeholders).
+- ☐ W1 (still open) Environmental Quality Guidelines for Alberta Surface Waters (2018) — confirms or replaces the 3 °C river limit.
+
+B. Ask
+- ☐ City of Vancouver: a current map of the Dedicated Fire Protection System (seismic saltwater system); only a 2009 page was found. Check VanMap for a layer first.
+- ☐ BC Assessment files: run bca_derive.py --inspect on each extract when access comes through.
+- Still open from section 11 B: Blatchford questions; Downtown District Energy temperatures; pipe cost per metre; Gold Bar reclaimed water; G5 ground floor; Edmonton non-market housing.
+
+C. Still open from section 11 A and D (unchanged): B1–B3 Blatchford documents; F1 Alberta Renewable Fuels Standard; L1 Edmonton library branches; E1 CER BC profile; S1 Alberta smoke chart; Metro Vancouver treatment plant addresses; City non-potable water systems map; Canadian RAS costs; utility capacity maps; greenhouse area by region (P4); CSA C448 (optional).
+
+D. Gaps no download fixes (published figures not found): Alberta PPA strike prices; litres of condensate per kW of cooling; a data-centre snowmelt precedent; the dollar value of avoided sewer upgrades in either city.
