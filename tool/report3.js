@@ -181,7 +181,7 @@ function pHeat(D,no){ const {heat,best,worth,f,rec,r,rL,m,note}=D; let s=''; con
   s+=`<rect x="${X0}" y="${py(wv)}" width="${X1-X0}" height="${Y1-py(wv)}" fill="${K.heat}" opacity=".07"/>`;
   for(const p of pts0) s+=dot(px(p.econ.route),py(p.econ.lcohMid),p.t==='housing'||p.t==='apartment'?1.6:2.1,TYPEC[p.t]||K.dim);
   s+=`<line x1="${X0}" y1="${py(wv)}" x2="${X1}" y2="${py(wv)}" stroke="${K.heat}" stroke-width="1"/>`+T(X1-4,py(wv)-4,`what the heat is worth (the gas it replaces): ${wvT}/MWh`,{fs:6.2,c:K.heat,a:'end',halo:true});
-  if(best){ const bx=px(best.len), by=py(best.mid.lcoh); s+=`<circle cx="${bx}" cy="${by}" r="5" fill="none" stroke="${K.red}" stroke-width="1"/>`+T(bx+8,by+3,`best set-up found: $${best.mid.lcoh.toFixed(0)}/MWh`,{fs:6.4,c:K.red,halo:true}); }
+  if(best){ const bx=px(best.len), by=py(best.mid.lcoh); s+=`<circle cx="${bx}" cy="${by}" r="5" fill="none" stroke="${K.red}" stroke-width="1"/>`+T(bx,by-9,`best set-up found: $${best.mid.lcoh.toFixed(0)}/MWh`,{fs:6.4,c:K.red,a:'middle',halo:true}); }
   s+=axisTicks(X0,X1,Y1,[0,0.25,0.5,0.75,1].map(p=>({p,v:p*xmax})),v=>fmt(v)+(v===xmax?' m':''));
   for(let v=ylo;v<=yhi*1.001;v*=10) for(const m of [1,3]){ const u=v*m; if(u>yhi*1.001) continue; s+=`<line x1="${X0}" y1="${py(u)}" x2="${X1}" y2="${py(u)}" stroke="${K.grid}" stroke-width=".4"/>`+T(X0-4,py(u)+2,`$${fmt(u)}`,{fs:5.6,c:K.mute,a:'end'}); }
   s+=T(X0-4,Y0-6,'$ per MWh (log scale)',{fs:5.6,c:K.mute,a:'start'});
@@ -208,7 +208,7 @@ function pPower(D,no){ const {r,refs,m,mw,f,note,opps}=D; let s=''; const iso=si
   return page(D,no,'Power',`A customer first: ${rng(r.fac[0],r.fac[1],'MW',1)} at the meter. What it gives back is flexibility, and only the operator can give it.`,s); }
 
 function pWater(D,no){ const {refs,f,e,A}=D; let s=''; const mm={van:1159.5,edm:422.5};
-  const rows=refs.filter(x=>x.id!=='qu2').map(x=>{ const roof=x.site&&x.site.roof; return {lab:x.lab,ev:x.id==='van4'?null:x.n.evap[1],rain:roof?roof*mm[x.city]/1000*0.8:null,me:x.id==='here'}; });
+  const rows=refs.filter(x=>x.id!=='qu2').map(x=>{ const roof=x.site&&x.site.roof; return {lab:x.lab+(x.city!==f.city&&x.site&&x.site.roof?' (its worked-example lot)':''),ev:x.id==='van4'?null:x.n.evap[1],rain:roof?roof*mm[x.city]/1000*0.8:null,me:x.id==='here'}; });
   const hereR=refs.find(x=>x.id==='here'); if(hereR&&!hereR.n.evap[1]) rows.splice(1,0,{lab:'Cooling towers instead, this site (at most)',ev:D.r.facMWh[1]*1.5,rain:null});
   const max=Math.max(1,...rows.map(r=>Math.max(r.ev||0,r.rain||0))); let y=120; const X0=M+170, X1=PW-M-80, px=v=>(X1-X0)*v/max;
   s+=caps(M,y-8,'Water a year: what the cooling evaporates against the rain on the roof'); y+=8;
@@ -295,7 +295,7 @@ async function pOptions(D,no){ const {e,f,near,nets,A}=D; const opts=e.optionSet
 
 function pCities(D,no){ const {refs,EC,worth,f}=D; let s=''; const here=refs.find(x=>x.id==='here'), ed=refs.find(x=>x.id==='edmd'), vm=refs.find(x=>x.id==='vanm');
   const van=f.city==='van'?here:vm, edm=f.city==='edm'?here:ed; if(!van||!edm) return '';
-  const pairs=[['Grid carbon of the electricity','t CO₂e a year',van.n.co2,edm.n.co2],['What a MWh of heat is worth','$, the gas it replaces',[worth('van'),worth('van')],[worth('edm'),worth('edm')]],['Gas the heat replaces','$ per GJ',[EC.gas.van/3.6,EC.gas.van/3.6],[EC.gas.edm/3.6,EC.gas.edm/3.6]],['Electricity, energy charges','$ per MWh, demand charges left out',[EC.elec.van,EC.elec.van],[EC.elec.edm,EC.elec.edm]],['Hours at or below about 8 °C','a year, dry coolers alone (CWEC typical year)',[3300,3300],[5500,5500]],['Rain on the worked-example roof','m³ a year',[van.site&&van.site.roof?van.site.roof*1.1595*0.8:0,0],[edm.site&&edm.site.roof?edm.site.roof*0.4225*0.8:0,0]]];
+  const pairs=[['Grid carbon of the electricity','t CO₂e a year',van.n.co2,edm.n.co2],['What a MWh of heat is worth','$, the gas it replaces',[worth('van'),worth('van')],[worth('edm'),worth('edm')]],['Gas the heat replaces','$ per GJ',[EC.gas.van/3.6,EC.gas.van/3.6],[EC.gas.edm/3.6,EC.gas.edm/3.6]],['Electricity, energy charges','$ per MWh, demand charges left out',[EC.elec.van,EC.elec.van],[EC.elec.edm,EC.elec.edm]],['Hours at or below about 8 °C','a year, cool enough for outside air alone (CWEC typical year)',[3300,3300],[5500,5500]],['Rain on the worked-example roof','m³ a year',[van.site&&van.site.roof?van.site.roof*1.1595*0.8:0,0],[edm.site&&edm.site.roof?edm.site.roof*0.4225*0.8:0,0]]];
   let y=128; const X0=M+200, X1=PW-M-90; const lab=(c,a)=>`${c} ${a[0]<0.5&&a[0]>-0.5&&a[1]===a[0]?'about 0':a[1]!==a[0]&&a[1]?rng(a[0],a[1],''):n0(a[0])}`;
   for(const [l,u,a,b] of pairs){ const mx=Math.max(a[1]||a[0],b[1]||b[0],1e-9); s+=T(M,y+6,l,{fs:7.4,w:400})+T(M,y+15,u,{fs:6,c:K.mute});
     const w1=Math.max(0,(X1-X0)*(a[1]||a[0])/mx), w2=Math.max(0,(X1-X0)*(b[1]||b[0])/mx); s+=`<rect x="${X0}" y="${y}" width="${w1}" height="8" fill="${K.cold}"/>`+T(X0+w1+4,y+7,lab('Vancouver',a),{fs:6.4});
