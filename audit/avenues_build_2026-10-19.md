@@ -14,8 +14,8 @@ J.B.: "all of the things we've listed are supposed to be part of the tool." Rese
 | Sea or river cooling | Add-on, Water | L/s per MW | approval | approval |
 | Stormwater held | Opportunity, Water | m³ and L/s from the lot area | allowed (required) | allowed (required > 0.16 ha) |
 | Snowmelt with server heat | Opportunity, Heat | m² kept clear; snow days (CWEC) | not yet read | approval (encroachment) |
-| Emergency water | Opportunity, Water | — (NFPA not read) | allowed (non-potable) | not yet researched |
-| Condensate | Add-on, Water | hours with dew point > 15 °C (CWEC) | not yet known | not yet read |
+| Emergency water | Opportunity, Water | — (NFPA not read) | allowed (non-potable) | building code same as BC; drinking-water sharing not read |
+| Condensate | Add-on, Water | hours with dew point > 15 °C (CWEC) | allowed (VBBL 2025 Table 2.7.1.3, Column B) | not yet read |
 
 ## Computed here (not from a source)
 - CWEC: hours a year with outdoor dew point above 15 °C: Vancouver 417, Edmonton 117.
@@ -37,3 +37,6 @@ Vancouver shoreline (CanVec Hydro; Edmonton river outline in, 19 Oct); NFPA 1142
 
 ## Correction (19 Oct)
 Alta Reg 117/2026 was already in the register (alta117_2026, J.B. PDF 16 Oct); research note L wrongly called it blocked and I used a law-firm summary. J.B. re-uploaded it; read in full and the gas-plant add-on now cites it directly. All the summary's points held; the regulation adds s. 7 (AESO may require zoning approvals and water licences) and expiry 31 May 2035.
+
+## Correction 2 (19 Oct): codes already held locally
+data/raw/codes holds BCBC 2024, NBC 2020, NFC 2020, NFC 2023 Alberta Edition, VBBL 2025 (Books I and II) and the Electric Utilities Act. I asked J.B. to download some of these again by mistake. Now read from the local copies: BCBC 3.2.5.7 and its note (firefighting water; sprinklered buildings deemed to comply), the NFC(AE) cross-reference to the same NBC(AE) clause, EUA s. 1(1)(vv.1) and 2(1)(b) (self-supply, replacing the law-firm summary), and VBBL Table 2.7.1.3 (condensate as cooling-tower make-up: allowed, already in the register as vbbl2025_272).
