@@ -126,7 +126,7 @@ def main():
     elif o.desc and o.desc_text:
         for row in rows(o.desc):
             if txt(row, 2) == o.jur or not txt(row, 2).isdigit(): desc[digits(txt(row, o.desc_roll))] = txt(row, int(o.desc_text))
-    P = collections.defaultdict(lambda: {'m2': collections.Counter(), 'homes': 0.0, 'heat': collections.Counter(), 'n': 0})
+    P = collections.defaultdict(lambda: {'m2': collections.Counter(), 'homes': 0.0, 'heat': collections.Counter(), 'n': 0, 'seen': set(), 'resm2': 0.0, 'comm2': 0.0})
     stat = collections.Counter()
     if o.nonres:
         for row in rows(o.nonres):
@@ -136,9 +136,17 @@ def main():
             p = P[lc]; p['n'] += 1
             homes = num(row, 12) + num(row, 22) + num(row, 31)  # co-op, rental apartment and seniors units (guide positions 12, 22, 31)
             area = (num(row, 19) + num(row, 20)) * FT2
+            # Strata: every strata lot has its own roll and row, and each row repeats the whole building's Gross Building Area (guide:
+            # 'the total constructed area of a building'); checked 20 Oct 2026 — one parcel had 216 rolls with one area value. Count each
+            # strata building once per parcel (same gross area, basement and year built). Field 21 (strata lot area) is not used: the guide
+            # calls it the development's total, but in the 2026 extract the rows add up to about one building, so its meaning is unclear.
+            if num(row, 21) > 0:
+                key = (num(row, 19), num(row, 20), txt(row, 4))
+                if key in p['seen']: area = 0; stat['nonres strata rows: building already counted'] += 1
+                else: p['seen'].add(key)
             g = group_of(desc.get(digits(txt(row, 3)), ''), GROUP_WORDS) or ('apartment' if homes else 'other')
-            if homes: p['homes'] += homes
-            elif area: p['m2'][g] += area
+            if homes: p['homes'] += homes; p['resm2'] += area
+            elif area: p['m2'][g] += area; p['comm2'] += area
             h = group_of(txt(row, 42), HEAT_WORDS)
             if h: p['heat'][h] += 1
     if o.res:
@@ -149,19 +157,28 @@ def main():
             if not lc: stat['res unmatched'] += 1; continue
             occ, uom = txt(row, 34), txt(row, 36)
             if occ == '2403' or uom == 'STRPS': stat['res parking rows skipped'] += 1; continue  # strata parking (Inc Occupancy 2403, unit STRPS) is not a home
-            p = P[lc]; p['n'] += 1; p['homes'] += 1  # one row per dwelling (a strata unit, a house, a laneway house): guide v1.1 'a record for every building or part of a building'
+            # floor area for the size test only (never written out): strata lot area (pos 35 with code STRLA, guide v1.1; excludes common
+            # areas, so it understates the building) or a house's total finished area (pos 9)
+            # strata lot areas leave out halls and lobbies: x 1.15, BC Assessment's own allowance for common areas (Commercial Inventory
+            # Extract User Guide v1.0, field 21, for strata office and retail; borrowed here for residential strata, J.B. 20 Oct 2026)
+            p = P[lc]; p['resm2'] += (num(row, 35) * 1.15 if uom.startswith('STRLA') else num(row, 9)) * FT2
+            p['n'] += 1; p['homes'] += 1  # one row per dwelling (a strata unit, a house, a laneway house): guide v1.1 'a record for every building or part of a building'
     out = {}
     for lc, p in P.items():
         mwh = p['homes'] * HOME_MWH + sum(m2 * GJ.get(g if g in GJ else 'other', GJ['other']) / 3.6 for g, m2 in p['m2'].items())
         g = 'apartment' if p['homes'] and p['homes'] * HOME_MWH >= mwh / 2 else (p['m2'].most_common(1)[0][0] if p['m2'] else 'other')
         t = p['heat'].most_common(1)[0][0] if p['heat'] else 'unknown'
-        if mwh > 0: out[lc] = {'h': sig2(mwh), 'g': g, 't': t}  # no record counts: they could reveal unit numbers
+        # 'b': passes the size thresholds of Vancouver's GHG limits by-law, the same ones the tool uses for Edmonton (multi-family
+        # >= 100,000 ft2 = 9,290 m2, commercial >= 50,000 ft2 = 4,645 m2). Only this yes/no leaves the computer, not the area.
+        big = p['resm2'] >= 9290 or p['comm2'] >= 4645
+        if mwh > 0: out[lc] = {'h': sig2(mwh), 'g': g, 't': t, 'b': 1 if big else 0}  # no record counts: they could reveal unit numbers
     json.dump({'source': 'BC Assessment Non-Residential and Residential Inventory Extracts via UBC Abacus (licensed); values derived and rounded to 2 significant figures; no BCA field is reproduced',
                'cite': 'Contains information licensed under BC Assessment data terms for UBC researchers', 'parcels': out}, open(o.out, 'w'), separators=(',', ':'))
     # summary: counts only
     for k, v in stat.items(): print(f'{k}: {v}')
     print('parcels with a derived heat demand:', len(out))
     print('by use group:', dict(collections.Counter(v['g'] for v in out.values())))
+    print('passing the size thresholds:', sum(v['b'] for v in out.values()))
     print('by heating group:', dict(collections.Counter(v['t'] for v in out.values())))
     print('wrote', os.path.abspath(o.out))
 
