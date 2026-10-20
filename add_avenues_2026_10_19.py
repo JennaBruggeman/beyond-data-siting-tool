@@ -71,6 +71,7 @@ S.update({
  'edmARP7188': "City of Edmonton, North Saskatchewan River Valley ARP (Bylaw 7188, consolidated), Policy 3.5.1 and s. 2.6.3: major facilities only where a river-valley location is deemed essential; utility corridors prohibited except direct river crossings — https://www.edmonton.ca/city_government/documents/plans_in_effect/North_Saskatchewan_River_ARP_Consolidation.pdf",
  'howley2021': "Howley, MSc thesis, University of Alberta (2021), s. 1.1 and 2.1: North Saskatchewan River supercooling to −0.106 °C (frazil ice); winter flow about 122 m³/s after the dams — https://era.library.ualberta.ca/items/df542886-debb-4f9e-9228-d761374609c6/download/e9a4644f-cf8c-4f0b-8ddc-9978b225de69",
  'hawaiiSWAC2002': "Hawaii DBEDT, Sea water district cooling feasibility analysis (Oct 2002), p. 61–66: cold-water pipe US$12.05–12.47 M for 5.7–5.8 km, about US$2,120–2,150 per m (2002, deep ocean intake at about 500 m); 92.5% energy saving (study) — https://energy.hawaii.gov/wp-content/uploads/2011/10/SeaWaterDistrictCoolingFeasibilityAnalysisfortheStateofHawaii2002.pdf",
+ 'ecccNormals2020': "ECCC Canadian Climate Normals 1991–2020, Vancouver International (Airport) and Edmonton (Airport), CSV (J.B. download 19 Oct 2026): snowfall 36.6 / 126.7 cm a year; days with snowfall ≥ 0.2 cm 7.4 / 54.7; days with snow depth ≥ 1 cm 8.2 / 145.1, ≥ 5 cm 4.4 / 120.5; average vapour pressure July 1.5 / 1.4 kPa — https://climate.weather.gc.ca/climate_normals/index_e.html",
  'dfoScreen': "DFO, Interim code of practice: end-of-pipe fish protection screens: openings ≤ 2.54 mm; approach velocity default 0.035–0.055 m/s; may not apply to large intakes — https://www.dfo-mpo.gc.ca/pnw-ppe/standards-normes/fish-screen-grillage-poisson-eng.html",
 })
 
@@ -87,8 +88,8 @@ add('chp_heat', 'Own gas plant: heat with the power', 'MW heat per MW electric',
     [role('epaCHP2015', 'power-to-heat 0.5–1.2', 'coefficient', 80), role('sor2024_263', '≥ 25 MW, 65 t/GWh', 'rule', 90), role('bjBYOG2026', 'tethered ≥ 75 MW', 'rule', 60, False)])
 add('condensate', 'Condensate from cooling coils', 'h a year', 'characterise', ['heat_rejected'],
     'coils condense only when air is cooled below its dew point; hours a year with outdoor dew point above 15 °C (the top of ASHRAE\'s recommended IT inlet range), from CWEC',
-    'computed from CWEC: Vancouver 417 h, Edmonton 117 h a year with outdoor dew point above 15 °C, so little condensate from a data centre; US EPA rule of thumb for offices 3–10 US gal a day per 1,000 ft² conditioned (about 0.12–0.41 L/m² a day), not for data halls; litres per kW of cooling not found (gap)',
-    ['cwec', 'ashraeTC99card', 'epaWSatWork'], 50, 'computed 19 Oct 2026; yield not sourced',
+    'computed from CWEC: Vancouver 417 h, Edmonton 117 h a year with outdoor dew point above 15 °C, so little condensate from a data centre; the monthly average dew point peaks near 13 °C in Vancouver and 12 °C in Edmonton in July–August (ECCC normals, vapour pressure 1.5 and 1.4 kPa, converted); US EPA rule of thumb for offices 3–10 US gal a day per 1,000 ft² conditioned (about 0.12–0.41 L/m² a day), not for data halls; litres per kW of cooling not found (gap)',
+    ['cwec', 'ecccNormals2020', 'ashraeTC99card', 'epaWSatWork'], 50, 'computed 19 Oct 2026; yield not sourced',
     [role('ashraeTC99card', '15 °C dew point', 'coefficient', 90), role('cwec', 'dew-point hours', 'coefficient', 90), role('epaWSatWork', '3–10 gal/day per 1,000 ft²', 'coefficient', 50)])
 add('stormwater_volume', 'Stormwater held on the lot', 'm³', 'characterise', ['envelope'],
     'Vancouver: small site a 3,400–7,200 L tank; otherwise stage 1 = 15 mm × non-landscaped area, released at 5 L/s/ha, then 25 L/s/ha. Edmonton (lots over 0.16 ha): 375 m³/ha for the 100-year storm at C = 0.90 (507 for 200-year), released at 35 L/s/ha',
@@ -97,8 +98,8 @@ add('stormwater_volume', 'Stormwater held on the lot', 'm³', 'characterise', ['
     [role('vbbl2025_2425', '15 mm; 5 and 25 L/s/ha', 'rule', 90), role('epcorStorm', '375 m³/ha; 35 L/s/ha', 'rule', 80)])
 add('snowmelt_area', 'Sidewalk kept clear by its heat', 'm²', 'opportunity', ['heat_delivered'],
     'm² = heat offered (W) ÷ design heat per m²',
-    'Edmonton design 430–700 W/m² (NRC CBD 160, 1974: sheltered to very exposed); nearest published figure for a Vancouver-like climate is Portland OR, 271–350 W/m² (ASHRAE classes I–III, 1995 data via Lund), used as an analogue; low-temperature fluid works (Holland MI 35 °C, Klamath Falls 38 °C); days with snow on the ground in the CWEC typical year (the file\'s snow field, 0 or 1): Vancouver 7, Edmonton 136; no data-centre snowmelt built (gap)',
-    ['nrcCBD160', 'lundSnow', 'hollandSnow', 'cwec', 'edmSidewalk', 'edmEncroach'], 50, 'derived 19 Oct 2026',
+    'Edmonton design 430–700 W/m² (NRC CBD 160, 1974: sheltered to very exposed); nearest published figure for a Vancouver-like climate is Portland OR, 271–350 W/m² (ASHRAE classes I–III, 1995 data via Lund), used as an analogue; low-temperature fluid works (Holland MI 35 °C, Klamath Falls 38 °C); snow (ECCC normals 1991–2020): Vancouver 36.6 cm a year, 7.4 days with snowfall, 8.2 days with at least 1 cm on the ground; Edmonton 126.7 cm, 54.7 days, 145.1 days; no data-centre snowmelt built (gap)',
+    ['nrcCBD160', 'lundSnow', 'hollandSnow', 'ecccNormals2020', 'edmSidewalk', 'edmEncroach'], 50, 'derived 19 Oct 2026',
     [role('nrcCBD160', '430–700 W/m²', 'coefficient', 70), role('lundSnow', 'Portland 271–350 W/m²', 'coefficient', 50), role('hollandSnow', '35 °C waste heat', 'precedent', 60)])
 add('backup_neighbours', 'Backup power for neighbours in a blackout', 'rule', 'opportunity', ['backup_hours'],
     'only behind the data centre\'s own transfer switch, on a private line, with the utility\'s written approval; never through the utility\'s lines',
@@ -191,7 +192,7 @@ opp('Snowmelt on sidewalks and streets', {'readiness': 'speculative', 'provision
     'basis': 'Holland, Michigan melts about 690,000 ft² of sidewalks and streets with 35 °C power-plant waste heat (City claim); no data-centre snowmelt found. Research 19 Oct 2026.',
     'sources': ['hollandSnow'], 'rules': [
      {'rung': 'Street', 'van': ['unknown', 'not yet read'], 'edm': ['approval', 'an encroachment agreement for structures in the road right-of-way ($300–500); owners must clear adjacent sidewalks'], 'sources': ['edmEncroach', 'edmSidewalk']}],
-    'unknowns': ['who owns pipes under a City sidewalk', 'snowfall normals (ECCC pages did not load)'], 'visual': 'heated sidewalk along the frontage'},
+    'unknowns': ['who owns pipes under a City sidewalk'], 'visual': 'heated sidewalk along the frontage'},
     ['snowmelt_area', 'heat_delivered'])
 opp('Stormwater held for the neighbourhood', {'readiness': 'built_here', 'provisional': False,
     'basis': 'Vancouver: 192 developments manage rainwater on site, about 7,400 L/s of peak flow held back (City claim, to Sep 2025); no data centre named; holding a neighbour\'s or the street\'s water is not described. Research 19 Oct 2026.',

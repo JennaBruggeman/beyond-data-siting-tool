@@ -19,7 +19,8 @@ J.B.: "all of the things we've listed are supposed to be part of the tool." Rese
 
 ## Computed here (not from a source)
 - CWEC: hours a year with outdoor dew point above 15 °C: Vancouver 417, Edmonton 117.
-- CWEC: days with snow on the ground (the file's snow field is 0 or 1): Vancouver 7, Edmonton 136.
+- Snow (ECCC normals 1991–2020, replacing the CWEC estimate): days with ≥ 1 cm on the ground Vancouver 8.2, Edmonton 145.1; snowfall 36.6 and 126.7 cm.
+- Dew point from normal vapour pressure (July 1.5 and 1.4 kPa): about 13 and 12 °C.
 - Flow to carry heat: 24–49 L/s per MW at a 10–5 °C rise (K, derived).
 - RS 2290: 2 MW ÷ 24 kW = at least 84 households to reach the cap.
 
@@ -32,4 +33,4 @@ J.B.: "all of the things we've listed are supposed to be part of the tool." Rese
 Resident: snowmelt_area, fire_water, backup_neighbours, community_solar. Community: clean_power_price, chp_heat, stormwater_volume, grid_refund. Full: condensate. Counts now 45 / 125 / 195.
 
 ## Gaps
-Shoreline file (distance to water); ECCC snowfall normals; NFPA 1142 volumes; Alberta fire and potable-water rules; Alberta PPA strike prices; Alta Reg 117/2026 and EUA text (blocked; law-firm summaries used).
+Shoreline file (distance to water); NFPA 1142 volumes; Alberta fire and potable-water rules; Alberta PPA strike prices; Alta Reg 117/2026 and EUA text (blocked; law-firm summaries used).

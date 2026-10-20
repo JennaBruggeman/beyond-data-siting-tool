@@ -9,7 +9,7 @@
 "quantities": 178,
 "conditions": 101,
 "opportunities": 21,
-"sources": 685
+"sources": 686
 }
 },
 "stages": [
@@ -10521,10 +10521,11 @@
 "stage": "characterise",
 "name": "Condensate from cooling coils",
 "formula": "coils condense only when air is cooled below its dew point; hours a year with outdoor dew point above 15 °C (the top of ASHRAE's recommended IT inlet range), from CWEC",
-"coef": "computed from CWEC: Vancouver 417 h, Edmonton 117 h a year with outdoor dew point above 15 °C, so little condensate from a data centre; US EPA rule of thumb for offices 3–10 US gal a day per 1,000 ft² conditioned (about 0.12–0.41 L/m² a day), not for data halls; litres per kW of cooling not found (gap)",
+"coef": "computed from CWEC: Vancouver 417 h, Edmonton 117 h a year with outdoor dew point above 15 °C, so little condensate from a data centre; the monthly average dew point peaks near 13 °C in Vancouver and 12 °C in Edmonton in July–August (ECCC normals, vapour pressure 1.5 and 1.4 kPa, converted); US EPA rule of thumb for offices 3–10 US gal a day per 1,000 ft² conditioned (about 0.12–0.41 L/m² a day), not for data halls; litres per kW of cooling not found (gap)",
 "unit": "h a year",
 "sources": [
 "cwec",
+"ecccNormals2020",
 "ashraeTC99card",
 "epaWSatWork"
 ],
@@ -10562,7 +10563,7 @@
 "city": {
 "van": 0,
 "edm": 0,
-"both": 0,
+"both": 1,
 "gen": 3
 }
 },
@@ -10619,13 +10620,13 @@
 "stage": "opportunity",
 "name": "Sidewalk kept clear by its heat",
 "formula": "m² = heat offered (W) ÷ design heat per m²",
-"coef": "Edmonton design 430–700 W/m² (NRC CBD 160, 1974: sheltered to very exposed); nearest published figure for a Vancouver-like climate is Portland OR, 271–350 W/m² (ASHRAE classes I–III, 1995 data via Lund), used as an analogue; low-temperature fluid works (Holland MI 35 °C, Klamath Falls 38 °C); days with snow on the ground in the CWEC typical year (the file's snow field, 0 or 1): Vancouver 7, Edmonton 136; no data-centre snowmelt built (gap)",
+"coef": "Edmonton design 430–700 W/m² (NRC CBD 160, 1974: sheltered to very exposed); nearest published figure for a Vancouver-like climate is Portland OR, 271–350 W/m² (ASHRAE classes I–III, 1995 data via Lund), used as an analogue; low-temperature fluid works (Holland MI 35 °C, Klamath Falls 38 °C); snow (ECCC normals 1991–2020): Vancouver 36.6 cm a year, 7.4 days with snowfall, 8.2 days with at least 1 cm on the ground; Edmonton 126.7 cm, 54.7 days, 145.1 days; no data-centre snowmelt built (gap)",
 "unit": "m²",
 "sources": [
 "nrcCBD160",
 "lundSnow",
 "hollandSnow",
-"cwec",
+"ecccNormals2020",
 "edmSidewalk",
 "edmEncroach"
 ],
@@ -10663,8 +10664,8 @@
 "city": {
 "van": 0,
 "edm": 3,
-"both": 0,
-"gen": 3
+"both": 1,
+"gen": 2
 }
 },
 {
@@ -14982,8 +14983,7 @@
 }
 ],
 "unknowns": [
-"who owns pipes under a City sidewalk",
-"snowfall normals (ECCC pages did not load)"
+"who owns pipes under a City sidewalk"
 ],
 "visual": "heated sidewalk along the frontage"
 }
@@ -15748,7 +15748,8 @@
 "edmARP7188": "City of Edmonton, North Saskatchewan River Valley ARP (Bylaw 7188, consolidated), Policy 3.5.1 and s. 2.6.3: major facilities only where a river-valley location is deemed essential; utility corridors prohibited except direct river crossings — https://www.edmonton.ca/city_government/documents/plans_in_effect/North_Saskatchewan_River_ARP_Consolidation.pdf",
 "howley2021": "Howley, MSc thesis, University of Alberta (2021), s. 1.1 and 2.1: North Saskatchewan River supercooling to −0.106 °C (frazil ice); winter flow about 122 m³/s after the dams — https://era.library.ualberta.ca/items/df542886-debb-4f9e-9228-d761374609c6/download/e9a4644f-cf8c-4f0b-8ddc-9978b225de69",
 "hawaiiSWAC2002": "Hawaii DBEDT, Sea water district cooling feasibility analysis (Oct 2002), p. 61–66: cold-water pipe US$12.05–12.47 M for 5.7–5.8 km, about US$2,120–2,150 per m (2002, deep ocean intake at about 500 m); 92.5% energy saving (study) — https://energy.hawaii.gov/wp-content/uploads/2011/10/SeaWaterDistrictCoolingFeasibilityAnalysisfortheStateofHawaii2002.pdf",
-"dfoScreen": "DFO, Interim code of practice: end-of-pipe fish protection screens: openings ≤ 2.54 mm; approach velocity default 0.035–0.055 m/s; may not apply to large intakes — https://www.dfo-mpo.gc.ca/pnw-ppe/standards-normes/fish-screen-grillage-poisson-eng.html"
+"dfoScreen": "DFO, Interim code of practice: end-of-pipe fish protection screens: openings ≤ 2.54 mm; approach velocity default 0.035–0.055 m/s; may not apply to large intakes — https://www.dfo-mpo.gc.ca/pnw-ppe/standards-normes/fish-screen-grillage-poisson-eng.html",
+"ecccNormals2020": "ECCC Canadian Climate Normals 1991–2020, Vancouver International (Airport) and Edmonton (Airport), CSV (J.B. download 19 Oct 2026): snowfall 36.6 / 126.7 cm a year; days with snowfall ≥ 0.2 cm 7.4 / 54.7; days with snow depth ≥ 1 cm 8.2 / 145.1, ≥ 5 cm 4.4 / 120.5; average vapour pressure July 1.5 / 1.4 kPa — https://climate.weather.gc.ca/climate_normals/index_e.html"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -18925,13 +18926,13 @@
 "edmARP7188": "edm",
 "howley2021": "edm",
 "hawaiiSWAC2002": "gen",
-"dfoScreen": "gen"
+"dfoScreen": "gen",
+"ecccNormals2020": "both"
 },
 "city_gaps": {
 "van": [
 "untaxed_equipment",
-"free_cooling_hours_2050s",
-"snowmelt_area"
+"free_cooling_hours_2050s"
 ],
 "edm": [
 "offerable_area",
