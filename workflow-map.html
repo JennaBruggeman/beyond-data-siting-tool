@@ -276,7 +276,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "quantities": 178,
 "conditions": 101,
 "opportunities": 21,
-"sources": 695
+"sources": 696
 }
 },
 "stages": [
@@ -6161,7 +6161,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "place",
 "name": "Sea or river water as a cooling sink",
 "formula": "capacity set by the thermal limit at the outfall and mixing, not by the licence: marine ±1 °C (BC, CCME), Burrard Inlet proposed \"no further increase\"; Alberta freshwater +3 °C over ambient",
-"coef": "BC licence: cooling application $1,000; heat-exchange rental $2.25 per 1,000 m³ (min $200); DFO intake screens 2.54 mm, approach velocity 0.035–0.055 m/s (internal conflict — confirm); Alberta Water Act review as for any industrial project; Toronto Enwave precedent: 4 °C in, ≤13 °C out, 50-year agreement | 19 Oct 2026 (K): Burrard Inlet bottom water 7.6–13.9 °C all year (False Creek not sampled); North Saskatchewan near 0 °C in winter with frazil-ice risk, summer not found; flow 24–49 L/s per MW at a 10–5 °C rise (derived); pipe about US$2,120–2,150/m (Hawaii 2002, deep ocean, an upper bound); BC: cooling water needs a waste discharge authorization, Port category C for a new discharge (60–120 business days); Edmonton: river valley plan allows major facilities only where essential and bans utility corridors except crossings. Distance to shore not computed: no shoreline file in the tool yet | 19 Oct 2026 (K): Burrard Inlet bottom water 7.6–13.9 °C all year (False Creek not sampled); North Saskatchewan near 0 °C in winter with frazil-ice risk, summer not found; flow 24–49 L/s per MW at a 10–5 °C rise (derived); pipe about US$2,120–2,150/m (Hawaii 2002, deep ocean, an upper bound); BC: cooling water needs a waste discharge authorization, Port category C for a new discharge (60–120 business days); Edmonton: river valley plan allows major facilities only where essential and bans utility corridors except crossings. distance to the water: Edmonton from the North Saskatchewan River outline (Altalis via Edmonton Public Schools, tool/shore.json); Vancouver not yet (CanVec Hydro to come)",
+"coef": "BC licence: cooling application $1,000; heat-exchange rental $2.25 per 1,000 m³ (min $200); DFO intake screens 2.54 mm, approach velocity 0.035–0.055 m/s (internal conflict — confirm); Alberta Water Act review as for any industrial project; Toronto Enwave precedent: 4 °C in, ≤13 °C out, 50-year agreement | 19 Oct 2026 (K): Burrard Inlet bottom water 7.6–13.9 °C all year (False Creek not sampled); North Saskatchewan near 0 °C in winter with frazil-ice risk, summer not found; flow 24–49 L/s per MW at a 10–5 °C rise (derived); pipe about US$2,120–2,150/m (Hawaii 2002, deep ocean, an upper bound); BC: cooling water needs a waste discharge authorization, Port category C for a new discharge (60–120 business days); Edmonton: river valley plan allows major facilities only where essential and bans utility corridors except crossings. Distance to shore not computed: no shoreline file in the tool yet | 19 Oct 2026 (K): Burrard Inlet bottom water 7.6–13.9 °C all year (False Creek not sampled); North Saskatchewan near 0 °C in winter with frazil-ice risk, summer not found; flow 24–49 L/s per MW at a 10–5 °C rise (derived); pipe about US$2,120–2,150/m (Hawaii 2002, deep ocean, an upper bound); BC: cooling water needs a waste discharge authorization, Port category C for a new discharge (60–120 business days); Edmonton: river valley plan allows major facilities only where essential and bans utility corridors except crossings. distance to the water: Edmonton from the North Saskatchewan River outline (Altalis via Edmonton Public Schools, tool/shore.json); Vancouver not yet (CanVec Hydro to come) | 19 Oct 2026 (K): Burrard Inlet bottom water 7.6–13.9 °C all year (False Creek not sampled); North Saskatchewan near 0 °C in winter with frazil-ice risk, summer not found; flow 24–49 L/s per MW at a 10–5 °C rise (derived); pipe about US$2,120–2,150/m (Hawaii 2002, deep ocean, an upper bound); BC: cooling water needs a waste discharge authorization, Port category C for a new discharge (60–120 business days); Edmonton: river valley plan allows major facilities only where essential and bans utility corridors except crossings. distance to the water: Edmonton from the North Saskatchewan River outline (Altalis via Edmonton Public Schools), Vancouver from NRCan CanVec 50K Hydro (ocean and Fraser River polygons) (tool/shore.json)",
 "unit": "MW (site-specific)",
 "sources": [
 "bcWSRfees",
@@ -6177,7 +6177,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "howley2021",
 "hawaiiSWAC2002",
 "dfoScreen",
-"epsbNSR"
+"epsbNSR",
+"canvecHydroBC"
 ],
 "source_roles": [
 {
@@ -6218,7 +6219,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 ],
 "upstream": 40,
 "city": {
-"van": 5,
+"van": 6,
 "edm": 5,
 "both": 1,
 "gen": 3
@@ -16037,7 +16038,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "ashrae2015ch51": "ASHRAE Handbook — HVAC Applications 2015 (SI), ch. 51 Snow Melting and Freeze Protection (J.B. via UBC Library, 19 Oct 2026; data/raw/codes, not shared), Table 1 and Table 3: US cities only, no Canadian; Seattle, WA (27 snowfall hours a year): heat flux not exceeded in 99% of snowfall hours 420 W/m² (snow-free area ratio 0.5) and 647 W/m² (ratio 1); annual energy at ratio 0.5: 3.0 kWh/m² melting + 33.0 idling",
 "bchTS6": "BC Hydro Electric Tariff Supplement No. 6, Agreement for new transmission service customers (accepted for filing 1991; J.B. download 19 Oct 2026), App. 1 s. 5(e): a payment for system reinforcement is recalculated and the first customer refunded if a later customer uses it within 5 years; s. 10: later customers pay a share of the replacement cost of a common extension in proportion to contract demand, the first customer is paid its depreciated value (3% a year); for 7 years capacity is not excess if the first customer shows it needs it within 3 years; no payment if BC Hydro adds load of 5% of capacity or less, or if the first customer takes under 30% of its contract demand for 36 months — https://app.bchydro.com/content/dam/hydro/medialib/internet/documents/appcontent/your_account/Electric_Tariff_Supplement_Number_6.pdf",
 "abADR276": "Alberta Activities Designation Regulation, Alta Reg 276/2003 (CanLII, J.B. download 19 Oct 2026), Sch. 1 Div. 5 (approval): a waterworks system that is a private utility and draws surface water or groundwater other than high-quality groundwater; Sch. 2 Div. 5 (registration): a private utility using high-quality groundwater, or one that consists solely of a distribution system supplied with potable water from an approved or registered waterworks",
-"bcWSA": "BC Water Sustainability Act, SBC 2014 c 15 (current to 13 Oct 2026; J.B. download 19 Oct 2026; scanned, read by OCR), s. 1: a 'stream' is a natural watercourse or natural body of water, including a lake, pond, river, creek, spring, ravine, gulch, wetland or glacier, but not an aquifer; the sea is not named either way"
+"bcWSA": "BC Water Sustainability Act, SBC 2014 c 15 (current to 13 Oct 2026; J.B. download 19 Oct 2026; scanned, read by OCR), s. 1: a 'stream' is a natural watercourse or natural body of water, including a lake, pond, river, creek, spring, ravine, gulch, wetland or glacier, but not an aquifer; the sea is not named either way",
+"canvecHydroBC": "NRCan, CanVec 50K Hydro, British Columbia (waterbody features; Open Government Licence – Canada; J.B. download 20 Oct 2026): ocean, Fraser River and side-channel polygons around Vancouver; source maps from 1987 on — https://open.canada.ca/data/en/dataset/9d96e8c9-22fe-4ad2-b5e8-94a6991b744b"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -19226,7 +19228,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "ashrae2015ch51": "gen",
 "bchTS6": "van",
 "abADR276": "edm",
-"bcWSA": "van"
+"bcWSA": "van",
+"canvecHydroBC": "van"
 },
 "city_gaps": {
 "van": [

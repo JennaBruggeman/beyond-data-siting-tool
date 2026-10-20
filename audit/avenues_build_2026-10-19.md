@@ -33,7 +33,7 @@ J.B.: "all of the things we've listed are supposed to be part of the tool." Rese
 Resident: snowmelt_area, fire_water, backup_neighbours, community_solar. Community: clean_power_price, chp_heat, stormwater_volume, grid_refund. Full: condensate. Counts now 45 / 125 / 195.
 
 ## Gaps
-Vancouver shoreline (CanVec Hydro; Edmonton river outline in, 19 Oct); NFPA 1142 volumes; Alberta PPA strike prices; Electric Utilities Act text (law-firm summary used for self-supply).
+NFPA 1142 volumes; Alberta PPA strike prices; Electric Utilities Act text (law-firm summary used for self-supply).
 
 ## Correction (19 Oct)
 Alta Reg 117/2026 was already in the register (alta117_2026, J.B. PDF 16 Oct); research note L wrongly called it blocked and I used a law-firm summary. J.B. re-uploaded it; read in full and the gas-plant add-on now cites it directly. All the summary's points held; the regulation adds s. 7 (AESO may require zoning approvals and water licences) and expiry 31 May 2035.
@@ -46,3 +46,5 @@ J.B. upload 19 Oct: Electric Utilities Act from CanLII, current to 6 Feb 2026, t
 J.B. uploads 19 Oct (late): Activities Designation Regulation (registration if passing on city water, approval if own source), ASHRAE 2015 ch. 51 (kept local, not shared), BC Hydro Tariff Supplement 6 (transmission refund rules, 1991 filing).
 
 J.B. upload 19 Oct (late): Edmonton 2026 Planning and Development Fee Schedules — already held (data/, edmFees2026, used for rezoning); its encroachment fees (Bylaw 12513) now added to the snowmelt card.
+
+20 Oct: Vancouver shoreline in (CanVec 50K Hydro BC: ocean, Fraser River and its side channels, extracted on J.B.'s computer; tool/shore.json). Distance to the water: 1425 Clark Dr about 1,380 m (False Creek), 555 W Hastings about 560 m. CanVec source maps date from the 1980s on, so recent fill and seawalls may differ.
