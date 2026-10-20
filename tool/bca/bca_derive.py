@@ -27,6 +27,10 @@ UBC Library notes on BC Assessment data (J.B. screenshots, 20 Oct 2026; UBC guid
     (--folio) so descriptions map FOLIO_ID -> (jurisdiction, roll).
   - Some folios have more than one address; use PRIMARY_FLAG = T if an address table is ever used (this script does not use addresses).
   - Sales (bca_folio_sales): exclude CONVEYANCE_TYPE 5 (not market sales); not used here.
+  - Values (bca_folio_gnrl_prop_values): a folio can have several rows, one per GEN_PROPERTY_CLASS_CODE; not used here.
+  - Data Advice 2016–2022 came as XML; UBC converted it to CSV and to a SQLite database (12 tables, all fields text, names as in BC Assessment's
+    user guides, inventory extracts included). --inspect on a .sqlite/.db file lists its tables, columns and row counts (no values).
+    Dataset: "BC Assessment Data Advice and Inventory Extracts", Abacus https://hdl.handle.net/11272.1/AB2/LAPUAB (SFU, UBC, UNBC, UVic only).
 Usage:
   python3 bca_derive.py --inspect FILE            (prints the number of columns and rows, and the header if there is one; no values)
   python3 bca_derive.py --codes FILE --pos 2      (counts of a short code column, e.g. jurisdiction, to find Vancouver's code; codes only)
@@ -74,6 +78,13 @@ def main():
     a.add_argument('--folio'); a.add_argument('--desc-id', default='FOLIO_ID')
     a.add_argument('--out', default='bca_derived_van.json')
     o = a.parse_args()
+    if o.inspect and o.inspect.lower().endswith(('.sqlite', '.sqlite3', '.db')):  # UBC's SQLite build (2016–2022): tables, columns, row counts; no values
+        import sqlite3
+        con = sqlite3.connect(o.inspect)
+        for (t,) in con.execute("select name from sqlite_master where type='table' order by name"):
+            cols = [r[1] for r in con.execute(f'pragma table_info("{t}")')]; n = con.execute(f'select count(*) from "{t}"').fetchone()[0]
+            print(f'{t}: {n} rows; {len(cols)} columns: ' + ' | '.join(cols))
+        return
     if o.inspect:
         with open(o.inspect, newline='', encoding='latin-1') as f:
             r = csv.reader(f); first = next(r); n = 1 + sum(1 for _ in r)
