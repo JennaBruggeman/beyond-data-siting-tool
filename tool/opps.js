@@ -78,6 +78,11 @@ function gates(n,c){ const L=(BD._O&&BD._O.opportunities||{})[n]||{}; const G={}
      G.land=['chg','a private line to the next lot, behind the data centre\'s own transfer switch; never through the utility\'s lines'];
      G.demand=['nk',city==='van'?'Vancouver has 25 disaster support hubs, mostly community centres; whether they have backup power is not stated':'not yet known'];
      { const PR=BD._PR; if(PR&&city==='van'){ const m=BD.S.meta.van, k=Math.cos(m.lat0*Math.PI/180)*111320; const cc=PR.cc.map(q=>({n:q[0],d:Math.hypot((q[3]-m.lon0)*k-f.c[0],(q[2]-m.lat0)*110540-f.c[1])})).sort((a,b)=>a.d-b.d)[0]; if(cc) G.demand=[G.demand[0],G.demand[1]+`; the nearest is ${cc.n} community centre (${fmt(cc.d)} m)`]; } }
+     { const hi=highNear(f), care=near.filter(p=>p.t==='care'&&p.dist<=1000).length, hosp=near.filter(p=>p.t==='hospital'&&p.dist<=1000).length;
+       const who=[care?`${care} care home${care>1?'s':''}${hosp?` and ${hosp} hospital${hosp>1?'s':''}`:''} within 1 km (${city==='van'?'StatCan health facilities':'StatCan health facilities, which list few Edmonton care homes'})`:'',
+         hi?(hi.n?`${fmt(hi.n)} buildings over 21 m within 1 km, ${fmt(hi.tall)} over 39 m (measured heights). By code, high buildings keep 2 hours of generator power for firefighters' elevators and fire safety only, not lights, heat or other elevators (BCBC 2024 / NBC(AE) 3.2.6, 3.2.7.9; roof heights, so approximate)`:'no buildings over 21 m within 1 km (measured heights)'):'',
+         city==='van'?'Main heating, Vancouver area households: electric baseboard or radiant 29%, furnace 39%, boiler 23% (NRCan SHEU 2019; boiler share: use with caution)':'Main heating, Edmonton area households: furnace 75%, boiler 19% (boiler share: use with caution); electric baseboard too unreliable to publish (NRCan SHEU 2019)'].filter(Boolean);
+       if(who.length) G.demand=[G.demand[0],G.demand[1]+'. Who would need power most: '+who.join('. ')]; }
      G.time=['yes','only during an outage']; G.money=['nk','—']; break; }
    case 'Grid upgrades shared with neighbours': { const ns=BD.nearSub&&BD.nearSub(f); G.physics=['yes','a larger feeder or substation than the data centre needs can serve customers who connect later'];
      G.land=ns&&ns.n?['yes',`the nearest substation in the tool is about ${fmt(ns.n.d)} m away${ns.n.named?` (${ns.n.n})`:''}`]:['nk','substations not loaded'];
@@ -178,7 +183,17 @@ function oppCard(n){ const c=ctx(), {L,G}=gates(n,c), i=ORDER.findIndex(o=>o.n==
   el=>{ $('#opv').onclick=()=>oppCard(prev.n); $('#opn').onclick=()=>oppCard(next.n); });
   opp3d(n,c); }
 /* the guided path (J.B., 16 Oct: "force u to walk through ... each opportunity and show the visualization for each"): one opportunity per step, only those not ruled out here */
-async function oppPrep(){ BD._O=await BD.opps(); try{ const f=E().siteFacts(); await E().loadRecv(f.city); if(BD.routeTree) await BD.routeTree(f); }catch(e){} await loadEV(); await loadWP(); if(BD._PR===undefined){ try{ const r=await fetch('public_rooms_van.json'); BD._PR=r.ok?await r.json():null; }catch(e){ BD._PR=null; } } }
+/* high buildings within 1 km, for backup power (J.B. 20 Oct 2026: Edmonton equivalents first). Both cities from measured heights:
+   Vancouver LiDAR 2022 (flags 1, 2, 4), Edmonton City 3D buildings (flags 5, 7). Over 21 m to the top ≈ top floor over 18 m, the
+   BCBC 2024 / NBC(AE) 3.2.6.1 line for residential high buildings (an approximation: heights are to the roof, not the top floor). */
+const HIGH_OK={van:[1,2,4],edm:[5,7]};
+async function highPrep(f){ const key=f.city+'|'+f.c.join(','); BD._HI=BD._HI||{}; if(BD._HI[key]) return; const m=BD.S.meta[f.city]; if(!m||!m.tileset) return; const T=m.T, R=1000, P=[];
+  for(let i=Math.floor((f.c[0]-R)/T);i<=Math.floor((f.c[0]+R)/T);i++) for(let j=Math.floor((f.c[1]-R)/T);j<=Math.floor((f.c[1]+R)/T);j++){ const k=i+'_'+j; if(m.tileset.has(k)) P.push(BD.loadTile(f.city,k)); }
+  const tiles=await Promise.all(P); let n=0, tall=0; const ok=HIGH_OK[f.city];
+  for(const t of tiles){ if(!t) continue; for(const b of t.bld){ if(!ok.includes(b.f)||!(b.h>21)) continue; if(Math.hypot(b.c[0]-f.c[0],b.c[1]-f.c[1])>R) continue; n++; if(b.h>39) tall++; } }
+  BD._HI[key]={n,tall}; }
+function highNear(f){ return (BD._HI||{})[f.city+'|'+f.c.join(',')]||null; }
+async function oppPrep(){ BD._O=await BD.opps(); try{ const f=E().siteFacts(); await E().loadRecv(f.city); if(BD.routeTree) await BD.routeTree(f); await highPrep(f); }catch(e){} await loadEV(); await loadWP(); if(BD._PR===undefined){ try{ const r=await fetch('public_rooms_van.json'); BD._PR=r.ok?await r.json():null; }catch(e){ BD._PR=null; } } }
 function oppScreen(){ const c=ctx(); return ORDER.map(o=>{ const {G}=gates(o.n,c); return Object.assign({},o,{s:summary(G),G}); }); }
 const SUMW={yes:'Possible here: every gate the tool can test passes.',chg:'Possible with a change: no gate fails outright.',nk:'Not ruled out: no gate fails, but some are not yet known.',no:'Not here.'};
 function oppStep(n,i,total){ const c=ctx(), e=c.e, {L,G}=gates(n,c), it=ORDER.find(o=>o.n===n), s=summary(G); BD.S.view2='tab';
