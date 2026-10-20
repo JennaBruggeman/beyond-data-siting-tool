@@ -420,3 +420,7 @@ Also: negative money is shown as −$; the BC/Alberta price label now follows th
 - M95: register it_load_outside aligned to the tool (290–630 m² of hall per MW, Canadian operator claims; RVO and US federal densities kept as context); it_load_actual states the single 0.6 used.
 - M98: refrigerant_co2e sourced to IPCC 2019 Refinement Vol. 3 Ch. 7 Table 7.9 (chillers: 10–2,000 kg charge, 2–15%/yr loss, lower end for developed countries); confidence 90 → 60.
 - M104: PUE confidence 100 → 80.
+
+## Parked: the site report (20 Oct 2026, J.B.: "we can keep polishing this part over the coming weeks")
+- Done: three reports, one per template (make_templates.py `reports`), drawn in the tier chooser, on each cover and on the logic page; white1 booklet style; opportunity tests legible.
+- To come back to: empty space on pages 02, 04, 05; Edmonton section label overlap; depth differences between the community and full reports beyond the logic page; whether the three reports also go on the full tool-logic diagram (workflow map tiers, step 6).
