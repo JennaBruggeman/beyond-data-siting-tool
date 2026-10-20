@@ -33,4 +33,4 @@ J.B.: "all of the things we've listed are supposed to be part of the tool." Rese
 Resident: snowmelt_area, fire_water, backup_neighbours, community_solar. Community: clean_power_price, chp_heat, stormwater_volume, grid_refund. Full: condensate. Counts now 45 / 125 / 195.
 
 ## Gaps
-Shoreline file (distance to water); NFPA 1142 volumes; Alberta fire and potable-water rules; Alberta PPA strike prices; Alta Reg 117/2026 and EUA text (blocked; law-firm summaries used).
+Vancouver shoreline (CanVec Hydro; Edmonton river outline in, 19 Oct); NFPA 1142 volumes; Alberta fire and potable-water rules; Alberta PPA strike prices; Alta Reg 117/2026 and EUA text (blocked; law-firm summaries used).
