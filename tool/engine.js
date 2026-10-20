@@ -213,7 +213,8 @@ function fitsView(){
   const f=siteFacts(), A=BD.S.answers; BD.S.view2='fits';
   const ST=R.steps, snap=v=>ST.reduce((b,s)=>Math.abs(Math.log(s/v))<Math.abs(Math.log(b/v))?s:b,ST[0]);
   // start at the low end of what fits (snapped to a step), not a hidden midpoint
-  if(!A.mw||!ST.includes(A.mw)||A.mwSite!==BD.S.sel.id){ A.mw=snap(Math.max(0.1,f.mw[0])); A.mwSite=BD.S.sel.id; }
+  // a size already set for this lot (a worked example's largest that fits, the fix button, the residents' choice) is kept, on a step or not (J.B. 20 Oct)
+  if(!A.mw||(A.mwSite&&A.mwSite!==BD.S.sel.id)){ A.mw=snap(Math.max(0.1,f.mw[0])); } A.mwSite=BD.S.sel.id;
   const pos01=v=>{ v=Math.max(ST[0],Math.min(ST[ST.length-1],v)); let i=0; while(i<ST.length-2&&ST[i+1]<v) i++; return (i+Math.log(v/ST[i])/Math.log(ST[i+1]/ST[i]))/(ST.length-1)*100; };
   const cases=(R.cases[f.city]||[]);
   const near=v=>{ const c=cases.slice().sort((a,b)=>Math.abs(Math.log(a.mw/v))-Math.abs(Math.log(b.mw/v)))[0]; if(!c) return ''; const r=v/c.mw; return r>0.85&&r<1.18?`about the size of ${c.n} (${c.mw} MW)`:`${r.toFixed(r<10?1:0)} × ${c.n} (${c.mw} MW)`; };
@@ -313,7 +314,7 @@ async function recvView(){
 
 /* ---------- round 3: three options, trade-off tables by party ---------- */
 function optionSet(f,near,nets){
-  const top=f.mw[1], A=BD.S.answers, chosen=A.mw||top/2;
+  const fm=BD.fitMax?BD.fitMax():null, top=fm!=null?fm:f.mw[1], A=BD.S.answers, chosen=Math.min(A.mw||top/2,top); /* largest = everything fits (J.B. 20 Oct) */
   const net=nets.find(n=>n.inside&&n.edge>=50&&n.src==='van9552');
   const sizes=[Math.max(0.1,+(chosen/2).toFixed(1)),+chosen.toFixed(1),+Math.max(chosen,top).toFixed(1)];
   return [

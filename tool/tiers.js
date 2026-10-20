@@ -81,7 +81,7 @@ function backLink(){ const sd=$('#side'), A=BD.S&&BD.S.answers; if(!sd||!A||BD.t
 const live=()=>{ const A=BD.S.answers; return BD.deck.DECK.filter(d=>!d.when||d.when(A)); };
 function sizeSet(which){ const A=BD.S.answers; A.mw=null; BD.modelReset&&BD.modelReset(); const f=BD.eng.siteFacts(), hi=f.mw[1];
   const fm=BD.fitMax?BD.fitMax():null, top=fm!=null?fm:hi; /* "as large as fits" = everything fits, not floor only (J.B. 20 Oct) */
-  const typ=Math.min(TYPICAL_MW,top); A.mw=which==='large'?+top.toFixed(1):which==='mid'?+((typ+top)/2).toFixed(1):+typ.toFixed(1); A.mwPick=which; BD.modelReset&&BD.modelReset(); }
+  const typ=Math.min(TYPICAL_MW,top); A.mw=which==='large'?+top.toFixed(1):which==='mid'?+((typ+top)/2).toFixed(1):+typ.toFixed(1); A.mwPick=which; A.mwSite=BD.S.sel&&BD.S.sel.id; BD.modelReset&&BD.modelReset(); }
 function residentCard(){ const A=BD.S.answers, m=BD.model&&BD.model(); if(!m) return;
   if(A.mw==null||!A.mwPick) sizeSet(A.mwPick||'typ');
   const f=BD.eng.siteFacts(), fm=BD.fitMax?BD.fitMax():null, hi=fm!=null?fm:0, L=live(); // largest size where everything fits (J.B. 20 Oct)

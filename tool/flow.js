@@ -11,7 +11,7 @@ const BASE=[
  {k:'site',g:'site',t:'Pick a site'},{k:'setup',g:'site',t:'Set up the site'},
  {k:'fits',g:'fits',t:'What fits'},{k:'prec',g:'fits',t:'Real buildings'},
  {k:'heat',g:'ex',t:'Heat'},{k:'energy',g:'ex',t:'Electricity'},{k:'water',g:'ex',t:'Water'},{k:'materials',g:'ex',t:'Materials'},{k:'social',g:'ex',t:'People'},
- {k:'opps',g:'opps',t:'Opportunities'},
+ {k:'opps',g:'opps',t:'Opportunities'},{k:'spec',g:'opps',t:'Could become'},
  {k:'opts',g:'opts',t:'Three options'},{k:'time',g:'opts',t:'Over time'},
  {k:'cities',g:'report',t:'Two cities'},{k:'report',g:'report',t:'Report'}];
 const F=BD.flow={on:true,steps:BASE.slice(),i:0,max:0,notes:{},busy:false};
@@ -98,7 +98,7 @@ async function runExample(i){ const x=EXAMPLES[i]; reset(); F.exPending=true; Ob
       let best=null; for(const t of tries){ Object.assign(A,base,t); BD.modelReset&&BD.modelReset(); const v=BD.fitMax(); if(!v) continue;
         if(!best) best={v,t}; else if(v>best.v+0.05&&!(best.t.gens!=='none'&&t.gens==='none')) best={v,t};
         if(t===tries[0]) break; /* the example's own choices fit: keep them */ if(best&&best.t.gens!=='none'&&t===tries[5]) break; }
-      Object.assign(A,base,best?best.t:{}); if(best){ A.mw=best.v; A.mwPick='large'; } BD.modelReset&&BD.modelReset(); }
+      Object.assign(A,base,best?best.t:{}); if(best){ A.mw=best.v; A.mwPick='large'; A.mwSite=BD.S.sel.id; } BD.modelReset&&BD.modelReset(); }
     F.sel=selKey(); F.sig=sigOf(); } finally{ F.exPending=false; } if(BD.S.sel) go(1); }
 
 /* ---------- the bar at the top and the buttons at the bottom of the panel ---------- */
@@ -118,7 +118,7 @@ function decorate(){ const sd=$('#side'); if(!sd||!F.on) return; F.busy=true;
   try{ sd.querySelectorAll(':scope > .flowbar, :scope > .flowfoot, .fstuck').forEach(x=>x.remove()); sd.insertAdjacentHTML('afterbegin',bar()); sd.insertAdjacentHTML('beforeend',foot());
     { const st=F.steps[F.i], tk=BD.explain&&BD.explain.topicFor(st.k); if(tk&&!sd.querySelector('.xpbtn')){ const at=sd.querySelector('.lead')||sd.querySelector('h2'); if(at){ const b=document.createElement('button'); b.className='xpbtn'; b.innerHTML='How it works <span>›</span>'; b.onclick=()=>BD.explain.open(tk); at.after(b); } } }
     sd.querySelectorAll('.flowbar [data-fg]').forEach(b=>b.onclick=()=>{ const k=F.steps.findIndex(s=>s.g===b.dataset.fg); if(k>=0&&k<=F.max&&!(F.stuck&&k>F.i)) go(k); });
-    { const fit=$('#fFit'); if(fit) fit.onclick=()=>{ const v=BD.fitMax(); if(v){ BD.S.answers.mw=v; BD.S.answers.mwPick='large'; BD.modelReset&&BD.modelReset(); go(F.i); } };
+    { const fit=$('#fFit'); if(fit) fit.onclick=()=>{ const v=BD.fitMax(); if(v){ BD.S.answers.mw=v; BD.S.answers.mwPick='large'; BD.S.answers.mwSite=BD.S.sel.id; BD.modelReset&&BD.modelReset(); go(F.i); } };
       const su=$('#fSetup'); if(su) su.onclick=()=>{ const k=F.steps.findIndex(s=>s.k==='setup'); if(k>=0) go(k); }; }
     const bk=$('#fBack'); if(bk) bk.onclick=back; const nx=$('#fNext'); if(nx) nx.onclick=next; }
   finally{ setTimeout(()=>{ F.busy=false; },0); } }
@@ -149,9 +149,10 @@ async function show(st){ const k=st.k;
   if(k.startsWith('fam:')) return BD.oppFamily(st.fam);
   if(k==='opps-rest') return BD.oppRest(F.oppList||[]);
   if(k==='opps-best') return BD.oppBest();
-  if(k==='report') return reportView();
+  if(k==='spec') return BD.views.spec();
+  if(k==='report') return (BD.views.report||reportView)();
   BD.tabView(k); }
-F.next=next; F.back=back; F.go=go; F.to=k=>{ const i=F.steps.findIndex(s=>s.k===k); if(i>=0) go(i); };
+F.next=next; F.back=back; F.go=go; F.capture=capture; F.reportData=()=>reportData(); F.to=k=>{ const i=F.steps.findIndex(s=>s.k===k); if(i>=0) go(i); };
 
 /* picking another parcel on the map sends the path back to the set-up step; changing an answer (set-up, size, cooling) drops what later steps showed */
 const selKey=()=>BD.S.sel?BD.S.sel.city+':'+BD.S.sel.id:'';
@@ -164,7 +165,7 @@ BD.afterIntro=function(){ const sd=$('#side'); if(!sd) return; sd.querySelectorA
   sd.insertAdjacentHTML('beforeend',`<p class="sub"><a href="#" id="reWelcome">Use a worked example instead</a></p>`); $('#reWelcome').onclick=e=>{ e.preventDefault(); welcome(); }; };
 
 /* ---------- what each step showed, kept for the report ---------- */
-function clean(el){ const c=el.cloneNode(true); c.querySelectorAll('button,.mo,svg,script').forEach(x=>x.remove()); c.querySelectorAll('td,th,small,li,dd,dt,div,p,.cls,.pill,.evb,br').forEach(x=>x.append(' ')); c.querySelectorAll('.more').forEach(x=>x.hidden=false); return (c.textContent||'').replace(/\s+/g,' ').trim(); }
+function clean(el){ const c=el.cloneNode(true); c.querySelectorAll('button,.mo,svg,script').forEach(x=>x.remove()); c.querySelectorAll('sup').forEach(x=>{ x.replaceWith(({'2':'²','3':'³'})[x.textContent.trim()]||x.textContent); }); c.querySelectorAll('*').forEach(x=>{ if(!/^(B|I|EM|STRONG|A|ABBR|SUB)$/.test(x.tagName)) x.append(' '); }); /* every element ends with a space, so cells never run together (J.B. 20 Oct: '40not stated as IT') */ c.querySelectorAll('.more').forEach(x=>x.hidden=false); return (c.textContent||'').replace(/\s+/g,' ').trim(); }
 function tableData(t){ return [...t.rows].map(r=>({party:r.classList.contains('party'),head:r.parentElement.tagName==='THEAD',cells:[...r.cells].map(clean)})); }
 function capture(){ const st=F.steps[F.i]; const sd=$('#side'); if(!st||!sd||!BD.S.sel||st.k==='report'||st.k==='site') return;
   const h2=sd.querySelector('h2'); const lead=sd.querySelector('.lead')||sd.querySelector('p.draft');
@@ -180,7 +181,7 @@ function capture(){ const st=F.steps[F.i]; const sd=$('#side'); if(!st||!sd||!BD
 /* ---------- step 6: the report, on screen and as HTML or PDF ---------- */
 function facts(){ const e=BD.eng, f=e.siteFacts(), A=BD.S.answers, a=BD.S.sel.a||[], rng=e.rng;
   return [['Site',`${a[0]||'No civic address'}, ${f.city==='van'?'Vancouver':'Edmonton'}`],['Zone',`${f.zone||'—'}: ${f.status.t}`],['Lot',`${BD.fmt(f.lot||0)} m²`],
-   ['Floor area available',`${f.fullCover?'up to ':''}${rng(f.gross[0],f.gross[1],'m²')}`],['Largest that fits',rng(f.mw[0],f.mw[1],'MW of servers')],['Size tested',A.mw?`${A.mw} MW of servers`:`${(f.M&&f.M.mwSized)||1} MW of servers (provisional: no size set)`],
+   ['Floor area available',`${f.fullCover?'up to ':''}${rng(f.gross[0],f.gross[1],'m²')}`],['Largest that fits',(()=>{ const v=BD.fitMax?BD.fitMax():null; return v!=null?`${v.toFixed(1)} MW of servers, with its plant, generators and loading (${rng(f.mw[0],f.mw[1],'MW')} counting floor space only)`:rng(f.mw[0],f.mw[1],'MW of servers'); })()],['Size tested',A.mw?`${A.mw} MW of servers`:`${(f.M&&f.M.mwSized)||1} MW of servers (provisional: no size set)`],
    ['Set-up',`${A.built==='existing'?'existing building':'new building'}, ${A.inside||'air'} cooling inside, ${(A.outside||'dry')==='dry'?((A.inside||'air')==='air'?'air-cooled chillers':'dry coolers'):(A.outside==='towers'?'cooling towers':'hybrid coolers')} outside`]]
    .concat(BD.tier&&BD.tier()==='resident'&&!A.residentEdit?[['Chosen for you','the size and set-up above are the tool\'s usual choices, not yours; change them in step 1 and the report follows']]:[]); }
 const ORDERG=['site','fits','ex','opps','opts','report'];
