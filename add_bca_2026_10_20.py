@@ -36,5 +36,23 @@ q.setdefault('source_roles', [])
 for s, term, role, c in (('bcAssess2026', 'Vancouver homes and floor area per parcel', 'input', 85), ('bcaGuideCom', 'strata area rule, x 1.15', 'coefficient', 60)):
     if not any(r['id'] == s for r in q['source_roles']): q['source_roles'].append({'id': s, 'term': term, 'role': role, 'conf': c, 'verified': True})
 q['revised'] = '2026-10-20'
+
+# backup power: who would need it most, the same three sources in both cities (J.B. 20 Oct: Edmonton equivalents first)
+q = Q['backup_neighbours']
+add = ("20 Oct 2026 (opps.js): who would need power most, within 1 km: care homes and hospitals (receivers; provincial licence lists to replace StatCan ODHF, "
+       "which lists few Edmonton care homes); buildings over 21 m from measured heights (Vancouver LiDAR 2022, Edmonton City 3D buildings) and over 39 m, read against "
+       "BCBC 2024 / NBC(AE) 3.2.6.1 (residential top floor over 18 m: high building), 3.2.6.5 (firefighters' elevator), 3.2.7.9 (over 36 m: 2 h generator for elevators, "
+       "fire pumps and smoke fans only); heights to the roof, so approximate. Main heating by CMA, SHEU 2019 Table 4.1: Vancouver furnace 39.25%, boiler 22.77% (M), "
+       "electric baseboard or radiant 28.95%; Edmonton furnace 75.24%, boiler 19.21% (M), electric baseboard U (not published). BC Assessment's care beds, elevators and "
+       "heating type exist for Vancouver only and are not used, to keep the cities equal")
+if add[:40] not in q['coef']: q['coef'] += ' | ' + add
+for s_ in ('bcbc2024_326', 'sheu2019cma'):
+    if s_ not in q['sources']: q['sources'].append(s_)
+q['revised'] = '2026-10-20'
+for qid in ('receiver_temp',):
+    if qid in Q:
+        q = Q[qid]; add = "20 Oct 2026 (cards.js, 'How hard to connect'): household main heating by CMA replaces StatCan 2011 provincial: SHEU 2019 Table 4.1 (see backup_neighbours)"
+        if add[:40] not in q.get('coef', ''): q['coef'] = (q.get('coef', '') + ' | ' + add).strip(' |')
+        if 'sheu2019cma' not in q.setdefault('sources', []): q['sources'].append('sheu2019cma')
 json.dump(d, open(P, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print('ok')
