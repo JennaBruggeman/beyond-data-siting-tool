@@ -273,7 +273,7 @@ function fitsView(){
 }
 
 /* ---------- who could take the heat ---------- */
-const TYPE={housing:'Non-market housing',school:'School',campus:'University or college campus',care:'Care home',hospital:'Hospital',rec:'Recreation centre',hall:'Community league hall',pool:'Pool',arena:'Indoor arena'};
+const TYPE={housing:'Non-market housing',school:'School',campus:'University or college campus',care:'Care home',hospital:'Hospital',rec:'Recreation centre',hall:'Community league hall',pool:'Pool',arena:'Indoor arena',apartment:'Apartment building',office:'Office building',hotel:'Hotel',commercial:'Commercial building'};
 const FIRM={completed:'existing','under construction':'committed',approved:'planned',proposed:'proposed'};
 function nearby(f,d){ const out=[]; for(const p of d.pts){ const dist=Math.hypot(p.x-f.c[0],p.y-f.c[1]); const reach=R.reach[p.t]||R.reachGuide; if(dist<=reach) out.push(Object.assign({dist,reach,guide:!R.reach[p.t]},p)); } return out.sort((a,b)=>a.dist-b.dist); }
 function netsAt(f,d){ return d.nets.map(n=>{ const inside=BD.pip(f.c[0],f.c[1],n.r); const e=distToRing(f.c[0],f.c[1],n.r); return Object.assign({inside,edge:e},n); }).filter(n=>n.inside||n.edge<1200).sort((a,b)=>(b.inside-a.inside)||(a.edge-b.edge)); } // inside first, then nearest (verification sweep M16)
@@ -403,7 +403,7 @@ async function optionsView(){
 }
 
 /* ---------- map layer: receivers, reach, networks ---------- */
-const RC={housing:'#c8c2b8',school:'#a7b4d6',campus:'#a7b4d6',care:'#b9a3cf',hospital:'#b9a3cf',rec:'#7fb2c4',hall:'#7fb2c4',pool:'#7fb2c4',arena:'#9fb38a'};
+const RC={housing:'#c8c2b8',apartment:'#c8c2b8',office:'#d8b48a',hotel:'#d8b48a',commercial:'#d8b48a',school:'#a7b4d6',campus:'#a7b4d6',care:'#b9a3cf',hospital:'#b9a3cf',rec:'#7fb2c4',hall:'#7fb2c4',pool:'#7fb2c4',arena:'#9fb38a'};
 BD.paintRecv=function(ctx,s,lw){
   const d=BD.recv[BD.S.city]; if(!d) return;
   for(const n of d.nets){ ctx.setLineDash([8/s,5/s]); ctx.strokeStyle='rgba(209,163,94,.85)'; ctx.lineWidth=lw(1.6); ctx.stroke(n.path); ctx.setLineDash([]); ctx.fillStyle='rgba(209,163,94,.06)'; ctx.fill(n.path); }
