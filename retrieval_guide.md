@@ -203,7 +203,7 @@ Already held locally (no need to fetch): BCBC 2024, NBC 2020, NFC 2020, NFC 2023
 Since section 11, also resolved: rainwater tank cost (Vancouver toolkit 2014, US EPA 2013).
 
 A. Changes results (yours to fetch)
-- ⏳ H1 (Alberta complete 19 Oct; BC still downloading) CanVec Hydro, BC (1:50K shapefile; or a Geospatial Data Extraction Tool cut around Vancouver) — the Vancouver shoreline, so "Cooling from the inlet" measures distance to the water. https://open.canada.ca/data/en/dataset/9d96e8c9-22fe-4ad2-b5e8-94a6991b744b → Prepackaged Shapefiles → Go to resource.
+- ✅ H1 (20 Oct: BC complete; Vancouver sea and Fraser shoreline extracted on J.B.'s computer and in the tool) CanVec Hydro, BC (1:50K shapefile; or a Geospatial Data Extraction Tool cut around Vancouver) — the Vancouver shoreline, so "Cooling from the inlet" measures distance to the water. https://open.canada.ca/data/en/dataset/9d96e8c9-22fe-4ad2-b5e8-94a6991b744b → Prepackaged Shapefiles → Go to resource.
 - ✅ H2 (received 19 Oct) Alberta Activities Designation Regulation (Alta Reg 276/2003, kings-printer.alberta.ca) — which approval a private drinking-water system for neighbours needs (Schedule 1 and 2, Division 5).
 - ☐ H3 NFPA 1142, chapter 4 (free read-only view at nfpa.org with an account) — how big a firefighting tank must be.
 - ✅ H4 (received 19 Oct) ASHRAE Handbook, HVAC Applications, "Snow Melting and Freeze Protection" (UBC Library) — design watts per m² for Vancouver and Edmonton (the tool now uses NRC 1974 for Edmonton and Portland, Oregon for Vancouver).
