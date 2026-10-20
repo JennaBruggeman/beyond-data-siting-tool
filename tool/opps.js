@@ -164,7 +164,7 @@ function oppBest(){ const c=ctx(), e=c.e; BD.S.view2='tab'; const B=bestSetups()
 BD.oppBest=oppBest; BD.bestSetups=bestSetups;
 function ladderHTML(L){ return Array.isArray(L.rules)&&L.rules.length?`<table class="cl">${L.rules.map(x=>`<tr><td>${esc(x.rung)}</td><td>Vancouver ${BD.rsPill(x.van[0])}<small>${esc(x.van[1]||'')}</small>Edmonton ${BD.rsPill(x.edm[0])}<small>${esc(x.edm[1]||'')}</small></td></tr>`).join('')}</table>`:'<p class="sub">not yet read</p>'; }
 function oppBody(n,c){ const {L,G}=gates(n,c);
-  return `<h3>At this site, gate by gate</h3><table class="cl">${GATES.map(g=>`<tr><td>${g}</td><td>${gp(G[g][0])}<small>${esc(G[g][1])}</small></td></tr>`).join('')}</table>
+  return `${BD.specBtn?`<p class="spbar">${BD.specBtn(n)} <span class="src">puts it in Could become and the report</span></p>`:''}<h3>At this site, gate by gate</h3><table class="cl">${GATES.map(g=>`<tr><td>${g}</td><td>${gp(G[g][0])}<small>${esc(G[g][1])}</small></td></tr>`).join('')}</table>
   ${Array.isArray(L.rules)&&L.rules.length&&L.rules.every(x=>x.van[0]==='na'&&x.edm[0]==='na')?'':`<h3>Rules, rung by rung</h3>${ladderHTML(L)}`/* J.B. 20 Oct: no rules, no row */}
   <h3>Not yet known</h3><p class="sub">${esc((L.unknowns||[]).join('; ')||'—')}</p><h3>How proven</h3><p class="sub">${esc(L.basis||'')}</p>${L.visual?`<p class="sub">Drawn as: ${esc(L.visual)}</p>`:''}
   <h3>Sources</h3>${BD.srcList((L.sources||[]).concat(...(Array.isArray(L.rules)?L.rules.map(x=>x.sources||[]):[]),['vanUses2026','edmUses2026']))}`; }
@@ -224,6 +224,6 @@ function oppRest(list){ const c=ctx(), e=c.e; BD.S.view2='tab';
   ${no.map(o=>{ const g=GATES.filter(k=>o.G[k][0]==='no'); return `<div class="addrow"><div>${esc(o.n)}<div class="src">${g.map(k=>`<span style="color:${GS.no[1]}">${k}</span>: ${esc(o.G[k][1])}`).join(' · ')}</div></div></div>`; }).join('')}`;
   e.wireTabs(); BD.draw(); e.show3d('model',{site:c.f}); }
 Object.assign(BD,{oppPrep,oppScreen,oppStep,oppRest,oppFamily,oppFams:FAM.map(f=>f[0]),oppGates:GS,oppGatesFor:n=>{ const c=ctx(), g=gates(n,c); return Object.assign(g,{s:summary(g.G),c,order:GATES,fam:(ORDER.find(o=>o.n===n)||{}).fam}); }});
-BD.oppCard=oppCard;
+BD.oppCard=oppCard; BD.oppFamList=f=>((FAM.find(x=>x[0]===f)||[])[1]||[]).slice(); BD.opp3d=n=>opp3d(n,ctx());
 BD.tabOverride=Object.assign(BD.tabOverride||{},{opps2:oppIndex});
 })();
