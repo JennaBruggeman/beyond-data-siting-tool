@@ -65,5 +65,11 @@ for s_ in ('bcResCare', 'abCCcompliance2026'):
 q['revised'] = '2026-10-20'
 for s_ in ('bcResCare', 'abCCcompliance2026'):
     if s_ not in Q['backup_neighbours']['sources']: Q['backup_neighbours']['sources'].append(s_)
+q = Q['receivers_nearby']
+add = ("20 Oct 2026 audit (tool/audit_receivers.py, lot_dedupe.py; audit/bca_build_2026-10-20.md): one lot, one count in both cities. Assessment estimates on a lot "
+       "already holding a named receiver with its own figure, or at a StatCan hospital or care address, dropped (Vancouver 14, Edmonton 7: e.g. Mount Saint Joseph, "
+       "BC Children's, Misericordia, Alberta Hospital Edmonton); schools inside an assessed building made tenants; same-name repeats on one lot merged. Estimate vs "
+       "building-outline floor area: median 0.86 Vancouver, 0.65 Edmonton")
+if add[:40] not in q['coef']: q['coef'] += ' | ' + add
 json.dump(d, open(P, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print('ok')

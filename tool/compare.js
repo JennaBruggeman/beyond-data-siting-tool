@@ -38,7 +38,7 @@ const NIL='<span class="sub">—</span>';
 const COLS={
  heat:[['Heat offered',r=>r.id==='qu2'?NS:r.n.rec?rg(r.n.avail.map(v=>v/1000),'GWh/yr',0):(['conv','van4','vanm','edmc'].includes(r.id)?'no heat recovery in this design':'not yet known (air-cooled)')],['Homes’ heating, as an equal',r=>r.n.rec?rg(r.n.homes):'—'],
        ['Nearest heat network',r=>!r.site?NIL:r.id==='here'||r.id==='conv'?'<span class="sub">see below</span>':(r.site.nets&&r.site.nets.length?`${esc(r.site.nets[0].n.replace(/ \(.*/,''))}, ${fmt(r.site.nets[0].edge)} m`:'none within 1.2 km')]],
- energy:[['Electricity',r=>r.noPue?NS:rg(r.n.MWh.map(v=>v/1000),'GWh/yr',0)],['Its grid carbon',r=>r.noPue?NS:rg(r.n.co2,'t CO₂e/yr')],['Heat-pump carbon',r=>r.n.rec?rg(r.n.hpco2,'t CO₂e/yr'):'—']],
+ energy:[['Electricity',r=>r.noPue?NS:rg(r.n.MWh.map(v=>v/1000),'GWh/yr',0)],['Its grid carbon',r=>r.noPue?NS:rg(r.n.co2,'t CO₂e/yr')],['Heat-pump carbon',r=>r.n.rec?rg(r.n.hpco2,'t CO₂e/yr'):r.k==='claim'?'<span class="sub">no heat recovery stated (operator claim)</span>':'<span class="sub">none: no heat recovered</span>']],
  water:[['Water evaporated on site',r=>r.id==='qu2'?NS:r.id==='van4'?'<span class="sub">none stated (operator claim)</span>':r.n.evap[1]?`up to ${fmt(r.n.evap[1])} m³/yr`:'none (dry coolers)'],['Rain on the roof',r=>r.site&&r.site.roof?`about ${fmt(r.site.roof*r.mm/1000*0.8)} m³/yr`:NIL]],
  materials:[['Electricity over 50 years',r=>r.noPue?NS:rg(r.n.MWh.map(v=>v*50/1e6),'TWh',1)]],
 };

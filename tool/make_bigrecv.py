@@ -10,6 +10,7 @@ Edmonton: City property assessment 2026 (open data), grouped by parcel: "Other R
   residential 0.777 GJ/m² (CEUD 2023 Alberta residential Table 2, 2018–22 average; all dwellings, so likely high for apartments),
   commercial 1.40 GJ/m² (CEUD 2023 Alberta commercial, heating-only, register receiver_demand). Strata condominiums are assessed as
   "Residential" unit by unit and are not caught here.
+Run order: dedupe_receivers.py, then this, then lot_dedupe.py (one lot, one count).
 Skipped where an existing receiver (school, hospital, housing…) lies within 40 m. Writes into tiles/<city>/receivers.json (pts) and receivers_<city>.json."""
 import json, os, csv, math, collections
 H = os.path.dirname(os.path.abspath(__file__)); D = os.path.join(H, '..', 'data')
