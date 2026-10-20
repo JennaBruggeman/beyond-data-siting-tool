@@ -13,7 +13,8 @@ button,input,select,textarea{font-family:var(--font)}
 h1,h2,h3,h4{font-family:var(--font);text-wrap:balance}
 aside h2,#side h2{font-weight:500;letter-spacing:-.005em}
 #side .lead,#drawer .lead,.lead{font-weight:400;font-size:17px!important;line-height:1.45!important}
-.tile > *:nth-child(n+3){color:var(--faint);align-self:center}
+.tile > *:nth-child(n+3){display:none} /* no glyph chevrons; the whole row is the control */
+.tile{grid-template-columns:minmax(120px,34%) 1fr!important}
 
 /* labels: sentence case, no tracked capitals */
 .kind,aside h3,#side h3{text-transform:none!important;letter-spacing:0!important;font-size:13px!important;font-weight:500!important;color:var(--fg)!important}
@@ -33,7 +34,8 @@ dl.lim{font-size:13px}
 .tile:hover{background:rgba(255,255,255,.025);border-color:var(--line)}
 .tile .tt{font-size:13px;color:var(--fg);font-weight:500}
 .tile .ta{font-size:13.5px;color:var(--muted);-webkit-line-clamp:2}
-.tile.feat{border-left:2px solid var(--accent);padding-left:10px}
+#wc .tile.feat,.tile.feat{border-left:0!important;background:rgba(204,116,108,.06)!important;padding-left:8px!important}
+.tile.feat .tt{color:var(--accent-2)} /* the finding: colour on the label, not a thick side bar (Impeccable craft floor) */
 
 /* pills and segmented controls: quieter shapes */
 .pill,.cls,.rd,.rs{border-radius:3px!important}
@@ -50,4 +52,25 @@ dl.lim{font-size:13px}
 .legend,.status{border-radius:4px}
 
 /* the "N more here" box and stuck box: plain rules, not boxes in boxes */
-.tmore{border-radius:0!important;border-left:2px solid var(--line-2)!important;border-top:0!important;border-right:0!important;border-bottom:0!important;background:transparent!important;padding:4px 0 4px 12px!important}
+.tmore{border-radius:0!important;border-left:1px solid var(--line-2)!important;border-top:0!important;border-right:0!important;border-bottom:0!important;background:transparent!important;padding:4px 0 4px 12px!important}
+
+/* pass 1b (Impeccable craft floor): the step title is the heading, not a small label above the lead */
+#side h2,#drawer h2{font-size:19px;font-weight:500;color:var(--fg);margin:10px 0 6px;line-height:1.3}
+#side .lead{font-size:15.5px!important;color:var(--fg)}
+/* browser surfaces themed from the palette */
+::selection{background:rgba(204,116,108,.35);color:#fff}
+*{scrollbar-color:var(--line-2) transparent;scrollbar-width:thin}
+input,textarea{caret-color:var(--accent-2)}
+:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
+a{text-underline-offset:2px}
+dd,td,.ta,.tile .ta{font-variant-numeric:tabular-nums}
+details.alld > summary::before{content:none!important}
+details.alld > summary{text-decoration:underline dotted;text-underline-offset:3px}
+/* pass 1b: override the tool-card rules (index.html #wc …) */
+#wc #side h2,#wc #drawer h2{font-size:19px;font-weight:500;color:var(--fg)}
+#wc #side > h2:has(+ .lead){font-size:19px;font-weight:500;color:var(--fg);margin:10px 0 6px}
+#wc #side > h2 + .lead{font-size:15.5px;font-weight:400;line-height:1.5;max-width:62ch;text-wrap:pretty}
+#wc .tile::after,.tile::after{content:none!important}
+#wc .tile.feat .tt{color:var(--accent-2);font-weight:500;font-size:13px}
+#wc .tile.feat .ta{font-size:15px;color:var(--fg)}
+#wc .tile.feat{display:grid!important;padding:12px 8px!important}
