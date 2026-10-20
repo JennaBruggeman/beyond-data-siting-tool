@@ -39,7 +39,9 @@ function preview(id){ const T=BD.TPL, Y=layout(); if(!T||!Y) return ''; const ra
   const ids=Object.keys(T.nodes), n=ids.length, on=ids.filter(lit).length;
   const wires=Y.edges.filter(([a,b])=>Y.pos[a]&&Y.pos[b]).map(([a,b])=>{ const [x1,y1]=Y.pos[a],[x2,y2]=Y.pos[b], on2=lit(a)&&lit(b); return `<path d="M${x1} ${y1}C${(x1+x2)/2} ${y1} ${(x1+x2)/2} ${y2} ${x2} ${y2}" fill="none" stroke="${on2?'var(--accent)':'var(--line-2)'}" stroke-opacity="${on2?.55:.35}" stroke-width=".5"/>`; }).join('');
   const dots=ids.filter(k=>Y.pos[k]).map(k=>{ const [x,y]=Y.pos[k]; return `<circle cx="${x}" cy="${y}" r="1.6" fill="${lit(k)?'var(--accent)':'var(--line-2)'}"/>`; }).join('');
-  return `<svg class="tprev" viewBox="0 0 ${Y.W} ${Y.H}" role="img" aria-label="The tool's logic diagram: ${on} of ${n} parts shown in this choice">${wires}${dots}</svg><span class="tcount">${on} of ${n} parts shown</span>`; }
+  const RP=T.reports&&T.reports[id]; const pg=RP?RP.filter(p=>p.id!=='sources'):[];
+  const strip=pg.length?`<span class="trep"><svg viewBox="0 0 ${pg.length*9} 11" width="${pg.length*9}" height="11" aria-hidden="true">${pg.map((p,i)=>`<rect x="${i*9+0.5}" y=".5" width="7" height="10" rx=".8" fill="none" stroke="var(--accent)" stroke-width=".8"><title>${esc(p.title)}</title></rect>`).join('')}</svg> Report: ${pg.length} sections, ${esc(pg.map(p=>p.title).join(', '))}</span>`:'';
+  return strip+`<svg class="tprev" viewBox="0 0 ${Y.W} ${Y.H}" role="img" aria-label="The tool's logic diagram: ${on} of ${n} parts shown in this choice">${wires}${dots}</svg><span class="tcount">${on} of ${n} parts shown</span>`; }
 function chooser(card,cont){
   card.innerHTML=`<div class="kind">Beyond Data</div><h2 id="wTitle">What do you want to know?</h2>
    <p class="sub">Every choice runs the same tool. It changes what you are asked and what you see. You can switch at any time.</p>
