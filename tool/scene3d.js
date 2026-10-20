@@ -191,7 +191,7 @@ const TCOL={housing:C.city,apartment:C.city,office:C.heat,hotel:C.heat,commercia
 function heat(d){
   plantLabels(C.heat); baseLabels();
   const c=roofC(), src=V(c[0],c[1],state.roof+3);
-  for(const rad of [1000,1200,1500]){ R.ov.add(line(circlePts(state.c[0],state.c[1],rad,0.5,180),C.heat,true,0.28)); label(`${rad/1000} km`,V(state.c[0],state.c[1]-rad,2),'#6b6964',{prio:1}); }
+  for(const rad of [3000]){ R.ov.add(line(circlePts(state.c[0],state.c[1],rad,0.5,180),C.heat,true,0.28)); label(`${rad/1000} km`,V(state.c[0],state.c[1]-rad,2),'#6b6964',{prio:1}); }
   (d.nets||[]).forEach(n=>{ const p=[]; for(let i=0;i<n.r.length;i+=2) p.push(V(n.r[i],n.r[i+1],0.6)); R.ov.add(line(p,C.heat,true,0.9)); const cc=BD.centroid(n.r); label(n.n+(n.src==='van9552'?' (traced)':' (approximate)'),V(cc[0],cc[1],4),'#d1a35e',{prio:5}); });
   const all=(d.all||d.near||[]); const lim=d.lim||40; let shown=0;
   for(const p of all){ if(shown>=lim) break; const nb=snap(p.x,p.y); const col=TCOL[p.t]||C.heat; const beyond=!!p.beyond; const ccol=beyond?C.faint:col;

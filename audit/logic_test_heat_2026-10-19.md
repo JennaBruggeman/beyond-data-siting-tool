@@ -28,3 +28,9 @@ Baseline after the fix in row 1 (cost per MWh / worth): Clark Dr 72 / 40 (Grandv
 3. Fuel vs heat (row 1): +$2–4/MWh (fixed).
 4. Search radius (row 2): changes which building is best in Edmonton.
 None of these turns "costs more than the heat is worth" into "pays its way" on the three examples; W Hastings comes closest ($46 at 3%, against $40).
+
+## J.B. decisions (19 Oct, same day) — built
+- Radius: search to 3 km (street-routing limit), cost decides; the Dutch 1.5 km circles retired from map, 3D and text. Clark Dr now 476 buildings with a demand figure, Edmonton lot 106.
+- Heat pump sizing: both shown. Middle case keeps the building's boiler for the coldest hours; each card adds the cost if the heat pump covers everything (CWEC full-load hours, Vancouver 3,200–4,500, Edmonton 2,900–3,900).
+- Cost of capital: middle case at 5.6% with 3% and 8% beside it, on each building's card and on the best set-up.
+- Best set-up after the changes (middle case; 3% / 8% / heat pump covers all): Clark Dr $66 ($54 / $79 / $78) vs $40; Edmonton lot $48 ($40 / $56 / $64) vs $13; 555 W Hastings $49 ($42 / $57 / $58) vs $40.
