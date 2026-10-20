@@ -210,7 +210,7 @@ CAT = [
  dict(id='tes', name='Hot or chilled water tank', family='heat_use', status='sized', quantities=['tes_volume'], rules={'vancouver': '—', 'edmonton': '—'}, changes=['peaks shifted', 'space ↑']),
  dict(id='absorption', name='Cooling for neighbours', family='heat_use', status='gate', quantities=['absorption'], rules={'vancouver': 'temperature gate', 'edmonton': 'temperature gate'}, changes=['cooling to neighbours (liquid-cooled only)']),
  dict(id='wind', name='Small wind', family='power', status='excluded', quantities=[], rules={}, changes=[], reason='Building-mounted turbines in UK urban and suburban trials made ≤200 kWh/yr each, load factor ≤3 % (Energy Saving Trust 2009; Energy Policy 2010); shown so users can see why it is out.', sources=['est_wind2009']),
- dict(id='biomass', name='Biomass or renewable gas', family='carbon', status='excluded', quantities=[], rules={}, changes=[], reason='Adds combustion to the urban airshed (in Vancouver, Metro Vancouver requires dispersion modelling for biomass boilers; the Edmonton rule is not yet read), the data centre already has surplus heat, and renewable gas is a fuel-accounting choice with limited supply (sources/15d §5).', sources=[]),
+ dict(id='biomass', name='Biomass or renewable gas', family='carbon', status='excluded', quantities=[], rules={}, changes=[], reason='Adds combustion to the urban airshed (in Vancouver, Metro Vancouver requires dispersion modelling for biomass boilers; the Edmonton rule is not yet read), the data centre already has surplus heat, and renewable gas is a fuel-accounting choice with limited supply.', sources=[]),
 ]
 
 ids = {q['id'] for q in NEW}

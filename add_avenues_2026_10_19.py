@@ -113,7 +113,7 @@ add('snowmelt_area', 'Sidewalk kept clear by its heat', 'm²', 'opportunity', ['
     [role('nrcCBD160', '430–700 W/m²', 'coefficient', 70), role('ashrae2015ch51', 'Seattle 420–647 W/m²', 'coefficient', 70), role('hollandSnow', '35 °C waste heat', 'precedent', 60)])
 add('backup_neighbours', 'Backup power for neighbours in a blackout', 'rule', 'opportunity', ['backup_hours'],
     'only behind the data centre\'s own transfer switch, on a private line, with the utility\'s written approval; never through the utility\'s lines',
-    'BC: supplying anyone but itself, its employees or tenants makes it a public utility unless the minister (UCA s. 22) or BCUC (s. 88(3)) exempts it; an affiliate is a separate person (2026 BCCA 93, law-firm summary); BC Hydro: never energize a de-energized line. Edmonton: EPCOR bars extending a customer\'s wiring beyond its property (T&C s. 4.4, exception in Art. 8.3 not read) and islanding without written approval (s. 7.6, 7.8). Spare generator capacity in a blackout is what the data centre\'s redundancy leaves, not sized here. Vancouver has 25 disaster support hubs, backup power not stated',
+    'BC: supplying anyone but itself, its employees or tenants makes it a public utility unless the minister (UCA s. 22) or BCUC (s. 88(3)) exempts it; an affiliate is a separate person (2026 BCCA 93, law-firm summary); BC Hydro: never energize a de-energized line. Edmonton: EPCOR bars extending a customer\'s wiring beyond its property (T&C s. 4.4, exception in Art. 8.3 not yet verified) and islanding without written approval (s. 7.6, 7.8). Spare generator capacity in a blackout is what the data centre\'s redundancy leaves, not sized here. Vancouver has 25 disaster support hubs, backup power not stated',
     ['bcUCAs1', 'fasken2026', 'bchCTT2024', 'epcorIG2022', 'epcorTC2025s44', 'vanHubs'], 70, 'rules read 19 Oct 2026',
     [role('bcUCAs1', 'public utility', 'rule', 90), role('bchCTT2024', 'never energize', 'rule', 90), role('epcorTC2025s44', 's. 4.4', 'rule', 80)])
 add('grid_refund', 'First payer refunded when neighbours connect', 'rule', 'test', ['interconnection'],
@@ -181,7 +181,7 @@ opp('Backup power for neighbours in a blackout', {'readiness': 'speculative', 'p
      {'rung': 'Utility law', 'van': ['approval', 'supplying anyone but itself, its employees or tenants makes it a public utility unless the minister or BCUC exempts it (UCA s. 1, 22, 88(3)); an affiliate counts as another person'],
       'edm': ['approval', 'the Electric Utilities Act exempts only power consumed solely on the producer\'s own or rented property (s. 1(1)(vv.1), 2(1)(b)); supplying a neighbour falls under the Act'], 'sources': ['bcUCAs1', 'fasken2026', 'euaS2']},
      {'rung': 'Utility wiring', 'van': ['approval', 'never energize a de-energized BC Hydro line (closed-transition rules)'],
-      'edm': ['not_allowed', 'a customer may not extend its wiring beyond its own property (EPCOR T&C s. 4.4; the exception in Art. 8.3 not read); islanding only with written approval'], 'sources': ['bchCTT2024', 'epcorTC2025s44', 'epcorIG2022']}],
+      'edm': ['not_allowed', 'a customer may not extend its wiring beyond its own property (EPCOR T&C s. 4.4; the exception in Art. 8.3 not yet verified); islanding only with written approval'], 'sources': ['bchCTT2024', 'epcorTC2025s44', 'epcorIG2022']}],
     'unknowns': ['spare generator capacity during a blackout', 'who on the next lot needs it'], 'visual': 'a private line from the generator yard to one neighbour, behind a transfer switch'},
     ['backup_neighbours', 'backup_hours', 'fuel_on_site'])
 opp('Grid upgrades shared with neighbours', {'readiness': 'built_here', 'provisional': False,
@@ -216,7 +216,7 @@ opp('Emergency water for neighbours', {'readiness': 'speculative', 'provisional'
     'sources': ['vanOEM2018'], 'rules': [
      {'rung': 'Health and building rules', 'van': ['allowed', 'non-potable firefighting water: no permit if unconnected and marked (DWPR s. 3.1(b)); drinking water makes it a water supplier with permits'],
       'edm': ['approval', 'non-potable firefighting water: the building code clause is the same as BC (NBC Alberta Edition 3.2.5.7) and the Potable Water Regulation covers only drinking water; drinking water piped to neighbours would make it a private utility waterworks (Alta Reg 277/2003 s. 1(1)(l)) with an engineer-stamped design: a registration if it only passes on city water, an approval if it draws its own river water or ordinary groundwater (Alta Reg 276/2003 Sch. 1–2, Div. 5)'], 'sources': ['bcDWPR', 'bcbc2024_3257', 'nfcAB2023_5635', 'abPWR277', 'abADR276']}],
-    'unknowns': ['tank volume (NFPA standards not read)', 'Vancouver: whether the site is inside the City\'s seismic saltwater system'], 'visual': 'a tank with a fire-department connection at the street'},
+    'unknowns': ['tank volume: not yet verified (the fire-code standard has not been read yet)', 'Vancouver: whether the site is inside the City\'s seismic saltwater system'], 'visual': 'a tank with a fire-department connection at the street'},
     ['fire_water', 'water_supply'])
 json.dump(d, open(P, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print('avenues added:', len(OL), 'opportunities,', len(m['try_menu']), 'add-ons')

@@ -80,6 +80,33 @@ function rowNodes(r){ const a=r.querySelector('[data-add]'), o=r.querySelector('
   if(r.closest('.famno')){ const n=rowName(r); return {key:'op:'+n, ids:oppNodes(n), name:n}; }
   if(b&&ROWID[b.id]) return {key:'row:'+b.id, ids:known(ROWID[b.id]), name:rowName(r)};
   return null; }
+/* plain words for residents (J.B. 20 Oct 2026: "Plain name + term on hover"): in the residents' template a technical term is written as a plain
+   name with the term in brackets; hovering gives a one-line meaning. Drafted by Claude for J.B. to check. Other templates keep the terms. */
+const GLOSS=[
+ [/\bPUE\b/g,'extra power for cooling and losses','PUE (power usage effectiveness): everything the building draws ÷ what the servers use; 1.4 means 40% on top'],
+ [/\bN\+1\b/g,'one spare unit','N+1: as many units as needed, plus one spare'],
+ [/\bCOP\b/g,'heat pump efficiency','COP (coefficient of performance): units of heat delivered for each unit of electricity'],
+ [/\bkWp\b/g,'kW of panels in full sun','kWp: the panels\' output in full sun'],
+ [/\bCWEC\b/g,'typical weather year','CWEC: Canadian Weather year for Energy Calculation, a typical year built from decades of records'],
+ [/\bchilled-water loop\b/g,'the building\'s cold-water cooling pipes','chilled-water loop: pipes carrying cold water from the chillers to the server rooms and back'],
+ [/\bblowdown\b/gi,'water flushed out','blowdown: water a cooling tower drains to stop minerals building up'],
+ [/\bmake-up water\b/gi,'top-up water','make-up water: water added to replace what evaporates or is drained'],
+ [/\b12 kV feeder/g,'local power line','12 kV feeder: the neighbourhood power line from a substation'],
+ [/\bt CO₂e\b/g,'tonnes of carbon','t CO₂e: tonnes of carbon dioxide and other greenhouse gases, counted as CO₂'],
+ [/\bdBA\b/g,'decibels','dBA: sound level in decibels, weighted the way people hear'],
+ [/\bGWh\b/g,'GWh','GWh: a million kilowatt-hours'],[/\bMWh\b/g,'MWh','MWh: a thousand kilowatt-hours']];
+function plainWords(root){ if(!root||tierNow()!=='resident') return; const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{ const p=n.parentElement; if(!p||p.closest('script,style,svg,button,select,option,input,textarea,abbr.gl,.flowbar')) return NodeFilter.FILTER_REJECT; return /PUE|N\+1|COP|kWp|CWEC|chilled-water loop|blowdown|make-up water|12 kV|CO₂e|dBA|GWh|MWh/i.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT; }});
+  const L=[]; while(w.nextNode()) L.push(w.currentNode);
+  for(const n of L){ let h=esc(n.nodeValue), ch=false;
+    for(const [re,plain,tip] of GLOSS){ re.lastIndex=0; h=h.replace(re,(m,off,str)=>{ ch=true; const ab=`<abbr class="gl" title="${esc(tip)}">${m}</abbr>`; if(plain===m) return ab;
+      const before=str.slice(Math.max(0,off-40),off).toLowerCase(), all=str.toLowerCase(); let pl=plain;
+      if(/heat pump\s*$/.test(before)&&pl.startsWith('heat pump ')) pl=pl.slice(10); // "heat pump COP" → "heat pump efficiency (COP)"
+      if(all.includes(pl.toLowerCase().split(' ').slice(0,2).join(' '))) return ab; // the plain words are already there ("One spare (N+1)")
+      if(/^[A-Z]/.test(m)&&/(^|[.:]\s*)$/.test(str.slice(0,off))) pl=pl[0].toUpperCase()+pl.slice(1);
+      const m2=/^[A-Z][a-z]/.test(m)?m.toLowerCase():m; return `${esc(pl)} (<abbr class="gl" title="${esc(tip)}">${m2}</abbr>)`; }); }
+    if(ch){ const sp=document.createElement('span'); sp.className='glw'; sp.innerHTML=h; n.replaceWith(sp); } } }
+BD.plainWords=plainWords;
+{ const st=document.createElement('style'); st.textContent='abbr.gl{text-decoration:underline dotted;text-underline-offset:2px;cursor:help}'; document.head.appendChild(st); }
 /* sensitivity rule (J.B. 20 Oct 2026, step 7): a part this template hides that moves a result shown here is named in plain words —
    25% or more (3 dB of sound) as what most of the range comes from, 10–25% as also behind it (templates.json 'drivers', from audit/sensitivity_2026-10-20.md) */
 function drivers(d,ids,t){ d.querySelectorAll(':scope .drv').forEach(x=>x.remove()); const D=BD.TPL&&BD.TPL.drivers; if(!D||t==='full') return;
@@ -88,7 +115,7 @@ function drivers(d,ids,t){ d.querySelectorAll(':scope .drv').forEach(x=>x.remove
   const p=document.createElement('p'); p.className='src drv';
   p.textContent=(main.size?`Most of this range comes from ${[...main.keys()].join(' and ')}.`:'')+(also.size?`${main.size?' ':''}Also behind it, shown in a fuller level: ${[...also.keys()].join('; ')}.`:'');
   const body=d.querySelector(':scope > :not(summary)'); (body&&body.parentNode===d?d:d).appendChild(p); }
-function filter(sd){ sd=sd||$('#side'); if(!sd||!L||!BD.flow||!BD.flow.on) return; const step=stepKey(), t=tierNow(); if(!step||step==='site'||step==='setup'||step==='report') return;
+function filter(sd){ sd=sd||$('#side'); if(!sd||!L||!BD.flow||!BD.flow.on) return; const step=stepKey(), t=tierNow(); plainWords(sd); if(!step||step==='site'||step==='setup'||step==='report') return;
   const hid=[];
   sd.querySelectorAll('details.sec').forEach(d=>{ if(d.closest('.dk,details.fp')) return; const title=titleOfSec(d); if(!title) return; const ids=secNodes(step,title); const k=step+':'+title;
     d.dataset.tier=tierOf(ids)||''; const show=shows(ids,t)||revealed(k); d.hidden=!show; if(!show) hid.push({k,name:title,tier:tierOf(ids)}); else drivers(d,ids,t); });
@@ -159,7 +186,7 @@ function fromDrawer(dr){ const h=dr.querySelector('h2'), kd=dr.querySelector('.k
   if(ids.length){ setTarget(h2||kind,ids); return true; } return false; }
 (function watch(){ const sd=$('#side'), dr=document.getElementById('drawer'); if(!sd||!dr) return setTimeout(watch,300); oj();
   let t1=null; new MutationObserver(()=>{ clearTimeout(t1); t1=setTimeout(()=>{ if(!BD.flow||!BD.flow.on) return; filter(sd); if(!(BD.drawer&&BD.drawer.isOpen&&BD.drawer.isOpen()&&fromDrawer(dr))) stepTarget(); panelEl(); render(); },80); }).observe(sd,{childList:true});
-  let t2=null; new MutationObserver(()=>{ clearTimeout(t2); t2=setTimeout(()=>{ if(BD.drawer&&BD.drawer.isOpen&&BD.drawer.isOpen()){ if(!fromDrawer(dr)) stepTarget(); } else stepTarget(); },60); }).observe(dr,{childList:true});
+  let t2=null; new MutationObserver(()=>{ clearTimeout(t2); t2=setTimeout(()=>{ plainWords(dr); const cc=document.getElementById('wcTx'); if(cc) plainWords(cc); if(BD.drawer&&BD.drawer.isOpen&&BD.drawer.isOpen()){ if(!fromDrawer(dr)) stepTarget(); } else stepTarget(); },60); }).observe(dr,{childList:true});
   sd.addEventListener('toggle',e=>{ const d=e.target; if(!(d&&d.matches&&d.matches('details.sec'))||!d.open) return; const ti=titleOfSec(d), ids=secNodes(stepKey(),ti); if(ids.length) setTarget(ti,ids); },true);
   setInterval(()=>{ if(document.body.classList.contains('wcon')&&!$('#wcLogicB')){ panelEl(); render(); } },700); })();
 
