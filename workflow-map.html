@@ -276,7 +276,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "quantities": 178,
 "conditions": 101,
 "opportunities": 21,
-"sources": 690
+"sources": 691
 }
 },
 "stages": [
@@ -11089,14 +11089,15 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "opportunity",
 "name": "Firefighting water for neighbours",
 "formula": "a tank on the lot, non-potable, for the fire department after an earthquake; drinking water makes the operator a water supplier",
-"coef": "BCBC 2024 and NBC 3.2.5.7 (Alberta uses the NBC Alberta Edition, same clause per the NFC(AE) cross-reference): every building has water for firefighting; a sprinklered building is deemed to comply; where city supply is limited, a supply on site may be needed, sized for at least 30 minutes of fire-department hose streams (NFPA 1142 and the ISO fire flow guide named; volume not sized: standards not read). Vancouver: sprinklers rely on the mains; the seismic saltwater system (DFPS) covers downtown, part of Kitsilano and to VGH and takes about 80 years to complete. BC DWPR: a non-potable, unconnected, marked supply needs no permit; drinking water needs construction and operating permits. Alberta drinking-water rules for sharing not yet read (gap)",
+"coef": "BCBC 2024 and NBC 3.2.5.7 (Alberta uses the NBC Alberta Edition, same clause per the NFC(AE) cross-reference): every building has water for firefighting; a sprinklered building is deemed to comply; where city supply is limited, a supply on site may be needed, sized for at least 30 minutes of fire-department hose streams (NFPA 1142 and the ISO fire flow guide named; volume not sized: standards not read). Vancouver: sprinklers rely on the mains; the seismic saltwater system (DFPS) covers downtown, part of Kitsilano and to VGH and takes about 80 years to complete. BC DWPR: a non-potable, unconnected, marked supply needs no permit; drinking water needs construction and operating permits. Alberta: drinking water piped to neighbours makes it a private utility waterworks (Potable Water Regulation s. 1(1)(l)); which approval it needs is in the Activities Designation Regulation, not read",
 "unit": "rule",
 "sources": [
 "bcbc2024_3257",
 "nfcAB2023_5635",
 "bcab2005",
 "vanOEM2018",
-"bcDWPR"
+"bcDWPR",
+"abPWR277"
 ],
 "source_roles": [
 {
@@ -11131,7 +11132,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "upstream": 70,
 "city": {
 "van": 4,
-"edm": 1,
+"edm": 2,
 "both": 0,
 "gen": 0
 }
@@ -15317,13 +15318,14 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "non-potable firefighting water: no permit if unconnected and marked (DWPR s. 3.1(b)); drinking water makes it a water supplier with permits"
 ],
 "edm": [
-"unknown",
-"building code: same clause as BC (NBC Alberta Edition 3.2.5.7); sharing drinking water: Alberta rules not yet read"
+"approval",
+"non-potable firefighting water: the building code clause is the same as BC (NBC Alberta Edition 3.2.5.7) and the Potable Water Regulation covers only drinking water; drinking water piped to neighbours would make it a private utility waterworks (Alta Reg 277/2003 s. 1(1)(l)), with an engineer-stamped design and an approval or registration (which, under the Activities Designation Regulation, not read)"
 ],
 "sources": [
 "bcDWPR",
 "bcbc2024_3257",
-"nfcAB2023_5635"
+"nfcAB2023_5635",
+"abPWR277"
 ]
 }
 ],
@@ -16024,7 +16026,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "epsbNSR": "North Saskatchewan River polygon, Altalis Base Features Hydrography, shared by Edmonton Public Schools Data Analysis Team (azimuth.epsb.ca, Hosted/North_Saskatchewan_River layer 98; J.B. download 19 Oct 2026; academic use)",
 "euaS2": "Alberta Electric Utilities Act, SA 2003 c E-5.1 (office consolidation current as of 6 Feb 2026; local copy data/raw/codes/eua.txt), s. 1(1)(vv.1) self-supply = production on a property the person owns or rents where any of it is consumed on that property by that owner or tenant; s. 2(1)(b) the Act does not apply to self-supply consumed solely on that property by that owner or tenant",
 "bcbc2024_3257": "BC Building Code 2024, Div. B 3.2.5.7 and Note A-3.2.5.7.(1) (local copy data/raw/codes/bcbc2024.pdf): every building has an adequate water supply for firefighting; sprinklered or standpiped buildings are deemed to comply (except some mass timber); where municipal supply is limited, supplemental supply on site may be needed; on-site volume for at least 30 minutes of fire-department hose streams; ISO Needed Fire Flow Guide, NFPA 1142 and AWWA named as useful",
-"nfcAB2023_5635": "National Fire Code 2023 Alberta Edition, Div. B 5.6.3.5 (local copy data/raw/codes/nfc_ab2023.pdf): water supply for firefighting on construction sites, cross-referencing Note A-3.2.5.7 of the NBC(AE), the same building clause as BCBC 3.2.5.7 (NBC 2020 3.2.5.7 checked in data/raw/codes/nbc.txt)"
+"nfcAB2023_5635": "National Fire Code 2023 Alberta Edition, Div. B 5.6.3.5 (local copy data/raw/codes/nfc_ab2023.pdf): water supply for firefighting on construction sites, cross-referencing Note A-3.2.5.7 of the NBC(AE), the same building clause as BCBC 3.2.5.7 (NBC 2020 3.2.5.7 checked in data/raw/codes/nbc.txt)",
+"abPWR277": "Alberta Potable Water Regulation, Alta Reg 277/2003 (consolidated to 199/2025, current as of 27 Aug 2025; J.B. download 19 Oct 2026; data/raw/codes/ab_potable_water_reg_277_2003.pdf), s. 1(1)(l): a private utility is a waterworks system owned and operated by anyone other than a municipality, development owner or similar, except one serving only a single family dwelling or farmstead; s. 1(2): applies only to waterworks listed in the Activities Designation Regulation (not read); s. 4: designs stamped by a professional engineer"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -19207,7 +19210,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "epsbNSR": "edm",
 "euaS2": "edm",
 "bcbc2024_3257": "van",
-"nfcAB2023_5635": "edm"
+"nfcAB2023_5635": "edm",
+"abPWR277": "edm"
 },
 "city_gaps": {
 "van": [
