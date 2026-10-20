@@ -196,7 +196,7 @@ opp('Solar on neighbours\' roofs', {'readiness': 'speculative', 'provisional': F
     'sources': ['bchSelfGen2026'], 'rules': [
      {'rung': 'Utility rate', 'van': ['allowed', 'RS 2290: up to 2 MW, neighbours credited on their bills at 10 ¢/kWh (BCUC G-64-26); selling power to them directly makes it a public utility'],
       'edm': ['approval', 'micro-generation on owned, leased or adjacent property, up to the site\'s own use; it cannot sell to the neighbour'], 'sources': ['bchSelfGen2026', 'bchCustGen', 'aucMicro2026']}],
-    'unknowns': ['whether a roof lease counts as leased property (Alberta)'], 'visual': 'panels on the roofs nearby, credits or power flowing back'},
+    'unknowns': ['Alberta: whether a roof lease counts as leased property'], 'visual': 'panels on the roofs nearby, credits or power flowing back'},
     ['community_solar', 'rooftop_solar'])
 opp('Snowmelt on sidewalks and streets', {'readiness': 'speculative', 'provisional': False,
     'basis': 'Holland, Michigan melts about 690,000 ft² of sidewalks and streets with 35 °C power-plant waste heat (City claim); no data-centre snowmelt found. Research 19 Oct 2026.',
@@ -209,14 +209,14 @@ opp('Stormwater held for the neighbourhood', {'readiness': 'built_here', 'provis
     'sources': ['vanRainPage'], 'rules': [
      {'rung': 'Building or drainage rule', 'van': ['allowed', 'required on site (VBBL 2025 2.4.2.5); holding more than required is not addressed'],
       'edm': ['allowed', 'required on lots over 0.16 ha (EPCOR guideline; Bylaw 18100)'], 'sources': ['vbbl2025_2425', 'epcorStorm', 'edmBylaw18100']}],
-    'unknowns': ['what holding back sewer flow is worth to the city', 'whether a harvesting tank counts toward detention (Vancouver 2025)'], 'visual': 'a tank under the yard with the required and the extra volume'},
+    'unknowns': ['what holding back sewer flow is worth to the city', 'Vancouver: whether a harvesting tank counts toward detention (City guidance 2025); Edmonton: not yet read'], 'visual': 'a tank under the yard with the required and the extra volume'},
     ['stormwater_volume', 'rainwater'])
 opp('Emergency water for neighbours', {'readiness': 'speculative', 'provisional': False,
     'basis': 'No private tank found serving a Vancouver or Edmonton neighbourhood; the City\'s 2018 memo names the gap but not private tanks. Research 19 Oct 2026.',
     'sources': ['vanOEM2018'], 'rules': [
      {'rung': 'Health and building rules', 'van': ['allowed', 'non-potable firefighting water: no permit if unconnected and marked (DWPR s. 3.1(b)); drinking water makes it a water supplier with permits'],
       'edm': ['approval', 'non-potable firefighting water: the building code clause is the same as BC (NBC Alberta Edition 3.2.5.7) and the Potable Water Regulation covers only drinking water; drinking water piped to neighbours would make it a private utility waterworks (Alta Reg 277/2003 s. 1(1)(l)) with an engineer-stamped design: a registration if it only passes on city water, an approval if it draws its own river water or ordinary groundwater (Alta Reg 276/2003 Sch. 1–2, Div. 5)'], 'sources': ['bcDWPR', 'bcbc2024_3257', 'nfcAB2023_5635', 'abPWR277', 'abADR276']}],
-    'unknowns': ['tank volume (NFPA standards not read)', 'whether the site is inside the City\'s seismic saltwater system'], 'visual': 'a tank with a fire-department connection at the street'},
+    'unknowns': ['tank volume (NFPA standards not read)', 'Vancouver: whether the site is inside the City\'s seismic saltwater system'], 'visual': 'a tank with a fire-department connection at the street'},
     ['fire_water', 'water_supply'])
 json.dump(d, open(P, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print('avenues added:', len(OL), 'opportunities,', len(m['try_menu']), 'add-ons')

@@ -74,7 +74,7 @@ let refam='';
 const titleOfSec=d=>{ const t=d.querySelector(':scope > summary .t'); return t?t.textContent.trim():''; };
 const rowName=r=>{ const d=r.querySelector(':scope > div')||r; for(const c of d.childNodes){ if(c.nodeType===3&&c.textContent.trim()) return c.textContent.trim(); } return (d.textContent||'').trim().split(/\s{2,}|\n/)[0]; };
 function rowNodes(r){ const a=r.querySelector('[data-add]'), o=r.querySelector('[data-op]'), b=r.querySelector('button[id]');
-  if(a){ const x=(O()&&(O().addons||[]).find(z=>z.id===a.dataset.add)); return {key:'add:'+a.dataset.add, ids:addonNodes(a.dataset.add), name:rowName(r)||(x&&x.name)||a.dataset.add}; }
+  if(a){ const x=(O()&&(O().addons||[]).find(z=>z.id===a.dataset.add)); return {key:'add:'+a.dataset.add, ids:addonNodes(a.dataset.add), name:(x&&x.name)||rowName(r)||a.dataset.add}; }
   if(o) return {key:'op:'+o.dataset.op, ids:oppNodes(o.dataset.op), name:o.dataset.op};
   if(r.dataset.n) return {key:'op:'+r.dataset.n, ids:oppNodes(r.dataset.n), name:r.dataset.n};
   if(r.closest('.famno')){ const n=rowName(r); return {key:'op:'+n, ids:oppNodes(n), name:n}; }
@@ -96,6 +96,9 @@ function filter(sd){ sd=sd||$('#side'); if(!sd||!L||!BD.flow||!BD.flow.on) retur
     const show=shows(x.ids,t)||revealed(x.key); r.hidden=!show; if(!show) hid.push({k:x.key,name:x.name.replace(/\s+(not yet known|built here|built elsewhere|pilot|speculative).*$/,''),tier:tierOf(x.ids)}); });
   // a family step opens on its first opportunity; if that one is hidden at this tier, open the first one shown instead
   const on=sd.querySelector('.famrow.on'); if(on&&on.hidden){ const v=sd.querySelector('.famrow:not([hidden])'); if(v&&refam!==on.dataset.n+'>'+v.dataset.n){ refam=on.dataset.n+'>'+v.dataset.n; setTimeout(()=>v.click(),0); } }
+  // sweep 20 Oct: a family whose every opportunity is hidden at this tier still opens on one; show that row too and keep it off the hidden list; one name once
+  if(on&&on.hidden&&!sd.querySelector('.famrow:not([hidden])')){ on.hidden=false; const n=on.dataset.n; for(let i=hid.length-1;i>=0;i--) if(hid[i].name===n||hid[i].k==='op:'+n) hid.splice(i,1); }
+  { const seen=new Set(); for(let i=hid.length-1;i>=0;i--){ const nm=hid[i].name; if(seen.has(nm)) hid.splice(i,1); else seen.add(nm); } }
   let box=sd.querySelector(':scope .tmore');
   if(!hid.length){ if(box) box.remove(); return; }
   if(!box){ box=document.createElement('div'); box.className='tmore'; const ft=sd.querySelector(':scope > .flowfoot'); if(ft) ft.before(box); else sd.appendChild(box); }

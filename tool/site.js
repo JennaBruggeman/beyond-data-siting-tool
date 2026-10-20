@@ -207,7 +207,7 @@ function ch(name,opts,val){ return `<div class="choice" data-q="${name}">${opts.
 function clauses(Z){ return `<table class="cl">${Z.cl.map(c=>`<tr><td>${esc(c[0])}</td><td>${esc(c[1])}<small>${esc(c[2])}</small></td></tr>`).join('')}</table>`; }
 function setDefaults(){ const A=BD.S.answers; const d={foot:'max',cover:70,hmode:'out',plantAt:'roof',outside:'dry',inside:'air',spares:'n1',gens:'yes',genAt:'yard',genSpares:'n1'}; for(const k in d) if(A[k]==null) A[k]=d[k]; }
 function liveBox(){ const m=model(); if(!m||!BD.eng) return ''; const f=BD.eng.siteFacts(); const P=m.plant;
-  return `<div class="live"><div class="kind">Updates as you choose</div>${draft('')}<b>${BD.eng.rng(f.mw[0],f.mw[1],'MW')}</b> of servers fit · ${BD.eng.rng(f.gross[0],f.gross[1],'m²')} floor area${m.footArea?` · footprint ${fmt(m.footArea)} m²`:''}${m.nF?` · ${m.nF[0]===m.nF[1]?m.nF[0]:m.nF[0]+'–'+m.nF[1]} storeys`:''}${P&&P.short?`<div class="draft" style="margin-top:4px">${esc(P.short)}</div>`:''}</div>`; }
+  return `<div class="live"><div class="kind">Updates as you choose</div>${draft('')}<b>${BD.eng.rng(f.mw[0],f.mw[1],'MW')}</b> of servers on floor space alone · ${BD.eng.rng(f.gross[0],f.gross[1],'m²')} floor area${m.footArea?` · footprint ${fmt(m.footArea)} m²`:''}${m.nF?` · ${m.nF[0]===m.nF[1]?m.nF[0]:m.nF[0]+'–'+m.nF[1]} storeys`:''}${P&&P.short?`<div class="draft" style="margin-top:4px">${esc(P.short)}</div>`:''}</div>`; }
 function card(step){
   setDefaults(); const S=BD.S, A=S.answers, m=model(); if(!m) return; const Z=m.Z, hb=(S.sel.blds||[]).filter(b=>b.f!==3).length>0;
   A.step=step;

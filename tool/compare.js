@@ -17,19 +17,19 @@ function nums(mw,city,des,pue){ const R=E().R; const P=pue?[pue,pue]:R.pue;
   const avail=rec?[it*R.capture[0]*R.cop[1]/(R.cop[1]-1),it*R.capture[1]*R.cop[0]/(R.cop[0]-1)]:[0,0];
   const hp=rec?[avail[0]/R.cop[1],avail[1]/R.cop[0]]:[0,0];
   const towers=des.outside==='towers'||des.outside==='hybrid';
-  return {MWh,co2:MWh.map(v=>v*R.grid[city]/1000),avail,homes:avail.map(v=>v/R.homeMWh[city]),hpco2:hp.map(v=>v*R.grid[city]/1000),
+  return {MWh,co2:MWh.map(v=>v*R.grid[city]/1000),avail,homes:avail.map(v=>v/(R.homeMWh[city]*0.85)),hpco2:hp.map(v=>v*R.grid[city]/1000),
     evap:towers?MWh.map(v=>v*1.5*(des.outside==='hybrid'?{van:0.124,edm:0.104}[city]:1)):[0,0],rec}; }
 function refs(f){ const A=BD.S.answers, mw=A.mw||1, here={inside:A.inside||'air',outside:A.outside||'dry'}, conv={inside:'air',outside:'dry'};
   const S=SITES||{}; const other=f.city==='van'?'edm':'van';
   const mm={van:1159.5,edm:422.5};
   const L=[
    {id:'here',lab:'This design',sub:'your choices, this site',city:f.city,des:here,site:{roof:E().roofArea(f),within:null,nets:null},k:'model'},
-   {id:'conv',lab:'Conventional, this site',sub:'air-cooled, dry coolers, no heat recovery',city:f.city,des:conv,site:{roof:E().roofArea(f)},k:'model'},
+   {id:'conv',lab:'Conventional, this site',sub:'air-cooled, air-cooled chillers, no heat recovery',city:f.city,des:conv,site:{roof:E().roofArea(f)},k:'model'},
    {id:'van4',lab:'Cologix VAN4, Vancouver',sub:'operator claims: 6.5 MW site, PUE 1.5, air-cooled chilled water; no heat recovery stated',city:'van',des:conv,pue:1.5,site:null,k:'claim'},
    {id:'qu2',lab:'Qu EDM2, Edmonton',sub:'operator claims: 3 MW (Tier III), 1,450 tons of N+1 cooling, 35,000 ft²; no PUE or heat recovery stated',city:'edm',des:conv,site:null,k:'claim',noPue:true},
    {id:'vanm',lab:'Vancouver, modelled',sub:'conventional, worked-example lot'+(S.van?` (${S.van.addr.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase())}, ${S.van.zone})`:''),city:'van',des:conv,site:S.van||null,k:'model'},
    {id:'edmd',lab:'Edmonton, same design',sub:'your choices, worked-example lot'+(S.edm?` (${S.edm.zone})`:''),city:'edm',des:here,site:S.edm||null,k:'model'},
-   {id:'edmc',lab:'Edmonton, conventional',sub:'air-cooled, dry coolers, worked-example lot',city:'edm',des:conv,site:S.edm||null,k:'model'}];
+   {id:'edmc',lab:'Edmonton, conventional',sub:'air-cooled, air-cooled chillers, worked-example lot',city:'edm',des:conv,site:S.edm||null,k:'model'}];
   // when the site is the worked-example lot itself, its own row stands in for the modelled row
   return L.map(r=>Object.assign(r,{n:nums(mw,r.city,r.des,r.pue),mm:mm[r.city]})); }
 const NS='<span class="sub">not stated</span>';
@@ -39,7 +39,7 @@ const COLS={
  heat:[['Heat offered',r=>r.id==='qu2'?NS:r.n.rec?rg(r.n.avail.map(v=>v/1000),'GWh/yr',0):(['conv','van4','vanm','edmc'].includes(r.id)?'no heat recovery in this design':'not yet known (air-cooled)')],['Homes’ heating, as an equal',r=>r.n.rec?rg(r.n.homes):'—'],
        ['Nearest heat network',r=>!r.site?NIL:r.id==='here'||r.id==='conv'?'<span class="sub">see below</span>':(r.site.nets&&r.site.nets.length?`${esc(r.site.nets[0].n.replace(/ \(.*/,''))}, ${fmt(r.site.nets[0].edge)} m`:'none within 1.2 km')]],
  energy:[['Electricity',r=>r.noPue?NS:rg(r.n.MWh.map(v=>v/1000),'GWh/yr',0)],['Its grid carbon',r=>r.noPue?NS:rg(r.n.co2,'t CO₂e/yr')],['Heat-pump carbon',r=>r.n.rec?rg(r.n.hpco2,'t CO₂e/yr'):r.k==='claim'?'<span class="sub">no heat recovery stated (operator claim)</span>':'<span class="sub">none: no heat recovered</span>']],
- water:[['Water evaporated on site',r=>r.id==='qu2'?NS:r.id==='van4'?'<span class="sub">none stated (operator claim)</span>':r.n.evap[1]?`up to ${fmt(r.n.evap[1])} m³/yr`:'none (dry coolers)'],['Rain on the roof',r=>r.site&&r.site.roof?`about ${fmt(r.site.roof*r.mm/1000*0.8)} m³/yr`:NIL]],
+ water:[['Water evaporated on site',r=>r.id==='qu2'?NS:r.id==='van4'?'<span class="sub">none stated (operator claim)</span>':r.n.evap[1]?`up to ${fmt(r.n.evap[1])} m³/yr`:'none (no cooling towers)'],['Rain on the roof',r=>r.site&&r.site.roof?`about ${fmt(r.site.roof*r.mm/1000*0.8)} m³/yr`:NIL]],
  materials:[['Electricity over 50 years',r=>r.noPue?NS:rg(r.n.MWh.map(v=>v*50/1e6),'TWh',1)]],
 };
 const WHY={heat:'Heat offered needs liquid cooling and a heat pump; air-cooled heat (25–35 °C) can be reused with heat pumps, but how much is not yet known, so no figure is shown.',energy:'Grid carbon: NIR 2026, 2024 consumption intensity in each province.',water:'Evaporation at most 1.5 L per kWh of heat (towers); hybrids wet only above 18 °C, 12.4% of the year in Vancouver and 10.4% in Edmonton (CWEC, computed). Rain at 80% capture, ECCC normals.',materials:'Materials embodied in each reference are not yet compared.'};

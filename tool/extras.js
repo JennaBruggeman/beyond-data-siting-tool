@@ -164,7 +164,7 @@ function timeView(){
   $('#side').innerHTML=e.tabBar('time')+`<h2>What changes, and when</h2>
   <p class="draft">Pipes and grid connections <span class="k">outlast the servers and the tenants</span>. Each red tick is a point where the heat could change.</p>
   <div class="chart" style="overflow-x:auto">${g}</div>
-  <h3>Four futures</h3><dl><dt>Tenant changes cooling</dt><dd>${draft('liquid to air: heat offered drops to none; air to liquid: heat could be offered')}</dd><dt>Tenant leaves</dt><dd>${draft('receivers fall back on their own heating at full peak; the grid connection and pipe stay')}</dd><dt>Receiver leaves</dt><dd>${draft('all heat goes back to the dry coolers, so they must stay full size')}</dd><dt>Network arrives</dt><dd>${draft('a district network reaching the site could take what neighbours cannot')}</dd></dl>
+  <h3>Four futures</h3><dl><dt>Tenant changes cooling</dt><dd>${draft('liquid to air: heat offered drops to none; air to liquid: heat could be offered')}</dd><dt>Tenant leaves</dt><dd>${draft('receivers fall back on their own heating at full peak; the grid connection and pipe stay')}</dd><dt>Receiver leaves</dt><dd>${draft(`all heat goes back to the ${BD.dryName()}, so they must stay full size`)}</dd><dt>Network arrives</dt><dd>${draft('a district network reaching the site could take what neighbours cannot')}</dd></dl>
   <div class="src"><span class="evb ev-peer">research or government lab</span> register: horizons (LBNL 2024 server life; company filings; ASHRAE plant medians; EN 253 pipe life; Digital Realty contracts — operator; Stockholm Exergi heat contracts — operator).</div>
   `;
   e.wireTabs(); document.body.classList.add('wide'); BD.draw();
@@ -176,13 +176,13 @@ function citiesView(){
   const e=E(), R=e.R, A=BD.S.answers, mw=A.mw||5, rng=e.rng; BD.scene3d&&BD.scene3d.hide();
   const one=c=>{ const fac=[mw*R.pue[0],mw*R.pue[1]], MWh=fac.map(v=>v*8760*R.lf), it=mw*8760*R.lf;
     const avail=[it*R.capture[0]*R.cop[1]/(R.cop[1]-1),it*R.capture[1]*R.cop[0]/(R.cop[0]-1)], hp=[avail[0]/R.cop[1],avail[1]/R.cop[0]];
-    return {MWh,co2:MWh.map(v=>v*R.grid[c]/1000),avail,homes:avail.map(v=>v/R.homeMWh[c]),hpco2:hp.map(v=>v*R.grid[c]/1000)}; };
+    return {MWh,co2:MWh.map(v=>v*R.grid[c]/1000),avail,homes:avail.map(v=>v/(R.homeMWh[c]*0.85)),hpco2:hp.map(v=>v*R.grid[c]/1000)}; };
   const v=one('van'), d=one('edm');
   const rows=[
    ['Grid carbon',`${R.grid.van} g/kWh`,`${R.grid.edm} g/kWh`,'NIR 2026, consumption intensity, 2024','record'],
    ['Carbon of its electricity',rng(v.co2[0],v.co2[1],'t CO₂e/yr'),rng(d.co2[0],d.co2[1],'t CO₂e/yr'),'electricity × grid carbon','physics'],
    ['Heat offered (liquid-cooled, heat pump)',rng(v.avail[0]/1000,v.avail[1]/1000,'GWh/yr'),rng(d.avail[0]/1000,d.avail[1]/1000,'GWh/yr'),'same physics in both cities','physics'],
-   ['Equal to the heating of',rng(v.homes[0],v.homes[1],'homes'),rng(d.homes[0],d.homes[1],'homes'),`a home uses ${R.homeMWh.van} MWh a year in BC, ${R.homeMWh.edm} in Alberta (NRCan CEUD, 2018–22 average)`,'record'],
+   ['Equal to the heating of',rng(v.homes[0],v.homes[1],'homes'),rng(d.homes[0],d.homes[1],'homes'),`a home buys ${R.homeMWh.van} MWh a year for heat in BC, ${R.homeMWh.edm} in Alberta (NRCan CEUD, 2018–22 average); the heat it needs is that × 0.85, the gas boiler it replaces`,'record'],
    ['Heat-pump carbon',rng(v.hpco2[0],v.hpco2[1],'t CO₂e/yr'),rng(d.hpco2[0],d.hpco2[1],'t CO₂e/yr'),'heat-pump electricity × grid carbon','physics'],
    ['Busiest to quietest heating month',`about ${R.monthRatio.van.toFixed(1)} : 1`,`about ${R.monthRatio.edm.toFixed(1)} : 1`,'homes: space heating by CWEC monthly degree-days, hot water flat; provincial shares, NRCan CEUD 2018–22','peer'],
    ['Solar yield, roof','892–1,007 kWh per kWp a year','944–1,244 kWh per kWp a year','NRCan municipal values (flat to latitude tilt)','record'],
