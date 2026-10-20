@@ -56,7 +56,7 @@ if os.path.exists(BCA):
     for tc, (lon, lat, addr) in loc.items():
         v = bca[tc]
         new['van'].append(dict(t='apartment' if v['g'] == 'apartment' else 'commercial', n=addr.title() or 'Unnamed', lon=lon, lat=lat, src='vanBCA',
-                               dem=round(v['h']), lo=round(v['h'] / CAL), meas=0, heat=v['t']))
+                               dem=round(v['h']), lo=round(v['h'] / CAL), meas=0))  # heating type left out: close to a raw BCA field, and Vancouver only
 # Edmonton
 G = collections.OrderedDict()
 for r in csv.DictReader(open(os.path.join(D, 'edmonton_properties_2026.csv'), encoding='utf-8')):
