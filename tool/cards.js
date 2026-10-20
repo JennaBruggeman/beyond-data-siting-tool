@@ -194,6 +194,7 @@ function scen(f,G,cop,offer){ const v=ECON.heatVal(f.city), pe=ECON.elec[f.city]
   const one=(pm,c,flh,Hx)=>{ const mw=Hx/flh, hp=mw*cpm(mw), om=(ECON.hpOMfix*mw+ECON.hpOMvar*Hx)*ECON.eur, pipe=fix+gc.w*pm, cap=pipe+hp, yr=Hx*(v-pe/c)-om;
     return {lcoh:(cP*pipe+cH*hp+om)/Hx+pe/c, pay:yr>0?cap/yr:Infinity, cap, pipe, hp, mw}; };
   const mid=one((ECON.pipe[0]+ECON.pipe[1])/2,(cop[0]+cop[1])/2,(ECON.hpFLH[0]+ECON.hpFLH[1])/2,Hm), lo=one(ECON.pipe[0],cop[1],ECON.hpFLH[1],H), hi=one(ECON.pipe[1],cop[0],ECON.hpFLH[0],HL);
+  if(!isFinite(mid.lcoh)||!isFinite(gc.len)) return null; /* lot test 20 Oct: a group whose route could not be measured gave $NaN or $-Infinity as the best set-up; it is left out */
   return {G,H:Hm,Hhi:H,HL,len:gc.len,v,mid,lo,hi,offer,elec:Hm/((cop[0]+cop[1])/2)}; }
 function bestHeat(f,all,offer){ const cand=all.filter(p=>p.econ&&p.econ.take&&p._route).sort((a,b)=>(a.econ.lcohMid||1e9)-(b.econ.lcohMid||1e9)).slice(0,60); if(!cand.length) return null; const out=[];
   for(const sk of HS.sinks){ const cop=lorenzCOP(HS.src.t,sk.t);

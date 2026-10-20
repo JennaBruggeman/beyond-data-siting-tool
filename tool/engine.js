@@ -91,7 +91,10 @@ function stableFacts(){ const A=BD.S.answers, s=BD.S.sel; if(!s) return null;
     f.plantFor=mw; }
   finally{ A.mw=keep; inStable=false; BD.modelReset&&BD.modelReset(); }
   stableKey=k; stableF=f; return f; }
-function siteFacts(){ if(inStable) return siteFactsRaw(); const st=stableFacts(); if(!st) return siteFactsRaw();
+/* lot test 20 Oct 2026: with no answer yet, the set-up screen shows "New building" as the default but the engine read an empty answer as
+   "not new" and gave the lot no floor, so every set-up failed on lots where a building fits (e.g. 24 MW on a 16,000 m² CD-1 lot). The labelled defaults now hold. */
+function defaults(){ const A=BD.S.answers; if(!A.built) A.built='new'; if(!A.extent) A.extent='whole'; }
+function siteFacts(){ defaults(); if(inStable) return siteFactsRaw(); const st=stableFacts(); if(!st) return siteFactsRaw();
   return Object.assign({},st,{M:BD.model?BD.model():st.M}); }
 function siteFactsRaw(){
   const s=BD.S.sel, city=s.city, a=s.a||[], A=BD.S.answers;
