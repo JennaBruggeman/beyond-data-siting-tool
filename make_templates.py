@@ -130,6 +130,34 @@ PAGES = [
  ('sources', R, 'Sources', 'as text'),
 ]
 out['reports'] = {tid: [{'id': i, 'title': t, 'what': w} for i, r, t, w in PAGES if rank[r] <= rank[tid]] for tid in ('resident', 'community', 'full')}
+# sensitivity test (step 7, 20 Oct 2026; audit/sensitivity_2026-10-20.md). J.B.'s rule: when a part a template hides moves a result it shows by 25% or
+# more (or 3 dB of sound), the card names that part in plain words as what most of the range comes from; 10–25% is listed as also behind the range;
+# under 10% nothing is said. Plain names drafted by Claude for J.B. to check.
+PLAIN = {'pue': 'how much extra power cooling and losses take', 'liquid_capture': "how much of the servers' heat liquid cooling catches",
+ 'cop': 'how well the heat pump lifts the heat', 'hall_area': 'how much of each floor is server hall', 'server_floor': 'how much floor each MW of servers needs',
+ 'plant_schedule': 'whether the cooling units are low-noise or standard models', 'receiver_demand': 'how much heat the buildings nearby use',
+ 'distribution_cost': 'what the pipe costs per metre', 'crf': 'the cost of borrowing (3 to 8%)', 'demand_profile': 'how many hours a year the heat pump runs',
+ 'cooling_type': 'how the servers are cooled (air or liquid)', 'component_space': 'how much room the plant needs per MW', 'envelope': 'floor heights', 'size_fit': 'the size chosen'}
+OUTN = {'fit': 'size_fit', 'floorMW': 'floor_area', 'elec': 'it_load_actual', 'co2': 'grid_co2', 'plant': 'component_space', 'noise': 'noise_level', 'jobs': 'jobs',
+ 'heat': 'heat_delivered', 'homes': 'homes_heated', 'best': 'lcoh', 'cheapest': 'lcoh'}
+_SP = os.path.join(H, 'audit', 'sensitivity_2026-10-20', 'summary.json')
+drivers = {}
+if os.path.exists(_SP):
+    _S = json.load(open(_SP))
+    for key, v in _S['agg'].items():
+        pk, o = key.split('|'); on = OUTN.get(o); pn = _S['params'][pk][0]
+        if not on or pn == on or pk == 'size': continue
+        u = 'dB' if o == 'noise' else '%'
+        big, mid = (3.0, 1.0) if u == 'dB' else (0.25, 0.10)
+        if v < mid: continue
+        L = drivers.setdefault(on, {}); old = L.get(pn)
+        if not old or v > old[0]: L[pn] = [round(v, 3), u, 'main' if v >= big else 'also']
+    for on in drivers: drivers[on] = sorted(([pn] + x for pn, x in drivers[on].items()), key=lambda r: -r[1] * (10 if r[2] == '%' else 1) / (1 if r[2] == '%' else 3))
+    for on, rows in drivers.items():
+        for pn, v, u, w in rows:
+            if pn in T: pass
+out_drivers = {'rule': 'a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing',
+               'plain': PLAIN, 'by_result': drivers, 'source': 'audit/sensitivity_2026-10-20.md'}
 # graph for the tool's diagram thumbnail: stage columns and wires, from the same diagram data
 _D = json.load(open(os.path.join(H, 'diagram_data.json')))
 out['graph'] = {'stages': [[s['id'], s['name']] for s in _D['stages']],
@@ -147,6 +175,12 @@ for n in _D['nodes']:
                             'u': n.get('unit', ''), 'q': n.get('conf'), 'st': n.get('status', ''), 'src': n.get('sources', []), 'st2': _cut(n.get('source_text', ''), 300),
                             't': T[n['id']][0], 'p': T[n['id']][1].split(), 'w': T[n['id']][2]}
 json.dump(_L, open(os.path.join(H, 'tool', 'logic.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
+out['drivers'] = out_drivers
+for on, rows in out_drivers['by_result'].items():
+    for pn, v, u, w in rows:
+        if pn in out['nodes']:
+            t = f"moves {on.replace('_', ' ')} by up to {v*100:.0f}%" if u == '%' else f"moves {on.replace('_', ' ')} by up to {v:.1f} dB"
+            out['nodes'][pn]['sens'] = (out['nodes'][pn].get('sens', '') + ('; ' if out['nodes'][pn].get('sens') else '') + t)
 for path in (os.path.join(H, 'templates.json'), os.path.join(H, 'tool', 'templates.json')):
     json.dump(out, open(path, 'w'), ensure_ascii=False, indent=1)
 print({k: out[k + '_count'] for k in ('resident', 'community', 'full')})

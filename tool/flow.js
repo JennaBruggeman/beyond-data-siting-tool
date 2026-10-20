@@ -93,14 +93,19 @@ async function runExample(i){ const x=EXAMPLES[i]; reset(); F.exPending=true; Ob
     // J.B. 20 Oct: a worked example opens at the largest size where everything fits (servers, plant, generators, loading)
     // if the example's own choices fit no size (the downtown tower: no yard for generators), try the other plant and generator places and keep
     // the one that fits the largest size; generators are kept if any placement allows them (most data centres have them)
-    if(BD.S.sel&&BD.fitMax){ const A=BD.S.answers, base={plantAt:A.plantAt,genAt:A.genAt,gens:A.gens};
-      const tries=[{},{genAt:'roof'},{plantAt:'split'},{plantAt:'yard'},{plantAt:'split',genAt:'roof'},{plantAt:'yard',genAt:'roof'},{gens:'none'},{gens:'none',plantAt:'split'},{gens:'none',plantAt:'yard'}];
-      let best=null; for(const t of tries){ Object.assign(A,base,t); BD.modelReset&&BD.modelReset(); const v=BD.fitMax(); if(!v) continue;
-        if(!best) best={v,t}; else if(v>best.v+0.05&&!(best.t.gens!=='none'&&t.gens==='none')) best={v,t};
-        if(t===tries[0]) break; /* the example's own choices fit: keep them */ if(best&&best.t.gens!=='none'&&t===tries[5]) break; }
-      Object.assign(A,base,best?best.t:{}); if(best){ A.mw=best.v; A.mwPick='large'; A.mwSite=BD.S.sel.id; } BD.modelReset&&BD.modelReset(); }
+    findFit();
     F.sel=selKey(); F.sig=sigOf(); } finally{ F.exPending=false; } if(BD.S.sel) go(1); }
 
+/* the placement search: keep the current choices if any size fits; otherwise try the other plant and generator places (generators kept if any
+   placement allows them) and take the one that fits the largest size. Used by worked examples and, since 20 Oct 2026, by "Find a set-up that fits"
+   when the user's choices fit no size (lot test: default choices fit nothing on many small lots). Returns what changed, or null. */
+function findFit(){ if(!BD.S.sel||!BD.fitMax) return null; const A=BD.S.answers, base={plantAt:A.plantAt,genAt:A.genAt,gens:A.gens};
+  const tries=[{},{genAt:'roof'},{plantAt:'split'},{plantAt:'yard'},{plantAt:'split',genAt:'roof'},{plantAt:'yard',genAt:'roof'},{gens:'none'},{gens:'none',plantAt:'split'},{gens:'none',plantAt:'yard'}];
+  let best=null; for(const t of tries){ Object.assign(A,base,t); BD.modelReset&&BD.modelReset(); const v=BD.fitMax(); if(!v) continue;
+    if(!best) best={v,t}; else if(v>best.v+0.05&&!(best.t.gens!=='none'&&t.gens==='none')) best={v,t};
+    if(t===tries[0]) break; if(best&&best.t.gens!=='none'&&t===tries[5]) break; }
+  Object.assign(A,base,best?best.t:{}); if(best){ A.mw=best.v; A.mwPick='large'; A.mwSite=BD.S.sel.id; } BD.modelReset&&BD.modelReset(); return best; }
+F.findFit=findFit;
 /* ---------- the bar at the top and the buttons at the bottom of the panel ---------- */
 function bar(){ const st=F.steps[F.i], gi=GROUPS.findIndex(g=>g[0]===st.g); const inG=F.steps.filter(s=>s.g===st.g), j=inG.indexOf(st);
   const reachG=g=>F.steps.findIndex((s,k)=>s.g===g&&k<=F.max)>=0;
@@ -112,13 +117,14 @@ function stuck(){ const st=F.steps[F.i]; if(!st||st.k==='site'||!BD.S.sel||!BD.s
   const fm=BD.fitMax?BD.fitMax():null; return {p,fm}; }
 function foot(){ const st=F.steps[F.i], nx=F.steps[F.i+1], pv=F.steps[F.i-1]; const S=stuck(); F.stuck=!!S; const blocked=(st.k==='site'&&!BD.S.sel)||!!S;
   const note=S?`<div class="fstuck" role="alert"><b>This set-up doesn't work on this lot.</b><ul>${S.p.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
-    <div class="fsx">${S.fm?`<button class="btn" id="fFit">Use the largest size that fits (${S.fm.toFixed(1)} MW)</button>`:'<span class="src">No size fits with these choices.</span>'}${st.k!=='setup'?'<button class="btn" id="fSetup">Change the set-up</button>':''}</div></div>`:'';
+    <div class="fsx">${S.fm?`<button class="btn" id="fFit">Use the largest size that fits (${S.fm.toFixed(1)} MW)</button>`:`<span class="src">No size fits with these choices.</span><button class="btn" id="fFind">Find a set-up that fits</button>`}${st.k!=='setup'?'<button class="btn" id="fSetup">Change the set-up</button>':''}</div></div>`:'';
   return `${note}<div class="flowfoot">${pv?`<button class="sec" id="fBack" title="Back to ${esc(pv.t)}">← ${pv.t.length>22?'Back':esc(pv.t)}</button>`:'<span></span>'}${nx?`<button class="${st.k==='setup'?'sec':'pri'}" id="fNext" ${blocked?'disabled':''}>${st.k==='site'&&!BD.S.sel?'Pick a site first':S?'Fix the set-up to go on':st.k==='setup'?'Keep the defaults →':(nx.t.length>26?'Next →':`Next: ${esc(nx.t)} →`)}</button>`:''}</div>`; }
 function decorate(){ const sd=$('#side'); if(!sd||!F.on) return; F.busy=true;
   try{ sd.querySelectorAll(':scope > .flowbar, :scope > .flowfoot, .fstuck').forEach(x=>x.remove()); sd.insertAdjacentHTML('afterbegin',bar()); sd.insertAdjacentHTML('beforeend',foot());
     { const st=F.steps[F.i], tk=BD.explain&&BD.explain.topicFor(st.k); if(tk&&!sd.querySelector('.xpbtn')){ const at=sd.querySelector('.lead')||sd.querySelector('h2'); if(at){ const b=document.createElement('button'); b.className='xpbtn'; b.innerHTML='How it works <span>›</span>'; b.onclick=()=>BD.explain.open(tk); at.after(b); } } }
     sd.querySelectorAll('.flowbar [data-fg]').forEach(b=>b.onclick=()=>{ const k=F.steps.findIndex(s=>s.g===b.dataset.fg); if(k>=0&&k<=F.max&&!(F.stuck&&k>F.i)) go(k); });
     { const fit=$('#fFit'); if(fit) fit.onclick=()=>{ const v=BD.fitMax(); if(v){ BD.S.answers.mw=v; BD.S.answers.mwPick='large'; BD.S.answers.mwSite=BD.S.sel.id; BD.modelReset&&BD.modelReset(); go(F.i); } };
+      const ff=$('#fFind'); if(ff) ff.onclick=()=>{ const b=findFit(); if(!b){ ff.disabled=true; ff.textContent='No set-up fits this lot'; return; } go(F.i); };
       const su=$('#fSetup'); if(su) su.onclick=()=>{ const k=F.steps.findIndex(s=>s.k==='setup'); if(k>=0) go(k); }; }
     const bk=$('#fBack'); if(bk) bk.onclick=back; const nx=$('#fNext'); if(nx) nx.onclick=next; }
   finally{ setTimeout(()=>{ F.busy=false; },0); } }
