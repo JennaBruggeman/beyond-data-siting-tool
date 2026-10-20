@@ -8,6 +8,7 @@
 const BD=window.BD; const {$,esc,fmt}=BD; const E=()=>BD.eng;
 const PAL={
  screen:{ink:'#e9e6e1',mute:'#a8a49d',faint:'#5d5b57',acc:'#CC746C',fill:'rgba(204,116,108,.20)',plant:'#7d7a74',gen:'#b9b5ae',bg:'none',lot:'rgba(255,255,255,.03)',ctx:'rgba(255,255,255,.07)',lotFill:'rgba(255,255,255,.02)',bfill:'rgba(204,116,108,.10)',equip:'rgba(255,255,255,.08)'},
+ v6:{ink:'#1d1e20',mute:'#5f5d58',faint:'#b9b6ae',acc:'#9b7946',fill:'#ebe2d2',plant:'#9a978f',gen:'#5f5d58',bg:'#f3f0ea',lot:'#f3f0ea',ctx:'#e3ded4',lotFill:'#f3f0ea',bfill:'#e9dfcd',equip:'#ebe7df'},
  print:{ink:'#222222',mute:'#6b6b6b',faint:'#c4c4c4',acc:'#CC746C',fill:'#f4dedb',plant:'#9a9a9a',gen:'#555555',bg:'#ffffff',lot:'#fafafa',ctx:'#ececeb',lotFill:'#ffffff',bfill:'#fbefed',equip:'#f2f2f2'}};
 const FONT=`font-family="Open Sans, Arial, sans-serif"`;
 const r1=v=>Math.round(v*10)/10;
@@ -287,5 +288,5 @@ async function docPDF(B){ if(!window.jspdf) await load(LIB[0]); if(!window.jspdf
   if(D.srcs.length){ doc.addPage(); y=M; text('SOURCES',{size:11,bold:true,color:acc,after:8}); D.srcs.forEach(s=>text(s,{size:7.5,color:mute,after:3})); }
   const np=doc.getNumberOfPages(); for(let p=1;p<=np;p++){ if(sheetPages.has(p)) continue; doc.setPage(p); doc.setFont(FN,'normal'); doc.setFontSize(7.5); doc.setTextColor(...mute); doc.text(T(`Beyond Data · ${D.facts[0][1]}`),M,PH-28); doc.text(`${p} / ${np}`,PW-M,PH-28,{align:'right'}); }
   return doc.output('blob'); }
-BD.report2={planSVG,sectionSVG,flowSVG,heatFlow,powerFlow,waterFlow,build,docPDF,docHTML,PAL,SPEC};
+BD.report2={specData,specFlow,oppPlanSVG,planSVG,sectionSVG,flowSVG,heatFlow,powerFlow,waterFlow,build,docPDF,docHTML,PAL,SPEC};
 })();
