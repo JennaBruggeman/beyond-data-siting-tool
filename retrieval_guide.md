@@ -203,12 +203,12 @@ Already held locally (no need to fetch): BCBC 2024, NBC 2020, NFC 2020, NFC 2023
 Since section 11, also resolved: rainwater tank cost (Vancouver toolkit 2014, US EPA 2013).
 
 A. Changes results (yours to fetch)
-- ☐ H1 CanVec Hydro, BC (1:50K shapefile; or a Geospatial Data Extraction Tool cut around Vancouver) — the Vancouver shoreline, so "Cooling from the inlet" measures distance to the water. https://open.canada.ca/data/en/dataset/9d96e8c9-22fe-4ad2-b5e8-94a6991b744b → Prepackaged Shapefiles → Go to resource.
-- ☐ H2 Alberta Activities Designation Regulation (Alta Reg 276/2003, kings-printer.alberta.ca) — which approval a private drinking-water system for neighbours needs (Schedule 1 and 2, Division 5).
+- ⏳ H1 (downloading, BC and AB, 19 Oct) CanVec Hydro, BC (1:50K shapefile; or a Geospatial Data Extraction Tool cut around Vancouver) — the Vancouver shoreline, so "Cooling from the inlet" measures distance to the water. https://open.canada.ca/data/en/dataset/9d96e8c9-22fe-4ad2-b5e8-94a6991b744b → Prepackaged Shapefiles → Go to resource.
+- ✅ H2 (received 19 Oct) Alberta Activities Designation Regulation (Alta Reg 276/2003, kings-printer.alberta.ca) — which approval a private drinking-water system for neighbours needs (Schedule 1 and 2, Division 5).
 - ☐ H3 NFPA 1142, chapter 4 (free read-only view at nfpa.org with an account) — how big a firefighting tank must be.
-- ☐ H4 ASHRAE Handbook, HVAC Applications, "Snow Melting and Freeze Protection" (UBC Library) — design watts per m² for Vancouver and Edmonton (the tool now uses NRC 1974 for Edmonton and Portland, Oregon for Vancouver).
+- ✅ H4 (received 19 Oct) ASHRAE Handbook, HVAC Applications, "Snow Melting and Freeze Protection" (UBC Library) — design watts per m² for Vancouver and Edmonton (the tool now uses NRC 1974 for Edmonton and Portland, Oregon for Vancouver).
 - ☐ H5 Edmonton encroachment agreements guide (edmonton.ca; blocked for Claude) — who owns heated pipes under a City sidewalk.
-- ☐ H6 BC Hydro Electric Tariff Supplement No. 6 (transmission connections) — the refund rule when later customers connect. https://app.bchydro.com/content/dam/hydro/medialib/internet/documents/appcontent/your_account/Electric_Tariff_Supplement_Number_6.pdf
+- ✅ H6 (received 19 Oct) BC Hydro Electric Tariff Supplement No. 6 (transmission connections) — the refund rule when later customers connect. https://app.bchydro.com/content/dam/hydro/medialib/internet/documents/appcontent/your_account/Electric_Tariff_Supplement_Number_6.pdf
 - ☐ H7 BC Data Centre and Hydrogen Production Facility Power Supply Regulation (BC Reg 8/2026) and the Water Sustainability Act (bclaws.gov.bc.ca; blocked for Claude) — whether the WSA covers sea water for cooling.
 - ☐ H8 EPCOR 2026 commercial water and wastewater rates (Edmonton water figures are still placeholders).
 - ☐ W1 (still open) Environmental Quality Guidelines for Alberta Surface Waters (2018) — confirms or replaces the 3 °C river limit.
