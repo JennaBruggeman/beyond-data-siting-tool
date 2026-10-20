@@ -382,8 +382,8 @@ function carriersCard(f){ const city=f.city;
    ['Heat pipe',`cost grows about $${fmt(ECON.pipe[0])}–${fmt(ECON.pipe[1])} a metre after a fixed $${fmt(ECON.fixed)} to connect; break-even depends on how much heat the receiver takes (see each card)`,'street: a street-use permit and trenching; a district-energy service area: connection may be compulsory inside it',ECON.src.slice(0,4)],
    ['Electric cable',`short runs are cheap; the step is the property line: supplying a neighbour for pay makes the supplier a public utility in BC unless exempted (UCA s. 1), and in Alberta self-supply must be on one property — "the lands must, at a minimum, be contiguous" (AUC 2025)`,'the property line; then the utility\'s service area',['bcUCAs1','aucCoaldale2025','abEUAdef2026']],
    ['Water pipe',`reclaimed-water pipe cost about US$1,870/m in one US project (2018, all items); pumping about 0.18 kWh per m³ (California 2023)`,'the street; Vancouver has no reclaimed-water network; EPCOR supplies Gold Bar reclaimed water to industry by agreement',['irwdCulver2018','cec2023pump','epcorGoldBar']],
-   ['Truck','cost and emissions per km not yet sourced','none: trucks use the streets',[]],
-   ['Walking (people to a refuge)','walking-distance norms for warming and cooling centres not yet sourced','busy streets and rail lines as barriers',[]],
+   ['Truck','cost and emissions per km not yet verified','none: trucks use the streets',[]],
+   ['Walking (people to a refuge)','walking-distance norms for warming and cooling centres not yet verified','busy streets and rail lines as barriers',[]],
   ];
   BD.drawer.open(`<div class="kind">Distance</div><h2>How far is too far</h2><p class="sub">${draft('Each thing a data centre could share travels differently. Distance costs money gradually; some lines cost a rule all at once.')}</p>
   <table class="cl">${rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}<small>Step changes: ${esc(r[2])}</small></td></tr>`).join('')}</table>

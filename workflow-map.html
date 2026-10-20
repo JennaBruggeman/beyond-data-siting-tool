@@ -1646,7 +1646,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Backup duration",
 "formula": "usable kWh ÷ load; fuel ÷ burn rate",
-"coef": "UPS runtime about 1–2 min (hyperscale), about 5 min (colocation), 10–15 min (financial); generators take over in 10–20 s (vendor claims, sources/15d); 12 h fuel minimum (Uptime) and 24–48 h typical (operator claims)",
+"coef": "UPS runtime about 1–2 min (hyperscale), about 5 min (colocation), 10–15 min (financial); generators take over in 10–20 s (vendor claims); 12 h fuel minimum (Uptime) and 24–48 h typical (operator claims)",
 "unit": "h",
 "sources": [
 "heatPhys",
@@ -10967,7 +10967,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "opportunity",
 "name": "Backup power for neighbours in a blackout",
 "formula": "only behind the data centre's own transfer switch, on a private line, with the utility's written approval; never through the utility's lines",
-"coef": "BC: supplying anyone but itself, its employees or tenants makes it a public utility unless the minister (UCA s. 22) or BCUC (s. 88(3)) exempts it; an affiliate is a separate person (2026 BCCA 93, law-firm summary); BC Hydro: never energize a de-energized line. Edmonton: EPCOR bars extending a customer's wiring beyond its property (T&C s. 4.4, exception in Art. 8.3 not read) and islanding without written approval (s. 7.6, 7.8). Spare generator capacity in a blackout is what the data centre's redundancy leaves, not sized here. Vancouver has 25 disaster support hubs, backup power not stated | 20 Oct 2026 (opps.js): who would need power most, within 1 km: care homes and hospitals (receivers: provincial licence lists, see receivers_nearby); buildings over 21 m from measured heights (Vancouver LiDAR 2022, Edmonton City 3D buildings) and over 39 m, read against BCBC 2024 / NBC(AE) 3.2.6.1 (residential top floor over 18 m: high building), 3.2.6.5 (firefighters' elevator), 3.2.7.9 (over 36 m: 2 h generator for elevators, fire pumps and smoke fans only); heights to the roof, so approximate. Main heating by CMA, SHEU 2019 Table 4.1: Vancouver furnace 39.25%, boiler 22.77% (M), electric baseboard or radiant 28.95%; Edmonton furnace 75.24%, boiler 19.21% (M), electric baseboard U (not published). BC Assessment's care beds, elevators and heating type exist for Vancouver only and are not used, to keep the cities equal",
+"coef": "BC: supplying anyone but itself, its employees or tenants makes it a public utility unless the minister (UCA s. 22) or BCUC (s. 88(3)) exempts it; an affiliate is a separate person (2026 BCCA 93, law-firm summary); BC Hydro: never energize a de-energized line. Edmonton: EPCOR bars extending a customer's wiring beyond its property (T&C s. 4.4, exception in Art. 8.3 not yet verified) and islanding without written approval (s. 7.6, 7.8). Spare generator capacity in a blackout is what the data centre's redundancy leaves, not sized here. Vancouver has 25 disaster support hubs, backup power not stated | 20 Oct 2026 (opps.js): who would need power most, within 1 km: care homes and hospitals (receivers: provincial licence lists, see receivers_nearby); buildings over 21 m from measured heights (Vancouver LiDAR 2022, Edmonton City 3D buildings) and over 39 m, read against BCBC 2024 / NBC(AE) 3.2.6.1 (residential top floor over 18 m: high building), 3.2.6.5 (firefighters' elevator), 3.2.7.9 (over 36 m: 2 h generator for elevators, fire pumps and smoke fans only); heights to the roof, so approximate. Main heating by CMA, SHEU 2019 Table 4.1: Vancouver furnace 39.25%, boiler 22.77% (M), electric baseboard or radiant 28.95%; Edmonton furnace 75.24%, boiler 19.21% (M), electric baseboard U (not published). BC Assessment's care beds, elevators and heating type exist for Vancouver only and are not used, to keep the cities equal",
 "unit": "rule",
 "sources": [
 "bcUCAs1",
@@ -15161,7 +15161,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 ],
 "edm": [
 "not_allowed",
-"a customer may not extend its wiring beyond its own property (EPCOR T&C s. 4.4; the exception in Art. 8.3 not read); islanding only with written approval"
+"a customer may not extend its wiring beyond its own property (EPCOR T&C s. 4.4; the exception in Art. 8.3 not yet verified); islanding only with written approval"
 ],
 "sources": [
 "bchCTT2024",
@@ -15363,7 +15363,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 }
 ],
 "unknowns": [
-"tank volume (NFPA standards not read)",
+"tank volume: not yet verified (the fire-code standard has not been read yet)",
 "Vancouver: whether the site is inside the City's seismic saltwater system"
 ],
 "visual": "a tank with a fire-department connection at the street"
@@ -17299,7 +17299,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "quantities": [],
 "rules": {},
 "changes": [],
-"reason": "Adds combustion to the urban airshed (in Vancouver, Metro Vancouver requires dispersion modelling for biomass boilers; the Edmonton rule is not yet read), the data centre already has surplus heat, and renewable gas is a fuel-accounting choice with limited supply (sources/15d §5).",
+"reason": "Adds combustion to the urban airshed (in Vancouver, Metro Vancouver requires dispersion modelling for biomass boilers; the Edmonton rule is not yet read), the data centre already has surplus heat, and renewable gas is a fuel-accounting choice with limited supply.",
 "sources": [],
 "kind": "technology"
 }
