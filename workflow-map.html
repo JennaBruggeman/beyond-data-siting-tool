@@ -276,7 +276,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "quantities": 178,
 "conditions": 101,
 "opportunities": 21,
-"sources": 687
+"sources": 690
 }
 },
 "stages": [
@@ -10734,7 +10734,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "opportunity",
 "name": "Own gas plant: heat with the power",
 "formula": "heat = electric output ÷ power-to-heat ratio; total efficiency 66–80%",
-"coef": "reciprocating engines 0.8–2.0 MW of heat per MW of power (27–41% electric, 77–80% total, HHV); gas turbines 0.9–1.7 (24–36%, 66–71%) (US EPA 2015, derived from Table 1-3). Rules: Clean Electricity Regulations, units ≥ 25 MW on fossil fuel, 65 t CO2/GWh from 2035 (held in abeyance in Alberta); Alberta TIER $95/t in 2026, sites ≥ 100,000 t a year; BC: waste discharge authorization above 5 MW of combustion; self-supply legal in BC (UCA s. 1(d)) and Alberta (EUA s. 2(1)(b), same property); Alberta Reg 117/2026 (read in full): data centres of 75 MW or more from the transmission system may be tethered to new generation or storage able to supply at least their maximum demand, located anywhere (no location is set) and of any fuel (the AESO's first intake is gas only, a proposal); tethered requests are processed first (s. 6); bridged service up to 3 years (s. 9); in a supply shortfall large data centres are cut before everyone else (s. 10); the AESO may require zoning approvals and water licences first (s. 7); the regulation expires 31 May 2035",
+"coef": "reciprocating engines 0.8–2.0 MW of heat per MW of power (27–41% electric, 77–80% total, HHV); gas turbines 0.9–1.7 (24–36%, 66–71%) (US EPA 2015, derived from Table 1-3). Rules: Clean Electricity Regulations, units ≥ 25 MW on fossil fuel, 65 t CO2/GWh from 2035 (held in abeyance in Alberta); Alberta TIER $95/t in 2026, sites ≥ 100,000 t a year; BC: waste discharge authorization above 5 MW of combustion; self-supply legal in BC (UCA s. 1(d)) and Alberta (EUA s. 2(1)(b): consumed solely on the producer's own or rented property); Alberta Reg 117/2026 (read in full): data centres of 75 MW or more from the transmission system may be tethered to new generation or storage able to supply at least their maximum demand, located anywhere (no location is set) and of any fuel (the AESO's first intake is gas only, a proposal); tethered requests are processed first (s. 6); bridged service up to 3 years (s. 9); in a supply shortfall large data centres are cut before everyone else (s. 10); the AESO may require zoning approvals and water licences first (s. 7); the regulation expires 31 May 2035",
 "unit": "MW heat per MW electric",
 "sources": [
 "epaCHP2015",
@@ -10742,7 +10742,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "caAbMOU2026",
 "emaWDA",
 "bcUCAs1",
-"bjSelfSupply",
+"euaS2",
 "alta117_2026"
 ],
 "source_roles": [
@@ -11089,19 +11089,21 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "opportunity",
 "name": "Firefighting water for neighbours",
 "formula": "a tank on the lot, non-potable, for the fire department after an earthquake; drinking water makes the operator a water supplier",
-"coef": "BCBC 3.2.5.7: every building has water for firefighting; on-site storage for at least 30 minutes of hose streams (NFPA 1142, volume not sized: standard not read). Vancouver: sprinklers rely on the mains; the seismic saltwater system (DFPS) covers downtown, part of Kitsilano and to VGH and takes about 80 years to complete. BC DWPR: a non-potable, unconnected, marked supply needs no permit; drinking water needs construction and operating permits. Alberta and Edmonton rules not researched (gap)",
+"coef": "BCBC 2024 and NBC 3.2.5.7 (Alberta uses the NBC Alberta Edition, same clause per the NFC(AE) cross-reference): every building has water for firefighting; a sprinklered building is deemed to comply; where city supply is limited, a supply on site may be needed, sized for at least 30 minutes of fire-department hose streams (NFPA 1142 and the ISO fire flow guide named; volume not sized: standards not read). Vancouver: sprinklers rely on the mains; the seismic saltwater system (DFPS) covers downtown, part of Kitsilano and to VGH and takes about 80 years to complete. BC DWPR: a non-potable, unconnected, marked supply needs no permit; drinking water needs construction and operating permits. Alberta drinking-water rules for sharing not yet read (gap)",
 "unit": "rule",
 "sources": [
+"bcbc2024_3257",
+"nfcAB2023_5635",
 "bcab2005",
 "vanOEM2018",
 "bcDWPR"
 ],
 "source_roles": [
 {
-"id": "bcab2005",
+"id": "bcbc2024_3257",
 "term": "30 min hose streams",
 "role": "rule",
-"conf": 80,
+"conf": 95,
 "verified": true
 },
 {
@@ -11119,17 +11121,17 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "verified": true
 }
 ],
-"conf": 60,
+"conf": 70,
 "status": "rules read 19 Oct 2026",
 "direction": "",
 "trial": "",
 "inputs": [
 "water_supply"
 ],
-"upstream": 60,
+"upstream": 70,
 "city": {
-"van": 3,
-"edm": 0,
+"van": 4,
+"edm": 1,
 "both": 0,
 "gen": 0
 }
@@ -15111,12 +15113,12 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 ],
 "edm": [
 "approval",
-"self-supply only on the same property (EUA s. 2(1)(b), law-firm summary)"
+"the Electric Utilities Act exempts only power consumed solely on the producer's own or rented property (s. 1(1)(vv.1), 2(1)(b)); supplying a neighbour falls under the Act"
 ],
 "sources": [
 "bcUCAs1",
 "fasken2026",
-"bjSelfSupply"
+"euaS2"
 ]
 },
 {
@@ -15316,11 +15318,12 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 ],
 "edm": [
 "unknown",
-"not yet researched"
+"building code: same clause as BC (NBC Alberta Edition 3.2.5.7); sharing drinking water: Alberta rules not yet read"
 ],
 "sources": [
 "bcDWPR",
-"bcab2005"
+"bcbc2024_3257",
+"nfcAB2023_5635"
 ]
 }
 ],
@@ -16018,7 +16021,10 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "hawaiiSWAC2002": "Hawaii DBEDT, Sea water district cooling feasibility analysis (Oct 2002), p. 61–66: cold-water pipe US$12.05–12.47 M for 5.7–5.8 km, about US$2,120–2,150 per m (2002, deep ocean intake at about 500 m); 92.5% energy saving (study) — https://energy.hawaii.gov/wp-content/uploads/2011/10/SeaWaterDistrictCoolingFeasibilityAnalysisfortheStateofHawaii2002.pdf",
 "dfoScreen": "DFO, Interim code of practice: end-of-pipe fish protection screens: openings ≤ 2.54 mm; approach velocity default 0.035–0.055 m/s; may not apply to large intakes — https://www.dfo-mpo.gc.ca/pnw-ppe/standards-normes/fish-screen-grillage-poisson-eng.html",
 "ecccNormals2020": "ECCC Canadian Climate Normals 1991–2020, Vancouver International (Airport) and Edmonton (Airport), CSV (J.B. download 19 Oct 2026): snowfall 36.6 / 126.7 cm a year; days with snowfall ≥ 0.2 cm 7.4 / 54.7; days with snow depth ≥ 1 cm 8.2 / 145.1, ≥ 5 cm 4.4 / 120.5; average vapour pressure July 1.5 / 1.4 kPa — https://climate.weather.gc.ca/climate_normals/index_e.html",
-"epsbNSR": "North Saskatchewan River polygon, Altalis Base Features Hydrography, shared by Edmonton Public Schools Data Analysis Team (azimuth.epsb.ca, Hosted/North_Saskatchewan_River layer 98; J.B. download 19 Oct 2026; academic use)"
+"epsbNSR": "North Saskatchewan River polygon, Altalis Base Features Hydrography, shared by Edmonton Public Schools Data Analysis Team (azimuth.epsb.ca, Hosted/North_Saskatchewan_River layer 98; J.B. download 19 Oct 2026; academic use)",
+"euaS2": "Alberta Electric Utilities Act, SA 2003 c E-5.1 (office consolidation current as of 6 Feb 2026; local copy data/raw/codes/eua.txt), s. 1(1)(vv.1) self-supply = production on a property the person owns or rents where any of it is consumed on that property by that owner or tenant; s. 2(1)(b) the Act does not apply to self-supply consumed solely on that property by that owner or tenant",
+"bcbc2024_3257": "BC Building Code 2024, Div. B 3.2.5.7 and Note A-3.2.5.7.(1) (local copy data/raw/codes/bcbc2024.pdf): every building has an adequate water supply for firefighting; sprinklered or standpiped buildings are deemed to comply (except some mass timber); where municipal supply is limited, supplemental supply on site may be needed; on-site volume for at least 30 minutes of fire-department hose streams; ISO Needed Fire Flow Guide, NFPA 1142 and AWWA named as useful",
+"nfcAB2023_5635": "National Fire Code 2023 Alberta Edition, Div. B 5.6.3.5 (local copy data/raw/codes/nfc_ab2023.pdf): water supply for firefighting on construction sites, cross-referencing Note A-3.2.5.7 of the NBC(AE), the same building clause as BCBC 3.2.5.7 (NBC 2020 3.2.5.7 checked in data/raw/codes/nbc.txt)"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -17196,11 +17202,11 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 ],
 "kind": "technology",
 "rules": {
-"vancouver": "condensate is clear-water waste; whether VBBL 2025 Table 2.7.1.3 lets it be cooling-tower make-up was not read; non-potable systems need an operating permit",
+"vancouver": "condensate is clear-water waste, which VBBL 2025 Table 2.7.1.3 lets be used, treated, as cooling-tower make-up (Column B); operating permit and professional design required",
 "edmonton": "not yet read"
 },
 "rule_state": {
-"vancouver": "unknown",
+"vancouver": "allowed",
 "edmonton": "unknown"
 },
 "changes": [
@@ -17212,6 +17218,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "epaWSatWork"
 ],
 "rule_sources": [
+"vbbl2025_272",
 "van_vbbl2025_27"
 ],
 "sources": [
@@ -19197,7 +19204,10 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "hawaiiSWAC2002": "gen",
 "dfoScreen": "gen",
 "ecccNormals2020": "both",
-"epsbNSR": "edm"
+"epsbNSR": "edm",
+"euaS2": "edm",
+"bcbc2024_3257": "van",
+"nfcAB2023_5635": "edm"
 },
 "city_gaps": {
 "van": [
@@ -19211,8 +19221,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "no2_at_receptor",
 "air_permit_trigger",
 "importance_cat",
-"ev_repay",
-"fire_water"
+"ev_repay"
 ]
 }
 }</script>
