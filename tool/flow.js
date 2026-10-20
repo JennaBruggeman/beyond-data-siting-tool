@@ -150,34 +150,48 @@ function clean(el){ const c=el.cloneNode(true); c.querySelectorAll('button,.mo,s
 function tableData(t){ return [...t.rows].map(r=>({party:r.classList.contains('party'),head:r.parentElement.tagName==='THEAD',cells:[...r.cells].map(clean)})); }
 function capture(){ const st=F.steps[F.i]; const sd=$('#side'); if(!st||!sd||!BD.S.sel||st.k==='report'||st.k==='site') return;
   const h2=sd.querySelector('h2'); const lead=sd.querySelector('.lead')||sd.querySelector('p.draft');
-  const secs=[...sd.querySelectorAll('details.sec')].filter(d=>!d.closest('details.fp')).map(d=>{ const t=d.querySelector(':scope > summary .t'), a=d.querySelector(':scope > summary .a'); const tt=t?clean(t):''; return [(BD.TITLES&&BD.TITLES[tt])||tt,a?clean(a):'']; }).filter(r=>r[0]);
-  sd.querySelectorAll('.sumrow').forEach(r=>{ const c=r.querySelectorAll('span'); if(c.length>=2) secs.push([clean(c[0]),clean(c[1])]); });
+  const LG=BD.logic, sk=LG?LG.stepKey():'';
+  const secs=[...sd.querySelectorAll('details.sec')].filter(d=>!d.closest('details.fp')).map(d=>{ const t=d.querySelector(':scope > summary .t'), a=d.querySelector(':scope > summary .a'); const tt=t?clean(t):''; const ti=(BD.TITLES&&BD.TITLES[tt])||tt; return [ti,a?clean(a):'',d.dataset.tier||'',!d.hidden,LG?LG.pathNames(LG.secNodes(sk,ti)):[]]; }).filter(r=>r[0]); // [title, answer, tier, shown, parts behind it] (report by tier, 20 Oct 2026)
+  sd.querySelectorAll('.sumrow').forEach(r=>{ const c=r.querySelectorAll('span'); if(c.length>=2) secs.push([clean(c[0]),clean(c[1]),'',true,[]]); });
   const tables=[...sd.querySelectorAll('.tt table, table.cl')].filter(t=>!t.closest('details.fp')).map(tableData);
   const srcs=[...sd.querySelectorAll('details.fp')].map(d=>{ const c=d.cloneNode(true); const s=c.querySelector('summary'); if(s) s.remove(); return clean(c); }).filter(Boolean);
-  const rows=st.k==='opps-rest'||st.k.startsWith('fam:')?[...sd.querySelectorAll('.famrow, .famno .addrow, :scope > .addrow')].map(r=>(r.closest('.famno')?'Not here: ':'')+clean(r)):[];
+  const rowEls=st.k==='opps-rest'||st.k.startsWith('fam:')?[...sd.querySelectorAll('.famrow, .famno .addrow, :scope > .addrow')]:[]; const rows=rowEls.map(r=>(r.closest('.famno')?'Not here: ':'')+clean(r)), rowT=rowEls.map(r=>[r.dataset.tier||'',!r.hidden]);
   const secs2=st.k.startsWith('opp:')||st.k.startsWith('fam:')?[]:secs.filter(r=>r[0]!=='How it compares');
-  F.notes[st.k]={t:st.t,g:st.g,title:h2?clean(h2):st.t,lead:lead?clean(lead):'',secs:secs2,tables,srcs,rows,sig:sigOf()}; }
+  F.notes[st.k]={t:st.t,g:st.g,title:h2?clean(h2):st.t,lead:lead?clean(lead):'',secs:secs2,tables,srcs,rows,rowT,tierAt:(BD.tier&&BD.tier())||'full',sig:sigOf()}; }
 
 /* ---------- step 6: the report, on screen and as HTML or PDF ---------- */
 function facts(){ const e=BD.eng, f=e.siteFacts(), A=BD.S.answers, a=BD.S.sel.a||[], rng=e.rng;
   return [['Site',`${a[0]||'No civic address'}, ${f.city==='van'?'Vancouver':'Edmonton'}`],['Zone',`${f.zone||'—'}: ${f.status.t}`],['Lot',`${BD.fmt(f.lot||0)} m²`],
    ['Floor area available',`${f.fullCover?'up to ':''}${rng(f.gross[0],f.gross[1],'m²')}`],['Largest that fits',rng(f.mw[0],f.mw[1],'MW of servers')],['Size tested',A.mw?`${A.mw} MW of servers`:`${(f.M&&f.M.mwSized)||1} MW of servers (provisional: no size set)`],
-   ['Set-up',`${A.built==='existing'?'existing building':'new building'}, ${A.inside||'air'} cooling inside, ${(A.outside||'dry')==='dry'?((A.inside||'air')==='air'?'air-cooled chillers':'dry coolers'):(A.outside==='towers'?'cooling towers':'hybrid coolers')} outside`]]; }
+   ['Set-up',`${A.built==='existing'?'existing building':'new building'}, ${A.inside||'air'} cooling inside, ${(A.outside||'dry')==='dry'?((A.inside||'air')==='air'?'air-cooled chillers':'dry coolers'):(A.outside==='towers'?'cooling towers':'hybrid coolers')} outside`]]
+   .concat(BD.tier&&BD.tier()==='resident'&&!A.residentEdit?[['Chosen for you','the size and set-up above are the tool\'s usual choices, not yours; change them in step 1 and the report follows']]:[]); }
 const ORDERG=['site','fits','ex','opps','opts','report'];
-function reportData(){ const groups=[]; for(const [g,l] of GROUPS){ const items=F.steps.filter(s=>s.g===g&&F.notes[s.k]).map(s=>F.notes[s.k]); if(items.length) groups.push({g,l,items}); }
-  const seen=new Set(), srcs=[]; for(const s of Object.values(F.notes).flatMap(n=>n.srcs)){ const key=s.toLowerCase().replace(/[^a-z0-9]/g,''); /* whole string: blocks sharing a preamble are kept (sweep M78) */ if(!seen.has(key)){ seen.add(key); srcs.push(s); } } return {facts:facts(),groups,srcs,date:new Date().toISOString().slice(0,10)}; }
+const RK={resident:0,community:1,full:2};
+/* the report follows the tier (J.B. and Xun, 19 Oct 2026): residents a plain page or two (what affects them, what was assumed); the neighbourhood
+   who gains and loses, money, approvals, comparisons (with tables); professionals everything, each result with the parts it is worked out from.
+   A section counts at a tier if any part behind it is drawn at that tier (logic.js); one the reader brought back with "Show more" stays in. */
+function keepAt(tier,shown,tierAt,t){ if(!tier) return true; if(RK[tier]<=RK[t]) return true; return !!(shown&&RK[tier]>RK[tierAt||'full']); }
+function forTier(n,t,left){ const secs=[]; for(const r of n.secs){ if(keepAt(r[2],r[3],n.tierAt,t)) secs.push([r[0],r[1],t==='full'&&r[4]&&r[4].length?r[4]:null]); else left.push(r[0]); }
+  const rows=[]; (n.rows||[]).forEach((r,i)=>{ const rt=(n.rowT||[])[i]||['',true]; if(keepAt(rt[0],rt[1],n.tierAt,t)) rows.push(r); else left.push(r.split(/\s+(?:not yet known|built here|built elsewhere|pilot|speculative)/)[0]); });
+  return Object.assign({},n,{secs,rows,tables:t==='resident'?[]:n.tables}); }
+const RHEAD={resident:'What it would mean for you: what affects neighbours, and every choice the tool made for you.',community:'What it would mean for the neighbourhood: who gains and who gives up, money, approvals and comparisons.',full:'How it is worked out: every result, with the parts of the tool\'s logic each one comes from.'};
+function reportData(){ const t=(BD.tier&&BD.tier())||'full', groups=[], left=[]; for(const [g,l] of GROUPS){ const items=F.steps.filter(s=>s.g===g&&F.notes[s.k]).map(s=>Object.assign(forTier(F.notes[s.k],t,left),{k:s.k})); if(items.length) groups.push({g,l,items}); }
+  const seen=new Set(), srcs=[]; for(const s of Object.values(F.notes).flatMap(n=>n.srcs)){ const key=s.toLowerCase().replace(/[^a-z0-9]/g,''); /* whole string: blocks sharing a preamble are kept (sweep M78) */ if(!seen.has(key)){ seen.add(key); srcs.push(s); } } return {facts:facts(),groups,srcs,date:new Date().toISOString().slice(0,10),tier:t,level:(BD.logic&&BD.logic.LEVEL[t])||'',left:[...new Set(left)]}; }
+const pathText=p=>p.length>14?p.slice(0,14).join(' · ')+` and ${p.length-14} more`:p.join(' · ');
 function stepHTML(n,wide){ let h=`<h3>${esc(n.title)}</h3>${n.sig&&n.sig!==sigOf()?`<p class="rl"><b>Recorded with earlier choices</b> — the set-up has changed since; open this step again to update it (sweep M77).</p>`:''}${n.lead?`<p class="rl">${esc(n.lead)}</p>`:''}`;
-  if(n.secs.length) h+=`<dl class="rd">${n.secs.map(([t,a])=>`<dt>${esc(t)}</dt><dd>${esc(a)}</dd>`).join('')}</dl>`;
+  if(n.secs.length) h+=`<dl class="rd">${n.secs.map(([t,a,p])=>`<dt>${esc(t)}</dt><dd>${esc(a)}${p?`<span class="rp">Worked out from: ${esc(pathText(p))}</span>`:''}</dd>`).join('')}</dl>`;
   if(n.rows&&n.rows.length) h+=`<ul class="rr">${n.rows.map(r=>`<li>${esc(r)}</li>`).join('')}</ul>`;
   if(wide) for(const T of n.tables) h+=`<div class="rt"><table>${T.map(r=>r.party?`<tr class="party"><td colspan="9">${esc(r.cells[0])}</td></tr>`:`<tr>${r.cells.map(c=>r.head?`<th>${esc(c)}</th>`:`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</table></div>`;
   return h; }
+const leftText=D=>`${D.left.length} item${D.left.length>1?'s':''} on this path ${D.left.length>1?'are':'is'} written for another level: ${D.left.join(' · ')}. They still count in every result.`;
+const leftHTML=D=>D.left.length?`<h2 class="rg">Left out at this level</h2><p class="sub">${esc(leftText(D))}</p>`:'';
 function reportView(){ const e=BD.eng; capture(); const D=reportData(); BD.S.view2='tab'; BD.S.tab='report'; BD.scene3d&&BD.scene3d.hide();
   const tabSteps=new Set(['opts','cities','opps-rest']);
-  $('#side').innerHTML=`<h2>Report</h2><p class="lead">Everything this path showed for <span class="k">${esc(D.facts[0][1])}</span>, in one place. Nothing is added up; nothing wins.</p>
+  $('#side').innerHTML=`<h2>Report</h2><p class="lead">${esc(RHEAD[D.tier])} For <span class="k">${esc(D.facts[0][1])}</span>. Nothing is added up; nothing wins.</p><p class="sub">Written for: ${esc(D.level)}. Change “Showing” above for the report at another level.</p>
   <div class="rbtns">${BD.dl?`<button class="pri" id="rHtml">Download HTML</button><button class="pri" id="rPdf">Download PDF</button>`:'<p class="sub">Downloads are not available in this view.</p>'}</div><p class="sub" id="rMsg"></p>
   <div class="report"><h3>Baseline</h3><dl class="rd">${D.facts.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
-  ${D.groups.map(G=>`<h2 class="rg">${esc(G.l)}</h2>${G.items.map(n=>stepHTML(n,tabSteps.has(Object.keys(F.notes).find(k=>F.notes[k]===n)))).join('')}`).join('')}
-  <h2 class="rg">Read with</h2><p class="sub">Ranges, not designs. Operator figures are claims. Heat available is not heat used. "Not yet known" names what is missing.</p>
+  ${D.groups.map(G=>`<h2 class="rg">${esc(G.l)}</h2>${G.items.map(n=>stepHTML(n,D.tier!=='resident'&&tabSteps.has(n.k))).join('')}`).join('')}
+  ${leftHTML(D)}<h2 class="rg">Read with</h2><p class="sub">Ranges, not designs. Operator figures are claims. Heat available is not heat used. "Not yet known" names what is missing.</p>
   ${D.srcs.length?`<details class="fp"><summary>Sources (${D.srcs.length})</summary>${D.srcs.map(s=>`<p class="src">${esc(s)}</p>`).join('')}</details>`:''}</div>`;
   document.body.classList.add('wide'); BD.draw();
   const msg=t=>{ const m=$('#rMsg'); if(m) m.textContent=t; };
@@ -187,16 +201,16 @@ function reportView(){ const e=BD.eng; capture(); const D=reportData(); BD.S.vie
 BD.views.report=reportView;
 const fname=(D,ext)=>`beyond-data-report-${D.facts[0][1].replace(/[^A-Za-z0-9]+/g,'-').toLowerCase().replace(/^-|-$/g,'')}.${ext}`;
 function docHTML(D){ const all=Object.entries(F.notes);
-  const body=D.groups.map(G=>`<h2>${esc(G.l)}</h2>${G.items.map(n=>stepHTML(n,true)).join('')}`).join('');
-  return `<!doctype html><html lang="en-CA"><head><meta charset="utf-8"><title>Beyond Data report: ${esc(D.facts[0][1])}</title>
+  const body=D.groups.map(G=>`<h2>${esc(G.l)}</h2>${G.items.map(n=>stepHTML(n,D.tier!=='resident')).join('')}`).join('');
+  return `<!doctype html><html lang="en-CA"><head><meta charset="utf-8"><title>Beyond Data report: ${esc(D.facts[0][1])} (${esc(D.level)})</title>
 <style>body{font-family:'Open Sans',Arial,sans-serif;font-weight:300;color:#222;max-width:820px;margin:32px auto;padding:0 20px;line-height:1.45;font-size:14px}
 h1{font-weight:300;margin:0 0 4px}h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#CC746C;margin:30px 0 6px;border-top:1px solid #ddd;padding-top:14px}
 h3{font-size:15px;font-weight:600;margin:18px 0 4px}.rl{margin:0 0 8px}dl{display:grid;grid-template-columns:minmax(140px,32%) 1fr;gap:3px 14px;margin:6px 0}dt{color:#555}dd{margin:0}
 table{border-collapse:collapse;width:100%;font-size:12px;margin:6px 0}td,th{border-bottom:1px solid #e3e3e3;padding:4px 6px;text-align:left;vertical-align:top}tr.party td{font-weight:600;color:#CC746C;padding-top:10px}
-.small{font-size:11px;color:#777}ul{margin:4px 0;padding-left:18px}@media print{h2{break-after:avoid}h3{break-after:avoid}}</style></head><body>
-<div class="small">BEYOND DATA · REPORT · ${D.date}</div><h1>${esc(D.facts[0][1])}</h1>
+.small{font-size:11px;color:#777}.rp{display:block;font-size:11px;color:#888;margin-top:2px}ul{margin:4px 0;padding-left:18px}@media print{h2{break-after:avoid}h3{break-after:avoid}}</style></head><body>
+<div class="small">BEYOND DATA · REPORT · ${esc(D.level.toUpperCase())} · ${D.date}</div><h1>${esc(D.facts[0][1])}</h1><p>${esc(RHEAD[D.tier])}</p>
 <h2>Baseline</h2><dl>${D.facts.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>${body}
-<h2>Read with</h2><p class="small">Ranges, not designs: screening figures from published sources, not a substitute for an engineer, a utility study or a permit review. Operator figures are claims. Heat available is not heat used. Nothing is added up and nothing wins.</p>
+${leftHTML(D)}<h2>Read with</h2><p class="small">Ranges, not designs: screening figures from published sources, not a substitute for an engineer, a utility study or a permit review. Operator figures are claims. Heat available is not heat used. Nothing is added up and nothing wins.</p>
 <h2>Sources</h2>${D.srcs.map(s=>`<p class="small">${esc(s)}</p>`).join('')}</body></html>`; }
 
 /* PDF: jsPDF and its table plug-in, loaded only when asked for. The standard PDF fonts cover Latin-1 only, so a few symbols are spelled out. */
@@ -211,11 +225,12 @@ async function docPDF(D){ if(!window.jspdf) await load(PDFLIB[0]); if(!(window.j
   const text=(t,o)=>{ o=o||{}; doc.setFont('helvetica',o.bold?'bold':'normal'); doc.setFontSize(o.size||10); doc.setTextColor(...(o.color||ink)); const lines=doc.splitTextToSize(L1(t),W-2*M-(o.indent||0)); const lh=(o.size||10)*1.35; for(const ln of lines){ room(lh); doc.text(ln,M+(o.indent||0),y+(o.size||10)); y+=lh; } y+=o.after||0; };
   const table=(rows,o)=>{ if(!rows.length) return; doc.autoTable({body:rows,startY:y,margin:{left:M,right:M},styles:{font:'helvetica',fontSize:8.5,cellPadding:3,textColor:ink,lineColor:[225,225,225],lineWidth:0.5},headStyles:{fillColor:[245,245,245],textColor:ink,fontStyle:'bold'},theme:'plain',...o}); y=doc.lastAutoTable.finalY+10; };
   const kv=rows=>table(rows.map(([k,v])=>[L1(k),L1(v)]),{columnStyles:{0:{cellWidth:150,textColor:grey}}});
-  text('BEYOND DATA - REPORT - '+D.date,{size:8,color:grey,after:4}); text(D.facts[0][1],{size:20,after:10});
+  text('BEYOND DATA - REPORT - '+D.level.toUpperCase()+' - '+D.date,{size:8,color:grey,after:4}); text(D.facts[0][1],{size:20,after:4}); text(RHEAD[D.tier],{size:10,after:10});
   text('BASELINE',{size:9,bold:true,color:acc,after:2}); kv(D.facts);
   for(const G of D.groups){ room(40); y+=6; doc.setDrawColor(220); doc.line(M,y,W-M,y); y+=8; text(G.l.toUpperCase(),{size:9,bold:true,color:acc,after:2});
-    for(const n of G.items){ room(30); text(n.title,{size:12,bold:true,after:2}); if(n.lead) text(n.lead,{size:10,after:4}); if(n.secs.length) kv(n.secs); if(n.rows&&n.rows.length) for(const r of n.rows) text('- '+r,{size:9,indent:6});
+    for(const n of G.items){ room(30); text(n.title,{size:12,bold:true,after:2}); if(n.lead) text(n.lead,{size:10,after:4}); if(n.secs.length) kv(n.secs.map(([k,v,p])=>[k,p?v+'  (Worked out from: '+pathText(p)+')':v])); if(n.rows&&n.rows.length) for(const r of n.rows) text('- '+r,{size:9,indent:6});
       for(const T of n.tables){ const head=T.filter(r=>r.head).map(r=>r.cells.map(L1)); const body=T.filter(r=>!r.head).map(r=>r.party?[{content:L1(r.cells[0]),colSpan:Math.max(1,...T.map(x=>x.cells.length)),styles:{fontStyle:'bold',textColor:acc}}]:r.cells.map(L1)); table(body,{head:head.length?head:undefined}); } } }
+  if(D.left.length){ room(40); y+=6; text('LEFT OUT AT THIS LEVEL',{size:9,bold:true,color:acc,after:2}); text(leftText(D),{size:9,after:6}); }
   room(40); y+=6; text('READ WITH',{size:9,bold:true,color:acc,after:2}); text('Ranges, not designs: screening figures from published sources, not a substitute for an engineer, a utility study or a permit review. Operator figures are claims. Heat available is not heat used. Nothing is added up and nothing wins.',{size:9,after:6});
   text('SOURCES',{size:9,bold:true,color:acc,after:2}); for(const s of D.srcs) text(s,{size:7.5,color:grey,after:2});
   const n=doc.getNumberOfPages(); for(let p=1;p<=n;p++){ doc.setPage(p); doc.setFontSize(7.5); doc.setTextColor(...grey); doc.text(`${p} / ${n}`,W-M,H-28,{align:'right'}); }

@@ -342,6 +342,34 @@ body.wcon.wckey #wc .keyb{bottom:auto;top:12px} #wc .keyb:hover{color:var(--fg)}
 .tierchip select{background:var(--panel-2);color:var(--fg);border:1px solid var(--line-2);border-radius:5px;padding:3px 6px;font:inherit;font-size:12px}
 .assumed{list-style:none;padding:0;margin:4px 0 12px}.assumed li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;align-items:baseline}
 .assumed .aq{color:var(--muted)}.assumed .aa{color:var(--fg)}.assumed a{color:var(--accent);font-size:12px}
+
+/* the logic panel beside the results, and "show more" for the tier (logic.js, 20 Oct 2026) */
+#wc .logicb{position:absolute;right:12px;bottom:12px;z-index:4;background:rgba(30,32,35,.9);border:1px solid var(--line-2);color:var(--muted);border-radius:6px;padding:4px 10px;font:inherit;font-size:12.5px;cursor:pointer}
+#wc .logicb:hover,#wc .logicb[aria-pressed="true"]{color:var(--fg);border-color:var(--accent)}
+#wc .wclogic{flex:0 0 auto;max-height:46%;overflow:auto;border-top:1px solid var(--line);padding:10px 16px 12px;background:var(--panel);font-size:12.5px}
+#wc .wclogic[hidden]{display:none}
+.wclogic .lgh{color:var(--muted);margin-bottom:6px;text-wrap:balance} .wclogic .lgh b{color:var(--fg);font-weight:400}
+.wclogic .lgb{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:16px;align-items:start}
+.wclogic svg{width:100%;height:auto;max-height:250px;display:block}
+.wclogic .hd text{fill:var(--muted);font-size:10px}
+.wclogic .ed path{fill:none;stroke:var(--line-2);stroke-width:.55;opacity:.75} .wclogic .edl path{fill:none;stroke:var(--accent);stroke-width:1.1;opacity:.9}
+.wclogic circle.nd{fill:var(--faint);cursor:pointer} .wclogic circle.nd.lit{fill:var(--accent-2)} .wclogic circle.nd.tg{fill:var(--panel);stroke:var(--accent);stroke-width:2}
+.wclogic circle.nd.sl{stroke:var(--fg);stroke-width:2} .wclogic circle.nd:hover{stroke:var(--fg);stroke-width:1.2}
+.wclogic .lgk{margin:4px 0 0;color:var(--faint);font-size:11px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.wclogic .lgk i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:3px;vertical-align:-1px} .lgk .kt{background:var(--panel);box-shadow:inset 0 0 0 2px var(--accent)} .lgk .kl{background:var(--accent-2)} .lgk .kf{background:var(--faint)}
+.wclogic .lgst{display:grid;grid-template-columns:84px minmax(0,1fr);gap:2px 8px;padding:4px 0;border-bottom:1px solid var(--line)} .wclogic .lgst>span{color:var(--faint);font-size:11.5px}
+.wclogic .lgst button,.wclogic .lgback{background:none;border:0;padding:1px 0;margin:0 10px 0 0;color:var(--fg);font:inherit;font-size:12.5px;text-align:left;cursor:pointer;text-decoration:underline dotted var(--faint);text-underline-offset:3px}
+.wclogic .lgst button.tg{color:var(--accent-2)} .wclogic .lgst button:hover,.wclogic .lgback:hover{color:var(--accent-2)}
+.wclogic .lgback{color:var(--muted);text-decoration:none;margin-bottom:4px}
+.wclogic h4{margin:2px 0 6px;font-size:14px;font-weight:400}
+.wclogic dl.lgd{grid-template-columns:70px minmax(0,1fr);gap:4px 10px;font-size:12px;margin:0} .wclogic dl.lgd dd{color:var(--fg);overflow-wrap:anywhere}
+.wclogic .lgs{margin:8px 0 2px;color:var(--muted);font-size:11.5px} .wclogic .lgsl{margin:0;padding-left:16px;color:var(--faint);font-size:11.5px}
+.wclogic .lgn{color:var(--faint);font-size:11px;margin:6px 0 0}
+@media (max-width:900px){.wclogic .lgb{grid-template-columns:1fr}}
+#side [hidden]{display:none!important} /* rows and sections hidden for the tier (some rows set display:grid) */
+.tmore{border:1px dashed var(--line-2);border-radius:6px;padding:10px 12px;margin:16px 0 8px;font-size:13px;color:var(--muted)} .tmore p{margin:0 0 8px} .tmore b{color:var(--fg);font-weight:400}
+.report .rp{display:block;font-size:11.5px;color:var(--faint);margin-top:2px}
+.tmore .btn{background:transparent;border:1px solid var(--line-2);border-radius:6px;padding:4px 12px;color:var(--fg);cursor:pointer;font:inherit;font-size:12.5px} .tmore .btn:hover{border-color:var(--accent)}
 </style>
 
 <div class="app">
@@ -747,3 +775,4 @@ window.BD={S,$,esc,fmt,getJSON,pathOf,draw,centroid,pip,area,statusOf,lowD,loadT
 <script src="explain.js"></script>
 <script src="flow.js"></script>
 <script src="stage.js"></script>
+<script src="logic.js"></script>

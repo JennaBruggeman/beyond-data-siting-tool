@@ -30,13 +30,13 @@ function tidy(sd){ const a=BD.S.sel&&BD.S.sel.a&&BD.S.sel.a[0]; const h=sd.query
   if(cb&&ft&&cb.nextElementSibling!==ft) ft.before(cb); }
 function tilesFor(sd){
   // the rows: the step's sections become tiles with their answers; the sections themselves fold under "All the detail"
-  if(!sd.querySelector('.dk')&&!sd.querySelector(':scope > .tiles')){ const secs=[...sd.querySelectorAll(':scope > details.sec, :scope > .tt + details.sec')].filter(x=>x.parentNode===sd);
+  if(!sd.querySelector('.dk')&&!sd.querySelector(':scope > .tiles')){ const all0=[...sd.querySelectorAll(':scope > details.sec, :scope > .tt + details.sec')].filter(x=>x.parentNode===sd), secs=all0.filter(x=>!x.hidden); /* sections hidden for this tier stay out of the tiles (logic.js) */
     if(secs.length>1){ const tiles=document.createElement('div'); tiles.className='tiles';
       tiles.innerHTML=secs.slice(0,6).map((x,i)=>{ const tt=x.querySelector(':scope > summary .t'), a=x.querySelector(':scope > summary .a'); return `<button class="tile" data-i="${i}"><span class="tt">${esc(tt?tt.textContent:'')}</span><span class="ta">${a?spaced(a.innerHTML):''}</span></button>`; }).join('');
       const all=document.createElement('details'); all.className='alld'; all.innerHTML='<summary>All the detail</summary>';
-      secs[0].before(tiles); tiles.after(all); for(const x of secs) all.appendChild(x);
+      secs[0].before(tiles); tiles.after(all); for(const x of all0) all.appendChild(x);
       // anything else loose after the sections (notes, legends) goes into the fold too, except the step's buttons
-      let n=all.nextElementSibling; while(n&&!n.classList.contains('flowfoot')){ const nx=n.nextElementSibling; if(!n.classList.contains('xpbtn')&&!n.classList.contains('coolbar')) all.appendChild(n); n=nx; }
+      let n=all.nextElementSibling; while(n&&!n.classList.contains('flowfoot')){ const nx=n.nextElementSibling; if(!n.classList.contains('xpbtn')&&!n.classList.contains('coolbar')&&!n.classList.contains('tmore')) all.appendChild(n); n=nx; }
       tiles.querySelectorAll('.tile').forEach(b=>b.onclick=()=>{ const s=secs[+b.dataset.i]; if(s) secCard(s, b.querySelector('.tt').textContent); }); } }
 }
 /* cards inside the card (J.B., 17 Oct: "the add-ons need to be their own card and each add-on opens another new card, because this right-hand toolbar is in the way").
@@ -66,7 +66,7 @@ function on(){ const sd=$('#side'), b=build(); document.body.classList.add('wcon
   const k=stepKey(), no3=NO3D.has(k); b.classList.toggle('nov',no3);
   if(k!=='setup') document.body.classList.remove('wcdim');
   sd.querySelectorAll('details.sec > summary .t').forEach(t=>{ const n=BD.TITLES&&BD.TITLES[t.textContent.trim()]; if(n) t.textContent=n; });
-  if(k!=='site'&&k!=='setup'&&!no3) tilesFor(sd); tidy(sd); if(no3) sd.querySelectorAll('details.sec').forEach(x=>x.open=true);
+  if(BD.logic&&BD.logic.filter) BD.logic.filter(sd); if(k!=='site'&&k!=='setup'&&!no3) tilesFor(sd); tidy(sd); if(no3) sd.querySelectorAll('details.sec').forEach(x=>x.open=true);
   const w=wrap(); if(w){ if(!no3){ if(w.parentNode!==$('#wc3d')) $('#wc3d').appendChild(w); } else if(w.parentNode!==map()) map().appendChild(w); }
   if(BD.scene3d&&BD.scene3d.cardMode) BD.scene3d.cardMode(!no3);
   if(!no3&&BD.scene3d&&!BD.scene3d.isOpen()&&k==='site'&&BD.showModel) BD.showModel();
