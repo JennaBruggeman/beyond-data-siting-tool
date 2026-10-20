@@ -19,9 +19,18 @@ Heat demand, as the tool's receivers (register receiver_demand, homes_heated):
   homes (rental units, seniors units, strata units counted as homes) × 16.81 MWh (BC space + water heating per household, CEUD 2018–22)
   non-residential floor area × space + water heating intensity (CEUD 2023, BC, GJ/m² ÷ 3.6): offices 0.45, education 0.497,
   health care 1.096 (care) — SCIEU hospitals 1.90 — arts and recreation 0.650, all others the BC commercial average 0.57
+UBC Library notes on BC Assessment data (J.B. screenshots, 20 Oct 2026; UBC guide 'Tips for working with BC Assessment data'):
+  - Roll numbers are unique only within a jurisdiction: always join on roll number AND jurisdiction (here: --jur is required, and the City's
+    tax report covers Vancouver only, so every roll is read within the one jurisdiction).
+  - From 2022 the Data Advice product is six CSV tables joined on FOLIO_ID; the Residential and Non-Residential Inventory Extracts have no
+    folio ID and join to Data Advice on ROLL_NUMBER + JURISDICTION. If the site descriptions come from Data Advice, pass its folio table
+    (--folio) so descriptions map FOLIO_ID -> (jurisdiction, roll).
+  - Some folios have more than one address; use PRIMARY_FLAG = T if an address table is ever used (this script does not use addresses).
+  - Sales (bca_folio_sales): exclude CONVEYANCE_TYPE 5 (not market sales); not used here.
 Usage:
   python3 bca_derive.py --inspect FILE            (prints the number of columns and rows, and the header if there is one; no values)
-  python3 bca_derive.py --nonres N.txt --res R.txt --taxreport property-tax-report.csv [--desc D.txt --desc-roll 3 --desc-text 5] [--jur 200]
+  python3 bca_derive.py --codes FILE --pos 2      (counts of a short code column, e.g. jurisdiction, to find Vancouver's code; codes only)
+  python3 bca_derive.py --nonres N.txt --res R.txt --taxreport property-tax-report.csv --jur CODE [--desc D.txt --desc-roll 3 --desc-text 5 | --folio FOLIO.csv --desc DESC.csv --desc-id FOLIO_ID --desc-text COLUMN]
 """
 import argparse, csv, json, math, os, re, sys, collections
 
@@ -59,8 +68,10 @@ def group_of(text, table):
 def main():
     a = argparse.ArgumentParser()
     a.add_argument('--inspect'); a.add_argument('--nonres'); a.add_argument('--res'); a.add_argument('--desc')
-    a.add_argument('--desc-roll', type=int, default=3); a.add_argument('--desc-text', type=int, default=0)
-    a.add_argument('--taxreport'); a.add_argument('--jur', default=None, help='keep one jurisdiction code (Vancouver), if known')
+    a.add_argument('--desc-roll', type=int, default=3); a.add_argument('--desc-text', default=0)
+    a.add_argument('--taxreport'); a.add_argument('--jur', default=None, help='the City of Vancouver jurisdiction code (required for a run; find it with --codes)')
+    a.add_argument('--codes'); a.add_argument('--pos', type=int, default=2)
+    a.add_argument('--folio'); a.add_argument('--desc-id', default='FOLIO_ID')
     a.add_argument('--out', default='bca_derived_van.json')
     o = a.parse_args()
     if o.inspect:
@@ -69,6 +80,12 @@ def main():
         hdr = not digits(first[2]) if len(first) > 2 else False
         print(f'{n} rows, {len(first)} columns; header row: {"yes: " + " | ".join(first) if hdr else "no"}')
         return
+    if o.codes:  # counts of one short code column (jurisdiction, class): codes only, never a property's values
+        c = collections.Counter(txt(r, o.pos) for r in rows(o.codes)); long = sum(v for k, v in c.items() if len(k) > 12)
+        if long: print('column', o.pos, 'is not a short code column; nothing printed'); return
+        for k, v in c.most_common(40): print(repr(k), v)
+        return
+    if not o.jur: sys.exit('--jur is required: roll numbers repeat across jurisdictions (UBC guide). Find Vancouver\'s code with --codes FILE --pos 2.')
     # FOLIO → LAND_COORDINATE from the City's open tax report
     f2lc = {}
     with open(o.taxreport, newline='', encoding='utf-8-sig') as f:
@@ -81,13 +98,25 @@ def main():
             if k in f2lc: return f2lc[k]
         return None
     desc = {}
-    if o.desc and o.desc_text:
-        for row in rows(o.desc): desc[digits(txt(row, o.desc_roll))] = txt(row, o.desc_text)
+    if o.desc and o.folio:  # Data Advice: descriptions keyed by FOLIO_ID; the folio table gives each folio's jurisdiction and roll
+        f2r = {}
+        with open(o.folio, newline='', encoding='latin-1') as f:
+            for r in csv.DictReader(f):
+                k = {x.upper(): v for x, v in r.items()}
+                j = (k.get('JURISDICTION_CODE') or k.get('JURISDICTION') or '').strip()
+                if j == o.jur: f2r[(k.get('FOLIO_ID') or '').strip()] = digits(k.get('ROLL_NUMBER'))
+        with open(o.desc, newline='', encoding='latin-1') as f:
+            for r in csv.DictReader(f):
+                k = {x.upper(): v for x, v in r.items()}; roll = f2r.get((k.get(o.desc_id.upper()) or '').strip())
+                if roll: desc[roll] = (k.get(str(o.desc_text).upper()) or '').strip().upper()
+    elif o.desc and o.desc_text:
+        for row in rows(o.desc):
+            if txt(row, 2) == o.jur or not txt(row, 2).isdigit(): desc[digits(txt(row, o.desc_roll))] = txt(row, int(o.desc_text))
     P = collections.defaultdict(lambda: {'m2': collections.Counter(), 'homes': 0.0, 'heat': collections.Counter(), 'n': 0})
     stat = collections.Counter()
     if o.nonres:
         for row in rows(o.nonres):
-            if o.jur and txt(row, 2) != o.jur: continue
+            if txt(row, 2) != o.jur: continue
             stat['nonres rows'] += 1; lc = parcel(txt(row, 3))
             if not lc: stat['nonres unmatched'] += 1; continue
             p = P[lc]; p['n'] += 1
@@ -100,7 +129,7 @@ def main():
             if h: p['heat'][h] += 1
     if o.res:
         for row in rows(o.res):
-            if o.jur and txt(row, 2) != o.jur: continue
+            if txt(row, 2) != o.jur: continue
             stat['res rows'] += 1; lc = parcel(txt(row, 3))
             if not lc: stat['res unmatched'] += 1; continue
             p = P[lc]; p['n'] += 1; p['homes'] += 1  # one row per dwelling (a strata unit or a house)
