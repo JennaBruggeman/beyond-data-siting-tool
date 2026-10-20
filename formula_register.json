@@ -2188,7 +2188,7 @@
       "rung": "Utility rate",
       "van": [
        "allowed",
-       "RS 2290: up to 2 MW, neighbours credited on their bills (credit rate not confirmed); selling power to them directly makes it a public utility"
+       "RS 2290: up to 2 MW, neighbours credited on their bills at 10 ¢/kWh (BCUC G-64-26); selling power to them directly makes it a public utility"
       ],
       "edm": [
        "approval",
@@ -2202,7 +2202,6 @@
      }
     ],
     "unknowns": [
-     "the bill credit per kWh (BC)",
      "whether a roof lease counts as leased property (Alberta)"
     ],
     "visual": "panels on the roofs nearby, credits or power flowing back"
@@ -11751,10 +11750,11 @@
    "inputs": [
     "rooftop_solar"
    ],
-   "coef": "BC: net injection up to 2 MW, set by 24 kW per residential and 100 kW per commercial beneficiary (so 2 MW needs at least 84 households); beneficiaries get bill credits, not power; selling power directly to a neighbour fails the UCA s. 1(d) exclusion; credit rate and location rule not confirmed. Alberta: under the lesser of 5 MW and the service rating, on property owned or leased or adjacent to it, not more than the site's own use; panels on a leased neighbour's roof could serve the data centre (whether a roof lease counts as leased property is not confirmed); revenue-seeking sites are commercial generators",
+   "coef": "BC: net injection up to 2 MW, set by 24 kW per residential and 100 kW per commercial beneficiary (so 2 MW needs at least 84 households); beneficiaries get bill credits, not power; selling power directly to a neighbour fails the UCA s. 1(d) exclusion; credits at 10 ¢/kWh (BCUC G-64-26); each beneficiary takes at most 10–50% of the credits, by group size. Alberta: under the lesser of 5 MW and the service rating, on property owned or leased or adjacent to it, not more than the site's own use; panels on a leased neighbour's roof could serve the data centre (whether a roof lease counts as leased property is not confirmed); revenue-seeking sites are commercial generators",
    "sources": [
     "bchSelfGen2026",
     "bchCustGen",
+    "bcucG6426",
     "bcUCAs1",
     "aucMicro2026"
    ],
@@ -14675,8 +14675,8 @@
   "aesoTariff4": "AESO ISO Tariff s. 4.6–4.7 (effective 1 Jan 2026): customer contribution = demand-related costs less the AESO's local investment ($121,800 a year substation fraction; $40,100 per MW a year for the first 7.5 MW, then less) — https://www.aeso.ca/assets/documents/Section-4-effective-2026-01-01.pdf",
   "aesoTariff5": "AESO ISO Tariff s. 5.5 and 5.7 (effective 1 Jan 2025): within 20 years of the original connection, new participants pay a share; the ISO 'may' refund the original customer; no refund under $10,000 — https://www.aeso.ca/assets/documents/Section-5-effective-2025-01-01.pdf",
   "abDCpay": "Government of Alberta, Powering new pathways for data centres: data centres, not Alberta ratepayers, pay for any transmission upgrades they need — https://www.alberta.ca/powering-new-pathways-for-data-centres",
-  "bchSelfGen2026": "BC Hydro, Self-generation rate updates (BCUC application ID 1323): RS 2289 from 1 Jul 2026, exports up to 100 kW per phase at 10 ¢/kWh; RS 2290 community generation, net injection up to 2 MW, set by 24 kW per residential and 100 kW per commercial beneficiary, bill credits only (credit rate and location rule not confirmed) — https://www.bchydro.com/toolbar/about/strategies-plans-regulatory/rate-design/self-generation-rate-updates.html",
-  "bchCustGen": "BC Hydro, Customer generation: community generation beneficiaries 'do not receive electricity directly from the facility' and must hold an active BC Hydro account — https://app.bchydro.com/accounts-billing/electrical-connections/customer-generation.html",
+  "bchSelfGen2026": "BC Hydro, Self-generation rate updates (BCUC application ID 1323): RS 2289 from 1 Jul 2026, exports up to 100 kW per phase at 10 ¢/kWh; RS 2290 community generation, net injection up to 2 MW, set by 24 kW per residential and 100 kW per commercial beneficiary, bill credits only; BCUC G-64-26 sets net billing at 10 ¢/kWh for RS 2289 and RS 2290 (executive summary); beneficiaries may be anywhere in BC Hydro's service area (BC Hydro page) — https://www.bchydro.com/toolbar/about/strategies-plans-regulatory/rate-design/self-generation-rate-updates.html",
+  "bchCustGen": "BC Hydro, Customer generation and Community generation pages: at least two benefitting customers; each takes at most 50% (≤ 4 accounts), 25% (5–9) or 10% (≥ 10) of the credits; beneficiaries anywhere in the service area; community generation beneficiaries 'do not receive electricity directly from the facility' and must hold an active BC Hydro account — https://app.bchydro.com/accounts-billing/electrical-connections/customer-generation.html",
   "aucMicro2026": "AUC, Micro-generation notice submission guideline (2026), p. 1, 4, 15: under the lesser of 5 MW or the service rating; on property the customer owns or leases, or adjacent owned or leased property; sized to the site's own use; revenue-seeking sites are commercial generators — https://media.auc.ab.ca/prd-wp-uploads/regulatory_documents/Reference/MicrogenerationNoticeSubmissionGuideline2026.pdf",
   "vbbl2025_2425": "Vancouver Building By-law 2025, Book II, Div. B, Art. 2.4.2.5 (By-law 14343 as amended by 14488, effective 1 Jan 2026), p. 26–28: all buildings manage rainwater on site; small sites (≤ 1,000 m² and FSR ≤ 1.0) a 3,400–7,200 L tank; otherwise released at no more than 5 L/s per hectare for the first 15 mm over the non-landscaped site, then 25 L/s per hectare (2100 IDF, 10-year) — https://vancouver.ca/files/cov/2025-vbbl-book-II-insert-pages.pdf",
   "vanRainPage": "City of Vancouver, Rainwater management (to Sep 2025): 192 developments, 66 ha managed, about 7,400 L/s peak reduction; purpose to 'relieve sewer system capacity constraints' (City claim) — https://vancouver.ca/home-property-development/rainwater-management.aspx",

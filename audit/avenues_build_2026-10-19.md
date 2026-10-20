@@ -32,4 +32,4 @@ J.B.: "all of the things we've listed are supposed to be part of the tool." Rese
 Resident: snowmelt_area, fire_water, backup_neighbours, community_solar. Community: clean_power_price, chp_heat, stormwater_volume, grid_refund. Full: condensate. Counts now 45 / 125 / 195.
 
 ## Gaps
-Shoreline file (distance to water); ECCC snowfall normals; NFPA 1142 volumes; Alberta fire and potable-water rules; RS 2290 credit rate; Alberta PPA strike prices; Alta Reg 117/2026 and EUA text (blocked; law-firm summaries used).
+Shoreline file (distance to water); ECCC snowfall normals; NFPA 1142 volumes; Alberta fire and potable-water rules; Alberta PPA strike prices; Alta Reg 117/2026 and EUA text (blocked; law-firm summaries used).
