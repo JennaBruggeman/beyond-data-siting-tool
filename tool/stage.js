@@ -32,7 +32,7 @@ function tilesFor(sd){
   // the rows: the step's sections become tiles with their answers; the sections themselves fold under "All the detail"
   if(!sd.querySelector('.dk')&&!sd.querySelector(':scope > .tiles')){ const all0=[...sd.querySelectorAll(':scope > details.sec, :scope > .tt + details.sec')].filter(x=>x.parentNode===sd), secs=all0.filter(x=>!x.hidden); /* sections hidden for this tier stay out of the tiles (logic.js) */
     if(secs.length>1){ const tiles=document.createElement('div'); tiles.className='tiles';
-      tiles.innerHTML=secs.slice(0,6).map((x,i)=>{ const tt=x.querySelector(':scope > summary .t'), a=x.querySelector(':scope > summary .a'); return `<button class="tile" data-i="${i}"><span class="tt">${esc(tt?tt.textContent:'')}</span><span class="ta">${a?spaced(a.innerHTML):''}</span></button>`; }).join('');
+      tiles.innerHTML=secs.slice(0,6).map((x,i)=>{ const tt=x.querySelector(':scope > summary .t'), a=x.querySelector(':scope > summary .a'); return `<button class="tile${x.querySelector(':scope > summary .a.f')?' feat':''}" data-i="${i}"><span class="tt">${esc(tt?tt.textContent:'')}</span><span class="ta">${a?spaced(a.innerHTML):''}</span></button>`; }).join('');
       const all=document.createElement('details'); all.className='alld'; all.innerHTML='<summary>All the detail</summary>';
       secs[0].before(tiles); tiles.after(all); for(const x of all0) all.appendChild(x);
       // anything else loose after the sections (notes, legends) goes into the fold too, except the step's buttons
@@ -60,6 +60,8 @@ D.close=()=>{ if(cur) last={cur,stack:stack.slice(),t:Date.now()}; giveBack(); s
 D.back=()=>{ last=null; back(); };
 function secCard(sec,t){ const id=sec.dataset.sec; const find=()=>{ const sd=$('#side'); return (id&&sd.querySelector(`details.sec[data-sec="${CSS.escape(id)}"]`))||sec; };
   D.open(`<h2>${esc(t)}</h2>`,dr=>{ const s=find(), b=s&&s.querySelector(':scope > .b'); if(b){ dr.appendChild(lend(b)); b.classList.add('secb'); } }); }
+// a section page whose contents were redrawn behind it (ticking 'cost more too' in Buildings that could take it): open it again on the new contents
+BD.reopenSec=(id,t)=>{ const s=$('#side').querySelector(`details.sec[data-sec="${CSS.escape(id)}"]`); if(!s) return; giveBack(); cur=null; stack.length=0; secCard(s,t); };
 function on(){ const sd=$('#side'), b=build(); document.body.classList.add('wcon');
   if(sd.parentNode!==$('#wcTx')) $('#wcTx').appendChild(sd);
   const a=BD.S.sel&&BD.S.sel.a; $('#wcAddr').textContent=a&&a[0]?a[0]:'';

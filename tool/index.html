@@ -295,10 +295,16 @@ body.wcon #wc{display:flex;position:fixed;top:56px;left:0;right:0;bottom:0;z-ind
 #wc .tiles{grid-template-columns:1fr;gap:0;margin:10px 0 6px;border-top:1px solid var(--line)}
 #wc .tile{flex-direction:row;align-items:baseline;gap:14px;background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:10px 2px}
 #wc .tile:hover{background:rgba(255,255,255,.025)} #wc .tile:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2px}
-#wc .tile .tt{flex:0 0 34%;font-size:13px;color:var(--muted);line-height:1.4}
+#wc .tile .tt{flex:0 0 34%;font-size:14px;color:var(--fg);font-weight:600;line-height:1.4} /* J.B. 20 Oct: the row names emphasised */
 #wc .tile .ta{flex:1;font-size:14px;line-height:1.45;-webkit-line-clamp:2}
 #wc .tile .ta *{display:inline!important;margin:0!important;padding:0!important;border:0!important;font-size:inherit!important}
 #wc .tile::after{content:'›';color:var(--faint);font-size:16px;align-self:center}
+/* a finding row (Best set-up found for heat; J.B. 20 Oct: "should be emphasized more"): full answer, larger, a soft red rule */
+#wc .tile.feat{flex-direction:column;gap:4px;padding:14px 2px 14px 14px;border-left:2px solid var(--accent);background:rgba(204,116,108,.05)}
+#wc .tile.feat .tt{flex:none;font-size:14px;color:var(--fg);font-weight:600}
+#wc .tile.feat .ta{font-size:17px;line-height:1.45;-webkit-line-clamp:4}
+#wc .tile.feat::after{position:absolute;right:8px;margin-top:6px}
+#wc .tile.feat{position:relative}
 #wc details.alld>summary{font-size:13.5px;padding:8px 0}
 #wc .coolbar{border:0;padding:12px 0 0;margin:14px 0 0;border-top:1px solid var(--line);font-size:13px}
 #wc .coolbar .kind{font-size:13px!important}

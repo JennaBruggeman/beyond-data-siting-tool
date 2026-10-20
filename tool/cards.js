@@ -187,19 +187,21 @@ function groupCost(f,G){ if(!RT||RT.key!==f.city+'|'+f.c.join(',')) return null;
   return {len,w}; }
 function scen(f,G,cop,offer){ const v=ECON.heatVal(f.city), pe=ECON.elec[f.city]; const gc=groupCost(f,G); if(!gc) return null;
   let H=G.reduce((a,p)=>a+p.econ.take[1],0); if(offer) H=Math.min(H,offer); if(H<=0) return null;
+  // estimates carry a range (J.B. 20 Oct): best case at the top of the buildings' demand, worst at the low end, middle case in between
+  let HL=G.reduce((a,p)=>a+p.econ.take[0],0); if(offer) HL=Math.min(HL,offer); HL=Math.min(HL,H); const Hm=(H+HL)/2;
   const cpm=mw=>{ const [[m1,c1],[m3,c3]]=ECON.hpCapex; return (mw<=m1?c1:mw>=m3?c3:c1+(c3-c1)*(mw-m1)/(m3-m1))*ECON.eur; };
   const fix=ECON.fixed*G.length, crf=(i,n)=>i*Math.pow(1+i,n)/(Math.pow(1+i,n)-1), cP=crf(ECON.rate,ECON.life.pipe), cH=crf(ECON.rate,ECON.life.hp);
-  const one=(pm,c,flh)=>{ const mw=H/flh, hp=mw*cpm(mw), om=(ECON.hpOMfix*mw+ECON.hpOMvar*H)*ECON.eur, pipe=fix+gc.w*pm, cap=pipe+hp, yr=H*(v-pe/c)-om;
-    return {lcoh:(cP*pipe+cH*hp+om)/H+pe/c, pay:yr>0?cap/yr:Infinity, cap, pipe, hp, mw}; };
-  const mid=one((ECON.pipe[0]+ECON.pipe[1])/2,(cop[0]+cop[1])/2,(ECON.hpFLH[0]+ECON.hpFLH[1])/2), lo=one(ECON.pipe[0],cop[1],ECON.hpFLH[1]), hi=one(ECON.pipe[1],cop[0],ECON.hpFLH[0]);
-  return {G,H,len:gc.len,v,mid,lo,hi,offer,elec:H/((cop[0]+cop[1])/2)}; }
+  const one=(pm,c,flh,Hx)=>{ const mw=Hx/flh, hp=mw*cpm(mw), om=(ECON.hpOMfix*mw+ECON.hpOMvar*Hx)*ECON.eur, pipe=fix+gc.w*pm, cap=pipe+hp, yr=Hx*(v-pe/c)-om;
+    return {lcoh:(cP*pipe+cH*hp+om)/Hx+pe/c, pay:yr>0?cap/yr:Infinity, cap, pipe, hp, mw}; };
+  const mid=one((ECON.pipe[0]+ECON.pipe[1])/2,(cop[0]+cop[1])/2,(ECON.hpFLH[0]+ECON.hpFLH[1])/2,Hm), lo=one(ECON.pipe[0],cop[1],ECON.hpFLH[1],H), hi=one(ECON.pipe[1],cop[0],ECON.hpFLH[0],HL);
+  return {G,H:Hm,Hhi:H,HL,len:gc.len,v,mid,lo,hi,offer,elec:Hm/((cop[0]+cop[1])/2)}; }
 function bestHeat(f,all,offer){ const cand=all.filter(p=>p.econ&&p.econ.take&&p._route).sort((a,b)=>(a.econ.lcohMid||1e9)-(b.econ.lcohMid||1e9)).slice(0,60); if(!cand.length) return null; const out=[];
   for(const sk of HS.sinks){ const cop=lorenzCOP(HS.src.t,sk.t);
     // start from the building with the lowest cost per MWh on its own, then add whichever building lowers the group's cost most
     let best=null; for(const p of cand){ const r=scen(f,[p],cop,offer); if(r&&(!best||r.mid.lcoh<best.mid.lcoh)) best=r; }
     if(!best) continue; let G=best.G.slice(), grew=true;
     while(grew&&G.length<40){ grew=false; let nb=null; for(const p of cand){ if(G.includes(p)) continue; const r=scen(f,G.concat([p]),cop,offer); if(r&&r.mid.lcoh<(nb||best).mid.lcoh) nb=r; }
-      if(nb&&nb.mid.lcoh<best.mid.lcoh-0.05){ best=nb; G=nb.G.slice(); grew=true; } if(offer&&best.H>=offer) break; }
+      if(nb&&nb.mid.lcoh<best.mid.lcoh-0.05){ best=nb; G=nb.G.slice(); grew=true; } if(offer&&best.Hhi>=offer) break; }
     out.push(Object.assign(best,{sink:sk,cop})); }
   return out; }
 BD.bestHeat=bestHeat;
@@ -219,7 +221,7 @@ function bestSec(f,B,base,mw,mwMax,Bmax){ if(!B||!B.length) return '';
   const body=`<p class="sub">The lowest cost per MWh the tool finds for heat on this lot, middle case. A search, not a recommendation.</p>
    <dl><dt>Cooling</dt><dd>liquid to the chip: water leaves the servers at about 35–40 °C and returns at 24 °C (NREL's ESIF data centre, measured design)</dd>
    <dt>Size</dt><dd>${mw.toFixed(1)} MW of servers</dd>
-   <dt>Who takes the heat</dt><dd>${nm}: about ${fmt(Math.round(b.H/100)*100)} MWh a year, through ${fmt(Math.round(b.len/10)*10)} m of pipe along the streets, shared where the routes overlap</dd>
+   <dt>Who takes the heat</dt><dd>${nm}: about ${fmt(Math.round(b.H/100)*100)} MWh a year${b.HL<b.Hhi*0.98?` (${fmt(Math.round(b.HL/100)*100)}–${fmt(Math.round(b.Hhi/100)*100)}: the range on estimated demand)`:''}, through ${fmt(Math.round(b.len/10)*10)} m of pipe along the streets, shared where the routes overlap</dd>
    <dt>Their heating</dt><dd>${esc(b.sink.lab)}: heat pump COP ${b.cop[0].toFixed(1)}–${b.cop[1].toFixed(1)}${b60?`. If they ran ${esc(b60.sink.lab)}: <span class="k">${sm(b60.mid.lcoh)} per MWh</span>`:''}</dd>
    <dt>Cost per MWh of heat</dt><dd><span class="k">${sm(b.mid.lcoh)}</span> (${sm(b.lo.lcoh)}–${sm(b.hi.lcoh)}) against ${sm(b.v)} worth; ${pays?'it costs less than the heat is worth in the middle case':`a gap of ${sm(b.mid.lcoh-b.v)}`}</dd>
    <dt>If the rules change</dt><dd>${(()=>{ const keepR=ECON.rate, keepF=ECON.hpFLH; const alt=(r,fl)=>{ ECON.rate=r; if(fl) ECON.hpFLH=fl; const x=scen(f,b.G,b.cop,b.offer); ECON.rate=keepR; ECON.hpFLH=keepF; return x?Math.round(x.mid.lcoh):'—'; }; const ff=ECON.hpFLHfull[f.city]||ECON.hpFLHfull.van;
@@ -252,7 +254,7 @@ async function heatIndex(){
       const life=`over the pipe's ${ECON.life.pipe}-year life`;
       const kn=all.filter(p=>p.econ.status!=='unknown'&&isFinite(p.econ.payMid)).sort((a,b)=>a.econ.payMid-b.econ.payMid), c=kn[0];
       const yrs=x=>x>50?'more than 50':String(Math.round(x));
-      const best=c?`Closest to paying back: <span class="k">a ${esc((PL1[c.t]||[c.t])[0])} ${fmt(Math.round(c.econ.route/10)*10)} m away by street, about ${yrs(c.econ.payMid)} years</span>${c.econ.payMid<=50?` (${yrs(c.econ.payback[0])} to ${isFinite(c.econ.payback[1])?yrs(c.econ.payback[1]):'never'}, by cost and efficiency)`:''}.`:'';
+      const best=c?`Closest to paying back: <span class="k">a ${esc((PL1[c.t]||[c.t])[0])} ${fmt(Math.round(c.econ.route/10)*10)} m away by street, about ${yrs(c.econ.payMid)} years</span>.`:''; // J.B. 20 Oct: the middle case only in the headline (the range stays in each building's card)
       const head=nW?`<span class="k">${nW} of ${nK} buildings</span> with a known heat demand within 3 km cost less to connect than their heat is worth ${life}.${nDep?` ${nDep} more ${nDep===1?'depends':'depend'} on the costs.`:''}`
         :`None of the ${nK} buildings with a known heat demand within 3 km costs less to connect than its heat is worth ${life}${nDep?`; ${nDep} ${nDep===1?'depends':'depend'} on the costs`:''}.`;
       return `${head} ${best}${nW?'':' What would bring it closer: higher gas prices, a cheaper pipe route, a pipe already in the street, or a cheaper heat pump.'}${unkTxt}${inside?` The lot is inside the ${inside.n.replace(/ \(.*/,'')}.`:''}`; })();
@@ -288,7 +290,7 @@ async function heatIndex(){
   +BD.sec('h-recv','Buildings that could take it',recvAns,
      `<label class="tgl"><input type="checkbox" id="showB" ${showB?'checked':''}> List buildings that cost more than the heat is worth too (greyed)</label>${groupRows(all,showB)}`);
   $('#side').innerHTML=h; e.wireTabs(); BD.draw();
-  $('#showB').onchange=ev=>{ A.showBeyond=ev.target.checked; heatIndex(); };
+  $('#showB').onchange=async ev=>{ A.showBeyond=ev.target.checked; const inPage=!!ev.target.closest('.secb'); await heatIndex(); if(inPage&&BD.reopenSec) BD.reopenSec('h-recv','Buildings that could take it'); };
   document.querySelectorAll('#side [data-rid]').forEach(a=>a.onclick=ev=>{ if(ev.target.closest&&ev.target.closest('a')&&!ev.target.closest('a').dataset.rid) return; ev.preventDefault(); openConnection('heat',+a.dataset.rid); });
   const nb=document.querySelector('#side [data-net]'); if(nb) nb.onclick=ev=>{ ev.preventDefault(); netCard(f,nets); };
   $('#hmath').onclick=ev=>{ ev.preventDefault(); heatMathCard(f,r); };
