@@ -89,19 +89,37 @@ function welcome(){ let w=$('#welcome'); if(w) w.remove(); w=document.createElem
 BD.welcome=welcome;
 function arcs(){ const cv=document.createElement('canvas'); cv.className='wbg'; cv.setAttribute('aria-hidden','true'); requestAnimationFrame(()=>{ try{ BD.welcomeCity(cv); cv.classList.add('on'); }catch(e){ console.warn(e); } }); let t; window.addEventListener('resize',()=>{ clearTimeout(t); t=setTimeout(()=>{ if(cv.isConnected) BD.welcomeCity(cv); },200); }); return cv; }
 async function runExample(i){ const x=EXAMPLES[i]; reset(); F.exPending=true; Object.assign(BD.S.answers,x.ans,{mw:null});
-  try{ if(BD.S.city!==x.sel.city) await BD.setCity(x.sel.city,true); await BD.select(Object.assign({quiet:true},x.sel)); F.sel=selKey(); F.sig=sigOf(); } finally{ F.exPending=false; } if(BD.S.sel) go(1); }
+  try{ if(BD.S.city!==x.sel.city) await BD.setCity(x.sel.city,true); await BD.select(Object.assign({quiet:true},x.sel));
+    // J.B. 20 Oct: a worked example opens at the largest size where everything fits (servers, plant, generators, loading)
+    // if the example's own choices fit no size (the downtown tower: no yard for generators), try the other plant and generator places and keep
+    // the one that fits the largest size; generators are kept if any placement allows them (most data centres have them)
+    if(BD.S.sel&&BD.fitMax){ const A=BD.S.answers, base={plantAt:A.plantAt,genAt:A.genAt,gens:A.gens};
+      const tries=[{},{genAt:'roof'},{plantAt:'split'},{plantAt:'yard'},{plantAt:'split',genAt:'roof'},{plantAt:'yard',genAt:'roof'},{gens:'none'},{gens:'none',plantAt:'split'},{gens:'none',plantAt:'yard'}];
+      let best=null; for(const t of tries){ Object.assign(A,base,t); BD.modelReset&&BD.modelReset(); const v=BD.fitMax(); if(!v) continue;
+        if(!best) best={v,t}; else if(v>best.v+0.05&&!(best.t.gens!=='none'&&t.gens==='none')) best={v,t};
+        if(t===tries[0]) break; /* the example's own choices fit: keep them */ if(best&&best.t.gens!=='none'&&t===tries[5]) break; }
+      Object.assign(A,base,best?best.t:{}); if(best){ A.mw=best.v; A.mwPick='large'; } BD.modelReset&&BD.modelReset(); }
+    F.sel=selKey(); F.sig=sigOf(); } finally{ F.exPending=false; } if(BD.S.sel) go(1); }
 
 /* ---------- the bar at the top and the buttons at the bottom of the panel ---------- */
 function bar(){ const st=F.steps[F.i], gi=GROUPS.findIndex(g=>g[0]===st.g); const inG=F.steps.filter(s=>s.g===st.g), j=inG.indexOf(st);
   const reachG=g=>F.steps.findIndex((s,k)=>s.g===g&&k<=F.max)>=0;
   return `<div class="flowbar"><nav class="path" aria-label="Steps">${GROUPS.map(([g,l],k)=>`<button data-fg="${g}" title="${l}" aria-label="${k+1} ${l}" ${k===gi?'aria-current="step"':''} ${reachG(g)?'':'disabled'}><span>${k+1}</span>${k===gi?l:`<span class="pl">${l}</span>`}</button>`).join('')}</nav>
   ${inG.length>1?`<div class="fsub"><span class="fst">${esc(st.t)} · ${j+1} of ${inG.length}</span><span class="fseg" title="${esc(st.t)}: ${j+1} of ${inG.length}">${inG.map((x,q)=>`<i class="${q<j?'done':q===j?'on':''}"></i>`).join('')}</span></div>`:''}</div>`; }
-function foot(){ const st=F.steps[F.i], nx=F.steps[F.i+1], pv=F.steps[F.i-1]; const blocked=st.k==='site'&&!BD.S.sel;
-  return `<div class="flowfoot">${pv?`<button class="sec" id="fBack" title="Back to ${esc(pv.t)}">← ${pv.t.length>22?'Back':esc(pv.t)}</button>`:'<span></span>'}${nx?`<button class="${st.k==='setup'?'sec':'pri'}" id="fNext" ${blocked?'disabled':''}>${blocked?'Pick a site first':st.k==='setup'?'Keep the defaults →':(nx.t.length>26?'Next →':`Next: ${esc(nx.t)} →`)}</button>`:''}</div>`; }
+/* a set-up that does not work stops the walk (J.B. 20 Oct: "a set up that doesnt work shouldnt ever let you click next … If there is not room
+   then it should say that and make you change the size etc. to fix it"): the reasons, then the two ways out */
+function stuck(){ const st=F.steps[F.i]; if(!st||st.k==='site'||!BD.S.sel||!BD.setupProblems) return null; const p=BD.setupProblems(); if(!p.length) return null;
+  const fm=BD.fitMax?BD.fitMax():null; return {p,fm}; }
+function foot(){ const st=F.steps[F.i], nx=F.steps[F.i+1], pv=F.steps[F.i-1]; const S=stuck(); F.stuck=!!S; const blocked=(st.k==='site'&&!BD.S.sel)||!!S;
+  const note=S?`<div class="fstuck" role="alert"><b>This set-up doesn't work on this lot.</b><ul>${S.p.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+    <div class="fsx">${S.fm?`<button class="btn" id="fFit">Use the largest size that fits (${S.fm.toFixed(1)} MW)</button>`:'<span class="src">No size fits with these choices.</span>'}${st.k!=='setup'?'<button class="btn" id="fSetup">Change the set-up</button>':''}</div></div>`:'';
+  return `${note}<div class="flowfoot">${pv?`<button class="sec" id="fBack" title="Back to ${esc(pv.t)}">← ${pv.t.length>22?'Back':esc(pv.t)}</button>`:'<span></span>'}${nx?`<button class="${st.k==='setup'?'sec':'pri'}" id="fNext" ${blocked?'disabled':''}>${st.k==='site'&&!BD.S.sel?'Pick a site first':S?'Fix the set-up to go on':st.k==='setup'?'Keep the defaults →':(nx.t.length>26?'Next →':`Next: ${esc(nx.t)} →`)}</button>`:''}</div>`; }
 function decorate(){ const sd=$('#side'); if(!sd||!F.on) return; F.busy=true;
-  try{ sd.querySelectorAll(':scope > .flowbar, :scope > .flowfoot').forEach(x=>x.remove()); sd.insertAdjacentHTML('afterbegin',bar()); sd.insertAdjacentHTML('beforeend',foot());
+  try{ sd.querySelectorAll(':scope > .flowbar, :scope > .flowfoot, .fstuck').forEach(x=>x.remove()); sd.insertAdjacentHTML('afterbegin',bar()); sd.insertAdjacentHTML('beforeend',foot());
     { const st=F.steps[F.i], tk=BD.explain&&BD.explain.topicFor(st.k); if(tk&&!sd.querySelector('.xpbtn')){ const at=sd.querySelector('.lead')||sd.querySelector('h2'); if(at){ const b=document.createElement('button'); b.className='xpbtn'; b.innerHTML='How it works <span>›</span>'; b.onclick=()=>BD.explain.open(tk); at.after(b); } } }
-    sd.querySelectorAll('.flowbar [data-fg]').forEach(b=>b.onclick=()=>{ const k=F.steps.findIndex(s=>s.g===b.dataset.fg); if(k>=0&&k<=F.max) go(k); });
+    sd.querySelectorAll('.flowbar [data-fg]').forEach(b=>b.onclick=()=>{ const k=F.steps.findIndex(s=>s.g===b.dataset.fg); if(k>=0&&k<=F.max&&!(F.stuck&&k>F.i)) go(k); });
+    { const fit=$('#fFit'); if(fit) fit.onclick=()=>{ const v=BD.fitMax(); if(v){ BD.S.answers.mw=v; BD.S.answers.mwPick='large'; BD.modelReset&&BD.modelReset(); go(F.i); } };
+      const su=$('#fSetup'); if(su) su.onclick=()=>{ const k=F.steps.findIndex(s=>s.k==='setup'); if(k>=0) go(k); }; }
     const bk=$('#fBack'); if(bk) bk.onclick=back; const nx=$('#fNext'); if(nx) nx.onclick=next; }
   finally{ setTimeout(()=>{ F.busy=false; },0); } }
 (function watch(){ const sd=$('#side'); if(!sd) return setTimeout(watch,200);
@@ -121,7 +139,7 @@ async function go(i){ if(i<0||i>=F.steps.length) return; invalidate(); capture()
   const st=F.steps[F.i]; if(BD.drawer&&BD.drawer.isOpen()&&st.k!=='setup') BD.drawer.close();
   try{ await show(st); }catch(e){ console.warn(e); }
   decorate(); const sd=$('#side'); if(sd) sd.scrollTop=0; const tx=document.getElementById('wcTx'); if(tx) tx.scrollTop=0; }
-function next(){ if(F.steps[F.i].k==='site'&&!BD.S.sel) return; go(F.i+1); }
+function next(){ if(F.steps[F.i].k==='site'&&!BD.S.sel) return; if(stuck()) { decorate(); return; } go(F.i+1); }
 function back(){ go(F.i-1); }
 async function show(st){ const k=st.k;
   if(k==='site'){ BD.S.view2=null; BD.scene3d&&BD.scene3d.hide(); if(BD.S.sel) BD.card(); else BD.intro(); BD.draw(); return; }
@@ -187,7 +205,7 @@ const leftText=D=>`${D.left.length} item${D.left.length>1?'s':''} on this path $
 const leftHTML=D=>D.left.length?`<h2 class="rg">Left out at this level</h2><p class="sub">${esc(leftText(D))}</p>`:'';
 function reportView(){ const e=BD.eng; capture(); const D=reportData(); BD.S.view2='tab'; BD.S.tab='report'; BD.scene3d&&BD.scene3d.hide();
   const tabSteps=new Set(['opts','cities','opps-rest']);
-  $('#side').innerHTML=`<h2>Report</h2><p class="lead">${esc(RHEAD[D.tier])} For <span class="k">${esc(D.facts[0][1])}</span>. Nothing is added up; nothing wins.</p><p class="sub">Written for: ${esc(D.level)}. Change “Showing” above for the report at another level.</p>
+  $('#side').innerHTML=`<h2>Report</h2><p class="lead">${esc(RHEAD[D.tier])} For <span class="k">${esc(D.facts[0][1])}</span>.</p><p class="sub">Written for: ${esc(D.level)}. Change “Showing” above for the report at another level.</p>
   <div class="rbtns">${BD.dl?`<button class="pri" id="rHtml">Download HTML</button><button class="pri" id="rPdf">Download PDF</button>`:'<p class="sub">Downloads are not available in this view.</p>'}</div><p class="sub" id="rMsg"></p>
   <div class="report"><h3>Baseline</h3><dl class="rd">${D.facts.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
   ${D.groups.map(G=>`<h2 class="rg">${esc(G.l)}</h2>${G.items.map(n=>stepHTML(n,D.tier!=='resident'&&tabSteps.has(n.k))).join('')}`).join('')}
@@ -210,7 +228,7 @@ table{border-collapse:collapse;width:100%;font-size:12px;margin:6px 0}td,th{bord
 .small{font-size:11px;color:#777}.rp{display:block;font-size:11px;color:#888;margin-top:2px}ul{margin:4px 0;padding-left:18px}@media print{h2{break-after:avoid}h3{break-after:avoid}}</style></head><body>
 <div class="small">BEYOND DATA · REPORT · ${esc(D.level.toUpperCase())} · ${D.date}</div><h1>${esc(D.facts[0][1])}</h1><p>${esc(RHEAD[D.tier])}</p>
 <h2>Baseline</h2><dl>${D.facts.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>${body}
-${leftHTML(D)}<h2>Read with</h2><p class="small">Ranges, not designs: screening figures from published sources, not a substitute for an engineer, a utility study or a permit review. Operator figures are claims. Heat available is not heat used. Nothing is added up and nothing wins.</p>
+${leftHTML(D)}<h2>Read with</h2><p class="small">Ranges, not designs: screening figures from published sources, not a substitute for an engineer, a utility study or a permit review. Operator figures are claims. Heat available is not heat used.</p>
 <h2>Sources</h2>${D.srcs.map(s=>`<p class="small">${esc(s)}</p>`).join('')}</body></html>`; }
 
 /* PDF: jsPDF and its table plug-in, loaded only when asked for. The standard PDF fonts cover Latin-1 only, so a few symbols are spelled out. */
@@ -231,7 +249,7 @@ async function docPDF(D){ if(!window.jspdf) await load(PDFLIB[0]); if(!(window.j
     for(const n of G.items){ room(30); text(n.title,{size:12,bold:true,after:2}); if(n.lead) text(n.lead,{size:10,after:4}); if(n.secs.length) kv(n.secs.map(([k,v,p])=>[k,p?v+'  (Worked out from: '+pathText(p)+')':v])); if(n.rows&&n.rows.length) for(const r of n.rows) text('- '+r,{size:9,indent:6});
       for(const T of n.tables){ const head=T.filter(r=>r.head).map(r=>r.cells.map(L1)); const body=T.filter(r=>!r.head).map(r=>r.party?[{content:L1(r.cells[0]),colSpan:Math.max(1,...T.map(x=>x.cells.length)),styles:{fontStyle:'bold',textColor:acc}}]:r.cells.map(L1)); table(body,{head:head.length?head:undefined}); } } }
   if(D.left.length){ room(40); y+=6; text('LEFT OUT AT THIS LEVEL',{size:9,bold:true,color:acc,after:2}); text(leftText(D),{size:9,after:6}); }
-  room(40); y+=6; text('READ WITH',{size:9,bold:true,color:acc,after:2}); text('Ranges, not designs: screening figures from published sources, not a substitute for an engineer, a utility study or a permit review. Operator figures are claims. Heat available is not heat used. Nothing is added up and nothing wins.',{size:9,after:6});
+  room(40); y+=6; text('READ WITH',{size:9,bold:true,color:acc,after:2}); text('Ranges, not designs: screening figures from published sources, not a substitute for an engineer, a utility study or a permit review. Operator figures are claims. Heat available is not heat used.',{size:9,after:6});
   text('SOURCES',{size:9,bold:true,color:acc,after:2}); for(const s of D.srcs) text(s,{size:7.5,color:grey,after:2});
   const n=doc.getNumberOfPages(); for(let p=1;p<=n;p++){ doc.setPage(p); doc.setFontSize(7.5); doc.setTextColor(...grey); doc.text(`${p} / ${n}`,W-M,H-28,{align:'right'}); }
   return doc.output('blob'); }

@@ -70,11 +70,15 @@ BD.plant={
  /* after the footprint: put units on the roof and in the yard, and report what does not fit */
  roof(m){
   const A=BD.S.answers, P=m.plant, F=m.F; if(!P||!F||!m.foot) return; const s=P.s;
-  const roofRing=m.foot, roofH=m.existing?(m.roofH||m.H):m.H;
+  // J.B. 20 Oct (examples that 'did not fit'): once a size is set the building is only as big as that size needs (m.sizedTo, site.js); the plant
+  // goes on that building's roof and in the yard around it, not around the most the lot could hold
+  const bld=m.sizedTo&&m.serverFoot?m.serverFoot:m.foot;
+  const roofRing=bld, roofH=m.existing?(m.roofH||m.H):m.H;
   const [ru0,ru1,rv0,rv1]=localBounds(F,roofRing);
   const put=(k,count,base,where)=>{ if(!count||!k) return 0; let got=[];
-    if(where==='roof') got=pack(F,roofRing,[],ru0,ru1,rv0,rv1,k,count,false);
-    else { const lotR=m.inset?BD.geo.clip(m.ring,m.inset):m.ring; const forbid=P.boxes.filter(b=>b.kind==='yard').map(b=>b.clear); if(m.existing) (m.feet||[]).forEach(f=>forbid.push(f.r)); else { if(m.foot) forbid.push(m.foot); if(m.loading) forbid.push(m.loading); }
+    if(where==='roof'){ got=pack(F,roofRing,[],ru0,ru1,rv0,rv1,k,count,false); // then turned 90° where the roof's shape suits that better (a C-shaped tower roof, 20 Oct)
+      if(got.length<count){ const tk=got.map(p=>BD.geo.rectW(F,p.u-p.L/2-1,p.u+p.L/2+1,p.v-p.W/2-1,p.v+p.W/2+1)); const g2=pack(F,roofRing,tk,ru0,ru1,rv0,rv1,k,count-got.length,true); got=got.concat(g2); } }
+    else { const lotR=m.inset?BD.geo.clip(m.ring,m.inset):m.ring; const forbid=P.boxes.filter(b=>b.kind==='yard').map(b=>b.clear); if(m.existing) (m.feet||[]).forEach(f=>forbid.push(f.r)); else { if(bld) forbid.push(bld); if(m.loading) forbid.push(m.loading); }
       // yard: the reserved strip for a new building (units turned across it); anywhere in the usable lot for an existing one
       if(P.yard&&!m.existing){ const [a,b,c,d]=localBounds(F,P.yard); got=pack(F,lotR,forbid,a,b,c,d,k,count,true);
         if(got.length<count){ const taken=P.boxes.map(x=>x.clear).concat(got.map(p=>BD.geo.rectW(F,p.u-p.L/2-1,p.u+p.L/2+1,p.v-p.W/2-1,p.v+p.W/2+1))); const [a2,b2,c2,d2]=localBounds(F,lotR);
@@ -87,7 +91,7 @@ BD.plant={
   P.indoor=0; if(A.vis==='indoors'&&P.coolRoof){ P.indoor=P.coolRoof*(s.k.L+2*s.k.wall[0])*(s.k.W+s.k.gap[1]); P.coolRoofIndoor=P.coolRoof; P.coolRoof=0; }
   const cr=put(s.k,P.coolRoof,roofH,'roof'), cy=put(s.k,P.coolYard,0,'yard');
   // generators: never on top of coolers; roof sets go where coolers left room
-  let gr=0; if(P.genRoof){ const used=P.boxes.filter(b=>b.kind==='roof').map(b=>b.clear); const got=pack(F,roofRing,used,ru0,ru1,rv0,rv1,s.g,P.genRoof,false); got.forEach(p=>P.boxes.push(boxOf(F,p,s.g,roofH,'roof'))); gr=got.length; }
+  let gr=0; if(P.genRoof){ const used=P.boxes.filter(b=>b.kind==='roof').map(b=>b.clear); let got=pack(F,roofRing,used,ru0,ru1,rv0,rv1,s.g,P.genRoof,false); if(got.length<P.genRoof) got=got.concat(pack(F,roofRing,used.concat(got.map(p=>BD.geo.rectW(F,p.u-p.L/2-1,p.u+p.L/2+1,p.v-p.W/2-1,p.v+p.W/2+1))),ru0,ru1,rv0,rv1,s.g,P.genRoof-got.length,true)); got.forEach(p=>P.boxes.push(boxOf(F,p,s.g,roofH,'roof'))); gr=got.length; }
   const gy=put(s.g,P.genYard,0,'yard');
   const kname=s.k.name, miss=[];
   if(cr<P.coolRoof) miss.push(`${P.coolRoof-cr} of ${P.coolRoof} ${kname} do not fit on the roof`);

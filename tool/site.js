@@ -132,7 +132,9 @@ function model(){
     if(y.max){ if(u1-u0>y.max){ const c=(u0+u1)/2; u0=c-y.max/2; u1=c+y.max/2; } if(v1-v0>y.max){ const c=(v0+v1)/2; v0=c-y.max/2; v1=c+y.max/2; } }
     m.inset=rectW(F,u0,u1,v0,v1); m.yardNote=Z.yardsKnown?'':'Yards and setbacks for this zone are not yet read, so the building may cover the whole lot.';
     // loading: rear end of the buildable area (the end with the rear yard; which end faces the street is not known in the tool)
-    const gfaGuess=lotArea*Z.fsr[1];
+    // J.B. 20 Oct: once a size is set, loading is counted from the floor that size needs, not the most the zone allows (capped at that)
+    const R0=BD.eng&&BD.eng.R, perMW0=R0?(R0.m2PerMW[0]+R0.m2PerMW[1])/2/((R0.hallShare[0]+R0.hallShare[1])/2):0;
+    const gfaGuess=A.mw&&perMW0?Math.min(lotArea*Z.fsr[1],A.mw*perMW0):lotArea*Z.fsr[1];
     const LN=loadingNeed(city,gfaGuess); m.loadingNeed=LN;
     const rearEnd=fl>0?u1:u0, dir=fl>0?-1:1; let cur=rearEnd;
     if(LN.n&&!A.loadIn&&A.foot!=='existing'){ const dep=LN.len+LN.aisle; const a0=cur, a1=cur+dir*dep; { const q=inscribe(F,ring,a0,a1,v0,v1); m.loading=q?rectW(F,q[0],q[1],q[2],q[3]):clip(ring,rectW(F,Math.min(a0,a1),Math.max(a0,a1),v0,v1)); m.loadV=q?[q[2],q[3]]:[v0,v1]; } m.loadDepth=dep; cur=a1;
@@ -161,6 +163,20 @@ function model(){
   if(BD.plant&&BD.plant.roof) BD.plant.roof(m);
   cache={key,m}; return m; }
 BD.model=model; BD.modelReset=()=>{ cache.key=null; };
+/* a set-up that does not work (J.B. 20 Oct: "a set up that doesnt work shouldnt ever let you click next"): everything that stops it, in words */
+function setupProblems(noFloor){ const m=model(); if(!m||!m.F) return []; const p=(m.warn||[]).slice();
+  if(m.plant&&m.plant.miss) p.push(...m.plant.miss.map(x=>x.charAt(0).toUpperCase()+x.slice(1)+'.'));
+  if(!noFloor) try{ const A=BD.S.answers; if(A.mw&&BD.eng){ const keep=A.mw; A.mw=null; cache.key=null; const hi=BD.eng.siteFacts().mw[1]; A.mw=keep; cache.key=null; model();
+    if(keep>hi+0.05) p.push(`${keep} MW of servers need more floor than this building can hold (up to ${hi.toFixed(1)} MW).`); } }catch(e){}
+  return p; }
+/* the largest size at which everything fits: servers, cooling plant, generators, loading (J.B. 20 Oct: worked examples open at it; "as large as fits" means it).
+   Binary search to 0.1 MW between 0.1 and the most the floor holds; assumes a smaller size never needs more room. Returns null if nothing fits. */
+function fitMax(){ const A=BD.S.answers, keep=A.mw; A.mw=null; cache.key=null; let hi=0; try{ hi=BD.eng.siteFacts().mw[1]; }catch(e){}
+  const ok=mw=>{ A.mw=mw; cache.key=null; return !setupProblems(true).length; };
+  let lo=0, best=null, top=Math.floor((hi||0)*10);
+  if(top>=1&&ok(top/10)) best=top/10; else { let a=1, b=top-1; while(a<=b){ const mid=(a+b)>>1; if(ok(mid/10)){ best=mid/10; a=mid+1; } else b=mid-1; } }
+  A.mw=keep; cache.key=null; return best; }
+BD.setupProblems=setupProblems; BD.fitMax=fitMax;
 
 /* ---------- the drawer (decision A, 16 Oct): over the map, beside the panel ---------- */
 const css=document.createElement('style'); css.textContent=`

@@ -161,7 +161,7 @@ const TOPICS={
 function oppTopic(n){ const g=BD.oppGatesFor(n), GS=BD.oppGates; const st=g.order.map(k=>[k,g.G[k][0],g.G[k][1]]); const L=g.L||{};
   const wrap=(t,w)=>{ const o=[]; let l=''; for(const word of String(t).split(' ')){ if((l+' '+word).trim().length>w){ o.push(l.trim()); l=word; } else l+=' '+word; } if(l.trim()) o.push(l.trim()); return o; };
   const steps=[
-   {t:'Six gates, at this site',p:`Each gate is tested here, on its own. ${K(({yes:'Possible here',chg:'Possible with a change',nk:'Not ruled out',no:'Not here'})[g.s])}: ${({yes:'every gate the tool can test passes',chg:'no gate fails outright',nk:'some gates are not yet known',no:'at least one gate fails'})[g.s]}. Nothing is added up.`,
+   {t:'Six gates, at this site',p:`Each gate is tested here, on its own. ${K(({yes:'Possible here',chg:'Possible with a change',nk:'Not ruled out',no:'Not here'})[g.s])}: ${({yes:'every gate the tool can test passes',chg:'no gate fails outright',nk:'some gates are not yet known',no:'at least one gate fails'})[g.s]}.`,
     v:h=>{ const lines=st.map(([,,why])=>wrap(why,52).slice(0,3)); let y=12; const H=12+lines.reduce((t,l)=>t+Math.max(1,l.length)*15+16,0); const s=svg(h,560,H,'Gates at this site');
       st.forEach(([k,v],i)=>{ const col=GS[v][1]; el('rect',{x:14,y,width:84,height:22,rx:4,fill:'none',stroke:col,'stroke-width':1.5},s); txt(s,24,y+15,k,{s:12}); txt(s,108,y+15,GS[v][0],{s:11.5,c:col});
         tip(el('g',{},s),`${k}: ${GS[v][0]} — ${st[i][2]}`); lines[i].forEach((ln,j)=>txt(s,250,y+15+j*15,ln,{s:11,c:C.muted})); y+=Math.max(1,lines[i].length)*15+16; }); }},

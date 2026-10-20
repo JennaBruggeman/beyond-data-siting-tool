@@ -396,5 +396,5 @@ BD.tabOverride=Object.assign(BD.tabOverride||{},{heat:heatIndex});
 BD.views=BD.views||{};
 BD.views.report=function(){ const e=BD.eng; BD.S.view2='tab'; document.body.classList.remove('wide');
   document.getElementById('side').innerHTML=e.tabBar('report')+`<h2>Report</h2><p class="lead">The report for this site is being built.</p>
-  <p class="sub">It will gather, in this order: the site and settings; the baseline (the lot today and a conventional data centre on it); this design against the six references; each exchange with gains and losses for each party in their own units; the three options and four futures; and everything not yet known, with every source and its check status. Nothing is added up or ranked. It will download as a PDF and as an HTML page.</p>`;
+  <p class="sub">It will gather, in this order: the site and settings; the baseline (the lot today and a conventional data centre on it); this design against the six references; each exchange with gains and losses for each party in their own units; the three options and four futures; and everything not yet known, with every source and its check status. It will download as a PDF and as an HTML page.</p>`;
   e.wireTabs(); BD.draw(); };

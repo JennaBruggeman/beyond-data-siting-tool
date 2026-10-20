@@ -80,24 +80,27 @@ function backLink(){ const sd=$('#side'), A=BD.S&&BD.S.answers; if(!sd||!A||BD.t
 /* ---------- residents' set-up: assumed answers, shown and changeable ---------- */
 const live=()=>{ const A=BD.S.answers; return BD.deck.DECK.filter(d=>!d.when||d.when(A)); };
 function sizeSet(which){ const A=BD.S.answers; A.mw=null; BD.modelReset&&BD.modelReset(); const f=BD.eng.siteFacts(), hi=f.mw[1];
-  const typ=Math.min(TYPICAL_MW,hi); A.mw=which==='large'?+hi.toFixed(1):which==='mid'?+((typ+hi)/2).toFixed(1):+typ.toFixed(1); A.mwPick=which; BD.modelReset&&BD.modelReset(); }
+  const fm=BD.fitMax?BD.fitMax():null, top=fm!=null?fm:hi; /* "as large as fits" = everything fits, not floor only (J.B. 20 Oct) */
+  const typ=Math.min(TYPICAL_MW,top); A.mw=which==='large'?+top.toFixed(1):which==='mid'?+((typ+top)/2).toFixed(1):+typ.toFixed(1); A.mwPick=which; BD.modelReset&&BD.modelReset(); }
 function residentCard(){ const A=BD.S.answers, m=BD.model&&BD.model(); if(!m) return;
   if(A.mw==null||!A.mwPick) sizeSet(A.mwPick||'typ');
-  const f=BD.eng.siteFacts(), hi=f.mw[1], L=live();
+  const f=BD.eng.siteFacts(), fm=BD.fitMax?BD.fitMax():null, hi=fm!=null?fm:0, L=live(); // largest size where everything fits (J.B. 20 Oct)
   const rows=L.map((d,j)=>{ const opts=d.opts(BD.model()), cur=d.k(A), o=opts.find(x=>x.v===cur)||opts[0]; return `<li><span class="aq">${esc(d.q)}</span><span class="aa">${esc(o.t)}</span><a href="#" data-j="${j}">Change</a></li>`; }).join('');
   // the floor the servers need (same figure the 3D label shows), not the zone's largest building
   const M=BD.model(); const fl=M&&(M.sizedTo?M.sizedTo.floor:M.footArea?M.footArea*Math.max(1,M.nF[0]-(M.Z&&M.Z.ground?1:0)):0); const store=fl?`about ${BD.fmt(Math.round(fl/100)*100)} m² (${BD.fmt(Math.round(fl*10.7639/1000)*1000)} ft²) of floor`:''; const foot='';
-  const nothing=hi<0.05;
+  const nothing=hi<0.05, probs=BD.setupProblems?BD.setupProblems():[];
   $('#side').innerHTML=`<div class="dk rset"><div class="kind">Set up the site</div><h2>What we assumed for you</h2>
    <p>You only chose where. The rest starts from the tool's usual choices, <span class="k">a starting point, not a recommendation</span>. Change any of them.</p>
-   ${nothing?`<p class="dwarn">Nothing fits on this lot with these choices. Try another lot, or change a choice below.</p>`:`
+   ${nothing?`<p class="dwarn">Nothing fits on this lot with these choices: ${esc(probs.join(' '))} Change a choice below, or try another lot.</p>`:`
    <h3>How big</h3><div class="dch" role="radiogroup">${[['typ',`Typical (${Math.min(TYPICAL_MW,hi).toFixed(1)} MW)`],['mid','In between'],['large',`As large as fits (${hi.toFixed(1)} MW)`]].map(([v,t])=>`<button role="radio" data-sz="${v}" aria-checked="${(A.mwPick||'typ')===v}">${esc(t)}</button>`).join('')}</div>
    <p class="sub">${M&&M.sizedTo?`${esc(A.mw.toFixed(1))} MW of servers: ${store}, any shape`:`The most the zone allows: ${store}, about ${f.mw[0].toFixed(1)}–${hi.toFixed(1)} MW of servers depending on how tightly racks are packed${hi>=40?' (the tool stops at 40 MW)':''}`}. "Typical" is the size of data centres already built inside Vancouver, Edmonton and Calgary, about 2–2.5 MW (operator claims)${hi<TYPICAL_MW?`; this lot fits only ${hi.toFixed(1)} MW`:''}.</p>`}
    <h3>Everything else</h3><ul class="assumed">${rows}</ul>
-   <div class="dnav"><button class="sec" id="rB">← The site</button><button class="pri" id="rN" ${nothing?'disabled':''}>What fits here →</button></div></div>`;
+   ${!nothing&&probs.length?`<div class="fstuck" role="alert"><b>This set-up doesn't work on this lot.</b><ul>${probs.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><div class="fsx"><button class="btn" id="rFit">Use the largest size that fits (${hi.toFixed(1)} MW)</button></div></div>`:''}
+   <div class="dnav"><button class="sec" id="rB">← The site</button><button class="pri" id="rN" ${nothing||probs.length?'disabled':''}>${nothing||probs.length?'Fix the set-up to go on':'What fits here →'}</button></div></div>`;
   const sd=$('#side');
   sd.querySelectorAll('[data-sz]').forEach(b=>b.onclick=()=>{ sizeSet(b.dataset.sz); residentCard(); if(BD.showModel) BD.showModel(); });
   sd.querySelectorAll('.assumed a').forEach(a=>a.onclick=e=>{ e.preventDefault(); A.residentEdit=true; BD.deck.show(+a.dataset.j); });
+  { const rf=$('#rFit'); if(rf) rf.onclick=()=>{ sizeSet('large'); residentCard(); if(BD.showModel) BD.showModel(); }; }
   $('#rB').onclick=()=>{ if(BD.flow&&BD.flow.on) BD.flow.back(); else BD.card(); };
   $('#rN').onclick=()=>{ A.setupDone=true; if(BD.flow&&BD.flow.on) BD.flow.next(); else BD.fitsView(); };
   if(BD.showModel) BD.showModel(); }
