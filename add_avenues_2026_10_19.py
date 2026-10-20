@@ -1,0 +1,211 @@
+#!/usr/bin/env python3
+"""Register update: the ten electricity and water avenues (J.B., 19 Oct 2026: "all of the things we've listed are supposed to be part of the tool").
+Sources: audit/research_2026-10-19/K_water_body_cooling.md, L_power_avenues.md, M_water_avenues.md. Idempotent.
+Add-ons (the data centre's own choice): ppa, chp, water_cooling, condensate.
+Opportunities (an exchange with neighbours): backup power, grid upgrades shared, solar on neighbours' roofs, snowmelt, stormwater, emergency water."""
+import json, os
+H = os.path.dirname(os.path.abspath(__file__))
+P = os.path.join(H, 'formula_register.json')
+d = json.load(open(P, encoding='utf-8'))
+Q = {q['id']: q for q in d['quantities']}
+S = d['new_sources']; m = d['meta']
+def role(i, term, r, c, v=True): return {'id': i, 'term': term, 'role': r, 'conf': c, 'verified': v}
+def edit(i, **kw):
+    q = Q[i]
+    for k, v in kw.items():
+        if k == 'add_sources': q['sources'] = q['sources'] + [x for x in v if x not in q['sources']]
+        elif k == 'append':
+            if v not in q.get('coef', ''): q['coef'] = (q.get('coef', '') + ' | ' + v).strip(' |')
+        else: q[k] = v
+    q['revised'] = '2026-10-19'
+def add(i, name, unit, stage, inputs, formula, coef, sources, conf, status, roles):
+    q = {'id': i, 'name': name, 'unit': unit, 'formula': formula, 'inputs': inputs, 'coef': coef, 'sources': sources, 'conf': conf, 'status': status, 'stage': stage, 'source_roles': roles, 'added': '2026-10-19'}
+    if i in Q: d['quantities'][d['quantities'].index(Q[i])] = q
+    else: d['quantities'].append(q)
+    Q[i] = q
+
+# ---------- sources (research L, M, K; 19 Oct 2026) ----------
+S.update({
+ 'bchCall2025': "BC Hydro, news release 12 Feb 2025: 2024 Call for Power, 10 projects, weighted average levelized price $74/MWh (2024$), about 4,830 GWh a year (operator) — https://www.bchydro.com/news/press_centre/news_releases/2025/call-for-power-epas.html",
+ 'bchEPA2026': "BC Hydro, 2025 Call for Power EPA application to BCUC (7 Aug 2026), s. 1 p. 1–2, s. 4.1: 2025 call weighted average levelized bid price $82/MWh (2025$), 4 wind projects, 1,158 MW; 2024 call restated $76/MWh (2025$) — https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/corporate/regulatory-planning-documents/regulatory-filings/epa/2026-08-07-2025-call-for-power-epa-application.pdf",
+ 'bjCall2025': "Bennett Jones, BC Hydro 2025 Call for Power (law-firm summary): EPAs are between successful proponents and BC Hydro — https://www.bennettjones.com/Insights/Blogs/BC-Hydro-2025-Call-to-Power",
+ 'bchRAS2011': "BC Hydro letter to BCUC, 23 Dec 2011: retail access programme suspension sought; no customer had ever taken part (current status not confirmed) — https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/corporate/regulatory-planning-documents/regulatory-matters/2011_12_23_ltr_bcuc_ras_appl.pdf",
+ 'brc2025': "Business Renewables Centre Canada, State of the Market 2025 (Jan 2026) p. 4–5 and Deal Tracker Q4 2025 p. 1: 3.63 GW bought through PPAs in Canada 2019–2025; over 60% of Alberta renewable projects with a PPA; corporate deals 'virtually disappeared' in 2025 (industry) — https://businessrenewables.ca/sites/default/files/2026-01/State%20of%20the%20Market%202025%20FINAL_0.pdf",
+ 'aesoAMS2025wind': "AESO, Annual Market Statistics 2025, p. 23 and Table 7 p. 27: wind earned $23.18/MWh in 2025, 46.9% below the average pool price ($43.68); solar 17.4% below — https://www.aeso.ca/assets/Annual-Market-Stats-2025.pdf",
+ 'epaCHP2015': "US EPA Combined Heat and Power Partnership, Catalog of CHP Technologies (2015), Table 1-3 p. 1-6: reciprocating engines 27–41% electric, 77–80% total (HHV); gas turbines 24–36% / 66–71%; power-to-heat ratio 0.5–1.2 and 0.6–1.1 — https://www.epa.gov/sites/default/files/2015-07/documents/catalog_of_chp_technologies.pdf",
+ 'sor2024_263': "Clean Electricity Regulations, SOR/2024-263, s. 5(1) (units ≥ 25 MW burning fossil fuel, connected to a NERC-standard grid) and s. 9(1) (65 t CO2 per GWh, 2035–2049) — https://laws-lois.justice.gc.ca/eng/regulations/SOR-2024-263/page-2.html",
+ 'caAbMOU2026': "Canada–Alberta Implementation Agreement backgrounder (15 May 2026): Clean Electricity Regulations held in abeyance in Alberta during a court reference; TIER price $95/t (2026), $100 (2027–29), $130 (2035), $140 (2040) — https://www.pm.gc.ca/en/news/backgrounders/2026/05/15/implementation-agreement-canada-alberta-memorandum-understanding",
+ 'bjBYOG2026': "Bennett Jones, Alberta's BYOG framework (Jul 2026, law-firm summary of Alta Reg 117/2026): ≥ 75 MW maximum transmission demand; tethered generation at least equal to the data centre's maximum demand; need not be on site — https://www.bennettjones.com/Insights/Blogs/2026/07/Albertas-BYOG-Framework",
+ 'bjSelfSupply': "Bennett Jones, On-site generation in Alberta (law-firm summary of EUA s. 2(1)(b)): generation and load must be on the same property; the AUC's view that supply must not cross roads, railways or third-party land is under appeal — https://www.bennettjones.com/Insights/Blogs/So-You-Want-to-Supply-Your-Own-Power-Key-Considerations-for-On-Site-Generation-in-Alberta",
+ 'emaWDA': "BC Government, Waste discharge authorization — do you need one: cooling water is listed as liquid waste; facilities powered by fuel combustion over 5 MW need authorization — https://www2.gov.bc.ca/gov/content/environment/waste-management/waste-discharge-authorization/need",
+ 'fasken2026': "Fasken, BC Court of Appeal clarifies BCUC jurisdiction (12 Mar 2026; law-firm summary of Powell River Energy v. BCUC, 2026 BCCA 93): an affiliate is a separate person, so supplying it is not self-supply — https://www.fasken.com/en/knowledge/2026/03/bc-court-of-appeal-clarifies-bc-utilities-commission",
+ 'bchCTT2024': "BC Hydro, Closed-transition transfer technical interconnection requirements (20 Mar 2024), s. 1.1 and 2.1: never energize a de-energized part of BC Hydro's system; momentary paralleling under 100 ms — https://app.bchydro.com/content/dam/BCHydro/customer-portal/documents/distribution/dgi/ctt-technical-interconnection-rqmts-2024mar20.pdf",
+ 'epcorIG2022': "EPCOR Distribution & Transmission, Interconnection guide (2022), s. 7.6 and 7.8 p. 47–50: no island with part of EPCOR's system; intentional islanding only with EDTI's written approval; trip within 2 s — https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2022_power_technical-requirements_interconnection-guide.pdf",
+ 'epcorTC2025s44': "EPCOR Distribution connection services terms and conditions (Jan 2025), s. 4.4 p. 19: a customer shall not extend its facilities beyond its own property (except as Art. 8.3 allows, not read); s. 6.5.2 p. 23: refund if a new customer shares an extension during the initial term — https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2025-01_distribution-connection-services-terms-and-conditions.pdf",
+ 'vanHubs': "City of Vancouver, Disaster support hubs: 25 hubs (mostly community centres); backup power not stated — https://vancouver.ca/home-property-development/disaster-support-hubs.aspx",
+ 'bchDEP2025': "BC Hydro, Distribution extension policy (BCUC approved 5 Mar 2025, effective 5 Jul 2025; order number not confirmed): the first payer is refunded when others connect, reviewed at the 5th anniversary (fee $25k to under $1M), 5th and 10th ($1–4.99M), 5th, 10th and 15th (≥ $5M); BC Hydro invests up to $1M at ≤ 1 MVA, $1M per MVA to $10M above — https://app.bchydro.com/accounts-billing/electrical-connections/distribution-extension-policy.html",
+ 'aesoTariff4': "AESO ISO Tariff s. 4.6–4.7 (effective 1 Jan 2026): customer contribution = demand-related costs less the AESO's local investment ($121,800 a year substation fraction; $40,100 per MW a year for the first 7.5 MW, then less) — https://www.aeso.ca/assets/documents/Section-4-effective-2026-01-01.pdf",
+ 'aesoTariff5': "AESO ISO Tariff s. 5.5 and 5.7 (effective 1 Jan 2025): within 20 years of the original connection, new participants pay a share; the ISO 'may' refund the original customer; no refund under $10,000 — https://www.aeso.ca/assets/documents/Section-5-effective-2025-01-01.pdf",
+ 'abDCpay': "Government of Alberta, Powering new pathways for data centres: data centres, not Alberta ratepayers, pay for any transmission upgrades they need — https://www.alberta.ca/powering-new-pathways-for-data-centres",
+ 'bchSelfGen2026': "BC Hydro, Self-generation rate updates (BCUC application ID 1323): RS 2289 from 1 Jul 2026, exports up to 100 kW per phase at 10 ¢/kWh; RS 2290 community generation, net injection up to 2 MW, set by 24 kW per residential and 100 kW per commercial beneficiary, bill credits only (credit rate and location rule not confirmed) — https://www.bchydro.com/toolbar/about/strategies-plans-regulatory/rate-design/self-generation-rate-updates.html",
+ 'bchCustGen': "BC Hydro, Customer generation: community generation beneficiaries 'do not receive electricity directly from the facility' and must hold an active BC Hydro account — https://app.bchydro.com/accounts-billing/electrical-connections/customer-generation.html",
+ 'aucMicro2026': "AUC, Micro-generation notice submission guideline (2026), p. 1, 4, 15: under the lesser of 5 MW or the service rating; on property the customer owns or leases, or adjacent owned or leased property; sized to the site's own use; revenue-seeking sites are commercial generators — https://media.auc.ab.ca/prd-wp-uploads/regulatory_documents/Reference/MicrogenerationNoticeSubmissionGuideline2026.pdf",
+ 'vbbl2025_2425': "Vancouver Building By-law 2025, Book II, Div. B, Art. 2.4.2.5 (By-law 14343 as amended by 14488, effective 1 Jan 2026), p. 26–28: all buildings manage rainwater on site; small sites (≤ 1,000 m² and FSR ≤ 1.0) a 3,400–7,200 L tank; otherwise released at no more than 5 L/s per hectare for the first 15 mm over the non-landscaped site, then 25 L/s per hectare (2100 IDF, 10-year) — https://vancouver.ca/files/cov/2025-vbbl-book-II-insert-pages.pdf",
+ 'vanRainPage': "City of Vancouver, Rainwater management (to Sep 2025): 192 developments, 66 ha managed, about 7,400 L/s peak reduction; purpose to 'relieve sewer system capacity constraints' (City claim) — https://vancouver.ca/home-property-development/rainwater-management.aspx",
+ 'epcorStorm': "EPCOR, Guidelines for on-site stormwater management (undated): control required for lots over 0.16 ha; release 0.035 m³/s per ha; storage for C = 0.90: 100 m³/ha (5-year), 375 (100-year), 507 (200-year), Exhibit 2 — https://epcor.com/content/dam/epcor/documents/supporting-documents/onsite-stormwater-management-guidelines.pdf",
+ 'edmBylaw18100': "City of Edmonton Bylaw 18100 (EPCOR Drainage Services), Sch. 2 Art. 6.1: owners control the release of stormwater when directed — https://www.edmonton.ca/residential_neighbourhoods/Bylaws/C18100.pdf",
+ 'nrcCBD160': "Williams, Snow melting systems, NRC Canadian Building Digest 160 (1974), Tables II–III: Edmonton design heat 40 (sheltered) to 60–65 W/ft² (very exposed), about 430–700 W/m²; 65 W/ft² to keep pavement bare and wet after a design storm — https://nrc-publications.canada.ca/fra/voir/td/?id=ea4000fb-340b-4fdf-878f-27658e1f7df8",
+ 'lundSnow': "Lund, Pavement snow melting, Geo-Heat Center (OSTI 895225): ASHRAE classes from 1995 data, Portland OR 86/97/111 Btu/h·ft² (about 271/306/350 W/m²); Klamath Falls deck at 50 Btu/h·ft² (about 158 W/m²) with 38 °C fluid — https://www.osti.gov/etdeweb/servlets/purl/895225",
+ 'hollandSnow': "City of Holland, Michigan, Snowmelt system: about 690,000 ft² of heated sidewalks and streets, water at 95 °F (35 °C) from power-plant waste heat, since 1988 (City claim) — https://cityofholland.com/879/Snowmelt-System",
+ 'edmSidewalk': "City of Edmonton, Sidewalk snow removal: property owners clear adjacent sidewalks; $100 fine plus the cost of removal — https://www.edmonton.ca/transportation/on_your_streets/sidewalk-snow-removal",
+ 'edmEncroach': "City of Edmonton, Encroachment agreement application form: road right-of-way encroachments and structures on City streets, fee $300 or $500 with circulation (heated sidewalks not named) — https://www.edmonton.ca/programs_services/documents/encroachment_agreement__application_form.pdf",
+ 'bcab2005': "BC Building Code Appeal Board decision 2005, quoting BCBC Div. B 3.2.5.7.(1) and Note A-3.2.5.7.(1): every building has an adequate water supply for firefighting; on-site storage for at least 30 minutes of fire-department hose streams; NFPA 1142 as the reference — https://www2.gov.bc.ca/gov/content/industry/construction-industry/building-codes-standards/building-code-appeal-board/building-code-appeal-board-decisions/bcab-2005",
+ 'vanOEM2018': "City of Vancouver, Office of Emergency Management memo, Fire risks following an earthquake (4 Jun 2018), p. 5–9: two saltwater pump stations and a seismic network (DFPS), limited in scope (downtown, part of Kitsilano, to VGH); sprinklers rely on mains; network complete in about 80 years; City wells only for emergency drinking water — https://vancouver.ca/files/cov/2018-06-04-fire-risks-following-an-earthquake.pdf",
+ 'bcDWPR': "BC Drinking Water Protection Regulation, s. 1, 3.1(b), 6–7: a water supplier needs construction and operating permits; a system not for drinking or food, not connected and marked is exempt — https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/200_2003",
+ 'epaWSatWork': "US EPA WaterSense at Work (Oct 2012) s. 8 p. 8-8: air-handler condensate 3–10 US gal a day per 1,000 ft² of conditioned space; generally usable without treatment as cooling-tower make-up — https://www.epa.gov/system/files/documents/2023-05/ws-commercial-watersense-at-work_Section_8_Alternative_Water.pdf",
+ 'ashraeTC99card': "ASHRAE TC 9.9, Thermal guidelines 5th ed. reference card, Table 2.1: recommended IT inlet 18–27 °C, dew point −9 to 15 °C — https://www.ashrae.org/file%20library/technical%20resources/bookstore/supplemental%20files/therm-gdlns-5th-r-e-refcard.pdf",
+ 'burrardTemp2024': "Tsleil-Waututh Nation and Province of BC, Burrard Inlet water quality: physical parameters technical report (Jul 2024), Table 4 p. 31 and p. 5: bottom water 7.6–13.9 °C across seasons (2018–20); proposed objective 'No further increase in temperature'; False Creek not sampled — https://www2.gov.bc.ca/assets/gov/environment/air-land-water/water/waterquality/water-quality-objectives/burrard_inlet_physical_parameters_report.pdf",
+ 'bcWQGtemp': "BC Ambient Water Quality Guidelines for Temperature, overview (2001), s. 2.2 and 2.4: marine ±1 °C from natural; streams with fish ±1 °C beyond the most sensitive salmonid's optimum — https://www2.gov.bc.ca/assets/gov/environment/air-land-water/water/waterquality/water-quality-guidelines/approved-wqgs/temperature-or.pdf",
+ 'portPER2025': "Port of Vancouver, Project and environmental review categories (10 Sep 2025): a new or modified discharge to water is Category C (60–120 business days); a water pipeline is Category A only under 100 m with no water crossing — https://www.portvancouver.com/media/documents/categories-0",
+ 'abSWQG1999': "Alberta Environment, Surface water quality guidelines for use in Alberta (Nov 1999), Table 1.0 p. 9: not more than 3 °C above ambient (aquatic life); the 2018 edition not read — https://open.alberta.ca/dataset/e0074537-88f6-4cc4-af5c-808161fa9af8/resource/ea13d7b1-c155-4fad-8b85-4f12443352f2/download/5713.pdf",
+ 'edmARP7188': "City of Edmonton, North Saskatchewan River Valley ARP (Bylaw 7188, consolidated), Policy 3.5.1 and s. 2.6.3: major facilities only where a river-valley location is deemed essential; utility corridors prohibited except direct river crossings — https://www.edmonton.ca/city_government/documents/plans_in_effect/North_Saskatchewan_River_ARP_Consolidation.pdf",
+ 'howley2021': "Howley, MSc thesis, University of Alberta (2021), s. 1.1 and 2.1: North Saskatchewan River supercooling to −0.106 °C (frazil ice); winter flow about 122 m³/s after the dams — https://era.library.ualberta.ca/items/df542886-debb-4f9e-9228-d761374609c6/download/e9a4644f-cf8c-4f0b-8ddc-9978b225de69",
+ 'hawaiiSWAC2002': "Hawaii DBEDT, Sea water district cooling feasibility analysis (Oct 2002), p. 61–66: cold-water pipe US$12.05–12.47 M for 5.7–5.8 km, about US$2,120–2,150 per m (2002, deep ocean intake at about 500 m); 92.5% energy saving (study) — https://energy.hawaii.gov/wp-content/uploads/2011/10/SeaWaterDistrictCoolingFeasibilityAnalysisfortheStateofHawaii2002.pdf",
+ 'dfoScreen': "DFO, Interim code of practice: end-of-pipe fish protection screens: openings ≤ 2.54 mm; approach velocity default 0.035–0.055 m/s; may not apply to large intakes — https://www.dfo-mpo.gc.ca/pnw-ppe/standards-normes/fish-screen-grillage-poisson-eng.html",
+})
+
+# ---------- quantities ----------
+add('clean_power_price', 'New clean power: price and route', 'CAD/MWh', 'test', ['electricity_price'],
+    'BC: new supply only through BC Hydro calls; Alberta: a corporate PPA, physical or virtual, against the pool price',
+    'BC Hydro calls: $74/MWh (2024 call, 2024$; restated $76 in 2025$) and $82/MWh (2025 call, 2025$); only BC Hydro signs; no direct customer route found (retail access suspended in 2011, current status not confirmed); grid access for data centres bid as a premium of at least 10% on BC Hydro\'s charges (2026 Call for Demand). Alberta: pool $43.68/MWh in 2025 ($62.78 in 2024); wind earned $23.18, 46.9% below the pool — the risk a virtual PPA carries; Alberta PPA strike prices not published (gap)',
+    ['bchCall2025', 'bchEPA2026', 'bjCall2025', 'bchRAS2011', 'cfd', 'brc2025', 'aesoAMS2025wind'], 70, 'read 19 Oct 2026',
+    [role('bchEPA2026', '$82/MWh, $76/MWh', 'coefficient', 80), role('aesoAMS2025wind', 'wind $23.18 vs pool $43.68', 'coefficient', 90), role('bjCall2025', 'only BC Hydro signs', 'rule', 60)])
+add('chp_heat', 'Own gas plant: heat with the power', 'MW heat per MW electric', 'opportunity', ['it_load_actual'],
+    'heat = electric output ÷ power-to-heat ratio; total efficiency 66–80%',
+    'reciprocating engines 0.8–2.0 MW of heat per MW of power (27–41% electric, 77–80% total, HHV); gas turbines 0.9–1.7 (24–36%, 66–71%) (US EPA 2015, derived from Table 1-3). Rules: Clean Electricity Regulations, units ≥ 25 MW on fossil fuel, 65 t CO2/GWh from 2035 (held in abeyance in Alberta); Alberta TIER $95/t in 2026, sites ≥ 100,000 t a year; BC: waste discharge authorization above 5 MW of combustion; self-supply legal in BC (UCA s. 1(d)) and Alberta (EUA s. 2(1)(b), same property); Alberta Reg 117/2026 gives ≥ 75 MW data centres tethered to new generation connection priority (law-firm summaries; the regulation text was blocked)',
+    ['epaCHP2015', 'sor2024_263', 'caAbMOU2026', 'emaWDA', 'bcUCAs1', 'bjSelfSupply', 'bjBYOG2026'], 70, 'derived 19 Oct 2026',
+    [role('epaCHP2015', 'power-to-heat 0.5–1.2', 'coefficient', 80), role('sor2024_263', '≥ 25 MW, 65 t/GWh', 'rule', 90), role('bjBYOG2026', 'tethered ≥ 75 MW', 'rule', 60, False)])
+add('condensate', 'Condensate from cooling coils', 'h a year', 'characterise', ['heat_rejected'],
+    'coils condense only when air is cooled below its dew point; hours a year with outdoor dew point above 15 °C (the top of ASHRAE\'s recommended IT inlet range), from CWEC',
+    'computed from CWEC: Vancouver 417 h, Edmonton 117 h a year with outdoor dew point above 15 °C, so little condensate from a data centre; US EPA rule of thumb for offices 3–10 US gal a day per 1,000 ft² conditioned (about 0.12–0.41 L/m² a day), not for data halls; litres per kW of cooling not found (gap)',
+    ['cwec', 'ashraeTC99card', 'epaWSatWork'], 50, 'computed 19 Oct 2026; yield not sourced',
+    [role('ashraeTC99card', '15 °C dew point', 'coefficient', 90), role('cwec', 'dew-point hours', 'coefficient', 90), role('epaWSatWork', '3–10 gal/day per 1,000 ft²', 'coefficient', 50)])
+add('stormwater_volume', 'Stormwater held on the lot', 'm³', 'characterise', ['envelope'],
+    'Vancouver: small site a 3,400–7,200 L tank; otherwise stage 1 = 15 mm × non-landscaped area, released at 5 L/s/ha, then 25 L/s/ha. Edmonton (lots over 0.16 ha): 375 m³/ha for the 100-year storm at C = 0.90 (507 for 200-year), released at 35 L/s/ha',
+    'the lot area is used as the non-landscaped area (an upper bound); Vancouver\'s full engineered volume (Modified Rational Method, 2100 IDF, 10-year) is not computed; extra volume held for a neighbour or the street costs as a tank ($667–2,955 per m³, register rainwater); no dollar value of avoided sewer upgrades found in either city',
+    ['vbbl2025_2425', 'epcorStorm', 'edmBylaw18100', 'vanRainPage', 'vanISMP2014', 'epaRain2013'], 70, 'read 19 Oct 2026',
+    [role('vbbl2025_2425', '15 mm; 5 and 25 L/s/ha', 'rule', 90), role('epcorStorm', '375 m³/ha; 35 L/s/ha', 'rule', 80)])
+add('snowmelt_area', 'Sidewalk kept clear by its heat', 'm²', 'opportunity', ['heat_delivered'],
+    'm² = heat offered (W) ÷ design heat per m²',
+    'Edmonton design 430–700 W/m² (NRC CBD 160, 1974: sheltered to very exposed); nearest published figure for a Vancouver-like climate is Portland OR, 271–350 W/m² (ASHRAE classes I–III, 1995 data via Lund), used as an analogue; low-temperature fluid works (Holland MI 35 °C, Klamath Falls 38 °C); days with snow on the ground in the CWEC typical year (the file\'s snow field, 0 or 1): Vancouver 7, Edmonton 136; no data-centre snowmelt built (gap)',
+    ['nrcCBD160', 'lundSnow', 'hollandSnow', 'cwec', 'edmSidewalk', 'edmEncroach'], 50, 'derived 19 Oct 2026',
+    [role('nrcCBD160', '430–700 W/m²', 'coefficient', 70), role('lundSnow', 'Portland 271–350 W/m²', 'coefficient', 50), role('hollandSnow', '35 °C waste heat', 'precedent', 60)])
+add('backup_neighbours', 'Backup power for neighbours in a blackout', 'rule', 'opportunity', ['backup_hours'],
+    'only behind the data centre\'s own transfer switch, on a private line, with the utility\'s written approval; never through the utility\'s lines',
+    'BC: supplying anyone but itself, its employees or tenants makes it a public utility unless the minister (UCA s. 22) or BCUC (s. 88(3)) exempts it; an affiliate is a separate person (2026 BCCA 93, law-firm summary); BC Hydro: never energize a de-energized line. Edmonton: EPCOR bars extending a customer\'s wiring beyond its property (T&C s. 4.4, exception in Art. 8.3 not read) and islanding without written approval (s. 7.6, 7.8). Spare generator capacity in a blackout is what the data centre\'s redundancy leaves, not sized here. Vancouver has 25 disaster support hubs, backup power not stated',
+    ['bcUCAs1', 'fasken2026', 'bchCTT2024', 'epcorIG2022', 'epcorTC2025s44', 'vanHubs'], 70, 'rules read 19 Oct 2026',
+    [role('bcUCAs1', 'public utility', 'rule', 90), role('bchCTT2024', 'never energize', 'rule', 90), role('epcorTC2025s44', 's. 4.4', 'rule', 80)])
+add('grid_refund', 'First payer refunded when neighbours connect', 'rule', 'test', ['interconnection'],
+    'the customer who pays for an extension or substation is refunded a share when later customers connect to it',
+    'BC Hydro distribution: automatic refund reviews at the 5th anniversary (fee $25k to under $1M), 5th and 10th ($1–4.99M), 5th, 10th and 15th (≥ $5M); BC Hydro transmission (TS 6): partial refund if later load exceeds 5% of capacity (workshop slides; tariff text not read). AESO: within 20 years later customers pay a share and the ISO may refund (no refund under $10,000); data centres pay their own upgrades (Alberta). EPCOR: refund if a new customer shares the extension in the initial term',
+    ['bchDEP2025', 'bchTCIP2026', 'aesoTariff4', 'aesoTariff5', 'abDCpay', 'epcorTC2025s44'], 80, 'rules read 19 Oct 2026',
+    [role('bchDEP2025', '5/10/15-yr reviews', 'rule', 90), role('aesoTariff5', '20 yr, may refund', 'rule', 90)])
+add('community_solar', 'Solar on neighbours\' roofs', 'rule', 'opportunity', ['rooftop_solar'],
+    'BC: RS 2290 community generation, neighbours credited on their bills; Alberta: micro-generation on owned, leased or adjacent property, sized to own use',
+    'BC: net injection up to 2 MW, set by 24 kW per residential and 100 kW per commercial beneficiary (so 2 MW needs at least 84 households); beneficiaries get bill credits, not power; selling power directly to a neighbour fails the UCA s. 1(d) exclusion; credit rate and location rule not confirmed. Alberta: under the lesser of 5 MW and the service rating, on property owned or leased or adjacent to it, not more than the site\'s own use; panels on a leased neighbour\'s roof could serve the data centre (whether a roof lease counts as leased property is not confirmed); revenue-seeking sites are commercial generators',
+    ['bchSelfGen2026', 'bchCustGen', 'bcUCAs1', 'aucMicro2026'], 70, 'rules read 19 Oct 2026',
+    [role('bchSelfGen2026', 'RS 2290 2 MW; 24/100 kW', 'rule', 80), role('aucMicro2026', 'owned, leased or adjacent', 'rule', 90)])
+add('fire_water', 'Firefighting water for neighbours', 'rule', 'opportunity', ['water_supply'],
+    'a tank on the lot, non-potable, for the fire department after an earthquake; drinking water makes the operator a water supplier',
+    'BCBC 3.2.5.7: every building has water for firefighting; on-site storage for at least 30 minutes of hose streams (NFPA 1142, volume not sized: standard not read). Vancouver: sprinklers rely on the mains; the seismic saltwater system (DFPS) covers downtown, part of Kitsilano and to VGH and takes about 80 years to complete. BC DWPR: a non-potable, unconnected, marked supply needs no permit; drinking water needs construction and operating permits. Alberta and Edmonton rules not researched (gap)',
+    ['bcab2005', 'vanOEM2018', 'bcDWPR'], 60, 'rules read 19 Oct 2026',
+    [role('bcab2005', '30 min hose streams', 'rule', 80), role('vanOEM2018', 'DFPS gap', 'context', 80), role('bcDWPR', 's. 3.1(b)', 'rule', 90)])
+# existing quantities gain the new research
+edit('surface_water_sink', add_sources=['burrardTemp2024', 'bcWQGtemp', 'emaWDA', 'portPER2025', 'abSWQG1999', 'edmARP7188', 'howley2021', 'hawaiiSWAC2002', 'dfoScreen'],
+     append='19 Oct 2026 (K): Burrard Inlet bottom water 7.6–13.9 °C all year (False Creek not sampled); North Saskatchewan near 0 °C in winter with frazil-ice risk, summer not found; flow 24–49 L/s per MW at a 10–5 °C rise (derived); pipe about US$2,120–2,150/m (Hawaii 2002, deep ocean, an upper bound); BC: cooling water needs a waste discharge authorization, Port category C for a new discharge (60–120 business days); Edmonton: river valley plan allows major facilities only where essential and bans utility corridors except crossings. Distance to shore not computed: no shoreline file in the tool yet')
+edit('rooftop_solar', add_sources=['bchSelfGen2026', 'aucMicro2026'], append='19 Oct 2026 (L): how neighbours could share it — see community_solar')
+edit('self_gen_rules', add_sources=['bchSelfGen2026', 'bchCustGen'], append='19 Oct 2026 (L): BC Hydro describes RS 2289 as generation on your own property; the formal location clause (same or adjacent parcel) is not confirmed')
+
+# ---------- add-ons (try menu) ----------
+TM = {t['id']: t for t in m['try_menu']}
+def addon(t):
+    if t['id'] in TM: m['try_menu'][m['try_menu'].index(TM[t['id']])] = t
+    else: m['try_menu'].insert(len([x for x in m['try_menu'] if x.get('status') != 'excluded']), t)
+    TM[t['id']] = t
+addon({'id': 'ppa', 'name': 'Buy new clean power', 'family': 'power', 'status': 'screening', 'quantities': ['clean_power_price'], 'kind': 'place',
+       'rules': {'vancouver': 'no route found to buy from a new project directly: only BC Hydro signs with new projects ($74–82/MWh in its last two calls); retail access suspended in 2011, current status not confirmed',
+                 'edmonton': 'corporate PPAs allowed and common (over 60% of Alberta renewable projects have one); a virtual PPA settles against the pool, where wind earned 46.9% below average in 2025'},
+       'rule_state': {'vancouver': 'unknown', 'edmonton': 'allowed'},
+       'changes': ['new wind or solar built for the grid ↑', 'price risk (Alberta) ↑'],
+       'readiness': 'built_elsewhere', 'readiness_basis': 'Corporate PPAs in Alberta are common (Business Renewables Centre, industry); none named for a data centre in Edmonton or Vancouver.',
+       'readiness_sources': ['brc2025'], 'rule_sources': ['bjCall2025', 'bchRAS2011', 'brc2025', 'aesoAMS2025wind'], 'sources': ['bchCall2025', 'bchEPA2026']})
+addon({'id': 'chp', 'name': 'Own gas power plant with heat', 'family': 'carbon', 'status': 'screening', 'quantities': ['chp_heat'], 'kind': 'technology',
+       'rules': {'vancouver': 'self-supply is legal (UCA s. 1(d)); a waste discharge authorization above 5 MW of combustion; Clean Electricity Regulations for units of 25 MW or more (65 t CO2/GWh from 2035); no explicit gas ban found',
+                 'edmonton': 'Alberta Reg 117/2026: data centres of 75 MW or more tethered to new generation get connection priority (AESO first intake gas only, a proposal); TIER $95/t in 2026; Clean Electricity Regulations in abeyance in Alberta (law-firm summaries; the regulation text was blocked)'},
+       'rule_state': {'vancouver': 'approval', 'edmonton': 'allowed'},
+       'changes': ['heat for neighbours ↑ (0.8–2.0 MW per MW of power)', 'gas burned and CO₂ ↑', 'air permits and stacks ↑'],
+       'readiness': 'unknown', 'readiness_basis': 'No data-centre CHP precedent searched yet; Alberta policy favours tethered gas for large data centres.',
+       'readiness_sources': [], 'rule_sources': ['bcUCAs1', 'emaWDA', 'sor2024_263', 'bjBYOG2026', 'caAbMOU2026'], 'sources': ['epaCHP2015']})
+addon({'id': 'water_cooling', 'name': 'Cooling from the inlet or river', 'family': 'water', 'status': 'screening', 'quantities': ['surface_water_sink'], 'kind': 'place',
+       'rules': {'vancouver': 'Burrard Inlet: waste discharge authorization for cooling water; BC guideline ±1 °C (marine), proposed objective "no further increase"; Port of Vancouver category C (60–120 business days); DFO fish screens; whether the Water Sustainability Act covers sea water not confirmed',
+                 'edmonton': 'Water Act licence; Alberta guideline +3 °C over ambient (1999); river valley plan: major facilities only where essential, utility corridors banned except crossings; frazil ice at the intake in winter'},
+       'rule_state': {'vancouver': 'approval', 'edmonton': 'approval'},
+       'changes': ['electricity for cooling ↓ (Enwave about 90%, operator)', 'warmer water returned ↑', 'a long pipe through the street or the valley ↑'],
+       'readiness': 'built_elsewhere', 'readiness_basis': 'Enwave Deep Lake Water Cooling, Toronto: water at 4 °C from Lake Ontario (City of Toronto reports); not with a data centre in BC or Alberta.',
+       'readiness_sources': ['enwaveDLWC'], 'rule_sources': ['emaWDA', 'bcWQGtemp', 'burrardTemp2024', 'portPER2025', 'dfoScreen', 'abSWQG1999', 'edmARP7188', 'howley2021'], 'sources': ['hawaiiSWAC2002']})
+addon({'id': 'condensate', 'name': 'Condensate to cooling water', 'family': 'water', 'status': 'screening', 'quantities': ['condensate'], 'kind': 'technology',
+       'rules': {'vancouver': 'condensate is clear-water waste; whether VBBL 2025 Table 2.7.1.3 lets it be cooling-tower make-up was not read; non-potable systems need an operating permit',
+                 'edmonton': 'not yet read'},
+       'rule_state': {'vancouver': 'unknown', 'edmonton': 'unknown'},
+       'changes': ['water from the city ↓ (a little)'],
+       'readiness': 'built_elsewhere', 'readiness_basis': 'US EPA Athens, Georgia laboratory: about 120,000 gal a month in summer (NREL/FEMP case study), a humid climate and not a data centre.',
+       'readiness_sources': ['epaWSatWork'], 'rule_sources': ['van_vbbl2025_27'], 'sources': ['ashraeTC99card', 'cwec']})
+
+# ---------- opportunities ----------
+OL = m['opportunity_labels']; OQ = d['opportunity_quantities']
+def opp(name, o, qs): OL[name] = o; OQ[name] = qs
+opp('Backup power for neighbours in a blackout', {'readiness': 'speculative', 'provisional': False,
+    'basis': 'No data centre found powering neighbours in an outage in BC or Alberta; Vancouver\'s 25 disaster support hubs do not state backup power. Research 19 Oct 2026.',
+    'sources': ['vanHubs'], 'rules': [
+     {'rung': 'Utility law', 'van': ['approval', 'supplying anyone but itself, its employees or tenants makes it a public utility unless the minister or BCUC exempts it (UCA s. 1, 22, 88(3)); an affiliate counts as another person'],
+      'edm': ['approval', 'self-supply only on the same property (EUA s. 2(1)(b), law-firm summary)'], 'sources': ['bcUCAs1', 'fasken2026', 'bjSelfSupply']},
+     {'rung': 'Utility wiring', 'van': ['approval', 'never energize a de-energized BC Hydro line (closed-transition rules)'],
+      'edm': ['not_allowed', 'a customer may not extend its wiring beyond its own property (EPCOR T&C s. 4.4; the exception in Art. 8.3 not read); islanding only with written approval'], 'sources': ['bchCTT2024', 'epcorTC2025s44', 'epcorIG2022']}],
+    'unknowns': ['spare generator capacity during a blackout', 'who on the next lot needs it'], 'visual': 'a private line from the generator yard to one neighbour, behind a transfer switch'},
+    ['backup_neighbours', 'backup_hours', 'fuel_on_site'])
+opp('Grid upgrades shared with neighbours', {'readiness': 'built_here', 'provisional': False,
+    'basis': 'The refund rules run for every customer extension in both provinces (BC Hydro, AESO, EPCOR); no case found of a data centre oversizing for neighbours. Research 19 Oct 2026.',
+    'sources': ['bchDEP2025', 'aesoTariff5'], 'rules': [
+     {'rung': 'Utility tariff', 'van': ['allowed', 'automatic refund reviews at years 5, 10 and 15 (distribution); transmission refund when added load exceeds 5%'],
+      'edm': ['allowed', 'AESO: later customers share within 20 years, refund at the ISO\'s discretion; EPCOR: refund within the initial term'], 'sources': ['bchDEP2025', 'bchTCIP2026', 'aesoTariff5', 'epcorTC2025s44']}],
+    'unknowns': ['who would connect later, and when'], 'visual': 'the feeder or substation the data centre pays for, with the neighbours who could join it'},
+    ['grid_refund', 'grid_headroom', 'lead_time'])
+opp('Solar on neighbours\' roofs', {'readiness': 'speculative', 'provisional': False,
+    'basis': 'BC Hydro\'s community generation rate (RS 2290) is new in 2026; no data-centre case found in either city. Research 19 Oct 2026.',
+    'sources': ['bchSelfGen2026'], 'rules': [
+     {'rung': 'Utility rate', 'van': ['allowed', 'RS 2290: up to 2 MW, neighbours credited on their bills (credit rate not confirmed); selling power to them directly makes it a public utility'],
+      'edm': ['approval', 'micro-generation on owned, leased or adjacent property, up to the site\'s own use; it cannot sell to the neighbour'], 'sources': ['bchSelfGen2026', 'bchCustGen', 'aucMicro2026']}],
+    'unknowns': ['the bill credit per kWh (BC)', 'whether a roof lease counts as leased property (Alberta)'], 'visual': 'panels on the roofs nearby, credits or power flowing back'},
+    ['community_solar', 'rooftop_solar'])
+opp('Snowmelt on sidewalks and streets', {'readiness': 'speculative', 'provisional': False,
+    'basis': 'Holland, Michigan melts about 690,000 ft² of sidewalks and streets with 35 °C power-plant waste heat (City claim); no data-centre snowmelt found. Research 19 Oct 2026.',
+    'sources': ['hollandSnow'], 'rules': [
+     {'rung': 'Street', 'van': ['unknown', 'not yet read'], 'edm': ['approval', 'an encroachment agreement for structures in the road right-of-way ($300–500); owners must clear adjacent sidewalks'], 'sources': ['edmEncroach', 'edmSidewalk']}],
+    'unknowns': ['who owns pipes under a City sidewalk', 'snowfall normals (ECCC pages did not load)'], 'visual': 'heated sidewalk along the frontage'},
+    ['snowmelt_area', 'heat_delivered'])
+opp('Stormwater held for the neighbourhood', {'readiness': 'built_here', 'provisional': False,
+    'basis': 'Vancouver: 192 developments manage rainwater on site, about 7,400 L/s of peak flow held back (City claim, to Sep 2025); no data centre named; holding a neighbour\'s or the street\'s water is not described. Research 19 Oct 2026.',
+    'sources': ['vanRainPage'], 'rules': [
+     {'rung': 'Building or drainage rule', 'van': ['allowed', 'required on site (VBBL 2025 2.4.2.5); holding more than required is not addressed'],
+      'edm': ['allowed', 'required on lots over 0.16 ha (EPCOR guideline; Bylaw 18100)'], 'sources': ['vbbl2025_2425', 'epcorStorm', 'edmBylaw18100']}],
+    'unknowns': ['what holding back sewer flow is worth to the city', 'whether a harvesting tank counts toward detention (Vancouver 2025)'], 'visual': 'a tank under the yard with the required and the extra volume'},
+    ['stormwater_volume', 'rainwater'])
+opp('Emergency water for neighbours', {'readiness': 'speculative', 'provisional': False,
+    'basis': 'No private tank found serving a Vancouver or Edmonton neighbourhood; the City\'s 2018 memo names the gap but not private tanks. Research 19 Oct 2026.',
+    'sources': ['vanOEM2018'], 'rules': [
+     {'rung': 'Health and building rules', 'van': ['allowed', 'non-potable firefighting water: no permit if unconnected and marked (DWPR s. 3.1(b)); drinking water makes it a water supplier with permits'],
+      'edm': ['unknown', 'not yet researched'], 'sources': ['bcDWPR', 'bcab2005']}],
+    'unknowns': ['tank volume (NFPA standards not read)', 'whether the site is inside the City\'s seismic saltwater system'], 'visual': 'a tank with a fire-department connection at the street'},
+    ['fire_water', 'water_supply'])
+json.dump(d, open(P, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+print('avenues added:', len(OL), 'opportunities,', len(m['try_menu']), 'add-ons')

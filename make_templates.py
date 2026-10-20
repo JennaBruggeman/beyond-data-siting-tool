@@ -91,6 +91,12 @@ T = {
  'vibration_target': (C, 'neighbours', 'vibration limit (reference)'), 'embodied_rule': (C, 'climate city', 'embodied carbon rule'),
  'heat_value_split': (C, 'operator utility receiver', 'who keeps the value of the heat'), 'power_bill_effect': (R, 'ratepayers neighbours', 'effect on household power bills'),
  'ev_repay': (C, 'neighbours operator', 'how much an EV port must sell to repay itself'), 'pv_lcoe': (C, 'operator', 'what rooftop solar costs per MWh'),
+ # added 19 Oct 2026 (ten avenues; tiers proposed by Claude, the ones marked ? to confirm with J.B.)
+ 'clean_power_price': (C, 'utility ratepayers climate', 'what new clean power costs and who can buy it'), 'chp_heat': (C, 'operator neighbours climate', 'heat from its own gas plant (?)'),
+ 'condensate': (F, 'operator', 'engineering'), 'stormwater_volume': (C, 'city neighbours', 'rain held back from the sewers'),
+ 'snowmelt_area': (R, 'neighbours public', 'sidewalks kept clear by its heat'), 'backup_neighbours': (R, 'neighbours public', 'power for neighbours in a blackout (?)'),
+ 'grid_refund': (C, 'utility ratepayers neighbours', 'first payer refunded when neighbours connect'), 'community_solar': (R, 'neighbours', "bill credits from solar on neighbours' roofs (?)"),
+ 'fire_water': (R, 'neighbours public city', 'firefighting water after an earthquake'),
 }
 ids = [n['id'] for n in D['nodes']]
 missing = [i for i in ids if i not in T]; extra = [i for i in T if i not in ids]

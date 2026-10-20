@@ -1409,6 +1409,80 @@
     "operator"
    ],
    "why": "what rooftop solar costs per MWh"
+  },
+  "clean_power_price": {
+   "tier": "community",
+   "parties": [
+    "utility",
+    "ratepayers",
+    "climate"
+   ],
+   "why": "what new clean power costs and who can buy it"
+  },
+  "chp_heat": {
+   "tier": "community",
+   "parties": [
+    "operator",
+    "neighbours",
+    "climate"
+   ],
+   "why": "heat from its own gas plant (?)"
+  },
+  "condensate": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "stormwater_volume": {
+   "tier": "community",
+   "parties": [
+    "city",
+    "neighbours"
+   ],
+   "why": "rain held back from the sewers"
+  },
+  "snowmelt_area": {
+   "tier": "resident",
+   "parties": [
+    "neighbours",
+    "public"
+   ],
+   "why": "sidewalks kept clear by its heat"
+  },
+  "backup_neighbours": {
+   "tier": "resident",
+   "parties": [
+    "neighbours",
+    "public"
+   ],
+   "why": "power for neighbours in a blackout (?)"
+  },
+  "grid_refund": {
+   "tier": "community",
+   "parties": [
+    "utility",
+    "ratepayers",
+    "neighbours"
+   ],
+   "why": "first payer refunded when neighbours connect"
+  },
+  "community_solar": {
+   "tier": "resident",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "bill credits from solar on neighbours' roofs (?)"
+  },
+  "fire_water": {
+   "tier": "resident",
+   "parties": [
+    "neighbours",
+    "public",
+    "city"
+   ],
+   "why": "firefighting water after an earthquake"
   }
  },
  "graph": {
@@ -2190,6 +2264,42 @@
    [
     "pv_lcoe",
     "test"
+   ],
+   [
+    "clean_power_price",
+    "test"
+   ],
+   [
+    "chp_heat",
+    "opportunity"
+   ],
+   [
+    "condensate",
+    "characterise"
+   ],
+   [
+    "stormwater_volume",
+    "characterise"
+   ],
+   [
+    "snowmelt_area",
+    "opportunity"
+   ],
+   [
+    "backup_neighbours",
+    "opportunity"
+   ],
+   [
+    "grid_refund",
+    "test"
+   ],
+   [
+    "community_solar",
+    "opportunity"
+   ],
+   [
+    "fire_water",
+    "opportunity"
    ]
   ],
   "edges": [
@@ -3200,10 +3310,46 @@
    [
     "pv_cost",
     "pv_lcoe"
+   ],
+   [
+    "electricity_price",
+    "clean_power_price"
+   ],
+   [
+    "it_load_actual",
+    "chp_heat"
+   ],
+   [
+    "heat_rejected",
+    "condensate"
+   ],
+   [
+    "envelope",
+    "stormwater_volume"
+   ],
+   [
+    "heat_delivered",
+    "snowmelt_area"
+   ],
+   [
+    "backup_hours",
+    "backup_neighbours"
+   ],
+   [
+    "interconnection",
+    "grid_refund"
+   ],
+   [
+    "rooftop_solar",
+    "community_solar"
+   ],
+   [
+    "water_supply",
+    "fire_water"
    ]
   ]
  },
- "resident_count": 41,
- "community_count": 117,
- "full_count": 186
+ "resident_count": 45,
+ "community_count": 125,
+ "full_count": 195
 }
