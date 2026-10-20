@@ -300,7 +300,7 @@ async function recvView(){
       `Heat captured into liquid: ${n0(it)} × ${R.capture[0]} = ${n0(it*R.capture[0])} MWh, up to × ${R.capture[1]} = <b>${n0(it*R.capture[1])} MWh</b>.`,
       `A heat pump adds its own electricity as heat: heat out = captured × COP ÷ (COP − 1). With COP ${R.cop[1]}: × ${(R.cop[1]/(R.cop[1]-1)).toFixed(3)}; with COP ${R.cop[0]}: × ${(R.cop[0]/(R.cop[0]-1)).toFixed(3)}. Low end ${n0(it*R.capture[0])} × ${(R.cop[1]/(R.cop[1]-1)).toFixed(3)} = ${n0(r.avail[0])} MWh; high end ${n0(it*R.capture[1])} × ${(R.cop[0]/(R.cop[0]-1)).toFixed(3)} = <b>${n0(r.avail[1])} MWh</b>.`,
       `Heat-pump electricity = heat out ÷ COP: ${n0(r.avail[0])} ÷ ${R.cop[1]} = ${n0(r.hp[0])} MWh; ${n0(r.avail[1])} ÷ ${R.cop[0]} = <b>${n0(r.hp[1])} MWh</b>.`,
-      `Homes: heat ÷ ${R.homeMWh[f.city]} MWh per home a year = ${n1(r.homes[0])}–<b>${n1(r.homes[1])}</b>.`,
+      `Homes: heat ÷ (${R.homeMWh[f.city]} MWh of energy a home buys for heating × 0.85 boiler efficiency) a year = ${n1(r.homes[0])}–<b>${n1(r.homes[1])}</b>.`,
       `Carbon: heat-pump electricity × ${R.grid[f.city]} g/kWh = ${n1(r.co2[0])}–<b>${n1(r.co2[1])} t CO₂e</b>.`],
       'Load factor: Fan et al. 2007. Capture: LBNL 2014, NREL (direct-to-chip). COP: DEA 2026 waste-heat heat pumps to 70 °C (3.0–3.6) and observed at Meta Odense (4.5, 2020). Homes: NRCan CEUD residential, 2018–22 average. Grid: NIR 2026.')}`; }
   { const EC=BD.ECON; if(EC){ const v=EC.heatVal(f.city), pe=EC.elec[f.city], nb=v-pe/R.cop[1], nw=v-pe/R.cop[0];
@@ -329,7 +329,7 @@ function calc(o,f,near,nets){
   if(o.recover){ const cap=[r.itMWh*R.capture[0],r.itMWh*R.capture[1]];
     r.avail=[cap[0]*R.cop[1]/(R.cop[1]-1),cap[1]*R.cop[0]/(R.cop[0]-1)];
     r.hp=[r.avail[0]/R.cop[1],r.avail[1]/R.cop[0]];
-    r.homes=r.avail.map(v=>v/R.homeMWh[f.city]); r.co2=r.hp.map(v=>v*R.grid[f.city]/1000);
+    r.homes=r.avail.map(v=>v/(R.homeMWh[f.city]*0.85)); /* logic test 19 Oct: a home's 16.81 / 33.14 MWh is energy bought; the heat it needs is that × 0.85 (gas boiler) */ r.co2=r.hp.map(v=>v*R.grid[f.city]/1000);
     const net=nets.find(n=>n.inside&&n.edge>=50&&n.src==='van9552'); if(o.to==='net'&&net) r.credit=r.avail.map(v=>v*R.neuCredit);
   }
   r.fuel=[fac[0]*1000*R.fuelHours*R.fuelLkWh,fac[1]*1000*R.fuelHours*R.fuelLkWh];
