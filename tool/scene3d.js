@@ -49,12 +49,12 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;',
 
 /* ---------- labels: leaders are vertical (orthogonal); overlapping labels give way by priority ---------- */
 const lab=[];
-function label(text,pos,col,o){ o=o||{}; const d=document.createElement('div'); d.textContent=text; d.style.cssText=`position:absolute;white-space:nowrap;transform:translate(-50%,-100%);color:${col||'#9d9a94'};text-shadow:0 0 3px #17181a,0 0 3px #17181a,0 0 2px #17181a;padding:0 2px`;
+function label(text,pos,col,o){ o=o||{}; if(!pos||!pos.clone) return {d:document.createElement('div'),pos:null,prio:0,w:0}; /* lot test 20 Oct: a label with no position (no building found) broke the 3D on Over time / Two cities */ const d=document.createElement('div'); d.textContent=text; d.style.cssText=`position:absolute;white-space:nowrap;transform:translate(-50%,-100%);color:${col||'#9d9a94'};text-shadow:0 0 3px #17181a,0 0 3px #17181a,0 0 2px #17181a;padding:0 2px`;
   labels.appendChild(d); const L={d,pos,prio:o.prio||1,w:text.length*6.5+14}; lab.push(L);
   if(o.from){ R.ov.add(line([o.from,pos.clone().add(new T.Vector3(0,-0.3,0))],o.leaderCol||C.faint,false,0.7)); } return L; }
 function placeLabels(){ const b=wrap.getBoundingClientRect(); const placed=[];
   const order=lab.slice().sort((a,c)=>c.prio-a.prio);
-  for(const l of order){ const v=l.pos.clone().project(R.cam); if(!(v.z<1&&Math.abs(v.x)<1.05&&Math.abs(v.y)<1.05)){ l.d.style.display='none'; continue; }
+  for(const l of order){ if(!l.pos) continue; const v=l.pos.clone().project(R.cam); if(!(v.z<1&&Math.abs(v.x)<1.05&&Math.abs(v.y)<1.05)){ l.d.style.display='none'; continue; }
     const x=(v.x+1)/2*b.width, y=(1-v.y)/2*b.height; const box=[x-l.w/2,y-20,x+l.w/2,y+3];
     if(placed.some(p=>!(box[2]<p[0]||box[0]>p[2]||box[3]<p[1]||box[1]>p[3]))){ l.d.style.display='none'; continue; }
     placed.push(box); l.d.style.display=''; l.d.style.left=x+'px'; l.d.style.top=y+'px'; } }
@@ -70,7 +70,7 @@ function prism(r,h,base,faceCol,edgeCol,edgeOp,faceOp){
 function line(pts,col,dashed,op){ const g=new T.BufferGeometry().setFromPoints(pts);
   const m=dashed?new T.LineDashedMaterial({color:col,dashSize:dashed===true?4:dashed,gapSize:dashed===true?3:dashed*0.7,transparent:true,opacity:op==null?1:op}):new T.LineBasicMaterial({color:col,transparent:true,opacity:op==null?1:op});
   const l=new T.Line(g,m); if(dashed) l.computeLineDistances(); return l; }
-function ringLine(r,z,col,dashed,op){ const p=[]; for(let i=0;i<r.length;i+=2) p.push(V(r[i],r[i+1],z)); p.push(p[0].clone()); return line(p,col,dashed,op); }
+function ringLine(r,z,col,dashed,op){ if(!r||r.length<6) return new T.Group(); /* lot test 20 Oct: a plant yard clipped to nothing broke the 3D on small lots */ const p=[]; for(let i=0;i<r.length;i+=2) p.push(V(r[i],r[i+1],z)); p.push(p[0].clone()); return line(p,col,dashed,op); }
 function circlePts(cx,cy,rad,z,n){ const p=[]; for(let i=0;i<=(n||96);i++){ const a=i/(n||96)*Math.PI*2; p.push(V(cx+rad*Math.cos(a),cy+rad*Math.sin(a),z||0.3)); } return p; }
 function arc(a,b,h,n){ const p=[]; for(let i=0;i<=(n||32);i++){ const t=i/(n||32); const v=a.clone().lerp(b,t); v.y+=Math.sin(Math.PI*t)*h; p.push(v); } return p; }
 function bbox(r){ let a=1e9,b=1e9,c=-1e9,d=-1e9; for(let i=0;i<r.length;i+=2){ a=Math.min(a,r[i]); b=Math.min(b,r[i+1]); c=Math.max(c,r[i]); d=Math.max(d,r[i+1]); } return [a,b,c,d]; }
