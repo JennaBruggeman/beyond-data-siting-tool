@@ -37,6 +37,11 @@ A 5-minute video: J.B.'s voice with big, short captions. No music. Voice is reco
   - Walk the steps ahead first, or later steps stay greyed out.
 - Renders so far: `video-test-shot-1.mp4` (tool), `video-opening-test-2.mp4` (opening, approved 20 Oct).
 
+## Made (20 Oct)
+- `anim/opening.html`: globe → dive → "only takes" → six exchanges, both ways (45 s). Approved.
+- `anim/sources.html`: real first pages from J.B.'s Downloads (pages 1–3 of 182 project PDFs; BC Assessment and photos of people removed), "704 sources, and growing", kinds, then a grid filtered by level (Residents 186, Neighbourhood 469, Full 595 sources behind the parts each level shows). Page images are not in the repo; re-render from Downloads with pdftoppm.
+- `anim/diagram.html`: the logic diagram rebuilt for video from the real layout (graph.json, taken from workflow-map.html) and diagram_data/templates; heat chain with source tabs and four cards; levels 45/125/195. Approved.
+
 ## Open
 - The script draft is in the chat of 20 Oct. J.B. to read it aloud and adjust the wording.
 - Report pages for the snippets.
