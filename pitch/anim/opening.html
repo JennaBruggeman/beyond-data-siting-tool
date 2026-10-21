@@ -1,0 +1,135 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Opening</title>
+<style>
+@font-face{font-family:Plex;font-weight:400;src:url(plex-400.woff2)}
+@font-face{font-family:Plex;font-weight:500;src:url(plex-500.woff2)}
+html,body{margin:0;background:#202124;overflow:hidden}
+svg{display:block;font-family:Plex,sans-serif}
+</style></head><body>
+<svg id="s" width="1920" height="1080" viewBox="0 0 1920 1080"></svg>
+<script>
+// Pitch video, opening (0:00–0:35). One function R(t) draws the frame at t seconds, so frames can be captured one by one.
+const C={bg:'#202124',line:'#34373b',bld:'#3b3e43',fg:'#f2efea',mute:'#bdb9b2',faint:'#918d86',red:'#CC746C',red2:'#e7a39c',heat:'#c9a35a'};
+const s=document.getElementById('s'), NS='http://www.w3.org/2000/svg';
+let P=null; const el=(tag,a,parent=P||s)=>{const e=document.createElementNS(NS,tag); for(const k in a) e.setAttribute(k,a[k]); parent.appendChild(e); return e;};
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;};
+const seg=(t,a,b)=>ease((t-a)/(b-a));               // 0→1 between a and b
+const win=(t,a,b,f=.6)=>Math.min(seg(t,a,a+f),1-seg(t,b-f,b)); // fade in at a, out at b
+
+// --- the globe: a plain dot sphere (no map data), with illustrative arcs from one point. Not real traffic or routes.
+const gGlobe=el('g',{}); const dBack=el('path',{fill:C.faint,'fill-opacity':.25},gGlobe), dFront=el('path',{fill:C.mute,'fill-opacity':.75},gGlobe);
+const NPT=1400, PTS=[...Array(NPT)].map((_,i)=>{ const y=1-2*(i+.5)/NPT, r=Math.sqrt(1-y*y), a=i*2.399963; return [r*Math.cos(a),y,r*Math.sin(a)]; });
+const LAT0=0.855, LON0=0.0; let seedG=11; const rg=()=>(seedG=(seedG*16807)%2147483647)/2147483647;
+const sph=(lat,lon)=>[Math.cos(lat)*Math.sin(lon),Math.sin(lat),Math.cos(lat)*Math.cos(lon)];
+const O=sph(LAT0,LON0);
+const TG=[...Array(10)].map((_,i)=>sph((rg()-.4)*1.6, LON0+(i%2?1:-1)*(0.6+rg()*2.2)));
+const arcs=TG.map((T,i)=>({T,t0:1.0+i*.38,path:el('path',{fill:'none',stroke:C.fg,'stroke-width':1.6,'stroke-opacity':.8},gGlobe),ping:el('circle',{r:4.5,fill:C.fg},gGlobe),end:el('circle',{r:4,fill:C.fg},gGlobe)}));
+const oDot=el('circle',{r:9,fill:C.red},gGlobe), oRing=el('circle',{fill:'none',stroke:C.red,'stroke-width':2},gGlobe);
+const GX=960, GY=420, GR=330;
+function proj(v,yaw,tau,S){ const [x,y,z]=v; const c=Math.cos(yaw), s_=Math.sin(yaw);
+  const x1=x*c+z*s_, z1=-x*s_+z*c, y1=y; const y2=y1*Math.cos(tau)-z1*Math.sin(tau), z2=y1*Math.sin(tau)+z1*Math.cos(tau);
+  return [GX+GR*S*x1, GY-GR*S*y2, z2]; }
+function slerp(a,b,u){ const d=Math.acos(Math.max(-1,Math.min(1,a[0]*b[0]+a[1]*b[1]+a[2]*b[2]))), s0=Math.sin((1-u)*d)/Math.sin(d), s1=Math.sin(u*d)/Math.sin(d);
+  const h=1+.32*d/Math.PI*Math.sin(Math.PI*u)*1.6; return [0,1,2].map(k=>(a[k]*s0+b[k]*s1)*h); }
+function globe(T){
+  const yaw=-0.9+0.75*seg(T,0,9.4), tau=0.3+0.12*seg(T,0,9.4), S=Math.pow(26,seg(T,8.4,11.2)), m=seg(T,7.6,10.2);
+  gGlobe.setAttribute('opacity',seg(T,0,1)*(1-seg(T,9.4,10.6))); if(T>11) return;
+  const [ox0,oy0]=proj(O,yaw,tau,1);
+  const M=(x,y)=>[GX+(x-ox0)*S+(ox0-GX)*(1-m), GY+(y-oy0)*S+(oy0-GY)*(1-m)];  // zoom about the point, moving it to the centre
+  const P2=v=>{ const [x,y,z]=proj(v,yaw,tau,1); const hid=z<0&&Math.hypot(x-GX,y-GY)<GR; const [X,Y]=M(x,y); return [X,Y,z,hid]; };
+  let f='',b=''; const r=1.9*Math.sqrt(S);
+  for(const v of PTS){ const [x,y,z]=P2(v); if(x<-20||x>1940||y<-20||y>1100) continue; const c=`M${x-r},${y}a${r},${r} 0 1 0 ${2*r},0a${r},${r} 0 1 0 ${-2*r},0`; if(z>0) f+=c; else b+=c; }
+  dFront.setAttribute('d',f); dBack.setAttribute('d',b);
+  const [ox,oy]=M(ox0,oy0); oDot.setAttribute('cx',ox); oDot.setAttribute('cy',oy); oDot.setAttribute('opacity',seg(T,.4,1));
+  const q=(T*.7)%1; oRing.setAttribute('cx',ox); oRing.setAttribute('cy',oy); oRing.setAttribute('r',10+30*q); oRing.setAttribute('opacity',(1-q)*seg(T,.6,1.2));
+  arcs.forEach(a=>{ const g=seg(T,a.t0,a.t0+1.3), N=48; let d='', pen=false;
+    for(let k=0;k<=N*g;k++){ const [x,y,z,hid]=P2(slerp(O,a.T,k/N)); if(hid){pen=false;continue;} d+=(pen?'L':'M')+x.toFixed(1)+','+y.toFixed(1); pen=true; }
+    a.path.setAttribute('d',d||'M0,0');
+    const [ex,ey,ez]=P2(a.T); a.end.setAttribute('cx',ex); a.end.setAttribute('cy',ey); a.end.setAttribute('opacity',g>=1&&ez>0?1:0);
+    const u=((T-a.t0-1.3)*.55)%1, [px,py,pz,ph]=P2(slerp(O,a.T,Math.max(0,u)));
+    a.ping.setAttribute('cx',px); a.ping.setAttribute('cy',py); a.ping.setAttribute('opacity',T>a.t0+1.3&&!ph?1:0); });
+}
+// --- the neighbourhood: blocks 200×160, streets 40 wide; the data centre's block is centred at (960,420)
+const gAll=el('g',{}); P=gAll;
+const gCity=el('g',{});
+let seed=7; const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+const bx0=860-4*240, by0=340-2*200, blds=[];
+for(let i=-1;i<9;i++) for(let j=-1;j<6;j++){
+  const x=bx0+i*240, y=by0+j*200; if(x===860&&y===340) continue;
+  el('rect',{x,y,width:200,height:160,fill:'none',stroke:C.line,'stroke-width':1},gCity);
+  const n=2+Math.floor(rnd()*3); let cx=x+10;
+  for(let k=0;k<n&&cx<x+180;k++){ const w=30+rnd()*45, h=40+rnd()*90, yy=y+10+rnd()*(150-h-10);
+    const r=el('rect',{x:cx,y:yy,width:Math.min(w,x+190-cx),height:h,fill:'none',stroke:C.bld,'stroke-width':1.2},gCity); blds.push(r); cx+=w+8; }
+}
+// --- the lot and the data centre
+const lot=el('rect',{x:860,y:340,width:200,height:160,fill:'none',stroke:C.mute,'stroke-width':1.5,'stroke-dasharray':'6 6'});
+const dc=el('rect',{x:885,y:365,width:150,height:110,fill:C.red,'fill-opacity':0,stroke:C.red,'stroke-width':2.5,pathLength:1,'stroke-dasharray':'1 1'});
+const dcLbl=el('text',{x:960,y:426,'text-anchor':'middle','font-size':22,'font-weight':500,fill:C.fg}); dcLbl.textContent='Data centre';
+const lotLbl=el('text',{x:852,y:334,'text-anchor':'end','font-size':26,fill:C.mute}); lotLbl.textContent='Land';
+
+// --- what it takes in: power from the left along the street, water from below
+const inflow=(d,lx,ly,name)=>{ const g=el('g',{});
+  const p=el('path',{d,fill:'none',stroke:C.fg,'stroke-width':2.5,pathLength:1,'stroke-dasharray':'1 1'},g);
+  const m=el('path',{d,fill:'none',stroke:C.fg,'stroke-width':6,pathLength:1,'stroke-dasharray':'0.012 0.05','stroke-linecap':'round'},g);
+  const l=el('text',{x:lx,y:ly,'font-size':28,'font-weight':500,fill:C.fg},g); l.textContent=name; return {g,p,m,l}; };
+const pw=inflow('M0,520 H930 V475',150,500,'Power');
+const wa=inflow('M1080,800 V440 H1035',1100,760,'Water');
+// --- what it gives off, as waste: heat rising, noise spreading
+const gWaste=el('g',{});
+const heat=[...Array(6)].map(()=>el('polyline',{fill:'none',stroke:C.heat,'stroke-width':2.5,'stroke-linecap':'round'},gWaste));
+const rings=[...Array(3)].map(()=>el('circle',{cx:960,cy:420,fill:'none',stroke:C.mute,'stroke-width':1.5},gWaste));
+const heatLbl=el('text',{x:1010,y:140,'font-size':28,'font-weight':500,fill:C.heat},gWaste); heatLbl.textContent='Heat, wasted';
+const noiseLbl=el('text',{x:1150,y:300,'font-size':28,'font-weight':500,fill:C.mute},gWaste); noiseLbl.textContent='Noise';
+
+// --- six exchanges to neighbours (orthogonal routes, like pipes and cables along streets)
+const EX=[['Heat',-500,-250,-140],['Power',-540,250,-250],['Water',-150,330,0],['Space',520,260,250],['Materials',540,-240,140],['Sound',100,-320,0]];
+const gEx=el('g',{});
+const ex=EX.map(([name,dx,dy,mx],i)=>{
+  const sx=960+Math.sign(dx)*75*(Math.abs(dx)>200?1:0)+(Math.abs(dx)<=200?dx*.3:0), sy=420+(Math.abs(dx)<=200?Math.sign(dy)*55:0);
+  const tx=960+dx, ty=420+dy, d=Math.abs(dx)>200?`M${sx},${sy} H${sx+mx} V${ty} H${tx}`:`M${sx},${sy} V${(sy+ty)/2} H${tx} V${ty}`;
+  const g=el('g',{},gEx);
+  const p=el('path',{d,fill:'none',stroke:C.red,'stroke-width':3,pathLength:1,'stroke-dasharray':'1 1'},g);
+  const out=el('path',{d,fill:'none',stroke:C.red2,'stroke-width':7,pathLength:1,'stroke-dasharray':'0.01 0.07','stroke-linecap':'round'},g);
+  const back=el('path',{d,fill:'none',stroke:C.fg,'stroke-width':7,pathLength:1,'stroke-dasharray':'0.008 0.072','stroke-linecap':'round'},g);
+  const b=el('rect',{x:tx-40,y:ty-30,width:80,height:60,fill:C.red,'fill-opacity':0,stroke:C.red,'stroke-width':2},g);
+  const ly=dy<0?ty-46:ty+66;
+  const l=el('text',{x:tx,y:ly,'text-anchor':'middle','font-size':32,'font-weight':500,fill:C.fg},g); l.textContent=name;
+  return {p,out,back,b,l,t0:19.2+i*.55}; });
+
+// --- captions: big, short, bottom left, on a dark band
+P=null;
+const defs=el('defs',{}); const lg=el('linearGradient',{id:'fade',x1:0,y1:0,x2:0,y2:1},defs);
+el('stop',{offset:0,'stop-color':C.bg,'stop-opacity':0},lg); el('stop',{offset:.45,'stop-color':C.bg,'stop-opacity':.92},lg);
+el('rect',{x:0,y:800,width:1920,height:280,fill:'url(#fade)'});
+const tag=el('text',{x:120,y:96,'font-size':24,'font-weight':500,fill:C.mute}); tag.textContent='Beyond Data';
+const CAPS=[[-9.2,-3.4,'It serves the world'],[-2.6,4.6,'But it lives here'],[8.6,17.2,'A building that only takes'],[19.4,27.4,'What if it traded?'],[28.2,35.5,'An exchange, <tspan fill="'+C.red2+'">both ways</tspan>']];
+const caps=CAPS.map(([a,b,txt])=>{ const e=el('text',{x:120,y:985,'font-size':80,'font-weight':500,fill:C.fg,'letter-spacing':'-0.01em'}); e.innerHTML=txt; return {a,b,e}; });
+
+function R(T){ globe(T); const t=T-10;
+  const k=.04+.96*seg(T,9.0,11.4); gAll.setAttribute('transform',`translate(960,420) scale(${k}) translate(-960,-420)`);
+  gCity.setAttribute('opacity',seg(T,9.4,10.6));
+  dc.setAttribute('stroke-dashoffset',1-seg(t,.8,2.4)); dc.setAttribute('fill-opacity',.14*seg(t,2,3));
+  dcLbl.setAttribute('opacity',seg(t,2.2,3));
+  lot.setAttribute('opacity',seg(t,5.6,6.4)); lotLbl.setAttribute('opacity',win(t,5.6,17.6));
+  // takes in
+  const dim=1-.7*seg(t,17.2,18.6);
+  for(const [f,a] of [[pw,3.0],[wa,4.2]]){ f.p.setAttribute('stroke-dashoffset',1-seg(t,a,a+1.6)); f.g.setAttribute('opacity',dim);
+    f.m.setAttribute('opacity',seg(t,a+1.4,a+2)); f.m.setAttribute('stroke-dashoffset',-(t*.08)%1); f.l.setAttribute('opacity',seg(t,a+.4,a+1.2)*(1-seg(t,17.2,18.2))); }
+  // gives off, as waste
+  const w=seg(t,8.6,10)*(1-seg(t,17,18.6)); gWaste.setAttribute('opacity',w);
+  heat.forEach((h,i)=>{ const q=((t/3.2)+i/6)%1, x0=900+i*24, pts=[];
+    for(let k=0;k<=24;k++){ const y=365-k/24*230*q-6; pts.push(`${x0+Math.sin(k*.55+t*2+i)*8*(k/24)*3},${y}`); }
+    h.setAttribute('points',pts.join(' ')); h.setAttribute('opacity',(1-q)*.9); });
+  rings.forEach((r,i)=>{ const q=((t/2.6)+i/3)%1; r.setAttribute('r',90+260*q); r.setAttribute('opacity',(1-q)*.55); });
+  heatLbl.setAttribute('opacity',seg(t,9.6,10.4)); noiseLbl.setAttribute('opacity',seg(t,10.8,11.6));
+  // the box warms as the exchanges arrive
+  dc.setAttribute('fill-opacity',.14+.16*seg(t,19,23));
+  ex.forEach(e=>{ const p=seg(t,e.t0,e.t0+1.4);
+    e.p.setAttribute('stroke-dashoffset',1-p);
+    e.b.setAttribute('fill-opacity',.28*seg(t,e.t0+1.2,e.t0+1.8)); e.b.setAttribute('opacity',seg(t,e.t0+.9,e.t0+1.3));
+    e.l.setAttribute('opacity',seg(t,e.t0+1.1,e.t0+1.7));
+    e.out.setAttribute('opacity',seg(t,e.t0+1.4,e.t0+2)); e.out.setAttribute('stroke-dashoffset',-(t*.12)%1);
+    e.back.setAttribute('opacity',seg(t,28.4,29.6)); e.back.setAttribute('stroke-dashoffset',(t*.12)%1); });
+  caps.forEach(c=>{ const o=win(t,c.a,c.b); c.e.setAttribute('opacity',o); c.e.setAttribute('transform',`translate(0,${(1-seg(t,c.a,c.a+.6))*14})`); });
+}
+window.R=R; R(0);
+</script></body></html>
