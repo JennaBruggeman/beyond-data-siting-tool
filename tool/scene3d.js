@@ -291,6 +291,6 @@ function applyCard(){ if(!R) return; const on=!!R.card; R.ctl.autoRotate=on; R.c
   if(R.nbMesh){ const m=R.nbMesh.material; m.transparent=on; m.opacity=on?0.22:1; m.depthWrite=!on; m.needsUpdate=true; }
   const fk=state.key+'|'+state.tab; if(on&&state.span&&!R.multi&&R.framed!==fk&&state.tab!=='heat'){ R.framed=fk; const sp=state.span*0.95, rf=state.roof||0; R.cam.position.set(sp*1.15,sp*2.1+rf*1.6,sp*1.35); R.ctl.target.set(0,rf*0.3,0); R.ctl.update(); } }
 function cardMode(on){ if(!R) return; R.card=!!on; if(!R.cardWired){ R.cardWired=true; R.ctl.addEventListener('start',()=>{ R.ctl.autoRotate=false; clearTimeout(idleT); }); R.ctl.addEventListener('end',()=>{ clearTimeout(idleT); idleT=setTimeout(()=>{ if(R.card) R.ctl.autoRotate=true; },6000); }); } applyCard(); }
-BD.scene3d={show,showOptions,hide,ensure,demo,cardMode,snap:(x,y)=>R&&R.nbList?snap(x,y):null,state:()=>state,isOpen:()=>!!wrap&&wrap.style.display!=='none'};
+BD.scene3d={show,showOptions,hide,ensure,demo,cardMode,rig:()=>R /* camera access for scripted recordings (video, 20 Oct 2026) */,snap:(x,y)=>R&&R.nbList?snap(x,y):null,state:()=>state,isOpen:()=>!!wrap&&wrap.style.display!=='none'};
 BD.showModel=()=>{ if(!BD.S.sel) return Promise.resolve(); return show('model',{}).catch(e=>console.warn(e)); };
 })();
