@@ -30,7 +30,7 @@ const st=document.getElementById('stage');
 const mk=(src)=>{ const d=document.createElement('div'); d.className='pg'; d.innerHTML=`<img src="${src}">`; st.appendChild(d); return d; };
 const lbl=(h)=>{ const d=document.createElement('div'); d.className='pl'; d.innerHTML=h; st.appendChild(d); return d; };
 const TC=mk('rep/p-12.jpg'); const C1=mk('rep/r1-1.jpg'), C2=mk('rep/p-01.jpg'), C3=mk('rep/r3-01.jpg'), H=mk('rep/p-04.jpg'), O=mk('rep/p-08.jpg'), T=mk('rep/p-11.jpg');
-const L=[lbl('Residents<i>What it means for me</i>'),lbl('Neighbourhood<i>What it means for the neighbourhood</i>'),lbl('Full<i>How it is worked out</i>')];
+const L=[lbl('Everyday<i>What it means for me</i>'),lbl('Civic<i>What it means for the neighbourhood</i>'),lbl('Technical<i>How it is worked out</i>')];
 const caps=[[.5,5.0,'A report for each level'],[5.2,10.4,'What it reveals'],[10.6,14.2,'What would close the gap'],[14.6,19.0,'Edmonton: same logic, different answer']].map(([a,b,x])=>{const e=document.createElement('div'); e.className='cap'; e.textContent=x; document.body.appendChild(e); return {a,b,e};});
 const place=(e,x,y,s,o,r=0)=>{ e.style.transform=`translate(${x}px,${y}px) rotate(${r}deg) scale(${s})`; e.style.opacity=o; };
 // logo lines

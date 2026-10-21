@@ -7,14 +7,14 @@
 const WI=0x8fc3dc, WO=0x5b8aa6;
 setup({n:'3',title:'Water',sub:'The cooling choice decides the water: almost none on site, or a balance in and out',
  key:[['#8fc3dc','water in'],['#5b8aa6','lost or discharged'],['#8fc3dc','possible line',1]],
- caps:[[.6,5.2,'Cooling decides the water'],[5.5,11.8,'A balance in and out'],[12.1,15.2,'Who could take it, or supply it']],
+ caps:[[.4,2.8,'Cooling decides the water'],[3.0,6.0,'A balance in and out']],
  conds:[['Technical','Evaporation ≤1.5 L/kWh','of heat rejected'],['Technical','Cycles 2–6','blowdown = evaporation ÷ (cycles − 1)'],['Temporal','Rain 1,160 | 420 mm a year','Vancouver | Edmonton, in seasons'],['Economic','Reclaimed water price','to be set'],['Regulatory','Supply from a plant','considered case by case'],['Environmental','Water behind the power','1.25–16.8 L/kWh, thermal to hydro']],
- keys:[[0,V(1,2,1),9],[4.6,V(4,2,6),11.5,330],[11.0,V(4,2,6),12,330],[11.6,V(5,1,13),15.5,150],[13.8,V(5,1,15),17.5,330],[20,V(5,1,15),18,330]],dur:15.4,condAt:99,keyIn:2.6});
+ keys:[[0,V(1,2,1),9],[4.6,V(4,2,6),11.5,330],[11.0,V(4,2,6),12,330],[11.6,V(5,1,13),15.5,150],[13.8,V(5,1,15),17.5,330],[20,V(5,1,15),18,330]],dur:13.6,condAt:99,keyIn:2.6});
 const dc=box(8,6.5,7,0,0,0,{}); const floors=[2.2,4.4].map(y=>{ const l=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(8.02,.01,7.02)),new THREE.LineBasicMaterial({color:0x6a6d73,transparent:true})); l.position.set(0,y,0); scene.add(l); return l; });
 const tower=box(3,3,3,6,0,1.5,{edge:WI}); const ttop=cyl(1.2,.7,6,3.35,1.5,'y',{edge:WI}); const fan=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.CircleGeometry(1,24)),new THREE.LineBasicMaterial({color:WI,transparent:true})); fan.rotation.x=-Math.PI/2; fan.position.set(6,3.72,1.5); scene.add(fan);
 const meter=box(.8,.8,.8,8.6,0,6,{edge:WI});
-const tank=cyl(1,2,-5.6,1,4,'y',{edge:WI}); const reuse=box(1.6,1.4,1.6,-5.8,0,-.6,{dashed:true,edge:WI});
-const plant=box(5,1.6,4,6,0,28,{edge:WI}); const ptk=[0,1].map(i=>cyl(1,.6,10+i*2.2,.3,24.5,'y',{edge:WI}));
+const tank=cyl(1,2,-5.6,1,4,'y',{edge:WI}); const reuse=R_.tanks(-2.2,8.6,2,1.0);
+const plant=R_.tanks(6.5,27,3,1.4); const ptk=[];
 const mk=pipe([V(12.4,.3,30),V(12.4,.3,6),V(9,.3,6),V(9,.3,1.5),V(7.5,.8,1.5)],WI,.16,2.2,1.6,16,.05,{rev:true});
 const bd=pipe([V(6.5,.25,3),V(6.5,.25,6.8),V(11.6,.25,6.8),V(11.6,.25,28),V(8.5,.25,28)],WO,.13,3.4,1.6,12,.05);
 const rec=new THREE.Line(new THREE.BufferGeometry().setFromPoints([V(13.4,.3,32),V(13.4,.3,6.2),V(9.4,.3,6.2)]),new THREE.LineDashedMaterial({color:WI,dashSize:.5,gapSize:.35,transparent:true,opacity:0})); rec.computeLineDistances(); scene.add(rec);
@@ -33,17 +33,21 @@ panel(`<div class="ph">Transfer, per kWh of heat</div>
  <span>lost: evaporation</span><span><span style="display:inline-block;width:75px;height:12px;background:#5b8aa6"></span> <b style="color:#f2efea;font-weight:500">≤1.5 L</b></span>
  <span>out: blowdown</span><span><span style="display:inline-block;width:15px;height:12px;background:#5b8aa6"></span><span style="display:inline-block;width:60px;height:12px;border:1.5px dashed #5b8aa6;box-sizing:border-box"></span> <b style="color:#f2efea;font-weight:500">0.3–1.5 L</b></span></div>`,5.4,9.4,'left:120px;top:250px');
 note('<b>The other choice: a dry cooler</b>almost none on site; its fans use more power,<br>so the water moves behind the power',9.6,11.8);
-recv('1','Blowdown, reused','else','Quincy, WA',V(-5.8,1.6,-.6),12.0,15.2,-330,-30);
-recv('2','Rain, in','nyk','Vancouver permitted; Alberta a variance',V(-5.6,2.2,4),12.4,15.2,-480,0);
-recv('3','Treatment plant','here','the usual path',V(6,1.8,28),12.8,15.2,-300,-10);
-recv('4','Reclaimed water, in','else','Loudoun, VA',V(13.4,.3,31),13.2,15.2,26,-10);
 UPD=t=>{
   setOp(dc,seg(t,.1,.8)); floors.forEach(l=>l.material.opacity=.6*seg(t,.5,1));
   setOp(tower,seg(t,1,1.5)); setOp(ttop,seg(t,1.2,1.6)); fan.material.opacity=seg(t,1.3,1.7); fan.rotation.z=t*3;
-  setOp(meter,seg(t,2.6,3)); setOp(tank,seg(t,7,7.5)); setOp(reuse,seg(t,11.6,12.1)); setOp(plant,seg(t,3.6,4.2)); ptk.forEach(g=>setOp(g,seg(t,3.8,4.3)));
+  setOp(meter,seg(t,2.6,3)); setOp(tank,seg(t,7,7.5)); setOp(plant,seg(t,3.6,4.2)); ptk.forEach(g=>setOp(g,seg(t,3.8,4.3)));
   rec.material.opacity=.8*seg(t,5.4,6);
   vap.forEach(v=>{ const q=((t*.45)+v.ph)%1; v.m.position.set(6+Math.cos(v.a)*.6*q,3.8+q*3.5,1.5+Math.sin(v.a)*.6*q); v.m.material.opacity=(1-q)*.8*seg(t,2,2.6); });
   rain.forEach(r=>{ const q=((t*1.1)+r.ph)%1; r.m.position.set(r.x,6.6+(1-q)*5,r.z); r.m.material.opacity=win(t,7.2,10.4)*.8; });
 };
+const recP=pipe([V(10.4,.3,27),V(13.4,.3,27),V(13.4,.3,6.2),V(9.4,.3,6.2)],WI,.13,15.0,1.0,12,.05,{rev:true});
+const reP=pipe([V(6.5,.25,6.8),V(-1.2,.25,6.8),V(-1.2,.25,7.6)],WO,.11,11.9,.6,5,.06);
+visits({start:5.9,slot:1.75,k:2,list:[
+ {n:1,name:'Blowdown, reused',gets:'cooling water treated and used again',k:'else',where:'Quincy, WA',obj:reuse,at:V(-2.2,1,8.6),tg:V(-1.5,1.5,8),hh:6,cap:'Reuse the blowdown'},
+ {n:2,name:'Rain, in',gets:'rain from the roof, for cooling',k:'nyk',where:'Vancouver permitted; Alberta a variance',at:V(-5.6,2.1,4),tg:V(-4.5,2.5,3),hh:6.5,cap:'Collect rain'},
+ {n:3,name:'Treatment plant',gets:'takes the blowdown',k:'here',where:'the usual path',at:V(6.5,1,27),tg:V(7,1,26.5),hh:6.5,cap:'Send it to treatment'},
+ {n:4,name:'Reclaimed water, in',gets:'treated wastewater for cooling',k:'else',where:'Loudoun, VA',at:V(13.4,.3,18),tg:V(11,1,17),hh:8,cap:'Cool with reclaimed water'}],
+ outro:[V(3,1,13),16,300]}); visitCaps();
 R(0);
 </script></body></html>

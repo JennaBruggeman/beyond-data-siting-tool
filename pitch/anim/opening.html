@@ -5,7 +5,7 @@
 html,body{margin:0;background:#202124;overflow:hidden}
 svg{display:block;font-family:Plex,sans-serif}
 </style></head><body>
-<svg id="s" width="1920" height="1080" viewBox="0 0 1920 1080"></svg>
+<svg id="s" width="1920" height="1080" viewBox="0 0 1920 1080"><defs><filter id="mono"><feColorMatrix type="saturate" values="0"/></filter></defs></svg>
 <script>
 // Pitch video, opening (0:00–0:35). One function R(t) draws the frame at t seconds, so frames can be captured one by one.
 const C={bg:'#202124',line:'#34373b',bld:'#3b3e43',fg:'#f2efea',mute:'#bdb9b2',faint:'#918d86',red:'#CC746C',red2:'#e7a39c',heat:'#c9a35a'};
@@ -16,6 +16,12 @@ const seg=(t,a,b)=>ease((t-a)/(b-a));               // 0→1 between a and b
 const win=(t,a,b,f=.6)=>Math.min(seg(t,a,a+f),1-seg(t,b-f,b)); // fade in at a, out at b
 
 // --- the globe: a plain dot sphere (no map data), with illustrative arcs from one point. Not real traffic or routes.
+const gCut=el('g',{});
+const CUTS=[['ab_strategy',-760,-250,-4],['p01',-520,180,3],['p05',-800,260,5],['p06',560,-300,-3],['p07',700,120,4],['p02',-330,-330,2],['p10',380,250,-5],['p11',820,-120,6],['p13',-150,330,-2],['p08',220,-360,3]];
+const cuts=CUTS.map(([f,dx,dy,r],i)=>{ const w=f==='p06'?440:270, h=f==='p06'?w*1223/2173:w*1.3; const g=el('g',{},gCut);
+  el('image',{href:'cut/'+f+'.png',x:-w/2,y:-h/2,width:w,height:h,preserveAspectRatio:'xMidYMid slice',filter:'url(#mono)'},g);
+  el('rect',{x:-w/2,y:-h/2,width:w,height:h,fill:'none',stroke:'#5a5d62','stroke-width':1},g); return {g,dx,dy,r,i}; });
+const gMask=el('circle',{cx:960,cy:420,r:345,fill:C.bg,'fill-opacity':.9});
 const gGlobe=el('g',{}); const dBack=el('path',{fill:C.faint,'fill-opacity':.25},gGlobe), dFront=el('path',{fill:C.mute,'fill-opacity':.75},gGlobe);
 const NPT=1400, PTS=[...Array(NPT)].map((_,i)=>{ const y=1-2*(i+.5)/NPT, r=Math.sqrt(1-y*y), a=i*2.399963; return [r*Math.cos(a),y,r*Math.sin(a)]; });
 const LAT0=0.855, LON0=0.0; let seedG=11; const rg=()=>(seedG=(seedG*16807)%2147483647)/2147483647;
@@ -62,7 +68,11 @@ const blds=[]; CK.bld.forEach(o=>{ const r=o.r; let cx=0,cy=0,n=r.length/2; for(
 const lr=CK.lot; let lx0=1e9,ly0=1e9,lx1=-1e9,ly1=-1e9; for(let i=0;i<lr.length;i+=2){ lx0=Math.min(lx0,X(lr[i])); lx1=Math.max(lx1,X(lr[i])); ly0=Math.min(ly0,Y(lr[i+1])); ly1=Math.max(ly1,Y(lr[i+1])); }
 const lot=el('polygon',{points:poly(lr),fill:'none',stroke:C.mute,'stroke-width':1.5,'stroke-dasharray':'6 6'});
 const dc=el('polygon',{points:poly(lr,.78),fill:C.red,'fill-opacity':0,stroke:C.red,'stroke-width':2.5,pathLength:1,'stroke-dasharray':'1 1'});
-const dcLbl=el('text',{x:960,y:426,'text-anchor':'middle','font-size':22,'font-weight':500,fill:C.fg}); dcLbl.textContent='Data centre';
+const pole=(()=>{ const q=[]; for(let i=0;i<lr.length;i+=2) q.push([X(lr[i]*.78),Y(lr[i+1]*.78)]);
+  const inside=(x,y)=>{ let c=false; for(let i=0,j=q.length-1;i<q.length;j=i++){ const [xi,yi]=q[i],[xj,yj]=q[j]; if((yi>y)!==(yj>y)&&x<(xj-xi)*(y-yi)/(yj-yi)+xi) c=!c; } return c; };
+  const dseg=(x,y,[ax,ay],[bx,by])=>{ const dx=bx-ax,dy=by-ay,u=cl(((x-ax)*dx+(y-ay)*dy)/(dx*dx+dy*dy)); return Math.hypot(x-ax-u*dx,y-ay-u*dy); };
+  let best=[960,420,-1]; for(let x=lx0;x<=lx1;x+=2) for(let y=ly0;y<=ly1;y+=2){ if(!inside(x,y)) continue; let m=1e9; for(let i=0;i+1<q.length;i++) m=Math.min(m,dseg(x,y,q[i],q[i+1])); if(m>best[2]) best=[x,y,m]; } return best; })();
+const dcLbl=el('text',{x:pole[0],y:pole[1],'text-anchor':'middle','dominant-baseline':'central','font-size':22,'font-weight':500,fill:C.fg}); dcLbl.textContent='Data centre';
 const lotLbl=el('text',{x:lx0-10,y:ly0-6,'text-anchor':'end','font-size':26,fill:C.mute}); lotLbl.textContent='Land';
 
 // --- what it takes in: power from the left along the street, water from below
@@ -92,7 +102,7 @@ const ex=EX.map(([name,dx,dy,mx],i)=>{
   USED.push(tb); const b=el('polygon',{points:poly(tb.r),fill:C.red,'fill-opacity':0,stroke:C.red,'stroke-width':2.5},g);
   const ly=dy<0?ty-46:ty+66;
   const l=el('text',{x:tx,y:ly,'text-anchor':'middle','font-size':32,'font-weight':500,fill:C.fg},g); l.textContent=name;
-  return {p,out,back,b,l,t0:19.2+i*.55}; });
+  return {p,out,back,b,l,t0:i===0?18.8:22.6+(i-1)*.35}; });
 
 // --- captions: big, short, bottom left, on a dark band
 P=null;
@@ -100,10 +110,19 @@ const defs=el('defs',{}); const lg=el('linearGradient',{id:'fade',x1:0,y1:0,x2:0
 el('stop',{offset:0,'stop-color':C.bg,'stop-opacity':0},lg); el('stop',{offset:.45,'stop-color':C.bg,'stop-opacity':.92},lg);
 el('rect',{x:0,y:800,width:1920,height:280,fill:'url(#fade)'});
 const tag=el('text',{x:120,y:96,'font-size':24,'font-weight':500,fill:C.mute}); tag.textContent='Beyond Data';
-const CAPS=[[-9.2,-3.4,'It serves the world'],[-2.6,4.6,'But it lives here'],[8.6,17.2,'A building that only takes'],[19.4,27.4,'What if it traded?'],[28.2,35.5,'An exchange, <tspan fill="'+C.red2+'">both ways</tspan>']];
-const caps=CAPS.map(([a,b,txt])=>{ const e=el('text',{x:120,y:985,'font-size':80,'font-weight':500,fill:C.fg,'letter-spacing':'-0.01em'}); e.innerHTML=txt; return {a,b,e}; });
+const CAPS=[[-9.2,-3.4,'A data centre serves the world'],[-2.6,4.6,'But it lives here'],[8.6,17.2,'A building type that only takes<tspan x="120" dy="62" font-size="44" fill="'+C.mute+'">from its immediate setting</tspan>',-50],[18.6,22.4,'What if it gave something back?'],[22.8,26.8,'…or many things?'],[27.4,34.4,'An exchange, <tspan fill="'+C.red2+'">both ways</tspan>']];
+const caps=CAPS.map(([a,b,txt,oy=0])=>{ const e=el('text',{x:120,y:985+oy,'font-size':80,'font-weight':500,fill:C.fg,'letter-spacing':'-0.01em'}); e.innerHTML=txt; return {a,b,e}; });
 
-function R(T){ globe(T); const t=T-10;
+const gEth=el('g',{opacity:0}); const ETH=[['Data centres are being built.',35.4],['So let\u2019s build them as neighbours.',37.9],['And find where they can <tspan fill="'+C.red2+'">give the most back</tspan>.',40.4]];
+const eth=ETH.map(([x,a],i)=>{ const e=el('text',{x:120,y:330+i*120,'font-size':76,'font-weight':500,fill:i===2?C.fg:C.fg,'letter-spacing':'-0.01em'},gEth); e.innerHTML=x; return {e,a}; });
+const gTi=el('g',{opacity:0});
+const tIn=el('text',{x:126,y:560,'font-size':34,fill:C.mute},gTi); tIn.textContent='Introducing';
+const tT=el('text',{x:120,y:720,'font-size':150,'font-weight':400,fill:C.fg,'letter-spacing':'-0.02em'},gTi); tT.textContent='Beyond Data';
+const tS=el('text',{x:126,y:790,'font-size':24,'font-weight':500,fill:C.mute,'letter-spacing':'0.32em'},gTi); tS.textContent='EXCHANGE SYSTEMS';
+el('rect',{x:126,y:814,width:70,height:4,fill:C.red},gTi);
+function R(T){ globe(T); cuts.forEach(c=>{ const k=.04+.96*seg(T,9.0,11.4), dr=T*6*(c.i%2?1:-1);
+    c.g.setAttribute('transform',`translate(${960+(c.dx+dr)*(1+.6*seg(T,8.4,10.6))},${420+c.dy*(1+.6*seg(T,8.4,10.6))+T*(c.i%3-1)*2}) rotate(${c.r}) scale(${1+.25*seg(T,8.4,10.6)})`);
+    gMask.setAttribute('opacity',1-seg(T,8.6,10.0)); c.g.setAttribute('opacity',.2*seg(T,.3+c.i*.35,1.3+c.i*.35)*(1-seg(T,8.6,10.0))); }); const t=T-10;
   const k=.04+.96*seg(T,9.0,11.4); gAll.setAttribute('transform',`translate(960,420) scale(${k}) translate(-960,-420)`);
   gCity.setAttribute('opacity',seg(T,9.4,10.6));
   dc.setAttribute('stroke-dashoffset',1-seg(t,.8,2.4)); dc.setAttribute('fill-opacity',.14*seg(t,2,3));
@@ -128,7 +147,10 @@ function R(T){ globe(T); const t=T-10;
     e.l.setAttribute('opacity',seg(t,e.t0+1.1,e.t0+1.7));
     e.out.setAttribute('opacity',seg(t,e.t0+1.4,e.t0+2)); e.out.setAttribute('stroke-dashoffset',-(t*.12)%1);
     e.back.setAttribute('opacity',seg(t,28.4,29.6)); e.back.setAttribute('stroke-dashoffset',(t*.12)%1); });
+  const dm=seg(t,34.6,35.6); gAll.setAttribute('opacity',1-.8*dm-.2*seg(t,46.8,47.6));
+  gEth.setAttribute('opacity',1-seg(t,43.4,44.0)); eth.forEach(o=>{ o.e.setAttribute('opacity',seg(t,o.a,o.a+.6)); o.e.setAttribute('transform',`translate(0,${(1-seg(t,o.a,o.a+.6))*14})`); });
+  tag.setAttribute('opacity',1-seg(t,43.6,44.2)); gTi.setAttribute('opacity',seg(t,44.4,45.2)*(1-seg(t,49.4,50.0))); gTi.setAttribute('transform',`translate(0,${(1-seg(t,44.4,45.2))*16})`);
   caps.forEach(c=>{ const o=win(t,c.a,c.b); c.e.setAttribute('opacity',o); c.e.setAttribute('transform',`translate(0,${(1-seg(t,c.a,c.a+.6))*14})`); });
 }
-window.R=R; R(0);
+window.DUR=60; window.R=R; R(0);
 </script></body></html>

@@ -1,0 +1,66 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Heat and cold</title></head><body>
+<script src="three.min.js"></script><script src="sheet3d.js"></script>
+<script>
+// Sheet 1, Heat and cold (Exchange sheets draft v3), draft 4 of the pitch: the system, then each receiver visited. Generic system, not to scale.
+// Figures as on the sheet: into liquid 48–75 % with cold plates; free cooling 7,109 h; ≥60 °C after the heat pump. Receivers and proof tags as on the sheet,
+// except QScale Lévis, tagged "under construction" (the sheet says pilot; flagged for J.B., 21 Oct 2026), and TELUS Garden, described as one development's loop.
+const COL={cool:0x6fa8dc,warm:0xe3c27a,hot:0xd99a4e,hp:0xe0714f,edge:0xd9d4cc,fill:0x2a2c30,dim:0x55585e};
+setup({n:'1',title:'Heat and cold',sub:'Servers make heat; it is rejected, or piped to receivers',
+ key:[['#6fa8dc','cool, supply or return'],['#e3c27a','warm 25–35 °C, air or glycol'],['#d99a4e','hot 50–60 °C, liquid capture'],['#e0714f','hot, after the heat pump']],
+ caps:[[.3,2.3,'Servers make heat'],[2.5,5.3,'Rejected, or piped to receivers'],[13.0,17.2,'Tested, condition by condition']],
+ conds:[['Technical','Enough heat for the receiver\'s demand'],['Technical','Hot enough, or the heat pump\'s lift'],['Spatial','Distance to the receiver'],['Spatial','Heat demand along the street'],['Spatial','Pipe route and right of way'],['Temporal','Supply meets demand, hour by hour'],['Economic','Price window: operator\'s floor, receiver\'s ceiling'],['Regulatory','Heat sale needs approval (BCUC)']],
+ keys:[[0,V(0,1.5,0),8.6],[4.2,V(.5,1.5,0),8.8],[5.0,V(6.5,1.5,-1.5),10],[6.6,V(9,1.5,-1),10.4],[8.0,V(18,1,16),14],[10.6,V(19,1,20),15.5]],dur:17.4,condAt:99,keyIn:1.6});
+const cyl_=cyl; 
+// --- the data hall (open on two sides, as drawn)
+const hall=new THREE.Group(); scene.add(hall);
+const slab=box(14,.3,9,0,0,0,{}); const wallB=box(14,4.2,.25,0,.3,-4.4,{}); const wallL=box(.25,4.2,9,-6.9,.3,0,{});
+const racks=[...Array(5)].map((_,i)=>box(1.1,2.6,1.4,-4.8+i*1.25,.3,-1.4,{fill:0x2f3034}));
+const cdu=box(1.5,2.4,1.4,1.8,.3,-1.4,{fill:0x34302a,edge:0xe3c27a});
+// --- outside: heat exchanger, heat pump, buffer tank, dry cooler
+const hx=box(1.2,1.8,1.6,10,0,1.5,{edge:0xe3c27a}); const hpU=box(2.4,2.4,2.2,12.6,0,1.5,{edge:0xe0714f}); const tank=cyl_(1.1,3.6,16.4,1.4,1.5,'x',{edge:0xe0714f});
+const dry=box(4.6,1.4,2.4,10.5,0,-6.5,{edge:0x6fa8dc}); const fans=[0,1].map(k=>{ const f=new THREE.Group(); const c=new THREE.Mesh(new THREE.CircleGeometry(.85,32),new THREE.MeshBasicMaterial({color:0x232427})); c.rotation.x=-Math.PI/2;
+  const r=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.CircleGeometry(.85,32)),new THREE.LineBasicMaterial({color:0x6fa8dc})); r.rotation.x=-Math.PI/2;
+  const bl=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-.8,0,0),new THREE.Vector3(.8,0,0),new THREE.Vector3(0,0,-.8),new THREE.Vector3(0,0,.8)]),new THREE.LineBasicMaterial({color:0x6fa8dc}));
+  f.add(c,r,bl); f.position.set(9.4+k*2.2,1.45,-6.5); scene.add(f); return {f,bl}; });
+
+
+const pCDU=pipe([V(2.5,2.2,-1.4),V(2.5,3.6,-1.4),V(8,3.6,-1.4),V(8,1.6,1.5),V(9.4,1.6,1.5)],COL.hot,.14,3.0,1.2,8);
+const pRet=pipe([V(9.4,.6,1.5),V(7.6,.6,1.5),V(7.6,.6,-.6),V(2.5,.6,-.6)],COL.cool,.1,3.6,1.0,6,.1);
+const pDry=pipe([V(8,3.6,-1.4),V(8,3.6,-6.5),V(8.2,1.0,-6.5)],COL.warm,.12,4.6,1.0,6);
+const pHP=pipe([V(10.6,1.2,1.5),V(11.4,1.2,1.5)],COL.hot,.14,5.8,.5,2);
+const pTank=pipe([V(13.8,1.6,1.5),V(14.6,1.6,1.5)],COL.hp,.14,6.3,.5,2);
+const MAIN_Z=[1.5,46];
+const pSup=pipe([V(18.2,1.6,1.5),V(19.5,.5,1.5),V(19.5,.5,MAIN_Z[1])],COL.hp,.22,7.0,3.6,18,.04);
+const pRtn=pipe([V(20.3,.5,MAIN_Z[1]),V(20.3,.5,2.2),V(18.2,1.0,2.2)],COL.cool,.18,7.4,3.6,16,.04);
+
+// receivers along the main: recognizable buildings (draft 4)
+const RB=[[R_.school(27,9.6),9,'r',3.5],[R_.tower(12.5,16,4,4,8),16,'l',3.5],[R_.pool(27,23,8,5.5),23,'r',4],[R_.housing(12.5,31,5,5,9),31,'l',2.5],[R_.greenhouse(27,40,8,6),40,'r',4]];
+const RX=RB.map(([g,z,side,hw],i)=>{ const x=side==='r'?27:12.5, t0=7.6+i*.62; const br=pipe([V(19.5,.5,z),V(side==='r'?x-hw:x+hw,.5,z)],COL.hp,.1,t0+.3,.4,3,.1); return {g,t0}; });
+lab('<b>Servers</b><i>power in, heat out</i>',V(-4.8,3.4,-1.4),1.6,6.4,-20,-40);
+lab('<b>Into liquid: 48–75 %</b><i>of server heat, with cold plates</i>',V(1.8,2.9,-1.4),3.3,6.4,20,-10);
+lab('<b>Dry cooler rejects it</b><i>free cooling 7,109 h a year</i>',V(12.8,1.6,-6.5),4.8,10.2,24,-30);
+lab('<b>Heat pump lifts it</b><i>to 60 °C and up</i>',V(12.6,2.6,1.5),6.0,10.2,18,-50);
+const heatUp=[...Array(15)].map((_,i)=>{ const m=new THREE.Mesh(new THREE.ConeGeometry(.12,.4,8),new THREE.MeshBasicMaterial({color:COL.warm,transparent:true})); scene.add(m); return {m,x:-4.8+(i%5)*1.25,ph:i*.37}; });
+const plume=[...Array(10)].map((_,i)=>{ const m=new THREE.Mesh(new THREE.SphereGeometry(.12,8,6),new THREE.MeshBasicMaterial({color:COL.warm,transparent:true})); scene.add(m); return {m,k:i%2,ph:i*.31}; });
+
+
+UPD=t=>{
+  // the hall builds
+  [slab,wallB,wallL].forEach((g,i)=>setOp(g,seg(t,.1+i*.15,.7+i*.15)));
+  racks.forEach((g,i)=>{ const u=seg(t,.5+i*.18,1.1+i*.18); g.scale.y=Math.max(.001,u); g.position.y=.3+1.3*u; setOp(g,u>0?1:0); });
+  const u=seg(t,1.8,2.4); cdu.scale.y=Math.max(.001,u); cdu.position.y=.3+1.2*u; setOp(cdu,u>0?1:0);
+  heatUp.forEach(h=>{ const q=((t*.6)+h.ph)%1; h.m.position.set(h.x,3+q*2.2,-1.4); h.m.material.opacity=(1-q)*seg(t,1.6,2.4)*(1-seg(t,7,8)); });
+  [[hx,2.8],[dry,4.4],[hpU,5.6],[tank,6.1]].forEach(([g,a])=>setOp(g,seg(t,a,a+.5)));
+  fans.forEach(({f,bl},k)=>{ f.visible=t>4.6; bl.rotation.y=t*4+k; f.traverse(c=>{if(c.material){c.material.transparent=true; c.material.opacity=seg(t,4.6,5);}}); });
+  plume.forEach(p=>{ const q=((t*.5)+p.ph)%1; p.m.position.set(9.4+p.k*2.2+Math.sin(q*6+p.ph)*.25,1.6+q*3,-6.5); p.m.material.opacity=(1-q)*seg(t,5,5.6)*.8; });
+  RX.forEach(r=>setOp(r.g,seg(t,r.t0,r.t0+.6)));
+};
+visits({start:5.4,slot:1.5,k:2,condAt:13.0,list:[
+ {n:1,name:'School',gets:'space heat',k:'else',where:'Heerlen (claim)',at:V(27,4.5,7),tg:V(25.5,2,9),hh:6.8,cap:'Heat a school'},
+ {n:2,name:'Heat network',gets:'heat shared across buildings',k:'here',where:'TELUS Garden, Vancouver (one development)',at:V(12.5,8,16),tg:V(13.5,4,16),hh:8,cap:'Feed a heat network'},
+ {n:3,name:'Pool',gets:'heat for the pool water',k:'else',where:'Paris, 2017',at:V(27,.4,23),tg:V(26,1.5,23),hh:6.5,cap:'Warm a pool'},
+ {n:4,name:'Housing',gets:'space heat and hot water',k:'else',where:'Helsinki (claim)',at:V(12.5,7,31),tg:V(13.5,4,31),hh:7.5,cap:'Heat homes'},
+ {n:5,name:'Greenhouse',gets:'warmth to grow through winter',k:'uc',where:'QScale, Lévis',at:V(27,2.4,40),tg:V(26,2,40),hh:7,cap:'Heat a greenhouse'}],
+ outro:[V(14,1,24),23,330]}); visitCaps();
+R(0);
+</script></body></html>
