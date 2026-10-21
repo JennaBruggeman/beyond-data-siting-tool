@@ -2,20 +2,20 @@
 @font-face{font-family:Plex;font-weight:400;src:url(plex-400.woff2)}@font-face{font-family:Plex;font-weight:500;src:url(plex-500.woff2)}
 html,body{margin:0;background:#202124;overflow:hidden;width:1920px;height:1080px;font-family:Plex,sans-serif;color:#f2efea}
 #s{position:absolute;inset:0;font-family:Plex,sans-serif}
-#band{position:absolute;left:0;right:0;bottom:0;height:260px;background:linear-gradient(rgba(32,33,36,0),rgba(32,33,36,.95) 55%)}
+#band{position:absolute;left:0;right:0;bottom:0;height:340px;background:linear-gradient(rgba(32,33,36,0),rgba(32,33,36,.97) 45%)}
 .cap{position:absolute;left:120px;top:915px;font:500 76px/1 Plex;opacity:0;white-space:nowrap;letter-spacing:-.01em}
-.chip{position:absolute;left:0;top:0;background:#f3f1ec;color:#1d1d1f;font:500 18px/1.25 Plex;padding:9px 14px 9px 14px;border-radius:3px;box-shadow:0 10px 24px rgba(0,0,0,.5);border-left:4px solid #CC746C;opacity:0;white-space:nowrap}
+.chip{position:absolute;left:0;top:0;background:#f3f1ec;color:#1d1d1f;font:500 21px/1.25 Plex;padding:9px 14px 9px 14px;border-radius:3px;box-shadow:0 10px 24px rgba(0,0,0,.5);border-left:4px solid #CC746C;opacity:0;white-space:nowrap}
 #card{position:absolute;left:1180px;top:120px;width:620px;background:#27292c;border:1.5px solid #3b3e43;border-radius:8px;padding:34px 38px;box-sizing:border-box;opacity:0;box-shadow:0 20px 50px rgba(0,0,0,.5)}
-#card .st{font:500 20px Plex;color:#bdb9b2}
+#card .st{font:500 22px Plex;color:#bdb9b2}
 #card h2{font:500 46px/1.12 Plex;margin:10px 0 6px;letter-spacing:-.01em}
 #card .why{font:400 24px/1.4 Plex;color:#f2efea;margin-bottom:22px}
-#card .lab{font:500 17px Plex;color:#918d86;margin:18px 0 8px}
-#card .f{font:400 19px/1.45 Plex;color:#bdb9b2}
-#card .s{font:400 18px/1.35 Plex;color:#f2efea;padding:7px 0 7px 14px;border-left:3px solid #CC746C;margin:6px 0}
+#card .lab{font:500 19px Plex;color:#918d86;margin:18px 0 8px}
+#card .f{font:400 22px/1.45 Plex;color:#bdb9b2}
+#card .s{font:400 21px/1.35 Plex;color:#f2efea;padding:7px 0 7px 14px;border-left:3px solid #CC746C;margin:6px 0}
 #card .more{font:400 17px Plex;color:#918d86;margin-top:6px}
 #card .row{display:flex;gap:10px;flex-wrap:wrap}
 #card .lv{font:500 18px Plex;padding:8px 14px;border-radius:4px;border:1.5px solid #4a4e54;color:#6f6c67}
-#card .lv.on{border-color:#CC746C;color:#f2efea;background:rgba(204,116,108,.18)}
+#card .lv.on{border-color:#8a8680;color:#f2efea;background:#3a3d42}
 #card .pt{font:400 18px Plex;padding:6px 12px;border-radius:4px;background:#2f3236;color:#f2efea}
 #card .trust{display:flex;align-items:center;gap:14px;font:400 19px Plex;color:#bdb9b2}
 #sw{position:absolute;left:50%;top:60px;transform:translateX(-50%);display:flex;background:#25272a;border:1.5px solid #4a4e54;border-radius:6px;padding:5px;gap:4px;opacity:0;box-shadow:0 10px 30px rgba(0,0,0,.5)}
@@ -24,7 +24,7 @@ html,body{margin:0;background:#202124;overflow:hidden;width:1920px;height:1080px
 #trust{position:absolute;left:120px;top:150px;width:1100px;opacity:0;font-family:Plex}
 #trust .row{display:flex;align-items:center;gap:26px;margin:0 0 30px;opacity:0}
 #trust .m{font:500 32px/1.2 Plex;width:520px}#trust .ex{font:400 24px/1.3 Plex;color:#bdb9b2}
-#trust .wk{display:flex;align-items:center;gap:40px}#trust .wk .n{font:500 64px/1 Plex}#trust .wk .l{font:400 26px/1.3 Plex;color:#bdb9b2;margin-top:8px}
+#trust .wk{display:flex;align-items:flex-start;gap:40px}#trust .wk .n{font:500 64px/1 Plex}#trust .wk .l{font:400 26px/1.3 Plex;color:#bdb9b2;margin-top:8px}
 #tag{position:absolute;left:120px;top:56px;font:500 24px Plex;color:#bdb9b2}
 </style></head><body>
 <svg id="s" width="1920" height="1080"></svg>
@@ -41,13 +41,13 @@ const STAGES=[['What we start with',24,200],['How big it can be',292,468],['What
 const gB=el('g',{}), gW=el('g',{}), gN=el('g',{}), gR=el('g',{}), gH=el('g',{});
 const BANDS=STAGES.map(([nm,a,b],i)=>{ el('rect',{x:a-14,y:-150,width:b-a+28,height:3260,rx:10,fill:i%2?'#232427':'#25272a'},gB);
   const t=el('text',{x:(a+b)/2,y:-110,'text-anchor':'middle','font-weight':500,fill:'#f2efea'},gH); const wds=nm.split(' '), h=Math.ceil(wds.length/2), l1=i===7?nm:wds.slice(0,h).join(' '), l2=i===7?'':wds.slice(h).join(' ');
-  t.innerHTML=`<tspan x="${(a+b)/2}" font-size="46" fill="#e7a39c">${i+1}</tspan><tspan x="${(a+b)/2}" dy="44" font-size="30">${l1}</tspan>`+(l2?`<tspan x="${(a+b)/2}" dy="34" font-size="30">${l2}</tspan>`:'');
+  t.innerHTML=`<tspan x="${(a+b)/2}" font-size="46" fill="#9a968f">${i+1}</tspan><tspan x="${(a+b)/2}" dy="44" font-size="30">${l1}</tspan>`+(l2?`<tspan x="${(a+b)/2}" dy="34" font-size="30">${l2}</tspan>`:'');
   if(i===7){ const n=G.nodes.filter(q=>q.x>=a-20).length; const d=el('text',{x:(a+b)/2,y:520,'text-anchor':'middle','font-size':34,fill:'#bdb9b2'},gH); d.innerHTML=`<tspan x="${(a+b)/2}" font-size="80">↓</tspan><tspan x="${(a+b)/2}" dy="56">${n} parts, further down</tspan>`; }
   return t; });
 G.wires.forEach(w=>el('path',{d:w.d,fill:'none',stroke:'#5a5e64','stroke-width':1.4,'stroke-opacity':.55},gW));
 const NE={}; G.nodes.forEach(n=>{ const g=el('g',{transform:`translate(${n.x},${n.y})`},gN);
   el('rect',{width:n.w,height:n.h,rx:6,fill:'#2b2d31',stroke:n.fc,'stroke-opacity':.75,'stroke-width':1.6,'stroke-dasharray':n.dashed?'5 4':''},g);
-  const nm=n.name.length>21?n.name.slice(0,20)+'…':n.name; const t=el('text',{x:12,y:n.h/2+6,'font-size':16,fill:'#f2efea'},g); t.textContent=nm; NE[n.id]=g; });
+  if(n.name.length>21){ const w=n.name.split(' '); let a='',k=0; while(k<w.length&&(a+' '+w[k]).trim().length<=22){ a=(a+' '+w[k]).trim(); k++; } let b=w.slice(k).join(' '); if(b.length>22) b=b.slice(0,21)+'…'; const t=el('text',{x:12,y:n.h/2-3,'font-size':14,fill:'#f2efea'},g); t.innerHTML=`<tspan x="12">${a}</tspan><tspan x="12" dy="17">${b}</tspan>`; } else { const t=el('text',{x:12,y:n.h/2+6,'font-size':16,fill:'#f2efea'},g); t.textContent=n.name; } NE[n.id]=g; });
 // the heat chain
 const CH=['parcel','floor_area','server_floor','it_load_outside','it_load_actual','heat_rejected','heat_captured','heat_delivered','homes_heated','price_floor','window','ledger'];
 const CARD=new Set(['it_load_actual','heat_delivered','homes_heated','ledger']);
@@ -101,14 +101,14 @@ function R(t){
   // levels after the chain: parts outside the chosen level fade
   const lv=3, after=t>TEND+.2;
   G.nodes.forEach(n=>{ const ci=CH.indexOf(n.id), lit=ci>=0?seg(t,TI[ci]-.1,TI[ci]+.3):0, inL=lv===3||(LV[n.tier]??3)<=lv;
-    const base=after?(n.id==='homes_heated'?1:.12+.2*(1-seg(t,TEND,TEND+1))):dim; NE[n.id].setAttribute('opacity',Math.max(base,lit*(inL?1:.07)));
+    const base=after?(n.id==='homes_heated'?1-.85*seg(t,MT[1],MT[1]+.6):(.12+.2*(1-seg(t,TEND,TEND+1)))*(1-.6*seg(t,MT[1],MT[1]+.6))):dim; NE[n.id].setAttribute('opacity',Math.max(base,lit*(inL?1:.07)));
     const r=NE[n.id].firstChild; r.setAttribute('stroke',lit>.5&&inL?'#CC746C':n.fc); r.setAttribute('stroke-width',lit>.5&&inL?4:1.6); r.setAttribute('fill',lit>.5&&inL?'#3a2d2c':'#2b2d31'); });
   gW.setAttribute('opacity',after?.1:dim); gR.setAttribute('opacity',after?1-.75*seg(t,TEND,TEND+1)-.17*seg(t,MT[1],MT[1]+.6):1);
   RL.forEach((p,k)=>{ const i=k+1; p.setAttribute('stroke-dashoffset',1-seg(t,TI[i]-.9,TI[i]+.1)); const off=lv<3&&((LV[N[CH[i]].tier]??3)>lv||(LV[N[CH[i-1]].tier]??3)>lv); p.setAttribute('opacity',off?.12:1); });
   // chips fly into the part as the camera arrives
   const M=s.getScreenCTM();
   chips.forEach(({e,i,j})=>{ const n=N[CH[i]], a=TI[i]-.6+j*.18, u=seg(t,a,a+.9), p=new DOMPoint(n.x+10,n.y+10).matrixTransform(M);
-    const sx=p.x-520, sy=p.y-150+j*64; e.style.transform=`translate(${sx+(p.x-sx)*u}px,${sy+(p.y-sy)*u}px) scale(${1-.6*u})`; e.style.opacity=win(t,a,a+1.05,.25); });
+    const sx=p.x-520, sy=p.y-150+j*64; e.style.transform=`translate(${sx+(p.x-sx)*u}px,${sy+(p.y-sy)*u}px) scale(${1-.6*u})`; e.style.opacity=(p.y>960||sy>960)?0:win(t,a,a+1.05,.25); });
   // the card
   let ci=-1; CH.forEach((id,i)=>{ if(CARD.has(id)&&t>=TI[i]+.5&&t<TI[i]+DW[i]-.1) ci=i; });
   const card=$('card'); if(t>=MT[0]&&t<MT[1]){ if(card.dataset.id!=='math'){ card.innerHTML=mathHTML(); card.dataset.id='math'; } card.style.opacity=win(t,MT[0]+.6,MT[1],.35); card.style.transform=`translateX(${(1-seg(t,MT[0]+.6,MT[0]+1))*30}px)`; } else if(ci>=0){ if(card.dataset.id!==CH[ci]){card.innerHTML=cardHTML(N[CH[ci]]); card.dataset.id=CH[ci];} card.style.opacity=win(t,TI[ci]+.5,TI[ci]+DW[ci]-.1,.35); card.style.transform=`translateX(${(1-seg(t,TI[ci]+.5,TI[ci]+.9))*30}px)`; } else card.style.opacity=0;

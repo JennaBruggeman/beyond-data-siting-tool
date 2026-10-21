@@ -54,3 +54,10 @@ A 5-minute video: J.B.'s voice with big, short captions. No music. Voice is reco
 - Sources: Everyday / Civic / Technical, with what each level covers. Diagram: new stage names; "Check the math" replaces the levels ending.
 - Automate: nine line-drawn professions; "who asks what" ending. `future.html`: the future urban data centre, before the logo.
 - Flagged for J.B.: QScale Lévis is tagged "under construction" (the sheet says pilot); TELUS Garden is described as one development's loop.
+
+## Draft 5 (21 Oct): `beyond-data-pitch-draft-5.mp4`, 4:57, 30 fps
+- Design pass: one colour per exchange (heat #d99a4e, energy #6fa3d8, water #6fc3c3, materials #a9c49a, people #b79fd6); bigger text with dark backing on labels; one neutral proof-tag style; red only for key words.
+- 3D: soft shadows, receivers tinted in the sheet colour. Renders at 30 fps (`FPS=30 node anim/rec.js …`).
+- Tool clips recorded at 2x (`tool-shots/rec_demo2x.js`, `rec_intro2x.js`), with zoom-ins by `tool-shots/zoom.py`; captions overlaid afterwards (`chap/cap*.png`).
+- Chapter marker bottom right (`chap/c0–c3.png`); a dip to dark between chapters. Assembly: `tool-shots/assemble5.py`.
+- Report pages re-rendered at 300 dpi (`anim/rep2`). The logo (J.B.'s): same red chip, with an ordered fan of lines in the exchange colours.
