@@ -1,0 +1,121 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Heat and cold</title>
+<style>
+@font-face{font-family:Plex;font-weight:400;src:url(plex-400.woff2)}
+@font-face{font-family:Plex;font-weight:500;src:url(plex-500.woff2)}
+html,body{margin:0;background:#1f2023;overflow:hidden;width:1920px;height:1080px;font-family:Plex,sans-serif;color:#f2efea}
+canvas{display:block}
+#hd{position:fixed;left:120px;top:70px}
+#hd .n{font:500 64px/1 Plex;color:#e7a39c;display:inline-block;width:56px}
+#hd .t{font:500 54px/1 Plex;display:inline-block}
+#hd .s{font:400 26px/1.3 Plex;color:#e7a39c;margin:14px 0 0 58px}
+#band{position:fixed;left:0;right:0;bottom:0;height:250px;background:linear-gradient(rgba(31,32,35,0),rgba(31,32,35,.94) 55%)}
+.cap{position:fixed;left:120px;top:915px;font:500 72px/1 Plex;opacity:0;white-space:nowrap;letter-spacing:-.01em}
+.lab{position:fixed;left:0;top:0;font:400 27px/1.25 Plex;color:#f2efea;white-space:nowrap;opacity:0}
+.lab b{font-weight:500}
+.lab i{font-style:normal;color:#bdb9b2;font-size:22px;display:block}
+.lab .dot{position:absolute;left:-14px;top:9px;width:8px;height:8px;border-radius:50%;background:#f2efea}
+.tag{display:inline-block;font:500 20px/1 Plex;padding:6px 9px;border-radius:4px;margin-top:6px}
+.here{background:#7fbf8f;color:#17181a}.else{background:#c9c2b6;color:#17181a}.pilot{background:#d1a35e;color:#17181a}
+#key{position:fixed;right:110px;top:76px;font:400 19px/1.9 Plex;color:#bdb9b2;opacity:0}
+#key span{display:inline-block;width:34px;height:4px;vertical-align:middle;margin-right:12px;border-radius:2px}
+</style></head><body>
+<div id="hd"><span class="n">1</span><span class="t">Heat and cold</span><div class="s">Servers make heat; it is rejected, or piped to receivers</div></div>
+<div id="key"><div><span style="background:#6fa8dc"></span>cool, supply or return</div><div><span style="background:#e3c27a"></span>warm 25–35 °C, air or glycol</div><div><span style="background:#d99a4e"></span>hot 50–60 °C, liquid capture</div><div><span style="background:#e0714f"></span>hot, after the heat pump</div></div>
+<div id="band"></div>
+<script src="three.min.js"></script>
+<script>
+// Pitch video: the Heat and cold exchange sheet (Exchange sheets draft v3, sheet 1) as a 3D sequence. Generic system, not to scale.
+// Figures as on the sheet: into liquid 48–75 % with cold plates; free cooling 7,109 h; ≥60 °C after the heat pump; search radii pool ≤1,000 m,
+// housing ≤1,200 m, greenhouse ≤1,500 m (a Dutch study, 5-year payback; not limits tested for Vancouver); servers ~5–6 yr, pipe 30–50 yr.
+const W=1920,H=1080, COL={cool:0x6fa8dc,warm:0xe3c27a,hot:0xd99a4e,hp:0xe0714f,edge:0xd9d4cc,fill:0x2a2c30,dim:0x55585e};
+const R3=new THREE.WebGLRenderer({antialias:true}); R3.setSize(W,H); R3.setPixelRatio(1); R3.setClearColor(0x1f2023); document.body.prepend(R3.domElement);
+const scene=new THREE.Scene(), cam=new THREE.OrthographicCamera(-1,1,1,-1,-500,500); const DIR=new THREE.Vector3(1,.92,1.05).normalize();
+scene.add(new THREE.AmbientLight(0xffffff,.9)); const dl=new THREE.DirectionalLight(0xffffff,.5); dl.position.set(5,10,3); scene.add(dl);
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;}, seg=(t,a,b)=>ease((t-a)/(b-a)), win=(t,a,b,f=.45)=>Math.min(seg(t,a,a+f),1-seg(t,b-f,b));
+// ground grid, like the sheets
+const grid=new THREE.GridHelper(160,80,0x2b2d31,0x2b2d31); grid.position.set(10,0,20); scene.add(grid);
+const ANIM=[]; // {obj, t0, kind}
+function solid(geo,pos,{fill=COL.fill,edge=COL.edge,eo=.9,dashed=false}={}){ const g=new THREE.Group(); const m=new THREE.Mesh(geo,new THREE.MeshLambertMaterial({color:fill,transparent:true,opacity:dashed?.25:1}));
+  const eg=new THREE.EdgesGeometry(geo,20); const lm=dashed?new THREE.LineDashedMaterial({color:edge,dashSize:.35,gapSize:.25,transparent:true,opacity:eo}):new THREE.LineBasicMaterial({color:edge,transparent:true,opacity:eo});
+  const l=new THREE.LineSegments(eg,lm); if(dashed) l.computeLineDistances(); g.add(m,l); g.position.copy(pos); scene.add(g); return g; }
+const box=(w,h,d,x,y,z,o)=>solid(new THREE.BoxGeometry(w,h,d),new THREE.Vector3(x,y+h/2,z),o);
+const cyl=(r,len,x,y,z,axis='x',o)=>{ const g=new THREE.CylinderGeometry(r,r,len,24,1); if(axis==='x') g.rotateZ(Math.PI/2); if(axis==='z') g.rotateX(Math.PI/2); return solid(g,new THREE.Vector3(x,y,z),o); };
+const setOp=(g,o)=>g.traverse(c=>{ if(c.material){ c.material.opacity=(c.isMesh?(c.userData.base??(c.userData.base=c.material.opacity)):(c.userData.base??(c.userData.base=c.material.opacity)))*o; c.visible=o>.01; } });
+
+// --- the data hall (open on two sides, as drawn)
+const hall=new THREE.Group(); scene.add(hall);
+const slab=box(14,.3,9,0,0,0,{}); const wallB=box(14,4.2,.25,0,.3,-4.4,{}); const wallL=box(.25,4.2,9,-6.9,.3,0,{});
+const racks=[...Array(5)].map((_,i)=>box(1.1,2.6,1.4,-4.8+i*1.25,.3,-1.4,{fill:0x2f3034}));
+const cdu=box(1.5,2.4,1.4,1.8,.3,-1.4,{fill:0x34302a,edge:0xe3c27a});
+// --- outside: heat exchanger, heat pump, buffer tank, dry cooler
+const hx=box(1.2,1.8,1.6,10,0,1.5,{edge:0xe3c27a}); const hpU=box(2.4,2.4,2.2,12.6,0,1.5,{edge:0xe0714f}); const tank=cyl(1.1,3.6,16.4,1.4,1.5,'x',{edge:0xe0714f});
+const dry=box(4.6,1.4,2.4,10.5,0,-6.5,{edge:0x6fa8dc}); const fans=[0,1].map(k=>{ const f=new THREE.Group(); const c=new THREE.Mesh(new THREE.CircleGeometry(.85,32),new THREE.MeshBasicMaterial({color:0x232427})); c.rotation.x=-Math.PI/2;
+  const r=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.CircleGeometry(.85,32)),new THREE.LineBasicMaterial({color:0x6fa8dc})); r.rotation.x=-Math.PI/2;
+  const bl=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-.8,0,0),new THREE.Vector3(.8,0,0),new THREE.Vector3(0,0,-.8),new THREE.Vector3(0,0,.8)]),new THREE.LineBasicMaterial({color:0x6fa8dc}));
+  f.add(c,r,bl); f.position.set(9.4+k*2.2,1.45,-6.5); scene.add(f); return {f,bl}; });
+
+// --- pipes as tubes that draw on, with moving beads for flow
+const PIPES=[];
+function pipe(pts,col,r,t0,dur,beads=10,speed=.12){ const curve=new THREE.CurvePath(); for(let i=1;i<pts.length;i++) curve.add(new THREE.LineCurve3(pts[i-1],pts[i]));
+  const geo=new THREE.TubeGeometry(curve,Math.max(40,pts.length*30),r,8,false); const m=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:.9})); scene.add(m);
+  const B=[...Array(beads)].map(()=>{ const b=new THREE.Mesh(new THREE.SphereGeometry(r*1.25,10,8),new THREE.MeshBasicMaterial({color:new THREE.Color(col).lerp(new THREE.Color(0xffffff),.55),transparent:true,opacity:.85})); scene.add(b); return b; });
+  const p={curve,geo,m,B,t0,dur,speed,len:geo.index.count}; PIPES.push(p); return p; }
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+const pCDU=pipe([V(2.5,2.2,-1.4),V(2.5,3.6,-1.4),V(8,3.6,-1.4),V(8,1.6,1.5),V(9.4,1.6,1.5)],COL.hot,.14,3.0,1.2,8);
+const pRet=pipe([V(9.4,.6,1.5),V(7.6,.6,1.5),V(7.6,.6,-.6),V(2.5,.6,-.6)],COL.cool,.1,3.6,1.0,6,.1);
+const pDry=pipe([V(8,3.6,-1.4),V(8,3.6,-6.5),V(8.2,1.0,-6.5)],COL.warm,.12,4.6,1.0,6);
+const pHP=pipe([V(10.6,1.2,1.5),V(11.4,1.2,1.5)],COL.hot,.14,5.8,.5,2);
+const pTank=pipe([V(13.8,1.6,1.5),V(14.6,1.6,1.5)],COL.hp,.14,6.3,.5,2);
+const MAIN_Z=[1.5,46];
+const pSup=pipe([V(18.2,1.6,1.5),V(19.5,.5,1.5),V(19.5,.5,MAIN_Z[1])],COL.hp,.22,7.0,3.6,18,.04);
+const pRtn=pipe([V(20.3,.5,MAIN_Z[1]),V(20.3,.5,2.2),V(18.2,1.0,2.2)],COL.cool,.18,7.4,3.6,16,.04);
+// --- receivers along the main, as on the sheet (dashed: possible)
+const RECV=[['5','School','else','Heerlen (claim)',9,'r',5,4,6],['4','District network','here','TELUS Garden, Vancouver',16,'l',4,3,5],['3','Pool','else','Paris, 2017',23,'r',8,2.4,6],['2','Housing','else','Helsinki (claim)',31,'l',5,9,5],['1','Greenhouse','pilot','QScale, Lévis',40,'r',8,3,6]];
+const RX=RECV.map(([n,nm,k,where,z,side,w,h,d],i)=>{ const x=side==='r'?27:12.5; const g=box(w,h,d,x,0,z,{dashed:true,edge:0xd9d4cc,eo:.85});
+  const t0=7.6+i*.62; const br=pipe([V(19.5,.5,z),V(side==='r'?x-w/2:x+w/2,.5,z)],COL.hp,.1,t0+.3,.4,3,.1); return {g,br,n,nm,k,where,z,side,x,h,w,t0}; });
+// --- labels anchored in 3D
+const labs=[]; const lab=(html,p,t0,t1,dx=0,dy=0)=>{ const e=document.createElement('div'); e.className='lab'; e.innerHTML='<span class="dot"></span>'+html; document.body.appendChild(e); labs.push({e,p,t0,t1,dx,dy}); return e; };
+lab('<b>Servers</b><i>power in, heat out</i>',V(-4.8,3.4,-1.4),1.6,6.4,-20,-40);
+lab('<b>Into liquid: 48–75 %</b><i>of server heat, with cold plates</i>',V(1.8,2.9,-1.4),3.3,6.4,20,-10);
+lab('<b>Dry cooler rejects it</b><i>free cooling 7,109 h a year</i>',V(12.8,1.6,-6.5),4.8,10.2,24,-30);
+lab('<b>Heat pump lifts it</b><i>to 60 °C and up</i>',V(12.6,2.6,1.5),6.0,10.2,18,-50);
+const DIST=[[23,'≤1,000 m','pool'],[31,'≤1,200 m','housing'],[40,'≤1,500 m','greenhouse']];
+DIST.forEach(([z,a,b],i)=>lab(`<b>${a}</b><i>${b}</i>`,V(19.9,0,z+.2),9.0+i*.5,19.4,-170,24));
+const note=document.createElement('div'); note.className='lab'; note.style.cssText+='font-size:26px;left:120px;top:300px'; note.innerHTML='<b>Distances</b><i style="font-size:22px;margin-top:6px">search radii from a Dutch study, 5-year payback;<br>not limits tested for Vancouver</i>'; document.body.appendChild(note);
+RX.forEach(r=>lab(`<b>${r.n}  ${r.nm}</b><br><span class="tag ${r.k}">${r.k==='here'?'Built here':r.k==='pilot'?'Pilot':'Built elsewhere'}: ${r.where}</span>`,V(r.x,r.h+.6,r.z),r.t0+.6,19.4,r.side==='r'?30:-300,-20));
+const fx=document.createElement('div'); fx.className='lab'; fx.style.cssText+='font-size:30px;left:120px;top:300px'; fx.innerHTML='<b>Servers change; the pipe stays</b><i style="font-size:24px;margin-top:6px">servers about 5–6 yr, pipe 30–50 yr</i>'; document.body.appendChild(fx);
+// captions
+const CAP=[[.6,4.4,'Servers make heat'],[4.6,7.0,'Rejected, or recovered'],[7.2,11.8,'Piped to receivers'],[12.0,19.4,'Tested, condition by condition']].map(([a,b,x])=>{const e=document.createElement('div'); e.className='cap'; e.textContent=x; document.body.appendChild(e); return {a,b,e};});
+const heatUp=[...Array(15)].map((_,i)=>{ const m=new THREE.Mesh(new THREE.ConeGeometry(.12,.4,8),new THREE.MeshBasicMaterial({color:COL.warm,transparent:true})); scene.add(m); return {m,x:-4.8+(i%5)*1.25,ph:i*.37}; });
+const plume=[...Array(10)].map((_,i)=>{ const m=new THREE.Mesh(new THREE.SphereGeometry(.12,8,6),new THREE.MeshBasicMaterial({color:COL.warm,transparent:true})); scene.add(m); return {m,k:i%2,ph:i*.31}; });
+
+// camera keys: [t, target, half-height]
+const KEYS=[[0,V(0,1.5,0),8.6],[4.2,V(.5,1.5,0),8.8],[5.0,V(6.5,1.5,-1.5),10],[6.6,V(9,1.5,-1),10.4],[8.0,V(18,1,16),14],[11.4,V(19,1,28),16.5],[12.6,V(9.5,1,24.5),21.5],[19.6,V(9.5,1,24.5),22.5]];
+function camAt(t){ let i=KEYS.findIndex(k=>k[0]>t); if(i<0) i=KEYS.length; if(i===0) i=1; const a=KEYS[i-1], b=KEYS[Math.min(i,KEYS.length-1)]; const u=b===a?1:ease((t-a[0])/(b[0]-a[0]));
+  const tg=a[1].clone().lerp(b[1],u), hh=a[2]+(b[2]-a[2])*u; const ox=150/W*2*hh*W/H, oy=20/H*2*hh; cam.left=-hh*W/H-ox; cam.right=hh*W/H-ox; cam.top=hh+oy; cam.bottom=-hh+oy; cam.position.copy(tg).addScaledVector(DIR,100); cam.lookAt(tg); cam.updateProjectionMatrix(); }
+function R(t){
+  camAt(t);
+  // the hall builds
+  [slab,wallB,wallL].forEach((g,i)=>setOp(g,seg(t,.1+i*.15,.7+i*.15)));
+  racks.forEach((g,i)=>{ const u=seg(t,.5+i*.18,1.1+i*.18); g.scale.y=Math.max(.001,u); g.position.y=.3+1.3*u; setOp(g,u>0?1:0); });
+  const u=seg(t,1.8,2.4); cdu.scale.y=Math.max(.001,u); cdu.position.y=.3+1.2*u; setOp(cdu,u>0?1:0);
+  heatUp.forEach(h=>{ const q=((t*.6)+h.ph)%1; h.m.position.set(h.x,3+q*2.2,-1.4); h.m.material.opacity=(1-q)*seg(t,1.6,2.4)*(1-seg(t,7,8)); });
+  [[hx,2.8],[dry,4.4],[hpU,5.6],[tank,6.1]].forEach(([g,a])=>setOp(g,seg(t,a,a+.5)));
+  fans.forEach(({f,bl},k)=>{ f.visible=t>4.6; bl.rotation.y=t*4+k; f.traverse(c=>{if(c.material){c.material.transparent=true; c.material.opacity=seg(t,4.6,5);}}); });
+  plume.forEach(p=>{ const q=((t*.5)+p.ph)%1; p.m.position.set(9.4+p.k*2.2+Math.sin(q*6+p.ph)*.25,1.6+q*3,-6.5); p.m.material.opacity=(1-q)*seg(t,5,5.6)*.8; });
+  // pipes draw on, then flow
+  PIPES.forEach(p=>{ const d=p.dur?seg(t,p.t0,p.t0+p.dur):(t>=p.t0?1:0); p.geo.setDrawRange(0,Math.floor(p.len*d)/3*3); p.m.visible=d>0;
+    p.B.forEach((b,i)=>{ const q=((t*p.speed*3)+i/p.B.length)%1; b.position.copy(p.curve.getPointAt(q)); b.visible=d>=1; b.material.opacity=.85; }); });
+  RX.forEach(r=>setOp(r.g,seg(t,r.t0,r.t0+.6)));
+  // labels follow their 3D anchors
+  labs.forEach(l=>{ const v=l.p.clone().project(cam); let x=(v.x+1)/2*W+l.dx; const y=(1-v.y)/2*H+l.dy; const ew=l.e.offsetWidth; if(x+ew>W-30) x=W-30-ew; l.e.style.transform=`translate(${x}px,${y}px)`; l.e.style.opacity=win(t,l.t0,l.t1); });
+  CAP.forEach(c=>c.e.style.opacity=win(t,c.a,c.b)); fx.style.opacity=0; note.style.opacity=win(t,9.4,12.0);
+  document.getElementById('hd').style.opacity=seg(t,.2,.9); document.getElementById('key').style.opacity=win(t,3.2,12.4);
+  R3.render(scene,cam);
+}
+window.DUR=19.8; // the conditions the tool tests for heat (diagram_data.json conditions; heat sale approval from the sheet)
+const COND=[['Technical','Enough heat for the receiver\'s demand'],['Technical','Hot enough, or the heat pump\'s lift'],['Spatial','Distance to the receiver'],['Spatial','Heat demand along the street'],['Spatial','Pipe route and right of way'],['Temporal','Supply meets demand, hour by hour'],['Economic','Price window: operator\'s floor, receiver\'s ceiling'],['Regulatory','Heat sale needs approval (BCUC)']];
+const cp=document.createElement('div'); cp.style.cssText='position:fixed;left:120px;top:250px;font-family:Plex,sans-serif;color:#f2efea'; cp.innerHTML='<div style="font:500 22px Plex;color:#bdb9b2;letter-spacing:.02em;margin-bottom:14px">Conditions to investigate</div>'+COND.map(([h,x])=>`<div class="ci" style="opacity:0;display:flex;align-items:baseline;gap:14px;margin:0 0 13px"><span style="display:inline-block;width:12px;height:12px;border:2px solid #e7a39c;transform:rotate(45deg);flex:none;position:relative;top:1px"></span><span style="font:400 18px Plex;color:#918d86;width:104px;flex:none">${h}</span><span style="font:500 26px Plex">${x}</span></div>`).join(''); document.body.appendChild(cp);
+const CI=[...cp.querySelectorAll('.ci')]; const R1=R; R=t=>{ R1(t); cp.style.opacity=win(t,12.3,19.6); CI.forEach((e,i)=>{ e.style.opacity=seg(t,12.6+i*.55,13.1+i*.55); e.style.transform=`translateX(${(1-seg(t,12.6+i*.55,13.1+i*.55))*-16}px)`; }); };
+window.R=R; R(0);
+</script></body></html>

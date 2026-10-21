@@ -1,0 +1,72 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Report and end</title><style>
+@font-face{font-family:Plex;font-weight:400;src:url(plex-400.woff2)}@font-face{font-family:Plex;font-weight:500;src:url(plex-500.woff2)}
+html,body{margin:0;background:#1f2023;overflow:hidden;width:1920px;height:1080px;font-family:Plex,sans-serif;color:#f2efea}
+.pg{position:absolute;left:0;top:0;width:425px;height:550px;transform-origin:0 0;box-shadow:0 24px 50px rgba(0,0,0,.55);opacity:0}
+.pg img{width:100%;height:100%;display:block}
+.pl{position:absolute;left:0;top:0;font:500 24px/1.2 Plex;color:#f2efea;opacity:0;text-align:center;width:425px}
+.pl i{display:block;font:400 19px Plex;color:#bdb9b2;font-style:normal;margin-top:4px}
+#band{position:absolute;left:0;right:0;bottom:0;height:250px;background:linear-gradient(rgba(31,32,35,0),rgba(31,32,35,.94) 55%)}
+.cap{position:absolute;left:120px;top:915px;font:500 72px/1 Plex;opacity:0;white-space:nowrap;letter-spacing:-.01em}
+#logo{position:absolute;inset:0;opacity:0}
+#title{position:absolute;left:120px;top:700px;opacity:0}
+#title .t{font:400 150px/1 Plex;letter-spacing:-.02em}
+#title .s{font:500 24px Plex;letter-spacing:.32em;color:#bdb9b2;margin:22px 0 0 6px}
+#title .r{width:70px;height:4px;background:#CC746C;margin:22px 0 0 6px}
+#title .a{font:400 22px Plex;color:#918d86;margin:26px 0 0 6px}
+</style></head><body>
+<div id="stage"></div><div id="dim" style="position:absolute;inset:0;background:#1f2023;opacity:0"></div>
+<div id="gap" style="position:absolute;left:120px;top:250px;opacity:0;font-family:Plex">
+ <div style="font:500 24px Plex;color:#bdb9b2;margin-bottom:22px">From the report: none of the 688 buildings pays back yet</div>
+ <div class="gi" style="font:500 52px/1.35 Plex">Higher gas prices</div><div class="gi" style="font:500 52px/1.35 Plex">A cheaper pipe route</div><div class="gi" style="font:500 52px/1.35 Plex">A pipe already in the street</div><div class="gi" style="font:500 52px/1.35 Plex">A cheaper heat pump</div></div>
+<div id="hl" style="position:absolute;border:3px solid #e7a39c;border-radius:6px;opacity:0"></div>
+<div id="vd" style="position:absolute;left:0;right:0;top:430px;text-align:center;font:500 96px/1 Plex;letter-spacing:-.01em;opacity:0">Trade-offs, <span style="color:#e7a39c">not verdicts</span></div>
+<div id="band"></div>
+<svg id="logo" width="1920" height="1080" viewBox="0 0 1920 1080"></svg>
+<div id="title"><div class="t">Beyond Data</div><div class="s">EXCHANGE SYSTEMS</div><div class="r"></div><div class="a">Jenna Bruggeman, M.Arch, UBC</div></div>
+<script>
+// Report snippets (the corrected 1425 Clark Dr reports, 20 Oct) and the end screen, after the booklet cover: a red square with lines running out from it.
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;}, seg=(t,a,b)=>ease((t-a)/(b-a)), win=(t,a,b,f=.45)=>Math.min(seg(t,a,a+f),1-seg(t,b-f,b));
+const st=document.getElementById('stage');
+const mk=(src)=>{ const d=document.createElement('div'); d.className='pg'; d.innerHTML=`<img src="${src}">`; st.appendChild(d); return d; };
+const lbl=(h)=>{ const d=document.createElement('div'); d.className='pl'; d.innerHTML=h; st.appendChild(d); return d; };
+const TC=mk('rep/p-12.jpg'); const C1=mk('rep/r1-1.jpg'), C2=mk('rep/p-01.jpg'), C3=mk('rep/r3-01.jpg'), H=mk('rep/p-04.jpg'), O=mk('rep/p-08.jpg'), T=mk('rep/p-11.jpg');
+const L=[lbl('Residents<i>What it means for me</i>'),lbl('Neighbourhood<i>What it means for the neighbourhood</i>'),lbl('Full<i>How it is worked out</i>')];
+const caps=[[.5,5.0,'A report for each level'],[5.2,10.4,'What it reveals'],[10.6,14.2,'What would close the gap'],[14.6,19.0,'Edmonton: same logic, different answer']].map(([a,b,x])=>{const e=document.createElement('div'); e.className='cap'; e.textContent=x; document.body.appendChild(e); return {a,b,e};});
+const place=(e,x,y,s,o,r=0)=>{ e.style.transform=`translate(${x}px,${y}px) rotate(${r}deg) scale(${s})`; e.style.opacity=o; };
+// logo lines
+const NS='http://www.w3.org/2000/svg', svg=document.getElementById('logo'); const el=(t,a)=>{const e=document.createElementNS(NS,t); for(const k in a) e.setAttribute(k,a[k]); svg.appendChild(e); return e;};
+const COLS=['#d99a4e','#8fc3dc','#a9b4e0','#a9c49a','#e7a39c','#bdb9b2','#d99a4e','#8fc3dc'];
+let sd=5; const rnd=()=>(sd=(sd*16807)%2147483647)/2147483647; const CX=1240, CY=430;
+const LINES=[...Array(46)].map((_,i)=>{ const side=i%4, off=(rnd()-.5)*150; let x=CX+(side===0?90:side===2?-90:off), y=CY+(side===1?70:side===3?-70:off*.7); let d=`M${x},${y}`;
+  const dir=[[1,0],[0,1],[-1,0],[0,-1]][side]; let L1=60+rnd()*220; x+=dir[0]*L1; y+=dir[1]*L1; d+=` L${x},${y}`;
+  const dg=rnd()<.6?(rnd()<.5?1:-1):0; const L2=80+rnd()*420; if(dg){ x+=dir[0]*L2*.7+(dir[1]?dg*L2*.7:0); y+=dir[1]*L2*.7+(dir[0]?dg*L2*.7:0);} else { x+=dir[0]*L2; y+=dir[1]*L2; } d+=` L${x},${y}`;
+  const L3=60+rnd()*500; x+=dir[0]*L3; y+=dir[1]*L3; d+=` L${x},${y}`;
+  const p=el('path',{d,fill:'none',stroke:COLS[i%COLS.length],'stroke-width':2+(i%3),pathLength:1,'stroke-dasharray':'1 1','stroke-linecap':'square'}); const end=el('rect',{x:x-5,y:y-5,width:10,height:10,fill:COLS[i%COLS.length],opacity:0}); return {p,end,t0:22.0+rnd()*1.2}; });
+const chip=el('rect',{x:CX-90,y:CY-70,width:180,height:140,fill:'#d4202b'}); [...Array(6)].forEach((_,k)=>el('line',{x1:CX-70,y1:CY-46+k*18,x2:CX+70,y2:CY-46+k*18,stroke:'#f2a3a8','stroke-width':1.5,opacity:.6}));
+function R(t){
+  // three covers fan in, one per level
+  const xs=[260,748,1236];
+  [C1,C2,C3].forEach((c,i)=>{ const a=.2+i*.25, u=seg(t,a,a+.9); let x=xs[i], y=170+(1-u)*120, s=1, o=u;
+    if(i===1){ const v=seg(t,3.0,4.0); x=xs[1]+(140-xs[1])*v; y=y+(250-170)*v; s=1-.08*v; } else o*=1-seg(t,3.0,3.6);
+    if(i===1) o*=1-seg(t,5.0,5.6); place(c,x,y,s,o,(i-1)*1.5*(1-seg(t,3,4))); });
+  L.forEach((l,i)=>place(l,xs[i],740,1,seg(t,.9+i*.25,1.5+i*.25)*(1-seg(t,2.8,3.3))));
+  // inner pages slide in beside the neighbourhood cover
+  [[H,560],[O,1010],[T,1460]].forEach(([e,x],i)=>{ const a=3.4+i*.3, u=seg(t,a,a+.8); place(e,x+(1-u)*200,250,.92,u*(i===0?1:1-seg(t,5.0,5.6))); });
+  // zoom into the heat page's scatter: every building within 3 km, cost against what the heat is worth
+  const z=seg(t,5.2,7.2); if(t>5.2){ const s=.92+(3.4-.92)*z, x=560+(420-560)*z, y=250+(-770-250)*z; place(H,x,y,s,1-seg(t,14.0,14.6)); }
+  // what would close the gap (the report's own list), over the dimmed page
+  document.getElementById('dim').style.opacity=.86*win(t,10.4,14.4,.5); document.getElementById('gap').style.opacity=win(t,10.6,14.2);
+  [...document.querySelectorAll('.gi')].forEach((e,i)=>{ const a=11.0+i*.5; e.style.opacity=seg(t,a,a+.4); e.style.transform=`translateX(${(1-seg(t,a,a+.4))*-20}px)`; });
+  // Two cities: the same data centre, heat worth about $40 in Vancouver and $13 in Edmonton
+  const u=seg(t,14.4,15.6); place(TC,180+(78-180)*u,220+(-106-220)*u,1.4+(4.2-1.4)*u,seg(t,14.4,14.9)*(1-seg(t,18.8,19.4)));
+  const hl=document.getElementById('hl'); hl.style.left='150px'; hl.style.top='372px'; hl.style.width='1620px'; hl.style.height='112px'; hl.style.opacity=win(t,16.0,18.8);
+  document.getElementById('vd').style.opacity=win(t,19.4,22.2);
+  caps.forEach(c=>c.e.style.opacity=win(t,c.a,c.b));
+  document.getElementById('band').style.opacity=1-seg(t,18.8,19.4);
+  // the end screen
+  svg.style.opacity=seg(t,21.4,22); chip.setAttribute('opacity',seg(t,21.6,22.1));
+  LINES.forEach(l=>{ l.p.setAttribute('stroke-dashoffset',1-seg(t,l.t0,l.t0+1.6)); l.end.setAttribute('opacity',seg(t,l.t0+1.5,l.t0+1.8)); });
+  const ti=document.getElementById('title'); ti.style.opacity=seg(t,23.6,24.4); ti.style.transform=`translateY(${(1-seg(t,23.6,24.4))*16}px)`;
+}
+window.DUR=28; window.R=R; R(0);
+</script></body></html>
