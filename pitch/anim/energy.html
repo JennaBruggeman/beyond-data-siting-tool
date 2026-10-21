@@ -1,0 +1,78 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Energy</title></head><body>
+<script src="three.min.js"></script><script src="sheet3d.js"></script>
+<script>
+// Sheet 2, Energy (Exchange sheets draft v3). Figures as on the sheet: battery bridge 10–15 s to generator start; curtail ≥10 % on 24 h notice,
+// ≥144 h a year; paid to curtail $50/kW-yr per season, Nov–Mar (BC Hydro); fossil generators can't count in BC Hydro demand response;
+// Alberta limit 1,200 MW, fully allocated; shaded alert: Alberta grid alert, 13 Jan 2024, 3:30–8:40 p.m.; the day is illustrative.
+const G=0xa9b4e0, BAT=0x7fbf8f, GEN=0x9a968f;
+setup({n:'2',title:'Energy',sub:'The grid connection is held, not used up; the site can use less when asked',
+ key:[['#a9b4e0','grid draw'],['#a9b4e0','curtailed',1],['#7fbf8f','carried by batteries'],['#9a968f','carried by generators',1]],
+ caps:[[.6,5.0,'The connection is held'],[5.3,11.8,'Using less when asked'],[12.1,15.2,'Who could take part']],
+ conds:[['Technical','Rooftop solar','share of the load'],['Technical','Battery bridge 10–15 s','to generator start'],['Temporal','Curtail ≥10 %','on 24 h notice'],['Economic','Paid to curtail $50/kW-yr','BC Hydro, Nov–Mar'],['Regulatory','Fossil generators can\'t count','in BC Hydro demand response'],['Regulatory','Alberta limit 1,200 MW','fully allocated'],['Environmental','Generator testing','noise, exhaust']],
+ keys:[[0,V(.5,1.5,0),8.6],[4.4,V(3,1.5,3),10.4],[11.6,V(5,1,15),16.5,150],[13.8,V(5,1,18),19,330],[20,V(5,1,18),19.5,330]],dur:15.4,condAt:99,keyIn:3});
+// hall
+const slab=box(12,.3,8,0,0,0), wB=box(12,4.2,.25,0,.3,-3.9), wL=box(.25,4.2,8,-5.9,.3,0);
+const racks=[0,1,2,3].map(i=>box(1.1,2.6,1.3,-4.3+i*1.25,.3,-1.6,{fill:0x2f3034}));
+const ups=[0,1,2].map(i=>box(.8,1.6,1.1,.6+i*.95,.3,-1.6,{edge:BAT}));
+const swg=box(1.8,2.2,1,4.2,.3,-1.6,{edge:G});
+const pv=[0,1].map(i=>{ const g=box(2.4,.08,1.6,1.2+i*2.7,4.6,-4.9,{edge:0x8fa3c9,fill:0x2f3a4a}); g.rotation.x=.35; return g; });
+// outside: substation, generators
+const sub=box(2.4,2,2.4,8,0,3,{edge:G}); const ins=[0,1,2].map(i=>cyl(.15,.8,7.3+i*.7,2.4,3,'y',{edge:G}));
+const gens=[0,1].map(i=>box(2,1.8,1.6,4.5+i*2.5,0,8,{edge:GEN})); const stacks=[0,1].map(i=>cyl(.15,1,5+i*2.5,2.3,8.3,'y',{edge:GEN}));
+// lines
+const feed=pipe([V(9.2,1,3),V(10.5,.3,3),V(10.5,.3,34)],G,.16,2.4,1.8,18,.05,{rev:true}); feed.custom=true;
+const inHall=pipe([V(6.8,1,3),V(5.6,1,3),V(5.6,1,-1.6),V(5.1,1,-1.6)],G,.12,3.6,.8,5,.08,{rev:true}); inHall.custom=true;
+const toRacks=pipe([V(3.3,2.6,-1.6),V(3.3,2.9,-2.5),V(-4.3,2.9,-2.5)],G,.1,3.9,.8,6,.08); toRacks.custom=true;
+const genLine=pipe([V(5.5,1,7.2),V(5.5,1,5),V(7,1,5),V(7,1,4.2)],GEN,.12,4.8,.8,5,.06); genLine.custom=true;
+const batLine=pipe([V(1.5,1.9,-1.6),V(1.5,2.9,-2.5)],BAT,.1,4.2,.4,3,.06); batLine.custom=true;
+// control signal, dash-dot (static)
+const csig=new THREE.Line(new THREE.BufferGeometry().setFromPoints([V(11.4,.3,34),V(11.4,.3,4.2),V(9.4,2.4,4.2)]),new THREE.LineDashedMaterial({color:0xd9d4cc,dashSize:.6,gapSize:.3,transparent:true,opacity:0})); csig.computeLineDistances(); scene.add(csig);
+// receivers along the feeder
+const rcv=[box(3,7,3,5.5,0,14,{dashed:true}),box(3.4,2.2,2.6,15.2,0,20,{edge:G}),box(3.6,3,3,5.5,0,26,{}),box(2.4,1.8,2,15.2,0,31,{edge:BAT})];
+const rcvT=[12.0,12.4,12.8,13.2];
+recv('1','Next tenant','nyk','connection kept?',V(5.5,7.4,14),12.3,15.2,26,-30);
+recv('2','The utility','else','Indiana, Google',V(15.2,2.6,20),12.7,15.2,26,-20);
+recv('3','The grid operator','here','AESO reserves',V(5.5,3.4,26),13.1,15.2,-300,-20);
+recv('4','Grid services','else','Ireland, UPS (claim)',V(15.2,2.2,31),13.5,15.2,26,-20);
+// labels
+lab('<b>Servers</b>',V(-3.6,3.3,-1.6),1.1,5.2,-10,-40);
+lab('<b>UPS and batteries</b>',V(1.5,2.1,-1.6),1.8,5.2,20,-6);
+lab('<b>Rooftop solar</b>',V(2.6,5.2,-4.9),2.4,5.2,20,-30);
+lab('<b>Site substation</b><i>BC Hydro: allocation; AESO: large-load limit</i>',V(8,2.2,3),3.2,11.6,26,-10);
+lab('<b>Feeder, off site</b>',V(10.5,.3,10),3.4,8,26,0);
+const bb=lab('<b>Battery bridge 10–15 s</b><i>to generator start</i>',V(2.4,2.1,-1.6),8.2,11.6,20,-6);
+lab('<b>Generators</b><i>testing: noise, exhaust</i>',V(7,2,8),8.6,11.6,26,-10);
+// the winter day
+const A0=15.5/24, A1=(20+40/60)/24;
+const day=panel(`<div class="ph">Transfer, over a winter day</div><svg width="560" height="210" viewBox="0 0 560 210" style="display:block;font-family:Plex">
+ <rect x="${40+A0*480}" y="20" width="${(A1-A0)*480}" height="150" fill="#3a3c41"/>
+ <line x1="40" y1="170" x2="520" y2="170" stroke="#5a5e64"/><line x1="40" y1="20" x2="40" y2="170" stroke="#5a5e64"/>
+ <path id="dl" d="M40,40 H${40+A0*480} V82 H${40+A1*480} V40 H520" fill="none" stroke="#a9b4e0" stroke-width="3" pathLength="1" stroke-dasharray="1 1"/>
+ <text x="2" y="45" fill="#bdb9b2" font-size="15">100%</text>
+ ${['00:00','12:00','24:00'].map((x,i)=>`<text x="${40+i*240}" y="192" fill="#bdb9b2" font-size="15" text-anchor="middle">${x}</text>`).join('')}
+ <line id="ph" x1="40" y1="16" x2="40" y2="172" stroke="#e7a39c" stroke-width="2"/>
+ <text x="${40+A0*480+2}" y="110" fill="#e7a39c" font-size="15">less, when asked</text></svg>
+ <div style="font:400 16px/1.4 Plex;color:#bdb9b2;margin-top:6px">shaded: Alberta grid alert, 13 Jan 2024, 3:30–8:40 p.m.<br><span style="color:#e7a39c">The day is illustrative, not a measured load.</span></div>`,5.2,12.0,'left:120px;top:250px');
+const dl=day.querySelector('#dl'), ph=day.querySelector('#ph');
+const dayU=t=>cl((t-5.8)/5.2);   // 0→1 across the day
+const inAlert=t=>{ const u=dayU(t); return u>A0&&u<A1&&t<11.2; };
+let fo=0,fg=0,fb=0,last=0;
+UPD=t=>{
+  [slab,wB,wL].forEach((g,i)=>setOp(g,seg(t,.1+i*.15,.7+i*.15)));
+  racks.forEach((g,i)=>{ const u=seg(t,.5+i*.18,1.1+i*.18); g.scale.y=Math.max(.001,u); g.position.y=.3+1.3*u; setOp(g,u>0?1:0); });
+  ups.forEach((g,i)=>{ setOp(g,seg(t,1.4+i*.15,1.8+i*.15)); g.children[1].material.color.set(inAlert(t)?0xb6f0c3:BAT); });
+  setOp(swg,seg(t,1.9,2.4)); pv.forEach((g,i)=>setOp(g,seg(t,2.2+i*.2,2.7+i*.2)));
+  setOp(sub,seg(t,2.6,3.1)); ins.forEach(g=>setOp(g,seg(t,2.8,3.2)));
+  gens.forEach((g,i)=>setOp(g,seg(t,4.8+i*.2,5.3+i*.2))); stacks.forEach(g=>setOp(g,seg(t,5,5.4)));
+  csig.material.opacity=.7*seg(t,4,4.8);
+  rcv.forEach((g,i)=>setOp(g,seg(t,rcvT[i],rcvT[i]+.5)));
+  // flows: grid draw drops in the alert; batteries bridge, then generators carry part of the load
+  const a=inAlert(t), dt=t-last; last=t;
+  fo+=dt*(a?.03:.16); fb+=dt*.2; fg+=dt*.12;
+  feed.off=-fo; inHall.off=-fo; toRacks.off=fo; feed.flow=inHall.flow=a?.35:1;
+  const u=dayU(t), bt=a&&u<A0+.02; batLine.flow=bt?1:0; batLine.off=fb; genLine.flow=a&&!bt?1:0; genLine.off=fg;
+  feed.m.material.opacity=a?.45:.9;
+  ph.setAttribute('x1',40+u*480); ph.setAttribute('x2',40+u*480); dl.setAttribute('stroke-dashoffset',1-u);
+};
+R(0);
+</script></body></html>

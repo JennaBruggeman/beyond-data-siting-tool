@@ -1,0 +1,59 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Materials</title></head><body>
+<script src="three.min.js"></script><script src="sheet3d.js"></script>
+<script>
+// Sheet 4, Materials (Exchange sheets draft v3). Figures as on the sheet: refresh 5–6 yr (servers average 4.4–5.7 yr); rare earths 3–4 g per 3.5-inch drive;
+// recovery: copper over 50 %, rare earths about 1 %; making one server 471 kg CO2e (one 2U model, operator claim, 2011); receivers: refurbisher and school or
+// community (Microsoft, claim; 83 % reuse, 17 % recycle), metal recycler (global rates), rare earths (not yet known).
+const M=0xa9c49a;
+setup({n:'4',title:'Materials',sub:'The building stays; the servers leave in batches, and most of what is in them is sorted out',
+ key:[['#a9c49a','equipment, whole'],['#7f9a73','materials'],['#a9c49a','possible, or sealed',1]],
+ caps:[[.6,4.8,'The building stays'],[5.0,11.8,'Servers leave in batches'],[12.1,15.2,'Where each batch could go']],
+ conds:[['Technical','Copper per MW','industry estimates only'],['Technical','Rare earths 3–4 g','per 3.5-inch drive'],['Temporal','Refresh 5–6 yr','servers average 4.4–5.7 yr'],['Economic','Who pays to refurbish?'],['Regulatory','Data security','the standard is not in our sources'],['Environmental','Recovery','copper over 50 %, rare earths about 1 %'],['Environmental','Making one server 471 kg CO₂e','operator claim, 2011']],
+ keys:[[0,V(1,3.2,1),9],[4.4,V(5,1.5,5),10.5,300],[11.2,V(6,1,12),14,200],[13.8,V(6,1,15),17,330],[20,V(6,1,15),17.5,330]],dur:15.4,condAt:99,keyIn:2.6});
+const slab=box(10,.3,8,0,0,0), wB=box(10,4,.25,0,.3,-3.9), wL=box(.25,4,8,-4.9,.3,0);
+const racks=[0,1,2].map(i=>box(1.1,2.6,1.3,-3.6+i*1.25,.3,-2,{fill:0x2f3034,edge:i===2?M:0xd9d4cc}));
+const drives=box(1.6,1,1.2,1.4,.3,0,{edge:M});
+const dock=box(4,1,3.2,6.5,0,2.8,{});
+const truck=new THREE.Group(); scene.add(truck);
+const cargo=solid(new THREE.BoxGeometry(5,2.8,2.4),V(0,2.5,0),{edge:M}); const cab=solid(new THREE.BoxGeometry(1.8,2.2,2.4),V(3.6,2.2,0),{}); scene.remove(cargo); scene.remove(cab); truck.add(cargo,cab);
+[[-1.6,1.25],[-1.6,-1.25],[1.4,1.25],[1.4,-1.25],[3.6,1.25],[3.6,-1.25]].forEach(([x,z])=>{ const w=solid(new THREE.CylinderGeometry(.55,.55,.3,20).rotateX(Math.PI/2),V(x,.6,z),{}); scene.remove(w); truck.add(w); });
+const route=pipe([V(10,.3,6),V(11,.3,6),V(11,.3,30)],M,.14,4.4,1.6,10,.05);
+const rv=[box(3.4,2,3,6,0,13,{edge:M}),box(3.4,2.2,3,16,0,18,{dashed:true,edge:M}),box(3.6,1.8,3,6,0,24,{edge:0x7f9a73})];
+const tri=new THREE.Mesh(new THREE.ConeGeometry(.5,.9,3),new THREE.MeshBasicMaterial({color:0xb79fd6,transparent:true})); tri.position.set(11,.5,31); scene.add(tri);
+const crates=[[6,2.2,13],[16,2.4,18],[6,2,24]].map(([x,y,z])=>{ const g=box(.8,.6,.8,x,y,z,{edge:M,fill:0x34382f}); return g; });
+const movingRack=box(1.1,2.6,1.3,0,.3,0,{fill:0x2f3034,edge:M});
+lab('<b>Racks and cabling</b>',V(-2.4,3.2,-2),1,4.8,-20,-40);
+lab('<b>Drives</b><i>wiped on site, or sealed and sent off site</i>',V(1.4,1.5,0),1.8,6.4,26,-10);
+lab('<b>A rack at refresh</b><i>every 5–6 years</i>',V(-1.1,3.2,-2),3.0,7.2,26,-40);
+lab('<b>Loading dock and truck</b><i>who pays to move it?</i>',V(8,3.8,3),4.6,8.6,26,-30);
+lab('<b>Route off site</b><i>distances?</i>',V(11,.3,20),6,11,26,0);
+const Y=[...Array(9)].map((_,i)=>4+i*5.5);
+panel(`<div class="ph">Transfer, over 50 years</div><svg width="520" height="150" viewBox="0 0 520 150" style="display:block;font-family:Plex">
+ <text x="0" y="24" fill="#bdb9b2" font-size="16">building</text><line x1="90" y1="19" x2="500" y2="19" stroke="#d9d4cc" stroke-width="6" stroke-dasharray="6 4"/>
+ <text x="0" y="58" fill="#bdb9b2" font-size="16">pipes</text><line x1="90" y1="53" x2="336" y2="53" stroke="#6a6d73" stroke-width="7"/><line x1="336" y1="53" x2="500" y2="53" stroke="#6a6d73" stroke-width="7" stroke-dasharray="3 3"/>
+ <text x="0" y="92" fill="#bdb9b2" font-size="16">servers</text>${Y.map((y,i)=>`<rect class="bt" x="${90+i*45.5}" y="80" width="42" height="16" fill="#a9c49a" fill-opacity=".25" stroke="#a9c49a"/>`).join('')}
+ ${[0,25,50].map((y,i)=>`<text x="${90+i*205}" y="124" fill="#bdb9b2" font-size="15" text-anchor="middle">${y} yr</text>`).join('')}
+ <line id="ph" x1="90" y1="8" x2="90" y2="104" stroke="#e7a39c" stroke-width="2"/></svg>
+ <div style="font:400 16px Plex;color:#bdb9b2;margin-top:4px">a batch leaves at each refresh</div>`,5.2,11.8,'left:120px;top:250px');
+const BT=[...document.querySelectorAll('.bt')], PH=document.getElementById('ph');
+recv('1','Refurbisher','else','Microsoft (claim), 83 % reuse',V(6,2.4,13),12.0,15.2,-400,-20);
+recv('2','School or community','else','Microsoft (claim)',V(16,2.6,18),12.4,15.2,26,-20);
+recv('3','Metal recycler','else','global rates; copper over half',V(6,2.2,24),12.8,15.2,-420,-10);
+recv('4','Rare earths','nyk','about 1 % recycled',V(11,.9,31),13.2,15.2,26,-10);
+const tpos=u=>{ const a=V(10.6,0,4.6), b=V(11,0,6), c=V(11,0,29); return u<.08?a.clone().lerp(b,u/.08):b.clone().lerp(c,(u-.08)/.92); };
+UPD=t=>{
+  [slab,wB,wL].forEach((g,i)=>setOp(g,seg(t,.1+i*.15,.7+i*.15)));
+  racks.forEach((g,i)=>{ const u=seg(t,.5+i*.2,1.1+i*.2); g.scale.y=Math.max(.001,u); g.position.y=.3+1.3*u; setOp(g,u>0&&!(i===2&&t>3.2)?1:0); });
+  setOp(drives,seg(t,1.4,1.9)); setOp(dock,seg(t,2,2.5));
+  // the refreshed rack slides out to the truck
+  const r=seg(t,3.2,4.6); movingRack.position.set(-1.1+(7-(-1.1))*r,.3+1.3+ (r>0&&r<1?.2:0),-2+(3.2+2)*r); setOp(movingRack,t>3.2&&t<4.7?1:0);
+  // the truck: arrives, loads, drives off along the route (twice, faster the second time)
+  setOp(cargo,seg(t,2.2,2.7)); setOp(cab,seg(t,2.2,2.7)); truck.children.forEach(c=>setOp(c,seg(t,2.2,2.7)));
+  const d1=seg(t,4.8,10.4); const p=tpos(d1); truck.position.set(p.x,0,p.z); truck.rotation.y=-Math.PI/2; truck.position.x+=0;
+  rv.forEach((g,i)=>setOp(g,seg(t,6+i*1.3,6.5+i*1.3)*(1)+seg(t,11.8,12.2)*0)); tri.material.opacity=seg(t,9.6,10.2);
+  crates.forEach((g,i)=>{ const a=6.3+i*1.3; setOp(g,seg(t,a,a+.4)); g.position.y=(i===1?2.4:2)+.3+(1-seg(t,a,a+.4))*1.2; });
+  const u=cl((t-5.6)/5.8); PH.setAttribute('x1',90+u*410); PH.setAttribute('x2',90+u*410);
+  BT.forEach((b,i)=>b.setAttribute('fill-opacity',u*410>i*45.5+20?.75:.15));
+};
+R(0);
+</script></body></html>
