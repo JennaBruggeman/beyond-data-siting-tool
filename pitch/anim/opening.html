@@ -8,7 +8,7 @@ svg{display:block;font-family:Plex,sans-serif}
 <svg id="s" width="1920" height="1080" viewBox="0 0 1920 1080"><defs><filter id="mono"><feColorMatrix type="saturate" values="0"/></filter></defs></svg>
 <script>
 // Pitch video, opening (0:00–0:35). One function R(t) draws the frame at t seconds, so frames can be captured one by one.
-const C={bg:'#202124',line:'#34373b',bld:'#3b3e43',fg:'#f2efea',mute:'#bdb9b2',faint:'#918d86',red:'#CC746C',red2:'#e7a39c',heat:'#c9a35a'};
+const C={bg:'#202124',line:'#34373b',bld:'#3b3e43',fg:'#f2efea',mute:'#bdb9b2',faint:'#918d86',red:'#CC746C',red2:'#e7a39c',heat:'#d99a4e'}; const XC={Heat:['#d99a4e','#ebc08a'],Power:['#6fa3d8','#a9c8ea'],Water:['#6fc3c3','#a8dede'],Space:['#b79fd6','#d6c5ea'],Materials:['#a9c49a','#cddfc2'],Sound:['#9a968f','#c9c5bf']};
 const s=document.getElementById('s'), NS='http://www.w3.org/2000/svg';
 let P=null; const el=(tag,a,parent=P||s)=>{const e=document.createElementNS(NS,tag); for(const k in a) e.setAttribute(k,a[k]); parent.appendChild(e); return e;};
 const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;};
@@ -72,22 +72,22 @@ const pole=(()=>{ const q=[]; for(let i=0;i<lr.length;i+=2) q.push([X(lr[i]*.78)
   const inside=(x,y)=>{ let c=false; for(let i=0,j=q.length-1;i<q.length;j=i++){ const [xi,yi]=q[i],[xj,yj]=q[j]; if((yi>y)!==(yj>y)&&x<(xj-xi)*(y-yi)/(yj-yi)+xi) c=!c; } return c; };
   const dseg=(x,y,[ax,ay],[bx,by])=>{ const dx=bx-ax,dy=by-ay,u=cl(((x-ax)*dx+(y-ay)*dy)/(dx*dx+dy*dy)); return Math.hypot(x-ax-u*dx,y-ay-u*dy); };
   let best=[960,420,-1]; for(let x=lx0;x<=lx1;x+=2) for(let y=ly0;y<=ly1;y+=2){ if(!inside(x,y)) continue; let m=1e9; for(let i=0;i+1<q.length;i++) m=Math.min(m,dseg(x,y,q[i],q[i+1])); if(m>best[2]) best=[x,y,m]; } return best; })();
-const dcLbl=el('text',{x:pole[0],y:pole[1],'text-anchor':'middle','dominant-baseline':'central','font-size':22,'font-weight':500,fill:C.fg}); dcLbl.textContent='Data centre';
-const lotLbl=el('text',{x:lx0-10,y:ly0-6,'text-anchor':'end','font-size':26,fill:C.mute}); lotLbl.textContent='Land';
+const dcLbl=el('text',{x:pole[0],y:pole[1],'text-anchor':'middle','dominant-baseline':'central','font-size':26,'font-weight':500,fill:C.fg}); dcLbl.textContent='Data centre';
+const lotLbl=el('text',{x:lx0-10,y:ly0-6,'text-anchor':'end','font-size':30,fill:C.mute}); lotLbl.textContent='Land';
 
 // --- what it takes in: power from the left along the street, water from below
 const inflow=(d,lx,ly,name)=>{ const g=el('g',{});
   const p=el('path',{d,fill:'none',stroke:C.fg,'stroke-width':2.5,pathLength:1,'stroke-dasharray':'1 1'},g);
   const m=el('path',{d,fill:'none',stroke:C.fg,'stroke-width':6,pathLength:1,'stroke-dasharray':'0.012 0.05','stroke-linecap':'round'},g);
-  const l=el('text',{x:lx,y:ly,'font-size':28,'font-weight':500,fill:C.fg},g); l.textContent=name; return {g,p,m,l}; };
+  const l=el('text',{x:lx,y:ly,'font-size':32,'font-weight':500,fill:C.fg},g); l.textContent=name; return {g,p,m,l}; };
 const pw=inflow(`M0,${ly1+28} H${940} V${420+(ly1-420)*.78}`,150,ly1+8,'Power');
 const wa=inflow(`M${lx1+26},800 V440 H${960+(lx1-960)*.78}`,lx1+46,760,'Water');
 // --- what it gives off, as waste: heat rising, noise spreading
 const gWaste=el('g',{});
 const heat=[...Array(6)].map(()=>el('polyline',{fill:'none',stroke:C.heat,'stroke-width':2.5,'stroke-linecap':'round'},gWaste));
 const rings=[...Array(3)].map(()=>el('circle',{cx:960,cy:420,fill:'none',stroke:C.mute,'stroke-width':1.5},gWaste));
-const heatLbl=el('text',{x:1010,y:140,'font-size':28,'font-weight':500,fill:C.heat},gWaste); heatLbl.textContent='Heat, wasted';
-const noiseLbl=el('text',{x:1150,y:300,'font-size':28,'font-weight':500,fill:C.mute},gWaste); noiseLbl.textContent='Noise';
+const heatLbl=el('text',{x:1010,y:140,'font-size':32,'font-weight':500,fill:C.heat},gWaste); heatLbl.textContent='Heat, wasted';
+const noiseLbl=el('text',{x:1150,y:300,'font-size':32,'font-weight':500,fill:C.mute},gWaste); noiseLbl.textContent='Noise';
 
 // --- six exchanges to neighbours (orthogonal routes, like pipes and cables along streets)
 const EX=[['Heat',-480,-170,-140],['Power',-540,230,-250],['Water',-200,250,0],['Space',520,260,250],['Materials',540,-240,140],['Sound',100,-320,0]];
@@ -96,12 +96,12 @@ const ex=EX.map(([name,dx,dy,mx],i)=>{
   const sx=960+Math.sign(dx)*75*(Math.abs(dx)>200?1:0)+(Math.abs(dx)<=200?dx*.3:0), sy=420+(Math.abs(dx)<=200?Math.sign(dy)*55:0);
   const want=[960+dx,420+dy]; const tb=blds.filter(o=>o.A>250&&!USED.some(u=>Math.hypot(u.x-o.x,u.y-o.y)<150)).reduce((a,o)=>Math.hypot(o.x-want[0],o.y-want[1])<Math.hypot(a.x-want[0],a.y-want[1])?o:a); const tx=tb.x, ty=tb.y, d=Math.abs(dx)>200?`M${sx},${sy} H${sx+mx} V${ty} H${tx}`:`M${sx},${sy} V${(sy+ty)/2} H${tx} V${ty}`;
   const g=el('g',{},gEx);
-  const p=el('path',{d,fill:'none',stroke:C.red,'stroke-width':3,pathLength:1,'stroke-dasharray':'1 1'},g);
-  const out=el('path',{d,fill:'none',stroke:C.red2,'stroke-width':7,pathLength:1,'stroke-dasharray':'0.01 0.07','stroke-linecap':'round'},g);
+  const [xc,xl]=XC[name]; const p=el('path',{d,fill:'none',stroke:xc,'stroke-width':3.5,pathLength:1,'stroke-dasharray':'1 1'},g);
+  const out=el('path',{d,fill:'none',stroke:xl,'stroke-width':7,pathLength:1,'stroke-dasharray':'0.01 0.07','stroke-linecap':'round'},g);
   const back=el('path',{d,fill:'none',stroke:C.fg,'stroke-width':7,pathLength:1,'stroke-dasharray':'0.008 0.072','stroke-linecap':'round'},g);
-  USED.push(tb); const b=el('polygon',{points:poly(tb.r),fill:C.red,'fill-opacity':0,stroke:C.red,'stroke-width':2.5},g);
+  USED.push(tb); const b=el('polygon',{points:poly(tb.r),fill:xc,'fill-opacity':0,stroke:xc,'stroke-width':2.5},g);
   const ly=dy<0?ty-46:ty+66;
-  const l=el('text',{x:tx,y:ly,'text-anchor':'middle','font-size':32,'font-weight':500,fill:C.fg},g); l.textContent=name;
+  const l=el('text',{x:tx,y:ly,'text-anchor':'middle','font-size':36,'font-weight':500,fill:xl},g); l.textContent=name;
   return {p,out,back,b,l,t0:i===0?18.8:22.6+(i-1)*.35}; });
 
 // --- captions: big, short, bottom left, on a dark band
@@ -109,17 +109,17 @@ P=null;
 const defs=el('defs',{}); const lg=el('linearGradient',{id:'fade',x1:0,y1:0,x2:0,y2:1},defs);
 el('stop',{offset:0,'stop-color':C.bg,'stop-opacity':0},lg); el('stop',{offset:.45,'stop-color':C.bg,'stop-opacity':.92},lg);
 el('rect',{x:0,y:800,width:1920,height:280,fill:'url(#fade)'});
-const tag=el('text',{x:120,y:96,'font-size':24,'font-weight':500,fill:C.mute}); tag.textContent='Beyond Data';
+const tag=el('text',{x:120,y:96,'font-size':24,'font-weight':500,fill:C.mute,opacity:0}); tag.textContent='';
 const CAPS=[[-9.2,-3.4,'A data centre serves the world'],[-2.6,4.6,'But it lives here'],[8.6,17.2,'A building type that only takes<tspan x="120" dy="62" font-size="44" fill="'+C.mute+'">from its immediate setting</tspan>',-50],[18.6,22.4,'What if it gave something back?'],[22.8,26.8,'…or many things?'],[27.4,34.4,'An exchange, <tspan fill="'+C.red2+'">both ways</tspan>']];
 const caps=CAPS.map(([a,b,txt,oy=0])=>{ const e=el('text',{x:120,y:985+oy,'font-size':80,'font-weight':500,fill:C.fg,'letter-spacing':'-0.01em'}); e.innerHTML=txt; return {a,b,e}; });
 
 const gEth=el('g',{opacity:0}); const ETH=[['Data centres are being built.',35.4],['So let\u2019s build them as neighbours.',37.9],['And find where they can <tspan fill="'+C.red2+'">give the most back</tspan>.',40.4]];
 const eth=ETH.map(([x,a],i)=>{ const e=el('text',{x:120,y:330+i*120,'font-size':76,'font-weight':500,fill:i===2?C.fg:C.fg,'letter-spacing':'-0.01em'},gEth); e.innerHTML=x; return {e,a}; });
 const gTi=el('g',{opacity:0});
-const tIn=el('text',{x:126,y:560,'font-size':34,fill:C.mute},gTi); tIn.textContent='Introducing';
+const tIn=el('text',{x:122,y:560,'font-size':34,fill:C.mute},gTi); tIn.textContent='Introducing';
 const tT=el('text',{x:120,y:720,'font-size':150,'font-weight':400,fill:C.fg,'letter-spacing':'-0.02em'},gTi); tT.textContent='Beyond Data';
-const tS=el('text',{x:126,y:790,'font-size':24,'font-weight':500,fill:C.mute,'letter-spacing':'0.32em'},gTi); tS.textContent='EXCHANGE SYSTEMS';
-el('rect',{x:126,y:814,width:70,height:4,fill:C.red},gTi);
+const tS=el('text',{x:122,y:790,'font-size':24,'font-weight':500,fill:C.mute,'letter-spacing':'0.32em'},gTi); tS.textContent='EXCHANGE SYSTEMS';
+el('rect',{x:122,y:814,width:70,height:4,fill:C.red},gTi);
 function R(T){ globe(T); cuts.forEach(c=>{ const k=.04+.96*seg(T,9.0,11.4), dr=T*6*(c.i%2?1:-1);
     c.g.setAttribute('transform',`translate(${960+(c.dx+dr)*(1+.6*seg(T,8.4,10.6))},${420+c.dy*(1+.6*seg(T,8.4,10.6))+T*(c.i%3-1)*2}) rotate(${c.r}) scale(${1+.25*seg(T,8.4,10.6)})`);
     gMask.setAttribute('opacity',1-seg(T,8.6,10.0)); c.g.setAttribute('opacity',.2*seg(T,.3+c.i*.35,1.3+c.i*.35)*(1-seg(T,8.6,10.0))); }); const t=T-10;
@@ -147,7 +147,7 @@ function R(T){ globe(T); cuts.forEach(c=>{ const k=.04+.96*seg(T,9.0,11.4), dr=T
     e.l.setAttribute('opacity',seg(t,e.t0+1.1,e.t0+1.7));
     e.out.setAttribute('opacity',seg(t,e.t0+1.4,e.t0+2)); e.out.setAttribute('stroke-dashoffset',-(t*.12)%1);
     e.back.setAttribute('opacity',seg(t,28.4,29.6)); e.back.setAttribute('stroke-dashoffset',(t*.12)%1); });
-  const dm=seg(t,34.6,35.6); gAll.setAttribute('opacity',1-.8*dm-.2*seg(t,46.8,47.6));
+  const dm=seg(t,34.6,35.6); gAll.setAttribute('opacity',1-.92*dm-.08*seg(t,46.8,47.6));
   gEth.setAttribute('opacity',1-seg(t,43.4,44.0)); eth.forEach(o=>{ o.e.setAttribute('opacity',seg(t,o.a,o.a+.6)); o.e.setAttribute('transform',`translate(0,${(1-seg(t,o.a,o.a+.6))*14})`); });
   tag.setAttribute('opacity',1-seg(t,43.6,44.2)); gTi.setAttribute('opacity',seg(t,44.4,45.2)*(1-seg(t,49.4,50.0))); gTi.setAttribute('transform',`translate(0,${(1-seg(t,44.4,45.2))*16})`);
   caps.forEach(c=>{ const o=win(t,c.a,c.b); c.e.setAttribute('opacity',o); c.e.setAttribute('transform',`translate(0,${(1-seg(t,c.a,c.a+.6))*14})`); });

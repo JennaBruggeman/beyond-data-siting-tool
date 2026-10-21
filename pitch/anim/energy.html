@@ -4,9 +4,9 @@
 // Sheet 2, Energy (Exchange sheets draft v3). Figures as on the sheet: battery bridge 10–15 s to generator start; curtail ≥10 % on 24 h notice,
 // ≥144 h a year; paid to curtail $50/kW-yr per season, Nov–Mar (BC Hydro); fossil generators can't count in BC Hydro demand response;
 // Alberta limit 1,200 MW, fully allocated; shaded alert: Alberta grid alert, 13 Jan 2024, 3:30–8:40 p.m.; the day is illustrative.
-const G=0xa9b4e0, BAT=0x7fbf8f, GEN=0x9a968f;
-setup({n:'2',title:'Energy',sub:'The grid connection is held, not used up; the site can use less when asked',
- key:[['#a9b4e0','grid draw'],['#a9b4e0','curtailed',1],['#7fbf8f','carried by batteries'],['#9a968f','carried by generators',1]],
+const G=0x6fa3d8, BAT=0x7fbf8f, GEN=0x9a968f;
+setup({col:'#6fa3d8',n:'2',title:'Energy',sub:'The grid connection is held, not used up; the site can use less when asked',
+ key:[['#6fa3d8','grid draw'],['#6fa3d8','curtailed',1],['#7fbf8f','carried by batteries'],['#9a968f','carried by generators',1]],
  caps:[[.4,2.8,'The connection is held'],[3.0,5.9,'Using less when asked']],
  conds:[['Technical','Rooftop solar','share of the load'],['Technical','Battery bridge 10–15 s','to generator start'],['Temporal','Curtail ≥10 %','on 24 h notice'],['Economic','Paid to curtail $50/kW-yr','BC Hydro, Nov–Mar'],['Regulatory','Fossil generators can\'t count','in BC Hydro demand response'],['Regulatory','Alberta limit 1,200 MW','fully allocated'],['Environmental','Generator testing','noise, exhaust']],
  keys:[[0,V(.5,1.5,0),8.6],[4.4,V(3,1.5,3),10.4],[11.6,V(5,1,15),16.5,150],[13.8,V(5,1,18),19,330],[20,V(5,1,18),19.5,330]],dur:13.6,condAt:99,keyIn:3});
@@ -40,12 +40,12 @@ const A0=15.5/24, A1=(20+40/60)/24;
 const day=panel(`<div class="ph">Transfer, over a winter day</div><svg width="560" height="210" viewBox="0 0 560 210" style="display:block;font-family:Plex">
  <rect x="${40+A0*480}" y="20" width="${(A1-A0)*480}" height="150" fill="#3a3c41"/>
  <line x1="40" y1="170" x2="520" y2="170" stroke="#5a5e64"/><line x1="40" y1="20" x2="40" y2="170" stroke="#5a5e64"/>
- <path id="dl" d="M40,40 H${40+A0*480} V82 H${40+A1*480} V40 H520" fill="none" stroke="#a9b4e0" stroke-width="3" pathLength="1" stroke-dasharray="1 1"/>
+ <path id="dl" d="M40,40 H${40+A0*480} V82 H${40+A1*480} V40 H520" fill="none" stroke="#6fa3d8" stroke-width="3" pathLength="1" stroke-dasharray="1 1"/>
  <text x="2" y="45" fill="#bdb9b2" font-size="15">100%</text>
  ${['00:00','12:00','24:00'].map((x,i)=>`<text x="${40+i*240}" y="192" fill="#bdb9b2" font-size="15" text-anchor="middle">${x}</text>`).join('')}
- <line id="ph" x1="40" y1="16" x2="40" y2="172" stroke="#e7a39c" stroke-width="2"/>
- <text x="${40+A0*480+2}" y="110" fill="#e7a39c" font-size="15">less, when asked</text></svg>
- <div style="font:400 16px/1.4 Plex;color:#bdb9b2;margin-top:6px">shaded: Alberta grid alert, 13 Jan 2024, 3:30–8:40 p.m.<br><span style="color:#e7a39c">The day is illustrative, not a measured load.</span></div>`,5.2,12.0,'left:120px;top:250px');
+ <line id="ph" x1="40" y1="16" x2="40" y2="172" stroke="#d9d5ce" stroke-width="2"/>
+ <text x="${40+A0*480+2}" y="110" fill="#bdb9b2" font-size="15">less, when asked</text></svg>
+ <div style="font:400 16px/1.4 Plex;color:#bdb9b2;margin-top:6px">shaded: Alberta grid alert, 13 Jan 2024, 3:30–8:40 p.m.<br>The day is illustrative, not a measured load.</div>`,5.2,12.0,'left:120px;top:250px');
 const dl=day.querySelector('#dl'), ph=day.querySelector('#ph');
 const dayU=t=>cl((t-5.8)/5.2);   // 0→1 across the day
 const inAlert=t=>{ const u=dayU(t); return u>A0&&u<A1&&t<11.2; };
@@ -68,7 +68,7 @@ UPD=t=>{
 };
 // the opportunities, visited one by one (draft 4): what each could get, and whether it has been done
 const oEV=R_.evlot(3.6,14), oSub=R_.substation(15.6,20.5), oPy=R_.pylons(4.5,23,31,3), oBat=R_.batteries(18,31.5);
-visits({start:5.8,slot:1.75,list:[
+visits({tint:[],start:5.8,slot:1.75,list:[
  {n:1,name:'EV charging hub',gets:'charging on the same grid connection',k:'spec',where:'BC: chargers not regulated as a utility',obj:oEV,at:V(3.6,3,15.2),tg:V(3.6,1.5,14),hh:6.2,cap:'Charge cars'},
  {n:2,name:'The utility',gets:'the site uses less when asked',k:'else',where:'Indiana, Google',obj:oSub,at:V(16,2.4,20.5),tg:V(17.5,2.5,20.5),hh:7,cap:'Use less when asked'},
  {n:3,name:'The grid operator',gets:'reserves on call',k:'here',where:'AESO reserves',obj:oPy,at:V(4.5,6.6,27),tg:V(4.5,3,27),hh:7.5,cap:'Hold reserves'},

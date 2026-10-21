@@ -29,20 +29,28 @@ const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>{x=cl(x);return x<.5?4*
 const st=document.getElementById('stage');
 const mk=(src)=>{ const d=document.createElement('div'); d.className='pg'; d.innerHTML=`<img src="${src}">`; st.appendChild(d); return d; };
 const lbl=(h)=>{ const d=document.createElement('div'); d.className='pl'; d.innerHTML=h; st.appendChild(d); return d; };
-const TC=mk('rep/p-12.jpg'); const C1=mk('rep/r1-1.jpg'), C2=mk('rep/p-01.jpg'), C3=mk('rep/r3-01.jpg'), H=mk('rep/p-04.jpg'), O=mk('rep/p-08.jpg'), T=mk('rep/p-11.jpg');
+const TC=mk('rep2/p-12.jpg'); const C1=mk('rep2/r1-1.jpg'), C2=mk('rep2/p-01.jpg'), C3=mk('rep2/r3-01.jpg'), H=mk('rep2/p-04.jpg'), O=mk('rep2/p-08.jpg'), T=mk('rep2/p-11.jpg');
 const L=[lbl('Everyday<i>What it means for me</i>'),lbl('Civic<i>What it means for the neighbourhood</i>'),lbl('Technical<i>How it is worked out</i>')];
 const caps=[[.5,5.0,'A report for each level'],[5.2,10.4,'What it reveals'],[10.6,14.2,'What would close the gap'],[14.6,19.0,'Edmonton: same logic, different answer']].map(([a,b,x])=>{const e=document.createElement('div'); e.className='cap'; e.textContent=x; document.body.appendChild(e); return {a,b,e};});
 const place=(e,x,y,s,o,r=0)=>{ e.style.transform=`translate(${x}px,${y}px) rotate(${r}deg) scale(${s})`; e.style.opacity=o; };
 // logo lines
 const NS='http://www.w3.org/2000/svg', svg=document.getElementById('logo'); const el=(t,a)=>{const e=document.createElementNS(NS,t); for(const k in a) e.setAttribute(k,a[k]); svg.appendChild(e); return e;};
-const COLS=['#d99a4e','#8fc3dc','#a9b4e0','#a9c49a','#e7a39c','#bdb9b2','#d99a4e','#8fc3dc'];
-let sd=5; const rnd=()=>(sd=(sd*16807)%2147483647)/2147483647; const CX=1240, CY=430;
-const LINES=[...Array(46)].map((_,i)=>{ const side=i%4, off=(rnd()-.5)*150; let x=CX+(side===0?90:side===2?-90:off), y=CY+(side===1?70:side===3?-70:off*.7); let d=`M${x},${y}`;
-  const dir=[[1,0],[0,1],[-1,0],[0,-1]][side]; let L1=60+rnd()*220; x+=dir[0]*L1; y+=dir[1]*L1; d+=` L${x},${y}`;
-  const dg=rnd()<.6?(rnd()<.5?1:-1):0; const L2=80+rnd()*420; if(dg){ x+=dir[0]*L2*.7+(dir[1]?dg*L2*.7:0); y+=dir[1]*L2*.7+(dir[0]?dg*L2*.7:0);} else { x+=dir[0]*L2; y+=dir[1]*L2; } d+=` L${x},${y}`;
-  const L3=60+rnd()*500; x+=dir[0]*L3; y+=dir[1]*L3; d+=` L${x},${y}`;
-  const p=el('path',{d,fill:'none',stroke:COLS[i%COLS.length],'stroke-width':2+(i%3),pathLength:1,'stroke-dasharray':'1 1','stroke-linecap':'square'}); const end=el('rect',{x:x-5,y:y-5,width:10,height:10,fill:COLS[i%COLS.length],opacity:0}); return {p,end,t0:22.0+rnd()*1.2}; });
-const chip=el('rect',{x:CX-90,y:CY-70,width:180,height:140,fill:'#d4202b'}); [...Array(6)].forEach((_,k)=>el('line',{x1:CX-70,y1:CY-46+k*18,x2:CX+70,y2:CY-46+k*18,stroke:'#f2a3a8','stroke-width':1.5,opacity:.6}));
+// the logo (J.B.'s): a red chip with lines leaving it. Draft 5: an ordered fan, one colour per exchange, square pads at the ends.
+const COLS=['#d99a4e','#6fa3d8','#6fc3c3','#a9c49a','#b79fd6'];
+const CX=1250, CY=450, CW=200, CH=150;
+const LINES=[]; let li=0;
+[[1,0,7,190,300],[-1,0,7,200,260],[0,-1,8,70,130],[0,1,8,120,190]].forEach(([dx,dy,n,base,reach],sd)=>{
+  for(let k=0;k<n;k++){ const u=(k-(n-1)/2)/((n-1)/2), side=dx?CH:CW, off=u*(side/2-16);
+    let x=CX+(dx?dx*CW/2:off), y=CY+(dy?dy*CH/2:off); const pts=[[x,y]];
+    const d1=28+(1-Math.abs(u))*46; x+=dx*d1; y+=dy*d1; pts.push([x,y]);
+    const spread=u*(dx?120:150)*(sd===3?.7:1); const dd=Math.abs(spread); x+=dx*dd+(dx?0:spread); y+=dy*dd+(dy?0:spread); pts.push([x,y]);
+    const L=base+((k*37+sd*11)%5)/4*(reach-base); x+=dx*L; y+=dy*L; pts.push([x,y]);
+    const d='M'+pts.map(q=>q.join(',')).join(' L'); const col=COLS[li++%COLS.length];
+    const p=el('path',{d,fill:'none',stroke:col,'stroke-width':2.5,pathLength:1,'stroke-dasharray':'1 1','stroke-linejoin':'round'});
+    const end=el('rect',{x:x-5,y:y-5,width:10,height:10,fill:col,opacity:0}); const pin=el('rect',{x:pts[0][0]-(dx?0:3)-(dx<0?8:0),y:pts[0][1]-(dy?0:3)-(dy<0?8:0),width:dx?8:6,height:dy?8:6,fill:'#e8b0aa',opacity:0});
+    LINES.push({p,end,pin,t0:22.0+Math.abs(u)*.5+sd*.12}); } });
+const chip=el('rect',{x:CX-CW/2,y:CY-CH/2,width:CW,height:CH,rx:6,fill:'#d4202b'});
+const chipIn=el('rect',{x:CX-CW/2+18,y:CY-CH/2+18,width:CW-36,height:CH-36,rx:3,fill:'none',stroke:'#f2a3a8','stroke-width':1.2,opacity:.55});
 function R(t){
   // three covers fan in, one per level
   const xs=[260,748,1236];
@@ -64,8 +72,8 @@ function R(t){
   caps.forEach(c=>c.e.style.opacity=win(t,c.a,c.b));
   document.getElementById('band').style.opacity=1-seg(t,18.8,19.4);
   // the end screen
-  svg.style.opacity=seg(t,21.4,22); chip.setAttribute('opacity',seg(t,21.6,22.1));
-  LINES.forEach(l=>{ l.p.setAttribute('stroke-dashoffset',1-seg(t,l.t0,l.t0+1.6)); l.end.setAttribute('opacity',seg(t,l.t0+1.5,l.t0+1.8)); });
+  svg.style.opacity=seg(t,21.4,22); chip.setAttribute('opacity',seg(t,21.6,22.1)); chipIn.setAttribute('opacity',.55*seg(t,21.8,22.3));
+  LINES.forEach(l=>{ l.p.setAttribute('stroke-dashoffset',1-seg(t,l.t0,l.t0+1.6)); l.end.setAttribute('opacity',seg(t,l.t0+1.5,l.t0+1.8)); l.pin.setAttribute('opacity',seg(t,l.t0-.1,l.t0+.2)); });
   const ti=document.getElementById('title'); ti.style.opacity=seg(t,23.6,24.4); ti.style.transform=`translateY(${(1-seg(t,23.6,24.4))*16}px)`;
 }
 window.DUR=28; window.R=R; R(0);

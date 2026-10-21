@@ -4,12 +4,12 @@
 // Sheet 1, Heat and cold (Exchange sheets draft v3), draft 4 of the pitch: the system, then each receiver visited. Generic system, not to scale.
 // Figures as on the sheet: into liquid 48–75 % with cold plates; free cooling 7,109 h; ≥60 °C after the heat pump. Receivers and proof tags as on the sheet,
 // except QScale Lévis, tagged "under construction" (the sheet says pilot; flagged for J.B., 21 Oct 2026), and TELUS Garden, described as one development's loop.
-const COL={cool:0x6fa8dc,warm:0xe3c27a,hot:0xd99a4e,hp:0xe0714f,edge:0xd9d4cc,fill:0x2a2c30,dim:0x55585e};
-setup({n:'1',title:'Heat and cold',sub:'Servers make heat; it is rejected, or piped to receivers',
- key:[['#6fa8dc','cool, supply or return'],['#e3c27a','warm 25–35 °C, air or glycol'],['#d99a4e','hot 50–60 °C, liquid capture'],['#e0714f','hot, after the heat pump']],
+const COL={cool:0x6fa8dc,warm:0xe3c27a,hot:0xd99a4e,hp:0xe07b39,edge:0xd9d4cc,fill:0x2a2c30,dim:0x55585e};
+setup({col:'#d99a4e',n:'1',title:'Heat and cold',sub:'Servers make heat; it is rejected, or piped to receivers',
+ key:[['#6fa8dc','cool, supply or return'],['#e3c27a','warm 25–35 °C, air or glycol'],['#d99a4e','hot 50–60 °C, liquid capture'],['#e07b39','hot, after the heat pump']],
  caps:[[.3,2.3,'Servers make heat'],[2.5,5.3,'Rejected, or piped to receivers'],[13.0,17.2,'Tested, condition by condition']],
  conds:[['Technical','Enough heat for the receiver\'s demand'],['Technical','Hot enough, or the heat pump\'s lift'],['Spatial','Distance to the receiver'],['Spatial','Heat demand along the street'],['Spatial','Pipe route and right of way'],['Temporal','Supply meets demand, hour by hour'],['Economic','Price window: operator\'s floor, receiver\'s ceiling'],['Regulatory','Heat sale needs approval (BCUC)']],
- keys:[[0,V(0,1.5,0),8.6],[4.2,V(.5,1.5,0),8.8],[5.0,V(6.5,1.5,-1.5),10],[6.6,V(9,1.5,-1),10.4],[8.0,V(18,1,16),14],[10.6,V(19,1,20),15.5]],dur:17.4,condAt:99,keyIn:1.6});
+ keys:[[0,V(0,1.5,0),8.6],[4.2,V(.5,1.5,0),8.8],[5.0,V(6.5,1.5,-1.5),10],[6.6,V(9,1.5,-1),10.4],[8.0,V(18,1,16),14],[10.6,V(19,1,20),15.5]],dur:17.4,condAt:99,keyIn:1.0,keyOut:4.6});
 const cyl_=cyl; 
 // --- the data hall (open on two sides, as drawn)
 const hall=new THREE.Group(); scene.add(hall);
@@ -55,7 +55,7 @@ UPD=t=>{
   plume.forEach(p=>{ const q=((t*.5)+p.ph)%1; p.m.position.set(9.4+p.k*2.2+Math.sin(q*6+p.ph)*.25,1.6+q*3,-6.5); p.m.material.opacity=(1-q)*seg(t,5,5.6)*.8; });
   RX.forEach(r=>setOp(r.g,seg(t,r.t0,r.t0+.6)));
 };
-visits({start:5.4,slot:1.5,k:2,condAt:13.0,list:[
+visits({tint:RB.map(r=>r[0]),start:5.4,slot:1.5,k:2,condAt:13.0,list:[
  {n:1,name:'School',gets:'space heat',k:'else',where:'Heerlen (claim)',at:V(27,4.5,7),tg:V(25.5,2,9),hh:6.8,cap:'Heat a school'},
  {n:2,name:'Heat network',gets:'heat shared across buildings',k:'here',where:'TELUS Garden, Vancouver (one development)',at:V(12.5,8,16),tg:V(13.5,4,16),hh:8,cap:'Feed a heat network'},
  {n:3,name:'Pool',gets:'heat for the pool water',k:'else',where:'Paris, 2017',at:V(27,.4,23),tg:V(26,1.5,23),hh:6.5,cap:'Warm a pool'},

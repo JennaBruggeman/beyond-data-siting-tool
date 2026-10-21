@@ -5,7 +5,7 @@
 // recovery: copper over 50 %, rare earths about 1 %; making one server 471 kg CO2e (one 2U model, operator claim, 2011); receivers: refurbisher and school or
 // community (Microsoft, claim; 83 % reuse, 17 % recycle), metal recycler (global rates), rare earths (not yet known).
 const M=0xa9c49a;
-setup({n:'4',title:'Materials',sub:'The building stays; the servers leave in batches, and most of what is in them is sorted out',
+setup({col:'#a9c49a',n:'4',title:'Materials',sub:'The building stays; the servers leave in batches, and most of what is in them is sorted out',
  key:[['#a9c49a','equipment, whole'],['#7f9a73','materials'],['#a9c49a','possible, or sealed',1]],
  caps:[[.4,2.4,'The building stays'],[2.6,6.0,'Servers leave in batches']],
  conds:[['Technical','Copper per MW','industry estimates only'],['Technical','Rare earths 3–4 g','per 3.5-inch drive'],['Temporal','Refresh 5–6 yr','servers average 4.4–5.7 yr'],['Economic','Who pays to refurbish?'],['Regulatory','Data security','the standard is not in our sources'],['Environmental','Recovery','copper over 50 %, rare earths about 1 %'],['Environmental','Making one server 471 kg CO₂e','operator claim, 2011']],
@@ -33,7 +33,7 @@ panel(`<div class="ph">Transfer, over 50 years</div><svg width="520" height="150
  <text x="0" y="58" fill="#bdb9b2" font-size="16">pipes</text><line x1="90" y1="53" x2="336" y2="53" stroke="#6a6d73" stroke-width="7"/><line x1="336" y1="53" x2="500" y2="53" stroke="#6a6d73" stroke-width="7" stroke-dasharray="3 3"/>
  <text x="0" y="92" fill="#bdb9b2" font-size="16">servers</text>${Y.map((y,i)=>`<rect class="bt" x="${90+i*45.5}" y="80" width="42" height="16" fill="#a9c49a" fill-opacity=".25" stroke="#a9c49a"/>`).join('')}
  ${[0,25,50].map((y,i)=>`<text x="${90+i*205}" y="124" fill="#bdb9b2" font-size="15" text-anchor="middle">${y} yr</text>`).join('')}
- <line id="ph" x1="90" y1="8" x2="90" y2="104" stroke="#e7a39c" stroke-width="2"/></svg>
+ <line id="ph" x1="90" y1="8" x2="90" y2="104" stroke="#d9d5ce" stroke-width="2"/></svg>
  <div style="font:400 16px Plex;color:#bdb9b2;margin-top:4px">a batch leaves at each refresh</div>`,5.2,11.8,'left:120px;top:250px');
 const BT=[...document.querySelectorAll('.bt')], PH=document.getElementById('ph');
 const tpos=u=>{ const a=V(10.6,0,4.6), b=V(11,0,6), c=V(11,0,29); return u<.08?a.clone().lerp(b,u/.08):b.clone().lerp(c,(u-.08)/.92); };
@@ -51,7 +51,7 @@ UPD=t=>{
   const u=cl((t-5.6)/5.8); PH.setAttribute('x1',90+u*410); PH.setAttribute('x2',90+u*410);
   BT.forEach((b,i)=>b.setAttribute('fill-opacity',u*410>i*45.5+20?.75:.15));
 };
-visits({start:6.0,slot:1.75,k:1.95,list:[
+visits({tint:rv,start:6.0,slot:1.75,k:1.95,list:[
  {n:1,name:'Refurbisher',gets:'servers repaired and resold',k:'else',where:'Microsoft (claim), 83 % reuse',at:V(5.5,3,13),tg:V(6.5,1.5,14),hh:6.5,cap:'Refurbish the servers'},
  {n:2,name:'School or community',gets:'computers passed on',k:'else',where:'Microsoft (claim)',at:V(18,4.4,16),tg:V(18,2,18.5),hh:7,cap:'Pass on the computers'},
  {n:3,name:'Metal recycler',gets:'metals sorted out for reuse',k:'else',where:'global rates; copper over half',at:V(5,3.2,24.5),tg:V(6.5,1.5,25),hh:6.5,cap:'Recover the metals'},

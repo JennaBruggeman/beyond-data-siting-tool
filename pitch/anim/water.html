@@ -5,7 +5,7 @@
 // make-up 1.8–3.0 L and blowdown 0.3–1.5 L per kWh of heat; rain 1,160 | 420 mm a year (Vancouver | Edmonton); water behind the power 1.25–16.8 L/kWh (thermal to hydro);
 // receivers: blowdown reused (Quincy, WA), rain (not yet known), treatment plant (Metro Vancouver, the usual path), reclaimed water (Loudoun, VA).
 const WI=0x8fc3dc, WO=0x5b8aa6;
-setup({n:'3',title:'Water',sub:'The cooling choice decides the water: almost none on site, or a balance in and out',
+setup({col:'#6fc3c3',n:'3',title:'Water',sub:'The cooling choice decides the water: almost none on site, or a balance in and out',
  key:[['#8fc3dc','water in'],['#5b8aa6','lost or discharged'],['#8fc3dc','possible line',1]],
  caps:[[.4,2.8,'Cooling decides the water'],[3.0,6.0,'A balance in and out']],
  conds:[['Technical','Evaporation ≤1.5 L/kWh','of heat rejected'],['Technical','Cycles 2–6','blowdown = evaporation ÷ (cycles − 1)'],['Temporal','Rain 1,160 | 420 mm a year','Vancouver | Edmonton, in seasons'],['Economic','Reclaimed water price','to be set'],['Regulatory','Supply from a plant','considered case by case'],['Environmental','Water behind the power','1.25–16.8 L/kWh, thermal to hydro']],
@@ -43,7 +43,7 @@ UPD=t=>{
 };
 const recP=pipe([V(10.4,.3,27),V(13.4,.3,27),V(13.4,.3,6.2),V(9.4,.3,6.2)],WI,.13,15.0,1.0,12,.05,{rev:true});
 const reP=pipe([V(6.5,.25,6.8),V(-1.2,.25,6.8),V(-1.2,.25,7.6)],WO,.11,11.9,.6,5,.06);
-visits({start:5.9,slot:1.75,k:2,list:[
+visits({tint:[plant],start:5.9,slot:1.75,k:2,list:[
  {n:1,name:'Blowdown, reused',gets:'cooling water treated and used again',k:'else',where:'Quincy, WA',obj:reuse,at:V(-2.2,1,8.6),tg:V(-1.5,1.5,8),hh:6,cap:'Reuse the blowdown'},
  {n:2,name:'Rain, in',gets:'rain from the roof, for cooling',k:'nyk',where:'Vancouver permitted; Alberta a variance',at:V(-5.6,2.1,4),tg:V(-4.5,2.5,3),hh:6.5,cap:'Collect rain'},
  {n:3,name:'Treatment plant',gets:'takes the blowdown',k:'here',where:'the usual path',at:V(6.5,1,27),tg:V(7,1,26.5),hh:6.5,cap:'Send it to treatment'},
