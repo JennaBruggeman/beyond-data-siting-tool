@@ -70,3 +70,94 @@ window.R=t=>{
 };
 // flow position: beads advance with a speed that can change over time (integrated per frame from t)
 function flowAt(p,t,speedFn){ p.off=speedFn(t)%1; }
+
+// ---- Draft 4 (21 Oct 2026): recognizable receivers, and a camera that visits each opportunity with a large callout.
+// The system part plays faster (S.warp: k× speed until 'until' s), then the visits run in real time.
+const grp=(...objs)=>{ const g=new THREE.Group(); objs.flat().forEach(o=>{ scene.remove(o); g.add(o); }); scene.add(g); return g; };
+const lineSeg=(pts,col,op=.9)=>{ const l=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:col,transparent:true,opacity:op})); scene.add(l); return l; };
+const extr=(shape2d,depth,x,y,z,o)=>{ const s=new THREE.Shape(shape2d.map(([a,b])=>new THREE.Vector2(a,b))); const g=new THREE.ExtrudeGeometry(s,{depth,bevelEnabled:false}); g.translate(0,0,-depth/2); return solid(g,V(x,y,z),o); };
+// windows on the two faces the camera sees (+x and +z)
+function windows(x,z,w,d,h,col=0x9a968f,y0=.8,dy=1.5,dx=1.3){ const P=[]; const rect=(a,b,c,e,face)=>{ const q=face==='x'?[[x+w/2+.02,b,a],[x+w/2+.02,b,c],[x+w/2+.02,e,c],[x+w/2+.02,e,a]]:[[a,b,z+d/2+.02],[c,b,z+d/2+.02],[c,e,z+d/2+.02],[a,e,z+d/2+.02]];
+    for(let i=0;i<4;i++){ P.push(V(...q[i]),V(...q[(i+1)%4])); } };
+  for(let y=y0;y+.9<h;y+=dy){ for(let u=-d/2+.5;u+.7<d/2;u+=dx) rect(z+u,y,z+u+.7,y+.9,'x'); for(let u=-w/2+.5;u+.7<w/2;u+=dx) rect(x+u,y,x+u+.7,y+.9,'z'); }
+  return lineSeg(P,col,.75); }
+const R_ = {
+  greenhouse(x,z,w=7,d=5,col=0x9fd3c7){ const n=Math.max(3,Math.round(w/1.6)), bw=w/n, hb=1.5, out=[box(w,hb,d,x,0,z,{edge:col,fill:0x26302e,fo:.35})];
+    for(let i=0;i<n;i++){ const cx=x-w/2+bw*(i+.5); out.push(extr([[-bw/2,0],[bw/2,0],[0,bw*.55]],d,cx,hb,z,{edge:col,fill:0x26302e,fo:.3})); }
+    const rows=[]; for(let k=-1;k<=1;k++) rows.push(V(x-w/2+.6,.35,z+k*1.2),V(x+w/2-.6,.35,z+k*1.2)); out.push(lineSeg(rows,0x7fbf8f,.9)); return grp(out); },
+  pylons(x,z0,z1,n=3,col=0xa9b4e0,H=8){ const P=[]; const lg=[[-1,-1],[1,-1],[1,1],[-1,1]]; const tops=[]; for(let j=0;j<n;j++){ const z=z0+(z1-z0)*j/(n-1);
+      lg.forEach(([a,b])=>P.push(V(x+a*1,0,z+b*1),V(x+a*.22,H,z+b*.22))); for(let k=1;k<5;k++){ const y=k*H/5, s=1-(.78*k/5); for(let i=0;i<4;i++){ const [a,b]=lg[i],[c,e]=lg[(i+1)%4]; P.push(V(x+a*s,y,z+b*s),V(x+c*s,y,z+e*s)); } }
+      P.push(V(x-2,H*.82,z),V(x+2,H*.82,z)); tops.push(z); }
+    for(let j=1;j<n;j++) [-1.9,1.9].forEach(dx=>P.push(V(x+dx,H*.8,tops[j-1]),V(x+dx,H*.8,tops[j]))); return grp(lineSeg(P,col,.85)); },
+  pool(x,z,w=8,d=5.5,col=0x8fc3dc){ const hall=box(w,2.8,d,x,0,z,{dashed:true,edge:0xd9d4cc,eo:.8}); const wa=new THREE.Mesh(new THREE.PlaneGeometry(w-1.6,d-1.8),new THREE.MeshBasicMaterial({color:0x4f86ad,transparent:true,opacity:.7})); wa.rotation.x=-Math.PI/2; wa.position.set(x,.32,z); scene.add(wa);
+    const L=[]; for(let k=1;k<4;k++){ const zz=z-(d-1.8)/2+k*(d-1.8)/4; L.push(V(x-(w-1.6)/2,.34,zz),V(x+(w-1.6)/2,.34,zz)); } const rim=box(w-1.2,.3,d-1.4,x,0,z,{edge:col,fill:0x2a2c30,fo:.0});
+    return grp(hall,wa,lineSeg(L,0xe8f3f8,.8),rim); },
+  housing(x,z,w=5,d=5,h=9,col=0xd9d4cc){ return grp(box(w,h,d,x,0,z,{edge:col}),windows(x,z,w,d,h),extr([[-w/2,0],[w/2,0],[w/2,.6],[-w/2,.6]],d,x,h,z,{edge:col})); },
+  tower(x,z,w=4,d=4,h=14,col=0xd9d4cc){ return grp(box(w+3,3,d+3,x,0,z,{edge:col}),box(w,h,d,x,3,z,{edge:col}),windows(x,z,w,d,h+3,0x9a968f,3.8,1.4)); },
+  school(x,z,col=0xd9d4cc){ const b=box(7,4.2,3.4,x,0,z-2.6,{edge:col}); const ro=extr([[-3.7,0],[3.7,0],[0,1.3]],3.6,x,4.2,z-2.6,{edge:col});
+    const P=[]; const tr=(rx,rz,cx,cz)=>{ const pts=[]; for(let k=0;k<=64;k++){ const a=k/64*Math.PI*2; const c=Math.cos(a), s=Math.sin(a); const sx=Math.sign(c)*Math.min(1,Math.abs(c)*1.6); pts.push(V(cx+rx*sx*(Math.abs(c)>.6?1:Math.abs(c)/.6)+ (c>0?1:-1)*0, .06, cz+rz*s)); } for(let k=0;k<64;k++) P.push(pts[k],pts[k+1]); };
+    tr(3.6,1.6,x,z+2.6); tr(3.0,1.1,x,z+2.6);
+    return grp(b,ro,windows(x,z-2.6,7,3.4,4.2),lineSeg(P,0xe7a39c,.9),cyl(.05,3.4,x+3.9,1.7,z-.6,'y',{edge:col})); },
+  tanks(x,z,n=3,r=1.5,col=0x8fc3dc){ const out=[]; for(let i=0;i<n;i++){ const cx=x+(i-(n-1)/2)*(2*r+.6); out.push(cyl(r,.9,cx,.45,z,'y',{edge:col,fill:0x28323a})); const wa=new THREE.Mesh(new THREE.CircleGeometry(r*.92,32),new THREE.MeshBasicMaterial({color:0x4f86ad,transparent:true,opacity:.6})); wa.rotation.x=-Math.PI/2; wa.position.set(cx,.92,z); scene.add(wa); out.push(wa, lineSeg([V(cx-r,.95,z),V(cx+r,.95,z)],0xd9d4cc,.8)); }
+    out.push(box(2.4,1.8,2,x,0,z+r+1.8,{edge:col})); return grp(out); },
+  substation(x,z,col=0xa9b4e0){ const f=box(6,1.3,5,x,0,z,{dashed:true,edge:col,eo:.8}); const tf=[-1.4,1.4].map(dx=>box(1.6,1.4,1.4,x+dx,0,z,{edge:col}));
+    const ins=[-1.4,1.4].flatMap(dx=>[-.4,0,.4].map(k=>cyl(.08,.7,x+dx+k,1.75,z,'y',{edge:col})));
+    const px=x+4.6, H=9, P=[]; const lg=[[-1,-1],[1,-1],[1,1],[-1,1]]; lg.forEach(([a,b])=>P.push(V(px+a*1.1,0,z+b*1.1),V(px+a*.25,H,z+b*.25)));
+    for(let k=1;k<5;k++){ const y=k*H/5, s=1.1-(.85*k/5); for(let i=0;i<4;i++){ const [a,b]=lg[i],[c,e]=lg[(i+1)%4]; P.push(V(px+a*s,y,z+b*s),V(px+c*s,y,z+e*s)); } }
+    P.push(V(px-2.2,H*.8,z),V(px+2.2,H*.8,z), V(px-1.6,H*.95,z),V(px+1.6,H*.95,z)); return grp(f,tf,ins,lineSeg(P,col,.85)); },
+  batteries(x,z,col=0x7fbf8f){ const out=[]; for(let i=0;i<3;i++){ const cz=z+(i-1)*3.1; out.push(box(6,2.6,2.4,x,0,cz,{edge:col})); const L=[]; for(let k=1;k<6;k++) L.push(V(x-3+k,0,cz+1.21),V(x-3+k,2.6,cz+1.21)); out.push(lineSeg(L,col,.5)); } return grp(out); },
+  evlot(x,z,col=0xa9b4e0){ const out=[]; const S=[]; for(let i=0;i<=5;i++){ S.push(V(x-5+i*2,.05,z-2.6),V(x-5+i*2,.05,z+.4)); } S.push(V(x-5,.05,z+.4),V(x+5,.05,z+.4)); out.push(lineSeg(S,0x9a968f,.8));
+    for(let i=0;i<5;i++){ const cx=x-4+i*2; if(i!==2){ out.push(box(1.5,.7,2.4,cx,.25,z-1.3,{edge:0xd9d4cc}), box(1.2,.5,1.2,cx,.95,z-1.4,{edge:0xd9d4cc})); [[-.6,-2.1],[.6,-2.1],[-.6,-.5],[.6,-.5]].forEach(([a,b])=>out.push(cyl(.25,.2,cx+a,.25,z+b+.0,'x',{edge:0x9a968f}))); }
+      out.push(box(.35,1.5,.3,cx,0,z+1.1,{edge:col,fill:0x2f3a4a})); out.push(lineSeg([V(cx,1.2,z+.95),V(cx,.8,z+.2),V(cx,.7,z-.2)],col,.9)); }
+    out.push(box(10.6,.1,1.4,x,3.0,z+1.6,{edge:col,fill:0x2f3a4a,fo:.15})); [-5,5].forEach(dx=>out.push(cyl(.08,3,x+dx*.98,1.5,z+1.2,'y',{edge:col}))); return grp(out); },
+  recycler(x,z,col=0x7f9a73){ const sh=box(5,3,4,x,0,z,{edge:col}); const ro=extr([[-2.6,0],[2.6,0],[0,.45]],4.2,x,3,z,{edge:col}); const bay=lineSeg([V(x+2.52,0,z-1.2),V(x+2.52,2.2,z-1.2),V(x+2.52,2.2,z-1.2),V(x+2.52,2.2,z+1.2),V(x+2.52,2.2,z+1.2),V(x+2.52,0,z+1.2)],col,.9); const conv=lineSeg([V(x+2.6,.9,z+1),V(x+4.2,2.4,z+1),V(x+2.6,.6,z+1.4),V(x+4.2,2.1,z+1.4)],0x9a968f,.9); const pile=solid(new THREE.ConeGeometry(1.4,1.4,10),V(x+4,.7,z+1),{edge:0xc9a35a,fill:0x3a3428});
+    const bales=[]; for(let i=0;i<3;i++) for(let j=0;j<2-(i>1?1:0);j++) bales.push(box(.9,.8,.9,x+3.3+i*.95,j*.8,z-1.4,{edge:0xc9a35a,fill:0x3a3428})); return grp(sh,ro,bay,conv,pile,bales); },
+  workshop(x,z,col=0xa9c49a){ const b=box(6,2.6,4,x,0,z,{edge:col}); const st=[0,1,2].map(i=>extr([[-1,0],[1,0],[1,1.1]],4,x-2+i*2,2.6,z,{edge:col}));
+    const bn=[box(3.6,.9,.8,x,0,z+2.8,{edge:0x9a968f}),...[0,1,2].map(i=>box(.6,.5,.6,x-1.2+i*1.2,.9,z+2.8,{edge:col,fill:0x34382f}))]; return grp(b,st,bn); },
+  houses(x,z,n=3,col=0x9a968f){ const out=[]; for(let i=0;i<n;i++){ const cx=x+(i-(n-1)/2)*4.2; out.push(box(3.2,3,3.6,cx,0,z,{edge:col}), extr([[-1.8,0],[1.8,0],[0,1.6]],3.8,cx,3,z,{edge:col}), windows(cx,z,3.2,3.6,3,0x6a6d73,.9,1.4,1.4)); } return grp(out); },
+  people(x,z,n=5,col=0xdcd7cf){ const out=[]; for(let i=0;i<n;i++){ const a=i*2.4, r=.6+i*.25; const px=x+Math.cos(a)*r, pz=z+Math.sin(a)*r; out.push(cyl(.17,.9,px,.45,pz,'y',{edge:col,fill:0x3a3c41})); const hd=new THREE.Mesh(new THREE.SphereGeometry(.17,10,8),new THREE.MeshBasicMaterial({color:col,transparent:true})); hd.position.set(px,1.1,pz); scene.add(hd); out.push(hd); } return grp(out); },
+  trees(pts,col=0x7fbf8f){ const out=[]; pts.forEach(([x,z])=>{ out.push(cyl(.08,1,x,.5,z,'y',{edge:0x9a968f})); out.push(solid(new THREE.ConeGeometry(.7,1.8,8),V(x,1.9,z),{edge:col,fill:0x26302a})); }); return grp(out); },
+};
+// callouts: one large card, left; a leader line to the receiver
+document.head.insertAdjacentHTML('beforeend',`<style>
+#co{position:fixed;left:120px;top:300px;width:720px;opacity:0;font-family:Plex}
+#co .cn{font:500 50px/1.1 Plex;letter-spacing:-.01em}#co .cn span{color:#e7a39c;margin-right:18px}
+#co .cg{font:400 28px/1.3 Plex;color:#bdb9b2;margin:14px 0 14px}#co .tag{font-size:22px;padding:7px 10px}
+#lead{position:fixed;left:0;top:0;pointer-events:none}
+.uc{background:#d1a35e;color:#17181a}
+</style>`);
+document.body.insertAdjacentHTML('beforeend','<div id="co"><div class="cn"></div><div class="cg"></div><div class="ct"></div></div><svg id="lead" width="1920" height="1080"><line id="ll" stroke="#e7a39c" stroke-width="2" opacity="0"/><circle id="lc" r="7" fill="#e7a39c" opacity="0"/></svg>');
+const TAGW={here:'Built here',else:'Built elsewhere',pilot:'Pilot',uc:'Under construction',nyk:'Not yet known',spec:'Speculative'};
+let VIS=null;
+function visits(S){ // S: {start, slot, list:[{n,name,gets,k,where,obj,at,tg,hh,ox,cap}], outro}
+  VIS=S; S.list.forEach((v,i)=>{ v.t0=S.start+i*S.slot; v.t1=v.t0+S.slot; if(v.obj) setOp(v.obj,0); });
+  S.end=S.start+S.list.length*S.slot; }
+function camState(keys,t){ let i=keys.findIndex(k=>k[0]>t); if(i<0) i=keys.length; if(i===0) i=1; const a=keys[i-1], b=keys[Math.min(i,keys.length-1)]; const u=b===a?1:ease((t-a[0])/(b[0]-a[0]));
+  return [a[1].clone().lerp(b[1],u), a[2]+(b[2]-a[2])*u, (a[3]??150)+((b[3]??150)-(a[3]??150))*u]; }
+function camSet([tg,hh,ox]){ const oxu=ox/W*2*hh*W/H, oy=20/H*2*hh; cam.left=-hh*W/H-oxu; cam.right=hh*W/H-oxu; cam.top=hh+oy; cam.bottom=-hh+oy; cam.position.copy(tg).addScaledVector(DIR,100); cam.lookAt(tg); cam.updateProjectionMatrix(); }
+const R0=window.R;
+window.R=t=>{
+  if(!VIS){ R0(t); return; }
+  const WK=VIS.k, WU=VIS.start, ts=t<WU?t*WK:WU*WK+(t-WU)*.6;
+  // run the system at its own time, but with the visit camera and HUD in real time
+  const keep=KEYS; if(t>=WU){ const s0=camState(keep,WU*WK); const VK=[[WU,...s0]]; VIS.list.forEach(v=>{ VK.push([v.t0+.6,v.tg,v.hh,v.ox??260],[v.t1,v.tg,v.hh,v.ox??260]); }); if(VIS.outro) VK.push([VIS.end+.7,...VIS.outro],[VIS.end+9,...VIS.outro]); KEYS=VK; }
+  const capsSave=CAPS; CAPS=[]; R0(ts); CAPS=capsSave; KEYS=keep;
+  if(t>=WU){ const VK=[[WU,...camState(keep,WU*WK)]]; VIS.list.forEach(v=>{ VK.push([v.t0+.6,v.tg,v.hh,v.ox??260],[v.t1,v.tg,v.hh,v.ox??260]); }); if(VIS.outro) VK.push([VIS.end+.7,...VIS.outro],[VIS.end+9,...VIS.outro]); camSet(camState(VK,t)); }
+  const sysOff=1-seg(t,WU-.3,WU+.3);
+  labs.forEach(l=>{ if(!l.vis) l.e.style.opacity=(+l.e.style.opacity)*sysOff; }); fixed.forEach(f=>f.e.style.opacity=(+f.e.style.opacity)*sysOff);
+  document.getElementById('key').style.opacity=(+document.getElementById('key').style.opacity)*sysOff;
+  // receivers appear as the camera arrives, and stay
+  VIS.list.forEach(v=>{ if(v.obj) setOp(v.obj,seg(t,v.t0+.05,v.t0+.6)); });
+  const cur=VIS.list.find(v=>t>=v.t0&&t<v.t1), co=document.getElementById('co'), ll=document.getElementById('ll'), lc=document.getElementById('lc');
+  if(cur){ co.querySelector('.cn').innerHTML=`<span>${cur.n}</span>${cur.name}`; co.querySelector('.cg').textContent=cur.gets; co.querySelector('.ct').innerHTML=`<span class="tag ${cur.k}">${TAGW[cur.k]}${cur.where?': '+cur.where:''}</span>`;
+    const o=win(t,cur.t0+.45,cur.t1-.05,.3); co.style.opacity=o; co.style.transform=`translateY(${(1-seg(t,cur.t0+.45,cur.t0+.75))*12}px)`;
+    const v=cur.at.clone().project(cam), ax=(v.x+1)/2*W, ay=(1-v.y)/2*H, r=co.getBoundingClientRect(); const lx=Math.min(r.right+22,ax-30), ly=r.top+38;
+    ll.setAttribute('x1',lx); ll.setAttribute('y1',ly); ll.setAttribute('x2',ax); ll.setAttribute('y2',ay); ll.setAttribute('opacity',o); lc.setAttribute('cx',ax); lc.setAttribute('cy',ay); lc.setAttribute('opacity',o); }
+  else { co.style.opacity=0; ll.setAttribute('opacity',0); lc.setAttribute('opacity',0); }
+  CAPS.forEach(c=>c.e.style.opacity=win(t,c.a,c.b));
+  VIS.list.forEach(v=>{ if(v.capE) v.capE.style.opacity=win(t,v.t0+.3,v.t1+(v===VIS.list[VIS.list.length-1]?.9:0)); });
+  if(VIS.condAt){ CP.style.opacity=win(t,VIS.condAt,window.DUR-.1); CI.forEach((e,i)=>{ const a=VIS.condAt+.2+i*.32; e.style.opacity=seg(t,a,a+.4); e.style.transform=`translateX(${(1-seg(t,a,a+.4))*-16}px)`; }); }
+  document.getElementById('hd').style.opacity=seg(t,.2,.9);
+  R3.render(scene,cam);
+};
+function visitCaps(){ VIS.list.forEach(v=>{ if(!v.cap) return; const e=document.createElement('div'); e.className='cap'; e.textContent=v.cap; document.body.appendChild(e); v.capE=e; }); }

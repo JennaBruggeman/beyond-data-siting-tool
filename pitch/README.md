@@ -46,3 +46,11 @@ A 5-minute video: J.B.'s voice with big, short captions. No music. Voice is reco
 - The script draft is in the chat of 20 Oct. J.B. to read it aloud and adjust the wording.
 - Report pages for the snippets.
 - Carbon: a seventh exchange, or a measure across all six?
+
+## Draft 4 (21 Oct): `beyond-data-pitch-draft-4.mp4`, 4:58
+- Opening (60 s): document covers drifting behind the globe; "A data centre serves the world"; label centred in the lot; "A building type that only takes / from its immediate setting"; "What if it gave something back?" then "…or many things?"; ethos lines; "Introducing Beyond Data".
+- What it is (8.6 s): "A tool that tests any real lot", Vancouver, then Edmonton. The floor flicker was the tool's looping "new building" demo, played too fast in a frame-by-frame capture. Now recorded on video time (`tool-shots/rec_intro2.js`). Tool fix: one demo loop at a time (`tool/scene3d.js`).
+- Sheets (`heat.html` replaces `heat3d.html`): recognizable receivers; the camera visits each one with a callout (name, what it gets, proof tag). Energy: "Next tenant" replaced by an EV charging hub (speculative).
+- Sources: Everyday / Civic / Technical, with what each level covers. Diagram: new stage names; "Check the math" replaces the levels ending.
+- Automate: nine line-drawn professions; "who asks what" ending. `future.html`: the future urban data centre, before the logo.
+- Flagged for J.B.: QScale Lévis is tagged "under construction" (the sheet says pilot); TELUS Garden is described as one development's loop.

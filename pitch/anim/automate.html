@@ -1,0 +1,81 @@
+<!doctype html><html><head><meta charset="utf-8"><title>What it automates</title><style>
+@font-face{font-family:Plex;font-weight:400;src:url(plex-400.woff2)}@font-face{font-family:Plex;font-weight:500;src:url(plex-500.woff2)}
+html,body{margin:0;background:#202124;overflow:hidden;width:1920px;height:1080px;font-family:Plex,sans-serif;color:#f2efea}
+svg{position:absolute;left:0;top:0;font-family:Plex,sans-serif}
+#job{position:absolute;left:120px;top:70px;font:500 66px/1 Plex;letter-spacing:-.01em;white-space:nowrap}
+#job .d{display:block;font:400 26px/1.3 Plex;color:#bdb9b2;margin-top:12px;letter-spacing:0}
+#box{position:absolute;left:1150px;top:150px;width:650px;height:620px;border:2.5px solid #CC746C;border-radius:8px;opacity:0;box-sizing:border-box;padding:28px 34px}
+#box .bt{font:500 30px Plex;margin-bottom:18px}#box .bt span{color:#e7a39c}
+.row{display:flex;align-items:center;gap:16px;font:400 25px/1 Plex;color:#f2efea;height:72px;border-top:1px solid #3b3e43;opacity:0}
+.row .k{width:30px;height:30px;border-radius:50%;border:2px solid #CC746C;flex:none;position:relative}
+.row .k::after{content:'';position:absolute;left:8px;top:4px;width:8px;height:14px;border:solid #e7a39c;border-width:0 3px 3px 0;transform:rotate(45deg);opacity:var(--c,0)}
+.row .s{margin-left:auto;font:500 20px Plex;color:#bdb9b2}
+.fly{position:absolute;left:0;top:0;font:500 22px Plex;background:#2b2d31;border:1.5px solid #CC746C;border-radius:4px;padding:8px 12px;white-space:nowrap;opacity:0}
+.q{position:absolute;width:480px;text-align:center;opacity:0}
+.q .lv{font:500 26px Plex;color:#e7a39c;margin-top:16px}.q .t{font:500 44px/1.2 Plex;margin-top:10px}
+#band{position:absolute;left:0;right:0;bottom:0;height:250px;background:linear-gradient(rgba(32,33,36,0),rgba(32,33,36,.94) 55%)}
+.cap{position:absolute;left:120px;top:915px;font:500 72px/1 Plex;opacity:0;white-space:nowrap;letter-spacing:-.01em}
+</style></head><body>
+<svg id="s" width="1920" height="1080" viewBox="0 0 1920 1080"></svg>
+<div id="job"></div>
+<div id="box"><div class="bt">Beyond <span>Data</span>, on one lot</div></div>
+<div id="band"></div>
+<script>
+// "What it automates" (draft 4): the professions a siting study usually draws on, each with the tool of their trade, light up job by job and hand off to the tool.
+// Who usually does each job is a general description of the professions, not a claim from a source. The three questions at the end are illustrations, one per level.
+const NS='http://www.w3.org/2000/svg', s=document.getElementById('s');
+const el=(t,a,p=s)=>{const e=document.createElementNS(NS,t); for(const k in a) e.setAttribute(k,a[k]); p.appendChild(e); return e;};
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;}, seg=(t,a,b)=>ease((t-a)/(b-a)), win=(t,a,b,f=.45)=>Math.min(seg(t,a,a+f),1-seg(t,b-f,b));
+const BG='#202124';
+// the tools of each trade, drawn in a 64×48 box centred on (0,0)
+const TOOL={
+ zoning:g=>{ el('rect',{x:-32,y:-24,width:64,height:48,class:'tl'},g); el('path',{d:'M-32,-4 H8 V24 M8,-4 V-24 M-12,-24 V-4 M8,6 H32',class:'tl'},g); el('rect',{x:-30,y:-22,width:16,height:16,class:'tf'},g); el('rect',{x:10,y:8,width:20,height:14,class:'tf'},g); },
+ layers:g=>{ [14,0,-14].forEach((dy,i)=>el('path',{d:`M-30,${dy} L0,${dy-10} L30,${dy} L0,${dy+10} Z`,class:i===0?'tl':'tl tfo'},g)); },
+ plan:g=>{ el('rect',{x:-32,y:-24,width:64,height:48,class:'tl'},g); el('path',{d:'M-6,-24 V2 M-6,10 V24 M-32,0 H-14 M2,0 H32 M14,0 V24',class:'tl'},g); },
+ rack:g=>{ el('rect',{x:-18,y:-26,width:36,height:52,class:'tl'},g); for(let k=0;k<6;k++) el('line',{x1:-13,y1:-19+k*8,x2:13,y2:-19+k*8,class:'tl'},g); for(let k=0;k<6;k++) el('circle',{cx:9,cy:-21+k*8,r:1.3,class:'tf'},g); },
+ curve:g=>{ el('path',{d:'M-30,-24 V22 H32',class:'tl'},g); el('path',{d:'M-26,16 C-12,14 -6,-2 4,-8 S22,-18 30,-20',class:'tl tw'},g); },
+ pipe:g=>{ el('circle',{r:22,class:'tl'},g); el('circle',{r:15,class:'tl'},g); el('circle',{r:8,class:'tl tw'},g); },
+ cost:g=>{ el('path',{d:'M-30,-24 V22 H32',class:'tl'},g); [[-22,10],[-9,22],[4,16],[17,30]].forEach(([x,h])=>el('rect',{x,y:22-h,width:9,height:h,class:'tf'},g)); },
+ bylaw:g=>{ el('path',{d:'M-22,-26 H12 L22,-16 V26 H-22 Z',class:'tl'},g); el('text',{x:-15,y:-6,'font-size':18,class:'tt'},g).textContent='§'; for(let k=0;k<4;k++) el('line',{x1:-15,y1:4+k*6,x2:15,y2:4+k*6,class:'tl'},g); },
+ report:g=>{ el('path',{d:'M-22,-26 H22 V26 H-22 Z',class:'tl'},g); [[-14,4],[-7,10],[0,7]].forEach(([x,h])=>el('rect',{x,y:-6-h,width:5,height:h,class:'tf'},g)); for(let k=0;k<4;k++) el('line',{x1:-15,y1:4+k*6,x2:15,y2:4+k*6,class:'tl'},g); },
+};
+el('style',{}).textContent=`.tl{fill:none;stroke:var(--c);stroke-width:1.8}.tfo{fill:${BG}}.tf{fill:var(--c);fill-opacity:.55}.tw{stroke-width:2.6}.tt{fill:var(--c);font-family:Plex}
+ .pp{fill:${BG};stroke:var(--c);stroke-width:2}.nm{fill:var(--n);font-size:21px}`;
+function person(x,y,sc,tool,name){ const g=el('g',{transform:`translate(${x},${y}) scale(${sc})`}); g.style.setProperty('--c','#8e8a84'); g.style.setProperty('--n','#bdb9b2');
+  el('path',{d:'M-38,70 C-40,10 -30,-14 0,-16 C30,-14 40,10 38,70',class:'pp'},g); el('circle',{cx:0,cy:-44,r:20,class:'pp'},g);
+  if(tool){ el('path',{d:'M-30,6 C-36,20 -24,30 -12,30 M30,6 C36,20 24,30 12,30',class:'pp'},g); const tg=el('g',{transform:'translate(0,34)'},g); el('rect',{x:-36,y:-28,width:72,height:56,fill:BG},tg); TOOL[tool](tg); }
+  const t=el('text',{x:0,y:112,'text-anchor':'middle',class:'nm'},g); t.textContent=name; return g; }
+const TEAM=[['planner','Planner','zoning'],['gis','GIS analyst','layers'],['arch','Architect','plan'],['dce','Data-centre engineer','rack'],['energy','Energy consultant','curve'],['eng','Engineer','pipe'],['econ','Economist','cost'],['law','Lawyer','bylaw'],['cons','Consultant','report']];
+const P={}; TEAM.forEach(([id,nm,tool],i)=>{ const c=i%3, r=Math.floor(i/3), x=250+c*340, y=320+r*235; P[id]={g:person(x,y,1.2,tool,nm),x,y,i}; });
+const JOBS=[['Read the lot','zoning, area, what stands there',['planner','gis'],'Site'],['Size what fits','halls, plant, generators, loading',['arch','dce'],'What fits'],['Find who is nearby','and what heat, power and water they need',['energy'],'Exchanges'],
+ ['Cost the connection','pipe, heat pump, upkeep',['eng','econ'],'Exchanges'],['Check the rules','zoning, code, utility rules, permits',['planner','law'],'Opportunities'],['Write it up','for Everyday, Civic and Technical readers',['cons'],'Report']];
+const J0=1.6, JD=1.45, JT=JOBS.map((_,i)=>J0+i*JD);
+const box=document.getElementById('box'); const ROWS=JOBS.map(([j,,,st])=>{ const e=document.createElement('div'); e.className='row'; e.innerHTML=`<span class="k"></span>${j}<span class="s">${st}</span>`; box.appendChild(e); return e; });
+const FLY=JOBS.map(([j])=>{ const e=document.createElement('div'); e.className='fly'; e.textContent=j; document.body.appendChild(e); return e; });
+const jobE=document.getElementById('job');
+// who asks what: one person per level
+const QS=[['Everyday','Will I hear it?'],['Civic','Is it allowed, and who pays?'],['Technical','How is that worked out?']];
+const gQ=el('g',{opacity:0}); const QP=QS.map((_,i)=>{ const x=420+i*540; const g=person(x,420,1.7,null,''); s.removeChild(g); gQ.appendChild(g); return g; });
+const QE=QS.map(([lv,q],i)=>{ const e=document.createElement('div'); e.className='q'; e.style.left=(420+i*540-240)+'px'; e.style.top='600px'; e.innerHTML=`<div class="lv">${lv}</div><div class="t">${q}</div>`; document.body.appendChild(e); return e; });
+const caps=[[.4,5.0,'Jobs usually split across a team'],[5.2,10.5,'Done in one pass, on any real lot'],[13.0,16.4,'Same lot, same facts, three ways in']].map(([a,b,x])=>{const e=document.createElement('div'); e.className='cap'; e.textContent=x; document.body.appendChild(e); return {a,b,e};});
+const lerpC=(a,b,u)=>{ const A=a.match(/\w\w/g).map(h=>parseInt(h,16)), B=b.match(/\w\w/g).map(h=>parseInt(h,16)); return '#'+A.map((v,i)=>Math.round(v+(B[i]-v)*u).toString(16).padStart(2,'0')).join(''); };
+function Rt(t){
+  const out=1-seg(t,10.4,11.0);
+  Object.values(P).forEach(p=>{ let lit=0; JOBS.forEach(([,,who],i)=>{ if(who.includes(Object.keys(P).find(k=>P[k]===p))) lit=Math.max(lit,win(t,JT[i]+.1,JT[i]+JD-.05,.25)); });
+    const a=seg(t,.3+p.i*.12,.8+p.i*.12); p.g.setAttribute('opacity',a*out); p.g.style.setProperty('--c',lerpC('8e8a84','e7a39c',lit)); p.g.style.setProperty('--n',lerpC('bdb9b2','f2efea',lit));
+    const sc=1.2+.07*lit; p.g.setAttribute('transform',`translate(${p.x},${p.y}) scale(${sc})`); });
+  // the job title, large; then the hand-off to the tool
+  const ji=JT.findIndex((a,i)=>t>=a&&t<a+JD); if(ji>=0&&t<10.6){ const [j,d]=JOBS[ji]; jobE.innerHTML=`${j}<span class="d">${d}</span>`; jobE.style.opacity=win(t,JT[ji],JT[ji]+JD,.25); } else jobE.style.opacity=0;
+  box.style.opacity=seg(t,JT[0]+.7,JT[0]+1.1)*(1-seg(t,10.4,11.0)); box.style.transform=`translateX(${(1-seg(t,JT[0]+.7,JT[0]+1.1))*30}px)`;
+  JOBS.forEach(([,,who],i)=>{ const a=JT[i]+.65, u=seg(t,a,a+.6); const px=who.reduce((v,k)=>v+P[k].x,0)/who.length, py=who.reduce((v,k)=>v+P[k].y,0)/who.length;
+    const tx=1184, ty=240+i*72; FLY[i].style.transform=`translate(${px-60+(tx-px+60)*u}px,${py-20+(ty-py+20)*u}px)`; FLY[i].style.opacity=seg(t,a-.1,a+.1)*(1-seg(t,a+.5,a+.65));
+    ROWS[i].style.opacity=seg(t,a+.5,a+.7); ROWS[i].querySelector('.k').style.setProperty('--c',seg(t,a+.65,a+.85)); });
+  // who asks what
+  gQ.setAttribute('opacity',seg(t,10.9,11.5)*(1-seg(t,16.2,16.8)));
+  QE.forEach((e,i)=>{ const a=11.3+i*.55; e.style.opacity=seg(t,a,a+.4)*(1-seg(t,16.2,16.8)); e.style.transform=`translateY(${(1-seg(t,a,a+.4))*14}px)`; });
+  QP.forEach((g,i)=>g.style.setProperty('--c',lerpC('8e8a84','e7a39c',seg(t,11.3+i*.55,11.7+i*.55))));
+  caps.forEach(c=>c.e.style.opacity=win(t,c.a,c.b));
+  document.body.style.opacity=1-seg(t,16.4,16.8);
+}
+window.DUR=16.8; window.R=Rt; Rt(0);
+</script></body></html>

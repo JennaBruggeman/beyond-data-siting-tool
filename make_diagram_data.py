@@ -7,14 +7,14 @@ r = json.load(open(os.path.join(here, 'formula_register.json'), encoding='utf-8'
 Q = {q['id']: q for q in r['quantities']}
 
 STAGES = [
-    ('input', 'Inputs', 'what the tool reads or asks for'),
-    ('size', 'Size', 'how big the data centre is'),
-    ('place', 'The place', 'what the place offers the data centre'),
-    ('characterise', 'Characterise', 'what it gives off and holds'),
-    ('prospect', 'Prospect', 'who is nearby and what they need'),
-    ('opportunity', 'Opportunities', 'what the output could become, sized'),
-    ('test', 'Test', 'the figures the conditions are judged on'),
-    ('decide', 'Account', 'ledger and trade-off table'),
+    ('input', 'What we start with', 'what the tool reads or asks for'),
+    ('size', 'How big it can be', 'how big the data centre is'),
+    ('place', 'What the site offers', 'what the place offers the data centre'),
+    ('characterise', 'What it gives off', 'what it gives off and holds'),
+    ('prospect', 'Who is nearby', 'who is nearby and what they need'),
+    ('opportunity', 'What it could become', 'what the output could become, sized'),
+    ('test', 'What it would take', 'the figures the conditions are judged on'),
+    ('decide', 'Who gains, who pays', 'ledger and trade-off table'),
 ]
 
 # External inputs: what they are and where the tool gets them

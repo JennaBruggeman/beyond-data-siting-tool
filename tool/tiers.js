@@ -10,9 +10,9 @@
 const BD=window.BD; const {$,esc}=BD;
 const KEY='bd-tier';
 const TIERS=[
- {id:'resident',name:'What it means for me',who:'For residents and neighbours',does:'Only where it is. Everything else starts from a typical choice you can change.'},
- {id:'community',name:'What it means for the neighbourhood',who:'For councillors, community groups and receivers of heat',does:'Every set-up choice; who gains and loses, the money, the approvals.'},
- {id:'full',name:'How it is worked out',who:'For engineers, architects and bylaw professionals',does:'Everything, with formulas, sources and confidence.'}];
+ {id:'resident',short:'Everyday',name:'What it means for me',who:'For residents and neighbours',does:'Only where it is. Everything else starts from a typical choice you can change.'},
+ {id:'community',short:'Civic',name:'What it means for the neighbourhood',who:'For councillors, community groups and receivers of heat',does:'Every set-up choice; who gains and loses, the money, the approvals.'},
+ {id:'full',short:'Technical',name:'How it is worked out',who:'For engineers, architects and bylaw professionals',does:'Everything, with formulas, sources and confidence.'}];
 const TYPICAL_MW=2.5;
 let tier=null; try{ tier=localStorage.getItem(KEY); }catch(e){}
 if(!TIERS.some(t=>t.id===tier)) tier=null;
@@ -45,7 +45,7 @@ function preview(id){ const T=BD.TPL, Y=layout(); if(!T||!Y) return ''; const ra
 function chooser(card,cont){
   card.innerHTML=`<div class="kind">Beyond Data</div><h2 id="wTitle">What do you want to know?</h2>
    <p class="sub">Every choice runs the same tool. It changes what you are asked and what you see. You can switch at any time.</p>
-   <div class="tiers" role="radiogroup">${TIERS.map(t=>`<button class="tier" role="radio" aria-checked="${t.id===tier}" data-t="${t.id}"><b>${esc(t.name)}</b><span>${esc(t.who)}</span><span class="tdo">${esc(t.does)}</span>${preview(t.id)}</button>`).join('')}</div>
+   <div class="tiers" role="radiogroup">${TIERS.map(t=>`<button class="tier" role="radio" aria-checked="${t.id===tier}" data-t="${t.id}"><b><span class="tshort">${esc(t.short)}</span>${esc(t.name)}</b><span>${esc(t.who)}</span><span class="tdo">${esc(t.does)}</span>${preview(t.id)}</button>`).join('')}</div>
    <p class="sub"><a href="#" id="tBack">← Back</a> · <a href="https://claude.ai/artifact/1qrPPrLsLqabEsDQriz6SZ" target="_blank" rel="noopener">See the full diagram</a> (opens in a new tab)</p>`;
   card.querySelectorAll('.tier').forEach(b=>b.onclick=()=>{ BD.setTier(b.dataset.t); cont(); });
   const bk=card.querySelector('#tBack'); if(bk) bk.onclick=e=>{ e.preventDefault(); const w=$('#welcome'); if(w) w.remove(); BD.welcome(); };

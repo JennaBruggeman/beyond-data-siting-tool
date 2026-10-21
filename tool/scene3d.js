@@ -270,7 +270,7 @@ async function showOptions(opts,data){
   { const sp=state.span; R.cam.position.set(sp*3.0,sp*2.6+state.roof*1.4,sp*3.4); R.ctl.target.set(0,state.roof*0.4,0); } note('Same site, same view: drag to orbit all three'); key(''); }
 function hide(){ if(wrap) wrap.style.display='none'; if(R){ R.multi=null; if(R.cap){ R.cap.forEach(c=>c.remove()); R.cap=[]; } } }
 /* demos for the decision cards (J.B., 17 Oct): the option picked, animated on this site. Schematic massing, not a design. */
-function demo(kind){ if(!R||!state.M) return; const M=state.M, sel=BD.S.sel; if(R.demoG){ R.scene.remove(R.demoG); } const g=new T.Group(); R.demoG=g; R.scene.add(g); R.ticks=R.ticks||[];
+function demo(kind){ if(!R||!state.M) return; const M=state.M, sel=BD.S.sel; if(R.demoG){ R.scene.remove(R.demoG); } const g=new T.Group(); R.demoG=g; R.scene.add(g); R.ticks=[]; /* one demo at a time: earlier loops stop (21 Oct) */
   const t0=performance.now(), loopMs=5200;
   const ease=x=>x<0?0:x>1?1:1-Math.pow(1-x,3);
   if((kind==='new'||kind==='share')&&M.foot){ const n=Math.max(1,M.nF?M.nF[0]:3), H=M.H||n*6, fh=H/n, data=kind==='share'?Math.max(1,Math.ceil((n-1)/2)):n, ground=kind==='share';

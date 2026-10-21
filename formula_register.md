@@ -1,6 +1,6 @@
 # Beyond Data — formula register
 
-Generated 20 Oct 2026 from `formula_register.json` (the diagram reads the JSON; edit that, then run `make_register_md.py`).
+Generated 21 Oct 2026 from `formula_register.json` (the diagram reads the JSON; edit that, then run `make_register_md.py`).
 
 **Scale.** 100 arithmetic/physics · 90 regulation, tariff or standard read directly · 80 government dataset or statistic · 70 peer-reviewed coefficient transferred from another context · 60 derived with stated assumption · 50 operator or industry claim · 40 proxy · 20 judged · 0 gap
 

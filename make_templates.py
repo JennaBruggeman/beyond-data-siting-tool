@@ -107,9 +107,9 @@ for k, (t, p, r) in T.items():
         assert q in parties, (k, q)
 rank = {R: 0, C: 1, F: 2}
 out = {'date': '2026-10-19', 'status': 'draft: judged by Claude from each node\'s meaning; no user testing yet; sensitivity test to follow',
-       'tiers': [{'id': 'resident', 'name': 'What it means for me', 'who': 'residents and other laypeople', 'asks': 'where, and maybe how big; other answers assumed, shown and changeable'},
-                 {'id': 'community', 'name': 'What it means for the neighbourhood', 'who': 'councillors, community groups, receivers, policy planners', 'asks': 'every setup question'},
-                 {'id': 'full', 'name': 'How it is worked out', 'who': 'engineers, architects, bylaw professionals', 'asks': 'every setup question'}],
+       'tiers': [{'id': 'resident', 'short': 'Everyday', 'name': 'What it means for me', 'who': 'residents and other laypeople', 'asks': 'where, and maybe how big; other answers assumed, shown and changeable'},
+                 {'id': 'community', 'short': 'Civic', 'name': 'What it means for the neighbourhood', 'who': 'councillors, community groups, receivers, policy planners', 'asks': 'every setup question'},
+                 {'id': 'full', 'short': 'Technical', 'name': 'How it is worked out', 'who': 'engineers, architects, bylaw professionals', 'asks': 'every setup question'}],
        'rule': 'every node runs in every tier; a tier sets what is asked and shown; facts are never switched off',
        'nodes': {k: {'tier': t, 'parties': p.split(), 'why': r} for k, (t, p, r) in T.items()}}
 # the report each template gets (J.B. 20 Oct 2026: "3 different reports for each of the templates, and this should be diagrammed in the template").
