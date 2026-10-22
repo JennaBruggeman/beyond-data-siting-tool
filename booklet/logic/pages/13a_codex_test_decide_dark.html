@@ -1,0 +1,193 @@
+<!doctype html><html><head><meta charset="utf-8"><title>13a_codex_test_decide_dark</title><style>@font-face{font-family:Barlow;font-weight:400;src:url(Barlow-Light.ttf)}@font-face{font-family:Barlow;font-weight:500;src:url(Barlow-SemiBold.ttf)}@font-face{font-family:Barlow;font-weight:450;src:url(Barlow-Regular.ttf)}
+@font-face{font-family:Plex;font-weight:400;src:url(../../../pitch/anim/plex-400.woff2)}@font-face{font-family:Plex;font-weight:500;src:url(../../../pitch/anim/plex-500.woff2)}
+@font-face{font-family:PlexMono;font-weight:400;src:url(mono-400.woff2)}@font-face{font-family:PlexMono;font-weight:500;src:url(mono-500.woff2)}
+@page{size:8.5in 11in;margin:0}html,body{margin:0;background:#1c1c1e}svg{display:block}
+text{font-family:Barlow,sans-serif} .m{font-family:PlexMono,monospace}</style></head><body>
+<svg xmlns="http://www.w3.org/2000/svg" width="816.0" height="1056" viewBox="0 0 816.0 1056"><rect width="816.0" height="1056" fill="#1c1c1e"/><text x="54" y="78" font-size="40" font-weight="400" fill="#f0f0f1">L13a</text><g transform="translate(96 0)"><text x="54" y="72" font-size="24" font-weight="500" fill="#f0f0f1">What it would take · Who gains, who pays</text><text x="54" y="90" font-size="12" fill="#b4b4b7">Every part, its inputs and its formula as written in the tool (58 parts, page 1 of 3)</text><line x1="54" y1="102" x2="80" y2="102" stroke="#e8e6e2" stroke-width="2.6"/></g><text x="762.0" y="56" font-size="8" font-weight="450" fill="#7d7d80" text-anchor="end" letter-spacing="2.4">BEYOND DATA · LOGIC DIAGRAM · TEST + DECIDE</text><text x="762.0" y="69" font-size="8" font-weight="450" fill="#7d7d80" text-anchor="end" letter-spacing="2.4">DRAFT V1 · 22 OCT 2026</text>
+<text x="54.0" y="146.2" font-size="8.2" font-weight="500" fill="#f0f0f1">Crossing type</text>
+<circle cx="269.66666666666663" cy="142.92" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="269.66666666666663" cy="142.92" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="31.42 31.42" transform="rotate(-90 269.66666666666663 142.92)"/>
+<text class="m" x="54.0" y="155.5" font-size="5.58" fill="#7d7d80">crossing_type  [class · own 100 · chain 60]</text>
+<text class="m" x="54.0" y="164.8" font-size="6.2" fill="#b4b4b7">← receivers, offerable_area</text>
+<text class="m" x="54.0" y="173.2" font-size="6.2" fill="#f0f0f1">pipes/cables/data only (easier) vs people inside (harder)</text>
+<text x="296.66666666666663" y="146.2" font-size="8.2" font-weight="500" fill="#f0f0f1">Hourly heat-demand profile</text>
+<circle cx="512.3333333333333" cy="142.92" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="512.3333333333333" cy="142.92" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="21.99 31.42" transform="rotate(-90 512.3333333333333 142.92)"/>
+<text class="m" x="296.66666666666663" y="155.5" font-size="5.58" fill="#7d7d80">demand_profile  [MW · own 70 · chain 60]</text>
+<text class="m" x="296.66666666666663" y="164.8" font-size="6.2" fill="#b4b4b7">← receiver_demand, weather</text>
+<text class="m" x="296.66666666666663" y="173.2" font-size="6.2" fill="#f0f0f1">hourly HDD = max(0, 16 − T_out)</text>
+<text class="m" x="296.66666666666663" y="181.5" font-size="6.2" fill="#f0f0f1">space heat ∝ HDD in season</text>
+<text class="m" x="296.66666666666663" y="189.9" font-size="6.2" fill="#f0f0f1">DHW constant</text>
+<text class="m" x="296.66666666666663" y="198.3" font-size="6.2" fill="#f0f0f1">losses ~15%</text>
+<text x="539.3333333333333" y="146.2" font-size="8.2" font-weight="500" fill="#f0f0f1">Data-centre build cost</text>
+<circle cx="754.9999999999999" cy="142.92" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="754.9999999999999" cy="142.92" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="21.99 31.42" transform="rotate(-90 754.9999999999999 142.92)"/>
+<text class="m" x="539.3333333333333" y="155.5" font-size="5.58" fill="#7d7d80">build_cost  [USD/W; CAD/ft² · own 70 · chain 70]</text>
+<text class="m" x="539.3333333333333" y="164.8" font-size="6.2" fill="#f0f0f1">cost per watt of critical power</text>
+<text class="m" x="539.3333333333333" y="173.2" font-size="6.2" fill="#f0f0f1">cost per ft²</text>
+<text class="m" x="539.3333333333333" y="181.5" font-size="6.2" fill="#f0f0f1">partially filled: capex and non-power opex × 1 ÷</text>
+<text class="m" x="539.3333333333333" y="189.9" font-size="6.2" fill="#8b8b8d">  occupancy</text>
+<text x="54.0" y="203.73999999999998" font-size="8.2" font-weight="500" fill="#f0f0f1">Capital recovery factor</text>
+<circle cx="269.66666666666663" cy="200.45999999999998" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="269.66666666666663" cy="200.45999999999998" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="31.42 31.42" transform="rotate(-90 269.66666666666663 200.45999999999998)"/>
+<text class="m" x="54.0" y="213.04" font-size="5.58" fill="#7d7d80">crf  [— · own 100 · chain 100]</text>
+<text class="m" x="54.0" y="222.3" font-size="6.2" fill="#f0f0f1">i ÷ (1 − (1+i)^−n)</text>
+<text x="539.3333333333333" y="220.47999999999996" font-size="8.2" font-weight="500" fill="#f0f0f1">Solar installed cost</text>
+<circle cx="754.9999999999999" cy="217.19999999999996" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="754.9999999999999" cy="217.19999999999996" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="21.99 31.42" transform="rotate(-90 754.9999999999999 217.19999999999996)"/>
+<text class="m" x="539.3333333333333" y="229.77999999999997" font-size="5.58" fill="#7d7d80">pv_cost  [CAD/W · own 70 · chain 70]</text>
+<text class="m" x="539.3333333333333" y="239.1" font-size="6.2" fill="#b4b4b7">← pv_roof</text>
+<text class="m" x="539.3333333333333" y="247.4" font-size="6.2" fill="#f0f0f1">kWp × 1,000 × rate by size</text>
+<text x="296.66666666666663" y="228.84999999999997" font-size="8.2" font-weight="500" fill="#f0f0f1">Zoning: allowed, conditional or rezoning</text>
+<circle cx="512.3333333333333" cy="225.56999999999996" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="512.3333333333333" cy="225.56999999999996" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="25.13 31.42" transform="rotate(-90 512.3333333333333 225.56999999999996)"/>
+<text class="m" x="296.66666666666663" y="238.14999999999998" font-size="5.58" fill="#7d7d80">zoning_status  [class · own 80 · chain 80]</text>
+<text class="m" x="296.66666666666663" y="247.4" font-size="6.2" fill="#b4b4b7">← parcel, zone, start_case</text>
+<text class="m" x="296.66666666666663" y="255.8" font-size="6.2" fill="#f0f0f1">look up the district: outright / conditional (development</text>
+<text class="m" x="296.66666666666663" y="264.2" font-size="6.2" fill="#8b8b8d">  permit) / not listed (rezoning or text amendment)</text>
+<text x="54.0" y="252.90999999999997" font-size="8.2" font-weight="500" fill="#f0f0f1">Buyer ceiling price</text>
+<circle cx="269.66666666666663" cy="249.62999999999997" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="269.66666666666663" cy="249.62999999999997" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="18.85 31.42" transform="rotate(-90 269.66666666666663 249.62999999999997)"/>
+<text class="m" x="54.0" y="262.21" font-size="5.58" fill="#7d7d80">price_ceiling  [CAD/MWh · own 60 · chain 60]</text>
+<text class="m" x="54.0" y="271.5" font-size="6.2" fill="#f0f0f1">fuel price ÷ boiler efficiency (0.85)</text>
+<text class="m" x="54.0" y="279.9" font-size="6.2" fill="#f0f0f1">or district-energy tariff</text>
+<text class="m" x="54.0" y="288.2" font-size="6.2" fill="#f0f0f1">NEU returned-heat credit as revealed WTP</text>
+<text x="539.3333333333333" y="278.0199999999999" font-size="8.2" font-weight="500" fill="#f0f0f1">Termination risk</text>
+<circle cx="754.9999999999999" cy="274.73999999999995" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="754.9999999999999" cy="274.73999999999995" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="21.99 31.42" transform="rotate(-90 754.9999999999999 274.73999999999995)"/>
+<text class="m" x="539.3333333333333" y="287.31999999999994" font-size="5.58" fill="#7d7d80">risk_term  [%/yr · own 70 · chain 70]</text>
+<text class="m" x="539.3333333333333" y="296.6" font-size="6.2" fill="#f0f0f1">share of recoveries lost (volume-weighted) and share of</text>
+<text class="m" x="539.3333333333333" y="305.0" font-size="6.2" fill="#8b8b8d">  cooperations terminated, by class</text>
+<text x="296.66666666666663" y="294.75999999999993" font-size="8.2" font-weight="500" fill="#f0f0f1">Water licence required</text>
+<circle cx="512.3333333333333" cy="291.47999999999996" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="512.3333333333333" cy="291.47999999999996" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="28.27 31.42" transform="rotate(-90 512.3333333333333 291.47999999999996)"/>
+<text class="m" x="296.66666666666663" y="304.05999999999995" font-size="5.58" fill="#7d7d80">licence_flag  [flag · own 90 · chain 80]</text>
+<text class="m" x="296.66666666666663" y="313.4" font-size="6.2" fill="#b4b4b7">← ground</text>
+<text class="m" x="296.66666666666663" y="321.7" font-size="6.2" fill="#f0f0f1">BC: yes for open-loop heat exchange (WSR Sch. A item 9).</text>
+<text class="m" x="296.66666666666663" y="330.1" font-size="6.2" fill="#8b8b8d">  Alberta (Guide to Groundwater Authorization 2023 §6.2):</text>
+<text class="m" x="296.66666666666663" y="338.5" font-size="6.2" fill="#8b8b8d">  open loop with no water loss and return to the same</text>
+<text class="m" x="296.66666666666663" y="346.8" font-size="6.2" fill="#8b8b8d">  water body = Water Act &quot;activity&quot; → approval</text>
+<text class="m" x="296.66666666666663" y="355.2" font-size="6.2" fill="#f0f0f1">different water body or any loss → licence</text>
+<text class="m" x="296.66666666666663" y="363.6" font-size="6.2" fill="#f0f0f1">closed loop → none. Flow tier for the aquifer test:…</text>
+<text x="54.0" y="318.82" font-size="8.2" font-weight="500" fill="#f0f0f1">Who pays which part</text>
+<circle cx="269.66666666666663" cy="315.54" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="269.66666666666663" cy="315.54" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="21.99 31.42" transform="rotate(-90 269.66666666666663 315.54)"/>
+<text class="m" x="54.0" y="328.12" font-size="5.58" fill="#7d7d80">capex_split  [— · own 70 · chain 70]</text>
+<text class="m" x="54.0" y="337.4" font-size="6.2" fill="#f0f0f1">recovery equipment / connection / network / heat pump, by</text>
+<text class="m" x="54.0" y="345.8" font-size="6.2" fill="#8b8b8d">  party</text>
+<text x="539.3333333333333" y="335.55999999999995" font-size="8.2" font-weight="500" fill="#f0f0f1">Time horizons</text>
+<circle cx="754.9999999999999" cy="332.28" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="754.9999999999999" cy="332.28" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="25.13 31.42" transform="rotate(-90 754.9999999999999 332.28)"/>
+<text class="m" x="539.3333333333333" y="344.85999999999996" font-size="5.58" fill="#7d7d80">horizons  [yr · own 80 · chain 80]</text>
+<text class="m" x="539.3333333333333" y="354.2" font-size="6.2" fill="#f0f0f1">servers ~6</text>
+<text class="m" x="539.3333333333333" y="362.5" font-size="6.2" fill="#f0f0f1">plant 15–25</text>
+<text class="m" x="539.3333333333333" y="370.9" font-size="6.2" fill="#f0f0f1">shell ≤40</text>
+<text class="m" x="539.3333333333333" y="379.3" font-size="6.2" fill="#f0f0f1">network 40–50</text>
+<text class="m" x="539.3333333333333" y="387.6" font-size="6.2" fill="#f0f0f1">lease</text>
+<text x="54.0" y="376.36" font-size="8.2" font-weight="500" fill="#f0f0f1">Connection lead time</text>
+<circle cx="269.66666666666663" cy="373.08000000000004" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="269.66666666666663" cy="373.08000000000004" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="28.27 31.42" transform="rotate(-90 269.66666666666663 373.08000000000004)"/>
+<text class="m" x="54.0" y="385.66" font-size="5.58" fill="#7d7d80">lead_time  [months · own 90 · chain 90]</text>
+<text class="m" x="54.0" y="395.0" font-size="6.2" fill="#f0f0f1">BC Hydro: conceptual 1–1.5 + SIS 6–9 + transition 3–4 +</text>
+<text class="m" x="54.0" y="403.3" font-size="6.2" fill="#8b8b8d">  FS 6–9</text>
+<text class="m" x="54.0" y="411.7" font-size="6.2" fill="#f0f0f1">AESO: stages 0–2 avg 86 wk, stage 3 avg 134 wk</text>
+<text x="296.66666666666663" y="394.1499999999999" font-size="8.2" font-weight="500" fill="#f0f0f1">Grid headroom status</text>
+<circle cx="512.3333333333333" cy="390.86999999999995" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="512.3333333333333" cy="390.86999999999995" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="28.27 31.42" transform="rotate(-90 512.3333333333333 390.86999999999995)"/>
+<text class="m" x="296.66666666666663" y="403.44999999999993" font-size="5.58" fill="#7d7d80">grid_headroom  [status · own 90 · chain 90]</text>
+<text class="m" x="296.66666666666663" y="412.7" font-size="6.2" fill="#f0f0f1">governing document, date, stated cap or constraint, next</text>
+<text class="m" x="296.66666666666663" y="421.1" font-size="6.2" fill="#8b8b8d">  milestone</text>
+<text class="m" x="296.66666666666663" y="429.5" font-size="6.2" fill="#f0f0f1">headroom field in the form regulators publish elsewhere:</text>
+<text class="m" x="296.66666666666663" y="437.9" font-size="6.2" fill="#8b8b8d">  remaining kVA band at station (≥7.5 MVA) and feeder</text>
+<text class="m" x="296.66666666666663" y="446.2" font-size="6.2" fill="#8b8b8d">  (OEB) or feeder-segment kVA class (ENMAX)</text>
+<text x="539.3333333333333" y="418.21" font-size="8.2" font-weight="500" fill="#f0f0f1">Earthquake design category</text>
+<circle cx="754.9999999999999" cy="414.93" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="754.9999999999999" cy="414.93" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="28.27 31.42" transform="rotate(-90 754.9999999999999 414.93)"/>
+<text class="m" x="539.3333333333333" y="427.51" font-size="5.58" fill="#7d7d80">importance_cat  [rule · own 90 · chain 60]</text>
+<text class="m" x="539.3333333333333" y="436.8" font-size="6.2" fill="#b4b4b7">← refuge_people</text>
+<text class="m" x="539.3333333333333" y="445.2" font-size="6.2" fill="#f0f0f1">Normal (IE 1.0) by default</text>
+<text class="m" x="539.3333333333333" y="453.6" font-size="6.2" fill="#f0f0f1">High (1.3) if likely used as a post-disaster shelter</text>
+<text class="m" x="539.3333333333333" y="461.9" font-size="6.2" fill="#f0f0f1">post-disaster (1.5) if it serves as a communications</text>
+<text class="m" x="539.3333333333333" y="470.3" font-size="6.2" fill="#8b8b8d">  facility, unless the authority exempts</text>
+<text x="54.0" y="442.27000000000004" font-size="8.2" font-weight="500" fill="#f0f0f1">Local noise limit</text>
+<circle cx="269.66666666666663" cy="438.99000000000007" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="269.66666666666663" cy="438.99000000000007" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="28.27 31.42" transform="rotate(-90 269.66666666666663 438.99000000000007)"/>
+<text class="m" x="54.0" y="451.57000000000005" font-size="5.58" fill="#7d7d80">noise_limit  [dBA · own 90 · chain 50]</text>
+<text class="m" x="54.0" y="460.9" font-size="6.2" fill="#b4b4b7">← noise_level</text>
+<text class="m" x="54.0" y="469.2" font-size="6.2" fill="#f0f0f1">Edmonton Bylaw 14600 at the property line, no averaging</text>
+<text class="m" x="54.0" y="477.6" font-size="6.2" fill="#8b8b8d">  period stated: residential 65 day / 50 night,</text>
+<text class="m" x="54.0" y="486.0" font-size="6.2" fill="#8b8b8d">  non-residential 75 / 60 (s.19–22)</text>
+<text class="m" x="54.0" y="494.4" font-size="6.2" fill="#f0f0f1">Vancouver by zone pair, continuous: quiet→quiet 55/45,</text>
+<text class="m" x="54.0" y="502.7" font-size="6.2" fill="#8b8b8d">  activity→quiet 60/55, other 70/65</text>
+<text class="m" x="54.0" y="511.1" font-size="6.2" fill="#f0f0f1">AUC Rule 012 Leq 40–56 + tonal +5 for the grid connectio…</text>
+<text x="296.66666666666663" y="476.79999999999995" font-size="8.2" font-weight="500" fill="#f0f0f1">Street right-of-way cost</text>
+<circle cx="512.3333333333333" cy="473.52" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="512.3333333333333" cy="473.52" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="28.27 31.42" transform="rotate(-90 512.3333333333333 473.52)"/>
+<text class="m" x="296.66666666666663" y="486.09999999999997" font-size="5.58" fill="#7d7d80">row_cost  [CAD/yr · own 90 · chain 60]</text>
+<text class="m" x="296.66666666666663" y="495.4" font-size="6.2" fill="#b4b4b7">← distribution_cost</text>
+<text class="m" x="296.66666666666663" y="503.8" font-size="6.2" fill="#f0f0f1">Vancouver Encroachment By-law 4243: $244.97 + $6.53/ft²</text>
+<text class="m" x="296.66666666666663" y="512.1" font-size="6.2" fill="#8b8b8d">  over 150 ft²</text>
+<text class="m" x="296.66666666666663" y="520.5" font-size="6.2" fill="#f0f0f1">Edmonton ULA permit, one-time: inspection $356.64 (no</text>
+<text class="m" x="296.66666666666663" y="528.9" font-size="6.2" fill="#8b8b8d">  circulation) to $570.63 (under 20 m) or $1,560.31 (over</text>
+<text class="m" x="296.66666666666663" y="537.2" font-size="6.2" fill="#8b8b8d">  20 m) + $2.67 per m over 20 m, plus pavement</text>
+<text class="m" x="296.66666666666663" y="545.6" font-size="6.2" fill="#8b8b8d">  degradation $2.59 per linear m (City of Edmonton ULA…</text>
+<text x="539.3333333333333" y="500.86" font-size="8.2" font-weight="500" fill="#f0f0f1">EV charging regulatory status</text>
+<circle cx="754.9999999999999" cy="497.58000000000004" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="754.9999999999999" cy="497.58000000000004" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="28.27 31.42" transform="rotate(-90 754.9999999999999 497.58000000000004)"/>
+<text class="m" x="539.3333333333333" y="510.16" font-size="5.58" fill="#7d7d80">ev_exemption  [flag · own 90 · chain 90]</text>
+<text class="m" x="539.3333333333333" y="519.5" font-size="6.2" fill="#f0f0f1">BC: exempt from UCA Part 3 (MO M104, 2019</text>
+<text class="m" x="539.3333333333333" y="527.8" font-size="6.2" fill="#f0f0f1">G-66-19). Alberta: no rule yet</text>
+<text class="m" x="539.3333333333333" y="536.2" font-size="6.2" fill="#f0f0f1">the AUC found parties agreed EV charging is &quot;not defined</text>
+<text class="m" x="539.3333333333333" y="544.6" font-size="6.2" fill="#8b8b8d">  clearly in legislation&quot; and that its status is</text>
+<text class="m" x="539.3333333333333" y="552.9" font-size="6.2" fill="#8b8b8d">  &quot;unclear&quot;</text>
+<text class="m" x="539.3333333333333" y="561.3" font-size="6.2" fill="#f0f0f1">most saw no need for more oversight (AUC Distribution…</text>
+<text x="54.0" y="541.6600000000001" font-size="8.2" font-weight="500" fill="#f0f0f1">Embodied carbon rule</text>
+<circle cx="269.66666666666663" cy="538.38" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="269.66666666666663" cy="538.38" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="28.27 31.42" transform="rotate(-90 269.66666666666663 538.38)"/>
+<text class="m" x="54.0" y="550.96" font-size="5.58" fill="#7d7d80">embodied_rule  [rule · own 90 · chain 40]</text>
+<text class="m" x="54.0" y="560.3" font-size="6.2" fill="#b4b4b7">← embodied_building</text>
+<text class="m" x="54.0" y="568.6" font-size="6.2" fill="#f0f0f1">Vancouver: new buildings at most 2× the baseline (cap 800</text>
+<text class="m" x="54.0" y="577.0" font-size="6.2" fill="#8b8b8d">  kg CO2e/m² on the absolute path)</text>
+<text class="m" x="54.0" y="585.4" font-size="6.2" fill="#f0f0f1">Edmonton: no requirement for private buildings</text>
+<text x="296.66666666666663" y="576.19" font-size="8.2" font-weight="500" fill="#f0f0f1">Floor strength</text>
+<circle cx="512.3333333333333" cy="572.91" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="512.3333333333333" cy="572.91" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="21.99 31.42" transform="rotate(-90 512.3333333333333 572.91)"/>
+<text class="m" x="296.66666666666663" y="585.49" font-size="5.58" fill="#7d7d80">floor_load_need  [kPa needed vs designed · own 70 · chain 50]</text>
+<text class="m" x="296.66666666666663" y="594.8" font-size="6.2" fill="#b4b4b7">← host_building, start_case</text>
+<text class="m" x="296.66666666666663" y="603.2" font-size="6.2" fill="#f0f0f1">equipment load of the hall (racks, batteries) vs the</text>
+<text class="m" x="296.66666666666663" y="611.5" font-size="6.2" fill="#8b8b8d">  floor&#x27;s design load for its original use</text>
+<text x="539.3333333333333" y="591.8800000000001" font-size="8.2" font-weight="500" fill="#f0f0f1">Ground warming over 20 years</text>
+<circle cx="754.9999999999999" cy="588.6" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="754.9999999999999" cy="588.6" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="17.28 31.42" transform="rotate(-90 754.9999999999999 588.6)"/>
+<text class="m" x="539.3333333333333" y="601.1800000000001" font-size="5.58" fill="#7d7d80">ground_warming  [K · own 55 · chain 40]</text>
+<text class="m" x="539.3333333333333" y="610.5" font-size="6.2" fill="#b4b4b7">← borefield</text>
+<text class="m" x="539.3333333333333" y="618.9" font-size="6.2" fill="#f0f0f1">from the share of heat put in vs taken out</text>
+<text x="54.0" y="615.9400000000002" font-size="8.2" font-weight="500" fill="#f0f0f1">What the receiver uses now</text>
+<circle cx="269.66666666666663" cy="612.6600000000001" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="269.66666666666663" cy="612.6600000000001" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="18.85 31.42" transform="rotate(-90 269.66666666666663 612.6600000000001)"/>
+<text class="m" x="54.0" y="625.2400000000001" font-size="5.58" fill="#7d7d80">displaced_source  [fuel · kg CO₂e/MWh of heat · own 60 · chain 20]</text>
+<text class="m" x="54.0" y="634.5" font-size="6.2" fill="#b4b4b7">← host_building, competing_sources, grid_co2, hp_electricit</text>
+<text class="m" x="54.0" y="642.9" font-size="6.2" fill="#f0f0f1">the heat source a match would replace: from the</text>
+<text class="m" x="54.0" y="651.3" font-size="6.2" fill="#8b8b8d">  host-building question (gas boilers · hot-water system</text>
+<text class="m" x="54.0" y="659.7" font-size="6.2" fill="#8b8b8d">  · electric baseboard · district energy) or the</text>
+<text class="m" x="54.0" y="668.0" font-size="6.2" fill="#8b8b8d">  network&#x27;s supply mix</text>
+<text class="m" x="54.0" y="676.4" font-size="6.2" fill="#f0f0f1">carbon change = displaced heat × its factor − heat-pump</text>
+<text class="m" x="54.0" y="684.8" font-size="6.2" fill="#8b8b8d">  electricity × grid factor, which can be zero or…</text>
+<text x="296.66666666666663" y="642.1000000000001" font-size="8.2" font-weight="500" fill="#f0f0f1">New clean power: price and route</text>
+<circle cx="512.3333333333333" cy="638.82" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="512.3333333333333" cy="638.82" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="21.99 31.42" transform="rotate(-90 512.3333333333333 638.82)"/>
+<text class="m" x="296.66666666666663" y="651.4000000000001" font-size="5.58" fill="#7d7d80">clean_power_price  [CAD/MWh · own 70 · chain 70]</text>
+<text class="m" x="296.66666666666663" y="660.7" font-size="6.2" fill="#b4b4b7">← electricity_price</text>
+<text class="m" x="296.66666666666663" y="669.1" font-size="6.2" fill="#f0f0f1">BC: new supply only through BC Hydro calls</text>
+<text class="m" x="296.66666666666663" y="677.4" font-size="6.2" fill="#f0f0f1">Alberta: a corporate PPA, physical or virtual, against</text>
+<text class="m" x="296.66666666666663" y="685.8" font-size="6.2" fill="#8b8b8d">  the pool price</text>
+<text x="539.3333333333333" y="649.4200000000002" font-size="8.2" font-weight="500" fill="#f0f0f1">First payer refunded when neighbours connect</text>
+<circle cx="754.9999999999999" cy="646.1400000000001" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="754.9999999999999" cy="646.1400000000001" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="25.13 31.42" transform="rotate(-90 754.9999999999999 646.1400000000001)"/>
+<text class="m" x="539.3333333333333" y="658.7200000000001" font-size="5.58" fill="#7d7d80">grid_refund  [rule · own 80 · chain 50]</text>
+<text class="m" x="539.3333333333333" y="668.0" font-size="6.2" fill="#b4b4b7">← interconnection</text>
+<text class="m" x="539.3333333333333" y="676.4" font-size="6.2" fill="#f0f0f1">the customer who pays for an extension or substation is</text>
+<text class="m" x="539.3333333333333" y="684.8" font-size="6.2" fill="#8b8b8d">  refunded a share when later customers connect to it</text>
+<text x="54.0" y="715.3300000000003" font-size="8.2" font-weight="500" fill="#f0f0f1">Water restrictions in a drought</text>
+<circle cx="269.66666666666663" cy="712.0500000000002" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="269.66666666666663" cy="712.0500000000002" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="28.27 31.42" transform="rotate(-90 269.66666666666663 712.0500000000002)"/>
+<text class="m" x="54.0" y="724.6300000000002" font-size="5.58" fill="#7d7d80">water_restriction_rule  [rule · own 90 · chain 70]</text>
+<text class="m" x="54.0" y="733.9" font-size="6.2" fill="#b4b4b7">← cooling_type</text>
+<text class="m" x="54.0" y="742.3" font-size="6.2" fill="#f0f0f1">per city, text only: what each restriction stage asks of</text>
+<text class="m" x="54.0" y="750.7" font-size="6.2" fill="#8b8b8d">  evaporative cooling</text>
+<text x="539.3333333333333" y="715.3300000000003" font-size="8.2" font-weight="500" fill="#f0f0f1">Vibration limit at neighbours (reference)</text>
+<circle cx="754.9999999999999" cy="712.0500000000002" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="754.9999999999999" cy="712.0500000000002" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="21.99 31.42" transform="rotate(-90 754.9999999999999 712.0500000000002)"/>
+<text class="m" x="539.3333333333333" y="724.6300000000002" font-size="5.58" fill="#7d7d80">vibration_target  [VdB · own 70 · chain 40]</text>
+<text class="m" x="539.3333333333333" y="733.9" font-size="6.2" fill="#b4b4b7">← vibration_rank</text>
+<text class="m" x="539.3333333333333" y="742.3" font-size="6.2" fill="#f0f0f1">compare with reference criteria: 72 VdB homes at night,</text>
+<text class="m" x="539.3333333333333" y="750.7" font-size="6.2" fill="#8b8b8d">  75 institutions, 65 vibration-sensitive rooms</text>
+<text x="296.66666666666663" y="716.3800000000002" font-size="8.2" font-weight="500" fill="#f0f0f1">Peak relief and what it earns</text>
+<circle cx="512.3333333333333" cy="713.1000000000001" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="512.3333333333333" cy="713.1000000000001" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="23.56 31.42" transform="rotate(-90 512.3333333333333 713.1000000000001)"/>
+<text class="m" x="296.66666666666663" y="725.6800000000002" font-size="5.58" fill="#7d7d80">peak_relief  [MW; $/yr · own 75 · chain 40]</text>
+<text class="m" x="296.66666666666663" y="735.0" font-size="6.2" fill="#b4b4b7">← battery, ups_flex, electricity_price</text>
+<text class="m" x="296.66666666666663" y="743.4" font-size="6.2" fill="#f0f0f1">MW = min(battery MW, MWh × √RTE ÷ event hours)</text>
+<text class="m" x="296.66666666666663" y="751.7" font-size="6.2" fill="#f0f0f1">$ = programme rate × kW</text>
+<text x="54.0" y="781.2400000000004" font-size="8.2" font-weight="500" fill="#f0f0f1">BC Hydro long-run marginal cost</text>
+<circle cx="269.66666666666663" cy="777.9600000000003" r="5" fill="none" stroke="#3e3e42" stroke-width="1.6"/><circle cx="269.66666666666663" cy="777.9600000000003" r="5" fill="none" stroke="#e8e6e2" stroke-width="1.6" stroke-dasharray="28.27 31.42" transform="rotate(-90 269.66666666666663 777.9600000000003)"/>
+<text class="m" x="54.0" y="790.5400000000003" font-size="5.58" fill="#7d7d80">lrmc_bc  [$/MWh; $/kW·yr · own 90 · chain 40]</text>
+<text class="m" x="54.0" y="799.8" font-size="6.2" fill="#b4b4b7">← flexible_load, spare_capacity</text>
+<text class="m" x="54.0" y="808.2" font-size="6.2" fill="#f0f0f1">value of energy or capacity a data centre frees up or</text>
+<text class="m" x="54.0" y="816.6" font-size="6.2" fill="#8b8b8d">  avoids = LRMC × quantity</text>
+<text class="m" x="54.0" y="825.0" font-size="6.2" fill="#f0f0f1">capacity value of flexible load = $300 + $110 per kW-yr</text>
+<text class="m" x="54.0" y="833.3" font-size="6.2" fill="#8b8b8d">  of firm reduction at peak</text><text x="768.0" y="1026" font-size="8" font-weight="450" fill="#7d7d80" text-anchor="end" letter-spacing="2.4">L 1 3 a</text></svg></body></html>

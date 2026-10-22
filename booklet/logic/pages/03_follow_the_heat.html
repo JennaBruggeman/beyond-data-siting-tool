@@ -1,0 +1,113 @@
+<!doctype html><html><head><meta charset="utf-8"><title>03_follow_the_heat</title><style>@font-face{font-family:Barlow;font-weight:400;src:url(Barlow-Light.ttf)}@font-face{font-family:Barlow;font-weight:500;src:url(Barlow-SemiBold.ttf)}@font-face{font-family:Barlow;font-weight:450;src:url(Barlow-Regular.ttf)}
+@font-face{font-family:Plex;font-weight:400;src:url(../../../pitch/anim/plex-400.woff2)}@font-face{font-family:Plex;font-weight:500;src:url(../../../pitch/anim/plex-500.woff2)}
+@font-face{font-family:PlexMono;font-weight:400;src:url(mono-400.woff2)}@font-face{font-family:PlexMono;font-weight:500;src:url(mono-500.woff2)}
+@page{size:8.5in 11in;margin:0}html,body{margin:0;background:#ffffff}svg{display:block}
+text{font-family:Barlow,sans-serif} .m{font-family:PlexMono,monospace}</style></head><body>
+<svg xmlns="http://www.w3.org/2000/svg" width="816.0" height="1056" viewBox="0 0 816.0 1056"><rect width="816.0" height="1056" fill="#ffffff"/><text x="54" y="78" font-size="40" font-weight="400" fill="#1c1c1e">L3</text><g transform="translate(54 0)"><text x="54" y="72" font-size="24" font-weight="500" fill="#1c1c1e">Follow the heat</text><text x="54" y="90" font-size="12" fill="#626264">From a parcel to who gains and who pays: twelve parts, each with its formula</text><line x1="54" y1="102" x2="80" y2="102" stroke="#1c1c1e" stroke-width="2.6"/></g><text x="762.0" y="56" font-size="8" font-weight="450" fill="#a9a9ab" text-anchor="end" letter-spacing="2.4">BEYOND DATA · LOGIC DIAGRAM · THE HEAT CHAIN</text><text x="762.0" y="69" font-size="8" font-weight="450" fill="#a9a9ab" text-anchor="end" letter-spacing="2.4">DRAFT V1 · 22 OCT 2026</text>
+<text x="58" y="144" font-size="18" fill="#d4202b">1</text>
+<text x="84" y="145.5" font-size="11.5" font-weight="500" fill="#1c1c1e">Parcel</text>
+<circle cx="367.0" cy="140.9" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="367.0" cy="140.9" r="5" fill="none" stroke="#d4202b" stroke-width="1.6" stroke-dasharray="25.13 31.42" transform="rotate(-90 367.0 140.9)"/>
+<text class="m" x="84" y="157.5" font-size="7.2" fill="#a9a9ab">parcel  [own 80 · chain 80]</text>
+<text class="m" x="84" y="169.5" font-size="8" fill="#1c1c1e">address → folio, lot, zoning, footprint, storeys</text>
+<line x1="66" y1="150" x2="66" y2="198.3" stroke="#d4202b" stroke-width="1"/>
+<text x="58" y="234.3" font-size="18" fill="#d4202b">2</text>
+<text x="84" y="235.8" font-size="11.5" font-weight="500" fill="#1c1c1e">Gross floor area</text>
+<circle cx="367.0" cy="231.20000000000002" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="367.0" cy="231.20000000000002" r="5" fill="none" stroke="#d4202b" stroke-width="1.6" stroke-dasharray="21.99 31.42" transform="rotate(-90 367.0 231.20000000000002)"/>
+<text class="m" x="84" y="247.8" font-size="7.2" fill="#a9a9ab">floor_area  [m² · own 70 · chain 70]</text>
+<text class="m" x="84" y="259.8" font-size="8" fill="#626264">← parcel</text>
+<text class="m" x="84" y="270.6" font-size="8" fill="#1c1c1e">footprint × storeys</text>
+<text class="m" x="84" y="281.4" font-size="8" fill="#1c1c1e">Vancouver fallback: area_m2 × round(hgt_agl ÷ 3.5–4.5 m</text>
+<text class="m" x="84" y="292.2" font-size="8" fill="#8b8b8d">  storey height) from the 2009 footprint layer (or</text>
+<text class="m" x="84" y="303.0" font-size="8" fill="#8b8b8d">  total_gross_area / BCA Gross Building Area where held)</text>
+<line x1="66" y1="240.3" x2="66" y2="331.8" stroke="#d4202b" stroke-width="1"/>
+<text x="58" y="367.8" font-size="18" fill="#d4202b">3</text>
+<text x="84" y="369.3" font-size="11.5" font-weight="500" fill="#1c1c1e">Server (raised) floor area</text>
+<circle cx="367.0" cy="364.7" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="367.0" cy="364.7" r="5" fill="none" stroke="#d4202b" stroke-width="1.6" stroke-dasharray="15.71 31.42" transform="rotate(-90 367.0 364.7)"/>
+<text class="m" x="84" y="381.3" font-size="7.2" fill="#a9a9ab">server_floor  [m² · own 50 · chain 50]</text>
+<text class="m" x="84" y="393.3" font-size="8" fill="#626264">← floor_area</text>
+<text class="m" x="84" y="404.1" font-size="8" fill="#1c1c1e">floor_area × share_raised</text>
+<line x1="66" y1="373.8" x2="66" y2="432.90000000000003" stroke="#d4202b" stroke-width="1"/>
+<text x="58" y="468.90000000000003" font-size="18" fill="#d4202b">4</text>
+<text x="84" y="470.40000000000003" font-size="11.5" font-weight="500" fill="#1c1c1e">IT load, estimated from outside</text>
+<circle cx="367.0" cy="465.8" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="367.0" cy="465.8" r="5" fill="none" stroke="#d4202b" stroke-width="1.6" stroke-dasharray="18.85 31.42" transform="rotate(-90 367.0 465.8)"/>
+<text class="m" x="84" y="482.40000000000003" font-size="7.2" fill="#a9a9ab">it_load_outside  [MW · own 60 · chain 50]</text>
+<text class="m" x="84" y="494.4" font-size="8" fill="#626264">← server_floor</text>
+<text class="m" x="84" y="505.2" font-size="8" fill="#1c1c1e">hall floor ÷ m² of hall per MW: 290–630 (typical) or about</text>
+<text class="m" x="84" y="516.0" font-size="8" fill="#8b8b8d">  250 (high density)</text>
+<text class="m" x="84" y="526.8" font-size="8" fill="#1c1c1e">IT MW = hall area ÷ that figure (M95, 19 Oct 2026: aligned</text>
+<text class="m" x="84" y="537.6" font-size="8" fill="#8b8b8d">  to the tool)</text>
+<line x1="66" y1="474.90000000000003" x2="66" y2="566.4000000000001" stroke="#d4202b" stroke-width="1"/>
+<text x="58" y="602.4000000000001" font-size="18" fill="#d4202b">5</text>
+<text x="84" y="603.9000000000001" font-size="11.5" font-weight="500" fill="#1c1c1e">IT load, actual (range)</text>
+<circle cx="367.0" cy="599.3000000000001" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="367.0" cy="599.3000000000001" r="5" fill="none" stroke="#d4202b" stroke-width="1.6" stroke-dasharray="21.99 31.42" transform="rotate(-90 367.0 599.3000000000001)"/>
+<text class="m" x="84" y="615.9000000000001" font-size="7.2" fill="#a9a9ab">it_load_actual  [MW · own 70 · chain 50]</text>
+<text class="m" x="84" y="627.9" font-size="8" fill="#626264">← it_load_claim, it_load_outside</text>
+<text class="m" x="84" y="638.7" font-size="8" fill="#1c1c1e">IT MW × 8,760 h × 0.6 for every yearly MWh in the tool</text>
+<text class="m" x="84" y="649.5" font-size="8" fill="#8b8b8d">  (M95: aligned to the tool)</text>
+<text class="m" x="84" y="660.3" font-size="8" fill="#1c1c1e">the 0.20–0.60 utilisation band is context and is not</text>
+<text class="m" x="84" y="671.1" font-size="8" fill="#8b8b8d">  applied</text>
+<line x1="66" y1="608.4000000000001" x2="66" y2="699.9000000000001" stroke="#d4202b" stroke-width="1"/>
+<text x="58" y="735.9000000000001" font-size="18" fill="#d4202b">6</text>
+<text x="84" y="737.4000000000001" font-size="11.5" font-weight="500" fill="#1c1c1e">Heat rejected</text>
+<circle cx="367.0" cy="732.8000000000001" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="367.0" cy="732.8000000000001" r="5" fill="none" stroke="#d4202b" stroke-width="1.6" stroke-dasharray="25.13 31.42" transform="rotate(-90 367.0 732.8000000000001)"/>
+<text class="m" x="84" y="749.4000000000001" font-size="7.2" fill="#a9a9ab">heat_rejected  [MWh/yr · own 80 · chain 50]</text>
+<text class="m" x="84" y="761.4" font-size="8" fill="#626264">← it_load_actual, pue</text>
+<text class="m" x="84" y="772.2" font-size="8" fill="#1c1c1e">Q ≈ E_IT + electrical losses</text>
+<text class="m" x="84" y="783.0" font-size="8" fill="#1c1c1e">idle floor 36% of max</text>
+<text x="402.0" y="144" font-size="18" fill="#d4202b">7</text>
+<text x="428.0" y="145.5" font-size="11.5" font-weight="500" fill="#1c1c1e">Heat captured at the boundary (E_reuse)</text>
+<circle cx="711.0" cy="140.9" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="711.0" cy="140.9" r="5" fill="none" stroke="#d4202b" stroke-width="1.6" stroke-dasharray="28.27 31.42" transform="rotate(-90 711.0 140.9)"/>
+<text class="m" x="428.0" y="157.5" font-size="7.2" fill="#a9a9ab">heat_captured  [MWh/yr · own 90 · chain 50]</text>
+<text class="m" x="428.0" y="169.5" font-size="8" fill="#626264">← heat_rejected, liquid_capture</text>
+<text class="m" x="428.0" y="180.3" font-size="8" fill="#1c1c1e">E_reuse = heat_rejected × liquid_capture, measured at the</text>
+<text class="m" x="428.0" y="191.1" font-size="8" fill="#8b8b8d">  data-centre boundary by flow × ΔT before any heat pump</text>
+<text class="m" x="428.0" y="201.9" font-size="8" fill="#8b8b8d">  (ISO/IEC 30134-6 cl.5–6</text>
+<text class="m" x="428.0" y="212.7" font-size="8" fill="#1c1c1e">EU Reg. 2024/1364 Annex II 1(j))</text>
+<line x1="410.0" y1="150" x2="410.0" y2="241.5" stroke="#d4202b" stroke-width="1"/>
+<text x="402.0" y="277.5" font-size="18" fill="#d4202b">8</text>
+<text x="428.0" y="279.0" font-size="11.5" font-weight="500" fill="#1c1c1e">Heat available after heat pump</text>
+<circle cx="711.0" cy="274.4" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="711.0" cy="274.4" r="5" fill="none" stroke="#d4202b" stroke-width="1.6" stroke-dasharray="21.99 31.42" transform="rotate(-90 711.0 274.4)"/>
+<text class="m" x="428.0" y="291.0" font-size="7.2" fill="#a9a9ab">heat_delivered  [MWh/yr · own 70 · chain 50]</text>
+<text class="m" x="428.0" y="303.0" font-size="8" fill="#626264">← heat_captured, cop</text>
+<text class="m" x="428.0" y="313.8" font-size="8" fill="#1c1c1e">Q_out = E_reuse × COP ÷ (COP − 1)</text>
+<text class="m" x="428.0" y="324.6" font-size="8" fill="#1c1c1e">network-side heat after the heat pump</text>
+<text class="m" x="428.0" y="335.4" font-size="8" fill="#1c1c1e">the match takes min(Q_out, receiver demand)</text>
+<line x1="410.0" y1="283.5" x2="410.0" y2="364.2" stroke="#d4202b" stroke-width="1"/>
+<text x="402.0" y="400.2" font-size="18" fill="#d4202b">9</text>
+<text x="428.0" y="401.7" font-size="11.5" font-weight="500" fill="#1c1c1e">Homes heated</text>
+<circle cx="711.0" cy="397.09999999999997" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="711.0" cy="397.09999999999997" r="5" fill="none" stroke="#d4202b" stroke-width="1.6" stroke-dasharray="25.13 31.42" transform="rotate(-90 711.0 397.09999999999997)"/>
+<text class="m" x="428.0" y="413.7" font-size="7.2" fill="#a9a9ab">homes_heated  [homes · own 80 · chain 50]</text>
+<text class="m" x="428.0" y="425.7" font-size="8" fill="#626264">← heat_delivered</text>
+<text class="m" x="428.0" y="436.5" font-size="8" fill="#1c1c1e">homes = Q_available ÷ (space + water heating GJ per</text>
+<text class="m" x="428.0" y="447.3" font-size="8" fill="#8b8b8d">  household)</text>
+<text class="m" x="428.0" y="458.1" font-size="8" fill="#1c1c1e">BC 60.5 GJ (16.81 MWh), AB 119.3 GJ (33.14 MWh), CEUD</text>
+<text class="m" x="428.0" y="468.9" font-size="8" fill="#8b8b8d">  residential 2018–22 average</text>
+<line x1="410.0" y1="406.2" x2="410.0" y2="497.7" stroke="#d4202b" stroke-width="1"/>
+<text x="402.0" y="533.7" font-size="18" fill="#d4202b">10</text>
+<text x="428.0" y="535.2" font-size="11.5" font-weight="500" fill="#1c1c1e">Operator floor price</text>
+<circle cx="711.0" cy="530.6" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="711.0" cy="530.6" r="5" fill="none" stroke="#d4202b" stroke-width="1.6" stroke-dasharray="18.85 31.42" transform="rotate(-90 711.0 530.6)"/>
+<text class="m" x="428.0" y="547.2" font-size="7.2" fill="#a9a9ab">price_floor  [CAD/MWh · own 60 · chain 50]</text>
+<text class="m" x="428.0" y="559.2" font-size="8" fill="#626264">← heat_delivered, crf</text>
+<text class="m" x="428.0" y="570.0" font-size="8" fill="#1c1c1e">CRF × capex_capture (0.5–0.65 M€/MW_heat) ÷ MWh − cooling</text>
+<text class="m" x="428.0" y="580.8" font-size="8" fill="#8b8b8d">  savings</text>
+<text class="m" x="428.0" y="591.6" font-size="8" fill="#1c1c1e">bounded by revealed prices (Fortum €11–50</text>
+<text class="m" x="428.0" y="602.4" font-size="8" fill="#1c1c1e">Exergi 400 SEK ≈ $57)</text>
+<line x1="410.0" y1="539.7" x2="410.0" y2="631.2" stroke="#d4202b" stroke-width="1"/>
+<text x="402.0" y="667.2" font-size="18" fill="#d4202b">11</text>
+<text x="428.0" y="668.7" font-size="11.5" font-weight="500" fill="#1c1c1e">Price window overlap</text>
+<circle cx="711.0" cy="664.1" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="711.0" cy="664.1" r="5" fill="none" stroke="#d4202b" stroke-width="1.6" stroke-dasharray="18.85 31.42" transform="rotate(-90 711.0 664.1)"/>
+<text class="m" x="428.0" y="680.7" font-size="7.2" fill="#a9a9ab">window  [CAD/MWh · own 60 · chain 50]</text>
+<text class="m" x="428.0" y="692.7" font-size="8" fill="#626264">← price_floor, price_ceiling</text>
+<text class="m" x="428.0" y="703.5" font-size="8" fill="#1c1c1e">overlap = [floor_low, floor_high] ∩ [ceiling_low,</text>
+<text class="m" x="428.0" y="714.3" font-size="8" fill="#8b8b8d">  ceiling_high]</text>
+<text class="m" x="428.0" y="725.1" font-size="8" fill="#1c1c1e">pass if non-empty</text>
+<line x1="410.0" y1="673.2" x2="410.0" y2="753.9000000000001" stroke="#d4202b" stroke-width="1"/>
+<text x="402.0" y="789.9000000000001" font-size="18" fill="#d4202b">12</text>
+<text x="428.0" y="791.4000000000001" font-size="11.5" font-weight="500" fill="#1c1c1e">Party ledger</text>
+<circle cx="711.0" cy="786.8000000000001" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="711.0" cy="786.8000000000001" r="5" fill="none" stroke="#d4202b" stroke-width="1.6" stroke-dasharray="18.85 31.42" transform="rotate(-90 711.0 786.8000000000001)"/>
+<text class="m" x="428.0" y="803.4000000000001" font-size="7.2" fill="#a9a9ab">ledger  [table · own 60 · chain 50]</text>
+<text class="m" x="428.0" y="815.4" font-size="8" fill="#626264">← capex_split, window, risk_term, deprivation</text>
+<text class="m" x="428.0" y="826.2" font-size="8" fill="#1c1c1e">parties × (owns, controls, pays, receives, bears, needs) ×</text>
+<text class="m" x="428.0" y="837.0" font-size="8" fill="#8b8b8d">  (recovery equipment, connection, network, conversion</text>
+<text class="m" x="428.0" y="847.8" font-size="8" fill="#8b8b8d">  energy, operating payment, risk, pass-through)</text>
+<text x="54" y="1012" font-size="7" fill="#a9a9ab">Ring: how far the tool trusts the figure on its own (full = arithmetic, three-quarters = a regulation or government data, half = an operator's claim). own = the part alone; chain = its weakest input.</text><text x="768.0" y="1026" font-size="8" font-weight="450" fill="#a9a9ab" text-anchor="end" letter-spacing="2.4">L 3</text></svg></body></html>
