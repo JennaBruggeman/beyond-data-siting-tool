@@ -2,18 +2,18 @@
 # final report (read by Claude from media.auc.ab.ca in the in-app browser). Idempotent. Run after add_precedents.py.
 import json, os, csv
 h = os.path.dirname(os.path.abspath(__file__))
-P = os.path.join(h, 'formula_register.json')
+P = os.path.join(h, '..', 'formula_register.json')
 r = json.load(open(P, encoding='utf-8'))
 m = r['meta']
 
-rows = list(csv.reader(open(os.path.join(h, 'data', 'raw', 'nrcan', 'municip_potentiel-potential.csv'), encoding='latin-1')))
+rows = list(csv.reader(open(os.path.join(h, '..', '..', 'data', 'raw', 'nrcan', 'municip_potentiel-potential.csv'), encoding='latin-1')))
 cols = ['vertical', 'latitude', 'lat+15', 'lat-15', 'tracking', 'horizontal']
 A = {}
 for x in rows[3:]:
     if len(x) > 8 and x[2].startswith('Annual') and x[1] in ('Vancouver', 'Edmonton', 'Spruce Grove'):
         A[x[1]] = dict(zip(cols, map(int, x[3:9])))
 assert set(A) == {'Vancouver', 'Edmonton', 'Spruce Grove'}, A
-json.dump(A, open(os.path.join(h, 'data', 'nrcan_pv_annual.json'), 'w'), indent=1)
+json.dump(A, open(os.path.join(h, '..', '..', 'data', 'nrcan_pv_annual.json'), 'w'), indent=1)
 V, E = A['Vancouver'], A['Edmonton']
 
 r['new_sources'].update({

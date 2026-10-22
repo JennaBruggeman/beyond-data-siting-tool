@@ -4,7 +4,7 @@
 # Idempotent. Run after add_lca_battery_census.py.
 # check: 'claude' = quote re-read by Claude on the page or local file; 'agent' = read by a research agent, quote to be checked.
 import json, os
-h = os.path.dirname(os.path.abspath(__file__)); P = os.path.join(h, 'formula_register.json')
+h = os.path.dirname(os.path.abspath(__file__)); P = os.path.join(h, '..', 'formula_register.json')
 r = json.load(open(P, encoding='utf-8'))
 S = r['new_sources']; m = r['meta']
 

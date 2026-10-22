@@ -2,7 +2,7 @@
 """Register update: heat payback method (J.B., 19 Oct 2026; audit/payback_method_2026-10-19.md). Idempotent."""
 import json, os
 H = os.path.dirname(os.path.abspath(__file__))
-P = os.path.join(H, 'formula_register.json')
+P = os.path.join(H, '..', 'formula_register.json')
 d = json.load(open(P, encoding='utf-8'))
 Q = {q['id']: q for q in d['quantities']}
 S = d['new_sources']

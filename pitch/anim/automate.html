@@ -57,7 +57,7 @@ const jobE=document.getElementById('job');
 const QS=[['Everyday','Will I hear it?'],['Civic','Is it allowed, and who pays?'],['Technical','How is that worked out?']];
 const gQ=el('g',{opacity:0}); const QP=QS.map((_,i)=>{ const x=420+i*540; const g=person(x,420,1.7,null,''); s.removeChild(g); gQ.appendChild(g); return g; });
 const QE=QS.map(([lv,q],i)=>{ const e=document.createElement('div'); e.className='q'; e.style.left=(420+i*540-270)+'px'; e.style.top='600px'; e.innerHTML=`<div class="lv">${lv}</div><div class="t">${q}</div>`; document.body.appendChild(e); return e; });
-const caps=[[.4,5.0,'Jobs usually split across a team'],[5.2,10.5,'Done in one pass, on any real lot'],[13.0,16.4,'Same lot, same facts, three ways in']].map(([a,b,x])=>{const e=document.createElement('div'); e.className='cap'; e.textContent=x; document.body.appendChild(e); return {a,b,e};});
+const caps=[[.4,5.0,'Jobs usually split across a team'],[5.2,10.5,'A first pass, on any real lot'],[13.0,16.4,'Same lot, same facts, three ways in']].map(([a,b,x])=>{const e=document.createElement('div'); e.className='cap'; e.textContent=x; document.body.appendChild(e); return {a,b,e};});
 const lerpC=(a,b,u)=>{ const A=a.match(/\w\w/g).map(h=>parseInt(h,16)), B=b.match(/\w\w/g).map(h=>parseInt(h,16)); return '#'+A.map((v,i)=>Math.round(v+(B[i]-v)*u).toString(16).padStart(2,'0')).join(''); };
 function Rt(t){
   const out=1-seg(t,10.4,11.0);

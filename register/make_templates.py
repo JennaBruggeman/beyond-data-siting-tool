@@ -140,7 +140,7 @@ PLAIN = {'pue': 'how much extra power cooling and losses take', 'liquid_capture'
  'cooling_type': 'how the servers are cooled (air or liquid)', 'component_space': 'how much room the plant needs per MW', 'envelope': 'floor heights', 'size_fit': 'the size chosen'}
 OUTN = {'fit': 'size_fit', 'floorMW': 'floor_area', 'elec': 'it_load_actual', 'co2': 'grid_co2', 'plant': 'component_space', 'noise': 'noise_level', 'jobs': 'jobs',
  'heat': 'heat_delivered', 'homes': 'homes_heated', 'best': 'lcoh', 'cheapest': 'lcoh'}
-_SP = os.path.join(H, 'audit', 'sensitivity_2026-10-20', 'summary.json')
+_SP = os.path.join(H, '..', 'audit', 'sensitivity_2026-10-20', 'summary.json')
 drivers = {}
 if os.path.exists(_SP):
     _S = json.load(open(_SP))
@@ -174,13 +174,13 @@ for n in _D['nodes']:
     _L['nodes'][n['id']] = {'n': n['name'], 's': n['stage'], 'k': n.get('kind', 'quantity'), 'f': _cut(n.get('formula', ''), 300), 'c': _cut(n.get('coef', ''), 500),
                             'u': n.get('unit', ''), 'q': n.get('conf'), 'st': n.get('status', ''), 'src': n.get('sources', []), 'st2': _cut(n.get('source_text', ''), 300),
                             't': T[n['id']][0], 'p': T[n['id']][1].split(), 'w': T[n['id']][2]}
-json.dump(_L, open(os.path.join(H, 'tool', 'logic.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
+json.dump(_L, open(os.path.join(H, '..', 'tool', 'logic.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
 out['drivers'] = out_drivers
 for on, rows in out_drivers['by_result'].items():
     for pn, v, u, w in rows:
         if pn in out['nodes']:
             t = f"moves {on.replace('_', ' ')} by up to {v*100:.0f}%" if u == '%' else f"moves {on.replace('_', ' ')} by up to {v:.1f} dB"
             out['nodes'][pn]['sens'] = (out['nodes'][pn].get('sens', '') + ('; ' if out['nodes'][pn].get('sens') else '') + t)
-for path in (os.path.join(H, 'templates.json'), os.path.join(H, 'tool', 'templates.json')):
+for path in (os.path.join(H, 'templates.json'), os.path.join(H, '..', 'tool', 'templates.json')):
     json.dump(out, open(path, 'w'), ensure_ascii=False, indent=1)
 print({k: out[k + '_count'] for k in ('resident', 'community', 'full')})

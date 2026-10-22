@@ -1,7 +1,7 @@
 # 16 Oct 2026: PNNL-33283 Figure 4.3 (LFP costs at 1 and 10 MW), Alissa et al. 2025 LCA workbooks (Zenodo), Census 2021 DA layer.
 # Idempotent. Run after add_water_rules.py.
 import json, os
-h = os.path.dirname(os.path.abspath(__file__)); P = os.path.join(h, 'formula_register.json')
+h = os.path.dirname(os.path.abspath(__file__)); P = os.path.join(h, '..', 'formula_register.json')
 r = json.load(open(P, encoding='utf-8'))
 S = r['new_sources']
 S['pnnl2022fig43'] = ('PNNL-33283 (Viswanathan et al., Aug 2022), Figure 4.3 p. 24, Li-ion LFP total installed cost, 2021 (US$/kWh): 1 MW 2 h 518.59, 4 h 448.34; 10 MW 2 h 461.15, 4 h 410.70; 2030: 1 MW 4 h 340.46, 10 MW 4 h 311.11; '

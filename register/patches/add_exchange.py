@@ -9,7 +9,7 @@
 # Idempotent: re-running replaces earlier exchange entries. Run after add_siting.py.
 import json, os
 h = os.path.dirname(os.path.abspath(__file__))
-P = os.path.join(h, 'formula_register.json')
+P = os.path.join(h, '..', 'formula_register.json')
 r = json.load(open(P, encoding='utf-8'))
 m = r['meta']
 

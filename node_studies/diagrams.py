@@ -2,7 +2,7 @@
 import json, html, os, sys, math
 here = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, here)
 from families import FAM, ICON, GROUP, family_of, group_of
-D = json.load(open(os.path.join(here, '..', 'diagram_data.json'), encoding='utf-8'))
+D = json.load(open(os.path.join(here, '..', 'register', 'diagram_data.json'), encoding='utf-8'))
 NODE = {n['id']: n for n in D['nodes']}
 E = html.escape
 A, A2, FG, MU, FA, LN, L2, BG, PN = '#CC746C', '#e39a93', '#e9e6e1', '#9d9a94', '#6b6964', '#30343a', '#3c4148', '#17181a', '#1e2023'
