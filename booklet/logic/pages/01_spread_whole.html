@@ -1,0 +1,1434 @@
+<!doctype html><html><head><meta charset="utf-8"><title>01_spread_whole</title><style>@font-face{font-family:Barlow;font-weight:400;src:url(Barlow-Light.ttf)}@font-face{font-family:Barlow;font-weight:500;src:url(Barlow-SemiBold.ttf)}@font-face{font-family:Barlow;font-weight:450;src:url(Barlow-Regular.ttf)}
+@font-face{font-family:Plex;font-weight:400;src:url(../../../pitch/anim/plex-400.woff2)}@font-face{font-family:Plex;font-weight:500;src:url(../../../pitch/anim/plex-500.woff2)}
+@font-face{font-family:PlexMono;font-weight:400;src:url(mono-400.woff2)}@font-face{font-family:PlexMono;font-weight:500;src:url(mono-500.woff2)}
+@page{size:17in 11in;margin:0}html,body{margin:0;background:#ffffff}svg{display:block}
+text{font-family:Barlow,sans-serif} .m{font-family:PlexMono,monospace}</style></head><body>
+<svg xmlns="http://www.w3.org/2000/svg" width="1632" height="1056" viewBox="0 0 1632 1056"><rect width="1632" height="1056" fill="#ffffff"/><text x="48" y="74" font-size="40" font-weight="400" fill="#1c1c1e">L1</text><g transform="translate(54 0)"><text x="48" y="68" font-size="24" font-weight="500" fill="#1c1c1e">The logic the tool runs on</text><text x="48" y="86" font-size="12" fill="#626264">8 stages, 195 parts, 261 links. Each part carries its own formula, in the tool as written here.</text><line x1="48" y1="98" x2="74" y2="98" stroke="#1c1c1e" stroke-width="2.6"/></g><text x="1584" y="52" font-size="8" font-weight="450" fill="#a9a9ab" text-anchor="end" letter-spacing="2.4">BEYOND DATA · LOGIC DIAGRAM · DIAGRAM_DATA.JSON, 21 OCT 2026</text><text x="1584" y="65" font-size="8" font-weight="450" fill="#a9a9ab" text-anchor="end" letter-spacing="2.4">DRAFT V1 · 22 OCT 2026</text><text x="48.0" y="132" font-size="15.840000000000002" font-weight="400" fill="#1c1c1e">1</text>
+<text x="61.68" y="130" font-size="8.28" font-weight="500" fill="#1c1c1e">What we start with</text>
+<text x="61.68" y="139.36" font-size="6.84" fill="#626264">17 parts</text>
+<line x1="48.0" y1="148" x2="133.07076923076923" y2="148" stroke="#d6d6d8" stroke-width=".8"/>
+<text x="166.15384615384616" y="132" font-size="15.840000000000002" font-weight="400" fill="#1c1c1e">2</text>
+<text x="179.83384615384617" y="130" font-size="8.28" font-weight="500" fill="#1c1c1e">How big it can be</text>
+<text x="179.83384615384617" y="139.36" font-size="6.84" fill="#626264">10 parts</text>
+<line x1="166.15384615384616" y1="148" x2="251.2246153846154" y2="148" stroke="#d6d6d8" stroke-width=".8"/>
+<text x="284.3076923076923" y="132" font-size="15.840000000000002" font-weight="400" fill="#1c1c1e">3</text>
+<text x="297.9876923076923" y="130" font-size="8.28" font-weight="500" fill="#1c1c1e">What the site offers</text>
+<text x="297.9876923076923" y="139.36" font-size="6.84" fill="#626264">20 parts</text>
+<line x1="284.3076923076923" y1="148" x2="369.3784615384616" y2="148" stroke="#d6d6d8" stroke-width=".8"/>
+<text x="402.46153846153845" y="132" font-size="15.840000000000002" font-weight="400" fill="#1c1c1e">4</text>
+<text x="416.14153846153846" y="130" font-size="8.28" font-weight="500" fill="#1c1c1e">What it gives off</text>
+<text x="416.14153846153846" y="139.36" font-size="6.84" fill="#626264">52 parts</text>
+<line x1="402.46153846153845" y1="148" x2="723.84" y2="148" stroke="#d6d6d8" stroke-width=".8"/>
+<text x="756.9230769230769" y="132" font-size="15.840000000000002" font-weight="400" fill="#1c1c1e">5</text>
+<text x="770.6030769230769" y="130" font-size="8.28" font-weight="500" fill="#1c1c1e">Who is nearby</text>
+<text x="770.6030769230769" y="139.36" font-size="6.84" fill="#626264">10 parts</text>
+<line x1="756.9230769230769" y1="148" x2="841.9938461538461" y2="148" stroke="#d6d6d8" stroke-width=".8"/>
+<text x="875.0769230769231" y="132" font-size="15.840000000000002" font-weight="400" fill="#1c1c1e">6</text>
+<text x="888.756923076923" y="130" font-size="8.28" font-weight="500" fill="#1c1c1e">What it could become</text>
+<text x="888.756923076923" y="139.36" font-size="6.84" fill="#626264">28 parts</text>
+<line x1="875.0769230769231" y1="148" x2="1078.3015384615385" y2="148" stroke="#d6d6d8" stroke-width=".8"/>
+<text x="1111.3846153846155" y="132" font-size="15.840000000000002" font-weight="400" fill="#1c1c1e">7</text>
+<text x="1125.0646153846155" y="130" font-size="8.28" font-weight="500" fill="#1c1c1e">What it would take</text>
+<text x="1125.0646153846155" y="139.36" font-size="6.84" fill="#626264">50 parts</text>
+<line x1="1111.3846153846155" y1="148" x2="1432.763076923077" y2="148" stroke="#d6d6d8" stroke-width=".8"/>
+<text x="1465.8461538461538" y="132" font-size="15.840000000000002" font-weight="400" fill="#1c1c1e">8</text>
+<text x="1479.5261538461539" y="130" font-size="8.28" font-weight="500" fill="#1c1c1e">Who gains, who pays</text>
+<text x="1479.5261538461539" y="139.36" font-size="6.84" fill="#626264">8 parts</text>
+<line x1="1465.8461538461538" y1="148" x2="1550.916923076923" y2="148" stroke="#d6d6d8" stroke-width=".8"/>
+<path d="M133.1,436.4 C149.6,436.4 149.6,415.9 166.2,415.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,415.9 C277.2,415.9 277.2,702.2 251.2,702.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,702.2 C277.2,702.2 277.2,743.1 251.2,743.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,538.6 C277.2,538.6 277.2,456.8 251.2,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,743.1 C277.2,743.1 277.2,456.8 251.2,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,456.8 C277.2,456.8 277.2,579.5 251.2,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,456.8 C385.9,456.8 385.9,415.9 520.6,415.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,497.7 C504.1,497.7 504.1,415.9 520.6,415.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,477.2 C267.8,477.2 267.8,415.9 402.5,415.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,477.2 C267.8,477.2 267.8,334.1 402.5,334.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,415.9 C504.1,415.9 504.1,293.2 520.6,293.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,272.8 C326.8,272.8 326.8,293.2 520.6,293.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,415.9 C631.7,415.9 631.7,334.1 605.7,334.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,334.1 C504.1,334.1 504.1,334.1 520.6,334.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,334.1 C622.2,334.1 622.2,375.0 638.8,375.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,293.2 C622.2,293.2 622.2,375.0 638.8,375.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,375.0 C749.8,375.0 749.8,415.9 723.8,415.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,293.2 C622.2,293.2 622.2,415.9 638.8,415.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,334.1 C622.2,334.1 622.2,579.5 638.8,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,415.9 C622.2,415.9 622.2,579.5 638.8,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,231.8 C267.8,231.8 267.8,211.4 402.5,211.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,456.8 C326.8,456.8 326.8,456.8 402.5,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,456.8 C326.8,456.8 326.8,375.0 402.5,375.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,415.9 C622.2,415.9 622.2,252.3 638.8,252.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,477.2 C385.9,477.2 385.9,252.3 638.8,252.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,252.3 C749.8,252.3 749.8,293.2 723.8,293.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,293.2 C749.8,293.2 749.8,620.4 723.8,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,456.8 C445.0,456.8 445.0,620.4 638.8,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,456.8 C326.8,456.8 326.8,784.0 402.5,784.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,497.7 C326.8,497.7 326.8,743.1 402.5,743.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,559.0 C267.8,559.0 267.8,743.1 402.5,743.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,456.8 C445.0,456.8 445.0,334.1 638.8,334.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,415.9 C749.8,415.9 749.8,334.1 723.8,334.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,538.6 C504.1,538.6 504.1,497.7 520.6,497.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,538.6 C504.1,538.6 504.1,538.6 520.6,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,477.2 C267.8,477.2 267.8,661.3 402.5,661.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,579.5 C326.8,579.5 326.8,824.9 402.5,824.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,415.9 C326.8,415.9 326.8,252.3 402.5,252.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,640.9 C267.8,640.9 267.8,579.5 402.5,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,681.8 C267.8,681.8 267.8,579.5 402.5,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,579.5 C504.1,579.5 504.1,865.8 520.6,865.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,804.5 C267.8,804.5 267.8,865.8 402.5,865.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,415.9 C326.8,415.9 326.8,702.2 402.5,702.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,559.0 C267.8,559.0 267.8,702.2 402.5,702.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,497.7 C858.5,497.7 858.5,456.8 875.1,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,538.6 C681.3,538.6 681.3,456.8 875.1,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,497.7 C858.5,497.7 858.5,661.3 875.1,661.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,763.5 C504.1,763.5 504.1,743.1 875.1,743.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,497.7 C858.5,497.7 858.5,743.1 875.1,743.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,415.9 C504.1,415.9 504.1,497.7 756.9,497.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,538.6 C868.0,538.6 868.0,702.2 842.0,702.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,722.6 C445.0,722.6 445.0,702.2 756.9,702.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,702.2 C868.0,702.2 868.0,743.1 842.0,743.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,886.2 C445.0,886.2 445.0,743.1 756.9,743.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,743.1 C868.0,743.1 868.0,620.4 842.0,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,313.6 C445.0,313.6 445.0,538.6 756.9,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,375.0 C799.5,375.0 799.5,293.2 875.1,293.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,375.0 C799.5,375.0 799.5,497.7 875.1,497.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,415.9 C681.3,415.9 681.3,497.7 875.1,497.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,375.0 C799.5,375.0 799.5,538.6 875.1,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,415.9 C681.3,415.9 681.3,538.6 875.1,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,375.0 C799.5,375.0 799.5,579.5 875.1,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,415.9 C681.3,415.9 681.3,579.5 875.1,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,415.9 C681.3,415.9 681.3,620.4 875.1,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,579.5 C563.2,579.5 563.2,784.0 875.1,784.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,456.8 C681.3,456.8 681.3,415.9 875.1,415.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M960.1,415.9 C976.7,415.9 976.7,702.2 993.2,702.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,375.0 C799.5,375.0 799.5,375.0 875.1,375.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,252.3 C740.4,252.3 740.4,375.0 875.1,375.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M960.1,375.0 C976.7,375.0 976.7,620.4 993.2,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,518.1 C504.1,518.1 504.1,334.1 875.1,334.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,456.8 C563.2,456.8 563.2,702.2 875.1,702.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,579.5 C563.2,579.5 563.2,824.9 875.1,824.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,579.5 C622.2,579.5 622.2,743.1 993.2,743.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,579.5 C622.2,579.5 622.2,579.5 756.9,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,375.0 C868.0,375.0 868.0,579.5 842.0,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,538.6 C976.7,538.6 976.7,272.8 1111.4,272.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,231.8 C622.2,231.8 622.2,272.8 1111.4,272.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,375.0 C1035.8,375.0 1035.8,375.0 1347.7,375.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,354.5 C1272.1,354.5 1272.1,375.0 1347.7,375.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1432.8,375.0 C1458.8,375.0 1458.8,415.9 1432.8,415.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,477.2 C1272.1,477.2 1272.1,415.9 1347.7,415.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,354.5 C1272.1,354.5 1272.1,497.7 1347.7,497.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,415.9 C1035.8,415.9 1035.8,497.7 1347.7,497.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,375.0 C1035.8,375.0 1035.8,497.7 1347.7,497.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1432.8,497.7 C1458.8,497.7 1458.8,702.2 1432.8,702.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1432.8,415.9 C1458.8,415.9 1458.8,702.2 1432.8,702.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,354.5 C1272.1,354.5 1272.1,702.2 1347.7,702.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,538.6 C1094.8,538.6 1094.8,702.2 1347.7,702.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,620.4 C1094.8,620.4 1094.8,702.2 1347.7,702.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,477.2 C1272.1,477.2 1272.1,743.1 1347.7,743.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,579.5 C1094.8,579.5 1094.8,743.1 1347.7,743.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,313.6 C622.2,313.6 622.2,231.8 1111.4,231.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,497.7 C976.7,497.7 976.7,231.8 1111.4,231.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,231.8 C1272.1,231.8 1272.1,252.3 1347.7,252.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,579.5 C799.5,579.5 799.5,804.5 1111.4,804.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,252.3 C858.5,252.3 858.5,559.0 1111.4,559.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,620.4 C976.7,620.4 976.7,845.4 1111.4,845.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,599.9 C1331.2,599.9 1331.2,620.4 1465.8,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1432.8,415.9 C1449.3,415.9 1449.3,620.4 1465.8,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,518.1 C1331.2,518.1 1331.2,620.4 1465.8,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,579.5 C1153.9,579.5 1153.9,620.4 1465.8,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,436.4 C326.8,436.4 326.8,252.3 520.6,252.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,456.8 C917.6,456.8 917.6,579.5 1347.7,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,313.6 C1272.1,313.6 1272.1,579.5 1347.7,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,375.0 C858.5,375.0 858.5,599.9 1229.5,599.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,456.8 C858.5,456.8 858.5,599.9 1229.5,599.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,640.9 C267.8,640.9 267.8,620.4 402.5,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,620.4 C504.1,620.4 504.1,784.0 520.6,784.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,518.1 C208.7,518.1 208.7,824.9 284.3,824.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,436.4 C208.7,436.4 208.7,579.5 284.3,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,559.0 C208.7,559.0 208.7,497.7 284.3,497.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,436.4 C208.7,436.4 208.7,252.3 284.3,252.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,436.4 C208.7,436.4 208.7,334.1 284.3,334.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,436.4 C208.7,436.4 208.7,456.8 284.3,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,559.0 C208.7,559.0 208.7,456.8 284.3,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,681.8 C208.7,681.8 208.7,865.8 284.3,865.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,436.4 C208.7,436.4 208.7,865.8 284.3,865.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,436.4 C208.7,436.4 208.7,293.2 284.3,293.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,436.4 C622.2,436.4 622.2,436.4 1111.4,436.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,395.4 C622.2,395.4 622.2,436.4 1111.4,436.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,599.9 C622.2,599.9 622.2,436.4 1111.4,436.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,436.4 C1272.1,436.4 1272.1,456.8 1347.7,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,415.9 C799.5,415.9 799.5,456.8 1347.7,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,559.0 C1272.1,559.0 1272.1,620.4 1347.7,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,722.6 C1272.1,722.6 1272.1,620.4 1347.7,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,681.8 C445.0,681.8 445.0,661.3 756.9,661.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,722.6 C445.0,722.6 445.0,661.3 756.9,661.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,415.9 C385.9,415.9 385.9,620.4 520.6,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,436.4 C1272.1,436.4 1272.1,661.3 1347.7,661.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,681.8 C1272.1,681.8 1272.1,661.3 1347.7,661.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,252.3 C749.8,252.3 749.8,375.0 369.4,375.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,293.2 C749.8,293.2 749.8,375.0 369.4,375.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M369.4,334.1 C395.4,334.1 395.4,375.0 369.4,375.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,661.3 C868.0,661.3 868.0,415.9 369.4,415.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M369.4,375.0 C445.0,375.0 445.0,743.1 520.6,743.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M369.4,415.9 C445.0,415.9 445.0,743.1 520.6,743.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,293.2 C749.8,293.2 749.8,865.8 723.8,865.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,559.0 C326.8,559.0 326.8,456.8 520.6,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,640.9 C326.8,640.9 326.8,456.8 520.6,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,559.0 C326.8,559.0 326.8,579.5 520.6,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,456.8 C917.6,456.8 917.6,804.5 1229.5,804.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,579.5 C917.6,579.5 917.6,804.5 1229.5,804.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,456.8 C740.4,456.8 740.4,804.5 1229.5,804.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,497.7 C858.5,497.7 858.5,804.5 1229.5,804.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,456.8 C858.5,456.8 858.5,395.4 1111.4,395.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,456.8 C622.2,456.8 622.2,375.0 993.2,375.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,456.8 C622.2,456.8 622.2,334.1 993.2,334.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,375.0 C740.4,375.0 740.4,334.1 993.2,334.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1078.3,375.0 C1153.9,375.0 1153.9,559.0 1229.5,559.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1078.3,334.1 C1153.9,334.1 1153.9,559.0 1229.5,559.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M369.4,252.3 C799.5,252.3 799.5,559.0 1229.5,559.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,497.7 C622.2,497.7 622.2,784.0 638.8,784.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,538.6 C622.2,538.6 622.2,784.0 638.8,784.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,538.6 C563.2,538.6 563.2,784.0 638.8,784.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,784.0 C749.8,784.0 749.8,824.9 723.8,824.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,415.9 C631.7,415.9 631.7,211.4 369.4,211.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,252.3 C631.7,252.3 631.7,211.4 369.4,211.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M369.4,211.4 C799.5,211.4 799.5,313.6 1229.5,313.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,334.1 C799.5,334.1 799.5,538.6 993.2,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M960.1,375.0 C976.7,375.0 976.7,538.6 993.2,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,538.6 C917.6,538.6 917.6,538.6 993.2,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,252.3 C631.7,252.3 631.7,538.6 369.4,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,334.1 C631.7,334.1 631.7,538.6 369.4,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,538.6 C868.0,538.6 868.0,784.0 369.4,784.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,334.1 C799.5,334.1 799.5,456.8 993.2,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,272.8 C1222.4,272.8 1222.4,456.8 1078.3,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,415.9 C740.4,415.9 740.4,497.7 993.2,497.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,334.1 C799.5,334.1 799.5,497.7 993.2,497.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,436.4 C149.6,436.4 149.6,497.7 166.2,497.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,395.4 C149.6,395.4 149.6,497.7 166.2,497.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,599.9 C149.6,599.9 149.6,661.3 166.2,661.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,477.2 C149.6,477.2 149.6,661.3 166.2,661.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,497.7 C277.2,497.7 277.2,620.4 251.2,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,661.3 C277.2,661.3 277.2,620.4 251.2,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,354.5 C149.6,354.5 149.6,620.4 166.2,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,620.4 C277.2,620.4 277.2,375.0 251.2,375.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1314.6,272.8 C1340.6,272.8 1340.6,375.0 251.2,375.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M369.4,170.5 C395.4,170.5 395.4,375.0 251.2,375.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,354.5 C681.3,354.5 681.3,272.8 1229.5,272.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,599.9 C681.3,599.9 681.3,272.8 1229.5,272.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,599.9 C326.8,599.9 326.8,906.7 520.6,906.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,538.6 C504.1,538.6 504.1,906.7 520.6,906.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,845.4 C208.7,845.4 208.7,906.7 284.3,906.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,599.9 C208.7,599.9 208.7,906.7 284.3,906.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,599.9 C326.8,599.9 326.8,375.0 520.6,375.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,354.5 C326.8,354.5 326.8,375.0 520.6,375.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,456.8 C267.8,456.8 267.8,170.5 284.3,170.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,436.4 C208.7,436.4 208.7,170.5 284.3,170.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,436.4 C445.0,436.4 445.0,415.9 756.9,415.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,375.0 C868.0,375.0 868.0,415.9 842.0,415.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,538.6 C868.0,538.6 868.0,415.9 842.0,415.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,272.8 C445.0,272.8 445.0,415.9 756.9,415.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,415.9 C868.0,415.9 868.0,456.8 842.0,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M960.1,334.1 C986.1,334.1 986.1,456.8 842.0,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,354.5 C681.3,354.5 681.3,354.5 1229.5,354.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,456.8 C1035.8,456.8 1035.8,354.5 1229.5,354.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,334.1 C976.7,334.1 976.7,354.5 1229.5,354.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,415.9 C976.7,415.9 976.7,354.5 1229.5,354.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,375.0 C1035.8,375.0 1035.8,334.1 1347.7,334.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,272.8 C1272.1,272.8 1272.1,334.1 1347.7,334.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,293.2 C917.6,293.2 917.6,334.1 1347.7,334.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M960.1,375.0 C1153.9,375.0 1153.9,334.1 1347.7,334.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,538.6 C385.9,538.6 385.9,824.9 520.6,824.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M842.0,415.9 C1153.9,415.9 1153.9,456.8 1465.8,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,640.9 C1331.2,640.9 1331.2,538.6 1465.8,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,415.9 C976.7,415.9 976.7,538.6 1465.8,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,334.1 C976.7,334.1 976.7,538.6 1465.8,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1432.8,334.1 C1449.3,334.1 1449.3,538.6 1465.8,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,518.1 C1331.2,518.1 1331.2,538.6 1465.8,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,415.9 C799.5,415.9 799.5,293.2 1347.7,293.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,313.6 C1272.1,313.6 1272.1,293.2 1347.7,293.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1432.8,293.2 C1449.3,293.2 1449.3,497.7 1465.8,497.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,456.8 C740.4,456.8 740.4,640.9 1229.5,640.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M369.4,293.2 C445.0,293.2 445.0,661.3 520.6,661.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,640.9 C1331.2,640.9 1331.2,661.3 1465.8,661.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M369.4,456.8 C917.6,456.8 917.6,661.3 1465.8,661.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,415.9 C622.2,415.9 622.2,702.2 638.8,702.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,415.9 C622.2,415.9 622.2,661.3 638.8,661.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,640.9 C385.9,640.9 385.9,661.3 638.8,661.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,640.9 C681.3,640.9 681.3,681.8 1229.5,681.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,436.4 C208.7,436.4 208.7,620.4 284.3,620.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,784.0 C749.8,784.0 749.8,456.8 723.8,456.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,456.8 C749.8,456.8 749.8,497.7 723.8,497.7" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,497.7 C749.8,497.7 749.8,538.6 723.8,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,538.6 C976.7,538.6 976.7,886.2 1229.5,886.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,497.7 C976.7,497.7 976.7,886.2 1229.5,886.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,456.8 C976.7,456.8 976.7,845.4 1229.5,845.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,231.8 C326.8,231.8 326.8,211.4 520.6,211.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,211.4 C504.1,211.4 504.1,211.4 520.6,211.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M960.1,293.2 C976.7,293.2 976.7,293.2 993.2,293.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,211.4 C799.5,211.4 799.5,293.2 993.2,293.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,477.2 C681.3,477.2 681.3,477.2 1229.5,477.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,436.4 C208.7,436.4 208.7,661.3 284.3,661.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M960.1,456.8 C1035.8,456.8 1035.8,763.5 1111.4,763.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,436.4 C208.7,436.4 208.7,702.2 284.3,702.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,763.5 C1272.1,763.5 1272.1,824.9 1347.7,824.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M960.1,456.8 C1153.9,456.8 1153.9,824.9 1347.7,824.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,538.6 C917.6,538.6 917.6,824.9 1347.7,824.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1078.3,375.0 C1153.9,375.0 1153.9,763.5 1229.5,763.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M133.1,436.4 C208.7,436.4 208.7,743.1 284.3,743.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1432.8,620.4 C1458.8,620.4 1458.8,865.8 1432.8,865.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,375.0 C917.6,375.0 917.6,518.1 1229.5,518.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,252.3 C858.5,252.3 858.5,231.8 1229.5,231.8" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1432.8,375.0 C1449.3,375.0 1449.3,579.5 1465.8,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,477.2 C1331.2,477.2 1331.2,579.5 1465.8,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,599.9 C1331.2,599.9 1331.2,579.5 1465.8,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,456.8 C799.5,456.8 799.5,784.0 1347.7,784.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,722.6 C1272.1,722.6 1272.1,784.0 1347.7,784.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M960.1,415.9 C1094.8,415.9 1094.8,722.6 1229.5,722.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,456.8 C976.7,456.8 976.7,538.6 1347.7,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M1196.5,395.4 C1272.1,395.4 1272.1,538.6 1347.7,538.6" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M369.4,252.3 C799.5,252.3 799.5,395.4 1229.5,395.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,456.8 C622.2,456.8 622.2,661.3 993.2,661.3" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M605.7,415.9 C622.2,415.9 622.2,743.1 638.8,743.1" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M251.2,497.7 C385.9,497.7 385.9,702.2 520.6,702.2" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M723.8,375.0 C858.5,375.0 858.5,415.9 993.2,415.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M487.5,538.6 C740.4,538.6 740.4,824.9 993.2,824.9" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M369.4,293.2 C799.5,293.2 799.5,436.4 1229.5,436.4" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M369.4,497.7 C681.3,497.7 681.3,784.0 993.2,784.0" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<path d="M369.4,334.1 C681.3,334.1 681.3,579.5 993.2,579.5" fill="none" stroke="#b4b4b7" stroke-width=".45" stroke-opacity="0.55"/>
+<g opacity="1"><rect x="48.0" y="225.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="234.8" font-size="7.2" fill="#1c1c1e">Weather file</text>
+<text class="m" x="49.0" y="244.1" font-size="4.6" fill="#8b8b8d">in: weather</text>
+<text class="m" x="49.0" y="249.8" font-size="4.6" fill="#8b8b8d">CWEC typical year, hourly</text>
+</g>
+<g opacity="1"><rect x="48.0" y="266.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="275.6" font-size="7.2" fill="#1c1c1e">Receiver temperature</text>
+<text class="m" x="49.0" y="285.0" font-size="4.6" fill="#8b8b8d">in: receiver_temp</text>
+<text class="m" x="49.0" y="290.8" font-size="4.6" fill="#8b8b8d">°C the receiver needs</text>
+</g>
+<g opacity="1"><rect x="48.0" y="307.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="316.5" font-size="7.2" fill="#1c1c1e">Receivers nearby</text>
+<text class="m" x="49.0" y="325.9" font-size="4.6" fill="#8b8b8d">in: receivers</text>
+<text class="m" x="49.0" y="331.6" font-size="4.6" fill="#8b8b8d">buildings and uses within reach</text>
+</g>
+<g opacity="1"><rect x="48.0" y="348.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="357.4" font-size="7.2" fill="#1c1c1e">Host building</text>
+<text class="m" x="49.0" y="366.8" font-size="4.6" fill="#8b8b8d">in: host_building</text>
+<text class="m" x="49.0" y="372.5" font-size="4.6" fill="#8b8b8d">part of an existing building:</text>
+<text class="m" x="49.0" y="378.3" font-size="4.6" fill="#8b8b8d">  owner or tenant, other uses,…</text>
+</g>
+<g opacity="1"><rect x="48.0" y="388.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="398.3" font-size="7.2" fill="#1c1c1e">Zone</text>
+<text class="m" x="49.0" y="407.7" font-size="4.6" fill="#8b8b8d">in: zone</text>
+<text class="m" x="49.0" y="413.4" font-size="4.6" fill="#8b8b8d">zoning district and sub-area</text>
+</g>
+<g opacity="1"><rect x="48.0" y="429.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="439.2" font-size="7.2" fill="#1c1c1e">Parcel</text>
+<text class="m" x="49.0" y="448.6" font-size="4.6" fill="#8b8b8d">in: parcel</text>
+<text class="m" x="49.0" y="454.4" font-size="4.6" fill="#8b8b8d">address → folio, lot, zoning,</text>
+<text class="m" x="49.0" y="460.1" font-size="4.6" fill="#8b8b8d">  footprint, storeys</text>
+</g>
+<g opacity="1"><rect x="48.0" y="470.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="480.1" font-size="7.2" fill="#1c1c1e">Cooling type</text>
+<text class="m" x="49.0" y="489.5" font-size="4.6" fill="#8b8b8d">in: cooling_type</text>
+<text class="m" x="49.0" y="495.2" font-size="4.6" fill="#8b8b8d">air / glycol-dry cooler / chilled</text>
+<text class="m" x="49.0" y="501.0" font-size="4.6" fill="#8b8b8d">  water / liquid</text>
+</g>
+<g opacity="1"><rect x="48.0" y="511.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="521.0" font-size="7.2" fill="#1c1c1e">Sewer flow</text>
+<text class="m" x="49.0" y="530.4" font-size="4.6" fill="#8b8b8d">in: sewer_flow</text>
+<text class="m" x="49.0" y="536.1" font-size="4.6" fill="#8b8b8d">m³/day in the main past the parcel</text>
+</g>
+<g opacity="1"><rect x="48.0" y="552.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="561.9" font-size="7.2" fill="#1c1c1e">Massing</text>
+<text class="m" x="49.0" y="571.3" font-size="4.6" fill="#8b8b8d">in: massing</text>
+<text class="m" x="49.0" y="577.0" font-size="4.6" fill="#8b8b8d">height and footprint</text>
+</g>
+<g opacity="1"><rect x="48.0" y="593.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="602.8" font-size="7.2" fill="#1c1c1e">What is being built</text>
+<text class="m" x="49.0" y="612.2" font-size="4.6" fill="#8b8b8d">in: start_case</text>
+<text class="m" x="49.0" y="617.9" font-size="4.6" fill="#8b8b8d">new or existing · whole or part ·</text>
+<text class="m" x="49.0" y="623.7" font-size="4.6" fill="#8b8b8d">  which floor · or a special case</text>
+</g>
+<g opacity="1"><rect x="48.0" y="634.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="643.8" font-size="7.2" fill="#1c1c1e">Plant on site</text>
+<text class="m" x="49.0" y="653.1" font-size="4.6" fill="#8b8b8d">in: plant_schedule</text>
+<text class="m" x="49.0" y="658.9" font-size="4.6" fill="#8b8b8d">generators, chillers, dry coolers,</text>
+<text class="m" x="49.0" y="664.6" font-size="4.6" fill="#8b8b8d">  transformers…</text>
+</g>
+<g opacity="1"><rect x="48.0" y="675.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="684.6" font-size="7.2" fill="#1c1c1e">Noise receptors</text>
+<text class="m" x="49.0" y="694.0" font-size="4.6" fill="#8b8b8d">in: receptors</text>
+<text class="m" x="49.0" y="699.8" font-size="4.6" fill="#8b8b8d">nearest dwellings and their</text>
+<text class="m" x="49.0" y="705.5" font-size="4.6" fill="#8b8b8d">  distance</text>
+</g>
+<g opacity="1"><rect x="48.0" y="716.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="725.5" font-size="7.2" fill="#1c1c1e">Area considered</text>
+<text class="m" x="49.0" y="734.9" font-size="4.6" fill="#8b8b8d">in: area</text>
+<text class="m" x="49.0" y="740.6" font-size="4.6" fill="#8b8b8d">hectares around the parcel</text>
+</g>
+<g opacity="1"><rect x="48.0" y="757.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="766.4" font-size="7.2" fill="#1c1c1e">Spare cooling</text>
+<text class="m" x="49.0" y="775.8" font-size="4.6" fill="#8b8b8d">in: spare_cooling</text>
+<text class="m" x="49.0" y="781.5" font-size="4.6" fill="#8b8b8d">cooling capacity beyond IT load</text>
+</g>
+<g opacity="1"><rect x="48.0" y="798.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="807.4" font-size="7.2" fill="#1c1c1e">Lighting</text>
+<text class="m" x="49.0" y="816.7" font-size="4.6" fill="#8b8b8d">in: lighting_plan</text>
+<text class="m" x="49.0" y="822.5" font-size="4.6" fill="#8b8b8d">exterior lighting as seen</text>
+</g>
+<g opacity="1"><rect x="48.0" y="838.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="848.2" font-size="7.2" fill="#1c1c1e">Floodplain</text>
+<text class="m" x="49.0" y="857.6" font-size="4.6" fill="#8b8b8d">in: flood_area</text>
+<text class="m" x="49.0" y="863.4" font-size="4.6" fill="#8b8b8d">whether the parcel is in the</text>
+<text class="m" x="49.0" y="869.1" font-size="4.6" fill="#8b8b8d">  designated floodplain</text>
+</g>
+<g opacity="1"><rect x="48.0" y="879.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="51.0" y="889.1" font-size="7.2" fill="#1c1c1e">Plot ratio</text>
+<text class="m" x="49.0" y="898.5" font-size="4.6" fill="#8b8b8d">in: plot_ratio</text>
+<text class="m" x="49.0" y="904.2" font-size="4.6" fill="#8b8b8d">built area ÷ land area</text>
+</g>
+<g opacity="1"><rect x="166.2" y="368.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="169.2" y="374.4" font-size="6.192" fill="#1c1c1e">Largest size that</text><text x="169.2" y="381.2" font-size="6.192" fill="#1c1c1e">fits</text>
+<text class="m" x="167.2" y="387.2" font-size="4.6" fill="#8b8b8d">f(hall_area, floor_load_need, serv</text>
+<text class="m" x="167.2" y="393.0" font-size="4.6" fill="#8b8b8d">hall area ÷ area per MW (range)</text>
+<text class="m" x="167.2" y="398.8" font-size="4.6" fill="#8b8b8d">for part of a building, also…</text>
+</g>
+<g opacity="1"><rect x="166.2" y="409.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="169.2" y="418.8" font-size="7.2" fill="#1c1c1e">Gross floor area</text>
+<text class="m" x="167.2" y="428.1" font-size="4.6" fill="#8b8b8d">f(parcel)</text>
+<text class="m" x="167.2" y="433.9" font-size="4.6" fill="#8b8b8d">footprint × storeys</text>
+<text class="m" x="167.2" y="439.6" font-size="4.6" fill="#8b8b8d">Vancouver fallback: area_m2 ×…</text>
+</g>
+<g opacity="1"><rect x="166.2" y="450.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="169.2" y="456.2" font-size="6.192" fill="#1c1c1e">IT load, actual</text><text x="169.2" y="463.0" font-size="6.192" fill="#1c1c1e">(range)</text>
+<text class="m" x="167.2" y="469.1" font-size="4.6" fill="#8b8b8d">f(it_load_claim, it_load_outside)</text>
+<text class="m" x="167.2" y="474.8" font-size="4.6" fill="#8b8b8d">IT MW × 8,760 h × 0.6 for every</text>
+<text class="m" x="167.2" y="480.6" font-size="4.6" fill="#8b8b8d">  yearly MWh in the tool (M95:…</text>
+</g>
+<g opacity="1"><rect x="166.2" y="491.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="169.2" y="500.6" font-size="7.2" fill="#1c1c1e">Buildable envelope</text>
+<text class="m" x="167.2" y="509.9" font-size="4.6" fill="#8b8b8d">f(parcel, zone)</text>
+<text class="m" x="167.2" y="515.7" font-size="4.6" fill="#8b8b8d">max floor area = site area × FSR</text>
+<text class="m" x="167.2" y="521.5" font-size="4.6" fill="#8b8b8d">  (or FAR) available to the…</text>
+</g>
+<g opacity="1"><rect x="166.2" y="532.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="169.2" y="538.0" font-size="6.192" fill="#1c1c1e">IT load, operator</text><text x="169.2" y="544.8" font-size="6.192" fill="#1c1c1e">claim</text>
+<text class="m" x="167.2" y="550.9" font-size="4.6" fill="#8b8b8d">in: it_load_claim</text>
+<text class="m" x="167.2" y="556.6" font-size="4.6" fill="#8b8b8d">stated nameplate</text>
+</g>
+<g opacity="1"><rect x="166.2" y="573.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="169.2" y="582.4" font-size="7.2" fill="#1c1c1e">Server count</text>
+<text class="m" x="167.2" y="591.8" font-size="4.6" fill="#8b8b8d">f(it_load_actual)</text>
+<text class="m" x="167.2" y="597.5" font-size="4.6" fill="#8b8b8d">P_IT ÷ P_server</text>
+</g>
+<g opacity="1"><rect x="166.2" y="613.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="169.2" y="619.8" font-size="6.192" fill="#1c1c1e">Room for the data</text><text x="169.2" y="626.6" font-size="6.192" fill="#1c1c1e">hall</text>
+<text class="m" x="167.2" y="632.6" font-size="4.6" fill="#8b8b8d">f(envelope, component_space, host_</text>
+<text class="m" x="167.2" y="638.4" font-size="4.6" fill="#8b8b8d">new: envelope floor area − plant</text>
+<text class="m" x="167.2" y="644.1" font-size="4.6" fill="#8b8b8d">  space − support − ground-floor…</text>
+</g>
+<g opacity="1"><rect x="166.2" y="654.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="169.2" y="664.2" font-size="7.2" fill="#1c1c1e">Space for the plant</text>
+<text class="m" x="167.2" y="673.5" font-size="4.6" fill="#8b8b8d">f(start_case, cooling_type)</text>
+<text class="m" x="167.2" y="679.3" font-size="4.6" fill="#8b8b8d">Σ components (electrical yard and</text>
+<text class="m" x="167.2" y="685.0" font-size="4.6" fill="#8b8b8d">  switchgear, UPS and batteries,…</text>
+</g>
+<g opacity="1"><rect x="166.2" y="695.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="169.2" y="701.6" font-size="6.192" fill="#1c1c1e">Server (raised) floor</text><text x="169.2" y="708.4" font-size="6.192" fill="#1c1c1e">area</text>
+<text class="m" x="167.2" y="714.5" font-size="4.6" fill="#8b8b8d">f(floor_area)</text>
+<text class="m" x="167.2" y="720.2" font-size="4.6" fill="#8b8b8d">floor_area × share_raised</text>
+</g>
+<g opacity="1"><rect x="166.2" y="736.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="169.2" y="742.4" font-size="6.192" fill="#1c1c1e">IT load, estimated</text><text x="169.2" y="749.3" font-size="6.192" fill="#1c1c1e">from outside</text>
+<text class="m" x="167.2" y="755.3" font-size="4.6" fill="#8b8b8d">f(server_floor)</text>
+<text class="m" x="167.2" y="761.1" font-size="4.6" fill="#8b8b8d">hall floor ÷ m² of hall per MW:</text>
+<text class="m" x="167.2" y="766.8" font-size="4.6" fill="#8b8b8d">  290–630 (typical) or about 250…</text>
+</g>
+<g opacity="1"><rect x="284.3" y="164.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="173.4" font-size="7.2" fill="#1c1c1e">Electrical service</text>
+<text class="m" x="285.3" y="182.8" font-size="4.6" fill="#8b8b8d">f(it_load_actual, parcel)</text>
+<text class="m" x="285.3" y="188.5" font-size="4.6" fill="#8b8b8d">IT load × PUE → the utility</text>
+<text class="m" x="285.3" y="194.2" font-size="4.6" fill="#8b8b8d">  service class and what it bring…</text>
+</g>
+<g opacity="1"><rect x="284.3" y="204.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="210.8" font-size="6.192" fill="#1c1c1e">Borefield as the data</text><text x="287.3" y="217.6" font-size="6.192" fill="#1c1c1e">centre&#x27;s heat sink</text>
+<text class="m" x="285.3" y="223.7" font-size="4.6" fill="#8b8b8d">f(heat_rejected, ground)</text>
+<text class="m" x="285.3" y="229.4" font-size="4.6" fill="#8b8b8d">L = heat to ground (W) ÷ q</text>
+<text class="m" x="285.3" y="235.2" font-size="4.6" fill="#8b8b8d">boreholes = L ÷ 150 m…</text>
+</g>
+<g opacity="1"><rect x="284.3" y="245.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="251.7" font-size="6.192" fill="#1c1c1e">Price of power at the</text><text x="287.3" y="258.5" font-size="6.192" fill="#1c1c1e">site</text>
+<text class="m" x="285.3" y="264.6" font-size="4.6" fill="#8b8b8d">f(parcel)</text>
+<text class="m" x="285.3" y="270.3" font-size="4.6" fill="#8b8b8d">tariff for the customer class: BC</text>
+<text class="m" x="285.3" y="276.1" font-size="4.6" fill="#8b8b8d">  Hydro LGS or Transmission (RS…</text>
+</g>
+<g opacity="1"><rect x="284.3" y="286.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="292.6" font-size="6.192" fill="#1c1c1e">Closeness to networks</text><text x="287.3" y="299.4" font-size="6.192" fill="#1c1c1e">and customers</text>
+<text class="m" x="285.3" y="305.4" font-size="4.6" fill="#8b8b8d">f(parcel)</text>
+<text class="m" x="285.3" y="311.2" font-size="4.6" fill="#8b8b8d">distance to the nearest</text>
+<text class="m" x="285.3" y="316.9" font-size="4.6" fill="#8b8b8d">  interconnection point and to…</text>
+</g>
+<g opacity="1"><rect x="284.3" y="327.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="333.5" font-size="6.192" fill="#1c1c1e">Water the place can</text><text x="287.3" y="340.3" font-size="6.192" fill="#1c1c1e">supply</text>
+<text class="m" x="285.3" y="346.4" font-size="4.6" fill="#8b8b8d">f(parcel)</text>
+<text class="m" x="285.3" y="352.1" font-size="4.6" fill="#8b8b8d">potable at the metered rate</text>
+<text class="m" x="285.3" y="357.9" font-size="4.6" fill="#8b8b8d">reclaimed where a utility offers…</text>
+</g>
+<g opacity="1"><rect x="284.3" y="368.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="374.4" font-size="6.192" fill="#1c1c1e">Reclaimed water as</text><text x="287.3" y="381.2" font-size="6.192" fill="#1c1c1e">cooling make-up</text>
+<text class="m" x="285.3" y="387.2" font-size="4.6" fill="#8b8b8d">f(evaporation, blowdown, water_sup</text>
+<text class="m" x="285.3" y="393.0" font-size="4.6" fill="#8b8b8d">V_rec = s × make-up, with make-up</text>
+<text class="m" x="285.3" y="398.8" font-size="4.6" fill="#8b8b8d">  = evaporation × C ÷ (C − 1)</text>
+</g>
+<g opacity="1"><rect x="284.3" y="409.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="415.2" font-size="6.192" fill="#1c1c1e">Greywater available</text><text x="287.3" y="422.1" font-size="6.192" fill="#1c1c1e">from neighbours</text>
+<text class="m" x="285.3" y="428.1" font-size="4.6" fill="#8b8b8d">f(people_affected)</text>
+<text class="m" x="285.3" y="433.9" font-size="4.6" fill="#8b8b8d">V_gw = residents within reach × 98</text>
+<text class="m" x="285.3" y="439.6" font-size="4.6" fill="#8b8b8d">  L/person/day × 365…</text>
+</g>
+<g opacity="1"><rect x="284.3" y="450.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="456.2" font-size="6.192" fill="#1c1c1e">Existing building to</text><text x="287.3" y="463.0" font-size="6.192" fill="#1c1c1e">convert</text>
+<text class="m" x="285.3" y="469.1" font-size="4.6" fill="#8b8b8d">f(parcel, massing)</text>
+<text class="m" x="285.3" y="474.8" font-size="4.6" fill="#8b8b8d">parcels with buildings whose use</text>
+<text class="m" x="285.3" y="480.6" font-size="4.6" fill="#8b8b8d">  and age suit conversion (from…</text>
+</g>
+<g opacity="1"><rect x="284.3" y="491.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="497.1" font-size="6.192" fill="#1c1c1e">Solar from roofs</text><text x="287.3" y="503.9" font-size="6.192" fill="#1c1c1e">nearby</text>
+<text class="m" x="285.3" y="509.9" font-size="4.6" fill="#8b8b8d">f(massing)</text>
+<text class="m" x="285.3" y="515.7" font-size="4.6" fill="#8b8b8d">Σ roof footprint × 0.81 usable ×</text>
+<text class="m" x="285.3" y="521.5" font-size="4.6" fill="#8b8b8d">  yield (kWh/kWp, NRCan municipal…</text>
+</g>
+<g opacity="1"><rect x="284.3" y="532.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="537.9" font-size="6.192" fill="#1c1c1e">Aquifer heat store</text><text x="287.3" y="544.8" font-size="6.192" fill="#1c1c1e">(open loop)</text>
+<text class="m" x="285.3" y="550.8" font-size="4.6" fill="#8b8b8d">f(ground, heat_captured)</text>
+<text class="m" x="285.3" y="556.6" font-size="4.6" fill="#8b8b8d">flow = MW × 3.6 ÷ (4.18 × ΔT)</text>
+<text class="m" x="285.3" y="562.3" font-size="4.6" fill="#8b8b8d">heat out ≈ 0.6 × heat in</text>
+</g>
+<g opacity="1"><rect x="284.3" y="573.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="578.9" font-size="6.192" fill="#1c1c1e">Sea or river water as</text><text x="287.3" y="585.7" font-size="6.192" fill="#1c1c1e">a cooling sink</text>
+<text class="m" x="285.3" y="591.8" font-size="4.6" fill="#8b8b8d">f(parcel)</text>
+<text class="m" x="285.3" y="597.5" font-size="4.6" fill="#8b8b8d">capacity set by the thermal limit</text>
+<text class="m" x="285.3" y="603.2" font-size="4.6" fill="#8b8b8d">  at the outfall and mixing, not…</text>
+</g>
+<g opacity="1"><rect x="284.3" y="613.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="619.8" font-size="6.192" fill="#1c1c1e">Urban heat in the</text><text x="287.3" y="626.6" font-size="6.192" fill="#1c1c1e">area</text>
+<text class="m" x="285.3" y="632.6" font-size="4.6" fill="#8b8b8d">f(parcel)</text>
+<text class="m" x="285.3" y="638.4" font-size="4.6" fill="#8b8b8d">one line per city: the City&#x27;s heat</text>
+<text class="m" x="285.3" y="644.1" font-size="4.6" fill="#8b8b8d">  policy and action, and the…</text>
+</g>
+<g opacity="1"><rect x="284.3" y="654.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="660.6" font-size="6.192" fill="#1c1c1e">Recent water</text><text x="287.3" y="667.5" font-size="6.192" fill="#1c1c1e">restrictions</text>
+<text class="m" x="285.3" y="673.5" font-size="4.6" fill="#8b8b8d">f(parcel)</text>
+<text class="m" x="285.3" y="679.3" font-size="4.6" fill="#8b8b8d">dated official events per city</text>
+</g>
+<g opacity="1"><rect x="284.3" y="695.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="705.1" font-size="7.2" fill="#1c1c1e">Earthquake hazard</text>
+<text class="m" x="285.3" y="714.4" font-size="4.6" fill="#8b8b8d">f(parcel)</text>
+<text class="m" x="285.3" y="720.2" font-size="4.6" fill="#8b8b8d">Sa(0.2) for the city</text>
+<text class="m" x="285.3" y="725.9" font-size="4.6" fill="#8b8b8d">replace with the NRCan calculator…</text>
+</g>
+<g opacity="1"><rect x="284.3" y="736.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="742.5" font-size="6.192" fill="#1c1c1e">Nations whose lands</text><text x="287.3" y="749.3" font-size="6.192" fill="#1c1c1e">these are</text>
+<text class="m" x="285.3" y="755.4" font-size="4.6" fill="#8b8b8d">f(parcel)</text>
+<text class="m" x="285.3" y="761.1" font-size="4.6" fill="#8b8b8d">the City&#x27;s own wording, and links</text>
+<text class="m" x="285.3" y="766.9" font-size="4.6" fill="#8b8b8d">  to each Nation&#x27;s own referral…</text>
+</g>
+<g opacity="1"><rect x="284.3" y="777.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="786.9" font-size="7.2" fill="#1c1c1e">Deep geothermal heat</text>
+<text class="m" x="285.3" y="796.2" font-size="4.6" fill="#8b8b8d">f(receiver_demand)</text>
+<text class="m" x="285.3" y="802.0" font-size="4.6" fill="#8b8b8d">MWth = flow × c × (T_res −</text>
+<text class="m" x="285.3" y="807.8" font-size="4.6" fill="#8b8b8d">  T_return)</text>
+</g>
+<g opacity="1"><rect x="284.3" y="818.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="824.2" font-size="6.192" fill="#1c1c1e">Sewer as heat source</text><text x="287.3" y="831.1" font-size="6.192" fill="#1c1c1e">or sink</text>
+<text class="m" x="285.3" y="837.1" font-size="4.6" fill="#8b8b8d">f(sewer_flow)</text>
+<text class="m" x="285.3" y="842.9" font-size="4.6" fill="#8b8b8d">Q = flow × 4.18 × ΔT, within the</text>
+<text class="m" x="285.3" y="848.6" font-size="4.6" fill="#8b8b8d">  temperature rules: sewage…</text>
+</g>
+<g opacity="1"><rect x="284.3" y="859.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="865.1" font-size="6.192" fill="#1c1c1e">Acoustic cover from</text><text x="287.3" y="872.0" font-size="6.192" fill="#1c1c1e">the place</text>
+<text class="m" x="285.3" y="878.0" font-size="4.6" fill="#8b8b8d">f(receptors, parcel)</text>
+<text class="m" x="285.3" y="883.8" font-size="4.6" fill="#8b8b8d">the zone pair sets what is allowed</text>
+<text class="m" x="285.3" y="889.5" font-size="4.6" fill="#8b8b8d">a louder zone is the cover…</text>
+</g>
+<g opacity="1"><rect x="284.3" y="900.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="909.6" font-size="7.2" fill="#1c1c1e">Flood exposure</text>
+<text class="m" x="285.3" y="918.9" font-size="4.6" fill="#8b8b8d">f(flood_area, start_case)</text>
+<text class="m" x="285.3" y="924.7" font-size="4.6" fill="#8b8b8d">floor elevation of the plant vs</text>
+<text class="m" x="285.3" y="930.4" font-size="4.6" fill="#8b8b8d">  the flood construction level,…</text>
+</g>
+<g opacity="1"><rect x="284.3" y="941.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="287.3" y="947.0" font-size="6.192" fill="#1c1c1e">Rules for generation</text><text x="287.3" y="953.8" font-size="6.192" fill="#1c1c1e">beside the data cent…</text>
+<text class="m" x="285.3" y="959.9" font-size="4.6" fill="#8b8b8d">in: self_gen_rules</text>
+<text class="m" x="285.3" y="965.6" font-size="4.6" fill="#8b8b8d">export cap and compensation by</text>
+<text class="m" x="285.3" y="971.4" font-size="4.6" fill="#8b8b8d">  province…</text>
+</g>
+<g opacity="1"><rect x="402.5" y="204.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="214.3" font-size="7.2" fill="#1c1c1e">Free-cooling hours</text>
+<text class="m" x="403.5" y="223.7" font-size="4.6" fill="#8b8b8d">f(weather)</text>
+<text class="m" x="403.5" y="229.4" font-size="4.6" fill="#8b8b8d">count hours with T_outdoor &lt;</text>
+<text class="m" x="403.5" y="235.2" font-size="4.6" fill="#8b8b8d">  threshold (18–27 °C inlet,…</text>
+</g>
+<g opacity="1"><rect x="402.5" y="245.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="251.7" font-size="6.192" fill="#1c1c1e">Embodied carbon,</text><text x="405.5" y="258.5" font-size="6.192" fill="#1c1c1e">building</text>
+<text class="m" x="403.5" y="264.6" font-size="4.6" fill="#8b8b8d">f(floor_area)</text>
+<text class="m" x="403.5" y="270.3" font-size="4.6" fill="#8b8b8d">floor_area × kg CO2e/m²</text>
+</g>
+<g opacity="1"><rect x="402.5" y="286.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="292.6" font-size="6.192" fill="#1c1c1e">Load factor (average</text><text x="405.5" y="299.4" font-size="6.192" fill="#1c1c1e">÷ the servers&#x27; combi…</text>
+<text class="m" x="403.5" y="305.4" font-size="4.6" fill="#8b8b8d">in: load_factor</text>
+<text class="m" x="403.5" y="311.2" font-size="4.6" fill="#8b8b8d">average ÷ sum of each server&#x27;s</text>
+<text class="m" x="403.5" y="316.9" font-size="4.6" fill="#8b8b8d">  measured maximum</text>
+</g>
+<g opacity="1"><rect x="402.5" y="327.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="333.5" font-size="6.192" fill="#1c1c1e">Share of heat</text><text x="405.5" y="340.3" font-size="6.192" fill="#1c1c1e">captured in liquid</text>
+<text class="m" x="403.5" y="346.4" font-size="4.6" fill="#8b8b8d">f(cooling_type)</text>
+<text class="m" x="403.5" y="352.1" font-size="4.6" fill="#8b8b8d">0.5–0.8 cold plate</text>
+<text class="m" x="403.5" y="357.9" font-size="4.6" fill="#8b8b8d">1.0 immersion…</text>
+</g>
+<g opacity="1"><rect x="402.5" y="368.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="374.4" font-size="6.192" fill="#1c1c1e">Flexible share of</text><text x="405.5" y="381.2" font-size="6.192" fill="#1c1c1e">load</text>
+<text class="m" x="403.5" y="387.2" font-size="4.6" fill="#8b8b8d">f(it_load_actual)</text>
+<text class="m" x="403.5" y="393.0" font-size="4.6" fill="#8b8b8d">flexible kW × hours</text>
+</g>
+<g opacity="1"><rect x="402.5" y="409.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="415.2" font-size="6.192" fill="#1c1c1e">Heat temperature by</text><text x="405.5" y="422.1" font-size="6.192" fill="#1c1c1e">cooling type</text>
+<text class="m" x="403.5" y="428.1" font-size="4.6" fill="#8b8b8d">f(cooling_type)</text>
+<text class="m" x="403.5" y="433.9" font-size="4.6" fill="#8b8b8d">air-cooled 25–35</text>
+<text class="m" x="403.5" y="439.6" font-size="4.6" fill="#8b8b8d">liquid-cooled 50–60…</text>
+</g>
+<g opacity="1"><rect x="402.5" y="450.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="456.1" font-size="6.192" fill="#1c1c1e">Reserved electrical</text><text x="405.5" y="463.0" font-size="6.192" fill="#1c1c1e">capacity</text>
+<text class="m" x="403.5" y="469.0" font-size="4.6" fill="#8b8b8d">f(it_load_actual)</text>
+<text class="m" x="403.5" y="474.8" font-size="4.6" fill="#8b8b8d">installed − peak</text>
+<text class="m" x="403.5" y="480.5" font-size="4.6" fill="#8b8b8d">2N holds half</text>
+</g>
+<g opacity="1"><rect x="402.5" y="491.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="497.1" font-size="6.192" fill="#1c1c1e">Power usage</text><text x="405.5" y="503.9" font-size="6.192" fill="#1c1c1e">effectiveness</text>
+<text class="m" x="403.5" y="510.0" font-size="4.6" fill="#8b8b8d">in: pue</text>
+<text class="m" x="403.5" y="515.7" font-size="4.6" fill="#8b8b8d">E_facility ÷ E_IT</text>
+</g>
+<g opacity="1"><rect x="402.5" y="532.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="541.5" font-size="7.2" fill="#1c1c1e">Backup duration</text>
+<text class="m" x="403.5" y="550.9" font-size="4.6" fill="#8b8b8d">in: backup_hours</text>
+<text class="m" x="403.5" y="556.6" font-size="4.6" fill="#8b8b8d">usable kWh ÷ load</text>
+<text class="m" x="403.5" y="562.4" font-size="4.6" fill="#8b8b8d">fuel ÷ burn rate</text>
+</g>
+<g opacity="1"><rect x="402.5" y="573.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="578.9" font-size="6.192" fill="#1c1c1e">Sound level at</text><text x="405.5" y="585.7" font-size="6.192" fill="#1c1c1e">receptor</text>
+<text class="m" x="403.5" y="591.8" font-size="4.6" fill="#8b8b8d">f(plant_schedule, receptors)</text>
+<text class="m" x="403.5" y="597.5" font-size="4.6" fill="#8b8b8d">screen Lp ≈ Lw − 20·log10(r) − 8</text>
+<text class="m" x="403.5" y="603.2" font-size="4.6" fill="#8b8b8d">full ISO 9613-2 (NoiseModelling)</text>
+</g>
+<g opacity="1"><rect x="402.5" y="613.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="619.8" font-size="6.192" fill="#1c1c1e">What is seen from</text><text x="405.5" y="626.6" font-size="6.192" fill="#1c1c1e">public space</text>
+<text class="m" x="403.5" y="632.6" font-size="4.6" fill="#8b8b8d">f(plant_schedule)</text>
+<text class="m" x="403.5" y="638.4" font-size="4.6" fill="#8b8b8d">for each plant element: seen from</text>
+<text class="m" x="403.5" y="644.1" font-size="4.6" fill="#8b8b8d">  public space / closed to view /…</text>
+</g>
+<g opacity="1"><rect x="402.5" y="654.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="664.2" font-size="7.2" fill="#1c1c1e">Refrigerant leakage</text>
+<text class="m" x="403.5" y="673.5" font-size="4.6" fill="#8b8b8d">f(cooling_type)</text>
+<text class="m" x="403.5" y="679.3" font-size="4.6" fill="#8b8b8d">charge × 3%/yr × GWP</text>
+</g>
+<g opacity="1"><rect x="402.5" y="695.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="705.1" font-size="7.2" fill="#1c1c1e">Shadow on neighbours</text>
+<text class="m" x="403.5" y="714.4" font-size="4.6" fill="#8b8b8d">f(floor_area, massing)</text>
+<text class="m" x="403.5" y="720.2" font-size="4.6" fill="#8b8b8d">fall-equinox shadows 10:00–16:00</text>
+<text class="m" x="403.5" y="725.9" font-size="4.6" fill="#8b8b8d">  on parks, schools, opposite…</text>
+</g>
+<g opacity="1"><rect x="402.5" y="736.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="746.0" font-size="7.2" fill="#1c1c1e">Harvestable rainwater</text>
+<text class="m" x="403.5" y="755.3" font-size="4.6" fill="#8b8b8d">f(envelope, massing)</text>
+<text class="m" x="403.5" y="761.1" font-size="4.6" fill="#8b8b8d">V = A × R × C</text>
+<text class="m" x="403.5" y="766.8" font-size="4.6" fill="#8b8b8d">A = roof area: a new building&#x27;s…</text>
+</g>
+<g opacity="1"><rect x="402.5" y="777.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="783.4" font-size="6.192" fill="#1c1c1e">Water behind the</text><text x="405.5" y="790.2" font-size="6.192" fill="#1c1c1e">electricity</text>
+<text class="m" x="403.5" y="796.2" font-size="4.6" fill="#8b8b8d">f(it_load_actual)</text>
+<text class="m" x="403.5" y="802.0" font-size="4.6" fill="#8b8b8d">E × w_grid</text>
+</g>
+<g opacity="1"><rect x="402.5" y="818.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="827.8" font-size="7.2" fill="#1c1c1e">Embodied carbon, IT</text>
+<text class="m" x="403.5" y="837.1" font-size="4.6" fill="#8b8b8d">f(servers)</text>
+<text class="m" x="403.5" y="842.9" font-size="4.6" fill="#8b8b8d">servers × kg CO2e per server ÷</text>
+<text class="m" x="403.5" y="848.6" font-size="4.6" fill="#8b8b8d">  lifespan</text>
+</g>
+<g opacity="1"><rect x="402.5" y="859.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="865.1" font-size="6.192" fill="#1c1c1e">Light at neighbour&#x27;s</text><text x="405.5" y="872.0" font-size="6.192" fill="#1c1c1e">window</text>
+<text class="m" x="403.5" y="878.0" font-size="4.6" fill="#8b8b8d">f(lighting_plan)</text>
+<text class="m" x="403.5" y="883.8" font-size="4.6" fill="#8b8b8d">vertical illuminance vs CIE 150</text>
+<text class="m" x="403.5" y="889.5" font-size="4.6" fill="#8b8b8d">  zone limit (E3 10 / 2 lx…</text>
+</g>
+<g opacity="1"><rect x="402.5" y="900.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="405.5" y="909.6" font-size="7.2" fill="#1c1c1e">Heat carried in water</text>
+<text class="m" x="403.5" y="918.9" font-size="4.6" fill="#8b8b8d">in: heat_in_water</text>
+<text class="m" x="403.5" y="924.7" font-size="4.6" fill="#8b8b8d">Q = V × 1.16 × ΔT</text>
+</g>
+<g opacity="1"><rect x="520.6" y="204.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="210.8" font-size="6.192" fill="#1c1c1e">Free-cooling hours in</text><text x="523.6" y="217.6" font-size="6.192" fill="#1c1c1e">the 2050s</text>
+<text class="m" x="521.6" y="223.7" font-size="4.6" fill="#8b8b8d">f(weather, free_cooling_hours)</text>
+<text class="m" x="521.6" y="229.4" font-size="4.6" fill="#8b8b8d">same count as free_cooling_hours,</text>
+<text class="m" x="521.6" y="235.2" font-size="4.6" fill="#8b8b8d">  run on the PCIC 2050s file…</text>
+</g>
+<g opacity="1"><rect x="520.6" y="245.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="251.7" font-size="6.192" fill="#1c1c1e">Ground and</text><text x="523.6" y="258.5" font-size="6.192" fill="#1c1c1e">groundwater at the p…</text>
+<text class="m" x="521.6" y="264.6" font-size="4.6" fill="#8b8b8d">f(parcel)</text>
+<text class="m" x="521.6" y="270.3" font-size="4.6" fill="#8b8b8d">nearest N wells (GWELLS well.csv</text>
+<text class="m" x="521.6" y="276.1" font-size="4.6" fill="#8b8b8d">  by lat/long): finished depth,…</text>
+</g>
+<g opacity="1"><rect x="520.6" y="286.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="292.6" font-size="6.192" fill="#1c1c1e">Heat-pump COP</text><text x="523.6" y="299.4" font-size="6.192" fill="#1c1c1e">(Lorenz)</text>
+<text class="m" x="521.6" y="305.4" font-size="4.6" fill="#8b8b8d">f(heat_temp, receiver_temp)</text>
+<text class="m" x="521.6" y="311.2" font-size="4.6" fill="#8b8b8d">COP = η × T_lm,sink ÷ (T_lm,sink −</text>
+<text class="m" x="521.6" y="316.9" font-size="4.6" fill="#8b8b8d">  T_lm,source), log-mean…</text>
+</g>
+<g opacity="1"><rect x="520.6" y="327.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="333.5" font-size="6.192" fill="#1c1c1e">Heat captured at the</text><text x="523.6" y="340.3" font-size="6.192" fill="#1c1c1e">boundary (E_reuse)</text>
+<text class="m" x="521.6" y="346.4" font-size="4.6" fill="#8b8b8d">f(heat_rejected, liquid_capture)</text>
+<text class="m" x="521.6" y="352.1" font-size="4.6" fill="#8b8b8d">E_reuse = heat_rejected ×</text>
+<text class="m" x="521.6" y="357.9" font-size="4.6" fill="#8b8b8d">  liquid_capture, measured at the…</text>
+</g>
+<g opacity="1"><rect x="520.6" y="368.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="374.4" font-size="6.192" fill="#1c1c1e">Vibration to</text><text x="523.6" y="381.2" font-size="6.192" fill="#1c1c1e">neighbours</text>
+<text class="m" x="521.6" y="387.2" font-size="4.6" fill="#8b8b8d">f(start_case, host_building)</text>
+<text class="m" x="521.6" y="393.0" font-size="4.6" fill="#8b8b8d">qualitative rank of how hard plant</text>
+<text class="m" x="521.6" y="398.8" font-size="4.6" fill="#8b8b8d">  vibration is to isolate at each…</text>
+</g>
+<g opacity="1"><rect x="520.6" y="409.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="418.8" font-size="7.2" fill="#1c1c1e">Heat rejected</text>
+<text class="m" x="521.6" y="428.1" font-size="4.6" fill="#8b8b8d">f(it_load_actual, pue)</text>
+<text class="m" x="521.6" y="433.9" font-size="4.6" fill="#8b8b8d">Q ≈ E_IT + electrical losses</text>
+<text class="m" x="521.6" y="439.6" font-size="4.6" fill="#8b8b8d">idle floor 36% of max</text>
+</g>
+<g opacity="1"><rect x="520.6" y="450.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="456.1" font-size="6.192" fill="#1c1c1e">Solar on the data</text><text x="523.6" y="463.0" font-size="6.192" fill="#1c1c1e">centre roof</text>
+<text class="m" x="521.6" y="469.0" font-size="4.6" fill="#8b8b8d">f(massing, plant_schedule)</text>
+<text class="m" x="521.6" y="474.8" font-size="4.6" fill="#8b8b8d">kWp = panel area × 0.16–0.20</text>
+<text class="m" x="521.6" y="480.5" font-size="4.6" fill="#8b8b8d">  kWp/m²…</text>
+</g>
+<g opacity="1"><rect x="520.6" y="491.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="500.6" font-size="7.2" fill="#1c1c1e">Generator carbon</text>
+<text class="m" x="521.6" y="510.0" font-size="4.6" fill="#8b8b8d">f(backup_hours)</text>
+<text class="m" x="521.6" y="515.7" font-size="4.6" fill="#8b8b8d">litres × 2.681 kg CO2/L</text>
+</g>
+<g opacity="1"><rect x="520.6" y="532.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="541.5" font-size="7.2" fill="#1c1c1e">Generator NOx and PM</text>
+<text class="m" x="521.6" y="550.9" font-size="4.6" fill="#8b8b8d">f(backup_hours)</text>
+<text class="m" x="521.6" y="556.6" font-size="4.6" fill="#8b8b8d">AP-42 factor × rated hp × hours</text>
+</g>
+<g opacity="1"><rect x="520.6" y="573.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="582.4" font-size="7.2" fill="#1c1c1e">Solar on the facade</text>
+<text class="m" x="521.6" y="591.8" font-size="4.6" fill="#8b8b8d">f(massing)</text>
+<text class="m" x="521.6" y="597.5" font-size="4.6" fill="#8b8b8d">MWh = south facade area × module</text>
+<text class="m" x="521.6" y="603.2" font-size="4.6" fill="#8b8b8d">  density × vertical yield</text>
+</g>
+<g opacity="1"><rect x="520.6" y="613.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="623.3" font-size="7.2" fill="#1c1c1e">Work created</text>
+<text class="m" x="521.6" y="632.6" font-size="4.6" fill="#8b8b8d">f(floor_area)</text>
+<text class="m" x="521.6" y="638.4" font-size="4.6" fill="#8b8b8d">floor area ÷ 154–465 m² per</text>
+<text class="m" x="521.6" y="644.1" font-size="4.6" fill="#8b8b8d">  operating job (range)…</text>
+</g>
+<g opacity="1"><rect x="520.6" y="654.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="660.6" font-size="6.192" fill="#1c1c1e">Who the computing</text><text x="523.6" y="667.5" font-size="6.192" fill="#1c1c1e">serves</text>
+<text class="m" x="521.6" y="673.5" font-size="4.6" fill="#8b8b8d">f(interconnection)</text>
+<text class="m" x="521.6" y="679.3" font-size="4.6" fill="#8b8b8d">up to four sourced statements, no</text>
+<text class="m" x="521.6" y="685.0" font-size="4.6" fill="#8b8b8d">  score: federal data-residency…</text>
+</g>
+<g opacity="1"><rect x="520.6" y="695.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="701.5" font-size="6.192" fill="#1c1c1e">Stormwater held on</text><text x="523.6" y="708.4" font-size="6.192" fill="#1c1c1e">the lot</text>
+<text class="m" x="521.6" y="714.4" font-size="4.6" fill="#8b8b8d">f(envelope)</text>
+<text class="m" x="521.6" y="720.2" font-size="4.6" fill="#8b8b8d">Vancouver: small site a</text>
+<text class="m" x="521.6" y="725.9" font-size="4.6" fill="#8b8b8d">  3,400–7,200 L tank…</text>
+</g>
+<g opacity="1"><rect x="520.6" y="736.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="742.4" font-size="6.192" fill="#1c1c1e">Electricity to treat</text><text x="523.6" y="749.3" font-size="6.192" fill="#1c1c1e">reused water</text>
+<text class="m" x="521.6" y="755.3" font-size="4.6" fill="#8b8b8d">f(reclaimed_makeup, greywater_neig</text>
+<text class="m" x="521.6" y="761.1" font-size="4.6" fill="#8b8b8d">E = m³ treated × e</text>
+</g>
+<g opacity="1"><rect x="520.6" y="777.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="783.4" font-size="6.192" fill="#1c1c1e">Surveillance as</text><text x="523.6" y="790.2" font-size="6.192" fill="#1c1c1e">experienced</text>
+<text class="m" x="521.6" y="796.2" font-size="4.6" fill="#8b8b8d">f(visibility)</text>
+<text class="m" x="521.6" y="802.0" font-size="4.6" fill="#8b8b8d">visible cameras and signs</text>
+<text class="m" x="521.6" y="807.8" font-size="4.6" fill="#8b8b8d">indicative watched area past the…</text>
+</g>
+<g opacity="1"><rect x="520.6" y="818.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="824.2" font-size="6.192" fill="#1c1c1e">Who controls the</text><text x="523.6" y="831.1" font-size="6.192" fill="#1c1c1e">computing</text>
+<text class="m" x="521.6" y="837.1" font-size="4.6" fill="#8b8b8d">f(it_load_claim)</text>
+<text class="m" x="521.6" y="842.9" font-size="4.6" fill="#8b8b8d">flexible load is offered only by</text>
+<text class="m" x="521.6" y="848.6" font-size="4.6" fill="#8b8b8d">  whoever runs the workloads: a…</text>
+</g>
+<g opacity="1"><rect x="520.6" y="859.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="868.7" font-size="7.2" fill="#1c1c1e">Low-frequency flag</text>
+<text class="m" x="521.6" y="878.0" font-size="4.6" fill="#8b8b8d">f(noise_level)</text>
+<text class="m" x="521.6" y="883.8" font-size="4.6" fill="#8b8b8d">dBC − dBA ≥ 20 dB and tone 20–250</text>
+<text class="m" x="521.6" y="889.5" font-size="4.6" fill="#8b8b8d">  Hz → +5 dBA</text>
+</g>
+<g opacity="1"><rect x="520.6" y="900.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="523.6" y="909.6" font-size="7.2" fill="#1c1c1e">Fuel kept on site</text>
+<text class="m" x="521.6" y="918.9" font-size="4.6" fill="#8b8b8d">f(start_case, backup_hours)</text>
+<text class="m" x="521.6" y="924.7" font-size="4.6" fill="#8b8b8d">generator capacity × runtime hours</text>
+<text class="m" x="521.6" y="930.4" font-size="4.6" fill="#8b8b8d">  × fuel per kWh, against the…</text>
+</g>
+<g opacity="1"><rect x="638.8" y="245.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="641.8" y="255.2" font-size="7.2" fill="#1c1c1e">Evaporative water</text>
+<text class="m" x="639.8" y="264.6" font-size="4.6" fill="#8b8b8d">f(heat_rejected, cooling_type)</text>
+<text class="m" x="639.8" y="270.3" font-size="4.6" fill="#8b8b8d">E ≤ Q_rejected ÷ h_fg (h_fg ≈</text>
+<text class="m" x="639.8" y="276.1" font-size="4.6" fill="#8b8b8d">  2,400 kJ/kg…</text>
+</g>
+<g opacity="1"><rect x="638.8" y="286.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="641.8" y="296.1" font-size="7.2" fill="#1c1c1e">Blowdown and make-up</text>
+<text class="m" x="639.8" y="305.4" font-size="4.6" fill="#8b8b8d">f(evaporation)</text>
+<text class="m" x="639.8" y="311.2" font-size="4.6" fill="#8b8b8d">B = E ÷ (C − 1)</text>
+<text class="m" x="639.8" y="316.9" font-size="4.6" fill="#8b8b8d">make-up = E + B</text>
+</g>
+<g opacity="1"><rect x="638.8" y="327.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="641.8" y="337.0" font-size="7.2" fill="#1c1c1e">Grid carbon</text>
+<text class="m" x="639.8" y="346.4" font-size="4.6" fill="#8b8b8d">f(it_load_actual, hp_electricity)</text>
+<text class="m" x="639.8" y="352.1" font-size="4.6" fill="#8b8b8d">E × EF_average and E × EF_long-run</text>
+<text class="m" x="639.8" y="357.9" font-size="4.6" fill="#8b8b8d">  marginal, both reported</text>
+</g>
+<g opacity="1"><rect x="638.8" y="368.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="641.8" y="374.4" font-size="6.192" fill="#1c1c1e">Heat available after</text><text x="641.8" y="381.2" font-size="6.192" fill="#1c1c1e">heat pump</text>
+<text class="m" x="639.8" y="387.2" font-size="4.6" fill="#8b8b8d">f(heat_captured, cop)</text>
+<text class="m" x="639.8" y="393.0" font-size="4.6" fill="#8b8b8d">Q_out = E_reuse × COP ÷ (COP − 1)</text>
+<text class="m" x="639.8" y="398.8" font-size="4.6" fill="#8b8b8d">network-side heat after the heat…</text>
+</g>
+<g opacity="1"><rect x="638.8" y="409.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="641.8" y="418.8" font-size="7.2" fill="#1c1c1e">Heat-pump electricity</text>
+<text class="m" x="639.8" y="428.1" font-size="4.6" fill="#8b8b8d">f(heat_delivered, cop)</text>
+<text class="m" x="639.8" y="433.9" font-size="4.6" fill="#8b8b8d">Q_out ÷ COP</text>
+</g>
+<g opacity="1"><rect x="638.8" y="450.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="641.8" y="456.2" font-size="6.192" fill="#1c1c1e">Generator emission</text><text x="641.8" y="463.0" font-size="6.192" fill="#1c1c1e">rate</text>
+<text class="m" x="639.8" y="469.1" font-size="4.6" fill="#8b8b8d">f(genset_test)</text>
+<text class="m" x="639.8" y="474.8" font-size="4.6" fill="#8b8b8d">Q = emission factor (g/kWh) ×</text>
+<text class="m" x="639.8" y="480.6" font-size="4.6" fill="#8b8b8d">  generator kWe × load ÷ 3,600</text>
+</g>
+<g opacity="1"><rect x="638.8" y="491.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="641.8" y="497.1" font-size="6.192" fill="#1c1c1e">Air at a neighbour</text><text x="641.8" y="503.9" font-size="6.192" fill="#1c1c1e">(screening)</text>
+<text class="m" x="639.8" y="509.9" font-size="4.6" fill="#8b8b8d">f(genset_emission_rate)</text>
+<text class="m" x="639.8" y="515.7" font-size="4.6" fill="#8b8b8d">C(1 h) = 10⁶ × Q ÷ (π·u·σy·σz) ×</text>
+<text class="m" x="639.8" y="521.5" font-size="4.6" fill="#8b8b8d">  exp(−H² ÷ 2σz²)…</text>
+</g>
+<g opacity="1"><rect x="638.8" y="532.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="641.8" y="538.0" font-size="6.192" fill="#1c1c1e">Nitrogen dioxide at a</text><text x="641.8" y="544.8" font-size="6.192" fill="#1c1c1e">neighbour</text>
+<text class="m" x="639.8" y="550.9" font-size="4.6" fill="#8b8b8d">f(air_screen_1h)</text>
+<text class="m" x="639.8" y="556.6" font-size="4.6" fill="#8b8b8d">NO2 = NOx at the receptor ×</text>
+<text class="m" x="639.8" y="562.4" font-size="4.6" fill="#8b8b8d">  conversion ratio: 1.0 (Tier 1)…</text>
+</g>
+<g opacity="1"><rect x="638.8" y="573.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="641.8" y="582.4" font-size="7.2" fill="#1c1c1e">Energy reuse factor</text>
+<text class="m" x="639.8" y="591.8" font-size="4.6" fill="#8b8b8d">f(heat_captured, heat_rejected)</text>
+<text class="m" x="639.8" y="597.5" font-size="4.6" fill="#8b8b8d">ERF = E_reuse ÷ E_DC (ISO/IEC</text>
+<text class="m" x="639.8" y="603.2" font-size="4.6" fill="#8b8b8d">  30134-6…</text>
+</g>
+<g opacity="1"><rect x="638.8" y="613.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="641.8" y="619.8" font-size="6.192" fill="#1c1c1e">Water usage</text><text x="641.8" y="626.6" font-size="6.192" fill="#1c1c1e">effectiveness</text>
+<text class="m" x="639.8" y="632.6" font-size="4.6" fill="#8b8b8d">f(blowdown, it_load_actual)</text>
+<text class="m" x="639.8" y="638.4" font-size="4.6" fill="#8b8b8d">site water ÷ E_IT</text>
+</g>
+<g opacity="1"><rect x="638.8" y="654.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="641.8" y="660.6" font-size="6.192" fill="#1c1c1e">Warmer air near the</text><text x="641.8" y="667.5" font-size="6.192" fill="#1c1c1e">cooling units</text>
+<text class="m" x="639.8" y="673.5" font-size="4.6" fill="#8b8b8d">f(heat_rejected, plant_schedule)</text>
+<text class="m" x="639.8" y="679.3" font-size="4.6" fill="#8b8b8d">at the coil: ΔT = Q ÷</text>
+<text class="m" x="639.8" y="685.0" font-size="4.6" fill="#8b8b8d">  (ρ·cp·airflow)…</text>
+</g>
+<g opacity="1"><rect x="638.8" y="695.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="641.8" y="701.6" font-size="6.192" fill="#1c1c1e">Heat given off per m²</text><text x="641.8" y="708.4" font-size="6.192" fill="#1c1c1e">of site</text>
+<text class="m" x="639.8" y="714.5" font-size="4.6" fill="#8b8b8d">f(heat_rejected)</text>
+<text class="m" x="639.8" y="720.2" font-size="4.6" fill="#8b8b8d">q = heat rejected at peak (W) ÷</text>
+<text class="m" x="639.8" y="726.0" font-size="4.6" fill="#8b8b8d">  site area (m²)…</text>
+</g>
+<g opacity="1"><rect x="638.8" y="736.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="641.8" y="742.4" font-size="6.192" fill="#1c1c1e">Condensate from</text><text x="641.8" y="749.3" font-size="6.192" fill="#1c1c1e">cooling coils</text>
+<text class="m" x="639.8" y="755.3" font-size="4.6" fill="#8b8b8d">f(heat_rejected)</text>
+<text class="m" x="639.8" y="761.1" font-size="4.6" fill="#8b8b8d">coils condense only when air is</text>
+<text class="m" x="639.8" y="766.8" font-size="4.6" fill="#8b8b8d">  cooled below its dew point…</text>
+</g>
+<g opacity="1"><rect x="638.8" y="777.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="641.8" y="783.4" font-size="6.192" fill="#1c1c1e">Generator testing</text><text x="641.8" y="790.2" font-size="6.192" fill="#1c1c1e">emissions</text>
+<text class="m" x="639.8" y="796.2" font-size="4.6" fill="#8b8b8d">f(generator_co2, generator_nox_pm,</text>
+<text class="m" x="639.8" y="802.0" font-size="4.6" fill="#8b8b8d">energy = units × kW × test hours</text>
+<text class="m" x="639.8" y="807.8" font-size="4.6" fill="#8b8b8d">  at load…</text>
+</g>
+<g opacity="1"><rect x="638.8" y="818.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="641.8" y="824.3" font-size="6.192" fill="#1c1c1e">Renewable diesel in</text><text x="641.8" y="831.1" font-size="6.192" fill="#1c1c1e">the generators</text>
+<text class="m" x="639.8" y="837.2" font-size="4.6" fill="#8b8b8d">f(genset_test)</text>
+<text class="m" x="639.8" y="842.9" font-size="4.6" fill="#8b8b8d">Δ lifecycle CO2e = fuel energy ×</text>
+<text class="m" x="639.8" y="848.7" font-size="4.6" fill="#8b8b8d">  (CI diesel − CI renewable…</text>
+</g>
+<g opacity="1"><rect x="638.8" y="859.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="641.8" y="868.7" font-size="7.2" fill="#1c1c1e">Blowdown recovered</text>
+<text class="m" x="639.8" y="878.0" font-size="4.6" fill="#8b8b8d">f(blowdown)</text>
+<text class="m" x="639.8" y="883.8" font-size="4.6" fill="#8b8b8d">make-up × 0.84</text>
+<text class="m" x="639.8" y="889.5" font-size="4.6" fill="#8b8b8d">blowdown × 0.47…</text>
+</g>
+<g opacity="1"><rect x="756.9" y="368.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="759.9" y="374.4" font-size="6.192" fill="#1c1c1e">Receiver search</text><text x="759.9" y="381.2" font-size="6.192" fill="#1c1c1e">radius</text>
+<text class="m" x="757.9" y="387.2" font-size="4.6" fill="#8b8b8d">in: receiver_radius</text>
+<text class="m" x="757.9" y="393.0" font-size="4.6" fill="#8b8b8d">search to 3 km in a straight line</text>
+<text class="m" x="757.9" y="398.8" font-size="4.6" fill="#8b8b8d">  (a street-routing limit)…</text>
+</g>
+<g opacity="1"><rect x="756.9" y="409.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="759.9" y="415.2" font-size="6.192" fill="#1c1c1e">Receivers within</text><text x="759.9" y="422.1" font-size="6.192" fill="#1c1c1e">reach</text>
+<text class="m" x="757.9" y="428.1" font-size="4.6" fill="#8b8b8d">f(parcel, receiver_radius, receive</text>
+<text class="m" x="757.9" y="433.9" font-size="4.6" fill="#8b8b8d">every candidate receiver whose</text>
+<text class="m" x="757.9" y="439.6" font-size="4.6" fill="#8b8b8d">  straight-line distance ≤ its…</text>
+</g>
+<g opacity="1"><rect x="756.9" y="450.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="759.9" y="456.2" font-size="6.192" fill="#1c1c1e">Other sources for the</text><text x="759.9" y="463.0" font-size="6.192" fill="#1c1c1e">same receiver</text>
+<text class="m" x="757.9" y="469.1" font-size="4.6" fill="#8b8b8d">f(receivers_nearby, sewage_heat)</text>
+<text class="m" x="757.9" y="474.8" font-size="4.6" fill="#8b8b8d">sources already serving, or</text>
+<text class="m" x="757.9" y="480.6" font-size="4.6" fill="#8b8b8d">  planned for, each receiver:…</text>
+</g>
+<g opacity="1"><rect x="756.9" y="491.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="759.9" y="500.6" font-size="7.2" fill="#1c1c1e">Offerable floor area</text>
+<text class="m" x="757.9" y="509.9" font-size="4.6" fill="#8b8b8d">f(floor_area)</text>
+<text class="m" x="757.9" y="515.7" font-size="4.6" fill="#8b8b8d">ground floor where zoning bars</text>
+<text class="m" x="757.9" y="521.5" font-size="4.6" fill="#8b8b8d">  data storage at grade + a…</text>
+</g>
+<g opacity="1"><rect x="756.9" y="532.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="759.9" y="541.5" font-size="7.2" fill="#1c1c1e">Receiver heat demand</text>
+<text class="m" x="757.9" y="550.9" font-size="4.6" fill="#8b8b8d">f(receivers)</text>
+<text class="m" x="757.9" y="556.6" font-size="4.6" fill="#8b8b8d">disclosed data (Energize</text>
+<text class="m" x="757.9" y="562.4" font-size="4.6" fill="#8b8b8d">  Vancouver) else floor area ×…</text>
+</g>
+<g opacity="1"><rect x="756.9" y="573.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="759.9" y="578.9" font-size="6.192" fill="#1c1c1e">Deprivation of</text><text x="759.9" y="585.7" font-size="6.192" fill="#1c1c1e">affected areas</text>
+<text class="m" x="757.9" y="591.8" font-size="4.6" fill="#8b8b8d">f(noise_level, receiver_radius)</text>
+<text class="m" x="757.9" y="597.5" font-size="4.6" fill="#8b8b8d">CIMD by dissemination area within</text>
+<text class="m" x="757.9" y="603.2" font-size="4.6" fill="#8b8b8d">  noise contour and receiver…</text>
+</g>
+<g opacity="1"><rect x="756.9" y="613.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="759.9" y="619.8" font-size="6.192" fill="#1c1c1e">Distribution capital</text><text x="759.9" y="626.6" font-size="6.192" fill="#1c1c1e">cost</text>
+<text class="m" x="757.9" y="632.6" font-size="4.6" fill="#8b8b8d">f(linear_heat_density)</text>
+<text class="m" x="757.9" y="638.4" font-size="4.6" fill="#8b8b8d">C_d = a(C1 + C2·d_a) ÷ q_L,w</text>
+<text class="m" x="757.9" y="644.1" font-size="4.6" fill="#8b8b8d">d_a = 0.0486 ln(q_L,w) + 0.0007…</text>
+</g>
+<g opacity="1"><rect x="756.9" y="654.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="759.9" y="664.2" font-size="7.2" fill="#1c1c1e">People within reach</text>
+<text class="m" x="757.9" y="673.5" font-size="4.6" fill="#8b8b8d">f(receptors, area)</text>
+<text class="m" x="757.9" y="679.3" font-size="4.6" fill="#8b8b8d">dissemination-area population ×</text>
+<text class="m" x="757.9" y="685.0" font-size="4.6" fill="#8b8b8d">  share of the DA within each…</text>
+</g>
+<g opacity="1"><rect x="756.9" y="695.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="759.9" y="701.6" font-size="6.192" fill="#1c1c1e">Heat density of</text><text x="759.9" y="708.4" font-size="6.192" fill="#1c1c1e">receiving area</text>
+<text class="m" x="757.9" y="714.5" font-size="4.6" fill="#8b8b8d">f(receiver_demand, area)</text>
+<text class="m" x="757.9" y="720.2" font-size="4.6" fill="#8b8b8d">q_L = population density × floor</text>
+<text class="m" x="757.9" y="726.0" font-size="4.6" fill="#8b8b8d">  space per capita × specific…</text>
+</g>
+<g opacity="1"><rect x="756.9" y="736.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="759.9" y="746.0" font-size="7.2" fill="#1c1c1e">Linear heat density</text>
+<text class="m" x="757.9" y="755.3" font-size="4.6" fill="#8b8b8d">f(heat_density, plot_ratio)</text>
+<text class="m" x="757.9" y="761.1" font-size="4.6" fill="#8b8b8d">q_L,w = Q_s ÷ L</text>
+<text class="m" x="757.9" y="766.8" font-size="4.6" fill="#8b8b8d">effective width w = 137.5e + 5 (e…</text>
+</g>
+<g opacity="1"><rect x="875.1" y="286.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="878.1" y="296.1" font-size="7.2" fill="#1c1c1e">Homes heated</text>
+<text class="m" x="876.1" y="305.4" font-size="4.6" fill="#8b8b8d">f(heat_delivered)</text>
+<text class="m" x="876.1" y="311.2" font-size="4.6" fill="#8b8b8d">homes = Q_available ÷ (space +</text>
+<text class="m" x="876.1" y="316.9" font-size="4.6" fill="#8b8b8d">  water heating GJ per household)…</text>
+</g>
+<g opacity="1"><rect x="875.1" y="327.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="878.1" y="333.4" font-size="6.192" fill="#1c1c1e">Sewage heat</text><text x="878.1" y="340.3" font-size="6.192" fill="#1c1c1e">recoverable</text>
+<text class="m" x="876.1" y="346.3" font-size="4.6" fill="#8b8b8d">f(sewer_flow)</text>
+<text class="m" x="876.1" y="352.1" font-size="4.6" fill="#8b8b8d">Q(L/s) × 4.18 × ΔT</text>
+<text class="m" x="876.1" y="357.8" font-size="4.6" fill="#8b8b8d">not below 6 °C…</text>
+</g>
+<g opacity="1"><rect x="875.1" y="368.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="878.1" y="377.9" font-size="7.2" fill="#1c1c1e">Seasonal stored heat</text>
+<text class="m" x="876.1" y="387.2" font-size="4.6" fill="#8b8b8d">f(heat_delivered, ground)</text>
+<text class="m" x="876.1" y="393.0" font-size="4.6" fill="#8b8b8d">ρ c V ΔT × efficiency (0.3–0.7)</text>
+</g>
+<g opacity="1"><rect x="875.1" y="409.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="878.1" y="415.2" font-size="6.192" fill="#1c1c1e">EV charging stalls</text><text x="878.1" y="422.1" font-size="6.192" fill="#1c1c1e">supported</text>
+<text class="m" x="876.1" y="428.1" font-size="4.6" fill="#8b8b8d">f(spare_capacity)</text>
+<text class="m" x="876.1" y="433.9" font-size="4.6" fill="#8b8b8d">P_reserved ÷ (SF × P_charger), SF</text>
+<text class="m" x="876.1" y="439.6" font-size="4.6" fill="#8b8b8d">  0.5–1 (corrected 18 Oct 2026: S…</text>
+</g>
+<g opacity="1"><rect x="875.1" y="450.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="878.1" y="459.7" font-size="7.2" fill="#1c1c1e">People sheltered</text>
+<text class="m" x="876.1" y="469.0" font-size="4.6" fill="#8b8b8d">f(offerable_area, backup_hours)</text>
+<text class="m" x="876.1" y="474.8" font-size="4.6" fill="#8b8b8d">usable area ÷ 3.5 m² per person</text>
+<text class="m" x="876.1" y="480.5" font-size="4.6" fill="#8b8b8d">0.75 m between beds (BC group…</text>
+</g>
+<g opacity="1"><rect x="875.1" y="491.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="878.1" y="497.1" font-size="6.192" fill="#1c1c1e">Greenhouse area</text><text x="878.1" y="503.9" font-size="6.192" fill="#1c1c1e">heated</text>
+<text class="m" x="876.1" y="509.9" font-size="4.6" fill="#8b8b8d">f(heat_delivered, heat_temp)</text>
+<text class="m" x="876.1" y="515.7" font-size="4.6" fill="#8b8b8d">Q_delivered ÷ q_greenhouse</text>
+<text class="m" x="876.1" y="521.5" font-size="4.6" fill="#8b8b8d">supply temperature check:…</text>
+</g>
+<g opacity="1"><rect x="875.1" y="532.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="878.1" y="537.9" font-size="6.192" fill="#1c1c1e">Fish production</text><text x="878.1" y="544.8" font-size="6.192" fill="#1c1c1e">supported</text>
+<text class="m" x="876.1" y="550.8" font-size="4.6" fill="#8b8b8d">f(heat_delivered, heat_temp)</text>
+<text class="m" x="876.1" y="556.6" font-size="4.6" fill="#8b8b8d">tonnes = heat_delivered ÷</text>
+<text class="m" x="876.1" y="562.3" font-size="4.6" fill="#8b8b8d">  heat_per_kg…</text>
+</g>
+<g opacity="1"><rect x="875.1" y="573.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="878.1" y="578.9" font-size="6.192" fill="#1c1c1e">Algae dry mass</text><text x="878.1" y="585.7" font-size="6.192" fill="#1c1c1e">supported</text>
+<text class="m" x="876.1" y="591.8" font-size="4.6" fill="#8b8b8d">f(heat_delivered, heat_temp)</text>
+<text class="m" x="876.1" y="597.5" font-size="4.6" fill="#8b8b8d">Q ÷ 217 kWh/kgDW at 24 °C</text>
+</g>
+<g opacity="1"><rect x="875.1" y="613.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="878.1" y="623.3" font-size="7.2" fill="#1c1c1e">Insect rearing heat</text>
+<text class="m" x="876.1" y="632.6" font-size="4.6" fill="#8b8b8d">f(heat_temp)</text>
+<text class="m" x="876.1" y="638.4" font-size="4.6" fill="#8b8b8d">mealworm: 2.88 kWh heating per kg</text>
+<text class="m" x="876.1" y="644.1" font-size="4.6" fill="#8b8b8d">  live (Dreyer et al. 2021,…</text>
+</g>
+<g opacity="1"><rect x="875.1" y="654.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="878.1" y="660.6" font-size="6.192" fill="#1c1c1e">Clean-air room volume</text><text x="878.1" y="667.5" font-size="6.192" fill="#1c1c1e">served</text>
+<text class="m" x="876.1" y="673.5" font-size="4.6" fill="#8b8b8d">f(offerable_area)</text>
+<text class="m" x="876.1" y="679.3" font-size="4.6" fill="#8b8b8d">cleaned airflow ÷ (2–3 ACH)</text>
+<text class="m" x="876.1" y="685.0" font-size="4.6" fill="#8b8b8d">MERV 13+…</text>
+</g>
+<g opacity="1"><rect x="875.1" y="695.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="878.1" y="701.6" font-size="6.192" fill="#1c1c1e">Copper in the</text><text x="878.1" y="708.4" font-size="6.192" fill="#1c1c1e">facility</text>
+<text class="m" x="876.1" y="714.5" font-size="4.6" fill="#8b8b8d">f(it_load_actual)</text>
+<text class="m" x="876.1" y="720.2" font-size="4.6" fill="#8b8b8d">MW × 20–40 t/MW</text>
+</g>
+<g opacity="1"><rect x="875.1" y="736.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="878.1" y="742.4" font-size="6.192" fill="#1c1c1e">People a cooling room</text><text x="878.1" y="749.3" font-size="6.192" fill="#1c1c1e">can hold</text>
+<text class="m" x="876.1" y="755.3" font-size="4.6" fill="#8b8b8d">f(spare_cooling, offerable_area)</text>
+<text class="m" x="876.1" y="761.1" font-size="4.6" fill="#8b8b8d">spare cooling kW ÷ (0.108 kW per</text>
+<text class="m" x="876.1" y="766.8" font-size="4.6" fill="#8b8b8d">  seated person + envelope gains)…</text>
+</g>
+<g opacity="1"><rect x="875.1" y="777.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="878.1" y="783.4" font-size="6.192" fill="#1c1c1e">Homes heated by</text><text x="878.1" y="790.2" font-size="6.192" fill="#1c1c1e">distributed servers</text>
+<text class="m" x="876.1" y="796.2" font-size="4.6" fill="#8b8b8d">f(servers)</text>
+<text class="m" x="876.1" y="802.0" font-size="4.6" fill="#8b8b8d">servers ÷ (37–114 servers per home</text>
+<text class="m" x="876.1" y="807.8" font-size="4.6" fill="#8b8b8d">  at 0.35 kW)</text>
+</g>
+<g opacity="1"><rect x="875.1" y="818.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="878.1" y="827.8" font-size="7.2" fill="#1c1c1e">E-waste</text>
+<text class="m" x="876.1" y="837.1" font-size="4.6" fill="#8b8b8d">f(servers)</text>
+<text class="m" x="876.1" y="842.9" font-size="4.6" fill="#8b8b8d">servers × mass ÷ 6 yr</text>
+</g>
+<g opacity="1"><rect x="993.2" y="286.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="996.2" y="292.6" font-size="6.192" fill="#1c1c1e">Homes heated in the</text><text x="996.2" y="299.4" font-size="6.192" fill="#1c1c1e">2050s</text>
+<text class="m" x="994.2" y="305.4" font-size="4.6" fill="#8b8b8d">f(homes_heated, free_cooling_hours</text>
+<text class="m" x="994.2" y="311.2" font-size="4.6" fill="#8b8b8d">homes = heat available ÷ (space</text>
+<text class="m" x="994.2" y="316.9" font-size="4.6" fill="#8b8b8d">  heat × HDD(2050s) ÷ HDD(now) +…</text>
+</g>
+<g opacity="1"><rect x="993.2" y="327.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="996.2" y="333.4" font-size="6.192" fill="#1c1c1e">UPS batteries offered</text><text x="996.2" y="340.3" font-size="6.192" fill="#1c1c1e">to the grid</text>
+<text class="m" x="994.2" y="346.3" font-size="4.6" fill="#8b8b8d">f(it_load_actual, flexible_load)</text>
+<text class="m" x="994.2" y="352.1" font-size="4.6" fill="#8b8b8d">flexible MWh = IT load × UPS</text>
+<text class="m" x="994.2" y="357.8" font-size="4.6" fill="#8b8b8d">  minutes ÷ 60 × 0.5 (half held…</text>
+</g>
+<g opacity="1"><rect x="993.2" y="368.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="996.2" y="377.9" font-size="7.2" fill="#1c1c1e">Battery storage</text>
+<text class="m" x="994.2" y="387.2" font-size="4.6" fill="#8b8b8d">f(it_load_actual)</text>
+<text class="m" x="994.2" y="393.0" font-size="4.6" fill="#8b8b8d">MWh = MW × hours (1–8, default 4)</text>
+<text class="m" x="994.2" y="398.8" font-size="4.6" fill="#8b8b8d">area m² = kWh ÷ 34 (19–49)</text>
+</g>
+<g opacity="1"><rect x="993.2" y="409.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="996.2" y="415.2" font-size="6.192" fill="#1c1c1e">Sidewalk kept clear</text><text x="996.2" y="422.1" font-size="6.192" fill="#1c1c1e">by its heat</text>
+<text class="m" x="994.2" y="428.1" font-size="4.6" fill="#8b8b8d">f(heat_delivered)</text>
+<text class="m" x="994.2" y="433.9" font-size="4.6" fill="#8b8b8d">m² = heat offered (W) ÷ design</text>
+<text class="m" x="994.2" y="439.6" font-size="4.6" fill="#8b8b8d">  heat per m²</text>
+</g>
+<g opacity="1"><rect x="993.2" y="450.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="996.2" y="456.1" font-size="6.192" fill="#1c1c1e">Hot or chilled water</text><text x="996.2" y="463.0" font-size="6.192" fill="#1c1c1e">tank</text>
+<text class="m" x="994.2" y="469.0" font-size="4.6" fill="#8b8b8d">f(heat_captured, demand_profile)</text>
+<text class="m" x="994.2" y="474.8" font-size="4.6" fill="#8b8b8d">litres per kWh = 3,600 ÷ (4.18 ×</text>
+<text class="m" x="994.2" y="480.5" font-size="4.6" fill="#8b8b8d">  ΔT) ÷ 0.85</text>
+</g>
+<g opacity="1"><rect x="993.2" y="491.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="996.2" y="497.1" font-size="6.192" fill="#1c1c1e">Cooling for</text><text x="996.2" y="503.9" font-size="6.192" fill="#1c1c1e">neighbours from wast…</text>
+<text class="m" x="994.2" y="509.9" font-size="4.6" fill="#8b8b8d">f(heat_temp, heat_captured)</text>
+<text class="m" x="994.2" y="515.7" font-size="4.6" fill="#8b8b8d">cooling = recovered heat × COP, if</text>
+<text class="m" x="994.2" y="521.5" font-size="4.6" fill="#8b8b8d">  temperature allows</text>
+</g>
+<g opacity="1"><rect x="993.2" y="532.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="996.2" y="537.9" font-size="6.192" fill="#1c1c1e">Seasonal ground store</text><text x="996.2" y="544.8" font-size="6.192" fill="#1c1c1e">for neighbours</text>
+<text class="m" x="994.2" y="550.8" font-size="4.6" fill="#8b8b8d">f(heat_captured, stored_heat, rece</text>
+<text class="m" x="994.2" y="556.6" font-size="4.6" fill="#8b8b8d">heat out = η × heat stored</text>
+<text class="m" x="994.2" y="562.3" font-size="4.6" fill="#8b8b8d">boreholes = charge W ÷ 47–83 W/m …</text>
+</g>
+<g opacity="1"><rect x="993.2" y="573.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="996.2" y="578.9" font-size="6.192" fill="#1c1c1e">Firefighting water</text><text x="996.2" y="585.7" font-size="6.192" fill="#1c1c1e">for neighbours</text>
+<text class="m" x="994.2" y="591.8" font-size="4.6" fill="#8b8b8d">f(water_supply)</text>
+<text class="m" x="994.2" y="597.5" font-size="4.6" fill="#8b8b8d">a tank on the lot, non-potable,</text>
+<text class="m" x="994.2" y="603.2" font-size="4.6" fill="#8b8b8d">  for the fire department after a…</text>
+</g>
+<g opacity="1"><rect x="993.2" y="613.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="996.2" y="623.3" font-size="7.2" fill="#1c1c1e">Storage footprint</text>
+<text class="m" x="994.2" y="632.6" font-size="4.6" fill="#8b8b8d">f(stored_heat)</text>
+<text class="m" x="994.2" y="638.4" font-size="4.6" fill="#8b8b8d">pit storage ≈ 20.15 V^0.61</text>
+<text class="m" x="994.2" y="644.1" font-size="4.6" fill="#8b8b8d">~47–97 kWh/m³…</text>
+</g>
+<g opacity="1"><rect x="993.2" y="654.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="996.2" y="660.6" font-size="6.192" fill="#1c1c1e">Own gas plant: heat</text><text x="996.2" y="667.5" font-size="6.192" fill="#1c1c1e">with the power</text>
+<text class="m" x="994.2" y="673.5" font-size="4.6" fill="#8b8b8d">f(it_load_actual)</text>
+<text class="m" x="994.2" y="679.3" font-size="4.6" fill="#8b8b8d">heat = electric output ÷</text>
+<text class="m" x="994.2" y="685.0" font-size="4.6" fill="#8b8b8d">  power-to-heat ratio…</text>
+</g>
+<g opacity="1"><rect x="993.2" y="695.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="996.2" y="701.6" font-size="6.192" fill="#1c1c1e">Space for charging</text><text x="996.2" y="708.4" font-size="6.192" fill="#1c1c1e">stalls</text>
+<text class="m" x="994.2" y="714.5" font-size="4.6" fill="#8b8b8d">f(ev_stalls)</text>
+<text class="m" x="994.2" y="720.2" font-size="4.6" fill="#8b8b8d">stalls × 13.75 m² net (≈ 22 m²</text>
+<text class="m" x="994.2" y="726.0" font-size="4.6" fill="#8b8b8d">  with aisle) Vancouver…</text>
+</g>
+<g opacity="1"><rect x="993.2" y="736.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="996.2" y="746.0" font-size="7.2" fill="#1c1c1e">Rare earth in drives</text>
+<text class="m" x="994.2" y="755.3" font-size="4.6" fill="#8b8b8d">f(servers)</text>
+<text class="m" x="994.2" y="761.1" font-size="4.6" fill="#8b8b8d">drives × 3–4 g</text>
+</g>
+<g opacity="1"><rect x="993.2" y="777.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="996.2" y="783.4" font-size="6.192" fill="#1c1c1e">Solar on neighbours&#x27;</text><text x="996.2" y="790.2" font-size="6.192" fill="#1c1c1e">roofs</text>
+<text class="m" x="994.2" y="796.2" font-size="4.6" fill="#8b8b8d">f(rooftop_solar)</text>
+<text class="m" x="994.2" y="802.0" font-size="4.6" fill="#8b8b8d">BC: RS 2290 community generation,</text>
+<text class="m" x="994.2" y="807.8" font-size="4.6" fill="#8b8b8d">  neighbours credited on their…</text>
+</g>
+<g opacity="1"><rect x="993.2" y="818.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="996.2" y="824.2" font-size="6.192" fill="#1c1c1e">Backup power for</text><text x="996.2" y="831.1" font-size="6.192" fill="#1c1c1e">neighbours in a blac…</text>
+<text class="m" x="994.2" y="837.1" font-size="4.6" fill="#8b8b8d">f(backup_hours)</text>
+<text class="m" x="994.2" y="842.9" font-size="4.6" fill="#8b8b8d">only behind the data centre&#x27;s own</text>
+<text class="m" x="994.2" y="848.6" font-size="4.6" fill="#8b8b8d">  transfer switch, on a private…</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="225.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="234.8" font-size="7.2" fill="#1c1c1e">Crossing type</text>
+<text class="m" x="1112.4" y="244.1" font-size="4.6" fill="#8b8b8d">f(receivers, offerable_area)</text>
+<text class="m" x="1112.4" y="249.8" font-size="4.6" fill="#8b8b8d">pipes/cables/data only (easier) vs</text>
+<text class="m" x="1112.4" y="255.6" font-size="4.6" fill="#8b8b8d">  people inside (harder)</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="266.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="272.1" font-size="6.192" fill="#1c1c1e">Hourly heat-demand</text><text x="1114.4" y="278.9" font-size="6.192" fill="#1c1c1e">profile</text>
+<text class="m" x="1112.4" y="285.0" font-size="4.6" fill="#8b8b8d">f(receiver_demand, weather)</text>
+<text class="m" x="1112.4" y="290.8" font-size="4.6" fill="#8b8b8d">hourly HDD = max(0, 16 − T_out)</text>
+<text class="m" x="1112.4" y="296.5" font-size="4.6" fill="#8b8b8d">space heat ∝ HDD in season…</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="307.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="313.0" font-size="6.192" fill="#1c1c1e">Data-centre build</text><text x="1114.4" y="319.8" font-size="6.192" fill="#1c1c1e">cost</text>
+<text class="m" x="1112.4" y="325.9" font-size="4.6" fill="#8b8b8d">in: build_cost</text>
+<text class="m" x="1112.4" y="331.6" font-size="4.6" fill="#8b8b8d">cost per watt of critical power</text>
+<text class="m" x="1112.4" y="337.4" font-size="4.6" fill="#8b8b8d">cost per ft²…</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="348.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="353.9" font-size="6.192" fill="#1c1c1e">Capital recovery</text><text x="1114.4" y="360.7" font-size="6.192" fill="#1c1c1e">factor</text>
+<text class="m" x="1112.4" y="366.8" font-size="4.6" fill="#8b8b8d">in: crf</text>
+<text class="m" x="1112.4" y="372.5" font-size="4.6" fill="#8b8b8d">i ÷ (1 − (1+i)^−n)</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="388.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="398.3" font-size="7.2" fill="#1c1c1e">Solar installed cost</text>
+<text class="m" x="1112.4" y="407.7" font-size="4.6" fill="#8b8b8d">f(pv_roof)</text>
+<text class="m" x="1112.4" y="413.4" font-size="4.6" fill="#8b8b8d">kWp × 1,000 × rate by size</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="429.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="435.7" font-size="6.192" fill="#1c1c1e">Zoning: allowed,</text><text x="1114.4" y="442.5" font-size="6.192" fill="#1c1c1e">conditional or rezon…</text>
+<text class="m" x="1112.4" y="448.6" font-size="4.6" fill="#8b8b8d">f(parcel, zone, start_case)</text>
+<text class="m" x="1112.4" y="454.4" font-size="4.6" fill="#8b8b8d">look up the district: outright /</text>
+<text class="m" x="1112.4" y="460.1" font-size="4.6" fill="#8b8b8d">  conditional (development permit…</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="470.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="480.1" font-size="7.2" fill="#1c1c1e">Buyer ceiling price</text>
+<text class="m" x="1112.4" y="489.5" font-size="4.6" fill="#8b8b8d">in: price_ceiling</text>
+<text class="m" x="1112.4" y="495.2" font-size="4.6" fill="#8b8b8d">fuel price ÷ boiler efficiency</text>
+<text class="m" x="1112.4" y="501.0" font-size="4.6" fill="#8b8b8d">  (0.85)…</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="511.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="521.0" font-size="7.2" fill="#1c1c1e">Termination risk</text>
+<text class="m" x="1112.4" y="530.4" font-size="4.6" fill="#8b8b8d">in: risk_term</text>
+<text class="m" x="1112.4" y="536.1" font-size="4.6" fill="#8b8b8d">share of recoveries lost</text>
+<text class="m" x="1112.4" y="541.9" font-size="4.6" fill="#8b8b8d">  (volume-weighted) and share of…</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="552.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="558.4" font-size="6.192" fill="#1c1c1e">Water licence</text><text x="1114.4" y="565.2" font-size="6.192" fill="#1c1c1e">required</text>
+<text class="m" x="1112.4" y="571.3" font-size="4.6" fill="#8b8b8d">f(ground)</text>
+<text class="m" x="1112.4" y="577.0" font-size="4.6" fill="#8b8b8d">BC: yes for open-loop heat</text>
+<text class="m" x="1112.4" y="582.8" font-size="4.6" fill="#8b8b8d">  exchange (WSR Sch. A item 9).…</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="593.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="602.8" font-size="7.2" fill="#1c1c1e">Who pays which part</text>
+<text class="m" x="1112.4" y="612.2" font-size="4.6" fill="#8b8b8d">in: capex_split</text>
+<text class="m" x="1112.4" y="617.9" font-size="4.6" fill="#8b8b8d">recovery equipment / connection /</text>
+<text class="m" x="1112.4" y="623.7" font-size="4.6" fill="#8b8b8d">  network / heat pump, by party</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="634.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="643.8" font-size="7.2" fill="#1c1c1e">Time horizons</text>
+<text class="m" x="1112.4" y="653.1" font-size="4.6" fill="#8b8b8d">in: horizons</text>
+<text class="m" x="1112.4" y="658.9" font-size="4.6" fill="#8b8b8d">servers ~6</text>
+<text class="m" x="1112.4" y="664.6" font-size="4.6" fill="#8b8b8d">plant 15–25…</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="675.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="684.6" font-size="7.2" fill="#1c1c1e">Connection lead time</text>
+<text class="m" x="1112.4" y="694.0" font-size="4.6" fill="#8b8b8d">in: lead_time</text>
+<text class="m" x="1112.4" y="699.8" font-size="4.6" fill="#8b8b8d">BC Hydro: conceptual 1–1.5 + SIS</text>
+<text class="m" x="1112.4" y="705.5" font-size="4.6" fill="#8b8b8d">  6–9 + transition 3–4 + FS 6–9…</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="716.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="725.5" font-size="7.2" fill="#1c1c1e">Grid headroom status</text>
+<text class="m" x="1112.4" y="734.9" font-size="4.6" fill="#8b8b8d">in: grid_headroom</text>
+<text class="m" x="1112.4" y="740.6" font-size="4.6" fill="#8b8b8d">governing document, date, stated</text>
+<text class="m" x="1112.4" y="746.4" font-size="4.6" fill="#8b8b8d">  cap or constraint, next…</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="757.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="762.9" font-size="6.192" fill="#1c1c1e">Earthquake design</text><text x="1114.4" y="769.7" font-size="6.192" fill="#1c1c1e">category</text>
+<text class="m" x="1112.4" y="775.8" font-size="4.6" fill="#8b8b8d">f(refuge_people)</text>
+<text class="m" x="1112.4" y="781.5" font-size="4.6" fill="#8b8b8d">Normal (IE 1.0) by default</text>
+<text class="m" x="1112.4" y="787.3" font-size="4.6" fill="#8b8b8d">High (1.3) if likely used as a…</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="798.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="807.4" font-size="7.2" fill="#1c1c1e">Local noise limit</text>
+<text class="m" x="1112.4" y="816.7" font-size="4.6" fill="#8b8b8d">f(noise_level)</text>
+<text class="m" x="1112.4" y="822.5" font-size="4.6" fill="#8b8b8d">Edmonton Bylaw 14600 at the</text>
+<text class="m" x="1112.4" y="828.2" font-size="4.6" fill="#8b8b8d">  property line, no averaging…</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="838.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="844.7" font-size="6.192" fill="#1c1c1e">Street right-of-way</text><text x="1114.4" y="851.5" font-size="6.192" fill="#1c1c1e">cost</text>
+<text class="m" x="1112.4" y="857.6" font-size="4.6" fill="#8b8b8d">f(distribution_cost)</text>
+<text class="m" x="1112.4" y="863.4" font-size="4.6" fill="#8b8b8d">Vancouver Encroachment By-law</text>
+<text class="m" x="1112.4" y="869.1" font-size="4.6" fill="#8b8b8d">  4243: $244.97 + $6.53/ft² over…</text>
+</g>
+<g opacity="1"><rect x="1111.4" y="879.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1114.4" y="885.6" font-size="6.192" fill="#1c1c1e">EV charging</text><text x="1114.4" y="892.4" font-size="6.192" fill="#1c1c1e">regulatory status</text>
+<text class="m" x="1112.4" y="898.5" font-size="4.6" fill="#8b8b8d">in: ev_exemption</text>
+<text class="m" x="1112.4" y="904.2" font-size="4.6" fill="#8b8b8d">BC: exempt from UCA Part 3 (MO</text>
+<text class="m" x="1112.4" y="910.0" font-size="4.6" fill="#8b8b8d">  M104, 2019…</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="225.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="234.8" font-size="7.2" fill="#1c1c1e">Embodied carbon rule</text>
+<text class="m" x="1230.5" y="244.1" font-size="4.6" fill="#8b8b8d">f(embodied_building)</text>
+<text class="m" x="1230.5" y="249.8" font-size="4.6" fill="#8b8b8d">Vancouver: new buildings at most</text>
+<text class="m" x="1230.5" y="255.6" font-size="4.6" fill="#8b8b8d">  2× the baseline (cap 800 kg…</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="266.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="275.6" font-size="7.2" fill="#1c1c1e">Floor strength</text>
+<text class="m" x="1230.5" y="285.0" font-size="4.6" fill="#8b8b8d">f(host_building, start_case)</text>
+<text class="m" x="1230.5" y="290.8" font-size="4.6" fill="#8b8b8d">equipment load of the hall (racks,</text>
+<text class="m" x="1230.5" y="296.5" font-size="4.6" fill="#8b8b8d">  batteries) vs the floor&#x27;s desig…</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="307.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="313.0" font-size="6.192" fill="#1c1c1e">Ground warming over</text><text x="1232.5" y="319.8" font-size="6.192" fill="#1c1c1e">20 years</text>
+<text class="m" x="1230.5" y="325.9" font-size="4.6" fill="#8b8b8d">f(borefield)</text>
+<text class="m" x="1230.5" y="331.6" font-size="4.6" fill="#8b8b8d">from the share of heat put in vs</text>
+<text class="m" x="1230.5" y="337.4" font-size="4.6" fill="#8b8b8d">  taken out</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="348.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="353.9" font-size="6.192" fill="#1c1c1e">What the receiver</text><text x="1232.5" y="360.7" font-size="6.192" fill="#1c1c1e">uses now</text>
+<text class="m" x="1230.5" y="366.8" font-size="4.6" fill="#8b8b8d">f(host_building, competing_sources</text>
+<text class="m" x="1230.5" y="372.5" font-size="4.6" fill="#8b8b8d">the heat source a match would</text>
+<text class="m" x="1230.5" y="378.3" font-size="4.6" fill="#8b8b8d">  replace: from the host-building…</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="388.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="394.8" font-size="6.192" fill="#1c1c1e">New clean power:</text><text x="1232.5" y="401.6" font-size="6.192" fill="#1c1c1e">price and route</text>
+<text class="m" x="1230.5" y="407.7" font-size="4.6" fill="#8b8b8d">f(electricity_price)</text>
+<text class="m" x="1230.5" y="413.4" font-size="4.6" fill="#8b8b8d">BC: new supply only through BC</text>
+<text class="m" x="1230.5" y="419.2" font-size="4.6" fill="#8b8b8d">  Hydro calls…</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="429.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="435.7" font-size="6.192" fill="#1c1c1e">First payer refunded</text><text x="1232.5" y="442.5" font-size="6.192" fill="#1c1c1e">when neighbours conn…</text>
+<text class="m" x="1230.5" y="448.6" font-size="4.6" fill="#8b8b8d">f(interconnection)</text>
+<text class="m" x="1230.5" y="454.4" font-size="4.6" fill="#8b8b8d">the customer who pays for an</text>
+<text class="m" x="1230.5" y="460.1" font-size="4.6" fill="#8b8b8d">  extension or substation is…</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="470.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="476.6" font-size="6.192" fill="#1c1c1e">Water restrictions in</text><text x="1232.5" y="483.4" font-size="6.192" fill="#1c1c1e">a drought</text>
+<text class="m" x="1230.5" y="489.5" font-size="4.6" fill="#8b8b8d">f(cooling_type)</text>
+<text class="m" x="1230.5" y="495.2" font-size="4.6" fill="#8b8b8d">per city, text only: what each</text>
+<text class="m" x="1230.5" y="501.0" font-size="4.6" fill="#8b8b8d">  restriction stage asks of…</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="511.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="517.5" font-size="6.192" fill="#1c1c1e">Vibration limit at</text><text x="1232.5" y="524.3" font-size="6.192" fill="#1c1c1e">neighbours (referenc…</text>
+<text class="m" x="1230.5" y="530.4" font-size="4.6" fill="#8b8b8d">f(vibration_rank)</text>
+<text class="m" x="1230.5" y="536.1" font-size="4.6" fill="#8b8b8d">compare with reference criteria:</text>
+<text class="m" x="1230.5" y="541.9" font-size="4.6" fill="#8b8b8d">  72 VdB homes at night, 75…</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="552.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="558.4" font-size="6.192" fill="#1c1c1e">Peak relief and what</text><text x="1232.5" y="565.2" font-size="6.192" fill="#1c1c1e">it earns</text>
+<text class="m" x="1230.5" y="571.3" font-size="4.6" fill="#8b8b8d">f(battery, ups_flex, electricity_p</text>
+<text class="m" x="1230.5" y="577.0" font-size="4.6" fill="#8b8b8d">MW = min(battery MW, MWh × √RTE ÷</text>
+<text class="m" x="1230.5" y="582.8" font-size="4.6" fill="#8b8b8d">  event hours)…</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="593.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="599.3" font-size="6.192" fill="#1c1c1e">BC Hydro long-run</text><text x="1232.5" y="606.1" font-size="6.192" fill="#1c1c1e">marginal cost</text>
+<text class="m" x="1230.5" y="612.2" font-size="4.6" fill="#8b8b8d">f(flexible_load, spare_capacity)</text>
+<text class="m" x="1230.5" y="617.9" font-size="4.6" fill="#8b8b8d">value of energy or capacity a data</text>
+<text class="m" x="1230.5" y="623.7" font-size="4.6" fill="#8b8b8d">  centre frees up or avoids = LRM…</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="634.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="640.2" font-size="6.192" fill="#1c1c1e">Equipment outside</text><text x="1232.5" y="647.0" font-size="6.192" fill="#1c1c1e">property tax</text>
+<text class="m" x="1230.5" y="653.1" font-size="4.6" fill="#8b8b8d">f(it_load_actual)</text>
+<text class="m" x="1230.5" y="658.9" font-size="4.6" fill="#8b8b8d">per city, list what is and is not</text>
+<text class="m" x="1230.5" y="664.6" font-size="4.6" fill="#8b8b8d">  taxed: shell and land…</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="675.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="681.1" font-size="6.192" fill="#1c1c1e">Warm air drawn back</text><text x="1232.5" y="687.9" font-size="6.192" fill="#1c1c1e">into the coolers</text>
+<text class="m" x="1230.5" y="694.0" font-size="4.6" fill="#8b8b8d">f(plant_schedule)</text>
+<text class="m" x="1230.5" y="699.8" font-size="4.6" fill="#8b8b8d">flag when the coolers sit inside a</text>
+<text class="m" x="1230.5" y="705.5" font-size="4.6" fill="#8b8b8d">  roof recirculation zone…</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="716.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="725.5" font-size="7.2" fill="#1c1c1e">EV port repaid by</text>
+<text class="m" x="1230.5" y="734.9" font-size="4.6" fill="#8b8b8d">f(ev_stalls)</text>
+<text class="m" x="1230.5" y="740.6" font-size="4.6" fill="#8b8b8d">kWh = port cost ÷ (public price −</text>
+<text class="m" x="1230.5" y="746.4" font-size="4.6" fill="#8b8b8d">  electricity cost)</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="757.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="766.4" font-size="7.2" fill="#1c1c1e">Battery rules</text>
+<text class="m" x="1230.5" y="775.8" font-size="4.6" fill="#8b8b8d">f(battery)</text>
+<text class="m" x="1230.5" y="781.5" font-size="4.6" fill="#8b8b8d">grid battery (ESS): certified</text>
+<text class="m" x="1230.5" y="787.3" font-size="4.6" fill="#8b8b8d">not above 23 m or below the lowes…</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="798.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="803.8" font-size="6.192" fill="#1c1c1e">Share of the data</text><text x="1232.5" y="810.6" font-size="6.192" fill="#1c1c1e">centre&#x27;s power from …</text>
+<text class="m" x="1230.5" y="816.7" font-size="4.6" fill="#8b8b8d">f(pv_roof, pv_facade, it_load_actu</text>
+<text class="m" x="1230.5" y="822.5" font-size="4.6" fill="#8b8b8d">pv_MWh ÷ (IT load × PUE × 8,760)</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="838.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="848.2" font-size="7.2" fill="#1c1c1e">Air permit trigger</text>
+<text class="m" x="1230.5" y="857.6" font-size="4.6" fill="#8b8b8d">f(genset_emission_rate)</text>
+<text class="m" x="1230.5" y="863.4" font-size="4.6" fill="#8b8b8d">Vancouver: daily NOx on a test day</text>
+<text class="m" x="1230.5" y="869.1" font-size="4.6" fill="#8b8b8d">  vs 5 kg/day (Bylaw 1082 s.…</text>
+</g>
+<g opacity="1"><rect x="1229.5" y="879.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1232.5" y="885.6" font-size="6.192" fill="#1c1c1e">Air against the</text><text x="1232.5" y="892.4" font-size="6.192" fill="#1c1c1e">limits</text>
+<text class="m" x="1230.5" y="898.5" font-size="4.6" fill="#8b8b8d">f(no2_at_receptor, air_screen_1h)</text>
+<text class="m" x="1230.5" y="904.2" font-size="4.6" fill="#8b8b8d">C(avg) = C(1 h) × averaging ratio</text>
+<text class="m" x="1230.5" y="910.0" font-size="4.6" fill="#8b8b8d">  (24 h 0.60, annual 0.10) +…</text>
+</g>
+<g opacity="1"><rect x="1347.7" y="245.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1350.7" y="255.2" font-size="7.2" fill="#1c1c1e">Standoff and zones</text>
+<text class="m" x="1348.7" y="264.6" font-size="4.6" fill="#8b8b8d">f(crossing_type)</text>
+<text class="m" x="1348.7" y="270.3" font-size="4.6" fill="#8b8b8d">10 m all new facilities</text>
+<text class="m" x="1348.7" y="276.1" font-size="4.6" fill="#8b8b8d">45 m enhanced (GO-ITS 25.18)…</text>
+</g>
+<g opacity="1"><rect x="1347.7" y="286.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1350.7" y="292.6" font-size="6.192" fill="#1c1c1e">Property tax to the</text><text x="1350.7" y="299.4" font-size="6.192" fill="#1c1c1e">city</text>
+<text class="m" x="1348.7" y="305.4" font-size="4.6" fill="#8b8b8d">f(floor_area, build_cost)</text>
+<text class="m" x="1348.7" y="311.2" font-size="4.6" fill="#8b8b8d">assessed value (land + taxable</text>
+<text class="m" x="1348.7" y="316.9" font-size="4.6" fill="#8b8b8d">  improvements) × combined class…</text>
+</g>
+<g opacity="1"><rect x="1347.7" y="327.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1350.7" y="337.0" font-size="7.2" fill="#1c1c1e">Hour-by-hour match</text>
+<text class="m" x="1348.7" y="346.4" font-size="4.6" fill="#8b8b8d">f(heat_delivered, demand_profile, </text>
+<text class="m" x="1348.7" y="352.1" font-size="4.6" fill="#8b8b8d">for each hour of the typical year:</text>
+<text class="m" x="1348.7" y="357.9" font-size="4.6" fill="#8b8b8d">  delivered = min(heat available,…</text>
+</g>
+<g opacity="1"><rect x="1347.7" y="368.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1350.7" y="377.9" font-size="7.2" fill="#1c1c1e">Operator floor price</text>
+<text class="m" x="1348.7" y="387.2" font-size="4.6" fill="#8b8b8d">f(heat_delivered, crf)</text>
+<text class="m" x="1348.7" y="393.0" font-size="4.6" fill="#8b8b8d">CRF × capex_capture (0.5–0.65</text>
+<text class="m" x="1348.7" y="398.8" font-size="4.6" fill="#8b8b8d">  M€/MW_heat) ÷ MWh − cooling…</text>
+</g>
+<g opacity="1"><rect x="1347.7" y="409.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1350.7" y="418.8" font-size="7.2" fill="#1c1c1e">Price window overlap</text>
+<text class="m" x="1348.7" y="428.1" font-size="4.6" fill="#8b8b8d">f(price_floor, price_ceiling)</text>
+<text class="m" x="1348.7" y="433.9" font-size="4.6" fill="#8b8b8d">overlap = [floor_low, floor_high]</text>
+<text class="m" x="1348.7" y="439.6" font-size="4.6" fill="#8b8b8d">  ∩ [ceiling_low, ceiling_high]…</text>
+</g>
+<g opacity="1"><rect x="1347.7" y="450.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1350.7" y="459.7" font-size="7.2" fill="#1c1c1e">What a rezoning takes</text>
+<text class="m" x="1348.7" y="469.1" font-size="4.6" fill="#8b8b8d">f(zoning_status, floor_area)</text>
+<text class="m" x="1348.7" y="474.8" font-size="4.6" fill="#8b8b8d">duration + application fee +</text>
+<text class="m" x="1348.7" y="480.6" font-size="4.6" fill="#8b8b8d">  levies and charges on new floor…</text>
+</g>
+<g opacity="1"><rect x="1347.7" y="491.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1350.7" y="497.1" font-size="6.192" fill="#1c1c1e">Levelised cost of</text><text x="1350.7" y="503.9" font-size="6.192" fill="#1c1c1e">heat</text>
+<text class="m" x="1348.7" y="509.9" font-size="4.6" fill="#8b8b8d">f(crf, hp_electricity, heat_delive</text>
+<text class="m" x="1348.7" y="515.7" font-size="4.6" fill="#8b8b8d">(CRF × capex + O&amp;M + energy) ÷ MWh</text>
+</g>
+<g opacity="1"><rect x="1347.7" y="532.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1350.7" y="538.0" font-size="6.192" fill="#1c1c1e">Rooftop solar cost</text><text x="1350.7" y="544.8" font-size="6.192" fill="#1c1c1e">per MWh</text>
+<text class="m" x="1348.7" y="550.9" font-size="4.6" fill="#8b8b8d">f(pv_roof, pv_cost)</text>
+<text class="m" x="1348.7" y="556.6" font-size="4.6" fill="#8b8b8d">(CRF(5.6%, 30) × capex + O&amp;M) ÷</text>
+<text class="m" x="1348.7" y="562.4" font-size="4.6" fill="#8b8b8d">  MWh a year, against the energy…</text>
+</g>
+<g opacity="1"><rect x="1347.7" y="573.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1350.7" y="578.9" font-size="6.192" fill="#1c1c1e">Cost of reserved</text><text x="1350.7" y="585.7" font-size="6.192" fill="#1c1c1e">(unused) capacity</text>
+<text class="m" x="1348.7" y="591.8" font-size="4.6" fill="#8b8b8d">f(spare_capacity, build_cost)</text>
+<text class="m" x="1348.7" y="597.5" font-size="4.6" fill="#8b8b8d">(capex + non-power opex) × (1 ÷</text>
+<text class="m" x="1348.7" y="603.2" font-size="4.6" fill="#8b8b8d">  occupancy − 1)…</text>
+</g>
+<g opacity="1"><rect x="1347.7" y="613.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1350.7" y="619.8" font-size="6.192" fill="#1c1c1e">Consultation and</text><text x="1350.7" y="626.6" font-size="6.192" fill="#1c1c1e">rights that apply</text>
+<text class="m" x="1348.7" y="632.6" font-size="4.6" fill="#8b8b8d">f(licence_flag, grid_headroom)</text>
+<text class="m" x="1348.7" y="638.4" font-size="4.6" fill="#8b8b8d">list the approvals an option needs</text>
+<text class="m" x="1348.7" y="644.1" font-size="4.6" fill="#8b8b8d">  that trigger Crown consultation…</text>
+</g>
+<g opacity="1"><rect x="1347.7" y="654.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1350.7" y="660.6" font-size="6.192" fill="#1c1c1e">Time to build and</text><text x="1350.7" y="667.5" font-size="6.192" fill="#1c1c1e">connect</text>
+<text class="m" x="1348.7" y="673.5" font-size="4.6" fill="#8b8b8d">f(zoning_status, lead_time)</text>
+<text class="m" x="1348.7" y="679.3" font-size="4.6" fill="#8b8b8d">planning and permits +</text>
+<text class="m" x="1348.7" y="685.0" font-size="4.6" fill="#8b8b8d">  construction + grid connection…</text>
+</g>
+<g opacity="1"><rect x="1347.7" y="695.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1350.7" y="705.1" font-size="7.2" fill="#1c1c1e">Payback and IRR</text>
+<text class="m" x="1348.7" y="714.5" font-size="4.6" fill="#8b8b8d">f(lcoh, window, crf, receiver_dema</text>
+<text class="m" x="1348.7" y="720.2" font-size="4.6" fill="#8b8b8d">simple payback = (pipe +</text>
+<text class="m" x="1348.7" y="726.0" font-size="4.6" fill="#8b8b8d">  connection + heat pump) ÷ (heat…</text>
+</g>
+<g opacity="1"><rect x="1347.7" y="736.6" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1350.7" y="742.4" font-size="6.192" fill="#1c1c1e">Heat cost share of</text><text x="1350.7" y="749.3" font-size="6.192" fill="#1c1c1e">income</text>
+<text class="m" x="1348.7" y="755.3" font-size="4.6" fill="#8b8b8d">f(price_ceiling, deprivation)</text>
+<text class="m" x="1348.7" y="761.1" font-size="4.6" fill="#8b8b8d">annual heat cost ÷ after-tax</text>
+<text class="m" x="1348.7" y="766.8" font-size="4.6" fill="#8b8b8d">  income…</text>
+</g>
+<g opacity="1"><rect x="1347.7" y="777.5" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1350.7" y="783.4" font-size="6.192" fill="#1c1c1e">Effect on household</text><text x="1350.7" y="790.2" font-size="6.192" fill="#1c1c1e">power bills</text>
+<text class="m" x="1348.7" y="796.2" font-size="4.6" fill="#8b8b8d">f(it_load_actual, grid_headroom)</text>
+<text class="m" x="1348.7" y="802.0" font-size="4.6" fill="#8b8b8d">by size and province, text only: a</text>
+<text class="m" x="1348.7" y="807.8" font-size="4.6" fill="#8b8b8d">  typical in-city data centre (≈…</text>
+</g>
+<g opacity="1"><rect x="1347.7" y="818.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1350.7" y="824.3" font-size="6.192" fill="#1c1c1e">Refuge after an</text><text x="1350.7" y="831.1" font-size="6.192" fill="#1c1c1e">earthquake</text>
+<text class="m" x="1348.7" y="837.2" font-size="4.6" fill="#8b8b8d">f(importance_cat, refuge_people, b</text>
+<text class="m" x="1348.7" y="842.9" font-size="4.6" fill="#8b8b8d">credible after an earthquake only</text>
+<text class="m" x="1348.7" y="848.7" font-size="4.6" fill="#8b8b8d">  if ALL: designed High or above…</text>
+</g>
+<g opacity="1"><rect x="1347.7" y="859.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1350.7" y="865.1" font-size="6.192" fill="#1c1c1e">City commitments to</text><text x="1350.7" y="872.0" font-size="6.192" fill="#1c1c1e">Indigenous Nations</text>
+<text class="m" x="1348.7" y="878.0" font-size="4.6" fill="#8b8b8d">f(consultation)</text>
+<text class="m" x="1348.7" y="883.8" font-size="4.6" fill="#8b8b8d">commitments, not legal duties:</text>
+<text class="m" x="1348.7" y="889.5" font-size="4.6" fill="#8b8b8d">  Vancouver UNDRIP Strategy Calls…</text>
+</g>
+<g opacity="1"><rect x="1465.8" y="409.4" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1468.8" y="415.2" font-size="6.192" fill="#1c1c1e">Incentive scoring</text><text x="1468.8" y="422.1" font-size="6.192" fill="#1c1c1e">(counter-example)</text>
+<text class="m" x="1466.8" y="428.1" font-size="4.6" fill="#8b8b8d">in: cfd_score</text>
+<text class="m" x="1466.8" y="433.9" font-size="4.6" fill="#8b8b8d">BC Hydro Call: 30/20/10/30/10</text>
+<text class="m" x="1466.8" y="439.6" font-size="4.6" fill="#8b8b8d">  weights…</text>
+</g>
+<g opacity="1"><rect x="1465.8" y="450.3" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1468.8" y="456.1" font-size="6.192" fill="#1c1c1e">How firm the exchange</text><text x="1468.8" y="463.0" font-size="6.192" fill="#1c1c1e">is</text>
+<text class="m" x="1466.8" y="469.0" font-size="4.6" fill="#8b8b8d">f(receivers_nearby)</text>
+<text class="m" x="1466.8" y="474.8" font-size="4.6" fill="#8b8b8d">existing = operating</text>
+<text class="m" x="1466.8" y="480.5" font-size="4.6" fill="#8b8b8d">committed = in a contract, permit…</text>
+</g>
+<g opacity="1"><rect x="1465.8" y="491.2" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1468.8" y="500.6" font-size="7.2" fill="#1c1c1e">Who receives the tax</text>
+<text class="m" x="1466.8" y="509.9" font-size="4.6" fill="#8b8b8d">f(property_tax)</text>
+<text class="m" x="1466.8" y="515.7" font-size="4.6" fill="#8b8b8d">list the parties, not a sum: City</text>
+<text class="m" x="1466.8" y="521.5" font-size="4.6" fill="#8b8b8d">  / school (Province) / TransLink…</text>
+</g>
+<g opacity="1"><rect x="1465.8" y="532.1" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1468.8" y="541.5" font-size="7.2" fill="#1c1c1e">Futures</text>
+<text class="m" x="1466.8" y="550.8" font-size="4.6" fill="#8b8b8d">f(horizons, heat_temp, liquid_capt</text>
+<text class="m" x="1466.8" y="556.6" font-size="4.6" fill="#8b8b8d">rerun the match in four futures:</text>
+<text class="m" x="1466.8" y="562.3" font-size="4.6" fill="#8b8b8d">  (1) as planned…</text>
+</g>
+<g opacity="1"><rect x="1465.8" y="573.0" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1468.8" y="578.9" font-size="6.192" fill="#1c1c1e">Who keeps the value</text><text x="1468.8" y="585.7" font-size="6.192" fill="#1c1c1e">of the heat</text>
+<text class="m" x="1466.8" y="591.8" font-size="4.6" fill="#8b8b8d">f(price_floor, price_ceiling, cape</text>
+<text class="m" x="1466.8" y="597.5" font-size="4.6" fill="#8b8b8d">describe who controls each share</text>
+<text class="m" x="1466.8" y="603.2" font-size="4.6" fill="#8b8b8d">  (operator, utility, end users)…</text>
+</g>
+<g opacity="1"><rect x="1465.8" y="613.9" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1468.8" y="623.3" font-size="7.2" fill="#1c1c1e">Party ledger</text>
+<text class="m" x="1466.8" y="632.6" font-size="4.6" fill="#8b8b8d">f(capex_split, window, risk_term, </text>
+<text class="m" x="1466.8" y="638.4" font-size="4.6" fill="#8b8b8d">parties × (owns, controls, pays,</text>
+<text class="m" x="1466.8" y="644.1" font-size="4.6" fill="#8b8b8d">  receives, bears, needs) ×…</text>
+</g>
+<g opacity="1"><rect x="1465.8" y="654.8" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1468.8" y="664.2" font-size="7.2" fill="#1c1c1e">After the data centre</text>
+<text class="m" x="1466.8" y="673.5" font-size="4.6" fill="#8b8b8d">f(horizons, existing_building)</text>
+<text class="m" x="1466.8" y="679.3" font-size="4.6" fill="#8b8b8d">at closure, three streams: shell</text>
+<text class="m" x="1466.8" y="685.0" font-size="4.6" fill="#8b8b8d">  (reuse or demolition), equipmen…</text>
+</g>
+<g opacity="1"><rect x="1465.8" y="695.7" width="85.1" height="13" rx="2" fill="#ffffff" stroke="#8b8b8d" stroke-width="0.55"/>
+<text x="1468.8" y="705.1" font-size="7.2" fill="#1c1c1e">Trade-off table</text>
+<text class="m" x="1466.8" y="714.5" font-size="4.6" fill="#8b8b8d">in: tradeoffs</text>
+<text class="m" x="1466.8" y="720.2" font-size="4.6" fill="#8b8b8d">for each option: every party,</text>
+<text class="m" x="1466.8" y="726.0" font-size="4.6" fill="#8b8b8d">  every row, gains and losses in…</text>
+</g><line x1="816.0" y1="0" x2="816.0" y2="1056" stroke="#d6d6d8" stroke-width=".4" stroke-dasharray="2 4"/><text x="48" y="1026" font-size="7" fill="#a9a9ab">Boxes: the parts the tool computes. Grey lines: what feeds what. Under each box, in code: its inputs, then its formula. Fold line dashed (centre).</text><text x="1584" y="1026" font-size="8" font-weight="450" fill="#a9a9ab" text-anchor="end" letter-spacing="2.4">L 1</text></svg></body></html>

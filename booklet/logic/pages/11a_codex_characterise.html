@@ -1,0 +1,174 @@
+<!doctype html><html><head><meta charset="utf-8"><title>11a_codex_characterise</title><style>@font-face{font-family:Barlow;font-weight:400;src:url(Barlow-Light.ttf)}@font-face{font-family:Barlow;font-weight:500;src:url(Barlow-SemiBold.ttf)}@font-face{font-family:Barlow;font-weight:450;src:url(Barlow-Regular.ttf)}
+@font-face{font-family:Plex;font-weight:400;src:url(../../../pitch/anim/plex-400.woff2)}@font-face{font-family:Plex;font-weight:500;src:url(../../../pitch/anim/plex-500.woff2)}
+@font-face{font-family:PlexMono;font-weight:400;src:url(mono-400.woff2)}@font-face{font-family:PlexMono;font-weight:500;src:url(mono-500.woff2)}
+@page{size:8.5in 11in;margin:0}html,body{margin:0;background:#ffffff}svg{display:block}
+text{font-family:Barlow,sans-serif} .m{font-family:PlexMono,monospace}</style></head><body>
+<svg xmlns="http://www.w3.org/2000/svg" width="816.0" height="1056" viewBox="0 0 816.0 1056"><rect width="816.0" height="1056" fill="#ffffff"/><text x="54" y="78" font-size="40" font-weight="400" fill="#1c1c1e">L11a</text><g transform="translate(96 0)"><text x="54" y="72" font-size="24" font-weight="500" fill="#1c1c1e">What it gives off</text><text x="54" y="90" font-size="12" fill="#626264">Every part, its inputs and its formula as written in the tool (52 parts, page 1 of 2)</text><line x1="54" y1="102" x2="80" y2="102" stroke="#1c1c1e" stroke-width="2.6"/></g><text x="762.0" y="56" font-size="8" font-weight="450" fill="#a9a9ab" text-anchor="end" letter-spacing="2.4">BEYOND DATA · LOGIC DIAGRAM · CHARACTERISE</text><text x="762.0" y="69" font-size="8" font-weight="450" fill="#a9a9ab" text-anchor="end" letter-spacing="2.4">DRAFT V1 · 22 OCT 2026</text>
+<text x="54.0" y="146.2" font-size="8.2" font-weight="500" fill="#1c1c1e">Free-cooling hours</text>
+<circle cx="269.66666666666663" cy="142.92" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="269.66666666666663" cy="142.92" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="25.13 31.42" transform="rotate(-90 269.66666666666663 142.92)"/>
+<text class="m" x="54.0" y="155.5" font-size="5.58" fill="#a9a9ab">free_cooling_hours  [h/yr · own 80 · chain 80]</text>
+<text class="m" x="54.0" y="164.8" font-size="6.2" fill="#626264">← weather</text>
+<text class="m" x="54.0" y="173.2" font-size="6.2" fill="#1c1c1e">count hours with T_outdoor &lt; threshold (18–27 °C inlet,</text>
+<text class="m" x="54.0" y="181.5" font-size="6.2" fill="#8b8b8d">  approach +1.5 air-side or +12 dry cooler)</text>
+<text x="296.66666666666663" y="146.2" font-size="8.2" font-weight="500" fill="#1c1c1e">Embodied carbon, building</text>
+<circle cx="512.3333333333333" cy="142.92" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="512.3333333333333" cy="142.92" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="12.57 31.42" transform="rotate(-90 512.3333333333333 142.92)"/>
+<text class="m" x="296.66666666666663" y="155.5" font-size="5.58" fill="#a9a9ab">embodied_building  [tCO2e · own 40 · chain 40]</text>
+<text class="m" x="296.66666666666663" y="164.8" font-size="6.2" fill="#626264">← floor_area</text>
+<text class="m" x="296.66666666666663" y="173.2" font-size="6.2" fill="#1c1c1e">floor_area × kg CO2e/m²</text>
+<text x="539.3333333333333" y="146.2" font-size="8.2" font-weight="500" fill="#1c1c1e">Load factor (average ÷ the servers&#x27; combined maximum power)</text>
+<circle cx="754.9999999999999" cy="142.92" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="754.9999999999999" cy="142.92" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="25.13 31.42" transform="rotate(-90 754.9999999999999 142.92)"/>
+<text class="m" x="539.3333333333333" y="155.5" font-size="5.58" fill="#a9a9ab">load_factor  [— · own 80 · chain 80]</text>
+<text class="m" x="539.3333333333333" y="164.8" font-size="6.2" fill="#1c1c1e">average ÷ sum of each server&#x27;s measured maximum</text>
+<text x="539.3333333333333" y="195.36999999999998" font-size="8.2" font-weight="500" fill="#1c1c1e">Share of heat captured in liquid</text>
+<circle cx="754.9999999999999" cy="192.08999999999997" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="754.9999999999999" cy="192.08999999999997" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="21.99 31.42" transform="rotate(-90 754.9999999999999 192.08999999999997)"/>
+<text class="m" x="539.3333333333333" y="204.67" font-size="5.58" fill="#a9a9ab">liquid_capture  [— · own 70 · chain 70]</text>
+<text class="m" x="539.3333333333333" y="214.0" font-size="6.2" fill="#626264">← cooling_type</text>
+<text class="m" x="539.3333333333333" y="222.3" font-size="6.2" fill="#1c1c1e">0.5–0.8 cold plate</text>
+<text class="m" x="539.3333333333333" y="230.7" font-size="6.2" fill="#1c1c1e">1.0 immersion</text>
+<text class="m" x="539.3333333333333" y="239.1" font-size="6.2" fill="#1c1c1e">air: judged</text>
+<text x="296.66666666666663" y="203.73999999999998" font-size="8.2" font-weight="500" fill="#1c1c1e">Flexible share of load</text>
+<circle cx="512.3333333333333" cy="200.45999999999998" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="512.3333333333333" cy="200.45999999999998" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="12.57 31.42" transform="rotate(-90 512.3333333333333 200.45999999999998)"/>
+<text class="m" x="296.66666666666663" y="213.04" font-size="5.58" fill="#a9a9ab">flexible_load  [MW·h · own 40 · chain 40]</text>
+<text class="m" x="296.66666666666663" y="222.3" font-size="6.2" fill="#626264">← it_load_actual</text>
+<text class="m" x="296.66666666666663" y="230.7" font-size="6.2" fill="#1c1c1e">flexible kW × hours</text>
+<text x="54.0" y="212.10999999999999" font-size="8.2" font-weight="500" fill="#1c1c1e">Heat temperature by cooling type</text>
+<circle cx="269.66666666666663" cy="208.82999999999998" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="269.66666666666663" cy="208.82999999999998" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="21.99 31.42" transform="rotate(-90 269.66666666666663 208.82999999999998)"/>
+<text class="m" x="54.0" y="221.41" font-size="5.58" fill="#a9a9ab">heat_temp  [°C · own 70 · chain 70]</text>
+<text class="m" x="54.0" y="230.7" font-size="6.2" fill="#626264">← cooling_type</text>
+<text class="m" x="54.0" y="239.1" font-size="6.2" fill="#1c1c1e">air-cooled 25–35</text>
+<text class="m" x="54.0" y="247.4" font-size="6.2" fill="#1c1c1e">liquid-cooled 50–60</text>
+<text class="m" x="54.0" y="255.8" font-size="6.2" fill="#1c1c1e">two runs if unknown</text>
+<text x="296.66666666666663" y="261.28" font-size="8.2" font-weight="500" fill="#1c1c1e">Reserved electrical capacity</text>
+<circle cx="512.3333333333333" cy="258.0" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="512.3333333333333" cy="258.0" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="31.42 31.42" transform="rotate(-90 512.3333333333333 258.0)"/>
+<text class="m" x="296.66666666666663" y="270.58" font-size="5.58" fill="#a9a9ab">spare_capacity  [MW · own 100 · chain 50]</text>
+<text class="m" x="296.66666666666663" y="279.9" font-size="6.2" fill="#626264">← it_load_actual</text>
+<text class="m" x="296.66666666666663" y="288.2" font-size="6.2" fill="#1c1c1e">installed − peak</text>
+<text class="m" x="296.66666666666663" y="296.6" font-size="6.2" fill="#1c1c1e">2N holds half</text>
+<text x="539.3333333333333" y="269.65" font-size="8.2" font-weight="500" fill="#1c1c1e">Power usage effectiveness</text>
+<circle cx="754.9999999999999" cy="266.37" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="754.9999999999999" cy="266.37" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="25.13 31.42" transform="rotate(-90 754.9999999999999 266.37)"/>
+<text class="m" x="539.3333333333333" y="278.95" font-size="5.58" fill="#a9a9ab">pue  [— · own 80 · chain 80]</text>
+<text class="m" x="539.3333333333333" y="288.2" font-size="6.2" fill="#1c1c1e">E_facility ÷ E_IT</text>
+<text x="54.0" y="286.39" font-size="8.2" font-weight="500" fill="#1c1c1e">Backup duration</text>
+<circle cx="269.66666666666663" cy="283.11" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="269.66666666666663" cy="283.11" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="28.27 31.42" transform="rotate(-90 269.66666666666663 283.11)"/>
+<text class="m" x="54.0" y="295.69" font-size="5.58" fill="#a9a9ab">backup_hours  [h · own 90 · chain 90]</text>
+<text class="m" x="54.0" y="305.0" font-size="6.2" fill="#1c1c1e">usable kWh ÷ load</text>
+<text class="m" x="54.0" y="313.4" font-size="6.2" fill="#1c1c1e">fuel ÷ burn rate</text>
+<text x="539.3333333333333" y="318.82" font-size="8.2" font-weight="500" fill="#1c1c1e">Sound level at receptor</text>
+<circle cx="754.9999999999999" cy="315.54" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="754.9999999999999" cy="315.54" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="15.71 31.42" transform="rotate(-90 754.9999999999999 315.54)"/>
+<text class="m" x="539.3333333333333" y="328.12" font-size="5.58" fill="#a9a9ab">noise_level  [dBA · own 50 · chain 50]</text>
+<text class="m" x="539.3333333333333" y="337.4" font-size="6.2" fill="#626264">← plant_schedule, receptors</text>
+<text class="m" x="539.3333333333333" y="345.8" font-size="6.2" fill="#1c1c1e">screen Lp ≈ Lw − 20·log10(r) − 8</text>
+<text class="m" x="539.3333333333333" y="354.2" font-size="6.2" fill="#1c1c1e">full ISO 9613-2 (NoiseModelling)</text>
+<text x="296.66666666666663" y="327.19" font-size="8.2" font-weight="500" fill="#1c1c1e">What is seen from public space</text>
+<circle cx="512.3333333333333" cy="323.91" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="512.3333333333333" cy="323.91" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="25.13 31.42" transform="rotate(-90 512.3333333333333 323.91)"/>
+<text class="m" x="296.66666666666663" y="336.49" font-size="5.58" fill="#a9a9ab">visibility  [ledger · own 80 · chain 70]</text>
+<text class="m" x="296.66666666666663" y="345.8" font-size="6.2" fill="#626264">← plant_schedule</text>
+<text class="m" x="296.66666666666663" y="354.2" font-size="6.2" fill="#1c1c1e">for each plant element: seen from public space / closed</text>
+<text class="m" x="296.66666666666663" y="362.5" font-size="6.2" fill="#8b8b8d">  to view / known only from documents / not checked</text>
+<text class="m" x="296.66666666666663" y="370.9" font-size="6.2" fill="#1c1c1e">tested the same way at every site</text>
+<text x="54.0" y="343.93" font-size="8.2" font-weight="500" fill="#1c1c1e">Refrigerant leakage</text>
+<circle cx="269.66666666666663" cy="340.65000000000003" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="269.66666666666663" cy="340.65000000000003" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="18.85 31.42" transform="rotate(-90 269.66666666666663 340.65000000000003)"/>
+<text class="m" x="54.0" y="353.23" font-size="5.58" fill="#a9a9ab">refrigerant_co2e  [tCO2e/yr · own 60 · chain 60]</text>
+<text class="m" x="54.0" y="362.5" font-size="6.2" fill="#626264">← cooling_type</text>
+<text class="m" x="54.0" y="370.9" font-size="6.2" fill="#1c1c1e">charge × 3%/yr × GWP</text>
+<text x="539.3333333333333" y="384.73" font-size="8.2" font-weight="500" fill="#1c1c1e">Shadow on neighbours</text>
+<circle cx="754.9999999999999" cy="381.45000000000005" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="754.9999999999999" cy="381.45000000000005" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="28.27 31.42" transform="rotate(-90 754.9999999999999 381.45000000000005)"/>
+<text class="m" x="539.3333333333333" y="394.03000000000003" font-size="5.58" fill="#a9a9ab">shadow  [m²·h · own 90 · chain 70]</text>
+<text class="m" x="539.3333333333333" y="403.3" font-size="6.2" fill="#626264">← floor_area, massing</text>
+<text class="m" x="539.3333333333333" y="411.7" font-size="6.2" fill="#1c1c1e">fall-equinox shadows 10:00–16:00 on parks, schools,</text>
+<text class="m" x="539.3333333333333" y="420.1" font-size="6.2" fill="#8b8b8d">  opposite sidewalks</text>
+<text x="54.0" y="401.47" font-size="8.2" font-weight="500" fill="#1c1c1e">Harvestable rainwater</text>
+<circle cx="269.66666666666663" cy="398.19000000000005" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="269.66666666666663" cy="398.19000000000005" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="25.13 31.42" transform="rotate(-90 269.66666666666663 398.19000000000005)"/>
+<text class="m" x="54.0" y="410.77000000000004" font-size="5.58" fill="#a9a9ab">rainwater  [m³/yr · own 80 · chain 75]</text>
+<text class="m" x="54.0" y="420.1" font-size="6.2" fill="#626264">← envelope, massing</text>
+<text class="m" x="54.0" y="428.4" font-size="6.2" fill="#1c1c1e">V = A × R × C</text>
+<text class="m" x="54.0" y="436.8" font-size="6.2" fill="#1c1c1e">A = roof area: a new building&#x27;s footprint as drawn from</text>
+<text class="m" x="54.0" y="445.2" font-size="6.2" fill="#8b8b8d">  the site setup (else the footprint the yards leave), an</text>
+<text class="m" x="54.0" y="453.6" font-size="6.2" fill="#8b8b8d">  existing building&#x27;s roofs added together (M47, 18 Oct</text>
+<text class="m" x="54.0" y="461.9" font-size="6.2" fill="#8b8b8d">  2026)</text>
+<text x="296.66666666666663" y="401.47" font-size="8.2" font-weight="500" fill="#1c1c1e">Water behind the electricity</text>
+<circle cx="512.3333333333333" cy="398.19000000000005" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="512.3333333333333" cy="398.19000000000005" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="18.85 31.42" transform="rotate(-90 512.3333333333333 398.19000000000005)"/>
+<text class="m" x="296.66666666666663" y="410.77000000000004" font-size="5.58" fill="#a9a9ab">water_behind_electricity  [L/yr · own 60 · chain 50]</text>
+<text class="m" x="296.66666666666663" y="420.1" font-size="6.2" fill="#626264">← it_load_actual</text>
+<text class="m" x="296.66666666666663" y="428.4" font-size="6.2" fill="#1c1c1e">E × w_grid</text>
+<text x="539.3333333333333" y="450.64000000000004" font-size="8.2" font-weight="500" fill="#1c1c1e">Embodied carbon, IT</text>
+<circle cx="754.9999999999999" cy="447.36000000000007" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="754.9999999999999" cy="447.36000000000007" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="15.71 31.42" transform="rotate(-90 754.9999999999999 447.36000000000007)"/>
+<text class="m" x="539.3333333333333" y="459.94000000000005" font-size="5.58" fill="#a9a9ab">embodied_it  [tCO2e/yr · own 50 · chain 50]</text>
+<text class="m" x="539.3333333333333" y="469.2" font-size="6.2" fill="#626264">← servers</text>
+<text class="m" x="539.3333333333333" y="477.6" font-size="6.2" fill="#1c1c1e">servers × kg CO2e per server ÷ lifespan</text>
+<text x="296.66666666666663" y="459.01000000000005" font-size="8.2" font-weight="500" fill="#1c1c1e">Light at neighbour&#x27;s window</text>
+<circle cx="512.3333333333333" cy="455.7300000000001" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="512.3333333333333" cy="455.7300000000001" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="21.99 31.42" transform="rotate(-90 512.3333333333333 455.7300000000001)"/>
+<text class="m" x="296.66666666666663" y="468.31000000000006" font-size="5.58" fill="#a9a9ab">light_at_window  [lx · own 70 · chain 60]</text>
+<text class="m" x="296.66666666666663" y="477.6" font-size="6.2" fill="#626264">← lighting_plan</text>
+<text class="m" x="296.66666666666663" y="486.0" font-size="6.2" fill="#1c1c1e">vertical illuminance vs CIE 150 zone limit (E3 10 / 2 lx</text>
+<text class="m" x="296.66666666666663" y="494.4" font-size="6.2" fill="#8b8b8d">  pre/post curfew)</text>
+<text x="54.0" y="492.49000000000007" font-size="8.2" font-weight="500" fill="#1c1c1e">Heat carried in water</text>
+<circle cx="269.66666666666663" cy="489.2100000000001" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="269.66666666666663" cy="489.2100000000001" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="31.42 31.42" transform="rotate(-90 269.66666666666663 489.2100000000001)"/>
+<text class="m" x="54.0" y="501.7900000000001" font-size="5.58" fill="#a9a9ab">heat_in_water  [kWh · own 100 · chain 100]</text>
+<text class="m" x="54.0" y="511.1" font-size="6.2" fill="#1c1c1e">Q = V × 1.16 × ΔT</text>
+<text x="539.3333333333333" y="508.18000000000006" font-size="8.2" font-weight="500" fill="#1c1c1e">Free-cooling hours in the 2050s</text>
+<circle cx="754.9999999999999" cy="504.9000000000001" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="754.9999999999999" cy="504.9000000000001" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="25.13 31.42" transform="rotate(-90 754.9999999999999 504.9000000000001)"/>
+<text class="m" x="539.3333333333333" y="517.48" font-size="5.58" fill="#a9a9ab">free_cooling_hours_2050s  [h/yr · own 80 · chain 80]</text>
+<text class="m" x="539.3333333333333" y="526.8" font-size="6.2" fill="#626264">← weather, free_cooling_hours</text>
+<text class="m" x="539.3333333333333" y="535.2" font-size="6.2" fill="#1c1c1e">same count as free_cooling_hours, run on the PCIC 2050s</text>
+<text class="m" x="539.3333333333333" y="543.5" font-size="6.2" fill="#8b8b8d">  file (SSP2-4.5 and SSP5-8.5)</text>
+<text class="m" x="539.3333333333333" y="551.9" font-size="6.2" fill="#1c1c1e">shown beside today&#x27;s value</text>
+<text x="296.66666666666663" y="524.9200000000001" font-size="8.2" font-weight="500" fill="#1c1c1e">Ground and groundwater at the parcel</text>
+<circle cx="512.3333333333333" cy="521.64" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="512.3333333333333" cy="521.64" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="25.13 31.42" transform="rotate(-90 512.3333333333333 521.64)"/>
+<text class="m" x="296.66666666666663" y="534.22" font-size="5.58" fill="#a9a9ab">ground  [ft, USgpm, m²/d · own 80 · chain 80]</text>
+<text class="m" x="296.66666666666663" y="543.5" font-size="6.2" fill="#626264">← parcel</text>
+<text class="m" x="296.66666666666663" y="551.9" font-size="6.2" fill="#1c1c1e">nearest N wells (GWELLS well.csv by lat/long): finished</text>
+<text class="m" x="296.66666666666663" y="560.3" font-size="6.2" fill="#8b8b8d">  depth, static water level, bedrock depth, yield,</text>
+<text class="m" x="296.66666666666663" y="568.6" font-size="6.2" fill="#8b8b8d">  aquifer_id, lithology</text>
+<text class="m" x="296.66666666666663" y="577.0" font-size="6.2" fill="#1c1c1e">pump-test transmissivity and hydraulic conductivity where</text>
+<text class="m" x="296.66666666666663" y="585.4" font-size="6.2" fill="#8b8b8d">  a test exists</text>
+<text class="m" x="296.66666666666663" y="593.7" font-size="6.2" fill="#1c1c1e">report the spread, never a point</text>
+<text x="54.0" y="541.6600000000001" font-size="8.2" font-weight="500" fill="#1c1c1e">Heat-pump COP (Lorenz)</text>
+<circle cx="269.66666666666663" cy="538.38" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="269.66666666666663" cy="538.38" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="21.99 31.42" transform="rotate(-90 269.66666666666663 538.38)"/>
+<text class="m" x="54.0" y="550.96" font-size="5.58" fill="#a9a9ab">cop  [— · own 70 · chain 70]</text>
+<text class="m" x="54.0" y="560.3" font-size="6.2" fill="#626264">← heat_temp, receiver_temp</text>
+<text class="m" x="54.0" y="568.6" font-size="6.2" fill="#1c1c1e">COP = η × T_lm,sink ÷ (T_lm,sink − T_lm,source), log-mean</text>
+<text class="m" x="54.0" y="577.0" font-size="6.2" fill="#8b8b8d">  temperatures on both sides (sink supply/return</text>
+<text class="m" x="54.0" y="585.4" font-size="6.2" fill="#1c1c1e">source in/out)</text>
+<text class="m" x="54.0" y="593.7" font-size="6.2" fill="#1c1c1e">η 0.40–0.50 for built systems (calibrated 13 Oct 2026),</text>
+<text class="m" x="54.0" y="602.1" font-size="6.2" fill="#8b8b8d">  0.50–0.60 upper bound</text>
+<text x="539.3333333333333" y="582.4600000000002" font-size="8.2" font-weight="500" fill="#1c1c1e">Heat captured at the boundary (E_reuse)</text>
+<circle cx="754.9999999999999" cy="579.1800000000001" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="754.9999999999999" cy="579.1800000000001" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="28.27 31.42" transform="rotate(-90 754.9999999999999 579.1800000000001)"/>
+<text class="m" x="539.3333333333333" y="591.7600000000001" font-size="5.58" fill="#a9a9ab">heat_captured  [MWh/yr · own 90 · chain 50]</text>
+<text class="m" x="539.3333333333333" y="601.1" font-size="6.2" fill="#626264">← heat_rejected, liquid_capture</text>
+<text class="m" x="539.3333333333333" y="609.4" font-size="6.2" fill="#1c1c1e">E_reuse = heat_rejected × liquid_capture, measured at the</text>
+<text class="m" x="539.3333333333333" y="617.8" font-size="6.2" fill="#8b8b8d">  data-centre boundary by flow × ΔT before any heat pump</text>
+<text class="m" x="539.3333333333333" y="626.2" font-size="6.2" fill="#8b8b8d">  (ISO/IEC 30134-6 cl.5–6</text>
+<text class="m" x="539.3333333333333" y="634.5" font-size="6.2" fill="#1c1c1e">EU Reg. 2024/1364 Annex II 1(j))</text>
+<text x="296.66666666666663" y="624.3100000000002" font-size="8.2" font-weight="500" fill="#1c1c1e">Vibration to neighbours</text>
+<circle cx="512.3333333333333" cy="621.0300000000001" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="512.3333333333333" cy="621.0300000000001" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="12.57 31.42" transform="rotate(-90 512.3333333333333 621.0300000000001)"/>
+<text class="m" x="296.66666666666663" y="633.6100000000001" font-size="5.58" fill="#a9a9ab">vibration_rank  [ranked: slab on grade → long-span upper floor · own 40 · chain 40]</text>
+<text class="m" x="296.66666666666663" y="642.9" font-size="6.2" fill="#626264">← start_case, host_building</text>
+<text class="m" x="296.66666666666663" y="651.3" font-size="6.2" fill="#1c1c1e">qualitative rank of how hard plant vibration is to</text>
+<text class="m" x="296.66666666666663" y="659.7" font-size="6.2" fill="#8b8b8d">  isolate at each position in the building</text>
+<text x="54.0" y="632.6800000000002" font-size="8.2" font-weight="500" fill="#1c1c1e">Heat rejected</text>
+<circle cx="269.66666666666663" cy="629.4000000000001" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="269.66666666666663" cy="629.4000000000001" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="25.13 31.42" transform="rotate(-90 269.66666666666663 629.4000000000001)"/>
+<text class="m" x="54.0" y="641.9800000000001" font-size="5.58" fill="#a9a9ab">heat_rejected  [MWh/yr · own 80 · chain 50]</text>
+<text class="m" x="54.0" y="651.3" font-size="6.2" fill="#626264">← it_load_actual, pue</text>
+<text class="m" x="54.0" y="659.7" font-size="6.2" fill="#1c1c1e">Q ≈ E_IT + electrical losses</text>
+<text class="m" x="54.0" y="668.0" font-size="6.2" fill="#1c1c1e">idle floor 36% of max</text>
+<text x="539.3333333333333" y="665.1100000000002" font-size="8.2" font-weight="500" fill="#1c1c1e">Solar on the data centre roof</text>
+<circle cx="754.9999999999999" cy="661.8300000000002" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="754.9999999999999" cy="661.8300000000002" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="21.99 31.42" transform="rotate(-90 754.9999999999999 661.8300000000002)"/>
+<text class="m" x="539.3333333333333" y="674.4100000000002" font-size="5.58" fill="#a9a9ab">pv_roof  [kWp; MWh/yr · own 70 · chain 70]</text>
+<text class="m" x="539.3333333333333" y="683.7" font-size="6.2" fill="#626264">← massing, plant_schedule</text>
+<text class="m" x="539.3333333333333" y="692.1" font-size="6.2" fill="#1c1c1e">kWp = panel area × 0.16–0.20 kWp/m²</text>
+<text class="m" x="539.3333333333333" y="700.5" font-size="6.2" fill="#1c1c1e">panel area = 12 m² × the number of 6 × 2 m panel rows</text>
+<text class="m" x="539.3333333333333" y="708.8" font-size="6.2" fill="#8b8b8d">  that fit on the roof outside the plant and its</text>
+<text class="m" x="539.3333333333333" y="717.2" font-size="6.2" fill="#8b8b8d">  clearances (1 m from the roof edge, an assumption</text>
+<text class="m" x="539.3333333333333" y="725.6" font-size="6.2" fill="#1c1c1e">rows 0.5 m apart along, 1.5 m across)</text>
+<text class="m" x="539.3333333333333" y="733.9" font-size="6.2" fill="#1c1c1e">MWh = kWp × yield (horizontal to latitude tilt)</text>
+<text x="296.66666666666663" y="690.2200000000003" font-size="8.2" font-weight="500" fill="#1c1c1e">Generator carbon</text>
+<circle cx="512.3333333333333" cy="686.9400000000002" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="512.3333333333333" cy="686.9400000000002" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="28.27 31.42" transform="rotate(-90 512.3333333333333 686.9400000000002)"/>
+<text class="m" x="296.66666666666663" y="699.5200000000002" font-size="5.58" fill="#a9a9ab">generator_co2  [tCO2/yr · own 90 · chain 90]</text>
+<text class="m" x="296.66666666666663" y="708.8" font-size="6.2" fill="#626264">← backup_hours</text>
+<text class="m" x="296.66666666666663" y="717.2" font-size="6.2" fill="#1c1c1e">litres × 2.681 kg CO2/L</text>
+<text x="54.0" y="698.5900000000003" font-size="8.2" font-weight="500" fill="#1c1c1e">Generator NOx and PM</text>
+<circle cx="269.66666666666663" cy="695.3100000000002" r="5" fill="none" stroke="#d6d6d8" stroke-width="1.6"/><circle cx="269.66666666666663" cy="695.3100000000002" r="5" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-dasharray="25.13 31.42" transform="rotate(-90 269.66666666666663 695.3100000000002)"/>
+<text class="m" x="54.0" y="707.8900000000002" font-size="5.58" fill="#a9a9ab">generator_nox_pm  [kg/yr · own 80 · chain 80]</text>
+<text class="m" x="54.0" y="717.2" font-size="6.2" fill="#626264">← backup_hours</text>
+<text class="m" x="54.0" y="725.6" font-size="6.2" fill="#1c1c1e">AP-42 factor × rated hp × hours</text><text x="768.0" y="1026" font-size="8" font-weight="450" fill="#a9a9ab" text-anchor="end" letter-spacing="2.4">L 1 1 a</text></svg></body></html>
