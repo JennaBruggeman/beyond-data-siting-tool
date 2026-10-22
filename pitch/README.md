@@ -1,6 +1,6 @@
 # Pitch video (Friday 23 Oct 2026)
 
-**Final video (draft 11, 5:10, with voiceover):** https://vimeo.com/1238516159. Built by the scripts in `build/`: the voice is cut into lines, then each scene is re-timed to its line (`plan.py`, `../anim/rec_warp.js`).
+**Final video (draft 12, 5:10, with voiceover):** https://vimeo.com/1238531048. Built by the scripts in `build/`: the voice is cut into lines, then each scene is re-timed to its line (`plan.py`, `../anim/rec_warp.js`).
 
 A 5-minute video: J.B.'s voice with big, short captions. No music. Voice is recorded after the picture is cut; clips are then trimmed to the voice.
 

@@ -6,7 +6,7 @@ Jenna Bruggeman, M.Arch. GP1 thesis and ARCH 540, UBC School of Architecture and
 
 The results are trade-offs, not verdicts. This is an early feasibility study: it shows professionals where to look first. It doesn't replace engineering, planning or legal review.
 
-**[Watch the pitch (5:10, Vimeo)](https://vimeo.com/1238516159)**
+**[Watch the pitch (5:10, Vimeo)](https://vimeo.com/1238531048)**
 
 ## Run the tool
 
