@@ -14,5 +14,5 @@ out = dict(order=list(FAM), families=fams, node_family={i: f for f, (_, ids) in 
            groups={g: dict(name=v[0], colour=v[1], families=v[2]) for g, v in GROUP.items()})
 missing = [n['id'] for n in d.D['nodes'] if n['id'] not in RAT]
 assert not missing, missing
-json.dump(out, open(os.path.join(here, '..', 'guide_data.json'), 'w', encoding='utf-8'), ensure_ascii=False)
+json.dump(out, open(os.path.join(here, '..', 'register', 'guide_data.json'), 'w', encoding='utf-8'), ensure_ascii=False)
 print('guide_data.json', sum(len(v['svg']) for v in fams.values()) // 1024, 'KB of diagrams')

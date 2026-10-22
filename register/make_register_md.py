@@ -29,7 +29,7 @@ for sid,sname in STAGES:
         esc=lambda s:str(s).replace('|','∣')
         L.append(f"| `{q['id']}` | {esc(q['name'])} | {esc(q['unit'])} | {esc(q['formula'])} | {', '.join(q['inputs']) or '—'} | {esc(q['coef']) or '—'} | {', '.join(q['sources'])} | {q['conf']} | {upstream(q['id'])} | {esc(q['status'])} | {'; '.join(usedby.get(q['id'],[])) or '— (input to others)'} |")
     L.append("")
-L.append("## How the tool reads a match (decided 13 Oct 2026; see tool_logic_decisions.md)\n")
+L.append("## How the tool reads a match (decided 13 Oct 2026; see docs/tool_logic_decisions.md)\n")
 L.append("No verdict and no score. Each option gets a trade-off table: every party, every row, in its own unit, never summed or ranked. Facts are shared; the weighting belongs to whoever is deciding.\n")
 L.append("### Parties\n")
 for p in r['meta'].get('parties',[]): L.append(f"- **{p['name']}** — {p['note']}")

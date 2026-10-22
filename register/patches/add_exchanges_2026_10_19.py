@@ -3,7 +3,7 @@
 Sources: audit/research_2026-10-19/G_electricity_exchange.md, H_water_exchange.md. Idempotent."""
 import json, os
 H = os.path.dirname(os.path.abspath(__file__))
-P = os.path.join(H, 'formula_register.json')
+P = os.path.join(H, '..', 'formula_register.json')
 d = json.load(open(P, encoding='utf-8'))
 Q = {q['id']: q for q in d['quantities']}
 S = d['new_sources']

@@ -4,7 +4,7 @@ and the power-bill research (audit/template_ideas_2026-10-19.md). Idempotent: ne
 Every figure here was read in the research files; confidences follow the round 2 skeptic check."""
 import json, os
 H = os.path.dirname(os.path.abspath(__file__))
-P = os.path.join(H, 'formula_register.json')
+P = os.path.join(H, '..', 'formula_register.json')
 d = json.load(open(P, encoding='utf-8'))
 Q = {q['id']: q for q in d['quantities']}
 S = d['new_sources']

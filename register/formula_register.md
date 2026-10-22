@@ -1,6 +1,6 @@
 # Beyond Data — formula register
 
-Generated 21 Oct 2026 from `formula_register.json` (the diagram reads the JSON; edit that, then run `make_register_md.py`).
+Generated 22 Oct 2026 from `formula_register.json` (the diagram reads the JSON; edit that, then run `make_register_md.py`).
 
 **Scale.** 100 arithmetic/physics · 90 regulation, tariff or standard read directly · 80 government dataset or statistic · 70 peer-reviewed coefficient transferred from another context · 60 derived with stated assumption · 50 operator or industry claim · 40 proxy · 20 judged · 0 gap
 
@@ -227,7 +227,7 @@ Generated 21 Oct 2026 from `formula_register.json` (the diagram reads the JSON; 
 | `afterlife` | After the data centre | text | at closure, three streams: shell (reuse or demolition), equipment (stewardship program or disposal, with data sanitization), plant and batteries | horizons, existing_building | Vacated first-generation centres "tend to remain unoccupied and are not readily adaptable" (UK VOA, 70); federal closures 500+ of 720; BC Recycling Regulation covers IT products (servers by interpretation, 60); Alberta designates computer equipment; large UPS batteries outside both consumer programs as read (gap); no official source on converting a data centre to another use | voaComputerCentres, sscConsolidation, bcRecyclingIT, abElectronicsReg | 60 | 40 | shell evidence transferred from the UK; conversion evidence a gap | — (input to others) |
 | `heat_value_split` | Who keeps the value of the heat | text | describe who controls each share (operator, utility, end users); no numeric split | price_floor, price_ceiling, capex_split | no study measures the split; peer-reviewed papers say it is negotiated and the utility holds the stronger hand; a numeric split stays a gap (0) — a gap the thesis could fill | dkHeatCap2025 | 50 | 50 | qualitative only | — (input to others) |
 
-## How the tool reads a match (decided 13 Oct 2026; see tool_logic_decisions.md)
+## How the tool reads a match (decided 13 Oct 2026; see docs/tool_logic_decisions.md)
 
 No verdict and no score. Each option gets a trade-off table: every party, every row, in its own unit, never summed or ranked. Facts are shared; the weighting belongs to whoever is deciding.
 

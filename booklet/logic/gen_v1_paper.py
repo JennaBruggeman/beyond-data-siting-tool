@@ -6,7 +6,7 @@ big stages split into sub-columns by their internal order). Paper style follows 
 """
 import json, math, os, re, html, collections
 H = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(H, 'pages'); os.makedirs(OUT, exist_ok=True)
-D = json.load(open(os.path.join(H, '..', '..', 'diagram_data.json')))
+D = json.load(open(os.path.join(H, '..', '..', 'register', 'diagram_data.json')))
 G = {n['id']: n for n in json.load(open(os.path.join(H, '..', '..', 'pitch', 'anim', 'graph.json')))['nodes']}
 NODES = D['nodes']; N = {n['id']: n for n in NODES}; EDGES = [(e['from'], e['to']) for e in D['edges'] if e['from'] in N and e['to'] in N]
 STAGES = D['stages']; SI = {s['id']: i for i, s in enumerate(STAGES)}

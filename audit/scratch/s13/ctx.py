@@ -8,7 +8,7 @@ def walk(o,path):
     elif isinstance(o,str):
         for m in re.finditer(pat,o):
             yield path, o[max(0,m.start()-w):m.end()+w]
-for f in ['tool/opps.json','formula_register.json']:
+for f in ['tool/opps.json','register/formula_register.json']:
     d=json.load(open(f))
     for p,s in walk(d,''):
         print(f+p,'::',s.replace('\n',' '));print()

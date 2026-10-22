@@ -5,7 +5,7 @@ Add-ons (the data centre's own choice): ppa, chp, water_cooling, condensate.
 Opportunities (an exchange with neighbours): backup power, grid upgrades shared, solar on neighbours' roofs, snowmelt, stormwater, emergency water."""
 import json, os
 H = os.path.dirname(os.path.abspath(__file__))
-P = os.path.join(H, 'formula_register.json')
+P = os.path.join(H, '..', 'formula_register.json')
 d = json.load(open(P, encoding='utf-8'))
 Q = {q['id']: q for q in d['quantities']}
 S = d['new_sources']; m = d['meta']

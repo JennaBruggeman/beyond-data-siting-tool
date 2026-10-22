@@ -1,7 +1,7 @@
 # 15 Oct 2026: BC Hydro Electric Tariff PDF (J.B. download, data/raw/bchydro). Confirms LGS and RS 1830 prices; reads RS 2289 and RS 4100.
 # Idempotent. Run after add_solar_ev.py.
 import json, os
-h = os.path.dirname(os.path.abspath(__file__)); P = os.path.join(h, 'formula_register.json')
+h = os.path.dirname(os.path.abspath(__file__)); P = os.path.join(h, '..', 'formula_register.json')
 r = json.load(open(P, encoding='utf-8')); m = r['meta']
 r['new_sources']['bchTariff2026'] = ('BC Hydro Electric Tariff (PDF, J.B. download 15 Oct 2026; read by Claude): RS 1600/1601/1610/1611 Large General Service, Revision 16, effective 1 Apr 2026 (BCUC G-76-25): '
   '29.99 ¢/day, $13.83/kW of billing demand, 6.79 ¢/kWh, for ≥150 kW or >550,000 kWh a year; RS 1830 Transmission Service, Revision 3, effective 1 Apr 2026: supply at 60 kV or higher, $12.178/kVA, 4.914 ¢/kWh; '

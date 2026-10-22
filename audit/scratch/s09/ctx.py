@@ -7,6 +7,6 @@ def walk(o,path):
         for i,v in enumerate(o): yield from walk(v,path+'['+str(i)+']')
     elif isinstance(o,str):
         if pat.search(o): yield path,o
-for f in ['formula_register.json','tool/opps.json']:
+for f in ['register/formula_register.json','tool/opps.json']:
     for p,s in walk(json.load(open(f)),''):
         print('##',f,p); print(s[:1500]); print()

@@ -1,7 +1,7 @@
 # 16 Oct 2026: VBBL 2025 Book II and the Alberta alternative-solutions notice (J.B. downloads, data/raw/codes), read by Claude.
 # Idempotent. Run after add_bch_tariff.py.
 import json, os
-h = os.path.dirname(os.path.abspath(__file__)); P = os.path.join(h, 'formula_register.json')
+h = os.path.dirname(os.path.abspath(__file__)); P = os.path.join(h, '..', 'formula_register.json')
 r = json.load(open(P, encoding='utf-8')); m = r['meta']
 r['new_sources']['vbbl2025_272'] = ('Vancouver Building By-law 2025, Book II, Div. B, Art. 2.7.1.2–2.7.1.3 and Table 2.7.1.3 (read by Claude 16 Oct 2026): a non-potable system may collect only rainwater, clear-water waste and Class R greywater used in the same dwelling unit; '
   'blackwater, groundwater, road runoff and perimeter drainage are not permitted; treated rainwater and clear-water waste may be used for "make-up water for cooling towers, adiabatic cooling systems"; operating permit (2.7.5.3) and professional design (2.7.6.1) required — '
