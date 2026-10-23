@@ -1,0 +1,58 @@
+{
+ "site": "E05",
+ "address": "8803 Stadium Rd NW, Edmonton",
+ "lat": 53.55511,
+ "lon": -113.477327,
+ "cell": {
+  "id": "edm_14_16",
+  "site": 0.7,
+  "zoning_best": "case",
+  "heat": 1.0,
+  "energy": 0.36,
+  "water": 0.124,
+  "materials": 0.585,
+  "people": 0.854,
+  "overlap": 0.585,
+  "overlap_zoned": 0.409,
+  "n_strong": 3,
+  "heat_MWh_weighted": 55993,
+  "receivers_in_reach": 36,
+  "network": "Downtown District Energy, planned Phases 2–4",
+  "network_dist_m": 860,
+  "substation_dist_m": 2012,
+  "households_1km": 6384,
+  "ev_ports_1km": 2,
+  "water_raw": 4378.4,
+  "arterial_dist_m": 20,
+  "industrial_share_1km": 0.002,
+  "schools_2km": 18,
+  "pop_800m": 8739,
+  "pop_150m": 117,
+  "ov_equal": 0.585,
+  "ov_priority": 0.656,
+  "ov_spread": 0.718,
+  "ov_equal_zoned": 0.409,
+  "ov_priority_zoned": 0.46,
+  "ov_spread_zoned": 0.502,
+  "stability": 0.464,
+  "stability_zoned": 0.774
+ },
+ "heat": {
+  "receivers_within_1500m": 50,
+  "in_reach": 35,
+  "demand_counted_MWh_yr": 54737
+ },
+ "substations_source": "NRCan CanVec 50K Res_MGT transformer_station_0 (points) and _2 (areas), 2019; dates are the source map years",
+ "named_substations_within_5km": [
+  {
+   "n": "Garneau",
+   "x": -1275,
+   "y": -2125,
+   "addr": "11123 85 Ave NW (placed at 11127, the nearest City-listed address)",
+   "status": "EPCOR project",
+   "src": "EPCOR Garneau substation project page",
+   "distance_m": 4701
+  }
+ ],
+ "ev_source": "nrcanEV2026 (2026-10-16, open, public)"
+}

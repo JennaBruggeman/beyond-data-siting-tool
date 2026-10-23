@@ -72,7 +72,9 @@ const pole=(()=>{ const q=[]; for(let i=0;i<lr.length;i+=2) q.push([X(lr[i]*.78)
   const inside=(x,y)=>{ let c=false; for(let i=0,j=q.length-1;i<q.length;j=i++){ const [xi,yi]=q[i],[xj,yj]=q[j]; if((yi>y)!==(yj>y)&&x<(xj-xi)*(y-yi)/(yj-yi)+xi) c=!c; } return c; };
   const dseg=(x,y,[ax,ay],[bx,by])=>{ const dx=bx-ax,dy=by-ay,u=cl(((x-ax)*dx+(y-ay)*dy)/(dx*dx+dy*dy)); return Math.hypot(x-ax-u*dx,y-ay-u*dy); };
   let best=[960,420,-1]; for(let x=lx0;x<=lx1;x+=2) for(let y=ly0;y<=ly1;y+=2){ if(!inside(x,y)) continue; let m=1e9; for(let i=0;i+1<q.length;i++) m=Math.min(m,dseg(x,y,q[i],q[i+1])); if(m>best[2]) best=[x,y,m]; } return best; })();
-const dcLbl=el('text',{x:pole[0],y:pole[1],'text-anchor':'middle','dominant-baseline':'central','font-size':26,'font-weight':500,fill:C.fg}); dcLbl.textContent='Data centre';
+const dcB=(()=>{ let a=1e9,b=-1e9,c=1e9,d=-1e9; for(let i=0;i<lr.length;i+=2){ const px=X(lr[i]*.78), py=Y(lr[i+1]*.78); a=Math.min(a,px); b=Math.max(b,px); c=Math.min(c,py); d=Math.max(d,py); } return [a,b,c,d]; })();
+// beside the building like every other label (J.B. 22 Oct): to its left, below the routes that arrive at its top edge
+const dcLbl=el('text',{x:dcB[0]-16,y:dcB[2]+0.64*(dcB[3]-dcB[2]),'text-anchor':'end','dominant-baseline':'central','font-size':30,'font-weight':500,fill:C.fg,stroke:C.bg,'stroke-width':8,'paint-order':'stroke','stroke-linejoin':'round'}); dcLbl.textContent='Data centre';
 const lotLbl=el('text',{x:lx0-10,y:ly0-6,'text-anchor':'end','font-size':30,fill:C.mute}); lotLbl.textContent='Land';
 
 // --- what it takes in: power from the left along the street, water from below
@@ -100,8 +102,10 @@ const ex=EX.map(([name,dx,dy,mx],i)=>{
   const out=el('path',{d,fill:'none',stroke:xl,'stroke-width':7,pathLength:1,'stroke-dasharray':'0.01 0.07','stroke-linecap':'round'},g);
   const back=el('path',{d,fill:'none',stroke:C.fg,'stroke-width':7,pathLength:1,'stroke-dasharray':'0.008 0.072','stroke-linecap':'round'},g);
   USED.push(tb); const b=el('polygon',{points:poly(tb.r),fill:xc,'fill-opacity':0,stroke:xc,'stroke-width':2.5},g);
-  const ly=dy<0?ty-46:ty+66;
-  const l=el('text',{x:tx,y:ly,'text-anchor':'middle','font-size':36,'font-weight':500,fill:xl},g); l.textContent=name;
+  // label beside its building, never on it (J.B. 22 Oct): above the building's outline if the route comes from below, else below it
+  let bx0=1e9,bx1=-1e9,by0=1e9,by1=-1e9; for(let i=0;i<tb.r.length;i+=2){ const px=X(tb.r[i]), py=Y(tb.r[i+1]); bx0=Math.min(bx0,px); bx1=Math.max(bx1,px); by0=Math.min(by0,py); by1=Math.max(by1,py); }
+  const ly=dy<0?by0-14:by1+40;
+  const l=el('text',{x:(bx0+bx1)/2,y:ly,'text-anchor':'middle','font-size':36,'font-weight':500,fill:xl,stroke:C.bg,'stroke-width':8,'paint-order':'stroke','stroke-linejoin':'round'},g); l.textContent=name;
   return {p,out,back,b,l,t0:i===0?18.8:22.6+(i-1)*.35}; });
 
 // --- captions: big, short, bottom left, on a dark band

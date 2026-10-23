@@ -1,0 +1,77 @@
+{
+ "site": "V09",
+ "address": "275 1st Ave E, Vancouver",
+ "lat": 49.268811,
+ "lon": -123.09697,
+ "cell": {
+  "id": "van_16_20",
+  "site": 0.7,
+  "zoning_best": "case",
+  "heat": 1.0,
+  "energy": 0.215,
+  "water": 0.591,
+  "materials": 0.872,
+  "people": 0.587,
+  "overlap": 0.653,
+  "overlap_zoned": 0.457,
+  "n_strong": 4,
+  "heat_MWh_weighted": 88408,
+  "receivers_in_reach": 171,
+  "network": "Neighbourhood Energy Utility (NEU)",
+  "network_dist_m": 0,
+  "substation_dist_m": 567,
+  "households_1km": 13668,
+  "ev_ports_1km": 132,
+  "water_raw": 26.0,
+  "arterial_dist_m": 109,
+  "industrial_share_1km": 0.363,
+  "schools_2km": 39,
+  "pop_800m": 14657,
+  "pop_150m": 321,
+  "ov_equal": 0.653,
+  "ov_priority": 0.7,
+  "ov_spread": 0.724,
+  "ov_equal_zoned": 0.457,
+  "ov_priority_zoned": 0.49,
+  "ov_spread_zoned": 0.507,
+  "stability": 0.0,
+  "stability_zoned": 0.998
+ },
+ "heat": {
+  "receivers_within_1500m": 302,
+  "in_reach": 172,
+  "demand_counted_MWh_yr": 88078
+ },
+ "substations_source": "NRCan CanVec 50K Res_MGT transformer_station_0 (points) and _2 (areas), 2019; dates are the source map years",
+ "named_substations_within_5km": [
+  {
+   "n": "Murrin",
+   "x": 1433,
+   "y": 3148,
+   "addr": "721 Main St",
+   "status": "in service",
+   "src": "Canadian Register of Historic Places",
+   "distance_m": 1095
+  },
+  {
+   "n": "East Vancouver",
+   "x": 2875,
+   "y": 3496,
+   "addr": "303 Vernon Dr",
+   "status": "BC Hydro project (replaces Murrin)",
+   "src": "BC Hydro East Vancouver substation project page",
+   "distance_m": 1858
+  },
+  {
+   "n": "West End",
+   "x": -729,
+   "y": 3689,
+   "addr": "1150 Nelson St (Lord Roberts Annex)",
+   "status": "planned, expected July 2032; not yet decided",
+   "src": "BC Hydro West End substation discussion guide 2025; CPCN 2025",
+   "distance_m": 2892
+  }
+ ],
+ "ev_source": "nrcanEV2026 (2026-10-16, open, public)",
+ "water_permits_note": "kind codes as in tool/water_permits_van.json (vanWaterPermits)"
+}

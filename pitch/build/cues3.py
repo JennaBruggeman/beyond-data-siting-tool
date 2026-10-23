@@ -27,12 +27,14 @@ def bound(i):
     if c: x,y=c[-1]; return (x+0.12, min(y,tt+0.25)-0.06)
     lo,hi=int((p+0.25)*100),int((tt+0.15)*100); k=lo+int(np.argmin(rms[lo:hi])) if hi>lo else int(tt*100)
     return (k/100,k/100)
-MAXG=0.42; out={}; pos=0
+MAXG0=0.42; out={}; pos=0
+TIGHT={'lv.intro','demo.here','au.hand','au.team','src.pile','dg.over','ec.two','op.ethos','dg.trust','dg.weak','ec.gap','demo.opps'}
 for k,s0p,e0p,nth in D:
     i0=find(s0p,pos if nth==1 else 0,nth) if nth==1 else find(s0p,0,nth)
     i1=find(e0p,i0)+len(e0p.split())-1; pos=i1+1
     s0=bound(i0)[1]; s1=bound(i1+1)[0]
     if k=='fu': s1=min(s1,W[i1]['s']+0.9)
+    MAXG=0.28 if k in TIGHT else MAXG0
     parts=[];cur=s0
     for s,e in SI:
         if s>s0 and e<s1 and e-s>MAXG: parts.append((cur,s+MAXG/2)); cur=e-MAXG/2
