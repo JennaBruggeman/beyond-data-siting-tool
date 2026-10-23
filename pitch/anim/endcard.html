@@ -14,10 +14,10 @@ html,body{margin:0;background:#1f2023;overflow:hidden;width:1920px;height:1080px
 #title .r{width:70px;height:4px;background:#CC746C;margin:22px 0 0 6px}
 #title .a{font:400 22px Plex;color:#918d86;margin:26px 0 0 6px}
 </style></head><body>
-<div id="stage"></div><div id="dim" style="position:absolute;inset:0;background:#1f2023;opacity:0"></div>
+<div id="stage"></div><div id="pblur" style="position:absolute;left:480px;top:812px;width:1260px;height:92px;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);opacity:0"></div><div id="dim" style="position:absolute;inset:0;background:#1f2023;opacity:0"></div>
 <div id="gap" style="position:absolute;left:120px;top:250px;opacity:0;font-family:Plex">
  <div style="font:500 24px Plex;color:#bdb9b2;margin-bottom:22px">From the report: none of the 688 buildings pays back yet</div>
- <div class="gi" style="font:500 52px/1.35 Plex">Higher gas prices</div><div class="gi" style="font:500 52px/1.35 Plex">A cheaper pipe route</div><div class="gi" style="font:500 52px/1.35 Plex">A pipe already in the street</div><div class="gi" style="font:500 52px/1.35 Plex">A cheaper heat pump</div></div>
+ <div class="gi" style="font:500 52px/1.35 Plex">A shorter heat pipe</div><div class="gi" style="font:500 52px/1.35 Plex">A heat network in the street</div><div class="gi" style="font:500 52px/1.35 Plex">A cheaper heat pump</div></div>
 <div id="hl" style="position:absolute;border:3px solid #e7a39c;border-radius:6px;opacity:0"></div>
 <div id="vd" style="position:absolute;left:0;right:0;top:430px;text-align:center;font:500 96px/1 Plex;letter-spacing:-.01em;opacity:0">Trade-offs, <span style="color:#e7a39c">not verdicts</span></div>
 <div id="band"></div>
@@ -62,6 +62,8 @@ function R(t){
   [[H,560],[O,1010],[T,1460]].forEach(([e,x],i)=>{ const a=3.4+i*.3, u=seg(t,a,a+.8); place(e,x+(1-u)*200,250,.92,u*(i===0?1:1-seg(t,5.0,5.6))); });
   // zoom into the heat page's scatter: every building within 3 km, cost against what the heat is worth
   const z=seg(t,5.2,7.2); if(t>5.2){ const s=.92+(3.4-.92)*z, x=560+(420-560)*z, y=250+(-770-250)*z; place(H,x,y,s,1-seg(t,14.0,14.6)); }
+  // the report's sentence under the scatter is softened (J.B. 22 Oct: the on-screen list is the infrastructure levers only)
+  document.getElementById('pblur').style.opacity=seg(t,6.6,7.2)*(1-seg(t,14.0,14.6));
   // what would close the gap (the report's own list), over the dimmed page
   document.getElementById('dim').style.opacity=.86*win(t,10.4,14.4,.5); document.getElementById('gap').style.opacity=win(t,10.6,14.2);
   [...document.querySelectorAll('.gi')].forEach((e,i)=>{ const a=11.0+i*.5; e.style.opacity=seg(t,a,a+.4); e.style.transform=`translateX(${(1-seg(t,a,a+.4))*-20}px)`; });

@@ -41,7 +41,12 @@ SITES = [
  ('E02', '17204 114 Ave NW, Edmonton', (53.56133, -113.62506, 53.56672, -113.61598), 'box as given'),
  ('E03', '9672 279 St, Acheson (Parkland County)', (53.53119, -113.79494, 53.53837, -113.78285), 'box as given'),
  ('E04', 'HSBC Bank Place, 10250 101 St NW, Edmonton', (53.54237, -113.49736, 53.54596, -113.49131), 'box as given'),
+ # the two chosen sites (J.B., 22 Oct 2026): 1,000 m boxes centred on the parcel, for the neighbourhood models
+ ('V09', '275 1st Ave E, Vancouver (chosen site)', bbox_from(49.268811, -123.09697, 1000), 'centred on the parcel at 275 1st Ave E (City parcel centroid), 1,000 m square'),
+ ('E05', '8803 Stadium Rd NW, Edmonton (chosen site)', bbox_from(53.555110, -113.477327, 1000), 'centred on the assessment point for 8803 Stadium Rd NW, 1,000 m square'),
 ]
+ONLY = set(filter(None, os.environ.get('ONLY', '').split(',')))
+if ONLY: SITES = [s for s in SITES if s[0] in ONLY]
 COLS = ['site', 'building_id', 'address', 'building_name', 'height_m', 'storeys', 'roof_elevation_m', 'ground_elevation_m', 'year_built', 'use', 'source_dataset', 'source_date', 'notes', 'parcel_id']
 SRC_V09 = 'City of Vancouver Open Data, Building footprints 2009'; SRC_VL = 'City of Vancouver LiDAR 2022, processed by Beyond Data (lidar_hybrid.py, 14–15 Oct 2026)'
 SRC_VP = 'City of Vancouver Open Data, property parcel polygons and property tax report 2026'
