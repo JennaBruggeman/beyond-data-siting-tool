@@ -1,0 +1,570 @@
+[
+ {
+  "id": "aesoP2Aupd2026",
+  "verdict": "Found",
+  "correct_url": "https://aesoengage.aeso.ca/pre-engagement-phase-ii-large-load-integration",
+  "what_was_checked": "AESO Engage page lists 'Large Load Integration Phase 2A BYOG Process Update', posted 18 Jun 2026, updated 24 Jun 2026",
+  "problem": "Deck contents not shown on the page; GW figures, 74.9 MW counts and load-shed wording not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "aesoDCupd2025",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://aesoengage.aeso.ca/pre-engagement-phase-ii-large-load-integration",
+  "what_was_checked": "Same AESO Engage page document list",
+  "problem": "Page lists it as 'Data Centre Update' (posted 26 Sep 2025), not 'Update on Data Centres'; 20,000 MW / 4,800 MW / 1,200 MW-to-3-projects figures not shown on page (only '1,200 MW interim limit')",
+  "copyright": "public"
+ },
+ {
+  "id": "alta117_2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL ; one WebSearch returned only law-firm blogs, no King's Printer page",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "edm7140sun",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL ; one WebSearch found no Edmonton bylaw page",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "edmFPO2250",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL ; same site as edm7140sun, blocked",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "aesoAMS2025",
+  "verdict": "Found",
+  "correct_url": "https://www.aeso.ca/assets/Annual-Market-Stats-2025.pdf",
+  "what_was_checked": "Opened PDF (via WebSearch): title, Mar 2026, pool prices 2016-2025, on/off-peak, gas $1.61/GJ, AIL 10,316 MW +2.0%, peak 12,785 MW Dec 2025, OR $218 M -19.6%, $78 vs $113",
+  "problem": "Gas-unit marginal cost and carbon cost ranges not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "edmPermitsDC2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL ; one WebSearch found no data.edmonton.ca page",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "cfr2022_140",
+  "verdict": "Found",
+  "correct_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2022-140/FullText.html",
+  "what_was_checked": "Opened Justice Laws text: current to 30 Sep 2026, last amended 30 Sep 2024; s.5(3) diesel 93 / gasoline 95; s.5(1) 89.5 (2023) to 79.0 (2030+); low-CI liquid = 90% of Schedule 1 reference",
+  "problem": "Schedule 1 values (89.2 to 80.1) not reached in fetched text; 9 Nov 2025 amendment announcement not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "bcLCFtech2023",
+  "verdict": "Found",
+  "correct_url": "https://www2.gov.bc.ca/gov/content/industry/electricity-alternative-energy/transportation-energies/renewable-low-carbon-fuels/requirements",
+  "what_was_checked": "Opened B.C. Reg. 295/2023 Sch. 3 Table 1 (diesel 94.38, gasoline 93.67) and BC requirements page (updated 6 Mar 2026; 79.28/77.11/74.94/66.07; 8% from 2025; Canadian-made from 1 Apr 2025; 30% by 2030)",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "bcRLCF007_2024",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://www2.gov.bc.ca/assets/gov/farming-natural-resources-and-industry/electricity-alternative-energy/transportation/renewable-low-carbon-fuels/information-bulletins/rlcf007-summary_2010-20252026_06_29.pdf",
+  "what_was_checked": "Cited URL blocked; opened RLCF-007-2024 (rev. Aug 2025) and current RLCF-007-2025 (rev. Jun 2026); BC bulletins page lists only the 2010-2025 summary",
+  "problem": "No 'revised Mar 2026' version found. Aug 2025 version: 2024 HDRD 1,046.5 ML at 22.97, biodiesel 0.29, 31.3% of 2,604.9 ML. Current RLCF-007-2025 (Jun 2026): HDRD 1,040.2 ML at 23.05, biodiesel 131.5 ML at 0.30, 31.2%, diesel pool 3,787.1 ML. Cited 1,041.1/23.06/2,610.2 match neither; 2023 HDRD 694.9 at 23.21 confirmed",
+  "copyright": "public"
+ },
+ {
+  "id": "abRFS2026",
+  "verdict": "Found",
+  "correct_url": "https://www.alberta.ca/renewable-fuels-standard-resources",
+  "what_was_checked": "Opened page: 2% bio-based diesel, 5% renewable alcohol, at least 25% lower GHG",
+  "problem": "Page update date (9 Oct 2026) and fact sheet date not seen in fetched text",
+  "copyright": "public"
+ },
+ {
+  "id": "ecccCFRmarket2024",
+  "verdict": "Found",
+  "correct_url": "https://www.canada.ca/en/environment-climate-change/services/managing-pollution/energy-production/fuel-regulations/clean-fuel-regulations/compliance/credit-market-report-june-2024.html",
+  "what_was_checked": "Opened page: issued 26 Jun 2024; HDRD CI 76.4 (36.0-80.0) 2022, 65.3 (15.0-80.0) 2023; median 36.0; Alberta Cat. 2 636,752 t",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "bcRLCF012b",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://www2.gov.bc.ca/assets/gov/farming-natural-resources-and-industry/electricity-alternative-energy/transportation/renewable-low-carbon-fuels/rlcf012_approved_carbon_intensities_current_29apr2026final.pdf",
+  "what_was_checked": "Opened official PDF via WebSearch: 'Approved Carbon Intensities - Current', RLCF-012; checked HDRD rows",
+  "problem": "Cited URL lacks 'final' in filename; PDF says revised 2026-04-30. Max 37.06 (Diamond Green, BCLCF737.1) and Imperial 15.06/19.46 confirmed. Min 7.58 'Tidewater Midstream' not confirmed: 7.58 is an expired Tidewater Renewables code (C-BCLCF409.1); Tidewater Midstream current rows min 8.07; fetched text cut off at BCLCF816.0. Expired max seen 131.35 (Hawaii Renewables), not 42.91",
+  "copyright": "public"
+ },
+ {
+  "id": "epcorDAS2026",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://www.epcor.com/content/dam/epcor/documents/rates/distribution-access-service-tariffs/2026-01-distribution-access-service-tariff.pdf",
+  "what_was_checked": "Opened SAS tariff (cited URL), DAS tariff and AUC Decision 30298-D01-2025 (10 Dec 2025, interim 2026 rates)",
+  "problem": "DAS-TOU charges ($43.4621/site/day, $0.22878/kW/day, $0 energy) are in the Distribution Access Service tariff, not the cited SAS tariff URL; SAS-TOU figures and 8.09% OR match the cited SAS PDF; tariff PDFs do not themselves cite the decision number",
+  "copyright": "public"
+ },
+ {
+  "id": "waterHardness2026",
+  "verdict": "Found",
+  "correct_url": "https://metrovancouver.org/services/water/Documents/water-quality-annual-report-volume-1-2025.pdf",
+  "what_was_checked": "Opened Metro Vancouver 2025 report: treated hardness Capilano 20.5, Seymour 20.2, Coquitlam 2.4",
+  "problem": "EPCOR monthly summary and 2021 EPCOR figures not checked (URL blocked)",
+  "copyright": "public"
+ },
+ {
+  "id": "cerProfiles2026",
+  "verdict": "Found",
+  "correct_url": "https://www.cer-rec.gc.ca/en/data-analysis/energy-markets/province-territory-energy-profiles/alberta.html",
+  "what_was_checked": "Opened CER BC profile (Mar 2026): 71.7 TWh 2021, 18,514 MW, hydro 15,953 MW; profiles index modified 2026-03-19",
+  "problem": "Alberta profile returned a server error, so 73.9 TWh and source shares not verified; 'modified 26 Mar 2026' not confirmed (index shows 19 Mar)",
+  "copyright": "public"
+ },
+ {
+  "id": "waterUse2026",
+  "verdict": "Found",
+  "correct_url": "https://www150.statcan.gc.ca/n1/daily-quotidien/231114/dq231114d-eng.htm",
+  "what_was_checked": "Opened The Daily 14 Nov 2023 (Survey of Drinking Water Plants, 2021); it links Chart 2 (cg-d002) on residential per-capita use",
+  "problem": "Chart page errored, so BC 286 / AB 195 and Table 38-10-0271-01 not verified; EPCOR figures not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "censusIncome2021",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "vanFire14419",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "mvBylaw1329",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "abDCenv2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "abWaterAct2021",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "vanLight2019",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "blatchfordSHX2026",
+  "verdict": "Found",
+  "correct_url": "https://blatchfordutility.ca/district-energy-sharing/",
+  "what_was_checked": "Opened page: sewer heat exchange in planning and design; 570 boreholes x 150 m",
+  "problem": "13.1 MW / 12.3 MW and $23.7 M of $79.2 M not on this page (NRCan source not checked); EPCOR Bylaw 19627 not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "blatchfordDG2025",
+  "verdict": "Found",
+  "correct_url": "https://www.gov.edmonton.ab.ca/sites/default/files/public-files/documents/district-energy-sharing-system-multi-unit-lots-design-guide.pdf",
+  "what_was_checked": "Opened guide: v8, June 2025; Table 8 supply 8-32 C, return 4 C winter; s.6.1 dT 5 C",
+  "problem": "Vancouver NEU Connectivity Guidelines not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "abRainwater2010",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "agsGround2009",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "vanDeepGeo",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "smoke2026",
+  "verdict": "Found",
+  "correct_url": "https://www.alberta.ca/air-indicators-wildfire-smoke",
+  "what_was_checked": "Opened page: smoke day = daily PM2.5 > 15 ug/m3; some northern stations > 100 days in 2023",
+  "problem": "Metro Vancouver advisory claims not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "nfcAB2023_4313",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "Cited URL is only the NRC publications homepage, not the document; blocked, and no search budget left",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "blatchfordRates2026",
+  "verdict": "Found",
+  "correct_url": "https://blatchfordutility.ca/2026-rates-blatchford-renewable-energy/",
+  "what_was_checked": "Opened page: 2026 townhouse $2.07/unit/day + $0.0358/kWh; multi-unit $13.18/kW peak/month + $0.0358; frozen by Council 1 Dec 2025 citing federal policy changes",
+  "problem": "Page shows multi-unit variable as '$0.0358 per kW' (likely page typo); Bylaw 17943 figures not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "blatchfordAdvisor2023",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "edmDEstrategy2024",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "buffa2019",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bfe2023dc",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "Cited URL is only the BFE homepage, not the report; blocked, and no search budget left",
+  "copyright": "public"
+ },
+ {
+  "id": "meyer2013",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "oro2019",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "pozgaj2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "ljungqvist2023",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "yuan2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "ecccEF2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "abEF2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "ucaRates2026",
+  "verdict": "Found",
+  "correct_url": "https://ucahelps.alberta.ca/regulated-rates.aspx",
+  "what_was_checked": "Opened UCA regulated-rates page",
+  "problem": "Fetched page showed only Nov 2025-Feb 2026 gas rates under 'Retailer'/'Distributor' columns and did not name Direct Energy Regulated Services/ATCO Gas; full Nov 2025-Oct 2026 series not confirmed",
+  "copyright": "public"
+ },
+ {
+  "id": "bcucG5026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "ipcc2019v3ch7",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "unknown"
+ },
+ {
+  "id": "vanTaxRates2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "vanBudget2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "bcAssessClasses",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "edmTaxRates2026",
+  "verdict": "Found, details wrong",
+  "correct_url": "",
+  "what_was_checked": "Opened cited City page 'where taxes go'",
+  "problem": "Cited page gives no non-residential rates and does not link the 2026 property tax bylaw (only residential impacts, 6.9% levy increase approved 4 Dec 2025); rates rest on an internal note, bylaw not located",
+  "copyright": "public"
+ },
+ {
+  "id": "abDataCentreLevy",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "gcDataResidency",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "bcFoippaAbroad",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "isocPulseIXP",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "statcanLives",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "sscConsolidation",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "voaComputerCentres",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "bcRecyclingIT",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "abElectronicsReg",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "unknown"
+ },
+ {
+  "id": "allen2011",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; search not possible",
+  "problem": "No URL given and the shared WebSearch budget was used up, so the paper could not be searched; text cites an internal audit note",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "duan2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; search not possible",
+  "problem": "No URL given and the shared WebSearch budget was used up, so the paper could not be searched; text cites an internal audit note",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "dcLstPreprint",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanHeatPolicy",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "edmHeatPolicy",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "gunterShipes1971",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; search not possible",
+  "problem": "No URL given and the shared WebSearch budget was used up, so the paper could not be searched; text cites an internal audit note",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "wrayAkbari2008",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; search not possible",
+  "problem": "No URL given and the shared WebSearch budget was used up, so the paper could not be searched; text cites an internal audit note",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bcDispersion",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "abModelGuideline",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "aerscreenGuide",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "bcNO2Guidance",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "mvAAQO",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ },
+ {
+  "id": "abAAQO",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Tried WebFetch of cited URL",
+  "problem": "WebFetch refused the URL (not in provenance set) and the shared WebSearch budget was used up, so no official page could be opened",
+  "copyright": "public"
+ }
+]

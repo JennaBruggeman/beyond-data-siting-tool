@@ -1,0 +1,570 @@
+[
+ {
+  "id": "nir2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "ceG526",
+  "verdict": "Found",
+  "correct_url": "https://www.ordersdecisions.bcuc.com/bcuc/orders/en/523033/1/document.do",
+  "what_was_checked": "Fetched BCUC order: G-5-26, 16 Jan 2026, Creative Energy Vancouver Platforms; tiers $19.53/16.53/14.63/11.60 per M# match",
+  "problem": "$/MWh conversion is the tool's own derivation, not stated in the order",
+  "copyright": "public"
+ },
+ {
+  "id": "fjfAars2020",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Direct fetch blocked; one search did not return the fjernvarmefyn.dk PDF",
+  "problem": "Not verified: 14,020 MWh, COP 4.5, 230 TJ",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "fjfAars2124",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Direct fetch blocked; one search did not return the Fjernvarme Fyn 2024 report",
+  "problem": "Not verified: 566/465/767/990 TJ, 393 %, 43 MW",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "dfKatalog2022",
+  "verdict": "Found",
+  "correct_url": "https://danskfjernvarme.dk/media/eqbhcqlv/inspirationskatalog-for-store-varmepumper-2022.pdf",
+  "what_was_checked": "Fetched PDF (Dansk Fjernvarme/DFP, Oct 2022): 23.9+20.7 MW, COP 4.4/4.9, 27→15 °C, 40→75 °C, 5,000–7,000 h, avg COP 4.2 incl. pumps (p.10), 215 M DKK all match",
+  "problem": "'≈30 % above DC-side heat' not checked; catalogue's own Table 1.1 lists 19 MW, inconsistent with p.8",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "teliaHKI2024",
+  "verdict": "Found",
+  "correct_url": "https://telia.fi/dam/jcr:3e4b6c78-a106-4364-9a91-97e36e8a77c1/Telia-Helsinki-Datacenter-cooling-options-for-AI-GPU-loads.pdf",
+  "what_was_checked": "Fetched whitepaper (Michael Holm, 26 Sep 2024): 24 MW IT/100 MW, 5→6.5 MW module, 29 May 2024 snapshot 4.11+1.45=5.65 MW, COP 3.9, PUE 1.152, ERF 0.75, 20/32 °C, DH 75–85 °C all match",
+  "problem": "Add author/date to citation; document's own sum 4.11+1.45 is 5.56, not 5.65",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "nivosMantsala",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.nib.int/loan/nivos-energia-oy-22822",
+  "what_was_checked": "Nivos article blocked and not in search results; NIB loan page fetched: dated 21 Oct 2019, 30 GWh/yr DC heat confirmed",
+  "problem": "Nivos/Sitra figures (15 MW, 6 MW, 4 MW HP, 20 GWh = 54 %, 37→80 °C, gas −70 %, price −11 %) not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "exergiAR2023",
+  "verdict": "Found",
+  "correct_url": "https://www.stockholmexergi.se/wp-content/uploads/2024/03/Arsredovisning-2023_SV_240326_sidor.pdf",
+  "what_was_checked": "Fetched report: 117 GWh from Stockholm Data Parks and Öppen Fjärrvärme in 2023, p.20 matches",
+  "problem": "Covenant of Mayors case and Energiforsk 2020:681 figures not checked",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "tallaghtD22",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://enabledhc.ambienteitalia.it/wp-content/uploads/2025/06/D2.2-Tallaght.pdf",
+  "what_was_checked": "Fetched D2.2 (factsheet, Apr 2025) and Codema page: 3,770 MWh first year, HEATWORKS CLG (SDCC), ~70/55 °C, fixed + variable tariff match",
+  "problem": "Neither source states source ~25 °C or that AWS supplies heat free; D2.2 says HP modules 'up to 3 MW' and does not state 2023 explicitly",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "engiePA10",
+  "verdict": "Found",
+  "correct_url": "https://engie-solutions.com/sites/default/files/assets/2024-06/cp_mise_en_service_officielle_de_la_sous-station_equinix_vdef_v2.pdf",
+  "what_was_checked": "Fetched release dated 21 Jun 2024: 28 °C, up to 6.6 MW, 10,800 MWh, €5.7 M, free heat 15 years match; 2022 SMIREC/Equinix release also exists",
+  "problem": "Release does not label 10,800 MWh explicitly as per year",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "rvoCases2018",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://www.bouwstenen.nl/sites/default/files/uploads/Rapportage-Restwarmte-uit-datacenters.pdf",
+  "what_was_checked": "Fetched report: Berenschot for Nederland ICT and RVO, 27 Feb 2018; APG 520 kW, 8,900 GJ, 16/28 °C, €0.8 M + €0.7 M match",
+  "problem": "Author is Berenschot (one report, not RVO + separate Berenschot); only Hengelo (185 kW DC) uses a gas HP to 55 °C — Eindhoven (600 kW) feeds a 10/18 °C ring",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bytes2heat",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://deneff.org/wp-content/uploads/2023/05/Bytes2Heat-Best-Practice-Uebersicht.pdf",
+  "what_was_checked": "Fetched PDF (May 2023): FRANKY 35 MW, ≥2,400 MWh/yr, 2×320 kWth, 30→70 °C, 15 yr; Braunschweig 300 kWth, COP 3.6, €460k; HLRS 270 MWh/yr match",
+  "problem": "Braunschweig 1,750 MWh/yr not in document (demand 2,100 MWh/a, network 4.2 GWh/a); temps are 18–25 °C → 70 °C (70/40 is FRANKY); document does not name DENEFF/IER as authors",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bcucC113",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://www.ordersdecisions.bcuc.com/bcuc/orders/en/118621/1/document.do",
+  "what_was_checked": "Fetched order (C-1-13, 4 Feb 2013; reasons 5 Feb): 1,400 kW quote, 5,194/4,591 MWh, 94 %, $7.9 M, $3.2 M vs $6.8 M, 'free waste heat supply' match",
+  "problem": "Panel DENIED the BC Hydro residential + 5–10 % market rate and ordered revised rates; G-155-12 rates and G-2-15 rescission not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "ulavalCVD",
+  "verdict": "Found",
+  "correct_url": "https://transformation-numerique.ulaval.ca/wp-content/uploads/2023/05/etude-de-cas-centre-de-valorisation-des-donnes-universite-laval-septembre-2021.pdf",
+  "what_was_checked": "Fetched case study (ATN for MELCC, Sept 2021): 1,150,000 kWh/yr, 40 °C, COP 'de l'ordre de 7', 130,000 m³ gas (p.9–10), PUE 1.28 over a year (p.10) match",
+  "problem": "Figures are for Colosse (predecessor), not the CVD itself (CVD PUE ≈1.25, p.27); pp.14–15, 24 not checked",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "equinixTR5",
+  "verdict": "Found",
+  "correct_url": "https://investor.equinix.com/news-events/press-releases/detail/1044/help-us-heat-our-neighbors---equinix-makes-data-center",
+  "what_was_checked": "Fetched press release 5 Jun 2024: TR5 Toronto and partner Markham District Energy named",
+  "problem": "24 Apr 2025 blog not checked",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "iso30134_6",
+  "verdict": "Found",
+  "correct_url": "https://services.bis.gov.in/tmp/LITD39622436_17102023_1.pdf",
+  "what_was_checked": "Fetched BIS IS/ISO/IEC 30134-6:2021 (Oct 2023, identical adoption): ERF formula 0–1, heat pumps 'shall not be included', handoff-point measurement, A.1.5.3 heat-pump output not reusable match",
+  "problem": "Exact 'logical boundary ... by flow and temperature rise' wording not confirmed; the cl.6 handoff quote seen refers to E_DC",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "euReg2024_1364",
+  "verdict": "Found",
+  "correct_url": "https://eur-lex.europa.eu/eli/reg_del/2024/1364",
+  "what_was_checked": "EUR-Lex record confirms title/date 14 Mar 2024; full-text content (≥500 kW, E_REUSE per EN 50600-4-6, T_WH at computer-room exchanger, Annex III ERF) read via lagen.nu reproduction of the official text",
+  "problem": "Content details read from a reproduction, not the EUR-Lex HTML (blocked); worth a direct re-read",
+  "copyright": "public"
+ },
+ {
+  "id": "skatOverskud",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "tax.dk jv-2024-1 page blocked; jv-2024-2 version from search failed at the site",
+  "problem": "Not verified; tax.dk is a private reproduction — official Juridisk vejledning is on info.skat.dk",
+  "copyright": "public"
+ },
+ {
+  "id": "dkPrisloftFAQ",
+  "verdict": "Found",
+  "correct_url": "https://cdn1.gopublic.dk/forsyningstilsynet/Media/638372891900131751/FAQ%20vedr%C3%B8rende%20prisloft%20p%C3%A5%20overskudsvarme.pdf",
+  "what_was_checked": "Fetched FAQ (Version 2, 1 Nov 2023): ≥0.25 MW, exact quote, costs incl. heat pump, connection, O&M, payment to supplier match",
+  "problem": "Add version/date (v2, 1 Nov 2023)",
+  "copyright": "public"
+ },
+ {
+  "id": "nrelRSF",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "van3575s2",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "vanDistricts",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "rts19744p4",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "vanRezoneTime",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "vanFees2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "vanDCL",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "vanACC",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "vanCAC",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "vanPermitTimes",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "edm20001",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "edmLDA26",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "edmRezone",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "parklandLUB",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "abConsult",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "gvsddUT008",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "gvsdd299",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "neuSewage",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "edm18100",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "bcWSRfees",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "thermalLimits",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "enwaveDLWC",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "neuConnect",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "bchRS2289",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "abMicrogen",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "abGridPage",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "bchLGS",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "bcIEAF",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "aesoStats2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "epcorDASSAS",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "fortisAB2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "bocFX2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "uptime2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "lbnlCapture",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "vanWater2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "epcorReclaimed",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "mvReclaimed",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "vanOfficeConv",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "edmPermits",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "van6555zones",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "lbnlLife",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "tenK_life",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "ashraeLife",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "en253Life",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "jlarc2024",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "ieaEnergyAI",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "dlrContracts",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "velkova2019",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "census2021DA",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "statcanEP2024",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "panFang2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ },
+ {
+  "id": "malecki2002",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NOT CHECKED: direct fetch of listed URL blocked (not in provenance) and shared web-search budget exhausted this turn",
+  "problem": "Needs re-check in a new run",
+  "copyright": "unknown"
+ }
+]

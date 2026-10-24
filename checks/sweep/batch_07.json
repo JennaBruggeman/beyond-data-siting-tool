@@ -1,0 +1,534 @@
+[
+{
+"id": "epcorGoldBar",
+"text": "EPCOR, Gold Bar operations: \"membrane-based wastewater recycling facility which supplies local industry with reclaimed water\" (utility claim; customers not named; a refinery is named only in trade press, not citable). Terms, price and openness to new customers not published — https://epcor.com/ca/en/ab/edmonton/operations/water-wastewater/gold-bar-wastewater-treatment-plant/gold-bar-operations.html",
+"url": "https://epcor.com/ca/en/ab/edmonton/operations/water-wastewater/gold-bar-wastewater-treatment-plant/gold-bar-operations.html",
+"used_by": [
+"Reclaimed water as cooling make-up"
+]
+},
+{
+"id": "vanSewerCap2025",
+"text": "City of Vancouver, Sewer Capacity Development Review Policy (Council 29 Oct 2025): no-review threshold, then low-impact class, else \"detailed technical review by the City Engineer\"; model prepared by the City or the applicant; no timeline or cost-sharing stated — https://vancouver.ca/files/cov/sewer-capacity-development-review-policy.pdf",
+"url": "https://vancouver.ca/files/cov/sewer-capacity-development-review-policy.pdf",
+"used_by": [
+"Sewer as heat source or sink"
+]
+},
+{
+"id": "mvWDP2021",
+"text": "Metro Vancouver waste discharge permit application (Dec 2021): \"cooling water\" and \"boiler blow down\" listed among non-domestic sources to describe; new industrial permit fee $1,000 — https://metrovancouver.org/services/liquid-waste/Documents/general-waste-discharge-application.pdf",
+"url": "https://metrovancouver.org/services/liquid-waste/Documents/general-waste-discharge-application.pdf",
+"used_by": [
+"Sewer as heat source or sink"
+]
+},
+{
+"id": "epcorDrainage2023",
+"text": "EPCOR Water and Drainage Customer Connection Guide (May 2023) and One Water planning memos (Mar 2025): EPCOR reviews stamped plans and issues an approval letter with costs; \"Details of any required sewer construction would be reviewed at the Development Permit stage\"; no timelines — https://www.epcor.com:443/products-services/new-connections/Documents/Water-Drainage-Customer-Connection-Guide.pdf",
+"url": "https://www.epcor.com:443/products-services/new-connections/Documents/Water-Drainage-Customer-Connection-Guide.pdf",
+"used_by": [
+"Sewer as heat source or sink"
+]
+},
+{
+"id": "bchExtension2026",
+"text": "BC Hydro Electric Tariff, T&C s. 8.3 and 11.5 (local copy, effective 2025–26): Extension Fee = extension cost + customer share of system improvement + service connection − BC Hydro maximum contribution; system improvement under $1M not charged; at ≥1 MVA the customer pays the part above $1M per MVA and above $10M; maximum contribution, General Service $521 per kW of estimated billing demand; minimum underground three-phase service connection $1,520 (≤200 A) to $2,950 (≤400 A) — data/raw/bchydro/tariff.txt",
+"url": "",
+"used_by": [
+"Closeness to networks and customers"
+]
+},
+{
+"id": "bchDG100",
+"text": "BC Hydro DG technical interconnection requirements ≤100 kW, Rev 3 (15 Jul 2026): covers \"customer‑owned generators and energy storage systems\" up to 100 kW net injection per phase; CSA C22.3 No. 9 and UL 1741; application and field-verification reviews. Larger (to 35 kV) per the 2010 requirements, which do not mention storage — https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/distribution/standards/ds-dgi-100kw-and-below-requirements.pdf",
+"url": "https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/distribution/standards/ds-dgi-100kw-and-below-requirements.pdf",
+"used_by": [
+"Closeness to networks and customers",
+"Battery storage"
+]
+},
+{
+"id": "aesoConnect",
+"text": "AESO Connection Process Quick Reference Guide v2.1 (2021): stages 0–6; generation and storage indicative weeks — Stage 1 14, Stage 2 39, Stage 3 55, Stage 4 30; only where transmission is needed — https://www.aeso.ca/assets/Uploads/connection-process/Connection-Process-Quick-Reference-Guide.pdf",
+"url": "https://www.aeso.ca/assets/Uploads/connection-process/Connection-Process-Quick-Reference-Guide.pdf",
+"used_by": [
+"Closeness to networks and customers"
+]
+},
+{
+"id": "epcorDTtc2025",
+"text": "EPCOR Distribution & Transmission terms and conditions (1 Jan 2025): \"Generating Facility\" includes storage; Distribution Interconnection Agreement required; customer pays \"all interconnection costs as determined by EDTI\"; exporters must be Power Pool participants; micro-generation <5 MW — https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2025-01_distribution-connection-services-terms-and-conditions.pdf",
+"url": "https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2025-01_distribution-connection-services-terms-and-conditions.pdf",
+"used_by": [
+"Closeness to networks and customers",
+"Battery storage"
+]
+},
+{
+"id": "bcUCAs1",
+"text": "BC Utilities Commission Act s. 1 \"public utility\" — includes supplying electricity \"to or for the public or a corporation for compensation\"; excludes \"a person not otherwise a public utility who provides the service or commodity only to the person or the person's employees or tenants, if the service or commodity is not resold to or used by others\"; s. 88(3) exemptions with the minister's approval. Supplying a neighbour for pay falls inside unless exempted (reading, not legal advice) — https://free.bcpublications.ca/civix/document/id/complete/statreg/96473_01",
+"url": "https://free.bcpublications.ca/civix/document/id/complete/statreg/96473_01",
+"used_by": [
+"Water licence required",
+"Rules for generation beside the data centre",
+"Own gas plant: heat with the power",
+"Backup power for neighbours in a blackout",
+"Solar on neighbours' roofs"
+]
+},
+{
+"id": "aucCoaldale2025",
+"text": "AUC Decision 29294-D01-2025 (Coaldale Renewables / McCain, 3 Jun 2025): under EUA s. 2(1)(b) \"the lands must, at a minimum, be contiguous\"; lines crossing a highway to the customer \"are an attempt to self-distribute and are not permitted\". Permission to appeal granted in part (Sep 2025, per law-firm commentary); outcome not verified — https://prd-api-efiling20.auc.ab.ca/Anonymous/DownloadPublicDocumentAsync/836696",
+"url": "https://prd-api-efiling20.auc.ab.ca/Anonymous/DownloadPublicDocumentAsync/836696",
+"used_by": [
+"Water licence required",
+"Rules for generation beside the data centre"
+]
+},
+{
+"id": "vanQuebecSt2020",
+"text": "City of Vancouver memo to Council (15 May 2020), NEU Mount Pleasant expansion on Quebec St 3rd–6th Ave: start 19 May, completion \"anticipated in fall 2020\" (≈5 months) — https://vancouver.ca/files/cov/05-15-2020-quebec-st-phase-3.pdf",
+"url": "https://vancouver.ca/files/cov/05-15-2020-quebec-st-phase-3.pdf",
+"used_by": [
+"Distribution capital cost",
+"Street right-of-way cost"
+]
+},
+{
+"id": "inlL2_2015",
+"text": "INL/EXT-15-36313 (2015), public Level 2 use: starts concentrate at the start of the work day; drivers \"rarely initiate their away-from-home charging before 6 a.m. or after 7 p.m.\"; DC fast charging leans to the end of the work day — https://inldigitallibrary.inl.gov/sites/sti/sti/6899530.pdf",
+"url": "https://inldigitallibrary.inl.gov/sites/sti/sti/6899530.pdf",
+"used_by": [
+"EV charging stalls supported",
+"Hourly heat-demand profile"
+]
+},
+{
+"id": "uclaWorkplace",
+"text": "Winn, Electric Vehicle Charging at Work (UCLA Luskin, ChargePoint data 2011–15): workplace session starts — 5–8 am 20.4%, 8–10 am 26.7%, 10–12 13.5%, 12–2 pm 15.2%, 2–6 pm 18.0%, 6 pm–12 am 5.4%, 12–5 am 0.9% — https://innovation.luskin.ucla.edu/sites/default/files/Full%20Report.pdf",
+"url": "https://innovation.luskin.ucla.edu/sites/default/files/Full%20Report.pdf",
+"used_by": [
+"EV charging stalls supported"
+]
+},
+{
+"id": "dunskyNRCan2024",
+"text": "Dunsky for NRCan (Feb 2024), EV charging infrastructure for Canada, Table 12 installed cost per port (2022 CAD): DC fast $160k at 125 kW (2025), $240k at 175 kW (2030); Level 2 $15k (2025), $10k (2030); grid upgrades excluded; fleets charge overnight at depots — https://natural-resources.canada.ca/energy-efficiency/transportation-energy-efficiency/resource-library/electric-vehicle-charging-infrastructure-canada",
+"url": "https://natural-resources.canada.ca/energy-efficiency/transportation-energy-efficiency/resource-library/electric-vehicle-charging-infrastructure-canada",
+"used_by": [
+"EV charging stalls supported"
+]
+},
+{
+"id": "bchDR2026",
+"text": "BC Hydro Demand Response for Business customer manual (Aug 2026): events Nov–Mar, weekdays 6 am–10 pm, ≤4 consecutive hours, ≤2 a day, ≤20 a season; BC Hydro peaks on weekday evenings (2021 demand report); records 5–6 pm (Dec 2022 winter, Jul 2026 summer) — https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/power-smart/business/programs/demand-response-for-business-customer-manual.pdf",
+"url": "https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/power-smart/business/programs/demand-response-for-business-customer-manual.pdf",
+"used_by": [
+"Hourly heat-demand profile",
+"Peak relief and what it earns"
+]
+},
+{
+"id": "abGreenhouse2017",
+"text": "Alberta Agriculture and Forestry AGDEX 821-59 (2018, 2017 survey): greenhouse capital investment per m² — cucumber $112.75, tomato $129.99, pepper $138.99, bedding plants $321.01 (surveyed existing operations, not new build) — https://open.alberta.ca/dataset/fbb2b0b5-53b9-4dbd-92b7-f37ec8ed9369/resource/d074794d-7ec0-4bef-bc93-99a57bbc2cf2/download/2017greenhousecop.pdf",
+"url": "https://open.alberta.ca/dataset/fbb2b0b5-53b9-4dbd-92b7-f37ec8ed9369/resource/d074794d-7ec0-4bef-bc93-99a57bbc2cf2/download/2017greenhousecop.pdf",
+"used_by": [
+"Greenhouse area heated"
+]
+},
+{
+"id": "faoRAS2022",
+"text": "Bregnballe, A guide to recirculation aquaculture (FAO/Eurofish 2022), pp. 53–54: total investment \"between EUR 12 to EUR 20 (or more) per kg produced per year\"; simple outdoor grow-out ≈€6/kg — https://www.fao.org/3/cc2390en/cc2390en.pdf",
+"url": "https://www.fao.org/3/cc2390en/cc2390en.pdf",
+"used_by": [
+"Fish production supported"
+]
+},
+{
+"id": "fortisBC2026",
+"text": "FortisBC business rates, Mainland and Vancouver Island, effective 1 Jul 2026 (J.B. screenshots 16 Oct 2026 of fortisbc.com): Rate 3 (commercial, institutional or small industrial, over 2,000 GJ a year, e.g. schools, offices) — basic $4.3526/day, delivery $5.377/GJ, storage and transport $2.268/GJ, cost of gas $1.660/GJ; Rate 2 — basic $1.4309/day, delivery $5.877/GJ, storage and transport $2.493/GJ, cost of gas $1.660/GJ (the earlier rate-sheet reading of $5.377 for Rate 2 was wrong) — https://www.fortisbc.com/accounts-billing/billing-rates/natural-gas-rates/business-rates",
+"url": "https://www.fortisbc.com/accounts-billing/billing-rates/natural-gas-rates/business-rates",
+"used_by": [
+"Buyer ceiling price"
+]
+},
+{
+"id": "atcoGas2026",
+"text": "ATCO Gas North delivery (1 Jan 2026): Low Use $0.997/day + $1.049/GJ; Mid Use $1.909/day + $1.045/GJ (riders excluded). Alberta regulated rate, ATCO area, 2026 $/GJ: Jan 3.331 … Oct 1.458 (Utilities Consumer Advocate) — https://ucahelps.alberta.ca/regulated-rates.aspx",
+"url": "https://ucahelps.alberta.ca/regulated-rates.aspx",
+"used_by": [
+"Buyer ceiling price"
+]
+},
+{
+"id": "bcCarbonTax2025",
+"text": "BC: \"The B.C. carbon tax was eliminated effective April 1, 2025\"; federal fuel charge set to zero 1 Apr 2025 (CRA FCN16); BC output-based pricing for large industry continues (≥10,000 t/yr); Alberta TIER $95/t for 2025, 2026 price not verified from a primary source — https://www2.gov.bc.ca/gov/content/taxes/sales-taxes/motor-fuel-carbon-tax/carbon-tax-elimination",
+"url": "https://www2.gov.bc.ca/gov/content/taxes/sales-taxes/motor-fuel-carbon-tax/carbon-tax-elimination",
+"used_by": [
+"Buyer ceiling price"
+]
+},
+{
+"id": "epraBC",
+"text": "EPRA BC / Return-It Electronics: accepts \"Desktop computers (including those acting as servers)\" and IT/telecom gear; loose batteries not accepted; Large Volume Generator pickup with a 3-pallet minimum; approved primary processors (Dec 2023): FCM Recycling (Delta), eCycle Solutions (Chilliwack), Quantum Lifecycle Partners and Hi Tech Recyclers (Edmonton) — https://www.recyclemyelectronics.ca/bc/what-can-i-recycle",
+"url": "https://www.recyclemyelectronics.ca/bc/what-can-i-recycle",
+"used_by": [
+"E-waste"
+]
+},
+{
+"id": "armaElectronics",
+"text": "Alberta Recycling Management Authority electronics program: \"Blade (rack mount), desktop and floor standing servers\" covered, for consumer, industrial or commercial use; registered processors incl. Hi-Tech Recyclers, Quantum Lifecycle Partners, YEG Electronics Recycling (Edmonton), Shanked Computer Recycling (Acheson), eCycle Solutions (Airdrie) — https://www.albertarecycling.ca/registry/stewardship/#processors",
+"url": "https://www.albertarecycling.ca/registry/stewardship/#processors",
+"used_by": [
+"E-waste"
+]
+},
+{
+"id": "cfsPlus",
+"text": "Computers for Schools Plus (ISED): BC affiliate BC Technology for Learning Society / ReuseTechBC (Burnaby; Windows 11-capable devices); Alberta Computers for Schools (Edmonton, Calgary) takes servers (≥4 cores) and recycles servers, switches, UPSs and lead batteries — https://www.cfsalberta.ca/donate.php",
+"url": "https://www.cfsalberta.ca/donate.php",
+"used_by": [
+"E-waste"
+]
+},
+{
+"id": "call2recycle",
+"text": "Call2Recycle Canada: dry-cell batteries up to 5 kg each (incl. sealed lead acid and Li-ion); larger UPS strings likely outside the program (inference); Alberta battery EPR from 1 Apr 2025 — https://call2recycle.ca/faq/",
+"url": "https://call2recycle.ca/faq/",
+"used_by": [
+"E-waste"
+]
+},
+{
+"id": "itsp40006",
+"text": "Canadian Centre for Cyber Security ITSP.40.006, IT Media Sanitization (supersedes ITSG-06; cites NIST SP 800-88 Rev. 1); Government of Alberta Secure Digital Media Sanitization Standard v2.0 (2023) uses NIST terms — https://www.cyber.gc.ca/en/guidance/it-media-sanitization-itsp40006",
+"url": "https://www.cyber.gc.ca/en/guidance/it-media-sanitization-itsp40006",
+"used_by": [
+"E-waste"
+]
+},
+{
+"id": "vbbl2025_63215",
+"text": "VBBL 2025 Book I, Div. B Art. 6.3.2.15 (J.B. download 16 Oct 2026; read by Claude): evaporative heat rejection discharge \"away from the building … not less than a) 2.15 m above sidewalks and driveways, b) 7.6 m from outdoor air intakes, c) 3 m horizontally or vertically from exterior doors and operable windows, and d) 3 m … from occupiable outdoor spaces\"; drift eliminator; drains and blow-downs to the building drainage system (Clause 2.4.2.1.(1)(e), Book II); operating permit per Book II Art. 2.2.11.6. NFPA 855 is not among the NFPA standards Book I cites — data/raw/codes/vbbl2025_v1.pdf",
+"url": "",
+"used_by": [
+"Evaporative water"
+]
+},
+{
+"id": "nfcAB2023",
+"text": "National Fire Code – 2023 Alberta Edition (NRC, 2026 print; J.B. download 16 Oct 2026; Claude searched the full text): no reference to NFPA 855 and no energy-storage-system provisions (battery rules cover industrial-truck charging only, 3.1.3.3) — data/raw/codes/nfc_ab2023.pdf",
+"url": "",
+"used_by": [
+"Battery storage"
+]
+},
+{
+"id": "abEUAdef2026",
+"text": "Alberta Electric Utilities Act, consolidation current to 6 Feb 2026 (J.B. download): s. 1(1)(m) \"electric distribution system\" means \"the plant, works, equipment, systems and services necessary to distribute electricity in a service area\", excluding a generating unit, a transmission facility, and an energy storage resource in an energy storage facility unless approved under HEEA s. 25.1. Amendments not in force at that date include 2025 c8 (repeals and substitutes s. 18) — check the current version before quoting s. 18 — data/raw/E05P1_EUA.pdf",
+"url": "",
+"used_by": [
+"Rules for generation beside the data centre"
+]
+},
+{
+"id": "nfpa855_2026",
+"text": "NFPA 855, 2026 edition (Free Access reader; J.B. screenshots 16 Oct 2026, read by Claude): applies above the Table 1.3 thresholds (lithium-ion 20 kWh per fire area or outdoor installation); outdoor ESS \"separated by a minimum 10 ft (3 m)\" from lot lines, public ways, buildings, stored combustibles and other exposures (9.6.2.7.1), reducible to 3 ft (0.9 m) with a 1-hour freestanding barrier, fire and explosion testing, or a 2-hour enclosure (9.6.2.7.1.1–5); remote outdoor installations more than 100 ft (30.5 m) from exposures (9.5.1); vegetation cleared within 10 ft (9.6.2.1.1); rooftop units over 20 kWh: from the roof edge at least the system height and not less than 5 ft (1.5 m), at least 10 ft (3 m) from the fire-service access point, units 3 ft (0.9 m) apart, 5 ft walkways, 10 ft to exposures on the roof (9.6.3.1.1.2, 9.6.3.1.1.3, 9.6.3.1.3). Not cited by any BC or Alberta code (see nfpa855tia) — reference only — data/raw/codes/nfpa855_2026_screens.pdf",
+"url": "",
+"used_by": [
+"Battery storage",
+"Space for the plant"
+]
+},
+{
+"id": "uptimeTiers",
+"text": "Uptime Institute, Tier Classification System web page (J.B. save, 16 Oct 2026): Tier I — basic capacity, no redundant components; Tier II — \"redundant capacity components for power and cooling\" (engine generators, energy storage, chillers, cooling units, UPS modules, pumps, heat rejection equipment, fuel tanks); Tier III — \"concurrently maintainable\", redundant distribution paths; Tier IV — \"several independent and physically isolated systems\", fault tolerant. The page does not use the terms N+1 or 2N; the tool's mapping (N+1 ≈ Tier II–III spares, 2N ≈ Tier IV) is Claude's reading — data/raw/codes/uptime_tiers.pdf",
+"url": "",
+"used_by": [
+"Space for the plant"
+]
+},
+{
+"id": "r2Van2026",
+"text": "SERI R2 certified facility directory, search within 100 miles of Vancouver (J.B. screenshot 16 Oct 2026): five active R2v3 facilities — FCM Recycling Inc., Delta BC (11 mi); Quantum Lifecycle Partners LP, Surrey BC (12 mi); CSI Electronics Processing Centre Ltd., Surrey BC (24 mi); 1PC LLC, Bellingham WA (45 mi); e-Cycle Solutions Inc., Chilliwack BC (54 mi). Directory listing, not an endorsement — https://www.sustainableelectronics.org/find-an-r2-certified-facility/",
+"url": "https://www.sustainableelectronics.org/find-an-r2-certified-facility/",
+"used_by": [
+"E-waste"
+]
+},
+{
+"id": "r2Edm2026",
+"text": "SERI R2 certified facility directory, search within 50 miles of Edmonton (J.B. screenshot 16 Oct 2026): two active R2v3 facilities — 1579568 Alberta Ltd. o/a Hi-Tech Recyclers, 10235 184 St NW, Edmonton (6 mi); Quantum Lifecycle Partners LP, 250 Aurum Road NE, Edmonton (8 mi). Directory listing, not an endorsement — https://www.sustainableelectronics.org/find-an-r2-certified-facility/",
+"url": "https://www.sustainableelectronics.org/find-an-r2-certified-facility/",
+"used_by": [
+"E-waste"
+]
+},
+{
+"id": "cologixVAN1_2026",
+"text": "Cologix VAN1 spec sheet (05-2026, J.B. download 16 Oct 2026): 555 W Hastings (Harbour Centre), Cologix a tenant in an office building; site capacity 400 kW; data-centre space 5,000 ft² (≈465 m²) in two suites; cooling \"N+1 chilled water cooling, N+1 dry cooler … N+1 IRC\"; generator and UPS \"N/N+1\"; PUE 1.2 (claim). An operator example of N+1 cooling in Vancouver. Security details on the sheet deliberately not carried into the register or tool — data/raw/cologix_van1_2026-05.pdf",
+"url": "",
+"used_by": [
+"Space for the plant"
+]
+},
+{
+"id": "cologixVAN4_2026",
+"text": "Cologix VAN4 spec sheet (05-2026, J.B. download 16 Oct 2026): 175 W Cordova St, a leased four-storey concrete-frame building, single tenant; site capacity 6.5 MW; data-centre space 40,000 ft² (≈3,716 m²), multiple halls per floor; cooling \"pumped refrigerant and air-cooled chilled water\"; generators and UPS \"5-to-make-4, distributed redundant\"; 6–8 kW per cabinet; PUE 1.5 (claim). Security, fuel and fibre-entry details on the sheet deliberately not carried into the register or tool — data/raw/cologix_van4_2026-05.pdf",
+"url": "",
+"used_by": [
+"Space for the plant"
+]
+},
+{
+"id": "vanStreets2026",
+"text": "City of Vancouver Open Data, Public streets (J.B. download 16 Oct 2026): 17,072 street centreline segments by hundred block with street use (residential, collector, arterial and others); plus Lanes (download 18 Oct 2026, updated by the City 27 Jul 2026): 7,856 lane centreline segments, surface not recorded. Used to route pipes and to place street viewpoints for sight lines — data/raw/van/public-streets.csv, data/raw/van/streets/lanes_2026-10-18.geojson",
+"url": "",
+"used_by": [
+"Distribution capital cost"
+]
+},
+{
+"id": "edmRoads2026",
+"text": "City of Edmonton Open Data, Road Network (J.B. download 16 Oct 2026): 53,873 centrelines with type (road, alley, railway), segment type, functional class (local, collector, arterial classes A–D) and surface; the tool keeps roads and alleys (50,755 segments; ramps, overpasses and bridges dropped) for pipe routes and street viewpoints; gravel alleys are marked unpaved — data/raw/edm/Road_Network_20261016.csv",
+"url": "",
+"used_by": [
+"Distribution capital cost"
+]
+},
+{
+"id": "vanI2_2026",
+"text": "City of Vancouver Zoning and Development By-law, I-2 District Schedule (June 2026; J.B. upload 16 Oct 2026): sub-areas A and B in the False Creek Flats (s. 1.1, Map 1); outside B: height 18.3 m, up to 30.5 m with approval, rear yard 3.1 m, side yards only beside R districts (ss. 3.1.2.1–5); sub-area B: FSR 3.0 (4.0 with approval), height 18.3 m (36.5 m with approval), front 0.6 m, sides 7.6 m, rear 3.1 m, building at most 61.0 m wide and deep, first floor 6.1 m and upper floors 4.0 m floor to floor (ss. 3.2.1–3.2.2); Bulk Data Storage conditional, not at the ground floor except entrances (s. 2.2.7) — https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-2.pdf",
+"url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-2.pdf",
+"used_by": []
+},
+{
+"id": "mvWWTP2026",
+"text": "Metro Vancouver, Wastewater Treatment Plants and Processes (J.B. screenshot 16 Oct 2026): five plants — Iona Island, Lions Gate, Lulu Island, Annacis Island, Northwest Langley — and the sewerage area each serves; over 1 billion litres a day. Street addresses not yet checked against Metro Vancouver pages (a chat search gave business-listing addresses; Lulu Island differs, 13400 vs 13500 Gilbert Road) — https://metrovancouver.org/services/liquid-waste",
+"url": "https://metrovancouver.org/services/liquid-waste",
+"used_by": []
+},
+{
+"id": "epcorGoldBar2026",
+"text": "EPCOR, Gold Bar Wastewater Treatment Plant walking tour (J.B. screenshot 16 Oct 2026): plant on the North Saskatchewan River at 50 St NW and Goldbar Park Road NW; position taken from the City road network (Goldbar Park Road NW, Road_Network 16 Oct 2026) as approximate — https://www.epcor.com/ca/en/ab/edmonton/operations/water-wastewater/gold-bar-wastewater-treatment-plant/gold-bar-walking-tour.html",
+"url": "https://www.epcor.com/ca/en/ab/edmonton/operations/water-wastewater/gold-bar-wastewater-treatment-plant/gold-bar-walking-tour.html",
+"used_by": [
+"Sewage heat recoverable"
+]
+},
+{
+"id": "statcanGH2021",
+"text": "Statistics Canada Table 32-10-0360-01, Greenhouse products, Census of Agriculture 2021 (J.B. downloads 16 Oct 2026): total greenhouse area in use — Canada 29,931,588 m² (4,796 farms); Alberta 1,391,678 m² (436); Division No. 11, Alberta 107,719 m² (68, quality D); City of Edmonton 23,733 m² (5, mostly potted plants); British Columbia 5,931,819 m² (1,098); City of Vancouver 3 farms, area suppressed (\"too unreliable to be published\"). Greater Vancouver census division not downloaded — https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3210036001",
+"url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3210036001",
+"used_by": []
+},
+{
+"id": "blatchfordBP2021",
+"text": "Blatchford Renewable Energy 2021–2024 Business Plan, City of Edmonton (J.B. upload 16 Oct 2026): the District Energy Sharing System uses geoexchange, sewer heat exchange and solar (p. 1); all buildings must connect for heating, cooling and hot water unless net-zero carbon (p. 2); a sewer-heat energy centre in the Blatchford Market area, drawing on the two combined sewer lines under the east side, was expected in 2023; connected floor area forecast 123,500 m² by 2024, all from the first energy centre; customers to pay at most a comparable fee to elsewhere in the city. No intake of heat from third-party sources is described — file BlatchfordRenewableEnergy2021-2024BusinessPlan2.pdf; City URL not yet checked",
+"url": "",
+"used_by": [
+"Sewage heat recoverable",
+"Who pays which part",
+"Party ledger"
+]
+},
+{
+"id": "abWells2026",
+"text": "Alberta Water Well Information Database, Reconnaissance Reports for Twp 51–54, Rge 22–26 W4M (J.B. downloads 16 Oct 2026; nine reports, 3,844 records parsed; owner names not kept): uses mostly domestic (about 2,810) and industrial (299); median depth 145 ft domestic, 200 ft industrial; records from 1898 to 2026, 366 since 2000. No record mentions geoexchange, ground loops or heat, although the area covered includes Blatchford, which has a geoexchange field — so closed-loop boreholes appear not to be recorded in this database (an inference, not stated by the source) — https://groundwater.alberta.ca/WaterWells/d/",
+"url": "https://groundwater.alberta.ca/WaterWells/d/",
+"used_by": [
+"Ground and groundwater at the parcel"
+]
+},
+{
+"id": "ceedcIEF2026",
+"text": "CEEDC (Simon Fraser University), Innovative Energy Facilities inventory, district energy download (J.B. 16 Oct 2026; 254 facilities; figures reported 2014–2023; some withheld as confidential). Vancouver: Creative Energy downtown steam 237 MW, 220 buildings (2014); SEFC NEU hot water 67/50 °C, 32 MW, 44 buildings, 27,094 ft of pipe (2022); River District 85/65 °C, 15 MW, 20 buildings (2018); VGH and BC Children's central plants (no figures); Sen̓áḵw, Oakridge Park, Main Alley planned. Edmonton: University of Alberta steam 205 °C, 590 MW, chilled water 5 °C, 145 MW, 80 buildings (2017); Boyle Renaissance; Blatchford (no figures). The coordinates in the file do not match the facilities (e.g. UBC placed in downtown Vancouver) and are not used — https://cieedacdb.rem.sfu.ca:8006/district-energy-inventory/",
+"url": "https://cieedacdb.rem.sfu.ca:8006/district-energy-inventory/",
+"used_by": []
+},
+{
+"id": "ceud2023com",
+"text": "NRCan Comprehensive Energy Use Database, Commercial/Institutional Sector, British Columbia and Alberta, 2023 (J.B. download 16 Oct 2026; com_bct_e.xls, com_ab_e.xls), Tables 15, 17, 19: space + water heating ÷ floor space — BC: Educational Services 0.497 GJ/m², Health Care and Social Assistance 1.096, Arts, Entertainment and Recreation 0.650; Alberta: 1.307, 2.348, 1.458. Delivered energy, provincial averages — https://oee.nrcan.gc.ca/corporate/statistics/neud/dpa/menus/trends/comprehensive_tables/list.cfm",
+"url": "https://oee.nrcan.gc.ca/corporate/statistics/neud/dpa/menus/trends/comprehensive_tables/list.cfm",
+"used_by": []
+},
+{
+"id": "vanNES2012",
+"text": "City of Vancouver, Vancouver Neighbourhood Energy Strategy and Energy Centre Guidelines, policy report RTS 9772, 25 Sep 2012 (PT&E Committee 3 Oct 2012; J.B. upload 16 Oct 2026): Central Heat Distribution Ltd. steam serves more than 200 downtown buildings; hospital steam systems at VGH and Children's and Women's; target areas Downtown, Cambie Corridor, Central Broadway (Figure 2, schematic, not traced); Energy Centre Guideline 4: \"Waste heat is in general the preferred low-carbon energy source of stakeholders\", recovered from commercial and industrial operations and sewage lines (Appendix A, 4.1) — https://council.vancouver.ca (report file ptec1.pdf)",
+"url": "https://council.vancouver.ca",
+"used_by": []
+},
+{
+"id": "rdeService2026",
+"text": "River District Energy, Service Area page (J.B. PDF print 16 Oct 2026; page clipped at the right): service area across the River District neighbourhood between Boundary Road and Kerr Street; map of existing and in-progress customers and piping with Marine Way at its top edge and the Area 2 energy centre. Operator description; drawn in the tool as an approximate area — https://www.riverdistrictenergy.com (URL not checked)",
+"url": "https://www.riverdistrictenergy.com",
+"used_by": []
+},
+{
+"id": "estarMedian2018",
+"text": "NRCan / ENERGY STAR Portfolio Manager, Canadian Energy Use Intensity by Property Type, technical reference, August 2018 (J.B. upload 16 Oct 2026): national median site EUI (all energy, GJ/m²) — K-12 school 0.75, hospital 2.22, residential care 1.04, ice/curling rink 1.15, recreation (pool, fitness, rink) 1.51; from SCIEU 2014, SECA 2014, CIBEUS 2000 — https://www.nrcan.gc.ca (ENERGY STAR Portfolio Manager technical reference)",
+"url": "https://www.nrcan.gc.ca",
+"used_by": []
+},
+{
+"id": "vanNESmap2020",
+"text": "City of Vancouver, Established Neighbourhood Energy Systems in Vancouver (map, last updated March 2020; J.B. upload 16 Oct 2026): False Creek NEU (City; connection required, By-law 9552), Creative Energy downtown and south downtown, River District (East Fraser Lands), VGH and Children's and Women's campuses (PHSA), and on-site systems at Arbutus Centre, Marine Gateway, Marpole Village, MC2, Pearson Dogwood, Shannon Mews. \"Boundaries are provided for illustrative purposes only.\" Vector shapes placed by fitting the NEU shape to the By-law 9552 trace; checked within about 150 m against hospital and River District positions — https://vancouver.ca (neighbourhood-energy-systems-established.pdf)",
+"url": "https://vancouver.ca",
+"used_by": []
+},
+{
+"id": "rdeTech2018",
+"text": "River District Energy, Information Package for Developers, Section II Technical Guidelines for Building Designers (10 Sep 2018; J.B. upload 16 Oct 2026): building heating hydronic from a central ETS; gas-fired, electric-resistance and conventional heat-pump or VRF heating not permitted; Table 1 building side max 70 °C supply / 50 °C return peak winter, 45/40 °C summer, ΔT ≥ 20 °C; Table 2 terminal units, e.g. radiant floor 49/38 °C, air-handling pre-heat 65/45 °C; ETS room 15–35 °C with floor drain and 15 A service — operator requirements",
+"url": "",
+"used_by": []
+},
+{
+"id": "bcucCE2026",
+"text": "BCUC Advanced Search, \"Creative Energy Vancouver Platforms Inc\" (J.B. PDF 16 Oct 2026): 336 results, e.g. Order G-282-25 (core steam reconsideration of G-199-25A, 3 Dec 2025) and G-2-25 (2024 Long-Term Resource Plan, procedural, 10 Jan 2025). Filings not yet read — https://www.bcuc.com",
+"url": "https://www.bcuc.com",
+"used_by": []
+},
+{
+"id": "edmDDEmap2025",
+"text": "City of Edmonton, Downtown District Energy Initiative phases technical map (May 2025; J.B. upload 16 Oct 2026): buildings by Phase 1, 1A, 2, 3, 4; proposed energy centre; district-energy mains below ground and through pedways/parkades, labelled e.g. \"500 H / 750 C\" (units not stated); \"Represents proposed design and growth ... and subject to change.\" Building outlines placed on City 3D footprints by fitting (mean overlap 0.44; Phase 1 within about 50 m of the Sir Winston Churchill Square parcels)",
+"url": "",
+"used_by": []
+},
+{
+"id": "nrcanEV2026",
+"text": "NRCan Electric Charging and Alternative Fuelling Stations Locator, BC and Alberta exports (J.B. download 16 Oct 2026): 2,597 electric stations in BC (2,565 open, 32 temporarily unavailable); within the tool's Vancouver extent 544 open stations, 1,481 Level 2 ports, 203 DC fast ports. Alberta export: 949 stations (935 open); within the tool's Edmonton extent 211 open stations, 563 Level 2 ports, 70 DC fast ports — https://natural-resources.canada.ca (station locator)",
+"url": "https://natural-resources.canada.ca",
+"used_by": []
+},
+{
+"id": "uofaGHG2025",
+"text": "University of Alberta, Operational GHG Emissions Reduction Plan (final, April 2025; scanned, read by OCR; J.B. upload 16 Oct 2026): 2023–24 scope 1 and 2 emissions 234,719 t CO2e, of which District Energy System fuel 136,705 t; the DES supplies electricity, steam, chilled water and other utilities to North Campus and sells them to customers in the Greater Campus Area (Fig. 2-1); North Campus is 84.9% of emissions. Two DES decarbonization pathways examined: 1 maintain steam (CHP with carbon capture; hydrogen; electric steam boilers), 2 convert to low-temperature hot water (condensing boilers with carbon capture; natural gas and hydrogen; electricity) (pp. 33–34). No mention of outside or waste heat found",
+"url": "",
+"used_by": []
+},
+{
+"id": "vanRainPrivate2026",
+"text": "City of Vancouver, Rainwater management on private property (web page printed 16 Oct 2026; read by OCR): most new buildings must manage rainwater on site; up to 1.0 FSR on sites up to 1,000 m² follow the small-site pathway (detention tank 3,400–7,200 L by site area), otherwise the engineered pathway; permits opened after 1 Jan 2026 follow VBBL 2025 Book II, Div. B, Art. 2.4.2.5. Mentions a City map of existing non-potable water systems. No tank costs — https://vancouver.ca (rainwater management on private property)",
+"url": "https://vancouver.ca",
+"used_by": []
+},
+{
+"id": "vanPublicRooms2026",
+"text": "City of Vancouver Open Data: libraries (22 records, one an outreach office; dataset currency old) and community centres (27), names, addresses, points (J.B. downloads 16 Oct 2026). The City's Keeping Cool maps (2026) show library and community-centre cooling centres by icon only — https://opendata.vancouver.ca",
+"url": "https://opendata.vancouver.ca",
+"used_by": []
+},
+{
+"id": "majdabadi2026",
+"text": "Majdabadi, Irandoostshahrestani and Koohi-Fayegh (2026), Integration of air-source to ground-source heat pump systems: impact on borehole design and life-cycle cost in Canada, Geothermics 138, 103640, doi:10.1016/j.geothermics.2026.103640 (J.B. upload 16 Oct 2026): Table 3 borehole installation (drilling, loop, grouting) $54/m Edmonton, $51/m Toronto, $140/m Montreal (CAD 2025); dual-source designs cut borehole length by up to about 40%, with limited overall savings in Edmonton (Climate Zone 6); case building a mid-rise multifamily",
+"url": "",
+"used_by": []
+},
+{
+"id": "bcucG25224",
+"text": "BCUC Order G-252-24 and decision, Creative Energy Vancouver Platforms Inc., Core Steam System Low Carbon Rate Design, 26 Sep 2024 (J.B. upload 16 Oct 2026): application rejected for filing (no indicative rates or scenario analyses); CPCN for the Core Steam System Decarbonization Project granted by Order C-5-22 (15 Sep 2022); material change report (31 Jul 2023) capital cost $37,461,691 → $52,637,018; Creative Energy aimed for low-carbon service by Q4 2025; existing rates are flat-rate/declining-block; Northeast False Creek system rates unified with the Core Steam System from 1 Jan 2022 (G-345-22) — https://www.bcuc.com",
+"url": "https://www.bcuc.com",
+"used_by": []
+},
+{
+"id": "bcucG526",
+"text": "BCUC Order G-5-26, Creative Energy Vancouver Platforms Inc., 2026 Revenue Requirements for Core TES, 16 Jan 2026 (J.B. upload 16 Oct 2026): Core TES = the downtown steam network plus the Northeast False Creek and Butterfly hot-water networks; interim rates from 1 Jan 2026 averaging $14.51 per thousand pounds of steam and $41.82/MWh of thermal energy on the hot-water networks, refundable pending a final decision — https://www.bcuc.com",
+"url": "https://www.bcuc.com",
+"used_by": []
+},
+{
+"id": "bcucG34522A",
+"text": "BCUC Decision and Order G-345-22A, Creative Energy Core Steam and Northeast False Creek rates, 29 Nov 2022, with errata (J.B. upload 16 Oct 2026): NEFC cost of service and rates consolidated with Core Steam from 1 Jan 2022, NEFC customers paying Core Steam rates plus a System Contribution Charge; 81-page decision covers load forecast and revenue requirement (not yet read in full) — https://www.bcuc.com",
+"url": "https://www.bcuc.com",
+"used_by": []
+},
+{
+"id": "bcucG17926",
+"text": "BCUC Order G-179-26 and decision, Creative Energy 2026 Revenue Requirements for Core TES, 20 Aug 2026 (J.B. upload 16 Oct 2026): permanent 2026 rates averaging $14.78 per thousand pounds (M#) of steam and $42.59/MWh on the hot-water networks, conversion factor 0.347 MWh per M#, declining-block structure; 2026 debt rate 5.33%; existing Beatty steam production plant operating beyond its design life, sustained on a condition basis until the New Beatty Energy Center is completed (to 2029); $666,650 of 2026 Beatty plant capital removed from rate base as not yet used and useful — https://www.bcuc.com",
+"url": "https://www.bcuc.com",
+"used_by": []
+},
+{
+"id": "uofaEERMP2021",
+"text": "University of Alberta, Envision Energy Reduction Master Plan 2022–30 (Nov 2021; J.B. upload 16 Oct 2026): targets for 2030 — energy intensity 15% below 2019/20, 350,000 GJe total reduction and 25,000 t CO2e from 2022, 2,500 kW renewable and 495 kW alternative energy installed; integrates with the Master Energy Plan for the District Energy System serving the Greater Campus Area; building measures include waste heat recovery (air and water) and micro-steam CHP turbines; laboratories use about 2.5× the energy of office or classroom space; programme of $3.56 M, 375,600 GJe, 30,450 t CO2e (savings valued at 2020/21 utility costs)",
+"url": "",
+"used_by": []
+},
+{
+"id": "abGreenhouse2023",
+"text": "Alberta Agriculture and Irrigation (E. A. Laate), Economics of production and marketing greenhouse crops in Alberta 2023 (J.B. upload 16 Oct 2026): 53 growers, 909,443 m² surveyed; Alberta greenhouse area about 2.30 million m²; average investment $105.06 (lettuce) to $478.16 (tree seedlings) per m²; natural gas cost $3.99–12.47 per m² by crop (Table 23); about 85% of growers heat with natural gas, 9% propane (2019–20); forced-air furnaces most common, 30% hot-water and steam boilers; Alberta gas averaged $4.30/GJ (net farm, Jan 2021–Dec 2023) — https://open.alberta.ca",
+"url": "https://open.alberta.ca",
+"used_by": []
+},
+{
+"id": "bcGreenhouse2011",
+"text": "BC Jobs Plan, Special Report on the Greenhouse Sector (BC Ministries of Agriculture, Energy and others, report dated 24 Jan 2012; J.B. upload 16 Oct 2026): energy about 15% of operating costs (Statistics Canada 2011); most heat from natural gas, over half of production area also uses wood biomass; from May to October 90% of greenhouse natural gas is used to produce CO2, not heat, about 50% of annual gas; vegetable greenhouses 13,000–20,000 GJ/ha/yr (industry estimate, down from 22,500–28,000 in 2005); BC carbon tax a cost pressure. Industry estimates, 2011",
+"url": "",
+"used_by": []
+},
+{
+"id": "vanWaterPermits",
+"text": "City of Vancouver Open Data, Issued operating permits — water systems (J.B. download 16 Oct 2026): 1,245 permits (1,099 active): cooling towers 672 (625 active with locations), decorative water features, building water treatment systems, rainwater harvesting/alternative water systems 44 (36 active); with renewal dates and Legionella pneumophila and other water-quality results. Shown in the tool as counts and distances only — https://opendata.vancouver.ca",
+"url": "https://opendata.vancouver.ca",
+"used_by": []
+},
+{
+"id": "quEDM1_2026",
+"text": "Qu Data Centres, EDM1 Facility Overview spec sheet (J.B. download 16 Oct 2026): Edmonton, Financial Core District; 18,000 ft² building (≈1,672 m²), 15,712 ft² raised floor (≈1,460 m²); 2.5 MW capacity; 248 tons of N+1 cooling (≈0.87 MW); ~5–10 kW per rack; no PUE and no heat recovery stated (claims). Security, fuel, generator and carrier details on the sheet deliberately not carried into the register or tool — https://qudatacentres.com/hubfs/location-spec-sheets/EDM1-Spec-Sheet.pdf",
+"url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM1-Spec-Sheet.pdf",
+"used_by": [
+"IT load, operator claim"
+]
+},
+{
+"id": "quEDM2_2026",
+"text": "Qu Data Centres, EDM2 Facility Overview spec sheet (J.B. download 16 Oct 2026): Edmonton; Uptime Institute Tier III certified (claim); raised floor phase 1 19,000 ft² + phase 2 14,196 ft², building 35,000 ft² (≈3,252 m²); 2.5 MW Tier II / 3 MW Tier III; 1,450 tons of N+1 cooling (≈5.1 MW); ~5–10 kW per rack; no PUE and no heat recovery stated (claims). Security, fuel, generator and carrier details deliberately not carried — https://qudatacentres.com/hubfs/location-spec-sheets/EDM2-Spec-Sheet.pdf",
+"url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM2-Spec-Sheet.pdf",
+"used_by": [
+"IT load, operator claim"
+]
+},
+{
+"id": "edmBEB6",
+"text": "City of Edmonton, Year 6 Building Energy Benchmarking Report (June 2023; 2021 data; J.B. upload 16 Oct 2026): voluntary programme with BOMA Edmonton; 468 properties, 1,014 buildings, 7,869,390 m² in 25 categories (largest: multifamily 139 properties, 1,865,615 m²; office 54, 1,049,068 m²); no data-centre category; average weather-normalized source EUI 1.3 GJ/m², average GHG intensity 125 kg CO2e/m²; buildings in all six years cut EUI 20.2% on average; building-level data shared on an online dashboard (edmonton.ca/energybenchmarkingdashboard, not yet read). Vancouver's equivalent is required reporting for buildings ≥100,000 ft² — https://www.edmonton.ca (search \"energy benchmarking\")",
+"url": "https://www.edmonton.ca",
+"used_by": [
+"IT load, actual (range)"
+]
+},
+{
+"id": "bartlett2025",
+"text": "Bartlett, C. (2025), Waste Heat Recovery and Utilization Potential from Data Centres in Alberta, MSc research project (Sustainable Energy Development), University of Calgary, supervisor G. Doluweera (J.B. upload 16 Oct 2026): modelled, not built — 11,879 MW of proposed data centres seeking AESO interconnection; immersion cooling with coolant outlet 60 °C, heat-exchanger efficiency 100%, transfer efficiency 68% (Luo et al. 2019) → 490 MWh of recoverable heat per MW of IT load per month; about 1,175 t CO2e/yr and $65,280/yr of natural gas displaced per MW (Alberta factors); \"Alberta has few established district heating networks\", naming the University of Alberta system and Calgary District Heating (6 of 15 million ft² served); cites Alberta's AI Data Centre Strategy (2024), pillar 2, which intends to \"explore waste heat capture and utilization\". No built Alberta data-centre heat-reuse case reported — https://ucalgary.scholaris.ca/server/api/core/bitstreams/8f66f77b-d1cd-4408-aad2-9cbb3076bcbc/content",
+"url": "https://ucalgary.scholaris.ca/server/api/core/bitstreams/8f66f77b-d1cd-4408-aad2-9cbb3076bcbc/content",
+"used_by": [
+"Heat available after heat pump"
+]
+},
+{
+"id": "abAIDCstrategy2024",
+"text": "Government of Alberta, Alberta's AI Data Centre Strategy: Powering the future of artificial intelligence (Technology and Innovation, Dec 2024, ISBN 978-1-4601-6171-5; J.B. upload 16 Oct 2026): three pillars — power capacity (off-grid and grid-connected solutions \"that avoid compromising the affordability and reliability of electricity for Albertans\"; natural gas with renewables and possibly carbon capture), sustainable cooling (\"Alberta will explore innovative ways of capturing and utilizing the heat generated by AI data centres\"; cooling strategies that respect the province's water capacity; Water Act allocation), economic growth (tax and shared prosperity). An intention, not a requirement — https://open.alberta.ca/publications/albertas-ai-data-centre-strategy",
+"url": "https://open.alberta.ca/publications/albertas-ai-data-centre-strategy",
+"used_by": [
+"Heat available after heat pump",
+"Evaporative water"
+]
+},
+{
+"id": "aesoP2A2026",
+"text": "AESO Engage, Phase 2A: Large Load Integration | BYOG Process (page last updated 8 Sep 2026; J.B. PDF print 16 Oct 2026, read by OCR): Phase 1 rolled out 4 Jun 2025 with a 1,200 MW interim large-load connection limit and an allocation process; Phase 2A develops a connection process for large loads that self-supply on site, enable net new transmission-connected generation, or need MW allocations (\"bring your own generation\"); Proposed BYOG Process posted 26 Jun 2026; at 8 Sep 2026 the process was still being finalized, with application intake expected in fall 2026; a final proposal waits on a data-centre regulation enabled by Bill 8 (fall 2025). Working group included eStruxture, IREN, Beacon AI Centers and generators — https://aesoengage.aeso.ca/pre-engagement-phase-ii-large-load-integration",
+"url": "https://aesoengage.aeso.ca/pre-engagement-phase-ii-large-load-integration",
+"used_by": [
+"Flexible share of load"
+]
+},
+{
+"id": "aesoBYOG2026",
+"text": "AESO, Large Load Integration Phase 2A — Proposed BYOG Process (26 Jun 2026, proposal, not final). Applies to transmission-connected loads asking for 75 MW or more of demand transmission service (DTS), site-aggregated; excludes loads under 75 MW, distribution-connected load and storage. First intake gas-fired generation only, \"net new\"; tethering ratio: generator output at 25 °C, 40% humidity equals DTS contract capacity. Data centres must show municipal zoning or area-structure-plan approval and accept the data-centre connection requirements. DTS commitment fee $15k/MW (refundable). Bridging before the generator runs: at most 20/30/40% of the DTS request by generator milestone, 1,600 MW across all intakes, up to 3 years; bridging load is fully interruptible, reduced before all other non-firm load to avoid a shortfall, curtailment scheme TBD (pro rata, rotation or combination); suspended for failing to curtail — https://aesoengage.aeso.ca/pre-engagement-phase-ii-large-load-integration",
+"url": "https://aesoengage.aeso.ca/pre-engagement-phase-ii-large-load-integration",
+"used_by": [
+"Flexible share of load"
+]
+}
+]

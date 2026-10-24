@@ -1,0 +1,570 @@
+[
+ {
+  "id": "epcorGoldBar",
+  "verdict": "Found",
+  "correct_url": "https://epcor.com/ca/en/ab/edmonton/operations/water-wastewater/gold-bar-wastewater-treatment-plant/gold-bar-operations.html",
+  "what_was_checked": "Fetched EPCOR 'Gold Bar Operations' page; quoted phrase present verbatim; no customers named",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "vanSewerCap2025",
+  "verdict": "Found",
+  "correct_url": "https://vancouver.ca/files/cov/sewer-capacity-development-review-policy.pdf",
+  "what_was_checked": "Fetched PDF: approved by Council 29 Oct 2025; no-review threshold, low-impact class, 'detailed technical review by the City Engineer'; City Engineer decides City or applicant prepares model; no timeline or cost-sharing",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "mvWDP2021",
+  "verdict": "Found",
+  "correct_url": "https://metrovancouver.org/services/liquid-waste/Documents/general-waste-discharge-application.pdf",
+  "what_was_checked": "Fetched PDF: Waste Discharge Permit Application, Dec 2021 (GVS&DD); 'cooling water, boiler blow down' in Section D; new industrial permit fee $1,000",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "epcorDrainage2023",
+  "verdict": "Found",
+  "correct_url": "https://www.epcor.com/products-services/new-connections/Documents/Water-Drainage-Customer-Connection-Guide.pdf",
+  "what_was_checked": "Fetched PDF: Customer Connection Guide, release date 1 May 2023; EPCOR reviews plans and sends approval letter with costs; P.Eng. seal required on plans",
+  "problem": "One Water planning memos (Mar 2025) and the 'Development Permit stage' quote not checked (not in this PDF's summary)",
+  "copyright": "public"
+ },
+ {
+  "id": "bchExtension2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; local copy exists at data/raw/bchydro/tariff.txt; Web search budget for this turn exhausted",
+  "problem": "Cannot confirm online; BC Hydro Electric Tariff is a public BCUC-approved tariff",
+  "copyright": "public"
+ },
+ {
+  "id": "bchDG100",
+  "verdict": "Found",
+  "correct_url": "https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/distribution/standards/ds-dgi-100kw-and-below-requirements.pdf",
+  "what_was_checked": "Fetched PDF: DGTIR-100 Rev 3, 15 Jul 2026; 'customer-owned generators and energy storage systems'; 100 kW per phase; CSA C22.3 No. 9 and UL 1741; application review and field verification",
+  "problem": "2010 >100 kW requirements doc listed on BC Hydro DGI page but its date and lack of storage not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "aesoConnect",
+  "verdict": "Found",
+  "correct_url": "https://www.aeso.ca/assets/Uploads/connection-process/Connection-Process-Quick-Reference-Guide.pdf",
+  "what_was_checked": "Fetched PDF: V2.1 dated 2021-05-31; stages 0-6; weeks 14/39/55/30 for Stages 1-4 (column assignment to generation/storage read from layout); applies when SASR needs transmission additions",
+  "problem": "AESO now links a newer 'The Connection Process' quick reference (V1, 27 May 2025, aeso.ca/assets/templates/Quick-Reference-Guide-Connection-Process.pdf) without these durations; v2.1 may be superseded",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "epcorDTtc2025",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2026-01-distribution-connection-services-terms-and-conditions.pdf",
+  "what_was_checked": "Cited 2025-01 URL not fetchable; fetched current 2026-01-01 T&Cs (supersede 2025-01-01): storage in Generating Facility, DIA required (s.8.1), 'all interconnection costs as determined by EDTI' (s.8.4), Power Pool participant (s.8.3.9)",
+  "problem": "2025 edition superseded by 1 Jan 2026 (and a 2026-08 edition exists); no 'micro-generation <5 MW' found - only 5 MW is the telemetry threshold (s.8.3.5)",
+  "copyright": "public"
+ },
+ {
+  "id": "bcUCAs1",
+  "verdict": "Unreachable",
+  "correct_url": "https://free.bcpublications.ca/civix/document/id/complete/statreg/96473_01",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "aucCoaldale2025",
+  "verdict": "Unreachable",
+  "correct_url": "https://prd-api-efiling20.auc.ab.ca/Anonymous/DownloadPublicDocumentAsync/836696",
+  "what_was_checked": "Fetch permission denied; search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "vanQuebecSt2020",
+  "verdict": "Unreachable",
+  "correct_url": "https://vancouver.ca/files/cov/05-15-2020-quebec-st-phase-3.pdf",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "inlL2_2015",
+  "verdict": "Unreachable",
+  "correct_url": "https://inldigitallibrary.inl.gov/sites/sti/sti/6899530.pdf",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "uclaWorkplace",
+  "verdict": "Unreachable",
+  "correct_url": "https://innovation.luskin.ucla.edu/sites/default/files/Full%20Report.pdf",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "dunskyNRCan2024",
+  "verdict": "Unreachable",
+  "correct_url": "https://natural-resources.canada.ca/energy-efficiency/transportation-energy-efficiency/resource-library/electric-vehicle-charging-infrastructure-canada",
+  "what_was_checked": "Fetch permission request timed out; search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "bchDR2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/power-smart/business/programs/demand-response-for-business-customer-manual.pdf",
+  "what_was_checked": "Fetch permission request timed out; search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "abGreenhouse2017",
+  "verdict": "Unreachable",
+  "correct_url": "https://open.alberta.ca/dataset/fbb2b0b5-53b9-4dbd-92b7-f37ec8ed9369/resource/d074794d-7ec0-4bef-bc93-99a57bbc2cf2/download/2017greenhousecop.pdf",
+  "what_was_checked": "Fetch permission request timed out; search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "faoRAS2022",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.fao.org/3/cc2390en/cc2390en.pdf",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "fortisBC2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.fortisbc.com/accounts-billing/billing-rates/natural-gas-rates/business-rates",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "atcoGas2026",
+  "verdict": "Found",
+  "correct_url": "https://ucahelps.alberta.ca/regulated-rates.aspx",
+  "what_was_checked": "Fetched UCA regulated rates page: 2026 Jan 3.331 $/GJ matches; page as served showed only Jan-Feb 2026 and no ATCO Gas North delivery charges",
+  "problem": "Oct 1.458 and ATCO Gas North delivery charges not shown on UCA page; delivery figures need ATCO's own rate schedule",
+  "copyright": "public"
+ },
+ {
+  "id": "bcCarbonTax2025",
+  "verdict": "Unreachable",
+  "correct_url": "https://www2.gov.bc.ca/gov/content/taxes/sales-taxes/motor-fuel-carbon-tax/carbon-tax-elimination",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "epraBC",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.recyclemyelectronics.ca/bc/what-can-i-recycle",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "armaElectronics",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.albertarecycling.ca/registry/stewardship/#processors",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "cfsPlus",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.cfsalberta.ca/donate.php",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "call2recycle",
+  "verdict": "Unreachable",
+  "correct_url": "https://call2recycle.ca/faq/",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "itsp40006",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.cyber.gc.ca/en/guidance/it-media-sanitization-itsp40006",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "vbbl2025_63215",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; local copy exists at data/raw/codes/vbbl2025_v1.pdf; web search budget exhausted",
+  "problem": "Not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "nfcAB2023",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; local copy exists at data/raw/codes/nfc_ab2023.pdf; web search budget exhausted",
+  "problem": "Not verified online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "abEUAdef2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; local copy exists at data/raw/E05P1_EUA.pdf; web search budget exhausted",
+  "problem": "Not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "nfpa855_2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; local screenshots exist at data/raw/codes/nfpa855_2026_screens.pdf; web search budget exhausted",
+  "problem": "Not verified online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "uptimeTiers",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; local save exists at data/raw/codes/uptime_tiers.pdf; web search budget exhausted",
+  "problem": "Not verified online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "r2Van2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.sustainableelectronics.org/find-an-r2-certified-facility/",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted; directory results are a dynamic search, not checkable by fetch",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "r2Edm2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.sustainableelectronics.org/find-an-r2-certified-facility/",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "cologixVAN1_2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; local copy exists at data/raw/cologix_van1_2026-05.pdf; web search budget exhausted",
+  "problem": "Not verified online; operator document",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "cologixVAN4_2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; local copy data/raw/cologix_van4_2026-05.pdf not checked; web search budget exhausted",
+  "problem": "Not verified online; operator document",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanStreets2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; local file data/raw/van/public-streets.csv exists; web search budget exhausted",
+  "problem": "Not verified online; give the opendata.vancouver.ca dataset URL",
+  "copyright": "public"
+ },
+ {
+  "id": "edmRoads2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; local file data/raw/edm/Road_Network_20261016.csv exists; web search budget exhausted",
+  "problem": "Not verified online; give the data.edmonton.ca dataset URL",
+  "copyright": "public"
+ },
+ {
+  "id": "vanI2_2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-2.pdf",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "mvWWTP2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://metrovancouver.org/services/liquid-waste",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "epcorGoldBar2026",
+  "verdict": "Found",
+  "correct_url": "https://www.epcor.com/ca/en/ab/edmonton/operations/water-wastewater/gold-bar-wastewater-treatment-plant/gold-bar-walking-tour.html",
+  "what_was_checked": "Fetched EPCOR walking tour page: plant next to North Saskatchewan River; tour starts at 50th Street just north of Gold Bar Park Road",
+  "problem": "Page spells 'Gold Bar Park Road' (citation 'Goldbar Park Road NW' follows the City road network name)",
+  "copyright": "public"
+ },
+ {
+  "id": "statcanGH2021",
+  "verdict": "Unreachable",
+  "correct_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3210036001",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "blatchfordBP2021",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; web search budget exhausted",
+  "problem": "Not verified online; City URL still missing",
+  "copyright": "public"
+ },
+ {
+  "id": "abWells2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://groundwater.alberta.ca/WaterWells/d/",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "ceedcIEF2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://cieedacdb.rem.sfu.ca:8006/district-energy-inventory/",
+  "what_was_checked": "Not fetched (provenance block expected); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "ceud2023com",
+  "verdict": "Unreachable",
+  "correct_url": "https://oee.nrcan.gc.ca/corporate/statistics/neud/dpa/menus/trends/comprehensive_tables/list.cfm",
+  "what_was_checked": "Not fetched (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "vanNES2012",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL is only council.vancouver.ca homepage; search budget exhausted",
+  "problem": "URL is a site homepage, not the report; not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "rdeService2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.riverdistrictenergy.com",
+  "what_was_checked": "Not fetched (provenance block); search budget exhausted",
+  "problem": "Not verified; URL is homepage, page URL not given",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "estarMedian2018",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL is only nrcan.gc.ca homepage; search budget exhausted",
+  "problem": "URL is a site homepage, not the document; not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "vanNESmap2020",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL is only vancouver.ca homepage; search budget exhausted",
+  "problem": "URL is a site homepage, not the map PDF; not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "rdeTech2018",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; web search budget exhausted",
+  "problem": "Not verified online; operator document",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bcucCE2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.bcuc.com",
+  "what_was_checked": "Cited URL is BCUC homepage; search budget exhausted",
+  "problem": "Search-result listing, not a document; not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "edmDDEmap2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; web search budget exhausted",
+  "problem": "Not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "nrcanEV2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL is only natural-resources.canada.ca homepage; search budget exhausted",
+  "problem": "URL is a site homepage, not the locator; not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "uofaGHG2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; web search budget exhausted",
+  "problem": "Not verified online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanRainPrivate2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL is only vancouver.ca homepage; search budget exhausted",
+  "problem": "URL is a site homepage; not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "vanPublicRooms2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://opendata.vancouver.ca",
+  "what_was_checked": "Cited URL is open-data portal homepage; search budget exhausted",
+  "problem": "Dataset URLs not given; not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "majdabadi2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "DOI not resolvable by fetch (provenance block); search budget exhausted",
+  "problem": "Not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bcucG25224",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.bcuc.com",
+  "what_was_checked": "Cited URL is BCUC homepage; search budget exhausted",
+  "problem": "URL is a site homepage, not the order; not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "bcucG526",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.bcuc.com",
+  "what_was_checked": "Cited URL is BCUC homepage; search budget exhausted",
+  "problem": "URL is a site homepage, not the order; not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "bcucG34522A",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.bcuc.com",
+  "what_was_checked": "Cited URL is BCUC homepage; search budget exhausted",
+  "problem": "URL is a site homepage, not the decision; not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "bcucG17926",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.bcuc.com",
+  "what_was_checked": "Cited URL is BCUC homepage; search budget exhausted",
+  "problem": "URL is a site homepage, not the order; not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "uofaEERMP2021",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; web search budget exhausted",
+  "problem": "Not verified online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "abGreenhouse2023",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL is only open.alberta.ca homepage; search budget exhausted",
+  "problem": "URL is a site homepage; not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "bcGreenhouse2011",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; web search budget exhausted",
+  "problem": "Not verified online; note id says 2011 but report dated 24 Jan 2012",
+  "copyright": "public"
+ },
+ {
+  "id": "vanWaterPermits",
+  "verdict": "Unreachable",
+  "correct_url": "https://opendata.vancouver.ca",
+  "what_was_checked": "Cited URL is open-data portal homepage; search budget exhausted",
+  "problem": "Dataset URL not given; not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "quEDM1_2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM1-Spec-Sheet.pdf",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "quEDM2_2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM2-Spec-Sheet.pdf",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "edmBEB6",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL is only edmonton.ca homepage; search budget exhausted",
+  "problem": "URL is a site homepage; not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "bartlett2025",
+  "verdict": "Unreachable",
+  "correct_url": "https://ucalgary.scholaris.ca/server/api/core/bitstreams/8f66f77b-d1cd-4408-aad2-9cbb3076bcbc/content",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "abAIDCstrategy2024",
+  "verdict": "Unreachable",
+  "correct_url": "https://open.alberta.ca/publications/albertas-ai-data-centre-strategy",
+  "what_was_checked": "URL fetch refused (provenance block); search budget exhausted",
+  "problem": "Web search budget for this turn exhausted and URL not fetchable (tool provenance block); not verified online",
+  "copyright": "public"
+ },
+ {
+  "id": "aesoP2A2026",
+  "verdict": "Found",
+  "correct_url": "https://aesoengage.aeso.ca/pre-engagement-phase-ii-large-load-integration",
+  "what_was_checked": "Fetched AESO Engage page: title matches, last updated 8 Sep 2026; Phase 1 4 Jun 2025 with 1,200 MW interim limit; Proposed BYOG Process 26 Jun 2026; intake expected fall 2026; final proposal awaits data-centre regulation (Bill 8)",
+  "problem": "Working group also lists Capital Power, TransAlta, Dow, Imperial Oil, KALiNA, Kineticor (citation's list is partial but not wrong)",
+  "copyright": "public"
+ },
+ {
+  "id": "aesoBYOG2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://aesoengage.aeso.ca/49943/widgets/210873/documents/170854",
+  "what_was_checked": "Document exists as 'Proposed BYOG Process' (26 Jun 2026) linked from AESO Engage page; PDF content not readable by fetch",
+  "problem": "75 MW, tethering, fee and bridging figures not verified; cite the direct document URL rather than the engagement page",
+  "copyright": "public"
+ }
+]

@@ -1,0 +1,570 @@
+[
+ {
+  "id": "caaqs",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "ccme.ca URL refused by WebFetch (provenance); search did not return it; Alberta CAAQS page (alberta.ca/canadian-ambient-air-quality-standards) read as cross-check",
+  "problem": "Cited CCME page not opened. Alberta gov page confirms NO2 1-h 2025 = 42 ppb and PM2.5 24-h 2020 = 27 ug/m3; 79 ug/m3, the 2030 PM2.5 value (23) and statistical forms not confirmed.",
+  "copyright": "public"
+ },
+ {
+  "id": "mvBylaw1082",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://metrovancouver.org/boards/Bylaws/MVRD_Bylaw_1082_Consolidated.pdf",
+  "what_was_checked": "Opened the consolidated bylaw PDF (unofficial consolidation current to 29 May 2020, Amending Bylaw 1308); read s. 7(9) and 7(12)",
+  "problem": "s. 7(12) exemption needs ALL of: <100 kg/day CO, <5 kg/day NOx (as NO2) and <5 kg/day SOx, not NOx alone; still subject to s. 10, onus on claimant (s. 7(13)). s. 7(9) covers steam/internal combustion engines (Motor Vehicle Act compliance where applicable).",
+  "copyright": "public"
+ },
+ {
+  "id": "bcAirBackground",
+  "verdict": "Found",
+  "correct_url": "https://www.env.gov.bc.ca/soe/indicators/air/print_ver/envreportbc_no2_April2026.pdf",
+  "what_was_checked": "Opened NO2 PDF: 'Status of Nitrogen Dioxide in B.C. (2021-2023 & 2022-2024)', Environmental Reporting BC, 2026; Clark Drive 1-h 43.6 ppb, annual 15 ppb match",
+  "problem": "Second link (envreportbc_pm25_June2025.pdf) not opened (provenance refusal, search budget gone): PM2.5 27 / 7 ug/m3 unverified. 82 ug/m3 is a conversion, not on the page.",
+  "copyright": "public"
+ },
+ {
+  "id": "mvAirSummary2024",
+  "verdict": "Found",
+  "correct_url": "https://metrovancouver.org/services/air-quality-climate-action/Documents/annual-air-quality-summary-2024.pdf",
+  "what_was_checked": "Opened '2024 Annual Air Quality Summary' (Metro Vancouver): Clark Drive exceeds annual 12 ppb and 1-h 42 ppb NO2 objectives",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "acaEdmonton",
+  "verdict": "Not found",
+  "correct_url": "",
+  "what_was_checked": "One search 'Alberta Capital Airshed Edmonton East NO2 annual mean 2023 report' returned no ACA document; alberta.ca NO2 indicator page read: no station 2023 value (points to Air Data Warehouse)",
+  "problem": "No named document cited (only an internal audit note); 13.9 ppb for 2023 not confirmed from any primary source.",
+  "copyright": "unknown"
+ },
+ {
+  "id": "pcicWx3",
+  "verdict": "Found",
+  "correct_url": "https://doi.org/10.1016/j.dib.2025.111667",
+  "what_was_checked": "Read Sobie & Curry 2025, Data in Brief 60:111667 (PMC12151185): CWEC2020 base, 2040s-2080s, SSP1-2.6/2-4.5/5-8.5, 564 sites, temp/dew point/RH/pressure shifted, heat-wave quote present, Zenodo 15151116",
+  "problem": "PCIC app page timed out (not opened); version 'PCIC-WX-3.0.1' and date 27 Jan 2025 not confirmed; Edmonton not named in the article text.",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "mvClimate2016",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://metrovancouver.org/services/air-quality-climate-action/Documents/climate-projections-for-metro-vancouver-2016.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "emrbClimate2023",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.leduc.ca/wp-content/uploads/2025/07/CRVA-From-Risk-to-Resilience-EMRB-Climate-Resilience-Study-2023.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "mvDWCP",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://metrovancouver.org/services/water/Documents/drinking-water-conservation-plan.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "vanOnceThrough",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://bylaws.vancouver.ca/consolidated/11777.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "mvStageHistory",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://metrovancouver.org/boards/GVWD/WD-2026-05-29-ADD-I1.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "epcorStages",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.epcor.com/ca/en/ab/edmonton/conservation/water-restrictions/business-guidance.html",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "abNewLicenceLast",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.alberta.ca/datacentres/water",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "nbcImportance",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; not searched",
+  "problem": "Not checked: shared web-search budget (200/turn) exhausted before this item could be searched; local/library copy not accessible to this agent; re-run needed.",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vbbl2025Seismic",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://vancouver.ca/files/cov/guide-to-2025-vbbl-updates.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "nrcSeismic2020",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://nrc.canada.ca/sites/default/files/2020-01/NRC_CodesCanada_PublicReview_2020_NBC_NFC_NPC_NECB_combined.2020-01-28.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "jibcGroupLodging",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.jibc.ca/sites/default/files/2020-05/EMD-EMRG-1612-Intro-to-GL-Participant-Guide-20150826.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "unknown"
+ },
+ {
+  "id": "vanHubs",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://vancouver.ca/home-property-development/disaster-support-hubs.aspx",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "edmWarming",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.edmonton.ca/programs_services/emergency_preparedness/extreme-weather-winter",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "cec2024ESS",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; not searched",
+  "problem": "Not checked: shared web-search budget (200/turn) exhausted before this item could be searched; local/library copy not accessible to this agent; re-run needed.",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanUndrip",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://council.vancouver.ca/20221025/documents/p1.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "bcDeclarationAct",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/19044",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "bcEAthresholds",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/243_2019",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "aucGuidance",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.auc.ab.ca/guidance-for-proponents/",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "vanNationsNamed",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.musqueam.bc.ca/departments/title-and-rights/iga/",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "unknown"
+ },
+ {
+  "id": "edmNationsNamed",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.treatysix.org/nation-listing",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "unknown"
+ },
+ {
+  "id": "nrcanPV2024",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://natural-resources.canada.ca/sites/nrcan/files/canmetenergy/files/pdf/PV_potential_summary_report_appendix-EN.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "vanI2Ground",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-I-2.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "nbc2020Live",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; not searched",
+  "problem": "Not checked: shared web-search budget (200/turn) exhausted before this item could be searched; local/library copy not accessible to this agent; re-run needed.",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "energyStarCA",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://portfoliomanager.energystar.gov:443/pdf/reference/Canadian%20National%20Median%20Table.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "scieu2024",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www150.statcan.gc.ca/n1/daily-quotidien/260626/dq260626d-eng.htm",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "ftaVibration",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.transit.dot.gov/sites/fta.dot.gov/files/docs/research-innovation/118131/transit-noise-and-vibration-impact-assessment-manual-fta-report-no-0123_0.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "vanEmbodied",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://vancouver.ca/files/cov/embodied-carbon-guidelines.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "vanixPoints",
+  "verdict": "Not a document",
+  "correct_url": "",
+  "what_was_checked": "Text cites operator claims (VANIX/YEGIX) and an internal audit note, no named document",
+  "problem": "Operator claims, no document named; not searched (budget exhausted).",
+  "copyright": "unknown"
+ },
+ {
+  "id": "bchTCIP2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/corporate/regulatory-planning-documents/regulatory-matters/transmission-customer-interconnection-policy-workshop2-presentation-2026-03-04.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "aesoDC2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; not searched",
+  "problem": "Not checked: shared web-search budget (200/turn) exhausted before this item could be searched; local/library copy not accessible to this agent; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "lbnlLargeLoad2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://eta-publications.lbl.gov/sites/default/files/2025-01/electricity_rate_designs_for_large_loads_evolving_practices_and_opportunities_final.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "dkHeatCap2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; not searched",
+  "problem": "Not checked: shared web-search budget (200/turn) exhausted before this item could be searched; local/library copy not accessible to this agent; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "sailor2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; not searched",
+  "problem": "Not checked: shared web-search budget (200/turn) exhausted before this item could be searched; local/library copy not accessible to this agent; re-run needed.",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "abConsultPolicy2013",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; not searched",
+  "problem": "Not checked: shared web-search budget (200/turn) exhausted before this item could be searched; local/library copy not accessible to this agent; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "duvenhageKroger1996",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; not searched",
+  "problem": "Not checked: shared web-search budget (200/turn) exhausted before this item could be searched; local/library copy not accessible to this agent; re-run needed.",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "molla2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; not searched",
+  "problem": "Not checked: shared web-search budget (200/turn) exhausted before this item could be searched; local/library copy not accessible to this agent; re-run needed.",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "jin2020",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; not searched",
+  "problem": "Not checked: shared web-search budget (200/turn) exhausted before this item could be searched; local/library copy not accessible to this agent; re-run needed.",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "salamanca2014",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; not searched",
+  "problem": "Not checked: shared web-search budget (200/turn) exhausted before this item could be searched; local/library copy not accessible to this agent; re-run needed.",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "ashraeCh45",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; not searched",
+  "problem": "Not checked: shared web-search budget (200/turn) exhausted before this item could be searched; local/library copy not accessible to this agent; re-run needed.",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "squamishNEU2010",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://squamish.ca/assets/Land-Use-Policies/61bbc09bea/Squamish-NEU-Final-Feasibility-Report.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "energiforsk2022life",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://energiforsk.se/media/31455/liftetime-predictions-and-status-assessments-energiforskrapport-2022-872.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "tbsCBA2018",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.canada.ca/en/treasury-board-secretariat/services/federal-regulatory-management/guidelines-tools/policy-cost-benefit-analysis.html",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "scotHeat2011",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.gov.scot/publications/study-recovery-heat-power-generation-scotland/pages/5/",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "vanNEURates2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://council.vancouver.ca/20251112/documents/spec1d.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "nrelESIF2019",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://nrel.gov/docs/fy19osti/74464.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "vanNEConnect2013",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://guidelines.vancouver.ca/bulletins/bulletin-sustainability-neighbourhood-energy-connectivity-standards.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "upsiteASHRAE5",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.upsite.com/blog/major-changes-to-ashraes-fifth-edition-of-thermal-guidelines-part-3-liquid-cooling-chapter-updates/",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed. Also: industry blog, not a primary source (ASHRAE text not read, per the citation itself).",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "nrelBatt2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://docs.nrel.gov/docs/fy25osti/93281.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "nrelATBcommBatt2024",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://atb.nrel.gov/electricity/2024/commercial_battery_storage",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "bchESI2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://bchydro.com/content/dam/BCHydro/customer-portal/documents/power-smart/business/programs/esi-customer-program-manual.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "bcucG6426",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.ordersdecisions.bcuc.com/bcuc/orders/en/523115/1/document.do",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "aesoMicrogen2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.aeso.ca/assets/Connecting-Microgeneration.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "bcucG3026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.ordersdecisions.bcuc.com/bcuc/orders/en/523073/1/document.do",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "nrcanEVinfra2024",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://natural-resources.canada.ca/energy-efficiency/transportation-alternative-fuels/resource-library/electric-vehicle-charging-infrastructure-for-canada/25756",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "vanRates2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://vancouver.ca/home-property-development/metered-rates.aspx",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "epcorBylaw19626",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://epcor.com/content/dam/epcor/documents/supporting-documents/epcor_water-services_bylaw%E2%80%8B-19626.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "epcorWW2024app",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2024_water-rate-application-appendix-a-summary-of-bylaw-and-key-changes.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "epcorWWpbr2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2025-2027-wastewater-pbr-application.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "mvUT019",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://metrovancouver.org/boards/Policies/interim-reclaimed-water.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "ubcReclaimed2022",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.sustain.ubc.ca/sites/default/files/2022-024_ReclaimedWaterBenefitsAndCost_Patino.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "unknown"
+ },
+ {
+  "id": "epaRain2013",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.epa.gov/sites/production/files/2015-11/documents/rainharvesting.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "vanISMP2014",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://vancouver.ca/files/cov/integrated-stormwater-management-best-practice-toolkit-volume-2.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "femRain",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.energy.gov/cmei/femp/rainwater-harvesting-systems-technology-review",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "edmBylaw21442",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Cited URL not opened: https://www.gov.edmonton.ab.ca/sites/default/files/public-files/documents/bl21442.pdf",
+  "problem": "Not checked: WebFetch refused this URL (not in provenance set) and the shared web-search budget (200/turn) was exhausted before a search could surface it; re-run needed.",
+  "copyright": "public"
+ },
+ {
+  "id": "ceudResTable2",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; not searched",
+  "problem": "Not checked: shared web-search budget (200/turn) exhausted before this item could be searched; local/library copy not accessible to this agent; re-run needed.",
+  "copyright": "public"
+ }
+]
