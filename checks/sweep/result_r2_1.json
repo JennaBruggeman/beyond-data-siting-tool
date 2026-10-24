@@ -1,0 +1,522 @@
+[
+ {
+  "id": "ashrae",
+  "verdict": "Found",
+  "correct_url": "https://www.ashrae.org/file library/technical resources/bookstore/supplemental files/therm-gdlns-5th-r-e-refcard.pdf",
+  "what_was_checked": "ASHRAE TC 9.9 reference card (Thermal Guidelines 5th ed.): recommended inlet 18–27 °C for A1–A4",
+  "problem": "Free-cooling bin method from CWEC is an internal Formulas-sheet calculation, not checked; H1 class recommended range is 18–22 °C",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "clf",
+  "verdict": "Unreachable",
+  "correct_url": "https://carbonleadershipforum.org/the-embodied-carbon-benchmark-report/",
+  "what_was_checked": "CLF Embodied Carbon Benchmark Report (Apr 2025, 292 buildings) exists; page/project page give no figures",
+  "problem": "461 kgCO2e/m² could not be verified: full report only in Flipsnack viewer; citation names no report title/year",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "crf",
+  "verdict": "Not a document",
+  "correct_url": "",
+  "what_was_checked": "Formulas-sheet note combining a standard formula with three references (NREL ATB, IEA SHC Task 54, Barroso ch. 8)",
+  "problem": "Composite internal note; underlying references not individually checked",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "edmParcel",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "One search for data.edmonton.ca dkk9-cj3x; no result surfaced; fetch blocked without a search hit",
+  "problem": "Dataset ID, field names and Rooflines 2019 dataset not verified; text cites two datasets but gives one URL",
+  "copyright": "public"
+ },
+ {
+  "id": "ess",
+  "verdict": "Not a document",
+  "correct_url": "",
+  "what_was_checked": "Formulas-sheet note combining BC ESS/JIBC, Edmonton shelter standard and Health Canada figures",
+  "problem": "Composite internal note; none of the three underlying documents named precisely enough to check",
+  "copyright": "public"
+ },
+ {
+  "id": "femp",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://www.energy.gov/node/849241",
+  "what_was_checked": "DOE FEMP BMP #10 page opened (energy.gov/node/849241)",
+  "problem": "BMP #10 gives only Make-up = Evaporation + Blowdown + Drift and cycles ≈ make-up/blowdown; it does not state evaporation ≤ Q/h_fg, ~1.5 L/kWh or blowdown = E/(C−1) (these are derivations); ISO 30134-9 not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "fortis",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.cdn.fortisbc.com/libraries/docs/default-source/about-us-documents/regulatory-affairs-documents/gas-utility/rateschedule_3.pdf",
+  "what_was_checked": "Search found FortisBC tariff pages and rateschedule_1.pdf on same CDN path; rate-schedule-3 PDF not surfaced so could not be opened; tariff/rates pages did not render Rate 3 figures",
+  "problem": "$9.305/GJ, effective dates and rider list not verified; carbon-tax claim not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "fortum",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.fortum.com/fi/lammitys-ja-jaahdytys/yritykset-ja-taloyhtiot/kaukolampoa-yrityksille/avoin-kaukolampo/avoin-kaukolampo-ostohinnat",
+  "what_was_checked": "One search (Finnish title); Fortum page not surfaced, so fetch not permitted",
+  "problem": "€11–€50/MWh price table and 1 May 2026 date not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "g9425",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.ordersdecisions.bcuc.com/bcuc/orders/en/522707/1/document.do",
+  "what_was_checked": "Search found adjacent BCUC IDs; 522706 = G-93-25 (8 Apr 2025, Creative Energy LTRP), so 522707 plausibly G-94-25, but it could not be opened",
+  "problem": "$38.5 M capex rejection and $15 M developer-cost threshold not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "gridBC",
+  "verdict": "Found",
+  "correct_url": "https://www2.gov.bc.ca/gov/content/environment/climate-change/data/electricity",
+  "what_was_checked": "BC EEIF page: integrated grid 2025 = 22.8, 2024 = 9.9 tCO2e/GWh, consumption-based",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "heatPhys",
+  "verdict": "Not a document",
+  "correct_url": "",
+  "what_was_checked": "Physics rule plus formula with references (Green Grid WP29, ISO/IEC 30134-6)",
+  "problem": "Physics/formula note; Green Grid WP29 and ISO/IEC 30134-6 not individually checked",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "iso9613",
+  "verdict": "Found",
+  "correct_url": "https://www.iso.org/standard/74047.html",
+  "what_was_checked": "ISO 9613-2:2024 (ed. 2, Jan 2024, confirmed 2025) exists",
+  "problem": "Screening formula is a simplification, not from the standard; NoiseModelling not checked",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "lbnl2024",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://eta-publications.lbl.gov/publications/2024-lbnl-data-center-energy-usage-report",
+  "what_was_checked": "LBNL ETA page: Shehabi et al., LBNL-2001637, 19 Dec 2024, DOI 10.71468/P1WC7Q",
+  "problem": "Details correct but URL is an MIT Climate Portal copy, not the LBNL primary; use LBNL page (DOI 10.71468/P1WC7Q)",
+  "copyright": "public"
+ },
+ {
+  "id": "lorenz",
+  "verdict": "Not a document",
+  "correct_url": "",
+  "what_was_checked": "Formulas-sheet note citing Reinholdt 2018, Pieper 2020, Alissa, Wahlroos",
+  "problem": "Composite internal note; underlying papers not individually checked",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "neu9552",
+  "verdict": "Found",
+  "correct_url": "https://bylaws.vancouver.ca/9552c.PDF",
+  "what_was_checked": "By-law 9552 Sch. C: energy charge $65.172/MWh; Part 4 credit for heat returned at 50% of energy charge",
+  "problem": "$32.59/MWh is a derived figure (65.172 × 50%), not stated in the schedule",
+  "copyright": "public"
+ },
+ {
+  "id": "neuReport",
+  "verdict": "Found",
+  "correct_url": "https://council.vancouver.ca/20251112/documents/spec1d.pdf",
+  "what_was_checked": "RTS 18251 (21 Oct 2025): 47 buildings, 667,000 m², 71% renewable forecast 2025, gas $2.23/GJ, RNG riders",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "parssinen",
+  "verdict": "Found",
+  "correct_url": "https://doi.org/10.1016/j.scs.2018.10.023",
+  "what_was_checked": "Pärssinen, Wahlroos, Manner, Syri 2019, Sustainable Cities and Society 44:428–444; capex €60k/€575k/€5.5M; DH pays marginal cost − €5/MWh",
+  "problem": "'2 MW' for €575k is an inference (2 MW blocks); 1.8–5.1 yr payback covers the large case; medium case >10 yr in Min scenario, small case >10 yr mostly",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "persson",
+  "verdict": "Found",
+  "correct_url": "https://vbn.aau.dk/ws/files/330989757/1_s2.0_S0360544219306097_main.pdf",
+  "what_was_checked": "Persson, Wiechers, Möller, Werner 2019, Energy 176:604–622; C1 = 212 €/m, C2 = 4464 €/m²",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "queue",
+  "verdict": "Found",
+  "correct_url": "https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/accounts-billing/electrical-connections/business-practice-load-interconnection-queue-mgmt.pdf",
+  "what_was_checked": "BC Hydro Business Practice v1.5 (27 Feb 2026): 'The queue is not publicly available as it contains confidential customer information'",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "rts19744",
+  "verdict": "Found",
+  "correct_url": "https://council.vancouver.ca/20260714/documents/rr1.pdf",
+  "what_was_checked": "RTS 19744, 30 Jun 2026, 111 E 5th Ave & 2060 Quebec St; up to 40 MW; cond. 1.11 material condition, applicant's sole cost; 579 submissions",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "solar",
+  "verdict": "Not a document",
+  "correct_url": "",
+  "what_was_checked": "Formulas-sheet note on Vancouver Solar Access Guidelines",
+  "problem": "Internal note; guideline edition/amendment and equinox 10:00–16:00 criterion not checked (no URL, no search spent)",
+  "copyright": "public"
+ },
+ {
+  "id": "woodcroft",
+  "verdict": "Found",
+  "correct_url": "https://www.aeso.ca/assets/Uploads/projects/2582/EDTI-Distribution-Deficiency-Report-2025-Updated.pdf",
+  "what_was_checked": "EPCOR DDR Rev 1, 12 Sep 2025: N-1 firm 76.0 MVA; 2025 summer peak 66.2 MVA; 76.3 MVA by 2032",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "wsa",
+  "verdict": "Found",
+  "correct_url": "https://free.bcpublications.ca/civix/document/id/complete/statreg/36_2016",
+  "what_was_checked": "Water Sustainability Regulation B.C. Reg. 36/2016 Sch. A item 4 'Cooling' confirmed",
+  "problem": "Item 9 could not be read (page text truncated); Sch. A defines industrial-purpose uses, licence requirement comes from Act s.6(1)",
+  "copyright": "public"
+ },
+ {
+  "id": "sunLuo2021",
+  "verdict": "Found",
+  "correct_url": "https://eta-publications.lbl.gov/publications/prototype-energy-models-data-centers",
+  "what_was_checked": "Sun, Luo, Luo, Hong 2021, Energy and Buildings 231:110603",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "doeFederal",
+  "verdict": "Found",
+  "correct_url": "https://www.energy.gov/sites/prod/files/2014/06/f16/casestudy_3federaldatacenters_0.pdf",
+  "what_was_checked": "DOE FEMP/LBNL case study, May 2014 (DOE/EE-1075): 33/50/62 W/ft²",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "fan2007",
+  "verdict": "Found",
+  "correct_url": "https://www.barroso.org/publications/PowerProvisioning.pdf",
+  "what_was_checked": "Fan, Weber, Barroso, ISCA '07 (June 2007)",
+  "problem": "Author-hosted copy; publisher is ACM (ISCA '07)",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "cie150",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://theilp.org.uk/publication/guidance-note-1-for-the-reduction-of-obtrusive-light-2021/",
+  "what_was_checked": "ILP GN01/20 copy on Brighton & Hove site; references CIE 150:2017 limits",
+  "problem": "URL is a council-hosted copy, not ILP; GN01/20 superseded by GN01/21 (May 2021)",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "healthCanada2026",
+  "verdict": "Found",
+  "correct_url": "https://www.canada.ca/en/health-canada/services/publications/healthy-living/guidance-upper-indoor-temperature-limits-protecting-older-adults.html",
+  "what_was_checked": "Health Canada guidance (June 2026): upper indoor limit 26 °C for adults 60+",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "statcanHousehold",
+  "verdict": "Found",
+  "correct_url": "https://open.canada.ca/data/en/dataset/18e24165-6a20-4c98-a20a-1fef1c4adcf4",
+  "what_was_checked": "Table 25-10-0060-01 'Household energy consumption, Canada and provinces', Statistics Canada",
+  "problem": "Open-data listing shows 2011–2019; 2021 coverage not confirmed online; local CSV not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "nrcanTrends",
+  "verdict": "Found",
+  "correct_url": "https://oee.rncan-nrcan.gc.ca/publications/statistics/trends/2020/residential.cfm",
+  "what_was_checked": "NRCan Trends 2020 residential: 95.70 GJ/household; space heating 61%",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "manitobaGH",
+  "verdict": "Found",
+  "correct_url": "https://www.gov.mb.ca/agriculture/crops/crop-management/print,energy-calculations.html",
+  "what_was_checked": "Manitoba Agriculture page: 2.1 GJ/m² for a double-poly greenhouse",
+  "problem": "Figure is per heating season (Sep–May), not stated per year; page marked archived",
+  "copyright": "public"
+ },
+ {
+  "id": "iesoGH",
+  "verdict": "Found",
+  "correct_url": "https://ieso.ca/-/media/Files/SaveOnEnergy/Industry/Greenhouse-Energy-Profile-Study.ashx",
+  "what_was_checked": "IESO Greenhouse Energy Profile Study (Posterity Group, 27 Sep 2019); Exhibits 53 and 73 exist",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "giacomelli",
+  "verdict": "Found",
+  "correct_url": "https://ceac.arizona.edu/sites/default/files/giacomelli%20heating.pdf",
+  "what_was_checked": "Giacomelli, ABE 483/583 Lecture #8 Heating Systems: covering U-values; 180 °F pipe loop example",
+  "problem": "Undated; 82 °C is a conversion of 180 °F",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "rootZone",
+  "verdict": "Found",
+  "correct_url": "https://farm-energy.extension.org/root-zone-heating-systems-for-greenhouses/",
+  "what_was_checked": "eXtension Farm Energy article (Bartok, UConn; Grubinger, UVM): water setpoint usually 100 °F (~38 °C)",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "ntnuRAS",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://www.ntnu.no/bridge/node/22667",
+  "what_was_checked": "NTNU page 'Current and Future Energy Use for Atlantic Salmon Farming in RAS in Norway'",
+  "problem": "8.8 kWh/kg is mean on-site energy per kg live-weight smolt (range 5.1–12.8); grow-out estimate is 6–10 kWh/kg",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "faoTrout",
+  "verdict": "Found",
+  "correct_url": "https://fao.org/fishery/docs/CDrom/aquaculture/I1129m/file/en/en_rainbowtrout.htm",
+  "what_was_checked": "FAO Cultured Aquatic Species fact sheet, Oncorhynchus mykiss",
+  "problem": "9–14 °C is the spawning/growth range; page gives culture optimum below 21 °C and 12–21 °C site criterion",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "dfoRAS",
+  "verdict": "Found",
+  "correct_url": "https://waves-vagues.dfo-mpo.gc.ca/library-bibliotheque/332156.pdf",
+  "what_was_checked": "DFO CSAS SAR 2008/001 'Potential Technologies for Closed-containment Saltwater Salmon Aquaculture' (DFO page opened)",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "gurreri2023",
+  "verdict": "Not found",
+  "correct_url": "https://www.cetjournal.it/cet/23/105/039.pdf",
+  "what_was_checked": "Two searches (author + CET 105 + Chlorella thermoregulation) returned no matching paper; URL could not be opened without a search hit",
+  "problem": "Existence, page 229 and 217 kWh/kgDW unconfirmed; needs a manual check of CET vol. 105",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "schon2024",
+  "verdict": "Found",
+  "correct_url": "https://brill.figshare.com/articles/journal_contribution/Effect_of_temperature_on_growth_metabolism_and_gas_exchange_in_i_Hermetia_illucens_i_larvae_reared_under_commercial_and_laboratory_conditions/27223125",
+  "what_was_checked": "Brill-hosted record: Schøn et al., 'Effect of temperature on growth, metabolism and gas exchange in Hermetia illucens larvae…', posted 29 Oct 2024",
+  "problem": "Journal name, volume and DOI not shown on the record; add full title and DOI",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "liu2011",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://www.usenix.org/conference/hotcloud11/data-furnace-heating-cloud-computing",
+  "what_was_checked": "Liu, Goraczko, James, Belady, Lu, Whitehouse, HotCloud '11 (USENIX), 2011",
+  "problem": "URL is a UMN course-page copy; primary is USENIX",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "wsuEV",
+  "verdict": "Found",
+  "correct_url": "https://www.energy.wsu.edu/documents/1%20Charging%20Speeds%20Ports%20Specs.pdf",
+  "what_was_checked": "WSU Energy Program sheet (M. Thiessen Spencer, updated 18 Dec 2023): L1/L2/DCFC power levels",
+  "problem": "Add author and date",
+  "copyright": "unknown"
+ },
+ {
+  "id": "vanDCFC",
+  "verdict": "Found",
+  "correct_url": "https://council.vancouver.ca/20210706/documents/r4.pdf",
+  "what_was_checked": "RTS 14229 (22 Jun 2021) EV charging in new non-residential buildings; DCFC 'typically… between 25 and 400kW'",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "silber2024",
+  "verdict": "Found",
+  "correct_url": "https://publikationen.bibliothek.kit.edu/1000163825",
+  "what_was_checked": "Silber, Scheubner, Märtz 2024, IJEPES 155:109540; simultaneity factor 0.5",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanParking",
+  "verdict": "Found",
+  "correct_url": "https://guidelines.vancouver.ca/bulletins/bulletin-parking-loading-design-supplement.pdf",
+  "what_was_checked": "Parking By-law 6059 Design Supplement (am. 16 Feb 2024): standard 90° stall 2.50 × 5.50 m",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "edmParking",
+  "verdict": "Found",
+  "correct_url": "https://webdocs.edmonton.ca/zoningbylaw/ZoningBylaw/Part1/Development/54_1_General_On-Site_Parking_and_Loading_Requirements.htm",
+  "what_was_checked": "Edmonton Zoning Bylaw 12800 s.54.1 page exists (amended to 2020)",
+  "problem": "Page itself does not state it is superseded; superseded status not verified here",
+  "copyright": "public"
+ },
+ {
+  "id": "m104",
+  "verdict": "Found",
+  "correct_url": "https://www.bclaws.gov.bc.ca/civix/document/id/mo/hmo/m0104_2019",
+  "what_was_checked": "M104, 18 Mar 2019, Minister of Energy, Mines and Petroleum Resources, EV charging exemption under UCA s.88(3); G-66-19 seen on bcuc.com in search",
+  "problem": "G-66-19 not opened",
+  "copyright": "public"
+ },
+ {
+  "id": "dea",
+  "verdict": "Found",
+  "correct_url": "https://ens.dk/en/analyses-and-statistics/technology-data-generation-electricity-and-district-heating",
+  "what_was_checked": "DEA page: data sheet for electricity and district heat 'Updated August 2026'",
+  "problem": "Sheet numbers 40/41/44/140 and 2025-EUR basis not confirmed on page; local xlsx/extract not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "wilsonWorrall",
+  "verdict": "Found",
+  "correct_url": "https://pubs.rsc.org/en/Content/ArticleLanding/2021/EW/D1EW00411E",
+  "what_was_checked": "Wilson & Worrall 2021, Environ. Sci.: Water Res. Technol. 7(10):1760–1777, DOI 10.1039/D1EW00411E",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "kwlSewer",
+  "verdict": "Found",
+  "correct_url": "https://www.canadianconsultingengineer.com/awards/pdfs/2014/F5_HeatSeekingSewerModel.pdf",
+  "what_was_checked": "KWL for Metro Vancouver, 'Heat-Seeking Sewer Model', 2014 CCE Awards submission (Apr 2014)",
+  "problem": "Award submission hosted by a trade magazine, not a technical report",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "cda2023",
+  "verdict": "Found",
+  "correct_url": "https://live.copper.org/copperpowers/reports/copper-in-data-centers-report.pdf",
+  "what_was_checked": "'Copper in Data Centers: A North American Market Study' (CDA/BlueWeave, Sep 2023): 20–40 tons/MW",
+  "problem": "Range is stated without derivation; report also gives ~3 t/MW at rack level",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "stratego",
+  "verdict": "Found",
+  "correct_url": "https://heatroadmap.eu/wp-content/uploads/2018/09/STRATEGO-WP2-Background-Report-2-Hourly-Distributions-1.pdf",
+  "what_was_checked": "STRATEGO WP2 Background Report 2 / D2.2 'Creating Hourly Profiles to Model both Demand and Supply' (Connolly et al., Aalborg, 2015)",
+  "problem": "STRATEGO is a separate IEE project, not 'Heat Roadmap Europe' itself (hosted on HRE site)",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vbblHDD",
+  "verdict": "Found",
+  "correct_url": "https://free.bcpublications.ca/civix/document/id/public/vbbl2014/ep001021.1",
+  "what_was_checked": "VBBL 2014 Table 1.1.3.1.A: degree-days below 18 °C = 2 925",
+  "problem": "Table is 1.1.3.1.A (and .B)",
+  "copyright": "public"
+ },
+ {
+  "id": "hiltunen2020",
+  "verdict": "Found",
+  "correct_url": "https://www.mdpi.com/1996-1073/13/14/3551",
+  "what_was_checked": "Hiltunen & Syri 2020, Energies 13(14):3551 'Highly Renewable District Heat for Espoo Utilizing Waste Heat Sources'",
+  "problem": "Paper assumes 0.6 M€/MW; 0.5–0.65 range comes from sources it cites (Wahlroos; Rämä)",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "cusp",
+  "verdict": "Unreachable",
+  "correct_url": "https://energypoverty.ca/",
+  "what_was_checked": "One search; energypoverty.ca not surfaced so it could not be opened",
+  "problem": "6% threshold not verified on CUSP site",
+  "copyright": "unknown"
+ },
+ {
+  "id": "daikinCAT624",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://tahoeweb.daikinapplied.com/api/general/DownloadDocumentByName/media/CAT624.pdf/",
+  "what_was_checked": "Daikin Applied Catalog 624-23, Trailblazer AGZ-E (©2022): AHRI 370 sound power Tables 6–7 on p.18",
+  "problem": "URL is a sales-rep (Hoffman & Hoffman) copy; primary is Daikin Applied; cite as Catalog 624-23",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "catTM9338",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://powergenenterprises.com/wp-content/uploads/2019/10/GS2888-Caterpillar-3516-GeneratorSet-Performance_Sheet.pdf",
+  "what_was_checked": "Caterpillar gen-set performance data, Ref TM9338 (June 2013): exhaust and mechanical sound data at 22.97 ft (~7 m)",
+  "problem": "Only copy found is on a used-equipment dealer site, not Caterpillar; no Caterpillar-hosted URL found",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "oldsNIA",
+  "verdict": "Found",
+  "correct_url": "https://www.olds.ca/media/egilzm3p/30732_x0011_tp-31-noise-impact-assessment_000011.pdf",
+  "what_was_checked": "NIA Stage-1.5 Olds Data Center (007700-NIA-001), OpenCycle for Synapse, Rev 1, 24 Mar 2026",
+  "problem": "Table 1 is equipment details with PWL in text; tabulated octave-band Lw is Appendix D, Table D",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "burlingtonNIA",
+  "verdict": "Found",
+  "correct_url": "https://www.burlington.ca/en/news/resources/Current-Development-Projects/Ward-4/3110-South-Service/Supporting-Documents/Noise%20and%20Vibration%20Study%20-%202026-05-05.pdf",
+  "what_was_checked": "SS Wilson Associates WA26-006, 5 May 2026: 12 chillers at 92 dBA each",
+  "problem": "Chiller data supplied by proponent (manufacturer info)",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "rvo2018",
+  "verdict": "Found",
+  "correct_url": "https://www.rvo.nl/sites/default/files/2018/11/Rapportage%20kansenkaart%20warmte%20uit%20datacenters.pdf",
+  "what_was_checked": "IF Technology (for Berenschot), published by RVO, 7 Nov 2018, RVO-178-1801/RP-DUZA",
+  "problem": "Commissioned by Ministry of EZK; RVO is publisher",
+  "copyright": "public"
+ },
+ {
+  "id": "necbHDD",
+  "verdict": "Unreachable",
+  "correct_url": "https://cbhcc-cchcc.ca/eng/public-review/2023_2/pcfs/necb20_divb_appc_001732.html",
+  "what_was_checked": "One search; CBHCC page not surfaced, so it could not be opened",
+  "problem": "Edmonton HDD 5,120 and table reference not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "lukeRAS",
+  "verdict": "Found",
+  "correct_url": "https://kamk.fi/wp-content/uploads/2025/11/ESITYS_Hukkalampo-kalankasvatuksessa-KAMK-Webinar-Pasi-Laajala-Luke-29.10.2025.pdf",
+  "what_was_checked": "Luke slides (Härkönen, Vielma, Laajala), KAMK webinar 29 Oct 2025: 4.6 GWh/yr for 1,000 t/yr trout",
+  "problem": "Figure is lake-water heating when below 15.5 °C (~9 months), Oulujärvi case",
+  "copyright": "unknown"
+ },
+ {
+  "id": "dreyer2021",
+  "verdict": "Found",
+  "correct_url": "https://link.springer.com/article/10.1007/s11367-021-01980-4",
+  "what_was_checked": "Springer article page: 10.38 MJ heating-related electricity per kg live mealworm",
+  "problem": "Per kg live mealworm; author list, 26:2232 not visible in fetched text",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "oekoBSF",
+  "verdict": "Found",
+  "correct_url": "https://ccacoalition.org/sites/default/files/resources//Oeko-Institut_Black_Soldier_Flies_20220516_final.pdf",
+  "what_was_checked": "Öko-Institut slides (UBA-funded), CCAC workshop 16 May 2022: Heat 3404 kWh/Mg input",
+  "problem": "Slide deck, not report; figure is on slide 4 (not p.5)",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "traneRTAF",
+  "verdict": "Found",
+  "correct_url": "https://www.trane.com/Resources/Partners/a41a3b61-a631-48b1-a8d8-3f25d0783c05/documents/RTAF-SLB001-GB_0620.pdf",
+  "what_was_checked": "Trane RTAF-SLB001-GB, June 2020: sound power tables pp.12–14",
+  "problem": "Sound tables span pp.12–14 by version; p.14 is HSS Extra Low Noise",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "energiforsk2020",
+  "verdict": "Found",
+  "correct_url": "https://energiforsk.se/media/28252/verktygslada-for-prosumtion-inom-fjarrvarme-energiforskrapport-2020-681.pdf",
+  "what_was_checked": "Energiforsk 2020:681 (Kensby et al., July 2020): Öppen Fjärrvärme contracts §2.5 pp.12–18, p.27",
+  "problem": "",
+  "copyright": "copyrighted"
+ }
+]
