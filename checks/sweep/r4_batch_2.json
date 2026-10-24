@@ -1,0 +1,567 @@
+[
+{
+"id": "edmParcel",
+"text": "Edmonton Property Information: total_gross_area, zoning, year_built per parcel; Rooflines 2019: building height — https://data.edmonton.ca/d/dkk9-cj3x",
+"url": "https://data.edmonton.ca/d/dkk9-cj3x",
+"used_by": [
+"Gross floor area",
+"Time horizons"
+]
+},
+{
+"id": "cusp",
+"text": "CUSP energy poverty 6% threshold — https://energypoverty.ca/",
+"url": "https://energypoverty.ca/",
+"used_by": [
+"Heat cost share of income"
+]
+},
+{
+"id": "ayuso2023",
+"text": "Ayuso-Virgili et al. 2023, Aquacultural Engineering 101:102314, energy demand of a salmon RAS (simulated) — full text (J.B. upload)",
+"url": "",
+"used_by": [
+"Fish production supported"
+]
+},
+{
+"id": "fjfAars2020",
+"text": "Fjernvarme Fyn, Årsberetning 2020, p.9 production table and p.13: 'Varmepumperne tilknyttet Facebook har forbrugt 14.020 MWh el svarende til COP 4,5'; 230 TJ heat (Facebook heat pumps only, first full year) — https://www.fjernvarmefyn.dk/media/1754/fjernvarme_fyn_aarsberetning_2020.pdf",
+"url": "https://www.fjernvarmefyn.dk/media/1754/fjernvarme_fyn_aarsberetning_2020.pdf",
+"used_by": [
+"Heat-pump COP (Lorenz)",
+"Who pays which part"
+]
+},
+{
+"id": "vanRezoneTime",
+"text": "City of Vancouver: typical CD-1 rezoning 'Target ~16 weeks to Letter of Response', 'Target ~15 months to decision' (process overview); 'about one year to process (from fee payment to public hearing)' (apply-to-rezone page, Jun 2026) — https://vancouver.ca/files/cov/rezoning-process-overview.pdf",
+"url": "https://vancouver.ca/files/cov/rezoning-process-overview.pdf",
+"used_by": [
+"What a rezoning takes",
+"Time to build and connect"
+]
+},
+{
+"id": "tenK_life",
+"text": "Company filings on server useful life: Microsoft FY2022 four → six years; Alphabet FY2023 servers four → six; Amazon six (2024), a subset back to five (2025, 'increased pace of technology development'); Meta 4–5 → 5.5 years (2025) — SEC filings (OPERATOR FILING)",
+"url": "",
+"used_by": [
+"Time horizons"
+]
+},
+{
+"id": "van_floodplain",
+"text": "City of Vancouver Open Data, Designated floodplain — https://opendata.vancouver.ca/explore/dataset/designated-floodplain/",
+"url": "https://opendata.vancouver.ca/explore/dataset/designated-floodplain/",
+"used_by": [
+"Flood exposure"
+]
+},
+{
+"id": "wang2026",
+"text": "Wang et al. 2026, Environmental Science and Ecotechnology 31:100702 — https://doi.org/10.1016/j.ese.2026.100702 (full text checked by the atlas chat 15 Oct)",
+"url": "https://doi.org/10.1016/j.ese.2026.100702",
+"used_by": []
+},
+{
+"id": "gowlingEV2021",
+"text": "SECONDARY (law-firm summary): Gowling WLG, Regulation of electric vehicle charging services (2021): BC exempts EV charging from UCA Part 3 (BCUC G-66-19, pre-authorised by MO M104); Alberta unresolved — AUC Distribution System Inquiry final report (21 Feb 2021) made no final decision, p.60 \"most parties were of the view that no additional regulatory oversight is required at this time\"; AUC report itself not yet read — https://gowlingwlg.com/en/insights-resources/articles/2021/regulation-of-electric-vehicle-charging-services",
+"url": "https://gowlingwlg.com/en/insights-resources/articles/2021/regulation-of-electric-vehicle-charging-services",
+"used_by": []
+},
+{
+"id": "whiteDCeel",
+"text": "OPERATOR CLAIM: White Data Center slide deck on the Hokkaido METI site (Oct 2025): eel farming started Jan 2024 (3,500 eels) at a 20-rack data centre, Bibai — https://www.hkd.meti.go.jp/hokpp/20251015/1111/data01.pdf",
+"url": "https://www.hkd.meti.go.jp/hokpp/20251015/1111/data01.pdf",
+"used_by": []
+},
+{
+"id": "nfpa855tia",
+"text": "NFPA 855-2023 as amended by TIA 23-1 and 23-2: ESS units separated by at least 3 ft (0.9 m), less with fire testing; rooftop units 3 ft apart, ≥5 ft from roof edge; Hydro One (Ontario utility standard) quotes §9.5.2.6.1: 10 ft (3 m) to lot lines, public ways and buildings, reducible to 3 ft. NFPA 855 is not referenced in the National Fire Code 2020 (Claude checked the local text: 35 NFPA standards cited, 855 not among them) or the BC Fire Code 2024 amendments; VBBL 2025 Book I, BCBC 2024 and NFC – 2023 Alberta Edition do not cite it either and have no energy-storage provisions (Claude checked the full texts, 16 Oct; J.B. downloads). So in both provinces battery spacing is not set by the building or fire code: it falls to the authority having jurisdiction, the electrical code and the listing (UL 9540/9540A) — https://docinfofiles.nfpa.org/files/AboutTheCodes/855/TIA_855_23_1.pdf",
+"url": "https://docinfofiles.nfpa.org/files/AboutTheCodes/855/TIA_855_23_1.pdf",
+"used_by": [
+"Storage footprint",
+"Battery storage",
+"Space for the plant"
+]
+},
+{
+"id": "spencerBldg",
+"text": "Smith + Andersen, Spencer Building (515 W Hastings, Vancouver) powered-shell sheet: air-cooled chillers and generators \"utilizing the limited roof space available\"; no screening information; City permit not found — https://www.smithandandersen.com/sites/default/files/project_profiles/2026-08/Spencer%20Building%20Powered%20Shell%2025770.pdf",
+"url": "https://www.smithandandersen.com/sites/default/files/project_profiles/2026-08/Spencer%20Building%20Powered%20Shell%2025770.pdf",
+"used_by": [
+"What is seen from public space"
+]
+},
+{
+"id": "mvWWTP2026",
+"text": "Metro Vancouver, Wastewater Treatment Plants and Processes (J.B. screenshot 16 Oct 2026): five plants — Iona Island, Lions Gate, Lulu Island, Annacis Island, Northwest Langley — and the sewerage area each serves; over 1 billion litres a day. Street addresses not yet checked against Metro Vancouver pages (a chat search gave business-listing addresses; Lulu Island differs, 13400 vs 13500 Gilbert Road) — https://metrovancouver.org/services/liquid-waste",
+"url": "https://metrovancouver.org/services/liquid-waste",
+"used_by": []
+},
+{
+"id": "quEDM2_2026",
+"text": "Qu Data Centres, EDM2 Facility Overview spec sheet (J.B. download 16 Oct 2026): Edmonton; Uptime Institute Tier III certified (claim); raised floor phase 1 19,000 ft² + phase 2 14,196 ft², building 35,000 ft² (≈3,252 m²); 2.5 MW Tier II / 3 MW Tier III; 1,450 tons of N+1 cooling (≈5.1 MW); ~5–10 kW per rack; no PUE and no heat recovery stated (claims). Security, fuel, generator and carrier details deliberately not carried — https://qudatacentres.com/hubfs/location-spec-sheets/EDM2-Spec-Sheet.pdf",
+"url": "https://qudatacentres.com/hubfs/location-spec-sheets/EDM2-Spec-Sheet.pdf",
+"used_by": [
+"IT load, operator claim"
+]
+},
+{
+"id": "abAIDCstrategy2024",
+"text": "Government of Alberta, Alberta's AI Data Centre Strategy: Powering the future of artificial intelligence (Technology and Innovation, Dec 2024, ISBN 978-1-4601-6171-5; J.B. upload 16 Oct 2026): three pillars — power capacity (off-grid and grid-connected solutions \"that avoid compromising the affordability and reliability of electricity for Albertans\"; natural gas with renewables and possibly carbon capture), sustainable cooling (\"Alberta will explore innovative ways of capturing and utilizing the heat generated by AI data centres\"; cooling strategies that respect the province's water capacity; Water Act allocation), economic growth (tax and shared prosperity). An intention, not a requirement — https://open.alberta.ca/publications/albertas-ai-data-centre-strategy",
+"url": "https://open.alberta.ca/publications/albertas-ai-data-centre-strategy",
+"used_by": [
+"Heat available after heat pump",
+"Evaporative water"
+]
+},
+{
+"id": "edm7140sun",
+"text": "Edmonton Zoning Bylaw 20001 (Charter Bylaw 20001 as adopted, effective 1 Jan 2024; City PDF, OCR text, J.B. download 14 Oct 2026; later amendments not checked), s. 7.140 Special Information Requirements, subs. 9 Sun Shadow Impact Study: the Development Planner MAY require one only where the development is a Discretionary Development (9.1); prepared by an Alberta P.Eng. or architect (9.2.1); shadows every 3 hours between sunrise and sunset, Mountain Standard Time, on 21 Mar, 21 Jun, 21 Sep and 21 Dec (9.2.3); impact judged as the difference between the maximum massing the zone allows and the proposed massing (9.3.1); may refuse or require redesign (9.3.2–9.3.3). No shadow clause found in the standard industrial zones (BE, IM, IH); shadow clauses appear for towers in RL and MU (in compliance with 7.140), UI height variances, and special areas (HOR, CMU, AED, RTCC, ALA); 3.50 Energy and Technology Park mentions shading only as tree planting. s. 2.140 IH lists permitted uses only (Major Industrial; Minor Industrial limited to those existing at 1 Jan 2024) and no discretionary uses, so the study cannot be required there; the bylaw names no data-centre use (Minor/Major Industrial definitions, Part 8), so the use class is for the Development Planner to determine. Search of the full text for shad/shadow/sun — https://zoningbylaw.edmonton.ca/",
+"url": "https://zoningbylaw.edmonton.ca/",
+"used_by": [
+"Shadow on neighbours"
+]
+},
+{
+"id": "censusIncome2021",
+"text": "Statistics Canada 2021 Census, median after-tax household income 2020: Vancouver CMA $79,500, Edmonton CMA $84,000 (The Daily, 13 Jul 2022; Table 98-10-0058-01) — https://www150.statcan.gc.ca/n1/daily-quotidien/220713/dq220713d-eng.htm",
+"url": "https://www150.statcan.gc.ca/n1/daily-quotidien/220713/dq220713d-eng.htm",
+"used_by": [
+"Heat cost share of income"
+]
+},
+{
+"id": "abDCenv2026",
+"text": "Government of Alberta, Data Centres in Alberta: EPA regulatory role and environmental requirements (20 Jul 2026): an EPEA approval is required for a larger combustion power plant or a backup power generation system over 50 MW, with emission limits set case by case; Alberta reviews wastewater, stormwater and cooling-water blowdown. Federal Multi-Sector Air Pollutants Regulations cover gaseous-fuel spark-ignition engines only, not diesel — https://www.alberta.ca/system/files/epa-data-centre-regulatory-role-and-environmental-requirements.pdf",
+"url": "https://www.alberta.ca/system/files/epa-data-centre-regulatory-role-and-environmental-requirements.pdf",
+"used_by": [
+"Generator NOx and PM"
+]
+},
+{
+"id": "abRainwater2010",
+"text": "Alberta Guidelines for Residential Rainwater Harvesting Systems (2010): uses toilet and urinal flushing and sub-surface irrigation; size with 20% dead space; first flush 0.5–1.5 mm; residential only, commercial referred to federal reclaimed-water guidance; Alberta Health Public Health Guidelines for Water Reuse and Stormwater Use (Jan 2021) list cooling towers among end uses but listing is not approval — https://open.alberta.ca/dataset/0575ad25-9a1c-4adf-85d1-f002ede89f72/resource/94537319-0a46-42b1-aad0-be21016a8417/download/5917517-2010-alberta-guidelines-residential-rain-harvesting-systems.pdf",
+"url": "https://open.alberta.ca/dataset/0575ad25-9a1c-4adf-85d1-f002ede89f72/resource/94537319-0a46-42b1-aad0-be21016a8417/download/5917517-2010-alberta-guidelines-residential-rain-harvesting-systems.pdf",
+"used_by": [
+"Harvestable rainwater"
+]
+},
+{
+"id": "nfcAB2023_4313",
+"text": "National Fire Code – 2023 Alberta Edition (J.B. download 16 Oct 2026), Tables 4.3.13.4.-A and -B read by Claude: identical to NFC 2020 — Classes II and IIIA tanks for emergency generators, first storey 200 000 L per protected storage room (tanks > 2 500 L); basement and storeys above the first, 20 000 L (tanks > 2 500 L) or 45 000 L (tanks > 20 000 L). Vancouver: Fire By-law 14419 adds no quantity limits to the BC Fire Code, so the same tables govern in both cities — https://nrc-publications.canada.ca/",
+"url": "https://nrc-publications.canada.ca/",
+"used_by": [
+"Fuel kept on site"
+]
+},
+{
+"id": "buffa2019",
+"text": "Buffa et al. 2019, 5th generation district heating and cooling systems: a review of existing cases in Europe, Renewable and Sustainable Energy Reviews 104:504–522: FGZ Friesenberg, Zürich (2014), \"an HE is installed for direct heat recovery from a data center\" (p. 515), network supply 8–28 °C; in summer the warm pipe reaches about 30 °C after the data centre, limiting free cooling downstream; borehole count inconsistent in the paper (332 vs 153). FGZ factsheet (Swiss Federal Office of Energy support): data-centre waste heat 9 MW, 27 GWh/a, 450 boreholes as seasonal storage (18 GWh); not stated as measured — https://doi.org/10.1016/j.rser.2018.12.059",
+"url": "https://doi.org/10.1016/j.rser.2018.12.059",
+"used_by": [
+"Sewage heat recoverable"
+]
+},
+{
+"id": "oro2019",
+"text": "Oró, Taddeo, Salom 2019, Waste heat recovery from urban air cooled data centres to increase energy efficiency of district heating networks, Sustainable Cities and Society 45:522–542 (peer-reviewed; J.B. upload, read 18 Oct 2026): 1 MW air-cooled model, Barcelona; recovery from return air (up to 47 °C) or chiller condenser (up to 50 °C) with a heat pump to 90 °C; ERF on a primary-energy basis 25–45% / ~55% (not the ISO 30134-6 ERF) — https://doi.org/10.1016/j.scs.2018.12.012",
+"url": "https://doi.org/10.1016/j.scs.2018.12.012",
+"used_by": [
+"Heat temperature by cooling type",
+"Share of heat captured in liquid"
+]
+},
+{
+"id": "yuan2025",
+"text": "Yuan, Liu, Sun, Lin, Fan, Zhao, Kosonen 2025, Data center waste heat for district heating networks: A review, Renewable and Sustainable Energy Reviews 219:115863 (peer-reviewed; J.B. upload, read 18 Oct 2026): Table 2, air-side return hot air 25–47 °C, condenser coolant 40–50 °C; heat pumps essential for air-side heat — https://doi.org/10.1016/j.rser.2025.115863",
+"url": "https://doi.org/10.1016/j.rser.2025.115863",
+"used_by": [
+"Heat temperature by cooling type",
+"Share of heat captured in liquid"
+]
+},
+{
+"id": "bcucG5026",
+"text": "BCUC Order G-50-26 (12 Mar 2026): FortisBC Mainland Commodity Cost Recovery Charge $2.230 → $1.660/GJ from 1 Apr 2026; BCUC letters L-9-25 (12 Jun 2025) and L-27-25 (11 Sep 2025): unchanged at $2.230 — https://www.ordersdecisions.bcuc.com/bcuc/orders/en/523096/1/document.do",
+"url": "https://www.ordersdecisions.bcuc.com/bcuc/orders/en/523096/1/document.do",
+"used_by": [
+"Buyer ceiling price"
+]
+},
+{
+"id": "vanBudget2026",
+"text": "City of Vancouver 2026 Budget: property tax about 56% of operating revenue; police the largest spending share — https://vancouver.ca/files/cov/2026-budget.pdf",
+"url": "https://vancouver.ca/files/cov/2026-budget.pdf",
+"used_by": [
+"Who receives the tax"
+]
+},
+{
+"id": "gcDataResidency",
+"text": "Government of Canada, Direction on the secure use of commercial cloud services / electronic data residency: Protected B, Protected C and Classified data stored in Canada (or GC premises abroad); GC white paper: 'Data residency does not mitigate against the application of foreign laws' — https://www.canada.ca/en/government/system/digital-government/digital-government-innovations/cloud-services/direction-electronic-data-residency.html",
+"url": "https://www.canada.ca/en/government/system/digital-government/digital-government-innovations/cloud-services/direction-electronic-data-residency.html",
+"used_by": [
+"Who the computing serves"
+]
+},
+{
+"id": "statcanLives",
+"text": "Statistics Canada, economic lives of assets: office buildings 27 yr, warehouses 25.4, other commercial construction 20.7, computers 4 — https://www150.statcan.gc.ca/n1/pub/15-206-x/2015039/t/tblc11-eng.htm",
+"url": "https://www150.statcan.gc.ca/n1/pub/15-206-x/2015039/t/tblc11-eng.htm",
+"used_by": [
+"Time horizons"
+]
+},
+{
+"id": "bcRecyclingIT",
+"text": "BC Recycling Regulation Sch. 3 (current to 3 Feb 2026): IT products covered; exclusion only for computers attached to commercial or industrial equipment that is not itself a covered product; servers not named (reading them as covered: interpretation, 60) — https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/449_2004",
+"url": "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/449_2004",
+"used_by": [
+"After the data centre"
+]
+},
+{
+"id": "duan2026",
+"text": "Duan et al. 2026 (peer-reviewed): surface urban heat island, Vancouver summer daytime 7.25 °C, Edmonton winter night 2.86 °C (land-surface, not air, temperature) — audit/research_2026-10-19/B",
+"url": "",
+"used_by": [
+"Urban heat in the area"
+]
+},
+{
+"id": "edmHeatPolicy",
+"text": "City of Edmonton, Climate Resilient Edmonton (2018) Action 9 'Cool Edmonton'; adaptation progress June 2026: hot days about 1 → 16 a year by the 2050s; no rule on heat rejected by equipment — https://www.edmonton.ca/sites/default/files/public-files/documents/june-2026-adaptation-plan-path-2-progress_0.pdf",
+"url": "https://www.edmonton.ca/sites/default/files/public-files/documents/june-2026-adaptation-plan-path-2-progress_0.pdf",
+"used_by": [
+"Urban heat in the area"
+]
+},
+{
+"id": "bcDispersion",
+"text": "BC Ministry of Environment, Guidelines for Air Quality Dispersion Modelling in BC: AERSCREEN 'preferred' for screening — https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/bc_dispersion_modelling_guideline.pdf",
+"url": "https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/bc_dispersion_modelling_guideline.pdf",
+"used_by": [
+"Air at a neighbour (screening)"
+]
+},
+{
+"id": "bcNO2Guidance",
+"text": "BC Ministry of Environment, Modelling guidance for NO2 (July 2022): Tier 1 100% conversion; ARM2 bounds 0.2–0.9; diesel in-stack NO2/NOx 0.083 — https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/modelling_guidance_nitrogen_dioxide.pdf",
+"url": "https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/modelling_guidance_nitrogen_dioxide.pdf",
+"used_by": [
+"Nitrogen dioxide at a neighbour"
+]
+},
+{
+"id": "caaqs",
+"text": "CCME Canadian Ambient Air Quality Standards: NO2 1-h 2025 standard 79 µg/m³ (42 ppb, 98th percentile, 3-yr average); PM2.5 24-h 27 µg/m³ (2020) → 23 (2030) — https://ccme.ca/en/air-quality-report",
+"url": "https://ccme.ca/en/air-quality-report",
+"used_by": [
+"Air against the limits"
+]
+},
+{
+"id": "mvDWCP",
+"text": "Metro Vancouver Drinking Water Conservation Plan: stages 1–3 restrict lawn and outdoor uses; no stage restricts cooling towers or evaporative cooling; stage 4 asks industry for voluntary cuts — https://metrovancouver.org/services/water/Documents/drinking-water-conservation-plan.pdf ; City By-law 12086 https://bylaws.vancouver.ca/12086c.pdf",
+"url": "https://metrovancouver.org/services/water/Documents/drinking-water-conservation-plan.pdf",
+"used_by": [
+"Water restrictions in a drought"
+]
+},
+{
+"id": "epcorStages",
+"text": "EPCOR water restrictions, business guides: stages 1–4 target 5/10/15/25% reduction; stages 1–2 'actions your business can take', 3–4 'must take'; cooling towers: optimise, reduce 'where possible'; non-essential continuous-flow processes limited (3–4); 'essential' not defined; only official event found: mandatory ban 29 Jan–2 Feb 2024 (plant failure) — https://www.epcor.com/ca/en/ab/edmonton/conservation/water-restrictions/business-guidance.html",
+"url": "https://www.epcor.com/ca/en/ab/edmonton/conservation/water-restrictions/business-guidance.html",
+"used_by": [
+"Water restrictions in a drought",
+"Recent water restrictions"
+]
+},
+{
+"id": "vbbl2025Seismic",
+"text": "City of Vancouver, Guide to 2025 VBBL updates (22 Sep 2025): new seismic rules apply to permits issued on or after 15 Sep 2026; in-stream projects before 8 Mar 2027 may use the old rules — https://vancouver.ca/files/cov/guide-to-2025-vbbl-updates.pdf",
+"url": "https://vancouver.ca/files/cov/guide-to-2025-vbbl-updates.pdf",
+"used_by": [
+"Earthquake design category"
+]
+},
+{
+"id": "vanHubs",
+"text": "City of Vancouver, Disaster support hubs: 25 hubs (mostly community centres); backup power not stated — https://vancouver.ca/home-property-development/disaster-support-hubs.aspx",
+"url": "https://vancouver.ca/home-property-development/disaster-support-hubs.aspx",
+"used_by": [
+"Refuge after an earthquake",
+"Backup power for neighbours in a blackout"
+]
+},
+{
+"id": "vanUndrip",
+"text": "City of Vancouver UNDRIP Strategy (endorsed 25 Oct 2022; 79 Calls to Action; e.g. 1.18 first right of refusal on City land, 2.3 'include this in permitting decisions', 3.10 free, prior and informed consent) and Action Plan 2024–28 (endorsed 25 Jun 2024; 'early engagement threshold points', in progress) — https://council.vancouver.ca/20221025/documents/p1.pdf ; https://vancouver.ca/files/cov/undrip-action-plan-2024-2028.pdf",
+"url": "https://council.vancouver.ca/20221025/documents/p1.pdf",
+"used_by": [
+"Consultation and rights that apply",
+"City commitments to Indigenous Nations"
+]
+},
+{
+"id": "aucGuidance",
+"text": "AUC Guidance for proponents, participant involvement categories: A (Crown duty found for related approvals, or reserve/Settlement in radius) Indigenous groups included; B (e.g. thermal plants < 10 MW, private land with limited off-site impacts) not ordinarily included; C case by case; 'The ACO has no direct role in the AUC's regulatory process' — https://www.auc.ab.ca/guidance-for-proponents/ ; Rule 007 https://media.auc.ab.ca/prd-wp-uploads/regulatory_documents/Consultations/Rule007.pdf",
+"url": "https://www.auc.ab.ca/guidance-for-proponents/",
+"used_by": [
+"Consultation and rights that apply"
+]
+},
+{
+"id": "nrcanPV2024",
+"text": "NRCan CanmetENERGY (2024) PV potential summary report: usable roof factors 0.81 (area) and 0.70 (yield); with NRCan municipal yields ≈ 128 kWh/m² of footprint a year in Vancouver and 159 in Edmonton (factors transferred; neither city in the sample) — https://natural-resources.canada.ca/sites/nrcan/files/canmetenergy/files/pdf/PV_potential_summary_report_appendix-EN.pdf",
+"url": "https://natural-resources.canada.ca/sites/nrcan/files/canmetenergy/files/pdf/PV_potential_summary_report_appendix-EN.pdf",
+"used_by": [
+"Solar from roofs nearby"
+]
+},
+{
+"id": "energyStarCA",
+"text": "NRCan ENERGY STAR Portfolio Manager, Canadian national median site EUI (GJ/m²): office 0.87, hospital 2.20, K-12 school 0.70, college/university 1.04, multifamily 0.82, ice rink 1.10 — https://portfoliomanager.energystar.gov:443/pdf/reference/Canadian%20National%20Median%20Table.pdf",
+"url": "https://portfoliomanager.energystar.gov:443/pdf/reference/Canadian%20National%20Median%20Table.pdf",
+"used_by": [
+"Receiver heat demand"
+]
+},
+{
+"id": "vanEmbodied",
+"text": "City of Vancouver embodied carbon guidelines / VBBL 2025: benchmark 400 kg CO2e/m²; new buildings at most 2× the baseline (absolute path cap 800 kg/m²); further 10% cut delayed; Edmonton has no requirement for private buildings — https://vancouver.ca/files/cov/embodied-carbon-guidelines.pdf",
+"url": "https://vancouver.ca/files/cov/embodied-carbon-guidelines.pdf",
+"used_by": [
+"Embodied carbon, building",
+"Embodied carbon rule"
+]
+},
+{
+"id": "lbnlLargeLoad2025",
+"text": "LBNL (Jan 2025), Electricity rate designs for large loads: mechanisms (stranded assets, forecast error, avoided charges) and protections (minimum bills, exit fees, collateral, contributions); no quantified rate effect — https://eta-publications.lbl.gov/sites/default/files/2025-01/electricity_rate_designs_for_large_loads_evolving_practices_and_opportunities_final.pdf",
+"url": "https://eta-publications.lbl.gov/sites/default/files/2025-01/electricity_rate_designs_for_large_loads_evolving_practices_and_opportunities_final.pdf",
+"used_by": [
+"Effect on household power bills"
+]
+},
+{
+"id": "abConsultPolicy2013",
+"text": "Government of Alberta, Policy on Consultation with First Nations on Land and Natural Resource Management, 2013 (amended 1 Apr 2020; read 19 Oct 2026): applies to Crown decisions on land and natural resource management that may adversely impact Treaty rights or traditional uses on provincial Crown lands; 'Matters Not Subject to this Policy' include 'Accessing private lands to which First Nations do not have a right of access for exercising their Treaty rights and traditional uses'; proponents (industry, municipal governments) may be delegated procedural aspects; the consultation office assesses adequacy — data/raw/ab/ir-policy-consultation-first-nations-land-resources-2013-amended-2020.pdf",
+"url": "",
+"used_by": [
+"Consultation and rights that apply"
+]
+},
+{
+"id": "jin2020",
+"text": "Jin, Schubert, Salim & Schneider 2020, Impact of air conditioning systems on the outdoor thermal environment during summer in Berlin (Int. J. Environ. Res. Public Health 17, 4645; peer-reviewed, modelled): wall-mounted AC outdoor units raise near-surface air temperature up to 0.6 K, more at night and in urban areas; rooftop units have a smaller effect — data/raw/papers/jin2020_berlin_ac.pdf",
+"url": "",
+"used_by": [
+"Warmer air near the cooling units"
+]
+},
+{
+"id": "squamishNEU2010",
+"text": "Compass Resource Management with FVB Energy and Hemmera, District of Squamish Neighbourhood Energy Utility feasibility study, final report, 15 Jun 2010: levelised cost over 30 years (pp. 27, 42); WACC 7.6% (5.6% real), ROE 10% (8% real) regulated by BCUC, debt 6%, 60/40; depreciation DPS 1.5%/yr, ETS 3%/yr (p. 44) — https://squamish.ca/assets/Land-Use-Policies/61bbc09bea/Squamish-NEU-Final-Feasibility-Report.pdf",
+"url": "https://squamish.ca/assets/Land-Use-Policies/61bbc09bea/Squamish-NEU-Final-Feasibility-Report.pdf",
+"used_by": [
+"Payback and IRR"
+]
+},
+{
+"id": "scotHeat2011",
+"text": "Scottish Government, The recovery of heat from power generation in Scotland (4 Nov 2011), economics: NPV at 9%, 40-year life — https://www.gov.scot/publications/study-recovery-heat-power-generation-scotland/pages/5/",
+"url": "https://www.gov.scot/publications/study-recovery-heat-power-generation-scotland/pages/5/",
+"used_by": [
+"Payback and IRR"
+]
+},
+{
+"id": "vanNEConnect2013",
+"text": "City of Vancouver, Neighbourhood Energy Connectivity Standards bulletin (Dec 2013), s. 4.3 maximum temperatures: radiant floor 45/35 °C, panels 60/45, baseboard 70/50, fan coils 70/50, make-up air 65/45, DHW 60 °C — https://guidelines.vancouver.ca/bulletins/bulletin-sustainability-neighbourhood-energy-connectivity-standards.pdf",
+"url": "https://guidelines.vancouver.ca/bulletins/bulletin-sustainability-neighbourhood-energy-connectivity-standards.pdf",
+"used_by": []
+},
+{
+"id": "nrelATBcommBatt2024",
+"text": "NREL ATB 2024, Commercial Battery Storage: fixed O&M 2.5% of capital cost; 15 yr; 85% — https://atb.nrel.gov/electricity/2024/commercial_battery_storage",
+"url": "https://atb.nrel.gov/electricity/2024/commercial_battery_storage",
+"used_by": [
+"Battery storage"
+]
+},
+{
+"id": "aesoMicrogen2025",
+"text": "AESO, Connecting Microgeneration (17 Sep 2025): under 5 MW; small under 150 kW credited at the retail energy rate; large at the hourly pool price — https://www.aeso.ca/assets/Connecting-Microgeneration.pdf",
+"url": "https://www.aeso.ca/assets/Connecting-Microgeneration.pdf",
+"used_by": [
+"Rooftop solar cost per MWh"
+]
+},
+{
+"id": "vanRates2026",
+"text": "City of Vancouver, 2026 utility rates (Council 12 Nov 2025, spec1a Sch. D, spec1b Part V; metered rates page): water $4.091 (16 Oct–30 Apr) and $5.128 (1 May–15 Oct) per unit, sewer $7.960 per unit, all metered uses; 1 unit = 2.83168 m³ — https://vancouver.ca/home-property-development/metered-rates.aspx",
+"url": "https://vancouver.ca/home-property-development/metered-rates.aspx",
+"used_by": [
+"Water the place can supply"
+]
+},
+{
+"id": "epcorWWpbr2025",
+"text": "EPCOR 2025–27 Wastewater PBR application: Gold Bar reclaimed water to industrial customers (pp. 2, 21, 25); price and volume not stated — https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2025-2027-wastewater-pbr-application.pdf",
+"url": "https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2025-2027-wastewater-pbr-application.pdf",
+"used_by": [
+"Water the place can supply"
+]
+},
+{
+"id": "epaRain2013",
+"text": "US EPA 841-R-13-002 (2013), Rainwater harvesting: cistern US$1.50–3.00 per gallon; pumps, controls, treatment US$2–5 per gallon (p. 24) — https://www.epa.gov/sites/production/files/2015-11/documents/rainharvesting.pdf",
+"url": "https://www.epa.gov/sites/production/files/2015-11/documents/rainharvesting.pdf",
+"used_by": [
+"Harvestable rainwater",
+"Stormwater held on the lot"
+]
+},
+{
+"id": "edmBylaw21442",
+"text": "City of Edmonton Bylaw 21442, 2026 Property Tax and Supplementary Property Tax Bylaw, s. 2(n): Other Residential = four or more self-contained dwelling units used for permanent living accommodation — https://www.gov.edmonton.ab.ca/sites/default/files/public-files/documents/bl21442.pdf",
+"url": "https://www.gov.edmonton.ab.ca/sites/default/files/public-files/documents/bl21442.pdf",
+"used_by": [
+"Receiver heat demand"
+]
+},
+{
+"id": "sor2024_263",
+"text": "Clean Electricity Regulations, SOR/2024-263, s. 5(1) (units ≥ 25 MW burning fossil fuel, connected to a NERC-standard grid) and s. 9(1) (65 t CO2 per GWh, 2035–2049) — https://laws-lois.justice.gc.ca/eng/regulations/SOR-2024-263/page-2.html",
+"url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2024-263/page-2.html",
+"used_by": [
+"Own gas plant: heat with the power"
+]
+},
+{
+"id": "emaWDA",
+"text": "BC Government, Waste discharge authorization — do you need one: cooling water is listed as liquid waste; facilities powered by fuel combustion over 5 MW need authorization — https://www2.gov.bc.ca/gov/content/environment/waste-management/waste-discharge-authorization/need",
+"url": "https://www2.gov.bc.ca/gov/content/environment/waste-management/waste-discharge-authorization/need",
+"used_by": [
+"Sea or river water as a cooling sink",
+"Own gas plant: heat with the power"
+]
+},
+{
+"id": "epcorIG2022",
+"text": "EPCOR Distribution & Transmission, Interconnection guide (2022), s. 7.6 and 7.8 p. 47–50: no island with part of EPCOR's system; intentional islanding only with EDTI's written approval; trip within 2 s — https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2022_power_technical-requirements_interconnection-guide.pdf",
+"url": "https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2022_power_technical-requirements_interconnection-guide.pdf",
+"used_by": [
+"Backup power for neighbours in a blackout"
+]
+},
+{
+"id": "aesoTariff4",
+"text": "AESO ISO Tariff s. 4.6–4.7 (effective 1 Jan 2026): customer contribution = demand-related costs less the AESO's local investment ($121,800 a year substation fraction; $40,100 per MW a year for the first 7.5 MW, then less) — https://www.aeso.ca/assets/documents/Section-4-effective-2026-01-01.pdf",
+"url": "https://www.aeso.ca/assets/documents/Section-4-effective-2026-01-01.pdf",
+"used_by": [
+"First payer refunded when neighbours connect"
+]
+},
+{
+"id": "aucMicro2026",
+"text": "AUC, Micro-generation notice submission guideline (2026), p. 1, 4, 15: under the lesser of 5 MW or the service rating; on property the customer owns or leases, or adjacent owned or leased property; sized to the site's own use; revenue-seeking sites are commercial generators — https://media.auc.ab.ca/prd-wp-uploads/regulatory_documents/Reference/MicrogenerationNoticeSubmissionGuideline2026.pdf",
+"url": "https://media.auc.ab.ca/prd-wp-uploads/regulatory_documents/Reference/MicrogenerationNoticeSubmissionGuideline2026.pdf",
+"used_by": [
+"Solar from roofs nearby",
+"Solar on neighbours' roofs"
+]
+},
+{
+"id": "nrcCBD160",
+"text": "Williams, Snow melting systems, NRC Canadian Building Digest 160 (1974), Tables II–III: Edmonton design heat 40 (sheltered) to 60–65 W/ft² (very exposed), about 430–700 W/m²; 65 W/ft² to keep pavement bare and wet after a design storm — https://nrc-publications.canada.ca/fra/voir/td/?id=ea4000fb-340b-4fdf-878f-27658e1f7df8",
+"url": "https://nrc-publications.canada.ca/fra/voir/td/?id=ea4000fb-340b-4fdf-878f-27658e1f7df8",
+"used_by": [
+"Sidewalk kept clear by its heat"
+]
+},
+{
+"id": "edmSidewalk",
+"text": "City of Edmonton, Sidewalk snow removal: property owners clear adjacent sidewalks; $100 fine plus the cost of removal — https://www.edmonton.ca/transportation/on_your_streets/sidewalk-snow-removal",
+"url": "https://www.edmonton.ca/transportation/on_your_streets/sidewalk-snow-removal",
+"used_by": [
+"Sidewalk kept clear by its heat"
+]
+},
+{
+"id": "vanOEM2018",
+"text": "City of Vancouver, Office of Emergency Management memo, Fire risks following an earthquake (4 Jun 2018), p. 5–9: two saltwater pump stations and a seismic network (DFPS), limited in scope (downtown, part of Kitsilano, to VGH); sprinklers rely on mains; network complete in about 80 years; City wells only for emergency drinking water — https://vancouver.ca/files/cov/2018-06-04-fire-risks-following-an-earthquake.pdf",
+"url": "https://vancouver.ca/files/cov/2018-06-04-fire-risks-following-an-earthquake.pdf",
+"used_by": [
+"Firefighting water for neighbours"
+]
+},
+{
+"id": "ashraeTC99card",
+"text": "ASHRAE TC 9.9, Thermal guidelines 5th ed. reference card, Table 2.1: recommended IT inlet 18–27 °C, dew point −9 to 15 °C — https://www.ashrae.org/file%20library/technical%20resources/bookstore/supplemental%20files/therm-gdlns-5th-r-e-refcard.pdf",
+"url": "https://www.ashrae.org/file%20library/technical%20resources/bookstore/supplemental%20files/therm-gdlns-5th-r-e-refcard.pdf",
+"used_by": [
+"Condensate from cooling coils"
+]
+},
+{
+"id": "portPER2025",
+"text": "Port of Vancouver, Project and environmental review categories (10 Sep 2025): a new or modified discharge to water is Category C (60–120 business days); a water pipeline is Category A only under 100 m with no water crossing — https://www.portvancouver.com/media/documents/categories-0",
+"url": "https://www.portvancouver.com/media/documents/categories-0",
+"used_by": [
+"Sea or river water as a cooling sink"
+]
+},
+{
+"id": "howley2021",
+"text": "Howley, MSc thesis, University of Alberta (2021), s. 1.1 and 2.1: North Saskatchewan River supercooling to −0.106 °C (frazil ice); winter flow about 122 m³/s after the dams — https://era.library.ualberta.ca/items/df542886-debb-4f9e-9228-d761374609c6/download/e9a4644f-cf8c-4f0b-8ddc-9978b225de69",
+"url": "https://era.library.ualberta.ca/items/df542886-debb-4f9e-9228-d761374609c6/download/e9a4644f-cf8c-4f0b-8ddc-9978b225de69",
+"used_by": [
+"Sea or river water as a cooling sink"
+]
+},
+{
+"id": "ecccNormals2020",
+"text": "ECCC Canadian Climate Normals 1991–2020, Vancouver International (Airport) and Edmonton (Airport), CSV (J.B. download 19 Oct 2026): snowfall 36.6 / 126.7 cm a year; days with snowfall ≥ 0.2 cm 7.4 / 54.7; days with snow depth ≥ 1 cm 8.2 / 145.1, ≥ 5 cm 4.4 / 120.5; average vapour pressure July 1.5 / 1.4 kPa — https://climate.weather.gc.ca/climate_normals/index_e.html",
+"url": "https://climate.weather.gc.ca/climate_normals/index_e.html",
+"used_by": [
+"Condensate from cooling coils",
+"Sidewalk kept clear by its heat"
+]
+},
+{
+"id": "bcWSA",
+"text": "BC Water Sustainability Act, SBC 2014 c 15 (current to 13 Oct 2026; J.B. download 19 Oct 2026; scanned, read by OCR), s. 1: a 'stream' is a natural watercourse or natural body of water, including a lake, pond, river, creek, spring, ravine, gulch, wetland or glacier, but not an aquifer; the sea is not named either way",
+"url": "",
+"used_by": []
+},
+{
+"id": "bcaGuideCom",
+"text": "BC Assessment, Commercial Inventory Extract External User Guide v1.0: field 19 Gross Building Area ('the total constructed area of a building'); field 21 strata lot area, with strata units' areas x 15% for common areas where building size is not known",
+"url": "",
+"used_by": [
+"Receiver heat demand"
+]
+},
+{
+"id": "sheu2019cma",
+"text": "NRCan, Survey of Household Energy Use 2019, Table 4.1 Number of households by CMA and main heating equipment — https://oee.nrcan.gc.ca/corporate/statistics/neud/dpa/showTable.cfm?type=SHCMA&sector=AAA&juris=CA&year=2019&rn=12&page=1 (pages 0-2)",
+"url": "https://oee.nrcan.gc.ca/corporate/statistics/neud/dpa/showTable.cfm?type=SHCMA&sector=AAA&juris=CA&year=2019&rn=12&page=1",
+"used_by": [
+"Backup power for neighbours in a blackout"
+]
+},
+{
+"id": "bcResCare",
+"text": "Government of British Columbia, Residential Care Facilities (licensed community care facilities, maximum capacity; Open Government Licence – BC) — https://catalogue.data.gov.bc.ca/dataset/residential-care-facilities",
+"url": "https://catalogue.data.gov.bc.ca/dataset/residential-care-facilities",
+"used_by": [
+"Receivers within reach",
+"Backup power for neighbours in a blackout"
+]
+}
+]
