@@ -1,0 +1,554 @@
+[
+ {
+  "id": "fortum",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "One search (Finnish title) did not surface the Fortum page; cited URL refused by fetch provenance rule; no saved copy",
+  "problem": "€11–€50/MWh table and 1 May 2026 date not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "necbHDD",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Search did not surface the CBHCC page; no saved NECB copy (saved NBC 2020 Table C-2 gives Edmonton HDD 5120)",
+  "problem": "NECB Table C-1 public-review page not opened; 5,120 matches NBC Table C-2 only",
+  "copyright": "public"
+ },
+ {
+  "id": "vanSewer",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Search returned only Australian datasets; Vancouver sewer-mains page not surfaced; no saved copy",
+  "problem": "Schema and 39,927 count not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "fjfAars2124",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Search did not return the Fjernvarme Fyn 2024 report; no saved copy",
+  "problem": "TJ series, 393 %, 43 MW not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanFees2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Search returned other cities' fee schedules, not this PDF; no saved copy",
+  "problem": "2026 fee figures not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "ieaEnergyAI",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai",
+  "what_was_checked": "Report and chapter URL confirmed on iea.org report page; chapter fetch failed (site client error); exec summary and news release lack the phrase",
+  "problem": "\"two to three years\" quote not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "cat3516c",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.cat.com/en_US/products/new/power-systems/electric-power/diesel-generator-sets/1000028912.html",
+  "what_was_checked": "Search surfaced only cat.com; cat.com 3516C (60 Hz) page lists standby 2500/2250/2000 ekW; Hanover County cut sheet not surfaced",
+  "problem": "Cited Hanover County cut sheet not opened; model and 2,500 kW standby rating exist on cat.com",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "zhang2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Volume/article-number search returned no publisher record; DOI fetch refused; no saved copy",
+  "problem": "Not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "ubcoBorefield2021",
+  "verdict": "Found",
+  "correct_url": "https://library.upei.ca/islandora/object/csme2021%3A113/datastream/PDF/download/csme2021_113.pdf",
+  "what_was_checked": "Opened PDF: Chanduri, Zabihi, Li (UBC Kelowna), \"Geothermal Cooling for Data Centers\", CSME Congress 2021; 250 kW; quote present",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "googleFervo",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Search returned only news coverage, not the blog.google post; cited URL refused by fetch provenance rule",
+  "problem": "Google blog quote not verified from the primary page",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "abESSstandata",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Search found only trade press; open.alberta.ca joint-bulletin page lists no ESS bulletin; no saved copy",
+  "problem": "Cited URL is only the portal root; STANDATA (trade press calls it a \"variance\") not located, so 1 m spacing and REV1 unverified",
+  "copyright": "public"
+ },
+ {
+  "id": "epraBC",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Search surfaced Return-It blog and gov.bc.ca pages, not the cited recyclemyelectronics page; no saved copy",
+  "problem": "Server wording, LVG 3-pallet minimum, processor list not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanWaterPermits",
+  "verdict": "Found",
+  "correct_url": "https://opendata.vancouver.ca/explore/dataset/operating-permits-water-systems-water-quality-reports/",
+  "what_was_checked": "Saved copy: /mnt/user-data/outputs/data/raw/van/water_system_permits.csv — 1,245 rows, 1,099 active; cooling towers 672 (630 active, 625 active with location); rainwater/alternative 44 (36 active); Legionella column present",
+  "problem": "Cited URL is only the portal root; dataset URL given (from the file's own links)",
+  "copyright": "public"
+ },
+ {
+  "id": "edmBEB6",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "Saved copy: /mnt/user-data/outputs/data/raw/edm/beb/beb_year6.pdf — June 2023; 468 properties, 1,014 buildings, 7,869,390 m², 25 categories; multifamily 139/1,865,615; office 54/1,049,068; EUI 1.3 GJ/m²; 125 kg CO2e/m²; −20.2%; dashboard link",
+  "problem": "Cited URL is only edmonton.ca homepage; Vancouver ≥100,000 ft² statement not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "aesoBYOG2026",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "Saved copy: /mnt/user-data/outputs/data/raw/ab/aeso_byog_proposed_2026-06.txt — \"Proposed BYOG Process\", 26 Jun 2026: ≥75 MW DTS, aggregated; excludes storage/distribution; gas-only first intake, net new; tethering at 25°/40% humidity; zoning/ASP letter; $15k/MW refundable; bridging 20/30/40%, 1,600 MW, 3 yr, reduced before other non-firm load, scheme TBD",
+  "problem": "Cited URL is the engagement page, not the document itself",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "edmFPO2250",
+  "verdict": "Found",
+  "correct_url": "https://zoningbylaw.edmonton.ca/",
+  "what_was_checked": "Saved copy: /mnt/user-data/outputs/data/raw/edm/bylaw/Bylaw20001.pdf — Charter Bylaw 20001 passed 23 Oct 2023, effective 1 Jan 2024; s. 2.250 FPO 2.1, 2.2, 3.1, 3.2.1–3.2.3, 3.4 match; no flood level set in section",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "vanFire14419",
+  "verdict": "Found",
+  "correct_url": "https://bylaws.vancouver.ca/14419c.pdf",
+  "what_was_checked": "Opened consolidated By-law 14419 (enacted 22 Jul 2025, consol. to 24 Feb 2026): repeals 12472, adopts BC Fire Code; Div C 1.2.1.5(2) tank permits; changes to 4.3.1.7 and 4.3.16.1; no indoor liquid quantity limits added",
+  "problem": "Cited URL (/consolidated/14419.PDF) not opened; official consolidated copy at the URL given",
+  "copyright": "public"
+ },
+ {
+  "id": "abWaterAct2021",
+  "verdict": "Found",
+  "correct_url": "https://open.alberta.ca/dataset/e0074537-88f6-4cc4-af5c-808161fa9af8/resource/ea13d7b1-c155-4fad-8b85-4f12443352f2/download/5713.pdf",
+  "what_was_checked": "Opened PDF: Surface Water Quality Guidelines for Use in Alberta, Alberta Environment, Nov 1999, Table 1.0 p. 9 \"Not to be increased by more than 3°C above ambient water temperature\"",
+  "problem": "2021 Water Act fact sheets not checked (no URL given)",
+  "copyright": "public"
+ },
+ {
+  "id": "agsGround2009",
+  "verdict": "Found",
+  "correct_url": "https://static.ags.aer.ca/files/document/OFR/OFR_2009_09.pdf",
+  "what_was_checked": "Opened PDF: AGS OFR 2009-09 (Grobe et al., Jun 2009), Hastings Lake east of Edmonton; 6.1 °C to ~25 m; linear-approx. conductivity 1.74–2.01, design 1.90 W/m·K",
+  "problem": "Full in-situ range incl. numerical results is 1.59–2.01 W/m·K; GSC OF 6914 Vancouver part not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "blatchfordAdvisor2023",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Search returned news and older plan, not the Utility Advisor report; no saved copy with these figures (checked Blatchford PDFs in data/)",
+  "problem": "181/292 customers, $1,324,700/$863,600 shortfalls and quote not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "bfe2023dc",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://pubdb.bfe.admin.ch/de/publication/download/11426",
+  "what_was_checked": "Opened report: Kulemann et al. (eicher+pauli for EnergieSchweiz), 1 Jun 2023; >32 °C (p. 20), 48%/12% (p. 24), 10–15 vs 30–40 yr (p. 5) confirmed",
+  "problem": "\"Kaum einen Preis\" is on p. 27, not p. 26; cited URL is only bfe.admin.ch homepage; Zürich RRB 1340/2025 not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "pozgaj2025",
+  "verdict": "Unreachable",
+  "correct_url": "https://doi.org/10.3390/app16010323",
+  "what_was_checked": "Exact-title and author searches returned no MDPI record; DOI fetch refused; no saved copy found in data/raw/papers",
+  "problem": "Not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "ecccEF2026",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://www.canada.ca/en/environment-climate-change/services/climate-change/pricing-pollution-how-it-will-work/output-based-pricing-system/federal-greenhouse-gas-offset-system/emission-factors-reference-values.html",
+  "what_was_checked": "Opened page: v4.0, 9 Sep 2026; HHV Table 8 natural gas 38.39 MJ/m³ (sourced from Clean Fuel Regulations workbook); NIR 1990–2024 Table A6.1-1 cited",
+  "problem": "For NIR 1990–2024 the CH4/N2O factors cite Table A6.1-4, not A6.1-3 (A6.1-3 is for earlier NIR editions)",
+  "copyright": "public"
+ },
+ {
+  "id": "ipcc2019v3ch7",
+  "verdict": "Found",
+  "correct_url": "https://www.ipcc-nggip.iges.or.jp/public/2019rf/pdf/3_Volume3/19R_V3_Ch07_ODS_Substitutes.pdf",
+  "what_was_checked": "Opened PDF: Table 7.9 (Updated), chillers 10–2,000 kg, 15–30 yr, 2–15 %/yr, lower values for developed countries, p. 7.32",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bcAssessClasses",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/finance/requisition-taxation/local-government-taxation/property-assessment-classes",
+  "what_was_checked": "Opened page: Class 6 \"All land and improvements not included in any of the other classes\"; page last updated 1 Dec 2022",
+  "problem": "Page does not name the Prescribed Classes of Property Regulation or a Sep 2024 amendment (regulation is BC Reg 438/81 on bclaws, not checked)",
+  "copyright": "public"
+ },
+ {
+  "id": "bcFoippaAbroad",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://www2.gov.bc.ca/gov/content/governments/services-for-government/policies-procedures/foippa-manual/disclosure-outside-canada",
+  "what_was_checked": "Opened s. 33.1 page: assessment required where sensitive personal information is disclosed to be stored outside Canada (within the PIA)",
+  "problem": "Page does not itself say the 2021 amendment removed the data-residency rule; only links a PDF on \"changes to data residency provisions\"",
+  "copyright": "public"
+ },
+ {
+  "id": "sscConsolidation",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://www.canada.ca/en/shared-services/campaigns/stories/closing-door-on-legacy-problems.html",
+  "what_was_checked": "Cited page opened: no 720/500 figures. SSC story page (8 Jan 2025, mod. 6 Feb 2026): \"In 2011, SSC inherited 720 legacy data centres\"; \"closed more than 500\"",
+  "problem": "Figures are on the SSC story page, not the cited data-centre-consolidation page",
+  "copyright": "public"
+ },
+ {
+  "id": "abElectronicsReg",
+  "verdict": "Found",
+  "correct_url": "https://open.alberta.ca/publications/2004_094",
+  "what_was_checked": "Opened open.alberta.ca record: Electronics Designation Regulation \"designates electronics for recycling (computers, computer equipment and televisions)\"",
+  "problem": "Cited URL is the Alberta Recycling program page, not the official text; reg. number 94/2004 not shown on record page",
+  "copyright": "public"
+ },
+ {
+  "id": "dcLstPreprint",
+  "verdict": "Unreachable",
+  "correct_url": "https://arxiv.org/pdf/2603.20897",
+  "what_was_checked": "Search for the arXiv number returned other LST papers; arXiv URL refused by fetch provenance rule",
+  "problem": "+2 °C / 4.5 km figures not verified",
+  "copyright": "unknown"
+ },
+ {
+  "id": "gunterShipes1971",
+  "verdict": "Found",
+  "correct_url": "https://files.chartindustries.com/hudson/Hot-Air-Recirculation.pdf",
+  "what_was_checked": "Opened PDF: Gunter & Shipes (Hudson Products Corp.), 12th National Heat Transfer Conf., AIChE–ASME, Tulsa, Aug 1971; 13.6% → ~10%, 24% → ~35% capacity loss",
+  "problem": "No URL in citation; PDF hosted by manufacturer (Chart/Hudson)",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "abModelGuideline",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://open.alberta.ca/dataset/cefcad38-6d49-4cce-98f7-23b1741f85b7/resource/b4ed8dc9-3850-4e5f-a618-42b29c4ba2d4/download/aep-aqmg-air-quality-model-guideline-2021-09.pdf",
+  "what_was_checked": "Opened PDF: Air Quality Model Guideline, 13 Sep 2021 (eff. 15 Nov 2021); AERSCREEN \"recommended by AEP\"; Eq. (1) 1.1233 × hours^−0.2906",
+  "problem": "Publisher on document is Alberta Environment and Parks, not \"Environment and Protected Areas\"",
+  "copyright": "public"
+ },
+ {
+  "id": "mvAAQO",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Search did not surface the cited Nov 2024 PDF; Metro Vancouver 2020 fact sheet opened shows older values (NO2 1-h 113 µg/m³/60 ppb, annual 32; PM2.5 24-h 25)",
+  "problem": "Nov 2024 values (79 µg/m³/42 ppb, 22.6, rolling 24-h) not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "mvClimate2016",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Search did not surface the metrovancouver.org PDF; UVic record confirms \"Climate projections for Metro Vancouver\", Metro Vancouver/PCIC/Pinna, June 2016",
+  "problem": "Document exists; HDD −25%/29%, CDD 49→235, snowpack 292→123 cm not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "vanOnceThrough",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Search returned other Vancouver bylaw/council PDFs, not By-law 11777; no saved copy",
+  "problem": "s. 3.9–3.10 wording, 1 Jan 2020 date and Legionella reporting not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "abNewLicenceLast",
+  "verdict": "Found",
+  "correct_url": "https://www.alberta.ca/datacentres/water",
+  "what_was_checked": "Opened page: \"A brand-new data centre licence stands last.\"; \"First In Time, First In Right\"",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "nrcSeismic2020",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "NRC winter-2020 public review page opened (seismic hazard update, Sa(0.2)→Smax) but lists no combined PDF; cited PDF not surfaced",
+  "problem": "Change 1405 and Sa(0.2) 0.848 / 0.103 not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "edmWarming",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Search returned only news articles; City page not surfaced",
+  "problem": "−20 °C wind-chill / 3-day trigger not verified from City page",
+  "copyright": "public"
+ },
+ {
+  "id": "bcDeclarationAct",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/19044",
+  "what_was_checked": "gov.bc.ca Declaration Act page opened: s. 3 alignment of laws, links bclaws 19044; bclaws fetch blocked (robots_disallowed)",
+  "problem": "Interpretation Act amendment, action plan and 2014 engagement-guide statements not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "vanNationsNamed",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Search returned council presentations, not the UNDRIP Strategy; Nation referral pages not surfaced",
+  "problem": "Strategy pp. 3–4 and Nation page URLs not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "vanI2Ground",
+  "verdict": "Found",
+  "correct_url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-I-2.pdf",
+  "what_was_checked": "Saved copies: /mnt/user-data/outputs/data/raw/codes/van_I-2_schedule.pdf (2.2.7), raw/van/i3.pdf (2.2.11, sub-area A), raw/van/fc2.pdf (2.2.4)",
+  "problem": "Use is \"Bulk Data Storage\", not permitted at ground floor/grade \"except for entrances\"",
+  "copyright": "public"
+ },
+ {
+  "id": "scieu2024",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "StatCan Daily table t001d (26 Jun 2026) opened: hospital/post-secondary campus profile, national only (hospitals 2.06, universities 1.12, colleges 0.86 GJ/m²); cited release page not surfaced",
+  "problem": "BC/AB values not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "bchTCIP2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "BC Hydro workshop-2 page returned 404; presentation PDF not surfaced; no saved copy",
+  "problem": "Rate-impact figures not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "dkHeatCap2025",
+  "verdict": "Found",
+  "correct_url": "https://www.retsinformation.dk/eli/lta/2025/738/pdf",
+  "what_was_checked": "Opened Lov nr. 738 (20 Jun 2025): abolishes price cap on surplus heat, in force 1 Jul 2025; Forsyningstilsynet 2025 cap notice exists (search) but redirect blocked",
+  "problem": "95 kr./GJ value and 1 Nov 2024 notice date not opened",
+  "copyright": "public"
+ },
+ {
+  "id": "duvenhageKroger1996",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "Saved copy: /mnt/user-data/outputs/data/raw/papers/duvenhage_kroger_1996.pdf — J. Wind Eng. Ind. Aerodyn. 62 (1996) 259–277; 10.7 m platform; e_sys 83.53% (3.1% recirc.) and 89.50%",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "salamanca2014",
+  "verdict": "Found",
+  "correct_url": "https://doi.org/10.1002/2013JD021225",
+  "what_was_checked": "Saved copy: /mnt/user-data/outputs/data/raw/papers/salamanca2014_phoenix_ac.pdf — JGR Atmos. 119, 5949–5965; 10-day Phoenix event; daytime negligible, night >1 °C at some locations; raises cooling demand",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "energiforsk2022life",
+  "verdict": "Found",
+  "correct_url": "https://energiforsk.se/media/31455/liftetime-predictions-and-status-assessments-energiforskrapport-2022-872.pdf",
+  "what_was_checked": "Opened PDF: Jakubowicz et al., Energiforsk 2022:872 (Jun 2022); s. 8.2 EN 253 quote, 300 h/yr, 50 yr <115 °C; ×2.5 per 10 °C",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanNEURates2026",
+  "verdict": "Found",
+  "correct_url": "https://council.vancouver.ca/20251112/documents/spec1d.pdf",
+  "what_was_checked": "Opened PDF: 2026 False Creek NEU Customer Rates, RTS 18251, 21 Oct 2025; levelized under-recovery; return on invested capital",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "upsiteASHRAE5",
+  "verdict": "Found",
+  "correct_url": "https://www.upsite.com/blog/major-changes-to-ashraes-fifth-edition-of-thermal-guidelines-part-3-liquid-cooling-chapter-updates/",
+  "what_was_checked": "Opened blog: W17/W27/W32/W40/W45/W+; \"around 40°C\"; \"few are capable of operating consistently above 45°C\"",
+  "problem": "Industry blog, not ASHRAE text (as cited)",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bchESI2026",
+  "verdict": "Found",
+  "correct_url": "https://bchydro.com/content/dam/BCHydro/customer-portal/documents/power-smart/business/programs/esi-customer-program-manual.pdf",
+  "what_was_checked": "Opened PDF: last updated 2026-09-24; lesser of $10,000/kW, $10,000×kWh/4, 80%; ≥25 kW; behind meter, non-exporting; 120 months; SGS/MGS/LGS, not transmission",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "bcucG3026",
+  "verdict": "Found",
+  "correct_url": "https://www.ordersdecisions.bcuc.com/bcuc/orders/en/523073/1/document.do",
+  "what_was_checked": "Opened Order G-30-26 (23 Feb 2026): L2 28.28 ¢/kWh unchanged; DCFC proposed 39.70 ¢/kWh from 1 Apr 2026",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "epcorBylaw19626",
+  "verdict": "Found",
+  "correct_url": "https://epcor.com/content/dam/epcor/documents/supporting-documents/epcor_water-services_bylaw%E2%80%8B-19626.pdf",
+  "what_was_checked": "Opened PDF: Bylaw 19626 (30 Aug 2021), Sch. 1 Pt I commercial 2022 rates: 0–100 m³ $1.6122, 100–1,000 $1.4867, 1,000–5,000 $1.1768, >5,000 $0.9472",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "mvUT019",
+  "verdict": "Found",
+  "correct_url": "https://metrovancouver.org/boards/Policies/interim-reclaimed-water.pdf",
+  "what_was_checked": "Opened PDF: UT-019 Interim Reclaimed Water Policy, effective 29 Sep 2023; industrial uses listed; \"Set pricing\" objective, no prices",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "vanISMP2014",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://vancouver.ca/files/cov/integrated-stormwater-management-best-practice-toolkit-volume-2.pdf",
+  "what_was_checked": "Opened PDF: ~$10,000 for 15 m³ below-ground tank (p. II-17); Class D ±30% (p. II-41); costs in 2014 dollars",
+  "problem": "Document dated March 2016 (costs in 2014 $), not 2014; figure is on p. II-17, not II-18",
+  "copyright": "public"
+ },
+ {
+  "id": "ceudResTable2",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "Saved copies: /mnt/user-data/outputs/data/82007eb2-res_bc_e_2.xls, a1c75be6-res_ab_e_2.xls (CEUD Residential Table 2, to 2023); recomputed 2018–22 mean: BC 0.400, AB 0.777 GJ/m²; BC 60.5, AB 119.3 GJ/household",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "caAbMOU2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Search returned only law-firm summaries; pm.gc.ca backgrounder not surfaced",
+  "problem": "CER abeyance and TIER price path not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "fasken2026",
+  "verdict": "Found",
+  "correct_url": "https://www.fasken.com/en/knowledge/2026/03/bc-court-of-appeal-clarifies-bc-utilities-commission",
+  "what_was_checked": "Opened Fasken bulletin (12 Mar 2026) on Powell River Energy v. BCUC, 2026 BCCA 93: each corporation a distinct entity, no self-supply to affiliates",
+  "problem": "Law-firm summary, not the judgment (as cited)",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "epcorTC2025s44",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2026-01-distribution-connection-services-terms-and-conditions.pdf",
+  "what_was_checked": "Opened 2026-01 edition (supersedes 2025-01): s. 4.4 no extension beyond own property except Art. 8.3; s. 6.5.2 refund when new customer shares extension in initial term",
+  "problem": "Cited Jan 2025 edition superseded (2026-01 and 2026-08 editions exist); 2025 page numbers not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "aesoTariff5",
+  "verdict": "Found",
+  "correct_url": "https://www.aeso.ca/assets/documents/Section-5-effective-2025-01-01.pdf",
+  "what_was_checked": "Opened PDF: s. 5.5 20-year sharing, 5.5(5)(b) ISO \"may refund\"; 5.7(5) no adjustment under $10 000",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "epcorStorm",
+  "verdict": "Found",
+  "correct_url": "https://epcor.com/content/dam/epcor/documents/supporting-documents/onsite-stormwater-management-guidelines.pdf",
+  "what_was_checked": "Opened PDF (undated): >0.16 ha; 0.035 m³/s/ha; C=0.90 100/375/507 m³/ha, Exhibit 2",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "lundSnow",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Search returned other OSTI snow-melt records, not 895225; cited URL refused by fetch provenance rule",
+  "problem": "Portland 86/97/111 and Klamath Falls 50 Btu/h·ft² not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "edmEncroach",
+  "verdict": "Unreachable",
+  "correct_url": "https://edmonton.ca/programs_services/service-encroachments-residential-commercial",
+  "what_was_checked": "City encroachment service page opened: fees $300 (no circulation) / $500 (circulation); form PDF itself not surfaced",
+  "problem": "Cited application form PDF not opened",
+  "copyright": "public"
+ },
+ {
+  "id": "bcDWPR",
+  "verdict": "Found",
+  "correct_url": "https://free.bcpublications.ca/civix/document/id/complete/statreg/200_2003",
+  "what_was_checked": "Opened B.C. Reg. 200/2003 (consol. 20 Oct 2026) on King's Printer free site: s. 1 definitions, 3.1(b) exemption (not for consumption, not connected, marked), ss. 6–7 permits",
+  "problem": "Read on free.bcpublications.ca rather than the cited bclaws URL (same official text)",
+  "copyright": "public"
+ },
+ {
+  "id": "burrardTemp2024",
+  "verdict": "Found",
+  "correct_url": "https://www2.gov.bc.ca/assets/gov/environment/air-land-water/water/waterquality/water-quality-objectives/burrard_inlet_physical_parameters_report.pdf",
+  "what_was_checked": "Opened PDF: Jul 2024, for TWN and Province; Table 4 p. 31 bottom 7.6–13.9 °C (2018–20); Table 9 \"No further increase in temperature\"; False Creek not sampled",
+  "problem": "p. 5 not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "abSWQG1999",
+  "verdict": "Found",
+  "correct_url": "https://open.alberta.ca/dataset/e0074537-88f6-4cc4-af5c-808161fa9af8/resource/ea13d7b1-c155-4fad-8b85-4f12443352f2/download/5713.pdf",
+  "what_was_checked": "Opened PDF: Alberta Environment, Nov 1999 (Pub. T/483), Table 1.0 p. 9: not more than 3 °C above ambient",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "hawaiiSWAC2002",
+  "verdict": "Found",
+  "correct_url": "https://energy.hawaii.gov/wp-content/uploads/2011/10/SeaWaterDistrictCoolingFeasibilityAnalysisfortheStateofHawaii2002.pdf",
+  "what_was_checked": "Opened PDF: DBEDT, Oct 2002; CWP $12,046,202 (p. 61) and $12,470,858 (p. 66); ~5.7/5.8 km; intakes 1,500–1,600 ft",
+  "problem": "92.5% saving is in Exec. Summary p. 4, not pp. 61–66; intake ~457–488 m, not 500 m",
+  "copyright": "public"
+ },
+ {
+  "id": "epsbNSR",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "Saved copy: /mnt/user-data/outputs/data/raw/hydro/nsr_epsb.geojson — North Saskatchewan River polygon, Altalis-style base-feature fields (bf_id, feature_co GA61850000, RIV-MAJ)",
+  "problem": "No URL; EPSB host layer not opened online; Altalis licence terms not checked",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "canvecHydroBC",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://open.canada.ca/data/en/dataset/9d96e8c9-22fe-4ad2-b5e8-94a6991b744b",
+  "what_was_checked": "Opened dataset page: \"Lakes, Rivers and Glaciers in Canada – CanVec Series – Hydrographic Features\", NRCan, OGL-Canada; saved extract /mnt/user-data/outputs/data/raw/hydro/canvec_van_water_extract.json (206 features: ocean, watercourse, side channel)",
+  "problem": "Saved extract has source dates from 1980 (7 features), not \"from 1987 on\"",
+  "copyright": "public"
+ },
+ {
+  "id": "bcaGuideRes",
+  "verdict": "Found",
+  "correct_url": "https://www.bcassessment.ca/Files/Misc/UserGuide/Residential_Inventory_Extract_External_User_Guide0.1.pdf",
+  "what_was_checked": "Opened PDF: v1.1, 8 Jul 2021; field 9 MB Total Finished Area (SFD); fields 34–36 occupancy code, unit of measure value/code (STRLA, STRPS parking space, STRUT)",
+  "problem": "No URL in citation",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "ceudCom2023t24",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "Saved copies: /mnt/user-data/outputs/data/raw/nrcan_ceud/x/com_bct_e.xls and com_ab_e.xls — Table 24 \"Space Heating Secondary Energy Use and GHG Emissions by Energy Source\", 2000–2023, BC & Territories / Alberta",
+  "problem": "",
+  "copyright": "public"
+ }
+]
