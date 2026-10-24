@@ -17,6 +17,22 @@ HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 d = json.load(open(os.path.join(ROOT, 'register', 'diagram_data.json')))
 reg = {q['id']: q for q in json.load(open(os.path.join(ROOT, 'register', 'formula_register.json')))['quantities']}
 SRC = d['sources']
+import glob
+FILES = [f for f in glob.glob(os.path.join(ROOT, 'data', '**', '*'), recursive=True)
+         if os.path.isfile(f) and re.search(r'\.(pdf|xlsx?|csv|epw|txt|html?)$', f, re.I) and '/raw/' not in f]
+STOP = set('the of and for to in a on by with from at per as is or an data city report pdf csv xlsx canada canadian 2020 2021 2022 2023 2024 2025 2026 https http www com ca org gov en html'.split())
+tok = lambda t: {w for w in re.findall(r'[a-z0-9]+', t.lower()) if len(w) > 2 and w not in STOP}
+FT = {f: tok(os.path.basename(f).rsplit('.', 1)[0].replace('_', ' ').replace('-', ' ')) for f in FILES}
+def file_for(text):
+    T = tok(text); best = None
+    for f, ft in FT.items():
+        if not ft: continue
+        sc = len(T & ft) / len(ft)
+        if sc >= 0.6 and len(T & ft) >= 2 and (best is None or sc > best[0]): best = (sc, f)
+    if not best: return ''
+    rel = os.path.relpath(best[1], ROOT)
+    return rel if best[0] >= 0.9 else rel + '  (suggested, confirm)'
+url_of = lambda t: (re.findall(r'https?://\S+', t or '') or [''])[0].rstrip('.,;)')
 N = {x['id']: x for x in d['nodes']}
 SN = {s['id']: s['name'] for s in d['stages']}
 ORDER = ['input', 'size', 'place', 'characterise', 'prospect', 'opportunity', 'test', 'decide']
@@ -34,7 +50,7 @@ seq = sorted(N, key=lambda i: (lvl[i], ORDER.index(N[i]['stage']), -len(used_by[
 
 OUT = os.path.join(HERE, 'chain_review.xlsx')
 REVIEW_O = ['Source check', 'Math check', 'Display check', 'J.B. decision', 'Status', 'Notes']
-REVIEW_S = ['Agent verdict', 'Page / table / quote', 'Opened (date)', 'J.B. OK', 'Notes']
+REVIEW_S = ['File confirmed', 'Page', 'Agent verdict', 'Page / table / quote', 'Opened (date)', 'J.B. OK', 'Notes']
 keep_o, keep_s = {}, {}
 if os.path.exists(OUT):  # keep review work already entered
     old = load_workbook(OUT)
@@ -59,7 +75,7 @@ for n, i in enumerate(seq, 1):
     o.append(row)
 
 s = wb.create_sheet('Sources')
-HS = ['Part #', 'Part id', 'Part', 'Source id', 'Used for', 'Role', 'Register trust', 'Register says verified', 'Source (as listed)'] + REVIEW_S
+HS = ['Part #', 'Part id', 'Part', 'Source id', 'Used for', 'Role', 'Register trust', 'Register says verified', 'Source (as listed)', 'Web link', 'File in data/'] + REVIEW_S
 s.append(HS)
 for n, i in enumerate(seq, 1):
     x = N[i]; roles = {r['id']: r for r in (reg.get(i, {}).get('source_roles') or [])}
@@ -70,7 +86,7 @@ for n, i in enumerate(seq, 1):
         rr = roles.get(sid, {})
         txt = SRC.get(sid, x.get('source_text', '') if sid == '(text only)' else '(missing from source list)')
         row = [n, i, x['name'], sid, rr.get('term', ''), rr.get('role', ''), rr.get('conf', ''),
-               {True: 'yes', False: 'no'}.get(rr.get('verified'), ''), txt]
+               {True: 'yes', False: 'no'}.get(rr.get('verified'), ''), txt, url_of(txt), file_for(txt) or 'web only (no saved copy)']
         k = keep_s.get((i, sid), {}); row += [k.get(h) for h in REVIEW_S]
         s.append(row)
 
@@ -80,13 +96,14 @@ for line in [
     ['Order', 'Every part in build order. Level 0 depends on nothing; level 1 depends only on level 0; and so on. Review top to bottom.'],
     ['Sources', 'One row per part and source. A source check opens the source and confirms the figure, page and date.'],
     ['Status', 'To do · In review · OK · Fix needed · Decision needed · Unverified (kept, marked) · Retired'],
+    ['File in data/', 'The saved copy in the project data folder, matched by name. "(suggested, confirm)" = a likely match to check. "web only" = read online, no copy saved.'],
     ['Agent verdict', 'Confirmed · Corrected (figure differs) · Unverified (could not open) · Wrong source · Popular source (replace)'],
     ['Trust', '100 arithmetic · 90 rule or standard · 80 government data · 70 peer-reviewed, transferred · 60 derived · 50 claim · 40 proxy · 20 judged · 0 gap'],
     ['Chain trust', 'The lowest trust among the part and everything it depends on.'],
 ]: k.append(line)
 
 for ws, widths in ((o, {'A': 5, 'B': 6, 'C': 18, 'D': 34, 'E': 18, 'F': 9, 'G': 34, 'H': 8, 'I': 50, 'J': 60, 'K': 8, 'L': 8, 'M': 40, 'N': 7, 'O': 7, 'P': 16, 'Q': 16, 'R': 16, 'S': 24, 'T': 16, 'U': 40}),
-                   (s, {'A': 6, 'B': 18, 'C': 30, 'D': 16, 'E': 40, 'F': 12, 'G': 8, 'H': 9, 'I': 70, 'J': 16, 'K': 40, 'L': 12, 'M': 10, 'N': 40}),
+                   (s, {'A': 6, 'B': 18, 'C': 30, 'D': 16, 'E': 40, 'F': 12, 'G': 8, 'H': 9, 'I': 70, 'J': 40, 'K': 40, 'L': 10, 'M': 8, 'N': 16, 'O': 40, 'P': 12, 'Q': 10, 'R': 40}),
                    (k, {'A': 16, 'B': 120})):
     for c, w in widths.items(): ws.column_dimensions[c].width = w
     for c in ws[1]: c.font = Font(bold=True)
@@ -97,7 +114,7 @@ for ws, widths in ((o, {'A': 5, 'B': 6, 'C': 18, 'D': 34, 'E': 18, 'F': 9, 'G': 
 dv = DataValidation(type='list', formula1='"To do,In review,OK,Fix needed,Decision needed,Unverified,Retired"', allow_blank=True)
 o.add_data_validation(dv); dv.add(f'T2:T{o.max_row}')
 dv2 = DataValidation(type='list', formula1='"Confirmed,Corrected,Unverified,Wrong source,Popular source"', allow_blank=True)
-s.add_data_validation(dv2); dv2.add(f'J2:J{s.max_row}')
+s.add_data_validation(dv2); dv2.add(f'N2:N{s.max_row}')
 o.auto_filter.ref = o.dimensions; s.auto_filter.ref = s.dimensions
 wb.save(OUT)
 print('parts', len(seq), 'source rows', s.max_row - 1, 'levels', max(lvl.values()) + 1)
