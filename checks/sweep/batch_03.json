@@ -1,0 +1,574 @@
+[
+{
+"id": "nir2026",
+"text": "ECCC, National Inventory Report 1990–2024 (2026 submission), Part 1 (data/NIR_2026_Part1.pdf) and Annex 7 electricity-intensity workbook, Tables A7-1 (Canada), A7-10 (Alberta), A7-11 (British Columbia) — data/NIR_2026_Annex7_Electricity_Intensity.xlsx; extract data/nir2026_annex7_intensity_extract.json",
+"url": "",
+"used_by": [
+"Grid carbon",
+"What the receiver uses now"
+]
+},
+{
+"id": "ceG526",
+"text": "BCUC Order G-5-26, Creative Energy 2026 interim rates: downtown steam $19.53 / 16.53 / 14.63 / 11.60 per M# by tier (≈ $66.6 to $39.6 per MWh) — https://www.ordersdecisions.bcuc.com/bcuc/orders/en/523033/1/document.do",
+"url": "https://www.ordersdecisions.bcuc.com/bcuc/orders/en/523033/1/document.do",
+"used_by": [
+"Buyer ceiling price"
+]
+},
+{
+"id": "fjfAars2020",
+"text": "Fjernvarme Fyn, Årsberetning 2020, p.9 production table and p.13: 'Varmepumperne tilknyttet Facebook har forbrugt 14.020 MWh el svarende til COP 4,5'; 230 TJ heat (Facebook heat pumps only, first full year) — https://www.fjernvarmefyn.dk/media/1754/fjernvarme_fyn_aarsberetning_2020.pdf",
+"url": "https://www.fjernvarmefyn.dk/media/1754/fjernvarme_fyn_aarsberetning_2020.pdf",
+"used_by": [
+"Heat-pump COP (Lorenz)",
+"Who pays which part"
+]
+},
+{
+"id": "fjfAars2124",
+"text": "Fjernvarme Fyn, Årsberetninger 2021–2024 (heat-pump output combined with Ejby Mølle): 566 / 465 / 767 / 990 TJ; 2023 'virkningsgrad 393 %'; 43 MW at Tietgenbyen (2021) — https://www.fjernvarmefyn.dk/media/ow1hkzhq/aarsberetning_2024_web.pdf and earlier",
+"url": "https://www.fjernvarmefyn.dk/media/ow1hkzhq/aarsberetning_2024_web.pdf",
+"used_by": []
+},
+{
+"id": "dfKatalog2022",
+"text": "Dansk Fjernvarme, Inspirationskatalog for store varmepumper 2022, pp.8–11 (Tietgenbyens Varmecentral): nominal 23.9 + 20.7 MW, nominal COP 4.4 / 4.9, source 27→15 °C, DH 40→75 °C, 5,000–7,000 full-load h, average COP 2021–22 4.2 'inklusive cirkulations- og distributionspumper', investment 215 M DKK, DH output ≈ 30 % above DC-side heat — trade-association catalogue written with the utility — https://danskfjernvarme.dk/media/eqbhcqlv/inspirationskatalog-for-store-varmepumper-2022.pdf",
+"url": "https://danskfjernvarme.dk/media/eqbhcqlv/inspirationskatalog-for-store-varmepumper-2022.pdf",
+"used_by": [
+"Heat-pump COP (Lorenz)",
+"Heat captured at the boundary (E_reuse)",
+"Heat available after heat pump",
+"Operator floor price"
+]
+},
+{
+"id": "teliaHKI2024",
+"text": "Telia, Helsinki Data Center cooling options for AI/GPU loads (operator PDF), pp.4–6: 24 MW IT / 100 MW total; module 5 MW cooling → 6.5 MW heat; snapshot 29 May 2024: 5.65 MW to DH (4.11 waste heat + 1.45 added), COP 3.9, PUE 1.152, ERF 0.75; loop 20 / 32 °C, DH 75–85 °C — OPERATOR CLAIM, one-day point measurement — https://www.telia.fi/dam/jcr:3e4b6c78-a106-4364-9a91-97e36e8a77c1/Telia-Helsinki-Datacenter-cooling-options-for-AI-GPU-loads.pdf",
+"url": "https://www.telia.fi/dam/jcr:3e4b6c78-a106-4364-9a91-97e36e8a77c1/Telia-Helsinki-Datacenter-cooling-options-for-AI-GPU-loads.pdf",
+"used_by": [
+"IT load, actual (range)",
+"Heat-pump COP (Lorenz)",
+"Energy reuse factor"
+]
+},
+{
+"id": "nivosMantsala",
+"text": "Nivos (Mäntsälä utility) articles 2016/2019 and 9 Mar 2022; Sitra case 18 Oct 2019; NIB loan page 21 Oct 2019: DC power demand ~15 MW (phase 1), heat recovery nominal ~6 MW, 4.0 MW heat pump (2015), 20 GWh delivered 2018 = 54 % of town demand, 30 GWh/yr programme figure, exhaust ~37 °C → 80 °C, gas −70 %, DH price −11 % — utility/programme reports — https://nivos.fi/ajankohtaista/paikallisen-datakeskuksen-kanssa-yhteistyossa-luotu-ekosysteemi-lammittaa-mantsalassa/ ; https://www.nib.int/loan/nivos-energia-oy-22822",
+"url": "https://nivos.fi/ajankohtaista/paikallisen-datakeskuksen-kanssa-yhteistyossa-luotu-ekosysteemi-lammittaa-mantsalassa/",
+"used_by": [
+"Heat available after heat pump",
+"Operator floor price"
+]
+},
+{
+"id": "exergiAR2023",
+"text": "Stockholm Exergi, Års- och hållbarhetsredovisning 2023 p.20 (117 GWh recovered from Stockholm Data Parks and Öppen Fjärrvärme in 2023); Covenant of Mayors case study 2023 (~EUR 190,000 per year per MW delivered); Energiforsk 2020:681 pp.12–17 (75 GWh from data halls 2018; Bahnhof Pionen 600 kW at 68 °C; meter owned by Exergi; hourly avoided-cost price) — https://www.stockholmexergi.se/wp-content/uploads/2024/03/Arsredovisning-2023_SV_240326_sidor.pdf",
+"url": "https://www.stockholmexergi.se/wp-content/uploads/2024/03/Arsredovisning-2023_SV_240326_sidor.pdf",
+"used_by": [
+"Heat captured at the boundary (E_reuse)",
+"Who pays which part"
+]
+},
+{
+"id": "tallaghtD22",
+"text": "ENABLE DHC D2.2 Tallaght (2025) pp.5–8 and Codema project page: 3,770 MWh distributed in the first year (2023) from a 3 MW heat pump (Heat Works CLG, SDCC-owned); source ~25 °C, network 70/55 °C; heat supplied by AWS free; customer tariff fixed + kWh — https://enabledhc.ambienteitalia.it/wp-content/uploads/2025/06/D2.2-Tallaght.pdf ; https://www.codema.ie/our-work/tallaght-district-heating-scheme/",
+"url": "https://enabledhc.ambienteitalia.it/wp-content/uploads/2025/06/D2.2-Tallaght.pdf",
+"used_by": [
+"Operator floor price",
+"Who pays which part"
+]
+},
+{
+"id": "engiePA10",
+"text": "Engie Solutions / SMIREC press releases 2022 and 21 Jun 2024 (Equinix PA10 → Plaine Commune Énergie): water recovered at 28 °C, up to 6.6 MW, 10,800 MWh/yr projected, €5.7 M investment, heat supplied free for 15 years — utility release — https://engie-solutions.com/sites/default/files/assets/2024-06/cp_mise_en_service_officielle_de_la_sous-station_equinix_vdef_v2.pdf",
+"url": "https://engie-solutions.com/sites/default/files/assets/2024-06/cp_mise_en_service_officielle_de_la_sous-station_equinix_vdef_v2.pdf",
+"used_by": [
+"Operator floor price",
+"Who pays which part"
+]
+},
+{
+"id": "rvoCases2018",
+"text": "RVO / Nederland ICT, Restwarmte uit datacenters – succesvoorbeelden (Feb 2018) pp.12–15 and Berenschot (Mar 2018): APG Heerlen 520 kW DC, 8,900 GJ extracted, Mijnwater network 16/28 °C, ≈€1.5 M; Eindhoven and Hengelo kW-scale gas heat pumps to 55 °C — https://www.bouwstenen.nl/sites/default/files/uploads/Rapportage-Restwarmte-uit-datacenters.pdf",
+"url": "https://www.bouwstenen.nl/sites/default/files/uploads/Rapportage-Restwarmte-uit-datacenters.pdf",
+"used_by": [
+"Heat available after heat pump"
+]
+},
+{
+"id": "bytes2heat",
+"text": "DENEFF / IER Stuttgart, Bytes2Heat Best-Practice-Übersicht (2023): Telehouse FRANKY 35 MW DC → Westville 2,400 MWh/yr, 2 × 320 kWth HPs, 30 → 70 °C, 15-yr contract; ReUseHeat Braunschweig 300 kWth, COP 3.6 design, 25/18 → 70/40 °C, 1,750 MWh/yr, €460k; HLRS 270 MWh/yr — https://deneff.org/wp-content/uploads/2023/05/Bytes2Heat-Best-Practice-Uebersicht.pdf",
+"url": "https://deneff.org/wp-content/uploads/2023/05/Bytes2Heat-Best-Practice-Uebersicht.pdf",
+"used_by": [
+"Heat-pump COP (Lorenz)",
+"Heat available after heat pump",
+"Operator floor price"
+]
+},
+{
+"id": "bcucC113",
+"text": "BCUC Order C-1-13 with Reasons (Feb 2013), FortisBC Alternative Energy Services, TELUS Garden thermal energy system, pp.14–19: 'A year round base load of 1,400 kW of heat is available on a 24/7 basis' from the TELUS data centre; development load 5,194 MWh heating / 4,591 MWh cooling; 94 % of heating from recovery, steam peaking; TES capital $7.9 M, waste-heat option $3.2 M vs geo-exchange $6.8 M; 'free waste heat supply from the TELUS Data Centre'; customer rate BC Hydro residential + 5–10 % (G-155-12: $0.105–0.126/kWh 2014–18); annual actual-load report rescinded by G-2-15 — https://www.ordersdecisions.bcuc.com/bcuc/orders/en/118621/1/document.do",
+"url": "https://www.ordersdecisions.bcuc.com/bcuc/orders/en/118621/1/document.do",
+"used_by": [
+"Heat available after heat pump",
+"Buyer ceiling price",
+"Who pays which part"
+]
+},
+{
+"id": "ulavalCVD",
+"text": "Université Laval, Étude de cas – Centre de valorisation des données (Sept 2021) pp.9–10, 14–15, 24: Colosse heat recovery 1,150,000 kWh/yr to the campus chilled-water loop, water-to-water heat pumps to 40 °C, COP 'de l'ordre de 7', 130,000 m³ gas/yr saved, PUE 1.28 measured over a year — https://transformation-numerique.ulaval.ca/wp-content/uploads/2023/05/etude-de-cas-centre-de-valorisation-des-donnes-universite-laval-septembre-2021.pdf",
+"url": "https://transformation-numerique.ulaval.ca/wp-content/uploads/2023/05/etude-de-cas-centre-de-valorisation-des-donnes-universite-laval-septembre-2021.pdf",
+"used_by": [
+"Heat-pump COP (Lorenz)"
+]
+},
+{
+"id": "equinixTR5",
+"text": "Equinix press release 5 Jun 2024 and blog 24 Apr 2025: TR5 heat to Markham District Energy (operator claim) — https://investor.equinix.com/news-events/press-releases/detail/1044/help-us-heat-our-neighbors---equinix-makes-data-center",
+"url": "https://investor.equinix.com/news-events/press-releases/detail/1044/help-us-heat-our-neighbors---equinix-makes-data-center",
+"used_by": [
+"Who pays which part"
+]
+},
+{
+"id": "iso30134_6",
+"text": "ISO/IEC 30134-6:2021 Energy reuse factor (read in the BIS identical-adoption text, Oct 2023): ERF = E_Reuse ÷ E_DC, 0–1; only energy reused outside the data-centre boundary counts (cl.4); heat pumps outside the boundary 'shall not be included in the calculation' (cl.5); measured 'at the logical boundary of the data centre at the handoff point' by flow and temperature rise (cl.6); Annex A.1.5.3: heat-pump output is not reusable energy as it contains the pump's electricity — https://services.bis.gov.in/tmp/LITD39622436_17102023_1.pdf",
+"url": "https://services.bis.gov.in/tmp/LITD39622436_17102023_1.pdf",
+"used_by": [
+"Heat captured at the boundary (E_reuse)",
+"Energy reuse factor"
+]
+},
+{
+"id": "euReg2024_1364",
+"text": "Commission Delegated Regulation (EU) 2024/1364 (14 Mar 2024) under EED 2023/1791: data centres ≥ 500 kW IT report E_DC, E_IT (EN 50600-4-2), waste heat reused E_REUSE per EN 50600-4-6 (outside the boundary only, at the handoff), average waste-heat temperature T_WH at the computer-room exchanger; Annex III ERF = E_REUSE ÷ E_DC — https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1364",
+"url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1364",
+"used_by": [
+"Heat captured at the boundary (E_reuse)",
+"Energy reuse factor"
+]
+},
+{
+"id": "skatOverskud",
+"text": "Skattestyrelsen, Juridisk vejledning E.A.4.6.10.2–3: electricity in heat pumps recovering surplus heat 'skal måles hver for sig'; the surplus-heat supplier is responsible for metering; heat measured at the heat-pump outlet with 3 × electricity deducted — https://www.tax.dk/jv-2024-1/ea/E_A_4_6_10_3.htm",
+"url": "https://www.tax.dk/jv-2024-1/ea/E_A_4_6_10_3.htm",
+"used_by": [
+"Heat captured at the boundary (E_reuse)"
+]
+},
+{
+"id": "dkPrisloftFAQ",
+"text": "Forsyningstilsynet FAQ on the surplus-heat price cap: cap applies to plants ≥ 0.25 MW; 'De samlede omkostninger til udnyttelse af overskudsvarme skal holdes under prisloftet' including the heat pump, connection, O&M and any payment to the supplier — https://cdn1.gopublic.dk/forsyningstilsynet/Media/638372891900131751/FAQ%20vedrørende%20prisloft%20på%20overskudsvarme.pdf",
+"url": "https://cdn1.gopublic.dk/forsyningstilsynet/Media/638372891900131751/FAQ%20vedrørende%20prisloft%20på%20overskudsvarme.pdf",
+"used_by": []
+},
+{
+"id": "nrelRSF",
+"text": "NREL RSF data-centre case study (DOE): 'Average ERE = 0.91 (calculated, not measured)' against 'Average PUE = 1.18 (measured)' — https://www1.eere.energy.gov/buildings/publications/pdfs/rsf/rsf_data_center_case_study.pdf",
+"url": "https://www1.eere.energy.gov/buildings/publications/pdfs/rsf/rsf_data_center_case_study.pdf",
+"used_by": [
+"Energy reuse factor"
+]
+},
+{
+"id": "van3575s2",
+"text": "City of Vancouver Zoning and Development By-law 3575, Section 2 (Jun 2026 consolidation): 'Bulk Data Storage' = 'The use of a wholly enclosed building for the storage of information on operating data servers', in the Transportation and Storage Uses group — https://bylaws.vancouver.ca/zoning/zoning-by-law-section-2.pdf",
+"url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-section-2.pdf",
+"used_by": []
+},
+{
+"id": "vanDistricts",
+"text": "Vancouver district schedules (Jun 2026 / Nov 2025): Bulk Data Storage Conditional in I-2 (s.2.2.7, not at ground floor), I-3 sub-area A (s.2.2.11), I-1C (s.2.2.1); not listed in I-1, I-1A, I-1B, I-4, IC-1–3, M-1, M-1A, M-1B, M-2, MC-1/2; Downtown ODP (DD) does not list it; CD-1 sets its own uses — https://bylaws.vancouver.ca/zoning/ (district schedule PDFs)",
+"url": "https://bylaws.vancouver.ca/zoning/",
+"used_by": []
+},
+{
+"id": "rts19744p4",
+"text": "RTS 19744 p.4: 'While the site's existing I-1A zoning does not allow data centres, this use is consistent with the RGS and ODP'; DCLs $0 on the applicant's estimate of no net floor area (p.6); pulled from the 23 Jul 2026 hearing, further consultation after the election (Shape Your City) — https://council.vancouver.ca/20260714/documents/rr1.pdf ; https://www.shapeyourcity.ca/111-e-5",
+"url": "https://council.vancouver.ca/20260714/documents/rr1.pdf",
+"used_by": []
+},
+{
+"id": "vanRezoneTime",
+"text": "City of Vancouver: typical CD-1 rezoning 'Target ~16 weeks to Letter of Response', 'Target ~15 months to decision' (process overview); 'about one year to process (from fee payment to public hearing)' (apply-to-rezone page, Jun 2026) — https://vancouver.ca/files/cov/rezoning-process-overview.pdf",
+"url": "https://vancouver.ca/files/cov/rezoning-process-overview.pdf",
+"used_by": [
+"What a rezoning takes",
+"Time to build and connect"
+]
+},
+{
+"id": "vanFees2026",
+"text": "City of Vancouver 2026 development and building permit fees (effective 1 Jan 2026), Schedule 2 s.3 new CD-1: elsewhere $94,500 + $1,590 per 100 m² (max $343,700) under 8,000 m²; Downtown/Broadway $226,300 + $1,590/100 m²; larger bands to $8,183,200; development permit 'all other uses' conditional $2,530 per 100 m² to 500 m² then $1,570 (max $366,600) — https://vancouver.ca/files/cov/vancouver-development-building-permit-fees.pdf",
+"url": "https://vancouver.ca/files/cov/vancouver-development-building-permit-fees.pdf",
+"used_by": [
+"What a rezoning takes"
+]
+},
+{
+"id": "vanDCL",
+"text": "Vancouver DCL Bulletin (amended 25 Aug 2026), Table 1 rates from 10 Dec 2025: Industrial (I-2, M-1, M-1A, M-1B, M-2) $112.87/m²; Mixed Employment (IC-1–3, I-1, I-1A–C, I-3, I-4) $211.54/m²; no levy where floor area does not increase (s.6.1(a)) — https://guidelines.vancouver.ca/bulletins/bulletin-development-cost-levies.pdf",
+"url": "https://guidelines.vancouver.ca/bulletins/bulletin-development-cost-levies.pdf",
+"used_by": [
+"What a rezoning takes"
+]
+},
+{
+"id": "vanACC",
+"text": "Vancouver Amenity Cost Charges, RTS 18333 (6 Jul 2026) Table 5: Industrial $12.92/m², Mixed-Employment $24.22/m², Commercial $32.29/m², effective 30 Sep 2026, in addition to DCLs — https://council.vancouver.ca/20260714/documents/r4.pdf",
+"url": "https://council.vancouver.ca/20260714/documents/r4.pdf",
+"used_by": [
+"What a rezoning takes"
+]
+},
+{
+"id": "vanCAC",
+"text": "Vancouver CAC Policy (amended 30 Sep 2026) s.8.2(c): rezonings submitted after 30 Sep 2026 that are 100 % commercial, industrial and institutional are exempt — https://guidelines.vancouver.ca/policy-community-amenity-contributions-for-rezonings.pdf",
+"url": "https://guidelines.vancouver.ca/policy-community-amenity-contributions-for-rezonings.pdf",
+"used_by": [
+"What a rezoning takes"
+]
+},
+{
+"id": "vanPermitTimes",
+"text": "City of Vancouver memo to Council, 10 Feb 2025 (3-3-3-1 permitting): Target D 'One year to approve permits for high rise and large-scale projects'; industrial/data-centre times not stated — https://vancouver.ca/files/cov/2025-02-10-council-memo-3-3-3-1-permitting-program-update.pdf",
+"url": "https://vancouver.ca/files/cov/2025-02-10-council-memo-3-3-3-1-permitting-program-update.pdf",
+"used_by": []
+},
+{
+"id": "edm20001",
+"text": "Edmonton Zoning Bylaw 20001, s.8.10 use definitions (no 'Data Centre' use); zone use lists: IM 'Major Industrial, limited to those existing as of January 1, 2024', Minor Industrial; BE Minor Industrial in an enclosed building; IH use list UNVERIFIED; s.7.20(3.3.2) unlisted activities 'always considered a Discretionary Use' — https://zoningbylaw.edmonton.ca/part-8-definitions/810-use-definitions",
+"url": "https://zoningbylaw.edmonton.ca/part-8-definitions/810-use-definitions",
+"used_by": []
+},
+{
+"id": "edmLDA26",
+"text": "City of Edmonton engagement page, LDA26-0225 (received 6 Jul 2026): 'an AI Data Centre would be considered a heavy industrial use'; 'A small-scale data centre could be considered as a Minor Industrial Use' where nuisances are minimal and contained on site; rezoning, text amendment and public hearing needed in EETIM — https://engaged.edmonton.ca/eetpdatacentre",
+"url": "https://engaged.edmonton.ca/eetpdatacentre",
+"used_by": []
+},
+{
+"id": "edmRezone",
+"text": "City of Edmonton rezoning page: fees paid before acceptance; notice to at least 60 m; public hearing; Direct Control needs 21-day pre-application notice; 'Processing times vary'; fees and durations not stated on the page — https://www.edmonton.ca/business_economy/rezoning",
+"url": "https://www.edmonton.ca/business_economy/rezoning",
+"used_by": [
+"What a rezoning takes"
+]
+},
+{
+"id": "parklandLUB",
+"text": "Parkland County Land Use Bylaw 2025-12 (passed 27 May 2025): 'Data Processing Facility' listed in BI, MI, HI and C districts (permitted vs discretionary UNVERIFIED); s.5.80 regulations not read; Bylaw 2025-23 creates a 'Data Processing and Infrastructure Direct Control District (DC Area 7)' — https://www.parklandcounty.com/media/iault5lh/amended-2025-12-july.pdf",
+"url": "https://www.parklandcounty.com/media/iault5lh/amended-2025-12-july.pdf",
+"used_by": []
+},
+{
+"id": "abConsult",
+"text": "Government of Alberta, data centres — Indigenous consultation: a project 'cannot receive its Water Act licence, its public lands disposition or its environmental approval' until consultation is complete; EPEA approval needed for backup generation over 50 MW (EPA fact sheet 20 Jul 2026) — https://www.alberta.ca/datacentres/indigenous",
+"url": "https://www.alberta.ca/datacentres/indigenous",
+"used_by": [
+"Consultation and rights that apply"
+]
+},
+{
+"id": "gvsddUT008",
+"text": "Metro Vancouver (GVS&DD) Policy UT-008 Sewage Waste Heat Recovery (rev. 29 Jul 2022): access 'on a first-come first-served basis'; private applicants need a letter of support from the host municipality; heat user pays access costs; no $/GJ — https://metrovancouver.org/services/liquid-waste/Documents/sewage-waste-heat-recovery-policy.pdf",
+"url": "https://metrovancouver.org/services/liquid-waste/Documents/sewage-waste-heat-recovery-policy.pdf",
+"used_by": [
+"Sewer as heat source or sink"
+]
+},
+{
+"id": "gvsdd299",
+"text": "GVS&DD Sewer Use Bylaw 299, Sch. A 4(b),(c): prohibited 'Any Waste which will raise the temperature of Waste entering any Sewage Facility to 40 degrees Centigrade' and non-domestic waste at 65 °C — https://metrovancouver.org/boards/Bylaws/GVSDD_Bylaw_299_Consolidated.pdf",
+"url": "https://metrovancouver.org/boards/Bylaws/GVSDD_Bylaw_299_Consolidated.pdf",
+"used_by": [
+"Sewer as heat source or sink"
+]
+},
+{
+"id": "neuSewage",
+"text": "City of Vancouver, NEU sewage heat recovery: '3.2 megawatts (MW) of sewage heat recovery capacity', expansion 'an additional 6.6 megawatts' (two 3.3 MW heat pumps, end of 2024) — https://vancouver.ca/home-property-development/sewage-heat-recovery-expansion-project.aspx",
+"url": "https://vancouver.ca/home-property-development/sewage-heat-recovery-expansion-project.aspx",
+"used_by": [
+"Sewer as heat source or sink"
+]
+},
+{
+"id": "edm18100",
+"text": "Edmonton Drainage Bylaw 18100 s.5.10(i): non-contact cooling water to the sanitary sewer only with prior written EWSI approval; no EPCOR sewer-heat programme found — https://www.edmonton.ca/residential_neighbourhoods/Bylaws/C18100.pdf",
+"url": "https://www.edmonton.ca/residential_neighbourhoods/Bylaws/C18100.pdf",
+"used_by": [
+"Sewer as heat source or sink"
+]
+},
+{
+"id": "bcWSRfees",
+"text": "BC Water Sustainability Fees, Rentals and Charges Tariff Regulation 37/2016, Sch.1–2: industrial 'cooling' application $1,000; 'heat exchange' annual rental $2.25 per 1,000 m³, minimum $200 — https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/37_2016",
+"url": "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/37_2016",
+"used_by": [
+"Sea or river water as a cooling sink"
+]
+},
+{
+"id": "thermalLimits",
+"text": "Thermal discharge limits: BC Water Quality Guideline (temperature, 2001) marine '+ or - 1 degree Celsius change from natural ambient background', ≤0.5 °C/h; CCME marine ±1 °C; proposed Burrard Inlet objective 'No further increase in temperature' (Jul 2024); Alberta Surface Water Quality Guidelines 1999 'Not to be increased by more than 3°C above ambient' — https://www2.gov.bc.ca/assets/gov/environment/air-land-water/water/waterquality/water-quality-guidelines/approved-wqgs/temperature-or.pdf",
+"url": "https://www2.gov.bc.ca/assets/gov/environment/air-land-water/water/waterquality/water-quality-guidelines/approved-wqgs/temperature-or.pdf",
+"used_by": [
+"Sea or river water as a cooling sink"
+]
+},
+{
+"id": "enwaveDLWC",
+"text": "City of Toronto reports (2000; 21 Nov 2019) on Enwave Deep Lake Water Cooling: water drawn at 4 °C, returned at ≤13 °C; 50-year Energy Transfer Agreement to 2054; serves 'over 80 buildings … including data centers' (DLWC Expansion EA 2020) — https://www.toronto.ca/legdocs/mmis/2019/ie/bgrd/backgroundfile-140486.pdf",
+"url": "https://www.toronto.ca/legdocs/mmis/2019/ie/bgrd/backgroundfile-140486.pdf",
+"used_by": [
+"Sea or river water as a cooling sink"
+]
+},
+{
+"id": "neuConnect",
+"text": "City of Vancouver NEU Connectivity Guidelines (May 2026 Rev.1): network 'minimum 65°C'; building supply 60 °C year-round; 'a maximum return water temperature of 45°C must be achieved under all conditions'; the NEU does not provide cooling; waste heat from building cooling may be accepted for a bill credit — https://guidelines.vancouver.ca/guidelines-neighbourhood-energy-utility-connectivity-requirements.pdf",
+"url": "https://guidelines.vancouver.ca/guidelines-neighbourhood-energy-utility-connectivity-requirements.pdf",
+"used_by": [
+"Receiver heat demand"
+]
+},
+{
+"id": "bchRS2289",
+"text": "BC Hydro self-generation: RS 1289 net metering closing; from 1 Jul 2026 RS 2289 — export 'up to 100 kW per phase', excess purchased 'at 10 cents per kWh'; community generation up to 2 MW net injection — https://www.bchydro.com/toolbar/about/strategies-plans-regulatory/rate-design/self-generation-rate-updates.html",
+"url": "https://www.bchydro.com/toolbar/about/strategies-plans-regulatory/rate-design/self-generation-rate-updates.html",
+"used_by": [
+"Rules for generation beside the data centre"
+]
+},
+{
+"id": "abMicrogen",
+"text": "Alberta micro-generation: capacity 'that does not exceed five (5) megawatts' (AUC); small (<150 kW) credited at retail, large at hourly wholesale; emissions ≤418 kg/MWh (alberta.ca, 2 Mar 2026) — https://www.alberta.ca/micro-generation",
+"url": "https://www.alberta.ca/micro-generation",
+"used_by": [
+"Rules for generation beside the data centre"
+]
+},
+{
+"id": "abGridPage",
+"text": "Government of Alberta, data centres — grid: 'projects that pair their demand with dedicated new generation or storage go to the front of the connection line'; interim allocation 1,200 MW, fully allocated — https://www.alberta.ca/datacentres/grid",
+"url": "https://www.alberta.ca/datacentres/grid",
+"used_by": [
+"Incentive scoring (counter-example)",
+"Rules for generation beside the data centre"
+]
+},
+{
+"id": "bchLGS",
+"text": "BC Hydro business rates (Large General Service RS 1600–1611, Revision 26, effective 1 Jul 2026): basic 29.99 ¢/day, demand $13.83/kW, energy 6.79 ¢/kWh; Transmission Service RS 1830 (fiscal 2027): $12.178/kVA, 4.914 ¢/kWh (RS 1823 cancelled 1 Apr 2026) — https://app.bchydro.com/accounts-billing/rates-energy-use/electricity-rates/business-rates.html",
+"url": "https://app.bchydro.com/accounts-billing/rates-energy-use/electricity-rates/business-rates.html",
+"used_by": [
+"Price of power at the site"
+]
+},
+{
+"id": "bcIEAF",
+"text": "BC Industrial Electricity Allocation Framework (updated 31 Mar 2026): '300MW for AI projects, 100MW for data centre projects'; data centre and AI projects ≥10 MW enter competitive selection; BC news release 2025ECS0044: loads over 150 MW pay 'the full cost of both incremental electricity generation and upgrades' — https://www2.gov.bc.ca/gov/content/industry/electricity-alternative-energy/electricity/industrial-electricity-allocation-framework",
+"url": "https://www2.gov.bc.ca/gov/content/industry/electricity-alternative-energy/electricity/industrial-electricity-allocation-framework",
+"used_by": [
+"Grid headroom status",
+"Price of power at the site"
+]
+},
+{
+"id": "aesoStats2025",
+"text": "AESO, Annual Market Statistics 2025, Table 13 (p. 55): operating reserve volumes and costs by category; active procured 2025 5,928 GWh / $206 M, 2024 5,834 / $255 M; standby procured 709 / $8 M and 713 / $10 M — https://www.aeso.ca/assets/Annual-Market-Stats-2025.pdf",
+"url": "https://www.aeso.ca/assets/Annual-Market-Stats-2025.pdf",
+"used_by": [
+"Hourly heat-demand profile",
+"Price of power at the site",
+"Peak relief and what it earns"
+]
+},
+{
+"id": "epcorDASSAS",
+"text": "EPCOR Distribution & Transmission 2026 interim tariffs (effective 1 Jan 2026): DAS-TOUP $67.45678/site/day + $0.13822/kW/day; SAS-TOUP $0.00250/kWh + capacity $0.13497/kW/day + demand $0.28126/kW/day + OR 7.99 % × pool price; DAS-CS (>5,000 kVA) closed to new service — https://www.epcor.com/content/dam/epcor/documents/rates/distribution-access-service-tariffs/2026-01-distribution-access-service-tariff.pdf",
+"url": "https://www.epcor.com/content/dam/epcor/documents/rates/distribution-access-service-tariffs/2026-01-distribution-access-service-tariff.pdf",
+"used_by": [
+"Price of power at the site"
+]
+},
+{
+"id": "fortisAB2026",
+"text": "FortisAlberta rates effective 1 Oct 2026 (AUC 30274-D01-2025): Rate 63 Large General Service (>2,000 kW) transmission $0.214447 + $0.174184 /kW-day + $0.006228/kWh; distribution $27.080602 per contract km-day + $0.015170/kW-day + $15.998863/day — https://www.fortisalberta.com/docs/default-source/default-document-library/rates-options-and-riders-schedules-effective-october1-2026.pdf",
+"url": "https://www.fortisalberta.com/docs/default-source/default-document-library/rates-options-and-riders-schedules-effective-october1-2026.pdf",
+"used_by": [
+"Price of power at the site"
+]
+},
+{
+"id": "bocFX2025",
+"text": "Bank of Canada annual average exchange rates: 1 EUR = 1.5782 CAD (2025), 1.4818 (2024) — https://www.bankofcanada.ca/rates/exchange/annual-average-exchange-rates/",
+"url": "https://www.bankofcanada.ca/rates/exchange/annual-average-exchange-rates/",
+"used_by": []
+},
+{
+"id": "uptime2025",
+"text": "Uptime Institute Global Data Center Survey 2025 (INDUSTRY SURVEY): weighted average PUE 1.54 (n=681); facilities commissioned in the last five years 1.48; North America 1.49 — https://datacenter.uptimeinstitute.com/rs/711-RIA-145/images/2025.Annual.Survey.Report.pdf",
+"url": "https://datacenter.uptimeinstitute.com/rs/711-RIA-145/images/2025.Annual.Survey.Report.pdf",
+"used_by": [
+"Power usage effectiveness"
+]
+},
+{
+"id": "lbnlCapture",
+"text": "Coles & Greenberg 2014 (LBNL), direct-to-chip liquid capture 'The best results ranged from 67 percent to 75 percent', 57–59 % at 30 °C supply; NREL/TP-2C00-62905: RackCDU 'up to 64% of server heat'; Heydari et al. 2024 Appl. Therm. Eng. 239:122122 cold plate 94 %; air-cooled capture: no primary figure — https://escholarship.org/content/qt0g50294h/qt0g50294h.pdf",
+"url": "https://escholarship.org/content/qt0g50294h/qt0g50294h.pdf",
+"used_by": [
+"Share of heat captured in liquid"
+]
+},
+{
+"id": "vanWater2026",
+"text": "City of Vancouver 2026 metered rates (Sch. D): water high season $5.128, low season $4.091, sewer $7.960 per unit (1 unit = 2.83168466 m³); one rate for all metered uses — https://council.vancouver.ca/20251112/documents/spec1a.pdf",
+"url": "https://council.vancouver.ca/20251112/documents/spec1a.pdf",
+"used_by": [
+"Water the place can supply"
+]
+},
+{
+"id": "epcorReclaimed",
+"text": "EPCOR 2024 Edmonton Wastewater Quality Annual Report p.11: '4,226 ML (3.9%) of reclaimed water provided to industrial customers'; price and customers not stated — https://www.epcor.com/content/dam/epcor/documents/water-quality-reports/2024_edmonton_wastewater-quality_annual-report.pdf",
+"url": "https://www.epcor.com/content/dam/epcor/documents/water-quality-reports/2024_edmonton_wastewater-quality_annual-report.pdf",
+"used_by": [
+"Water the place can supply"
+]
+},
+{
+"id": "mvReclaimed",
+"text": "Metro Vancouver Interim Reclaimed Water Policy UT-019 (29 Sep 2023): industrial uses case-by-case; no rates — https://metrovancouver.org/boards/Policies/interim-reclaimed-water.pdf",
+"url": "https://metrovancouver.org/boards/Policies/interim-reclaimed-water.pdf",
+"used_by": [
+"Water the place can supply"
+]
+},
+{
+"id": "vanOfficeConv",
+"text": "City of Vancouver Downtown Office Conversion Policy (2009): applies to buildings ≥50,000 sq ft of office; addresses residential conversion only — https://guidelines.vancouver.ca/policy-downtown-office-conversion.pdf",
+"url": "https://guidelines.vancouver.ca/policy-downtown-office-conversion.pdf",
+"used_by": [
+"Existing building to convert"
+]
+},
+{
+"id": "edmPermits",
+"text": "City of Edmonton General Building Permits (open data 24uj-dj8v): 'DATA CENT' records incl. office → data centre (2009, 2011), warehouse → data centre (17204 114 Ave NW, 2015, 2020), and a 2021 demolition of a 'Sobeys Data Centre'; occupancy dates for non-residential permits completed since 2024 — https://data.edmonton.ca/d/24uj-dj8v",
+"url": "https://data.edmonton.ca/d/24uj-dj8v",
+"used_by": [
+"Existing building to convert",
+"Time to build and connect"
+]
+},
+{
+"id": "van6555zones",
+"text": "Vancouver Noise Control By-law 6555 (consol. 14 Jul 2026), continuous sound ss.2.1–2.3: quiet→quiet 55 day / 45 night; activity→quiet 60 / 55; intermediate/activity→other 70 / 65; 'background noise' credited only for commercial premises (s.3.1(b)); no ambient credit for equipment — https://bylaws.vancouver.ca/6555c.PDF",
+"url": "https://bylaws.vancouver.ca/6555c.PDF",
+"used_by": [
+"Local noise limit",
+"Acoustic cover from the place"
+]
+},
+{
+"id": "lbnlLife",
+"text": "Shehabi et al. 2024 (LBNL) p.31: average server lifetime 'is 4.4 years, increasing to 5 years in 2020, and to 5.7 years by 2023' — https://climate.mit.edu/sites/default/files/2025-02/lbnl-2024-united-states-data-center-energy-usage-report.pdf",
+"url": "https://climate.mit.edu/sites/default/files/2025-02/lbnl-2024-united-states-data-center-energy-usage-report.pdf",
+"used_by": [
+"Time horizons"
+]
+},
+{
+"id": "tenK_life",
+"text": "Company filings on server useful life: Microsoft FY2022 four → six years; Alphabet FY2023 servers four → six; Amazon six (2024), a subset back to five (2025, 'increased pace of technology development'); Meta 4–5 → 5.5 years (2025) — SEC filings (OPERATOR FILING)",
+"url": "",
+"used_by": [
+"Time horizons"
+]
+},
+{
+"id": "ashraeLife",
+"text": "ASHRAE Handbook HVAC Applications 2015, ch.37 Table 4 (median service life): centrifugal chiller >25 yr; cooling tower galvanized >22; air-cooled condenser 20; commercial water-to-air heat pump >24; base-mounted pump 20; shell-and-tube heat exchanger 24; transformer 30 — https://handbook.ashrae.org/Handbooks/A15/IP/A15_CH37/a15_ch37_ip.aspx",
+"url": "https://handbook.ashrae.org/Handbooks/A15/IP/A15_CH37/a15_ch37_ip.aspx",
+"used_by": [
+"Time horizons"
+]
+},
+{
+"id": "en253Life",
+"text": "Energiforsk 2022:872 (RISE): 'EN 253 (2019) states that the service life shall be 30 years at 120 °C'; 'If a service life of 50 years is desired, the temperatures must be below 115 °C' (p.32) — https://energiforsk.se/media/31455/liftetime-predictions-and-status-assessments-energiforskrapport-2022-872.pdf",
+"url": "https://energiforsk.se/media/31455/liftetime-predictions-and-status-assessments-energiforskrapport-2022-872.pdf",
+"used_by": [
+"Time horizons"
+]
+},
+{
+"id": "jlarc2024",
+"text": "Virginia JLARC Report 598, Data Centers in Virginia (Dec 2024): building 'usually takes about 12 to 18 months'; campus 'five or more years'; ~50 full-time workers per 250,000 sq ft ('one employee per 5,000 square feet'), about half contract; ~1,500 workers at peak construction; grid additions 12–36 months longer; 'One-third of data centers are currently located near residential areas'; residential bills +$14–37/month — https://jlarc.virginia.gov/pdfs/reports/Rpt598-2.pdf",
+"url": "https://jlarc.virginia.gov/pdfs/reports/Rpt598-2.pdf",
+"used_by": [
+"Closeness to networks and customers",
+"Work created",
+"Time to build and connect"
+]
+},
+{
+"id": "ieaEnergyAI",
+"text": "IEA, Energy and AI (2025): 'a data centre can be operational in two to three years' — https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai",
+"url": "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai",
+"used_by": [
+"Time to build and connect"
+]
+},
+{
+"id": "dlrContracts",
+"text": "Digital Realty 10-K FY2024, Item 1: 0–1 MW colocation 'Contract length generally 2-5 years'; >1 MW 'generally 5-10+ years' (OPERATOR FILING) — https://www.sec.gov/Archives/edgar/data/1297996/000155837025001424/dlr-20241231x10k.htm",
+"url": "https://www.sec.gov/Archives/edgar/data/1297996/000155837025001424/dlr-20241231x10k.htm",
+"used_by": [
+"Time horizons"
+]
+},
+{
+"id": "velkova2019",
+"text": "Velkova 2019, 'Data centers as impermanent infrastructures', Culture Machine 18: operators 'tend to limit their lifespan to six years only'; Ericsson Vaudreuil QC shut down less than a year after inauguration — https://culturemachine.net/vol-18-the-nature-of-data-centers/data-centers-as-impermanent/",
+"url": "https://culturemachine.net/vol-18-the-nature-of-data-centers/data-centers-as-impermanent/",
+"used_by": []
+},
+{
+"id": "census2021DA",
+"text": "Statistics Canada, Census Profile 2021, dissemination areas (98-401-X2021006, BC and Prairies files) and 2021 DA cartographic boundaries (92-160-X, lda_000b21a_e); J.B. downloads 16 Oct 2026; selected counts extracted on J.B.'s computer for CD 5915 (Greater Vancouver, 3,590 DAs, population 2,642,825) and CD 4811 (Division No. 11, 1,952 DAs) — https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/download-telecharger.cfm?Lang=E",
+"url": "https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/download-telecharger.cfm?Lang=E",
+"used_by": [
+"People within reach"
+]
+},
+{
+"id": "statcanEP2024",
+"text": "Statistics Canada 46-28-0001 (20 Feb 2024), Estimation of Energy Poverty Rates Using the 2021 Census: energy bills ≥10 % of after-tax income; Canada 5.6 %, BC 4.9 %, Alberta 7.3 %; provincial only. CUSP's tool is no longer at energypoverty.ca (observed 13 Oct 2026) — https://www150.statcan.gc.ca/n1/pub/46-28-0001/2024001/article/00001-eng.htm",
+"url": "https://www150.statcan.gc.ca/n1/pub/46-28-0001/2024001/article/00001-eng.htm",
+"used_by": [
+"Heat cost share of income"
+]
+},
+{
+"id": "panFang2025",
+"text": "Pan Fang & Greenstein 2025, 'Where the cloud rests: the economic geography of data centers', Strategy Science 10(4) (abstract): third-party firms favour urban settings and are 'sensitive to buyer demand for proximity'; cloud providers have 'a lower propensity for locating in urban areas'",
+"url": "",
+"used_by": [
+"Closeness to networks and customers"
+]
+},
+{
+"id": "malecki2002",
+"text": "Malecki 2002, Economic Geography 78(4):399–424 (abstract): 'a global bias of Internet backbone networks toward world cities', tempered by urban areas 'that serve as interconnection points'",
+"url": "",
+"used_by": [
+"Closeness to networks and customers"
+]
+}
+]

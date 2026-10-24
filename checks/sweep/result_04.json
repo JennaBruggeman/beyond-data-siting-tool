@@ -1,0 +1,570 @@
+[
+ {
+  "id": "satya2017",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "Read copy of Computer Jan 2017 pp.30-39 (UMN course page copy): both p.32 quotes match",
+  "problem": "Only a course-hosted copy read; official IEEE page not opened",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "isedPrinciples",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://ised-isde.canada.ca/site/ised/en/canadas-responsible-data-centre-development-principles",
+  "what_was_checked": "ISED principles page and launch news release: cost quote (Principle 2), waste heat in Principle 3, local benefits (Principle 1), no siting criteria all confirmed",
+  "problem": "Date wrong: published 3 Sep 2026, not 15 Sep 2026; waste heat recovery is one of several priority practices, not a standalone priority",
+  "copyright": "public"
+ },
+ {
+  "id": "bchCfDRfA",
+  "verdict": "Found",
+  "correct_url": "https://app.bchydro.com/content/dam/BCHydro/customer-portal/documents/accounts-billing/electrical-connections/2026-cfd-request-for-applications.pdf",
+  "what_was_checked": "RfA PDF (issued 1 Feb 2026): 300 MW AI, 100 MW storage, 10-145 MW, weights 30/30/20/10/10 confirmed",
+  "problem": "Environment sub-items (heat recovery ready, PUE, WUE) not checked; official title is '2026 BC Hydro Call for Demand for Emerging Industries - Request for Applications'",
+  "copyright": "public"
+ },
+ {
+  "id": "receiversBCUC",
+  "verdict": "Found",
+  "correct_url": "https://www.ordersdecisions.bcuc.com/",
+  "what_was_checked": "Opened G-310-21A, C-12-15, C-5-23, C-3-23, G-279-21 decisions; all figures confirmed",
+  "problem": "River District 33,600 MWh is low-carbon thermal energy at full build-out 2047 (peak 11.0 MW 2022 to 26.1 MW 2047); Senakw 11,218 MWh is modelled heating demand, Phases 1-2",
+  "copyright": "public"
+ },
+ {
+  "id": "edmReceivers",
+  "verdict": "Found",
+  "correct_url": "https://www.edmonton.ca/projects_plans/district-energy",
+  "what_was_checked": "City DDEI page (3 buildings Phase 1, up to 50 by 2050, heat only phases 1-2); Blatchford page (13.1 MW heat / 12.3 MW cooling); UofA page (no capacity stated)",
+  "problem": "Blatchford page calls it 'District Energy Sharing System'; 'ambient-temperature' not stated there; 13.1/12.3 MW is capacity being added under federal grant, not total",
+  "copyright": "public"
+ },
+ {
+  "id": "edmFees2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "WebFetch refused the PDF; one search found only the fee-listing page, which showed 2025 schedules",
+  "problem": "2026 schedule and its dates not confirmed",
+  "copyright": "public"
+ },
+ {
+  "id": "edmBL19340",
+  "verdict": "Found",
+  "correct_url": "https://www.edmonton.ca/business_economy/off-site-levy-bylaw",
+  "what_was_checked": "City off-site levy page and bylaws-by-number list confirm Bylaw 19340 (approved 16 Aug 2021, in force 1 Jan 2022)",
+  "problem": "Consolidation date 23 Apr 2024 not verified; city lists it as 'Facilities Off-Site Levies Bylaw'",
+  "copyright": "public"
+ },
+ {
+  "id": "edmBL14380",
+  "verdict": "Found",
+  "correct_url": "https://www.edmonton.ca/city_government/bylaws/bylaws-by-number",
+  "what_was_checked": "City bylaws-by-number list shows Bylaw 14380 'Arterial Roads For Development Bylaw'",
+  "problem": "May 2026 office consolidation not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "blatchford2023",
+  "verdict": "Found",
+  "correct_url": "https://www.edmonton.ca/sites/default/files/public-files/2023-2026BlatchfordRenewableEnergyUtilityBudget.pdf",
+  "what_was_checked": "PDF opened: title, City of Edmonton, Dec 2022 match",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "edmDES2022",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Two searches; only a law-firm summary (vLex, not primary) confirms the City published a District Energy Strategy",
+  "problem": "IIS02148 attachment and 27 Feb 2024 committee date not confirmed from a primary source",
+  "copyright": "public"
+ },
+ {
+  "id": "edmProcTimes",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "WebFetch refused; search found the rezoning page, which mentions a processing-times web page but gave no link",
+  "problem": "Page and Apr-Jun 2026 actuals not confirmed",
+  "copyright": "public"
+ },
+ {
+  "id": "edmRezComplexity",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "WebFetch refused; City rezoning page names a 'Rezoning Application Complexity' document but no URL obtained",
+  "problem": "PDF and 1 Jan 2024 date not confirmed",
+  "copyright": "public"
+ },
+ {
+  "id": "edmOSL2026",
+  "verdict": "Found",
+  "correct_url": "https://www.edmonton.ca/sites/default/files/public-files/documents/2026-off-site-levies-approved-rates.pdf",
+  "what_was_checked": "City PDF: '2026 Fire Hall Off-Site Levy Rates', 23 Apr 2026, Steering Committee vote to hold 2024-2025 rates quoted",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "ddeRates2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Two searches for IIS02765 / Utility Committee June 2025 surfaced no City report; council agenda site not reached",
+  "problem": "Not confirmed; needs check on Edmonton eScribe council records",
+  "copyright": "public"
+ },
+ {
+  "id": "ddeBizCase2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Same searches as ddeRates2025; no primary record surfaced",
+  "problem": "Not confirmed; needs check on Edmonton eScribe council records",
+  "copyright": "public"
+ },
+ {
+  "id": "femp_ct",
+  "verdict": "Found",
+  "correct_url": "https://www.energy.gov/node/849241",
+  "what_was_checked": "DOE FEMP page: title matches, published 8 Oct 2013, modified 26 May 2026",
+  "problem": "Page cites EPA WaterSense at Work but no section 6.3; that section reference not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "arden2021",
+  "verdict": "Found",
+  "correct_url": "https://pasteur.epa.gov/uploads/10.23719/1519028/Arden%20et%20al.%2C%202021.pdf",
+  "what_was_checked": "EPA-hosted PDF: Water Research 191:116635 (2021), doi 10.1016/j.watres.2020.116635",
+  "problem": "Title shortened; full title adds ': Environmental and Economic Suitability as a Function of Building Characteristics and Location'",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "gsa_gpg052",
+  "verdict": "Found",
+  "correct_url": "https://www.gsa.gov/system/files/GPG%20Findings-052-Blowdown%20Recovery-14Sep23.pdf",
+  "what_was_checked": "GSA PDF: GPG-052, Aug 2023, NREL evaluation",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "mv_ut019",
+  "verdict": "Found",
+  "correct_url": "https://metrovancouver.org/boards/Policies/interim-reclaimed-water.pdf",
+  "what_was_checked": "Metro Vancouver PDF: Interim Reclaimed Water Policy UT-019, effective 29 Sep 2023",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "bc_mwr",
+  "verdict": "Found",
+  "correct_url": "https://free.bcpublications.ca/civix/document/id/complete/statreg/87_2012",
+  "what_was_checked": "Regulation text: s.104 'Categories of reclaimed water'; Table 13 present",
+  "problem": "Table 13 is 'Municipal Effluent Quality Requirements For Reclaimed Water' (categories themselves are in s.104)",
+  "copyright": "public"
+ },
+ {
+  "id": "ab_health2021",
+  "verdict": "Found",
+  "correct_url": "https://open.alberta.ca/dataset/6a57d29c-d437-4dd9-94e3-d96bedc01bb4/resource/d533afcb-2933-43da-9199-eea030148c00/download/health-public-health-guidelines-water-reuse-stormwater-use-2021.pdf",
+  "what_was_checked": "Open Alberta PDF: title, Alberta Health, Jan 2021 match",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "ab_p1701",
+  "verdict": "Found",
+  "correct_url": "https://open.alberta.ca/dataset/42295e2f-cf70-44e4-bac9-7a027c4a0c5e/resource/50a4b829-e50b-40fb-9883-351b9a2b1e0f/download/p-17-01-reclaimedwatersystemssingleproperty.pdf",
+  "what_was_checked": "Open Alberta PDF: P-17-01-NPC15, Jan 2017, marked Archived",
+  "problem": "Exact title is 'Reclaimed Water Systems within a Single Property'",
+  "copyright": "public"
+ },
+ {
+  "id": "nasem2016",
+  "verdict": "Found",
+  "correct_url": "https://www.nationalacademies.org/read/21866/chapter/5",
+  "what_was_checked": "NAP page is Ch. 3 'Quantities Available for Beneficial Use...' of the 2016 report",
+  "problem": "Full title adds ': An Assessment of Risks, Costs, and Benefits'",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "van_vbbl2019_27",
+  "verdict": "Found",
+  "correct_url": "https://free.bcpublications.ca/civix/document/id/public/vpbl2019/734749594",
+  "what_was_checked": "VBBL 2019 Div. B Part 2, changes to 25 Jul 2023; Art. 2.7.1.2 'Non-Potable Water Sources' present",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "mv_bylaw299",
+  "verdict": "Found",
+  "correct_url": "https://metrovancouver.org/boards/Bylaws/GVSDD_Bylaw_299_Consolidated.pdf",
+  "what_was_checked": "PDF: GVS&DD Sewer Use Bylaw No. 299, 2007, unofficial consolidation 28 Jul 2023",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "msft_water2026",
+  "verdict": "Found",
+  "correct_url": "https://blogs.microsoft.com/blog/2026/06/24/inside-microsofts-two-decade-push-to-cut-water-intensity-while-scaling-for-growth/",
+  "what_was_checked": "Microsoft blog, 24 Jun 2026, by J. Priest and S. Solomon; recycled water for cooling discussed",
+  "problem": "Operator claim (company blog), correctly labelled",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "nrcan_pv2006",
+  "verdict": "Found",
+  "correct_url": "https://www.nrcan.gc.ca/energy/publications/sciences-technology/renewable/solar-photovoltaic/6199",
+  "what_was_checked": "NRCan archived publication page: title, Pelland, Poissant, McKenney et al., CETC 2006-046",
+  "problem": "PDF redirect blocked, so Table 1 not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "nrel_rooftop2016",
+  "verdict": "Found",
+  "correct_url": "https://nrel.gov/docs/fy16osti/65298.pdf",
+  "what_was_checked": "NREL PDF: Gagnon et al., NREL/TP-6A20-65298, Jan 2016",
+  "problem": "Full title: 'Rooftop Solar Photovoltaic Technical Potential in the United States: A Detailed Assessment'",
+  "copyright": "public"
+ },
+ {
+  "id": "nrel_bench2023",
+  "verdict": "Found",
+  "correct_url": "https://www.nrel.gov/docs/fy23osti/87303.pdf",
+  "what_was_checked": "NREL PDF: Ramasamy et al., NREL/TP-7A40-87303, Sep 2023",
+  "problem": "Full title adds 'With Minimum Sustainable Price Analysis'",
+  "copyright": "public"
+ },
+ {
+  "id": "ieapvps_bipv",
+  "verdict": "Found",
+  "correct_url": "https://iea-pvps.org/key-topics/journal-article-multi-objective-assessment-of-bipv-yield-complementarity-and-economic-feasibility/",
+  "what_was_checked": "IEA PVPS Task 15 page: Yang R.J. et al., 2026, doi 10.1016/j.enbuild.2026.118031",
+  "problem": "Page does not name the journal; Energy and Buildings inferred from DOI only",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "nrcan_pvcost2024",
+  "verdict": "Found",
+  "correct_url": "https://iea-pvps.org/national_survey/nsr-canada-2024/",
+  "what_was_checked": "IEA PVPS NSR Canada 2024 page: Baldus-Jeursen & Poissant, 19 Dec 2025; turnkey CAD/W prices shown",
+  "problem": "Page credits IEA PVPS Task 1 (NRCan not named on page); only residential and utility-scale prices seen; size breakdown in full PDF not checked",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bch_rs2289",
+  "verdict": "Found",
+  "correct_url": "https://app.bchydro.com/accounts-billing/electrical-connections/customer-generation/self-generation.html",
+  "what_was_checked": "BC Hydro page: RS 1289 closed to new customers; RS 2289 effective 1 Jul 2026",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "auc_microgen",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "bc_ef2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "ab_ghgperf",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "est_wind2009",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: shared web search limit was used up before this item could be searched",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "zurmuhl2018",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "kindaichi2018",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "drake_landing",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: shared web search limit was used up before this item could be searched",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "li2021_dcbtes",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: shared web search limit was used up before this item could be searched",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "ags_edmonton",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: shared web search limit was used up before this item could be searched",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "majorowicz2021",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "aer_d089",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "bc_gwpr",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "ab_gshe2018",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: shared web search limit was used up before this item could be searched",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "barth2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "atb2024_batt",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "pnnl2022",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "reber2023",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "bch_esi",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "bch_drb",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "aeso_or",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "auc_27938",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "ap42_34",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "bc_rlcf012",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "absorption2026",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "van_vbbl2025_27",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "van_zdb_s2",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "van_zdb_i2",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "van_zdb_i1c",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "van_zdb_i3",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "van_zdb_fc2",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "van_rts19744",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "van_cd1",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "van_f014",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "van_floodplain",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "edm_bl20001",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "edm_matrix",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "edm_dcpage",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "nbc2020_4153",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: shared web search limit was used up before this item could be searched",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ },
+ {
+  "id": "nfc2020_4313",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked: WebFetch refused the URL (not in provenance) and the shared web search limit was used up before a search could run",
+  "problem": "Needs a re-run; existence not confirmed",
+  "copyright": "unknown"
+ }
+]

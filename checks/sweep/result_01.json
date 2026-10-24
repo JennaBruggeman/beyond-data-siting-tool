@@ -1,0 +1,570 @@
+[
+ {
+  "id": "abgas",
+  "verdict": "Found",
+  "correct_url": "https://ucahelps.alberta.ca/regulated-rates.aspx",
+  "what_was_checked": "UCA regulated-rates page fetched; DERS Oct 2026 rate checked in DERS's own 30 Sep 2026 release",
+  "problem": "UCA page as fetched shows no Oct 2026 rows; DERS $1.458/GJ confirmed by the DERS release; ATCO North Mid-Use $1.062/GJ not confirmed",
+  "copyright": "public"
+ },
+ {
+  "id": "aeso",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://www.aeso.ca/grid/connecting-to-the-grid/large-load-projects",
+  "what_was_checked": "AESO large-load page fetched: 1,200 MW fully allocated; GLDC P2936 970 MW; Keephills Phase I P3083 230 MW; Phase 2A BYOG heading",
+  "problem": "Edmonton load ≈1,400 MW and BYOG 1,600 MW (Jun 2026) are not on the cited page; the only June 2026 item is a data-centre connection guide posted 12 Jun 2026",
+  "copyright": "public"
+ },
+ {
+  "id": "ashrae",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; ASHRAE TC 9.9 thermal guidelines + CWEC weather",
+  "problem": "Not checked: shared web-search budget ran out before this item could be searched",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bins",
+  "verdict": "Not a document",
+  "correct_url": "",
+  "what_was_checked": "Internal GP1 workbook sheet (Bins), not a published source",
+  "problem": "",
+  "copyright": "unknown"
+ },
+ {
+  "id": "bylaw14600",
+  "verdict": "Found",
+  "correct_url": "https://edmonton.ca/sites/default/files/public-files/C14600.pdf",
+  "what_was_checked": "Community Standards Bylaw 14600 (consol. 22 Oct 2024): s.19 65 dBA day, s.20 50 dBA night at residential line; no Leq",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "bylaw6555",
+  "verdict": "Found",
+  "correct_url": "https://bylaws.vancouver.ca/6555c.PDF",
+  "what_was_checked": "Noise Control By-law 6555 consol. to 14 Jul 2026: continuous >3 min in 15; intermediate→quiet 60/50 dBA; dBC for bass/amplified sound",
+  "problem": "dBC also applies to the Rogers Arena exemption (s.4.3(g)), not only commercial bass/music",
+  "copyright": "public"
+ },
+ {
+  "id": "cfd",
+  "verdict": "Found",
+  "correct_url": "https://app.bchydro.com/content/dam/BCHydro/customer-portal/documents/accounts-billing/electrical-connections/2026-cfd-request-for-applications.pdf",
+  "what_was_checked": "2026 CFD for Emerging Industries RFA (1 Feb 2026): 100 + 300 MW; 10–145 MW; ≥10% premium; curtailment; heat-recovery-ready in 10% environmental weight",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "cimd",
+  "verdict": "Found",
+  "correct_url": "https://open.canada.ca/data/en/dataset/ec6dc8e7-2fa0-4e49-8969-38541ca0a34d",
+  "what_was_checked": "Open Canada record: CIMD 2021, Statistics Canada, DA level, published 2024-03-01",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "clf",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; Carbon Leadership Forum WBLCA benchmark",
+  "problem": "Not checked: shared web-search budget ran out before this item could be searched",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "crf",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; NREL ATB, IEA SHC Task 54, Barroso ch. 8",
+  "problem": "Not checked: shared web-search budget ran out before this item could be searched",
+  "copyright": "unknown"
+ },
+ {
+  "id": "dell",
+  "verdict": "Found",
+  "correct_url": "https://i.dell.com/sites/csdocuments/corpcomm_docs/en/carbon-footprint-poweredge-r740.pdf",
+  "what_was_checked": "Dell R740 and R540 carbon-footprint PDFs fetched",
+  "problem": "26.3 kg (R740) and 25.4 kg (R540) are product weights, not CO2e (totals 8,640 and 8,230 kgCO2e); R650, Danczak 2018 and Graedel 2011 not checked",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "drake",
+  "verdict": "Found",
+  "correct_url": "https://proceedings.ises.org/paper/swc2017/swc2017-0033-Mesquita.pdf",
+  "what_was_checked": "Mesquita et al., ISES SWC 2017 'Drake Landing Solar Community: 10 Years of Operation'; table shows BTES efficiency 0.06 (2007–08) and 0.54 (2016–17)",
+  "problem": "Paper calls it apparent efficiency (ignores year-to-year storage change); not a steady rise (0.54 already in 2010–11)",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "edmBench",
+  "verdict": "Found",
+  "correct_url": "https://www.edmonton.ca/programs_services/environmental/building-energy-benchmarking-program",
+  "what_was_checked": "City of Edmonton Commercial Building Energy Benchmarking Program page: opt-in with owner consent; Year 7 dashboard 'coming soon'",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "edmParcel",
+  "verdict": "Unreachable",
+  "correct_url": "https://data.edmonton.ca/d/dkk9-cj3x",
+  "what_was_checked": "Search found no hit for dataset dkk9-cj3x; fetch refused",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "energize",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://vancouver.ca/files/cov/vancouver-annual-greenhouse-gas-and-energy-limits-by-law-faq.pdf",
+  "what_was_checked": "CoV GHG and Energy Limits By-law FAQ fetched (≥4,645 m² reporting, disclosure opt-in); By-law 13472 consolidation also fetched",
+  "problem": "Neither the FAQ nor By-law 13472 (consol. to 12 Dec 2023) mentions an enforcement pause on 21 May 2026 or the name 'Energize Vancouver'; the pause needs its own source",
+  "copyright": "public"
+ },
+ {
+  "id": "ess",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; BC ESS/JIBC, Edmonton shelter standard, Health Canada cleaner-air spaces",
+  "problem": "Not checked: shared web-search budget ran out before this item could be searched",
+  "copyright": "public"
+ },
+ {
+  "id": "exergi",
+  "verdict": "Found",
+  "correct_url": "https://www.stockholmexergi.se/wp-content/uploads/2023/05/Produktblad_tjanster_Oppen-Fjarrvarme.pdf",
+  "what_was_checked": "Stockholm Exergi Öppen Fjärrvärme product sheet: 'ca 2 MSEK årligen ... 1 MW vid 5000 timmar'; supply normally 68 °C; 400 SEK/MWh arithmetic correct",
+  "problem": "Quote omits 'ca' and 'motsvarande' (minor)",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "femp",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; DOE FEMP water BMP #10; ISO 30134-9",
+  "problem": "Not checked: shared web-search budget ran out before this item could be searched",
+  "copyright": "public"
+ },
+ {
+  "id": "floor",
+  "verdict": "Not a document",
+  "correct_url": "",
+  "what_was_checked": "A model output label (operator floor price), not a source",
+  "problem": "",
+  "copyright": "unknown"
+ },
+ {
+  "id": "fortis",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.cdn.fortisbc.com/libraries/docs/default-source/about-us-documents/regulatory-affairs-documents/gas-utility/rateschedule_3.pdf",
+  "what_was_checked": "FortisBC tariff page confirms Rate 3 exists (large commercial >2,000 GJ/yr); PDF fetch refused",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule; $9.305/GJ and riders not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "fortum",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.fortum.com/fi/lammitys-ja-jaahdytys/yritykset-ja-taloyhtiot/kaukolampoa-yrityksille/avoin-kaukolampo/avoin-kaukolampo-ostohinnat",
+  "what_was_checked": "One search found no Fortum page; fetch refused",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "g9425",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.ordersdecisions.bcuc.com/bcuc/orders/en/522707/1/document.do",
+  "what_was_checked": "Search returned BCUC order pages but not 522707; fetch refused",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "gridAB",
+  "verdict": "Found",
+  "correct_url": "https://www.alberta.ca/albertas-greenhouse-gas-emissions-reduction-performance",
+  "what_was_checked": "Alberta.ca Figure 7: 335 g CO2e/kWh (2024), citing ECCC NIR 1990–2024 (2026) Table A7-10, Annex 7",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "gridBC",
+  "verdict": "Unreachable",
+  "correct_url": "https://www2.gov.bc.ca/gov/content/environment/climate-change/data/electricity",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "heatPhys",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; Green Grid WP29, ISO/IEC 30134-6",
+  "problem": "Not checked: shared web-search budget ran out before this item could be searched",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "horizons",
+  "verdict": "Not a document",
+  "correct_url": "",
+  "what_was_checked": "Internal handoff rule 7 plus named authors (Greene; Monstadt and Saltzman) not checked",
+  "problem": "Named academic works not verified",
+  "copyright": "unknown"
+ },
+ {
+  "id": "iso9613",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; ISO 9613-2:2024, NoiseModelling",
+  "problem": "Not checked: shared web-search budget ran out before this item could be searched",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "lbnl2024",
+  "verdict": "Unreachable",
+  "correct_url": "https://climate.mit.edu/sites/default/files/2025-02/lbnl-2024-united-states-data-center-energy-usage-report.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule; URL is an MIT copy, not LBNL's own site",
+  "copyright": "public"
+ },
+ {
+  "id": "lorenz",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; Reinholdt 2018, Pieper 2020, Alissa, Wahlroos",
+  "problem": "Not checked: shared web-search budget ran out before this item could be searched",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "neu9552",
+  "verdict": "Unreachable",
+  "correct_url": "https://bylaws.vancouver.ca/9552c.PDF",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "neuReport",
+  "verdict": "Unreachable",
+  "correct_url": "https://council.vancouver.ca/20251112/documents/spec1d.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "nonComp",
+  "verdict": "Not a document",
+  "correct_url": "",
+  "what_was_checked": "Method label citing Munda, Cinelli 2014, Rowley 2012 and internal handoff rule 1",
+  "problem": "Named academic works not verified",
+  "copyright": "unknown"
+ },
+ {
+  "id": "opClaims",
+  "verdict": "Not a document",
+  "correct_url": "",
+  "what_was_checked": "Operator claims compiled internally (sources/01), no single document",
+  "problem": "",
+  "copyright": "unknown"
+ },
+ {
+  "id": "parssinen",
+  "verdict": "Unreachable",
+  "correct_url": "https://acris.aalto.fi/ws/portalfiles/portal/29723097/ELEC_parssinen_et_al_waste_heat_sustainability.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "persson",
+  "verdict": "Unreachable",
+  "correct_url": "https://vbn.aau.dk/ws/files/330989757/1_s2.0_S0360544219306097_main.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "queue",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/accounts-billing/electrical-connections/business-practice-load-interconnection-queue-mgmt.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "rts19744",
+  "verdict": "Unreachable",
+  "correct_url": "https://council.vancouver.ca/20260714/documents/rr1.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "rule9",
+  "verdict": "Not a document",
+  "correct_url": "",
+  "what_was_checked": "Internal handoff rule 9",
+  "problem": "",
+  "copyright": "unknown"
+ },
+ {
+  "id": "solar",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; Vancouver Solar Access Guidelines",
+  "problem": "Not checked: shared web-search budget ran out before this item could be searched",
+  "copyright": "public"
+ },
+ {
+  "id": "woodcroft",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.aeso.ca/assets/Uploads/projects/2582/EDTI-Distribution-Deficiency-Report-2025-Updated.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "wsa",
+  "verdict": "Unreachable",
+  "correct_url": "https://free.bcpublications.ca/civix/document/id/complete/statreg/36_2016",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "sunLuo2021",
+  "verdict": "Unreachable",
+  "correct_url": "https://eta-publications.lbl.gov/publications/prototype-energy-models-data-centers",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "doeFederal",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.energy.gov/sites/prod/files/2014/06/f16/casestudy_3federaldatacenters_0.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "fan2007",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.barroso.org/publications/PowerProvisioning.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "cie150",
+  "verdict": "Unreachable",
+  "correct_url": "https://mta-sts.brighton-hove.gov.uk/sites/default/files/2021-05/OD65%20ILP-Guidance%20Note%201%202020.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule; URL is a council-hosted copy of ILP GN01/20 on an 'mta-sts' subdomain, not ILP's site",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "healthCanada2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.canada.ca/en/health-canada/services/publications/healthy-living/guidance-upper-indoor-temperature-limits-protecting-older-adults.html",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "statcanHousehold",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; StatCan Table 25-10-0060-01 (local CSV said to be in hand)",
+  "problem": "Not checked: shared web-search budget ran out before this item could be searched",
+  "copyright": "public"
+ },
+ {
+  "id": "nrcanTrends",
+  "verdict": "Unreachable",
+  "correct_url": "https://oee.rncan-nrcan.gc.ca/publications/statistics/trends/2020/residential.cfm",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "manitobaGH",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.gov.mb.ca/agriculture/crops/crop-management/print,energy-calculations.html",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "iesoGH",
+  "verdict": "Unreachable",
+  "correct_url": "https://ieso.ca/-/media/Files/SaveOnEnergy/Industry/Greenhouse-Energy-Profile-Study.ashx",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "giacomelli",
+  "verdict": "Unreachable",
+  "correct_url": "https://ceac.arizona.edu/sites/default/files/giacomelli%20heating.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "rootZone",
+  "verdict": "Unreachable",
+  "correct_url": "https://farm-energy.extension.org/root-zone-heating-systems-for-greenhouses/",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "ntnuRAS",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.ntnu.no/bridge/node/22667",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "faoTrout",
+  "verdict": "Unreachable",
+  "correct_url": "https://fao.org/fishery/docs/CDrom/aquaculture/I1129m/file/en/en_rainbowtrout.htm",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "dfoRAS",
+  "verdict": "Unreachable",
+  "correct_url": "https://waves-vagues.dfo-mpo.gc.ca/library-bibliotheque/332156.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "gurreri2023",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.cetjournal.it/cet/23/105/039.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "schon2024",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; Schøn et al. 2024, J. Insects as Food and Feed",
+  "problem": "Not checked: shared web-search budget ran out before this item could be searched",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "liu2011",
+  "verdict": "Unreachable",
+  "correct_url": "https://classpages.cselabs.umn.edu/Fall-2021/csci8980-ec/papers/EdgeArch/furnace.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule; URL is a course-page copy, not the publisher's",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "wsuEV",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.energy.wsu.edu/documents/1%20Charging%20Speeds%20Ports%20Specs.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanDCFC",
+  "verdict": "Unreachable",
+  "correct_url": "https://council.vancouver.ca/20210706/documents/r4.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "silber2024",
+  "verdict": "Unreachable",
+  "correct_url": "https://publikationen.bibliothek.kit.edu/1000163825",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanParking",
+  "verdict": "Unreachable",
+  "correct_url": "https://guidelines.vancouver.ca/bulletins/bulletin-parking-loading-design-supplement.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "edmParking",
+  "verdict": "Unreachable",
+  "correct_url": "https://webdocs.edmonton.ca/zoningbylaw/ZoningBylaw/Part1/Development/54_1_General_On-Site_Parking_and_Loading_Requirements.htm",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "m104",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.bclaws.gov.bc.ca/civix/document/id/mo/hmo/m0104_2019",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "dea",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "No URL; DEA technology data catalogue (local download said to be in hand)",
+  "problem": "Not checked: shared web-search budget ran out before this item could be searched",
+  "copyright": "public"
+ },
+ {
+  "id": "wilsonWorrall",
+  "verdict": "Unreachable",
+  "correct_url": "https://pubs.rsc.org/en/content/articlepdf/2021/ew/d1ew00411e",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "kwlSewer",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.canadianconsultingengineer.com/awards/pdfs/2014/F5_HeatSeekingSewerModel.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule; URL is a trade-magazine awards PDF, not a Metro Vancouver/KWL report",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "cda2023",
+  "verdict": "Unreachable",
+  "correct_url": "https://live.copper.org/copperpowers/reports/copper-in-data-centers-report.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "stratego",
+  "verdict": "Unreachable",
+  "correct_url": "https://heatroadmap.eu/wp-content/uploads/2018/09/STRATEGO-WP2-Background-Report-2-Hourly-Distributions-1.pdf",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vbblHDD",
+  "verdict": "Unreachable",
+  "correct_url": "https://free.bcpublications.ca/civix/document/id/public/vbbl2014/ep001021.1",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "public"
+ },
+ {
+  "id": "hiltunen2020",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.mdpi.com/1996-1073/13/14/3551",
+  "what_was_checked": "Not reached",
+  "problem": "Not checked: shared web-search budget ran out and the URL was refused by WebFetch's provenance rule",
+  "copyright": "copyrighted"
+ }
+]

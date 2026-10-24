@@ -1,0 +1,570 @@
+[
+ {
+  "id": "wahlroos2017",
+  "verdict": "Found",
+  "correct_url": "https://doi.org/10.1016/j.energy.2017.08.078",
+  "what_was_checked": "Opened Aalto PDF: Wahlroos, Pärssinen, Manner, Syri, Energy 140 (2017) 1228–1238",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "cusp",
+  "verdict": "Unreachable",
+  "correct_url": "https://energypoverty.ca/",
+  "what_was_checked": "energypoverty.ca fetch refused; Green Municipal Fund page confirms CUSP made the Energy Poverty and Equity Explorer at this URL",
+  "problem": "6% threshold not confirmed; the GMF page gives no numeric threshold",
+  "copyright": "unknown"
+ },
+ {
+  "id": "statcanSHS",
+  "verdict": "Found",
+  "correct_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1110022201",
+  "what_was_checked": "StatCan subject listing confirms 11-10-0222-01 = SHS average household spending, Canada, regions and provinces",
+  "problem": "Table page itself not opened; the $2,535 (2019) figure is not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "tt2025",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://assets.foleon.com/eu-central-1/de-uploads-7e3kk3/48604/cost_data_table_2025.e9125d36911e.pdf",
+  "what_was_checked": "Opened PDF: Turner & Townsend Canada, 'Canada market intelligence Q4 2024–2025' (Jan 2025), with a data-centre row for 11 cities",
+  "problem": "Exact title is 'Canada market intelligence: Q4 2024–2025' (cost data table), not 'cost table 2025'",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bchTransmission",
+  "verdict": "Found",
+  "correct_url": "https://app.bchydro.com/accounts-billing/electrical-connections/large-load/transmission.html",
+  "what_was_checked": "Opened BC Hydro 'Transmission connections' page; staged timelines (e.g. SIS 6–9 mo, facilities study 6–9 mo)",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "aesoPerf",
+  "verdict": "Found",
+  "correct_url": "https://www.aeso.ca/assets/Uploads/grid/April-2026-Connection-Process-Performance.pdf",
+  "what_was_checked": "Linked from aeso.ca Connecting to the Grid page; opened PDF: AESO 'Connection Process Performance Update', April 2026",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "goits",
+  "verdict": "Found",
+  "correct_url": "https://files.ontario.ca/tbs-2019-11-14/go-its-25-18-data-centre-physical-security.pdf",
+  "what_was_checked": "Opened PDF: GO-ITS 25.18 Physical Security Requirements for Data Centres, v1.2 (Jan 2015), Government of Ontario",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "gcpsg015",
+  "verdict": "Found",
+  "correct_url": "https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-015-2024-guide-application-physical-security-zones",
+  "what_was_checked": "Opened RCMP page: GCPSG-015 (2024) Guide to the Application of Physical Security Zones",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "tia942",
+  "verdict": "Found",
+  "correct_url": "https://tiaonline.org/?p=16534",
+  "what_was_checked": "Opened TIA page 'TIA 942 Certifications & Ratings' describing Rated-1 to Rated-4",
+  "problem": "Page is a TIA summary; the standard itself (ANSI/TIA-942) is paywalled",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bylaw4243",
+  "verdict": "Found",
+  "correct_url": "https://bylaws.vancouver.ca/4243c.pdf",
+  "what_was_checked": "Opened PDF: City of Vancouver Encroachment By-law No. 4243, consolidated to 9 Dec 2025",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "edmULA",
+  "verdict": "Found",
+  "correct_url": "https://www.edmonton.ca/business_economy/utility-line-assignment-permit",
+  "what_was_checked": "Opened City of Edmonton ULA permit page",
+  "problem": "Page gives no fee figures; any ROW cost must come from elsewhere",
+  "copyright": "public"
+ },
+ {
+  "id": "daikinCAT624",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Fetch refused; one WebSearch did not surface CAT624 on hoffman-hoffman or daikinapplied.com",
+  "problem": "Not confirmed; p.18 AHRI 370 table not checked",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "climavenetaIFX",
+  "verdict": "Found",
+  "correct_url": "https://library.mitsubishielectric.co.uk/pdf/download_full/4298",
+  "what_was_checked": "Opened PDF: Mitsubishi Electric 'i-FX Air Cooled Chillers' (Climaveneta), effective Mar 2021; note 4 cites ISO 9614 sound power",
+  "problem": "Add edition: effective March 2021 (R513A)",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "kelvionLF",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://www.resale.de/images/161618957_g_rueckkuehler-lf-pd203t4h-080y06d_2023-04-dn100.pdf",
+  "what_was_checked": "Opened PDF: Kelvion Select RT datasheet LF-PD203T4H-080Y06D, 31 Mar 2023, EN 13487; LwA 94 dB(A), LpA(10 m) 61 dB(A)",
+  "problem": "Both figures are listed PER FAN (unit has 6 fans), not whole unit; hosted by used-equipment dealer resale.de, not Kelvion",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "mtuDS2250",
+  "verdict": "Found",
+  "correct_url": "https://www.mtu-solutions.com/content/dam/mtu/products/power-generation/powergeneration-product-list-latest/231210_PG_Spec_16V4000DS2250G04_2250kW_3D_FC_60Hz_50C.pdf",
+  "what_was_checked": "Opened mtu spec sheet: 16V4000 DS2250, 98.7 dB(A) @7 m Level 0 (open), ISO 8528-10",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "catTM9338",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Fetch refused; one WebSearch for GS2888 sheet found only powergenenterprises listing pages, not the PDF",
+  "problem": "Not confirmed; also hosted by a used-equipment dealer, not Caterpillar",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "cumminsS1443",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://powersuite.cummins.com/PS5/PS5Content/SiteContent/en/Binary_Asset/pdf/Commercial/Diesel/s-1443.pdf",
+  "what_was_checked": "Opened PDF: Cummins S-1443 'Enclosures and Tanks' (08/18), dB(A) at 7 m by enclosure level",
+  "problem": "Sheet covers 250–1,000 kW (citation says 500–1,000); title 'Enclosures and Tanks', Aug 2018",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "stulz",
+  "verdict": "Found",
+  "correct_url": "https://repository.stulz.com/DFC83F25",
+  "what_was_checked": "Opened Stulz PDF (German): CyberAir 3PRO DX ASR, rev V1.1 09-16, sound level dBA at 2 m free field",
+  "problem": "Model is the ASR (underfloor-fan) variant; date Sept 2016",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "oldsNIA",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "burlingtonNIA",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "rvo2018",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "necbHDD",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "lukeRAS",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "dreyer2021",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "oekoBSF",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "traneRTAF",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "energiforsk2020",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "dkPriceCap",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "bcaExtract",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "edmBylaw20001",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "rts06419",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "dellR760",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "lbnlBench",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "quebecRejets",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "lygnerud",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: no URL, and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "wahlroos2018",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: no URL, and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "ayuso2023",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: no URL, and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "ion2022",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: no URL, and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "nistad2020",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: no URL, and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "barroso2018",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: no URL, and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "gwells",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: no URL, and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "dlrQ2_2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "enmaxMap",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "oebCCIM",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "torontoHydroMap",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "hqZones",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "woodcroftDDR",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "aesoLargeLoad",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "goaGrid",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "cfdPage",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "cwec",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: no URL, and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "eccc",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: no URL, and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "vanTax",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "vanFoot",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "vanPermits",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: no URL, and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "vanEnergyReport",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "vanSewer",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "atlasCloud",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "aesoList",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "altaReg117",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "abEGDF",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: no URL, and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "ceud",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: no URL, and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "abDirective",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: no URL, and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "abGSHE",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: no URL, and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "abGuide",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: no URL, and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "rule012",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "bchIRP2025",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "wes",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "edmDDE",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: no URL, and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ },
+ {
+  "id": "fieldJB",
+  "verdict": "Not a document",
+  "correct_url": "",
+  "what_was_checked": "First-hand site visits and photos by J.B., Oct 2026",
+  "problem": "Primary observation, not a published source",
+  "copyright": "unknown"
+ },
+ {
+  "id": "eqix10k",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Not checked (see problem)",
+  "problem": "Not checked: WebFetch refused the URL (provenance) and the shared WebSearch budget for this turn ran out before this item; re-run needed",
+  "copyright": "public"
+ }
+]
