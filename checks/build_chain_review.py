@@ -19,7 +19,7 @@ reg = {q['id']: q for q in json.load(open(os.path.join(ROOT, 'register', 'formul
 SRC = d['sources']
 import glob
 FILES = [f for f in glob.glob(os.path.join(ROOT, 'data', '**', '*'), recursive=True)
-         if os.path.isfile(f) and re.search(r'\.(pdf|xlsx?|csv|epw|txt|html?)$', f, re.I) and '/raw/' not in f]
+         if os.path.isfile(f) and re.search(r'\.(pdf|xlsx?|csv|epw|txt|html?)$', f, re.I) and ('/raw/' not in f or f.lower().endswith('.pdf'))]
 STOP = set('the of and for to in a on by with from at per as is or an data city report pdf csv xlsx canada canadian 2020 2021 2022 2023 2024 2025 2026 https http www com ca org gov en html'.split())
 tok = lambda t: {w for w in re.findall(r'[a-z0-9]+', t.lower()) if len(w) > 2 and w not in STOP}
 FT = {f: tok(os.path.basename(f).rsplit('.', 1)[0].replace('_', ' ').replace('-', ' ')) for f in FILES}
