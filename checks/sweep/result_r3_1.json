@@ -1,0 +1,522 @@
+[
+ {
+  "id": "clf",
+  "verdict": "Unreachable",
+  "correct_url": "https://carbonleadershipforum.org/",
+  "what_was_checked": "Search found CLF WBLCA Benchmark Study v2 page (292 buildings); no figures on page",
+  "problem": "461 kgCO2e/m² not verified; citation names no report/year",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "edmParcel",
+  "verdict": "Unreachable",
+  "correct_url": "https://data.edmonton.ca/d/dkk9-cj3x",
+  "what_was_checked": "One search; data.edmonton.ca dataset dkk9-cj3x not surfaced, no saved copy",
+  "problem": "Fields and Rooflines 2019 dataset not verified; two datasets cited with one URL",
+  "copyright": "public"
+ },
+ {
+  "id": "fortis",
+  "verdict": "Found",
+  "correct_url": "https://www.cdn.fortisbc.com/libraries/docs/default-source/about-us-documents/regulatory-affairs-documents/gas-utility/rateschedule_3.pdf",
+  "what_was_checked": "saved copy: data/fortisbc/rateschedule_3_2026-07.pdf — delivery 5.377 (eff. 1 Jan 2026, G-287-25) + S&T 2.268 incl. Riders 6, 8 (eff. 1 Jul 2026) + gas 1.660 = $9.305/GJ; Rider 5 included; ÷0.85 ≈ $39.4/MWh",
+  "problem": "Carbon-tax-zero claim not on the schedule (not checked here)",
+  "copyright": "public"
+ },
+ {
+  "id": "fortum",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.fortum.com/fi/lammitys-ja-jaahdytys/yritykset-ja-taloyhtiot/kaukolampoa-yrityksille/avoin-kaukolampo/avoin-kaukolampo-ostohinnat",
+  "what_was_checked": "One search (Finnish title); Fortum price page not surfaced, fetch not permitted; no saved copy",
+  "problem": "€11–€50/MWh table and 1 May 2026 date not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "g9425",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.ordersdecisions.bcuc.com/bcuc/orders/en/522707/1/document.do",
+  "what_was_checked": "Search surfaced 522706 = G-93-25 (8 Apr 2025, Creative Energy LTRP); 522707 fetch refused (not in search results); no saved copy",
+  "problem": "$38.5 M / $15 M figures not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "cusp",
+  "verdict": "Unreachable",
+  "correct_url": "https://energypoverty.ca/",
+  "what_was_checked": "One search; energypoverty.ca not surfaced so could not be opened; no saved copy",
+  "problem": "6% threshold not verified at CUSP site",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "necbHDD",
+  "verdict": "Unreachable",
+  "correct_url": "https://cbhcc-cchcc.ca/eng/public-review/2023_2/pcfs/necb20_divb_appc_001732.html",
+  "what_was_checked": "CBHCC page not surfaced; saved NBC 2020 (raw/codes/nbc.txt) Table C-2 gives Edmonton HDD 5120; Alberta NECB 2020 Table C-1 supplement exists",
+  "problem": "NECB Table C-1 / CBHCC public-review page not opened; 5,120 matches NBC 2020 Table C-2",
+  "copyright": "public"
+ },
+ {
+  "id": "dkPriceCap",
+  "verdict": "Unreachable",
+  "correct_url": "https://forsyningstilsynet.dk/Media/638660516540345737/Udmeldelse%20af%20prisloft%20for%20overskudsvarme%202025.pdf",
+  "what_was_checked": "Search confirms PDF URL on forsyningstilsynet.dk; it redirects to cdn1.gopublic.dk, which fetch refused",
+  "problem": "95 DKK/GJ not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "ayuso2023",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Search shows NTNU Open record (Ayuso Virgili); record redirects to nva.sikt.no / x-mol (blocked); no saved copy in data/",
+  "problem": "Vol 101, art. 102314 and \"simulated\" not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "cwec",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copies: data/*CAN_BC_VANCOUVER-INTL-A_1108395_CWEC.epw and *CAN_AB_EDMONTON-INTL-A_3012216_CWEC.epw; data years 2000–2017 consistent with CWEC 2020",
+  "problem": "ECCC download folder not opened online; EPW header label reads \"CWEC2011\" (format tag)",
+  "copyright": "public"
+ },
+ {
+  "id": "vanTax",
+  "verdict": "Found",
+  "correct_url": "https://opendata.vancouver.ca/explore/dataset/property-tax-report/",
+  "what_was_checked": "saved copy: data/raw/van/property-tax-report.csv — 30 fields match the list, no floor-area field",
+  "problem": "1.55 M-row total not verified (saved export has 228,921 rows, likely a filtered year)",
+  "copyright": "public"
+ },
+ {
+  "id": "vanSewer",
+  "verdict": "Unreachable",
+  "correct_url": "https://opendata.vancouver.ca/explore/dataset/sewer-mains/",
+  "what_was_checked": "One search; Vancouver sewer-mains page not surfaced; no saved copy",
+  "problem": "Schema and 39,927 count not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "atlasCloud",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.atlasdatacenter.ca/about-atlas-cloud/",
+  "what_was_checked": "One search returned only third-party directories (datacentermap, baxtel); operator pages and CSE release not surfaced",
+  "problem": "Operator claims not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "altaReg117",
+  "verdict": "Found",
+  "correct_url": "https://canlii.ca/t/56vg9",
+  "what_was_checked": "saved copy: data/Alta_Reg_117_2026_Data_Centre_Regulation.pdf — CanLII page: current version as posted 2026-06-17, stable link canlii.ca/t/56vg9, retrieved 2026-10-11; Electric Utilities Act",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "ceud",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copies: res_bc_e_2/res_ab_e_2 = Table 2 (by end-use), com_ab_e_3/com_bct_e_3 = Table 3 (by activity type; BC and Territories), years to 2023",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "edmDDE",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: data/Edmonton_IIS02765_DDEI_Growth_Plan_report.pdf — IIS02765, 23 Jun 2025; references Bylaw 20914, Policy C631, FCS02853; Utility Committee cover confirmed in data/Edmonton_DDEI_Growth_Plan_2025-06.pdf",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "fjfAars2020",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.fjernvarmefyn.dk/media/1754/fjernvarme_fyn_aarsberetning_2020.pdf",
+  "what_was_checked": "One search; annual report not surfaced; no saved copy",
+  "problem": "14,020 MWh / COP 4.5 / 230 TJ not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "fjfAars2124",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.fjernvarmefyn.dk/media/ow1hkzhq/aarsberetning_2024_web.pdf",
+  "what_was_checked": "Covered by same search; 2024 report not surfaced; no saved copy",
+  "problem": "TJ series, 393 %, 43 MW not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "nivosMantsala",
+  "verdict": "Unreachable",
+  "correct_url": "https://nivos.fi/ajankohtaista/paikallisen-datakeskuksen-kanssa-yhteistyossa-luotu-ekosysteemi-lammittaa-mantsalassa/",
+  "what_was_checked": "One search returned only news/EU summary pages, not nivos.fi or Sitra; no saved copy (NIB page confirmed in an earlier pass)",
+  "problem": "Nivos/Sitra figures not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanRezoneTime",
+  "verdict": "Unreachable",
+  "correct_url": "https://vancouver.ca/files/cov/rezoning-process-overview.pdf",
+  "what_was_checked": "One search; rezoning-process-overview.pdf not surfaced (only CD-1 application guide); no saved copy",
+  "problem": "16 weeks / 15 months / ~1 year not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "vanFees2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://vancouver.ca/files/cov/vancouver-development-building-permit-fees.pdf",
+  "what_was_checked": "One search returned other cities' fee schedules; no saved copy",
+  "problem": "2026 fee figures not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "edm20001",
+  "verdict": "Found",
+  "correct_url": "https://zoningbylaw.edmonton.ca/part-8-definitions/810-use-definitions",
+  "what_was_checked": "saved copy (as adopted): data/raw/edm/bylaw/Bylaw20001.pdf — s.2.130 IM 2.3 \"Major Industrial, limited to those existing as of January 1, 2024\"; BE lists Minor Industrial; s.7.20 3.3.2 \"always considered a Discretionary Use\"; no Data Centre use in 8.10",
+  "problem": "Online current version (zoningbylaw.edmonton.ca) not opened; IH list in adopted text: Major Industrial permitted, Minor Industrial limited to existing",
+  "copyright": "public"
+ },
+ {
+  "id": "edmLDA26",
+  "verdict": "Unreachable",
+  "correct_url": "https://engaged.edmonton.ca/eetpdatacentre",
+  "what_was_checked": "One search returned only news/third-party pages, not the engagement page; saved City data-centre page (raw/edm) confirms EETP ASP amendment application exists",
+  "problem": "Quotes and LDA26-0225 not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "edmRezone",
+  "verdict": "Found",
+  "correct_url": "https://www.edmonton.ca/business_economy/rezoning",
+  "what_was_checked": "Fetched page: fees paid before acceptance; ≥60 m notice; Council public hearing; DC 21-day pre-application notice; \"Processing times vary\"; no fees/overall durations stated",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "abConsult",
+  "verdict": "Found",
+  "correct_url": "https://www.alberta.ca/datacentres/indigenous",
+  "what_was_checked": "Fetched alberta.ca/datacentres/indigenous: Water Act licence, public lands disposition, environmental approval withheld until consultation complete",
+  "problem": "EPEA >50 MW backup-generation fact sheet (20 Jul 2026) is a separate document; not on this page, not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "edmPermits",
+  "verdict": "Found",
+  "correct_url": "https://data.edmonton.ca/d/24uj-dj8v",
+  "what_was_checked": "saved copy: data/raw/General_Building_Permits_20261013.zip — \"data centre\" records incl. 2009/2011 office, 17204 114 Ave NW (2015, 2020), 2021 Sobeys Data Centre demolition; Occupancy Date field present",
+  "problem": "Dataset id 24uj-dj8v not confirmed online",
+  "copyright": "public"
+ },
+ {
+  "id": "tenK_life",
+  "verdict": "Unreachable",
+  "correct_url": "",
+  "what_was_checked": "Meta FY2025 10-K found on sec.gov but fetch truncated before PP&E note; no specific filings named for others",
+  "problem": "No filing-level citations; useful-life figures not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "ieaEnergyAI",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai",
+  "what_was_checked": "One search; chapter page not surfaced (only IEA news release); no saved copy",
+  "problem": "\"two to three years\" quote not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "edmFees2026",
+  "verdict": "Found",
+  "correct_url": "https://www.edmonton.ca/sites/default/files/public-files/2026-Planning-and-Development-Fee-Schedules.pdf",
+  "what_was_checked": "saved copy: data/Edmonton_2026_Planning_Development_Fee_Schedules.pdf — \"Effective January 1, 2026\", \"Updated December 2025\"",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "edmDES2022",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: data/Edmonton_District_Energy_Strategy_2022.pdf — Attachment 1, Publication Date August 2022, 27 Feb 2024 Urban Planning Committee, IIS02148",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "drake_landing",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://natural-resources.canada.ca/maps-tools-publications/publications/performance-high-solar-fraction-seasonal-storage-district-heating-system-five-years-operation",
+  "what_was_checked": "Sibbitt et al. 2012 (NRCan record, \"Five Years of Operation\", 19 Dec 2012) confirmed; Mudasar, Leong, Fung, CSME 2020 paper opened",
+  "problem": "Mudasar et al. CSME 2020 is a GSHP + ORC modelling study using DLSC as case, not measured BTES performance",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "li2021_dcbtes",
+  "verdict": "Found",
+  "correct_url": "https://doi.org/10.1016/j.energy.2020.119582",
+  "what_was_checked": "LBNL record: Li, Hou, Hong, Ding, Nord (2021) Energy 219:119582, BTES with data-centre waste heat, Norwegian campus DH",
+  "problem": "0.9 MW not verified (abstract only); citation lacks title/journal: use doi:10.1016/j.energy.2020.119582",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "ags_edmonton",
+  "verdict": "Found",
+  "correct_url": "https://static.ags.aer.ca/files/document/OFR/OFR_2009_09.pdf",
+  "what_was_checked": "Opened AGS OFR 2009-09 (Grobe et al. 2009): Hastings Lake TRT; modelling uses k = 1.90 W/m·K and 6.1 °C",
+  "problem": "Citation lacks report number: AGS Open File Report 2009-09; measured TRT values were 2.01 and 1.74 W/m·K",
+  "copyright": "public"
+ },
+ {
+  "id": "bc_gwpr",
+  "verdict": "Found",
+  "correct_url": "https://free.bcpublications.ca/civix/document/id/complete/statreg/39_2016",
+  "what_was_checked": "Fetched gov.bc.ca GWPR page: links bclaws statreg/39_2016; regulated wells include closed-loop geoexchange wells",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "ab_gshe2018",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: data/AB_Directive_Water_Wells_GSHE_2018.pdf — AEP Water Quality 2018 No.3, effective 11 Dec 2018",
+  "problem": "Exact title: \"Water Wells and Ground Source Heat Exchange Systems Directive\"",
+  "copyright": "public"
+ },
+ {
+  "id": "auc_27938",
+  "verdict": "Unreachable",
+  "correct_url": "https://efiling-webapi.auc.ab.ca/Document/Get/784765",
+  "what_was_checked": "One search; decision not surfaced (only AUC data-centre fact sheet, no proceeding numbers); eFiling URL not fetchable; no saved copy",
+  "problem": "Decision not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "van_vbbl2025_27",
+  "verdict": "Found",
+  "correct_url": "https://vancouver.ca/files/cov/2025-vbbl-book-II-insert-pages.pdf",
+  "what_was_checked": "saved copy: data/raw/codes/2025-vbbl-book-II-insert-pages.pdf — By-law 14343 (15 Sep 2025) as amended by 14488 (1 Jan 2026); Arts 2.7.1.2, 2.7.1.3 and Table 2.7.1.3 present",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "van_zdb_s2",
+  "verdict": "Found",
+  "correct_url": "https://bylaws.vancouver.ca/zoning/Sec02.pdf",
+  "what_was_checked": "Fetched Sec02.pdf: Bulk Data Storage defined (\"wholly enclosed building for the storage of information on operating data servers\"); footer June 2026",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "van_zdb_i2",
+  "verdict": "Found",
+  "correct_url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-I-2.pdf",
+  "what_was_checked": "saved copy: data/raw/codes/van_I-2_schedule.pdf — I-2 District Schedule, footer June 2026",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "van_zdb_i1c",
+  "verdict": "Found",
+  "correct_url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-1c.pdf",
+  "what_was_checked": "Fetched PDF: I-1C District Schedule, footer \"November 2025\"",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "van_zdb_i3",
+  "verdict": "Found",
+  "correct_url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-3.pdf",
+  "what_was_checked": "saved copy: data/raw/van/i3.pdf — I-3 District Schedule, June 2026; s.2.2.11 bulk data storage not at ground floor; 3.1.1–3.1.2 present",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "van_zdb_fc2",
+  "verdict": "Found",
+  "correct_url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-fc-2.pdf",
+  "what_was_checked": "saved copy: data/raw/van/fc2.pdf — FC-2 District Schedule, June 2026; s.2.2.4 (bulk data storage not at grade); 3.1–3.4 present",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "van_rts19744",
+  "verdict": "Found",
+  "correct_url": "https://council.vancouver.ca/20260714/documents/rr1.pdf",
+  "what_was_checked": "Fetched rr1.pdf: RTS 19744, CD-1 Rezoning 111 E 5th Ave and 2060 Quebec St, bulk data storage (data centre); meeting 14 Jul 2026",
+  "problem": "Report itself dated 30 Jun 2026 (14 Jul is the Council meeting date)",
+  "copyright": "public"
+ },
+ {
+  "id": "van_cd1",
+  "verdict": "Found",
+  "correct_url": "https://cd1-bylaws.vancouver.ca/ByCD-1Number%20-%202.htm",
+  "what_was_checked": "Fetched CD-1 by-law index on cd1-bylaws.vancouver.ca (listings by number and location)",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "van_f014",
+  "verdict": "Found",
+  "correct_url": "https://guidelines.vancouver.ca/F014.pdf",
+  "what_was_checked": "Fetched F014.pdf: Flood Plain Standards and Requirements, adopted 16 Sep 2014 (effective 1 Jan 2015), amended 7 Mar 2023",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "van_floodplain",
+  "verdict": "Unreachable",
+  "correct_url": "https://opendata.vancouver.ca/explore/dataset/designated-floodplain/",
+  "what_was_checked": "One search; Vancouver open-data floodplain page not surfaced; no saved copy",
+  "problem": "Not verified",
+  "copyright": "public"
+ },
+ {
+  "id": "edm_bl20001",
+  "verdict": "Found",
+  "correct_url": "https://www.edmonton.ca/sites/default/files/public-files/assets/Bylaws/Bylaw20001.pdf",
+  "what_was_checked": "saved copy: data/raw/edm/bylaw/Bylaw20001.pdf — Charter Bylaw 20001 as adopted, PDF modified 3 Jan 2024; ss. 2.130, 2.140, 5.70, 5.120, 8.10 present",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "edm_matrix",
+  "verdict": "Found",
+  "correct_url": "https://www.edmonton.ca/sites/default/files/public-files/Edmonton-Zoning-Bylaw-Land-Use-and-Zoning-Matrix.pdf",
+  "what_was_checked": "saved copy: data/raw/edm/land_use_zoning_matrix.pdf — \"Land Use & Zoning Matrix: Uses in Standard Zones, October 2026\"",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "edm_dcpage",
+  "verdict": "Found",
+  "correct_url": "https://www.edmonton.ca/business_economy/economic_investment/data-centre-development",
+  "what_was_checked": "saved copy: data/raw/edm/data_centre_development_page.pdf — \"Data Centre Development\", saved 14 Oct 2026",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "nbc2020_4153",
+  "verdict": "Found",
+  "correct_url": "https://doi.org/10.4224/w324-hv93",
+  "what_was_checked": "saved copy: data/raw/codes/nbc2020_v2.pdf (Vol 1, 2nd printing) — Sentence 4.1.5.1.(1), Table 4.1.5.3; DOI 10.4224/w324-hv93 confirmed on NRC NBC 2020 page",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "nfc2020_4313",
+  "verdict": "Found",
+  "correct_url": "https://publications.gc.ca/collections/collection_2022/cnrc-nrc/NR24-27-2020-eng.pdf",
+  "what_was_checked": "saved copy: data/raw/codes/nfc2020.pdf — NFC 2020 (cat. NR24-27/2020E), 4.3.13.4, Table 4.3.13.4.-B, 4.3.14 present",
+  "problem": "URL not opened online; catalogue number matches",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "cat3516c",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.hanovercounty.gov/DocumentCenter/View/5983/CAT-3516C-2500KW-Cut",
+  "what_was_checked": "One search returned only cat.com 3516C pages (1,650–2,500 kW, 60 Hz); Hanover County cut sheet not surfaced; no saved copy",
+  "problem": "Cited cut sheet not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "npc2612",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: data/raw/codes/vbbl2025_bookII_insert.pdf — 2.6.1.12.(1) storage heaters ≥60 °C; 2.6.1.1.(3) recirculated ≥49 °C",
+  "problem": "Edmonton/Alberta NPC sentence not checked (citation itself flags it)",
+  "copyright": "public"
+ },
+ {
+  "id": "roudbari2025",
+  "verdict": "Unreachable",
+  "correct_url": "https://doi.org/10.1016/j.energy.2025.137902",
+  "what_was_checked": "DOI-string search returned no publisher record; DOI not fetchable; no saved copy",
+  "problem": "Not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "wang2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://doi.org/10.1016/j.ese.2026.100702",
+  "what_was_checked": "DOI-string search returned only journal pages; no saved copy",
+  "problem": "Not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "zhang2025",
+  "verdict": "Unreachable",
+  "correct_url": "https://doi.org/10.1016/j.apenergy.2024.124697",
+  "what_was_checked": "Volume/article search returned no record; no saved copy",
+  "problem": "Not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "epaQuincy",
+  "verdict": "Found",
+  "correct_url": "https://www.epa.gov/node/286187",
+  "what_was_checked": "Fetched EPA page: operational 30 Jun 2021; $31 M financed by Microsoft; 30-yr agreement; 138 M gal/yr saved",
+  "problem": "City owns/operates the utility; \"operator-funded\" means the data-centre operator (Microsoft)",
+  "copyright": "public"
+ },
+ {
+  "id": "vanNMH",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: data/raw/van/non-market-housing.json — 641 records with status, occupancy year, operator, unit counts",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "van9552",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: data/raw/van/9552c.pdf — consolidated to By-law 14524 eff. 1 Jan 2026; s.2.1 compulsory use; s.5.2(a)(v) cooling heat recovery; Sch. C Part 4 credit ×50%",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "van6555",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: data/raw/van/6555c.pdf — consolidated to 14 Jul 2026 (By-law 14786); Schedules A, B, B.1; ss. 2.1–2.3",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "bcucTelus",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.ordersdecisions.bcuc.com/bcuc/orders/en/118621/1/document.do",
+  "what_was_checked": "URL id 118621 not surfaced by search; C-1-13 (4 Feb 2013) was confirmed in an earlier pass (bcucC113); G-155-12, G-2-15 not checked",
+  "problem": "Orders G-155-12 and G-2-15 not verified here",
+  "copyright": "public"
+ },
+ {
+  "id": "qcRejets2026",
+  "verdict": "Found",
+  "correct_url": "https://cdn-contenu.quebec.ca/cdn-contenu/environnement/rejets-thermiques/developpper-ia-decarboner-quebec.pdf",
+  "what_was_checked": "Fetched PDF: S. Gagnon (MELCCFP), \"Développer l'IA ou décarboner le Québec? On peut faire les deux!\", Vecteur Environnement, Mar 2026; Humano District and QScale Lévis mentioned",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "telehouse2026",
+  "verdict": "Found",
+  "correct_url": "https://www.businesswire.com/news/home/20260512456773/en",
+  "what_was_checked": "Fetched Business Wire release \"Telehouse Canada Undergoes Major Infrastructure Upgrade…\" (URL date 12 May 2026): heat transferred to Enwave's closed-loop system",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanRoofBulletin2022",
+  "verdict": "Found",
+  "correct_url": "https://guidelines.vancouver.ca/bulletins/bulletin-roof-mounted-energy-technologies-and-green-roofs.pdf",
+  "what_was_checked": "Fetched bulletin: effective 3 Feb 2009, amended 26 Aug 2019 and 14 Nov 2022; minor additional height under s.10.1.1(d); rationale and drawings; no figure/setback",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "gowlingEV2021",
+  "verdict": "Unreachable",
+  "correct_url": "https://gowlingwlg.com/en/insights-resources/articles/2021/regulation-of-electric-vehicle-charging-services",
+  "what_was_checked": "One search; Gowling 2021 article not surfaced (only a 2016 Gowling piece); no saved copy",
+  "problem": "Secondary source; contents not verified",
+  "copyright": "copyrighted"
+ }
+]

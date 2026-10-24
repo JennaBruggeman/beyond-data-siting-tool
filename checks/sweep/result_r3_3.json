@@ -1,0 +1,522 @@
+[
+ {
+  "id": "nproCosts",
+  "verdict": "Found",
+  "correct_url": "https://www.npro.energy/main/en/help/technology-costs",
+  "what_was_checked": "Opened page: DN100 160+700/1,500, DN200 320+950/2,130, DN300 560+1,120/2,690 €/m; Logstor TCO + KWW catalogue",
+  "problem": "Quoted disclaimer not verbatim: page says \"no guarantee can be made regarding accuracy or completeness\"",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "cambridgeApp5",
+  "verdict": "Found",
+  "correct_url": "https://www.cambridgema.gov:443/-/media/Files/CDD/Climate/NetZero/LCESS/appendix5_webversion.pdf",
+  "what_was_checked": "Opened PDF: Appendix 5 Table 12, 2027 prices DN100 $336, DN200 $571, DN300 $896 per ft; inclusions not stated",
+  "problem": "",
+  "copyright": "unknown"
+ },
+ {
+  "id": "vanNEU2018",
+  "verdict": "Found",
+  "correct_url": "https://council.vancouver.ca/20180221/documents/pspc3.pdf",
+  "what_was_checked": "Opened report 'Expansion of the False Creek NEU': $13–37M (2018$) distribution; base case $29M",
+  "problem": "Report dated 13 Feb 2018; 21 Feb 2018 is the committee meeting date",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "edmDDEcapital",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/Edmonton_DDE_2025-2026_Rate_Filing.pdf (IIS02765, Attachment 4, 23 Jun 2025): $35.9M Phase 1 profile covers energy centre, distribution piping, ETS; Phase 1A $18.3M",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "isoplusEPD",
+  "verdict": "Found",
+  "correct_url": "https://api.environdec.com/api/v1/EPDLibrary/Files/697db282-a3b1-41da-888c-08dcd3ea77d2/Data",
+  "what_was_checked": "Opened EPD-IES-0016090 (isoplus Suomi Oy): S2P100 per m A1–A3 39.5, A4 1.03, A5 0.205; DN20 ×0.22, DN400 ×6.20 (S2 series)",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanNEUlevy2025",
+  "verdict": "Found",
+  "correct_url": "https://council.vancouver.ca/20241203/documents/spec1e.pdf",
+  "what_was_checked": "Opened report (25 Nov 2024): 2025 $112,611/ETS + $133/kW, proposed 2026 $123,873 + $146/kW; saved copy /mnt/user-data/outputs/data/raw/van/9552.txt Sch. C Part 1: $123,873/$146 (1 Jan 2026), $136,260/$161 (1 Jan 2027), By-law 14524",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanNEUguide",
+  "verdict": "Found",
+  "correct_url": "https://guidelines.vancouver.ca/guidelines-neighbourhood-energy-utility-connectivity-requirements.pdf",
+  "what_was_checked": "Opened NEU Connectivity Guidelines & Requirements (Rev 1, May 2026): 60 °C supply, ΔT ≥15, return ≤45; ETS 6×3 m <13,940 m², 6×4 m to 23,230 m², 2.7 m headroom; ETS owned by NEU",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "torontoDER2016",
+  "verdict": "Found",
+  "correct_url": "https://www.toronto.ca/wp-content/uploads/2017/12/8c27-District-Energy-Ready-Guideline_October-2016.pdf",
+  "what_was_checked": "Opened 'Design Guideline for District Energy-Ready Buildings' V1.1, Oct 2016: 45/35, 60/45, 70/55, 65/45 °C",
+  "problem": "Formal title is 'Design Guideline for District Energy-Ready Buildings'",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "statcanHeat2011",
+  "verdict": "Found",
+  "correct_url": "https://www150.statcan.gc.ca/n1/pub/11-526-s/2013002/t001-eng.htm",
+  "what_was_checked": "Opened table: Canada furnace 57%, baseboard 27%, boiler 5%; BC 52/28/E; Alberta 94%",
+  "problem": "BC boiler 6% (E) could not be confirmed cleanly from page rendering",
+  "copyright": "public"
+ },
+ {
+  "id": "irwdCulver2018",
+  "verdict": "Found",
+  "correct_url": "https://www.irwd.com/images/pdf/doing-business/engineering/2018/BID_SUMMARY_-_Culver_Dr_RW_Pipeline.pdf",
+  "what_was_checked": "Opened bid summary (12 Jul 2018): low bid $707,777 (L & S Construction); 1,210 LF 12-in + 30 LF 8-in = 1,240 LF",
+  "problem": "",
+  "copyright": "unknown"
+ },
+ {
+  "id": "cec2023pump",
+  "verdict": "Found",
+  "correct_url": "https://www.energy.ca.gov/sites/default/files/2023-05/CEC-500-2023-026.pdf",
+  "what_was_checked": "Opened PDF (Chow, DeShazo, Moghaddam, UCLA Luskin, 2023): s. 2.2.2 'uniform requirement for pressurization energy of 222kWh/AF'",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "bchExtension2026",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/bchydro/tariff.txt: s. 8.3.2 $1M / $1M per MVA / $10M; 8.3.4 Extension Fee; s. 11.5 General Service $521/kW; underground 3-phase $1,520 (≤200 A), $2,950 (≤400 A); pages effective 1 Apr 2025–1 Jul 2026",
+  "problem": "$1,520/$2,950 are the listed underground service connection charges, not labelled 'minimum'",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bcUCAs1",
+  "verdict": "Found",
+  "correct_url": "https://free.bcpublications.ca/civix/document/id/complete/statreg/96473_01",
+  "what_was_checked": "Opened UCA: s. 1 'public utility' wording and para. (d) exclusion verbatim; s. 88(3) exemption with advance approval of the minister",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "aucCoaldale2025",
+  "verdict": "Found",
+  "correct_url": "https://prd-api-efiling20.auc.ab.ca/Anonymous/DownloadPublicDocumentAsync/836696",
+  "what_was_checked": "Opened Decision 29294-D01-2025 (3 Jun 2025): para. 14 'must, at a minimum, be contiguous'; para. 23 'attempt to self-distribute and are not permitted'",
+  "problem": "Appeal status not checked (search shows McCain Foods v AUC, 2025 ABCA 297)",
+  "copyright": "public"
+ },
+ {
+  "id": "vanQuebecSt2020",
+  "verdict": "Found",
+  "correct_url": "https://vancouver.ca/files/cov/05-15-2020-quebec-st-phase-3.pdf",
+  "what_was_checked": "Opened memo to Mayor and Council, 15 May 2020: start 19 May, 'completion anticipated in fall 2020', Quebec St 3rd–6th Ave",
+  "problem": "Cover email in same PDF says 3rd–5th Ave and October 2020",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "inlL2_2015",
+  "verdict": "Found",
+  "correct_url": "https://inldigitallibrary.inl.gov/sites/sti/sti/6899530.pdf",
+  "what_was_checked": "Opened INL/EXT-15-36313 (Dec 2015): quote verbatim; Leaf starts peak at start of work day; DCFC more at end of work day",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "uclaWorkplace",
+  "verdict": "Found",
+  "correct_url": "https://innovation.luskin.ucla.edu/sites/default/files/Full%20Report.pdf",
+  "what_was_checked": "Opened Winn report, Table 1: 20.4/26.7/13.5/15.2/18.0/5.4/0.9%; ChargePoint 2011–15",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "dunskyNRCan2024",
+  "verdict": "Found",
+  "correct_url": "https://natural-resources.canada.ca/energy-efficiency/transportation-alternative-fuels/resource-library/electric-vehicle-charging-infrastructure-for-canada/25756",
+  "what_was_checked": "Opened report (Dunsky for NRCan, Feb 2024): Table 12 (2022$) DCFC $160k@125 kW 2025, $240k@175 kW 2030; L2 $15k, $10k",
+  "problem": "Cited URL not surfaced/checked; report is inconsistent on whether utility upgrades are included (ES says excluded, s. 2.5.1 says included); depot-overnight point not checked",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bchDR2026",
+  "verdict": "Found",
+  "correct_url": "https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/power-smart/business/programs/demand-response-for-business-customer-manual.pdf",
+  "what_was_checked": "Opened manual (last updated 5 Aug 2026): Nov–Mar, weekdays 6 am–10 pm, ≤4 h, ≤2/day, ≤20/season",
+  "problem": "Peak/record claims (2021 demand report, 5–6 pm records) are not in this manual; not checked",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "abGreenhouse2017",
+  "verdict": "Found",
+  "correct_url": "https://open.alberta.ca/dataset/fbb2b0b5-53b9-4dbd-92b7-f37ec8ed9369/resource/d074794d-7ec0-4bef-bc93-99a57bbc2cf2/download/2017greenhousecop.pdf",
+  "what_was_checked": "Opened AGDEX 821-59 (Alberta Agriculture and Forestry, Oct 2018, 2017 crop year): $112.75, $129.99, $138.99, $321.01 per m²",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "faoRAS2022",
+  "verdict": "Found",
+  "correct_url": "https://www.fao.org/3/cc2390en/cc2390en.pdf",
+  "what_was_checked": "Opened Bregnballe 2022 (FAO/Eurofish), p. 53 'between EUR 12 to EUR 20 (or more) per kg produced per year'; p. 54 ~EUR 6/kg outdoor grow-out",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "fortisBC2026",
+  "verdict": "Found",
+  "correct_url": "https://www.fortisbc.com/accounts/billing-rates/natural-gas-rates/business-rates",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/fortisbc/rateschedule_3_2026-07.pdf: Rate 3 subtotals $4.3526/day, $5.377/GJ, S&T $2.268, cost of gas $1.660 (Jul 2026 pages); >2,000 GJ",
+  "problem": "Rate 2 figures not verified (web page did not render rates; J.B. screenshots not saved)",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bcCarbonTax2025",
+  "verdict": "Found",
+  "correct_url": "https://www2.gov.bc.ca/gov/content/taxes/sales-taxes/motor-fuel-carbon-tax/carbon-tax-elimination",
+  "what_was_checked": "Opened page: quote verbatim",
+  "problem": "CRA FCN16, BC OBPS ≥10,000 t and Alberta TIER $95/t not on this page; not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "epraBC",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.recyclemyelectronics.ca/bc/what-can-i-recycle",
+  "what_was_checked": "Search did not surface the BC page, so it could not be fetched; no saved copy",
+  "problem": "Unverified: server wording, LVG 3-pallet minimum, processor list",
+  "copyright": "unknown"
+ },
+ {
+  "id": "armaElectronics",
+  "verdict": "Found",
+  "correct_url": "https://www.albertarecycling.ca/registry/stewardship/#processors",
+  "what_was_checked": "Opened ARMA registry: processors eCycle (Airdrie), Hi-Tech Recyclers, Quantum (Edmonton), Shanked (Acheson), YEG (Edmonton); definitions PDF lists 'Blade (rack mount), desktop and floor standing servers', consumer/industrial/commercial",
+  "problem": "Server wording is in https://files.albertarecycling.ca/Electronics_Products-Definitions-and-Fees.pdf, not the registry page",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "cfsPlus",
+  "verdict": "Unreachable",
+  "correct_url": "https://www.cfsalberta.ca/donate.php",
+  "what_was_checked": "Search did not surface cfsalberta.ca or ISED CFS+ pages, so not fetched; no saved copy",
+  "problem": "Unverified: ReuseTechBC, server ≥4 cores, recycling of switches/UPS/batteries",
+  "copyright": "unknown"
+ },
+ {
+  "id": "call2recycle",
+  "verdict": "Found",
+  "correct_url": "https://call2recycle.ca/faqs/",
+  "what_was_checked": "Opened FAQ: 'only dry-cell batteries weighing up to 5 kg each'; SLA and Li-ion accepted; PRO in Ontario and Alberta",
+  "problem": "Cited URL is /faq/, live page is /faqs/; Alberta EPR start 1 Apr 2025 not on page",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "itsp40006",
+  "verdict": "Found",
+  "correct_url": "https://www.cyber.gc.ca/en/guidance/it-media-sanitization-itsp40006",
+  "what_was_checked": "Opened page: ITSP.40.006 v2 (Jul 2017) supersedes ITSG-06; cites NIST SP 800-88 Rev. 1",
+  "problem": "GoA Secure Digital Media Sanitization Standard v2.0 (2023) not checked",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vbbl2025_63215",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/codes/vbbl2025_v1.txt: Art. 6.3.2.15.(1),(5) a–d verbatim, (10) Clause 2.4.2.1.(1)(e) Book II; no NFPA 855 in Book I; Book II Art. 2.2.11.6 Cooling Towers (vbbl2025_bookII_insert.txt)",
+  "problem": "Saved file is consolidation to 30 Sep 2026 (v4.01), a convenience copy",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "nfcAB2023",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/codes/nfc_ab2023.pdf (NRC © 2026): no 'NFPA 855', no 'energy storage'; 3.1.3.3 Battery-Powered Industrial Trucks",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "abEUAdef2026",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/E05P1_EUA.pdf: current as of 6 Feb 2026; s. 1(1)(m) wording and exclusions (i)–(iii) incl. HEEA s. 25.1; 2025 c8 not in force, repeals and substitutes s. 18",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "nfpa855_2026",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/codes/nfpa855_2026_screens.pdf (2026 ed., Free Access): 9.6.2.7.1 10 ft (3 m) exposures, 9.6.2.7.1.1–.5 reductions to 3 ft, 9.6.2.1.1 vegetation 10 ft, rooftop 9.6.3.1.1.2–3, 9.6.3.1.3 10 ft; remote >100 ft (30.5 m)",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "uptimeTiers",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/codes/uptime_tiers.pdf (OCR): Tier II 'redundant capacity components for power and cooling', Tier III 'concurrently maintainable', Tier IV 'several independent and physically isolated systems'; no N+1/2N",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "r2Van2026",
+  "verdict": "Found",
+  "correct_url": "https://www.sustainableelectronics.org/find-an-r2-certified-facility/",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/codes/r2_vancouver_2026-10-16.png: 5 facilities, Active R2v3, 11.03/12.04/24.22/45.25/53.74 mi",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "r2Edm2026",
+  "verdict": "Found",
+  "correct_url": "https://www.sustainableelectronics.org/find-an-r2-certified-facility/",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/codes/r2_edmonton_2026-10-16.png: 2 facilities, Active R2v3, 10235 184 St NW (5.93 mi), Site 700-250 Aurum Rd NE (8.33 mi)",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "cologixVAN1_2026",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/cologix_van1_2026-05.pdf: 555 W Hastings (Harbour Centre), tenant, office building, 400 kW, 5K sq ft 2 suites, N+1 cooling text, N/N+1, PUE 1.2",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "cologixVAN4_2026",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/cologix_van4_2026-05.pdf (VAN4.E.052026.R2): 175 W Cordova, leased single tenant, 4-storey concrete, 6.5 MW, 40K sq ft, pumped refrigerant + air-cooled CHW, 5-to-make-4, 6–8 kW/cab, PUE 1.5",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanStreets2026",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/van/public-streets.csv (17,072 rows, HBLOCK, STREETUSE) and raw/van/streets/lanes_2026-10-18.geojson (7,856 features, no surface field)",
+  "problem": "City 27 Jul 2026 update date not checked",
+  "copyright": "public"
+ },
+ {
+  "id": "edmRoads2026",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/edm/Road_Network_20261016.csv: 53,873 rows; types Road/Alley/Railway; functional class and SURFACE_LAYER_TYPE fields",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "vanI2_2026",
+  "verdict": "Found",
+  "correct_url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-2.pdf",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/codes/van_I-2_schedule.txt (June 2026): 3.1.2.1–5, 3.2.1–3.2.2 figures and 2.2.7 bulk data storage match",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "mvWWTP2026",
+  "verdict": "Unreachable",
+  "correct_url": "https://metrovancouver.org/services/liquid-waste/wastewater-treatment-plants-and-processes",
+  "what_was_checked": "Search shows the Metro Vancouver page exists; fetch blocked by hourly fetch limit; no saved copy",
+  "problem": "Page is a sub-page of the cited URL; plant list and '1 billion litres' not verified",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "statcanGH2021",
+  "verdict": "Found",
+  "correct_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3210036001",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/statcan/greenhouse_32100360_*.csv: 29,931,588 m² (4,796), AB 1,391,678 (436), Div 11 107,719 D (68), Edmonton 23,733 (5), BC 5,931,819 (1,098), Vancouver F (3)",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "blatchfordBP2021",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/edm/blatchford_business_plan_2021_2024.pdf (text blatchford_bp.txt): geoexchange/sewer/solar, net-zero exemption, sewer-heat centre 2023 in Market area, 123,500 m²",
+  "problem": "Saved filename differs from cited one",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "abWells2026",
+  "verdict": "Found",
+  "correct_url": "https://groundwater.alberta.ca/WaterWells/d/",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/edm/wells/Reconnaissance_Report*.txt (9 reports): dates 1898–2026; no geoexchange/loop/heat terms (only owner names)",
+  "problem": "Record counts and medians not recomputed",
+  "copyright": "public"
+ },
+ {
+  "id": "ceedcIEF2026",
+  "verdict": "Found",
+  "correct_url": "https://cieedacdb.rem.sfu.ca:8006/district-energy-inventory/",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/ceedc/b4658e8f-CEEDC_IEF_district_energy.xlsx: Creative 237 MW 220 bldgs 2014; SEFC 67/50, 32 MW, 44, 27,094 ft 2022; RDE 85/65, 15 MW, 20, 2018; UofA 590/145 MW, 205/5 °C, 80; UBC coords downtown",
+  "problem": "",
+  "copyright": "unknown"
+ },
+ {
+  "id": "ceud2023com",
+  "verdict": "Found",
+  "correct_url": "https://oee.nrcan.gc.ca/corporate/statistics/neud/dpa/menus/trends/comprehensive_tables/list.cfm",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/nrcan_ceud/x/com_bct_e.xls, com_ab_e.xls Tables 15/17/19, 2023: recomputed 0.497/1.096/0.650 BC, 1.307/2.348/1.458 AB GJ/m²",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "vanNES2012",
+  "verdict": "Found",
+  "correct_url": "https://council.vancouver.ca",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/bcuc/ptec1.txt: RTS 9772, 25 Sep 2012, PT&E 3 Oct 2012; Central Heat >200 buildings; waste heat 'preferred low-carbon energy source'; App. A 4.1",
+  "problem": "Exact council URL not given (only domain + ptec1.pdf)",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "rdeService2026",
+  "verdict": "Found",
+  "correct_url": "https://www.riverdistrictenergy.com",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/van/networks/river_district_service_area.pdf (16 Oct 2026, 3 pp): service area between Boundary Road and Kerr Street; map",
+  "problem": "Page URL not checked online",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "estarMedian2018",
+  "verdict": "Found",
+  "correct_url": "https://www.nrcan.gc.ca",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/nrcan/median_tables_2018.pdf (Aug 2018): site EUI K-12 0.75, hospital 2.22, residential care 1.04, ice/curling 1.15, recreation 1.51; SCIEU/SECA/CIBEUS",
+  "problem": "Only the domain is given as URL",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanNESmap2020",
+  "verdict": "Found",
+  "correct_url": "https://vancouver.ca",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/van/networks/nes_established.pdf: last updated March 2020; systems listed match; 'illustrative purposes only'",
+  "problem": "Only the domain is given as URL",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "rdeTech2018",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/bcuc/tech_guidelines.pdf (2018-09-10 RDE Information for Developers): Table 1 70/50 winter, 45/40 summer, ΔT 20; radiant 49/38, AHU 65/45; ETS 15–35 °C, floor drain, 15 A",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bcucCE2026",
+  "verdict": "Found",
+  "correct_url": "https://www.bcuc.com",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/bcuc/advanced_search.pdf + as-1.png: 336 results; G-282-25 (3 Dec 2025), G-2-25 (10 Jan 2025)",
+  "problem": "Search-results listing, not a document",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "edmDDEmap2025",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/edm/ddei_phases_map.pdf (DDEI-Phases-Technical-Map-FINAL, created 26 May 2025): phases 1–4, energy centre, mains labels, 'subject to change'",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "nrcanEV2026",
+  "verdict": "Found",
+  "correct_url": "https://natural-resources.canada.ca",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/nrcan/alt_fuel_stations_2026-10-16.csv (BC 2,597: 2,565 E, 32 T) and _b.csv (AB 949: 935 E)",
+  "problem": "City-extent counts not recomputed; URL is domain only",
+  "copyright": "public"
+ },
+ {
+  "id": "uofaGHG2025",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/edm/uofa/ghg_plan.pdf (Final, created 28 Apr 2025; OCR): scope 1&2 234,718.98 t, DES fuel 136,705.47 t, North Campus 84.9%, steam vs low-temperature hot water pathways",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanRainPrivate2026",
+  "verdict": "Found",
+  "correct_url": "https://vancouver.ca",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/van/rainwater_private_ocr.txt: 1.0 FSR / 1,000 m² small-site pathway, 3,400–7,200 L, engineered pathway, VBBL Book II 2.4.2.5",
+  "problem": "URL is domain only",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "vanPublicRooms2026",
+  "verdict": "Found",
+  "correct_url": "https://opendata.vancouver.ca",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/van/libraries.csv (22 incl. Outreach Services), community-centres.csv (27); raw/van/cool/*.pdf Keeping Cool maps 2026",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "majdabadi2026",
+  "verdict": "Found",
+  "correct_url": "https://doi.org/10.1016/j.geothermics.2026.103640",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/papers/geothermics_2026.txt: Geothermics 138, 103640; Table 3 $54/$51/$140 per m (CAD 2025); up to ~40%; Edmonton CZ 6; mid-rise multifamily",
+  "problem": "First author surname is 'Mahmoudi Majdabadi'",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "bcucG25224",
+  "verdict": "Found",
+  "correct_url": "https://www.bcuc.com",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/bcuc/G-252-24_creative_energy_low_carbon_rate.pdf: 26 Sep 2024, rejected for filing, C-5-22 (15 Sep 2022), $37,461,691 → $52,637,018 (31 Jul 2023), Q4 2025, G-345-22",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "bcucG526",
+  "verdict": "Found",
+  "correct_url": "https://www.bcuc.com",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/bcuc/G-5-26_timetable.pdf: Order G-5-26, 16 Jan 2026, interim refundable rates $14.51 and $41.82, NEFC and Butterfly",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "bcucG34522A",
+  "verdict": "Found",
+  "correct_url": "https://www.bcuc.com",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/bcuc/G-345-22A_order.pdf (3 pp, 29 Nov 2022) and G-345-22A_errata.pdf (81-page decision): System Contribution Charge, consolidation from 1 Jan 2022",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "bcucG17926",
+  "verdict": "Found",
+  "correct_url": "https://www.bcuc.com",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/bcuc/G-179-26.pdf: 20 Aug 2026, $14.78/M#, $42.59/MWh, 0.347, debt 5.33%, New Beatty to 2029, $666,650 removed",
+  "problem": "",
+  "copyright": "public"
+ },
+ {
+  "id": "uofaEERMP2021",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/edm/uofa/envision_2021.pdf (published Nov 2021): 15%, 350,000 GJe, 25,000 t, 2,500 kW, 495 kW, 2.5 times, micro-steam, programme total $3,558,000 / 375,600 / 30,450",
+  "problem": "",
+  "copyright": "copyrighted"
+ },
+ {
+  "id": "abGreenhouse2023",
+  "verdict": "Found, details wrong",
+  "correct_url": "https://open.alberta.ca",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/ab/greenhouse_economics_2023.pdf (Laate): 909,443 m², 2.30 million m² (2024 AGGA), $105.06–$478.16/m², 85% gas, 9% propane, 30% boilers, $4.30/GJ",
+  "problem": "'53 growers' is wrong: report says 56 completed questionnaires from 41 greenhouse operations",
+  "copyright": "public"
+ },
+ {
+  "id": "bcGreenhouse2011",
+  "verdict": "Found",
+  "correct_url": "",
+  "what_was_checked": "saved copy: /mnt/user-data/outputs/data/raw/bc/greenhouse_jobsplan_2011.pdf (GH_Report_FINAL_24Jan2012): 15%, 90%/50% CO2 gas, 13,000–20,000 GJ/ha, 22,500–28,000 (2005), biomass, carbon tax",
+  "problem": "",
+  "copyright": "copyrighted"
+ }
+]
