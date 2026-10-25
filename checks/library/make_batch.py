@@ -17,6 +17,6 @@ for dom in doms:
     if not uniq: continue
     actions.append({'name': 'navigate', 'input': {'url': uniq[0][1]}})
     actions.append({'name': 'javascript_tool', 'input': {'action': 'javascript_exec', 'text': 'window.__out = []; window.__done = false; (async () => { const L = ' + json.dumps(uniq) + ';\n' + BODY + ' })(); "started"'}})
-    actions.append({'name': 'javascript_tool', 'input': {'action': 'javascript_exec', 'text': 'for (let i = 0; i < 45 && !window.__done; i++) await new Promise(r => setTimeout(r, 1000)); ({done: window.__done, out: window.__out})'}})
+    actions.append({'name': 'javascript_tool', 'input': {'action': 'javascript_exec', 'text': 'for (let i = 0; i < 35 && !window.__done; i++) await new Promise(r => setTimeout(r, 1000)); ({done: window.__done, out: window.__out})'}})
 json.dump(allL, open(f'dl_{tag}.json', 'w'))
 print(json.dumps(actions))
