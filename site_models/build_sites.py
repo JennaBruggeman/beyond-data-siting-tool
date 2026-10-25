@@ -44,6 +44,8 @@ SITES = [
  # the two chosen sites (J.B., 22 Oct 2026): 1,000 m boxes centred on the parcel, for the neighbourhood models
  ('V09', '275 1st Ave E, Vancouver (chosen site)', bbox_from(49.268811, -123.09697, 1000), 'centred on the parcel at 275 1st Ave E (City parcel centroid), 1,000 m square'),
  ('E05', '8803 Stadium Rd NW, Edmonton (chosen site)', bbox_from(53.555110, -113.477327, 1000), 'centred on the assessment point for 8803 Stadium Rd NW, 1,000 m square'),
+ # new Edmonton site (J.B., 25 Oct 2026): the two empty BE lots at 74 and 64 Airport Rd NW, Blatchford edge; centred midway between their assessment points
+ ('E06', '74 and 64 Airport Rd NW, Edmonton (Blatchford edge, chosen site)', bbox_from(53.568862, -113.522429, 1000), 'centred midway between the assessment points of 74 and 64 Airport Rd NW, 1,000 m square'),
 ]
 ONLY = set(filter(None, os.environ.get('ONLY', '').split(',')))
 if ONLY: SITES = [s for s in SITES if s[0] in ONLY]
