@@ -1,0 +1,14 @@
+const L = [["energize", "https://vancouver.ca/files/cov/vancouver-annual-greenhouse-gas-and-energy-limits-by-law-faq.pdf"], ["vanPermitTimes", "https://vancouver.ca/files/cov/2025-02-10-council-memo-3-3-3-1-permitting-program-update.pdf"], ["neuSewage", "https://vancouver.ca/home-property-development/sewage-heat-recovery-expansion-project.aspx"], ["van_vbbl2025_27", "https://vancouver.ca/files/cov/2025-vbbl-book-II-insert-pages.pdf"], ["van_genroom", "https://vancouver.ca/files/cov/2000-015-emergency-generator-rooms.pdf"], ["vanNEU2025", "https://vancouver.ca/home-property-development/southeast-false-creek-neighbourhood-energy-utility.aspx"], ["vanCTseminar2021", "https://vancouver.ca/files/cov/cp-seminar-operating-permits-storm-sumps-nov-4-2021-chris-radziminski.pdf"], ["vanR3R4R5", "https://vancouver.ca/files/cov/r-3-4-5-rezoning-guide.pdf"], ["vanSewerCap2025", "https://vancouver.ca/files/cov/sewer-capacity-development-review-policy.pdf"], ["vanHeatPolicy", "https://vancouver.ca/files/cov/2022-03-10-council-memo-planning-for-extreme-heat.pdf"], ["vanISMP2014", "https://vancouver.ca/files/cov/integrated-stormwater-management-best-practice-toolkit-volume-2.pdf"], ["vanRainPage", "https://vancouver.ca/home-property-development/rainwater-management.aspx"]];
+const out = []; const save = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); out.push([name, blob.size]); };
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+for (const [id, url] of L) {
+  try { const r = await fetch(url); const ct = r.headers.get('content-type') || ''; const b = await r.blob();
+    if (!r.ok) { out.push([id + ' HTTP ' + r.status, 0]); continue; }
+    if (ct.includes('pdf')) save(b, id + '/full.pdf');
+    else { const html = await b.text(); save(new Blob([html], {type: 'text/html'}), id + '/page.html');
+      const doc = new DOMParser().parseFromString(html, 'text/html'); const host = new URL(url).host;
+      const pdfs = [...new Set([...doc.querySelectorAll('a[href]')].map(a => { try { return new URL(a.getAttribute('href'), r.url).href; } catch (e) { return ''; } }).filter(h => /\.pdf(\?|#|$)/i.test(h) && new URL(h).host === host))];
+      let n = 0; for (const p of pdfs.slice(0, 2)) { try { const pr = await fetch(p); if ((pr.headers.get('content-type') || '').includes('pdf')) { save(await pr.blob(), id + '/linked_' + n + '__' + p.split('/').pop().split('?')[0]); n++; await sleep(300); } } catch (e) {} } }
+  } catch (e) { out.push([id + ' ERR ' + String(e).slice(0, 60), 0]); }
+  await sleep(400); }
+out
