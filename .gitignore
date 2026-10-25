@@ -23,3 +23,7 @@ lot_proforma/
 checks/size_check_recalculated.xlsx
 sources/library/private/
 sources/library/_large/
+# Saved source documents live in the private repo beyond-data-sources; only the index (info.json) is kept here
+sources/library/public/*/*
+!sources/library/public/*/info.json
+sources/library/_incoming/
