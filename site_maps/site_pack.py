@@ -5,7 +5,7 @@ import json, csv, math, os
 from build_site_maps import demand, REACH, REACH_DEF, CITY, C, proj
 H = os.path.dirname(os.path.abspath(__file__)); T = os.path.join(H, '..', 'tool'); D = os.path.join(H, '..', 'data'); OUT = os.path.join(H, 'chosen')
 os.makedirs(OUT, exist_ok=True)
-SITES = [('V09', 'van', '275 1st Ave E, Vancouver', 49.268811, -123.09697), ('E05', 'edm', '8803 Stadium Rd NW, Edmonton', 53.555110, -113.477327)]
+SITES = [('V09', 'van', '275 1st Ave E, Vancouver', 49.268811, -123.09697), ('E05', 'edm', '8803 Stadium Rd NW, Edmonton', 53.555110, -113.477327), ('E06', 'edm', '74 and 64 Airport Rd NW, Edmonton (Blatchford edge)', 53.568862, -113.522429)]
 def dist(lat1, lon1, lat2, lon2):
     k = math.pi / 180; x = (lon2 - lon1) * k * math.cos((lat1 + lat2) / 2 * k); y = (lat2 - lat1) * k
     return 6371000 * math.hypot(x, y)
@@ -13,7 +13,9 @@ def write(name, rows):
     if not rows: return
     with open(os.path.join(OUT, name), 'w', newline='', encoding='utf-8') as f:
         w = csv.DictWriter(f, list(rows[0])); w.writeheader(); w.writerows(rows)
+ONLY = set(filter(None, os.environ.get('ONLY', '').split(',')))
 for sid, city, addr, lat, lon in SITES:
+    if ONLY and sid not in ONLY: continue
     pack = {'site': sid, 'address': addr, 'lat': lat, 'lon': lon}
     # the site's cell in the site maps (scores 0-1, compared within the city only)
     fx, _ = proj(CITY[city]); x, y = fx(lon, lat); cid = '%s_%d_%d' % (city, math.floor(x / C), math.floor(y / C))

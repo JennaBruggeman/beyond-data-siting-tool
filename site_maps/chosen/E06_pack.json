@@ -1,0 +1,58 @@
+{
+ "site": "E06",
+ "address": "74 and 64 Airport Rd NW, Edmonton (Blatchford edge)",
+ "lat": 53.568862,
+ "lon": -113.522429,
+ "cell": {
+  "id": "edm_-15_31",
+  "site": 0.7,
+  "zoning_best": "case",
+  "heat": 1.0,
+  "energy": 0.513,
+  "water": 0.0,
+  "materials": 0.375,
+  "people": 0.112,
+  "overlap": 0.4,
+  "overlap_zoned": 0.28,
+  "n_strong": 2,
+  "heat_MWh_weighted": 41519,
+  "receivers_in_reach": 15,
+  "network": "Blatchford District Energy Sharing System",
+  "network_dist_m": 0,
+  "substation_dist_m": 596,
+  "households_1km": 1211,
+  "ev_ports_1km": 1,
+  "water_raw": 7297.6,
+  "arterial_dist_m": 168,
+  "industrial_share_1km": 0.051,
+  "schools_2km": 7,
+  "pop_800m": 932,
+  "pop_150m": 2,
+  "ov_equal": 0.4,
+  "ov_priority": 0.526,
+  "ov_spread": 0.546,
+  "ov_equal_zoned": 0.28,
+  "ov_priority_zoned": 0.368,
+  "ov_spread_zoned": 0.382,
+  "stability": 0.0,
+  "stability_zoned": 0.038
+ },
+ "heat": {
+  "receivers_within_1500m": 23,
+  "in_reach": 16,
+  "demand_counted_MWh_yr": 42039
+ },
+ "substations_source": "NRCan CanVec 50K Res_MGT transformer_station_0 (points) and _2 (areas), 2019; dates are the source map years",
+ "named_substations_within_5km": [
+  {
+   "n": "Woodcroft",
+   "x": -4381,
+   "y": 3441,
+   "addr": "11819 142 St NW (placed at 11820, the nearest City-listed address)",
+   "status": "EPCOR project",
+   "src": "EPCOR Woodcroft substation project page",
+   "distance_m": 2908
+  }
+ ],
+ "ev_source": "nrcanEV2026 (2026-10-16, open, public)"
+}
