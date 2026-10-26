@@ -8,10 +8,10 @@ For Wednesday's review I'm making an **8.5-minute video** of all the work so far
 3. The exchange sheets **0–5** and **20 What else it could give**.
 4. The precedents overview and the 11 field-site spreads.
 5. **L1, L3, L6** and **S0**.
-6. **S2, S3, S6, S11, S12, S15** (S7–S10 only as a quick strip).
+6. **S2, S6, S11, S12** (the v4 results only), and the heat-pump cost against value chart (from J0 or E7).
 7. **J0**.
-8. **E1, E2, E3, E7, E8**.
-9. **V1, V2, V4, V7, V8**.
+8. **E1, E2, E3, E7**.
+9. **V1, V2, V4, V7**.
 
 **For each of those, export into `Claude Link/video_assets/<spread code>/`:**
 1. **The spread** as PDF and 300 dpi PNG (as the booklet).
@@ -32,7 +32,7 @@ For Wednesday's review I'm making an **8.5-minute video** of all the work so far
    - type no smaller than about 28 px;
    - white background; same colours and fonts (GP2 frame, Lato).
 4. **The data behind each chart or table** as CSV or JSON: bar values, table rows, ranks, distances. Then animated bars and tables can be drawn to the same scale as on the page.
-   - This matters most for **E7 and V7** (the money), **S12** (the shortlist) and **S15** (before and after).
+   - This matters most for **E7 and V7** (the money), the **cost against value chart**, and **S12** (the shortlist).
 5. **For E1 and V1:**
    - the 3D context model (OBJ or GLB) with the site left empty;
    - the camera position and target used for the booklet view (in the model's local frame);
@@ -40,7 +40,7 @@ For Wednesday's review I'm making an **8.5-minute video** of all the work so far
 
 **Naming:** `<code>_<what>.<ext>`, e.g. `S12_table.csv`, `E7_money.svg`, `E1_model.obj`.
 
-**Rules:** nothing new is drawn for the video. These are the booklet graphics, separated into layers. Same accuracy rules as the booklet.
+**Rules:** nothing new is drawn for the video, and nothing about 8803 Stadium Rd or the earlier method appears in it. These are the booklet graphics, separated into layers. Same accuracy rules as the booklet.
 
 Reply with the list of files exported and anything you couldn't separate into layers.
 
