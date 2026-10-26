@@ -1,72 +1,80 @@
-This updates the Vancouver site analysis for GP2 (275 1st Ave E, V09). The earlier prompt `PROMPT_site_analysis.md` paired V09 with 8803 Stadium Rd. **The Edmonton site is now E06** (74 and 64 Airport Rd NW, see `PROMPT_site_analysis_E06.md`). Keep the earlier prompt's structure, data rules and style for V09, with the changes below. **`SITE_LEDGER_2026-10-25.md` overrides any older figure.**
+This updates the Vancouver site analysis for GP2 (275 1st Ave E, V09). It **replaces** the earlier `PROMPT_site_analysis.md` for V09. Use that file only for its data descriptions (what's in the folder) and its data rules. **`SITE_LEDGER_2026-10-25.md` overrides any older figure.** The Edmonton site is now E06 (`PROMPT_site_analysis_E06.md`); 8803 Stadium Rd is dropped.
+
+**This is a site analysis, not a building design.** The building is GP2's work and isn't designed yet.
+- **Don't draw a data centre on the site:** no massing, no plan, no section of a building.
+- **Do show:** the exchanges, the money, the adjacencies, the site rules, and the **qualities a data centre here would need** to make each exchange possible.
+- Any program is **speculative and graphic**, never a plan.
+
+Use the same spread structure as E06 so the two sites compare page for page. Propose the spreads (title plus a one-line plan each) before drawing.
 
 ## The pairing
-
-The two buildings make one argument: **join vs grow**.
 
 | | Edmonton, E06 ("grow") | Vancouver, V09 ("join") |
 |---|---|---|
 | What's scarce | Heat demand, for now | Land and power |
 | Network | Young ambient loop (8–32 °C), no heat pump | Mature hot network (NEU, at least 65 °C), heat pump needed |
-| How it shares | **Over time:** halls lent out, then taken back | **At the same time:** stacked and shared |
+| How it would share | Over time | At the same time (stacked) |
 | Heat money | Pays if the tie-in is close | **Doesn't pay under today's tariff** |
+| The exchange to lead with | Heat | **Power and space** |
 
-## Corrections for V09 (from the ledger)
+## The site (from the ledger)
 
-- **Lot:** about 7,850 m², not 7,791 or 7,803. Legal area needs the land title plan.
+- **Lot:** about 7,850 m² (legal area needs the land title plan).
+- **Existing building:** 1956. It covers 36 % of the lot in the 2009 data, **about 60 % if two 2022 LiDAR outlines are real** (unverified).
 - **Zoning, I-3 sub-area A:**
-  - data storage is conditional, sub-area A only;
-  - no data storage on the ground floor "except for entrances";
-  - first floor at least 6.0 m; **floors above at least 4.0 m**;
+  - data storage conditional, sub-area A only;
+  - **no data storage on the ground floor** "except for entrances";
+  - first floor at least 6.0 m; floors above at least 4.0 m;
   - height 18.3 m outright, up to 30.5 m or 45.7 m at the City's discretion;
   - floor area up to 3.0 × the lot (about 23,550 m²); the extra 2.0 doesn't apply to storage;
   - yards: front 0.6 m, side 7.6 m, rear 3.1 m, with more above 18.3 m; max 61 m wide and deep.
-- **Existing building:** 1956. It covers 36 % of the lot in the 2009 data, but **about 60 % if two 2022 LiDAR outlines are real**. Mark as unverified.
+- **Public uses allowed** (I-3 s. 2.1): Arts and Culture Event outright (at most 6 days a month). Conditional: community centre, social service centre, child care, hall, fitness, farmers' market, Restaurant Class 1, urban farm.
 - **NEU:**
-  - inside the service area, about 220 m from the edge;
-  - network at least 65 °C; building return at most 45 °C (**50 °C is a building supply rule, not the return**);
+  - inside the service area, about 220 m from the edge; new buildings must connect unless exempted;
+  - network at least 65 °C; building return at most 45 °C;
   - no published terms for feeding heat in;
-  - credit $32.59/MWh, netted on the data centre's own bill;
-  - connection levy $123,873 + $146/kW (2026), if it applies to a supplier at all.
-- **Heat money:**
-  - heat-pump route costs **$37–59/MWh** with the demand charge;
-  - it **doesn't pay under the published tariff**;
-  - it pays only with a negotiated price near gas parity ($39.40) and low-end costs.
-  - The tool report in the folder says the NEU route pays. **It leaves out capital costs; use the ledger instead.**
+  - credit $32.59/MWh, netted on the building's own bill;
+  - levy $123,873 + $146/kW (2026), if it applies to a supplier.
 - **Power:**
-  - downtown feeders are full by fiscal 2027;
-  - BC Hydro says it will keep connecting customers with temporary measures; the West End substation is due July 2032;
-  - this is BC Hydro's application, not a BCUC decision.
-  - Large loads must curtail at least 10 % on 24 h notice (2026 Call for Demand, 10–145 MW). Electricity is $67.90/MWh for energy, about $86.90 with the demand charge.
-- **Substations:** nearest 604 m (unnamed); Murrin 1.05–1.10 km (operating); East Vancouver 1.88 km (future).
-- **Neighbours:** Emily Carr 359 m; Centre for Digital Media 573 m; False Creek 596 m; Vancouver Detox Centre 146 m.
+  - downtown feeders full by fiscal 2027; BC Hydro will use "temporary measures" to keep connecting; West End substation July 2032 (an application, not yet a BCUC decision);
+  - large loads must curtail at least 10 % on 24 h notice (2026 Call for Demand, 10–145 MW);
+  - electricity $67.90/MWh for energy, about $86.90 with the demand charge.
+- **Neighbours:** Vancouver Detox Centre 146 m; Emily Carr 359 m; Centre for Digital Media 573 m; False Creek 596 m; nearest substation 604 m; Murrin substation 1.05–1.10 km.
 - **Site maps v4:** V09 is in Vancouver's #1 area, stable in 99 % of 500 random weightings. Use the new `V09_pack.json`.
+- **The folder's tool reports** say NEU heat pays. **They leave out capital costs; use the ledger.**
 
-## The building: "space and power at the same time" (decided)
+## What the booklet should show (same structure as E06)
 
-- **Size:** by the same rule as Edmonton, set by its client and the power available. Likely client: the Great Northern Way campus (Emily Carr, Centre for Digital Media), unconfirmed. Show the size the power supply allows during the feeder freeze. If you need a range, use the tool's 2.7–10.2 MW and mark the chosen size as J.B.'s to confirm.
-- **A vertical hybrid:**
-  - the **6 m ground floor** is permanent public and production space (studios, recording, making), since I-3 bars data storage there;
-  - **data floors above**, at least 4.0 m each;
-  - the **NEU connection room** made into a visible civic room at the street.
-- **A good grid citizen:**
-  - curtails load at peaks (at least 10 % on 24 h notice);
-  - shares its batteries;
-  - acts as a backup-power hub for neighbours such as the Detox Centre.
-  - Power is the exchange the architecture expresses.
-- **Heat:** join the NEU with a heat pump. Show it honestly: it doesn't pay today and depends on a deal with the City.
+**1. Adjacencies.** The NEU, the substations, Emily Carr and the Centre for Digital Media, the Detox Centre, False Creek, homes and studios nearby, truck routes. Give distances and what each link crosses.
 
-## Drawings
+**2. Site rules.** I-3 as a diagram of limits: the 6 m ground floor where data storage isn't allowed, 4 m upper floors, heights, floor area, yards. Plus the NEU's compulsory-connection rule and the downtown feeder limit. Rules, not a building.
 
-As in the earlier prompt (3D model, site maps, axonometric, the exchanges documented, program, plan and sections, specification sheet), plus **the GP2 drawing set shared with E06**:
-1. a section;
-2. the five exchanges;
-3. the network over time;
-4. the heat-interface detail;
-5. an inhabited civic view;
-6. the tool's numbers.
+**3. The exchanges.** One compact treatment per exchange (heat, energy, water, materials, people and place):
+- what could be given and taken;
+- with whom (named, with distances);
+- how much;
+- what would have to be true;
+- what's ruled out;
+- how sure.
 
-For Vancouver, put the **power exchange** first in the axonometric and the section: substation, batteries, curtailment, backup to neighbours. Use the same per-MW rules from `DESIGN_BRIEF.md`.
+Lead with **power**: curtailment, batteries, backup for neighbours such as the Detox Centre.
+
+**4. The money.**
+- Heat-pump route $37–59/MWh against the NEU credit ($32.59, netted on the bill) or gas parity ($39.40, only by negotiation). Verdict: doesn't pay today.
+- Power: what curtailing at least 10 % means in MW and hours (144 h a year).
+
+**5. Power over time.** The feeder freeze to 2032 against what a data centre could be allowed and could give back.
+
+**6. Qualities the data centre would need,** as a list or diagram per exchange, marked **GP2 hypotheses**:
+- **Energy:** a load sized to the power available; able to curtail; batteries that answer the grid; a backup-power role.
+- **People:** the ground floor for public and production use (the zoning already requires it), a refuge room on backup power.
+- **Heat:** liquid cooling, a heat exchanger at the boundary, a heat pump, a visible NEU connection room.
+- **Water:** dry coolers.
+- **Materials:** a dock for refreshes.
+
+**7. A speculative program,** graphic only: proportions per MW (`DESIGN_BRIEF.md`) and the stacking logic the zoning implies (public ground, data above), drawn as a diagram. No plan, no layout, no massing on the site.
+
+**8. A 3D model of the neighbourhood** for context only: the site highlighted, existing building shown as existing, no new building. OBJ or 3DM plus GeoJSON, local frame centred on the site; state the origin.
 
 ## Rules
-As before. Don't make anything up; every number from the folder, the ledger or the library, with its source. Mark unverified items. The tool's results are trade-offs, not verdicts, and its re-run is pending: mark any tool-only figure "tool re-run pending". Raw BC Assessment data must not be sought. Booklet style. Canadian spelling. Short labels. Leave a "TEXT · J.B." box.
+As before. Don't make anything up; every number from the folder, the ledger or the library, with its source. Mark unverified items. The tool's results are trade-offs, not verdicts, and its re-run is pending. Raw BC Assessment data must not be sought. Booklet style. Canadian spelling. Short labels. Leave a "TEXT · J.B." box.

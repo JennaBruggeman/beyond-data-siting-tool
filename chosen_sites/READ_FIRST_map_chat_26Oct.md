@@ -3,7 +3,9 @@
 1. `site_maps/PROMPT_addendum_method_v4.md`: the new site-map method, the results, the maps to redo, and the booklet plan (simulation section 24 → 16 spreads).
 2. `chosen_sites/SITE_LEDGER_2026-10-25.md`: checked numbers for both sites. It **overrides any older figure** in any file, including the V09 tool report.
 3. `chosen_sites/PROMPT_site_analysis_E06.md`: the full Edmonton site analysis (Blatchford edge, "grow").
-4. `chosen_sites/PROMPT_site_analysis_V09_update.md`: the Vancouver site analysis update ("join", space and power at the same time). Read it with the original `PROMPT_site_analysis.md`, which it updates.
+4. `chosen_sites/PROMPT_site_analysis_V09_update.md`: the Vancouver site analysis ("join", power and space). It replaces the old `PROMPT_site_analysis.md` for V09.
+
+**Both site analyses are about the exchanges, the money, the adjacencies, the site rules, and the qualities a data centre would need.** Don't draw a data centre on either site; the building is GP2's work. Any program is speculative and graphic, not a plan.
 
 **Old and superseded:**
 - 8803 Stadium Rd (E05) is no longer a thesis site. It appears only on the before/after spread.

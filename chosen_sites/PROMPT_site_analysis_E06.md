@@ -1,132 +1,123 @@
-I've moved my Edmonton site for GP2 (Beyond Data: data centres as neighbours). The new site is at the edge of Blatchford, the City's new low-carbon neighbourhood on the old City Centre Airport. I need a full site analysis of it, at the same depth as the earlier sites:
+I've moved my Edmonton site for GP2 (Beyond Data: data centres as neighbours). The new site is at the edge of Blatchford, the City's new low-carbon neighbourhood on the old City Centre Airport. I need a site analysis of it for my booklet.
 
-- a 3D model of the neighbourhood;
-- site maps;
-- an axonometric with the exchanges;
-- every exchange documented;
-- the data centre's program, layout and specifications.
+**This is a site analysis, not a building design.** The building is GP2's work and isn't designed yet.
+- **Don't draw a data centre on the site:** no massing, no plan, no section of a building.
+- **Do show:**
+  - the exchanges;
+  - the money behind them;
+  - the adjacencies (what's near, how far, across what);
+  - the site rules;
+  - the **qualities a data centre here would need** to make each exchange possible.
+- Any program is **speculative and graphic** (proportions, relationships, phases), never a plan.
 
-Everything you need is in the connected folder `chosen_sites/`, mainly `E06_74_64_Airport_Rd_NW/`. **`SITE_LEDGER_2026-10-25.md` overrides any older figure**: use its numbers. Read this whole prompt, then the folder's `README.md` (its data gaps especially), then tell me your plan and which drawings you'll make before making them.
+Everything you need is in the connected folder `chosen_sites/`, mainly `E06_74_64_Airport_Rd_NW/`. **`SITE_LEDGER_2026-10-25.md` overrides any older figure.** Read this whole prompt and the folder's `README.md` (its data gaps especially). Then propose your spreads (title plus a one-line plan each) before drawing. I'd expect about 6–8 spreads, but you propose.
 
-## Why the site moved (say this in the booklet)
+## Why this site (say this in the booklet)
 
-- The GP1 site maps ranked 8803 Stadium Rd NW (E05) first in Edmonton.
-- The later money test found that at Edmonton's gas prices, waste heat sold into a hot network (downtown, 70/50 °C) doesn't pay. Most of the cost is the heat pump needed to lift the heat that far.
-- Blatchford's loop runs at 8–32 °C (Blatchford District Energy Design Guide v8, June 2025). A data centre's waste heat can go in without a heat pump. Delivery costs a few dollars per MWh.
-- So the move is a **finding**: the tool's #1 site failed the money test, and the network decided the site.
-- The GP1 site maps still rank E06 lower (0.40 vs 0.59 overall). They score heat by demand and distance, not by network temperature or cost, and the people score uses 2021 census data from before most of Blatchford was built. Show this openly; don't hide it.
+- The GP1 screen ranked 8803 Stadium Rd NW first in Edmonton.
+- A hand check then found that at Edmonton's gas prices, heat sold into a hot network through a heat pump doesn't pay at any 2021–25 power price.
+- Blatchford's loop runs at 8–32 °C (Design Guide v8, June 2025). A data centre's heat can go in **without a heat pump**.
+- So the move is a **finding**: the network decided the site.
+- With the method corrected (site maps v4, see `site_maps/PROMPT_addendum_method_v4.md`):
+  - Blatchford's south edge is **Edmonton's #1 area**;
+  - E06's cells rank 3rd–13th of 34,428, depending on the weighting.
 
 ## The site
 
 | | |
 |---|---|
 | Addresses | 74 and 64 Airport Rd NW, Edmonton |
-| Folder | `E06_74_64_Airport_Rd_NW/` |
 | Centre | 53.568862, −113.522429 (midway between the two City assessment points) |
-| Neighbourhood | Blatchford Area (City assessment) |
-| Zoning | BE (Business Employment), both lots: height 16.0 m, floor area ratio 1.6 (about 14,140 m²), setbacks 4.5 m to Airport Rd. A data centre isn't a listed use (discretionary, or argued as Minor Utility). Public uses capped at 500 m² each unless varied. |
-| Lots | 4,562.5 m² and 4,274.4 m², about 8,840 m² together |
-| On them now | Nothing on record: open gravel lots |
-| Across the road | Blatchford's new townhouses (missing from the 3D data, see below). The site is **outside** Blatchford's utility service area, about 50–60 m across Airport Rd. |
-| Owner | Unknown: land title search pending (J.B.) |
+| Lots | 4,562.5 m² and 4,274.4 m², about 8,840 m² together; vacant gravel; owner unknown (land title search pending) |
+| Zoning | **BE** (Bylaw 20001 s. 2.120): height 16.0 m; floor area ratio 1.6 (about 14,140 m²); setbacks 4.5 m to Airport Rd (collector), 6 m to a street or residential site, 0 m to other sites |
+| Data centre as a use | Not listed: discretionary, or argued as Minor Utility. Generators or big cooling plant read as Major Utility, which BE doesn't allow |
+| Public uses allowed | Community Service, Indoor Sales and Service (markets), entertainment, Food and Drink, Child Care, Urban Agriculture: **up to 500 m² each** unless varied |
+| Blatchford | The site is **outside** its utility service area, about 50 m across Airport Rd (Bylaw C17943 Sch. A) |
+| Neighbours | Blatchford row housing across Airport Rd; Edmonton Inn on Kingsway; NAIT campus 1.3 km (its Blatchford extension is to be served by Energy Centre One); Royal Alexandra Hospital 2.1 km; substation 617 m |
+| Possible risk | Former airport land: expect an environmental site assessment (Bylaw 20001 s. 7.140) |
 
 ## What's in the folder
 
-- **`E06_footprints.geojson`, `E06_heights.csv`:** buildings in a 1,000 m square, from the City's 3D Buildings model (roof outlines, not surveyed footprints). `datasets.md` explains every column. A blank means the data doesn't give that value; don't fill it in.
-- **`E06_parcels_500m.csv`:** assessment points within 500 m (points, not lot outlines), with zoning and area.
-- **`E06_heat_receivers.csv`:** larger heat users within 1,500 m, as the site maps count them. Columns as in the E05 pack.
-- **`E06_substations.csv`, `E06_ev_chargers.csv`:** substations within 3 km (nearest 596 m) and public chargers within 1.5 km.
-- **`E06_pack.json`:** the site's 100 m cell from the GP1 site maps: scores and raw factors.
-- **`E06_tool_fit.json`:** the tool's fit for each lot alone: 3.6–10.3 MW (74) and 3.4–10.3 MW (64), two floors. The tool can't combine lots.
-- **`DESIGN_BRIEF.md`:** the design that makes each exchange possible, and plant space per MW.
-- The E05 folder, for comparison only.
+- **`E06_footprints.geojson`, `E06_heights.csv`:** buildings in a 1,000 m square (City 3D Buildings). A blank means the data doesn't give that value.
+- **`E06_parcels_500m.csv`:** assessment points within 500 m, with zoning.
+- **`E06_heat_receivers.csv`, `E06_substations.csv`, `E06_ev_chargers.csv`.**
+- **`E06_pack.json`:** the site's cell in the site maps (v4).
+- **`E06_tool_fit.json`:** how much the zoning would fit (3.4–10.3 MW per lot). Use only as a range for scale, never as a drawn building.
+- **`DESIGN_BRIEF.md`:** the design qualities that make each exchange possible, and plant space per MW.
 
-**No tool reports for E06 yet, on purpose.** The tool still assumes a heat pump for every network, which is wrong for Blatchford's ambient loop. It will be re-run after its heat fixes. Until then:
-- heat numbers come from `SITE_LEDGER_2026-10-25.md`;
-- sizes and plant areas come from `E06_tool_fit.json` and the per-MW rules in `DESIGN_BRIEF.md`;
-- anything that would need the tool is marked "tool re-run pending".
+**No tool reports for E06 yet, on purpose.** The tool still assumes a heat pump for every network, which is wrong here. Heat and money come from the ledger. Anything that would need the tool is marked "tool re-run pending".
 
-## Data gaps: read before modelling
+## Data gaps
 
-- **Blatchford's new buildings are missing.** The 3D data has no buildings from 2015 on, but the assessment roll has 210 parcels built since 2015 in Blatchford (all BRH zone). Trace them from a current aerial or a newer City or OpenStreetMap layer, and label the source and date on every drawing. Don't estimate heights; if you can't find them, draw outlines only and say so.
-- **Blatchford homes aren't in the heat-receiver list**, so heat demand next door is undercounted. Use the Blatchford figures below instead, labelled.
-- **People counts lag** (2021 census). Say so on the people map.
+- **Blatchford's new buildings are missing** from the 3D data: none from 2015 on, against 210 parcels built since. Trace them from a current aerial or a newer City or OpenStreetMap layer, and label the source and date. Don't estimate heights; outlines only if unknown.
+- **Blatchford homes aren't in the heat-receiver list.** Use the network figures below, labelled.
+- **People counts lag** (2021 census); say so.
 
-## Blatchford's network (sources in the library)
+## Blatchford's network (from the ledger)
 
-- Loop temperature 8–32 °C; ground boreholes plus a central energy centre (Design Guide v8, June 2025).
-- About 400 homes connected today; Energy Centre One is 1–3 MW.
-- Planned at full build-out: about 46,800 MWh a year heating (34.5 MW peak) and 43,700 MWh a year cooling.
-- An expansion of $79.2M ($23.7M federal) adds 13.1 MW of capacity. That's what's being added, not the system total.
-- 570 boreholes now, planned to reach 2,100. Sewer heat is listed as "in design and construction".
-- The utility bylaw (C17943) has no rules or prices for heat from outside sources. Service can be cut for "undue or abnormal fluctuations" (s. 41(g)(ii)).
-- The utility's finances are a risk (an advisor called it not viable without support). Treat this as a risk to state, not a fact to resolve; the figures behind it are from news reports, so label them unverified.
+- Loop 8 °C minimum (winter) to 32 °C maximum (summer).
+- Energy Centre One: **1 MW heating / 1 MW cooling (2023)**, expanding to 4.25 / 4 MW. "Over 100" homes (2024); 442 accounts projected by 2026.
+- Build-out: 46,789 MWh/yr heating (34.5 MW peak) and 43,747 MWh/yr cooling (46.6 MW peak).
+- Expansion: $79.2M ($23.7M federal), adding 13.1 MW heating and 12.3 MW cooling.
+- 570 boreholes.
+- **Sewer heat deferred**: lower sewer-flow forecasts, so a $15.3M peaking energy centre comes first.
+- Customer rate $35.80/MWh (2026).
+- The bylaw has no rules or prices for outside heat. Service can be cut for "undue or abnormal fluctuations" (s. 41, item (ii)).
+- **Open question:** does the loop gain or lose heat over a year? Only the utility can say. Show both readings from the ledger.
 
-## The building (decided)
+## What the booklet should show
 
-- **Size:** sized by its client and power supply: about 3–4 MW to start, growing towards about 9 MW. Likely client: NAIT (main campus about 1.3 km away) or City research computing, both unconfirmed.
-- **Heat:** straight into Blatchford's loop at its temperature; no heat pump at the data centre. The share of heat used is small at first and grows as Blatchford builds out.
-- **Its own full cooling** (dry coolers), because the loop can't always take its heat.
-- **Built full, filled over time:**
-  - permanent public wing;
-  - structure, power and risers built for the full size now;
-  - about 5–8 halls of about 500 m² each (BE caps each public use at 500 m² unless varied), 2–3 live at the start;
-  - empty halls lent only to uses designed to leave: markets, events, recreational sport, maker space, a winter greenhouse;
-  - halls built to the data-hall module, so each reads as a data centre lent out;
-  - a published timeline for when halls convert, so nobody is evicted.
-- **Two doors per hall:** a fixed secure spine on one side, a public arcade on the other. Which door is locked decides what the hall is. The security line never moves.
-- **Built to assembly occupancy from day one:** exits, fire separations, construction type, pre-action sprinklers and alarm, barrier-free. Plugged in when a hall turns public: fresh air, lighting, finishes. Washrooms in the permanent wing. This is general code logic, not an Alberta code review; mark it so.
-- **Framed as an architectural experiment:** hypothesis, fixed vs changing parts, what's measured, what would count as failure.
+**1. Adjacencies.**
+- What's near and how it connects: the loop edge, substation, NAIT, the hospital, homes across the road, truck routes.
+- Distances, and what each link crosses (Airport Rd, Kingsway).
+- Trace Blatchford's buildings for this.
 
-## What I'd like
+**2. Site rules.**
+- Zoning as a diagram of limits on the empty lots (height, floor area ratio, setbacks, the 500 m² public-use cap, what counts as Minor vs Major Utility). Rules, not a building.
+- The service-area boundary and what being outside it means: no compulsory connection, no published terms.
 
-**1. 3D model**
+**3. The exchanges.** One compact treatment per exchange (heat, energy, water, materials, people and place):
+- what could be given and taken;
+- with whom (named, with distances);
+- how much (range and units);
+- what would have to be true;
+- what's ruled out and why;
+- how sure (trust).
 
-- Extrude every footprint by its height in the 1,000 m square, plus the traced Blatchford buildings (labelled as traced).
-- Both lots highlighted; a simple massing for the full shell (from the fit file), with the halls marked.
-- Plain grey massing, site in accent, ground plane, streets from open data.
-- OBJ or 3DM plus GeoJSON, in metres, local frame centred on the site; state the origin.
+Add **land and time** (meanwhile use of space held for growth) as its own exchange.
 
-**2. Site maps** (8.5 × 11 and 17 × 11)
+**4. The money.**
+- Heat delivered with no heat pump: $5–15/MWh at the boundary for winter heat; more at a farther tie-in.
+- Against what the heat could be worth: unknown, with the $35.80 customer rate as a ceiling.
+- Beside it, why the heat-pump route fails in Edmonton: $30–75/MWh against $13, at 2021–25 power prices.
+- The carbon price that would close the gap: $108–238/t.
+- A monthly picture: 70 % of heating falls in Nov–Mar, but a data centre gives heat evenly all year.
 
-- Figure-ground (with traced Blatchford).
-- Zoning within 500 m.
-- Heat: receivers by type and demand, reach rings, and Blatchford's network and energy centre.
-- Energy: substations and chargers.
-- People: population (with the census-lag note), the 150 m night-noise ring, Blatchford homes across the road.
-- Materials: truck access, industrial land.
-- Water: say what the folder has and doesn't; no Edmonton water permit list exists in the pack.
-- Scale bar, north arrow, source line and date on each.
+**5. The network over time.** Blatchford's build-out (homes, MW) against the share of a 3–4 MW data centre's heat that could be used, rising over time. Speculative and labelled.
 
-**3. Axonometric**
+**6. Qualities the data centre would need** (from `DESIGN_BRIEF.md` and the ledger), as a list or diagram per exchange, not a design:
+- **Heat:** liquid cooling; a heat exchanger at the boundary (the meter); **no heat pump** here; its own full cooling for summer.
+- **Energy:** grid-ready batteries; a load it can curtail; a backup role.
+- **Water:** dry coolers (almost no water); a rain tank.
+- **Materials:** dock and truck route sized for refreshes; drive wiping on site.
+- **People:** space that can host public uses, sized to the 500 m² cap; acoustic screening.
+- **Land and time:** a shell built ahead of servers, lent until needed.
 
-- Neighbourhood massing with exchange lines to real receivers, labelled by name and distance: the loop, the substation, chargers, nearby homes, truck route.
-- One full axo, plus zoom-ins of the two strongest exchanges (likely heat to the loop and the public halls).
+Mark these as **GP2 hypotheses**, not decisions.
 
-**4. Exchanges, documented** (heat, energy, water, materials, people and place)
+**7. A speculative program**, graphic only:
+- the proportions of spaces per MW (from `DESIGN_BRIEF.md`) and their relationships (what must touch what: the meter at the boundary, the dock at the street, public space at the front door);
+- how it might grow from about 3–4 MW to about 9 MW.
 
-For each: what the site gives and takes, who receives it, how much (range and units), what would have to be true, what's ruled out and why, and how sure. Cover the tool's 21 opportunities and say which apply. Add **meanwhile use of empty halls** as its own exchange, since it's the core of this building.
+No plan, no layout, no massing on the site.
 
-**5. The data centre: program, layout, specifications**
-
-- Program by phase (start at 3–4 MW, full at about 9 MW): data halls, electrical (UPS, batteries, switchgear), cooling, the heat-exchange room at the boundary, generators, loading, staff, public wing, refuge, interim halls. Show the per-MW rule from `DESIGN_BRIEF.md` behind each area; mark assumptions for me to confirm.
-- Site plan and sections within BE zoning: where the pipe, cable and trucks leave, the secure spine, the public arcade, the plant and its sound screen.
-- Specification sheet with source and trust level on each line, beside a conventional baseline (air cooling, no heat recovery).
-
-**6. The GP2 drawing set** (shared with the Vancouver building, so the two compare)
-
-1. a section through the building;
-2. the five exchanges;
-3. the network over time (Blatchford's build-out against the halls going live, and the share of heat used rising);
-4. the heat-interface detail (data centre to loop);
-5. an inhabited civic view of a lent hall;
-6. the tool's numbers.
+**8. A 3D model of the neighbourhood**, for context only: footprints extruded, traced Blatchford buildings labelled, both lots highlighted and **left empty**. OBJ or 3DM plus GeoJSON, in metres, local frame centred on the site; state the origin.
 
 ## Rules
 
-- **Accuracy:** don't make anything up. Every number from the folder or the library, with its source; show any calculation. Mark what you can't confirm as unverified. Label operator or industry figures as claims. No popular sources (news, blogs, Wikipedia) for facts.
-- **The tool's results are trade-offs, not verdicts:** an early feasibility study that shows where to look first, not engineering.
-- **Data terms:** Edmonton lot outlines aren't in the folder (licensed, not for redistribution). Use the assessment points and the 3D model.
-- **Style** (match the booklet, `Beyond_Data_booklet_white6_spreads_22Oct`): white pages; Barlow (Light text, SemiBold titles); ink #1c1c1e; greys for lines. Exchange colours: heat #d4202b, energy #f1b604, water #1f78c7, materials #2e9d4e, people #7b3fb4. S-page headers: page code, title, grey subtitle, short black bar, tracked meta line top right. Thin lines; plain and professional.
-- **Writing:** Canadian spelling. Short labels. Leave a "TEXT · J.B." box where I'll write.
+- **Accuracy:** don't make anything up. Every number from the folder, the ledger or the library, with its source; show any calculation. Mark what you can't confirm as unverified. Label operator or industry figures as claims. No popular sources.
+- **The tool's results are trade-offs, not verdicts:** an early feasibility study, not engineering.
+- **Data terms:** Edmonton lot outlines aren't in the folder (licensed). Use the assessment points and the 3D model.
+- **Style** (match the booklet, `Beyond_Data_booklet_white6_spreads_22Oct`): white pages; Barlow (Light text, SemiBold titles); ink #1c1c1e; greys for lines. Exchange colours: heat #d4202b, energy #f1b604, water #1f78c7, materials #2e9d4e, people #7b3fb4. S-page headers. Thin lines; plain and professional.
+- **Writing:** Canadian spelling. Short labels. Leave a "TEXT · J.B." box.
 - **Output:** vector PDF and 300 dpi PNG per drawing, plus model files, named by site and drawing.
