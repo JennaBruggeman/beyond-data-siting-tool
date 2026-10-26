@@ -56,3 +56,18 @@ Run with `METHOD=2` (the default; `METHOD=1` reproduces the 21 Oct maps, archive
 - **Blatchford outline:** the strip between Kingsway and Airport Rd is removed, following Bylaw C17943 Schedule A.
 - **Edmonton people:** homes built since the 2021 census are added from the 2026 assessment roll.
 - **Unchanged:** site, energy (except the households added), water, materials, and the weighting study rules.
+
+## Method v3 (25 Oct 2026): what's already built, and the public uses the zone allows
+`METHOD=3` is the default; `METHOD=2` reproduces v2.
+- **Already built (site factor):** the site score is multiplied by 0.7 + 0.3 × readiness.
+  - Readiness = 1 − building cover ÷ 0.5. Cover is the share of the 100 m cell under buildings (`built_cover.py`, from the tool's building outlines).
+  - An existing building can cost at most 30 % of the site score, because a shell may be reused.
+- **Public uses (people factor):** people × (0.5 + 0.5 × uses).
+  - Uses = mean of six kinds (community, assembly or entertainment, markets, food, child care, urban agriculture) from each zone's use table: permitted 1, conditional or temporary only 0.5, not listed 0.
+  - Edmonton BE 1.00, IM 0.25, IH 0.00; Vancouver I-2 0.50, I-1C 0.58, I-3 0.50, FC-2 0.67.
+  - Zones needing a site-specific or rezoning decision: 0.5 (neutral).
+- **Why these two factors:** both were raised after seeing they favour E06 (25 Oct). They apply to every cell in both cities, and v2 is kept for comparison.
+- **Known limits:**
+  - Both factors work at cell level, not lot level.
+  - Lot size isn't checked. 11440 Kingsway (1,828 m²) scores high, but it's too small for a data centre.
+  - The Blatchford outline is still approximate at the Kingsway / Airport Rd southeast corner.

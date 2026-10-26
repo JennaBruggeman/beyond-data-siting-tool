@@ -43,7 +43,7 @@ ART_R, IND_R, SCH_R = 500, 1000, 2000                               # assumption
 PEOPLE_R, NOISE_R, NOISE_W = 800, 150, 0.6                          # assumptions
 W_EN = (0.6, 0.4); W_MAT = (0.4, 0.4, 0.2)                          # assumptions
 EXCH = ['heat', 'energy', 'water', 'materials', 'people']
-METHOD = int(os.environ.get('METHOD', '2'))   # 1 = GP1 maps (21 Oct); 2 = heat scored by whether it pays (25 Oct)
+METHOD = int(os.environ.get('METHOD', '3'))   # 1 = GP1 maps (21 Oct); 2 = heat scored by whether it pays (25 Oct); 3 = v2 + what's already built + public uses the zone allows (25 Oct)
 RADIUS = {'heat': 1200, 'energy': 2000, 'water': {'van': 500, 'edm': 5000}, 'materials': 1000, 'people': 800}
 
 def proj(c):
@@ -69,6 +69,20 @@ def edm_status(zraw, lot):   # tool/index.html edmStatus + engine.js:107
     if z not in STD: return 'site'
     return 'no'
 
+# public uses each zone allows (method v3): six kinds, each scored 1 permitted/outright, 0.5 conditional or temporary only, 0 not listed;
+# zone score = mean of the six. Kinds: community, assembly/entertainment, markets/retail, food, child care, urban agriculture.
+# Edmonton Bylaw 20001 s. 2.120 BE, 2.130 IM, 2.140 IH (uses are permitted or not listed; IM Special Event and Vancouver "Arts and Culture Event"
+# are temporary, so 0.5; IM Indoor Sales limited to existing = 0). Vancouver district schedules I-2, I-1C, I-3, FC-2, s. 2.1 tables (2026).
+# Zones where a data centre needs a site-specific or rezoning decision are not scored (0.5, neutral): their uses would be set by that decision.
+USES = {'edm': {'BE': (1, 1, 1, 1, 1, 1), 'IM': (0, .5, 0, 0, 0, 1), 'IH': (0, 0, 0, 0, 0, 0)},
+        'van': {'I-2': (.5, .5, .5, .5, .5, .5), 'I-1C': (.5, 1, .5, .5, .5, .5), 'I-3': (.5, .5, .5, .5, .5, .5), 'FC-2': (.5, 1, .5, 1, .5, .5)}}
+def uses_score(city, z):
+    z = (z or '').strip(); z = z.split(' ')[0].upper() if city == 'edm' else z
+    u = USES[city].get(z); return sum(u) / 6 if u else 0.5
+BUILT_FULL = 0.5      # assumption: a cell half covered by buildings counts as fully built
+BUILT_W = 0.3         # assumption: an existing building can cost up to 30 % of the site score (reuse is possible, so not more)
+USES_W = 0.5          # assumption: people x (0.5 + 0.5 x uses)
+
 def industrial(city, z):
     z = (z or '').strip().split(' ')[0].upper()
     return z.startswith(('I-', 'M-', 'IC-')) if city == 'van' else z in ('IH', 'IM', 'BE')
@@ -92,20 +106,27 @@ def run(city):
     if city == 'van':
         for ft in json.load(open(os.path.join(D, 'vancouver_parcels_2026.geojson')))['features']:
             c = shape(ft['geometry']).centroid; x, y = f(c.x, c.y); z = ft['properties'].get('zoning')
-            pts.append((x, y, van_status(z), industrial(city, z)))
+            pts.append((x, y, van_status(z), industrial(city, z), uses_score(city, z)))
     else:
         for r in csv.DictReader(open(os.path.join(D, 'edmonton_properties_2026.csv'))):
             try: lat, lon = float(r['lat']), float(r['lon'])
             except ValueError: continue
             lot = float((r['lot_size_m2'] or '0').replace(',', '') or 0); x, y = f(lon, lat)
-            pts.append((x, y, edm_status(r['zoning'], lot), industrial(city, r['zoning'])))
+            pts.append((x, y, edm_status(r['zoning'], lot), industrial(city, r['zoning']), uses_score(city, r['zoning'])))
     rank = {'yes': 3, 'case': 2, 'site': 1, 'no': 0}; inv = {v: k for k, v in rank.items()}
     best = {}; P = np.array([(p[0], p[1]) for p in pts]); IND = np.array([p[3] for p in pts], bool)
-    for x, y, k, _ in pts:
+    bestu = {}
+    for x, y, k, _, u in pts:
         key = (int(math.floor(x / C)), int(math.floor(y / C))); best[key] = max(best.get(key, 0), rank[k])
+        bestu[key] = max(bestu.get(key, (-1, 0)), (rank[k], u))
     keys = sorted(best); XY = np.array([((i + .5) * C, (j + .5) * C) for i, j in keys]); N = len(keys)
     log['cells'] = N; log['parcels'] = len(pts)
     site = np.array([SITE[inv[best[k]]] for k in keys])
+    uses = np.array([bestu[k][1] for k in keys]); built = np.zeros(N); ready = np.ones(N)
+    if METHOD >= 3:
+        bc = json.load(open(os.path.join(H, 'built_cover_%s.json' % city)))
+        built = np.array([bc.get('%s_%d_%d' % (city, i, j), 0.0) for i, j in keys]); ready = np.clip(1 - built / BUILT_FULL, 0, 1)
+        site = site * (1 - BUILT_W + BUILT_W * ready)
     if city == 'van':   # floodplain
         fl = []
         for row in list(csv.reader(open(os.path.join(D, 'vancouver_designated_floodplain.csv'), encoding='utf-8-sig'), delimiter=';'))[1:]:
@@ -128,7 +149,7 @@ def run(city):
         heatMWh[idx] += rd[k] * w; nrec[idx] += 1
     log['receivers'] = len(rx); log['receivers_with_demand'] = int((rd > 0).sum()); log['receiver_demand_MWh'] = round(float(rd.sum()))
     # method v2 (25 Oct 2026): each network and the direct-to-building route carry a 'pays' factor = min(1, value / cost) x timing (networks_v2.json)
-    V2 = json.load(open(os.path.join(H, 'networks_v2.json'))) if METHOD == 2 else None
+    V2 = json.load(open(os.path.join(H, 'networks_v2.json'))) if METHOD >= 2 else None
     nets = []
     for n in R.get('nets', []):
         ring = V2['nets'].get(n['n'], {}).get('ring', n['ring']) if V2 else n['ring']
@@ -150,7 +171,7 @@ def run(city):
     dsub, _ = cKDTree(np.array(subs, float)).query(XY); sub = np.clip(1 - dsub / SUB_REACH, 0, 1)
     cen = json.load(open(os.path.join(T, 'census_%s.json' % city)))
     CXY = np.array([((c[0] + .5) * C, (c[1] + .5) * C) for c in cen['cells']]); POP = np.array([c[2] for c in cen['cells']]); HH = np.array([c[5] for c in cen['cells']])
-    if METHOD == 2 and city == 'edm':
+    if METHOD >= 2 and city == 'edm':
         # census lag (2021): add homes built 2022 or later from the 2026 assessment roll. 'Residential' accounts = 1 home each (houses, townhouses, condo suites);
         # 'Other Residential' (rental buildings) = gross floor area / 85 m2 per home (assumption). People = homes x the city's census persons per household.
         pph = POP.sum() / HH.sum(); ax, ap, ah = [], [], []
@@ -199,6 +220,7 @@ def run(city):
     # ---- people
     pop800 = within(PEOPLE_R, POP); pop150 = within(NOISE_R, POP)
     people = np.clip(pop800 / p95(pop800), 0, 1) * (1 - NOISE_W * np.clip(pop150 / p95(pop150), 0, 1))
+    if METHOD >= 3: people = people * (1 - USES_W + USES_W * uses)
     # ---- overlap
     A = dict(heat=heat, energy=energy, water=water, materials=materials, people=people)
     overlap = np.mean([A[k] for k in EXCH], axis=0); zoned = overlap * site; nstrong = sum((A[k] >= 0.5).astype(int) for k in EXCH)
@@ -211,7 +233,7 @@ def run(city):
                   heat_MWh_weighted=round(heatMWh[k]), receivers_in_reach=int(nrec[k]), network=netn[k] if netd[k] <= NET_REACH else '', network_dist_m=None if not np.isfinite(netd[k]) else round(netd[k]), heat_net_term=round(float(net_term[k]), 3), heat_net_best=netbest[k],
                   substation_dist_m=round(dsub[k]), households_1km=round(hh1k[k]), ev_ports_1km=int(ports[k]),
                   water_raw=round(float(wraw[k]), 1), arterial_dist_m=round(dart[k]), industrial_share_1km=round(ind[k], 3), schools_2km=int(nsch[k]),
-                  pop_800m=round(pop800[k]), pop_150m=round(pop150[k]))
+                  pop_800m=round(pop800[k]), pop_150m=round(pop150[k]), built_cover=round(float(built[k]), 3), site_ready=round(float(ready[k]), 3), public_uses=round(float(uses[k]), 3))
         feats.append(dict(type='Feature', geometry=dict(type='Polygon', coordinates=[[[round(a, 6), round(b, 6)] for a, b in ring]]), properties=pr))
     json.dump(dict(type='FeatureCollection', name='%s_grid' % city, crs_note='WGS84 lon/lat; cells are 100 m in the tool frame', features=feats),
               open(os.path.join(H, '%s_grid.geojson' % city), 'w'), separators=(',', ':'))
