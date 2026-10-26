@@ -22,6 +22,9 @@ Together about 8,840 m². The tool can't combine lots; a combined fit needs a ne
 - `E06_pack.json`: the site's 100 m cell from the GP1 site maps.
 - `E06_tool_fit.json`: the tool's fit for each lot.
 
+## Corrections (25 Oct)
+See `checks/site_math/SITE_LEDGER_2026-10-25.md`. Key points: the site is outside Blatchford's service area; BE height is 16.0 m and floor area ratio 1.6; a data centre isn't a listed use (discretionary unless argued as Minor Utility); public uses are capped at 500 m² each.
+
 ## Data gaps — read before modelling
 - **Blatchford's new buildings are missing from the 3D data.** The 1,000 m square has 0 buildings dated 2015 or later, but the assessment roll has **210 parcels built since 2015** in Blatchford Area (all BRH zone, the townhouses across Airport Rd). The City's 3D Buildings and Rooflines layers predate them. Don't estimate them: trace from aerials, or find a newer City or OSM layer, and label the source.
 - **Blatchford homes aren't in the heat-receiver list** (the tool's list covers larger buildings), so heat demand next to the site is undercounted.
@@ -36,7 +39,7 @@ Together about 8,840 m². The tool can't combine lots; a combined fit needs a ne
 | Materials | 0.59 | 0.38 |
 | People | 0.85 | 0.11 (census lag, see above) |
 | Overlap (mean of five) | 0.59 | 0.40 |
-| Network | Downtown DE planned Phases 2–4, 860 m | Blatchford DESS, 0 m |
-| Nearest substation | 2,012 m | 596 m |
+| Network | Downtown DE planned Phases 2–4, 860 m | Blatchford DESS: **outside** its service area, about 50–60 m across Airport Rd (Bylaw C17943 Sch. A); the pack's 0 m is wrong |
+| Nearest substation | 2,012 m | 617 m from the site centre (596 m from the cell centre) |
 
 The GP1 site maps rank E06 lower. They score heat by demand and distance to a network, not by network temperature or the money test, which is why E05 led. The move to E06 rests on the later finding: at Edmonton gas prices only a low-temperature network (no heat pump) pays. State that explicitly.
