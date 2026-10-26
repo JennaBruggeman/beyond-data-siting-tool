@@ -43,7 +43,7 @@ Factors 2–4 were added after seeing that they favour E06. They apply to every 
 |---|---|---|---|
 | **Vancouver #1 area** | 225–245 E 2nd Ave / 275 1st Ave E | Same | Same (stability 100 %) |
 | **V09, 275 1st Ave E (cell)** | #2 of 9,856 | #3 | #5–6; stability 99 %; in the #1 area |
-| **Edmonton #1 area** | 8803 Stadium Rd NW | Blatchford's southwest edge | **Blatchford's south edge**, #1 in all three weightings (#2 with spread weights) |
+| **Edmonton #1 area** | 8803 Stadium Rd NW | Blatchford's southwest edge | **Blatchford's south edge**: #1 with equal and heat-priority weights, #2 with spread weights |
 | **E06, 64 Airport Rd (cell)** | #122 of 34,428 | #30 | **#4** (equal), **#3** (heat-priority), #7 (spread); stability 53 % |
 | **E06, 74 Airport Rd (cell)** | #119 | #25 | #6 (equal), #7 (heat-priority), #13 (spread) |
 | **12003–12025 Kingsway (cell)** | #21 | #1 | #6 (equal), #10 (heat-priority) |
