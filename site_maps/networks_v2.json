@@ -1,0 +1,271 @@
+{
+ "version": "2026-10-25 (method v2: heat scored by whether it pays, not demand alone)",
+ "source": "checks/site_math/site_math.py + SITE_LEDGER_2026-10-25.md; network list checks/networks/*_inventory_2026-10-25.csv",
+ "direct": {
+  "edm": {
+   "value": 13.0,
+   "cost": 38.43,
+   "factor": 0.338,
+   "why": "heat pump to 70 C, gas value; pipe not counted (generous)"
+  },
+  "van": {
+   "value": 39.41,
+   "cost": 41.99,
+   "factor": 0.938,
+   "why": "heat pump to 70 C, gas value (FortisBC Rate 3); pipe not counted; new buildings inside the NEU must take NEU heat (not modelled)"
+  }
+ },
+ "nets": {
+  "Neighbourhood Energy Utility (NEU)": {
+   "class": "hot water 65 C+",
+   "status": "operating",
+   "value": 32.59,
+   "cost": 41.99,
+   "timing": 1.0,
+   "why": "By-law 9552 credit; upper bound: netted on the data centre's own bill, cap not stated",
+   "factor": 0.776,
+   "pipe_per_m": 0.0215,
+   "heat_sold": "all year, about 11313 MWh/yr"
+  },
+  "River District Energy": {
+   "class": "hot water 60-85 C",
+   "status": "operating",
+   "value": 39.41,
+   "cost": 41.99,
+   "timing": 1.0,
+   "why": "no published intake price; gas value assumed; buys Metro Vancouver waste-to-energy heat (BCUC C-3-23)",
+   "factor": 0.939,
+   "pipe_per_m": 0.0215,
+   "heat_sold": "all year, about 11313 MWh/yr"
+  },
+  "Creative Energy (downtown)": {
+   "class": "steam",
+   "status": "operating",
+   "value": 0,
+   "cost": null,
+   "timing": 1.0,
+   "why": "steam cannot take server heat (Creative Energy BCUC filing rules out heat pumps for steam)",
+   "factor": 0.0,
+   "pipe_per_m": null
+  },
+  "Creative Energy (south downtown)": {
+   "class": "unknown (assumed hot water)",
+   "status": "operating",
+   "value": 39.41,
+   "cost": 41.99,
+   "timing": 1.0,
+   "why": "temperatures not read; treated as hot water at gas value (assumption)",
+   "factor": 0.939,
+   "pipe_per_m": 0.0215,
+   "heat_sold": "all year, about 11313 MWh/yr"
+  },
+  "Downtown District Energy, Phases 1 and 1A": {
+   "class": "hot water (temperature not published)",
+   "status": "operating",
+   "value": 13.0,
+   "cost": 38.43,
+   "timing": 1.0,
+   "why": "gas boilers; heat pump needed; Edmonton gas value",
+   "factor": 0.338,
+   "pipe_per_m": 0.0215,
+   "heat_sold": "all year, about 11313 MWh/yr"
+  },
+  "Downtown District Energy, planned Phases 2–4": {
+   "class": "hot water",
+   "status": "planned (Phase 2 about 2028-30)",
+   "value": 13.0,
+   "cost": 38.43,
+   "timing": 0.5,
+   "why": "planned, not built: x0.5 (assumption); the City plans Gold Bar effluent heat as its main low-carbon source",
+   "factor": 0.169,
+   "pipe_per_m": 0.0215,
+   "heat_sold": "all year, about 11313 MWh/yr"
+  },
+  "Blatchford District Energy Sharing System": {
+   "class": "ambient loop 8-32 C",
+   "status": "operating",
+   "value": 13.0,
+   "cost": 4.77,
+   "timing": 1.0,
+   "ring": [
+    [
+     -113.519657,
+     53.565598
+    ],
+    [
+     -113.51959,
+     53.56565
+    ],
+    [
+     -113.519394,
+     53.565815
+    ],
+    [
+     -113.51839,
+     53.566666
+    ],
+    [
+     -113.518364,
+     53.566723
+    ],
+    [
+     -113.51839,
+     53.56679
+    ],
+    [
+     -113.51852,
+     53.566883
+    ],
+    [
+     -113.51856,
+     53.566914
+    ],
+    [
+     -113.519005,
+     53.56721
+    ],
+    [
+     -113.5191,
+     53.567272
+    ],
+    [
+     -113.519775,
+     53.567738
+    ],
+    [
+     -113.52026,
+     53.56807
+    ],
+    [
+     -113.52074,
+     53.56839
+    ],
+    [
+     -113.5212,
+     53.568707
+    ],
+    [
+     -113.52124,
+     53.568726
+    ],
+    [
+     -113.52167,
+     53.56902
+    ],
+    [
+     -113.52276,
+     53.569763
+    ],
+    [
+     -113.522804,
+     53.56979
+    ],
+    [
+     -113.52286,
+     53.569817
+    ],
+    [
+     -113.52296,
+     53.569855
+    ],
+    [
+     -113.523056,
+     53.56988
+    ],
+    [
+     -113.523155,
+     53.569897
+    ],
+    [
+     -113.52324,
+     53.569904
+    ],
+    [
+     -113.523384,
+     53.569904
+    ],
+    [
+     -113.52351,
+     53.56989
+    ],
+    [
+     -113.52367,
+     53.569847
+    ],
+    [
+     -113.523895,
+     53.569763
+    ],
+    [
+     -113.52544,
+     53.56922
+    ],
+    [
+     -113.52558,
+     53.569164
+    ],
+    [
+     -113.52568,
+     53.569115
+    ],
+    [
+     -113.52578,
+     53.56905
+    ],
+    [
+     -113.52587,
+     53.56898
+    ],
+    [
+     -113.5262,
+     53.568714
+    ],
+    [
+     -113.530682,
+     53.570849
+    ],
+    [
+     -113.52764,
+     53.580091
+    ],
+    [
+     -113.517245,
+     53.579479
+    ],
+    [
+     -113.50627,
+     53.576396
+    ],
+    [
+     -113.503295,
+     53.572524
+    ],
+    [
+     -113.505031,
+     53.567532
+    ],
+    [
+     -113.516835,
+     53.564254
+    ],
+    [
+     -113.519657,
+     53.565598
+    ]
+   ],
+   "why": "ambient loop, no heat pump. Cost: exchanger and pumps at the boundary + pipe per metre, spread over winter heat only. Value: $13/MWh, the same gas-equivalent value every other Edmonton route uses (the utility's real avoided cost is unknown; $35.80 customer rate is the ceiling). Outline: property-record hull with the Kingsway/Airport Rd strip removed (C17943 Sch. A).",
+   "factor": 1.0,
+   "pipe_per_m": 0.052,
+   "heat_sold": "winter only (Nov-Mar), about 4683 MWh/yr"
+  }
+ },
+ "pays_rule": "pays(d) = min(1, value / (cost at the edge + pipe_per_m x d)) x timing; d = metres to the network edge (0 inside); counted out to 1,200 m",
+ "assumptions": {
+  "pipe_cost_per_m": 3500,
+  "crf_pipe": 0.0696,
+  "start_MW": 3.5,
+  "capture": 0.615,
+  "load": 0.6,
+  "winter_share": 0.414
+ }
+}

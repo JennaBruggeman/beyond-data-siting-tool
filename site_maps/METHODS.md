@@ -46,3 +46,13 @@ Cells use the tool's local metre frame: x = (lon − lon0) × cos(lat0) × 111,3
 
 ## Weighting study (added 21 Oct)
 `weighting_study.py` tests equal, priority and spread weightings and 500 random ones (stability). `weighting_charts.py` draws charts/01–05. Findings and what throws the results off: `WHAT_AFFECTS_THE_RESULTS.md`. Hand-off: `PROMPT_addendum_weighting.md`.
+
+## Method v2 (25 Oct 2026): heat scored by whether it pays
+Run with `METHOD=2` (the default; `METHOD=1` reproduces the 21 Oct maps, archived in `v1_2026-10-21/`).
+- **Why:** v1 gave every cell inside any district network a heat score of 1, whatever its temperature or cost. A hand check (`checks/site_math/SITE_LEDGER_2026-10-25.md`) found heat sold through a heat pump doesn't pay anywhere in Edmonton at gas parity. v1 couldn't see this.
+- **Heat:** for each route, a "pays" factor = value ÷ cost, capped at 1 (`networks_v2.json`).
+  - Direct to buildings: Edmonton 0.34, Vancouver 0.94.
+  - Networks: the score falls with the pipe cost to reach them. Steam = 0. Planned networks × 0.5.
+- **Blatchford outline:** the strip between Kingsway and Airport Rd is removed, following Bylaw C17943 Schedule A.
+- **Edmonton people:** homes built since the 2021 census are added from the 2026 assessment roll.
+- **Unchanged:** site, energy (except the households added), water, materials, and the weighting study rules.
