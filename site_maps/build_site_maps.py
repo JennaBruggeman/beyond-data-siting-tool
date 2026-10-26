@@ -43,6 +43,7 @@ ART_R, IND_R, SCH_R = 500, 1000, 2000                               # assumption
 PEOPLE_R, NOISE_R, NOISE_W = 800, 150, 0.6                          # assumptions
 W_EN = (0.6, 0.4); W_MAT = (0.4, 0.4, 0.2)                          # assumptions
 EXCH = ['heat', 'energy', 'water', 'materials', 'people']
+METHOD = int(os.environ.get('METHOD', '2'))   # 1 = GP1 maps (21 Oct); 2 = heat scored by whether it pays (25 Oct)
 RADIUS = {'heat': 1200, 'energy': 2000, 'water': {'van': 500, 'edm': 5000}, 'materials': 1000, 'people': 800}
 
 def proj(c):
@@ -126,20 +127,43 @@ def run(city):
         d = np.hypot(XY[idx, 0] - x, XY[idx, 1] - y); w = np.clip(1 - d / rr[k], 0, 1)
         heatMWh[idx] += rd[k] * w; nrec[idx] += 1
     log['receivers'] = len(rx); log['receivers_with_demand'] = int((rd > 0).sum()); log['receiver_demand_MWh'] = round(float(rd.sum()))
-    nets = [(n['n'], Polygon([f(*q) for q in n['ring']])) for n in R.get('nets', [])]
-    netd = np.full(N, np.inf); netn = [''] * N
-    for nm, poly in nets:
+    # method v2 (25 Oct 2026): each network and the direct-to-building route carry a 'pays' factor = min(1, value / cost) x timing (networks_v2.json)
+    V2 = json.load(open(os.path.join(H, 'networks_v2.json'))) if METHOD == 2 else None
+    nets = []
+    for n in R.get('nets', []):
+        ring = V2['nets'].get(n['n'], {}).get('ring', n['ring']) if V2 else n['ring']
+        nets.append((n['n'], Polygon([f(*q) for q in ring]), V2['nets'][n['n']] if V2 else None))
+    netd = np.full(N, np.inf); netn = [''] * N; net_term = np.zeros(N); netbest = [''] * N
+    for nm, poly, fac in nets:
         for k in tree.query_ball_point(poly.centroid.coords[0], 15000):
             d = poly.distance(Point(*XY[k]))
             if d < netd[k]: netd[k] = d; netn[k] = nm
-    net_term = np.where(netd <= 0, 1.0, np.where(netd <= NET_REACH, 1 - 0.5 * netd / NET_REACH, 0.0))
-    heat = np.maximum(np.clip(heatMWh / p95(heatMWh), 0, 1), net_term)
+            if fac is None: t = 1.0 if d <= 0 else 1 - 0.5 * d / NET_REACH if d <= NET_REACH else 0.0
+            elif not fac['cost'] or d > NET_REACH: t = 0.0
+            else: t = min(1.0, fac['value'] / (fac['cost'] + fac['pipe_per_m'] * max(d, 0.0))) * fac['timing']
+            if t > net_term[k]: net_term[k] = t; netbest[k] = nm
+    direct = V2['direct'][city]['factor'] if V2 else 1.0
+    heat = np.maximum(np.clip(heatMWh / p95(heatMWh), 0, 1) * direct, net_term)
     # ---- energy
     S = json.load(open(os.path.join(T, 'substations.json')))
     subs = [(a[0], a[1]) for a in S['cities'][city]] + [(n['x'], n['y']) for n in S['named'][city] if 'planned' not in (n.get('status') or '')]
     dsub, _ = cKDTree(np.array(subs, float)).query(XY); sub = np.clip(1 - dsub / SUB_REACH, 0, 1)
     cen = json.load(open(os.path.join(T, 'census_%s.json' % city)))
     CXY = np.array([((c[0] + .5) * C, (c[1] + .5) * C) for c in cen['cells']]); POP = np.array([c[2] for c in cen['cells']]); HH = np.array([c[5] for c in cen['cells']])
+    if METHOD == 2 and city == 'edm':
+        # census lag (2021): add homes built 2022 or later from the 2026 assessment roll. 'Residential' accounts = 1 home each (houses, townhouses, condo suites);
+        # 'Other Residential' (rental buildings) = gross floor area / 85 m2 per home (assumption). People = homes x the city's census persons per household.
+        pph = POP.sum() / HH.sum(); ax, ap, ah = [], [], []
+        for r in csv.DictReader(open(os.path.join(D, 'edmonton_properties_2026.csv'))):
+            y = r['year_built']
+            if not (y.isdigit() and int(y) >= 2022) or r['tax_class'] not in ('Residential', 'Other Residential'): continue
+            try: lat, lon = float(r['lat']), float(r['lon'])
+            except ValueError: continue
+            ga = float((r['gross_area_m2'] or '0').replace(',', '') or 0)
+            u = 1.0 if r['tax_class'] == 'Residential' else max(1.0, ga / 85.0)
+            ax.append(f(lon, lat)); ah.append(u); ap.append(u * pph)
+        log['homes_added_2022_on'] = round(sum(ah)); log['people_added_2022_on'] = round(sum(ap)); log['persons_per_household'] = round(float(pph), 3)
+        CXY = np.vstack([CXY, np.array(ax)]); POP = np.concatenate([POP, ap]); HH = np.concatenate([HH, ah])
     ctree = cKDTree(CXY)
     def within(r, vals): return np.array([vals[i].sum() if i else 0.0 for i in ctree.query_ball_point(XY, r)])
     hh1k = within(EV_R, HH)
@@ -184,7 +208,7 @@ def run(city):
         ring = [g(i * C, j * C), g((i + 1) * C, j * C), g((i + 1) * C, (j + 1) * C), g(i * C, (j + 1) * C), g(i * C, j * C)]
         pr = dict(id='%s_%d_%d' % (city, i, j), site=round(site[k], 2), zoning_best=inv[best[keys[k]]], heat=round(heat[k], 3), energy=round(energy[k], 3), water=round(water[k], 3),
                   materials=round(materials[k], 3), people=round(people[k], 3), overlap=round(overlap[k], 3), overlap_zoned=round(zoned[k], 3), n_strong=int(nstrong[k]),
-                  heat_MWh_weighted=round(heatMWh[k]), receivers_in_reach=int(nrec[k]), network=netn[k] if netd[k] <= NET_REACH else '', network_dist_m=None if not np.isfinite(netd[k]) else round(netd[k]),
+                  heat_MWh_weighted=round(heatMWh[k]), receivers_in_reach=int(nrec[k]), network=netn[k] if netd[k] <= NET_REACH else '', network_dist_m=None if not np.isfinite(netd[k]) else round(netd[k]), heat_net_term=round(float(net_term[k]), 3), heat_net_best=netbest[k],
                   substation_dist_m=round(dsub[k]), households_1km=round(hh1k[k]), ev_ports_1km=int(ports[k]),
                   water_raw=round(float(wraw[k]), 1), arterial_dist_m=round(dart[k]), industrial_share_1km=round(ind[k], 3), schools_2km=int(nsch[k]),
                   pop_800m=round(pop800[k]), pop_150m=round(pop150[k]))
