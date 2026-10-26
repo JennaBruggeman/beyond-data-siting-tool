@@ -6,7 +6,7 @@ I've moved my Edmonton site for GP2 (Beyond Data: data centres as neighbours). T
 - every exchange documented;
 - the data centre's program, layout and specifications.
 
-Everything you need is in the connected folder `chosen_sites/`, mainly `E06_74_64_Airport_Rd_NW/`. Read this whole prompt, then the folder's `README.md` (its data gaps especially), then tell me your plan and which drawings you'll make before making them.
+Everything you need is in the connected folder `chosen_sites/`, mainly `E06_74_64_Airport_Rd_NW/`. **`SITE_LEDGER_2026-10-25.md` overrides any older figure**: use its numbers. Read this whole prompt, then the folder's `README.md` (its data gaps especially), then tell me your plan and which drawings you'll make before making them.
 
 ## Why the site moved (say this in the booklet)
 
@@ -24,10 +24,10 @@ Everything you need is in the connected folder `chosen_sites/`, mainly `E06_74_6
 | Folder | `E06_74_64_Airport_Rd_NW/` |
 | Centre | 53.568862, −113.522429 (midway between the two City assessment points) |
 | Neighbourhood | Blatchford Area (City assessment) |
-| Zoning | BE (Business Employment), both lots |
+| Zoning | BE (Business Employment), both lots: height 16.0 m, floor area ratio 1.6 (about 14,140 m²), setbacks 4.5 m to Airport Rd. A data centre isn't a listed use (discretionary, or argued as Minor Utility). Public uses capped at 500 m² each unless varied. |
 | Lots | 4,562.5 m² and 4,274.4 m², about 8,840 m² together |
 | On them now | Nothing on record: open gravel lots |
-| Across the road | Blatchford's new townhouses (missing from the 3D data, see below) |
+| Across the road | Blatchford's new townhouses (missing from the 3D data, see below). The site is **outside** Blatchford's utility service area, about 50–60 m across Airport Rd. |
 | Owner | Unknown: land title search pending (J.B.) |
 
 ## What's in the folder
@@ -67,7 +67,7 @@ Full tool reports for E06 (Everyday, Civic, Technical) and `tool_data_full.json`
 - **Built full, filled over time:**
   - permanent public wing;
   - structure, power and risers built for the full size now;
-  - about 5–8 halls of 500–700 m² each, 2–3 live at the start;
+  - about 5–8 halls of about 500 m² each (BE caps each public use at 500 m² unless varied), 2–3 live at the start;
   - empty halls lent only to uses designed to leave: markets, events, recreational sport, maker space, a winter greenhouse;
   - halls built to the data-hall module, so each reads as a data centre lent out;
   - a published timeline for when halls convert, so nobody is evicted.
