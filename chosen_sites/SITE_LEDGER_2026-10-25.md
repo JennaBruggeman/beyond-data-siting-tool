@@ -131,3 +131,17 @@ Pipe is not even counted. The carbon price that would close the gap is **$108–
 - **Land titles:** the owner of both lots.
 - **NEU engineer:** terms for feeding heat in; whether the credit pays out beyond the bill; whether a supplier pays the levy.
 - **BC Hydro:** what's available for about 15 MW at V09 before 2032.
+
+## Alternate checked: 12003 and 12025 Kingsway NW (best cell in method v2)
+| | 12003 + 12025 Kingsway NW | E06 74 + 64 Airport Rd NW |
+|---|---|---|
+| Lots | 4,360 + 4,821 = 9,181 m² | 8,837 m² |
+| On it | Two 1970s commercial buildings (12025: 1,517 m², 1971; 12003: 1973, area not on record) | Vacant |
+| Assessed | $3,352,500 + $2,151,000 = $5.5M | $2.37M |
+| Neighbourhood | Prince Rupert (older; small-house RS zoning within 150 m) | Blatchford Area (row housing across Airport Rd) |
+| Zone | IM: height 18 m, floor area ratio 2.0, setbacks 3 m street / 6 m to non-industrial | BE: 16 m, 1.6, 4.5–6 m |
+| Data centre | Minor Industrial (permitted) or Minor Utility; Major Industrial only if existing at 1 Jan 2024 | Discretionary or Minor Utility |
+| Public uses | **No Community Service, entertainment or new indoor sales.** Only Special Event (temporary), Urban Agriculture, Custom Manufacturing (150 m² public space) | Community Service, Indoor Sales and Service, entertainment, Food and Drink (500 m² each) |
+| To Blatchford's edge | About 90 m, **across Kingsway** (arterial) | About 50 m, across Airport Rd (collector) |
+| Screen v2 | heat 1.0, energy 0.61, materials 0.47, people 0.41 | heat 1.0, energy 0.53, materials 0.36–0.38, people 0.16–0.21 |
+Sources: City assessment 2026; Bylaw 20001 s. 2.130 (IM) and s. 2.120 (BE); networks_v2 outline. Permit history: none found for either Kingsway address.
