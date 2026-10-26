@@ -70,7 +70,12 @@ Changes 2–4 were added after seeing that they favour E06. They apply to every 
 | 8803 Stadium Rd (E05) | #1 | #23 |
 | 12503 66 St NW | top five | #65 |
 
-**Top five areas, v4, equal weights**
+**Land-checked lists (use these for S12, as on 22 Oct).** `realistic_top5.csv` re-run on v4: only cells with at least 2,000 m² of land zoned allowed or case-by-case.
+- **Vancouver #1** is still **302 Industrial Ave / 235 1st Ave E**, the same cell as the S2/S3 example, so those spreads stay valid. V09 is #3–4 of 295 land-checked cells.
+- **Edmonton #1** is **11720 Kingsway NW** (BE, 2,533 m², 1969 building), about 200 m from E06 on Blatchford's edge. E06's 64 Airport Rd cell is #2–5 of 3,088 land-checked cells; the 74 cell is #5–10.
+- 11440 Kingsway (1,828 m²) fails the land check.
+
+**Top five areas, v4, equal weights (cells, not land-checked)**
 - **Edmonton:** 1 Blatchford's south edge (best cell 11440 Kingsway; E06 about 370 m away); 2 8635 Stadium Rd NW; 3 4999 98 Ave NW; 4 5703 125 Ave NW; 5 10008 166 St NW.
 - **Vancouver:** 1 225–245 E 2nd Ave (next to V09); 2 1342 Georgia St E / 636 Clark Dr; 3 1525 Coal Harbour Quay; 4 8729 Aisne St; 5 1661 Granville St.
 
@@ -160,7 +165,9 @@ Keep the graphic style exactly as it is. The simulation section goes from **24 s
 - Loop 8 °C minimum (winter) to 32 °C maximum (summer).
 - Energy Centre One: 1 MW heating / 1 MW cooling (2023), expanding to 4.25 / 4 MW. "Over 100" homes (2024).
 - Build-out: 46,789 MWh/yr heating (34.5 MW peak) and 43,747 MWh/yr cooling (46.6 MW peak).
-- Expansion: $79.2M ($23.7M federal), adding 13.1 MW heating.
+- Two separate projects; don't add them together:
+  - the Energy Centre One expansion to 4.25 MW heating / 4 MW cooling (2023–26 budget, $3.2M);
+  - the $79.2M expansion ($23.7M federal, July 2024), adding 13.1 MW heating and 12.3 MW cooling.
 - Sewer heat **deferred**; a $15.3M peaking energy centre comes first.
 - Customer rate $35.80/MWh.
 - **Open question:** does the loop gain or lose heat over a year? Show both readings from the ledger.
@@ -202,7 +209,7 @@ Keep the graphic style exactly as it is. The simulation section goes from **24 s
 ### V09: 275 1st Ave E, Vancouver ("join")
 
 **Site**
-- Lot about 7,850 m².
+- Lot about 7,850 m². The 7,791 and 7,803 figures come from the same City outline, measured with the tool's flat-map scale, which reads about 0.7 % low. The City record gives no area; the legal area needs the land title plan.
 - Existing building from 1956. It covers 36 % of the lot in the 2009 data, about 60 % if two 2022 LiDAR outlines are real (unverified).
 
 **Zoning: I-3, sub-area A**
@@ -215,7 +222,7 @@ Keep the graphic style exactly as it is. The simulation section goes from **24 s
 
 **NEU**
 - Inside the service area, about 220 m from the edge; new buildings must connect.
-- Network at least 65 °C; building return at most 45 °C.
+- Network at least 65 °C; building return at most 45 °C (NEU Connectivity Guidelines, May 2026; By-law 9552). This replaces 67/50 °C, an operator-reported inventory figure not found in a primary source.
 - No published terms for feeding heat in.
 - Credit $32.59/MWh, netted on the building's own bill.
 - Levy $123,873 + $146/kW, if it applies to a supplier.
@@ -254,7 +261,7 @@ Keep the graphic style exactly as it is. The simulation section goes from **24 s
 - **Data terms:**
   - Raw BC Assessment data must not be sought; use only the rounded values given.
   - Edmonton lot outlines are licensed and not in the folder; use assessment points and the 3D model.
-- **Style:** match the booklet exactly. White pages; Barlow (Light text, SemiBold titles); ink #1c1c1e; greys for lines. Exchange colours: heat #d4202b, energy #f1b604, water #1f78c7, materials #2e9d4e, people #7b3fb4. S-page headers. Thin lines; plain and professional; nothing that looks AI-generated.
+- **Style:** the GP2 frame (32 mm left margin, 9 pt minimum text) and Graphic Standards v6 (Lato) adopted on 25 Oct, not the old Barlow white-booklet style. Keep the existing graphic language (maps, exchange colours, diagrams); re-set type and frame to GP2. Exchange colours: heat #d4202b, energy #f1b604, water #1f78c7, materials #2e9d4e, people #7b3fb4. Thin lines; plain and professional; nothing that looks AI-generated.
 - **Writing:** Canadian spelling. Short labels, no long paragraphs. Leave a "TEXT · J.B." box where I'll write.
 - **Output:** vector PDF and 300 dpi PNG per drawing, plus model files, named by site and drawing.
 
