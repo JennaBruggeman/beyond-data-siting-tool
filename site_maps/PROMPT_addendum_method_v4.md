@@ -86,3 +86,35 @@ Factors 2–4 were added after seeing that they favour E06. They apply to every 
 
 ## Rules as before
 Don't make anything up. Every number from the files. Mark assumptions (the new factors are trust 60: derived with stated assumptions). Booklet style. Canadian spelling. Short labels.
+
+## Booklet plan: consolidate the simulation section
+
+Keep the graphic style exactly as it is. The section is too long: S12 to A3 is 13 spreads answering three questions:
+- who wins;
+- does it hold up;
+- can it be built there.
+
+Consolidate that part to **5 spreads**, and update S4–S10 in place. Every change below is either a merge or a replacement. Nothing new in style.
+
+**Keep, updated to v4 (no new spreads)**
+- **S1–S3:** unchanged, apart from the method label.
+- **S4 The rules:** add the four v2–v4 changes (heat that pays, already built, public uses, zoning as a gate), in the same diagram style.
+- **S5 Zoning:** show the gate (allowed / case by case = 1, site-specific 0.5, rezoning 0.1). Add a small **"already built"** inset map (`built_cover`).
+- **S6 Heat:** recolour from the new `heat`. Legend by network type: ambient, hot water, steam, planned. Add a one-line note: "scored by whether it pays".
+- **S7–S9:** recolour from the new data (Edmonton energy changes slightly).
+- **S10 People:** recolour. Add a small **"public uses the zone allows"** inset map (`public_uses`).
+- **S11 Where they overlap:** recolour, new peaks.
+
+**Consolidate S12–A3 (13 spreads) into 5**
+
+| New | Title | Replaces | What's on it |
+|---|---|---|---|
+| S12 | The shortlist | S12 top five, S17 what holds up, S19 how much they win by | Top five areas per city on the map. One table per city: score, stability (share of 500 weightings), lead over the next, and rank in each of the three weightings. Stability and margin become columns, not separate spreads. |
+| S13 | How the weighting changes it | S15 and S16 (counted and ignored), S18 rezoning candidates | One row of three small maps per city (equal, heat-priority, spread). With zoning now a gate, the "zoning ignored" spread isn't needed. Rezoning candidates become a short list in the margin. |
+| S14 | Can it be built there? | S13 enough land, S14 what stands there | Lot size against the size needed, and what stands on the land (the "already built" factor). Name the limit: the screen works in cells, so 11440 Kingsway (1,828 m²) is too small. |
+| S15 | What changed | A1–A3 first pass | Before and after, one column each, v1 (21 Oct) vs v4 (26 Oct): Edmonton #1 moves from 8803 Stadium Rd to Blatchford's edge; V09 stays in Vancouver's #1 area. One line per change and why: heat that pays, already built, public uses, zoning as a gate. State that the last three were added after seeing they favour E06, and are applied city-wide. |
+| S16 | What throws it off | S20 what each exchange can tell apart, S21 what throws it off | The S21 tiles, updated. Mark each problem **fixed in v4** or **still open**. Fold in S20's key point (Edmonton water only tells 12 % of the city apart). |
+
+**Result:** the simulation section goes from 24 spreads to 16, with no information lost. The old A1–A3 content survives as the before/after on S15.
+
+**Before drawing**, send me the page list with each spread's title and a one-line content plan so I can approve it.
