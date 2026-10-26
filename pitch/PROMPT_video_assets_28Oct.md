@@ -3,12 +3,15 @@
 For Wednesday's review I'm making an **8.5-minute video** of all the work so far. It animates the updated booklet graphics, so finish and approve the booklet spreads first. Then export them as below, so the graphics carry over into the video unchanged. The storyboard is `pitch/STORYBOARD_review_28Oct.md` in the Claude Link folder.
 
 **Spreads used in the video, in order**
-1. The exchange sheets 0–5 (overview, heat, energy, water, materials, people and place) and the matrix.
-2. The precedents grid and "by type".
-3. **S2, S3, S6, S7, S8, S9, S10, S11, S12, S15** (S15 is the before/after).
-4. **J0**.
-5. **E1, E2, E3, E7, E8**.
-6. **V1, V2, V4, V7, V8**.
+1. The cover graphic.
+2. **D1–D4** (the server and rack, the layouts, the data hall, around the hall).
+3. The exchange sheets **0–5** and **20 What else it could give**.
+4. The precedents overview and the 11 field-site spreads.
+5. **L1, L3, L6** and **S0**.
+6. **S2, S3, S6, S11, S12, S15** (S7–S10 only as a quick strip).
+7. **J0**.
+8. **E1, E2, E3, E7, E8**.
+9. **V1, V2, V4, V7, V8**.
 
 **For each of those, export into `Claude Link/video_assets/<spread code>/`:**
 1. **The spread** as PDF and 300 dpi PNG (as the booklet).
