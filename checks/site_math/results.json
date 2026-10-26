@@ -1,0 +1,184 @@
+{
+ "offer": {
+  "it_mwh": [
+   15768.0,
+   21024.0
+  ],
+  "liquid": [
+   7568.64,
+   15768.0
+  ],
+  "ambient_all": [
+   14979.6,
+   19972.8
+  ]
+ },
+ "hp_route": {
+  "edm_2025": [
+   [
+    29.94,
+    {
+     "capex": 15.9,
+     "om": 5.31,
+     "elec": 8.73
+    }
+   ],
+   [
+    46.92,
+    {
+     "capex": 30.51,
+     "om": 5.6,
+     "elec": 10.81
+    }
+   ]
+  ],
+  "edm_5yr": [
+   [
+    40.79,
+    {
+     "capex": 15.9,
+     "om": 5.31,
+     "elec": 19.58
+    }
+   ],
+   [
+    60.37,
+    {
+     "capex": 30.51,
+     "om": 5.6,
+     "elec": 24.26
+    }
+   ]
+  ],
+  "edm_2022": [
+   [
+    52.46,
+    {
+     "capex": 15.9,
+     "om": 5.31,
+     "elec": 31.25
+    }
+   ],
+   [
+    74.83,
+    {
+     "capex": 30.51,
+     "om": 5.6,
+     "elec": 38.72
+    }
+   ]
+  ],
+  "van_energy": [
+   [
+    33.12,
+    {
+     "capex": 15.9,
+     "om": 5.31,
+     "elec": 11.91
+    }
+   ],
+   [
+    50.87,
+    {
+     "capex": 30.51,
+     "om": 5.6,
+     "elec": 14.76
+    }
+   ]
+  ],
+  "van_demand": [
+   [
+    37.22,
+    {
+     "capex": 15.9,
+     "om": 5.31,
+     "elec": 16.01
+    }
+   ],
+   [
+    59.07,
+    {
+     "capex": 30.51,
+     "om": 5.6,
+     "elec": 22.96
+    }
+   ]
+  ]
+ },
+ "e06_delivery": {
+  "60": [
+   2.47,
+   7.92
+  ],
+  "300": [
+   4.59,
+   18.95
+  ],
+  "600": [
+   7.23,
+   32.73
+  ]
+ },
+ "e06_delivery_winter_only": {
+  "60": [
+   4.91,
+   15.34
+  ],
+  "300": [
+   10.02,
+   41.98
+  ],
+  "600": [
+   16.42,
+   75.28
+  ]
+ },
+ "blatchford_annual_net": {
+  "COP3.0/EER3.5": 25053,
+  "COP3.5/EER4.5": 20048,
+  "COP4.0/EER5.5": 16609
+ },
+ "winter_share_heating": {
+  "edm": 0.7,
+  "van": 0.69
+ },
+ "winter_share_flat_offer": 0.41,
+ "blatchford_monthly_heat_MWh": [
+  7429,
+  6272,
+  5854,
+  3638,
+  2077,
+  974,
+  436,
+  807,
+  2080,
+  3856,
+  5821,
+  7544
+ ],
+ "carbon_break_even_edm": [
+  107.66,
+  237.59
+ ],
+ "v09_value": {
+  "neu_credit": 32.59,
+  "gas_parity": 39.41,
+  "credit_cap_note": "credit is netted on the building's own NEU bill; a data centre buys little NEU heat, so most credit may be unusable (cap not stated in by-law)"
+ },
+ "inputs": {
+  "EDM_ELEC": [
+   49.74,
+   111.59,
+   178.13
+  ],
+  "VAN_ELEC": [
+   67.9,
+   67.9
+  ],
+  "EDM_HEATVAL": 13.0,
+  "VAN_HEATVAL": 39.41,
+  "CRF_PIPE": 0.07,
+  "CRF_HP": 0.08
+ }
+}
