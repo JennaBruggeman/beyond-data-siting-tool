@@ -166,7 +166,7 @@ Keep the graphic style exactly as it is. The simulation section goes from **24 s
 - Energy Centre One: 1 MW heating / 1 MW cooling (2023), expanding to 4.25 / 4 MW. "Over 100" homes (2024).
 - Build-out: 46,789 MWh/yr heating (34.5 MW peak) and 43,747 MWh/yr cooling (46.6 MW peak).
 - Two separate projects; don't add them together:
-  - the Energy Centre One expansion to 4.25 MW heating / 4 MW cooling (2023–26 budget, $3.2M);
+  - the Energy Centre One expansion to 4.25 MW heating / 4 MW cooling ($3.2M capital in 2023–24, Blatchford budget 2023–26 p. 6);
   - the $79.2M expansion ($23.7M federal, July 2024), adding 13.1 MW heating and 12.3 MW cooling.
 - Sewer heat **deferred**; a $15.3M peaking energy centre comes first.
 - Customer rate $35.80/MWh.
