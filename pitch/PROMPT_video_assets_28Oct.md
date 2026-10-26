@@ -6,7 +6,7 @@ For Wednesday's review I'm making an **8.5-minute video** of all the work so far
 1. The cover graphic.
 2. **D1–D4** (the server and rack, the layouts, the data hall, around the hall).
 3. The exchange sheets **0–5** and **20 What else it could give**.
-4. The precedents overview and the 11 field-site spreads.
+4. The precedents overview (embedded/freestanding × legible/concealed) and all 11 field-site spreads. Export each collage axo and its photo insets as separate layers; the video dwells on them.
 5. **L1, L3, L6** and **S0**.
 6. **S2, S6, S11, S12** (the v4 results only), and the heat-pump cost against value chart (from J0 or E7).
 7. **J0**.
