@@ -1,0 +1,91 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Lato;font-weight:300;src:url(fonts/lato-latin-300-normal.woff2)}
+@font-face{font-family:Lato;font-weight:400;src:url(fonts/lato-latin-400-normal.woff2)}
+@font-face{font-family:Lato;font-weight:700;src:url(fonts/lato-latin-700-normal.woff2)}
+html,body{margin:0;background:#fff;overflow:hidden}
+canvas{display:block}
+</style></head><body><div style="position:absolute;left:-999px;font-family:Lato"><span style="font-weight:300">a</span><span style="font-weight:400">a</span><span style="font-weight:700">a</span></div><canvas id="c" width="1920" height="1080"></canvas>
+<script src="weighting_data.js"></script>
+<script>
+// The weighting, 20 s. Data: site_maps weighting outputs (method v4), prepared into weighting_data.json.
+const INK='#1c1c1e', G1='#e6e6e6', G2='#b5b5b5', G3='#7a7a7a';
+const COL=['#d4202b','#f1b604','#1f78c7','#2e9d4e','#7b3fb4'], NAMES=['Heat','Energy','Water','Materials','People'];
+const cv=document.getElementById('c'), x=cv.getContext('2d');
+const D=window.WD;
+const W={equal:[.2,.2,.2,.2,.2],priority:[.35,.2,.15,.15,.15]};
+// fixed random weightings (Dirichlet(1) via exponentials), seeded
+let s=21; const rnd=()=>{s=(s*16807)%2147483647;return s/2147483647};
+const RW=[...Array(60)].map(()=>{const e=[0,0,0,0,0].map(()=>-Math.log(rnd()+1e-9)); const t=e.reduce((a,b)=>a+b); return e.map(v=>v/t)});
+// map geometry per city
+const BOX={van:{x:110,y:250,w:800,h:640,name:'Vancouver'},edm:{x:1010,y:250,w:800,h:640,name:'Edmonton'}};
+for(const c of ['van','edm']){ const d=D[c]; const xs=d.x, ys=d.y;
+  const minx=Math.min(...xs),maxx=Math.max(...xs),miny=Math.min(...ys),maxy=Math.max(...ys);
+  const b=BOX[c], sc=Math.min(b.w/(maxx-minx+1), b.h/(maxy-miny+1));
+  b.sc=sc; b.ox=b.x+(b.w-(maxx-minx+1)*sc)/2-minx*sc; b.oy=b.y+(b.h-(maxy-miny+1)*sc)/2+maxy*sc;
+  d.mark=d.ids.indexOf(D.mark[c]); }
+const P=(c,i)=>{const b=BOX[c],d=D[c]; return [b.ox+d.x[i]*b.sc, b.oy-d.y[i]*b.sc]};
+const ease=t=>t<0?0:t>1?1:t*t*(3-2*t);
+const lerp=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t);
+function weights(c,t){
+  const sp=D[c].wspread;
+  if(t<5) return W.equal;
+  if(t<9) return lerp(W.equal,W.priority,ease((t-5)/1.5));
+  if(t<13) return lerp(W.priority,sp,ease((t-9)/1.5));
+  if(t<18) return RW[Math.floor((t-13)*12)%RW.length];
+  return W.equal;
+}
+function scheme(t){ return t<5?'equal':t<9?'priority':t<13?'spread':null }
+function bar(c,t,a){
+  const b=BOX[c], w=weights(c,t), y=b.y-70, h=22; let x0=b.x;
+  x.globalAlpha=a;
+  w.forEach((v,i)=>{ const ww=v*b.w; x.fillStyle=COL[i]; x.fillRect(x0,y,ww-2,h);
+    if(ww>70){ x.fillStyle='#fff'; x.font='400 15px Lato'; x.fillText(NAMES[i]+' '+Math.round(v*100)+'%',x0+8,y+16);} x0+=ww; });
+  x.fillStyle=INK; x.font='700 22px Lato'; x.fillText(b.name,b.x,y-14);
+  x.globalAlpha=1;
+}
+function cells(c,t,a){
+  const d=D[c], b=BOX[c], sz=Math.max(1.2,b.sc);
+  x.globalAlpha=a; x.fillStyle=G1;
+  for(let i=0;i<d.x.length;i++){ const [px,py]=P(c,i); x.fillRect(px,py-sz,sz,sz); }
+  x.globalAlpha=1;
+  const sc=scheme(t);
+  if(sc){ const k=sc==='equal'?ease((t-1.2)/1):sc==='priority'?ease((t-5.6)/0.8):ease((t-9.6)/0.8);
+    x.fillStyle=INK; x.globalAlpha=k;
+    for(const i of d[sc]){ const [px,py]=P(c,i); x.beginPath(); x.arc(px+sz/2,py-sz/2,5,0,7); x.fill(); }
+    x.globalAlpha=1; }
+  if(t>=13){ const pr=Math.min(1,(t-13)/4.5);
+    for(let i=0;i<d.x.length;i++){ const v=d.stab[i]; if(v<=0.05) continue; const [px,py]=P(c,i);
+      x.globalAlpha=Math.min(1,0.25+0.75*v)*pr; x.fillStyle=INK; x.beginPath(); x.arc(px+sz/2,py-sz/2,1.5+6*v,0,7); x.fill(); }
+    x.globalAlpha=1; }
+}
+function ring(c,t,t0,label,sub){
+  if(t<t0) return; const k=ease((t-t0)/0.6), d=D[c], [px,py]=P(c,d.mark);
+  x.strokeStyle='#d4202b'; x.lineWidth=3; x.globalAlpha=k; x.beginPath(); x.arc(px,py,22+30*(1-k),0,7); x.stroke();
+  const lx=px+90, ly=py+120;
+  x.beginPath(); x.moveTo(px+16,py+16); x.lineTo(lx-6,ly-22); x.strokeStyle=INK; x.lineWidth=1.5; x.stroke();
+  x.font='700 22px Lato'; const w1=x.measureText(label).width; x.font='400 18px Lato'; const w2=x.measureText(sub).width;
+  x.fillStyle='rgba(255,255,255,.92)'; x.fillRect(lx-8,ly-26,Math.max(w1,w2)+16,58);
+  x.fillStyle=INK; x.font='700 22px Lato'; x.fillText(label,lx,ly); x.font='400 18px Lato'; x.fillStyle=G3; x.fillText(sub,lx,ly+24); x.globalAlpha=1;
+}
+function caption(t){
+  const lines=[[0.3,5,'Equal: each exchange counts the same'],[5,9,'Heat first: heat counts most'],[9,13,'Spread: each exchange counts by how much it tells places apart'],
+               [13,18,'Then 500 random weightings: which places stay near the top?'],[18,21,'No single right priority, so the result is tested across them']];
+  for(const [a,b,s] of lines){ if(t>=a&&t<b){ const k=Math.min(ease((t-a)/0.4),ease((b-t)/0.4)); x.globalAlpha=k; x.fillStyle=INK; x.font='300 40px Lato'; x.fillText(s,110,990); x.globalAlpha=1; } }
+  if(t>=13&&t<18){ x.fillStyle=G3; x.font='400 20px Lato'; x.fillText('weighting '+Math.min(500,Math.floor((t-13)/4.5*500))+' of 500',1600,990); }
+}
+function header(t){
+  x.fillStyle=INK; x.font='700 30px Lato'; x.fillText('How the weighting changes it',110,90);
+  x.fillStyle=G3; x.font='400 18px Lato'; x.fillText('Site maps, method v4 · zoning counted as a gate · top 30 cells per city',110,118);
+  x.fillStyle=INK; x.fillRect(110,132,40,3);
+}
+window.R=function(t){
+  x.clearRect(0,0,1920,1080); x.fillStyle='#fff'; x.fillRect(0,0,1920,1080);
+  const a=ease(t/0.8); header(t);
+  for(const c of ['van','edm']){ bar(c,t,a); cells(c,t,a); }
+  if(t>=18){ ring('van',t,18,'275 1st Ave E area','top in 99 % of weightings'); ring('edm',t,18.4,'Blatchford edge (E06)','top in about half; first when heat counts most'); }
+  caption(t);
+  x.fillStyle=G2; x.font='400 14px Lato'; x.fillText('Source: Beyond Data site maps, method v4 (26 Oct 2026); 500 random weightings, each exchange 0–100 %, summing to 100 %.',110,1050);
+};
+R(0);
+</script></body></html>

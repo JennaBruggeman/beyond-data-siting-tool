@@ -1,0 +1,54 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Lato;font-weight:300;src:url(fonts/lato-latin-300-normal.woff2)}
+@font-face{font-family:Lato;font-weight:400;src:url(fonts/lato-latin-400-normal.woff2)}
+@font-face{font-family:Lato;font-weight:700;src:url(fonts/lato-latin-700-normal.woff2)}
+html,body{margin:0;background:#fff;overflow:hidden;width:1920px;height:1080px;font-family:Lato}
+.pg{position:absolute;left:0;top:0;transform-origin:0 0;opacity:0;box-shadow:0 2px 0 rgba(0,0,0,.06)}
+#band{position:absolute;left:0;right:0;bottom:0;height:230px;background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.96) 45%)}
+.cap{position:absolute;left:120px;top:900px;font:300 50px/1.1 Lato;color:#1c1c1e;opacity:0;white-space:nowrap}
+.cap small{display:block;font:400 26px/1.3 Lato;color:#4a4a4a;margin-top:10px}
+.lesson{position:absolute;right:120px;top:60px;font:700 22px Lato;color:#d4202b;opacity:0}
+#card{position:absolute;left:120px;top:250px;opacity:0}
+#card h2{font:700 34px Lato;color:#1c1c1e;margin:0 0 30px}
+#card div{font:300 44px/1.5 Lato;color:#1c1c1e;opacity:0}
+#card div b{font-weight:700;color:#d4202b}
+</style></head><body>
+<div id="pages"></div><div id="band"></div>
+<div class="lesson" id="les"></div>
+<div id="card"><h2>What the site visits informed</h2><div><b>Heat first:</b> the exchange to test before any other</div><div><b>The network matters:</b> heat needs somewhere to go</div><div><b>The plant edge</b> is where it meets its neighbours</div><div><b>The front could be public,</b> not hidden</div></div>
+<script>
+// Site visits (about 62 s). Pages: the booklet's precedent spreads (bk/*.png, rendered from the 26 Oct booklet; swap for the final booklet).
+// Lessons are a draft from J.B.'s own spread summaries, for her to confirm in the voiceover.
+const SEQ=[ // file, start, dur, caption, sub, lesson
+ ['prec_overview',0,5,'Eleven field sites, Vancouver and Edmonton','October 2026: embedded or freestanding, legible or concealed',''],
+ ['V03',5,4.6,'1  Hidden in plain sight','333 Terminal: schools upstairs, generators caged at grade','Lesson 1 of 5'],
+ ['E04',9.6,4.6,'1  Hidden in plain sight','HSBC Bank Place: a suite under the old food court','Lesson 1 of 5'],
+ ['V05',14.2,4.6,'1  Hidden in plain sight','Harbour Centre: the region’s networks, under the Lookout','Lesson 1 of 5'],
+ ['V07',18.8,4.6,'2  The machine shows at the back','Cologix VAN2: generator exhaust beside the patio','Lesson 2 of 5'],
+ ['V01',23.4,4.6,'2  The machine shows at the back','55 E 7th: an ordinary front; the plant on a lane deck','Lesson 2 of 5'],
+ ['E02',28,4.6,'2  The machine shows at the back','Qu EDM2: cooling units behind a block wall','Lesson 2 of 5'],
+ ['V04',32.6,4.6,'3  No heat shared at any site visited','Cologix VAN4: a 2023 permit for roof chillers, no heat recovery','Lesson 3 of 5'],
+ ['E01',37.2,4.6,'3  No heat shared at any site visited','The Internet Centre: condensing units above a shopfront','Lesson 3 of 5'],
+ ['E03',41.8,4.6,'3  No heat shared at any site visited','Kyndryl Acheson: the plant in the open, behind a berm','Lesson 3 of 5'],
+ ['V06',46.4,5.2,'4  The one building that shows its heat is a heat plant','720 Beatty: next door, a data centre is allowed, with no condition to feed it','Lesson 4 of 5'],
+ ['V02',51.6,5.2,'5  Neighbours already share plants','111 E 5th: a cooling plant for the buildings around it','Lesson 5 of 5'],
+];
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)), ease=t=>{t=cl(t);return t*t*(3-2*t)}, seg=(t,a,b)=>ease((t-a)/(b-a)), win=(t,a,b,f=.45)=>Math.min(seg(t,a,a+f),1-seg(t,b-f,b));
+const W0=2600,H0=1683, FIT=1080/H0*0.98; // whole spread fits the height
+const P=SEQ.map(([f,a,d,cap,sub,les])=>{ const im=document.createElement('img'); im.src='bk/'+f+'.png'; im.className='pg'; im.style.width=W0+'px'; document.getElementById('pages').appendChild(im);
+  const c=document.createElement('div'); c.className='cap'; c.innerHTML=cap+'<small>'+sub+'</small>'; document.body.appendChild(c); return {im,a,d,c,les,ov:f==='prec_overview'}; });
+function place(p,t){ const u=cl((t-p.a)/p.d); // from the whole spread to the collage page (right half)
+  const s0=FIT, s1=p.ov?FIT*1.05:FIT*1.55; const s=s0+(s1-s0)*ease(u*1.1);
+  const fx=p.ov?.5:.74, fy=p.ov?.45:.5; // focus point in the spread
+  const X=960-(fx*W0)*s + (fx*W0*s - 960)*(1-ease(u*1.1)) - ((W0*s0)/2-960+ (fx*W0)*s0 -(fx*W0)*s0)*(1-ease(u*1.1))*0;
+  const x0=960-W0*s0/2, y0=540-H0*s0/2; const x1=960-fx*W0*s1, y1=480-fy*H0*s1; const k=ease(u*1.1);
+  p.im.style.transform=`translate(${x0+(x1-x0)*k}px,${y0+(y1-y0)*k}px) scale(${s0+(s1-s0)*k})`; }
+window.R=function(t){
+  for(const p of P){ const a=win(t,p.a-.2,p.a+p.d+.2,.4); p.im.style.opacity=a; if(a>0) place(p,t); p.c.style.opacity=win(t,p.a+.2,p.a+p.d,.35); }
+  const cur=P.find(p=>t>=p.a&&t<p.a+p.d); const L=document.getElementById('les'); L.textContent=cur?cur.les:''; L.style.opacity=cur&&cur.les?1:0;
+  const C=document.getElementById('card'); C.style.opacity=seg(t,56.9,57.4); [...C.querySelectorAll('div')].forEach((d,i)=>d.style.opacity=seg(t,57.4+i*.9,57.9+i*.9));
+  document.getElementById('band').style.opacity=t<56.9?1:1-seg(t,56.9,57.4);
+};
+window.DUR=62; R(0);
+</script></body></html>
