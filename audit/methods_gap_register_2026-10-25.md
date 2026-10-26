@@ -52,3 +52,19 @@ Blatchford is the only **operating** low-temperature network found. The four Cit
 3. Add to the maps: heat margin ($/MWh) instead of demand alone; network class and timing; capacity flags.
 4. Make the two cities consistent (receivers, hazards, water, zoning sub-areas).
 5. Re-run both cities' maps and the weighting study, and show the before and after.
+
+## Added 25 Oct (J.B.), for the tool phase
+
+21. **What's already on the land isn't scored.** Cost, demolition carbon and displacement all depend on it. **Fix:** a site factor (like zoning, not a sixth exchange) for redevelopment readiness.
+    - Vancouver: building value ÷ land value (tax report).
+    - Edmonton: no land/building split, so use building floor area ÷ lot, year built and total assessed value per m².
+    - Flag homes separately. Treat an existing shell as possibly reusable, not only a cost. Flag former airport or industrial land for an environmental site assessment (Bylaw 20001 s. 7.140).
+    - Apply citywide in both cities and show results with and without. **Severity:** changes rankings (Kingsway vs E06).
+22. **Which public uses the zoning allows isn't scored.** It decides whether the building can host people at all. IM allows no community, event or market uses; BE allows them up to 500 m² each. **Fix:** a second term in the people exchange.
+    - People = who lives nearby (as now) × what the zone lets the building offer.
+    - Scored from each zone's use table: permitted 1, discretionary or conditional 0.5, not listed 0.
+    - Uses counted: Community Service, assembly and entertainment, Indoor Sales and Service (markets), Food and Drink, Child Care, Urban Agriculture. Each is reduced by its size cap.
+    - Sources: Bylaw 20001 zone tables; Vancouver district schedules. Weights within the people exchange are an assumption.
+    - Apply citywide in both cities, with and without. **Severity:** changes rankings.
+
+Both were raised after seeing that they favour E06, so the before/after comparison is required, not optional.
