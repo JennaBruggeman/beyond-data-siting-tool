@@ -41,7 +41,10 @@ Everything you need is in the connected folder `chosen_sites/`, mainly `E06_74_6
 - **`DESIGN_BRIEF.md`:** the design that makes each exchange possible, and plant space per MW.
 - The E05 folder, for comparison only.
 
-Full tool reports for E06 (Everyday, Civic, Technical) and `tool_data_full.json` will follow. Until they arrive, use the fit file and mark tool figures you can't find as "awaiting tool run".
+**No tool reports for E06 yet, on purpose.** The tool still assumes a heat pump for every network, which is wrong for Blatchford's ambient loop. It will be re-run after its heat fixes. Until then:
+- heat numbers come from `SITE_LEDGER_2026-10-25.md`;
+- sizes and plant areas come from `E06_tool_fit.json` and the per-MW rules in `DESIGN_BRIEF.md`;
+- anything that would need the tool is marked "tool re-run pending".
 
 ## Data gaps: read before modelling
 
