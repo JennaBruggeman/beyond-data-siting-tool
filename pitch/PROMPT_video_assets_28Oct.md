@@ -7,8 +7,8 @@ For Wednesday's review I'm making an **8.5-minute video** of all the work so far
 2. **D1–D4** (the server and rack, the layouts, the data hall, around the hall).
 3. The exchange sheets **0–5** and **20 What else it could give**.
 4. The precedents overview (embedded/freestanding × legible/concealed) and all 11 field-site spreads. Export each collage axo and its photo insets as separate layers; the video dwells on them.
-5. **L1, L3, L6** and **S0**.
-6. **S2, S6, S11, S12** (the v4 results only), and the heat-pump cost against value chart (from J0 or E7).
+5. **L1, L6** and **S0**.
+6. **The whole simulation in step order: S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S13, S14, S12** (v4 results only), plus the heat-pump cost against value chart (from J0 or E7). The video walks through these one by one, so separate each map's layers (cells, peaks, legend) for build-up.
 7. **J0**.
 8. **E1, E2, E3, E7**.
 9. **V1, V2, V4, V7**.

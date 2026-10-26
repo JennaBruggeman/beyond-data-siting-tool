@@ -14,20 +14,23 @@ Same workflow as the 23 Oct pitch:
 
 Graphics come from the booklet (`Beyond_Data_booklet_gp2_v3`, plus the new E and V spreads); booklet codes are in brackets.
 
-**Revised 26 Oct (J.B.):** more time on the argument; the site visits and the exchanges are major beats; the two sites are the last two minutes.
+**Revised 26 Oct (J.B.):**
+- more time on the argument;
+- the site visits and the exchanges are major beats;
+- the simulation is walked through step by step, with the money test inside the heat step;
+- the two sites are the last two minutes.
 
 | # | Time | Beat | On screen (booklet source) | What it says | Assignment item |
 |---|---|---|---|---|---|
 | 1 | 0:00–0:30 | **Hook and title** | A data centre on a real block: power in, heat out the roof, neighbours burning gas (pitch dive; sheet 1). Title on the cover graphic. | It takes from its block and gives nothing back. | Title and opening image |
 | 2 | 0:30–0:50 | **Thesis** | 35 words, word by word | The statement | Thesis statement |
-| 3 | 0:50–1:50 | **The argument** | Literature map built up in steps: why data centres are coming into cities; what they take (power, water, land) and throw away (heat, noise); where reciprocity works (Nordic heat reuse on hot networks where heat is costly; industrial symbiosis); Canada marked: cheap gas. Your position marked. | Data centres are coming into our cities either way. Elsewhere they give back, but only where conditions make it pay. My question is where, in Vancouver and Edmonton, those conditions exist, and what a data centre would have to be to meet them. | Literature review and positioning |
-| 4 | 1:50–3:10 | **The site visits** | Precedents overview (embedded/freestanding × legible/concealed), then the 11 collage axos in sequence, each with its one-line title. Lessons appear as captions, each on its strongest site. | **What I learned** (draft for J.B. to confirm, from her spread summaries): **(1) Hidden in plain sight:** inside towers, under a food court, beneath a school (Harbour Centre, HSBC Bank Place, 333 Terminal). **(2) The machine shows at the back:** generators in lanes, louvres in murals, fans on roofs, exhaust beside a patio (VAN2, 55 E 7th, Qu EDM2). **(3) No heat shared anywhere visited:** it goes to roof coolers (VAN4's 2023 permit: chillers, no heat recovery). **(4) The one building that shows its heat is a heat plant:** next to it, a data centre is allowed whose heat could feed the network, but no zoning condition asks for it (Creative Energy, 720 Beatty). **(5) Neighbours already share plants:** 111 E 5th cools the buildings around it. **What it informed:** heat is the first exchange to test; the network matters; the plant edge is where a data centre meets its neighbours; and its front could be public instead of hidden. | Results (field work) |
-| 5 | 3:10–4:30 | **The exchanges** | D1–D4 in one zoom-out (rack to hall, about 10 s). Then sheets 1–5, one beat each, with what flows each way and how proven it is (built here / built elsewhere / speculative). Then "20 What else it could give" (the opportunity tree). | One module, two loads: power in, heat out. Six kinds of exchange, both ways (heat and cold, energy, water, materials, people and place), with 21 opportunities, each rated by how proven it is. | Results (exchange systems) |
-| 6 | 4:30–5:00 | **The instrument** | L1 the logic → L3 follow the heat → L6 trust → S0 "704 sources". The method sequence with "you are here". | A tool that tests any lot: every figure sourced and rated. Here's where I am in the method. | Methodology, tactics, where I am |
-| 7 | 5:00–5:50 | **The money test** | Heat-pump cost bars ($30–75/MWh) against heat value ($13) at every 2021–25 power price, in Edmonton. Then hot vs ambient networks. | Selling heat through a heat pump doesn't pay in Edmonton at today's gas price. Only a network that takes the heat as it comes can. (Answers the mid-review jury: here's which kind of district energy, and why.) | New material (key finding) |
-| 8 | 5:50–6:20 | **The screen** | S2 cells → S6 heat (by whether it pays) → S12 shortlist, both cities | Every 100 m cell scored, heat counted only where it pays. Blatchford's edge leads Edmonton; the blocks around 1st Ave E lead Vancouver. | New material |
-| 9 | 6:20–6:30 | **The rule** | "The network decides the site." | | Finding |
-| 10 | 6:30–8:30 | **The two sites** | J0 (10 s) → **E06, grow** (55 s): E1 adjacencies, E2 rules, E3 heat, E7 money and over time → **V09, join** (50 s): V1, V2, V4 energy, V7 money → both side by side, the rule, the title (5 s) | E06: a young ambient loop next door, heat with no heat pump, pays if close; in Edmonton's #1 area. V09: a mature hot network, heat doesn't pay today, so the exchange is power and space at the same time; in Vancouver's #1 area. | Site analysis |
+| 3 | 0:50–1:45 | **The argument** | Literature map built up in steps: why data centres are coming into cities; what they take (power, water, land) and throw away (heat, noise); where reciprocity works (Nordic heat reuse on hot networks where heat is costly; industrial symbiosis); Canada marked: cheap gas. Your position marked. | Data centres are coming into our cities either way. Elsewhere they give back, but only where conditions make it pay. My question is where, in Vancouver and Edmonton, those conditions exist, and what a data centre would have to be to meet them. | Literature review and positioning |
+| 4 | 1:45–2:55 | **The site visits** | Precedents overview (embedded/freestanding × legible/concealed), then the 11 collage axos in sequence, each with its one-line title. Lessons appear as captions, each on its strongest site. | **What I learned** (draft for J.B. to confirm, from her spread summaries): **(1) Hidden in plain sight:** inside towers, under a food court, beneath a school (Harbour Centre, HSBC Bank Place, 333 Terminal). **(2) The machine shows at the back:** generators in lanes, louvres in murals, fans on roofs, exhaust beside a patio (VAN2, 55 E 7th, Qu EDM2). **(3) No heat shared anywhere visited:** it goes to roof coolers (VAN4's 2023 permit: chillers, no heat recovery). **(4) The one building that shows its heat is a heat plant:** next to it, a data centre is allowed whose heat could feed the network, but no zoning condition asks for it (Creative Energy, 720 Beatty). **(5) Neighbours already share plants:** 111 E 5th cools the buildings around it. **What it informed:** heat is the first exchange to test; the network matters; the plant edge is where a data centre meets its neighbours; and its front could be public instead of hidden. | Results (field work) |
+| 5 | 2:55–4:05 | **The exchanges** | D1–D4 in one zoom-out (rack to hall, about 10 s). Then sheets 1–5, one beat each, with what flows each way and how proven it is (built here / built elsewhere / speculative). Then "20 What else it could give" (the opportunity tree). | One module, two loads: power in, heat out. Six kinds of exchange, both ways (heat and cold, energy, water, materials, people and place), with 21 opportunities, each rated by how proven it is. | Results (exchange systems) |
+| 6 | 4:05–4:20 | **The instrument** | L1 the logic → L6 trust → S0 "704 sources". The method sequence with "you are here". | Every figure sourced and rated. Here's where I am in the method. | Methodology, tactics, where I am |
+| 7 | 4:20–6:25 | **The simulation, step by step** | **a** (4:20–4:35) S1 how it works, S2 two cities as cells. **b** (4:35–4:45) S3 what one cell can reach. **c** (4:45–4:55) S4 the rules, S5 zoning as a gate, with the "already built" inset. **d** (4:55–5:40) S6 heat, then **the money test**: heat-pump cost bars ($30–75/MWh) against value ($13) at every 2021–25 power price; hot vs ambient networks; heat scored by whether it pays, legend by network type. **e** (5:40–5:55) S7 energy, S8 water, S9 materials, S10 people with the "public uses" inset, one beat each. **f** (5:55–6:05) S11 where they overlap. **g** (6:05–6:15) S13 how the weighting changes it (stability). **h** (6:15–6:25) S14 can it be built there (land check), then S12 the shortlist. | Step by step: cut both cities into 100 m cells; for each, what it can reach; can a data centre go here; then each exchange. For heat, does it pay? A heat pump doesn't pay in Edmonton at today's gas price; only a network that takes heat as it comes can (this answers the mid-review jury). Then overlap, test the weighting, check the land. Blatchford's edge leads Edmonton; the blocks around 1st Ave E lead Vancouver. | Methodology and new material |
+| 8 | 6:25–6:30 | **The rule** | "The network decides the site." | | Finding |
+| 9 | 6:30–8:30 | **The two sites** | J0 (10 s) → **E06, grow** (55 s): E1 adjacencies, E2 rules, E3 heat, E7 money and over time → **V09, join** (50 s): V1, V2, V4 energy, V7 money → both side by side, the rule, the title (5 s) | E06: a young ambient loop next door, heat with no heat pump, pays if close; in Edmonton's #1 area. V09: a mature hot network, heat doesn't pay today, so the exchange is power and space at the same time; in Vancouver's #1 area. | Site analysis |
 
 **Through-line:** heat. Thrown away at the hook; on roof coolers at every site visited; the first exchange; the money test; the reason each site was chosen.
 
@@ -43,15 +46,14 @@ Graphics come from the booklet (`Beyond_Data_booklet_gp2_v3`, plus the new E and
 |---|---|
 | 1 | 60 |
 | 2 | 35 |
-| 3 | 135 |
-| 4 | 180 |
-| 5 | 175 |
-| 6 | 65 |
-| 7 | 110 |
-| 8 | 65 |
-| 9 | 10 |
-| 10 | 250 |
-| **Total** | **about 1,085** |
+| 3 | 120 |
+| 4 | 155 |
+| 5 | 155 |
+| 6 | 35 |
+| 7 | 270 |
+| 8 | 10 |
+| 9 | 250 |
+| **Total** | **about 1,090** |
 
 ## Still needed from J.B. or the thesis chat
 - The **35-word thesis statement**.
