@@ -1,0 +1,79 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Lato;font-weight:300;src:url(fonts/lato-latin-300-normal.woff2)}
+@font-face{font-family:Lato;font-weight:400;src:url(fonts/lato-latin-400-normal.woff2)}
+@font-face{font-family:Lato;font-weight:700;src:url(fonts/lato-latin-700-normal.woff2)}
+html,body{margin:0;background:#fff;overflow:hidden}
+</style></head><body><div style="position:absolute;left:-999px;font-family:Lato"><span style="font-weight:300">a</span><span style="font-weight:400">a</span><span style="font-weight:700">a</span></div>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script>
+// The money test, about 26 s. All figures from checks/site_math (SITE_LEDGER_2026-10-25.md), Edmonton, $ per MWh of heat delivered.
+const INK='#1c1c1e', G1='#ececec', G2='#bdbdbd', G3='#7a7a7a', RED='#d4202b', RED2='#ef9a9a', BLUE='#8fb3d1';
+const x=document.getElementById('c').getContext('2d');
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)), ease=t=>{t=cl(t);return t*t*(3-2*t)}, seg=(t,a,b)=>ease((t-a)/(b-a)), win=(t,a,b,f=.4)=>Math.min(seg(t,a,a+f),1-seg(t,b-f,b));
+// scale: $0–80 per MWh across 1200 px
+const X0=520, PX=15, sx=v=>X0+v*PX;
+const ROWS=[ // label, sub, lo, hi, parts at the low end [capital, upkeep, electricity], t0
+ ['Heat pump to a 70 °C network','power at 2025 prices',29.94,46.92,[15.9,5.31,8.73],2.0],
+ ['','power at the 2021–25 average',40.79,60.37,[15.9,5.31,19.58],4.0],
+ ['','power at 2022 prices',52.46,74.83,[15.9,5.31,31.25],5.2],
+];
+function text(s,X,Y,f,c,a=1,al='left'){ x.globalAlpha=a; x.fillStyle=c; x.font=f; x.textAlign=al; x.fillText(s,X,Y); x.textAlign='left'; x.globalAlpha=1; }
+function axis(t,a){
+  x.globalAlpha=a; x.strokeStyle=G2; x.lineWidth=1;
+  for(let v=0;v<=80;v+=10){ const X=sx(v); x.beginPath(); x.moveTo(X,300); x.lineTo(X,770); x.stroke(); text('$'+v,X,800,'400 18px Lato',G3,a,'center'); }
+  text('dollars per MWh of heat delivered (Edmonton)',sx(40),835,'400 18px Lato',G3,a,'center'); x.globalAlpha=1;
+}
+function rangeBar(r,i,t){
+  const [lab,sub,lo,hi,parts,t0]=r, y=330+i*95, k=seg(t,t0,t0+1.1);
+  if(t<t0) return;
+  if(lab) text(lab,120,y+8,'700 24px Lato',INK,seg(t,t0-.3,t0+.3));
+  text(sub,120,y+36,'400 20px Lato',G3,seg(t,t0-.3,t0+.3));
+  // low-end stack: capital, upkeep, electricity
+  let v0=0; const cols=['#9e1219',RED,RED2];
+  parts.forEach((p,j)=>{ const w=p*PX*k; x.fillStyle=cols[j]; x.fillRect(sx(v0),y,w,34); v0+=p*k; });
+  // the range to the high end, hatched
+  const kh=seg(t,t0+.9,t0+1.6); x.globalAlpha=.35*kh; x.fillStyle=RED; x.fillRect(sx(lo),y,(hi-lo)*PX*kh,34); x.globalAlpha=1;
+  text('$'+Math.round(lo)+'–'+Math.round(hi),sx(hi)+14,y+25,'700 22px Lato',INK,kh);
+  if(i===0){ const kl=win(t,t0+1.2,9.6); ['capital','upkeep','electricity'].forEach((s,j)=>{ const a=parts.slice(0,j).reduce((p,q)=>p+q,0)+parts[j]/2; text(s,sx(a),y-10,'400 16px Lato',G3,kl,'center'); }); }
+}
+function valueLine(t){
+  const k=seg(t,1.0,1.8); if(k<=0) return; x.globalAlpha=k; x.strokeStyle=INK; x.lineWidth=3; x.setLineDash([]);
+  x.beginPath(); x.moveTo(sx(13),290); x.lineTo(sx(13),300+470*k); x.stroke(); x.globalAlpha=1;
+  text('$13',sx(13),278,'700 24px Lato',INK,k,'center'); text('what the heat is worth: the gas it replaces',sx(13)+16,252,'400 20px Lato',G3,k);
+}
+function ambient(t){
+  const t0=10.2; if(t<t0) return; const y=330+3*95+30, k=seg(t,t0,t0+1);
+  text('Ambient loop, no heat pump',120,y+8,'700 24px Lato',INK,k); text('winter heat, tie-in at the boundary',120,y+36,'400 20px Lato',G3,k);
+  x.fillStyle=BLUE; x.fillRect(sx(5),y,(15-5)*PX*k,34);
+  text('$5–15',sx(15)+14,y+25,'700 22px Lato',INK,seg(t,t0+.8,t0+1.3));
+}
+function caption(t){
+  const C=[[.2,7.8,'Does the heat pay?'],[7.6,10.2,'Through a heat pump: no, at any power price since 2021'],[11.4,15.4,'Into a loop that takes heat as it comes: it can']];
+  for(const [a,b,s] of C){ const k=win(t,a,b); if(k>0) text(s,120,980,'300 46px Lato',INK,k); }
+}
+// hot vs ambient: temperatures, 15.6 s on
+function temps(t){
+  const t0=15.6; if(t<t0) return; const a=seg(t,t0,t0+.6);
+  x.globalAlpha=a; x.fillStyle='#fff'; x.fillRect(0,140,1920,860); x.globalAlpha=1;
+  const T0=820, TY=v=>T0-(v)*7.5; // °C scale, 0–80
+  text('Why: temperature',120,200,'700 30px Lato',INK,a);
+  x.globalAlpha=a; x.strokeStyle=G2; x.lineWidth=1; for(let v=0;v<=80;v+=10){ x.beginPath(); x.moveTo(470,TY(v)); x.lineTo(1800,TY(v)); x.stroke(); text(v+' °C',450,TY(v)+6,'400 18px Lato',G3,a,'right'); } x.globalAlpha=1;
+  const cols=[[600,'Server heat','air 25–35 °C · liquid 50–60 °C',[[25,35,RED2],[50,60,RED]],t0+.5],[1080,'Hot network','65 °C or more (e.g. Vancouver NEU)',[[65,80,'#9e1219']],t0+1.6],[1560,'Ambient loop (Blatchford)','8–32 °C',[[8,32,BLUE]],t0+2.8]];
+  for(const [cx,lab,sub,bars,ts] of cols){ const k=seg(t,ts,ts+.8); if(k<=0) continue;
+    for(const [lo,hi,c] of bars){ x.globalAlpha=k; x.fillStyle=c; x.fillRect(cx-70,TY(hi),140,(hi-lo)*7.5); x.globalAlpha=1; }
+    const top=Math.max(...bars.map(b=>b[1])); text(lab,cx,TY(top)-40,'700 24px Lato',INK,k,'center'); text(sub,cx,TY(top)-14,'400 19px Lato',G3,k,'center'); }
+  const k1=seg(t,t0+2.2,t0+3); if(k1>0){ x.globalAlpha=k1; x.strokeStyle=INK; x.lineWidth=2.5; x.beginPath(); x.moveTo(675,TY(58)); x.lineTo(1005,TY(70)); x.stroke(); x.globalAlpha=1;
+    text('a heat pump must lift it',840,TY(70)-12,'700 20px Lato',INK,k1,'center'); }
+  const k2=seg(t,t0+3.4,t0+4.2); if(k2>0){ x.globalAlpha=k2; x.strokeStyle=INK; x.lineWidth=2.5; x.beginPath(); x.moveTo(675,TY(30)); x.lineTo(1485,TY(22)); x.stroke(); x.globalAlpha=1;
+    text('goes in as it comes, through an exchanger',1080,TY(26)+34,'700 20px Lato',INK,k2,'center'); }
+  const kc=seg(t,t0+5,t0+5.6); text('The network decides whether the heat pays',120,980,'300 46px Lato',INK,kc);
+}
+function header(t){ text('The money test',120,90,'700 30px Lato',INK); text('Edmonton · dollars per MWh of heat · power prices 2021–25',120,118,'400 18px Lato',G3); x.fillStyle=INK; x.fillRect(120,132,40,3); }
+window.R=function(t){
+  x.clearRect(0,0,1920,1080); x.fillStyle='#fff'; x.fillRect(0,0,1920,1080);
+  header(t); const a=seg(t,.2,1); axis(t,a); valueLine(t); ROWS.forEach((r,i)=>rangeBar(r,i,t)); ambient(t); caption(t); temps(t);
+  text('Sources: AESO Annual Market Statistics 2025 (pool prices); Danish Energy Agency technology data (heat pump cost); ATCO regulated gas; Blatchford Design Guide v8; Beyond Data site ledger, 25 Oct 2026.',120,1050,'400 14px Lato',G2);
+};
+window.DUR=22.6; R(0);
+</script></body></html>

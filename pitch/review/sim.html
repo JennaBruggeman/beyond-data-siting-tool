@@ -1,0 +1,75 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Lato;font-weight:300;src:url(fonts/lato-latin-300-normal.woff2)}
+@font-face{font-family:Lato;font-weight:400;src:url(fonts/lato-latin-400-normal.woff2)}
+@font-face{font-family:Lato;font-weight:700;src:url(fonts/lato-latin-700-normal.woff2)}
+html,body{margin:0;background:#fff;overflow:hidden}
+</style></head><body><div style="position:absolute;left:-999px;font-family:Lato"><span style="font-weight:300">a</span><span style="font-weight:400">a</span><span style="font-weight:700">a</span></div>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script src="sim_data.js"></script>
+<script>
+// The simulation, step by step (75 s). Data: site maps method v4 (site_maps/*_grid.geojson, networks_v2.json, realistic_top5.csv).
+// Cut points for the edit: 28 s = before the money test; 65 s = before the weighting.
+const D=window.SD, INK='#1c1c1e', G1='#ececec', G2='#bdbdbd', G3='#7a7a7a';
+const EX={heat:[212,32,43],energy:[241,182,4],water:[31,120,199],materials:[46,157,78],people:[123,63,180]};
+const x=document.getElementById('c').getContext('2d');
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)), ease=t=>{t=cl(t);return t*t*(3-2*t)}, seg=(t,a,b)=>ease((t-a)/(b-a)), win=(t,a,b,f=.4)=>Math.min(seg(t,a,a+f),1-seg(t,b-f,b));
+const BOX={van:{x:110,y:200,w:820,h:700,name:'Vancouver'},edm:{x:1000,y:200,w:820,h:700,name:'Edmonton'}};
+for(const c of ['van','edm']){ const d=D[c], b=BOX[c]; const minx=Math.min(...d.x),maxx=Math.max(...d.x),miny=Math.min(...d.y),maxy=Math.max(...d.y);
+  b.sc=Math.min(b.w/(maxx-minx+1),b.h/(maxy-miny+1)); b.ox=b.x+(b.w-(maxx-minx+1)*b.sc)/2-minx*b.sc; b.oy=b.y+(b.h-(maxy-miny+1)*b.sc)/2+(maxy+1)*b.sc; d.n=d.x.length; }
+const PX=(c,X,Y)=>[BOX[c].ox+X*BOX[c].sc, BOX[c].oy-Y*BOX[c].sc];
+function text(s,X,Y,f,col,a=1,al='left'){ if(a<=0)return; x.globalAlpha=a; x.fillStyle=col; x.font=f; x.textAlign=al; x.fillText(s,X,Y); x.textAlign='left'; x.globalAlpha=1; }
+function cells(c,colorFn,a=1,reveal=1){ const d=D[c], b=BOX[c], sz=Math.max(1.1,b.sc*.92); const n=Math.floor(d.n*reveal);
+  x.globalAlpha=a; for(let i=0;i<n;i++){ const col=colorFn(i); if(!col) continue; const [px,py]=PX(c,d.x[i],d.y[i]+1); x.fillStyle=col; x.fillRect(px,py,sz,sz); } x.globalAlpha=1; }
+const ramp=(rgb,v)=>{ v=cl(v); const m=k=>Math.round(255+(k-255)*(.08+.92*v)); return `rgb(${m(rgb[0])},${m(rgb[1])},${m(rgb[2])})`; };
+const grey=v=>{ const g=Math.round(236-(236-28)*cl(v)); return `rgb(${g},${g},${g})`; };
+function nets(c,a){ if(a<=0) return; const b=BOX[c];
+  for(const n of D[c].nets){ const cls=n.cls||'', planned=(n.status||'').startsWith('planned');
+    let col='#9e1219', dash=[10,6], fill=null; if(cls.startsWith('ambient')){ col='#1f78c7'; dash=[]; fill='rgba(31,120,199,.12)'; } else if(cls.startsWith('steam')){ col='#8a8a8a'; dash=[2,5]; } if(planned) dash=[3,7];
+    x.globalAlpha=a; x.beginPath(); n.ring.forEach(([X,Y],k)=>{ const [px,py]=PX(c,X,Y); k?x.lineTo(px,py):x.moveTo(px,py); }); x.closePath();
+    if(fill){ x.fillStyle=fill; x.fill(); } x.setLineDash(dash); x.strokeStyle=col; x.lineWidth=2.5; x.stroke(); x.setLineDash([]); x.globalAlpha=1; } }
+function netLegend(a){ if(a<=0) return; const L=[['#1f78c7',[],'ambient loop: no heat pump'],['#9e1219',[10,6],'hot water: heat pump needed'],['#8a8a8a',[2,5],'steam: can\'t take server heat'],['#9e1219',[3,7],'planned']];
+  L.forEach(([c,d,s],i)=>{ const y=935+i*0; const X=110+i*430; x.globalAlpha=a; x.setLineDash(d); x.strokeStyle=c; x.lineWidth=3; x.beginPath(); x.moveTo(X,945); x.lineTo(X+44,945); x.stroke(); x.setLineDash([]); x.globalAlpha=1; text(s,X+56,951,'400 20px Lato',INK,a); }); }
+function siteMark(c,a,big){ if(a<=0) return; const s=D[c].mark, [px,py]=PX(c,s.x+.5,s.y+.5); x.globalAlpha=a; x.strokeStyle='#d4202b'; x.lineWidth=3; x.beginPath(); x.arc(px,py,big?20:14,0,7); x.stroke(); x.globalAlpha=1;
+  const b=BOX[c]; x.globalAlpha=a; x.strokeStyle='#d4202b'; x.lineWidth=3; x.beginPath(); x.arc(b.x+8,b.y+30+5*30+16,8,0,7); x.stroke(); x.globalAlpha=1; text(s.lab,b.x+24,b.y+30+5*30+23,'700 22px Lato','#d4202b',a); }
+const LBL={van:['302 Industrial Ave / 235 1st Ave E','733 McLean Dr','8729 Aisne St','3432 Lougheed Hwy','8210 Ross St'],edm:['Blatchford edge (11720 Kingsway)','8635 Stadium Rd','4999 98 Ave','5703 125 Ave','10014 166 St']};
+function peaks(c,t,t0){ D[c].peaks.forEach((p,i)=>{ const a=seg(t,t0+i*.35,t0+i*.35+.4); if(a<=0) return; const [px,py]=PX(c,p.x,p.y);
+  x.globalAlpha=a; x.fillStyle=INK; x.beginPath(); x.arc(px,py,15,0,7); x.fill(); x.globalAlpha=1; text(String(p.rank),px,py+7,'700 18px Lato','#fff',a,'center');
+  text(LBL[c][i],BOX[c].x+(c==='van'?0:0),BOX[c].y+BOX[c].h+40+i*0,'',INK,0); }); }
+function shortlist(c,t,t0){ const b=BOX[c]; LBL[c].forEach((s,i)=>{ const a=seg(t,t0+i*.35,t0+i*.35+.4); text((i+1)+'  '+s,b.x,b.y+30+i*30,(i===0?'700':'400')+' 22px Lato',INK,a); }); }
+const STEPS=[ // caption, start, end
+ ['Both cities, cut into 100 m cells',0.6,9.6],
+ ['From each cell: what it can reach',10,17.6],
+ ['Can a data centre go here? Zoning as a gate',18,24.6],
+ ['Less where it is already built',24.6,27.8],
+ ['Heat: counted only where it pays',28,42.6],
+ ['Energy',43,45.8],['Water',46,48.8],['Materials',49,51.8],['People, and the public uses the zone allows',52,54.8],
+ ['Where they overlap',55,64.6],
+ ['Enough land? Then the shortlist',65,74.8]];
+function header(t){ text('The simulation, step by step',110,90,'700 30px Lato',INK); text('Site maps, method v4 · Vancouver 9,856 cells · Edmonton 34,428 cells',110,118,'400 18px Lato',G3); x.fillStyle=INK; x.fillRect(110,132,40,3);
+  const i=STEPS.findIndex(s=>t>=s[1]&&t<s[2]); if(i>=0){ const s=STEPS[i]; text(s[0],110,1010,'300 44px Lato',INK,win(t,s[1],s[2])); } }
+window.R=function(t){
+  x.clearRect(0,0,1920,1080); x.fillStyle='#fff'; x.fillRect(0,0,1920,1080); header(t);
+  for(const c of ['van','edm']){ const d=D[c], b=BOX[c];
+    text(b.name,b.x,b.y-14,'700 22px Lato',INK,seg(t,.3,1));
+    let fn, a=1;
+    if(t<10){ fn=()=>G1; cells(c,fn,1,seg(t,.6,7)); text((c==='van'?'9,856':'34,428')+' cells',b.x+b.w,b.y-14,'400 22px Lato',G3,seg(t,6,7),'right'); continue; }
+    if(t<18){ cells(c,()=>G1); if(c==='van'){ const s=d.mark, [px,py]=PX(c,s.x+.5,s.y+.5);
+        const R=[[10,'pool, 1,000 m'],[12,'homes and most buildings, 1,200 m'],[15,'greenhouse, 1,500 m'],[20,'substation, 2,000 m']];
+        R.forEach(([r,l],k)=>{ const a2=seg(t,10.6+k*1.3,11.2+k*1.3); x.globalAlpha=a2; x.strokeStyle=k===3?'#f1b604':'#d4202b'; x.setLineDash(k===3?[6,5]:[]); x.lineWidth=2; x.beginPath(); x.arc(px,py,r*b.sc,0,7); x.stroke(); x.setLineDash([]); x.globalAlpha=1;
+          x.globalAlpha=a2; x.strokeStyle=G2; x.lineWidth=1; x.beginPath(); x.moveTo(px+r*b.sc,py); x.lineTo(px+22*b.sc,py+(k-1.5)*34); x.stroke(); x.globalAlpha=1; text(l,px+22*b.sc+8,py+(k-1.5)*34+6,'400 18px Lato',INK,a2); });
+        x.fillStyle=INK; x.fillRect(px-b.sc/2,py-b.sc/2,b.sc,b.sc); } continue; }
+    if(t<28){ const gate=i=>{ const s=d.site[i]; return s>=.65?INK:s>=.3?'#9a9a9a':G1; };
+      const built=t>=24.6; cells(c,i=>{ if(!built) return gate(i); const s=d.site[i]; const g=s>=.65?Math.round(28+(1-(s-.65)/.35)*90):s>=.3?154:236; return `rgb(${g},${g},${g})`; }, seg(t,18,18.8));
+      if(c==='edm') text('allowed or case by case · site-specific · rezoning needed',b.x,b.y+b.h+30,'400 18px Lato',G3,seg(t,18.5,19.3)); continue; }
+    if(t<43){ cells(c,i=>ramp(EX.heat,d.heat[i]),seg(t,28,29)); nets(c,seg(t,30,31.5)); if(c==='van') netLegend(seg(t,31,32)); continue; }
+    if(t<55){ const k=t<46?'energy':t<49?'water':t<52?'materials':'people'; cells(c,i=>ramp(EX[k],d[k][i])); continue; }
+    if(t<65){ cells(c,i=>grey(d.overlap_zoned[i]/0.5),seg(t,55,56)); continue; }
+    // land check, then the shortlist
+    cells(c,i=>grey(d.overlap_zoned[i]/0.5),1-.6*seg(t,65.5,66.5));
+    peaks(c,t,66.6); shortlist(c,t,68.4); siteMark(c,seg(t,71,71.6),true);
+  }
+  text('Source: Beyond Data site maps, method v4 (26 Oct 2026). City open data, NRCan, Statistics Canada, utility and by-law sources as in the booklet.',110,1050,'400 14px Lato',G2);
+};
+window.DUR=75; R(0);
+</script></body></html>

@@ -1,0 +1,86 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Sources</title><style>
+@font-face{font-family:Plex;font-weight:400;src:url(fonts/lato-latin-400-normal.woff2)}@font-face{font-family:Plex;font-weight:500;src:url(fonts/lato-latin-700-normal.woff2)}
+html,body{margin:0;background:#ffffff;overflow:hidden;width:1920px;height:1080px;font-family:Plex,sans-serif}
+#table{position:absolute;inset:0;transform-origin:960px 500px}
+.pg{position:absolute;left:0;top:0;background:#fff;transform-origin:50% 50%;opacity:0}
+.pg img{display:block;width:100%;height:100%}
+#dim{position:absolute;inset:0;background:#ffffff;opacity:0}
+#band{position:absolute;left:0;right:0;bottom:0;height:300px;background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.94) 50%)}
+.cap{position:absolute;left:120px;top:905px;font:500 80px/1 Plex;color:#1c1c1e;letter-spacing:-.01em;opacity:0;white-space:nowrap}
+.cap b{font-weight:500;color:#d4202b}
+#chips{position:absolute;left:120px;right:120px;top:380px;display:flex;flex-wrap:wrap;gap:18px}
+.chip{font:500 34px/1 Plex;color:#1c1c1e;border:1.5px solid #c9c9c9;border-radius:4px;padding:16px 22px;opacity:0;background:#f3f3f3}
+.chip.claim{border-color:#d4202b;color:#d4202b}
+#sw{position:absolute;left:50%;top:70px;transform:translateX(-50%);display:flex;background:#f3f3f3;border:1.5px solid #c9c9c9;border-radius:6px;padding:5px;gap:4px;opacity:0;box-shadow:0 10px 30px rgba(0,0,0,.12)}
+#sw div{font:500 30px/1 Plex;color:#4a4a4a;padding:16px 30px;border-radius:4px}
+#sw div.on{background:#c9c9c9;color:#1c1c1e}
+#lv,.lv{position:absolute;left:1010px;top:190px;width:790px;padding:30px 36px;box-sizing:border-box;background:rgba(255,255,255,.94);border:1.5px solid #d6d6d6;border-radius:6px;opacity:0;font-family:Plex;color:#1c1c1e}
+.lv .lh{font:500 46px/1 Plex}.lv .ls{font:400 24px Plex;color:#4a4a4a;margin:10px 0 18px}
+.lv ul{margin:0;padding:0;list-style:none}.lv li{font:400 29px/1.62 Plex;opacity:0;padding-left:30px;position:relative}
+.lv li::before{content:'';position:absolute;left:2px;top:19px;width:10px;height:10px;border:2px solid #d4202b;transform:rotate(45deg)}
+#tag{position:absolute;left:120px;top:72px;font:500 24px Plex;color:#4a4a4a}
+</style></head><body>
+<div id="table"></div><div id="dim"></div><div id="band" style="opacity:0"></div>
+<div id="chips"></div><div id="sw"><div>Everyday</div><div>Civic</div><div>Technical</div></div>
+<div class="cap" id="cN"></div>
+<div class="cap" id="c1">704 sources, <b>and growing</b></div>
+<div class="cap" id="c2">Labelled by kind</div>
+<div class="cap" id="c3">Everyday: 45 parts, 186 sources</div>
+<div class="cap" id="c4">Civic: 125 parts, 469 sources</div>
+<div class="cap" id="c5">Technical: 195 parts, 595 sources</div>
+<div class="cap" id="c6" style="top:860px">Tailored to you<div style="font:400 40px/1.2 Plex;color:#4a4a4a;margin-top:18px">the information and analysis that affect you</div></div>
+<div class="lv" id="l0"><div class="lh">Everyday</div><div class="ls">for residents and neighbours</div><ul><li>Noise at your home</li><li>Light at your window</li><li>Shadow</li><li>Generator emissions and testing</li><li>Homes heated</li><li>Effect on your power bill</li><li>Backup power in a blackout</li><li>Refuge after an earthquake</li><li>Jobs created</li></ul></div>
+<div class="lv" id="l1"><div class="lh">Civic</div><div class="ls">for councillors, community groups, receivers and planners</div><ul><li>Who receives the heat, and who pays which part</li><li>The price window</li><li>Grid headroom and connection time</li><li>Water licences and restrictions</li><li>What a rezoning takes</li><li>Property tax to the city</li><li>What happens after the data centre</li></ul></div>
+<div class="lv" id="l2"><div class="lh">Technical</div><div class="ls">for engineers, architects and by-law professionals</div><ul><li>Every formula, coefficient and source</li><li>IT load and heat rejected</li><li>Heat-pump lift</li><li>The party ledger</li><li>All 195 parts</li></ul></div>
+
+<script>
+const MORE=[["q001-01.jpg", 325, 420], ["q002-01.jpg", 325, 420], ["q003-01.jpg", 325, 420], ["q004-01.jpg", 325, 420], ["q005-01.jpg", 325, 420], ["q006-01.jpg", 325, 420], ["q007-01.jpg", 325, 420], ["q008-01.jpg", 325, 420], ["q009-01.jpg", 325, 420], ["q010-01.jpg", 325, 420], ["q011-01.jpg", 325, 420], ["q012-01.jpg", 325, 420], ["q013-01.jpg", 325, 420], ["q014-01.jpg", 325, 420], ["q015-01.jpg", 325, 420], ["q016-01.jpg", 325, 420], ["q017-01.jpg", 325, 420], ["q018-01.jpg", 297, 420], ["q019-01.jpg", 297, 420], ["q020-01.jpg", 325, 420], ["q021-01.jpg", 325, 420], ["q022-01.jpg", 325, 420], ["q023-01.jpg", 325, 420], ["q024-01.jpg", 325, 420], ["q025-01.jpg", 325, 420], ["q026-01.jpg", 325, 420], ["q027-01.jpg", 325, 420], ["q028-01.jpg", 325, 420], ["q029-01.jpg", 325, 420], ["q030-01.jpg", 297, 420], ["q031-01.jpg", 325, 420], ["q032-01.jpg", 325, 420], ["q033-01.jpg", 325, 420], ["q034-01.jpg", 325, 420], ["q035-01.jpg", 297, 420], ["q036-01.jpg", 325, 420], ["q037-01.jpg", 325, 420], ["q038-01.jpg", 420, 325], ["q039-01.jpg", 420, 325], ["q040-01.jpg", 325, 420], ["q041-01.jpg", 420, 325], ["q042-01.jpg", 325, 420], ["q043-01.jpg", 325, 420], ["q044-01.jpg", 325, 420], ["q045-01.jpg", 325, 420], ["q046-01.jpg", 325, 420], ["q047-01.jpg", 325, 420], ["q048-01.jpg", 325, 420], ["q049-01.jpg", 327, 420], ["q050-01.jpg", 325, 420], ["q051-01.jpg", 325, 420], ["q052-01.jpg", 325, 420], ["q053-01.jpg", 325, 420], ["q054-01.jpg", 325, 420], ["q055-01.jpg", 297, 420], ["q056-01.jpg", 325, 420], ["q057-01.jpg", 329, 420], ["q058-01.jpg", 325, 420], ["q059-01.jpg", 325, 420], ["q060-01.jpg", 325, 420], ["q061-01.jpg", 325, 420], ["q062-01.jpg", 325, 420], ["q063-01.jpg", 325, 420], ["q064-01.jpg", 297, 420], ["q065-01.jpg", 297, 420], ["q066-01.jpg", 325, 420], ["q067-01.jpg", 420, 325], ["q068-01.jpg", 325, 420], ["q069-01.jpg", 325, 420], ["q070-01.jpg", 325, 420], ["q071-01.jpg", 420, 325], ["q072-01.jpg", 420, 272], ["q073-01.jpg", 325, 420], ["q074-01.jpg", 325, 420], ["q075-01.jpg", 325, 420], ["q076-01.jpg", 325, 420], ["q077-01.jpg", 325, 420], ["q078-01.jpg", 325, 420], ["q079-01.jpg", 325, 420], ["q080-01.jpg", 325, 420], ["q081-01.jpg", 325, 420], ["q082-01.jpg", 325, 420], ["q083-01.jpg", 325, 420], ["q084-01.jpg", 325, 420], ["q085-01.jpg", 325, 420], ["q086-01.jpg", 325, 420], ["q087-01.jpg", 325, 420], ["q088-01.jpg", 325, 420], ["q089-01.jpg", 325, 420], ["q090-01.jpg", 325, 420], ["q091-01.jpg", 325, 420], ["q092-01.jpg", 325, 420], ["q093-01.jpg", 325, 420], ["q094-01.jpg", 325, 420], ["q095-01.jpg", 325, 420], ["q096-01.jpg", 325, 420], ["q097-01.jpg", 325, 420], ["q098-01.jpg", 297, 420], ["q099-01.jpg", 325, 420], ["q100-01.jpg", 325, 420], ["q101-01.jpg", 325, 420], ["q102-01.jpg", 325, 420], ["q103-01.jpg", 325, 420], ["q104-01.jpg", 325, 420], ["q105-01.jpg", 325, 420], ["q106-01.jpg", 325, 420], ["q107-01.jpg", 325, 420], ["q108-01.jpg", 325, 420], ["q109-01.jpg", 420, 325], ["q110-01.jpg", 325, 420], ["q111-01.jpg", 325, 420], ["q112-01.jpg", 325, 420], ["q113-01.jpg", 325, 420], ["q114-01.jpg", 325, 420], ["q115-01.jpg", 325, 420], ["q116-01.jpg", 325, 420], ["q117-01.jpg", 325, 420], ["q118-01.jpg", 325, 420], ["q119-01.jpg", 325, 420], ["q120-01.jpg", 325, 420], ["q121-01.jpg", 325, 420], ["q122-01.jpg", 420, 315], ["q123-01.jpg", 325, 420], ["q124-01.jpg", 255, 420], ["q125-01.jpg", 325, 420], ["q126-01.jpg", 325, 420], ["q127-01.jpg", 323, 420], ["q128-01.jpg", 325, 420], ["q129-01.jpg", 325, 420], ["q130-01.jpg", 325, 420], ["q131-01.jpg", 325, 420], ["q132-01.jpg", 325, 420], ["q133-01.jpg", 297, 420], ["q134-01.jpg", 325, 420], ["q135-01.jpg", 325, 420], ["q136-01.jpg", 325, 420], ["q137-01.jpg", 325, 420], ["q138-01.jpg", 325, 420], ["q139-01.jpg", 325, 420], ["q140-01.jpg", 420, 237], ["q141-01.jpg", 325, 420], ["q142-01.jpg", 325, 420], ["q143-01.jpg", 325, 420], ["q144-01.jpg", 325, 420], ["q145-01.jpg", 298, 420], ["q146-01.jpg", 325, 420], ["q147-01.jpg", 325, 420], ["q148-01.jpg", 325, 420], ["q149-01.jpg", 325, 420], ["q150-01.jpg", 325, 420], ["q151-01.jpg", 325, 420], ["q152-01.jpg", 325, 420], ["q153-01.jpg", 298, 420], ["q154-01.jpg", 325, 420], ["q155-01.jpg", 325, 420], ["q156-01.jpg", 325, 420], ["q157-01.jpg", 325, 420], ["q158-01.jpg", 325, 420], ["q159-01.jpg", 325, 420], ["q160-01.jpg", 325, 420], ["q161-01.jpg", 325, 420], ["q162-01.jpg", 325, 420], ["q163-01.jpg", 325, 420], ["q164-01.jpg", 325, 420], ["q165-01.jpg", 325, 420], ["q166-01.jpg", 325, 420], ["q167-01.jpg", 325, 420], ["q168-01.jpg", 325, 420], ["q169-01.jpg", 325, 420], ["q170-01.jpg", 325, 420], ["q171-01.jpg", 325, 420], ["q172-01.jpg", 325, 420], ["q173-01.jpg", 325, 420], ["q174-01.jpg", 325, 420], ["q175-01.jpg", 325, 420], ["q176-01.jpg", 325, 420], ["q177-01.jpg", 325, 420]];
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;}, out=x=>1-Math.pow(1-cl(x),3);
+const seg=(t,a,b)=>ease((t-a)/(b-a)), win=(t,a,b,f=.45)=>Math.min(seg(t,a,a+f),1-seg(t,b-f,b));
+let sd=21; const rnd=()=>(sd=(sd*16807)%2147483647)/2147483647;
+const tb=$('table'), P=[];
+const add=(src,w,h,x,y,r,t0)=>{ const d=document.createElement('div'); d.className='pg'; d.style.width=w+'px'; d.style.height=h+'px'; d.innerHTML=`<img src="${src}">`; tb.appendChild(d); P.push({d,x:x-w/2,y:y-h/2,r,t0,u:rnd()}); };
+// 1. key first pages, slowly enough to read what they are
+const SPOTS=[[760,300],[1180,260],[520,520],[980,560],[1380,560],[300,250],[1600,300],[760,760],[1200,800],[420,820],[1620,760],[1000,180],[180,560],[1450,120]];
+let t=.4, gap=.7;
+SPOTS.forEach((s,i)=>{ const wide=i===5; add('pages/p'+String(i+1).padStart(2,'0')+'.png',wide?560:330,wide?315:427,s[0],s[1],(rnd()-.5)*10,t); t+=gap; gap*=.78; });
+// 2. pages from the rest of the collection, faster and faster until the table is full
+let g=.07; const N=MORE.length;
+MORE.forEach(([f,w,h],k)=>{ const W=210+rnd()*60, H=W*h/w; add('more/'+f,W,H,-100+rnd()*2120,-120+rnd()*1180,(rnd()-.5)*26,t); t+=g; g=Math.max(.007,g*.975); });
+const FULL=t, a=FULL+.3;
+// 3. and growing: a slow trickle keeps landing
+for(let k=0;k<5;k++){ const [f,w,h]=MORE[(k*53)%N]; add('more/'+f,250,250*h/w,300+rnd()*1300,200+rnd()*600,(rnd()-.5)*20,a+.4+k*.45); }
+const NP=14+N;
+const KINDS=[['Peer-reviewed research',''],['Federal and provincial law',''],['City by-laws and plans',''],['Utilities and regulators',''],['Built cases',''],['Tested and simulated models',''],['Operator claims, labelled as claims','claim']];
+const CH=KINDS.map(([n,c])=>{const e=document.createElement('div'); e.className='chip '+c; e.textContent=n; $('chips').appendChild(e); return e;});
+const F=[186/704,469/704,595/704], TS=[a+100,a+101,a+102], GS=a+5.4;
+// the pile sorts itself into a grid, one thumbnail per page, so what each level leaves out can be seen
+const COLS=38, slots=[...P.keys()].sort((i,j)=>P[i].u-P[j].u+ (rnd()-.5)*2); slots.forEach((pi,k)=>{ const p=P[pi], c=k%COLS, r=Math.floor(k/COLS);
+  p.gx=124+22+c*44; p.gy=176+26+r*52; p.gc=c; p.w=parseFloat(p.d.style.width); p.h=parseFloat(p.d.style.height); p.gs=32/p.w; });
+function frac(T){ let f=1; TS.forEach((ts,i)=>{ const prev=i?F[i-1]:1; f=T<ts?f:prev+(F[i]-prev)*seg(T,ts,ts+.9); }); return f; }
+function R(T){
+  tb.style.transform=`scale(${1+.07*seg(T,0,a+6)*(1-seg(T,GS,GS+1.2))})`;
+  const fr=frac(T); let landed=0;
+  for(const p of P){ const v=(T-p.t0)/.4; if(v<0){p.d.style.opacity=0;continue;} if(p.t0<FULL) landed++; const s=1+.35*(1-out(v));
+    const keep=T<TS[0]?1:.1+.9*cl((fr-p.u)*30);
+    const q=seg(T,GS+p.gc*.025,GS+p.gc*.025+.9), X=p.x+(p.gx-p.w/2-p.x)*q, Y=p.y+(p.gy-p.h/2-p.y)*q, rot=p.r*(1-q), sc=s+(p.gs-s)*q;
+    p.d.style.opacity=cl(v*2.5)*keep; p.d.style.transform=`translate(${X}px,${Y}px) rotate(${rot}deg) scale(${sc})`;
+    const k=(1-q)*(1-out(v)); p.d.style.boxShadow=(q>.98||v>1.05)?'0 1px 0 rgba(0,0,0,.1)':`0 ${6+26*k}px ${16+40*k}px rgba(0,0,0,${(.45+.2*k)*(1-q)})`; }
+  // a counter climbs with the pile, then the totals by level
+  $('cN').textContent=Math.round(704*cl(landed/NP))+' sources'; $('cN').style.opacity=win(T,1.2,a+.3,.3);
+  $('band').style.opacity=seg(T,1,1.6);
+  $('c1').style.opacity=win(T,a+.3,a+3.0);
+  $('dim').style.opacity=.6*win(T,a+3.0,a+6.2,.6);
+  $('c2').style.opacity=win(T,a+3.2,a+6.0);
+  CH.forEach((e,i)=>{ const b=a+3.3+i*.25; e.style.opacity=win(T,b,a+6.0); e.style.transform=`translateY(${(1-seg(T,b,b+.4))*14}px)`; });
+  $('sw').style.opacity=0;
+  [...$('sw').children].forEach((d,i)=>d.className=(T>=TS[i]&&(i===2||T<TS[i+1]))?'on':'');
+  ['c3','c4','c5'].forEach((c,i)=>$(c).style.opacity=win(T,TS[i]+.3,i<2?TS[i+1]:TS[2]+4.0));
+  $('c6').style.opacity=0;
+  ['l0','l1','l2'].forEach((c,i)=>{ const e=$(c), b=TS[i]+.4, end=i<2?TS[i+1]:TS[2]+4.0; e.style.opacity=win(T,b,end,.4); e.style.transform=`translateX(${(1-seg(T,b,b+.4))*24}px)`;
+    [...e.querySelectorAll('li')].forEach((li,k)=>li.style.opacity=seg(T,b+.3+k*.22,b+.6+k*.22)); }); $('band').style.opacity=seg(T,1,1.6);
+  tb.style.opacity=1-seg(T,a+6.0,a+6.6);
+}
+window.DUR=a+6.7; window.R=R; R(0);
+</script></body></html>
