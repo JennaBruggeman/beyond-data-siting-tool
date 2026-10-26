@@ -71,3 +71,11 @@ Run with `METHOD=2` (the default; `METHOD=1` reproduces the 21 Oct maps, archive
   - Both factors work at cell level, not lot level.
   - Lot size isn't checked. 11440 Kingsway (1,828 m²) scores high, but it's too small for a data centre.
   - The Blatchford outline is still approximate at the Kingsway / Airport Rd southeast corner.
+
+## Method v4 (26 Oct 2026): zoning as a gate
+`METHOD=4` is the default; `METHOD=3` reproduces v3.
+- **Why:** in v1–v3 the zoning score multiplied the exchanges. A vacant lot zoned for heavy industry (IH), where a data centre is allowed outright, could outrank sites with far better exchanges: 12503 66 St NW led Edmonton in v3 with a heat score of 0.14. The screen asks where a data centre can be a good neighbour. Zoning decides whether it can go there, not how good the exchanges are.
+- **Rule:**
+  - Allowed and case-by-case: 1.0. Site-specific: 0.5. Rezoning needed: 0.1.
+  - Still multiplied by the "already built" factor (v3).
+- **Effect:** IH, IM, BE, I-2, I-3 and FC-2 now enter on equal terms, and the ranking is set by the exchanges.

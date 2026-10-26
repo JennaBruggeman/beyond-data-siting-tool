@@ -27,6 +27,7 @@ csv.field_size_limit(10**9)
 
 # ---------- factors (see factors.csv for sources) ----------
 SITE = {'yes': 1.0, 'case': 0.7, 'site': 0.35, 'no': 0.1}          # assumption: how far each zoning status is from "allowed"
+SITE_GATE = {'yes': 1.0, 'case': 1.0, 'site': 0.5, 'no': 0.1}   # method v4 (J.B., 26 Oct): zoning decides whether a data centre can go here, not how good the exchanges are
 FLOOD = 0.6                                                         # assumption: site score x 0.6 in Vancouver's designated / Still Creek floodplain
 REACH = {'pool': 1000, 'housing': 1200, 'greenhouse': 1500}; REACH_DEF = 1200   # tool/engine.js:33 (RVO 2018)
 HOME_MWH = {'van': 16.81, 'edm': 33.14}                             # tool/engine.js:29 (NRCan CEUD)
@@ -43,7 +44,7 @@ ART_R, IND_R, SCH_R = 500, 1000, 2000                               # assumption
 PEOPLE_R, NOISE_R, NOISE_W = 800, 150, 0.6                          # assumptions
 W_EN = (0.6, 0.4); W_MAT = (0.4, 0.4, 0.2)                          # assumptions
 EXCH = ['heat', 'energy', 'water', 'materials', 'people']
-METHOD = int(os.environ.get('METHOD', '3'))   # 1 = GP1 maps (21 Oct); 2 = heat scored by whether it pays (25 Oct); 3 = v2 + what's already built + public uses the zone allows (25 Oct)
+METHOD = int(os.environ.get('METHOD', '4'))   # 1 = GP1 maps (21 Oct); 2 = heat scored by whether it pays (25 Oct); 3 = v2 + what's already built + public uses the zone allows (25 Oct)
 RADIUS = {'heat': 1200, 'energy': 2000, 'water': {'van': 500, 'edm': 5000}, 'materials': 1000, 'people': 800}
 
 def proj(c):
@@ -121,7 +122,7 @@ def run(city):
         bestu[key] = max(bestu.get(key, (-1, 0)), (rank[k], u))
     keys = sorted(best); XY = np.array([((i + .5) * C, (j + .5) * C) for i, j in keys]); N = len(keys)
     log['cells'] = N; log['parcels'] = len(pts)
-    site = np.array([SITE[inv[best[k]]] for k in keys])
+    site = np.array([(SITE_GATE if METHOD >= 4 else SITE)[inv[best[k]]] for k in keys])
     uses = np.array([bestu[k][1] for k in keys]); built = np.zeros(N); ready = np.ones(N)
     if METHOD >= 3:
         bc = json.load(open(os.path.join(H, 'built_cover_%s.json' % city)))
