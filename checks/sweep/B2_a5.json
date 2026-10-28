@@ -1,0 +1,91 @@
+[
+ {"id":"bcucG6426","reachable":true,"publisher":"British Columbia Utilities Commission","title":"British Columbia Hydro and Power Authority, Net Metering Service Rates - Order G-64-26 and Decision","edition":"Order G-64-26 with Decision","date":"24 March 2026","url":"https://www.ordersdecisions.bcuc.com/bcuc/orders/en/523115/1/document.do",
+  "values":[
+   {"blank_context":"Order G-___-___","value":"G-64-26","quote":"Order G-64-26","where":"Order cover"},
+   {"blank_context":"Decision (___ Mar ___)","value":"24 March 2026","quote":"DATED at the City of Vancouver, in the Province of British Columbia, this 24th day of March 2026.","where":"Order, signature line"},
+   {"blank_context":"RS ___ net metering closed","value":"1289","quote":"The Net Metering Service Rate (RS 1289) is closed to new customers effective July 1, 2026.","where":"Order, para. 2, p. 2 of 3"},
+   {"blank_context":"closed ___ Jul ___","value":"1 July 2026","quote":"closed to new customers effective July 1, 2026","where":"Order, para. 2, p. 2 of 3"},
+   {"blank_context":"RS ___ net injection limit","value":"2289 (Self-Generation Service Rate)","quote":"Self-Generation Service Rate under Rate Schedule 2289 ... a net injection limit of 100 kilowatts per phase after serving the customer's load","where":"Executive Summary (fetch tool reported p. i in one pass, p. ii in another; quote assembled from two passages)"},
+   {"blank_context":"___ kW per phase","value":"100","quote":"a net injection limit of 100 kilowatts per phase after serving the customer's load","where":"Executive Summary"},
+   {"blank_context":"___ ¢/kWh for net generation","value":"10","quote":"an Energy Price of 10 cents per kWh for Net Generation","where":"Decision s. 2.3, p. 14 of 35; Exec. Summary says it applies to RS 2289 and RS 2290"}
+  ],
+  "unsupported_wording":"none found",
+  "note":"Last ~7,400 characters of the document not read. Exact page of the Executive Summary quotes is uncertain (i vs ii)."},
+
+ {"id":"bcDeclarationAct","reachable":true,"publisher":"BC Ministry of Community, Sport and Cultural Development, Local Government Division","title":"Guide to First Nations Engagement on Local Government Statutory Approvals (Interim)","edition":"Interim; Revised December 2014","date":"Revised: December 2014","url":"https://www2.gov.bc.ca/assets/gov/british-columbians-our-governments/local-governments/governance-powers/first_nations_engagement_guide.pdf",
+  "values":[
+   {"blank_context":"Declaration on the Rights of Indigenous Peoples Act (___)","value":"not stated","quote":"","where":"Guide does not mention the Declaration Act"},
+   {"blank_context":"s. ___","value":"not stated","quote":"","where":"Guide does not mention the Declaration Act"},
+   {"blank_context":"Interpretation Act amendment ___ Nov ___","value":"not stated","quote":"","where":"Not in guide"},
+   {"blank_context":"___ provincial guide","value":"2014","quote":"Revised: December 2014","where":"Cover"},
+   {"blank_context":"no constitutional duty to consult","value":"(no number) supported","quote":"Local governments do not have a constitutional obligation to consult on the potential impacts","where":"p. 3"},
+   {"blank_context":"may have a statutory one","value":"(no number) supported","quote":"local governments have a statutory obligation to consider whether consultation with First Nations is required","where":"p. 3 (cites Local Government Act s. 879 and s. 855)"},
+   {"blank_context":"'decisions that affect private land'","value":"(no number) supported","quote":"This includes Crown land decisions and decisions that affect private land.","where":"p. 9"}
+  ],
+  "unsupported_wording":"Declaration Act year/section, Interpretation Act amendment, and 'the Province's plan does not set local-government duties' are not in this document (it predates the Act). Guide says local governments have a statutory obligation 'to consider whether consultation ... is required', not a statutory duty to consult outright.",
+  "note":"First fetch refused (URL not in provenance); found via official BC 'Local government and First Nations relations' page, which links it, then opened. That page says the Declaration Act requires ministries to align statutes; it does not state the Interpretation Act date. Those parts need a separate primary source (the Act itself)."},
+
+ {"id":"bcAssessClasses","reachable":true,"publisher":"Province of British Columbia","title":"Local government property assessment and classes","edition":"web page","date":"Last updated on December 1, 2022","url":"https://www2.gov.bc.ca/gov/content/governments/local-governments/finance/requisition-taxation/local-government-taxation/property-assessment-classes",
+  "values":[
+   {"blank_context":"last amended Sep ___","value":"not stated","quote":"Last updated on December 1, 2022","where":"Page footer; no regulation amendment date given"},
+   {"blank_context":"Class ___ Business and Other","value":"6","quote":"Business and Other ... All land and improvements not included in any of the other classes.","where":"Class list, Class 6"}
+  ],
+  "unsupported_wording":"Page names the Assessment Act, not the Prescribed Classes of Property Regulation, and gives no 'last amended Sep' date. 'Residual' is not used, though the wording means that.",
+  "note":"Reached after finding the page via search."},
+
+ {"id":"bahnhofPionen","reachable":false,"publisher":"Bahnhof AB (operator)","title":"Pionen PDF (not opened)","edition":"","date":"","url":"https://www.bahnhof.se/filestorage/userfiles/file/Pionen-PDF.pdf",
+  "values":[],
+  "unsupported_wording":"Could not check against the PDF. OPERATOR CLAIM on bahnhof.se/foretag/colocation/our-data-centers/: 'A former Cold War nuclear bunker, built 30 metres into the rock beneath Vita Bergen.' That page does not mention generators or that only the entrance is visible.",
+  "note":"Unreachable: WebFetch refused the PDF URL (not in provenance). Searched site:bahnhof.se; the official data-centres page has no link to the PDF. No mirrors used."},
+
+ {"id":"aucGuidance","reachable":true,"publisher":"Alberta Utilities Commission","title":"Guidance for proponents","edition":"web page (no version number)","date":"page metadata: last modified 18 September 2026","url":"https://www.auc.ab.ca/guidance-for-proponents/",
+  "values":[
+   {"blank_context":"thermal plants < ___ MW","value":"10","quote":"thermal power plants less than 10 megawatts;","where":"Category B list"}
+  ],
+  "unsupported_wording":"Category A: supported ('the Government of Alberta or Canada has determined that consultation is required for a related approval; and/or ... a First Nation reserve or Métis Settlement is within the applicable consultation radii'). B: supported ('projects on private land with little or no off-site impacts'). C: supported ('reviewed by the AUC on a case-by-case basis'). The sentence 'The ACO has no direct role in the AUC's regulatory process' was NOT found on this page or on the Rule 007 HTML page.",
+  "note":"The listed link (Rule007.pdf) was first refused (provenance), then fetched but returned only binary, so it could not be read. Rule 007 HTML page: 'Rule 007 (effective November 6, 2025)'; it has no A/B/C categories. The checked values come from the Guidance page, not the PDF."},
+
+ {"id":"whiteDCeel","reachable":false,"publisher":"Hokkaido Bureau of Economy, Trade and Industry (host); White Data Center (presenter, OPERATOR CLAIM)","title":"data01.pdf (not opened)","edition":"","date":"","url":"https://www.hkd.meti.go.jp/hokpp/20251015/1111/data01.pdf",
+  "values":[],
+  "unsupported_wording":"Not checked.",
+  "note":"Unreachable: WebFetch refused (URL not in provenance). Searches in Japanese and for the path found no official page linking it. The hkd.meti.go.jp Nov 2025 archive page had no matching entry. No news or mirrors used."},
+
+ {"id":"vanOnceThrough","reachable":false,"publisher":"City of Vancouver","title":"Consolidated by-law 11777 (not opened)","edition":"","date":"","url":"https://bylaws.vancouver.ca/consolidated/11777.pdf",
+  "values":[
+   {"blank_context":"Water Works By-law ___","value":"4848 (from a different consolidation, see note)","quote":"Water Works By-law ... No. 4848","where":"bylaws.vancouver.ca/4848c.PDF, title page"},
+   {"blank_context":"s. ___–___","value":"3.10–3.11 in the 4848c consolidation","quote":"once through cooling equipment, except that this prohibition does not apply to emergency once through cooling equipment","where":"4848c s. 3.10(a)"},
+   {"blank_context":"(By-law ___)","value":"not stated","quote":"","where":"4848c lists no amending by-law for these sections"},
+   {"blank_context":"prohibited from ___ Jan ___","value":"1 January 2020 (4848c)","quote":"must be disconnected from the City's water system by January 1, 2020","where":"4848c s. 3.11 (exceptions allow extension to January 1, 2021 for some buildings)"}
+  ],
+  "unsupported_wording":"The 4848c consolidation (to April 27, 2021) has no cooling-tower operating permit or Legionella monthly report requirement; that must be in another by-law (possibly 11777). Not verified.",
+  "note":"Target 11777.pdf unreachable: WebFetch refused (provenance); searched 'bylaws.vancouver.ca consolidated 11777', which did not return it. Values above come from bylaws.vancouver.ca/4848c.PDF (consolidated to 27 Apr 2021, incl. By-law 12961). It is a different file from the cited one and may be outdated."},
+
+ {"id":"vanNationsNamed","reachable":true,"publisher":"Tsleil-Waututh Nation","title":"Treaty, Lands & Resources - Tsleil-Waututh Nation","edition":"web page","date":"not stated","url":"https://twnation.ca/our-departments/treaty-lands-resources/",
+  "values":[
+   {"blank_context":"Sḵwx̱wú___mesh","value":"not stated (character, not a number; Squamish spelling not on this page)","quote":"","where":""},
+   {"blank_context":"UNDRIP Strategy pp. ___–___","value":"not stated","quote":"","where":"City of Vancouver UNDRIP Strategy not opened; not at this link"}
+  ],
+  "unsupported_wording":"This page supports only the Tsleil-Waututh name: 'səlilwətaɬ (Tsleil-Waututh Nation)' (also 'səl̓ilwətaɁɬ' elsewhere on the page). It describes referrals ('We coordinate protocols for all referrals inside our territory'; about 400–500 a year) but gives no submission process. The City's naming of all three Nations and the unceded-territory wording were not checked.",
+  "note":"Musqueam and Squamish referral pages and the City UNDRIP Strategy were not opened."},
+
+ {"id":"vanFees2026","reachable":false,"publisher":"City of Vancouver","title":"vancouver-development-building-permit-fees.pdf (not opened)","edition":"","date":"","url":"https://vancouver.ca/files/cov/vancouver-development-building-permit-fees.pdf",
+  "values":[],
+  "unsupported_wording":"Not checked.",
+  "note":"Unreachable: WebFetch refused (provenance). Searches for the exact filename and 2026 Vancouver BC fees returned no official copy (results were Vancouver WA and other cities). Found By-law 13207 (2022 fees, amending Zoning and Development Fee By-law 5585). It has a similar structure (Schedule 2 s. 3 rezoning fees for new CD-1, e.g. $154,100.00 for sites under 2,000 m² downtown; Schedule 1 s. 3(a) $953.00 per 100 m² up to 500 m², max $46,800.00), but those are 2022 figures and are NOT the 2026 values."},
+
+ {"id":"vanDeepGeo","reachable":true,"publisher":"Geological Survey of Canada (Natural Resources Canada)","title":"Geothermal Energy Resource Potential of Canada","edition":"Open File 6914 (revised)","date":"2012","url":"https://download-telecharger.services.geo.ca/pub/nrcan_rncan/publications/STPublications_PublicationsST/291/291488/gid_291488.pdf",
+  "values":[
+   {"blank_context":"about ___ mW/m² (west of Coast Plutonic Complex)","value":"not stated in readable text","quote":"","where":"Text extraction ended around p. 41; Chapter 5 (heat flow) not readable"},
+   {"blank_context":"Lewis, Judge & Souther ___","value":"not stated","quote":"","where":"Only 'Lewis et al (1984)', 'Lewis and Bentkowski (1988)', 'Lewis et al. (1992)', 'Souther (1977)' cited, pp. 24, 33"},
+   {"blank_context":"GSC OF ___","value":"6914","quote":"Geological Survey of Canada, Open File 6914","where":"Title page/citation"},
+   {"blank_context":"Grasby et al. ___","value":"2012","quote":"Grasby, S.E., ... 2012","where":"Citation"},
+   {"blank_context":"southern BC volcanic belts (Garibaldi) as EGS targets","value":"(no number) partly supported","quote":"The most promising targets for EGS are in the Canadian Cordillera, particularly in southern British Columbia","where":"p. XIII; Garibaldi named for heat flow: 'The highest heat flow values measured in Canada occur in the Garibaldi volcanic belt (>200 mW/m2)' p. XI"},
+   {"blank_context":"Geoscience BC Report ___-___","value":"not stated","quote":"","where":"Different document; not opened"},
+   {"blank_context":"___+ km away","value":"not stated","quote":"","where":""},
+   {"blank_context":"Meager Creek ___–___ °C","value":"only an upper value: 290 °C","quote":"A successful demonstration project at Meager Mountain in British Columbia discovered resources up to 290 °C","where":"p. XI"},
+   {"blank_context":"Edmonton ___ °C at ___ km","value":"not stated","quote":"","where":"Edmonton appears only in a list of potential targets, p. XIII"},
+   {"blank_context":"Majorowicz & Grasby ___ Table A1","value":"not stated","quote":"","where":"Different document; not opened"}
+  ],
+  "unsupported_wording":"OF 6914 does not name Garibaldi as an EGS target in the text read; it names southern BC/Cordillera. The Lewis-Judge-Souther, Geoscience BC and Majorowicz & Grasby figures cite other documents that were not opened.",
+  "note":"Reached after search. Extracted text (~108k chars) covers only the front matter to about p. 41 of 322 pages, so later chapters could not be checked."}
+]
