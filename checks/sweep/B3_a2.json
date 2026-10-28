@@ -1,0 +1,131 @@
+[
+ {
+  "id": "bcRLCF012b",
+  "reachable": true,
+  "publisher": "BC Ministry of Energy and Climate Solutions",
+  "title": "Approved Carbon Intensities - Current",
+  "edition": "Revised 2026-04-30 (file name 29apr2026final; issued July 2013)",
+  "date": "2026-04-30",
+  "url": "https://www2.gov.bc.ca/assets/gov/farming-natural-resources-and-industry/electricity-alternative-energy/transportation/renewable-low-carbon-fuels/rlcf012_approved_carbon_intensities_current_29apr2026final.pdf",
+  "values": [
+   {"blank_context": "RLCF-___", "value": "not stated in the PDF (012 appears only in the file name and on the gov.bc.ca bulletin page)", "quote": "Approved Carbon Intensities - Current", "where": "p.1 header and footer"},
+   {"blank_context": "rev. ___ Apr ___", "value": "30 Apr 2026 (file name says 29apr2026)", "quote": "Revised: 2026-04-30", "where": "p.1 header"},
+   {"blank_context": "HDRD valid at ___ Apr ___", "value": "not stated; the list has no validity or expiry column", "quote": "Fuel Code | Fuel | Company | Carbon Intensity (gCO2e/MJ) | Effective Date", "where": "column headings"},
+   {"blank_context": "low ___ (Tidewater Midstream)", "value": "7.58 (lowest Tidewater Midstream HDRD row)", "quote": "C-BCLCF858.0 HDRD Tidewater Midstream and Inffrastructure Ltd. 7.58 December 1, 2025", "where": "HDRD rows"},
+   {"blank_context": "high ___ (Diamond Green Diesel)", "value": "37.76 (highest Diamond Green Diesel HDRD row)", "quote": "BCLCF735.0 HDRD Diamond Green Diesel LLC 37.76 October 27, 2024", "where": "HDRD rows"},
+   {"blank_context": "expired extremes −___ to ___", "value": "not stated; the list marks nothing as expired", "quote": "", "where": "whole document"},
+   {"blank_context": "Imperial Oil HDRD ___ and ___", "value": "list has four Imperial Oil HDRD rows: 11.96, 5.52, 19.46, 15.06", "quote": "C-BCLCF673.0 ... 11.96; C-BCLCF677.0 HDRD Imperial Oil 5.52 November 1, 2024; C-BCLCF790.0 ... 19.46; C-BCLCF792.0 ... 15.06", "where": "HDRD rows"}
+  ],
+  "unsupported_wording": "Tidewater Midstream (7.58) and Diamond Green Diesel (37.76) are not the HDRD extremes in this list. The list also has Parkland Refining (BC) at -7.03 (C-BCLCF588.1), Tidewater Renewables Ltd at 0.83, Montana Renewables at 45.59, and Hawaii Renewables at 61.65 and 131.35 (BCLCF889.0, effective March 3, 2026). The list has no expiry status, so 'valid at' and 'expired extremes' are not supported by it. It has four Imperial Oil HDRD codes, not two. The PDF does not print 'RLCF-012'.",
+  "note": "Supported: the list gives no facility location or feedstock. A 'C-' prefix appears on some codes but is not explained in the rows read. The URL given (..._29apr2026.pdf) was not fetchable from here, so I read the '29apr2026final' file on the same gov.bc.ca path. Values were read through a fetch tool's text extraction; spot-check them against the PDF."
+ },
+ {
+  "id": "ayuso2023",
+  "reachable": true,
+  "publisher": "Elsevier (Aquacultural Engineering)",
+  "title": "Linear modelling of the mass balance and energy demand for a recirculating aquaculture system",
+  "edition": "Vol. 101, article 102330; doi:10.1016/j.aquaeng.2023.102330",
+  "date": "May 2023 (online 17 Mar 2023)",
+  "url": "https://www.sciencedirect.com/science/article/pii/S0144860923000171",
+  "values": [
+   {"blank_context": "Ayuso-Virgili et al. ___", "value": "2023", "quote": "Aquacultural Engineering ... 2023", "where": "article header"},
+   {"blank_context": "Aquacultural Engineering ___", "value": "101", "quote": "Volume 101", "where": "article header"},
+   {"blank_context": "___ (article no.)", "value": "102330", "quote": "102330", "where": "article header"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Authors: Ayuso-Virgili, Jafari, Lande-Sudall, Lümmen. Simulated 15-week Atlantic salmon post-smolt grow-out, MATLAB coupled with Aspen HYSYS. Abstract: 'The specific energy demand of the RAS was calculated at 9.59 kWh/kg for the full grow-out.' Read from the ScienceDirect page, not the uploaded full text; '(J.B. upload)' cannot be checked from here."
+ },
+ {
+  "id": "dellR760",
+  "reachable": true,
+  "publisher": "Dell Technologies (study by Sphera)",
+  "title": "Life Cycle Assessment of Dell Server PowerEdge R760",
+  "edition": "LCA FE 10.9.1.10 and CUP2024.2 database by Sphera; EF 3.1",
+  "date": "September 2025",
+  "url": "https://www.delltechnologies.com/asset/en-us/products/servers/briefs-summaries/poweredge-r760-life-cycle-assessment.pdf",
+  "values": [
+   {"blank_context": "PowerEdge R7___", "value": "60", "quote": "Life Cycle Assessment of Dell Server PowerEdge R760", "where": "title"},
+   {"blank_context": "Sphera ___", "value": "not a year; software 'LCA FE 10.9.1.10', database 'CUP2024.2'; report produced September 2025", "quote": "LCA FE 10.9.1.10 and CUP2024.2 database by Sphera", "where": "Assumptions table, Software & Database row"},
+   {"blank_context": "system weight ___ kg", "value": "not stated", "quote": "These components represent only ~12.5% of the product's weight", "where": "Manufacturing impacts bullets; only percentage shares of weight are given"}
+  ],
+  "unsupported_wording": "System weight in kg is not printed in this LCA. It gives only dimensions and percentage weight shares.",
+  "note": "VENDOR CLAIM (Dell, study by Sphera 'for EPEAT compliance'). Total GWP: 4177.4 kg CO2e (US) and 2896.0 kg CO2e (EU); EoL credit -62.2 kg CO2e. Dimensions: 86.8 x 482 x 772.13 mm."
+ },
+ {
+  "id": "gurreri2023",
+  "reachable": true,
+  "publisher": "AIDIC (Chemical Engineering Transactions)",
+  "title": "Life Cycle Inventory Based on Primary Data of an Industrial Plant for the Cultivation of Chlorella Vulgaris",
+  "edition": "Vol. 105, pp. 229-234; doi:10.3303/CET23105039",
+  "date": "30 November 2023",
+  "url": "http://www.cetjournal.it/cet/23/105/039.pdf (plus article page https://www.cetjournal.it/index.php/cet/article/view/CET23105039)",
+  "values": [
+   {"blank_context": "Gurreri et al. ___", "value": "2023", "quote": "Vol. 105 (2023)", "where": "article page"},
+   {"blank_context": "Chem. Eng. Trans. ___", "value": "105", "quote": "Chemical Engineering Transactions, 105, 229-234", "where": "PDF citation line"},
+   {"blank_context": "___ (pages)", "value": "229-234", "quote": "Chemical Engineering Transactions, 105, 229-234", "where": "PDF citation line"},
+   {"blank_context": "thermoregulation ___ kWh/kgDW", "value": "217", "quote": "dominated by thermoregulation (217 kWh kgDW–1)", "where": "Section 3; also Table 2 and Section 4"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Primary data from one industrial plant in Sicily (1,200 kg dry biomass/yr, 40.4 m3 photobioreactors). Total: 376 kWh kgDW-1 of electricity (Section 4). Pumping/aeration 115; lighting 40."
+ },
+ {
+  "id": "mvBylaw1082",
+  "reachable": true,
+  "publisher": "Greater Vancouver Regional District (Metro Vancouver)",
+  "title": "Greater Vancouver Regional District Air Quality Management Bylaw No. 1082, 2008 (Unofficial Consolidation)",
+  "edition": "Unofficial consolidation",
+  "date": "as of May 29, 2020",
+  "url": "https://metrovancouver.org/boards/Bylaws/MVRD_Bylaw_1082_Consolidated.pdf",
+  "values": [
+   {"blank_context": "Bylaw ___", "value": "1082", "quote": "Air Quality Management Bylaw No. 1082, 2008", "where": "title"},
+   {"blank_context": "s. ___(___) exempts", "value": "7(12)", "quote": "Subject to section 10, nothing in section 5 or 6 prohibits the discharge of an air contaminant where", "where": "s. 7 lead-in, p.5; 7(12) on p.6"},
+   {"blank_context": "under ___ kg/day NOx", "value": "5", "quote": "less than 5 kilograms per day of each of the following: nitrogen oxides (expressed as nitrogen dioxide); and sulphur oxides", "where": "s. 7(12), p.6"},
+   {"blank_context": "s. ___(___) engines", "value": "7(9)", "quote": "the discharge is from steam powered or internal combustion engines in compliance, if applicable, with the Motor Vehicle Act", "where": "s. 7(9), p.5"}
+  ],
+  "unsupported_wording": "none. The 7(12) exemption also needs CO under 100 kg/day and SOx under 5 kg/day, and is subject to s.10.",
+  "note": "The 7(9) wording ties engines to Motor Vehicle Act compliance 'if applicable'. Whether that covers stationary generators is not stated, which fits 'applicability unsettled'. This is an unofficial consolidation."
+ },
+ {
+  "id": "vanBudget2026",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "2026 Budget",
+  "edition": "Approved 2026 budget",
+  "date": "2026 budget year (approved Nov 2025 per City news page; date not checked in PDF)",
+  "url": "https://vancouver.ca/files/cov/2026-budget.pdf",
+  "values": [
+   {"blank_context": "City of Vancouver ___ Budget", "value": "2026", "quote": "2026 BUDGET", "where": "cover"},
+   {"blank_context": "property tax about ___% of operating revenue", "value": "56", "quote": "56% | Property Tax", "where": "p.6 operating revenues chart; p.10 'property taxes fund approximately 56% of the City's Operating Budget'"}
+  ],
+  "unsupported_wording": "'Police the largest spending share' is not supported: p.6 shows '24% | Utilities' above '22% | Police'. Police is the largest non-utility line, and the 'Public Safety 31%' group is the largest group.",
+  "note": "The operating budget is $2,393 million."
+ },
+ {
+  "id": "fluenceStGhislain",
+  "reachable": true,
+  "publisher": "Fluence Energy (with Centrica)",
+  "title": "Fluence and Centrica Work with Data Centre in Belgium to Provide and Optimise its First Zero-Emission Backup Power System",
+  "edition": "Press release",
+  "date": "April 21, 2022",
+  "url": "https://ir.fluenceenergy.com/node/7211/pdf",
+  "values": [
+   {"blank_context": "Fluence ___", "value": "2022", "quote": "April 21, 2022", "where": "release dateline"},
+   {"blank_context": "___ MW", "value": "2.75", "quote": "The 2.75 MW battery-based energy storage system", "where": "release body"},
+   {"blank_context": "___ MWh", "value": "5.5", "quote": "The batteries have a total energy capacity of 5.5 MWh", "where": "release body"}
+  ],
+  "unsupported_wording": "'Replacing diesel backup' overstates it. The release says the battery will 'reduce the number of diesel generators needed to provide backup power'.",
+  "note": "VENDOR CLAIM. Supported: St. Ghislain; Google named; 'participation in the ancillary services market operated by Belgian TSO ELIA'; 'serves as a proof-of-concept for wider use of battery-based energy storage'."
+ },
+ {
+  "id": "horizons",
+  "reachable": false,
+  "publisher": "not stated",
+  "title": "not stated",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "",
+  "values": [],
+  "unsupported_wording": "cannot check; no source link given",
+  "note": "No link. This looks like an internal handoff note citing Greene and Monstadt & Saltzman, so it has no single source to open. Each figure needs its own primary source."
+ }
+]
