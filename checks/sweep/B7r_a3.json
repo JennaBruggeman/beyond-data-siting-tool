@@ -1,0 +1,151 @@
+[
+ {
+  "id": "ashraeLife",
+  "reachable": true,
+  "publisher": "ASHRAE",
+  "title": "ASHRAE Handbook—HVAC Applications, Chapter 37 Owning and Operating Costs",
+  "edition": "I-P; year not printed on the page (URL code A15 suggests 2015, not verified)",
+  "date": "not stated on page",
+  "url": "https://handbook.ashrae.org/Handbooks/A15/IP/A15_CH37/a15_ch37_ip.aspx",
+  "values": [
+   {"blank_context": "Handbook HVAC Applications ___ (year)", "value": "not stated", "quote": "", "where": "page shows no edition year; only cross-refs to 2016 Systems and Equipment and 2017 Fundamentals"},
+   {"blank_context": "ch.___", "value": "37", "quote": "CHAPTER 37. OWNING AND OPERATING COSTS", "where": "chapter title"},
+   {"blank_context": "Table ___ (median service life)", "value": "3 (only chiller and cooling tower); other items are in Table 4", "quote": "Table 3. Median Service Life\" / \"Table 4. Comparison of Service Life Estimates", "where": "Tables 3 and 4"},
+   {"blank_context": "centrifugal chiller >___ yr", "value": "25", "quote": "Chillers, centrifugal | >25", "where": "Table 3; also Table 4 Abramson et al. (2005) column"},
+   {"blank_context": "cooling tower galvanized >___", "value": "22", "quote": "Galvanized metal | >22 | 20", "where": "Table 4, Abramson et al. (2005) column (Table 3 row reads \"Cooling towers, metal >22\")"},
+   {"blank_context": "air-cooled condenser ___", "value": "20", "quote": "Condensers, air-cooled | N/A | 20", "where": "Table 4, Akalin (1978) column"},
+   {"blank_context": "commercial water-to-air heat pump >___", "value": "24", "quote": "Commercial water-to-air | >24 | 19", "where": "Table 4, Abramson et al. (2005) column"},
+   {"blank_context": "base-mounted pump ___", "value": "20", "quote": "Base-mounted | N/A* | 20", "where": "Table 4, Akalin (1978) column"},
+   {"blank_context": "shell-and-tube heat exchanger ___", "value": "24", "quote": "Shell-and-tube | N/A* | 24", "where": "Table 4, Akalin (1978) column"},
+   {"blank_context": "transformer ___", "value": "30", "quote": "Electric transformers | N/A* | 30", "where": "Table 4, Akalin (1978) column"}
+  ],
+  "unsupported_wording": "Claim implies all values come from one median-service-life table. Only the chiller and cooling tower are in Table 3 (Median Service Life). The condenser, pump, heat exchanger and transformer values are Akalin (1978) figures from Table 4, which the source footnotes as possibly 'outdated and not statistically relevant'.",
+  "note": "Handbook year not printed on the online page. Table 3 labels the cooling tower 'metal', not 'galvanized'; 'galvanized metal' appears only in Table 4."
+ },
+ {
+  "id": "abpHuntstown",
+  "reachable": true,
+  "publisher": "An Bord Pleanála",
+  "title": "Board Order ABP-313583-22 (Huntstown Power Company Ltd, Finglas, Dublin 11)",
+  "edition": "n/a",
+  "date": "Order signed 21/03/2025 (case page); day/month illegible on the PDF copy",
+  "url": "https://www.pleanala.ie/anbordpleanala/media/abp/cases/orders/313/d313583.pdf ; https://www.pleanala.ie/en-ie/case/313583",
+  "values": [
+   {"blank_context": "ABP-___", "value": "313583-22", "quote": "ABP-313583-22", "where": "order header (case page: PL06F.313583)"},
+   {"blank_context": "___ generators", "value": "58", "quote": "58 number emergency generators located within a generator yard", "where": "development description"},
+   {"blank_context": "circa ___ metres high louvred screen wall", "value": "6.5", "quote": "enclosed by a circa 6.5 metres high louvred screen wall", "where": "development description"},
+   {"blank_context": "condition ___", "value": "18", "quote": "No additional development shall take place above roof parapet level, including air handling equipment, storage tanks, ducts or other external plant", "where": "Condition 18"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Berms are supported: 'landscaping and berming (circa six metres high)'. Applicant is Huntstown Power Company Limited; the site is in Finglas, Dublin 11."
+ },
+ {
+  "id": "bcCarbonTax2025",
+  "reachable": true,
+  "publisher": "Province of British Columbia; Canada Revenue Agency",
+  "title": "Carbon tax elimination (gov.bc.ca); FCN16 Removal of the fuel charge (CRA)",
+  "edition": "n/a",
+  "date": "BC page last updated June 17, 2025; FCN16 March 2025",
+  "url": "https://www2.gov.bc.ca/gov/content/taxes/sales-taxes/motor-fuel-carbon-tax/carbon-tax-elimination ; https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/fcn16/removal-of-the-fuel-charge.html ; https://news.gov.bc.ca/releases/2025FIN0014-000280",
+  "values": [
+   {"blank_context": "eliminated effective April ___ ___", "value": "1, 2025", "quote": "The B.C. carbon tax was eliminated effective April 1, 2025.", "where": "gov.bc.ca Carbon tax elimination page"},
+   {"blank_context": "federal fuel charge set to zero ___ Apr ___", "value": "1 Apr 2025", "quote": "removing the fuel charge effective April 1, 2025, by setting all fuel charges rates to zero", "where": "CRA FCN16"},
+   {"blank_context": "CRA FCN1___", "value": "6", "quote": "FCN16 Removal of the fuel charge", "where": "CRA notice title"},
+   {"blank_context": "output-based pricing ≥___ t/yr", "value": "not stated", "quote": "", "where": "not on the linked BC page or the 31 Mar 2025 BC release; the release only says the Province 'will continue to ensure big polluters pay through the B.C. output-based carbon pricing system'"},
+   {"blank_context": "Alberta TIER $___/t for ___ ___", "value": "not checked", "quote": "", "where": "claim itself says it is not verified; no primary source opened"}
+  ],
+  "unsupported_wording": "The linked BC page supports only the elimination date. The federal fuel charge is supported by CRA FCN16, a separate source. The OBPS continuation is supported by the BC release, but no tonne threshold was found. Alberta TIER is not verified.",
+  "note": "The OBPS threshold needs its own primary source (BC Greenhouse Gas Industrial Reporting and Control Act / OBPS regulation)."
+ },
+ {
+  "id": "ashrae",
+  "reachable": true,
+  "publisher": "ASHRAE (TC 9.9)",
+  "title": "Thermal Guidelines for Data Processing Environments, Fifth Edition (Revised and Expanded) — reference card",
+  "edition": "Fifth Edition, Revised and Expanded",
+  "date": "card printed '2021, 2024 ASHRAE'",
+  "url": "https://www.ashrae.org/file library/technical resources/bookstore/supplemental files/therm-gdlns-5th-r-e-refcard.pdf",
+  "values": [
+   {"blank_context": "ASHRAE TC ___", "value": "9.9", "quote": "ASHRAE TC 9.9", "where": "card header"},
+   {"blank_context": "inlet ___–___ °C", "value": "18–27", "quote": "18 to 27", "where": "recommended envelope, Classes A1 to A4, dry-bulb °C"}
+  ],
+  "unsupported_wording": "The card does not mention free-cooling hours, weather bins or CWEC. That method is an internal formula, not from this source.",
+  "note": "Allowable ranges: A1 15–32, A2 10–35, A3 5–40, A4 5–45 °C. H1 is recommended 18–22 °C."
+ },
+ {
+  "id": "aerscreenGuide",
+  "reachable": true,
+  "publisher": "US EPA (OAQPS)",
+  "title": "AERSCREEN User's Guide",
+  "edition": "EPA-454/B-21-005 (revises EPA-454/B-16-004)",
+  "date": "April 2021",
+  "url": "https://gaftp.epa.gov/air/aqmg/SCRAM/models/screening/aerscreen/aerscreen_userguide.pdf",
+  "values": [
+   {"blank_context": "User's Guide (___)", "value": "2021", "quote": "April 2021", "where": "cover"},
+   {"blank_context": "s. ___", "value": "1.1", "quote": "The averaging period ratios currently implemented in AERSCREEN are as follows", "where": "Section 1.1 Description of AERSCREEN"},
+   {"blank_context": "___-h to ___-h", "value": "1-h to 3-h", "quote": "3-hour fixed ratio of 1.00 0.90", "where": "Section 1.1"},
+   {"blank_context": "3-h ratio ___", "value": "1.00", "quote": "3-hour fixed ratio of 1.00", "where": "Section 1.1 (0.90 = SCREEN3)"},
+   {"blank_context": "___-h ___ (8-h)", "value": "8; 0.90", "quote": "8-hour fixed ratio of 0.90 0.70", "where": "Section 1.1 (0.70 = SCREEN3)"},
+   {"blank_context": "___-h ___ (24-h)", "value": "24; 0.60", "quote": "24-hour fixed ratio of 0.60 0.40", "where": "Section 1.1 (0.40 = SCREEN3)"},
+   {"blank_context": "annual ___", "value": "0.10", "quote": "Annual fixed ratio of 0.10 0.08", "where": "Section 1.1 (0.08 = SCREEN3)"}
+  ],
+  "unsupported_wording": "none",
+  "note": "The first number in each pair is the AERSCREEN value. The second is SCREEN3, shown for comparison. Make sure the tool uses the first."
+ },
+ {
+  "id": "barth2026",
+  "reachable": true,
+  "publisher": "Springer / BMC (Geothermal Energy); KIT repository copy",
+  "title": "Potential of aquifer thermal energy storage (ATES) for data centres in Germany",
+  "edition": "n/a",
+  "date": "2026",
+  "url": "https://publikationen.bibliothek.kit.edu/1000192638/179927510",
+  "values": [
+   {"blank_context": "Geothermal Energy ___ (volume)", "value": "14", "quote": "Volume: 14", "where": "article metadata"},
+   {"blank_context": ":___ (article no.)", "value": "11", "quote": "Article number: 11", "where": "article metadata"},
+   {"blank_context": "(___) year", "value": "2026", "quote": "2026", "where": "article metadata; DOI 10.1186/s40517-026-00383-8"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Authors in printed order: Florian Barth, Georg Schefel, Philipp Blum, Kathrin Menberg."
+ },
+ {
+  "id": "ashraeCh45",
+  "reachable": false,
+  "publisher": "ASHRAE",
+  "title": "Checked against: 2019 ASHRAE Handbook—HVAC Applications (I-P), Ch. 46 Building Air Intake and Exhaust Design",
+  "edition": "2019 I-P (not the SI library edition cited; that copy is unreachable)",
+  "date": "2019",
+  "url": "https://www.ashrae.org/File Library/Technical Resources/ASHRAE Handbook/I-P_A19_Ch46.pdf",
+  "values": [
+   {"blank_context": "SI, ___ (edition year)", "value": "not stated", "quote": "", "where": "cited SI library copy not reachable; free copy is 2019 I-P"},
+   {"blank_context": "Ch. ___", "value": "46 in the 2019 edition (cited edition unverified)", "quote": "Building Air Intake and Exhaust Design", "where": "chapter title, 2019 I-P"},
+   {"blank_context": "read ___ Oct ___", "value": "not checkable", "quote": "", "where": "internal note"},
+   {"blank_context": "Wilson ___", "value": "1979", "quote": "Wilson (1979)", "where": "Wind Recirculation Zones on Flat-Roofed Buildings"},
+   {"blank_context": "R = Bs^___ × BL^___", "value": "0.67; 0.33", "quote": "R = Bs^0.67 BL^0.33", "where": "Eq. 5"},
+   {"blank_context": "Hc = ___R", "value": "0.22", "quote": "Hc = 0.22R", "where": "Eq. 1"},
+   {"blank_context": "Xc = ___R", "value": "0.5", "quote": "Xc = 0.5R", "where": "Eq. 2"},
+   {"blank_context": "Lc = ___R", "value": "0.9", "quote": "Lc = 0.9R", "where": "Eq. 3"},
+   {"blank_context": "Fundamentals (___) Ch. ___", "value": "unreachable", "quote": "", "where": "Fundamentals Airflow Around Buildings chapter not found on an official free site"}
+  ],
+  "unsupported_wording": "Checked against the 2019 I-P text. (1) It says recirculation 'can be an even more serious problem', not 'can be a serious problem'. (2) The equipment is described as units that 'take in air on one side and discharge heated, moist air horizontally from the other side', not intake and exhaust 'on the same housing'. (3) It names Legionnaires' disease, not 'Legionella'. 'Considerably hotter', the reduced capacity of cooling towers and air-cooled condensers, 'can drastically reduce equipment performance', the three recirculation causes, Lr = R and keeping towers away from intakes, operable windows and outdoor public areas are all supported.",
+  "note": "Not reachable: the SI library edition and the Fundamentals chapter were not reached. Marked false for the cited copy. The 2019 I-P comparison is supporting evidence only. The towers-away-from-intakes advice is credited to ASHRAE Guideline 12."
+ },
+ {
+  "id": "bcab2005",
+  "reachable": true,
+  "publisher": "BC Building Code Appeal Board (Province of British Columbia)",
+  "title": "BCAB 2005 - Provision of water supply for firefighting",
+  "edition": "BCBC 2024",
+  "date": "August 6, 2026 (as returned; re-check on page)",
+  "url": "https://www2.gov.bc.ca/gov/content/industry/construction-industry/building-codes-standards/building-code-appeal-board/building-code-appeal-board-decisions/bcab-2005",
+  "values": [
+   {"blank_context": "decision ___", "value": "2005", "quote": "BCAB 2005 - Provision of water supply for firefighting", "where": "page title"},
+   {"blank_context": "Div. B ___(___)", "value": "3.2.5.7.(1)", "quote": "Sentence 3.2.5.7.(1), Division B", "where": "decision text"},
+   {"blank_context": "Note A-___(___)", "value": "A-3.2.5.7.(1)", "quote": "Note A-3.2.5.7.(1)", "where": "decision text"},
+   {"blank_context": "at least ___ minutes", "value": "30", "quote": "should be sufficient to allow at least 30 minutes of fire department hose stream use", "where": "quoted Note A-3.2.5.7.(1)"},
+   {"blank_context": "NFPA ___", "value": "1142", "quote": "NFPA 1142, Standard on Water Supplies for Suburban and Rural Fire Fighting", "where": "decision text"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Code quote: 'Every building shall be provided with an adequate water supply for firefighting.' The date was read by the fetch tool's summary, so re-check it on the page."
+ }
+]

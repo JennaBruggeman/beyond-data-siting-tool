@@ -1,0 +1,126 @@
+[
+ {
+  "id": "bcAirBackground",
+  "reachable": true,
+  "publisher": "Environmental Reporting BC, Ministry of Environment and Parks, British Columbia",
+  "title": "Status of Nitrogen Dioxide in B.C. (2021-2023 & 2022-2024)",
+  "edition": "April 2026 print version",
+  "date": "2026",
+  "url": "https://www.env.gov.bc.ca/soe/indicators/air/print_ver/envreportbc_no2_April2026.pdf",
+  "values": [
+   {"blank_context": "NO2 ___-h metric", "value": "1", "quote": "NO2 1-hour Metric: 43.6ppb (3 year average)", "where": "Appendix, Vancouver Clark Drive (Lower Fraser Valley), p. 53"},
+   {"blank_context": "NO2 1-h metric ___ ppb", "value": "43.6", "quote": "NO2 1-hour Metric: 43.6ppb (3 year average)", "where": "Appendix, p. 53"},
+   {"blank_context": "(≈___ µg/m³)", "value": "not stated", "quote": "", "where": "conversion, not printed"},
+   {"blank_context": "annual ___ ppb", "value": "15", "quote": "NO2 Annual Metric: 15ppb (1 year average)", "where": "Appendix, p. 53"},
+   {"blank_context": "PM2.___ ___-h ___ annual ___ µg/m³", "value": "unreachable", "quote": "", "where": "PM2.5 report (other_link, June 2025) blocked by fetch provenance rule; not checked"}
+  ],
+  "unsupported_wording": "µg/m³ equivalent for NO2 is not printed (conversion). The PM2.5 values could not be checked: the June 2025 PM2.5 report was unreachable.",
+  "note": "NO2 report reached; PM2.5 June 2025 PDF unreachable (fetch blocked). Search also shows a newer envreportbc_pm25_April2026.pdf exists, so the June 2025 edition may be superseded. For reference, page 1 gives the CAAQS: 60 ppb (1-h) and 17 ppb (annual), with 2025 standards of 42 ppb and 12 ppb."
+ },
+ {
+  "id": "aesoMicrogen2025",
+  "reachable": true,
+  "publisher": "Alberta Electric System Operator (AESO). Inferred from aeso.ca hosting and contact; no publisher statement printed.",
+  "title": "Connecting Micro-generation",
+  "edition": "Version: September 17, 2025",
+  "date": "2025-09-17",
+  "url": "https://www.aeso.ca/assets/Connecting-Microgeneration.pdf",
+  "values": [
+   {"blank_context": "(___ Sep ___)", "value": "17 Sep 2025", "quote": "Version: September 17, 2025", "where": "p. 1"},
+   {"blank_context": "under ___ MW", "value": "5", "quote": "less than five megawatts (MW)", "where": "p. 1"},
+   {"blank_context": "small under ___ kW", "value": "150", "quote": "Small micro-generators: less than 150 kilowatts (kW)", "where": "p. 1"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Crediting is supported. Small: the retail energy rate, 'the same price as the electrical energy micro-generators are purchasing from the retailer' (p. 2). Large: 'the hourly generated amount of energy multiplied by the pool price' (p. 2). The title is spelled 'Micro-generation' with a hyphen."
+ },
+ {
+  "id": "aer_d089",
+  "reachable": true,
+  "publisher": "Alberta Energy Regulator",
+  "title": "Directive 089: Geothermal Resource Development",
+  "edition": "Release date February 7, 2025",
+  "date": "2025-02-07",
+  "url": "https://static.aer.ca/prd/documents/directives/Directive-089.pdf",
+  "values": [
+   {"blank_context": "Directive ___", "value": "089", "quote": "Directive 089", "where": "cover"},
+   {"blank_context": "(___ Feb ___)", "value": "7 Feb 2025", "quote": "Release date: February 7, 2025", "where": "cover; effective date also February 7, 2025"}
+  ],
+  "unsupported_wording": "none",
+  "note": ""
+ },
+ {
+  "id": "bacLayout2023",
+  "reachable": true,
+  "publisher": "Baltimore Aircoil Company (manufacturer)",
+  "title": "Layout Guidelines, Product & Application Handbook Volume VI, pp. J74-J95",
+  "edition": "Vol. VI; no date printed in the text (the filename says 20230719)",
+  "date": "not stated in text (filename 2023-07-19)",
+  "url": "https://baltimoreaircoil.com:443/download_api_endpoint/5888/J74_PAHBvi_LayoutGuidelines_20230719.pdf",
+  "values": [
+   {"blank_context": "BAC Layout Guidelines (___)", "value": "not stated in text (filename 20230719)", "quote": "", "where": "-"},
+   {"blank_context": "air inlet ___–___ m from a wall", "value": "not stated as a range; model-specific tables", "quote": "The minimum acceptable dimension \"d\" for the products is tabulated in Tables 1-14 on pages J78-J82.", "where": "pp. J78-J82. Examples at h=0 run from 2.7 ft (0.8 m) for TRF-1010N (p. J80) to 17 ft (5.2 m) for VT1-825-P to VT1-1335-S with no hood (p. J79). Full table range not verified."},
+   {"blank_context": "envelope air velocity below ___ fpm", "value": "300", "quote": "The maximum acceptable envelope air velocity is 300 FPM", "where": "p. J77 (400 FPM for Series V with tapered discharge hood)"}
+  ],
+  "unsupported_wording": "The source gives no single 'X–Y m' range. Distances are per-model tables in ft with m, and the claim's range would be a summary, not printed. 'More in a well' is not phrased that way; the well section gives a 400 FPM maximum downward air velocity (p. J83).",
+  "note": "These are manufacturer guidelines. Supported verbatim: 'any job that involves four or more cells should be referred to your local BAC Representative for review' (p. J74), and 'The fan discharge cylinder must be at least level with or higher than any adjacent walls or buildings' (p. J75)."
+ },
+ {
+  "id": "aesoP2Aupd2026",
+  "reachable": false,
+  "publisher": "Alberta Electric System Operator (AESO)",
+  "title": "Large Load Integration Phase 2A BYOG Process Update (stakeholder session deck)",
+  "edition": "posted June 18, 2026; updated June 24, 2026",
+  "date": "2026-06-24 (session)",
+  "url": "https://aesoengage.aeso.ca/pre-engagement-phase-ii-large-load-integration ; deck https://aesoengage.aeso.ca/49943/widgets/210873/documents/170489 (download page only, no text)",
+  "values": [
+   {"blank_context": "Phase ___A", "value": "2", "quote": "Large Load Integration Phase 2A BYOG Process Update", "where": "AESO Engage Materials list"},
+   {"blank_context": "(___ Jun ___ updated ___ Jun ___)", "value": "posted 18 Jun 2026, updated 24 Jun 2026", "quote": "posted June 18, 2026, updated June 24, 2026", "where": "AESO Engage Materials list"},
+   {"blank_context": "all deck figures (GW per quarter, Q2 GW, MW application counts, MW band, threshold, final-process year)", "value": "unreachable", "quote": "", "where": "deck PDF text not retrievable"}
+  ],
+  "unsupported_wording": "Not checkable: none of the deck content (load figures, 2A/2B/2C structure, load-management wording, distribution-connected loads, timing) could be read.",
+  "note": "Only the title and dates were verified, from the engagement page listing. Deck content is unreachable: the fetch returned only a download stub. The engagement page itself prints only '1,200 MW interim large load connection limit' (Phase I)."
+ },
+ {
+  "id": "bcWQGtemp",
+  "reachable": true,
+  "publisher": "BC Ministry of Environment, Water Protection and Sustainability Branch (authors G.G. Oliver and L.E. Fidler, Aspen Applied Sciences Ltd., under contract)",
+  "title": "Water Quality Guidelines for Temperature: Overview Report",
+  "edition": "Overview Report (a 2020 addendum exists separately)",
+  "date": "2001-08-22",
+  "url": "https://www2.gov.bc.ca/assets/gov/environment/air-land-water/water/waterquality/water-quality-guidelines/approved-wqgs/temperature-or.pdf",
+  "values": [
+   {"blank_context": "overview (___)", "value": "2001", "quote": "August 22, 2001", "where": "title page"},
+   {"blank_context": "s. ___ and ___", "value": "2.2 and 2.4", "quote": "2.2 All Other Streams - Streams with Known Fish Distribution; 2.4 Marine and Estuarine", "where": "section headings"},
+   {"blank_context": "marine ±___ °C", "value": "1", "quote": "+ or - 1 degree Celsius change from the natural condition", "where": "s. 2.4; Table 1"},
+   {"blank_context": "streams with fish ±___ °C", "value": "1", "quote": "+ or - 1 degree Celsius beyond the optimum temperature range (see Table 2) for each life history phase of the most sensitive salmonid species present", "where": "s. 2.2; Table 1"}
+  ],
+  "unsupported_wording": "Minor: the title is 'Water Quality Guidelines for Temperature: Overview Report', not 'BC Ambient Water Quality Guidelines'. The catalogue title 'Ambient water quality guidelines for temperature: overview' is close. The stream guideline applies per life-history phase.",
+  "note": "No page numbers were in the extracted text, so sections and tables are cited instead. A 2020 addendum is listed on the gov.bc.ca page and was not checked."
+ },
+ {
+  "id": "bartlett2025",
+  "reachable": true,
+  "publisher": "University of Calgary (Graduate Program in Sustainable Energy Development)",
+  "title": "Waste Heat Recovery and Utilization Potential from Data Centres in Alberta",
+  "edition": "MSc (Sustainable Energy Development) project; supervisor Dr. Ganesh Doluweera",
+  "date": "2025-08",
+  "url": "https://ucalgary.scholaris.ca/server/api/core/bitstreams/8f66f77b-d1cd-4408-aad2-9cbb3076bcbc/content",
+  "values": [
+   {"blank_context": "Bartlett, C. (___)", "value": "2025", "quote": "August 2025", "where": "title page"},
+   {"blank_context": "J.B. upload ___ Oct ___", "value": "not stated", "quote": "", "where": "internal note, not in source"},
+   {"blank_context": "___ MW of proposed data centres", "value": "11,879", "quote": "11,879 MW of proposed data centres seeking grid interconnection in Alberta", "where": "Abstract p. ii; s. 1.1 p. 1 (citing AESO 2025a)"},
+   {"blank_context": "coolant outlet ___ °C", "value": "60", "quote": "Coolant outlet temperature = 60C", "where": "p. 20 (also p. 17)"},
+   {"blank_context": "heat-exchanger efficiency ___%", "value": "100", "quote": "Heat Exchanger efficiency= 100%", "where": "p. 20 (cited to Belkin 2023)"},
+   {"blank_context": "transfer efficiency ___%", "value": "68", "quote": "Waste Heat Transfer Efficiency = 68%", "where": "p. 20"},
+   {"blank_context": "(Luo et al. ___)", "value": "2019", "quote": "Luo et al., 2019", "where": "p. 20"},
+   {"blank_context": "___ MWh ... per MW of IT load per month", "value": "490 (489.6)", "quote": "a 1 MW data centre will produce 490 MWh of recoverable waste heat per month", "where": "p. 22"},
+   {"blank_context": "about ___ t CO2e/yr", "value": "1175", "quote": "could offset approximately 1175 tCO2e annually", "where": "Abstract p. ii; Table 3 p. 29"},
+   {"blank_context": "$___/yr", "value": "65,280", "quote": "$65,280 per year in fuel costs", "where": "Abstract p. ii"},
+   {"blank_context": "(___ of ___ million ft² served)", "value": "6 of 15", "quote": "can provide heating for 15 million square feet, although it only serves 6 million square feet currently", "where": "p. 10"},
+   {"blank_context": "AI Data Centre Strategy (___)", "value": "2024", "quote": "Government of Alberta (2024a)", "where": "p. 2"},
+   {"blank_context": "pillar ___", "value": "2 (second of three, 'Sustainable Cooling')", "quote": "explore waste heat capture and utilization", "where": "p. 2"}
+  ],
+  "unsupported_wording": "'J.B. upload ___ Oct ___' is an internal note and not in the source. 'MSc research project' is not verified verbatim: the source says Master of Science, Graduate Program in Sustainable Energy Development. The claim attributes only the transfer efficiency to Luo et al.; the 100% heat-exchanger figure is cited to Belkin 2023, which is acceptable if the citation is kept separate.",
+  "note": "The figures are modelled estimates. The 11,879 MW is an AESO queue figure as cited by the author. The quoted phrase 'Alberta has few established district heating networks' is supported (p. 10), naming the University of Alberta system and Calgary District Heating. No built Alberta data-centre heat-reuse case is reported: the operating cases are in Stockholm and Espoo (p. 12)."
+ }
+]
