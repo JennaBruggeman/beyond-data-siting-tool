@@ -166,7 +166,7 @@ R = {
   ('tt2025','Vancouver 910–1,200 CAD/ft²','coefficient',50,True),
   ('vanPermits','permit values $28.5 M, $18 M','site fact',80,True)],
  'horizons': [
-  ('horizons','servers ~6; plant 15–25; shell ≤40; network 40–50','coefficient',60,True),
+  ('horizons','servers ~6; plant 15–25; building 25–27 (economic life); network 30–50','coefficient',60,True),
   ('vanTax','improvement ÷ land value flags holding sites','proxy',80,True)],
  'lead_time': [
   ('bchTransmission','BC Hydro stage durations','data',90,True),
