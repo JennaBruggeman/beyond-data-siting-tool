@@ -15,7 +15,6 @@ DEC = [
  ['dellR760', 'needs source', 'Server weight 36.1 kg is not in the cited LCA; find a Dell spec sheet', 'B3'],
  ['cusp', 'needs source', 'CUSP 6% energy-poverty threshold: website gone; find the CUSP report or use StatCan 10% only', 'B3'],
  ['abDataCentreLevy', 'J.B. can check', 'Off-grid rate R (0%?) after Bill 17: read the consolidated Corporate Tax Act Part 9.1', 'B3'],
- ['nistad2020', 'J.B. can check', 'Confirm author, year and title against your uploaded PDF', 'B3'],
  ['bcRLCF012b', 'decision', 'Carbon-intensity range: checks disagree on current rows (7.58–37.06 vs −7.03–131.35); re-read the table', 'B3'],
  ['cologixVAN4_2026', 'decision', 'Cologix VAN4 capacity: web page 4 MW vs spec sheet 6.5 MW (operator claims)', 'C trace'],
  ['vibration STC', 'decision', 'STC 47/55 read in VBBL 2019 / BCBC 2018, not NBC 2020 as the coef says', 'C trace'],
