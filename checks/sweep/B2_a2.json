@@ -1,0 +1,462 @@
+[
+ {
+  "id": "aesoDCupd2025",
+  "reachable": true,
+  "publisher": "Alberta Electric System Operator (AESO)",
+  "title": "AESO Update on Data Centres",
+  "edition": "September 2025 update (linked from AESO Engage page as posted 26 Sep 2025)",
+  "date": "September 2025",
+  "url": "https://www.aeso.ca/assets/Uploads/grid/Data-Centre/AESO-Data-Centre-Update-September-2025.pdf",
+  "values": [
+   {
+    "blank_context": "Update date (Sep ___)",
+    "value": "2025",
+    "quote": "AESO Update on Data Centres ... September 2025",
+    "where": "title block"
+   },
+   {
+    "blank_context": "over ___ MW data-centre load on project list",
+    "value": "20,000",
+    "quote": "with over 20,000 MW of data centre load now on the AESO project list",
+    "where": "p. 1"
+   },
+   {
+    "blank_context": "Phase ___",
+    "value": "I",
+    "quote": "Phase I proceeded as planned and we're waiting for final contract execution",
+    "where": "p. 2"
+   },
+   {
+    "blank_context": "qualified ___ projects / ___ developers / ___ MW",
+    "value": "15 / 5 / 4,800",
+    "quote": "15 Projects | 5 Developers | 4,800 MW Qualified",
+    "where": "p. 2 graphic"
+   },
+   {
+    "blank_context": "assigned ___ MW to ___ projects / ___ developers",
+    "value": "1,200 / 3 / 2",
+    "quote": "3 Projects | 2 Developers | 1,200 MW Assigned",
+    "where": "p. 2 graphic"
+   },
+   {
+    "blank_context": "deadline extended to Oct ___",
+    "value": "2025 (no day given)",
+    "quote": "The contract execution deadline was extended from August 4 to October 2025 ... supporting developer participation in the provincial government's data centre levy engagement",
+    "where": "p. 2"
+   },
+   {
+    "blank_context": "draft requirements posted ___ Aug ___",
+    "value": "22 Aug 2025",
+    "quote": "Draft requirements were released in August for written comment (timeline: August 22, 2025; feedback due September 19, 2025)",
+    "where": "p. 2 timeline"
+   },
+   {
+    "blank_context": "final requirements planned Nov ___",
+    "value": "2025",
+    "quote": "Requirements will be revised as needed, followed by an information session to share the final approach (timeline: November 2025)",
+    "where": "p. 2 timeline"
+   }
+  ],
+  "unsupported_wording": "'final requirements planned Nov' is close but the document says an information session to share the final approach is in November 2025, not that final requirements are issued then. Graphic layout made the qualified/assigned pairing readable but extraction was not perfectly clear; check p. 2 visually.",
+  "note": "The given link (aesoengage Phase 2A page) was reachable but only lists the update's title and post date (26 Sep 2025); it does not contain these figures. Values taken from the AESO PDF found by search on aeso.ca. Page numbers from footer markers in extracted text."
+ },
+ {
+  "id": "vanSewer",
+  "reachable": true,
+  "publisher": "City of Vancouver (Open Data Portal)",
+  "title": "Sewer mains",
+  "edition": "extract updated weekly",
+  "date": "not stated in fetched text",
+  "url": "https://opendata.vancouver.ca/explore/dataset/sewer-mains/",
+  "values": [
+   {
+    "blank_context": "___ segments (record count)",
+    "value": "not stated",
+    "quote": "{{ ctx.nhits | number }} record (unrendered template)",
+    "where": "dataset page"
+   },
+   {
+    "blank_context": "geo_point____d",
+    "value": "not verified",
+    "quote": "schema not rendered in fetched page",
+    "where": "dataset page"
+   },
+   {
+    "blank_context": "schema checked ___ Oct ___",
+    "value": "not applicable (claimant's check date)",
+    "quote": "",
+    "where": ""
+   }
+  ],
+  "unsupported_wording": "Field names (effluent_type, material, geom, geo_point_2d) and absence of a diameter/flow field could not be verified: the page text did not include the schema. The page does say main types are Sanitary, Storm, Combined and Sanitary Force — the claim omits 'Sanitary Force'.",
+  "note": "Page reached but rendered via JavaScript; record count and schema not visible. The DCAT catalogue export was robots-disallowed; API endpoint URLs not attempted (not in provenance). Not worked around."
+ },
+ {
+  "id": "vanEmbodied",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Embodied Carbon Guidelines",
+  "edition": "Version 1.0",
+  "date": "October 2023 (approved by Chief Building Official October 2023)",
+  "url": "https://vancouver.ca/files/cov/embodied-carbon-guidelines.pdf",
+  "values": [
+   {
+    "blank_context": "VBBL ___",
+    "value": "2023 requirements; guidelines apply to VBBL Section 10.4; 2025 update proposed",
+    "quote": "The VBBL requirements effective in 2023 require that embodied carbon impacts not be more than double a functionally-equivalent baseline",
+    "where": "s. 2.3 note, p. 10"
+   },
+   {
+    "blank_context": "benchmark ___ kg CO2e/m²",
+    "value": "400",
+    "quote": "ECI = 400 kgCO2e/m2 ... The absolute embodied carbon intensity value (400 kgCO2e/m2) is for the mandatory scope of the object of assessment",
+    "where": "s. 2.2, p. 9"
+   },
+   {
+    "blank_context": "at most ___× the baseline",
+    "value": "2.0 (2023 VBBL)",
+    "quote": "not be more than double a functionally-equivalent baseline, so in this case f = 2.0",
+    "where": "s. 2.3 note, p. 10"
+   },
+   {
+    "blank_context": "absolute path cap ___ kg/m²",
+    "value": "not stated (800 would be derived 400 x 2.0; not printed)",
+    "quote": "",
+    "where": "s. 2.2-2.3"
+   },
+   {
+    "blank_context": "further ___% cut delayed",
+    "value": "not stated as delayed; proposed 10% or 20%",
+    "quote": "For the proposed requirements for new Part 3 buildings in the 2025 update of the VBBL ... a 10% reduction requirement means f = 0.9, and for a 20% reduction requirement f = 0.8",
+    "where": "s. 2.3 note, p. 10"
+   }
+  ],
+  "unsupported_wording": "'delayed' not in document (no 'delay' anywhere). 'Edmonton has no requirement for private buildings' not in this document. An absolute cap figure is not printed. Extraction placed the 400 value in the note at s. 2.2; one pass attributed it to the baseline-path note — check p. 9 visually.",
+  "note": "Document predates any 2025 VBBL decision; for the current VBBL value and any delay, a newer City source is needed."
+ },
+ {
+  "id": "tenK_life",
+  "reachable": true,
+  "publisher": "SEC EDGAR filings / company annual report (OPERATOR FILINGS)",
+  "title": "Microsoft 2023 Annual Report (10-K); Alphabet Form 10-Q Q1 2023; Amazon Forms 10-Q Q1 2024 and Q1 2025; Meta Form 10-Q Q1 2025",
+  "edition": "as listed",
+  "date": "FY2023 (MSFT, GOOGL); 2024-03-31 and 2025-03-31 (AMZN); 2025-03-31 (META)",
+  "url": "https://www.microsoft.com/investor/reports/ar23/index.html ; https://www.sec.gov/Archives/edgar/data/1652044/000165204423000045/goog-20230331.htm ; https://www.sec.gov/Archives/edgar/data/1018724/000101872424000083/amzn-20240331.htm ; https://www.sec.gov/Archives/edgar/data/1018724/000101872425000036/amzn-20250331.htm ; https://www.sec.gov/Archives/edgar/data/1326801/000132680125000054/R9.htm",
+  "values": [
+   {
+    "blank_context": "Microsoft FY2___ four → six",
+    "value": "FY2023 (assessment July 2022)",
+    "quote": "increase the estimated useful lives of both server and network equipment from four years to six years. This change in accounting estimate was effective beginning fiscal year 2023.",
+    "where": "Microsoft 2023 Annual Report, notes (Property and equipment / accounting policies)"
+   },
+   {
+    "blank_context": "Alphabet FY2___ servers four → six",
+    "value": "FY2023",
+    "quote": "adjusted the estimated useful life of our servers from four years to six years ... effective beginning in fiscal year 2023",
+    "where": "Alphabet 10-Q Q1 2023, Note 1"
+   },
+   {
+    "blank_context": "Amazon six (___)",
+    "value": "2024 (effective 1 Jan 2024, five to six)",
+    "quote": "effective January 1, 2024 we changed our estimate of the useful lives for our servers from five to six years",
+    "where": "Amazon 10-Q Q1 2024, Note 1"
+   },
+   {
+    "blank_context": "subset back to five (___)",
+    "value": "2025 (effective 1 Jan 2025)",
+    "quote": "Effective January 1, 2025 we changed our estimate of the useful lives of a subset of our servers and networking equipment from six years to five years. The shorter useful lives are due to the increased pace of technology development, particularly in the area of artificial intelligence and machine learning.",
+    "where": "Amazon 10-Q Q1 2025, Note 1"
+   },
+   {
+    "blank_context": "Meta ___–___ → ___ years (___)",
+    "value": "prior range not verified → 5.5 years (effective 1 Jan 2025)",
+    "quote": "increase in the estimated useful lives of most servers and network assets to 5.5 years, effective January 1, 2025",
+    "where": "Meta 10-Q Q1 2025, Note 1 (R9)"
+   }
+  ],
+  "unsupported_wording": "Meta's prior range not found in fetched text (10-K pages truncated before notes). Alphabet: network equipment went five → six, not four. Meta change applies to 'most' servers and network assets.",
+  "note": "No link was given; filings found by search. Operator claims. Microsoft and Alphabet figures from the annual report and Q1 10-Q rather than the 10-K itself (10-K text truncated)."
+ },
+ {
+  "id": "statcanLives",
+  "reachable": true,
+  "publisher": "Statistics Canada",
+  "title": "Table C.1-1 List of depreciation rates under the new asset code classification — Building construction (industry, commercial, and institutional); in 'An Update on Depreciation Rates for the Canadian Productivity Accounts', The Canadian Productivity Review, cat. 15-206-X No. 039",
+  "edition": "No. 039 (archived)",
+  "date": "issued 2015-01; date modified 2015-11-27",
+  "url": "https://www150.statcan.gc.ca/n1/pub/15-206-x/2015039/t/tblc11-eng.htm",
+  "values": [
+   {
+    "blank_context": "office buildings ___ yr",
+    "value": "27.0",
+    "quote": "Office buildings (1013) | 0.067 | 0.060 | 27.0",
+    "where": "Table C.1-1"
+   },
+   {
+    "blank_context": "warehouses ___",
+    "value": "25.4",
+    "quote": "Warehouses, refrigerated storage, freight terminals (1006) | 0.064 | 0.068 | 25.4",
+    "where": "Table C.1-1"
+   },
+   {
+    "blank_context": "other commercial construction ___",
+    "value": "20.7",
+    "quote": "Other commercial construction (1098) | 0.101 | 0.085 | 20.7",
+    "where": "Table C.1-1"
+   },
+   {
+    "blank_context": "computers ___",
+    "value": "not stated (as a life). Depreciation rate only: 0.431 (1985–2010)",
+    "quote": "Computers, associated hardware and word processors (6002) | 0.385 | 0.479 | 0.431",
+    "where": "Table 4 (rates for 1985–2001, 2002–2010, 1985–2010), tbl04-eng.htm"
+   }
+  ],
+  "unsupported_wording": "Table gives 'surveyed lives (1985 to 2010)' in years, not 'economic lives'. Column headers are ambiguous in extraction (years unit shown under 'Statistics Canada (2007)'); check the table visually. No computer life in years found in this publication's tables checked.",
+  "note": ""
+ },
+ {
+  "id": "nbcImportance",
+  "reachable": true,
+  "publisher": "Province of British Columbia (King's Printer, BC Publications)",
+  "title": "BC Building Code 2018, Division B, Section 4.1 Structural Loads and Procedures (Rev2)",
+  "edition": "BCBC 2018 Rev2 (not NBC 2020 / BCBC 2024)",
+  "date": "not stated in fetched text",
+  "url": "https://free.bcpublications.ca/civix/document/id/public/bcbc2018/bcbc_2018dbp4s41r2",
+  "values": [
+   {
+    "blank_context": "NBC ___ / BCBC ___ Table ___",
+    "value": "Table 4.1.2.1 (BCBC 2018); NBC 2020 and BCBC 2024 editions not checked",
+    "quote": "Table 4.1.2.1 Importance Categories",
+    "where": "Div. B, 4.1.2.1"
+   },
+   {
+    "blank_context": "IE ___ Normal, ___ High, ___ post-disaster",
+    "value": "1.0 / 1.3 / 1.5 (Low 0.8)",
+    "quote": "IE is the earthquake importance factor and has a value of 0.8, 1.0, 1.3 and 1.5",
+    "where": "Div. B, Sentence 4.1.8.1.(2)(a) (as extracted; Table 4.1.8.5 not in fetched text)"
+   },
+   {
+    "blank_context": "audit/research____-___-___/D",
+    "value": "not applicable (internal reference)",
+    "quote": "",
+    "where": ""
+   }
+  ],
+  "unsupported_wording": "Wording supported in BCBC 2018: Post-disaster list includes 'telephone exchanges' and 'communications facilities, including radio and television stations', 'unless exempted from this designation by the authority having jurisdiction'; High = 'Buildings that are likely to be used as post-disaster shelters'. Not verified against NBC 2020 or BCBC 2024 text.",
+  "note": "NBC 2020 Vol. 1 on nrc-publications.canada.ca reached but fetched text ended in Division A; Part 4 not retrieved. Mapping of IE values to categories inferred from order in the sentence."
+ },
+ {
+  "id": "mfrAdiabatic",
+  "reachable": false,
+  "publisher": "Baltimore Aircoil Company (claimed link); EVAPCO, Inc. (secondary check) — VENDOR CLAIMS",
+  "title": "Claimed: TrilliumSeries brochure 2020-03-27 (not reached). Checked instead: BAC 'Adiabatic Made Better' TrilliumSeries Adiabatic Cooler brochure; EVAPCO 'Equipment Layout Manual, eco-Air Series' Bulletin EAEQPTLYT26",
+  "edition": "BAC BTRF/20240531; EVAPCO EAEQPTLYT26",
+  "date": "BAC ©2024; EVAPCO ©2026",
+  "url": "https://baltimoreaircoil.com/sites/default/files/2024-06/TRF_brochure_20240624.pdf ; https://www.evapco.com/media/1644929",
+  "values": [
+   {
+    "blank_context": "EVAPCO ___B adiabatic models",
+    "value": "not stated (no models ending in B; adiabatic models named EAW-VA, EAW-DA, EAVCA, EAVGA)",
+    "quote": "",
+    "where": "EVAPCO manual"
+   },
+   {
+    "blank_context": "about ___–___ MW per unit",
+    "value": "not stated",
+    "quote": "",
+    "where": "BAC 2024 brochure gives no kW/MW; EVAPCO manual gives none"
+   },
+   {
+    "blank_context": "up to ___ m long",
+    "value": "BAC: longest listed 40'-9\" (~12.4 m, converted, not printed)",
+    "quote": "TRF-1038N-C80Fx77E 18 77 40'-9\" 28,440 23,193",
+    "where": "BAC 2024 brochure, dimension table"
+   },
+   {
+    "blank_context": "___–___ m wide",
+    "value": "not reliably extracted (one row ~9'-10\", column mapping uncertain)",
+    "quote": "TRF-1010N-C80Fx17E ... 9'-9\" 9'-10\" 11'-10\"",
+    "where": "BAC 2024 brochure, dimension table"
+   },
+   {
+    "blank_context": "___ m high",
+    "value": "not reliably extracted",
+    "quote": "",
+    "where": "BAC 2024 brochure"
+   },
+   {
+    "blank_context": "___–___ t",
+    "value": "BAC operating weight 7,793–28,440 lb (~3.5–12.9 t, converted, not printed)",
+    "quote": "TRF-1010N-C60Fx17E ... 7,793 6,724 / TRF-1038N-C80Fx77E ... 28,440 23,193",
+    "where": "BAC 2024 brochure, Weights (lbs)"
+   }
+  ],
+  "unsupported_wording": "'same clearance table as dry coolers' supported by EVAPCO: Table 1 'EVAPCO's Recommended Clearances for Dry, Adiabatic and Spray Units'. Quote supported: 'Adiabatic eco-Air units can be elevated, but grade level layout guidelines apply. They cannot be elevated in lieu of spacing.' (EVAPCO EAEQPTLYT26, p. 7). MW per unit not supported by either document fetched.",
+  "note": "Given link (trillium_brochure_20200327.pdf) refused by fetch tool (URL not in provenance) and not surfaced by site-restricted search; no workaround. Dimension table extraction jumbled; check the 2024 PDF visually."
+ },
+ {
+  "id": "edmTaxRates2026",
+  "reachable": false,
+  "publisher": "City of Edmonton",
+  "title": "Where Your Taxes Go (reached); 2026 property tax bylaw (not reached)",
+  "edition": "",
+  "date": "page last modified 2026-08-18",
+  "url": "https://www.edmonton.ca/city_government/budget_finances/where-taxes-go",
+  "values": [
+   {
+    "blank_context": "___ property tax bylaw",
+    "value": "not stated",
+    "quote": "",
+    "where": "linked page"
+   },
+   {
+    "blank_context": "non-residential municipal ___ and education ___ per $___",
+    "value": "not stated",
+    "quote": "",
+    "where": "linked page; Tax Breakdown page gives only % change (education non-residential +2.6% for 2026)"
+   },
+   {
+    "blank_context": "$___ + $___ = $___ per $___",
+    "value": "not stated",
+    "quote": "",
+    "where": ""
+   }
+  ],
+  "unsupported_wording": "Linked page only states: 'On April 17, 2026, Council approved a 6.9% municipal property tax levy increase for 2026.' No rates or bylaw number.",
+  "note": "Bylaw-type PDFs on edmonton.ca (BL21068.pdf, tax-mail-out-key-facts-2026.pdf, Blatchford plan PDF) refused: robots_disallowed. data.edmonton.ca rates dataset page returned no table text. Not worked around."
+ },
+ {
+  "id": "blatchfordAdvisor2023",
+  "reachable": true,
+  "publisher": "City of Edmonton Utility Committee (Utility Advisor response; Attachment 2 to FCS02051)",
+  "title": "Utility Advisor Response to the 2024 Blatchford Renewable Energy Utility Rate Filing",
+  "edition": "Attachment 2, FCS02051",
+  "date": "October 25, 2023 (Utility Committee November 3, 2023)",
+  "url": "https://pub-edmonton.escribemeetings.com/filestream.ashx?DocumentId=205403",
+  "values": [
+   {
+    "blank_context": "Blatchford ___ rate filing",
+    "value": "2024",
+    "quote": "RESPONSE TO THE 2024 BLATCHFORD RENEWABLE ENERGY UTILITY RATE FILING",
+    "where": "title block"
+   },
+   {
+    "blank_context": "___ Oct ___",
+    "value": "25 Oct 2023",
+    "quote": "OCTOBER 25, 2023",
+    "where": "title block"
+   },
+   {
+    "blank_context": "Utility Committee ___ Nov ___ FCS0___",
+    "value": "3 Nov 2023; FCS02051",
+    "quote": "November 3, 2023 - Utility Committee | FCS02051",
+    "where": "header"
+   },
+   {
+    "blank_context": "customers forecast ___ in ___ (down from ___)",
+    "value": "181 in 2024 (down from 217)",
+    "quote": "In the 2023 application the utility forecast 217 customers in 2024 and 291 customers in 2025. In this application, the utility forecast 181 customers in 2024 and 292 customers in 2025.",
+    "where": "s. 5.0"
+   },
+   {
+    "blank_context": "and ___ in ___",
+    "value": "292 in 2025 (previously 291 — up, not down)",
+    "quote": "as above",
+    "where": "s. 5.0"
+   },
+   {
+    "blank_context": "revenue shortfall $___ (___) and $___ (___)",
+    "value": "$1,324,700 (2024); $863,600 (2025)",
+    "quote": "In this application, the utility forecast a revenue shortfall of $1,324,700 in 2024, and a revenue shortfall of $863,600 in 2025.",
+    "where": "s. 5.0"
+   },
+   {
+    "blank_context": "Operator page (Jan ___): over ___ homes",
+    "value": "not stated (separate operator page, not checked)",
+    "quote": "",
+    "where": "not in this document"
+   },
+   {
+    "blank_context": "Earlier plan (___–___) forecast ___ customers by ___",
+    "value": "not stated in this document; 2023–2026 plan PDF robots_disallowed",
+    "quote": "",
+    "where": "not reached"
+   },
+   {
+    "blank_context": "___ MWh cumulative",
+    "value": "not stated (no MWh figures in this document)",
+    "quote": "",
+    "where": ""
+   }
+  ],
+  "unsupported_wording": "Viability quote supported: 'it is becoming increasingly clear that the viability of the utility rides on increasing customers as quickly as possible.' (s. 5.0). Borefield seasonal storage, operator homes-connected figure, earlier-plan forecasts and MWh not in this document.",
+  "note": "Document has no page numbers; cited by section. 2023–2026 Budget and Plans PDF on edmonton.ca robots_disallowed; escribe DocumentId=174375 returned client error."
+ },
+ {
+  "id": "bfe2023dc",
+  "reachable": true,
+  "publisher": "EnergieSchweiz / Bundesamt für Energie BFE (authors Kulemann, Husi, Gürber, Grüniger, Gemperle, eicher+pauli Zürich AG); Kanton Zürich Baudirektion AWEL",
+  "title": "Abwärmenutzung von Rechenzentren – Potenzialstudie und Empfehlungen für Betreiber und Gemeinden (Schlussbericht); Merkblatt 'Rechenzentren' (Kanton Zürich)",
+  "edition": "Schlussbericht; Merkblatt Version 1",
+  "date": "1 June 2023; Merkblatt 31 August 2023",
+  "url": "https://pubdb.bfe.admin.ch/de/publication/download/11426 ; https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/planen-bauen/bauvorschriften/bauvorschriften-im-energiebereich/energetische-bauvorschriften/merkblaetter/2023_rechenzentren_v1.pdf",
+  "values": [
+   {
+    "blank_context": "BFE/EnergieSchweiz ___",
+    "value": "2023",
+    "quote": "Schlussbericht, 1. Juni 2023",
+    "where": "p. 1"
+   },
+   {
+    "blank_context": "above ___ °C (p. ___)",
+    "value": "32 °C, p. 21",
+    "quote": "Voraussetzung hierfür ist jedoch, dass das Temperaturniveau der Abwärme des Rechenzentrums bei über 32°C liegt.",
+    "where": "s. 3.3, p. 21"
+   },
+   {
+    "blank_context": "fictional ___ MW IT case",
+    "value": "20 MW installed IT (40% utilisation, ~9.12 MW recoverable heat)",
+    "quote": "installed IT capacity 20 MW (as extracted)",
+    "where": "pp. 23–24"
+   },
+   {
+    "blank_context": "___% used with ___ MW network",
+    "value": "12% with 5 MW",
+    "quote": "nur 12 Prozent der zur Verfügung stehenden Abwärme genutzt",
+    "where": "p. 24"
+   },
+   {
+    "blank_context": "___% with ___ MW network (p. ___)",
+    "value": "48% with 25 MW; p. 24",
+    "quote": "Der Anteil genutzter Abwärme beträgt 48 Prozent.",
+    "where": "p. 24"
+   },
+   {
+    "blank_context": "hardly had a price (p. ___)",
+    "value": "p. 27",
+    "quote": "Bisher hatte die Abwärme von Rechenzentren kaum einen Preis.",
+    "where": "s. 5.2, p. 27"
+   },
+   {
+    "blank_context": "operators ___–___ years, networks ___–___ (p. ___)",
+    "value": "10–15 / 30–40; p. 5",
+    "quote": "Betrachtungshorizont bei Rechenzentren-Betreibenden (10-15 Jahre) ... Wärmenetze von Energiedienstleistenden (30-40 Jahre)",
+    "where": "p. 5"
+   },
+   {
+    "blank_context": "Canton of Zürich RRB ___/___",
+    "value": "RRB Nr. 840/2022 (8 June 2022, BBV I amendment, § 30a) per AWEL Merkblatt; also cites RRB Nr. 1324/2022",
+    "quote": "RRB Nr. 840 vom 8. Juni 2022",
+    "where": "Kanton Zürich Merkblatt Rechenzentren"
+   },
+   {
+    "blank_context": "waste heat above ___ GWh",
+    "value": "2 GWh",
+    "quote": "Abwärme von mehr als zwei Gigawattstunden (GWh), die nicht selbst genutzt werden kann, Dritten in geeigneter Form zu den Gestehungskosten zur Nutzung zur Verfügung gestellt werden",
+    "where": "§ 30a Abs. 2 BBV I, quoted in Merkblatt"
+   }
+  ],
+  "unsupported_wording": "Zürich rule applies to new buildings, or existing ones after renewal/conversion of cooling, and only to heat 'die nicht selbst genutzt werden kann' — the claim omits these conditions. The RRB/GWh rule is not in the BFE report; it is from the Kanton Zürich Merkblatt (which cites RRB 840/2022), not the RRB itself.",
+  "note": "Given link was the BFE home page; report found via search on pubdb.bfe.admin.ch. RRB 840/2022 itself not opened. Network sizes are peak demand (MW)."
+ }
+]
