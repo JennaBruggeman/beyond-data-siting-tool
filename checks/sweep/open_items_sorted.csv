@@ -2,26 +2,14 @@ impact,id,type,what is open,number at stake,used by,where found,status
 0 your decision,F-01..F-05,display fix,Open display fixes from the tool review (F-04 CLARK page error),,,tool,open
 0 your decision,abDataCentreLevy,J.B. can check,Off-grid rate R (0%?) after Bill 17: read the consolidated Corporate Tax Act Part 9.1,,untaxed_equipment,B3,open
 0 your decision,bcAssess2026,J.B. can check,BC Assessment page blocked (check it on the Abacus page yourself),,receiver_demand,B1,open
-0 your decision,bcRLCF012b,decision,Carbon-intensity range: checks disagree on current rows (7.58–37.06 vs −7.03–131.35); re-read the table,,hvo_swap,B3,open
 0 your decision,bchTariff2026,J.B. can check,"BC Hydro rate figures (LGS 29.99 ¢/day, $13.83/kW, 6.79 ¢/kWh; RS 1830) not read by either check: read them in your downloaded Electric Tariff",,electricity_price; ev_repay; lcoh; self_gen_rules,B4,open
 0 your decision,bytes2heat,needs source,Unreachable,,New district with the data centre as heat plant; cop; heat_delivered; price_floor,B1,open
-0 your decision,caAbMOU2026,decision,TIER price path: $130 in 2035 vs $115 (2030) and $130 effective target in 2040,,chp_heat,B2,open
-0 your decision,cologixVAN4_2026,decision,Cologix VAN4 capacity: web page 4 MW vs spec sheet 6.5 MW (operator claims),,component_space,C trace,open
 0 your decision,cusp,needs source,CUSP 6% energy-poverty threshold: website gone; find the CUSP report or use StatCan 10% only,,affordability,B3,open
 0 your decision,dellR760,needs source,Server weight 36.1 kg is not in the cited LCA; find a Dell spec sheet,,embodied_it,B3,open
-0 your decision,edmBylaw18100,decision,Cite Bylaw 19627 instead (18100 possibly repealed),,stormwater_volume,B2,open
 0 your decision,edmParcel,J.B. can check,Unreachable for both checks,,floor_area; horizons,B1,open
 0 your decision,edmPermitsDC2026,J.B. can check,"Edmonton permit floor areas may be ft², not m² (some are exact conversions); open a few permits to confirm the unit",,build_cost,B12,open
 0 your decision,edmTaxRates2026,J.B. can check,Find the 2026 Edmonton property tax bylaw (non-residential rates),,property_tax; tax_split,B2,open
-0 your decision,hollandSnow,decision,"Area: 690,000 ft² (web page) vs about 1,050,000 ft² (City fact sheet)",,Snowmelt on sidewalks and streets; snowmelt_area,B2,open
-0 your decision,nrcSeismic2020,decision,"seismic_sa02 uses unverified proposed 2020 values (Vancouver 0.848, Edmonton 0.103); take final values from the NRCan 2020 seismic hazard tool for both sites",,seismic_sa02,B3,open
-0 your decision,portPER2025,decision,Category C review time 60–120 or 120–170 business days; 100 m pipeline threshold,,surface_water_sink,B2,open
-0 your decision,price_floor,node review,"capex 0.5–0.65 M€/MW is attributed to Hiltunen 2020, which assumes 0.6; cite Wahlroos / Rämä directly",,,B4,open
 0 your decision,schneiderUPS2020,needs source,Schneider UPS blog logged at a thegreengrid.org URL; find the right link,,backup_hours,C trace,open
-0 your decision,scieu2024,decision,Use national 2.06 GJ/m² for hospitals (provincial values not found)?,,receiver_demand,B1,open
-0 your decision,tallaghtD22,decision,"capex_split calibration wording: ""five of seven"" is effectively four confirmed (AWS heat price not stated)",,capex_split; price_floor,B1,open
-0 your decision,vanISMP2014,decision,"$10,000 / 15 m³ may be a rainwater-harvesting system, not a detention tank",,rainwater; stormwater_volume,B2,open
-0 your decision,vibration STC,decision,"STC 47/55 read in VBBL 2019 / BCBC 2018, not NBC 2020 as the coef says",,,C trace,open
 1 may change a number,abgas,source ?,(?: not on this page; needs the ATCO rate schedule),ATCO North Mid-Use delivery $1.062/GJ (coef uses $1.045),price_ceiling,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
 1 may change a number,absorption2026,source ?,?,"absorption ≥90 °C single-effect, 70–80 °C two-stage; COP 0.6–0.7 / <0.4",Cooling for neighbours; a_absorption_temp; absorption,"B2 28 Oct: not confirmed, marked ?",open
 1 may change a number,bacS3000,source ?,(?: one check reads 171 tons for the smallest single-cell model),smallest tower 293 vs 171 nominal tons (≈1.3 vs 0.75 MW per model),component_space,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
@@ -159,6 +147,7 @@ impact,id,type,what is open,number at stake,used by,where found,status
 "2 wording/citation, used",clf,source ?,(?: report title and year not given; not verified),,embodied_building,"B2 28 Oct: not confirmed, marked ?",open
 "2 wording/citation, used",codemaTallaght,source ?,400 t in 2025 ?),,District heat to a network; New district with the data centre as heat plant,B15 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",cologixVAN2web,source ?,B16 28 Oct: second check could not read it (single check),,it_load_claim,B16 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",cologixVAN4_2026,source ?,000 ft² ?),,component_space,B8 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",cologixVAN4web,source ?,check 2: page now prints 'Site Capacity: 6.5 MW' ?) | page also shows 58K ?),,it_load_claim,B16 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",crf,source ?,Barroso ch. 8 ?,,crf; lcoh; payback,"B3 28 Oct: not confirmed, marked ?",open
 "2 wording/citation, used",crozier2025,source ?,'pause' is our word ?),,workload_control,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
@@ -171,6 +160,7 @@ impact,id,type,what is open,number at stake,used by,where found,status
 "2 wording/citation, used",edm7140sun,source ?,other zones' shadow clauses not fully listed ?),,shadow,B12 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",edmBEB6,source ?,'voluntary' ?),,it_load_actual,B12 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",edmBL14380,source ?,office consolidation May 2026 ?),,rezoning_price,B16 28 Oct: two checks; disputed points marked ?,open
+"2 wording/citation, used",edmBylaw18100,source ?,"B2 28 Oct: not confirmed, marked ?",,stormwater_volume,"B2 28 Oct: not confirmed, marked ?",open
 "2 wording/citation, used",edmDDE,source ?,B14 28 Oct: second check could not read it (single check),,price_ceiling,B14 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",edmDDEcapital,source ?,B16 28 Oct: second check could not read it (single check),,distribution_cost,B16 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",edmEncroach,source ?,current fee ?),,snowmelt_area,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
@@ -221,6 +211,7 @@ impact,id,type,what is open,number at stake,used by,where found,status
 "2 wording/citation, used",gwells,source ?,file names not confirmed online ?),,ground,B14 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",heatPhys,source ?,B14 28 Oct: second check could not read it (single check),,backup_hours; erf; heat_in_water; heat_rejected; hp_electricity; pue; spare_capacity,B14 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",heataCentrica,source ?,year from the URL ?),,Distributed servers as heaters,B15 28 Oct: two checks; disputed points marked ?,open
+"2 wording/citation, used",hollandSnow,source ?,"B2 28 Oct: not confirmed, marked ?",,Snowmelt on sidewalks and streets; snowmelt_area,"B2 28 Oct: not confirmed, marked ?",open
 "2 wording/citation, used",howley2021,source ?,cited from Kalke et al. 2019 ?) | cited from Total E&P Canada 2007 ?),,surface_water_sink,B15 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",hut8VAN1,source ?,B16 28 Oct: second check could not read it (single check),,it_load_claim,B16 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",ieaSHCTask54,source ?,B17 28 Oct: unchecked: no first check and the web check could not read it,,lcoh,B17 28 Oct: unchecked: no first check and the web check could not read it,open
@@ -263,6 +254,7 @@ impact,id,type,what is open,number at stake,used by,where found,status
 "2 wording/citation, used",nistad2020,source ?,"B3 28 Oct: not confirmed, marked ?",,aquaculture_tonnes,"B3 28 Oct: not confirmed, marked ?",open
 "2 wording/citation, used",nivosMantsala,source ?,"(?: 4.0 MW heat pump, 20 GWh = 54 %, exhaust temperatures, gas −70 % and DH price −11 % not confirmed by either check)",,District heat to a network; heat_delivered; price_floor,B5 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",nonComp,source ?,B14 28 Oct: second check could not read it (single check),,tradeoffs,B14 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",nrcSeismic2020,source ?,"B3 28 Oct: not confirmed, marked ?",,seismic_sa02,"B3 28 Oct: not confirmed, marked ?",open
 "2 wording/citation, used",nrcanEstarDC,source ?,title ?),,pue,B19 28 Oct: two web checks; disputed or open points marked ?,open
 "2 wording/citation, used",nrcan_pv2006,source ?,B16 28 Oct: second check could not read it (single check),,pv_share,B16 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",nrcan_pvcost2024,source ?,the report prints 'turnkey' prices ?),,pv_cost,B16 28 Oct: agreed fixes applied; single-check points marked ?,open
@@ -276,6 +268,7 @@ impact,id,type,what is open,number at stake,used by,where found,status
 "2 wording/citation, used",parssinen,source ?,not the medium case ?),,payback,B14 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",pcicWx3,source ?,27 Jan 2025 ?,,free_cooling_hours_2050s; homes_heated_2050s,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",pieper2020,source ?,B17 28 Oct: unchecked: no first check and the web check could not read it,,cop,B17 28 Oct: unchecked: no first check and the web check could not read it,open
+"2 wording/citation, used",portPER2025,source ?,"B2 28 Oct: not confirmed, marked ?",,surface_water_sink,"B2 28 Oct: not confirmed, marked ?",open
 "2 wording/citation, used",pspcLegionella,source ?,B16 28 Oct: second check could not read it (single check),,evaporation,B16 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",r2Edm2026,source ?,B16 28 Oct: second check could not read it (single check),,ewaste,B16 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",r2Van2026,source ?,B16 28 Oct: second check could not read it (single check),,ewaste,B16 28 Oct: second check could not read it (single check),open
@@ -286,6 +279,7 @@ impact,id,type,what is open,number at stake,used by,where found,status
 "2 wording/citation, used",rule9,source ?,B14 28 Oct: second check could not read it (single check),,crossing_type,B14 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",rvo2018,source ?,IF Technology ?,,it_load_outside; receiver_radius; receivers_nearby,B4 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",rvoCases2018,source ?,"(?: one check found €0.8 M installations + ≈€0.7 M network on p.13 and the only €1.5 M is Aalsmeer, p.15; not re-confirmed)",,heat_delivered,single check: marked ?,open
+"2 wording/citation, used",scieu2024,source ?,unconfirmed: provincial values not found,,receiver_demand,unconfirmed: provincial values not found,open
 "2 wording/citation, used",sethuramalingam2019,source ?,B17 28 Oct: unchecked: no first check and the web check could not read it,,heat_temp,B17 28 Oct: unchecked: no first check and the web check could not read it,open
 "2 wording/citation, used",sheu2019cma,source ?,page 2 not saved ?),,backup_neighbours,B13 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",skatOverskud,source ?,and the heat-pump rule and 3 × deduction were not found ?),,heat_captured,B4 28 Oct: agreed fixes applied; single-check points marked ?,open
@@ -297,6 +291,7 @@ impact,id,type,what is open,number at stake,used by,where found,status
 "2 wording/citation, used",statcanHousehold,source ?,2011–2021 ? | biennial ?,,homes_heated; receiver_demand,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",statcanSHS,source ?,2019 ?),,affordability,B9 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",stulz,source ?,"""CRAC"" ?)",,noise_level,B14 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",tallaghtD22,source ?,(?) | price not stated ?),,capex_split; price_floor,corrected; temp and AWS price marked ?,open
 "2 wording/citation, used",teliaHKI2024,source ?,printed title ? | so one figure is misprinted ?),,cop; erf; it_load_actual,B4 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",tenK_life,source ?,"(?: one check reads FY2023, decided Jul 2022) | prior range ?)",,horizons,"B2 28 Oct: not confirmed, marked ?",open
 "2 wording/citation, used",thGlobalSwitch2025,source ?,'enclosed' is our word ?),,visibility,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open

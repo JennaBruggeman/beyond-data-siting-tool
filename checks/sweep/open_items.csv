@@ -1,23 +1,11 @@
 id,type,what is open,where found,status
-hollandSnow,decision,"Area: 690,000 ft² (web page) vs about 1,050,000 ft² (City fact sheet)",B2,open
-vanISMP2014,decision,"$10,000 / 15 m³ may be a rainwater-harvesting system, not a detention tank",B2,open
-portPER2025,decision,Category C review time 60–120 or 120–170 business days; 100 m pipeline threshold,B2,open
-caAbMOU2026,decision,TIER price path: $130 in 2035 vs $115 (2030) and $130 effective target in 2040,B2,open
-edmBylaw18100,decision,Cite Bylaw 19627 instead (18100 possibly repealed),B2,open
 edmTaxRates2026,J.B. can check,Find the 2026 Edmonton property tax bylaw (non-residential rates),B2,open
-nrcSeismic2020,decision,"seismic_sa02 uses unverified proposed 2020 values (Vancouver 0.848, Edmonton 0.103); take final values from the NRCan 2020 seismic hazard tool for both sites",B3,open
 dellR760,needs source,Server weight 36.1 kg is not in the cited LCA; find a Dell spec sheet,B3,open
 cusp,needs source,CUSP 6% energy-poverty threshold: website gone; find the CUSP report or use StatCan 10% only,B3,open
 abDataCentreLevy,J.B. can check,Off-grid rate R (0%?) after Bill 17: read the consolidated Corporate Tax Act Part 9.1,B3,open
-bcRLCF012b,decision,Carbon-intensity range: checks disagree on current rows (7.58–37.06 vs −7.03–131.35); re-read the table,B3,open
-cologixVAN4_2026,decision,Cologix VAN4 capacity: web page 4 MW vs spec sheet 6.5 MW (operator claims),C trace,open
-vibration STC,decision,"STC 47/55 read in VBBL 2019 / BCBC 2018, not NBC 2020 as the coef says",C trace,open
 schneiderUPS2020,needs source,Schneider UPS blog logged at a thegreengrid.org URL; find the right link,C trace,open
 bchTariff2026,J.B. can check,"BC Hydro rate figures (LGS 29.99 ¢/day, $13.83/kW, 6.79 ¢/kWh; RS 1830) not read by either check: read them in your downloaded Electric Tariff",B4,open
-price_floor,node review,"capex 0.5–0.65 M€/MW is attributed to Hiltunen 2020, which assumes 0.6; cite Wahlroos / Rämä directly",B4,open
 edmPermitsDC2026,J.B. can check,"Edmonton permit floor areas may be ft², not m² (some are exact conversions); open a few permits to confirm the unit",B12,open
-tallaghtD22,decision,"capex_split calibration wording: ""five of seven"" is effectively four confirmed (AWS heat price not stated)",B1,open
-scieu2024,decision,Use national 2.06 GJ/m² for hospitals (provincial values not found)?,B1,open
 edmParcel,J.B. can check,Unreachable for both checks,B1,open
 bcAssess2026,J.B. can check,BC Assessment page blocked (check it on the Abacus page yourself),B1,open
 bytes2heat,needs source,Unreachable,B1,open
@@ -83,6 +71,7 @@ dfKatalog2022,source ?,(?: not checked; Table 1.1 lists 19 MW),B4 28 Oct: two ch
 teliaHKI2024,source ?,printed title ? | so one figure is misprinted ?),B4 28 Oct: agreed fixes applied; single-check points marked ?,open
 nivosMantsala,source ?,"(?: 4.0 MW heat pump, 20 GWh = 54 %, exhaust temperatures, gas −70 % and DH price −11 % not confirmed by either check)",B5 28 Oct: agreed fixes applied; single-check points marked ?,open
 exergiAR2023,source ?,(?),B5 28 Oct: two checks; disputed points marked ?,open
+tallaghtD22,source ?,(?) | price not stated ?),corrected; temp and AWS price marked ?,open
 engiePA10,source ?,per year not printed ?) | (? the 2022 release gives €4.3 M),B5 28 Oct: agreed fixes applied; single-check points marked ?,open
 rvoCases2018,source ?,"(?: one check found €0.8 M installations + ≈€0.7 M network on p.13 and the only €1.5 M is Aalsmeer, p.15; not re-confirmed)",single check: marked ?,open
 euReg2024_1364,source ?,"(?: details read from a reproduction, not EUR-Lex; re-read at the primary)",B5 28 Oct: agreed fixes applied; single-check points marked ?,open
@@ -229,6 +218,7 @@ nfpa855_2026,source ?,for units of 20 kWh or less ?),B11 28 Oct: two checks; dis
 uptimeTiers,source ?,'no redundant components' is our summary ?),B11 28 Oct: two checks; disputed points marked ?,open
 r2Van2026,source ?,B16 28 Oct: second check could not read it (single check),B16 28 Oct: second check could not read it (single check),open
 r2Edm2026,source ?,B16 28 Oct: second check could not read it (single check),B16 28 Oct: second check could not read it (single check),open
+cologixVAN4_2026,source ?,000 ft² ?),B8 28 Oct: two checks; disputed points marked ?,open
 vanStreets2026,source ?,updated by the City 27 Jul 2026 ?,B11 28 Oct: agreed fixes applied; single-check points marked ?,open
 statcanGH2021,source ?,not re-checked ?),B11 28 Oct: two checks; disputed points marked ?,open
 blatchfordBP2021,source ?,"(?: one check read the City's 2020–2023 edition, which has the energy centre in the Town Centre and no Blatchford Market sewer lines or m² forecast; check the uploaded file)",B4 28 Oct: two checks; disputed points marked ?,open
@@ -293,6 +283,7 @@ vanOnceThrough,source ?,"(?: one check reads s. 3.10–3.11 in the 2021 consolid
 mvStageHistory,source ?,(?: not in this report; need their own sources),B3 28 Oct: agreed fixes applied; single-check points marked ?,open
 nbcImportance,source ?,"B2 28 Oct: not confirmed, marked ?","B2 28 Oct: not confirmed, marked ?",open
 vbbl2025Seismic,source ?,(?: the guide is internally inconsistent — p. 9 says projects submitted before 15 Sep 2026 may use the 2019 rules; a newer v1.01 exists),B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
+nrcSeismic2020,source ?,"B3 28 Oct: not confirmed, marked ?","B3 28 Oct: not confirmed, marked ?",open
 jibcGroupLodging,source ?,the guide's own 1.5 × 2.5 m is 3.75 m² ?),B5 28 Oct: agreed fixes applied; single-check points marked ?,open
 edmWarming,source ?,'minimum of 3 days in a row' ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 cec2024ESS,source ?,the code is paywalled ?),B5 28 Oct: agreed fixes applied; single-check points marked ?,open
@@ -303,6 +294,7 @@ vanNationsNamed,source ?,"B2 28 Oct: not confirmed, marked ?","B2 28 Oct: not co
 edmNationsNamed,source ?,(?: one check counts 16 member nations in the Confederacy list; no total printed),B5 28 Oct: two checks; disputed points marked ?,open
 vanI2Ground,source ?,I-3 and FC-2 clauses not in the saved copy ?,B12 28 Oct: agreed fixes applied; single-check points marked ?,open
 nbc2020Live,source ?,not re-checked ?) | copy not in the saved set ?),B12 28 Oct: agreed fixes applied; single-check points marked ?,open
+scieu2024,source ?,unconfirmed: provincial values not found,unconfirmed: provincial values not found,open
 ftaVibration,source ?,criteria vary with event frequency ?),B12 28 Oct: agreed fixes applied; single-check points marked ?,open
 vanEmbodied,source ?,(?: not from this source),B2 28 Oct: agreed fixes applied; single-check points marked ?,open
 aesoDC2025,source ?,Sep 2025): 'Are large loads paying their fair share of transmission costs?,B7 28 Oct: confirmed by two checks,open
@@ -327,13 +319,16 @@ bchDEP2025,source ?,"page says ""under 1 MVA"" and bands $1–4.99M ? | refunds 
 aesoTariff5,source ?,discretionary ?) | 000 ?,B7 28 Oct: two checks; disputed points marked ?,open
 bchSelfGen2026,source ?,BCUC application ID 1323 ?),B2 28 Oct: agreed fixes applied; single-check points marked ?,open
 vanRainPage,source ?,(?: these figures and the phrase are not on this page; source not located),B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+edmBylaw18100,source ?,"B2 28 Oct: not confirmed, marked ?","B2 28 Oct: not confirmed, marked ?",open
 nrcCBD160,source ?,"(?: not verified; one check finds the NRC record titled 'Design heat requirements for snow melting systems', with no author, digest number or year shown, and the PDF not openable)","B3 28 Oct: not confirmed, marked ?",open
+hollandSnow,source ?,"B2 28 Oct: not confirmed, marked ?","B2 28 Oct: not confirmed, marked ?",open
 edmSidewalk,source ?,page title ?),B15 28 Oct: two checks; disputed points marked ?,open
 edmEncroach,source ?,current fee ?),B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 vanOEM2018,source ?,title per check 2 ?),B15 28 Oct: two checks; disputed points marked ?,open
 bcDWPR,source ?,"(? the duty is in the Act, ss. 7–8; the regulation sets how permits are issued and the exemptions)",B7 28 Oct: two checks; disputed points marked ?,open
 ashraeTC99card,source ?,table number not printed on the card ?) | with an RH cap per the footnote ?),B18 28 Oct: two checks; disputed points marked ?,open
 bcWQGtemp,source ?,printed title ?),B7 28 Oct: two checks; disputed points marked ?,open
+portPER2025,source ?,"B2 28 Oct: not confirmed, marked ?","B2 28 Oct: not confirmed, marked ?",open
 howley2021,source ?,cited from Kalke et al. 2019 ?) | cited from Total E&P Canada 2007 ?),B15 28 Oct: two checks; disputed points marked ?,open
 ecccNormals2020,source ?,values not re-checked ?),B13 28 Oct: two checks; disputed points marked ?,open
 abPWR277,source ?,our paraphrase ?),B6 28 Oct: two checks; disputed points marked ?,open
