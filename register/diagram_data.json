@@ -9,7 +9,7 @@
 "quantities": 178,
 "conditions": 101,
 "opportunities": 21,
-"sources": 750
+"sources": 751
 }
 },
 "stages": [
@@ -815,7 +815,7 @@
 "stage": "characterise",
 "name": "Heat temperature by cooling type",
 "formula": "air-cooled 25–35; liquid-cooled 50–60; two runs if unknown",
-"coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): air-side return hot air 25–47 °C, chiller condenser 40–50 °C, chilled-water loop 10–20 °C (Yuan et al. 2025 Table 2; Oró et al. 2019); the tool keeps 25–35 °C as the typical air-cooled figure. Alissa p.332; Wahlroos p.1753; heat-rejection equipment per site from permits: rooftop condensers (1050 W Pender, 175 W Cordova), rooftop chiller (55 E 7th), P1 chiller room (555 W Hastings), L8 roof well (515 W Hastings); seen on site (J.B.): 55 E 7th lane deck with a Cummins generator enclosure and a packaged cooling unit piped into the building (rooftop chiller in BP-2019-00595 not photographed — keep both); 111 E 5th louvre bands and three rooftop vent stacks; Internet Centre two rooftop condensing units (corroborates the 2024 \"two RTUs, AC only\" permit); Qu EDM2 cooling units on a raised platform under a canopy, \"Munters\" casings (air-side or indirect evaporative suggested, not confirmed); Kyndryl Acheson cooling plant with pipe racks into the wall on the south side; Baxtel claim for Kyndryl: two 550-ton water-cooled chillers (≈3.9 MW thermal) — operator/directory claim | 19 Oct 2026: liquid-cooled measured design 24 °C supply, 35–40 °C return (NREL ESIF); 50–60 °C remains unverified (secondary).",
+"coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): air-side return hot air 25–47 °C, chiller condenser 40–50 °C, chilled-water loop 10–20 °C (Yuan et al. 2025 Table 2; Oró et al. 2019); the tool keeps 25–35 °C as the typical air-cooled figure. Wahlroos p.1753 (temperatures); Alissa p.332 (cold-plate liquid share 50–80%+, not temperatures); heat-rejection equipment per site from permits: rooftop condensers (1050 W Pender, 175 W Cordova), rooftop chiller (55 E 7th), P1 chiller room (555 W Hastings), L8 roof well (515 W Hastings); seen on site (J.B.): 55 E 7th lane deck with a Cummins generator enclosure and a packaged cooling unit piped into the building (rooftop chiller in BP-2019-00595 not photographed — keep both); 111 E 5th louvre bands and three rooftop vent stacks; Internet Centre two rooftop condensing units (corroborates the 2024 \"two RTUs, AC only\" permit); Qu EDM2 cooling units on a raised platform under a canopy, \"Munters\" casings (air-side or indirect evaporative suggested, not confirmed); Kyndryl Acheson cooling plant with pipe racks into the wall on the south side; Baxtel claim for Kyndryl: two 550-ton water-cooled chillers (≈3.9 MW thermal) — operator/directory claim | 19 Oct 2026: liquid-cooled measured design 24 °C supply, 35–40 °C return (NREL ESIF); 50–60 °C remains unverified (secondary).",
 "unit": "°C",
 "sources": [
 "lorenz",
@@ -3898,7 +3898,7 @@
 "stage": "opportunity",
 "name": "E-waste",
 "formula": "servers × mass ÷ 6 yr",
-"coef": "26.3 kg (2U); 21.25 kg (1U)",
+"coef": "26.3 kg (2U, R740); 21.2 kg (1U, R650)",
 "unit": "kg/yr",
 "sources": [
 "dell",
@@ -3988,11 +3988,11 @@
 "kind": "quantity",
 "stage": "opportunity",
 "name": "Rare earth in drives",
-"formula": "drives × 3–4 g",
-"coef": "Danczak 2018",
+"formula": "drives × about 1–4 g of rare earths (our arithmetic from Dańczak 2018)",
+"coef": "Dańczak et al. 2018, Physicochemical Problems of Mineral Processing 54(2):363–376: NdFeB magnets 6–19 g per desktop (3.5\") HDD and 2–6 g per notebook (2.5\") HDD (p. 369); Nd 25–29 %, Pr 2–13 %, Dy 0.1–1.4 % of the magnet (Table 6, p. 372) → about 1–1.5 g (2.5\") to about 4 g (3.5\") of rare earths per drive (our arithmetic; not printed)",
 "unit": "g",
 "sources": [
-"dell"
+"danczak2018"
 ],
 "source_roles": [
 {
@@ -10495,7 +10495,7 @@
 "stage": "test",
 "name": "Battery rules",
 "formula": "grid battery (ESS): certified; not above 23 m or below the lowest egress level unless in an electrical equipment vault; outdoors ≥ 3 m from egress and ≥ 1.5 m from openings unless UL 9540A-evaluated; UPS batteries are not an ESS and follow the general battery rules (ventilation, authorized access)",
-"coef": "CEC 2024 Section 64 (Rules 64-902, 64-926, 64-1002; Appendix B) published 4 Mar 2024; in force Alberta 1 Apr 2025, BC 4 Mar 2025 ?; no city fire bylaw adds battery rules in either city; NFPA 855 commercial thresholds stay reference only (unverified)",
+"coef": "CEC 2024 Section 64 (Rules 64-902, 64-926, 64-1002; Appendix B) published 4 Mar 2024; in force Alberta 1 Apr 2025, BC 4 Mar 2025 (Technical Safety BC, IB-EL 2024-01, 11 Jun 2024); no city fire bylaw adds battery rules in either city; NFPA 855 commercial thresholds stay reference only (unverified)",
 "unit": "rule",
 "sources": [
 "cec2024ESS"
@@ -15526,7 +15526,7 @@
 "cimd": "StatCan Canadian Index of Multiple Deprivation 2021 (DA level); Census 2021 DA boundaries (not named on the record ?) — https://open.canada.ca/data/en/dataset/ec6dc8e7-2fa0-4e49-8969-38541ca0a34d",
 "clf": "Carbon Leadership Forum WBLCA benchmark 461 kgCO2e/m² — no data-centre benchmark (matrix MA-20) (?: report title and year not given; not verified)",
 "crf": "CRF = i / (1 − (1+i)^−n) (NREL ATB, printed with WACC and t); LCoH (IEA SHC Task 54 INFO Sheet A01); TCO (Barroso ch. 8 ?: chapter not confirmed) (Formulas sheet)",
-"dell": "Dell carbon-footprint PDFs (Jan/Feb 2019, manufacturer claims): R740 26.3 kg (2U per Dell R740 Technical Guide), R540 25.4 kg (product weights; 2U per Dell R540 Technical Guide); R650 21.2 kg ('4 x 3.5-inch', maximum with all drives; 1U) from Dell's R650 Technical Specifications, chassis weight; Danczak 2018 rare earths and Graedel 2011 copper are separate sources, not in the Dell PDFs (their values not checked ?) — https://i.dell.com/sites/csdocuments/corpcomm_docs/en/carbon-footprint-poweredge-r740.pdf",
+"dell": "Dell carbon-footprint PDFs (Jan/Feb 2019, manufacturer claims): R740 26.3 kg (2U per Dell R740 Technical Guide), R540 25.4 kg (product weights; 2U per Dell R540 Technical Guide); R650 21.2 kg ('4 x 3.5-inch', maximum with all drives; 1U) from Dell's R650 Technical Specifications, chassis weight; rare earths come from Dańczak et al. 2018 (separate source); Graedel 2011 is not used — https://i.dell.com/sites/csdocuments/corpcomm_docs/en/carbon-footprint-poweredge-r740.pdf",
 "drake": "Drake Landing BTES 'apparent efficiency' (ignores year-to-year change in stored energy) 0.06 in year 1, 0.54 by year 4, peak 0.56 in year 7, not a steady rise (Mesquita et al. 2017) — https://proceedings.ises.org/paper/swc2017/swc2017-0033-Mesquita.pdf",
 "edmBench": "Edmonton building benchmarking: owner consent needed ('voluntary' is our word); Year 7 dashboard 'coming soon' — https://www.edmonton.ca/programs_services/environmental/building-energy-benchmarking-program",
 "edmParcel": "Edmonton Property Information (Current Calendar Year; rows updated 26 Oct 2026): total_gross_area ('typically measured from outside walls'; no unit given, read as m², our inference from typical house sizes), zoning, year_built per parcel; Rooflines 2019: building height — https://data.edmonton.ca/d/dkk9-cj3x",
@@ -15544,7 +15544,7 @@
 "horizons": "Horizons: servers ~6 yr; plant 15–25; shell up to 40; network 40–50 (handoff rule 7); control in colocation (Greene; Monstadt and Saltzman) (handoff §3; ?: internal note, each figure needs its own source in the node review)",
 "iso9613": "ISO 9613-2:2024; screen Lp ≈ Lw − 20·log10(r) − 8 (our simplification, not from the standard); NoiseModelling (open source) (Formulas sheet)",
 "lbnl2024": "Shehabi et al., 2024 United States Data Center Energy Usage Report, LBNL-2001637, Lawrence Berkeley National Laboratory, Dec 2024 — https://eta-publications.lbl.gov/publications/2024-lbnl-data-center-energy-usage-report (DOI 10.71468/P1WC7Q)",
-"lorenz": "Lorenz COP, η 0.50–0.60 (Pieper et al. 2020, Energy 205:117994: 0.5 assumed in the literature, design values 0.53–0.61 by heat source; Reinholdt et al. 2018 is an IIR conference paper, value not read ?); air 25–35 °C, liquid 50–60 °C (Wahlroos et al. 2018, RSER 82, p. 1753, confirmed; Alissa ?: not checked) (Formulas sheet)",
+"lorenz": "Lorenz COP, η 0.50–0.60 (Pieper et al. 2020, Energy 205:117994: 0.5 assumed in the literature, design values 0.53–0.61 by heat source; Reinholdt/Jensen et al. 2018, IIR Gustav Lorentzen, give the method but no η value); air 25–35 °C, liquid 50–60 °C (Wahlroos et al. 2018, RSER 82, p. 1753); Alissa et al. 2025 (Nature 641, p. 332) gives the cold-plate liquid share, '50% to 80% or more', not these temperatures (Formulas sheet)",
 "neu9552": "Energy Utility System By-law 9552 (the False Creek NEU) Sch. C: energy charge $65.172/MWh; credit for heat returned = 50% → $32.59/MWh (our calculation) — https://bylaws.vancouver.ca/9552c.PDF",
 "neuReport": "NEU rates report RTS 18251 (Oct 2025): 47 buildings, 667,000 m²; 71% renewable (?: one check reads a 70% target, not achieved share); gas $2.23/GJ; RNG rider — https://council.vancouver.ca/20251112/documents/spec1d.pdf",
 "nonComp": "Non-compensatory method: Munda; Cinelli et al. 2014; Rowley et al. 2012; handoff rule 1 (handoff §3)",
@@ -15580,7 +15580,7 @@
 "vanParking": "Vancouver Parking and Loading Design Supplement, 2.5 × 5.5 m — https://guidelines.vancouver.ca/bulletins/bulletin-parking-loading-design-supplement.pdf",
 "edmParking": "Edmonton Zoning Bylaw 12800 s.54.1 (Bylaw 12800 repealed when Zoning Bylaw 20001 took effect, 1 Jan 2024; the saved page does not say so) — https://webdocs.edmonton.ca/zoningbylaw/ZoningBylaw/Part1/Development/54_1_General_On-Site_Parking_and_Loading_Requirements.htm",
 "m104": "BC Ministerial Order M104 (2019) and BCUC G-66-19 (?: the order number is not in the saved file, whose attachment is a draft \"G-xx-xx\") — https://www.bclaws.gov.bc.ca/civix/document/id/mo/hmo/m0104_2019",
-"dea": "Danish Energy Agency, Technology Data for Electricity and District Heating Production, data sheets updated August 2026 (version 0019): sheets 40 (compression heat pumps, waste heat 1/3/10 MW; air-source 1/3/10 MW) and 41 (electric boilers) in 2025 EUR; sheet 44 (gas boilers, columns 2015/2020/2030/2050) in 2020 EUR — J.B. download, data/DEA_technology_data_el_dh_2026-08.xlsx; extract data/dea_catalogue_extract.json (sheet 44 entries mis-keyed ?). Pit storage is in DEA's separate Technology Data – Energy storage (version 0011, CC BY 4.0; saved in sources/library/public/deaStorage): ch. 140 Seasonal Heat Storage, p. 43 footprint = 20.15 × V^0.61 m² (100,000 m³ → 22,600 m²); p. 45–46 built Danish pits 2013–2022: 47–97 kWh of capacity per m³ (our arithmetic from the table), prices 0.36–1.83 €/kWh",
+"dea": "Danish Energy Agency, Technology Data for Electricity and District Heating Production, data sheets updated August 2026 (version 0019): sheets 40 (compression heat pumps, waste heat 1/3/10 MW; air-source 1/3/10 MW) and 41 (electric boilers) in 2025 EUR; sheet 44 (gas boilers, columns 2015/2020/2030/2050) in 2020 EUR — J.B. download, data/DEA_technology_data_el_dh_2026-08.xlsx; extract data/dea_catalogue_extract.json (sheet 44 re-extracted 28 Oct 2026 with its own 2015/2020/2030/2050 columns). Pit storage is in DEA's separate Technology Data – Energy storage (version 0011, CC BY 4.0; saved in sources/library/public/deaStorage): ch. 140 Seasonal Heat Storage, p. 43 footprint = 20.15 × V^0.61 m² (100,000 m³ → 22,600 m²); p. 45–46 built Danish pits 2013–2022: 47–97 kWh of capacity per m³ (our arithmetic from the table), prices 0.36–1.83 €/kWh",
 "wilsonWorrall": "Wilson & Worrall 2021, Environ. Sci.: Water Res. Technol. 7:1760 — https://pubs.rsc.org/en/content/articlepdf/2021/ew/d1ew00411e",
 "kwlSewer": "KWL for Metro Vancouver 2014, heat-seeking sewer model — https://www.canadianconsultingengineer.com/awards/pdfs/2014/F5_HeatSeekingSewerModel.pdf",
 "cda2023": "Copper Development Association 2023, Copper in Data Centers: A North American Market Study (Sept 2023; industry association), 20–40 'tons/MW' (metric or short not stated; also 'nearly 3 tons/MW' at rack level, p. 21) — https://live.copper.org/copperpowers/reports/copper-in-data-centers-report.pdf",
@@ -16097,7 +16097,7 @@
 "jibcGroupLodging": "JIBC / BC Emergency Support Services, Introduction to Group Lodging participant guide: 3.5 m² minimum sleeping area per person (the guide itself gives 1.5 × 2.5 m, which is 3.75 m²; tool uses the stated 3.5 m²), 0.75 m between beds (p. 35); facilities 'will only be opened up if they are suitable and have power' (p. 44) — https://www.jibc.ca/sites/default/files/2020-05/EMD-EMRG-1612-Intro-to-GL-Participant-Guide-20150826.pdf",
 "vanHubs": "City of Vancouver, Disaster support hubs: 25 hubs (mostly community centres); backup power not stated — https://vancouver.ca/home-property-development/disaster-support-hubs.aspx",
 "edmWarming": "City of Edmonton, Extreme Weather Response for Winter: activated at −20 °C with wind chill for 3 days ('minimum of 3 days in a row' ?, single check); City recreation centres and libraries as places to warm up (seasonal page, read 28 Oct 2026) — https://www.edmonton.ca/programs_services/emergency_preparedness/extreme-weather-winter",
-"cec2024ESS": "CSA C22.1:24 Canadian Electrical Code, Section 64 (read 19 Oct 2026 and re-read 28 Oct 2026 from J.B.'s licensed copy, March 2024 printing; not stored): published 4 Mar 2024; in force Alberta 1 Apr 2025, BC 4 Mar 2025 ? (Alberta Municipal Affairs notice, Apr 2025). Rule 64-1002: battery energy storage over 1 kWh must be certified (Rule 2-024), installed to the manufacturer's instructions, and — except in an electrical equipment vault — not where the floor is more than 23 m above grade or below the lowest level of egress. Rule 64-926: outdoor batteries at least 3 m from a means of egress and 1.5 m from windows, vents and doors, unless evaluated to ANSI/CAN/UL 9540A and installed to the manufacturer's instructions. Rule 64-902: plaque showing the system and its disconnects. Appendix B: the ESS definition does not include a UPS (covered by CSA C22.2 No. 107.3); batteries in general follow Rules 64-800–64-820 (ventilation if they vent gas, access by authorized persons only). 20 kWh / 80 kWh caps apply to residential occupancies only (Rule 64-1100). Neither Vancouver Fire By-law 14419 nor Edmonton Fire Rescue Services Bylaw 15309 (consolidated 1 Jan 2025, read) has battery or fuel provisions — data/raw/codes/CEC_2024_note.txt; data/raw/ab/ma_notice_CEC2024_2025-04.pdf; data/raw/edm/bylaw/C15309_fire_2025-01-01.pdf",
+"cec2024ESS": "CSA C22.1:24 Canadian Electrical Code, Section 64 (read 19 Oct 2026 and re-read 28 Oct 2026 from J.B.'s licensed copy, March 2024 printing; not stored): published 4 Mar 2024; in force Alberta 1 Apr 2025, BC 4 Mar 2025 (Technical Safety BC, IB-EL 2024-01, 11 Jun 2024) (Alberta Municipal Affairs notice, Apr 2025). Rule 64-1002: battery energy storage over 1 kWh must be certified (Rule 2-024), installed to the manufacturer's instructions, and — except in an electrical equipment vault — not where the floor is more than 23 m above grade or below the lowest level of egress. Rule 64-926: outdoor batteries at least 3 m from a means of egress and 1.5 m from windows, vents and doors, unless evaluated to ANSI/CAN/UL 9540A and installed to the manufacturer's instructions. Rule 64-902: plaque showing the system and its disconnects. Appendix B: the ESS definition does not include a UPS (covered by CSA C22.2 No. 107.3); batteries in general follow Rules 64-800–64-820 (ventilation if they vent gas, access by authorized persons only). 20 kWh / 80 kWh caps apply to residential occupancies only (Rule 64-1100). Neither Vancouver Fire By-law 14419 nor Edmonton Fire Rescue Services Bylaw 15309 (consolidated 1 Jan 2025, read) has battery or fuel provisions — data/raw/codes/CEC_2024_note.txt; data/raw/ab/ma_notice_CEC2024_2025-04.pdf; data/raw/edm/bylaw/C15309_fire_2025-01-01.pdf",
 "vanUndrip": "City of Vancouver UNDRIP Strategy (report 25 Oct 2022 ?; 79 Calls to Action; e.g. 1.18 first right of refusal on City land, 2.3 'include this in permitting decisions', 3.10 free, prior and informed consent) and Action Plan 2024–28 (endorsed 25 Jun 2024; 'early engagement threshold points', in progress; ?: Action Plan not checked) — https://council.vancouver.ca/20221025/documents/p1.pdf ; https://vancouver.ca/files/cov/undrip-action-plan-2024-2028.pdf",
 "bcDeclarationAct": "BC Declaration on the Rights of Indigenous Peoples Act (2019) s. 3; Interpretation Act amendment 23 Nov 2021; the Province's plan does not set local-government duties (?: these three not yet checked against bclaws); provincial guide (rev. Dec 2014): local governments have no constitutional duty to consult but a statutory obligation 'to consider whether consultation … is required'; the Province's duty includes 'decisions that affect private land' — https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/19044 ; https://www2.gov.bc.ca/assets/gov/british-columbians-our-governments/local-governments/governance-powers/first_nations_engagement_guide.pdf",
 "bcEAthresholds": "BC Reviewable Projects Regulation (243/2019): power plants ≥ 50 MW, transmission ≥ 345 kV and ≥ 40 km, groundwater ≥ 75 L/s; data centres not listed — https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/243_2019",
@@ -16264,7 +16264,8 @@
 "vaSpec230541": "US Department of Veterans Affairs, Spec. 23 05 41 Noise and Vibration Control for HVAC Piping and Equipment (2016), via WBDG: isolator minimum static deflection by support location (on grade, 20–50 ft floor span), non-decreasing with span (flat in some rows); cites the ASHRAE HVAC Applications noise and vibration chapter (government spec; sources/23 S22) — https://www.wbdg.org/FFC/VA/VANCAS/VANCA230541.pdf",
 "melo2001": "Melo & Chapnik 2001, The absence of structure-borne sound transmission regulation in the Ontario Building Code, Canadian Acoustics 29(3):84–85 (short note, peer review ?; sources/23 S20) — https://jcaa.caa-aca.ca/index.php/jcaa/article/download/1394/1137/1527",
 "edmZoningGeo": "City of Edmonton Open Data, Zoning Bylaw Geographical Data (map view; J.B. export Zoning_Bylaw_Geographical_Data_20261014.csv, date_ext 2026/10/12): zone codes for all properties; 1,068 of 11,549 features (9.2 %) Direct Control (count in sources/18) — https://data.edmonton.ca/d/ruwn-htv8",
-"vanCD1_520": "City of Vancouver, CD-1 (520) By-law No. 10403 (2011), s. 3.4(c): floors for 'heating and mechanical equipment … which are at or below base surface' excluded from floor space ratio (sources/22 S7) — https://cd1-bylaws.vancouver.ca/CD-1(520).pdf"
+"vanCD1_520": "City of Vancouver, CD-1 (520) By-law No. 10403 (2011), s. 3.4(c): floors for 'heating and mechanical equipment … which are at or below base surface' excluded from floor space ratio (sources/22 S7) — https://cd1-bylaws.vancouver.ca/CD-1(520).pdf",
+"danczak2018": "Dańczak, Chojnacka, Matuska, Marcola, Leśniewicz, Wełna, Żak, Adamski, Rycerz 2018, The recycling-oriented material characterization of hard disk drives with special emphasis on NdFeB magnets, Physicochemical Problems of Mineral Processing 54(2):363–376 (peer-reviewed): magnets 6–19 g per desktop HDD, 2–6 g per notebook HDD (p. 369); Nd 25–29 %, Pr 2–13 %, Dy 0.1–1.4 % of the magnet (Table 6, p. 372) — https://yadda.icm.edu.pl/baztech/element/bwmeta1.element.baztech-9f3156b7-678b-4a46-a1c5-cbfeb9347b12/c/363-376_ppmp_2018_2.pdf"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -19508,7 +19509,8 @@
 "vaSpec230541": "gen",
 "melo2001": "gen",
 "edmZoningGeo": "edm",
-"vanCD1_520": "van"
+"vanCD1_520": "van",
+"danczak2018": "gen"
 },
 "city_gaps": {
 "van": [
