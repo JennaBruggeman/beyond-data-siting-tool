@@ -11,6 +11,9 @@ const LOTS = {
   E05: { lab: '8803 Stadium Rd NW', sub: 'IM · new building', sel: { city: 'edm', tile: '0_0', id: '51053' }, ans: { built: 'new', extent: 'whole', floor: '' } },
   CLARK: { lab: '1425 Clark Dr', sub: 'I-2 · new building', sel: { city: 'van', tile: '2_1', id: '23060741' }, ans: { built: 'new', extent: 'whole', floor: '' } },
   E123: { lab: '12603 123 Street NW', sub: 'IH · new building', sel: { city: 'edm', tile: '-1_1', id: '883345' }, ans: { built: 'new', extent: 'whole', floor: '' } },
+  V339: { lab: '339 1st Ave E', sub: 'I-3 · new building (Vancouver thesis site from 27 Oct)', sel: { city: 'van', tile: '1_1', id: '63819485' }, ans: { built: 'new', extent: 'whole', floor: '' } },
+  E06A: { lab: '74 Airport Rd NW', sub: 'BE · new building (Edmonton thesis site, lot 1 of 2)', sel: { city: 'edm', tile: '-1_1', id: '176767' }, ans: { built: 'new', extent: 'whole', floor: '' } },
+  E06B: { lab: '64 Airport Rd NW', sub: 'BE · new building (Edmonton thesis site, lot 2 of 2)', sel: { city: 'edm', tile: '-1_1', id: '146402' }, ans: { built: 'new', extent: 'whole', floor: '' } },
   HAST: { lab: '555 W Hastings', sub: 'existing · one upper floor', sel: { city: 'van', tile: '0_2', id: '59013407' }, ans: { built: 'existing', extent: 'part', floor: 'upper' } },
 };
 
