@@ -533,7 +533,7 @@ const SRC3={
  ev:'register: ev_stalls, ev_area (charger ratings; Vancouver and Edmonton parking dimensions)', gen:'register: genset_test (AUC 27938-D01-2023, derived; AP-42 Table 3.4-1 upper bounds)', ctl:'register: workload_control (Crozier & Liska 2025)',
  evap:'register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)', wbe:'register: water_behind_electricity (US thermoelectric ~1.25 L/kWh; hydro ~16.8 L/kWh)', rain:'register: rainwater (ECCC Normals 1991–2020; runoff coefficient 0.8 and a one-wet-month tank assumed; CSA B805 not read)',
  reuse:'register: a_reuse_rules, reclaimed_makeup (VBBL 2025; Metro Vancouver UT-019; EPCOR)', wprice:'register: water_supply (City of Vancouver 2026 rates)', sewer:'register: sewer_sink (Bylaw 299 limits; KWL 2014)',
- srv:'LBNL 2024: about 600 W per server (register: servers)', ew:'register: ewaste (server masses 21.25–26.3 kg, 6-year refresh)', cu:'register: copper_tonnes (Copper Development Association 2023 — industry figure)',
+ srv:'LBNL 2024: about 600 W per server (register: servers)', ew:'register: ewaste (server masses 21.2–26.3 kg, 6-year refresh)', cu:'register: copper_tonnes (Copper Development Association 2023 — industry figure)',
  eit:'register: embodied_it (Dell R760 life-cycle assessment 2025 — manufacturer)', eb:'register: embodied_building (461 kg CO₂e/m² median; no data-centre benchmark)',
  snd:'register: noise_level (screen Lp = Lw − 20 log r − 8; Trane RTAF size 280, 1,010 kW: Lw 98 low-noise, 101 standard, one unit per MW)', lf:'register: lf_flag (AUC Rule 012 s. 4.5)', light:'register: light_at_window (CIE 150:2017; Edmonton Bylaw 20001 s. 5.120(3); Vancouver: no lux limit)',
  so:'register: standoff (Ontario GO-ITS 25.18, transferred)', watch:'register: watched_area (field observation, labelled as one person\'s)', ppl:'Statistics Canada, Census 2021 Profile by dissemination area (98-401-X2021006) and DA boundaries; counts spread evenly within each area',
@@ -601,7 +601,7 @@ function waterView(){
 }
 function materialsView(){
   const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, racks=mw*1000/R.kWPerRack, servers=mw*1000/0.6;
-  const ew=[servers*21.25/6/1000,servers*26.3/6/1000], cu=[mw*20,mw*40], eit=[servers*4.177*0.10/6,servers*4.177*0.15/6], eb=f.gross[1]*0.461;
+  const ew=[servers*21.2/6/1000,servers*26.3/6/1000], cu=[mw*20,mw*40], eit=[servers*4.177*0.10/6,servers*4.177*0.15/6], eb=f.gross[1]*0.461;
   let h=tabBar('materials')+`<h2>What it is made of, and how often</h2><p class="draft">The building lasts decades; <span class="k">the servers are replaced every five to six years</span>.</p>
   <h3>The equipment</h3><dl><dt>Racks</dt><dd>about ${fmt(racks)} at 8 kW each</dd><dt>Servers</dt><dd>about ${fmt(servers)} at 600 W each</dd>
   <dt>Electronic waste</dt><dd>${rng(ew[0],ew[1],'t/yr')} of servers alone, on a six-year refresh</dd><dt>Copper</dt><dd>${fmt(cu[0])}–${fmt(cu[1])} t in the facility (industry figure)</dd>
@@ -611,7 +611,7 @@ function materialsView(){
   ${mathBox([
     `Racks: ${mw} MW × 1,000 ÷ ${R.kWPerRack} kW per rack = <b>${n0(racks)}</b>.`,
     `Servers: ${mw} MW × 1,000 ÷ 0.6 kW each = <b>${n0(servers)}</b>.`,
-    `Electronic waste: ${n0(servers)} servers × 21.25–26.3 kg ÷ 6 years ÷ 1,000 = <b>${rng(ew[0],ew[1],'t/yr')}</b>.`,
+    `Electronic waste: ${n0(servers)} servers × 21.2–26.3 kg ÷ 6 years ÷ 1,000 = <b>${rng(ew[0],ew[1],'t/yr')}</b>.`,
     `Copper: ${mw} MW × 20–40 t per MW = <b>${n0(cu[0])}–${n0(cu[1])} t</b>.`,
     `Embodied carbon, servers: ${n0(servers)} × 4.177 t × 10–15% manufacturing ÷ 6 years = <b>${rng(eit[0],eit[1],'t CO₂e/yr')}</b>.`,
     A.built==='existing'?'':`Embodied carbon, building: ${n0(f.gross[1])} m² × 0.461 t/m² = <b>${n0(eb)} t CO₂e</b>.`].filter(Boolean),
