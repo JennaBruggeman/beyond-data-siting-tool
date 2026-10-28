@@ -35,7 +35,7 @@ for i, t in srcs.items():
     if i in seen: continue
     hits = [h.strip(' ;,') for h in re.findall(r'\(\?[^)]*\)|[^;,(—]{0,80}\?\s*\)?', t) if '?' in h and 'http' not in h]
     st = tri.get(i, {}).get('status', '')
-    if hits or re.search(r'unconfirmed|not confirmed|single check|marked \?', st):
+    if hits or re.search(r'unconfirmed|not confirmed|could not read|single check:|^single check', st):
         rows.append([i, 'source ?', (' | '.join(hits)[:400] or st), st, 'open'])
 with open(R / 'checks/sweep/open_items.csv', 'w', newline='') as f:
     w = csv.writer(f); w.writerow(['id', 'type', 'what is open', 'where found', 'status']); w.writerows(rows)
