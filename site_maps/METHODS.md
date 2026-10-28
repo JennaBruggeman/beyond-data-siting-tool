@@ -73,9 +73,36 @@ Run with `METHOD=2` (the default; `METHOD=1` reproduces the 21 Oct maps, archive
   - The Blatchford outline is still approximate at the Kingsway / Airport Rd southeast corner.
 
 ## Method v4 (26 Oct 2026): zoning as a gate
-`METHOD=4` is the default; `METHOD=3` reproduces v3.
+`METHOD=4` reproduces v4 (v4 outputs kept in v4_2026-10-26/); `METHOD=3` reproduces v3.
 - **Why:** in v1–v3 the zoning score multiplied the exchanges. A vacant lot zoned for heavy industry (IH), where a data centre is allowed outright, could outrank sites with far better exchanges: 12503 66 St NW led Edmonton in v3 with a heat score of 0.14. The screen asks where a data centre can be a good neighbour. Zoning decides whether it can go there, not how good the exchanges are.
 - **Rule:**
   - Allowed and case-by-case: 1.0. Site-specific: 0.5. Rezoning needed: 0.1.
   - Still multiplied by the "already built" factor (v3).
 - **Effect:** IH, IM, BE, I-2, I-3 and FC-2 now enter on equal terms, and the ranking is set by the exchanges.
+
+## Method v5 (26 Oct 2026): new factors
+`METHOD=5` is the default. Inputs: `prep_v5.py` → `v5_inputs/v5_<city>.json`. Every factor, source and assumption is in factors.csv.
+- **Heat:** year-round users (hospitals, campuses, hotels, food processing, laundries, indoor rinks), reach by size (Ricardo-AEA: about 400 m at 100 kW, 2 km at 500 kW). They only add: a cell next to a district network is not diluted. Vancouver also gets a small bonus within 300 m of a trunk sewer (Fraunhofer IBP).
+- **Materials:** recyclers within 1 km take 0.2 of the weight from the industrial-share proxy.
+- **People:** people x (0.6 + 0.4 x (0.2 transit + 0.4 partners + 0.4 need)). Transit weighs less (J.B., 26 Oct); first run used a third each, and the ranking didn't change.
+  - Transit: 800 m to rapid transit, 400 m to a bus stop.
+  - Partners: a library or community centre within 800 m (cooling refuge distance).
+  - Need: CIMD 2021, economic dependency and situational vulnerability only.
+- **Site:** Edmonton flood hazard zones (floodway x 0.1 to 1:500 x 0.9); fibre nearness to a PeeringDB facility (x 0.9 to 1.0, weak on purpose: no sourced rule).
+- **Not scored:** Edmonton sewer (no diameter), Iona Island (planned), sea or river cooling (speculative), power lines and rail (federal download site down), broadband (NBD roads: nearly every street already served, so it can't tell sites apart).
+- **Asymmetries:** Edmonton has no laundry licence category; Edmonton "food processing" includes caterers; Vancouver rinks are the 7 indoor rinks in parks facilities, Edmonton rinks are ODRSF arenas.
+- **Effect (zoned, land-checked top five):**
+  - Vancouver: the #1 area is unchanged (Industrial Ave / 1st Ave E, next to V09; stable in 99 % of weightings). V09's cell is #4 (equal weights; v4 #5) and #3 on stability (unchanged).
+  - Edmonton: Stadium Road (8635 Stadium Rd NW) moves to #1 (0.397), the Blatchford edge to #2 (0.381). E06's cell is #7 equal (v4 #4), #2 heat-priority (v4 #3), #4 spread (v4 #7).
+  - Why Edmonton moved: Stadium Road is 570 m from an LRT stop, 320 m from a library or community centre, in a high-need area, and gains year-round heat users. The Blatchford edge has no partner within 800 m (nearest about 1 km), its LRT stop is 830 m away (just past 800 m), and its DAs are new, so need is neutral.
+- **v5.1 (26 Oct):** added Edmonton curling clubs and cannabis growers as year-round heat users, and three Vancouver neighbourhood houses as partners. Rankings unchanged. Vancouver non-market housing was already a heat receiver (tool receivers, `vanNMH`); Edmonton has none yet.
+- **v5.2 (26 Oct):** added licensed group child care as small year-round heat users (weight 0.5), Vancouver homeless shelters as partners, and fire halls in both cities as a recorded distance for the site sheets (not scored). Rankings unchanged. E06 is 185 m from a fire station; V09 about 980 m.
+- **Not distance scores:** bus depots and refurbishers are reach-chart "through a network" rows; decision partners go on the site sheets.
+- **v5.3 (26 Oct):**
+  - Transit now fades instead of cutting off: full within 800 m (rapid) or 400 m (bus), down to 0 at 1,200 m or 600 m.
+  - Big facilities added as large year-round heat users (2 km): Bloedel, Vancouver Aquarium, Science World; Muttart, Valley Zoo, Expo Centre, Royal Alberta Museum.
+  - New scenario `BUILDOUT=1`: Blatchford at its planned 30,000 residents (City target for 2042). Outputs in `scenario_blatchford_buildout/`. The default run stays on today's population.
+  - **Effect, Edmonton (zoned, land-checked):**
+    - Today's population: Stadium Road #1 (0.405), Blatchford edge #2 (0.382).
+    - At build-out: Blatchford edge #1 (0.452), Stadium Road #2 (0.405); E06's own cell #3 (equal), #2 (heat-priority), #3 on stability.
+  - Vancouver unchanged.
