@@ -6847,7 +6847,7 @@
    "id": "horizons",
    "name": "Time horizons",
    "unit": "yr",
-   "formula": "servers ~6; plant 15–25; shell ≤40; network 40–50; lease",
+   "formula": "servers ~6; plant 15–25; building 25–27 (economic life); network 30–50; lease",
    "inputs": [],
    "coef": "Servers: average life 4.4 → 5 → 5.7 years (2000–2019, 2020, 2023; LBNL 2024); filings moved server useful lives to 5–6 years (Microsoft, Alphabet, Meta; Amazon partly back to 5 in 2025); Barroso: servers depreciated over 3–4 years, facilities over 15–20; plant medians ~20–25 years (ASHRAE); district-heating pipes 30 years at 120 °C, 50 only below 115 °C (EN 253); contracts: colocation 2–5 years, scale 5–10+ (Digital Realty); heat contracts 10 + 5 (Stockholm Exergi); Tallaght plant 25–35 years; Seattle permit 10 + two 10-year renewals; Vancouver property-tax report flags holding sites (improvement ÷ land value); Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, computers 4.9; Shared Services Canada closed 500+ of 720 federal data centres since 2011",
    "sources": [
@@ -6870,8 +6870,8 @@
    "source_roles": [
     {
      "id": "horizons",
-     "term": "servers ~6; plant 15–25; shell ≤40; network 40–50",
-     "role": "internal note (no primary named for: shell up to 40 years: no primary named (statcanLives gives 27 yr offices, 25.4 warehouses); Seattle permit 10 + two 10-year renewals: no id or note source found; Stockholm Exergi heat contracts 10 + 5: exergi citation does not state contract length; Tallaght plant 25–35 years: tallaghtD22 citation d)",
+     "term": "servers ~6; plant 15–25; building 25–27 (economic life); network 30–50",
+     "role": "internal note (building now 25–27 yr from statcanLives, J.B. 28 Oct 2026; no primary named for: Seattle permit 10 + two 10-year renewals: no id or note source found; Stockholm Exergi heat contracts 10 + 5: exergi citation does not state contract length; Tallaght plant 25–35 years: tallaghtD22 citation d)",
      "conf": 60,
      "verified": true
     },
@@ -15326,7 +15326,7 @@
   "gridAB": "Alberta 335 g CO2e/kWh (2024, generation-based), citing NIR 2026 Table A7-10 — https://www.alberta.ca/albertas-greenhouse-gas-emissions-reduction-performance",
   "gridBC": "BC 2025 consumption-based factor for the Integrated Grid 22.8 tCO2e/GWh (2024: 9.9; Fort Nelson differs) — https://www2.gov.bc.ca/gov/content/environment/climate-change/data/electricity",
   "heatPhys": "Heat ≈ electricity drawn; Q = V × 1.16 × ΔT (Green Grid WP29); ISO/IEC 30134-6 ERF (Formulas sheet)",
-  "horizons": "Horizons: servers ~6 yr; plant 15–25; shell up to 40; network 40–50 (handoff rule 7); control in colocation (Greene; Monstadt and Saltzman) (handoff §3; ?: internal note, each figure needs its own source in the node review)",
+  "horizons": "Horizons: servers ~6 yr (LBNL 2024; company filings); plant 15–25 (Barroso; ASHRAE); building 25–27 yr economic life (Statistics Canada, offices 27.0, warehouses 25.4; physical life not published); network 30–50 (EN 253 via Energiforsk 2022); (handoff rule 7, sources added 28 Oct 2026); control in colocation (Greene; Monstadt and Saltzman) (handoff §3; Greene 2022 and Monstadt and Saltzman 2025 are cited as their own sources)",
   "iso9613": "ISO 9613-2:2024; screen Lp ≈ Lw − 20·log10(r) − 8 (our simplification, not from the standard); NoiseModelling (open source) (Formulas sheet)",
   "lbnl2024": "Shehabi et al., LBNL 2024 US Data Center Energy Usage Report: 2-socket server 600 W (2023); idle 36%; colocation utilisation 21→35% — https://eta-publications.lbl.gov/publications/2024-lbnl-data-center-energy-usage-report",
   "lorenz": "Lorenz COP, η 0.50–0.60 (Pieper et al. 2020, Energy 205:117994: 0.5 assumed in the literature, design values 0.53–0.61 by heat source; Reinholdt/Jensen et al. 2018, IIR Gustav Lorentzen, give the method but no η value); air 25–35 °C, liquid 50–60 °C (Wahlroos et al. 2018, RSER 82, p. 1753); Alissa et al. 2025 (Nature 641, p. 332) gives the cold-plate liquid share, '50% to 80% or more', not these temperatures (Formulas sheet)",

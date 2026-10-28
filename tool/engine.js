@@ -607,7 +607,7 @@ function materialsView(){
   <dt>Electronic waste</dt><dd>${rng(ew[0],ew[1],'t/yr')} of servers alone, on a six-year refresh</dd><dt>Copper</dt><dd>${fmt(cu[0])}–${fmt(cu[1])} t in the facility (industry figure)</dd>
   <dt>Embodied carbon, servers</dt><dd>${rng(eit[0],eit[1],'t CO₂e/yr')} — the manufacturing share (10–15%) of one manufacturer's server assessment, spread over six years; uncertainty is large</dd></dl>${s3('srv')}${s3('ew')}${s3('cu')}${s3('eit')}
   <h3>The building</h3><dl>${A.built==='existing'?`<dt>Reuse</dt><dd>an existing building keeps its structure; precedents: 515 W Hastings offices (2023), Edmonton office and warehouse conversions</dd><dt>Watch for</dt><dd>floor strength, floor-to-floor height and room for plant</dd>`:`<dt>Embodied carbon, building</dt><dd>about ${fmt(eb)} t CO₂e for ${fmt(f.gross[1])} m² at 461 kg/m² — a general building median; no data-centre benchmark exists</dd>`}
-  <dt>Lifespans</dt><dd>servers about 5–6 years · cooling and heat pumps 15–25 · shell up to 40 · pipe network 30–50, depending on water temperature</dd></dl>${A.built==='existing'?'':s3('eb')}
+  <dt>Lifespans</dt><dd>servers about 5–6 years · cooling and heat pumps 15–25 · building 25–27 (economic life, Statistics Canada) · pipe network 30–50, depending on water temperature</dd></dl>${A.built==='existing'?'':s3('eb')}
   ${mathBox([
     `Racks: ${mw} MW × 1,000 ÷ ${R.kWPerRack} kW per rack = <b>${n0(racks)}</b>.`,
     `Servers: ${mw} MW × 1,000 ÷ 0.6 kW each = <b>${n0(servers)}</b>.`,
