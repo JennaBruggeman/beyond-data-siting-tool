@@ -1,0 +1,73 @@
+[
+ {
+  "id": "bcbc2024_326",
+  "citation_in_tool": "BC Building Code 2024, 3.2.6.1 (high buildings: Group C major occupancy 'whose floor level is more than 18 m above grade' ?) and 3.2.6.5 (at least one elevator for use by firefighters); NBC(AE) the same Article (not checked ?)",
+  "open_point": "ings: Group C major occupancy 'whose floor level is more than 18 m above grade' ?) | not checked ?)",
+  "used_by": "backup_neighbours",
+  "saved_copies": []
+ },
+ {
+  "id": "censusIncome2021",
+  "citation_in_tool": "Statistics Canada 2021 Census, median after-tax household income 2020: Vancouver CMA $79,500, Edmonton CMA $84,000 (The Daily, 13 Jul 2022; Table 98-10-0058-01 ?: table number not printed in the release) — https://www150.statcan.gc.ca/n1/daily-quotidien/220713/dq220713d-eng.htm",
+  "open_point": "Table 98-10-0058-01 ?",
+  "used_by": "affordability",
+  "saved_copies": [
+   "/mnt/attach/outputs/sources/library/public/censusIncome2021/page.html"
+  ]
+ },
+ {
+  "id": "dell",
+  "citation_in_tool": "Dell carbon-footprint PDFs: R740 26.3 kg, R540 25.4 kg (product weights; 2U ?); R650 21.25 kg (1U) (?: not found in these PDFs); Danczak 2018 rare earths and Graedel 2011 copper (separate sources, not in the Dell PDFs ?) — https://i.dell.com/sites/csdocuments/corpcomm_docs/en/carbon-footprint-poweredge-r740.pdf",
+  "open_point": "2U ?) | (?: not found in these PDFs) | not in the Dell PDFs ?)",
+  "used_by": "embodied_it; ewaste; rare_earth",
+  "saved_copies": []
+ },
+ {
+  "id": "edmNationsNamed",
+  "citation_in_tool": "City of Edmonton land acknowledgement: Treaty 6 territory and the Métis homeland; names peoples (incl. Nehiyaw/Cree, Dene, Anishinaabe/Saulteaux, Nakota Isga, Niitsitapi) not individual Nations; Confederacy of Treaty No. 6 lists 15 Nations (?: one check counts 16 member nations in the Confederacy list; no total printed) (https://www.treatysix.org/nation-listing); Indigenous Framework roles Listener, Connector, Advocate, Partner; Urban Reserve Strategy approved 28 Jun 2021 — https://www.edmonton.ca/city_government/indigenous-relations-office",
+  "open_point": "(?: one check counts 16 member nations in the Confederacy list; no total printed)",
+  "used_by": "city_commitments; nations_named",
+  "saved_copies": [
+   "/mnt/attach/outputs/sources/library/public/edmNationsNamed/page.html"
+  ]
+ },
+ {
+  "id": "ieaEnergyAI",
+  "citation_in_tool": "IEA, Energy and AI (2025): 'a data centre can be operational in two to three years' (?: quote not verified; iea.org chapter page could not be read by either check) — https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai",
+  "open_point": "(?: quote not verified; iea.org chapter page could not be read by either check)",
+  "used_by": "construction_time",
+  "saved_copies": []
+ },
+ {
+  "id": "mvAAQO",
+  "citation_in_tool": "Metro Vancouver ambient air quality objectives (Nov 2024 ?): NO2 1-h 79 µg/m³ (42 ppb), annual 22.6 µg/m³; PM2.5 24-h 25 µg/m³ (rolling ?) (?: the cited PDF could not be opened by either check; a May 2025 Metro Vancouver fact sheet gives the same values) — https://metrovancouver.org/services/air-quality-climate-action/Documents/ambient-air-quality-objectives.pdf",
+  "open_point": "Nov 2024 ?) | rolling ?) | (?: the cited PDF could not be opened by either check; a May 2025 Metro Vancouver fact sheet gives the same values)",
+  "used_by": "air_vs_objective",
+  "saved_copies": []
+ },
+ {
+  "id": "nrcanPVmunic",
+  "citation_in_tool": "NRCan, Photovoltaic potential and solar resource maps of Canada — municipal values (CSV, J.B. download 15 Oct 2026; Canadian Forest Service with CanmetENERGY; CERES 1974–1993 insolation, 144 stations; performance ratio 0.75; \"within about 10%\" of lifetime averages). Annual kWh/kWp (read from the downloaded CSV; not re-checked ?) — Vancouver: horizontal 892, latitude tilt 1007, vertical 716; Edmonton: horizontal 944, latitude tilt 1244, vertical 989; Spruce Grove (proxy for Parkland County / Acheson): horizontal 942, latitude 1232 — https://natural-resources.canada.ca/energy-sources/renewable-energy/photovoltaic-potential-solar-resource-maps-canada",
+  "open_point": "not re-checked ?)",
+  "used_by": "pv_facade; pv_roof",
+  "saved_copies": [
+   "/mnt/attach/outputs/sources/library/public/nrcanPVmunic/page.html"
+  ]
+ },
+ {
+  "id": "vanDCL",
+  "citation_in_tool": "Vancouver DCL Bulletin (amended 25 Aug 2026), Table 1 rates from 10 Dec 2025: Industrial (I-2, M-1, M-1A, M-1B, M-2) $112.87/m²; Mixed Employment (IC-1, IC-2, I-1, I-1A–C, I-3, I-4) $211.54/m²; no levy where floor area does not increase (s.6.1(a)) (rates single check: the other check was served the 14 Jun 2024 version ?) — https://guidelines.vancouver.ca/bulletins/bulletin-development-cost-levies.pdf",
+  "open_point": "rates single check: the other check was served the 14 Jun 2024 version ?)",
+  "used_by": "rezoning_price",
+  "saved_copies": [
+   "/mnt/attach/outputs/sources/library/public/vanDCL/full.pdf"
+  ]
+ },
+ {
+  "id": "vanTaxReport",
+  "citation_in_tool": "City of Vancouver Open Data, property tax report (FOLIO = the last 12 digits of BC Assessment's 15-digit roll number ?; LAND_COORDINATE equals the first 8 digits of FOLIO in all 228,921 rows), downloaded Oct 2026",
+  "open_point": "FOLIO = the last 12 digits of BC Assessment's 15-digit roll number ?",
+  "used_by": "receiver_demand",
+  "saved_copies": []
+ }
+]

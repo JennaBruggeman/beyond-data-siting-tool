@@ -1,0 +1,265 @@
+[
+ {
+  "id": "bacS3000_2012",
+  "resolved": "yes",
+  "source_read": "Baltimore Aircoil Company, Series 3000 Cooling Tower, Product & Application Handbook Volume V (file b8_ct_s3000_20150914; '2012' printed in the p. B34 footer) — https://baltimoreaircoil.com/download_api_endpoint/536/b8_ct_s3000_20150914.pdf (fetched 28 Oct 2026 after a search returned the URL)",
+  "findings": [
+   {
+    "point": "S3E-1222-07Q nominal capacity",
+    "value": "652 tons",
+    "quote": "S3E-1222-07Q … 652 (nominal tons)",
+    "where": "p. B31, Series 3000 Single Cell Data table"
+   },
+   {
+    "point": "S3E-1222-07Q plan dimensions",
+    "value": "L 11'-10\", W 21'-7\"",
+    "quote": "L 11'-10\"  W 21'-7\"",
+    "where": "p. B31, Single Cell Data table, Dimensions columns"
+   },
+   {
+    "point": "definition of nominal ton",
+    "value": "3 USGPM cooled 95→85 °F at 78 °F wet bulb (= 3 × 10 × 500 = 15,000 Btu/h; derived arithmetic, not printed)",
+    "quote": "Nominal tons of cooling represents the capability to cool 3 USGPM of water from a 95°F entering water temperature to an 85°F leaving water temperature at a 78°F entering wet-bulb temperature.",
+    "where": "p. B31, note 3 (same note p. B34)"
+   },
+   {
+    "point": "edition / date",
+    "value": "Volume V; '2012' appears only in the B34 footer",
+    "quote": "PRODUCT & APPLICATION HANDBOOK VOLUME V … PRODUCT & APPLICATION HANDBOOK 2012",
+    "where": "footers p. B31 and p. B34"
+   },
+   {
+    "point": "recomputed area per MW",
+    "value": "23.73 m² ÷ 2.866 MW ≈ 8.3 m²/MW",
+    "quote": "(arithmetic: 11.833 ft × 21.583 ft = 255.4 ft² = 23.73 m²; 652 × 15,000 Btu/h = 9.78 MBtu/h = 2.866 MW)",
+    "where": "derived from p. B31"
+   }
+  ],
+  "proposed_text": "Baltimore Aircoil Co., Series 3000 Cooling Tower (Product & Application Handbook, Vol. V; '2012' in footer), b8_ct_s3000_20150914, p. B31 Single Cell Data: S3E-1222-07Q 652 nominal tons (3 USGPM cooled 95→85 °F at 78 °F wb, = 15,000 Btu/h per ton), 11'-10\" × 21'-7\" → ≈8.3 m² per MW (MANUFACTURER CLAIM; sources/16 S24; a different edition from bacS3000, 2023) — https://baltimoreaircoil.com/download_api_endpoint/536/b8_ct_s3000_20150914.pdf",
+  "number_change": "none",
+  "note": "8.3 m²/MW holds only with the cooling-tower ton (15,000 Btu/h); with a refrigeration ton (12,000 Btu/h) it would be ≈10.3. The 15,000 figure is arithmetic from note 3, not printed. Handbook says data 'should be reconfirmed at the time of purchase'."
+ },
+ {
+  "id": "cec2024ESS",
+  "resolved": "no",
+  "source_read": "CSA C22.1:24 not openable (paywalled; not circumvented). Read instead: data/raw/codes/CEC_2024_note.txt; Alberta Municipal Affairs notice 'New Canadian Electrical Code, Part 1', April 2025 (data/raw/ab/ma_notice_CEC2024_2025-04.pdf); City of Edmonton Bylaw 15309 Fire Rescue Services Bylaw, consolidated 1 Jan 2025 (data/raw/edm/bylaw/C15309_fire_2025-01-01.pdf)",
+  "findings": [
+   {
+    "point": "rule text (64-1002, 64-926, 64-902, 64-1100, App. B)",
+    "value": "not second-checked",
+    "quote": "CSA C22.1:24 (J.B. copy via UBC Library, 19 Oct 2026) — not stored in the repository (copyrighted; 972 pages).",
+    "where": "CEC_2024_note.txt"
+   },
+   {
+    "point": "Alberta in-force date",
+    "value": "1 Apr 2025",
+    "quote": "The 2024 Canadian Electrical Code (CE Code), Part 1 was published on March 4, 2024, and automatically came into force on April 1, 2025.",
+    "where": "AB notice, 'Date Effective'"
+   },
+   {
+    "point": "Edmonton Bylaw 15309 consolidation and content",
+    "value": "consolidated 1 Jan 2025; no 'battery' or 'fuel' in text",
+    "quote": "(CONSOLIDATED ON JANUARY 01, 2025)",
+    "where": "Bylaw 15309 cover; text search for 'batter'/'fuel' = 0 hits"
+   }
+  ],
+  "proposed_text": "(unchanged) CSA C22.1:24 Canadian Electrical Code, Section 64 (read 19 Oct 2026, J.B. library copy; rule text not second-checked, the code is paywalled ?): … [rest as now]",
+  "number_change": "none",
+  "note": "Rule text cannot be second-checked without the paid code. Side flag: the AB notice gives 4 Mar 2024 as the CEC publication date; the tool's 'in force BC 4 Mar 2025' was not checked here (no BC source in hand) — worth confirming it is not a mix-up with the publication date."
+ },
+ {
+  "id": "dea",
+  "resolved": "partly",
+  "source_read": "Danish Energy Agency, Technology Data for Generation of Electricity and District Heating, data sheets xlsx 'Updated August 2026' (Intro: Version 0019), data/DEA_technology_data_el_dh_2026-08.xlsx; landing page saved copy sources/library/public/dea/page.html (https://ens.dk/en/analyses-and-statistics/technology-data-generation-electricity-and-district-heating)",
+  "findings": [
+   {
+    "point": "edition",
+    "value": "August 2026",
+    "quote": "Data sheet for Electricity and district heat production - Updated August 2026",
+    "where": "page.html (saved 25 Oct 2026)"
+   },
+   {
+    "point": "price year, general",
+    "value": "2020 EUR except sheets 22x, 40x, 41x, 45x, 47x (2025 EUR)",
+    "quote": "Cost data is in 2020 EURO … Cost data for datasheets 22x, 40x, 41x, 45x and 47x is in 2025 EURO (specified in the specific datasheets)",
+    "where": "xlsx, Intro rows 12–13"
+   },
+   {
+    "point": "sheet 40 sizes",
+    "value": "waste heat 1/3/10 MW and air-source 1/3/10 MW present",
+    "quote": "40 Comp. hp, waste heat 1 MW | 40 Comp. hp, waste heat 3 MW | 40 Comp. hp, waste heat 10 MW | 40 Comp. hp, airsource 1 MW …",
+    "where": "xlsx sheet names; each sheet row 3 'Cost data in 2025 EURO'"
+   },
+   {
+    "point": "sheet 41",
+    "value": "electric boiler small/large, 2025 EUR; large total investment 0.07 MEUR/MW_h",
+    "quote": "Nominal investment (*total) [MEUR/MW_h] 0.07",
+    "where": "sheet '41 Electric boiler, large'"
+   },
+   {
+    "point": "sheet 44 price year and columns",
+    "value": "2020 EUR (not 2025); columns 2015, 2020, 2030, 2050; total investment 0.0638 (2015/2020), 0.0532 (2030/2050) MEUR/MW_h",
+    "quote": "year 2015 2020 2030 2050 … Nominal investment (*total) [MEUR/MW_h] 0.0638… 0.0638… 0.0532… 0.0532…",
+    "where": "sheet '44 Natural Gas DH Only', rows 3 and 28; no 'Cost data in 2025 EURO' label"
+   },
+   {
+    "point": "extract vs xlsx",
+    "value": "sheets 40/41: 312 values match; sheet 44: extract keys mis-mapped (its '2025' = xlsx 2015, '2030' = 2020, '2050' = lower 2020, 'lower2030' = upper 2020, 'upper2030' = lower 2050)",
+    "quote": "(script comparison, 28 Oct 2026)",
+    "where": "data/dea_catalogue_extract.json vs xlsx"
+   },
+   {
+    "point": "sheet 140 pit storage",
+    "value": "not in this workbook",
+    "quote": "(sheet list ends at '52 OCGT - Light fuel oil'; no 140 or storage sheet)",
+    "where": "xlsx sheet names; pit storage is in DEA's separate energy-storage catalogue, which could not be read (ens.dk/media/6448/download returned binary only)"
+   }
+  ],
+  "proposed_text": "Danish Energy Agency, Technology Data for Electricity and District Heating Production, data sheets updated August 2026 (version 0019): sheets 40 (compression heat pumps, waste heat 1/3/10 MW; air-source 1/3/10 MW) and 41 (electric boilers) in 2025 EUR; sheet 44 (gas boilers, columns 2015/2020/2030/2050) in 2020 EUR — J.B. download, data/DEA_technology_data_el_dh_2026-08.xlsx; extract data/dea_catalogue_extract.json (sheet 44 entries mis-keyed ?). Pit storage (140) is in DEA's separate Technology Data for Energy Storage, not this workbook (edition and values not checked ?)",
+  "number_change": "Gas boiler 0.064 M€/MW: value unchanged but price year 2025 EUR → 2020 EUR. Extract sheet 44, if any '2030'/'2050' keys are used: investment 0.0638 → 0.0532 (2030), 0.0425 → 0.0532 (2050); same shift applies to O&M, efficiency, lifetime rows.",
+  "note": "Sheets 40 and 41 confirmed against the xlsx. Fix the extract builder for sheet 44's older column layout. Find and cite the energy-storage catalogue for pit storage."
+ },
+ {
+  "id": "edmBL19340",
+  "resolved": "yes",
+  "source_read": "City of Edmonton, Bylaw 19340 Facilities Off-site Levies Bylaw (consolidated 23 Apr 2024) — data/Edmonton_Bylaw_19340_Facilities_Offsite_Levies.pdf",
+  "findings": [
+   {
+    "point": "Levy or Levies",
+    "value": "Levies",
+    "quote": "BYLAW 19340 FACILITIES OFF-SITE LEVIES BYLAW",
+    "where": "cover page and p. 2 heading"
+   },
+   {
+    "point": "consolidation date",
+    "value": "23 Apr 2024",
+    "quote": "(CONSOLIDATED ON APRIL 23, 2024)",
+    "where": "cover page"
+   }
+  ],
+  "proposed_text": "City of Edmonton Bylaw 19340, Facilities Off-site Levies Bylaw (consolidated 23 Apr 2024)",
+  "number_change": "none",
+  "note": "Local copy is the City's consolidation PDF."
+ },
+ {
+  "id": "horizons",
+  "resolved": "no",
+  "source_read": "none — internal note (handoff rule 7, handoff §3); no document to check",
+  "findings": [],
+  "proposed_text": "(unchanged) Horizons: servers ~6 yr; plant 15–25; shell up to 40; network 40–50 (handoff rule 7); control in colocation (Greene; Monstadt and Saltzman) (handoff §3; ?: internal note, each figure needs its own source in the node review)",
+  "number_change": "none",
+  "note": "Internal note, not a source. Each horizon needs its own primary citation (e.g. DEA technical lifetimes for plant)."
+ },
+ {
+  "id": "malecki2002",
+  "resolved": "yes",
+  "source_read": "Malecki, E.J. (2002) 'The Economic Geography of the Internet's Infrastructure', Economic Geography 78(4): 399–424, DOI 10.1111/j.1944-8287.2002.tb00193.x — abstract via RePEc/IDEAS record https://ideas.repec.org/a/taf/recgxx/v78y2002i4p399-424.html",
+  "findings": [
+   {
+    "point": "citation details",
+    "value": "vol. 78(4), pp. 399–424, Oct 2002",
+    "quote": "Economic Geography, Taylor & Francis Journals, vol. 78(4), pages 399-424, October.",
+    "where": "IDEAS record"
+   },
+   {
+    "point": "quote 1",
+    "value": "confirmed",
+    "quote": "A global bias of Internet backbone networks toward world cities is evident",
+    "where": "abstract"
+   },
+   {
+    "point": "quote 2",
+    "value": "confirmed",
+    "quote": "a set of urban areas that serve as interconnection points between backbone networks",
+    "where": "abstract"
+   }
+  ],
+  "proposed_text": "Malecki 2002, Economic Geography 78(4):399–424 (abstract): 'a global bias of Internet backbone networks toward world cities', tempered by urban areas 'that serve as interconnection points'",
+  "number_change": "none",
+  "note": "Read from the RePEc abstract index, not the publisher page. The linking verb ('tempered') was not seen verbatim; it is unquoted in the tool, so fine as paraphrase."
+ },
+ {
+  "id": "nrcCBD160",
+  "resolved": "no",
+  "source_read": "NRC record URL refused (provenance); searches found no official NRC copy. Only a non-official MIT mirror (not used). TRID record for Williams, G.P. (1976) 'Design heat requirements for embedded snow-melting systems in cold climates', TRR 576: 20–32 (https://trid.trb.org/View/46856) — a different paper",
+  "findings": [
+   {
+    "point": "CBD 160 author, year, tables",
+    "value": "not confirmed",
+    "quote": "(no official text read)",
+    "where": "—"
+   },
+   {
+    "point": "related paper (not CBD 160)",
+    "value": "exposed Ottawa site ≈ 170 Btu/ft²·h (536 W/m²)",
+    "quote": "This agrees quite well with current practice in this region.",
+    "where": "TRID 46856 abstract"
+   }
+  ],
+  "proposed_text": "(unchanged) NRC Canadian Building Digest 160 (1974), Tables II–III: … (?: not verified; …)",
+  "number_change": "none",
+  "note": "Still open. Try NRC Publications Archive by title from a browser, or the UBC Library print CBD series."
+ },
+ {
+  "id": "uptime2024survey",
+  "resolved": "yes",
+  "source_read": "Uptime Institute, Uptime Institute Global Data Center Survey 2024, UII Keynote Report 146M, July 2024 (Donnellan, Lawrence, Bizo et al.) — https://datacenter.uptimeinstitute.com/rs/711-RIA-145/images/2024.GlobalDataCenterSurvey.Report.pdf",
+  "findings": [
+   {
+    "point": "average rack density",
+    "value": "8 kW",
+    "quote": "Uptime Intelligence calculates the average of typical racks densities across respondents to this survey to be 8 kW.",
+    "where": "p. 10"
+   },
+   {
+    "point": "outliers",
+    "value": "11 sites above 50 kW",
+    "quote": "However, this is skewed upwards by 11 sites that report their most rack density to be above 50 kW.",
+    "where": "p. 10"
+   },
+   {
+    "point": "without outliers",
+    "value": "7.1 kW",
+    "quote": "If these sites are taken out as outliers, the average is 7.1 kW.",
+    "where": "p. 10"
+   },
+   {
+    "point": "report number",
+    "value": "146M",
+    "quote": "UII KEYNOTE REPORT 146M",
+    "where": "cover"
+   },
+   {
+    "point": "sample",
+    "value": "> 850 owners/operators",
+    "quote": "collected responses from more than 850 data center owners and operators",
+    "where": "p. 5"
+   }
+  ],
+  "proposed_text": "Uptime Institute, Global Data Center Survey 2024 (Keynote report 146M, Jul 2024; > 850 owners and operators): average rack density 8 kW (7.1 kW without the 11 sites above 50 kW), p. 10 (INDUSTRY SURVEY; sources/16 S15) — https://datacenter.uptimeinstitute.com/rs/711-RIA-145/images/2024.GlobalDataCenterSurvey.Report.pdf",
+  "number_change": "none",
+  "note": "Figures sit on p. 10 (not pp. 10–11 as far as read). n for the rack question itself is not stated in text."
+ },
+ {
+  "id": "vanRezoneTime",
+  "resolved": "no",
+  "source_read": "Attempts: rezoning-process-overview.pdf (fetch failed, client error); 'Enquire about and apply for rezoning' https://vancouver.ca/home-property-development/enquire-about-and-apply-for-rezoning.aspx; 'How rezoning works' https://vancouver.ca/home-property-development/how-rezoning-works.aspx",
+  "findings": [
+   {
+    "point": "'about one year to process (from fee payment to public hearing)'",
+    "value": "not found on the fetched apply page",
+    "quote": "(fetched page heading: 'New permit and service fees in effect: January 1, 2025'; no processing time stated)",
+    "where": "enquire-about-and-apply-for-rezoning.aspx, 28 Oct 2026"
+   },
+   {
+    "point": "process overview targets (16 weeks / 15 months)",
+    "value": "not read",
+    "quote": "(PDF fetch failed)",
+    "where": "—"
+   }
+  ],
+  "proposed_text": "City of Vancouver: typical CD-1 rezoning 'Target ~16 weeks to Letter of Response', 'Target ~15 months to decision' (process overview; not re-read ?); 'about one year to process (from fee payment to public hearing)' (apply-to-rezone page, Jun 2026; not seen by check 2 or check 3 ?) — https://vancouver.ca/files/cov/rezoning-process-overview.pdf",
+  "number_change": "none",
+  "note": "The fetched apply page may be a cached older version; still, the 'about one year' quote could not be found. Re-save the page from a browser with date."
+ }
+]

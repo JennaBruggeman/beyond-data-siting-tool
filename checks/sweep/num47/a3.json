@@ -1,0 +1,295 @@
+[
+ {
+  "id": "bacS3000",
+  "resolved": "yes",
+  "source_read": "Baltimore Aircoil Company, Series 3000 Cooling Towers, Product & Application Handbook Vol. VI (file C015_PAHBvi_3000_ED_20231020), manufacturer document, file dated 20 Oct 2023 — https://baltimoreaircoil.com:443/download_api_endpoint/6026/C015_PAHBvi_3000_ED_20231020.pdf (read via WebFetch 28 Oct 2026)",
+  "findings": [
+   {
+    "point": "Smallest single-cell model and tonnage",
+    "value": "S3E-8518-05L, 293 nominal tons",
+    "quote": "S3E-8518-05L 293 15 77,410 15,170 8,030 8,030 8'-6\" 18'-1\" 9'-10\" 8'-8\"",
+    "where": "p. C16, table 'Series 3000 Single Cell Data'"
+   },
+   {
+    "point": "Where 171 tons comes from",
+    "value": "XE model XES3E-8518-05G, 171 tons, 15,000 lb operating — a separate 'XE Model Data' table, not the standard single-cell table",
+    "quote": "XES3E-8518-05G 171 3 46,830 15,000 7,860 7,860 8'-6\" 18'-1\" 9'-10\" 8'-8\"",
+    "where": "p. C18, table 'XE Model Data'"
+   },
+   {
+    "point": "Largest single-cell model",
+    "value": "1,394 tons, 50,280 lb operating, 14'-0\" × 24'-1\" × 22'-5\"",
+    "quote": "S3E-1424-14W [2] 1,394 125 321,160 50,280 25,260 14,660 14'-0\" 24'-1\" 22'-5\" 20'-10\"",
+    "where": "p. C17, Single Cell Data"
+   },
+   {
+    "point": "Lowest operating weight in single-cell table",
+    "value": "15,170 lb (not 15,000 lb; 15,000 lb is the XE model)",
+    "quote": "S3E-8518-05L 293 15 77,410 15,170 ...",
+    "where": "p. C16; column header 'Weights (lbs)' / 'Operating[4]'"
+   },
+   {
+    "point": "Nominal ton definition",
+    "value": "3 USGPM, 95→85 °F at 78 °F wet bulb (no BTU/h figure printed)",
+    "quote": "Nominal tons of cooling represents the capability to cool 3 USGPM of water from a 95°F entering water temperature to an 85°F leaving water temperature at a 78°F entering wet-bulb temperature.",
+    "where": "p. C17, Notes for Single Cell Units, note 3"
+   }
+  ],
+  "proposed_text": "BAC Series 3000 cooling towers, Product & Application Handbook Vol. VI (file dated 20 Oct 2023), seller's figures, Series 3000 Single Cell Data (pp. C16–C17): 293–1,394 nominal tons per model (≈1.3–6.1 MW, Claude conversion at 15,000 BTU/h per tower ton; BAC defines a nominal ton as 3 USGPM cooled 95→85 °F at 78 °F wet bulb, p. C17 note 3); 8'-6\" × 18'-1\", 9'-10\" high to 14'-0\" × 24'-1\", 22'-5\" high (≈2.6 × 5.5 × 3.0 m to 4.3 × 7.3 × 6.8 m, our conversion); 15,170–50,280 lb operating (≈6.9–22.8 t, our conversion). The 171-ton figure is the separate XE model XES3E-8518-05G (p. C18), not a standard single-cell model — https://baltimoreaircoil.com:443/download_api_endpoint/6026/C015_PAHBvi_3000_ED_20231020.pdf",
+  "number_change": "Lower operating weight 15,000 lb (≈6.8 t) → 15,170 lb (≈6.9 t). Tonnage range and dimensions unchanged.",
+  "note": "Manufacturer claim. The old 15,000 lb lower bound came from the XE row (p. C18), mixed with the standard single-cell range. The fetch tool flagged that the L/W column order may not match the model names; dimensions are as printed. Check against certified drawings before using them in design."
+ },
+ {
+  "id": "bytes2heat",
+  "resolved": "yes",
+  "source_read": "DENEFF / IER Stuttgart, Bytes2Heat Best-Practice-Übersicht, PDF created 4 May 2023 (145 pp.) — saved copy /mnt/user-data/beyond-data-sources/private/bytes2heat/full.pdf (https://deneff.org/wp-content/uploads/2023/05/Bytes2Heat-Best-Practice-Uebersicht.pdf)",
+  "findings": [
+   {
+    "point": "Braunschweig area heat demand",
+    "value": "2,100 MWh/yr (400 houses)",
+    "quote": "benachbartes Wohnquartier mit 400 Häusern und einem Wärmebedarf von 2100 MWh/a",
+    "where": "PDF p. 11 (printed page 10), 'Neubaugebiet „Heinrich des Löwen“', Technik"
+   },
+   {
+    "point": "1,750 MWh/yr from the DC",
+    "value": "Not printed anywhere in the document",
+    "quote": "(no match for '1750', '1.750' or '1 750' in full text)",
+    "where": "full-text search of all 145 pages"
+   },
+   {
+    "point": "40 °C return for Braunschweig",
+    "value": "Not printed; card shows only 18–25 °C source and 70 °C network",
+    "quote": "18-25 °C  70 °C ... Niedrigtemperatur-Wärmenetz mit 70 °C.",
+    "where": "PDF p. 11, card icons and Technik"
+   },
+   {
+    "point": "Other Braunschweig values",
+    "value": "12 MW IT, 250 kW at 18–25 °C, 300 kWth, COP 3.6, €460k",
+    "quote": "IT-Leistung von etwa 12 MW ... 18 - 25 °C werden 250 kW ausgekoppelt ... 300 kWth und COP von 3,6 ... Investitionskosten von 460.000 € ohne das Wärmenetz.",
+    "where": "PDF p. 11"
+   },
+   {
+    "point": "Westville / FRANKY",
+    "value": "confirmed as cited",
+    "quote": "Temperaturen Nahwärmenetz: 70/40°C, 2 Großwärmepumpen mit je 320 kW th ... davon sollen mind. 2.400 MWh/a aus Abwärme gedeckt werden ... Mainova-Contracting, 15 Jahre Vertragslaufzeit",
+    "where": "PDF p. 20"
+   },
+   {
+    "point": "HLRS",
+    "value": "confirmed as cited",
+    "quote": "zwei strombasierten Wärmepumpen (Heizleistung von je 55 kWth) ... Jährlich werden hierdurch ca. 270 MWh Wärme erzeugt.",
+    "where": "PDF p. 13"
+   }
+  ],
+  "proposed_text": "DENEFF / IER Stuttgart, Bytes2Heat Best-Practice-Übersicht (2023): Telehouse FRANKY (IT connection ~35 MW, actual draw ~20 MW) → Westville at least 2,400 MWh/yr planned from waste heat, 2 × 320 kWth HPs, ~30 °C waste heat to a 70/40 °C network, 15-yr Mainova contract (p. 20); ReUseHeat Braunschweig (VW data centre ~12 MW IT; 250 kW extracted at 18–25 °C) 300 kWth heat pump, COP 3.6, to a 70 °C network; area demand 2,100 MWh/yr (a 1,750 MWh/yr share from the DC and a 40 °C return are not printed in this document); €460k capex without the network (PDF p. 11, printed p. 10); HLRS two 55 kWth heat pumps, ~270 MWh/yr (p. 13); version May 2023, read from J.B. download 28 Oct 2026 — https://deneff.org/wp-content/uploads/2023/05/Bytes2Heat-Best-Practice-Uebersicht.pdf",
+  "number_change": "none from this check. If the tool uses 1,750 MWh/yr or a 40 °C Braunschweig return, those have no source in this document and need another source or removal.",
+  "note": "Confirmed absent: the open point is settled as 'not in this source'. Page numbers in the tool are PDF page numbers (printed numbers are one lower for Braunschweig). Possible origin: ReUseHeat project pages ([14] in the document's references), not checked here."
+ },
+ {
+  "id": "ddeRates2025",
+  "resolved": "yes",
+  "source_read": "City of Edmonton, Attachment 4 – IIS02765 – Downtown District Energy 2025–2026 Rate Filing with Minimum Filing Requirements, Utility Committee 23 Jun 2025 — J.B. upload /root/.claude/uploads/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/012b7eef-Attachment_4_-_IIS02765_-_2025-2026_Rate_Filing_with_Minimum_Filing_Requirements.pdf",
+  "findings": [
+   {
+    "point": "Title, attachment number, meeting",
+    "value": "confirmed",
+    "quote": "Attachment 4 / June 23, 2025 - Utility Committee | IIS02765 / Integrated Infrastructure Services, Renewable Energy Systems | Downtown District Energy 2025-2026 Rate Filing | IIS02765",
+    "where": "p. 1 header"
+   },
+   {
+    "point": "Proposed 2025 rates",
+    "value": "$7.92 per kW peak capacity per month; $0.0294 per kWh (heat energy only)",
+    "quote": "Monthly Charge $7.92 per kW peak capacity per month ... Variable Rate (Heat Energy Only) $0.0294 per kWh",
+    "where": "p. 3, 1.0 Executive Summary, rate table"
+   },
+   {
+    "point": "Proposed 2026 rates",
+    "value": "$8.08 per kW peak capacity per month; $0.0300 per kWh",
+    "quote": "Monthly Charge $8.08 per kW peak capacity per month ... Variable Rate (Heat Energy Only) $0.0300 per kWh",
+    "where": "p. 3"
+   }
+  ],
+  "proposed_text": "City of Edmonton, Downtown District Energy 2025–2026 Rate Filing, Attachment 4 to IIS02765, Utility Committee 23 Jun 2025 (proposed rates, p. 3: 2025 $7.92/kW peak capacity/month + $0.0294/kWh; 2026 $8.08/kW/month + $0.0300/kWh)",
+  "number_change": "none known — the citation in q3 carries no value; compare the tool's price_ceiling inputs against p. 3 figures above.",
+  "note": "Read from a PDF J.B. uploaded earlier (not re-downloaded from edmonton.ca). These are proposed rates in a filing; whether Council approved them unchanged was not checked."
+ },
+ {
+  "id": "eccc",
+  "resolved": "yes",
+  "source_read": "ECCC Canadian Climate Normals 1991–2020: station CSVs en_1991-2020_Normals_BC_VANCOUVER_INTERNATIONAL_AIRPORT.csv and en_1991-2020_Normals_AB_EDMONTON_AIRPORT.csv (in /mnt/attach/outputs/data/), plus province files 1991-2020_Canadian_Climate_Normals_BC_Data.csv and _AB_Data.csv (J.B. uploads, 10 Oct 2026); landing page saved 25 Oct 2026 at /mnt/attach/outputs/sources/library/public/eccc/page.html",
+  "findings": [
+   {
+    "point": "Saved web page",
+    "value": "is the landing page only (confirmed)",
+    "quote": "Canadian Climate Normals 1991-2020 ... Search by Location Name",
+    "where": "page.html, title 'Canadian Climate Normals - Climate - Environment and Climate Change Canada'"
+   },
+   {
+    "point": "Station CSVs exist locally",
+    "value": "Vancouver Intl and Edmonton Airport station CSVs in data/; Edmonton (City) rows are in the AB province CSV",
+    "quote": "\"EDMONTON (CITY)\",\"AB\",\"Normal\",\"Temperature\",\"Daily Average (°C)\",\"-10.3\",...,\"4.2\",\"A\"",
+    "where": "1991-2020_Canadian_Climate_Normals_AB_Data.csv"
+   },
+   {
+    "point": "Extract matches CSVs",
+    "value": "all 72 element rows in data/normals_1991_2020_extract.json match the CSVs exactly (months, year, period)",
+    "quote": "\"VANCOUVER INTERNATIONAL (AIRPORT)\",\"BC\",\"Normal\",\"Precipitation\",\"Rainfall (mm)\",\"162.1\",...,\"1119.2\",\"C\"",
+    "where": "BC province CSV / station CSV; script check 28 Oct 2026"
+   }
+  ],
+  "proposed_text": "ECCC Canadian Climate Normals 1991–2020, station data CSV (BC, AB), climate.weather.gc.ca — J.B. download (station CSVs for Vancouver Intl and Edmonton Airport saved in data/; Edmonton City from the AB province CSV; extract re-checked against the CSVs 28 Oct 2026); extract in data/normals_1991_2020_extract.json (Vancouver Intl, Edmonton Airport, Edmonton City)",
+  "number_change": "none",
+  "note": "Station-CSV station files and data/ copies are byte-identical (sha256). The CSVs are J.B. downloads; the download URL itself is not recorded. The library folder still holds only the landing page — consider adding the CSVs there."
+ },
+ {
+  "id": "fjfAars2020",
+  "resolved": "no",
+  "source_read": "Fjernvarme Fyn, Årsberetning 2020 — https://www.fjernvarmefyn.dk/media/1754/fjernvarme_fyn_aarsberetning_2020.pdf (not read)",
+  "findings": [],
+  "proposed_text": "Fjernvarme Fyn, Årsberetning 2020, p.9 production table and p.13: 'Varmepumperne tilknyttet Facebook har forbrugt 14.020 MWh el svarende til COP 4,5'; 230 TJ heat (Facebook heat pumps only, first full year) (?: not re-read; single check) — https://www.fjernvarmefyn.dk/media/1754/fjernvarme_fyn_aarsberetning_2020.pdf",
+  "number_change": "none",
+  "note": "Direct fetch refused (provenance). Two searches did not return the official fjernvarmefyn.dk URL (only third-party aggregators such as api.risika.dk, and news/trade sites, which I did not use). 3 attempts used. Needs J.B. to download the PDF from fjernvarmefyn.dk and save it."
+ },
+ {
+  "id": "lorenz",
+  "resolved": "partly",
+  "source_read": "Wahlroos M., Pärssinen M., Rinne S., Syri S., Manner J. (2018), 'Future views on waste heat utilization – Case of data centers in Northern Europe', Renewable and Sustainable Energy Reviews 82, 1749–1764 — J.B. upload /root/.claude/uploads/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/3ee48d3d-1-s2.0-S1364032117314314-main_1.pdf",
+  "findings": [
+   {
+    "point": "Air 25–35 °C, liquid 50–60 °C (Wahlroos)",
+    "value": "confirmed",
+    "quote": "In air-cooled DCs waste heat can generally be captured between 25 °C and 35 °C, while liquid cooling would allow capturing the waste heat at 50–60 °C.",
+    "where": "p. 1753 (PDF p. 5), section on cooling technologies"
+   },
+   {
+    "point": "η 0.50–0.60 (Reinholdt 2018; Pieper 2020)",
+    "value": "not located",
+    "quote": "",
+    "where": "two web searches returned neither paper"
+   },
+   {
+    "point": "Alissa",
+    "value": "not checked; full reference not given in the citation",
+    "quote": "",
+    "where": ""
+   }
+  ],
+  "proposed_text": "Lorenz COP, η 0.50–0.60 (Reinholdt et al. 2018; Pieper et al. 2020) (?: not yet checked); air 25–35 °C, liquid 50–60 °C (Wahlroos et al. 2018, RSER 82, p. 1753, confirmed; Alissa ?: not checked) (Formulas sheet)",
+  "number_change": "none",
+  "note": "The η range drives cop and heat_delivered and is still unsourced. Next step: get full references (DOI) for Reinholdt 2018, Pieper 2020 and the Alissa work from the Formulas sheet, then check each."
+ },
+ {
+  "id": "nir2026",
+  "resolved": "yes",
+  "source_read": "ECCC, National Inventory Report 1990–2024, Annex 7 'Electricity in Canada: Summary and Intensity Tables' workbook (EN_Annex7_Electricity_Intensity.xlsx) — saved at /mnt/attach/outputs/data/NIR_2026_Annex7_Electricity_Intensity.xlsx (identical to J.B. upload of 12 Oct 2026); Part 1 PDF at data/NIR_2026_Part1.pdf",
+  "findings": [
+   {
+    "point": "Workbook is saved",
+    "value": "yes, data/NIR_2026_Annex7_Electricity_Intensity.xlsx (sha256 matches the J.B. upload)",
+    "quote": "National Inventory Report 1990–2024: Greenhouse Gas Sources and Sinks in Canada / ANNEX 7 - ELECTRICITY IN CANADA: SUMMARY AND INTENSITY TABLES",
+    "where": "tab 'Content of the file'"
+   },
+   {
+    "point": "Tables A7-1, A7-10, A7-11 exist",
+    "value": "Canada, Alberta, British Columbia",
+    "quote": "Table A7–10 Electricity Generation and GHG Emission Details for Alberta; Table A7–11 ... for British Columbia",
+    "where": "tabs 'Table A7–1', 'Table A7–10', 'Table A7–11'"
+   },
+   {
+    "point": "2024 consumption intensity (extract check)",
+    "value": "Canada 110.554; AB 346.102; BC 18.064 g CO2 eq/kWh — extract matches workbook",
+    "quote": "Consumption Intensity (g CO2 eq / kWh)r ... 346.102 (A7–10); ... 18.064 (A7–11)",
+    "where": "2024a column of each table"
+   },
+   {
+    "point": "2024 generation intensity",
+    "value": "Canada 102.174; AB 334.757; BC 16.712 g CO2 eq/kWh — extract matches",
+    "quote": "Generation Intensity (g CO2 eq / kWh)f ... 334.757",
+    "where": "Table A7–10, 2024a column"
+   }
+  ],
+  "proposed_text": "ECCC, National Inventory Report 1990–2024 (2026 submission), Part 1 (data/NIR_2026_Part1.pdf) and Annex 7 electricity-intensity workbook, Tables A7-1 (Canada), A7-10 (Alberta), A7-11 (British Columbia) — data/NIR_2026_Annex7_Electricity_Intensity.xlsx (J.B. download; extract re-checked 28 Oct 2026); extract data/nir2026_annex7_intensity_extract.json",
+  "number_change": "none",
+  "note": "The library folder (sources/library/public/nir2026) still holds only the canada.ca landing page; the workbook is in data/. 2024 values carry footnote 'a' in the workbook (header '2024a'). Download URL of the workbook not recorded."
+ },
+ {
+  "id": "thermokeyGH2490",
+  "resolved": "yes",
+  "source_read": "Thermokey selection printout, Archimede 2019 (Build190418, Unilab Srl), dated 19/8/2019, via resale listing — https://resale.de/images/164420960_h_r190392800.pdf (read via WebFetch 28 Oct 2026)",
+  "findings": [
+   {
+    "point": "Model",
+    "value": "GH2490.CX D/02 V QRAFS",
+    "quote": "GH2490.CX D/02 V QRAFS",
+    "where": "p. 1"
+   },
+   {
+    "point": "Capacity",
+    "value": "737.6 kW real (720 kW requested)",
+    "quote": "Requested Capacity 720,00 kW ... Real Capacity 737,60 kW",
+    "where": "p. 1"
+   },
+   {
+    "point": "Temperatures",
+    "value": "32 °C air; 48 → 42.7 °C fluid",
+    "quote": "Inlet Air Temp [MAX] 32,0 °C ... Inlet Fluid Temp. 48,0 °C ... Outlet Fluid Temp. 42,7 °C",
+    "where": "p. 1"
+   },
+   {
+    "point": "Dimensions",
+    "value": "7,530 × 2,400 mm (height 1,565 mm; weight 1,866 kg)",
+    "quote": "Length 7530 mm ... Height 1565 mm ... Width 2400 mm ... Weight (3) 1866 kg",
+    "where": "p. 1"
+   },
+   {
+    "point": "Area per MW",
+    "value": "7.53 × 2.40 = 18.07 m² ÷ 0.7376 MW ≈ 24.5 m²/MW (our arithmetic)",
+    "quote": "",
+    "where": "derived"
+   },
+   {
+    "point": "Manufacturer",
+    "value": "Thermokey",
+    "quote": "All fan units manufactured by Thermokey",
+    "where": "p. 7"
+   }
+  ],
+  "proposed_text": "Thermokey, selection printout GH2490.CX D/02 V QRAFS (Archimede 2019, dated 19 Aug 2019), via resale listing: 737.6 kW at 32 °C air, 48 → 42.7 °C fluid; 7,530 × 2,400 mm (1,565 mm high, 1,866 kg) → ≈24.5 m² per MW, our arithmetic (MANUFACTURER CLAIM; resale copy; sources/16 S25) — https://resale.de/images/164420960_h_r190392800.pdf",
+  "number_change": "none",
+  "note": "Manufacturer selection-software output, reached through a resale site (not Thermokey's own site). Footprint excludes service clearances."
+ },
+ {
+  "id": "vanRainPage",
+  "resolved": "yes",
+  "source_read": "City of Vancouver, 'Rainwater management on private property' — saved copy 25 Oct 2026, /mnt/attach/outputs/sources/library/public/vanRainPage/page.html (https://vancouver.ca/home-property-development/rainwater-management.aspx)",
+  "findings": [
+   {
+    "point": "192 developments, 66 ha, 7,400 L/s",
+    "value": "on the page, 'as of September 2025'",
+    "quote": "As of September 2025, 192 new developments with issued building permits will meet the on-site rainwater management requirements. In total these will: Manage 66 hectares ... Reduce peak rainwater runoff by about 7,400 litres per second",
+    "where": "Background tab, 'Program results'"
+   },
+   {
+    "point": "Purpose phrase",
+    "value": "on the page",
+    "quote": "private property rainwater management will enable housing development to proceed by helping to relieve sewer system capacity constraints.",
+    "where": "Background tab, 'Purpose'"
+   },
+   {
+    "point": "Most new buildings from 1 Jul 2025",
+    "value": "confirmed",
+    "quote": "Council approved on-site rainwater management requirements for most new buildings, effective July 1, 2025.",
+    "where": "Background, 'Regulatory history'"
+   },
+   {
+    "point": "Requirements since 1 Jan 2024",
+    "value": "confirmed (Building By-law requirements from 1 Jan 2024); the words 'Part 3' are not on the page",
+    "quote": "For building permits opened before January 1, 2024, there are no rainwater management requirements in the Building By-law.",
+    "where": "In-stream applications tab"
+   }
+  ],
+  "proposed_text": "City of Vancouver, Rainwater management on private property: Building By-law requirements since 1 Jan 2024 (?: 'Part 3' is our reading, not the page's wording), most new buildings from 1 Jul 2025; as of September 2025, 192 developments, 66 ha managed, about 7,400 L/s peak reduction; purpose to 'relieve sewer system capacity constraints' (page saved 25 Oct 2026) — https://vancouver.ca/home-property-development/rainwater-management.aspx",
+  "number_change": "none",
+  "note": "The earlier '?' was wrong: the figures and phrase are on the Background tab of the saved page (they may be hidden in a collapsed tab in the browser). City figures are forecasts for permitted developments ('will meet')."
+ }
+]
