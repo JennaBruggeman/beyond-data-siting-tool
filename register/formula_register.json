@@ -3043,18 +3043,26 @@
    ],
    "coef": "share 0.75–0.87 from Qu EDM1 (15,712/18,000) and eStruxture VAN-1 (7,500/10,000)",
    "sources": [
-    "opClaims"
+    "quEDM1_2026",
+    "estruxtureVAN1ds"
    ],
    "conf": 50,
    "status": "operator claim",
    "stage": "size",
    "source_roles": [
     {
-     "id": "opClaims",
-     "term": "all coefficients",
-     "role": "coefficient",
+     "id": "quEDM1_2026",
+     "term": "Server (raised) floor area",
+     "role": "traced from opClaims",
      "conf": 50,
-     "verified": true
+     "verified": false
+    },
+    {
+     "id": "estruxtureVAN1ds",
+     "term": "Server (raised) floor area",
+     "role": "traced from opClaims",
+     "conf": 50,
+     "verified": false
     }
    ]
   },
@@ -3119,7 +3127,12 @@
     "rts19744",
     "vanPermits",
     "quEDM1_2026",
-    "quEDM2_2026"
+    "quEDM2_2026",
+    "cologixVAN4web",
+    "cologixVAN2web",
+    "estruxtureVAN1ds",
+    "hut8VAN1",
+    "hut8Vault"
    ],
    "conf": 50,
    "status": "operator claim / public record",
@@ -3128,7 +3141,7 @@
     {
      "id": "opClaims",
      "term": "nameplate MW per site",
-     "role": "data",
+     "role": "internal note (no primary named for: '2–4 MW typical downtown colocation' is a range read across the operator claims, not stated in any document)",
      "conf": 50,
      "verified": true
     },
@@ -3159,6 +3172,41 @@
      "role": "pending build",
      "conf": 70,
      "verified": true
+    },
+    {
+     "id": "cologixVAN4web",
+     "term": "IT load, operator claim",
+     "role": "traced from opClaims",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "cologixVAN2web",
+     "term": "IT load, operator claim",
+     "role": "traced from opClaims",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "estruxtureVAN1ds",
+     "term": "IT load, operator claim",
+     "role": "traced from opClaims",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "hut8VAN1",
+     "term": "IT load, operator claim",
+     "role": "traced from opClaims",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "hut8Vault",
+     "term": "IT load, operator claim",
+     "role": "traced from opClaims",
+     "conf": 50,
+     "verified": false
     }
    ]
   },
@@ -3280,26 +3328,26 @@
    ],
    "coef": "heat ≈ electricity drawn (Barroso); idle 36% (2023)",
    "sources": [
-    "heatPhys",
-    "lbnl2024"
+    "lbnl2024",
+    "barroso2018"
    ],
    "conf": 80,
    "status": "in hand",
    "stage": "characterise",
    "source_roles": [
     {
-     "id": "heatPhys",
-     "term": "heat ≈ electricity drawn",
-     "role": "rule",
-     "conf": 100,
-     "verified": true
-    },
-    {
      "id": "lbnl2024",
      "term": "idle floor 36% of max",
      "role": "coefficient",
      "conf": 80,
      "verified": true
+    },
+    {
+     "id": "barroso2018",
+     "term": "Heat rejected",
+     "role": "traced from heatPhys",
+     "conf": 100,
+     "verified": false
     }
    ]
   },
@@ -3318,7 +3366,11 @@
     "yuan2025",
     "oro2019",
     "nrelESIF2019",
-    "upsiteASHRAE5"
+    "upsiteASHRAE5",
+    "wahlroos2018",
+    "alissa2025lca",
+    "sethuramalingam2019",
+    "ornlWang"
    ],
    "conf": 70,
    "status": "in hand",
@@ -3327,7 +3379,7 @@
     {
      "id": "lorenz",
      "term": "air 25–35 °C; liquid 50–60 °C (second-hand via Sethuramalingam; unverified, report 14)",
-     "role": "coefficient",
+     "role": "internal note (no primary named for: liquid-cooled 50–60 °C: only secondary sources (Sethuramalingam citing Ebrahimi 2015 and Davies 2016; ORNL Wang); originals not read)",
      "conf": 70,
      "verified": false
     },
@@ -3337,6 +3389,34 @@
      "role": "site fact",
      "conf": 80,
      "verified": true
+    },
+    {
+     "id": "wahlroos2018",
+     "term": "Heat temperature by cooling type",
+     "role": "traced from lorenz",
+     "conf": 70,
+     "verified": false
+    },
+    {
+     "id": "alissa2025lca",
+     "term": "Heat temperature by cooling type",
+     "role": "traced from lorenz",
+     "conf": 70,
+     "verified": false
+    },
+    {
+     "id": "sethuramalingam2019",
+     "term": "Heat temperature by cooling type",
+     "role": "traced from lorenz",
+     "conf": 70,
+     "verified": false
+    },
+    {
+     "id": "ornlWang",
+     "term": "Heat temperature by cooling type",
+     "role": "traced from lorenz",
+     "conf": 70,
+     "verified": false
     }
    ],
    "revised": "2026-10-19"
@@ -3356,7 +3436,8 @@
     "oro2019",
     "pozgaj2025",
     "ljungqvist2023",
-    "yuan2025"
+    "yuan2025",
+    "zimmermann2012"
    ],
    "conf": 70,
    "status": "in hand",
@@ -3365,7 +3446,7 @@
     {
      "id": "lorenz",
      "term": "all coefficients",
-     "role": "coefficient",
+     "role": "internal note (no primary named for: 1.0 for immersion (formula): no primary named; 0.5–0.8 cold-plate band is a reading of 48–75 % / 94 %, not stated in a source)",
      "conf": 70,
      "verified": true
     },
@@ -3375,6 +3456,13 @@
      "role": "coefficient",
      "conf": 80,
      "verified": true
+    },
+    {
+     "id": "zimmermann2012",
+     "term": "Share of heat captured in liquid",
+     "role": "traced from lorenz",
+     "conf": 70,
+     "verified": false
     }
    ]
   },
@@ -3393,22 +3481,16 @@
     "dea",
     "dfKatalog2022",
     "fjfAars2020",
-    "lorenz",
     "teliaHKI2024",
     "ulavalCVD",
-    "blatchfordDG2025"
+    "blatchfordDG2025",
+    "reinholdt2018",
+    "pieper2020"
    ],
    "conf": 70,
    "status": "calibrated on six cases: η 0.39–0.53 built/operating",
    "stage": "characterise",
    "source_roles": [
-    {
-     "id": "lorenz",
-     "term": "COP = η × T_lm,H ÷ (T_lm,H − T_lm,L); η 0.50–0.60",
-     "role": "method",
-     "conf": 70,
-     "verified": true
-    },
     {
      "id": "dea",
      "term": "annual COP 3.1 / 3.6 / 4.7 at 1 / 3 / 10 MW",
@@ -3456,6 +3538,20 @@
      "term": "research pass 16 Oct 2026 (city guideline)",
      "role": "pending build",
      "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "reinholdt2018",
+     "term": "Heat-pump COP (Lorenz)",
+     "role": "traced from lorenz",
+     "conf": 70,
+     "verified": false
+    },
+    {
+     "id": "pieper2020",
+     "term": "Heat-pump COP (Lorenz)",
+     "role": "traced from lorenz",
+     "conf": 70,
      "verified": false
     }
    ]
@@ -3532,7 +3628,6 @@
     "bcucC113",
     "bytes2heat",
     "dfKatalog2022",
-    "lorenz",
     "nivosMantsala",
     "rvoCases2018",
     "bartlett2025",
@@ -3542,13 +3637,6 @@
    "status": "calibrated: receiver-limited in 4 of 5 built cases",
    "stage": "characterise",
    "source_roles": [
-    {
-     "id": "lorenz",
-     "term": "all coefficients",
-     "role": "coefficient",
-     "conf": 70,
-     "verified": true
-    },
     {
      "id": "nivosMantsala",
      "term": "20–30 GWh/yr from ~15 MW DC (receiver-limited)",
@@ -3620,7 +3708,7 @@
     {
      "id": "heatPhys",
      "term": "all coefficients",
-     "role": "coefficient",
+     "role": "internal note (no primary named for: allocation rule ('show two rules'): internal method, no primary named)",
      "conf": 100,
      "verified": true
     }
@@ -3638,10 +3726,11 @@
    "coef": "EnEfG benchmark 10% → 20%; first attempt used heat_delivered ÷ IT energy — corrected 13 Oct 2026: Telia Helsinki reports ERF 0.75 (operator claim; basis not stated in the PDF); German HPC centres 0.01–0.20 (arXiv 2411.16204, non-ISO denominator); NREL RSF reports ERE 0.91 \"calculated, not measured\"",
    "sources": [
     "euReg2024_1364",
-    "heatPhys",
     "iso30134_6",
     "nrelRSF",
-    "teliaHKI2024"
+    "teliaHKI2024",
+    "enefg11",
+    "greenGridWP29"
    ],
    "conf": 90,
    "status": "in hand",
@@ -3652,13 +3741,6 @@
      "term": "definition",
      "role": "rule",
      "conf": 90,
-     "verified": true
-    },
-    {
-     "id": "heatPhys",
-     "term": "reported value",
-     "role": "check",
-     "conf": 50,
      "verified": true
     },
     {
@@ -3681,6 +3763,20 @@
      "role": "check",
      "conf": 50,
      "verified": true
+    },
+    {
+     "id": "enefg11",
+     "term": "Energy reuse factor",
+     "role": "traced from heatPhys",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "greenGridWP29",
+     "term": "Energy reuse factor",
+     "role": "traced from heatPhys",
+     "conf": 50,
+     "verified": false
     }
    ]
   },
@@ -3692,18 +3788,18 @@
    "inputs": [],
    "coef": "1.16 kWh per m³ per °C",
    "sources": [
-    "heatPhys"
+    "greenGridWP29"
    ],
    "conf": 100,
    "status": "in hand",
    "stage": "characterise",
    "source_roles": [
     {
-     "id": "heatPhys",
-     "term": "all coefficients",
-     "role": "coefficient",
+     "id": "greenGridWP29",
+     "term": "Heat carried in water",
+     "role": "traced from heatPhys",
      "conf": 100,
-     "verified": true
+     "verified": false
     }
    ]
   },
@@ -3750,7 +3846,10 @@
    "coef": "Manor Farm target < 1.30; 13 Oct 2026: US average 1.4 (2023, LBNL); global 1.54, North America 1.49, new facilities 1.48 (Uptime 2025, INDUSTRY SURVEY); no Canadian figure (NRCan: no sufficient survey); no source splits existing buildings from purpose-built — use 1.4–1.55",
    "sources": [
     "heatPhys",
-    "uptime2025"
+    "uptime2025",
+    "lbnl2024",
+    "uptimeRegional2025",
+    "nrcanEstarDC"
    ],
    "conf": 80,
    "status": "range in hand: an estimate (LBNL 2023) and an industry survey (Uptime 2025), not measured here; confidence 80, not 100 (M104, 19 Oct 2026)",
@@ -3759,7 +3858,7 @@
     {
      "id": "heatPhys",
      "term": "all coefficients",
-     "role": "coefficient",
+     "role": "internal note (no primary named for: Manor Farm target < 1.30: no primary named in the notes; PUE definition (E_facility ÷ E_IT): no standard named in heatPhys or the notes)",
      "conf": 100,
      "verified": true
     },
@@ -3769,6 +3868,27 @@
      "role": "check",
      "conf": 50,
      "verified": true
+    },
+    {
+     "id": "lbnl2024",
+     "term": "Power usage effectiveness",
+     "role": "traced from heatPhys",
+     "conf": 100,
+     "verified": false
+    },
+    {
+     "id": "uptimeRegional2025",
+     "term": "Power usage effectiveness",
+     "role": "traced from heatPhys",
+     "conf": 100,
+     "verified": false
+    },
+    {
+     "id": "nrcanEstarDC",
+     "term": "Power usage effectiveness",
+     "role": "traced from heatPhys",
+     "conf": 100,
+     "verified": false
     }
    ]
   },
@@ -3782,7 +3902,8 @@
    ],
    "coef": "",
    "sources": [
-    "heatPhys"
+    "heatPhys",
+    "uptimeTiers"
    ],
    "conf": 100,
    "status": "in hand",
@@ -3791,9 +3912,16 @@
     {
      "id": "heatPhys",
      "term": "all coefficients",
-     "role": "coefficient",
+     "role": "internal note (no primary named for: '2N holds half': 2N is not defined in any public Uptime text read (sources/16 gap 11))",
      "conf": 100,
      "verified": true
+    },
+    {
+     "id": "uptimeTiers",
+     "term": "Reserved electrical capacity",
+     "role": "traced from heatPhys",
+     "conf": 100,
+     "verified": false
     }
    ]
   },
@@ -3806,7 +3934,13 @@
    "coef": "UPS runtime about 1–2 min (hyperscale), about 5 min (colocation), 10–15 min (financial); generators take over in 10–20 s (vendor claims); 12 h fuel minimum (Uptime) and 24–48 h typical (operator claims)",
    "sources": [
     "heatPhys",
-    "opClaims"
+    "quEDM1_2026",
+    "cat3516c",
+    "schneiderUPS2020",
+    "uptimeHeslin2014",
+    "cologixVAN2fr",
+    "estruxtureVAN1ds",
+    "hut8Vault"
    ],
    "conf": 90,
    "status": "in hand",
@@ -3815,16 +3949,58 @@
     {
      "id": "heatPhys",
      "term": "kWh ÷ load; fuel ÷ burn rate",
-     "role": "rule",
+     "role": "internal note (no primary named for: )",
      "conf": 100,
      "verified": true
     },
     {
-     "id": "opClaims",
-     "term": "UPS and fuel durations stated by operators",
-     "role": "data",
+     "id": "quEDM1_2026",
+     "term": "Backup duration",
+     "role": "traced from opClaims",
      "conf": 50,
-     "verified": true
+     "verified": false
+    },
+    {
+     "id": "cat3516c",
+     "term": "Backup duration",
+     "role": "traced from opClaims",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "schneiderUPS2020",
+     "term": "Backup duration",
+     "role": "traced from opClaims",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "uptimeHeslin2014",
+     "term": "Backup duration",
+     "role": "traced from opClaims",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "cologixVAN2fr",
+     "term": "Backup duration",
+     "role": "traced from opClaims",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "estruxtureVAN1ds",
+     "term": "Backup duration",
+     "role": "traced from opClaims",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "hut8Vault",
+     "term": "Backup duration",
+     "role": "traced from opClaims",
+     "conf": 50,
+     "verified": false
     }
    ]
   },
@@ -4551,7 +4727,8 @@
    "coef": "Vancouver Solar Access Guidelines",
    "sources": [
     "solar",
-    "edm7140sun"
+    "edm7140sun",
+    "vanSolarAccess"
    ],
    "conf": 90,
    "status": "in hand",
@@ -4560,7 +4737,7 @@
     {
      "id": "solar",
      "term": "all coefficients",
-     "role": "coefficient",
+     "role": "internal note (no primary named for: fall-equinox 10:00–16:00 criterion and the 2024 / am. 2026 edition: no primary read; document named by title only)",
      "conf": 90,
      "verified": true
     },
@@ -4570,6 +4747,13 @@
      "role": "pending build",
      "conf": 70,
      "verified": true
+    },
+    {
+     "id": "vanSolarAccess",
+     "term": "Shadow on neighbours",
+     "role": "traced from solar",
+     "conf": 90,
+     "verified": false
     }
    ]
   },
@@ -4595,7 +4779,7 @@
     {
      "id": "ess",
      "term": "3.5 m² per person; 2 m between beds",
-     "role": "coefficient",
+     "role": "internal note (no primary named for: Edmonton group-lodging spacing: no Edmonton document named)",
      "conf": 90,
      "verified": true
     },
@@ -4627,7 +4811,8 @@
    "coef": "Health Canada 2020",
    "sources": [
     "ess",
-    "smoke2026"
+    "smoke2026",
+    "healthCanada2026"
    ],
    "conf": 80,
    "status": "in hand",
@@ -4636,7 +4821,7 @@
     {
      "id": "ess",
      "term": "all coefficients",
-     "role": "coefficient",
+     "role": "internal note (no primary named for: Health Canada 2020 cleaner-air spaces (MERV 13+, 2–3 ACH): document not named precisely in any note; no URL)",
      "conf": 80,
      "verified": true
     },
@@ -4645,6 +4830,13 @@
      "term": "research pass 16 Oct 2026 (government)",
      "role": "pending build",
      "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "healthCanada2026",
+     "term": "Clean-air room volume served",
+     "role": "traced from ess",
+     "conf": 80,
      "verified": false
     }
    ]
@@ -4660,23 +4852,16 @@
    ],
    "coef": "108 W seated, 126 standing, 207 W walking 3.2 km/h (ASHRAE via EnergyPlus; 180 W is 'walking about, office'); 26 °C Health Canada 2026; need: Vancouver Intl 5.7 days/yr humidex ≥30, Edmonton 10.5 (≥35: Edmonton ~1/yr; ECCC Normals 1991–2020); note 2021 heat dome exceeds normals",
    "sources": [
-    "ess",
     "healthCanada2026",
     "eccc",
     "vanUses2026",
-    "edmUses2026"
+    "edmUses2026",
+    "energyPlusPeople"
    ],
    "conf": 60,
    "status": "derived",
    "stage": "opportunity",
    "source_roles": [
-    {
-     "id": "ess",
-     "term": "room standards",
-     "role": "coefficient",
-     "conf": 90,
-     "verified": false
-    },
     {
      "id": "healthCanada2026",
      "term": "26 °C indoor limit",
@@ -4704,6 +4889,13 @@
      "role": "pending build",
      "conf": 50,
      "verified": false
+    },
+    {
+     "id": "energyPlusPeople",
+     "term": "People a cooling room can hold",
+     "role": "traced from ess",
+     "conf": 90,
+     "verified": false
     }
    ]
   },
@@ -4718,7 +4910,12 @@
    "coef": "Vancouver I-2 s. 2.2.7, I-3 s. 2.2.11 (sub-area A), FC-2 s. 2.2.4 bar data storage at grade; Edmonton has no ground-floor rule",
    "sources": [
     "bins",
-    "vanI2Ground"
+    "vanI2Ground",
+    "edm_bl20001",
+    "hillingdon_up4",
+    "burlingtonPlans2026",
+    "abp317802",
+    "abp317446"
    ],
    "conf": 60,
    "status": "ground floor by rule (90) in three Vancouver zones; support block from plans (60); growth space judged (20)",
@@ -4727,7 +4924,7 @@
     {
      "id": "bins",
      "term": "all coefficients",
-     "role": "coefficient",
+     "role": "internal note (no primary named for: space held for growth (judged, 20): no document; Edmonton 'no ground-floor rule' is an absence finding (sources/18), not a stated rule)",
      "conf": 20,
      "verified": true
     },
@@ -4737,6 +4934,41 @@
      "role": "rule",
      "conf": 90,
      "verified": true
+    },
+    {
+     "id": "edm_bl20001",
+     "term": "Offerable floor area",
+     "role": "traced from bins",
+     "conf": 20,
+     "verified": false
+    },
+    {
+     "id": "hillingdon_up4",
+     "term": "Offerable floor area",
+     "role": "traced from bins",
+     "conf": 20,
+     "verified": false
+    },
+    {
+     "id": "burlingtonPlans2026",
+     "term": "Offerable floor area",
+     "role": "traced from bins",
+     "conf": 20,
+     "verified": false
+    },
+    {
+     "id": "abp317802",
+     "term": "Offerable floor area",
+     "role": "traced from bins",
+     "conf": 20,
+     "verified": false
+    },
+    {
+     "id": "abp317446",
+     "term": "Offerable floor area",
+     "role": "traced from bins",
+     "conf": 20,
+     "verified": false
     }
    ],
    "revised": "2026-10-19"
@@ -6000,7 +6232,7 @@
     {
      "id": "floor",
      "term": "Canadian operator floor price",
-     "role": "gap",
+     "role": "internal note (no primary named for: Canadian operator floor price: not public; a gap, no document exists)",
      "conf": 0,
      "verified": true
     },
@@ -6188,18 +6420,18 @@
    "inputs": [],
    "coef": "NREL ATB",
    "sources": [
-    "crf"
+    "nrelATB_crf"
    ],
    "conf": 100,
    "status": "in hand",
    "stage": "test",
    "source_roles": [
     {
-     "id": "crf",
-     "term": "all coefficients",
-     "role": "coefficient",
+     "id": "nrelATB_crf",
+     "term": "Capital recovery factor",
+     "role": "traced from crf",
      "conf": 100,
-     "verified": true
+     "verified": false
     }
    ]
   },
@@ -6215,22 +6447,16 @@
    ],
    "coef": "IEA SHC Task 54; O&M 2,000 €/MW·yr",
    "sources": [
-    "crf",
     "hiltunen2020",
     "epcorDAS2026",
-    "bchTariff2026"
+    "bchTariff2026",
+    "ieaSHCTask54",
+    "nrelATB_crf"
    ],
    "conf": 70,
    "status": "in hand",
    "stage": "test",
    "source_roles": [
-    {
-     "id": "crf",
-     "term": "CRF and LCoH method",
-     "role": "method",
-     "conf": 100,
-     "verified": true
-    },
     {
      "id": "hiltunen2020",
      "term": "O&M 2,000 €/MW·yr; capex",
@@ -6251,6 +6477,20 @@
      "role": "parity: the other city",
      "conf": 70,
      "verified": true
+    },
+    {
+     "id": "ieaSHCTask54",
+     "term": "Levelised cost of heat",
+     "role": "traced from crf",
+     "conf": 100,
+     "verified": false
+    },
+    {
+     "id": "nrelATB_crf",
+     "term": "Levelised cost of heat",
+     "role": "traced from crf",
+     "conf": 100,
+     "verified": false
     }
    ]
   },
@@ -6268,26 +6508,19 @@
    ],
    "coef": "i = 5.6% real (Squamish NEU 2010, BCUC-regulated utility WACC); pipe 30 yr (EN 253:2019 via Energiforsk 2022:872); heat pump 25 yr, 1.13–0.95 M€/MW, upkeep 2,100 €/MW·yr + 3.07 €/MWh (DEA sheet 40); 4,400–7,100 full-load h; middle case = midpoints. Check: Pärssinen 2019 Table 4 paybacks 1.8–5.1 yr (Finnish, larger units). No 5-year threshold (RVO 2018 kept only for the 1.5 km search radius) | logic test 19 Oct 2026 (J.B.): demand figures are energy bought, heat delivered = × 0.85 (gas boiler); cards also show the middle case at 3% and 8% cost of capital, and with the heat pump covering the coldest hours (full-load hours from CWEC: Vancouver 3,200–4,500, Edmonton 2,900–3,900; annual ÷ peak hour, single coldest to 99th percentile, base 15.5–18 °C, hot water flat)",
    "sources": [
-    "crf",
     "parssinen",
     "squamishNEU2010",
     "energiforsk2022life",
     "dea",
     "tbsCBA2018",
     "scotHeat2011",
-    "vanNEURates2026"
+    "vanNEURates2026",
+    "nrelATB_crf"
    ],
    "conf": 60,
    "status": "revised 19 Oct 2026: one BC cost of capital (2010); EN 253 read through a secondary report",
    "stage": "test",
    "source_roles": [
-    {
-     "id": "crf",
-     "term": "capital recovery factor",
-     "role": "method",
-     "conf": 100,
-     "verified": true
-    },
     {
      "id": "squamishNEU2010",
      "term": "5.6% real, levelised over 30 yr",
@@ -6336,6 +6569,13 @@
      "role": "context",
      "conf": 90,
      "verified": true
+    },
+    {
+     "id": "nrelATB_crf",
+     "term": "Payback and IRR",
+     "role": "traced from crf",
+     "conf": 100,
+     "verified": false
     }
    ],
    "revised": "2026-10-19"
@@ -6629,7 +6869,8 @@
     "dlrContracts",
     "edmParcel",
     "statcanLives",
-    "sscConsolidation"
+    "sscConsolidation",
+    "monstadt2025"
    ],
    "conf": 80,
    "status": "primary sources found (13 Oct 2026)",
@@ -6638,7 +6879,7 @@
     {
      "id": "horizons",
      "term": "servers ~6; plant 15–25; shell ≤40; network 40–50",
-     "role": "coefficient",
+     "role": "internal note (no primary named for: shell up to 40 years: no primary named (statcanLives gives 27 yr offices, 25.4 warehouses); Seattle permit 10 + two 10-year renewals: no id or note source found; Stockholm Exergi heat contracts 10 + 5: exergi citation does not state contract length; Tallaght plant 25–35 years: tallaghtD22 citation d)",
      "conf": 60,
      "verified": true
     },
@@ -6711,6 +6952,13 @@
      "role": "data",
      "conf": 80,
      "verified": true
+    },
+    {
+     "id": "monstadt2025",
+     "term": "Time horizons",
+     "role": "traced from horizons",
+     "conf": 60,
+     "verified": false
     }
    ],
    "revised": "2026-10-19"
@@ -6919,7 +7167,7 @@
     {
      "id": "rule9",
      "term": "all coefficients",
-     "role": "coefficient",
+     "role": "internal note (no primary named for: pipes/cables/data vs people inside: internal handoff rule 9, no primary)",
      "conf": 100,
      "verified": true
     }
@@ -7236,7 +7484,8 @@
     "horizons",
     "rts19744",
     "g9425",
-    "blatchfordBP2021"
+    "blatchfordBP2021",
+    "monstadt2025"
    ],
    "conf": 60,
    "status": "derived",
@@ -7245,7 +7494,7 @@
     {
      "id": "horizons",
      "term": "who controls what, by horizon",
-     "role": "data",
+     "role": "internal note (no primary named for: Greene: work not identified)",
      "conf": 60,
      "verified": true
     },
@@ -7269,6 +7518,13 @@
      "role": "pending build",
      "conf": 70,
      "verified": true
+    },
+    {
+     "id": "monstadt2025",
+     "term": "Party ledger",
+     "role": "traced from horizons",
+     "conf": 60,
+     "verified": false
     }
    ]
   },
@@ -7282,18 +7538,34 @@
    ],
    "coef": "Replaces the match verdict (decided 13 Oct 2026). Constraints that cannot move are stated as such; everything else carries what it would take to move it.",
    "sources": [
-    "nonComp"
+    "munda",
+    "cinelli2014",
+    "rowley2012"
    ],
    "conf": 100,
    "status": "logic defined",
    "stage": "decide",
    "source_roles": [
     {
-     "id": "nonComp",
-     "term": "all coefficients",
-     "role": "coefficient",
+     "id": "munda",
+     "term": "Trade-off table",
+     "role": "traced from nonComp",
      "conf": 100,
-     "verified": true
+     "verified": false
+    },
+    {
+     "id": "cinelli2014",
+     "term": "Trade-off table",
+     "role": "traced from nonComp",
+     "conf": 100,
+     "verified": false
+    },
+    {
+     "id": "rowley2012",
+     "term": "Trade-off table",
+     "role": "traced from nonComp",
+     "conf": 100,
+     "verified": false
     }
    ]
   },
@@ -8083,7 +8355,10 @@
     "aesoConnect",
     "epcorDTtc2025",
     "isocPulseIXP",
-    "vanixPoints"
+    "vanixPoints",
+    "vanixFacilities",
+    "yegixStatus",
+    "ciraIXP2023"
    ],
    "source_roles": [
     {
@@ -8152,9 +8427,30 @@
     {
      "id": "vanixPoints",
      "term": "connection points (not shown)",
-     "role": "claim",
+     "role": "internal note (no primary named for: fibre ≈0.005 ms per km: derived with an assumed refractive index; ITU-T G.114 not read)",
      "conf": 50,
      "verified": true
+    },
+    {
+     "id": "vanixFacilities",
+     "term": "Closeness to networks and customers",
+     "role": "traced from vanixPoints",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "yegixStatus",
+     "term": "Closeness to networks and customers",
+     "role": "traced from vanixPoints",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "ciraIXP2023",
+     "term": "Closeness to networks and customers",
+     "role": "traced from vanixPoints",
+     "conf": 50,
+     "verified": false
     }
    ],
    "conf": 50,
@@ -9602,8 +9898,7 @@
     "van_zdb_fc2",
     "van_rts19744",
     "edm_bl20001",
-    "src17",
-    "src18"
+    "edmZB2120"
    ],
    "source_roles": [
     {
@@ -9649,18 +9944,11 @@
      "verified": true
     },
     {
-     "id": "src17",
+     "id": "edmZB2120",
      "term": "Buildable envelope",
-     "role": "data",
+     "role": "traced from src18",
      "conf": 75,
-     "verified": true
-    },
-    {
-     "id": "src18",
-     "term": "Buildable envelope",
-     "role": "data",
-     "conf": 75,
-     "verified": true
+     "verified": false
     }
    ],
    "conf": 75,
@@ -9698,13 +9986,21 @@
     "uptimeTiers",
     "nfpa855_2026",
     "cologixVAN1_2026",
-    "cologixVAN4_2026"
+    "cologixVAN4_2026",
+    "traneTCA2026",
+    "femp2024dc",
+    "vertivEXLS1",
+    "vertivHPL",
+    "vertivCDU2300",
+    "thermokeyGH2490",
+    "bacS3000_2012",
+    "carrier61XWH"
    ],
    "source_roles": [
     {
      "id": "src16",
      "term": "Space for the plant",
-     "role": "data",
+     "role": "internal note (no primary named for: 'Mark' dry cooler (AWSVN-58D-835M, ≈30.5 m²/MW): model named only in audit/plant_sources_2026-10-18.md, no document or URL)",
      "conf": 40,
      "verified": false
     },
@@ -9840,6 +10136,62 @@
      "role": "pending build",
      "conf": 70,
      "verified": true
+    },
+    {
+     "id": "traneTCA2026",
+     "term": "Space for the plant",
+     "role": "traced from src16",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "femp2024dc",
+     "term": "Space for the plant",
+     "role": "traced from src16",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "vertivEXLS1",
+     "term": "Space for the plant",
+     "role": "traced from src16",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "vertivHPL",
+     "term": "Space for the plant",
+     "role": "traced from src16",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "vertivCDU2300",
+     "term": "Space for the plant",
+     "role": "traced from src16",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "thermokeyGH2490",
+     "term": "Space for the plant",
+     "role": "traced from src16",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "bacS3000_2012",
+     "term": "Space for the plant",
+     "role": "traced from src16",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "carrier61XWH",
+     "term": "Space for the plant",
+     "role": "traced from src16",
+     "conf": 40,
+     "verified": false
     }
    ],
    "conf": 40,
@@ -9862,8 +10214,8 @@
     "van_zdb_i3",
     "van_zdb_fc2",
     "van_zdb_i2",
-    "src16",
-    "edm_bl20001"
+    "edm_bl20001",
+    "burlingtonPlans2026"
    ],
    "source_roles": [
     {
@@ -9888,18 +10240,18 @@
      "verified": false
     },
     {
-     "id": "src16",
-     "term": "Room for the data hall",
-     "role": "data",
-     "conf": 50,
-     "verified": false
-    },
-    {
      "id": "edm_bl20001",
      "term": "research pass 16 Oct 2026 (earlier source)",
      "role": "parity: the other city",
      "conf": 70,
      "verified": true
+    },
+    {
+     "id": "burlingtonPlans2026",
+     "term": "Room for the data hall",
+     "role": "traced from src16",
+     "conf": 50,
+     "verified": false
     }
    ],
    "conf": 50,
@@ -9922,10 +10274,10 @@
     "lbnl_proto2021",
     "hillingdon_up4",
     "van_rts19744",
-    "src16",
     "evapcoLayout2026",
     "vanParking5",
-    "edmZB580"
+    "edmZB580",
+    "uptime2024survey"
    ],
    "source_roles": [
     {
@@ -9944,13 +10296,6 @@
     },
     {
      "id": "van_rts19744",
-     "term": "Largest size that fits",
-     "role": "data",
-     "conf": 50,
-     "verified": false
-    },
-    {
-     "id": "src16",
      "term": "Largest size that fits",
      "role": "data",
      "conf": 50,
@@ -9976,6 +10321,13 @@
      "role": "pending build",
      "conf": 70,
      "verified": true
+    },
+    {
+     "id": "uptime2024survey",
+     "term": "Largest size that fits",
+     "role": "traced from src16",
+     "conf": 50,
+     "verified": false
     }
    ],
    "conf": 50,
@@ -9995,7 +10347,9 @@
    "coef": "NBC 2020 Table 4.1.5.3: office 2.4 kPa (upper floors), 4.8 kPa (basement and ground floors with exterior access); equipment and service rooms ≥ 3.6 kPa; office row excludes computer rooms; data halls designed for actual loads (4.1.5.1.(1)); data-hall values 7.2 kPa (US DoD) and 12 kPa (TIA-942 Rated-3) need the standard",
    "sources": [
     "nbc2020_4153",
-    "src16"
+    "nbc2020Live",
+    "linwood2023",
+    "epiTIA942"
    ],
    "source_roles": [
     {
@@ -10006,11 +10360,25 @@
      "verified": true
     },
     {
-     "id": "src16",
+     "id": "nbc2020Live",
      "term": "Floor strength",
-     "role": "data",
+     "role": "traced from src16",
      "conf": 70,
-     "verified": true
+     "verified": false
+    },
+    {
+     "id": "linwood2023",
+     "term": "Floor strength",
+     "role": "traced from src16",
+     "conf": 70,
+     "verified": false
+    },
+    {
+     "id": "epiTIA942",
+     "term": "Floor strength",
+     "role": "traced from src16",
+     "conf": 70,
+     "verified": false
     }
    ],
    "conf": 70,
@@ -10031,10 +10399,11 @@
    "sources": [
     "nfc2020_4313",
     "cat3516c",
-    "src16",
     "src23",
     "vanFire14419",
-    "nfcAB2023_4313"
+    "nfcAB2023_4313",
+    "uptimeHeslin2014",
+    "abStandata19FCI003"
    ],
    "source_roles": [
     {
@@ -10052,16 +10421,9 @@
      "verified": true
     },
     {
-     "id": "src16",
-     "term": "Fuel kept on site",
-     "role": "data",
-     "conf": 60,
-     "verified": true
-    },
-    {
      "id": "src23",
      "term": "Fuel kept on site",
-     "role": "data",
+     "role": "internal note (no primary named for: whether data-centre standby counts as 'emergency generators': no source answers it (sources/23))",
      "conf": 60,
      "verified": true
     },
@@ -10078,6 +10440,20 @@
      "role": "pending build",
      "conf": 70,
      "verified": true
+    },
+    {
+     "id": "uptimeHeslin2014",
+     "term": "Fuel kept on site",
+     "role": "traced from src16",
+     "conf": 60,
+     "verified": false
+    },
+    {
+     "id": "abStandata19FCI003",
+     "term": "Fuel kept on site",
+     "role": "traced from src23",
+     "conf": 60,
+     "verified": false
     }
    ],
    "conf": 60,
@@ -10098,8 +10474,8 @@
    "sources": [
     "van_f014",
     "van_floodplain",
-    "src22",
-    "edmFPO2250"
+    "edmFPO2250",
+    "vanFCL2014"
    ],
    "source_roles": [
     {
@@ -10117,18 +10493,18 @@
      "verified": true
     },
     {
-     "id": "src22",
-     "term": "Flood exposure",
-     "role": "data",
-     "conf": 70,
-     "verified": true
-    },
-    {
      "id": "edmFPO2250",
      "term": "research pass 16 Oct 2026 (bylaw)",
      "role": "pending build",
      "conf": 70,
      "verified": true
+    },
+    {
+     "id": "vanFCL2014",
+     "term": "Flood exposure",
+     "role": "traced from src22",
+     "conf": 70,
+     "verified": false
     }
    ],
    "conf": 70,
@@ -10148,13 +10524,29 @@
    ],
    "coef": "NBC/VBBL apparent STC 47 between dwellings and other spaces (STC 55 by elevator shafts) — airborne only, no equipment-vibration limit; isolator deflection rises with floor span (US government spec citing ASHRAE); ASHRAE Applications ch. 49 not read",
    "sources": [
-    "src23"
+    "vbbl2019_58",
+    "bcbc2018_911",
+    "vaSpec230541"
    ],
    "source_roles": [
     {
-     "id": "src23",
+     "id": "vbbl2019_58",
      "term": "Vibration to neighbours",
-     "role": "data",
+     "role": "traced from src23",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "bcbc2018_911",
+     "term": "Vibration to neighbours",
+     "role": "traced from src23",
+     "conf": 40,
+     "verified": false
+    },
+    {
+     "id": "vaSpec230541",
+     "term": "Vibration to neighbours",
+     "role": "traced from src23",
      "conf": 40,
      "verified": false
     }
@@ -10176,8 +10568,7 @@
    "coef": "BC Hydro: above 6.5 MVA (12.5 kV areas) or 13 MVA (25 kV areas) a two-feeder supply may be required; 60 kV and above under transmission rules. EPCOR: primary service typical above 2,500 kVA; transformer clearances 3.0 m / 2.0 m; access road 4.6 m in a 6.5 m strip",
    "sources": [
     "bch_primary",
-    "epcor_ccg",
-    "src16"
+    "epcor_ccg"
    ],
    "source_roles": [
     {
@@ -10189,13 +10580,6 @@
     },
     {
      "id": "epcor_ccg",
-     "term": "Electrical service",
-     "role": "data",
-     "conf": 75,
-     "verified": true
-    },
-    {
-     "id": "src16",
      "term": "Electrical service",
      "role": "data",
      "conf": 75,
@@ -10295,7 +10679,7 @@
     {
      "id": "src25",
      "term": "Receivers within reach",
-     "role": "data",
+     "role": "internal note (no primary named for: ice-rink plants as heat sources: no primary named; estimate vs building-outline medians 0.86 / 0.65: internal audit derivation)",
      "conf": 70,
      "verified": true
     },
@@ -10334,7 +10718,8 @@
     "blatchfordDESS",
     "neuTraced",
     "van9552",
-    "vanNEU2025"
+    "vanNEU2025",
+    "van_rts19744"
    ],
    "source_roles": [
     {
@@ -10350,6 +10735,13 @@
      "role": "data",
      "conf": 60,
      "verified": true
+    },
+    {
+     "id": "van_rts19744",
+     "term": "Other sources for the same receiver",
+     "role": "traced from neuTraced",
+     "conf": 50,
+     "verified": false
     }
    ],
    "conf": 60,
@@ -10473,7 +10865,7 @@
     {
      "id": "learningSeries",
      "term": "How firm the exchange is",
-     "role": "data",
+     "role": "internal note (no primary named for: five commitment states and 'only existing and committed count': internal rule from J.B.'s learning-series critique, no primary)",
      "conf": 100,
      "verified": true
     }
@@ -10497,15 +10889,39 @@
    ],
    "coef": "lifespans from horizons (servers ~6 years, plant 15–25, network 40–50); closure cases in meta.lifecycle",
    "sources": [
-    "learningSeries"
+    "learningSeries",
+    "lbnlLife",
+    "ashraeLife",
+    "en253Life"
    ],
    "source_roles": [
     {
      "id": "learningSeries",
      "term": "Futures",
-     "role": "data",
+     "role": "internal note (no primary named for: four-futures scenario set: internal method; network 40–50 yr: en253Life gives 30 yr at 120 °C, 50 only below 115 °C)",
      "conf": 60,
      "verified": true
+    },
+    {
+     "id": "lbnlLife",
+     "term": "Futures",
+     "role": "traced from learningSeries",
+     "conf": 60,
+     "verified": false
+    },
+    {
+     "id": "ashraeLife",
+     "term": "Futures",
+     "role": "traced from learningSeries",
+     "conf": 60,
+     "verified": false
+    },
+    {
+     "id": "en253Life",
+     "term": "Futures",
+     "role": "traced from learningSeries",
+     "conf": 60,
+     "verified": false
     }
    ],
    "conf": 60,
@@ -13588,9 +14004,26 @@
    "note": "CD-1 and DC1/DC2 zones each have their own by-law; the tool links to it and treats the parcel as a rezoning route. About 9 % of Edmonton zone features are Direct Control.",
    "sources": [
     "van_cd1",
-    "src18"
+    "edm_bl20001",
+    "edmZoningGeo"
    ],
-   "next_action": "ask the authority (City, BCUC or AUC, utility) — cite the rule"
+   "next_action": "ask the authority (City, BCUC or AUC, utility) — cite the rule",
+   "source_roles": [
+    {
+     "id": "edm_bl20001",
+     "term": "Site-specific zoning is read on its own",
+     "role": "traced from src18",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "edmZoningGeo",
+     "term": "Site-specific zoning is read on its own",
+     "role": "traced from src18",
+     "conf": 50,
+     "verified": false
+    }
+   ]
   },
   {
    "id": "z_edm_class",
@@ -13670,9 +14103,26 @@
    "sources": [
     "van_zdb_i2",
     "van_rts19744",
-    "src22"
+    "vanZDBs10",
+    "vanCD1_520"
    ],
-   "next_action": "route survey and utility locates; confirm the receiver's location and size"
+   "next_action": "route survey and utility locates; confirm the receiver's location and size",
+   "source_roles": [
+    {
+     "id": "vanZDBs10",
+     "term": "Vancouver: plant above grade counts as floor area",
+     "role": "traced from src22",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "vanCD1_520",
+     "term": "Vancouver: plant above grade counts as floor area",
+     "role": "traced from src22",
+     "conf": 50,
+     "verified": false
+    }
+   ]
   },
   {
    "id": "z_ground_floor",
@@ -13789,9 +14239,34 @@
    "constraint": false,
    "note": "The code limits airborne sound between units, not equipment vibration; a mixed-use position carries this row.",
    "sources": [
-    "src23"
+    "vbbl2019_58",
+    "vaSpec230541",
+    "melo2001"
    ],
-   "next_action": "site visit at the times that matter (night, generator test)"
+   "next_action": "site visit at the times that matter (night, generator test)",
+   "source_roles": [
+    {
+     "id": "vbbl2019_58",
+     "term": "Neighbours above and below are not disturbed",
+     "role": "traced from src23",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "vaSpec230541",
+     "term": "Neighbours above and below are not disturbed",
+     "role": "traced from src23",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "melo2001",
+     "term": "Neighbours above and below are not disturbed",
+     "role": "traced from src23",
+     "conf": 50,
+     "verified": false
+    }
+   ]
   },
   {
    "id": "p_service",
@@ -13816,10 +14291,35 @@
    "sources": [
     "bch_primary",
     "epcor_ccg",
-    "src21",
-    "edm_dcpage"
+    "edm_dcpage",
+    "abGridPage",
+    "aeso",
+    "aesoP2A2026"
    ],
-   "next_action": "engineering figure from the operator or a study (temperature, flow, capture)"
+   "next_action": "engineering figure from the operator or a study (temperature, flow, capture)",
+   "source_roles": [
+    {
+     "id": "abGridPage",
+     "term": "The electrical service class is available",
+     "role": "traced from src21",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "aeso",
+     "term": "The electrical service class is available",
+     "role": "traced from src21",
+     "conf": 50,
+     "verified": false
+    },
+    {
+     "id": "aesoP2A2026",
+     "term": "The electrical service class is available",
+     "role": "traced from src21",
+     "conf": 50,
+     "verified": false
+    }
+   ]
   },
   {
    "id": "t_mechanism",
@@ -14761,7 +15261,57 @@
   "bcbc2024_326": "BC Building Code 2024, 3.2.6.1 (high buildings: Group C floor level of the top storey more than 18 m above grade) and 3.2.6.5 (at least one elevator for use by firefighters); NBC(AE) the same Article",
   "abCCcompliance2026": "Government of Alberta, Assisted Living and Social Services, Continuing Care Accommodation Standards compliance reporting as of June 2026 (Open Government Licence – Alberta) — https://open.alberta.ca/dataset/continuing-care-accommodation-standards-compliance-reporting",
   "bcResCare": "Government of British Columbia, Residential Care Facilities (licensed community care facilities, maximum capacity; Open Government Licence – BC) — https://catalogue.data.gov.bc.ca/dataset/residential-care-facilities",
-  "sfpucReuse": "San Francisco Public Utilities Commission (regulator), Onsite Water Reuse Program Guidebook: district-scale systems \"serving two or more buildings\"; cooling listed among allowed non-potable uses — https://www.sfpuc.gov/sites/default/files/documents/Onsite-Water-Reuse-Guidebook.pdf"
+  "sfpucReuse": "San Francisco Public Utilities Commission (regulator), Onsite Water Reuse Program Guidebook: district-scale systems \"serving two or more buildings\"; cooling listed among allowed non-potable uses — https://www.sfpuc.gov/sites/default/files/documents/Onsite-Water-Reuse-Guidebook.pdf",
+  "estruxtureVAN1ds": "eStruxture, VAN-1 datasheet (V5; 55 E 7th Ave, Vancouver): '2.4Mw critical IT load', 'up to 30kW/cabinet', '10,000 sq. ft. total space', '7,500 sq. ft. of cabinet space', generator fuel ≥28 h (OPERATOR CLAIM; sources/01) — https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN1_EN-V5.pdf",
+  "cologixVAN4web": "Cologix, VAN4 facility page (175 W Cordova St): '4 MW of colocation capacity'; 3–10 kW/cabinet; '68K SQFT across four floors' (OPERATOR CLAIM; sources/01) — https://cologix.com/data-centers/vancouver/van4/",
+  "cologixVAN2web": "Cologix, VAN2 facility page (1050 W Pender St): '2 MW'; utility ATS (OPERATOR CLAIM; sources/01) — https://cologix.com/data-centers/vancouver/van2/",
+  "hut8VAN1": "Hut 8, Vancouver colocation (VAN1) page: '0.6 MW designed power capacity'; '900kW UPS each for A and B side'; '435 kW supplied by 2 generators' (OPERATOR CLAIM; address linkage unresolved, sources/01) — https://canada.hut8.com/centers/colocation-vancouver",
+  "hut8Vault": "Hut 8, Vancouver Vault page: '1 MW designed power capacity'; '560 kW UPS'; '600 kW generator', >48 h fuel (OPERATOR CLAIM; sources/01) — https://canada.hut8.com/centers/vancouver-vault",
+  "sethuramalingam2019": "Sethuramalingam, Asthana, Weston, Review of Waste Heat Utilisation from Data Centres, ICESF 2019 (Nottingham Trent), Sec. 3.3, p. 370: air-cooled heat captured at 25–35 °C, liquid-cooled 50–60 °C — SECONDARY (cites Ebrahimi et al. 2015 and Davies et al. 2016, not read; sources/14, 15d) — https://shura.shu.ac.uk/26175/1/Asthana_ReviewOfWaste%28VoR%29.pdf",
+  "ornlWang": "Wang, P. et al. (ORNL), District Heating Utilizing Waste Heat of a Data Center: High-Temperature Heat Pumps, OSTI 2372986 (journal and year not confirmed): waste heat '25℃–35℃ for air-cooled systems', '50℃–60℃ for water-cooled systems' (sources/16 S28) — https://www.osti.gov/pages/servlets/purl/2372986",
+  "zimmermann2012": "Zimmermann et al. 2012, Energy 43:237–245 (peer-reviewed): Aquasar hot-water cooling, 'A heat recovery efficiency of 80% … with a water temperature of 60 °C' (sources/14) — https://ideas.repec.org/a/eee/energy/v43y2012i1p237-245.html",
+  "reinholdt2018": "Reinholdt et al. 2018 (title, venue and URL not given in the notes): Lorenz efficiency η 0.50–0.60 for heat pumps — named, not yet checked",
+  "pieper2020": "Pieper et al. 2020 (title, venue and URL not given in the notes): Lorenz efficiency η 0.50–0.60 for heat pumps — named, not yet checked",
+  "enefg11": "Germany, Energieeffizienzgesetz (EnEfG) § 11 (BGBl. 2023 I Nr. 309, 13 Nov 2023): new data centres PUE ≤ 1.2 and ERF ≥ 10 / 15 / 20 % by commissioning date (sources/20) — https://www.gesetze-im-internet.de/enefg/__11.html",
+  "greenGridWP29": "The Green Grid, White Paper #29 (22 Sep 2010; M. Patterson, ed.), ERE: ERF = reuse energy ÷ total energy; ERE = (1 − ERF) × PUE — named, not yet checked; full text behind sign-in, formulae read only via Shuja et al. arXiv 1208.0593 (sources/13) — https://www.thegreengrid.org/product/118",
+  "uptimeRegional2025": "Uptime Institute, Field report 183, Annual survey — regional view 2025 (INDUSTRY SURVEY): North America weighted average PUE 1.49 (n=111), p. 1 (sources/14) — https://intelligence.uptimeinstitute.com/sites/default/files/2025-08/UI%20Field%20report%20183_Annual%20survey%20-%20regional%20view%202025.pdf",
+  "nrcanEstarDC": "NRCan, ENERGY STAR data-centre technical reference: 'a sufficient survey assessing data center PUE is not currently available' (no Canadian PUE figure; sources/14) — https://natural-resources.canada.ca/energy-efficiency/energy-star/buildings/technical-reference-documents/data-center",
+  "schneiderUPS2020": "Schneider Electric blog (M. Hurley), Design Considerations for the Deployment of UPS Systems in Data Centers (20 Jul 2020): UPS runtime 1–2 min hyperscale, ~5 min cloud and colocation, 10–15 min financial; generators take over in 10–20 s (vendor, OPERATOR CLAIM; sources/15d — URL as logged there, on a thegreengrid.org host) — https://thegreengrid.org/ja/node/2747",
+  "uptimeHeslin2014": "Heslin, K., Fuel System Design and Reliability, Uptime Institute Journal (18 Jun 2014): 'The Tier Standard: Topology requires this 12-hour fuel storage minimum for all Tiers' (industry certifier; sources/16 S5) — https://journal.uptimeinstitute.com/?p=3233",
+  "cologixVAN2fr": "Cologix, Vancouver VAN2 spec sheet (French): 'Primaire 12,5 kV'; UPS '2 Mitsubishi de 750 kW chacun'; N+1 diesel generators, ≥24 h fuel; '15K SQFT' (OPERATOR CLAIM; sources/01) — https://www.cologix.com/pdf/Vancouver-VAN2-SpecSheet-French.pdf",
+  "vanSolarAccess": "City of Vancouver, Solar Access Guidelines (2024, amended 2026, as named in the GP1 Formulas sheet): fall-equinox shadows 10:00–16:00 — named, not yet checked; no URL, clause or edition check in any note",
+  "energyPlusPeople": "Big Ladder Software, EnergyPlus 9.0 Input Output Reference, Group – Internal Gains (People, Lights, Other): metabolic heat seated 108 W, standing 126 W, walking 3.2 km/h 207 W; 180 W 'walking about, office' — SECONDARY (ASHRAE Fundamentals via EnergyPlus; sources/06) — https://bigladdersoftware.com/epx/docs/9-0/input-output-reference/group-internal-gains-people-lights-other.html",
+  "burlingtonPlans2026": "City of Burlington, 3110 South Service Rd, Architectural Plans (20 Jun 2026): GFA '5163 m2' (floor labels sum ≈7,770 m²; conflict), halls 1,650 + 2,060 = 3,710 m², office 100 m², loading 45 m², storage 40 + 18.6 m², 'SERVICE AREA' 175–200 m² (municipal plans; IT MW not stated; sources/16 C5) — https://www.burlington.ca/en/news/resources/Current-Development-Projects/Ward-4/3110-South-Service/Supporting-Documents/Architectural%20Plans%20-%202026-06-20.pdf",
+  "abp317802": "An Bord Pleanála, Inspector's Report ABP-317802-23 (EdgeConneX DUB06, Lucan): GFA 15,274 m², halls 12,859 m² (84 %); 'circa 40 people, over a 24hr period' (sources/16 C9) — https://www.pleanala.ie/anbordpleanala/media/abp/cases/reports/317/r317802.pdf",
+  "abp317446": "An Bord Pleanála, Inspector's Report ABP-317446-23 (DUB13): GFA 12,893 m²; office 603 m²; 45 operational jobs (sources/16 C12) — https://www.pleanala.ie/anbordpleanala/media/abp/cases/reports/317/r317446.pdf",
+  "nrelATB_crf": "NREL, Annual Technology Baseline (edition and page not named in the notes): capital recovery factor CRF = i ÷ (1 − (1+i)^−n) — named, not yet checked; no URL in the notes (existing ATB ids atb2024_batt / nrelATBcommBatt2024 cite battery pages, not the CRF definition)",
+  "ieaSHCTask54": "IEA SHC Task 54 (document not named in the notes): levelised cost of heat method — named, not yet checked; no URL in the notes",
+  "monstadt2025": "Monstadt & Saltzman 2025, How data centers have come to matter…, IJURR 49(4):757–778, doi:10.1111/1468-2427.13316 — SECONDARY read (abstract via RePEc only; sources/14); claim on control in colocation named, not yet checked",
+  "munda": "Munda (work, year and URL not given in the notes): non-compensatory multi-criteria method — named, not yet checked",
+  "cinelli2014": "Cinelli et al. 2014 (title, venue and URL not given in the notes): non-compensatory multi-criteria method — named, not yet checked",
+  "rowley2012": "Rowley et al. 2012 (title, venue and URL not given in the notes): non-compensatory multi-criteria method — named, not yet checked",
+  "vanixFacilities": "VANIX, facility connections page (modified 23 Dec 2025): six connection points — Cologix VAN2 (1050 W Pender), VAN3 (2828 Natal St), VAN4 (175 W Cordova), eStruxture VAN-2 and Harbour Centre MMR (555 W Hastings), Spencer Building MMR (515 W Hastings) (OPERATOR CLAIM; audit/research_2026-10-19/F) — https://vanix.ca/facility-connections/",
+  "yegixStatus": "YEGIX Internet Exchange Community Ltd., status page (undated): one named facility, Wolfpaw, Scotia Place; five initial peers (OPERATOR CLAIM; audit/research_2026-10-19/F) — https://yegix.ca/status.html",
+  "ciraIXP2023": "CIRA, IXPs (16 May 2023, modified 31 Aug 2026): lists Vancouver VANIX and Edmonton YEGIX (not-for-profit registry operator, CLAIM; audit/research_2026-10-19/F) — https://www.cira.ca/en/net-good/network-resilience/ixps/",
+  "traneTCA2026": "Trane, Air-Cooled Magnetic Bearing Chiller, Model TCA, TCA-SLB001-EN (05/07/2026; 'All values are estimated'): 300–850 TR units 27–52 m² → ≈17–26 m² per MW, unit only (MANUFACTURER CLAIM; sources/16 S23) — https://elibrary.tranetechnologies.com/public/commercial-hvac/Literature/Sales/TCA-SLB001-EN_05072026.pdf",
+  "femp2024dc": "Van Geet & Sickinger (NREL) for US DOE FEMP, Best Practices Guide for Energy-Efficient Data Center Design, rev. July 2024, DOE/GO-102024-6283: CRAH units on 55 °F (12.8 °C) or higher chilled water (s. 5.2.1, p. 16); medium-temperature loop ≥55 °F (s. 5.3.2) (government guide; sources/16 S3, audit/plant_sources_2026-10-18) — https://www.energy.gov/sites/default/files/2024-07/best-practice-guide-data-center-design.pdf",
+  "vertivEXLS1": "Vertiv, Liebert EXL S1 Site Planning Data 1000–1200 kVA, SL-26092 rev 8-11-21: module 2,654 × 914 × 2,009 mm, 2,117 kg → ≈2.0–2.4 m² per MW (MANUFACTURER CLAIM; sources/16 S9) — https://www.vertiv.com/globalassets/products/critical-power/uninterruptible-power-supplies-ups/liebert-exl-s1-site-planning-data-1000-1200kva-sl-26092.pdf",
+  "vertivHPL": "Vertiv, HPL 9540A Lithium-ion Battery Energy Storage System, SL-70383 R02/21: 38 kWh / 207 kW per cabinet, 600 × 725 × 2,020 mm, 585 kg → ≥5 cabinets ≈2.2 m² per MW (MANUFACTURER CLAIM; sources/16 S10) — https://www.vertiv.com/4a74a8/globalassets/products/critical-power/uninterruptible-power-supplies-ups/vertiv-hpl-lithium-ion-data-sheet-sl-70383.pdf",
+  "vertivCDU2300": "Vertiv, CoolChip CDU 2300kW data sheet SL-80607 (08/26, preliminary): 2,400 × 1,200 × 1,200 mm, 1,793 kg wet → ≈0.63 m² per MW (MANUFACTURER CLAIM; sources/16 S22) — https://www.vertiv.cn/4a480e/globalassets/shared/vertiv-coolchipcdu-2300kw-_datasheet_global-english_sl-80607.pdf",
+  "thermokeyGH2490": "Thermokey, selection printout GH2490.CX D/02 V QRAFS (Archimede 2019), via resale listing: 737.6 kW at 32 °C air, 48 → 42.7 °C fluid; 7,530 × 2,400 mm → ≈24.5 m² per MW (MANUFACTURER CLAIM; resale copy; sources/16 S25) — https://resale.de/images/164420960_h_r190392800.pdf",
+  "bacS3000_2012": "Baltimore Aircoil Co., Series 3000 Cooling Tower (Product & Application Handbook 2012), b8_ct_s3000_20150914: S3E-1222-07Q 652 tons, 11'-10\" × 21'-7\" → ≈8.3 m² per MW (MANUFACTURER CLAIM; sources/16 S24; a different edition from bacS3000, 2023) — https://baltimoreaircoil.com/download_api_endpoint/536/b8_ct_s3000_20150914.pdf",
+  "carrier61XWH": "Carrier, 61XWH-ZE water-to-water heat pump data (2016/2017, preliminary), via Meier Tobler: model 1501, 1,948 kW at 30/75 °C, 4,850 × 1,350 mm → ≈3.4 m² per MW heat (MANUFACTURER CLAIM; sources/16 S27) — https://referenzen.meiertobler.ch/app/uploads//2017/10/61XWH-ZE.pdf",
+  "uptime2024survey": "Uptime Institute, Global Data Center Survey 2024 (Keynote report 146, Jul 2024; n > 850): average rack density 8 kW (7.1 kW without sites above 50 kW), pp. 10–11 (INDUSTRY SURVEY; sources/16 S15) — https://datacenter.uptimeinstitute.com/rs/711-RIA-145/images/2024.GlobalDataCenterSurvey.Report.pdf",
+  "linwood2023": "Linwood, E., Design Parameters for Data Center Facilities, STRUCTURE (NCSEA), 1 Jan 2023: UFC 3-301-01 (2018) 150 psf (7.2 kPa) for IT server spaces; ASCE 7-22 access floor 100 psf (SECONDARY, professional magazine; sources/16 S20) — https://www.structuremag.org/article/design-parameters-for-data-center-facilities/",
+  "epiTIA942": "EPI Singapore (TIA-942 certification body), web article (undated): TIA-942 Rated-3 floor loading 'should be 12kPa (250 lb/ft2)' (SECONDARY; sources/16 S21) — https://www.epi-ap.com/content/28/641",
+  "abStandata19FCI003": "Alberta Municipal Affairs, STANDATA 19-FCI-003, Storage Tank Systems Inside Buildings (Apr 2020; NFC(AE) 2019): tanks supplying stationary combustion engines comply with NFC(AE) Part 4; 'it is the storage tank/storage tank system supplying the fuel that dictates the rating' (sources/23 S2) — https://open.alberta.ca/dataset/4ac126d2-ccb2-455d-b215-7bcb75827924/resource/ba18e71a-43ff-4dfd-bee5-379f9cf70ec9/download/ma-standata-fire-interpretation-19-fci-003.pdf",
+  "vanFCL2014": "City of Vancouver, Administrative Report 'Flood Construction Levels', RTS 10576 (30 May 2014; CFSC 9 Jul 2014): FCL basis 1 m sea-level rise to 2100, 1:500-year return period, 0.6 m freeboard (sources/22 S2) — https://council.vancouver.ca/20140709/documents/cfsc2.pdf",
+  "vbbl2019_58": "Vancouver Building By-law 2019, Div. B, Section 5.8 Sound Transmission: 5.8.1.1.(1) ASTC ≥ 47 between dwelling units and other spaces (or STC ≥ 50 with flanking); 5.8.1.1.(2) STC ≥ 55 next to elevator shafts and refuse chutes; no equipment-vibration rule (sources/23 S17) — https://free.bcpublications.ca/civix/document/id/public/vbbl2019/492684920",
+  "bcbc2018_911": "BC Building Code 2018 Rev. 2, Div. B, Section 9.11: same ASTC 47 / STC 50 / STC 55 for Part 9 buildings; no mention of mechanical equipment or vibration (sources/23 S19) — https://free.bcpublications.ca/civix/document/id/public/bcbc2018/bcbc_2018dbp9s911r2",
+  "vaSpec230541": "US Department of Veterans Affairs, Spec. 23 05 41 Noise and Vibration Control for HVAC Piping and Equipment (2016), via WBDG: isolator minimum static deflection by support location (on grade, 20–50 ft floor span), rising with span; cites the ASHRAE HVAC Applications noise and vibration chapter (government spec; sources/23 S22) — https://www.wbdg.org/FFC/VA/VANCAS/VANCA230541.pdf",
+  "melo2001": "Melo & Chapnik 2001, The absence of structure-borne sound transmission regulation in the Ontario Building Code, Canadian Acoustics 29(3):84–85 (peer-reviewed note; sources/23 S20) — https://jcaa.caa-aca.ca/index.php/jcaa/article/download/1394/1137/1527",
+  "edmZoningGeo": "City of Edmonton Open Data, Zoning Bylaw Geographical Data (map view; J.B. export Zoning_Bylaw_Geographical_Data_20261014.csv, date_ext 2026/10/12): zone codes for all properties; 1,068 of 11,549 features (9.2 %) Direct Control (count in sources/18) — https://data.edmonton.ca/d/ruwn-htv8",
+  "vanCD1_520": "City of Vancouver, CD-1 (520) By-law No. 10403 (2011), s. 3.4(c): floors for 'heating and mechanical equipment … which are at or below base surface' excluded from floor area (sources/22 S7) — https://cd1-bylaws.vancouver.ca/CD-1(520).pdf"
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ; ATCO North Mid-Use $1.062/GJ → ≈ $11/MWh heat — https://www.ucahelps.alberta.ca/regulated-rates.aspx",
