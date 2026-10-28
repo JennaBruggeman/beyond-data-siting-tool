@@ -1,0 +1,218 @@
+[
+ {
+  "id": "zimmermann2012",
+  "reachable": true,
+  "publisher": "Elsevier (journal Energy), read via RePEc/IDEAS listing",
+  "title": "Aquasar: A hot water cooled data center with direct energy reuse",
+  "edition": "Energy vol. 43, issue 1",
+  "date": "2012",
+  "url": "https://ideas.repec.org/a/eee/energy/v43y2012i1p237-245.html",
+  "values": [
+   {"blank_context": "year", "value": "2012", "quote": "Year: 2012", "where": "IDEAS bibliographic record"},
+   {"blank_context": "Energy volume", "value": "43", "quote": "Volume 43, Issue 1", "where": "IDEAS bibliographic record"},
+   {"blank_context": "pages", "value": "237–245", "quote": "Pages 237-245", "where": "IDEAS bibliographic record"},
+   {"blank_context": "heat recovery efficiency %", "value": "80", "quote": "A heat recovery efficiency of 80% and an exergetic efficiency of 34% were achieved with a water temperature of 60 °C.", "where": "Abstract"},
+   {"blank_context": "water temperature °C", "value": "60", "quote": "with a water temperature of 60 °C", "where": "Abstract"},
+   {"blank_context": "sources/___", "value": "not stated (internal file reference, not in source)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "none (quote matches abstract verbatim; ellipsis drops 'and an exergetic efficiency of 34% were achieved'). 'peer-reviewed' is not printed on the RePEc page; it is an inference from journal type.",
+  "question_marks": "no ? notes on this item",
+  "note": "Read abstract only via RePEc (secondary listing of the journal record). DOI printed: 10.1016/j.energy.2012.04.037. Authors: Zimmermann, Meijer, Tiwari, Paredes, Michel, Poulikakos."
+ },
+ {
+  "id": "uptimeRegional2025",
+  "reachable": true,
+  "publisher": "Uptime Institute Intelligence",
+  "title": "Uptime Institute Global Data Center Survey 2025: regional view",
+  "edition": "UII Data Report 183",
+  "date": "August 2025",
+  "url": "https://intelligence.uptimeinstitute.com/sites/default/files/2025-08/UI%20Field%20report%20183_Annual%20survey%20-%20regional%20view%202025.pdf",
+  "values": [
+   {"blank_context": "UII Data Report number", "value": "183", "quote": "UII DATA REPORT 183", "where": "cover"},
+   {"blank_context": "survey year", "value": "2025", "quote": "Uptime Institute Global Data Center Survey 2025: regional view", "where": "cover title"},
+   {"blank_context": "North America average annual PUE", "value": "1.49", "quote": "North America (n=111) ... 1.49", "where": "p. 1, chart 'Operators in China, Europe and N America report lowest average PUEs'"},
+   {"blank_context": "n", "value": "111", "quote": "North America (n=111)", "where": "p. 1, same chart"},
+   {"blank_context": "page", "value": "1", "quote": "chart appears before the page '2' marker", "where": "p. 1"},
+   {"blank_context": "sources/___", "value": "not stated (internal reference)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "'self-reported' is not printed; the chart question 'What is the average annual PUE for your data center?' implies respondent-supplied figures. Report is titled a 'Data Report', not labelled 'industry survey' in those words (beyond 'Global Data Center Survey').",
+  "question_marks": "CONFIRMED: 'weighted' is not printed with the PUE figure; no methodology note on the PUE chart.",
+  "note": "Survey responses from operators. Other regions as printed: China 1.4 (n=55), APAC excl. China 1.52 (n=79), Europe 1.50 (n=134), Latin America 1.65 (n=72), Middle East and Africa 1.68 (n=79), global 1.54 (n=681). Authors: Douglas Donnellan, Rose Weinschenk."
+ },
+ {
+  "id": "cologixVAN2fr",
+  "reachable": true,
+  "publisher": "Cologix",
+  "title": "Vancouver VAN 2 spec sheet (French); page header: '24 centres de données neutres en termes de réseau à travers l'Amérique du Nord'",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "https://www.cologix.com/pdf/Vancouver-VAN2-SpecSheet-French.pdf",
+  "values": [
+   {"blank_context": "Primaire kV", "value": "12,5", "quote": "Électricité : Primaire 12,5 kV", "where": "section 'Électricité du site'"},
+   {"blank_context": "number of UPS", "value": "2", "quote": "Alimentation noninterruptible (UPS) : 2 Mitsubishi de 750 kW chacun", "where": "section 'Électricité'"},
+   {"blank_context": "UPS kW each", "value": "750", "quote": "2 Mitsubishi de 750 kW chacun", "where": "section 'Électricité'"},
+   {"blank_context": "generator redundancy N+___", "value": "1", "quote": "Génératrices : Oui, N+1", "where": "section 'Électricité'"},
+   {"blank_context": "fuel hours ≥", "value": "24", "quote": "Autonomie : Diesel, minimum 24-hours at full load", "where": "section 'Électricité' (printed in English within French sheet)"},
+   {"blank_context": "Surface Vancouver ___", "value": "2", "quote": "Surface Vancouver 2 : 15 000 p.c.", "where": "Informations sur le site"},
+   {"blank_context": "surface p.c.", "value": "15 000", "quote": "Surface Vancouver 2 : 15 000 p.c.", "where": "Informations sur le site"},
+   {"blank_context": "check ___", "value": "not stated (internal reference)", "quote": "", "where": ""},
+   {"blank_context": "sources/___", "value": "not stated (internal reference)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "none. Minor: source prints 'VAN 2' (with space); 'diesel generators' — sheet says 'Génératrices : Oui, N+1' and 'Autonomie : Diesel', so diesel is supported. Claim layout '___ ___ p.c.' fits '15 000' (digits split by space).",
+  "question_marks": "The 'check ___ ?' note cannot be resolved from the source (it refers to an internal check). Surface value confirmed as 15 000 p.c. for Vancouver 2; separate line 'Surface totale Vancouver : 20 000 p.c.' exists — make sure the 20 000 total is not used for VAN 2.",
+  "note": "OPERATOR CLAIM (marketing spec sheet). Address printed: 1050 West Pender Street. No date on sheet."
+ },
+ {
+  "id": "monstadt2025",
+  "reachable": true,
+  "publisher": "Wiley / IJURR (record read via RePEc/IDEAS)",
+  "title": "HOW DATA CENTERS HAVE COME TO MATTER: Governing the Spatial and Environmental Footprint of the 'Digital Gateway to Europe'",
+  "edition": "IJURR vol. 49, issue 4",
+  "date": "2025",
+  "url": "https://ideas.repec.org/a/bla/ijurrs/v49y2025i4p757-778.html",
+  "values": [
+   {"blank_context": "year", "value": "2025", "quote": "Year: 2025", "where": "IDEAS record"},
+   {"blank_context": "volume", "value": "49", "quote": "Volume 49", "where": "IDEAS record"},
+   {"blank_context": "issue", "value": "4", "quote": "Issue 4", "where": "IDEAS record"},
+   {"blank_context": "pages", "value": "757–778", "quote": "Pages 757-778", "where": "IDEAS record"},
+   {"blank_context": "doi", "value": "10.1111/1468-2427.13316", "quote": "DOI: 10.1111/1468-2427.13316", "where": "IDEAS record"},
+   {"blank_context": "sources/___", "value": "not stated (internal reference)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "Claim on control in colocation is not supported by the abstract: abstract never mentions colocation. Full text not read (Wiley). Case is the Amsterdam Metropolitan Area.",
+  "question_marks": "CONFIRMED: colocation-control point is not in the abstract. Still unverified against full text.",
+  "note": "SECONDARY read of abstract only. Item had no link; found via WebSearch. Authors: Jochen Monstadt, Katherine Saltzman. DOI fits pattern ___/___-___ as 10.1111/1468-2427.13316."
+ },
+ {
+  "id": "traneTCA2026",
+  "reachable": true,
+  "publisher": "Trane Technologies",
+  "title": "From 1MW to 3MW Cooling Capacity for Data Center Thermal Management — Trane Air-Cooled Magnetic Bearing Chiller, Model TCA",
+  "edition": "TCA-SLB001-EN",
+  "date": "05/07/2026 (day/month order not stated)",
+  "url": "https://elibrary.tranetechnologies.com/public/commercial-hvac/Literature/Sales/TCA-SLB001-EN_05072026.pdf",
+  "values": [
+   {"blank_context": "title MW range low", "value": "1", "quote": "From 1MW to 3MW Cooling Capacity for Data Center Thermal Management", "where": "page header/title"},
+   {"blank_context": "title MW range high", "value": "3", "quote": "From 1MW to 3MW Cooling Capacity", "where": "page header/title"},
+   {"blank_context": "doc number TCA-SLB0___", "value": "01", "quote": "TCA-SLB001-EN", "where": "footer"},
+   {"blank_context": "date", "value": "05/07/2026", "quote": "05/07/2026", "where": "footer"},
+   {"blank_context": "TR range low", "value": "300", "quote": "TCAA330: 300-400T", "where": "General Data table, Capacity Range column"},
+   {"blank_context": "TR range high", "value": "850", "quote": "TCAB850: 650-850T", "where": "General Data table, Capacity Range column"},
+   {"blank_context": "unit footprint (smallest)", "value": "478 x 88 in (printed); m² is conversion, not printed", "quote": "Length x Width x Height (in) ... TCAA330 478 x 88", "where": "General Data table"},
+   {"blank_context": "unit footprint (largest)", "value": "672 x 120 in (printed); m² is conversion, not printed", "quote": "TCAB850 672 x 120", "where": "General Data table"},
+   {"blank_context": "m² per MW", "value": "not stated (our calculation)", "quote": "", "where": ""},
+   {"blank_context": "sources/___ S2___", "value": "not stated (internal reference)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "Source prints capacity as 'T' (e.g. '300-400T'), not 'TR'. Otherwise none.",
+  "question_marks": "CONFIRMED: title reads 'From 1MW to 3MW Cooling Capacity for Data Center Thermal Management'. CONFIRMED: 'All values are estimated' printed ('*All values are estimated. Contact Trane for project-specific details.'). Day/month order of 05/07/2026: not stated in source — remains unresolved.",
+  "note": "MANUFACTURER CLAIM. Footprint check (conversion, not printed): 478x88 in ≈ 27.1 m²; 672x120 in ≈ 52.0 m². Height values not extracted."
+ },
+ {
+  "id": "vertivHPL",
+  "reachable": true,
+  "publisher": "Vertiv",
+  "title": "Vertiv HPL 9540A Lithium-ion Battery Energy Storage System",
+  "edition": "SL-70383 (R02/21)",
+  "date": "R02/21 (revision code)",
+  "url": "https://www.vertiv.com/4a74a8/globalassets/products/critical-power/uninterruptible-power-supplies-ups/vertiv-hpl-lithium-ion-data-sheet-sl-70383.pdf",
+  "values": [
+   {"blank_context": "HPL ___A", "value": "9540", "quote": "Vertiv HPL 9540A Lithium-ion Battery Energy Storage System", "where": "p. 1 heading"},
+   {"blank_context": "SL-___", "value": "70383", "quote": "SL-70383 (R02/21)", "where": "p. 4 footer"},
+   {"blank_context": "R0___/___", "value": "2 / 21", "quote": "R02/21", "where": "p. 4 footer"},
+   {"blank_context": "kWh per cabinet", "value": "38", "quote": "38kWh (207kWb/cabinet); Nominal Energy 38kWh", "where": "p. 2 body; p. 4 Specifications table"},
+   {"blank_context": "kWb per cabinet", "value": "207", "quote": "Maximum Discharge Power 207kWb", "where": "p. 4 Specifications table"},
+   {"blank_context": "dimensions mm", "value": "600 × 725 × 2020", "quote": "600mm x 725mm x 2020mm", "where": "p. 4 Specifications table, Dimensions row"},
+   {"blank_context": "weight kg", "value": "585", "quote": "585kg", "where": "p. 4 Specifications table, Weight row"},
+   {"blank_context": "≥ cabinets / m² per MW", "value": "not stated (our calculation)", "quote": "", "where": ""},
+   {"blank_context": "sources/___ S1___", "value": "not stated (internal reference)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "none. Note: dimension order (W x D x H) is not labelled in the source.",
+  "question_marks": "no ? notes on this item",
+  "note": "MANUFACTURER CLAIM. 'kWb' is the source's own unit."
+ },
+ {
+  "id": "linwood2023",
+  "reachable": true,
+  "publisher": "STRUCTURE magazine (NCSEA not printed as publisher on the page)",
+  "title": "Design Parameters for Data Center Facilities",
+  "edition": "not stated (no issue line printed)",
+  "date": "January 1, 2023",
+  "url": "https://www.structuremag.org/article/design-parameters-for-data-center-facilities/",
+  "values": [
+   {"blank_context": "day Jan", "value": "1", "quote": "January 1, 2023", "where": "article date line"},
+   {"blank_context": "year", "value": "2023", "quote": "January 1, 2023", "where": "article date line"},
+   {"blank_context": "UFC number", "value": "3-301-01", "quote": "United Facilities Criteria (UFC) 3-301-01 (2018) specifies 150 psf for", "where": "body text, design live loads discussion"},
+   {"blank_context": "UFC year", "value": "2018", "quote": "UFC 3-301-01 (2018)", "where": "same"},
+   {"blank_context": "UFC psf IT server spaces", "value": "150", "quote": "specifies 150 psf for ... Telephone exchange rooms and central computer IT server spaces", "where": "same"},
+   {"blank_context": "kPa", "value": "conversion, not printed", "quote": "", "where": ""},
+   {"blank_context": "ASCE edition", "value": "7-22", "quote": "ASCE 7-22, Minimum Design Loads and Associated Criteria for Buildings and Other Structures", "where": "body text"},
+   {"blank_context": "access floor psf", "value": "100", "quote": "specifies a 100 psf distributed load or 2,000-pound point load for ... Computer use – Access floor systems", "where": "body text"},
+   {"blank_context": "sources/___ S2___", "value": "not stated (internal reference)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "'NCSEA' as publisher not printed on the article page (NCSEA appears only in a newsletter notice). ASCE access-floor value also carries a 2,000-pound point load the claim omits. Author printed as 'Eka Linwood, P.E.'",
+  "question_marks": "NOT CONFIRMED from this page: NCSEA as publisher (footer reads '© 2026 STRUCTURE Magazine').",
+  "note": "SECONDARY source (professional magazine) citing UFC and ASCE 7-22; primary standards not checked."
+ },
+ {
+  "id": "vanFCL2014",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Flood Construction Levels (ADMINISTRATIVE REPORT, to Standing Committee on City Finance and Services)",
+  "edition": "RTS No. 10576; VanRIMS No. 08-2000-20",
+  "date": "Report Date May 30, 2014; Meeting Date July 9, 2014",
+  "url": "https://council.vancouver.ca/20140709/documents/cfsc2.pdf",
+  "values": [
+   {"blank_context": "RTS", "value": "10576", "quote": "RTS No.: 10576", "where": "p. 1 header"},
+   {"blank_context": "report day May", "value": "30", "quote": "Report Date: May 30, 2014", "where": "p. 1 header"},
+   {"blank_context": "report year", "value": "2014", "quote": "Report Date: May 30, 2014", "where": "p. 1 header"},
+   {"blank_context": "CFSC day Jul", "value": "9", "quote": "Meeting Date: July 9, 2014", "where": "p. 1 header"},
+   {"blank_context": "CFSC year", "value": "2014", "quote": "Meeting Date: July 9, 2014", "where": "p. 1 header"},
+   {"blank_context": "sea-level rise m", "value": "1", "quote": "include 1m of sea level rise", "where": "Appendix D, p. 6 of 6"},
+   {"blank_context": "to year", "value": "2100", "quote": "use the time horizon of 2100", "where": "Appendix D, p. 6 of 6"},
+   {"blank_context": "return period 1:___", "value": "1:500", "quote": "once every 500 years (1:500 year return period)", "where": "Strategic Analysis, p. 6"},
+   {"blank_context": "freeboard m", "value": "0.6", "quote": "The standard 0.6m freeboard is recommended", "where": "Appendix D, section e iv)"},
+   {"blank_context": "sources/___", "value": "not stated (internal reference)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "none. 'CFSC' is an abbreviation; the report prints 'Standing Committee on City Finance and Services'.",
+  "question_marks": "no ? notes on this item",
+  "note": "Claim has blanks '___ ___:___-year'; values are 2100, 1:500."
+ },
+ {
+  "id": "vaSpec230541",
+  "reachable": true,
+  "publisher": "US Department of Veterans Affairs (via WBDG)",
+  "title": "SECTION 23 05 41 NOISE AND VIBRATION CONTROL FOR HVAC PIPING AND EQUIPMENT",
+  "edition": "not stated",
+  "date": "11-01-16 (as printed; date format not stated)",
+  "url": "https://www.wbdg.org/FFC/VA/VANCAS/VANCA230541.pdf",
+  "values": [
+   {"blank_context": "section number", "value": "23 05 41", "quote": "SECTION 23 05 41", "where": "heading"},
+   {"blank_context": "date", "value": "11-01-16", "quote": "11-01-16", "where": "page header"},
+   {"blank_context": "floor span range low ft", "value": "20", "quote": "20FT Floor Span", "where": "Selection Guide for Vibration Isolators table"},
+   {"blank_context": "floor span range high ft", "value": "50", "quote": "50FT Floor Span", "where": "same table"},
+   {"blank_context": "sources/___ S2___", "value": "not stated (internal reference)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "none. Rows checked: min deflection is non-decreasing from on grade to 50 ft span in every row; flat in several (e.g. 'Suspended, up thru 10 HP' 0.75 throughout; pumps base mounted 0.75, 0.75, 1.5, 1.5, 1.5). Some rows have '---' on grade (no isolator). ASHRAE citation printed as 'ASHRAE Handbook-HVAC Applications, Noise and Vibration Control Chapter' with no chapter number.",
+  "question_marks": "no ? notes on this item",
+  "note": "Government spec (US). Deflection units not quoted (column header 'Min Defl')."
+ },
+ {
+  "id": "vanCD1_520",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "CD-1 (520) By-law No. 10403 (10 Terry Fox Way, Concord Area 5(b) East)",
+  "edition": "not stated (consolidation status not checked)",
+  "date": "Enacted 29 November 2011",
+  "url": "https://cd1-bylaws.vancouver.ca/CD-1(520).pdf",
+  "values": [
+   {"blank_context": "CD-___", "value": "1", "quote": "CD-1 (520)", "where": "heading"},
+   {"blank_context": "(___)", "value": "520", "quote": "CD-1 (520)", "where": "heading"},
+   {"blank_context": "By-law No.", "value": "10403", "quote": "By-law No. 10403", "where": "heading"},
+   {"blank_context": "year", "value": "2011", "quote": "ENACTED by Council this 29th day of November, 2011.", "where": "enactment clause"},
+   {"blank_context": "section", "value": "3.4", "quote": "Computation of floor space ratio must exclude: (c) where floors are used for ... heating and mechanical equipment ... which are at or below base surface", "where": "s. 3.4(c)"},
+   {"blank_context": "sources/___ S7", "value": "not stated (internal reference)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "Minor: by-law says excluded from 'floor space ratio' computation, not 'floor area'. Quoted phrase is supported via ellipsis (full: 'heating and mechanical equipment, or uses which in the opinion of the Director of Planning are similar to the foregoing, those floors or portions thereof so used, which are at or below base surface').",
+  "question_marks": "no ? notes on this item",
+  "note": "Section is 3.4(c)."
+ }
+]

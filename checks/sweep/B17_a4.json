@@ -1,0 +1,171 @@
+[
+ {
+  "id": "reinholdt2018",
+  "reachable": false,
+  "publisher": "not stated",
+  "title": "not stated",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "",
+  "values": [
+   {"blank_context": "Reinholdt et al. ___", "value": "not stated", "quote": "", "where": "no link in item"},
+   {"blank_context": "Lorenz efficiency η ___–___", "value": "not stated", "quote": "", "where": "no link in item"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Not a document: internal note naming a reference with no title, venue or URL. Not checked."
+ },
+ {
+  "id": "nrcanEstarDC",
+  "reachable": true,
+  "publisher": "Natural Resources Canada",
+  "title": "Data Center Estimates in the United States and Canada",
+  "edition": "Canadian estimate updated August 2023",
+  "date": "Issued 2024-05-07; modified 2025-03-19",
+  "url": "https://natural-resources.canada.ca/energy-efficiency/energy-star/buildings/technical-reference-documents/data-center",
+  "values": [
+   {"blank_context": "sources/___", "value": "not stated (internal file reference, not in source)", "quote": "", "where": "n/a"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Quote confirmed verbatim: estimates used because 'a sufficient survey assessing data center PUE is not currently available' (Technical Approach section). No Canadian PUE figure printed; only Canadian figure is source EUI 20.35 GJ/m² (Figure 1). Direct fetch refused for provenance at first; reached via WebSearch for the same official URL."
+ },
+ {
+  "id": "energyPlusPeople",
+  "reachable": true,
+  "publisher": "Big Ladder Software",
+  "title": "Group – Internal Gains (People, Lights, Other internal zone equipment), Input Output Reference — EnergyPlus 9.0",
+  "edition": "EnergyPlus 9.0",
+  "date": "not stated",
+  "url": "https://bigladdersoftware.com/epx/docs/9-0/input-output-reference/group-internal-gains-people-lights-other.html",
+  "values": [
+   {"blank_context": "EnergyPlus ___ Input Output Reference", "value": "9.0", "quote": "Input Output Reference — EnergyPlus 9.0", "where": "page title"},
+   {"blank_context": "metabolic heat seated ___ W", "value": "108 (seated, quiet); also reading, seated 99; writing 108", "quote": "Seated, quiet | 108 | 60 | 1", "where": "Table 'Metabolic Rates for Various Activities', column 'Activity Level w/ Person EnergyPlus Schedule Value' (W/person)"},
+   {"blank_context": "standing ___ W", "value": "126 (standing, relaxed)", "quote": "Standing, relaxed | 126 | 70 | 1.2", "where": "same table"},
+   {"blank_context": "walking ___ km/h", "value": "3.2 / 4.3 / 6.4 (three speeds printed)", "quote": "3.2 km/h (0.9 m/s) | 207 | 115 | 2; 4.3 km/h (1.2 m/s) | 270 | 150 | 2.6; 6.4 km/h (1.8 m/s) | 396 | 220 | 3.8", "where": "same table, Walking rows"},
+   {"blank_context": "walking ___ km/h ___ W", "value": "207 at 3.2 km/h; 270 at 4.3 km/h; 396 at 6.4 km/h", "quote": "as above", "where": "same table"},
+   {"blank_context": "___ W 'walking about, office'", "value": "180 W/person (100 is W/m²)", "quote": "Walking about | 180 | 100 | 1.7", "where": "same table, under 'Office Activities'"},
+   {"blank_context": "sources/___", "value": "not stated (internal file reference)", "quote": "", "where": "n/a"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Secondary label correct: table is 'based on' a table from the '2005 ASHRAE Handbook of Fundamentals, page 8.6.' Check that the tool used the W/person column, not W/m² (e.g. walking about = 180 W/person, not 100). The claim names one walking speed; three are printed."
+ },
+ {
+  "id": "ieaSHCTask54",
+  "reachable": false,
+  "publisher": "not stated",
+  "title": "not stated",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "",
+  "values": [
+   {"blank_context": "IEA SHC Task ___", "value": "not stated (54 appears only in the item id, not checked)", "quote": "", "where": "no link in item"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Not a document: internal note with no named document or URL. Not checked."
+ },
+ {
+  "id": "vanixFacilities",
+  "reachable": false,
+  "publisher": "VANIX (claimed)",
+  "title": "facility connections page (claimed)",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "https://vanix.ca/facility-connections/",
+  "values": [
+   {"blank_context": "all blanks (modified date, street numbers, VAN-___, audit ref)", "value": "not checked", "quote": "", "where": "page not reached"}
+  ],
+  "unsupported_wording": "not checked",
+  "note": "Unreachable. The direct fetch was refused for provenance, and two WebSearches (one limited to vanix.ca) did not return the facility-connections URL. Stopped at 3 attempts. Third-party listings (baxtel) were not used. Addresses are an OPERATOR CLAIM and remain unverified."
+ },
+ {
+  "id": "vertivEXLS1",
+  "reachable": true,
+  "publisher": "Vertiv",
+  "title": "Site Planning Data – Liebert® EXL S1",
+  "edition": "SL-26092_REV8-11-21",
+  "date": "not printed as a date; revision string '11-21' and '© 2021' suggest Nov 2021 (inference)",
+  "url": "https://www.vertiv.com/globalassets/products/critical-power/uninterruptible-power-supplies-ups/liebert-exl-s1-site-planning-data-1000-1200kva-sl-26092.pdf",
+  "values": [
+   {"blank_context": "Site Planning Data ___–___ kVA", "value": "1000–1200 is in the URL/file name; the document's tables cover 250 to 1200 kVA/kW", "quote": "1000/1100/1200 ... ; 250/300/400 ...", "where": "Dimensions and Weights table, p. 3"},
+   {"blank_context": "SL-___", "value": "26092", "quote": "SL-26092_REV8-11-21", "where": "document footer"},
+   {"blank_context": "rev ___-___-___", "value": "8-11-21", "quote": "SL-26092_REV8-11-21", "where": "document footer"},
+   {"blank_context": "module ___ × ___ × ___ mm", "value": "2654 × 914 × 2009 (1000/1100/1200, no options); 3254 × 914 × 2009 with option", "quote": "(2654 x 914 x 2009)", "where": "Dimensions and Weights—with and without Options, p. 3 (inches printed with mm in parentheses)"},
+   {"blank_context": "___ kg", "value": "2117 (no options); up to 2959 with options", "quote": "(2117)", "where": "same table, kg in parentheses after lb"},
+   {"blank_context": "≈___–___ m² per MW", "value": "not stated (derived figure)", "quote": "", "where": "no footprint per MW or m² printed"},
+   {"blank_context": "sources/___ S9", "value": "not stated (internal file reference)", "quote": "", "where": "n/a"}
+  ],
+  "unsupported_wording": "'Site Planning Data 1000–1200 kVA': the document as read covers 250 to 1200 kVA; 1000–1200 appears only in the URL. The m² per MW range is a derivation, not printed.",
+  "note": "MANUFACTURER CLAIM. Several option rows have no dimensions in the extracted text. The m² per MW figure is the tool's own calculation."
+ },
+ {
+  "id": "carrier61XWH",
+  "reachable": true,
+  "publisher": "Carrier (hosted by Meier Tobler)",
+  "title": "61XWH-ZE High Temperature Water-to-Water Heat Pumps",
+  "edition": "Carrier 2016 / 2017; 'Preliminary product data for information only'",
+  "date": "2016/2017",
+  "url": "https://referenzen.meiertobler.ch/app/uploads/2017/10/61XWH-ZE.pdf",
+  "values": [
+   {"blank_context": "___XWH-ZE", "value": "61", "quote": "61XWH-ZE", "where": "header"},
+   {"blank_context": "(___/___ preliminary)", "value": "2016/2017", "quote": "CARRIER 2016 / 2017 ... Preliminary product data for information only.", "where": "header; Physical data page"},
+   {"blank_context": "model ___ ___ kW at ___/___ °C", "value": "model not identifiable from the claim; options printed: ZE0301 222/410/271/419; ZE0501 362/655/439/671; ZE0751 532/974/645/996; ZE1001 723/1310/879/1342; ZE1501 1064/1948/1290/1992 kW at 10/75, 30/75, 20/85, 35/85 °C respectively", "quote": "Heating Capacity (10°C / 75°C) ...", "where": "Physical data table, p. 2"},
+   {"blank_context": "___ × ___ mm", "value": "L × W: 0301 2750×950; 0501 3100×950; 0751 3300×1150; 1001 4800×1050; 1501 4850×1350 (heights 1600–2200)", "quote": "Length / Width / Height (mm)", "where": "Physical data table, p. 2"},
+   {"blank_context": "≈___ m² per MW heat", "value": "not stated (derived figure)", "quote": "", "where": "not printed"},
+   {"blank_context": "sources/___ S2___", "value": "not stated (internal file reference)", "quote": "", "where": "n/a"}
+  ],
+  "unsupported_wording": "none",
+  "note": "MANUFACTURER CLAIM, preliminary data. The listed link had a double slash ('uploads//2017'); the page read was the search-returned single-slash URL of the same file. The temperature pair is not defined as evaporator/condenser in the extract. The m² per MW figure is the tool's own calculation."
+ },
+ {
+  "id": "vanFCL2014",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Flood Construction Levels (Administrative Report)",
+  "edition": "RTS 10576",
+  "date": "Report dated May 30, 2014; Standing Committee on City Finance and Services, July 9, 2014",
+  "url": "https://council.vancouver.ca/20140709/documents/cfsc2.pdf",
+  "values": [
+   {"blank_context": "RTS ___", "value": "10576", "quote": "RTS No.: 10576", "where": "report header p. 1"},
+   {"blank_context": "(___ May ___", "value": "30 May 2014", "quote": "Report Date: May 30, 2014", "where": "report header p. 1"},
+   {"blank_context": "CFSC ___ Jul ___", "value": "9 Jul 2014", "quote": "Meeting Date: July 9, 2014", "where": "report header p. 1"},
+   {"blank_context": "FCL basis ___ m sea-level rise to ___", "value": "1 m by 2100", "quote": "a study by the Province recommended planning for sea level rise of 1m by year 2100", "where": "report p. 4; Appendix D p. 6 of 6 (1.0 m, 2100)"},
+   {"blank_context": "___:___-year return period", "value": "1:500", "quote": "once every 500 years (1:500 year return period)", "where": "report p. 6"},
+   {"blank_context": "___ m freeboard", "value": "0.6", "quote": "The standard 0.6m freeboard is recommended to account for uncertainties in sea level rise projections", "where": "Appendix D p. 5 of 6; table p. 6 of 6"},
+   {"blank_context": "sources/___ S2", "value": "not stated (internal file reference)", "quote": "", "where": "n/a"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Committee is the Standing Committee on City Finance and Services (CFSC). Freeboard is stated in Appendix D, not the report body."
+ },
+ {
+  "id": "edmZoningGeo",
+  "reachable": true,
+  "publisher": "City of Edmonton Open Data Portal (owner not printed on page)",
+  "title": "Zoning Bylaw Geographical Data: Map View",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "https://data.edmonton.ca/d/ruwn-htv8",
+  "values": [
+   {"blank_context": "Zoning_Bylaw_Geographical_Data____csv, date_ext ___/___/___", "value": "not stated (local export details)", "quote": "", "where": "not on page"},
+   {"blank_context": "___ of ___ features (___ %) Direct Control", "value": "not stated", "quote": "", "where": "page shows no row count and no DC information"},
+   {"blank_context": "sources/___", "value": "not stated (internal file reference)", "quote": "", "where": "n/a"}
+  ],
+  "unsupported_wording": "none (description 'To visually display all property zone codes for the City of Edmonton' supports 'zone codes for all properties'); DC count is the tool's own count from the export and cannot be checked against the page",
+  "note": "The parent dataset page (data.edmonton.ca/Thematic-Features/Zoning-Bylaw-Geographical-Data/fixa-tstc) was also fetched; it shows no description, row count or update date in the extracted text. The first direct fetch was refused for provenance; reached via search."
+ },
+ {
+  "id": "edmUses2026",
+  "reachable": true,
+  "publisher": "City of Edmonton",
+  "title": "Zoning Bylaw 20001, Part 8 Definitions, 8.10 Use Definitions",
+  "edition": "Bylaw 20001 (from site title in search result; section number from URL only)",
+  "date": "not stated",
+  "url": "https://zoningbylaw.edmonton.ca/part-8-definitions/810-use-definitions",
+  "values": [
+   {"blank_context": "Zoning Bylaw ___", "value": "20001 (site title 'City of Edmonton | Zoning Bylaw 20001'; not printed in page body)", "quote": "City of Edmonton | Zoning Bylaw 20001", "where": "site title (search result)"},
+   {"blank_context": "s. ___", "value": "8.10 (URL path '810-use-definitions'; not printed in extracted body)", "quote": "", "where": "URL"},
+   {"blank_context": "MU ≤___ m²", "value": "not stated", "quote": "", "where": "not on this page (zone-specific rules are in zone sections)"},
+   {"blank_context": "BE ≤___ m² except shelters", "value": "not stated", "quote": "", "where": "not on this page"}
+  ],
+  "unsupported_wording": "On this page: zone permissions (MU, IM, BE, CB), 'within or on a building', the m² caps and 'permitted in' statements are not stated. Use definitions supported: no EV charging use; Urban Agriculture examples include 'hydroponic or aquaponic systems, and vertical farms'; Community Service examples include 'Seasonal Shelters, and Year-round Shelters'; Minor Utility examples include 'district heating plants'; Major Utility examples include 'cooling plants'. Note these are listed as typical examples, not part of the definition proper.",
+  "note": "The zone permissions and area limits need checking against the zone sections (MU, IM, BE, CB) of Bylaw 20001."
+ }
+]

@@ -1,0 +1,180 @@
+[
+ {
+  "id": "enefg11",
+  "reachable": true,
+  "publisher": "Bundesministerium der Justiz / gesetze-im-internet.de (official consolidated text)",
+  "title": "§ 11 EnEfG – Klimaneutrale Rechenzentren (Gesetz zur Steigerung der Energieeffizienz in Deutschland, Energieeffizienzgesetz – EnEfG)",
+  "edition": "current consolidated text",
+  "date": "not stated on the § 11 page; BGBl. issue date seen only in search-result title (see note)",
+  "url": "https://www.gesetze-im-internet.de/enefg/__11.html",
+  "values": [
+   {"blank_context": "EnEfG § ___", "value": "11", "quote": "§ 11 EnEfG – Klimaneutrale Rechenzentren", "where": "page heading"},
+   {"blank_context": "BGBl. ___ I Nr. ___", "value": "2023 / 309 (not on the fetched page)", "quote": "Bundesgesetzblatt Teil I 2023 Ausgegeben zu Bonn am 17. November 2023 Nr. 309", "where": "WebSearch result title for recht.bund.de/bgbl/1/2023/309 (not fetched; the law's index page with 'Vollzitat' was refused for provenance and the 3-attempt limit was reached)"},
+   {"blank_context": "___ Nov ___ (date)", "value": "not verified: the source prints only the 17 November 2023 issue date (search title). The Ausfertigungsdatum was not read", "quote": "Ausgegeben zu Bonn am 17. November 2023", "where": "search-result title only"},
+   {"blank_context": "new data centres PUE ≤ ___", "value": "1,2", "quote": "Rechenzentren, die ab dem 1. Juli 2026 den Betrieb aufnehmen, ... eine Energieverbrauchseffektivität von kleiner oder gleich 1,2 erreichen", "where": "§ 11 (2) Satz 1 Nr. 1"},
+   {"blank_context": "DIN EN ___-___-___", "value": "50600-4-6", "quote": "einen Anteil an wiederverwendeter Energie nach DIN EN 50600-4-6, Ausgabe November 2020", "where": "§ 11 (2) Satz 1 Nr. 2"},
+   {"blank_context": "reused energy ≥ ___ %", "value": "10", "quote": "von mindestens 10 Prozent aufweisen", "where": "§ 11 (2) Satz 1 Nr. 2 (operation from 1 July 2026)"},
+   {"blank_context": "reused energy ≥ ___ %", "value": "15", "quote": "Rechenzentren, die ab dem 1. Juli 2027 den Betrieb aufnehmen, müssen einen geplanten Anteil an wiederverwendeter Energie von mindestens 15 Prozent aufweisen", "where": "§ 11 (2) Satz 1"},
+   {"blank_context": "reused energy ≥ ___ %", "value": "20", "quote": "Rechenzentren, die ab dem 1. Juli 2028 den Betrieb aufnehmen, müssen einen geplanten Anteil an wiederverwendeter Energie von mindestens 20 Prozent aufweisen.", "where": "§ 11 (2) Satz 1"},
+   {"blank_context": "the ___ and ___ % worded as 'geplant'", "value": "15 and 20", "quote": "einen geplanten Anteil", "where": "§ 11 (2) Satz 1"},
+   {"blank_context": "sources/___", "value": "internal path, not in source", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "'ERF' is not in the law; the law says 'Anteil an wiederverwendeter Energie'. The claim already marks this as 'our label', so that is fine. The BGBl. citation and the 'Nov' date are not printed on the § 11 page; the year/number come only from a search-result title.",
+  "question_marks": "CONFIRMED: only the 15 % and 20 % thresholds use 'geplanten Anteil'. The 10 % threshold has no 'geplant'.",
+  "note": "Statute, primary source. Commissioning dates in the law: 1 July 2026 / 2027 / 2028. Both requirements must be met 'spätestens zwei Jahre nach Inbetriebnahme im Jahresdurchschnitt'. Older data centres: PUE ≤1,5 from 1 July 2027 and ≤1,3 from 1 July 2030 (§ 11 (1), summarized). https://www.gesetze-im-internet.de/enefg/ was refused (provenance). Still to do: fetch https://www.gesetze-im-internet.de/enefg/BJNR1350B0023.html (returned by search) to confirm the Vollzitat and Ausfertigungsdatum."
+ },
+ {
+  "id": "nrcanEstarDC",
+  "reachable": true,
+  "publisher": "Natural Resources Canada",
+  "title": "Data Center Estimates in the United States and Canada",
+  "edition": "Technical Reference (ENERGY STAR Portfolio Manager)",
+  "date": "Date modified: 2025-03-19",
+  "url": "https://natural-resources.canada.ca/energy-efficiency/energy-star/buildings/technical-reference-documents/data-center",
+  "values": [
+   {"blank_context": "sources/___", "value": "internal path, not in source", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "none. The quoted phrase matches the page. The claim's title 'ENERGY STAR data-centre technical reference' is a description; the page title is 'Data Center Estimates in the United States and Canada'.",
+  "question_marks": "no '?' notes",
+  "note": "Verbatim: 'In Canada, estimates are used for all data centers, since a sufficient survey assessing data center PUE is not currently available.' (under 'Technical Approach'). No numerical PUE is printed, so 'no Canadian PUE figure' is supported."
+ },
+ {
+  "id": "energyPlusPeople",
+  "reachable": true,
+  "publisher": "Big Ladder Software (hosting U.S. DOE EnergyPlus documentation)",
+  "title": "Input Output Reference — EnergyPlus 9.0; Group – Internal Gains (People, Lights, Other)",
+  "edition": "EnergyPlus 9.0",
+  "date": "not stated",
+  "url": "https://bigladdersoftware.com/epx/docs/9-0/input-output-reference/group-internal-gains-people-lights-other.html",
+  "values": [
+   {"blank_context": "EnergyPlus ___", "value": "9.0", "quote": "Input Output Reference — EnergyPlus 9.0", "where": "page title"},
+   {"blank_context": "seated ___ W", "value": "108", "quote": "Seated, quiet | 108 | 60 | 1", "where": "Table 'Metabolic Rates for Various Activities', People > Field: Activity Level Schedule Name"},
+   {"blank_context": "standing ___ W", "value": "126", "quote": "Standing, relaxed | 126 | 70 | 1.2", "where": "same table"},
+   {"blank_context": "walking ___ km/h", "value": "3.2, 4.3 or 6.4 (claim must say which)", "quote": "3.2 km/h (0.9 m/s) | 207 ... 4.3 km/h (1.2 m/s) | 270 ... 6.4 km/h (1.8 m/s) | 396", "where": "same table, Walking (on level surface)"},
+   {"blank_context": "walking ... ___ W", "value": "207 / 270 / 396 (paired with the speeds above)", "quote": "see above", "where": "same table"},
+   {"blank_context": "___ W 'walking about, office'", "value": "180", "quote": "Walking about | 180 | 100 | 1.7", "where": "same table, Office Activities"},
+   {"blank_context": "sources/___", "value": "internal path, not in source", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "Minor: the source labels are 'Seated, quiet' and 'Standing, relaxed'. 'Walking about' sits under 'Office Activities'; the exact phrase 'walking about, office' is not printed.",
+  "question_marks": "no '?' notes",
+  "note": "SECONDARY, as the claim says. The W column is 'Activity Level w/ Person EnergyPlus Schedule Value'. The ASHRAE Fundamentals origin was not checked in the read portion. The page is 108k characters; only the first 100k were read."
+ },
+ {
+  "id": "yegixStatus",
+  "reachable": true,
+  "publisher": "YEGIX Internet Exchange Community Ltd. (Alberta not-for-profit)",
+  "title": "YEGIX status page",
+  "edition": "n/a",
+  "date": "undated (mentions 'January 30th' with no year)",
+  "url": "https://yegix.ca/status.html",
+  "values": [
+   {"blank_context": "five initial peers", "value": "5", "quote": "5 initial peers (AXIA Connect, Cybera, Edmonton Public Library, Hurricane Electric, University of Alberta)", "where": "page body (summarized by fetch tool, not verbatim)"},
+   {"blank_context": "audit/research____-___-___/F", "value": "internal path, not in source", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "none",
+  "question_marks": "no '?' notes",
+  "note": "OPERATOR CLAIM. One facility is named: Wolfpaw, a neutral data centre in Scotia Place, downtown Edmonton. Switch, route servers and OOB equipment were installed on 'January 30th' (no year). The fetch tool summarized the page; the peer names are as reported by the tool."
+ },
+ {
+  "id": "femp2024dc",
+  "reachable": true,
+  "publisher": "NREL for U.S. DOE Federal Energy Management Program (hosted energy.gov)",
+  "title": "Best Practices Guide for Energy-Efficient Data Center Design",
+  "edition": "Revised July 2024",
+  "date": "Revised July 2024",
+  "url": "https://www.energy.gov/sites/default/files/2024-07/best-practice-guide-data-center-design.pdf",
+  "values": [
+   {"blank_context": "rev. July ___", "value": "2024", "quote": "Revised July 2024", "where": "cover"},
+   {"blank_context": "DOE/GO-___-___", "value": "not read (extracted text truncated after 'DOE/GO-')", "quote": "DOE/GO-", "where": "back cover"},
+   {"blank_context": "CRAH units on ___ °F", "value": "55", "quote": "A CRAH unit that uses 55°F or higher chilled water, and efficient fans with VSD with low pressure drop air design", "where": "s. 5.2.1 Central vs. Modular Systems, p. 16"},
+   {"blank_context": "(___ °C, our conversion)", "value": "conversion, not printed (55 °F ≈ 12.8 °C)", "quote": "", "where": "no °C printed alongside"},
+   {"blank_context": "(s. ___ p. ___)", "value": "5.2.1, p. 16", "quote": "", "where": ""},
+   {"blank_context": "medium-temperature loop ≥___ °F", "value": "55", "quote": "using a water supply temperature of 55°F or higher improves chiller efficiency", "where": "s. 5.3.2 Optimize Plant Design and Operation, p. 17"},
+   {"blank_context": "(s. ___)", "value": "5.3.2", "quote": "", "where": ""},
+   {"blank_context": "sources/___ S3, audit/plant_sources____-___-___", "value": "internal paths, not in source", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "The DOE/GO number could not be verified because the text was truncated. The fetch tool placed 'medium-temperature' in s. 5.3.2 but did not quote that exact phrase next to the 55°F; check the wording on p. 17.",
+  "question_marks": "no '?' notes",
+  "note": "Government guide. Authors: Otto Van Geet and David Sickinger, NREL. The two fetch attempts did not return the document number."
+ },
+ {
+  "id": "vertivCDU2300",
+  "reachable": true,
+  "publisher": "Vertiv Group Corp.",
+  "title": "Vertiv CoolChip CDU 2300kW data sheet",
+  "edition": "SL-80607 (08/26), preliminary",
+  "date": "08/26; © 2026",
+  "url": "https://www.vertiv.cn/4a480e/globalassets/shared/vertiv-coolchipcdu-2300kw-_datasheet_global-english_sl-80607.pdf",
+  "values": [
+   {"blank_context": "CoolChip CDU ___kW", "value": "2300", "quote": "Vertiv CoolChip CDU 2300kW; 2300 kW @ 4°C ATD", "where": "title / nominal capacity"},
+   {"blank_context": "SL-___", "value": "80607", "quote": "SL-80607 (08/26)", "where": "footer"},
+   {"blank_context": "(___/___ preliminary)", "value": "08/26", "quote": "This document contains preliminary information regarding products currently in development", "where": "footer / disclaimer"},
+   {"blank_context": "___ × ___ × ___ mm", "value": "2400 × 1200 × 1200 (H × W × D)", "quote": "2400 × 1200 × 1200 mm (94.5 × 48 × 48 in)", "where": "specifications table"},
+   {"blank_context": "___ kg wet", "value": "1793", "quote": "Weight (wet) 1,793 kg (3,953 lb)", "where": "specifications table"},
+   {"blank_context": "≈___ m² per MW", "value": "conversion, not printed (1.2 × 1.2 m = 1.44 m² ÷ 2.3 MW ≈ 0.63 m²/MW, unit footprint only)", "quote": "", "where": "not printed"},
+   {"blank_context": "sources/___ S2___", "value": "internal path, not in source", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "none. The m²/MW figure is derived, not printed; the claim's arrow implies derivation. The dimension order printed is H × W × D.",
+  "question_marks": "no '?' notes",
+  "note": "MANUFACTURER CLAIM, preliminary data for a product in development. No dry weight printed."
+ },
+ {
+  "id": "epiTIA942",
+  "reachable": true,
+  "publisher": "EPI Singapore (footer: 'Copyright EPI Singapore 2025')",
+  "title": "not stated (no article heading found)",
+  "edition": "n/a",
+  "date": "undated (footer copyright 2025)",
+  "url": "https://www.epi-ap.com/content/28/641",
+  "values": [
+   {"blank_context": "TIA-___", "value": "942 (from the claim and URL context; the fetch quoted only 'Rated-3')", "quote": "", "where": ""},
+   {"blank_context": "Rated-___", "value": "3", "quote": "the floor loading capacity for superimposed live load for a Rated-3 data center should be 12kPa (250 lb/ft2)", "where": "page body (Q&A)"},
+   {"blank_context": "should be ___kPa", "value": "12", "quote": "same", "where": "same"},
+   {"blank_context": "(___ lb/ft2)", "value": "250", "quote": "same", "where": "same"},
+   {"blank_context": "sources/___ S2___", "value": "internal path, not in source", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "'TIA-942 certification body': the page does not describe EPI as a TIA-942 certification body or licensed auditor. It lists EPI's own frameworks (EPI Data Center Framework, DCOS) and refers to 'the auditor'. 'Web article' has no title on the page.",
+  "question_marks": "'(TIA-942 certification body ?)' NOT CONFIRMED by this page; leave it unverified or remove it. The quote '12kPa (250 lb/ft2)' and 'superimposed live load' are CONFIRMED.",
+  "note": "SECONDARY. The figure is a commercial auditor's restatement of the TIA-942 Rated-3 floor load, not the standard itself."
+ },
+ {
+  "id": "vbbl2019_58",
+  "reachable": true,
+  "publisher": "City of Vancouver / King's Printer (BC Publications, free.bcpublications.ca)",
+  "title": "Vancouver Building By-law 2019, Division B, Part 5, Section 5.8 Sound Transmission",
+  "edition": "VBBL 2019",
+  "date": "not stated",
+  "url": "https://free.bcpublications.ca/civix/document/id/public/vbbl2019/492684920",
+  "values": [
+   {"blank_context": "By-law ___", "value": "2019", "quote": "Vancouver Building By-law 2019", "where": "heading"},
+   {"blank_context": "Section ___", "value": "5.8", "quote": "Section 5.8 Sound Transmission", "where": "heading"},
+   {"blank_context": "___(___) ASTC", "value": "5.8.1.1.(1)", "quote": "Except as provided in Sentence (2), a dwelling unit shall be separated from every other space in a building in which noise may be generated by a) ... (ASTC) rating not less than 47, or", "where": "Sentence 5.8.1.1.(1)(a)"},
+   {"blank_context": "ASTC ≥ ___", "value": "47", "quote": "apparent sound transmission class (ASTC) rating not less than 47", "where": "5.8.1.1.(1)(a)"},
+   {"blank_context": "STC ≥ ___ with flanking", "value": "50", "quote": "a separating assembly that provides a sound transmission class (STC) rating of not less than 50 and adjoining constructions that conform to Article 9.11.1.4.", "where": "5.8.1.1.(1)(b)"},
+   {"blank_context": "___(___) STC ≥ ___ elevator/refuse", "value": "5.8.1.1.(2); 55", "quote": "Assemblies and adjoining constructions separating a dwelling unit from an elevator shaft or a refuse chute shall have an STC rating not less than 55.", "where": "Sentence 5.8.1.1.(2)"},
+   {"blank_context": "sources/___ S1___", "value": "internal path, not in source", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "Minor: the source says 'every other space in a building in which noise may be generated', not simply 'other spaces'. 'STC ≥ 50 with flanking' should read 'adjoining constructions that conform to Article 9.11.1.4'.",
+  "question_marks": "no '?' notes",
+  "note": "'No equipment-vibration rule' is supported for this section. 'Structure-borne transmission' appears only in the calculation methods (5.8.1.4.(4),(5); 5.8.1.5.(5)) for heavyweight assemblies."
+ },
+ {
+  "id": "melo2001",
+  "reachable": true,
+  "publisher": "Canadian Acoustical Association (Canadian Acoustics / Acoustique canadienne)",
+  "title": "The Absence of Structure-Borne Sound Transmission Regulation in the Ontario Building Code",
+  "edition": "Vol. 29 No. 3",
+  "date": "2001",
+  "url": "https://jcaa.caa-aca.ca/index.php/jcaa/article/download/1394/1137/1527",
+  "values": [
+   {"blank_context": "Melo & Chapnik ___", "value": "2001", "quote": "Vol. 29 No. 3 (2001)-84", "where": "page footer"},
+   {"blank_context": "Canadian Acoustics ___", "value": "29", "quote": "same", "where": "page footer"},
+   {"blank_context": "(___)", "value": "3", "quote": "same", "where": "page footer"},
+   {"blank_context": "___–___", "value": "84–85 (from page footers; no printed page range)", "quote": "Vol. 29 No. 3 (2001)-84 ... 85 -Vol. 29 No. 3 (2001)", "where": "page footers"},
+   {"blank_context": "sources/___ S2___", "value": "internal path, not in source", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "none (title matches; authors Mark A. Melo, Brian V. Chapnik)",
+  "question_marks": "'peer review ?' NOT RESOLVED. The document has no label such as technical note or peer-reviewed. 'Short note' is consistent with 2 pages but is not printed.",
+  "note": "The extracted text has letter-spacing artifacts, so the title was reconstructed by the fetch tool. Pages are inferred from footers 84 and 85. This looks like a two-page conference-issue paper; the review status is unverified."
+ }
+]

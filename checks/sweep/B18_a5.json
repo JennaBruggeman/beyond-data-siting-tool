@@ -1,0 +1,55 @@
+[
+ {
+  "id": "vanRezoneTime",
+  "reachable": false,
+  "publisher": "City of Vancouver",
+  "title": "Rezoning process overview (per link; not opened)",
+  "edition": "not checked",
+  "date": "not checked",
+  "url": "https://vancouver.ca/home-property-development/enquire-about-and-apply-for-rezoning.aspx (secondary page only; the main PDF failed)",
+  "values": [
+   {"blank_context": "typical CD-___ rezoning", "value": "not checked", "quote": "", "where": "PDF unreachable"},
+   {"blank_context": "Target ~___ weeks to Letter of Response", "value": "not checked", "quote": "", "where": "PDF unreachable"},
+   {"blank_context": "Target ~___ months to decision", "value": "not checked", "quote": "", "where": "PDF unreachable"},
+   {"blank_context": "apply-to-rezone page, Jun ___", "value": "not stated", "quote": "", "where": "The page as fetched shows no last-updated date"}
+  ],
+  "unsupported_wording": "'about one year to process (from fee payment to public hearing)' does not appear on the enquire/apply-for-rezoning page as fetched. The page has no processing-time statement. Its only dated heading is 'New permit and service fees in effect: January 1, 2025', and it says applications 'may not be processed until January 2025'. That suggests the fetch may have returned an older version.",
+  "note": "The process-overview PDF failed at the site (client error, likely moved or removed). A WebSearch for the file name found no official copy. The Target weeks/months figures are unverified. Steps 5, 7 and 8 on the apply page do support the order of fee payment, then referral to public hearing, then Council decision. They give no duration."
+ },
+ {
+  "id": "cambridgeApp5",
+  "reachable": true,
+  "publisher": "City of Cambridge, MA (Community Development Dept., Net Zero / LCESS)",
+  "title": "Appendix 5. Technology characteristics",
+  "edition": "web version",
+  "date": "not stated",
+  "url": "https://www.cambridgema.gov:443/-/media/Files/CDD/Climate/NetZero/LCESS/appendix5_webversion.pdf",
+  "values": [
+   {"blank_context": "Appendix ___", "value": "5", "quote": "Appendix 5. Technology characteristics", "where": "Title"},
+   {"blank_context": "DN1___", "value": "DN100 (4\")", "quote": "DN100 4\" 480 468 456 444 432 420 408 384 360 336 ...", "where": "Table 12"},
+   {"blank_context": "DN100 price", "value": "depends on year column: 480 (2017) ... 360 (2025), 336 (2026 onward)", "quote": "DN100 4\" 480 468 456 444 432 420 408 384 360 336 336 336 336 336 336", "where": "Table 12, columns 2017-2027, 2037-2040"},
+   {"blank_context": "DN2___", "value": "DN200 (8\")", "quote": "DN200 8\" 815 795 774 ...", "where": "Table 12"},
+   {"blank_context": "DN200 price", "value": "815 (2017) ... 611 (2025), 571 (2026 onward)", "quote": "DN200 8\" 815 795 774 754 734 713 693 652 611 571 571 571 571 571 571", "where": "Table 12"},
+   {"blank_context": "DN3___", "value": "DN300 (12\")", "quote": "DN300 12\" 1280 1248 ...", "where": "Table 12"},
+   {"blank_context": "DN300 price", "value": "1280 (2017) ... 960 (2025), 896 (2026 onward)", "quote": "DN300 12\" 1280 1248 1216 1184 1152 1120 1088 1024 960 896 896 896 896 896 896", "where": "Table 12"},
+   {"blank_context": "(___ planning prices)", "value": "the table runs 2017-2040; no single year is printed as the basis", "quote": "Table 12: Specific estimated pipe prices for planning ($ / ft)", "where": "Table 12 caption"}
+  ],
+  "unsupported_wording": "'US$' is not printed: the table says '$ / ft'. US dollars is a reasonable reading for a Cambridge MA document, but the document does not say so. 'Inclusions not stated' is supported. The prices vary by year, so the claim must name the year column it uses. The table's columns show no 2028-2036, as extracted.",
+  "note": "Author/consultant and publication date were not shown in the extracted text. These are planning estimates, not tendered costs."
+ },
+ {
+  "id": "dkPriceCap",
+  "reachable": false,
+  "publisher": "Forsyningstilsynet (Danish Utility Regulator)",
+  "title": "Udmeldelse af prisloft for overskudsvarme 2025 (per file name; not opened)",
+  "edition": "not checked",
+  "date": "not checked",
+  "url": "",
+  "values": [
+   {"blank_context": "Forsyningstilsynet, ___ surplus-heat price cap", "value": "not checked (file name says 2025)", "quote": "", "where": "URL file name only"},
+   {"blank_context": "___ DKK/GJ", "value": "not checked", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "not checked",
+  "note": "forsyningstilsynet.dk returned a 302 redirect to the regulator's file CDN (cdn1.gopublic.dk/forsyningstilsynet/...). Fetching that CDN URL was refused (provenance), and a WebSearch returned only the original forsyningstilsynet.dk URL. A related official file, 'Bilag 1 Interval til overskudsvarmeprisloft', exists on forsyningstilsynet.dk but was not opened. Marked unreachable; the cap value is unverified."
+ }
+]

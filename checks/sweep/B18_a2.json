@@ -1,0 +1,125 @@
+[
+ {
+  "id": "edmProcTimes",
+  "reachable": true,
+  "publisher": "City of Edmonton",
+  "title": "New Home Construction Permits (as now served at this URL)",
+  "edition": "n/a",
+  "date": "not stated",
+  "url": "https://www.edmonton.ca/business_economy/processing-times",
+  "values": [
+   {
+    "blank_context": "April–June ___",
+    "value": "not stated",
+    "quote": "",
+    "where": ""
+   },
+   {
+    "blank_context": "saved ___ Oct ___",
+    "value": "not stated (internal save date)",
+    "quote": "",
+    "where": ""
+   }
+  ],
+  "unsupported_wording": "The page at this URL is now headed 'New Home Construction Permits'. The title 'Development and Construction Application Processing Times' and the 'actuals April–June' period do not appear on it.",
+  "note": "The page content has changed since it was saved, or it loads dynamically. A WebSearch did not return the original page. Rely on the saved copy, or re-cite it as an archived snapshot."
+ },
+ {
+  "id": "ashraeTC99card",
+  "reachable": true,
+  "publisher": "ASHRAE TC 9.9",
+  "title": "Reference card from Thermal Guidelines for Data Processing Environments (title truncated in extraction)",
+  "edition": "Fifth Edition, Revised and Expanded",
+  "date": "2021, 2024 (copyright line)",
+  "url": "https://www.ashrae.org/file%20library/technical%20resources/bookstore/supplemental%20files/therm-gdlns-5th-r-e-refcard.pdf",
+  "values": [
+   {
+    "blank_context": "TC ___",
+    "value": "9.9",
+    "quote": "ASHRAE TC 9.9",
+    "where": "card header"
+   },
+   {
+    "blank_context": "___th ed.",
+    "value": "5",
+    "quote": "Fifth Edition, Revised and Exp[anded]",
+    "where": "card header"
+   },
+   {
+    "blank_context": "Table ___",
+    "value": "not stated",
+    "quote": "",
+    "where": "no table numbers on the card"
+   },
+   {
+    "blank_context": "IT inlet ___–___ °C",
+    "value": "18–27",
+    "quote": "A1 to A4 18 to 27",
+    "where": "Recommended envelope table"
+   },
+   {
+    "blank_context": "dew point −___ to ___ °C",
+    "value": "−9 to 15",
+    "quote": "–9°C DP to 15°C DP and 70% rh or 50% rh",
+    "where": "Recommended envelope table"
+   }
+  ],
+  "unsupported_wording": "The card prints no table number. The recommended envelope also includes an RH cap (70% or 50% rh, per the footnote) that the claim leaves out.",
+  "note": "Reached directly. The full title was truncated in the extraction."
+ },
+ {
+  "id": "cumminsF1493",
+  "reachable": true,
+  "publisher": "Cummins (Cummins Power Generation)",
+  "title": "Sound-attenuated and weather-protective enclosures (CPG-623 F-1493)",
+  "edition": "n/a",
+  "date": "not stated (URL path 2018-08)",
+  "url": "https://www.cummins.com/sites/default/files/2018-08/F-1493-Enclosures-en.pdf",
+  "values": [
+   {
+    "blank_context": "F-___",
+    "value": "1493",
+    "quote": "CPG-623 F-1493",
+    "where": "document number"
+   },
+   {
+    "blank_context": "___ kW set",
+    "value": "not determinable: the table covers 10–1000 kW and the claim does not name a model. Example: 1000 kW DFHD/DQFAD",
+    "quote": "1000 DFHD 90 80 76",
+    "where": "sound level table"
+   },
+   {
+    "blank_context": "at ___ m",
+    "value": "7",
+    "quote": "Full load at 7 meters, steel enclosures",
+    "where": "table footnote"
+   },
+   {
+    "blank_context": "___ dB(A) weather housing",
+    "value": "depends on set; 1000 kW = 90",
+    "quote": "1000 DQFAD 90 80 76",
+    "where": "sound level table"
+   },
+   {
+    "blank_context": "___ Level I",
+    "value": "depends on set; 1000 kW = 80",
+    "quote": "",
+    "where": ""
+   },
+   {
+    "blank_context": "___ Level II",
+    "value": "depends on set; 1000 kW = 76",
+    "quote": "",
+    "where": ""
+   },
+   {
+    "blank_context": "≈___–___ dB",
+    "value": "not stated (Claude inference, not printed)",
+    "quote": "",
+    "where": ""
+   }
+  ],
+  "unsupported_wording": "The source states no attenuation in dB. The '≈ dB' range is inference, correctly labelled as such. The kW rating could not be matched without the model name.",
+  "note": "These are vendor figures (manufacturer claims). The 1000 kW row is given only as an example, not as the claimed set."
+ }
+]

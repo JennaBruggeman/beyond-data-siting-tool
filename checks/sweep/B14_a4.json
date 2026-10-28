@@ -1,0 +1,146 @@
+[
+ {
+  "id": "fieldJB",
+  "reachable": false,
+  "publisher": "not stated",
+  "title": "not stated",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "",
+  "values": [],
+  "unsupported_wording": "none",
+  "note": "No link supplied. This is J.B.'s own field record (sources/...field_observations.md), not an external source, so nothing could be checked online. All blanks stay unverified."
+ },
+ {
+  "id": "learningSeries",
+  "reachable": false,
+  "publisher": "not stated",
+  "title": "not stated",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "",
+  "values": [],
+  "unsupported_wording": "none",
+  "note": "No link supplied. This is J.B.'s own manuscript, not an external source. Nothing to check online."
+ },
+ {
+  "id": "nonComp",
+  "reachable": false,
+  "publisher": "not stated",
+  "title": "not stated",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "",
+  "values": [],
+  "unsupported_wording": "none",
+  "note": "No link supplied. Munda, Cinelli et al. and Rowley et al. are named but no works are identified, and the 'handoff rule' and 'handoff §' refer to an internal document. Years were not filled from memory. Each paper needs its own source entry with a link."
+ },
+ {
+  "id": "cie150",
+  "reachable": true,
+  "publisher": "Institution of Lighting Professionals (ILP), theilp.org.uk",
+  "title": "GN01 For the reduction of obtrusive light 2021",
+  "edition": "2021 revision",
+  "date": "2021 (year in title only; no full date on the page)",
+  "url": "https://theilp.org.uk/publication/guidance-note-1-for-the-reduction-of-obtrusive-light-2021/",
+  "values": [
+   {"blank_context": "CIE ___:___", "value": "150:2017", "quote": "as detailed in CIE 150:2017 Guide.", "where": "ILP publication page, description text"},
+   {"blank_context": "ILP Guidance Note ___/___", "value": "GN01, 2021", "quote": "GN01 For the reduction of obtrusive light 2021", "where": "ILP publication page title"},
+   {"blank_context": "(___ supersedes GN0___/___)", "value": "not stated", "quote": "This guidance note has just been revised", "where": "ILP publication page"}
+  ],
+  "unsupported_wording": "The supersession clause '(___ supersedes GN0___/___)' is not supported. The page only says the note 'has just been revised' and names no earlier version. The format 'GN__/__' is also not printed; the page uses 'GN01 ... 2021'.",
+  "note": "Only the publication landing page was read, not the PDF. The limit values were not checked here."
+ },
+ {
+  "id": "liu2011",
+  "reachable": true,
+  "publisher": "USENIX",
+  "title": "The Data Furnace: Heating Up with Cloud Computing",
+  "edition": "3rd USENIX Workshop on Hot Topics in Cloud Computing (HotCloud 11)",
+  "date": "June 2011, Portland, OR",
+  "url": "https://www.usenix.org/conference/hotcloud11/data-furnace-heating-cloud-computing",
+  "values": [
+   {"blank_context": "Liu et al. ___", "value": "2011", "quote": "3rd USENIX Workshop on Hot Topics in Cloud Computing (HotCloud 11)", "where": "USENIX paper page header; June 2011, Portland, OR"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Authors: Jie Liu, Michel Goraczko, Sean James, Christian Belady, Jiakang Lu, Kamin Whitehouse. The title matches exactly. Several authors were at Microsoft, so any performance figures in the paper should be treated as operator-affiliated claims."
+ },
+ {
+  "id": "tia942",
+  "reachable": true,
+  "publisher": "Telecommunications Industry Association (TIA), tiaonline.org",
+  "title": "Telecommunications Industry Association 942 Certifications & Ratings",
+  "edition": "not stated on page",
+  "date": "not stated",
+  "url": "https://tiaonline.org/products-and-services/tia942certification/tia-942-certifications-ratings/",
+  "values": [
+   {"blank_context": "TIA-___ ratings", "value": "942", "quote": "ANSI/TIA-942 ... Rated-1: Basic Site Infrastructure ... Rated-4: Fault Tolerant Site Infrastructure", "where": "TIA certifications and ratings page"}
+  ],
+  "unsupported_wording": "none",
+  "note": "The given link (tiaonline.org/?p=16534) was refused by the fetch tool. The same publisher's ratings page was read instead. The ratings are Rated-1 to Rated-4: Basic, Redundant Capacity Component, Concurrently Maintainable, Fault Tolerant. The standard's edition (for example 942-C) was not confirmed from this page."
+ },
+ {
+  "id": "lukeRAS",
+  "reachable": true,
+  "publisher": "Luonnonvarakeskus (Luke), hosted by KAMK (Kajaani University of Applied Sciences)",
+  "title": "Datakeskusten hukkalämpö kalankasvatuksessa (Konesalien hukkalämmöt hyötykäyttöön -hanke)",
+  "edition": "webinar slides",
+  "date": "29.10.2025",
+  "url": "https://kamk.fi/wp-content/uploads/2025/11/ESITYS_Hukkalampo-kalankasvatuksessa-KAMK-Webinar-Pasi-Laajala-Luke-29.10.2025.pdf",
+  "values": [
+   {"blank_context": "webinar ___ Oct ___", "value": "29, 2025", "quote": "Webinaari 29.10.2025", "where": "title slide"},
+   {"blank_context": "___ GWh/yr heating", "value": "4,6", "quote": "4,6 GWh/vuosi Oulujärven veden lämmittämiseen (kun järviveden lämpötila on alle 15,5 °C, noin 9 kuukauden ajan)", "where": "slide 'Arvioita kirjolohen tuotannosta RAS-järjestelmissä' (no slide numbers printed)"},
+   {"blank_context": "___ t/yr rainbow trout", "value": "1 000 000 kg (1,000 t is a conversion, not printed)", "quote": "RAS-tuotanto: 1 000 000 kg kirjolohta kiertovesijärjestelmässä vuodessa", "where": "same slide"}
+  ],
+  "unsupported_wording": "The slides credit 'Laura Härkönen, Jouni Vielma, Pasi Laajala' as literature review authors. They do not name Laajala as the sole presenter; only the file name does. The 't/yr' unit is not printed; the source gives kg.",
+  "note": "This is a Luke estimate for heating Oulujärvi lake water when it is below 15.5 °C, for about 9 months. It is not a measured figure. Other figures on the slides: Finnforel 3 000 000 kg, Hima Seafood 9 000 000 kg; these are operator claims as reported. No page numbers are printed, so the slide title is given instead."
+ },
+ {
+  "id": "gwells",
+  "reachable": true,
+  "publisher": "Province of British Columbia",
+  "title": "Groundwater Wells and Aquifers - Province of British Columbia",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "https://apps.nrs.gov.bc.ca/gwells/",
+  "values": [],
+  "unsupported_wording": "The file names (well.csv, lithology.csv, screen.csv, pt_aquifer_parameters.csv) could not be confirmed. The page needs JavaScript and the fetch returned only the title. The BC Data Catalogue page also needed JavaScript. This is not shown to be wrong, only unverified.",
+  "note": "The page's existence and title are confirmed. 'J.B. upload' refers to a local file and cannot be checked online. The claim has no numeric blanks."
+ },
+ {
+  "id": "eqix10k",
+  "reachable": false,
+  "publisher": "Equinix, Inc. (SEC EDGAR)",
+  "title": "Form 10-K (main document eqix-20241231.htm)",
+  "edition": "FY2024",
+  "date": "Filed 2025-02-12; period 2024-12-31",
+  "url": "https://www.sec.gov/Archives/edgar/data/1101239/0001628280-25-005126-index.html",
+  "values": [
+   {"blank_context": "Form ___-K", "value": "10", "quote": "Form 10-K - Annual report [Section 13 and 15(d), not S-K Item 405]", "where": "EDGAR filing index page"},
+   {"blank_context": "for FY2___", "value": "2024 (period of report)", "quote": "Period of Report 2024-12-31", "where": "EDGAR filing index page"},
+   {"blank_context": "(filed Feb ___)", "value": "2025 (filed 2025-02-12)", "quote": "Filing Date 2025-02-12", "where": "EDGAR filing index page"},
+   {"blank_context": "Item ___ Properties", "value": "not checked (main document refused)", "quote": "", "where": ""},
+   {"blank_context": "Item ___ Capacity Trends", "value": "not checked (main document refused)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "Not checked: the Item numbers, whether Properties covers cabinet capacity, cabinets billed, utilisation, MRR per cabinet by region and an expansion table, and the 'Capacity Trends' heading. The claim also contains an empty fragment ('Capacity Trends —  ;').",
+  "note": "The main 10-K document was refused twice by the fetch tool. Only the EDGAR index was read, which confirms form type, filer, filing date and period. Equinix capacity and MRR figures are operator claims."
+ },
+ {
+  "id": "en253Life",
+  "reachable": true,
+  "publisher": "Energiforsk (research by RISE Research Institutes of Sweden)",
+  "title": "Lifetime Predictions and Status Assessments of District Heating Pipelines",
+  "edition": "Energiforsk report 2022:872",
+  "date": "June 2022 ('© Energiforsk juni 2022')",
+  "url": "https://energiforsk.se/media/31455/liftetime-predictions-and-status-assessments-energiforskrapport-2022-872.pdf",
+  "values": [
+   {"blank_context": "Energiforsk ___:___", "value": "2022:872", "quote": "2022:872", "where": "cover page"},
+   {"blank_context": "EN ___ (___)", "value": "253 (2019)", "quote": "EN 253 (2019) states that the service life shall be 30 years at 120 °C", "where": "p.32, section 8.2"},
+   {"blank_context": "service life shall be ___ years at ___ °C", "value": "30 years at 120 °C", "quote": "the service life shall be 30 years at 120 °C", "where": "p.32, section 8.2; repeated p.34, Conclusions"},
+   {"blank_context": "If a service life of ___ years is desired, below ___ °C", "value": "50 years, 115 °C", "quote": "If a service life of 50 years is desired, the temperatures must be below 115 °C.", "where": "p.32, section 8.2"},
+   {"blank_context": "(p.___)", "value": "32", "quote": "", "where": "p.32"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Authors: Ignacy Jakubowicz, Jan Henrik Sällström, Alberto Vega, Nazdaneh Yarahmadi (RISE). The report adds after the first quote: 'with single peaks of 140 °C for a total of 300 hours per year'. The URL contains the publisher's own spelling 'liftetime'."
+ }
+]

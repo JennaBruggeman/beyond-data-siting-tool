@@ -1,0 +1,157 @@
+[
+ {
+  "id": "src23",
+  "reachable": false,
+  "publisher": "not stated",
+  "title": "not stated",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "",
+  "values": [
+   {"blank_context": "research note ___", "value": "not stated", "quote": "", "where": "no link given"},
+   {"blank_context": "sources/____fuel_and_vibration.md", "value": "not stated", "quote": "", "where": "no link given"}
+  ],
+  "unsupported_wording": "cannot check; no link given",
+  "note": "Internal project note with no URL. Not checkable as an external source."
+ },
+ {
+  "id": "bins",
+  "reachable": false,
+  "publisher": "not stated",
+  "title": "not stated",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "",
+  "values": [
+   {"blank_context": "___ receivers noted", "value": "not stated", "quote": "", "where": "no link given"},
+   {"blank_context": "___ precedents", "value": "not stated", "quote": "", "where": "no link given"}
+  ],
+  "unsupported_wording": "cannot check; no link given",
+  "note": "Internal GP1 spreadsheet with no URL. Not checkable as an external source."
+ },
+ {
+  "id": "parssinen",
+  "reachable": true,
+  "publisher": "Elsevier (Sustainable Cities and Society); Aalto repository copy",
+  "title": "Waste heat from data centers: An investment analysis",
+  "edition": "Publisher's PDF (version of record), CC BY",
+  "date": "2019 (Sustainable Cities and Society 44, pp. 428-444)",
+  "url": "https://acris.aalto.fi/ws/portalfiles/portal/29723097/ELEC_parssinen_et_al_waste_heat_sustainability.pdf",
+  "values": [
+   {"blank_context": "Pärssinen et al. ___", "value": "2019", "quote": "Sustainable Cities and Society, 44 (2019), pp. 428-444", "where": "repository cover page"},
+   {"blank_context": "heat-pump capex €___ k (small)", "value": "60000 (printed as 60000; '60 k' is a reformatting)", "quote": "Heat pump 60000 575000 5500000", "where": "Table 3, Section 2.6.4, p. 434"},
+   {"blank_context": "€___ k (medium)", "value": "575000", "quote": "Heat pump 60000 575000 5500000", "where": "Table 3, p. 434"},
+   {"blank_context": "(___ MW)", "value": "2 MW block (block size, not a stated case capacity)", "quote": "In the medium case, the 2MW block is invested immediately.", "where": "Section 2.4, p. 432"},
+   {"blank_context": "€___ M (large)", "value": "5500000", "quote": "Heat pump 60000 575000 5500000", "where": "Table 3, p. 434"},
+   {"blank_context": "marginal cost − €___/MWh", "value": "5", "quote": "a DH operator would pay a DC operator according to marginal costs, minus a five €/MWh premium", "where": "Section 2.5, p. 433"},
+   {"blank_context": "payback ___", "value": "1.82", "quote": "The discounted payback period for medium and large cases varies from 1.82 to 5.14 years", "where": "Section 3; Table 4, pp. 435-436"},
+   {"blank_context": "–___ yr", "value": "5.14", "quote": "varies from 1.82 to 5.14 years", "where": "Section 3"}
+  ],
+  "unsupported_wording": "'(___ MW)' attached to the medium capex implies the case is a 2 MW case; the paper describes a 2 MW capacity block and sizes cases in racks (about 50 / 500 / 5,000). Payback range covers medium and large cases only; small case is 'over than ten years'. Table 3 prints no currency unit label in the row.",
+  "note": "Peer-reviewed. Capex figures attributed in the paper partly to Calefa Oy (vendor) input; treat as vendor-informed estimates."
+ },
+ {
+  "id": "giacomelli",
+  "reachable": false,
+  "publisher": "University of Arizona CEAC (listed as 'Giacomelli - Heating systems lecture')",
+  "title": "not verified",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "https://ceac.arizona.edu/resources/ventilation-heating-cooling (listing page only)",
+  "values": [
+   {"blank_context": "___ °C pipe-rail", "value": "not stated (document not read)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "cannot check; PDF not fetched. CEAC listing calls it 'Heating systems lecture', which fits 'lecture notes'.",
+  "note": "Original link refused by fetch tool. CEAC resource page links the file at live-azs-ceac.pantheonsite.io/sites/default/files/giacomelli%20heating.pdf; not fetched (3-attempt limit reached). U-value content unverified."
+ },
+ {
+  "id": "wsuEV",
+  "reachable": true,
+  "publisher": "Not printed on document; hosted on WSU Energy Program site (energy.wsu.edu). Author: Melinda Thiessen Spencer, Technical Education & Outreach",
+  "title": "No formal title printed (content: EV charging speeds, ports, specs)",
+  "edition": "Updated 12-18-2023",
+  "date": "12-18-2023 (update date)",
+  "url": "https://www.energy.wsu.edu/documents/1%20Charging%20Speeds%20Ports%20Specs.pdf",
+  "values": [],
+  "unsupported_wording": "none (title in claim is descriptive; document has no formal title and the publisher name is inferred from the host domain)",
+  "note": "No blanks. Covers Level 1/2, DCFC, ports (CCS, CHAdeMO, J1772, Tesla), equipment specs, WA public charging rules."
+ },
+ {
+  "id": "edmULA",
+  "reachable": true,
+  "publisher": "City of Edmonton (City Operations - Parks and Roads Services)",
+  "title": "Utility Line Assignment Permit",
+  "edition": "web page",
+  "date": "not printed; metadata last-modified 2026-07-29",
+  "url": "https://www.edmonton.ca/business_economy/utility-line-assignment-permit",
+  "values": [],
+  "unsupported_wording": "none",
+  "note": "No blanks. Page covers ULA permits for utilities in road right-of-way, agreements, No Cut exemptions, OSCAM permit."
+ },
+ {
+  "id": "dreyer2021",
+  "reachable": true,
+  "publisher": "Springer (The International Journal of Life Cycle Assessment)",
+  "title": "Environmental life cycle assessment of yellow mealworm (Tenebrio molitor) production for human consumption in Austria – a comparison of mealworm and broiler as protein source",
+  "edition": "published article",
+  "date": "Published online 7 October 2021",
+  "url": "https://link.springer.com/content/pdf/10.1007/s11367-021-01980-4.pdf",
+  "values": [
+   {"blank_context": "Dreyer et al. ___", "value": "2021", "quote": "The International Journal of Life Cycle Assessment (2021) 26:2232-2247", "where": "first page header"},
+   {"blank_context": "Int J LCA ___", "value": "26", "quote": "(2021) 26:2232-2247", "where": "first page header"},
+   {"blank_context": "___:___ (pages)", "value": "2232-2247", "quote": "26:2232-2247", "where": "first page header"},
+   {"blank_context": "mealworm heating ___ MJ/kg", "value": "10.38", "quote": "Annualised assumptions resulted in heating-related electricity use per kg of live mealworm of 10.38 MJ.", "where": "Section 2.2.1 'Mealworm system'"}
+  ],
+  "unsupported_wording": "Claim's '___:___' pattern needs a page range (2232-2247), not a single page. The 10.38 MJ is heating-related electricity per kg of live mealworm; claim should say 'per kg live mealworm' and 'electricity'. Worst-case colder-winter figure 15.86 MJ also given (Section 3.3).",
+  "note": "Peer-reviewed. Austrian production context."
+ },
+ {
+  "id": "enmaxMap",
+  "reachable": true,
+  "publisher": "ENMAX Corporation (ENMAX Power)",
+  "title": "ENMAX Load capacity map",
+  "edition": "web page",
+  "date": "not printed (footer copyright 2026)",
+  "url": "https://www.enmax.com/system-resources/load-capacity-map",
+  "values": [
+   {"blank_context": "Feeder_Load_Capacity_Rev9____", "value": "not stated", "quote": "", "where": "layer name not in fetched page text; map is embedded/rendered by script"}
+  ],
+  "unsupported_wording": "ArcGIS layer name 'Feeder_Load_Capacity_Rev9___' not found on the page as fetched (text-only fetch cannot see embedded map service).",
+  "note": "Operator source. System resources page says: 'The load capacity map illustrates the estimated load capacity available within the ENMAX Power distribution service territory.' Capacities are operator estimates."
+ },
+ {
+  "id": "ulavalCVD",
+  "reachable": true,
+  "publisher": "Académie de la transformation numérique (ATN), Université Laval, at the request of MELCC",
+  "title": "Étude de cas : Le Centre de valorisation des données de l'Université Laval : Un centre de données à la fine pointe de la technologie qui innove en matière de développement durable",
+  "edition": "case study",
+  "date": "Septembre 2021",
+  "url": "https://transformation-numerique.ulaval.ca/wp-content/uploads/2023/05/etude-de-cas-centre-de-valorisation-des-donnes-universite-laval-septembre-2021.pdf",
+  "values": [
+   {"blank_context": "Sept ___", "value": "2021", "quote": "Septembre 2021", "where": "cover"},
+   {"blank_context": "pp.___–___ ___–___ ___", "value": "pp. 8-10 for Colosse figures; p. 27 for CVD PUE (exact page string in claim not checkable)", "quote": "", "where": "pp. 8-10, 27"},
+   {"blank_context": "___ kWh/yr", "value": "1 150 000", "quote": "En y ajoutant la récupération de chaleur, soit 1 150 000 kWh/an", "where": "p. 10"},
+   {"blank_context": "heat pumps to ___ °C", "value": "40", "quote": "pompes thermiques eau/eau qui génèrent de l'eau de chauffage à 40 degrés Celsius", "where": "p. 9"},
+   {"blank_context": "COP 'de l'ordre de ___'", "value": "7", "quote": "le coefficient de performance de ces pompes thermiques était de l'ordre de 7", "where": "p. 9"},
+   {"blank_context": "___ m³ gas/yr saved", "value": "130 000", "quote": "L'économie annuelle était de l'ordre de 130 000 m3 de gaz naturel", "where": "p. 9"},
+   {"blank_context": "PUE ___ measured over a year", "value": "1.28 (printed 1,28)", "quote": "Les données recueillies sur une base continue d'un an démontraient un PUE de 1,28 pour le Colosse", "where": "p. 10"}
+  ],
+  "unsupported_wording": "Source says heat was rejected into the 'réseau central d'eau réfrigérée' and picked up by other pavilions via heat pumps (p. 9); it does not explicitly tie the 1 150 000 kWh/an figure to that loop. Gas saving is 'de l'ordre de' (approximate), which the claim drops.",
+  "note": "Operator (university) self-reported case study; label figures as operator claims. CVD (new centre) PUE 1.25 in testing, target 1.3 (p. 27) — not the same as Colosse."
+ },
+ {
+  "id": "panFang2025",
+  "reachable": true,
+  "publisher": "INFORMS (Strategy Science)",
+  "title": "Where the Cloud Rests: The Economic Geography of Data Centers",
+  "edition": "journal article (earlier version: HBS Working Paper 21-042, Sept 2020)",
+  "date": "not confirmed from fetched text",
+  "url": "https://pubsonline.informs.org/doi/pdf/10.1287/stsc.2024.0225",
+  "values": [
+   {"blank_context": "Pan Fang & Greenstein ___", "value": "not stated in fetched text", "quote": "", "where": "PDF fetch returned abstract without citation metadata; HKS page labels it 2025 (not the publisher)"},
+   {"blank_context": "Strategy Science ___(___)", "value": "not stated in fetched text", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "Quotes check out: 'The former favors urban settings more and appears sensitive to buyer demand for proximity.' and 'Cloud providers tend to display a lower propensity for locating in urban areas'. Claim's 'favour' is Canadian respelling of paraphrase (fine). Year, volume, issue unverified.",
+  "note": "Peer-reviewed. Study covers US third-party data centres in 2018-2019. 3-attempt limit reached before publisher landing page metadata could be read."
+ }
+]

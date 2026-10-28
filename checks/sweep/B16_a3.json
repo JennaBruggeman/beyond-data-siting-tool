@@ -1,0 +1,145 @@
+[
+ {
+  "id": "edmReceivers",
+  "reachable": true,
+  "publisher": "City of Edmonton (edmonton.ca); Blatchford Renewable Energy Utility page also City of Edmonton",
+  "title": "District Energy (edmonton.ca projects_plans page); 'About | Blatchford Renewable Energy Utility | City of Edmonton'",
+  "edition": "not stated",
+  "date": "edmonton.ca page: not stated; Blatchford page modified 2025-01-14 (footer (c) 2026)",
+  "url": "https://www.edmonton.ca/projects_plans/district-energy ; https://blatchfordutility.ca/about-us/",
+  "values": [
+   {"blank_context": "Downtown District Energy Phase ___ three buildings", "value": "1", "quote": "Three buildings will be connected as part of Phase 1", "where": "edmonton.ca district-energy page, DDEI section"},
+   {"blank_context": "up to ___ [buildings]", "value": "50", "quote": "The system is designed to connect up to 50 buildings at full build-out by 2050.", "where": "edmonton.ca district-energy page, DDEI section"},
+   {"blank_context": "by ___", "value": "2050", "quote": "up to 50 buildings at full build-out by 2050", "where": "edmonton.ca district-energy page, DDEI section"},
+   {"blank_context": "heat only in phases ___–___", "value": "1–2", "quote": "the first two phases of the DDEI will only provide heat", "where": "edmonton.ca district-energy page, DDEI section"},
+   {"blank_context": "Blatchford ___ MW heating", "value": "13.1", "quote": "13.1 MW of heating and 12.3 MW cooling capacity", "where": "blatchfordutility.ca/about-us, 2024 timeline entry (grant)"},
+   {"blank_context": "Blatchford ___ MW cooling", "value": "12.3", "quote": "13.1 MW of heating and 12.3 MW cooling capacity", "where": "blatchfordutility.ca/about-us, 2024 timeline entry (grant)"}
+  ],
+  "unsupported_wording": "'ambient-temperature sharing network' not printed on the Blatchford page (it says 'District Energy Sharing System'). University of Alberta district energy not mentioned on either page read. Claim's 'up to ___' omits the unit: source says up to 50 buildings (Phase 2 alone: 'up to 20 buildings'). Blatchford MW figures are tied to a 2024 grant statement ('the grant supports...'), not stated as installed capacity.",
+  "note": "DDEI Phase 1 began operations Sept 2025; City partnered with EPCOR to deliver Phase 1. Blatchford capacity is the City's own statement about a grant-funded system."
+ },
+ {
+  "id": "msft_water2026",
+  "reachable": true,
+  "publisher": "Microsoft (The Official Microsoft Blog)",
+  "title": "Inside Microsoft's two-decade push to cut water intensity while scaling for growth",
+  "edition": "not stated",
+  "date": "Jun 24, 2026",
+  "url": "https://blogs.microsoft.com/blog/2026/06/24/inside-microsofts-two-decade-push-to-cut-water-intensity-while-scaling-for-growth/",
+  "values": [
+   {"blank_context": "(___ Jun", "value": "24", "quote": "Jun 24, 2026", "where": "post byline/date"},
+   {"blank_context": "Jun ___)", "value": "2026", "quote": "Jun 24, 2026", "where": "post byline/date"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Operator claim. Authors Judy Priest and Steve Solomon (Microsoft). Post claims average WUE fell from 2.3 L/kWh to 0.27 L/kWh in 2025, and a 25% water-use-intensity reduction as of 2025 against a 40% by 2030 goal (all Microsoft claims)."
+ },
+ {
+  "id": "li2021_dcbtes",
+  "reachable": false,
+  "publisher": "not verified",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://doi.org/10.1016/j.energy.2020.119582",
+  "values": [],
+  "unsupported_wording": "not checked (unreachable)",
+  "note": "Fetch refused (URL provenance block). Not retried per rules. Year, MW and 'sources/___c' path unverified."
+ },
+ {
+  "id": "mfrGenset",
+  "reachable": true,
+  "publisher": "Cummins (Cummins Power Generation)",
+  "title": "S-1443 Specification sheet, Enclosures and Tanks, 250-1000 kW Gensets",
+  "edition": "S-1443 (08/18)",
+  "date": "08/18",
+  "url": "https://powersuite.cummins.com/PS5/PS5Content/SiteContent/en/Binary_Asset/pdf/Commercial/Diesel/s-1443.pdf",
+  "values": [
+   {"blank_context": "Cummins S-___", "value": "1443", "quote": "S-1443 (08/18)", "where": "sheet footer/ID"},
+   {"blank_context": "about ___ MW", "value": "1000 kW (top of 600-1000 kW range); MW figure is conversion, not printed", "quote": "Enclosures and Tanks, 250-1000 kW Gensets", "where": "title, p.1"},
+   {"blank_context": "___ × ___ m (length × width, ~1 MW)", "value": "printed in inches: length 260-338 in (weather protective) / 303-338 in (QuietSite), width 98 in; metres are conversion, not printed", "quote": "600-1000 kW ... Width 98 ... Weather protective length 260 ... 338", "where": "p.4, 'Package Dimensions of Enclosure, Exhaust System, and UL Tank', 600-1000 kW table"},
+   {"blank_context": "___–___ m high (~1 MW)", "value": "printed 137-146 in; metres are conversion, not printed", "quote": "Height (in) 137 ... 146", "where": "p.4, 600-1000 kW table"},
+   {"blank_context": "___–___ MW range dims (length, width, height)", "value": "not stated in S-1443 (sheet tops out at 1000 kW); presumably from the Cat sheet, not read", "quote": "n/a", "where": "n/a"},
+   {"blank_context": "Cat ___C enclosure sheet", "value": "not stated (Cat sheet not linked; not read)", "quote": "n/a", "where": "n/a"},
+   {"blank_context": "≥___ m clearance (Cummins T-___)", "value": "not stated in S-1443; no T- document referenced", "quote": "n/a", "where": "n/a"},
+   {"blank_context": "No ___ MW sheet found", "value": "not checkable from source", "quote": "n/a", "where": "n/a"}
+  ],
+  "unsupported_wording": "Clearance figure and Cummins T-___ reference are not in S-1443 (only a bottom-space height note). Any dimensions above 1000 kW and the Cat enclosure sheet are not supported by the linked document. 'Sub-base fuel tank optional': S-1443 shows a 'Lifting base' (no-tank) row only for 250-500 kW; for 600-1000 kW every row has a tank (200-2400 gal), so optionality at ~1 MW is not shown.",
+  "note": "Manufacturer spec sheet (vendor figures). All dimensions printed in inches; any metre values in the claim are conversions. Width to lifting eyes: 102 in (600-1000 kW)."
+ },
+ {
+  "id": "drieeEtix2010",
+  "reachable": false,
+  "publisher": "not verified",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://georisques.gouv.fr/webappReport/ws/installations/document/affef3ad33a04701bf35d5b8240b2eb1",
+  "values": [],
+  "unsupported_wording": "not checked (unreachable)",
+  "note": "Fetch refused (URL provenance block). Year, generator count and rooftop wording unverified."
+ },
+ {
+  "id": "isoplusEPD",
+  "reachable": false,
+  "publisher": "not verified",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://api.environdec.com/api/v1/EPDLibrary/Files/697db282-a3b1-41da-888c-08dcd3ea77d2/Data",
+  "values": [],
+  "unsupported_wording": "not checked (unreachable)",
+  "note": "Fetch refused (URL provenance block). All GWP values unverified; EPD figures would be manufacturer declarations."
+ },
+ {
+  "id": "faoRAS2022",
+  "reachable": false,
+  "publisher": "not verified",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://www.fao.org/3/cc2390en/cc2390en.pdf",
+  "values": [],
+  "unsupported_wording": "not checked (unreachable)",
+  "note": "Fetch refused (URL provenance block). Quoted investment range and pages unverified."
+ },
+ {
+  "id": "meyer2013",
+  "reachable": false,
+  "publisher": "not verified",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://arxiv.org/pdf/1309.4887",
+  "values": [],
+  "unsupported_wording": "not checked (unreachable)",
+  "note": "Fetch refused (URL provenance block). Temperatures unverified."
+ },
+ {
+  "id": "wrayAkbari2008",
+  "reachable": false,
+  "publisher": "not verified",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://escholarship.org/uc/item/1gk4v965",
+  "values": [],
+  "unsupported_wording": "not checked (unreachable)",
+  "note": "Fetch refused (URL provenance block). Year, temperature rise and 'peer-reviewed' status unverified. Claim also contains an internal path 'audit/research____-___-___/B round ___' which is not a source value."
+ },
+ {
+  "id": "cologixVAN2web",
+  "reachable": false,
+  "publisher": "Cologix",
+  "title": "Colocation in Vancouver: VAN2 Data Center (per search result title; page not readable)",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "https://cologix.com/data-centers/vancouver/van2/ (returned only 'You are being redirected...'); address read from https://cologix.com/data-centers/vancouver/",
+  "values": [
+   {"blank_context": "___ W Pender St", "value": "1050", "quote": "1050 West Pender Street, Vancouver, British Columbia", "where": "Cologix Vancouver overview page, VAN2 entry (not the VAN2 facility page)"},
+   {"blank_context": "'___ MW'", "value": "not verified (facility page unreadable; overview page does not state MW)", "quote": "n/a", "where": "n/a"},
+   {"blank_context": "sources/___", "value": "internal path, not a source value", "quote": "n/a", "where": "n/a"}
+  ],
+  "unsupported_wording": "MW figure and 'utility ATS' not verified: facility page returned a redirect stub and the Vancouver overview page mentions neither.",
+  "note": "Operator claim. Facility page counted unreachable (redirect stub on both cologix.com and www.cologix.com). A Cologix news item titled 'Cologix Adds New 5 MW Data Center in Vancouver' appeared in search but was not read and may not refer to VAN2."
+ }
+]

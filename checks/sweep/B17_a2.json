@@ -1,0 +1,171 @@
+[
+ {
+  "id": "ornlWang",
+  "reachable": true,
+  "publisher": "Oak Ridge National Laboratory (via OSTI.GOV)",
+  "title": "District Heating Utilizing Waste Heat of a Data Center: High-Temperature Heat Pumps",
+  "edition": "not stated",
+  "date": "not stated in fetched text",
+  "url": "https://www.osti.gov/pages/servlets/purl/2372986",
+  "values": [
+   {"blank_context": "OSTI ___", "value": "2372986 (from URL / OSTI listing; not printed in document text)", "quote": "not stated in document text", "where": "URL path; OSTI biblio page title in search results"},
+   {"blank_context": "'___℃–___℃ for air-cooled systems'", "value": "25; 35", "quote": "Typical temperatures of DCs waste heat are 25℃–35℃ for air-cooled systems", "where": "Section 1 Introduction, p. 7"},
+   {"blank_context": "'___℃–___℃ for water-cooled systems'", "value": "50; 60", "quote": "50℃–60℃ for water-cooled systems", "where": "Section 1 Introduction, p. 7"},
+   {"blank_context": "sources/___ S2___", "value": "not stated", "quote": "", "where": "internal file reference, not in source"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Authors as printed: Pengtao Wang, Steve Kowalski, Zhiming Gao, Jian Sun, Cheng-Min Yang, David Grant, Philip Boudreaux, Shean Huff, Kashif Nawaz (ORNL). Journal, year, DOI not printed in fetched text, which matches the claim's 'not confirmed'. Same sentence also gives 'up to 90℃ for two-phase refrigerant-cooled systems'. Direct fetch was first refused (provenance), then fetched after a WebSearch returned the same OSTI URL."
+ },
+ {
+  "id": "greenGridWP29",
+  "reachable": true,
+  "publisher": "The Green Grid",
+  "title": "WP# 29 - ERE: A Metric for Measuring the Benefit of Reuse Energy From a Data Center",
+  "edition": "not stated",
+  "date": "22 September, 2010",
+  "url": "https://www.thegreengrid.org/product/118",
+  "values": [
+   {"blank_context": "White Paper #___", "value": "29", "quote": "WP# 29 - ERE: A Metric for Measuring the Benefit of Reuse Energy From a Data Center", "where": "product page title"},
+   {"blank_context": "(___ Sep ___)", "value": "22; 2010", "quote": "22 September, 2010", "where": "product page metadata"},
+   {"blank_context": "ERE = (___ − ERF) × PUE", "value": "not stated", "quote": "", "where": "formula not on product page; full text behind sign-in ('Please sign in to download this item.')"},
+   {"blank_context": "arXiv ___", "value": "not stated", "quote": "", "where": "not in this source"},
+   {"blank_context": "sources/___", "value": "not stated", "quote": "", "where": "internal file reference"}
+  ],
+  "unsupported_wording": "Formulae (ERF definition, ERE = (1 − ERF) × PUE) not printed on the product page; ERF is not mentioned there. Claim already flags this as read via Shuja et al., which was not checked here.",
+  "note": "Editor printed as 'Mike Patterson, Intel' (matches 'M. Patterson, ed.'). Contributors: Bill Tschudi (LBNL), Otto VanGeet (NREL), Jud Cooley (Oracle), Dan Azevedo (Symantec). Page states the metric 'Energy Reuse Effectiveness, or ERE'. Full PDF not read (sign-in, not circumvented)."
+ },
+ {
+  "id": "cologixVAN2fr",
+  "reachable": true,
+  "publisher": "Cologix",
+  "title": "Vancouver VAN2 spec sheet (French); page heading '24 centres de données neutres en termes de réseau à travers l'Amérique du Nord'",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "https://www.cologix.com/pdf/Vancouver-VAN2-SpecSheet-French.pdf",
+  "values": [
+   {"blank_context": "'Primaire ___ kV'", "value": "12,5", "quote": "Électricité : Primaire 12,5 kV", "where": "spec list"},
+   {"blank_context": "UPS '___ Mitsubishi de ___ kW chacun'", "value": "2; 750", "quote": "Alimentation noninterruptible (UPS) : 2 Mitsubishi de 750 kW chacun", "where": "spec list"},
+   {"blank_context": "N+___ diesel generators", "value": "1", "quote": "Génératrices : Oui, N+1", "where": "spec list"},
+   {"blank_context": "≥___ h fuel", "value": "24", "quote": "Autonomie : Diesel, minimum 24-hours at full load", "where": "spec list"},
+   {"blank_context": "'___K SQFT'", "value": "not stated (sheet prints 15 000 p.c. for VAN2; 20 000 p.c. total Vancouver)", "quote": "Surface Vancouver 2 : 15 000 p.c.", "where": "spec list"},
+   {"blank_context": "sources/___", "value": "not stated", "quote": "", "where": "internal file reference"}
+  ],
+  "unsupported_wording": "The quoted string 'K SQFT' does not appear in the French sheet. It prints 'Surface Vancouver 2 : 15 000 p.c.' Also note that 'minimum 24-hours at full load' is printed in English within the French sheet.",
+  "note": "OPERATOR CLAIM (Cologix's own spec sheet). Direct fetch was first refused (provenance), then fetched after a WebSearch returned the same cologix.com URL."
+ },
+ {
+  "id": "abp317446",
+  "reachable": false,
+  "publisher": "An Bord Pleanála",
+  "title": "Inspector's Report, case 317446 (report PDF not readable)",
+  "edition": "not stated",
+  "date": "case page: lodged 26/06/2023; decision 'Refuse Permission' signed 04/04/2025",
+  "url": "https://www.pleanala.ie/en-ie/case/317446 (case page read); report PDF https://www.pleanala.ie/anbordpleanala/media/abp/cases/reports/317/r317446.pdf returned binary data only",
+  "values": [
+   {"blank_context": "ABP-___-___", "value": "not stated (case page prints 'PL06S.317446'; PA ref SD22A/0420)", "quote": "PL06S.317446", "where": "case page"},
+   {"blank_context": "DUB1___", "value": "1 (DUB11)", "quote": "Vantage Data Centres DUB11 Limited", "where": "case page, applicant"},
+   {"blank_context": "GFA ___ m²", "value": "not stated", "quote": "", "where": "report PDF not readable; not on case page"},
+   {"blank_context": "office ___ m²", "value": "not stated", "quote": "", "where": "report PDF not readable; not on case page"},
+   {"blank_context": "___ operational jobs", "value": "not stated", "quote": "", "where": "report PDF not readable; not on case page"},
+   {"blank_context": "sources/___ C1___", "value": "not stated", "quote": "", "where": "internal file reference"}
+  ],
+  "unsupported_wording": "GFA, office area and jobs could not be checked. The case reference format 'ABP-…' was not seen; the case page uses 'PL06S.317446'.",
+  "note": "3 attempts: the direct fetch was refused (provenance); the report PDF fetched after search came back as binary with no extractable text; the case page has no figures. Development on the case page: 'Demolition of structures, construction of a data centre and all associated works', Ballybane & Kilbride, Clondalkin, Dublin 22, South Dublin County Council; decision Refuse Permission."
+ },
+ {
+  "id": "cinelli2014",
+  "reachable": false,
+  "publisher": "not stated",
+  "title": "not stated",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "",
+  "values": [
+   {"blank_context": "Cinelli et al. ___", "value": "not stated", "quote": "", "where": "no link given"}
+  ],
+  "unsupported_wording": "Unchecked: no source was opened.",
+  "note": "No link was given. This is a literature citation with no title or venue, not a readable document, so it was not checked. A title and URL are needed before it can be verified."
+ },
+ {
+  "id": "traneTCA2026",
+  "reachable": true,
+  "publisher": "Trane (Trane Technologies)",
+  "title": "From 1MW to 3MW Cooling Capacity for Data Center Thermal Management (as read by fetch); doc no. TCA-SLB001-EN",
+  "edition": "TCA-SLB001-EN",
+  "date": "05/07/2026",
+  "url": "https://elibrary.tranetechnologies.com/public/commercial-hvac/Literature/Sales/TCA-SLB001-EN_05072026.pdf",
+  "values": [
+   {"blank_context": "TCA-SLB0___-EN", "value": "01", "quote": "TCA-SLB001-EN", "where": "footer"},
+   {"blank_context": "(___/___/___)", "value": "05/07/2026", "quote": "05/07/2026", "where": "footer"},
+   {"blank_context": "'All values are estimated'", "value": "n/a (wording confirmed)", "quote": "*All values are estimated. Contact Trane for project-specific details.", "where": "footnote under General Data table"},
+   {"blank_context": "___–___ TR units", "value": "300; 850", "quote": "Capacity Range: 300-850T", "where": "overview; General Data table (TCAA330 300-400T, TCAB570 400-600T, TCAB850 650-850T)"},
+   {"blank_context": "___–___ m²", "value": "conversion, not printed (dimensions printed in inches: 478 x 88 x 106; 624 x 88 x 106; 672 x 120 x 106 L x W x H)", "quote": "478 x 88 x 106", "where": "General Data table"},
+   {"blank_context": "≈___–___ m² per MW", "value": "conversion, not printed", "quote": "over 850 tons (3MW)", "where": "text; no m² per MW printed"},
+   {"blank_context": "sources/___ S2___", "value": "not stated", "quote": "", "where": "internal file reference"}
+  ],
+  "unsupported_wording": "Footprint in m² and m²/MW are derived (inches only printed), so they should be labelled 'conversion'. The title 'Air-Cooled Magnetic Bearing Chiller, Model TCA' was not confirmed as this document's title: the fetch read the title as 'From 1MW to 3MW Cooling Capacity for Data Center Thermal Management'. The date 05/07/2026 is ambiguous (May 7 or 5 July); the filename and footer don't say which.",
+  "note": "MANUFACTURER CLAIM; all values are 'estimated' per the footnote. Direct fetch was first refused (provenance), then fetched after a WebSearch returned the same URL. Older editions exist (03162026, 08262025)."
+ },
+ {
+  "id": "thermokeyGH2490",
+  "reachable": false,
+  "publisher": "Thermokey (via resale.de listing)",
+  "title": "not read",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "https://resale.de/images/164420960_h_r190392800.pdf (not fetched)",
+  "values": [
+   {"blank_context": "all blanks", "value": "not stated", "quote": "", "where": "source not reached"}
+  ],
+  "unsupported_wording": "Unchecked: source not reached.",
+  "note": "3 attempts: the direct fetch was refused (provenance) and two WebSearches did not return this PDF URL. Unreachable; not circumvented. MANUFACTURER CLAIM via resale copy."
+ },
+ {
+  "id": "epiTIA942",
+  "reachable": true,
+  "publisher": "EPI Singapore (EPI-AP)",
+  "title": "The data centre is not meeting the 12kPa floor loading capability as per TIA-942 Rated-3. Will this data centre fail the certification? (Q&A page; title from URL slug, no title printed on page)",
+  "edition": "not stated",
+  "date": "undated (footer 'Copyright EPI Singapore 2025')",
+  "url": "https://www.epi-ap.com/content/28/641",
+  "values": [
+   {"blank_context": "TIA-___", "value": "942", "quote": "as per TIA-942 Rated-3", "where": "page URL slug / question"},
+   {"blank_context": "Rated-___", "value": "3", "quote": "for a Rated-3 data center", "where": "answer text"},
+   {"blank_context": "'should be ___kPa (___ lb/ft2)'", "value": "12; 250", "quote": "floor loading capacity for superimposed live load for a Rated-3 data center should be 12kPa (250 lb/ft2)", "where": "answer text"},
+   {"blank_context": "sources/___ S2___", "value": "not stated", "quote": "", "where": "internal file reference"}
+  ],
+  "unsupported_wording": "'certification body' was not confirmed from this page. The page specifies 'superimposed live load', which the claim omits. Note that 250 lb/ft² is about 12 kPa (11.97); the page prints both.",
+  "note": "SECONDARY source (EPI is restating TIA-942); not the TIA standard itself. Fetched directly."
+ },
+ {
+  "id": "vaSpec230541",
+  "reachable": true,
+  "publisher": "US Department of Veterans Affairs (via WBDG)",
+  "title": "SECTION 23 05 41 NOISE AND VIBRATION CONTROL FOR HVAC PIPING AND EQUIPMENT",
+  "edition": "not stated",
+  "date": "11-01-16 (footer)",
+  "url": "https://www.wbdg.org/FFC/VA/VANCAS/VANCA230541.pdf",
+  "values": [
+   {"blank_context": "Spec. ___ ___ ___", "value": "23 05 41", "quote": "SECTION 23 05 41", "where": "header"},
+   {"blank_context": "(___)", "value": "11-01-16", "quote": "11-01-16", "where": "footer"},
+   {"blank_context": "___–___ ft floor span", "value": "20; 50", "quote": "EQUIPMENT ON GRADE 20FT FLOOR SPAN 30FT FLOOR SPAN 40FT FLOOR SPAN 50FT FLOOR SPAN", "where": "Selection Guide for Vibration Isolators table"},
+   {"blank_context": "sources/___ S2___", "value": "not stated", "quote": "", "where": "internal file reference"}
+  ],
+  "unsupported_wording": "'rising with span' is not true of every row: deflection is non-decreasing but flat in some rows (e.g. pumps up to 10 HP 'I S 0.75 I S 0.75 I S 1.5 I S 1.5 I S 1.5'; roof ventilators 0.75 at every span). Deflection units are not stated in the table.",
+  "note": "Government spec. ASHRAE citation confirmed: 'ASHRAE Handbook-HVAC Applications, Noise and Vibration Control Chapter' (Latest Edition; no chapter number). Table note 2: for floors lighter than 100 mm (4 inch) concrete, use the next higher span. Fetched after a WebSearch returned the same URL."
+ },
+ {
+  "id": "edmRezComplexity",
+  "reachable": false,
+  "publisher": "City of Edmonton",
+  "title": "Rezoning Application Complexity (title confirmed only as link text)",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "https://www.edmonton.ca/business_economy/rezoning (referring page read; PDF not fetched)",
+  "values": [
+   {"blank_context": "about Jan ___", "value": "not stated", "quote": "See Rezoning Application Complexity for more information.", "where": "City rezoning 'What to Expect' page"}
+  ],
+  "unsupported_wording": "Date (Jan ___) not checked; the PDF was not reached.",
+  "note": "3 attempts: two WebSearches did not return the PDF URL (so a direct fetch would be refused for provenance); the rezoning page names the document but the extracted text gave no link target or date. Unreachable."
+ }
+]
