@@ -1,0 +1,341 @@
+[
+ {
+  "id": "daikinCAT624",
+  "reachable": true,
+  "publisher": "Daikin Applied",
+  "title": "Trailblazer® Air-Cooled Scroll Compressor Chillers (Model AGZ-E)",
+  "edition": "Catalog 624-23",
+  "date": "2022 (footer ©2022; literature code 2F-4056 (01/22))",
+  "url": "https://tahoeweb.daikinapplied.com/api/general/DownloadDocumentByName/media/CAT624.pdf/",
+  "values": [
+   {
+    "blank_context": "Catalog ___-___",
+    "value": "624-23",
+    "quote": "Catalog 624-23 (catalog number as printed)",
+    "where": "cover / footer"
+   },
+   {
+    "blank_context": "AHRI ___",
+    "value": "370",
+    "quote": "present sound power levels per AHRI Standard 370, 'Sound Rating of Large Outdoor Refrigerating and Air Conditioning Equipment'",
+    "where": "p.16, Sound data text"
+   },
+   {
+    "blank_context": "sound power table — p.___",
+    "value": "18 (60 Hz); 50 Hz tables on p.20",
+    "quote": "Table 6: 60 Hz Sound Power without Sound Insulation; Table 7: 60 Hz Sound Power with Sound Insulation",
+    "where": "p.18 (Tables 6-7); p.20 (Tables 10-11, 50 Hz)"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Manufacturer catalogue: sound data are vendor-published figures (claims). AHRI 370 is cited in the text on p.16, not in the table headings. Title wording 'Trailblazer AGZ-E' matches."
+ },
+ {
+  "id": "spencerBldg",
+  "reachable": true,
+  "publisher": "Smith + Andersen",
+  "title": "Spencer Building Powered Shell (project profile sheet)",
+  "edition": "not stated",
+  "date": "completion year 2025 on sheet; file path 2026-08",
+  "url": "https://smithandandersen.com/sites/default/files/project_profiles/2026-08/Spencer%20Building%20Powered%20Shell%2025770_0.pdf (also project page https://smithandandersen.com/work/spencer-building-powered-shell)",
+  "values": [],
+  "unsupported_wording": "none for the sheet itself. 'City permit not found' is a statement about another search, not something the sheet can support.",
+  "note": "Sheet: no street address (only 'downtown Vancouver, BC'); exact phrase 'utilizing the limited roof space available' present; 'three aircooled chillers' (Phase I, two more Phase II); 'Two 4MW N+1 generators' plus a swing generator; no screening mentioned. Consultant marketing sheet: capacities are claims. Internal inconsistency to check: sources/11_vancouver_permits.md lists 515 W Hastings as 'Harbour Centre East Tower / Spencer Building' with BP-2022-05512 (generators to L8 roof well, chiller platform) - this contradicts 'City permit not found' (not verified by me against the City dataset)."
+ },
+ {
+  "id": "bcUCAs1",
+  "reachable": true,
+  "publisher": "King's Printer for British Columbia (BC Laws)",
+  "title": "Utilities Commission Act, RSBC 1996, c. 473",
+  "edition": "consolidation current to October 20, 2026",
+  "date": "current to 2026-10-20",
+  "url": "https://free.bcpublications.ca/civix/document/id/complete/statreg/96473_01",
+  "values": [
+   {
+    "blank_context": "s. ___ \"public utility\"",
+    "value": "1 (s. 1(1) Definitions)",
+    "quote": "\"public utility\" means a person, or the person's lessee, trustee, receiver or liquidator, who owns or operates in British Columbia, equipment or facilities for (a) the production, generation, storage, transmission, sale, delivery or provision of electricity ... to or for the public or a corporation for compensation",
+    "where": "s. 1(1)"
+   },
+   {
+    "blank_context": "s. ___(___) exemptions with the minister's approval",
+    "value": "88(3)",
+    "quote": "the commission ... with the advance approval of the minister responsible for the administration of the Hydro and Power Authority Act, [may] exempt a person ... from ... the provisions of this Act",
+    "where": "s. 88(3)"
+   }
+  ],
+  "unsupported_wording": "none (exclusion (d) quoted verbatim). Note the exemption power under 88(3) is the commission's, with the minister's advance approval; s. 22(2) separately lets the minister exempt by regulation.",
+  "note": "Exclusion (d): 'a person not otherwise a public utility who provides the service or commodity only to the person or the person's employees or tenants, if the service or commodity is not resold to or used by others'. The 'neighbour for pay' reading is the author's interpretation, correctly flagged as not legal advice."
+ },
+ {
+  "id": "vanPermits",
+  "reachable": true,
+  "publisher": "City of Vancouver (Open Data Portal)",
+  "title": "Issued building permits",
+  "edition": "not stated",
+  "date": "not stated on fetched page (dataset covers permits from 2017)",
+  "url": "https://opendata.vancouver.ca/explore/dataset/issued-building-permits/ ; local: sources/11_vancouver_permits.md, data/vancouver_permits_7sites.json",
+  "values": [
+   {
+    "blank_context": "___ Oct ___ (export date)",
+    "value": "10 Oct 2026",
+    "quote": "Hunt 11 — Vancouver issued building permits, seven site addresses (10 Oct 2026)",
+    "where": "internal note sources/11_vancouver_permits.md, heading (not the dataset)"
+   },
+   {
+    "blank_context": "data/vancouver_permits____sites.json",
+    "value": "7",
+    "quote": "Extract saved as data/vancouver_permits_7sites.json",
+    "where": "sources/11_vancouver_permits.md, para 1; file exists"
+   },
+   {
+    "blank_context": "sources/____vancouver_permits.md",
+    "value": "11",
+    "quote": "file sources/11_vancouver_permits.md",
+    "where": "local file name"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Dataset page reachable: 'This dataset includes information of all building permits issued by the City of Vancouver, starting in 2017.' Licence and modified date not shown in fetched text. Export date and file names come from internal notes, not the City. The JSON holds 8 address keys (515 W Hastings added as site 7a), so '7sites' is slightly out of date."
+ },
+ {
+  "id": "dfKatalog2022",
+  "reachable": true,
+  "publisher": "Dansk Fjernvarme / DFP (cover: 'Udarbejdet af Grøn Energi'; DIN Forsyning, Fjernvarme Fyn, Kalundborg Forsyning on cover)",
+  "title": "Inspirationskatalog for store varmepumper",
+  "edition": "2022 (supplement to 2017 catalogue)",
+  "date": "October 2022",
+  "url": "https://danskfjernvarme.dk/media/eqbhcqlv/inspirationskatalog-for-store-varmepumper-2022.pdf",
+  "values": [
+   {
+    "blank_context": "catalogue year ___",
+    "value": "2022",
+    "quote": "Inspirationskatalog for store varmepumper ... oktober 2022",
+    "where": "cover p.1"
+   },
+   {
+    "blank_context": "pp.___–___",
+    "value": "8–11",
+    "quote": "case 2.1 Tietgenbyens Varmecentral",
+    "where": "pp.8–11"
+   },
+   {
+    "blank_context": "nominal ___ + ___ MW",
+    "value": "23,9 + 20,7",
+    "quote": "Nominel varmeydelse 23,9 MW / Nominel varmeydelse 20,7 MW",
+    "where": "p.8 table (TBV-1, TBV-2); sum not printed"
+   },
+   {
+    "blank_context": "nominal COP ___ / ___",
+    "value": "4,4 / 4,9",
+    "quote": "Nominel COP 4,4 / Nominel COP 4,9",
+    "where": "p.8 table"
+   },
+   {
+    "blank_context": "source ___→___ °C",
+    "value": "27→15",
+    "quote": "Varmekilde afkøles fra-til 27-15 °C",
+    "where": "p.8 table"
+   },
+   {
+    "blank_context": "DH ___→___ °C",
+    "value": "40→75",
+    "quote": "Fjernvarme opvarmes fra-til 40-75°C",
+    "where": "p.8 table"
+   },
+   {
+    "blank_context": "___–___ full-load h",
+    "value": "5.000–7.000",
+    "quote": "Årligt antal fuldlasttimer 5.000-7.000",
+    "where": "p.8 table"
+   },
+   {
+    "blank_context": "average COP ___–___ ___",
+    "value": "years 2021–2022, COP 4,2",
+    "quote": "Gennemsnits COP for 2021 og 2022 har ligget på 4,2 som en samlet opgørelse inklusive cirkulations- og distributionspumper.",
+    "where": "p.10"
+   },
+   {
+    "blank_context": "investment ___ M DKK",
+    "value": "215",
+    "quote": "Samlet anlægsinvestering for de to varmepumpeanlæg beløber sig til 215 mio.kr.",
+    "where": "p.11"
+   },
+   {
+    "blank_context": "DH output ≈ ___ % above DC-side heat",
+    "value": "30",
+    "quote": "Den producerede fjernvarme er ca. 30 procent højere end figurens værdier.",
+    "where": "p.10 (figure = average surplus heat from Facebook)"
+   }
+  ],
+  "unsupported_wording": "none; phrase 'inklusive cirkulations- og distributionspumper' verbatim. Average COP is a single value (4,2) for 2021 and 2022 combined, not a COP range.",
+  "note": "Trade-association catalogue; performance figures reported by the utility (Fjernvarme Fyn) - treat as operator claims."
+ },
+ {
+  "id": "barroso2018",
+  "reachable": true,
+  "publisher": "Morgan & Claypool Publishers (Synthesis Lectures; later Springer reissue)",
+  "title": "The Datacenter as a Computer: Designing Warehouse-Scale Machines, Third Edition",
+  "edition": "3rd",
+  "date": "2018 (October 2018 per SIGARCH; Springer catalogue shows '3rd ed. 2019')",
+  "url": "https://research.google/pubs/the-datacenter-as-a-computer-designing-warehouse-scale-machines/ ; https://www.sigarch.org/other-announcements/book-release-the-datacenter-as-a-computer-3rd-edition/",
+  "values": [
+   {
+    "blank_context": "year ___",
+    "value": "2018",
+    "quote": "Year 2018",
+    "where": "research.google publication page"
+   },
+   {
+    "blank_context": "___rd ed.",
+    "value": "3",
+    "quote": "The third edition reflects four years of advancements since the previous edition",
+    "where": "research.google page"
+   },
+   {
+    "blank_context": "ch.___ Modeling Costs",
+    "value": "not stated (Modeling Costs is the 6th entry in the listed contents; number inferred, not printed)",
+    "quote": "Modeling Costs",
+    "where": "SIGARCH announcement table of contents"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Full text (J.B. upload) not found locally and not opened; chapter number not verified. Authors are Google staff."
+ },
+ {
+  "id": "cfd",
+  "reachable": true,
+  "publisher": "BC Hydro",
+  "title": "2026 Call for Demand for Emerging Industries – Request for Applications",
+  "edition": "not stated",
+  "date": "Issued February 1, 2026",
+  "url": "https://app.bchydro.com/content/dam/BCHydro/customer-portal/documents/accounts-billing/electrical-connections/2026-cfd-request-for-applications.pdf",
+  "values": [
+   {
+    "blank_context": "BC Hydro ___ Call for Demand",
+    "value": "2026",
+    "quote": "2026 Call for Demand for Emerging Industries – Request for Applications",
+    "where": "s.1.1, p.1"
+   },
+   {
+    "blank_context": "___ + ___ MW",
+    "value": "300 + 100",
+    "quote": "300 MW of electrical capacity plus unused capacity under the Storage MW Allocation ... AI Data Centre; 100 MW of electrical capacity for Projects that constitute a Storage Data Centre",
+    "where": "s.1.1, p.1"
+   },
+   {
+    "blank_context": "___–___ MW per project",
+    "value": "10–145",
+    "quote": "10MW of capacity or greater, but not more than 145MW of capacity",
+    "where": "s.9.2 Table 1, p.6"
+   },
+   {
+    "blank_context": "≥___% premium",
+    "value": "10",
+    "quote": "that is equal to or exceeds 10%",
+    "where": "Schedule 3, Stage 1(a), p.29"
+   },
+   {
+    "blank_context": "inside the ___% environmental weight",
+    "value": "10",
+    "quote": "Environmental impacts and benefits, including heat recovery ready, power usage efficiency and water usage efficiency — 10%",
+    "where": "Schedule 3, Stage 2 table, p.30"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Curtailment confirmed (Schedule 3 Stage 1(c), pp.29–30: 24 h notice, ≥10% of requested load, ≥36 events / ≥144 h per year). The 300 MW AI allocation also takes any unused Storage MW; BC Hydro may reduce either allocation."
+ },
+ {
+  "id": "hiltunen2020",
+  "reachable": true,
+  "publisher": "MDPI",
+  "title": "Highly Renewable District Heat for Espoo Utilizing Waste Heat Sources",
+  "edition": "Energies 13(14):3551",
+  "date": "2020",
+  "url": "https://mdpi.com/1996-1073/13/14/3551",
+  "values": [
+   {
+    "blank_context": "year ___",
+    "value": "2020",
+    "quote": "Energies 2020, 13(14), 3551",
+    "where": "article header"
+   },
+   {
+    "blank_context": "Energies ___(___):___",
+    "value": "13(14):3551",
+    "quote": "Energies 2020, 13(14), 3551",
+    "where": "article header"
+   },
+   {
+    "blank_context": "heat-recovery capex ___–___ M€/MW",
+    "value": "not stated as a range; study assumes 0.6 M€/MWheat (cited literature: 0.58 M€/MWheat, 500 €/kWheat, 650 €/kWheat)",
+    "quote": "Here, the investment costs were assumed to be 0.6 M€/MWheat",
+    "where": "s.2.5 Investment Analysis"
+   }
+  ],
+  "unsupported_wording": "The '___–___ M€/MW' range is not printed; the paper gives a single assumed value (0.6 M€/MWheat for data-centre heat pumps) and point values from other studies (500 and 650 €/kWheat would need conversion, not printed in M€/MW). The figure is heat-pump investment, not a broader 'heat-recovery capex'.",
+  "note": "Authors note cost assumptions 'contain a great level of uncertainty'; no sensitivity range on investment."
+ },
+ {
+  "id": "persson",
+  "reachable": true,
+  "publisher": "Elsevier (Energy); author copy on Aalborg University VBN",
+  "title": "Heat Roadmap Europe: Heat distribution costs (Persson, Wiechers, Möller, Werner)",
+  "edition": "Energy vol.176, pp.604–622",
+  "date": "2019",
+  "url": "https://vbn.aau.dk/ws/files/330989757/1_s2.0_S0360544219306097_main.pdf",
+  "values": [
+   {
+    "blank_context": "Persson et al. ___",
+    "value": "2019",
+    "quote": "Energy 176 (2019) 604–622",
+    "where": "article header"
+   },
+   {
+    "blank_context": "C1 = ___ €/m",
+    "value": "212",
+    "quote": "average construction cost constant value of 212 euro/m",
+    "where": "s.2.2, p.608 (Eq. 5)"
+   },
+   {
+    "blank_context": "C2 = ___ €/m²",
+    "value": "4464",
+    "quote": "average construction cost coefficient value of 4464 euro/m2",
+    "where": "s.2.2, p.608 (Eq. 5)"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Author-accepted copy on university repository (official institutional site)."
+ },
+ {
+  "id": "abAIDCstrategy2024",
+  "reachable": true,
+  "publisher": "Government of Alberta, Technology and Innovation",
+  "title": "Alberta's AI Data Centre Strategy: Powering the future of artificial intelligence",
+  "edition": "not stated",
+  "date": "December 2024 (open.alberta.ca: Date Issued 2024-12-04)",
+  "url": "open.alberta.ca page failed (server error); read J.B.'s saved copy of the same publication: sources/library/public/abAIDCstrategy2024/full.pdf and page.html (saved 2026-10-25 from https://open.alberta.ca/publications/albertas-ai-data-centre-strategy); cross-checked against https://www.alberta.ca/artificial-intelligence-data-centres-strategy",
+  "values": [
+   {
+    "blank_context": "Dec ___",
+    "value": "2024",
+    "quote": "© 2024 Government of Alberta | Published: December, 2024",
+    "where": "PDF p.2 (imprint)"
+   },
+   {
+    "blank_context": "ISBN ___-___-___-___-___",
+    "value": "978-1-4601-6171-5",
+    "quote": "ISBN 978-1-4601-6171-5",
+    "where": "PDF p.2; open.alberta.ca 'ISBN (pdf) 9781460161715'"
+   },
+   {
+    "blank_context": "J.B. upload ___ Oct ___",
+    "value": "25 Oct 2026",
+    "quote": "\"saved\": \"2026-10-25\"",
+    "where": "internal info.json (not the source)"
+   }
+  ],
+  "unsupported_wording": "Minor: 'Water Act allocation' is in the 'Water' advantage on p.6 ('Alberta's Water Act provides a regulatory framework that seeks to allocate water resources based on sustainable usage'), not under Pillar 2. Pillar 3 'shared prosperity' is about jobs and tax revenue. Otherwise all quotes verbatim (p.8 affordability/reliability; p.8 natural gas, renewables, 'may include investments in carbon capture'; p.9 heat capture and water capacity).",
+  "note": "The open.alberta.ca page failed to load this session, so the PDF was read from the user's own saved copy of the official file. 'An intention, not a requirement' is a fair reading: the wording is 'will evaluate', 'will explore'."
+ }
+]

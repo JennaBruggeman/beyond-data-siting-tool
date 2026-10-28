@@ -1,0 +1,167 @@
+[
+ {
+  "id": "pcicWx3",
+  "reachable": true,
+  "publisher": "Pacific Climate Impacts Consortium (University of Victoria); article in Data in Brief (Elsevier)",
+  "title": "Dataset of future-shifted weather files for Canada using climate projections from CMIP6 (Sobie & Curry); PCIC Weather Files page",
+  "edition": "version 3 (per PCIC page)",
+  "date": "Article: Data in Brief vol. 60, 2025 (accepted 2025 May 9); PCIC page: 'In December 2024, the weather files were updated to version 3.'",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12151185 ; https://www.uvic.ca/pcic/data-analysis-tools/data-portal/weather-files/index.php",
+  "values": [
+   {"blank_context": "PCIC-WX-___ ___ Jan ___ (identifier/date)", "value": "not stated", "quote": "In December 2024, the weather files were updated to version 3.", "where": "PCIC weather files page; Zenodo record and services.pacificclimate.org app were not reachable (fetch blocked)"},
+   {"blank_context": "based on CWEC ___", "value": "2020", "quote": "CWEC2020", "where": "Article, data description; PCIC page"},
+   {"blank_context": "___s–___s", "value": "2040s–2080s", "quote": "five future periods from the 2040s through the 2080s", "where": "Article; PCIC page lists '2040s, 2050s, 2060s, 2070s, and 2080s'"},
+   {"blank_context": "SSP1-___ ___-___ ___-___", "value": "SSP1-2.6, SSP2-4.5, SSP5-8.5", "quote": "low (SSP1-2.6), moderate (SSP2-4.5) and high (SSP5-8.5) emissions scenarios", "where": "PCIC page; article same"},
+   {"blank_context": "___ locations", "value": "564", "quote": "564 CWEC2020 sites, with 15 future-shifted files per location", "where": "Article (PCIC page says only 'all CWEC2020 locations in Canada', no count)"},
+   {"blank_context": "Sobie & Curry ___ Data in Brief", "value": "2025", "quote": "Data in Brief, 2025 May 15, vol. 60, article 111667 (DOI: 10.1016/j.dib.2025.111667)", "where": "Article header"}
+  ],
+  "unsupported_wording": "Quote is trimmed: source reads 'the frequency and duration of persistent events such as heat waves or cold spells remain largely unchanged in the future-shifted files' — the claim drops 'frequency and duration of persistent events'. 'PCIC-WX-' identifier and a January date are not printed in what was read. Edmonton not named in article or PCIC page (claim already flags this).",
+  "note": "Variables shifted confirmed: dry bulb temperature, dew point, relative humidity, surface pressure. Zenodo record 15151116 and the wx-files app were blocked (provenance), so the version string/date could not be checked there."
+ },
+ {
+  "id": "statcanHousehold",
+  "reachable": true,
+  "publisher": "Statistics Canada (via Open Government Portal)",
+  "title": "Household energy consumption, Canada and provinces",
+  "edition": "Table 25100060 (formerly CANSIM 153-0161)",
+  "date": "Published 2024-03-19; modified 2024-03-19",
+  "url": "https://open.canada.ca/data/en/dataset/18e24165-6a20-4c98-a20a-1fef1c4adcf4",
+  "values": [
+   {"blank_context": "Table ___-___-___-___", "value": "25-10-0060 (printed as 'Table 25100060'; '-01' suffix not printed on this page)", "quote": "Table 25100060", "where": "Open Government dataset page"},
+   {"blank_context": "(___–___ biennial)", "value": "2011–2019", "quote": "2011-2019", "where": "Dataset page, reference period"},
+   {"blank_context": "data/___csv", "value": "25100060-eng.zip (zip containing CSV)", "quote": "25100060-eng.zip", "where": "Dataset page, resources"}
+  ],
+  "unsupported_wording": "'biennial' not stated (frequency printed as 'As Needed'). Local file path 'data/...csv' is internal and cannot be checked.",
+  "note": "Primary StatCan source confirmed via open.canada.ca."
+ },
+ {
+  "id": "vanNEU2025",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Southeast False Creek Neighbourhood Energy Utility (web page)",
+  "edition": "web page",
+  "date": "not stated (no modified date found on page)",
+  "url": "https://vancouver.ca/home-property-development/southeast-false-creek-neighbourhood-energy-utility.aspx",
+  "values": [
+   {"blank_context": "modified ___ May ___", "value": "not stated", "quote": "In 2024, we expanded the NEU's sewage heat recovery system.", "where": "Page body; no modified date found"},
+   {"blank_context": "___% renewable, mostly sewage heat recovery", "value": "70", "quote": "The NEU currently generates 70% of its energy from renewable sources, mostly from sewage heat recovery.", "where": "Page body"},
+   {"blank_context": "___ MW sewage heat recovery added", "value": "6.6", "quote": "Added 6.6 megawatts of sewage heat recovery capacity to the False Creek Energy Centre", "where": "Page body"},
+   {"blank_context": "___% renewable by ___", "value": "100 / 2030", "quote": "evaluating options for transitioning its energy supply to 100% renewable energy by 2030", "where": "Page body, next steps"}
+  ],
+  "unsupported_wording": "'___% renewable by ___' reads as a commitment; source says the City is 'evaluating options' for 100% by 2030. Modified date (May) not found.",
+  "note": "City (operator) figures; label as City claims."
+ },
+ {
+  "id": "vanUndrip",
+  "reachable": true,
+  "publisher": "City of Vancouver (UNDRIP Task Force report to Council)",
+  "title": "City of Vancouver's UNDRIP Strategy",
+  "edition": "Council report",
+  "date": "October 25, 2022 (report date)",
+  "url": "https://council.vancouver.ca/20221025/documents/p1.pdf",
+  "values": [
+   {"blank_context": "endorsed ___ Oct ___", "value": "not stated as endorsement; report dated October 25, 2022", "quote": "endorse this Task Force report, City of Vancouver's UNDRIP Strategy", "where": "Recommendations (the report asks for endorsement; it cannot record it)"},
+   {"blank_context": "___ Calls to Action", "value": "79", "quote": "79", "where": "Strategy, Calls to Action"},
+   {"blank_context": "___ first right of refusal on City land", "value": "1.18", "quote": "This should include first right of refusal for Musqueam, Squamish, and Tsleil-Waututh for City land dispositions.", "where": "Call 1.18, p. 16"},
+   {"blank_context": "___ 'include this in permitting decisions'", "value": "2.3", "quote": "...through the lens of Indigenous rights and title, and environmental racism, and include this in permitting decisions.", "where": "Call 2.3, p. 17"},
+   {"blank_context": "___ free, prior and informed consent", "value": "3.10", "quote": "based on genuine free, prior and informed consent rather than mere consultation", "where": "Call 3.10, p. 22"},
+   {"blank_context": "Action Plan ___–___ (endorsed ___ Jun ___)", "value": "unreachable", "quote": "", "where": "undrip-action-plan-2024-2028.pdf fetch blocked"}
+  ],
+  "unsupported_wording": "Endorsement date not printed in the report (it is the report date). Action Plan details ('early engagement threshold points', in progress, June endorsement) unchecked: Action Plan PDF unreachable.",
+  "note": "Report only lists 'Early Actions Approved by Vancouver City Council June 7, 2022'. Last ~30k characters of the PDF not read."
+ },
+ {
+  "id": "van_zdb_s2",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Zoning and Development By-law, Section 2 Definitions",
+  "edition": "consolidated section",
+  "date": "Footers vary; latest 'June 2018'; Bulk Data Storage page footer 'May 2018'",
+  "url": "https://bylaws.vancouver.ca/zoning/Sec02.pdf",
+  "values": [
+   {"blank_context": "By-law No. ___", "value": "not stated (headers/footers read only 'City of Vancouver Zoning and Development By-law'; the only 'By-law No.' in the text is 5869, inside the Development Permit Board definition, not this by-law's number)", "quote": "City of Vancouver Zoning and Development By-law", "where": "Page footers"},
+   {"blank_context": "Section ___", "value": "2", "quote": "Section 2", "where": "Page headers"},
+   {"blank_context": "June ___", "value": "2018", "quote": "June 2018", "where": "Footer on two pages (latest date); the Bulk Data Storage page is footed 'May 2018'"}
+  ],
+  "unsupported_wording": "By-law number not printed in this PDF. 'June' is the latest footer, but the page with the Bulk Data Storage definition is dated May 2018.",
+  "note": "Definition begins: 'Bulk Data Storage, which means the use of a wholly enclosed building, for the storage of information on operating data' (servers), under Transportation and Storage Uses."
+ },
+ {
+  "id": "abADR276",
+  "reachable": false,
+  "publisher": "Province of Alberta (King's Printer)",
+  "title": "Activities Designation Regulation",
+  "edition": "",
+  "date": "",
+  "url": "",
+  "values": [],
+  "unsupported_wording": "Could not check",
+  "note": "No link given; the official King's Printer text could not be found (search budget used up; only third-party mirrors like FAOLEX turned up, and those weren't used). Unreachable."
+ },
+ {
+  "id": "abEF2026",
+  "reachable": true,
+  "publisher": "Not named on page (contact: Climate Regulation and Carbon Markets), Government of Alberta open publications",
+  "title": "Carbon offset emission factors handbook. Version 3.1",
+  "edition": "3.1 (3.0 marked superseded)",
+  "date": "Date Issued 2022-06-14; Updated January 31, 2023",
+  "url": "https://open.alberta.ca/publications/carbon-offset-emission-factors-handbook-version-3",
+  "values": [
+   {"blank_context": "v3.___", "value": "1", "quote": "Carbon offset emission factors handbook. Version 3.1", "where": "Publication page resource list"},
+   {"blank_context": "Aug ___", "value": "not stated", "quote": "Date Issued: 2022-06-14 ... Updated: January 31, 2023", "where": "Publication page metadata; no August date shown"},
+   {"blank_context": "Table ___ ; CO2 ___ CH4 ___ N2O ___ g/m³", "value": "unreachable", "quote": "", "where": "Handbook PDF links not exposed on page; table not read"}
+  ],
+  "unsupported_wording": "August date not supported by this page (it shows June 2022 / Jan 2023). 'Alberta Environment and Protected Areas' is not named as publisher on the page. A newer v3.x dated August may exist elsewhere but was not found. Table values unchecked.",
+  "note": "Emission factor table not reached."
+ },
+ {
+  "id": "abGreenhouse2017",
+  "reachable": true,
+  "publisher": "Alberta Agriculture and Forestry, Government of Alberta",
+  "title": "Economics of Production and Marketing Greenhouse Crops in Alberta",
+  "edition": "Agdex 821-59",
+  "date": "October 2018",
+  "url": "https://open.alberta.ca/dataset/fbb2b0b5-53b9-4dbd-92b7-f37ec8ed9369/resource/d074794d-7ec0-4bef-bc93-99a57bbc2cf2/download/2017greenhousecop.pdf",
+  "values": [
+   {"blank_context": "AGDEX ___-___", "value": "821-59", "quote": "Agdex 821-59", "where": "Cover"},
+   {"blank_context": "(___ ___ survey)", "value": "2017 crop year", "quote": "2017 crop year", "where": "Report introduction"},
+   {"blank_context": "cucumber $___", "value": "112.75", "quote": "112.75 ($/sq. m.)", "where": "Table 7, p. 25; also Table 16, p. 44"},
+   {"blank_context": "tomato $___", "value": "129.99", "quote": "129.99 ($/sq. m.)", "where": "Table 9, p. 29; Table 16, p. 44"},
+   {"blank_context": "pepper $___", "value": "138.99", "quote": "138.99 ($/sq. m.)", "where": "Table 11, p. 33; Table 16, p. 44"},
+   {"blank_context": "bedding plants $___", "value": "321.01", "quote": "321.01 ($/sq. m.)", "where": "Table 13, p. 37; Table 16, p. 44"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Existing operations confirmed: 'The sample for the study was randomly selected from a list of greenhouse operators in Alberta' (p. 9). Small samples (9 cucumber, 7 tomato, 6 pepper, 17 bedding/ornamental). Table 13 area (10,043 sq. m.) differs from summary (8,489 sq. m.), which is unexplained. Bedding category is 'bedding plants/ornamentals'."
+ },
+ {
+  "id": "abRFS2026",
+  "reachable": true,
+  "publisher": "Government of Alberta (Environment and Protected Areas)",
+  "title": "Renewable fuels standard resources (web page); Renewable Fuels Standard Regulation fact sheet",
+  "edition": "",
+  "date": "Resources page metadata published October 9, 2026; fact sheet January 12, 2024",
+  "url": "https://alberta.ca/renewable-fuels-standard-resources ; https://open.alberta.ca/dataset/0dc754a0-943c-4c7d-b5b1-cbc032f25d69/resource/59576c69-c260-4169-9e22-34b8c68d085e/download/epa-renewable-fuels-standard-regulation-fact-sheet-2024-01.pdf",
+  "values": [
+   {"blank_context": "Alta Reg ___/___", "value": "not stated", "quote": "Renewable Fuels Standard (RFS) Regulation", "where": "Resources page and fact sheet; no Alta Reg number printed"},
+   {"blank_context": "___% bio-based diesel", "value": "2", "quote": "2% bio-based diesel in diesel fuel", "where": "Resources page; fact sheet: 'a minimum of two per cent by volume'"},
+   {"blank_context": "___% renewable alcohol in gasoline", "value": "5", "quote": "a minimum annual average of 5% renewable alcohol in gasoline", "where": "Resources page; fact sheet: 'a minimum of five per cent by volume'"},
+   {"blank_context": "at least ___% lower life-cycle GHG", "value": "25", "quote": "at least 25% fewer greenhouse gas (GHG) emissions than the equivalent petroleum fuel", "where": "Resources page; fact sheet 'at least 25 per cent'"},
+   {"blank_context": "RFS resources page, ___ Oct ___", "value": "9 Oct 2026 (metadata published date)", "quote": "published date of October 9, 2026", "where": "Page metadata"},
+   {"blank_context": "fact sheet ___ Jan ___", "value": "12 Jan 2024", "quote": "©2024 Government of Alberta | January 12, 2024 | Environment and Protected Areas", "where": "Fact sheet footer"}
+  ],
+  "unsupported_wording": "'No carbon-intensity limit ... unlike BC' is an inference: Alberta pages simply don't mention carbon intensity, and BC isn't covered by these sources. The fact sheet doesn't use the term 'bio-based diesel'. The resources page doesn't date the fact sheet.",
+  "note": "Regulation text not consulted (per claim, blocked)."
+ },
+ {
+  "id": "ab_ghgperf",
+  "reachable": true,
+  "publisher": "Government of Alberta",
+  "title": "Alberta's greenhouse gas emissions reduction performance",
+  "edition": "web page",
+  "date": "metadata published 2026-09-10",
+  "url": "https://alberta.ca/albertas-greenhouse-gas-emissions-reduction-performance",
+  "values": [],
+  "unsupported_wording": "none",
+  "note": "No blanks in claim. Title and publisher match. Government performance claims on this page should be labelled as Government of Alberta claims if used."
+ }
+]

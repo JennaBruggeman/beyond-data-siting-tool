@@ -14,93 +14,190 @@ bcRLCF012b,decision,Carbon-intensity range: checks disagree on current rows (7.5
 cologixVAN4_2026,decision,Cologix VAN4 capacity: web page 4 MW vs spec sheet 6.5 MW (operator claims),C trace,open
 vibration STC,decision,"STC 47/55 read in VBBL 2019 / BCBC 2018, not NBC 2020 as the coef says",C trace,open
 schneiderUPS2020,needs source,Schneider UPS blog logged at a thegreengrid.org URL; find the right link,C trace,open
+bchTariff2026,J.B. can check,"BC Hydro rate figures (LGS 29.99 ¢/day, $13.83/kW, 6.79 ¢/kWh; RS 1830) not read by either check: read them in your downloaded Electric Tariff",B4,open
+price_floor,node review,"capex 0.5–0.65 M€/MW is attributed to Hiltunen 2020, which assumes 0.6; cite Wahlroos / Rämä directly",B4,open
 tallaghtD22,decision,"capex_split calibration wording: ""five of seven"" is effectively four confirmed (AWS heat price not stated)",B1,open
 scieu2024,decision,Use national 2.06 GJ/m² for hospitals (provincial values not found)?,B1,open
 edmParcel,J.B. can check,Unreachable for both checks,B1,open
 bcAssess2026,J.B. can check,BC Assessment page blocked (check it on the Abacus page yourself),B1,open
 bytes2heat,needs source,Unreachable,B1,open
 F-01..F-05,display fix,Open display fixes from the tool review (F-04 CLARK page error),tool,open
+abgas,source ?,(?: not on this page; needs the ATCO rate schedule),B6 28 Oct: agreed fixes applied; single-check points marked ?,open
 aeso,source ?,(?: not on this page) | (?: MW not on this page; Phase 2A materials posted 26 Jun 2026),B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+bylaw14600,source ?,B5 28 Oct: second check could not read it (single check),B5 28 Oct: second check could not read it (single check),open
+bylaw6555,source ?,cons. 14 Jul 2026 ?,B5 28 Oct: agreed fixes applied; single-check points marked ?,open
 clf,source ?,(?: report title and year not given; not verified),"B2 28 Oct: not confirmed, marked ?",open
 crf,source ?,Barroso ch. 8 ?,"B3 28 Oct: not confirmed, marked ?",open
+dell,source ?,2U ?) | (?: not found in these PDFs) | not in the Dell PDFs ?),B4 28 Oct: agreed fixes applied; single-check points marked ?,open
 ess,source ?,?,"B3 28 Oct: not confirmed, marked ?",open
+exergi,source ?,(? the requirement can range to 103 °C),B5 28 Oct: agreed fixes applied; single-check points marked ?,open
 horizons,source ?,?,"B3 28 Oct: not confirmed, marked ?",open
 lorenz,source ?,?,"B3 28 Oct: not confirmed, marked ?",open
+neuReport,source ?,"(?: one check reads a 70% target, not achieved share)",B5 28 Oct: two checks; disputed points marked ?,open
+statcanHousehold,source ?,2011–2021 ? | biennial ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
 gurreri2023,source ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
-tt2025,source ?,fixed 27 Oct (citation); second check unreachable (single check),fixed 27 Oct (citation); second check unreachable (single check),open
-daikinCAT624,source ?,fixed 27 Oct (citation); second check unreachable (single check),fixed 27 Oct (citation); second check unreachable (single check),open
-catTM9338,source ?,fixed 27 Oct (citation); second check unreachable (single check),fixed 27 Oct (citation); second check unreachable (single check),open
+dea,source ?,B4 28 Oct: second check could not read it (single check),B4 28 Oct: second check could not read it (single check),open
+stratego,source ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
+hiltunen2020,source ?,B4 28 Oct: agreed fixes applied; single-check points marked ?,B4 28 Oct: agreed fixes applied; single-check points marked ?,open
+tt2025,source ?,B4 28 Oct: second check could not read it (single check),B4 28 Oct: second check could not read it (single check),open
+catTM9338,source ?,B4 28 Oct: second check could not read it (single check),B4 28 Oct: second check could not read it (single check),open
 cumminsS1443,source ?,B2 28 Oct: agreed fixes applied; single-check points marked ?,B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+rvo2018,source ?,IF Technology ?,B4 28 Oct: two checks; disputed points marked ?,open
 necbHDD,source ?,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 ayuso2023,source ?,(?: one check reads article 102330),B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 oebCCIM,source ?,B2 28 Oct: agreed fixes applied; single-check points marked ?,B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+cwec,source ?,B4 28 Oct: second check could not read it (single check),B4 28 Oct: second check could not read it (single check),open
+eccc,source ?,B4 28 Oct: second check could not read it (single check),B4 28 Oct: second check could not read it (single check),open
 vanSewer,source ?,"B2 28 Oct: not confirmed, marked ?","B2 28 Oct: not confirmed, marked ?",open
+altaReg117,source ?,B5 28 Oct: second check could not read it (single check),B5 28 Oct: second check could not read it (single check),open
+abEGDF,source ?,Feb 2023 ? | publisher not printed on the page ?),B6 28 Oct: agreed fixes applied; single-check points marked ?,open
+ceud,source ?,file names ?,B4 28 Oct: two checks; disputed points marked ?,open
+rule012,source ?,"""consolidated"" and 74 pp. ?) | 17 Apr 2026 ?",B4 28 Oct: two checks; disputed points marked ?,open
+bchIRP2025,source ?,B5 28 Oct: second check could not read it (single check),B5 28 Oct: second check could not read it (single check),open
+nir2026,source ?,B5 28 Oct: second check could not read it (single check),B5 28 Oct: second check could not read it (single check),open
+fjfAars2020,source ?,B5 28 Oct: second check could not read it (single check),B5 28 Oct: second check could not read it (single check),open
+dfKatalog2022,source ?,(?: not checked; Table 1.1 lists 19 MW),B4 28 Oct: two checks; disputed points marked ?,open
+teliaHKI2024,source ?,printed title ? | so one figure is misprinted ?),B4 28 Oct: agreed fixes applied; single-check points marked ?,open
+nivosMantsala,source ?,"(?: 4.0 MW heat pump, 20 GWh = 54 %, exhaust temperatures, gas −70 % and DH price −11 % not confirmed by either check)",B5 28 Oct: agreed fixes applied; single-check points marked ?,open
+exergiAR2023,source ?,(?),B5 28 Oct: two checks; disputed points marked ?,open
+engiePA10,source ?,per year not printed ?) | (? the 2022 release gives €4.3 M),B5 28 Oct: agreed fixes applied; single-check points marked ?,open
 rvoCases2018,source ?,"(?: one check found €0.8 M installations + ≈€0.7 M network on p.13 and the only €1.5 M is Aalsmeer, p.15; not re-confirmed)",single check: marked ?,open
-skatOverskud,source ?,wording not re-checked at the primary ?),fixed 27 Oct (citation); second check unreachable (single check),open
+euReg2024_1364,source ?,"(?: details read from a reproduction, not EUR-Lex; re-read at the primary)",B5 28 Oct: agreed fixes applied; single-check points marked ?,open
+skatOverskud,source ?,and the heat-pump rule and 3 × deduction were not found ?),B4 28 Oct: agreed fixes applied; single-check points marked ?,open
+vanRezoneTime,source ?,B6 28 Oct: second check could not read it (single check),B6 28 Oct: second check could not read it (single check),open
 vanFees2026,source ?,(?: not yet verified; two checks could not open the PDF),"B2 28 Oct: not confirmed, marked ?",open
 vanDCL,source ?,rates single check: the other check was served the 14 Jun 2024 version ?),B3 28 Oct: agreed fixes applied; single-check points marked ?,open
+abConsult,source ?,(?: quote not found by either check),B6 28 Oct: agreed fixes applied; single-check points marked ?,open
+abMicrogen,source ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
 bchLGS,source ?,(?),B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+aesoStats2025,source ?,"""by category"" ?)",B4 28 Oct: two checks; disputed points marked ?,open
 vanWater2026,source ?,"(?: not in this report, which covers water only; needs the sewer by-law report)",B2 28 Oct: agreed fixes applied; single-check points marked ?,open
 vanOfficeConv,source ?,B2 28 Oct: agreed fixes applied; single-check points marked ?,B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+edmPermits,source ?,B5 28 Oct: second check could not read it (single check),B5 28 Oct: second check could not read it (single check),open
+van6555zones,source ?,consol. 14 Jul 2026 ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
 tenK_life,source ?,"(?: one check reads FY2023, decided Jul 2022) | prior range ?)","B2 28 Oct: not confirmed, marked ?",open
+jlarc2024,source ?,real $ ?) | one check read Rpt598.pdf ?),B4 28 Oct: two checks; disputed points marked ?,open
 ieaEnergyAI,source ?,(?: quote not verified; iea.org chapter page could not be read by either check),"B3 28 Oct: not confirmed, marked ?",open
 census2021DA,source ?,tatcan.gc.ca/census-recensement/2021/dp-pd/prof/details/download-telecharger.cfm?,,open
-edmRezComplexity,source ?,fixed 27 Oct (citation); second check unreachable (single check),fixed 27 Oct (citation); second check unreachable (single check),open
+receiversBCUC,source ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
+edmFees2026,source ?,B5 28 Oct: second check could not read it (single check),B5 28 Oct: second check could not read it (single check),open
+edmProcTimes,source ?,B5 28 Oct: second check could not read it (single check),B5 28 Oct: second check could not read it (single check),open
+edmRezComplexity,source ?,B4 28 Oct: second check could not read it (single check),B4 28 Oct: second check could not read it (single check),open
+ab_p1701,source ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
+zurmuhl2018,source ?,12–14 Feb 2018 ?),B4 28 Oct: two checks; disputed points marked ?,open
 kindaichi2018,source ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 drake_landing,source ?,"(?: one check reads it as a GSHP + ORC modelling study using DLSC as the case, not measured data)","B2 28 Oct: not confirmed, marked ?",open
-pnnl2022,source ?,fixed 27 Oct (citation); second check unreachable (single check),fixed 27 Oct (citation); second check unreachable (single check),open
+ab_gshe2018,source ?,B4 28 Oct: agreed fixes applied; single-check points marked ?,B4 28 Oct: agreed fixes applied; single-check points marked ?,open
+pnnl2022,source ?,B4 28 Oct: second check could not read it (single check),B4 28 Oct: second check could not read it (single check),open
 absorption2026,source ?,?,"B2 28 Oct: not confirmed, marked ?",open
+van_zdb_s2,source ?,(? one check reads footers to June 2018; the Bulk Data Storage page May 2018; by-law number not printed),B6 28 Oct: two checks; disputed points marked ?,open
+van_zdb_i2,source ?,current ?),B4 28 Oct: two checks; disputed points marked ?,open
+van_zdb_i1c,source ?,current ?),B6 28 Oct: two checks; disputed points marked ?,open
+van_zdb_i3,source ?,B4 28 Oct: second check could not read it (single check),B4 28 Oct: second check could not read it (single check),open
+van_zdb_fc2,source ?,B4 28 Oct: second check could not read it (single check),B4 28 Oct: second check could not read it (single check),open
+van_rts19744,source ?,and 2060 Quebec St ?),B4 28 Oct: agreed fixes applied; single-check points marked ?,open
+edm_bl20001,source ?,B4 28 Oct: second check could not read it (single check),B4 28 Oct: second check could not read it (single check),open
+edm_matrix,source ?,B5 28 Oct: second check could not read it (single check),B5 28 Oct: second check could not read it (single check),open
+edm_dcpage,source ?,B4 28 Oct: second check could not read it (single check),B4 28 Oct: second check could not read it (single check),open
+nbc2020_4153,source ?,B5 28 Oct: second check could not read it (single check),B5 28 Oct: second check could not read it (single check),open
+nfc2020_4313,source ?,B4 28 Oct: second check could not read it (single check),B4 28 Oct: second check could not read it (single check),open
+van_genroom,source ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
+epcor_ccg,source ?,"(?: one check reads the title as 'EDTI Customer Connection Guide', 1 Aug 2025)",B4 28 Oct: two checks; disputed points marked ?,open
+vanNEU2025,source ?,modified 21 May 2025 ?),B6 28 Oct: agreed fixes applied; single-check points marked ?,open
 odrsf,source ?,"(?: the two checks disagree — one found only v1.0, Sep 2021, ~182,000 records, CSV)",B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+epaQuincy,source ?,"""potable"" ?)",B4 28 Oct: two checks; disputed points marked ?,open
 crozier2025,source ?,'pause' is our word ?),B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
+van9552,source ?,?,B6 28 Oct: two checks; disputed points marked ?,open
 bcucTelus,source ?,(?: not identifiable from this order),B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 cordisModerator,source ?,the TES as phase-change store ?),B3 28 Oct: agreed fixes applied; single-check points marked ?,open
 whiteDCeel,source ?,?,"B2 28 Oct: not confirmed, marked ?",open
 canaanMB,source ?,not measured ?) | primary URL to add ?),B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 googleFervo,source ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 fluenceStGhislain,source ?,B3 28 Oct: agreed fixes applied; single-check points marked ?,B3 28 Oct: agreed fixes applied; single-check points marked ?,open
+nrcanPVmunic,source ?,not re-checked ?),B5 28 Oct: agreed fixes applied; single-check points marked ?,open
+alissa2025lca,source ?,the workbooks could not be opened by the second check ?),B5 28 Oct: agreed fixes applied; single-check points marked ?,open
 evapcoLayout2026,source ?,printed as 'Recommended' ?) | the 5 °F / 50% figure is not in this manual ?),B2 28 Oct: agreed fixes applied; single-check points marked ?,open
 bacS3000,source ?,(?: one check reads 171 tons for the smallest single-cell model),B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 mfrAdiabatic,source ?,(?) | (? sizes not confirmed in the brochures read),B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+mfrBESS,source ?,?,B4 28 Oct: two checks; disputed points marked ?,open
+nfpa855tia,source ?,and the roof-edge distance is the system height but not less than 5 ft ?) | (?: not verified),B4 28 Oct: agreed fixes applied; single-check points marked ?,open
 abESSstandata,source ?,single check ?),B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
+vanParking5,source ?,May 2026 ?,B6 28 Oct: two checks; disputed points marked ?,open
+edmZB580,source ?,"""no backing"" ?)",B5 28 Oct: two checks; disputed points marked ?,open
+edmUses2026,source ?,B4 28 Oct: second check could not read it (single check),B4 28 Oct: second check could not read it (single check),open
 thGlobalSwitch2025,source ?,'enclosed' is our word ?),B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
-spencerBldg,source ?,fixed 27 Oct (citation); second check unreachable (single check),fixed 27 Oct (citation); second check unreachable (single check),open
+spencerBldg,source ?,B4 28 Oct: agreed fixes applied; single-check points marked ?,B4 28 Oct: agreed fixes applied; single-check points marked ?,open
 bahnhofPionen,source ?,"(?: our inference, not stated)",B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+nproCosts,source ?,B5 28 Oct: agreed fixes applied; single-check points marked ?,B5 28 Oct: agreed fixes applied; single-check points marked ?,open
+bchDG100,source ?,(?: not checked),B5 28 Oct: two checks; disputed points marked ?,open
+aucCoaldale2025,source ?,one check ties this to the Hydro and Electric Energy Act ?),B5 28 Oct: two checks; disputed points marked ?,open
+vanQuebecSt2020,source ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
+bchDR2026,source ?,(?: these are not in this manual; need their own source),B5 28 Oct: agreed fixes applied; single-check points marked ?,open
 epraBC,source ?,(?) | (?: not found on the page),B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
+abEUAdef2026,source ?,B6 28 Oct: second check could not read it (single check),B6 28 Oct: second check could not read it (single check),open
+nfpa855_2026,source ?,B5 28 Oct: second check could not read it (single check),B5 28 Oct: second check could not read it (single check),open
+blatchfordBP2021,source ?,"(?: one check read the City's 2020–2023 edition, which has the energy centre in the Town Centre and no Blatchford Market sewer lines or m² forecast; check the uploaded file)",B4 28 Oct: two checks; disputed points marked ?,open
+abWells2026,source ?,B6 28 Oct: second check could not read it (single check),B6 28 Oct: second check could not read it (single check),open
+abAIDCstrategy2024,source ?,not under the pillar ?),B4 28 Oct: two checks; disputed points marked ?,open
 aesoDCupd2025,source ?,the Engage page lists only the title ?),B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+alta117_2026,source ?,B5 28 Oct: second check could not read it (single check),B5 28 Oct: second check could not read it (single check),open
 bcRLCF007_2024,source ?,so the 31.2% basis is not stated ?),B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
+abRFS2026,source ?,"page dates ? | ""bio-based diesel"" ?)",B6 28 Oct: agreed fixes applied; single-check points marked ?,open
 epcorDAS2026,source ?,B2 28 Oct: agreed fixes applied; single-check points marked ?,B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+waterHardness2026,source ?,(?: not checked; source not given),B6 28 Oct: agreed fixes applied; single-check points marked ?,open
+mvBylaw1329,source ?,prohibitions and surcharges ?),B5 28 Oct: two checks; disputed points marked ?,open
 abDCenv2026,source ?,(?),corrected; MSAPR marked ?,open
+abWaterAct2021,source ?,fact sheets 2021 ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
+abRainwater2010,source ?,Canadian Guidelines for Domestic Reclaimed Water for toilet and urinal flushing ?,B6 28 Oct: two checks; disputed points marked ?,open
+agsGround2009,source ?,"""undisturbed"" ?) | not checked ?)",B5 28 Oct: agreed fixes applied; single-check points marked ?,open
 vanDeepGeo,source ?,"B2 28 Oct: not confirmed, marked ?","B2 28 Oct: not confirmed, marked ?",open
 blatchfordAdvisor2023,source ?,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 bfe2023dc,source ?,"p. 20 ? | (?: one check finds RRB 840/2022 via the AWEL Merkblatt; for new buildings or cooling renewals, heat the site cannot use itself)",B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+oro2019,source ?,B6 28 Oct: second check could not read it (single check),B6 28 Oct: second check could not read it (single check),open
+yuan2025,source ?,B6 28 Oct: second check could not read it (single check),B6 28 Oct: second check could not read it (single check),open
+abEF2026,source ?,"(?: the open.alberta.ca page read shows v3.1, 2022–23; publisher not printed)",B6 28 Oct: two checks; disputed points marked ?,open
 bcucG5026,source ?,(?: the letters are not in this order and need their own citation),B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
+vanTaxRates2026,source ?,(? a3 is a resolution),B6 28 Oct: two checks; disputed points marked ?,open
 vanBudget2026,source ?,B3 28 Oct: agreed fixes applied; single-check points marked ?,B3 28 Oct: agreed fixes applied; single-check points marked ?,open
 bcAssessClasses,source ?,amendment date ?),B2 28 Oct: agreed fixes applied; single-check points marked ?,open
 gcDataResidency,source ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 bcFoippaAbroad,source ?,(?),B3 28 Oct: agreed fixes applied; single-check points marked ?,open
+isocPulseIXP,source ?,"""members"" ?)",B5 28 Oct: two checks; disputed points marked ?,open
 statcanLives,source ?,(?: not in this table; needs the machinery and equipment table of 15-206-X2015039),B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+voaComputerCentres,source ?,"""s. 281"" ?)",B6 28 Oct: two checks; disputed points marked ?,open
+abElectronicsReg,source ?,regulation number and official text not read ?),B6 28 Oct: agreed fixes applied; single-check points marked ?,open
 dcLstPreprint,source ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 edmHeatPolicy,source ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 mvAAQO,source ?,Nov 2024 ?) | rolling ?) | (?: the cited PDF could not be opened by either check; a May 2025 Metro Vancouver fact sheet gives the same values),"B3 28 Oct: not confirmed, marked ?",open
 mvBylaw1082,source ?,B3 28 Oct: agreed fixes applied; single-check points marked ?,B3 28 Oct: agreed fixes applied; single-check points marked ?,open
 acaEdmonton,source ?,URL to add ?),B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
+pcicWx3,source ?,27 Jan 2025 ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
 mvClimate2016,source ?,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 vanOnceThrough,source ?,"(?: one check reads s. 3.10–3.11 in the 2021 consolidation, without the permit or Legionella rule)","B2 28 Oct: not confirmed, marked ?",open
 mvStageHistory,source ?,(?: not in this report; need their own sources),B3 28 Oct: agreed fixes applied; single-check points marked ?,open
 nbcImportance,source ?,"B2 28 Oct: not confirmed, marked ?","B2 28 Oct: not confirmed, marked ?",open
 vbbl2025Seismic,source ?,(?: the guide is internally inconsistent — p. 9 says projects submitted before 15 Sep 2026 may use the 2019 rules; a newer v1.01 exists),B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
+jibcGroupLodging,source ?,the guide's own 1.5 × 2.5 m is 3.75 m² ?),B5 28 Oct: agreed fixes applied; single-check points marked ?,open
 edmWarming,source ?,'minimum of 3 days in a row' ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
+cec2024ESS,source ?,the code is paywalled ?),B5 28 Oct: agreed fixes applied; single-check points marked ?,open
+vanUndrip,source ?,report 25 Oct 2022 ? | ?,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
 bcDeclarationAct,source ?,(?: these three not yet checked against bclaws),"B2 28 Oct: not confirmed, marked ?",open
 aucGuidance,source ?,(?: not on this page; Rule 007 not checked),B2 28 Oct: agreed fixes applied; single-check points marked ?,open
 vanNationsNamed,source ?,"B2 28 Oct: not confirmed, marked ?","B2 28 Oct: not confirmed, marked ?",open
+edmNationsNamed,source ?,(?: one check counts 16 member nations in the Confederacy list; no total printed),B5 28 Oct: two checks; disputed points marked ?,open
 vanEmbodied,source ?,(?: not from this source),B2 28 Oct: agreed fixes applied; single-check points marked ?,open
 bchTCIP2026,source ?,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 aesoDC2025,source ?,Sep 2025): 'Are large loads paying their fair share of transmission costs?,,open
+dkHeatCap2025,source ?,?,B5 28 Oct: agreed fixes applied; single-check points marked ?,open
+sailor2026,source ?,B6 28 Oct: two checks; disputed points marked ?,B6 28 Oct: two checks; disputed points marked ?,open
+abConsultPolicy2013,source ?,B6 28 Oct: second check could not read it (single check),B6 28 Oct: second check could not read it (single check),open
 molla2026,source ?,In my backyard?,,open
 squamishNEU2010,source ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 bcucG6426,source ?,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
+epaRain2013,source ?,p. 24 ?),B5 28 Oct: two checks; disputed points marked ?,open
 brc2025,source ?,B2 28 Oct: agreed fixes applied; single-check points marked ?,B2 28 Oct: agreed fixes applied; single-check points marked ?,open
-epcorTC2025s44,source ?,sections not re-checked ?),fixed 27 Oct (citation); second check unreachable (single check),open
+emaWDA,source ?,"""may need"" ?)",B5 28 Oct: two checks; disputed points marked ?,open
+epcorTC2025s44,source ?,sections not re-checked ?),B4 28 Oct: second check could not read it (single check),open
 aesoTariff4,source ?,B3 28 Oct: agreed fixes applied; single-check points marked ?,B3 28 Oct: agreed fixes applied; single-check points marked ?,open
 bchSelfGen2026,source ?,BCUC application ID 1323 ?),B2 28 Oct: agreed fixes applied; single-check points marked ?,open
 bchCustGen,source ?,B2 28 Oct: agreed fixes applied; single-check points marked ?,B2 28 Oct: agreed fixes applied; single-check points marked ?,open
@@ -108,3 +205,8 @@ vanRainPage,source ?,(?: these figures and the phrase are not on this page; sour
 nrcCBD160,source ?,"(?: not verified; one check finds the NRC record titled 'Design heat requirements for snow melting systems', with no author, digest number or year shown, and the PDF not openable)","B3 28 Oct: not confirmed, marked ?",open
 lundSnow,source ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 edmEncroach,source ?,current fee ?),B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
+ecccNormals2020,source ?,B5 28 Oct: second check could not read it (single check),B5 28 Oct: second check could not read it (single check),open
+abPWR277,source ?,our paraphrase ?),B6 28 Oct: two checks; disputed points marked ?,open
+abADR276,source ?,B6 28 Oct: second check could not read it (single check),B6 28 Oct: second check could not read it (single check),open
+abCCcompliance2026,source ?,"(?: ministry name, date and licence not printed on the dataset page)",B4 28 Oct: agreed fixes applied; single-check points marked ?,open
+bcResCare,source ?,"""community care"" ?",B5 28 Oct: two checks; disputed points marked ?,open
