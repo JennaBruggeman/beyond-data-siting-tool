@@ -151,7 +151,7 @@ const TOPICS={
    {t:'How far it carries here',p:`About ${n} unit${n>1?'s':''} together (an assumption). The night limit of ${lim} dBA is reached at ${K(rg(dist[0],dist[1],'m'))}, low-noise to standard units.`,
     v:h=>lineChart(h,{label:'Sound level against distance',x0:10,x1:600,y0:20,y1:90,xt:[100,200,300,400,500,600],xu:' m',yt:[30,40,50,60,70,80],yu:'dBA',pts,band:[d=>Lp(lw[0],d),d=>Lp(lw[1],d)],c:C.heat,limit:lim,limitLabel:`night limit, ${lim} dBA`,marks:[[Math.min(600,dist[0]),'low-noise'],[Math.min(600,dist[1]),'standard',14]]}),src:['snd','noise']},
   ]; }},
- materials:{t:'What it is made of, and how often', steps:x=>{ const {mw}=x; const servers=mw*1000/0.6, t=[servers*21.25/1000,servers*26.3/1000];
+ materials:{t:'What it is made of, and how often', steps:x=>{ const {mw}=x; const servers=mw*1000/0.6, t=[servers*21.2/1000,servers*26.3/1000];
   return [
    {t:'The servers turn over',p:`The building lasts decades; ${K('the servers are replaced every five to six years')}. Each refresh is a truckload of equipment out and in.`,v:anim('refresh'),src:['srv','ew']},
    {t:'Each refresh, by weight',p:`About ${fmt(servers)} servers at this size (about 600 W each): ${K(rg(t[0],t[1],'tonnes'))} each time.`,v:h=>bars(h,[{label:'Servers, one refresh',lo:t[0],hi:t[1],c:C.mat},{label:'Copper in the facility',lo:mw*20,hi:mw*40,c:C.power,note:'industry figure'}],'tonnes','Material by weight'),src:['ew','cu']},

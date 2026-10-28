@@ -222,7 +222,7 @@ function waterIndex(){ if(BD.loadWP&&!waterIndex.q){ waterIndex.q=BD.loadWP().th
 
 /* ---------- materials as an index, with trucks, a 50-year slider and where equipment can go ---------- */
 function materialsIndex(){ const e=E(), f=e.siteFacts(), R=e.R, a=A(), mw=a.mw||1, racks=mw*1000/R.kWPerRack, servers=mw*1000/0.6; BD.S.view2='tab';
-  const ew=[servers*21.25/6/1000,servers*26.3/6/1000], yr=a.yr||25, refresh=Math.floor(yr/5.5), rf=[Math.floor(yr/6),Math.floor(yr/5)] /* sweep 20 Oct: 25 years at every 5–6 years is 4–5 refreshes, not 4 */, eit=[servers*4.177*0.10,servers*4.177*0.15];
+  const ew=[servers*21.2/6/1000,servers*26.3/6/1000], yr=a.yr||25, refresh=Math.floor(yr/5.5), rf=[Math.floor(yr/6),Math.floor(yr/5)] /* sweep 20 Oct: 25 years at every 5–6 years is 4–5 refreshes, not 4 */, eit=[servers*4.177*0.10,servers*4.177*0.15];
   let h=e.tabBar('materials')+`<h2>What it is made of, and how often</h2><p class="draft">The building lasts decades; <span class="k">the servers are replaced every five to six years</span>.</p>
   <div class="hfig"><div><b>${fmt(racks)}</b><span>racks at 8 kW each (Uptime 2024 average, survey)</span></div><div><b>${fmt(servers)}</b><span>servers at about 600 W (LBNL 2024)</span></div><div><b>${e.rng(ew[0],ew[1],'t')}</b><span>of servers retired a year, on a six-year refresh</span></div><div><b>${fmt(mw*20)}–${fmt(mw*40)} t</b><span>copper in the facility (industry figure)</span></div></div>
   <h3>Over ${yr} years</h3><div class="numin"><label>Years <input type="range" id="yr" min="5" max="50" step="1" value="${yr}" style="width:200px"> <b id="yrv">${yr}</b></label></div>
