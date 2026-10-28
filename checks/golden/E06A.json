@@ -1,0 +1,486 @@
+{
+ "lot": "E06A",
+ "answers": {
+  "built": "new",
+  "extent": "whole",
+  "floor": "",
+  "host": {},
+  "mw": 10.2,
+  "foot": "max",
+  "cover": 70,
+  "hmode": "out",
+  "plantAt": "roof",
+  "outside": "dry",
+  "inside": "air",
+  "spares": "n1",
+  "gens": "yes",
+  "genAt": "yard",
+  "genSpares": "n1",
+  "mwSite": "176767"
+ },
+ "sel": {
+  "city": "edm",
+  "id": "176767",
+  "lotArea": 4563,
+  "a": [
+   "74 AIRPORT ROAD NW",
+   "BE",
+   "BE",
+   "record",
+   4563,
+   null,
+   1991,
+   1991,
+   1213500,
+   [
+    "Commercial"
+   ],
+   "BLATCHFORD AREA",
+   1
+  ]
+ },
+ "facts": {
+  "city": "edm",
+  "lot": 4563,
+  "zone": "BE",
+  "env": {
+   "fsr": [
+    1.6,
+    1.6
+   ],
+   "h": 16,
+   "yards": {
+    "front": 6,
+    "side": 0,
+    "rear": 0,
+    "note": "BE: 6.0 m from the street (4.5 m on a collector or local road; road class not read); 6.0 m next to a residential zone (not applied — neighbours not read)"
+   }
+  },
+  "envNote": "",
+  "blds": [],
+  "status": {
+   "k": "case",
+   "t": "Smaller only",
+   "d": "Minor Industrial is permitted in BE; Major Industrial is not. A large data centre is treated by the City as Major Industrial. A smaller one whose noise, emissions and fuel or battery hazards stay inside the site could be argued as Minor Industrial — the Development Planner decides.",
+   "env": "Height 16.0 m. Floor area up to 1.6 × the lot. Setbacks 6.0 m from a street (4.5 m on a collector or local road), 6.0 m next to a residential zone, none to other sites or alleys.",
+   "src": [
+    "edm_matrix",
+    "edm_dc"
+   ]
+  },
+  "foot": 0,
+  "hmax": 0,
+  "plate": 0,
+  "c": [
+   -1505.8,
+   3203.7
+  ],
+  "downtown": false,
+  "cpcn": false,
+  "M": {
+   "Z": {
+    "zone": "BE",
+    "key": "BE",
+    "city": "edm",
+    "cl": [
+     [
+      "Floor area",
+      "up to 1.6 × the lot",
+      "Bylaw 20001, BE"
+     ],
+     [
+      "Height",
+      "16.0 m",
+      "Bylaw 20001, BE"
+     ],
+     [
+      "Setbacks",
+      "6.0 m from a street (4.5 m on a collector or local road; road class not read, so 6.0 m is used); none to other sites or alleys; 6.0 m next to a residential zone (neighbours not read, not applied)",
+      "Bylaw 20001, BE Table 4.1"
+     ],
+     [
+      "Screening",
+      "\"All mechanical and electrical equipment … cooling towers … must be screened from view from Abutting Streets and Sites in non-industrial Zones\"",
+      "Bylaw 20001, BE s. 5.2"
+     ],
+     [
+      "Roof equipment",
+      "ventilating equipment, plumbing stacks and mechanical penthouses are not counted in height",
+      "Bylaw 20001 s. 5.70 cl. 1.9.5"
+     ]
+    ],
+    "warn": "",
+    "assumed": false,
+    "base": {
+     "fsr": [
+      1.6,
+      1.6
+     ],
+     "h": 16,
+     "hx": null,
+     "ground": false,
+     "yards": {
+      "front": 6,
+      "side": 0,
+      "rear": 0
+     },
+     "known": "yards",
+     "cl": [
+      "[cycle]",
+      "[cycle]",
+      "[cycle]",
+      "[cycle]"
+     ]
+    },
+    "mods": {},
+    "fsr": [
+     1.6,
+     1.6
+    ],
+    "hOutright": 16,
+    "hx": null,
+    "ground": false,
+    "yards": "[cycle]",
+    "yardsKnown": true,
+    "userSet": false
+   },
+   "city": "edm",
+   "lotArea": 4563,
+   "ring": "[ring 10]",
+   "notes": [],
+   "warn": [],
+   "F": {
+    "cx": -1504.25,
+    "cy": 3213,
+    "ux": -0.749252,
+    "uy": -0.662285,
+    "L": 74.951947,
+    "W": 60.913509
+   },
+   "H": 16,
+   "hmode": "outright",
+   "nF": [
+    2,
+    2
+   ],
+   "inset": "[ring 8]",
+   "yardNote": "",
+   "loadingNeed": {
+    "n": 1,
+    "len": 9,
+    "wid": 3.3,
+    "ht": 4,
+    "aisle": 6.1,
+    "cls": "loading space",
+    "basis": "1 loading space for 7,301 m² of floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site, with no backing onto streets or alleys (s. 5.80 subs. 7). Aisle: Vancouver's 6.1 m used as an assumption.",
+    "src": "edmZB580"
+   },
+   "loading": "[ring 8]",
+   "loadV": [
+    -30.456755,
+    27.411079
+   ],
+   "loadDepth": 15.1,
+   "loadSpaces": [
+    "[ring 8]"
+   ],
+   "plantYardStart": 22.375974,
+   "dir": -1,
+   "v": [
+    -30.456755,
+    30.456755
+   ],
+   "uFront": -31.475974,
+   "footMode": "max",
+   "uBuild": [
+    22.375974,
+    -31.475974
+   ],
+   "mwSized": 10.2,
+   "plant": {
+    "s": {
+     "Q": 15.81,
+     "k": {
+      "name": "air-cooled chillers",
+      "L": 17.07,
+      "W": 3.05,
+      "H": 2.69,
+      "mw": 2.29,
+      "wall": [
+       0.9,
+       2.1
+      ],
+      "gap": [
+       1.8,
+       4.3
+      ]
+     },
+     "need": 7,
+     "n": 8,
+     "g": {
+      "name": "standby generators",
+      "L": 13.9,
+      "W": 2.7,
+      "H": 5,
+      "mw": 2,
+      "wall": [
+       1.5,
+       1.5
+      ],
+      "gap": [
+       2,
+       2
+      ]
+     },
+     "gNeed": 8,
+     "gN": 9,
+     "src": "Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer; free-cooling coils on the chillers take no extra footprint (Trane white paper DC-WPR006A, manufacturer claim). Units: 12.1 × 2.2 m, 2.7 m high, about 1.06–1.41 MW, or 17.1 × 3.0 m at about 2.29–2.99 MW (Trane TCA, manufacturer claim, \"all values are estimated\"); the tool sizes for …"
+    },
+    "boxes": [
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 2.69,
+      "base": 16,
+      "kind": "roof",
+      "name": "air-cooled chillers"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 2.69,
+      "base": 16,
+      "kind": "roof",
+      "name": "air-cooled chillers"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 2.69,
+      "base": 16,
+      "kind": "roof",
+      "name": "air-cooled chillers"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 2.69,
+      "base": 16,
+      "kind": "roof",
+      "name": "air-cooled chillers"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 2.69,
+      "base": 16,
+      "kind": "roof",
+      "name": "air-cooled chillers"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 2.69,
+      "base": 16,
+      "kind": "roof",
+      "name": "air-cooled chillers"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 2.69,
+      "base": 16,
+      "kind": "roof",
+      "name": "air-cooled chillers"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 2.69,
+      "base": 16,
+      "kind": "roof",
+      "name": "air-cooled chillers"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 5,
+      "base": 0,
+      "kind": "yard",
+      "name": "standby generators"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 5,
+      "base": 0,
+      "kind": "yard",
+      "name": "standby generators"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 5,
+      "base": 0,
+      "kind": "yard",
+      "name": "standby generators"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 5,
+      "base": 0,
+      "kind": "yard",
+      "name": "standby generators"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 5,
+      "base": 0,
+      "kind": "yard",
+      "name": "standby generators"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 5,
+      "base": 0,
+      "kind": "yard",
+      "name": "standby generators"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 5,
+      "base": 0,
+      "kind": "yard",
+      "name": "standby generators"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 5,
+      "base": 0,
+      "kind": "yard",
+      "name": "standby generators"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 5,
+      "base": 0,
+      "kind": "yard",
+      "name": "standby generators"
+     }
+    ],
+    "lines": [
+     "Sized for <b>10 MW</b> of servers: heat to reject ≈ 10 × PUE 1.55 = <b>15.8 MW</b> at peak.",
+     "7 air-cooled chillers carry it; with spares, <b>8</b>. Placed: 8 on the roof, 0 in the yard.",
+     "Each unit about 17.07 × 3.05 m, 2.69 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
+     "<span class=\"src\">Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer; free-cooling coils on the chillers take no extra footprint (Trane white paper DC-WPR006A, manufacturer claim). Units: 12.1 × 2.2 m, 2.7 m high, about 1.06–1.41 MW, or 17.1 × 3.0 m at about 2.29–2.99 MW (Trane TCA, manufacturer claim, \"all values are estimated\"); t…"
+    ],
+    "genLines": [
+     "8 generator sets of about 2 MW carry 15.8 MW; with spares, <b>9</b>. Placed: 0 on the roof, 9 in the yard.",
+     "Each about 13.9 × 2.7 m, 5 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).",
+     "<span class=\"src\">Standby generator sets in enclosures: about 2 MW — 13.9 × 2.7 m, up to 5.0 m high; 0.6–1 MW — up to 8.6 × 2.5 m, 3.7 m high (manufacturer data sheets, claims). 1 m clear around each set (Cummins application manual); 1.5 m from wall openings and combustible walls (NFPA 37 s. 4.1.4, a US standard; Vancouver points to CSA C282, not read).</span>"
+    ],
+    "short": "",
+    "coolYard": 0,
+    "coolRoof": 8,
+    "genYard": 9,
+    "genRoof": 0,
+    "yard": "[ring 8]",
+    "yardU": [
+     7.275974,
+     22.375974
+    ],
+    "indoor": 0,
+    "miss": [],
+    "placed": {
+     "cr": 8,
+     "cy": 0,
+     "gr": 0,
+     "gy": 9
+    }
+   },
+   "plantYardDepth": 15.1,
+   "foot": "[ring 8]",
+   "footRect": "[ring 8]",
+   "simpleMass": true,
+   "serverFoot": "[ring 8]",
+   "footArea": 2355.566217
+  },
+  "envAssumed": false,
+  "envH": 16,
+  "envU": {
+   "fsr": [
+    1.6,
+    1.6
+   ],
+   "h": 16,
+   "yards": "[cycle]",
+   "ground": false
+  },
+  "hallS": [
+   2261.343568,
+   3392.015352
+  ],
+  "hallL": null,
+  "floors": 2,
+  "floorsR": [
+   2,
+   2
+  ],
+  "fpNote": "from the site setup: the most the zone allows, less setbacks, loading and the plant yard",
+  "fp": 2355.566217,
+  "fpCalc": null,
+  "indoorPlant": 0,
+  "g": [
+   7300.8,
+   7300.8
+  ],
+  "G": [
+   4711.132434,
+   4711.132434
+  ],
+  "fullCover": "",
+  "heightCut": true,
+  "yardCut": true,
+  "gross": [
+   4711.132434,
+   4711.132434
+  ],
+  "how": "lot 4,563 m² × floor-space ratio 1.6",
+  "hallGross": [
+   4711.132434,
+   4711.132434
+  ],
+  "density": "typical",
+  "mwS": [
+   3.589434,
+   11.696605
+  ],
+  "mwL": null,
+  "hall": [
+   2261.343568,
+   3392.015352
+  ],
+  "mw": [
+   3.589434,
+   10.292735
+  ],
+  "m2MW": [
+   290,
+   630
+  ],
+  "mwCheck": [
+   4.248091,
+   9.328975
+  ],
+  "mwCapped": true,
+  "plantFor": 10.292735
+ },
+ "model": "[cycle]",
+ "errors": []
+}
