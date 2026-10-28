@@ -1,0 +1,142 @@
+[
+ {
+  "id": "abpCruiserath",
+  "reachable": false,
+  "publisher": "An Bord Pleanála (claimed; not verified)",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://www.pleanala.ie/anbordpleanala/media/abp/cases/orders/248/d248544.pdf",
+  "values": [],
+  "unsupported_wording": "unverified (source unreachable)",
+  "note": "WebFetch refused the link (provenance block). The search budget for this turn was used up, so no alternative official copy could be found. Unreachable. No blanks filled."
+ },
+ {
+  "id": "aesoAMS2025wind",
+  "reachable": true,
+  "publisher": "AESO (Alberta Electric System Operator)",
+  "title": "AESO 2025 Annual Market Statistics",
+  "edition": "2025",
+  "date": "March 2026",
+  "url": "https://www.aeso.ca/assets/Annual-Market-Stats-2025.pdf",
+  "values": [
+   {"blank_context": "Annual Market Statistics ___", "value": "2025", "quote": "AESO 2025 Annual Market Statistics", "where": "cover/title"},
+   {"blank_context": "p. ___ (discount text)", "value": "22", "quote": "Wind (-46.9 per cent) and solar (-17.4 per cent) were the only asset types to achieve a discount to average pool price.", "where": "p. 22, Figure 17 text"},
+   {"blank_context": "Table ___ p. ___", "value": "Table 7, p. 27", "quote": "TABLE 7: 2025 Regional Wind Statistics ... Achieved price ($/MWh) $24.39 $22.70 $23.18", "where": "p. 27, Table 7 (Central, South, Total)"},
+   {"blank_context": "wind earned $___/MWh", "value": "23.18", "quote": "Achieved price ($/MWh) ... $23.18", "where": "p. 27, Table 7, Total column"},
+   {"blank_context": "in ___", "value": "2025", "quote": "TABLE 7: 2025 Regional Wind Statistics", "where": "p. 27"},
+   {"blank_context": "wind ___% below", "value": "46.9", "quote": "Wind (-46.9 per cent)", "where": "p. 22"},
+   {"blank_context": "average pool price ($___)", "value": "43.68", "quote": "The 2025 daily average pool price ($43.68) fell by 30.4 per cent compared to 2024 ($62.78).", "where": "p. 1, near Table 1 'Annual Market Price Statistics'"},
+   {"blank_context": "solar ___% below", "value": "17.4", "quote": "solar (-17.4 per cent)", "where": "p. 22"}
+  ],
+  "unsupported_wording": "none. Minor point: the source says 'achieve a discount to average pool price' and gives an 'Achieved price', not 'earned'. No solar $/MWh is stated.",
+  "note": "Page numbers are as reported by the fetch tool from the PDF's page labels and contents. They were not checked visually. The claim's first 'p. ___' is ambiguous: the discount sentence is on p. 22 and the pool price on p. 1."
+ },
+ {
+  "id": "aesoList",
+  "reachable": true,
+  "publisher": "AESO",
+  "title": "AESO Connection Project List Guide",
+  "edition": "V1.5",
+  "date": "2025-02-25",
+  "url": "https://www.aeso.ca/assets/AESO-Connection-Project-List-Guide-v2.pdf",
+  "values": [
+   {"blank_context": "October ___", "value": "not stated", "quote": "", "where": "The guide has no October list date. Its only date is the version date 2025-02-25."},
+   {"blank_context": "updated ___-___-___", "value": "not stated", "quote": "", "where": "Not in the guide. This needs the October Excel file itself."},
+   {"blank_context": "___ projects", "value": "not stated", "quote": "", "where": "The guide gives no project count."},
+   {"blank_context": "EN1–___", "value": "3", "quote": "Energizations are categorized chronologically as EN1, EN2 and EN3.", "where": "Energization fields section"},
+   {"blank_context": "aeso_project_list_oct2____extract.json", "value": "not stated", "quote": "", "where": "This is an internal file name and cannot be checked against the source."}
+  ],
+  "unsupported_wording": "The guide supports the field names Status, Planning Area, MW Type, Stage, STS MW, DTS MW and ISD. It does not support the October Excel date, the update date, the project count, the 'J.B. download' note or the extract file name. Those need the Excel list itself, which this link is not.",
+  "note": "The linked file is the field guide, not the October project list. The guide also lists Cluster, Project Type, CA Modelled, Inclusion and Applied On. Status categories: Cluster, Active, ISD Under Review, On Hold, Recently Energized, Recently Cancelled."
+ },
+ {
+  "id": "aesoTariff5",
+  "reachable": true,
+  "publisher": "AESO",
+  "title": "ISO Tariff, Section 5",
+  "edition": "Section 5",
+  "date": "Effective 2025-01-01",
+  "url": "https://www.aeso.ca/assets/documents/Section-5-effective-2025-01-01.pdf",
+  "values": [
+   {"blank_context": "s. ___ and ___", "value": "5.5 and 5.7 (5.6 also referenced)", "quote": "Section 5.5 Shared Facilities ... 5.7(5)", "where": "s. 5.5, s. 5.7(5)"},
+   {"blank_context": "effective ___ Jan ___", "value": "1 Jan 2025", "quote": "Effective: 2025-01-01 Section 5 Public", "where": "page header"},
+   {"blank_context": "within ___ years", "value": "20", "quote": "within 20 years after commercial operation of the original connection project", "where": "s. 5.5(1)"},
+   {"blank_context": "no refund under $___", "value": "10 000", "quote": "a legal owner of a transmission facility is not required to refund an adjustment amount less than $10 000.", "where": "s. 5.7(5)"}
+  ],
+  "unsupported_wording": "Mostly supported, with three wording points. (1) The source says 'within 20 years after commercial operation of the original connection project', not 'of the original connection'. (2) 'New participants pay a share' is softer in the source: the ISO 'may assess construction contributions to the additional market participants' (s. 5.5(6)(b)), which is discretionary. (3) The $10 000 floor applies to adjustment amounts in general (payments and refunds) and binds the legal owner of a transmission facility, not only ISO refunds to the original customer.",
+  "note": "'May' refund is supported: s. 5.5(5)(b) says the ISO 'may refund under subsection 5.6 below, where applicable, in part or in full' a contribution 'previously paid by that market participant'. The source says 'market participant', not 'customer'."
+ },
+ {
+  "id": "armaElectronics",
+  "reachable": false,
+  "publisher": "Alberta Recycling Management Authority (claimed; not verified)",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://www.albertarecycling.ca/registry/stewardship/#processors",
+  "values": [],
+  "unsupported_wording": "unverified (source unreachable). The quote 'Blade (rack mount), desktop and floor standing servers' and the processor names and locations were not checked.",
+  "note": "WebFetch refused the link (provenance block). The search budget was used up. Unreachable."
+ },
+ {
+  "id": "ashraeLife",
+  "reachable": false,
+  "publisher": "ASHRAE (claimed; not verified)",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://handbook.ashrae.org/Handbooks/A15/IP/A15_CH37/a15_ch37_ip.aspx",
+  "values": [],
+  "unsupported_wording": "unverified (source unreachable)",
+  "note": "WebFetch refused the link (provenance block). The ASHRAE online handbook is also normally behind a subscriber login. Unreachable. No service-life values filled."
+ },
+ {
+  "id": "auc_27938",
+  "reachable": false,
+  "publisher": "Alberta Utilities Commission (claimed; not verified)",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://efiling-webapi.auc.ab.ca/Document/Get/784765",
+  "values": [],
+  "unsupported_wording": "unverified (source unreachable)",
+  "note": "WebFetch refused the link (provenance block). The search budget was used up. Unreachable. The decision number and date were not checked."
+ },
+ {
+  "id": "bcAirBackground",
+  "reachable": false,
+  "publisher": "BC Ministry of Environment, Environmental Reporting BC (claimed; not verified)",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://www.env.gov.bc.ca/soe/indicators/air/print_ver/envreportbc_no2_April2026.pdf",
+  "values": [],
+  "unsupported_wording": "unverified (source unreachable)",
+  "note": "WebFetch refused the NO2 link (provenance block). The PM2.5 link was not tried, because the same provenance block applies to links from the task file. Unreachable. The µg/m³ figure would likely be a conversion and needs checking once the source is reachable."
+ },
+ {
+  "id": "bcNO2Guidance",
+  "reachable": false,
+  "publisher": "BC Ministry of Environment (claimed; not verified)",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/modelling_guidance_nitrogen_dioxide.pdf",
+  "values": [],
+  "unsupported_wording": "unverified (source unreachable)",
+  "note": "WebFetch refused the link (provenance block). The search budget was used up. Unreachable."
+ },
+ {
+  "id": "bc_mwr",
+  "reachable": false,
+  "publisher": "Province of British Columbia (claimed; not verified)",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://free.bcpublications.ca/civix/document/id/complete/statreg/87_2012",
+  "values": [],
+  "unsupported_wording": "unverified (source unreachable)",
+  "note": "WebFetch refused the link (provenance block). The search budget was used up. Unreachable. The regulation number, section and table were not checked."
+ }
+]

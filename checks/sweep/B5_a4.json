@@ -1,0 +1,168 @@
+[
+ {
+  "id": "altaReg117",
+  "reachable": false,
+  "publisher": "not verified (claim: CanLII; Alberta King's Printer)",
+  "title": "Data Centre Regulation (title only seen in a search-result listing: open.alberta.ca 'Data Centre Regulation - Open Government program')",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://canlii.ca/t/56vg9 (blocked: fetch tool provenance refusal); https://open.alberta.ca/publications/2026_117 (server error twice)",
+  "values": [
+   {"blank_context": "Alta Reg ___/___", "value": "unreachable", "quote": "", "where": "The open.alberta.ca slug '2026_117' hints at 117/2026, but the page did not load, so this is not verified"},
+   {"blank_context": "current as posted ___-___-___", "value": "unreachable", "quote": "", "where": ""},
+   {"blank_context": "retrieved ___-___-___", "value": "not checkable (user's own retrieval date)", "quote": "", "where": ""},
+   {"blank_context": "local file name Alta_Reg_________", "value": "not checkable (local file)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "not checkable: 'Electric Utilities Act' as the enabling Act and the CanLII currency date could not be verified",
+  "note": "Could not read the CanLII page or the Alberta Open Government page. Law-firm summaries turned up in search but are not primary sources and were not used."
+ },
+ {
+  "id": "bcResCare",
+  "reachable": true,
+  "publisher": "Government of British Columbia",
+  "title": "Residential Care Facilities",
+  "edition": "n/a",
+  "date": "Date Published 2019-10-15; Record Released 2020-06-05; Record Modified 2026-01-28 (Open Government Portal mirror of the BC catalogue record)",
+  "url": "https://open.canada.ca/data/en/dataset/f4d45e1d-1fb3-4a5b-ae12-7e6afe89e645 (the catalogue.data.gov.bc.ca link was blocked by the fetch tool's provenance rule)",
+  "values": [],
+  "unsupported_wording": "'licensed community care facilities' is not printed. The description says 'New licensed residential care facilities are added as they become operational' and lists 'community living' as one care type. 'Maximum capacity' and 'Open Government Licence - British Columbia' are supported.",
+  "note": "Read from the federal portal's copy of the BC record, not the BC catalogue page itself. The record's Status is 'Obsolete'. Update frequency conflicts: the description says 'updated biweekly' but the metadata says 'As Needed'."
+ },
+ {
+  "id": "bch_drb",
+  "reachable": true,
+  "publisher": "BC Hydro (no publisher line on the cover; the text names BC Hydro as the program operator)",
+  "title": "Demand Response for Business - Customer Manual",
+  "edition": "not stated",
+  "date": "Last updated: 2026-08-05",
+  "url": "https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/power-smart/business/programs/demand-response-for-business-customer-manual.pdf",
+  "values": [],
+  "unsupported_wording": "none",
+  "note": "Search also lists a separate 'drb-customer-manual-effective-nov-2025.pdf'. Confirm which version the tool relies on. Program terms are BC Hydro's (operator) terms."
+ },
+ {
+  "id": "ecccNormals2020",
+  "reachable": false,
+  "publisher": "Environment and Climate Change Canada",
+  "title": "Canadian Climate Normals (index page reached); station data not reached",
+  "edition": "Periods offered include 1991-2020 and 1981-2010",
+  "date": "index page Date modified 2026-08-10",
+  "url": "https://climate.weather.gc.ca/climate_normals/index_e.html; https://climate.weather.gc.ca/climate_normals/results_1991_2020_e.html?...stnID=360000000 and ...stnID=281000000 (both rendered with no station table)",
+  "values": [
+   {"blank_context": "Normals ___-___", "value": "1991-2020 is offered (one of several periods); not confirmed which period the CSV used", "quote": "1991-2020", "where": "Climate Normals index page"},
+   {"blank_context": "J.B. download ___ Oct ___", "value": "not checkable (user's own download date)", "quote": "", "where": ""},
+   {"blank_context": "snowfall ___ / ___ cm a year", "value": "unreachable", "quote": "", "where": ""},
+   {"blank_context": "days with snowfall >= ___ cm ___ / ___", "value": "unreachable", "quote": "", "where": ""},
+   {"blank_context": "days with snow depth >= ___ cm ___ / ___ >= ___ cm ___ / ___", "value": "unreachable", "quote": "", "where": ""},
+   {"blank_context": "average vapour pressure July ___ / ___ kPa", "value": "unreachable", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "not checkable: the station names (Vancouver International (Airport), Edmonton (Airport)) and the values",
+  "note": "The station normals pages seem to load their tables with scripts, and the fetch tool returned only search forms. The bulk CSV link was not reached. Needs a manual check against the downloaded CSV."
+ },
+ {
+  "id": "edmProcTimes",
+  "reachable": false,
+  "publisher": "City of Edmonton",
+  "title": "Search result titled 'Development and Construction Application Processing Times'; the fetched page rendered as H1 'New Home Construction Permits'",
+  "edition": "n/a",
+  "date": "not stated",
+  "url": "https://www.edmonton.ca/business_economy/processing-times",
+  "values": [
+   {"blank_context": "actuals April-June ___", "value": "not stated in fetched content", "quote": "", "where": "fetched page has no quarter, months, year or 'actual' text"},
+   {"blank_context": "web page saved ___ Oct ___", "value": "not checkable (user's own save date)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "not checkable: 'actuals April-June'. The fetched text showed no processing-time figures or period, probably because the content is in tabs or loaded by scripts.",
+  "note": "The page loaded, but the processing-times content did not come through. Check it against the user's saved copy."
+ },
+ {
+  "id": "epaRain2013",
+  "reachable": true,
+  "publisher": "US Environmental Protection Agency",
+  "title": "Rainwater Harvesting: Conservation, Credit, Codes, and Cost: Literature Review and Case Studies",
+  "edition": "EPA-841-R-13-002",
+  "date": "January 2013",
+  "url": "https://www.epa.gov/sites/production/files/2015-11/documents/rainharvesting.pdf",
+  "values": [
+   {"blank_context": "EPA ___-R-___-___", "value": "841 / 13 / 002", "quote": "EPA-841-R-13-002", "where": "front matter"},
+   {"blank_context": "(___) year", "value": "2013", "quote": "January 2013", "where": "front matter"},
+   {"blank_context": "cistern US$___-___ per gallon", "value": "1.50-3.00", "quote": "costs are typically between $1.50 and $3.00 per gallon of storage", "where": "p. 24, s. 2.4.1"},
+   {"blank_context": "pumps, controls, treatment US$___-___ per gallon", "value": "2-5", "quote": "often representing an additional $2 - $5 per gallon of harvesting system capacity", "where": "p. 24, s. 2.4.1"},
+   {"blank_context": "(p. ___)", "value": "24", "quote": "", "where": "s. 2.4.1"}
+  ],
+  "unsupported_wording": "minor: the source says 'pumps, controls, filtration, and treatment' and gives the cost per gallon of 'harvesting system capacity', not per gallon of storage",
+  "note": "Page numbers come from the fetch tool's reading of the PDF and are not visually confirmed. The figures are a literature-review summary."
+ },
+ {
+  "id": "femp_ct",
+  "reachable": true,
+  "publisher": "US Department of Energy, Federal Energy Management Program (Energy.gov)",
+  "title": "Best Management Practice #10: Cooling Tower Management",
+  "edition": "n/a",
+  "date": "published 2013-10-08; modified 2026-05-26",
+  "url": "https://www.energy.gov/node/849241; https://www.epa.gov/system/files/documents/2023-05/ws-commercial-watersense-at-work_Section_6.3_Cooling_Towers.pdf",
+  "values": [
+   {"blank_context": "Best Management Practice #___", "value": "10", "quote": "Best Management Practice #10: Cooling Tower Management", "where": "page heading"},
+   {"blank_context": "(___ modified ___)", "value": "2013 published; modified 2026-05-26 (the format of the blanks is unclear)", "quote": "2013-10-08 ... 2026-05-26", "where": "page metadata"},
+   {"blank_context": "EPA WaterSense at Work §___", "value": "6.3", "quote": "6.3 Cooling Towers", "where": "EPA WaterSense at Work section PDF header (October 2012); the FEMP page itself gives no section number"}
+  ],
+  "unsupported_wording": "none",
+  "note": "The FEMP page links to the 'EPA WaterSense at Work Best Management Practice: Cooling Towers'. The section number comes from the EPA PDF."
+ },
+ {
+  "id": "jibcGroupLodging",
+  "reachable": true,
+  "publisher": "Emergency Management Division, Justice Institute of British Columbia, for the Province of BC (Emergency Support Services)",
+  "title": "Introduction to Group Lodging - Participant Guide",
+  "edition": "Fourth Edition 2013, revised 2015",
+  "date": "August 2015",
+  "url": "https://www.jibc.ca/sites/default/files/2020-05/EMD-EMRG-1612-Intro-to-GL-Participant-Guide-20150826.pdf",
+  "values": [
+   {"blank_context": "___ m² per person", "value": "3.5", "quote": "The minimum sleeping area per person is 3.5 square metres", "where": "p. 35"},
+   {"blank_context": "___ m between beds", "value": "0.75", "quote": "a distance of 0.75 metres (2.5 feet) between beds, bunks or sleeping bags should be maintained.", "where": "p. 35"},
+   {"blank_context": "(p. ___) spacing", "value": "35", "quote": "", "where": ""},
+   {"blank_context": "(p. ___) power quote", "value": "44", "quote": "Facilities will only be opened up if they are suitable and have power.", "where": "p. 44"}
+  ],
+  "unsupported_wording": "none (the source says 'minimum sleeping area' per person; the claim should keep 'minimum' and 'sleeping area')",
+  "note": "Page numbers come from the fetch tool's reading of the PDF and are not visually confirmed. The guide dates from 2015 and may be superseded."
+ },
+ {
+  "id": "neuReport",
+  "reachable": true,
+  "publisher": "City of Vancouver (Council report)",
+  "title": "2026 False Creek Neighbourhood Energy Utility Customer Rates",
+  "edition": "RTS No. 18251",
+  "date": "Report date October 21, 2025 (Council 2025-11-12)",
+  "url": "https://council.vancouver.ca/20251112/documents/spec1d.pdf",
+  "values": [
+   {"blank_context": "RTS ___", "value": "18251", "quote": "RTS No. 18251", "where": "p. 1"},
+   {"blank_context": "(Oct ___)", "value": "2025 (October 21, 2025)", "quote": "October 21, 2025", "where": "p. 1"},
+   {"blank_context": "___ buildings", "value": "47", "quote": "currently services 47 residential, commercial, and institutional buildings", "where": "p. 2"},
+   {"blank_context": "___ m²", "value": "667,000", "quote": "667,000 square metres (7,180,000 square feet) of floor area", "where": "p. 2"},
+   {"blank_context": "___% renewable", "value": "70 (target)", "quote": "The NEU currently targets delivering 70% of its energy from renewable sources.", "where": "p. 2 (also p. 1)"},
+   {"blank_context": "gas $___/GJ", "value": "2.23 (commodity-only, FortisBC approved commodity charge as of Sept 2025); full-cost RNG modelled at 22.33", "quote": "$2.23/GJ", "where": "Appendix F, p. 10, Table 3"}
+  ],
+  "unsupported_wording": "'___% renewable' must read as a target ('targets 70%'), not achieved performance. The RNG rider is printed in $/MWh (Enhanced Green Heat $5.78/MWh; 100% Renewable $9.73/MWh, p. 5 Table 3).",
+  "note": "Only the first 100,000 of 111,360 characters were read. The gas price and RNG figures are consultant (Reshape) modelling in Appendix F."
+ },
+ {
+  "id": "nrcanPVmunic",
+  "reachable": true,
+  "publisher": "Natural Resources Canada",
+  "title": "Photovoltaic potential and solar resource maps of Canada",
+  "edition": "n/a",
+  "date": "web page modified 2025-01-16; open.canada record modified 2024-02-15",
+  "url": "https://natural-resources.canada.ca/energy-sources/renewable-energy/photovoltaic-potential-solar-resource-maps-canada; https://open.canada.ca/data/en/dataset/8b434ac7-aedb-4698-90df-ba77424a551f (the municipal CSV itself refused the fetch through robots.txt)",
+  "values": [
+   {"blank_context": "J.B. download ___ Oct ___", "value": "not checkable (user's own download date)", "quote": "", "where": ""},
+   {"blank_context": "CERES ___-___ insolation", "value": "1974-1993", "quote": "1974-1993", "where": "NRCan web page; open.canada temporal coverage 1974-01-01 to 1993-01-01"},
+   {"blank_context": "___ stations", "value": "144 (plus 8 in Alaska)", "quote": "144 meteorological stations across Canada", "where": "NRCan web page"},
+   {"blank_context": "performance ratio ___", "value": "0.75", "quote": "a performance ratio of 0.75", "where": "NRCan web page"},
+   {"blank_context": "within about ___%", "value": "10", "quote": "Lifetime average annual PV potential values for most systems should be within about 10% of the values presented here.", "where": "NRCan web page"},
+   {"blank_context": "Vancouver horizontal / latitude tilt / vertical kWh/kWp", "value": "unreachable", "quote": "", "where": "municip_potentiel-potential.csv (robots disallowed)"},
+   {"blank_context": "Edmonton horizontal / latitude tilt / vertical kWh/kWp", "value": "unreachable", "quote": "", "where": "same"},
+   {"blank_context": "Spruce Grove horizontal / latitude kWh/kWp", "value": "unreachable", "quote": "", "where": "same"}
+  ],
+  "unsupported_wording": "none for the metadata (Canadian Forest Service with CanmetENERGY confirmed; ECCC supplied the insolation data). Whether the 'CERES' label appears was not confirmed verbatim; the fetch summary gave only the years. Spruce Grove as a proxy for Parkland County / Acheson is the user's assumption, not the source's.",
+  "note": "The municipal kWh/kWp values could not be checked. The CSV host blocks automated fetching, so check them against the user's downloaded CSV."
+ }
+]

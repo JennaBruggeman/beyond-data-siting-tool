@@ -1,0 +1,164 @@
+[
+ {
+  "id": "catTM9338",
+  "reachable": false,
+  "publisher": "Caterpillar (copy hosted by PowerGen Enterprises, a used-equipment dealer)",
+  "title": "not checked",
+  "edition": "not checked",
+  "date": "not checked",
+  "url": "https://powergenenterprises.com/wp-content/uploads/2019/10/GS2888-Caterpillar-3516-GeneratorSet-Performance_Sheet.pdf",
+  "values": [],
+  "unsupported_wording": "not checked (unreachable)",
+  "note": "Fetch blocked by the tool (URL not permitted). A search found no Caterpillar-hosted copy; other hits were dealer or Scribd copies, which were not used. Model, TM number and spectrum distance were not verified. Any figures on a dealer copy are manufacturer claims."
+ },
+ {
+  "id": "skatOverskud",
+  "reachable": true,
+  "publisher": "Skattestyrelsen (info.skat.dk)",
+  "title": "Den juridiske vejledning, E.A.4.6.10.6 Afsætning af overskudsvarme som er omfattet af energieffektiviseringsordningen",
+  "edition": "Den juridiske vejledning 2026-2",
+  "date": "page metadata 31 Jul 2026",
+  "url": "https://info.skat.dk/data.aspx?oid=2062260",
+  "values": [
+   {"blank_context": "E.A.___–___ (section range)", "value": "E.A.4.6.10.6 seen; range end not determined", "quote": "E.A.4.6.10.6 Afsætning af overskudsvarme som er omfattet af energieffektiviseringsordningen", "where": "section heading, info.skat.dk oid=2062260"},
+   {"blank_context": "heat at heat-pump outlet with ___ × electricity deducted", "value": "not stated", "quote": "", "where": "no 'varmepumpe' text in the first 100,000 characters read; the final ~3,400 characters hold only an SKM reference"}
+  ],
+  "unsupported_wording": "Here 'skal måles hver for sig' refers to taxed and tax-exempt surplus heat ('Overskudsvarme, som er pålagt overskudsvarmeafgift, og overskudsvarme, som er afgiftsfritaget, skal måles hver for sig'), not to electricity used in heat pumps. The claims about metering at the heat-pump outlet and the ___ × electricity deduction were not found in this section. Metering responsibility is supported: 'producenten af overskudsvarme skal foretage måling af overskudsvarme'.",
+  "note": "Only E.A.4.6.10.6 was read on the primary site. The heat-pump rule may sit in another E.A.4.6.10.x subsection that was not read within the fetch budget. tax.dk is a private mirror and was not used. Also printed: 'Overskudsvarmeafgiften for varme fra elektricitet er ophævet ... 1. januar 2021' (in a ruling summary)."
+ },
+ {
+  "id": "van_zdb_i3",
+  "reachable": false,
+  "publisher": "City of Vancouver",
+  "title": "Zoning and Development By-law, I-3 District Schedule (not opened)",
+  "edition": "not checked",
+  "date": "not checked",
+  "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-3.pdf",
+  "values": [
+   {"blank_context": "I-___", "value": "3 (from the link and the City's consultation draft only)", "quote": "Link to current I-3 district schedule", "where": "syc.vancouver.ca I-3 consultation draft (April 2022), not the in-force schedule"},
+   {"blank_context": "June ___", "value": "not checked", "quote": "", "where": ""},
+   {"blank_context": "ss. ___ ___–___", "value": "not checked", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "not checked (unreachable)",
+  "note": "Fetch of the in-force PDF was blocked by the tool. The City's April 2022 consultation draft (https://syc.vancouver.ca/projects/regulation-redesign/i/zoning-by-law-district-schedule-i-3-draft.pdf) uses sections 1.1–4.6, but it is a draft and was not used to verify the claim."
+ },
+ {
+  "id": "rts19744",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Council report RTS No. 19744 (111 East 5th Avenue and 2060 Quebec Street)",
+  "edition": "n/a",
+  "date": "Report Date: June 30, 2026 (council 14 Jul 2026)",
+  "url": "https://council.vancouver.ca/20260714/documents/rr1.pdf",
+  "values": [
+   {"blank_context": "RTS ___", "value": "19744", "quote": "RTS No.: 19744", "where": "p. 1"},
+   {"blank_context": "(___ Jun ___)", "value": "30 Jun 2026", "quote": "Report Date: June 30, 2026", "where": "p. 1"},
+   {"blank_context": "___ E ___th", "value": "111 E 5th", "quote": "111 East 5th Avenue and 2060 Quebec Street", "where": "p. 1"},
+   {"blank_context": "'up to ___ MW'", "value": "40", "quote": "a data centre with an anticipated load of up to 40 MW", "where": "p. 16, note to condition 1.11"},
+   {"blank_context": "cond. ___", "value": "1.11", "quote": "Successful waste heat recovery and delivery to the NEU is a material condition of the proposed use.", "where": "p. 14; 'sole cost' at 1.11(e), p. 15: 'are to be provided at the applicant's sole cost'"},
+   {"blank_context": "___ submissions", "value": "approx. 579 in total (289 via the online comment form)", "quote": "approximately 579 submissions were received", "where": "p. 6; '289 submissions' p. 24"}
+  ],
+  "unsupported_wording": "none. Note: the report says 'approximately' 579, and the site also includes 2060 Quebec Street. Heat recovery is to the NEU (delivery to the NEU is the material condition).",
+  "note": "40 MW is the applicant's anticipated load as reported by the City."
+ },
+ {
+  "id": "cwec",
+  "reachable": false,
+  "publisher": "Environment and Climate Change Canada (Engineering Climate Datasets)",
+  "title": "Canadian Weather Year for Energy Calculation (CWEC)",
+  "edition": "not confirmed",
+  "date": "not confirmed",
+  "url": "https://climate.weather.gc.ca/prods_servs/engineering_e.html",
+  "values": [
+   {"blank_context": "CWEC ___ edition", "value": "not stated on ECCC page", "quote": "564 datasets created by joining twelve Typical Meteorological Months", "where": "ECCC Engineering Climate Datasets page"},
+   {"blank_context": "CWEC_FMCCE_v____ folder", "value": "not checked", "quote": "FTP download -> https://collaboration.cmc.ec.gc.ca/cmc/climate/Engineer_Climate/CWEC_FMCCE/", "where": "ECCC page; folder listing blocked"},
+   {"blank_context": "file names ..._____CWEC.epw", "value": "not checked", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "not checked: the edition, version folder and file names could not be confirmed",
+  "note": "The ECCC page confirms the collaboration.cmc.ec.gc.ca .../CWEC_FMCCE/ path but not a version or edition, and the folder listing was blocked. NRCan's open.canada.ca record points to a CWEC_2023 folder on ftp.maps.canada.ca (temporal coverage 1998–2020); this is a different host from the one cited. Local files in data/ were not examined."
+ },
+ {
+  "id": "aesoStats2025",
+  "reachable": true,
+  "publisher": "AESO",
+  "title": "AESO 2025 Annual Market Statistics",
+  "edition": "2025",
+  "date": "March 2026",
+  "url": "https://www.aeso.ca/assets/Annual-Market-Stats-2025.pdf",
+  "values": [
+   {"blank_context": "Annual Market Statistics ___", "value": "2025", "quote": "AESO 2025 Annual Market Statistics", "where": "title"},
+   {"blank_context": "Table ___ (p. ___)", "value": "Table 13, p. 55", "quote": "Table 13: Annual Operating Reserve Statistics", "where": "p. 55"},
+   {"blank_context": "active procured ___ ___ GWh / $___ M", "value": "2024: 5,834 GWh / $255 M", "quote": "Active procured 5,624 5,719 5,360 5,834 5,928 ... Active procured $314 $466 $334 $255 $206", "where": "Table 13, Volume (GWh) and Cost ($-millions), columns 2021–2025"},
+   {"blank_context": "___ ___ / $___ M (active, second year)", "value": "2025: 5,928 / $206 M", "quote": "as above", "where": "Table 13"},
+   {"blank_context": "standby procured ___ / $___ M and ___ / $___ M", "value": "2024: 713 / $10 M; 2025: 709 / $8 M", "quote": "Standby procured 1,191 994 954 713 709 ... Standby procured $4 $2 $4 $10 $8", "where": "Table 13"}
+  ],
+  "unsupported_wording": "Mostly supported. Table 13 is titled 'Annual Operating Reserve Statistics' and gives totals for active procured, standby procured and standby activated. It does not break costs down by product category, so 'by category' is only loosely supported. Pairing the blanks with 2024 and 2025 is inferred from the blank pattern.",
+  "note": "Also printed: Standby activated 87 (2024) / 110 (2025) GWh, $6 M / $4 M; Total $271 M (2024) / $218 M (2025)."
+ },
+ {
+  "id": "ceud",
+  "reachable": true,
+  "publisher": "Natural Resources Canada (Office of Energy Efficiency)",
+  "title": "Comprehensive Energy Use Database – Residential Sector, British Columbia",
+  "edition": "2023 data (per table links and file name)",
+  "date": "not stated",
+  "url": "https://oee.nrcan.gc.ca/corporate/statistics/neud/dpa/menus/trends/comprehensive/trends_res_bc.cfm",
+  "values": [
+   {"blank_context": "___ data", "value": "2023", "quote": "resbc2023e.zip", "where": "BC residential menu page, download link"},
+   {"blank_context": "Residential Table ___", "value": "not determinable (table not named in the claim); e.g. Table 1 'Secondary Energy Use and GHG Emissions by Energy Source', Table 2 '... by End-Use'", "quote": "Table 1: Secondary Energy Use and GHG Emissions by Energy Source", "where": "BC residential menu"},
+   {"blank_context": "Commercial/Institutional Table ___", "value": "not checked", "quote": "", "where": "commercial pages not opened"},
+   {"blank_context": "file names res_bc_e____ etc.", "value": "not printed in that form", "quote": "resbc2023e.zip", "where": "BC residential menu"}
+  ],
+  "unsupported_wording": "The file names res_bc_e____ etc. do not match the zip name printed on the page ('resbc2023e.zip'). Individual Excel names may differ inside the zip; this was not checked. The Alberta pages and the commercial BC & Territories pages were not opened.",
+  "note": "A search result confirms a 'Residential Sector British Columbia and Territories' Table 1 page for year=2023. Local files in data/ were not examined."
+ },
+ {
+  "id": "fan2007",
+  "reachable": true,
+  "publisher": "ACM (ISCA '07); author-hosted copy at barroso.org",
+  "title": "Power Provisioning for a Warehouse-sized Computer",
+  "edition": "n/a",
+  "date": "ISCA'07, June 9–13, 2007, San Diego, California, USA",
+  "url": "https://www.barroso.org/publications/PowerProvisioning.pdf",
+  "values": [
+   {"blank_context": "Fan, Weber, Barroso ___", "value": "2007", "quote": "ISCA’07, June 9–13, 2007, San Diego, California, USA", "where": "p. 1 header/footer"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Authors as printed: Xiaobo Fan, Wolf-Dietrich Weber, Luiz André Barroso."
+ },
+ {
+  "id": "nfpa855tia",
+  "reachable": true,
+  "publisher": "NFPA",
+  "title": "NFPA 855 Standard for the Installation of Stationary Energy Storage Systems, 2023 Edition; TIA 23-1 (Log #1727) and TIA 23-2 (Log #1746)",
+  "edition": "2023",
+  "date": "TIAs issued Aug 25, 2023; effective Sep 14, 2023",
+  "url": "https://docinfofiles.nfpa.org/files/AboutTheCodes/855/TIA_855_23_1.pdf ; https://docinfofiles.nfpa.org/files/AboutTheCodes/855/TIA_855_23_2.pdf",
+  "values": [
+   {"blank_context": "NFPA ___-___", "value": "855-2023", "quote": "NFPA® 855 ... 2023 Edition", "where": "TIA 23-1 header"},
+   {"blank_context": "TIA ___-___ and ___-___", "value": "23-1 and 23-2", "quote": "TIA 23-1 ... TIA 23-2", "where": "TIA headers"},
+   {"blank_context": "ESS units separated by at least ___ ft (___ m)", "value": "3 ft (914 mm)", "quote": "Individual ESS units shall be separated from each other by a minimum of 3 ft (914 mm)", "where": "TIA 23-1, 15.3.1 (prints mm; 0.9 m would be a conversion, not printed)"},
+   {"blank_context": "less with fire testing", "value": "supported", "quote": "smaller separation distances are documented to be adequate based on fire and explosion testing", "where": "TIA 23-1, 15.3.1"},
+   {"blank_context": "rooftop units ___ ft apart", "value": "3 ft (0.9 m)", "quote": "spaced a minimum of 3 ft (0.9m) from other units", "where": "TIA 23-2, new 9.5.3.1.1.3 (applies to individual units of 20 kWh or less)"},
+   {"blank_context": "≥___ ft from roof edge", "value": "5 ft (1.5 m)", "quote": "but not less than 5 ft (1.5 m)", "where": "TIA 23-2, 9.5.3.1.1.2 (distance equal to system height, minimum 5 ft)"},
+   {"blank_context": "Hydro One quotes §___: ___ ft (___ m) to lot lines ..., reducible to ___ ft", "value": "not stated in TIAs", "quote": "", "where": "Hydro One document and NFPA 855 base text not checked"},
+   {"blank_context": "NFC ___, BC Fire Code ___, VBBL ___, BCBC ___, NFC – ___ AE, count of NFPA standards, ___ Oct, UL ___/___A", "value": "not checked against these sources", "quote": "UL 9540A or equivalent test standards", "where": "TIA 23-1, 15.13.1 (UL 9540A only)"}
+  ],
+  "unsupported_wording": "In TIA 23-2, the 3 ft rooftop spacing applies only to individual units of 20 kWh or less; the claim omits this. The roof-edge rule is 'equal to system height, but not less than 5 ft', and TIA 23-2 also sets a 10 ft (3 m) clearance from the rooftop fire-service access point. The TIAs do not print the 15.3.1 reference cleanly (it reads '9.1.515.13', an apparent typo). Not verified here: the Hydro One quote, the code-citation statements (NFC, BCFC, VBBL, BCBC, NFC-AE) and the 'UL ___/___A' pair (only UL 9540A is seen).",
+  "note": "Code-absence statements rely on Claude's own earlier check of local texts and are outside these sources."
+ },
+ {
+  "id": "zurmuhl2018",
+  "reachable": true,
+  "publisher": "Stanford University (Stanford Geothermal Program)",
+  "title": "Hybrid Geothermal Heat Pumps for Cooling Telecommunications Data Centers",
+  "edition": "43rd Workshop on Geothermal Reservoir Engineering, SGP-TR-213",
+  "date": "February 12–14, 2018",
+  "url": "https://pangea.stanford.edu/ERE/pdf/IGAstandard/SGW/2018/Zurmuhl.pdf",
+  "values": [
+   {"blank_context": "Stanford Geothermal Workshop ___", "value": "2018", "quote": "43rd Workshop on Geothermal Reservoir Engineering ... February 12-14, 2018 ... SGP-TR-213", "where": "p. 1 header"}
+  ],
+  "unsupported_wording": "Minor: the printed name is 'Workshop on Geothermal Reservoir Engineering' (43rd), not 'Stanford Geothermal Workshop'.",
+  "note": "Authors: David P. Zurmuhl, Maciej Z. Lukawski, Gloria A. Aguirre, George P. Schnaars, Koenraad F. Beckers, C. Lindsay Anderson, Jefferson W. Tester."
+ }
+]

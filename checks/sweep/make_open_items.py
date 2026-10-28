@@ -20,6 +20,8 @@ DEC = [
  ['cologixVAN4_2026', 'decision', 'Cologix VAN4 capacity: web page 4 MW vs spec sheet 6.5 MW (operator claims)', 'C trace'],
  ['vibration STC', 'decision', 'STC 47/55 read in VBBL 2019 / BCBC 2018, not NBC 2020 as the coef says', 'C trace'],
  ['schneiderUPS2020', 'needs source', 'Schneider UPS blog logged at a thegreengrid.org URL; find the right link', 'C trace'],
+ ['bchTariff2026', 'J.B. can check', 'BC Hydro rate figures (LGS 29.99 ¢/day, $13.83/kW, 6.79 ¢/kWh; RS 1830) not read by either check: read them in your downloaded Electric Tariff', 'B4'],
+ ['price_floor', 'node review', 'capex 0.5–0.65 M€/MW is attributed to Hiltunen 2020, which assumes 0.6; cite Wahlroos / Rämä directly', 'B4'],
  ['tallaghtD22', 'decision', 'capex_split calibration wording: "five of seven" is effectively four confirmed (AWS heat price not stated)', 'B1'],
  ['scieu2024', 'decision', 'Use national 2.06 GJ/m² for hospitals (provincial values not found)?', 'B1'],
  ['edmParcel', 'J.B. can check', 'Unreachable for both checks', 'B1'],

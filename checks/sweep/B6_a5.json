@@ -1,0 +1,168 @@
+[
+ {
+  "id": "receiversBCUC",
+  "reachable": true,
+  "publisher": "British Columbia Utilities Commission",
+  "title": "Composite: Decision G-310-21A (Creative Energy 2021 RRA, Core Steam System); Decision C-12-15 (NEFC & Chinatown low-carbon NES CPCN); Decision C-5-23 (Sen̓áḵw DES CPCN); Decision G-279-21 (Burnaby Mountain DEU 2020-2023 RRA); River District decision not read",
+  "edition": "n/a",
+  "date": "G-310-21A: 2021-10-29; C-12-15: 2015-12-08; C-5-23: 2023-10-26; G-279-21: 2021-09-24",
+  "url": "https://www.ordersdecisions.bcuc.com/bcuc/decisions/en/515249/1/document.do ; https://www.ordersdecisions.bcuc.com/bcuc/decisions/en/126938/1/document.do ; https://www.ordersdecisions.bcuc.com/bcuc/decisions/en/521940/1/document.do ; https://www.ordersdecisions.bcuc.com/bcuc/decisions/en/513500/1/document.do",
+  "values": [
+   {"blank_context": "Creative Energy Core steam ___ klb forecast", "value": "971,259 (amended, approved); initial was 1,142,658", "quote": "the amended annual steam load forecast 971,259 thousand pounds of steam", "where": "G-310-21A decision (first 100k chars of text)"},
+   {"blank_context": ">___ buildings", "value": "200", "quote": "serving more than 200 buildings in downtown Vancouver", "where": "G-310-21A decision"},
+   {"blank_context": "(G-___-___A, ___)", "value": "G-310-21A, 2021", "quote": "Order G-310-21A ... October 29, 2021", "where": "G-310-21A page headers"},
+   {"blank_context": "NE False Creek ___ MW peak", "value": "24", "quote": "diversified peak energy demand of 24 MW", "where": "C-12-15 decision (first 100k chars)"},
+   {"blank_context": "___ MWh/yr by ___", "value": "48,100 by 2024", "quote": "annual energy sales forecast of 48,100 MWh by 2024", "where": "C-12-15 decision"},
+   {"blank_context": "(C-___-___) NEFC", "value": "C-12-15", "quote": "Commission Order C-12-15", "where": "C-12-15 decision"},
+   {"blank_context": "Sen̓áḵw DES ___ kW peak", "value": "10,343 (heating peak design load, Phases 1&2); diversified heating peak at energy centre 8,357; cooling 8,026 / 6,890", "quote": "Phases 1 & 2 10,343 8,026", "where": "C-5-23 decision, Table 1 (and Table 4)"},
+   {"blank_context": "Sen̓áḵw ___ MWh/yr", "value": "11,218 heating; 4,172 cooling; 15,390 total billing determinant", "quote": "Phase 1 & 2 5,924 5,188 11,218 4,172", "where": "C-5-23 decision, Table 2; Table 10 (15,390 total, full-year 2026 onward)"},
+   {"blank_context": "(C-___-___) Sen̓áḵw", "value": "C-5-23", "quote": "Decision and Order C-5-23", "where": "C-5-23 decision"},
+   {"blank_context": "River District ___ → ___ MW peak, ~___ MWh/yr (C-___-___)", "value": "not checked (decision text not reachable); search listing names 'Decision and C-3-23' for River District Phase 2 CPCN", "quote": "Application for Approval for a Certificate of Convenience and Necessity to Construct and Operate the Second Phase of the District Energy Utility System for the River District Development ~ Decision and C-3-23", "where": "BCUC search result title only (item 521743); document fetch failed"},
+   {"blank_context": "SFU Burnaby Mountain ___ MWh/yr", "value": "43,787", "quote": "SFU's annual average energy demand is 43,787 MWh.", "where": "G-279-21 decision (first 100k chars)"},
+   {"blank_context": "(G-___-___) SFU", "value": "G-279-21", "quote": "Order Number: G-279-21", "where": "G-279-21 decision"}
+  ],
+  "unsupported_wording": "River District figures and order number unverified (document not reachable). Sen̓áḵw 'kW peak' ambiguous: source gives several peaks (design heating 10,343 kW, diversified 8,357 kW, cooling 8,026/6,890 kW); MWh/yr ambiguous (11,218 heating vs 15,390 total). Core steam klb: decision gives both initial 1,142,658 and approved amended 971,259.",
+  "note": "Link in file was the BCUC site root; individual decisions found via search on ordersdecisions.bcuc.com. Forecasts are utility (operator) forecasts accepted/recited in decisions - label as utility claims. Long decisions only read to ~100k chars."
+ },
+ {
+  "id": "van9552",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Energy Utility System By-law No. 9552 (consolidated)",
+  "edition": "Consolidated for convenience only to May 12, 2020",
+  "date": "2020-05-12",
+  "url": "https://bylaws.vancouver.ca/9552c.PDF",
+  "values": [
+   {"blank_context": "By-law ___", "value": "9552", "quote": "ENERGY UTILITY SYSTEM BY-LAW NO. 9552", "where": "cover/title"},
+   {"blank_context": "consolidated to By-law ___", "value": "12699", "quote": "amended to include By-law No. 12699 effective May 12, 2020", "where": "cover"},
+   {"blank_context": "effective ___ Jan ___", "value": "May 12, 2020 (not January)", "quote": "Consolidated for convenience only to May 12, 2020", "where": "cover"},
+   {"blank_context": "s. ___ compulsory use", "value": "2.1", "quote": "must make use of the energy utility system in accordance with the terms and conditions of this By-law", "where": "Section 2.1"},
+   {"blank_context": "s. ___(a)(v)", "value": "5.2", "quote": "equipment to recover waste heat energy from the refrigeration or cooling system of the building", "where": "Section 5.2(a)(v)"},
+   {"blank_context": "___% credit for returned heat", "value": "50", "quote": "$53.111 per each MW per hour multiplied by 50%", "where": "Schedule C"},
+   {"blank_context": "data/raw/van/___c.pdf", "value": "9552 (filename matches 9552c.PDF)", "quote": "n/a", "where": "URL"}
+  ],
+  "unsupported_wording": "'effective ___ Jan ___': the version read is consolidated to May 12, 2020, not January. 'Consolidated to By-law 12699' wording is loose: source says 9552 was 'amended to include By-law No. 12699'. A later consolidation may exist but was not found.",
+  "note": "No link given; found official consolidated PDF on bylaws.vancouver.ca. Schedule A map not readable as text."
+ },
+ {
+  "id": "vanRezoneTime",
+  "reachable": false,
+  "publisher": "City of Vancouver",
+  "title": "Typical Rezoning Process Overview (for policy-compliant proposals) [PDF not read]; Apply to rezone your property [web page read]",
+  "edition": "n/a",
+  "date": "Apply-to-rezone page meta-modified 2026-06-16",
+  "url": "https://vancouver.ca/home-property-development/enquire-about-and-apply-for-rezoning.aspx (PDF https://vancouver.ca/files/cov/rezoning-process-overview.pdf failed twice)",
+  "values": [
+   {"blank_context": "CD-___", "value": "not checked (PDF unreachable)", "quote": "", "where": ""},
+   {"blank_context": "Target ~___ weeks to Letter of Response", "value": "not checked (PDF unreachable)", "quote": "", "where": ""},
+   {"blank_context": "Target ~___ months to decision", "value": "not checked (PDF unreachable)", "quote": "", "where": ""},
+   {"blank_context": "apply-to-rezone page, Jun ___", "value": "2026 (page last-modified 16 Jun 2026)", "quote": "Rezoning applications take about one year to process (from fee payment to public hearing).", "where": "Apply to rezone your property page; date from meta-modified tag"}
+  ],
+  "unsupported_wording": "Process overview PDF quotes unverified. The 'about one year' quote is supported.",
+  "note": "Partially reachable: web page yes, PDF no (client error). Search listing title of the PDF: 'TYPICAL REZONING PROCESS OVERVIEW (FOR POLICY-COMPLIANT PROPOSALS) +/- 1 month'. CD-1 rezoning guide (updated Oct 1, 2026) has no time targets."
+ },
+ {
+  "id": "van_genroom",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Emergency Generator Rooms",
+  "edition": "Bulletin 2000-015-BU/EL, revised October 5, 2015; attachment diagram revised November 30, 2020",
+  "date": "2015-10-05 (attachment 2020-11-30)",
+  "url": "https://vancouver.ca/files/cov/2000-015-emergency-generator-rooms.pdf",
+  "values": [
+   {"blank_context": "bulletin ___-___", "value": "2000-015 (full: 2000-015-BU/EL)", "quote": "BULLETIN 2000-015-BU/EL Revised October 5, 2015", "where": "header"},
+   {"blank_context": "VBBL ___", "value": "not stated", "quote": "Sentence 3.6.2.8.(1) of Division B of the VBBL", "where": "body; no edition year printed"}
+  ],
+  "unsupported_wording": "Any VBBL edition year in the claim is not printed in the bulletin. Cited articles: 3.2.7.5.(1), 3.6.2.8.(1), 3.6.1.4., 3.2.7.10 of Division B; CSA C282.",
+  "note": "Revised 2015 bulletin may predate VBBL 2019; edition must come from elsewhere."
+ },
+ {
+  "id": "yuan2025",
+  "reachable": false,
+  "publisher": "Elsevier (Renewable and Sustainable Energy Reviews)",
+  "title": "Data center waste heat for district heating networks: A review",
+  "edition": "Vol. 219",
+  "date": "2025",
+  "url": "https://ideas.repec.org/a/eee/rensus/v219y2025ics1364032125005362.html (metadata only; DOI link blocked)",
+  "values": [
+   {"blank_context": "Kosonen ___", "value": "2025", "quote": "Year: 2025", "where": "RePEc record"},
+   {"blank_context": "Renewable and Sustainable Energy Reviews ___:___", "value": "219 : article no. not stated on record (DOI suffix 115863)", "quote": "v:219:y:2025:i:c:s1364032125005362; DOI 10.1016/j.rser.2025.115863", "where": "RePEc record"},
+   {"blank_context": "read ___ Oct ___", "value": "not checkable", "quote": "", "where": ""},
+   {"blank_context": "Table ___ air-side ___–___ °C, condenser ___–___ °C", "value": "not checked (full text not reachable)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "Authors (Yuan, Liu, Sun, Lin, Fan, Zhao, Kosonen), title, journal, vol 219, year 2025 confirmed. Table temperatures and 'heat pumps essential for air-side heat' not verified.",
+  "note": "Full text paywalled/not fetchable; claim relies on a user upload I cannot see."
+ },
+ {
+  "id": "abDCpay",
+  "reachable": true,
+  "publisher": "Government of Alberta",
+  "title": "Powering new pathways for data centres",
+  "edition": "n/a",
+  "date": "2026-01-28 (published)",
+  "url": "https://www.alberta.ca/powering-new-pathways-for-data-centres",
+  "values": [],
+  "unsupported_wording": "none (minor: source frames it as the Utilities Statutes Amendment Act, 2025 aligning with a cost-causation framework, i.e. 'will pay')",
+  "note": "Quote: \"which means data centres (not Alberta ratepayers) will pay for any necessary transmission upgrades.\" Government policy statement, forward-looking."
+ },
+ {
+  "id": "abElectronicsReg",
+  "reachable": true,
+  "publisher": "Alberta King's Printer (Open Government)",
+  "title": "Electronics Designation Regulation",
+  "edition": "n/a",
+  "date": "not stated",
+  "url": "https://open.alberta.ca/publications/2004_094",
+  "values": [
+   {"blank_context": "Regulation ___/___", "value": "not stated on page (URL slug 2004_094 implies 94/2004 but not printed)", "quote": "", "where": "open.alberta.ca publication record"}
+  ],
+  "unsupported_wording": "none on substance: record says it designates \"computers, computer equipment and televisions\". Regulation number not printed on the page read.",
+  "note": "Given link (albertarecycling.ca) blocked by fetch provenance; used official open.alberta.ca record instead. Official regulation text still not read."
+ },
+ {
+  "id": "abNewLicenceLast",
+  "reachable": true,
+  "publisher": "Government of Alberta",
+  "title": "Water | AI Data Centres in Alberta",
+  "edition": "n/a",
+  "date": "2022-11-23 per page metadata (likely template date; treat as uncertain)",
+  "url": "https://www.alberta.ca/datacentres/water",
+  "values": [],
+  "unsupported_wording": "none",
+  "note": "Quotes: \"A brand-new data centre licence stands last.\" and \"Alberta allocates water by seniority, under a system called First In Time, First In Right.\""
+ },
+ {
+  "id": "abWaterAct2021",
+  "reachable": true,
+  "publisher": "Alberta Environment, Environmental Assurance Division, Science and Standards Branch",
+  "title": "Surface Water Quality Guidelines for Use in Alberta",
+  "edition": "Pub. No. T/483",
+  "date": "November 1999",
+  "url": "https://open.alberta.ca/dataset/e0074537-88f6-4cc4-af5c-808161fa9af8/resource/ea13d7b1-c155-4fad-8b85-4f12443352f2/download/5713.pdf",
+  "values": [
+   {"blank_context": "Surface Water Quality Guidelines for Use in Alberta (___)", "value": "1999", "quote": "November 1999 (Pub. No. T/483)", "where": "cover"},
+   {"blank_context": "Not to be increased by more than ___°C above ambient", "value": "3", "quote": "Not to be increased by more than 3°C above ambient water temperature", "where": "Table 1.0, p. 9 (footnote 17, AENV 1993)"},
+   {"blank_context": "fact sheets ___", "value": "not checked (fact sheets not read)", "quote": "", "where": ""},
+   {"blank_context": "current ___ guidelines", "value": "not checked", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "Source quote has 'above ambient water temperature' (claim truncates). Water Act licence/approval statement not in this document (only: 'The Water Act allows for the development of objectives for specific water bodies.'); id label '2021' not supported by this 1999 document.",
+  "note": "Water Act licence/approval wording needs the separate fact sheets."
+ },
+ {
+  "id": "abgas",
+  "reachable": true,
+  "publisher": "Utilities Consumer Advocate (Government of Alberta)",
+  "title": "Regulated Rates - Year at a Glance (2026 Natural Gas Regulated Rates in $/GJ)",
+  "edition": "n/a",
+  "date": "2026 (October row)",
+  "url": "https://www.ucahelps.alberta.ca/regulated-rates.aspx",
+  "values": [
+   {"blank_context": "DERS gas Oct ___", "value": "2026", "quote": "2026 Natural Gas Regulated Rates in $/GJ ... October | 1.458 | 1.602", "where": "natural gas table, October row"},
+   {"blank_context": "$___/GJ (DERS)", "value": "1.458", "quote": "October | 1.458 | 1.602", "where": "DERS / ATCO Gas column"},
+   {"blank_context": "ATCO North Mid-Use $___/GJ", "value": "not stated", "quote": "", "where": "page has no North or Mid-Use entries"},
+   {"blank_context": "≈ $___/MWh heat", "value": "conversion, not printed", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "'ATCO North Mid-Use' rate not on this page (only DERS 1.458 in ATCO Gas service area and Apex 1.602). MWh conversion is a derived figure.",
+  "note": "DERS figure also matches DERS news release (operator release via GlobeNewswire): 'The October regulated natural gas rate is $1.458 per GJ.' ATCO delivery tariff would need ATCO/AUC rate schedule."
+ }
+]
