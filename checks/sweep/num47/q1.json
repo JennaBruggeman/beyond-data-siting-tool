@@ -1,0 +1,78 @@
+[
+ {
+  "id": "abgas",
+  "citation_in_tool": "Alberta DERS gas Oct 2026 $1.458/GJ; ATCO North Mid-Use $1.062/GJ (?: not on this page; needs the ATCO rate schedule) → ≈ $11/MWh heat — https://www.ucahelps.alberta.ca/regulated-rates.aspx",
+  "open_point": "(?: not on this page; needs the ATCO rate schedule)",
+  "used_by": "price_ceiling",
+  "saved_copies": [
+   "/mnt/attach/outputs/sources/library/public/abgas/page.html"
+  ]
+ },
+ {
+  "id": "bchDEP2025",
+  "citation_in_tool": "BC Hydro, Distribution extension policy (BCUC approved 5 Mar 2025, effective 5 Jul 2025; order number not confirmed): the first payer is refunded when others connect, reviewed at the 5th anniversary (fee $25k to under $1M), 5th and 10th ($1–4.99M), 5th, 10th and 15th (≥ $5M); BC Hydro invests up to $1M at ≤ 1 MVA, $1M per MVA to $10M above (page says \"under 1 MVA\" and bands $1–4.99M ?; refunds framed as reviews at anniversaries ?) — https://app.bchydro.com/accounts-billing/electrical-connections/distribution-extension-policy.html",
+  "open_point": "page says \"under 1 MVA\" and bands $1–4.99M ? | refunds framed as reviews at anniversaries ?)",
+  "used_by": "Grid upgrades shared with neighbours; grid_refund",
+  "saved_copies": [
+   "/mnt/attach/outputs/sources/library/public/bchDEP2025/page.html"
+  ]
+ },
+ {
+  "id": "cwec",
+  "citation_in_tool": "CWEC 2020 edition typical-year files, ECCC Engineering Climate Datasets (collaboration.cmc.ec.gc.ca …/CWEC_FMCCE/CWEC_FMCCE_v_2020): CAN_BC_VANCOUVER-INTL-A_1108395_CWEC.epw; CAN_AB_EDMONTON-INTL-A_3012216_CWEC.epw — J.B. download, in data/",
+  "open_point": "B17 28 Oct: second check could not read it (single check)",
+  "used_by": "condensate; demand_profile; free_cooling_hours; hourly_overlap",
+  "saved_copies": []
+ },
+ {
+  "id": "dkPriceCap",
+  "citation_in_tool": "Forsyningstilsynet, 2025 surplus-heat price cap 95 DKK/GJ — https://forsyningstilsynet.dk/Media/638660516540345737/Udmeldelse%20af%20prisloft%20for%20overskudsvarme%202025.pdf",
+  "open_point": "B18 28 Oct: second check could not read it (single check)",
+  "used_by": "price_ceiling",
+  "saved_copies": []
+ },
+ {
+  "id": "edmProcTimes",
+  "citation_in_tool": "City of Edmonton, Development and Construction Application Processing Times (actuals April–June 2026), web page saved 14 Oct 2026 (the URL now serves another page; actuals rest on the saved copy ?) — https://www.edmonton.ca/business_economy/processing-times",
+  "open_point": "actuals rest on the saved copy ?)",
+  "used_by": "construction_time; rezoning_price",
+  "saved_copies": []
+ },
+ {
+  "id": "jibcGroupLodging",
+  "citation_in_tool": "JIBC / BC Emergency Support Services, Introduction to Group Lodging participant guide: 3.5 m² minimum sleeping area per person (the guide's own 1.5 × 2.5 m is 3.75 m² ?), 0.75 m between beds (p. 35); facilities 'will only be opened up if they are suitable and have power' (p. 44) — https://www.jibc.ca/sites/default/files/2020-05/EMD-EMRG-1612-Intro-to-GL-Participant-Guide-20150826.pdf",
+  "open_point": "the guide's own 1.5 × 2.5 m is 3.75 m² ?)",
+  "used_by": "refuge_after_quake; refuge_people",
+  "saved_copies": []
+ },
+ {
+  "id": "nbcImportance",
+  "citation_in_tool": "NBC 2020 / BCBC 2024 Table 4.1.2.1 importance categories: post-disaster buildings incl. telephone exchanges and communications facilities (authority may exempt); 'likely to be used as post-disaster shelters' = High; earthquake importance factor IE 1.0 Normal, 1.3 High, 1.5 post-disaster — audit/research_2026-10-19/D",
+  "open_point": "B2 28 Oct: not confirmed, marked ?",
+  "used_by": "importance_cat; refuge_after_quake",
+  "saved_copies": []
+ },
+ {
+  "id": "src16",
+  "citation_in_tool": "Beyond Data research note 16: data centre components and sizing (sources/16_dc_components_sizing.md)",
+  "open_point": "B14 28 Oct: second check could not read it (single check)",
+  "used_by": "component_space; floor_load_need; fuel_on_site; hall_area; service_class; size_fit",
+  "saved_copies": []
+ },
+ {
+  "id": "vanFees2026",
+  "citation_in_tool": "City of Vancouver 2026 development and building permit fees (effective 1 Jan 2026), Schedule 2 s.3 new CD-1: elsewhere $94,500 + $1,590 per 100 m² (max $343,700) under 8,000 m²; Downtown/Broadway $226,300 + $1,590/100 m²; larger bands to $8,183,200; development permit 'all other uses' conditional $2,530 per 100 m² to 500 m² then $1,570 (max $366,600) — https://vancouver.ca/files/cov/vancouver-development-building-permit-fees.pdf (?: not yet verified; two checks could not open the PDF)",
+  "open_point": "(?: not yet verified; two checks could not open the PDF)",
+  "used_by": "rezoning_price",
+  "saved_copies": []
+ },
+ {
+  "id": "vanWater2026",
+  "citation_in_tool": "City of Vancouver 2026 metered rates (RTS 18253, report of 24 Oct 2025 for Council 12 Nov 2025, rates as proposed): water $5.128 per unit (1 May–15 Oct) and $4.091 (16 Oct–30 Apr), 'rate for all metered uses' (p. 11); 1 unit = 100 ft³ = 2.83168466 m³; sewer $7.960 per unit (?: not in this report, which covers water only; needs the sewer by-law report) — https://council.vancouver.ca/20251112/documents/spec1a.pdf",
+  "open_point": "(?: not in this report, which covers water only; needs the sewer by-law report)",
+  "used_by": "water_supply",
+  "saved_copies": [
+   "/mnt/attach/outputs/sources/library/public/vanWater2026/full.pdf"
+  ]
+ }
+]

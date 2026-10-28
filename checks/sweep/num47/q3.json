@@ -1,0 +1,73 @@
+[
+ {
+  "id": "bacS3000",
+  "citation_in_tool": "BAC Series 3000 cooling towers, Product & Application Handbook Vol. VI (file dated 20 Oct 2023), seller's figures: 293–1,394 nominal tons per model (?: one check reads 171 tons for the smallest single-cell model) (≈1.3–6.1 MW, Claude conversion at 15,000 BTU/h per tower ton); 8'-6\" × 18'-1\", 9'-10\" high to 14'-0\" × 24'-1\", 22'-5\" high (≈2.6 × 5.5 × 3.0 m to 4.3 × 7.3 × 6.8 m, our conversion); 15,000–50,280 lb operating (≈6.8–22.8 t, our conversion) — https://baltimoreaircoil.com:443/download_api_endpoint/6026/C015_PAHBvi_3000_ED_20231020.pdf",
+  "open_point": "(?: one check reads 171 tons for the smallest single-cell model)",
+  "used_by": "component_space",
+  "saved_copies": []
+ },
+ {
+  "id": "bytes2heat",
+  "citation_in_tool": "DENEFF / IER Stuttgart, Bytes2Heat Best-Practice-Übersicht (2023): Telehouse FRANKY (IT connection ~35 MW, actual draw ~20 MW) → Westville at least 2,400 MWh/yr planned from waste heat, 2 × 320 kWth HPs, ~30 °C waste heat to a 70/40 °C network, 15-yr Mainova contract (p. 20); ReUseHeat Braunschweig (VW data centre ~12 MW IT; 250 kW extracted at 18–25 °C) 300 kWth heat pump, COP 3.6, to a 70 °C network; area demand 2,100 MWh/yr (1,750 MWh/yr from the DC and the 40 °C return not printed ?); €460k capex without the network (p. 11); HLRS two 55 kWth heat pumps, ~270 MWh/yr (p. 13); version May 2023, read from J.B. download 28 Oct 2026 — https://deneff.org/wp-content/uploads/2023/05/Bytes2Heat-Best-Practice-Uebersicht.pdf",
+  "open_point": "750 MWh/yr from the DC and the 40 °C return not printed ?)",
+  "used_by": "New district with the data centre as heat plant; cop; heat_delivered; price_floor",
+  "saved_copies": [
+   "/mnt/user-data/beyond-data-sources/private/bytes2heat/full.pdf"
+  ]
+ },
+ {
+  "id": "ddeRates2025",
+  "citation_in_tool": "City of Edmonton, Downtown District Energy 2025–2026 Rate Filing, Attachment 4 to IIS02765, Utility Committee 23 Jun 2025",
+  "open_point": "B18 28 Oct: second check could not read it (single check)",
+  "used_by": "price_ceiling",
+  "saved_copies": []
+ },
+ {
+  "id": "eccc",
+  "citation_in_tool": "ECCC Canadian Climate Normals 1991–2020, station data CSV (BC, AB), climate.weather.gc.ca — J.B. download (station CSVs not re-checked; the saved web page is the landing page only ?); extract in data/normals_1991_2020_extract.json (Vancouver Intl, Edmonton Airport, Edmonton City)",
+  "open_point": "the saved web page is the landing page only ?)",
+  "used_by": "cooling_centre_people; demand_profile; generator_co2; generator_nox_pm; rainwater; refrigerant_co2e; refuge_people",
+  "saved_copies": [
+   "/mnt/attach/outputs/sources/library/public/eccc/page.html"
+  ]
+ },
+ {
+  "id": "fjfAars2020",
+  "citation_in_tool": "Fjernvarme Fyn, Årsberetning 2020, p.9 production table and p.13: 'Varmepumperne tilknyttet Facebook har forbrugt 14.020 MWh el svarende til COP 4,5'; 230 TJ heat (Facebook heat pumps only, first full year) — https://www.fjernvarmefyn.dk/media/1754/fjernvarme_fyn_aarsberetning_2020.pdf",
+  "open_point": "B18 28 Oct: second check could not read it (single check)",
+  "used_by": "District heat to a network; capex_split; cop",
+  "saved_copies": []
+ },
+ {
+  "id": "lorenz",
+  "citation_in_tool": "Lorenz COP, η 0.50–0.60 (Reinholdt et al. 2018; Pieper et al. 2020); air 25–35 °C, liquid 50–60 °C (Alissa; Wahlroos) (Formulas sheet; ?: each work to be checked separately in the node review)",
+  "open_point": "?",
+  "used_by": "cop; heat_delivered; heat_temp; liquid_capture",
+  "saved_copies": []
+ },
+ {
+  "id": "nir2026",
+  "citation_in_tool": "ECCC, National Inventory Report 1990–2024 (2026 submission), Part 1 (data/NIR_2026_Part1.pdf) and Annex 7 electricity-intensity workbook, Tables A7-1 (Canada), A7-10 (Alberta), A7-11 (British Columbia) (?: workbook not in the saved copies; only the landing page) — data/NIR_2026_Annex7_Electricity_Intensity.xlsx; extract data/nir2026_annex7_intensity_extract.json",
+  "open_point": "(?: workbook not in the saved copies; only the landing page)",
+  "used_by": "displaced_source; grid_co2",
+  "saved_copies": [
+   "/mnt/attach/outputs/sources/library/public/nir2026/page.html"
+  ]
+ },
+ {
+  "id": "thermokeyGH2490",
+  "citation_in_tool": "Thermokey, selection printout GH2490.CX D/02 V QRAFS (Archimede 2019), via resale listing: 737.6 kW at 32 °C air, 48 → 42.7 °C fluid; 7,530 × 2,400 mm → ≈24.5 m² per MW (MANUFACTURER CLAIM; resale copy; sources/16 S25) — https://resale.de/images/164420960_h_r190392800.pdf",
+  "open_point": "B17 28 Oct: unchecked: no first check and the web check could not read it",
+  "used_by": "component_space",
+  "saved_copies": []
+ },
+ {
+  "id": "vanRainPage",
+  "citation_in_tool": "City of Vancouver, Rainwater management on private property: Part 3 requirements since 1 Jan 2024, most new buildings from 1 Jul 2025; 192 developments, 66 ha managed, about 7,400 L/s peak reduction, purpose to 'relieve sewer system capacity constraints' (?: these figures and the phrase are not on this page; source not located) — https://vancouver.ca/home-property-development/rainwater-management.aspx",
+  "open_point": "(?: these figures and the phrase are not on this page; source not located)",
+  "used_by": "Stormwater held for the neighbourhood; stormwater_volume",
+  "saved_copies": [
+   "/mnt/attach/outputs/sources/library/public/vanRainPage/page.html"
+  ]
+ }
+]

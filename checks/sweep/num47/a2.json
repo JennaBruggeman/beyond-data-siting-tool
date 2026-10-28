@@ -1,0 +1,224 @@
+[
+ {
+  "id": "absorption2026",
+  "resolved": "no",
+  "source_read": "None. Energies 19(9):2147 (MDPI), https://www.mdpi.com/1996-1073/19/9/2147 — direct fetch refused (provenance); MDPI-restricted search, issue/article search and DOI search 10.3390/en19092147 returned no matching article page.",
+  "findings": [],
+  "proposed_text": "Absorption chiller temperatures and COP (Energies 19(9):2147, 2026; ?: title and authors not confirmed, page not reached) — https://www.mdpi.com/1996-1073/19/9/2147",
+  "number_change": "none",
+  "note": "Unchanged. Needs the user to open the MDPI page (or paste it into the conversation) so it can be read. Temperatures and COP in the tool stay unverified."
+ },
+ {
+  "id": "bylaw14600",
+  "resolved": "no",
+  "source_read": "None. Tried https://edmonton.ca/sites/default/files/public-files/C14600.pdf (robots_disallowed), https://www.edmonton.ca/public-files/assets/document?path=bylaws/c14600.pdf (robots_disallowed), https://webdocs.edmonton.ca/Bylaws/C14600.doc (client error).",
+  "findings": [],
+  "proposed_text": "Edmonton Bylaw 14600 ss.19–22: 65 dBA day / 50 night at the residential property line; no Leq or continuous-noise provision (? second check not done: city site blocks automated reading) — https://edmonton.ca/sites/default/files/public-files/C14600.pdf",
+  "number_change": "none",
+  "note": "Three official URLs all blocked; no mirrors used. Still a single check. Saving the PDF locally via the browser would let the next pass grep ss.19–22."
+ },
+ {
+  "id": "ddeBizCase2025",
+  "resolved": "no",
+  "source_read": "City of Edmonton, District Energy project page, https://www.edmonton.ca/projects_plans/district-energy (fetched; no link to the business case or IIS02765). Searches for IIS02765 / DDEI business case returned no official document.",
+  "findings": [],
+  "proposed_text": "City of Edmonton, DDEI Business Case — Phase 1A and 2 Development, Attachment 3 to IIS02765, Utility Committee 23 Jun 2025 (? second check not done: document not found online)",
+  "number_change": "none",
+  "note": "Document is likely in the City's council agenda system (eSCRIBE), which no search returned. A saved copy is needed to verify price_ceiling."
+ },
+ {
+  "id": "duan2026",
+  "resolved": "yes",
+  "source_read": "Duan, Y., Agrawal, S., Sanchez-Azofeifa, A., Welegedara, N.P.Y., 'Urban heat island effect in Canada: Insights from five major cities', Canadian Journal of Urban Research 33(2):53–78 (Winter 2024 issue; online 12 Jan 2026), https://cjur.uwinnipeg.ca/index.php/cjur/article/view/445",
+  "findings": [
+   {
+    "point": "Vancouver summer daytime",
+    "value": "7.25 °C",
+    "quote": "In summer, Vancouver has the highest daytime UHI intensity at 7.25°C",
+    "where": "Abstract"
+   },
+   {
+    "point": "Edmonton winter night",
+    "value": "2.86 °C",
+    "quote": "Edmonton records the lowest winter daytime UHI intensity at -1.29°C, with a nighttime increase reaching 2.86°C",
+    "where": "Abstract"
+   },
+   {
+    "point": "Land-surface, not air, temperature",
+    "value": "LST-based",
+    "quote": "based on land surface temperature and land use data",
+    "where": "Abstract"
+   }
+  ],
+  "proposed_text": "Duan, Agrawal, Sanchez-Azofeifa & Welegedara, 'Urban heat island effect in Canada: Insights from five major cities', Canadian Journal of Urban Research 33(2):53–78 (Winter 2024 issue, published online Jan 2026): surface urban heat island, Vancouver summer daytime 7.25 °C, Edmonton winter night 2.86 °C (land-surface, not air, temperature) — https://cjur.uwinnipeg.ca/index.php/cjur/article/view/445",
+  "number_change": "none",
+  "note": "Read from the abstract on the journal page (via fetch summary). The year on the page is mixed: the issue is dated 2024 but the online date is 2026. CJUR is a refereed journal, but peer review was not checked on this page. Full text not read."
+ },
+ {
+  "id": "ess",
+  "resolved": "yes",
+  "source_read": "(1) JIBC School of Public Safety & Security, Emergency Social Services Quick Reference Guide (2012), https://www.jibc.ca/sites/default/files/2020-05/EMD-ESS-Quick-Reference-Guide-20121102.pdf; (2) City of Edmonton, Minimum Emergency Shelter Standards (2021), https://www.gov.edmonton.ab.ca/sites/default/files/public-files/MinimumEmergencyShelterStandards.pdf; (3) Health Canada, Guidance for Cleaner Air Spaces during Wildfire Smoke Events (Sept 2020, modified 13 Nov 2020), https://www.canada.ca/en/health-canada/services/publications/healthy-living/guidance-cleaner-air-spaces-during-wildfire-smoke-events.html",
+  "findings": [
+   {
+    "point": "Group lodging area per person",
+    "value": "3.5 m²",
+    "quote": "3.5 square metres (10 cubic metres) or 40 square feet (5'x8') minimum sleeping area per person",
+    "where": "JIBC ESS Quick Reference Guide, 'GL – Facility Sanitary Standards', 'Space Allocation for Sleeping' (unnumbered page); attributed to Emergency Lodging Service, PHAC (2007)"
+   },
+   {
+    "point": "Edmonton bed spacing",
+    "value": "2 m",
+    "quote": "2 meters between beds, if in a congregate setting (although this is not a preferred setting).",
+    "where": "Edmonton Minimum Emergency Shelter Standards, s.4 Operational Standards, 'Sleeping Accommodations', p.8"
+   },
+   {
+    "point": "Filter rating",
+    "value": "MERV 13+",
+    "quote": "A MERV value of 13 or more is recommended to remove fine particulate matter.",
+    "where": "Health Canada guidance, s.1 Executive summary"
+   },
+   {
+    "point": "Air changes",
+    "value": "2–3 room volumes per hour (portable air cleaners)",
+    "quote": "for smoke at least two to three times the room volume per hour",
+    "where": "Health Canada guidance, s.3.1.2 (Additional filtration and portable air cleaners)"
+   }
+  ],
+  "proposed_text": "JIBC ESS Quick Reference Guide (2012; from PHAC Emergency Lodging Service 2007): group lodging 3.5 m² minimum sleeping area per person; City of Edmonton Minimum Emergency Shelter Standards (2021) s.4: 2 m between beds in congregate settings; Health Canada, Guidance for Cleaner Air Spaces during Wildfire Smoke Events (2020): MERV 13+ filters, portable air cleaners sized for 2–3 room volumes per hour (Formulas sheet)",
+  "number_change": "none",
+  "note": "All three sources are named and confirmed. Health Canada does not use the term 'ACH'. Its 2–3 figure is a portable air cleaner CADR sizing (minimum 'at least'), not a ventilation rate for the space. The 3.5 m² is a 2012 JIBC guide, not a current BC ESS standard; whether a newer BC ESS document repeats it was not checked."
+ },
+ {
+  "id": "learningSeries",
+  "resolved": "no",
+  "source_read": "None. Internal note: J.B.'s own manuscript (Oct 2026) and critique; there is no published document to check.",
+  "findings": [],
+  "proposed_text": "J.B., Beyond Data learning series (manuscript, Oct 2026), critique 14 Oct 2026 — a learning aid; figures it reports are unverified until the papers are read",
+  "number_change": "none",
+  "note": "Internal note with no document. It cannot be checked against a primary source. Any figures used for commitment/futures should be traced to the papers the manuscript cites."
+ },
+ {
+  "id": "neuSewage",
+  "resolved": "yes",
+  "source_read": "City of Vancouver, 'Sewage heat recovery expansion project' web page; saved copy /mnt/attach/outputs/sources/library/public/neuSewage/page.html (saved 25 Oct 2026) and live page fetched 28 Oct 2026, https://vancouver.ca/home-property-development/sewage-heat-recovery-expansion-project.aspx",
+  "findings": [
+   {
+    "point": "Original capacity",
+    "value": "3.2 MW",
+    "quote": "supplying thermal energy to Southeast False Creek with 3.2 megawatts (MW) of sewage heat recovery capacity",
+    "where": "'About the expansion' section"
+   },
+   {
+    "point": "Expansion units",
+    "value": "2 × 3.3 MW",
+    "quote": "Two new sewage-to-water heat pumps, each with a thermal output of 3.3 MW",
+    "where": "'About the expansion' list"
+   },
+   {
+    "point": "Commissioning",
+    "value": "end of 2024",
+    "quote": "The Neighbourhood Energy Utility (NEU) turned on 2 new sewage-to-water heat pumps at the end of 2024",
+    "where": "'Latest news' section"
+   },
+   {
+    "point": "Phrase 'an additional 6.6 megawatts'",
+    "value": "not on page",
+    "quote": "(absent) — no '6.6' in the saved copy or the live page",
+    "where": "whole page"
+   }
+  ],
+  "proposed_text": "City of Vancouver, NEU sewage heat recovery: '3.2 megawatts (MW) of sewage heat recovery capacity'; expansion of two heat pumps 'each with a thermal output of 3.3 MW' (6.6 MW combined: calculated, not stated on the page), turned on at the end of 2024 — https://vancouver.ca/home-property-development/sewage-heat-recovery-expansion-project.aspx",
+  "number_change": "none",
+  "note": "The doubt is settled: the City page never states 6.6 MW. 6.6 is 2 × 3.3 and should be shown as calculated. The value used by sewer_sink is unchanged."
+ },
+ {
+  "id": "statcanLives",
+  "resolved": "partly",
+  "source_read": "Statistics Canada, 15-206-X2015039 'An Update on Depreciation Rates for the Canadian Productivity Accounts', Table C.1-1 (archived; modified 27 Nov 2015); saved copy /mnt/attach/outputs/sources/library/public/statcanLives/page.html; appendix list https://www150.statcan.gc.ca/pub/15-206-x/2015039/app-ann-eng.htm",
+  "findings": [
+   {
+    "point": "Office buildings",
+    "value": "27.0 yr",
+    "quote": "Office buildings (1013) 0.067 0.060 27.0",
+    "where": "Table C.1-1, column 'Surveyed lives (1985 to 2010)', unit 'years' (checked against HTML headers h_559_1-3 / u_559_3-2)"
+   },
+   {
+    "point": "Warehouses",
+    "value": "25.4 yr",
+    "quote": "Warehouses, refrigerated storage, freight terminals (1006) 0.064 0.068 25.4",
+    "where": "Table C.1-1, Surveyed lives column"
+   },
+   {
+    "point": "Other commercial construction",
+    "value": "20.7 yr",
+    "quote": "Other commercial construction (1098) 0.101 0.085 20.7",
+    "where": "Table C.1-1, Surveyed lives column"
+   },
+   {
+    "point": "Computers",
+    "value": "not in C.1-1",
+    "quote": "Table C.1-1 List of depreciation rates under the new asset code classification — Building construction (industry, commercial, and institutional)",
+    "where": "Table C.1-1 title; machinery and equipment are in Tables C.1-4 to C.1-7 (appendix list)"
+   }
+  ],
+  "proposed_text": "Statistics Canada, 15-206-X2015039, Table C.1-1, surveyed lives of assets 1985–2010: office buildings 27.0 yr, warehouses 25.4, other commercial construction 20.7; computers 4 (?: not in this table; likely Table C.1-6 or C.1-7 (machinery and equipment), not yet read) — https://www150.statcan.gc.ca/n1/pub/15-206-x/2015039/t/tblc11-eng.htm",
+  "number_change": "none",
+  "note": "Building lives confirmed. Computers still open: M&E tables are C.1-4 to C.1-7 (https://www150.statcan.gc.ca/n1/pub/15-206-x/2015039/t/tblc16-eng.htm and .../tblc17-eng.htm). The 3-fetch limit was reached before reading them. The table is archived."
+ },
+ {
+  "id": "vanLight2019",
+  "resolved": "partly",
+  "source_read": "(1) City of Vancouver, Untidy Premises By-law 4548 (consolidated to 10 Sept 2019), saved copy /mnt/attach/outputs/sources/library/public/vanLight2019/full.pdf; (2) City of Vancouver, VBBL Part 10, unofficial wording effective 3 Jun 2019, https://vancouver.ca/files/cov/vancouver-building-bylaw-part-10-unofficial-wording-effective-jun-3-2019.pdf (fetch summary); (3) City of Vancouver, 'Outdoor lighting design tips', https://vancouver.ca/files/cov/outdoor-lighting-design-tips.pdf. Nov 1 2019 Part 10 wording (https://vancouver.ca/files/cov/vbbl-part-10-unofficial-wording-effective-nov-1-2019.pdf) failed to load.",
+  "findings": [
+   {
+    "point": "By-law 4548 s.7",
+    "value": "no lux value",
+    "quote": "An owner or occupier of a parcel of real property shall not cause, permit or allow an outdoor light fixture to be placed or lit in such a way that: (a) the light fixture casts light directly onto a window or other opening of a residential structure located across a street, or adjacent to, the real property; and (b) the light unreasonably disturbs the peace, rest, enjoyment, comfort or convenience of the owner or occupier of the neighbouring real property.",
+    "where": "By-law 4548, s.7 (saved PDF)"
+   },
+   {
+    "point": "VBBL 10.2.2.10(2), June 2019 wording",
+    "value": "4 lux / 2 lux",
+    "quote": "limit backlighting of building walls, roofs, or reflective surfaces to not more than … 4 lux at any given point … minimize lighting of adjacent exterior properties … not exceed an illumination level of 2 lux average on any reflective surface",
+    "where": "VBBL Part 10 (eff. 3 Jun 2019), 10.2.2.10 'Lighting in Residential Buildings', Sentence (2) (fragments from fetch summary)"
+   },
+   {
+    "point": "600 lumens, 4 m, lane-facing, dimmers/timers",
+    "value": "not in June 2019 wording",
+    "quote": "Fixtures should not be mounted higher than 4 meters above grade … Install dimmers and timers to easily control lightings.",
+    "where": "City 'Outdoor lighting design tips' handout citing 'Building Bylaw Section 10.2.2.10 — Outdoor Lighting'; the handout has no 600-lumen figure"
+   }
+  ],
+  "proposed_text": "Vancouver Building By-law 2019, 10.2.2.10(2) (? wording depends on version: the 3 Jun 2019 text requires fully shielded or full cut-off fixtures, backlighting of walls ≤ 4 lux at any point, ≤ 2 lux average on reflective surfaces, minimize lighting of adjacent properties; the lane-facing / 600 lumen / 4 m / dimmer-and-timer wording comes from a City design-tips handout and a later version not yet read); Untidy Premises By-law 4548 s. 7: no outdoor light that casts light directly onto a neighbouring residential window and unreasonably disturbs (no lux value) — https://bylaws.vancouver.ca/4548c.pdf",
+  "number_change": "'no lux values in either city' → VBBL 10.2.2.10(2) (June 2019 wording) has 4 lux (backlighting, any point) and 2 lux average (reflective surfaces); By-law 4548 still has none",
+  "note": "By-law 4548 is confirmed. VBBL 10.2.2.10 contradicts the tool: the June 2019 wording has lux limits but no 600 lumen / 4 m / lane rule. The tool's wording matches the City handout and probably the 1 Nov 2019 amendment (see Outdoor Lighting Strategy report, https://council.vancouver.ca/20190723/documents/a4.pdf), which did not load. The VBBL quotes are fragments from a fetch summary; check them against the PDF. light_at_window should not rely on 'no lux values' until the in-force version is read."
+ },
+ {
+  "id": "yorkClearance2024",
+  "resolved": "yes",
+  "source_read": "York / Johnson Controls, 'Chiller clearances vs efficiency' (insights page, 10 Jun 2024; no named author), https://www.york.com/insights/2024/chiller-clearances-vs-efficiency — manufacturer claim",
+  "findings": [
+   {
+    "point": "Wall height",
+    "value": "12 ft",
+    "quote": "for units having up to 26 fans with a surrounding wall height of 12 feet placed at a distance six feet away",
+    "where": "section on pits / thick-walled enclosures"
+   },
+   {
+    "point": "Derating",
+    "value": ">4.5% capacity, >6.0% power",
+    "quote": "the capacity was decreased by more than 4.5% and the power requirement increased by more than 6.0%",
+    "where": "same section"
+   },
+   {
+    "point": "Thin walls no taller than unit",
+    "value": "wording as in source",
+    "quote": "Customers wanting to conceal the chiller with a thin wall or fence may do so without any negligible derating to capacity or increase in power required, providing the wall does not exceed the height of the chiller.",
+    "where": "section on thin fencing"
+   }
+  ],
+  "proposed_text": "York / Johnson Controls (10 Jun 2024; vendor testing, manufacturer claim): a 12 ft wall 6 ft from an air-cooled chiller (units up to 26 fans) cut capacity by more than 4.5% and raised power by more than 6.0%; thin walls or fences no taller than the unit: 'without any negligible derating' [sic; source wording] — https://www.york.com/insights/2024/chiller-clearances-vs-efficiency",
+  "number_change": "none",
+  "note": "12 ft confirmed. The garbled phrase is verbatim in the source (double negative; the intended meaning is likely 'negligible derating'), so mark it [sic]. Applies to thick walls/pits taller than the chiller; the scope is units with up to 26 fans. Read via fetch summary."
+ }
+]

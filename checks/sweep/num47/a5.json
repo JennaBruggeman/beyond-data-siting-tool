@@ -1,0 +1,271 @@
+[
+ {
+  "id": "bcbc2024_326",
+  "resolved": "partly",
+  "source_read": "British Columbia Building Codes 2024 (BC Building Code), Division B, Subsection 3.2.6, Government of British Columbia, 2024 — local copy /mnt/attach/outputs/data/raw/codes/bcbc2024.pdf (text: bcbc2024.txt). Also National Building Code of Canada 2020, Volume 1, NRC (issued 2025 printing) — local copy /mnt/attach/outputs/data/raw/codes/nbc2020_v2.pdf (text: nbc.txt). NBC 2023 Alberta Edition not available locally and not read.",
+  "findings": [
+   {
+    "point": "BCBC 3.2.6.1 Group C trigger wording",
+    "value": "confirmed: Group C floor level more than 18 m above grade",
+    "quote": "d) containing a Group C major occupancy whose floor level is more than 18 m above grade.",
+    "where": "BCBC 2024, Div. B, Article 3.2.6.1.(1)(d), p. 3-189"
+   },
+   {
+    "point": "BCBC 3.2.6.5 firefighter elevator",
+    "value": "confirmed",
+    "quote": "1) At least one elevator shall be provided for use by firefighters in conformance with Sentences (2) to (6).",
+    "where": "BCBC 2024, Div. B, Article 3.2.6.5.(1), pp. 3-190/3-191"
+   },
+   {
+    "point": "National NBC 2020 same Articles",
+    "value": "same wording in national NBC 2020 (not the Alberta Edition)",
+    "quote": "d) containing a Group C major occupancy whose floor level is more than 18 m above grade.\" / \"1) At least one elevator shall be provided for use by firefighters in conformance with Sentences (2) to (6).",
+    "where": "NBC 2020 Vol. 1, Div. B, 3.2.6.1.(1)(d) p. 3-108; 3.2.6.5.(1) p. 3-109"
+   },
+   {
+    "point": "NBC(AE) wording",
+    "value": "not checked",
+    "quote": "",
+    "where": "NBC 2023 Alberta Edition not in local library; not fetched"
+   }
+  ],
+  "proposed_text": "BC Building Code 2024, Div. B 3.2.6.1(1)(d) (high buildings: 'containing a Group C major occupancy whose floor level is more than 18 m above grade') and 3.2.6.5(1) (at least one elevator for use by firefighters); same wording in national NBC 2020 Div. B 3.2.6.1(1)(d) and 3.2.6.5(1); NBC(AE) itself not checked ?",
+  "number_change": "none",
+  "note": "BCBC Sentence 3.2.6.1.(2) differs slightly from NBC 2020 (BCBC adds Article 3.2.2.93. and 'Except as required by Clause 3.2.6.1.(1)(c)'); not relevant to the Group C trigger. NBC(AE) 2023 still needs a direct read."
+ },
+ {
+  "id": "censusIncome2021",
+  "resolved": "yes",
+  "source_read": "Statistics Canada, The Daily, 13 Jul 2022, 'Pandemic benefits cushion losses for low income earners and narrow income inequality' — saved copy /mnt/attach/outputs/sources/library/public/censusIncome2021/page.html (https://www150.statcan.gc.ca/n1/daily-quotidien/220713/dq220713d-eng.htm); Statistics Canada Table 98-10-0058-01 page (https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=9810005801); Statistics Canada Focus on Geography Series, 2021 Census, Edmonton (CMA), chart 'Median after-tax income of households, Canada, Alberta [PR], Edmonton (CMA), 2015 to 2020', modified 2022-12-16 (https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/alternative.cfm?topic=5&lang=e&dguid=2021S0503835&objectId=1c)",
+  "findings": [
+   {
+    "point": "Vancouver median after-tax household income 2020",
+    "value": "$79,500",
+    "quote": "while in Vancouver it was $79,500, up 16.1% from five years earlier.",
+    "where": "The Daily, 13 Jul 2022, body text on large urban centres"
+   },
+   {
+    "point": "Edmonton median after-tax household income 2020",
+    "value": "$84,000 (not printed in The Daily; The Daily only says Edmonton decreased)",
+    "quote": "Edmonton, 2020: 84,000 [column 'Median after-tax income of households ($)']; Daily: 'After-tax income grew in Vancouver, Montréal and Toronto and decreased in Calgary, Edmonton, and St. John's'",
+    "where": "Focus on Geography Series, Edmonton (CMA), income chart alternative table; The Daily Map 2 caption"
+   },
+   {
+    "point": "Table 98-10-0058-01",
+    "value": "exists: 'Household income statistics by household type: Census metropolitan areas, tracted census agglomerations and census tracts', released 2022-07-13; table number not printed in The Daily; table values not read (default view returned no results)",
+    "quote": "Household income statistics by household type: Census metropolitan areas, tracted census agglomerations and census tracts",
+    "where": "StatCan table page pid=9810005801 (title, release date 2022-07-13)"
+   }
+  ],
+  "proposed_text": "Statistics Canada 2021 Census, median after-tax household income 2020: Vancouver CMA $79,500 (The Daily, 13 Jul 2022), Edmonton CMA $84,000 (Focus on Geography Series 2021, Edmonton CMA); full data in Table 98-10-0058-01 (Household income statistics by household type: CMAs, tracted CAs and census tracts; released 13 Jul 2022; values not read from the table itself) — https://www150.statcan.gc.ca/n1/daily-quotidien/220713/dq220713d-eng.htm",
+  "number_change": "none",
+  "note": "Edmonton value was attributed to The Daily but is not in its text; re-cited to Focus on Geography. Table number confirmed as a real StatCan table of the right content and date; whether the tool's two values were read from it was not verified."
+ },
+ {
+  "id": "dell",
+  "resolved": "partly",
+  "source_read": "Dell, 'Product Carbon Footprint — PowerEdge R740', report produced January 2019 (https://i.dell.com/sites/csdocuments/corpcomm_docs/en/carbon-footprint-poweredge-r740.pdf); Dell, PowerEdge R540 carbon footprint, report produced February 2019 (https://i.dell.com/sites/csdocuments/CorpComm_Docs/en/carbon-footprint-poweredge-r540.pdf); Dell EMC PowerEdge R540 Technical Guide (https://i.dell.com/sites/csdocuments/shared-content_data-sheets_documents/en/us/poweredge-r540-technical-guide.pdf). Manufacturer documents (claims). Read via fetch-tool summary.",
+  "findings": [
+   {
+    "point": "R740 weight",
+    "value": "26.3 kg",
+    "quote": "Product Weight 26.3 kg",
+    "where": "R740 carbon footprint PDF, assumptions"
+   },
+   {
+    "point": "R540 weight",
+    "value": "25.4 kg",
+    "quote": "Product Weight 25.4 kg",
+    "where": "R540 carbon footprint PDF, assumptions"
+   },
+   {
+    "point": "Form factor in footprint PDFs",
+    "value": "not stated; only 'Rack'",
+    "quote": "Server Type Rack Assembly",
+    "where": "R740 and R540 carbon footprint PDFs, assumptions"
+   },
+   {
+    "point": "R540 is 2U",
+    "value": "2U (manufacturer technical guide)",
+    "quote": "The PowerEdge R540 is a dual socket, 2U rack server with up to 16 DIMMs",
+    "where": "R540 Technical Guide, Ch. 3 Chassis overview; also Table 3 '2U rack'"
+   },
+   {
+    "point": "R650, rare earths, copper, Danczak, Graedel in Dell PDFs",
+    "value": "none of these appear in the R740 PDF; R650/rare earth/copper do not appear in the R540 PDF",
+    "quote": "",
+    "where": "R740 and R540 carbon footprint PDFs (keyword check)"
+   }
+  ],
+  "proposed_text": "Dell carbon-footprint PDFs (Jan/Feb 2019, manufacturer claims): R740 26.3 kg (2U ?: not stated in the PDF), R540 25.4 kg (product weights; 2U per Dell R540 Technical Guide); R650 21.25 kg (1U) (?: not in these PDFs; source not found); Danczak 2018 rare earths and Graedel 2011 copper are separate sources, not in the Dell PDFs (their values not checked ?) — https://i.dell.com/sites/csdocuments/corpcomm_docs/en/carbon-footprint-poweredge-r740.pdf",
+  "number_change": "none",
+  "note": "Fetch limit reached; R740 form factor and R650 weight/form factor still need a Dell spec sheet. Rare earth/copper sources confirmed absent from Dell PDFs but Danczak 2018 and Graedel 2011 themselves were not read."
+ },
+ {
+  "id": "edmNationsNamed",
+  "resolved": "yes",
+  "source_read": "Confederacy of Treaty No. 6 First Nations, 'Member Nations' page — saved copy /mnt/attach/outputs/sources/library/public/edmNationsNamed/page.html (https://www.treatysix.org/nation-listing), saved 25 Oct 2026",
+  "findings": [
+   {
+    "point": "Number of member Nations listed",
+    "value": "15 (no total printed)",
+    "quote": "ALEXANDER FIRST NATION ... ALEXIS NAKOTA SIOUX NATION ... BEAVER LAKE CREE NATION ... COLD LAKE FIRST NATIONS ... ENOCH CREE NATION ... ERMINESKIN CREE NATION ... FROG LAKE FIRST NATION ... WHITEFISH LAKE FIRST NATION #128 ... HEART LAKE FIRST NATION ... KEHEWIN CREE NATION ... LOUIS BULL TRIBE ... MONTANA FIRST NATION ... PAUL FIRST NATION ... SAMSON CREE NATION ... SUNCHILD FIRST NATION",
+    "where": "Member Nations page, list of Nations with Chief and address"
+   },
+   {
+    "point": "Source of the 16 count",
+    "value": "'ALEXANDER FIRST NATION' is printed twice at the top of the list (heading repeated), but there is only one Alexander entry with a Chief and address",
+    "quote": "ALEXANDER FIRST NATION ALEXANDER FIRST NATION Chief George Arcand Jr. Box 3419 Morrinville, AB",
+    "where": "Member Nations page, first entry"
+   }
+  ],
+  "proposed_text": "City of Edmonton land acknowledgement: Treaty 6 territory and the Métis homeland; names peoples (incl. Nehiyaw/Cree, Dene, Anishinaabe/Saulteaux, Nakota Isga, Niitsitapi) not individual Nations; Confederacy of Treaty No. 6 First Nations lists 15 member Nations (count of entries; no total printed) (https://www.treatysix.org/nation-listing, read 25 Oct 2026); Indigenous Framework roles Listener, Connector, Advocate, Partner; Urban Reserve Strategy approved 28 Jun 2021 — https://www.edmonton.ca/city_government/indigenous-relations-office",
+  "number_change": "none",
+  "note": "Only the Treaty Six count was the open point; Edmonton page items were not re-checked here."
+ },
+ {
+  "id": "ieaEnergyAI",
+  "resolved": "no",
+  "source_read": "IEA, Energy and AI (2025) — attempted https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai (site client error), full report PDF https://iea.blob.core.windows.net/assets/de9dea13-b07d-42c5-a398-d1b3ae17d866/EnergyandAI.pdf (returned as binary, unreadable), and https://www.iea.org/reports/energy-and-ai/executive-summary (site client error)",
+  "findings": [],
+  "proposed_text": "IEA, Energy and AI (2025): 'a data centre can be operational in two to three years' (?: quote not verified; iea.org chapter and executive-summary pages and the report PDF could not be read) — https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai",
+  "number_change": "none",
+  "note": "Three fetch attempts failed. Search returned only media pages for the exact phrase (not used). Next step: download the report PDF (iea.blob.core.windows.net link above) in a browser and grep with pdftotext."
+ },
+ {
+  "id": "mvAAQO",
+  "resolved": "yes",
+  "source_read": "Metro Vancouver, 'Metro Vancouver Ambient Air Quality Objectives (November 2024)', page footer 05/2025 — https://metrovancouver.org/services/air-quality-climate-action/Documents/ambient-air-quality-objectives.pdf (read via fetch-tool summary)",
+  "findings": [
+   {
+    "point": "Date",
+    "value": "November 2024 objectives; document revision 05/2025",
+    "quote": "Metro Vancouver Ambient Air Quality Objectives (November 2024)",
+    "where": "Title; '05/2025' at end of page"
+   },
+   {
+    "point": "NO2 1-hour",
+    "value": "79 µg/m³ (42 ppb)",
+    "quote": "79 (42) ... c: Achievement based on annual 98th percentile of the daily maximum 1-hour concentration averaged over three consecutive years.",
+    "where": "Objectives table, NO2 1-hour row, footnote c"
+   },
+   {
+    "point": "NO2 annual",
+    "value": "22.6 µg/m³ (12.0 ppb)",
+    "quote": "22.6 (12.0) ... d: Achievement based on annual average of 1-hour concentrations over one year.",
+    "where": "Objectives table, NO2 annual row, footnote d"
+   },
+   {
+    "point": "PM2.5 24-hour, rolling",
+    "value": "25 µg/m³, rolling average",
+    "quote": "25 ... b: Achievement based on rolling average.",
+    "where": "Objectives table, PM2.5 24-hour row, footnote b"
+   }
+  ],
+  "proposed_text": "Metro Vancouver Ambient Air Quality Objectives (November 2024; document dated 05/2025): NO2 1-h 79 µg/m³ (42 ppb; annual 98th percentile of daily max 1-h, 3-yr average), annual 22.6 µg/m³ (12.0 ppb); PM2.5 24-h 25 µg/m³ (rolling average) — https://metrovancouver.org/services/air-quality-climate-action/Documents/ambient-air-quality-objectives.pdf",
+  "number_change": "none",
+  "note": "The cited PDF opened this time. Its 05/2025 footer suggests the 'May 2025 fact sheet' seen earlier is this same document. Also on the sheet: PM2.5 annual 8 µg/m³ with a 6 µg/m³ planning goal (not used by the tool). Values came through a fetch-tool summary of the PDF, not a local pdftotext read."
+ },
+ {
+  "id": "nrcanPVmunic",
+  "resolved": "yes",
+  "source_read": "Natural Resources Canada, Photovoltaic potential and solar resource maps of Canada, page modified 2025-01-16 — saved copy /mnt/attach/outputs/sources/library/public/nrcanPVmunic/page.html; municipal CSV /mnt/attach/outputs/data/raw/nrcan/municip_potentiel-potential.csv (downloaded 15 Oct 2026)",
+  "findings": [
+   {
+    "point": "Vancouver annual kWh/kWp (vertical, latitude tilt, horizontal)",
+    "value": "716, 1007, 892",
+    "quote": "British Columbia/Colombie-Britannique,Vancouver,Annual/Annuel,716,1007,938,1025,1426,892",
+    "where": "CSV line 9260; columns: vertical, latitude, lat+15, lat-15, 2-axis, horizontal"
+   },
+   {
+    "point": "Edmonton annual kWh/kWp",
+    "value": "989, 1244, 944",
+    "quote": "Alberta/Alberta,Edmonton,Annual/Annuel,989,1244,1181,1247,1779,944",
+    "where": "CSV line 1538"
+   },
+   {
+    "point": "Spruce Grove annual kWh/kWp",
+    "value": "latitude 1232, horizontal 942 (vertical 977)",
+    "quote": "Alberta/Alberta,Spruce Grove,Annual/Annuel,977,1232,1168,1236,1760,942",
+    "where": "CSV line 4060"
+   },
+   {
+    "point": "Method details",
+    "value": "CERES 1974–1993, 144 stations, PR 0.75, within about 10%",
+    "quote": "based on 1974-1993 (CERES, Environment and Climate Change Canada) monthly mean daily global insolation data from 144 meteorological stations ... using a performance ratio of 0.75 ... should be within about 10% of the values presented here.",
+    "where": "NRCan page, Methodology and Uncertainty sections"
+   }
+  ],
+  "proposed_text": "NRCan, Photovoltaic potential and solar resource maps of Canada — municipal values (CSV, J.B. download 15 Oct 2026; Canadian Forest Service with CanmetENERGY; CERES 1974–1993 insolation, 144 stations; performance ratio 0.75; \"within about 10%\" of lifetime averages). Annual kWh/kWp (re-checked against the CSV 28 Oct 2026) — Vancouver: horizontal 892, latitude tilt 1007, vertical 716; Edmonton: horizontal 944, latitude tilt 1244, vertical 989; Spruce Grove (proxy for Parkland County / Acheson): horizontal 942, latitude 1232 — https://natural-resources.canada.ca/energy-sources/renewable-energy/photovoltaic-potential-solar-resource-maps-canada",
+  "number_change": "none",
+  "note": "All eight values match the CSV. Spruce Grove vertical is 977 if the tool ever needs it."
+ },
+ {
+  "id": "vanDCL",
+  "resolved": "yes",
+  "source_read": "City of Vancouver, Bulletin: Development Cost Levies, last amended 25 Aug 2026 (PDF created 25 Aug 2026) — saved copy /mnt/attach/outputs/sources/library/public/vanDCL/full.pdf (saved 25 Oct 2026 from https://guidelines.vancouver.ca/bulletins/bulletin-development-cost-levies.pdf)",
+  "findings": [
+   {
+    "point": "Version",
+    "value": "last amended 25 Aug 2026",
+    "quote": "Last amended: August 25, 2026",
+    "where": "p. 1"
+   },
+   {
+    "point": "Industrial total City-wide DCL",
+    "value": "$112.87/m²",
+    "quote": "Industrial ... $85.96/m2 $26.91/m2 $112.87/m2",
+    "where": "p. 4, Table 1: Current DCL Rates by Area (effective Dec 10, 2025); footnote 5: I-2, M-1, M-1A, M-1B, M-2"
+   },
+   {
+    "point": "Mixed Employment total City-wide DCL",
+    "value": "$211.54/m²",
+    "quote": "Mixed Employment (Light Industrial) $161.07/m2 $50.47/m2 $211.54/m2",
+    "where": "p. 4, Table 1; footnote 4: IC-1, IC-2, I-1, I-1A, I-1B, I-1C, I-3 and I-4"
+   },
+   {
+    "point": "Rates still current after 30 Sep 2026",
+    "value": "same rates in the table effective 30 Sep 2026",
+    "quote": "Table 1: Approved DCL Rates by Area (effective Sept 30, 2026) ... $211.54/m2 ... $112.87/m2",
+    "where": "p. 18, Appendix F"
+   },
+   {
+    "point": "No levy without added floor area",
+    "value": "confirmed",
+    "quote": "(a) alterations to an existing building where the total floor area of the building is not increased;",
+    "where": "s. 6.1(a), p. 7"
+   }
+  ],
+  "proposed_text": "Vancouver DCL Bulletin (last amended 25 Aug 2026), Table 1 rates effective 10 Dec 2025 and unchanged in Appendix F table effective 30 Sep 2026: Industrial (I-2, M-1, M-1A, M-1B, M-2) $112.87/m²; Mixed Employment (IC-1, IC-2, I-1, I-1A–C, I-3, I-4) $211.54/m²; no levy where floor area does not increase (s.6.1(a)) — https://guidelines.vancouver.ca/bulletins/bulletin-development-cost-levies.pdf",
+  "number_change": "none",
+  "note": "A WebFetch of the live URL on 28 Oct 2026 again returned the 14 Jun 2024 version (Industrial $123.25, Mixed Employment $230.99), most likely a stale cached copy; the 25 Aug 2026 saved copy is newer by its own amendment date and PDF metadata. The bulletin text mentions annual 3% increases each 30 Sep through 2029, but Appendix F's 30 Sep 2026 table prints the same rates as Dec 2025."
+ },
+ {
+  "id": "vanTaxReport",
+  "resolved": "partly",
+  "source_read": "City of Vancouver Open Data, property tax report — local CSV /mnt/attach/outputs/data/raw/van/property-tax-report.csv; saved dataset page /mnt/attach/outputs/sources/library/public/vanTax/page.html (no field descriptions in saved HTML). Live dataset pages (opendata.vancouver.ca .../property-tax-report/information/, /explore/assets/property-tax-report/, 2011-2015 /api/) refused: provenance / robots_disallowed.",
+  "findings": [
+   {
+    "point": "FOLIO length",
+    "value": "12 digits in all 228,921 rows",
+    "quote": "015-252-779;LAND;210650400000;21065040;RT-5;...",
+    "where": "CSV, first data row (columns PID;LEGAL_TYPE;FOLIO;LAND_COORDINATE); length counted over all rows"
+   },
+   {
+    "point": "LAND_COORDINATE = first 8 digits of FOLIO",
+    "value": "true in 228,921 of 228,921 rows",
+    "quote": "210650400000;21065040",
+    "where": "CSV, FOLIO and LAND_COORDINATE columns"
+   },
+   {
+    "point": "FOLIO = last 12 digits of BC Assessment 15-digit roll number",
+    "value": "not confirmed; no City or BC Assessment documentation read",
+    "quote": "",
+    "where": ""
+   }
+  ],
+  "proposed_text": "City of Vancouver Open Data, property tax report (FOLIO: 12 digits in all rows; relation to BC Assessment's 15-digit roll number not confirmed ?; LAND_COORDINATE equals the first 8 digits of FOLIO in all 228,921 rows), downloaded Oct 2026",
+  "number_change": "none",
+  "note": "Open-data field descriptions blocked to the fetch tool (robots). Could be settled from the dataset's 'Information' tab in a browser, or a BC Assessment roll-number explanation for jurisdiction 200 (Vancouver)."
+ }
+]

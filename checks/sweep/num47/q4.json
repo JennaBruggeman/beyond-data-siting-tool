@@ -1,0 +1,67 @@
+[
+ {
+  "id": "bacS3000_2012",
+  "citation_in_tool": "Baltimore Aircoil Co., Series 3000 Cooling Tower (Product & Application Handbook 2012), b8_ct_s3000_20150914: S3E-1222-07Q 652 tons, 11'-10\" × 21'-7\" → ≈8.3 m² per MW (MANUFACTURER CLAIM; sources/16 S24; a different edition from bacS3000, 2023) — https://baltimoreaircoil.com/download_api_endpoint/536/b8_ct_s3000_20150914.pdf",
+  "open_point": "B17 28 Oct: unchecked: no first check and the web check could not read it",
+  "used_by": "component_space",
+  "saved_copies": []
+ },
+ {
+  "id": "cec2024ESS",
+  "citation_in_tool": "CSA C22.1:24 Canadian Electrical Code, Section 64 (read 19 Oct 2026, J.B. library copy; rule text not second-checked, the code is paywalled ?): in force BC 4 Mar 2025, Alberta 1 Apr 2025 (Alberta Municipal Affairs notice, Apr 2025). Rule 64-1002: battery energy storage over 1 kWh must be certified (Rule 2-024), installed to the manufacturer's instructions, and — except in an electrical equipment vault — not where the floor is more than 23 m above grade or below the lowest level of egress. Rule 64-926: outdoor batteries at least 3 m from a means of egress and 1.5 m from windows, vents and doors, unless evaluated to ANSI/CAN/UL 9540A and installed to the manufacturer's instructions. Rule 64-902: plaque showing the system and its disconnects. Appendix B: the ESS definition does not include a UPS (covered by CSA C22.2 No. 107.3); batteries in general follow Rules 64-800–64-820 (ventilation if they vent gas, access by authorized persons only). 20 kWh / 80 kWh caps apply to residential occupancies only (Rule 64-1100). Neither Vancouver Fire By-law 14419 nor Edmonton Fire Rescue Services Bylaw 15309 (consolidated 1 Jan 2025, read) has battery or fuel provisions — data/raw/codes/CEC_2024_note.txt; data/raw/ab/ma_notice_CEC2024_2025-04.pdf; data/raw/edm/bylaw/C15309_fire_2025-01-01.pdf",
+  "open_point": "the code is paywalled ?)",
+  "used_by": "battery; battery_code_path",
+  "saved_copies": []
+ },
+ {
+  "id": "dea",
+  "citation_in_tool": "Danish Energy Agency, Technology Data for Electricity and District Heating Production, data sheet updated August 2026 (2025 EUR; sheet numbers, price year and sizes read from the xlsx once, not re-checked ?): sheets 40 (compression heat pumps, waste heat 1/3/10 MW; air-source), 41 (electric boilers), 44 (gas boilers), 140 (pit storage) — J.B. download, data/DEA_technology_data_el_dh_2026-08.xlsx; extract data/dea_catalogue_extract.json",
+  "open_point": "not re-checked ?)",
+  "used_by": "capex_split; cop; payback; price_floor; storage_footprint",
+  "saved_copies": [
+   "/mnt/attach/outputs/sources/library/public/dea/page.html"
+  ]
+ },
+ {
+  "id": "edmBL19340",
+  "citation_in_tool": "City of Edmonton Bylaw 19340, Facilities Off-site Levy (or Levies ?) Bylaw (consolidated 23 Apr 2024 ?)",
+  "open_point": "or Levies ?) | consolidated 23 Apr 2024 ?)",
+  "used_by": "rezoning_price",
+  "saved_copies": []
+ },
+ {
+  "id": "horizons",
+  "citation_in_tool": "Horizons: servers ~6 yr; plant 15–25; shell up to 40; network 40–50 (handoff rule 7); control in colocation (Greene; Monstadt and Saltzman) (handoff §3; ?: internal note, each figure needs its own source in the node review)",
+  "open_point": "?",
+  "used_by": "horizons; ledger",
+  "saved_copies": []
+ },
+ {
+  "id": "malecki2002",
+  "citation_in_tool": "Malecki 2002, Economic Geography 78(4):399–424 (abstract): 'a global bias of Internet backbone networks toward world cities', tempered by urban areas 'that serve as interconnection points'",
+  "open_point": "B16 28 Oct: second check could not read it (single check)",
+  "used_by": "interconnection",
+  "saved_copies": []
+ },
+ {
+  "id": "nrcCBD160",
+  "citation_in_tool": "NRC Canadian Building Digest 160 (1974), Tables II–III: Edmonton design heat 40 (sheltered) to 60–65 W/ft² (very exposed), about 430–700 W/m²; 65 W/ft² to keep pavement bare and wet after a design storm (?: not verified; one check finds the NRC record titled 'Design heat requirements for snow melting systems', with no author, digest number or year shown, and the PDF not openable) — https://nrc-publications.canada.ca/fra/voir/td/?id=ea4000fb-340b-4fdf-878f-27658e1f7df8",
+  "open_point": "(?: not verified; one check finds the NRC record titled 'Design heat requirements for snow melting systems', with no author, digest number or year shown, and the PDF not openable)",
+  "used_by": "snowmelt_area",
+  "saved_copies": []
+ },
+ {
+  "id": "uptime2024survey",
+  "citation_in_tool": "Uptime Institute, Global Data Center Survey 2024 (Keynote report 146, Jul 2024; n > 850): average rack density 8 kW (7.1 kW without sites above 50 kW), pp. 10–11 (INDUSTRY SURVEY; sources/16 S15) — https://datacenter.uptimeinstitute.com/rs/711-RIA-145/images/2024.GlobalDataCenterSurvey.Report.pdf",
+  "open_point": "B17 28 Oct: unchecked: no first check and the web check could not read it",
+  "used_by": "size_fit",
+  "saved_copies": []
+ },
+ {
+  "id": "vanRezoneTime",
+  "citation_in_tool": "City of Vancouver: typical CD-1 rezoning 'Target ~16 weeks to Letter of Response', 'Target ~15 months to decision' (process overview); 'about one year to process (from fee payment to public hearing)' (apply-to-rezone page, Jun 2026; not seen by check 2 ?) — https://vancouver.ca/files/cov/rezoning-process-overview.pdf",
+  "open_point": "not seen by check 2 ?)",
+  "used_by": "construction_time; rezoning_price",
+  "saved_copies": []
+ }
+]

@@ -1,0 +1,78 @@
+[
+ {
+  "id": "absorption2026",
+  "citation_in_tool": "Absorption chiller temperatures and COP (Energies 19(9):2147, 2026; ?: title and authors not confirmed, page not reached) — https://www.mdpi.com/1996-1073/19/9/2147",
+  "open_point": "?",
+  "used_by": "Cooling for neighbours; a_absorption_temp; absorption",
+  "saved_copies": []
+ },
+ {
+  "id": "bylaw14600",
+  "citation_in_tool": "Edmonton Bylaw 14600 ss.19–22: 65 dBA day / 50 night at the residential property line; no Leq or continuous-noise provision — https://edmonton.ca/sites/default/files/public-files/C14600.pdf",
+  "open_point": "B18 28 Oct: second check could not read it (single check)",
+  "used_by": "ambient_cover; noise_limit",
+  "saved_copies": []
+ },
+ {
+  "id": "ddeBizCase2025",
+  "citation_in_tool": "City of Edmonton, DDEI Business Case — Phase 1A and 2 Development, Attachment 3 to IIS02765, Utility Committee 23 Jun 2025",
+  "open_point": "B18 28 Oct: second check could not read it (single check)",
+  "used_by": "price_ceiling",
+  "saved_copies": []
+ },
+ {
+  "id": "duan2026",
+  "citation_in_tool": "Duan et al. 2026 (peer-reviewed): surface urban heat island, Vancouver summer daytime 7.25 °C, Edmonton winter night 2.86 °C (land-surface, not air, temperature) — audit/research_2026-10-19/B",
+  "open_point": "B16 28 Oct: second check could not read it (single check)",
+  "used_by": "uhi_context",
+  "saved_copies": []
+ },
+ {
+  "id": "ess",
+  "citation_in_tool": "BC ESS / JIBC group lodging 3.5 m² per person; Edmonton shelter standard 2 m between beds; Health Canada cleaner-air spaces MERV 13+, 2–3 ACH (Formulas sheet; ?: three separate sources, each to be named and checked in the node review)",
+  "open_point": "?",
+  "used_by": "Warming centre, refuge, clean-air room; clean_air_volume; cooling_centre_people; refuge_people",
+  "saved_copies": []
+ },
+ {
+  "id": "learningSeries",
+  "citation_in_tool": "J.B., Beyond Data learning series (manuscript, Oct 2026), critique 14 Oct 2026 — a learning aid; figures it reports are unverified until the papers are read",
+  "open_point": "B14 28 Oct: second check could not read it (single check)",
+  "used_by": "commitment; futures",
+  "saved_copies": []
+ },
+ {
+  "id": "neuSewage",
+  "citation_in_tool": "City of Vancouver, NEU sewage heat recovery: '3.2 megawatts (MW) of sewage heat recovery capacity', expansion of 6.6 MW (two 3.3 MW heat pumps; the phrase 'an additional 6.6 megawatts' is not on the saved page ?) (two 3.3 MW heat pumps, end of 2024) — https://vancouver.ca/home-property-development/sewage-heat-recovery-expansion-project.aspx",
+  "open_point": "the phrase 'an additional 6.6 megawatts' is not on the saved page ?)",
+  "used_by": "Sewage heat as comparator source; sewer_sink",
+  "saved_copies": [
+   "/mnt/attach/outputs/sources/library/public/neuSewage/page.html"
+  ]
+ },
+ {
+  "id": "statcanLives",
+  "citation_in_tool": "Statistics Canada, Table C.1-1, surveyed lives of assets 1985–2010: office buildings 27 yr, warehouses 25.4, other commercial construction 20.7; computers 4 (?: not in this table; needs the machinery and equipment table of 15-206-X2015039) — https://www150.statcan.gc.ca/n1/pub/15-206-x/2015039/t/tblc11-eng.htm",
+  "open_point": "(?: not in this table; needs the machinery and equipment table of 15-206-X2015039)",
+  "used_by": "horizons",
+  "saved_copies": [
+   "/mnt/attach/outputs/sources/library/public/statcanLives/page.html"
+  ]
+ },
+ {
+  "id": "vanLight2019",
+  "citation_in_tool": "Vancouver Building By-law 2019, 10.2.2.10(2) (?: not in the saved copies; only By-law 4548 is) (residential buildings and parts facing a lane): full cut-off or shielded luminaires over 600 lumens, mounted no higher than 4 m along side and back yards, dimmer and timer controls, minimize lighting of adjacent properties; Untidy Premises By-law 4548 s. 7: no outdoor light that casts light directly onto a neighbouring residential window and unreasonably disturbs; no lux values in either city — https://bylaws.vancouver.ca/4548c.pdf",
+  "open_point": "(?: not in the saved copies; only By-law 4548 is)",
+  "used_by": "light_at_window",
+  "saved_copies": [
+   "/mnt/attach/outputs/sources/library/public/vanLight2019/full.pdf"
+  ]
+ },
+ {
+  "id": "yorkClearance2024",
+  "citation_in_tool": "York / Johnson Controls (10 Jun 2024; vendor testing): a wall (12 ft ?) 6 ft from an air-cooled chiller cut capacity by more than 4.5% and raised power by more than 6%; walls no taller than the unit: 'without any negligible derating' (garbled in source ?) — https://www.york.com/insights/2024/chiller-clearances-vs-efficiency",
+  "open_point": "12 ft ?) | garbled in source ?)",
+  "used_by": "visibility",
+  "saved_copies": []
+ }
+]
