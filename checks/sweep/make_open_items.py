@@ -5,11 +5,6 @@ R = pathlib.Path(__file__).resolve().parents[2]
 r = json.load(open(R / 'register/formula_register.json'))
 tri = {x['id']: x for x in csv.DictReader(open(R / 'checks/sweep/triage_2026-10-27.csv'))}
 DEC = [
- ['edmTaxRates2026', 'J.B. can check', 'Find the 2026 Edmonton property tax bylaw (non-residential rates)', 'B2'],
- ['bchTariff2026', 'J.B. can check', 'BC Hydro rate figures (LGS 29.99 ¢/day, $13.83/kW, 6.79 ¢/kWh; RS 1830) not read by either check: read them in your downloaded Electric Tariff', 'B4'],
- ['edmPermitsDC2026', 'J.B. can check', 'Edmonton permit floor areas may be ft², not m² (some are exact conversions); open a few permits to confirm the unit', 'B12'],
- ['edmParcel', 'J.B. can check', 'Unreachable for both checks', 'B1'],
- ['bcAssess2026', 'J.B. can check', 'BC Assessment page blocked (check it on the Abacus page yourself)', 'B1'],
  ['F-01..F-05', 'display fix', 'Open display fixes from the tool review (F-04 CLARK page error)', 'tool'],
 ]
 srcs = {**r['old_sources'], **r['new_sources']}

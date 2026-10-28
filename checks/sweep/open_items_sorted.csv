@@ -1,10 +1,5 @@
 impact,id,type,what is open,number at stake,used by,where found,status
 0 your decision,F-01..F-05,display fix,Open display fixes from the tool review (F-04 CLARK page error),,,tool,open
-0 your decision,bcAssess2026,J.B. can check,BC Assessment page blocked (check it on the Abacus page yourself),,receiver_demand,B1,open
-0 your decision,bchTariff2026,J.B. can check,"BC Hydro rate figures (LGS 29.99 ¢/day, $13.83/kW, 6.79 ¢/kWh; RS 1830) not read by either check: read them in your downloaded Electric Tariff",,electricity_price; ev_repay; lcoh; self_gen_rules,B4,open
-0 your decision,edmParcel,J.B. can check,Unreachable for both checks,,floor_area; horizons,B1,open
-0 your decision,edmPermitsDC2026,J.B. can check,"Edmonton permit floor areas may be ft², not m² (some are exact conversions); open a few permits to confirm the unit",,build_cost,B12,open
-0 your decision,edmTaxRates2026,J.B. can check,Find the 2026 Edmonton property tax bylaw (non-residential rates),,property_tax; tax_split,B2,open
 1 may change a number,abgas,source ?,(?: not on this page; needs the ATCO rate schedule),ATCO North Mid-Use delivery $1.062/GJ (coef uses $1.045),price_ceiling,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
 1 may change a number,absorption2026,source ?,?,"absorption ≥90 °C single-effect, 70–80 °C two-stage; COP 0.6–0.7 / <0.4",Cooling for neighbours; a_absorption_temp; absorption,"B2 28 Oct: not confirmed, marked ?",open
 1 may change a number,bacS3000,source ?,(?: one check reads 171 tons for the smallest single-cell model),smallest tower 293 vs 171 nominal tons (≈1.3 vs 0.75 MW per model),component_space,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
@@ -162,6 +157,7 @@ impact,id,type,what is open,number at stake,used by,where found,status
 "2 wording/citation, used",edmDDEcapital,source ?,B16 28 Oct: second check could not read it (single check),,distribution_cost,B16 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",edmEncroach,source ?,current fee ?),,snowmelt_area,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 "2 wording/citation, used",edmOSL2026,source ?,B16 28 Oct: second check could not read it (single check),,rezoning_price,B16 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",edmParcel,source ?,unconfirmed: unreachable,,floor_area; horizons,unconfirmed: unreachable,open
 "2 wording/citation, used",edmPermits,source ?,one check reads these as narrower than 'office/warehouse → data centre' ?) | dataset id not in the export ?,,construction_time; existing_building,B10 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",edmReceivers,source ?,not on these pages ?),,receiver_demand,B16 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",edmRezComplexity,source ?,B17 28 Oct: second check could not read it (single check),,rezoning_price,B17 28 Oct: second check could not read it (single check),open
