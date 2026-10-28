@@ -1,0 +1,660 @@
+[
+ {
+  "id": "abgas",
+  "tier": 1,
+  "number_at_stake": "ATCO North Mid-Use delivery $1.062/GJ (coef uses $1.045)",
+  "feeds": "Edmonton gas ≈ $13.0/MWh heat in price_ceiling",
+  "reason": "ATCO delivery rate not on cited page; delivery charge enters the Edmonton heat price."
+ },
+ {
+  "id": "aeso",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Unconfirmed Edmonton load and Phase 2A MW are not in the grid_headroom coef."
+ },
+ {
+  "id": "bylaw14600",
+  "tier": 1,
+  "number_at_stake": "Edmonton 65 dBA day / 50 night residential (75/60 non-res)",
+  "feeds": "noise_limit",
+  "reason": "Whole bylaw single-checked; its limits are the Edmonton noise thresholds."
+ },
+ {
+  "id": "bylaw6555",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Consolidation date only."
+ },
+ {
+  "id": "clf",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Title/year unverified; tool uses 400, not 461."
+ },
+ {
+  "id": "crf",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Chapter reference only."
+ },
+ {
+  "id": "dell",
+  "tier": 1,
+  "number_at_stake": "R650 21.25 kg per 1U server (and 26.3 kg 2U class)",
+  "feeds": "ewaste (servers × mass ÷ 6 yr)",
+  "reason": "1U mass not found in cited Dell PDFs; ewaste coef uses it."
+ },
+ {
+  "id": "ess",
+  "tier": 1,
+  "number_at_stake": "3.5 m² per person; 2–3 ACH, MERV 13+",
+  "feeds": "refuge_people, clean_air_volume",
+  "reason": "Whole source line unverified; area and ACH drive capacity numbers."
+ },
+ {
+  "id": "exergi",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "103 °C range not used; price uses 400 SEK figure."
+ },
+ {
+  "id": "horizons",
+  "tier": 1,
+  "number_at_stake": "servers ~6 yr; plant 15–25; shell ≤40; network 40–50",
+  "feeds": "horizons",
+  "reason": "Internal note; every horizon figure lacks its own source."
+ },
+ {
+  "id": "lorenz",
+  "tier": 1,
+  "number_at_stake": "η 0.50–0.60; heat 25–35 °C air / 50–60 °C liquid",
+  "feeds": "cop, heat_temp",
+  "reason": "Works not yet checked; η and temperatures feed COP and heat temperature."
+ },
+ {
+  "id": "neuReport",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "71% vs 70% renewable share is descriptive, not computed."
+ },
+ {
+  "id": "statcanHousehold",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Year range and frequency of table only."
+ },
+ {
+  "id": "gurreri2023",
+  "tier": 1,
+  "number_at_stake": "217 kWh/kgDW thermoregulation",
+  "feeds": "algae_kg",
+  "reason": "Single check; 217 is the divisor in algae_kg."
+ },
+ {
+  "id": "dea",
+  "tier": 1,
+  "number_at_stake": "DEA capex 1.13/0.95 M€/MW, O&M 2,100 €/MW·yr + 3.07 €/MWh, COP 3.1–4.7",
+  "feeds": "price_floor, payback, cop, capex_split",
+  "reason": "Single check; DEA values are core cost and COP inputs."
+ },
+ {
+  "id": "stratego",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "No point marked ?; status only."
+ },
+ {
+  "id": "hiltunen2020",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "No point marked ?; status only."
+ },
+ {
+  "id": "tt2025",
+  "tier": 1,
+  "number_at_stake": "Vancouver 910–1,200 CAD/ft²",
+  "feeds": "build_cost",
+  "reason": "Single check; the cost per ft² is shown in build_cost."
+ },
+ {
+  "id": "catTM9338",
+  "tier": 1,
+  "number_at_stake": "Cat 3516 generator sound spectra at 7 m",
+  "feeds": "noise_level (generator Lw)",
+  "reason": "Single check, dealer-hosted copy; generator sound feeds noise screen."
+ },
+ {
+  "id": "cumminsS1443",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "No point marked ?; status only."
+ },
+ {
+  "id": "rvo2018",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Author attribution only."
+ },
+ {
+  "id": "necbHDD",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "HDD 5,120 is an 'earlier' value; current method uses CWEC."
+ },
+ {
+  "id": "ayuso2023",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Article number only."
+ },
+ {
+  "id": "oebCCIM",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "No point marked ?; status only."
+ },
+ {
+  "id": "cwec",
+  "tier": 1,
+  "number_at_stake": "CWEC hourly temperatures → free-cooling hours (e.g. 7,109 / 7,614 h) and HDD16 shares",
+  "feeds": "free_cooling_hours, demand_profile",
+  "reason": "Single check of climate file; all hour counts derive from it."
+ },
+ {
+  "id": "eccc",
+  "tier": 1,
+  "number_at_stake": "precipitation 1,159.5 mm Vancouver / 422.5 mm Edmonton",
+  "feeds": "rainwater (V = A × R × C)",
+  "reason": "Single check; R in rainwater formula comes from it."
+ },
+ {
+  "id": "vanSewer",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Schema note; no value used (flow is a stated gap)."
+ },
+ {
+  "id": "altaReg117",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Single check, but cited for a rule, not a number."
+ },
+ {
+  "id": "abEGDF",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Dates and publisher only."
+ },
+ {
+  "id": "ceud",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "File names only."
+ },
+ {
+  "id": "rule012",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Page count, consolidation wording, bulletin date only."
+ },
+ {
+  "id": "bchIRP2025",
+  "tier": 1,
+  "number_at_stake": "LRMC energy $97/MWh; capacity $300/kW-yr (150–400)",
+  "feeds": "lrmc_bc",
+  "reason": "Single check; IRP App. F values multiply quantities in lrmc_bc."
+ },
+ {
+  "id": "nir2026",
+  "tier": 1,
+  "number_at_stake": "AB 334.8 / 346.1 g CO2e/kWh; BC intensity",
+  "feeds": "grid_co2 (E × EF)",
+  "reason": "Single check; emission factors set grid CO2 numbers."
+ },
+ {
+  "id": "fjfAars2020",
+  "tier": 1,
+  "number_at_stake": "Odense realised COP 4.5 (14,020 MWh el, 230 TJ)",
+  "feeds": "η calibration (0.40–0.50) in cop",
+  "reason": "Single check; Odense COP sets the upper calibrated η."
+ },
+ {
+  "id": "dfKatalog2022",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "19 vs 44.6 MW capacity not used by cop."
+ },
+ {
+  "id": "teliaHKI2024",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Title and misprinted MW not used; COP 3.9 not in doubt."
+ },
+ {
+  "id": "nivosMantsala",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Disputed Mäntsälä figures are calibration context, not inputs."
+ },
+ {
+  "id": "exergiAR2023",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Meter-ownership detail only."
+ },
+ {
+  "id": "engiePA10",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "PA10 capex not used in any coef."
+ },
+ {
+  "id": "rvoCases2018",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Heerlen capex not used; heat_delivered uses 54% share."
+ },
+ {
+  "id": "euReg2024_1364",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Read from reproduction; regulatory definitions, no number."
+ },
+ {
+  "id": "skatOverskud",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Tax metering rule is context, not a number."
+ },
+ {
+  "id": "vanRezoneTime",
+  "tier": 1,
+  "number_at_stake": "~15 months to decision (~1 yr fee to hearing)",
+  "feeds": "rezoning_price, construction_time",
+  "reason": "Single check; duration is a shown component."
+ },
+ {
+  "id": "vanFees2026",
+  "tier": 1,
+  "number_at_stake": "CD-1 fee $94,500 / $226,300 + $1,590 per 100 m²",
+  "feeds": "rezoning_price",
+  "reason": "Fee PDF never opened; fees enter rezoning cost."
+ },
+ {
+  "id": "vanDCL",
+  "tier": 1,
+  "number_at_stake": "DCL $112.87/m² industrial, $211.54/m² mixed employment",
+  "feeds": "rezoning_price",
+  "reason": "Rates single-checked (other check got 2024 version)."
+ },
+ {
+  "id": "abConsult",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Quote not found; consultation part describes, no number."
+ },
+ {
+  "id": "abMicrogen",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "No point marked ?; status only."
+ },
+ {
+  "id": "bchLGS",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "RS 1823 cancellation not used."
+ },
+ {
+  "id": "aesoStats2025",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Table category wording only."
+ },
+ {
+  "id": "vanWater2026",
+  "tier": 1,
+  "number_at_stake": "sewer $7.960 per unit",
+  "feeds": "water_supply (and rainwater savings vs water + sewer rates)",
+  "reason": "Sewer rate not in cited report; added to water cost."
+ },
+ {
+  "id": "vanOfficeConv",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "No point marked ?; status only."
+ },
+ {
+  "id": "edmPermits",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Single check; precedents only, no number used."
+ },
+ {
+  "id": "van6555zones",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Consolidation date only."
+ },
+ {
+  "id": "tenK_life",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Filing year and prior range; tool uses 5–6 yr."
+ },
+ {
+  "id": "jlarc2024",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Real-dollar basis and URL only."
+ },
+ {
+  "id": "ieaEnergyAI",
+  "tier": 1,
+  "number_at_stake": "2–3 years to operation",
+  "feeds": "construction_time",
+  "reason": "Quote unverified; figure printed in construction_time coef."
+ },
+ {
+  "id": "census2021DA",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "No real open point (URL fragment)."
+ },
+ {
+  "id": "receiversBCUC",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "No point marked ?; status only."
+ },
+ {
+  "id": "edmFees2026",
+  "tier": 1,
+  "number_at_stake": "Edmonton rezoning $2,745 + $340/ha; DC $7,930 / $15,855 + $/m²",
+  "feeds": "rezoning_price",
+  "reason": "Single check; Edmonton fees enter rezoning cost."
+ },
+ {
+  "id": "edmProcTimes",
+  "tier": 1,
+  "number_at_stake": "DP 90/73 days; BP 120/64 days",
+  "feeds": "construction_time",
+  "reason": "Single check; processing times shown in construction_time."
+ },
+ {
+  "id": "edmRezComplexity",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Single check; complexity criteria, not a value."
+ },
+ {
+  "id": "ab_p1701",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Single check; part has no formula or value."
+ },
+ {
+  "id": "zurmuhl2018",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Workshop date only."
+ },
+ {
+  "id": "kindaichi2018",
+  "tier": 1,
+  "number_at_stake": "+3 K in 3 yr at 4.8× injection ratio",
+  "feeds": "ground_warming",
+  "reason": "Only an index record checked; warming value shown in ground_warming."
+ },
+ {
+  "id": "drake_landing",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Study-type characterisation of Mudasar; η from Sibbitt not disputed."
+ },
+ {
+  "id": "ab_gshe2018",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "No point marked ?; status only."
+ },
+ {
+  "id": "pnnl2022",
+  "tier": 1,
+  "number_at_stake": "LFP $448.34/kWh (1 MW 4 h) etc.",
+  "feeds": "battery cost range CAD 467–627/kWh",
+  "reason": "Single check; PNNL sets the high end of battery cost."
+ },
+ {
+  "id": "absorption2026",
+  "tier": 1,
+  "number_at_stake": "absorption ≥90 °C single-effect, 70–80 °C two-stage; COP 0.6–0.7 / <0.4",
+  "feeds": "absorption",
+  "reason": "Page never reached; temperature thresholds and COP drive absorption."
+ },
+ {
+  "id": "van_zdb_s2",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "By-law date/number only."
+ },
+ {
+  "id": "van_zdb_i2",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Whether schedule is current (date)."
+ },
+ {
+  "id": "van_zdb_i1c",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Whether schedule is current (date)."
+ },
+ {
+  "id": "van_zdb_i3",
+  "tier": 1,
+  "number_at_stake": "I-3 A: FSR 3.00, 18.3 m (30.5), side yard 7.6 m, 61.0 m width",
+  "feeds": "envelope",
+  "reason": "Single check; zoning limits set max floor area."
+ },
+ {
+  "id": "van_zdb_fc2",
+  "tier": 1,
+  "number_at_stake": "FC-2: FSR 1.00–5.00 (6.50), 10.7–22.9 m",
+  "feeds": "envelope",
+  "reason": "Single check; FSR and height set max floor area."
+ },
+ {
+  "id": "van_rts19744",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Second address only."
+ },
+ {
+  "id": "edm_bl20001",
+  "tier": 1,
+  "number_at_stake": "Edmonton IM 18.0 m FAR 2.0; IH 30.0 m FAR 2.0; BE 16.0 m FAR 1.6",
+  "feeds": "envelope",
+  "reason": "Single check; FAR and heights set Edmonton floor area."
+ },
+ {
+  "id": "edm_matrix",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Single check; zoning status is categorical, not numeric."
+ },
+ {
+  "id": "edm_dcpage",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Single check; zoning status is categorical."
+ },
+ {
+  "id": "nbc2020_4153",
+  "tier": 1,
+  "number_at_stake": "office 2.4 / 4.8 kPa; service rooms ≥3.6 kPa",
+  "feeds": "floor_load_need",
+  "reason": "Single check; design loads compared against hall loads."
+ },
+ {
+  "id": "nfc2020_4313",
+  "tier": 1,
+  "number_at_stake": "200,000 L / 20,000 L / 45,000 L per storage room",
+  "feeds": "fuel_on_site",
+  "reason": "Single check; fuel limits are the threshold in fuel_on_site."
+ },
+ {
+  "id": "van_genroom",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "No point marked ?; status only."
+ },
+ {
+  "id": "epcor_ccg",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Title only."
+ },
+ {
+  "id": "vanNEU2025",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Page modified date only."
+ },
+ {
+  "id": "odrsf",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Version/record count of dataset, not a coef value."
+ },
+ {
+  "id": "epaQuincy",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "'Potable' wording only."
+ },
+ {
+  "id": "crozier2025",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Wording ('pause') only."
+ },
+ {
+  "id": "van9552",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Consolidation date only."
+ },
+ {
+  "id": "bcucTelus",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "G-2-15 link only; opportunity card text."
+ },
+ {
+  "id": "cordisModerator",
+  "tier": 3,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "No tool part cites this source."
+ },
+ {
+  "id": "whiteDCeel",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Author/attribution; opportunity card text."
+ },
+ {
+  "id": "canaanMB",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Capability wording and URL; opportunity card text."
+ },
+ {
+  "id": "googleFervo",
+  "tier": 3,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "No tool part cites this source."
+ },
+ {
+  "id": "fluenceStGhislain",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "No point marked ?; opportunity card text."
+ },
+ {
+  "id": "nrcanPVmunic",
+  "tier": 1,
+  "number_at_stake": "kWh/kWp: Vancouver 892–1007, Edmonton 944–1244",
+  "feeds": "pv_roof (MWh = kWp × yield)",
+  "reason": "Yields read from CSV, not re-checked; drive PV output."
+ },
+ {
+  "id": "alissa2025lca",
+  "tier": 2,
+  "number_at_stake": null,
+  "feeds": null,
+  "reason": "Percentages are context/inference in embodied_it, not computed."
+ }
+]
