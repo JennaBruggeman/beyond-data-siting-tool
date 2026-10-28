@@ -1,0 +1,57 @@
+[
+ {
+  "id": "oro2019",
+  "reachable": true,
+  "publisher": "Elsevier (Sustainable Cities and Society)",
+  "title": "Waste heat recovery from urban air cooled data centres to increase energy efficiency of district heating networks",
+  "edition": "Volume 45",
+  "date": "February 2019",
+  "url": "https://www.sciencedirect.com/science/article/abs/pii/S2210670718314082",
+  "values": [
+   {"blank_context": "Oró, Taddeo, Salom ___", "value": "2019", "quote": "published February 2019", "where": "ScienceDirect abstract page, article details"},
+   {"blank_context": "Sustainable Cities and Society ___:___–___", "value": "45:522–542", "quote": "Volume 45 ... Pages 522-542", "where": "ScienceDirect abstract page, article details"},
+   {"blank_context": "read ___ Oct ___", "value": "not stated", "quote": "", "where": "internal reading date; not in source"},
+   {"blank_context": "___ MW air-cooled model, Barcelona", "value": "1000 kW (conversion to 1 MW, not printed)", "quote": "a specific 1000 kW data centre located in Barcelona (Spain)", "where": "Abstract"},
+   {"blank_context": "return air (up to ___ °C)", "value": "not stated", "quote": "", "where": "not on abstract page; full text paywalled"},
+   {"blank_context": "chiller condenser (up to ___ °C)", "value": "not stated", "quote": "", "where": "not on abstract page; full text paywalled"},
+   {"blank_context": "heat pump to ___ °C", "value": "not stated", "quote": "", "where": "not on abstract page; full text paywalled"},
+   {"blank_context": "ERF primary-energy basis ___–___%", "value": "not stated", "quote": "", "where": "not on abstract page; full text paywalled"},
+   {"blank_context": "~___%", "value": "not stated as an approximate value; abstract says 'above 50%'", "quote": "the primary energy reused in such installations can be above 50%", "where": "Abstract; also Highlights: 'primary energy reuse in district heating networks above 50%'"},
+   {"blank_context": "ISO ___-___ ERF", "value": "not stated", "quote": "", "where": "not on abstract page"}
+  ],
+  "unsupported_wording": "Only the abstract page was readable. The return-air, condenser and heat-pump temperatures, the ERF range, the 'primary-energy basis' framing and 'not the ISO ERF' could not be checked. The abstract gives the size as 1000 kW, not in MW. 'J.B. upload' and the read date are internal and can't be checked.",
+  "note": "The DOI fetch was refused (provenance). The ScienceDirect URL came from a WebSearch, and only the abstract and highlights were shown; the full text is paywalled. The abstract says heat recovery is 'not economical feasible' in conventional air-cooled centres but is feasible with rear door cooling. The fetch summary also gave ERF figures (about 55% at the condenser, 25-45% from return air) from a citing review, Huang et al. 2020. That is secondhand, so I did not use it. Check against the full-text upload."
+ },
+ {
+  "id": "burlingtonNIA",
+  "reachable": true,
+  "publisher": "SS Wilson Associates (SSWA) Inc., for Cuadro Arch Ltd.; posted by the City of Burlington",
+  "title": "Detailed Noise and Vibration Control Study, Proposed Data Centre Development, 3110 South Service Road, Burlington, ON (Report No. WA26-006)",
+  "edition": "Report No. WA26-006",
+  "date": "May 5, 2026",
+  "url": "https://www.burlington.ca/en/news/resources/Current-Development-Projects/Ward-4/3110-South-Service/Supporting-Documents/Noise%20and%20Vibration%20Study%20-%202026-05-05.pdf",
+  "values": [
+   {"blank_context": "May ___", "value": "2026", "quote": "May 5, 2026", "where": "Title page"},
+   {"blank_context": "chillers Lw ___ dBA each", "value": "92", "quote": "CU-01 CU_01 92 ... (same for CU-02 to CU-12)", "where": "Table 6.5.5-1, p. 15"}
+  ],
+  "unsupported_wording": "none",
+  "note": "The first fetch was refused (provenance). It succeeded after the same burlington.ca URL came back from a WebSearch. There are 12 rooftop air-cooled chillers. Their data was 'provided by the project proponent based on manufacturer information' (Section 6.5.5), so 92 dBA is a proponent/manufacturer claim. The emergency generator is an assumed 108 dBA (Section 6.6), and each transformer is 80 dBA, 'conservatively assumed'."
+ },
+ {
+  "id": "ddeRates2025",
+  "reachable": false,
+  "publisher": "City of Edmonton (per claim; not checked)",
+  "title": "not checked",
+  "edition": "not checked",
+  "date": "not checked",
+  "url": "",
+  "values": [
+   {"blank_context": "Downtown District Energy ___–___ Rate Filing", "value": "not checked", "quote": "", "where": ""},
+   {"blank_context": "Attachment ___", "value": "not checked", "quote": "", "where": ""},
+   {"blank_context": "IIS0___", "value": "not checked", "quote": "", "where": ""},
+   {"blank_context": "Utility Committee ___ Jun ___", "value": "not checked", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "not checked",
+  "note": "No link was given. This is a citation to a City of Edmonton committee report, which is a real document, but no URL was supplied, so it was not looked up. To verify it, supply the edmonton.ca meeting link (Utility Committee agenda, report IIS0___)."
+ }
+]

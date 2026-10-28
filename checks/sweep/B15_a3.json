@@ -1,0 +1,165 @@
+[
+ {
+  "id": "nrelATBcommBatt2024",
+  "reachable": true,
+  "publisher": "National Renewable Energy Laboratory (NREL), Annual Technology Baseline",
+  "title": "Commercial Battery Storage",
+  "edition": "2024 ATB (page notes \"The most recent version of this page is for 2024b.\")",
+  "date": "not stated on page",
+  "url": "https://atb.nrel.gov/electricity/2024/commercial_battery_storage",
+  "values": [
+   {"blank_context": "NREL ATB ___", "value": "2024", "quote": "The 2024 ATB represents cost and performance for battery storage across a range of durations (1–8 hours).", "where": "Introduction"},
+   {"blank_context": "fixed O&M ___% of capital cost", "value": "2.5", "quote": "FOM costs are estimated at 2.5% of the capital costs in $/kW.", "where": "Operation and Maintenance (O&M) Costs section"},
+   {"blank_context": "___ yr", "value": "15", "quote": "throughout its 15-year lifetime", "where": "Operation and Maintenance (O&M) Costs section"},
+   {"blank_context": "___%", "value": "85 (round-trip efficiency, assumed meaning of the bare %)", "quote": "identified 85% as a representative round-trip efficiency", "where": "Round-Trip Efficiency section"}
+  ],
+  "unsupported_wording": "none",
+  "note": "The final bare '___%' has no label in the claim. 85% round-trip efficiency is the most likely match. Label it in the claim. The page also gives capacity factors of 16.7% (4 h) and 8.3% (2 h)."
+ },
+ {
+  "id": "edmSidewalk",
+  "reachable": true,
+  "publisher": "City of Edmonton",
+  "title": "Page heading read as \"Snow shoveling in winter\"; search-result title \"Residential Sidewalk Snow and Ice\"",
+  "edition": "n/a",
+  "date": "not stated",
+  "url": "https://www.edmonton.ca/transportation/on_your_streets/sidewalk-snow-removal",
+  "values": [
+   {"blank_context": "$___ fine plus the cost of removal", "value": "100", "quote": "could result in a $100 fine plus the cost of snow removal", "where": "main page body"}
+  ],
+  "unsupported_wording": "Title 'Sidewalk snow removal' is the URL slug, not the printed page title (the page reads 'Residential Sidewalk Snow and Ice' / 'Snow shoveling in winter'). Minor.",
+  "note": "Property-owner duty is supported: \"Property owners should remove snow and ice as soon as possible\". No fixed deadline is stated. The first fetch was refused for provenance; a WebSearch surfaced the same URL, which then fetched."
+ },
+ {
+  "id": "atlasCloud",
+  "reachable": true,
+  "publisher": "Atlas Cloud (operator website); Atlas Cloud Enterprises news release filed on CSE",
+  "title": "About Atlas Cloud; Site Location; ATLAS CLOUD ACQUIRES 1000 BITCOIN MINERS",
+  "edition": "n/a",
+  "date": "Web pages: not stated. Release: January 24, 2018",
+  "url": "https://www.atlasdatacenter.ca/about-atlas-cloud/ ; https://www.atlasdatacenter.ca/about-atlas-cloud/site-location/ ; https://webfiles.thecse.com/AKE_NR_1.24.18_S9_Miners_V6.pdf",
+  "values": [
+   {"blank_context": "___ East ___th Ave site", "value": "308 / 5", "quote": "308 East 5th Avenue", "where": "/about-atlas-cloud/ (also \"308 East 5th Ave in Vancouver\" on /about-atlas-cloud/site-location/)"},
+   {"blank_context": "first phase of ___ racks", "value": "16", "quote": "the first phase of 16 racks is installed", "where": "/about-atlas-cloud/"},
+   {"blank_context": "CSE release ___ Jan ___", "value": "24 / 2018", "quote": "VANCOUVER, BC, January 24, 2018", "where": "CSE news release dateline"},
+   {"blank_context": "Electric City WA ___ MW", "value": "3.0", "quote": "3.0 MW", "where": "CSE news release body"}
+  ],
+  "unsupported_wording": "'instrument now inactive on MarketScreener' was not checked (MarketScreener was not read). The site-location page is at /about-atlas-cloud/site-location/, not /site-location/. Lease and packing-plant wording appear on /about-atlas-cloud/, not on site-location.",
+  "note": "OPERATOR CLAIMS. Lease: \"Atlas Cloud has a long-term lease on a very unique property in Vancouver\"; building: \"formerly the manufacturing plant for the Mayer's packing company\" (claim says 'former packing-plant manufacturing building', which is supported). Release: \"ATLAS CLOUD ACQUIRES 1000 BITCOIN MINERS\", \"CSE: AKE\". Release found on webfiles.thecse.com through WebSearch. The /news/ page is blocked by robots. The first fetch was refused for provenance."
+ },
+ {
+  "id": "ravi2026",
+  "reachable": true,
+  "publisher": "Elsevier, Applied Energy (record read on the EPFL Infoscience repository)",
+  "title": "From servers to services: modeling data centers as heat-active urban energy prosumers",
+  "edition": "Vol. 402, article 127049",
+  "date": "January 1, 2026",
+  "url": "https://infoscience.epfl.ch/entities/publication/e7cb9063-5db3-4154-9c4c-7c5a9a0eccc0/articledetails",
+  "values": [
+   {"blank_context": "Ravi et al. ___", "value": "2026", "quote": "Year: 2026; publication date January 1, 2026", "where": "Infoscience article details"},
+   {"blank_context": "Applied Energy ___", "value": "402", "quote": "Volume: 402", "where": "Infoscience article details"},
+   {"blank_context": ":___", "value": "127049", "quote": "Article number: 127049; DOI 10.1016/j.apenergy.2025.127049", "where": "Infoscience article details"},
+   {"blank_context": "checked by the atlas chat ___ Oct", "value": "not stated", "quote": "", "where": "internal note, not from source"}
+  ],
+  "unsupported_wording": "'(abstract and EPFL pages checked by the atlas chat ___ Oct)' is an internal process note that no source can confirm. The claim's title slot is empty.",
+  "note": "Authors: Ravi, Sai Sudharshan; Löffler, Theresa Sophie; Pina, Eduardo Antonio; Sharma, Shivom; Lepour, Dorsan; Terrier, Cedric; Maréchal, François. The DOI link was refused for provenance. Read on EPFL's institutional repository, not on Elsevier's own page. The abstract was not checked here."
+ },
+ {
+  "id": "gowlingEV2021",
+  "reachable": true,
+  "publisher": "Gowling WLG",
+  "title": "Are electric vehicle charging services regulated 'suppliers' of electricity? Provincial energy regulators are saying no (listed in URL and search as 'Regulation of electric vehicle charging services')",
+  "edition": "n/a",
+  "date": "27 May 2021",
+  "url": "https://gowlingwlg.com/en/insights-resources/articles/2021/regulation-of-electric-vehicle-charging-services",
+  "values": [
+   {"blank_context": "(___)", "value": "2021", "quote": "Published 27 May 2021", "where": "article header"},
+   {"blank_context": "UCA Part ___", "value": "3", "quote": "Part 3 of the Utilities Commission Act", "where": "BC section"},
+   {"blank_context": "BCUC G-___-___", "value": "66 / 19", "quote": "Order G-66-19 ... exempting EV charging services from the provisions of the Utilities Commission Act that regulate the sale, delivery or provision of electricity", "where": "BC section"},
+   {"blank_context": "MO M1___", "value": "04 (M104)", "quote": "Ministerial Order M104", "where": "BC section"},
+   {"blank_context": "final report (___ Feb ___)", "value": "21 / 2021", "quote": "February 21, 2021", "where": "Alberta section"},
+   {"blank_context": "p.___", "value": "60", "quote": "most parties were of the view that no additional regulatory oversight is required at this time", "where": "Alberta section, cited to page 60 of the AUC report"}
+  ],
+  "unsupported_wording": "The title in the claim is the URL slug or page label. The printed headline is 'Are electric vehicle charging services regulated \"suppliers\" of electricity? Provincial energy regulators are saying no'.",
+  "note": "SECONDARY law-firm summary, by Chris Hummel and Ian A. Mondrow. The article says the AUC \"did not issue a final conclusion or decision on EV charging\", which supports 'no final decision'. The quoted phrase matches the article. The AUC report itself was not read. The fetcher summarised the M104 wording instead of quoting the exact sentence."
+ },
+ {
+  "id": "mainovaWestville",
+  "reachable": true,
+  "publisher": "Mainova AG",
+  "title": "Innovatives Wärmekonzept für Frankfurter Wohnquartier „Westville“ vorgestellt",
+  "edition": "press release",
+  "date": "08.07.2021",
+  "url": "https://www.mainova.de/resource/blob/76624/8658ad28e9ad7ddaf86445e6a84ff960/pm-08072021-rz-abwaermenutzung-westville-data.pdf",
+  "values": [
+   {"blank_context": "press release ___ Jul ___", "value": "8 / 2021", "quote": "(Frankfurt, 08.07.2021)", "where": "dateline, p.1"},
+   {"blank_context": "about ___ homes", "value": "1,300 (printed '1.300')", "quote": "rund 1.300 Neubauwohnungen", "where": "p.1 body"},
+   {"blank_context": "at least ___% of heat", "value": "60", "quote": "mindestens 60 Prozent aus der Abwärme des benachbarten Rechenzentrums", "where": "p.1 body"},
+   {"blank_context": "ab Anfang ___ vorgesehen", "value": "2023", "quote": "Der Beginn der Wärmelieferung ist ab Anfang 2023 vorgesehen.", "where": "body"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Telehouse is named: \"der Rechenzentrumsbetreiber Telehouse Deutschland GmbH\". The first direct fetch was refused for provenance. A WebSearch then surfaced the same PDF URL, which fetched. Mainova's current reference page also gives 1,300 homes and at least 60%, with completion expected mid-2025. Page numbers come from a converted text extract and are approximate."
+ },
+ {
+  "id": "wilde2017",
+  "reachable": true,
+  "publisher": "IBM Research publications page (proceedings publisher listed as Institute of Electrical and Electronics Engineers Inc.)",
+  "title": "CooLMUC-2: A supercomputing cluster with heat recovery for adsorption cooling",
+  "edition": "SEMI-THERM 2017 (Annual Semiconductor Thermal Measurement, Modeling and Management Symposium)",
+  "date": "11 Apr 2017",
+  "url": "https://research.ibm.com/publications/coolmuc-2-a-supercomputing-cluster-with-heat-recovery-for-adsorption-cooling",
+  "values": [
+   {"blank_context": "Wilde et al. ___", "value": "2017", "quote": "11 Apr 2017", "where": "IBM publication page"},
+   {"blank_context": "CoolMUC-___", "value": "2", "quote": "CooLMUC-2: A supercomputing cluster with heat recovery for adsorption cooling", "where": "title"}
+  ],
+  "unsupported_wording": "'(peer-reviewed)' is not stated. The page says only 'Conference paper'. The printed spelling is 'CooLMUC-2', not 'CoolMUC-2'.",
+  "note": "Authors: Torsten Wilde, Michael Ott, Axel Auweter, Ingmar Meijer, Patrick W. Ruch, Markus Hilger, Steffen Kuhnert, Herbert Huber. The first fetch was refused for provenance. A WebSearch then surfaced the same URL, which fetched. Read on IBM's page, not IEEE Xplore."
+ },
+ {
+  "id": "lclHVO",
+  "reachable": true,
+  "publisher": "Caterpillar (cat.com)",
+  "title": "LCL Data Centers Fuels Standby Power System With HVO, A Renewable Alternative To Diesel",
+  "edition": "testimonial",
+  "date": "2024-05-28 (page metadata)",
+  "url": "https://www.cat.com/en_US/by-industry/electric-power/Articles/Testimonials/lcl-data-centers-fuels-standby-power-system-with-hvo-a-renewable-alternative-to-diesel.html",
+  "values": [
+   {"blank_context": "six ___B gensets", "value": "3516 (3516B)", "quote": "six Cat 3516B diesel generator sets", "where": "article body"},
+   {"blank_context": "HVO1___", "value": "00 (HVO100)", "quote": "operates exclusively on HVO100", "where": "article body"}
+  ],
+  "unsupported_wording": "none",
+  "note": "VENDOR CLAIM (Caterpillar). The site is described as \"LCL Brussels-West data center in Aalst\". The en_GB link was refused for provenance, so the en_US version of the same testimonial was read. The date comes only from metadata."
+ },
+ {
+  "id": "onyxMAD01",
+  "reachable": true,
+  "publisher": "Onyx Solar",
+  "title": "Data Center Madrid - Onyx Solar´s Projects",
+  "edition": "project page",
+  "date": "not stated",
+  "url": "https://onyxsolar.com/photovoltaic-facade-data-center",
+  "values": [
+   {"blank_context": "MAD0___", "value": "1 (MAD01)", "quote": "MAD01", "where": "project page"},
+   {"blank_context": "covering ___ m2", "value": "3,600", "quote": "covering 3,600 m2 that achieve 600 kWp", "where": "project page body"},
+   {"blank_context": "achieve ___ kWp", "value": "600", "quote": "covering 3,600 m2 that achieve 600 kWp", "where": "project page body"}
+  ],
+  "unsupported_wording": "none",
+  "note": "VENDOR CLAIM (Onyx Solar). The page says \"photovoltaic ventilated façade\" under the heading \"DATA CENTER · MADRID, SPAIN\". The first fetch was refused for provenance. A WebSearch then surfaced the same URL, which fetched."
+ },
+ {
+  "id": "bjBYOG2026",
+  "reachable": true,
+  "publisher": "Bennett Jones LLP",
+  "title": "Alberta's BYOG Framework: What Data Centre and Generation Proponents Need to Know",
+  "edition": "blog",
+  "date": "July 9, 2026",
+  "url": "https://www.bennettjones.com/Insights/Blogs/2026/07/Albertas-BYOG-Framework",
+  "values": [
+   {"blank_context": "Jul ___", "value": "2026", "quote": "July 9, 2026", "where": "article header"},
+   {"blank_context": "Alta Reg ___/___", "value": "117/2026", "quote": "Data Centre Regulation, AR 117/2026, made under the Electric Utilities Act", "where": "article body"},
+   {"blank_context": "≥ ___ MW maximum transmission demand", "value": "75", "quote": "a maximum direct transmission demand of 75 MW or more", "where": "article body ('large data centre' definition)"}
+  ],
+  "unsupported_wording": "none",
+  "note": "SECONDARY law-firm summary by Kennedy, Ignasiak KC, Lees, Quinton and Allison. Tethered generation: \"Combined tethered generation or storage must reliably supply energy at a rate at least equal to the data centre's maximum demand\". On-site: \"generation may be, but is not required to be, co-located with, or connected directly to, the data centre\". The source also covers storage, which the claim omits. The claim says 'maximum transmission demand'; the source says 'maximum direct transmission demand'. The regulation itself was not read."
+ }
+]

@@ -1,0 +1,189 @@
+[
+ {
+  "id": "ornlWang",
+  "reachable": true,
+  "publisher": "not stated in the document (Oak Ridge National Laboratory author affiliation; hosted on OSTI.gov)",
+  "title": "District Heating Utilizing Waste Heat of a Data Center: High-Temperature Heat Pumps",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "https://www.osti.gov/pages/servlets/purl/2372986",
+  "values": [
+   {"blank_context": "OSTI ___", "value": "2372986 (from the URL only; not printed in the document)", "quote": "not stated in document", "where": "URL path"},
+   {"blank_context": "'___℃–___℃ for air-cooled systems'", "value": "25, 35", "quote": "Typical temperatures of DCs waste heat are 25℃–35℃ for air-cooled systems", "where": "Section 1 Introduction, p. 7"},
+   {"blank_context": "'___℃–___℃ for water-cooled systems'", "value": "50, 60", "quote": "50℃–60℃ for water-cooled systems", "where": "Section 1 Introduction, p. 7"},
+   {"blank_context": "sources/___ S2___", "value": "internal file reference, not in source", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "none. Authors confirmed (Pengtao Wang et al., all ORNL). Sentence continues 'and up to 90℃ for two-phase refrigerant-cooled systems'.",
+  "question_marks": "'journal and year not confirmed' stays open: the PDF prints no journal, year, volume or OSTI ID.",
+  "note": "Accepted-manuscript PDF; bibliographic data needs the OSTI landing page or the journal record."
+ },
+ {
+  "id": "greenGridWP29",
+  "reachable": true,
+  "publisher": "The Green Grid",
+  "title": "WP# 29 - ERE: A Metric for Measuring the Benefit of Reuse Energy From a Data Center",
+  "edition": "not stated",
+  "date": "22 September, 2010",
+  "url": "https://www.thegreengrid.org/product/118",
+  "values": [
+   {"blank_context": "White Paper #___", "value": "29", "quote": "WP# 29 - ERE: A Metric for Measuring the Benefit of Reuse Energy From a Data Center", "where": "product page title"},
+   {"blank_context": "(___ Sep ___", "value": "22 Sep 2010", "quote": "22 September, 2010", "where": "product page"},
+   {"blank_context": "ERE = (___ − ERF) × PUE", "value": "not stated (product page prints no formula)", "quote": "Please sign in to download this item.", "where": "product page"},
+   {"blank_context": "Shuja et al. arXiv ___", "value": "not checked; that paper was not in the item links", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "The ERF and ERE formulae are not on the reachable page, and ERF is not mentioned there. This matches the claim's own caveat.",
+  "question_marks": "No ? notes. The editor is confirmed: 'Mike Patterson, Intel'. Contributors are Tschudi (LBNL), VanGeet (NREL), Cooley (Oracle) and Azevedo (Symantec).",
+  "note": "Full text is behind sign-in. I did not get around it. The formulae are only on the product page if you are signed in."
+ },
+ {
+  "id": "schneiderUPS2020",
+  "reachable": true,
+  "publisher": "Schneider Electric Blog (per the page, hosted on a thegreengrid.org URL)",
+  "title": "Design Considerations for the Deployment of UPS Systems in Data Centers",
+  "edition": "not stated",
+  "date": "20 July, 2020",
+  "url": "https://thegreengrid.org/ja/node/2747",
+  "values": [
+   {"blank_context": "(___ Jul ___)", "value": "20 Jul 2020", "quote": "20 July, 2020", "where": "page header"},
+   {"blank_context": "UPS runtime ___–___ min hyperscale", "value": "1, 2", "quote": "designing hyperscale data centers with 1-2 minutes of battery runtime", "where": "body text"},
+   {"blank_context": "~___ min cloud and colocation", "value": "5", "quote": "Cloud and colocation data centers are typically designed with 5 minutes of battery runtime", "where": "body text"},
+   {"blank_context": "___–___ min financial", "value": "10, 15", "quote": "In the financial industry, you will typically see 10-15 minutes of battery runtime", "where": "body text"},
+   {"blank_context": "generators take over in ___–___ s", "value": "10, 20", "quote": "the load is transferred to the generators (typically 10-20 seconds)", "where": "body text"}
+  ],
+  "unsupported_wording": "none (author Mark Hurley confirmed)",
+  "question_marks": "No ? notes.",
+  "note": "These are vendor claims (Schneider Electric), not standards."
+ },
+ {
+  "id": "burlingtonPlans2026",
+  "reachable": true,
+  "publisher": "CUADRO ARCH LTD. (drawings), hosted by City of Burlington",
+  "title": "Architectural Plans, 3110 S Service Rd, Burlington ON (sheets A-01-0 to A-04-0)",
+  "edition": "not stated",
+  "date": "JUNE 20 ,2026 (issue block); title-block DATE fields blank; plot stamps 2026-06-21",
+  "url": "https://www.burlington.ca/en/news/resources/Current-Development-Projects/Ward-4/3110-South-Service/Supporting-Documents/Architectural%20Plans%20-%202026-06-20.pdf",
+  "values": [
+   {"blank_context": "___ South Service Rd", "value": "3110", "quote": "3110 S SERVICE RD, BURLINGTON, ON L7N 3J3", "where": "title block"},
+   {"blank_context": "(___ Jun ___)", "value": "20 Jun 2026", "quote": "JUNE 20 ,2026", "where": "issue block, all sheets"},
+   {"blank_context": "GFA '___ m2'", "value": "5163", "quote": "GFA: 5163 m2", "where": "Site plan A-01-2 (also in the A-01-0 stats)"},
+   {"blank_context": "floor labels sum ≈___ m²", "value": "a calculation, not printed", "quote": "", "where": ""},
+   {"blank_context": "halls ___ + ___", "value": "1650, 2060", "quote": "DATA HALL 1650 m2 ; DATA HALL (2060 m2)", "where": "A-02-2 First Floor; A-02-3 Second Floor"},
+   {"blank_context": "= ___ m² (hall total)", "value": "sum 3710 is a calculation; no hall total printed that I could isolate", "quote": "", "where": ""},
+   {"blank_context": "office ___ m²", "value": "100", "quote": "OPEN SPACE OFFICE (100 m2)", "where": "A-02-2"},
+   {"blank_context": "'LOADING / GARBAGE ROOM' ___ m²", "value": "45", "quote": "LOADING / GARBAGE ROOM (45 m2)", "where": "A-02-2"},
+   {"blank_context": "storage ___ + ___ m²", "value": "40, 18.6", "quote": "STORAGE (40 m2) ; STORAGE (18.6m2)", "where": "A-02-1 Lower Level"},
+   {"blank_context": "'SERVICE AREA' ___–___ m²", "value": "not resolvable. 'SERVICE AREA' is printed only as a label in the summary table, and its values are interleaved in the extracted text", "quote": "BUILDING AREA SUMMARY BY USE ... SERVICE AREA", "where": "summary table A-02-1/2/3"}
+  ],
+  "unsupported_wording": "Several items are not supported as stated. The 'SERVICE AREA' range is one. The figure behind 'summary OFFICE figure differs' is another: I could not map values to rows in the summary table. Printed values include 2525, 2438, 200, 1650, 175, 2060, 127, 230 and 2807 m2. Finally, no hall total is printed.",
+  "question_marks": "Office '?': I can't confirm or refute it from the text extraction. The summary prints an 'OFFICE' label, and the unlabelled values include 175 m2, which could differ from 100. Someone needs to read the sheet visually. The GFA conflict is plausible: the A-01-0 GFA table prints 5163, 200 and 2438 m2 but the rows can't be aligned. The 'IT MW not stated' claim is confirmed.",
+  "note": "Municipal planning submission prepared for the applicant. The table alignment is lost in the PDF text layer. Check the summary tables (A-01-0, A-02-x) by eye."
+ },
+ {
+  "id": "ciraIXP2023",
+  "reachable": false,
+  "publisher": "CIRA (not verified)",
+  "title": "not verified",
+  "edition": "not stated",
+  "date": "not verified",
+  "url": "https://www.cira.ca/en/net-good/network-resilience/ixps/ (not read)",
+  "values": [
+   {"blank_context": "___ May ___ modified ___ Aug ___", "value": "unreachable", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "cannot assess",
+  "question_marks": "'dates not printed ?' is still open.",
+  "note": "Attempt 1 was refused for provenance. WebSearch (allowed_domains cira.ca) returned the same official URL with the title 'IXPs'. Attempts 2 and 3, on the www and bare-domain hosts, both failed with a site client_error. Per the rules I did not use mirrors or archives. CIRA's not-for-profit self-description stays a claim."
+ },
+ {
+  "id": "vertivEXLS1",
+  "reachable": true,
+  "publisher": "Vertiv",
+  "title": "Site Planning Data – Liebert® EXL S1 (Electrical and Thermal Data—Single-module (SMS) and Distributed-bypass (MMS))",
+  "edition": "REV8-11-21",
+  "date": "not stated separately; revision code REV8-11-21",
+  "url": "https://www.vertiv.com/globalassets/products/critical-power/uninterruptible-power-supplies-ups/liebert-exl-s1-site-planning-data-1000-1200kva-sl-26092.pdf",
+  "values": [
+   {"blank_context": "document covers ___–___ kVA", "value": "250–1200 (from the rating rows; no range phrase printed)", "quote": "rows 250/300/400 ... 1000/1100/1200", "where": "Dimensions and Weights table"},
+   {"blank_context": "___–___ in the URL", "value": "1000–1200", "quote": "site-planning-data-1000-1200kva-sl-26092", "where": "URL"},
+   {"blank_context": "SL-___ rev ___-___-___", "value": "26092, 8-11-21", "quote": "SL-26092_REV8-11-21", "where": "footer p. 1"},
+   {"blank_context": "module ___ × ___ × ___ mm", "value": "2654 × 914 × 2009 (1000/1100/1200 kVA, no options)", "quote": "104.5 x 36.0 x 79.1 (2654 x 914 x 2009)", "where": "Dimensions and Weights—with and without Options table"},
+   {"blank_context": "___ kg", "value": "2117 (no options); up to 2959 with all options", "quote": "4667 (2117)", "where": "same table"},
+   {"blank_context": "≈___–___ m² per MW (our calculation)", "value": "a calculation, not printed", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "none (the m²/MW figure is labelled as our calculation)",
+  "question_marks": "Confirmed: the URL says 1000–1200 kVA, but the document tables cover 250–1200 kVA/kW. The cover prints no range phrase.",
+  "note": "Manufacturer claim. The 'rev ___-___-___' reads REV8-11-21, which looks like a date code, but the document doesn't define it. Option columns in the table didn't align in extraction. Only the no-options row is certain."
+ },
+ {
+  "id": "carrier61XWH",
+  "reachable": true,
+  "publisher": "Carrier (brand; no publisher named), hosted by Meier Tobler",
+  "title": "HIGH TEMPERATURE WATER-TO-WATER HEAT PUMPS 61XWH-ZE",
+  "edition": "CARRIER 2016 / 2017",
+  "date": "2016 / 2017 (page header)",
+  "url": "https://referenzen.meiertobler.ch/app/uploads/2017/10/61XWH-ZE.pdf (same file as the item link minus the double slash; URL from a WebSearch restricted to meiertobler.ch after a provenance refusal)",
+  "values": [
+   {"blank_context": "___XWH-ZE", "value": "61", "quote": "61XWH-ZE", "where": "header"},
+   {"blank_context": "(___/___ preliminary)", "value": "2016/2017", "quote": "CARRIER 2016 / 2017 ; Preliminary product data for information only.", "where": "header; Physical data page"},
+   {"blank_context": "model ___ ___ kW at ___/___ °C", "value": "the claim does not say which model; options are: 0301: 222/410/271/419; 0501: 362/655/439/671; 0751: 532/974/645/996; 1001: 723/1310/879/1342; 1501: 1064/1948/1290/1992 kW at 10/75, 30/75, 20/85, 35/85 °C respectively", "quote": "Heating capacity (10°C / 75°C) ... (30°C / 75°C) ... (20°C / 85°C) ... (35°C / 85°C)", "where": "Physical data table, p. 2"},
+   {"blank_context": "___ × ___ mm", "value": "0301: 2750×950; 0501: 3100×950; 0751: 3300×1150; 1001: 4800×1050; 1501: 4850×1350 (L×W; H 1600–2200)", "quote": "e.g. 4850 x 1350 x 2200", "where": "Physical data table, p. 2"},
+   {"blank_context": "≈___ m² per MW heat", "value": "a calculation, not printed", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "Minor: the table headings print the temperature pairs without defining them, so whether they mean evaporator inlet or condenser outlet is not stated. The document also says the performances are not compliant with EN14511-3:2013.",
+  "question_marks": "No ? notes. The 'preliminary' wording is confirmed.",
+  "note": "Manufacturer claim, preliminary data, not certified to EN14511-3:2013."
+ },
+ {
+  "id": "abStandata19FCI003",
+  "reachable": true,
+  "publisher": "Alberta Municipal Affairs – Community & Technical Support",
+  "title": "STORAGE TANK SYSTEMS INSIDE BUILDINGS",
+  "edition": "National Fire Code-2019 Alberta Edition",
+  "date": "April 2020",
+  "url": "https://open.alberta.ca/dataset/4ac126d2-ccb2-455d-b215-7bcb75827924/resource/ba18e71a-43ff-4dfd-bee5-379f9cf70ec9/download/ma-standata-fire-interpretation-19-fci-003.pdf",
+  "values": [
+   {"blank_context": "STANDATA ___-FCI-___", "value": "19, 003", "quote": "19-FCI-003", "where": "header"},
+   {"blank_context": "(Apr ___", "value": "2020", "quote": "April 2020", "where": "header"},
+   {"blank_context": "NFC(AE) ___", "value": "2019", "quote": "National Fire Code-2019 Alberta Edition", "where": "header/body"},
+   {"blank_context": "NFC(AE) Part ___", "value": "4", "quote": "The inclusion of \"Part\" in these Sentences means Part 4", "where": "interpretation, re Sentence 4.3.13.2.(1)"}
+  ],
+  "unsupported_wording": "Small paraphrase gap. The code text says 'stationary engines' and 'shall conform to this Part when they are used to supply appliances installed in conformance with NFPA 37'. The claim says 'stationary combustion engines' and leaves out the NFPA 37 condition. The rating quote is verbatim and confirmed.",
+  "question_marks": "No ? notes.",
+  "note": "Provincial interpretation document."
+ },
+ {
+  "id": "bcbc2018_911",
+  "reachable": true,
+  "publisher": "BC Publications / Province of British Columbia (free.bcpublications.ca)",
+  "title": "British Columbia Building Code 2018, Division B, Section 9.11. Sound Transmission",
+  "edition": "2018, Revision 2.01",
+  "date": "not stated",
+  "url": "https://free.bcpublications.ca/civix/document/id/public/bcbc2018/bcbc_2018dbp9s911r2",
+  "values": [
+   {"blank_context": "BC Building Code ___ Rev. ___", "value": "2018, 2.01", "quote": "British Columbia Building Code 2018 ... Revision 2.01", "where": "page header"},
+   {"blank_context": "Section ___", "value": "9.11", "quote": "Section 9.11. Sound Transmission", "where": "heading"},
+   {"blank_context": "ASTC ___", "value": "47", "quote": "an apparent sound transmission class (ASTC) rating of not less than 47", "where": "9.11.1.1.(1)(a)"},
+   {"blank_context": "STC ___ (first)", "value": "50", "quote": "a separating assembly providing a sound transmission class (STC) rating of not less than 50", "where": "9.11.1.1.(1)(b)"},
+   {"blank_context": "STC ___ (second)", "value": "55 (elevator shaft/refuse chute); not certain this is the intended one", "quote": "have an STC rating of not less than 55", "where": "9.11.1.1.(3)"},
+   {"blank_context": "Part ___ buildings", "value": "9", "quote": "Part 9 – Housing and Small Buildings", "where": "page heading"}
+  ],
+  "unsupported_wording": "'same ... as' compares this with another source not in this item, so I can't check it here. The section also prints secondary-suite values (STC 43, ASTC 40, 9.11.1.1.(2)). The claim's three-value list leaves them out.",
+  "question_marks": "No ? notes. Confirmed that the page mentions no mechanical equipment or vibration (per the fetch summary).",
+  "note": "Revision 2.01 is confirmed. The URL suffix 'r2' agrees."
+ },
+ {
+  "id": "edmZoningGeo",
+  "reachable": true,
+  "publisher": "City of Edmonton Open Data Portal (owner not explicitly printed)",
+  "title": "Zoning Bylaw Geographical Data: Map View",
+  "edition": "not stated",
+  "date": "not stated (no last-updated date in the fetched page)",
+  "url": "https://data.edmonton.ca/d/ruwn-htv8",
+  "values": [
+   {"blank_context": "Zoning_Bylaw_Geographical_Data____csv, date_ext ___/___/___", "value": "not stated (refers to a local export, not to the page)", "quote": "", "where": ""},
+   {"blank_context": "___ of ___ features (___ %) Direct Control", "value": "not stated; the page prints no feature count and no Direct Control count", "quote": "To visually display all property zone codes for the City of Edmonton.", "where": "description"}
+  ],
+  "unsupported_wording": "The Direct Control count and share can't be checked from the page: they come from the local CSV, and the page prints no row count. 'Zone codes for all properties' is supported by the description.",
+  "question_marks": "No ? notes.",
+  "note": "The page is a map view, and Socrata renders it client-side, so the metadata may be incomplete in the fetch. The DC count needs re-deriving from a fresh export."
+ }
+]

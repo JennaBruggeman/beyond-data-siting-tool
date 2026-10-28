@@ -1,0 +1,152 @@
+[
+ {
+  "id": "src16",
+  "reachable": false,
+  "publisher": "not stated",
+  "title": "Beyond Data research note: data centre components and sizing",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "",
+  "values": [
+   {"blank_context": "research note ___", "value": "not stated", "quote": "", "where": "no link given"},
+   {"blank_context": "sources/____dc_components_sizing.md", "value": "not stated", "quote": "", "where": "no link given"}
+  ],
+  "unsupported_wording": "none",
+  "note": "No URL. This is an internal project note (local .md file), not an external source; cannot be checked with WebFetch/WebSearch."
+ },
+ {
+  "id": "src22",
+  "reachable": false,
+  "publisher": "not stated",
+  "title": "Beyond Data research note: Vancouver floors, flood, water",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "",
+  "values": [
+   {"blank_context": "research note ___", "value": "not stated", "quote": "", "where": "no link given"},
+   {"blank_context": "sources/____vancouver_floors_flood_water.md", "value": "not stated", "quote": "", "where": "no link given"}
+  ],
+  "unsupported_wording": "none",
+  "note": "No URL. Internal project note (local .md file); not externally checkable."
+ },
+ {
+  "id": "floor",
+  "reachable": false,
+  "publisher": "not stated",
+  "title": "Operator floor price at any Canadian site",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "",
+  "values": [],
+  "unsupported_wording": "Claim has no source attached; nothing to verify it against.",
+  "note": "No link and no publisher. Appears to be a placeholder/assumption, not a sourced figure. If it is an operator figure it must be labelled as an operator claim and given a source."
+ },
+ {
+  "id": "solar",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Solar Access Guidelines for the Downtown Peninsula",
+  "edition": "not stated",
+  "date": "Approved by Council September 17, 2025",
+  "url": "https://guidelines.vancouver.ca/guidelines-solar-access-downtown.pdf",
+  "values": [
+   {"blank_context": "(___ am. ___)", "value": "2025 (approval year); no amendment date stated", "quote": "Approved by Council September 17, 2025", "where": "title page; no amendment dates listed in the document"},
+   {"blank_context": "fall-equinox shadows ___:___ (start)", "value": "10 am", "quote": "from 10 am to 4 pm PDT", "where": "s.3.1.1 (p.4, page from table of contents); also s.1 p.3, s.5.1.1/5.2.1 p.10"},
+   {"blank_context": "fall-equinox shadows ___:___ (end)", "value": "4 pm (Robson Village north sidewalk: 3 pm)", "quote": "from 10 am to 4 pm PDT", "where": "s.3.1.1 p.4; Robson Village exception s.3.3.1 p.8"}
+  ],
+  "unsupported_wording": "'am.' (amended) is not supported: the document lists no amendment, only Council approval 17 Sept 2025. Title is narrower than 'Vancouver Solar Access Guidelines' - it covers the Downtown Peninsula only. Times printed as '10 am to 4 pm PDT', not 24-h; 'HH:MM' form is a reformat. Equinox date printed as September 22.",
+  "note": "Original claim had no link; found on City of Vancouver official guidelines site via WebSearch. Page numbers from the table of contents, not page footers. Not checked against the tool's 'Formulas sheet'."
+ },
+ {
+  "id": "faoTrout",
+  "reachable": true,
+  "publisher": "FAO, Cultured Aquatic Species fact sheets",
+  "title": "FAO - Oncorhynchus mykiss (text by Cowx, I. G.; edited and compiled by Valerio Crespi and Michael New)",
+  "edition": "CD-ROM fact sheet",
+  "date": "2009",
+  "url": "https://fao.org/fishery/docs/CDrom/aquaculture/I1129m/file/en/en_rainbowtrout.htm",
+  "values": [
+   {"blank_context": "___-___ °C (if site water-quality range)", "value": "12-21", "quote": "Temperature ... 12-21ºC", "where": "Production > Production systems, site water-quality table"},
+   {"blank_context": "___-___ °C (if spawning/growth range)", "value": "9-14", "quote": "spawning and growth occurs in a narrower range (9-14 °C)", "where": "Profile > Habitat and biology"},
+   {"blank_context": "___-___ °C (if tolerance range)", "value": "0-27", "quote": "The species can withstand vast ranges of temperature variation (0-27 °C)", "where": "Profile > Habitat and biology"}
+  ],
+  "unsupported_wording": "none (but claim is ambiguous: the sheet prints three different ranges; claim should say which one)",
+  "note": "Also prints 'The optimum water temperature for rainbow trout culture is below 21 °C' (Habitat and biology). First fetch refused (provenance); reached after URL surfaced in WebSearch."
+ },
+ {
+  "id": "wilsonWorrall",
+  "reachable": true,
+  "publisher": "Royal Society of Chemistry",
+  "title": "The heat recovery potential of 'wastewater': a national analysis of sewage effluent discharge temperatures",
+  "edition": "Issue 10, 2021",
+  "date": "Received 15 June 2021; accepted 16 August 2021; first published 20 August 2021",
+  "url": "https://pubs.rsc.org/en/Content/ArticleLanding/2021/EW/D1EW00411E (also read https://pubs.rsc.org/en/content/articlehtml/2021/ew/d1ew00411e)",
+  "values": [
+   {"blank_context": "Wilson & Worrall ___", "value": "2021", "quote": "Environ. Sci.: Water Res. Technol., 2021,7, 1760-1777", "where": "article landing page citation line"},
+   {"blank_context": "Water Res. Technol. ___", "value": "7", "quote": "Environ. Sci.: Water Res. Technol., 2021,7, 1760-1777", "where": "article landing page citation line"},
+   {"blank_context": ":___", "value": "1760 (pages 1760-1777)", "quote": "Environ. Sci.: Water Res. Technol., 2021,7, 1760-1777", "where": "article landing page citation line"}
+  ],
+  "unsupported_wording": "none for the citation. Note: the paper is about sewage effluent discharge temperatures; it does not mention data centres, and rainbow trout appear only in a reference-list title. Any use of it for data-centre or trout figures would be unsupported.",
+  "note": "Authors printed as 'M. P. Wilson and F. Worrall'. DOI 10.1039/D1EW00411E. The given articlepdf link was refused (provenance); read the HTML and landing pages on pubs.rsc.org instead."
+ },
+ {
+  "id": "stulz",
+  "reachable": true,
+  "publisher": "STULZ GmbH, Hamburg",
+  "title": "CyberAir 3PRO DX ASR brochure (cover headline: 'Höchste Energieeffizienz und optimale Luftführung dank Ventilatoren im Doppelboden')",
+  "edition": "1100296 V1.1 09-16 dt (German)",
+  "date": "September 2016 (from footer '09-16')",
+  "url": "https://repository.stulz.com/DFC83F25",
+  "values": [
+   {"blank_context": "CyberAir ___PRO", "value": "3", "quote": "CyberAir 3PRO DX ASR", "where": "product name, throughout"},
+   {"blank_context": "sound pressure @___ m", "value": "2", "quote": "In 2 m Abstand unter Freifeldbedingungen.", "where": "footnote 3 (German) / 4 (English) to noise rows in ASR A, AS, ALR GE, GES tables, spreads 8/9 and 10/11"}
+  ],
+  "unsupported_wording": "'CRAC' not confirmed as a term printed in the brochure (it covers ASR downflow/underfloor-fan DX units). Brochure is a German edition dated 2016.",
+  "note": "Vendor (operator) claim: sound pressure levels are Stulz's own published figures, measured at 2 m under free-field conditions. Range printed across models roughly 40-62 dBA; column pairing from text extraction should be confirmed against the PDF. First fetch refused (provenance); reached after URL surfaced in WebSearch."
+ },
+ {
+  "id": "traneRTAF",
+  "reachable": false,
+  "publisher": "Trane",
+  "title": "not read",
+  "edition": "not read",
+  "date": "not read",
+  "url": "https://www.trane.com/Resources/Partners/a41a3b61-a631-48b1-a8d8-3f25d0783c05/documents/RTAF-SLB001-GB_0620.pdf (refused)",
+  "values": [
+   {"blank_context": "RTAF-SLB0___-GB", "value": "not verified", "quote": "", "where": "unreachable"},
+   {"blank_context": "(___)", "value": "not verified", "quote": "", "where": "unreachable"},
+   {"blank_context": "sound power table p.___", "value": "not verified", "quote": "", "where": "unreachable"}
+  ],
+  "unsupported_wording": "Could not check.",
+  "note": "Given link refused by fetch tool (provenance) and did not surface in search. WebSearch found a sibling on the same Trane path, RTAF-SLB004-GB_0620.pdf ('Air-Cooled Variable Volume Index Screw Chillers', June 2020), which shows only a 'RTAF XSE/XSS sound offers' table with no dB values; it is a different document code, so not used to fill blanks. Vendor figures, when checked, must be labelled as manufacturer claims."
+ },
+ {
+  "id": "hqZones",
+  "reachable": true,
+  "publisher": "Hydro-Québec",
+  "title": "Capacités de raccordement de projets industriels au réseau de transport (subtitle: 13 zones de développement industriel ciblées)",
+  "edition": "not stated",
+  "date": "Décembre 2025",
+  "url": "https://pannes.hydroquebec.com/data/projets/presentation-zones-raccordement-industriel.pdf",
+  "values": [
+   {"blank_context": "(Dec ___)", "value": "2025", "quote": "Décembre 2025", "where": "cover slide (slide 1), below title"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Utility (operator) document; capacity figures in it are Hydro-Québec's own statements. First fetch refused (provenance); reached after URL surfaced in WebSearch."
+ },
+ {
+  "id": "edmRezone",
+  "reachable": true,
+  "publisher": "City of Edmonton",
+  "title": "Rezoning (page has no explicit title; first heading 'What to Expect')",
+  "edition": "not stated",
+  "date": "not stated (no last-updated date shown)",
+  "url": "https://www.edmonton.ca/business_economy/rezoning",
+  "values": [
+   {"blank_context": "notice to at least ___ m", "value": "60", "quote": "within a minimum of 60 metres of the lands being rezoned", "where": "notification section"},
+   {"blank_context": "Direct Control needs ___-day pre-application notice", "value": "21", "quote": "Applications for Direct Control Zones require a 21-day pre-application notice.", "where": "application section"}
+  ],
+  "unsupported_wording": "'durations not stated on the page' is not quite right: the page states one duration, 'you cannot submit the same rezoning application again for 12 months' after a refusal. Processing-time wording printed in full is 'Processing times vary based on the complexity of the application.' Other wording supported: 'Applications are not accepted until fees are paid in full'; City Council Public Hearing; no fee amounts (fees in linked Planning and Development Fee Schedules).",
+  "note": "Official municipal page. Reached on first fetch."
+ }
+]

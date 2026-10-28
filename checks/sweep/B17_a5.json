@@ -1,0 +1,193 @@
+[
+ {
+  "id": "pieper2020",
+  "reachable": false,
+  "publisher": "not stated",
+  "title": "not stated",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "",
+  "values": [
+   {"blank_context": "Pieper et al. ___ (year)", "value": "not stated", "quote": "", "where": "no source identified"},
+   {"blank_context": "Lorenz efficiency η ___–___", "value": "not stated", "quote": "", "where": "no source identified"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Not a document: an internal note with no link. The claim itself says title, venue and URL are not given. One WebSearch ('Pieper Lorenz efficiency heat pumps 2020') did not identify a matching Pieper et al. 2020 paper. The η range remains unchecked."
+ },
+ {
+  "id": "schneiderUPS2020",
+  "reachable": true,
+  "publisher": "Schneider Electric (Schneider Electric Blog), page hosted at thegreengrid.org",
+  "title": "Design Considerations for the Deployment of UPS Systems in Data Centers",
+  "edition": "not stated",
+  "date": "20 July 2020",
+  "url": "https://thegreengrid.org/ja/node/2747",
+  "values": [
+   {"blank_context": "(___ Jul ___) day", "value": "20", "quote": "date shown as 20 July 2020", "where": "page header/byline"},
+   {"blank_context": "(___ Jul ___) year", "value": "2020", "quote": "date shown as 20 July 2020", "where": "page header/byline"},
+   {"blank_context": "UPS runtime ___–___ min hyperscale", "value": "1–2", "quote": "designing hyperscale data centers with 1-2 minutes of battery runtime", "where": "body text"},
+   {"blank_context": "~___ min cloud and colocation", "value": "5", "quote": "Cloud and colocation data centers are typically designed with 5 minutes of battery runtime", "where": "body text"},
+   {"blank_context": "___–___ min financial", "value": "10–15", "quote": "In the financial industry, you will typically see 10-15 minutes of battery runtime", "where": "body text"},
+   {"blank_context": "generators take over in ___–___ s", "value": "10–20", "quote": "the load is transferred to the generators (typically 10-20 seconds)", "where": "body text"},
+   {"blank_context": "sources/___d", "value": "not stated", "quote": "", "where": "internal file path, not in source"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Author Mark Hurley confirmed. These are vendor figures (Schneider Electric), so they are claims. The first direct fetch was refused for provenance. After a WebSearch returned the same URL, a second fetch succeeded. The same post also appears on Schneider's own blog: blog.se.com/datacenter/2020/07/20/design-considerations-deployment-ups-systems-in-data-centers (not read)."
+ },
+ {
+  "id": "burlingtonPlans2026",
+  "reachable": true,
+  "publisher": "Posted by the City of Burlington. The drawings are by the applicant's architect, Cuadro Arch Ltd. (Toronto).",
+  "title": "Architectural Plans, 3110 South Service Rd: 'NEW TWO STOREY DATA CENTER', issued for SPA",
+  "edition": "Issued for SPA",
+  "date": "20 June 2026",
+  "url": "https://www.burlington.ca/en/news/resources/Current-Development-Projects/Ward-4/3110-South-Service/Supporting-Documents/Architectural%20Plans%20-%202026-06-20.pdf",
+  "values": [
+   {"blank_context": "___ South Service Rd", "value": "3110", "quote": "3110 S Service Rd, Burlington, ON L7N 3J3", "where": "title block"},
+   {"blank_context": "(___ Jun ___)", "value": "20 / 2026", "quote": "ISSUED FOR SPA, June 20, 2026", "where": "title block issue date"},
+   {"blank_context": "GFA '___ m2'", "value": "5163", "quote": "GFA: 5163 m2", "where": "Sheet A-01-2 (Site Plan)"},
+   {"blank_context": "floor labels sum ≈___ m²", "value": "not stated (my sum of the labelled room areas on A-02-1 to A-02-3 is about 4486 m²; computed, not printed)", "quote": "", "where": "Sheets A-02-1, A-02-2, A-02-3"},
+   {"blank_context": "halls ___ + ___", "value": "1650 + 2060", "quote": "DATA HALL 1650 m2 / DATA HALL 2060 m2", "where": "A-02-2 (First Floor) / A-02-3 (Second Floor)"},
+   {"blank_context": "= ___ m² (halls total)", "value": "not stated (computed 3710)", "quote": "", "where": "sum not printed as a label; the area summary block also shows a 'DATA HALL' value read as 2525 m2, which does not match"},
+   {"blank_context": "office ___ m²", "value": "100", "quote": "OPEN SPACE OFFICE 100 m2", "where": "A-02-2"},
+   {"blank_context": "loading ___ m²", "value": "45", "quote": "LOADING / GARBAGE ROOM 45 m2", "where": "A-02-2"},
+   {"blank_context": "storage ___ + ___ m²", "value": "40 + 18.6", "quote": "STORAGE 40 m2; STORAGE 18.6 m2", "where": "A-02-1 (Lower Level)"},
+   {"blank_context": "'SERVICE AREA' ___–___ m²", "value": "175–200 (uncertain)", "quote": "values 200 m2 and 175 m2 in the BUILDING AREA SUMMARY BY USE block", "where": "A-02-1, A-02-2, A-02-3 summary blocks"},
+   {"blank_context": "sources/___ C5", "value": "not stated", "quote": "", "where": "internal file path"}
+  ],
+  "unsupported_wording": "'City of Burlington ... Architectural Plans' presents the city as the author. The city only hosts the drawings; the author is Cuadro Arch Ltd. The 'loading' label in the source is 'LOADING / GARBAGE ROOM', not loading alone. 'Office ___ m²' is the 'OPEN SPACE OFFICE' room only; the summary block shows an 'OFFICE' figure read as 2438 m2, so the term is ambiguous.",
+  "note": "These are municipal application drawings prepared by the applicant's architect. No IT MW is stated, which is confirmed. The PDF text extraction jumbles the BUILDING AREA SUMMARY BY USE blocks, so labels and numbers there do not pair reliably. The 175/200 SERVICE AREA values and the summary figures (data hall 2525, office 2438, parking 2807) need checking by eye on the sheets. The GFA versus label-sum conflict is real: 5163 vs about 4486 computed. The labelled rooms do not include parking or all circulation, though. Fetch 1 was refused for provenance; fetches 2 and 3 succeeded after a WebSearch."
+ },
+ {
+  "id": "monstadt2025",
+  "reachable": true,
+  "publisher": "Wiley Blackwell (International Journal of Urban and Regional Research); read via RePEc/IDEAS record",
+  "title": "HOW DATA CENTERS HAVE COME TO MATTER: Governing the Spatial and Environmental Footprint of the 'Digital Gateway to Europe'",
+  "edition": "not stated",
+  "date": "2025",
+  "url": "https://ideas.repec.org/a/bla/ijurrs/v49y2025i4p757-778.html",
+  "values": [
+   {"blank_context": "Monstadt & Saltzman ___", "value": "2025", "quote": "Year: 2025", "where": "IDEAS bibliographic record"},
+   {"blank_context": "IJURR ___(___)", "value": "49(4)", "quote": "Volume 49, Issue 4", "where": "IDEAS bibliographic record"},
+   {"blank_context": "pp ___–___", "value": "757–778", "quote": "Pages: 757-778", "where": "IDEAS bibliographic record"},
+   {"blank_context": "doi:___/___-___", "value": "10.1111/1468-2427.13316", "quote": "DOI: 10.1111/1468-2427.13316", "where": "IDEAS bibliographic record"},
+   {"blank_context": "sources/___", "value": "not stated", "quote": "", "where": "internal file path"}
+  ],
+  "unsupported_wording": "The claim about 'control in colocation' is not supported by the abstract, which does not mention colocation or control over facilities. The abstract covers regulation of data centres in the Amsterdam Metropolitan Area, policy reforms 'to confine data center growth', electricity, land and residual heat. Full text not read.",
+  "note": "There was no link, so I used a WebSearch and fetched the RePEc/IDEAS record. This is still a secondary read (abstract only). The authors are Jochen Monstadt and Katherine Saltzman. The colocation-control point needs checking in the full text."
+ },
+ {
+  "id": "yegixStatus",
+  "reachable": true,
+  "publisher": "YEGIX Internet Exchange Community Ltd. (Alberta not-for-profit)",
+  "title": "Progress Report (status page)",
+  "edition": "not stated",
+  "date": "Year not stated. The page mentions an install 'on January 30th' with no year.",
+  "url": "https://yegix.ca/status.html",
+  "values": [
+   {"blank_context": "audit/research____-___-___/F", "value": "not stated", "quote": "", "where": "internal file path"}
+  ],
+  "unsupported_wording": "none. Small points: the page title is 'Progress Report', and it is dated only to day and month. Its quote is 'We installed our switch, route servers, and oob management equipment at Wolfpaw on January 30th'.",
+  "note": "This is an operator claim. Wolfpaw in Scotia Place is confirmed: 'Located along the LRT line in downtown in Scotia Place'. Five initial peers are confirmed: AXIA Connect, Cybera, Edmonton Public Library, Hurricane Electric, University of Alberta ('Initial peers now active include ...'). No numbers are blanked in the claim other than the internal path. Fetch 1 was refused for provenance; fetch 2 succeeded after a WebSearch."
+ },
+ {
+  "id": "vertivHPL",
+  "reachable": true,
+  "publisher": "Vertiv",
+  "title": "Vertiv HPL 9540A Lithium-ion Battery Energy Storage System",
+  "edition": "R02/21",
+  "date": "2021 (from revision code and copyright)",
+  "url": "https://www.vertiv.com/4a74a8/globalassets/products/critical-power/uninterruptible-power-supplies-ups/vertiv-hpl-lithium-ion-data-sheet-sl-70383.pdf",
+  "values": [
+   {"blank_context": "HPL ___A", "value": "9540", "quote": "Vertiv™ HPL 9540A Lithium-ion Battery Energy Storage System", "where": "cover page"},
+   {"blank_context": "SL-___", "value": "70383", "quote": "SL-70383", "where": "document footer"},
+   {"blank_context": "R0___/___", "value": "R02/21", "quote": "R02/21", "where": "document footer"},
+   {"blank_context": "___ kWh per cabinet", "value": "38", "quote": "38 kWh (nominal energy)", "where": "specification table"},
+   {"blank_context": "___ kW per cabinet", "value": "207", "quote": "207kWb/cabinet", "where": "spec table and page 2. The unit is printed as 'kWb'."},
+   {"blank_context": "___ × ___ × ___ mm", "value": "600 × 725 × 2020", "quote": "600 mm x 725 mm x 2020 mm", "where": "specification table (W/D/H order not labelled in the extracted text)"},
+   {"blank_context": "___ kg", "value": "585", "quote": "585 kg", "where": "specification table"},
+   {"blank_context": "≥___ cabinets per MW", "value": "not stated (derived, not printed)", "quote": "", "where": "not in datasheet"},
+   {"blank_context": "≈___ m² per MW", "value": "not stated (derived, not printed)", "quote": "", "where": "not in datasheet"},
+   {"blank_context": "sources/___ S1___", "value": "not stated", "quote": "", "where": "internal file path"}
+  ],
+  "unsupported_wording": "'≥___ cabinets ≈___ m² per MW' is a derived figure. The datasheet does not print it, so it should be labelled as a calculation and not attributed to Vertiv. The power unit is printed as 'kWb', not 'kW'.",
+  "note": "These are manufacturer figures, so they are claims. The extraction did not label the dimension order (W×D×H), so check it on the PDF drawing. Fetch 1 was refused for provenance; fetch 2 succeeded after a WebSearch."
+ },
+ {
+  "id": "uptime2024survey",
+  "reachable": false,
+  "publisher": "Uptime Institute",
+  "title": "Uptime Institute Global Data Center Survey Results 2024 (title of landing page; PDF not read)",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "https://uptimeinstitute.com/resources/research-and-reports/uptime-institute-global-data-center-survey-results-2024",
+  "values": [
+   {"blank_context": "Global Data Center Survey ___", "value": "2024 (landing page title only)", "quote": "Uptime Institute Global Data Center Survey Results 2024", "where": "landing page title"},
+   {"blank_context": "Keynote report ___", "value": "not stated", "quote": "", "where": "PDF not reached"},
+   {"blank_context": "___ Jul ___", "value": "not stated", "quote": "", "where": "PDF not reached"},
+   {"blank_context": "n > ___", "value": "not stated", "quote": "", "where": "PDF not reached"},
+   {"blank_context": "average rack density ___ kW", "value": "not stated", "quote": "", "where": "PDF not reached; not on landing page"},
+   {"blank_context": "(___ kW without sites above ___ kW)", "value": "not stated", "quote": "", "where": "PDF not reached"},
+   {"blank_context": "pp. ___–___", "value": "not stated", "quote": "", "where": "PDF not reached"},
+   {"blank_context": "sources/___ S1___", "value": "not stated", "quote": "", "where": "internal file path"}
+  ],
+  "unsupported_wording": "Not checkable. The landing page calls the free download a 14-page executive summary, taken from a 31-page report for members only. The claim's 'Keynote report' label could not be checked.",
+  "note": "Unreachable. The direct PDF fetch was refused for provenance twice. The WebSearch did not return the PDF URL. The official landing page (third attempt) has a download form and no rack-density figures. This is an industry survey."
+ },
+ {
+  "id": "vbbl2019_58",
+  "reachable": true,
+  "publisher": "City of Vancouver / King's Printer (BC Publications, free.bcpublications.ca)",
+  "title": "Vancouver Building By-law 2019, Division B, Part 5, Section 5.8 Sound Transmission",
+  "edition": "VBBL 2019",
+  "date": "not stated on page",
+  "url": "https://free.bcpublications.ca/civix/document/id/public/vbbl2019/492684920",
+  "values": [
+   {"blank_context": "Vancouver Building By-law ___", "value": "2019", "quote": "Vancouver Building By-law 2019", "where": "document header"},
+   {"blank_context": "Section ___ Sound Transmission", "value": "5.8", "quote": "5.8 Sound Transmission", "where": "Div. B, Part 5"},
+   {"blank_context": "___(___) ASTC (article/sentence)", "value": "5.8.1.1.(1)", "quote": "provide an apparent sound transmission class (ASTC) rating not less than 47", "where": "Sentence 5.8.1.1.(1)(a)"},
+   {"blank_context": "ASTC ≥ ___", "value": "47", "quote": "ASTC rating not less than 47", "where": "5.8.1.1.(1)(a)"},
+   {"blank_context": "STC ≥ ___ with flanking", "value": "50", "quote": "a separating assembly that provides a sound transmission class (STC) rating of not less than 50", "where": "5.8.1.1.(1)(b), adjoining constructions to conform to Article 9.11.1.4"},
+   {"blank_context": "___(___) STC (article/sentence)", "value": "5.8.1.1.(2)", "quote": "shall have an STC rating not less than 55", "where": "Sentence 5.8.1.1.(2)"},
+   {"blank_context": "STC ≥ ___ elevator shafts and refuse chutes", "value": "55", "quote": "shall have an STC rating not less than 55", "where": "5.8.1.1.(2)"},
+   {"blank_context": "sources/___ S1___", "value": "not stated", "quote": "", "where": "internal file path"}
+  ],
+  "unsupported_wording": "none. Note on 'no equipment-vibration rule': the source has no rule on mechanical equipment vibration. It does have 5.8.1.4.(2) and 5.8.1.5.(2), which use a vibration reduction index for junctions between separating assemblies. Also, 5.8.1.1.(2) applies to a dwelling unit next to an elevator shaft or refuse chute.",
+  "note": "Fetch 1 was refused for provenance; fetch 2 succeeded after a WebSearch. Sentence numbers are as given in the fetch summary; check the formatting on the page."
+ },
+ {
+  "id": "vanCD1_520",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "CD-1 (520) By-law No. 10403, 10 Terry Fox Way (Concord Area 5(b) East)",
+  "edition": "not stated",
+  "date": "29 November 2011 (enacted)",
+  "url": "https://cd1-bylaws.vancouver.ca/CD-1(520).pdf",
+  "values": [
+   {"blank_context": "CD-___", "value": "1", "quote": "CD-1 (520)", "where": "header"},
+   {"blank_context": "(___)", "value": "520", "quote": "CD-1 (520)", "where": "header"},
+   {"blank_context": "By-law No. ___", "value": "10403", "quote": "By-law No. 10403", "where": "header"},
+   {"blank_context": "(___) year", "value": "2011", "quote": "ENACTED by Council this 29th day of November, 2011.", "where": "enactment line"},
+   {"blank_context": "s. ___(c)", "value": "3.4", "quote": "Computation of floor space ratio must exclude: ... (c) ... heating and mechanical equipment ... which are at or below base surface", "where": "Section 3.4(c)"}
+  ],
+  "unsupported_wording": "none. Small point: the source says 'Computation of floor space ratio must exclude', not 'floor area'. Clause (c) also limits the parking-space exclusion to 7.3 m in length.",
+  "note": "Fetch 1 was refused for provenance; fetches 2 and 3 succeeded after a WebSearch. The by-law may have later amendments; not checked."
+ },
+ {
+  "id": "cwec",
+  "reachable": false,
+  "publisher": "Environment and Climate Change Canada (Engineering Climate Datasets), as named in the claim",
+  "title": "CWEC typical-year files (as named in the claim)",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "",
+  "values": [
+   {"blank_context": "CWEC ___ edition", "value": "not stated", "quote": "", "where": "no link"},
+   {"blank_context": "CWEC_FMCCE_v____", "value": "not stated", "quote": "", "where": "no link"},
+   {"blank_context": "CAN_BC_VANCOUVER-INTL-A_____CWEC.epw", "value": "not stated", "quote": "", "where": "local file name, not checked"},
+   {"blank_context": "CAN_AB_EDMONTON-INTL-A_____CWEC.epw", "value": "not stated", "quote": "", "where": "local file name, not checked"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Not a document: an internal note recording a data download (files in data/), with no link. The edition, version and file names should be checked against the files in data/."
+ }
+]

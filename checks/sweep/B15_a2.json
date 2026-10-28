@@ -1,0 +1,170 @@
+[
+ {
+  "id": "nrelBatt2025",
+  "reachable": true,
+  "publisher": "National Renewable Energy Laboratory (NREL)",
+  "title": "Cost Projections for Utility-Scale Battery Storage: 2025 Update",
+  "edition": "2025 Update; NREL/TP-6A40-93281",
+  "date": "June 2025",
+  "url": "https://docs.nrel.gov/docs/fy25osti/93281.pdf",
+  "values": [
+   {"blank_context": "NREL TP-___A4___-___ (report number)", "value": "6A40-93281 (NREL/TP-6A40-93281)", "quote": "NREL/TP-6A40-93281", "where": "cover page"},
+   {"blank_context": "___ Update", "value": "2025", "quote": "Cost Projections for Utility-Scale Battery Storage: 2025 Update", "where": "cover page"},
+   {"blank_context": "(Jun ___)", "value": "2025", "quote": "June 2025", "where": "cover page"},
+   {"blank_context": "US$___/kWh", "value": "334", "quote": "The 2024 starting point of $334/kWh is derived from the bottom-up cost model described in Section 2.2.", "where": "Section 3, p. 8"},
+   {"blank_context": "(___$)", "value": "2024", "quote": "All cost values were converted to 2024$ using the consumer pricing index.", "where": "Section 2.1, p. 3"},
+   {"blank_context": "___ h", "value": "4", "quote": "The FOM value selected is 4% of the $/kW capacity cost for a 4-hour battery.", "where": "Section 3, p. 11"},
+   {"blank_context": "fixed O&M ___% of capex a year", "value": "4", "quote": "The FOM value selected is 4% of the $/kW capacity cost for a 4-hour battery.", "where": "Section 3, p. 11"},
+   {"blank_context": "___-yr life", "value": "15", "quote": "The lifetime we selected is 15 years, which is on the lower end of published values.", "where": "Section 3, p. 12"},
+   {"blank_context": "___% round trip", "value": "85", "quote": "The round-trip efficiency is chosen to be 85%, which is well aligned with published values.", "where": "Section 3, p. 12"}
+  ],
+  "unsupported_wording": "Minor: source says FOM is 4% 'of the $/kW capacity cost', not 'of capex'; 'a year' is not in the quoted sentence (read via summarizing fetch, so verify on p. 11). Report number in claim is garbled ('TP-___A4___-___'); printed form is NREL/TP-6A40-93281.",
+  "note": "Authors Wesley Cole, Vignesh Ramasamy, Merve Turan confirmed on cover. $334/kWh is the 2024 starting point (2024$). Page numbers as reported by fetch tool."
+ },
+ {
+  "id": "epcorIG2022",
+  "reachable": false,
+  "publisher": "EPCOR (not verified)",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2022_power_technical-requirements_interconnection-guide.pdf (blocked: provenance refusal); https://www.epcor.com:443/products-services/new-connections/Documents/Interconnection-Guide-2022.pdf (returned only EPCOR 'Guides, checklists, and forms' navigation page)",
+  "values": [
+   {"blank_context": "Interconnection guide (___)", "value": "not verified", "quote": "", "where": ""},
+   {"blank_context": "s. ___ and ___", "value": "not verified", "quote": "", "where": ""},
+   {"blank_context": "p. ___–___", "value": "not verified", "quote": "", "where": ""},
+   {"blank_context": "trip within ___ s", "value": "not verified", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "not checked (unreachable)",
+  "note": "Given link refused by fetch tool (provenance). Search-result URL for 'Interconnection Guide 2022' landed on a navigation page listing a 'Customer Connection Guide' (updated May 2026, effective August 6, 2025), not the 2022 guide. Islanding wording, EDTI written approval and trip time all unverified."
+ },
+ {
+  "id": "ntnuRAS",
+  "reachable": true,
+  "publisher": "not stated on page (hosted on ntnu.no 'bridge' site)",
+  "title": "Current and Future Energy Use for Atlantic Salmon Farming in Recirculating Aquaculture Systems in Norway",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "https://www.ntnu.no/bridge/node/22667",
+  "values": [
+   {"blank_context": "___ kWh/kg (smolt, current, on-site)", "value": "8.8 mean (range 5.1–12.8)", "quote": "The on-site energy use for production of 1 kilo live-weight smolt ranges from 5.1 to 12.8 kWh, with a mean of 8.8 kWh.", "where": "abstract text on page"},
+   {"blank_context": "___ kWh/kg (smolt, optimised future)", "value": "4-5", "quote": "the energy use can be lowered to 4-5 kWh/kg", "where": "abstract text on page"},
+   {"blank_context": "___ kWh/kg (post-smolt, modelled)", "value": "3.4 to 5.4", "quote": "on-site energy demand for production of 1 kilo live-weight post-smolt of 1 kg is 3.4 to 5.4 kWh", "where": "abstract text on page"},
+   {"blank_context": "___ kWh/kg (grow-out to market size, modelled)", "value": "6 to 10", "quote": "between 6 and 10 kWh per kilo live-weight", "where": "abstract text on page"}
+  ],
+  "unsupported_wording": "Claim gives a single kWh/kg value with no life stage; source gives several stage-specific figures (smolt, post-smolt, grow-out), measured vs modelled. Page names no author, institution, year, or 'NTNU' in its text; attribution to NTNU rests only on the ntnu.no domain.",
+  "note": "Abstract-style page with no bibliographic details. Specify which stage the tool uses. Original thesis/report record should be found for author and year."
+ },
+ {
+  "id": "est_wind2009",
+  "reachable": true,
+  "publisher": "Energy Saving Trust, London, GB",
+  "title": "Location, location, location: domestic small-scale wind field trial report",
+  "edition": "Monograph (Project Report), 24pp.",
+  "date": "July 2009",
+  "url": "https://eprints.soton.ac.uk/353113",
+  "values": [
+   {"blank_context": "Energy Saving Trust (___)", "value": "2009", "quote": "July 2009", "where": "eprints record metadata"},
+   {"blank_context": "eprints.soton.ac.uk/___", "value": "353113", "quote": "EPrints ID: 353113", "where": "eprints record metadata"}
+  ],
+  "unsupported_wording": "Claim's title 'Domestic small-scale wind field trial report' omits the leading 'Location, location, location:'. Authors James, P.A.B.; Bahaj, A.S.; Anwar, Arif A.; Myers, L.E. match.",
+  "note": "Official repository record has a full-text PDF listed ('Location_Location_Location_field_trial_small-scale_wind_report(1).pdf'), so the official copy is available; PDF itself not read."
+ },
+ {
+  "id": "telehouse2026",
+  "reachable": true,
+  "publisher": "Telehouse Canada, distributed via Business Wire",
+  "title": "Telehouse Canada Undergoes Major Infrastructure Upgrade to Scale AI-Driven Organizations",
+  "edition": "press release",
+  "date": "not printed on fetched page (URL string 20260512 suggests 12 May 2026; inference only)",
+  "url": "https://www.businesswire.com/news/home/20260512456773/en",
+  "values": [
+   {"blank_context": "___ May", "value": "not stated (URL implies 12)", "quote": "", "where": "no visible date in fetched text"},
+   {"blank_context": "May ___", "value": "not stated (footer '© 2026 Business Wire, Inc.'; URL implies 2026)", "quote": "© 2026 Business Wire, Inc.", "where": "page footer"}
+  ],
+  "unsupported_wording": "Date not printed in fetched text (inferred from URL only). Otherwise supported: 'This heat is then transferred to Enwave’s closed-loop district energy system, where it is captured and repurposed'.",
+  "note": "OPERATOR CLAIM. Dateline TORONTO. Release says heat helps warm Toronto's municipal drinking water and improves PUE (operator claim). Date may be visible in rendered page; fetch tool showed none."
+ },
+ {
+  "id": "ubcoBorefield2021",
+  "reachable": false,
+  "publisher": "not verified",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://library.upei.ca/islandora/object/csme2021%3A113/datastream/PDF/download/csme2021_113.pdf (blocked: provenance refusal; two searches did not surface it)",
+  "values": [
+   {"blank_context": "CSME ___ paper", "value": "not verified", "quote": "", "where": ""},
+   {"blank_context": "___ kW data centre", "value": "not verified", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "not checked (unreachable); quoted phrase 'it is not feasible to operate the system under steady-state conditions' unverified",
+  "note": "Fetch refused; searches for the UPEI record returned only csme2020 items. Needs manual check."
+ },
+ {
+  "id": "goteborgGH",
+  "reachable": true,
+  "publisher": "Göteborg Energi",
+  "title": "Chili Peppers and Ginger Grown with Waste Heat Recovered from Data Centers",
+  "edition": "web article (artikelbank)",
+  "date": "January 2025 (printed as 'Publiced january 2025')",
+  "url": "https://www.goteborgenergi.se/i-var-stad/artikelbank/chili-peppers-and-ginger-grown-with-waste-heat-recovered-from-data-centers",
+  "values": [
+   {"blank_context": "___ m²", "value": "130", "quote": "The size of the greenhouse is 130 square meters", "where": "article body"},
+   {"blank_context": "heat about ___ °C", "value": "24", "quote": "The residual heat temperature is usually around 24 degrees Celsius", "where": "article body"},
+   {"blank_context": "operational summer ___", "value": "2024", "quote": "went operational during the summer growing season of 2024", "where": "article body"}
+  ],
+  "unsupported_wording": "none",
+  "note": "'The greenhouse is a so-called proof of concept.' and 'the data center in Backa' both printed. Utility's own article (claim by city utility, not independent)."
+ },
+ {
+  "id": "enelxDLR",
+  "reachable": true,
+  "publisher": "Enel X",
+  "title": "Digital Realty Grid interactive UPS Case Study",
+  "edition": "web case study (IE site)",
+  "date": "not stated",
+  "url": "https://www.enelx.com/ie/en/resources/digital-realty-case-study",
+  "values": [
+   {"blank_context": "drops below ___Hz", "value": "50", "quote": "But when the grid frequency drops below 50Hz, the data centre can safely draw some power from its batteries", "where": "case study body"}
+  ],
+  "unsupported_wording": "'nine data centres in EirGrid DS3 frequency response' not supported as worded: page says 'Digital Realty’s nine highly connected data centres demand a constant amount of energy from the grid' but does not say how many sites are enrolled in DS3. Page says 'Digital Realty', not 'Digital Realty Ireland'.",
+  "note": "OPERATOR/VENDOR CLAIM (Enel X). No publication date on page."
+ },
+ {
+  "id": "equinixME1",
+  "reachable": true,
+  "publisher": "Equinix (Interconnections blog)",
+  "title": "Rooftop Solar Systems in Melbourne Green the Grid",
+  "edition": "blog post, author 'Equinix Editor'",
+  "date": "February 26, 2024",
+  "url": "https://blog.equinix.com/blog/2024/02/26/rooftop-solar-systems-in-melbourne-green-the-grid/",
+  "values": [
+   {"blank_context": "___ Feb", "value": "26", "quote": "February 26, 2024", "where": "post header"},
+   {"blank_context": "Feb ___", "value": "2024", "quote": "February 26, 2024", "where": "post header"},
+   {"blank_context": "a ___MW rooftop solar system", "value": "1", "quote": "a 1MW rooftop solar system at its ME1 International Business Exchange®", "where": "post body"}
+  ],
+  "unsupported_wording": "none",
+  "note": "OPERATOR CLAIM (Equinix)."
+ },
+ {
+  "id": "vanNEConnect2013",
+  "reachable": true,
+  "publisher": "City of Vancouver, Planning, Urban Design and Sustainability Department",
+  "title": "Neighbourhood Energy Connectivity Standards - Information for Developers",
+  "edition": "Effective August 2, 2011; amended November 1, 2011, November 1, 2012 and December 11, 2013",
+  "date": "December 2013",
+  "url": "https://guidelines.vancouver.ca/bulletins/bulletin-sustainability-neighbourhood-energy-connectivity-standards.pdf",
+  "values": [
+   {"blank_context": "(Dec ___)", "value": "2013", "quote": "Amended November 1, 2011, November 1, 2012 and December 11, 2013", "where": "cover/header"},
+   {"blank_context": "s. ___", "value": "4.3", "quote": "4.3 Hydronic Heating and Domestic Hot Water Systems (Minimum) Requirements", "where": "s. 4.3, p. 6"},
+   {"blank_context": "radiant floor ___/___ °C", "value": "45/35", "quote": "Hot water supply: 45°C ... Hot water return: 35°C", "where": "s. 4.3 'Hydronic Radiant Floor Heating', p. 6"},
+   {"blank_context": "panels ___/___", "value": "60/45", "quote": "Radiators: Hot water supply: 60°C ... Hot water return: 45°C", "where": "s. 4.3 'Fin Type Baseboard Convectors / Perimeter Radiators', p. 6"},
+   {"blank_context": "baseboard ___/___", "value": "70/50", "quote": "Convectors: Hot water supply: 70°C ... Hot water return: 50°C", "where": "s. 4.3 'Fin Type Baseboard Convectors / Perimeter Radiators', p. 6"},
+   {"blank_context": "fan coils ___/___", "value": "70/50", "quote": "Hot water supply: 70°C ... Hot water return: 50°C", "where": "s. 4.3 'Fan Coils', p. 7"},
+   {"blank_context": "make-up air ___/___", "value": "65/45", "quote": "Hot water supply: 65°C ... Hot water return: 45°C", "where": "s. 4.3 'Ventilation Make-Up Air Units', p. 7"},
+   {"blank_context": "DHW ___ °C", "value": "60", "quote": "Domestic hot water: 60°C", "where": "s. 4.3, p. 7"}
+  ],
+  "unsupported_wording": "none (note: source labels the 60/45 line 'Radiators', describing 'perimeter style radiant panels (European style)'; 'panels' is a fair paraphrase)",
+  "note": "Values printed as text lines, not a table. Page numbers per fetch tool's page markers. Also prints 'Domestic cold water: 5°C'."
+ }
+]

@@ -1,0 +1,152 @@
+[
+ {
+  "id": "heatPhys",
+  "reachable": false,
+  "publisher": "not checked",
+  "title": "not checked",
+  "edition": "not checked",
+  "date": "not checked",
+  "url": "",
+  "values": [
+   {"blank_context": "Q = V x ___ x dT", "value": "not checked", "quote": "", "where": ""},
+   {"blank_context": "Green Grid WP2___", "value": "not checked", "quote": "", "where": ""},
+   {"blank_context": "ISO/IEC ___-___ ERF", "value": "not checked", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "not checked",
+  "note": "No link given. The item cites a Green Grid white paper, an ISO/IEC ERF standard and the tool's own Formulas sheet. None was opened, so every blank is unverified. A URL for each cited document is needed."
+ },
+ {
+  "id": "src18",
+  "reachable": false,
+  "publisher": "Beyond Data (internal)",
+  "title": "not checked",
+  "edition": "not checked",
+  "date": "not checked",
+  "url": "",
+  "values": [
+   {"blank_context": "research note ___", "value": "not checked", "quote": "", "where": ""},
+   {"blank_context": "sources/____zoning_edmonton.md", "value": "not checked", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "not checked",
+  "note": "This is an internal project note with no external link, so it cannot be checked on the web. Check it against the local sources folder."
+ },
+ {
+  "id": "edmBench",
+  "reachable": true,
+  "publisher": "City of Edmonton",
+  "title": "Commercial Building Energy Benchmarking Program (page title per fetch; search listing shows 'Building Energy Benchmarking Program')",
+  "edition": "n/a (web page; refers to Year 7 and Year 8)",
+  "date": "no last-updated date printed; registration closes October 15, 2024",
+  "url": "https://www.edmonton.ca/programs_services/environmental/building-energy-benchmarking-program",
+  "values": [],
+  "unsupported_wording": "'voluntary': the page does not use the word. It says 'Anyone can register, however the building owner must consent to participation', which implies but does not state voluntary. 'dashboard pending' is broadly supported: the Year 7 dashboard is listed as 'Online interactive dashboard (coming soon)'.",
+  "note": "No blanks to fill. The direct fetch was first refused (provenance) and then succeeded after the same URL was returned by WebSearch on edmonton.ca. The page is undated, so 'coming soon' may be out of date."
+ },
+ {
+  "id": "rule9",
+  "reachable": false,
+  "publisher": "internal (handoff document)",
+  "title": "not checked",
+  "edition": "not checked",
+  "date": "not checked",
+  "url": "",
+  "values": [
+   {"blank_context": "Handoff rule ___", "value": "not checked", "quote": "", "where": ""},
+   {"blank_context": "handoff section ___", "value": "not checked", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "not checked",
+  "note": "This is an internal project rule with no external source. Check it against the handoff document itself."
+ },
+ {
+  "id": "rootZone",
+  "reachable": true,
+  "publisher": "Farm Energy (farm-energy.extension.org), Cooperative Extension; supported by USDA NIFA grant 2020-41595-30123",
+  "title": "Root Zone Heating Systems for Greenhouses",
+  "edition": "n/a",
+  "date": "Posted April 3, 2019; updated April 12, 2019",
+  "url": "https://farm-energy.extension.org/root-zone-heating-systems-for-greenhouses/",
+  "values": [
+   {"blank_context": "root-zone heating ~___ °C", "value": "not printed in °C. Printed value: 70 to 75 °F soil temperature (21-24 °C is a conversion, not printed)", "quote": "to provide 70 to 75 degrees F. soil temperature", "where": "section 'System Components'"}
+  ],
+  "unsupported_wording": "The °C figure is not printed; the source gives °F only. 'UConn/UVM Extension' is correct for the authors (John Bartok Jr., UConn Extension; Vern Grubinger, UVM Extension), but the publisher is Farm Energy/eXtension, and the article says it is adapted from UConn IPM and UMass Extension articles.",
+  "note": "The heating water is about 100 °F, so it should not be confused with the soil temperature. Fetched after the URL was returned by WebSearch."
+ },
+ {
+  "id": "silber2024",
+  "reachable": true,
+  "publisher": "Elsevier (International Journal of Electrical Power and Energy Systems); KIT repository record",
+  "title": "Analysis of the simultaneity factor of fast-charging sites using Monte-Carlo simulation",
+  "edition": "Vol. 155, article 109540",
+  "date": "2024 (available online 16 October 2023)",
+  "url": "https://publikationen.bibliothek.kit.edu/1000163825/151678922",
+  "values": [
+   {"blank_context": "Silber, Scheubner, Märtz ___", "value": "2024", "quote": "International Journal of Electrical Power and Energy Systems ... 2024", "where": "KIT record / article header"},
+   {"blank_context": "IJEPES ___:___ (volume)", "value": "155", "quote": "Volume 155", "where": "article header"},
+   {"blank_context": "IJEPES ___:___ (article no.)", "value": "109540", "quote": "109540; doi 10.1016/j.ijepes.2023.109540", "where": "article header"},
+   {"blank_context": "simultaneity ___", "value": "0.5", "quote": "in most cases, fast-charging sites can be designed with a simultaneity factor of 0.5 to satisfy demand", "where": "Abstract; also section 6.1"}
+  ],
+  "unsupported_wording": "none",
+  "note": "This applies to EV fast-charging sites, not data centres; any transfer to data-centre loads is the tool's own inference. Only the extreme case of n = 15 gives psi_opt > 0.6 (section 5.3). Read from the KIT open-access PDF that WebSearch returned."
+ },
+ {
+  "id": "mtuDS2250",
+  "reachable": false,
+  "publisher": "Rolls-Royce Power Systems / mtu (per URL)",
+  "title": "mtu 16V4000 DS2250 50 °C Diesel Generator Set (search-result title only)",
+  "edition": "231210 (from filename only)",
+  "date": "not checked",
+  "url": "https://www.mtu-solutions.com/content/dam/mtu/products/power-generation/powergeneration-product-list-latest/231210_PG_Spec_16V4000DS2250G04_2250kW_3D_FC_60Hz_50C.pdf",
+  "values": [
+   {"blank_context": "___V4___ DS2___", "value": "not checked (filename and search title show 16V4000 DS2250, 2250 kW, 60 Hz, 50 °C)", "quote": "", "where": "filename only"},
+   {"blank_context": "___ dBA @___ m open", "value": "not checked", "quote": "", "where": ""},
+   {"blank_context": "ISO ___-___", "value": "not checked", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "not checked",
+  "note": "Unreachable. Fetch 1: the given URL was refused (provenance). Fetch 2: the long rendition URL from WebSearch was rejected by the proxy as too long. Fetch 3: the Series 4000 page does not link this PDF. The noise figures are vendor claims and still need checking against the spec sheet."
+ },
+ {
+  "id": "oekoBSF",
+  "reachable": true,
+  "publisher": "Öko-Institut; funded by German Environment Agency (UBA), FKZ 3717 34 341 0",
+  "title": "Black Soldier Fly facilities in temperate and cold climate – important factors to be a climate friendly alternative in waste management",
+  "edition": "Workshop presentation (CCAC online event 'Opportunities in Waste Sector and Agriculture ... Black Soldier Fly')",
+  "date": "16/05/2022",
+  "url": "https://ccacoalition.org/sites/default/files/resources//Oeko-Institut_Black_Soldier_Flies_20220516_final.pdf",
+  "values": [
+   {"blank_context": "for UBA ___", "value": "2022", "quote": "Öko-Institut│Online event│16/05/2022", "where": "slide footer"},
+   {"blank_context": "heat ___ kWh per tonne input", "value": "3404 (printed per Mg)", "quote": "Heat: 3404 kWh/Mg Input", "where": "p.4, 'Black Soldier Fly Larvae – Mass Balance'"},
+   {"blank_context": "p.___", "value": "4", "quote": "Heat: 3404 kWh/Mg Input", "where": "p.4"}
+  ],
+  "unsupported_wording": "'for UBA': the source says 'Funded by the German Environment Agency (UBA)', which makes UBA the funder; 'for' is acceptable but loose. The source is a workshop slide deck, not a report. The source prints 'per Mg input', and 1 Mg = 1 tonne, so 'per tonne' is a unit rename. A separate line, 'Energy: 161 kWh/Mg Input', is not labelled as heat.",
+  "note": "This is a modelled mass and energy balance, not a measured operator figure. The PDF is hosted by CCAC, the event host, not by Öko-Institut. Fetched after the URL was returned by WebSearch."
+ },
+ {
+  "id": "torontoHydroMap",
+  "reachable": true,
+  "publisher": "Toronto Hydro",
+  "title": "Frequently asked Load Capacity Map questions",
+  "edition": "n/a",
+  "date": "not stated on page",
+  "url": "https://www.torontohydro.com/contractors-and-developers/frequently-asked-load-capacity-map-questions",
+  "values": [],
+  "unsupported_wording": "none",
+  "note": "No blanks to fill. The title is confirmed. The FAQ says substations below 7.5 MVA and feeders below 4.16 kV are not included in the map."
+ },
+ {
+  "id": "equinixTR5",
+  "reachable": true,
+  "publisher": "Equinix, Inc.",
+  "title": "\"Help Us Heat Our Neighbors\" - Equinix Makes Data Center Heat Available to Warm Nearby Buildings and Swimming Pools; blog: \"The Hidden Benefit of Data Centers: Warming Communities, Not Just Servers\"",
+  "edition": "n/a",
+  "date": "press release June 5, 2024; blog April 24, 2025",
+  "url": "https://investor.equinix.com/news-events/press-releases/detail/1044/help-us-heat-our-neighbors---equinix-makes-data-center ; https://blog.equinix.com/blog/2025/04/24/the-hidden-benefit-of-data-centers-warming-communities-not-just-servers/",
+  "values": [
+   {"blank_context": "press release ___ Jun", "value": "5", "quote": "June 5, 2024", "where": "release dateline"},
+   {"blank_context": "Jun ___", "value": "2024", "quote": "June 5, 2024", "where": "release dateline"},
+   {"blank_context": "blog ___ Apr", "value": "24", "quote": "Published: April 24, 2025", "where": "blog header"},
+   {"blank_context": "Apr ___", "value": "2025", "quote": "Published: April 24, 2025", "where": "blog header"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Operator claim. Release: 'Heat exported from TR5, one of Equinix's IBX data centers in Toronto' goes to buildings 'in downtown Markham' 'thanks to the heat network of Equinix's energy partner, Markham District Energy'. Blog: 'Equinix's TR5 data center facility exports residual heat to the MDE system.' The blog is by Marc Mondesir and Noah Nkonge (Equinix). The release links a different blog post, dated June 5, 2024 by its URL. The April 2025 blog was found through WebSearch."
+ }
+]

@@ -1,0 +1,147 @@
+[
+ {
+  "id": "opClaims",
+  "reachable": false,
+  "publisher": "not checked",
+  "title": "not checked",
+  "edition": "not checked",
+  "date": "not checked",
+  "url": "",
+  "values": [],
+  "unsupported_wording": "none (not checkable: no link given)",
+  "note": "No link or other_links; claim points to local sources/___ files for operator (Cologix, eStruxture, Qu, Hut) capacity figures. Nothing fetched. All MW figures are operator claims and must stay labelled as such."
+ },
+ {
+  "id": "blatchfordDESS",
+  "reachable": true,
+  "publisher": "not stated (hosted on blatchfordedmonton.ca)",
+  "title": "not stated as a formal title; opens with 'district energy'; heading 'WHAT IS DISTRICT ENERGY?'",
+  "edition": "not stated",
+  "date": "not stated",
+  "url": "https://blatchfordedmonton.ca/wp-content/uploads/2016/05/Blatchford-district-energy-sharing-system-overview.pdf",
+  "values": [
+   {"blank_context": "uploaded ___", "value": "not stated", "quote": "", "where": "No date printed in document; URL path contains /2016/05/ (URL, not printed date)"}
+  ],
+  "unsupported_wording": "'geo-exchange and sewer heat exchange' and 'heat pumps in buildings' only partly supported in what was read: text says 'a DESS distributes ambient temperature water, which is then upgraded using heat pumps to provide both heating and cooling' but does not explicitly place heat pumps in buildings. Geo-exchange and sewer heat exchange reported by fetch tool as named sources for Blatchford, but verbatim quote not captured.",
+  "note": "No author/publisher printed (claim correct). Quotes BC Climate Toolkit (toolkit.bc.ca) for the definition of district energy. Ambient loop supported: 'An ambient district energy sharing system (DESS) is recommended for Blatchford.' 'uploaded 2016/05' would be inferred from URL only."
+ },
+ {
+  "id": "iso9613",
+  "reachable": true,
+  "publisher": "ISO",
+  "title": "Acoustics — Attenuation of sound during propagation outdoors — Part 2: Engineering method for the prediction of sound pressure levels outdoors",
+  "edition": "Edition 2",
+  "date": "2024-01 (published 2024-01-12)",
+  "url": "https://www.iso.org/standard/74047.html",
+  "values": [
+   {"blank_context": "ISO ___-___:___", "value": "9613-2:2024", "quote": "ISO 9613-2:2024", "where": "page heading"},
+   {"blank_context": "Lp ≈ Lw − ___·log1___(r) − ___", "value": "not stated", "quote": "", "where": "ISO catalogue page has no equations (full text paywalled)"}
+  ],
+  "unsupported_wording": "The screening formula and 'NoiseModelling (open source)' are not on the ISO page; formula not verifiable without the paid standard.",
+  "note": "First fetch refused (provenance), succeeded on second after search. Abstract: 'The method predicts the equivalent continuous A-weighted sound pressure level'. Amendment ISO 9613-2:2024/DAmd 1 exists in draft."
+ },
+ {
+  "id": "sunLuo2021",
+  "reachable": true,
+  "publisher": "Elsevier (Energy and Buildings), listed by LBNL ETA publications",
+  "title": "Prototype energy models for data centers",
+  "edition": "n/a",
+  "date": "2021",
+  "url": "https://eta-publications.lbl.gov/publications/prototype-energy-models-data-centers",
+  "values": [
+   {"blank_context": "Hong ___", "value": "2021", "quote": "Sun, K., Luo, N., Luo, X., & Hong, T. (2021)", "where": "citation on LBNL page"},
+   {"blank_context": "Energy & Buildings ___", "value": "231", "quote": "Energy and Buildings, 231, 110603", "where": "citation on LBNL page"},
+   {"blank_context": ":___", "value": "110603", "quote": "Energy and Buildings, 231, 110603", "where": "citation on LBNL page (article number)"}
+  ],
+  "unsupported_wording": "none",
+  "note": "DOI 10.1016/j.enbuild.2020.110603. Second fetch attempt."
+ },
+ {
+  "id": "schon2024",
+  "reachable": true,
+  "publisher": "Wageningen Academic Publishers (Journal of Insects as Food and Feed); figshare via Brill",
+  "title": "Effect of temperature on growth, metabolism, and gas exchange in Hermetia illucens larvae reared under commercial and laboratory conditions",
+  "edition": "n/a",
+  "date": "Online 15 November 2024; issue 15 April 2025 (figshare posted 2024-10-29)",
+  "url": "https://brill.figshare.com/articles/journal_contribution/Effect_of_temperature_on_growth_metabolism_and_gas_exchange_in_i_Hermetia_illucens_i_larvae_reared_under_commercial_and_laboratory_conditions/27223125 ; https://pure.au.dk/portal/da/publications/effect-of-temperature-on-growth-metabolism-and-gas-exchange-in-he/",
+  "values": [
+   {"blank_context": "Schøn et al. ___", "value": "2024 (figshare posted/online date) or 2025 (journal issue year)", "quote": "Posted 2024-10-29 (figshare); Aarhus Pure: Journal of Insects as Food and Feed, 11(6), 1059–1074 (2025)", "where": "figshare record; Aarhus University Pure record"}
+  ],
+  "unsupported_wording": "Year ambiguous: version of record is vol. 11(6) 2025, pp. 1059–1074, DOI 10.1163/23524588-00001268; '2024' only matches online/posted date. Figshare page itself does not name the journal (Pure does).",
+  "note": "Rearing temperatures in abstract: lab 'from 27.0 to 41.9 °C'; commercial '~34-35 °C'."
+ },
+ {
+  "id": "wahlroos2017",
+  "reachable": true,
+  "publisher": "Elsevier (Energy); Aalto ACRIS repository copy",
+  "title": "Utilizing data center waste heat in district heating – Impacts on energy efficiency and prospects for low-temperature district heating networks",
+  "edition": "n/a",
+  "date": "2017",
+  "url": "https://acris.aalto.fi/ws/portalfiles/portal/17305461/1_s2.0_S0360544217314548_main.pdf",
+  "values": [
+   {"blank_context": "Wahlroos et al. ___", "value": "2017", "quote": "Energy, 140, 1228-1238", "where": "'Please cite the original version' block, p.1"},
+   {"blank_context": "Energy ___", "value": "140", "quote": "Energy, 140, 1228-1238", "where": "p.1"},
+   {"blank_context": ":___", "value": "1228–1238", "quote": "Energy, 140, 1228-1238", "where": "p.1"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Authors Wahlroos, Pärssinen, Manner, Syri. DOI 10.1016/j.energy.2017.08.078. Second fetch attempt."
+ },
+ {
+  "id": "oldsNIA",
+  "reachable": true,
+  "publisher": "OpenCycle Technologies Inc. (prepared for Synapse Real Estate Corporation); hosted by Town of Olds",
+  "title": "Noise Impact Assessment, Olds Data Center, W-04-033-01 W5M",
+  "edition": "Revision 1",
+  "date": "2026-03-24",
+  "url": "https://www.olds.ca/media/egilzm3p/30732_x0011_tp-31-noise-impact-assessment_000011.pdf",
+  "values": [
+   {"blank_context": "Rev ___", "value": "1", "quote": "REVISION 1", "where": "title page, p.1; version control table p.3"},
+   {"blank_context": "___ Mar ___", "value": "24 Mar 2026", "quote": "2026-03-24 / March 24, 2026", "where": "title page p.1; version table p.3"},
+   {"blank_context": "Table ___", "value": "D", "quote": "Table D, Source Octave Band Sound Power Levels", "where": "pp. APPENDIX-D-2 to D-3"}
+  ],
+  "unsupported_wording": "Report uses 'PWL' not 'Lw' (equivalent term, minor). 'Synapse Olds NIA (OpenCycle...)' is fine: 'Synapse Real Estate Corporation (Synapse) retained OpenCycle Technologies Inc.' p.4.",
+  "note": "Equipment sound power levels are proponent/consultant figures (claims). A separate peer review (2026-03-20) and another Synapse NIA PDF exist on olds.ca. Appendix D titled 'Appendix D: Sound Power Levels'."
+ },
+ {
+  "id": "energiforsk2020",
+  "reachable": true,
+  "publisher": "Energiforsk",
+  "title": "Verktygslåda för prosumtion inom fjärrvärme",
+  "edition": "FutureHeat programme",
+  "date": "July 2020 ('© Energiforsk juli 2020')",
+  "url": "https://energiforsk.se/media/28252/verktygslada-for-prosumtion-inom-fjarrvarme-energiforskrapport-2020-681.pdf",
+  "values": [
+   {"blank_context": "Energiforsk ___:___", "value": "2020:681", "quote": "RAPPORT 2020:681", "where": "cover"},
+   {"blank_context": "pp.___–___", "value": "12–17 (Öppen Fjärrvärme section and contract structures); also p.27", "quote": "2.5 ÖPPEN FJÄRRVÄRME (p.12); 'Affärsmodell: Ersättning, avtal och ansvarsfördelning' (p.14): 'Ersättningsmodellen för Öppen Fjärrvärme är strukturerad i fyra olika avtalsformer och indelad i två geografier'", "where": "pp.12, 14–17, 27"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Authors Kensby, Ottosson, Eklund, Fransson, Johansson. Öppen Fjärrvärme is Stockholm Exergi's programme; terms described are operator terms. Page range is my reading; claim's own range blanked so cannot compare."
+ },
+ {
+  "id": "edmDDE",
+  "reachable": false,
+  "publisher": "City of Edmonton (per claim; not verified)",
+  "title": "not checked",
+  "edition": "not checked",
+  "date": "not checked",
+  "url": "",
+  "values": [],
+  "unsupported_wording": "none (not checkable: no link; claim refers to local file data/Edmonton_IIS0____DDEI_Growth_Plan_report.pdf)",
+  "note": "No link given. Search found only City district energy project page and news, not the report itself; not fetched. Check local PDF directly."
+ },
+ {
+  "id": "edm18100",
+  "reachable": true,
+  "publisher": "City of Edmonton",
+  "title": "Bylaw 18100, EPCOR Drainage Services Bylaw",
+  "edition": "Consolidated",
+  "date": "consolidated February 19, 2020",
+  "url": "https://www.edmonton.ca/residential_neighbourhoods/Bylaws/C18100.pdf",
+  "values": [
+   {"blank_context": "Drainage Bylaw ___", "value": "18100", "quote": "Bylaw 18100", "where": "cover"},
+   {"blank_context": "s.___(i)", "value": "Schedule 2, Article 5.10(i)", "quote": "(i) non-contact cooling water; and ... into a Sanitary Sewer or a Combined Sewer if prior written approval for the Release has been given by EWSI", "where": "Schedule 2 (Terms and Conditions of Drainage Service), 5.10(i)"}
+  ],
+  "unsupported_wording": "'no EPCOR sewer-heat programme found' is a search finding, not something the bylaw states. Short title is 'EPCOR Drainage Services Bylaw', not 'Drainage Bylaw'. 5.10 also allows release to a combined sewer, not 'sanitary sewer only'.",
+  "note": "EWSI = EPCOR Water Services Inc. Last ~8k characters of PDF not read."
+ }
+]
