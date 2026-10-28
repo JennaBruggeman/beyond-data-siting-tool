@@ -5,7 +5,6 @@ R = pathlib.Path(__file__).resolve().parents[2]
 r = json.load(open(R / 'register/formula_register.json'))
 tri = {x['id']: x for x in csv.DictReader(open(R / 'checks/sweep/triage_2026-10-27.csv'))}
 DEC = [
- ['F-01..F-05', 'display fix', 'Open display fixes from the tool review (F-04 CLARK page error)', 'tool'],
 ]
 srcs = {**r['old_sources'], **r['new_sources']}
 rows = [d + ['open'] for d in DEC]; seen = {d[0] for d in DEC}

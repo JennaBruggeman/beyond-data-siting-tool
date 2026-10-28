@@ -8,11 +8,11 @@ Two independent routes: the hand calculation in `size_check.xlsx` (live formulas
 
 | id | Problem | Fix |
 |---|---|---|
-| F-01 | "Plant space, dry coolers" uses air-cooled chiller figures when cooling is air; the written sum leaves out × PUE | Label the cooler actually used; show × PUE |
-| F-02 | Cooling towers or hybrid chosen: plant m² still uses chillers or dry coolers | Use the outside-cooling answer |
-| F-03 | After the plant cap, only the top MW is capped; hall bars and the "hall ÷ 290 = …" math line don't add up | Cap all, or show the cap as its own step |
-| F-04 | Page error on 1425 Clark Dr: "Cannot read properties of undefined (reading 'sources')" | Trace and fix |
-| F-05 | Indoor plant floor is subtracted but never shown in the math | Add the line |
+| F-01 | "Plant space, dry coolers" uses air-cooled chiller figures when cooling is air; the written sum leaves out × PUE | **Fixed 28 Oct:** label names the cooler used; math line shows each end with × PUE |
+| F-02 | Cooling towers or hybrid chosen: plant m² still uses chillers or dry coolers | **Fixed 28 Oct:** plant m² uses the same cooler as the plant layout (towers 5.1–11.1, hybrid 24.5–50.1 m² per MW of heat, from plant.js unit sizes) |
+| F-03 | After the plant cap, only the top MW is capped; hall bars and the "hall ÷ 290 = …" math line don't add up | **Fixed 28 Oct:** strict and lenient bars capped too; the cap is its own math step |
+| F-04 | Page error on 1425 Clark Dr: "Cannot read properties of undefined (reading 'sources')" | **Closed 28 Oct:** no longer reproduces; absent from every golden run since 24 Oct, and a sweep of all tabs on 1425 Clark Dr gives no page errors |
+| F-05 | Indoor plant floor is subtracted but never shown in the math | **Fixed 28 Oct:** the floor-area step names the plant rooms subtracted |
 
 ## Register text out of step with the code (fix)
 

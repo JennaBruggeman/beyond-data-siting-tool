@@ -21,7 +21,7 @@ const R={
  grossPerMW:[505,1109],               // check: whole building per MW IT — min–max of the 11 benchmark buildings in bench/benchmarks.json (6 approved, 2 proposed, 1 refused, 1 under construction, 1 unknown; applicant or filed figures; test_size_chain.py keeps this in sync)
  cases:{van:[{mw:1.6,n:'Cologix VAN5'},{mw:2.4,n:'eStruxture VAN-1'},{mw:40,n:'111 E 5th (proposed)'}], edm:[{mw:2.5,n:'Qu EDM1'}]}, // operator or applicant figures
  steps:[0.1,0.2,0.3,0.5,0.75,1,1.5,2,2.5,3,4,5,6,8,10,12,15,20,25,30,40],
- plant:{ups:[2.0,2.4],batt:[2.2,2.2],dry:[19.5,30.5],chill:[17,26],hp:[3.4,3.4],cdu:[0.6,0.6]}, // m² per MW; ups, batt, hp, cdu per MW of servers; dry and chill per MW of HEAT (× PUE), sweep M30/M31 18 Oct: dry coolers (liquid cooling) 19.5–30.5 (EVAPCO, Thermokey, Mark), air-cooled chillers (air cooling) 17–26 (Trane TCA); manufacturer claims, equipment only, spare units added when the plant is laid out
+ plant:{ups:[2.0,2.4],batt:[2.2,2.2],dry:[19.5,30.5],chill:[17,26],towers:[5.1,11.1],hybrid:[24.5,50.1],hp:[3.4,3.4],cdu:[0.6,0.6]}, // m² per MW; ups, batt, hp, cdu per MW of servers; dry and chill per MW of HEAT (× PUE), sweep M30/M31 18 Oct: dry coolers (liquid cooling) 19.5–30.5 (EVAPCO, Thermokey, Mark), air-cooled chillers (air cooling) 17–26 (Trane TCA); manufacturer claims, equipment only, spare units added when the plant is laid out
  pue:[1.4,1.55], lf:0.6, lwUnitDry:[98.5,102], // dry cooler, per unit at full fan speed: Güntner GFD 090.2D ≈ 2.5 MW, LWA 98.5 (Deerfield MA submittal); Thermokey 102 at 738 kW (manufacturer claims; sweep M32)
  lwUnit:[98,101], // sound power per ~1 MW air-cooled unit: Trane RTAF size 280 (1,010 kW), low-noise 98 / standard 101 dB(A), brochure RTAF-SLB001-GB p.13 (sweep 17 Oct; checked 18 Oct)
   capture:[0.48,0.75], cop:[3.0,4.5], // COP: DEA 2026 waste-heat HPs to 70 °C 3.0–3.6; observed Meta Odense 27→70 °C: 4.5 (2020), ≈3.9 combined 2022–24 (Fjernvarme Fyn annual reports)
@@ -87,7 +87,7 @@ function stableFacts(){ const A=BD.S.answers, s=BD.S.sel; if(!s) return null;
       else { for(let i=0;i<18;i++){ const m=Math.sqrt(lo*hi), fm=at(m); if(fm.mw[1]>=m){ lo=m; f=fm; mw=m; } else hi=m; if(hi/lo<1.01) break; }
         if(!f){ f=at(lo); mw=lo; } } }
     // plant comes in whole units, so the top can jump past the size it was sized for; above that size the plant no longer fits, so cap it there
-    if(f.mw[1]>mw&&mw<40){ f.mw=[Math.min(f.mw[0],mw),mw]; f.mwCapped=true; }
+    if(f.mw[1]>mw&&mw<40){ f.mwTopRaw=f.mw[1]; f.mw=[Math.min(f.mw[0],mw),mw]; f.mwCapped=true; const cap=r=>r?[Math.min(r[0],mw),Math.min(r[1],mw)]:r; f.mwS=cap(f.mwS); f.mwL=cap(f.mwL); } // finding F-03: every bar capped, not only the top
     f.plantFor=mw; }
   finally{ A.mw=keep; inStable=false; BD.modelReset&&BD.modelReset(); }
   stableKey=k; stableF=f; return f; }
@@ -163,7 +163,12 @@ function siteFactsRaw(){
   f.mwCheck=A.built==='new'&&A.extent!=='part'?[f.gross[0]/R.grossPerMW[1],f.gross[1]/R.grossPerMW[0]]:null;
   return f;
 }
-function plantPerMW(recover){ const p=R.plant, air=!recover&&((BD.S.answers.inside||'air')==='air'), c=air?p.chill:p.dry; // heat per MW of servers = PUE
+/* findings F-01/F-02 (24 Oct): the cooler counted here is the one the plant layout uses (plant.js sizeFor): towers or hybrid when chosen;
+   otherwise air-cooled chillers for an air-cooled hall, dry coolers for liquid cooling or heat recovery. m² of unit per MW of heat. */
+function coolerFor(recover){ const A=BD.S.answers, p=R.plant, out=A.outside||'dry';
+  if(out==='towers') return {name:'cooling tower cells',c:p.towers}; if(out==='hybrid') return {name:'hybrid coolers',c:p.hybrid};
+  return !recover&&(A.inside||'air')==='air'?{name:'air-cooled chillers',c:p.chill}:{name:'dry coolers',c:p.dry}; }
+function plantPerMW(recover){ const p=R.plant, c=coolerFor(recover).c; // heat per MW of servers = PUE
   let lo=p.ups[0]+p.batt[0]+c[0]*R.pue[0], hi=p.ups[1]+p.batt[1]+c[1]*R.pue[1]; if(recover){ lo+=p.hp[0]+p.cdu[0]; hi+=p.hp[1]+p.cdu[1]; } return [lo,hi]; }
 function noiseLw(mw){ const CU=coolUnits(mw), LU=CU.name==='dry coolers'?R.lwUnitDry:R.lwUnit; return {n:CU.n,name:CU.name,lw:[LU[0]+10*Math.log10(CU.n),LU[1]+10*Math.log10(CU.n)]}; }
 /* cooling units for the noise count: the same units the plant lays out (sweep M30), spares included */
@@ -187,7 +192,7 @@ function mathFits(f){
     L.push(`Storeys under the ${e.h} m height limit: first floor 6.0 m, then data-hall floors of 6.0 or 5.5 m. (${e.h} − 6.0) ÷ 6.0 = ${((e.h-6)/6).toFixed(2)}, whole floors ${Math.floor((e.h-6)/6)}, plus the first floor = <b>${f.floorsR[0]}</b>; with 5.5 m floors, ${((e.h-6)/5.5).toFixed(2)} → ${Math.floor((e.h-6)/5.5)} + 1 = <b>${f.floorsR[1]}</b>.`);
     if(f.fpNote&&!f.fpCalc) L.push(`Footprint ${esc(f.fpNote)}: <b>${n0(f.fp)} m²</b> (drawn in 3D).`);
     if(f.fpNote&&f.fpCalc){ const c=f.fpCalc; L.push(`Footprint after yards: lot ${n0(f.lot)} m² treated as ${n1(c.w)} m wide × ${n1(c.d)} m deep (width = area ÷ longest span). Less the yards: ${n1(c.fw)} × ${n1(c.fd)} = <b>${n0(f.fp)} m²</b>.`); }
-    const fpv=f.fp||f.lot; L.push(`Most floor area those storeys can hold: ${n0(fpv)} m² × ${f.floorsR[0]} = ${n0(fpv*f.floorsR[0])} m²${f.floorsR[1]!==f.floorsR[0]?` (or × ${f.floorsR[1]} = ${n0(fpv*f.floorsR[1])} m²)`:''}. The smaller of this and step 2: <b>${rng(f.gross[0],f.gross[1],'m²')}</b>.`);
+    const fpv=f.fp||f.lot, ip=f.indoorPlant||0; L.push(`Most floor area those storeys can hold: ${n0(fpv)} m² × ${f.floorsR[0]} = ${n0(fpv*f.floorsR[0])} m²${f.floorsR[1]!==f.floorsR[0]?` (or × ${f.floorsR[1]} = ${n0(fpv*f.floorsR[1])} m²)`:''}. The smaller of this and step 2${ip?`, less ${n0(ip)} m² of plant rooms inside the building (finding F-05)`:''}: <b>${rng(f.gross[0],f.gross[1],'m²')}</b>.`);
     if(f.sc){ f.sc.forEach((s,i)=>{ if(i===1&&f.floorsR[1]===f.floorsR[0]) return; const tag=f.floorsR[1]!==f.floorsR[0]?` <i>(${f.floorsR[i]} storeys)</i>`:'';
       L.push(`Ground floor (no data storage at grade)${tag}: floor area ÷ storeys = ${n0(s.G)} ÷ ${f.floorsR[i]} = <b>${n0(s.gr)} m²</b>. Floors above: ${n0(s.G)} − ${n0(s.gr)} = <b>${n0(s.up)} m²</b>.`);
       L.push(`Data hall, strict reading${tag} (only the floors above, and only part of them is hall): ${n0(s.up)} × ${hs[0]} = ${n0(s.up*hs[0])} m², up to ${n0(s.up)} × ${hs[1]} = <b>${n0(s.up*hs[1])} m²</b>.`);
@@ -197,16 +202,18 @@ function mathFits(f){
     L.push(`Floor area: ${esc(f.how)} = <b>${rng(f.gross[0],f.gross[1],'m²')}</b>.`);
     L.push(`Data hall: ${n0(f.hallGross[0])} × ${hs[0]} = ${n0(f.hallS[0])} m², up to ${n0(f.hallGross[1])} × ${hs[1]} = <b>${n0(f.hallS[1])} m²</b>.`);
   }
-  L.push(`Servers: the smallest hall laid out loosely, ${n0(f.hall[0])} ÷ ${m[1]} m² per MW = <b>${n1(f.mw[0])} MW</b>; the largest hall laid out densely, ${n0(f.hall[1])} ÷ ${m[0]} = <b>${n1(f.mw[1])} MW</b>${f.mw[1]>=40?' (capped at 40 MW, the tool\'s range)':''}.`);
+  const top=f.mwCapped?f.mwTopRaw:f.mw[1], lo0=Math.min(40,f.hall[0]/m[1]);
+  L.push(`Servers: the smallest hall laid out loosely, ${n0(f.hall[0])} ÷ ${m[1]} m² per MW = <b>${n1(lo0)} MW</b>; the largest hall laid out densely, ${n0(f.hall[1])} ÷ ${m[0]} = <b>${n1(top)} MW</b>${top>=40?' (capped at 40 MW, the tool\'s range)':''}.`);
+  if(f.mwCapped) L.push(`Plant cap: the cooling plant for more than ${n1(f.plantFor)} MW no longer fits on this lot alongside the building, so every reading is capped at <b>${n1(f.plantFor)} MW</b>: range ${n1(f.mw[0])}–${n1(f.mw[1])} MW.`);
   if(f.mwCheck) L.push(`Check: ${n0(f.gross[1])} ÷ ${n0(R.grossPerMW[1])} = ${n1(f.gross[1]/R.grossPerMW[1])} MW; ${n0(f.gross[1])} ÷ ${n0(R.grossPerMW[0])} = ${n1(f.gross[1]/R.grossPerMW[0])} MW${f.gross[0]!==f.gross[1]?' (shown for the larger floor area)':''}.`);
   return mathBox(L,`Hall share ${hs[0]}–${hs[1]}: Burlington plan set. ${m[0]}–${m[1]} m² of hall per MW: ${f.density==='high'?'high-density halls (NEXTDC S3, QScale; operator claims) to the densest built Canadian hall':'five built Canadian halls (operator claims)'}. ${n0(R.grossPerMW[0])}–${n0(R.grossPerMW[1])} m² of building per MW: benchmark buildings in the precedent catalogue.`);
 }
 function mathNeeds(mw,fac,f){
-  const pl=plantPerMW(false), plR=plantPerMW(true), p=R.plant;
+  const pl=plantPerMW(false), plR=plantPerMW(true), p=R.plant, cN=coolerFor(false), cR=coolerFor(true);
   return mathBox([
     `Power at the meter at full load: ${mw} MW × PUE ${R.pue[0]} = ${n1(fac[0])} MW; × ${R.pue[1]} = <b>${n1(fac[1])} MW</b>. Averaged over a year (× ${R.lf}): <b>${n1(fac[0]*R.lf)}–${n1(fac[1]*R.lf)} MW</b>.`,
-    `Plant space, dry coolers: (UPS ${p.ups[0]}–${p.ups[1]} + batteries ${p.batt[0]} + dry coolers ${p.dry[0]}) = ${pl[0].toFixed(1)}–${pl[1].toFixed(1)} m² per MW; × ${mw} = <b>${n0(pl[0]*mw)}–${n0(pl[1]*mw)} m²</b>.`,
-    `With heat recovery, add heat pumps ${p.hp[0]} + CDUs ${p.cdu[0]} = ${plR[0].toFixed(1)}–${plR[1].toFixed(1)} m² per MW; × ${mw} = <b>${n0(plR[0]*mw)}–${n0(plR[1]*mw)} m²</b>.`,
+    `Plant space, ${cN.name}: UPS ${p.ups[0]} + batteries ${p.batt[0]} + ${cN.name} ${cN.c[0]} × PUE ${R.pue[0]} = ${pl[0].toFixed(1)} m² per MW, up to UPS ${p.ups[1]} + batteries ${p.batt[1]} + ${cN.c[1]} × ${R.pue[1]} = ${pl[1].toFixed(1)}; × ${mw} MW = <b>${n0(pl[0]*mw)}–${n0(pl[1]*mw)} m²</b> (coolers are sized for the heat, which is the servers × PUE).`,
+    `With heat recovery (${cR.name}: ${cR.c[0]}–${cR.c[1]} × PUE), add heat pumps ${p.hp[0]} + CDUs ${p.cdu[0]}: ${plR[0].toFixed(1)}–${plR[1].toFixed(1)} m² per MW; × ${mw} = <b>${n0(plR[0]*mw)}–${n0(plR[1]*mw)} m²</b>.`,
     BD.S.answers.gens==='none'?'Standby fuel: none (no generators chosen).':`Standby fuel: ${n1(fac[0])}–${n1(fac[1])} MW × 1,000 (kW) × ${R.fuelHours} h × ${R.fuelLkWh} L per kWh = <b>${n0(fac[0]*1000*R.fuelHours*R.fuelLkWh)}–${n0(fac[1]*1000*R.fuelHours*R.fuelLkWh)} L</b>.`
   ],'PUE: LBNL 2023, Uptime 2025. Plant areas: manufacturer claims, equipment only. Fuel rate: manufacturer claim at full load.');
 }
@@ -257,7 +264,7 @@ function fitsView(){
    <div class="src">Bar under the track: what fits here. Ticks: built or proposed sites, operator or applicant figures. Steps widen as size grows.</div></div>
   <h3>What that size needs</h3><dl>
   <dt>Power at full load</dt><dd>${rng(fac[0],fac[1],'MW')} at the meter (servers × PUE 1.4–1.55); this sizes the grid connection and the cooling plant</dd><dt>Power on average</dt><dd>${rng(fac[0]*R.lf,fac[1]*R.lf,'MW')} (about ${Math.round(R.lf*100)}% of full load over a year); this sets the yearly energy</dd>
-  <dt>Plant space</dt><dd>${rng(pl[0]*mw,pl[1]*mw,'m²')} with dry coolers; ${rng(plR[0]*mw,plR[1]*mw,'m²')} with heat recovery — equipment only, before clearances</dd>
+  <dt>Plant space</dt><dd>${rng(pl[0]*mw,pl[1]*mw,'m²')} with ${coolerFor(false).name}; ${rng(plR[0]*mw,plR[1]*mw,'m²')} with heat recovery — equipment only, before clearances</dd>
   <dt>Standby fuel</dt><dd>${A.gens==='none'?'none: no generators chosen':`${rng(fuel[0],fuel[1],'L')} for 12 h; ${pos==='ground'?`a first-storey storage room may hold ${fmt(R.fuelLimit.first)} L`:pos?`a basement or upper-storey storage room may hold ${fmt(R.fuelLimit.low)} L (tanks of 2,500–20,000 L) or 45,000 L (tanks over 20,000 L)`:`a protected storage room may hold ${fmt(R.fuelLimit.first)} L on the first storey, or in a basement or upper storey ${fmt(R.fuelLimit.low)} L (tanks of 2,500–20,000 L) or 45,000 L (tanks over 20,000 L)`} (NFC 2020 Table 4.3.13.4.-B)${fuel[1]>(pos==='ground'||!pos?R.fuelLimit.first:45000)?' — <span class="draft">more than one room or an outdoor tank</span>':''}`}</dd>
   <dt>Electrical service</dt><dd>${esc(svc)}</dd>
   ${f.cpcn?`<dt>Grid</dt><dd class="draft">Downtown supply area (downtown peninsula east to Nanaimo St): no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures.</dd>`:''}
