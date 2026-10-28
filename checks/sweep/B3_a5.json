@@ -1,0 +1,115 @@
+[
+ {
+  "id": "acaEdmonton",
+  "reachable": true,
+  "publisher": "Alberta Capital Airshed (ACA)",
+  "title": "Annual Report to the Community 2023",
+  "edition": "2023-24 annual report",
+  "date": "2023 data; file uploaded 2025-06",
+  "url": "https://capitalairshed.ca/wp-content/uploads/2025/06/ACA-AR2023-24_F100824-1.pdf",
+  "values": [
+   {"blank_context": "Edmonton East NO2 annual mean ___ ppb", "value": "13.9 (2023); series 2016-2023: 11.2, 13.6, 13.2, 12.1, 11.9, 12.7, 13.2, 13.9", "quote": "Edmonton East 11.2 13.6 13.2 12.1 11.9 12.7 13.2 13.9", "where": "p. 12, Nitrogen Dioxide (NO2) table, columns 2016-2023"},
+   {"blank_context": "(___) year of the annual mean", "value": "2023 if this report is the intended source; claim does not name year/report", "quote": "columns 2016 to 2023", "where": "p. 12"},
+   {"blank_context": "audit/research____-___-___/B round ___", "value": "not checkable (internal file path, not a source value)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "none; 'no short-term percentile values' is consistent: no station-level NO2 percentiles in the 2023 report or the Alberta Airsheds 2024 report (only a 2023 network max of 79 ppb and a daily 95th-percentile figure whose values were not extractable).",
+  "note": "No link given; found on ACA official site. Claim does not say which year/report, so match of 13.9 ppb to the intended value is unconfirmed. Values read via text extraction of the table; recheck the table visually. Also checked Alberta Airsheds 2024 Air Quality Report (capitalairshed.ca/.../AAC_2024AR_FF.pdf): no station-level Edmonton East value in text, only provincial range 1.0-14.6 ppb (p. 11)."
+ },
+ {
+  "id": "cusp",
+  "reachable": false,
+  "publisher": "CUSP (Canadian Urban Sustainability Practitioners) - claimed",
+  "title": "Energy Poverty and Equity Explorer (energypoverty.ca) - claimed",
+  "edition": "",
+  "date": "",
+  "url": "https://energypoverty.ca/index_fr.html; https://energypoverty.ca/files/statement_of_purpose.pdf",
+  "values": [
+   {"blank_context": "energy poverty ___% threshold", "value": "not stated (source content not available)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "Whole claim unsupported: energypoverty.ca now serves an online casino comparison page, not CUSP content.",
+  "note": "Direct link blocked by fetch tool; the two energypoverty.ca URLs reached via search both returned casino-comparison content ('Canadian Casinos', updated 28 Oct 2026). Domain appears lapsed/repurposed. One search for the threshold on a CUSP site found nothing official. The link in the tool should be replaced; do not cite energypoverty.ca."
+ },
+ {
+  "id": "epraBC",
+  "reachable": true,
+  "publisher": "EPRA (Electronic Products Recycling Association) / Recycle My Electronics BC; LVG page by Encorp Pacific (Canada), Return-It",
+  "title": "What Can I Recycle? (BC); Requirements for Large Volume Generators",
+  "edition": "",
+  "date": "no page date printed; Return-It page copyright 2026",
+  "url": "https://recyclemyelectronics.ca/bc/what-can-i-recycle; https://www.return-it.ca/electronics/recycling/largevolume-requirements",
+  "values": [
+   {"blank_context": "Large Volume Generator pickup with a ___-pallet minimum", "value": "3 (Metro Vancouver, Greater Victoria, Kelowna); 5 (Interior, Kootenay, Northern BC)", "quote": "Minimum pick up quantity: 3 Pallets ... Minimum pick up quantity: 5 Pallets", "where": "return-it.ca Requirements for Large Volume Generators, by region"},
+   {"blank_context": "approved primary processors (Dec ___)", "value": "not stated (no processor list found)", "quote": "", "where": "recyclemyelectronics.ca/bc/processors describes the Recycler Qualification Program only"}
+  ],
+  "unsupported_wording": "Processor list (FCM Delta, eCycle Chilliwack, Quantum, Hi Tech Edmonton) and 'Dec' date not found; 'loose batteries not accepted' not stated on the page; single pallet minimum hides 3 vs 5 regional split.",
+  "note": "Verified verbatim: 'Desktop computers (including those acting as servers) and all bundled keyboards, mice, cables and internal components.' IT and Telecom Equipment category listed (routers, bridges, Ethernet switches, networking incl. security appliances/firewalls, business video conferencing). LVG minimum is on the Return-It (Encorp) site, not the EPRA page. Processor list may be in an EPRA annual report to the Director (not read)."
+ },
+ {
+  "id": "lundSnow",
+  "reachable": true,
+  "publisher": "Geo-Heat Center, Oregon Institute of Technology (author affiliation); hosted by OSTI ETDEWEB",
+  "title": "Pavement Snow Melting",
+  "edition": "",
+  "date": "not stated in text (cites references to 1999)",
+  "url": "https://www.osti.gov/etdeweb/servlets/purl/895225",
+  "values": [
+   {"blank_context": "OSTI ___", "value": "895225 is in the URL only; no OSTI ID printed in the document text", "quote": "", "where": "URL"},
+   {"blank_context": "ASHRAE classes from ___ data", "value": "1995 (ASHRAE Applications Handbook)", "quote": "The 1995 ASHRAE Applications Handbook presents design output data for each of the three classes for selected cities in the U.S.", "where": "no page numbers in text"},
+   {"blank_context": "Portland OR ___/___/___ Btu/h·ft²", "value": "86 / 97 / 111 (Class I / II / III)", "quote": "Portland, OR: 86, 97, 111", "where": "design output table, no page numbers"},
+   {"blank_context": "about ___/___/___ W/m²", "value": "not stated (conversion, not printed)", "quote": "", "where": ""},
+   {"blank_context": "Klamath Falls deck at ___ Btu/h·ft²", "value": "50", "quote": "The heated bridge deck and pavement covers 22,000 ft2 and is designed for a heat output of 50 Btu/ft2/hr.", "where": "Klamath Falls section"},
+   {"blank_context": "about ___ W/m²", "value": "not stated (conversion, not printed)", "quote": "", "where": ""},
+   {"blank_context": "___ °C fluid", "value": "100 °F printed; °C not stated (conversion, not printed)", "quote": "The DHE supplies 100oF glycol mixture to the grid with a temperature drop of 24oF", "where": "Klamath Falls section"}
+  ],
+  "unsupported_wording": "'ASHRAE classes': classes are Chapman's (1957); ASHRAE 1995 handbook supplies the city output data. Fluid temperature printed in °F only.",
+  "note": "Text has no page numbers, no date, no publisher line; 'Geo-Heat Center' is the author's affiliation (likely GHC Quarterly Bulletin, not printed). The 22,000 ft2 figure covers bridge deck and pavement together. Read via text extraction; table values should be visually rechecked."
+ },
+ {
+  "id": "nrcSeismic2020",
+  "reachable": false,
+  "publisher": "National Research Council Canada (Codes Canada)",
+  "title": "Public review on proposed changes to Codes Canada publications - winter 2020",
+  "edition": "",
+  "date": "review 13 Jan 2020 - 13 Mar 2020 (landing page)",
+  "url": "https://nrc.canada.ca/en/certifications-evaluations-standards/codes-canada/public-review-proposed-changes-codes-canada-publications-winter-2020",
+  "values": [
+   {"blank_context": "NBC ___ public review", "value": "2020 (winter 2020 public review)", "quote": "Public review ran from January 13, 2020 to March 13, 2020", "where": "NRC landing page"},
+   {"blank_context": "(Jan ___ Change ___)", "value": "not stated (combined PDF not read)", "quote": "", "where": ""},
+   {"blank_context": "Sa(___): Vancouver ___ Edmonton ___", "value": "not stated (combined PDF not read)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "Cannot check; seismic values, change number and Sa period unverified.",
+  "note": "Combined PDF link was blocked by the fetch tool (not in provenance) and is not linked from the archived NRC landing page, which says proposed changes are 'available on request from Codes Canada'. Final values should come from the NRCan 2020 NBC Seismic Hazard Tool instead."
+ },
+ {
+  "id": "canaanMB",
+  "reachable": true,
+  "publisher": "Canaan Inc. via PR Newswire (read on Finviz news reprint)",
+  "title": "Canaan Inc. Expands Energy Efficiency Initiatives with 3 MW Compute Heat Recovery Proof of Concept at Canadian Greenhouse",
+  "edition": "",
+  "date": "2026-01-06",
+  "url": "https://finviz.com/news/268229/canaan-inc-expands-energy-efficiency-initiatives-with-3-mw-compute-heat-recovery-proof-of-concept-at-canadian-greenhouse",
+  "values": [
+   {"blank_context": "press release Jan ___", "value": "06, 2026", "quote": "January 06, 2026, 9:05 AM", "where": "release header (PR Newswire)"},
+   {"blank_context": "___ MW compute heat-recovery proof of concept", "value": "3.0", "quote": "3.0 MW proof-of-concept (PoC)", "where": "release body"},
+   {"blank_context": "water above ___ °C", "value": "75", "quote": "high-temperature hot water above 75°C", "where": "release body"}
+  ],
+  "unsupported_wording": "'water above 75 °C' is a stated system capability ('can output'), not a measured site temperature.",
+  "note": "OPERATOR CLAIM. Manitoba location confirmed ('in Manitoba, Canada'). Quote confirmed verbatim: 'Actual performance metrics will be confirmed once fully operational.' Finviz is a reprint; the original is on PR Newswire / Canaan investor site."
+ },
+ {
+  "id": "crf",
+  "reachable": true,
+  "publisher": "NREL (ATB); IEA SHC Task 54; Springer (Synthesis Lectures on Computer Architecture)",
+  "title": "Equations and Variables in the ATB (2024); LCoH for Solar Thermal Applications, INFO Sheet A01; The Datacenter as a Computer, 3rd ed.",
+  "edition": "ATB 2024; INFO Sheet A01 rev. 06/05/2019; Barroso 3rd ed. 2019",
+  "date": "ATB 2024; 06/03/2017; 2019",
+  "url": "https://atb.nrel.gov/electricity/2024/equations_&_variables; https://task54.iea-shc.org/Data/Sites/1/publications/A01-Info-Sheet--LCOH-for-Solar-Thermal-Applications.pdf; https://link.springer.com/book/10.1007/978-3-031-01761-2",
+  "values": [
+   {"blank_context": "CRF = i / (___ − (___+i)^−n)", "value": "1 and 1 (algebraically equivalent; NREL prints a different form)", "quote": "CRF = WACC × [1 / (1 − 1/(1 + WACC)^t)]", "where": "ATB 2024, Calculated Variables Equations"},
+   {"blank_context": "IEA SHC Task ___", "value": "54", "quote": "IEA-SHC Task 54 ... LCoH for Solar Thermal Applications", "where": "INFO Sheet A01, p. 1, Equation 1"},
+   {"blank_context": "Barroso ch. ___", "value": "not stated (Springer page gives no table of contents)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "Notation differs: NREL uses WACC and t, not i and n; same formula. Barroso chapter number and edition unverified.",
+  "note": "No link given (formulas sheet). Task 54 LCoH equation includes subsidies, tax, depreciation and residual value terms; check the tool uses the same form. Barroso 3rd ed. (2019) has 8 chapters per Springer; which one covers TCO is not printed on the page read."
+ }
+]

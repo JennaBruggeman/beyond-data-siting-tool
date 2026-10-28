@@ -1,0 +1,121 @@
+[
+ {
+  "id": "nrcCBD160",
+  "reachable": false,
+  "publisher": "not verified",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://nrc-publications.canada.ca/fra/voir/td/?id=ea4000fb-340b-4fdf-878f-27658e1f7df8 (fetch refused by tool provenance block; two searches found no other copy on an NRC domain)",
+  "values": [],
+  "unsupported_wording": "not checked; source unreachable",
+  "note": "Only copy found was an unofficial mirror at web.mit.edu (Canadian Building Digests), which was not used under the no-mirrors rule. Every blank still needs checking against the NRC original."
+ },
+ {
+  "id": "bcRLCF007_2024",
+  "reachable": true,
+  "publisher": "BC Ministry of Energy and Climate Solutions",
+  "title": "Renewable and Low Carbon Fuel Requirements Summary for 2010 - 2024",
+  "edition": "Information Bulletin RLCF-007-2024",
+  "date": "Cover: 'Revised: March 2026'; page headers: 'Revised: February 2026'",
+  "url": "https://www2.gov.bc.ca/assets/gov/farming-natural-resources-and-industry/electricity-alternative-energy/transportation/renewable-low-carbon-fuels/information-bulletins/rlcf007-summary_2010-2024.pdf",
+  "values": [
+   {"blank_context": "RLCF-___-___", "value": "007-2024", "quote": "Information Bulletin RLCF-007-2024", "where": "cover"},
+   {"blank_context": "Summary ___–___", "value": "2010–2024", "quote": "Summary for 2010 - 2024", "where": "cover"},
+   {"blank_context": "revised Mar ___", "value": "2026", "quote": "Revised: March 2026", "where": "cover (page headers say February 2026)"},
+   {"blank_context": "___ HDRD (year)", "value": "2024", "quote": "Table 2, HDRD, 2024 column", "where": "Table 2, p. 3"},
+   {"blank_context": "HDRD ___ million L", "value": "1041.1", "quote": "HDRD ... 2024: 1041.1", "where": "Table 2 'Annual fuel volumes (million units) and percentages subject to the low carbon fuel requirement', p. 3"},
+   {"blank_context": "weighted average ___ gCO2e/MJ (HDRD 2024)", "value": "23.06", "quote": "HDRD ... 2024: 23.06", "where": "Table 4 'Annual weighted average carbon intensity (gCO2e/MJ) of fuels reported', p. 6"},
+   {"blank_context": "(___: ___ ML at ___) prior year", "value": "2023: 694.9 ML at 23.21", "quote": "HDRD 2023: 694.9 (Table 2); 23.21 (Table 4)", "where": "Table 2 p. 3; Table 4 p. 6"},
+   {"blank_context": "biodiesel ___ ML at ___", "value": "131.5 ML at 0.30", "quote": "Biodiesel 2024: 131.5 (Table 2); 0.30 (Table 4)", "where": "Table 2 p. 3; Table 4 p. 6"},
+   {"blank_context": "renewable share ___%", "value": "31.2", "quote": "% Renewable Content ... 21.7% 31.2% 3.0%", "where": "Table 1 'Annual fuel volumes (million litres) and percentages subject to the renewable fuel requirement', 2024 column, p. 2"},
+   {"blank_context": "(___ of ___ ML)", "value": "Renewable Diesel 1172.8; Total Diesel 2610.2 (non-exempt 2586.7)", "quote": "Renewable DieselB ... 844.1 1172.8 91.7; Total Diesel ... 3069.0 2610.2 3,305.1; Non-exempt Diesel ... 2586.7", "where": "Table 1, p. 2"}
+  ],
+  "unsupported_wording": "'(1172.8 of 2610.2 ML)' doesn't give 31.2%. That works out to about 45%, and the table doesn't state the denominator for 31.2%.",
+  "note": "Government-reported figures. Footnote B says 'Renewable Diesel' includes biodiesel, HDRD and co-processed renewable diesel. Table 2 total diesel was reported as 2586.9, against 2586.7 non-exempt in Table 1 (extraction; worth a visual check). The cover and page headers give different revision months."
+ },
+ {
+  "id": "edmHeatPolicy",
+  "reachable": true,
+  "publisher": "City of Edmonton",
+  "title": "Linked: 'Path 2: Preparing for Changing Temperatures' (adaptation progress); also read: 'Climate Resilient Edmonton: Adaptation Strategy and Action Plan'",
+  "edition": "not stated",
+  "date": "Progress: 'current as of June 30, 2026'; Climate Resilient Edmonton: 2018",
+  "url": "https://www.edmonton.ca/sites/default/files/public-files/documents/june-2026-adaptation-plan-path-2-progress_0.pdf ; https://www.gov.edmonton.ab.ca/city_government/documents/Climate_Resilient_Edmonton.pdf",
+  "values": [
+   {"blank_context": "Climate Resilient Edmonton (___)", "value": "2018", "quote": "Climate Resilient Edmonton: Adaptation Strategy and Action Plan (2018)", "where": "CRE plan, cover/front matter (not in the linked progress PDF)"},
+   {"blank_context": "Action ___ 'Cool Edmonton'", "value": "9", "quote": "The City of Edmonton develops and implements a \"Cool Edmonton\" program to reduce the impacts of urban heat island effect", "where": "CRE plan, Action 9, p. 30. The progress PDF says only 'Actions 9-10 ... All actions in progress'"},
+   {"blank_context": "adaptation progress June ___", "value": "2026", "quote": "Pathway progress is current as of June 30, 2026.", "where": "linked progress PDF"},
+   {"blank_context": "hot days about ___ → ___", "value": "1 → 16 (days above 30°C per year)", "quote": "historical 1 day/year; 2050s 16 days/year", "where": "CRE plan, Table 4, p. 17 (Figure 1 on the same page gives +15 days for 2041–2070). Not stated in the progress PDF"},
+   {"blank_context": "by the ___s", "value": "2050", "quote": "2050s", "where": "CRE plan, Table 4, p. 17"}
+  ],
+  "unsupported_wording": "The linked progress PDF supports only 'June 2026'. Plan year, Action 9 and hot days come from the 2018 plan. 'No rule on heat rejected by equipment' is an absence I couldn't prove.",
+  "note": "The tool extractor gave only a summary of the progress PDF, not verbatim text. Neither document mentions heat rejected by equipment, but that is an absence, not a printed statement."
+ },
+ {
+  "id": "ieaEnergyAI",
+  "reachable": false,
+  "publisher": "not verified (IEA expected)",
+  "title": "not verified",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai (site returned client_error); https://www.iea.org/news/ai-is-set-to-drive-surging-electricity-demand-... (client_error)",
+  "values": [],
+  "unsupported_wording": "not checked; the quote 'a data centre can be operational in two to three years' is unverified",
+  "note": "Both iea.org fetches failed at the site, and no workaround was tried. The year blank and the exact quote are both unverified."
+ },
+ {
+  "id": "mvStageHistory",
+  "reachable": true,
+  "publisher": "Metro Vancouver (Water Services), in the GVWD Board addendum",
+  "title": "Water Supply Preparedness for Summer 2026",
+  "edition": "Water Committee information report, WAT 20260513 Item E1; in GVWD Board package WD-2026-05-29 ADD I1",
+  "date": "Report dated May 1, 2026; Water Committee meeting May 13, 2026; Board addendum May 29, 2026",
+  "url": "https://metrovancouver.org/boards/GVWD/WD-2026-05-29-ADD-I1.pdf",
+  "values": [
+   {"blank_context": "Stage ___ in ___ (history)", "value": "not stated", "quote": "", "where": "no prior-year Stage 3 reported"},
+   {"blank_context": "Stage ___ extended to ___ Oct in ___", "value": "not stated (only standard Stage 1 period printed)", "quote": "annually from May 1 to October 15", "where": "p. 2, 'System Operations Outlook for Summer 2026'"},
+   {"blank_context": "Stage ___ ___ Aug–___ Oct ___", "value": "not stated", "quote": "", "where": ""},
+   {"blank_context": "___ Stage ___ from ___ May", "value": "2026 Stage 2 from 1 May (source); Stage 1 from May 1 is the standard annual start", "quote": "Metro Vancouver implemented Stage 2 water restrictions — which prohibit all lawn watering — starting on May 1.", "where": "p. 1, Executive Summary"},
+   {"blank_context": "Stage ___ from ___ Jun", "value": "Stage 3 'anticipated to begin in early June' (no day printed)", "quote": "Stage 3 restrictions are anticipated to begin in early June.", "where": "p. 1 and p. 2"},
+   {"blank_context": "Stage ___ from ___ Sep", "value": "not stated", "quote": "", "where": ""},
+   {"blank_context": "May ___ report: ___ 'the most recent escalation to Stage ___' before ___", "value": "May 2026 report: 2023, Stage 2", "quote": "The most recent escalation to Stage 2 was during the summer of 2023 in response to warmer and drier weather conditions", "where": "p. 2, 'System Operations Outlook for Summer 2026'"}
+  ],
+  "unsupported_wording": "Most of the stage history (prior Stage 3, October extension, Aug–Oct span, Stage 3 from September) isn't in this report. Only the 2023 Stage 2 quote and 2026 May/June are supported.",
+  "note": "The extractor summarised the content rather than printing all of it verbatim. The pattern Stage 1 May / Stage 2 June / Stage 3 September doesn't match the 2026 sequence here (Stage 2 May 1, Stage 3 expected early June)."
+ },
+ {
+  "id": "vanDCL",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Development Cost Levies Bulletin",
+  "edition": "not stated",
+  "date": "'Last amended June 14, 2024' (as served); 'Effective:' printed blank",
+  "url": "https://guidelines.vancouver.ca/bulletins/bulletin-development-cost-levies.pdf",
+  "values": [
+   {"blank_context": "amended ___ Aug ___", "value": "not stated; served version says 'Last amended June 14, 2024'", "quote": "Last amended June 14, 2024", "where": "p. 1"},
+   {"blank_context": "Table ___ rates from ___ Dec ___", "value": "not stated; tables are Table 1 (effective Sept. 30, 2023) and Table 2 (effective Sept. 30, 2024); 'Dec' does not appear", "quote": "Table 1: Current DCL Rates by Area (effective Sept. 30, 2023); Table 2: Approved DCL Rates by Area (effective Sept. 30, 2024)", "where": "p. 5"},
+   {"blank_context": "Industrial (I-___ M-___ M-___A, M-___B, M-___)", "value": "I-2, M-1, M-1A, M-1B, M-2", "quote": "I-2, M-1, M-1A, M-1B, M-2 zoning districts", "where": "p. 5, footnote 4"},
+   {"blank_context": "Industrial $___/m²", "value": "Table 1: city-wide $93.86 + utilities $29.39 = $123.25/m²; Table 2: $101.69 + $31.84 = $133.53/m²", "quote": "Industrial: $93.86/m2 ... $29.39/m2 ... $123.25/m2 (Table 1); $101.69/m2 ... $31.84/m2 ... $133.53/m2 (Table 2)", "where": "p. 5, Tables 1 and 2"},
+   {"blank_context": "Mixed Employment (IC-___–___ I-___ I-___A–C, I-___ I-___)", "value": "IC-1, IC-2, I-1, I-1A, I-1B, I-1C, I-3, I-4", "quote": "IC-1, IC-2, I-1, I-1A, I-1B, I-1C, I-3 and I-4 zoning districts", "where": "p. 5, footnote 5"},
+   {"blank_context": "Mixed Employment $___/m²", "value": "Table 1: $175.88 + $55.11 = $230.99/m²; Table 2: $190.54 + $59.71 = $250.25/m²", "quote": "Mixed Employment (Light Industrial): $175.88/m2 ... $55.11/m2 ... $230.99/m2 (Table 1); $190.54/m2 ... $59.71/m2 ... $250.25/m2 (Table 2)", "where": "p. 5, Tables 1 and 2"},
+   {"blank_context": "s.___(a)", "value": "not stated; the exemption is numbered item 1 under 'DCL Exemptions'", "quote": "DCLs do not apply to the following: 1. alterations to an existing building where the total floor area of the building is not increased;", "where": "p. 7, DCL Exemptions"}
+  ],
+  "unsupported_wording": "'amended Aug', 'rates from Dec' and 's.(a)' are not in the served bulletin. It says amended June 14, 2024, Sept. 30 rates, exemption item 1.",
+  "note": "A newer version may exist, but the URL served the June 14, 2024 version. The fourth Industrial value ($34.64, $37.53) is probably the False Creek Flats column (layout unclear)."
+ },
+ {
+  "id": "googleFervo",
+  "reachable": true,
+  "publisher": "Google (The Keyword blog)",
+  "title": "A first-of-its-kind geothermal project is now operational",
+  "edition": "not stated",
+  "date": "Nov 28, 2023",
+  "url": "https://blog.google/company-news/outreach-and-initiatives/sustainability/google-fervo-geothermal-energy-partnership/",
+  "values": [
+   {"blank_context": "Google ___ Fervo", "value": "2023 (post date); partnership 'Two years ago' (no year printed)", "quote": "Two years ago, we partnered with clean-energy startup Fervo", "where": "blog post body; dated Nov 28, 2023"}
+  ],
+  "unsupported_wording": "none. The quote matches; 'electricity contract' type isn't printed (post says 'corporate agreement'); no heat supply mentioned.",
+  "note": "OPERATOR CLAIM (Google, author Michael Terrell). Printed quote: 'carbon-free electricity has started flowing onto the local grid that serves our data centers in Nevada'. No PPA or contract form is named. The post mentions heat only as the Earth's heat, not as a heat supply to data centres."
+ }
+]

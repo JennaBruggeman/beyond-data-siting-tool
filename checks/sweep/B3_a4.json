@@ -1,0 +1,125 @@
+[
+ {
+  "id": "abDataCentreLevy",
+  "reachable": false,
+  "publisher": "Legislative Assembly of Alberta (bill); Government of Alberta (alberta.ca pages read instead)",
+  "title": "Bill 12, Financial Statutes Amendment Act, 2025 (No. 2)",
+  "edition": "First reading PDF, 2nd Session, 31st Legislature",
+  "date": "Bill PDF dated 20251023 in URL; alberta.ca page published March 11, 2026",
+  "url": "https://docs.assembly.ab.ca/LADDAR_files/docs/bills/bill/legislature_31/session_2/20251023_bill-012.pdf (fetch returned binary, not readable); read instead https://www.alberta.ca/updating-financial-laws and https://www.alberta.ca/system/files/tbf-bill-12-financial-statutes-amendment-act-fact-sheet.pdf",
+  "values": [
+   {"blank_context": "Corporate Tax Act Part ___", "value": "not stated (bill text not readable)", "quote": "", "where": ""},
+   {"blank_context": "ss. ___–___", "value": "not stated (bill text not readable)", "quote": "", "where": ""},
+   {"blank_context": "Bill ___ Financial Statutes Amendment Act, ___ (No. ___)", "value": "Bill 12; 2025; No. 2", "quote": "Bill 12, Financial Statutes Amendment Act (No. 2), 2025", "where": "alberta.ca fact sheet (undated); search-result title of bill PDF: '2025 Bill 12 Second Session, 31st Legislature'"},
+   {"blank_context": "amended by Bill ___ ___", "value": "not stated", "quote": "", "where": "neither alberta.ca page mentions an amending bill"},
+   {"blank_context": "data centres of ___ MW or greater", "value": "75", "quote": "large data centres (with 75 megawatts of power or more)", "where": "alberta.ca fact sheet; same phrase on alberta.ca/updating-financial-laws"},
+   {"blank_context": "E = ___% of cost of computing equipment", "value": "not stated", "quote": "a levy of up to two per cent on the value of computer equipment", "where": "fact sheet; gives only 'up to two per cent', no E/F split"},
+   {"blank_context": "under ___ years", "value": "not stated", "quote": "", "where": ""},
+   {"blank_context": "F = ___% of older", "value": "not stated", "quote": "", "where": ""},
+   {"blank_context": "R ___% grid power", "value": "not stated", "quote": "", "where": "fact sheet says self-generating data centres pay a reduced rate; no figure"},
+   {"blank_context": "R ___% new capacity", "value": "not stated", "quote": "", "where": ""},
+   {"blank_context": "R ___% off-grid", "value": "not stated", "quote": "", "where": ""},
+   {"blank_context": "from ___ Jan ___", "value": "not stated", "quote": "", "where": ""},
+   {"blank_context": "Assessment Bulletin ___-___", "value": "not read (claim itself says not read)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "Not verifiable from bill text. Fact sheet says levy 'deductible from corporate income taxes paid in Alberta' (supports creditable, wording differs). Formula (E + F) x R, equipment age split, R tiers, start date, 'paid to the Province', MGA exclusion and amending bill all not found on pages read. alberta.ca page names the Act as 'Alberta Corporate Tax Amendment Act' and says royal assent December 9, 2025.",
+  "note": "Bill PDF reached but tool could not extract text; per rules did not curl/download. Needs a human read of the bill PDF and consolidated Act."
+ },
+ {
+  "id": "crozier2025",
+  "reachable": true,
+  "publisher": "Springer Nature",
+  "title": "The Potential of Data Center Energy Demand To Provide Grid Flexibility",
+  "edition": "Current Sustainable/Renewable Energy Reports, vol. 12, issue 1, article 12",
+  "date": "published online 29 April 2025",
+  "url": "https://link.springer.com/article/10.1007/s40518-025-00258-9 (ResearchGate link blocked by fetch tool; also read author PDF https://constancecrozier.github.io/files/Data_Centers_Review_jk.pdf)",
+  "values": [
+   {"blank_context": "Crozier & Liska ___", "value": "2025", "quote": "Article number: 12 (2025)", "where": "Springer article page metadata"},
+   {"blank_context": "Reports ___(___)", "value": "12(1)", "quote": "Volume 12, Issue 1", "where": "Springer article page metadata"},
+   {"blank_context": "art. ___", "value": "12", "quote": "Article number: 12", "where": "Springer article page metadata"},
+   {"blank_context": "checked by the atlas chat ___ Oct", "value": "not applicable (internal note, not in source)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "'checkpointed training can pause': source says HPC/AI workloads 'checkpoint regularly, so can be terminated quickly' (Smart Scheduling); does not discuss pausing training specifically. 'UPS rarely offered' is a paraphrase of survey respondent being 'unwilling to deploy it for ancillary services'.",
+  "note": "Open access confirmed: 'You have full access to this open access article', CC BY 4.0. Supported: no single share ('It is very challenging to make estimates of the total flexibility potential', Conclusion); price signals ('using only electricity prices as incentive data centers would almost always be incentivized to take additional jobs rather than provide flexibility'); inference ('need to be able to process user queries on very short timescales'). DOI 10.1007/s40518-025-00258-9."
+ },
+ {
+  "id": "edmWarming",
+  "reachable": true,
+  "publisher": "City of Edmonton",
+  "title": "Extreme Weather Response for Winter",
+  "edition": "web page",
+  "date": "no last-updated date; page mentions an update 'by Friday, December 19, 2025 at 9am'",
+  "url": "https://www.edmonton.ca/programs_services/emergency_preparedness/extreme-weather-winter",
+  "values": [
+   {"blank_context": "warming response at −___ °C with wind chill", "value": "-20", "quote": "forecasts indicate conditions of -20 degrees Celsius with wind chill", "where": "trigger description on page"},
+   {"blank_context": "for ___ days", "value": "3", "quote": "for a minimum of 3 days in a row", "where": "same passage"}
+  ],
+  "unsupported_wording": "Page calls it 'Extreme Weather Response', not 'warming response'; 'minimum of 3 days in a row' is stricter than 'for 3 days'.",
+  "note": "Recreation centres and libraries (incl. Edmonton Public Library branches) listed as places to warm up: supported. Page content is seasonal and may change; date of reading 28 Oct 2026."
+ },
+ {
+  "id": "kindaichi2018",
+  "reachable": true,
+  "publisher": "Elsevier (record via RePEc/IDEAS)",
+  "title": "Simple index for onsite operation management of ground source heat pump systems in cooling-dominant regions",
+  "edition": "Renewable Energy, vol. 127, issue C",
+  "date": "2018",
+  "url": "https://ideas.repec.org/a/eee/renene/v127y2018icp182-194.html",
+  "values": [
+   {"blank_context": "Renewable Energy ___", "value": "127", "quote": "Volume: 127", "where": "IDEAS record"},
+   {"blank_context": "(___)", "value": "2018", "quote": "Year: 2018", "where": "IDEAS record"},
+   {"blank_context": "___–___", "value": "182-194", "quote": "Pages: 182-194", "where": "IDEAS record"},
+   {"blank_context": "doi:___/j.renene.___", "value": "10.1016 / 2018.04.065", "quote": "10.1016/j.renene.2018.04.065", "where": "IDEAS record"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Authors printed as 'Kindaichi, Sayaka' and 'Nishina, Daisaku'. Bibliographic index record, not the article itself."
+ },
+ {
+  "id": "nistad2020",
+  "reachable": false,
+  "publisher": "NTNU (claimed)",
+  "title": "Energy use and efficiency in RAS (as claimed; not verified)",
+  "edition": "MSc thesis (claimed)",
+  "date": "not verified",
+  "url": "none read; no link given. NTNU Open search found https://ntnuopen.ntnu.no/ntnu-xmlui/handle/11250/2656753 ('Current and Future Energy Use for Atlantic Salmon Farming in Recirculating Aquaculture Systems in Norway'), which redirected to nva.sikt.no and could not be fetched",
+  "values": [
+   {"blank_context": "Nistad ___", "value": "not stated (source not read)", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "Cannot check. The only NTNU record found has a different title and its author was not confirmed as Nistad.",
+  "note": "Claim refers to a full-text upload (J.B.); no such file found under /mnt/attach/outputs. Needs check against the uploaded PDF."
+ },
+ {
+  "id": "bcucTelus",
+  "reachable": true,
+  "publisher": "British Columbia Utilities Commission",
+  "title": "Order C-1-13: An Application by FortisBC Alternative Energy Services Inc. for a Certificate of Public Convenience and Necessity for the TELUS Garden Thermal Energy System and for Approval of the Rate Design and Rates to Provide Thermal Energy Service to Customers at the TELUS Garden Development",
+  "edition": "Order with Appendix A (Reasons for Decision)",
+  "date": "4 February 2013",
+  "url": "https://www.ordersdecisions.bcuc.com/bcuc/orders/en/118621/1/document.do",
+  "values": [
+   {"blank_context": "Order C-___-___", "value": "C-1-13", "quote": "NUMBER C-1-13", "where": "order heading"},
+   {"blank_context": "(___ Feb ___)", "value": "4 Feb 2013", "quote": "this 4th day of February 2013", "where": "order date line"},
+   {"blank_context": "G-___-___ G-___-___ (___ Jan ___)", "value": "not stated as written", "quote": "was made interim effective January 1, 2012 by Order G-223-22 dated December 22, 2011 ... Commission Order G-187-12 made the 9.5 percent benchmark ROE interim, effective January 1, 2013", "where": "Reasons for Decision (Appendix A)"}
+  ],
+  "unsupported_wording": "No G-order in this document is dated in January; the January dates printed are effective dates (G-223-22 dated Dec 22, 2011; G-187-12). The G-orders in the claim are not identifiable from this source.",
+  "note": "Source prints 'G-223-22' (likely a typo for G-223-11 in the source; not corrected here). FortisBC Alternative Energy Services applied 'on behalf of itself and the Westbank-TELUS Partnership'. Order denied proposed rates and directed a new rate application. Other G-orders cited: G-155-12 (October 19, 2012), G-2-12, G-50-10, G-100-12."
+ },
+ {
+  "id": "lorenz",
+  "reachable": false,
+  "publisher": "not identified (multiple cited works: Reinholdt et al.; Pieper et al.; Alissa; Wahlroos)",
+  "title": "not identified",
+  "edition": "",
+  "date": "",
+  "url": "none; no link given",
+  "values": [
+   {"blank_context": "η ___–___", "value": "not stated (no source read)", "quote": "", "where": ""},
+   {"blank_context": "Reinholdt et al. ___", "value": "not stated", "quote": "", "where": ""},
+   {"blank_context": "Pieper et al. ___", "value": "not stated", "quote": "", "where": ""},
+   {"blank_context": "air ___–___ °C", "value": "not stated", "quote": "", "where": ""},
+   {"blank_context": "liquid ___–___ °C", "value": "not stated", "quote": "", "where": ""}
+  ],
+  "unsupported_wording": "Cannot check: compound entry citing four works with no links.",
+  "note": "Split into separate items with links (one per cited work) to verify."
+ }
+]
