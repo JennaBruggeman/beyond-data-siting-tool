@@ -44,7 +44,20 @@ ART_R, IND_R, SCH_R = 500, 1000, 2000                               # assumption
 PEOPLE_R, NOISE_R, NOISE_W = 800, 150, 0.6                          # assumptions
 W_EN = (0.6, 0.4); W_MAT = (0.4, 0.4, 0.2)                          # assumptions
 EXCH = ['heat', 'energy', 'water', 'materials', 'people']
-METHOD = int(os.environ.get('METHOD', '4'))   # 1 = GP1 maps (21 Oct); 2 = heat scored by whether it pays (25 Oct); 3 = v2 + what's already built + public uses the zone allows (25 Oct)
+METHOD = int(os.environ.get('METHOD', '5'))   # 1 = GP1 maps (21 Oct); 2 = heat scored by whether it pays (25 Oct); 3 = v2 + what's already built + public uses the zone allows (25 Oct)
+# ---- method v5 (J.B., 26 Oct 2026): new factors; sources in factors.csv; inputs from prep_v5.py
+ANCHOR_R = {'hospital': 2000, 'campus': 2000, 'hotel': 400, 'food': 400, 'laundry': 400, 'rink': 400, 'cannabis': 400, 'childcare': 400, 'big': 2000}   # Ricardo-AEA for Defra: a heat link stays viable to ~400 m at 100 kWth, ~2 km at 500 kW; hospitals and campuses assumed 500 kW+, the rest ~100 kW (assumption)
+ANCHOR_W = {'hospital': 5, 'campus': 5, 'childcare': 0.5, 'big': 5}; ANCHOR_SHARE = 0.25   # assumptions: relative load; year-round users fill up to a quarter of the gap to 1
+SEWER_FULL, SEWER_R, SEWER_W = 150, 300, 0.1   # Fraunhofer IBP: sewer within 300 m, 150 m preferred; bonus weight is an assumption
+REC_R = 1000; W_MAT5 = (0.4, 0.2, 0.2, 0.2)    # recyclers reach and weights (access, industrial, recyclers, schools): assumptions
+BUS_R, RAPID_R, REFUGE_R = 400, 800, 800       # TransLink / BC Reg 263/2023 / Edmonton TOD: 400 m bus, 800 m rapid transit; Kim et al. 2021: 800 m to a cooling refuge
+W_P5 = (0.2, 0.4, 0.4)   # transit, partners, need (J.B., 26 Oct: transit weighs less; was a third each)
+TFADE = 0.5   # transit score fades over a further 50 % of the reach (assumption)
+BUILDOUT = int(os.environ.get('BUILDOUT', '0'))   # scenario: Blatchford at its planned 30,000 residents (City target for 2042, Taproot Edmonton 17 Jan 2025)
+BLATCHFORD_POP = 30000
+PEOPLE5_W = 0.4                                # people x (0.6 + 0.4 x mean(transit, partners, need)): assumption
+FLOOD_EDM = {'Floodway': 0.1, 'High Hazard Flood Fringe': 0.4, 'Flood Fringe': 0.6, '1:200 Flood': 0.6, 'Protected Flood Fringe': 0.8, '1:500 Flood': 0.9}   # assumptions; 0.6 matches Vancouver
+FIBRE_R, FIBRE_W = 10000, 0.1                  # assumption: no sourced rule; site x (0.9 + 0.1 x nearness to a PeeringDB facility)
 RADIUS = {'heat': 1200, 'energy': 2000, 'water': {'van': 500, 'edm': 5000}, 'materials': 1000, 'people': 800}
 
 def proj(c):
@@ -135,6 +148,19 @@ def run(city):
                 gj = json.loads(row[5]); geoms = [gj['coordinates']] if gj['type'] == 'Polygon' else gj['coordinates']
                 for poly in geoms: fl.append(Polygon([f(*q) for q in poly[0]]))
         FP = prep(unary_union(fl)); inflood = np.array([FP.contains(Point(*c)) for c in XY]); site[inflood] *= FLOOD; log['cells_in_floodplain'] = int(inflood.sum())
+    V5 = json.load(open(os.path.join(H, 'v5_inputs', 'v5_%s.json' % city))) if METHOD >= 5 else None
+    pip = lambda geom: prep(shape(geom))
+    if V5:
+        fx = np.ones(N); fz = [''] * N
+        for fl in V5.get('flood', []):
+            m = FLOOD_EDM.get(fl['zone'], 1.0); G = pip(fl['geometry']); b = shape(fl['geometry']).bounds
+            for k in range(N):
+                lon, lat = g(*XY[k])
+                if b[0] <= lon <= b[2] and b[1] <= lat <= b[3] and m < fx[k] and G.contains(Point(lon, lat)): fx[k] = m; fz[k] = fl['zone']
+        site = site * fx; log['cells_in_flood_hazard'] = int((fx < 1).sum())
+        PX = np.array([f(a[0], a[1]) for a in V5['peering']]); dfib, _ = cKDTree(PX).query(XY)
+        site = site * (1 - FIBRE_W + FIBRE_W * np.clip(1 - dfib / FIBRE_R, 0, 1))
+        dfire, _ = cKDTree(np.array([f(a[0], a[1]) for a in V5['fire']])).query(XY)   # v5.2: recorded for the site sheets (resilience partner), not scored
     tree = cKDTree(XY)
     # ---- heat
     R = json.load(open(os.path.join(T, 'tiles', city, 'receivers.json')))
@@ -166,6 +192,17 @@ def run(city):
             if t > net_term[k]: net_term[k] = t; netbest[k] = nm
     direct = V2['direct'][city]['factor'] if V2 else 1.0
     heat = np.maximum(np.clip(heatMWh / p95(heatMWh), 0, 1) * direct, net_term)
+    anchor = np.zeros(N); n_anchor = np.zeros(N, int); dsew = np.full(N, np.inf)
+    if V5:
+        for a in V5['anchors']:
+            x, y = f(a[0], a[1]); r = ANCHOR_R[a[2]]; idx = tree.query_ball_point((x, y), r)
+            if not idx: continue
+            d = np.hypot(XY[idx, 0] - x, XY[idx, 1] - y); anchor[idx] += ANCHOR_W.get(a[2], 1) * np.clip(1 - d / r, 0, 1); n_anchor[idx] += 1
+        anchor = np.clip(anchor / p95(anchor), 0, 1); heat = heat + ANCHOR_SHARE * anchor * (1 - heat)   # adds only: a district network already takes heat year round, so it is not diluted
+        if V5.get('sewer'):
+            dsew, _ = cKDTree(np.array([f(a[0], a[1]) for a in V5['sewer']])).query(XY)
+            heat = np.clip(heat + SEWER_W * np.clip((SEWER_R - dsew) / (SEWER_R - SEWER_FULL), 0, 1), 0, 1)
+        log['anchors'] = len(V5['anchors'])
     # ---- energy
     S = json.load(open(os.path.join(T, 'substations.json')))
     subs = [(a[0], a[1]) for a in S['cities'][city]] + [(n['x'], n['y']) for n in S['named'][city] if 'planned' not in (n.get('status') or '')]
@@ -186,6 +223,15 @@ def run(city):
             ax.append(f(lon, lat)); ah.append(u); ap.append(u * pph)
         log['homes_added_2022_on'] = round(sum(ah)); log['people_added_2022_on'] = round(sum(ap)); log['persons_per_household'] = round(float(pph), 3)
         CXY = np.vstack([CXY, np.array(ax)]); POP = np.concatenate([POP, ap]); HH = np.concatenate([HH, ah])
+    if BUILDOUT and city == 'edm':
+        bl = set()
+        for r in csv.DictReader(open(os.path.join(D, 'edmonton_properties_2026.csv'))):
+            if r['neighbourhood'].upper() == 'BLATCHFORD AREA' and r['lat']:
+                x, y = f(float(r['lon']), float(r['lat'])); bl.add((math.floor(x / C), math.floor(y / C)))
+        BC_ = np.array([((i + .5) * C, (j + .5) * C) for i, j in bl]); now = sum(POP[i].sum() for i in cKDTree(CXY).query_ball_point(BC_, C * 0.71) if i)
+        add_ = max(0.0, BLATCHFORD_POP - now) / len(BC_); pph = POP.sum() / HH.sum()
+        CXY = np.vstack([CXY, BC_]); POP = np.concatenate([POP, np.full(len(BC_), add_)]); HH = np.concatenate([HH, np.full(len(BC_), add_ / pph)])
+        log['buildout_cells'] = len(BC_); log['buildout_people_added'] = round(add_ * len(BC_))
     ctree = cKDTree(CXY)
     def within(r, vals): return np.array([vals[i].sum() if i else 0.0 for i in ctree.query_ball_point(XY, r)])
     hh1k = within(EV_R, HH)
@@ -218,10 +264,32 @@ def run(city):
     ptree = cKDTree(P); ind = np.array([IND[i].mean() if i else 0.0 for i in ptree.query_ball_point(XY, IND_R)])
     SXY = rx[np.array([t == 'school' for t in rt])]; nsch = np.array([len(i) for i in cKDTree(SXY).query_ball_point(XY, SCH_R)], float)
     materials = W_MAT[0] * access + W_MAT[1] * np.clip(ind / p95(ind), 0, 1) + W_MAT[2] * np.clip(nsch / p95(nsch), 0, 1)
+    nrec1k = np.zeros(N)
+    if V5:
+        RX = np.array([f(a[0], a[1]) for a in V5['recyclers']])
+        for x, y in RX:
+            idx = tree.query_ball_point((x, y), REC_R)
+            if idx: nrec1k[idx] += np.clip(1 - np.hypot(XY[idx, 0] - x, XY[idx, 1] - y) / REC_R, 0, 1)
+        materials = W_MAT5[0] * access + W_MAT5[1] * np.clip(ind / p95(ind), 0, 1) + W_MAT5[2] * np.clip(nrec1k / p95(nrec1k), 0, 1) + W_MAT5[3] * np.clip(nsch / p95(nsch), 0, 1)
     # ---- people
     pop800 = within(PEOPLE_R, POP); pop150 = within(NOISE_R, POP)
     people = np.clip(pop800 / p95(pop800), 0, 1) * (1 - NOISE_W * np.clip(pop150 / p95(pop150), 0, 1))
     if METHOD >= 3: people = people * (1 - USES_W + USES_W * uses)
+    transit = np.zeros(N); partners = np.zeros(N); need = np.full(N, np.nan); drap = dbus = dpar = np.full(N, np.inf)
+    if V5:
+        T5 = V5['transit']; rp = [f(a[0], a[1]) for a in T5 if a[2] == 'rapid']; bs = [f(a[0], a[1]) for a in T5]
+        drap, _ = cKDTree(np.array(rp)).query(XY); dbus, _ = cKDTree(np.array(bs)).query(XY)
+        transit = np.maximum(np.clip(1 - (drap - RAPID_R) / (RAPID_R * TFADE), 0, 1), 0.5 * np.clip(1 - (dbus - BUS_R) / (BUS_R * TFADE), 0, 1))   # v5.3: full inside 800 / 400 m, fading to 0 at 1,200 / 600 m (fade is an assumption)
+        dpar, _ = cKDTree(np.array([f(a[0], a[1]) for a in V5['partners']])).query(XY); partners = (dpar <= REFUGE_R).astype(float)
+        from shapely.strtree import STRtree
+        polys = [shape(d['geometry']) for d in V5['need']]; qs = np.array([d['q'] for d in V5['need']]); st = STRtree(polys)
+        LL = [Point(*g(*c)) for c in XY]
+        for k, pt in enumerate(LL):
+            for i in st.query(pt):
+                if polys[i].contains(pt): need[k] = (qs[i] - 1) / 4; break
+        log['cells_without_need_data'] = int(np.isnan(need).sum())
+        extra = W_P5[0] * transit + W_P5[1] * partners + W_P5[2] * np.nan_to_num(need, nan=0.5)
+        people = people * (1 - PEOPLE5_W + PEOPLE5_W * extra)
     # ---- overlap
     A = dict(heat=heat, energy=energy, water=water, materials=materials, people=people)
     overlap = np.mean([A[k] for k in EXCH], axis=0); zoned = overlap * site; nstrong = sum((A[k] >= 0.5).astype(int) for k in EXCH)
@@ -235,6 +303,9 @@ def run(city):
                   substation_dist_m=round(dsub[k]), households_1km=round(hh1k[k]), ev_ports_1km=int(ports[k]),
                   water_raw=round(float(wraw[k]), 1), arterial_dist_m=round(dart[k]), industrial_share_1km=round(ind[k], 3), schools_2km=int(nsch[k]),
                   pop_800m=round(pop800[k]), pop_150m=round(pop150[k]), built_cover=round(float(built[k]), 3), site_ready=round(float(ready[k]), 3), public_uses=round(float(uses[k]), 3))
+        if V5: pr.update(year_round_users=round(float(anchor[k]), 3), year_round_n=int(n_anchor[k]), sewer_dist_m=None if not np.isfinite(dsew[k]) else round(float(dsew[k])),
+                         recyclers_1km=round(float(nrec1k[k]), 2), transit=float(transit[k]), rapid_dist_m=round(float(drap[k])), partners_800m=float(partners[k]), partner_dist_m=round(float(dpar[k])),
+                         need=None if np.isnan(need[k]) else round(float(need[k]), 3), flood_zone=fz[k], fibre_dist_m=round(float(dfib[k])), fire_hall_dist_m=round(float(dfire[k])))
         feats.append(dict(type='Feature', geometry=dict(type='Polygon', coordinates=[[[round(a, 6), round(b, 6)] for a, b in ring]]), properties=pr))
     json.dump(dict(type='FeatureCollection', name='%s_grid' % city, crs_note='WGS84 lon/lat; cells are 100 m in the tool frame', features=feats),
               open(os.path.join(H, '%s_grid.geojson' % city), 'w'), separators=(',', ':'))

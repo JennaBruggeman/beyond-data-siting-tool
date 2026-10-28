@@ -8704,10 +8704,11 @@
    "inputs": [
     "people_affected"
    ],
-   "coef": "98 L/person/day residential greywater (National Academies 2016, US data); treatment recovery share not found (gap); cross-property sharing: no BC or Alberta rule text found",
+   "coef": "98 L/person/day residential greywater (National Academies 2016, US data); treatment recovery share not found (gap); cross-property sharing: no BC or Alberta rule text found; San Francisco permits district-scale systems serving two or more buildings (SFPUC)",
    "sources": [
     "nasem2016",
-    "waterUse2026"
+    "waterUse2026",
+    "sfpucReuse"
    ],
    "source_roles": [
     {
@@ -8723,6 +8724,13 @@
      "role": "pending build",
      "conf": 50,
      "verified": false
+    },
+    {
+     "id": "sfpucReuse",
+     "term": "district-scale greywater between buildings",
+     "role": "precedent (not a data centre)",
+     "conf": 70,
+     "verified": true
     }
    ],
    "conf": 45,
@@ -14760,7 +14768,8 @@
   "ceudCom2023t24": "NRCan CEUD 2023, Commercial/Institutional Table 24, space heating energy by source (BC and Territories; Alberta), local com_bct_e.xls / com_ab_e.xls",
   "bcbc2024_326": "BC Building Code 2024, 3.2.6.1 (high buildings: Group C floor level of the top storey more than 18 m above grade) and 3.2.6.5 (at least one elevator for use by firefighters); NBC(AE) the same Article",
   "abCCcompliance2026": "Government of Alberta, Assisted Living and Social Services, Continuing Care Accommodation Standards compliance reporting as of June 2026 (Open Government Licence – Alberta) — https://open.alberta.ca/dataset/continuing-care-accommodation-standards-compliance-reporting",
-  "bcResCare": "Government of British Columbia, Residential Care Facilities (licensed community care facilities, maximum capacity; Open Government Licence – BC) — https://catalogue.data.gov.bc.ca/dataset/residential-care-facilities"
+  "bcResCare": "Government of British Columbia, Residential Care Facilities (licensed community care facilities, maximum capacity; Open Government Licence – BC) — https://catalogue.data.gov.bc.ca/dataset/residential-care-facilities",
+  "sfpucReuse": "San Francisco Public Utilities Commission (regulator), Onsite Water Reuse Program Guidebook: district-scale systems \"serving two or more buildings\"; cooling listed among allowed non-potable uses — https://www.sfpuc.gov/sites/default/files/documents/Onsite-Water-Reuse-Guidebook.pdf"
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ; ATCO North Mid-Use $1.062/GJ → ≈ $11/MWh heat — https://www.ucahelps.alberta.ca/regulated-rates.aspx",

@@ -41,13 +41,18 @@ UPD=t=>{
   vap.forEach(v=>{ const q=((t*.45)+v.ph)%1; v.m.position.set(6+Math.cos(v.a)*.6*q,3.8+q*3.5,1.5+Math.sin(v.a)*.6*q); v.m.material.opacity=(1-q)*.8*seg(t,2,2.6); });
   rain.forEach(r=>{ const q=((t*1.1)+r.ph)%1; r.m.position.set(r.x,6.6+(1-q)*5,r.z); r.m.material.opacity=win(t,7.2,10.4)*.8; });
 };
+// greywater from neighbours (J.B. 27 Oct): treated and used as tower make-up; shared between buildings in San Francisco (SFPUC Onsite Water Reuse Program); no data-centre case
+const nbr=R_.housing(-9,13,5,5,8); setOp(nbr,0);
+const gw=new THREE.Line(new THREE.BufferGeometry().setFromPoints([V(-6.5,.3,13),V(-5,.3,13),V(-5,.3,10.4),V(4.8,.3,10.4),V(4.8,.3,3.2)]),new THREE.LineDashedMaterial({color:WI,dashSize:.5,gapSize:.35,transparent:true,opacity:0})); gw.computeLineDistances(); scene.add(gw);
+{ const U0=UPD; UPD=t=>{ U0(t); gw.material.opacity=.8*seg(t,12.6,13.2); }; }
 const recP=pipe([V(10.4,.3,27),V(13.4,.3,27),V(13.4,.3,6.2),V(9.4,.3,6.2)],WI,.13,15.0,1.0,12,.05,{rev:true});
 const reP=pipe([V(6.5,.25,6.8),V(-1.2,.25,6.8),V(-1.2,.25,7.6)],WO,.11,11.9,.6,5,.06);
 visits({tint:[plant],start:5.9,slot:1.75,k:2,list:[
  {n:1,name:'Blowdown, reused',gets:'cooling water treated and used again',k:'else',where:'Quincy, WA',obj:reuse,at:V(-2.2,1,8.6),tg:V(-1.5,1.5,8),hh:6,cap:'Reuse the blowdown'},
  {n:2,name:'Rain, in',gets:'rain from the roof, for cooling',k:'nyk',where:'Vancouver permitted; Alberta a variance',at:V(-5.6,2.1,4),tg:V(-4.5,2.5,3),hh:6.5,cap:'Collect rain'},
  {n:3,name:'Treatment plant',gets:'takes the blowdown',k:'here',where:'the usual path',at:V(6.5,1,27),tg:V(7,1,26.5),hh:6.5,cap:'Send it to treatment'},
- {n:4,name:'Reclaimed water, in',gets:'treated wastewater for cooling',k:'else',where:'Loudoun, VA',at:V(13.4,.3,18),tg:V(11,1,17),hh:8,cap:'Cool with reclaimed water'}],
+ {n:4,name:'Reclaimed water, in',gets:'treated wastewater for cooling',k:'else',where:'Loudoun, VA',at:V(13.4,.3,18),tg:V(11,1,17),hh:8,cap:'Cool with reclaimed water'},
+ {n:5,name:'Greywater, in',gets:'neighbours\u2019 greywater, treated, for cooling',k:'spec',where:'shared between buildings in San Francisco',obj:nbr,at:V(-9,4,13),tg:V(-6,1,11),hh:8,cap:'Take in the neighbours\u2019 greywater'}],
  outro:[V(3,1,13),16,300]}); visitCaps();
 R(0);
 </script></body></html>
