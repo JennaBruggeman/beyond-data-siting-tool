@@ -1,0 +1,116 @@
+[
+ {
+  "id": "armaElectronics",
+  "reachable": true,
+  "publisher": "Alberta Recycling Management Authority (ARMA)",
+  "title": "Stewardship registry (Electronics Processors section); Electronics program page",
+  "edition": "not stated",
+  "date": "not stated (footer '© 2026 ARMA' only)",
+  "url": "https://www.albertarecycling.ca/registry/stewardship/#processors ; https://www.albertarecycling.ca/programs/electronics/",
+  "values": [],
+  "unsupported_wording": "Server wording not found on either page: no 'Blade (rack mount), desktop and floor standing servers' text and no 'consumer, industrial or commercial use' text. The program page lists only 'Computers and servers' and points to a separate products/definitions/fees PDF, which was not read. Processor names and towns are supported: eCycle Solutions Inc. 'Airdrie'; Hi-Tech Recyclers 'Edmonton'; Quantum Lifecycle Partners (Edmonton) 'Edmonton'; Shanked Computer Recycling Inc. 'Acheson'; YEG Electronics Recycling Ltd. 'Edmonton'. The claim leaves out Technotrash Alberta (Taber), which is also listed; the 'incl.' wording covers that.",
+  "note": "The claim has no numbers. The quoted server phrase likely comes from the products/definitions PDF linked on the program page. That PDF was not checked, so the phrase stays unverified."
+ },
+ {
+  "id": "bc_mwr",
+  "reachable": true,
+  "publisher": "King's Printer, Victoria BC (BC Laws / free.bcpublications.ca)",
+  "title": "Municipal Wastewater Regulation (Environmental Management Act)",
+  "edition": "consolidation current to October 20, 2026; last amended October 27, 2025 by B.C. Reg. 171/2025",
+  "date": "deposited April 20, 2012",
+  "url": "https://free.bcpublications.ca/civix/document/id/complete/statreg/87_2012",
+  "values": [
+   {"blank_context": "B.C. Reg. ___/___", "value": "87/2012", "quote": "B.C. Reg. 87/2012, O.C. 230/2012", "where": "document header"},
+   {"blank_context": "s.___ (reclaimed water categories)", "value": "104", "quote": "Categories of reclaimed water", "where": "table of contents, Part 7 Division 1, s. 104; s. 12(c) refers to the category 'as described in section 104'"},
+   {"blank_context": "Table ___ (reclaimed water categories)", "value": "not verified", "quote": "", "where": "The page text that was read ended partway through s. 103 / Table 12, so the body of s. 104 and any table it references were not reached."}
+  ],
+  "unsupported_wording": "none found; the table number is unverified",
+  "note": "Section 104 is confirmed from the table of contents only. Three fetches with offsets each stopped at Table 12 (s. 103), so the text of s. 104 and its table number are unverified."
+ },
+ {
+  "id": "ashraeTC99card",
+  "reachable": false,
+  "publisher": "ASHRAE",
+  "title": "Thermal Guidelines for Data Processing Environments, 5th ed., reference card (per link)",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "not read: the tool refused the given link (URL not in its allowed set), and searches did not surface the 5th-ed card on ashrae.org",
+  "values": [],
+  "unsupported_wording": "not checked",
+  "note": "Unreachable. Searches surfaced the 4th-edition card (xp20.ashrae.org/datacom1_4th/ReferenceCard.pdf). That is a different edition, so it was not used."
+ },
+ {
+  "id": "allen2011",
+  "reachable": true,
+  "publisher": "Wiley / Royal Meteorological Society (International Journal of Climatology); metadata read on US EPA HERO record",
+  "title": "Global to city scale urban anthropogenic heat flux: model and variability",
+  "edition": "Vol. 31, Issue 13, pp. 1990-2005",
+  "date": "2011",
+  "url": "https://hero.epa.gov/hero/index.cfm/reference/details/reference_id/1607955 (doi.org link refused by the tool; Reading CentAUR blocked by an access-denied page)",
+  "values": [
+   {"blank_context": "Allen, Lindberg & Grimmond ___", "value": "2011", "quote": "Year: 2011", "where": "HERO bibliographic record"},
+   {"blank_context": "Vancouver grid cell ___", "value": "119", "quote": "San Francisco (173.6), Vancouver (119) and London (106.7).", "where": "abstract"},
+   {"blank_context": "audit/research____-___-___/B", "value": "not stated", "quote": "", "where": "internal file path, not part of the source"}
+  ],
+  "unsupported_wording": "none. The abstract attaches no unit to the city values; it uses 'W m(-2)' elsewhere, so the claim's 'units assumed W/m²; not stated in the abstract' is accurate. No Edmonton value in the abstract is confirmed.",
+  "note": "Only the abstract and metadata were checked, not the full text."
+ },
+ {
+  "id": "bcRecyclingIT",
+  "reachable": true,
+  "publisher": "King's Printer, Victoria BC (BC Laws)",
+  "title": "Recycling Regulation, B.C. Reg. 449/2004 (Environmental Management Act)",
+  "edition": "consolidation",
+  "date": "current to February 3, 2026",
+  "url": "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/449_2004",
+  "values": [
+   {"blank_context": "Sch. ___", "value": "3", "quote": "Schedule 3 ... electronic and electrical products (s. 2 defines the category)", "where": "Schedule 3, s. 2"},
+   {"blank_context": "current to ___ Feb ___", "value": "3 / 2026", "quote": "This consolidation is current to February 3, 2026.", "where": "page header"},
+   {"blank_context": "(reading them as covered: interpretation, ___)", "value": "not stated", "quote": "", "where": "internal note, not in the source"}
+  ],
+  "unsupported_wording": "Partly too narrow. The s. 2(2) exclusion also lists other items, (a)-(b) not quoted here, besides commercial/industrial equipment: 'does not include computers and televisions that are part of or attached to any of the following: ... (c) commercial equipment that is not a product described in subsection (1); (d) industrial equipment that is not a product described in subsection (1).' So 'exclusion only for ... commercial or industrial equipment' is not supported. The exclusion also covers televisions. 'Servers not named' is supported: the word 'server' does not appear. IT coverage is supported: s. 2(1)(a)(i) 'computers, whether desktop, laptop, portable or part of other products'; (vi) 'other devices, equipment or media for collecting, storing, processing, presenting or communicating information'.",
+  "note": "Reading servers as covered under (i)/(vi) is interpretation, as the claim says."
+ },
+ {
+  "id": "ashrae2015ch51",
+  "reachable": false,
+  "publisher": "ASHRAE",
+  "title": "ASHRAE Handbook - HVAC Applications (SI), Snow Melting and Freeze Protection chapter",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://www.ashrae.org/advertising/handbook-advertising/applications/snow-melting-and-freeze-protection (advertising page only; the handbook is paywalled)",
+  "values": [],
+  "unsupported_wording": "not checked",
+  "note": "Unreachable. The handbook is paywalled and the claim's copy is a private UBC Library extract. The ASHRAE page names the chapter 'Snow Melting and Freeze Protection' (listed under '2023 HVAC Applications'), with no chapter number or table data. The 2015 chapter number, the Seattle values and the table numbers are all unverified."
+ },
+ {
+  "id": "arden2021",
+  "reachable": true,
+  "publisher": "Elsevier (Water Research); author copy on US EPA PASTEUR",
+  "title": "Onsite Non-potable Reuse for Large Buildings: Environmental and Economic Suitability as a Function of Building Characteristics and Location",
+  "edition": "Vol. 191, article 116635",
+  "date": "2021",
+  "url": "https://pasteur.epa.gov/uploads/10.23719/1519028/Arden%20et%20al.%2C%202021.pdf",
+  "values": [
+   {"blank_context": "Water Research ___", "value": "191", "quote": "Water Research 191 (2021) 116635", "where": "citation line, first page"},
+   {"blank_context": ":___", "value": "116635", "quote": "Water Research 191 (2021) 116635", "where": "citation line, first page"},
+   {"blank_context": "(___)", "value": "2021", "quote": "Water Research 191 (2021) 116635", "where": "citation line, first page"}
+  ],
+  "unsupported_wording": "none (the claim gives a shortened title; the full title continues 'Environmental and Economic Suitability as a Function of Building Characteristics and Location')",
+  "note": "DOI 10.1016/j.watres.2020.116635. The first page prints the author as 'Sam Ardena' (a superscript affiliation 'a' merged into the name); the running header reads 'S. Arden'."
+ },
+ {
+  "id": "bc_ef2026",
+  "reachable": true,
+  "publisher": "Province of British Columbia",
+  "title": "Electricity emission intensity factors for grid-connected entities",
+  "edition": "not stated",
+  "date": "Last updated on May 26, 2026",
+  "url": "https://www2.gov.bc.ca/gov/content/environment/climate-change/data/electricity",
+  "values": [
+   {"blank_context": "updated ___ May ___", "value": "26 / 2026", "quote": "Last updated on May 26, 2026", "where": "page footer"}
+  ],
+  "unsupported_wording": "none (the claim shortens the title; the full title adds 'for grid-connected entities')",
+  "note": "For reference, the page prints Integrated Grid 2025 = 22.8 tCO2e/GWh (2024: 9.9); the claim has no factor value."
+ }
+]

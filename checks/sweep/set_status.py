@@ -4,10 +4,9 @@ import csv, json, sys, pathlib
 H = pathlib.Path(__file__).resolve().parent; n = sys.argv[1]
 FIX = set(sys.argv[2].split()); MARK = set(sys.argv[3].split())
 ids = json.load(open(H / f'B_batch{n}_ids.json')); A = {}
-for k in range(1, 6):
-    p = H / f'B{n}_a{k}.json'
-    if p.exists():
-        for a in json.load(open(p)): A[a['id']] = a
+for p in sorted(H.glob(f'B{n}_a*.json')):
+    for a in json.load(open(p)):
+        if a.get('reachable') or a['id'] not in A: A[a['id']] = a
 rows = list(csv.DictReader(open(H / 'triage_2026-10-27.csv'))); f = list(rows[0].keys()); have = {r['id'] for r in rows}
 for i in ids:
     if i not in have: rows.append({k: '' for k in f} | {'id': i, 'verdict': 'Found', 'group': 'second check'})

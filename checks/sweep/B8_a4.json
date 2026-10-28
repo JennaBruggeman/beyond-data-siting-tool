@@ -1,0 +1,172 @@
+[
+ {
+  "id": "bchCall2025",
+  "reachable": true,
+  "publisher": "BC Hydro",
+  "title": "Statement: BC Hydro secures Electricity Purchase Agreements with new renewable energy projects at a lower cost than previous calls",
+  "edition": "news release",
+  "date": "Feb 12, 2025",
+  "url": "https://www.bchydro.com/news/press_centre/news_releases/2025/call-for-power-epas.html",
+  "values": [
+   {"blank_context": "news release ___ Feb ___", "value": "12 Feb 2025", "quote": "Feb 12, 2025", "where": "release dateline"},
+   {"blank_context": "___ Call for Power", "value": "2024", "quote": "signed with ten new renewable energy projects from its recent call for power", "where": "body; 'call for power' links to the 2024 Call for Power page (year not in body text)"},
+   {"blank_context": "___ projects", "value": "10", "quote": "signed with ten new renewable energy projects", "where": "body"},
+   {"blank_context": "weighted average levelized price $___/MWh (___$)", "value": "$74/MWh (2024$)", "quote": "The weighted average levelized price for these successful projects is $74 per megawatt hour (2024)", "where": "body"},
+   {"blank_context": "about ___ GWh a year", "value": "4,830", "quote": "anticipated to generate approximately 4,830 gigawatt hours of electricity annually", "where": "body"}
+  ],
+  "unsupported_wording": "none (but note: this release is about the 2024 Call for Power, despite the /2025/ URL path and the id 'bchCall2025'; do not label it the 2025 Call for Power)",
+  "note": "Operator claims (BC Hydro). The first fetch timed out on permission; the second fetch, after a WebSearch surfaced the URL, succeeded. BCUC acceptance statement (Aug 25, 2025) repeats the same 10 projects / $74 (2024) / 4,830 GWh."
+ },
+ {
+  "id": "bchExtension2026",
+  "reachable": false,
+  "publisher": "BC Hydro",
+  "title": "BC Hydro Electric Tariff, Terms and Conditions (distribution extension sections)",
+  "edition": "not verified",
+  "date": "not verified",
+  "url": "https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/corporate/tariff-filings/electric-tariff/bchydro-electric-tariff.pdf (returned binary, unreadable); partial cross-check on https://app.bchydro.com/accounts-billing/electrical-connections/connection-requests/design/costs.html, https://app.bchydro.com/accounts-billing/electrical-connections/distribution-extension-policy.html, https://app.bchydro.com/accounts-billing/electrical-connections/connection-requests/express/fees-charges.html",
+  "values": [
+   {"blank_context": "T&C s. ___ and ___", "value": "not verified (web page cites only section 8)", "quote": "section 8 of our Electric Tariff", "where": "design/costs.html"},
+   {"blank_context": "local copy, effective ___–___", "value": "not verified", "quote": "", "where": "tariff PDF unreadable"},
+   {"blank_context": "system improvement under $___M not charged; at >=___ MVA pays part above $___M per MVA and above $___M", "value": "web page (summarised by fetch tool, not verbatim): under 1 MVA BC Hydro investment capped at $1 million; above 1 MVA $1 million per MVA prorated by kVA, up to $10 million maximum", "quote": "not verbatim; fetch tool paraphrase", "where": "distribution-extension-policy.html"},
+   {"blank_context": "maximum contribution, General Service $___ per kW", "value": "$521 (Apr 1 2026 - Mar 31 2027); a second page shows $518", "quote": "$521 per kW of estimated billing demand", "where": "design/costs.html contribution table; $518 on distribution-extension-policy.html (period not stated)"},
+   {"blank_context": "underground three-phase min. $___ (<=___ A)", "value": "$1,520 (up to 200 A)", "quote": "Up to 200 amps: $1,520 plus GST", "where": "fees-charges.html, 'Minimum charges for underground service'"},
+   {"blank_context": "to $___ (<=___ A)", "value": "$2,950 (>200 to 400 A)", "quote": "Greater than 200 amps, up to 400 amps: $2,950 plus GST", "where": "fees-charges.html"}
+  ],
+  "unsupported_wording": "Tariff section numbers, effective dates and the Extension Fee formula wording could not be checked against the tariff itself. 'System improvement ... not charged' framing not confirmed: the web page describes BC Hydro investment caps, not a system-improvement charge rule. Maximum contribution value depends on period ($518 vs $521).",
+  "note": "Primary tariff PDF unreadable via WebFetch; values above are from BC Hydro web pages (operator), effective July 5, 2025 per those pages. The local copy data/raw/bchydro/tariff.txt was not used."
+ },
+ {
+  "id": "bch_rs2289",
+  "reachable": true,
+  "publisher": "BC Hydro",
+  "title": "Self-generation",
+  "edition": "web page",
+  "date": "not stated",
+  "url": "https://app.bchydro.com/accounts-billing/electrical-connections/customer-generation/self-generation.html",
+  "values": [
+   {"blank_context": "Rate Schedule ___", "value": "2289", "quote": "Effective July 1, 2026, a new self-generation service rate (Rate Schedule 2289) applies.", "where": "page body"},
+   {"blank_context": "from ___ Jul ___", "value": "1 July 2026", "quote": "Effective July 1, 2026", "where": "page body"},
+   {"blank_context": "RS ___ net metering closed", "value": "1289", "quote": "BC Hydro has closed the net metering service rate (Rate Schedule 1289) to new customers.", "where": "page body"}
+  ],
+  "unsupported_wording": "none (minor: closed 'to new customers'; existing customers keep RS 1289 for 10 years from start date)",
+  "note": "Operator page. Change follows a BCUC decision per the page."
+ },
+ {
+  "id": "blatchfordRates2026",
+  "reachable": true,
+  "publisher": "Blatchford Renewable Energy (City of Edmonton); City of Edmonton (bylaw)",
+  "title": "2026 rates - Blatchford Renewable Energy; Bylaw 17943 Blatchford Renewable Energy Utility Bylaw",
+  "edition": "Bylaw 17943 consolidated January 1, 2024",
+  "date": "rates post Dec 4, 2025; bylaw consolidation Jan 1, 2024",
+  "url": "https://blatchfordutility.ca/2026-rates-blatchford-renewable-energy/ ; https://www.edmonton.ca/documents/Bylaws/C17943.pdf",
+  "values": [
+   {"blank_context": "Bylaw ___ consolidated ___ Jan ___", "value": "17943, 1 Jan 2024", "quote": "BYLAW 17943 ... (CONSOLIDATED ON JANUARY 1, 2024)", "where": "C17943.pdf cover"},
+   {"blank_context": "infrastructure fee $___/unit residential", "value": "$1,947.03", "quote": "$1,947.03 per unit", "where": "C17943.pdf Schedule B"},
+   {"blank_context": "$___/m2 commercial", "value": "$22.24", "quote": "$22.24 per square meter", "where": "C17943.pdf Schedule B"},
+   {"blank_context": "fixed $___/unit/day townhouse", "value": "$1.88", "quote": "$1.88 per unit per day", "where": "C17943.pdf Schedule B"},
+   {"blank_context": "$___/kW peak/month multi-unit", "value": "$12.84", "quote": "$12.84 per kW peak capacity per month", "where": "C17943.pdf Schedule B"},
+   {"blank_context": "variable $___/kWh", "value": "$0.0325", "quote": "$0.0325 per kWh", "where": "C17943.pdf Schedule B"},
+   {"blank_context": "___ and ___ (frozen)", "value": "page states freeze for 2026 only; 2026 rates identical to 2025", "quote": "City Council approved Administration's proposal to freeze the current monthly and variable rates for 2026 only", "where": "rates page"},
+   {"blank_context": "frozen by Council ___ Dec ___", "value": "1 Dec (2025 from post date)", "quote": "On Dec. 1, City Council approved the following 2026 rates", "where": "rates page; post dated Dec 4, 2025"},
+   {"blank_context": "townhouse $___/unit/day + $___/kWh", "value": "$2.07 + $0.0358", "quote": "Fixed monthly charge of $2.07 per unit per day ... Variable charge for heating and cooling of $0.0358 per kWh", "where": "rates page"},
+   {"blank_context": "multi-unit $___/kW peak/month + $___/kWh", "value": "$13.18 + $0.0358", "quote": "Fixed monthly charge of $13.18 per kW peak capacity per month ... Variable charge for heating and cooling of $0.0358 per kW", "where": "rates page (prints 'per kW', likely typo for kWh)"},
+   {"blank_context": "Bylaw ___ (___ consolidation, read by Claude): variable rate $___/kWh", "value": "not checked (later consolidation not found)", "quote": "", "where": "unreachable"}
+  ],
+  "unsupported_wording": "Meter sentence ('measures heating and cooling energy drawn from the loop by the heat pump') not checked; operator equipment page not read, and the rates page does not describe the meter. '___ and ___ frozen' if it means two years: page says 2026 only (2026 = 2025 rates). 'citing federal policy changes' supported. Second bylaw/consolidation not verified. Multi-unit variable is printed as 'per kW', not 'per kWh'.",
+  "note": "Operator/municipal rates. The infrastructure fee and Jan 2024 values come from the 2024 consolidation; it was not confirmed whether a later (2025/2026) consolidation changed the infrastructure fees. Amending bylaws 20312 (2023) and 20628 (2024) are noted in Schedule B."
+ },
+ {
+  "id": "bylaw4243",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Encroachment By-law No. 4243",
+  "edition": "consolidated for convenience to December 8, 2021 (notes amendment by By-law 13191 effective January 1, 2022)",
+  "date": "consolidation Dec 8, 2021",
+  "url": "https://bylaws.vancouver.ca/4243c.pdf",
+  "values": [
+   {"blank_context": "Vancouver Encroachment By-law ___", "value": "4243", "quote": "ENCROACHMENT BY-LAW NO. 4243", "where": "cover/title"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Official City of Vancouver consolidation."
+ },
+ {
+  "id": "ceG526",
+  "reachable": true,
+  "publisher": "British Columbia Utilities Commission",
+  "title": "Order G-5-26 (Creative Energy Vancouver Platforms Inc., 2026 interim rates)",
+  "edition": "order",
+  "date": "January 16, 2026",
+  "url": "https://www.ordersdecisions.bcuc.com/bcuc/orders/en/523033/1/document.do",
+  "values": [
+   {"blank_context": "Order G-___-___", "value": "G-5-26", "quote": "G-5-26", "where": "order heading"},
+   {"blank_context": "Creative Energy ___ interim rates", "value": "2026", "quote": "on an interim basis, effective January 1, 2026", "where": "order body"},
+   {"blank_context": "downtown steam $___ / ___ / ___ / ___ per M#", "value": "$19.53 / $16.53 / $14.63 / $11.60", "quote": "First 50 M# $19.53; Next 150 M# $16.53; Next 800 M# $14.63; Remainder $11.60 (interim)", "where": "downtown steam rate table (previous: 18.13/15.35/13.58/10.77)"},
+   {"blank_context": "≈ $___ to $___ per MWh", "value": "not stated; conversion, not printed", "quote": "", "where": "order gives $/MWh only for NEFC/Butterfly hot water ($56.28/$47.64/$42.17/$33.44)"}
+  ],
+  "unsupported_wording": "The $/MWh range for downtown steam is not printed; it is a conversion. Applicant is named 'Creative Energy Vancouver Platforms Inc.'",
+  "note": "Rates are interim. The tiers are 50 / 150 / 800 M#, then the remainder."
+ },
+ {
+  "id": "ceudResTable2",
+  "reachable": true,
+  "publisher": "Natural Resources Canada",
+  "title": "Comprehensive Energy Use Database, Residential Sector British Columbia, Table 2: Secondary Energy Use and GHG Emissions by End-Use",
+  "edition": "issued 2026-03-10 (years 2000, 2018-2023 shown)",
+  "date": "2026-03-10",
+  "url": "https://oee.nrcan.gc.ca/corporate/statistics/neud/dpa/showTable.cfm?type=CP&sector=res&juris=bc&rn=2&page=0",
+  "values": [
+   {"blank_context": "CEUD ___ / Table ___", "value": "Table 2; edition year not printed as such (issued 2026-03-10, data to 2023)", "quote": "Table 2: Secondary Energy Use and GHG Emissions by End-Use", "where": "table title"},
+   {"blank_context": "___-___ average", "value": "not stated (averages are computed)", "quote": "", "where": "n/a"},
+   {"blank_context": "BC ___ GJ/m2 (space+water / floor space)", "value": "not stated; conversion, not printed. Inputs printed: 2023 Space Heating 72.1 PJ, Water Heating 42.3 PJ, Total Floor Space 336.6 million m2 (2022: 84.8, 43.9, 326.6)", "quote": "\"Space Heating\" 72.1; \"Water Heating\" 42.3; \"Total Floor Space (million m2)\" 336.6", "where": "BC Table 2, 2023 column"},
+   {"blank_context": "Alberta ___ GJ/m2", "value": "not checked (Alberta table not fetched)", "quote": "", "where": "n/a"},
+   {"blank_context": "per household BC ___ GJ", "value": "not stated (computed); Total Households 2,177.0 thousand (2023)", "quote": "\"Total Households (thousands)\" 2,177.0", "where": "BC Table 2"},
+   {"blank_context": "per household Alberta ___ GJ", "value": "not checked", "quote": "", "where": "n/a"},
+   {"blank_context": "file names data/___eb2..., a1c7___be6...", "value": "not checkable (local files)", "quote": "", "where": "n/a"}
+  ],
+  "unsupported_wording": "The space+water GJ/m2 and GJ/household figures are derived ratios and not printed (the table's printed intensity rows cover all end-uses: 0.46 GJ/m2 and 71.7 GJ/household in 2023). Alberta values and the averaging period were not verified.",
+  "note": "Government statistical source. BC table reached; Alberta table not fetched (fetch budget)."
+ },
+ {
+  "id": "climavenetaIFX",
+  "reachable": true,
+  "publisher": "Mitsubishi Electric Europe (Climaveneta brand)",
+  "title": "i-FX R513A Air Cooled Chillers",
+  "edition": "brochure",
+  "date": "Effective as of March 2021",
+  "url": "https://library.mitsubishielectric.co.uk/pdf/download_full/4298",
+  "values": [
+   {"blank_context": "ISO ___ sound power", "value": "9614", "quote": "Sound power on the basis of measurements taken in compliance with ISO 9614.", "where": "footnote 4 on performance data pages"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Manufacturer document; sound data are vendor claims. Back page: '©Mitsubishi Electric Europe 2021'."
+ },
+ {
+  "id": "ddeRates2025",
+  "reachable": false,
+  "publisher": "City of Edmonton",
+  "title": "Downtown District Energy rate filing (attachment to Utility Committee report)",
+  "edition": "not found",
+  "date": "not found",
+  "url": "none (not found on edmonton.ca or council meeting site via search)",
+  "values": [
+   {"blank_context": "___-___ Rate Filing, Attachment ___ to IIS0___, Utility Committee ___ Jun ___", "value": "not checked", "quote": "", "where": "unreachable"}
+  ],
+  "unsupported_wording": "Could not verify any part (unreachable).",
+  "note": "Two searches did not surface the official report; no secondary sources used."
+ },
+ {
+  "id": "doeFederal",
+  "reachable": true,
+  "publisher": "U.S. Department of Energy, Federal Energy Management Program (prepared by Lawrence Berkeley National Laboratory)",
+  "title": "Case Study: Opportunities to Improve Energy Efficiency in Three Federal Data Centers",
+  "edition": "case study",
+  "date": "May 2014",
+  "url": "https://www.energy.gov/sites/prod/files/2014/06/f16/casestudy_3federaldatacenters_0.pdf",
+  "values": [
+   {"blank_context": "___/___/___ W/ft2", "value": "33 / 50 / 62", "quote": "DC1 33; DC2 50; DC3 62 (W/ft2, current IT load)", "where": "Table 2, p. 6"}
+  ],
+  "unsupported_wording": "none (note: figures are current IT load power density)",
+  "note": "Prepared by LBNL for DOE FEMP. First fetch timed out on permission; succeeded after search."
+ }
+]

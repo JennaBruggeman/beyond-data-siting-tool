@@ -25,10 +25,12 @@ impact,id,type,what is open,number at stake,used by,where found,status
 1 may change a number,abgas,source ?,(?: not on this page; needs the ATCO rate schedule),ATCO North Mid-Use delivery $1.062/GJ (coef uses $1.045),price_ceiling,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
 1 may change a number,absorption2026,source ?,?,"absorption ≥90 °C single-effect, 70–80 °C two-stage; COP 0.6–0.7 / <0.4",Cooling for neighbours; a_absorption_temp; absorption,"B2 28 Oct: not confirmed, marked ?",open
 1 may change a number,bacS3000,source ?,(?: one check reads 171 tons for the smallest single-cell model),smallest tower 293 vs 171 nominal tons (≈1.3 vs 0.75 MW per model),component_space,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
+1 may change a number,bchDEP2025,source ?,"page says ""under 1 MVA"" and bands $1–4.99M ? | refunds framed as reviews at anniversaries ?)",,Grid upgrades shared with neighbours; grid_refund,B8 28 Oct: two checks; disputed points marked ?,open
 1 may change a number,bchIRP2025,source ?,B5 28 Oct: second check could not read it (single check),LRMC energy $97/MWh; capacity $300/kW-yr (150–400),grid_headroom; lrmc_bc,B5 28 Oct: second check could not read it (single check),open
 1 may change a number,bylaw14600,source ?,B5 28 Oct: second check could not read it (single check),Edmonton 65 dBA day / 50 night residential (75/60 non-res),ambient_cover; noise_limit,B5 28 Oct: second check could not read it (single check),open
 1 may change a number,catTM9338,source ?,B4 28 Oct: second check could not read it (single check),Cat 3516 generator sound spectra at 7 m,noise_level,B4 28 Oct: second check could not read it (single check),open
 1 may change a number,cec2024ESS,source ?,the code is paywalled ?),23 m height limit; 3 m from egress; 1.5 m from openings,battery; battery_code_path,B5 28 Oct: agreed fixes applied; single-check points marked ?,open
+1 may change a number,censusIncome2021,source ?,Table 98-10-0058-01 ?,,affordability,B8 28 Oct: agreed fixes applied; single-check points marked ?,open
 1 may change a number,cwec,source ?,B4 28 Oct: second check could not read it (single check),"CWEC hourly temperatures → free-cooling hours (e.g. 7,109 / 7,614 h) and HDD16 shares",condensate; demand_profile; free_cooling_hours; hourly_overlap,B4 28 Oct: second check could not read it (single check),open
 1 may change a number,dea,source ?,B4 28 Oct: second check could not read it (single check),"DEA capex 1.13/0.95 M€/MW, O&M 2,100 €/MW·yr + 3.07 €/MWh, COP 3.1–4.7",capex_split; cop; payback; price_floor; storage_footprint,B4 28 Oct: second check could not read it (single check),open
 1 may change a number,dell,source ?,2U ?) | (?: not found in these PDFs) | not in the Dell PDFs ?),R650 21.25 kg per 1U server (and 26.3 kg 2U class),embodied_it; ewaste; rare_earth,B4 28 Oct: agreed fixes applied; single-check points marked ?,open
@@ -76,41 +78,98 @@ impact,id,type,what is open,number at stake,used by,where found,status
 "2 wording/citation, used",abRainwater2010,source ?,Canadian Guidelines for Domestic Reclaimed Water for toilet and urinal flushing ?,,rainwater,B6 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",abWaterAct2021,source ?,fact sheets 2021 ?,,surface_water_sink,B6 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",abWells2026,source ?,B6 28 Oct: second check could not read it (single check),,ground,B6 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",abpCruiserath,source ?,a)) ?,,visibility,B7 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",acaEdmonton,source ?,URL to add ?),,air_vs_objective,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 "2 wording/citation, used",aeso,source ?,(?: not on this page) | (?: MW not on this page; Phase 2A materials posted 26 Jun 2026),,cfd_score; grid_headroom; p_service,B2 28 Oct: agreed fixes applied; single-check points marked ?,open
-"2 wording/citation, used",aesoDC2025,source ?,Sep 2025): 'Are large loads paying their fair share of transmission costs?,,power_bill_effect,,open
+"2 wording/citation, used",aesoBYOG2026,source ?,B7 28 Oct: second check could not read it (single check),,flexible_load,B7 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",aesoConnect,source ?,"(? the graphic's week figures read unclearly; a newer quick reference, V1 27 May 2025, gives no durations)",,interconnection,B7 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",aesoDC2025,source ?,Sep 2025): 'Are large loads paying their fair share of transmission costs?,,power_bill_effect,B7 28 Oct: confirmed by two checks,open
 "2 wording/citation, used",aesoDCupd2025,source ?,the Engage page lists only the title ?),,flexible_load,B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",aesoList,source ?,not checked online ?),,grid_headroom,B7 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",aesoP2A2026,source ?,2026 inferred from the page date ?),,flexible_load; p_service,B7 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",aesoP2Aupd2026,source ?,B7 28 Oct: second check could not read it (single check),,flexible_load,B7 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",aesoStats2025,source ?,"""by category"" ?)",,demand_profile; electricity_price; peak_relief,B4 28 Oct: two checks; disputed points marked ?,open
+"2 wording/citation, used",aesoTariff5,source ?,discretionary ?) | 000 ?,,Grid upgrades shared with neighbours; grid_refund,B7 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",agsGround2009,source ?,"""undisturbed"" ?) | not checked ?)",,btes; ground_warming,B5 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",ags_edmonton,source ?,"""design"" ?)",,borefield,B7 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",alissa2025lca,source ?,the workbooks could not be opened by the second check ?),,embodied_building; embodied_it; heat_temp,B5 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",alta117_2026,source ?,B5 28 Oct: second check could not read it (single check),,chp_heat; flexible_load,B5 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",altaReg117,source ?,B5 28 Oct: second check could not read it (single check),,grid_headroom; self_gen_rules,B5 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",armaElectronics,source ?,single check ?),,ewaste,B7 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",arupManx2013,source ?,a copy of the Isle of Man public register ?,,noise_level,B7 28 Oct: two checks; disputed points marked ?,open
+"2 wording/citation, used",ashrae2015ch51,source ?,B7 28 Oct: second check could not read it (single check),,snowmelt_area,B7 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",ashraeCh45,source ?,"(?: the 2019 edition reads 'can be an even more serious problem' and describes intake on one side, discharge on the other; SI 2015 copy not re-checked)",,recirculation_flag,B7 28 Oct: two checks; disputed points marked ?,open
+"2 wording/citation, used",ashraeTC99card,source ?,B7 28 Oct: second check could not read it (single check),,condensate,B7 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",atb2024_batt,source ?,a newer 2024b version exists ?),,battery,B7 28 Oct: two checks; disputed points marked ?,open
+"2 wording/citation, used",atcoGas2026,source ?,riders excluded ?,,price_ceiling,B7 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",aucCoaldale2025,source ?,one check ties this to the Hydro and Electric Energy Act ?),,licence_flag; self_gen_rules,B5 28 Oct: two checks; disputed points marked ?,open
+"2 wording/citation, used",aucDSI2021,source ?,(?: pp. 60 and 69 not re-checked),,ev_exemption,B7 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",aucGuidance,source ?,(?: not on this page; Rule 007 not checked),,consultation,B2 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",ayuso2023,source ?,(?: one check reads article 102330),,aquaculture_tonnes,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
+"2 wording/citation, used",bacLayout2023,source ?,our summary of per-model tables ?),,component_space,B7 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",bahnhofPionen,source ?,"(?: our inference, not stated)",,visibility,B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",bartlett2025,source ?,the report also gives $4 and $6/GJ cases ?),,heat_delivered,B7 28 Oct: two checks; disputed points marked ?,open
+"2 wording/citation, used",bcAirBackground,source ?,(?: June 2025 report not checked; an April 2026 edition exists),,air_vs_objective,B7 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",bcAssessClasses,source ?,amendment date ?),,property_tax,B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",bcCarbonTax2025,source ?,000 t/yr ?,,price_ceiling,B7 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",bcDWPR,source ?,"(? the duty is in the Act, ss. 7–8; the regulation sets how permits are issued and the exemptions)",,fire_water,B7 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",bcDeclarationAct,source ?,(?: these three not yet checked against bclaws),,consultation,"B2 28 Oct: not confirmed, marked ?",open
 "2 wording/citation, used",bcFoippaAbroad,source ?,(?),,computing_served,B3 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",bcLCFtech2023,source ?,?,,hvo_swap,B7 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",bcRLCF007_2024,source ?,so the 31.2% basis is not stated ?),,hvo_swap,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
+"2 wording/citation, used",bcRecyclingIT,source ?,(?),,afterlife,B7 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",bcResCare,source ?,"""community care"" ?",,backup_neighbours; receivers_nearby,B5 28 Oct: two checks; disputed points marked ?,open
+"2 wording/citation, used",bcWQGtemp,source ?,printed title ?),,surface_water_sink,B7 28 Oct: two checks; disputed points marked ?,open
+"2 wording/citation, used",bc_mwr,source ?,(? one check reads it as Municipal Effluent Quality Requirements for Reclaimed Water),,a_reuse_rules,B7 28 Oct: two checks; disputed points marked ?,open
+"2 wording/citation, used",bcaExtract,source ?,5 Apr 2019 ?) | Abacus record not checked ?),,floor_area,B7 28 Oct: two checks; disputed points marked ?,open
+"2 wording/citation, used",bcbc2024_3257,source ?,B8 28 Oct: second check could not read it (single check),,fire_water,B8 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",bcbc2024_326,source ?,B8 28 Oct: second check could not read it (single check),,backup_neighbours,B8 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",bchCTT2024,source ?,B8 28 Oct: second check could not read it (single check),,backup_neighbours,B8 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",bchDG100,source ?,(?: not checked),,battery; interconnection,B5 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",bchDR2026,source ?,(?: these are not in this manual; need their own source),,demand_profile; peak_relief,B5 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",bchEPA2026,source ?,B8 28 Oct: second check could not read it (single check),,clean_power_price; ppa,B8 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",bchESI2026,source ?,B8 28 Oct: second check could not read it (single check),,peak_relief,B8 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",bchExtension2026,source ?,B8 28 Oct: second check could not read it (single check),,interconnection,B8 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",bchLGS,source ?,(?),,electricity_price,B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",bchRAS2011,source ?,per BCUC G-39-12 ?,,clean_power_price,B8 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",bchSelfGen2026,source ?,BCUC application ID 1323 ?),,Solar on neighbours' roofs; community_solar; rooftop_solar; self_gen_rules,B2 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",bchTS6,source ?,B8 28 Oct: second check could not read it (single check),,grid_refund,B8 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",bch_esi,source ?,B8 28 Oct: second check could not read it (single check),,peak_relief,B8 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",bcucG3026,source ?,(?: one check reads 39.70 as the Decision's figure for the 6% increase the Commission approved; BC Hydro proposed 5%),,ev_repay,B8 28 Oct: two checks; disputed points marked ?,open
 "2 wording/citation, used",bcucG5026,source ?,(?: the letters are not in this order and need their own citation),,price_ceiling,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 "2 wording/citation, used",bcucTelus,source ?,(?: not identifiable from this order),,District heat to a network,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
 "2 wording/citation, used",bfe2023dc,source ?,"p. 20 ? | (?: one check finds RRB 840/2022 via the AWEL Merkblatt; for new buildings or cooling renewals, heat the site cannot use itself)",,sewage_heat,B2 28 Oct: agreed fixes applied; single-check points marked ?,open
 "2 wording/citation, used",blatchfordBP2021,source ?,"(?: one check read the City's 2020–2023 edition, which has the energy centre in the Town Centre and no Blatchford Market sewer lines or m² forecast; check the uploaded file)",,capex_split; ledger; sewage_heat,B4 28 Oct: two checks; disputed points marked ?,open
+"2 wording/citation, used",blatchfordSHX2026,source ?,"""combined"" ?) | (?: not on these pages; needs the bylaw)",,sewage_heat,B8 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",buffa2019,source ?,B8 28 Oct: second check could not read it (single check),,sewage_heat,B8 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",burlingtonNIA,source ?,B8 28 Oct: second check could not read it (single check),,noise_level,B8 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",burrardTemp2024,source ?,B8 28 Oct: second check could not read it (single check),,surface_water_sink,B8 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",bylaw6555,source ?,cons. 14 Jul 2026 ?,,lf_flag; noise_limit,B5 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",caaqs,source ?,(? 2030 value not on this page; CAAQS handbook not read),,air_vs_objective,B8 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",call2recycle,source ?,"""sealed lead acid"" ?) | (?: not on this page)",,ewaste,B8 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",cambridgeApp5,source ?,B8 28 Oct: second check could not read it (single check),,distribution_cost,B8 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",canaanMB,source ?,not measured ?) | primary URL to add ?),,Greenhouse,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
-"2 wording/citation, used",census2021DA,source ?,tatcan.gc.ca/census-recensement/2021/dp-pd/prof/details/download-telecharger.cfm?,,people_affected,,open
+"2 wording/citation, used",cda2023,source ?,B8 28 Oct: second check could not read it (single check),,Material bank: copper; copper_tonnes,B8 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",census2021DA,source ?,tatcan.gc.ca/census-recensement/2021/dp-pd/prof/details/download-telecharger.cfm?,,people_affected,B8 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",cerProfiles2026,source ?,B8 28 Oct: second check could not read it (single check),,water_behind_electricity,B8 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",ceud,source ?,file names ?,,demand_profile; homes_heated; receiver_demand,B4 28 Oct: two checks; disputed points marked ?,open
+"2 wording/citation, used",ceudResTable2,source ?,not printed ?),,receiver_demand,B8 28 Oct: two checks; disputed points marked ?,open
+"2 wording/citation, used",cfr2022_140,source ?,(?: not reached by either check),,hvo_swap,B8 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",cfsPlus,source ?,B8 28 Oct: second check could not read it (single check),,ewaste,B8 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",cimd,source ?,B8 28 Oct: second check could not read it (single check),,deprivation,B8 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",clf,source ?,(?: report title and year not given; not verified),,embodied_building,"B2 28 Oct: not confirmed, marked ?",open
+"2 wording/citation, used",cologixVAN1_2026,source ?,B8 28 Oct: second check could not read it (single check),,component_space,B8 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",crf,source ?,Barroso ch. 8 ?,,crf; lcoh; payback,"B3 28 Oct: not confirmed, marked ?",open
 "2 wording/citation, used",crozier2025,source ?,'pause' is our word ?),,workload_control,B3 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open
+"2 wording/citation, used",cumminsF1493,source ?,B8 28 Oct: second check could not read it (single check),,noise_level,B8 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",ddeBizCase2025,source ?,B8 28 Oct: second check could not read it (single check),,price_ceiling,B8 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",ddeRates2025,source ?,B8 28 Oct: second check could not read it (single check),,price_ceiling,B8 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",dfKatalog2022,source ?,(?: not checked; Table 1.1 lists 19 MW),,cop; heat_captured; heat_delivered; price_floor,B4 28 Oct: two checks; disputed points marked ?,open
+"2 wording/citation, used",dfoRAS,source ?,B8 28 Oct: second check could not read it (single check),,aquaculture_tonnes,B8 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",dkHeatCap2025,source ?,?,,heat_value_split; price_ceiling,B5 28 Oct: agreed fixes applied; single-check points marked ?,open
+"2 wording/citation, used",dkPriceCap,source ?,B8 28 Oct: second check could not read it (single check),,price_ceiling,B8 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",dlrContracts,source ?,B8 28 Oct: second check could not read it (single check),,horizons,B8 28 Oct: second check could not read it (single check),open
+"2 wording/citation, used",dlrQ2_2025,source ?,B8 28 Oct: second check could not read it (single check),,it_load_actual,B8 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",drake_landing,source ?,"(?: one check reads it as a GSHP + ORC modelling study using DLSC as the case, not measured data)",,Seasonal storage in the ground; btes,"B2 28 Oct: not confirmed, marked ?",open
 "2 wording/citation, used",ecccNormals2020,source ?,B5 28 Oct: second check could not read it (single check),,condensate; snowmelt_area,B5 28 Oct: second check could not read it (single check),open
 "2 wording/citation, used",edmEncroach,source ?,current fee ?),,snowmelt_area,B2 28 Oct: confirmed by one check (other unreachable); disputed points marked ?,open

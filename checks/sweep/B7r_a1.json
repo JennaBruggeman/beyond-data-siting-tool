@@ -1,0 +1,138 @@
+[
+ {
+  "id": "abpCruiserath",
+  "reachable": true,
+  "publisher": "An Bord Pleanála (now An Coimisiún Pleanála)",
+  "title": "Board Order PL 06F.248544 (Fingal Reg. Ref. FW17A/0025), data storage facility, Cruiserath Road / Hollywood Road",
+  "edition": "n/a",
+  "date": "2018 (day and month left blank in order; case page gives decision 18/01/2018)",
+  "url": "https://www.pleanala.ie/anbordpleanala/media/abp/cases/orders/248/d248544.pdf (case page https://www.pleanala.ie/en-ie/case/248544 also read)",
+  "values": [
+   {"blank_context": "PL0___F.", "value": "6", "quote": "PL 06F.248544", "where": "Board Order header"},
+   {"blank_context": "F.___", "value": "248544", "quote": "PL 06F.248544", "where": "Board Order header"},
+   {"blank_context": "Dublin ___", "value": "not stated in order; case page states Dublin 15", "quote": "Hollywood Road, Dublin 15 (case page); order says 'Hollywood Road, Dublin' with no district", "where": "Case page location field; order site description"}
+  ],
+  "unsupported_wording": "'screened plant' is in the development description, not a screening condition. The parapet condition (Cond. 9) bars 'lift motor enclosures, air handling equipment, storage tanks, ducts or other external plant' above parapet level unless further permission is granted, so this is supported. The flue-stack finishes are not set by the condition. Cond. 6(a) requires the finishes, including to the flue stacks, to be agreed in writing with the planning authority, with samples. No colour or material is fixed.",
+  "note": "Dublin 15 comes from the An Bord Pleanála case page, not the order itself."
+ },
+ {
+  "id": "bcNO2Guidance",
+  "reachable": true,
+  "publisher": "BC Ministry of Environment & Climate Change Strategy, Environmental Protection Division",
+  "title": "Guidance on NO2 Dispersion Modelling in British Columbia",
+  "edition": "July 2022 version",
+  "date": "July 2022 (document history: released August 2022; BC modelling web page says 'Updated August 2022')",
+  "url": "https://www2.gov.bc.ca/assets/gov/environment/air-land-water/air/reports-pub/modelling_guidance_nitrogen_dioxide.pdf",
+  "values": [
+   {"blank_context": "July ___", "value": "2022", "quote": "July 2022", "where": "Version date / document history"},
+   {"blank_context": "Tier ___", "value": "1", "quote": "Tier 1: Total Conversion", "where": "s. 3.2.1.1, p. 10"},
+   {"blank_context": "___% conversion", "value": "100", "quote": "models assume that 100% of NOX emissions resulting from a given project are converted to NO2", "where": "s. 3.2.1.1, p. 10"},
+   {"blank_context": "ARM2 bounds ___–___", "value": "0.2–0.9", "quote": "the ARM2 equation is constrained to a maximum value of 0.9 and a minimum value of 0.2", "where": "Appendix A, p. 26"},
+   {"blank_context": "diesel in-stack NO2/NOx ___", "value": "0.083 (reciprocating IC engines, diesel/kerosene)", "quote": "Reciprocating IC Engines – Diesel/Kerosene: 0.083", "where": "Appendix B, Table B-1, p. 31"}
+  ],
+  "unsupported_wording": "none",
+  "note": "The 0.083 in-stack ratio is for reciprocating engines only. Table B-1 gives 0.242 for diesel turbines and 0.035 for boilers/heaters. The default ratio of 0.5 applies only to unlisted sources (s. 3.2.1.3.1, p. 13). Page numbers come from the fetch extraction."
+ },
+ {
+  "id": "arupManx2013",
+  "reachable": true,
+  "publisher": "Arup (via Isle of Man planning portal)",
+  "title": "Plant Noise Breakout Assessment (Job No. AAc\\230750-00\\TN01), Manx Telecom Data Centre, Greenhill, Braddan",
+  "edition": "TN01",
+  "date": "15 August 2013",
+  "url": "https://planningportal.im/md/docs/1314840.md",
+  "values": [
+   {"blank_context": "___/___/REM", "value": "13/00726/REM", "quote": "13/00726/REM", "where": "Document header / application reference"},
+   {"blank_context": "screen ___m high", "value": "3", "quote": "A solid screen 3m high having a surface mass of 12kg/m² will be erected in the location shown", "where": "Section 3"},
+   {"blank_context": "surface mass ___kg/m²", "value": "12", "quote": "A solid screen 3m high having a surface mass of 12kg/m²", "where": "Section 3"},
+   {"blank_context": "___ dB LAeq at the school", "value": "35 internally / 45 externally", "quote": "office and meeting room shall not exceed 35dBL Aeq,1hr internally and 45dBL Aeq,1hr externally", "where": "Section 2, Planning Criteria (Condition 1)"},
+   {"blank_context": "LAeq,___hr", "value": "1", "quote": "35dBL Aeq,1hr", "where": "Section 2"},
+   {"blank_context": "___ dB at nearest homes", "value": "30", "quote": "at the nearest residential premises shall not exceed 30dBL Aeq,1hr", "where": "Section 2"}
+  ],
+  "unsupported_wording": "The claim gives a single school limit. The source has two: 35 dB internally and 45 dB externally, applying to the 'surrounding school, office and meeting room'. The claim should say which one it means.",
+  "note": "The application was a reserved-matters conversion/extension at Greenhill, Braddan. The document names no client. The quotes were reformatted from LaTeX in the source text."
+ },
+ {
+  "id": "aesoConnect",
+  "reachable": true,
+  "publisher": "Alberta Electric System Operator (AESO)",
+  "title": "Connection Process Quick Reference Guide",
+  "edition": "V2.1",
+  "date": "2021-05-31",
+  "url": "https://www.aeso.ca/assets/Uploads/connection-process/Connection-Process-Quick-Reference-Guide.pdf",
+  "values": [
+   {"blank_context": "v2.___", "value": "1", "quote": "V2.1", "where": "Cover/footer"},
+   {"blank_context": "(___) date", "value": "2021-05-31", "quote": "2021-05-31", "where": "Cover/footer"},
+   {"blank_context": "stages ___–___", "value": "0–6", "quote": "Stage 0: Application ... Stage 6: Close Out", "where": "Stage list"},
+   {"blank_context": "Generation and storage Stage ___ ___ (x4)", "value": "Stage 1: 14 weeks; Stage 2: 39 weeks; Stage 3: 55 weeks (asterisked); Stage 4: 30 weeks. UNCERTAIN mapping", "quote": "Generation and Energy Storage Projects ... *55 Weeks ... 14 Weeks ... 30 Weeks ... 39 Weeks", "where": "'Connection Process – Target Timelines' graphic"}
+  ],
+  "unsupported_wording": "The text extraction of the graphic is jumbled, so it is uncertain which week figures go with generation/storage and which go with load/reliability (51/34/41/15/2). Check the PDF visually. The guide does not say 'only where transmission is needed'. It says the process 'is followed when the AESO determines that a System Access Service Request (SASR) will require the addition or alteration of facilities on Alberta's transmission system', so the claim's phrase is a paraphrase. The guide labels these 'target timelines', not 'indicative weeks'.",
+  "note": "AESO targets are not achieved durations. The April 2026 performance update reports actual times well above the targets."
+ },
+ {
+  "id": "bcDWPR",
+  "reachable": true,
+  "publisher": "Province of British Columbia (BC Laws / King's Printer)",
+  "title": "Drinking Water Protection Regulation, B.C. Reg. 200/2003",
+  "edition": "Consolidation current to October 20, 2026 (last amended by B.C. Reg. 168/2025, eff. Oct 27, 2025)",
+  "date": "current to 2026-10-20",
+  "url": "https://free.bcpublications.ca/civix/document/id/complete/statreg/200_2003 (bclaws.gov.bc.ca link not fetchable from this session; same King's Printer consolidation)",
+  "values": [
+   {"blank_context": "s. ___ ___(b)", "value": "3.1(b)", "quote": "the system does not provide water for human consumption or food preparation purposes ... is not connected to a water supply system that provides water for human consumption ... identified by markings that are permanent, distinct and easily recognized", "where": "s. 3.1(b)(i)-(iii)"},
+   {"blank_context": "___–___ (permit sections)", "value": "6–7 (construction permit s. 6; operating permit s. 7)", "quote": "may issue a construction permit to a person after receiving an application (s. 6(2)); may issue an operating permit to a water supplier after receiving an application (s. 7(1))", "where": "ss. 6, 7"}
+  ],
+  "unsupported_wording": "The regulation sets out how permits are issued and when they are exempt. The duty itself ('a water supplier needs construction and operating permits') is in the Drinking Water Protection Act (ss. 7–8), not this regulation. The s. 3.1 exemption applies only to s. 6 of the Act. The blank structure 's. ___ ___(b), ___–___' is ambiguous, so my mapping to 3.1(b) and 6–7 is an inference.",
+  "note": "I read the free.bcpublications.ca copy because the bclaws.gov.bc.ca URL was blocked by fetch provenance rules. It is the same official consolidation."
+ },
+ {
+  "id": "amsterdamDC2020",
+  "reachable": true,
+  "publisher": "Gemeente Amsterdam (hosted on odnzkg.nl)",
+  "title": "Vestigingsbeleid datacenters gemeente Amsterdam 2020–2030 (eerste herziening) / Amsterdam Duurzaam Digitaal",
+  "edition": "Eerste herziening (first revision)",
+  "date": "not stated (latest cited source dated 4 December 2024)",
+  "url": "https://odnzkg.nl/wp-content/uploads/2026/07/Vestigingsbeleid-datacenters-2020-2030-Amsterdam-Duurzaam-Digitaal-eerste-herziening.pdf",
+  "values": [
+   {"blank_context": "___–___", "value": "2020–2030", "quote": "Vestigingsbeleid datacenters ... 2020–2030", "where": "Title"}
+  ],
+  "unsupported_wording": "none. 'Datacentergebouwen mogen alleen intensief gestapeld uitgevoerd worden' (s. 3.3.2, approx. p. 18). 'wordt ondergronds bouwen van een datacenter aangemoedigd' (s. 3.3.2). No rule found on roof plant or screening.",
+  "note": "The document is hosted by the Omgevingsdienst Noordzeekanaalgebied, not amsterdam.nl. The page numbers are inferred from the extracted text. The 'no roof-plant rule' finding is negative evidence from a model-read extraction, so confirm it by searching the PDF for 'dak'."
+ },
+ {
+  "id": "aesoPerf",
+  "reachable": true,
+  "publisher": "Alberta Electric System Operator (AESO)",
+  "title": "Connection Process Performance Update",
+  "edition": "n/a",
+  "date": "April 2026 (reporting period Sept 2023 – March 2026)",
+  "url": "https://www.aeso.ca/assets/Uploads/grid/April-2026-Connection-Process-Performance.pdf",
+  "values": [
+   {"blank_context": "April ___", "value": "2026", "quote": "April 2026", "where": "Title page"}
+  ],
+  "unsupported_wording": "Minor: the printed title is 'Connection Process Performance Update'.",
+  "note": "These are AESO operator figures. For example, connection Stage 3 averaged 134 weeks against a 32-week target and 70-week maximum. Cluster 1 Stages 0–2 took about 67 weeks against a 43-week target."
+ },
+ {
+  "id": "bcLCFtech2023",
+  "reachable": true,
+  "publisher": "Province of British Columbia (BC Laws; Ministry of Energy requirements page)",
+  "title": "Low Carbon Fuels (Technical) Regulation B.C. Reg. 295/2023; Low Carbon Fuels (General) Regulation B.C. Reg. 282/2023; Renewable and Low Carbon Fuel Requirements web page",
+  "edition": "Consolidations current to October 20, 2026; web page last updated March 6, 2026",
+  "date": "2026-10-20 (regs); 2026-03-06 (page)",
+  "url": "https://free.bcpublications.ca/civix/document/id/complete/statreg/295_2023 ; https://free.bcpublications.ca/civix/document/id/complete/statreg/282_2023 ; https://www2.gov.bc.ca/gov/content/industry/electricity-alternative-energy/transportation-energies/renewable-low-carbon-fuels/requirements",
+  "values": [
+   {"blank_context": "B.C. Reg. ___/___ (Technical)", "value": "295/2023", "quote": "B.C. Reg. 295/2023", "where": "Technical Regulation header"},
+   {"blank_context": "Schedule ___ Table ___", "value": "Schedule 3, Table 1", "quote": "Table 1 of Schedule 3", "where": "s. 10(1); Schedule 3"},
+   {"blank_context": "base CI diesel ___ gCO2e/MJ", "value": "94.38", "quote": "Diesel fuel ... 94.38", "where": "Schedule 3, Table 1"},
+   {"blank_context": "gasoline ___", "value": "93.67", "quote": "Gasoline ... 93.67", "where": "Schedule 3, Table 1"},
+   {"blank_context": "General Regulation ___/___", "value": "282/2023", "quote": "B.C. Reg. 282/2023", "where": "General Regulation header"},
+   {"blank_context": "___% reduction by ___", "value": "30% by 2030", "quote": "30% for diesel fuel and gasoline categories, for 2030 and subsequent compliance periods", "where": "General Reg. s. 15, Table, Item 7; also requirements page"},
+   {"blank_context": "updated ___ Mar ___", "value": "6 Mar 2026", "quote": "Last updated on March 6, 2026", "where": "Requirements page footer"},
+   {"blank_context": "diesel target CI ___ (___) x3 to ___ (___)", "value": "79.28 (2024), 77.11 (2025), 74.94 (2026) ... 66.07 (2030)", "quote": "2024 79.28; 2025 77.11; 2026 74.94; 2027 72.67; 2028 70.50; 2029 68.24; 2030 66.07", "where": "Requirements page, diesel CI target table"},
+   {"blank_context": "renewable content in diesel ___% from ___", "value": "8% from 2025 (4% in 2024)", "quote": "8% for the diesel fuel category (s. 13(1)(a)); page: 4% in 2024 rising to 8% in 2025", "where": "General Reg. s. 13(1)(a); requirements page"},
+   {"blank_context": "from ___ Apr ___ produced in Canada", "value": "1 Apr 2025", "quote": "Eligible renewable fuels in the diesel category must be produced in Canada, effective April 1, 2025", "where": "Requirements page"}
+  ],
+  "unsupported_wording": "The parenthetical 'regulation copies read were older' does not hold for the current consolidations. Both regulations are current to 20 Oct 2026. Technical Reg. s. 4 already includes 'biomass-derived diesel fuel produced in Canada' and 'biodiesel produced in Canada'. The target CI years in the claim are inferred from the blank pattern.",
+  "note": "The page lists gasoline targets too: 78.68 (2024) to 65.57 (2030). The page also states the diesel baseline as 'Diesel 94.38g CO2e/MJ', which matches Schedule 3."
+ }
+]

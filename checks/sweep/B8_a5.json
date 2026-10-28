@@ -1,0 +1,172 @@
+[
+ {
+  "id": "bchDEP2025",
+  "reachable": true,
+  "publisher": "BC Hydro",
+  "title": "Distribution extension policy (web page)",
+  "edition": "web page, current at 2026-10-28",
+  "date": "not stated on page (policy approved 5 Mar 2025, effective 5 Jul 2025)",
+  "url": "https://app.bchydro.com/accounts-billing/electrical-connections/distribution-extension-policy.html",
+  "values": [
+   {"blank_context": "BCUC approved ___ Mar ___", "value": "5 Mar 2025", "quote": "The BCUC approved our application on March 5, 2025.", "where": "policy page, approval section"},
+   {"blank_context": "effective ___ Jul ___", "value": "5 Jul 2025", "quote": "the new policy took effect on July 5, 2025.", "where": "policy page, approval section"},
+   {"blank_context": "reviewed at the ___th anniversary (fee $___k to under $___M)", "value": "5th; $25,000 to $999,999", "quote": "$25,000 to $999,999: review at the fifth anniversary of energization", "where": "Extension fee refunds section (tool summary of table)"},
+   {"blank_context": "___th and ___th ($___–___M)", "value": "5th and 10th; $1 million to $4.99 million", "quote": "$1 million to $4.99 million: reviews at the fifth and tenth anniversaries", "where": "Extension fee refunds section"},
+   {"blank_context": "___th, ___th and ___th (≥ $___M)", "value": "5th, 10th, 15th; $5 million or higher", "quote": "$5 million or higher: reviews at the fifth, tenth, and fifteenth anniversaries, with an option to apply for annual review", "where": "Extension fee refunds section"},
+   {"blank_context": "invests up to $___M at ≤ ___ MVA", "value": "$1 million; under 1 MVA", "quote": "Under 1 MVA: \"Up to $1 million\"", "where": "System improvement investment by connection size"},
+   {"blank_context": "$___M per MVA to $___M above", "value": "$1 million per MVA; max $10 million", "quote": "$1 million per MVA, pro-rated by kilovolt-ampere (kVA) up to a maximum of $10 million", "where": "System improvement investment by connection size"}
+  ],
+  "unsupported_wording": "Page says 'Under 1 MVA', claim says '≤ 1 MVA'. Middle band printed as $1M to $4.99M (claim's '$___–___M' should read 1–4.99, not 1–5). Refund trigger 'when others connect' not quoted on page; page frames refunds as reviews at anniversaries of energization for fees over $25,000. Order number not on page (claim already says not confirmed). Page also mentions optional annual review for ≥$5M, not in claim.",
+  "note": "Quotes partly come via the fetch tool's summary of the page table; re-check exact table wording before citing."
+ },
+ {
+  "id": "bchRAS2011",
+  "reachable": false,
+  "publisher": "BC Hydro (letter); BCUC (order read instead)",
+  "title": "BC Hydro letter to BCUC, Retail Access Program suspension application (letter PDF unreadable); checked against BCUC Order G-39-12",
+  "edition": "n/a",
+  "date": "letter: 23 Dec 2011 per BCUC order; order G-39-12 dated 23 Mar 2012",
+  "url": "https://www.ordersdecisions.bcuc.com/bcuc/orders/en/118470/1/document.do (linked letter PDF returned binary data, no text)",
+  "values": [
+   {"blank_context": "___ Dec ___", "value": "23 Dec 2011", "quote": "On December 23, 2011, BC Hydro filed an application seeking to suspend the Retail Access Tariff.", "where": "BCUC Order G-39-12, recitals (not the letter itself)"}
+  ],
+  "unsupported_wording": "Order says 'no transmission service customer has participated in the Retail Access Program' — claim says 'no customer had ever taken part'; narrow to transmission service customers. Order names it 'Retail Access Tariff'/'Retail Access Program'.",
+  "note": "Letter itself not read (PDF text not extractable by fetch tool). G-39-12 suspended the tariff for a maximum of two years, to 23 Mar 2014; current status not checked."
+ },
+ {
+  "id": "bcucG3026",
+  "reachable": true,
+  "publisher": "British Columbia Utilities Commission",
+  "title": "Order G-30-26 with Decision, BC Hydro EV fast-charging rate (RS 4100)",
+  "edition": "Order and Decision",
+  "date": "23 Feb 2026",
+  "url": "https://www.ordersdecisions.bcuc.com/bcuc/orders/en/523073/1/document.do",
+  "values": [
+   {"blank_context": "Order G-___-___", "value": "G-30-26", "quote": "Order Number: G-30-26", "where": "order header"},
+   {"blank_context": "(___ Feb ___)", "value": "23 Feb 2026", "quote": "February 23, 2026", "where": "order header"},
+   {"blank_context": "Level ___ ___ ¢/kWh", "value": "Level 2; 28.28", "quote": "28.28 cents per kilowatt-hour (kWh) for Level 2 charging", "where": "Order recital B, p. 1 of 2 (rate approved in 2024 by G-67-24; unchanged here)"},
+   {"blank_context": "fast charging ___ ¢/kWh", "value": "39.70", "quote": "resulting in a proposed fast-charging rate of 39.70 cents per kWh, or an average increase of 84 cents per charging session.", "where": "Decision s. 2.1.3, p. 11 of 18 (6 percent scenario, with F2027 general rate increase)"},
+   {"blank_context": "from ___ Apr ___", "value": "1 Apr 2026", "quote": "BC Hydro is approved to increase its EV fast-charging rate set out in RS 4100 by 6 percent, effective April 1, 2026.", "where": "Order para. 1, p. 1 of 2"}
+  ],
+  "unsupported_wording": "'as proposed': BC Hydro proposed 5% (39.32 ¢/kWh, Decision s. 2.1.3 p. 10); the Commission approved 6%, not as BC Hydro proposed. 39.70 is the Decision's calculated figure for the 6% scenario, not a tariff-printed rate; order is not a Level 2 rate decision (Level 2 was out of scope).",
+  "note": "Current pre-increase fast-charging rate cited as 36.09 ¢/kWh (Decision s. 2.1.3)."
+ },
+ {
+  "id": "blatchfordSHX2026",
+  "reachable": true,
+  "publisher": "Blatchford Renewable Energy (web page); NRCan news release (checked for funding figures)",
+  "title": "District Energy Sharing (web page); 'Government of Canada announces $23.7 million in affordable and clean energy support for Blatchford, a neighbourhood in Edmonton'",
+  "edition": "web pages",
+  "date": "NRCan release 31 Jul 2024; Blatchford page undated",
+  "url": "https://blatchfordutility.ca/district-energy-sharing/ ; https://www.canada.ca/en/natural-resources-canada/news/2024/07/government-of-canada-announces-237-million-in-affordable-and-clean-energy-support-for-blatchford-a-neighbourhood-in-edmonton.html",
+  "values": [
+   {"blank_context": "expansion adds ___ MW heating", "value": "13.1", "quote": "an additional 13.1 MW of heating and 12.3 MW of cooling capacity", "where": "NRCan news release (not the linked Blatchford page)"},
+   {"blank_context": "___ MW cooling", "value": "12.3", "quote": "an additional 13.1 MW of heating and 12.3 MW of cooling capacity", "where": "NRCan news release"},
+   {"blank_context": "geoexchange field ___ boreholes", "value": "570", "quote": "570 boreholes that are 150 metres deep", "where": "Blatchford District Energy Sharing page"},
+   {"blank_context": "× ___ m", "value": "150", "quote": "570 boreholes that are 150 metres deep", "where": "Blatchford District Energy Sharing page"},
+   {"blank_context": "SREPs $___ M", "value": "23.7", "quote": "$23.7 million", "where": "NRCan news release body (Minister's quote in same release says '$27.3-million investment' — internal inconsistency)"},
+   {"blank_context": "toward a $___ M project", "value": "79.2", "quote": "The total project value is $79.2 million", "where": "NRCan news release"},
+   {"blank_context": "(NRCan, ___ Jul ___)", "value": "31 Jul 2024", "quote": "July 31, 2024", "where": "NRCan news release date"},
+   {"blank_context": "EPCOR Bylaw ___", "value": "not stated", "quote": "", "where": "neither page mentions a bylaw"}
+  ],
+  "unsupported_wording": "'combined sewers' not supported: page says 'two major existing sewers that run under the east side of Blatchford' (no 'combined'). EPCOR bylaw and non-contact cooling water clause not on either page (needs its own source). MW, SREPs, cost and NRCan date are not on the linked Blatchford page; only in the NRCan release. Status 'in planning and design' supported: 'in the planning and design phase for a sewer heat exchange system'. 'City of Edmonton company' supported in substance: 'The City of Edmonton created Blatchford Renewable Energy.'",
+  "note": "NRCan release has $23.7M vs $27.3M inconsistency; release title uses $23.7M. Expansion capacities are government release figures."
+ },
+ {
+  "id": "caaqs",
+  "reachable": true,
+  "publisher": "Canadian Council of Ministers of the Environment (CCME)",
+  "title": "Air Quality (air quality report web page), CAAQS table",
+  "edition": "web page",
+  "date": "not stated",
+  "url": "https://ccme.ca/en/air-quality-report",
+  "values": [
+   {"blank_context": "NO2 ___-h", "value": "1", "quote": "The 3-year average of the annual 98th percentile of the daily maximum 1-hour average concentrations", "where": "CAAQS table"},
+   {"blank_context": "NO2 ___ standard", "value": "2020 (60 ppb) and 2025 (42 ppb) both printed; which year the claim means is unclear", "quote": "60 ppb ... 42 ppb", "where": "CAAQS table, NO2 1-hour row"},
+   {"blank_context": "___ µg/m³ (NO2)", "value": "not stated (conversion, not printed)", "quote": "", "where": "CAAQS table gives ppb only"},
+   {"blank_context": "(___ ppb)", "value": "60 (2020) / 42 (2025)", "quote": "60 ppb; 42 ppb", "where": "CAAQS table"},
+   {"blank_context": "___th percentile", "value": "98", "quote": "annual 98th percentile", "where": "CAAQS table"},
+   {"blank_context": "___-yr average", "value": "3", "quote": "The 3-year average", "where": "CAAQS table"},
+   {"blank_context": "PM2.___ ___-h", "value": "PM2.5; 24-h", "quote": "The 3-year average of the annual 98th percentile of the daily 24-hour average concentrations", "where": "CAAQS table"},
+   {"blank_context": "___ µg/m³ (___) [earlier standard]", "value": "not stated (2015 value not on page)", "quote": "", "where": "CAAQS table"},
+   {"blank_context": "→ ___ (___) [later standard]", "value": "27 µg/m³ (2020)", "quote": "27 μg/m3", "where": "CAAQS table, PM2.5 24-hour row"}
+  ],
+  "unsupported_wording": "NO2 value in µg/m³ not printed on this page (ppb only). PM2.5 2015 value not shown on page, so the '→' change cannot be confirmed here; source would need to be the CAAQS handbook (ccme.ca/en/res/caaqshandbook.pdf, not read).",
+  "note": "Values from fetch-tool extraction of the page table."
+ },
+ {
+  "id": "cec2023pump",
+  "reachable": true,
+  "publisher": "California Energy Commission (prepared by UCLA Luskin Center for Innovation)",
+  "title": "The Energy Implications of Greater Reliance on Direct Potable Reuse Water Recycling in Import Reliant Regions: Evidence from Los Angeles County",
+  "edition": "Final Project Report CEC-500-2023-026",
+  "date": "May 2023",
+  "url": "https://www.energy.ca.gov/sites/default/files/2023-05/CEC-500-2023-026.pdf",
+  "values": [
+   {"blank_context": "CEC-___-___-___", "value": "CEC-500-2023-026", "quote": "CEC-500-2023-026", "where": "cover"},
+   {"blank_context": "(UCLA, ___)", "value": "2023 (May)", "quote": "May 2023", "where": "cover"},
+   {"blank_context": "pressurisation energy ___ kWh per acre-foot", "value": "222", "quote": "This results in a uniform requirement for pressurization energy of 222kWh/AF.", "where": "p. 21, Section 2.2.2"},
+   {"blank_context": "≈___ kWh/m³", "value": "conversion, not printed", "quote": "", "where": "n/a"}
+  ],
+  "unsupported_wording": "none",
+  "note": "Authors: Nicholas Chow, JR DeShazo, Omar Moghaddam (UCLA Luskin Center for Innovation)."
+ },
+ {
+  "id": "cfdPage",
+  "reachable": true,
+  "publisher": "BC Hydro",
+  "title": "Emerging industries connections (web page), 2026 Call for Demand for Emerging Industries",
+  "edition": "web page, current at 2026-10-28",
+  "date": "not stated",
+  "url": "https://app.bchydro.com/accounts-billing/electrical-connections/large-load/emerging-industries-connections.html",
+  "values": [
+   {"blank_context": "BC Hydro ___ Call for Demand", "value": "2026", "quote": "2026 Call for Demand for Emerging Industries", "where": "page"},
+   {"blank_context": "___ applications", "value": "15", "quote": "We received 15 applications representing close to 800 megawatts (MW) in total load request.", "where": "page"},
+   {"blank_context": "~___ MW", "value": "800 (close to)", "quote": "close to 800 megawatts (MW) in total load request", "where": "page"}
+  ],
+  "unsupported_wording": "'outcome deferred': page says the timeline 'has been extended' because a provincial election was called, and 'notifications are expected following the completion of the government transition period later this year'. Not described as deferred; use 'timeline extended'.",
+  "note": "Application count and MW are operator (BC Hydro) figures."
+ },
+ {
+  "id": "cologixVAN1_2026",
+  "reachable": false,
+  "publisher": "Cologix (operator)",
+  "title": "VAN1 Data Center Spec Sheet",
+  "edition": "not confirmed",
+  "date": "not confirmed",
+  "url": "https://cologix.com/resources/spec-sheets/van1-data-center-spec-sheet/ (landing page only, no specs in text); https://cologix.com/data-centers/vancouver/van1/ (redirect, no content)",
+  "values": [],
+  "unsupported_wording": "not checked",
+  "note": "No link given; spec-sheet landing page does not print the sheet's contents (likely a gated download). Not checked against the local file data/raw. All figures (capacity, PUE, redundancy) would be operator claims. An older 2018 Cologix VAN-1 PDF exists on cologix.com but is a different edition and was not used."
+ },
+ {
+  "id": "dfoRAS",
+  "reachable": false,
+  "publisher": "Fisheries and Oceans Canada, Canadian Science Advisory Secretariat",
+  "title": "not confirmed",
+  "edition": "not confirmed",
+  "date": "not confirmed",
+  "url": "https://waves-vagues.dfo-mpo.gc.ca/library-bibliotheque/332156.pdf (fetch permission not granted); CSAS 2008/001 page redirected to a generic ISAS page",
+  "values": [
+   {"blank_context": "SAR ___/___", "value": "not confirmed", "quote": "", "where": "source not read"}
+  ],
+  "unsupported_wording": "not checked",
+  "note": "A DFO search lists 'Science Advisory Report 2008/001' near closed-containment results, but it was not opened and is not confirmed to be library item 332156. Do not fill from this."
+ },
+ {
+  "id": "drake",
+  "reachable": true,
+  "publisher": "International Solar Energy Society (ISES), SWC 2017 / SHC 2017 proceedings",
+  "title": "Drake Landing Solar Community: 10 Years of Operation",
+  "edition": "conference paper swc2017-0033",
+  "date": "2017",
+  "url": "https://proceedings.ises.org/paper/swc2017/swc2017-0033-Mesquita.pdf",
+  "values": [
+   {"blank_context": "efficiency measured ___", "value": "0.06 (6%), 2007-08", "quote": "Although the BTES only returned 152 GJ (6%) of the input energy for heating later in the first year", "where": "Section 3.2; Table 2"},
+   {"blank_context": "→ ___", "value": "0.54 (2016-17)", "quote": "Table 2 series: 0.06, 0.21, 0.35, 0.54, 0.36, 0.51, 0.56, 0.42, 0.32, 0.54", "where": "Table 2"},
+   {"blank_context": "(Mesquita et al. ___)", "value": "2017", "quote": "Solar World Congress 2017", "where": "paper header"}
+  ],
+  "unsupported_wording": "Table footnote: 'Apparent efficiency; does not account for year-to-year change in stored energy' — claim should say 'apparent efficiency'. Not a steady rise: 54% already reached in year 4, peak 0.56 in year 7, 0.32 in year 9.",
+  "note": "Authors: Mesquita, McClenahan, Thornton, Carriere, Wong."
+ }
+]
