@@ -1,0 +1,341 @@
+[
+ {
+  "id": "neuConnect",
+  "reachable": true,
+  "publisher": "City of Vancouver, Engineering Services, Neighbourhood Energy Utility",
+  "title": "Neighbourhood Energy Utility Connectivity Guidelines & Requirements",
+  "edition": "Revision 1 (Various amendments); Revision 0 March 2020",
+  "date": "May 2026",
+  "url": "/mnt/user-data/beyond-data-sources/public/neuConnect/full.pdf",
+  "values": [
+   {
+    "blank_context": "May ___",
+    "value": "2026",
+    "quote": "Neighbourhood Energy Utility  May 2026",
+    "where": "cover, pdf p.1; header every page"
+   },
+   {
+    "blank_context": "Rev.___",
+    "value": "1",
+    "quote": "1   May, 2026   Various amendments",
+    "where": "revision table, pdf p.2"
+   },
+   {
+    "blank_context": "network 'minimum ___°C'",
+    "value": "65",
+    "quote": "The NEU distribution network temperature is minimum 65°C.",
+    "where": "s.6.3, printed p.19 (pdf p.22)"
+   },
+   {
+    "blank_context": "building supply ___ °C year-round",
+    "value": "60",
+    "quote": "space heating and domestic hot water supply temperatures of 60°C on the building side of the ETS can always been achieved; Table 2 Supply Temperature 60°C",
+    "where": "s.6.3 and Table 2, pdf pp.22-23"
+   },
+   {
+    "blank_context": "maximum return water temperature of ___°C",
+    "value": "45",
+    "quote": "This effectively means a maximum return water temperature of 45°C must be achieved under all conditions regardless of time of year except for periods when DHWR heating is the only load.",
+    "where": "s.6.3 below Table 2/Figure 7, pdf p.23"
+   }
+  ],
+  "unsupported_wording": "Minor: 'year-round' is not the source's phrase (source: 60°C 'can always been achieved' / design condition). The return-temperature quote is cut before its exception 'except for periods when DHWR heating is the only load'. Other wording supported: 'does not provide cooling' (s.2.3, pdf p.6) and bill credit for building-generated waste heat (s.2.6.1, pdf p.8). The source says the NEU 'may' have opportunity to accept waste heat from cooling loads.",
+  "note": "Same document as cited (Rev. 1, May 2026). Network minimum 65°C sits on the NEU side of the ETS; 15°C minimum supply-return differential is what yields the 45°C maximum return."
+ },
+ {
+  "id": "lbnlCapture",
+  "reachable": true,
+  "publisher": "Lawrence Berkeley National Laboratory (Environmental Energy Technologies Division); sponsored by California Energy Commission PIER",
+  "title": "Direct Liquid Cooling for Electronic Equipment",
+  "edition": "report number printed as placeholder 'LBNL-XXXXX'",
+  "date": "March 2014 (eScholarship publication date 2014-05-01)",
+  "url": "/mnt/user-data/beyond-data-sources/public/lbnlCapture/full.pdf",
+  "values": [
+   {
+    "blank_context": "Coles & Greenberg ___",
+    "value": "2014",
+    "quote": "Henry Coles and Steve Greenberg ... March 2014",
+    "where": "title page, pdf p.2"
+   },
+   {
+    "blank_context": "'The best results ranged from ___ percent to ___ percent'",
+    "value": "67; 75",
+    "quote": "The best results ranged from 67 percent to 75 percent. These maximum heat capture results corresponded with low supply water temperatures (15°C–20°C; 59°F–68°F)",
+    "where": "Executive summary, Heat Capture: Maximum Efficiency, printed p.2 (pdf p.10)"
+   },
+   {
+    "blank_context": "___–___ % at ___ °C supply",
+    "value": "57–59 at 30",
+    "quote": "The heat captured for the 50 percent and 100 percent power level was 57 percent and 59 percent, respectively, using 30°C supply water temperature.",
+    "where": "same paragraph, pdf p.10"
+   },
+   {
+    "blank_context": "NREL/TP-___C0___-___",
+    "value": "not stated",
+    "quote": "",
+    "where": "not in this file (no NREL reference found)"
+   },
+   {
+    "blank_context": "RackCDU 'up to ___% of server heat'",
+    "value": "not stated",
+    "quote": "",
+    "where": "phrase 'up to' not found; not in this file"
+   },
+   {
+    "blank_context": "Heydari et al. ___ Appl. Therm. Eng. ___:___ cold plate ___ %",
+    "value": "not stated",
+    "quote": "",
+    "where": "no Heydari / Applied Thermal Engineering reference in this file"
+   }
+  ],
+  "unsupported_wording": "The NREL/TP and Heydari et al. citations and the 'up to __% of server heat' quote cannot be checked: those are separate documents not in this file. Coles & Greenberg parts are supported. Idle at 30°C was only 35% (the claim's range covers 50% and 100% power only).",
+  "note": "Asetek RackCDU field demo; heat captured is % of server power-cord power. Only the LBNL report is saved; NREL TP and Heydari paper need their own files."
+ },
+ {
+  "id": "dlrContracts",
+  "reachable": true,
+  "publisher": "Digital Realty Trust, Inc. (filed with U.S. SEC)",
+  "title": "Form 10-K Annual Report for the fiscal year ended December 31, 2024",
+  "edition": "FY2024 10-K (EDGAR accession 0001558370-25-001424)",
+  "date": "fiscal year ended December 31, 2024",
+  "url": "/mnt/user-data/beyond-data-sources/public/dlrContracts/page.html",
+  "values": [
+   {
+    "blank_context": "___-K",
+    "value": "10",
+    "quote": "FORM 10-K",
+    "where": "cover"
+   },
+   {
+    "blank_context": "FY2___",
+    "value": "024 (FY2024)",
+    "quote": "For the fiscal year ended December 31 , 2024",
+    "where": "cover"
+   },
+   {
+    "blank_context": "Item ___",
+    "value": "1",
+    "quote": "ITEM 1. BUSINESS",
+    "where": "Part I, Item 1 Business, product table (printed p.5)"
+   },
+   {
+    "blank_context": "___–___ MW colocation",
+    "value": "0 to 1",
+    "quote": "0 to 1 MW (Colocation)",
+    "where": "Item 1, Capacity product table"
+   },
+   {
+    "blank_context": "'Contract length generally ___-___ years'",
+    "value": "2-5",
+    "quote": "Contract length generally 2-5 years",
+    "where": "Item 1, Capacity product table"
+   },
+   {
+    "blank_context": ">___ MW",
+    "value": "1",
+    "quote": "> 1 MW (Scale & Hyperscale Powered Base Building ®)",
+    "where": "Item 1, Capacity product table"
+   },
+   {
+    "blank_context": "'generally ___-___+ years'",
+    "value": "5-10",
+    "quote": "Contract length generally 5-10+ years",
+    "where": "Item 1, Capacity product table"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Operator claim (company's own description of typical contract terms in its 10-K), not independently verified."
+ },
+ {
+  "id": "edmDES2022",
+  "reachable": true,
+  "publisher": "City of Edmonton",
+  "title": "District Energy Strategy",
+  "edition": "Attachment 1 to report IIS02148",
+  "date": "Publication Date: August 2022; committee date February 27, 2024",
+  "url": "/mnt/user-data/beyond-data-sources/public/edmDEstrategy2022/full.pdf",
+  "values": [
+   {
+    "blank_context": "Aug ___",
+    "value": "2022",
+    "quote": "Publication Date: August 2022",
+    "where": "cover, pdf p.1"
+   },
+   {
+    "blank_context": "Attachment ___",
+    "value": "1",
+    "quote": "Attachment 1",
+    "where": "cover, pdf p.1"
+   },
+   {
+    "blank_context": "IIS0___",
+    "value": "2148",
+    "quote": "February 27, 2024 - Urban Planning Committee | IIS02148",
+    "where": "cover footer, pdf p.1"
+   },
+   {
+    "blank_context": "___ Feb ___",
+    "value": "27 Feb 2024",
+    "quote": "February 27, 2024 - Urban Planning Committee",
+    "where": "cover footer, pdf p.1"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "PDF metadata: created 1 Sep 2022, modified 22 Feb 2024 (consistent with re-issue as committee attachment)."
+ },
+ {
+  "id": "bch_esi",
+  "reachable": true,
+  "publisher": "BC Hydro",
+  "title": "Energy storage incentive",
+  "edition": "web page (no version)",
+  "date": "not stated (footer '© 2026 BC Hydro'; page mentions March 12, 2025 Tesla exclusion)",
+  "url": "/mnt/user-data/beyond-data-sources/public/bch_esi/page.html",
+  "values": [],
+  "unsupported_wording": "Title wording: the page's title and heading are 'Energy storage incentive' (body: 'energy storage incentive (ESI)', 'Energy Storage Incentive offer'). 'Energy Storage System Incentive' appears only in the URL slug, not as a printed title.",
+  "note": "Page sits under Demand response for business; programme terms are BC Hydro's (utility programme page)."
+ },
+ {
+  "id": "edm_bl20001",
+  "reachable": true,
+  "publisher": "City of Edmonton",
+  "title": "Charter Bylaw 20001 - A Bylaw to adopt the Edmonton Zoning Bylaw (Schedule A: Zoning Bylaw 20001)",
+  "edition": "as passed 23 Oct 2023, effective 1 Jan 2024",
+  "date": "passed October 23, 2023; PDF modified 3 Jan 2024 (metadata)",
+  "url": "/mnt/user-data/beyond-data-sources/_large/edm_bl20001/full.pdf",
+  "values": [
+   {
+    "blank_context": "Charter Bylaw ___",
+    "value": "20001",
+    "quote": "Charter Bylaw 20001 / A Bylaw to adopt the Edmonton Zoning Bylaw",
+    "where": "p.1"
+   },
+   {
+    "blank_context": "PDF ___ Jan ___",
+    "value": "3 Jan 2024 (metadata only)",
+    "quote": "ModDate: Wed Jan 3 08:05:19 2024 PST",
+    "where": "PDF metadata, not printed text; printed effective date is 'January 1, 2024' (p.1 s.3)"
+   },
+   {
+    "blank_context": "s. ___ IM",
+    "value": "2.130",
+    "quote": "2.130 IM - Medium Industrial Zone",
+    "where": "Table of Contents, Part 2 Industrial Zones"
+   },
+   {
+    "blank_context": "s. ___ IH",
+    "value": "2.140",
+    "quote": "2.140 IH - Heavy Industrial Zone",
+    "where": "Table of Contents, Part 2 Industrial Zones"
+   },
+   {
+    "blank_context": "s. ___ s. ___ s. ___ (unlabelled)",
+    "value": "cannot check",
+    "quote": "",
+    "where": "claim gives no zone or topic for these three sections"
+   }
+  ],
+  "unsupported_wording": "'PDF ___ Jan ___' is metadata, not a printed date. The three unlabelled section numbers cannot be checked because the claim does not say what they are.",
+  "note": "Text-searchable PDF of 1058 pages. Phrase 'data cent' not found."
+ },
+ {
+  "id": "bch_primary",
+  "reachable": true,
+  "publisher": "BC Hydro",
+  "title": "Requirements for Customer-Owned Primary Services Supplied at 4 kV to 35 kV",
+  "edition": "Primary Guide R4 (File 1615.0.3)",
+  "date": "Issued 2025-02-20; effective 2025-06-30",
+  "url": "/mnt/user-data/beyond-data-sources/public/bch_primary/full.pdf",
+  "values": [
+   {
+    "blank_context": "Supplied at ___ kV to ___ kV",
+    "value": "4; 35",
+    "quote": "Requirements for Customer-Owned Primary Services Supplied at 4 kV to 35 kV",
+    "where": "title page, p.1"
+   },
+   {
+    "blank_context": "issued ___ Feb ___",
+    "value": "20 Feb 2025",
+    "quote": "Issued date: 2025-02-20",
+    "where": "p.1"
+   },
+   {
+    "blank_context": "effective ___ Jun ___",
+    "value": "30 Jun 2025",
+    "quote": "Effective date: 2025-06-30",
+    "where": "p.1"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Revision 4 was approved by H. Giesbrecht, P.Eng; the changes are summarised in equipment advisory 2025-001."
+ },
+ {
+  "id": "vanNMH",
+  "reachable": true,
+  "publisher": "not stated in file (records link to app.vancouver.ca NonMarketHousing pages)",
+  "title": "not stated in file (non-market housing records)",
+  "edition": "local JSON export",
+  "date": "not stated in file (file saved 14 Oct 2026, filesystem date only)",
+  "url": "/mnt/attach/outputs/data/raw/van/non-market-housing.json",
+  "values": [
+   {
+    "blank_context": "export ___ Oct ___",
+    "value": "not stated",
+    "quote": "",
+    "where": "no date field in the JSON; file mtime 2026-10-14 (filesystem, not printed)"
+   },
+   {
+    "blank_context": "___ projects",
+    "value": "641",
+    "quote": "641 records, 641 unique index_number",
+    "where": "counted with python"
+   }
+  ],
+  "unsupported_wording": "The 'City of Vancouver Open Data' name and the export date are not in the file itself. The fields are supported: project_status (Completed 581, Under Construction 27, Approved 26, Proposed 7), occupancy_year, operator, and unit counts by design/bedroom type (no total-units field).",
+  "note": "A sibling file non-market-housing_2026-10-16.csv exists with a different date in its name. Confirm which export the claim means."
+ },
+ {
+  "id": "stavangerBTES2023",
+  "reachable": true,
+  "publisher": "Copernicus Meetings / EGU General Assembly 2023 (author: Raoof Gholami, University of Stavanger)",
+  "title": "Thermal Energy Storage Integration with Waste Heat: What are the Challenges?",
+  "edition": "conference abstract EGU23-16904, doi:10.5194/egusphere-egu23-16904",
+  "date": "EGU General Assembly 2023, 23–28 April 2023",
+  "url": "/mnt/user-data/beyond-data-sources/public/stavangerBTES2023/page.html",
+  "values": [
+   {
+    "blank_context": "EGU2___-___",
+    "value": "EGU23-16904",
+    "quote": "Abstract EGU23-16904",
+    "where": "page header"
+   },
+   {
+    "blank_context": "from ___ to ___ years",
+    "value": "30; 10",
+    "quote": "shorten its lifespan from 30 to 10 years",
+    "where": "abstract, last sentence"
+   }
+  ],
+  "unsupported_wording": "none for the quotes, which are verbatim. Context left out: the lifespan cut is tied to storing heat 'at a temperature of more than 75 C', and the source says it 'may' happen.",
+  "note": "This is a conference abstract, not peer-reviewed. Measurements were taken on a BTES in Norway; the waste-heat supply was simulated."
+ },
+ {
+  "id": "iurc46276",
+  "reachable": true,
+  "publisher": "Indiana Utility Regulatory Commission",
+  "title": "Order of the Commission, Cause No. 46276 (Indiana Michigan Power Company: customer-specific clean capacity arrangement and demand response contract)",
+  "edition": "final order",
+  "date": "Approved: Apr 29 2026",
+  "url": "/mnt/user-data/beyond-data-sources/public/iurc46276/full.pdf",
+  "values": [
+   {
+    "blank_context": "Cause ___",
+    "value": "46276",
+    "quote": "CAUSE NO. 46276 ... APPROVED: APR 29 2026",
+    "where": "caption, p.1"
+   }
+  ],
+  "unsupported_wording": "none. The quote is verbatim: 'The Contract also contains demand response obligations designed to reduce I&M’s peak load and capacity obligations.' The next sentence reads 'These obligations include specified amounts of interruptible load, curtailment parameters, notification procedures, and compliance standards.' (Commission findings, printed p.10, citing Pet. Ex. 1, p. 13).",
+  "note": "The actual interruptible amounts are not printed in the public order; CAC says extensive redactions prevent public review. Google and Fort Wayne are confirmed on pp.1-3."
+ }
+]

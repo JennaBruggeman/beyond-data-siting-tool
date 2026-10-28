@@ -1,0 +1,522 @@
+[
+ {
+  "id": "vanRainPrivate2026",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Rainwater management on private property (drainage)",
+  "edition": "web page as printed to PDF (13 pp.); OCR text companion",
+  "date": "not printed on the page; PDF metadata CreationDate 16 Oct 2026; footer '© 2026 City of Vancouver'",
+  "url": "/mnt/attach/outputs/data/raw/van/rainwater_private.pdf; /mnt/attach/outputs/data/raw/van/rainwater_private_ocr.txt",
+  "values": [
+   {
+    "blank_context": "web page printed ___ Oct ___",
+    "value": "16 Oct 2026 (metadata only)",
+    "quote": "CreationDate: Fri Oct 16 11:00:04 2026 PDT",
+    "where": "PDF metadata (pdfinfo); no print date appears on the page itself"
+   },
+   {
+    "blank_context": "up to ___ FSR",
+    "value": "1.0",
+    "quote": "Up to 1.0 FSR on sites up to 1,000 m² (about 10,760 sq ft) - follow the small site pathway",
+    "where": "Requirements > Applicability, p. 1"
+   },
+   {
+    "blank_context": "sites up to ___ m²",
+    "value": "1,000",
+    "quote": "Up to 1.0 FSR on sites up to 1,000 m²",
+    "where": "Requirements > Applicability, p. 1"
+   },
+   {
+    "blank_context": "detention tank ___–___ L by site area",
+    "value": "3,400 to 7,200",
+    "quote": "Up to 400 m² 3,400 L 30mm ... 751.1 to 1000m² 7,200 L 50mm",
+    "where": "Small site pathway > Rainwater detention tank table (minimum active storage capacity)"
+   },
+   {
+    "blank_context": "permits opened after ___ Jan ___",
+    "value": "1 January 2026",
+    "quote": "For building permits opened after January 1, 2026, refer to the 2025 Vancouver Building By-law",
+    "where": "In-stream applications > Building permits opened after January 1, 2026"
+   },
+   {
+    "blank_context": "VBBL ___",
+    "value": "2025",
+    "quote": "2025 Vancouver Building By-law ... (By-law 14343, amended by By-law 14488), Book II, Division B, Article 2.4.2.5.",
+    "where": "In-stream applications"
+   },
+   {
+    "blank_context": "Art. ___",
+    "value": "2.4.2.5",
+    "quote": "Book II, Division B, Article 2.4.2.5.",
+    "where": "In-stream applications; also Specifications and Engineered pathway"
+   }
+  ],
+  "unsupported_wording": "none (print date is from PDF metadata, not printed on the page)",
+  "note": "Table figures are 'minimum active storage capacity', which the page says is not the overall tank volume. Last band printed as '751.1 to 1000m²' (likely 750.1; as printed). Map reference: 'Review map of existing non-potable water systems' (Program results). No tank costs anywhere on the page. Read from OCR text; checked p. 1 render."
+ },
+ {
+  "id": "bcucG34522A",
+  "reachable": true,
+  "publisher": "British Columbia Utilities Commission (BCUC)",
+  "title": "Creative Energy Vancouver Platforms Inc. Application for Rates for the Core Steam and Northeast False Creek Systems, Decision and Order G-345-22A",
+  "edition": "Order G-345-22A (3 pp.) and Decision (81 PDF pp.)",
+  "date": "Decision cover: November 29, 2022; order and decision signed 'this 16th day of March 2023'",
+  "url": "/mnt/attach/outputs/data/raw/bcuc/G-345-22A_order.pdf; G-345-22A_order.txt; G-345-22A_errata.pdf; G-345-22A_errata.txt",
+  "values": [
+   {
+    "blank_context": "Order G-___-___A",
+    "value": "345-22",
+    "quote": "ORDER NUMBER G-345-22A",
+    "where": "Order p. 1"
+   },
+   {
+    "blank_context": "___ Nov ___",
+    "value": "29 November 2022",
+    "quote": "on November 29, 2022",
+    "where": "Order p. 1; decision cover"
+   },
+   {
+    "blank_context": "J.B. upload ___ Oct ___",
+    "value": "not stated",
+    "quote": "",
+    "where": "not in source"
+   },
+   {
+    "blank_context": "from ___ Jan ___",
+    "value": "1 January 2022",
+    "quote": "consolidate the cost of service and unify the rate base and rates for the NEFC system with the Core Steam system under the Proposed Rate Design, effective January 1, 2022.",
+    "where": "Order para. 1, p. 2"
+   },
+   {
+    "blank_context": "___-page decision",
+    "value": "81 PDF pages (decision body numbered i–ii and 1–68, plus order and Appendices A–B)",
+    "quote": "pdfinfo Pages: 81; last body page footer 'Order G-345-22A 68'",
+    "where": "G-345-22A_errata.pdf"
+   }
+  ],
+  "unsupported_wording": "'with errata': the file named _errata contains the full decision; no BCUC errata notice or list of corrections was found in it (only Creative Energy's April 21, 2022 'evidentiary update and errata' to its application). The 'A' order is dated 16 March 2023, not only 29 Nov 2022.",
+  "note": "System Contribution Charge supported: 'plus a System Contribution Charge to customers connected to the NEFC system' (Order para. 2). Load forecast and revenue requirement are decision Sections 4.0 and 5.0."
+ },
+ {
+  "id": "vanWaterPermits",
+  "reachable": true,
+  "publisher": "City of Vancouver Open Data Portal",
+  "title": "Operating permits - water systems — water quality reports",
+  "edition": "dataset landing page (HTML shell; data rendered by JavaScript, not saved)",
+  "date": "dateModified 2026-10-25T13:50:30+00:00; dateCreated 2022-06-29",
+  "url": "/mnt/user-data/beyond-data-sources/public/vanWaterPermits/page.html",
+  "values": [
+   {
+    "blank_context": "J.B. download ___ Oct ___",
+    "value": "not stated (info.json says page saved 2026-10-25)",
+    "quote": "",
+    "where": "not in page"
+   },
+   {
+    "blank_context": "___ permits",
+    "value": "not stated",
+    "quote": "",
+    "where": "records_count field present but empty in saved HTML"
+   },
+   {
+    "blank_context": "___ active",
+    "value": "not stated",
+    "quote": "",
+    "where": ""
+   },
+   {
+    "blank_context": "cooling towers ___",
+    "value": "not stated",
+    "quote": "",
+    "where": ""
+   },
+   {
+    "blank_context": "___ active with locations",
+    "value": "not stated",
+    "quote": "",
+    "where": ""
+   },
+   {
+    "blank_context": "rainwater harvesting ___",
+    "value": "not stated",
+    "quote": "",
+    "where": ""
+   },
+   {
+    "blank_context": "___ active",
+    "value": "not stated",
+    "quote": "",
+    "where": ""
+   }
+  ],
+  "unsupported_wording": "Wrong dataset saved: page is 'Operating permits - water systems — water quality reports' (all permits since 2019 with full water-quality history), which itself points to the cited one as a 'companion dataset Issued operating permits – water systems'. No counts, no active counts, no locations, no renewal dates in the file. Source says 'rainwater harvesting/non-potable water systems', not 'alternative water systems'.",
+  "note": "Description does say permits are required for 'cooling towers, decorative water features, building water treatment systems and rainwater harvesting/non-potable water systems' and mentions 'Legionella pneumophila'. Water-quality data are 'self-reported by permit holders'. Re-save the 'Issued operating permits – water systems' dataset (CSV export) to check counts."
+ },
+ {
+  "id": "aesoP2Aupd2026",
+  "reachable": true,
+  "publisher": "Alberta Electric System Operator (AESO)",
+  "title": "Large Load Integration Phase 2A BYOG Process Proposal (stakeholder session deck)",
+  "edition": "text extract only; no PDF of the deck in files",
+  "date": "JUNE 24, 2026 (cover)",
+  "url": "/mnt/attach/outputs/data/raw/ab/aeso_p2a_update_2026-06-24.txt",
+  "values": [
+   {
+    "blank_context": "Phase ___A",
+    "value": "2",
+    "quote": "Large Load Integration Phase 2A",
+    "where": "cover"
+   },
+   {
+    "blank_context": "___ Jun ___",
+    "value": "24 June 2026",
+    "quote": "JUNE 24, 2026",
+    "where": "cover"
+   },
+   {
+    "blank_context": "updated ___ Jun ___",
+    "value": "not stated",
+    "quote": "",
+    "where": "no update date in file"
+   },
+   {
+    "blank_context": "About ___ GW each quarter",
+    "value": "20",
+    "quote": "Consistently 20 GW of requested load",
+    "where": "slide 11 Executive Summary"
+   },
+   {
+    "blank_context": "since Q2 ___",
+    "value": "2025 (chart starts Q1-25 at 14.4 GW; Q2-25 onward 19.2–21.4 GW)",
+    "quote": "Data Centre Cumulative Requested Load ... Q1-25 Q2-25 Q3-25 Q4-25 Q1-26 Q2-26",
+    "where": "slide 11 chart"
+   },
+   {
+    "blank_context": "___ GW Q2 ___",
+    "value": "19.6 GW for Q2-25 by text-layout alignment; 21.4 GW aligns with Q3-25",
+    "quote": "21.4 GW / 19.6 GW 19.4 GW 20.1 GW 19.2 GW",
+    "where": "slide 11 chart (label positions from pdftotext layout; no image to confirm)"
+   },
+   {
+    "blank_context": "Phase ___ is modular; ___A/___B/___C",
+    "value": "2; 2A, 2B, 2C",
+    "quote": "Phase 2A – BYOG / Phase 2B – ISO Tariff / Phase 2C – Grid Partners",
+    "where": "slide 18 Modular Approach to Phase 2"
+   },
+   {
+    "blank_context": "___ MW applications",
+    "value": "74.9 (facilities applying at 74.9 MW); the counts are for 'Loads 25 - 75 MW' on the project list",
+    "quote": "Facilities are applying at an initial 74.9 MW",
+    "where": "slide 36"
+   },
+   {
+    "blank_context": "rose from ___ (Jun ___)",
+    "value": "9 (June 2025)",
+    "quote": "Project List Loads 25 - 75 MW ... 9 June 2025",
+    "where": "slide 36"
+   },
+   {
+    "blank_context": "to ___ (Jun ___)",
+    "value": "18 (June 2026)",
+    "quote": "18 June 2026",
+    "where": "slide 36"
+   },
+   {
+    "blank_context": "___–___ MW band",
+    "value": "25–75",
+    "quote": "Loads 25 - 75 MW",
+    "where": "slide 36"
+   },
+   {
+    "blank_context": "may lower the ___ MW threshold",
+    "value": "75",
+    "quote": "The AESO may reduce the limit if a high rate of sub-75 MW applications continues",
+    "where": "slide 37"
+   },
+   {
+    "blank_context": "late July–early August ___",
+    "value": "2026 (year from deck date / work plan)",
+    "quote": "Final BYOG Process published late July to early August depending on feedback received; Aug. 2026 – BYOG Process Rollout",
+    "where": "slides 72, 20"
+   }
+  ],
+  "unsupported_wording": "Title: deck says 'BYOG Process Proposal', not 'Process Update' ('BYOG Process Update' appears only as the feedback-form name). No 'updated' date. '21.4 GW Q2 2025' not supported by layout (21.4 sits under Q3-25; Q2-25 = 19.6). Slide 36 counts are project-list loads in the 25–75 MW band, not explicitly '74.9 MW applications'. Phase 2C 'not yet set' is not stated (deck says future modules 'will be created and refined as needed').",
+  "note": "Load management supported verbatim (slide 69): 'Data centres will be prioritized above other loads when there is a need to reduce load to manage supply related operating conditions'; 'If firm load shed is needed in an emergency grid condition, data centres will be required to reduce load before all other firm loads'; 'Curtailment options may include pro rata, blocks, and/or rotations'. Distribution: facilities >75 MW on distribution '“bypass” the large load limit and BYOG'; 'The AESO currently has limited tools' (slide 38). Requested-load figures are AESO-reported queue figures."
+ },
+ {
+  "id": "ecccCFRmarket2024",
+  "reachable": true,
+  "publisher": "Environment and Climate Change Canada (Canada.ca)",
+  "title": "Clean Fuel Regulations credit market report, June 2024",
+  "edition": "HTML version (first Annual CFR Credit Market Data Report)",
+  "date": "June 2024 (title); Page details date modified 2024-07-12",
+  "url": "/mnt/user-data/beyond-data-sources/public/ecccCFRmarket2024/page.html",
+  "values": [
+   {
+    "blank_context": "report (___ Jun ___)",
+    "value": "June 2024",
+    "quote": "Clean Fuel Regulations credit market report, June 2024",
+    "where": "title"
+   },
+   {
+    "blank_context": "HDRD VWA CI ___ gCO2e/MJ in ___",
+    "value": "76.4 in 2022",
+    "quote": "Hydrogenation-Derived Renewable Diesel 0 0 502,095 224,621 36.0 80.0 76.4",
+    "where": "Table 6a (2022), Weighted Average CI by Volume"
+   },
+   {
+    "blank_context": "(range ___–___)",
+    "value": "36.0–80.0",
+    "quote": "Min CI Used 36.0, Max CI Used 80.0",
+    "where": "Table 6a"
+   },
+   {
+    "blank_context": "and ___ in ___",
+    "value": "65.3 in 2023",
+    "quote": "Hydrogenation-Derived Renewable Diesel - 2 - 2 1,244,358 1,025,026 15.0 80.0 65.3",
+    "where": "Table 6b (2023)"
+   },
+   {
+    "blank_context": "(___–___)",
+    "value": "15.0–80.0",
+    "quote": "Min 15.0, Max 80.0",
+    "where": "Table 6b"
+   },
+   {
+    "blank_context": "approved Fuel LCA Model CIs for HDRD median ___",
+    "value": "36.0 (48 approved CIs; average 37.3)",
+    "quote": "Hydrogenation-Derived Renewable Diesel 48 36.0 37.3",
+    "where": "Table 7"
+   },
+   {
+    "blank_context": "Alberta Category ___ credits",
+    "value": "2",
+    "quote": "Compliance Category 2",
+    "where": "Tables 3a/3b"
+   },
+   {
+    "blank_context": "___ t in ___",
+    "value": "139,000 t (2022); 636,752 t (2023)",
+    "quote": "Alberta - 139,000 2,691 / Alberta - 636,752 6,766",
+    "where": "Tables 3a (2022) and 3b (2023)"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Claim's single Alberta figure is ambiguous: pick 2022 (139,000) or 2023 (636,752) t CO2e. HDRD 2022 is all imported (produced volume 0). CI tables are national only; provincial tables give credits, not CI."
+ },
+ {
+  "id": "smoke2026",
+  "reachable": true,
+  "publisher": "Government of Alberta (Alberta.ca)",
+  "title": "Air indicators – Wildfire smoke",
+  "edition": "web page",
+  "date": "Results 'Last updated: February 2026'; © 2026",
+  "url": "/mnt/user-data/beyond-data-sources/public/smoke2026/page.html",
+  "values": [
+   {
+    "blank_context": "PM2.___",
+    "value": "5 (PM2.5)",
+    "quote": "daily average PM 2.5 > 15 µg/m 3",
+    "where": "Summary / Wildfire smoke impacts"
+   },
+   {
+    "blank_context": "above ___ µg/m³",
+    "value": "15",
+    "quote": "Only days with daily average PM 2.5 concentration greater than 15 µg/m 3 were included",
+    "where": "Limitations of the dataset"
+   },
+   {
+    "blank_context": "more than ___ smoke days",
+    "value": "100",
+    "quote": "wildfire smoke impacted some northern Alberta stations for more than 100 days of the year",
+    "where": "Changes over time > Wildfire smoke impacts"
+   },
+   {
+    "blank_context": "in ___",
+    "value": "2023",
+    "quote": "In 2023, wildfire smoke impacted some northern Alberta stations for more than 100 days",
+    "where": "same"
+   },
+   {
+    "blank_context": "Metro Vancouver ___-day advisory in ___",
+    "value": "not stated",
+    "quote": "",
+    "where": "Metro Vancouver not mentioned in file"
+   },
+   {
+    "blank_context": "two multi-day advisories in ___",
+    "value": "not stated",
+    "quote": "",
+    "where": ""
+   },
+   {
+    "blank_context": "(___ summary)",
+    "value": "not stated",
+    "quote": "",
+    "where": ""
+   }
+  ],
+  "unsupported_wording": "All Metro Vancouver content (multi-day advisory, two advisories, 'seven of the last ten years', the summary year) is not in this file; the word 'Vancouver' does not appear. Needs a separate Metro Vancouver source.",
+  "note": "Edmonton: only 'In 2024, central and northern Alberta saw more wildfire smoke impacted days (particularly Fort McMurray and Edmonton)'; station values are in interactive Figures 1/3, not in saved HTML. Page does not give smoke-hour counts. Fort McMurray-Athabasca Valley: 61 days in 2024."
+ },
+ {
+  "id": "sscConsolidation",
+  "reachable": true,
+  "publisher": "Shared Services Canada (Canada.ca)",
+  "title": "Closing the door on legacy problems",
+  "edition": "web story",
+  "date": "Page details 2026-02-06",
+  "url": "/mnt/user-data/beyond-data-sources/public/sscConsolidation/page.html",
+  "values": [
+   {
+    "blank_context": "more than ___",
+    "value": "500",
+    "quote": "it has closed more than 500 of those original data centres",
+    "where": "Forward together"
+   },
+   {
+    "blank_context": "of the ___ legacy",
+    "value": "720",
+    "quote": "In 2011, SSC inherited 720 legacy data centres",
+    "where": "Forward together"
+   },
+   {
+    "blank_context": "since ___",
+    "value": "2011",
+    "quote": "In 2011, SSC inherited 720 legacy data centres",
+    "where": "Forward together"
+   }
+  ],
+  "unsupported_wording": "none (minor: page does not say 'since 2011' outright; it says SSC inherited 720 in 2011 and 'has now' closed more than 500)",
+  "note": "Operator claim: SSC self-reporting on its own programme, in a promotional 'Stories' piece."
+ },
+ {
+  "id": "emrbClimate2023",
+  "reachable": true,
+  "publisher": "Edmonton Metropolitan Region Board (prepared by Associated Engineering Alberta Ltd.)",
+  "title": "From Risk to Resilience: EMRB Climate Resilience Study",
+  "edition": "122 pp. PDF (copy hosted on leduc.ca)",
+  "date": "no date printed in text; PDF metadata 21 Dec 2023; URL filename '2023'",
+  "url": "/mnt/user-data/beyond-data-sources/public/emrbClimate2023/full.pdf",
+  "values": [
+   {
+    "blank_context": "study (___)",
+    "value": "2023 (metadata/URL only)",
+    "quote": "CreationDate: Thu Dec 21 2023",
+    "where": "PDF metadata"
+   },
+   {
+    "blank_context": "RCP8.___",
+    "value": "5",
+    "quote": "Representative Concentration Pathway 8.5 (RCP 8.5)",
+    "where": "Section 2, p. 22 text"
+   },
+   {
+    "blank_context": "___s",
+    "value": "2050s (2041-2070)",
+    "quote": "Table 2-1 provides results for one future time period: the 2050s (the annual average over 2041-2070)",
+    "where": "Section 2, PDF p. 22"
+   },
+   {
+    "blank_context": "HDD ___ → ___",
+    "value": "5,657 → 4,331",
+    "quote": "Heating Degree Days (Degree Days) 5,657 4,331 -1,326 3,867 4,869",
+    "where": "Table 2-1, PDF p. 22"
+   },
+   {
+    "blank_context": "CDD ___ → ___",
+    "value": "12 → 144",
+    "quote": "Cooling Degree Days (Degree Days) 12 144 132 66 259",
+    "where": "Table 2-1"
+   },
+   {
+    "blank_context": "days ≥ ___ °C",
+    "value": "30",
+    "quote": "Very hot days [≥ +30°C] (Days)",
+    "where": "Table 2-1"
+   },
+   {
+    "blank_context": "___ → ___",
+    "value": "1 → 11",
+    "quote": "Very hot days [≥ +30°C] (Days) 1 11 10 2 28",
+    "where": "Table 2-1"
+   },
+   {
+    "blank_context": "(___th–___th percentile ranges)",
+    "value": "10th–90th (HDD 3,867–4,869; CDD 66–259; hot days 2–28)",
+    "quote": "10th Percentile / 90th Percentile",
+    "where": "Table 2-1 headers"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Historical values are modelled (1976-2005), not observed; ensemble of 11 simulations from 4 RCMs. Study date not printed in text."
+ },
+ {
+  "id": "lbnlLargeLoad2025",
+  "reachable": true,
+  "publisher": "Lawrence Berkeley National Laboratory (with The Brattle Group and U.S. DOE)",
+  "title": "Electricity Rate Designs for Large Loads: Evolving Practices and Opportunities (Technical Brief)",
+  "edition": "final, 14 pp.",
+  "date": "January 2025",
+  "url": "/mnt/user-data/beyond-data-sources/public/lbnlLargeLoad2025/full.pdf",
+  "values": [
+   {
+    "blank_context": "LBNL (Jan ___)",
+    "value": "2025",
+    "quote": "January 2025",
+    "where": "cover p. 1"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Mechanisms present: stranded assets ('stranded assets from underutilized utility system investments if the forecasted electricity demand fails to materialize', p. 2), forecast error (p. 4), avoided charges from BTM generation ('avoid certain charges', p. 5). Protections: minimum demand/charges, exit fee, collateral, contribution in aid of construction. Gives tariff terms (e.g. 85% minimum demand, 3-year exit fee) but no aggregate rate effect. U.S. utilities only."
+ },
+ {
+  "id": "salamanca2014",
+  "reachable": true,
+  "publisher": "AGU / Journal of Geophysical Research: Atmospheres",
+  "title": "Anthropogenic heating of the urban environment due to air conditioning",
+  "edition": "J. Geophys. Res. Atmos., 119, 5949–5965, doi:10.1002/2013JD021225",
+  "date": "Published online 28 MAY 2014",
+  "url": "/mnt/attach/outputs/data/raw/papers/salamanca2014_phoenix_ac.pdf",
+  "values": [
+   {
+    "blank_context": "Salamanca et al. ___",
+    "value": "2014",
+    "quote": "Salamanca, F., M. Georgescu, A. Mahalov, M. Moustaoui, and M. Wang (2014)",
+    "where": "p. 5949 citation box"
+   },
+   {
+    "blank_context": "___-day Phoenix heat event",
+    "value": "10",
+    "quote": "We simulate a 10 day extreme heat period over the Phoenix metropolitan area",
+    "where": "Abstract"
+   },
+   {
+    "blank_context": "read ___ Oct ___",
+    "value": "not stated",
+    "quote": "",
+    "where": "not in source"
+   },
+   {
+    "blank_context": "raised ___ m air temperature",
+    "value": "2",
+    "quote": "increased the mean 2 m air temperature by more than 1°C for some urban locations",
+    "where": "Abstract"
+   },
+   {
+    "blank_context": "by more than ___ °C",
+    "value": "1",
+    "quote": "more than 1°C",
+    "where": "Abstract"
+   },
+   {
+    "blank_context": "salamanca2____ (file path)",
+    "value": "2014",
+    "quote": "salamanca2014_phoenix_ac.pdf",
+    "where": "file name"
+   }
+  ],
+  "unsupported_wording": "none (minor: abstract says waste heat 'was maximum during the day, but the mean effect was negligible near the surface'; 'mean daytime effect' is a fair paraphrase)",
+  "note": "Peer-reviewed. Model: WRF coupled to a multilayer building energy scheme. 'increases cooling demands' is in the abstract."
+ }
+]

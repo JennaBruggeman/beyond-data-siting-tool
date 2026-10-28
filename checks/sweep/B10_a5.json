@@ -1,0 +1,376 @@
+[
+ {
+  "id": "bchRS2289",
+  "reachable": true,
+  "publisher": "BC Hydro",
+  "title": "Customer generation",
+  "edition": "web page (saved HTML)",
+  "date": "not stated on page body (embedded timestamp 2024-05-28T16:48:25 at top of saved page, which predates the July 2026 content)",
+  "url": "/mnt/user-data/beyond-data-sources/public/bchRS2289/page.html",
+  "values": [
+   {
+    "blank_context": "RS ___ net metering",
+    "value": "1289",
+    "quote": "BC Hydro has closed the net metering service rate (Rate Schedule 1289) to new customers.",
+    "where": "'Net metering' notice paragraph near end of page"
+   },
+   {
+    "blank_context": "from ___ Jul ___",
+    "value": "1 / 2026",
+    "quote": "Effective July 1, 2026, a new self-generation service rate (Rate Schedule 2289) applies.",
+    "where": "same paragraph"
+   },
+   {
+    "blank_context": "RS ___ (self-generation)",
+    "value": "2289",
+    "quote": "placed on the self-generation service rate (Rate Schedule 2289)",
+    "where": "'Self-generation versus community generation' section"
+   },
+   {
+    "blank_context": "'up to ___ kW per phase'",
+    "value": "100",
+    "quote": "send up to 100 kW AC per phase of excess energy generation back to BC Hydro",
+    "where": "'Self-generation versus community generation' section"
+   },
+   {
+    "blank_context": "bill credit of $___/kWh",
+    "value": "0.10",
+    "quote": "BC Hydro applies a credit of $0.10 per kWh to your bill",
+    "where": "'How you get credited' paragraph"
+   },
+   {
+    "blank_context": "community generation up to ___ MW net injection",
+    "value": "2",
+    "quote": "With community generation you can send up to 2 megawatt (MW) AC of extra generation back to BC Hydro",
+    "where": "'Maximum net injection' subsection"
+   }
+  ],
+  "unsupported_wording": "Minor: page says net metering 'has closed' to new customers (not 'closing'); quoted phrase drops 'AC' (page: 'up to 100 kW AC per phase').",
+  "note": "Utility tariff description, not the tariff itself; community generation allowance also depends on number/type of benefitting customers per page."
+ },
+ {
+  "id": "epcorReclaimed",
+  "reachable": true,
+  "publisher": "EPCOR Water Services (submitted to Alberta Environment and Protected Areas)",
+  "title": "EPCOR Water Services Edmonton, Alberta 2024 Annual Wastewater System Report (Part I: 2024 Annual Wastewater Treatment Plant Report, Gold Bar WWTP)",
+  "edition": "2024 report year, Approval to Operate No. 639-03-07",
+  "date": "February 2025",
+  "url": "/mnt/user-data/beyond-data-sources/public/epcorReclaimed/full.pdf",
+  "values": [
+   {
+    "blank_context": "EPCOR ___ (year)",
+    "value": "2024",
+    "quote": "2024 Annual Wastewater System Report",
+    "where": "cover, PDF p.1"
+   },
+   {
+    "blank_context": "p.___",
+    "value": "PDF p.14; printed 'Page 10 of 28' (Part I)",
+    "quote": "Page 10 of 28",
+    "where": "footer of the page with the quote"
+   },
+   {
+    "blank_context": "___ ML",
+    "value": "4,226",
+    "quote": "with 4,226 ML (3.9%) of reclaimed water provided to industrial customers.",
+    "where": "PDF p.14 (Part I p.10), summary of 2024 flows"
+   },
+   {
+    "blank_context": "(___%)",
+    "value": "3.9",
+    "quote": "4,226 ML (3.9%)",
+    "where": "same"
+   }
+  ],
+  "unsupported_wording": "Title 'Edmonton Wastewater Quality Annual Report' is not printed; the document is titled '2024 Annual Wastewater System Report' (Part I '2024 Annual Wastewater Treatment Plant Report'). Page number must be qualified (PDF p.14 vs printed Part I p.10).",
+  "note": "Quoted sentence verbatim. Confirmed no price is stated; customers are not named (only 'industrial customers'). 3.9% is of total raw influent (107,555 ML)."
+ },
+ {
+  "id": "census2021DA",
+  "reachable": true,
+  "publisher": "Statistics Canada (boundary file); extracted CSV is a derived local file",
+  "title": "Dissemination Area 2021, Cartographic Boundary Files (CBF) [lda_000b21a_e]; census2021_DA_selected_Vancouver_Edmonton_regions.csv (derived extract)",
+  "edition": "2021 Census",
+  "date": "Boundary metadata: 2021-10 creation, 2021-11 publication",
+  "url": "/mnt/attach/outputs/data/raw/census/lda_000b21a_e.zip; /mnt/attach/outputs/data/raw/census/census2021_DA_selected_Vancouver_Edmonton_regions.csv (Claude Link copies byte-identical)",
+  "values": [
+   {
+    "blank_context": "Census Profile ___ dissemination areas",
+    "value": "2021 (boundary file only)",
+    "quote": "Dissemination Area 2021, Cartographic Boundary Files (CBF)",
+    "where": "lda_000b21a_e.xml metadata"
+   },
+   {
+    "blank_context": "___-___-X2___ BC and Prairies files",
+    "value": "not stated in the listed files; the 98-401 zips in the same folder are 98-401-X2021024 and 98-401-X2021025 but are census subdivision files",
+    "quote": "Census Profile, 2021 - Census Subdivisions in Alberta / Catalogue number: 98-401-X2021024 ... Census Subdivisions in British Columbia / Catalogue number: 98-401-X2021025",
+    "where": "*_English_meta.txt in /mnt/attach/outputs/data/raw/census/98-401-X202102{4,5}_eng_CSV.zip (not in item's files list); GEO_LEVEL column contains only 'Census subdivision'"
+   },
+   {
+    "blank_context": "___ DA cartographic boundaries",
+    "value": "2021",
+    "quote": "Dissemination Area 2021",
+    "where": "xml metadata"
+   },
+   {
+    "blank_context": "(___-___-X, ...) boundary catalogue no.",
+    "value": "not stated",
+    "quote": "—",
+    "where": "not printed in lda_000b21a_e.xml"
+   },
+   {
+    "blank_context": "lda____b2___a_e",
+    "value": "lda_000b21a_e",
+    "quote": "lda_000b21a_e.shp",
+    "where": "zip listing"
+   },
+   {
+    "blank_context": "downloads ___ Oct ___",
+    "value": "not stated (local file mtime 15 Oct is not printed by the source)",
+    "quote": "—",
+    "where": "—"
+   },
+   {
+    "blank_context": "CD ___ (Greater Vancouver)",
+    "value": "5915",
+    "quote": "cd column = 5915",
+    "where": "derived CSV"
+   },
+   {
+    "blank_context": "___ DAs (CD 5915)",
+    "value": "3590",
+    "quote": "3590 rows with cd=5915; boundary DBF also has 3590 DAUIDs starting 5915",
+    "where": "derived CSV row count; lda_000b21a_e.dbf"
+   },
+   {
+    "blank_context": "population ___ (CD 5915)",
+    "value": "2,642,825 (sum computed, not printed)",
+    "quote": "sum of pop2021 for cd=5915",
+    "where": "derived CSV (computed)"
+   },
+   {
+    "blank_context": "CD ___ (Edmonton region)",
+    "value": "4811",
+    "quote": "cd column = 4811",
+    "where": "derived CSV"
+   },
+   {
+    "blank_context": "Division No. ___",
+    "value": "not stated (CD names not in any saved file)",
+    "quote": "—",
+    "where": "—"
+   },
+   {
+    "blank_context": "___ DAs (CD 4811)",
+    "value": "1952",
+    "quote": "1952 rows with cd=4811; boundary DBF also 1952",
+    "where": "derived CSV; dbf"
+   }
+  ],
+  "unsupported_wording": "The saved 98-401-X2021024/025 Census Profile files are census subdivision level for Alberta and BC, not DA-level 'BC and Prairies' files; no DA-level Census Profile file is in the saved set. 'Greater Vancouver' and 'Division No. __' names are not printed in any saved file. Download date and boundary catalogue number not printed.",
+  "note": "Counts are from a derived extract made locally, not a StatCan-published table; population total is a computed sum. DA counts agree with the boundary file."
+ },
+ {
+  "id": "gsa_gpg052",
+  "reachable": true,
+  "publisher": "US General Services Administration, Public Buildings Service (Green Proving Ground)",
+  "title": "Blowdown Recovery System for Cooling Towers",
+  "edition": "GPG-052",
+  "date": "August 2023",
+  "url": "/mnt/user-data/beyond-data-sources/public/gsa_gpg052/full.pdf",
+  "values": [
+   {
+    "blank_context": "GPG-___",
+    "value": "052",
+    "quote": "GPG-052         AUGUST 2023",
+    "where": "p.1 header"
+   },
+   {
+    "blank_context": "Aug ___",
+    "value": "2023",
+    "quote": "AUGUST 2023",
+    "where": "p.1 header"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "NREL role printed p.1: 'Green Proving Ground (GPG) worked with researchers from the National Renewable Energy Laboratory (NREL) to assess...'. 'Findings' appears as section heading and 'These Findings are based...' (p.4)."
+ },
+ {
+  "id": "van_vbbl2025_27",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Vancouver Building By-law 2025, Book II: Plumbing Systems, Insert Pages",
+  "edition": "Convenience Copy; By-law 14343 as amended by By-law 14488",
+  "date": "effective September 15, 2025; amended effective January 1, 2026",
+  "url": "/mnt/user-data/beyond-data-sources/public/van_vbbl2025_27/full.pdf",
+  "values": [
+   {
+    "blank_context": "Building By-law ___",
+    "value": "2025",
+    "quote": "Vancouver Building By-law 2025",
+    "where": "cover"
+   },
+   {
+    "blank_context": "By-law ___ (base)",
+    "value": "14343",
+    "quote": "By-law 14343, effective September 15, 2025",
+    "where": "cover"
+   },
+   {
+    "blank_context": "effective ___ Sep ___",
+    "value": "15 / 2025",
+    "quote": "effective September 15, 2025",
+    "where": "cover"
+   },
+   {
+    "blank_context": "amended by By-law ___",
+    "value": "14488",
+    "quote": "and as amended by By-law 14488, effective January 1, 2026",
+    "where": "cover"
+   },
+   {
+    "blank_context": "effective ___ Jan ___",
+    "value": "1 / 2026",
+    "quote": "effective January 1, 2026",
+    "where": "cover"
+   },
+   {
+    "blank_context": "Div. B, Art. ___–___",
+    "value": "not determinable from blanked claim; candidate water-use articles printed: 2.2.11.4. Non-recirculating Applications, 2.2.11.5. Geoexchange Systems, 2.2.11.6. Cooling Towers, 2.2.11.7. Decorative Water Features",
+    "quote": "2.2.11.6. Cooling Towers ... 21",
+    "where": "table of contents"
+   },
+   {
+    "blank_context": "Table ___",
+    "value": "not determinable; tables printed include 2.2.1.7., 2.2.10.6., 2.2.11.1., 2.2.11.6., 2.2.11.7., 2.7.7.1.",
+    "quote": "standard set out in Table 2.2.11.6. or 2.2.11.7.",
+    "where": "Div. B 2.2.1.7 area"
+   }
+  ],
+  "unsupported_wording": "none (cover wording, numbers and 'Convenience Copy' match); article/table numbers could not be checked because they are blanked without context.",
+  "note": "Cover: 'These \"insert pages\" are not an official version.' Some pages carry footer 'Effective September 15, 2025 to December 31, 2025'. Caller should confirm intended Art./Table numbers."
+ },
+ {
+  "id": "edm_matrix",
+  "reachable": true,
+  "publisher": "City of Edmonton",
+  "title": "Edmonton Zoning Bylaw Land Use & Zoning Matrix: Uses in Standard Zones",
+  "edition": "October 2026 (convenience document)",
+  "date": "October 2026",
+  "url": "/mnt/user-data/beyond-data-sources/public/edm_matrix/full.pdf",
+  "values": [
+   {
+    "blank_context": "Zoning Bylaw ___",
+    "value": "20001",
+    "quote": "ZONING BYLAW 20001",
+    "where": "p.3 header; also PDF metadata title"
+   },
+   {
+    "blank_context": "October ___",
+    "value": "2026",
+    "quote": "October 2026",
+    "where": "cover and page footers"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Cover: 'This document is created for convenience only.'"
+ },
+ {
+  "id": "hillingdon_up4",
+  "reachable": true,
+  "publisher": "London Borough of Hillingdon (Report of the Head of Development Management and Building Control)",
+  "title": "Committee Report, 75111/APP/2025/739, Union Park UP4, North Hyde Gardens (applicant Ark UP4 Ltd.)",
+  "edition": "Hillingdon Planning Committee – 4th September 2025",
+  "date": "4 September 2025",
+  "url": "/mnt/user-data/beyond-data-sources/public/hillingdon_up4/full.pdf",
+  "values": [],
+  "unsupported_wording": "none",
+  "note": "No blanks. 'Ark UP4' is the applicant name ('Applicant: Ark UP4 Ltd.'); site is 'Union Park UP4'. Recommendation: GRANT subject to s106. Claim omits date and reference number; consider adding."
+ },
+ {
+  "id": "van6555",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Noise Control By-law No. 6555",
+  "edition": "Consolidated for convenience only, amended to include By-law No. 14786",
+  "date": "consolidated to July 14, 2026",
+  "url": "/mnt/attach/outputs/data/raw/van/6555c.pdf",
+  "values": [
+   {
+    "blank_context": "By-law ___",
+    "value": "6555",
+    "quote": "NOISE CONTROL BY-LAW NO. 6555",
+    "where": "cover"
+   },
+   {
+    "blank_context": "Schedule B.___ (intermediate)",
+    "value": "1",
+    "quote": "\"intermediate zone\" means those areas described in Schedule B and that portion of the city shown outlined on Schedule B.1",
+    "where": "s.1.2 definitions"
+   },
+   {
+    "blank_context": "ss. ___–___ continuous-sound limits",
+    "value": "2.1–2.3",
+    "quote": "2.1 In a quiet zone ... 2.2 In an intermediate zone ... 2.3 In an activity zone or an event zone, a person must not make ... continuous sound",
+    "where": "Part 2, PDF pp.5–6"
+   },
+   {
+    "blank_context": "data/raw/van/___c.pdf",
+    "value": "6555",
+    "quote": "6555c.pdf",
+    "where": "file name"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Schedule A 'Activity Zone' (PDF p.14), Schedule B 'Intermediate Zone' (p.24), Schedule B.1 (p.35, map). Intermediate-zone definition excludes areas in Schedule G.1."
+ },
+ {
+  "id": "epicDOE",
+  "reachable": true,
+  "publisher": "US Department of Energy",
+  "title": "Geothermal Heat Pump Case Study: Epic Systems Corporation",
+  "edition": "DOE/GO-102025-6433",
+  "date": "May 2026",
+  "url": "/mnt/user-data/beyond-data-sources/public/epicDOE/full.pdf",
+  "values": [
+   {
+    "blank_context": "___ MW data centre",
+    "value": "3.5",
+    "quote": "Cooling support for a 3.5-MW data center",
+    "where": "p.1 sidebar 'Unique Features'"
+   },
+   {
+    "blank_context": "___ wells",
+    "value": "6,100",
+    "quote": "6,100 wells",
+    "where": "p.1 sidebar 'Geothermal System Size'"
+   },
+   {
+    "blank_context": "in ___ borefields",
+    "value": "4",
+    "quote": "4 borefields",
+    "where": "same"
+   },
+   {
+    "blank_context": "plus lakes",
+    "value": "2 lake exchange systems",
+    "quote": "2 lake exchange systems ... Stormwater lake and quarry lake serve as heat sinks",
+    "where": "same"
+   }
+  ],
+  "unsupported_wording": "none (quoted sentence verbatim: 'Excess heat from the data center is transferred into the relatively cooler ground' continues '...beneath the building')",
+  "note": "Location 'Verona, Wisconsin' printed. System figures appear to be operator-supplied (photos/contact from Epic; 'Epic claims ... one of the largest geothermal systems'); treat as operator claims reported by DOE."
+ },
+ {
+  "id": "loudounWater",
+  "reachable": true,
+  "publisher": "Loudoun Water",
+  "title": "Reclaimed Water Program | loudounwater.org",
+  "edition": "web page (saved HTML)",
+  "date": "not stated",
+  "url": "/mnt/user-data/beyond-data-sources/public/loudounWater/page.html",
+  "values": [],
+  "unsupported_wording": "none",
+  "note": "Quote verbatim: 'In 2010 Loudoun Water constructed the first pipelines of the reclaimed water distribution system to supply irrigation and industrial cooling water to Loudoun County's rapidly growing data center industry.' (Reclaimed Water Program History). Utility's own claim."
+ }
+]

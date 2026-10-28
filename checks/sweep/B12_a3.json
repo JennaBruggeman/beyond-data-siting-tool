@@ -1,0 +1,576 @@
+[
+ {
+  "id": "vanPublicRooms2026",
+  "reachable": true,
+  "publisher": "City of Vancouver (Open Data CSVs; Keeping Cool maps)",
+  "title": "libraries.csv; community-centres.csv; Keeping Cool in Vancouver (4 neighbourhood maps)",
+  "edition": "Maps: doc no. 26-163; DTES and Downtown/West End 'Last update: August 2026'; Mount Pleasant and Sunset/Oakridge/Marpole 'Last update: July 2026'",
+  "date": "CSVs: no date printed; maps July/August 2026",
+  "url": "/mnt/attach/outputs/data/raw/van/libraries.csv; /mnt/attach/outputs/data/raw/van/community-centres.csv; /mnt/attach/outputs/data/raw/van/cool/keeping-cool-map-{downtown-eastside,downtown-westend,mount-pleasant,sunset-oakridge-marpole}.pdf",
+  "values": [
+   {
+    "blank_context": "libraries ___ records",
+    "value": "22",
+    "quote": "22 data rows; one row '302-345 Robson St;Outreach Services'",
+    "where": "libraries.csv (header + 22 rows)"
+   },
+   {
+    "blank_context": "community centres (___)",
+    "value": "27",
+    "quote": "27 data rows, e.g. 'Hastings;3096 E Hastings St'",
+    "where": "community-centres.csv (header + 27 rows)"
+   },
+   {
+    "blank_context": "J.B. downloads ___ Oct ___",
+    "value": "not stated",
+    "quote": "no download date in the files (file mtimes 16 Oct, not printed by source)",
+    "where": "n/a"
+   },
+   {
+    "blank_context": "Keeping Cool maps (___)",
+    "value": "4 maps saved; 2026 (©2026, doc 26-163)",
+    "quote": "'English | ©2026 City of Vancouver | 26-163' / 'Last update: August 2026' (DTES, DT/West End) / 'Last update: July 2026' (Mt Pleasant, Sunset/Oakridge/Marpole)",
+    "where": "each map PDF, p.1 footer"
+   }
+  ],
+  "unsupported_wording": "'dataset currency old' is not stated in the CSVs (no currency/metadata in the saved files). Download dates not in source. Rest supported: 'Outreach Services' row is an office (Robson St unit address); map page 2 legends 'Library Cooling Centres' and 'Community Centre Cooling Centres' with no site names in text; DTES map viewed as image: icons only, no labels.",
+  "note": "CSVs are semicolon-delimited with Geom points and geo_point_2d. Map p.1 lists Evelyne Saller Centre at '404 Alexander Street' while community-centres.csv has '320 Alexander St' (address mismatch, not part of the claim). Only DTES map rendered as image; other three checked by text layer only (legend, no names)."
+ },
+ {
+  "id": "bcucG17926",
+  "reachable": true,
+  "publisher": "British Columbia Utilities Commission (BCUC)",
+  "title": "Order G-179-26 and Decision: Creative Energy Vancouver Platforms Inc. 2026 Revenue Requirements for Core TES",
+  "edition": "Final Order (3 pp.) + decision; 37 PDF pages; local .txt matches PDF",
+  "date": "August 20, 2026",
+  "url": "/mnt/attach/outputs/data/raw/bcuc/G-179-26.pdf (and .txt)",
+  "values": [
+   {
+    "blank_context": "Order G-___-___",
+    "value": "179-26",
+    "quote": "ORDER NUMBER G-179-26",
+    "where": "Order p.1"
+   },
+   {
+    "blank_context": "Creative Energy ___ Revenue Requirements",
+    "value": "2026",
+    "quote": "2026 Revenue Requirements for Core TES",
+    "where": "Order p.1"
+   },
+   {
+    "blank_context": "___ Aug ___",
+    "value": "20 Aug 2026",
+    "quote": "on August 20, 2026 / this 20th day of August 2026",
+    "where": "Order p.1, p.3"
+   },
+   {
+    "blank_context": "J.B. upload ___ Oct ___",
+    "value": "not stated",
+    "quote": "not in source",
+    "where": "n/a"
+   },
+   {
+    "blank_context": "permanent ___ rates",
+    "value": "2026",
+    "quote": "effective January 1, 2026, on a permanent basis",
+    "where": "Order para 1, p.2"
+   },
+   {
+    "blank_context": "$___ per M# of steam",
+    "value": "14.78",
+    "quote": "average thermal energy service rate of $14.78 per M# of steam",
+    "where": "Order para 1, p.2; decision s.2 (PDF p.20)"
+   },
+   {
+    "blank_context": "$___/MWh hot water",
+    "value": "42.59",
+    "quote": "$42.59 per MWh of thermal energy for customers connected to the hot water distribution networks",
+    "where": "Order para 1, p.2"
+   },
+   {
+    "blank_context": "conversion factor ___ MWh per M#",
+    "value": "0.347",
+    "quote": "after applying a conversion factor of 0.347 MWh per M#",
+    "where": "Decision exec summary (PDF p.5) and s.1 (PDF p.7)"
+   },
+   {
+    "blank_context": "___ debt rate",
+    "value": "2026",
+    "quote": "use 5.33 percent as its 2026 debt rate for the Core TES",
+    "where": "Order para 2, p.2"
+   },
+   {
+    "blank_context": "debt rate ___%",
+    "value": "5.33",
+    "quote": "5.33 percent",
+    "where": "Order para 2, p.2"
+   },
+   {
+    "blank_context": "sustained ... (to ___)",
+    "value": "2029",
+    "quote": "does not have a revised forecast for the total capital investments required to maintain the plant through to 2029",
+    "where": "Decision, PDF p.22"
+   },
+   {
+    "blank_context": "$___ ... removed",
+    "value": "666,650",
+    "quote": "directs Creative Energy to remove the 2026 Forecast Beatty steam production plant capital expenditures of $666,650",
+    "where": "Decision s.2.1.4, PDF p.17"
+   },
+   {
+    "blank_context": "of ___ Beatty plant capital",
+    "value": "2026",
+    "quote": "2026 Forecast Beatty steam production plant capital expenditures",
+    "where": "Decision s.2.1.4, PDF p.17"
+   }
+  ],
+  "unsupported_wording": "Minor: Order says rates are 'as adjusted in accordance with sections 2.1.2 and 2.1.4', so $14.78/$42.59 are pre-adjustment averages; claim omits this. 'to 2029' is the horizon for sustainment capital, not a New Beatty completion date — decision says 'the completion date of the New Beatty Energy Center remains uncertain'. Otherwise supported (declining block structure, 'used and useful', 'condition-based basis').",
+  "note": "'operating beyond its design life' is Creative Energy's submission ('Creative Energy submits that the Beatty steam production plant is operating beyond its design life'), i.e. an operator claim, not a BCUC finding. Applied-for rates were $14.51/M# and $41.82/MWh (recital B)."
+ },
+ {
+  "id": "quEDM1_2026",
+  "reachable": true,
+  "publisher": "Qu Data Centres (qudatacentres.com)",
+  "title": "EDM1 | Facility Overview (PDF title 'EDM1 V1 SpecSheet - Edmonton Location #1')",
+  "edition": "V1 (per PDF title)",
+  "date": "not stated",
+  "url": "/mnt/attach/outputs/data/raw/qu/EDM1.pdf",
+  "values": [
+   {
+    "blank_context": "J.B. download ___ Oct ___",
+    "value": "not stated",
+    "quote": "not in source",
+    "where": "n/a"
+   },
+   {
+    "blank_context": "___ ft² building",
+    "value": "18,000",
+    "quote": "18,000 ft² Building",
+    "where": "SPACE block"
+   },
+   {
+    "blank_context": "(≈___ m²) building",
+    "value": "conversion, not printed",
+    "quote": "—",
+    "where": "—"
+   },
+   {
+    "blank_context": "___ ft² raised floor",
+    "value": "15712",
+    "quote": "15712 ft² Raise Floor",
+    "where": "SPACE block"
+   },
+   {
+    "blank_context": "(≈___ m²) raised floor",
+    "value": "conversion, not printed",
+    "quote": "—",
+    "where": "—"
+   },
+   {
+    "blank_context": "___ MW capacity",
+    "value": "2.5",
+    "quote": "2.5MW Capacity",
+    "where": "POWER & BACKUP block"
+   },
+   {
+    "blank_context": "___ tons cooling",
+    "value": "248",
+    "quote": "248 Tons of N+1 cooling",
+    "where": "CLIMATE CONTROL block"
+   },
+   {
+    "blank_context": "N+___",
+    "value": "1",
+    "quote": "N+1",
+    "where": "CLIMATE CONTROL block"
+   },
+   {
+    "blank_context": "(≈___ MW) cooling",
+    "value": "conversion, not printed",
+    "quote": "—",
+    "where": "—"
+   },
+   {
+    "blank_context": "~___–___ kW per rack",
+    "value": "5–10",
+    "quote": "designed for ~5-10kW per rack",
+    "where": "POWER & BACKUP block"
+   }
+  ],
+  "unsupported_wording": "none (Edmonton 'Financial Core District' printed; no PUE or heat recovery anywhere on the sheet)",
+  "note": "All figures are operator claims. Sheet is undated. Sheet spells 'Raise Floor'. Sheet also carries generator, fuel, carrier and security details, consistent with the claim that these were deliberately excluded."
+ },
+ {
+  "id": "alta117_2026",
+  "reachable": true,
+  "publisher": "Government of Alberta (creator); King's Printer (publisher) — Open Government publication page",
+  "title": "Data Centre Regulation (Open Government catalogue page)",
+  "edition": "Catalogue record only, not the regulation text",
+  "date": "Date issued/created/modified 2026-06-09",
+  "url": "/mnt/user-data/beyond-data-sources/public/alta117_2026/page.html",
+  "values": [
+   {
+    "blank_context": "Alta Reg ___/___",
+    "value": "117/2026 not printed as such; URL slug '2026_117'",
+    "quote": "name | URL 2026_117",
+    "where": "catalogue Available Fields"
+   },
+   {
+    "blank_context": "current as of ___ Jun ___",
+    "value": "not stated",
+    "quote": "page shows 'Updated June 9, 2026' / 'Date Issued 2026-06-09' only",
+    "where": "Summary; Resource Dates"
+   },
+   {
+    "blank_context": "J.B. PDF ___ Oct ___",
+    "value": "not stated",
+    "quote": "not in source",
+    "where": "n/a"
+   },
+   {
+    "blank_context": "s. ___ (all section numbers)",
+    "value": "not stated",
+    "quote": "regulation text not in file",
+    "where": "n/a"
+   },
+   {
+    "blank_context": "___ MW or more",
+    "value": "not stated",
+    "quote": "not in file",
+    "where": "n/a"
+   },
+   {
+    "blank_context": "max ___ years (bridged)",
+    "value": "not stated",
+    "quote": "not in file",
+    "where": "n/a"
+   },
+   {
+    "blank_context": "review by ___ May ___ / expires ___ May ___",
+    "value": "not stated",
+    "quote": "not in file",
+    "where": "n/a"
+   }
+  ],
+  "unsupported_wording": "Almost all. The file is the open.alberta.ca catalogue page, not the King's Printer extract; info.json itself says 'Publication page only; regulation PDF is on the King's Printer site, still to save'. Supported only: title 'Data Centre Regulation', made 'under the Electric Utilities Act', publisher King's Printer, and the description that it 'directs the Independent System Operator to prioritize large data centres that bring their own generation' and lets it 'target large data centres for load management'. All section content, definitions, thresholds, bridging, load-shed order, review/expiry and the 'current as of' date are unverified.",
+  "note": "Saved file is not the cited document. Need the King's Printer PDF (ISBN 9780779862924) to check."
+ },
+ {
+  "id": "cerProfiles2026",
+  "reachable": true,
+  "publisher": "Canada Energy Regulator",
+  "title": "Provincial and Territorial Energy Profiles – Alberta",
+  "edition": "Alberta page only",
+  "date": "Date modified 2026-03-26",
+  "url": "/mnt/user-data/beyond-data-sources/public/cerProfiles2026/page.html",
+  "values": [
+   {
+    "blank_context": "modified ___ Mar ___",
+    "value": "26 Mar 2026",
+    "quote": "Date modified: 2026-03-26",
+    "where": "page footer"
+   },
+   {
+    "blank_context": "Alberta ___ generation",
+    "value": "2021",
+    "quote": "In 2021, Alberta generated 73.9 terawatt-hours (TWh)",
+    "where": "Electricity section"
+   },
+   {
+    "blank_context": "___ TWh (AB)",
+    "value": "73.9",
+    "quote": "73.9 terawatt-hours (TWh)",
+    "where": "Electricity section"
+   },
+   {
+    "blank_context": "___% coal",
+    "value": "22",
+    "quote": "Approximately 22% of Alberta's electricity was generated from coal",
+    "where": "Electricity section"
+   },
+   {
+    "blank_context": "___% natural gas",
+    "value": "63",
+    "quote": "and 63% was from natural gas",
+    "where": "Electricity section"
+   },
+   {
+    "blank_context": "wind ___%",
+    "value": "9",
+    "quote": "wind (9%)",
+    "where": "Electricity section"
+   },
+   {
+    "blank_context": "hydro ___%",
+    "value": "3",
+    "quote": "hydro (3%)",
+    "where": "Electricity section"
+   },
+   {
+    "blank_context": "bioenergy ___%",
+    "value": "2",
+    "quote": "bioenergy (2%)",
+    "where": "Electricity section"
+   },
+   {
+    "blank_context": "coal phased out June ___",
+    "value": "2024",
+    "quote": "By June 2024, Alberta had fully phased out coal-fired generation",
+    "where": "Electricity section"
+   },
+   {
+    "blank_context": "BC ___ generation / ___ TWh",
+    "value": "not stated",
+    "quote": "BC profile not in saved file",
+    "where": "n/a"
+   },
+   {
+    "blank_context": "BC hydro ___ of ___ MW (≈___%)",
+    "value": "not stated",
+    "quote": "BC profile not in saved file",
+    "where": "n/a"
+   }
+  ],
+  "unsupported_wording": "All BC wording (generation, TWh, 'shares by source not given in text', hydro capacity) — saved file is the Alberta page only. Alberta part supported.",
+  "note": "Alberta figures are 2021 data (source: CER Canada's Energy Future 2023 Data Appendix). Claim calls the source 'profiles' plural; only Alberta saved."
+ },
+ {
+  "id": "nfcAB2023_4313",
+  "reachable": true,
+  "publisher": "National Research Council of Canada / Canadian Commission on Building and Fire Codes",
+  "title": "National Fire Code – 2023 Alberta Edition",
+  "edition": "Sixth Edition 2023, Second Printing, 'Includes Revisions and Errata released in April 2026'",
+  "date": "©2026",
+  "url": "/mnt/attach/outputs/data/raw/codes/nfc_ab2023.pdf (and .txt)",
+  "values": [
+   {
+    "blank_context": "___ Alberta Edition",
+    "value": "2023",
+    "quote": "National Fire Code – 2023 Alberta Edition",
+    "where": "cover"
+   },
+   {
+    "blank_context": "J.B. download ___ Oct ___",
+    "value": "not stated",
+    "quote": "not in source",
+    "where": "n/a"
+   },
+   {
+    "blank_context": "Tables ___-A and -B",
+    "value": "4.3.13.4.",
+    "quote": "Table 4.3.13.4.-A ... Table 4.3.13.4.-B",
+    "where": "Div B 4-32"
+   },
+   {
+    "blank_context": "identical to NFC ___",
+    "value": "not stated",
+    "quote": "base NFC not in file",
+    "where": "n/a"
+   },
+   {
+    "blank_context": "first storey ___ ___ L",
+    "value": "200 000",
+    "quote": "First storey (2) ... 200 000",
+    "where": "Table 4.3.13.4.-B, Div B 4-32"
+   },
+   {
+    "blank_context": "(tanks > ___ ___ L) first storey",
+    "value": "2 500 (row also covers > 20 000)",
+    "quote": "> 2 500 (3) / > 20 000 (4) ... 200 000",
+    "where": "Table 4.3.13.4.-B"
+   },
+   {
+    "blank_context": "basement/above first ___ ___ L",
+    "value": "20 000",
+    "quote": "Basement and storeys above the first storey > 2 500 (3) 20 000",
+    "where": "Table 4.3.13.4.-B"
+   },
+   {
+    "blank_context": "(tanks > ___ ___ L)",
+    "value": "2 500",
+    "quote": "> 2 500",
+    "where": "Table 4.3.13.4.-B"
+   },
+   {
+    "blank_context": "or ___ ___ L",
+    "value": "45 000",
+    "quote": "> 20 000 (4) 45 000",
+    "where": "Table 4.3.13.4.-B"
+   },
+   {
+    "blank_context": "(tanks > ___ ___ L)",
+    "value": "20 000",
+    "quote": "> 20 000",
+    "where": "Table 4.3.13.4.-B"
+   },
+   {
+    "blank_context": "Fire By-law ___",
+    "value": "not stated",
+    "quote": "not in file",
+    "where": "n/a"
+   }
+  ],
+  "unsupported_wording": "'identical to NFC ___' and the Vancouver Fire By-law / BC Fire Code statement cannot be checked from this file. The quoted limits come from Table -B (emergency generators); Table -A is industrial occupancies (Classes II/IIIA protected: 200 000 first storey, 20 000 above first and basement) — citing both is fine but the generator figures are Table -B's. Claim says first storey 200 000 for tanks > 2 500; table applies 200 000 to both > 2 500 and > 20 000. 'per protected storage room' matches 'Quantity per Protected Storage Room'.",
+  "note": "Values are aggregate per protected storage room; individual tanks > 2 500 L need double-wall/secondary containment (4.3.13.5.(1)); > 20 000 L per 4.3.13.5.(2). A-4.3.13.4.(1)(b): CSA B139 limits tanks to 2 500 L each, 5 000 L aggregate."
+ },
+ {
+  "id": "vanHeatPolicy",
+  "reachable": true,
+  "publisher": "City of Vancouver (Planning, Urban Design & Sustainability)",
+  "title": "Memorandum: Planning for Extreme Heat and Air Quality Mitigation in Vancouver (RTS 14654)",
+  "edition": "Council memo with cover email",
+  "date": "March 10, 2022",
+  "url": "/mnt/user-data/beyond-data-sources/public/vanHeatPolicy/full.pdf",
+  "values": [
+   {
+    "blank_context": "memo (___ Mar ___)",
+    "value": "10 Mar 2022",
+    "quote": "MEMORANDUM March 10, 2022",
+    "where": "memo p.1 (PDF p.2)"
+   },
+   {
+    "blank_context": "Adaptation Strategy ___–___ update",
+    "value": "not stated",
+    "quote": "'first approved in 2012 and refreshed in 2018, with another comprehensive update due in 2023'",
+    "where": "memo p.3 (PDF p.3)"
+   },
+   {
+    "blank_context": "___% canopy",
+    "value": "30",
+    "quote": "new target set by Park Board of 30% canopy cover by 2050",
+    "where": "memo p.3; also table '30% (a 7% increase) by 2050'"
+   },
+   {
+    "blank_context": "by ___",
+    "value": "2050",
+    "quote": "by 2050",
+    "where": "memo p.3"
+   }
+  ],
+  "unsupported_wording": "The Climate Change Adaptation Strategy update itself is not in the file; the memo only says an update is 'due in 2023'. The canopy target belongs to the Park Board / Urban Forest Strategy, not the Adaptation Strategy. 'heat mapping' supported ('Mapping of hot areas, existing cooling infrastructure and social vulnerability', PDF p.6). 'no rule on heat rejected by equipment': memo has no such rule, but absence in one memo does not prove no City rule exists.",
+  "note": ""
+ },
+ {
+  "id": "nrcanPV2024",
+  "reachable": true,
+  "publisher": "Natural Resources Canada, CanmetENERGY",
+  "title": "Assessing the photovoltaic potential of the Canadian building stock",
+  "edition": "Saved URL is 'PV_potential_summary_report_appendix-EN.pdf'; the document's printed title does not say 'summary report'",
+  "date": "July 25, 2024",
+  "url": "/mnt/user-data/beyond-data-sources/public/nrcanPV2024/full.pdf",
+  "values": [
+   {
+    "blank_context": "CanmetENERGY (___)",
+    "value": "2024",
+    "quote": "July 25, 2024 / © ... 2024",
+    "where": "cover; p.1"
+   },
+   {
+    "blank_context": "usable roof factor ___ (area)",
+    "value": "0.81",
+    "quote": "UF2 0.81",
+    "where": "Table 2, p.9 (s.2.1.2)"
+   },
+   {
+    "blank_context": "___ (yield)",
+    "value": "0.70",
+    "quote": "Yr 0.70",
+    "where": "Table 2, p.9"
+   },
+   {
+    "blank_context": "≈ ___ kWh/m² footprint Vancouver",
+    "value": "conversion, not printed",
+    "quote": "no Vancouver value in report",
+    "where": "—"
+   },
+   {
+    "blank_context": "___ Edmonton",
+    "value": "conversion, not printed",
+    "quote": "no Edmonton value in report",
+    "where": "—"
+   }
+  ],
+  "unsupported_wording": "'NRCan municipal yields' for Vancouver/Edmonton are not in this file (derived elsewhere). 'neither city in the sample' is supported (Table A-1 lists 11 municipalities: Varennes, Calgary, St. John's, Yellowknife, Kelowna, Moncton, Halifax, North Vancouver, London, Saskatoon, Winnipeg), but North Vancouver is in it.",
+  "note": "UF2 multiplies ground-floor area; Yr is fraction of optimal insolation. Report gives cross-validation uncertainty ~3.6% (UF2) and 4.9% (Yr)."
+ },
+ {
+  "id": "abConsultPolicy2013",
+  "reachable": true,
+  "publisher": "Government of Alberta",
+  "title": "The Government of Alberta's Policy on Consultation with First Nations on Land and Natural Resource Management, 2013",
+  "edition": "Version footed April 1, 2020",
+  "date": "April 1, 2020 (page footers)",
+  "url": "/mnt/attach/outputs/data/raw/ab/ir-policy-consultation-first-nations-land-resources-2013-amended-2020.pdf",
+  "values": [
+   {
+    "blank_context": "Policy ..., ___",
+    "value": "2013",
+    "quote": "Policy on Consultation with First Nations on Land and Natural Resource Management, 2013",
+    "where": "title, p.1"
+   },
+   {
+    "blank_context": "amended ___ Apr ___",
+    "value": "1 Apr 2020 (date only; word 'amended' not printed)",
+    "quote": "April 1, 2020",
+    "where": "footer, every page"
+   },
+   {
+    "blank_context": "read ___ Oct ___",
+    "value": "not stated",
+    "quote": "not in source",
+    "where": "n/a"
+   },
+   {
+    "blank_context": "file path ___ / ___",
+    "value": "2013 / 2020",
+    "quote": "file name ...-2013-amended-2020.pdf",
+    "where": "local file name"
+   }
+  ],
+  "unsupported_wording": "'amended' is only in the file name; the document prints 'April 1, 2020' with no amendment wording. Rest supported: Crown lands application (p.2), quoted 'Matters Not Subject to this Policy' bullet verbatim (p.3), proponents 'may include industry, municipal governments' and delegation of 'procedural aspects' (pp.5–7), 'The consultation office will assess the adequacy of the consultation' (p.7). Claim's path ends '___pdf' (missing '.').",
+  "note": ""
+ },
+ {
+  "id": "tbsCBA2018",
+  "reachable": true,
+  "publisher": "Treasury Board of Canada Secretariat",
+  "title": "Policy on Cost-Benefit Analysis",
+  "edition": "web page; 'last reviewed on September 1, 2018'; page Date modified 2025-10-22",
+  "date": "takes effect September 1, 2018",
+  "url": "/mnt/user-data/beyond-data-sources/public/tbsCBA2018/page.html",
+  "values": [
+   {
+    "blank_context": "(___ Sep ___)",
+    "value": "1 Sep 2018",
+    "quote": "This policy takes effect on September 1, 2018.",
+    "where": "s.1 intro"
+   },
+   {
+    "blank_context": "s. ___ discount rate",
+    "value": "7.1",
+    "quote": "7.1 Discount rate",
+    "where": "s.7.1"
+   },
+   {
+    "blank_context": "long-term (___+ years)",
+    "value": "50",
+    "quote": "impacts occur over the long term (50 years or more)",
+    "where": "s.7.1"
+   },
+   {
+    "blank_context": "s. ___ time period",
+    "value": "7.4",
+    "quote": "7.4 Time period and price year",
+    "where": "s.7.4"
+   },
+   {
+    "blank_context": "minimum ___-year period",
+    "value": "10",
+    "quote": "based on a minimum 10-year period",
+    "where": "s.7.4"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "The actual OCC and social discount rate values are in the TBS CBA Guide, not this page. Page date modified 2025-10-22."
+ }
+]

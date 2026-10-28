@@ -1,0 +1,330 @@
+[
+ {
+  "id": "fortis",
+  "reachable": true,
+  "publisher": "FortisBC Energy Inc. (rate schedule accepted for filing by BCUC)",
+  "title": "Rate Schedule 3: Large Commercial Service",
+  "edition": "R-3.1 Fifteenth Revision (Order G-287-25); R-3.2 Twenty-Eighth Revision and R-3.3 Nineteenth Revision (Order G-131-26)",
+  "date": "R-3.1 effective January 1, 2026; R-3.2/R-3.3 effective July 1, 2026",
+  "url": "/mnt/user-data/beyond-data-sources/public/fortis/full.pdf",
+  "values": [
+   {
+    "blank_context": "Rate ___",
+    "value": "3",
+    "quote": "RATE SCHEDULE 3 / LARGE COMMERCIAL SERVICE",
+    "where": "p.1 (Page R-3)"
+   },
+   {
+    "blank_context": "delivery ___ Jan ___",
+    "value": "1 / 2026",
+    "quote": "Effective Date: January 1, 2026",
+    "where": "p.2 footer (Page R-3.1, Order G-287-25)"
+   },
+   {
+    "blank_context": "commodity ___ Jul ___",
+    "value": "1 / 2026",
+    "quote": "Effective Date: July 1, 2026",
+    "where": "p.3 footer (Page R-3.2, Order G-131-26)"
+   },
+   {
+    "blank_context": "variable $___/GJ",
+    "value": "not printed as a single figure; computed 5.377 + 2.268 + 1.660 = 9.305 (Mainland and Vancouver Island)",
+    "quote": "Subtotal of per Gigajoule Delivery Margin Related Charges $ 5.377 ... Subtotal of per Gigajoule Storage and Transport Related Charges $ 2.268 ... Cost of Gas (Commodity Cost Recovery Charge) per Gigajoule $ 1.660",
+    "where": "pp.2-3, Table of Charges lines 3-8"
+   },
+   {
+    "blank_context": "Riders ___ ___ ___",
+    "value": "5, 6, 8 (the per-GJ riders; Rider 2 is per day)",
+    "quote": "4. Rider 5 per Gigajoule $ 0.212 ... 6. Rider 6 per Gigajoule $ 0.188 ... 7. Rider 8 per Gigajoule $ 0.909",
+    "where": "pp.2-3, Table of Charges"
+   },
+   {
+    "blank_context": "≈ $___/MWh heat",
+    "value": "conversion, not printed",
+    "quote": "no $/MWh figure in schedule; all charges per GJ or per day",
+    "where": "whole document"
+   },
+   {
+    "blank_context": "at ___% (efficiency)",
+    "value": "not stated",
+    "quote": "—",
+    "where": "—"
+   },
+   {
+    "blank_context": "checked against the schedule ___ Oct ___",
+    "value": "not stated (check date, not in source)",
+    "quote": "—",
+    "where": "—"
+   },
+   {
+    "blank_context": "BC carbon tax zero since ___ Apr ___",
+    "value": "not stated",
+    "quote": "schedule does not mention carbon tax",
+    "where": "whole document"
+   }
+  ],
+  "unsupported_wording": "BC carbon tax claim is not in this source; the $/MWh figure and efficiency % are not printed; the 'checked ... Oct' date is not in the document. Variable total excludes the Municipal Operating Fee, which the schedule says is payable in addition where applicable.",
+  "note": "Utility tariff (regulated rates, not an operator claim). Page R-3 cover shows Effective Date November 1, 2018 (Original Page); charges pages are the 2026 revisions. Cost of Gas footnote: charged on consumption net of RNG Blend %."
+ },
+ {
+  "id": "neu9552",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Energy Utility System By-law No. 9552",
+  "edition": "Consolidated for convenience only to December 9, 2025; amended to include By-law No. 14524 effective January 1, 2026",
+  "date": "Schedule C rates effective Jan. 1, 2026 (connection levy columns Jan. 1, 2026 / Jan. 1, 2027)",
+  "url": "/mnt/user-data/beyond-data-sources/public/neu9552/full.pdf",
+  "values": [
+   {
+    "blank_context": "By-law ___",
+    "value": "9552",
+    "quote": "ENERGY UTILITY SYSTEM BY-LAW NO. 9552",
+    "where": "p.1 cover"
+   },
+   {
+    "blank_context": "energy charge $___/MWh",
+    "value": "65.172",
+    "quote": "Energy charge (Standard Green Heat) $65.172 per MW hour",
+    "where": "Schedule C, Part 3"
+   },
+   {
+    "blank_context": "credit = ___%",
+    "value": "50",
+    "quote": "Credit for heat energy returned to energy transfer station $65.172 per each MW hour multiplied by 50%",
+    "where": "Schedule C, Part 4"
+   },
+   {
+    "blank_context": "→ $___/MWh (credit)",
+    "value": "conversion, not printed (65.172 × 50% = 32.586)",
+    "quote": "$65.172 per each MW hour multiplied by 50%",
+    "where": "Schedule C, Part 4"
+   }
+  ],
+  "unsupported_wording": "'False Creek NEU' is not the by-law's name (it is the 'Energy Utility System By-law'); the by-law refers to 'Southeast False Creek' (SEFC) but the system applies beyond SEFC (Class 2 covers buildings 'located outside SEFC').",
+  "note": "Section 8.3: owner pays Part 3 charge less Part 4 credit. Rate riders also exist: Enhanced Green Heat $5.78/MWh, 100% Renewable $9.73/MWh. info.json marks this as same file as 'van9552'."
+ },
+ {
+  "id": "nrcanTrends",
+  "reachable": true,
+  "publisher": "Natural Resources Canada, Office of Energy Efficiency",
+  "title": "Energy Efficiency Trends in Canada — Energy Use in the Residential Sector",
+  "edition": "2020 data edition (URL .../trends/2020/residential.cfm)",
+  "date": "data year 2020; no page date printed in saved text",
+  "url": "/mnt/user-data/beyond-data-sources/public/nrcanTrends/page.html",
+  "values": [
+   {
+    "blank_context": "Trends ___",
+    "value": "2020",
+    "quote": "As a result of energy efficiency improvements since 2000, in 2020",
+    "where": "Highlights"
+   },
+   {
+    "blank_context": "___ GJ/household",
+    "value": "95.70 (2020)",
+    "quote": "Energy intensity per household ( GJ /household) ... 2020 95.70 0.65",
+    "where": "Text version: Residential energy intensity per household and floor space, 2000–2020"
+   },
+   {
+    "blank_context": "space heating ___%",
+    "value": "61",
+    "quote": "Space heating 61",
+    "where": "Text version: Distribution of residential energy use by end use, 2020; also 'accounting for 61% of the total residential energy use' (Space heating section)"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Government statistics. If the tool rounds to 96 GJ, that is rounding, not printed."
+ },
+ {
+  "id": "vanParking",
+  "reachable": true,
+  "publisher": "City of Vancouver (Authority: Director of Planning and City Engineer)",
+  "title": "Bulletin: Parking By-Law No. 6059 Design Supplement",
+  "edition": "Effective July 12, 1988; Last amended February 16, 2024",
+  "date": "February 2024",
+  "url": "/mnt/user-data/beyond-data-sources/public/vanParking/full.pdf",
+  "values": [
+   {
+    "blank_context": "___ × ___ m",
+    "value": "ambiguous — claim does not say which space. Candidate printed dimensions: parallel spaces 2.5 × 6.4 m; van accessible 3.5 m wide × 5.5 m long; corner cut 2.7 × 2.7 m; motorcycle 1.5 m wide × 2.4 m",
+    "quote": "All parallel spaces shall be 2.5m x 6.4m / Van accessible spaces ... minimum of 5.5 m in length and 3.5 m in width / a 2.7 m x 2.7 m corner cut",
+    "where": "Figure 1 table (p.5); s.2.2 (p.4); s.1.4.1 (p.4); s.2.7"
+   }
+  ],
+  "unsupported_wording": "Printed title is 'Parking By-Law No. 6059 Design Supplement', not 'Parking and Loading Design Supplement' (the URL slug says parking-loading). The supplement states standard space sizes are 'prescribed in Section 4 of the Parking By-law' and loading space sizes 'in Section 5 of the Parking By-law' — not in this document; a standard stall or loading bay size would not be supported by this source.",
+  "note": "Cannot fill the blank without knowing which space the tool means."
+ },
+ {
+  "id": "statcanSHS",
+  "reachable": true,
+  "publisher": "Statistics Canada",
+  "title": "Table 11-10-0222-01 Household spending, Canada, regions and provinces",
+  "edition": "Release date 2026-09-18 (formerly CANSIM 203-0021)",
+  "date": "2026-09-18; reference periods 2019–2023 shown",
+  "url": "/mnt/user-data/beyond-data-sources/public/statcanSHS/page.html",
+  "values": [
+   {
+    "blank_context": "StatCan ___-___-___-___",
+    "value": "11-10-0222-01",
+    "quote": "Table: 11-10-0222-01 (formerly CANSIM 203-0021)",
+    "where": "page header"
+   },
+   {
+    "blank_context": "household energy spend $___",
+    "value": "2,907 (2023); 2,737 (2021); 2,535 (2019); 2020 and 2022 '..'",
+    "quote": "Water, fuel and electricity for principal accommodation ... 2,535 .. 2,737 .. 2,907",
+    "where": "embedded table data (Canada, Average expenditure per household, columns 2019–2023)"
+   },
+   {
+    "blank_context": "(___) year",
+    "value": "2023 likely (latest); not determinable from claim",
+    "quote": "Reference period 2019 2020 2021 2022 2023",
+    "where": "table column headers"
+   }
+  ],
+  "unsupported_wording": "The row is 'Water, fuel and electricity for principal accommodation' — it includes water and excludes vehicle fuel, so 'household energy spend' is a relabel; mark it as such.",
+  "note": "Values are in the page's embedded JSON (table renders by script); geography Canada, statistic 'Average expenditure per household', dollars."
+ },
+ {
+  "id": "quebecRejets",
+  "reachable": true,
+  "publisher": "Gouvernement du Québec (Québec.ca)",
+  "title": "Projets de valorisation des rejets thermiques en cours",
+  "edition": "web page",
+  "date": "Dernière mise à jour : 4 mars 2025",
+  "url": "/mnt/user-data/beyond-data-sources/public/quebecRejets/page.html",
+  "values": [
+   {
+    "blank_context": "$___ M grant",
+    "value": "40",
+    "quote": "a octroyé au producteur agricole Les fraises de l'Île d'Orléans une aide financière de 40 M$ pour capter et valoriser les rejets thermiques du gigantesque centre de traitement de données de QScale à Lévis",
+    "where": "section 'Projets de centres de traitement de données' > 'Les fraises de l'Île d'Orléans'"
+   }
+  ],
+  "unsupported_wording": "Page says 'aide financière' (financial assistance), not specifically a grant/subvention. The recipient is the producer 'Les fraises de l'Île d'Orléans'; the 12-hectare greenhouses are being installed 'à proximité du centre de traitement de données' (near QScale in Lévis), not on Île d'Orléans — 'Île d'Orléans greenhouses' could mislead. Page title is 'Projets ... en cours' under the Valorisation des rejets thermiques section.",
+  "note": "Page also states >23,000 t CO2e/yr reduction expected at commissioning (government projection)."
+ },
+ {
+  "id": "goaGrid",
+  "reachable": true,
+  "publisher": "Government of Alberta (Alberta.ca)",
+  "title": "Grid | AI Data Centres in Alberta ('Is Alberta's grid ready?')",
+  "edition": "web page",
+  "date": "figure dated July 30, 2026; no page update date printed",
+  "url": "/mnt/user-data/beyond-data-sources/public/goaGrid/page.html",
+  "values": [
+   {
+    "blank_context": "~___ MW requested",
+    "value": "19,565",
+    "quote": "Requested ~19,565 MW New data centre load that companies have asked to connect in Alberta (AESO connection list, July 30, 2026). The figure moves every quarter.",
+    "where": "Section 2 'The speed bump Alberta built on purpose'"
+   },
+   {
+    "blank_context": "___ Jul ___",
+    "value": "30 / 2026",
+    "quote": "(AESO connection list, July 30, 2026)",
+    "where": "Section 2"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Figure is the Government of Alberta citing the AESO connection list (requests, not committed load). Page also prints 1,200 MW interim limit and ~12,800 MW record peak. Page is advocacy-toned."
+ },
+ {
+  "id": "bchIRP2025",
+  "reachable": true,
+  "publisher": "BC Hydro (British Columbia Hydro and Power Authority), filed with BCUC",
+  "title": "BC Hydro 2025 Integrated Resource Plan Application",
+  "edition": "public version (Figure F-3 redacted)",
+  "date": "October 31, 2025 (cover letter); PDF modified Nov 3, 2025",
+  "url": "/mnt/user-data/beyond-data-sources/public/bchIRP2025/full.pdf",
+  "values": [
+   {
+    "blank_context": "BC Hydro ___ IRP",
+    "value": "2025",
+    "quote": "BC HYDRO 2025 IRP",
+    "where": "p.1 header"
+   },
+   {
+    "blank_context": "Exhibit B-___",
+    "value": "1",
+    "quote": "EXHIBIT B-1",
+    "where": "p.1 header"
+   },
+   {
+    "blank_context": "filed ___ Oct ___",
+    "value": "31 / 2025",
+    "quote": "October 31, 2025 ... Application Submitted October 31, 2025",
+    "where": "p.1 cover letter; Table 1 p.2"
+   },
+   {
+    "blank_context": "___ pp.",
+    "value": "413 (PDF page count from file metadata; not printed in document)",
+    "quote": "—",
+    "where": "pdfinfo"
+   },
+   {
+    "blank_context": "data/BCH_____IRP_Exhibit_B-___pdf",
+    "value": "not stated (local filename; saved copy is full.pdf)",
+    "quote": "—",
+    "where": "—"
+   }
+  ],
+  "unsupported_wording": "Claim has an empty segment ('—  ;') where a description seems missing. Filename 'data/BCH_..._Exhibit_B-...pdf' cannot be checked against the saved file 'full.pdf'.",
+  "note": "BC Hydro is the applicant; plan figures are utility claims pending BCUC acceptance. Public version: Figure F-3 market price forecast redacted."
+ },
+ {
+  "id": "van3575s2",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Zoning and Development By-law: Section 2 (Definitions)",
+  "edition": "June 2026 (page footers)",
+  "date": "June 2026",
+  "url": "/mnt/user-data/beyond-data-sources/public/van3575s2/full.pdf",
+  "values": [
+   {
+    "blank_context": "By-law ___",
+    "value": "not stated in this file (no '3575' printed in Section 2)",
+    "quote": "—",
+    "where": "—"
+   },
+   {
+    "blank_context": "Section ___",
+    "value": "2",
+    "quote": "Section 2 Definitions",
+    "where": "p.1"
+   },
+   {
+    "blank_context": "(Jun ___ consolidation)",
+    "value": "2026",
+    "quote": "City of Vancouver June 2026",
+    "where": "page footers (e.g. p.6)"
+   }
+  ],
+  "unsupported_wording": "Definition quote matches verbatim: 'The use of a wholly enclosed building for the storage of information on operating data servers.' (p.6, letter T); listed under 'Transportation and Storage Uses' (p.45). Only issues: by-law number 3575 is not printed in this file, and the word 'consolidation' is not printed (footer just says June 2026).",
+  "note": "Supported on substance."
+ },
+ {
+  "id": "edmLDA26",
+  "reachable": true,
+  "publisher": "City of Edmonton (Engaged Edmonton)",
+  "title": "LDA26-0225 Edmonton Energy and Technology Park AI Data Centre Amendment",
+  "edition": "engagement web page",
+  "date": "Application Received July 6, 2026; engagement Sept 28 – Oct 25, 2026",
+  "url": "/mnt/user-data/beyond-data-sources/public/edmLDA26/page.html",
+  "values": [
+   {
+    "blank_context": "LDA2___-___",
+    "value": "LDA26-0225",
+    "quote": "LDA26-0225 Edmonton Energy and Technology Park AI Data Centre Amendment",
+    "where": "page title"
+   },
+   {
+    "blank_context": "received ___ Jul ___",
+    "value": "6 / 2026",
+    "quote": "Application Received July 6, 2026",
+    "where": "Engagement Timelines"
+   }
+  ],
+  "unsupported_wording": "Quotes match: 'an AI Data Centre would be considered a heavy industrial use (or Major Industrial under Edmonton Zoning Bylaw 20001)'; 'A small-scale data centre could be considered as a Minor Industrial Use, provided that associated nuisances are shown to be minimal and mainly contained on site' — claim drops 'mainly'. Rezoning + text amendment + another Public Hearing are stated for the Medium Industrial precinct (implemented by EETIM): 'the applicant will need to submit a rezoning and text amendment application ... There would be further opportunity for public engagement and another Public Hearing'. Note the Minor Industrial sentence is printed for both EETIM and EETB.",
+  "note": "Applicant: Stantec on behalf of Walton Global Investments Ltd. This is a plan (ASP) amendment application, not yet approved."
+ }
+]

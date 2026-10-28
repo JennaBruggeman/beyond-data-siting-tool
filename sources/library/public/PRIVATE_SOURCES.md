@@ -54,7 +54,7 @@ Ids match the tool's register (`register/formula_register.json`). The tool parts
 - **How we use it:** air-side and condenser heat temperatures (heat_temp); share of heat captured in liquid (liquid_capture).
 
 ### majdabadi2026
-- **Citation:** Majdabadi, M. M., Irandoostshahrestani, M., & Koohi-Fayegh, S. (2026). Integration of air-source to ground-source heat pump systems: Impact on borehole design and life-cycle cost in Canada. *Geothermics, 138*, 103640. https://doi.org/10.1016/j.geothermics.2026.103640
+- **Citation:** Mahmoudi Majdabadi, M., Irandoostshahrestani, M., & Koohi-Fayegh, S. (2026). Integration of air-source to ground-source heat pump systems: Impact on borehole design and life-cycle cost in Canada. *Geothermics, 138*, 103640. https://doi.org/10.1016/j.geothermics.2026.103640
 - **Where:** ScienceDirect. Our copy: Downloads `1-s2.0-S0375650526000453-main.pdf`; working copy `data/raw/papers/geothermics_2026.pdf`.
 - **How we use it:** borehole installation cost per metre for Edmonton. It's in the register but not yet linked to a tool part.
 

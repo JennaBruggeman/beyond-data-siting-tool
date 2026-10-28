@@ -1,0 +1,278 @@
+[
+ {
+  "id": "epcorBylaw19626",
+  "reachable": true,
+  "publisher": "City of Edmonton (bylaw approving EPCOR Water Services Inc. rates)",
+  "title": "EPCOR Water Services Bylaw 19626 (PDF metadata: 'Bylaw 19626 - EPCOR Water Services Bylaw. A Bylaw to Replace Bylaw 17698 ...')",
+  "edition": "As passed (no consolidation/amendment noted); OCR scan, 116 PDF pages",
+  "date": "Passed 30 August 2021; rates for April 1, 2022 to March 31, 2023",
+  "url": "/mnt/user-data/beyond-data-sources/public/epcorBylaw19626/full.pdf",
+  "values": [
+   {
+    "blank_context": "Bylaw ___",
+    "value": "19626",
+    "quote": "EPCOR WATER SERVICES BYLAW 19626",
+    "where": "PDF p.1, title"
+   },
+   {
+    "blank_context": "Sch. ___",
+    "value": "1",
+    "quote": "Schedule 1 - Price Schedule",
+    "where": "s.10 Schedules list; Schedule 1 header, Water Bylaw page 2 of 12 (PDF p.9)"
+   },
+   {
+    "blank_context": "Pt I (___–___) start",
+    "value": "2022 (April 1, 2022)",
+    "quote": "Consumption Charges and Public Fire Protection Monthly Charges for the period April 1, 2022 to March 31 , 2023 are set out below",
+    "where": "Sch.1 Pt I Commercial Water Service, Effective Dates (PDF p.9)"
+   },
+   {
+    "blank_context": "Pt I (___–___) end",
+    "value": "2023 (March 31, 2023); later years 2023-2027 set by Schedule 3 adjustment factors, not printed here",
+    "quote": "for the period April 1, 2023 to March 31, 2027 will be determined by applying the adjustment factors in Schedule 3",
+    "where": "same, PDF p.9"
+   },
+   {
+    "blank_context": "commercial water $___ (low end)",
+    "value": "0.9472",
+    "quote": "Over 5000 m 3   $0.9472 per m3",
+    "where": "Sch.1 Pt I Commercial Water Service, Consumption Charge (PDF p.9)"
+   },
+   {
+    "blank_context": "commercial water $___/m³ (high end)",
+    "value": "1.6122",
+    "quote": "0m 3 -25.0m 3  $1.6122 per m3 / 25.1 m3 - 100.0 m3  $1.6122 per m3",
+    "where": "same, PDF p.9"
+   },
+   {
+    "blank_context": "tier mapping (for reference)",
+    "value": "0-25.0 and 25.1-100.0 m3: 1.6122; 100.1-1000.0: 1.4867; 1000.1-5000.0: 1.1768; over 5000: 0.9472 (per m3, monthly consumption blocks not labelled as monthly on this page)",
+    "quote": "100.1 m3 - 1000.0 m3  $1.4867 per m3 ; 1000.1 m3 - 5000.0 m3  $1 .1768 per m3",
+    "where": "same, PDF p.9"
+   }
+  ],
+  "unsupported_wording": "'tier mapping unclear in the extract' is not borne out: the source prints a clear five-block table mapping each volume block to a rate (declining block). Range $0.9472-$1.6122 is supported only for Apr 2022-Mar 2023; later-year rates are not in this document.",
+  "note": "Rates are 2022-23 base rates; current rates require the annual Schedule 3 adjustments/filings. OCR text has stray spaces (e.g. '$1 .1768'); values confirmed in context. Fixed monthly charges and Public Fire Protection charge are extra (fire-protection table OCR is garbled)."
+ },
+ {
+  "id": "epaCHP2015",
+  "reachable": true,
+  "publisher": "U.S. Environmental Protection Agency, Combined Heat and Power Partnership (prepared by ICF International)",
+  "title": "Catalog of CHP Technologies",
+  "edition": "September 2017 revision (adds Section 7, packaged CHP). The source id says 2015 and the saved URL path is /2015-07/, but the file is the Sept 2017 edition, not the March 2015 edition.",
+  "date": "September 2017",
+  "url": "/mnt/user-data/beyond-data-sources/public/epaCHP2015/full.pdf",
+  "values": [
+   {
+    "blank_context": "Sep ___",
+    "value": "2017",
+    "quote": "September 2017 ... The September 2017 revision incorporated a new section on packaged CHP systems (Section 7).",
+    "where": "cover and Disclaimer page (p. ii)"
+   },
+   {
+    "blank_context": "Table ___-___",
+    "value": "1-3",
+    "quote": "Table 1-3. Comparison of CHP Technology Sizing, Cost, and Performance Parameters",
+    "where": "Section 1 Introduction"
+   },
+   {
+    "blank_context": "p. ___-___",
+    "value": "1-6",
+    "quote": "Table 1-3 ... 1-6 (list of tables); page footer '1-6'",
+    "where": "List of Tables; page footer"
+   },
+   {
+    "blank_context": "reciprocating engines ___–___% electric",
+    "value": "27-41%",
+    "quote": "Electric efficiency (HHV)  Recip. Engine 27-41%",
+    "where": "Table 1-3, p.1-6"
+   },
+   {
+    "blank_context": "recip ___–___% total (HHV)",
+    "value": "77-80%",
+    "quote": "Overall CHP efficiency (HHV)  77-80%",
+    "where": "Table 1-3, p.1-6"
+   },
+   {
+    "blank_context": "gas turbines ___–___% electric",
+    "value": "24-36%",
+    "quote": "Electric efficiency (HHV) ... Gas Turbine 24-36%",
+    "where": "Table 1-3, p.1-6"
+   },
+   {
+    "blank_context": "gas turbines ___–___% total",
+    "value": "66-71%",
+    "quote": "Overall CHP efficiency (HHV) ... 66-71%",
+    "where": "Table 1-3, p.1-6"
+   },
+   {
+    "blank_context": "power-to-heat ratio recip ___–___",
+    "value": "0.5-1.2",
+    "quote": "Typical power to heat ratio  0.5-1.2",
+    "where": "Table 1-3, p.1-6"
+   },
+   {
+    "blank_context": "power-to-heat ratio gas turbine ___–___",
+    "value": "0.6-1.1",
+    "quote": "Typical power to heat ratio ... 0.6-1.1",
+    "where": "Table 1-3, p.1-6"
+   }
+  ],
+  "unsupported_wording": "none (wording 'updated edition, Sep 2017' matches the file; but the id 'epaCHP2015' labels it as a 2015 document, which this file is not).",
+  "note": "Government report compiled 'from published industry sources' (disclaimer); figures are typical ranges, not EPA determinations. Table 1-3 also prints 'Effective electrical efficiency' (recip 75-80%, GT 50-62%), which should not be confused with overall CHP efficiency."
+ },
+ {
+  "id": "epcorStorm",
+  "reachable": true,
+  "publisher": "EPCOR Drainage Services",
+  "title": "Guidelines for Stormwater Management - Requirements for Individual Lot Development Areas between 0.16 ha to 3.0 ha",
+  "edition": "not stated",
+  "date": "No date printed in the document (PDF creation metadata 11 Jun 2018 only)",
+  "url": "/mnt/user-data/beyond-data-sources/public/epcorStorm/full.pdf",
+  "values": [
+   {
+    "blank_context": "control required for lots over ___ ha",
+    "value": "0.16",
+    "quote": "Stormwater runoff control is required for all lots greater than 0.16 ha.",
+    "where": "Introduction, PDF p.2"
+   },
+   {
+    "blank_context": "release ___ m³/s per ha",
+    "value": "0.035 (printed as 'CMS/ha' / 'cms/ha')",
+    "quote": "storm flows are to be restricted to 0.035CMS/ha or as required by EPCOR Drainage",
+    "where": "Introduction, PDF p.2; also Exhibit 2 note a 'Outflow rate is constant 0.035cms/ha' (PDF p.7)"
+   },
+   {
+    "blank_context": "storage for C = ___",
+    "value": "not determinable from the claim; table rows run C=0.10-1.00. For C=0.90 (paved/roof per the guideline) the row is: 2-yr 55, 5-yr 100, 10-yr 142, 25-yr 214, 50-yr 282, 100-yr 375, 200-yr 507 m3/ha",
+    "quote": "0.90  55  100  142  214  282  375  507  68  369  45",
+    "where": "Exhibit 2, 'STORAGE VOLUME IN CUBIC METERS/Ha', PDF p.7"
+   },
+   {
+    "blank_context": "___ m³/ha (___-year), ___ (___-year), ___ (___-year)",
+    "value": "depends on chosen C and return periods; printed return periods are 2, 5, 10, 25, 50, 100, 200 year plus 1937, 1978, 1988 storms",
+    "quote": "The 2 year, 5 year, 10 year, 25 year, 50 year, 100 year and 200 year storms are based on a 4 hour Chicago Distribution.",
+    "where": "Exhibit 2 note c, PDF p.7"
+   },
+   {
+    "blank_context": "Exhibit ___",
+    "value": "2",
+    "quote": "Exhibit 2 lists these storage volumes",
+    "where": "Storage Volume Determination, PDF p.2; table on PDF p.7"
+   }
+  ],
+  "unsupported_wording": "Title 'Guidelines for on-site stormwater management' is not the printed title (that phrase comes from the URL filename); printed title is 'Guidelines for Stormwater Management, Requirements for Individual Lot Development Areas between 0.16 ha to 3.0 ha'. Claim omits the 3.0 ha upper limit ('This method should only be used for drainage areas up to 3.0ha').",
+  "note": "Per-ha values assume 1 ha basin and constant 0.035 cms/ha outflow (Exhibit 2 notes a-b). Runoff coefficients printed: grass 0.1, gravel 0.5, paved 0.9, roof 0.9."
+ },
+ {
+  "id": "dfoScreen",
+  "reachable": true,
+  "publisher": "Fisheries and Oceans Canada (DFO)",
+  "title": "Water intake end-of-pipe fish screens",
+  "edition": "Interim mitigation procedure (web page)",
+  "date": "Date modified: 2026-06-17",
+  "url": "/mnt/user-data/beyond-data-sources/public/dfoScreen/page.html",
+  "values": [
+   {
+    "blank_context": "openings ≤ ___ mm",
+    "value": "2.54 (1 mm where eels and small-bodied species at risk <25 mm fork length are present)",
+    "quote": "Use a maximum slot or opening size of 2.54 mm if there is no presence of eels and small-bodied species-at-risk (< 25 mm fork length). Use a maximum slot or opening size of 1 mm in the presence of eels ...",
+    "where": "s.3.2.1 Effective screen area; Table C-1 Opening / slot size"
+   },
+   {
+    "blank_context": "approach velocity default ___ (low)",
+    "value": "page is inconsistent: 0.055 m/s in s.3.1.1, 0.035 m/s in Table C-1",
+    "quote": "Implement a maximum design approach velocity of 0.055 m/s for water bodies where fish community or habitat data are not available.  /  Where fish community data or fish habitat data are lacking ... the maximum approach velocity is 0.035 m/s for waterbodies.",
+    "where": "s.3.1.1 Approach velocity vs Table C-1 Design approach velocity"
+   },
+   {
+    "blank_context": "approach velocity default ___ (high)",
+    "value": "0.12 (conditional maximum, not a default)",
+    "quote": "Implement a design approach velocity of up to 0.12 m/s if the ambient flow is at least twice the design approach velocity.",
+    "where": "s.3.1.1; Table C-1 ('up to a maximum approach velocity of 0.12 m/s')"
+   }
+  ],
+  "unsupported_wording": "'mitigation standard' - page calls it an 'interim mitigation procedure'. 'Approach velocity default ___-___ m/s' misstates it: the default is a single maximum (0.035 m/s in Table C-1, but 0.055 m/s in s.3.1.1 - the page contradicts itself), and 0.12 m/s is a conditional ceiling only where sweeping velocity is at least 2x the approach velocity. 'Openings <=' should note the 1 mm limit where eels/small SAR are present.",
+  "note": "'May not apply to large intakes' is supported: 'the methods specified in this mitigation procedure may not be applicable to large water intakes or high withdrawal rates.' Federal guidance; application depends on the authorizing instrument."
+ },
+ {
+  "id": "nfcAB2023_5635",
+  "reachable": true,
+  "publisher": "National Research Council of Canada / Canadian Commission on Building and Fire Codes (Alberta Edition)",
+  "title": "National Fire Code - 2023 Alberta Edition",
+  "edition": "Sixth Edition 2023, Second Printing, 'Includes Revisions and Errata released in April 2026' (copyright 2026). nbc.txt is NBC of Canada 2020 Vol.1 (national, copyright 2025), not the NBC(AE).",
+  "date": "2023 edition; this printing 2026",
+  "url": "/mnt/attach/outputs/data/raw/codes/nfc_ab2023.pdf; /mnt/attach/outputs/data/raw/codes/nbc.txt",
+  "values": [
+   {
+    "blank_context": "National Fire Code ___ Alberta Edition",
+    "value": "2023",
+    "quote": "National Fire Code – 2023 Alberta Edition",
+    "where": "cover/title page"
+   },
+   {
+    "blank_context": "Div. B ___",
+    "value": "5.6.3.5.(1) (Article 5.6.3.5. Water Supply)",
+    "quote": "5.6.3.5. Water Supply 1) An adequate water supply for firefighting shall be provided as soon as combustible or encapsulated mass timber construction material arrives on the site.",
+    "where": "Div. B, p.5-18 (PDF p.298)"
+   },
+   {
+    "blank_context": "local copy nfc_ab2___pdf",
+    "value": "023. (file nfc_ab2023.pdf)",
+    "quote": "n/a (file name)",
+    "where": "file path"
+   },
+   {
+    "blank_context": "Note A-___ of the NBC(AE)",
+    "value": "3.2.5.7.",
+    "quote": "(See Note A-5.6.3.5.(1).) (See also Note A-3.2.5.7. of Division B of the NBC(AE).)",
+    "where": "Div. B 5.6.3.5.(1), p.5-18"
+   },
+   {
+    "blank_context": "BCBC ___",
+    "value": "3.2.5.7. (checked in bcbc2024.txt, BCBC 2024 Book I Revision 1; file not listed for this item)",
+    "quote": "3.2.5.7. Water Supply 1) Every building shall be provided with an adequate water supply for firefighting. (See Note A-3.2.5.7.(1).)",
+    "where": "bcbc2024.txt, Div. B 3.2.5.7."
+   },
+   {
+    "blank_context": "NBC ___ ___",
+    "value": "2020; 3.2.5.7.",
+    "quote": "National Building Code of Canada 2020 ... 3.2.5.7. Water Supply 1) Every building shall be provided with an adequate water supply for firefighting.",
+    "where": "nbc.txt, Div. B 3.2.5.7. (PDF p.248); Note A-3.2.5.7.(1)"
+   }
+  ],
+  "unsupported_wording": "none for the NFC(AE) clause. Minor: NFC(AE) points to Note A-3.2.5.7. of the NBC(AE); the checked file is the national NBC 2020, not the NBC(AE), so the Alberta note text itself was not checked. NBC/BCBC 3.2.5.7. applies to every building (permanent), not specifically construction sites; the construction-site trigger is in NFC 5.6.3.5.",
+  "note": "Code text. The NFC(AE) copy includes April 2026 revisions; the NFC 5.6.3.5. wording includes 'encapsulated mass timber construction material'."
+ },
+ {
+  "id": "canvecHydroBC",
+  "reachable": true,
+  "publisher": "not stated in file",
+  "title": "not stated in file (local JSON extract canvec_van_water_extract.json; both listed copies are byte-identical)",
+  "edition": "not stated",
+  "date": "not stated (feature 'd' field values 19800101-19880101)",
+  "url": "/mnt/attach/outputs/data/raw/hydro/canvec_van_water_extract.json; /mnt/user-data/uploads/Claude Link/canvec_van_water_extract.json",
+  "values": [
+   {
+    "blank_context": "CanVec ___K",
+    "value": "not stated",
+    "quote": "file holds only 206 records with keys t, n, d, r (type, name, date, rings); no metadata",
+    "where": "whole file"
+   },
+   {
+    "blank_context": "J.B. download ___ Oct ___",
+    "value": "not stated (file system mtime is 20 Oct, which is not a printed value)",
+    "quote": "n/a",
+    "where": "n/a"
+   },
+   {
+    "blank_context": "source maps from ___ on",
+    "value": "1980 (earliest 'd' value; field unlabelled, interpreting it as source map date is not stated in the file)",
+    "quote": "\"d\": \"19800101\" (7 features); \"19870101\" (197); \"19880101\" (2)",
+    "where": "'d' field across features"
+   }
+  ],
+  "unsupported_wording": "Nothing in the file states NRCan, CanVec, scale, 'Hydro', 'British Columbia', 'waterbody features', the Open Government Licence - Canada, or the download date; only the filename says 'canvec'. Supported: feature types 'Ocean' (148), 'Watercourse' (33), 'Side Channel' (25); 'Fraser River' appears as 2 'Watercourse' polygons; extent lon -123.5 to -122.5, lat 49.0 to 49.5 (Vancouver region). Calling the 'd' field 'source maps from' is an interpretation.",
+  "note": "This is a derived extract, not the cited NRCan product. Provenance (product, scale, licence, download date) must be verified from the original download or its metadata (a separate /mnt/attach/outputs/data/raw/canvec folder exists but was not in this item's files and was not checked)."
+ }
+]

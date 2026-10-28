@@ -1,0 +1,354 @@
+[
+ {
+  "id": "gridBC",
+  "reachable": true,
+  "publisher": "Province of British Columbia (gov.bc.ca)",
+  "title": "Electricity emission intensity factors for grid-connected entities",
+  "edition": "web page, 2025 EEIF",
+  "date": "Last updated on May 26, 2026",
+  "url": "/mnt/user-data/beyond-data-sources/public/gridBC/page.html",
+  "values": [
+   {
+    "blank_context": "BC ___ consumption-based grid factor",
+    "value": "2025",
+    "quote": "Year / Integrated Grid / Fort Nelson Grid / 2025 / 22.8 / 531.4",
+    "where": "section 'Grid intensity factors', table 'B.C.'s grid electricity GHG emission intensity factors in tCO2e/GWh'"
+   },
+   {
+    "blank_context": "grid factor ___ tCO2e/GWh",
+    "value": "22.8 (Integrated Grid, 2025)",
+    "quote": "2025 22.8 531.4",
+    "where": "same table, Integrated Grid column"
+   },
+   {
+    "blank_context": "(___: ___) first blank",
+    "value": "not identifiable from the claim; most likely 'Fort Nelson' or the data window",
+    "quote": "Fort Nelson Grid ... 2025 ... 531.4",
+    "where": "same table"
+   },
+   {
+    "blank_context": "(___: ___) second blank",
+    "value": "if Fort Nelson: 531.4; if data window: 2021-2024",
+    "quote": "2025's EEIF uses data from 2021-2024",
+    "where": "section 'Methodology for calculating EEIF'"
+   }
+  ],
+  "unsupported_wording": "none (the claim says 'BC' but 22.8 is the Integrated Grid factor only; Fort Nelson is 531.4)",
+  "note": "'Consumption-based' supported: 'The EEIFs are consumption-based estimate, meaning electricity imports are included and exports are excluded.' 4-year window. Older 2017-methodology values (e.g. 2020: 40.1) differ from 2021-methodology backcasts (2020: 9.2); don't mix. Parenthetical blanks are ambiguous; confirm against the tool's intended text."
+ },
+ {
+  "id": "wsa",
+  "reachable": true,
+  "publisher": "King's Printer, Victoria, British Columbia (BC Laws)",
+  "title": "Water Sustainability Regulation, B.C. Reg. 36/2016",
+  "edition": "consolidation current to October 20, 2026; last amended May 11, 2026 by B.C. Reg. 79/2026",
+  "date": "Deposited February 29, 2016",
+  "url": "/mnt/user-data/beyond-data-sources/public/wsa/page.html",
+  "values": [
+   {
+    "blank_context": "Sch. A items ___",
+    "value": "4",
+    "quote": "4 Cooling The diversion and use of water for cooling purposes in any manufacturing, processing or industrial operation",
+    "where": "Schedule A, Industrial Water Use Purposes table, item 4"
+   },
+   {
+    "blank_context": "and ___",
+    "value": "9",
+    "quote": "9 Heat exchange The diversion and use of water in industrial and commercial operations to extract or dissipate heat by passing water through an open loop system",
+    "where": "Schedule A, item 9"
+   }
+  ],
+  "unsupported_wording": "'licence required' is not stated in Schedule A; it only designates these uses as industrial purposes (s.2(1): 'are designated as uses of water for industrial purposes'). The licence requirement comes from the Water Sustainability Act, not this file. Also item 4 (Cooling) is not limited to open-loop, and applies to 'manufacturing, processing or industrial operation'; only item 9 says 'open loop system'.",
+  "note": "Whether a data centre counts as a 'manufacturing, processing or industrial operation' (item 4) is not stated; item 9 (industrial and commercial operations, open loop) fits more directly."
+ },
+ {
+  "id": "dfoRAS",
+  "reachable": true,
+  "publisher": "Fisheries and Oceans Canada, Canadian Science Advisory Secretariat (National Capital Region)",
+  "title": "Assessing Potential Technologies for Closed-Containment Saltwater Salmon Aquaculture",
+  "edition": "Science Advisory Report 2008/001",
+  "date": "March 2008",
+  "url": "/mnt/user-data/beyond-data-sources/public/dfoRAS/full.pdf",
+  "values": [
+   {
+    "blank_context": "SAR ___/___",
+    "value": "2008/001",
+    "quote": "Science Advisory Report 2008/001",
+    "where": "p.1 header"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Report is mainly about saltwater salmon closed containment; land-based RAS is discussed (Summary item 5). Workshop held Sidney, B.C., January 29-31 (p.3)."
+ },
+ {
+  "id": "dea",
+  "reachable": true,
+  "publisher": "Danish Energy Agency (ens.dk)",
+  "title": "Technology Data for Generation of Electricity and District Heating (landing page)",
+  "edition": "catalogue and data sheet 'Updated August 2026'",
+  "date": "Updated August 2026",
+  "url": "/mnt/user-data/beyond-data-sources/public/dea/page.html",
+  "values": [
+   {
+    "blank_context": "data sheet updated August ___",
+    "value": "2026",
+    "quote": "Data sheet for Electricity and district heat production - Updated August 2026",
+    "where": "landing page, download links"
+   },
+   {
+    "blank_context": "(___ EUR)",
+    "value": "not stated",
+    "quote": "",
+    "where": "not on landing page"
+   },
+   {
+    "blank_context": "sheets ___ (compression heat pumps)",
+    "value": "not stated",
+    "quote": "",
+    "where": "not on landing page"
+   },
+   {
+    "blank_context": "waste heat ___/___/___ MW",
+    "value": "not stated",
+    "quote": "",
+    "where": "not on landing page"
+   },
+   {
+    "blank_context": "___ (electric boilers)",
+    "value": "not stated",
+    "quote": "",
+    "where": "not on landing page"
+   },
+   {
+    "blank_context": "___ (gas boilers)",
+    "value": "not stated",
+    "quote": "",
+    "where": "not on landing page"
+   },
+   {
+    "blank_context": "___ (pit storage)",
+    "value": "not stated",
+    "quote": "",
+    "where": "not on landing page"
+   },
+   {
+    "blank_context": "filename DEA_technology_data_el_dh____-___xlsx",
+    "value": "not stated",
+    "quote": "links are '/media/8614/download' etc., no filenames",
+    "where": "page HTML hrefs"
+   }
+  ],
+  "unsupported_wording": "Title differs slightly: page says 'Technology Data for Generation of Electricity and District Heating' / 'Technology Data Catalogue for Electricity and District Heating Production'; claim's 'Technology Data for Electricity and District Heating Production' is close but not verbatim. Sheet numbers, price year, MW sizes and filename are not on the saved page.",
+  "note": "Saved file is the landing page, not the xlsx data sheet the claim cites. The xlsx (J.B. download) and dea_catalogue_extract.json are needed to check sheet numbers, EUR year and MW sizes. Page also lists 'Technology Brief: Update of large heat pumps, geothermal, el and geth boilers (June 2026)'."
+ },
+ {
+  "id": "rts06419",
+  "reachable": true,
+  "publisher": "City of Vancouver, Administrative Report (General Manager of Engineering Services)",
+  "title": "Neighbourhood Energy Utility - Evaluation of Heat Source Options",
+  "edition": "RTS No. 06419, to Standing Committee on City Services and Budgets",
+  "date": "Report date November 27, 2006; meeting December 14, 2006",
+  "url": "/mnt/user-data/beyond-data-sources/public/rts06419/full.pdf",
+  "values": [
+   {
+    "blank_context": "RTS ___",
+    "value": "06419",
+    "quote": "RTS No.: 06419",
+    "where": "p.1 header"
+   },
+   {
+    "blank_context": "(___)",
+    "value": "2006 (report Nov 27, 2006; meeting Dec 14, 2006)",
+    "quote": "Report Date: November 27, 2006 ... Meeting Date: December 14, 2006",
+    "where": "p.1"
+   },
+   {
+    "blank_context": "___ MW sewage heat base",
+    "value": "2.5",
+    "quote": "sewer heat and biomass facilities with the same base heat output (2.5 megawatt)",
+    "where": "p.4; also Appendix A p.10"
+   },
+   {
+    "blank_context": "COP ~___",
+    "value": "3 (printed as heat ratio/300%, not as 'COP')",
+    "quote": "this heat pump would produce roughly 3 units of heat energy for every 1 unit of electricity consumed, with an efficiency rating of 300%",
+    "where": "p.4"
+   },
+   {
+    "blank_context": "$___/MWh levelized",
+    "value": "59 (sewer heat with natural gas peaking; capital $30, operating $29)",
+    "quote": "Levelized Cost $/MWhr ... Total: $59 ... Capital: $30 ... Operating: $29",
+    "where": "Appendix A table, p.10; Fig. 3 p.7 gives units as '2006 $/MW.hr', 25-year levelized"
+   },
+   {
+    "blank_context": "pp.___ ___",
+    "value": "4, 10 (and 7 for Fig. 3)",
+    "quote": "",
+    "where": "page numbers printed in report headers"
+   }
+  ],
+  "unsupported_wording": "'COP' is not used in the source (it says 'efficiency rating of 300%'). The 2.5 MW is a comparison size, not a design: 'actual base heat output ... may be higher or lower'. The report recommended biomass, not sewage heat, for Phase 1.",
+  "note": "$59/MWh is in 2006 dollars, 25-year levelized, and includes natural gas peaking. Staff estimate, not measured."
+ },
+ {
+  "id": "ion2022",
+  "reachable": true,
+  "publisher": "Elsevier (Energy Reports)",
+  "title": "Heat requirement in an indoor recirculating aquaculture system",
+  "edition": "Research paper, open access CC BY-NC-ND; doi 10.1016/j.egyr.2022.08.245",
+  "date": "2022 (available online 21 September 2022)",
+  "url": "/mnt/user-data/beyond-data-sources/private/ion2022/fulltext.txt",
+  "values": [
+   {
+    "blank_context": "et al. ___",
+    "value": "2022",
+    "quote": "Energy Reports 8 (2022) 11707–11714",
+    "where": "page header"
+   },
+   {
+    "blank_context": "Energy Reports ___",
+    "value": "8",
+    "quote": "Energy Reports 8 (2022) 11707–11714",
+    "where": "page header"
+   },
+   {
+    "blank_context": ":___–___",
+    "value": "11707–11714",
+    "quote": "Energy Reports 8 (2022) 11707–11714",
+    "where": "page header"
+   }
+  ],
+  "unsupported_wording": "none ('indoor RAS' abbreviates 'indoor recirculating aquaculture system')",
+  "note": "Authors: Ion V. Ion, Florin Popescu, Gelu Coman, and a fourth author (name garbled in text extraction). Dunarea de Jos University of Galati, Romania. Saved file is extracted text, not the PDF. Article is open access (CC BY-NC-ND), though info.json says 'copyrighted: keep private'."
+ },
+ {
+  "id": "vanFoot",
+  "reachable": true,
+  "publisher": "City of Vancouver Open Data Portal",
+  "title": "Building footprints 2009",
+  "edition": "dataset page; 'reflects conditions in 2009 and is not being updated'",
+  "date": "not stated on saved page",
+  "url": "/mnt/user-data/beyond-data-sources/public/vanFoot/page.html",
+  "values": [
+   {
+    "blank_context": "Building footprints ___",
+    "value": "2009",
+    "quote": "Building footprints 2009",
+    "where": "page title / meta"
+   },
+   {
+    "blank_context": "geo_point____d",
+    "value": "not stated as a field of this dataset (string 'geo_point_2d' appears only in the portal's generic field-type labels)",
+    "quote": "\"geo_point_2d\":{\"$$noContext\":\"geo point\"}",
+    "where": "page script i18n block"
+   },
+   {
+    "blank_context": "schema confirmed ___ Oct ___",
+    "value": "not stated",
+    "quote": "",
+    "where": "not in source (author's own check date)"
+   },
+   {
+    "blank_context": "___ snapshot",
+    "value": "2009",
+    "quote": "This dataset reflects conditions in 2009 and is not being updated.",
+    "where": "meta description"
+   }
+  ],
+  "unsupported_wording": "The field list (id, orient8, bldgid, topelev_m, med_slope, baseelev_m, hgt_agl, rooftype, area_m2, avght_m, minht_m, maxht_m, base_m, len, wid, geom, geo_point_2d) is not on the saved page; the schema is loaded by JavaScript and was not captured.",
+  "note": "Page says data are generated from 2009 LiDAR, 'approximate', 'best used for comparison purposes only'. Schema needs checking against an export (csv/json) or the API."
+ },
+ {
+  "id": "dkPrisloftFAQ",
+  "reachable": true,
+  "publisher": "Forsyningstilsynet (Danish Utility Regulator)",
+  "title": "FAQ Prisloft på overskudsvarme",
+  "edition": "Version 2",
+  "date": "1 November 2023",
+  "url": "/mnt/user-data/beyond-data-sources/public/dkPrisloftFAQ/full.pdf",
+  "values": [
+   {
+    "blank_context": "cap applies to plants ≥ ___ MW",
+    "value": "0,25 (0.25)",
+    "quote": "Prisloftet gælder for anlæg, der udnytter og leverer overskudsvarme, med en kapacitet på mindst 0,25 MW.",
+    "where": "p.3 (Baggrund) and p.7 ('For hvilke anlæg gælder prisloftet?')"
+   }
+  ],
+  "unsupported_wording": "none. Quote is verbatim on p.8 (hyphenated 'prislof-tet' across a line break). Heat pump, connection, O&M and supplier payment are on p.9: 'omkostninger til tilslutning, investering, drift og vedligehold af anlægget samt evt. betaling til den virksomhed, der leverer overskudsvarme' and 'hæve temperaturen ... ved anvendelse af en varmepumpe'.",
+  "note": "Source also lists 'investering' and any necessary taxes ('afgifter'). The cap binds the heat supply company; the surplus-heat supplier is exempt (p.7). Plants under 0.25 MW are exempt."
+ },
+ {
+  "id": "vanCAC",
+  "reachable": true,
+  "publisher": "City of Vancouver",
+  "title": "Community Amenity Contributions Policy for Rezonings",
+  "edition": "Approved by Council January 28, 1999; last amended September 30, 2026",
+  "date": "September 2026",
+  "url": "/mnt/user-data/beyond-data-sources/public/vanCAC/full.pdf",
+  "values": [
+   {
+    "blank_context": "amended ___ Sep ___",
+    "value": "30 Sep 2026",
+    "quote": "Last amended September 30, 2026",
+    "where": "p.1 cover"
+   },
+   {
+    "blank_context": "s.___(c)",
+    "value": "8.2",
+    "quote": "8.2 Rezoning applications that meet any of the following conditions will be exempt from CACs:",
+    "where": "s.8 Exemptions, p.10"
+   },
+   {
+    "blank_context": "submitted after ___ Sep ___",
+    "value": "30 Sep 2026",
+    "quote": "(c) Rezonings submitted after September 30, 2026 that include 100% commercial, industrial and institutional (hospital, post-secondary, care facility) developments;",
+    "where": "s.8.2(c), p.10"
+   },
+   {
+    "blank_context": "___ % commercial, industrial and institutional",
+    "value": "100",
+    "quote": "that include 100% commercial, industrial and institutional",
+    "where": "s.8.2(c), p.10"
+   }
+  ],
+  "unsupported_wording": "Minor: source limits 'institutional' to '(hospital, post-secondary, care facility)'; the claim drops this qualifier.",
+  "note": "CAC targets in Appendix Table 1 apply only to applications submitted before Sept 30, 2026 (p.11). Whether a data centre counts as 'commercial' or 'industrial' under this policy is not stated."
+ },
+ {
+  "id": "neuSewage",
+  "reachable": true,
+  "publisher": "City of Vancouver (vancouver.ca)",
+  "title": "Sewage heat recovery expansion project",
+  "edition": "web page",
+  "date": "not stated on saved page (saved 2026-10-25)",
+  "url": "/mnt/user-data/beyond-data-sources/public/neuSewage/page.html",
+  "values": [
+   {
+    "blank_context": "'___ megawatts (MW) of sewage heat recovery capacity'",
+    "value": "3.2",
+    "quote": "The NEU began operating in 2010, supplying thermal energy to Southeast False Creek with 3.2 megawatts (MW) of sewage heat recovery capacity.",
+    "where": "section 'About the expansion'"
+   },
+   {
+    "blank_context": "'an additional ___ megawatts'",
+    "value": "not stated",
+    "quote": "",
+    "where": "phrase not on saved page"
+   },
+   {
+    "blank_context": "two ___ MW heat pumps",
+    "value": "3.3",
+    "quote": "Two new sewage-to-water heat pumps, each with a thermal output of 3.3 MW",
+    "where": "section 'About the expansion'"
+   },
+   {
+    "blank_context": "end of ___",
+    "value": "2024",
+    "quote": "turned on 2 new sewage-to-water heat pumps at the end of 2024",
+    "where": "'Latest news' box"
+   }
+  ],
+  "unsupported_wording": "The quoted phrase 'an additional ___ megawatts' does not appear on the saved page. 6.6 MW total would be a calculation (2 x 3.3), not printed.",
+  "note": "Page also says the new heat pumps 'operate at over 300% efficiency' (operator claim). Expansion approved by Council in 2018. Funding: CleanBC $10.2M grant; FCM GMF $8.6M financing with $1.3M grant."
+ }
+]

@@ -1,0 +1,300 @@
+[
+ {
+  "id": "cimd",
+  "reachable": true,
+  "publisher": "Statistics Canada (via Open Government Portal, open.canada.ca)",
+  "title": "Canadian Index of Multiple Deprivation 2021",
+  "edition": "2021 (with correction of October 22, 2024)",
+  "date": "2025-04-07 (record date shown on page)",
+  "url": "/mnt/user-data/beyond-data-sources/public/cimd/page.html",
+  "values": [
+   {
+    "blank_context": "Canadian Index of Multiple Deprivation ___ (DA level)",
+    "value": "2021",
+    "quote": "Canadian Index of Multiple Deprivation 2021 ... at the dissemination area (DA)-level",
+    "where": "page title and description paragraph"
+   },
+   {
+    "blank_context": "Census ___ DA boundaries",
+    "value": "2021 (Census year printed; 'boundaries' not printed)",
+    "quote": "used 2021 Census of Population microdata ... Dictionary, Census of Population, 2021 - Dissemination area (DA)",
+    "where": "description paragraph; resource list"
+   }
+  ],
+  "unsupported_wording": "'DA boundaries' is not stated: the page says the index uses 2021 Census microdata at DA level and links a 2021 DA dictionary entry, but does not name a boundary file. The ESRI/GDB resources are listed but their geometry vintage is not printed.",
+  "note": "Portal dataset record, not the StatCan Dataset and User Guide (catalogue 45200001), which is only linked. Page notes a correction dated October 22, 2024 affecting all data in the Canada, Atlantic, Quebec, Ontario, Prairies and BC datasets."
+ },
+ {
+  "id": "lbnl2024",
+  "reachable": true,
+  "publisher": "Lawrence Berkeley National Laboratory (ETA Publications page)",
+  "title": "2024 United States Data Center Energy Usage Report",
+  "edition": "2024",
+  "date": "12/19/2024",
+  "url": "/mnt/user-data/beyond-data-sources/public/lbnl2024/page.html",
+  "values": [
+   {
+    "blank_context": "Shehabi et al., ___ United States Data Center Energy Usage Report",
+    "value": "2024",
+    "quote": "2024 United States Data Center Energy Usage Report",
+    "where": "page title"
+   },
+   {
+    "blank_context": "LBNL-___",
+    "value": "2001637",
+    "quote": "LBL Report Number LBNL-2001637",
+    "where": "metadata"
+   },
+   {
+    "blank_context": "Dec ___",
+    "value": "2024",
+    "quote": "Date Published 12/19/2024",
+    "where": "metadata"
+   },
+   {
+    "blank_context": "DOI ___/P1WC7Q",
+    "value": "10.71468",
+    "quote": "DOI 10.71468/P1WC7Q",
+    "where": "metadata"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Saved file is the publication landing page (abstract and metadata), not the report PDF. First author Arman Shehabi is listed. Supports citation details only; no report content checked."
+ },
+ {
+  "id": "healthCanada2026",
+  "reachable": true,
+  "publisher": "Health Canada (Canada.ca)",
+  "title": "Guidance on upper indoor temperature limits: Protecting the health of older adults",
+  "edition": "June 2026",
+  "date": "June 2026",
+  "url": "/mnt/user-data/beyond-data-sources/public/healthCanada2026/page.html",
+  "values": [
+   {
+    "blank_context": "Health Canada ___ upper indoor temperature limits",
+    "value": "2026",
+    "quote": "June 2026",
+    "where": "header under title"
+   },
+   {
+    "blank_context": "(___ °C)",
+    "value": "26 (31 °C also printed as a 'critical threshold', not a limit)",
+    "quote": "Health Canada recommends an upper indoor temperature limit of 26°C to protect older adults ... indoor temperatures above 31°C represent a critical threshold where health impacts escalate dramatically",
+    "where": "Summary; Section 5.0 Recommendation"
+   }
+  ],
+  "unsupported_wording": "Minor: claim says 'limits' (plural); the document recommends a single limit of 26°C. It is guidance (a recommendation), framed as health-protective for adults aged 60+, not a regulation.",
+  "note": "Scope is older adults (60+); the document notes 26°C 'may not be protective of all older adults'. HTML page of a 36-page PDF."
+ },
+ {
+  "id": "vanDCFC",
+  "reachable": true,
+  "publisher": "City of Vancouver (General Manager of Planning, Urban Design and Sustainability)",
+  "title": "Requirements for Electric Vehicle Charging in New Non-Residential Buildings – Climate Emergency (Council report, RTS 14229)",
+  "edition": "Report dated June 22, 2021; Appendix A draft by-law",
+  "date": "2021-06-22 (meeting date July 6, 2021)",
+  "url": "/mnt/user-data/beyond-data-sources/public/vanDCFC/full.pdf",
+  "values": [
+   {
+    "blank_context": "DCFC ___–___ kW",
+    "value": "25–400",
+    "quote": "typically supplies output power between 25 and 400kW",
+    "where": "Appendix A (draft by-law amending Parking By-law No. 6059), s.2(a), PDF p.7"
+   }
+  ],
+  "unsupported_wording": "The source is a Council report recommending approval 'in principle' with a DRAFT amending by-law (Appendix A, 'BY-LAW NO. ______'), not the enacted amendment. It amends the Parking By-law No. 6059. The 25–400 kW range is 'typically', not a defined limit; the definition's hard bound is output voltage 50–1000V.",
+  "note": "Calling it an 'EV charging by-law amendment' needs the enacted by-law to confirm the wording survived; this file doesn't show that."
+ },
+ {
+  "id": "vbblHDD",
+  "reachable": true,
+  "publisher": "City of Vancouver, via BC Publications (free.bcpublications.ca civix)",
+  "title": "Vancouver Building By-law, Division B Part 1, Section 1.1 General",
+  "edition": "VBBL 2014 (URL path vbbl2014; revision markers to 2015-12-11)",
+  "date": "not stated (latest revision marker BC2012 2015-12-11 R8)",
+  "url": "/mnt/user-data/beyond-data-sources/public/vbblHDD/page.html",
+  "values": [
+   {
+    "blank_context": "Vancouver Building By-law ___",
+    "value": "2014 (from source URL/link paths only, not printed in page text)",
+    "quote": "/civix/document/id/public/vbbl2014/ep001021.1",
+    "where": "info.json URL and page link paths"
+   },
+   {
+    "blank_context": "Table ___",
+    "value": "1.1.3.1.A (also 1.1.3.1.B, same HDD)",
+    "quote": "Table 1.1.3.1.A Climatic Data for the City of Vancouver – Except Granville & 41st Avenue",
+    "where": "Article 1.1.3.1."
+   },
+   {
+    "blank_context": "HDD ___",
+    "value": "2 925",
+    "quote": "Degree-days below 18°C 2 925",
+    "where": "Table 1.1.3.1.A row 5 (and Table 1.1.3.1.B row 5)"
+   }
+  ],
+  "unsupported_wording": "'HDD' is not printed; the table says 'Degree-days below 18°C'.",
+  "note": "Saved page is the 2014 VBBL edition. The page does not say whether it is the current by-law; if the tool cites a later VBBL edition, this is a different edition and needs re-checking."
+ },
+ {
+  "id": "lbnlBench",
+  "reachable": true,
+  "publisher": "Lawrence Berkeley National Laboratory (Tengfang Xu and Steve Greenberg); draft by EYP Mission Critical Facilities and Landsberg Engineering",
+  "title": "Data Center Energy Benchmarking: Part 5 - Case Studies on a Corporate Data Center (No. 22), Final Report",
+  "edition": "Final Report",
+  "date": "August 2007",
+  "url": "/mnt/user-data/beyond-data-sources/public/lbnlBench/full.pdf",
+  "values": [
+   {
+    "blank_context": "benchmarking #___",
+    "value": "22",
+    "quote": "Case Studies on a Corporate Data Center (No. 22) ... Data Center #22",
+    "where": "title page; Section 2.1"
+   },
+   {
+    "blank_context": "(___)",
+    "value": "2007 if a year is meant (also printed: Pasadena, California)",
+    "quote": "Final Report August 2007",
+    "where": "title page"
+   },
+   {
+    "blank_context": "___ racks",
+    "value": "377",
+    "quote": "The data center housed 377 computer racks",
+    "where": "Executive Summary, p.1 (PDF p.4)"
+   },
+   {
+    "blank_context": "in ___ ft²",
+    "value": "10,000",
+    "quote": "a total floor area of 10,000 square feet (ft2)",
+    "where": "Executive Summary, p.1 (PDF p.4)"
+   }
+  ],
+  "unsupported_wording": "none (the second blank's meaning is ambiguous; check whether the claim means the year 2007 or the location)",
+  "note": "10,000 ft² is the data-centre floor area; the building is 110,000 ft². Printed only in ft² (any m² figure is a conversion)."
+ },
+ {
+  "id": "woodcroftDDR",
+  "reachable": true,
+  "publisher": "EPCOR Distribution & Transmission Inc. (EDTI); hosted by AESO",
+  "title": "Distribution Deficiency Report (DDR) for Woodcroft Transformer Capacity Increase",
+  "edition": "Revision 1",
+  "date": "September 12, 2025",
+  "url": "/mnt/user-data/beyond-data-sources/public/woodcroftDDR/full.pdf",
+  "values": [
+   {
+    "blank_context": "Rev ___",
+    "value": "1",
+    "quote": "Rev 1 September 12, 2025 Sana Adil AESO Connection Process, Stage 3 Revision",
+    "where": "Document History, p.3"
+   },
+   {
+    "blank_context": "___ Sep",
+    "value": "12",
+    "quote": "September 12, 2025",
+    "where": "cover sign-off table; Document History p.3"
+   },
+   {
+    "blank_context": "Sep ___",
+    "value": "2025",
+    "quote": "September 12, 2025",
+    "where": "cover; page footers"
+   }
+  ],
+  "unsupported_wording": "Minor: the title is 'Distribution Deficiency Report (DDR) for Woodcroft Transformer Capacity Increase'; 'Woodcroft POD' is used in the body, not the title.",
+  "note": "Utility (operator) document: forecasts in it (e.g. N-1 exceedance in 2032) are EDTI claims. info.json marks it the same file as source 'woodcroft'. Rev 0 was May 15, 2022."
+ },
+ {
+  "id": "altaReg117",
+  "reachable": true,
+  "publisher": "Alberta King's Printer (not CanLII)",
+  "title": "Data Centre Regulation, Alberta Regulation 117/2026, Electric Utilities Act",
+  "edition": "Extract, current as of June 9, 2026 (no amdt)",
+  "date": "2026-06-09 (current-as-of date)",
+  "url": "/mnt/attach/outputs/data/raw/ab/alta_reg_117_2026.txt",
+  "values": [
+   {
+    "blank_context": "Alta Reg ___/___",
+    "value": "117/2026",
+    "quote": "Alberta Regulation 117/2026",
+    "where": "cover"
+   },
+   {
+    "blank_context": "current as posted ___-___-___",
+    "value": "2026-06-09 (printed as 'June 9, 2026'; ISO form is reformatting)",
+    "quote": "Current as of June 9, 2026",
+    "where": "cover (King's Printer extract)"
+   },
+   {
+    "blank_context": "retrieved ___-___-___",
+    "value": "not stated",
+    "quote": "",
+    "where": "not in file"
+   },
+   {
+    "blank_context": "data/Alta_Reg_________Data_Centre_Regulation.pdf",
+    "value": "117_2026 (filename only; a PDF with that name exists at /mnt/attach/outputs/data/)",
+    "quote": "Alta_Reg_117_2026_Data_Centre_Regulation.pdf",
+    "where": "directory listing"
+   }
+  ],
+  "unsupported_wording": "'CanLII' is not supported: the saved text is the Alberta King's Printer extract and never mentions CanLII. The 'current as posted' date in the file is the King's Printer 'Current as of' date, not a CanLII posting date. No retrieval date is in the file.",
+  "note": "Checked the .txt only, not the PDF. Regulation must be reviewed on or before May 31, 2030 and expires May 31, 2035 (s.12)."
+ },
+ {
+  "id": "nrelRSF",
+  "reachable": true,
+  "publisher": "National Renewable Energy Laboratory (Otto Van Geet, PE); hosted on DOE EERE website",
+  "title": "NREL Research Support Facility Data Center Case Study",
+  "edition": "slide deck (PDF metadata created 2011-08-29)",
+  "date": "not printed (data period Oct '10 – July '11; PDF created Aug 29, 2011)",
+  "url": "/mnt/user-data/beyond-data-sources/public/nrelRSF/full.pdf",
+  "values": [
+   {
+    "blank_context": "Average ERE = ___ (calculated, not measured)",
+    "value": "0.91",
+    "quote": "Average ERE = 0.91 (calculated, not measured)",
+    "where": "'Results' slide, PDF p.23"
+   },
+   {
+    "blank_context": "Average PUE = ___ (measured)",
+    "value": "1.18",
+    "quote": "Average PUE = 1.18 (measured)",
+    "where": "'Results' slide, PDF p.23"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Both quotes are verbatim. These are operator-reported figures (NREL about its own facility), for Oct 2010 – July 2011. The slide adds that ERE 'Maybe lower' if waste heat offsets building heating."
+ },
+ {
+  "id": "vanPermitTimes",
+  "reachable": true,
+  "publisher": "City of Vancouver, Office of the City Manager (Paul Mochrie)",
+  "title": "Permitting Improvement Program Update (memo); cover email subject '3-3-3-1 permitting program update'",
+  "edition": "n/a",
+  "date": "February 10, 2025",
+  "url": "/mnt/user-data/beyond-data-sources/public/vanPermitTimes/full.pdf",
+  "values": [
+   {
+    "blank_context": "___ Feb",
+    "value": "10",
+    "quote": "MEMORANDUM February 10, 2025",
+    "where": "memo header, p.1 of 9 (PDF p.3)"
+   },
+   {
+    "blank_context": "Feb ___",
+    "value": "2025",
+    "quote": "February 10, 2025",
+    "where": "memo header"
+   },
+   {
+    "blank_context": "(___-___-___-___ permitting)",
+    "value": "3-3-3-1",
+    "quote": "Council's June 2023 3-3-3-1 Permit Approval Framework",
+    "where": "Section A, p.1 of 9"
+   }
+  ],
+  "unsupported_wording": "none",
+  "note": "Quote is verbatim but across a line break: 'Target D – Highrise and largescale projects. One year to approve permits for high rise and large-scale projects' (Section A). 'Industrial/data-centre times not stated' is supported: no mention of industrial or data centres anywhere in the file. The formal memo subject is 'Permitting Improvement Program Update'. Target D is defined as new buildings above twelve storeys or larger than 485,000 sq ft, with residential housing types listed (Appendix, p.9 of 9). Figures cover City processing time only."
+ }
+]
