@@ -1,0 +1,326 @@
+[
+ {
+  "id": "vanEnergyReport",
+  "citation": "City of Vancouver Annual Energy and Carbon Report (by-law reporting, buildings ≥100,000 ft²), map at https://energycarbonreport.vancouver.ca/map/ — four sites screenshot by J.B. 10 Oct 2026; derivations in data/vancouver_energy_report.json; reporting year 2025 (selector confirmed)",
+  "sweep_verdict": "Found, details wrong",
+  "sweep_problem": "City page calls it the 'Energize Vancouver reporting map' and sets reporting at existing buildings ≥4,645 m2 (50,000 ft2), not ≥100,000 ft2; map shows only owners who agreed to disclose; 2025 year not verified",
+  "used_for": [
+   {
+    "part": "Gross floor area",
+    "coef": "Edmonton: total_gross_area field; Vancouver: BCA Non-Residential Inventory Extract (UBC Abacus, listed as \"Commercial\"): pos. 19 Gross Building Area, 7 Gross Leasable Area, 8 Net Leasable Area, 20 Basement Area (all ft²), 6 Storeys, 4 Year Built, 42 Type of Heating, 45 Type of Construction (A steel / B concrete / C masonry / D wood-steel), 48 Zoning; one row per building or part — sum per roll number; quarterly .txt; no areas for ad valorem properties (major industrial, utilities, schools, airports) → fall back to footprint × storeys; Vancouver footprints 2009 carry area_m2 and hgt_agl/avght_m/maxht_m, rooftype, len, wid — fallback at 60 (storey-height divisor assumed; buildings after 2009 a",
+    "role": [
+     {
+      "id": "vanEnergyReport",
+      "term": "measured GFA for four listed buildings",
+      "role": "check",
+      "conf": 80,
+      "verified": true
+     }
+    ]
+   },
+   {
+    "part": "IT load, actual (range)",
+    "coef": "colocation server utilisation 0.21→0.35 (LBNL 2024); capacity utilisation 0.5 (LBNL); average ÷ servers' combined maximum ≈ 0.6 (Fan et al. 2007, real data centre); leased share proxy: Digital Realty Toronto occupancy 96.4%, 55.8 MW white-space (Q2 2025 supplemental p.24) — occupancy ≠ utilisation; measured whole-building ceiling (City energy report): 555 W Hastings site EUI 1.84 GJ/m² → 37.4 GWh/yr total, 32.5 GWh non-heat ≈ 3.7 MW average for the whole 73,000 m² tower, data centre and offices together — so the ≥3.7 MW of operator nameplate claims cannot all be running at once; 1050 W Pender 11.2 GWh non-heat ≈ 1.3 MW avg; 900 W Hastings 0.57 MW; 111 E 5th 0.45 MW (no data centre yet); Equi",
+    "role": [
+     {
+      "id": "vanEnergyReport",
+      "term": "measured whole-building ceiling (3.7 MW at 555 W Hastings)",
+      "role": "bound",
+      "conf": 80,
+      "verified": true
+     }
+    ]
+   },
+   {
+    "part": "Receiver heat demand",
+    "coef": "heating-only intensity, CEUD 2023: BC 0.57 / AB 1.40 GJ/m² overall; offices 0.45 / 1.13; heat is 48–63% of energy in BC, 62–83% in Alberta; hospitals from SCIEU 2024 (BC 1.90, AB 2.46 GJ/m² total); type medians NRCan ENERGY STAR; delivered fuel, not useful heat (boiler efficiency not yet sourced); 2023 a warm year | 19 Oct 2026 (make_bigrecv.py): large buildings added at the Vancouver GHG by-law reporting thresholds in both cities (commercial ≥ 4,645 m², multi-family and hotels ≥ 9,290 m²). Vancouver: owner-reported floor area × reported heat energy intensity (measured, disclosed buildings only: 200 added). Edmonton: assessment gross area of Other Residential × 0.777 GJ/m² and Commercial × 1",
+    "role": [
+     {
+      "id": "vanEnergyReport",
+      "term": "measured heat intensity of listed hosts (0.24–0.32 GJ/m²)",
+      "role": "data",
+      "conf": 80,
+      "verified": true
+     }
+    ]
+   },
+   {
+    "part": "Receivers within reach",
+    "coef": "types: hot-water district network · ambient (low-temperature) network · steam network · pool · ice rink (also a source) · school · hospital or care home · housing · office · greenhouse · wastewater plant. Pools: water ≤ 37 °C by regulation, 25–28 °C recommended for competition pools (BC 2025). Ambient networks (Blatchford) take heat near ground temperature and lift it in each building. Hot water stored for taps must be at least 60 °C, and 49 °C anywhere in a recirculation loop (Vancouver Building By-law 2025 Book II, 2.6.1.12.(1), 2.6.1.1.(3)); so data-centre heat at 25–35 °C can preheat tap water but a heat pump or other source must finish it. Map records (15 Oct 2026, tool/receivers_*.json",
+    "role": [
+     {
+      "id": "vanEnergyReport",
+      "term": "Receivers within reach",
+      "role": "data",
+      "conf": 70,
+      "verified": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "edmParcel",
+  "citation": "Edmonton Property Information: total_gross_area, zoning, year_built per parcel; Rooflines 2019: building height — https://data.edmonton.ca/d/dkk9-cj3x",
+  "sweep_verdict": "Unreachable",
+  "sweep_problem": "Dataset, field names and Rooflines 2019 not verified; two datasets cited with one URL",
+  "used_for": [
+   {
+    "part": "Gross floor area",
+    "coef": "Edmonton: total_gross_area field; Vancouver: BCA Non-Residential Inventory Extract (UBC Abacus, listed as \"Commercial\"): pos. 19 Gross Building Area, 7 Gross Leasable Area, 8 Net Leasable Area, 20 Basement Area (all ft²), 6 Storeys, 4 Year Built, 42 Type of Heating, 45 Type of Construction (A steel / B concrete / C masonry / D wood-steel), 48 Zoning; one row per building or part — sum per roll number; quarterly .txt; no areas for ad valorem properties (major industrial, utilities, schools, airports) → fall back to footprint × storeys; Vancouver footprints 2009 carry area_m2 and hgt_agl/avght_m/maxht_m, rooftype, len, wid — fallback at 60 (storey-height divisor assumed; buildings after 2009 a",
+    "role": [
+     {
+      "id": "edmParcel",
+      "term": "total_gross_area (Edmonton)",
+      "role": "data",
+      "conf": 80,
+      "verified": true
+     }
+    ]
+   },
+   {
+    "part": "Time horizons",
+    "coef": "Servers: average life 4.4 → 5 → 5.7 years (2000–2019, 2020, 2023; LBNL 2024); filings moved server useful lives to 5–6 years (Microsoft, Alphabet, Meta; Amazon partly back to 5 in 2025); Barroso: servers depreciated over 3–4 years, facilities over 15–20; plant medians ~20–25 years (ASHRAE); district-heating pipes 30 years at 120 °C, 50 only below 115 °C (EN 253); contracts: colocation 2–5 years, scale 5–10+ (Digital Realty); heat contracts 10 + 5 (Stockholm Exergi); Tallaght plant 25–35 years; Seattle permit 10 + two 10-year renewals; Vancouver property-tax report flags holding sites (improvement ÷ land value); Statistics Canada economic lives: office buildings 27 yr, warehouses 25.4, comput",
+    "role": [
+     {
+      "id": "edmParcel",
+      "term": "research pass 16 Oct 2026 (earlier source)",
+      "role": "parity: the other city",
+      "conf": 70,
+      "verified": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "bytes2heat",
+  "citation": "DENEFF / IER Stuttgart, Bytes2Heat Best-Practice-Übersicht (2023): Telehouse FRANKY 35 MW DC → Westville 2,400 MWh/yr, 2 × 320 kWth HPs, 30 → 70 °C, 15-yr contract; ReUseHeat Braunschweig 300 kWth, COP 3.6 design, 25/18 → 70/40 °C, 1,750 MWh/yr, €460k; HLRS 270 MWh/yr — https://deneff.org/wp-content/uploads/2023/05/Bytes2Heat-Best-Practice-Uebersicht.pdf",
+  "sweep_verdict": "Found, details wrong",
+  "sweep_problem": "Braunschweig 1,750 MWh/yr not in document (demand 2,100 MWh/a, network 4.2 GWh/a); temps are 18–25 °C → 70 °C (70/40 is FRANKY); document does not name DENEFF/IER as authors",
+  "used_for": [
+   {
+    "part": "Heat-pump COP (Lorenz)",
+    "coef": "checks: ~3 at 20→75 °C; 4.5–5.0 Odense; DEA Aug 2026 waste-heat heat pumps, annual average COP to 70 °C forward / 35 °C return: 3.1 at 1 MW (source 13→8 °C), 3.6 at 3 MW (15→8 °C), 4.7 at 10 MW (27→15 °C); air-source 3 MW 2.8; CALIBRATION 13 Oct 2026 (calibrate.py; sources/13): full Lorenz with η 0.50 gives 4.56 for Odense (27→15 / 40→75 °C) against realised 4.5 (2020) and 4.2 all-in (2021–22, η 0.49 / 0.46); Telia Helsinki snapshot 3.9 at 20/32 → ~80 °C implies η 0.39; Université Laval ~7 at ~15 → 40 °C implies η 0.53; ReUseHeat design 3.6 and Bahnhof simulation 3.7 imply 0.37 / 0.43. The simplified form used in the first attempt (sink supply ÷ (sink supply − source out)) under-predicts at ",
+    "role": [
+     {
+      "id": "bytes2heat",
+      "term": "design COP 3.6 at 25/18 → 70/40 °C",
+      "role": "check",
+      "conf": 60,
+      "verified": true
+     }
+    ]
+   },
+   {
+    "part": "Heat available after heat pump",
+    "coef": "; CALIBRATION: delivered heat is receiver-limited, not source-limited, in every built case with a large data centre — Mäntsälä 20–30 GWh/yr from a ~15 MW DC (15–23 % of nameplate-continuous), Westville 2.4 GWh/yr PLANNED from a 35 MW DC (1 %; operation not yet sourced), TELUS Garden 4.9 of 12.3 GWh available (40 %; 2013 design forecast, Order C-1-13); only Heerlen (520 kW DC into a 5GDHC network) ran source-limited at 54 %. Report this quantity as heat AVAILABLE after the heat pump; the match quantity is min(available, receiver demand); Odense DH output ≈ 1.3 × DC-side heat at COP 4.2 (Inspirationskatalog) matches COP ÷ (COP − 1)",
+    "role": [
+     {
+      "id": "bytes2heat",
+      "term": "Westville 2.4 GWh/yr PLANNED from 35 MW (1 %; operation not yet sourced)",
+      "role": "check",
+      "conf": 60,
+      "verified": true
+     }
+    ]
+   },
+   {
+    "part": "Operator floor price",
+    "coef": "no Canadian operator figure; 111 E 5th implicit $0 + unrecovered capex; DEA Aug 2026 (2025 €): waste-heat heat pump total investment 1.13 M€/MW_heat at 1 MW, 0.95 at 3 and 10 MW (heat pump 0.36–0.55, building 0.06–0.12, other — pipes, electrical, controls, consultancy — 0.47–0.52); +5–15% at 40–80 °C DH temperatures; fixed O&M ≈ 2,100 €/MW·yr, variable 3.07 €/MWh excluding electricity; lifetime 25 yr; construction 0.5 yr; minimum load 25%; electric boiler 0.07 M€/MW, gas boiler 0.064 M€/MW; CALIBRATION: realised heat-pump full-load hours 1,300–2,700 h in ramp-up years (Tallaght year 1, Odense 2020) and 4,400–7,100 h mature (Odense 2024 ≈ 4,365; Mäntsälä 5,000; STACK Oslo claim 7,143; Inspira",
+    "role": [
+     {
+      "id": "bytes2heat",
+      "term": "ReUseHeat €460k / 0.3 MW",
+      "role": "check",
+      "conf": 60,
+      "verified": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "uptime2025",
+  "citation": "Uptime Institute Global Data Center Survey 2025 (INDUSTRY SURVEY): weighted average PUE 1.54 (n=681); facilities commissioned in the last five years 1.48; North America 1.49 — https://datacenter.uptimeinstitute.com/rs/711-RIA-145/images/2025.Annual.Survey.Report.pdf",
+  "sweep_verdict": "Found, details wrong",
+  "sweep_problem": "North America 1.49 (n=111) is not in this report; it is in UI Field Report 183 'Annual survey - regional view 2025'",
+  "used_for": [
+   {
+    "part": "Power usage effectiveness",
+    "coef": "Manor Farm target < 1.30; 13 Oct 2026: US average 1.4 (2023, LBNL); global 1.54, North America 1.49, new facilities 1.48 (Uptime 2025, INDUSTRY SURVEY); no Canadian figure (NRCan: no sufficient survey); no source splits existing buildings from purpose-built — use 1.4–1.55",
+    "role": [
+     {
+      "id": "uptime2025",
+      "term": "PUE survey averages",
+      "role": "check",
+      "conf": 50,
+      "verified": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "bcucC113",
+  "citation": "BCUC Order C-1-13 with Reasons (Feb 2013), FortisBC Alternative Energy Services, TELUS Garden thermal energy system, pp.14–19: 'A year round base load of 1,400 kW of heat is available on a 24/7 basis' from the TELUS data centre; development load 5,194 MWh heating / 4,591 MWh cooling; 94 % of heating from recovery, steam peaking; TES capital $7.9 M, waste-heat option $3.2 M vs geo-exchange $6.8 M; 'free waste heat supply from the TELUS Data Centre'; customer rate BC Hydro residential + 5–10 % (G-155-12: $0.105–0.126/kWh 2014–18); annual actual-load report rescinded by G-2-15 — https://www.ordersdecisions.bcuc.com/bcuc/orders/en/118621/1/document.do",
+  "sweep_verdict": "Found, details wrong",
+  "sweep_problem": "Panel DENIED the BC Hydro residential + 5–10 % market rate and ordered revised rates; G-155-12 rates and G-2-15 rescission not checked",
+  "used_for": [
+   {
+    "part": "Heat available after heat pump",
+    "coef": "; CALIBRATION: delivered heat is receiver-limited, not source-limited, in every built case with a large data centre — Mäntsälä 20–30 GWh/yr from a ~15 MW DC (15–23 % of nameplate-continuous), Westville 2.4 GWh/yr PLANNED from a 35 MW DC (1 %; operation not yet sourced), TELUS Garden 4.9 of 12.3 GWh available (40 %; 2013 design forecast, Order C-1-13); only Heerlen (520 kW DC into a 5GDHC network) ran source-limited at 54 %. Report this quantity as heat AVAILABLE after the heat pump; the match quantity is min(available, receiver demand); Odense DH output ≈ 1.3 × DC-side heat at COP 4.2 (Inspirationskatalog) matches COP ÷ (COP − 1)",
+    "role": [
+     {
+      "id": "bcucC113",
+      "term": "1.4 MW base-load offer, 94 % of 5,194 MWh demand taken",
+      "role": "check",
+      "conf": 90,
+      "verified": true
+     }
+    ]
+   },
+   {
+    "part": "Buyer ceiling price",
+    "coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): gas commodity averaged over the same 12 months in both cities (Nov 2025 – Oct 2026), rest of each tariff at the current schedule. Vancouver: FortisBC CCRC $2.230 (to 31 Mar 2026; BCUC L-9-25, L-27-25) and $1.660 (from 1 Apr 2026; G-50-26; Oct 2026 unchanged per FortisBC release copy, unverified) → mean $1.8975; all per-GJ $9.5425 → ≈ $40.4/MWh heat at 85%. Edmonton: UCA regulated rate (2.579, 3.390, 3.331, 2.422, 1.784, 1.874, 0.936, 2.076, 1.595, 1.729, 1.124, 1.458) → mean $2.025, + ATCO delivery $1.045 → ≈ $13.0/MWh heat. Earlier: Vancouver gas ≈ $39.4 (Rate 3, every per-GJ charge incl. Riders 5, 6 and 8",
+    "role": [
+     {
+      "id": "bcucC113",
+      "term": "TELUS Garden customer rate $105–126/MWh (all-in TES)",
+      "role": "check",
+      "conf": 90,
+      "verified": true
+     }
+    ]
+   },
+   {
+    "part": "Who pays which part",
+    "coef": "Stockholm Exergi: supplier owns and invests in the heat pump; Exergi owns meter and pipes to metering point; called-off contracts 10 yr + 5 yr option, spot contracts open-ended (Energiforsk 2020:681); Fortum: price by outdoor temperature and supply/return side; RTS 19744: applicant pays all; Wahlroos 2018 p.1760: heat-pump capex 500 EUR/kW_heat (\"rather low\", DH pipe very near, Finnish sewage-HP experience); Table 2: 12 MW DH output, 5 MEUR extra investment, 5-yr direct payback; Bahnhof projects 3–5 yr ROI (operator claim); DEA Aug 2026 (2025 €): waste-heat heat pump total investment 1.13 M€/MW_heat at 1 MW, 0.95 at 3 and 10 MW (heat pump 0.36–0.55, building 0.06–0.12, other — pipes, electri",
+    "role": [
+     {
+      "id": "bcucC113",
+      "term": "FAES-owned TES; free DC heat; customer rate BC Hydro + 5–10 %",
+      "role": "data",
+      "conf": 90,
+      "verified": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "pozgaj2025",
+  "citation": "Požgaj, Delač, Pavković, Medica-Viola 2025, Energy Efficiency Through Waste-Heat Recovery: Hybrid Data-Centre Cooling in District Heating Applications, Applied Sciences 16(1):323 (peer-reviewed; J.B. upload, read 18 Oct 2026): 108.5 kW HPC, Rijeka; ~30% of heat to air via chilled-water rack coolers (10–15 °C), recovered by heat pumps in place of the chillers; ERF 0.78–0.88 — https://doi.org/10.3390/app16010323",
+  "sweep_verdict": "Unreachable",
+  "sweep_problem": "Not verified",
+  "used_for": [
+   {
+    "part": "Share of heat captured in liquid",
+    "coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): air cooling — still no capture share for a whole air-cooled hall. Reuse is shown 'possible with a change' (heat pumps on the chilled-water loop or chiller condenser) and the figure 'not yet known'. Evidence: Oró et al. 2019 (return air up to 47 °C, condenser up to 50 °C; ERF on a primary-energy basis 25–45% / ~55%, not ISO ERF); Požgaj et al. 2025 (air-side 30% recovered by heat pumps in place of chillers, ERF 0.78–0.88, 108 kW hybrid); Ljungqvist et al. 2023 (theoretical upper limit with no heat pump, 0.50–0.66 at 13–18 °C); Yuan et al. 2025 review (Table 2 temperatures; its '50–70% recoverable' is cited t",
+    "role": []
+   }
+  ]
+ },
+ {
+  "id": "nrelESIF2019",
+  "citation": "Van Geet (NREL), Data Center Optimization Strategies: NREL ESIF Data Center Energy and Water Savings (Aug 2019): 24 °C cooling water supply, 35–40 °C return used to heat offices and lab space; ERE 0.929 (first year of TSC operation) — https://nrel.gov/docs/fy19osti/74464.pdf; NREL warm-water liquid cooling page: building needs at least 95 °F on the coldest day — https://www.nrel.gov/computational-science/warm-water-liquid-cooling",
+  "sweep_verdict": "Unreachable",
+  "sweep_problem": "24 °C/35–40 °C, ERE 0.929 and the 95 °F warm-water page not verified; current host is docs.nrel.gov",
+  "used_for": [
+   {
+    "part": "Heat temperature by cooling type",
+    "coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): air-side return hot air 25–47 °C, chiller condenser 40–50 °C, chilled-water loop 10–20 °C (Yuan et al. 2025 Table 2; Oró et al. 2019); the tool keeps 25–35 °C as the typical air-cooled figure. Alissa p.332; Wahlroos p.1753; heat-rejection equipment per site from permits: rooftop condensers (1050 W Pender, 175 W Cordova), rooftop chiller (55 E 7th), P1 chiller room (555 W Hastings), L8 roof well (515 W Hastings); seen on site (J.B.): 55 E 7th lane deck with a Cummins generator enclosure and a packaged cooling unit piped into the building (rooftop chiller in BP-2019-00595 not photographed — keep both); 111 E ",
+    "role": []
+   }
+  ]
+ },
+ {
+  "id": "rvoCases2018",
+  "citation": "RVO / Nederland ICT, Restwarmte uit datacenters – succesvoorbeelden (Feb 2018) pp.12–15 and Berenschot (Mar 2018): APG Heerlen 520 kW DC, 8,900 GJ extracted, Mijnwater network 16/28 °C, ≈€1.5 M; Eindhoven and Hengelo kW-scale gas heat pumps to 55 °C — https://www.bouwstenen.nl/sites/default/files/uploads/Rapportage-Restwarmte-uit-datacenters.pdf",
+  "sweep_verdict": "Found, details wrong",
+  "sweep_problem": "Author is Berenschot (one report, not RVO + separate Berenschot); only Hengelo (185 kW DC) uses a gas HP to 55 °C — Eindhoven (600 kW) feeds a 10/18 °C ring",
+  "used_for": [
+   {
+    "part": "Heat available after heat pump",
+    "coef": "; CALIBRATION: delivered heat is receiver-limited, not source-limited, in every built case with a large data centre — Mäntsälä 20–30 GWh/yr from a ~15 MW DC (15–23 % of nameplate-continuous), Westville 2.4 GWh/yr PLANNED from a 35 MW DC (1 %; operation not yet sourced), TELUS Garden 4.9 of 12.3 GWh available (40 %; 2013 design forecast, Order C-1-13); only Heerlen (520 kW DC into a 5GDHC network) ran source-limited at 54 %. Report this quantity as heat AVAILABLE after the heat pump; the match quantity is min(available, receiver demand); Odense DH output ≈ 1.3 × DC-side heat at COP 4.2 (Inspirationskatalog) matches COP ÷ (COP − 1)",
+    "role": [
+     {
+      "id": "rvoCases2018",
+      "term": "Heerlen 8,900 GJ from 520 kW (source-limited, 54 %)",
+      "role": "check",
+      "conf": 70,
+      "verified": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "cat3516c",
+  "citation": "Caterpillar 3516C 2,500 kW standby generator set specification (manufacturer claim) — https://www.hanovercounty.gov/DocumentCenter/View/5983/CAT-3516C-2500KW-Cut",
+  "sweep_verdict": "Unreachable",
+  "sweep_problem": "Cited Hanover County cut sheet not opened; model and 2,500 kW standby rating exist on cat.com",
+  "used_for": [
+   {
+    "part": "Backup duration",
+    "coef": "UPS runtime about 1–2 min (hyperscale), about 5 min (colocation), 10–15 min (financial); generators take over in 10–20 s (vendor claims); 12 h fuel minimum (Uptime) and 24–48 h typical (operator claims)",
+    "role": [
+     {
+      "id": "cat3516c",
+      "term": "Backup duration",
+      "role": "traced from opClaims",
+      "conf": 50,
+      "verified": false
+     }
+    ]
+   },
+   {
+    "part": "Space for the plant",
+    "coef": "18 Oct 2026 (sweep M30–M32; audit/plant_sources_2026-10-18.md): cooling space is per MW of HEAT (servers × PUE), spares added when the plant is laid out; air cooling → air-cooled chillers with free-cooling coils, 17–26 m²/MW (Trane TCA; a dry cooler cannot cool water below outdoor air, and air-cooled halls need ≥13 °C chilled water, NREL/DOE FEMP 2024); liquid cooling → dry coolers, 19.5–30.5 m²/MW (EVAPCO, Thermokey, Mark; manufacturer claims). Manufacturer claims per MW: UPS ≈2.0–2.4 m², Li-ion batteries ≈2.2 m² (5 min), air-cooled chillers 17–26 m², cooling towers ≈8 m², dry coolers ≈24.5 m², heat pumps ≈3.4 m² per MW heat, CDUs ≈0.6 m²; equipment only, without clearances; EPCOR transform",
+    "role": [
+     {
+      "id": "cat3516c",
+      "term": "Space for the plant",
+      "role": "data",
+      "conf": 40,
+      "verified": false
+     }
+    ]
+   },
+   {
+    "part": "Fuel kept on site",
+    "coef": "NFC 2020 Table 4.3.13.4.-B (Class II): first storey 200 000 L per room; basement or above the first storey 20 000 L (tanks > 2 500 L) or 45 000 L (tanks > 20 000 L); tanks > 230 L in a dedicated 2 h room; fuel use ≈0.263 L/kWh (one Cat model, manufacturer claim) ≈6.3 m³ per MW per 24 h; Uptime ≥ 12 h on site; whether data-centre standby counts as \"emergency generators\" is for the authority to decide",
+    "role": [
+     {
+      "id": "cat3516c",
+      "term": "Fuel kept on site",
+      "role": "data",
+      "conf": 60,
+      "verified": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "scieu2024",
+  "citation": "Statistics Canada, SCIEU 2024 (The Daily, 26 Jun 2026): hospitals BC 1.90 / AB 2.46 GJ/m², universities 1.25 / 1.59, colleges 0.75 / 1.50 — https://www150.statcan.gc.ca/n1/daily-quotidien/260626/dq260626d-eng.htm",
+  "sweep_verdict": "Unreachable",
+  "sweep_problem": "BC/AB values not verified",
+  "used_for": [
+   {
+    "part": "Receiver heat demand",
+    "coef": "heating-only intensity, CEUD 2023: BC 0.57 / AB 1.40 GJ/m² overall; offices 0.45 / 1.13; heat is 48–63% of energy in BC, 62–83% in Alberta; hospitals from SCIEU 2024 (BC 1.90, AB 2.46 GJ/m² total); type medians NRCan ENERGY STAR; delivered fuel, not useful heat (boiler efficiency not yet sourced); 2023 a warm year | 19 Oct 2026 (make_bigrecv.py): large buildings added at the Vancouver GHG by-law reporting thresholds in both cities (commercial ≥ 4,645 m², multi-family and hotels ≥ 9,290 m²). Vancouver: owner-reported floor area × reported heat energy intensity (measured, disclosed buildings only: 200 added). Edmonton: assessment gross area of Other Residential × 0.777 GJ/m² and Commercial × 1",
+    "role": [
+     {
+      "id": "scieu2024",
+      "term": "hospital and campus intensities",
+      "role": "data",
+      "conf": 80,
+      "verified": true
+     }
+    ]
+   }
+  ]
+ }
+]

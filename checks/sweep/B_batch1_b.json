@@ -1,0 +1,295 @@
+[
+ {
+  "id": "energyStarCA",
+  "citation": "NRCan ENERGY STAR Portfolio Manager, Canadian national median site EUI (GJ/m²): office 0.87, hospital 2.20, K-12 school 0.70, college/university 1.04, multifamily 0.82, ice rink 1.10 — https://portfoliomanager.energystar.gov:443/pdf/reference/Canadian%20National%20Median%20Table.pdf",
+  "sweep_verdict": "Unreachable",
+  "sweep_problem": "Saved 2018 table (data/raw/nrcan/median_tables_2018.pdf) gives different values (office site 0.99), so cited figures need the current table",
+  "used_for": [
+   {
+    "part": "Receiver heat demand",
+    "coef": "heating-only intensity, CEUD 2023: BC 0.57 / AB 1.40 GJ/m² overall; offices 0.45 / 1.13; heat is 48–63% of energy in BC, 62–83% in Alberta; hospitals from SCIEU 2024 (BC 1.90, AB 2.46 GJ/m² total); type medians NRCan ENERGY STAR; delivered fuel, not useful heat (boiler efficiency not yet sourced); 2023 a warm year | 19 Oct 2026 (make_bigrecv.py): large buildings added at the Vancouver GHG by-law reporting thresholds in both cities (commercial ≥ 4,645 m², multi-family and hotels ≥ 9,290 m²). Vancouver: owner-reported floor area × reported heat energy intensity (measured, disclosed buildings only: 200 added). Edmonton: assessment gross area of Other Residential × 0.777 GJ/m² and Commercial × 1",
+    "role": [
+     {
+      "id": "energyStarCA",
+      "term": "type medians",
+      "role": "data",
+      "conf": 80,
+      "verified": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "energize",
+  "citation": "Energize Vancouver (By-law 13472): ≥4,645 m² report; disclosure opt-in; enforcement paused 21 May 2026 — https://vancouver.ca/files/cov/vancouver-annual-greenhouse-gas-and-energy-limits-by-law-faq.pdf",
+  "sweep_verdict": "Found, details wrong",
+  "sweep_problem": "Neither the FAQ nor By-law 13472 (consol. to 12 Dec 2023) mentions an enforcement pause on 21 May 2026 or the name 'Energize Vancouver'; the pause needs its own source",
+  "used_for": [
+   {
+    "part": "Receiver heat demand",
+    "coef": "heating-only intensity, CEUD 2023: BC 0.57 / AB 1.40 GJ/m² overall; offices 0.45 / 1.13; heat is 48–63% of energy in BC, 62–83% in Alberta; hospitals from SCIEU 2024 (BC 1.90, AB 2.46 GJ/m² total); type medians NRCan ENERGY STAR; delivered fuel, not useful heat (boiler efficiency not yet sourced); 2023 a warm year | 19 Oct 2026 (make_bigrecv.py): large buildings added at the Vancouver GHG by-law reporting thresholds in both cities (commercial ≥ 4,645 m², multi-family and hotels ≥ 9,290 m²). Vancouver: owner-reported floor area × reported heat energy intensity (measured, disclosed buildings only: 200 added). Edmonton: assessment gross area of Other Residential × 0.777 GJ/m² and Commercial × 1",
+    "role": [
+     {
+      "id": "energize",
+      "term": "disclosed building energy (opt-in; enforcement paused)",
+      "role": "data",
+      "conf": 80,
+      "verified": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "edmBylaw21442",
+  "citation": "City of Edmonton Bylaw 21442, 2026 Property Tax and Supplementary Property Tax Bylaw, s. 2(n): Other Residential = four or more self-contained dwelling units used for permanent living accommodation — https://www.gov.edmonton.ab.ca/sites/default/files/public-files/documents/bl21442.pdf",
+  "sweep_verdict": "Unreachable",
+  "sweep_problem": "s.2(n) definition not verified",
+  "used_for": [
+   {
+    "part": "Receiver heat demand",
+    "coef": "heating-only intensity, CEUD 2023: BC 0.57 / AB 1.40 GJ/m² overall; offices 0.45 / 1.13; heat is 48–63% of energy in BC, 62–83% in Alberta; hospitals from SCIEU 2024 (BC 1.90, AB 2.46 GJ/m² total); type medians NRCan ENERGY STAR; delivered fuel, not useful heat (boiler efficiency not yet sourced); 2023 a warm year | 19 Oct 2026 (make_bigrecv.py): large buildings added at the Vancouver GHG by-law reporting thresholds in both cities (commercial ≥ 4,645 m², multi-family and hotels ≥ 9,290 m²). Vancouver: owner-reported floor area × reported heat energy intensity (measured, disclosed buildings only: 200 added). Edmonton: assessment gross area of Other Residential × 0.777 GJ/m² and Commercial × 1",
+    "role": []
+   }
+  ]
+ },
+ {
+  "id": "bcAssess2026",
+  "citation": "BC Assessment, Residential Inventory Extract (area 09, 1 Apr 2026) and Non-Residential Inventory Extract (1 Apr 2026), via UBC Library Abacus, 'BC Assessment Data Advice and Inventory Extracts', https://hdl.handle.net/11272.1/AB2/LAPUAB (licensed to UBC researchers; derived values only, rounded)",
+  "sweep_verdict": "Unreachable",
+  "sweep_problem": "Licensed dataset; extracts and dates not verified",
+  "used_for": [
+   {
+    "part": "Receiver heat demand",
+    "coef": "heating-only intensity, CEUD 2023: BC 0.57 / AB 1.40 GJ/m² overall; offices 0.45 / 1.13; heat is 48–63% of energy in BC, 62–83% in Alberta; hospitals from SCIEU 2024 (BC 1.90, AB 2.46 GJ/m² total); type medians NRCan ENERGY STAR; delivered fuel, not useful heat (boiler efficiency not yet sourced); 2023 a warm year | 19 Oct 2026 (make_bigrecv.py): large buildings added at the Vancouver GHG by-law reporting thresholds in both cities (commercial ≥ 4,645 m², multi-family and hotels ≥ 9,290 m²). Vancouver: owner-reported floor area × reported heat energy intensity (measured, disclosed buildings only: 200 added). Edmonton: assessment gross area of Other Residential × 0.777 GJ/m² and Commercial × 1",
+    "role": [
+     {
+      "id": "bcAssess2026",
+      "term": "Vancouver homes and floor area per parcel",
+      "role": "input",
+      "conf": 85,
+      "verified": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "femp",
+  "citation": "US DOE FEMP BMP #10: evaporation ≤ Q ÷ h_fg (~1.5 L/kWh); blowdown = E ÷ (C−1); WUE (ISO 30134-9) (Formulas sheet)",
+  "sweep_verdict": "Found, details wrong",
+  "sweep_problem": "BMP #10 gives only Make-up = Evaporation + Blowdown + Drift and cycles ≈ make-up/blowdown; it does not state evaporation ≤ Q/h_fg, ~1.5 L/kWh or blowdown = E/(C−1) (these are derivations); ISO 30134-9 not checked",
+  "used_for": [
+   {
+    "part": "Evaporative water",
+    "coef": "",
+    "role": [
+     {
+      "id": "femp",
+      "term": "all coefficients",
+      "role": "coefficient",
+      "conf": 100,
+      "verified": true
+     }
+    ]
+   },
+   {
+    "part": "Blowdown and make-up",
+    "coef": "C cycles of concentration",
+    "role": [
+     {
+      "id": "femp",
+      "term": "all coefficients",
+      "role": "coefficient",
+      "conf": 100,
+      "verified": true
+     }
+    ]
+   },
+   {
+    "part": "Water usage effectiveness",
+    "coef": "DCRE cap 2 L/kWh",
+    "role": [
+     {
+      "id": "femp",
+      "term": "all coefficients",
+      "role": "coefficient",
+      "conf": 90,
+      "verified": true
+     }
+    ]
+   },
+   {
+    "part": "Water behind the electricity",
+    "coef": "US thermoelectric ~1.25 L/kWh; hydro ~16.8 L/kWh; BC as a range",
+    "role": [
+     {
+      "id": "femp",
+      "term": "all coefficients",
+      "role": "coefficient",
+      "conf": 60,
+      "verified": true
+     }
+    ]
+   },
+   {
+    "part": "Harvestable rainwater",
+    "coef": "ECCC Normals 1991–2020: Vancouver Intl precipitation 1,159.5 mm/yr (rain 1,119.2; Oct–Jan ≥124 mm/mo, Jul 34 mm); Edmonton City 422.5 mm/yr (Edmonton Airport 434.0; Jun–Aug 213 mm, Dec–Feb 43 mm, mostly snow); C = 0.8 assumed (CSA B805 not read); tank = one wet month, assumed | 19 Oct 2026: storage CAD 667/m³ (Vancouver toolkit 2014) to 2,955 (US EPA 2013 with pumps and controls, US$ converted); 15–30 yr (warranties); cost per m³ used at 5.6% real against water + sewer rates | 19 Oct 2026: storage CAD 667/m³ (Vancouver toolkit 2014) to 2,955 (US EPA 2013 with pumps and controls, US$ converted); 15–30 yr (warranties); cost per m³ used at 5.6% real against water + sewer rates | 19 Oct 2026: st",
+    "role": [
+     {
+      "id": "femp",
+      "term": "V = A × R × C (general method; the femp source is the cooling-tower guide, CSA B805 not read)",
+      "role": "method",
+      "conf": 90,
+      "verified": false
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "tallaghtD22",
+  "citation": "ENABLE DHC D2.2 Tallaght (2025) pp.5–8 and Codema project page: 3,770 MWh distributed in the first year (2023) from a 3 MW heat pump (Heat Works CLG, SDCC-owned); source ~25 °C, network 70/55 °C; heat supplied by AWS free; customer tariff fixed + kWh — https://enabledhc.ambienteitalia.it/wp-content/uploads/2025/06/D2.2-Tallaght.pdf ; https://www.codema.ie/our-work/tallaght-district-heating-scheme/",
+  "sweep_verdict": "Found, details wrong",
+  "sweep_problem": "Neither source states source ~25 °C or that AWS supplies heat free; D2.2 says HP modules 'up to 3 MW' and does not state 2023 explicitly",
+  "used_for": [
+   {
+    "part": "Operator floor price",
+    "coef": "no Canadian operator figure; 111 E 5th implicit $0 + unrecovered capex; DEA Aug 2026 (2025 €): waste-heat heat pump total investment 1.13 M€/MW_heat at 1 MW, 0.95 at 3 and 10 MW (heat pump 0.36–0.55, building 0.06–0.12, other — pipes, electrical, controls, consultancy — 0.47–0.52); +5–15% at 40–80 °C DH temperatures; fixed O&M ≈ 2,100 €/MW·yr, variable 3.07 €/MWh excluding electricity; lifetime 25 yr; construction 0.5 yr; minimum load 25%; electric boiler 0.07 M€/MW, gas boiler 0.064 M€/MW; CALIBRATION: realised heat-pump full-load hours 1,300–2,700 h in ramp-up years (Tallaght year 1, Odense 2020) and 4,400–7,100 h mature (Odense 2024 ≈ 4,365; Mäntsälä 5,000; STACK Oslo claim 7,143; Inspira",
+    "role": [
+     {
+      "id": "tallaghtD22",
+      "term": "year-1 1,257 flh",
+      "role": "check",
+      "conf": 80,
+      "verified": true
+     }
+    ]
+   },
+   {
+    "part": "Who pays which part",
+    "coef": "Stockholm Exergi: supplier owns and invests in the heat pump; Exergi owns meter and pipes to metering point; called-off contracts 10 yr + 5 yr option, spot contracts open-ended (Energiforsk 2020:681); Fortum: price by outdoor temperature and supply/return side; RTS 19744: applicant pays all; Wahlroos 2018 p.1760: heat-pump capex 500 EUR/kW_heat (\"rather low\", DH pipe very near, Finnish sewage-HP experience); Table 2: 12 MW DH output, 5 MEUR extra investment, 5-yr direct payback; Bahnhof projects 3–5 yr ROI (operator claim); DEA Aug 2026 (2025 €): waste-heat heat pump total investment 1.13 M€/MW_heat at 1 MW, 0.95 at 3 and 10 MW (heat pump 0.36–0.55, building 0.06–0.12, other — pipes, electri",
+    "role": [
+     {
+      "id": "tallaghtD22",
+      "term": "SDCC-owned HP; AWS heat free",
+      "role": "data",
+      "conf": 80,
+      "verified": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "fortum",
+  "citation": "Fortum Avoin kaukolämpö purchase prices from 1 May 2026: €11 (≥16.1 °C) to €50/MWh (≤−8 °C) — https://www.fortum.com/fi/lammitys-ja-jaahdytys/yritykset-ja-taloyhtiot/kaukolampoa-yrityksille/avoin-kaukolampo/avoin-kaukolampo-ostohinnat",
+  "sweep_verdict": "Unreachable",
+  "sweep_problem": "€11–€50/MWh table and 1 May 2026 date not verified",
+  "used_for": [
+   {
+    "part": "Operator floor price",
+    "coef": "no Canadian operator figure; 111 E 5th implicit $0 + unrecovered capex; DEA Aug 2026 (2025 €): waste-heat heat pump total investment 1.13 M€/MW_heat at 1 MW, 0.95 at 3 and 10 MW (heat pump 0.36–0.55, building 0.06–0.12, other — pipes, electrical, controls, consultancy — 0.47–0.52); +5–15% at 40–80 °C DH temperatures; fixed O&M ≈ 2,100 €/MW·yr, variable 3.07 €/MWh excluding electricity; lifetime 25 yr; construction 0.5 yr; minimum load 25%; electric boiler 0.07 M€/MW, gas boiler 0.064 M€/MW; CALIBRATION: realised heat-pump full-load hours 1,300–2,700 h in ramp-up years (Tallaght year 1, Odense 2020) and 4,400–7,100 h mature (Odense 2024 ≈ 4,365; Mäntsälä 5,000; STACK Oslo claim 7,143; Inspira",
+    "role": [
+     {
+      "id": "fortum",
+      "term": "revealed €11–50/MWh",
+      "role": "bound",
+      "conf": 50,
+      "verified": true
+     }
+    ]
+   },
+   {
+    "part": "Who pays which part",
+    "coef": "Stockholm Exergi: supplier owns and invests in the heat pump; Exergi owns meter and pipes to metering point; called-off contracts 10 yr + 5 yr option, spot contracts open-ended (Energiforsk 2020:681); Fortum: price by outdoor temperature and supply/return side; RTS 19744: applicant pays all; Wahlroos 2018 p.1760: heat-pump capex 500 EUR/kW_heat (\"rather low\", DH pipe very near, Finnish sewage-HP experience); Table 2: 12 MW DH output, 5 MEUR extra investment, 5-yr direct payback; Bahnhof projects 3–5 yr ROI (operator claim); DEA Aug 2026 (2025 €): waste-heat heat pump total investment 1.13 M€/MW_heat at 1 MW, 0.95 at 3 and 10 MW (heat pump 0.36–0.55, building 0.06–0.12, other — pipes, electri",
+    "role": [
+     {
+      "id": "fortum",
+      "term": "price by temperature and side",
+      "role": "data",
+      "conf": 50,
+      "verified": false
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "abDCenv2026",
+  "citation": "Government of Alberta, Data Centres in Alberta: EPA regulatory role and environmental requirements (20 Jul 2026): an EPEA approval is required for a larger combustion power plant or a backup power generation system over 50 MW, with emission limits set case by case; Alberta reviews wastewater, stormwater and cooling-water blowdown. Federal Multi-Sector Air Pollutants Regulations cover gaseous-fuel spark-ignition engines only, not diesel — https://www.alberta.ca/system/files/epa-data-centre-regulatory-role-and-environmental-requirements.pdf",
+  "sweep_verdict": "Found, details wrong",
+  "sweep_problem": "Doc does not mention federal Multi-Sector Air Pollutants Regulations or diesel vs spark-ignition; says approvals 'may include… emission limits', not 'case by case'",
+  "used_for": [
+   {
+    "part": "Generator NOx and PM",
+    "coef": "NOx 0.024 lb/hp·h uncontrolled; Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause",
+    "role": [
+     {
+      "id": "abDCenv2026",
+      "term": "research pass 16 Oct 2026 (government)",
+      "role": "pending build",
+      "conf": 50,
+      "verified": false
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "kelvionLF",
+  "citation": "Kelvion dry cooler selection printout, EN 13487, Lw 94 dBA / 61 dBA @10 m — https://www.resale.de/images/161618957_g_rueckkuehler-lf-pd203t4h-080y06d_2023-04-dn100.pdf",
+  "sweep_verdict": "Found, details wrong",
+  "sweep_problem": "Both figures are listed PER FAN (unit has 6 fans), not whole unit; hosted by used-equipment dealer resale.de, not Kelvion",
+  "used_for": [
+   {
+    "part": "Sound level at receptor",
+    "coef": "18 Oct 2026 (sweep M30–M32; audit/plant_sources_2026-10-18.md): unit count = the units the plant lays out (spares included); Lw per unit: air-cooled chillers 98–101 dBA (Trane RTAF, low-noise to standard), dry coolers 98.5–102 dBA at full fan speed (Güntner GFD ≈2.5 MW; Thermokey 738 kW); towers and hybrid coolers use the chiller ratings as a stand-in (labelled). starter set: scroll chiller 450–850 kW Lw 96–100 dBA (Daikin, AHRI 370); Trane Sintesis Prime RTAF HSE 333–1,010 kW Lw 94–101 standard / 91–98 low-noise, plus size 245 (877 kW) printed as 107 / 103, out of line with its neighbours (brochure RTAF-SLB001-GB p.13; sound rows sit under the 'Eurovent performances' heading but are not lab",
+    "role": [
+     {
+      "id": "kelvionLF",
+      "term": "dry cooler Lw (unit total unresolved)",
+      "role": "coefficient",
+      "conf": 40,
+      "verified": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "epcorDTtc2025",
+  "citation": "EPCOR Distribution & Transmission terms and conditions (1 Jan 2025): \"Generating Facility\" includes storage; Distribution Interconnection Agreement required; customer pays \"all interconnection costs as determined by EDTI\"; exporters must be Power Pool participants; micro-generation <5 MW — https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2025-01_distribution-connection-services-terms-and-conditions.pdf",
+  "sweep_verdict": "Found, details wrong",
+  "sweep_problem": "2025 edition superseded by 1 Jan 2026 (and a 2026-08 edition exists); no 'micro-generation <5 MW' found - only 5 MW is the telemetry threshold (s.8.3.5)",
+  "used_for": [
+   {
+    "part": "Closeness to networks and customers",
+    "coef": "Why operators locate in cities: third-party (colocation) firms favour urban settings for buyer proximity (Pan Fang & Greenstein 2025); backbone networks are biased to cities that serve as interconnection points (Malecki 2002); edge latency targets of a few tens of ms, VR under 16 ms (Satyanarayanan 2017); internet exchange and customer proximity (JLARC 2024). Locations of internet exchange points in Vancouver and Edmonton not yet sourced; exchanges: Vancouver VANIX (78 participants, six connection points), UNM-Exch Canada-West (64), CSIX (16); Edmonton YEGIX (9) — operator-reported; fibre adds about 0.005 ms per km one way, small within a city; locations are not shown; exchanges: Vancouver V",
+    "role": [
+     {
+      "id": "epcorDTtc2025",
+      "term": "research pass 16 Oct 2026 (rule (utility terms))",
+      "role": "pending build",
+      "conf": 50,
+      "verified": false
+     }
+    ]
+   },
+   {
+    "part": "Battery storage",
+    "coef": "round-trip 85% (NREL ATB 2024); PNNL 2022 LFP, 2021 US$ installed: 1 MW 518.59/kWh (2 h) and 448.34 (4 h), 10 MW 461.15 and 410.70 — about 10% above the 100 MW figure of 385; 2030: 340.46 (1 MW 4 h), 311.11 (10 MW 4 h); RTE 83% at the transformer, 2,400 cycles at 80% DOD, 16-year life; 34 ± 15 kWh/m² across built sites (Reber 2023); fire-code basis in BC/AB (NFPA 855 adoption) unconfirmed | 19 Oct 2026: cost range CAD 467–627/kWh (NREL 2025 US$334, 2024$, to PNNL 2022 1 MW 4 h US$448, 2021$; US$ × 1.3978, no inflation adjustment); O&M 2.5–4% of capex a year; 15 yr; cost per kW-year at 5.6% real compared with the programme value (Electricity card) | 19 Oct 2026: cost range CAD 467–627/kWh (NR",
+    "role": [
+     {
+      "id": "epcorDTtc2025",
+      "term": "research pass 16 Oct 2026 (rule (utility terms))",
+      "role": "pending build",
+      "conf": 50,
+      "verified": false
+     }
+    ]
+   }
+  ]
+ }
+]
