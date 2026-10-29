@@ -298,6 +298,57 @@
    ],
    "why": "engineering"
   },
+  "hr_flow": {
+   "tier": "full",
+   "parties": [
+    "receiver"
+   ],
+   "why": "engineering"
+  },
+  "hr_pipe_size": {
+   "tier": "full",
+   "parties": [
+    "receiver"
+   ],
+   "why": "engineering"
+  },
+  "heat_pumps": {
+   "tier": "community",
+   "parties": [
+    "receiver",
+    "operator"
+   ],
+   "why": "the heat pumps that lift the heat"
+  },
+  "phe_frames": {
+   "tier": "full",
+   "parties": [
+    "receiver"
+   ],
+   "why": "engineering"
+  },
+  "buffer_tanks": {
+   "tier": "full",
+   "parties": [
+    "receiver"
+   ],
+   "why": "engineering"
+  },
+  "hr_pumps": {
+   "tier": "full",
+   "parties": [
+    "receiver"
+   ],
+   "why": "engineering"
+  },
+  "hr_plant_room": {
+   "tier": "community",
+   "parties": [
+    "receiver",
+    "host"
+   ],
+   "why": "the room the heat plant needs"
+  },
   "heat_rejected": {
    "tier": "community",
    "parties": [
@@ -2594,6 +2645,34 @@
    [
     "room_cooling_type",
     "size"
+   ],
+   [
+    "hr_flow",
+    "size"
+   ],
+   [
+    "hr_pipe_size",
+    "size"
+   ],
+   [
+    "heat_pumps",
+    "size"
+   ],
+   [
+    "phe_frames",
+    "size"
+   ],
+   [
+    "buffer_tanks",
+    "size"
+   ],
+   [
+    "hr_pumps",
+    "size"
+   ],
+   [
+    "hr_plant_room",
+    "size"
    ]
   ],
   "edges": [
@@ -3760,12 +3839,64 @@
    [
     "cooling_type",
     "room_cooling_type"
+   ],
+   [
+    "heat_captured",
+    "hr_flow"
+   ],
+   [
+    "heat_delivered",
+    "hr_flow"
+   ],
+   [
+    "heat_in_water",
+    "hr_flow"
+   ],
+   [
+    "hr_flow",
+    "hr_pipe_size"
+   ],
+   [
+    "heat_delivered",
+    "heat_pumps"
+   ],
+   [
+    "cop",
+    "heat_pumps"
+   ],
+   [
+    "hr_flow",
+    "phe_frames"
+   ],
+   [
+    "heat_pumps",
+    "buffer_tanks"
+   ],
+   [
+    "hr_flow",
+    "hr_pumps"
+   ],
+   [
+    "heat_pumps",
+    "hr_plant_room"
+   ],
+   [
+    "phe_frames",
+    "hr_plant_room"
+   ],
+   [
+    "buffer_tanks",
+    "hr_plant_room"
+   ],
+   [
+    "hr_pumps",
+    "hr_plant_room"
    ]
   ]
  },
  "resident_count": 45,
- "community_count": 128,
- "full_count": 205,
+ "community_count": 130,
+ "full_count": 212,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {
