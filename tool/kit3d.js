@@ -60,6 +60,8 @@ const SPEC={
  bess:{name:'Battery storage container',L:6.058,W:2.438,H:2.896,src:'Sungrow PowerTitan 2.0 ST5015UX data sheet V5 (2024): 6058 × 2438 × 2896 mm; front single-door design',unsure:['cooling unit position ?; drawn at one end','"20 ft" not printed']},
  rack:{name:'Server rack, 42U',L:0.6,W:1.2,H:2.0,src:'Vertiv VR3300 (North American brochure 06/25): 600 × 1200 × 2000 mm, UL 2416; the same 600 × 1200 footprint from Schneider APC, Rittal, Chatsworth and Panduit; 1U = 44.45 mm (EIA-310)',unsure:[]},
  crah:{name:'Room air unit (CRAH), about 180 kW',L:3.099,W:1.067,H:2.388,src:'Vertiv Liebert CW181 (North American, 60 Hz, ©2024): 179 kW, 3.099 × 1.067 × 2.388 m; the middle of the units with printed sizes',unsure:['rated at 23.9 °C return air; not like-for-like with warm-aisle ratings','fan and filter faces drawn; ?']},
+ twall:{name:'Thermal wall unit (fan wall), 500 kW',L:3.962,W:1.524,H:3.67,src:'Vertiv CoolLoop Thermal Wall CA80 (SL-80367 R11/25): 500 kW net sensible, 60 × 156 × 144.5 in; gallery-side mounting; service from the gallery side (SL-70701); UL 1995',unsure:['which face carries the fans and which the coil is drawn from the description (fans to the hall, coil to the gallery); drawing axes not read ?','rating water temperatures not printed']},
+ crv:{name:'In-row cooler, 73.7 kW',L:0.6,W:1.1,H:2.0,src:'Vertiv Liebert CRV CR050RC (System Design Catalog): 73.7 kW at 95 °F return, 45/55 °F water; 600 mm wide, 1100 mm deep',unsure:['height not in the catalogue text read; 2.0 m drawn to match the racks ?']},
  cdu:{name:'Coolant distribution unit, 1.5 MW',L:0.914,W:1.565,H:2.045,src:'Motivair (Schneider) MCDU-50, CDU brochure ©2025: 36 × 61-5/8 × 80-1/2 in, 1516 kW at a 4 K approach; UL, 50/60 Hz. The middle of 10 units from 6 makers',unsure:['pipe connections drawn on top; position ?']},
  heatpump:{name:'Water-to-water heat pump, about 2 MW to 70–90 °C',L:6.1,W:3.0,H:2.1,src:'Johnson Controls Sabroe DualPAC 716-W data sheet (johnsoncontrols.de, undated): 6100 × 3000 × 2100 mm, 1991 kW at 50→70 °C (source 30→20 °C), 1841 kW at 70→90 °C. Nearest the median of 10 units from Sabroe and GEA (5.6–15.1 m² per MW)',unsure:['only Sabroe and GEA print both size and rating at this scale','document date not printed; Canadian use ?','compressor, vessels and frame drawn generically']},
  phe:{name:'Plate heat exchanger',L:3.93,W:0.78,H:2.145,src:'Alfa Laval T20-FM leaflet (2016-04): H 2145, W 780, L 930–3930 mm, DN200 ports',unsure:['duty (MW) for this frame not printed; longest frame drawn']},
@@ -190,6 +192,11 @@ const B={
    for(let i=0;i<4;i++){ const x=-s.L/2+s.L*(i+0.5)/4; door(g,'z+',x,0.15,s.L/4-0.03,s.H*0.5,s.W/2+0.012); }
    louvres(g,'z',[0,0],s.L*0.94,s.H*0.6,s.H-0.12,0.05,s.W/2+0.003); perf(g,'x+',-s.W*0.4,s.W*0.4,s.H*0.6,s.H-0.15,s.L/2,0.06);
    return g; },
+ twall(o){ const s=SPEC.twall, g=new T.Group(), L=s.L, W=s.W, H=s.H; box(g,L,H,W,0,0,0,M.body);
+   const nf=3, nr=3; for(let i=0;i<nf;i++) for(let j=0;j<nr;j++){ const x=-L/2+L*(i+0.5)/nf, y=0.5+(H-0.9)*(j+0.5)/nr; const d=new T.Mesh(new T.CircleGeometry(0.42,28),M.fan); d.position.set(x,y,W/2+0.004); g.add(d);
+     const p=[]; for(let k=0;k<32;k++){ const a=k/32*Math.PI*2,b=(k+1)/32*Math.PI*2; p.push(v(x+0.42*Math.cos(a),y+0.42*Math.sin(a),W/2+0.008),v(x+0.42*Math.cos(b),y+0.42*Math.sin(b),W/2+0.008)); } lines(g,p,M.edge); }
+   fins(g,[-L/2+0.05,-W/2-0.003],[L/2-0.05,-W/2-0.003],H-0.6,Math.round(L/0.06),0.3); return g; },
+ crv(o){ const s=SPEC.crv, g=new T.Group(); box(g,s.L,s.H,s.W,0,0,0,M.body); perf(g,'z+',-s.L*0.4,s.L*0.4,0.2,s.H-0.2,s.W/2,0.04); return g; },
  cdu(o){ const s=SPEC.cdu, g=new T.Group(); box(g,s.L,s.H,s.W,0,0,0,M.body); door(g,'z+',-s.L/4,0.08,s.L/2-0.03,s.H-0.16,s.W/2+0.012); door(g,'z+',s.L/4,0.08,s.L/2-0.03,s.H-0.16,s.W/2+0.012,{left:true});
    for(const z of [-0.3,0,0.3]) stub(g,0.06,0.25,s.L*0.1*(z>0?1:-1),s.H,z,'y+',M.dark); return g; }, // connections on top (position ?)
  heatpump(o){ const s=SPEC.heatpump, g=new T.Group(), L=s.L, W=s.W, H=s.H, m=(o&&o.hot)?M.heat:M.body;

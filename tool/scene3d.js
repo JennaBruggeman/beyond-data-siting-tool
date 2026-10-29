@@ -197,15 +197,29 @@ function racksFor(M){ const A=BD.S.answers, mw=A.mw||M.mwSized||1, E=BD.eng.equi
     ue+=band; }
   got.ups=nu; got.battery=nb;
   if(ue>u0){ const r=BD.geo.rectW(F,u0,ue,v0,v1); state.dc.add(ringLine(r,z0+0.05,C.power,1.5,0.9)); state.dc.add(line([V(...F.toW(ue,v0),z0),V(...F.toW(ue,v0),z0+3.5)],C.power,1.2,0.7)); state.elecRoom=r; }
-  // 2. room cooling units (3.10 × 1.07 m) along both long walls, 0.457 m clear at each end; CDUs after them (1.0 m in front)
-  const ua=ue+Lr.corridor, ub=u1-Lr.corridor;
+  // 2. room cooling by hall density (register: room_cooling_type): room units along both long walls, 0.457 m clear at each end;
+  //    or a thermal wall in a side gallery (units side by side, gasketed gap, 1.1 m clear on the hall and gallery sides); or in-row coolers in the rows
+  const ua=ue+Lr.corridor, ub=u1-Lr.corridor, RT=E.room?E.room.type:'crah';
   const wallRow=(kind,count,side)=>{ const s=S[kind]; let u=ua+Lr.crahEnd, n=0; while(n<count&&u+s.L<=ub-Lr.crahEnd){ const v=side<0?v0+s.W/2+0.05:v1-s.W/2-0.05; if(inside(u+s.L/2,v)){ put(kind,u+s.L/2,v,side<0?Math.PI:0); n++; } u+=s.L+2*Lr.crahEnd; } return n; };
-  if(need.crah){ const a=wallRow('crah',Math.ceil(need.crah/2),-1); got.crah=a+wallRow('crah',need.crah-a,1); }
+  need.room=E.room?Math.ceil(E.room.n[1]/floors):0; got.room=0; let gallery=0;
+  if(RT==='crah'&&need.room){ const a=wallRow('crah',Math.ceil(need.room/2),-1); got.room=a+wallRow('crah',need.room-a,1); }
+  let gallery0=0;
+  if(RT==='wall'&&need.room){ const s=S.twall; gallery=s.W+Lr.wallClear; let n=0;
+    const side=(vc,flip)=>{ let u=ua; while(n<need.room&&u+s.L<=ub){ if(inside(u+s.L/2,vc)){ put('twall',u+s.L/2,vc,flip?Math.PI:0); n++; } u+=s.L+Lr.wallGap; } };
+    side(v1-Lr.wallClear-s.W/2,false); state.dc.add(line([V(...F.toW(ua,v1-gallery),z0),V(...F.toW(ub,v1-gallery),z0)],C.grey,1.2,0.8));
+    if(n<need.room){ gallery0=gallery; side(v0+Lr.wallClear+s.W/2,true); state.dc.add(line([V(...F.toW(ua,v0+gallery0),z0),V(...F.toW(ub,v0+gallery0),z0)],C.grey,1.2,0.8)); } // a second gallery on the other long wall
+    got.room=n; }
   if(need.cdu){ got.cdu=0; } // CDUs: no maker placement rule found for the Motivair basis; listed, not placed (?)
-  const wallZone=(need.crah?S.crah.W+Lr.crahFront:need.cdu?S.cdu.W+Lr.cduFront:0)+0.05;
+  const wallZone=gallery0?gallery0+S.twall.W+Lr.wallClear:(RT==='crah'&&need.room?S.crah.W+Lr.crahFront:need.cdu?S.cdu.W+Lr.cduFront:0)+0.05, farZone=RT==='wall'?gallery+S.twall.W+Lr.wallClear:wallZone;
   // 3. racks in back-to-back pairs: cold aisle 1.2 | rack 1.2 | hot aisle 1.2 | rack 1.2
-  const pts=[]; const D=S.rack.W, Wd=S.rack.L; let v=v0+wallZone+Lr.aisle;
-  while(v+2*D+Lr.aisle<=v1-wallZone-Lr.aisle+1e-6&&pts.length<need.racks){ for(const vr of [v,v+D+Lr.aisle]){ for(let u=ua;u+Wd<=ub&&pts.length<need.racks;u+=Wd){ if(inside(u+Wd/2,vr+D/2)) pts.push([u+Wd/2,vr+D/2]); } } v+=2*D+2*Lr.aisle; }
+  const pts=[]; const D=S.rack.W, Wd=S.rack.L; let v=v0+wallZone+Lr.aisle; const rowsV=[];
+  while(v+2*D+Lr.aisle<=v1-farZone-Lr.aisle+1e-6) { rowsV.push(v,v+D+Lr.aisle); v+=2*D+2*Lr.aisle; }
+  // in-row coolers: at both ends of each row, then evenly along it (Vertiv CRV catalog E.2)
+  const crvPer=RT==='inrow'&&need.room&&rowsV.length?Math.max(2,Math.ceil(need.room/rowsV.length)):0; const crvAt=[];
+  for(const vr of rowsV){ const slots=[]; for(let u=ua;u+Wd<=ub;u+=Wd){ if(inside(u+Wd/2,vr+D/2)) slots.push(u); } if(!slots.length) continue;
+    const pick=new Set(); if(crvPer){ for(let k=0;k<crvPer&&k<slots.length;k++) pick.add(Math.round(k*(slots.length-1)/Math.max(1,crvPer-1))); }
+    slots.forEach((u,k)=>{ if(pick.has(k)&&crvAt.length<need.room) crvAt.push([u+Wd/2,vr+D/2]); else if(pts.length<need.racks) pts.push([u+Wd/2,vr+D/2]); }); }
+  crvAt.forEach(([u,vv])=>put('crv',u,vv,0)); if(RT==='inrow') got.room=crvAt.length;
   got.racks=pts.length;
   const geo=new T.BoxGeometry(Wd*0.98,S.rack.H,D*0.98); const mat=new T.MeshStandardMaterial({color:0x3a3d42,roughness:.8,flatShading:true,transparent:true,opacity:0.9});
   const im=new T.InstancedMesh(geo,mat,Math.max(1,pts.length)); const m4=new T.Matrix4(), q=new T.Quaternion().setFromAxisAngle(new T.Vector3(0,1,0),ang), sc=new T.Vector3(1,1,1);
@@ -237,7 +251,7 @@ function model(d){ plantLabels(); baseLabels(); const M=state.M, P=M&&M.plant;
   key(sw(C.acc,'the lot; dashed red: the building envelope (not a design)')+sw(C.grey,'setbacks (yards) and plant yard',true)+sw(C.edge,'plant to makers\' sizes: solid = unit, dashed = clearance')+sw(C.mat,'loading spaces')+roomsKey()); }
 function roomsKey(){ const r=state.rooms; if(!r) return ''; const E=r.E, rg=a=>a[0]===a[1]?`${a[0]}`:`${a[0]}–${a[1]}`, gap=(k)=>r.got[k]<r.need[k]?` (${r.got[k]} drawn)`:'';
   const L=[`racks ${rg(E.racks)}, about ${r.need.racks} a floor${gap('racks')}`,`UPS modules ${E.ups}${gap('ups')}`,`battery cabinets ${rg(E.batt)}${gap('battery')}`];
-  if(E.crah[1]) L.push(`room cooling units ${rg(E.crah)}${r.floors>1?`, about ${r.need.crah} a floor`:''}${gap('crah')}`); if(E.cdu[1]) L.push(`coolant units ${rg(E.cdu)} (not placed: no placement rule found)`);
+  if(E.room&&E.room.n[1]) L.push(`${E.room.name} ${rg(E.room.n)}${r.floors>1?`, about ${r.need.room} a floor`:''}${gap('room')} (hall about ${Math.round(E.room.wft2)} W/ft²: ${E.room.type==='crah'?'room units, up to about 150':E.room.type==='wall'?'thermal wall in a side gallery, up to about 400':'in-row coolers, above about 400'} by Vertiv's limits)`); if(E.cdu[1]) L.push(`coolant units ${rg(E.cdu)} (not placed: no placement rule found)`);
   return `<div style="margin-top:4px">Inside, first hall floor of ${r.floors}${r.floors>1?' (the others alike)':''}: ${L.join(' · ')}. Gold dashed: UPS and battery room. Spacing from the register (hall_layout, electrical_room).</div>`; }
 const TYPE={housing:'Non-market housing',school:'School',campus:'University or college campus',care:'Care home',hospital:'Hospital',rec:'Recreation centre',hall:'Community league hall',pool:'Pool',arena:'Indoor arena',apartment:'Apartment building',office:'Office building',hotel:'Hotel',commercial:'Commercial building'};
 const TCOL={housing:C.city,apartment:C.city,office:C.heat,hotel:C.heat,commercial:C.heat,school:C.power,campus:C.power,care:C.senses,hospital:C.senses,rec:C.water,hall:C.water,pool:C.water,arena:C.mat};

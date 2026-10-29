@@ -12409,15 +12409,18 @@
     "it_load_actual",
     "liquid_capture",
     "cooling_type",
-    "spare_cooling"
+    "spare_cooling",
+    "room_cooling_type"
    ],
    "sources": [
     "vertivCW181",
     "schneiderWP133",
-    "fujiRedundancy"
+    "fujiRedundancy",
+    "coolloopBr",
+    "vertivCRVcat"
    ],
    "formula": "n = ⌈heat to air ÷ unit capacity⌉, then redundancy; heat to air = P_IT (air cooling) or P_IT × (1 − liquid share) (liquid cooling)",
-   "coef": "Vertiv Liebert CW181 (60 Hz, CSA/UL 1995): 172 kW at 80 °F to 246 kW at 90 °F entering air with 50/64 °F water (System Design Catalog ©2024 Table 2.3 p.11; 'DB' read as return air for a downflow unit — our reading); 179 kW at the legacy 75 °F; above 90 °F not printed ?; 3.10 × 1.07 × 2.39 m; liquid cooling leaves the rest of the heat to air (Schneider WP 133)",
+   "coef": "the unit follows room_cooling_type — room units: Vertiv Liebert CW181 (60 Hz, CSA/UL 1995): 172 kW at 80 °F to 246 kW at 90 °F entering air with 50/64 °F water (System Design Catalog ©2024 Table 2.3 p.11; 'DB' read as return air for a downflow unit — our reading); 179 kW at the legacy 75 °F; above 90 °F not printed ?; 3.10 × 1.07 × 2.39 m; liquid cooling leaves the rest of the heat to air (Schneider WP 133); thermal wall: CoolLoop CA80 500 kW; in-row: CR050RC 73.7 kW with about 20% extra (Vertiv CRV catalog)",
    "source_roles": [
     {
      "id": "vertivCW181",
@@ -12749,6 +12752,67 @@
      "term": "Edmonton: same egress and service-room articles",
      "role": "rule",
      "conf": 90,
+     "verified": true
+    }
+   ]
+  },
+  {
+   "id": "room_cooling_type",
+   "name": "Room cooling type",
+   "unit": "class",
+   "stage": "size",
+   "conf": 50,
+   "status": "in hand",
+   "inputs": [
+    "it_load_actual",
+    "hall_area",
+    "liquid_capture",
+    "cooling_type"
+   ],
+   "sources": [
+    "vertivCWAds",
+    "coolloopBr",
+    "coolloopSpec",
+    "vertivCWAiom",
+    "vertivCRVcat",
+    "vertivCW181"
+   ],
+   "formula": "hall density = heat to air on a hall floor ÷ its floor area (W/ft²); up to about 150 → room units along the walls; up to about 400 → a thermal wall in a side gallery; above → in-row coolers",
+   "coef": "density limits are Vertiv's claims (SL-70713): about 150 W/ft² traditional CRAH, 250 full-face, 400 thermal wall; using heat to air (not all IT heat) for liquid-cooled halls is our reading (?); thermal wall: CA80 500 kW (rating water temperatures not printed ?), 1.52 m deep × 3.96 m along the wall × 3.67 m high, side by side with a gasketed gap, 1.1 m clear on the hall and gallery sides, UL 1995; in-row: CR050RC 73.7 kW at 95 °F return, 0.6 × 1.1 m, at row ends and evenly along rows, sized with about 20% extra (Vertiv CRV catalog)",
+   "source_roles": [
+    {
+     "id": "vertivCWAds",
+     "term": "150 / 250 / 400 W/ft² limits",
+     "role": "rule",
+     "conf": 50,
+     "verified": true
+    },
+    {
+     "id": "coolloopBr",
+     "term": "CA80 500 kW, size, gallery mounting",
+     "role": "coefficient",
+     "conf": 50,
+     "verified": true
+    },
+    {
+     "id": "coolloopSpec",
+     "term": "UL 1995; service from the gallery",
+     "role": "rule",
+     "conf": 50,
+     "verified": true
+    },
+    {
+     "id": "vertivCWAiom",
+     "term": "1.1 m clearances; gasketed gap",
+     "role": "rule",
+     "conf": 50,
+     "verified": true
+    },
+    {
+     "id": "vertivCRVcat",
+     "term": "73.7 kW in-row; placement; +20%",
+     "role": "coefficient",
+     "conf": 50,
      "verified": true
     }
    ]
@@ -15811,7 +15875,12 @@
   "nbc2020_v1": "National Building Code of Canada 2020, Vol. 1 Div. B (NRC; J.B.'s copy NBC2020p2.pdf, read 29 Oct 2026): 3.3.1.9.(1) public corridor 1 100 mm, (5) dead-end corridor ≤ 6 m; 3.3.1.10.(1) aisles 'in conformance with the NFC'; 3.4.2.5.(1) travel distance to an exit ≤ 45 m in a floor area sprinklered throughout (c), 40 m business (b), 30 m otherwise (f); 3.6.2.1.(6) CEC-required service rooms 1 h; (7) service room in a storey not sprinklered throughout 1 h; (8) limited-quantity exemption (pp. 3-143, 3-161)",
   "cec2024": "CSA C22.1:24 Canadian Electrical Code, Part I, 26th ed. (J.B.'s copy, read on her computer 29 Oct 2026; text not stored): Rule 2-308 1) working space 1 m with secure footing; 5) 2.2 m headroom at exposed bare live parts; Rule 2-310 2) 1200 A or more or over 750 V: arranged so a person can leave without passing the failure point, otherwise working space not less than 1.5 m; Rule 26-010 service rooms for small dielectric-liquid equipment; Rule 64-804 2) batteries with exposed energized parts in a room or enclosure for authorized persons; Rule 64-1100 9) ESS evaluated to UL 9540A installed to the maker's instructions",
   "nfc2020_2712": "National Fire Code of Canada 2020, Div. B 2.7.1.2. Open Floor Areas (p. 2-11; NFC 2023 Alberta Edition identical): aisles serving required egress doorways ≥ 1 100 mm, two opposite directions at every point; subsidiary aisles with one direction ≥ 900 mm, ≤ 7.5 m (business, mercantile, high-hazard), 10 m (medium-hazard industrial), 15 m (low-hazard industrial) — https://publications.gc.ca/collections/collection_2022/cnrc-nrc/NR24-27-2020-eng.pdf",
-  "nbcAB2023": "National Building Code – 2023 Alberta Edition, Vol. 1 Div. B (NRC 2026; free PDF https://doi.org/10.4224/hz98-7h49; J.B. upload 29 Oct 2026): 3.3.1.9.(1),(5) corridors 1 100 mm, dead ends ≤ 6 m; 3.3.1.10 aisles 'in conformance with the NFC(AE)'; 3.4.2.5.(1) travel distance 45 m sprinklered (c), 40 m business (b), 30 m otherwise (f) (p. 3-143); 3.6.2.1.(6) electrical equipment the Electrical Code Regulation (Safety Codes Act) requires in a service room → 1 h; (7) service room in a storey not sprinklered throughout → 1 h — same as NBC 2020 for these articles"
+  "nbcAB2023": "National Building Code – 2023 Alberta Edition, Vol. 1 Div. B (NRC 2026; free PDF https://doi.org/10.4224/hz98-7h49; J.B. upload 29 Oct 2026): 3.3.1.9.(1),(5) corridors 1 100 mm, dead ends ≤ 6 m; 3.3.1.10 aisles 'in conformance with the NFC(AE)'; 3.4.2.5.(1) travel distance 45 m sprinklered (c), 40 m business (b), 30 m otherwise (f) (p. 3-143); 3.6.2.1.(6) electrical equipment the Electrical Code Regulation (Safety Codes Act) requires in a service room → 1 h; (7) service room in a storey not sprinklered throughout → 1 h — same as NBC 2020 for these articles",
+  "vertivCWAds": "Vertiv, Liebert CWA Thermal Wall data sheet SL-70713 (R11/22): 'allowing a maximum of around 400 W/ft2 data hall density, as opposed to around 150 W/ft2 for traditional CRAH' and 'around 250 W/ft2 for full face discharge CRAH' (manufacturer claims; no test conditions) — https://www.vertiv.com/48edfb/globalassets/products/thermal-management/room-cooling/vertiv-liebert-cwa-thermal-wall/vertiv-liebert-cwa-ds-en-na-sl-70713-web.pdf",
+  "coolloopBr": "Vertiv, CoolLoop Thermal Wall brochure SL-80367 (R11/25): 'optimized for slab floors and gallery-side mounting'; CA60 360 kW net sensible, 60 × 120 × 144.3 in; CA80 500 kW, 60 × 156 × 144.5 in; return air up to 45 °C; rating water temperatures not printed (?) — https://www.vertiv.com/49a63d/globalassets/shared/vertiv-coolloop-thermal-wall-br-en-na-sl-80367-web.pdf",
+  "coolloopSpec": "Vertiv, CoolLoop Thermal Wall Guide Specifications SL-70701 (rev 11-25) s.1.2: standard 60 Hz units certified to UL 1995 (harmonized US/Canada); s.1.4: 'All service and maintenance shall be performed through the gallery side of the unit'; 'No side access shall be required.' — https://www.vertiv.com/4966eb/globalassets/shared/coolloop-thermal-wall-guide-spec_ca80_nam_10102025.pdf",
+  "vertivCWAiom": "Vertiv, Liebert CWA Installer/User Guide (sl-70553 rev 3, 03-23): drawing DPN005165 '1.1m (42 inch) minimum clearance for installation and service access (Data Hall & Gallary Sides)'; DPN005179 adjacent units with a gasketed minimum gap, 152 mm with the gravity condensate kit (manual p.11, Appendix C p.65) — https://www.vertiv.com/4a76ae/globalassets/products/thermal-management/room-cooling/vertiv-liebert-cwa-thermal-wall/sl-70553_cwa_rev3_03-23-locked.pdf",
+  "vertivCRVcat": "Vertiv, Liebert CRV System Design Catalog (performance data LRS 12/13/2019): CR050RC 73.7 kW at 95 °F DB / 67.7 °F WB, 45/55 °F water (AHRI 1360 condition), 600 mm wide, 1100 mm deep; Appendix E.2 pp.54–56: units at the end of rows or between racks, with containment 'space CRVs evenly in each row', aisle 0.6–1.8 m, 'oversize the CRV by approximately 20%', air reaches 'six to seven racks away'; E.3 p.59 capacity met if any other unit in the row fails — https://www.vertiv.com/48ed92/globalassets/products/thermal-management/in-row-cooling/liebert-crv-row-based-cooling-system-design-manual.pdf"
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ (UCA default rates, ATCO Gas area); ATCO Gas North Mid Use variable delivery $1.045/GJ (ATCO Gas North Rate Schedules, p. 11, eff. 1 Jan 2026; riders T $1.289/GJ and L $0.087/GJ not included) → (1.045 + 1.458) × 3.6 ÷ 0.85 boiler efficiency ≈ $10.6/MWh heat at the October rate (our arithmetic; the tool uses the 12-month mean commodity, ≈ $13/MWh) — https://www.ucahelps.alberta.ca/regulated-rates.aspx ; https://gas.atco.com/content/dam/web/for-home/natural-gas/natural-gas-north-rate-schedule.pdf",
