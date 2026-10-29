@@ -174,16 +174,22 @@ function noiseLw(mw){ const CU=coolUnits(mw), LU=CU.name==='dry coolers'?R.lwUni
 /* cooling units for the noise count: the same units the plant lays out (sweep M30), spares included */
 /* equipment counts (register: rack_count, ups_modules, battery_cabinets, room_cooling_units, cdu_units, cooling_units, generator_sets;
    29 Oct 2026). Each count is [low, high] where its coefficient is a range. */
-R.equip={kwRack:[7.1,8], upsKW:1000, cabKW:[400,263], crahKW:[246,172], cduKW:1516};
+R.equip={kwRack:[7.1,8], upsKW:1000, cabKW:[400,263], crahKW:[246,172], cduKW:1516, wallKW:500, rowKW:73.7, rowOver:1.2, wfCrah:150, wfWall:400};
 /* layout rules (register: hall_layout, electrical_room; 29 Oct 2026) — every distance has its source there */
-R.layout={aisle:1.2, corridor:1.1, crahFront:0.864, crahEnd:0.457, cduFront:1.0, upsFront:1.5, battFront:0.914, battWall:0.025, upsAmps:1203};
+R.layout={aisle:1.2, corridor:1.1, crahFront:0.864, crahEnd:0.457, cduFront:1.0, upsFront:1.5, battFront:0.914, battWall:0.025, upsAmps:1203, wallClear:1.1, wallGap:0.152};
 function equip(mw,A){ A=A||BD.S.answers; const sp=A.spares||'n1', red=n=>sp==='2n'?n*2:sp==='n1'?n+1:n, kw=mw*1000, E=R.equip;
   const air=(A.inside||'air')==='air', liq=air?[0,0]:(A.inside==='immersion'?[1,1]:R.capture); // immersion: all heat in liquid (register liquid_capture, not verified)
   const toAir=[kw*(1-liq[1]),kw*(1-liq[0])], toLiq=[kw*liq[0],kw*liq[1]];
   const out={racks:[Math.ceil(kw/E.kwRack[1]),Math.ceil(kw/E.kwRack[0])], ups:red(Math.ceil(kw/E.upsKW)),
     batt:[Math.ceil(kw/E.cabKW[0])*(sp==='2n'?2:1),Math.ceil(kw/E.cabKW[1])*(sp==='2n'?2:1)],
-    crah:toAir[1]>0?[red(Math.ceil(toAir[0]/E.crahKW[0])),red(Math.ceil(toAir[1]/E.crahKW[1]))]:[0,0],
+    crah:[0,0],
     cdu:toLiq[1]>0?[red(Math.ceil(toLiq[0]/E.cduKW)),red(Math.ceil(toLiq[1]/E.cduKW))]:[0,0]};
+  // room cooling type from hall density (register: room_cooling_type; Vertiv SL-70713 limits, manufacturer claims)
+  let M=null; try{ M=BD.model&&BD.model(); }catch(e){} const fl=M&&M.nF?Math.max(1,M.Z&&M.Z.ground?M.nF[0]-1:M.nF[0]):1, fa=M&&(M.serverFoot||M.foot)?BD.area(M.serverFoot||M.foot):0;
+  const wft2=fa?toAir[1]/fl*1000/(fa*10.7639):null; const type=wft2==null||wft2<=E.wfCrah?'crah':wft2<=E.wfWall?'wall':'inrow';
+  const per={crah:[E.crahKW[0],E.crahKW[1]],wall:[E.wallKW,E.wallKW],inrow:[E.rowKW/E.rowOver,E.rowKW/E.rowOver]}[type];
+  const room=toAir[1]>0?[red(Math.ceil(toAir[0]/per[0])),red(Math.ceil(toAir[1]/per[1]))]:[0,0];
+  out.room={type,wft2,n:room,name:{crah:'room cooling units',wall:'thermal-wall units',inrow:'in-row coolers'}[type]}; if(type==='crah') out.crah=room;
   if(BD.plant&&BD.plant.sizeFor){ const s=BD.plant.sizeFor(mw,A); out.cool={n:s.n,name:s.k.name}; out.gens={n:s.gN,need:s.gNeed,mw:s.g?s.g.mw:0}; }
   return out; }
 function coolUnits(mw){ const A=BD.S.answers; if(BD.plant&&BD.plant.sizeFor){ const s=BD.plant.sizeFor(mw,A); return {n:s.n,name:s.k.name,mw:s.k.mw}; } return {n:Math.max(1,Math.ceil(mw*R.pue[1])),name:'cooling units',mw:1}; }

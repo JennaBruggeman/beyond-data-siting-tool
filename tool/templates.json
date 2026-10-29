@@ -291,6 +291,13 @@
    ],
    "why": "engineering"
   },
+  "room_cooling_type": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
   "heat_rejected": {
    "tier": "community",
    "parties": [
@@ -2583,6 +2590,10 @@
    [
     "electrical_room",
     "size"
+   ],
+   [
+    "room_cooling_type",
+    "size"
    ]
   ],
   "edges": [
@@ -3671,6 +3682,10 @@
     "room_cooling_units"
    ],
    [
+    "room_cooling_type",
+    "room_cooling_units"
+   ],
+   [
     "it_load_actual",
     "cdu_units"
    ],
@@ -3729,12 +3744,28 @@
    [
     "battery_cabinets",
     "electrical_room"
+   ],
+   [
+    "it_load_actual",
+    "room_cooling_type"
+   ],
+   [
+    "hall_area",
+    "room_cooling_type"
+   ],
+   [
+    "liquid_capture",
+    "room_cooling_type"
+   ],
+   [
+    "cooling_type",
+    "room_cooling_type"
    ]
   ]
  },
  "resident_count": 45,
  "community_count": 128,
- "full_count": 204,
+ "full_count": 205,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {

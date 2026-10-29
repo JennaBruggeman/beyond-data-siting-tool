@@ -17,7 +17,7 @@ const tierNow=()=>(BD.tier&&BD.tier())||'full';
 
 /* ---------- what sits behind what ---------- */
 const STEP={
- setup:['start_case','cooling_type','zone','parcel','size_fit','cooling_units','generator_sets','rack_count','ups_modules','battery_cabinets','room_cooling_units','cdu_units','hall_layout','electrical_room'],
+ setup:['start_case','cooling_type','zone','parcel','size_fit','cooling_units','generator_sets','rack_count','ups_modules','battery_cabinets','room_cooling_units','cdu_units','hall_layout','electrical_room','room_cooling_type'],
  fits:['envelope','size_fit','hall_area','component_space','floor_area'],
  prec:['it_load_claim','it_load_actual','floor_area'],
  heat:['heat_delivered','homes_heated','receivers_nearby','lcoh'],
