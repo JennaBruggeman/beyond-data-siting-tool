@@ -179,31 +179,40 @@ function buildSite(site){
   const bb=foot?bbox(foot):[site.c[0]-40,site.c[1]-40,site.c[0]+40,site.c[1]+40]; const span=Math.max(60,Math.hypot(bb[2]-bb[0],bb[3]-bb[1]));
   R.cam.position.set(span*1.9,span*1.6+roof*1.3,span*2.2); R.ctl.target.set(0,roof*0.35,0); R.ctl.update(); state.span=span;
 }
-function racksFor(M){ const A=BD.S.answers, mw=A.mw||M.mwSized||1, racks=Math.round(mw*1000/8); const floors=Math.max(1,M.Z.ground?M.nF[0]-1:M.nF[0]); const per=Math.min(900,Math.ceil(racks/floors));
-  const F=M.F, foot=M.serverFoot||M.foot; const pts=[]; let n=0; const z0=state.hallZ||0.3;
+/* the first hall floor, laid out to the register's rules (hall_layout, electrical_room; 29 Oct 2026):
+   electrical room at one end (UPS against the end wall, working space, battery cabinets), room cooling units along the long walls with
+   their service clearance, racks in back-to-back pairs with 1.2 m aisles, 1.1 m corridors at the row ends. Counts: register quantities. */
+function racksFor(M){ const A=BD.S.answers, mw=A.mw||M.mwSized||1, E=BD.eng.equip(mw,A), Lr=BD.eng.R.layout; const floors=Math.max(1,M.Z.ground?M.nF[0]-1:M.nF[0]);
+  const F=M.F, foot=M.serverFoot||M.foot, z0=state.hallZ||0.3;
   const [u0,u1,v0,v1]=(()=>{ let a=1e9,b=-1e9,c=1e9,d=-1e9; for(let i=0;i<foot.length;i+=2){ const [u,v]=F.toL(foot[i],foot[i+1]); a=Math.min(a,u); b=Math.max(b,u); c=Math.min(c,v); d=Math.max(d,v); } return [a,b,c,d]; })();
-  // rows: racks 1.2 m deep, back to back, 1.2 m contained aisles (Vertiv SmartAisle 1200 mm option) → a pair of rows every 3.6 m
-  for(let v=v0+4; v<=v1-4-1.2 && n<per; v+=3.6) for(let u=u0+4; u<=u1-4-0.6 && n<per; u+=0.6){ const [x,y]=F.toW(u+0.3,v+0.6); if(!BD.pip(x,y,foot)) continue; pts.push([u,v]); n++; }
-  const s=BD.kit?BD.kit.SPEC.rack:{L:0.6,W:1.2,H:2.0};
-  const geo=new T.BoxGeometry(s.L*0.98,s.H,s.W*0.98); const mat=new T.MeshStandardMaterial({color:0x3a3d42,roughness:.8,flatShading:true,transparent:true,opacity:0.9});
-  const im=new T.InstancedMesh(geo,mat,Math.max(1,pts.length)); const m4=new T.Matrix4(), q=new T.Quaternion(), sc=new T.Vector3(1,1,1);
-  const ang=(()=>{ const a=F.toW(0,0), b=F.toW(1,0); return Math.atan2(b[1]-a[1],b[0]-a[0]); })(); q.setFromAxisAngle(new T.Vector3(0,1,0),ang);
-  pts.forEach(([u,v],k)=>{ const [x,y]=F.toW(u+0.3,v+0.6); m4.compose(V(x,y,z0+s.H/2),q,sc); im.setMatrixAt(k,m4); }); im.count=pts.length; state.dc.add(im);
+  const ang=(()=>{ const a=F.toW(0,0), b=F.toW(1,0); return Math.atan2(b[1]-a[1],b[0]-a[0]); })();
+  const inside=(u,v)=>{ const [x,y]=F.toW(u,v); return BD.pip(x,y,foot); };
+  const put=(kind,u,v,rot)=>{ const g=BD.kit.make(kind); const [x,y]=F.toW(u,v); g.position.copy(V(x,y,z0)); g.rotation.y=ang+(rot||0); state.dc.add(g); return g; };
+  const S=BD.kit.SPEC, got={ups:0,battery:0,crah:0,cdu:0,racks:0};
+  // 1. electrical room at the u0 end: UPS (3.6 m long, 0.9 deep) against the end wall, 1.5 m working space, battery cabinets (0.65 × 0.75) facing them
+  const need={ups:E.ups,battery:E.batt[1],racks:Math.ceil(E.racks[1]/floors),crah:Math.ceil(E.crah[1]/floors),cdu:Math.ceil(E.cdu[1]/floors)};
+  const band=S.ups.W+Lr.upsFront+S.battery.W+Lr.battWall; let ue=u0, nu=0, nb=0;
+  while((nu<need.ups||nb<need.battery)&&ue+band<u1-10){ let v=v0+0.3; while(nu<need.ups&&v+S.ups.L<=v1-0.3){ if(inside(ue+S.ups.W/2,v+S.ups.L/2)){ put('ups',ue+S.ups.W/2,v+S.ups.L/2,Math.PI/2); nu++; } v+=S.ups.L; }
+    v=v0+0.3; const ub=ue+S.ups.W+Lr.upsFront+S.battery.W/2; while(nb<need.battery&&v+S.battery.L<=v1-0.3){ if(inside(ub,v+S.battery.L/2)){ put('battery',ub,v+S.battery.L/2,-Math.PI/2); nb++; } v+=S.battery.L; }
+    ue+=band; }
+  got.ups=nu; got.battery=nb;
+  if(ue>u0){ const r=BD.geo.rectW(F,u0,ue,v0,v1); state.dc.add(ringLine(r,z0+0.05,C.power,1.5,0.9)); state.dc.add(line([V(...F.toW(ue,v0),z0),V(...F.toW(ue,v0),z0+3.5)],C.power,1.2,0.7)); state.elecRoom=r; }
+  // 2. room cooling units (3.10 × 1.07 m) along both long walls, 0.457 m clear at each end; CDUs after them (1.0 m in front)
+  const ua=ue+Lr.corridor, ub=u1-Lr.corridor;
+  const wallRow=(kind,count,side)=>{ const s=S[kind]; let u=ua+Lr.crahEnd, n=0; while(n<count&&u+s.L<=ub-Lr.crahEnd){ const v=side<0?v0+s.W/2+0.05:v1-s.W/2-0.05; if(inside(u+s.L/2,v)){ put(kind,u+s.L/2,v,side<0?Math.PI:0); n++; } u+=s.L+2*Lr.crahEnd; } return n; };
+  if(need.crah){ const a=wallRow('crah',Math.ceil(need.crah/2),-1); got.crah=a+wallRow('crah',need.crah-a,1); }
+  if(need.cdu){ got.cdu=0; } // CDUs: no maker placement rule found for the Motivair basis; listed, not placed (?)
+  const wallZone=(need.crah?S.crah.W+Lr.crahFront:need.cdu?S.cdu.W+Lr.cduFront:0)+0.05;
+  // 3. racks in back-to-back pairs: cold aisle 1.2 | rack 1.2 | hot aisle 1.2 | rack 1.2
+  const pts=[]; const D=S.rack.W, Wd=S.rack.L; let v=v0+wallZone+Lr.aisle;
+  while(v+2*D+Lr.aisle<=v1-wallZone-Lr.aisle+1e-6&&pts.length<need.racks){ for(const vr of [v,v+D+Lr.aisle]){ for(let u=ua;u+Wd<=ub&&pts.length<need.racks;u+=Wd){ if(inside(u+Wd/2,vr+D/2)) pts.push([u+Wd/2,vr+D/2]); } } v+=2*D+2*Lr.aisle; }
+  got.racks=pts.length;
+  const geo=new T.BoxGeometry(Wd*0.98,S.rack.H,D*0.98); const mat=new T.MeshStandardMaterial({color:0x3a3d42,roughness:.8,flatShading:true,transparent:true,opacity:0.9});
+  const im=new T.InstancedMesh(geo,mat,Math.max(1,pts.length)); const m4=new T.Matrix4(), q=new T.Quaternion().setFromAxisAngle(new T.Vector3(0,1,0),ang), sc=new T.Vector3(1,1,1);
+  pts.forEach(([u,vv],k)=>{ const [x,y]=F.toW(u,vv); m4.compose(V(x,y,z0+S.rack.H/2),q,sc); im.setMatrixAt(k,m4); }); im.count=pts.length; im.castShadow=true; state.dc.add(im);
   if(R.lights&&!R.lights[0].parent) R.lights.forEach(l=>R.scene.add(l));
-  rooms(M,F,[u0,u1,v0,v1],z0,ang,mw);
-  return {obj:im,n:pts.length,per,racks,floors}; }
-/* the rooms' equipment, schematic arrangement (J.B., 29 Oct 2026: "yes" to showing inside). Counts from the sourced sizes per unit:
-   UPS 1 MW frames (Schneider Galaxy VX), Li-ion cabinets 4 per MW for about 5 min (Vertiv EnergyCore Li5), room air units 179 kW each
-   (Vertiv Liebert CW181) for air cooling or CDUs 1.516 MW each (Motivair MCDU-50) for liquid; spares as set up. Where they stand is not designed. */
-function rooms(M,F,bb,z0,ang,mw){ if(!BD.kit||!BD.eng.equip) return; const A=BD.S.answers, [u0,u1,v0,v1]=bb, E=BD.eng.equip(mw,A);
-  const floors=Math.max(1,M.Z&&M.Z.ground?M.nF[0]-1:M.nF[0]);
-  // a row of units along v, wrapping to the next row (rows given); returns how many were drawn
-  const row=(kind,count,rowsV,flip)=>{ let drawn=0; for(const v of rowsV){ let u=u0+2; while(drawn<count){ const g=BD.kit.make(kind), s=g.userData.spec; if(u+s.L>u1-2) break; const [x,y]=F.toW(u+s.L/2,v);
-      g.position.copy(V(x,y,z0)); g.rotation.y=ang+(flip?Math.PI:0); state.dc.add(g); drawn++; u+=s.L+0.15; } if(drawn>=count) break; } return drawn; };
-  // high end of each range is drawn (the most space it could take); register: ups_modules, battery_cabinets, room_cooling_units, cdu_units
-  const need={ups:E.ups,battery:E.batt[1],crah:Math.ceil(E.crah[1]/floors),cdu:Math.ceil(E.cdu[1]/floors)};
-  const got={ups:row('ups',need.ups,[v0+1.2]),battery:row('battery',need.battery,[v0+2.6]),crah:need.crah?row('crah',need.crah,[v1-1.5,v1-3.0],true):0,cdu:need.cdu?row('cdu',need.cdu,[v1-1.5,v1-3.0],true):0};
-  state.rooms={E,need,got,floors}; }
+  state.rooms={E,need,got,floors};
+  return {obj:im,n:pts.length,per:need.racks,racks:E.racks[1],floors}; }
 /* ---------- overlays ---------- */
 function clearOverlay(){ if(R.ov) R.scene.remove(R.ov); R.ov=new T.Group(); R.scene.add(R.ov); R.ticks=[]; if(R.demoG){ R.scene.remove(R.demoG); R.demoG=null; } lab.splice(0); labels.innerHTML=''; resetTint(); R.onPick=null;
   if(state.shell){ state.shell.children[0].material.opacity=0.55; } if(state.racks) state.racks.obj.material.opacity=0.9; }
@@ -227,9 +236,9 @@ function model(d){ plantLabels(); baseLabels(); const M=state.M, P=M&&M.plant;
   note((P&&P.miss&&P.miss.length?'Doesn\'t fit: '+P.miss.join('; ')+'. ':'')+heightsNote()+'. Neighbours drawn to 1.5 km.');
   key(sw(C.acc,'the lot; dashed red: the building envelope (not a design)')+sw(C.grey,'setbacks (yards) and plant yard',true)+sw(C.edge,'plant to makers\' sizes: solid = unit, dashed = clearance')+sw(C.mat,'loading spaces')+roomsKey()); }
 function roomsKey(){ const r=state.rooms; if(!r) return ''; const E=r.E, rg=a=>a[0]===a[1]?`${a[0]}`:`${a[0]}–${a[1]}`, gap=(k)=>r.got[k]<r.need[k]?` (${r.got[k]} drawn)`:'';
-  const L=[`racks ${rg(E.racks)}`,`UPS modules ${E.ups}${gap('ups')}`,`battery cabinets ${rg(E.batt)}${gap('battery')}`];
-  if(E.crah[1]) L.push(`room cooling units ${rg(E.crah)}${r.floors>1?`, about ${r.need.crah} a floor`:''}${gap('crah')}`); if(E.cdu[1]) L.push(`coolant units ${rg(E.cdu)}${gap('cdu')}`);
-  return `<div style="margin-top:4px">Inside, first hall floor of ${r.floors}${r.floors>1?' (the others alike)':''}: ${L.join(' · ')}. Arrangement schematic.</div>`; }
+  const L=[`racks ${rg(E.racks)}, about ${r.need.racks} a floor${gap('racks')}`,`UPS modules ${E.ups}${gap('ups')}`,`battery cabinets ${rg(E.batt)}${gap('battery')}`];
+  if(E.crah[1]) L.push(`room cooling units ${rg(E.crah)}${r.floors>1?`, about ${r.need.crah} a floor`:''}${gap('crah')}`); if(E.cdu[1]) L.push(`coolant units ${rg(E.cdu)} (not placed: no placement rule found)`);
+  return `<div style="margin-top:4px">Inside, first hall floor of ${r.floors}${r.floors>1?' (the others alike)':''}: ${L.join(' · ')}. Gold dashed: UPS and battery room. Spacing from the register (hall_layout, electrical_room).</div>`; }
 const TYPE={housing:'Non-market housing',school:'School',campus:'University or college campus',care:'Care home',hospital:'Hospital',rec:'Recreation centre',hall:'Community league hall',pool:'Pool',arena:'Indoor arena',apartment:'Apartment building',office:'Office building',hotel:'Hotel',commercial:'Commercial building'};
 const TCOL={housing:C.city,apartment:C.city,office:C.heat,hotel:C.heat,commercial:C.heat,school:C.power,campus:C.power,care:C.senses,hospital:C.senses,rec:C.water,hall:C.water,pool:C.water,arena:C.mat};
 function heat(d){

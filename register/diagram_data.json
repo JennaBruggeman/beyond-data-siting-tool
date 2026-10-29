@@ -6,10 +6,10 @@
 "rule": "A quantity's confidence is the lowest of its inputs; a condition's is the lowest of its quantities; a match fails at its weakest link; burdens are recorded beside, never netted.",
 "counts": {
 "inputs": 17,
-"quantities": 185,
+"quantities": 187,
 "conditions": 101,
 "opportunities": 21,
-"sources": 769
+"sources": 777
 }
 },
 "stages": [
@@ -11693,6 +11693,144 @@
 "both": 0,
 "gen": 4
 }
+},
+{
+"id": "hall_layout",
+"kind": "quantity",
+"stage": "size",
+"name": "Data-hall arrangement",
+"formula": "racks in back-to-back pairs: cold aisle | rack 1.2 m | hot aisle | rack 1.2 m; room cooling units along the long walls with their service clearance in front; corridors and travel distance to the building code",
+"coef": "aisles 1.2 m (middle of Vertiv's standard containment sizes 0.9 / 1.2 / 1.8 m — product sizes; no code minimum found for aisles inside a data hall ?); racks 0.6 × 1.2 m; room cooling units: 0.864 m clear in front recommended (0.61 m minimum), 0.457 m at each end, not in alcoves or at the end of a long narrow room, near the heat load (Vertiv CW guide); Vertiv also asks for units 30–40 ft apart, which a hall of this load cannot meet with units of this size (conflict shown, not resolved ?); egress: public corridors 1.1 m, dead ends ≤ 6 m, travel distance ≤ 45 m sprinklered (VBBL 2019 3.3.1; Edmonton (NBC(AE) 2023) not read ?)",
+"unit": "m (clearances)",
+"sources": [
+"vertivVR3300",
+"vertivContainment",
+"vertivCWguide",
+"vbbl2019_331"
+],
+"source_roles": [
+{
+"id": "vertivContainment",
+"term": "aisle widths 0.9/1.2/1.8 m",
+"role": "coefficient",
+"conf": 50,
+"verified": true
+},
+{
+"id": "vertivVR3300",
+"term": "rack 0.6 × 1.2 m",
+"role": "coefficient",
+"conf": 50,
+"verified": true
+},
+{
+"id": "vertivCWguide",
+"term": "CRAH clearances and placement",
+"role": "rule",
+"conf": 50,
+"verified": true
+},
+{
+"id": "vbbl2019_331",
+"term": "corridors, dead ends, travel distance",
+"role": "rule",
+"conf": 90,
+"verified": true
+}
+],
+"conf": 50,
+"status": "in hand",
+"direction": "",
+"trial": "",
+"inputs": [
+"rack_count",
+"room_cooling_units",
+"cdu_units",
+"hall_area"
+],
+"upstream": 40,
+"city": {
+"van": 1,
+"edm": 0,
+"both": 0,
+"gen": 3
+}
+},
+{
+"id": "electrical_room",
+"kind": "quantity",
+"stage": "size",
+"name": "UPS and battery room",
+"formula": "UPS modules and battery cabinets in a room of their own; area = their footprints + working space in front + clearances",
+"coef": "room: a service room with a 1 h fire separation where the electrical rules require one (VBBL 3.6.2.1(6); whether a UPS triggers it is in the electrical code, not read ?); working space in front of the UPS 1.5 m (Galaxy VX 1000 kW draws 1203 A at 480 V, at or above 1200 A: CEC Rule 2-308 per ESA Bulletin 2-9-9; 1 m below 1200 A), headroom 2.2 m; UPS against a wall, no rear or side access (Schneider); battery cabinets 0.914 m clear in front, 0.457 m above, 25 mm to a wall, none side to side (Vertiv, UL 9540A-tested); NFPA 855 asks 0.914 m between ESS units unless fire testing shows less (adoption in BC/AB ?)",
+"unit": "m² (and clearances)",
+"sources": [
+"vbbl2019_362",
+"esaBulletin299",
+"tsbcIBEL201605",
+"galaxyVXinstall",
+"vertivLi5manual",
+"nfpa855tia"
+],
+"source_roles": [
+{
+"id": "vbbl2019_362",
+"term": "service room, 1 h",
+"role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "esaBulletin299",
+"term": "1 m / 1.5 m working space",
+"role": "rule",
+"conf": 80,
+"verified": true
+},
+{
+"id": "galaxyVXinstall",
+"term": "against a wall; 1203 A",
+"role": "coefficient",
+"conf": 50,
+"verified": true
+},
+{
+"id": "vertivLi5manual",
+"term": "battery clearances",
+"role": "coefficient",
+"conf": 50,
+"verified": true
+},
+{
+"id": "nfpa855tia",
+"term": "0.914 m between ESS units",
+"role": "bound",
+"conf": 70,
+"verified": false
+},
+{
+"id": "tsbcIBEL201605",
+"term": "BC working-space bulletin",
+"role": "check",
+"conf": 80,
+"verified": true
+}
+],
+"conf": 50,
+"status": "in hand",
+"direction": "",
+"trial": "",
+"inputs": [
+"ups_modules",
+"battery_cabinets"
+],
+"upstream": 40,
+"city": {
+"van": 2,
+"edm": 0,
+"both": 2,
+"gen": 2
+}
 }
 ],
 "edges": [
@@ -12815,6 +12953,30 @@
 {
 "from": "pue",
 "to": "generator_sets"
+},
+{
+"from": "rack_count",
+"to": "hall_layout"
+},
+{
+"from": "room_cooling_units",
+"to": "hall_layout"
+},
+{
+"from": "cdu_units",
+"to": "hall_layout"
+},
+{
+"from": "hall_area",
+"to": "hall_layout"
+},
+{
+"from": "ups_modules",
+"to": "electrical_room"
+},
+{
+"from": "battery_cabinets",
+"to": "electrical_room"
 }
 ],
 "conditions": [
@@ -16746,7 +16908,15 @@
 "motivairMCDU": "Motivair by Schneider Electric, CDU brochure (©2025): MCDU-50 1516 kW at a 4 K approach (row 2: primary supply 105.8 °F, secondary supply 113 °F), 36 × 61-5/8 × 80-1/2 in; UL, 380–480 V, 50/60 Hz (manufacturer claims)",
 "lbnlXu2007": "Xu, T. & Greenberg, S., Data Center Energy Benchmarking Part 1: Case Studies on Two Co-location Data Centers (No. 16 and 17), LBNL-62716, Aug 2007: UPS serves the 'computer loads' (p.2); HVAC — 'CRACs, cooling towers, and condenser water pumps' — on generator-backed essential power (p.9); one site — https://eta-publications.lbl.gov/sites/default/files/62716-p1.pdf",
 "fujiRedundancy": "Fuji Electric Corp. of America (UPS maker; no date), 'What are N+1, 2N, and 2(N+1) redundancy?': N+1 'N units to handle the full load, plus 1 additional (spare) unit'; 2N 'two completely independent sets of N components, each capable of handling the full load' — https://americas.fujielectric.com/what-are-n1-2n-and-2n1-redundancy/",
-"schneiderWP133": "Lin, Bunger, Avelar, Navigating Liquid Cooling Architectures for Data Centers with AI Workloads, Schneider Electric White Paper 133 v2 (©2024) p.8: '60% to 90% of a liquid-cooled server's heat can be removed via the liquid'; 'The remaining heat is removed by air cooling.' — https://download.schneider-electric.com/doc/SPD_WP133_EN/WP133_V2_EN.pdf"
+"schneiderWP133": "Lin, Bunger, Avelar, Navigating Liquid Cooling Architectures for Data Centers with AI Workloads, Schneider Electric White Paper 133 v2 (©2024) p.8: '60% to 90% of a liquid-cooled server's heat can be removed via the liquid'; 'The remaining heat is removed by air cooling.' — https://download.schneider-electric.com/doc/SPD_WP133_EN/WP133_V2_EN.pdf",
+"vertivCWguide": "Vertiv, Liebert CW 38–181 kW Installer/User Guide SL-18060 (©2022; hosted publicly by Vertiv): s.3 p.9 'Do not install a Vertiv Liebert CW in an alcove or at the end of a long, narrow room'; s.3.2 p.11 recommended ≈34 in (864 mm) service clearance left, right and front, minimum 18 in (457 mm) each end and 24 in (610 mm) front; 'avoid installing units too close together' (30–40 ft); s.3 p.9 'as close as possible to the largest heat load' — https://www.vertiv.com/4966e4/globalassets/shared/for-internal-use-only-cw-38-181-kw-installer-and-user-guide-sl-18060.pdf-unlocked.pdf",
+"vertivLi5manual": "Vertiv, EnergyCore Lithium-ion Battery Cabinet Installation and Operation Manual SL-71251, s.5.2 Table 5.1 p.36: 36 in (914 mm) in front, 18 in (457 mm) above, 1 in (25 mm) to a combustible wall; side to side none; back to back none (4 in / 102 mm on seismic mounts); s.5.3 p.39 1 in to the wall at the rear — https://www.vertiv.com/4a50af/globalassets/shared/vertiv-energycore-lithium-ion-battery-cabinet-installation-and-operation-manual-sl-71251.pdf",
+"galaxyVXinstall": "Schneider Electric, Galaxy VX UPS with 1500 kW I/O Cabinet Installation 990-5783J-001 (11/2024) p.39: 'The UPS system can be placed up against a wall with no requirement for rear or side access'; front and top clearances shown only in a figure (?); Galaxy VX 1000 kW 480 V: 1203 A (990-5451K-001 p.40)",
+"esaBulletin299": "Electrical Safety Authority (Ontario), Bulletin 2-9-9 'Working space around electrical equipment' (May 2025), on Canadian Electrical Code Rule 2-308: Table B1 1 m in front below 1200 A and at 750 V or less; 1.5 m at or above 1200 A or above 750 V; Note 2: 1 m → 1.5 m where a person cannot leave without passing a failure point; 2.2 m headroom at exposed live parts; egress not less than 750 mm. Ontario bulletin on the same national code text (BC/AB adoption of the same rule ?) — https://esasafe.com/assets/files/esasafe/pdf/Electrical_Safety_Products/Bulletins/2-9-9.pdf",
+"tsbcIBEL201605": "Technical Safety BC, Information Bulletin IB-EL 2016-05 Rev 03 (Mar 2025), Section 2 general rules: working space and second means of egress at large equipment (does not print the 1 m figure) — https://files.technicalsafetybc.ca/v3/assets/bltdec2ded849740f4d/blta76004f5f868765a/67bf6bf887966dc859992d15/IB-EL_2016-05_-_Section_2_-_General_Rules.pdf",
+"vbbl2019_362": "Vancouver Building By-law 2019 (consolidated 1 Jul 2024), Div. B 3.6.2.1.(6): electrical equipment required by the Electrical Safety Regulation to be in a service room is installed in a service room with a fire separation (1 h); 3.6.2.7 electrical equipment vaults 3 h unsprinklered / 2 h sprinklered — https://free.bcpublications.ca/civix/document/id/public/vbbl2019/2046477372",
+"vbbl2019_331": "Vancouver Building By-law 2019 (consolidated 1 Jul 2024), Div. B 3.3.1.4.(4)(a) travel distance to an exit not more than 45 m (sprinklered floor area, open public corridor); 3.3.1.5.(1)(d)(i) 25 m to an egress doorway (sprinklered); 3.3.1.9.(1) public corridor at least 1 100 mm; 3.3.1.9.(7) dead-end corridor not more than 6 m — https://free.bcpublications.ca/civix/document/id/public/vbbl2019/758782467",
+"vertivContainment": "Vertiv, SmartAisle Containment brochure MKA4L0CATKSE Rev.2 (04/2024) p.8, p.10: 'Aisle width 1200 and 1800 mm'; Vertiv Aisle Containment data sheet SL-11422 (R03/21): 900, 1200 or 1800 mm (product sizes, not minimums) — https://www.vertiv.com/globalassets/products/facilities-enclosures-and-racks/racks-and-containment/smartaisle-containment-brochure-english.pdf"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -20009,7 +20179,15 @@
 "motivairMCDU": "gen",
 "lbnlXu2007": "gen",
 "fujiRedundancy": "gen",
-"schneiderWP133": "gen"
+"schneiderWP133": "gen",
+"vertivCWguide": "gen",
+"vertivLi5manual": "gen",
+"galaxyVXinstall": "gen",
+"esaBulletin299": "both",
+"tsbcIBEL201605": "van",
+"vbbl2019_362": "van",
+"vbbl2019_331": "van",
+"vertivContainment": "gen"
 },
 "city_gaps": {
 "van": [
@@ -20025,7 +20203,8 @@
 "no2_at_receptor",
 "air_permit_trigger",
 "importance_cat",
-"ev_repay"
+"ev_repay",
+"hall_layout"
 ]
 }
 }

@@ -175,6 +175,8 @@ function noiseLw(mw){ const CU=coolUnits(mw), LU=CU.name==='dry coolers'?R.lwUni
 /* equipment counts (register: rack_count, ups_modules, battery_cabinets, room_cooling_units, cdu_units, cooling_units, generator_sets;
    29 Oct 2026). Each count is [low, high] where its coefficient is a range. */
 R.equip={kwRack:[7.1,8], upsKW:1000, cabKW:[400,263], crahKW:[246,172], cduKW:1516};
+/* layout rules (register: hall_layout, electrical_room; 29 Oct 2026) — every distance has its source there */
+R.layout={aisle:1.2, corridor:1.1, crahFront:0.864, crahEnd:0.457, cduFront:1.0, upsFront:1.5, battFront:0.914, battWall:0.025, upsAmps:1203};
 function equip(mw,A){ A=A||BD.S.answers; const sp=A.spares||'n1', red=n=>sp==='2n'?n*2:sp==='n1'?n+1:n, kw=mw*1000, E=R.equip;
   const air=(A.inside||'air')==='air', liq=air?[0,0]:(A.inside==='immersion'?[1,1]:R.capture); // immersion: all heat in liquid (register liquid_capture, not verified)
   const toAir=[kw*(1-liq[1]),kw*(1-liq[0])], toLiq=[kw*liq[0],kw*liq[1]];
