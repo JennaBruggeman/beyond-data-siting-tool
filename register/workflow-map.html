@@ -278,7 +278,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "quantities": 178,
 "conditions": 101,
 "opportunities": 21,
-"sources": 751
+"sources": 761
 }
 },
 "stages": [
@@ -2480,7 +2480,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Sound level at receptor",
 "formula": "screen Lp ≈ Lw − 20·log10(r) − 8; full ISO 9613-2 (NoiseModelling)",
-"coef": "18 Oct 2026 (sweep M30–M32; audit/plant_sources_2026-10-18.md): unit count = the units the plant lays out (spares included); Lw per unit: air-cooled chillers 98–101 dBA (Trane RTAF, low-noise to standard), dry coolers 98.5–102 dBA at full fan speed (Güntner GFD ≈2.5 MW; Thermokey 738 kW); towers and hybrid coolers use the chiller ratings as a stand-in (labelled). starter set: scroll chiller 450–850 kW Lw 96–100 dBA (Daikin, AHRI 370); Trane Sintesis Prime RTAF HSE 333–1,010 kW Lw 94–101 standard / 91–98 low-noise, plus size 245 (877 kW) printed as 107 / 103, out of line with its neighbours (brochure RTAF-SLB001-GB p.13; sound rows sit under the 'Eurovent performances' heading but are not labelled Eurovent; checked 18 Oct 2026); the tool takes the 1,010 kW unit (size 280), 98 low-noise / 101 standard, as one unit per MW; screw chiller 99–103 (ISO 9614); dry cooler: Kelvion LF-PD203T4H 94 dBA per fan, 6 fans ≈ 101.8 dBA per unit (our sum of the printed per-fan value), 61 dBA @10 m per fan; seller copy, not on kelvion.com; Güntner small unit Lw 67 dBA (permit submittal); standby diesel open 98–99 dBA @7 m (ISO 8528-10); enclosed: Cummins QuietSite L2 73–76, L1 78–87, weather-protective 89–91 dBA @7 m; CRAC 48–62 dBA @2 m (Stulz, 30–150 kW); transformer 62–63 dB (NEMA contour, unverified edition)",
+"coef": "18 Oct 2026 (sweep M30–M32; audit/plant_sources_2026-10-18.md): unit count = the units the plant lays out (spares included); Lw per unit: air-cooled chillers 102.8–106.1 dBA per 1.49 MW free-cooling chiller (Vertiv Liebert AFC FH3135/FIZ135, Lp at 1 m 80.0/83.0 dB(A) converted to Lw by the ISO 3744 1 m box, our calculation; 'Preliminary data'; low-noise options not rated), dry coolers 98.5–102 dBA at full fan speed (Güntner GFD ≈2.5 MW; Thermokey 738 kW); towers and hybrid coolers use the chiller ratings as a stand-in (labelled). starter set: scroll chiller 450–850 kW Lw 96–100 dBA (Daikin, AHRI 370); Trane Sintesis Prime RTAF HSE 333–1,010 kW Lw 94–101 standard / 91–98 low-noise, plus size 245 (877 kW) printed as 107 / 103, out of line with its neighbours (brochure RTAF-SLB001-GB p.13; sound rows sit under the 'Eurovent performances' heading but are not labelled Eurovent; checked 18 Oct 2026); the tool takes the 1,010 kW unit (size 280), 98 low-noise / 101 standard, as one unit per MW; screw chiller 99–103 (ISO 9614); dry cooler: Kelvion LF-PD203T4H 94 dBA per fan, 6 fans ≈ 101.8 dBA per unit (our sum of the printed per-fan value), 61 dBA @10 m per fan; seller copy, not on kelvion.com; Güntner small unit Lw 67 dBA (permit submittal); standby diesel open 98–99 dBA @7 m (ISO 8528-10); enclosed: Cummins QuietSite L2 73–76, L1 78–87, weather-protective 89–91 dBA @7 m; CRAC 48–62 dBA @2 m (Stulz, 30–150 kW); transformer 62–63 dB (NEMA contour, unverified edition)",
 "unit": "dBA",
 "sources": [
 "iso9613",
@@ -2497,7 +2497,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "maekawaISO",
 "arupManx2013",
 "cumminsF1493",
-"fhwaBarrier"
+"fhwaBarrier",
+"vertivAFC"
 ],
 "source_roles": [
 {
@@ -2619,7 +2620,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "van": 0,
 "edm": 0,
 "both": 0,
-"gen": 15
+"gen": 16
 }
 },
 {
@@ -8777,7 +8778,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "size",
 "name": "Space for the plant",
 "formula": "Σ components (electrical yard and switchgear, UPS and batteries, generators and fuel, heat rejection, heat recovery, fire suppression, loading) × IT load × redundancy",
-"coef": "18 Oct 2026 (sweep M30–M32; audit/plant_sources_2026-10-18.md): cooling space is per MW of HEAT (servers × PUE), spares added when the plant is laid out; air cooling → air-cooled chillers with free-cooling coils, 17–26 m²/MW (Trane TCA; a dry cooler cannot cool water below outdoor air, and air-cooled halls need ≥13 °C chilled water, NREL/DOE FEMP 2024); liquid cooling → dry coolers, 19.5–30.5 m²/MW (EVAPCO, Thermokey, Mark; manufacturer claims). Manufacturer claims per MW: UPS ≈2.0–2.4 m², Li-ion batteries ≈2.2 m² (5 min), air-cooled chillers 17–26 m², cooling towers ≈8 m², dry coolers ≈24.5 m², heat pumps ≈3.4 m² per MW heat, CDUs ≈0.6 m²; equipment only, without clearances; EPCOR transformer clearances 3.0 m door side / 2.0 m others; fuel room 2 h separation and 550 mm clearance (NFC 4.3.14); generator room 2 h (VBBL 3.6.2.8)",
+"coef": "18 Oct 2026 (sweep M30–M32; audit/plant_sources_2026-10-18.md): cooling space is per MW of HEAT (servers × PUE), spares added when the plant is laid out; air cooling → air-cooled chillers with free-cooling coils, 16.4–30.5 m²/MW across Vertiv Liebert AFC and Airedale TurboChill DCS, basis Vertiv AFC FIZ135 at 19.3 (equipment study 29 Oct 2026; Trane TCA dropped: Trane says it works 'without relying on glycol or separate free-cooling coils'; a dry cooler cannot cool water below outdoor air, and air-cooled halls need ≥13 °C chilled water, NREL/DOE FEMP 2024); liquid cooling → dry coolers, 19.5–30.5 m²/MW (EVAPCO, Thermokey, Mark; manufacturer claims). Manufacturer claims per MW (equipment study 29 Oct 2026, range across makers compared): UPS 2.4–3.3 m² (Vertiv EXL S1, Schneider Galaxy VX, ABB MegaFlex UL; basis Galaxy VX), Li-ion batteries 1.0–1.8 m² for about 5 min (Vertiv EnergyCore Li5, 4 cabinets per MW; Delta LZH, 400 kW per rack; basis Vertiv), air-cooled chillers 16.4–30.5 m², cooling towers 4.7–16.5 m² (BAC Series 3000, Marley NC; basis BAC S3E-1222-07R), dry coolers 19.5–30.5 m² (EVAPCO 21.9, SPX Marley OlympusV 24.1–25.0 dry-rated; the tool sizes 24.5), heat pumps 5.6–15.1 m² per MW heat (Sabroe DualPAC 7xx, GEA RedAstrum/RedGenium at 60/80 °C; basis DualPAC 716-W; HeatPAC dropped, its document is not on the maker's site), CDUs 0.4–1.5 m² (10 units, 6 makers; basis Motivair MCDU-50); equipment only, without clearances; EPCOR transformer clearances 3.0 m door side / 2.0 m others; fuel room 2 h separation and 550 mm clearance (NFC 4.3.14); generator room 2 h (VBBL 3.6.2.8)",
 "unit": "m² per MW, by component",
 "sources": [
 "src16",
@@ -8807,7 +8808,16 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "vertivCDU2300",
 "thermokeyGH2490",
 "bacS3000_2012",
-"carrier61XWH"
+"carrier61XWH",
+"vertivAFC",
+"airedaleDCS",
+"rehlkoKD2000",
+"rehlkoKD1000",
+"bacS3000ed",
+"equipStudy2026",
+"geaRedHP",
+"deltaLZH",
+"spxOlympusV"
 ],
 "source_roles": [
 {
@@ -9020,7 +9030,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "van": 5,
 "edm": 2,
 "both": 2,
-"gen": 19
+"gen": 28
 }
 },
 {
@@ -16155,12 +16165,12 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "pnnl2022fig43": "PNNL-33283 (Viswanathan et al., Aug 2022), Figure 4.3 p. 24, Li-ion LFP total installed cost, 2021 (US$/kWh): 1 MW 2 h 518.59, 4 h 448.34; 10 MW 2 h 461.15, 4 h 410.70; 2030: 1 MW 4 h 340.46, 10 MW 4 h 311.11; fixed O&M 1 MW 4 h $5.05/kW-yr; RTE 83%, 2,400 cycles at 80% DOD, 16-year calendar life (read by Claude 16 Oct 2026; J.B. download) — https://www.sandia.gov/app/uploads/sites/256/2024/02/ESGC-Cost-Performance-Report-2022-PNNL-33283.pdf",
 "alissa2025lca": "Alissa et al. 2025, Nature 641:331–338, LCA tool workbooks (Zenodo 14268168; J.B. download): per virtual core per year on the 2021 US grid, air-cooled — building 0.6% of life-cycle GHG, servers 8.8%, use phase 90.4%; with 100% renewable electricity the total falls to 10.7% of that and servers become 82% of what remains (building 5%). Building figures come from a Microsoft bill of materials; no per-m² value is given (read by Claude 16 Oct 2026; percentages not re-checked, the workbooks could not be opened by the second check ?) — https://zenodo.org/records/14268168",
 "bchEIC2026": "BC Hydro, Emerging industries connections (page saved by J.B., Oct 2026; read by Claude): the 2026 Call for Demand for AI and data centres is closed — \"15 applications representing close to 800 megawatts (MW) in total load request\"; process enabled by Bill 31; feasibility results delivered 24 Aug, supplemental applications due 9 Sep, withdrawal deadline 16 Sep; with a provincial election called, results are expected after the government transition later in 2026 — https://app.bchydro.com/accounts-billing/electrical-connections/large-load/emerging-industries-connections.html",
-"mfrDryCooler": "Dry coolers, generic ranges from manufacturer data sheets (Alfa Laval VDM / SOLAR Max leaflets; EVAPCO eco-Air 270B; Vertiv drycooler manual; LU-VE, Güntner pages): about 20–2,700 kW per unit; length 1.6–12 m, width 1.15–2.5 m, height 1.45–2.9 m; 160 kg to 10.6 t operating (only the EVAPCO sheet re-read, which prints MBH and inches; other makers ?). Ratings at standard conditions, not data-centre conditions — https://www.evapco.com/sites/evapco.com/files/2020-05/eco-Air-Coolers%20270B%20Dry%20Cooling.pdf",
+"mfrDryCooler": "Dry coolers, generic ranges from manufacturer data sheets (Alfa Laval VDM / SOLAR Max leaflets; EVAPCO eco-Air 270B; Vertiv drycooler manual; LU-VE, Güntner pages): about 20–2,700 kW per unit; length 1.6–12 m, width 1.15–2.5 m, height 1.45–2.9 m; 160 kg to 10.6 t operating (other makers ?). EVAPCO EA26MRKT (©2026) p.13: 12 m V-coil EAW-VD9120ZA, 20 fans in two rows, 12.04 × 2.38 m, 2.88 m high (9'-5-1/2\"), 4461 MBH = 1.31 MW (maker's claim). Ratings at standard conditions, not data-centre conditions — https://www.evapco.com/sites/evapco.com/files/2020-05/eco-Air-Coolers%20270B%20Dry%20Cooling.pdf",
 "evapcoLayout2026": "EVAPCO, Equipment Layout Manual for Dry, Adiabatic and Spray Fluid Coolers (Bulletin EAEQPTLYT26, 2026), Table 1 clearances (ft; printed as 'Recommended' ?): V-coil 10–20 ft long — end-to-wall 3, side-to-wall 5, end-to-end 6, side-to-side 10; double stack 39 ft — 4 / 10 / 8 / 20; \"The top of the unit must be equal to or higher than the structure\"; louvres ≥50% net free area; hotter entering air 'can cause the unit to underperform' (the 5 °F / 50% figure is not in this manual ?) — https://www.evapco.com/media/1644929",
 "bacS3000": "BAC Series 3000 cooling towers, Product & Application Handbook Vol. VI (file dated 20 Oct 2023), seller's figures, Series 3000 Single Cell Data (pp. C16–C17): 293–1,394 nominal tons per model (≈1.3–6.1 MW, Claude conversion at 15,000 BTU/h per tower ton; BAC defines a nominal ton as 3 USGPM cooled 95→85 °F at 78 °F wet bulb, p. C17 note 3); 8'-6\" × 18'-1\", 9'-10\" high to 14'-0\" × 24'-1\", 22'-5\" high (≈2.6 × 5.5 × 3.0 m to 4.3 × 7.3 × 6.8 m, our conversion); 15,170–50,280 lb operating (≈6.9–22.8 t, our conversion). The 171-ton figure is the separate XE model XES3E-8518-05G (p. C18), not a standard single-cell model — https://baltimoreaircoil.com:443/download_api_endpoint/6026/C015_PAHBvi_3000_ED_20231020.pdf",
 "bacLayout2023": "BAC Layout Guidelines (2023): air inlet 1.5–2.7 m from a wall for a single cell at grade (our summary of per-model tables ?), more in a well; envelope air velocity below 300 fpm; four or more cells referred to the manufacturer; fan discharge level with or above adjacent walls — https://baltimoreaircoil.com:443/download_api_endpoint/5888/J74_PAHBvi_LayoutGuidelines_20230719.pdf",
-"mfrAdiabatic": "Adiabatic / hybrid coolers (EVAPCO adiabatic eco-Air models; BAC TrilliumSeries): about 0.7–1.4 MW per unit (?), up to 12 m long, 1.8–2.8 m wide, 2.5 m high, 2–10.6 t (? sizes not confirmed in the brochures read); same clearance table as dry coolers (EVAPCO Table 1, 'Dry, Adiabatic and Spray Units'); \"They cannot be elevated in lieu of spacing\" (EVAPCO EAEQPTLYT26, p. 7, not the BAC brochure) — https://www.evapco.com/media/1644929 ; https://baltimoreaircoil.com/download_api_endpoint/1938/trillium_brochure_20200327.pdf",
-"mfrGenset": "Standby diesel generator sets in enclosures (Cat 3516C enclosure sheet; Cummins S-1443): about 2 MW — 13.9 × 2.7 m, 3.9–5.0 m high; 0.6–1 MW — 6.6–8.6 × 2.5 m (8.6 m not seen; S-1443 prints inches ?), 3.5–3.7 m high; sub-base fuel tank optional (S-1443 shows no-tank bases only to 500 kW ?); ≥1 m clearance around each set (Cummins T-030; not checked ?); Cat 3516C sheet not re-read ?. No 3 MW sheet found; no numeric stack-height guidance — https://powersuite.cummins.com/PS5/PS5Content/SiteContent/en/Binary_Asset/pdf/Commercial/Diesel/s-1443.pdf",
+"mfrAdiabatic": "Adiabatic / hybrid coolers (EVAPCO adiabatic eco-Air models; BAC TrilliumSeries): about 0.7–1.4 MW per unit (?), up to 12 m long, 1.8–2.8 m wide; the 12 m, 8' V-coil adiabatic model is 12.04 × 2.77 m and 2.88 m high (EVAPCO EA26MRKT ©2026 p.13: L 39'-5-7/8\", adiabatic width 9'-7/8\", height 9'-5-1/2\"; pads outside both coil faces, p.8), 2–10.6 t (other makers' sizes ?); same clearance table as dry coolers (EVAPCO Table 1, 'Dry, Adiabatic and Spray Units'); \"They cannot be elevated in lieu of spacing\" (EVAPCO EAEQPTLYT26, p. 7, not the BAC brochure) — https://www.evapco.com/media/1644929 ; https://baltimoreaircoil.com/download_api_endpoint/1938/trillium_brochure_20200327.pdf",
+"mfrGenset": "Standby diesel generator sets in enclosures (basis since 29 Oct 2026: Rehlko KD2000 13.49 × 3.49 m, 4.78 m high, and KD1000 8.43 × 2.62 m, 3.71 m high — see rehlkoKD2000, rehlkoKD1000; earlier: Cat 3516C enclosure sheet; Cummins S-1443): about 2 MW — 13.9 × 2.7 m, 3.9–5.0 m high (Cat); 0.6–1 MW — 6.6–8.6 × 2.5 m (8.6 m not seen; S-1443 prints inches ?), 3.5–3.7 m high; sub-base fuel tank optional (S-1443 shows no-tank bases only to 500 kW ?); ≥1 m clearance around each set (Cummins T-030; not checked ?); Cat 3516C sheet not re-read ?. No 3 MW sheet found; no numeric stack-height guidance — https://powersuite.cummins.com/PS5/PS5Content/SiteContent/en/Binary_Asset/pdf/Commercial/Diesel/s-1443.pdf",
 "nfpa37clear": "NFPA 37 s. 4.1.4 as reprinted by the NC Office of State Fire Marshal: engines outdoors at least 5 ft (1.5 m, our conversion) from wall openings and from structures with combustible walls; reducible with a 1-hour wall or a tested enclosure. US standard, edition not stated; Vancouver bulletin 2000-015 points to CSA C282 (a separate source; C282 paywalled, not read) — https://ncosfm.gov/fuel-gas/3013-3rd-party-listing-requirement-generator-clearance-reduction-1/open",
 "mfrBESS": "Battery energy storage, generic: 20 ft container ≈5 MWh / ≈2.5 MW, 6.06 × 2.44 × 2.90 m, ≈42 t (StarCharge, Sungrow data sheets; ? one check reads ~43 t on the StarCharge sheet); cabinet ≈3.9 MWh / 1–1.9 MW, 8.8 × 1.65 × 2.8 m, 38 t (Megapack 2 XL sheet filed with the CT Siting Council) — https://starcharge.com/am/wp-content/uploads/sites/3/2025/03/5MWh-Datasheet-1-1.pdf",
 "nfpa855tia": "NFPA 855-2023 as amended by TIA 23-1 and 23-2: ESS units separated by at least 3 ft (0.9 m), less with fire testing; rooftop units 3 ft apart, ≥5 ft from roof edge (these are in TIA 23-2, not 23-1; the 3 ft applies to individual units ≤20 kWh, and the roof-edge distance is the system height but not less than 5 ft ?); Hydro One (Ontario utility standard) quotes §9.5.2.6.1 (?: not verified): 10 ft (3 m) to lot lines, public ways and buildings, reducible to 3 ft. NFPA 855 is not referenced in the National Fire Code 2020 (Claude checked the local text: 35 NFPA standards cited, 855 not among them) or the BC Fire Code 2024 amendments; VBBL 2025 Book I, BCBC 2024 and NFC – 2023 Alberta Edition do not cite it either and have no energy-storage provisions (Claude checked the full texts, 16 Oct; J.B. downloads). So in both provinces battery spacing is not set by the building or fire code: it falls to the authority having jurisdiction, the electrical code and the listing (UL 9540/9540A) — https://docinfofiles.nfpa.org/files/AboutTheCodes/855/TIA_855_23_1.pdf",
@@ -16534,7 +16544,17 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "melo2001": "Melo & Chapnik 2001, The absence of structure-borne sound transmission regulation in the Ontario Building Code, Canadian Acoustics 29(3):84–85 (short note, peer review ?; sources/23 S20) — https://jcaa.caa-aca.ca/index.php/jcaa/article/download/1394/1137/1527",
 "edmZoningGeo": "City of Edmonton Open Data, Zoning Bylaw Geographical Data (map view; J.B. export Zoning_Bylaw_Geographical_Data_20261014.csv, date_ext 2026/10/12): zone codes for all properties; 1,068 of 11,549 features (9.2 %) Direct Control (count in sources/18) — https://data.edmonton.ca/d/ruwn-htv8",
 "vanCD1_520": "City of Vancouver, CD-1 (520) By-law No. 10403 (2011), s. 3.4(c): floors for 'heating and mechanical equipment … which are at or below base surface' excluded from floor space ratio (sources/22 S7) — https://cd1-bylaws.vancouver.ca/CD-1(520).pdf",
-"danczak2018": "Dańczak, Chojnacka, Matuska, Marcola, Leśniewicz, Wełna, Żak, Adamski, Rycerz 2018, The recycling-oriented material characterization of hard disk drives with special emphasis on NdFeB magnets, Physicochemical Problems of Mineral Processing 54(2):363–376 (peer-reviewed): magnets 6–19 g per desktop HDD, 2–6 g per notebook HDD (p. 369); Nd 25–29 %, Pr 2–13 %, Dy 0.1–1.4 % of the magnet (Table 6, p. 372) — https://yadda.icm.edu.pl/baztech/element/bwmeta1.element.baztech-9f3156b7-678b-4a46-a1c5-cbfeb9347b12/c/363-376_ppmp_2018_2.pdf"
+"danczak2018": "Dańczak, Chojnacka, Matuska, Marcola, Leśniewicz, Wełna, Żak, Adamski, Rycerz 2018, The recycling-oriented material characterization of hard disk drives with special emphasis on NdFeB magnets, Physicochemical Problems of Mineral Processing 54(2):363–376 (peer-reviewed): magnets 6–19 g per desktop HDD, 2–6 g per notebook HDD (p. 369); Nd 25–29 %, Pr 2–13 %, Dy 0.1–1.4 % of the magnet (Table 6, p. 372) — https://yadda.icm.edu.pl/baztech/element/bwmeta1.element.baztech-9f3156b7-678b-4a46-a1c5-cbfeb9347b12/c/363-376_ppmp_2018_2.pdf",
+"evapcoEA26": "EVAPCO, eco-Air Series Closed Circuit Coolers, Bulletin EA26MRKT (©2026; J.B. download 28 Oct 2026): p.8 adiabatic and spray principles (pads outside both coil faces); p.13 V-coil EC twin-fan 8' models: EAW-VD9120ZA 20 fans, 4461 MBH, L 39'-5-7/8\", W 7'-9-7/8\" (adiabatic 9'-7/8\"), H 9'-5-1/2\"; 'Dimensions are subject to change. Do not use for pre-fabrication.'",
+"vertivAFC": "Vertiv, Liebert AFC air-cooled free cooling chiller 900–1800 kW, SL-71060 (R09/24), 'Preliminary data': FIZ135 423 tons (1489 kW) at 95 °F ambient, 82/66 °F fluid, 30% ethylene glycol, 460 V/60 Hz; 478 × 93 × 114 in (12141 × 2362 × 2896 mm); 'oversized free cooling coils' — https://www.vertiv.com/49fe65/globalassets/shared/vertiv-liebert-afc_datasheet_en-na.pdf",
+"airedaleDCS": "Airedale by Modine, TurboChill DCS sales brochure (2025): TCF13R18K 985 kW, 10.55 × 2.844 × 2.2 m; TCF24R24G 1600 kW, 14.385 × 2.90 × 2.2 m, at 30/20 °C water, 35 °C ambient, 50 Hz (manufacturer claims) — https://www.airedale.com/wp-content/uploads/2025/07/TurboChill_DCS_Sales_Brochure_280925.pdf",
+"rehlkoKD2000": "Kohler/Rehlko, Industrial Diesel Generator Set KD2000, G5-626 (rev 6/24d): 2000 kW standby, data-center continuous same as standby; Sound Level 2 enclosure 13493 × 3488 × 4777 mm max; Tier 2 EPA; cULus UL 2200 and CSA C22.2 No. 100 — https://techcomm.kohler.com/techcomm/pdf/g5626.pdf",
+"rehlkoKD1000": "Kohler/Rehlko, KD800–KD2500 enclosure and sub-base tank dimensions, G6-154 (12/23): KD1000 Sound Level 2, 3475 L (12 h) tank 8434 × 2616 × 3706 mm; 6621 L (24 h) 8434 × 2616 × 3934 mm; KD1000 spec sheet G5-580 (9/24) — https://techcomm.kohler.com/techcomm/pdf/KD800-2500_G6154.pdf",
+"bacS3000ed": "BAC, Series 3000 Engineering Data, Product & Application Handbook Vol. VI pp. C15–C17 (file 20231020; J.B. upload 28 Oct 2026): S3E-1222-07R 690 nominal tons, L 11'-10\", W 21'-7\", H 12'-9\", A 11'-4\"; access door both ends; nominal tons at 95/85/78 °F — https://baltimoreaircoil.com/download_api_endpoint/6026/C015_PAHBvi_3000_ED_20231020.pdf",
+"equipStudy2026": "Beyond Data equipment study, 29 Oct 2026: makers compared per type from their own documents, basis = unit nearest the median area per MW (checks/node_review/select_heat.md, select_power.md, select_hall.md)",
+"geaRedHP": "GEA, Red Heat Pumps brochure 7757-3000-017 (rev 10-26), GEA Systems North America, metric table p.17: RedAstrum MH 1,575 kW at 40/35 → 60/80 °C, 7050 × 2150 × 2450 mm; RN 3,019 kW, 7900 × 2150 × 2750 mm; RedGenium 550 1,362 kW (35/30 → 60/80, paired by column order), 6450 × 2150 × 2500 mm (manufacturer claims)",
+"deltaLZH": "Delta Electronics, LZH Series lithium-ion battery leaflet (© 2025): '400 kW with 5 mins (BOL)' per rack; 620 × 625 × 2185 mm with top-hat (1910 mm without); UL 1973, UL 9540A (manufacturer claims)",
+"spxOlympusV": "SPX Cooling Tech, Marley OlympusV adiabatic cooler: engineering data TECH-OLYAD-26 (3/2026) lengths and dry ratings (VWS20 4,983 MBH; VWS29 4,668 MBH at 115→105 °F, 95 °F DB, CTI-certified); brochure OLYMPUSV-26 (1/2026) nominal width 2.90 m, height 3.05 m (manufacturer claims)"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -19779,7 +19799,17 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "melo2001": "gen",
 "edmZoningGeo": "edm",
 "vanCD1_520": "van",
-"danczak2018": "gen"
+"danczak2018": "gen",
+"evapcoEA26": "gen",
+"vertivAFC": "gen",
+"airedaleDCS": "gen",
+"rehlkoKD2000": "gen",
+"rehlkoKD1000": "gen",
+"bacS3000ed": "gen",
+"equipStudy2026": "gen",
+"geaRedHP": "gen",
+"deltaLZH": "gen",
+"spxOlympusV": "gen"
 },
 "city_gaps": {
 "van": [

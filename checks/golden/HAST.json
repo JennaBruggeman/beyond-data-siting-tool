@@ -5,7 +5,7 @@
   "extent": "part",
   "floor": "upper",
   "host": {},
-  "mw": 1.3,
+  "mw": 1.9,
   "foot": "max",
   "cover": 70,
   "hmode": "out",
@@ -293,16 +293,16 @@
     }
    ],
    "footArea": 5990.5,
-   "mwSized": 1.3,
+   "mwSized": 1.9,
    "plant": {
     "s": {
-     "Q": 2.015,
+     "Q": 2.945,
      "k": {
       "name": "air-cooled chillers",
-      "L": 12.14,
-      "W": 2.24,
-      "H": 2.69,
-      "mw": 1.06,
+      "L": 12.141,
+      "W": 2.362,
+      "H": 2.896,
+      "mw": 1.489,
       "wall": [
        0.9,
        2.1
@@ -316,9 +316,9 @@
      "n": 3,
      "g": {
       "name": "standby generators",
-      "L": 8.6,
-      "W": 2.5,
-      "H": 3.7,
+      "L": 8.434,
+      "W": 2.616,
+      "H": 3.706,
       "mw": 1,
       "wall": [
        1.5,
@@ -331,13 +331,13 @@
      },
      "gNeed": 3,
      "gN": 4,
-     "src": "Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer; free-cooling coils on the chillers take no extra footprint (Trane white paper DC-WPR006A, manufacturer claim). Units: 12.1 × 2.2 m, 2.7 m high, about 1.06–1.41 MW, or 17.1 × 3.0 m at about 2.29–2.99 MW (Trane TCA, manufacturer claim, \"all values are estimated\"); the tool sizes for …"
+     "src": "Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit nearest the middle of …"
     },
     "boxes": [
      {
       "ring": "[ring 8]",
       "clear": "[ring 8]",
-      "h": 2.69,
+      "h": 2.896,
       "base": 42,
       "kind": "roof",
       "name": "air-cooled chillers"
@@ -345,7 +345,7 @@
      {
       "ring": "[ring 8]",
       "clear": "[ring 8]",
-      "h": 2.69,
+      "h": 2.896,
       "base": 42,
       "kind": "roof",
       "name": "air-cooled chillers"
@@ -353,7 +353,7 @@
      {
       "ring": "[ring 8]",
       "clear": "[ring 8]",
-      "h": 2.69,
+      "h": 2.896,
       "base": 0,
       "kind": "yard",
       "name": "air-cooled chillers"
@@ -361,7 +361,7 @@
      {
       "ring": "[ring 8]",
       "clear": "[ring 8]",
-      "h": 3.7,
+      "h": 3.706,
       "base": 42,
       "kind": "roof",
       "name": "standby generators"
@@ -369,7 +369,7 @@
      {
       "ring": "[ring 8]",
       "clear": "[ring 8]",
-      "h": 3.7,
+      "h": 3.706,
       "base": 42,
       "kind": "roof",
       "name": "standby generators"
@@ -377,7 +377,7 @@
      {
       "ring": "[ring 8]",
       "clear": "[ring 8]",
-      "h": 3.7,
+      "h": 3.706,
       "base": 42,
       "kind": "roof",
       "name": "standby generators"
@@ -385,22 +385,22 @@
      {
       "ring": "[ring 8]",
       "clear": "[ring 8]",
-      "h": 3.7,
+      "h": 3.706,
       "base": 42,
       "kind": "roof",
       "name": "standby generators"
      }
     ],
     "lines": [
-     "Sized for <b>1.3 MW</b> of servers: heat to reject ≈ 1.3 × PUE 1.55 = <b>2.0 MW</b> at peak.",
+     "Sized for <b>1.9 MW</b> of servers: heat to reject ≈ 1.9 × PUE 1.55 = <b>2.9 MW</b> at peak.",
      "2 air-cooled chillers carry it; with spares, <b>3</b>. Placed: 2 on the roof, 1 in the yard.",
-     "Each unit about 12.14 × 2.24 m, 2.69 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
-     "<span class=\"src\">Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer; free-cooling coils on the chillers take no extra footprint (Trane white paper DC-WPR006A, manufacturer claim). Units: 12.1 × 2.2 m, 2.7 m high, about 1.06–1.41 MW, or 17.1 × 3.0 m at about 2.29–2.99 MW (Trane TCA, manufacturer claim, \"all values are estimated\"); t…"
+     "Each unit about 12.141 × 2.362 m, 2.896 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
+     "<span class=\"src\">Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit near…"
     ],
     "genLines": [
-     "3 generator sets of about 1 MW carry 2.0 MW; with spares, <b>4</b>. Placed: 4 on the roof, 0 in the yard.",
-     "Each about 8.6 × 2.5 m, 3.7 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).",
-     "<span class=\"src\">Standby generator sets in enclosures: about 2 MW — 13.9 × 2.7 m, up to 5.0 m high; 0.6–1 MW — up to 8.6 × 2.5 m, 3.7 m high (manufacturer data sheets, claims). 1 m clear around each set (Cummins application manual); 1.5 m from wall openings and combustible walls (NFPA 37 s. 4.1.4, a US standard; Vancouver points to CSA C282, not read).</span>"
+     "3 generator sets of about 1 MW carry 2.9 MW; with spares, <b>4</b>. Placed: 4 on the roof, 0 in the yard.",
+     "Each about 8.434 × 2.616 m, 3.706 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).",
+     "<span class=\"src\">Standby diesel generator sets in Sound Level 2 enclosures with sub-base tanks. Basis units: Rehlko (Kohler) KD2000, 2,000 kW standby (data-centre continuous rating the same), 13.49 × 3.49 m, up to 4.78 m high (G5-626, rev 6/24); KD1000, 1,000 kW, 8.43 × 2.62 m, 3.71 m high with the 12 h tank (G6-154, 12/23). Both EPA Tier 2, cULus (UL 2200, CSA C22.2 No. 100); manufacturer claims. Chosen 29 Oct 2026 as the middle of Cat, Rehlko and Generac: 2 MW 18.5–38.4 m² per MW, 1 MW 19.5–22.4. 1 m clear around each set (Cummins application manual); 1.5 m from wall openings and combustibl…"
     ],
     "short": "",
     "coolYard": 1,
