@@ -9,7 +9,7 @@
 "quantities": 187,
 "conditions": 101,
 "opportunities": 21,
-"sources": 779
+"sources": 780
 }
 },
 "stages": [
@@ -11700,14 +11700,15 @@
 "stage": "size",
 "name": "Data-hall arrangement",
 "formula": "racks in back-to-back pairs: cold aisle | rack 1.2 m | hot aisle | rack 1.2 m; room cooling units along the long walls with their service clearance in front; corridors and travel distance to the building code",
-"coef": "aisles 1.2 m (middle of Vertiv's standard containment sizes 0.9 / 1.2 / 1.8 m — product sizes; no code minimum found for aisles inside a data hall ?); racks 0.6 × 1.2 m; room cooling units: 0.864 m clear in front recommended (0.61 m minimum), 0.457 m at each end, not in alcoves or at the end of a long narrow room, near the heat load (Vertiv CW guide); Vertiv also asks for units 30–40 ft apart, which a hall of this load cannot meet with units of this size (conflict shown, not resolved ?); egress: public corridors 1.1 m, dead ends ≤ 6 m, travel distance to an exit ≤ 45 m sprinklered or 30 m otherwise (NBC 2020 3.3.1.9, 3.4.2.5; VBBL 2019 the same); aisles follow the NFC (not read ?); Edmonton uses NBC(AE) 2023 (Alberta amendments not read ?)",
+"coef": "aisles 1.2 m (middle of Vertiv's standard containment sizes 0.9 / 1.2 / 1.8 m), open at both ends onto 1.1 m cross aisles, which meets the NFC: aisles serving egress doorways ≥ 1 100 mm with two directions of travel, single-direction subsidiary aisles ≥ 900 mm and ≤ 7.5–15 m by occupancy (NFC 2020 / NFC(AE) 2023 2.7.1.2; a data hall's occupancy class is not stated in the codes read ?); racks 0.6 × 1.2 m; room cooling units: 0.864 m clear in front recommended (0.61 m minimum), 0.457 m at each end, not in alcoves or at the end of a long narrow room, near the heat load (Vertiv CW guide); Vertiv also asks for units 30–40 ft apart, which a hall of this load cannot meet with units of this size (conflict shown, not resolved ?); egress: public corridors 1.1 m, dead ends ≤ 6 m, travel distance to an exit ≤ 45 m sprinklered or 30 m otherwise (NBC 2020 3.3.1.9, 3.4.2.5; VBBL 2019 the same); aisles follow the NFC (2.7.1.2, above); Edmonton uses NBC(AE) 2023 (Alberta amendments not read ?)",
 "unit": "m (clearances)",
 "sources": [
 "vertivVR3300",
 "vertivContainment",
 "vertivCWguide",
 "vbbl2019_331",
-"nbc2020_v1"
+"nbc2020_v1",
+"nfc2020_2712"
 ],
 "source_roles": [
 {
@@ -11744,6 +11745,13 @@
 "role": "rule",
 "conf": 90,
 "verified": true
+},
+{
+"id": "nfc2020_2712",
+"term": "aisles ≥ 1 100 mm, subsidiary ≥ 900 mm and 7.5–15 m",
+"role": "rule",
+"conf": 90,
+"verified": true
 }
 ],
 "conf": 50,
@@ -11759,7 +11767,7 @@
 "upstream": 40,
 "city": {
 "van": 1,
-"edm": 0,
+"edm": 1,
 "both": 0,
 "gen": 4
 }
@@ -16942,7 +16950,8 @@
 "vbbl2019_331": "Vancouver Building By-law 2019 (consolidated 1 Jul 2024), Div. B 3.3.1.4.(4)(a) travel distance to an exit not more than 45 m (sprinklered floor area, open public corridor); 3.3.1.5.(1)(d)(i) 25 m to an egress doorway (sprinklered); 3.3.1.9.(1) public corridor at least 1 100 mm; 3.3.1.9.(7) dead-end corridor not more than 6 m — https://free.bcpublications.ca/civix/document/id/public/vbbl2019/758782467",
 "vertivContainment": "Vertiv, SmartAisle Containment brochure MKA4L0CATKSE Rev.2 (04/2024) p.8, p.10: 'Aisle width 1200 and 1800 mm'; Vertiv Aisle Containment data sheet SL-11422 (R03/21): 900, 1200 or 1800 mm (product sizes, not minimums) — https://www.vertiv.com/globalassets/products/facilities-enclosures-and-racks/racks-and-containment/smartaisle-containment-brochure-english.pdf",
 "nbc2020_v1": "National Building Code of Canada 2020, Vol. 1 Div. B (NRC; J.B.'s copy NBC2020p2.pdf, read 29 Oct 2026): 3.3.1.9.(1) public corridor 1 100 mm, (5) dead-end corridor ≤ 6 m; 3.3.1.10.(1) aisles 'in conformance with the NFC'; 3.4.2.5.(1) travel distance to an exit ≤ 45 m in a floor area sprinklered throughout (c), 40 m business (b), 30 m otherwise (f); 3.6.2.1.(6) CEC-required service rooms 1 h; (7) service room in a storey not sprinklered throughout 1 h; (8) limited-quantity exemption (pp. 3-143, 3-161)",
-"cec2024": "CSA C22.1:24 Canadian Electrical Code, Part I, 26th ed. (J.B.'s copy, read on her computer 29 Oct 2026; text not stored): Rule 2-308 1) working space 1 m with secure footing; 5) 2.2 m headroom at exposed bare live parts; Rule 2-310 2) 1200 A or more or over 750 V: arranged so a person can leave without passing the failure point, otherwise working space not less than 1.5 m; Rule 26-010 service rooms for small dielectric-liquid equipment; Rule 64-804 2) batteries with exposed energized parts in a room or enclosure for authorized persons; Rule 64-1100 9) ESS evaluated to UL 9540A installed to the maker's instructions"
+"cec2024": "CSA C22.1:24 Canadian Electrical Code, Part I, 26th ed. (J.B.'s copy, read on her computer 29 Oct 2026; text not stored): Rule 2-308 1) working space 1 m with secure footing; 5) 2.2 m headroom at exposed bare live parts; Rule 2-310 2) 1200 A or more or over 750 V: arranged so a person can leave without passing the failure point, otherwise working space not less than 1.5 m; Rule 26-010 service rooms for small dielectric-liquid equipment; Rule 64-804 2) batteries with exposed energized parts in a room or enclosure for authorized persons; Rule 64-1100 9) ESS evaluated to UL 9540A installed to the maker's instructions",
+"nfc2020_2712": "National Fire Code of Canada 2020, Div. B 2.7.1.2. Open Floor Areas (p. 2-11; NFC 2023 Alberta Edition identical): aisles serving required egress doorways ≥ 1 100 mm, two opposite directions at every point; subsidiary aisles with one direction ≥ 900 mm, ≤ 7.5 m (business, mercantile, high-hazard), 10 m (medium-hazard industrial), 15 m (low-hazard industrial) — https://publications.gc.ca/collections/collection_2022/cnrc-nrc/NR24-27-2020-eng.pdf"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -20215,7 +20224,8 @@
 "vbbl2019_331": "van",
 "vertivContainment": "gen",
 "nbc2020_v1": "gen",
-"cec2024": "gen"
+"cec2024": "gen",
+"nfc2020_2712": "edm"
 },
 "city_gaps": {
 "van": [
@@ -20231,8 +20241,7 @@
 "no2_at_receptor",
 "air_permit_trigger",
 "importance_cat",
-"ev_repay",
-"hall_layout"
+"ev_repay"
 ]
 }
 }
