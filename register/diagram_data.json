@@ -9,7 +9,7 @@
 "quantities": 187,
 "conditions": 101,
 "opportunities": 21,
-"sources": 777
+"sources": 779
 }
 },
 "stages": [
@@ -11700,13 +11700,14 @@
 "stage": "size",
 "name": "Data-hall arrangement",
 "formula": "racks in back-to-back pairs: cold aisle | rack 1.2 m | hot aisle | rack 1.2 m; room cooling units along the long walls with their service clearance in front; corridors and travel distance to the building code",
-"coef": "aisles 1.2 m (middle of Vertiv's standard containment sizes 0.9 / 1.2 / 1.8 m — product sizes; no code minimum found for aisles inside a data hall ?); racks 0.6 × 1.2 m; room cooling units: 0.864 m clear in front recommended (0.61 m minimum), 0.457 m at each end, not in alcoves or at the end of a long narrow room, near the heat load (Vertiv CW guide); Vertiv also asks for units 30–40 ft apart, which a hall of this load cannot meet with units of this size (conflict shown, not resolved ?); egress: public corridors 1.1 m, dead ends ≤ 6 m, travel distance ≤ 45 m sprinklered (VBBL 2019 3.3.1; Edmonton (NBC(AE) 2023) not read ?)",
+"coef": "aisles 1.2 m (middle of Vertiv's standard containment sizes 0.9 / 1.2 / 1.8 m — product sizes; no code minimum found for aisles inside a data hall ?); racks 0.6 × 1.2 m; room cooling units: 0.864 m clear in front recommended (0.61 m minimum), 0.457 m at each end, not in alcoves or at the end of a long narrow room, near the heat load (Vertiv CW guide); Vertiv also asks for units 30–40 ft apart, which a hall of this load cannot meet with units of this size (conflict shown, not resolved ?); egress: public corridors 1.1 m, dead ends ≤ 6 m, travel distance to an exit ≤ 45 m sprinklered or 30 m otherwise (NBC 2020 3.3.1.9, 3.4.2.5; VBBL 2019 the same); aisles follow the NFC (not read ?); Edmonton uses NBC(AE) 2023 (Alberta amendments not read ?)",
 "unit": "m (clearances)",
 "sources": [
 "vertivVR3300",
 "vertivContainment",
 "vertivCWguide",
-"vbbl2019_331"
+"vbbl2019_331",
+"nbc2020_v1"
 ],
 "source_roles": [
 {
@@ -11736,6 +11737,13 @@
 "role": "rule",
 "conf": 90,
 "verified": true
+},
+{
+"id": "nbc2020_v1",
+"term": "corridors, dead ends, travel distance",
+"role": "rule",
+"conf": 90,
+"verified": true
 }
 ],
 "conf": 50,
@@ -11753,7 +11761,7 @@
 "van": 1,
 "edm": 0,
 "both": 0,
-"gen": 3
+"gen": 4
 }
 },
 {
@@ -11762,7 +11770,7 @@
 "stage": "size",
 "name": "UPS and battery room",
 "formula": "UPS modules and battery cabinets in a room of their own; area = their footprints + working space in front + clearances",
-"coef": "room: a service room with a 1 h fire separation where the electrical rules require one (VBBL 3.6.2.1(6); whether a UPS triggers it is in the electrical code, not read ?); working space in front of the UPS 1.5 m (Galaxy VX 1000 kW draws 1203 A at 480 V, at or above 1200 A: CEC Rule 2-308 per ESA Bulletin 2-9-9; 1 m below 1200 A), headroom 2.2 m; UPS against a wall, no rear or side access (Schneider); battery cabinets 0.914 m clear in front, 0.457 m above, 25 mm to a wall, none side to side (Vertiv, UL 9540A-tested); NFPA 855 asks 0.914 m between ESS units unless fire testing shows less (adoption in BC/AB ?)",
+"coef": "room: no CEC rule found that puts a UPS in a service room (CEC 26-010 covers liquid-filled equipment); NBC 2020 / VBBL 3.6.2.1.(7) require a 1 h service room for service equipment in a storey not sprinklered throughout (reading UPS and batteries as service equipment is ours ?), so the separate room is code-required only there and drawn everywhere as a choice; working space in front of the UPS 1 m (CEC 2-308), and because the Galaxy VX 1000 kW is rated 1203 A at 480 V (≥ 1200 A) the room must let a person leave without passing it, otherwise 1.5 m (CEC 2-310 2)) — the tool draws 1.5 m because doors are not placed; headroom 2.2 m at exposed live parts (2-308 5)); UPS against a wall, no rear or side access (Schneider); battery cabinets 0.914 m clear in front, 0.457 m above, 25 mm to a wall, none side to side (Vertiv, UL 9540A-tested; CEC 64-1100 9) lets UL 9540A systems follow the maker's instructions); NFPA 855 asks 0.914 m between ESS units unless fire testing shows less (adoption in BC/AB ?)",
 "unit": "m² (and clearances)",
 "sources": [
 "vbbl2019_362",
@@ -11770,7 +11778,9 @@
 "tsbcIBEL201605",
 "galaxyVXinstall",
 "vertivLi5manual",
-"nfpa855tia"
+"nfpa855tia",
+"nbc2020_v1",
+"cec2024"
 ],
 "source_roles": [
 {
@@ -11814,6 +11824,20 @@
 "role": "check",
 "conf": 80,
 "verified": true
+},
+{
+"id": "cec2024",
+"term": "1 m / 1.5 m working space; ESS to maker instructions",
+"role": "rule",
+"conf": 90,
+"verified": true
+},
+{
+"id": "nbc2020_v1",
+"term": "service room 1 h where not sprinklered",
+"role": "rule",
+"conf": 90,
+"verified": true
 }
 ],
 "conf": 50,
@@ -11829,7 +11853,7 @@
 "van": 2,
 "edm": 0,
 "both": 2,
-"gen": 2
+"gen": 4
 }
 }
 ],
@@ -16916,7 +16940,9 @@
 "tsbcIBEL201605": "Technical Safety BC, Information Bulletin IB-EL 2016-05 Rev 03 (Mar 2025), Section 2 general rules: working space and second means of egress at large equipment (does not print the 1 m figure) — https://files.technicalsafetybc.ca/v3/assets/bltdec2ded849740f4d/blta76004f5f868765a/67bf6bf887966dc859992d15/IB-EL_2016-05_-_Section_2_-_General_Rules.pdf",
 "vbbl2019_362": "Vancouver Building By-law 2019 (consolidated 1 Jul 2024), Div. B 3.6.2.1.(6): electrical equipment required by the Electrical Safety Regulation to be in a service room is installed in a service room with a fire separation (1 h); 3.6.2.7 electrical equipment vaults 3 h unsprinklered / 2 h sprinklered — https://free.bcpublications.ca/civix/document/id/public/vbbl2019/2046477372",
 "vbbl2019_331": "Vancouver Building By-law 2019 (consolidated 1 Jul 2024), Div. B 3.3.1.4.(4)(a) travel distance to an exit not more than 45 m (sprinklered floor area, open public corridor); 3.3.1.5.(1)(d)(i) 25 m to an egress doorway (sprinklered); 3.3.1.9.(1) public corridor at least 1 100 mm; 3.3.1.9.(7) dead-end corridor not more than 6 m — https://free.bcpublications.ca/civix/document/id/public/vbbl2019/758782467",
-"vertivContainment": "Vertiv, SmartAisle Containment brochure MKA4L0CATKSE Rev.2 (04/2024) p.8, p.10: 'Aisle width 1200 and 1800 mm'; Vertiv Aisle Containment data sheet SL-11422 (R03/21): 900, 1200 or 1800 mm (product sizes, not minimums) — https://www.vertiv.com/globalassets/products/facilities-enclosures-and-racks/racks-and-containment/smartaisle-containment-brochure-english.pdf"
+"vertivContainment": "Vertiv, SmartAisle Containment brochure MKA4L0CATKSE Rev.2 (04/2024) p.8, p.10: 'Aisle width 1200 and 1800 mm'; Vertiv Aisle Containment data sheet SL-11422 (R03/21): 900, 1200 or 1800 mm (product sizes, not minimums) — https://www.vertiv.com/globalassets/products/facilities-enclosures-and-racks/racks-and-containment/smartaisle-containment-brochure-english.pdf",
+"nbc2020_v1": "National Building Code of Canada 2020, Vol. 1 Div. B (NRC; J.B.'s copy NBC2020p2.pdf, read 29 Oct 2026): 3.3.1.9.(1) public corridor 1 100 mm, (5) dead-end corridor ≤ 6 m; 3.3.1.10.(1) aisles 'in conformance with the NFC'; 3.4.2.5.(1) travel distance to an exit ≤ 45 m in a floor area sprinklered throughout (c), 40 m business (b), 30 m otherwise (f); 3.6.2.1.(6) CEC-required service rooms 1 h; (7) service room in a storey not sprinklered throughout 1 h; (8) limited-quantity exemption (pp. 3-143, 3-161)",
+"cec2024": "CSA C22.1:24 Canadian Electrical Code, Part I, 26th ed. (J.B.'s copy, read on her computer 29 Oct 2026; text not stored): Rule 2-308 1) working space 1 m with secure footing; 5) 2.2 m headroom at exposed bare live parts; Rule 2-310 2) 1200 A or more or over 750 V: arranged so a person can leave without passing the failure point, otherwise working space not less than 1.5 m; Rule 26-010 service rooms for small dielectric-liquid equipment; Rule 64-804 2) batteries with exposed energized parts in a room or enclosure for authorized persons; Rule 64-1100 9) ESS evaluated to UL 9540A installed to the maker's instructions"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -20187,7 +20213,9 @@
 "tsbcIBEL201605": "van",
 "vbbl2019_362": "van",
 "vbbl2019_331": "van",
-"vertivContainment": "gen"
+"vertivContainment": "gen",
+"nbc2020_v1": "gen",
+"cec2024": "gen"
 },
 "city_gaps": {
 "van": [
