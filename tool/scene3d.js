@@ -220,12 +220,15 @@ function racksFor(M){ const A=BD.S.answers, mw=A.mw||M.mwSized||1, E=BD.eng.equi
     const pick=new Set(); if(crvPer){ for(let k=0;k<crvPer&&k<slots.length;k++) pick.add(Math.round(k*(slots.length-1)/Math.max(1,crvPer-1))); }
     slots.forEach((u,k)=>{ if(pick.has(k)&&crvAt.length<need.room) crvAt.push([u+Wd/2,vr+D/2]); else if(pts.length<need.racks) pts.push([u+Wd/2,vr+D/2]); }); }
   crvAt.forEach(([u,vv])=>put('crv',u,vv,0)); if(RT==='inrow') got.room=crvAt.length;
+  // the other hall floors have no UPS and battery room: count their rack places by the same rules (not drawn)
+  const slotsFrom=u_a=>{ let n=0; for(const vr of rowsV){ for(let u=u_a;u+Wd<=ub;u+=Wd){ if(inside(u+Wd/2,vr+D/2)) n++; } } return n-(RT==='inrow'?Math.min(need.room,rowsV.length*crvPer):0); };
+  const otherFloor=floors>1?slotsFrom(u0+Lr.corridor):0;
   got.racks=pts.length;
   const geo=new T.BoxGeometry(Wd*0.98,S.rack.H,D*0.98); const mat=new T.MeshStandardMaterial({color:0x3a3d42,roughness:.8,flatShading:true,transparent:true,opacity:0.9});
   const im=new T.InstancedMesh(geo,mat,Math.max(1,pts.length)); const m4=new T.Matrix4(), q=new T.Quaternion().setFromAxisAngle(new T.Vector3(0,1,0),ang), sc=new T.Vector3(1,1,1);
   pts.forEach(([u,vv],k)=>{ const [x,y]=F.toW(u,vv); m4.compose(V(x,y,z0+S.rack.H/2),q,sc); im.setMatrixAt(k,m4); }); im.count=pts.length; im.castShadow=true; state.dc.add(im);
   if(R.lights&&!R.lights[0].parent) R.lights.forEach(l=>R.scene.add(l));
-  state.rooms={E,need,got,floors};
+  state.rooms={E,need,got,floors,capacity:Math.min(need.racks,pts.length)+(floors-1)*Math.max(0,otherFloor),otherFloor};
   return {obj:im,n:pts.length,per:need.racks,racks:E.racks[1],floors}; }
 /* ---------- overlays ---------- */
 function clearOverlay(){ if(R.ov) R.scene.remove(R.ov); R.ov=new T.Group(); R.scene.add(R.ov); R.ticks=[]; if(R.demoG){ R.scene.remove(R.demoG); R.demoG=null; } lab.splice(0); labels.innerHTML=''; resetTint(); R.onPick=null;
@@ -250,7 +253,7 @@ function model(d){ plantLabels(); baseLabels(); const M=state.M, P=M&&M.plant;
   note((P&&P.miss&&P.miss.length?'Doesn\'t fit: '+P.miss.join('; ')+'. ':'')+heightsNote()+'. Neighbours drawn to 1.5 km.');
   key(sw(C.acc,'the lot; dashed red: the building envelope (not a design)')+sw(C.grey,'setbacks (yards) and plant yard',true)+sw(C.edge,'plant to makers\' sizes: solid = unit, dashed = clearance')+sw(C.mat,'loading spaces')+roomsKey()); }
 function roomsKey(){ const r=state.rooms; if(!r) return ''; const E=r.E, rg=a=>a[0]===a[1]?`${a[0]}`:`${a[0]}–${a[1]}`, gap=(k)=>r.got[k]<r.need[k]?` (${r.got[k]} drawn)`:'';
-  const L=[`racks ${rg(E.racks)}, about ${r.need.racks} a floor${gap('racks')}`,`UPS modules ${E.ups}${gap('ups')}`,`battery cabinets ${rg(E.batt)}${gap('battery')}`];
+  const L=[`racks ${rg(E.racks)}: room for ${r.capacity} on ${r.floors} floor${r.floors>1?'s':''} (${r.got.racks} on this one, which holds the UPS room${r.floors>1?`; ${r.otherFloor} on each other floor`:''})${r.capacity<E.racks[1]?' — short of the high end':''}`,`UPS modules ${E.ups}${gap('ups')}`,`battery cabinets ${rg(E.batt)}${gap('battery')}`];
   if(E.room&&E.room.n[1]) L.push(`${E.room.name} ${rg(E.room.n)}${r.floors>1?`, about ${r.need.room} a floor`:''}${gap('room')} (hall about ${Math.round(E.room.wft2)} W/ft²: ${E.room.type==='crah'?'room units, up to about 150':E.room.type==='wall'?'thermal wall in a side gallery, up to about 400':'in-row coolers, above about 400'} by Vertiv's limits)`); if(E.cdu[1]) L.push(`coolant units ${rg(E.cdu)} (not placed: no placement rule found)`);
   return `<div style="margin-top:4px">Inside, first hall floor of ${r.floors}${r.floors>1?' (the others alike)':''}: ${L.join(' · ')}. Gold dashed: UPS and battery room. Spacing from the register (hall_layout, electrical_room).</div>`; }
 const TYPE={housing:'Non-market housing',school:'School',campus:'University or college campus',care:'Care home',hospital:'Hospital',rec:'Recreation centre',hall:'Community league hall',pool:'Pool',arena:'Indoor arena',apartment:'Apartment building',office:'Office building',hotel:'Hotel',commercial:'Commercial building'};
