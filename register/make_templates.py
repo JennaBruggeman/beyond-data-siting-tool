@@ -31,6 +31,10 @@ T = {
  'cooling_units': (C, 'neighbours operator', 'the units on the roof or in the yard'), 'generator_sets': (C, 'neighbours operator', 'the generators on site'),
  'hall_layout': (F, 'operator', 'engineering'), 'electrical_room': (F, 'operator', 'engineering'),
  'room_cooling_type': (F, 'operator', 'engineering'),
+ # heat-recovery plant (29 Oct 2026)
+ 'hr_flow': (F, 'receiver', 'engineering'), 'hr_pipe_size': (F, 'receiver', 'engineering'), 'heat_pumps': (C, 'receiver operator', 'the heat pumps that lift the heat'),
+ 'phe_frames': (F, 'receiver', 'engineering'), 'buffer_tanks': (F, 'receiver', 'engineering'), 'hr_pumps': (F, 'receiver', 'engineering'),
+ 'hr_plant_room': (C, 'receiver host', 'the room the heat plant needs'),
  # characterise
  'heat_rejected': (C, 'receiver climate', 'the heat it gives off'), 'heat_temp': (F, 'receiver', 'engineering'), 'liquid_capture': (F, 'operator', 'engineering'),
  'cop': (F, 'receiver', 'engineering'), 'heat_captured': (F, 'operator', 'engineering'), 'heat_delivered': (C, 'receiver', 'heat that could be offered'),
