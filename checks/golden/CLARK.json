@@ -5,7 +5,7 @@
   "extent": "whole",
   "floor": "",
   "host": {},
-  "mw": 10.6,
+  "mw": 7.7,
   "foot": "max",
   "cover": 70,
   "hmode": "out",
@@ -197,14 +197,14 @@
    "inset": "[ring 8]",
    "yardNote": "",
    "loadingNeed": {
-    "n": 5,
+    "n": 4,
     "len": 10.2,
     "wid": 3.4,
     "ht": 3.8,
     "aisle": 6.1,
     "cls": "truck loading bay",
     "nC": 2,
-    "basis": "5 truck loading bays for 8,127 m² of floor. The Parking By-law calls this size Class B, its mid-size bay: 10.2 × 3.4 m with 3.8 m clearance (Class C is the 23.1 m bay for the largest trucks). The count uses row 5.2.5 as the similar use: data centres are not listed, so the Director of Planning decides (s. 5.1.4). Each bay is reached by a 6.1 m aisle (s. 5.4.1). If the City reads a data centre as a storage warehouse, 2 Class C spaces (23.1 × 3.6 m, 14.0 m aisle) would also be needed.",
+    "basis": "4 truck loading bays for 5,903 m² of floor. The Parking By-law calls this size Class B, its mid-size bay: 10.2 × 3.4 m with 3.8 m clearance (Class C is the 23.1 m bay for the largest trucks). The count uses row 5.2.5 as the similar use: data centres are not listed, so the Director of Planning decides (s. 5.1.4). Each bay is reached by a 6.1 m aisle (s. 5.4.1). If the City reads a data centre as a storage warehouse, 2 Class C spaces (23.1 × 3.6 m, 14.0 m aisle) would also be needed.",
     "src": "vanParking5"
    },
    "loading": "[ring 8]",
@@ -214,7 +214,6 @@
    ],
    "loadDepth": 16.3,
    "loadSpaces": [
-    "[ring 8]",
     "[ring 8]",
     "[ring 8]",
     "[ring 8]",
@@ -232,10 +231,10 @@
     23.352924,
     -42.752924
    ],
-   "mwSized": 10.6,
+   "mwSized": 7.7,
    "plant": {
     "s": {
-     "Q": 16.43,
+     "Q": 11.935,
      "k": {
       "name": "air-cooled chillers",
       "L": 12.141,
@@ -251,8 +250,8 @@
        4.3
       ]
      },
-     "need": 12,
-     "n": 13,
+     "need": 9,
+     "n": 10,
      "g": {
       "name": "standby generators",
       "L": 13.493,
@@ -268,8 +267,8 @@
        2
       ]
      },
-     "gNeed": 9,
-     "gN": 10,
+     "gNeed": 6,
+     "gN": 7,
      "src": "Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit nearest the middle of …"
     },
     "boxes": [
@@ -356,54 +355,6 @@
      {
       "ring": "[ring 8]",
       "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 18.3,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 18.3,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 18.3,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
       "h": 4.777,
       "base": 0,
       "kind": "yard",
@@ -459,20 +410,20 @@
      }
     ],
     "lines": [
-     "Sized for <b>11 MW</b> of servers: heat to reject ≈ 11 × PUE 1.55 = <b>16.4 MW</b> at peak.",
-     "12 air-cooled chillers carry it; with spares, <b>13</b>. Placed: 13 on the roof, 0 in the yard.",
+     "Sized for <b>7.7 MW</b> of servers: heat to reject ≈ 7.7 × PUE 1.55 = <b>11.9 MW</b> at peak.",
+     "9 air-cooled chillers carry it; with spares, <b>10</b>. Placed: 10 on the roof, 0 in the yard.",
      "Each unit about 12.141 × 2.362 m, 2.896 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
      "<span class=\"src\">Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit near…"
     ],
     "genLines": [
-     "9 generator sets of about 2 MW carry 16.4 MW; with spares, <b>10</b>. Placed: 0 on the roof, 10 in the yard.",
+     "6 generator sets of about 2 MW carry 11.9 MW; with spares, <b>7</b>. Placed: 0 on the roof, 7 in the yard.",
      "Each about 13.493 × 3.488 m, 4.777 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).",
      "<span class=\"src\">Standby diesel generator sets in Sound Level 2 enclosures with sub-base tanks. Basis units: Rehlko (Kohler) KD2000, 2,000 kW standby (data-centre continuous rating the same), 13.49 × 3.49 m, up to 4.78 m high (G5-626, rev 6/24); KD1000, 1,000 kW, 8.43 × 2.62 m, 3.71 m high with the 12 h tank (G6-154, 12/23). Both EPA Tier 2, cULus (UL 2200, CSA C22.2 No. 100); manufacturer claims. Chosen 29 Oct 2026 as the middle of Cat, Rehlko and Generac: 2 MW 18.5–38.4 m² per MW, 1 MW 19.5–22.4. 1 m clear around each set (Cummins application manual); 1.5 m from wall openings and combustibl…"
     ],
     "short": "",
     "coolYard": 0,
-    "coolRoof": 13,
-    "genYard": 10,
+    "coolRoof": 10,
+    "genYard": 7,
     "genRoof": 0,
     "yard": "[ring 8]",
     "yardU": [
@@ -482,17 +433,17 @@
     "indoor": 0,
     "miss": [],
     "placed": {
-     "cr": 13,
+     "cr": 10,
      "cy": 0,
      "gr": 0,
-     "gy": 10
+     "gy": 7
     }
    },
    "plantYardDepth": 11.976,
    "serverFoot": "[ring 8]",
    "sizedTo": {
-    "mw": 10.6,
-    "floor": 8126.666667,
+    "mw": 7.7,
+    "floor": 5903.333333,
     "perMW": 766.666667
    },
    "foot": "[ring 10]",

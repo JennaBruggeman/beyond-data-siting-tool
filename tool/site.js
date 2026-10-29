@@ -153,7 +153,7 @@ function model(){
     const q=inscribe(F,ring,a0,a1,m.v[0],m.v[1]); if(q){
       // J.B., 16 Oct: "the server amount changes but the building doesnt shrink" — when a size is set, the building is only as big as that size needs:
       // floor = MW × 460 m² of hall per MW (built Canadian halls 290–630, operator claims) ÷ 0.6 hall share (48–72%), spread over the storeys; centred in the buildable rectangle
-      if(A.mw&&m.footMode==='max'&&BD.eng){ const R=BD.eng.R, perMW=(R.m2PerMW[0]+R.m2PerMW[1])/2/((R.hallShare[0]+R.hallShare[1])/2), floors=Math.max(1,m.nF[0]), need=A.mw*perMW/floors, W=q[1]-q[0], H=q[3]-q[2];
+      if(A.mw&&m.footMode==='max'&&BD.eng){ const R=BD.eng.R, perMW=(R.m2PerMW[0]+R.m2PerMW[1])/2/((R.hallShare[0]+R.hallShare[1])/2), floors=Math.max(1,m.Z&&m.Z.ground?m.nF[0]-1:m.nF[0]), /* 29 Oct 2026: data floors only where the zone keeps the ground floor for other uses (as the 3D and the hall count already do) */ need=A.mw*perMW/floors, W=q[1]-q[0], H=q[3]-q[2];
         if(need<W*H*0.98){ const k=Math.sqrt(need/(W*H)), cu=(q[0]+q[1])/2, cv=(q[2]+q[3])/2; let w=W*k, h=H*k; if(h<12){ h=Math.min(H,12); w=need/h; } m.serverFoot=rectW(F,cu-w/2,cu+w/2,cv-h/2,cv+h/2); m.sizedTo={mw:A.mw,floor:A.mw*perMW,perMW}; } }
       // capacity is always worked out on the most the lot allows; the drawn floor is only the chosen size (no feedback into "what fits")
       const rr=rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); m.foot=clip(ring,rr); m.footRect=rr; m.simpleMass=true;
