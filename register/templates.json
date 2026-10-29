@@ -277,6 +277,20 @@
    ],
    "why": "the generators on site"
   },
+  "hall_layout": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "electrical_room": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
   "heat_rejected": {
    "tier": "community",
    "parties": [
@@ -2561,6 +2575,14 @@
    [
     "generator_sets",
     "size"
+   ],
+   [
+    "hall_layout",
+    "size"
+   ],
+   [
+    "electrical_room",
+    "size"
    ]
   ],
   "edges": [
@@ -3683,12 +3705,36 @@
    [
     "pue",
     "generator_sets"
+   ],
+   [
+    "rack_count",
+    "hall_layout"
+   ],
+   [
+    "room_cooling_units",
+    "hall_layout"
+   ],
+   [
+    "cdu_units",
+    "hall_layout"
+   ],
+   [
+    "hall_area",
+    "hall_layout"
+   ],
+   [
+    "ups_modules",
+    "electrical_room"
+   ],
+   [
+    "battery_cabinets",
+    "electrical_room"
    ]
   ]
  },
  "resident_count": 45,
  "community_count": 128,
- "full_count": 202,
+ "full_count": 204,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {

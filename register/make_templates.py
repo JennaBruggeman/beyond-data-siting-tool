@@ -29,6 +29,7 @@ T = {
  'rack_count': (C, 'operator', 'how many server racks'), 'ups_modules': (F, 'operator', 'engineering'), 'battery_cabinets': (F, 'operator', 'engineering'),
  'room_cooling_units': (F, 'operator', 'engineering'), 'cdu_units': (F, 'operator', 'engineering'),
  'cooling_units': (C, 'neighbours operator', 'the units on the roof or in the yard'), 'generator_sets': (C, 'neighbours operator', 'the generators on site'),
+ 'hall_layout': (F, 'operator', 'engineering'), 'electrical_room': (F, 'operator', 'engineering'),
  # characterise
  'heat_rejected': (C, 'receiver climate', 'the heat it gives off'), 'heat_temp': (F, 'receiver', 'engineering'), 'liquid_capture': (F, 'operator', 'engineering'),
  'cop': (F, 'receiver', 'engineering'), 'heat_captured': (F, 'operator', 'engineering'), 'heat_delivered': (C, 'receiver', 'heat that could be offered'),
