@@ -8,7 +8,7 @@ Generated 29 Oct 2026 from `formula_register.json` (the diagram reads the JSON; 
 
 **Verification.** Independent re-verification 9–10 Oct 2026: 258 items re-opened; 195 confirmed, 37 confirmed with wording/page notes, 10 mismatches corrected, 6 not on page (citations fixed), 1 unreachable. See verification_report.md. Hunt 9 (public proxies) and hunt 10 (J.B. full-text uploads) folded in 10 Oct: see sources/09 and sources/10.
 
-**Counts.** 178 quantities · 101 conditions under 10 headings · 21 opportunities quantified.
+**Counts.** 185 quantities · 101 conditions under 10 headings · 21 opportunities quantified.
 
 ## Quantities
 
@@ -28,6 +28,13 @@ Generated 29 Oct 2026 from `formula_register.json` (the diagram reads the JSON; 
 | `component_space` | Space for the plant | m² per MW, by component | Σ components (electrical yard and switchgear, UPS and batteries, generators and fuel, heat rejection, heat recovery, fire suppression, loading) × IT load × redundancy | start_case, cooling_type | 18 Oct 2026 (sweep M30–M32; audit/plant_sources_2026-10-18.md): cooling space is per MW of HEAT (servers × PUE), spares added when the plant is laid out; air cooling → air-cooled chillers with free-cooling coils, 16.4–30.5 m²/MW across Vertiv Liebert AFC and Airedale TurboChill DCS, basis Vertiv AFC FIZ135 at 19.3 (equipment study 29 Oct 2026; Trane TCA dropped: Trane says it works 'without relying on glycol or separate free-cooling coils'; a dry cooler cannot cool water below outdoor air, and air-cooled halls need ≥13 °C chilled water, NREL/DOE FEMP 2024); liquid cooling → dry coolers, 19.5–30.5 m²/MW (EVAPCO, Thermokey, Mark; manufacturer claims). Manufacturer claims per MW (equipment study 29 Oct 2026, range across makers compared): UPS 2.4–3.3 m² (Vertiv EXL S1, Schneider Galaxy VX, ABB MegaFlex UL; basis Galaxy VX), Li-ion batteries 1.0–1.8 m² for about 5 min (Vertiv EnergyCore Li5, 4 cabinets per MW; Delta LZH, 400 kW per rack; basis Vertiv), air-cooled chillers 16.4–30.5 m², cooling towers 4.7–16.5 m² (BAC Series 3000, Marley NC; basis BAC S3E-1222-07R), dry coolers 19.5–30.5 m² (EVAPCO 21.9, SPX Marley OlympusV 24.1–25.0 dry-rated; the tool sizes 24.5), heat pumps 5.6–15.1 m² per MW heat (Sabroe DualPAC 7xx, GEA RedAstrum/RedGenium at 60/80 °C; basis DualPAC 716-W; HeatPAC dropped, its document is not on the maker's site), CDUs 0.4–1.5 m² (10 units, 6 makers; basis Motivair MCDU-50); equipment only, without clearances; EPCOR transformer clearances 3.0 m door side / 2.0 m others; fuel room 2 h separation and 550 mm clearance (NFC 4.3.14); generator room 2 h (VBBL 3.6.2.8) | src16, epcor_ccg, nfc2020_4313, van_genroom, cat3516c, mfrDryCooler, evapcoLayout2026, bacS3000, bacLayout2023, mfrAdiabatic, mfrGenset, nfpa37clear, mfrBESS, nfpa855tia, vanParking5, edmZB580, uptimeTiers, nfpa855_2026, cologixVAN1_2026, cologixVAN4_2026, traneTCA2026, femp2024dc, vertivEXLS1, vertivHPL, vertivCDU2300, thermokeyGH2490, bacS3000_2012, carrier61XWH, vertivAFC, airedaleDCS, rehlkoKD2000, rehlkoKD1000, bacS3000ed, equipStudy2026, geaRedHP, deltaLZH, spxOlympusV | 40 | 40 | manufacturer claims; clearances and switchgear room sizes unsourced | The building fits the envelope; Vancouver: plant above grade counts as floor area |
 | `hall_area` | Room for the data hall | m² | new: envelope floor area − plant space − support − ground-floor uses the zone requires; part of an existing building: the floor area offered | envelope, component_space, host_building | Vancouver I-2, I-3 and FC-2: no data storage at the ground floor except entrances; calibration: Burlington 3,710 m² of halls = 48–72 % of gross area | van_zdb_i3, van_zdb_fc2, van_zdb_i2, edm_bl20001, burlingtonPlans2026 | 50 | 40 | arithmetic on sourced limits; white-space share from one calibration case | The building fits the envelope; Vancouver: no data storage at the ground floor |
 | `size_fit` | Largest size that fits | MW IT (range) | hall area ÷ area per MW (range); for part of a building, also capped by floor load, electrical service and heat-rejection space | hall_area, floor_load_need, service_class | LBNL prototypes 3.7–13.9 m² per rack → ≈186–2,325 m² per MW; Ark UP4 28 MW IT in 15,410 m² (three buildings); 111 E 5th ≤ 291 m² per MW (upper bound); Uptime 2024 average 8 kW per rack (industry survey) | lbnl_proto2021, hillingdon_up4, van_rts19744, evapcoLayout2026, vanParking5, edmZB580, uptime2024survey | 50 | 40 | range, wide; narrows with rack density | — (input to others) |
+| `rack_count` | Server racks | count (range) | racks = P_IT ÷ kW per rack | it_load_actual | 7.1–8 kW per rack average (Uptime Institute Global Data Center Survey 2024 p.10: 'the average of typical racks densities ... 8 kW'; 7.1 kW without 11 sites above 50 kW; industry survey); cabinet 0.6 × 1.2 × 2.0 m (Vertiv VR3300; five makers share the footprint); arrangement in rows with 1.2 m contained aisles is schematic | uptime2024survey, vertivVR3300 | 50 | 50 | in hand | — (input to others) |
+| `ups_modules` | UPS modules | count | n = ⌈P_IT ÷ module rating⌉, then redundancy: N+1 adds one, 2N doubles | it_load_actual, spare_cooling | 1000 kW frame, 3.6 × 0.9 × 1.97 m (Schneider Galaxy VX, UL 1778 + CSA); the UPS carries the IT load ('computer loads' on UPS, cooling on generator-backed power: LBNL 2007, one site; where continuous cooling is required, some cooling is on UPS too — not modelled ?); N+1 and 2N as defined by a UPS maker (Fuji Electric); UPS modules are redundant capacity components (TIA-942); the set-up's spare-unit choice is applied | galaxyVX, lbnlXu2007, fujiRedundancy, tia942 | 50 | 50 | in hand | — (input to others) |
+| `battery_cabinets` | UPS battery cabinets | count (range) | n = ⌈P_IT ÷ cabinet power at the runtime⌉, ×2 for 2N | it_load_actual, backup_hours, spare_cooling | about 5 min runtime (backup_hours, colocation); 263 kW per cabinet (Vertiv EnergyCore Li5, 0.6 × 0.75 × 2.0 m, drawn) to 400 kW per rack (Delta LZH) for 5 min → range (manufacturer claims) | vertivLi5, deltaLZH | 50 | 50 | in hand | — (input to others) |
+| `room_cooling_units` | Room cooling units | count (range) | n = ⌈heat to air ÷ unit capacity⌉, then redundancy; heat to air = P_IT (air cooling) or P_IT × (1 − liquid share) (liquid cooling) | it_load_actual, liquid_capture, cooling_type, spare_cooling | Vertiv Liebert CW181 (60 Hz, CSA/UL 1995): 172 kW at 80 °F to 246 kW at 90 °F entering air with 50/64 °F water (System Design Catalog ©2024 Table 2.3 p.11; 'DB' read as return air for a downflow unit — our reading); 179 kW at the legacy 75 °F; above 90 °F not printed ?; 3.10 × 1.07 × 2.39 m; liquid cooling leaves the rest of the heat to air (Schneider WP 133) | vertivCW181, schneiderWP133, fujiRedundancy | 50 | 50 | in hand | — (input to others) |
+| `cdu_units` | Coolant distribution units | count | n = ⌈P_IT × liquid share ÷ CDU capacity⌉, then redundancy | it_load_actual, liquid_capture, spare_cooling | 1516 kW at a 4 K approach, 0.91 × 1.57 × 2.05 m (Motivair MCDU-50, manufacturer claim); liquid share from liquid_capture (0.48–0.75; WP 133 gives 60–90%); sizing the CDU on the heat in the liquid is our inference (no primary rule found ?) | motivairMCDU, schneiderWP133 | 40 | 40 | in hand | — (input to others) |
+| `cooling_units` | Outdoor cooling units | count | n = ⌈P_IT × PUE ÷ unit capacity⌉, then spares (N+1 / 2N) | it_load_actual, pue, cooling_type, spare_cooling | heat to reject ≈ facility power (servers × PUE, high end); unit capacity: air-cooled chillers with free cooling 1.489 MW (Vertiv AFC FIZ135); dry coolers 1.18 MW (24.5 m² per MW over a 12 × 2.4 m unit; EVAPCO 12 m unit rated 1.31 MW); hybrid coolers 0.67 MW (low end of 0.67–1.37, EVAPCO/BAC claims); tower cells 3.03 MW (BAC S3E-1222-07R); air-cooled halls get chillers, liquid-cooled halls dry coolers | vertivAFC, evapcoEA26, mfrAdiabatic, bacS3000ed, fujiRedundancy | 50 | 50 | in hand | — (input to others) |
+| `generator_sets` | Standby generator sets | count | n = ⌈P_IT × PUE ÷ set rating⌉, then spares | it_load_actual, pue | 2,000 kW sets when the facility load is above 3 MW (Rehlko KD2000), otherwise 1,000 kW (KD1000); data-centre continuous rating = standby (Rehlko); the sets carry the whole facility, cooling included (HVAC on generator-backed power: LBNL 2007, one site); generator spares as set up (N+1 default) | rehlkoKD2000, rehlkoKD1000, lbnlXu2007, fujiRedundancy | 50 | 50 | in hand | — (input to others) |
 
 ### What the place offers
 
@@ -1146,6 +1153,28 @@ source_roles (added 12 Oct 2026): for each source, the term of the formula it su
 | `fire_water` | `bcbc2024_3257` | 30 min hose streams | rule | 95 |  |
 | `fire_water` | `vanOEM2018` | DFPS gap | context | 80 |  |
 | `fire_water` | `bcDWPR` | s. 3.1(b) | rule | 90 |  |
+| `rack_count` | `uptime2024survey` | 7.1–8 kW per rack | coefficient | 50 |  |
+| `rack_count` | `vertivVR3300` | 0.6 × 1.2 × 2.0 m cabinet | coefficient | 50 |  |
+| `ups_modules` | `galaxyVX` | 1000 kW module | coefficient | 50 |  |
+| `ups_modules` | `lbnlXu2007` | UPS carries the IT load | rule | 40 |  |
+| `ups_modules` | `fujiRedundancy` | N+1, 2N definitions | rule | 50 |  |
+| `ups_modules` | `tia942` | redundant capacity components | rule | 90 | unverified |
+| `battery_cabinets` | `vertivLi5` | 263 kW per cabinet, 5 min | coefficient | 50 |  |
+| `battery_cabinets` | `deltaLZH` | 400 kW per rack, 5 min | bound | 50 |  |
+| `room_cooling_units` | `vertivCW181` | 172–246 kW per unit | coefficient | 50 |  |
+| `room_cooling_units` | `schneiderWP133` | remaining heat removed by air | rule | 50 |  |
+| `room_cooling_units` | `fujiRedundancy` | N+1, 2N | rule | 50 |  |
+| `cdu_units` | `motivairMCDU` | 1516 kW at 4 K | coefficient | 50 |  |
+| `cdu_units` | `schneiderWP133` | 60–90% of heat to liquid | bound | 50 |  |
+| `cooling_units` | `vertivAFC` | 1.489 MW chiller | coefficient | 50 |  |
+| `cooling_units` | `evapcoEA26` | 12 m dry cooler | coefficient | 50 |  |
+| `cooling_units` | `mfrAdiabatic` | 0.67–1.37 MW hybrid | coefficient | 50 | unverified |
+| `cooling_units` | `bacS3000ed` | 3.03 MW tower cell | coefficient | 50 |  |
+| `cooling_units` | `fujiRedundancy` | N+1, 2N | rule | 50 |  |
+| `generator_sets` | `rehlkoKD2000` | 2,000 kW set | coefficient | 50 |  |
+| `generator_sets` | `rehlkoKD1000` | 1,000 kW set | coefficient | 50 |  |
+| `generator_sets` | `lbnlXu2007` | cooling on generator power | rule | 40 |  |
+| `generator_sets` | `fujiRedundancy` | N+1 | rule | 50 |  |
 
 ### Own confidence vs sources (for review)
 
@@ -1205,6 +1234,9 @@ source_roles (added 12 Oct 2026): for each source, the term of the formula it su
 - `grid_refund` own 80, lowest coefficient-role source 90 — rules read 19 Oct 2026
 - `community_solar` own 70, lowest coefficient-role source 80 — rules read 19 Oct 2026
 - `fire_water` own 70, lowest coefficient-role source 90 — rules read 19 Oct 2026
+- `ups_modules` own 50, lowest coefficient-role source 40 — in hand
+- `cdu_units` own 40, lowest coefficient-role source 50 — in hand
+- `generator_sets` own 50, lowest coefficient-role source 40 — in hand
 
 ## Sources
 
@@ -1930,6 +1962,14 @@ Source ids added 9–11 Oct are listed first with their citations; ids from the 
 - `geaRedHP` — GEA, Red Heat Pumps brochure 7757-3000-017 (rev 10-26), GEA Systems North America, metric table p.17: RedAstrum MH 1,575 kW at 40/35 → 60/80 °C, 7050 × 2150 × 2450 mm; RN 3,019 kW, 7900 × 2150 × 2750 mm; RedGenium 550 1,362 kW (35/30 → 60/80, paired by column order), 6450 × 2150 × 2500 mm (manufacturer claims)
 - `deltaLZH` — Delta Electronics, LZH Series lithium-ion battery leaflet (© 2025): '400 kW with 5 mins (BOL)' per rack; 620 × 625 × 2185 mm with top-hat (1910 mm without); UL 1973, UL 9540A (manufacturer claims)
 - `spxOlympusV` — SPX Cooling Tech, Marley OlympusV adiabatic cooler: engineering data TECH-OLYAD-26 (3/2026) lengths and dry ratings (VWS20 4,983 MBH; VWS29 4,668 MBH at 115→105 °F, 95 °F DB, CTI-certified); brochure OLYMPUSV-26 (1/2026) nominal width 2.90 m, height 3.05 m (manufacturer claims)
+- `vertivVR3300` — Vertiv, VR Rack brochure SL-20819 (R06/25): VR3300 42U, 600 × 1200 × 2000 mm ('nominal'), UL 2416; the same 600 × 1200 footprint from Schneider APC AR3300B2, Rittal VX, Chatsworth ZA15, Panduit XG — https://www.vertiv.com/en-us/products-catalog/facilities-enclosures-and-racks/racks-and-containment/vr3300/
+- `galaxyVX` — Schneider Electric, Galaxy VX 480 V UPS System Technical Specifications 990-5451K-001 (11/2024): 1000 kW (GVX1000K1000NGS), UL 1778 and CSA C22.2 No. 107.3; dimensions 990-6264J-001: 3600 × 900 × 1970 mm
+- `vertivLi5` — Vertiv, EnergyCore Li5 data sheet SL-71271 (R06/26): 18 modules, 31.1 kWh, 263 kW max discharge, 5 min class, 600 × 750 × 2000 mm (axes not labelled), UL 1973, UL 9540A, CSA mark
+- `vertivCW181` — Vertiv, Liebert CW System Design Catalog, 60 Hz (©2024), Table 2.3 'High Delta T Conditions' p.11, 50/64 °F water: CW181 172 kW at 80 °F DB, 210 kW at 85 °F, 246 kW at 90 °F (total = sensible); p.7 179 kW at 75 °F; product page: 94 × 122 × 42 in (2388 × 3099 × 1067 mm), 177 kW; guide spec SL-18061GS Rev. 9 (Oct 2021) p.1: CSA C22.2 No 236/UL 1995 — https://www.vertiv.com/4a6b21/globalassets/products/thermal-management/room-cooling/liebert-cw-038-181kw--chilled-water-cooling/liebert-cw-38-to-181-kw-system-design-catalog-sl-18061.pdf
+- `motivairMCDU` — Motivair by Schneider Electric, CDU brochure (©2025): MCDU-50 1516 kW at a 4 K approach (row 2: primary supply 105.8 °F, secondary supply 113 °F), 36 × 61-5/8 × 80-1/2 in; UL, 380–480 V, 50/60 Hz (manufacturer claims)
+- `lbnlXu2007` — Xu, T. & Greenberg, S., Data Center Energy Benchmarking Part 1: Case Studies on Two Co-location Data Centers (No. 16 and 17), LBNL-62716, Aug 2007: UPS serves the 'computer loads' (p.2); HVAC — 'CRACs, cooling towers, and condenser water pumps' — on generator-backed essential power (p.9); one site — https://eta-publications.lbl.gov/sites/default/files/62716-p1.pdf
+- `fujiRedundancy` — Fuji Electric Corp. of America (UPS maker; no date), 'What are N+1, 2N, and 2(N+1) redundancy?': N+1 'N units to handle the full load, plus 1 additional (spare) unit'; 2N 'two completely independent sets of N components, each capable of handling the full load' — https://americas.fujielectric.com/what-are-n1-2n-and-2n1-redundancy/
+- `schneiderWP133` — Lin, Bunger, Avelar, Navigating Liquid Cooling Architectures for Data Centers with AI Workloads, Schneider Electric White Paper 133 v2 (©2024) p.8: '60% to 90% of a liquid-cooled server's heat can be removed via the liquid'; 'The remaining heat is removed by air cooling.' — https://download.schneider-electric.com/doc/SPD_WP133_EN/WP133_V2_EN.pdf
 
 Source ids from the first register (hunts 1–8; full reports in sources/01–08):
 

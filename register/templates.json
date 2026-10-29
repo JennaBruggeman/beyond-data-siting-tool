@@ -226,6 +226,57 @@
    ],
    "why": "how big a data centre fits here"
   },
+  "rack_count": {
+   "tier": "community",
+   "parties": [
+    "operator"
+   ],
+   "why": "how many server racks"
+  },
+  "ups_modules": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "battery_cabinets": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "room_cooling_units": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "cdu_units": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "cooling_units": {
+   "tier": "community",
+   "parties": [
+    "neighbours",
+    "operator"
+   ],
+   "why": "the units on the roof or in the yard"
+  },
+  "generator_sets": {
+   "tier": "community",
+   "parties": [
+    "neighbours",
+    "operator"
+   ],
+   "why": "the generators on site"
+  },
   "heat_rejected": {
    "tier": "community",
    "parties": [
@@ -2482,6 +2533,34 @@
    [
     "fire_water",
     "opportunity"
+   ],
+   [
+    "rack_count",
+    "size"
+   ],
+   [
+    "ups_modules",
+    "size"
+   ],
+   [
+    "battery_cabinets",
+    "size"
+   ],
+   [
+    "room_cooling_units",
+    "size"
+   ],
+   [
+    "cdu_units",
+    "size"
+   ],
+   [
+    "cooling_units",
+    "size"
+   ],
+   [
+    "generator_sets",
+    "size"
    ]
   ],
   "edges": [
@@ -3528,12 +3607,88 @@
    [
     "water_supply",
     "fire_water"
+   ],
+   [
+    "it_load_actual",
+    "rack_count"
+   ],
+   [
+    "it_load_actual",
+    "ups_modules"
+   ],
+   [
+    "spare_cooling",
+    "ups_modules"
+   ],
+   [
+    "it_load_actual",
+    "battery_cabinets"
+   ],
+   [
+    "backup_hours",
+    "battery_cabinets"
+   ],
+   [
+    "spare_cooling",
+    "battery_cabinets"
+   ],
+   [
+    "it_load_actual",
+    "room_cooling_units"
+   ],
+   [
+    "liquid_capture",
+    "room_cooling_units"
+   ],
+   [
+    "cooling_type",
+    "room_cooling_units"
+   ],
+   [
+    "spare_cooling",
+    "room_cooling_units"
+   ],
+   [
+    "it_load_actual",
+    "cdu_units"
+   ],
+   [
+    "liquid_capture",
+    "cdu_units"
+   ],
+   [
+    "spare_cooling",
+    "cdu_units"
+   ],
+   [
+    "it_load_actual",
+    "cooling_units"
+   ],
+   [
+    "pue",
+    "cooling_units"
+   ],
+   [
+    "cooling_type",
+    "cooling_units"
+   ],
+   [
+    "spare_cooling",
+    "cooling_units"
+   ],
+   [
+    "it_load_actual",
+    "generator_sets"
+   ],
+   [
+    "pue",
+    "generator_sets"
    ]
   ]
  },
  "resident_count": 45,
- "community_count": 125,
- "full_count": 195,
+ "community_count": 128,
+ "full_count": 202,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {

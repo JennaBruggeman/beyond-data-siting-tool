@@ -172,6 +172,18 @@ function plantPerMW(recover){ const p=R.plant, c=coolerFor(recover).c; // heat p
   let lo=p.ups[0]+p.batt[0]+c[0]*R.pue[0], hi=p.ups[1]+p.batt[1]+c[1]*R.pue[1]; if(recover){ lo+=p.hp[0]+p.cdu[0]; hi+=p.hp[1]+p.cdu[1]; } return [lo,hi]; }
 function noiseLw(mw){ const CU=coolUnits(mw), LU=CU.name==='dry coolers'?R.lwUnitDry:R.lwUnit; return {n:CU.n,name:CU.name,lw:[LU[0]+10*Math.log10(CU.n),LU[1]+10*Math.log10(CU.n)]}; }
 /* cooling units for the noise count: the same units the plant lays out (sweep M30), spares included */
+/* equipment counts (register: rack_count, ups_modules, battery_cabinets, room_cooling_units, cdu_units, cooling_units, generator_sets;
+   29 Oct 2026). Each count is [low, high] where its coefficient is a range. */
+R.equip={kwRack:[7.1,8], upsKW:1000, cabKW:[400,263], crahKW:[246,172], cduKW:1516};
+function equip(mw,A){ A=A||BD.S.answers; const sp=A.spares||'n1', red=n=>sp==='2n'?n*2:sp==='n1'?n+1:n, kw=mw*1000, E=R.equip;
+  const air=(A.inside||'air')==='air', liq=air?[0,0]:(A.inside==='immersion'?[1,1]:R.capture); // immersion: all heat in liquid (register liquid_capture, not verified)
+  const toAir=[kw*(1-liq[1]),kw*(1-liq[0])], toLiq=[kw*liq[0],kw*liq[1]];
+  const out={racks:[Math.ceil(kw/E.kwRack[1]),Math.ceil(kw/E.kwRack[0])], ups:red(Math.ceil(kw/E.upsKW)),
+    batt:[Math.ceil(kw/E.cabKW[0])*(sp==='2n'?2:1),Math.ceil(kw/E.cabKW[1])*(sp==='2n'?2:1)],
+    crah:toAir[1]>0?[red(Math.ceil(toAir[0]/E.crahKW[0])),red(Math.ceil(toAir[1]/E.crahKW[1]))]:[0,0],
+    cdu:toLiq[1]>0?[red(Math.ceil(toLiq[0]/E.cduKW)),red(Math.ceil(toLiq[1]/E.cduKW))]:[0,0]};
+  if(BD.plant&&BD.plant.sizeFor){ const s=BD.plant.sizeFor(mw,A); out.cool={n:s.n,name:s.k.name}; out.gens={n:s.gN,need:s.gNeed,mw:s.g?s.g.mw:0}; }
+  return out; }
 function coolUnits(mw){ const A=BD.S.answers; if(BD.plant&&BD.plant.sizeFor){ const s=BD.plant.sizeFor(mw,A); return {n:s.n,name:s.k.name,mw:s.k.mw}; } return {n:Math.max(1,Math.ceil(mw*R.pue[1])),name:'cooling units',mw:1}; }
 
 
@@ -715,6 +727,6 @@ async function precView(){
 }
 /* sweep 20 Oct 2026: air-cooled halls get air-cooled chillers, not dry coolers (plant.js, sweep M31); every 'dry coolers' a user reads says which */
 BD.dryName=()=>{ const A=BD.S.answers; return (A.inside||'air')==='air'&&(A.outside||'dry')==='dry'?'air-cooled chillers':'dry coolers'; };
-BD.eng={R,vZone,siteFacts,plantPerMW,coolUnits,noiseLw,calc,rng,f1,n0,n1,mathBox,tabBar,wireTabs,show3d,nearby,netsAt,loadRecv,badge,src,s3,rangeBar,state,roofArea,optionSet};
+BD.eng={R,vZone,siteFacts,plantPerMW,coolUnits,equip,noiseLw,calc,rng,f1,n0,n1,mathBox,tabBar,wireTabs,show3d,nearby,netsAt,loadRecv,badge,src,s3,rangeBar,state,roofArea,optionSet};
 BD.fitsView=fitsView; BD.recvView=recvView; BD.optionsView=optionsView; BD.tabView=tabView;
 })();

@@ -220,6 +220,6 @@ const B={
    return g; },
 };
 
-function make(kind,o){ if(!window.THREE) throw new Error('three.js not loaded'); T=window.THREE; mats(); const g=B[kind](o||{}); g.userData.kind=kind; g.userData.spec=SPEC[kind]; return g; }
+function make(kind,o){ if(!window.THREE) throw new Error('three.js not loaded'); T=window.THREE; mats(); const g=B[kind](o||{}); g.traverse(c=>{ if(c.isMesh){ c.castShadow=true; c.receiveShadow=true; } }); g.userData.kind=kind; g.userData.spec=SPEC[kind]; return g; }
 BD.kit={make,SPEC,COL,kinds:Object.keys(B)};
 })();

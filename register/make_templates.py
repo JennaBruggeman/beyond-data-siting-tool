@@ -25,6 +25,10 @@ T = {
  'it_load_claim': (F, 'operator', 'engineering'), 'it_load_actual': (C, 'operator utility ratepayers', 'how much power it draws'), 'servers': (F, 'operator', 'engineering'),
  'envelope': (C, 'city neighbours', 'what the zone lets it be'), 'component_space': (F, 'operator', 'engineering'), 'hall_area': (F, 'operator', 'engineering'),
  'size_fit': (R, 'host city neighbours', 'how big a data centre fits here'),
+ # equipment counts (29 Oct 2026)
+ 'rack_count': (C, 'operator', 'how many server racks'), 'ups_modules': (F, 'operator', 'engineering'), 'battery_cabinets': (F, 'operator', 'engineering'),
+ 'room_cooling_units': (F, 'operator', 'engineering'), 'cdu_units': (F, 'operator', 'engineering'),
+ 'cooling_units': (C, 'neighbours operator', 'the units on the roof or in the yard'), 'generator_sets': (C, 'neighbours operator', 'the generators on site'),
  # characterise
  'heat_rejected': (C, 'receiver climate', 'the heat it gives off'), 'heat_temp': (F, 'receiver', 'engineering'), 'liquid_capture': (F, 'operator', 'engineering'),
  'cop': (F, 'receiver', 'engineering'), 'heat_captured': (F, 'operator', 'engineering'), 'heat_delivered': (C, 'receiver', 'heat that could be offered'),
