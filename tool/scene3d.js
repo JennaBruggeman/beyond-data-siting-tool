@@ -8,6 +8,9 @@ const BD=window.BD;
 const TH='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
 const OC='https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js';
 const C={bg:0x17181a,face:0x1e2023,edge:0xe9e6e1,acc:0xCC746C,heat:0xd1a35e,power:0xa7b4d6,water:0x7fb2c4,mat:0x9fb38a,senses:0xb9a3cf,city:0xc8c2b8,ok:0x8fb996,bad:0xb24f49,faint:0x6b6964,grey:0x9d9a94};
+const DARK=Object.assign({},C), LIGHT=Object.assign({},C,{bg:0xf1f0ec,face:0xf7f6f3,edge:0x4a4d52,grey:0x8a8780,faint:0xb5b2ab,city:0x6b6964,acc:0xc0655c,mat:0x6f8a5c,senses:0x8a6fb0,heat:0xb07a2e,power:0x6a7fb0,water:0x3f87b0});
+const light3d=()=>!(BD.S&&BD.S.dark3d); // light ground by default for the test (J.B., 29 Oct 2026: "lets test light")
+function applyTheme(){ Object.assign(C,light3d()?LIGHT:DARK); if(R) R.ren.setClearColor(C.bg); if(wrap) wrap.style.background=hex(C.bg); if(labels) labels.style.color=light3d()?'#55585d':'#9d9a94'; }
 const hex=c=>'#'+c.toString(16).padStart(6,'0');
 const RAD=1500, NEAR=420;
 let T=null, R=null, wrap=null, labels=null, tip=null, state={};
@@ -27,7 +30,10 @@ function setup(){
   wrap.insertBefore(ren.domElement,labels); ren.domElement.style.cssText='display:block;width:100%;height:100%';
   const scene=new T.Scene(); const cam=new T.PerspectiveCamera(35,1,1,40000);
   const ctl=new T.OrbitControls(cam,ren.domElement); ctl.enableDamping=true; ctl.dampingFactor=0.15; ctl.maxPolarAngle=Math.PI*0.48; ctl.maxDistance=9000;
-  R={ren,scene,cam,ctl};
+  R={ren,scene,cam,ctl}; applyTheme(); ren.shadowMap.enabled=true; ren.shadowMap.type=T.PCFSoftShadowMap;
+  // lights for the equipment kit (kit3d.js uses lit materials; the rest of the scene is unlit) — 29 Oct 2026
+  R.lights=[new T.HemisphereLight(0xffffff,0x8f8c85,0.5),new T.DirectionalLight(0xffffff,0.6)]; { const d=R.lights[1]; d.position.set(-260,520,320); d.castShadow=true; d.shadow.mapSize.set(4096,4096);
+    const c=d.shadow.camera; c.left=-NEAR; c.right=NEAR; c.top=NEAR; c.bottom=-NEAR; c.near=10; c.far=2000; d.shadow.bias=-0.0006; d.shadow.normalBias=0.6; }
   document.getElementById('v3map').onclick=()=>hide();
   const fit=()=>{ const b=wrap.getBoundingClientRect(); if(!b.width) return; ren.setSize(b.width,b.height,false); cam.aspect=b.width/b.height; cam.updateProjectionMatrix(); };
   new ResizeObserver(fit).observe(wrap); fit();
@@ -49,7 +55,8 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;',
 
 /* ---------- labels: leaders are vertical (orthogonal); overlapping labels give way by priority ---------- */
 const lab=[];
-function label(text,pos,col,o){ o=o||{}; if(!pos||!pos.clone) return {d:document.createElement('div'),pos:null,prio:0,w:0}; /* lot test 20 Oct: a label with no position (no building found) broke the 3D on Over time / Two cities */ const d=document.createElement('div'); d.textContent=text; d.style.cssText=`position:absolute;white-space:nowrap;transform:translate(-50%,-100%);color:${col||'#9d9a94'};text-shadow:0 0 3px #17181a,0 0 3px #17181a,0 0 2px #17181a;padding:0 2px`;
+const LMAP={'#9d9a94':'#55585d','#e39a93':'#a8483f','#e9e6e1':'#26282b','#cdb07a':'#8a6a1c','#8fb996':'#3f7a4a'};
+function label(text,pos,col,o){ o=o||{}; if(light3d()) col=LMAP[col]||col||'#55585d'; if(!pos||!pos.clone) return {d:document.createElement('div'),pos:null,prio:0,w:0}; /* lot test 20 Oct: a label with no position (no building found) broke the 3D on Over time / Two cities */ const d=document.createElement('div'); d.textContent=text; d.style.cssText=`position:absolute;white-space:nowrap;transform:translate(-50%,-100%);color:${col||'#9d9a94'};text-shadow:${light3d()?'0 0 3px #f1f0ec,0 0 3px #f1f0ec,0 0 2px #f1f0ec':'0 0 3px #17181a,0 0 3px #17181a,0 0 2px #17181a'};padding:0 2px`;
   labels.appendChild(d); const L={d,pos,prio:o.prio||1,w:text.length*6.5+14}; lab.push(L);
   if(o.from){ R.ov.add(line([o.from,pos.clone().add(new T.Vector3(0,-0.3,0))],o.leaderCol||C.faint,false,0.7)); } return L; }
 function placeLabels(){ const b=wrap.getBoundingClientRect(); const placed=[];
@@ -93,20 +100,22 @@ function buildNeighbours(site){
   const X=(ax,ay,bx,by,cx,cy,dx,dy)=>{ const d=(bx-ax)*(dy-cy)-(by-ay)*(dx-cx); if(!d) return false; const t=((cx-ax)*(dy-cy)-(cy-ay)*(dx-cx))/d, u=((cx-ax)*(by-ay)-(cy-ay)*(bx-ax))/d; return t>0&&t<1&&u>0&&u<1; };
   const onLot=b=>{ if(!ring) return false; if(BD.pip(b.c[0],b.c[1],ring)) return true; if(!inner) return false; const r=b.r, n=r.length/2, m=inner.length/2;
     for(let i=0;i<n;i++){ if(BD.pip(r[2*i],r[2*i+1],inner)) return true; const j=(i+1)%n; for(let p=0;p<m;p++){ const q=(p+1)%m; if(X(r[2*i],r[2*i+1],r[2*j],r[2*j+1],inner[2*p],inner[2*p+1],inner[2*q],inner[2*q+1])) return true; } } return false; };
-  const cE=new T.Color(C.edge);
+  const cE=new T.Color(C.edge), cB=new T.Color(C.bg);
   for(const id in S.tiles){ if(!id.startsWith(S.city+':')) continue; for(const b of S.tiles[id].bld){ if(b.f===3||siteB.has(b)||(isNew&&onLot(b))) continue;
       const d=Math.hypot(b.c[0]-site.c[0],b.c[1]-site.c[1]); if(d>RAD) continue; const h=Math.max(2,b.h||0), r=b.r, n=r.length/2;
-      const base=pos.length/3; faceStart.push(tri); const near=d<=NEAR; const op=near?0.30:d<900?0.16:0.09;
+      const base=pos.length/3; faceStart.push(tri); const near=d<=NEAR; const op=light3d()?(near?0.22:d<900?0.12:0.06):(near?0.30:d<900?0.16:0.09);
       for(let i=0;i<n;i++){ const x=r[2*i]-site.c[0], z=-(r[2*i+1]-site.c[1]); pos.push(x,0,z, x,h,z); }
       for(let i=0;i<n;i++){ const j=(i+1)%n; const a0=base+2*i, a1=a0+1, b0=base+2*j, b1=b0+1; idx.push(a0,b0,b1, a0,b1,a1); tri+=2; }
       const contour=[]; for(let i=0;i<n;i++) contour.push(new T.Vector2(r[2*i],r[2*i+1])); let tris=[]; try{ tris=T.ShapeUtils.triangulateShape(contour,[]); }catch(e){}
       for(const t of tris){ idx.push(base+2*t[0]+1,base+2*t[1]+1,base+2*t[2]+1); tri++; }
       const ls=lp.length/3;
       for(let i=0;i<n;i++){ const j=(i+1)%n; const x=r[2*i]-site.c[0], z=-(r[2*i+1]-site.c[1]), x2=r[2*j]-site.c[0], z2=-(r[2*j+1]-site.c[1]); lp.push(x,h,z, x2,h,z2); if(near||i%2===0) lp.push(x,0,z, x,h,z); }
-      const le=lp.length/3; for(let k=ls;k<le;k++) lc.push(cE.r*op,cE.g*op,cE.b*op);
+      const le=lp.length/3; for(let k=ls;k<le;k++) lc.push(cB.r+(cE.r-cB.r)*op,cB.g+(cE.g-cB.g)*op,cB.b+(cE.b-cB.b)*op);
       list.push({b,d,ls,le,op,h}); } }
   const g=new T.BufferGeometry(); g.setAttribute('position',new T.Float32BufferAttribute(pos,3)); g.setIndex(idx);
-  const mesh=new T.Mesh(g,new T.MeshBasicMaterial({color:C.face,polygonOffset:true,polygonOffsetFactor:1,polygonOffsetUnits:1}));
+  const mesh=new T.Mesh(g,light3d()?new T.MeshStandardMaterial({color:0xf6f5f2,roughness:1,metalness:0,flatShading:true,polygonOffset:true,polygonOffsetFactor:1,polygonOffsetUnits:1})
+                                   :new T.MeshBasicMaterial({color:C.face,polygonOffset:true,polygonOffsetFactor:1,polygonOffsetUnits:1}));
+  if(light3d()){ mesh.castShadow=true; mesh.receiveShadow=true; }
   const lg=new T.BufferGeometry(); lg.setAttribute('position',new T.Float32BufferAttribute(lp,3)); lg.setAttribute('color',new T.Float32BufferAttribute(lc,3));
   const lines=new T.LineSegments(lg,new T.LineBasicMaterial({vertexColors:true}));
   R.nbMesh=mesh; R.nbLines=lines; R.nbList=list; R.nbFaceStart=faceStart; R.nbBase=Float32Array.from(lc);
@@ -118,10 +127,24 @@ function snap(x,y){ let best=null; for(const nb of R.nbList){ const b=nb.b; cons
     if(BD.pip(x,y,b.r)) return nb; const d=Math.hypot(b.c[0]-x,b.c[1]-y); if(d<25&&(!best||d<best.dd)) best=Object.assign(nb,{dd:d}); } return best; }
 
 /* ---------- the data-centre model ---------- */
+/* ---------- equipment kit and envelope (29 Oct 2026) ---------- */
+const KITOF={'dry coolers':'dry','air-cooled chillers':'chill','hybrid coolers':'hybrid','cooling tower cells':'tower','standby generators':'genset'};
+function kitUnit(b){ const k=KITOF[b.name]; if(!k||!BD.kit) return null; const r=b.ring; if(!r||r.length<8) return null;
+  const p=i=>[r[2*i],r[2*i+1]], P0=p(0), P1=p(1), P2=p(2), e1=[P1[0]-P0[0],P1[1]-P0[1]], e2=[P2[0]-P1[0],P2[1]-P1[1]], l1=Math.hypot(...e1), l2=Math.hypot(...e2);
+  const along=l1>=l2?e1:e2, L=Math.max(l1,l2), W=Math.min(l1,l2); let cx=0,cy=0; const n=Math.min(4,r.length/2); for(let i=0;i<n;i++){ cx+=r[2*i]; cy+=r[2*i+1]; } cx/=n; cy/=n;
+  let g; try{ g=BD.kit.make(k); }catch(e){ return null; } const s=g.userData.spec;
+  g.scale.set(L/s.L,(b.h||s.H)/s.H,W/s.W); g.rotation.y=Math.atan2(along[1],along[0]); g.position.copy(V(cx,cy,b.base||0)); g.userData.box=b; return g; }
+function envelope(r,H,n){ const g=new T.Group(), fh=H/Math.max(1,n);
+  const face=prism(r,H,0,0xe9e6e1,C.acc,0.0,0.035); face.children[0].material.depthWrite=false; g.add(face);         // see-through faces
+  for(let i=0;i<=n;i++) g.add(ringLine(r,i*fh+0.02,i===n||i===0?C.acc:C.grey,i===n||i===0?2.5:1.6,i===n||i===0?0.85:0.45)); // dashed floor lines, roof and base in the accent
+  for(let i=0;i<r.length;i+=2) g.add(line([V(r[i],r[i+1],0),V(r[i],r[i+1],H)],C.acc,2.5,0.6));                               // dashed corners
+  return g; }
 function buildSite(site){
   const sc=R.scene; while(sc.children.length) sc.remove(sc.children[0]); lab.length=0; labels.innerHTML=''; R.ov=null;
   state={c:site.c, site}; const S=BD.S, sel=S.sel, A=S.answers, M=BD.model?BD.model():null; state.M=M;
-  sc.add(new T.GridHelper(RAD*2.2,88,0x232629,0x1d1f22));
+  applyTheme();
+  if(light3d()){ const gr=new T.Mesh(new T.PlaneGeometry(RAD*2.4,RAD*2.4),new T.MeshStandardMaterial({color:0xd9d7d0,roughness:1})); gr.rotation.x=-Math.PI/2; gr.position.y=-0.05; gr.receiveShadow=true; sc.add(gr); R.lights.forEach(l=>sc.add(l)); }
+  else sc.add(new T.GridHelper(RAD*2.2,88,0x232629,0x1d1f22));
   sc.add(buildNeighbours(site));
   const dc=new T.Group(); state.dc=dc; sc.add(dc);
   // the lot, the setbacks, loading, plant yard
@@ -135,13 +158,15 @@ function buildSite(site){
     if(A.extent==='part'){ const big=M.foot, rh=M.roofH||roof; const lvl={basement:-4,ground:0,upper:Math.max(4,Math.min(rh-8,rh*0.6)),roof:rh-0.5}[A.floor||'ground']; dc.add(prism(big,4,lvl,0x3a2626,C.acc,1)); } }
   else if(M&&M.foot&&M.footArea>5){ foot=M.foot; roof=M.H; const nF=M.nF[0];
     // equipment only (J.B., 16 Oct: "its not a massing tool"): no building; the floor the servers need is a flat outline, any shape
-    dc.add(ringLine(foot,0.2,C.grey,3,0.35)); const sf=M.serverFoot||foot; dc.add(ringLine(sf,0.25,C.acc,2,0.9)); dc.add(prism(sf,0.15,0,0x2a2224,C.acc,0.35,0.0)); foot=sf;
-    roof=0; state.equipOnly=true; state.hallZ=0.3; }
+    // the building as a dashed, see-through envelope (J.B., 28 Oct 2026): the form is not prescribed; the equipment is shown
+    dc.add(envelope(foot,M.H,nF)); const sf=M.serverFoot||foot; dc.add(ringLine(sf,0.25,C.acc,2,0.9)); foot=sf;
+    roof=M.H; state.envelope=true; state.hallZ=0.3; }
   else if(sel.pt){ foot=new Float64Array(circlePts(sel.pt[0],sel.pt[1],25,0,8).flatMap(v=>[v.x+site.c[0],-v.z+site.c[1]])); roof=18; dc.add(prism(foot,roof,0,0x221d1e,C.acc,1)); }
   state.foot=foot; state.roof=roof;
   // plant: generic units at the size and clearance the register gives; dashed outline = clearance
-  if(M&&M.plant){ const P=state.equipOnly?{...M.plant,boxes:M.plant.boxes.map(b=>b.kind==='roof'?{...b,base:0,atGrade:1}:b)}:M.plant; const grp={}; // no building drawn, so roof units sit on the ground plane rather than float at roof height
-    for(const b of P.boxes){ const col=b.name.indexOf('generator')>=0?C.grey:C.edge; dc.add(prism(b.ring,b.h,b.base,0x26292e,col,0.85)); dc.add(ringLine(b.clear,b.base+0.06,col,1.2,0.45)); (grp[b.name+'|'+b.kind]=grp[b.name+'|'+b.kind]||[]).push(b); }
+  if(M&&M.plant){ const P=M.plant; const grp={}; let lit=false;
+    for(const b of P.boxes){ const col=b.name.indexOf('generator')>=0?C.grey:C.edge; const u=kitUnit(b); if(u){ dc.add(u); lit=true; } else dc.add(prism(b.ring,b.h,b.base,0x26292e,col,0.85)); dc.add(ringLine(b.clear,b.base+0.06,col,1.2,0.45)); (grp[b.name+'|'+b.kind]=grp[b.name+'|'+b.kind]||[]).push(b); }
+    if(lit) R.lights.forEach(l=>sc.add(l));
     state.plantGroups=grp;
     // seen or hidden (J.B., 16 Oct): a screen around the roof plant, housings over each unit, or a louvred plant floor
     const roofB=P.boxes.filter(b=>b.kind==='roof'&&b.name.indexOf('generator')<0), vis=A.vis||'reveal';
@@ -157,16 +182,31 @@ function buildSite(site){
 function racksFor(M){ const A=BD.S.answers, mw=A.mw||M.mwSized||1, racks=Math.round(mw*1000/8); const floors=Math.max(1,M.Z.ground?M.nF[0]-1:M.nF[0]); const per=Math.min(900,Math.ceil(racks/floors));
   const F=M.F, foot=M.serverFoot||M.foot; const pts=[]; let n=0; const z0=state.hallZ||0.3;
   const [u0,u1,v0,v1]=(()=>{ let a=1e9,b=-1e9,c=1e9,d=-1e9; for(let i=0;i<foot.length;i+=2){ const [u,v]=F.toL(foot[i],foot[i+1]); a=Math.min(a,u); b=Math.max(b,u); c=Math.min(c,v); d=Math.max(d,v); } return [a,b,c,d]; })();
+  // rows: racks 1.2 m deep, back to back, 1.2 m contained aisles (Vertiv SmartAisle 1200 mm option) → a pair of rows every 3.6 m
   for(let v=v0+4; v<=v1-4-1.2 && n<per; v+=3.6) for(let u=u0+4; u<=u1-4-0.6 && n<per; u+=0.6){ const [x,y]=F.toW(u+0.3,v+0.6); if(!BD.pip(x,y,foot)) continue; pts.push([u,v]); n++; }
-  const lp=[]; const h=2.0; for(const [u,v] of pts){ const c=[[u,v],[u+0.6,v],[u+0.6,v+1.2],[u,v+1.2]].map(([a,b])=>F.toW(a,b));
-    for(let i=0;i<4;i++){ const p=c[i], q=c[(i+1)%4]; for(const z of [z0,z0+h]){ const A1=V(p[0],p[1],z), B1=V(q[0],q[1],z); lp.push(A1.x,A1.y,A1.z,B1.x,B1.y,B1.z); } } }
-  const g=new T.BufferGeometry(); g.setAttribute('position',new T.Float32BufferAttribute(lp,3));
-  const ls=new T.LineSegments(g,new T.LineBasicMaterial({color:C.mat,transparent:true,opacity:0.35})); state.dc.add(ls);
-  return {obj:ls,n:pts.length,per,racks,floors}; }
-
+  const s=BD.kit?BD.kit.SPEC.rack:{L:0.6,W:1.2,H:2.0};
+  const geo=new T.BoxGeometry(s.L*0.98,s.H,s.W*0.98); const mat=new T.MeshStandardMaterial({color:0x3a3d42,roughness:.8,flatShading:true,transparent:true,opacity:0.9});
+  const im=new T.InstancedMesh(geo,mat,Math.max(1,pts.length)); const m4=new T.Matrix4(), q=new T.Quaternion(), sc=new T.Vector3(1,1,1);
+  const ang=(()=>{ const a=F.toW(0,0), b=F.toW(1,0); return Math.atan2(b[1]-a[1],b[0]-a[0]); })(); q.setFromAxisAngle(new T.Vector3(0,1,0),ang);
+  pts.forEach(([u,v],k)=>{ const [x,y]=F.toW(u+0.3,v+0.6); m4.compose(V(x,y,z0+s.H/2),q,sc); im.setMatrixAt(k,m4); }); im.count=pts.length; state.dc.add(im);
+  if(R.lights&&!R.lights[0].parent) R.lights.forEach(l=>R.scene.add(l));
+  rooms(M,F,[u0,u1,v0,v1],z0,ang,mw);
+  return {obj:im,n:pts.length,per,racks,floors}; }
+/* the rooms' equipment, schematic arrangement (J.B., 29 Oct 2026: "yes" to showing inside). Counts from the sourced sizes per unit:
+   UPS 1 MW frames (Schneider Galaxy VX), Li-ion cabinets 4 per MW for about 5 min (Vertiv EnergyCore Li5), room air units 179 kW each
+   (Vertiv Liebert CW181) for air cooling or CDUs 1.516 MW each (Motivair MCDU-50) for liquid; spares as set up. Where they stand is not designed. */
+function rooms(M,F,bb,z0,ang,mw){ if(!BD.kit||!BD.eng.equip) return; const A=BD.S.answers, [u0,u1,v0,v1]=bb, E=BD.eng.equip(mw,A);
+  const floors=Math.max(1,M.Z&&M.Z.ground?M.nF[0]-1:M.nF[0]);
+  // a row of units along v, wrapping to the next row (rows given); returns how many were drawn
+  const row=(kind,count,rowsV,flip)=>{ let drawn=0; for(const v of rowsV){ let u=u0+2; while(drawn<count){ const g=BD.kit.make(kind), s=g.userData.spec; if(u+s.L>u1-2) break; const [x,y]=F.toW(u+s.L/2,v);
+      g.position.copy(V(x,y,z0)); g.rotation.y=ang+(flip?Math.PI:0); state.dc.add(g); drawn++; u+=s.L+0.15; } if(drawn>=count) break; } return drawn; };
+  // high end of each range is drawn (the most space it could take); register: ups_modules, battery_cabinets, room_cooling_units, cdu_units
+  const need={ups:E.ups,battery:E.batt[1],crah:Math.ceil(E.crah[1]/floors),cdu:Math.ceil(E.cdu[1]/floors)};
+  const got={ups:row('ups',need.ups,[v0+1.2]),battery:row('battery',need.battery,[v0+2.6]),crah:need.crah?row('crah',need.crah,[v1-1.5,v1-3.0],true):0,cdu:need.cdu?row('cdu',need.cdu,[v1-1.5,v1-3.0],true):0};
+  state.rooms={E,need,got,floors}; }
 /* ---------- overlays ---------- */
 function clearOverlay(){ if(R.ov) R.scene.remove(R.ov); R.ov=new T.Group(); R.scene.add(R.ov); R.ticks=[]; if(R.demoG){ R.scene.remove(R.demoG); R.demoG=null; } lab.splice(0); labels.innerHTML=''; resetTint(); R.onPick=null;
-  if(state.shell){ state.shell.children[0].material.opacity=0.55; } if(state.racks) state.racks.obj.material.opacity=0.35; }
+  if(state.shell){ state.shell.children[0].material.opacity=0.55; } if(state.racks) state.racks.obj.material.opacity=0.9; }
 function roofC(){ return state.foot?BD.centroid(state.foot):state.c; }
 function plantLabels(col){ const G=state.plantGroups||{}; for(const k in G){ const L=G[k], [name,where]=k.split('|'); const b=L[Math.floor(L.length/2)], c=BD.centroid(b.ring);
     const top=V(c[0],c[1],b.base+b.h), at=top.clone().add(new T.Vector3(0,9+(where==='roof'?4:0),0)); label(`${name} ×${L.length} · ${where}${b.atGrade?' (shown at grade)':''}`,at,col?hex(col):'#e9e6e1',{prio:6,from:top}); } }
@@ -185,7 +225,11 @@ function heightsNote(){ return BD.S.city==='van'?'Heights: City of Vancouver LiD
 
 function model(d){ plantLabels(); baseLabels(); const M=state.M, P=M&&M.plant;
   note((P&&P.miss&&P.miss.length?'Doesn\'t fit: '+P.miss.join('; ')+'. ':'')+heightsNote()+'. Neighbours drawn to 1.5 km.');
-  key(sw(C.acc,'the lot (grey dashed: what the zoning allows); red: the floor the servers need, any shape')+sw(C.grey,'setbacks (yards) and plant yard',true)+sw(C.edge,'plant, generic: solid = unit, dashed = clearance')+sw(C.mat,'loading spaces; racks inside')); }
+  key(sw(C.acc,'the lot; dashed red: the building envelope (not a design)')+sw(C.grey,'setbacks (yards) and plant yard',true)+sw(C.edge,'plant to makers\' sizes: solid = unit, dashed = clearance')+sw(C.mat,'loading spaces')+roomsKey()); }
+function roomsKey(){ const r=state.rooms; if(!r) return ''; const E=r.E, rg=a=>a[0]===a[1]?`${a[0]}`:`${a[0]}–${a[1]}`, gap=(k)=>r.got[k]<r.need[k]?` (${r.got[k]} drawn)`:'';
+  const L=[`racks ${rg(E.racks)}`,`UPS modules ${E.ups}${gap('ups')}`,`battery cabinets ${rg(E.batt)}${gap('battery')}`];
+  if(E.crah[1]) L.push(`room cooling units ${rg(E.crah)}${r.floors>1?`, about ${r.need.crah} a floor`:''}${gap('crah')}`); if(E.cdu[1]) L.push(`coolant units ${rg(E.cdu)}${gap('cdu')}`);
+  return `<div style="margin-top:4px">Inside, first hall floor of ${r.floors}${r.floors>1?' (the others alike)':''}: ${L.join(' · ')}. Arrangement schematic.</div>`; }
 const TYPE={housing:'Non-market housing',school:'School',campus:'University or college campus',care:'Care home',hospital:'Hospital',rec:'Recreation centre',hall:'Community league hall',pool:'Pool',arena:'Indoor arena',apartment:'Apartment building',office:'Office building',hotel:'Hotel',commercial:'Commercial building'};
 const TCOL={housing:C.city,apartment:C.city,office:C.heat,hotel:C.heat,commercial:C.heat,school:C.power,campus:C.power,care:C.senses,hospital:C.senses,rec:C.water,hall:C.water,pool:C.water,arena:C.mat};
 function heat(d){
@@ -274,7 +318,7 @@ function demo(kind){ if(!R||!state.M) return; const M=state.M, sel=BD.S.sel; if(
   const t0=performance.now(), loopMs=5200;
   const ease=x=>x<0?0:x>1?1:1-Math.pow(1-x,3);
   if((kind==='new'||kind==='share')&&M.foot){ const n=Math.max(1,M.nF?M.nF[0]:3), H=M.H||n*6, fh=H/n, data=kind==='share'?Math.max(1,Math.ceil((n-1)/2)):n, ground=kind==='share';
-    const fl=[]; for(let i=0;i<n;i++){ const isData=kind==='new'||(i>=(ground?1:0)&&i<(ground?1:0)+data); const p=prism(M.foot,fh*0.96,i*fh,isData?0x2a2224:0x23262a,isData?C.acc:C.grey,0.95,isData?0.5:0.35); p.visible=false; g.add(p); fl.push(p); }
+    const fl=[]; for(let i=0;i<n;i++){ const isData=kind==='new'||(i>=(ground?1:0)&&i<(ground?1:0)+data); const p=prism(M.foot,fh*0.96,i*fh,isData?0x2a2224:0x23262a,isData?C.acc:C.grey,0.95,isData?0.12:0.06); p.visible=false; g.add(p); fl.push(p); }
     if(kind==='share'){ const c=BD.centroid(M.foot); label('data-centre floors',V(c[0],c[1],fh*(ground?1:0)+fh*data*0.5),'#e39a93',{prio:9}); label(ground?'street use at grade · other uses above':'other uses above',V(c[0],c[1],H+6),'#9d9a94',{prio:8}); }
     else { const c=BD.centroid(M.foot); label(`a new building · ${n} storeys · ${H.toFixed(1)} m`,V(c[0],c[1],H+6),'#e39a93',{prio:9}); }
     R.ticks.push(now=>{ const t=((now-t0)%loopMs)/loopMs*1.6; fl.forEach((p,i)=>{ const k=ease((t*n-i)/1.1); p.visible=k>0.01; p.scale.set(1,Math.max(0.01,k),1); p.position.y=i*fh*(1-k)*0; }); }); }
@@ -288,8 +332,8 @@ function demo(kind){ if(!R||!state.M) return; const M=state.M, sel=BD.S.sel; if(
    so they no longer hide the site. Any drag stops the turning; it resumes after a few seconds untouched. */
 let idleT=null;
 function applyCard(){ if(!R) return; const on=!!R.card; R.ctl.autoRotate=on; R.ctl.autoRotateSpeed=0.55;
-  if(R.nbMesh){ const m=R.nbMesh.material; m.transparent=on; m.opacity=on?0.22:1; m.depthWrite=!on; m.needsUpdate=true; }
-  const fk=state.key+'|'+state.tab; if(on&&state.span&&!R.multi&&R.framed!==fk&&state.tab!=='heat'){ R.framed=fk; const sp=state.span*0.95, rf=state.roof||0; R.cam.position.set(sp*1.15,sp*2.1+rf*1.6,sp*1.35); R.ctl.target.set(0,rf*0.3,0); R.ctl.update(); } }
+  if(R.nbMesh){ const m=R.nbMesh.material; const see=on&&!light3d(); m.transparent=see; m.opacity=see?0.22:1; m.depthWrite=!see; m.needsUpdate=true; /* light: solid white massing, as in the spreads */ }
+  const fk=state.key+'|'+state.tab; if(on&&state.span&&!R.multi&&R.framed!==fk&&state.tab!=='heat'){ R.framed=fk; const sp=state.span*0.95, rf=state.roof||0; R.cam.position.set(sp*1.45,sp*0.95+rf*1.25,sp*1.65); R.ctl.target.set(0,rf*0.45,0); R.ctl.update(); } }
 function cardMode(on){ if(!R) return; R.card=!!on; if(!R.cardWired){ R.cardWired=true; R.ctl.addEventListener('start',()=>{ R.ctl.autoRotate=false; clearTimeout(idleT); }); R.ctl.addEventListener('end',()=>{ clearTimeout(idleT); idleT=setTimeout(()=>{ if(R.card) R.ctl.autoRotate=true; },6000); }); } applyCard(); }
 BD.scene3d={show,showOptions,hide,ensure,demo,cardMode,rig:()=>R /* camera access for scripted recordings (video, 20 Oct 2026) */,snap:(x,y)=>R&&R.nbList?snap(x,y):null,state:()=>state,isOpen:()=>!!wrap&&wrap.style.display!=='none'};
 BD.showModel=()=>{ if(!BD.S.sel) return Promise.resolve(); return show('model',{}).catch(e=>console.warn(e)); };
