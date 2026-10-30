@@ -19,22 +19,22 @@ STAGES = [
 
 # External inputs: what they are and where the tool gets them
 INPUTS = {
-    'parcel': ('Parcel', 'address → folio, lot, zoning, footprint, storeys', 'City open data (Vancouver property-tax report, 2009 footprints; Edmonton parcels); BCA extract', 80),
+    'parcel': ('Parcel', 'address → folio, lot, zoning, footprint, storeys; lot area from the outline (Edmonton record as a note), corrected to true degree lengths (+0.8% Van, +0.9% Edm; 30 Oct 2026)', 'City open data (Vancouver property-tax report, 2009 footprints; Edmonton parcels); BCA extract', 80),
     'cooling_type': ('Cooling type', 'air / glycol-dry cooler / chilled water / liquid', 'permits (public record), operator page (claim), site visit', 70),
     'weather': ('Weather file', 'CWEC typical year, hourly', 'ECCC CWEC 2020 (Vancouver Intl, Edmonton Intl)', 80),
     'plant_schedule': ('Plant on site', 'generators, chillers, dry coolers, transformers — what, where', 'permits, filed noise reports, site visit', 70),
-    'receivers': ('Receivers nearby', 'buildings and uses within reach', 'City energy report (4 buildings read), BCUC network decisions, Statistics Canada facility databases (to download), site visit', 60),
+    'receivers': ('Receivers nearby', 'buildings and uses within 3 km (receiver_radius; RVO reaches kept as reference only, 30 Oct 2026)', 'City energy report (4 buildings read), BCUC network decisions, Statistics Canada facility databases (to download), site visit', 60),
     'receiver_temp': ('Receiver temperature', '°C the receiver needs', 'receiver type (DH 70/35, floor heat 35–45, RAS 12–15, greenhouse 38–82)', 70),
     'receptors': ('Noise receptors', 'nearest dwellings and their distance', 'City parcels, site visit', 80),
     'lighting_plan': ('Lighting', 'exterior lighting as seen', 'site visit', 60),
-    'massing': ('Massing', 'height and footprint', '2009 footprints (Vancouver), parcels (Edmonton)', 80),
+    'massing': ('Massing', 'height and footprint; parts with no recorded height labelled, never shown as a height (30 Oct 2026)', '2009 footprints (Vancouver), parcels (Edmonton)', 80),
     'spare_cooling': ('Spare cooling', 'cooling capacity beyond IT load', 'operator claim or judged', 40),
     'area': ('Area considered', 'hectares around the parcel', 'tool radius setting', 100),
     'plot_ratio': ('Plot ratio', 'built area ÷ land area', 'parcels and footprints', 70),
     'start_case': ('What is being built', 'new or existing · whole or part · which floor · or a special case', 'asked first (J.B., 14 Oct); quick-path default: new, whole building', 100),
     'host_building': ('Host building', 'part of an existing building: owner or tenant, other uses, heating system, walls and orientation, room for heat rejection, electrical service, floor height, floor load', 'asked; "don\'t know" gives a labelled assumption', 50),
     'zone': ('Zone', 'zoning district and sub-area', 'Vancouver property-tax report zoning field; Edmonton zoning map (11,549 polygons); sub-area maps from the schedules', 80),
-    'flood_area': ('Floodplain', 'whether the parcel is in the designated floodplain', 'City of Vancouver designated-floodplain layer', 80),
+    'flood_area': ('Floodplain', 'whether, and what share of, the parcel is in the designated floodplain (grid over the whole lot, 30 Oct 2026)', 'City of Vancouver designated-floodplain layer', 80),
     'sewer_flow': ('Sewer flow', 'm³/day in the main past the parcel', 'sewer-mains layer gives type and material only; flow by request', 20),
 }
 
