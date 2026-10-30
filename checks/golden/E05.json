@@ -5,7 +5,7 @@
   "extent": "whole",
   "floor": "",
   "host": {},
-  "mw": 32.7,
+  "mw": 33.1,
   "foot": "max",
   "cover": 70,
   "hmode": "out",
@@ -21,7 +21,7 @@
  "sel": {
   "city": "edm",
   "id": "51053",
-  "lotArea": 8811,
+  "lotArea": 8826,
   "a": [
    "8803 STADIUM ROAD NW",
    "IM",
@@ -41,7 +41,7 @@
  },
  "facts": {
   "city": "edm",
-  "lot": 8811,
+  "lot": 8826,
   "zone": "IM",
   "env": {
    "fsr": [
@@ -66,7 +66,7 @@
      1477.9,
      1677.1
     ],
-    "a": 16.5
+    "a": 16.648912
    },
    {
     "h": 4.3,
@@ -76,7 +76,7 @@
      1526.4,
      1655.5
     ],
-    "a": 71.875
+    "a": 72.523668
    },
    {
     "h": 13.4,
@@ -86,7 +86,7 @@
      1509.833333,
      1632.277778
     ],
-    "a": 30.75
+    "a": 31.027517
    },
    {
     "h": 14.3,
@@ -96,7 +96,7 @@
      1513.555556,
      1637.666667
     ],
-    "a": 17.25
+    "a": 17.40568
    },
    {
     "h": 16.6,
@@ -106,7 +106,7 @@
      1494.75,
      1657.578947
     ],
-    "a": 869.5
+    "a": 877.347188
    },
    {
     "h": 16.1,
@@ -116,7 +116,7 @@
      1517.111111,
      1642.722222
     ],
-    "a": 21.375
+    "a": 21.567908
    }
   ],
   "status": {
@@ -130,9 +130,10 @@
     "edm_dc"
    ]
   },
-  "foot": 1027.25,
+  "foot": 1036.520873,
   "hmax": 16.6,
-  "plate": 869.5,
+  "hUnknown": false,
+  "plate": 877.347188,
   "c": [
    1511.8,
    1676.5
@@ -201,7 +202,7 @@
     "userSet": false
    },
    "city": "edm",
-   "lotArea": 8811,
+   "lotArea": 8826,
    "ring": "[ring 10]",
    "notes": [],
    "warn": [],
@@ -228,7 +229,7 @@
     "ht": 4,
     "aisle": 6.1,
     "cls": "loading space",
-    "basis": "2 loading spaces for 17,622 m² of floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site, with no backing onto streets or alleys (s. 5.80 subs. 7). Aisle: Vancouver's 6.1 m used as an assumption.",
+    "basis": "2 loading spaces for 17,652 m² of floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site, with no backing onto streets or alleys (s. 5.80 subs. 7). Aisle: Vancouver's 6.1 m used as an assumption.",
     "src": "edmZB580"
    },
    "loading": "[ring 8]",
@@ -253,10 +254,10 @@
     42.704086,
     -54.804086
    ],
-   "mwSized": 32.7,
+   "mwSized": 33.1,
    "plant": {
     "s": {
-     "Q": 50.685,
+     "Q": 51.305,
      "k": {
       "name": "air-cooled chillers",
       "L": 12.141,
@@ -800,13 +801,13 @@
      }
     ],
     "lines": [
-     "Sized for <b>33 MW</b> of servers: heat to reject ≈ 33 × PUE 1.55 = <b>50.7 MW</b> at peak.",
+     "Sized for <b>33 MW</b> of servers: heat to reject ≈ 33 × PUE 1.55 = <b>51.3 MW</b> at peak.",
      "35 air-cooled chillers carry it; with spares, <b>36</b>. Placed: 36 on the roof, 0 in the yard.",
      "Each unit about 12.141 × 2.362 m, 2.896 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
      "<span class=\"src\">Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit near…"
     ],
     "genLines": [
-     "26 generator sets of about 2 MW carry 50.7 MW; with spares, <b>27</b>. Placed: 0 on the roof, 27 in the yard.",
+     "26 generator sets of about 2 MW carry 51.3 MW; with spares, <b>27</b>. Placed: 0 on the roof, 27 in the yard.",
      "Each about 13.493 × 3.488 m, 4.777 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).",
      "<span class=\"src\">Standby diesel generator sets in Sound Level 2 enclosures with sub-base tanks. Basis units: Rehlko (Kohler) KD2000, 2,000 kW standby (data-centre continuous rating the same), 13.49 × 3.49 m, up to 4.78 m high (G5-626, rev 6/24); KD1000, 1,000 kW, 8.43 × 2.62 m, 3.71 m high with the 12 h tank (G6-154, 12/23). Both EPA Tier 2, cULus (UL 2200, CSA C22.2 No. 100); manufacturer claims. Chosen 29 Oct 2026 as the middle of Cat, Rehlko and Generac: 2 MW 18.5–38.4 m² per MW, 1 MW 19.5–22.4. 1 m clear around each set (Cummins application manual; not checked ?); 1.5 m from wall openings…"
     ],
@@ -834,7 +835,7 @@
    "footRect": "[ring 8]",
    "simpleMass": true,
    "serverFoot": "[ring 8]",
-   "footArea": 4414.623082
+   "footArea": 4454.464803
   },
   "envAssumed": false,
   "envH": 18,
@@ -848,8 +849,8 @@
    "ground": false
   },
   "hallS": [
-   6357.057238,
-   9535.585856
+   6414.429316,
+   9621.643974
   ],
   "hallL": null,
   "floors": 3,
@@ -858,54 +859,54 @@
    3
   ],
   "fpNote": "from the site setup: the most the zone allows, less setbacks, loading and the plant yard",
-  "fp": 4414.623082,
+  "fp": 4454.464803,
   "fpCalc": null,
   "indoorPlant": 0,
   "g": [
-   17622,
-   17622
+   17652,
+   17652
   ],
   "G": [
-   13243.869245,
-   13243.869245
+   13363.394409,
+   13363.394409
   ],
   "fullCover": "",
   "heightCut": true,
   "yardCut": true,
   "gross": [
-   13243.869245,
-   13243.869245
+   13363.394409,
+   13363.394409
   ],
-  "how": "lot 8,811 m² × floor-space ratio 2",
+  "how": "lot 8,826 m² × floor-space ratio 2",
   "hallGross": [
-   13243.869245,
-   13243.869245
+   13363.394409,
+   13363.394409
   ],
   "density": "typical",
   "mwS": [
-   10.090567,
-   32.784115
+   10.181634,
+   33.170011
   ],
   "mwL": null,
   "hall": [
-   6357.057238,
-   9535.585856
+   6414.429316,
+   9621.643974
   ],
   "mw": [
-   10.090567,
-   32.784115
+   10.181634,
+   33.170011
   ],
   "m2MW": [
    290,
    630
   ],
   "mwCheck": [
-   11.942172,
-   26.225484
+   12.04995,
+   26.462167
   ],
-  "mwTopRaw": 32.881331,
+  "mwTopRaw": 33.178083,
   "mwCapped": true,
-  "plantFor": 32.784115
+  "plantFor": 33.170011
  },
  "model": "[cycle]",
  "errors": []
