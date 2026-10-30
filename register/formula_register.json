@@ -1802,13 +1802,19 @@
    "Reserved capacity and batteries to the grid": {
     "readiness": "built_elsewhere",
     "provisional": false,
-    "basis": "Demand response: Google's contract with Indiana Michigan Power carries interruptible load and curtailment obligations (Indiana regulator, Cause 46276; operation not confirmed). UPS batteries: Digital Realty, nine Irish data centres in EirGrid frequency response (operator claim). Battery: Google St. Ghislain, Belgium, 2.75 MW proof of concept (vendor claim). None found in BC or Alberta. Precedent search 15 Oct 2026.",
+    "basis": "Demand response: Google's contract with Indiana Michigan Power carries interruptible load and curtailment obligations (Indiana regulator, Cause 46276; operation not confirmed). UPS batteries: Digital Realty, nine Irish data centres in EirGrid frequency response (operator claim). Battery: Google St. Ghislain, Belgium, 2.75 MW proof of concept (vendor claim). None found in BC or Alberta. Precedent search 15 Oct 2026. Added 30 Oct 2026 (check 1): UPS batteries in fast frequency markets — Basefarm, Norway, 1.5 MW (2018, vendor claim) and Telia Helsinki, several MW (2022, operator claim); workload cuts — Google in Belgium, Taiwan and Omaha (operator claim) and Oracle Phoenix, 25% for 3 h on 256 GPUs (company preprint); rules — Texas S.B. 6 (75 MW+), Ireland proposed decision 2025.",
     "sources": [
      "iurc46276",
      "enelxDLR",
      "fluenceStGhislain",
      "cfd",
-     "aeso_or"
+     "aeso_or",
+     "eatonBasefarm2018",
+     "fortumTelia2022",
+     "googleFlex2025",
+     "emeraldPhoenix2025",
+     "txSB6_2025",
+     "cruLEU2025"
     ],
     "rules": [
      {
@@ -2514,7 +2520,14 @@
    "bcbcGroupC": "rule",
    "jibcESSqrg2012": "government (training guide)",
    "eatonCA022021": "manufacturer claim",
-   "tourVAN3": "site visit (J.B.)"
+   "tourVAN3": "site visit (J.B.)",
+   "googleFlex2025": "operator claim",
+   "emeraldPhoenix2025": "preprint (company-authored)",
+   "epriDCFlexEU": "research institute (press release)",
+   "eatonBasefarm2018": "vendor claim",
+   "fortumTelia2022": "operator claim",
+   "txSB6_2025": "rule (legislative analysis)",
+   "cruLEU2025": "regulator (proposed decision)"
   },
   "source_check": {
    "mfrDryCooler": "agent",
@@ -2690,7 +2703,14 @@
    "bcbcGroupC": "claude",
    "jibcESSqrg2012": "claude",
    "eatonCA022021": "claude",
-   "tourVAN3": "claude"
+   "tourVAN3": "claude",
+   "googleFlex2025": "claude",
+   "emeraldPhoenix2025": "claude",
+   "epriDCFlexEU": "claude",
+   "eatonBasefarm2018": "claude",
+   "fortumTelia2022": "claude",
+   "txSB6_2025": "claude",
+   "cruLEU2025": "claude"
   },
   "research_pass": {
    "date": "16 Oct 2026",
@@ -3274,6 +3294,69 @@
      "date": "30 Oct 2026",
      "where": "J.B.'s notes in chat, 30 Oct 2026",
      "what": "transcribed as observations vs claims"
+    }
+   ],
+   "googleFlex2025": [
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "Google blog page",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "emeraldPhoenix2025": [
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "arXiv HTML",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "epriDCFlexEU": [
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "EPRI Europe page",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "eatonBasefarm2018": [
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "Eaton release page",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "fortumTelia2022": [
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "Fortum release page",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "txSB6_2025": [
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "Texas Legislature bill analysis page",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "cruLEU2025": [
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "CRU news page",
+     "what": "figures quoted in the source entry"
     }
    ]
   },
@@ -4308,7 +4391,7 @@
    "inputs": [
     "it_load_actual"
    ],
-   "coef": "Emerald AI Phoenix 25% for 3 h (preprint); Call for Demand curtailment ≥10%, 4 h, 36 events; 2026 Call: 15 applications, close to 800 MW requested; results expected after the government transition (BC Hydro, Oct 2026); Microsoft's Dublin UPS batteries answer EirGrid signals through Enel X (operator claim, 2022); Alberta grid alert 13 Jan 2024: 100–200 MW dropped after a public appeal (AESO); BC's 2026 Call makes curtailment an entry condition (power_allocation)",
+   "coef": "Emerald AI Phoenix 25% for 3 h (preprint); Call for Demand curtailment ≥10%, 4 h, 36 events; 2026 Call: 15 applications, close to 800 MW requested; results expected after the government transition (BC Hydro, Oct 2026); Microsoft's Dublin UPS batteries answer EirGrid signals through Enel X (operator claim, 2022); Alberta grid alert 13 Jan 2024: 100–200 MW dropped after a public appeal (AESO); BC's 2026 Call makes curtailment an entry condition (power_allocation); precedents (check 1, 30 Oct 2026 — mostly operator or vendor claims): workloads — Google shifted non-urgent compute in Belgium and Taiwan and cut ML load in 3 OPPD events, no MW given (googleFlex2025); Oracle Phoenix, 256 GPUs cut 25% for 3 h at two May 2025 peaks with zero SLA violations, flexible jobs only (emeraldPhoenix2025); UK DCFlex demo up to 30–40% within seconds, no site or MW (epriDCFlexEU); UPS batteries — Basefarm, Norway, 1.5 MW fast frequency response with Statnett, 2018 (eatonBasefarm2018); Telia Helsinki, several MW in Fingrid's FFR market, 2022 (fortumTelia2022); rules — Texas S.B. 6: loads of 75 MW and up must be curtailable and may be ordered onto their backup generators (txSB6_2025); Ireland proposed that new data centres bring generation or storage to match their demand (cruLEU2025, proposed). For a colocation building the UPS route is the one the operator controls (workload_control)",
    "sources": [
     "cfd",
     "bchEIC2026",
@@ -4318,7 +4401,14 @@
     "aesoDCupd2025",
     "alta117_2026",
     "msDublinUPS2022",
-    "aesoAlert2024"
+    "aesoAlert2024",
+    "googleFlex2025",
+    "emeraldPhoenix2025",
+    "epriDCFlexEU",
+    "eatonBasefarm2018",
+    "fortumTelia2022",
+    "txSB6_2025",
+    "cruLEU2025"
    ],
    "conf": 40,
    "status": "literature",
@@ -4376,6 +4466,55 @@
     {
      "id": "aesoAlert2024",
      "term": "added 30 Oct 2026",
+     "role": "check",
+     "conf": 70,
+     "verified": true
+    },
+    {
+     "id": "googleFlex2025",
+     "term": "precedent",
+     "role": "check",
+     "conf": 50,
+     "verified": true
+    },
+    {
+     "id": "emeraldPhoenix2025",
+     "term": "precedent",
+     "role": "check",
+     "conf": 70,
+     "verified": true
+    },
+    {
+     "id": "epriDCFlexEU",
+     "term": "precedent",
+     "role": "check",
+     "conf": 70,
+     "verified": true
+    },
+    {
+     "id": "eatonBasefarm2018",
+     "term": "precedent",
+     "role": "check",
+     "conf": 50,
+     "verified": true
+    },
+    {
+     "id": "fortumTelia2022",
+     "term": "precedent",
+     "role": "check",
+     "conf": 50,
+     "verified": true
+    },
+    {
+     "id": "txSB6_2025",
+     "term": "precedent",
+     "role": "check",
+     "conf": 70,
+     "verified": true
+    },
+    {
+     "id": "cruLEU2025",
+     "term": "precedent",
      "role": "check",
      "conf": 70,
      "verified": true
@@ -16927,7 +17066,14 @@
   "bcbcGroupC": "BCBC 2024 Div. A definitions (local copy; NBC 2020 has the same wording): 'Residential occupancy (Group C) means the occupancy or use of a building or part thereof by persons for whom sleeping accommodation is provided but who are not harboured for the purpose of receiving care or treatment and are not involuntarily detained.'",
   "jibcESSqrg2012": "JIBC, Emergency Social Services Quick Reference Guide (2012; standards attributed to the Public Health Agency of Canada Emergency Lodging Service, 2007), group lodging: '3.5 square metres … minimum sleeping area per person'; '5 toilets per 75-100 people, add 1 toilet for each additional 30 people'; '1 washbasin per 10 people, 1 shower per 50 people'; water about 2 L drinking, 12 L washing and 112 L sanitation per person per day. A 2012 guide: whether BC's current ESS standard is the same is not checked (?) — https://www.jibc.ca/sites/default/files/2020-05/EMD-ESS-Quick-Reference-Guide-20121102.pdf",
   "eatonCA022021": "Eaton, substation transformer catalogue CA022021EN (Jan 2020) Table 14.1-20, 2,500 kVA: H 2084.1 × W 2263.1 × D 2390.1 mm; radiators 'may be mounted on the front and back' (equipment study 29 Oct 2026, kit3d basis; not re-read tonight)",
-  "tourVAN3": "J.B., guided tour of Cologix VAN3, 2828 Natal St, Vancouver (about 2 hours, Oct 2026; her notes and three lobby photos). OBSERVED: no clear front, entrance hard to find; perimeter fence with a video-and-voice intercom at the gate; ramp up to a buzzed building door; vestibule with a guard behind glazing, an ID slot, screens and cameras; visitor pass, buzzed door into a lobby; client hot desks, private client offices, client kitchen and boardroom; washrooms with lockers and showers; a technicians' room with two desks; a POP room and meet-me room at the front right and another pair at the back left, behind scanner doors; a single-person security portal that weighed and measured her; a staff door with biometric and card; a first-floor hall on an 18 in raised floor reached by a ramp; three tenant enclosures with their own biometrics and cameras; 400 A wall panels; VESDA; a humidifier; a loading bay with two docks and a client delivery room; a freight elevator to a second-floor hall. GUIDE'S CLAIMS: anti-ram ('K') fence sunk about 9 ft; 24/7 guard; three tenants on that floor; a sensor on every rack reporting temperature and humidity to an outside monitoring company; the second POP is for redundancy; some clients work overnight; power export 'is not a thing'; generator testing the only give-back; 2N (Cologix's page says N+1); industry moving to liquid-to-chip cooling in a closed loop; data cabling mostly fibre now. One visit: observations, not measurements."
+  "tourVAN3": "J.B., guided tour of Cologix VAN3, 2828 Natal St, Vancouver (about 2 hours, Oct 2026; her notes and three lobby photos). OBSERVED: no clear front, entrance hard to find; perimeter fence with a video-and-voice intercom at the gate; ramp up to a buzzed building door; vestibule with a guard behind glazing, an ID slot, screens and cameras; visitor pass, buzzed door into a lobby; client hot desks, private client offices, client kitchen and boardroom; washrooms with lockers and showers; a technicians' room with two desks; a POP room and meet-me room at the front right and another pair at the back left, behind scanner doors; a single-person security portal that weighed and measured her; a staff door with biometric and card; a first-floor hall on an 18 in raised floor reached by a ramp; three tenant enclosures with their own biometrics and cameras; 400 A wall panels; VESDA; a humidifier; a loading bay with two docks and a client delivery room; a freight elevator to a second-floor hall. GUIDE'S CLAIMS: anti-ram ('K') fence sunk about 9 ft; 24/7 guard; three tenants on that floor; a sensor on every rack reporting temperature and humidity to an outside monitoring company; the second POP is for redundancy; some clients work overnight; power export 'is not a thing'; generator testing the only give-back; 2N (Cologix's page says N+1); industry moving to liquid-to-chip cooling in a closed loop; data cabling mostly fibre now. One visit: observations, not measurements.",
+  "googleFlex2025": "OPERATOR CLAIM: Google blog, 'How we're making data centers more flexible to benefit power grids' (M. Terrell, 4 Aug 2025): first data-centre demand response shifted non-urgent compute (e.g. processing a YouTube video) during grid stress with Centrica Energy and Elia (Belgium) and Taiwan Power Company; reduced ML workload demand in three grid events for Omaha Public Power District 'last year'; new agreements with Indiana Michigan Power (Fort Wayne) and TVA; no MW or hours given; flexibility 'early' and only at some locations; Search, Maps and some Cloud customers limit it — https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/how-were-making-data-centers-more-flexible-to-benefit-power-grids/",
+  "emeraldPhoenix2025": "Colangelo, Coskun et al. (Emerald AI, NVIDIA, Salt River Project, EPRI), 'Turning AI Data Centers into Grid-Interactive Assets: Results from a Field Demonstration in Phoenix, Arizona', arXiv 2507.00909v1 (1 Jul 2025; company-authored preprint): Oracle Phoenix region, 256 NVIDIA A100 GPUs; '25% reduction in cluster power usage for three hours during peak grid events' on 1 May (APS peak) and 3 May 2025 (SRP peak), 15-minute ramps; zero SLA violations reported; only batch training, fine-tuning and some inference slowed or paused, real-time serving untouched; one cluster, no MW given; frequency regulation not tested — https://arxiv.org/html/2507.00909v1",
+  "epriDCFlexEU": "EPRI Europe press release 'DCFlex: Momentum Builds Across Europe' (undated page ?): UK's first live DCFlex demonstration with National Grid, Nebius, Kraken, Emerald AI and NVIDIA cut load 'up to 30–40% within seconds' 'without disrupting critical workloads'; ESB joined; no site, date or MW given (?) — https://europe.epri.com/press-releases/dcflex-momentum-builds-across-europe",
+  "eatonBasefarm2018": "VENDOR CLAIM: Eaton news release 7 Nov 2018, UPS-as-a-Reserve pilot: Basefarm (Norwegian data-centre company), project led by Statnett with Fortum, completed Q3 2018; 'the UPSs were now capable of providing 1.5 MW of capacity' for Fast Frequency Response; UPSs can reduce the data centre's demand 'and even return power to the grid' — https://www.eaton.com/kr/ko-kr/company/news-insights/news-releases/2018/UPSasR-pilot-Norway.html",
+  "fortumTelia2022": "OPERATOR CLAIM: Fortum release 18 Jan 2022, Fortum and Telia agreement: Telia's Helsinki Data Center UPS systems (ABB) take part in grid balancing; the data centre 'has contributed several megawatts of capacity to Fingrid's Fast Frequency Reserve (FFR) market as part of the Fortum Spring's virtual battery'; batteries still carry the load until generators start in an outage — https://www.fortum.com/media/2022/01/fortum-and-telia-agree-new-data-center-connection-electricity-market",
+  "txSB6_2025": "Texas S.B. 6 (89th Legislature), Senate Research Center bill analysis, enrolled version (5 Aug 2025): PUC to set a large-load threshold of 75 MW (s. 37.0561(c)); large loads disclose on-site backup generation, and ERCOT may direct them to 'deploy the customer's on-site backup generating facilities or curtail load' (s. 37.0561(e)); transmission-voltage loads must have curtailment capability before interconnection, and ERCOT must 'competitively procure demand reductions from large load customers with a demand of at least 75 megawatts' (s. 39.170) — read from the analysis, not the enrolled bill text (?) — https://capitol.texas.gov/tlodocs/89R/analysis/html/SB00006F.htm",
+  "cruLEU2025": "Commission for Regulation of Utilities (Ireland), news 'New Electricity Connection Policy for Data Centres' (18 Feb 2025; PROPOSED decision, comments to 4 Apr 2025): new data centres 'will be required to provide generation and/or storage capacity to match the requested data centre demand capacity', on site or nearby, taking part in the electricity market; annual reporting on renewable use and emissions; whether and how it was finalised: not read (?) — https://www.cru.ie/about-us/news/new-electricity-connection-policy-for-data-centre/"
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ (UCA default rates, ATCO Gas area); ATCO Gas North Mid Use variable delivery $1.045/GJ (ATCO Gas North Rate Schedules, p. 11, eff. 1 Jan 2026; riders T $1.289/GJ and L $0.087/GJ not included) → (1.045 + 1.458) × 3.6 ÷ 0.85 boiler efficiency ≈ $10.6/MWh heat at the October rate (our arithmetic; the tool uses the 12-month mean commodity, ≈ $13/MWh) — https://www.ucahelps.alberta.ca/regulated-rates.aspx ; https://gas.atco.com/content/dam/web/for-home/natural-gas/natural-gas-north-rate-schedule.pdf",
