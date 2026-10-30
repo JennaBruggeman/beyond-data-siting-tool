@@ -1,0 +1,1364 @@
+{
+ "meta": {
+  "built": "2026-10-30",
+  "script": "checks/input_check/build_input_check.py",
+  "assumptions": [
+   "Lot geometry: Vancouver = City parcel polygons sharing the tax coordinate, unioned; Edmonton = Alberta title lot(s) (EPSB copy) containing the City assessment point.",
+   "Projections: Vancouver EPSG:26910 (NAD83 UTM 10N); Edmonton EPSG:3776 (NAD83 3TM 114). Geodesic area given as a cross-check.",
+   "A building counts as on the lot if at least 50% of its footprint lies inside the lot.",
+   "Receiver reach: 3,000 m straight line from the lot boundary (register receiver_radius); no per-type reach applied.",
+   "Noise receptor = nearest dwelling: Vancouver residential-zoned parcel (zoning_class), Edmonton residential assessment class; neither file states dwelling use directly.",
+   "Weather threshold: dry-bulb <= 8.0 °C inclusive (register: \"only at <= 8 °C outdoors\").",
+   "Floodplain answer uses the \"Designated Floodplain (FCL 4.6m)\" layer only; other layers reported beside it."
+  ],
+  "data_notes": [
+   "V09: parcel-file area_m2 7791.2 vs EPSG:26910 7845.5 (ratio 0.9931).",
+   "CLARK: parcel-file area_m2 5844.7 vs EPSG:26910 5885.1 (ratio 0.9931).",
+   "V339: parcel-file area_m2 4454.9 vs EPSG:26910 4485.1 (ratio 0.9933).",
+   "HAST: parcel-file area_m2 6224.6 vs EPSG:26910 6275.4 (ratio 0.9919).",
+   "Vancouver parcel-file area_m2 runs a steady ~0.7% below the UTM and geodesic areas on all four lots; the ratio matches an equirectangular projection using 110,540 m per degree of latitude (the equator value; ~111,210 m at 49.25° N). make_tiles.py uses that constant for both cities, so tool distances and areas measured north–south would be ~0.6% short. Edmonton City lot_size_m2 / parcel_area_m2 agree with the title-lot geodesic area within 0.2%.",
+   "Vancouver 2009 footprint area_m2 is per building (bldgid), not per polygon: multi-part buildings repeat the whole-building area on each part (e.g. 555 W Hastings parts 162924 / 161714 carry 11,907 m²). Areas here are measured from each polygon.",
+   "Edmonton rooflines height_est_m disagrees with the City 3D buildings: 8803 Stadium Rd est. 4.0 m vs measured 16.6 m; 12603 123 St est. 20.0 m vs 9.3 m.",
+   "No Vancouver zoning-district polygon layer, no Edmonton floodplain layer, and no sewer-main or sewer-flow file are in data/.",
+   "CWEC files carry the header format \"CWEC2011\" while the register calls them the CWEC 2020 edition; the year column spans 2000–2017, consistent with the 2020 edition.",
+   "Noise receptors for downtown lots: the residential-zone proxy puts 555 W Hastings 934 m from a dwelling, but strata parcels in CD-1/DD zones lie ~60 m away; a zone-based receptor rule understates downtown dwellings."
+  ],
+  "crs": {
+   "van": "EPSG:26910",
+   "edm": "EPSG:3776"
+  }
+ },
+ "lots": {
+  "V09": {
+   "_lot": {
+    "label": "275 1st Ave E",
+    "city": "van",
+    "parcel_id": "63819363"
+   },
+   "1_lot_area_m2": {
+    "value": 7845.5,
+    "how": "1 parcel polygon(s) with tax_coord 63819363, unioned, projected to EPSG:26910 (NAD83 UTM 10N), planar area. Geodesic (GRS80) check: 7851.7 m². Attribute area_m2 in the joined parcel file: [7791.2] (sum 7791.2). The 2026 tax report itself states no lot area.",
+    "data_file": "data/vancouver_parcels_2026.geojson; data/raw/van/property-tax-report.csv"
+   },
+   "2_zone": {
+    "value": "I-3",
+    "how": "Raw 2026 property-tax report, LAND_COORDINATE 63819363: ZONING_DISTRICT ['I-3'], ZONING_CLASSIFICATION ['Industrial'], 1 record(s); joined parcel file says ['I-3']. Independent zoning-map check NOT possible: no Vancouver zoning-district polygon layer is in data/ (the parcel file's zoning is the same tax-report field joined on).",
+    "data_file": "data/raw/van/property-tax-report.csv; data/vancouver_parcels_2026.geojson"
+   },
+   "3_buildings": {
+    "value": {
+     "count_2009": 5,
+     "footprints_m2": [
+      91.5,
+      388.7,
+      283.6,
+      1198.5,
+      844.2
+     ],
+     "total_footprint_m2": 2806.5,
+     "max_hgt_agl_m": 8.87,
+     "max_max_ht_m": 17.41,
+     "lidar2022_gone_since_2009": [],
+     "lidar2022_new_outlines": [
+      {
+       "p90": 17.6,
+       "max": 22.7,
+       "area_m2": 1713
+      },
+      {
+       "p90": 12.5,
+       "max": 13.7,
+       "area_m2": 212
+      }
+     ],
+     "straddling_lot_line": [
+      {
+       "id": 169903,
+       "area_m2_attr": 2341.0,
+       "area_m2_proj": 735.8,
+       "share_on_lot": 0.0,
+       "hgt_agl": 6.57,
+       "max_ht": 9.36,
+       "lidar2022": {
+        "p90": 6.5,
+        "max": 10.6,
+        "share_still_built": 0.98
+       }
+      }
+     ],
+     "detail": [
+      {
+       "id": 169915,
+       "area_m2_attr": 2341.0,
+       "area_m2_proj": 91.5,
+       "share_on_lot": 1.0,
+       "hgt_agl": 6.36,
+       "max_ht": 9.36,
+       "lidar2022": {
+        "p90": 6.3,
+        "max": 9.3,
+        "share_still_built": 1.0
+       }
+      },
+      {
+       "id": 169914,
+       "area_m2_attr": 2341.0,
+       "area_m2_proj": 388.7,
+       "share_on_lot": 1.0,
+       "hgt_agl": 6.78,
+       "max_ht": 9.36,
+       "lidar2022": {
+        "p90": 6.4,
+        "max": 9.1,
+        "share_still_built": 1.0
+       }
+      },
+      {
+       "id": 168293,
+       "area_m2_attr": 2341.0,
+       "area_m2_proj": 283.6,
+       "share_on_lot": 1.0,
+       "hgt_agl": 6.62,
+       "max_ht": 9.36,
+       "lidar2022": {
+        "p90": 7.4,
+        "max": 8.0,
+        "share_still_built": 1.0
+       }
+      },
+      {
+       "id": 168436,
+       "area_m2_attr": 1197.5,
+       "area_m2_proj": 1198.5,
+       "share_on_lot": 1.0,
+       "hgt_agl": 7.74,
+       "max_ht": 17.41,
+       "lidar2022": {
+        "p90": 7.2,
+        "max": 8.4,
+        "share_still_built": 0.99
+       }
+      },
+      {
+       "id": 168294,
+       "area_m2_attr": 2341.0,
+       "area_m2_proj": 844.2,
+       "share_on_lot": 1.0,
+       "hgt_agl": 8.87,
+       "max_ht": 9.36,
+       "lidar2022": {
+        "p90": 8.9,
+        "max": 10.8,
+        "share_still_built": 0.99
+       }
+      }
+     ]
+    },
+    "how": "City 2009 footprints projected to EPSG:26910; a footprint counts as on the lot if >= 50% of its area lies inside the lot (assumption); hgt_agl and max_ht are the file's fields (m). LiDAR 2022 cross-check from data/lidar2022 (90th-percentile and max building height; share_still_built < 0.1 read as demolished). New LiDAR outlines counted if their representative point is on the lot.",
+    "data_file": "data/vancouver_footprints_2009.geojson; data/lidar2022/*.json"
+   },
+   "4_floodplain": {
+    "value": "partly",
+    "how": "Share of the lot (EPSG:26910) inside each layer: {'Fraser Risk Today 1/500 Storm': 0.0, 'Still Creek Floodplain': 0.0, 'Wave Effect Zone': 0.0, 'Designated Floodplain (FCL 4.6m)': 0.482}. Answer refers to \"Designated Floodplain (FCL 4.6m)\"; the other layers (Still Creek, wave effect zone, Fraser risk today) are shown beside it.",
+    "data_file": "data/vancouver_designated_floodplain.csv"
+   },
+   "5_sewer_flow_m3_day": {
+    "value": "not derivable",
+    "how": "No sewer-main or sewer-flow data file exists in data/ or tool/ (searched for sewer/sanitary/wastewater/main). The register (sewer_flow, conf 20) says the sewer-mains layer gives type and material only and flow is by request to the City.",
+    "data_file": "—"
+   },
+   "7_receivers_within_3km": {
+    "value": {
+     "count": 1082,
+     "count_off_lot": 1081,
+     "by_type": {
+      "housing": 396,
+      "rec": 13,
+      "hospital": 4,
+      "school": 94,
+      "campus": 6,
+      "care": 33,
+      "office": 64,
+      "commercial": 251,
+      "apartment": 208,
+      "hotel": 13
+     },
+     "on_lot": [
+      {
+       "t": "commercial",
+       "n": "275 1St Ave E"
+      }
+     ],
+     "nearest_off_lot": {
+      "name": "Vancouver Detoxification Centre",
+      "type": "care",
+      "src": "bcCare",
+      "dist_edge_m": 85.1,
+      "dist_centroid_m": 145.7
+     },
+     "count_by_centroid": 1070,
+     "heat_network_outlines_dist_m": {
+      "van_creative_downtown_citymap.geojson": 1184.0,
+      "van_creative_southdowntown_citymap.geojson": 2385.0,
+      "van_neu_9552_traced.geojson": 0.0,
+      "van_river_district_approx.geojson": 8022.0,
+      "van_river_district_citymap.geojson": 8028.0
+     }
+    },
+    "how": "Receiver points in tool/receivers_van.json (1842 records), projected to EPSG:26910; straight-line distance from the lot boundary (0 if on the lot) ≤ 3,000 m, the register's receiver_radius (\"search to 3 km in a straight line\"). Per-type reaches (RVO 1.0–2.1 km) are retired for searching (19 Oct 2026) and not applied. count_by_centroid uses the lot centroid instead. Network outlines (data/networks) given as distance only (0 = lot inside).",
+    "data_file": "tool/receivers_van.json; data/networks/*.geojson"
+   },
+   "8_nearest_receptor_m": {
+    "value": 200.8,
+    "how": "Nearest parcel zoned residential (zoning_class Residential / Residential Inclusive / Residential Rental) in the 2026 parcel file: 396 2ND AVE E (R5-3), edge-to-edge in EPSG:26910. ASSUMPTION: a residentially zoned parcel stands for a dwelling; dwellings in commercial, CD-1, DD or industrial zones are missed. Cross-check, nearest STRATA parcel in a non-residential zone (often condos, use not stated): 336 1ST AVE E (IC-3) at 30.5 m. Residential-zoned parcels within 1.5 km (AUC receptor reach): 2939.",
+    "data_file": "data/vancouver_parcels_2026.geojson"
+   },
+   "9_coverage_and_plot_ratio": {
+    "value": {
+     "site_coverage": 0.358,
+     "plot_ratio": "not derivable without a storey count"
+    },
+    "how": "site coverage = 2009 footprints on lot ÷ lot area (EPSG:26910). Plot ratio needs floor area: the tax report has none; footprint × storeys needs an assumed storey height (the register's 3.5–4.5 m) — not applied here.",
+    "data_file": "data/vancouver_footprints_2009.geojson"
+   },
+   "6_weather": {
+    "value": {
+     "hours_le_8C": 3284,
+     "hours_lt_8C": 3220,
+     "annual_mean_C": 10.58,
+     "hdd18_hourly": 2810.0,
+     "min_C": -5.8,
+     "max_C": 25.6,
+     "hours": 8760
+    },
+    "how": "EPW field 7 (dry-bulb °C), 8760 hourly rows; hours with T <= 8.0 °C (and < 8.0 shown). HDD18 = Σ max(0, 18 − T) ÷ 24. Header: \"LOCATION,VANCOUVER INTL A,BC,CAN,CWEC2011,718920,49.19,-123.18,-8.0,4.3\". Year column in the rows: {'2000': 672, '2001': 744, '2002': 720, '2006': 744, '2009': 744, '2011': 744, '2013': 720, '2015': 744, '2016': 1464, '2017': 1464}. Sanity check: VANCOUVER INTERNATIONAL (AIRPORT) 1991–2020 normal annual daily average 10.5 °C (normals station as named in the file; for Edmonton it is not confirmed to be the same station as the Edmonton Intl CWEC file).",
+    "data_file": "data/51376785-CAN_BC_VANCOUVER-INTL-A_1108395_CWEC.epw; data/en_1991-2020_Normals_BC_VANCOUVER_INTERNATIONAL_AIRPORT.csv"
+   },
+   "10_not_from_lot_data": {
+    "value": "not derivable from lot data",
+    "how": "start_case: asked of the user (quick-path default: new, whole building); host_building: asked; cooling_type: permits / operator / site visit; plant_schedule: permits, noise reports, site visit; spare_cooling: operator claim or judged; lighting_plan: site visit; receiver_temp: set by receiver type, not by lot data; area: tool radius setting",
+    "data_file": "—"
+   }
+  },
+  "E05": {
+   "_lot": {
+    "label": "8803 Stadium Rd NW",
+    "city": "edm",
+    "parcel_id": "51053"
+   },
+   "1_lot_area_m2": {
+    "value": 8802.5,
+    "how": "Alberta title-mapping lot(s) (EPSB copy, Altalis, current to 1 Sep 2025) containing the City assessment point of parcel_point_id 51053 (lot pid [3148955]), projected to EPSG:3776 (3TM 114), planar area. Geodesic (GRS80) check: 8804.0 m². City attributes: lot_size_m2 ['8,811.637'], parcel_area_m2 ['8811.4'] (1 assessment account(s): ['3878709']; legal \"Plan: 155HW  Block: 12  Lot: 2\").",
+    "data_file": "data/raw/edm/lots/edmonton_lots_epsb.json; data/edmonton_properties_2026.csv"
+   },
+   "2_zone": {
+    "value": "IM",
+    "how": "Assessment record zoning field ['IM'] (zoning_source record, zone_from_map IM). Independently, the City zoning map (12 Oct 2026) polygon holding the assessment point: ['IM']; share of the title lot in each zone: {'BE': 0.0, 'IM': 1.0}.",
+    "data_file": "data/edmonton_properties_2026.csv; data/edmonton_zoning.geojson"
+   },
+   "4_floodplain": {
+    "value": "not derivable",
+    "how": "No Edmonton floodplain layer is in data/ (the register names only the City of Vancouver designated-floodplain layer).",
+    "data_file": "—"
+   },
+   "3_buildings": {
+    "value": {
+     "count": 6,
+     "footprints_m2": [
+      878.0,
+      34.8,
+      18.2,
+      22.8,
+      72.7,
+      15.5
+     ],
+     "total_footprint_m2": 1042.0,
+     "max_height_3d_measured_m": 16.6,
+     "max_height_estimate_m": 4.0,
+     "parts_3d_on_lot": 6,
+     "detail": [
+      {
+       "id": NaN,
+       "footprint_attr": 875.2,
+       "footprint_proj": 878.0,
+       "share_on_lot": 1.0,
+       "height_est_m": 4.0,
+       "storeys_est": 1,
+       "height_3d_m": 16.6,
+       "n_3d_parts": 1
+      },
+      {
+       "id": NaN,
+       "footprint_attr": 34.7,
+       "footprint_proj": 34.8,
+       "share_on_lot": 1.0,
+       "height_est_m": 4.0,
+       "storeys_est": 1,
+       "height_3d_m": 13.4,
+       "n_3d_parts": 1
+      },
+      {
+       "id": NaN,
+       "footprint_attr": 18.2,
+       "footprint_proj": 18.2,
+       "share_on_lot": 1.0,
+       "height_est_m": 4.0,
+       "storeys_est": 1,
+       "height_3d_m": 14.3,
+       "n_3d_parts": 1
+      },
+      {
+       "id": NaN,
+       "footprint_attr": 22.8,
+       "footprint_proj": 22.8,
+       "share_on_lot": 1.0,
+       "height_est_m": 4.0,
+       "storeys_est": 1,
+       "height_3d_m": 16.1,
+       "n_3d_parts": 1
+      },
+      {
+       "id": NaN,
+       "footprint_attr": 72.6,
+       "footprint_proj": 72.7,
+       "share_on_lot": 1.0,
+       "height_est_m": 4.0,
+       "storeys_est": 1,
+       "height_3d_m": 4.3,
+       "n_3d_parts": 1
+      },
+      {
+       "id": NaN,
+       "footprint_attr": 15.5,
+       "footprint_proj": 15.5,
+       "share_on_lot": 1.0,
+       "height_est_m": 4.0,
+       "storeys_est": 1,
+       "height_3d_m": 2.8,
+       "n_3d_parts": 1
+      }
+     ]
+    },
+    "how": "City rooflines (2019) projected to EPSG:3776; footprint on the lot if >= 50% inside (assumption). Two heights: height_est_m is the file's ESTIMATE (assessed gross area ÷ footprint × 4 m, not measured); height_3d_m is measured here from the City 3D buildings (EPSG:3776): highest vertex − lowest vertex of multipatch parts whose vertex centroid falls inside the footprint (parts with base elevation <= 500 m skipped as artefacts).",
+    "data_file": "data/edmonton_rooflines_est.geojson; data/raw/edm/3d/3dBuildings.gdb"
+   },
+   "5_sewer_flow_m3_day": {
+    "value": "not derivable",
+    "how": "No sewer-main or sewer-flow data file exists in data/ or tool/ (searched for sewer/sanitary/wastewater/main). The register (sewer_flow, conf 20) says the sewer-mains layer gives type and material only and flow is by request to the City.",
+    "data_file": "—"
+   },
+   "7_receivers_within_3km": {
+    "value": {
+     "count": 267,
+     "count_off_lot": 267,
+     "by_type": {
+      "pool": 2,
+      "arena": 3,
+      "hall": 14,
+      "rec": 3,
+      "hospital": 2,
+      "care": 24,
+      "school": 35,
+      "campus": 3,
+      "commercial": 124,
+      "apartment": 57
+     },
+     "on_lot": [],
+     "nearest_off_lot": {
+      "name": "Commonwealth Community Recreation Centre",
+      "type": "rec",
+      "src": "odsrf",
+      "dist_edge_m": 216.6,
+      "dist_centroid_m": 285.2
+     },
+     "count_by_centroid": 258,
+     "heat_network_outlines_dist_m": {
+      "edm_blatchford_hull.geojson": 2256.0,
+      "edm_dde_phase1_1a_citymap.geojson": 1225.0,
+      "edm_dde_phases2_4_citymap.geojson": 851.0
+     }
+    },
+    "how": "Receiver points in tool/receivers_edm.json (1623 records), projected to EPSG:3776; straight-line distance from the lot boundary (0 if on the lot) ≤ 3,000 m, the register's receiver_radius (\"search to 3 km in a straight line\"). Per-type reaches (RVO 1.0–2.1 km) are retired for searching (19 Oct 2026) and not applied. count_by_centroid uses the lot centroid instead. Network outlines (data/networks) given as distance only (0 = lot inside).",
+    "data_file": "tool/receivers_edm.json; data/networks/*.geojson"
+   },
+   "8_nearest_receptor_m": {
+    "value": 27.6,
+    "how": "Nearest assessment record with a residential class (RESIDENTIAL / OTHER RESIDENTIAL in class1–3): 10741 92 STREET NW (RESIDENTIAL); distance from the subject title lot to that record's title lot, edge to edge, EPSG:3776 (lot found); to the assessment point itself 43.9 m. ASSUMPTION: a residential assessment class stands for a dwelling. Residential records within 1.5 km (AUC receptor reach): 13441.",
+    "data_file": "data/edmonton_properties_2026.csv; data/raw/edm/lots/edmonton_lots_epsb.json"
+   },
+   "9_coverage_and_plot_ratio": {
+    "value": {
+     "site_coverage": 0.118,
+     "plot_ratio_assessed_gross": 0.1,
+     "gross_area_m2": 877.162
+    },
+    "how": "site coverage = footprints on lot ÷ lot area (both EPSG:3776); plot ratio = assessed gross_area_m2 (City record, all accounts) ÷ lot area.",
+    "data_file": "data/edmonton_properties_2026.csv"
+   },
+   "6_weather": {
+    "value": {
+     "hours_le_8C": 5522,
+     "hours_lt_8C": 5496,
+     "annual_mean_C": 3.3,
+     "hdd18_hourly": 5514.0,
+     "min_C": -32.5,
+     "max_C": 29.0,
+     "hours": 8760
+    },
+    "how": "EPW field 7 (dry-bulb °C), 8760 hourly rows; hours with T <= 8.0 °C (and < 8.0 shown). HDD18 = Σ max(0, 18 − T) ÷ 24. Header: \"LOCATION,EDMONTON INTL A,AB,CAN,CWEC2011,711230,53.31,-113.58,-7.0,723.3\". Year column in the rows: {'2000': 744, '2003': 744, '2005': 672, '2007': 1464, '2010': 720, '2012': 1464, '2015': 744, '2016': 720, '2017': 1488}. Sanity check: EDMONTON (AIRPORT) 1991–2020 normal annual daily average 2.4 °C (normals station as named in the file; for Edmonton it is not confirmed to be the same station as the Edmonton Intl CWEC file).",
+    "data_file": "data/effbc917-CAN_AB_EDMONTON-INTL-A_3012216_CWEC.epw; data/en_1991-2020_Normals_AB_EDMONTON_AIRPORT.csv"
+   },
+   "10_not_from_lot_data": {
+    "value": "not derivable from lot data",
+    "how": "start_case: asked of the user (quick-path default: new, whole building); host_building: asked; cooling_type: permits / operator / site visit; plant_schedule: permits, noise reports, site visit; spare_cooling: operator claim or judged; lighting_plan: site visit; receiver_temp: set by receiver type, not by lot data; area: tool radius setting",
+    "data_file": "—"
+   }
+  },
+  "CLARK": {
+   "_lot": {
+    "label": "1425 Clark Dr",
+    "city": "van",
+    "parcel_id": "23060741"
+   },
+   "1_lot_area_m2": {
+    "value": 5885.1,
+    "how": "1 parcel polygon(s) with tax_coord 23060741, unioned, projected to EPSG:26910 (NAD83 UTM 10N), planar area. Geodesic (GRS80) check: 5889.8 m². Attribute area_m2 in the joined parcel file: [5844.7] (sum 5844.7). The 2026 tax report itself states no lot area.",
+    "data_file": "data/vancouver_parcels_2026.geojson; data/raw/van/property-tax-report.csv"
+   },
+   "2_zone": {
+    "value": "I-2",
+    "how": "Raw 2026 property-tax report, LAND_COORDINATE 23060741: ZONING_DISTRICT ['I-2'], ZONING_CLASSIFICATION ['Industrial'], 1 record(s); joined parcel file says ['I-2']. Independent zoning-map check NOT possible: no Vancouver zoning-district polygon layer is in data/ (the parcel file's zoning is the same tax-report field joined on).",
+    "data_file": "data/raw/van/property-tax-report.csv; data/vancouver_parcels_2026.geojson"
+   },
+   "3_buildings": {
+    "value": {
+     "count_2009": 3,
+     "footprints_m2": [
+      56.1,
+      554.8,
+      1352.6
+     ],
+     "total_footprint_m2": 1963.5,
+     "max_hgt_agl_m": 6.44,
+     "max_max_ht_m": 10.3,
+     "lidar2022_gone_since_2009": [],
+     "lidar2022_new_outlines": [],
+     "straddling_lot_line": [
+      {
+       "id": 168149,
+       "area_m2_attr": 5766.8,
+       "area_m2_proj": 1814.0,
+       "share_on_lot": 0.01,
+       "hgt_agl": 9.2,
+       "max_ht": 10.3,
+       "lidar2022": {
+        "p90": 9.3,
+        "max": 10.7,
+        "share_still_built": 0.99
+       }
+      }
+     ],
+     "detail": [
+      {
+       "id": 167163,
+       "area_m2_attr": 56.4,
+       "area_m2_proj": 56.1,
+       "share_on_lot": 1.0,
+       "hgt_agl": 4.46,
+       "max_ht": 4.45,
+       "lidar2022": {
+        "p90": 4.3,
+        "max": 4.5,
+        "share_still_built": 1.0
+       }
+      },
+      {
+       "id": 168158,
+       "area_m2_attr": 5766.8,
+       "area_m2_proj": 554.8,
+       "share_on_lot": 1.0,
+       "hgt_agl": 4.14,
+       "max_ht": 10.3,
+       "lidar2022": {
+        "p90": 4.1,
+        "max": 5.5,
+        "share_still_built": 0.99
+       }
+      },
+      {
+       "id": 168157,
+       "area_m2_attr": 5766.8,
+       "area_m2_proj": 1352.6,
+       "share_on_lot": 1.0,
+       "hgt_agl": 6.44,
+       "max_ht": 10.3,
+       "lidar2022": {
+        "p90": 6.2,
+        "max": 9.4,
+        "share_still_built": 1.0
+       }
+      }
+     ]
+    },
+    "how": "City 2009 footprints projected to EPSG:26910; a footprint counts as on the lot if >= 50% of its area lies inside the lot (assumption); hgt_agl and max_ht are the file's fields (m). LiDAR 2022 cross-check from data/lidar2022 (90th-percentile and max building height; share_still_built < 0.1 read as demolished). New LiDAR outlines counted if their representative point is on the lot.",
+    "data_file": "data/vancouver_footprints_2009.geojson; data/lidar2022/*.json"
+   },
+   "4_floodplain": {
+    "value": "partly",
+    "how": "Share of the lot (EPSG:26910) inside each layer: {'Fraser Risk Today 1/500 Storm': 0.0, 'Still Creek Floodplain': 0.0, 'Wave Effect Zone': 0.0, 'Designated Floodplain (FCL 4.6m)': 0.356}. Answer refers to \"Designated Floodplain (FCL 4.6m)\"; the other layers (Still Creek, wave effect zone, Fraser risk today) are shown beside it.",
+    "data_file": "data/vancouver_designated_floodplain.csv"
+   },
+   "5_sewer_flow_m3_day": {
+    "value": "not derivable",
+    "how": "No sewer-main or sewer-flow data file exists in data/ or tool/ (searched for sewer/sanitary/wastewater/main). The register (sewer_flow, conf 20) says the sewer-mains layer gives type and material only and flow is by request to the City.",
+    "data_file": "—"
+   },
+   "7_receivers_within_3km": {
+    "value": {
+     "count": 744,
+     "count_off_lot": 744,
+     "by_type": {
+      "housing": 334,
+      "rec": 9,
+      "care": 33,
+      "hospital": 2,
+      "school": 71,
+      "campus": 6,
+      "office": 26,
+      "apartment": 94,
+      "commercial": 167,
+      "hotel": 2
+     },
+     "on_lot": [],
+     "nearest_off_lot": {
+      "name": "1549 Clark Dr",
+      "type": "commercial",
+      "src": "vanBCA",
+      "dist_edge_m": 65.0,
+      "dist_centroid_m": 112.6
+     },
+     "count_by_centroid": 728,
+     "heat_network_outlines_dist_m": {
+      "van_creative_downtown_citymap.geojson": 2148.0,
+      "van_creative_southdowntown_citymap.geojson": 3678.0,
+      "van_neu_9552_traced.geojson": 220.0,
+      "van_river_district_approx.geojson": 7783.0,
+      "van_river_district_citymap.geojson": 7783.0
+     }
+    },
+    "how": "Receiver points in tool/receivers_van.json (1842 records), projected to EPSG:26910; straight-line distance from the lot boundary (0 if on the lot) ≤ 3,000 m, the register's receiver_radius (\"search to 3 km in a straight line\"). Per-type reaches (RVO 1.0–2.1 km) are retired for searching (19 Oct 2026) and not applied. count_by_centroid uses the lot centroid instead. Network outlines (data/networks) given as distance only (0 = lot inside).",
+    "data_file": "tool/receivers_van.json; data/networks/*.geojson"
+   },
+   "8_nearest_receptor_m": {
+    "value": 69.3,
+    "how": "Nearest parcel zoned residential (zoning_class Residential / Residential Inclusive / Residential Rental) in the 2026 parcel file: 1328 GRANT ST (RM-4), edge-to-edge in EPSG:26910. ASSUMPTION: a residentially zoned parcel stands for a dwelling; dwellings in commercial, CD-1, DD or industrial zones are missed. Cross-check, nearest STRATA parcel in a non-residential zone (often condos, use not stated): 1147 GRANT ST (I-2) at 18.3 m. Residential-zoned parcels within 1.5 km (AUC receptor reach): 5279.",
+    "data_file": "data/vancouver_parcels_2026.geojson"
+   },
+   "9_coverage_and_plot_ratio": {
+    "value": {
+     "site_coverage": 0.334,
+     "plot_ratio": "not derivable without a storey count"
+    },
+    "how": "site coverage = 2009 footprints on lot ÷ lot area (EPSG:26910). Plot ratio needs floor area: the tax report has none; footprint × storeys needs an assumed storey height (the register's 3.5–4.5 m) — not applied here.",
+    "data_file": "data/vancouver_footprints_2009.geojson"
+   },
+   "6_weather": {
+    "value": {
+     "hours_le_8C": 3284,
+     "hours_lt_8C": 3220,
+     "annual_mean_C": 10.58,
+     "hdd18_hourly": 2810.0,
+     "min_C": -5.8,
+     "max_C": 25.6,
+     "hours": 8760
+    },
+    "how": "EPW field 7 (dry-bulb °C), 8760 hourly rows; hours with T <= 8.0 °C (and < 8.0 shown). HDD18 = Σ max(0, 18 − T) ÷ 24. Header: \"LOCATION,VANCOUVER INTL A,BC,CAN,CWEC2011,718920,49.19,-123.18,-8.0,4.3\". Year column in the rows: {'2000': 672, '2001': 744, '2002': 720, '2006': 744, '2009': 744, '2011': 744, '2013': 720, '2015': 744, '2016': 1464, '2017': 1464}. Sanity check: VANCOUVER INTERNATIONAL (AIRPORT) 1991–2020 normal annual daily average 10.5 °C (normals station as named in the file; for Edmonton it is not confirmed to be the same station as the Edmonton Intl CWEC file).",
+    "data_file": "data/51376785-CAN_BC_VANCOUVER-INTL-A_1108395_CWEC.epw; data/en_1991-2020_Normals_BC_VANCOUVER_INTERNATIONAL_AIRPORT.csv"
+   },
+   "10_not_from_lot_data": {
+    "value": "not derivable from lot data",
+    "how": "start_case: asked of the user (quick-path default: new, whole building); host_building: asked; cooling_type: permits / operator / site visit; plant_schedule: permits, noise reports, site visit; spare_cooling: operator claim or judged; lighting_plan: site visit; receiver_temp: set by receiver type, not by lot data; area: tool radius setting",
+    "data_file": "—"
+   }
+  },
+  "E123": {
+   "_lot": {
+    "label": "12603 123 Street NW",
+    "city": "edm",
+    "parcel_id": "883345"
+   },
+   "1_lot_area_m2": {
+    "value": 14520.0,
+    "how": "Alberta title-mapping lot(s) (EPSB copy, Altalis, current to 1 Sep 2025) containing the City assessment point of parcel_point_id 883345 (lot pid [3086250]), projected to EPSG:3776 (3TM 114), planar area. Geodesic (GRS80) check: 14522.6 m². City attributes: lot_size_m2 ['14,521.556'], parcel_area_m2 ['14516.3'] (1 assessment account(s): ['10279877']; legal \"Plan: 1220197  Block: 2  Lot: 2\").",
+    "data_file": "data/raw/edm/lots/edmonton_lots_epsb.json; data/edmonton_properties_2026.csv"
+   },
+   "2_zone": {
+    "value": "IH",
+    "how": "Assessment record zoning field ['IH'] (zoning_source record, zone_from_map IH). Independently, the City zoning map (12 Oct 2026) polygon holding the assessment point: ['IH']; share of the title lot in each zone: {'IH': 1.0}.",
+    "data_file": "data/edmonton_properties_2026.csv; data/edmonton_zoning.geojson"
+   },
+   "4_floodplain": {
+    "value": "not derivable",
+    "how": "No Edmonton floodplain layer is in data/ (the register names only the City of Vancouver designated-floodplain layer).",
+    "data_file": "—"
+   },
+   "3_buildings": {
+    "value": {
+     "count": 7,
+     "footprints_m2": [
+      500.4,
+      1876.3,
+      2986.6,
+      40.6,
+      69.6,
+      93.0,
+      215.2
+     ],
+     "total_footprint_m2": 5781.7,
+     "max_height_3d_measured_m": 9.3,
+     "max_height_estimate_m": 20.0,
+     "parts_3d_on_lot": 7,
+     "detail": [
+      {
+       "id": NaN,
+       "footprint_attr": 499.0,
+       "footprint_proj": 500.4,
+       "share_on_lot": 1.0,
+       "height_est_m": 20.0,
+       "storeys_est": 5,
+       "height_3d_m": 4.9,
+       "n_3d_parts": 1
+      },
+      {
+       "id": NaN,
+       "footprint_attr": null,
+       "footprint_proj": 1876.3,
+       "share_on_lot": 1.0,
+       "height_est_m": 20.0,
+       "storeys_est": 5,
+       "height_3d_m": null,
+       "n_3d_parts": 0
+      },
+      {
+       "id": NaN,
+       "footprint_attr": null,
+       "footprint_proj": 2986.6,
+       "share_on_lot": 0.99,
+       "height_est_m": 20.0,
+       "storeys_est": 5,
+       "height_3d_m": 9.3,
+       "n_3d_parts": 1
+      },
+      {
+       "id": NaN,
+       "footprint_attr": 40.9,
+       "footprint_proj": 40.6,
+       "share_on_lot": 1.0,
+       "height_est_m": 20.0,
+       "storeys_est": 5,
+       "height_3d_m": null,
+       "n_3d_parts": 0
+      },
+      {
+       "id": NaN,
+       "footprint_attr": 69.1,
+       "footprint_proj": 69.6,
+       "share_on_lot": 0.97,
+       "height_est_m": 20.0,
+       "storeys_est": 5,
+       "height_3d_m": null,
+       "n_3d_parts": 0
+      },
+      {
+       "id": NaN,
+       "footprint_attr": 93.9,
+       "footprint_proj": 93.0,
+       "share_on_lot": 1.0,
+       "height_est_m": 20.0,
+       "storeys_est": 5,
+       "height_3d_m": 5.4,
+       "n_3d_parts": 1
+      },
+      {
+       "id": NaN,
+       "footprint_attr": 214.1,
+       "footprint_proj": 215.2,
+       "share_on_lot": 1.0,
+       "height_est_m": 20.0,
+       "storeys_est": 5,
+       "height_3d_m": 4.3,
+       "n_3d_parts": 1
+      }
+     ]
+    },
+    "how": "City rooflines (2019) projected to EPSG:3776; footprint on the lot if >= 50% inside (assumption). Two heights: height_est_m is the file's ESTIMATE (assessed gross area ÷ footprint × 4 m, not measured); height_3d_m is measured here from the City 3D buildings (EPSG:3776): highest vertex − lowest vertex of multipatch parts whose vertex centroid falls inside the footprint (parts with base elevation <= 500 m skipped as artefacts).",
+    "data_file": "data/edmonton_rooflines_est.geojson; data/raw/edm/3d/3dBuildings.gdb"
+   },
+   "5_sewer_flow_m3_day": {
+    "value": "not derivable",
+    "how": "No sewer-main or sewer-flow data file exists in data/ or tool/ (searched for sewer/sanitary/wastewater/main). The register (sewer_flow, conf 20) says the sewer-mains layer gives type and material only and flow is by request to the City.",
+    "data_file": "—"
+   },
+   "7_receivers_within_3km": {
+    "value": {
+     "count": 135,
+     "count_off_lot": 134,
+     "by_type": {
+      "pool": 1,
+      "arena": 2,
+      "hall": 15,
+      "rec": 3,
+      "school": 14,
+      "campus": 1,
+      "care": 17,
+      "commercial": 58,
+      "apartment": 24
+     },
+     "on_lot": [
+      {
+       "t": "commercial",
+       "n": "12005 127 Avenue Nw"
+      }
+     ],
+     "nearest_off_lot": {
+      "name": "Calder",
+      "type": "hall",
+      "src": "odsrf",
+      "dist_edge_m": 478.3,
+      "dist_centroid_m": 522.5
+     },
+     "count_by_centroid": 129,
+     "heat_network_outlines_dist_m": {
+      "edm_blatchford_hull.geojson": 346.0,
+      "edm_dde_phase1_1a_citymap.geojson": 4824.0,
+      "edm_dde_phases2_4_citymap.geojson": 4179.0
+     }
+    },
+    "how": "Receiver points in tool/receivers_edm.json (1623 records), projected to EPSG:3776; straight-line distance from the lot boundary (0 if on the lot) ≤ 3,000 m, the register's receiver_radius (\"search to 3 km in a straight line\"). Per-type reaches (RVO 1.0–2.1 km) are retired for searching (19 Oct 2026) and not applied. count_by_centroid uses the lot centroid instead. Network outlines (data/networks) given as distance only (0 = lot inside).",
+    "data_file": "tool/receivers_edm.json; data/networks/*.geojson"
+   },
+   "8_nearest_receptor_m": {
+    "value": 152.6,
+    "how": "Nearest assessment record with a residential class (RESIDENTIAL / OTHER RESIDENTIAL in class1–3): 12529 125 STREET NW (RESIDENTIAL); distance from the subject title lot to that record's title lot, edge to edge, EPSG:3776 (lot found); to the assessment point itself 174.3 m. ASSUMPTION: a residential assessment class stands for a dwelling. Residential records within 1.5 km (AUC receptor reach): 6584.",
+    "data_file": "data/edmonton_properties_2026.csv; data/raw/edm/lots/edmonton_lots_epsb.json"
+   },
+   "9_coverage_and_plot_ratio": {
+    "value": {
+     "site_coverage": 0.398,
+     "plot_ratio_assessed_gross": 0.3,
+     "gross_area_m2": 4353.065
+    },
+    "how": "site coverage = footprints on lot ÷ lot area (both EPSG:3776); plot ratio = assessed gross_area_m2 (City record, all accounts) ÷ lot area.",
+    "data_file": "data/edmonton_properties_2026.csv"
+   },
+   "6_weather": {
+    "value": {
+     "hours_le_8C": 5522,
+     "hours_lt_8C": 5496,
+     "annual_mean_C": 3.3,
+     "hdd18_hourly": 5514.0,
+     "min_C": -32.5,
+     "max_C": 29.0,
+     "hours": 8760
+    },
+    "how": "EPW field 7 (dry-bulb °C), 8760 hourly rows; hours with T <= 8.0 °C (and < 8.0 shown). HDD18 = Σ max(0, 18 − T) ÷ 24. Header: \"LOCATION,EDMONTON INTL A,AB,CAN,CWEC2011,711230,53.31,-113.58,-7.0,723.3\". Year column in the rows: {'2000': 744, '2003': 744, '2005': 672, '2007': 1464, '2010': 720, '2012': 1464, '2015': 744, '2016': 720, '2017': 1488}. Sanity check: EDMONTON (AIRPORT) 1991–2020 normal annual daily average 2.4 °C (normals station as named in the file; for Edmonton it is not confirmed to be the same station as the Edmonton Intl CWEC file).",
+    "data_file": "data/effbc917-CAN_AB_EDMONTON-INTL-A_3012216_CWEC.epw; data/en_1991-2020_Normals_AB_EDMONTON_AIRPORT.csv"
+   },
+   "10_not_from_lot_data": {
+    "value": "not derivable from lot data",
+    "how": "start_case: asked of the user (quick-path default: new, whole building); host_building: asked; cooling_type: permits / operator / site visit; plant_schedule: permits, noise reports, site visit; spare_cooling: operator claim or judged; lighting_plan: site visit; receiver_temp: set by receiver type, not by lot data; area: tool radius setting",
+    "data_file": "—"
+   }
+  },
+  "V339": {
+   "_lot": {
+    "label": "339 1st Ave E",
+    "city": "van",
+    "parcel_id": "63819485"
+   },
+   "1_lot_area_m2": {
+    "value": 4485.1,
+    "how": "1 parcel polygon(s) with tax_coord 63819485, unioned, projected to EPSG:26910 (NAD83 UTM 10N), planar area. Geodesic (GRS80) check: 4488.7 m². Attribute area_m2 in the joined parcel file: [4454.9] (sum 4454.9). The 2026 tax report itself states no lot area.",
+    "data_file": "data/vancouver_parcels_2026.geojson; data/raw/van/property-tax-report.csv"
+   },
+   "2_zone": {
+    "value": "I-3",
+    "how": "Raw 2026 property-tax report, LAND_COORDINATE 63819485: ZONING_DISTRICT ['I-3'], ZONING_CLASSIFICATION ['Industrial'], 1 record(s); joined parcel file says ['I-3']. Independent zoning-map check NOT possible: no Vancouver zoning-district polygon layer is in data/ (the parcel file's zoning is the same tax-report field joined on).",
+    "data_file": "data/raw/van/property-tax-report.csv; data/vancouver_parcels_2026.geojson"
+   },
+   "3_buildings": {
+    "value": {
+     "count_2009": 0,
+     "footprints_m2": [],
+     "total_footprint_m2": 0,
+     "max_hgt_agl_m": null,
+     "max_max_ht_m": null,
+     "lidar2022_gone_since_2009": [],
+     "lidar2022_new_outlines": [],
+     "straddling_lot_line": [],
+     "detail": []
+    },
+    "how": "City 2009 footprints projected to EPSG:26910; a footprint counts as on the lot if >= 50% of its area lies inside the lot (assumption); hgt_agl and max_ht are the file's fields (m). LiDAR 2022 cross-check from data/lidar2022 (90th-percentile and max building height; share_still_built < 0.1 read as demolished). New LiDAR outlines counted if their representative point is on the lot.",
+    "data_file": "data/vancouver_footprints_2009.geojson; data/lidar2022/*.json"
+   },
+   "4_floodplain": {
+    "value": "partly",
+    "how": "Share of the lot (EPSG:26910) inside each layer: {'Fraser Risk Today 1/500 Storm': 0.0, 'Still Creek Floodplain': 0.0, 'Wave Effect Zone': 0.0, 'Designated Floodplain (FCL 4.6m)': 0.291}. Answer refers to \"Designated Floodplain (FCL 4.6m)\"; the other layers (Still Creek, wave effect zone, Fraser risk today) are shown beside it.",
+    "data_file": "data/vancouver_designated_floodplain.csv"
+   },
+   "5_sewer_flow_m3_day": {
+    "value": "not derivable",
+    "how": "No sewer-main or sewer-flow data file exists in data/ or tool/ (searched for sewer/sanitary/wastewater/main). The register (sewer_flow, conf 20) says the sewer-mains layer gives type and material only and flow is by request to the City.",
+    "data_file": "—"
+   },
+   "7_receivers_within_3km": {
+    "value": {
+     "count": 1067,
+     "count_off_lot": 1067,
+     "by_type": {
+      "housing": 397,
+      "rec": 13,
+      "hospital": 4,
+      "school": 93,
+      "campus": 6,
+      "care": 32,
+      "office": 63,
+      "commercial": 249,
+      "apartment": 197,
+      "hotel": 13
+     },
+     "on_lot": [],
+     "nearest_off_lot": {
+      "name": "275 1St Ave E",
+      "type": "commercial",
+      "src": "vanBCA",
+      "dist_edge_m": 22.1,
+      "dist_centroid_m": 53.1
+     },
+     "count_by_centroid": 1054,
+     "heat_network_outlines_dist_m": {
+      "van_creative_downtown_citymap.geojson": 1271.0,
+      "van_creative_southdowntown_citymap.geojson": 2467.0,
+      "van_neu_9552_traced.geojson": 0.0,
+      "van_river_district_approx.geojson": 7978.0,
+      "van_river_district_citymap.geojson": 7985.0
+     }
+    },
+    "how": "Receiver points in tool/receivers_van.json (1842 records), projected to EPSG:26910; straight-line distance from the lot boundary (0 if on the lot) ≤ 3,000 m, the register's receiver_radius (\"search to 3 km in a straight line\"). Per-type reaches (RVO 1.0–2.1 km) are retired for searching (19 Oct 2026) and not applied. count_by_centroid uses the lot centroid instead. Network outlines (data/networks) given as distance only (0 = lot inside).",
+    "data_file": "tool/receivers_van.json; data/networks/*.geojson"
+   },
+   "8_nearest_receptor_m": {
+    "value": 165.6,
+    "how": "Nearest parcel zoned residential (zoning_class Residential / Residential Inclusive / Residential Rental) in the 2026 parcel file: 396 2ND AVE E (R5-3), edge-to-edge in EPSG:26910. ASSUMPTION: a residentially zoned parcel stands for a dwelling; dwellings in commercial, CD-1, DD or industrial zones are missed. Cross-check, nearest STRATA parcel in a non-residential zone (often condos, use not stated): 336 1ST AVE E (IC-3) at 20.1 m. Residential-zoned parcels within 1.5 km (AUC receptor reach): 3085.",
+    "data_file": "data/vancouver_parcels_2026.geojson"
+   },
+   "9_coverage_and_plot_ratio": {
+    "value": {
+     "site_coverage": 0.0,
+     "plot_ratio": "not derivable without a storey count"
+    },
+    "how": "site coverage = 2009 footprints on lot ÷ lot area (EPSG:26910). Plot ratio needs floor area: the tax report has none; footprint × storeys needs an assumed storey height (the register's 3.5–4.5 m) — not applied here.",
+    "data_file": "data/vancouver_footprints_2009.geojson"
+   },
+   "6_weather": {
+    "value": {
+     "hours_le_8C": 3284,
+     "hours_lt_8C": 3220,
+     "annual_mean_C": 10.58,
+     "hdd18_hourly": 2810.0,
+     "min_C": -5.8,
+     "max_C": 25.6,
+     "hours": 8760
+    },
+    "how": "EPW field 7 (dry-bulb °C), 8760 hourly rows; hours with T <= 8.0 °C (and < 8.0 shown). HDD18 = Σ max(0, 18 − T) ÷ 24. Header: \"LOCATION,VANCOUVER INTL A,BC,CAN,CWEC2011,718920,49.19,-123.18,-8.0,4.3\". Year column in the rows: {'2000': 672, '2001': 744, '2002': 720, '2006': 744, '2009': 744, '2011': 744, '2013': 720, '2015': 744, '2016': 1464, '2017': 1464}. Sanity check: VANCOUVER INTERNATIONAL (AIRPORT) 1991–2020 normal annual daily average 10.5 °C (normals station as named in the file; for Edmonton it is not confirmed to be the same station as the Edmonton Intl CWEC file).",
+    "data_file": "data/51376785-CAN_BC_VANCOUVER-INTL-A_1108395_CWEC.epw; data/en_1991-2020_Normals_BC_VANCOUVER_INTERNATIONAL_AIRPORT.csv"
+   },
+   "10_not_from_lot_data": {
+    "value": "not derivable from lot data",
+    "how": "start_case: asked of the user (quick-path default: new, whole building); host_building: asked; cooling_type: permits / operator / site visit; plant_schedule: permits, noise reports, site visit; spare_cooling: operator claim or judged; lighting_plan: site visit; receiver_temp: set by receiver type, not by lot data; area: tool radius setting",
+    "data_file": "—"
+   }
+  },
+  "E06A": {
+   "_lot": {
+    "label": "74 Airport Rd NW",
+    "city": "edm",
+    "parcel_id": "176767"
+   },
+   "1_lot_area_m2": {
+    "value": 4560.8,
+    "how": "Alberta title-mapping lot(s) (EPSB copy, Altalis, current to 1 Sep 2025) containing the City assessment point of parcel_point_id 176767 (lot pid [3079131]), projected to EPSG:3776 (3TM 114), planar area. Geodesic (GRS80) check: 4561.6 m². City attributes: lot_size_m2 ['4,562.524'], parcel_area_m2 ['4562.67'] (1 assessment account(s): ['3046844']; legal \"Plan: 1315NY  Block: 18B  Lot: 2A / Plan: 1315NY  Block: 18B  Lot: 2A\").",
+    "data_file": "data/raw/edm/lots/edmonton_lots_epsb.json; data/edmonton_properties_2026.csv"
+   },
+   "2_zone": {
+    "value": "BE",
+    "how": "Assessment record zoning field ['BE'] (zoning_source record, zone_from_map BE). Independently, the City zoning map (12 Oct 2026) polygon holding the assessment point: ['BE']; share of the title lot in each zone: {'BE': 1.0}.",
+    "data_file": "data/edmonton_properties_2026.csv; data/edmonton_zoning.geojson"
+   },
+   "4_floodplain": {
+    "value": "not derivable",
+    "how": "No Edmonton floodplain layer is in data/ (the register names only the City of Vancouver designated-floodplain layer).",
+    "data_file": "—"
+   },
+   "3_buildings": {
+    "value": {
+     "count": 0,
+     "footprints_m2": [],
+     "total_footprint_m2": 0,
+     "max_height_3d_measured_m": null,
+     "max_height_estimate_m": null,
+     "parts_3d_on_lot": 0,
+     "detail": []
+    },
+    "how": "City rooflines (2019) projected to EPSG:3776; footprint on the lot if >= 50% inside (assumption). Two heights: height_est_m is the file's ESTIMATE (assessed gross area ÷ footprint × 4 m, not measured); height_3d_m is measured here from the City 3D buildings (EPSG:3776): highest vertex − lowest vertex of multipatch parts whose vertex centroid falls inside the footprint (parts with base elevation <= 500 m skipped as artefacts).",
+    "data_file": "data/edmonton_rooflines_est.geojson; data/raw/edm/3d/3dBuildings.gdb"
+   },
+   "5_sewer_flow_m3_day": {
+    "value": "not derivable",
+    "how": "No sewer-main or sewer-flow data file exists in data/ or tool/ (searched for sewer/sanitary/wastewater/main). The register (sewer_flow, conf 20) says the sewer-mains layer gives type and material only and flow is by request to the City.",
+    "data_file": "—"
+   },
+   "7_receivers_within_3km": {
+    "value": {
+     "count": 175,
+     "count_off_lot": 175,
+     "by_type": {
+      "pool": 3,
+      "arena": 3,
+      "hall": 16,
+      "rec": 3,
+      "care": 20,
+      "hospital": 1,
+      "school": 22,
+      "campus": 3,
+      "commercial": 62,
+      "apartment": 42
+     },
+     "on_lot": [],
+     "nearest_off_lot": {
+      "name": "Amiskwaciy Academy",
+      "type": "school",
+      "src": "odef",
+      "dist_edge_m": 142.8,
+      "dist_centroid_m": 188.2
+     },
+     "count_by_centroid": 167,
+     "heat_network_outlines_dist_m": {
+      "edm_blatchford_hull.geojson": 0.0,
+      "edm_dde_phase1_1a_citymap.geojson": 3282.0,
+      "edm_dde_phases2_4_citymap.geojson": 2616.0
+     }
+    },
+    "how": "Receiver points in tool/receivers_edm.json (1623 records), projected to EPSG:3776; straight-line distance from the lot boundary (0 if on the lot) ≤ 3,000 m, the register's receiver_radius (\"search to 3 km in a straight line\"). Per-type reaches (RVO 1.0–2.1 km) are retired for searching (19 Oct 2026) and not applied. count_by_centroid uses the lot centroid instead. Network outlines (data/networks) given as distance only (0 = lot inside).",
+    "data_file": "tool/receivers_edm.json; data/networks/*.geojson"
+   },
+   "8_nearest_receptor_m": {
+    "value": 39.1,
+    "how": "Nearest assessment record with a residential class (RESIDENTIAL / OTHER RESIDENTIAL in class1–3): 8079 CEDRIC MAH ROAD NW (RESIDENTIAL); distance from the subject title lot to that record's title lot, edge to edge, EPSG:3776 (lot found); to the assessment point itself 55.7 m. ASSUMPTION: a residential assessment class stands for a dwelling. Residential records within 1.5 km (AUC receptor reach): 5115.",
+    "data_file": "data/edmonton_properties_2026.csv; data/raw/edm/lots/edmonton_lots_epsb.json"
+   },
+   "9_coverage_and_plot_ratio": {
+    "value": {
+     "site_coverage": 0.0,
+     "plot_ratio_assessed_gross": 0.0,
+     "gross_area_m2": 0
+    },
+    "how": "site coverage = footprints on lot ÷ lot area (both EPSG:3776); plot ratio = assessed gross_area_m2 (City record, all accounts) ÷ lot area.",
+    "data_file": "data/edmonton_properties_2026.csv"
+   },
+   "6_weather": {
+    "value": {
+     "hours_le_8C": 5522,
+     "hours_lt_8C": 5496,
+     "annual_mean_C": 3.3,
+     "hdd18_hourly": 5514.0,
+     "min_C": -32.5,
+     "max_C": 29.0,
+     "hours": 8760
+    },
+    "how": "EPW field 7 (dry-bulb °C), 8760 hourly rows; hours with T <= 8.0 °C (and < 8.0 shown). HDD18 = Σ max(0, 18 − T) ÷ 24. Header: \"LOCATION,EDMONTON INTL A,AB,CAN,CWEC2011,711230,53.31,-113.58,-7.0,723.3\". Year column in the rows: {'2000': 744, '2003': 744, '2005': 672, '2007': 1464, '2010': 720, '2012': 1464, '2015': 744, '2016': 720, '2017': 1488}. Sanity check: EDMONTON (AIRPORT) 1991–2020 normal annual daily average 2.4 °C (normals station as named in the file; for Edmonton it is not confirmed to be the same station as the Edmonton Intl CWEC file).",
+    "data_file": "data/effbc917-CAN_AB_EDMONTON-INTL-A_3012216_CWEC.epw; data/en_1991-2020_Normals_AB_EDMONTON_AIRPORT.csv"
+   },
+   "10_not_from_lot_data": {
+    "value": "not derivable from lot data",
+    "how": "start_case: asked of the user (quick-path default: new, whole building); host_building: asked; cooling_type: permits / operator / site visit; plant_schedule: permits, noise reports, site visit; spare_cooling: operator claim or judged; lighting_plan: site visit; receiver_temp: set by receiver type, not by lot data; area: tool radius setting",
+    "data_file": "—"
+   }
+  },
+  "E06B": {
+   "_lot": {
+    "label": "64 Airport Rd NW",
+    "city": "edm",
+    "parcel_id": "146402"
+   },
+   "1_lot_area_m2": {
+    "value": 4276.2,
+    "how": "Alberta title-mapping lot(s) (EPSB copy, Altalis, current to 1 Sep 2025) containing the City assessment point of parcel_point_id 146402 (lot pid [3083657]), projected to EPSG:3776 (3TM 114), planar area. Geodesic (GRS80) check: 4277.0 m². City attributes: lot_size_m2 ['4,274.364'], parcel_area_m2 ['4274.48'] (1 assessment account(s): ['1222850']; legal \"Plan: 8222638  Block: 18B  Lot: 3B\").",
+    "data_file": "data/raw/edm/lots/edmonton_lots_epsb.json; data/edmonton_properties_2026.csv"
+   },
+   "2_zone": {
+    "value": "BE",
+    "how": "Assessment record zoning field ['BE'] (zoning_source record, zone_from_map BE). Independently, the City zoning map (12 Oct 2026) polygon holding the assessment point: ['BE']; share of the title lot in each zone: {'BE': 1.0}.",
+    "data_file": "data/edmonton_properties_2026.csv; data/edmonton_zoning.geojson"
+   },
+   "4_floodplain": {
+    "value": "not derivable",
+    "how": "No Edmonton floodplain layer is in data/ (the register names only the City of Vancouver designated-floodplain layer).",
+    "data_file": "—"
+   },
+   "3_buildings": {
+    "value": {
+     "count": 0,
+     "footprints_m2": [],
+     "total_footprint_m2": 0,
+     "max_height_3d_measured_m": null,
+     "max_height_estimate_m": null,
+     "parts_3d_on_lot": 0,
+     "detail": []
+    },
+    "how": "City rooflines (2019) projected to EPSG:3776; footprint on the lot if >= 50% inside (assumption). Two heights: height_est_m is the file's ESTIMATE (assessed gross area ÷ footprint × 4 m, not measured); height_3d_m is measured here from the City 3D buildings (EPSG:3776): highest vertex − lowest vertex of multipatch parts whose vertex centroid falls inside the footprint (parts with base elevation <= 500 m skipped as artefacts).",
+    "data_file": "data/edmonton_rooflines_est.geojson; data/raw/edm/3d/3dBuildings.gdb"
+   },
+   "5_sewer_flow_m3_day": {
+    "value": "not derivable",
+    "how": "No sewer-main or sewer-flow data file exists in data/ or tool/ (searched for sewer/sanitary/wastewater/main). The register (sewer_flow, conf 20) says the sewer-mains layer gives type and material only and flow is by request to the City.",
+    "data_file": "—"
+   },
+   "7_receivers_within_3km": {
+    "value": {
+     "count": 183,
+     "count_off_lot": 183,
+     "by_type": {
+      "pool": 3,
+      "arena": 3,
+      "hall": 16,
+      "rec": 3,
+      "care": 23,
+      "hospital": 1,
+      "school": 22,
+      "campus": 3,
+      "commercial": 64,
+      "apartment": 45
+     },
+     "on_lot": [],
+     "nearest_off_lot": {
+      "name": "Campbell College Ltd.",
+      "type": "school",
+      "src": "odef",
+      "dist_edge_m": 108.0,
+      "dist_centroid_m": 155.0
+     },
+     "count_by_centroid": 173,
+     "heat_network_outlines_dist_m": {
+      "edm_blatchford_hull.geojson": 0.0,
+      "edm_dde_phase1_1a_citymap.geojson": 3224.0,
+      "edm_dde_phases2_4_citymap.geojson": 2558.0
+     }
+    },
+    "how": "Receiver points in tool/receivers_edm.json (1623 records), projected to EPSG:3776; straight-line distance from the lot boundary (0 if on the lot) ≤ 3,000 m, the register's receiver_radius (\"search to 3 km in a straight line\"). Per-type reaches (RVO 1.0–2.1 km) are retired for searching (19 Oct 2026) and not applied. count_by_centroid uses the lot centroid instead. Network outlines (data/networks) given as distance only (0 = lot inside).",
+    "data_file": "tool/receivers_edm.json; data/networks/*.geojson"
+   },
+   "8_nearest_receptor_m": {
+    "value": 24.4,
+    "how": "Nearest assessment record with a residential class (RESIDENTIAL / OTHER RESIDENTIAL in class1–3): 8079 CEDRIC MAH ROAD NW (RESIDENTIAL); distance from the subject title lot to that record's title lot, edge to edge, EPSG:3776 (lot found); to the assessment point itself 29.5 m. ASSUMPTION: a residential assessment class stands for a dwelling. Residential records within 1.5 km (AUC receptor reach): 5343.",
+    "data_file": "data/edmonton_properties_2026.csv; data/raw/edm/lots/edmonton_lots_epsb.json"
+   },
+   "9_coverage_and_plot_ratio": {
+    "value": {
+     "site_coverage": 0.0,
+     "plot_ratio_assessed_gross": 0.0,
+     "gross_area_m2": 0
+    },
+    "how": "site coverage = footprints on lot ÷ lot area (both EPSG:3776); plot ratio = assessed gross_area_m2 (City record, all accounts) ÷ lot area.",
+    "data_file": "data/edmonton_properties_2026.csv"
+   },
+   "6_weather": {
+    "value": {
+     "hours_le_8C": 5522,
+     "hours_lt_8C": 5496,
+     "annual_mean_C": 3.3,
+     "hdd18_hourly": 5514.0,
+     "min_C": -32.5,
+     "max_C": 29.0,
+     "hours": 8760
+    },
+    "how": "EPW field 7 (dry-bulb °C), 8760 hourly rows; hours with T <= 8.0 °C (and < 8.0 shown). HDD18 = Σ max(0, 18 − T) ÷ 24. Header: \"LOCATION,EDMONTON INTL A,AB,CAN,CWEC2011,711230,53.31,-113.58,-7.0,723.3\". Year column in the rows: {'2000': 744, '2003': 744, '2005': 672, '2007': 1464, '2010': 720, '2012': 1464, '2015': 744, '2016': 720, '2017': 1488}. Sanity check: EDMONTON (AIRPORT) 1991–2020 normal annual daily average 2.4 °C (normals station as named in the file; for Edmonton it is not confirmed to be the same station as the Edmonton Intl CWEC file).",
+    "data_file": "data/effbc917-CAN_AB_EDMONTON-INTL-A_3012216_CWEC.epw; data/en_1991-2020_Normals_AB_EDMONTON_AIRPORT.csv"
+   },
+   "10_not_from_lot_data": {
+    "value": "not derivable from lot data",
+    "how": "start_case: asked of the user (quick-path default: new, whole building); host_building: asked; cooling_type: permits / operator / site visit; plant_schedule: permits, noise reports, site visit; spare_cooling: operator claim or judged; lighting_plan: site visit; receiver_temp: set by receiver type, not by lot data; area: tool radius setting",
+    "data_file": "—"
+   }
+  },
+  "HAST": {
+   "_lot": {
+    "label": "555 W Hastings",
+    "city": "van",
+    "parcel_id": "59013407"
+   },
+   "1_lot_area_m2": {
+    "value": 6275.4,
+    "how": "1 parcel polygon(s) with tax_coord 59013407, unioned, projected to EPSG:26910 (NAD83 UTM 10N), planar area. Geodesic (GRS80) check: 6280.4 m². Attribute area_m2 in the joined parcel file: [6224.6] (sum 6224.6). The 2026 tax report itself states no lot area.",
+    "data_file": "data/vancouver_parcels_2026.geojson; data/raw/van/property-tax-report.csv"
+   },
+   "2_zone": {
+    "value": "DD",
+    "how": "Raw 2026 property-tax report, LAND_COORDINATE 59013407: ZONING_DISTRICT ['DD'], ZONING_CLASSIFICATION ['Comprehensive Development'], 1 record(s); joined parcel file says ['DD']. Independent zoning-map check NOT possible: no Vancouver zoning-district polygon layer is in data/ (the parcel file's zoning is the same tax-report field joined on).",
+    "data_file": "data/raw/van/property-tax-report.csv; data/vancouver_parcels_2026.geojson"
+   },
+   "3_buildings": {
+    "value": {
+     "count_2009": 9,
+     "footprints_m2": [
+      811.7,
+      1166.1,
+      1443.0,
+      66.3,
+      1051.9,
+      686.7,
+      71.8,
+      456.0,
+      72.0
+     ],
+     "total_footprint_m2": 5825.5,
+     "max_hgt_agl_m": 141.22,
+     "max_max_ht_m": 160.17,
+     "lidar2022_gone_since_2009": [],
+     "lidar2022_new_outlines": [],
+     "straddling_lot_line": [
+      {
+       "id": 162924,
+       "area_m2_attr": 11907.3,
+       "area_m2_proj": 3008.9,
+       "share_on_lot": 0.0,
+       "hgt_agl": 19.39,
+       "max_ht": 160.17,
+       "lidar2022": {
+        "p90": 19.2,
+        "max": 50.9,
+        "share_still_built": 1.0
+       }
+      },
+      {
+       "id": 161714,
+       "area_m2_attr": 11907.3,
+       "area_m2_proj": 116.1,
+       "share_on_lot": 0.47,
+       "hgt_agl": 6.4,
+       "max_ht": 160.17,
+       "lidar2022": {
+        "p90": 26.2,
+        "max": 27.9,
+        "share_still_built": 0.99
+       }
+      }
+     ],
+     "detail": [
+      {
+       "id": 148567,
+       "area_m2_attr": 11907.3,
+       "area_m2_proj": 811.7,
+       "share_on_lot": 0.93,
+       "hgt_agl": 24.61,
+       "max_ht": 160.17,
+       "lidar2022": {
+        "p90": 32.6,
+        "max": 134.0,
+        "share_still_built": 0.81
+       }
+      },
+      {
+       "id": 155387,
+       "area_m2_attr": 11907.3,
+       "area_m2_proj": 1166.1,
+       "share_on_lot": 1.0,
+       "hgt_agl": 135.34,
+       "max_ht": 160.17,
+       "lidar2022": {
+        "p90": 139.2,
+        "max": 169.9,
+        "share_still_built": 0.99
+       }
+      },
+      {
+       "id": 162923,
+       "area_m2_attr": 11907.3,
+       "area_m2_proj": 1443.0,
+       "share_on_lot": 1.0,
+       "hgt_agl": 40.76,
+       "max_ht": 160.17,
+       "lidar2022": {
+        "p90": 42.0,
+        "max": 51.2,
+        "share_still_built": 0.99
+       }
+      },
+      {
+       "id": 148580,
+       "area_m2_attr": 11907.3,
+       "area_m2_proj": 66.3,
+       "share_on_lot": 0.81,
+       "hgt_agl": 7.93,
+       "max_ht": 160.17,
+       "lidar2022": {
+        "p90": 131.9,
+        "max": 132.0,
+        "share_still_built": 0.24
+       }
+      },
+      {
+       "id": 162921,
+       "area_m2_attr": 11907.3,
+       "area_m2_proj": 1051.9,
+       "share_on_lot": 1.0,
+       "hgt_agl": 48.05,
+       "max_ht": 160.17,
+       "lidar2022": {
+        "p90": 48.5,
+        "max": 51.7,
+        "share_still_built": 1.0
+       }
+      },
+      {
+       "id": 162922,
+       "area_m2_attr": 11907.3,
+       "area_m2_proj": 686.7,
+       "share_on_lot": 1.0,
+       "hgt_agl": 30.31,
+       "max_ht": 160.17,
+       "lidar2022": {
+        "p90": 30.2,
+        "max": 41.7,
+        "share_still_built": 0.98
+       }
+      },
+      {
+       "id": 148581,
+       "area_m2_attr": 11907.3,
+       "area_m2_proj": 71.8,
+       "share_on_lot": 1.0,
+       "hgt_agl": 111.19,
+       "max_ht": 160.17,
+       "lidar2022": {
+        "p90": 110.8,
+        "max": 135.1,
+        "share_still_built": 1.0
+       }
+      },
+      {
+       "id": 148582,
+       "area_m2_attr": 11907.3,
+       "area_m2_proj": 456.0,
+       "share_on_lot": 1.0,
+       "hgt_agl": 107.87,
+       "max_ht": 160.17,
+       "lidar2022": {
+        "p90": 112.7,
+        "max": 134.2,
+        "share_still_built": 1.0
+       }
+      },
+      {
+       "id": 148358,
+       "area_m2_attr": 11907.3,
+       "area_m2_proj": 72.0,
+       "share_on_lot": 1.0,
+       "hgt_agl": 141.22,
+       "max_ht": 160.17,
+       "lidar2022": {
+        "p90": 162.1,
+        "max": 169.9,
+        "share_still_built": 1.0
+       }
+      }
+     ]
+    },
+    "how": "City 2009 footprints projected to EPSG:26910; a footprint counts as on the lot if >= 50% of its area lies inside the lot (assumption); hgt_agl and max_ht are the file's fields (m). LiDAR 2022 cross-check from data/lidar2022 (90th-percentile and max building height; share_still_built < 0.1 read as demolished). New LiDAR outlines counted if their representative point is on the lot.",
+    "data_file": "data/vancouver_footprints_2009.geojson; data/lidar2022/*.json"
+   },
+   "4_floodplain": {
+    "value": "no",
+    "how": "Share of the lot (EPSG:26910) inside each layer: {'Fraser Risk Today 1/500 Storm': 0.0, 'Still Creek Floodplain': 0.0, 'Wave Effect Zone': 0.0, 'Designated Floodplain (FCL 4.6m)': 0.0}. Answer refers to \"Designated Floodplain (FCL 4.6m)\"; the other layers (Still Creek, wave effect zone, Fraser risk today) are shown beside it.",
+    "data_file": "data/vancouver_designated_floodplain.csv"
+   },
+   "5_sewer_flow_m3_day": {
+    "value": "not derivable",
+    "how": "No sewer-main or sewer-flow data file exists in data/ or tool/ (searched for sewer/sanitary/wastewater/main). The register (sewer_flow, conf 20) says the sewer-mains layer gives type and material only and flow is by request to the City.",
+    "data_file": "—"
+   },
+   "7_receivers_within_3km": {
+    "value": {
+     "count": 1011,
+     "count_off_lot": 1010,
+     "by_type": {
+      "housing": 324,
+      "rec": 12,
+      "hospital": 3,
+      "school": 76,
+      "campus": 5,
+      "care": 18,
+      "office": 65,
+      "commercial": 248,
+      "apartment": 247,
+      "hotel": 13
+     },
+     "on_lot": [
+      {
+       "t": "campus",
+       "n": "Simon Fraser University – Vancouver Campus"
+      }
+     ],
+     "nearest_off_lot": {
+      "name": "Northeastern University - Vancouver",
+      "type": "school",
+      "src": "odef",
+      "dist_edge_m": 11.9,
+      "dist_centroid_m": 55.7
+     },
+     "count_by_centroid": 1001,
+     "heat_network_outlines_dist_m": {
+      "van_creative_downtown_citymap.geojson": 0.0,
+      "van_creative_southdowntown_citymap.geojson": 1539.0,
+      "van_neu_9552_traced.geojson": 574.0,
+      "van_river_district_approx.geojson": 10098.0,
+      "van_river_district_citymap.geojson": 10104.0
+     }
+    },
+    "how": "Receiver points in tool/receivers_van.json (1842 records), projected to EPSG:26910; straight-line distance from the lot boundary (0 if on the lot) ≤ 3,000 m, the register's receiver_radius (\"search to 3 km in a straight line\"). Per-type reaches (RVO 1.0–2.1 km) are retired for searching (19 Oct 2026) and not applied. count_by_centroid uses the lot centroid instead. Network outlines (data/networks) given as distance only (0 = lot inside).",
+    "data_file": "tool/receivers_van.json; data/networks/*.geojson"
+   },
+   "8_nearest_receptor_m": {
+    "value": 934.5,
+    "how": "Nearest parcel zoned residential (zoning_class Residential / Residential Inclusive / Residential Rental) in the 2026 parcel file: 855 THURLOW ST (RM-5B), edge-to-edge in EPSG:26910. ASSUMPTION: a residentially zoned parcel stands for a dwelling; dwellings in commercial, CD-1, DD or industrial zones are missed. Cross-check, nearest STRATA parcel in a non-residential zone (often condos, use not stated): 320 GRANVILLE ST (CD-1 (702)) at 59.8 m. Residential-zoned parcels within 1.5 km (AUC receptor reach): 380.",
+    "data_file": "data/vancouver_parcels_2026.geojson"
+   },
+   "9_coverage_and_plot_ratio": {
+    "value": {
+     "site_coverage": 0.928,
+     "plot_ratio": "not derivable without a storey count"
+    },
+    "how": "site coverage = 2009 footprints on lot ÷ lot area (EPSG:26910). Plot ratio needs floor area: the tax report has none; footprint × storeys needs an assumed storey height (the register's 3.5–4.5 m) — not applied here.",
+    "data_file": "data/vancouver_footprints_2009.geojson"
+   },
+   "6_weather": {
+    "value": {
+     "hours_le_8C": 3284,
+     "hours_lt_8C": 3220,
+     "annual_mean_C": 10.58,
+     "hdd18_hourly": 2810.0,
+     "min_C": -5.8,
+     "max_C": 25.6,
+     "hours": 8760
+    },
+    "how": "EPW field 7 (dry-bulb °C), 8760 hourly rows; hours with T <= 8.0 °C (and < 8.0 shown). HDD18 = Σ max(0, 18 − T) ÷ 24. Header: \"LOCATION,VANCOUVER INTL A,BC,CAN,CWEC2011,718920,49.19,-123.18,-8.0,4.3\". Year column in the rows: {'2000': 672, '2001': 744, '2002': 720, '2006': 744, '2009': 744, '2011': 744, '2013': 720, '2015': 744, '2016': 1464, '2017': 1464}. Sanity check: VANCOUVER INTERNATIONAL (AIRPORT) 1991–2020 normal annual daily average 10.5 °C (normals station as named in the file; for Edmonton it is not confirmed to be the same station as the Edmonton Intl CWEC file).",
+    "data_file": "data/51376785-CAN_BC_VANCOUVER-INTL-A_1108395_CWEC.epw; data/en_1991-2020_Normals_BC_VANCOUVER_INTERNATIONAL_AIRPORT.csv"
+   },
+   "10_not_from_lot_data": {
+    "value": "not derivable from lot data",
+    "how": "start_case: asked of the user (quick-path default: new, whole building); host_building: asked; cooling_type: permits / operator / site visit; plant_schedule: permits, noise reports, site visit; spare_cooling: operator claim or judged; lighting_plan: site visit; receiver_temp: set by receiver type, not by lot data; area: tool radius setting",
+    "data_file": "—"
+   }
+  }
+ }
+}
