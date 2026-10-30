@@ -10,7 +10,7 @@ const crf=(i,n)=>i*Math.pow(1+i,n)/(Math.pow(1+i,n)-1);
 const usd=1.3978; // Bank of Canada 2025 annual average (as ECON)
 const X={
  pv:{cost:k=>k<100?[2.0,3.2]:k<250?[1.9,2.4]:[1.68,2.22], om:21*usd, life:30, // CAD/W (NRCan/IEA PVPS Canada 2024, register pv_cost); O&M US$21/kW·yr, 30 yr (NREL ATB 2024)
-     export:{van:'exports above the site\'s own use earn 10 ¢/kWh, up to 100 kW per phase (RS 2289 from 1 Jul 2026, BCUC G-64-26)',edm:'under 5 MW is micro-generation: exports credited at the retail energy rate under 150 kW, at the hourly pool price above (AESO 2025)'}},
+     export:{van:'exports above the site\'s own use earn 10 ¢/kWh, up to 100 kW per phase (RS 2289 from 1 Jul 2026, BCUC G-64-26), for a site connected at distribution voltage, as a 2.5–10 MW data centre usually is; not available on transmission service (RS 1830)',edm:'under 5 MW is micro-generation, sized to the site\'s own use: exports credited at the retail energy rate under 150 kW, at the hourly pool price above (Alberta Micro-generation Regulation; AUC guideline 2026)'}},
  batt:{capex:[334*usd,448.34*usd], omShare:[0.025,0.04], life:15, rte:0.85, // CAD/kWh: NREL 2025 utility-scale 4 h (US$334, 2024$) to PNNL 2022 1 MW 4 h (US$448, 2021$); no inflation adjustment; O&M 2.5% (NREL ATB commercial) to 4% (NREL 2025) of capex a year; 15 yr; 85%
    van:{dr:50, esi:0.80}, // BC Hydro Demand Response for Business $50 per average kW reduced a season (Nov–Mar, ≤ 20 events, ≤ 4 h); Energy Storage Incentive pays up to 80% of eligible cost (≥ 25 kW, behind the meter, non-exporting, 10-yr contract; LGS eligible, transmission customers not)
    edm:{active:[34.75,43.71], standby:[11.28,14.03]}}, // AESO operating reserves, $/MW per hour procured, 2025 and 2024 (Annual Market Statistics 2025, Table 13, cost ÷ volume); not by product
@@ -52,7 +52,7 @@ function nearSub(f){ if(!SUB) return null; const named=(SUB.named&&SUB.named[f.c
 BD.nearSub=nearSub;
 /* ---------- electricity ---------- */
 function solar(f){ const lay=BD.pvLayout&&BD.pvLayout(f); if(!lay||!lay.kwp[1]) return null; const pv=BD._pv, c=f.city;
-  const yl=pv?[pv[c].horizontal.reduce((s,v)=>s+v,0),pv[c].latitude.reduce((s,v)=>s+v,0)]:(c==='van'?[892,1007]:[944,1244]);
+  const yl=pv?[pv[c].horizontal.reduce((s,v)=>s+v,0),pv[c].latitude.reduce((s,v)=>s+v,0)]:(c==='van'?[892,1006]:[947,1243]);
   const M=f.M, z0=((M&&(M.roofH||M.H))||4)+0.5, pts=lay.slots.map(r=>BD.centroid(r)), sh=roofShade(f,pts,z0), keepF=sh?1-sh.loss:1;
   const kwp=lay.kwp, mwh=[kwp[0]*yl[0]/1000*keepF,kwp[1]*yl[1]/1000*keepF], cw=X.pv.cost(kwp[1]), capex=[kwp[0]*1000*cw[0],kwp[1]*1000*cw[1]], om=[kwp[0]*X.pv.om,kwp[1]*X.pv.om];
   const v=ECON().elec[c], k=crf(rate(),X.pv.life);
@@ -100,10 +100,10 @@ function elecSecs(f){ const s=solar(f), b=battery(f), ev=evHub(f), Bst=solarBest
 function nearEV(f){ const ev=BD.evNear&&BD.evNear(f); return ev?`${ev.n} public charging station${ev.n===1?'':'s'} within 1 km (${ev.l2} Level 2 ports, ${ev.dc} DC fast; NRCan locator, 16 Oct 2026)`:'charging stations nearby: not loaded'; }
 function nearCT(f){ const w=BD.wpNear&&BD.wpNear(f,'ct',500); return f.city!=='van'?'no cooling-tower permit list for Edmonton':w?`${w.n} cooling tower${w.n===1?'':'s'} with active City operating permits within 500 m, nearest ${fmt(Math.round(w.d))} m: buildings that already buy water for cooling (counts and distances only)`:'cooling-tower permits: not loaded'; }
 /* ---------- water ---------- */
-function waterRate(c){ if(c==='van') return {r:X.water.van,known:true,txt:'City of Vancouver 2026: water $1.445–1.811 per m³ (winter, summer) + sewer $2.811 per m³, both billed on metered water'};
+function waterRate(c){ if(c==='van') return {r:X.water.van,known:true,txt:'City of Vancouver 2026 rates as proposed: water $1.445–1.811 per m³ (winter, summer) + sewer $2.811 per m³ (?), both billed on metered water'};
   const o=X.water.edmOld; return {r:[o.w[0]+o.ww[0]+o.san,o.w[1]+o.ww[1]+o.san],known:false,txt:'EPCOR 2026 commercial rates not read: placeholder from the 2022–23 commercial water tiers ($0.95–1.61), the proposed 2025 wastewater treatment ($0.46–1.15) and the proposed sanitary rate ($1.12)'}; }
-function towerUse(f,outside){ const R=E().R, mw=A().mw||1, MWh=mw*R.pue[1]*8760*R.lf; const hyb=outside==='hybrid', share={van:0.124,edm:0.104}[f.city]; if(outside==='dry') return null;
-  const evap=MWh*1.5*(hyb?share:1); return {evap,mk:[evap*1.2,evap*2]}; }
+function towerUse(f,outside){ const R=E().R, mw=A().mw||1, MWh=mw*R.pue[1]*8760*R.lf, MWh0=mw*R.pue[0]*8760*R.lf; const hyb=outside==='hybrid', share={van:0.124,edm:0.104}[f.city]; if(outside==='dry') return null;
+  const evap=MWh*1.5*(hyb?share:1), evap0=MWh0*1.5*(hyb?share:1); return {evap,evap0,mk:[evap0*1.2,evap*2]}; } /* 30 Oct 2026: low end at PUE 1.4, high end at 1.55 */
 function rain(f,outside){ const roof=E().roofArea(f), mm=f.city==='van'?1159.5:422.5, wet=f.city==='van'?124:80, v=roof*mm/1000*0.8, tank=roof*wet/1000*0.8; const t=towerUse(f,outside);
   const used=t?Math.min(v,t.mk[0]):0; const wr=waterRate(f.city); if(!used) return {v,tank,used:0,wr};
   const cap=[tank*X.tank.cost[0],tank*X.tank.cost[1]], lc=[crf(rate(),X.tank.life[1])*cap[0]/used,crf(rate(),X.tank.life[0])*cap[1]/used];
@@ -119,7 +119,7 @@ function waterSecs(f){ const sec=BD.sec, out=A().outside||'dry', wr=waterRate(f.
      <dt>What it is worth</dt><dd>${esc(wr.txt)}</dd>${r.used?`<dt>What it costs</dt><dd>${money(r.cap[0])}–${money(r.cap[1])} for the tank and pumps: $${X.tank.cost[0]}–${fmt(Math.round(X.tank.cost[1]))} per m³ of storage (City of Vancouver toolkit 2014, ±30%, to US EPA 2013 with pumps and controls, US$ converted, no inflation adjustment); tanks warranted 15–30 years (US DOE FEMP)</dd>
      <dt>Cost against worth</dt><dd><span class="k">$${r.lc[0].toFixed(2)}–${r.lc[1].toFixed(2)} per m³</span> against $${wr.r[0].toFixed(2)}–${wr.r[1].toFixed(2)}</dd><dt>Years to pay back</dt><dd>${yrs(r.pay[0])} to ${yrs(r.pay[1])}</dd>`:''}
      <dt>Best set-up found</dt><dd>${(()=>{ const ok=all.filter(x=>x.r.used).sort((a,b)=>a.r.lc[0]-b.r.lc[0]); return ok.length?`${ok[0].o==='towers'?'cooling towers':'hybrid coolers'} use the most rain (${fmt(ok[0].r.used)} m³ a year, $${ok[0].r.lc[0].toFixed(2)}–${ok[0].r.lc[1].toFixed(2)} per m³); they also buy the most water`:'none: with no tower water to replace, rain has no use here'; })()}</dd></dl>`);
-  h+=sec('x-recl','Reclaimed water',f.city==='van'?'no price set: Metro Vancouver commits to one (UT-019, 2023)':'Gold Bar supplies one industrial customer by a 5.5 km pipe; price not published',
+  h+=sec('x-recl','Reclaimed water',f.city==='van'?'no price set: Metro Vancouver commits to one (UT-019, 2023)':'Gold Bar supplies local industry with reclaimed water (EPCOR, utility claim; customers not named); price not published',
     `<dl><dt>What it is worth</dt><dd>${f.city==='van'?'Metro Vancouver\'s interim policy (UT-019, 29 Sep 2023) lists industrial uses and commits to setting a price; none is published':'EPCOR\'s Gold Bar plant supplies reclaimed water to industry (EPCOR wastewater PBR 2025–27); the price is not published'}. US utilities price reclaimed water at 20–100% of drinking water (2007 US survey, in a UBC Sustainability Scholars report for Metro Vancouver, 2022; not peer-reviewed)</dd>
      <dt>A precedent</dt><dd>Quincy, Washington: a city-owned reuse plant, $31 M paid by the operator, 30-year agreement, saving about 522 ML of drinking water a year (US EPA case study)</dd><dt>Cost against worth</dt><dd>not yet known: no price, no pipe cost</dd></dl>`);
   return h; }

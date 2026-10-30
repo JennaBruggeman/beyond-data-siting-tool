@@ -85,3 +85,5 @@ print('written; non-quantity inputs:',missing)
 import subprocess as _sp, sys as _sys
 if _sp.call([_sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'check_sources.py')]) != 0:
     _sys.exit('register rebuild stopped: cited sources without a check record (see above)')
+# 30 Oct 2026 (P-09): tool/opps.json is rebuilt from the register every time, so it can't drift
+_sp.check_call([_sys.executable, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'tool', 'make_tool_opps.py')])

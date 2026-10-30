@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Hand the register's opportunity labels, add-ons (try menu), label systems and the text of every source they cite to the tool.
-In: formula_register.json. Out: tool/opps.json. Run after make_register_md.py (pipeline), or any time the register changes."""
+In: register/formula_register.json (path fixed 30 Oct 2026, P-09). Out: tool/opps.json. Run after make_register_md.py (pipeline), or any time the register changes."""
 import json, os, re
 H = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(H)
-r = json.load(open(os.path.join(ROOT, 'formula_register.json'), encoding='utf-8'))
+r = json.load(open(os.path.join(ROOT, 'register', 'formula_register.json'), encoding='utf-8'))
 m = r['meta']; S = {**r.get('old_sources', {}), **r['new_sources']}
 used = set()
 def walk(x):

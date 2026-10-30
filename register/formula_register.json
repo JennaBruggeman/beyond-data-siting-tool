@@ -2587,7 +2587,56 @@
    "epiTIA942": "certifier reading (industry)",
    "bchES54F": "utility standard",
    "nfc2020_4313": "code",
-   "bcbc2024_3275": "code"
+   "bcbc2024_3275": "code",
+   "sfpucReuse": "regulator",
+   "estruxtureVAN1ds": "named in our notes, not yet checked",
+   "cologixVAN4web": "named in our notes, not yet checked",
+   "cologixVAN2web": "named in our notes, not yet checked",
+   "hut8VAN1": "named in our notes, not yet checked",
+   "hut8Vault": "named in our notes, not yet checked",
+   "sethuramalingam2019": "named in our notes, not yet checked",
+   "ornlWang": "named in our notes, not yet checked",
+   "zimmermann2012": "named in our notes, not yet checked",
+   "reinholdt2018": "named in our notes, not yet checked",
+   "pieper2020": "named in our notes, not yet checked",
+   "enefg11": "named in our notes, not yet checked",
+   "greenGridWP29": "named in our notes, not yet checked",
+   "uptimeRegional2025": "named in our notes, not yet checked",
+   "nrcanEstarDC": "named in our notes, not yet checked",
+   "schneiderUPS2020": "named in our notes, not yet checked",
+   "uptimeHeslin2014": "named in our notes, not yet checked",
+   "cologixVAN2fr": "named in our notes, not yet checked",
+   "energyPlusPeople": "named in our notes, not yet checked",
+   "burlingtonPlans2026": "named in our notes, not yet checked",
+   "abp317802": "named in our notes, not yet checked",
+   "abp317446": "named in our notes, not yet checked",
+   "nrelATB_crf": "named in our notes, not yet checked",
+   "ieaSHCTask54": "named in our notes, not yet checked",
+   "monstadt2025": "named in our notes, not yet checked",
+   "munda": "named in our notes, not yet checked",
+   "cinelli2014": "named in our notes, not yet checked",
+   "rowley2012": "named in our notes, not yet checked",
+   "vanixFacilities": "named in our notes, not yet checked",
+   "yegixStatus": "named in our notes, not yet checked",
+   "ciraIXP2023": "named in our notes, not yet checked",
+   "traneTCA2026": "named in our notes, not yet checked",
+   "femp2024dc": "named in our notes, not yet checked",
+   "vertivEXLS1": "named in our notes, not yet checked",
+   "vertivHPL": "named in our notes, not yet checked",
+   "vertivCDU2300": "named in our notes, not yet checked",
+   "thermokeyGH2490": "named in our notes, not yet checked",
+   "bacS3000_2012": "named in our notes, not yet checked",
+   "carrier61XWH": "named in our notes, not yet checked",
+   "uptime2024survey": "named in our notes, not yet checked",
+   "abStandata19FCI003": "named in our notes, not yet checked",
+   "vanFCL2014": "named in our notes, not yet checked",
+   "vbbl2019_58": "named in our notes, not yet checked",
+   "bcbc2018_911": "named in our notes, not yet checked",
+   "vaSpec230541": "named in our notes, not yet checked",
+   "melo2001": "named in our notes, not yet checked",
+   "edmZoningGeo": "named in our notes, not yet checked",
+   "vanCD1_520": "named in our notes, not yet checked",
+   "solar": "guideline (City of Vancouver, downtown)"
   },
   "source_check": {
    "mfrDryCooler": "agent",
@@ -2783,7 +2832,56 @@
    "epiTIA942": "claude",
    "bchES54F": "claude",
    "nfc2020_4313": "claude",
-   "bcbc2024_3275": "claude"
+   "bcbc2024_3275": "claude",
+   "sfpucReuse": "claude",
+   "estruxtureVAN1ds": "claude",
+   "cologixVAN4web": "claude",
+   "cologixVAN2web": "claude",
+   "hut8VAN1": "claude",
+   "hut8Vault": "claude",
+   "sethuramalingam2019": "claude",
+   "ornlWang": "claude",
+   "zimmermann2012": "claude",
+   "reinholdt2018": "claude",
+   "pieper2020": "claude",
+   "enefg11": "claude",
+   "greenGridWP29": "claude",
+   "uptimeRegional2025": "claude",
+   "nrcanEstarDC": "claude",
+   "schneiderUPS2020": "claude",
+   "uptimeHeslin2014": "claude",
+   "cologixVAN2fr": "claude",
+   "vanSolarAccess": "claude",
+   "energyPlusPeople": "claude",
+   "burlingtonPlans2026": "claude",
+   "abp317802": "claude",
+   "abp317446": "claude",
+   "nrelATB_crf": "claude",
+   "ieaSHCTask54": "claude",
+   "monstadt2025": "claude",
+   "munda": "claude",
+   "cinelli2014": "claude",
+   "rowley2012": "claude",
+   "vanixFacilities": "claude",
+   "yegixStatus": "claude",
+   "ciraIXP2023": "claude",
+   "traneTCA2026": "claude",
+   "femp2024dc": "claude",
+   "vertivEXLS1": "claude",
+   "vertivHPL": "claude",
+   "vertivCDU2300": "claude",
+   "thermokeyGH2490": "claude",
+   "bacS3000_2012": "claude",
+   "carrier61XWH": "claude",
+   "uptime2024survey": "claude",
+   "abStandata19FCI003": "claude",
+   "vanFCL2014": "claude",
+   "vbbl2019_58": "claude",
+   "bcbc2018_911": "claude",
+   "vaSpec230541": "claude",
+   "melo2001": "claude",
+   "edmZoningGeo": "claude",
+   "vanCD1_520": "claude"
   },
   "research_pass": {
    "date": "16 Oct 2026",
@@ -14697,6 +14795,15 @@
      "where": "source PDF / local code copy",
      "what": "plant research"
     }
+   ],
+   "_place_stage": [
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "checks/findings_place.md",
+     "what": "place-stage fixes applied (P-01–P-23 clear-cut)"
+    }
    ]
   },
   "check_log_note": "check_log: CHECK 1 = first read (Claude, overnight pass 29 Oct 2026); CHECK 2 = independent agent re-read the same evening. 'confirmed' = both reads agree. 'fixed at check 2' = the second reader found a difference and the entry was corrected to the source wording it quoted: that new wording has one read, so it is the place for any third look. Items still marked '?' stay open. Back-fill (30 Oct 2026): sources read before per-source logging began (16 Oct) have a check-1 entry pointing to the research note that records them; sources with no trace in any note were re-read as check 1.",
@@ -19910,7 +20017,7 @@
    "inputs": [
     "parcel"
    ],
-   "coef": "BC licence: cooling application $1,000; heat-exchange rental $2.25 per 1,000 m³ (min $200); DFO intake screens 2.54 mm, approach velocity 0.035–0.055 m/s (internal conflict — confirm); Alberta Water Act review as for any industrial project; Toronto Enwave precedent: 4 °C in, ≤13 °C out, 50-year agreement | 19 Oct 2026 (K): Burrard Inlet bottom water 7.6–13.9 °C all year (False Creek not sampled); North Saskatchewan near 0 °C in winter with frazil-ice risk, summer not found; flow 24–49 L/s per MW at a 10–5 °C rise (derived); pipe about US$2,120–2,150/m (Hawaii 2002, deep ocean, an upper bound); BC: cooling water needs a waste discharge authorization, Port category C for a new discharge (60–120 business days ?); Edmonton: river valley plan allows major facilities only where essential and bans utility corridors except crossings. Distance to shore not computed: no shoreline file in the tool yet | 19 Oct 2026 (K): Burrard Inlet bottom water 7.6–13.9 °C all year (False Creek not sampled); North Saskatchewan near 0 °C in winter with frazil-ice risk, summer not found; flow 24–49 L/s per MW at a 10–5 °C rise (derived); pipe about US$2,120–2,150/m (Hawaii 2002, deep ocean, an upper bound); BC: cooling water needs a waste discharge authorization, Port category C for a new discharge (60–120 business days ?); Edmonton: river valley plan allows major facilities only where essential and bans utility corridors except crossings. distance to the water: Edmonton from the North Saskatchewan River outline (Altalis via Edmonton Public Schools, tool/shore.json); Vancouver not yet (CanVec Hydro to come) | 19 Oct 2026 (K): Burrard Inlet bottom water 7.6–13.9 °C all year (False Creek not sampled); North Saskatchewan near 0 °C in winter with frazil-ice risk, summer not found; flow 24–49 L/s per MW at a 10–5 °C rise (derived); pipe about US$2,120–2,150/m (Hawaii 2002, deep ocean, an upper bound); BC: cooling water needs a waste discharge authorization, Port category C for a new discharge (60–120 business days ?); Edmonton: river valley plan allows major facilities only where essential and bans utility corridors except crossings. distance to the water: Edmonton from the North Saskatchewan River outline (Altalis via Edmonton Public Schools), Vancouver from NRCan CanVec 50K Hydro (ocean and Fraser River polygons) (tool/shore.json)",
+   "coef": "BC licence: cooling application $1,000; heat-exchange rental $2.25 per 1,000 m³ (min $200); DFO intake screens 2.54 mm, approach velocity 0.035–0.055 m/s (internal conflict — confirm); Alberta Water Act review as for any industrial project; Toronto Enwave precedent: 4 °C in, ≤13 °C out, 50-year agreement | 19 Oct 2026 (K): Burrard Inlet bottom water 7.6–13.9 °C all year (False Creek not sampled); North Saskatchewan near 0 °C in winter with frazil-ice risk, summer not found; flow 24–49 L/s per MW at a 10–5 °C rise (derived); pipe about US$2,120–2,150/m (Hawaii 2002, deep ocean, an upper bound); BC: cooling water needs a waste discharge authorization, Port category C for a new discharge (60–120 business days ?); Edmonton: river valley plan allows major facilities only where essential and bans utility corridors except crossings. Distance to shore not computed: no shoreline file in the tool yet | 19 Oct 2026 (K): Burrard Inlet bottom water 7.6–13.9 °C all year (False Creek not sampled); North Saskatchewan near 0 °C in winter with frazil-ice risk, summer not found; flow 24–49 L/s per MW at a 10–5 °C rise (derived); pipe about US$2,120–2,150/m (Hawaii 2002, deep ocean, an upper bound); BC: cooling water needs a waste discharge authorization, Port category C for a new discharge (60–120 business days ?); Edmonton: river valley plan allows major facilities only where essential and bans utility corridors except crossings. distance to the water: Edmonton from the North Saskatchewan River outline (Altalis via Edmonton Public Schools, tool/shore.json); Vancouver not yet (CanVec Hydro to come) | 19 Oct 2026 (K): Burrard Inlet bottom water 7.6–13.9 °C all year (False Creek not sampled); North Saskatchewan near 0 °C in winter with frazil-ice risk, summer not found; flow 24–49 L/s per MW at a 10–5 °C rise (derived); pipe about US$2,120–2,150/m (Hawaii 2002, deep ocean, an upper bound); BC: cooling water needs a waste discharge authorization, Port category C for a new discharge (60–120 business days ?); Edmonton: river valley plan allows major facilities only where essential and bans utility corridors except crossings. distance to the water: Edmonton from the North Saskatchewan River outline (Altalis via Edmonton Public Schools), Vancouver from NRCan CanVec 50K Hydro (ocean and Fraser River polygons) (tool/shore.json) P-15 (30 Oct 2026): river water 23.9–47.8 L/s per MW (4.18 kJ/kg·K, 1.0 kg/L) for the North Saskatchewan and Fraser arms; sea water 24–49 for Burrard Inlet (4.0 kJ/kg·K, 1.025 kg/L).",
    "sources": [
     "bcWSRfees",
     "thermalLimits",
@@ -20093,7 +20200,7 @@
    "inputs": [
     "parcel"
    ],
-   "coef": "BC LGS (RS 1600–1611, effective 1 Apr 2026): $13.83/kW, 6.79 ¢/kWh, 29.99 ¢/day; RS 1830 (supply at 60 kV or higher, effective 1 Apr 2026): $12.178/kVA, 4.914 ¢/kWh; loads >150 MW pay full incremental cost; 300 MW AI + 100 MW DC allocation. Alberta: pool $43.68/MWh (2025), $62.78 (2024); EPCOR DAS-TOUP and SAS-TOUP; FortisAlberta Rate 63; Rate of Last Resort not available to these loads. Replaces the first attempt's assumed $80–120/MWh; BC's over-150 MW full-cost rule is stated for industrial customers on the North Coast line; data centres not named: context, not a rule for the Vancouver site [decision 30 Oct 2026]",
+   "coef": "BC LGS (RS 1600–1611, effective 1 Apr 2026): $13.83/kW, 6.79 ¢/kWh, 29.99 ¢/day; RS 1830 (supply at 60 kV or higher, effective 1 Apr 2026): $12.178/kVA, 4.914 ¢/kWh; loads >150 MW pay full incremental cost; 300 MW AI + 100 MW DC allocation. Alberta: pool $43.68/MWh (2025), $62.78 (2024); EPCOR DAS-TOUP and SAS-TOUP; FortisAlberta Rate 63; Rate of Last Resort not available to these loads. Replaces the first attempt's assumed $80–120/MWh; BC's over-150 MW full-cost rule is stated for industrial customers on the North Coast line; data centres not named: context, not a rule for the Vancouver site [decision 30 Oct 2026] P-12 (30 Oct 2026): the BC Hydro demand charge is billed monthly, so a year is 12 × the monthly charge. Edmonton energy: pool $43.68 + EPCOR $2.50/MWh + 7.99% = $49.67/MWh (epcorDASSAS). The large general service rate applies at distribution voltage; transmission service (RS 1830, 60 kV or higher) is not applied; the size at which BC Hydro requires it is not sourced (?).",
    "sources": [
     "bchTariff2026",
     "bchLGS",
@@ -20288,7 +20395,7 @@
     "receptors",
     "parcel"
    ],
-   "coef": "Vancouver By-law 6555: quiet→quiet 55/45, activity→quiet 60/55, intermediate or activity→other 70/65 (day/night); background credited only for commercial premises. AUC Rule 012 road categories credit ambient but apply only to power plants and substations. Neither city publishes a road-noise map (traffic counts only). Edmonton Bylaw 14600 limits pending (J.B. retrieval D1)",
+   "coef": "Vancouver By-law 6555: quiet→quiet 55/45, activity→quiet 60/55, intermediate or activity→other 70/65 (day/night); background credited only for commercial premises. AUC Rule 012 road categories credit ambient but apply only to power plants and substations. Neither city publishes a road-noise map (traffic counts only). Edmonton Bylaw 14600 (ss. 19–22, at the property line): 50 dBA overnight next to homes, 60 next to non-residential uses; no ambient credit (bylaw14600; P-13, 30 Oct 2026)",
    "sources": [
     "van6555zones",
     "rule012",
@@ -21119,7 +21226,7 @@
     "massing",
     "plant_schedule"
    ],
-   "coef": "18 Oct 2026 (sweep M102): the register now matches the layout the Solar card uses (addons.js pvLayout); the earlier roof area × 0.66 × (1 − plant share) × 0.70 formula is retired. yield, annual kWh/kWp (NRCan municipal values, ±10%, losses in a 0.75 performance ratio): Vancouver 892 horizontal to 1007 at latitude tilt; Edmonton 944 to 1244. A flat-roof array at about 15° tilt lies between the two, so the tool uses horizontal as the low end and latitude tilt as the high end. Edmonton yields about 6–24% more than Vancouver per kWp. Module density 0.16 kWp/m² (2014 median) to 0.20 (current) (NREL); module cover 0.70 of a flat roof at 15° tilt; 66% of large roofs suitable (NREL 2016); roof share taken by plant from the cooling module",
+   "coef": "18 Oct 2026 (sweep M102): the register now matches the layout the Solar card uses (addons.js pvLayout); the earlier roof area × 0.66 × (1 − plant share) × 0.70 formula is retired. yield, annual kWh/kWp (NRCan municipal values, ±10%, losses in a 0.75 performance ratio): Vancouver 892 horizontal to 1007 at latitude tilt; Edmonton 944 to 1244. A flat-roof array at about 15° tilt lies between the two, so the tool uses horizontal as the low end and latitude tilt as the high end. Edmonton yields about 6–24% more than Vancouver per kWp. Module density 0.16 kWp/m² (2014 median) to 0.20 (current) (NREL); module cover 0.70 of a flat roof at 15° tilt; 66% of large roofs suitable (NREL 2016); roof share taken by plant from the cooling module P-05 (30 Oct 2026): 128 / 159 kWh per m² of roof is our derivation, at the optimistic end (module density × whole usable roof). P-16 (30 Oct 2026): one set of NRCan yields everywhere: Vancouver 892 (flat) – 1,006 (latitude tilt), 718 vertical; Edmonton 947 – 1,243, 990 vertical.",
    "sources": [
     "nrcanPVmunic",
     "nrel_rooftop2016",
@@ -21631,7 +21738,7 @@
     "heat_rejected",
     "ground"
    ],
-   "coef": "q = 12 W/m (base design, 1,248 m) to 19 W/m (economic optimum, about 760 m), both for the ground-only heat-pump system; the dry-cooler hybrid only reused 760 m (derived by dividing the 14.5 kW cooling load by length, not the heat rejected to the ground, which also includes compressor work; Zurmuhl et al. 2018 s. 3.1, 4.2.1–4.2.2, a 14.5 kW data centre, Ithaca, k 3.27 W/m·K; checked 18 Oct 2026); Edmonton design k 1.9 W/m·K (Alberta Geological Survey) → ~7–11 W/m (scaling is an assumption); ≈2 ha of borefield per MW rejected; 40 MW ≈ 0.8 km²; screening only — CSA C448 sizing and a thermal response test required; no Vancouver ground data found",
+   "coef": "q = 12 W/m (base design, 1,248 m) to 19 W/m (economic optimum, about 760 m), both for the ground-only heat-pump system; the dry-cooler hybrid only reused 760 m (derived by dividing the 14.5 kW cooling load by length, not the heat rejected to the ground, which also includes compressor work; Zurmuhl et al. 2018 s. 3.1, 4.2.1–4.2.2, a 14.5 kW data centre, Ithaca, k 3.27 W/m·K; checked 18 Oct 2026); Edmonton design k 1.9 W/m·K (Alberta Geological Survey) → ~7–11 W/m (scaling is an assumption); ≈2 ha of borefield per MW rejected; 40 MW ≈ 0.8 km²; screening only — CSA C448 sizing and a thermal response test required; no Vancouver ground data found P-22 (30 Oct 2026): \"about 2 ha per MW\" holds only at 12 W/m; at 19 W/m it is about 1.3 ha, and at the 7–11 W/m used for Edmonton 2.2–3.4 ha per MW (our arithmetic, same 150 m boreholes on 36 m²).",
    "sources": [
     "zurmuhl2018",
     "ags_edmonton",
@@ -21766,7 +21873,7 @@
    "name": "Aquifer heat store (open loop)",
    "stage": "place",
    "unit": "m³/h; MWh/yr",
-   "formula": "flow = MW × 3.6 ÷ (4.18 × ΔT); heat out ≈ 0.6 × heat in",
+   "formula": "flow (m³/h) = MW × 1,000 × 3.6 ÷ (4.18 × ΔT); heat out ≈ 0.6 × heat in",
    "inputs": [
     "ground",
     "heat_captured"
@@ -21814,7 +21921,7 @@
    "inputs": [
     "receiver_demand"
    ],
-   "coef": "Edmonton: ~90 °C at 2.5 km, 30–80 kg/s → 2.1–5.6 MWth average per well pair, $4.7–8 M per well (Majorowicz & Grasby 2021); licensed by the AER (Directive 089, 2025); competes with data-centre heat as a district source rather than cooling the data centre; Vancouver: not plausible for power, direct use unproven",
+   "coef": "Edmonton: ~90 °C at 2.5 km, 30–80 kg/s → 2.1–5.6 MWth average per well pair, $4.7–8 M per well (Majorowicz & Grasby 2021); licensed by the AER (Directive 089, 2025); competes with data-centre heat as a district source rather than cooling the data centre; Vancouver: not plausible for power, direct use unproven P-21 (30 Oct 2026): the return temperature is not stated; 2.1–5.6 MWth from 30–80 kg/s implies a drop of about 16.7 K, a return near 73 °C (our arithmetic ?).",
    "sources": [
     "majorowicz2021",
     "aer_d089",
@@ -22494,7 +22601,7 @@
     "flood_area",
     "start_case"
    ],
-   "coef": "Vancouver FCL 4.6 m (GVRD datum, includes 1 m sea-level rise to 2100, 1:500-yr, 0.6 m freeboard); switchgear, electrical panels and fire protection not below FCL unless flood-protected (VBBL Div. C 2.2.9.3(2)); main switchgear in industrial buildings at or above FCL (F014 s. 3.3)",
+   "coef": "Vancouver FCL 4.6 m (GVRD datum, includes 1 m sea-level rise to 2100, 1:500-yr, 0.6 m freeboard); switchgear, electrical panels and fire protection not below FCL unless flood-protected (VBBL 2025 Div. B 2.2.10.3(2); hazardous or toxic substances not stored below FCL, 2.2.10.3(3)); main switchgear in industrial buildings at or above FCL (F014 s. 3.3) P-14 (30 Oct 2026): clause settled by reading the by-law (earlier cited as Div. C 2.2.9.3); counting generator diesel as a \"hazardous substance\" is our reading (?).",
    "sources": [
     "van_f014",
     "van_floodplain",
@@ -22589,7 +22696,7 @@
     "it_load_actual",
     "parcel"
    ],
-   "coef": "BC Hydro: above 6.5 MVA (12.5 kV areas) or 13 MVA (25 kV areas) a two-feeder supply may be required; 60 kV and above under transmission rules. EPCOR: primary service typical above 2,500 kVA; transformer clearances 3.0 m / 2.0 m; access road 4.6 m in a 6.5 m strip",
+   "coef": "BC Hydro: above 6.5 MVA (12.5 kV areas) or 13 MVA (25 kV areas) a two-feeder supply may be required; 60 kV and above under transmission rules. EPCOR: primary service typical above 2,500 kVA; transformer clearances 3.0 m / 2.0 m; access road 4.6 m in a 6.5 m strip P-12 (30 Oct 2026): power factor taken as 1, so kW = kVA (our assumption ?).",
    "sources": [
     "bch_primary",
     "epcor_ccg"
@@ -23539,7 +23646,7 @@
    "inputs": [
     "parcel"
    ],
-   "coef": "Vancouver: Stage 3 2015; Stage 2 2023 (4 Aug–15 Oct); 2026 Stage 3 from 8 Jun; Edmonton: one mandatory ban 29 Jan–2 Feb 2024 (plant failure, not drought); EPCOR: restrictions not every year",
+   "coef": "Vancouver: Stage 2 from 1 May 2026, Stage 3 anticipated early June (Metro Vancouver report, 1 May 2026); 2023 the last escalation to Stage 2 before 2026; earlier dates held back until each is sourced (P-19, 30 Oct 2026); Edmonton: one mandatory ban 29 Jan–2 Feb 2024 (plant failure, not drought); EPCOR: restrictions not every year",
    "sources": [
     "mvStageHistory",
     "epcorStages"
