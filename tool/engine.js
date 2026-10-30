@@ -176,7 +176,7 @@ function noiseLw(mw){ const CU=coolUnits(mw), LU=CU.name==='dry coolers'?R.lwUni
    29 Oct 2026). Each count is [low, high] where its coefficient is a range. */
 R.equip={kwRack:[7.1,8], upsKW:1000, cabKW:[400,263], crahKW:[246,172], cduKW:1516, wallKW:500, rowKW:73.7, rowOver:1.2, wfCrah:150, wfWall:400};
 /* layout rules (register: hall_layout, electrical_room; 29 Oct 2026) — every distance has its source there */
-R.layout={aisle:1.2, corridor:1.1, crahFront:0.864, crahEnd:0.457, cduFront:1.0, upsFront:1.5, battFront:0.914, battWall:0.025, upsAmps:1203, wallClear:1.1, wallGap:0.152};
+R.layout={rackFloor:2.32 /* m² of floor a rack: Schneider WP 46 Fig. 1 'rack floor equivalent of 25 ft2' (aisles included; common 25–30 ft²) */, aisle:1.2, corridor:1.1, crahFront:0.864, crahEnd:0.457, cduFront:1.0, upsFront:1.5, battFront:0.914, battWall:0.025, upsAmps:1203, wallClear:1.1, wallGap:0.152};
 function equip(mw,A){ A=A||BD.S.answers; const sp=A.spares||'n1', red=n=>sp==='2n'?n*2:sp==='n1'?n+1:n, kw=mw*1000, E=R.equip;
   const air=(A.inside||'air')==='air', liq=air?[0,0]:(A.inside==='immersion'?[1,1]:R.capture); // immersion: all heat in liquid (register liquid_capture, not verified)
   const toAir=[kw*(1-liq[1]),kw*(1-liq[0])], toLiq=[kw*liq[0],kw*liq[1]];

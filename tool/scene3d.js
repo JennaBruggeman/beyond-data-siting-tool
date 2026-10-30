@@ -23,7 +23,7 @@ function setup(){
   labels=document.createElement('div'); labels.style.cssText='position:absolute;inset:0;pointer-events:none;font:300 11px/1.3 "Open Sans",system-ui,sans-serif;color:#9d9a94;overflow:hidden';
   tip=document.createElement('div'); tip.style.cssText='position:absolute;pointer-events:none;background:rgba(30,32,35,.95);border:1px solid #3c4148;border-radius:6px;padding:5px 8px;font:300 12px/1.35 "Open Sans",system-ui,sans-serif;color:#e9e6e1;display:none;max-width:260px;z-index:4';
   const bar=document.createElement('div'); bar.style.cssText='position:absolute;left:12px;top:12px;right:12px;display:flex;gap:6px;z-index:3;flex-wrap:wrap;pointer-events:none';
-  bar.innerHTML='<button id="v3map" style="pointer-events:auto;background:rgba(30,32,35,.92);border:1px solid #3c4148;border-radius:6px;padding:4px 10px;color:#e9e6e1;cursor:pointer;font-size:12px">← Map</button><button id="v3light" style="pointer-events:auto;background:rgba(30,32,35,.92);border:1px solid #3c4148;border-radius:6px;padding:4px 10px;color:#e9e6e1;cursor:pointer;font-size:12px">Light ground</button><span id="v3note" style="background:rgba(30,32,35,.92);border:1px solid #30343a;border-radius:6px;padding:4px 10px;font-size:12px;color:#9d9a94;max-width:640px"></span>';
+  bar.innerHTML='<button id="v3map" style="pointer-events:auto;background:rgba(30,32,35,.92);border:1px solid #3c4148;border-radius:6px;padding:4px 10px;color:#e9e6e1;cursor:pointer;font-size:12px">← Map</button><button id="v3light" style="pointer-events:auto;background:rgba(30,32,35,.92);border:1px solid #3c4148;border-radius:6px;padding:4px 10px;color:#e9e6e1;cursor:pointer;font-size:12px">Light ground</button><span id="v3sl" style="pointer-events:auto;display:none;background:rgba(30,32,35,.92);border:1px solid #3c4148;border-radius:6px;padding:2px 4px 2px 10px;font-size:12px;color:#e9e6e1">Secure line <button data-sl="off">Off</button><button data-sl="today">Today</button><button data-sl="proposed">Proposed</button></span><span id="v3note" style="background:rgba(30,32,35,.92);border:1px solid #30343a;border-radius:6px;padding:4px 10px;font-size:12px;color:#9d9a94;max-width:640px"></span>';
   const key=document.createElement('div'); key.id='v3key'; key.addEventListener('click',ev=>{ const t=ev.target.closest&&ev.target.closest('[data-sl]'); if(!t) return; state.secure=t.dataset.sl; secureDraw(); key.innerHTML=modelKey(); }); key.style.cssText='position:absolute;left:12px;bottom:12px;background:rgba(30,32,35,.92);border:1px solid #30343a;border-radius:6px;padding:6px 10px;font:300 11.5px/1.5 "Open Sans",system-ui,sans-serif;color:#9d9a94;z-index:3;max-width:320px';
   wrap.appendChild(labels); wrap.appendChild(bar); wrap.appendChild(key); wrap.appendChild(tip); map.appendChild(wrap); for(const ev of ['pointerdown','wheel']) wrap.addEventListener(ev,e=>e.stopPropagation()); // the 2D map captures the pointer on pointerdown, which swallowed clicks on ← Map; pointerup must reach the document, where the orbit control listens for the release
   const ren=new T.WebGLRenderer({antialias:true,preserveDrawingBuffer:true}); ren.setPixelRatio(Math.min(window.devicePixelRatio||1,2)); ren.setClearColor(C.bg);
@@ -35,6 +35,7 @@ function setup(){
   R.lights=[new T.HemisphereLight(0xffffff,0x8f8c85,0.5),new T.DirectionalLight(0xffffff,0.6)]; { const d=R.lights[1]; d.position.set(-260,520,320); d.castShadow=true; d.shadow.mapSize.set(4096,4096);
     const c=d.shadow.camera; c.left=-NEAR; c.right=NEAR; c.top=NEAR; c.bottom=-NEAR; c.near=10; c.far=2000; d.shadow.bias=-0.0006; d.shadow.normalBias=0.6; }
   document.getElementById('v3map').onclick=()=>hide();
+  document.getElementById('v3sl').addEventListener('click',ev=>{ const t=ev.target.closest&&ev.target.closest('[data-sl]'); if(!t) return; state.secure=t.dataset.sl; secureDraw(); if(state.tab==='model'||!FN[state.tab]) document.getElementById('v3key').innerHTML=modelKey(); slButtons(); });
   document.getElementById('v3light').onclick=()=>{ BD.S.light3d=!BD.S.light3d; document.getElementById('v3light').textContent=BD.S.light3d?'Dark ground':'Light ground'; state.key=null; show(state.tab||'model',{site:state.site}); };
   const fit=()=>{ const b=wrap.getBoundingClientRect(); if(!b.width) return; ren.setSize(b.width,b.height,false); cam.aspect=b.width/b.height; cam.updateProjectionMatrix(); };
   new ResizeObserver(fit).observe(wrap); fit();
@@ -227,15 +228,18 @@ function racksFor(M){ const A=BD.S.answers, mw=A.mw||M.mwSized||1, E=BD.eng.equi
   const wallZone=gallery0?gallery0+S.twall.W+Lr.wallClear:(RT==='crah'&&need.room?S.crah.W+Lr.crahFront:need.cdu?S.cdu.W+Lr.cduFront:0)+0.05, farZone=RT==='wall'?gallery+S.twall.W+Lr.wallClear:wallZone;
   // 3. racks in back-to-back pairs: cold aisle 1.2 | rack 1.2 | hot aisle 1.2 | rack 1.2
   const pts=[]; const D=S.rack.W, Wd=S.rack.L; let v=v0+wallZone+Lr.aisle; const rowsV=[];
+  // Schneider spacing (J.B., 30 Oct 2026): a rack takes rackFloor (2.32 m², WP 46) with its aisles, not just rack + aisle (Wd × (D + aisle) = 1.44 m²);
+  // the extra floor is drawn as breaks in each row: runs of RUN racks, then GAP empty places. How the extra floor is arranged is our choice (?)
+  const tight=Wd*(D+Lr.aisle), fr=Math.min(1,tight/(Lr.rackFloor||tight)), GAP=3, RUN=fr>=1?1e9:Math.max(1,Math.round(GAP*fr/(1-fr))), gapAt=k=>(k%(RUN+GAP))>=RUN;
   while(v+2*D+Lr.aisle<=v1-farZone-Lr.aisle+1e-6) { rowsV.push(v,v+D+Lr.aisle); v+=2*D+2*Lr.aisle; }
   // in-row coolers: at both ends of each row, then evenly along it (Vertiv CRV catalog E.2)
   const crvPer=RT==='inrow'&&need.room&&rowsV.length?Math.max(2,Math.ceil(need.room/rowsV.length)):0; const crvAt=[];
   for(const vr of rowsV){ const slots=[]; for(let u=ua;u+Wd<=ub;u+=Wd){ if(inside(u+Wd/2,vr+D/2)) slots.push(u); } if(!slots.length) continue;
     const pick=new Set(); if(crvPer){ for(let k=0;k<crvPer&&k<slots.length;k++) pick.add(Math.round(k*(slots.length-1)/Math.max(1,crvPer-1))); }
-    slots.forEach((u,k)=>{ if(pick.has(k)&&crvAt.length<need.room) crvAt.push([u+Wd/2,vr+D/2]); else if(pts.length<need.racks) pts.push([u+Wd/2,vr+D/2]); }); }
+    slots.forEach((u,k)=>{ if(pick.has(k)&&crvAt.length<need.room) crvAt.push([u+Wd/2,vr+D/2]); else if(!gapAt(k)&&pts.length<need.racks) pts.push([u+Wd/2,vr+D/2]); }); }
   crvAt.forEach(([u,vv])=>put('crv',u,vv,0)); if(RT==='inrow') got.room=crvAt.length;
   // the other hall floors have no UPS and battery room: count their rack places by the same rules (not drawn)
-  const slotsFrom=u_a=>{ let n=0; const ub2=u1-Lr.corridor; for(const vr of rowsV){ for(let u=u_a;u+Wd<=ub2;u+=Wd){ if(inside(u+Wd/2,vr+D/2)) n++; } } return n-(RT==='inrow'?Math.min(need.room,rowsV.length*crvPer):0); };
+  const slotsFrom=u_a=>{ let n=0; const ub2=u1-Lr.corridor; for(const vr of rowsV){ let k=0; for(let u=u_a;u+Wd<=ub2;u+=Wd){ if(inside(u+Wd/2,vr+D/2)){ if(!gapAt(k)) n++; k++; } } } return n-(RT==='inrow'?Math.min(need.room,rowsV.length*crvPer):0); };
   const otherFloor=floors>1?slotsFrom(u0+Lr.corridor):0;
   got.racks=pts.length;
   // the other hall floors: same rows, from the u0 corridor (no UPS room, no heat plant), same cap per floor; room units cloned up; in-row coolers re-picked per row
@@ -243,7 +247,7 @@ function racksFor(M){ const A=BD.S.answers, mw=A.mw||M.mwSized||1, E=BD.eng.equi
   for(let k=1;k<floors;k++){ const dz=k*fh; let nr=0, nc=0;
     for(const vr of rowsV){ const slots=[]; for(let u=u0+Lr.corridor;u+Wd<=u1-Lr.corridor;u+=Wd){ if(inside(u+Wd/2,vr+D/2)) slots.push(u); } if(!slots.length) continue;
       const pick=new Set(); if(crvPer){ for(let j=0;j<crvPer&&j<slots.length;j++) pick.add(Math.round(j*(slots.length-1)/Math.max(1,crvPer-1))); }
-      slots.forEach((u,j)=>{ if(pick.has(j)&&nc<need.room){ crvUp.push([u+Wd/2,vr+D/2,dz]); nc++; } else if(nr<need.racks){ upper.push([u+Wd/2,vr+D/2,dz]); nr++; } }); }
+      slots.forEach((u,j)=>{ if(pick.has(j)&&nc<need.room){ crvUp.push([u+Wd/2,vr+D/2,dz]); nc++; } else if(!gapAt(j)&&nr<need.racks){ upper.push([u+Wd/2,vr+D/2,dz]); nr++; } }); }
     placed.forEach(g=>{ const c=g.clone(); c.position.y+=dz; state.dc.add(c); }); }
   crvUp.forEach(([u,vv,dz])=>{ const g=put('crv',u,vv,0); g.position.y+=dz; });
   const geo=new T.BoxGeometry(Wd*0.98,S.rack.H,D*0.98); const mat=new T.MeshStandardMaterial({color:0x3a3d42,roughness:.8,flatShading:true,transparent:true,opacity:0.9});
@@ -268,7 +272,9 @@ function baseLabels(){ const M=state.M; if(!M) return;
 function frame(r){ const k=r*1.15; R.cam.position.set(k*0.55,k*0.95,k*0.95); R.ctl.target.set(0,0,0); R.ctl.update(); }
 function frameSite(){ const sp=state.span; R.cam.position.set(sp*1.9,sp*1.6+state.roof*1.3,sp*2.2); R.ctl.target.set(0,state.roof*0.35,0); R.ctl.update(); }
 function note(t){ document.getElementById('v3note').textContent=t; }
-function key(html){ const k=document.getElementById('v3key'); k.innerHTML=html; k.style.display=html?'':'none'; }
+function key(html){ const k=document.getElementById('v3key'); k.innerHTML=html; k.style.display=html?'':'none'; slButtons(); }
+function slButtons(){ const g=document.getElementById('v3sl'); if(!g) return; const M=state.M, on=!!(M&&M.ring&&!M.existing&&(state.tab==='model'||!FN[state.tab])); g.style.display=on?'':'none'; const m=state.secure||'off';
+  g.querySelectorAll('button').forEach(b=>{ const a=b.dataset.sl===m; b.style.cssText=`font:inherit;font-size:12px;padding:2px 9px;margin-left:4px;border-radius:4px;cursor:pointer;color:#e9e6e1;border:1px solid ${a?'#CC746C':'#5a5d62'};background:${a?'rgba(204,116,108,.25)':'transparent'}`; }); }
 const sw=(c,t,dash)=>`<div><i style="display:inline-block;width:16px;height:0;border-top:1.5px ${dash?'dashed':'solid'} ${hex(c)};vertical-align:3px;margin-right:6px"></i>${t}</div>`;
 function heightsNote(){ return BD.S.city==='van'?'Heights: City of Vancouver LiDAR 2022':'Heights: City of Edmonton 3D buildings (measured) or floor area ÷ footprint (estimate)'; }
 
@@ -281,7 +287,7 @@ function modelKey(){ return sw(C.acc,'the lot; dashed red: the building envelope
    PROPOSAL: at the data-hall wall, with the ground floor (where the zone keeps it for other uses) or the yard as space that could face the street.
    The proposal is speculative (a design inference, no source states it); nothing here is sized. */
 function secureKey(){ const M=state.M; if(!M||!M.ring||M.existing) return ''; const m=state.secure||'off', b=(v,t)=>`<button data-sl="${v}" style="font:inherit;font-size:11px;padding:1px 7px;margin:0 4px 0 0;border-radius:4px;cursor:pointer;border:1px solid ${m===v?'#CC746C':'#5a5d62'};background:${m===v?'rgba(204,116,108,.18)':'transparent'};color:inherit">${t}</button>`;
-  return `<div style="margin-top:6px;pointer-events:auto">Secure line: ${b('off','off')}${b('today','today')}${b('proposed','proposed')}</div>`+(m==='today'?'<div>the whole lot is secured: fence and gate intercom at the lot line (as at VAN3, one tour)</div>':m==='proposed'?'<div>secured only at the data-hall wall (solid red); the shaded ground floor, or where the zone does not keep one, the lot between the dashed lot line and the hall, could face the street (a proposal: speculative, not sized)</div>':''); }
+  return (m==='today'?'<div style="margin-top:6px">Secure line, today: the whole lot is secured: fence and gate intercom at the lot line (as at VAN3, one tour)</div>':m==='proposed'?'<div style="margin-top:6px">Secure line, proposed: secured only at the data-hall wall (solid red); the shaded ground floor, or where the zone does not keep one, the lot between the dashed lot line and the hall, could face the street (a proposal: speculative, not sized)</div>':''); }
 function secureDraw(){ const M=state.M; if(state.slG){ state.dc.remove(state.slG); state.slG=null; } const m=state.secure||'off'; if(!M||!M.ring||M.existing||m==='off') return;
   const g=new T.Group(); state.slG=g; state.dc.add(g); const hall=M.serverFoot||M.foot;
   if(m==='today'){ for(const z of [0.15,0.9,1.8]) g.add(ringLine(M.ring,z,C.acc,false,z<0.5?1:0.55)); }
@@ -294,7 +300,7 @@ function secureDraw(){ const M=state.M; if(state.slG){ state.dc.remove(state.slG
 function roomsKey(){ const r=state.rooms; if(!r) return ''; const E=r.E, rg=a=>a[0]===a[1]?`${a[0]}`:`${a[0]}–${a[1]}`, gap=(k)=>r.got[k]<r.need[k]?` (${r.got[k]} drawn)`:'';
   const L=[`racks ${rg(E.racks)}: room for ${r.capacity} on ${r.floors} floor${r.floors>1?'s':''} (${r.got.racks} on this one, which holds the UPS room${r.floors>1?`; ${r.otherFloor} on each other floor`:''})${r.capacity<E.racks[1]?' — short of the high end':''}`,`UPS modules ${E.ups}${gap('ups')}`,`battery cabinets ${rg(E.batt)}${gap('battery')}`];
   if(E.room&&E.room.n[1]) L.push(`${E.room.name} ${rg(E.room.n)}${r.floors>1?`, about ${r.need.room} a floor`:''}${gap('room')} (hall about ${Math.round(E.room.wft2)} W/ft²: ${E.room.type==='crah'?'room units, up to about 150':E.room.type==='wall'?'thermal wall in a side gallery, up to about 400':'in-row coolers, above about 400'} by Vertiv's limits)`); if(E.cdu[1]) L.push(`coolant units ${rg(E.cdu)} (not placed: no placement rule found)`);
-  return `<div style="margin-top:4px">Inside, ${r.floors} hall floor${r.floors>1?'s, all drawn':''}${state.hallZ>1?' from the 2nd storey (the zone keeps the ground floor for other uses)':''}; racks are drawn at the tightest spacing the rules allow (rack and aisle, about 180–200 m² per MW, our arithmetic) and fill each floor's share row by row from the electrical-room end. Built halls leave more floor: 290–630 m² of hall per MW in five Canadian halls (operator claims), for tenant enclosures, growth and lower densities (VAN3 guide). Register: hall_layout. First floor: ${L.join(' · ')}. Gold dashed: UPS and battery room. Spacing from the register (hall_layout, electrical_room).</div>`; }
+  return `<div style="margin-top:4px">Inside, ${r.floors} hall floor${r.floors>1?'s, all drawn':''}${state.hallZ>1?' from the 2nd storey (the zone keeps the ground floor for other uses)':''}; each rack is given 2.32 m² (25 ft²) of floor with its aisles, Schneider's figure (WP 46), shown as breaks in the rows (how that floor is arranged is our choice ?); racks fill each floor's share row by row from the electrical-room end. Built halls leave still more: 290–630 m² of hall per MW in five Canadian halls (operator claims), for tenant enclosures, growth and lower densities (VAN3 guide). Register: hall_layout. First floor: ${L.join(' · ')}. Gold dashed: UPS and battery room. Spacing from the register (hall_layout, electrical_room).</div>`; }
 const TYPE={housing:'Non-market housing',school:'School',campus:'University or college campus',care:'Care home',hospital:'Hospital',rec:'Recreation centre',hall:'Community league hall',pool:'Pool',arena:'Indoor arena',apartment:'Apartment building',office:'Office building',hotel:'Hotel',commercial:'Commercial building'};
 const TCOL={housing:C.city,apartment:C.city,office:C.heat,hotel:C.heat,commercial:C.heat,school:C.power,campus:C.power,care:C.senses,hospital:C.senses,rec:C.water,hall:C.water,pool:C.water,arena:C.mat};
 function heat(d){
