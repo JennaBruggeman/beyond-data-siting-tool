@@ -445,7 +445,7 @@ Condition states (met / with a change / not met / not applicable or declined / n
 - **Seasonal storage in the ground**: `stored_heat`, `storage_footprint`, `licence_flag`, `btes` (weakest 50)
 - **Aquaculture / insects / algae**: `aquaculture_tonnes`, `insect_check`, `algae_kg`, `heat_temp` (weakest 50)
 - **Warming centre, refuge, clean-air room**: `refuge_people`, `clean_air_volume`, `cooling_centre_people`, `backup_hours`, `crossing_type`, `refuge_services`, `refuge_code`, `crisis_events`, `security_layers` (weakest 40)
-- **Reserved capacity and batteries to the grid**: `spare_capacity`, `flexible_load`, `backup_hours`, `lrmc_bc`, `battery`, `ups_flex` (weakest 40)
+- **Reserved capacity and batteries to the grid**: `spare_capacity`, `flexible_load`, `backup_hours`, `lrmc_bc`, `battery`, `ups_flex`, `power_allocation` (weakest 40)
 - **EV charging hub**: `ev_stalls`, `ev_area`, `ev_exemption`, `grid_headroom` (weakest 50)
 - **Meanwhile uses on land held for growth**: `offerable_area`, `horizons` (weakest 60)
 - **Rainwater, condensate and water reuse**: `rainwater`, `blowdown` (weakest 50)
