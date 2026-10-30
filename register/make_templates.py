@@ -38,7 +38,7 @@ T = {
  # overnight pass 30 Oct 2026 (tiers drafted by Claude for J.B. to check)
  'power_allocation': (C, 'operator utility city', 'whether and on what terms it gets power'), 'heat_sale_rules': (F, 'operator receiver city', 'engineering and regulation'),
  'refuge_services': (C, 'neighbours city', 'what a refuge needs: washrooms, showers, water'), 'refuge_code': (F, 'city', 'code detail'),
- 'crisis_events': (R, 'neighbours city', 'what the refuge is for in each crisis'), 'it_load_share': (C, 'operator', 'why the load running is below capacity'), 'fire_protection': (F, 'operator', 'engineering'),
+ 'crisis_events': (R, 'neighbours city', 'what the refuge is for in each crisis'), 'it_load_share': (C, 'operator', 'why the load running is below capacity'), 'plant_weight': (F, 'operator', 'engineering: whether plant can sit above people'), 'fire_protection': (F, 'operator', 'engineering'),
  'transformers': (F, 'operator utility', 'engineering'), 'security_layers': (C, 'neighbours operator', 'how closed the building is'),
  # characterise
  'heat_rejected': (C, 'receiver climate', 'the heat it gives off'), 'heat_temp': (F, 'receiver', 'engineering'), 'liquid_capture': (F, 'operator', 'engineering'),
