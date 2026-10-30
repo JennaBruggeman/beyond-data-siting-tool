@@ -1,0 +1,122 @@
+{
+ "googleFlex2025": {
+  "where_read": "blog.google page via WebFetch, 29 Oct 2026",
+  "claims": [
+   {"claim": "Author M. Terrell, 4 Aug 2025, title", "verdict": "CONFIRMED", "evidence": "Michael Terrell, Head of Advanced Energy; August 4, 2025", "fix": ""},
+   {"claim": "Label OPERATOR CLAIM", "verdict": "CONFIRMED", "evidence": "Google writing about its own data centres", "fix": ""},
+   {"claim": "first data-centre demand response shifted non-urgent compute (e.g. YouTube video) during grid stress with Centrica/Elia (Belgium) and Taiwan Power", "verdict": "CORRECTED", "evidence": "'shifting non-urgent compute tasks — like processing a YouTube video — during specific periods when the grid is strained'; 'first time' sentence refers to the I&M and TVA agreements: 'represent the first time we're delivering data center demand response'", "fix": "Drop 'first' from the Belgium/Taiwan clause; 'first time ... delivering data center demand response' belongs to the new I&M/TVA agreements. Use 'when the grid is strained' (source does not say 'grid stress')."},
+   {"claim": "Centrica Energy and Elia (Belgium); Taiwan Power Company", "verdict": "CONFIRMED", "evidence": "'partnerships with Centrica Energy and transmission system operator Elia in Belgium' ... 'and Taiwan Power Company in Taiwan'", "fix": ""},
+   {"claim": "Reduced ML workload demand in three grid events for OPPD 'last year'", "verdict": "CONFIRMED", "evidence": "'where we reduced the power demand associated with ML workloads during three grid events last year'", "fix": ""},
+   {"claim": "New agreements with Indiana Michigan Power (Fort Wayne) and TVA", "verdict": "CONFIRMED", "evidence": "'two new utility agreements with Indiana Michigan Power (I&M) and Tennessee Valley Authority (TVA)'; 'new data center in Fort Wayne, IN'", "fix": ""},
+   {"claim": "No MW or hours given", "verdict": "CONFIRMED", "evidence": "No MW or duration figures found on page", "fix": ""},
+   {"claim": "Flexibility 'early' and only at some locations", "verdict": "CONFIRMED", "evidence": "'Data center demand flexibility is still in the early stages and will only be available at certain locations.'", "fix": ""},
+   {"claim": "Search, Maps and some Cloud customers limit it", "verdict": "CONFIRMED", "evidence": "'reliability are critical for services like Search and Maps' ... 'Cloud customers in essential industries like healthcare'", "fix": "Optionally say 'Cloud customers in essential industries (e.g. healthcare)'."}
+  ],
+  "overreach": ["'first' attached to the Belgium/Taiwan shifting; the source's 'first time' is about the I&M/TVA agreements."],
+  "overall": "needs fix"
+ },
+ "emeraldPhoenix2025": {
+  "where_read": "arXiv HTML 2507.00909v1 via WebFetch, 29 Oct 2026",
+  "claims": [
+   {"claim": "Authors Colangelo, Coskun et al.; affiliations Emerald AI, NVIDIA, SRP, EPRI; title; arXiv 2507.00909v1, 1 Jul 2025", "verdict": "CONFIRMED", "evidence": "Authors listed under Emerald AI, NVIDIA Corporation, Salt River Project, EPRI; submitted 01 Jul 2025", "fix": ""},
+   {"claim": "'company-authored preprint'", "verdict": "CONFIRMED", "evidence": "Most authors Emerald AI; arXiv preprint. Note co-authors also from SRP (utility) and EPRI (research institute).", "fix": "Optional: 'mainly company-authored (Emerald AI), with SRP and EPRI co-authors'."},
+   {"claim": "Oracle Phoenix region, 256 NVIDIA A100 GPUs", "verdict": "CONFIRMED", "evidence": "'an Oracle Phoenix Region Cloud data center'; '256-GPU cluster built on NVIDIA A100 Tensor Core GPUs'", "fix": ""},
+   {"claim": "'25% reduction in cluster power usage for three hours during peak grid events'", "verdict": "CONFIRMED", "evidence": "'achieved a 25% reduction in cluster power usage for three hours during peak grid events'", "fix": ""},
+   {"claim": "1 May (APS peak) and 3 May 2025 (SRP peak)", "verdict": "CONFIRMED", "evidence": "May 1, 2025 addressed APS system peak; May 3, 2025 SRP system peak", "fix": ""},
+   {"claim": "15-minute ramps", "verdict": "CONFIRMED", "evidence": "'ramp down and up gracefully over 15 minutes'", "fix": ""},
+   {"claim": "Zero SLA violations reported", "verdict": "CONFIRMED", "evidence": "'maintain[ed] zero SLA violations'", "fix": ""},
+   {"claim": "Only batch training, fine-tuning and some inference slowed/paused; real-time serving untouched", "verdict": "CONFIRMED", "evidence": "Flex 0 jobs 'such as real-time inference, streaming, and model serving were not modified'; batch training, fine-tuning, inference could be slowed or paused", "fix": ""},
+   {"claim": "One cluster, no MW given", "verdict": "CONFIRMED", "evidence": "Only percentages and GPU/node counts reported", "fix": ""},
+   {"claim": "Frequency regulation not tested", "verdict": "CONFIRMED", "evidence": "Future work will explore 'day-ahead demand response, frequency regulation, and other ancillary services'", "fix": ""}
+  ],
+  "overreach": ["Also a synthetic CAISO Aug 2020 reenactment (15% then 10% step) exists; not an error, but the entry implies only two events."],
+  "overall": "ok"
+ },
+ "epriDCFlexEU": {
+  "where_read": "europe.epri.com press release via WebFetch, 29 Oct 2026",
+  "claims": [
+   {"claim": "Title 'DCFlex: Momentum Builds Across Europe'; undated (?)", "verdict": "CONFIRMED", "evidence": "No date shown on page; '?' can be settled as 'undated'", "fix": "Replace '(undated page ?)' with '(page undated)'."},
+   {"claim": "UK's first live DCFlex demonstration with National Grid, Nebius, Kraken, Emerald AI and NVIDIA", "verdict": "CORRECTED", "evidence": "'delivered with National Grid, Emerald AI, Nebius, NVIDIA, and EPRI'; Kraken 'brings its distributed energy flexibility platform to DCFlex' (joined separately)", "fix": "Partners: National Grid, Emerald AI, Nebius, NVIDIA and EPRI. Move Kraken to 'joined DCFlex' alongside ESB."},
+   {"claim": "Cut load 'up to 30–40% within seconds' 'without disrupting critical workloads'", "verdict": "CONFIRMED", "evidence": "'up to 30–40% within seconds' ... 'without disrupting critical workloads'", "fix": "Label as claim (press release by a programme partner)."},
+   {"claim": "ESB joined", "verdict": "CONFIRMED", "evidence": "'ESB's participation reflects the growing need for practical solutions in Ireland.'", "fix": ""},
+   {"claim": "No site, date or MW given (?)", "verdict": "CONFIRMED", "evidence": "Site, demo date and MW not stated on page; '?' can be removed", "fix": "Remove '(?)'."}
+  ],
+  "overreach": ["Kraken placed in the UK demonstration without support.", "No claim label; this is a self-reported result by the programme (EPRI) and partners — consider 'PROGRAMME CLAIM'."],
+  "overall": "needs fix"
+ },
+ "eatonBasefarm2018": {
+  "where_read": "eaton.com news release (kr/ko-kr path, English text) via WebFetch, 29 Oct 2026",
+  "claims": [
+   {"claim": "Eaton news release 7 Nov 2018; VENDOR CLAIM", "verdict": "CONFIRMED", "evidence": "'November 7, 2018'", "fix": ""},
+   {"claim": "Basefarm (Norwegian data-centre company)", "verdict": "CONFIRMED", "evidence": "'Basefarm, a Norwegian data center company'", "fix": ""},
+   {"claim": "Project led by Statnett with Fortum", "verdict": "CONFIRMED", "evidence": "'led by Statnett, a Norwegian transmission system operator'; Fortum named as participant (role not specified)", "fix": ""},
+   {"claim": "Completed Q3 2018", "verdict": "CONFIRMED", "evidence": "'was completed in summer (Q3) 2018'", "fix": ""},
+   {"claim": "'the UPSs were now capable of providing 1.5 MW of capacity' for Fast Frequency Response", "verdict": "CONFIRMED", "evidence": "'the UPSs were now capable of providing 1.5 MW of capacity'; UPSaaR 'for Fast Frequency Response'", "fix": ""},
+   {"claim": "Reduce demand 'and even return power to the grid'", "verdict": "CONFIRMED", "evidence": "'momentarily reduce the power demands of the data center and even return power to the grid'", "fix": "Optional: add 'momentarily'."}
+  ],
+  "overreach": [],
+  "overall": "ok"
+ },
+ "fortumTelia2022": {
+  "where_read": "fortum.com media release via WebFetch, 29 Oct 2026",
+  "claims": [
+   {"claim": "Fortum release 18 Jan 2022, Fortum and Telia agreement; OPERATOR CLAIM", "verdict": "CONFIRMED", "evidence": "'18 January 2022 at 15:00 EET'; 'Fortum and Telia agree on new data center connection to the electricity market'", "fix": ""},
+   {"claim": "Telia's Helsinki Data Center UPS systems (ABB)", "verdict": "CONFIRMED", "evidence": "'UPS systems manufactured by ABB'; Helsinki Data Center (HDC)", "fix": ""},
+   {"claim": "'has contributed several megawatts of capacity to Fingrid's Fast Frequency Reserve (FFR) market as part of the Fortum Spring's virtual battery'", "verdict": "CONFIRMED", "evidence": "'has contributed several megawatts of capacity to Fingrid's Fast Frequency Reserve (FFR) market'; 'as part of the Fortum Spring's virtual battery'", "fix": "Quote spans two fragments as returned; verify they are one continuous sentence before keeping a single quote mark pair."},
+   {"claim": "Batteries still carry the load until generators start in an outage", "verdict": "CONFIRMED", "evidence": "'the batteries will still be used to cover the data center's electricity demand' ... 'before the back-up power generators start operating'", "fix": ""}
+  ],
+  "overreach": [],
+  "overall": "ok"
+ },
+ "msDublinUPS2022": {
+  "where_read": "news.microsoft.com/source/?p=782 via WebFetch, 29 Oct 2026",
+  "claims": [
+   {"claim": "Microsoft news story 7 Jul 2022; OPERATOR CLAIM", "verdict": "CONFIRMED", "evidence": "'Microsoft datacenter batteries to support growth of renewables on the power grid', July 7, 2022", "fix": ""},
+   {"claim": "Grid-interactive UPS developed and tested with Eaton at Dublin datacenter", "verdict": "CONFIRMED", "evidence": "'partnered with ... Eaton, to develop and test a grid-interactive UPS'; 'The UPS in Microsoft's Dublin datacenter includes new technology'", "fix": ""},
+   {"claim": "Through Enel X it can receive EirGrid signals", "verdict": "CORRECTED", "evidence": "'Microsoft is participating in this market through Enel X'; 'Utilities, by way of aggregators, can give us a signal'", "fix": "Source says Microsoft participates in EirGrid's grid-services market through Enel X, and that 'utilities, by way of aggregators' send the signal; it does not say EirGrid signals directly. Reword: 'participates in EirGrid's grid-services market through aggregator Enel X; on a signal it can ...'."},
+   {"claim": "'discharge our batteries to compensate for our load'", "verdict": "CONFIRMED", "evidence": "'give us a signal that tells us to discharge our batteries to compensate for our load'", "fix": ""},
+   {"claim": "Replacing fossil-fuel spinning reserve", "verdict": "CORRECTED", "evidence": "'reduces the need to maintain spinning reserve'; 'If grid-interactive UPS systems replace the grid services currently provided by fossil fuel power plants…'", "fix": "Source says 'reduces the need' for spinning reserve at coal and gas plants and uses 'if ... replace' conditionally; change 'replacing' to 'reducing the need for'."}
+  ],
+  "overreach": ["'replacing' overstates the source's conditional/'reduces the need' wording."],
+  "overall": "needs fix"
+ },
+ "txSB6_2025": {
+  "where_read": "capitol.texas.gov bill analysis SB00006F.htm via WebFetch, 29 Oct 2026",
+  "claims": [
+   {"claim": "Senate Research Center bill analysis, enrolled version, 5 Aug 2025", "verdict": "CONFIRMED", "evidence": "Header: Senate Research Center; S.B. 6; Enrolled; 8/5/2025; King; Schwertner", "fix": ""},
+   {"claim": "PUC to set large-load threshold of 75 MW (s. 37.0561(c))", "verdict": "CORRECTED", "evidence": "'Requires the PUC to establish a demand threshold of 75 megawatts unless the PUC determines that a lower threshold' [is necessary for purposes in (b)]", "fix": "Add: '75 MW unless the PUC sets a lower threshold' — 75 MW is the default, not fixed."},
+   {"claim": "Large loads disclose on-site backup generation (s. 37.0561(e))", "verdict": "CONFIRMED", "evidence": "'information about the customer's on-site backup generating facilities'", "fix": ""},
+   {"claim": "ERCOT may direct them to 'deploy the customer's on-site backup generating facilities or curtail load' (s. 37.0561(e))", "verdict": "CONFIRMED", "evidence": "'deploy the customer's on-site backup generating facilities or curtail load'", "fix": ""},
+   {"claim": "Transmission-voltage loads must have curtailment capability before interconnection (s. 39.170)", "verdict": "CORRECTED", "evidence": "'a protocol, including the installation of any necessary equipment or technology before the customer is interconnected' (39.170(a))", "fix": "Duty sits with ERCOT/serving utilities via a protocol for curtailment during firm load shed; applies to loads interconnected after 31 Dec 2025; excludes critical load industrial customers and critical natural gas facilities. Cite s. 39.170(a)."},
+   {"claim": "ERCOT must 'competitively procure demand reductions from large load customers with a demand of at least 75 megawatts' (s. 39.170)", "verdict": "CONFIRMED", "evidence": "'competitively procure demand reductions from large load customers with a demand of at least 75 megawatts' — s. 39.170(b)", "fix": "Cite s. 39.170(b)."},
+   {"claim": "Read from analysis, not enrolled bill text (?)", "verdict": "NOT FOUND", "evidence": "Cannot be settled from this source; the analysis is a summary, not the statute", "fix": "Keep '?' until the enrolled bill text is read."}
+  ],
+  "overreach": ["75 MW presented as fixed; analysis allows PUC to set lower.", "Curtailment-capability rule presented as applying to all transmission-voltage loads; it applies post-31 Dec 2025 with exemptions."],
+  "overall": "needs fix"
+ },
+ "cruLEU2025": {
+  "where_read": "cru.ie news page via WebFetch, 29 Oct 2026",
+  "claims": [
+   {"claim": "CRU news 'New Electricity Connection Policy for Data Centres', 18 Feb 2025", "verdict": "CONFIRMED", "evidence": "Title as given; 18 February 2025", "fix": ""},
+   {"claim": "PROPOSED decision, comments to 4 Apr 2025", "verdict": "CONFIRMED", "evidence": "'We have published a proposed decision...'; comment 'by the 4th of April 2025'", "fix": ""},
+   {"claim": "'will be required to provide generation and/or storage capacity to match the requested data centre demand capacity'", "verdict": "CONFIRMED", "evidence": "'will be required to provide generation and/or storage capacity' ... 'to match the requested data centre demand capacity' (returned as two fragments)", "fix": "Confirm fragments are contiguous before quoting as one string."},
+   {"claim": "On site or nearby", "verdict": "CONFIRMED", "evidence": "'can now be onsite or local in proximity to the data centre'", "fix": ""},
+   {"claim": "Taking part in the electricity market", "verdict": "CONFIRMED", "evidence": "'will be required to participate in the electricity market, supporting overall system adequacy'", "fix": ""},
+   {"claim": "Annual reporting on renewable use and emissions", "verdict": "CONFIRMED", "evidence": "'required to report to System Operators annually in relation to their use of renewable energy and emissions'", "fix": ""},
+   {"claim": "Whether finalised: not read (?)", "verdict": "NOT FOUND", "evidence": "Page says comments invited 'before a final decision is made'; no final decision stated", "fix": "Cannot be settled from this page; keep '?'."}
+  ],
+  "overreach": [],
+  "overall": "ok"
+ },
+ "eatonCA022021": {
+  "where_read": "Eaton PDF CA022021EN via WebFetch, 29 Oct 2026",
+  "claims": [
+   {"claim": "Eaton substation catalogue CA022021EN (Jan 2020)", "verdict": "CONFIRMED", "evidence": "Design Guide CA022021EN, effective January 2020", "fix": "Call it a design guide (secondary unit substation design guide), not a catalogue."},
+   {"claim": "Table 14.1-20, 2,500 kVA: H 2084.1 x W 2263.1 x D 2390.1 mm", "verdict": "CORRECTED", "evidence": "'2500 5 or 15 60 or 95 82.05 (2084.1) 89.10 (2263.1) 94.10 (2390.1) 15,500 (7031)'; 25/35 kV row: '82.05 (2084.1) 103.60 (2631.4) 98.10 (2491.7)'", "fix": "Figures correct but only for the 5 or 15 kV (60/95 kV BIL) row of 'Oil-Filled Standard Design, 60 Hz, HV Delta, LV at 600 V Class'. State this; at 25/35 kV: W 2631.4, D 2491.7 mm. Columns are HTX/WTX/DTX (transformer dims). Weight 15,500 lb (7031 kg), oil 560 gal (2120 L) also given."},
+   {"claim": "Radiators 'may be mounted on the front and back'", "verdict": "CONFIRMED", "evidence": "'Flat, tubular or panel radiators may be mounted on the front and back of the tank.'", "fix": ""},
+   {"claim": "'not re-read tonight'", "verdict": "CORRECTED", "evidence": "Re-read in this check", "fix": "Replace with check-2 note: re-read 29 Oct 2026."}
+  ],
+  "overreach": ["Single dimension set presented for 2,500 kVA; table has two rows depending on HV class, and is oil-filled / 600 V class only."],
+  "overall": "needs fix"
+ }
+}

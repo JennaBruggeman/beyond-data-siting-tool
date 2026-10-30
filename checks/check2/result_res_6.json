@@ -1,0 +1,1001 @@
+{
+ "vanHubs": {
+  "where_read": "WebFetch of register URL (vancouver.ca disaster-support-hubs.aspx), 29 Oct 2026",
+  "claims": [
+   {
+    "claim": "25 hubs",
+    "verdict": "CONFIRMED",
+    "evidence": "\"There are 25 disaster support hubs located throughout the city.\"",
+    "fix": ""
+   },
+   {
+    "claim": "mostly community centres",
+    "verdict": "CONFIRMED",
+    "evidence": "List = 23 community centres + Oppenheimer Park + Fraserview Branch, Vancouver Public Library",
+    "fix": ""
+   },
+   {
+    "claim": "backup power not stated",
+    "verdict": "CONFIRMED",
+    "evidence": "Page has no mention of backup power, generators or electricity",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "edmWarming": {
+  "where_read": "WebFetch of register URL (edmonton.ca extreme-weather-winter), 29 Oct 2026",
+  "claims": [
+   {
+    "claim": "activated at −20 °C with wind chill for 3 days ('minimum of 3 days in a row' ?)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"conditions of -20 degrees Celsius with wind chill for a minimum of 3 days in a row\"",
+    "fix": "Remove '?' and 'single check': quote now double-checked"
+   },
+   {
+    "claim": "City recreation centres and libraries as places to warm up",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Find a Place to Warm Up at City Facilities\": 19 recreation/leisure centres + all Edmonton Public Library branches",
+    "fix": "Optional: libraries are Edmonton Public Library branches"
+   },
+   {
+    "claim": "page is seasonal",
+    "verdict": "CONFIRMED",
+    "evidence": "Page is the winter version of the extreme weather page",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Page says the City is 'ready to activate' when forecasts meet the trigger (usually with an ECCC extreme cold alert); it is a readiness trigger, not automatic activation"
+  ],
+  "overall": "ok"
+ },
+ "vanNationsNamed": {
+  "where_read": "UNDRIP Strategy found by WebSearch (council.vancouver.ca/20221025/documents/p1.pdf, 'City of Vancouver's UNDRIP Strategy', 25 Oct 2022) and fetched; TWN page fetched; Musqueam and Squamish referral URLs blocked by fetch permission",
+  "claims": [
+   {
+    "claim": "City names xʷməθkʷəy̓əm (Musqueam), Sḵwx̱wú7mesh Úxwumixw (Squamish), səlilwətaɬ (Tsleil-Waututh) Nations, UNDRIP Strategy p. 3",
+    "verdict": "CONFIRMED",
+    "evidence": "Printed p. 3 'The Indigenous Peoples of These Lands' gives 'xʷməθkʷəy̓əm Musqueam', 'Sḵwx̱wú7mesh Úxwumixw Squamish Nation', 'səlilwətaɬ Tsleil-Waututh Nation'",
+    "fix": ""
+   },
+   {
+    "claim": "on unceded territories (pp. 3–4)",
+    "verdict": "CORRECTED",
+    "evidence": "'unceded' is not on pp. 3–4 (p. 4 is Acknowledgements); p. 7: '...the City is on the unceded territory of the Musqueam, Squamish...'; also p. 9",
+    "fix": "Cite names p. 3, 'unceded' p. 7 (and p. 9); add the Strategy URL to the entry"
+   },
+   {
+    "claim": "Tsleil-Waututh referral page",
+    "verdict": "CONFIRMED",
+    "evidence": "TLR page: \"We coordinate protocols for all referrals inside our territory\"",
+    "fix": ""
+   },
+   {
+    "claim": "Musqueam referral page",
+    "verdict": "UNREACHABLE",
+    "evidence": "Fetch permission not granted for musqueam.bc.ca URL; not in search results",
+    "fix": ""
+   },
+   {
+    "claim": "Squamish referral page",
+    "verdict": "UNREACHABLE",
+    "evidence": "Fetch permission not granted for squamish.net URL; not in search results",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Entry gives no URL for the UNDRIP Strategy; add it"
+  ],
+  "overall": "needs fix"
+ },
+ "edmNationsNamed": {
+  "where_read": "Saved copy page.html (treatysix.org nation-listing) + WebFetch of register URL (edmonton.ca indigenous-relations-office)",
+  "claims": [
+   {
+    "claim": "Land acknowledgement: Treaty 6 territory and the Métis homeland",
+    "verdict": "CONFIRMED",
+    "evidence": "\"...is in Treaty Six Territory\"; \"We also acknowledge this as the Métis' (May-tee) homeland\"",
+    "fix": ""
+   },
+   {
+    "claim": "names peoples (Nehiyaw/Cree, Dene, Anishinaabe/Saulteaux, Nakota Isga, Niitsitapi), not individual Nations",
+    "verdict": "CONFIRMED",
+    "evidence": "\"such as nêhiyaw / Cree, Dene, Anishinaabe / Saulteaux, Nakota Isga / Nakota Sioux, and Niitsitapi / Blackfoot peoples\"",
+    "fix": "Optional: acknowledgement also names Inuit ('one of the largest communities of Inuit south of the 60th parallel')"
+   },
+   {
+    "claim": "Confederacy of Treaty No. 6 First Nations lists 15 member Nations, no total printed",
+    "verdict": "CONFIRMED",
+    "evidence": "Saved page lists Alexander, Alexis Nakota Sioux, Beaver Lake, Cold Lake, Enoch, Ermineskin, Frog Lake, Whitefish Lake #128, Heart Lake, Kehewin, Louis Bull, Montana, Paul, Samson, Sunchild = 15; no total",
+    "fix": ""
+   },
+   {
+    "claim": "Indigenous Framework roles Listener, Connector, Advocate, Partner",
+    "verdict": "NOT FOUND",
+    "evidence": "Cited IRO page has only heading 'Indigenous Relations Framework' and a link; the four roles are not on it",
+    "fix": "Cite the Indigenous Framework page/report directly, then re-verify"
+   },
+   {
+    "claim": "Urban Reserve Strategy approved 28 Jun 2021",
+    "verdict": "NOT FOUND",
+    "evidence": "No Urban Reserve Strategy or date on the cited IRO page",
+    "fix": "Cite the City's urban-reserves page or strategy PDF, then re-verify"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Saved copy is only the treatysix.org page; the City page is not saved"
+  ],
+  "overall": "needs fix"
+ },
+ "bchTCIP2026": {
+  "where_read": "Not read: register PDF URL blocked by fetch permission; the workshop landing page found by search returns 404",
+  "claims": [
+   {
+    "claim": "Workshop #2, 4 Mar 2026, slides 12–34",
+    "verdict": "UNREACHABLE",
+    "evidence": "PDF fetch not permitted",
+    "fix": ""
+   },
+   {
+    "claim": "F2036 rate impact of one 75–250 MVA customer: +0.4 to +1.5% with no threshold; 0 to −1.2% with threshold options",
+    "verdict": "UNREACHABLE",
+    "evidence": "PDF fetch not permitted",
+    "fix": ""
+   },
+   {
+    "claim": "data-centre approaches 'emerging'",
+    "verdict": "UNREACHABLE",
+    "evidence": "PDF fetch not permitted",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Cannot check; also a utility's modelled forecast, so label it 'BC Hydro modelling' in the tool"
+  ],
+  "overall": "unreachable"
+ },
+ "aesoDC2025": {
+  "where_read": "Local copy /mnt/attach/outputs/data/raw/ab/aeso_dc_update_2025-09.txt",
+  "claims": [
+   {
+    "claim": "AESO Update on Data Centres, Sep 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "Title 'AESO Update on Data Centres'; footer 'September 2025'",
+    "fix": ""
+   },
+   {
+    "claim": "'Are large loads paying their fair share of transmission costs?' an open Phase II question",
+    "verdict": "CONFIRMED",
+    "evidence": "Under 'Phase II Key Questions to Address and Related Topics': \"Are large loads paying their fair share of transmission costs?\"",
+    "fix": ""
+   },
+   {
+    "claim": "20,000+ MW of data-centre load on project list",
+    "verdict": "CONFIRMED",
+    "evidence": "\"over 20,000 MW of data centre load now on the AESO project list\"",
+    "fix": ""
+   },
+   {
+    "claim": "'Load is outpacing generation'",
+    "verdict": "CONFIRMED",
+    "evidence": "Heading \"Load is outpacing generation\"",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "lbnlLargeLoad2025": {
+  "where_read": "Saved copy full.pdf (pdftotext)",
+  "claims": [
+   {
+    "claim": "LBNL, Jan 2025, Electricity rate designs for large loads",
+    "verdict": "CONFIRMED",
+    "evidence": "\"January 2025 / Electricity Rate Designs for Large Loads: Evolving Practices and Opportunities\" (Berkeley Lab + Brattle + DOE)",
+    "fix": ""
+   },
+   {
+    "claim": "mechanisms: stranded assets, forecast error, avoided charges",
+    "verdict": "CONFIRMED",
+    "evidence": "\"stranded assets from underutilized utility system investments if the forecasted electricity demand fails to materialize\"; BTM generation \"may allow customers to avoid certain charges\"",
+    "fix": ""
+   },
+   {
+    "claim": "protections: minimum bills, exit fees, collateral, contributions",
+    "verdict": "CONFIRMED",
+    "evidence": "Sections on minimum charges, 'Contract duration and exit fee', 'collateral requirements', 'contribution in aid of construction'",
+    "fix": "Source wording is 'minimum charges'/'minimum demand' more than 'minimum bills'"
+   },
+   {
+    "claim": "no quantified rate effect",
+    "verdict": "CONFIRMED",
+    "evidence": "Brief describes tariff provisions only; no modelled ratepayer impact found in the text",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "US tariffs only; label as US context"
+  ],
+  "overall": "ok"
+ },
+ "nrcCBD160": {
+  "where_read": "Not read: NRC URL blocked by fetch permission; only a third-party mirror (web.mit.edu) turned up in search, not used",
+  "claims": [
+   {
+    "claim": "Edmonton 65 W/ft² bare and wet after design storm (Table II)",
+    "verdict": "UNREACHABLE",
+    "evidence": "NRC page not fetchable",
+    "fix": ""
+   },
+   {
+    "claim": "design heat 40 sheltered, 55–60 average, 60–65 extremely exposed (Table III)",
+    "verdict": "UNREACHABLE",
+    "evidence": "NRC page not fetchable",
+    "fix": ""
+   },
+   {
+    "claim": "about 430–700 W/m² (our conversion)",
+    "verdict": "CONFIRMED",
+    "evidence": "Arithmetic only: 40 W/ft² = 430.6 W/m²; 65 W/ft² = 699.7 W/m²",
+    "fix": "Arithmetic is right; the inputs are still unverified"
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Coefficient rests on a 1974 digest that this check could not open"
+  ],
+  "overall": "unreachable"
+ },
+ "ashrae2015ch51": {
+  "where_read": "Local copy /mnt/attach/outputs/data/raw/codes/ashrae2015_ch51_snow_melting.pdf",
+  "claims": [
+   {
+    "claim": "Table 1 and Table 3: US cities only, no Canadian",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Table 1 shows frequencies of snow-melting loads for 46 cities in the United States\"; no Canadian city in the tables",
+    "fix": ""
+   },
+   {
+    "claim": "Seattle 27 snowfall hours a year",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 1: 'Seattle, WA 27' (Snowfall Hours per Year)",
+    "fix": ""
+   },
+   {
+    "claim": "99% heat flux 420 W/m² at Ar 0.5",
+    "verdict": "CONFIRMED",
+    "evidence": "Seattle row Ar 0.5: 142 226 307 384 420 551 (99% column = 420)",
+    "fix": ""
+   },
+   {
+    "claim": "99% heat flux 647 W/m² at Ar 1",
+    "verdict": "CONFIRMED",
+    "evidence": "Ar = 1 row sits above the city line (checked against Albany worked example, 471 W/m² at 95%); Seattle Ar 1: 177 339 434 539 647 664",
+    "fix": ""
+   },
+   {
+    "claim": "annual energy at Ar 0.5: 3.0 kWh/m² melting + 33.0 idling",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 3 Seattle: 27 260 –7.9 | 3.8 33.1 | 3.0 33.0 | 2.1 33.0",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Table 3 excludes back and edge losses ('not included in the energy values'); add that note"
+  ],
+  "overall": "ok"
+ },
+ "lundSnow": {
+  "where_read": "WebFetch of register URL (osti.gov 895225) after it appeared in search",
+  "claims": [
+   {
+    "claim": "Chapman's classes with ASHRAE (1995) output data",
+    "verdict": "CONFIRMED",
+    "evidence": "Classes I–III (Chapman 1957); design output for US cities from the 1995 ASHRAE Applications Handbook",
+    "fix": ""
+   },
+   {
+    "claim": "Portland OR 86/97/111 Btu/h·ft² (about 271/306/350 W/m²)",
+    "verdict": "CONFIRMED",
+    "evidence": "Class I 86, II 97, III 111 Btu/h·ft²; conversion ×3.155 = 271/306/350 is right",
+    "fix": ""
+   },
+   {
+    "claim": "Klamath Falls deck at 50 Btu/h·ft² (about 158 W/m²)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"is designed for a heat output of 50 Btu/ft2/hr\" (22,000 ft² deck and pavement); 157.7 W/m²",
+    "fix": ""
+   },
+   {
+    "claim": "100 °F (38 °C) fluid (single check)",
+    "verdict": "CONFIRMED",
+    "evidence": "Downhole heat exchanger supplies a 100°F glycol mixture, 24°F drop",
+    "fix": "Remove 'single check'"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "No date printed in the document; register gives none, fine"
+  ],
+  "overall": "ok"
+ },
+ "hollandSnow": {
+  "where_read": "WebFetch of register URL (cityofholland.com/879/Snowmelt-System)",
+  "claims": [
+   {
+    "claim": "'approximately 690,000 square feet of heated sidewalks and streets'",
+    "verdict": "CONFIRMED",
+    "evidence": "\"approximately 690,000 square feet of heated sidewalks and streets\"",
+    "fix": ""
+   },
+   {
+    "claim": "plus 190,000 ft² private systems on City mains",
+    "verdict": "CONFIRMED",
+    "evidence": "\"190,000 square feet of privately owned snowmelt systems heated with water from City snowmelt mains\"",
+    "fix": ""
+   },
+   {
+    "claim": "DDA coordinator's slides: 860,000 ft² public, 1,050,000 ft² in all",
+    "verdict": "NOT FOUND",
+    "evidence": "Not on the City page; slideshow section empty",
+    "fix": "Separate source: register it on its own or drop it"
+   },
+   {
+    "claim": "water at 95 °F (35 °C)",
+    "verdict": "CORRECTED",
+    "evidence": "Page: pumps over 4,700 gal/min 'at 95 degrees' - unit not stated",
+    "fix": "Write '95 degrees (unit not stated; °F assumed, 35 °C)'"
+   },
+   {
+    "claim": "from power-plant waste heat",
+    "verdict": "CONFIRMED",
+    "evidence": "\"waste heat from power generation is captured to heat water\"",
+    "fix": ""
+   },
+   {
+    "claim": "since 1988 (City claim)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Since 1988, residents and visitors have enjoyed snow-free streets and sidewalks\"",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "'35 °C waste heat' precedent rests on a temperature with no unit on the page"
+  ],
+  "overall": "needs fix"
+ },
+ "ecccNormals2020": {
+  "where_read": "Saved copy is only the index page; values checked in ECCC CSVs /mnt/attach/outputs/data/en_1991-2020_Normals_BC_VANCOUVER_INTERNATIONAL_AIRPORT.csv and ..._AB_EDMONTON_AIRPORT.csv",
+  "claims": [
+   {
+    "claim": "snowfall 36.6 / 126.7 cm a year",
+    "verdict": "CONFIRMED",
+    "evidence": "'Snowfall (cm)' Year: Vancouver 36.6, Edmonton 126.7",
+    "fix": ""
+   },
+   {
+    "claim": "days with snowfall ≥ 0.2 cm 7.4 / 54.7",
+    "verdict": "CONFIRMED",
+    "evidence": "'Days with Snowfall >= 0.2 cm' Year 7.4 / 54.7",
+    "fix": ""
+   },
+   {
+    "claim": "days with snow depth ≥ 1 cm 8.2 / 145.1",
+    "verdict": "CONFIRMED",
+    "evidence": "'Days with Snow Depth >= 1 cm' Year 8.2 / 145.1",
+    "fix": ""
+   },
+   {
+    "claim": "≥ 5 cm 4.4 / 120.5",
+    "verdict": "CONFIRMED",
+    "evidence": "'Days with Snow Depth >= 5 cm' Year 4.4 / 120.5",
+    "fix": ""
+   },
+   {
+    "claim": "average vapour pressure July 1.5 / 1.4 kPa",
+    "verdict": "CONFIRMED",
+    "evidence": "'Average Vapour Pressure (kPa)' Jul 1.5 / 1.4",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "'values not re-checked ?' can be removed; add the two CSVs to saved copies (snow values carry data code C)"
+  ],
+  "overall": "ok"
+ },
+ "edmSidewalk": {
+  "where_read": "Register URL blocked; read City short link edmonton.ca/safesidewalks (found by search); could not confirm it resolves to the register URL",
+  "claims": [
+   {
+    "claim": "page title 'Residential Sidewalk Snow and Ice' ?",
+    "verdict": "UNREACHABLE",
+    "evidence": "Fetch tool returned no title; '?' cannot be settled",
+    "fix": ""
+   },
+   {
+    "claim": "property owners clear adjacent sidewalks",
+    "verdict": "CONFIRMED",
+    "evidence": "City does not have \"council-approved resources to clear sidewalks in most residential or commercial areas\"; owners clear sidewalks next to property",
+    "fix": ""
+   },
+   {
+    "claim": "$100 fine plus the cost of removal",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Failure to maintain your sidewalks could result in a $100 fine plus the cost of snow removal.\"",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Read at the short link, not the register URL; update URL to edmonton.ca/safesidewalks or re-check"
+  ],
+  "overall": "ok"
+ },
+ "edmEncroach": {
+  "where_read": "Register PDF blocked (not in search results); fee checked in edmFees2026 saved copy",
+  "claims": [
+   {
+    "claim": "Encroachment agreement request form (Feb 2017), road right-of-way, structures on City streets; heated sidewalks not named",
+    "verdict": "UNREACHABLE",
+    "evidence": "Form PDF not fetchable",
+    "fix": ""
+   },
+   {
+    "claim": "fee $300 or $500 with circulation (current fee ?)",
+    "verdict": "CONFIRMED",
+    "evidence": "2026 Fee Schedules p. 11, 'Encroachment Applications - Bylaw 12513': no circulation $300; require circulation $500",
+    "fix": "Settles '?' from edmFees2026: still $300/$500 in 2026, plus a separate encroachment fee ($50–$350 or (A/B)×C)"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "unreachable"
+ },
+ "edmFees2026": {
+  "where_read": "Saved copy full.pdf (pdftotext)",
+  "claims": [
+   {
+    "claim": "2026 Planning and Development Fee Schedules, effective 1 Jan 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Planning and Development FEE SCHEDULES, EFFECTIVE JANUARY 1, 2026\"",
+    "fix": ""
+   },
+   {
+    "claim": "updated Dec 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "Page footer \"Updated December 2025\"",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "fasken2026": {
+  "where_read": "WebFetch of register URL (fasken.com) after it appeared in search",
+  "claims": [
+   {
+    "claim": "Title 'Family Ties: BC Court of Appeal Confirms BC Utilities Commission Jurisdiction over Affiliate Electricity Sales'",
+    "verdict": "CONFIRMED",
+    "evidence": "Same title on page",
+    "fix": ""
+   },
+   {
+    "claim": "Mar 2026 (day ?)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Page shows no publication date; URL has /2026/03/; day not settled",
+    "fix": ""
+   },
+   {
+    "claim": "Powell River Energy v. BCUC, 2026 BCCA 93",
+    "verdict": "CONFIRMED",
+    "evidence": "Powell River Energy Inc. v. British Columbia (Utilities Commission), 2026 BCCA 93",
+    "fix": "Use the full case name"
+   },
+   {
+    "claim": "affiliate is a separate person, so supplying it is not self-supply (our reading ?)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"each corporation in PREI's corporate group was a distinct legal entity and therefore a separate 'person' under the statute\"",
+    "fix": "Remove 'our reading ?': this is Fasken's own statement of the holding; still a law-firm summary"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Law-firm summary, not the judgment; read 2026 BCCA 93 before using it as a rule"
+  ],
+  "overall": "ok"
+ },
+ "bchCTT2024": {
+  "where_read": "Saved copy full.pdf (pdftotext)",
+  "claims": [
+   {
+    "claim": "BC Hydro CTT technical interconnection requirements, 20 Mar 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Closed Transition Transfer of Power Generators Technical Interconnection Requirements (CTTIR) March 20, 2024\"",
+    "fix": "Use the full title"
+   },
+   {
+    "claim": "s. 2.1: never energize a de-energized part of BC Hydro's system",
+    "verdict": "CONFIRMED",
+    "evidence": "s. 2.1: \"The PG shall not, under any circumstances, energize any de-energized portion of the BC Hydro DS.\"",
+    "fix": ""
+   },
+   {
+    "claim": "s. 1.1: momentary paralleling under 100 ms",
+    "verdict": "CONFIRMED",
+    "evidence": "s. 1.1: \"paralleling the sources momentarily (less than 100ms)\"; s. 3.1 'up to 100ms (6 cycles)'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Also s. 2.1: 'PG(s) capable of CTT shall not export power'; Extended CTT allows up to 20 s"
+  ],
+  "overall": "ok"
+ },
+ "epcorIG2022": {
+  "where_read": "Not read: register PDF blocked; search result 'Interconnection-Guide-2022.pdf' on epcor.com returned a guides page without the guide text",
+  "claims": [
+   {
+    "claim": "s. 7.6 and 7.8 p. 47–50: no island with part of EPCOR's system",
+    "verdict": "UNREACHABLE",
+    "evidence": "Guide text not fetchable",
+    "fix": ""
+   },
+   {
+    "claim": "intentional islanding only with EDTI's written approval",
+    "verdict": "UNREACHABLE",
+    "evidence": "Guide text not fetchable",
+    "fix": ""
+   },
+   {
+    "claim": "trip within 2 s",
+    "verdict": "UNREACHABLE",
+    "evidence": "Guide text not fetchable",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [],
+  "overall": "unreachable"
+ },
+ "epcorTC2025s44": {
+  "where_read": "Saved copy full.pdf = 1 Jan 2026 edition (header 'Effective: 2026-01-01, Supercedes: 2025-01-01'); Jan 2025 edition at register URL not read",
+  "claims": [
+   {
+    "claim": "s. 4.4 p. 19: customer shall not extend facilities beyond own property (except Art. 8.3)",
+    "verdict": "CONFIRMED",
+    "evidence": "2026 ed. p. 19 s. 4.4: \"Except as permitted within Article 8.3 ... a Customer shall not extend ... beyond property owned or occupied by that Customer\"",
+    "fix": ""
+   },
+   {
+    "claim": "s. 6.5.2 p. 23: first customer 'may receive a refund' in proportion if a new customer shares the extension during the initial term",
+    "verdict": "CONFIRMED",
+    "evidence": "2026 ed. p. 23 s. 6.5.2: \"a Customer may receive a refund based on the proportion of the costs of the shared extension\"; refund only if event occurs 'during the initial term'",
+    "fix": ""
+   },
+   {
+    "claim": "Jan 2025 edition superseded by Jan and Aug 2026 editions",
+    "verdict": "CORRECTED",
+    "evidence": "Saved copy confirms Jan 2026 superseded Jan 2025; Aug 2026 edition not seen; Jan 2025 sections not re-checked",
+    "fix": "Cite the 2026-01-01 edition (the one saved and checked); keep '?' on the Aug 2026 edition"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Entry cites the 2025 URL but checks were made on the 2026 edition; also s. 7.3 lets multiple-dwelling unit facilities extend beyond the property, a second exception besides Art. 8.3 (8.3 = Generation Customer Responsibilities)"
+  ],
+  "overall": "needs fix"
+ },
+ "bcbc2024_326": {
+  "where_read": "Local copies data/raw/codes/bcbc2024.txt, nbc.txt (NBC 2020), nbc_ab2023.txt (NBC(AE) 2023)",
+  "claims": [
+   {
+    "claim": "BCBC 3.2.6.1(1)(d) 'containing a Group C major occupancy whose floor level is more than 18 m above grade'",
+    "verdict": "CONFIRMED",
+    "evidence": "BCBC 3.2.6.1.(1)(d) same wording",
+    "fix": ""
+   },
+   {
+    "claim": "BCBC 3.2.6.5(1) at least one elevator for use by firefighters",
+    "verdict": "CONFIRMED",
+    "evidence": "\"1) At least one elevator shall be provided for use by firefighters in conformance with Sentences (2) to (6).\"",
+    "fix": ""
+   },
+   {
+    "claim": "same wording in NBC 2020 3.2.6.1(1)(d) and 3.2.6.5(1)",
+    "verdict": "CONFIRMED",
+    "evidence": "NBC 2020 text identical for both",
+    "fix": ""
+   },
+   {
+    "claim": "NBC(AE) not checked ?",
+    "verdict": "CORRECTED",
+    "evidence": "NBC(AE) 2023: 3.2.6.1.(1)(d) same; firefighter elevator is 3.2.6.5.(3), after (1) 'All elevators shall be capable of operation on emergency power' and (2) one at a time",
+    "fix": "Settle '?': cite NBC(AE) 3.2.6.1.(1)(d) and 3.2.6.5.(3); note its added emergency-power sentences"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "needs fix"
+ },
+ "sheu2019cma": {
+  "where_read": "Saved copy page.html (NRCan SHEU 2019 Table 4.1, page=1)",
+  "claims": [
+   {
+    "claim": "Table 4.1 Number of households by CMA and main heating equipment",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Table 4.1 – Number of Households by CMA and Main Heating Equipment\"",
+    "fix": ""
+   },
+   {
+    "claim": "pages 0-2; page 2 not saved ?",
+    "verdict": "CORRECTED",
+    "evidence": "Site pagination shows 'Page 1 Page 2' only; saved copy is page 1 and already has the Edmonton and Vancouver rows",
+    "fix": "Write 'pages 1–2'; page 2 still not saved. Saved values: Edmonton 579,530 households, furnace 436,049 (75.24%), boilers 111,311 (19.21%, Q.I. M); Vancouver 987,104, furnace 387,439 (39.25%), boilers 224,718 (22.77%, M), baseboard 285,745 (28.95%)"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Some cells are quality M or U (suppressed); flag Q.I. when used"
+  ],
+  "overall": "needs fix"
+ },
+ "bchSelfGen2026": {
+  "where_read": "Register self-generation URL: 404 (29 Oct 2026); saved community-generation page.html; BCUC G-64-26 via WebFetch",
+  "claims": [
+   {
+    "claim": "BCUC application ID 1323 ?",
+    "verdict": "NOT FOUND",
+    "evidence": "Not on community-generation page or G-64-26 (Order and Decision cite exhibits only)",
+    "fix": "Keep '?' or drop"
+   },
+   {
+    "claim": "RS 2289 from 1 Jul 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "G-64-26: \"RS 2289 ... is approved effective July 1, 2026.\"",
+    "fix": ""
+   },
+   {
+    "claim": "exports up to 100 kW per phase at 10 ¢/kWh",
+    "verdict": "CONFIRMED",
+    "evidence": "Decision Exec. Summary: \"net injection limit of 100 kilowatts per phase after serving the customer's load\"; 10 ¢/kWh",
+    "fix": ""
+   },
+   {
+    "claim": "RS 2290 net injection up to 2 MW",
+    "verdict": "CONFIRMED",
+    "evidence": "Page: \"net injection to the grid does not exceed 2 megawatt (MW) AC\"",
+    "fix": ""
+   },
+   {
+    "claim": "set by 24 kW per residential and 100 kW per General Service beneficiary",
+    "verdict": "CONFIRMED",
+    "evidence": "Page: residential accounts \"multiplied by 24 kW plus ... general service multiplied by 100 kW\"",
+    "fix": ""
+   },
+   {
+    "claim": "bill credits only",
+    "verdict": "CORRECTED",
+    "evidence": "Page: credits go to the generator's account and \"can be distributed as bill credits via our optional credit billing service or as a direct monetary exchange (e.g. via Interact e-Transfer)\"",
+    "fix": "Write: BC Hydro pays as bill credits; generator may pass them on as bill credits or direct payment"
+   },
+   {
+    "claim": "G-64-26 sets 10 ¢/kWh for RS 2289 and RS 2290 (executive summary)",
+    "verdict": "CONFIRMED",
+    "evidence": "Exec. Summary: 10 ¢/kWh \"for both the Self-Generation Service Rate and the Community Generation Service Rate\"",
+    "fix": ""
+   },
+   {
+    "claim": "beneficiaries 'can be located anywhere in the Province' and must be BC Hydro customers",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Benefitting customer(s) can be located anywhere in the Province and must be a BC Hydro customer\"",
+    "fix": "Optional: excludes Kingsgate-Yakh and Lardeau-Shutty Bench"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Also: at least 2 beneficiaries; share caps 50/25/10%; facility built on or after 1 Jul 2026"
+  ],
+  "overall": "needs fix"
+ },
+ "bcucG6426": {
+  "where_read": "WebFetch of register URL (BCUC Order G-64-26 and Decision)",
+  "claims": [
+   {
+    "claim": "Order G-64-26 and Decision, 24 Mar 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Order G-64-26 dated March 24, 2026, 'BC Hydro, Net Metering Service Rates'",
+    "fix": ""
+   },
+   {
+    "claim": "RS 1289 net metering closed 1 Jul 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "\"The Net Metering Service Rate (RS 1289) is closed to new customers effective July 1, 2026.\"",
+    "fix": ""
+   },
+   {
+    "claim": "RS 2289 net injection limit 100 kW per phase after the customer's load",
+    "verdict": "CONFIRMED",
+    "evidence": "\"a net injection limit of 100 kilowatts per phase after serving the customer's load\"",
+    "fix": ""
+   },
+   {
+    "claim": "10 ¢/kWh for net generation",
+    "verdict": "CONFIRMED",
+    "evidence": "s. 2.3: \"an Energy Price of 10 cents per kWh for Net Generation\"",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "bcbc2024_3257": {
+  "where_read": "Local copy data/raw/codes/bcbc2024.pdf (bcbc2024.txt)",
+  "claims": [
+   {
+    "claim": "every building has an adequate water supply for firefighting",
+    "verdict": "CONFIRMED",
+    "evidence": "3.2.5.7.(1): \"Every building shall be provided with an adequate water supply for firefighting.\"",
+    "fix": ""
+   },
+   {
+    "claim": "sprinklered or standpiped buildings deemed to comply (except some mass timber)",
+    "verdict": "CONFIRMED",
+    "evidence": "3.2.5.7.(2): \"Except for buildings constructed of encapsulated mass timber construction ... are deemed to comply with Sentence (1).\"",
+    "fix": ""
+   },
+   {
+    "claim": "where municipal supply is limited, supplemental on-site supply may be needed",
+    "verdict": "CONFIRMED",
+    "evidence": "Note: \"where municipal water supply capacities are limited, it may be necessary for buildings to have supplemental water supplies on site\"",
+    "fix": ""
+   },
+   {
+    "claim": "on-site volume for at least 30 minutes of hose streams",
+    "verdict": "CONFIRMED",
+    "evidence": "Note: \"should be sufficient to allow at least 30 minutes of fire department hose stream use\"",
+    "fix": ""
+   },
+   {
+    "claim": "ISO Needed Fire Flow Guide, NFPA 1142, AWWA named as useful",
+    "verdict": "CONFIRMED",
+    "evidence": "Note: \"the following documents may be useful\": ISO, NFPA 1142, AWWA",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "30 min is Note (advisory 'should'), not a Code requirement; label the rule as guidance",
+   "Note also says sprinklered buildings must still verify an adequate source at the site"
+  ],
+  "overall": "ok"
+ },
+ "nfcAB2023_5635": {
+  "where_read": "Local copies data/raw/codes/nfc_ab2023.txt, nbc_ab2023.txt, nbc.txt",
+  "claims": [
+   {
+    "claim": "NFC(AE) 2023 Div. B 5.6.3.5: water supply for firefighting on construction sites",
+    "verdict": "CONFIRMED",
+    "evidence": "\"An adequate water supply for firefighting shall be provided as soon as combustible or encapsulated mass timber construction material arrives on the site.\"",
+    "fix": ""
+   },
+   {
+    "claim": "cross-references Note A-3.2.5.7 of the NBC(AE)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"(See also Note A-3.2.5.7. of Division B of the NBC(AE).)\"",
+    "fix": ""
+   },
+   {
+    "claim": "the same building clause as BCBC 3.2.5.7",
+    "verdict": "CORRECTED",
+    "evidence": "NBC(AE) 3.2.5.7.(1) is prescriptive: for buildings over 3 storeys or 600 m², municipal supply ≥ 3 800 L/min at ≥ 140 kPa, or private supply Q from formula/Table 3.2.5.7; Note names NFPA 1142 and Fire Underwriters Survey",
+    "fix": "Drop 'same clause'; state that NBC(AE) 3.2.5.7 sets flow/volume figures, unlike BCBC/NBC 2020, which only say 'adequate'"
+   },
+   {
+    "claim": "NBC 2020 3.2.5.7 checked in nbc.txt",
+    "verdict": "CONFIRMED",
+    "evidence": "NBC 2020 3.2.5.7.(1) 'Every building shall be provided with an adequate water supply for firefighting'; no Sentence (2), unlike BCBC",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "The 30-min Note sentence is shared by all three codes, but the clauses differ"
+  ],
+  "overall": "needs fix"
+ },
+ "bcab2005": {
+  "where_read": "Saved copy page.html (gov.bc.ca BCAB 2005)",
+  "claims": [
+   {
+    "claim": "BCAB decision 2005",
+    "verdict": "CORRECTED",
+    "evidence": "Page: 'Appeal Board Final Decision #2005', 'Dated: August 6, 2026'",
+    "fix": "Write 'BCAB Decision #2005 (6 Aug 2026)': 2005 is the decision number, not the year"
+   },
+   {
+    "claim": "quoting BCBC Div. B 3.2.5.7.(1) and Note A-3.2.5.7.(1)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Applicable Code requirements (BCBC 2024) Sentence 3.2.5.7.(1)...' and full Note",
+    "fix": ""
+   },
+   {
+    "claim": "every building has an adequate water supply for firefighting",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Every building shall be provided with an adequate water supply for firefighting.\"",
+    "fix": ""
+   },
+   {
+    "claim": "on-site storage for at least 30 minutes of hose streams",
+    "verdict": "CONFIRMED",
+    "evidence": "\"should be sufficient to allow at least 30 minutes of fire department hose stream use\"",
+    "fix": "Source says 'on-site water supply', not 'storage'"
+   },
+   {
+    "claim": "NFPA 1142 as the reference",
+    "verdict": "CONFIRMED",
+    "evidence": "Board: water shuttle acceptable \"provided that it is demonstrated to meet the requirements of NFPA 1142\"",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Decision concerns an unsprinklered rural store; shuttle supply acceptable under NFPA 1142, so not a general on-site storage rule"
+  ],
+  "overall": "needs fix"
+ },
+ "vanOEM2018": {
+  "where_read": "WebFetch of register URL (vancouver.ca 2018-06-04 fire-risks-following-an-earthquake.pdf)",
+  "claims": [
+   {
+    "claim": "Title 'Fire Following EQ – Response to Council Inquiry' (title ?)",
+    "verdict": "CONFIRMED",
+    "evidence": "Subject: \"Fire Following EQ - Response to Council Inquiry\", June 4, 2018",
+    "fix": "Settle '?'. Note: FROM line is Paul Mochrie, Deputy City Manager; body says OEM wrote it"
+   },
+   {
+    "claim": "two saltwater pump stations and a seismic network (DFPS)",
+    "verdict": "CORRECTED",
+    "evidence": "p. 7: DFPS includes \"two salt-water pumping stations\" plus pipe/hydrant network; the memo uses 'seismically resilient network' only for a separate planned network of hardened water mains",
+    "fix": "Describe DFPS as 2 saltwater pumping stations + pipe/hydrant network; keep the seismic water-main network separate"
+   },
+   {
+    "claim": "limited in scope (downtown, part of Kitsilano, to VGH)",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 9: DFPS \"is limited in geographic scope\": downtown core, parts of Kitsilano, east to VGH",
+    "fix": ""
+   },
+   {
+    "claim": "sprinklers rely on mains",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 5: \"sprinkler systems typically get their water from municipal water mains\"",
+    "fix": ""
+   },
+   {
+    "claim": "network complete in about 80 years",
+    "verdict": "CORRECTED",
+    "evidence": "p. 7: the seismically resilient water-main network \"will be complete in approximately 80 years\" (opportunistic upgrades), not the DFPS",
+    "fix": "Tie 80 years to the hardened water-main network"
+   },
+   {
+    "claim": "City wells only for emergency drinking water",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 6: yields \"expected only to supply emergency drinking water\"",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "needs fix"
+ },
+ "bcDWPR": {
+  "where_read": "Saved copy page.html (BC Reg 200/2003, current to 20 Oct 2026)",
+  "claims": [
+   {
+    "claim": "s. 1 definitions",
+    "verdict": "CONFIRMED",
+    "evidence": "s. 1 defines 'small system', 'system within a system', etc.",
+    "fix": ""
+   },
+   {
+    "claim": "ss. 6–7: construction and operating permits",
+    "verdict": "CONFIRMED",
+    "evidence": "s. 6 'Construction permits' (who may issue; exemptions in (3)); s. 7 'Operating permits and fees'",
+    "fix": ""
+   },
+   {
+    "claim": "water supplier needs permits (? duty in Act ss. 7–8)",
+    "verdict": "CORRECTED",
+    "evidence": "Regulation ss. 6–7 only say who issues permits and how; no duty stated in the regulation",
+    "fix": "Partly settled: the duty is not in the regulation; Act ss. 7–8 not read here, so keep '?' on the Act section numbers"
+   },
+   {
+    "claim": "s. 3.1(b): system not for drinking/food, not connected, marked, is exempt",
+    "verdict": "CORRECTED",
+    "evidence": "\"The following are exempt from section 6 of the Act: ... (b) a water supply system ... if (i) ... not ... human consumption or food preparation, (ii) not connected ..., (iii) ... markings\"",
+    "fix": "State 'exempt from s. 6 of the Act' (potable-water duty), not exempt from permits"
+   }
+  ],
+  "roles_ok": false,
+  "overreach": [
+   "Role fire_water 's. 3.1(b)' rule: s. 3.1(b) exempts only from Act s. 6 (potable water), not from construction/operating permits; do not use it to say a fire-water system needs no permit"
+  ],
+  "overall": "needs fix"
+ },
+ "abPWR277": {
+  "where_read": "Local copy data/raw/codes/ab_potable_water_reg_277_2003.txt",
+  "claims": [
+   {
+    "claim": "Alta Reg 277/2003, consolidated to 199/2025, current as of 27 Aug 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "\"With amendments up to and including Alberta Regulation 199/2025 / Current as of August 27, 2025\"",
+    "fix": ""
+   },
+   {
+    "claim": "s. 1(1)(l) private utility = waterworks owned and operated by anyone other than owners listed in clause (i) (our paraphrase ?), except one serving only a single family dwelling or farmstead",
+    "verdict": "CONFIRMED",
+    "evidence": "\"owned and operated by a person other than a person referred to in clause (i)(i), (ii), (iii)(A) and (C), (iv), (v), (vii) and (viii)\"; excludes single family dwelling/farmstead",
+    "fix": "Settle '?': excluded owners are local authorities of cities/towns etc., hamlet owners, municipal-development authority or lot owners, privately owned development owner, regional services commission, industrial development owner (vii), watering point owner"
+   },
+   {
+    "claim": "s. 1(2): applies only to waterworks in the Activities Designation Regulation",
+    "verdict": "CONFIRMED",
+    "evidence": "\"This Regulation only applies to waterworks systems referred to in Schedule 1, Division 5 and Schedule 2, Division 5 of the Activities Designation Regulation\"",
+    "fix": ""
+   },
+   {
+    "claim": "s. 4: designs stamped by a professional engineer",
+    "verdict": "CONFIRMED",
+    "evidence": "s. 4(3): design \"must be stamped and signed by the professional engineer who designed the system\" (other than micro waterworks)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Owner of an industrial development (clause (i)(vii)) is not a 'private utility'; a data centre's own system may fall under 'industrial development', not private utility"
+  ],
+  "overall": "ok"
+ },
+ "abADR276": {
+  "where_read": "Local copy data/raw/codes/ab_activities_designation_reg_276_2003.pdf (CanLII print; OCR, text layer garbled)",
+  "claims": [
+   {
+    "claim": "Sch. 1 Div. 5 (approval): private utility drawing surface water or groundwater other than high-quality groundwater",
+    "verdict": "CONFIRMED",
+    "evidence": "Sch. 1 Div. 5(a): waterworks that '(B) is a private utility or a watering point' and uses '(A) surface water, or (B) groundwater other than high quality groundwater'",
+    "fix": ""
+   },
+   {
+    "claim": "Sch. 2 Div. 5 (registration): private utility using high-quality groundwater",
+    "verdict": "CONFIRMED",
+    "evidence": "Sch. 2 Div. 5(a): '(B) is a private utility' ... 'uses high quality groundwater as the source of its water supply'",
+    "fix": ""
+   },
+   {
+    "claim": "or one that consists solely of a distribution system supplied from an approved or registered waterworks",
+    "verdict": "CONFIRMED",
+    "evidence": "Sch. 2 Div. 5(b)(ii): \"consists solely of a water distribution system that uses ... potable water from a waterworks system that holds a current approval or registration\"",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Sch. 1 Div. 5 also covers waterworks serving an industrial development; Notes exclude extensions/replacements of approved systems"
+  ],
+  "overall": "ok"
+ }
+}

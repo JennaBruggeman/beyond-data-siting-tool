@@ -1,0 +1,1158 @@
+{
+ "odrsf": {
+  "where_read": "saved page.html (StatCan LODE page, modified 2025-12-22) + ODSRF_v2_metadata.pdf inside local data/raw/receivers/odsrf_v2_gpkg.zip; live LODE page re-fetched (same v1 text)",
+  "claims": [
+   {
+    "claim": "StatCan catalogue 21-26-0002, issue 2021001",
+    "verdict": "CONFIRMED",
+    "evidence": "Page: 'Catalogue number: 21260002 Issue number: 2021001'; v2 metadata cites .../21-26-0002/212600022021001-eng.htm",
+    "fix": ""
+   },
+   {
+    "claim": "v2, released 24 Sep 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Metadata: 'Version 2.0' ... 'Release Date: September 24th, 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "~249,000 records",
+    "verdict": "CONFIRMED",
+    "evidence": "'In its current version (version 2.0), the ODSRF contains approximately 249,000 individual records.'",
+    "fix": ""
+   },
+   {
+    "claim": "'?: the two checks disagree' v1.0 Sep 2021 ~182,000 CSV vs v2",
+    "verdict": "CORRECTED",
+    "evidence": "LODE landing page (saved and live): 'This first version of the database (version 1.0) contains approximately 182,000 records' ... 'compressed comma-separated values (CSV) file'",
+    "fix": "Settled: both are right. The LODE landing page still describes v1.0 (~182,000, CSV); the downloaded zip is v2.0 (24 Sep 2026, ~249,000, GeoPackage/GeoParquet). Drop the '?' and cite the v2 metadata PDF for v2 figures."
+   },
+   {
+    "claim": "Database name ODRSF",
+    "verdict": "CORRECTED",
+    "evidence": "v2 metadata: 'The Open Database of Sports and Recreational ... Facilities (ODSRF), formerly called the Open Database of Recreational and Sport Facilities'",
+    "fix": "v2 is renamed 'Open Database of Sports and Recreational Facilities (ODSRF)'; note the rename."
+   },
+   {
+    "claim": "Types pools, arenas, rinks, community centres",
+    "verdict": "CORRECTED",
+    "evidence": "v2 Table 1 asset types include 'Swimming', 'Arena or stadium', 'Rink', 'Recreation centre' (54 types)",
+    "fix": "Those labels are v1's 18 types; v2 uses 54 types — use v2 names (Swimming, Arena or stadium, Rink, Recreation centre)."
+   },
+   {
+    "claim": "Fields type, year_built, ownership, geometry",
+    "verdict": "CONFIRMED",
+    "evidence": "Data dictionary: 'Variable - type', 'Variable – ownership', 'Variable – year built ... year_built'; provided as GeoPackage",
+    "fix": ""
+   },
+   {
+    "claim": "File odsrf_v2_gpkg.zip, downloaded 15 Oct 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Local zip present; file mtime 14 Oct 21:54 local (≈15 Oct UTC); contents dated 2026-09-23",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "year_built and ownership are 'Provided by source data' — often blank; do not imply full coverage"
+  ],
+  "overall": "needs fix"
+ },
+ "receiversBCUC": {
+  "where_read": "BCUC decisions on ordersdecisions.bcuc.com, located via WebSearch and fetched: G-310-21A (515249), C-12-15 (126938), C-5-23 (521940), C-3-23 (521743), G-279-21 (513500)",
+  "claims": [
+   {
+    "claim": "Creative Energy Core steam 971,259 klb forecast, G-310-21A, 2021",
+    "verdict": "CONFIRMED",
+    "evidence": "Amended forecast '971,259 thousand pounds of steam'; Decision and Order G-310-21A dated October 29, 2021",
+    "fix": ""
+   },
+   {
+    "claim": ">200 buildings",
+    "verdict": "CONFIRMED",
+    "evidence": "'more than 200 buildings in downtown Vancouver'",
+    "fix": ""
+   },
+   {
+    "claim": "NE False Creek 24 MW peak, 48,100 MWh/yr by 2024 (C-12-15)",
+    "verdict": "CONFIRMED",
+    "evidence": "'a diversified peak energy demand of 24 MW'; 'an annual energy sales forecast of 48,100 MWh by 2024' (Order C-12-15, 8 Dec 2015)",
+    "fix": ""
+   },
+   {
+    "claim": "Sen̓áḵw 10,343 kW design heating peak; 11,218 MWh/yr modelled; Phases 1–2 (C-5-23)",
+    "verdict": "CONFIRMED",
+    "evidence": "C-5-23 (26 Oct 2023): design peak 10,343 kW (space heat + DHW, VBBL 2019 design conditions); 11,218 MWh from hourly energy model, Phases 1 and 2",
+    "fix": ""
+   },
+   {
+    "claim": "River District 11.0 → 26.1 MW peak, ~33,600 MWh/yr at full build-out 2047 (C-3-23)",
+    "verdict": "CONFIRMED",
+    "evidence": "'from 11.0 MW in 2022 to 26.1 MW in 2047'; 'approximately 33,600 MWh of low carbon thermal energy annually at full buildout in 2047'",
+    "fix": ""
+   },
+   {
+    "claim": "SFU Burnaby Mountain 43,787 MWh/yr (G-279-21)",
+    "verdict": "CONFIRMED",
+    "evidence": "'SFU's annual average energy demand is 43,787 MWh.' (G-279-21, 24 Sep 2021)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Most figures are the utility's (applicant's) forecasts recited in BCUC decisions, not Commission findings — label 'utility forecast, in BCUC decision' (971,259 is the amended forecast the panel accepted)",
+   "River District 33,600 MWh is the low-carbon energy requirement, not total demand",
+   "SFU 43,787 MWh is SFU customer demand (biomass fuel section), not whole-system load",
+   "Entry URL is the generic portal; add per-decision links"
+  ],
+  "overall": "ok"
+ },
+ "rvo2018": {
+  "where_read": "saved full.pdf (RVO, 9 pp. + back cover)",
+  "claims": [
+   {
+    "claim": "Title Rapportage kansenkaart Warmte uit Datacenters, 7 Nov 2018",
+    "verdict": "CONFIRMED",
+    "evidence": "'Rapportage kansenkaart Warmte uit Datacenters' ... 'Datum 7 november 2018'",
+    "fix": ""
+   },
+   {
+    "claim": "? printed author Barry Scholten; IF Technology made the maps for Berenschot",
+    "verdict": "CONFIRMED",
+    "evidence": "'Auteur Barry Scholten'; 'IF Technology heeft in opdracht van Berenschot landelijke kansenkaarten opgesteld'",
+    "fix": "Settled: drop '?'. Author Barry Scholten (IF Technology, ref 68223/BaS/20181107); published by RVO, commissioned by Ministerie van EZK."
+   },
+   {
+    "claim": "RVO-178-1801",
+    "verdict": "CONFIRMED",
+    "evidence": "Back cover: 'Publicatienummer: RVO-178-1801/RP-DUZA'",
+    "fix": ""
+   },
+   {
+    "claim": "pp.3–9",
+    "verdict": "CONFIRMED",
+    "evidence": "Report pages run 'Pagina 2/9' ... '9/9'; search radii tables (e.g. Tabel 3 zwembaden) on pp.6–7",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Search radii (e.g. pools 1000 m RP at 5-yr payback) are Dutch 2018 cost/gas-price assumptions; transfer to Vancouver/Edmonton as method, not data"
+  ],
+  "overall": "ok"
+ },
+ "src25": {
+  "where_read": "/mnt/attach/outputs/sources/25_receivers_networks_precedents.md (internal note)",
+  "claims": [
+   {
+    "claim": "Internal note 25 covers receivers, service areas, noise zones, Canadian precedents",
+    "verdict": "CONFIRMED",
+    "evidence": "Heading: '25 — Receivers, district-energy service areas, noise zones, Canadian precedents (15 Oct 2026)'",
+    "fix": ""
+   },
+   {
+    "claim": "Role note: ice-rink plants as heat sources; building-outline medians 0.86 / 0.65",
+    "verdict": "NOT FOUND",
+    "evidence": "Note 25 mentions rinks only as excluded outdoor rinks; no 0.86/0.65 found in it",
+    "fix": "Point these two items to where they actually live (audit derivation) or source them; note 25 does not hold them."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Internal note, not a primary; its Canadian-precedent section says 'not re-read here' and includes operator claims"
+  ],
+  "overall": "needs fix"
+ },
+ "vanEnergyReport": {
+  "where_read": "vancouver.ca/green-vancouver/energize-vancouver.aspx (fetched); map URL not fetchable (provenance block); local data/vancouver_energy_report.json and data/raw/van/energy_report/disclosed_2025_extract.csv cross-checked",
+  "claims": [
+   {
+    "claim": "Commercial ≥4,645 m² / 50,000 ft²; residential and hotel ≥9,290 m² / 100,000 ft²",
+    "verdict": "CONFIRMED",
+    "evidence": "'Commercial building greater than or equal to 4,645 square metres (50,000 square feet)'; 'Multi-unit residential building or hotel greater than or equal to 9,290 square metres (100,000 square feet)'",
+    "fix": ""
+   },
+   {
+    "claim": "Map shows only buildings whose owners agreed to disclose",
+    "verdict": "CONFIRMED",
+    "evidence": "'data for buildings whose owners have agreed to disclosed this information'",
+    "fix": ""
+   },
+   {
+    "claim": "Name 'Annual Energy and Carbon Report'",
+    "verdict": "CORRECTED",
+    "evidence": "By-law: 'Annual Greenhouse Gas and Energy Limits By-law'; map labelled 'Energize Vancouver reporting map'",
+    "fix": "Name the by-law and map as the City does."
+   },
+   {
+    "claim": "Map at energycarbonreport.vancouver.ca/map/, reporting year 2025, four sites screenshot 10 Oct 2026",
+    "verdict": "UNREACHABLE",
+    "evidence": "Map URL blocked for fetch; screenshots not located. Local 2025 extract matches the JSON for V11414, V10062, V11800 (GFA, HEI, EUI identical)",
+    "fix": "Keep as J.B. screenshot record; attach screenshot files to register."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Derivation treats non-heat energy as electricity ('assumed electricity') — label as assumption"
+  ],
+  "overall": "needs fix"
+ },
+ "vanNMH": {
+  "where_read": "local data/raw/van/non-market-housing.json (+ 2026-10-16 CSV)",
+  "claims": [
+   {
+    "claim": "641 projects",
+    "verdict": "CONFIRMED",
+    "evidence": "JSON list length 641; CSV 641 data rows",
+    "fix": ""
+   },
+   {
+    "claim": "Fields status, occupancy year, operator, unit counts",
+    "verdict": "CONFIRMED",
+    "evidence": "Keys 'project_status', 'occupancy_year', 'operator', 'design_standard_1br' ... clientele counts",
+    "fix": ""
+   },
+   {
+    "claim": "Export 15 Oct 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "File mtime 14 Oct 21:58 PDT (= 15 Oct UTC)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "bcResCare": {
+  "where_read": "saved page.html is a JavaScript stub (no content); live catalogue page blocked for fetch; local dataset data/raw/receivers/bc_residential_care_2026-10-20.csv read",
+  "claims": [
+   {
+    "claim": "Licensed residential care facilities with maximum capacity",
+    "verdict": "CONFIRMED",
+    "evidence": "CSV columns: 'TYPE' = 'Residential Care', '...LONG_TERM_CARE_MAX_CAP', 'COMMUNITY_LIVING_MAX_CAP' etc.",
+    "fix": ""
+   },
+   {
+    "claim": "? 'community care'",
+    "verdict": "CONFIRMED",
+    "evidence": "CSV: GOVERNING_ACT 'Community Care and Assisted Living Act', 'Residential Care Regulation'; 'COMMUNITY_LIVING' care type",
+    "fix": "Settled from the data file: facilities are licensed under the Community Care and Assisted Living Act; 'community living' is one care category."
+   },
+   {
+    "claim": "Open Government Licence – BC",
+    "verdict": "UNREACHABLE",
+    "evidence": "Catalogue page not readable (JS stub; fetch blocked)",
+    "fix": "Re-save the catalogue page with licence visible."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "roles list is empty although used_by receivers_nearby and backup_neighbours — fill roles"
+  ],
+  "overall": "unreachable"
+ },
+ "abCCcompliance2026": {
+  "where_read": "saved page.html (open.alberta.ca dataset page) + local ab_cc_compliance_2026-06.xlsx",
+  "claims": [
+   {
+    "claim": "? ministry name not printed",
+    "verdict": "CORRECTED",
+    "evidence": "'Creator Assisted Living and Social Services Publisher Assisted Living and Social Services'",
+    "fix": "Settled: ministry IS printed — Assisted Living and Social Services (branch moved from Health in May 2025)."
+   },
+   {
+    "claim": "? licence not printed",
+    "verdict": "CORRECTED",
+    "evidence": "'Licence Open Government Licence - Alberta'",
+    "fix": "Settled: licence IS printed."
+   },
+   {
+    "claim": "Compliance reporting as of June 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Local xlsx sheet 'June 2026_Open_Data_Extract' (32,361 rows)",
+    "fix": "Note: dataset page (updated 21 Oct 2026) now offers 'as of October 2026'; record that the tool uses the June 2026 extract."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "roles list empty although used_by two quantities",
+   "Dataset is a compliance-visit log (one row per visit), not a facility register — dedupe by site before counting receivers"
+  ],
+  "overall": "needs fix"
+ },
+ "vanTaxRates2026": {
+  "where_read": "saved full.pdf (RTS 18298, council.vancouver.ca/20260505/documents/r2.pdf); a2–a5 fetched from council.vancouver.ca",
+  "claims": [
+   {
+    "claim": "RTS 18298, 2026 tax rates, Council 5 May 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'RTS No.: 18298' ... 'Meeting Date: May 5, 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "Class 6 general purposes 7.09436 per $1,000",
+    "verdict": "CONFIRMED",
+    "evidence": "'Class 6 Business & Other 7.08019 7.09436' (DPRP-adjusted); Appendix C '(6) 7.09436'",
+    "fix": ""
+   },
+   {
+    "claim": "All taxing authorities 12.46720 (with DPRP adjustment)",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 'General purpose tax rates adjusted for implementation of 2026 pilot DPRP': Class 6 Adjusted Total 12.46720",
+    "fix": ""
+   },
+   {
+    "claim": "Rates by-laws a2–a5 (? a3 is a resolution)",
+    "verdict": "CORRECTED",
+    "evidence": "a2 'RESOLUTION ... 2026 Tax Levies for Provincial Schools'; a3 TransLink; a4 BC Assessment; a5 Municipal Finance Authority — all headed 'RESOLUTION'",
+    "fix": "Settled: a2–a5 are all averaging resolutions, not by-laws. The rating by-laws are Appendices C and D of r2."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "roles list empty although used_by tax_split",
+   "r2 approves by-laws 'in principle'; cite enacted versions if available"
+  ],
+  "overall": "needs fix"
+ },
+ "vanBudget2026": {
+  "where_read": "vancouver.ca/files/cov/2026-budget.pdf (fetched after WebSearch)",
+  "claims": [
+   {
+    "claim": "Property tax about 56% of operating revenue",
+    "verdict": "CONFIRMED",
+    "evidence": "p.10: 'The City's property taxes fund approximately 56% of the City's Operating Budget.'",
+    "fix": ""
+   },
+   {
+    "claim": "Utilities largest spending share 24%",
+    "verdict": "CONFIRMED",
+    "evidence": "p.6 chart '24% | Utilities' ($572.2M of $2,392.5M)",
+    "fix": ""
+   },
+   {
+    "claim": "Police second 22%",
+    "verdict": "CONFIRMED",
+    "evidence": "p.6 chart '22% | Police' ($525.3M)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Shares are of total operating expenditures, debt and transfers ($2,393M), not of property tax; utilities are funded mainly by utility fees, so applying these shares to a property-tax split overstates utilities — use a tax-supported breakdown or label"
+  ],
+  "overall": "ok"
+ },
+ "edmTaxRates2026": {
+  "where_read": "bl21442.pdf and COE_Historical_Tax_Rates.pdf (fetched after WebSearch)",
+  "claims": [
+   {
+    "claim": "Bylaw 21442, 2026 Property Tax and Supplementary Property Tax Bylaw, passed 28 Apr 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'BYLAW 21442' '2026 PROPERTY TAX AND SUPPLEMENTARY PROPERTY TAX BYLAW'; 'SIGNED AND PASSED this 28th day of April 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "Non-residential municipal 0.0252216",
+    "verdict": "CONFIRMED",
+    "evidence": "Schedule A municipal: Non-Residential tax rate 0.0252216",
+    "fix": ""
+   },
+   {
+    "claim": "Education 0.0039677",
+    "verdict": "CONFIRMED",
+    "evidence": "Schedule A education: Non-Residential tax rate 0.0039677",
+    "fix": ""
+   },
+   {
+    "claim": "Units per $1 assessed; $25.22 + $3.97 = $29.19 per $1,000, confirmed from levy row",
+    "verdict": "CONFIRMED",
+    "evidence": "Municipal Taxes 1,109,389,134 ÷ Total assessment 43,985,676,319 = 0.0252216; Education 169,974,462 ÷ 42,839,544,595 = 0.0039677",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "roles list empty although used_by tax_split",
+   "Schedule A also has an ASFF requisition allowance rate 0.0000770 (non-res) — small, but omitted from the $29.19 total"
+  ],
+  "overall": "ok"
+ },
+ "sailor2026": {
+  "where_read": "local data/raw/papers/sailor2026_dc_waste_heat.pdf",
+  "claims": [
+   {
+    "claim": "Title 'Data center waste heat as an emerging urban thermal hazard: first field measurements'",
+    "verdict": "CORRECTED",
+    "evidence": "Full title: 'Data Center Waste Heat as an Emerging Urban Thermal Hazard: First Field Measurements of Neighborhood-Scale Air Temperature Impacts'",
+    "fix": "Use the full title."
+   },
+   {
+    "claim": "ASME JESBC 7(2) 024501, short communication, doi 10.1115/1.4071922",
+    "verdict": "CONFIRMED",
+    "evidence": "'MAY 2026, Vol. 7 / 024501-1'; 'This short communication'; '[DOI: 10.1115/1.4071922]'",
+    "fix": ""
+   },
+   {
+    "claim": "Four Phoenix facilities 36–169 MW",
+    "verdict": "CONFIRMED",
+    "evidence": "'Five traverses at four facilities ... from a 36 MW single-building data center in Mesa to a 169 MW colocation campus'",
+    "fix": ""
+   },
+   {
+    "claim": "Downwind up to 2.2 °C; average 0.7–0.9 °C warmer than upwind",
+    "verdict": "CONFIRMED",
+    "evidence": "'warming as high as 2.2 °C, with average downwind air temperatures 0.7–0.9 °C warmer'",
+    "fix": ""
+   },
+   {
+    "claim": "Detectable 100–500 m depending on size, wind, layout",
+    "verdict": "CONFIRMED",
+    "evidence": "'detectable at distances of 100–500 m from the facility perimeter, depending on facility size, wind conditions, and campus layout'",
+    "fix": ""
+   },
+   {
+    "claim": "Condenser discharge 8–14 °C above ambient (cited)",
+    "verdict": "CONFIRMED",
+    "evidence": "'air-cooled condenser arrays discharge air at temperatures 8–14 °C above ambient' [15,16]",
+    "fix": ""
+   },
+   {
+    "claim": "~1 °C per 100 W/m² (cited)",
+    "verdict": "CONFIRMED",
+    "evidence": "'approximately 1 °C for each 100 W/m2 [6] at the neighborhood scale'",
+    "fix": ""
+   },
+   {
+    "claim": "June–October traverses",
+    "verdict": "CONFIRMED",
+    "evidence": "'conditions from June 18 to October 25, 2025'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Paper notes the 1 °C/100 W/m² relation 'would suggest much larger warming' than measured — do not use it to scale plume ΔT"
+  ],
+  "overall": "needs fix"
+ },
+ "jin2020": {
+  "where_read": "local data/raw/papers/jin2020_berlin_ac.pdf",
+  "claims": [
+   {
+    "claim": "Jin, Schubert, Salim & Schneider 2020, IJERPH 17, 4645",
+    "verdict": "CONFIRMED",
+    "evidence": "'Int. J. Environ. Res. Public Health 2020, 17, 4645'",
+    "fix": ""
+   },
+   {
+    "claim": "Modelled",
+    "verdict": "CONFIRMED",
+    "evidence": "'We conduct simulations applying the model system CCLM/DCEP-BEM'",
+    "fix": ""
+   },
+   {
+    "claim": "Wall-mounted units up to 0.6 K; more at night and urban",
+    "verdict": "CONFIRMED",
+    "evidence": "'VerAC scenario with a target indoor temperature of 22 °C results in a temperature increase of up to 0.6 K. The increase is more pronounced during the night'",
+    "fix": "Add 'at 22 °C target indoor temperature, summer 2018'."
+   },
+   {
+    "claim": "Rooftop units smaller effect",
+    "verdict": "CONFIRMED",
+    "evidence": "'The effect of HorAC on air temperature is overall smaller than in VerAC.'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "roles list empty although used_by heat_plume_dT; city-wide residential AC, not a single point source"
+  ],
+  "overall": "ok"
+ },
+ "salamanca2014": {
+  "where_read": "local data/raw/papers/salamanca2014_phoenix_ac.pdf",
+  "claims": [
+   {
+    "claim": "JGR Atmospheres 2014, WRF + building energy model, 10-day Phoenix heat event",
+    "verdict": "CONFIRMED",
+    "evidence": "'We simulate a 10 day extreme heat period over the Phoenix metropolitan area ... Weather Research and Forecasting model coupled to a multilayer building energy scheme'",
+    "fix": ""
+   },
+   {
+    "claim": "Mean daytime effect negligible near surface",
+    "verdict": "CONFIRMED",
+    "evidence": "'Waste heat release from AC systems was maximum during the day, but the mean effect was negligible near the surface.'",
+    "fix": ""
+   },
+   {
+    "claim": "Night: 2 m air temperature +>1 °C at some urban locations",
+    "verdict": "CONFIRMED",
+    "evidence": "'during the night, heat emitted from AC systems increased the mean 2 m air temperature by more than 1°C for some urban locations'",
+    "fix": ""
+   },
+   {
+    "claim": "Increased cooling demand",
+    "verdict": "CONFIRMED",
+    "evidence": "'releasing waste heat into the ambient environment exacerbates the nocturnal urban heat island and increases cooling demands'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "roles list empty although used_by heat_plume_dT"
+  ],
+  "overall": "ok"
+ },
+ "dcLstPreprint": {
+  "where_read": "arxiv.org/abs/2603.20897 and arxiv.org/pdf/2603.20897 (fetched after WebSearch)",
+  "claims": [
+   {
+    "claim": "Marinoni et al., 'The data heat island effect'",
+    "verdict": "CONFIRMED",
+    "evidence": "Title 'The data heat island effect: quantifying the impact of AI data centers in a warming world'; first author Andrea Marinoni",
+    "fix": ""
+   },
+   {
+    "claim": "Preprint v3 21 Apr 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Submission history: 'v3: Tue, 21 Apr 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "LST ≈ +2 °C on average after operations start",
+    "verdict": "CONFIRMED",
+    "evidence": "'the land surface temperature increases by 2°C on average after the start of operations'",
+    "fix": ""
+   },
+   {
+    "claim": "+1 °C detectable to 4.5 km",
+    "verdict": "CONFIRMED",
+    "evidence": "'an average monthly LST increase of 1 °C can be measured up to 4.5 km from the AI hyperscalers'",
+    "fix": "Add 'monthly average, land surface, hyperscalers'."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Land-surface temperature at hyperscale sites; context only, as labelled"
+  ],
+  "overall": "ok"
+ },
+ "vanHeatPolicy": {
+  "where_read": "saved full.pdf (Council memo, 10 Mar 2022)",
+  "claims": [
+   {
+    "claim": "Council memo 'Planning for extreme heat', 10 Mar 2022",
+    "verdict": "CORRECTED",
+    "evidence": "'Council Memo - Planning for Extreme Heat and Air Quality Mitigation in Vancouver - RTS 14654'; 'Date: 3/10/2022'",
+    "fix": "Use full title and RTS 14654."
+   },
+   {
+    "claim": "Heat mapping",
+    "verdict": "CONFIRMED",
+    "evidence": "'Mapping of hot areas, existing cooling infrastructure and social vulnerability is being used to identify gaps'",
+    "fix": ""
+   },
+   {
+    "claim": "30% canopy by 2050 (Urban Forest Strategy)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Urban Forest Strategy is currently being updated with a new target set by Park Board of 30% canopy cover by 2050'",
+    "fix": ""
+   },
+   {
+    "claim": "No rule on heat rejected by equipment",
+    "verdict": "CONFIRMED",
+    "evidence": "No mention of condensers, heat rejection or waste heat; only AC provision ('Staff are proposing to require air conditioning')",
+    "fix": "Keep as 'our reading'."
+   },
+   {
+    "claim": "? Climate Change Adaptation Strategy 2024–25 update not checked",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not in this 2022 memo; needs the strategy document itself",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "roles list empty although used_by uhi_context"
+  ],
+  "overall": "needs fix"
+ },
+ "edmHeatPolicy": {
+  "where_read": "Climate_Resilient_Edmonton.pdf (gov.edmonton.ab.ca) and june-2026-adaptation-plan-path-2-progress_0.pdf (fetched after WebSearch)",
+  "claims": [
+   {
+    "claim": "Climate Resilient Edmonton: Adaptation Strategy and Action Plan (2018)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Climate Resilient Edmonton: Adaptation Strategy and Action Plan'; 'Copyright 2018 The City of Edmonton'",
+    "fix": ""
+   },
+   {
+    "claim": "Action 9 'Cool Edmonton'",
+    "verdict": "CONFIRMED",
+    "evidence": "Action 9 'Cool Edmonton' ... 'to reduce the impacts of urban heat island effect'",
+    "fix": ""
+   },
+   {
+    "claim": "Days above 30 °C about 1 → 16 by 2050s",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 4 'Hot Days': baseline 1/yr; 2050s 16/yr (2080s 34)",
+    "fix": "Can drop 'single check'."
+   },
+   {
+    "claim": "Progress 'current as of June 30, 2026'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Pathway progress is current as of June 30, 2026.' (Path 2: Preparing for Changing Temperatures)",
+    "fix": ""
+   },
+   {
+    "claim": "No rule on heat rejected by equipment (both documents)",
+    "verdict": "CONFIRMED",
+    "evidence": "Neither document mentions equipment heat rejection, AC exhaust or waste heat",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "roles list empty although used_by uhi_context",
+   "Entry URL is only the progress page; add the 2018 plan URL"
+  ],
+  "overall": "ok"
+ },
+ "duan2026": {
+  "where_read": "cjur.uwinnipeg.ca article page 445 (fetched after WebSearch)",
+  "claims": [
+   {
+    "claim": "Authors, title, CJUR 33(2):53–78",
+    "verdict": "CONFIRMED",
+    "evidence": "Vol. 33, No. 2, pp. 53–78; Duan, Agrawal, Sanchez-Azofeifa, Welegedara",
+    "fix": ""
+   },
+   {
+    "claim": "Winter 2024 issue, published online Jan 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Vol. 33 No. 2 (2024) ... Winter 2024 Issue'; Published 2026-01-12",
+    "fix": ""
+   },
+   {
+    "claim": "Vancouver summer daytime 7.25 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "'In summer, Vancouver has the highest daytime UHI intensity at 7.25°C.'",
+    "fix": ""
+   },
+   {
+    "claim": "Edmonton winter night 2.86 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "'Edmonton records the lowest winter daytime UHI intensity at -1.29°C, with a nighttime increase reaching 2.86°C.'",
+    "fix": ""
+   },
+   {
+    "claim": "Land-surface, not air, temperature",
+    "verdict": "CONFIRMED",
+    "evidence": "Study uses land surface temperature data",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "molla2026": {
+  "where_read": "local data/raw/papers/molla2026_digital_heat_islands.pdf",
+  "claims": [
+   {
+    "claim": "CPAS 3–4, 100016, short communication",
+    "verdict": "CONFIRMED",
+    "evidence": "'Climate Physics and Atmospheric Science ... 3–4 (2026) 100016'; 'Short Communication'",
+    "fix": ""
+   },
+   {
+    "claim": "46 data-centre buildings",
+    "verdict": "CONFIRMED",
+    "evidence": "'exploratory spatial analysis of 46 data center buildings across Phoenix'",
+    "fix": ""
+   },
+   {
+    "claim": "LST 39.74 vs 39.26 °C (≈ +0.5)",
+    "verdict": "CONFIRMED",
+    "evidence": "'39.74 °C within 0–1 km versus 39.26 °C citywide'",
+    "fix": ""
+   },
+   {
+    "claim": "NDVI 0.15 vs 0.17",
+    "verdict": "CONFIRMED",
+    "evidence": "'NDVI 0.15 within 0–1 km versus 0.17 citywide'",
+    "fix": ""
+   },
+   {
+    "claim": "Disproportionate proximity to low-income and minority populations",
+    "verdict": "CONFIRMED",
+    "evidence": "'disproportionate proximity to low-income and minority populations'",
+    "fix": ""
+   },
+   {
+    "claim": "Exploratory, does not establish causality",
+    "verdict": "CONFIRMED",
+    "evidence": "'the analysis is exploratory and does not establish causality'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "roles list empty although used_by uhi_context"
+  ],
+  "overall": "ok"
+ },
+ "aerscreenGuide": {
+  "where_read": "saved full.pdf (EPA-454/B-21-005, April 2021)",
+  "claims": [
+   {
+    "claim": "AERSCREEN User's Guide 2021, s. 1.1",
+    "verdict": "CONFIRMED",
+    "evidence": "'EPA-454/B-21-005 April 2021'; ratios in '1.1 Description of AERSCREEN'",
+    "fix": ""
+   },
+   {
+    "claim": "1-h to 3-h 1.00, 8-h 0.90, 24-h 0.60, annual 0.10",
+    "verdict": "CONFIRMED",
+    "evidence": "'3-hour fixed ratio of 1.00 ... 8-hour 0.90 ... 24-hour 0.60 ... Annual 0.10'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Ratios apply to point/volume sources; 'For area sources ... 3, 8, and 24-hour average concentrations are equal to the 1-hour average' and no annual — flag if generators are modelled as area sources",
+   "URL: saved copy is gaftp.epa.gov/aqmg/... (entry has /Air/aqmg/); check link"
+  ],
+  "overall": "ok"
+ },
+ "mvAAQO": {
+  "where_read": "Entry PDF not fetchable (provenance block); Metro Vancouver objectives web page and air-quality-objectives-fact-sheet.pdf (05/2025) fetched; local mvAirSummary2024 PDF",
+  "claims": [
+   {
+    "claim": "NO2 1-h 79 µg/m³ (42 ppb), annual 22.6 µg/m³ (12.0 ppb)",
+    "verdict": "CONFIRMED",
+    "evidence": "Fact sheet table: NO2 1-hour 79 / 42; Annual 22.6 / 12.0",
+    "fix": ""
+   },
+   {
+    "claim": "PM2.5 24-h 25 µg/m³",
+    "verdict": "CONFIRMED",
+    "evidence": "Fact sheet: PM2.5 24-hour 25; 2024 summary: 'Vancouver's 24-hour objective (25 μg/m3)'",
+    "fix": ""
+   },
+   {
+    "claim": "Document dated 05/2025",
+    "verdict": "CORRECTED",
+    "evidence": "05/2025 is the footer date of the fact sheet, which points to a separate 'Metro Vancouver's Ambient Air Quality Objectives'",
+    "fix": "Date belongs to the fact sheet; confirm the objectives PDF's own date."
+   },
+   {
+    "claim": "November 2024; NO2 1-h statistical form (98th pct daily max, 3-yr avg); PM2.5 'rolling average'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Objectives PDF not reachable; fact sheet gives no statistical forms or adoption date",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [],
+  "overall": "unreachable"
+ },
+ "abAAQO": {
+  "where_read": "saved full.pdf (Alberta AAQO and Guidelines, July 19, 2024)",
+  "claims": [
+   {
+    "claim": "Alberta AAQO 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "'© 2024 Government of Alberta | July 19, 2024'",
+    "fix": ""
+   },
+   {
+    "claim": "NO2 1-h 300 µg/m³",
+    "verdict": "CONFIRMED",
+    "evidence": "'Nitrogen dioxide (10102-44-0) 1-hour 300 159'",
+    "fix": ""
+   },
+   {
+    "claim": "PM2.5 24-h 29 µg/m³",
+    "verdict": "CONFIRMED",
+    "evidence": "'Particulate Matter Fine – 2.5 microns or less (PM2.5) 24-hour 29'",
+    "fix": ""
+   },
+   {
+    "claim": "Statistical form for NO2 1-h not stated",
+    "verdict": "CONFIRMED",
+    "evidence": "No percentile or exceedance form in the document; it refers to separate 'Using Ambient Air Quality Objectives in Industrial Dispersion Modelling...' guidance",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "The modelling-use statistical form is in the separate modelling guidance, not this document; 'hour-by-hour reading conf 60' is our assumption"
+  ],
+  "overall": "ok"
+ },
+ "caaqs": {
+  "where_read": "saved page.html (ccme.ca/en/air-quality-report)",
+  "claims": [
+   {
+    "claim": "NO2 1-h 2025 standard 42 ppb; 98th percentile, 3-yr average",
+    "verdict": "CONFIRMED",
+    "evidence": "'Nitrogen dioxide (NO 2 ) 1-hour 60 ppb 42 ppb ... The 3-year average of the annual 98th percentile of the daily maximum 1-hour average'",
+    "fix": ""
+   },
+   {
+    "claim": "≈79 µg/m³ (our conversion)",
+    "verdict": "CONFIRMED",
+    "evidence": "42 ppb × 1.88 = 79 (arithmetic)",
+    "fix": ""
+   },
+   {
+    "claim": "PM2.5 24-h 27 µg/m³ (2020)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Fine Particulate Matter (PM 2.5 ) 24-hour 27 μg/m 3 - 23 μg/m 3'",
+    "fix": ""
+   },
+   {
+    "claim": "? 2030 value 23 not on this page",
+    "verdict": "CORRECTED",
+    "evidence": "Same table: 2030 column '23 μg/m 3'",
+    "fix": "Settled: 23 µg/m³ (2030) IS on this page; drop '?'."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "needs fix"
+ },
+ "bcAirBackground": {
+  "where_read": "saved full.pdf (envreportbc_no2_April2026); PM2.5 June 2025 PDF not fetchable (provenance block)",
+  "claims": [
+   {
+    "claim": "Clark Drive NO2 1-h metric 43.6 ppb",
+    "verdict": "CONFIRMED",
+    "evidence": "'Monitoring Station: Vancouver Clark Drive ... NO2 1‑hour Metric: 43.6ppb (3 year average)'",
+    "fix": ""
+   },
+   {
+    "claim": "≈82 µg/m³ (our conversion)",
+    "verdict": "CONFIRMED",
+    "evidence": "43.6 × 1.88 = 82 (arithmetic)",
+    "fix": ""
+   },
+   {
+    "claim": "Annual 15 ppb",
+    "verdict": "CONFIRMED",
+    "evidence": "'NO2 Annual Metric: 15ppb (1 year average)'",
+    "fix": ""
+   },
+   {
+    "claim": "PM2.5 24-h 27, annual 7 µg/m³ (June 2025 report)",
+    "verdict": "UNREACHABLE",
+    "evidence": "envreportbc_pm25_June2025.pdf not reachable; WebSearch shows an envreportbc_pm25_April2026.pdf edition exists",
+    "fix": "Check against the April 2026 PM2.5 edition and update URL."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "roles list empty although used_by air_vs_objective",
+   "State reporting period (2022–2024) for the Clark Drive values"
+  ],
+  "overall": "needs fix"
+ },
+ "mvAirSummary2024": {
+  "where_read": "saved full.pdf (Metro Vancouver annual air quality summary 2024)",
+  "claims": [
+   {
+    "claim": "Clark Drive over both regional NO2 objectives (2024)",
+    "verdict": "CONFIRMED",
+    "evidence": "'below ... annual objective (12 ppb) at all monitoring stations in 2024, except for Vancouver-Downtown and Vancouver-Clark Drive'; 'below ... one-hour objective (42 ppb) ... except for Vancouver-Clark Drive'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "roles list empty although used_by air_vs_objective"
+  ],
+  "overall": "ok"
+ },
+ "acaEdmonton": {
+  "where_read": "Not reachable: report URL not surfaced by WebSearch; internal audit/research_2026-10-19/B_local_heat_air.md records the URL (capitalairshed.ca/wp-content/uploads/2025/06/ACA-AR2023-24_F100824-1.pdf, pp.12, 14) but fetch is blocked",
+  "claims": [
+   {
+    "claim": "Edmonton East NO2 annual mean 13.9 ppb (2023)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Report not readable here",
+    "fix": ""
+   },
+   {
+    "claim": "Series 2016–2023 11.2 to 13.9",
+    "verdict": "UNREACHABLE",
+    "evidence": "Report not readable here",
+    "fix": ""
+   },
+   {
+    "claim": "No station short-term percentile values",
+    "verdict": "UNREACHABLE",
+    "evidence": "Report not readable here",
+    "fix": ""
+   },
+   {
+    "claim": "? URL to add",
+    "verdict": "CORRECTED",
+    "evidence": "Internal audit B lists 'https://capitalairshed.ca/wp-content/uploads/2025/06/ACA-AR2023-24_F100824-1.pdf (pp.12, 14)'",
+    "fix": "Add that URL to the entry and save a copy; title appears to be the 2023–24 report."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "roles list empty; published by a non-government airshed body — label accordingly"
+  ],
+  "overall": "unreachable"
+ },
+ "pcicWx3": {
+  "where_read": "Sobie & Curry 2025 (pmc.ncbi.nlm.nih.gov/articles/PMC12151185), PCIC weather-files page (uvic.ca/pcic), local EPW headers in data/raw/weather_future/",
+  "claims": [
+   {
+    "claim": "Based on CWEC 2020; 2040s–2080s; SSP1-2.6, 2-4.5, 5-8.5; 564 locations",
+    "verdict": "CONFIRMED",
+    "evidence": "Paper: CWEC2020; 'five future periods from the 2040s through the 2080s'; SSP1 2.6, SSP2 4.5, SSP5 8.5; 564 sites",
+    "fix": ""
+   },
+   {
+    "claim": "Shifts temperature, dew point, humidity, pressure",
+    "verdict": "CONFIRMED",
+    "evidence": "Dry bulb, dew point, relative humidity, surface pressure; EPW header 'Future-shifted variables:TAS,RHS,DWPT,PS'",
+    "fix": ""
+   },
+   {
+    "claim": "Heat-wave quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'the frequency and duration of persistent events such as heat waves or cold spells remain largely unchanged'",
+    "fix": ""
+   },
+   {
+    "claim": "Updated to v3 Dec 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "PCIC page: 'In December 2024, the weather files were updated to version 3.'",
+    "fix": ""
+   },
+   {
+    "claim": "? PCIC-WX-3.0.1, 27 Jan 2025",
+    "verdict": "CORRECTED",
+    "evidence": "EPW headers: 'File Version: 3.0, Creation Date: 2022-11-11/14'; neither '3.0.1' nor '27 Jan 2025' on PCIC page or paper",
+    "fix": "Use 'version 3.0 (files created Nov 2022, released Dec 2024)'; drop 3.0.1 / 27 Jan 2025 unless Zenodo shows them."
+   },
+   {
+    "claim": "? Edmonton station in the set",
+    "verdict": "CONFIRMED",
+    "evidence": "Local file header: 'LOCATION,EDMONTON INTL A,AB,CAN,CWEC2020,711230'",
+    "fix": "Settled: Edmonton Intl A is in the set."
+   },
+   {
+    "claim": "Zenodo 15151116",
+    "verdict": "CONFIRMED",
+    "evidence": "Paper: 'https://doi.org/10.5281/zenodo.15151116'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "roles list empty although used_by homes_heated_2050s",
+   "Sobie & Curry 2025: Data in Brief vol. 60, 111667"
+  ],
+  "overall": "needs fix"
+ },
+ "mvClimate2016": {
+  "where_read": "UVic dspace copy of 'Climate projections for Metro Vancouver' (June 2016; bitstream 86e234a7...) via WebSearch; entry's metrovancouver.org URL not fetchable",
+  "claims": [
+   {
+    "claim": "RCP8.5 2050s",
+    "verdict": "CONFIRMED",
+    "evidence": "Body uses RCP8.5; 2050s = 2041–2070",
+    "fix": ""
+   },
+   {
+    "claim": "HDD −25% (Table 16)",
+    "verdict": "CONFIRMED",
+    "evidence": "p.35: 'Heating degree days are projected to decrease by 25% by 2050s'; Table 16 Region 3489 → 2605 (−884)",
+    "fix": ""
+   },
+   {
+    "claim": "Summary says 29%",
+    "verdict": "CONFIRMED",
+    "evidence": "p.vi: 'heating demand for buildings will decrease by 29%'",
+    "fix": ""
+   },
+   {
+    "claim": "CDD 49 → 235",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 12 (p.29): Region past 49, 2050s 235",
+    "fix": ""
+   },
+   {
+    "claim": "Snowpack 292 → 123 cm (−58%)",
+    "verdict": "CONFIRMED",
+    "evidence": "p.17: 'April 1 snow depth will decrease by 58% by the 2050s, from 292 cm to 123 cm'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Read from UVic repository copy of the same report, not the metrovancouver.org URL"
+  ],
+  "overall": "ok"
+ },
+ "emrbClimate2023": {
+  "where_read": "saved full.pdf (EMRB Climate Resilience Study 2023, leduc.ca copy)",
+  "claims": [
+   {
+    "claim": "RCP8.5 2050s",
+    "verdict": "CONFIRMED",
+    "evidence": "'Projected Values ... by the 2050s (2041-2070)'; RCP 8.5",
+    "fix": ""
+   },
+   {
+    "claim": "HDD 5,657 → 4,331",
+    "verdict": "CONFIRMED",
+    "evidence": "'Heating Degree Days (Degree Days) 5,657 4,331 -1,326 3,867 4,869'",
+    "fix": ""
+   },
+   {
+    "claim": "CDD 12 → 144",
+    "verdict": "CONFIRMED",
+    "evidence": "'Cooling Degree Days ... 12 144 132 66 259'",
+    "fix": ""
+   },
+   {
+    "claim": "Days ≥30 °C 1 → 11",
+    "verdict": "CONFIRMED",
+    "evidence": "'Very hot days [≥ +30°C] (Days) 1 11 10 2 28'",
+    "fix": ""
+   },
+   {
+    "claim": "10th–90th percentile ranges",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 2-1 columns '10th Percentile' '90th Percentile'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Historical values are modelled (1976–2005), not observed"
+  ],
+  "overall": "ok"
+ },
+ "mvDWCP": {
+  "where_read": "metrovancouver.org drinking-water-conservation-plan.pdf (amended 1 Nov 2021) and bylaws.vancouver.ca/12086c.pdf, both fetched after WebSearch",
+  "claims": [
+   {
+    "claim": "Stages 1–3 restrict lawn and outdoor uses",
+    "verdict": "CONFIRMED",
+    "evidence": "Stages 1–3 limit lawn, garden, surface washing, aesthetic features; Stage 3 also pools/hot tubs top-up and vehicle washing",
+    "fix": "Note stage 3 also covers pools and vehicle washing."
+   },
+   {
+    "claim": "No stage restricts cooling towers or evaporative cooling",
+    "verdict": "CONFIRMED",
+    "evidence": "Plan does not mention cooling towers or evaporative cooling",
+    "fix": ""
+   },
+   {
+    "claim": "Stage 4 limits indoor and outdoor uses; asks industrial users for voluntary cuts",
+    "verdict": "CONFIRMED",
+    "evidence": "'Stage 4 is an emergency stage that limits both indoor and outdoor water uses'; 'Metro Vancouver could request that industrial water users implement voluntary reductions'",
+    "fix": ""
+   },
+   {
+    "claim": "? City By-law 12086 not checked",
+    "verdict": "CONFIRMED",
+    "evidence": "By-law 12086 (consolidated to 13 Jun 2023): stage 4 s.10.2 lists watering, pools/features, vehicle washes; no cooling-tower mention",
+    "fix": "Settled: 12086 also has no cooling-tower restriction."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Plan version read is amended 1 Nov 2021; check for 2026 amendments"
+  ],
+  "overall": "needs fix"
+ },
+ "vanOnceThrough": {
+  "where_read": "bylaws.vancouver.ca/4848c.PDF (Water Works By-law 4848, consolidated to 27 Apr 2021), fetched after WebSearch; By-law 11777 PDF not fetchable",
+  "claims": [
+   {
+    "claim": "Once-through cooling on City water prohibited from 1 Jan 2020",
+    "verdict": "CONFIRMED",
+    "evidence": "s.3.10(a) prohibits connecting 'once through cooling equipment'; s.3.11 'disconnected from the City's water system by January 1, 2020'",
+    "fix": ""
+   },
+   {
+    "claim": "Sections 3.9–3.10",
+    "verdict": "CORRECTED",
+    "evidence": "2021 consolidation: prohibition s.3.10(a), deadline s.3.11",
+    "fix": "Settled: cite s.3.10–3.11 (2021 consolidation)."
+   },
+   {
+    "claim": "Cooling towers need operating permit and monthly Legionella reports",
+    "verdict": "NOT FOUND",
+    "evidence": "No cooling-tower permit or Legionella rule in the 2021 consolidation of By-law 4848",
+    "fix": "Find the by-law that sets this (likely a later amendment or separate by-law) or drop."
+   },
+   {
+    "claim": "By-law 11777",
+    "verdict": "UNREACHABLE",
+    "evidence": "11777.pdf not reachable; 4848 consolidation notes only By-law 12961",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "roles list empty although used_by water_restriction_rule"
+  ],
+  "overall": "needs fix"
+ },
+ "epcorStages": {
+  "where_read": "EPCOR water-restrictions page and business-guidance page (fetched after WebSearch); EPCOR news PDF (29 Jan 2024)",
+  "claims": [
+   {
+    "claim": "Stages 1–4 target 5/10/15/25%",
+    "verdict": "CONFIRMED",
+    "evidence": "'Stage 1 ... (5% reduction)' ... 'Stage 4: Critical water restrictions (25% reduction)'",
+    "fix": ""
+   },
+   {
+    "claim": "Stages 1–2 'actions your business can take', 3–4 'must take'",
+    "verdict": "NOT FOUND",
+    "evidence": "Business page uses one sentence for all stages: 'your business is asked to implement specific water restrictions'; 'Businesses must follow the specific water restrictions that are in effect'",
+    "fix": "Wording may be in the per-stage PDF guides (not read); otherwise drop the can/must split."
+   },
+   {
+    "claim": "Cooling towers: optimise, reduce 'where possible'",
+    "verdict": "CORRECTED",
+    "evidence": "'Optimize all automated water-using equipment, like cooling towers'; Stage 2 'Optimize cooling and building systems'; 'where possible' only on Stage 3 non-essential activities",
+    "fix": "Drop 'reduce where possible' for cooling towers."
+   },
+   {
+    "claim": "Non-essential continuous-flow processes limited (3–4)",
+    "verdict": "CORRECTED",
+    "evidence": "'Shut off continuous-flow equipment when not needed' (general); Stage 3 'Pause non-essential water-dependent activities where possible'",
+    "fix": "Not tied to stages 3–4 on this page."
+   },
+   {
+    "claim": "'essential' not defined",
+    "verdict": "CONFIRMED",
+    "evidence": "Used in 'essential business functions', 'essential operations'; not defined",
+    "fix": ""
+   },
+   {
+    "claim": "Only official event: mandatory ban 29 Jan–2 Feb 2024 (plant failure)",
+    "verdict": "CORRECTED",
+    "evidence": "EPCOR release 29 Jan 2024: failure of pumping equipment at E.L. Smith plant; duration 'unknown'. Not on the business-guidance page",
+    "fix": "Cite the EPCOR release for the event; end date 2 Feb not confirmed in it."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Role 'stages' as a rule: business guidance is advisory ('asked to'), not a by-law"
+  ],
+  "overall": "needs fix"
+ }
+}

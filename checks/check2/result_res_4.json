@@ -1,0 +1,1002 @@
+{
+ "aucGuidance": {
+  "where_read": "WebFetch https://www.auc.ab.ca/guidance-for-proponents/ (29 Oct 2026); Rule 007 PDF not reachable (URL not in fetch provenance); also checked auc.ab.ca/duty-to-consult/",
+  "claims": [
+   {
+    "claim": "Category A: Crown duty found for related approvals, or reserve/Settlement in radius; Indigenous groups included",
+    "verdict": "CONFIRMED",
+    "evidence": "'the Government of Alberta or Canada has determined that consultation is required for a related approval'; 'a First Nation reserve or Métis Settlement is within the applicable consultation radii'",
+    "fix": ""
+   },
+   {
+    "claim": "Category B: thermal plants < 10 MW, private land with limited off-site impacts; not ordinarily included",
+    "verdict": "CONFIRMED",
+    "evidence": "'projects on private land with little or no off-site impacts'; 'thermal power plants less than 10 megawatts'",
+    "fix": "Wording on page is 'little or no off-site impacts' (entry says 'limited')."
+   },
+   {
+    "claim": "Category C case by case",
+    "verdict": "CONFIRMED",
+    "evidence": "'Projects that are not captured by Category A or Category B are reviewed by the AUC on a case-by-case basis'",
+    "fix": ""
+   },
+   {
+    "claim": "'The ACO has no direct role in the AUC's regulatory process' (?)",
+    "verdict": "NOT FOUND",
+    "evidence": "Not on guidance page; not on duty-to-consult page. Page mentions ACO only as a channel: 'If the Government of Alberta, through the Aboriginal Consultation Office (ACO) or otherwise, directed consultation'",
+    "fix": "Keep '?' or drop the quote until Rule 007 is read; Rule 007 UNREACHABLE here."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "ACO quote is unsourced; do not use it in the consultation rule"
+  ],
+  "overall": "needs fix"
+ },
+ "abConsultPolicy2013": {
+  "where_read": "local /mnt/attach/outputs/data/raw/ab/ir-policy-consultation-first-nations-land-resources-2013-amended-2020.pdf",
+  "claims": [
+   {
+    "claim": "Title, 2013, amended 1 Apr 2020",
+    "verdict": "CONFIRMED",
+    "evidence": "Title 'Policy on Consultation with First Nations on Land and Natural Resource Management, 2013'; page footers 'April 1, 2020'",
+    "fix": "Footer date only; 'amended' not stated in text read - acceptable as file name says amended-2020."
+   },
+   {
+    "claim": "Applies to Crown decisions on land and resource management that may adversely impact Treaty rights or traditional uses on provincial Crown lands",
+    "verdict": "CONFIRMED",
+    "evidence": "'the Policy applies to Crown decisions in relation to land and natural resource management with the potential to adversely impact Treaty rights on provincial Crown lands'",
+    "fix": ""
+   },
+   {
+    "claim": "Matters Not Subject include accessing private lands ...",
+    "verdict": "CONFIRMED",
+    "evidence": "'Accessing private lands to which First Nations do not have a right of access for exercising their Treaty rights and traditional uses'",
+    "fix": ""
+   },
+   {
+    "claim": "Proponents (industry, municipal governments) may be delegated procedural aspects",
+    "verdict": "CONFIRMED",
+    "evidence": "'allows the Crown to delegate procedural aspects of consultation to project proponents'; proponents 'may include industry, municipal governments'",
+    "fix": ""
+   },
+   {
+    "claim": "Consultation office assesses adequacy",
+    "verdict": "CONFIRMED",
+    "evidence": "'the consultation office will assess consultation adequacy'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "census2021DA": {
+  "where_read": "local /mnt/attach/outputs/data/raw/census/ (98-401-X2021024/025 zips, lda_000b21a_e.zip DBF, census2021_DA_selected_Vancouver_Edmonton_regions.csv); StatCan URL not fetched",
+  "claims": [
+   {
+    "claim": "Product 98-401-X2021006 DA profile (?: saved files are CSD level)",
+    "verdict": "CORRECTED",
+    "evidence": "Saved zips are 'Census Profile, 2021 - Census Subdivisions in Alberta' (98-401-X2021024) and BC CSD (98-401-X2021025)",
+    "fix": "'?' settled as stated: saved profile files are CSD-level (024 AB, 025 BC). The DA product code 98-401-X2021006 is still unconfirmed - no DA-level profile file is saved; keep '?' on 2021006."
+   },
+   {
+    "claim": "2021 DA boundary file 92-160-X, lda_000b21a_e",
+    "verdict": "CONFIRMED",
+    "evidence": "lda_000b21a_e.zip contains lda_000b21a_e.shp/.dbf (DAUID, DGUID, LANDAREA, PRUID)",
+    "fix": "Catalogue number 92-160-X not printed in the files read."
+   },
+   {
+    "claim": "CD 5915: 3,590 DAs, population 2,642,825",
+    "verdict": "CONFIRMED",
+    "evidence": "Boundary DBF: 3,590 DAUIDs starting 5915; extract CSV: 3,590 rows, pop2021 sum 2,642,825",
+    "fix": ""
+   },
+   {
+    "claim": "CD 4811: 1,952 DAs",
+    "verdict": "CONFIRMED",
+    "evidence": "Boundary DBF and extract CSV both 1,952 (extract pop2021 sum 1,462,041)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Counts come from J.B.'s extract CSV; the DA-level profile source file itself is not saved locally, so the per-DA attributes cannot be re-traced to a StatCan file"
+  ],
+  "overall": "needs fix"
+ },
+ "jlarc2024": {
+  "where_read": "saved copy /mnt/user-data/beyond-data-sources/public/jlarc2024/full.pdf (info.json URL = Rpt598.pdf, not Rpt598-2.pdf)",
+  "claims": [
+   {
+    "claim": "Report 598, Data Centers in Virginia, Dec 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "'December 9, 2024 ... Data Centers in Virginia'; 'JLARC Report 598'",
+    "fix": ""
+   },
+   {
+    "claim": "Building 'usually takes about 12 to 18 months'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Construction of an individual data center building usually takes about 12 to 18 months'",
+    "fix": ""
+   },
+   {
+    "claim": "Campus 'five or more years'",
+    "verdict": "CONFIRMED",
+    "evidence": "'it can take five or more years to fully build out a campus'",
+    "fix": ""
+   },
+   {
+    "claim": "~50 FT workers per 250,000 sq ft; 'one employee per 5,000 square feet'; about half contract",
+    "verdict": "CONFIRMED",
+    "evidence": "'several data center representatives indicated that a typical 250,000-square-foot data center may have approximately 50 full-time workers (one employee per 5,000 square feet'",
+    "fix": "Label as industry/operator claim reported by JLARC ('data center representatives indicated'), not JLARC measurement."
+   },
+   {
+    "claim": "~1,500 workers at peak construction",
+    "verdict": "CONFIRMED",
+    "evidence": "'data center representatives indicated that, at the height of construction, approximately 1,500 workers are on site'",
+    "fix": "Also operator claim."
+   },
+   {
+    "claim": "Grid additions 12-36 months longer",
+    "verdict": "CONFIRMED",
+    "evidence": "Dominion letter: 'future large load additions ... are expected to take 12 to 36 months longer than they have previously taken'",
+    "fix": "Label as utility (Dominion) statement, Dominion transmission zone, July 2024."
+   },
+   {
+    "claim": "'One-third of data centers are currently located near residential areas'",
+    "verdict": "CONFIRMED",
+    "evidence": "'One-third of data centers are currently located near residential areas'",
+    "fix": ""
+   },
+   {
+    "claim": "Residential bills +$14-37/month (typical Dominion residential customer by 2040, real $ ?)",
+    "verdict": "CORRECTED",
+    "evidence": "'generation- and transmission-related costs increasing by an estimated $14 to $37 monthly in constant (or real) dollars by 2040'; Table 4-2 '2024 constant dollars'; 1,000 kWh/month",
+    "fix": "'?' settled: real 2024 dollars. Fix wording: not whole bills - generation & transmission charges only (excl. distribution), typical 1,000 kWh customer; $14 = half-unconstrained, $37 = unconstrained with VCEA."
+   },
+   {
+    "claim": "URL Rpt598-2.pdf (one check read Rpt598.pdf ?)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Saved copy came from Rpt598.pdf; Rpt598-2.pdf not fetchable here",
+    "fix": "Cite Rpt598.pdf (the saved copy) or confirm -2 is the same text."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "jobs coefficient (1 per 5,000 sq ft) is an operator claim relayed by JLARC; register should label it so",
+   "construction_time grid delay is a Dominion-specific utility statement, not general"
+  ],
+  "overall": "needs fix"
+ },
+ "ieaEnergyAI": {
+  "where_read": "none - https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai blocked (not in fetch provenance); executive-summary page returned client error; no local copy",
+  "claims": [
+   {
+    "claim": "'a data centre can be operational in two to three years'; energy system 'requires longer lead times'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Page could not be opened",
+    "fix": "Keep as earlier-read; re-check by J.B. in browser."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [],
+  "overall": "unreachable"
+ },
+ "vanRezoneTime": {
+  "where_read": "none - https://vancouver.ca/files/cov/rezoning-process-overview.pdf not fetchable (not in provenance, not returned by searches); no local copy found",
+  "claims": [
+   {
+    "claim": "Enquiry 'Target ~16 weeks to LOR'; application 'Target ~15 months to decision'",
+    "verdict": "UNREACHABLE",
+    "evidence": "PDF not reachable",
+    "fix": ""
+   },
+   {
+    "claim": "Apply-for-rezoning page gives no processing time",
+    "verdict": "UNREACHABLE",
+    "evidence": "Page not read",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Targets are City service targets, not measured actuals - label as 'target'"
+  ],
+  "overall": "unreachable"
+ },
+ "edmPermits": {
+  "where_read": "local /mnt/attach/outputs/data/raw/General_Building_Permits_20261013.zip (CSV export 13 Oct 2026); web dataset page not fetched",
+  "claims": [
+   {
+    "claim": "New data centre inside an office (2009, 2011)",
+    "verdict": "CORRECTED",
+    "evidence": "2009: 'interior alterations to an existing office building - \" New Data Center for Alberta Pensions Administration Corp. \"'; 2011: 'interior alterations to office tower (P1 level - Epcor Data Centre)'",
+    "fix": "Only 2009 says 'new'. 2011 records are interior alterations/fire-suppression work to existing data rooms in offices; say '2009 new data centre in office; 2011 alterations to data centres in offices'."
+   },
+   {
+    "claim": "Expansion of existing data centre into empty warehouse, 17204 114 Ave NW (2015, 2020)",
+    "verdict": "CORRECTED",
+    "evidence": "2020: 'Expansion of Rogers data center within empty warehouse'; 2015: 'addition and interior alterations to an existing General Industrial Use building (data centre and mechanical equipment)'",
+    "fix": "'?' settled: narrower. Only the 2020 permit says empty warehouse; 2015 is an addition to an industrial building."
+   },
+   {
+    "claim": "Dataset id not in the export (?)",
+    "verdict": "CONFIRMED",
+    "evidence": "CSV contains no '24uj-dj8v' string; header has no dataset id",
+    "fix": "'?' can be removed: id only from the URL."
+   },
+   {
+    "claim": "2021 demolition of a 'Sobeys Data Centre'",
+    "verdict": "CONFIRMED",
+    "evidence": "2021-08-26 'To demolish a Business And Personal Services use building - Sobeys Data Centre.'",
+    "fix": ""
+   },
+   {
+    "claim": "Occupancy dates for non-residential permits completed since 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "Non-residential (Commercial Final) rows with Occupancy Date: 2024 (631), 2025 (1,160), 2026 (866); none earlier",
+    "fix": "Residential occupancy dates start 2022."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "needs fix"
+ },
+ "edmProcTimes": {
+  "where_read": "local /mnt/attach/outputs/data/Edmonton_Processing_Times_2026Q2.pdf (fonts garbled; read by OCR of rendered pages); live URL not fetched",
+  "claims": [
+   {
+    "claim": "Title 'Development and Construction Application Processing Times'",
+    "verdict": "CONFIRMED",
+    "evidence": "PDF title 'Development and Construction Application Processing Times _ City of Edmonton'",
+    "fix": ""
+   },
+   {
+    "claim": "Actuals April-June 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "OCR: 'Actual ... April - June 2026' on every table page",
+    "fix": ""
+   },
+   {
+    "claim": "Saved 14 Oct 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "PDF CreationDate 'Wed Oct 14 10:09:50 2026 PDT'",
+    "fix": ""
+   },
+   {
+    "claim": "URL now serves another page",
+    "verdict": "UNREACHABLE",
+    "evidence": "Live URL not fetchable here",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Times are measured from complete application to decision and exclude notification/appeal periods - tool must not treat them as full approval time"
+  ],
+  "overall": "ok"
+ },
+ "auc_27938": {
+  "where_read": "WebFetch https://efiling-webapi.auc.ab.ca/Document/Get/784765",
+  "claims": [
+   {
+    "claim": "AUC Decision 27938-D01-2023, Amazon Data Services Canada, 10 Mar 2023",
+    "verdict": "CONFIRMED",
+    "evidence": "'Decision 27938-D01-2023'; 'Amazon Data Services Canada Inc.'; 'March 10, 2023'",
+    "fix": "Title: Emergency Backup Generation Project."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Supports testing schedule (para 8: 'testing at zero per cent load ... 15 minutes every two weeks and one hour every three months'; full load up to two hours twice a year) and AAAQO modelling (para 10); gives no NOx emission rates - pair with AP-42 for rates"
+  ],
+  "overall": "ok"
+ },
+ "ap42_34": {
+  "where_read": "saved copy /mnt/user-data/beyond-data-sources/public/ap42_34/full.pdf",
+  "claims": [
+   {
+    "claim": "AP-42 5th ed., Vol. I, s. 3.4",
+    "verdict": "CONFIRMED",
+    "evidence": "'3.4 Large Stationary Diesel And All Stationary Dual-fuel Engines'; '3.4.6 Updates Since the Fifth Edition'",
+    "fix": "'Vol. I' not printed on pages read; conventional."
+   },
+   {
+    "claim": "Table 3.4-1",
+    "verdict": "CONFIRMED",
+    "evidence": "'Table 3.4-1. GASEOUS EMISSION FACTORS FOR LARGE STATIONARY DIESEL AND ALL'",
+    "fix": ""
+   },
+   {
+    "claim": "Apr 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "page footers '4/25'; 'April 2025' in update history",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Factors apply to engines > 600 hp; EPA disclaimer: factors are averages, not limits"
+  ],
+  "overall": "ok"
+ },
+ "lbnl_proto2021": {
+  "where_read": "WebFetch LBNL PDF and LBNL publication record https://eta-publications.lbl.gov/publications/prototype-energy-models-data-centers",
+  "claims": [
+   {
+    "claim": "Sun, Luo, Luo, Hong, Prototype energy models for data centers",
+    "verdict": "CONFIRMED",
+    "evidence": "Authors 'Kaiyu Sun, Na Luo, Xuan Luo, Tianzhen Hong'; title 'Prototype Energy Models for Data Centers'",
+    "fix": ""
+   },
+   {
+    "claim": "Energy and Buildings 231:110603 (2021); volume not printed in LBNL copy",
+    "verdict": "CONFIRMED",
+    "evidence": "PDF prints 'DOI: 10.1016/j.enbuild.2020.110603' and 'January 2021' but no journal/volume; LBNL record: Energy and Buildings, vol 231, 110603",
+    "fix": ""
+   },
+   {
+    "claim": "DOI 10.1016/j.enbuild.2020.110603 (?)",
+    "verdict": "CONFIRMED",
+    "evidence": "PDF: 'DOI: 10.1016/j.enbuild.2020.110603'",
+    "fix": "'?' can be removed."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Prototypes are small (600 ft2 and 6,000 ft2 computer rooms, 24-3,000 kW) - not a basis for 'largest size that fits' urban sites beyond those scales"
+  ],
+  "overall": "needs fix"
+ },
+ "hillingdon_up4": {
+  "where_read": "saved copy /mnt/user-data/beyond-data-sources/public/hillingdon_up4/full.pdf",
+  "claims": [
+   {
+    "claim": "London Borough of Hillingdon planning committee report, Ark UP4 data centre",
+    "verdict": "CONFIRMED",
+    "evidence": "'Applicant: Ark UP4 Ltd.'; 'Hillingdon Planning Committee – 4th September 2025'; ref 75111/APP/2025/739",
+    "fix": "Add date 4 Sep 2025 and application ref."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "IT capacity 28 MW and staff densities are 'The submission states' (applicant claim); floorspace 18,898 m2 is officer text"
+  ],
+  "overall": "ok"
+ },
+ "van_rts19744": {
+  "where_read": "saved copy /mnt/user-data/beyond-data-sources/public/van_rts19744/full.pdf",
+  "claims": [
+   {
+    "claim": "Referral Report RTS 19744, CD-1 rezoning of 111 E 5th Ave",
+    "verdict": "CONFIRMED",
+    "evidence": "'RTS No.: 19744'; 'SUBJECT: CD-1 Rezoning: 111 East 5th Avenue and 2060 Quebec Street'",
+    "fix": ""
+   },
+   {
+    "claim": "and 2060 Quebec St (?)",
+    "verdict": "CONFIRMED",
+    "evidence": "'111 East 5th Avenue and 2060 Quebec Street'",
+    "fix": "'?' settled: both addresses."
+   },
+   {
+    "claim": "Data centre",
+    "verdict": "CONFIRMED",
+    "evidence": "'to add Bulk Data Storage Use as an allowable use'",
+    "fix": ""
+   },
+   {
+    "claim": "Report 30 Jun 2026 for Council 14 Jul 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Report Date: June 30, 2026'; 'Meeting Date: July 14, 2026'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Conversion of an existing three-storey building; site 2,767.3 m2, 20 m height, staff support 4.2 FSR, load up to 40 MW (applicant)"
+  ],
+  "overall": "needs fix"
+ },
+ "evapcoLayout2026": {
+  "where_read": "WebFetch https://www.evapco.com/media/1644929",
+  "claims": [
+   {
+    "claim": "Bulletin EAEQPTLYT26, Equipment Layout Manual for Dry, Adiabatic and Spray Fluid Coolers",
+    "verdict": "CONFIRMED",
+    "evidence": "Title '... Fluid Coolers, Condensers & CO2 Gas Coolers (eco-Air Series)'; bulletin 'EAEQPTLYT26'",
+    "fix": "Full title adds 'Condensers & CO2 Gas Coolers'. Year 2026 inferred from bulletin code, not confirmed."
+   },
+   {
+    "claim": "Table 1 printed as 'Recommended' (?)",
+    "verdict": "CONFIRMED",
+    "evidence": "'EVAPCO's Recommended Clearances for Dry, Adiabatic and Spray Units'",
+    "fix": "'?' settled; worked example calls them 'Recommended Minimum Clearances'."
+   },
+   {
+    "claim": "V-coil 10-20 ft: 3 / 5 / 6 / 10 ft",
+    "verdict": "CONFIRMED",
+    "evidence": "D1 end-wall 3', D2 side-wall 5', D3 end-end 6', D4 side-side 10'",
+    "fix": ""
+   },
+   {
+    "claim": "Double stack 39 ft: 4 / 10 / 8 / 20 ft",
+    "verdict": "CONFIRMED",
+    "evidence": "D1 4', D2 10', D3 8', D4 20'",
+    "fix": ""
+   },
+   {
+    "claim": "'The top of the unit must be equal to or higher than the structure'",
+    "verdict": "CONFIRMED",
+    "evidence": "'The top of the unit must be equal to or higher than the structure.'",
+    "fix": ""
+   },
+   {
+    "claim": "Louvres >= 50% net free area",
+    "verdict": "CONFIRMED",
+    "evidence": "'the louvers should have a minimum of 50% net free area'",
+    "fix": ""
+   },
+   {
+    "claim": "Hotter entering air 'can cause the unit to underperform'",
+    "verdict": "CONFIRMED",
+    "evidence": "'the entering air will be hotter than the specified ambient conditions' ... can cause the unit to underperform",
+    "fix": "Exact phrase only partly quoted by fetch tool."
+   },
+   {
+    "claim": "5 °F / 50% figure not in this manual (?)",
+    "verdict": "CONFIRMED",
+    "evidence": "No '5 °F' figure; '50%' appears only as louver net free area",
+    "fix": "'?' can be removed."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "vanParking5": {
+  "where_read": "saved copy /mnt/user-data/beyond-data-sources/public/vanParking5/full.pdf",
+  "claims": [
+   {
+    "claim": "May 2026 (?: page stamps run Sep 2012 to Nov 2021)",
+    "verdict": "CORRECTED",
+    "evidence": "Every page footer reads 'Parking By-law 5-1 ... May 2026' through 5-7",
+    "fix": "'?' settled: all page stamps in saved copy are May 2026; drop the Sep 2012-Nov 2021 note."
+   },
+   {
+    "claim": "Class B 10.2 x 3.4 x 3.8 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least 10.2 metres long, 3.4 metres wide, and 3.8 metres high'",
+    "fix": "Height 3.5 m allowed for a single Class B space off a lane/local street (5.5.1.2)."
+   },
+   {
+    "claim": "Class C 23.1 x 3.6 x 4.3",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least 23.1 metres long, 3.6 metres wide, and 4.3 metres high'",
+    "fix": ""
+   },
+   {
+    "claim": "Class C aisle 14.0 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'manouevring aisle for each Class C off-street loading space must be at least 14.0 metres wide'",
+    "fix": ""
+   },
+   {
+    "claim": "Access by 6.1 m aisle from the lane where there is one (5.4.1)",
+    "verdict": "CONFIRMED",
+    "evidence": "'minimum 6.1 metre wide manoeuvring aisle ... and from any lane abutting the site'",
+    "fix": ""
+   },
+   {
+    "claim": "Row 5.2.5 Class B: one for first 465 m2 + one for next 1,860 + one per further 2,325",
+    "verdict": "CONFIRMED",
+    "evidence": "'one space for the first 465 square metres ... next 1 860 ... each additional 2 325 square metres'",
+    "fix": "Also: no requirement under 100 m2."
+   },
+   {
+    "claim": "Class C one for 2,000-5,000 m2 of manufacturing, storage warehouse or wholesale, two above 5,000",
+    "verdict": "CORRECTED",
+    "evidence": "'for a manufacturing use, retail use except for a neighbourhood grocery store, storage warehouse, or wholesale use'",
+    "fix": "Add 'retail (except neighbourhood grocery)'."
+   },
+   {
+    "claim": "Uses not listed set by Director of Planning (5.1.4)",
+    "verdict": "CONFIRMED",
+    "evidence": "'If a use is not listed in the tables ... on the basis of a similar use as determined by the Director of Planning'",
+    "fix": ""
+   },
+   {
+    "claim": "Data centres are not listed",
+    "verdict": "CORRECTED",
+    "evidence": "Row 5.2.5 lists 'Transportation and Storage Uses' and 'Utility and Communication Uses'; RTS 19744: 'Data centres are classified ... under \"Transportation and Storage use\"'",
+    "fix": "Literally no 'data centre' word, but its use category (Transportation and Storage) IS in row 5.2.5, so Class B applies directly; whether Class C applies is unclear (its text names only manufacturing/retail/storage warehouse/wholesale)."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "5.1.4 'similar use' route overstated - data centres fall in a listed category (5.2.5)"
+  ],
+  "overall": "needs fix"
+ },
+ "edmZB580": {
+  "where_read": "local consolidated Zoning Bylaw 20001 PDF /mnt/attach/outputs/sources/library/_large/edm_bl20001/full.pdf (PDF mod. Jan 2024); live web page not fetched",
+  "claims": [
+   {
+    "claim": "s. 5.80 subs. 7 loading space 9.0 x 3.0 m, 3.1/3.3 m with obstructions, 4.0 m clearance",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 7.1.4: '9.0 m 3.0 m 3.1 m 3.3 m 4.0m' (width with obstruction on 1 side / each side)",
+    "fix": ""
+   },
+   {
+    "claim": "Wholly on site",
+    "verdict": "CONFIRMED",
+    "evidence": "7.1.2 'be wholly located on-Site'",
+    "fix": ""
+   },
+   {
+    "claim": "Backing and turning must not interfere with traffic on abutting streets or alleys (7.1.3); 'no backing' ?",
+    "verdict": "CONFIRMED",
+    "evidence": "7.1.3 'be arranged so that backing and turning movements do not interfere with access and traffic on Abutting Streets or Alleys'",
+    "fix": "'?' settled: no 'no backing' rule; backing allowed if it does not interfere."
+   },
+   {
+    "claim": "Non-residential: <2,500 m2 0; 2,500-7,500 m2 1; >7,500 m2 2",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 7.2: 'Less than 2,500 m2 ... 0'; 'Between 2,500 m2 and 7,500 m2 ... 1'; 'Greater than 7,500 m2 ... 2'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Read in the Jan 2024 bylaw PDF; current web consolidation not re-checked"
+  ],
+  "overall": "ok"
+ },
+ "uptime2024survey": {
+  "where_read": "WebFetch https://datacenter.uptimeinstitute.com/rs/711-RIA-145/images/2024.GlobalDataCenterSurvey.Report.pdf",
+  "claims": [
+   {
+    "claim": "Keynote report 146M, Jul 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "'UII KEYNOTE REPORT 146M • JULY 2024'",
+    "fix": ""
+   },
+   {
+    "claim": "> 850 owners and operators",
+    "verdict": "CONFIRMED",
+    "evidence": "'collected responses from more than 850 data center owners and operators'",
+    "fix": ""
+   },
+   {
+    "claim": "Average rack density 8 kW; 7.1 kW without the 11 sites above 50 kW; p. 10",
+    "verdict": "CONFIRMED",
+    "evidence": "'8 kW'; 'skewed upwards by 11 sites ... above 50 kW'; 'the average is 7.1 kW' (p. 10)",
+    "fix": ""
+   },
+   {
+    "claim": "Label INDUSTRY SURVEY",
+    "verdict": "CONFIRMED",
+    "evidence": "Operator self-reported survey",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "nfc2020_4313": {
+  "where_read": "local /mnt/attach/outputs/data/raw/codes/nfc2020.pdf + nfc.txt (NR24-27/2020E, same publication as the URL)",
+  "claims": [
+   {
+    "claim": "NFC 2020, Div. B, 4.3.13-4.3.14 and Table 4.3.13.4.-B",
+    "verdict": "CONFIRMED",
+    "evidence": "'Table 4.3.13.4.-B Indoor Tank Storage in Occupancies Using Oil-Burning Equipment, Emergency Generators and Fire Pumps'; '4.3.14. Rooms for Storage Tanks'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "cat3516c": {
+  "where_read": "none - hanovercounty.gov DocumentCenter URL not fetchable (not in provenance; not returned by search); no local copy",
+  "claims": [
+   {
+    "claim": "Caterpillar 3516C 2,500 kW standby genset specification (manufacturer claim)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not opened",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Hosted by a US county (permit file), not Caterpillar - note host; label manufacturer claim stays"
+  ],
+  "overall": "unreachable"
+ },
+ "src23": {
+  "where_read": "local /mnt/attach/outputs/sources/23_fuel_and_vibration.md",
+  "claims": [
+   {
+    "claim": "Internal note: no source answers whether data-centre standby counts as 'emergency generators'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Whether a data-centre standby (non-life-safety) generator is treated the same way is an interpretation question not answered by any source read.'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Note 23 line 7 says NFC 2020 tables UNVERIFIED; that is now settled from local NFC 2020 / NFC(AE) 2023 copies (identical)"
+  ],
+  "overall": "ok"
+ },
+ "vanFire14419": {
+  "where_read": "saved copy /mnt/user-data/beyond-data-sources/public/vanFire14419/full.pdf (from 14419c.pdf, consolidated to 24 Feb 2026)",
+  "claims": [
+   {
+    "claim": "By-law 14419, in force 22 Jul 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'come into force and take effect on the day of enactment'; 'ENACTED by Council this 22nd day of July, 2025'",
+    "fix": ""
+   },
+   {
+    "claim": "Replaces 12472",
+    "verdict": "CONFIRMED",
+    "evidence": "'Council repeals By-law No. 12472'",
+    "fix": ""
+   },
+   {
+    "claim": "Adopts the 2024 BC Fire Code",
+    "verdict": "CONFIRMED",
+    "evidence": "'adopts the British Columbia Fire Code ... Ministerial Order No. FSA 20231 dated November 24, 2023 and effective March 8, 2024'",
+    "fix": "'2024' is not printed; identified by MO date."
+   },
+   {
+    "claim": "No added indoor quantity limits for flammable/combustible liquids; tank changes only (4.3.1.7, 4.3.16.1)",
+    "verdict": "CONFIRMED",
+    "evidence": "Schedule amendments to Part 4 are only items 34 (4.3.1.7 tank labelling), 35 (4.3.16.1 out-of-service USTs), 36 (Table 4.13.1.1)",
+    "fix": ""
+   },
+   {
+    "claim": "Permit from Fire Chief to install, remove or abandon any above- or underground tank (Div. C 1.2.1.5(2))",
+    "verdict": "CONFIRMED",
+    "evidence": "'No person shall install, remove or abandon in place any aboveground or underground storage tank without first obtaining a permit from the Fire Chief.'",
+    "fix": ""
+   },
+   {
+    "claim": "URL 14419.PDF",
+    "verdict": "CORRECTED",
+    "evidence": "Saved copy came from https://bylaws.vancouver.ca/14419c.pdf",
+    "fix": "Use the saved-copy URL or confirm both serve the same consolidation."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "nfcAB2023_4313": {
+  "where_read": "local /mnt/attach/outputs/data/raw/codes/nfc_ab2023.txt and nfc.txt (NFC 2020)",
+  "claims": [
+   {
+    "claim": "Tables -A and -B identical to NFC 2020 (?)",
+    "verdict": "CONFIRMED",
+    "evidence": "Table texts match line for line (titles, values 40 000/25 000/7 500, 200 000/100 000/20 000; -B 200 000, 20 000, 45 000)",
+    "fix": "'?' can be removed."
+   },
+   {
+    "claim": "Table -B first storey 200 000 L per protected storage room (tanks > 2 500 L)",
+    "verdict": "CONFIRMED",
+    "evidence": "'First storey (2) ... > 2 500 (3) ... > 20 000 (4) ... 200 000'",
+    "fix": "200 000 covers both >2 500 and >20 000 L individual-tank rows; Note (2): industrial occupancies with tanks in separate room use Table -A."
+   },
+   {
+    "claim": "Basement and storeys above first: 20 000 L (tanks > 2 500) or 45 000 L (tanks > 20 000)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Basement and storeys above the first storey > 2 500 (3) 20 000 / > 20 000 (4) 45 000'",
+    "fix": ""
+   },
+   {
+    "claim": "Same tables govern in both cities",
+    "verdict": "NOT FOUND",
+    "evidence": "Not in this source; BC Fire Code 2024 tables not read here",
+    "fix": "Mark the Vancouver half UNVERIFIED (note 23 relies on BCFC schedule [S5] saying 4.3 not amended)."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Applying Table -B to data-centre standby generators rests on src23's open interpretation question",
+   "URL is the NRC publications home page, not the document"
+  ],
+  "overall": "needs fix"
+ },
+ "uptimeHeslin2014": {
+  "where_read": "none - journal.uptimeinstitute.com/?p=3233 not fetchable; intelligence.uptimeinstitute.com 'Focus: Fuel System Design and Reliability' page has no author/date and no 12-hour sentence",
+  "claims": [
+   {
+    "claim": "Heslin, 18 Jun 2014: 'The Tier Standard: Topology requires this 12-hour fuel storage minimum for all Tiers'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Article page not reachable; the related Uptime Intelligence page does not contain the quote",
+    "fix": "Re-check in browser."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [],
+  "overall": "unreachable"
+ },
+ "abStandata19FCI003": {
+  "where_read": "WebFetch open.alberta.ca PDF (URL in entry)",
+  "claims": [
+   {
+    "claim": "STANDATA 19-FCI-003, Storage Tank Systems Inside Buildings, Apr 2020, NFC(AE) 2019",
+    "verdict": "CONFIRMED",
+    "evidence": "'STORAGE TANK SYSTEMS INSIDE BUILDINGS', Fire Code Interpretation 19-FCI-003, April 2020, NFC(AE) 2019",
+    "fix": ""
+   },
+   {
+    "claim": "Class I tanks supplying stationary engines inside buildings comply with Part 4 (when serving appliances installed to NFPA 37 ?)",
+    "verdict": "CONFIRMED",
+    "evidence": "'using Class I liquids as fuel supplies for stationary engines inside buildings' ... 'installed in conformance with NFPA 37' ... 'shall conform to this Part'",
+    "fix": "'?' settled: yes, the NFPA 37 condition is in the quoted sentence 4.3.13.2.(1); Part 4 applies 'and not NFPA 37'."
+   },
+   {
+    "claim": "'it is the storage tank/storage tank system supplying the fuel that dictates the rating'",
+    "verdict": "CONFIRMED",
+    "evidence": "'it is the storage tank/storage tank system supplying the fuel that dictates the rating'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Class I statement does not directly cover diesel (normally Class II); Class II/IIIA tanks fall under the CSA B139 sentence"
+  ],
+  "overall": "ok"
+ },
+ "vbbl2019_58": {
+  "where_read": "WebFetch https://free.bcpublications.ca/civix/document/id/public/vbbl2019/492684920",
+  "claims": [
+   {
+    "claim": "5.8.1.1.(1) ASTC >= 47 (or STC >= 50 with flanking)",
+    "verdict": "CONFIRMED",
+    "evidence": "'apparent sound transmission class (ASTC) rating not less than 47, or' / 'sound transmission class (STC) rating of not less than 50'",
+    "fix": ""
+   },
+   {
+    "claim": "5.8.1.1.(2) STC >= 55 next to elevator shafts and refuse chutes",
+    "verdict": "CONFIRMED",
+    "evidence": "'separating a dwelling unit from an elevator shaft or a refuse chute shall have an STC rating not less than 55'",
+    "fix": ""
+   },
+   {
+    "claim": "No equipment-vibration rule",
+    "verdict": "CONFIRMED",
+    "evidence": "Section 5.8 does not mention mechanical equipment; vibration only as vibration reduction index in 5.8.1.4/5.8.1.5",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "VBBL 2019 superseded by VBBL 2025 - check 5.8 unchanged before using as current"
+  ],
+  "overall": "ok"
+ },
+ "bcbc2018_911": {
+  "where_read": "WebFetch https://free.bcpublications.ca/civix/document/id/public/bcbc2018/bcbc_2018dbp9s911r2",
+  "claims": [
+   {
+    "claim": "BCBC 2018 Rev. 2, Div. B, 9.11",
+    "verdict": "CONFIRMED",
+    "evidence": "page header 'Revision 2.01'",
+    "fix": ""
+   },
+   {
+    "claim": "Same ASTC 47 / STC 50 / STC 55",
+    "verdict": "CONFIRMED",
+    "evidence": "'(ASTC) rating of not less than 47'; '(STC) rating of not less than 50'; 'STC rating of not less than 55'",
+    "fix": ""
+   },
+   {
+    "claim": "Secondary suites STC 43 / ASTC 40, 9.11.1.1.(2)",
+    "verdict": "CONFIRMED",
+    "evidence": "'STC rating of not less than 43'; 'ASTC rating of not less than 40'",
+    "fix": ""
+   },
+   {
+    "claim": "No mention of mechanical equipment or vibration",
+    "verdict": "CONFIRMED",
+    "evidence": "9.11 covers only 'Protection from Airborne Noise'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "BCBC 2018 superseded by BCBC 2024"
+  ],
+  "overall": "ok"
+ },
+ "vaSpec230541": {
+  "where_read": "WebFetch https://www.wbdg.org/FFC/VA/VANCAS/VANCA230541.pdf",
+  "claims": [
+   {
+    "claim": "US VA Spec 23 05 41 Noise and Vibration Control for HVAC Piping and Equipment (2016), via WBDG",
+    "verdict": "CONFIRMED",
+    "evidence": "'Section 23 05 41, Noise and Vibration Control for HVAC Piping and Equipment'; dated 11-01-16",
+    "fix": ""
+   },
+   {
+    "claim": "Isolator minimum static deflection by support location (on grade, 20-50 ft span), non-decreasing with span (flat in some rows)",
+    "verdict": "CONFIRMED",
+    "evidence": "Pumps up to 10 HP: 'S 0.75 I S 0.75 I S 1.5 I S 1.5 I S 1.5'; roof ventilators flat 0.75 at 30-50 ft",
+    "fix": ""
+   },
+   {
+    "claim": "Cites ASHRAE HVAC Applications noise and vibration chapter",
+    "verdict": "CONFIRMED",
+    "evidence": "'ASHRAE Handbook-HVAC Applications, Noise and Vibration Control Chapter'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "bcPools2025": {
+  "where_read": "WebFetch islandhealth.ca PDF (URL in entry), first 100,000 characters",
+  "claims": [
+   {
+    "claim": "BC MoH Health Protection Branch, Guidelines for Pool Operations v3 (2025)",
+    "verdict": "CONFIRMED",
+    "evidence": "'B.C. Guidelines for Pool Operations', version 3, 2025, Health Protection Branch, Ministry of Health",
+    "fix": ""
+   },
+   {
+    "claim": "Pool water <= 37 °C (s. 5.2; Pool Reg 10(2)(b))",
+    "verdict": "CONFIRMED",
+    "evidence": "'the temperature of pool water must not exceed 37°C'",
+    "fix": ""
+   },
+   {
+    "claim": "Hot tubs <= 40 °C (s. 5.6; Pool Reg 16(b))",
+    "verdict": "CONFIRMED",
+    "evidence": "'The water temperature in hot tubs must not exceed 40oC.'",
+    "fix": ""
+   },
+   {
+    "claim": "Competitive pools 25-28 °C recommended",
+    "verdict": "CONFIRMED",
+    "evidence": "'pools used solely for competitive swimming be maintained at temperatures of 25°C to 28°C'",
+    "fix": "Recommendation ('should'), not regulation."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "blatchfordDESS": {
+  "where_read": "WebFetch blatchfordedmonton.ca PDF (URL in entry)",
+  "claims": [
+   {
+    "claim": "No author or publisher printed; hosted on blatchfordedmonton.ca, uploaded 2016",
+    "verdict": "CONFIRMED",
+    "evidence": "No author/date printed; text credits '\"District Energy Systems\" - BC Climate Toolkit'; URL path /2016/05/",
+    "fix": "Add that content credits BC Climate Toolkit."
+   },
+   {
+    "claim": "Ambient-temperature loop",
+    "verdict": "CONFIRMED",
+    "evidence": "'distributes ambient temperature water'",
+    "fix": ""
+   },
+   {
+    "claim": "Geo-exchange and sewer heat exchange",
+    "verdict": "CONFIRMED",
+    "evidence": "'Many renewables, such as geo-exchange and sewer heat exchange, provide low-temperature energy'",
+    "fix": ""
+   },
+   {
+    "claim": "Heat pumps in buildings",
+    "verdict": "CORRECTED",
+    "evidence": "'upgraded using heat pumps to provide both heating and cooling'",
+    "fix": "Source says heat pumps upgrade the loop water; 'in buildings' location not stated in text read - drop 'in buildings' or mark '?'."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "2016 concept overview; not current system status (see blatchford2023 etc.)"
+  ],
+  "overall": "needs fix"
+ },
+ "npc2612": {
+  "where_read": "local /mnt/attach/outputs/data/raw/codes/vbbl2025_bookII_insert.pdf (.txt)",
+  "claims": [
+   {
+    "claim": "VBBL 2025 Book II, 2.6.1.12.(1): storage-type heaters not lower than 60 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "'Storage-type service water heaters shall operate at a temperature not lower than 60°C.'",
+    "fix": ""
+   },
+   {
+    "claim": "2.6.1.1.(3): recirculated hot water not less than 49 °C at any point",
+    "verdict": "CONFIRMED",
+    "evidence": "'the temperature of the water being recirculated shall not be less than 49°C at any point of the system'",
+    "fix": ""
+   },
+   {
+    "claim": "Convenience copy, By-law 14343 as amended by 14488",
+    "verdict": "CONFIRMED",
+    "evidence": "'By-law 14343, effective September 15, 2025 and as amended by By-law 14488, effective January 1, 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "Edmonton: NPC 2020 as adopted in Alberta, text to confirm",
+    "verdict": "NOT FOUND",
+    "evidence": "Not in this source; VBBL insert notes these articles 'replace the version in the 2020 National Plumbing Code' - so NPC text differs",
+    "fix": "Still open; and NPC 2020 2.6.1.12 may differ from the Vancouver wording - do not assume 60 °C / 49 °C for Edmonton."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Edmonton half unsourced"
+  ],
+  "overall": "needs fix"
+ },
+ "odef": {
+  "where_read": "saved page /mnt/user-data/beyond-data-sources/public/odef/page.html + local ODEF_v2.1.zip metadata PDF",
+  "claims": [
+   {
+    "claim": "ODEF v2.1, metadata dated 28 Nov 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "'Version 2.1 Release date: November 28, 2022'",
+    "fix": ""
+   },
+   {
+    "claim": "Web page release 13 Dec 2024, issue 2022001",
+    "verdict": "CONFIRMED",
+    "evidence": "'Issue Number: 2022001 ... HTML December 13, 2024'",
+    "fix": ""
+   },
+   {
+    "claim": "'archived' ?",
+    "verdict": "NOT FOUND",
+    "evidence": "No 'archived' text in saved page",
+    "fix": "Drop 'archived' or keep '?'."
+   },
+   {
+    "claim": "ZIP URL downloaded 15 Oct 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Local ODEF_v2.1.zip present in data/raw/receivers",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "odhf": {
+  "where_read": "saved page /mnt/user-data/beyond-data-sources/public/odhf/page.html (open.canada.ca record) + local ODHF.zip metadata PDF",
+  "claims": [
+   {
+    "claim": "Published 17 Apr 2020",
+    "verdict": "CONFIRMED",
+    "evidence": "'Date Published: 2020-04-17'; metadata 'Version 1.0 April 17, 2020'",
+    "fix": ""
+   },
+   {
+    "claim": "Coverage Nov 2019-Mar 2020",
+    "verdict": "CONFIRMED",
+    "evidence": "'Temporal Coverage: 2019-11-01 to 2020-03-01'",
+    "fix": "Metadata cautions source update dates 'should not be interpreted as the reference date'."
+   },
+   {
+    "claim": "Hospitals, nursing and residential care, ambulatory",
+    "verdict": "CONFIRMED",
+    "evidence": "'ambulatory health care services, hospitals, and nursing and residential care facilities'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ }
+}
