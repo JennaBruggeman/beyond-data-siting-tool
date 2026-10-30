@@ -278,7 +278,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "quantities": 204,
 "conditions": 101,
 "opportunities": 22,
-"sources": 826
+"sources": 827
 }
 },
 "stages": [
@@ -12008,13 +12008,14 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "size",
 "name": "Standby generator sets",
 "formula": "n = ⌈P_IT × PUE ÷ set rating⌉, then spares",
-"coef": "2,000 kW sets when the facility load is above 3 MW (Rehlko KD2000), otherwise 1,000 kW (KD1000); data-centre continuous rating = standby (Rehlko); the sets carry the whole facility, cooling included (HVAC on generator-backed power: LBNL 2007, one site); generator spares as set up (N+1 default)",
+"coef": "2,000 kW sets when the facility load is above 3 MW (Rehlko KD2000), otherwise 1,000 kW (KD1000); data-centre continuous rating = standby (Rehlko); the sets carry the whole facility, cooling included (HVAC on generator-backed power: LBNL 2007, one site); generator spares as set up (N+1 default); testing (check 1, 30 Oct 2026): emergency power systems are tested monthly at ≥30% of rated load for 60 min and yearly for 2 h at full load (CSA C282, via a fire department summary; whether IT standby sets fall under C282 ?) (weyburnC282)",
 "unit": "count",
 "sources": [
 "rehlkoKD2000",
 "rehlkoKD1000",
 "lbnlXu2007",
-"fujiRedundancy"
+"fujiRedundancy",
+"weyburnC282"
 ],
 "source_roles": [
 {
@@ -12044,6 +12045,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "rule",
 "conf": 50,
 "verified": true
+},
+{
+"id": "weyburnC282",
+"term": "testing: monthly at ≥30% load for 60 min (emergency power, C282 via summary)",
+"role": "check",
+"conf": 50,
+"verified": true
 }
 ],
 "conf": 50,
@@ -12056,7 +12064,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 ],
 "upstream": 50,
 "city": {
-"van": 0,
+"van": 1,
 "edm": 0,
 "both": 0,
 "gen": 4
@@ -18520,7 +18528,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "cruLEU2025": "Commission for Regulation of Utilities (Ireland), news 'New Electricity Connection Policy for Data Centres' (18 Feb 2025; PROPOSED decision, comments to 4 Apr 2025): new data centres 'will be required to provide generation and/or storage capacity to match the requested data centre demand capacity', on site or nearby, taking part in the electricity market; annual reporting on renewable use and emissions; whether and how it was finalised: not read (?) — https://www.cru.ie/about-us/news/new-electricity-connection-policy-for-data-centre/",
 "uptime2024Survey": "Uptime Institute, Global Data Center Survey 2024 (UII Keynote Report 146M, July 2024; Donnellan, Lawrence, Bizo et al.; survey Mar–Apr 2024, 879 end users answered at least one question, n varies by question): 'one in four data centers in our survey is typically under 40% utilized by available UPS capacity' (p. 9; no question wording, bands or n given for this figure ?); typical rack density averages 8 kW, 7.1 kW without 11 sites over 50 kW; 4–6 kW racks most common (p. 10). Self-reported operator survey — https://datacenter.uptimeinstitute.com/rs/711-RIA-145/images/2024.GlobalDataCenterSurvey.Report.pdf ‖ CHECK 2 (30 Oct 2026, unreachable): unreachable: Report 146M, July 2024; survey Mar–Apr 2024; 879 end users → Not on landing page; unreachable: 'one in four ... under 40% utilized by available UPS capacity' (p. 9) → Full report not reachable; unreachable: Rack density avg 8 kW; 7.1 kW without 11 sites >50 kW; 4–6 kW most common (p. 10) → Full report not reachable; overreach: Used as 'check' only - appropriate; global survey, not BC/AB; roles: partly supported",
 "schneiderWP46": "VENDOR WHITE PAPER: N. Rasmussen, 'Cooling Strategies for Ultra-High Density Racks and Blade Servers', Schneider Electric Data Center Science Center White Paper 46, Rev. 7 (undated; cites 2002–03 survey data): densities are taken over total floor area 'which includes space such as aisles' (p. 3); 'The rack and row densities in Figure 1 use a rack floor equivalent of 25 ft2', common values 25–30 ft² (2.3–2.8 m²) per rack (p. 2, note 1); its design table uses 30 ft² (2.79 m²) per enclosure (p. 4); what else besides aisles the equivalent covers (cooling units, PDUs, cross aisles) is not stated (?). Read from a copy hosted by FacilitiesNet (https://www.facilitiesnet.com/whitepapers/pdfs/20130227-SchneiderElectric.pdf); Schneider's listing: https://it-resource.schneider-electric.com/server-rooms-and-network-closets/wp-46-cooling-strategies-for-ultra-high-density-racks-and-blade-servers ‖ CHECK 2 (30 Oct 2026, unreachable): unreachable: Rasmussen, WP 46 Rev. 7, Schneider (undated; 2002–03 survey data) → not read; unreachable: Densities over total floor area 'which includes space such as aisles' (p.3) → not read; unreachable: 'rack floor equivalent of 25 ft2'; common 25–30 ft2 (p.2 note 1) → not read; unreachable: Design table uses 30 ft2 per enclosure (p.4) → not read; overreach: Vendor white paper, labelled; used as 'check' only. Read from a third-party host (FacilitiesNet) — prefer the Schneider copy.",
-"intelHD2012": "OPERATOR WHITE PAPER: J. Musilli and B. Ellison, 'Facilities Design for High-density Data Centers', IT@Intel White Paper (Jan 2012): Table 1 (p. 4) pairs 15 / 22.5 / 30 kW racks with 250 / 375 / 500 W per sq ft, 'based on a 5,000-square-foot room with cooling units and power distribution units (PDUs) in the same space'; no area per rack is stated (60 ft², about 5.6 m², per rack is our arithmetic from the table) — https://www.intel.cn/content/dam/www/public/us/en/documents/best-practices/data-center-facilities-paper.pdf ‖ CHECK 2 (30 Oct 2026, unreachable): unreachable: Musilli & Ellison, 'Facilities Design for High-density Data Centers', IT@Intel White Paper, Jan 2012 → Source not opened; unreachable: Table 1 (p.4): 15/22.5/30 kW racks ↔ 250/375/500 W/ft² → Source not opened; unreachable: 'based on a 5,000-square-foot room with cooling units and power distribution units (PDUs) in the same space' → Source not opened; unreachable: No area per rack stated; 60 ft² (≈5.6 m²) per rack is our arithmetic → Arithmetic checks: 15000/250 = 22500/375 = 30000/500 = 60 ft² = 5.57 m² (calc); overreach: Operator white paper (2012, Intel's own rooms), correctly labelled; use as a check only, as the role says."
+"intelHD2012": "OPERATOR WHITE PAPER: J. Musilli and B. Ellison, 'Facilities Design for High-density Data Centers', IT@Intel White Paper (Jan 2012): Table 1 (p. 4) pairs 15 / 22.5 / 30 kW racks with 250 / 375 / 500 W per sq ft, 'based on a 5,000-square-foot room with cooling units and power distribution units (PDUs) in the same space'; no area per rack is stated (60 ft², about 5.6 m², per rack is our arithmetic from the table) — https://www.intel.cn/content/dam/www/public/us/en/documents/best-practices/data-center-facilities-paper.pdf ‖ CHECK 2 (30 Oct 2026, unreachable): unreachable: Musilli & Ellison, 'Facilities Design for High-density Data Centers', IT@Intel White Paper, Jan 2012 → Source not opened; unreachable: Table 1 (p.4): 15/22.5/30 kW racks ↔ 250/375/500 W/ft² → Source not opened; unreachable: 'based on a 5,000-square-foot room with cooling units and power distribution units (PDUs) in the same space' → Source not opened; unreachable: No area per rack stated; 60 ft² (≈5.6 m²) per rack is our arithmetic → Arithmetic checks: 15000/250 = 22500/375 = 30000/500 = 60 ft² = 5.57 m² (calc); overreach: Operator white paper (2012, Intel's own rooms), correctly labelled; use as a check only, as the role says.",
+"weyburnC282": "SECONDARY (fire department summary of a paywalled standard): Weyburn Fire Department, 'Emergency Power Systems Requirements' (undated; posted Apr 2024 ?), citing CSA C282 'Emergency Electrical Power Supply for Buildings': 'The emergency electrical power shall be thoroughly tested monthly', running the set at 'at least 30% of the rated load for 60 minutes' with transfer switches operated under load; an annual 2-hour full-load test; weekly tests for health-care facilities. Applies to emergency (life-safety) power systems; whether a data centre's standby generators for IT load fall under C282 is not stated (?; Vancouver bulletin 2000-015 points emergency generator rooms to C282). CSA C282 itself not read (paywalled) — https://weyburn.ca/wp-content/uploads/2024/04/Emergency-Power-Systems-Requirements.pdf"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -20880,7 +20889,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "uptime2024Survey": "industry survey (operator self-report)",
 "lbnl2024": "national lab report (modelling assumption)",
 "schneiderWP46": "vendor white paper",
-"intelHD2012": "operator white paper"
+"intelHD2012": "operator white paper",
+"weyburnC282": "municipal summary of a standard"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -21067,7 +21077,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "uptime2024Survey": "claude",
 "lbnl2024": "claude",
 "schneiderWP46": "claude",
-"intelHD2012": "claude"
+"intelHD2012": "claude",
+"weyburnC282": "claude"
 },
 "source_city": {
 "abgas": "edm",
@@ -21894,7 +21905,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "cruLEU2025": "gen",
 "uptime2024Survey": "both",
 "schneiderWP46": "gen",
-"intelHD2012": "gen"
+"intelHD2012": "gen",
+"weyburnC282": "van"
 },
 "city_gaps": {
 "van": [
@@ -21909,6 +21921,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "air_permit_trigger",
 "importance_cat",
 "ev_repay",
+"generator_sets",
 "refuge_services",
 "fire_protection",
 "transformers",
