@@ -539,7 +539,7 @@
 "stage": "size",
 "name": "IT load, operator claim",
 "formula": "stated nameplate",
-"coef": "2–4 MW typical downtown colocation; 40 MW stated at 111 E 5th (applicant figure in RTS 19744); permit record: no MW stated anywhere; load traces are BC Hydro primary-service upgrade at 555 W Hastings (DB-2022-01818) and new BC Hydro room at 175 W Cordova (BP-2021-06112)",
+"coef": "2–4 MW typical downtown colocation; 40 MW stated at 111 E 5th (applicant figure in RTS 19744); permit record: no MW stated anywhere; load traces are BC Hydro primary-service upgrade at 555 W Hastings (DB-2022-01818) and new BC Hydro room at 175 W Cordova (BP-2021-06112); Cologix VAN4: 4–6.5 MW (two Cologix pages disagree) [decision 30 Oct 2026]",
 "unit": "MW",
 "sources": [
 "opClaims",
@@ -1966,7 +1966,7 @@
 "stage": "characterise",
 "name": "Harvestable rainwater",
 "formula": "V = A × R × C; A = roof area: a new building's footprint as drawn from the site setup (else the footprint the yards leave), an existing building's roofs added together (M47, 18 Oct 2026)",
-"coef": "ECCC Normals 1991–2020: Vancouver Intl precipitation 1,159.5 mm/yr (rain 1,119.2; Oct–Jan ≥124 mm/mo, Jul 34 mm); Edmonton City 422.5 mm/yr (Edmonton Airport 434.0; Jun–Aug 213 mm, Dec–Feb 43 mm, mostly snow); C = 0.8 assumed (CSA B805 not read); tank = one wet month, assumed | 19 Oct 2026: storage CAD 667/m³ (Vancouver toolkit 2014) to 2,955 (US EPA 2013 with pumps and controls, US$ converted); 15–30 yr (warranties); cost per m³ used at 5.6% real against water + sewer rates",
+"coef": "ECCC Normals 1991–2020: Vancouver Intl precipitation 1,159.5 mm/yr (rain 1,119.2; Oct–Jan ≥124 mm/mo, Jul 34 mm); Edmonton City 422.5 mm/yr (Edmonton Airport 434.0; Jun–Aug 213 mm, Dec–Feb 43 mm, mostly snow); C = 0.8 assumed (CSA B805 not read); tank = one wet month, assumed | 19 Oct 2026: storage CAD 667/m³ (Vancouver toolkit 2014) to 2,955 (US EPA 2013 with pumps and controls, US$ converted); 15–30 yr (warranties); cost per m³ used at 5.6% real against water + sewer rates; Alberta's rainwater guideline is written for houses: a benchmark for a data centre [decision 30 Oct 2026]",
 "unit": "m³/yr",
 "sources": [
 "femp",
@@ -1994,9 +1994,10 @@
 {
 "id": "abRainwater2010",
 "term": "research pass 16 Oct 2026 (government guideline)",
-"role": "pending build",
+"role": "benchmark",
 "conf": 50,
-"verified": false
+"verified": false,
+"relabel": "30 Oct 2026 (J.B. decision): pending build → benchmark"
 }
 ],
 "conf": 80,
@@ -2119,7 +2120,7 @@
 "stage": "characterise",
 "name": "Generator NOx and PM",
 "formula": "AP-42 factor × rated hp × hours",
-"coef": "NOx 0.024 lb/hp·h uncontrolled; Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read)",
+"coef": "NOx 0.024 lb/hp·h uncontrolled; Edmonton: emergency standby generators exempt from an EPEA approval (AUC 27938-D01-2023 para 10, reported; regulation clause not read); Metro Vancouver Bylaw 1329: no Tier 0/1 engines within 100 m of hospitals, schools and day cares; the sets the tool draws are EPA Tier 2 (maker claim), so not barred; shown with the generators [decision 30 Oct 2026]",
 "unit": "kg/yr",
 "sources": [
 "eccc",
@@ -2138,9 +2139,10 @@
 {
 "id": "mvBylaw1329",
 "term": "research pass 16 Oct 2026 (regional bylaw)",
-"role": "pending build",
+"role": "rule",
 "conf": 50,
-"verified": false
+"verified": false,
+"relabel": "30 Oct 2026 (J.B. decision): pending build → rule"
 },
 {
 "id": "abDCenv2026",
@@ -2444,7 +2446,7 @@
 "stage": "characterise",
 "name": "Low-frequency flag",
 "formula": "dBC − dBA ≥ 20 dB and tone 20–250 Hz → +5 dBA",
-"coef": "AUC Rule 012 s.4.5; NANR45 curve",
+"coef": "AUC Rule 012 s.4.5; NANR45 curve; worth checking, no rule: Vancouver's dBC limits cover amplified sound only, and AUC Rule 012 covers power plants and substations (benchmark) [decision 30 Oct 2026]",
 "unit": "—",
 "sources": [
 "rule012",
@@ -2454,9 +2456,10 @@
 {
 "id": "rule012",
 "term": "all coefficients",
-"role": "coefficient",
+"role": "benchmark",
 "conf": 90,
-"verified": true
+"verified": true,
+"relabel": "30 Oct 2026 (J.B. decision): coefficient → benchmark"
 },
 {
 "id": "bylaw6555",
@@ -2488,7 +2491,7 @@
 "stage": "characterise",
 "name": "Light at neighbour's window",
 "formula": "vertical illuminance vs CIE 150 zone limit (E3 10 / 2 lx pre/post curfew)",
-"coef": "CIE 150:2017 via ILP GN01/20; Vancouver: no lux limit; Untidy Premises By-law 4548 s. 7 bars an outdoor light casting light directly onto a residential window across the street or adjacent AND unreasonably disturbing the neighbour (qualitative; checked 18 Oct 2026); Edmonton Bylaw 20001 s.5.120(3): glare minimised, light deflected away, directed downward — qualitative",
+"coef": "CIE 150:2017 via ILP GN01/20; Vancouver: no lux limit; Untidy Premises By-law 4548 s. 7 bars an outdoor light casting light directly onto a residential window across the street or adjacent AND unreasonably disturbing the neighbour (qualitative; checked 18 Oct 2026); Edmonton Bylaw 20001 s.5.120(3): glare minimised, light deflected away, directed downward — qualitative; VBBL 10.2.2.10 (4 / 2 lux) covers residential buildings only: a benchmark for a data centre, not a rule [decision 30 Oct 2026]",
 "unit": "lx",
 "sources": [
 "cie150",
@@ -2541,7 +2544,7 @@
 "stage": "characterise",
 "name": "Shadow on neighbours",
 "formula": "fall-equinox shadows 10:00–16:00 on parks, schools, opposite sidewalks",
-"coef": "Vancouver Solar Access Guidelines",
+"coef": "Vancouver Solar Access Guidelines; Vancouver's solar-access guideline protects downtown parks, plazas and sidewalks only: used as a benchmark for these sites, not a rule [decision 30 Oct 2026]",
 "unit": "m²·h",
 "sources": [
 "solar",
@@ -4407,7 +4410,7 @@
 "stage": "test",
 "name": "Buyer ceiling price",
 "formula": "fuel price ÷ boiler efficiency (0.85); or district-energy tariff; NEU returned-heat credit as revealed WTP",
-"coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): gas commodity averaged over the same 12 months in both cities (Nov 2025 – Oct 2026), rest of each tariff at the current schedule. Vancouver: FortisBC CCRC $2.230 (to 31 Mar 2026; BCUC L-9-25, L-27-25) and $1.660 (from 1 Apr 2026; G-50-26; Oct 2026 unchanged per FortisBC release copy, unverified) → mean $1.8975; all per-GJ $9.5425 → ≈ $40.4/MWh heat at 85%. Edmonton: UCA regulated rate (2.579, 3.390, 3.331, 2.422, 1.784, 1.874, 0.936, 2.076, 1.595, 1.729, 1.124, 1.458) → mean $2.025, + ATCO delivery $1.045 → ≈ $13.0/MWh heat. Earlier: Vancouver gas ≈ $39.4 (Rate 3, every per-GJ charge incl. Riders 5, 6 and 8: $9.305/GJ, checked against the schedule 18 Oct 2026; $38.6 without the Rider 6 true-up); RNG ≈ $70.7; NEU credit $32.59; Creative Energy 2026 interim tiers $66.6 (first tier) to $39.6 (remainder) per MWh; Edmonton gas ≈ $10.7; Denmark surplus-heat price cap 95 DKK/GJ (≈342 DKK/MWh) — HISTORICAL: abolished 1 Jul 2025; Edmonton Downtown District Energy Utility (City-owned, Bylaw 20914; EPCOR design-build-finance-operate; Phase 1 = Winspear-area plant serving Century Hall and Chancery Place, Phase 1A adds City Hall, Citadel Theatre, Milner Library): rates set on a 'Business as Usual' principle — customers pay on average what they would pay a traditional provider plus their avoided boiler maintenance and capital renewal (IIS02765 p.4), so the Edmonton buyer ceiling = gas-equivalent cost + avoided boiler costs; Phase 1/1A: capital $51 M, annual rate revenue $2.4 M vs operating cost $1.9 M on gas or $5.3 M on electric boilers; 30-yr NPV +$4 M gas vs −$25 M electric (84% GHG cut, 126,000 t, $198/tCO2); full build-out: no-decarbonization NPV +$106 M (10% GHG cut) vs max-decarbonization −$172 M (96% cut); no private building is obliged to connect and no capital is funded for private connections; 2025 budget $889k spend vs $336k revenue; the $/GJ tariff itself is in Attachment 4 (pending); Vancouver built case: TELUS Garden TES (FAES, BCUC C-1-13 / G-155-12) proposed the BC Hydro residential benchmark + 5–10 % ($0.105–0.126/kWh 2014–18 = $105–126/MWh), which the BCUC denied in C-1-13 for recovered-heat service — an all-in regulated TES rate including distribution and capital, not a price for the heat itself; Edmonton Downtown District Energy regulated rates (first filing): 2025 $7.92 per kW peak capacity per month + $0.0294/kWh; 2026 $8.08 per kW·month + $0.0300/kWh (= $8.33/GJ variable); set at \"business as usual\" — what a building would pay for its own heating plus maintenance and replacement reserve; one rate class (Winspear Centre, Century Place, Chancery Place); Phase 1 fuel mainly natural gas; business case scenarios to 96% GHG reduction include waste heat recovery and geo-exchange",
+"coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): gas commodity averaged over the same 12 months in both cities (Nov 2025 – Oct 2026), rest of each tariff at the current schedule. Vancouver: FortisBC CCRC $2.230 (to 31 Mar 2026; BCUC L-9-25, L-27-25) and $1.660 (from 1 Apr 2026; G-50-26; Oct 2026 unchanged per FortisBC release copy, unverified) → mean $1.8975; all per-GJ $9.5425 → ≈ $40.4/MWh heat at 85%. Edmonton: UCA regulated rate (2.579, 3.390, 3.331, 2.422, 1.784, 1.874, 0.936, 2.076, 1.595, 1.729, 1.124, 1.458) → mean $2.025, + ATCO delivery $1.045 → ≈ $13.0/MWh heat. Earlier: Vancouver gas ≈ $39.4 (Rate 3, every per-GJ charge incl. Riders 5, 6 and 8: $9.305/GJ, checked against the schedule 18 Oct 2026; $38.6 without the Rider 6 true-up); RNG ≈ $70.7; NEU credit $32.59; Creative Energy 2026 interim tiers $66.6 (first tier) to $39.6 (remainder) per MWh; Edmonton gas ≈ $10.7; Denmark surplus-heat price cap 95 DKK/GJ (≈342 DKK/MWh) — HISTORICAL: abolished 1 Jul 2025; Edmonton Downtown District Energy Utility (City-owned, Bylaw 20914; EPCOR design-build-finance-operate; Phase 1 = Winspear-area plant serving Century Hall and Chancery Place, Phase 1A adds City Hall, Citadel Theatre, Milner Library): rates set on a 'Business as Usual' principle — customers pay on average what they would pay a traditional provider plus their avoided boiler maintenance and capital renewal (IIS02765 p.4), so the Edmonton buyer ceiling = gas-equivalent cost + avoided boiler costs; Phase 1/1A: capital $51 M, annual rate revenue $2.4 M vs operating cost $1.9 M on gas or $5.3 M on electric boilers; 30-yr NPV +$4 M gas vs −$25 M electric (84% GHG cut, 126,000 t, $198/tCO2); full build-out: no-decarbonization NPV +$106 M (10% GHG cut) vs max-decarbonization −$172 M (96% cut); no private building is obliged to connect and no capital is funded for private connections; 2025 budget $889k spend vs $336k revenue; the $/GJ tariff itself is in Attachment 4 (pending); Vancouver built case: TELUS Garden TES (FAES, BCUC C-1-13 / G-155-12) proposed the BC Hydro residential benchmark + 5–10 % ($0.105–0.126/kWh 2014–18 = $105–126/MWh), which the BCUC denied in C-1-13 for recovered-heat service — an all-in regulated TES rate including distribution and capital, not a price for the heat itself; Edmonton Downtown District Energy regulated rates (first filing): 2025 $7.92 per kW peak capacity per month + $0.0294/kWh; 2026 $8.08 per kW·month + $0.0300/kWh (= $8.33/GJ variable); set at \"business as usual\" — what a building would pay for its own heating plus maintenance and replacement reserve; one rate class (Winspear Centre, Century Place, Chancery Place); Phase 1 fuel mainly natural gas; business case scenarios to 96% GHG reduction include waste heat recovery and geo-exchange; Creative Energy (Vancouver; BCUC Order G-5-26, interim rates) ceiling uses its hot-water tiers: $56.28–33.44 per MWh, not $66.6–39.6 (steam), since a data centre sells hot water [decision 30 Oct 2026]",
 "unit": "CAD/MWh",
 "sources": [
 "abgas",
@@ -4473,7 +4476,7 @@
 },
 {
 "id": "ceG526",
-"term": "Creative Energy tiers $66.6 / $39.6",
+"term": "Creative Energy hot-water tiers $56.28 / $33.44 per MWh",
 "role": "proxy",
 "conf": 90,
 "verified": false,
@@ -5235,7 +5238,7 @@
 "stage": "test",
 "name": "Grid headroom status",
 "formula": "governing document, date, stated cap or constraint, next milestone; headroom field in the form regulators publish elsewhere: remaining kVA band at station (≥7.5 MVA) and feeder (OEB) or feeder-segment kVA class (ENMAX)",
-"coef": "Vancouver: West End Substation CPCN (10 Nov 2025, read in full): the downtown substations (Murrin 1947, Dal Grauer 1952, Cathedral Square) are 'at their final stage of development with no room to add more capacity'; by fiscal 2027 all 12 kV feeder positions in the study area will be in use, after which new customers connect only by loading feeders above planning guidelines or using transfer-tie positions in other stations (s.2.2.2); the project is a 230/25 kV, 400 MVA underground substation at 1150 Nelson St, expected in service July 2032, cost $756 M–$1.391 B (expected $1.028 B); Mount Pleasant (150 MVA, 2014, expandable to 400 MVA) cannot absorb Murrin's load; decision pending; Edmonton: 1,200 MW allocated; Data Centre Regulation, Alta Reg 117/2026 (posted 17 Jun 2026; read in full): s.2 'large data centre' = maximum demand from the transmission system ≥ 75 MW (ISO may set a lower threshold); s.3 ISO may aggregate data centres on the same or adjacent parcels under the same person or affiliate; s.5 'tethered' = large data centre whose access request is tied to a generating unit or storage facility of equal or greater capability; s.6 tethered requests processed first; s.7 ISO may require site control, municipal zoning approval, financing, permits and water licences before service; s.8 tethered service capped at the tethered generation's rate; s.9 'bridged' = tethered data centre served before its generation is in service, for at most 3 years, with an ISO-set demand limit and an ISO-set limit on all bridged load (no MW figure in the regulation — the 1,600 MW pool is an AESO process figure, not statute); s.10 bridged data centres cut first in a supply shortfall, large data centres cut before other participants in mandatory load shedding; s.12 review by 31 May 2030, expires 31 May 2035; neither city publishes a load-capacity map (EPCOR, BC Hydro: verified negative); precedents: ENMAX feeder classes <999…11,000–12,999 kVA (Dec 2025), OEB bands 0–1,000/1,000–2,000/>2,000 kVA at stations, Toronto Hydro = planning limit − annual peak, Hydro-Québec zone residuals (Montréal-Est 100 MW); Edmonton substation example: Woodcroft POD N-1 firm 76.0 MVA vs 74.2 MVA 2024 peak, shortfall from 2032 (EPCOR DDR Sep 2025); AESO Phase 1 1,200 MW allocated (970 + 230), ~19,565 MW requested (GoA, Jul 2026); BC CFD 15 applications ~800 MW, up to 400 MW, timeline extended; AESO list Oct 2026: 56 data-load projects, 23,549 MW DTS in total — Active 16 / 1,752 MW, ISD Under Review 28 / 18,491 MW, Cluster 3 9 / 2,466 MW, cancelled 3 / 840 MW; none energized; 9 projects sized at exactly 74.9 MW (just under the 75 MW Alta Reg 117/2026 threshold); planning area 60-Edmonton: Beacon Saunders Lake A.I. Hub 400 MW (stage 2, ISD under review), Sovereign Cloud 74.9 MW (stage 2, active, ISD Dec 2029); EPCOR distribution-load reliability projects name the constrained areas: South Edmonton 51 MW (2031), West/Poundmaker 30.6 MW (2031), SW/Meadowlark 28 MW (2030), Woodcroft equipment change (Nov 2026); BC Hydro 2025 IRP (Exh. B-1): load scenarios follow Bill 31 (tabled 20 Oct 2025) — permanent ban on new cryptocurrency connections; sector limits for a two-year competitive call of 300 MW for AI and 100 MW for data centres (p.2-22 fn 17) — so the \"up to 400 MW\" Call for Demand is 100 MW of conventional data centre plus 300 MW of AI; Lower Mainland is one of three transfer-constrained regions, options with ~10-year lead times: SVCs at Ingledow/Meridian +400 MW ($20/kW-yr), new 500 kV Kelly Lake–Lower Mainland +630 MW ($195/kW-yr), Kelly Lake–Nicola +300 MW ($298/kW-yr) (Table 2-22); 13 Oct 2026: BC allocation framework — 300 MW AI + 100 MW data centres, ≥10 MW competitive, >150 MW full incremental cost; ISED principles (Sep 2026): proponents pay connection costs",
+"coef": "Vancouver: West End Substation CPCN (10 Nov 2025, read in full): the downtown substations (Murrin 1947, Dal Grauer 1952, Cathedral Square) are 'at their final stage of development with no room to add more capacity'; by fiscal 2027 all 12 kV feeder positions in the study area will be in use, after which new customers connect only by loading feeders above planning guidelines or using transfer-tie positions in other stations (s.2.2.2); the project is a 230/25 kV, 400 MVA underground substation at 1150 Nelson St, expected in service July 2032, cost $756 M–$1.391 B (expected $1.028 B); Mount Pleasant (150 MVA, 2014, expandable to 400 MVA) cannot absorb Murrin's load; decision pending; Edmonton: 1,200 MW allocated; Data Centre Regulation, Alta Reg 117/2026 (posted 17 Jun 2026; read in full): s.2 'large data centre' = maximum demand from the transmission system ≥ 75 MW (ISO may set a lower threshold); s.3 ISO may aggregate data centres on the same or adjacent parcels under the same person or affiliate; s.5 'tethered' = large data centre whose access request is tied to a generating unit or storage facility of equal or greater capability; s.6 tethered requests processed first; s.7 ISO may require site control, municipal zoning approval, financing, permits and water licences before service; s.8 tethered service capped at the tethered generation's rate; s.9 'bridged' = tethered data centre served before its generation is in service, for at most 3 years, with an ISO-set demand limit and an ISO-set limit on all bridged load (no MW figure in the regulation — the 1,600 MW pool is an AESO process figure, not statute); s.10 bridged data centres cut first in a supply shortfall, large data centres cut before other participants in mandatory load shedding; s.12 review by 31 May 2030, expires 31 May 2035; neither city publishes a load-capacity map (EPCOR, BC Hydro: verified negative); precedents: ENMAX feeder classes <999…11,000–12,999 kVA (Dec 2025), OEB bands 0–1,000/1,000–2,000/>2,000 kVA at stations, Toronto Hydro = planning limit − annual peak, Hydro-Québec zone residuals (Montréal-Est 100 MW); Edmonton substation example: Woodcroft POD N-1 firm 76.0 MVA vs 74.2 MVA 2024 peak, shortfall from 2032 (EPCOR DDR Sep 2025); AESO Phase 1 1,200 MW allocated (970 + 230), ~19,565 MW requested (GoA, Jul 2026); BC CFD 15 applications ~800 MW, up to 400 MW, timeline extended; AESO list Oct 2026: 56 data-load projects, 23,549 MW DTS in total — Active 16 / 1,752 MW, ISD Under Review 28 / 18,491 MW, Cluster 3 9 / 2,466 MW, cancelled 3 / 840 MW; none energized; 9 projects sized at exactly 74.9 MW (just under the 75 MW Alta Reg 117/2026 threshold); planning area 60-Edmonton: Beacon Saunders Lake A.I. Hub 400 MW (stage 2, ISD under review), Sovereign Cloud 74.9 MW (stage 2, active, ISD Dec 2029); EPCOR distribution-load reliability projects name the constrained areas: South Edmonton 51 MW (2031), West/Poundmaker 30.6 MW (2031), SW/Meadowlark 28 MW (2030), Woodcroft equipment change (Nov 2026); BC Hydro 2025 IRP (Exh. B-1): load scenarios follow Bill 31 (tabled 20 Oct 2025) — permanent ban on new cryptocurrency connections; sector limits for a two-year competitive call of 300 MW for AI and 100 MW for data centres (p.2-22 fn 17) — so the \"up to 400 MW\" Call for Demand is 100 MW of conventional data centre plus 300 MW of AI; Lower Mainland is one of three transfer-constrained regions, options with ~10-year lead times: SVCs at Ingledow/Meridian +400 MW ($20/kW-yr), new 500 kV Kelly Lake–Lower Mainland +630 MW ($195/kW-yr), Kelly Lake–Nicola +300 MW ($298/kW-yr) (Table 2-22); 13 Oct 2026: BC allocation framework — 300 MW AI + 100 MW data centres, ≥10 MW competitive, >150 MW full incremental cost; ISED principles (Sep 2026): proponents pay connection costs; BC's over-150 MW rule: context only (industrial, North Coast) [decision 30 Oct 2026]; AESO connection list: 40 data-related projects, 19,789 MW requested (saved extract); the 56 / 23,549 MW figure could not be found [decision 30 Oct 2026]",
 "unit": "status",
 "sources": [
 "wes",
@@ -5295,7 +5298,7 @@
 },
 {
 "id": "aesoList",
-"term": "56 data-load projects, 23,549 MW requested",
+"term": "40 data-related projects, 19,789 MW requested",
 "role": "context",
 "conf": 80,
 "verified": true,
@@ -5367,9 +5370,10 @@
 {
 "id": "bcIEAF",
 "term": "BC allocation",
-"role": "rule",
+"role": "context",
 "conf": 90,
-"verified": true
+"verified": true,
+"relabel": "30 Oct 2026 (J.B. decision): rule → context"
 },
 {
 "id": "isedPrinciples",
@@ -5488,7 +5492,7 @@
 "stage": "test",
 "name": "Local noise limit",
 "formula": "Edmonton Bylaw 14600 at the property line, no averaging period stated: residential 65 day / 50 night, non-residential 75 / 60 (s.19–22); Vancouver by zone pair, continuous: quiet→quiet 55/45, activity→quiet 60/55, other 70/65; AUC Rule 012 Leq 40–56 + tonal +5 for the grid connection and any tethered generation",
-"coef": "AUC Rule 012 (30 Sep 2024 consolidation; Bulletin 2026-03 of 17 Apr 2026 added guidance only) Table 1 basic sound level, night-time dBA Leq, all 15 cells confirmed: Category 1 (≥500 m from heavily travelled road/rail): 40 / 43 / 46 / 48 / 53 for 1–8 / 9–160 / 161–400 / 401–1,000 (suburban) / >1,000 (urban) dwellings per quarter section (451 m radius); Category 2 (30–500 m): 45 / 48 / 51 / 51 / 53; Category 3 (<30 m or frequent flyovers): 50 / 53 / 56 / 56 / 56; daytime = +10 dBA; minimum night BSL 40; Class A (seasonal/ambient) and B (temporary) adjustments may add; receptor = any dwelling within 1.5 km of the property boundary, else a point at 1.5 km; cumulative with other energy-related facilities; no-net-increase rule (s.2.8) for areas already at the limit. Note: Rule 012 binds AUC-regulated facilities (substations, generation); a data centre itself falls under Edmonton Bylaw 14600 — the rule applies to its grid connection and any generation it tethers to; 13 Oct 2026: Vancouver zone pairs confirmed — quiet→quiet 55/45, activity→quiet 60/55, intermediate/activity→other 70/65; no standing variance for operating noise (111 E 5th amended the by-law's schedule instead); 14 Oct 2026: Edmonton Bylaw 14600 (consolidated 22 Oct 2024) read in full — s.19 residential day 65 dB(A) at the property line 7 a.m.–10 p.m., with allowances 70/2 h, 75/1 h, 80/30 min, 85/15 min per day; s.20 residential night 50; s.21 non-residential day 75 (allowances 80/2 h, 85/1 h); s.22 non-residential night 60; no averaging period stated (read as instantaneous); s.14 a disturbance can be an offence whether or not a level is measured or exceeded; s.16 construction 7 a.m.–9 p.m. (Sun/holidays 9 a.m.–7 p.m.); Vancouver zones (By-law 6555 Sch. A/B/B.1, read 15 Oct): activity = MC-1, MC-2, DD, M-1, M-1A, M-1B, M-2, IC-1–3, I-1, I-1A–C, I-2, I-3, I-4, CWD, DEOD and listed CD-1s; intermediate = C-1, C-2, C-2A–C, C-2C1, C-3A, C-5, C-5A, C-6, C-7, C-8, FC-1, FC-2, FCCDD, BCPED, HA-1, HA-1A, HA-2–4, R3-1–3, R4-1, R5-1–4, RR-3A–C and the B.1 outline (north False Creek shore); quiet = all else. From an activity zone: to quiet 60/55, to intermediate or activity 70/65 dBA day/night",
+"coef": "AUC Rule 012 (30 Sep 2024 consolidation; Bulletin 2026-03 of 17 Apr 2026 added guidance only) Table 1 basic sound level, night-time dBA Leq, all 15 cells confirmed: Category 1 (≥500 m from heavily travelled road/rail): 40 / 43 / 46 / 48 / 53 for 1–8 / 9–160 / 161–400 / 401–1,000 (suburban) / >1,000 (urban) dwellings per quarter section (451 m radius); Category 2 (30–500 m): 45 / 48 / 51 / 51 / 53; Category 3 (<30 m or frequent flyovers): 50 / 53 / 56 / 56 / 56; daytime = +10 dBA; minimum night BSL 40; Class A (seasonal/ambient) and B (temporary) adjustments may add; receptor = any dwelling within 1.5 km of the property boundary, else a point at 1.5 km; cumulative with other energy-related facilities; no-net-increase rule (s.2.8) for areas already at the limit. Note: Rule 012 binds AUC-regulated facilities (substations, generation); a data centre itself falls under Edmonton Bylaw 14600 — the rule applies to its grid connection and any generation it tethers to; 13 Oct 2026: Vancouver zone pairs confirmed — quiet→quiet 55/45, activity→quiet 60/55, intermediate/activity→other 70/65; no standing variance for operating noise (111 E 5th amended the by-law's schedule instead); 14 Oct 2026: Edmonton Bylaw 14600 (consolidated 22 Oct 2024) read in full — s.19 residential day 65 dB(A) at the property line 7 a.m.–10 p.m., with allowances 70/2 h, 75/1 h, 80/30 min, 85/15 min per day; s.20 residential night 50; s.21 non-residential day 75 (allowances 80/2 h, 85/1 h); s.22 non-residential night 60; no averaging period stated (read as instantaneous); s.14 a disturbance can be an offence whether or not a level is measured or exceeded; s.16 construction 7 a.m.–9 p.m. (Sun/holidays 9 a.m.–7 p.m.); Vancouver zones (By-law 6555 Sch. A/B/B.1, read 15 Oct): activity = MC-1, MC-2, DD, M-1, M-1A, M-1B, M-2, IC-1–3, I-1, I-1A–C, I-2, I-3, I-4, CWD, DEOD and listed CD-1s; intermediate = C-1, C-2, C-2A–C, C-2C1, C-3A, C-5, C-5A, C-6, C-7, C-8, FC-1, FC-2, FCCDD, BCPED, HA-1, HA-1A, HA-2–4, R3-1–3, R4-1, R5-1–4, RR-3A–C and the B.1 outline (north False Creek shore); quiet = all else. From an activity zone: to quiet 60/55, to intermediate or activity 70/65 dBA day/night; Edmonton: AUC Rule 012 is for power plants and substations, used as a benchmark; the City's own noise bylaw still to be read (?) [decision 30 Oct 2026]",
 "unit": "dBA",
 "sources": [
 "bylaw14600",
@@ -6526,7 +6530,7 @@
 "stage": "place",
 "name": "Price of power at the site",
 "formula": "tariff for the customer class: BC Hydro LGS or Transmission (RS 1830); Alberta pool price + EPCOR (Edmonton) or FortisAlberta (Parkland) distribution and transmission",
-"coef": "BC LGS (RS 1600–1611, effective 1 Apr 2026): $13.83/kW, 6.79 ¢/kWh, 29.99 ¢/day; RS 1830 (supply at 60 kV or higher, effective 1 Apr 2026): $12.178/kVA, 4.914 ¢/kWh; loads >150 MW pay full incremental cost; 300 MW AI + 100 MW DC allocation. Alberta: pool $43.68/MWh (2025), $62.78 (2024); EPCOR DAS-TOUP and SAS-TOUP; FortisAlberta Rate 63; Rate of Last Resort not available to these loads. Replaces the first attempt's assumed $80–120/MWh",
+"coef": "BC LGS (RS 1600–1611, effective 1 Apr 2026): $13.83/kW, 6.79 ¢/kWh, 29.99 ¢/day; RS 1830 (supply at 60 kV or higher, effective 1 Apr 2026): $12.178/kVA, 4.914 ¢/kWh; loads >150 MW pay full incremental cost; 300 MW AI + 100 MW DC allocation. Alberta: pool $43.68/MWh (2025), $62.78 (2024); EPCOR DAS-TOUP and SAS-TOUP; FortisAlberta Rate 63; Rate of Last Resort not available to these loads. Replaces the first attempt's assumed $80–120/MWh; BC's over-150 MW full-cost rule is stated for industrial customers on the North Coast line; data centres not named: context, not a rule for the Vancouver site [decision 30 Oct 2026]",
 "unit": "$/MWh + $/kW",
 "sources": [
 "bchTariff2026",
@@ -6547,9 +6551,10 @@
 {
 "id": "bcIEAF",
 "term": "BC allocation and >150 MW rule",
-"role": "rule",
+"role": "context",
 "conf": 90,
-"verified": true
+"verified": true,
+"relabel": "30 Oct 2026 (J.B. decision): rule → context"
 },
 {
 "id": "aesoStats2025",
@@ -6675,7 +6680,7 @@
 "stage": "place",
 "name": "Existing building to convert",
 "formula": "parcels with buildings whose use and age suit conversion (from the parcel tables), less what policy steers to other uses",
-"coef": "Precedents: 515 W Hastings office → Bulk Data Storage (2023); Edmonton office → data centre (2009, 2011), warehouse → data centre (Qu EDM2); Vancouver Office Conversion Policy addresses residential conversion only; no official vacancy statistics in either city; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening",
+"coef": "Precedents: 515 W Hastings office → Bulk Data Storage (2023); Edmonton office → data centre (2009, 2011), warehouse → data centre (Qu EDM2); Vancouver Office Conversion Policy addresses residential conversion only; no official vacancy statistics in either city; floor load: offices 2.4 kPa above the ground floor, 4.8 kPa on ground-access floors and basements (NBC 2020 / BCBC 2024 Table 4.1.5.3); computer rooms excluded from the office row; ≈ 6.0 kPa used in US VA design (claim-level transfer): upper office floors would need strengthening; both views shown, dated: UK valuation note 2017 'not readily adaptable'; 2026 note: such buildings can take another use [decision 30 Oct 2026]",
 "unit": "m² available",
 "sources": [
 "vanPermits",
@@ -8127,12 +8132,13 @@
 "stage": "characterise",
 "name": "Generator testing emissions",
 "formula": "energy = units × kW × test hours at load; × emission factors",
-"coef": "testing ≈14.5 h/yr per unit, ~4 h at full load (AUC 27938-D01-2023, Amazon 25.6 MW, derived); Vancouver noise by-law exemption caps tests ≈15 h/yr; uncontrolled diesel 14.6 g NOx, 0.43 g PM, 706 g CO2 per kWh (AP-42 Table 3.4-1, upper bound for modern engines); Alberta exempts standby generators from environmental approval",
+"coef": "testing ≈14.5 h/yr per unit, ~4 h at full load (AUC 27938-D01-2023, Amazon 25.6 MW, derived); Vancouver noise by-law exemption caps tests ≈15 h/yr; uncontrolled diesel 14.6 g NOx, 0.43 g PM, 706 g CO2 per kWh (AP-42 Table 3.4-1, upper bound for modern engines); Alberta exempts standby generators from environmental approval; Vancouver Noise By-law s. 4.1(c): a test is exempt from the noise limits at most once a month, daytime, up to 60 min, plus once a year up to 180 min, at no more than 80 dBA [decision 30 Oct 2026]",
 "unit": "t CO2; kg NOx, PM",
 "sources": [
 "auc_27938",
 "ap42_34",
-"mvBylaw1329"
+"mvBylaw1329",
+"bylaw6555"
 ],
 "source_roles": [
 {
@@ -8152,9 +8158,17 @@
 {
 "id": "mvBylaw1329",
 "term": "research pass 16 Oct 2026 (regional bylaw)",
-"role": "pending build",
+"role": "rule",
 "conf": 50,
-"verified": false
+"verified": false,
+"relabel": "30 Oct 2026 (J.B. decision): pending build → rule"
+},
+{
+"id": "bylaw6555",
+"term": "test exemption: monthly, daytime, ≤60 min, ≤80 dBA",
+"role": "rule",
+"conf": 70,
+"verified": true
 }
 ],
 "conf": 65,
@@ -8168,7 +8182,7 @@
 ],
 "upstream": 65,
 "city": {
-"van": 1,
+"van": 2,
 "edm": 1,
 "both": 0,
 "gen": 1
@@ -8941,7 +8955,7 @@
 "stage": "size",
 "name": "Room for the data hall",
 "formula": "new: envelope floor area − plant space − support − ground-floor uses the zone requires; part of an existing building: the floor area offered",
-"coef": "Vancouver I-2, I-3 and FC-2: no data storage at the ground floor except entrances; calibration: Burlington 3,710 m² of halls = 48–72 % of gross area",
+"coef": "Vancouver I-2, I-3 and FC-2: no data storage at the ground floor except entrances; calibration: Burlington 3,710 m² of halls = 48–72 % of gross area; Cologix VAN2 (≈619 m² per MW) dropped: its 2 MW is site capacity, not IT load; the range is unchanged, VAN5 (≈627) sets the top [decision 30 Oct 2026]",
 "unit": "m²",
 "sources": [
 "van_zdb_i3",
@@ -9010,7 +9024,7 @@
 "stage": "size",
 "name": "Largest size that fits",
 "formula": "hall area ÷ area per MW (range); for part of a building, also capped by floor load, electrical service and heat-rejection space",
-"coef": "LBNL prototypes 3.7–13.9 m² per rack → ≈186–2,325 m² per MW; Ark UP4 28 MW IT in 15,410 m² (three buildings); 111 E 5th ≤ 291 m² per MW (upper bound); Uptime 2024 average 8 kW per rack (industry survey)",
+"coef": "LBNL prototypes 3.7–13.9 m² per rack → ≈186–2,325 m² per MW; Ark UP4 28 MW IT in 15,410 m² (three buildings); 111 E 5th ≤ 291 m² per MW (upper bound); Uptime 2024 average 8 kW per rack (industry survey); Cologix VAN2 (≈619 m² per MW) dropped: its 2 MW is site capacity, not IT load; the range is unchanged, VAN5 (≈627) sets the top [decision 30 Oct 2026]",
 "unit": "MW IT (range)",
 "sources": [
 "lbnl_proto2021",
@@ -9732,7 +9746,7 @@
 "stage": "decide",
 "name": "Futures",
 "formula": "rerun the match in four futures: (1) as planned; (2) the tenant changes cooling — air ↔ liquid changes heat temperature, capture share and flexibility; (3) the tenant leaves — the receiver's backup carries its full peak and the building's reusable parts are listed; (4) the receiver leaves — all heat goes back to rejection, so full rejection capacity stays",
-"coef": "lifespans from horizons (servers ~6 years, plant 15–25, network 40–50); closure cases in meta.lifecycle",
+"coef": "lifespans from horizons (servers ~6 years, plant 15–25, network 40–50); closure cases in meta.lifecycle; three futures from the learning series; the fourth is our addition, labelled so [decision 30 Oct 2026]",
 "unit": "one table per future",
 "sources": [
 "learningSeries",
@@ -9973,7 +9987,7 @@
 "stage": "decide",
 "name": "After the data centre",
 "formula": "at closure, three streams: shell (reuse or demolition), equipment (stewardship program or disposal, with data sanitization), plant and batteries",
-"coef": "Vacated first-generation centres \"tend to remain unoccupied and are not readily adaptable\" (UK VOA, 70); federal closures 500+ of 720; BC Recycling Regulation covers IT products (servers by interpretation, 60); Alberta designates computer equipment; large UPS batteries outside both consumer programs as read (gap); no official source on converting a data centre to another use",
+"coef": "Vacated first-generation centres \"tend to remain unoccupied and are not readily adaptable\" (UK VOA, 70); federal closures 500+ of 720; BC Recycling Regulation covers IT products (servers by interpretation, 60); Alberta designates computer equipment; large UPS batteries outside both consumer programs as read (gap); no official source on converting a data centre to another use; both views shown, dated: UK valuation note 2017 'not readily adaptable'; 2026 note: such buildings can take another use [decision 30 Oct 2026]",
 "unit": "text",
 "sources": [
 "voaComputerCentres",
@@ -11446,7 +11460,7 @@
 "stage": "opportunity",
 "name": "Firefighting water for neighbours",
 "formula": "a tank on the lot, non-potable, for the fire department after an earthquake; drinking water makes the operator a water supplier",
-"coef": "BCBC 2024 and NBC 3.2.5.7 (Alberta uses the NBC Alberta Edition, same clause per the NFC(AE) cross-reference): every building has water for firefighting; a sprinklered building is deemed to comply; where city supply is limited, a supply on site may be needed, sized for at least 30 minutes of fire-department hose streams (NFPA 1142 and the ISO fire flow guide named; volume not sized: standards not read). Vancouver: sprinklers rely on the mains; the seismic saltwater system (DFPS) covers downtown, part of Kitsilano and to VGH and takes about 80 years to complete. BC DWPR: a non-potable, unconnected, marked supply needs no permit; drinking water needs construction and operating permits. Alberta: drinking water piped to neighbours makes it a private utility waterworks (Potable Water Regulation s. 1(1)(l)); a registration if it only passes on city water, an approval if it draws its own source (Activities Designation Regulation)",
+"coef": "BCBC 2024 and NBC 3.2.5.7 (Alberta uses the NBC Alberta Edition, same clause per the NFC(AE) cross-reference): every building has water for firefighting; a sprinklered building is deemed to comply; where city supply is limited, a supply on site may be needed, sized for at least 30 minutes of fire-department hose streams (NFPA 1142 and the ISO fire flow guide named; volume not sized: standards not read). Vancouver: sprinklers rely on the mains; the seismic saltwater system (DFPS) covers downtown, part of Kitsilano and to VGH and takes about 80 years to complete. BC DWPR: a non-potable, unconnected, marked supply needs no permit; drinking water needs construction and operating permits. Alberta: drinking water piped to neighbours makes it a private utility waterworks (Potable Water Regulation s. 1(1)(l)); a registration if it only passes on city water, an approval if it draws its own source (Activities Designation Regulation); Edmonton: NBC(AE) 3.2.5.7.(1) — for buildings over 3 storeys or 600 m², municipal supply at least 3,800 L/min at 140 kPa, or an on-site volume by formula [decision 30 Oct 2026]",
 "unit": "rule",
 "sources": [
 "bcbc2024_3257",
@@ -12009,7 +12023,7 @@
 "stage": "size",
 "name": "UPS and battery room",
 "formula": "UPS modules and battery cabinets in a room of their own; area = their footprints + working space in front + clearances",
-"coef": "room: no CEC rule found that puts a UPS in a service room (CEC 26-010 covers liquid-filled equipment); NBC 2020 / VBBL 3.6.2.1.(7) require a 1 h service room for service equipment in a storey not sprinklered throughout (reading UPS and batteries as service equipment is ours ?), so the separate room is code-required only there and drawn everywhere as a choice; working space in front of the UPS 1 m (CEC 2-308), and because the Galaxy VX 1000 kW is rated 1203 A at 480 V (≥ 1200 A) the room must let a person leave without passing it, otherwise 1.5 m (CEC 2-310 2)) — the tool draws 1.5 m because doors are not placed; headroom 2.2 m at exposed live parts (2-308 5)); UPS against a wall, no rear or side access (Schneider); battery cabinets 0.914 m clear in front, 0.457 m above, 25 mm to a wall, none side to side (Vertiv, UL 9540A-tested; CEC 64-1100 9) lets UL 9540A systems follow the maker's instructions); NFPA 855 asks 0.914 m between ESS units unless fire testing shows less (adoption in BC/AB ?)",
+"coef": "room: no CEC rule found that puts a UPS in a service room (CEC 26-010 covers liquid-filled equipment); NBC 2020 / VBBL 3.6.2.1.(7) require a 1 h service room for service equipment in a storey not sprinklered throughout (reading UPS and batteries as service equipment is ours ?), so the separate room is code-required only there and drawn everywhere as a choice; working space in front of the UPS 1 m (CEC 2-308), and because the Galaxy VX 1000 kW is rated 1203 A at 480 V (≥ 1200 A) the room must let a person leave without passing it, otherwise 1.5 m (CEC 2-310 2)) — the tool draws 1.5 m because doors are not placed; headroom 2.2 m at exposed live parts (2-308 5)); UPS against a wall, no rear or side access (Schneider); battery cabinets 0.914 m clear in front, 0.457 m above, 25 mm to a wall, none side to side (Vertiv, UL 9540A-tested; CEC 64-1100 9) lets UL 9540A systems follow the maker's instructions); NFPA 855 asks 0.914 m between ESS units unless fire testing shows less (adoption in BC/AB ?); corrected: a code-required electrical service room is drawn with a 1 h fire separation whether or not the storey is sprinklered (check 2; the safer reading) [decision 30 Oct 2026]",
 "unit": "m² (and clearances)",
 "sources": [
 "vbbl2019_362",
