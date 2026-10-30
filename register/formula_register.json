@@ -2636,7 +2636,10 @@
    "melo2001": "named in our notes, not yet checked",
    "edmZoningGeo": "named in our notes, not yet checked",
    "vanCD1_520": "named in our notes, not yet checked",
-   "solar": "guideline (City of Vancouver, downtown)"
+   "solar": "guideline (City of Vancouver, downtown)",
+   "rcmpGCPSG009": "government guide (benchmark)",
+   "ufc4_022_03": "US government criteria (benchmark)",
+   "uptimeMyths": "industry body web page"
   },
   "source_check": {
    "mfrDryCooler": "agent",
@@ -2881,7 +2884,10 @@
    "vaSpec230541": "claude",
    "melo2001": "claude",
    "edmZoningGeo": "claude",
-   "vanCD1_520": "claude"
+   "vanCD1_520": "claude",
+   "rcmpGCPSG009": "claude",
+   "ufc4_022_03": "claude",
+   "uptimeMyths": "claude"
   },
   "research_pass": {
    "date": "16 Oct 2026",
@@ -14804,6 +14810,33 @@
      "where": "checks/findings_place.md",
      "what": "place-stage fixes applied (P-01–P-23 clear-cut)"
     }
+   ],
+   "rcmpGCPSG009": [
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "PDF pp. 5–6, 8, 10",
+     "what": "quotes in the source entry"
+    }
+   ],
+   "ufc4_022_03": [
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "PDF pp. 22, 26, 45",
+     "what": "quotes in the source entry"
+    }
+   ],
+   "uptimeMyths": [
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "web page",
+     "what": "quotes in the source entry"
+    }
    ]
   },
   "check_log_note": "check_log: CHECK 1 = first read (Claude, overnight pass 29 Oct 2026); CHECK 2 = independent agent re-read the same evening. 'confirmed' = both reads agree. 'fixed at check 2' = the second reader found a difference and the entry was corrected to the source wording it quoted: that new wording has one read, so it is the place for any third look. Items still marked '?' stay open. Back-fill (30 Oct 2026): sources read before per-source logging began (16 Oct) have a check-1 entry pointing to the research note that records them; sources with no trace in any note were re-read as check 1.",
@@ -25685,10 +25718,13 @@
    "inputs": [],
    "sources": [
     "tourVAN3",
-    "cologixVAN3web"
+    "cologixVAN3web",
+    "rcmpGCPSG009",
+    "ufc4_022_03",
+    "uptimeMyths"
    ],
    "formula": "count the controlled doors a visitor passes between the street and a tenant's servers",
-   "coef": "VAN3 (tour, Oct 2026): 4 she passed — gate intercom, buzzed front door, buzzed door from the vestibule to the lobby, single-person portal (it weighed and measured her; the guide used a side door with 'biometrics AND a scanner'); then, by the guide's account, each tenant's enclosure with its own biometrics and cameras (5 to the servers); the first POP and meet-me room behind scanners; the lobby, client offices, kitchen, boardroom and showers sit inside the third door but outside the portal; Cologix lists ISO 27001 and SOC 2 Type 2 (claims); one site",
+   "coef": "VAN3 (tour, Oct 2026): 4 she passed — gate intercom, buzzed front door, buzzed door from the vestibule to the lobby, single-person portal (it weighed and measured her; the guide used a side door with 'biometrics AND a scanner'); then, by the guide's account, each tenant's enclosure with its own biometrics and cameras (5 to the servers); the first POP and meet-me room behind scanners; the lobby, client offices, kitchen, boardroom and showers sit inside the third door but outside the portal; Cologix lists ISO 27001 and SOC 2 Type 2 (claims); one site; FENCE (30 Oct 2026, J.B.: one fence, the type expected at a Tier III/IV site): Tier III and IV prescribe no security (uptimeMyths), so the fence follows the RCMP's minimum for a security fence: 2.4 m anti-climb welded mesh at the lot line (rcmpGCPSG009 s. 10.1, 9.5; agrees with UFC 4-022-03's 2.44 m, ufc4_022_03); 3.6 m is the RCMP's suggestion for 'high security installations', not used (whether a colocation site counts is not stated ?); crash rating (ASTM F2656 M30–M50) not drawn; VAN3 fence type not recorded beyond her words 'K gate fence' (tourVAN3); post spacing not sourced (?). The 3D 'Secure line' is on or off",
    "source_roles": [
     {
      "id": "tourVAN3",
@@ -25702,6 +25738,27 @@
      "term": "certifications listed",
      "role": "data",
      "conf": 50,
+     "verified": true
+    },
+    {
+     "id": "rcmpGCPSG009",
+     "term": "fence height and type",
+     "role": "benchmark",
+     "conf": 60,
+     "verified": true
+    },
+    {
+     "id": "ufc4_022_03",
+     "term": "fence height (cross-check)",
+     "role": "check",
+     "conf": 50,
+     "verified": true
+    },
+    {
+     "id": "uptimeMyths",
+     "term": "Tiers do not set security",
+     "role": "check",
+     "conf": 60,
      "verified": true
     }
    ]
@@ -28940,7 +28997,10 @@
   "vanFCF2017draft": "City of Vancouver, draft by-law for public hearing 19 Sep 2017, 'False Creek Flats Amendments to the Zoning and Development By-law' (DRAFT, not enacted as printed; number and date blank): adds the Bulk Data Storage definition; I-3 (Appendix B) s. 3.2.T Bulk Data Storage conditional 'but only in sub-area A'; s. 3.3.7 'Except for entrances, Bulk Data Storage use shall not be permitted at the ground floor'; I-2 (Appendix A) s. 3.3.6 the same — https://council.vancouver.ca/20170919/documents/phea6draftbylawZD.pdf",
   "vanI3draft2022": "City of Vancouver, I-3 District Schedule, Consultation Draft (April 2022, regulation redesign): s. 2.1 Bulk Data Storage conditional 'only in sub-area A'; s. 2.2.11 'Bulk data storage is not permitted at the ground floor, except for entrances' — https://syc.vancouver.ca/projects/regulation-redesign/i/zoning-by-law-district-schedule-i-3-draft.pdf",
   "bchES54F": "BC Hydro Distribution Standard ES54 Section F, Transformer pads and vaults (F0-02 general notes; F3-04 R.6 Feb 2017, three-phase pad ≤500 kVA; F3-05 R.8 Sep 2017, ≥750 kVA): pad at least 1 m from a customer building or other structure (BC Hydro's minimum; the CEC allows less); 'a minimum 3 m unobstructed area in front of each transformer'; 1 m at the sides and between transformers; granular oil containment in a timber frame; pad-mounted units hold under 2,500 L of oil. These are BC Hydro-owned distribution transformers; a customer-owned substation at primary service follows the CEC (not read ?) — https://app.bchydro.com/content/dam/BCHydro/customer-portal/documents/distribution/standards/ds-ES54-section-f-transformer-pads-vaults.pdf",
-  "bcbc2024_3275": "BC Building Code 2024, Div. B 3.2.7.5.(1) (local copy): an emergency electrical power supply system 'shall be installed in conformance with CSA C282'. C282 (paywalled) therefore governs generator rooms, exhaust and testing for code-required emergency power; whether a data centre's IT generators are 'emergency' power is not stated (?)"
+  "bcbc2024_3275": "BC Building Code 2024, Div. B 3.2.7.5.(1) (local copy): an emergency electrical power supply system 'shall be installed in conformance with CSA C282'. C282 (paywalled) therefore governs generator rooms, exhaust and testing for code-required emergency power; whether a data centre's IT generators are 'emergency' power is not stated (?)",
+  "rcmpGCPSG009": "GOVERNMENT GUIDE: RCMP Lead Security Agency for Physical Security, Security Fencing Considerations Guide, GCPSG-009 (effective 27 Jan 2022): 'Fences with a height of 2 meters or less should not be referred to as security fencing as they provide little delay'; 'The minimum height for a security fence should be 2.4 meters'; 'High security installations should consider fences of at least 3.6 meters' (s. 10.1, p. 10); anti-climb types: small-mesh chain link or welded mesh (½–¾ in.), vertical slat panels (s. 9.5, p. 8); setbacks kept clear on both sides (s. 9.1, p. 6); ASTM F2656 for hostile-vehicle mitigation, K-ratings 'now outdated', replaced by M-ratings: M30 (K4) 48 km/h, M40 (K8) 64 km/h, M50 (K12) 80 km/h, 15,000 lb vehicle, P-ratings for penetration (s. 8.2, pp. 5–6). Guidance, not a code. Read from a copy hosted at grc.ca (official RCMP copy not found ?) — https://grc.ca/sites/default/files/doc/gcpsg-gsmgc-009-eng.pdf",
+  "ufc4_022_03": "US GOVERNMENT CRITERIA: UFC 4-022-03, Security Fences and Gates (US Department of Defense, 1 Oct 2013): chain link 'minimum fence fabric height of 7 feet (2.13m), excluding the top guard', 8 ft (2.44 m) with outriggers (s. 2-8, 2-9, p. 22); clear zones 'may be 30 feet (9 m)' outside and '20 feet (6 m)' inside (s. 2-12.1, p. 26); standard gates 'not considered to resist impact by vehicles' (s. 3-4, p. 45). US military benchmark — https://www.wbdg.org/FFC/DOD/UFC/ufc_4_022_03_2013.pdf",
+  "uptimeMyths": "INDUSTRY BODY PAGE: Uptime Institute, 'Tier Myths and Misconceptions': 'The Tier Classification System does not prescribe security provisions'; reinforced perimeter fencing is listed among measures that are best practice 'regardless of Tier' — https://uptimeinstitute.com/myths"
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ (UCA default rates, ATCO Gas area); ATCO Gas North Mid Use variable delivery $1.045/GJ (ATCO Gas North Rate Schedules, p. 11, eff. 1 Jan 2026; riders T $1.289/GJ and L $0.087/GJ not included) → (1.045 + 1.458) × 3.6 ÷ 0.85 boiler efficiency ≈ $10.6/MWh heat at the October rate (our arithmetic; the tool uses the 12-month mean commodity, ≈ $13/MWh) — https://www.ucahelps.alberta.ca/regulated-rates.aspx ; https://gas.atco.com/content/dam/web/for-home/natural-gas/natural-gas-north-rate-schedule.pdf",
