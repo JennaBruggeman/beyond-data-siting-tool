@@ -726,7 +726,7 @@ function introBase(){ legend();
     <ol class="sub"><li>Choose a city</li><li>Click a parcel</li><li>Say what is being built — or leave the defaults</li></ol>
   ${srcs(S.city==='van'?['van_data']:['edm_data','edm_lots'])}</div>`;
 }
-function legend(){ const m=S.meta[S.city];
+function legend(){ const m=S.meta[S.city]; if(!m) return; /* 30 Oct 2026: the legend could be asked for before the city's data had loaded (page error seen once in the display check) */
   const L=S.city==='van'?[['case','Case by case (I-2, I-1C, I-3 A, FC-2)'],['site','Site-specific (CD-1), or not yet reviewed (downtown plan areas)'],['low','Small-scale housing (R1-1, RT): rezoning needed'],['no','Rezoning needed']]:[['yes','Allowed (IH)'],['case','Smaller only, or case by case (IM, BE, UI, FD)'],['site','Site-specific (Direct Control, special areas)'],['low','Small-scale housing (RS, RSF, RR): rezoning needed'],['no','Rezoning needed']];
   const op=document.querySelector('#lg details'); const open=op?op.open:window.innerWidth>760;
   $('#lg').innerHTML=`<details${open?' open':''}><summary>Is a data centre an allowed use?</summary>`+L.map(([k,t])=>`<div><i style="background:${COL[k][0]||'transparent'};border:1px solid ${COL[k][1]}"></i>${esc(t)}</div>`).join('')+(window.BD&&BD.legendRecv?BD.legendRecv():'')+`<div class="src">${esc(m.sources[0])}</div></details>`;

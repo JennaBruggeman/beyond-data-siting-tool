@@ -1,0 +1,4668 @@
+{
+ "meta": {
+  "built": "2026-10-30",
+  "script": "checks/emit_check/build_emit_check.py",
+  "inputs": "register (stage characterise, 53 parts) + new/old_sources; data/ (CWEC, PCIC 2050s EPW, NIR 2026 Annex 7 extract, ECCC normals extract, nrcan_pv_annual.json); checks/input_check/input_check.json; checks/place_check/place_check.json (greywater); IT load per lot as given",
+  "not_read": "tool/*.js, tool/index.html, checks/golden, checks/place_check/screen, checks/agents, *_tabs.json",
+  "assumptions": [
+   "load: IT × 0.6 (load_factor) × PUE 1.4–1.55; low pairs PUE 1.4 with low coefficients, high pairs 1.55 with high",
+   "generator capacity (size stage) taken as facility peak kW: a lower bound",
+   "cooling type unknown: evaporation / make-up / WUE are evaporative upper bounds; heat capture uses the liquid (cold-plate) run",
+   "COP for downstream parts: register tool range 3.0–4.5 (lot COP needs receiver_temp)"
+  ],
+  "part_status": {
+   "heat_rejected": "computed",
+   "heat_temp": "computed",
+   "liquid_capture": "computed",
+   "cop": "not computable",
+   "heat_captured": "computed",
+   "heat_delivered": "computed",
+   "hp_electricity": "computed",
+   "erf": "computed",
+   "heat_in_water": "computed",
+   "free_cooling_hours": "computed",
+   "pue": "computed",
+   "spare_capacity": "not computable",
+   "backup_hours": "computed",
+   "flexible_load": "computed",
+   "load_factor": "computed",
+   "evaporation": "computed",
+   "blowdown": "computed",
+   "wue": "computed",
+   "water_behind_electricity": "computed",
+   "rainwater": "computed/not computable",
+   "grid_co2": "computed",
+   "generator_co2": "computed",
+   "generator_nox_pm": "computed",
+   "refrigerant_co2e": "not computable",
+   "embodied_it": "not computable",
+   "embodied_building": "not computable",
+   "noise_level": "computed",
+   "lf_flag": "not computable",
+   "light_at_window": "not computable",
+   "shadow": "not computable",
+   "ground": "not computable",
+   "visibility": "qualitative",
+   "watched_area": "qualitative",
+   "jobs": "computed",
+   "treatment_energy": "computed",
+   "blowdown_recovery": "computed",
+   "pv_roof": "not computable",
+   "pv_facade": "not computable",
+   "genset_test": "computed",
+   "hvo_swap": "not computable",
+   "fuel_on_site": "computed",
+   "vibration_rank": "qualitative",
+   "workload_control": "qualitative",
+   "computing_served": "qualitative",
+   "heat_flux_site": "computed",
+   "heat_plume_dT": "not computable",
+   "genset_emission_rate": "computed",
+   "air_screen_1h": "not computable",
+   "no2_at_receptor": "not computable",
+   "free_cooling_hours_2050s": "computed",
+   "condensate": "computed",
+   "stormwater_volume": "computed",
+   "security_layers": "qualitative"
+  },
+  "status_summary": {
+   "computed": 31,
+   "not computable": 15,
+   "computed/not computable": 1,
+   "qualitative": 6
+  },
+  "formula_errors": [],
+  "register_notes": [
+   {
+    "part": "heat_captured",
+    "kind": "basis",
+    "note": "Capture shares (LBNL 48–75 %, 0.5–0.8 band) are shares of SERVER heat, but the formula multiplies heat_rejected (facility energy incl. PUE overhead). E_reuse is overstated by the PUE factor (1.4–1.55): compare hc_hi with the \"IT heat only\" cross-check row."
+   },
+   {
+    "part": "erf",
+    "kind": "construction",
+    "note": "Because heat_captured = heat_rejected × liquid_capture and E_DC = heat_rejected, ERF equals liquid_capture (0.5–0.8) for every lot; the quantity carries no lot information."
+   },
+   {
+    "part": "heat_rejected",
+    "kind": "source gap",
+    "note": "\"idle floor 36% of max\" is credited to lbnl2024 (role verified), but the lbnl2024 register text has no 36 % figure (it gives a 50 % capacity utilisation); lbnlCapture mentions 35 % capture at idle — a different quantity."
+   },
+   {
+    "part": "liquid_capture",
+    "kind": "source gap",
+    "note": "0.5–0.8 cold-plate band and immersion 1.0 have no primary (role says so); no air-cooled share → air run not computable."
+   },
+   {
+    "part": "cop",
+    "kind": "input",
+    "note": "Lot COP needs receiver_temp (not lot data). Lorenz formula reproduces the register Odense check (η 0.50 → 4.56). Downstream uses the register \"tool range 3.0–4.5\"."
+   },
+   {
+    "part": "pv_roof / pv_facade",
+    "kind": "contradiction",
+    "note": "pv_roof coef P-16 quotes Vancouver 892–1,006 (vertical 718) and Edmonton 947–1,243 (vertical 990); the same coef, pv_facade (716 / 989), nrcanPVmunic and data/nrcan_pv_annual.json give 1,007 / 716 and 944 / 1,244 / 989. P-16 values match no source in the register."
+   },
+   {
+    "part": "refrigerant_co2e",
+    "kind": "contradiction",
+    "note": "sources = [ipcc2019v3ch7] but source_roles credits eccc (Climate Normals) with \"all coefficients\"; refrigerant and GWP not named; chiller count is size stage."
+   },
+   {
+    "part": "generator_co2",
+    "kind": "source gap",
+    "note": "2.681 kg CO2/L is credited to eccc, whose register entry is the Climate Normals (no emission factor). Arithmetic is consistent: 0.263 L/kWh × 2.681 = 705 g/kWh vs AP-42 706. \"Manor Farm 564 h/yr\" has no source in the list and no per-unit / per-site basis."
+   },
+   {
+    "part": "generator_nox_pm",
+    "kind": "source gap",
+    "note": "NOx 0.024 lb/hp·h: eccc role relabelled \"climate input only\"; ap42_34 (the AP-42 source) is not in this part's list. Value equals 14.6 g/kWh (consistent with genset_test). No PM lb/hp·h factor; PM uses genset_test 0.43 g/kWh."
+   },
+   {
+    "part": "generators (all)",
+    "kind": "size stage",
+    "note": "Generator capacity, unit count and redundancy are size stage; facility peak kW is used as a lower bound (capacity ≥ load). genset_test 14.5 h reconstructs from auc_27938 text: 26 × 15 min + 4 × 1 h at zero load + 2 × 2 h full load."
+   },
+   {
+    "part": "blowdown",
+    "kind": "unstated input",
+    "note": "coef gives no value of C; femp text example 3→6 cycles used. femp \"~20 % cut\" checks (1 − 1.2/1.5 = 20 %). Evaporation is an upper bound (cooling type is size stage)."
+   },
+   {
+    "part": "blowdown_recovery",
+    "kind": "contradiction",
+    "note": "Factors −53 % blowdown / −16 % make-up are not consistent with the stated cycles 2.8 → 4.9 at constant evaporation (implies −54 % blowdown and −19 % make-up); applying 0.84 and 0.47 together over-determines the water balance. femp_ct covers blowdown reduction, not recovery (register open item). Skid count not stated."
+   },
+   {
+    "part": "wue",
+    "kind": "scale",
+    "note": "At the evaporative upper bound WUE = 1.5 × PUE × C/(C−1) = 2.5–3.5 L/kWh for every lot, above the \"DCRE cap 2 L/kWh\" (DCRE not in the part's sources)."
+   },
+   {
+    "part": "water_behind_electricity",
+    "kind": "source gap",
+    "note": "\"BC as a range\" gives no numbers (1.25–16.8 used); no Alberta value; femp role \"all coefficients\" but the femp text (BMP #10) has neither 1.25 nor 16.8. Input names it_load_actual; facility electricity used here."
+   },
+   {
+    "part": "grid_co2",
+    "kind": "basis",
+    "note": "NIR 2024 is flagged \"a\" (preliminary). Input names it_load_actual; facility electricity used (heat ≈ electricity). Alberta displacement factor is an offset-policy number, shown separately."
+   },
+   {
+    "part": "free_cooling_hours",
+    "kind": "wording",
+    "note": "Formula says \"T_outdoor < threshold\"; the register's counts (7,109 / 7,614 at 18 °C; 3,284 / 5,522 at 8 °C; 7,675 / 7,846 dry cooler 30 °C) match ≤, not <. Both computed."
+   },
+   {
+    "part": "noise_level",
+    "kind": "basis",
+    "note": "\"one unit per MW\" does not say MW of IT or of facility load: both used (low / high). r is lot edge to nearest residential parcel (input_check 8), so Lp is a closest-case screen; −8 is a hemispherical free-field simplification (iso9613 old: \"our simplification\")."
+   },
+   {
+    "part": "jobs",
+    "kind": "size stage",
+    "note": "Formula is floor-area based (size stage); per-MW route uses the Ark UP4 applicant figure (claim), which is not in the part's source list (jlarc2024, tourVAN3)."
+   },
+   {
+    "part": "treatment_energy",
+    "kind": "source gap",
+    "note": "arden2021 register entry states no figures (check 2: unreachable) — the 0.75–1.28 kWh/m³ values cannot be checked against the register."
+   },
+   {
+    "part": "heat_flux_site",
+    "kind": "comparability",
+    "note": "Allen 2011 119 W/m² is a peak grid cell (check 1), units assumed; comparison is indicative."
+   },
+   {
+    "part": "air_screen_1h",
+    "kind": "unusable",
+    "note": "σy, σz coefficients and stack height H not given (\"table to be checked against the final ISC3 edition\"); downstream no2_at_receptor and heat_plume_dT (neighbour) therefore not computable."
+   },
+   {
+    "part": "hvo_swap",
+    "kind": "unusable",
+    "note": "Fossil diesel reference CI \"to retrieve\" — formula cannot be evaluated."
+   },
+   {
+    "part": "ground",
+    "kind": "contradiction",
+    "note": "status says \"Vancouver in hand (government export)\", but gwells check 2 found no export files locally; Edmonton reports are indexed by ATS legal land description."
+   },
+   {
+    "part": "condensate",
+    "kind": "unit",
+    "note": "Named \"condensate\" but unit is hours; no litres-per-kW yield exists in the register (EPA office rule of thumb not for data halls)."
+   },
+   {
+    "part": "spare_capacity",
+    "kind": "definition",
+    "note": "\"2N holds half\" — 2N is not defined in the uptimeTiers text (role note)."
+   },
+   {
+    "part": "embodied_it",
+    "kind": "basis",
+    "note": "4,177 kg is full life cycle including US use phase (claim); 10–15 % manufacturing share marked \"?\"."
+   },
+   {
+    "part": "stormwater_volume",
+    "kind": "scope",
+    "note": "Lot area used as non-landscaped area (upper bound, per register); Vancouver full engineered volume not computed; all lots between 0.16 and 3.0 ha."
+   },
+   {
+    "part": "heat_delivered / hp_electricity",
+    "kind": "gap",
+    "note": "hp_electricity coef \"allocation rule stated; show two rules\" — the two rules are not stated."
+   }
+  ]
+ },
+ "lots": {
+  "V09": {
+   "_lot": {
+    "label": "275 1st Ave E",
+    "city": "van",
+    "parcel_id": "63819363",
+    "it_mw": 2.5
+   },
+   "heat_rejected": {
+    "status": "computed",
+    "unit": "MWh/yr",
+    "how": "facility electricity = IT × 0.6 × PUE 1.4–1.55 × 8,760 (heat ≈ electricity drawn)",
+    "low": 18396,
+    "high": 20367,
+    "extra": {
+     "peak_MW": [
+      3.5,
+      3.875
+     ],
+     "it_energy_MWh": 13140
+    }
+   },
+   "heat_temp": {
+    "status": "computed (register lookup; cooling type is size stage)",
+    "unit": "°C",
+    "how": "two runs: air-cooled 25–35, liquid-cooled 50–60 (liquid unverified; NREL measured return 35–40)",
+    "low": 25,
+    "high": 60,
+    "extra": {
+     "air_C": [
+      25,
+      35
+     ],
+     "liquid_C_unverified": [
+      50,
+      60
+     ],
+     "liquid_measured_return_hi_C": 40
+    }
+   },
+   "liquid_capture": {
+    "status": "computed (register lookup, liquid run only)",
+    "unit": "share",
+    "how": "cold plate 0.5–0.8 (no primary for the band); immersion 1.0; air-cooled not stated (?)",
+    "low": 0.5,
+    "high": 0.8,
+    "extra": {
+     "immersion": 1,
+     "air": "not stated (?): coef \"no capture share for a whole air-cooled hall\""
+    }
+   },
+   "cop": {
+    "status": "not computable (needs receiver_temp: set by receiver type, match stage); register range shown",
+    "unit": "—",
+    "how": "register tool range 3.0–4.5 carried downstream; Lorenz check for Odense in extra",
+    "low": null,
+    "high": null,
+    "extra": {
+     "lorenz_odense_eta050": 4.5587,
+     "lorenz_odense_eta040": 3.647,
+     "reference_shown": [
+      3,
+      4.5
+     ]
+    }
+   },
+   "heat_captured": {
+    "status": "computed (liquid-cooled run)",
+    "unit": "MWh/yr",
+    "how": "heat_rejected × cold-plate share 0.5–0.8 (liquid-cooled run); air-cooled not computable",
+    "low": 9198,
+    "high": 16293.6,
+    "extra": {
+     "immersion_MWh": 20367,
+     "it_heat_only_hi_MWh": 10512
+    }
+   },
+   "heat_delivered": {
+    "status": "computed (COP from register range)",
+    "unit": "MWh/yr available",
+    "how": "E_reuse × COP ÷ (COP − 1), COP 4.5 (low) to 3.0 (high); receiver demand not applied",
+    "low": 11826,
+    "high": 24440.4
+   },
+   "hp_electricity": {
+    "status": "computed (COP from register range)",
+    "unit": "MWh/yr",
+    "how": "Q_out ÷ COP (4.5 low, 3.0 high)",
+    "low": 2628,
+    "high": 8146.8
+   },
+   "erf": {
+    "status": "computed",
+    "unit": "—",
+    "how": "E_reuse ÷ E_DC (= heat_rejected); collapses to the capture share by construction",
+    "low": 0.5,
+    "high": 0.8
+   },
+   "heat_in_water": {
+    "status": "computed (coefficient check; no lot input)",
+    "unit": "kWh per m³·K",
+    "how": "coefficient only: 4.18 × 1,000 ÷ 3,600 (low) vs register 1.16 (high); no lot volume or ΔT named",
+    "low": 1.1611,
+    "high": 1.16
+   },
+   "free_cooling_hours": {
+    "status": "computed",
+    "unit": "h/yr",
+    "how": "CWEC hours ≤ 8 °C (full free cooling, air-cooled hall) to air-side at 27 °C inlet (≤ 25.5 °C); ≤ counts match the register, the formula text says <",
+    "low": 3284,
+    "high": 8759,
+    "extra": {
+     "air_18_21_24_27": [
+      7109,
+      8086,
+      8645,
+      8759
+     ],
+     "dry_cooler_30_40": [
+      7675,
+      8760
+     ],
+     "strict_lt_air18": 7064
+    }
+   },
+   "pue": {
+    "status": "computed (register values)",
+    "unit": "—",
+    "how": "register range 1.4–1.55 (estimate + industry survey)",
+    "low": 1.4,
+    "high": 1.55
+   },
+   "spare_capacity": {
+    "status": "not computable (needs size stage: installed capacity and redundancy); conditional 2N value shown",
+    "unit": "MW",
+    "how": "only the conditional \"if 2N, spare = peak\" (our arithmetic); installed capacity is size stage",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      3.5,
+      3.875
+     ]
+    }
+   },
+   "backup_hours": {
+    "status": "computed (register values only; battery kWh and fuel stored are size stage)",
+    "unit": "h (fuel)",
+    "how": "register ranges: fuel 12 h (Uptime minimum) to 48 h (operator claims); UPS 1–15 min (vendor claims) in extra",
+    "low": 12,
+    "high": 48,
+    "extra": {
+     "ups_h": [
+      0.0167,
+      0.25
+     ]
+    }
+   },
+   "flexible_load": {
+    "status": "computed",
+    "unit": "MW·h per event",
+    "how": "it_load_actual × 10 % × 4 h (Call for Demand) to × 25 % × 3 h (Emerald preprint, claim)",
+    "low": 0.6,
+    "high": 1.125
+   },
+   "load_factor": {
+    "status": "computed (register value)",
+    "unit": "—",
+    "how": "Fan et al. 2007 (one 2007 site)",
+    "value": 0.6
+   },
+   "evaporation": {
+    "status": "computed (upper bound)",
+    "unit": "L/yr",
+    "how": "upper bound: heat_rejected ÷ 2,400 kJ/kg (all heat evaporated; dry cooling gives 0)",
+    "low": 27594000,
+    "high": 30550500
+   },
+   "blowdown": {
+    "status": "computed (upper bound; C from femp example)",
+    "unit": "L/yr make-up",
+    "how": "make-up = E + E ÷ (C − 1), C 6 (low) to 3 (high) from the femp example; blowdown in extra",
+    "low": 33112800,
+    "high": 45825750,
+    "extra": {
+     "blowdown_L": [
+      5518800,
+      15275250
+     ],
+     "evaporation_L": [
+      27594000,
+      30550500
+     ],
+     "femp_check_cut": 0.2
+    }
+   },
+   "wue": {
+    "status": "computed (upper bound)",
+    "unit": "L/kWh",
+    "how": "make-up ÷ E_IT (evaporative upper bound)",
+    "low": 2.52,
+    "high": 3.4875,
+    "extra": {
+     "low_over_DCRE_cap": 1.26
+    }
+   },
+   "water_behind_electricity": {
+    "status": "computed",
+    "unit": "L/yr",
+    "how": "facility MWh × 1.25 L/kWh (thermo) to × 16.8 (hydro, Vancouver only); Alberta 1.25 both ends",
+    "low": 22995000,
+    "high": 342165600
+   },
+   "rainwater": {
+    "status": "computed (existing roofs)",
+    "unit": "m³/yr",
+    "how": "existing roofs (footprint) × rainfall–precipitation (ECCC 1991–2020) × 0.8",
+    "low": 2512.8278,
+    "high": 2603.3094,
+    "extra": {
+     "roof_m2": 2806.5
+    }
+   },
+   "grid_co2": {
+    "status": "computed",
+    "unit": "t CO2e/yr",
+    "how": "facility MWh × NIR 2024 consumption intensity (BC 18.1, AB 346.1 g/kWh); Alberta displacement factor and heat-pump share in extra",
+    "low": 332.3053,
+    "high": 367.9095,
+    "extra": {
+     "ab_displacement_t": [
+      "n/a: BC publishes no marginal factor",
+      "n/a: BC publishes no marginal factor"
+     ],
+     "heat_pump_t": [
+      47.4722,
+      147.1638
+     ]
+    }
+   },
+   "generator_co2": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "t CO2/yr",
+    "how": "test kWh (facility peak kW × 4–14.5 h) × 0.263 L/kWh × 2.681 kg/L",
+    "low": 9.8714,
+    "high": 39.618,
+    "extra": {
+     "litres": [
+      3682,
+      14777.3125
+     ],
+     "g_per_kWh_check": 705.103,
+     "manor_farm_564h_t": 1391.8733,
+     "generator_kW_lower_bound": [
+      3500,
+      3875
+     ]
+    }
+   },
+   "generator_nox_pm": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "kg NOx/yr",
+    "how": "kW ÷ 0.7457 × hours × 0.024 lb/hp·h; PM in extra at 0.43 g/kWh",
+    "low": 204.3812,
+    "high": 820.2621,
+    "extra": {
+     "pm_kg": [
+      6.02,
+      24.1606
+     ],
+     "nox_g_per_kWh_check": 14.5987
+    }
+   },
+   "refrigerant_co2e": {
+    "status": "not computable (needs size stage: chiller count and charge; refrigerant GWP not stated)",
+    "unit": "t CO2e/yr",
+    "how": "charge × 3 %/yr × GWP"
+   },
+   "embodied_it": {
+    "status": "not computable (needs size stage: server count); per-server value shown",
+    "unit": "kg CO2e/yr per server",
+    "how": "per server only: 4,177 kg (claim) × 10–15 % ÷ 4 yr",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      104.425,
+      156.6375
+     ]
+    }
+   },
+   "embodied_building": {
+    "status": "not computable (needs size stage: floor area)",
+    "unit": "t CO2e",
+    "how": "floor area × 400–461 kg/m²"
+   },
+   "noise_level": {
+    "status": "computed (screening; plant schedule is size stage)",
+    "unit": "dBA at nearest residential parcel",
+    "how": "Lw 98–101 dBA per unit (Trane, claim), one unit per MW (IT to facility peak), Lw + 10·log10 n − 20·log10 r − 8; r = lot edge to parcel edge",
+    "low": 48.7159,
+    "high": 52.9653,
+    "extra": {
+     "units": [
+      3,
+      4
+     ],
+     "combined_Lw": [
+      102.7712,
+      107.0206
+     ],
+     "receptor_m": 200.8
+    }
+   },
+   "lf_flag": {
+    "status": "not computable (needs plant spectra)",
+    "unit": "—",
+    "how": "dBC − dBA ≥ 20 dB and tone 20–250 Hz → +5 dBA (benchmark)"
+   },
+   "light_at_window": {
+    "status": "not computable (needs lighting plan)",
+    "unit": "lx",
+    "how": "vertical illuminance vs 10 / 2 lx (benchmark, unverified)"
+   },
+   "shadow": {
+    "status": "not computable (needs size stage: massing)",
+    "unit": "m²·h",
+    "how": "fall-equinox shadows 10:00–16:00 (benchmark)"
+   },
+   "ground": {
+    "status": "not computable (GWELLS export not in data/; Edmonton reports by ATS section)",
+    "unit": "ft, USgpm, m²/d",
+    "how": "nearest N wells: register gives Vancouver area stats only (333 wells, depth median 59 ft)"
+   },
+   "visibility": {
+    "status": "qualitative",
+    "unit": "ledger",
+    "register_says": "Ledger per plant element: seen from public space / closed to view / known only from documents / not checked (fieldJB site fact; vanPermits for the documents column). Field observation, not lot data."
+   },
+   "watched_area": {
+    "status": "qualitative",
+    "unit": "m; count",
+    "register_says": "Visible cameras and signs; indicative watched area past the lot line; first-person account labelled as one person's. fieldJB notes support counts and description, not metres. Never a guide to coverage gaps."
+   },
+   "jobs": {
+    "status": "computed (per-MW claim route)",
+    "unit": "FTE",
+    "how": "IT MW × 50–100 jobs ÷ 28 MW (Ark UP4 applicant claim); floor-area route needs size stage",
+    "low": 4.4643,
+    "high": 8.9286,
+    "extra": {
+     "m2_per_job_check": [
+      154.1,
+      308.2
+     ]
+    }
+   },
+   "treatment_energy": {
+    "status": "computed (upper bound: recovery share is a register gap)",
+    "unit": "kWh/yr",
+    "how": "MIN(greywater within 200–500 m, make-up) × 0.75–1.1 kWh/m³ (Arden 2021; register has no page/table)",
+    "low": 23850,
+    "high": 50408.325,
+    "extra": {
+     "all_makeup_mixed_hi_kWh": 58656.96
+    }
+   },
+   "blowdown_recovery": {
+    "status": "computed (single US test)",
+    "unit": "L/yr recovered",
+    "how": "blowdown × 0.53; make-up × 0.84 and 3,541 kWh per skid in extra",
+    "low": 2924964,
+    "high": 8095882.5,
+    "extra": {
+     "makeup_after_L": [
+      27814752,
+      38493630
+     ],
+     "kWh_per_skid": 3541,
+     "implied_cuts_2.8_to_4.9": [
+      0.1923,
+      0.5385
+     ]
+    }
+   },
+   "pv_roof": {
+    "status": "not computable (needs size stage: roof layout); per-m² value shown",
+    "unit": "kWh/yr per m² of panel",
+    "how": "per m² only: 0.16–0.20 kWp/m² × NRCan horizontal–latitude yield",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      142.72,
+      201.4
+     ]
+    }
+   },
+   "pv_facade": {
+    "status": "not computable (needs size stage: south facade area); per-m² value shown",
+    "unit": "kWh/yr per m² of facade",
+    "how": "per m² only: 0.16–0.20 kWp/m² × NRCan vertical yield",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      114.56,
+      143.2
+     ]
+    }
+   },
+   "genset_test": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "t CO2/yr",
+    "how": "test kWh × 706 g CO2 / 14.6 g NOx / 0.43 g PM per kWh (AP-42 upper bounds)",
+    "low": 9.884,
+    "high": 39.6684,
+    "extra": {
+     "nox_kg": [
+      204.4,
+      820.3375
+     ],
+     "pm_kg": [
+      6.02,
+      24.1606
+     ],
+     "test_kWh": [
+      14000,
+      56187.5
+     ],
+     "test_hours_check": 14.5
+    }
+   },
+   "hvo_swap": {
+    "status": "not computable (fossil diesel reference CI not stated)",
+    "unit": "g CO2e/MJ",
+    "how": "Δ = fuel energy × (CI diesel − CI RD)"
+   },
+   "fuel_on_site": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "L",
+    "how": "facility peak kW × 12–48 h × 0.263 L/kWh (claim); vs NFC 200,000 L per first-storey room",
+    "low": 11046,
+    "high": 48918,
+    "extra": {
+     "first_storey_rooms": [
+      1,
+      1
+     ],
+     "upper_storey_rooms_hi": 3,
+     "m3_per_MW_24h_check": 6.312
+    }
+   },
+   "vibration_rank": {
+    "status": "qualitative",
+    "unit": "rank",
+    "register_says": "Qualitative rank, slab on grade → long-span upper floor. VBBL 2019 / BCBC 2018 ASTC 47 (STC 55 by elevator shafts) are airborne only; isolator deflection rises with floor span (VA spec citing ASHRAE). No dB values."
+   },
+   "workload_control": {
+    "status": "qualitative",
+    "unit": "operator · tenants · mixed",
+    "register_says": "Flexibility is offered only by whoever runs the workloads: single-owner or hyperscale operator can shift its own computing; in colocation the building operator controls power and cooling, not tenants' computing. Crozier & Liska 2025: no single flexible share."
+   },
+   "computing_served": {
+    "status": "qualitative",
+    "unit": "text",
+    "register_says": "Up to four statements, no score: federal Protected B and above stored in Canada (gcDataResidency, archived — history); BC FOIPPA s. 33.1 assessment for public bodies (context); Alberta no rule found; Vancouver exchanges 158 participants across three (78 + 64 + 16, isocPulseIXP), Edmonton YEGIX 9; residency ≠ sovereignty."
+   },
+   "heat_flux_site": {
+    "status": "computed",
+    "unit": "W/m²",
+    "how": "facility peak W ÷ lot area",
+    "low": 446.1156,
+    "high": 493.9137,
+    "extra": {
+     "high_over_allen119": 4.1505
+    }
+   },
+   "heat_plume_dT": {
+    "status": "not computable (needs plant airflow and air_screen_1h)",
+    "unit": "°C",
+    "how": "needs airflow and plume factor"
+   },
+   "genset_emission_rate": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "g/s NOx",
+    "how": "14.6 g/kWh × facility peak kW ÷ 3,600, all sets at full load",
+    "low": 14.1944,
+    "high": 15.7153,
+    "extra": {
+     "check_2000kWe": 8.1111
+    }
+   },
+   "air_screen_1h": {
+    "status": "not computable (σy, σz and stack height not stated)",
+    "unit": "µg/m³",
+    "how": "Gaussian screen"
+   },
+   "no2_at_receptor": {
+    "status": "not computable (needs air_screen_1h)",
+    "unit": "µg/m³",
+    "how": "NOx × 1.0 / 0.9–0.2"
+   },
+   "free_cooling_hours_2050s": {
+    "status": "computed",
+    "unit": "h/yr",
+    "how": "PCIC 2050s: hours ≤ 8 °C under SSP5-8.5 (low) to air-side at 27 °C inlet under SSP2-4.5 (high)",
+    "low": 1954,
+    "high": 8702,
+    "extra": {
+     "le8_now_245_585": [
+      3284,
+      2279,
+      1954
+     ],
+     "air18_245_585": [
+      6246,
+      5975
+     ],
+     "gt18_now_245_585": [
+      1085,
+      1879,
+      2218
+     ],
+     "ge30_245_585": [
+      0,
+      0
+     ],
+     "peak_C_now_245_585": [
+      25.6,
+      27.6,
+      28.6
+     ]
+    }
+   },
+   "condensate": {
+    "status": "computed (hours only)",
+    "unit": "h/yr (dew point > 15 °C)",
+    "how": "CWEC hours with dew point > 15 °C; condensate yield not sourced",
+    "value": 417
+   },
+   "stormwater_volume": {
+    "status": "computed (upper bound: whole lot non-landscaped)",
+    "unit": "m³",
+    "how": "Van 15 mm × lot (stage 1); Edm 375–507 m³/ha",
+    "low": 117.6825,
+    "high": 117.6825,
+    "extra": {
+     "release_L_per_s": 3.9228
+    }
+   },
+   "security_layers": {
+    "status": "qualitative",
+    "unit": "count",
+    "register_says": "One site visit (VAN3, tourVAN3, conf 40): 4 controlled doors passed (gate intercom, buzzed front door, vestibule-to-lobby door, single-person portal), then each tenant's enclosure (5 to the servers, guide's account). Cologix lists ISO 27001 and SOC 2 Type 2 (claims). Not lot data."
+   }
+  },
+  "E05": {
+   "_lot": {
+    "label": "8803 Stadium Rd NW",
+    "city": "edm",
+    "parcel_id": "51053",
+    "it_mw": 10.2
+   },
+   "heat_rejected": {
+    "status": "computed",
+    "unit": "MWh/yr",
+    "how": "facility electricity = IT × 0.6 × PUE 1.4–1.55 × 8,760 (heat ≈ electricity drawn)",
+    "low": 75055.68,
+    "high": 83097.36,
+    "extra": {
+     "peak_MW": [
+      14.28,
+      15.81
+     ],
+     "it_energy_MWh": 53611.2
+    }
+   },
+   "heat_temp": {
+    "status": "computed (register lookup; cooling type is size stage)",
+    "unit": "°C",
+    "how": "two runs: air-cooled 25–35, liquid-cooled 50–60 (liquid unverified; NREL measured return 35–40)",
+    "low": 25,
+    "high": 60,
+    "extra": {
+     "air_C": [
+      25,
+      35
+     ],
+     "liquid_C_unverified": [
+      50,
+      60
+     ],
+     "liquid_measured_return_hi_C": 40
+    }
+   },
+   "liquid_capture": {
+    "status": "computed (register lookup, liquid run only)",
+    "unit": "share",
+    "how": "cold plate 0.5–0.8 (no primary for the band); immersion 1.0; air-cooled not stated (?)",
+    "low": 0.5,
+    "high": 0.8,
+    "extra": {
+     "immersion": 1,
+     "air": "not stated (?): coef \"no capture share for a whole air-cooled hall\""
+    }
+   },
+   "cop": {
+    "status": "not computable (needs receiver_temp: set by receiver type, match stage); register range shown",
+    "unit": "—",
+    "how": "register tool range 3.0–4.5 carried downstream; Lorenz check for Odense in extra",
+    "low": null,
+    "high": null,
+    "extra": {
+     "lorenz_odense_eta050": 4.5587,
+     "lorenz_odense_eta040": 3.647,
+     "reference_shown": [
+      3,
+      4.5
+     ]
+    }
+   },
+   "heat_captured": {
+    "status": "computed (liquid-cooled run)",
+    "unit": "MWh/yr",
+    "how": "heat_rejected × cold-plate share 0.5–0.8 (liquid-cooled run); air-cooled not computable",
+    "low": 37527.84,
+    "high": 66477.888,
+    "extra": {
+     "immersion_MWh": 83097.36,
+     "it_heat_only_hi_MWh": 42888.96
+    }
+   },
+   "heat_delivered": {
+    "status": "computed (COP from register range)",
+    "unit": "MWh/yr available",
+    "how": "E_reuse × COP ÷ (COP − 1), COP 4.5 (low) to 3.0 (high); receiver demand not applied",
+    "low": 48250.08,
+    "high": 99716.832
+   },
+   "hp_electricity": {
+    "status": "computed (COP from register range)",
+    "unit": "MWh/yr",
+    "how": "Q_out ÷ COP (4.5 low, 3.0 high)",
+    "low": 10722.24,
+    "high": 33238.944
+   },
+   "erf": {
+    "status": "computed",
+    "unit": "—",
+    "how": "E_reuse ÷ E_DC (= heat_rejected); collapses to the capture share by construction",
+    "low": 0.5,
+    "high": 0.8
+   },
+   "heat_in_water": {
+    "status": "computed (coefficient check; no lot input)",
+    "unit": "kWh per m³·K",
+    "how": "coefficient only: 4.18 × 1,000 ÷ 3,600 (low) vs register 1.16 (high); no lot volume or ΔT named",
+    "low": 1.1611,
+    "high": 1.16
+   },
+   "free_cooling_hours": {
+    "status": "computed",
+    "unit": "h/yr",
+    "how": "CWEC hours ≤ 8 °C (full free cooling, air-cooled hall) to air-side at 27 °C inlet (≤ 25.5 °C); ≤ counts match the register, the formula text says <",
+    "low": 5522,
+    "high": 8661,
+    "extra": {
+     "air_18_21_24_27": [
+      7614,
+      8046,
+      8412,
+      8661
+     ],
+     "dry_cooler_30_40": [
+      7846,
+      8754
+     ],
+     "strict_lt_air18": 7598
+    }
+   },
+   "pue": {
+    "status": "computed (register values)",
+    "unit": "—",
+    "how": "register range 1.4–1.55 (estimate + industry survey)",
+    "low": 1.4,
+    "high": 1.55
+   },
+   "spare_capacity": {
+    "status": "not computable (needs size stage: installed capacity and redundancy); conditional 2N value shown",
+    "unit": "MW",
+    "how": "only the conditional \"if 2N, spare = peak\" (our arithmetic); installed capacity is size stage",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      14.28,
+      15.81
+     ]
+    }
+   },
+   "backup_hours": {
+    "status": "computed (register values only; battery kWh and fuel stored are size stage)",
+    "unit": "h (fuel)",
+    "how": "register ranges: fuel 12 h (Uptime minimum) to 48 h (operator claims); UPS 1–15 min (vendor claims) in extra",
+    "low": 12,
+    "high": 48,
+    "extra": {
+     "ups_h": [
+      0.0167,
+      0.25
+     ]
+    }
+   },
+   "flexible_load": {
+    "status": "computed",
+    "unit": "MW·h per event",
+    "how": "it_load_actual × 10 % × 4 h (Call for Demand) to × 25 % × 3 h (Emerald preprint, claim)",
+    "low": 2.448,
+    "high": 4.59
+   },
+   "load_factor": {
+    "status": "computed (register value)",
+    "unit": "—",
+    "how": "Fan et al. 2007 (one 2007 site)",
+    "value": 0.6
+   },
+   "evaporation": {
+    "status": "computed (upper bound)",
+    "unit": "L/yr",
+    "how": "upper bound: heat_rejected ÷ 2,400 kJ/kg (all heat evaporated; dry cooling gives 0)",
+    "low": 112583520,
+    "high": 124646040
+   },
+   "blowdown": {
+    "status": "computed (upper bound; C from femp example)",
+    "unit": "L/yr make-up",
+    "how": "make-up = E + E ÷ (C − 1), C 6 (low) to 3 (high) from the femp example; blowdown in extra",
+    "low": 135100224,
+    "high": 186969060,
+    "extra": {
+     "blowdown_L": [
+      22516704,
+      62323020
+     ],
+     "evaporation_L": [
+      112583520,
+      124646040
+     ],
+     "femp_check_cut": 0.2
+    }
+   },
+   "wue": {
+    "status": "computed (upper bound)",
+    "unit": "L/kWh",
+    "how": "make-up ÷ E_IT (evaporative upper bound)",
+    "low": 2.52,
+    "high": 3.4875,
+    "extra": {
+     "low_over_DCRE_cap": 1.26
+    }
+   },
+   "water_behind_electricity": {
+    "status": "computed",
+    "unit": "L/yr",
+    "how": "facility MWh × 1.25 L/kWh (thermo) to × 16.8 (hydro, Vancouver only); Alberta 1.25 both ends",
+    "low": 93819600,
+    "high": 103871700
+   },
+   "rainwater": {
+    "status": "computed (existing roofs)",
+    "unit": "m³/yr",
+    "how": "existing roofs (footprint) × rainfall–precipitation (ECCC 1991–2020) × 0.8",
+    "low": 274.5045,
+    "high": 352.196,
+    "extra": {
+     "roof_m2": 1042
+    }
+   },
+   "grid_co2": {
+    "status": "computed",
+    "unit": "t CO2e/yr",
+    "how": "facility MWh × NIR 2024 consumption intensity (BC 18.1, AB 346.1 g/kWh); Alberta displacement factor and heat-pump share in extra",
+    "low": 25976.921,
+    "high": 28760.1625,
+    "extra": {
+     "ab_displacement_t": [
+      32296.4591,
+      38125.0688
+     ],
+     "heat_pump_t": [
+      3710.9887,
+      11504.065
+     ]
+    }
+   },
+   "generator_co2": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "t CO2/yr",
+    "how": "test kWh (facility peak kW × 4–14.5 h) × 0.263 L/kWh × 2.681 kg/L",
+    "low": 40.2755,
+    "high": 161.6413,
+    "extra": {
+     "litres": [
+      15022.56,
+      60291.435
+     ],
+     "g_per_kWh_check": 705.103,
+     "manor_farm_564h_t": 5678.8432,
+     "generator_kW_lower_bound": [
+      14280,
+      15810
+     ]
+    }
+   },
+   "generator_nox_pm": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "kg NOx/yr",
+    "how": "kW ÷ 0.7457 × hours × 0.024 lb/hp·h; PM in extra at 0.43 g/kWh",
+    "low": 833.8753,
+    "high": 3346.6692,
+    "extra": {
+     "pm_kg": [
+      24.5616,
+      98.5754
+     ],
+     "nox_g_per_kWh_check": 14.5987
+    }
+   },
+   "refrigerant_co2e": {
+    "status": "not computable (needs size stage: chiller count and charge; refrigerant GWP not stated)",
+    "unit": "t CO2e/yr",
+    "how": "charge × 3 %/yr × GWP"
+   },
+   "embodied_it": {
+    "status": "not computable (needs size stage: server count); per-server value shown",
+    "unit": "kg CO2e/yr per server",
+    "how": "per server only: 4,177 kg (claim) × 10–15 % ÷ 4 yr",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      104.425,
+      156.6375
+     ]
+    }
+   },
+   "embodied_building": {
+    "status": "not computable (needs size stage: floor area)",
+    "unit": "t CO2e",
+    "how": "floor area × 400–461 kg/m²"
+   },
+   "noise_level": {
+    "status": "computed (screening; plant schedule is size stage)",
+    "unit": "dBA at nearest residential parcel",
+    "how": "Lw 98–101 dBA per unit (Trane, claim), one unit per MW (IT to facility peak), Lw + 10·log10 n − 20·log10 r − 8; r = lot edge to parcel edge",
+    "low": 71.5957,
+    "high": 76.223,
+    "extra": {
+     "units": [
+      11,
+      16
+     ],
+     "combined_Lw": [
+      108.4139,
+      113.0412
+     ],
+     "receptor_m": 27.6
+    }
+   },
+   "lf_flag": {
+    "status": "not computable (needs plant spectra)",
+    "unit": "—",
+    "how": "dBC − dBA ≥ 20 dB and tone 20–250 Hz → +5 dBA (benchmark)"
+   },
+   "light_at_window": {
+    "status": "not computable (needs lighting plan)",
+    "unit": "lx",
+    "how": "vertical illuminance vs 10 / 2 lx (benchmark, unverified)"
+   },
+   "shadow": {
+    "status": "not computable (needs size stage: massing)",
+    "unit": "m²·h",
+    "how": "fall-equinox shadows 10:00–16:00 (benchmark)"
+   },
+   "ground": {
+    "status": "not computable (GWELLS export not in data/; Edmonton reports by ATS section)",
+    "unit": "ft, USgpm, m²/d",
+    "how": "nearest N wells: register gives Vancouver area stats only (333 wells, depth median 59 ft)"
+   },
+   "visibility": {
+    "status": "qualitative",
+    "unit": "ledger",
+    "register_says": "Ledger per plant element: seen from public space / closed to view / known only from documents / not checked (fieldJB site fact; vanPermits for the documents column). Field observation, not lot data."
+   },
+   "watched_area": {
+    "status": "qualitative",
+    "unit": "m; count",
+    "register_says": "Visible cameras and signs; indicative watched area past the lot line; first-person account labelled as one person's. fieldJB notes support counts and description, not metres. Never a guide to coverage gaps."
+   },
+   "jobs": {
+    "status": "computed (per-MW claim route)",
+    "unit": "FTE",
+    "how": "IT MW × 50–100 jobs ÷ 28 MW (Ark UP4 applicant claim); floor-area route needs size stage",
+    "low": 18.2143,
+    "high": 36.4286,
+    "extra": {
+     "m2_per_job_check": [
+      154.1,
+      308.2
+     ]
+    }
+   },
+   "treatment_energy": {
+    "status": "computed (upper bound: recovery share is a register gap)",
+    "unit": "kWh/yr",
+    "how": "MIN(greywater within 200–500 m, make-up) × 0.75–1.1 kWh/m³ (Arden 2021; register has no page/table)",
+    "low": 21972,
+    "high": 200552,
+    "extra": {
+     "all_makeup_mixed_hi_kWh": 239320.3968
+    }
+   },
+   "blowdown_recovery": {
+    "status": "computed (single US test)",
+    "unit": "L/yr recovered",
+    "how": "blowdown × 0.53; make-up × 0.84 and 3,541 kWh per skid in extra",
+    "low": 11933853.12,
+    "high": 33031200.6,
+    "extra": {
+     "makeup_after_L": [
+      113484188.16,
+      157054010.4
+     ],
+     "kWh_per_skid": 3541,
+     "implied_cuts_2.8_to_4.9": [
+      0.1923,
+      0.5385
+     ]
+    }
+   },
+   "pv_roof": {
+    "status": "not computable (needs size stage: roof layout); per-m² value shown",
+    "unit": "kWh/yr per m² of panel",
+    "how": "per m² only: 0.16–0.20 kWp/m² × NRCan horizontal–latitude yield",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      151.04,
+      248.8
+     ]
+    }
+   },
+   "pv_facade": {
+    "status": "not computable (needs size stage: south facade area); per-m² value shown",
+    "unit": "kWh/yr per m² of facade",
+    "how": "per m² only: 0.16–0.20 kWp/m² × NRCan vertical yield",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      158.24,
+      197.8
+     ]
+    }
+   },
+   "genset_test": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "t CO2/yr",
+    "how": "test kWh × 706 g CO2 / 14.6 g NOx / 0.43 g PM per kWh (AP-42 upper bounds)",
+    "low": 40.3267,
+    "high": 161.847,
+    "extra": {
+     "nox_kg": [
+      833.952,
+      3346.977
+     ],
+     "pm_kg": [
+      24.5616,
+      98.5754
+     ],
+     "test_kWh": [
+      57120,
+      229245
+     ],
+     "test_hours_check": 14.5
+    }
+   },
+   "hvo_swap": {
+    "status": "not computable (fossil diesel reference CI not stated)",
+    "unit": "g CO2e/MJ",
+    "how": "Δ = fuel energy × (CI diesel − CI RD)"
+   },
+   "fuel_on_site": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "L",
+    "how": "facility peak kW × 12–48 h × 0.263 L/kWh (claim); vs NFC 200,000 L per first-storey room",
+    "low": 45067.68,
+    "high": 199585.44,
+    "extra": {
+     "first_storey_rooms": [
+      1,
+      1
+     ],
+     "upper_storey_rooms_hi": 10,
+     "m3_per_MW_24h_check": 6.312
+    }
+   },
+   "vibration_rank": {
+    "status": "qualitative",
+    "unit": "rank",
+    "register_says": "Qualitative rank, slab on grade → long-span upper floor. VBBL 2019 / BCBC 2018 ASTC 47 (STC 55 by elevator shafts) are airborne only; isolator deflection rises with floor span (VA spec citing ASHRAE). No dB values."
+   },
+   "workload_control": {
+    "status": "qualitative",
+    "unit": "operator · tenants · mixed",
+    "register_says": "Flexibility is offered only by whoever runs the workloads: single-owner or hyperscale operator can shift its own computing; in colocation the building operator controls power and cooling, not tenants' computing. Crozier & Liska 2025: no single flexible share."
+   },
+   "computing_served": {
+    "status": "qualitative",
+    "unit": "text",
+    "register_says": "Up to four statements, no score: federal Protected B and above stored in Canada (gcDataResidency, archived — history); BC FOIPPA s. 33.1 assessment for public bodies (context); Alberta no rule found; Vancouver exchanges 158 participants across three (78 + 64 + 16, isocPulseIXP), Edmonton YEGIX 9; residency ≠ sovereignty."
+   },
+   "heat_flux_site": {
+    "status": "computed",
+    "unit": "W/m²",
+    "how": "facility peak W ÷ lot area",
+    "low": 1622.2664,
+    "high": 1796.0807,
+    "extra": {
+     "high_over_allen119": 15.0931
+    }
+   },
+   "heat_plume_dT": {
+    "status": "not computable (needs plant airflow and air_screen_1h)",
+    "unit": "°C",
+    "how": "needs airflow and plume factor"
+   },
+   "genset_emission_rate": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "g/s NOx",
+    "how": "14.6 g/kWh × facility peak kW ÷ 3,600, all sets at full load",
+    "low": 57.9133,
+    "high": 64.1183,
+    "extra": {
+     "check_2000kWe": 8.1111
+    }
+   },
+   "air_screen_1h": {
+    "status": "not computable (σy, σz and stack height not stated)",
+    "unit": "µg/m³",
+    "how": "Gaussian screen"
+   },
+   "no2_at_receptor": {
+    "status": "not computable (needs air_screen_1h)",
+    "unit": "µg/m³",
+    "how": "NOx × 1.0 / 0.9–0.2"
+   },
+   "free_cooling_hours_2050s": {
+    "status": "computed",
+    "unit": "h/yr",
+    "how": "PCIC 2050s: hours ≤ 8 °C under SSP5-8.5 (low) to air-side at 27 °C inlet under SSP2-4.5 (high)",
+    "low": 4815,
+    "high": 8484,
+    "extra": {
+     "le8_now_245_585": [
+      5522,
+      5047,
+      4815
+     ],
+     "air18_245_585": [
+      7165,
+      6952
+     ],
+     "gt18_now_245_585": [
+      914,
+      1259,
+      1479
+     ],
+     "ge30_245_585": [
+      22,
+      71
+     ],
+     "peak_C_now_245_585": [
+      29,
+      31.9,
+      33.3
+     ]
+    }
+   },
+   "condensate": {
+    "status": "computed (hours only)",
+    "unit": "h/yr (dew point > 15 °C)",
+    "how": "CWEC hours with dew point > 15 °C; condensate yield not sourced",
+    "value": 117
+   },
+   "stormwater_volume": {
+    "status": "computed (upper bound: whole lot non-landscaped)",
+    "unit": "m³",
+    "how": "Van 15 mm × lot (stage 1); Edm 375–507 m³/ha",
+    "low": 330.0938,
+    "high": 446.2867,
+    "extra": {
+     "release_L_per_s": 30.8087
+    }
+   },
+   "security_layers": {
+    "status": "qualitative",
+    "unit": "count",
+    "register_says": "One site visit (VAN3, tourVAN3, conf 40): 4 controlled doors passed (gate intercom, buzzed front door, vestibule-to-lobby door, single-person portal), then each tenant's enclosure (5 to the servers, guide's account). Cologix lists ISO 27001 and SOC 2 Type 2 (claims). Not lot data."
+   }
+  },
+  "CLARK": {
+   "_lot": {
+    "label": "1425 Clark Dr",
+    "city": "van",
+    "parcel_id": "23060741",
+    "it_mw": 5.2
+   },
+   "heat_rejected": {
+    "status": "computed",
+    "unit": "MWh/yr",
+    "how": "facility electricity = IT × 0.6 × PUE 1.4–1.55 × 8,760 (heat ≈ electricity drawn)",
+    "low": 38263.68,
+    "high": 42363.36,
+    "extra": {
+     "peak_MW": [
+      7.28,
+      8.06
+     ],
+     "it_energy_MWh": 27331.2
+    }
+   },
+   "heat_temp": {
+    "status": "computed (register lookup; cooling type is size stage)",
+    "unit": "°C",
+    "how": "two runs: air-cooled 25–35, liquid-cooled 50–60 (liquid unverified; NREL measured return 35–40)",
+    "low": 25,
+    "high": 60,
+    "extra": {
+     "air_C": [
+      25,
+      35
+     ],
+     "liquid_C_unverified": [
+      50,
+      60
+     ],
+     "liquid_measured_return_hi_C": 40
+    }
+   },
+   "liquid_capture": {
+    "status": "computed (register lookup, liquid run only)",
+    "unit": "share",
+    "how": "cold plate 0.5–0.8 (no primary for the band); immersion 1.0; air-cooled not stated (?)",
+    "low": 0.5,
+    "high": 0.8,
+    "extra": {
+     "immersion": 1,
+     "air": "not stated (?): coef \"no capture share for a whole air-cooled hall\""
+    }
+   },
+   "cop": {
+    "status": "not computable (needs receiver_temp: set by receiver type, match stage); register range shown",
+    "unit": "—",
+    "how": "register tool range 3.0–4.5 carried downstream; Lorenz check for Odense in extra",
+    "low": null,
+    "high": null,
+    "extra": {
+     "lorenz_odense_eta050": 4.5587,
+     "lorenz_odense_eta040": 3.647,
+     "reference_shown": [
+      3,
+      4.5
+     ]
+    }
+   },
+   "heat_captured": {
+    "status": "computed (liquid-cooled run)",
+    "unit": "MWh/yr",
+    "how": "heat_rejected × cold-plate share 0.5–0.8 (liquid-cooled run); air-cooled not computable",
+    "low": 19131.84,
+    "high": 33890.688,
+    "extra": {
+     "immersion_MWh": 42363.36,
+     "it_heat_only_hi_MWh": 21864.96
+    }
+   },
+   "heat_delivered": {
+    "status": "computed (COP from register range)",
+    "unit": "MWh/yr available",
+    "how": "E_reuse × COP ÷ (COP − 1), COP 4.5 (low) to 3.0 (high); receiver demand not applied",
+    "low": 24598.08,
+    "high": 50836.032
+   },
+   "hp_electricity": {
+    "status": "computed (COP from register range)",
+    "unit": "MWh/yr",
+    "how": "Q_out ÷ COP (4.5 low, 3.0 high)",
+    "low": 5466.24,
+    "high": 16945.344
+   },
+   "erf": {
+    "status": "computed",
+    "unit": "—",
+    "how": "E_reuse ÷ E_DC (= heat_rejected); collapses to the capture share by construction",
+    "low": 0.5,
+    "high": 0.8
+   },
+   "heat_in_water": {
+    "status": "computed (coefficient check; no lot input)",
+    "unit": "kWh per m³·K",
+    "how": "coefficient only: 4.18 × 1,000 ÷ 3,600 (low) vs register 1.16 (high); no lot volume or ΔT named",
+    "low": 1.1611,
+    "high": 1.16
+   },
+   "free_cooling_hours": {
+    "status": "computed",
+    "unit": "h/yr",
+    "how": "CWEC hours ≤ 8 °C (full free cooling, air-cooled hall) to air-side at 27 °C inlet (≤ 25.5 °C); ≤ counts match the register, the formula text says <",
+    "low": 3284,
+    "high": 8759,
+    "extra": {
+     "air_18_21_24_27": [
+      7109,
+      8086,
+      8645,
+      8759
+     ],
+     "dry_cooler_30_40": [
+      7675,
+      8760
+     ],
+     "strict_lt_air18": 7064
+    }
+   },
+   "pue": {
+    "status": "computed (register values)",
+    "unit": "—",
+    "how": "register range 1.4–1.55 (estimate + industry survey)",
+    "low": 1.4,
+    "high": 1.55
+   },
+   "spare_capacity": {
+    "status": "not computable (needs size stage: installed capacity and redundancy); conditional 2N value shown",
+    "unit": "MW",
+    "how": "only the conditional \"if 2N, spare = peak\" (our arithmetic); installed capacity is size stage",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      7.28,
+      8.06
+     ]
+    }
+   },
+   "backup_hours": {
+    "status": "computed (register values only; battery kWh and fuel stored are size stage)",
+    "unit": "h (fuel)",
+    "how": "register ranges: fuel 12 h (Uptime minimum) to 48 h (operator claims); UPS 1–15 min (vendor claims) in extra",
+    "low": 12,
+    "high": 48,
+    "extra": {
+     "ups_h": [
+      0.0167,
+      0.25
+     ]
+    }
+   },
+   "flexible_load": {
+    "status": "computed",
+    "unit": "MW·h per event",
+    "how": "it_load_actual × 10 % × 4 h (Call for Demand) to × 25 % × 3 h (Emerald preprint, claim)",
+    "low": 1.248,
+    "high": 2.34
+   },
+   "load_factor": {
+    "status": "computed (register value)",
+    "unit": "—",
+    "how": "Fan et al. 2007 (one 2007 site)",
+    "value": 0.6
+   },
+   "evaporation": {
+    "status": "computed (upper bound)",
+    "unit": "L/yr",
+    "how": "upper bound: heat_rejected ÷ 2,400 kJ/kg (all heat evaporated; dry cooling gives 0)",
+    "low": 57395520,
+    "high": 63545040
+   },
+   "blowdown": {
+    "status": "computed (upper bound; C from femp example)",
+    "unit": "L/yr make-up",
+    "how": "make-up = E + E ÷ (C − 1), C 6 (low) to 3 (high) from the femp example; blowdown in extra",
+    "low": 68874624,
+    "high": 95317560,
+    "extra": {
+     "blowdown_L": [
+      11479104,
+      31772520
+     ],
+     "evaporation_L": [
+      57395520,
+      63545040
+     ],
+     "femp_check_cut": 0.2
+    }
+   },
+   "wue": {
+    "status": "computed (upper bound)",
+    "unit": "L/kWh",
+    "how": "make-up ÷ E_IT (evaporative upper bound)",
+    "low": 2.52,
+    "high": 3.4875,
+    "extra": {
+     "low_over_DCRE_cap": 1.26
+    }
+   },
+   "water_behind_electricity": {
+    "status": "computed",
+    "unit": "L/yr",
+    "how": "facility MWh × 1.25 L/kWh (thermo) to × 16.8 (hydro, Vancouver only); Alberta 1.25 both ends",
+    "low": 47829600,
+    "high": 711704448
+   },
+   "rainwater": {
+    "status": "computed (existing roofs)",
+    "unit": "m³/yr",
+    "how": "existing roofs (footprint) × rainfall–precipitation (ECCC 1991–2020) × 0.8",
+    "low": 1758.0394,
+    "high": 1821.3426,
+    "extra": {
+     "roof_m2": 1963.5
+    }
+   },
+   "grid_co2": {
+    "status": "computed",
+    "unit": "t CO2e/yr",
+    "how": "facility MWh × NIR 2024 consumption intensity (BC 18.1, AB 346.1 g/kWh); Alberta displacement factor and heat-pump share in extra",
+    "low": 691.1951,
+    "high": 765.2517,
+    "extra": {
+     "ab_displacement_t": [
+      "n/a: BC publishes no marginal factor",
+      "n/a: BC publishes no marginal factor"
+     ],
+     "heat_pump_t": [
+      98.7422,
+      306.1007
+     ]
+    }
+   },
+   "generator_co2": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "t CO2/yr",
+    "how": "test kWh (facility peak kW × 4–14.5 h) × 0.263 L/kWh × 2.681 kg/L",
+    "low": 20.5326,
+    "high": 82.4054,
+    "extra": {
+     "litres": [
+      7658.56,
+      30736.81
+     ],
+     "g_per_kWh_check": 705.103,
+     "manor_farm_564h_t": 2895.0965,
+     "generator_kW_lower_bound": [
+      7280,
+      8060
+     ]
+    }
+   },
+   "generator_nox_pm": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "kg NOx/yr",
+    "how": "kW ÷ 0.7457 × hours × 0.024 lb/hp·h; PM in extra at 0.43 g/kWh",
+    "low": 425.1129,
+    "high": 1706.1451,
+    "extra": {
+     "pm_kg": [
+      12.5216,
+      50.2541
+     ],
+     "nox_g_per_kWh_check": 14.5987
+    }
+   },
+   "refrigerant_co2e": {
+    "status": "not computable (needs size stage: chiller count and charge; refrigerant GWP not stated)",
+    "unit": "t CO2e/yr",
+    "how": "charge × 3 %/yr × GWP"
+   },
+   "embodied_it": {
+    "status": "not computable (needs size stage: server count); per-server value shown",
+    "unit": "kg CO2e/yr per server",
+    "how": "per server only: 4,177 kg (claim) × 10–15 % ÷ 4 yr",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      104.425,
+      156.6375
+     ]
+    }
+   },
+   "embodied_building": {
+    "status": "not computable (needs size stage: floor area)",
+    "unit": "t CO2e",
+    "how": "floor area × 400–461 kg/m²"
+   },
+   "noise_level": {
+    "status": "computed (screening; plant schedule is size stage)",
+    "unit": "dBA at nearest residential parcel",
+    "how": "Lw 98–101 dBA per unit (Trane, claim), one unit per MW (IT to facility peak), Lw + 10·log10 n − 20·log10 r − 8; r = lot edge to parcel edge",
+    "low": 60.9668,
+    "high": 65.7278,
+    "extra": {
+     "units": [
+      6,
+      9
+     ],
+     "combined_Lw": [
+      105.7815,
+      110.5424
+     ],
+     "receptor_m": 69.3
+    }
+   },
+   "lf_flag": {
+    "status": "not computable (needs plant spectra)",
+    "unit": "—",
+    "how": "dBC − dBA ≥ 20 dB and tone 20–250 Hz → +5 dBA (benchmark)"
+   },
+   "light_at_window": {
+    "status": "not computable (needs lighting plan)",
+    "unit": "lx",
+    "how": "vertical illuminance vs 10 / 2 lx (benchmark, unverified)"
+   },
+   "shadow": {
+    "status": "not computable (needs size stage: massing)",
+    "unit": "m²·h",
+    "how": "fall-equinox shadows 10:00–16:00 (benchmark)"
+   },
+   "ground": {
+    "status": "not computable (GWELLS export not in data/; Edmonton reports by ATS section)",
+    "unit": "ft, USgpm, m²/d",
+    "how": "nearest N wells: register gives Vancouver area stats only (333 wells, depth median 59 ft)"
+   },
+   "visibility": {
+    "status": "qualitative",
+    "unit": "ledger",
+    "register_says": "Ledger per plant element: seen from public space / closed to view / known only from documents / not checked (fieldJB site fact; vanPermits for the documents column). Field observation, not lot data."
+   },
+   "watched_area": {
+    "status": "qualitative",
+    "unit": "m; count",
+    "register_says": "Visible cameras and signs; indicative watched area past the lot line; first-person account labelled as one person's. fieldJB notes support counts and description, not metres. Never a guide to coverage gaps."
+   },
+   "jobs": {
+    "status": "computed (per-MW claim route)",
+    "unit": "FTE",
+    "how": "IT MW × 50–100 jobs ÷ 28 MW (Ark UP4 applicant claim); floor-area route needs size stage",
+    "low": 9.2857,
+    "high": 18.5714,
+    "extra": {
+     "m2_per_job_check": [
+      154.1,
+      308.2
+     ]
+    }
+   },
+   "treatment_energy": {
+    "status": "computed (upper bound: recovery share is a register gap)",
+    "unit": "kWh/yr",
+    "how": "MIN(greywater within 200–500 m, make-up) × 0.75–1.1 kWh/m³ (Arden 2021; register has no page/table)",
+    "low": 12153,
+    "high": 104849.316,
+    "extra": {
+     "all_makeup_mixed_hi_kWh": 122006.4768
+    }
+   },
+   "blowdown_recovery": {
+    "status": "computed (single US test)",
+    "unit": "L/yr recovered",
+    "how": "blowdown × 0.53; make-up × 0.84 and 3,541 kWh per skid in extra",
+    "low": 6083925.12,
+    "high": 16839435.6,
+    "extra": {
+     "makeup_after_L": [
+      57854684.16,
+      80066750.4
+     ],
+     "kWh_per_skid": 3541,
+     "implied_cuts_2.8_to_4.9": [
+      0.1923,
+      0.5385
+     ]
+    }
+   },
+   "pv_roof": {
+    "status": "not computable (needs size stage: roof layout); per-m² value shown",
+    "unit": "kWh/yr per m² of panel",
+    "how": "per m² only: 0.16–0.20 kWp/m² × NRCan horizontal–latitude yield",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      142.72,
+      201.4
+     ]
+    }
+   },
+   "pv_facade": {
+    "status": "not computable (needs size stage: south facade area); per-m² value shown",
+    "unit": "kWh/yr per m² of facade",
+    "how": "per m² only: 0.16–0.20 kWp/m² × NRCan vertical yield",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      114.56,
+      143.2
+     ]
+    }
+   },
+   "genset_test": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "t CO2/yr",
+    "how": "test kWh × 706 g CO2 / 14.6 g NOx / 0.43 g PM per kWh (AP-42 upper bounds)",
+    "low": 20.5587,
+    "high": 82.5102,
+    "extra": {
+     "nox_kg": [
+      425.152,
+      1706.302
+     ],
+     "pm_kg": [
+      12.5216,
+      50.2541
+     ],
+     "test_kWh": [
+      29120,
+      116870
+     ],
+     "test_hours_check": 14.5
+    }
+   },
+   "hvo_swap": {
+    "status": "not computable (fossil diesel reference CI not stated)",
+    "unit": "g CO2e/MJ",
+    "how": "Δ = fuel energy × (CI diesel − CI RD)"
+   },
+   "fuel_on_site": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "L",
+    "how": "facility peak kW × 12–48 h × 0.263 L/kWh (claim); vs NFC 200,000 L per first-storey room",
+    "low": 22975.68,
+    "high": 101749.44,
+    "extra": {
+     "first_storey_rooms": [
+      1,
+      1
+     ],
+     "upper_storey_rooms_hi": 6,
+     "m3_per_MW_24h_check": 6.312
+    }
+   },
+   "vibration_rank": {
+    "status": "qualitative",
+    "unit": "rank",
+    "register_says": "Qualitative rank, slab on grade → long-span upper floor. VBBL 2019 / BCBC 2018 ASTC 47 (STC 55 by elevator shafts) are airborne only; isolator deflection rises with floor span (VA spec citing ASHRAE). No dB values."
+   },
+   "workload_control": {
+    "status": "qualitative",
+    "unit": "operator · tenants · mixed",
+    "register_says": "Flexibility is offered only by whoever runs the workloads: single-owner or hyperscale operator can shift its own computing; in colocation the building operator controls power and cooling, not tenants' computing. Crozier & Liska 2025: no single flexible share."
+   },
+   "computing_served": {
+    "status": "qualitative",
+    "unit": "text",
+    "register_says": "Up to four statements, no score: federal Protected B and above stored in Canada (gcDataResidency, archived — history); BC FOIPPA s. 33.1 assessment for public bodies (context); Alberta no rule found; Vancouver exchanges 158 participants across three (78 + 64 + 16, isocPulseIXP), Edmonton YEGIX 9; residency ≠ sovereignty."
+   },
+   "heat_flux_site": {
+    "status": "computed",
+    "unit": "W/m²",
+    "how": "facility peak W ÷ lot area",
+    "low": 1237.0223,
+    "high": 1369.5604,
+    "extra": {
+     "high_over_allen119": 11.5089
+    }
+   },
+   "heat_plume_dT": {
+    "status": "not computable (needs plant airflow and air_screen_1h)",
+    "unit": "°C",
+    "how": "needs airflow and plume factor"
+   },
+   "genset_emission_rate": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "g/s NOx",
+    "how": "14.6 g/kWh × facility peak kW ÷ 3,600, all sets at full load",
+    "low": 29.5244,
+    "high": 32.6878,
+    "extra": {
+     "check_2000kWe": 8.1111
+    }
+   },
+   "air_screen_1h": {
+    "status": "not computable (σy, σz and stack height not stated)",
+    "unit": "µg/m³",
+    "how": "Gaussian screen"
+   },
+   "no2_at_receptor": {
+    "status": "not computable (needs air_screen_1h)",
+    "unit": "µg/m³",
+    "how": "NOx × 1.0 / 0.9–0.2"
+   },
+   "free_cooling_hours_2050s": {
+    "status": "computed",
+    "unit": "h/yr",
+    "how": "PCIC 2050s: hours ≤ 8 °C under SSP5-8.5 (low) to air-side at 27 °C inlet under SSP2-4.5 (high)",
+    "low": 1954,
+    "high": 8702,
+    "extra": {
+     "le8_now_245_585": [
+      3284,
+      2279,
+      1954
+     ],
+     "air18_245_585": [
+      6246,
+      5975
+     ],
+     "gt18_now_245_585": [
+      1085,
+      1879,
+      2218
+     ],
+     "ge30_245_585": [
+      0,
+      0
+     ],
+     "peak_C_now_245_585": [
+      25.6,
+      27.6,
+      28.6
+     ]
+    }
+   },
+   "condensate": {
+    "status": "computed (hours only)",
+    "unit": "h/yr (dew point > 15 °C)",
+    "how": "CWEC hours with dew point > 15 °C; condensate yield not sourced",
+    "value": 417
+   },
+   "stormwater_volume": {
+    "status": "computed (upper bound: whole lot non-landscaped)",
+    "unit": "m³",
+    "how": "Van 15 mm × lot (stage 1); Edm 375–507 m³/ha",
+    "low": 88.2765,
+    "high": 88.2765,
+    "extra": {
+     "release_L_per_s": 2.9426
+    }
+   },
+   "security_layers": {
+    "status": "qualitative",
+    "unit": "count",
+    "register_says": "One site visit (VAN3, tourVAN3, conf 40): 4 controlled doors passed (gate intercom, buzzed front door, vestibule-to-lobby door, single-person portal), then each tenant's enclosure (5 to the servers, guide's account). Cologix lists ISO 27001 and SOC 2 Type 2 (claims). Not lot data."
+   }
+  },
+  "E123": {
+   "_lot": {
+    "label": "12603 123 Street NW",
+    "city": "edm",
+    "parcel_id": "883345",
+    "it_mw": 22.2
+   },
+   "heat_rejected": {
+    "status": "computed",
+    "unit": "MWh/yr",
+    "how": "facility electricity = IT × 0.6 × PUE 1.4–1.55 × 8,760 (heat ≈ electricity drawn)",
+    "low": 163356.48,
+    "high": 180858.96,
+    "extra": {
+     "peak_MW": [
+      31.08,
+      34.41
+     ],
+     "it_energy_MWh": 116683.2
+    }
+   },
+   "heat_temp": {
+    "status": "computed (register lookup; cooling type is size stage)",
+    "unit": "°C",
+    "how": "two runs: air-cooled 25–35, liquid-cooled 50–60 (liquid unverified; NREL measured return 35–40)",
+    "low": 25,
+    "high": 60,
+    "extra": {
+     "air_C": [
+      25,
+      35
+     ],
+     "liquid_C_unverified": [
+      50,
+      60
+     ],
+     "liquid_measured_return_hi_C": 40
+    }
+   },
+   "liquid_capture": {
+    "status": "computed (register lookup, liquid run only)",
+    "unit": "share",
+    "how": "cold plate 0.5–0.8 (no primary for the band); immersion 1.0; air-cooled not stated (?)",
+    "low": 0.5,
+    "high": 0.8,
+    "extra": {
+     "immersion": 1,
+     "air": "not stated (?): coef \"no capture share for a whole air-cooled hall\""
+    }
+   },
+   "cop": {
+    "status": "not computable (needs receiver_temp: set by receiver type, match stage); register range shown",
+    "unit": "—",
+    "how": "register tool range 3.0–4.5 carried downstream; Lorenz check for Odense in extra",
+    "low": null,
+    "high": null,
+    "extra": {
+     "lorenz_odense_eta050": 4.5587,
+     "lorenz_odense_eta040": 3.647,
+     "reference_shown": [
+      3,
+      4.5
+     ]
+    }
+   },
+   "heat_captured": {
+    "status": "computed (liquid-cooled run)",
+    "unit": "MWh/yr",
+    "how": "heat_rejected × cold-plate share 0.5–0.8 (liquid-cooled run); air-cooled not computable",
+    "low": 81678.24,
+    "high": 144687.168,
+    "extra": {
+     "immersion_MWh": 180858.96,
+     "it_heat_only_hi_MWh": 93346.56
+    }
+   },
+   "heat_delivered": {
+    "status": "computed (COP from register range)",
+    "unit": "MWh/yr available",
+    "how": "E_reuse × COP ÷ (COP − 1), COP 4.5 (low) to 3.0 (high); receiver demand not applied",
+    "low": 105014.88,
+    "high": 217030.752
+   },
+   "hp_electricity": {
+    "status": "computed (COP from register range)",
+    "unit": "MWh/yr",
+    "how": "Q_out ÷ COP (4.5 low, 3.0 high)",
+    "low": 23336.64,
+    "high": 72343.584
+   },
+   "erf": {
+    "status": "computed",
+    "unit": "—",
+    "how": "E_reuse ÷ E_DC (= heat_rejected); collapses to the capture share by construction",
+    "low": 0.5,
+    "high": 0.8
+   },
+   "heat_in_water": {
+    "status": "computed (coefficient check; no lot input)",
+    "unit": "kWh per m³·K",
+    "how": "coefficient only: 4.18 × 1,000 ÷ 3,600 (low) vs register 1.16 (high); no lot volume or ΔT named",
+    "low": 1.1611,
+    "high": 1.16
+   },
+   "free_cooling_hours": {
+    "status": "computed",
+    "unit": "h/yr",
+    "how": "CWEC hours ≤ 8 °C (full free cooling, air-cooled hall) to air-side at 27 °C inlet (≤ 25.5 °C); ≤ counts match the register, the formula text says <",
+    "low": 5522,
+    "high": 8661,
+    "extra": {
+     "air_18_21_24_27": [
+      7614,
+      8046,
+      8412,
+      8661
+     ],
+     "dry_cooler_30_40": [
+      7846,
+      8754
+     ],
+     "strict_lt_air18": 7598
+    }
+   },
+   "pue": {
+    "status": "computed (register values)",
+    "unit": "—",
+    "how": "register range 1.4–1.55 (estimate + industry survey)",
+    "low": 1.4,
+    "high": 1.55
+   },
+   "spare_capacity": {
+    "status": "not computable (needs size stage: installed capacity and redundancy); conditional 2N value shown",
+    "unit": "MW",
+    "how": "only the conditional \"if 2N, spare = peak\" (our arithmetic); installed capacity is size stage",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      31.08,
+      34.41
+     ]
+    }
+   },
+   "backup_hours": {
+    "status": "computed (register values only; battery kWh and fuel stored are size stage)",
+    "unit": "h (fuel)",
+    "how": "register ranges: fuel 12 h (Uptime minimum) to 48 h (operator claims); UPS 1–15 min (vendor claims) in extra",
+    "low": 12,
+    "high": 48,
+    "extra": {
+     "ups_h": [
+      0.0167,
+      0.25
+     ]
+    }
+   },
+   "flexible_load": {
+    "status": "computed",
+    "unit": "MW·h per event",
+    "how": "it_load_actual × 10 % × 4 h (Call for Demand) to × 25 % × 3 h (Emerald preprint, claim)",
+    "low": 5.328,
+    "high": 9.99
+   },
+   "load_factor": {
+    "status": "computed (register value)",
+    "unit": "—",
+    "how": "Fan et al. 2007 (one 2007 site)",
+    "value": 0.6
+   },
+   "evaporation": {
+    "status": "computed (upper bound)",
+    "unit": "L/yr",
+    "how": "upper bound: heat_rejected ÷ 2,400 kJ/kg (all heat evaporated; dry cooling gives 0)",
+    "low": 245034720,
+    "high": 271288440
+   },
+   "blowdown": {
+    "status": "computed (upper bound; C from femp example)",
+    "unit": "L/yr make-up",
+    "how": "make-up = E + E ÷ (C − 1), C 6 (low) to 3 (high) from the femp example; blowdown in extra",
+    "low": 294041664,
+    "high": 406932660,
+    "extra": {
+     "blowdown_L": [
+      49006944,
+      135644220
+     ],
+     "evaporation_L": [
+      245034720,
+      271288440
+     ],
+     "femp_check_cut": 0.2
+    }
+   },
+   "wue": {
+    "status": "computed (upper bound)",
+    "unit": "L/kWh",
+    "how": "make-up ÷ E_IT (evaporative upper bound)",
+    "low": 2.52,
+    "high": 3.4875,
+    "extra": {
+     "low_over_DCRE_cap": 1.26
+    }
+   },
+   "water_behind_electricity": {
+    "status": "computed",
+    "unit": "L/yr",
+    "how": "facility MWh × 1.25 L/kWh (thermo) to × 16.8 (hydro, Vancouver only); Alberta 1.25 both ends",
+    "low": 204195600,
+    "high": 226073700
+   },
+   "rainwater": {
+    "status": "computed (existing roofs)",
+    "unit": "m³/yr",
+    "how": "existing roofs (footprint) × rainfall–precipitation (ECCC 1991–2020) × 0.8",
+    "low": 1523.131,
+    "high": 1954.2146,
+    "extra": {
+     "roof_m2": 5781.7
+    }
+   },
+   "grid_co2": {
+    "status": "computed",
+    "unit": "t CO2e/yr",
+    "how": "facility MWh × NIR 2024 consumption intensity (BC 18.1, AB 346.1 g/kWh); Alberta displacement factor and heat-pump share in extra",
+    "low": 56538.0044,
+    "high": 62595.6478,
+    "extra": {
+     "ab_displacement_t": [
+      70292.2933,
+      82978.0908
+     ],
+     "heat_pump_t": [
+      8076.8578,
+      25038.2591
+     ]
+    }
+   },
+   "generator_co2": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "t CO2/yr",
+    "how": "test kWh (facility peak kW × 4–14.5 h) × 0.263 L/kWh × 2.681 kg/L",
+    "low": 87.6584,
+    "high": 351.8076,
+    "extra": {
+     "litres": [
+      32696.16,
+      131222.535
+     ],
+     "g_per_kWh_check": 705.103,
+     "manor_farm_564h_t": 12359.8351,
+     "generator_kW_lower_bound": [
+      31080,
+      34410
+     ]
+    }
+   },
+   "generator_nox_pm": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "kg NOx/yr",
+    "how": "kW ÷ 0.7457 × hours × 0.024 lb/hp·h; PM in extra at 0.43 g/kWh",
+    "low": 1814.9051,
+    "high": 7283.9271,
+    "extra": {
+     "pm_kg": [
+      53.4576,
+      214.5463
+     ],
+     "nox_g_per_kWh_check": 14.5987
+    }
+   },
+   "refrigerant_co2e": {
+    "status": "not computable (needs size stage: chiller count and charge; refrigerant GWP not stated)",
+    "unit": "t CO2e/yr",
+    "how": "charge × 3 %/yr × GWP"
+   },
+   "embodied_it": {
+    "status": "not computable (needs size stage: server count); per-server value shown",
+    "unit": "kg CO2e/yr per server",
+    "how": "per server only: 4,177 kg (claim) × 10–15 % ÷ 4 yr",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      104.425,
+      156.6375
+     ]
+    }
+   },
+   "embodied_building": {
+    "status": "not computable (needs size stage: floor area)",
+    "unit": "t CO2e",
+    "how": "floor area × 400–461 kg/m²"
+   },
+   "noise_level": {
+    "status": "computed (screening; plant schedule is size stage)",
+    "unit": "dBA at nearest residential parcel",
+    "how": "Lw 98–101 dBA per unit (Trane, claim), one unit per MW (IT to facility peak), Lw + 10·log10 n − 20·log10 r − 8; r = lot edge to parcel edge",
+    "low": 59.9462,
+    "high": 64.7696,
+    "extra": {
+     "units": [
+      23,
+      35
+     ],
+     "combined_Lw": [
+      111.6173,
+      116.4407
+     ],
+     "receptor_m": 152.6
+    }
+   },
+   "lf_flag": {
+    "status": "not computable (needs plant spectra)",
+    "unit": "—",
+    "how": "dBC − dBA ≥ 20 dB and tone 20–250 Hz → +5 dBA (benchmark)"
+   },
+   "light_at_window": {
+    "status": "not computable (needs lighting plan)",
+    "unit": "lx",
+    "how": "vertical illuminance vs 10 / 2 lx (benchmark, unverified)"
+   },
+   "shadow": {
+    "status": "not computable (needs size stage: massing)",
+    "unit": "m²·h",
+    "how": "fall-equinox shadows 10:00–16:00 (benchmark)"
+   },
+   "ground": {
+    "status": "not computable (GWELLS export not in data/; Edmonton reports by ATS section)",
+    "unit": "ft, USgpm, m²/d",
+    "how": "nearest N wells: register gives Vancouver area stats only (333 wells, depth median 59 ft)"
+   },
+   "visibility": {
+    "status": "qualitative",
+    "unit": "ledger",
+    "register_says": "Ledger per plant element: seen from public space / closed to view / known only from documents / not checked (fieldJB site fact; vanPermits for the documents column). Field observation, not lot data."
+   },
+   "watched_area": {
+    "status": "qualitative",
+    "unit": "m; count",
+    "register_says": "Visible cameras and signs; indicative watched area past the lot line; first-person account labelled as one person's. fieldJB notes support counts and description, not metres. Never a guide to coverage gaps."
+   },
+   "jobs": {
+    "status": "computed (per-MW claim route)",
+    "unit": "FTE",
+    "how": "IT MW × 50–100 jobs ÷ 28 MW (Ark UP4 applicant claim); floor-area route needs size stage",
+    "low": 39.6429,
+    "high": 79.2857,
+    "extra": {
+     "m2_per_job_check": [
+      154.1,
+      308.2
+     ]
+    }
+   },
+   "treatment_energy": {
+    "status": "computed (upper bound: recovery share is a register gap)",
+    "unit": "kWh/yr",
+    "how": "MIN(greywater within 200–500 m, make-up) × 0.75–1.1 kWh/m³ (Arden 2021; register has no page/table)",
+    "low": 5687.25,
+    "high": 51426.1,
+    "extra": {
+     "all_makeup_mixed_hi_kWh": 520873.8048
+    }
+   },
+   "blowdown_recovery": {
+    "status": "computed (single US test)",
+    "unit": "L/yr recovered",
+    "how": "blowdown × 0.53; make-up × 0.84 and 3,541 kWh per skid in extra",
+    "low": 25973680.32,
+    "high": 71891436.6,
+    "extra": {
+     "makeup_after_L": [
+      246994997.76,
+      341823434.4
+     ],
+     "kWh_per_skid": 3541,
+     "implied_cuts_2.8_to_4.9": [
+      0.1923,
+      0.5385
+     ]
+    }
+   },
+   "pv_roof": {
+    "status": "not computable (needs size stage: roof layout); per-m² value shown",
+    "unit": "kWh/yr per m² of panel",
+    "how": "per m² only: 0.16–0.20 kWp/m² × NRCan horizontal–latitude yield",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      151.04,
+      248.8
+     ]
+    }
+   },
+   "pv_facade": {
+    "status": "not computable (needs size stage: south facade area); per-m² value shown",
+    "unit": "kWh/yr per m² of facade",
+    "how": "per m² only: 0.16–0.20 kWp/m² × NRCan vertical yield",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      158.24,
+      197.8
+     ]
+    }
+   },
+   "genset_test": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "t CO2/yr",
+    "how": "test kWh × 706 g CO2 / 14.6 g NOx / 0.43 g PM per kWh (AP-42 upper bounds)",
+    "low": 87.7699,
+    "high": 352.2552,
+    "extra": {
+     "nox_kg": [
+      1815.072,
+      7284.597
+     ],
+     "pm_kg": [
+      53.4576,
+      214.5463
+     ],
+     "test_kWh": [
+      124320,
+      498945
+     ],
+     "test_hours_check": 14.5
+    }
+   },
+   "hvo_swap": {
+    "status": "not computable (fossil diesel reference CI not stated)",
+    "unit": "g CO2e/MJ",
+    "how": "Δ = fuel energy × (CI diesel − CI RD)"
+   },
+   "fuel_on_site": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "L",
+    "how": "facility peak kW × 12–48 h × 0.263 L/kWh (claim); vs NFC 200,000 L per first-storey room",
+    "low": 98088.48,
+    "high": 434391.84,
+    "extra": {
+     "first_storey_rooms": [
+      1,
+      3
+     ],
+     "upper_storey_rooms_hi": 22,
+     "m3_per_MW_24h_check": 6.312
+    }
+   },
+   "vibration_rank": {
+    "status": "qualitative",
+    "unit": "rank",
+    "register_says": "Qualitative rank, slab on grade → long-span upper floor. VBBL 2019 / BCBC 2018 ASTC 47 (STC 55 by elevator shafts) are airborne only; isolator deflection rises with floor span (VA spec citing ASHRAE). No dB values."
+   },
+   "workload_control": {
+    "status": "qualitative",
+    "unit": "operator · tenants · mixed",
+    "register_says": "Flexibility is offered only by whoever runs the workloads: single-owner or hyperscale operator can shift its own computing; in colocation the building operator controls power and cooling, not tenants' computing. Crozier & Liska 2025: no single flexible share."
+   },
+   "computing_served": {
+    "status": "qualitative",
+    "unit": "text",
+    "register_says": "Up to four statements, no score: federal Protected B and above stored in Canada (gcDataResidency, archived — history); BC FOIPPA s. 33.1 assessment for public bodies (context); Alberta no rule found; Vancouver exchanges 158 participants across three (78 + 64 + 16, isocPulseIXP), Edmonton YEGIX 9; residency ≠ sovereignty."
+   },
+   "heat_flux_site": {
+    "status": "computed",
+    "unit": "W/m²",
+    "how": "facility peak W ÷ lot area",
+    "low": 2140.4959,
+    "high": 2369.8347,
+    "extra": {
+     "high_over_allen119": 19.9146
+    }
+   },
+   "heat_plume_dT": {
+    "status": "not computable (needs plant airflow and air_screen_1h)",
+    "unit": "°C",
+    "how": "needs airflow and plume factor"
+   },
+   "genset_emission_rate": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "g/s NOx",
+    "how": "14.6 g/kWh × facility peak kW ÷ 3,600, all sets at full load",
+    "low": 126.0467,
+    "high": 139.5517,
+    "extra": {
+     "check_2000kWe": 8.1111
+    }
+   },
+   "air_screen_1h": {
+    "status": "not computable (σy, σz and stack height not stated)",
+    "unit": "µg/m³",
+    "how": "Gaussian screen"
+   },
+   "no2_at_receptor": {
+    "status": "not computable (needs air_screen_1h)",
+    "unit": "µg/m³",
+    "how": "NOx × 1.0 / 0.9–0.2"
+   },
+   "free_cooling_hours_2050s": {
+    "status": "computed",
+    "unit": "h/yr",
+    "how": "PCIC 2050s: hours ≤ 8 °C under SSP5-8.5 (low) to air-side at 27 °C inlet under SSP2-4.5 (high)",
+    "low": 4815,
+    "high": 8484,
+    "extra": {
+     "le8_now_245_585": [
+      5522,
+      5047,
+      4815
+     ],
+     "air18_245_585": [
+      7165,
+      6952
+     ],
+     "gt18_now_245_585": [
+      914,
+      1259,
+      1479
+     ],
+     "ge30_245_585": [
+      22,
+      71
+     ],
+     "peak_C_now_245_585": [
+      29,
+      31.9,
+      33.3
+     ]
+    }
+   },
+   "condensate": {
+    "status": "computed (hours only)",
+    "unit": "h/yr (dew point > 15 °C)",
+    "how": "CWEC hours with dew point > 15 °C; condensate yield not sourced",
+    "value": 117
+   },
+   "stormwater_volume": {
+    "status": "computed (upper bound: whole lot non-landscaped)",
+    "unit": "m³",
+    "how": "Van 15 mm × lot (stage 1); Edm 375–507 m³/ha",
+    "low": 544.5,
+    "high": 736.164,
+    "extra": {
+     "release_L_per_s": 50.82
+    }
+   },
+   "security_layers": {
+    "status": "qualitative",
+    "unit": "count",
+    "register_says": "One site visit (VAN3, tourVAN3, conf 40): 4 controlled doors passed (gate intercom, buzzed front door, vestibule-to-lobby door, single-person portal), then each tenant's enclosure (5 to the servers, guide's account). Cologix lists ISO 27001 and SOC 2 Type 2 (claims). Not lot data."
+   }
+  },
+  "V339": {
+   "_lot": {
+    "label": "339 1st Ave E",
+    "city": "van",
+    "parcel_id": "63819485",
+    "it_mw": 3.8
+   },
+   "heat_rejected": {
+    "status": "computed",
+    "unit": "MWh/yr",
+    "how": "facility electricity = IT × 0.6 × PUE 1.4–1.55 × 8,760 (heat ≈ electricity drawn)",
+    "low": 27961.92,
+    "high": 30957.84,
+    "extra": {
+     "peak_MW": [
+      5.32,
+      5.89
+     ],
+     "it_energy_MWh": 19972.8
+    }
+   },
+   "heat_temp": {
+    "status": "computed (register lookup; cooling type is size stage)",
+    "unit": "°C",
+    "how": "two runs: air-cooled 25–35, liquid-cooled 50–60 (liquid unverified; NREL measured return 35–40)",
+    "low": 25,
+    "high": 60,
+    "extra": {
+     "air_C": [
+      25,
+      35
+     ],
+     "liquid_C_unverified": [
+      50,
+      60
+     ],
+     "liquid_measured_return_hi_C": 40
+    }
+   },
+   "liquid_capture": {
+    "status": "computed (register lookup, liquid run only)",
+    "unit": "share",
+    "how": "cold plate 0.5–0.8 (no primary for the band); immersion 1.0; air-cooled not stated (?)",
+    "low": 0.5,
+    "high": 0.8,
+    "extra": {
+     "immersion": 1,
+     "air": "not stated (?): coef \"no capture share for a whole air-cooled hall\""
+    }
+   },
+   "cop": {
+    "status": "not computable (needs receiver_temp: set by receiver type, match stage); register range shown",
+    "unit": "—",
+    "how": "register tool range 3.0–4.5 carried downstream; Lorenz check for Odense in extra",
+    "low": null,
+    "high": null,
+    "extra": {
+     "lorenz_odense_eta050": 4.5587,
+     "lorenz_odense_eta040": 3.647,
+     "reference_shown": [
+      3,
+      4.5
+     ]
+    }
+   },
+   "heat_captured": {
+    "status": "computed (liquid-cooled run)",
+    "unit": "MWh/yr",
+    "how": "heat_rejected × cold-plate share 0.5–0.8 (liquid-cooled run); air-cooled not computable",
+    "low": 13980.96,
+    "high": 24766.272,
+    "extra": {
+     "immersion_MWh": 30957.84,
+     "it_heat_only_hi_MWh": 15978.24
+    }
+   },
+   "heat_delivered": {
+    "status": "computed (COP from register range)",
+    "unit": "MWh/yr available",
+    "how": "E_reuse × COP ÷ (COP − 1), COP 4.5 (low) to 3.0 (high); receiver demand not applied",
+    "low": 17975.52,
+    "high": 37149.408
+   },
+   "hp_electricity": {
+    "status": "computed (COP from register range)",
+    "unit": "MWh/yr",
+    "how": "Q_out ÷ COP (4.5 low, 3.0 high)",
+    "low": 3994.56,
+    "high": 12383.136
+   },
+   "erf": {
+    "status": "computed",
+    "unit": "—",
+    "how": "E_reuse ÷ E_DC (= heat_rejected); collapses to the capture share by construction",
+    "low": 0.5,
+    "high": 0.8
+   },
+   "heat_in_water": {
+    "status": "computed (coefficient check; no lot input)",
+    "unit": "kWh per m³·K",
+    "how": "coefficient only: 4.18 × 1,000 ÷ 3,600 (low) vs register 1.16 (high); no lot volume or ΔT named",
+    "low": 1.1611,
+    "high": 1.16
+   },
+   "free_cooling_hours": {
+    "status": "computed",
+    "unit": "h/yr",
+    "how": "CWEC hours ≤ 8 °C (full free cooling, air-cooled hall) to air-side at 27 °C inlet (≤ 25.5 °C); ≤ counts match the register, the formula text says <",
+    "low": 3284,
+    "high": 8759,
+    "extra": {
+     "air_18_21_24_27": [
+      7109,
+      8086,
+      8645,
+      8759
+     ],
+     "dry_cooler_30_40": [
+      7675,
+      8760
+     ],
+     "strict_lt_air18": 7064
+    }
+   },
+   "pue": {
+    "status": "computed (register values)",
+    "unit": "—",
+    "how": "register range 1.4–1.55 (estimate + industry survey)",
+    "low": 1.4,
+    "high": 1.55
+   },
+   "spare_capacity": {
+    "status": "not computable (needs size stage: installed capacity and redundancy); conditional 2N value shown",
+    "unit": "MW",
+    "how": "only the conditional \"if 2N, spare = peak\" (our arithmetic); installed capacity is size stage",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      5.32,
+      5.89
+     ]
+    }
+   },
+   "backup_hours": {
+    "status": "computed (register values only; battery kWh and fuel stored are size stage)",
+    "unit": "h (fuel)",
+    "how": "register ranges: fuel 12 h (Uptime minimum) to 48 h (operator claims); UPS 1–15 min (vendor claims) in extra",
+    "low": 12,
+    "high": 48,
+    "extra": {
+     "ups_h": [
+      0.0167,
+      0.25
+     ]
+    }
+   },
+   "flexible_load": {
+    "status": "computed",
+    "unit": "MW·h per event",
+    "how": "it_load_actual × 10 % × 4 h (Call for Demand) to × 25 % × 3 h (Emerald preprint, claim)",
+    "low": 0.912,
+    "high": 1.71
+   },
+   "load_factor": {
+    "status": "computed (register value)",
+    "unit": "—",
+    "how": "Fan et al. 2007 (one 2007 site)",
+    "value": 0.6
+   },
+   "evaporation": {
+    "status": "computed (upper bound)",
+    "unit": "L/yr",
+    "how": "upper bound: heat_rejected ÷ 2,400 kJ/kg (all heat evaporated; dry cooling gives 0)",
+    "low": 41942880,
+    "high": 46436760
+   },
+   "blowdown": {
+    "status": "computed (upper bound; C from femp example)",
+    "unit": "L/yr make-up",
+    "how": "make-up = E + E ÷ (C − 1), C 6 (low) to 3 (high) from the femp example; blowdown in extra",
+    "low": 50331456,
+    "high": 69655140,
+    "extra": {
+     "blowdown_L": [
+      8388576,
+      23218380
+     ],
+     "evaporation_L": [
+      41942880,
+      46436760
+     ],
+     "femp_check_cut": 0.2
+    }
+   },
+   "wue": {
+    "status": "computed (upper bound)",
+    "unit": "L/kWh",
+    "how": "make-up ÷ E_IT (evaporative upper bound)",
+    "low": 2.52,
+    "high": 3.4875,
+    "extra": {
+     "low_over_DCRE_cap": 1.26
+    }
+   },
+   "water_behind_electricity": {
+    "status": "computed",
+    "unit": "L/yr",
+    "how": "facility MWh × 1.25 L/kWh (thermo) to × 16.8 (hydro, Vancouver only); Alberta 1.25 both ends",
+    "low": 34952400,
+    "high": 520091712
+   },
+   "rainwater": {
+    "status": "not computable (no building on the lot; new footprint is size stage)",
+    "unit": "m³/yr",
+    "how": "existing roofs (footprint) × rainfall–precipitation (ECCC 1991–2020) × 0.8",
+    "low": null,
+    "high": null,
+    "extra": {
+     "roof_m2": "not computable (no building on the lot; new footprint is size stage)"
+    }
+   },
+   "grid_co2": {
+    "status": "computed",
+    "unit": "t CO2e/yr",
+    "how": "facility MWh × NIR 2024 consumption intensity (BC 18.1, AB 346.1 g/kWh); Alberta displacement factor and heat-pump share in extra",
+    "low": 505.1041,
+    "high": 559.2224,
+    "extra": {
+     "ab_displacement_t": [
+      "n/a: BC publishes no marginal factor",
+      "n/a: BC publishes no marginal factor"
+     ],
+     "heat_pump_t": [
+      72.1577,
+      223.689
+     ]
+    }
+   },
+   "generator_co2": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "t CO2/yr",
+    "how": "test kWh (facility peak kW × 4–14.5 h) × 0.263 L/kWh × 2.681 kg/L",
+    "low": 15.0046,
+    "high": 60.2193,
+    "extra": {
+     "litres": [
+      5596.64,
+      22461.515
+     ],
+     "g_per_kWh_check": 705.103,
+     "manor_farm_564h_t": 2115.6474,
+     "generator_kW_lower_bound": [
+      5320,
+      5890
+     ]
+    }
+   },
+   "generator_nox_pm": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "kg NOx/yr",
+    "how": "kW ÷ 0.7457 × hours × 0.024 lb/hp·h; PM in extra at 0.43 g/kWh",
+    "low": 310.6594,
+    "high": 1246.7983,
+    "extra": {
+     "pm_kg": [
+      9.1504,
+      36.7242
+     ],
+     "nox_g_per_kWh_check": 14.5987
+    }
+   },
+   "refrigerant_co2e": {
+    "status": "not computable (needs size stage: chiller count and charge; refrigerant GWP not stated)",
+    "unit": "t CO2e/yr",
+    "how": "charge × 3 %/yr × GWP"
+   },
+   "embodied_it": {
+    "status": "not computable (needs size stage: server count); per-server value shown",
+    "unit": "kg CO2e/yr per server",
+    "how": "per server only: 4,177 kg (claim) × 10–15 % ÷ 4 yr",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      104.425,
+      156.6375
+     ]
+    }
+   },
+   "embodied_building": {
+    "status": "not computable (needs size stage: floor area)",
+    "unit": "t CO2e",
+    "how": "floor area × 400–461 kg/m²"
+   },
+   "noise_level": {
+    "status": "computed (screening; plant schedule is size stage)",
+    "unit": "dBA at nearest residential parcel",
+    "how": "Lw 98–101 dBA per unit (Trane, claim), one unit per MW (IT to facility peak), Lw + 10·log10 n − 20·log10 r − 8; r = lot edge to parcel edge",
+    "low": 51.6394,
+    "high": 56.4003,
+    "extra": {
+     "units": [
+      4,
+      6
+     ],
+     "combined_Lw": [
+      104.0206,
+      108.7815
+     ],
+     "receptor_m": 165.6
+    }
+   },
+   "lf_flag": {
+    "status": "not computable (needs plant spectra)",
+    "unit": "—",
+    "how": "dBC − dBA ≥ 20 dB and tone 20–250 Hz → +5 dBA (benchmark)"
+   },
+   "light_at_window": {
+    "status": "not computable (needs lighting plan)",
+    "unit": "lx",
+    "how": "vertical illuminance vs 10 / 2 lx (benchmark, unverified)"
+   },
+   "shadow": {
+    "status": "not computable (needs size stage: massing)",
+    "unit": "m²·h",
+    "how": "fall-equinox shadows 10:00–16:00 (benchmark)"
+   },
+   "ground": {
+    "status": "not computable (GWELLS export not in data/; Edmonton reports by ATS section)",
+    "unit": "ft, USgpm, m²/d",
+    "how": "nearest N wells: register gives Vancouver area stats only (333 wells, depth median 59 ft)"
+   },
+   "visibility": {
+    "status": "qualitative",
+    "unit": "ledger",
+    "register_says": "Ledger per plant element: seen from public space / closed to view / known only from documents / not checked (fieldJB site fact; vanPermits for the documents column). Field observation, not lot data."
+   },
+   "watched_area": {
+    "status": "qualitative",
+    "unit": "m; count",
+    "register_says": "Visible cameras and signs; indicative watched area past the lot line; first-person account labelled as one person's. fieldJB notes support counts and description, not metres. Never a guide to coverage gaps."
+   },
+   "jobs": {
+    "status": "computed (per-MW claim route)",
+    "unit": "FTE",
+    "how": "IT MW × 50–100 jobs ÷ 28 MW (Ark UP4 applicant claim); floor-area route needs size stage",
+    "low": 6.7857,
+    "high": 13.5714,
+    "extra": {
+     "m2_per_job_check": [
+      154.1,
+      308.2
+     ]
+    }
+   },
+   "treatment_energy": {
+    "status": "computed (upper bound: recovery share is a register gap)",
+    "unit": "kWh/yr",
+    "how": "MIN(greywater within 200–500 m, make-up) × 0.75–1.1 kWh/m³ (Arden 2021; register has no page/table)",
+    "low": 20979,
+    "high": 76620.654,
+    "extra": {
+     "all_makeup_mixed_hi_kWh": 89158.5792
+    }
+   },
+   "blowdown_recovery": {
+    "status": "computed (single US test)",
+    "unit": "L/yr recovered",
+    "how": "blowdown × 0.53; make-up × 0.84 and 3,541 kWh per skid in extra",
+    "low": 4445945.28,
+    "high": 12305741.4,
+    "extra": {
+     "makeup_after_L": [
+      42278423.04,
+      58510317.6
+     ],
+     "kWh_per_skid": 3541,
+     "implied_cuts_2.8_to_4.9": [
+      0.1923,
+      0.5385
+     ]
+    }
+   },
+   "pv_roof": {
+    "status": "not computable (needs size stage: roof layout); per-m² value shown",
+    "unit": "kWh/yr per m² of panel",
+    "how": "per m² only: 0.16–0.20 kWp/m² × NRCan horizontal–latitude yield",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      142.72,
+      201.4
+     ]
+    }
+   },
+   "pv_facade": {
+    "status": "not computable (needs size stage: south facade area); per-m² value shown",
+    "unit": "kWh/yr per m² of facade",
+    "how": "per m² only: 0.16–0.20 kWp/m² × NRCan vertical yield",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      114.56,
+      143.2
+     ]
+    }
+   },
+   "genset_test": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "t CO2/yr",
+    "how": "test kWh × 706 g CO2 / 14.6 g NOx / 0.43 g PM per kWh (AP-42 upper bounds)",
+    "low": 15.0237,
+    "high": 60.2959,
+    "extra": {
+     "nox_kg": [
+      310.688,
+      1246.913
+     ],
+     "pm_kg": [
+      9.1504,
+      36.7242
+     ],
+     "test_kWh": [
+      21280,
+      85405
+     ],
+     "test_hours_check": 14.5
+    }
+   },
+   "hvo_swap": {
+    "status": "not computable (fossil diesel reference CI not stated)",
+    "unit": "g CO2e/MJ",
+    "how": "Δ = fuel energy × (CI diesel − CI RD)"
+   },
+   "fuel_on_site": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "L",
+    "how": "facility peak kW × 12–48 h × 0.263 L/kWh (claim); vs NFC 200,000 L per first-storey room",
+    "low": 16789.92,
+    "high": 74355.36,
+    "extra": {
+     "first_storey_rooms": [
+      1,
+      1
+     ],
+     "upper_storey_rooms_hi": 4,
+     "m3_per_MW_24h_check": 6.312
+    }
+   },
+   "vibration_rank": {
+    "status": "qualitative",
+    "unit": "rank",
+    "register_says": "Qualitative rank, slab on grade → long-span upper floor. VBBL 2019 / BCBC 2018 ASTC 47 (STC 55 by elevator shafts) are airborne only; isolator deflection rises with floor span (VA spec citing ASHRAE). No dB values."
+   },
+   "workload_control": {
+    "status": "qualitative",
+    "unit": "operator · tenants · mixed",
+    "register_says": "Flexibility is offered only by whoever runs the workloads: single-owner or hyperscale operator can shift its own computing; in colocation the building operator controls power and cooling, not tenants' computing. Crozier & Liska 2025: no single flexible share."
+   },
+   "computing_served": {
+    "status": "qualitative",
+    "unit": "text",
+    "register_says": "Up to four statements, no score: federal Protected B and above stored in Canada (gcDataResidency, archived — history); BC FOIPPA s. 33.1 assessment for public bodies (context); Alberta no rule found; Vancouver exchanges 158 participants across three (78 + 64 + 16, isocPulseIXP), Edmonton YEGIX 9; residency ≠ sovereignty."
+   },
+   "heat_flux_site": {
+    "status": "computed",
+    "unit": "W/m²",
+    "how": "facility peak W ÷ lot area",
+    "low": 1186.1497,
+    "high": 1313.2372,
+    "extra": {
+     "high_over_allen119": 11.0356
+    }
+   },
+   "heat_plume_dT": {
+    "status": "not computable (needs plant airflow and air_screen_1h)",
+    "unit": "°C",
+    "how": "needs airflow and plume factor"
+   },
+   "genset_emission_rate": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "g/s NOx",
+    "how": "14.6 g/kWh × facility peak kW ÷ 3,600, all sets at full load",
+    "low": 21.5756,
+    "high": 23.8872,
+    "extra": {
+     "check_2000kWe": 8.1111
+    }
+   },
+   "air_screen_1h": {
+    "status": "not computable (σy, σz and stack height not stated)",
+    "unit": "µg/m³",
+    "how": "Gaussian screen"
+   },
+   "no2_at_receptor": {
+    "status": "not computable (needs air_screen_1h)",
+    "unit": "µg/m³",
+    "how": "NOx × 1.0 / 0.9–0.2"
+   },
+   "free_cooling_hours_2050s": {
+    "status": "computed",
+    "unit": "h/yr",
+    "how": "PCIC 2050s: hours ≤ 8 °C under SSP5-8.5 (low) to air-side at 27 °C inlet under SSP2-4.5 (high)",
+    "low": 1954,
+    "high": 8702,
+    "extra": {
+     "le8_now_245_585": [
+      3284,
+      2279,
+      1954
+     ],
+     "air18_245_585": [
+      6246,
+      5975
+     ],
+     "gt18_now_245_585": [
+      1085,
+      1879,
+      2218
+     ],
+     "ge30_245_585": [
+      0,
+      0
+     ],
+     "peak_C_now_245_585": [
+      25.6,
+      27.6,
+      28.6
+     ]
+    }
+   },
+   "condensate": {
+    "status": "computed (hours only)",
+    "unit": "h/yr (dew point > 15 °C)",
+    "how": "CWEC hours with dew point > 15 °C; condensate yield not sourced",
+    "value": 417
+   },
+   "stormwater_volume": {
+    "status": "computed (upper bound: whole lot non-landscaped)",
+    "unit": "m³",
+    "how": "Van 15 mm × lot (stage 1); Edm 375–507 m³/ha",
+    "low": 67.2765,
+    "high": 67.2765,
+    "extra": {
+     "release_L_per_s": 2.2426
+    }
+   },
+   "security_layers": {
+    "status": "qualitative",
+    "unit": "count",
+    "register_says": "One site visit (VAN3, tourVAN3, conf 40): 4 controlled doors passed (gate intercom, buzzed front door, vestibule-to-lobby door, single-person portal), then each tenant's enclosure (5 to the servers, guide's account). Cologix lists ISO 27001 and SOC 2 Type 2 (claims). Not lot data."
+   }
+  },
+  "E06A": {
+   "_lot": {
+    "label": "74 Airport Rd NW",
+    "city": "edm",
+    "parcel_id": "176767",
+    "it_mw": 10.2
+   },
+   "heat_rejected": {
+    "status": "computed",
+    "unit": "MWh/yr",
+    "how": "facility electricity = IT × 0.6 × PUE 1.4–1.55 × 8,760 (heat ≈ electricity drawn)",
+    "low": 75055.68,
+    "high": 83097.36,
+    "extra": {
+     "peak_MW": [
+      14.28,
+      15.81
+     ],
+     "it_energy_MWh": 53611.2
+    }
+   },
+   "heat_temp": {
+    "status": "computed (register lookup; cooling type is size stage)",
+    "unit": "°C",
+    "how": "two runs: air-cooled 25–35, liquid-cooled 50–60 (liquid unverified; NREL measured return 35–40)",
+    "low": 25,
+    "high": 60,
+    "extra": {
+     "air_C": [
+      25,
+      35
+     ],
+     "liquid_C_unverified": [
+      50,
+      60
+     ],
+     "liquid_measured_return_hi_C": 40
+    }
+   },
+   "liquid_capture": {
+    "status": "computed (register lookup, liquid run only)",
+    "unit": "share",
+    "how": "cold plate 0.5–0.8 (no primary for the band); immersion 1.0; air-cooled not stated (?)",
+    "low": 0.5,
+    "high": 0.8,
+    "extra": {
+     "immersion": 1,
+     "air": "not stated (?): coef \"no capture share for a whole air-cooled hall\""
+    }
+   },
+   "cop": {
+    "status": "not computable (needs receiver_temp: set by receiver type, match stage); register range shown",
+    "unit": "—",
+    "how": "register tool range 3.0–4.5 carried downstream; Lorenz check for Odense in extra",
+    "low": null,
+    "high": null,
+    "extra": {
+     "lorenz_odense_eta050": 4.5587,
+     "lorenz_odense_eta040": 3.647,
+     "reference_shown": [
+      3,
+      4.5
+     ]
+    }
+   },
+   "heat_captured": {
+    "status": "computed (liquid-cooled run)",
+    "unit": "MWh/yr",
+    "how": "heat_rejected × cold-plate share 0.5–0.8 (liquid-cooled run); air-cooled not computable",
+    "low": 37527.84,
+    "high": 66477.888,
+    "extra": {
+     "immersion_MWh": 83097.36,
+     "it_heat_only_hi_MWh": 42888.96
+    }
+   },
+   "heat_delivered": {
+    "status": "computed (COP from register range)",
+    "unit": "MWh/yr available",
+    "how": "E_reuse × COP ÷ (COP − 1), COP 4.5 (low) to 3.0 (high); receiver demand not applied",
+    "low": 48250.08,
+    "high": 99716.832
+   },
+   "hp_electricity": {
+    "status": "computed (COP from register range)",
+    "unit": "MWh/yr",
+    "how": "Q_out ÷ COP (4.5 low, 3.0 high)",
+    "low": 10722.24,
+    "high": 33238.944
+   },
+   "erf": {
+    "status": "computed",
+    "unit": "—",
+    "how": "E_reuse ÷ E_DC (= heat_rejected); collapses to the capture share by construction",
+    "low": 0.5,
+    "high": 0.8
+   },
+   "heat_in_water": {
+    "status": "computed (coefficient check; no lot input)",
+    "unit": "kWh per m³·K",
+    "how": "coefficient only: 4.18 × 1,000 ÷ 3,600 (low) vs register 1.16 (high); no lot volume or ΔT named",
+    "low": 1.1611,
+    "high": 1.16
+   },
+   "free_cooling_hours": {
+    "status": "computed",
+    "unit": "h/yr",
+    "how": "CWEC hours ≤ 8 °C (full free cooling, air-cooled hall) to air-side at 27 °C inlet (≤ 25.5 °C); ≤ counts match the register, the formula text says <",
+    "low": 5522,
+    "high": 8661,
+    "extra": {
+     "air_18_21_24_27": [
+      7614,
+      8046,
+      8412,
+      8661
+     ],
+     "dry_cooler_30_40": [
+      7846,
+      8754
+     ],
+     "strict_lt_air18": 7598
+    }
+   },
+   "pue": {
+    "status": "computed (register values)",
+    "unit": "—",
+    "how": "register range 1.4–1.55 (estimate + industry survey)",
+    "low": 1.4,
+    "high": 1.55
+   },
+   "spare_capacity": {
+    "status": "not computable (needs size stage: installed capacity and redundancy); conditional 2N value shown",
+    "unit": "MW",
+    "how": "only the conditional \"if 2N, spare = peak\" (our arithmetic); installed capacity is size stage",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      14.28,
+      15.81
+     ]
+    }
+   },
+   "backup_hours": {
+    "status": "computed (register values only; battery kWh and fuel stored are size stage)",
+    "unit": "h (fuel)",
+    "how": "register ranges: fuel 12 h (Uptime minimum) to 48 h (operator claims); UPS 1–15 min (vendor claims) in extra",
+    "low": 12,
+    "high": 48,
+    "extra": {
+     "ups_h": [
+      0.0167,
+      0.25
+     ]
+    }
+   },
+   "flexible_load": {
+    "status": "computed",
+    "unit": "MW·h per event",
+    "how": "it_load_actual × 10 % × 4 h (Call for Demand) to × 25 % × 3 h (Emerald preprint, claim)",
+    "low": 2.448,
+    "high": 4.59
+   },
+   "load_factor": {
+    "status": "computed (register value)",
+    "unit": "—",
+    "how": "Fan et al. 2007 (one 2007 site)",
+    "value": 0.6
+   },
+   "evaporation": {
+    "status": "computed (upper bound)",
+    "unit": "L/yr",
+    "how": "upper bound: heat_rejected ÷ 2,400 kJ/kg (all heat evaporated; dry cooling gives 0)",
+    "low": 112583520,
+    "high": 124646040
+   },
+   "blowdown": {
+    "status": "computed (upper bound; C from femp example)",
+    "unit": "L/yr make-up",
+    "how": "make-up = E + E ÷ (C − 1), C 6 (low) to 3 (high) from the femp example; blowdown in extra",
+    "low": 135100224,
+    "high": 186969060,
+    "extra": {
+     "blowdown_L": [
+      22516704,
+      62323020
+     ],
+     "evaporation_L": [
+      112583520,
+      124646040
+     ],
+     "femp_check_cut": 0.2
+    }
+   },
+   "wue": {
+    "status": "computed (upper bound)",
+    "unit": "L/kWh",
+    "how": "make-up ÷ E_IT (evaporative upper bound)",
+    "low": 2.52,
+    "high": 3.4875,
+    "extra": {
+     "low_over_DCRE_cap": 1.26
+    }
+   },
+   "water_behind_electricity": {
+    "status": "computed",
+    "unit": "L/yr",
+    "how": "facility MWh × 1.25 L/kWh (thermo) to × 16.8 (hydro, Vancouver only); Alberta 1.25 both ends",
+    "low": 93819600,
+    "high": 103871700
+   },
+   "rainwater": {
+    "status": "not computable (no building on the lot; new footprint is size stage)",
+    "unit": "m³/yr",
+    "how": "existing roofs (footprint) × rainfall–precipitation (ECCC 1991–2020) × 0.8",
+    "low": null,
+    "high": null,
+    "extra": {
+     "roof_m2": "not computable (no building on the lot; new footprint is size stage)"
+    }
+   },
+   "grid_co2": {
+    "status": "computed",
+    "unit": "t CO2e/yr",
+    "how": "facility MWh × NIR 2024 consumption intensity (BC 18.1, AB 346.1 g/kWh); Alberta displacement factor and heat-pump share in extra",
+    "low": 25976.921,
+    "high": 28760.1625,
+    "extra": {
+     "ab_displacement_t": [
+      32296.4591,
+      38125.0688
+     ],
+     "heat_pump_t": [
+      3710.9887,
+      11504.065
+     ]
+    }
+   },
+   "generator_co2": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "t CO2/yr",
+    "how": "test kWh (facility peak kW × 4–14.5 h) × 0.263 L/kWh × 2.681 kg/L",
+    "low": 40.2755,
+    "high": 161.6413,
+    "extra": {
+     "litres": [
+      15022.56,
+      60291.435
+     ],
+     "g_per_kWh_check": 705.103,
+     "manor_farm_564h_t": 5678.8432,
+     "generator_kW_lower_bound": [
+      14280,
+      15810
+     ]
+    }
+   },
+   "generator_nox_pm": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "kg NOx/yr",
+    "how": "kW ÷ 0.7457 × hours × 0.024 lb/hp·h; PM in extra at 0.43 g/kWh",
+    "low": 833.8753,
+    "high": 3346.6692,
+    "extra": {
+     "pm_kg": [
+      24.5616,
+      98.5754
+     ],
+     "nox_g_per_kWh_check": 14.5987
+    }
+   },
+   "refrigerant_co2e": {
+    "status": "not computable (needs size stage: chiller count and charge; refrigerant GWP not stated)",
+    "unit": "t CO2e/yr",
+    "how": "charge × 3 %/yr × GWP"
+   },
+   "embodied_it": {
+    "status": "not computable (needs size stage: server count); per-server value shown",
+    "unit": "kg CO2e/yr per server",
+    "how": "per server only: 4,177 kg (claim) × 10–15 % ÷ 4 yr",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      104.425,
+      156.6375
+     ]
+    }
+   },
+   "embodied_building": {
+    "status": "not computable (needs size stage: floor area)",
+    "unit": "t CO2e",
+    "how": "floor area × 400–461 kg/m²"
+   },
+   "noise_level": {
+    "status": "computed (screening; plant schedule is size stage)",
+    "unit": "dBA at nearest residential parcel",
+    "how": "Lw 98–101 dBA per unit (Trane, claim), one unit per MW (IT to facility peak), Lw + 10·log10 n − 20·log10 r − 8; r = lot edge to parcel edge",
+    "low": 68.5704,
+    "high": 73.1977,
+    "extra": {
+     "units": [
+      11,
+      16
+     ],
+     "combined_Lw": [
+      108.4139,
+      113.0412
+     ],
+     "receptor_m": 39.1
+    }
+   },
+   "lf_flag": {
+    "status": "not computable (needs plant spectra)",
+    "unit": "—",
+    "how": "dBC − dBA ≥ 20 dB and tone 20–250 Hz → +5 dBA (benchmark)"
+   },
+   "light_at_window": {
+    "status": "not computable (needs lighting plan)",
+    "unit": "lx",
+    "how": "vertical illuminance vs 10 / 2 lx (benchmark, unverified)"
+   },
+   "shadow": {
+    "status": "not computable (needs size stage: massing)",
+    "unit": "m²·h",
+    "how": "fall-equinox shadows 10:00–16:00 (benchmark)"
+   },
+   "ground": {
+    "status": "not computable (GWELLS export not in data/; Edmonton reports by ATS section)",
+    "unit": "ft, USgpm, m²/d",
+    "how": "nearest N wells: register gives Vancouver area stats only (333 wells, depth median 59 ft)"
+   },
+   "visibility": {
+    "status": "qualitative",
+    "unit": "ledger",
+    "register_says": "Ledger per plant element: seen from public space / closed to view / known only from documents / not checked (fieldJB site fact; vanPermits for the documents column). Field observation, not lot data."
+   },
+   "watched_area": {
+    "status": "qualitative",
+    "unit": "m; count",
+    "register_says": "Visible cameras and signs; indicative watched area past the lot line; first-person account labelled as one person's. fieldJB notes support counts and description, not metres. Never a guide to coverage gaps."
+   },
+   "jobs": {
+    "status": "computed (per-MW claim route)",
+    "unit": "FTE",
+    "how": "IT MW × 50–100 jobs ÷ 28 MW (Ark UP4 applicant claim); floor-area route needs size stage",
+    "low": 18.2143,
+    "high": 36.4286,
+    "extra": {
+     "m2_per_job_check": [
+      154.1,
+      308.2
+     ]
+    }
+   },
+   "treatment_energy": {
+    "status": "computed (upper bound: recovery share is a register gap)",
+    "unit": "kWh/yr",
+    "how": "MIN(greywater within 200–500 m, make-up) × 0.75–1.1 kWh/m³ (Arden 2021; register has no page/table)",
+    "low": 348.75,
+    "high": 8774.7,
+    "extra": {
+     "all_makeup_mixed_hi_kWh": 239320.3968
+    }
+   },
+   "blowdown_recovery": {
+    "status": "computed (single US test)",
+    "unit": "L/yr recovered",
+    "how": "blowdown × 0.53; make-up × 0.84 and 3,541 kWh per skid in extra",
+    "low": 11933853.12,
+    "high": 33031200.6,
+    "extra": {
+     "makeup_after_L": [
+      113484188.16,
+      157054010.4
+     ],
+     "kWh_per_skid": 3541,
+     "implied_cuts_2.8_to_4.9": [
+      0.1923,
+      0.5385
+     ]
+    }
+   },
+   "pv_roof": {
+    "status": "not computable (needs size stage: roof layout); per-m² value shown",
+    "unit": "kWh/yr per m² of panel",
+    "how": "per m² only: 0.16–0.20 kWp/m² × NRCan horizontal–latitude yield",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      151.04,
+      248.8
+     ]
+    }
+   },
+   "pv_facade": {
+    "status": "not computable (needs size stage: south facade area); per-m² value shown",
+    "unit": "kWh/yr per m² of facade",
+    "how": "per m² only: 0.16–0.20 kWp/m² × NRCan vertical yield",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      158.24,
+      197.8
+     ]
+    }
+   },
+   "genset_test": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "t CO2/yr",
+    "how": "test kWh × 706 g CO2 / 14.6 g NOx / 0.43 g PM per kWh (AP-42 upper bounds)",
+    "low": 40.3267,
+    "high": 161.847,
+    "extra": {
+     "nox_kg": [
+      833.952,
+      3346.977
+     ],
+     "pm_kg": [
+      24.5616,
+      98.5754
+     ],
+     "test_kWh": [
+      57120,
+      229245
+     ],
+     "test_hours_check": 14.5
+    }
+   },
+   "hvo_swap": {
+    "status": "not computable (fossil diesel reference CI not stated)",
+    "unit": "g CO2e/MJ",
+    "how": "Δ = fuel energy × (CI diesel − CI RD)"
+   },
+   "fuel_on_site": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "L",
+    "how": "facility peak kW × 12–48 h × 0.263 L/kWh (claim); vs NFC 200,000 L per first-storey room",
+    "low": 45067.68,
+    "high": 199585.44,
+    "extra": {
+     "first_storey_rooms": [
+      1,
+      1
+     ],
+     "upper_storey_rooms_hi": 10,
+     "m3_per_MW_24h_check": 6.312
+    }
+   },
+   "vibration_rank": {
+    "status": "qualitative",
+    "unit": "rank",
+    "register_says": "Qualitative rank, slab on grade → long-span upper floor. VBBL 2019 / BCBC 2018 ASTC 47 (STC 55 by elevator shafts) are airborne only; isolator deflection rises with floor span (VA spec citing ASHRAE). No dB values."
+   },
+   "workload_control": {
+    "status": "qualitative",
+    "unit": "operator · tenants · mixed",
+    "register_says": "Flexibility is offered only by whoever runs the workloads: single-owner or hyperscale operator can shift its own computing; in colocation the building operator controls power and cooling, not tenants' computing. Crozier & Liska 2025: no single flexible share."
+   },
+   "computing_served": {
+    "status": "qualitative",
+    "unit": "text",
+    "register_says": "Up to four statements, no score: federal Protected B and above stored in Canada (gcDataResidency, archived — history); BC FOIPPA s. 33.1 assessment for public bodies (context); Alberta no rule found; Vancouver exchanges 158 participants across three (78 + 64 + 16, isocPulseIXP), Edmonton YEGIX 9; residency ≠ sovereignty."
+   },
+   "heat_flux_site": {
+    "status": "computed",
+    "unit": "W/m²",
+    "how": "facility peak W ÷ lot area",
+    "low": 3131.0296,
+    "high": 3466.4971,
+    "extra": {
+     "high_over_allen119": 29.1302
+    }
+   },
+   "heat_plume_dT": {
+    "status": "not computable (needs plant airflow and air_screen_1h)",
+    "unit": "°C",
+    "how": "needs airflow and plume factor"
+   },
+   "genset_emission_rate": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "g/s NOx",
+    "how": "14.6 g/kWh × facility peak kW ÷ 3,600, all sets at full load",
+    "low": 57.9133,
+    "high": 64.1183,
+    "extra": {
+     "check_2000kWe": 8.1111
+    }
+   },
+   "air_screen_1h": {
+    "status": "not computable (σy, σz and stack height not stated)",
+    "unit": "µg/m³",
+    "how": "Gaussian screen"
+   },
+   "no2_at_receptor": {
+    "status": "not computable (needs air_screen_1h)",
+    "unit": "µg/m³",
+    "how": "NOx × 1.0 / 0.9–0.2"
+   },
+   "free_cooling_hours_2050s": {
+    "status": "computed",
+    "unit": "h/yr",
+    "how": "PCIC 2050s: hours ≤ 8 °C under SSP5-8.5 (low) to air-side at 27 °C inlet under SSP2-4.5 (high)",
+    "low": 4815,
+    "high": 8484,
+    "extra": {
+     "le8_now_245_585": [
+      5522,
+      5047,
+      4815
+     ],
+     "air18_245_585": [
+      7165,
+      6952
+     ],
+     "gt18_now_245_585": [
+      914,
+      1259,
+      1479
+     ],
+     "ge30_245_585": [
+      22,
+      71
+     ],
+     "peak_C_now_245_585": [
+      29,
+      31.9,
+      33.3
+     ]
+    }
+   },
+   "condensate": {
+    "status": "computed (hours only)",
+    "unit": "h/yr (dew point > 15 °C)",
+    "how": "CWEC hours with dew point > 15 °C; condensate yield not sourced",
+    "value": 117
+   },
+   "stormwater_volume": {
+    "status": "computed (upper bound: whole lot non-landscaped)",
+    "unit": "m³",
+    "how": "Van 15 mm × lot (stage 1); Edm 375–507 m³/ha",
+    "low": 171.03,
+    "high": 231.2326,
+    "extra": {
+     "release_L_per_s": 15.9628
+    }
+   },
+   "security_layers": {
+    "status": "qualitative",
+    "unit": "count",
+    "register_says": "One site visit (VAN3, tourVAN3, conf 40): 4 controlled doors passed (gate intercom, buzzed front door, vestibule-to-lobby door, single-person portal), then each tenant's enclosure (5 to the servers, guide's account). Cologix lists ISO 27001 and SOC 2 Type 2 (claims). Not lot data."
+   }
+  },
+  "E06B": {
+   "_lot": {
+    "label": "64 Airport Rd NW",
+    "city": "edm",
+    "parcel_id": "146402",
+    "it_mw": 10.2
+   },
+   "heat_rejected": {
+    "status": "computed",
+    "unit": "MWh/yr",
+    "how": "facility electricity = IT × 0.6 × PUE 1.4–1.55 × 8,760 (heat ≈ electricity drawn)",
+    "low": 75055.68,
+    "high": 83097.36,
+    "extra": {
+     "peak_MW": [
+      14.28,
+      15.81
+     ],
+     "it_energy_MWh": 53611.2
+    }
+   },
+   "heat_temp": {
+    "status": "computed (register lookup; cooling type is size stage)",
+    "unit": "°C",
+    "how": "two runs: air-cooled 25–35, liquid-cooled 50–60 (liquid unverified; NREL measured return 35–40)",
+    "low": 25,
+    "high": 60,
+    "extra": {
+     "air_C": [
+      25,
+      35
+     ],
+     "liquid_C_unverified": [
+      50,
+      60
+     ],
+     "liquid_measured_return_hi_C": 40
+    }
+   },
+   "liquid_capture": {
+    "status": "computed (register lookup, liquid run only)",
+    "unit": "share",
+    "how": "cold plate 0.5–0.8 (no primary for the band); immersion 1.0; air-cooled not stated (?)",
+    "low": 0.5,
+    "high": 0.8,
+    "extra": {
+     "immersion": 1,
+     "air": "not stated (?): coef \"no capture share for a whole air-cooled hall\""
+    }
+   },
+   "cop": {
+    "status": "not computable (needs receiver_temp: set by receiver type, match stage); register range shown",
+    "unit": "—",
+    "how": "register tool range 3.0–4.5 carried downstream; Lorenz check for Odense in extra",
+    "low": null,
+    "high": null,
+    "extra": {
+     "lorenz_odense_eta050": 4.5587,
+     "lorenz_odense_eta040": 3.647,
+     "reference_shown": [
+      3,
+      4.5
+     ]
+    }
+   },
+   "heat_captured": {
+    "status": "computed (liquid-cooled run)",
+    "unit": "MWh/yr",
+    "how": "heat_rejected × cold-plate share 0.5–0.8 (liquid-cooled run); air-cooled not computable",
+    "low": 37527.84,
+    "high": 66477.888,
+    "extra": {
+     "immersion_MWh": 83097.36,
+     "it_heat_only_hi_MWh": 42888.96
+    }
+   },
+   "heat_delivered": {
+    "status": "computed (COP from register range)",
+    "unit": "MWh/yr available",
+    "how": "E_reuse × COP ÷ (COP − 1), COP 4.5 (low) to 3.0 (high); receiver demand not applied",
+    "low": 48250.08,
+    "high": 99716.832
+   },
+   "hp_electricity": {
+    "status": "computed (COP from register range)",
+    "unit": "MWh/yr",
+    "how": "Q_out ÷ COP (4.5 low, 3.0 high)",
+    "low": 10722.24,
+    "high": 33238.944
+   },
+   "erf": {
+    "status": "computed",
+    "unit": "—",
+    "how": "E_reuse ÷ E_DC (= heat_rejected); collapses to the capture share by construction",
+    "low": 0.5,
+    "high": 0.8
+   },
+   "heat_in_water": {
+    "status": "computed (coefficient check; no lot input)",
+    "unit": "kWh per m³·K",
+    "how": "coefficient only: 4.18 × 1,000 ÷ 3,600 (low) vs register 1.16 (high); no lot volume or ΔT named",
+    "low": 1.1611,
+    "high": 1.16
+   },
+   "free_cooling_hours": {
+    "status": "computed",
+    "unit": "h/yr",
+    "how": "CWEC hours ≤ 8 °C (full free cooling, air-cooled hall) to air-side at 27 °C inlet (≤ 25.5 °C); ≤ counts match the register, the formula text says <",
+    "low": 5522,
+    "high": 8661,
+    "extra": {
+     "air_18_21_24_27": [
+      7614,
+      8046,
+      8412,
+      8661
+     ],
+     "dry_cooler_30_40": [
+      7846,
+      8754
+     ],
+     "strict_lt_air18": 7598
+    }
+   },
+   "pue": {
+    "status": "computed (register values)",
+    "unit": "—",
+    "how": "register range 1.4–1.55 (estimate + industry survey)",
+    "low": 1.4,
+    "high": 1.55
+   },
+   "spare_capacity": {
+    "status": "not computable (needs size stage: installed capacity and redundancy); conditional 2N value shown",
+    "unit": "MW",
+    "how": "only the conditional \"if 2N, spare = peak\" (our arithmetic); installed capacity is size stage",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      14.28,
+      15.81
+     ]
+    }
+   },
+   "backup_hours": {
+    "status": "computed (register values only; battery kWh and fuel stored are size stage)",
+    "unit": "h (fuel)",
+    "how": "register ranges: fuel 12 h (Uptime minimum) to 48 h (operator claims); UPS 1–15 min (vendor claims) in extra",
+    "low": 12,
+    "high": 48,
+    "extra": {
+     "ups_h": [
+      0.0167,
+      0.25
+     ]
+    }
+   },
+   "flexible_load": {
+    "status": "computed",
+    "unit": "MW·h per event",
+    "how": "it_load_actual × 10 % × 4 h (Call for Demand) to × 25 % × 3 h (Emerald preprint, claim)",
+    "low": 2.448,
+    "high": 4.59
+   },
+   "load_factor": {
+    "status": "computed (register value)",
+    "unit": "—",
+    "how": "Fan et al. 2007 (one 2007 site)",
+    "value": 0.6
+   },
+   "evaporation": {
+    "status": "computed (upper bound)",
+    "unit": "L/yr",
+    "how": "upper bound: heat_rejected ÷ 2,400 kJ/kg (all heat evaporated; dry cooling gives 0)",
+    "low": 112583520,
+    "high": 124646040
+   },
+   "blowdown": {
+    "status": "computed (upper bound; C from femp example)",
+    "unit": "L/yr make-up",
+    "how": "make-up = E + E ÷ (C − 1), C 6 (low) to 3 (high) from the femp example; blowdown in extra",
+    "low": 135100224,
+    "high": 186969060,
+    "extra": {
+     "blowdown_L": [
+      22516704,
+      62323020
+     ],
+     "evaporation_L": [
+      112583520,
+      124646040
+     ],
+     "femp_check_cut": 0.2
+    }
+   },
+   "wue": {
+    "status": "computed (upper bound)",
+    "unit": "L/kWh",
+    "how": "make-up ÷ E_IT (evaporative upper bound)",
+    "low": 2.52,
+    "high": 3.4875,
+    "extra": {
+     "low_over_DCRE_cap": 1.26
+    }
+   },
+   "water_behind_electricity": {
+    "status": "computed",
+    "unit": "L/yr",
+    "how": "facility MWh × 1.25 L/kWh (thermo) to × 16.8 (hydro, Vancouver only); Alberta 1.25 both ends",
+    "low": 93819600,
+    "high": 103871700
+   },
+   "rainwater": {
+    "status": "not computable (no building on the lot; new footprint is size stage)",
+    "unit": "m³/yr",
+    "how": "existing roofs (footprint) × rainfall–precipitation (ECCC 1991–2020) × 0.8",
+    "low": null,
+    "high": null,
+    "extra": {
+     "roof_m2": "not computable (no building on the lot; new footprint is size stage)"
+    }
+   },
+   "grid_co2": {
+    "status": "computed",
+    "unit": "t CO2e/yr",
+    "how": "facility MWh × NIR 2024 consumption intensity (BC 18.1, AB 346.1 g/kWh); Alberta displacement factor and heat-pump share in extra",
+    "low": 25976.921,
+    "high": 28760.1625,
+    "extra": {
+     "ab_displacement_t": [
+      32296.4591,
+      38125.0688
+     ],
+     "heat_pump_t": [
+      3710.9887,
+      11504.065
+     ]
+    }
+   },
+   "generator_co2": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "t CO2/yr",
+    "how": "test kWh (facility peak kW × 4–14.5 h) × 0.263 L/kWh × 2.681 kg/L",
+    "low": 40.2755,
+    "high": 161.6413,
+    "extra": {
+     "litres": [
+      15022.56,
+      60291.435
+     ],
+     "g_per_kWh_check": 705.103,
+     "manor_farm_564h_t": 5678.8432,
+     "generator_kW_lower_bound": [
+      14280,
+      15810
+     ]
+    }
+   },
+   "generator_nox_pm": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "kg NOx/yr",
+    "how": "kW ÷ 0.7457 × hours × 0.024 lb/hp·h; PM in extra at 0.43 g/kWh",
+    "low": 833.8753,
+    "high": 3346.6692,
+    "extra": {
+     "pm_kg": [
+      24.5616,
+      98.5754
+     ],
+     "nox_g_per_kWh_check": 14.5987
+    }
+   },
+   "refrigerant_co2e": {
+    "status": "not computable (needs size stage: chiller count and charge; refrigerant GWP not stated)",
+    "unit": "t CO2e/yr",
+    "how": "charge × 3 %/yr × GWP"
+   },
+   "embodied_it": {
+    "status": "not computable (needs size stage: server count); per-server value shown",
+    "unit": "kg CO2e/yr per server",
+    "how": "per server only: 4,177 kg (claim) × 10–15 % ÷ 4 yr",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      104.425,
+      156.6375
+     ]
+    }
+   },
+   "embodied_building": {
+    "status": "not computable (needs size stage: floor area)",
+    "unit": "t CO2e",
+    "how": "floor area × 400–461 kg/m²"
+   },
+   "noise_level": {
+    "status": "computed (screening; plant schedule is size stage)",
+    "unit": "dBA at nearest residential parcel",
+    "how": "Lw 98–101 dBA per unit (Trane, claim), one unit per MW (IT to facility peak), Lw + 10·log10 n − 20·log10 r − 8; r = lot edge to parcel edge",
+    "low": 72.6661,
+    "high": 77.2934,
+    "extra": {
+     "units": [
+      11,
+      16
+     ],
+     "combined_Lw": [
+      108.4139,
+      113.0412
+     ],
+     "receptor_m": 24.4
+    }
+   },
+   "lf_flag": {
+    "status": "not computable (needs plant spectra)",
+    "unit": "—",
+    "how": "dBC − dBA ≥ 20 dB and tone 20–250 Hz → +5 dBA (benchmark)"
+   },
+   "light_at_window": {
+    "status": "not computable (needs lighting plan)",
+    "unit": "lx",
+    "how": "vertical illuminance vs 10 / 2 lx (benchmark, unverified)"
+   },
+   "shadow": {
+    "status": "not computable (needs size stage: massing)",
+    "unit": "m²·h",
+    "how": "fall-equinox shadows 10:00–16:00 (benchmark)"
+   },
+   "ground": {
+    "status": "not computable (GWELLS export not in data/; Edmonton reports by ATS section)",
+    "unit": "ft, USgpm, m²/d",
+    "how": "nearest N wells: register gives Vancouver area stats only (333 wells, depth median 59 ft)"
+   },
+   "visibility": {
+    "status": "qualitative",
+    "unit": "ledger",
+    "register_says": "Ledger per plant element: seen from public space / closed to view / known only from documents / not checked (fieldJB site fact; vanPermits for the documents column). Field observation, not lot data."
+   },
+   "watched_area": {
+    "status": "qualitative",
+    "unit": "m; count",
+    "register_says": "Visible cameras and signs; indicative watched area past the lot line; first-person account labelled as one person's. fieldJB notes support counts and description, not metres. Never a guide to coverage gaps."
+   },
+   "jobs": {
+    "status": "computed (per-MW claim route)",
+    "unit": "FTE",
+    "how": "IT MW × 50–100 jobs ÷ 28 MW (Ark UP4 applicant claim); floor-area route needs size stage",
+    "low": 18.2143,
+    "high": 36.4286,
+    "extra": {
+     "m2_per_job_check": [
+      154.1,
+      308.2
+     ]
+    }
+   },
+   "treatment_energy": {
+    "status": "computed (upper bound: recovery share is a register gap)",
+    "unit": "kWh/yr",
+    "how": "MIN(greywater within 200–500 m, make-up) × 0.75–1.1 kWh/m³ (Arden 2021; register has no page/table)",
+    "low": 429,
+    "high": 9089.3,
+    "extra": {
+     "all_makeup_mixed_hi_kWh": 239320.3968
+    }
+   },
+   "blowdown_recovery": {
+    "status": "computed (single US test)",
+    "unit": "L/yr recovered",
+    "how": "blowdown × 0.53; make-up × 0.84 and 3,541 kWh per skid in extra",
+    "low": 11933853.12,
+    "high": 33031200.6,
+    "extra": {
+     "makeup_after_L": [
+      113484188.16,
+      157054010.4
+     ],
+     "kWh_per_skid": 3541,
+     "implied_cuts_2.8_to_4.9": [
+      0.1923,
+      0.5385
+     ]
+    }
+   },
+   "pv_roof": {
+    "status": "not computable (needs size stage: roof layout); per-m² value shown",
+    "unit": "kWh/yr per m² of panel",
+    "how": "per m² only: 0.16–0.20 kWp/m² × NRCan horizontal–latitude yield",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      151.04,
+      248.8
+     ]
+    }
+   },
+   "pv_facade": {
+    "status": "not computable (needs size stage: south facade area); per-m² value shown",
+    "unit": "kWh/yr per m² of facade",
+    "how": "per m² only: 0.16–0.20 kWp/m² × NRCan vertical yield",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      158.24,
+      197.8
+     ]
+    }
+   },
+   "genset_test": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "t CO2/yr",
+    "how": "test kWh × 706 g CO2 / 14.6 g NOx / 0.43 g PM per kWh (AP-42 upper bounds)",
+    "low": 40.3267,
+    "high": 161.847,
+    "extra": {
+     "nox_kg": [
+      833.952,
+      3346.977
+     ],
+     "pm_kg": [
+      24.5616,
+      98.5754
+     ],
+     "test_kWh": [
+      57120,
+      229245
+     ],
+     "test_hours_check": 14.5
+    }
+   },
+   "hvo_swap": {
+    "status": "not computable (fossil diesel reference CI not stated)",
+    "unit": "g CO2e/MJ",
+    "how": "Δ = fuel energy × (CI diesel − CI RD)"
+   },
+   "fuel_on_site": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "L",
+    "how": "facility peak kW × 12–48 h × 0.263 L/kWh (claim); vs NFC 200,000 L per first-storey room",
+    "low": 45067.68,
+    "high": 199585.44,
+    "extra": {
+     "first_storey_rooms": [
+      1,
+      1
+     ],
+     "upper_storey_rooms_hi": 10,
+     "m3_per_MW_24h_check": 6.312
+    }
+   },
+   "vibration_rank": {
+    "status": "qualitative",
+    "unit": "rank",
+    "register_says": "Qualitative rank, slab on grade → long-span upper floor. VBBL 2019 / BCBC 2018 ASTC 47 (STC 55 by elevator shafts) are airborne only; isolator deflection rises with floor span (VA spec citing ASHRAE). No dB values."
+   },
+   "workload_control": {
+    "status": "qualitative",
+    "unit": "operator · tenants · mixed",
+    "register_says": "Flexibility is offered only by whoever runs the workloads: single-owner or hyperscale operator can shift its own computing; in colocation the building operator controls power and cooling, not tenants' computing. Crozier & Liska 2025: no single flexible share."
+   },
+   "computing_served": {
+    "status": "qualitative",
+    "unit": "text",
+    "register_says": "Up to four statements, no score: federal Protected B and above stored in Canada (gcDataResidency, archived — history); BC FOIPPA s. 33.1 assessment for public bodies (context); Alberta no rule found; Vancouver exchanges 158 participants across three (78 + 64 + 16, isocPulseIXP), Edmonton YEGIX 9; residency ≠ sovereignty."
+   },
+   "heat_flux_site": {
+    "status": "computed",
+    "unit": "W/m²",
+    "how": "facility peak W ÷ lot area",
+    "low": 3339.4135,
+    "high": 3697.2078,
+    "extra": {
+     "high_over_allen119": 31.069
+    }
+   },
+   "heat_plume_dT": {
+    "status": "not computable (needs plant airflow and air_screen_1h)",
+    "unit": "°C",
+    "how": "needs airflow and plume factor"
+   },
+   "genset_emission_rate": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "g/s NOx",
+    "how": "14.6 g/kWh × facility peak kW ÷ 3,600, all sets at full load",
+    "low": 57.9133,
+    "high": 64.1183,
+    "extra": {
+     "check_2000kWe": 8.1111
+    }
+   },
+   "air_screen_1h": {
+    "status": "not computable (σy, σz and stack height not stated)",
+    "unit": "µg/m³",
+    "how": "Gaussian screen"
+   },
+   "no2_at_receptor": {
+    "status": "not computable (needs air_screen_1h)",
+    "unit": "µg/m³",
+    "how": "NOx × 1.0 / 0.9–0.2"
+   },
+   "free_cooling_hours_2050s": {
+    "status": "computed",
+    "unit": "h/yr",
+    "how": "PCIC 2050s: hours ≤ 8 °C under SSP5-8.5 (low) to air-side at 27 °C inlet under SSP2-4.5 (high)",
+    "low": 4815,
+    "high": 8484,
+    "extra": {
+     "le8_now_245_585": [
+      5522,
+      5047,
+      4815
+     ],
+     "air18_245_585": [
+      7165,
+      6952
+     ],
+     "gt18_now_245_585": [
+      914,
+      1259,
+      1479
+     ],
+     "ge30_245_585": [
+      22,
+      71
+     ],
+     "peak_C_now_245_585": [
+      29,
+      31.9,
+      33.3
+     ]
+    }
+   },
+   "condensate": {
+    "status": "computed (hours only)",
+    "unit": "h/yr (dew point > 15 °C)",
+    "how": "CWEC hours with dew point > 15 °C; condensate yield not sourced",
+    "value": 117
+   },
+   "stormwater_volume": {
+    "status": "computed (upper bound: whole lot non-landscaped)",
+    "unit": "m³",
+    "how": "Van 15 mm × lot (stage 1); Edm 375–507 m³/ha",
+    "low": 160.3575,
+    "high": 216.8033,
+    "extra": {
+     "release_L_per_s": 14.9667
+    }
+   },
+   "security_layers": {
+    "status": "qualitative",
+    "unit": "count",
+    "register_says": "One site visit (VAN3, tourVAN3, conf 40): 4 controlled doors passed (gate intercom, buzzed front door, vestibule-to-lobby door, single-person portal), then each tenant's enclosure (5 to the servers, guide's account). Cologix lists ISO 27001 and SOC 2 Type 2 (claims). Not lot data."
+   }
+  },
+  "HAST": {
+   "_lot": {
+    "label": "555 W Hastings",
+    "city": "van",
+    "parcel_id": "59013407",
+    "it_mw": 1.1
+   },
+   "heat_rejected": {
+    "status": "computed",
+    "unit": "MWh/yr",
+    "how": "facility electricity = IT × 0.6 × PUE 1.4–1.55 × 8,760 (heat ≈ electricity drawn)",
+    "low": 8094.24,
+    "high": 8961.48,
+    "extra": {
+     "peak_MW": [
+      1.54,
+      1.705
+     ],
+     "it_energy_MWh": 5781.6
+    }
+   },
+   "heat_temp": {
+    "status": "computed (register lookup; cooling type is size stage)",
+    "unit": "°C",
+    "how": "two runs: air-cooled 25–35, liquid-cooled 50–60 (liquid unverified; NREL measured return 35–40)",
+    "low": 25,
+    "high": 60,
+    "extra": {
+     "air_C": [
+      25,
+      35
+     ],
+     "liquid_C_unverified": [
+      50,
+      60
+     ],
+     "liquid_measured_return_hi_C": 40
+    }
+   },
+   "liquid_capture": {
+    "status": "computed (register lookup, liquid run only)",
+    "unit": "share",
+    "how": "cold plate 0.5–0.8 (no primary for the band); immersion 1.0; air-cooled not stated (?)",
+    "low": 0.5,
+    "high": 0.8,
+    "extra": {
+     "immersion": 1,
+     "air": "not stated (?): coef \"no capture share for a whole air-cooled hall\""
+    }
+   },
+   "cop": {
+    "status": "not computable (needs receiver_temp: set by receiver type, match stage); register range shown",
+    "unit": "—",
+    "how": "register tool range 3.0–4.5 carried downstream; Lorenz check for Odense in extra",
+    "low": null,
+    "high": null,
+    "extra": {
+     "lorenz_odense_eta050": 4.5587,
+     "lorenz_odense_eta040": 3.647,
+     "reference_shown": [
+      3,
+      4.5
+     ]
+    }
+   },
+   "heat_captured": {
+    "status": "computed (liquid-cooled run)",
+    "unit": "MWh/yr",
+    "how": "heat_rejected × cold-plate share 0.5–0.8 (liquid-cooled run); air-cooled not computable",
+    "low": 4047.12,
+    "high": 7169.184,
+    "extra": {
+     "immersion_MWh": 8961.48,
+     "it_heat_only_hi_MWh": 4625.28
+    }
+   },
+   "heat_delivered": {
+    "status": "computed (COP from register range)",
+    "unit": "MWh/yr available",
+    "how": "E_reuse × COP ÷ (COP − 1), COP 4.5 (low) to 3.0 (high); receiver demand not applied",
+    "low": 5203.44,
+    "high": 10753.776
+   },
+   "hp_electricity": {
+    "status": "computed (COP from register range)",
+    "unit": "MWh/yr",
+    "how": "Q_out ÷ COP (4.5 low, 3.0 high)",
+    "low": 1156.32,
+    "high": 3584.592
+   },
+   "erf": {
+    "status": "computed",
+    "unit": "—",
+    "how": "E_reuse ÷ E_DC (= heat_rejected); collapses to the capture share by construction",
+    "low": 0.5,
+    "high": 0.8
+   },
+   "heat_in_water": {
+    "status": "computed (coefficient check; no lot input)",
+    "unit": "kWh per m³·K",
+    "how": "coefficient only: 4.18 × 1,000 ÷ 3,600 (low) vs register 1.16 (high); no lot volume or ΔT named",
+    "low": 1.1611,
+    "high": 1.16
+   },
+   "free_cooling_hours": {
+    "status": "computed",
+    "unit": "h/yr",
+    "how": "CWEC hours ≤ 8 °C (full free cooling, air-cooled hall) to air-side at 27 °C inlet (≤ 25.5 °C); ≤ counts match the register, the formula text says <",
+    "low": 3284,
+    "high": 8759,
+    "extra": {
+     "air_18_21_24_27": [
+      7109,
+      8086,
+      8645,
+      8759
+     ],
+     "dry_cooler_30_40": [
+      7675,
+      8760
+     ],
+     "strict_lt_air18": 7064
+    }
+   },
+   "pue": {
+    "status": "computed (register values)",
+    "unit": "—",
+    "how": "register range 1.4–1.55 (estimate + industry survey)",
+    "low": 1.4,
+    "high": 1.55
+   },
+   "spare_capacity": {
+    "status": "not computable (needs size stage: installed capacity and redundancy); conditional 2N value shown",
+    "unit": "MW",
+    "how": "only the conditional \"if 2N, spare = peak\" (our arithmetic); installed capacity is size stage",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      1.54,
+      1.705
+     ]
+    }
+   },
+   "backup_hours": {
+    "status": "computed (register values only; battery kWh and fuel stored are size stage)",
+    "unit": "h (fuel)",
+    "how": "register ranges: fuel 12 h (Uptime minimum) to 48 h (operator claims); UPS 1–15 min (vendor claims) in extra",
+    "low": 12,
+    "high": 48,
+    "extra": {
+     "ups_h": [
+      0.0167,
+      0.25
+     ]
+    }
+   },
+   "flexible_load": {
+    "status": "computed",
+    "unit": "MW·h per event",
+    "how": "it_load_actual × 10 % × 4 h (Call for Demand) to × 25 % × 3 h (Emerald preprint, claim)",
+    "low": 0.264,
+    "high": 0.495
+   },
+   "load_factor": {
+    "status": "computed (register value)",
+    "unit": "—",
+    "how": "Fan et al. 2007 (one 2007 site)",
+    "value": 0.6
+   },
+   "evaporation": {
+    "status": "computed (upper bound)",
+    "unit": "L/yr",
+    "how": "upper bound: heat_rejected ÷ 2,400 kJ/kg (all heat evaporated; dry cooling gives 0)",
+    "low": 12141360,
+    "high": 13442220
+   },
+   "blowdown": {
+    "status": "computed (upper bound; C from femp example)",
+    "unit": "L/yr make-up",
+    "how": "make-up = E + E ÷ (C − 1), C 6 (low) to 3 (high) from the femp example; blowdown in extra",
+    "low": 14569632,
+    "high": 20163330,
+    "extra": {
+     "blowdown_L": [
+      2428272,
+      6721110
+     ],
+     "evaporation_L": [
+      12141360,
+      13442220
+     ],
+     "femp_check_cut": 0.2
+    }
+   },
+   "wue": {
+    "status": "computed (upper bound)",
+    "unit": "L/kWh",
+    "how": "make-up ÷ E_IT (evaporative upper bound)",
+    "low": 2.52,
+    "high": 3.4875,
+    "extra": {
+     "low_over_DCRE_cap": 1.26
+    }
+   },
+   "water_behind_electricity": {
+    "status": "computed",
+    "unit": "L/yr",
+    "how": "facility MWh × 1.25 L/kWh (thermo) to × 16.8 (hydro, Vancouver only); Alberta 1.25 both ends",
+    "low": 10117800,
+    "high": 150552864
+   },
+   "rainwater": {
+    "status": "computed (existing roofs)",
+    "unit": "m³/yr",
+    "how": "existing roofs (footprint) × rainfall–precipitation (ECCC 1991–2020) × 0.8",
+    "low": 5215.9197,
+    "high": 5403.7338,
+    "extra": {
+     "roof_m2": 5825.5
+    }
+   },
+   "grid_co2": {
+    "status": "computed",
+    "unit": "t CO2e/yr",
+    "how": "facility MWh × NIR 2024 consumption intensity (BC 18.1, AB 346.1 g/kWh); Alberta displacement factor and heat-pump share in extra",
+    "low": 146.2144,
+    "high": 161.8802,
+    "extra": {
+     "ab_displacement_t": [
+      "n/a: BC publishes no marginal factor",
+      "n/a: BC publishes no marginal factor"
+     ],
+     "heat_pump_t": [
+      20.8878,
+      64.7521
+     ]
+    }
+   },
+   "generator_co2": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "t CO2/yr",
+    "how": "test kWh (facility peak kW × 4–14.5 h) × 0.263 L/kWh × 2.681 kg/L",
+    "low": 4.3434,
+    "high": 17.4319,
+    "extra": {
+     "litres": [
+      1620.08,
+      6502.0175
+     ],
+     "g_per_kWh_check": 705.103,
+     "manor_farm_564h_t": 612.4243,
+     "generator_kW_lower_bound": [
+      1540,
+      1705
+     ]
+    }
+   },
+   "generator_nox_pm": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "kg NOx/yr",
+    "how": "kW ÷ 0.7457 × hours × 0.024 lb/hp·h; PM in extra at 0.43 g/kWh",
+    "low": 89.9277,
+    "high": 360.9153,
+    "extra": {
+     "pm_kg": [
+      2.6488,
+      10.6307
+     ],
+     "nox_g_per_kWh_check": 14.5987
+    }
+   },
+   "refrigerant_co2e": {
+    "status": "not computable (needs size stage: chiller count and charge; refrigerant GWP not stated)",
+    "unit": "t CO2e/yr",
+    "how": "charge × 3 %/yr × GWP"
+   },
+   "embodied_it": {
+    "status": "not computable (needs size stage: server count); per-server value shown",
+    "unit": "kg CO2e/yr per server",
+    "how": "per server only: 4,177 kg (claim) × 10–15 % ÷ 4 yr",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      104.425,
+      156.6375
+     ]
+    }
+   },
+   "embodied_building": {
+    "status": "not computable (needs size stage: floor area)",
+    "unit": "t CO2e",
+    "how": "floor area × 400–461 kg/m²"
+   },
+   "noise_level": {
+    "status": "computed (screening; plant schedule is size stage)",
+    "unit": "dBA at nearest residential parcel",
+    "how": "Lw 98–101 dBA per unit (Trane, claim), one unit per MW (IT to facility peak), Lw + 10·log10 n − 20·log10 r − 8; r = lot edge to parcel edge",
+    "low": 33.5987,
+    "high": 36.5987,
+    "extra": {
+     "units": [
+      2,
+      2
+     ],
+     "combined_Lw": [
+      101.0103,
+      104.0103
+     ],
+     "receptor_m": 934.5
+    }
+   },
+   "lf_flag": {
+    "status": "not computable (needs plant spectra)",
+    "unit": "—",
+    "how": "dBC − dBA ≥ 20 dB and tone 20–250 Hz → +5 dBA (benchmark)"
+   },
+   "light_at_window": {
+    "status": "not computable (needs lighting plan)",
+    "unit": "lx",
+    "how": "vertical illuminance vs 10 / 2 lx (benchmark, unverified)"
+   },
+   "shadow": {
+    "status": "not computable (needs size stage: massing)",
+    "unit": "m²·h",
+    "how": "fall-equinox shadows 10:00–16:00 (benchmark)"
+   },
+   "ground": {
+    "status": "not computable (GWELLS export not in data/; Edmonton reports by ATS section)",
+    "unit": "ft, USgpm, m²/d",
+    "how": "nearest N wells: register gives Vancouver area stats only (333 wells, depth median 59 ft)"
+   },
+   "visibility": {
+    "status": "qualitative",
+    "unit": "ledger",
+    "register_says": "Ledger per plant element: seen from public space / closed to view / known only from documents / not checked (fieldJB site fact; vanPermits for the documents column). Field observation, not lot data."
+   },
+   "watched_area": {
+    "status": "qualitative",
+    "unit": "m; count",
+    "register_says": "Visible cameras and signs; indicative watched area past the lot line; first-person account labelled as one person's. fieldJB notes support counts and description, not metres. Never a guide to coverage gaps."
+   },
+   "jobs": {
+    "status": "computed (per-MW claim route)",
+    "unit": "FTE",
+    "how": "IT MW × 50–100 jobs ÷ 28 MW (Ark UP4 applicant claim); floor-area route needs size stage",
+    "low": 1.9643,
+    "high": 3.9286,
+    "extra": {
+     "m2_per_job_check": [
+      154.1,
+      308.2
+     ]
+    }
+   },
+   "treatment_energy": {
+    "status": "computed (upper bound: recovery share is a register gap)",
+    "unit": "kWh/yr",
+    "how": "MIN(greywater within 200–500 m, make-up) × 0.75–1.1 kWh/m³ (Arden 2021; register has no page/table)",
+    "low": 10927.224,
+    "high": 22179.663,
+    "extra": {
+     "all_makeup_mixed_hi_kWh": 25809.0624
+    }
+   },
+   "blowdown_recovery": {
+    "status": "computed (single US test)",
+    "unit": "L/yr recovered",
+    "how": "blowdown × 0.53; make-up × 0.84 and 3,541 kWh per skid in extra",
+    "low": 1286984.16,
+    "high": 3562188.3,
+    "extra": {
+     "makeup_after_L": [
+      12238490.88,
+      16937197.2
+     ],
+     "kWh_per_skid": 3541,
+     "implied_cuts_2.8_to_4.9": [
+      0.1923,
+      0.5385
+     ]
+    }
+   },
+   "pv_roof": {
+    "status": "not computable (needs size stage: roof layout); per-m² value shown",
+    "unit": "kWh/yr per m² of panel",
+    "how": "per m² only: 0.16–0.20 kWp/m² × NRCan horizontal–latitude yield",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      142.72,
+      201.4
+     ]
+    }
+   },
+   "pv_facade": {
+    "status": "not computable (needs size stage: south facade area); per-m² value shown",
+    "unit": "kWh/yr per m² of facade",
+    "how": "per m² only: 0.16–0.20 kWp/m² × NRCan vertical yield",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      114.56,
+      143.2
+     ]
+    }
+   },
+   "genset_test": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "t CO2/yr",
+    "how": "test kWh × 706 g CO2 / 14.6 g NOx / 0.43 g PM per kWh (AP-42 upper bounds)",
+    "low": 4.349,
+    "high": 17.4541,
+    "extra": {
+     "nox_kg": [
+      89.936,
+      360.9485
+     ],
+     "pm_kg": [
+      2.6488,
+      10.6307
+     ],
+     "test_kWh": [
+      6160,
+      24722.5
+     ],
+     "test_hours_check": 14.5
+    }
+   },
+   "hvo_swap": {
+    "status": "not computable (fossil diesel reference CI not stated)",
+    "unit": "g CO2e/MJ",
+    "how": "Δ = fuel energy × (CI diesel − CI RD)"
+   },
+   "fuel_on_site": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "L",
+    "how": "facility peak kW × 12–48 h × 0.263 L/kWh (claim); vs NFC 200,000 L per first-storey room",
+    "low": 4860.24,
+    "high": 21523.92,
+    "extra": {
+     "first_storey_rooms": [
+      1,
+      1
+     ],
+     "upper_storey_rooms_hi": 2,
+     "m3_per_MW_24h_check": 6.312
+    }
+   },
+   "vibration_rank": {
+    "status": "qualitative",
+    "unit": "rank",
+    "register_says": "Qualitative rank, slab on grade → long-span upper floor. VBBL 2019 / BCBC 2018 ASTC 47 (STC 55 by elevator shafts) are airborne only; isolator deflection rises with floor span (VA spec citing ASHRAE). No dB values."
+   },
+   "workload_control": {
+    "status": "qualitative",
+    "unit": "operator · tenants · mixed",
+    "register_says": "Flexibility is offered only by whoever runs the workloads: single-owner or hyperscale operator can shift its own computing; in colocation the building operator controls power and cooling, not tenants' computing. Crozier & Liska 2025: no single flexible share."
+   },
+   "computing_served": {
+    "status": "qualitative",
+    "unit": "text",
+    "register_says": "Up to four statements, no score: federal Protected B and above stored in Canada (gcDataResidency, archived — history); BC FOIPPA s. 33.1 assessment for public bodies (context); Alberta no rule found; Vancouver exchanges 158 participants across three (78 + 64 + 16, isocPulseIXP), Edmonton YEGIX 9; residency ≠ sovereignty."
+   },
+   "heat_flux_site": {
+    "status": "computed",
+    "unit": "W/m²",
+    "how": "facility peak W ÷ lot area",
+    "low": 245.4027,
+    "high": 271.6958,
+    "extra": {
+     "high_over_allen119": 2.2832
+    }
+   },
+   "heat_plume_dT": {
+    "status": "not computable (needs plant airflow and air_screen_1h)",
+    "unit": "°C",
+    "how": "needs airflow and plume factor"
+   },
+   "genset_emission_rate": {
+    "status": "computed (lower bound on capacity: facility peak)",
+    "unit": "g/s NOx",
+    "how": "14.6 g/kWh × facility peak kW ÷ 3,600, all sets at full load",
+    "low": 6.2456,
+    "high": 6.9147,
+    "extra": {
+     "check_2000kWe": 8.1111
+    }
+   },
+   "air_screen_1h": {
+    "status": "not computable (σy, σz and stack height not stated)",
+    "unit": "µg/m³",
+    "how": "Gaussian screen"
+   },
+   "no2_at_receptor": {
+    "status": "not computable (needs air_screen_1h)",
+    "unit": "µg/m³",
+    "how": "NOx × 1.0 / 0.9–0.2"
+   },
+   "free_cooling_hours_2050s": {
+    "status": "computed",
+    "unit": "h/yr",
+    "how": "PCIC 2050s: hours ≤ 8 °C under SSP5-8.5 (low) to air-side at 27 °C inlet under SSP2-4.5 (high)",
+    "low": 1954,
+    "high": 8702,
+    "extra": {
+     "le8_now_245_585": [
+      3284,
+      2279,
+      1954
+     ],
+     "air18_245_585": [
+      6246,
+      5975
+     ],
+     "gt18_now_245_585": [
+      1085,
+      1879,
+      2218
+     ],
+     "ge30_245_585": [
+      0,
+      0
+     ],
+     "peak_C_now_245_585": [
+      25.6,
+      27.6,
+      28.6
+     ]
+    }
+   },
+   "condensate": {
+    "status": "computed (hours only)",
+    "unit": "h/yr (dew point > 15 °C)",
+    "how": "CWEC hours with dew point > 15 °C; condensate yield not sourced",
+    "value": 417
+   },
+   "stormwater_volume": {
+    "status": "computed (upper bound: whole lot non-landscaped)",
+    "unit": "m³",
+    "how": "Van 15 mm × lot (stage 1); Edm 375–507 m³/ha",
+    "low": 94.131,
+    "high": 94.131,
+    "extra": {
+     "release_L_per_s": 3.1377
+    }
+   },
+   "security_layers": {
+    "status": "qualitative",
+    "unit": "count",
+    "register_says": "One site visit (VAN3, tourVAN3, conf 40): 4 controlled doors passed (gate intercom, buzzed front door, vestibule-to-lobby door, single-person portal), then each tenant's enclosure (5 to the servers, guide's account). Cologix lists ISO 27001 and SOC 2 Type 2 (claims). Not lot data."
+   }
+  }
+ }
+}
