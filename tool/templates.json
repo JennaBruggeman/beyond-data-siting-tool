@@ -390,6 +390,13 @@
    ],
    "why": "what the refuge is for in each crisis"
   },
+  "it_load_share": {
+   "tier": "community",
+   "parties": [
+    "operator"
+   ],
+   "why": "why the load running is below capacity"
+  },
   "fire_protection": {
    "tier": "full",
    "parties": [
@@ -2769,6 +2776,10 @@
    [
     "security_layers",
     "characterise"
+   ],
+   [
+    "it_load_share",
+    "test"
    ]
   ],
   "edges": [
@@ -4031,12 +4042,16 @@
    [
     "spare_cooling",
     "transformers"
+   ],
+   [
+    "rack_count",
+    "it_load_share"
    ]
   ]
  },
  "resident_count": 46,
- "community_count": 134,
- "full_count": 220,
+ "community_count": 135,
+ "full_count": 221,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {
