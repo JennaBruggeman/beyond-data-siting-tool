@@ -2582,7 +2582,12 @@
    "vertivLi5": "manufacturer claim (data sheet)",
    "nbc2020_4153": "code",
    "vanFCF2017draft": "draft by-law (public hearing)",
-   "vanI3draft2022": "consultation draft"
+   "vanI3draft2022": "consultation draft",
+   "linwood2023": "trade magazine (engineer)",
+   "epiTIA942": "certifier reading (industry)",
+   "bchES54F": "utility standard",
+   "nfc2020_4313": "code",
+   "bcbc2024_3275": "code"
   },
   "source_check": {
    "mfrDryCooler": "agent",
@@ -2773,7 +2778,12 @@
    "weyburnC282": "claude",
    "nbc2020_4153": "claude",
    "vanFCF2017draft": "claude",
-   "vanI3draft2022": "claude"
+   "vanI3draft2022": "claude",
+   "linwood2023": "claude",
+   "epiTIA942": "claude",
+   "bchES54F": "claude",
+   "nfc2020_4313": "claude",
+   "bcbc2024_3275": "claude"
   },
   "research_pass": {
    "date": "16 Oct 2026",
@@ -5307,6 +5317,13 @@
      "where": "local /mnt/attach/outputs/data/raw/codes/nfc2020.pdf + nfc.txt (NR24-27/2020E, same publication as the URL)",
      "result": "confirmed (1 of 1 claims confirmed)",
      "record": "scratchpad check2/result_res_4.json"
+    },
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "source PDF / local code copy",
+     "what": "plant research"
     }
    ],
    "cat3516c": [
@@ -10163,6 +10180,13 @@
      "what": "check-2 fixes applied",
      "result": "title settled: EDTI Customer Connection Guide, 1 Aug 2025 ('?' removed); added Edmonton only",
      "record": "checks/check2/fixes_proposed_2026_10_30.json"
+    },
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "source PDF / local code copy",
+     "what": "plant research"
     }
    ],
    "van_genroom": [
@@ -10399,6 +10423,13 @@
      "date": "30 Oct 2026",
      "result": "not read: source could not be opened (WebFetch of structuremag.org article refused (provenance); no saved copy.)",
      "record": "scratchpad check3/result_full_3.json"
+    },
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "source PDF / local code copy",
+     "what": "plant research"
     }
    ],
    "epiTIA942": [
@@ -10415,6 +10446,13 @@
      "date": "30 Oct 2026",
      "result": "not read: source could not be opened (Not read. WebFetch refused the register URL (PROVENANCE_REQUIRED) and the shared WebSearch budget was exhausted; no saved copy found in /mnt/user-data/beyond-da)",
      "record": "scratchpad check3/result_full_4.json"
+    },
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "source PDF / local code copy",
+     "what": "plant research"
     }
    ],
    "van_f014": [
@@ -14640,6 +14678,24 @@
      "date": "30 Oct 2026",
      "where": "City PDF via WebFetch",
      "what": "Bulk Data Storage clauses quoted"
+    }
+   ],
+   "bchES54F": [
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "source PDF / local code copy",
+     "what": "plant research"
+    }
+   ],
+   "bcbc2024_3275": [
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "30 Oct 2026",
+     "where": "source PDF / local code copy",
+     "what": "plant research"
     }
    ]
   },
@@ -24534,10 +24590,13 @@
     "rehlkoKD1000",
     "lbnlXu2007",
     "fujiRedundancy",
-    "weyburnC282"
+    "weyburnC282",
+    "nfc2020_4313",
+    "bcbc2024_3275",
+    "mvBylaw1329"
    ],
    "formula": "n = ⌈P_IT × PUE ÷ set rating⌉, then spares",
-   "coef": "2,000 kW sets when the facility load is above 3 MW (Rehlko KD2000), otherwise 1,000 kW (KD1000); data-centre continuous rating = standby (Rehlko); the sets carry the whole facility, cooling included (HVAC on generator-backed power: LBNL 2007, one site); generator spares as set up (N+1 default); testing (check 1, 30 Oct 2026): emergency power systems are tested monthly at ≥30% of rated load for 60 min and yearly for 2 h at full load (CSA C282, via a fire department summary; whether IT standby sets fall under C282 ?) (weyburnC282)",
+   "coef": "2,000 kW sets when the facility load is above 3 MW (Rehlko KD2000), otherwise 1,000 kW (KD1000); data-centre continuous rating = standby (Rehlko); the sets carry the whole facility, cooling included (HVAC on generator-backed power: LBNL 2007, one site); generator spares as set up (N+1 default); testing (check 1, 30 Oct 2026): emergency power systems are tested monthly at ≥30% of rated load for 60 min and yearly for 2 h at full load (CSA C282, via a fire department summary; whether IT standby sets fall under C282 ?) (weyburnC282); fuel and exhaust (check 1, 30 Oct 2026): diesel tanks for generators fall under CSA B139, not NFC Part 4 (nfc2020_4313; B139 paywalled, not read ?); code-required emergency power installed to CSA C282 (bcbc2024_3275; paywalled); exhaust: keep away from building openings and air intakes (mvBylaw1329); exhaust height not set by any code read (?)",
    "source_roles": [
     {
      "id": "rehlkoKD2000",
@@ -24574,6 +24633,27 @@
      "term": "testing: monthly at ≥30% load for 60 min (emergency power, C282 via summary)",
      "role": "check",
      "conf": 50,
+     "verified": true
+    },
+    {
+     "id": "nfc2020_4313",
+     "term": "fuel and exhaust (check 1, 30 Oct 2026)",
+     "role": "rule",
+     "conf": 70,
+     "verified": true
+    },
+    {
+     "id": "bcbc2024_3275",
+     "term": "fuel and exhaust (check 1, 30 Oct 2026)",
+     "role": "rule",
+     "conf": 70,
+     "verified": true
+    },
+    {
+     "id": "mvBylaw1329",
+     "term": "fuel and exhaust (check 1, 30 Oct 2026)",
+     "role": "rule",
+     "conf": 70,
      "verified": true
     }
    ]
@@ -25429,10 +25509,12 @@
     "bchTariff2026",
     "cologixVAN3web",
     "cologixVAN4_2026",
-    "fujiRedundancy"
+    "fujiRedundancy",
+    "bchES54F",
+    "epcor_ccg"
    ],
    "formula": "n = ⌈facility peak ÷ 2,500 kVA⌉, then the set-up's spare rule (N+1 or 2N)",
-   "coef": "unit: Eaton 2,500 kVA oil-filled transformer (CA022021EN): 2.263 × 2.39 × 2.084 m with a 5/15 kV primary, 2.631 × 2.492 m footprint with a 25/35 kV primary — BC Hydro asks primary-service equipment to take 25 kV, so the larger row may apply in BC (?); facility kW taken as kVA (power factor 1: not sourced ?); at primary service the customer supplies the transformation and its equipment must also take 25 kV (BC Hydro T&C 3.7 and 3.13, effective 1 Apr 2026); built examples claim 'N+1 distributed redundant' (VAN3) and '5-to-make-4, distributed redundant' (VAN4); location and clearances not read (?); switchgear sections per transformer not sourced (?)",
+   "coef": "unit: Eaton 2,500 kVA oil-filled transformer (CA022021EN): 2.263 × 2.39 × 2.084 m with a 5/15 kV primary, 2.631 × 2.492 m footprint with a 25/35 kV primary — BC Hydro asks primary-service equipment to take 25 kV, so the larger row may apply in BC (?); facility kW taken as kVA (power factor 1: not sourced ?); at primary service the customer supplies the transformation and its equipment must also take 25 kV (BC Hydro T&C 3.7 and 3.13, effective 1 Apr 2026); built examples claim 'N+1 distributed redundant' (VAN3) and '5-to-make-4, distributed redundant' (VAN4); location and clearances not read (?); switchgear sections per transformer not sourced (?); clearances (check 1, 30 Oct 2026): BC Hydro pads 1 m from buildings, 3 m clear in front, 1 m at sides and between units (bchES54F; utility-owned distribution transformers); EPCOR up to 6.0 m from buildings by transformer type, in a registered right-of-way with truck access (epcor_ccg s. 6.4); customer-owned substations at primary service: CEC (paywalled, not read ?)",
    "source_roles": [
     {
      "id": "eatonCA022021",
@@ -25469,6 +25551,20 @@
      "conf": 50,
      "verified": true,
      "relabel": "30 Oct 2026: rule → definition (vendor glossary defines terms; which redundancy applies needs a standard/tier)"
+    },
+    {
+     "id": "bchES54F",
+     "term": "clearances (check 1, 30 Oct 2026)",
+     "role": "rule",
+     "conf": 70,
+     "verified": true
+    },
+    {
+     "id": "epcor_ccg",
+     "term": "clearances (check 1, 30 Oct 2026)",
+     "role": "rule",
+     "conf": 70,
+     "verified": true
     }
    ]
   },
@@ -25562,10 +25658,12 @@
     "vertivAFC",
     "eatonCA022021",
     "vertivLi5",
-    "nbc2020_4153"
+    "nbc2020_4153",
+    "linwood2023",
+    "epiTIA942"
    ],
    "formula": "load spread over the unit footprint = weight × 9.81 ÷ (L × W); compared with the code minimum for equipment rooms (3.6 kPa) and office floors (2.4 kPa)",
-   "coef": "2 MW generator in SL2 enclosure 40,394 kg over 13.49 × 3.49 m ≈ 8.4 kPa (rehlkoKD2000); 1.49 MW chiller 13,110 kg dry over 12.14 × 2.36 m ≈ 4.5 kPa, plus its fluid (?) (vertivAFC); 2,500 kVA transformer 7,031–8,528 kg ≈ 12.7 kPa (eatonCA022021); battery cabinet 590 kg over 0.6 × 0.75 m ≈ 12.9 kPa (vertivLi5); code minimum for generator rooms and transformer vaults 3.6 kPa, or the actual load where greater (nbc2020_4153). All spread loads are our arithmetic; point loads at mounts and vibration not sourced (?)",
+   "coef": "2 MW generator in SL2 enclosure 40,394 kg over 13.49 × 3.49 m ≈ 8.4 kPa (rehlkoKD2000); 1.49 MW chiller 13,110 kg dry over 12.14 × 2.36 m ≈ 4.5 kPa, plus its fluid (?) (vertivAFC); 2,500 kVA transformer 7,031–8,528 kg ≈ 12.7 kPa (eatonCA022021); battery cabinet 590 kg over 0.6 × 0.75 m ≈ 12.9 kPa (vertivLi5); code minimum for generator rooms and transformer vaults 3.6 kPa, or the actual load where greater (nbc2020_4153). All spread loads are our arithmetic; point loads at mounts and vibration not sourced (?); hall floors (check 1, 30 Oct 2026): 100 psf (4.8 kPa) US code minimum for computer access floors, 150 psf (7.2) US military IT spaces, about 240 psf (11.5) one engineer's worked example, 350 psf (16.8) Intel's recommendation (linwood2023); 12 kPa for a TIA-942 Rated-3 hall per a certifier (epiTIA942) — so a data-hall floor is as heavy as the plant or heavier; the NBC has no data-hall line (computer rooms are excluded from the office load)",
    "source_roles": [
     {
      "id": "rehlkoKD2000",
@@ -25600,6 +25698,20 @@
      "term": "floor load minimum",
      "role": "rule",
      "conf": 80,
+     "verified": true
+    },
+    {
+     "id": "linwood2023",
+     "term": "hall floors (check 1, 30 Oct 2026)",
+     "role": "benchmark",
+     "conf": 50,
+     "verified": true
+    },
+    {
+     "id": "epiTIA942",
+     "term": "hall floors (check 1, 30 Oct 2026)",
+     "role": "benchmark",
+     "conf": 50,
      "verified": true
     }
    ]
@@ -28173,10 +28285,10 @@
   "edm_matrix": "City of Edmonton, Zoning Bylaw 20001 Land Use & Zoning Matrix: Uses in Standard Zones, October 2026 — https://www.edmonton.ca/sites/default/files/public-files/Edmonton-Zoning-Bylaw-Land-Use-and-Zoning-Matrix.pdf ‖ CHECK 2 (29 Oct 2026, ok): overreach: Matrix has no 'data centre' use; any status the tool reads from it relies on mapping data centres to another use class, which the matrix does not state. City says the matrix is 'created for convenience only'; roles: partly supported",
   "edm_dcpage": "City of Edmonton, Data Centre Development (web page, saved 14 Oct 2026) — https://www.edmonton.ca/business_economy/economic_investment/data-centre-development ‖ CHECK 2 (29 Oct 2026, ok): overreach: Page notes an EETP application to allow data centres as permitted uses in the Medium Industrial Precinct (feedback to 25 Oct 2026); this is a proposal, not current zoning; roles: partly supported",
   "nbc2020_4153": "National Building Code of Canada 2020, Div. B 4.1.5.1.(1) and Table 4.1.5.3 (local copy data/raw/codes/nbc.txt): equipment areas and service rooms, including generator rooms and transformer vaults, minimum specified live load 3.6 kPa, but not less than 'the loads due to the intended use and occupancy' where that is more critical (note 4 → 4.1.5.1.(1)); office floors 2.4 kPa (4.8 at grade). BCBC and NBC(AE) adopt the same article (not re-checked ?)",
-  "nfc2020_4313": "NRC, National Fire Code of Canada 2020, Div. B, 4.3.13–4.3.14 and Table 4.3.13.4.-B — https://publications.gc.ca/collections/collection_2022/cnrc-nrc/NR24-27-2020-eng.pdf",
+  "nfc2020_4313": "National Fire Code of Canada 2020 (local copy data/raw/codes/nfc.txt): Note A-4.1.1.1.(3)(b) — tanks and piping supplying diesel-engine emergency generators fall under CSA B139 Series, and 'Part 4 of the NFC does not apply to such tanks and piping systems'; for other indoor tanks, Table 4.3.13.4.-B (protected storage rooms, Classes II/IIIA such as diesel): up to 200,000 L aggregate on the first storey, 20,000 L in basements and upper storeys (45,000 L with tanks over 20,000 L ? table layout unclear in the text copy); tanks over 2,500 L double-walled or secondarily contained (4.3.13.5); Class I fuels for indoor engines → NFPA 37 (4.3.13.2). BC and Alberta fire codes adopt the same Part 4 (not re-checked ?)",
   "van_genroom": "City of Vancouver, Emergency generator rooms (Building By-law bulletin 2000-015, rev. 5 Oct 2015; Div. B 3.6.2.8; VBBL edition not printed) — https://vancouver.ca/files/cov/2000-015-emergency-generator-rooms.pdf ‖ CHECK 2 (30 Oct 2026, ok): overreach: Used for 'Space for the plant', but the bulletin gives no room size or clearance figures (it defers to CSA C282). It supports a 2 h separated, generator-only room, not an area.; overreach: Bulletin is about emergency (life-safety) generators; data-centre standby generators may not all be 'emergency' — label the applicability.; overreach: Pre-dates VBBL 2025; check the current by-law article numbering.; roles: partly supported",
   "bch_primary": "BC Hydro, Requirements for Customer-Owned Primary Services Supplied at 4 kV to 35 kV, Primary Guide R4 (issued 20 Feb 2025, effective 30 Jun 2025) — https://app.bchydro.com/content/dam/BCHydro/customer-portal/documents/distribution/standards/ds-primary-guide.pdf ‖ CHECK 2 (30 Oct 2026, ok): overreach: Register states no figures; any service-class thresholds the tool takes from it must be quoted with clause numbers (not checked here).",
-  "epcor_ccg": "EPCOR Distribution & Transmission Inc. (EDTI), Customer Connection Guide, released/effective 1 Aug 2025; Edmonton (EPCOR) only — https://epcor.com/content/dam/epcor/documents/supporting-documents/power_customer-connection-guide.pdf ‖ CHECK 2 fixes applied (30 Oct 2026): title settled: EDTI Customer Connection Guide, 1 Aug 2025 ('?' removed); added Edmonton only ‖ OPEN for J.B. (30 Oct 2026): The entry names no section. Add the sections the tool uses (e.g. 3.5 service type, 6.4 padmount transformers, 3.10 clearances, 3.14 electrical room)?",
+  "epcor_ccg": "EPCOR Distribution & Transmission Inc. (EDTI), Customer Connection Guide, released/effective 1 Aug 2025; Edmonton (EPCOR) only — https://epcor.com/content/dam/epcor/documents/supporting-documents/power_customer-connection-guide.pdf ‖ CHECK 2 fixes applied (30 Oct 2026): title settled: EDTI Customer Connection Guide, 1 Aug 2025 ('?' removed); added Edmonton only ‖ OPEN for J.B. (30 Oct 2026): The entry names no section. Add the sections the tool uses (e.g. 3.5 service type, 6.4 padmount transformers, 3.10 clearances, 3.14 electrical room)? ‖ SECTIONS READ (check 1, 30 Oct 2026, local copy full.pdf): s. 6.4(g) 'Required clearances between transformers and buildings can be as high as 6.0m, depending on the type of transformer used' (especially 347/600 V in the 5 kV area; confirm with EDTI); 6.4(e) on the customer's site in a registered utility right-of-way; 6.4(b) truck access; 6.4(o) piles if within 4.0 m of a foundation; 3.10.2.2 padmount equipment 1.0 m from gas lines, 1.8 m from water lines, 2.0 m from valves, hydrants, catch basins and sewers",
   "lbnl_proto2021": "Sun, Luo, Luo, Hong, Prototype energy models for data centers, Energy and Buildings 231:110603 (2021; journal volume not printed in the LBNL copy, DOI 10.1016/j.enbuild.2020.110603 ?): prototypes are 600 ft² and 6,000 ft² computer rooms, 24–3,000 kW — not a basis beyond those scales — https://eta-publications.lbl.gov/sites/default/files/prototype_energy_models_for_data_centers.pdf ‖ CHECK 2 fixes applied (30 Oct 2026): prototype scale limits added",
   "hillingdon_up4": "London Borough of Hillingdon, planning committee report, Ark UP4 data centre — https://modgov.hillingdon.gov.uk/documents/s64459/739%20REPORT.pdf ‖ CHECK 2 (29 Oct 2026, ok): overreach: IT capacity 28 MW and staff densities are 'The submission states' (applicant claim); floorspace 18,898 m2 is officer text",
   "cat3516c": "Caterpillar 3516C 2,500 kW standby generator set specification (manufacturer claim) — https://www.hanovercounty.gov/DocumentCenter/View/5983/CAT-3516C-2500KW-Cut ‖ CHECK 2 (29 Oct 2026, unreachable): unreachable: Caterpillar 3516C 2,500 kW standby genset specification (manufacturer claim) → Not opened; overreach: Hosted by a US county (permit file), not Caterpillar - note host; label manufacturer claim stays; roles: partly supported",
@@ -28631,8 +28743,8 @@
   "bacS3000_2012": "Baltimore Aircoil Co., Series 3000 Cooling Tower (Product & Application Handbook, Vol. V; '2012' in footer), b8_ct_s3000_20150914, p. B31 Single Cell Data: S3E-1222-07Q 652 nominal tons (3 USGPM cooled 95→85 °F at 78 °F wb, = 15,000 Btu/h per ton), 11'-10\" × 21'-7\" → ≈8.3 m² per MW (MANUFACTURER CLAIM; sources/16 S24; a different edition from bacS3000, 2023) — https://baltimoreaircoil.com/download_api_endpoint/536/b8_ct_s3000_20150914.pdf ‖ CHECK 2 (30 Oct 2026, unreachable): unreachable: Product & Application Handbook Vol. V, '2012' footer, b8_ct_s3000_20150914, p. B31 → Cited edition not opened.; overreach: m² per MW is per MW of heat rejected at nominal (95/85/78 °F) conditions, unit footprint only — not per MW IT load and excludes service clearance/airflow spacing (BAC layout guidelines). Label as MANUFACTURER CLAIM (it i; roles: partly supported",
   "carrier61XWH": "Carrier, 61XWH-ZE water-to-water heat pump data (2016/2017, preliminary), via Meier Tobler: model 1501, 1,948 kW at 30/75 °C, 4,850 × 1,350 mm → ≈3.4 m² per MW heat (MANUFACTURER CLAIM; sources/16 S27) — https://referenzen.meiertobler.ch/app/uploads//2017/10/61XWH-ZE.pdf ‖ CHECK 2 (30 Oct 2026, unreachable): unreachable: Carrier 61XWH-ZE data (2016/2017, preliminary), via Meier Tobler → Could not open; unreachable: Model 1501, 1,948 kW at 30/75 °C → Could not open; unreachable: 4,850 × 1,350 mm → ≈3.4 m² per MW heat → Could not open; arithmetic 4.85×1.35/1.948 = 3.36 m²/MW is consistent; overreach: Footprint excludes service clearances; preliminary data via a reseller. Labelled manufacturer claim (good).; roles: partly supported",
   "uptime2024survey": "Uptime Institute, Global Data Center Survey 2024 (Keynote report 146M, Jul 2024; > 850 owners and operators): average rack density 8 kW (7.1 kW without the 11 sites above 50 kW), p. 10 (INDUSTRY SURVEY; sources/16 S15) — https://datacenter.uptimeinstitute.com/rs/711-RIA-145/images/2024.GlobalDataCenterSurvey.Report.pdf",
-  "linwood2023": "Linwood, E., Design Parameters for Data Center Facilities, STRUCTURE magazine, 1 Jan 2023: UFC 3-301-01 (2018) 150 psf (7.2 kPa, our conversion) for IT server spaces; ASCE 7-22 access floor 100 psf (plus a 2,000 lb point load ?) (SECONDARY, professional magazine; sources/16 S20) — https://www.structuremag.org/article/design-parameters-for-data-center-facilities/ ‖ CHECK 2 (30 Oct 2026, unreachable): unreachable: Linwood, STRUCTURE magazine, 1 Jan 2023 → Could not open; unreachable: UFC 3-301-01 (2018) 150 psf for IT server spaces → Could not open; unreachable: ASCE 7-22 access floor 100 psf (+2,000 lb point ?) → Could not open; overreach: Secondary magazine; US military/US codes. In Canada NBC Table 4.1.5.3 governs live loads — the tool should cite NBC/BCBC for the rule and use this only as context.; roles: partly supported",
-  "epiTIA942": "EPI Singapore (data-centre auditor and trainer; not shown as a TIA-942 certification body), web article (undated): TIA-942 Rated-3 floor loading 'should be 12kPa (250 lb/ft2)' superimposed live load (SECONDARY; sources/16 S21) — https://www.epi-ap.com/content/28/641 ‖ CHECK 2 (30 Oct 2026, unreachable): unreachable: EPI web article (undated) → not read; unreachable: TIA-942 Rated-3 floor loading 'should be 12kPa (250 lb/ft2)' → not read; overreach: Secondary trainer article stands in for TIA-942 itself; a 'should' recommendation is used for floor strength need. NBC/BCBC live loads govern in Canada — label as industry guidance, not a rule.; roles: not supported",
+  "linwood2023": "E. Linwood, P.E., 'Design Parameters for Data Center Facilities', STRUCTURE magazine, 'Outside the Box', Jan 2023, pp. 16–18 (trade magazine of the structural engineering profession; US codes): data-hall live loads — 100 psf ASCE 7-22 minimum for computer access floors (or a 2,000 lb point load); 150 psf UFC 3-301-01 (2018) for IT server spaces; 350 psf recommended by Intel 2012 (intelHD2012); about 240 psf the author's own worked example for a 16 × 20 ft module (racks, containment, raised floor, cables); 412.5 psf under a single 3,000 lb rack; clients 'typically prefer a conservative structural design'; roof: ASCE minimum 20 psf, a heavier roof criterion recommended. No operator requests quoted. 100/150/240/350 psf ≈ 4.8/7.2/11.5/16.8 kPa (our conversion) — https://www.structuremag.org/wp-content/uploads/2022/12/302301-C-OutsidetheBox-Linwood.pdf",
+  "epiTIA942": "INDUSTRY READING (certification firm, not TIA): EPI Singapore, Q&A on TIA-942 Rated-3 floor loading (undated page, © 2026): 'should be 12kPa (250 lb/ft2)' superimposed live load for a Rated-3 data centre; auditors may accept less if fit for purpose. TIA-942 itself not read (paywalled) — https://www.epi-ap.com/content/28/641/The_data_centre_is_not_meeting_the_12kPa_floor_loading_capability_as_per_TIA-942_Rated-3_Will_this_data_centre_fail_the_certification?",
   "abStandata19FCI003": "Alberta Municipal Affairs, STANDATA 19-FCI-003, Storage Tank Systems Inside Buildings (Apr 2020; NFC(AE) 2019): tanks of Class I liquids supplying stationary engines inside buildings comply (when serving appliances installed to NFPA 37 ?) with NFC(AE) Part 4; 'it is the storage tank/storage tank system supplying the fuel that dictates the rating' (sources/23 S2) — https://open.alberta.ca/dataset/4ac126d2-ccb2-455d-b215-7bcb75827924/resource/ba18e71a-43ff-4dfd-bee5-379f9cf70ec9/download/ma-standata-fire-interpretation-19-fci-003.pdf ‖ CHECK 2 (29 Oct 2026, ok): overreach: Class I statement does not directly cover diesel (normally Class II); Class II/IIIA tanks fall under the CSA B139 sentence; roles: partly supported",
   "vanFCL2014": "City of Vancouver, Administrative Report 'Flood Construction Levels', RTS 10576 (30 May 2014; CFSC 9 Jul 2014): FCL basis 1 m sea-level rise to 2100, 1:500-year return period, 0.6 m freeboard (sources/22 S2) — https://council.vancouver.ca/20140709/documents/cfsc2.pdf ‖ CHECK 2 (30 Oct 2026, ok): overreach: 2014 report basis; resulting FCL (4.6 m per App. D) applies to Vancouver's designated floodplain only - check that flood_exposure uses the current by-law / floodplain designation, not this report alone. Traced via 'src22; roles: partly supported",
   "vbbl2019_58": "Vancouver Building By-law 2019, Div. B, Section 5.8 Sound Transmission: 5.8.1.1.(1) ASTC ≥ 47 between dwelling units and other spaces (or STC ≥ 50 with flanking); 5.8.1.1.(2) STC ≥ 55 next to elevator shafts and refuse chutes; no equipment-vibration rule (sources/23 S17) — https://free.bcpublications.ca/civix/document/id/public/vbbl2019/492684920 ‖ CHECK 2 (29 Oct 2026, ok): overreach: VBBL 2019 superseded by VBBL 2025 - check 5.8 unchanged before using as current",
@@ -28719,7 +28831,9 @@
   "intelHD2012": "OPERATOR WHITE PAPER: J. Musilli and B. Ellison, 'Facilities Design for High-density Data Centers', IT@Intel White Paper (Jan 2012): Table 1 (p. 4) pairs 15 / 22.5 / 30 kW racks with 250 / 375 / 500 W per sq ft, 'based on a 5,000-square-foot room with cooling units and power distribution units (PDUs) in the same space'; no area per rack is stated (60 ft², about 5.6 m², per rack is our arithmetic from the table) — https://www.intel.cn/content/dam/www/public/us/en/documents/best-practices/data-center-facilities-paper.pdf ‖ CHECK 2 (30 Oct 2026, unreachable): unreachable: Musilli & Ellison, 'Facilities Design for High-density Data Centers', IT@Intel White Paper, Jan 2012 → Source not opened; unreachable: Table 1 (p.4): 15/22.5/30 kW racks ↔ 250/375/500 W/ft² → Source not opened; unreachable: 'based on a 5,000-square-foot room with cooling units and power distribution units (PDUs) in the same space' → Source not opened; unreachable: No area per rack stated; 60 ft² (≈5.6 m²) per rack is our arithmetic → Arithmetic checks: 15000/250 = 22500/375 = 30000/500 = 60 ft² = 5.57 m² (calc); overreach: Operator white paper (2012, Intel's own rooms), correctly labelled; use as a check only, as the role says.",
   "weyburnC282": "SECONDARY (fire department summary of a paywalled standard): Weyburn Fire Department, 'Emergency Power Systems Requirements' (undated; posted Apr 2024 ?), citing CSA C282 'Emergency Electrical Power Supply for Buildings': 'The emergency electrical power shall be thoroughly tested monthly', running the set at 'at least 30% of the rated load for 60 minutes' with transfer switches operated under load; an annual 2-hour full-load test; weekly tests for health-care facilities. Applies to emergency (life-safety) power systems; whether a data centre's standby generators for IT load fall under C282 is not stated (?; Vancouver bulletin 2000-015 points emergency generator rooms to C282). CSA C282 itself not read (paywalled) — https://weyburn.ca/wp-content/uploads/2024/04/Emergency-Power-Systems-Requirements.pdf",
   "vanFCF2017draft": "City of Vancouver, draft by-law for public hearing 19 Sep 2017, 'False Creek Flats Amendments to the Zoning and Development By-law' (DRAFT, not enacted as printed; number and date blank): adds the Bulk Data Storage definition; I-3 (Appendix B) s. 3.2.T Bulk Data Storage conditional 'but only in sub-area A'; s. 3.3.7 'Except for entrances, Bulk Data Storage use shall not be permitted at the ground floor'; I-2 (Appendix A) s. 3.3.6 the same — https://council.vancouver.ca/20170919/documents/phea6draftbylawZD.pdf",
-  "vanI3draft2022": "City of Vancouver, I-3 District Schedule, Consultation Draft (April 2022, regulation redesign): s. 2.1 Bulk Data Storage conditional 'only in sub-area A'; s. 2.2.11 'Bulk data storage is not permitted at the ground floor, except for entrances' — https://syc.vancouver.ca/projects/regulation-redesign/i/zoning-by-law-district-schedule-i-3-draft.pdf"
+  "vanI3draft2022": "City of Vancouver, I-3 District Schedule, Consultation Draft (April 2022, regulation redesign): s. 2.1 Bulk Data Storage conditional 'only in sub-area A'; s. 2.2.11 'Bulk data storage is not permitted at the ground floor, except for entrances' — https://syc.vancouver.ca/projects/regulation-redesign/i/zoning-by-law-district-schedule-i-3-draft.pdf",
+  "bchES54F": "BC Hydro Distribution Standard ES54 Section F, Transformer pads and vaults (F0-02 general notes; F3-04 R.6 Feb 2017, three-phase pad ≤500 kVA; F3-05 R.8 Sep 2017, ≥750 kVA): pad at least 1 m from a customer building or other structure (BC Hydro's minimum; the CEC allows less); 'a minimum 3 m unobstructed area in front of each transformer'; 1 m at the sides and between transformers; granular oil containment in a timber frame; pad-mounted units hold under 2,500 L of oil. These are BC Hydro-owned distribution transformers; a customer-owned substation at primary service follows the CEC (not read ?) — https://app.bchydro.com/content/dam/BCHydro/customer-portal/documents/distribution/standards/ds-ES54-section-f-transformer-pads-vaults.pdf",
+  "bcbc2024_3275": "BC Building Code 2024, Div. B 3.2.7.5.(1) (local copy): an emergency electrical power supply system 'shall be installed in conformance with CSA C282'. C282 (paywalled) therefore governs generator rooms, exhaust and testing for code-required emergency power; whether a data centre's IT generators are 'emergency' power is not stated (?)"
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ (UCA default rates, ATCO Gas area); ATCO Gas North Mid Use variable delivery $1.045/GJ (ATCO Gas North Rate Schedules, p. 11, eff. 1 Jan 2026; riders T $1.289/GJ and L $0.087/GJ not included) → (1.045 + 1.458) × 3.6 ÷ 0.85 boiler efficiency ≈ $10.6/MWh heat at the October rate (our arithmetic; the tool uses the 12-month mean commodity, ≈ $13/MWh) — https://www.ucahelps.alberta.ca/regulated-rates.aspx ; https://gas.atco.com/content/dam/web/for-home/natural-gas/natural-gas-north-rate-schedule.pdf",
