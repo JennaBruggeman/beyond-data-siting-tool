@@ -1,0 +1,966 @@
+{
+ "rowley2012": {
+  "where_read": "Entry names no title/venue/URL. WebSearch found a likely match: Rowley, Peters, Lundie & Moore 2012, 'Aggregating sustainability indicators: Beyond the weighted sum', J. Environ. Manage. 111:24-33, doi 10.1016/j.jenvman.2012.05.004 (Chalmers record). Full text not read; the abstract on the record does not mention non-compensatory methods.",
+  "claims": [
+   {
+    "claim": "Rowley et al. 2012 describes a non-compensatory multi-criteria method",
+    "verdict": "UNREACHABLE",
+    "evidence": "Abstract on the Chalmers record: 'the wide variety of methodological approaches to weighting and aggregation introduces subjectivity and often uncertainty.' Nothing on non-compensatory methods.",
+    "fix": "Confirm with J.B. that this is the paper meant. Add the full citation, then read the full text (paywalled at Elsevier; use UBC library access) before using it for the trade-off table."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Cited for 'Trade-off table / traced from nonComp' at conf 100 while the source is unidentified and unread"
+  ],
+  "overall": "unreachable"
+ },
+ "fieldJB": {
+  "where_read": "/mnt/attach/outputs/sources/12_field_observations.md (secondary record of J.B.'s visits; photos not seen)",
+  "claims": [
+   {
+    "claim": "Vancouver visits 8 and 11 Oct 2026; Edmonton Oct 2026",
+    "verdict": "CORRECTED",
+    "evidence": "'Vancouver 8 and 11 Oct 2026; Edmonton Oct 2026, dates to confirm'",
+    "fix": "Add 'dates to confirm' for Edmonton"
+   },
+   {
+    "claim": "Sites: 55 E 7th, 111 E 5th, 333+369 Terminal, Internet Centre, Qu EDM2, Kyndryl Acheson",
+    "verdict": "CONFIRMED",
+    "evidence": "'Atlas site set is six: V01 55 E 7th · V02 111 E 5th · V03 333 + 369 Terminal · E01 Internet Centre · E02 Qu EDM2 · E03 Kyndryl Acheson'",
+    "fix": ""
+   },
+   {
+    "claim": "first-hand observation; positions approximate unless confirmed",
+    "verdict": "CONFIRMED",
+    "evidence": "'Type: first-hand observation (OBS). Positions approximate unless J.B. confirmed.'",
+    "fix": ""
+   },
+   {
+    "claim": "recorded in sources/12 from atlas-chat handoff of 11 Oct",
+    "verdict": "CONFIRMED",
+    "evidence": "'relayed through the atlas-chat handoff of 11 Oct'",
+    "fix": ""
+   },
+   {
+    "claim": "watched_area coefficients (55 E 7th camera 'almost on the public edge'; 111 E 5th dome under soffit, mast camera, '24 hour video surveillance' signs)",
+    "verdict": "CONFIRMED",
+    "evidence": "'camera almost on the public edge of the front door' ... 'dome camera under soffit, mast camera at roof corner' ... '\"24 hour video surveillance\" signs'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "watched_area unit is 'm; count' and formula asks for an 'indicative watched area past the lot line', but the notes give no distances or aim for cameras; only presence and position. Supports counts and description, not metres.",
+   "Confidence 80 is proposed, not set by J.B. ('Confidence level ... is J.B.'s to set; proposed 80')"
+  ],
+  "overall": "needs fix"
+ },
+ "vanPermits": {
+  "where_read": "Saved page.html is only the portal shell (no data). Read /mnt/attach/outputs/data/vancouver_permits_7sites.json and sources/11_vancouver_permits.md",
+  "claims": [
+   {
+    "claim": "seven address exports by J.B., 10 Oct 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "11_vancouver_permits.md: 'exported by J.B. with the portal text search per address (seven CSVs ...)' (10 Oct 2026)",
+    "fix": ""
+   },
+   {
+    "claim": "extract data/vancouver_permits_7sites.json; summary sources/11",
+    "verdict": "CONFIRMED",
+    "evidence": "'Extract saved as data/vancouver_permits_7sites.json'; file exists; note it has 8 address keys (515 W Hastings added from the loose search)",
+    "fix": ""
+   },
+   {
+    "claim": "documents-only column (e.g. 55 E 7th rooftop chiller)",
+    "verdict": "CONFIRMED",
+    "evidence": "BP-2019-00595: '... add a new chiller on the rooftop ... eStruxture Data Centres Inc'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Saved copy (page.html) is not the data; the evidence is J.B.'s exports. Note this on the entry"
+  ],
+  "overall": "ok"
+ },
+ "edmZB5120": {
+  "where_read": "Online consolidated page blocked (WebFetch provenance). Read the as-adopted Charter Bylaw 20001 (local /mnt/attach/outputs/data/raw/edm/bylaw/b.txt, s. 5.120)",
+  "claims": [
+   {
+    "claim": "1.1 'Non-Industrial development must comply with the following'",
+    "verdict": "CONFIRMED",
+    "evidence": "'1.1. Non-Industrial development must comply with the following:'",
+    "fix": ""
+   },
+   {
+    "claim": "1.1.2 'All mechanical equipment, except for Solar Collectors, must be concealed by screening' or incorporated in the building",
+    "verdict": "CONFIRMED",
+    "evidence": "'All mechanical equipment, except for Solar Collectors, must be concealed by screening in a manner compatible with ... or by incorporating it within the building.'",
+    "fix": ""
+   },
+   {
+    "claim": "Does not apply to industrial development",
+    "verdict": "CONFIRMED",
+    "evidence": "Heading '1. Non-Industrial Development Standards'; scope is non-industrial only. Note s. 2 (Nuisances) applies to any non-Residential Use and allows extra screening",
+    "fix": ""
+   },
+   {
+    "claim": "Current consolidated wording same as adopted",
+    "verdict": "UNREACHABLE",
+    "evidence": "zoningbylaw.edmonton.ca blocked here",
+    "fix": "Re-check the online page for amendments"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "5.120 s. 2.1.1 lets the Development Planner require extra screening for any non-Residential Use creating a Nuisance, including industrial; 'does not apply to industrial' is true only for 1.1"
+  ],
+  "overall": "ok"
+ },
+ "edmZB2120": {
+  "where_read": "Online page blocked. Read as-adopted Bylaw 20001 (local b.txt) s. 2.120, 2.130, 2.140, 3.28, 3.4x, 3.141",
+  "claims": [
+   {
+    "claim": "BE s. 2.120 subs. 5.2 quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'5.2. All mechanical and electrical equipment, transformers, ducts, cooling towers, materials handling equipment or other similar exposed projections must be screened from view from Abutting Streets and Sites in non-industrial Zones.'",
+    "fix": ""
+   },
+   {
+    "claim": "IM and IH have no mechanical clause; storage/service areas screened; IM screens ≤3.7 m",
+    "verdict": "CONFIRMED",
+    "evidence": "IM 5.2 'Storage, waste collection and service areas ... must be screened'; 5.3 'The maximum Height of screening specified in Subsection 5.2 is 3.7 m'; IH 5.2 storage and service areas; no mechanical-equipment clause found in either. '?' settled for the adopted text",
+    "fix": ""
+   },
+   {
+    "claim": "Blatchford, CMUV, JAMSC require rooftop equipment concealed",
+    "verdict": "CONFIRMED",
+    "evidence": "JAMSC 6.27 'All minor mechanical equipment on a roof of any building must be concealed by screening'; Blatchford zones e.g. 6.5 'All mechanical equipment, except Solar Collectors, on a roof ... must be concealed'; CMUV 6.10 'Major mechanical equipment on a roof ... must be concealed'. '?' settled for adopted text",
+    "fix": "Note JAMSC covers 'minor' and CMUV 'major' mechanical equipment"
+   },
+   {
+    "claim": "Current consolidated wording",
+    "verdict": "UNREACHABLE",
+    "evidence": "online bylaw blocked",
+    "fix": "Re-check online for amendments since 2024"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "'outdoor storage' in the entry: the IM/IH clause says 'Storage, waste collection and service areas' (IM) and 'Storage and service areas' (IH), with exceptions where the street is a local road serving IM/IH or the abutting site is IM/IH"
+  ],
+  "overall": "ok"
+ },
+ "vanZDBs10": {
+  "where_read": "saved full.pdf (Section 10, footers May 2026) plus saved I-2, I-3, I-1C, FC-2 schedules",
+  "claims": [
+   {
+    "claim": "s. 10.1.1 (May 2026): Director may let mechanical equipment and related screening exceed max height",
+    "verdict": "CONFIRMED",
+    "evidence": "'(b) mechanical equipment, including elevator machine rooms, and any related screening materials that the Director of Planning considers appropriate to reduce visual impacts'",
+    "fix": ""
+   },
+   {
+    "claim": "roof energy technologies may exceed height",
+    "verdict": "CONFIRMED",
+    "evidence": "'(d) roof mounted energy technologies, zero-emission mechanical equipment ...'",
+    "fix": ""
+   },
+   {
+    "claim": "I-2, I-3, I-1C, FC-2 have no roof screening clause",
+    "verdict": "CONFIRMED",
+    "evidence": "No mechanical-screening clause in the saved schedules; only I-3 4.5.2 'garbage and recycling containers must be enclosed ... or screened'",
+    "fix": ""
+   },
+   {
+    "claim": "M-1, C-2 have no roof screening clause",
+    "verdict": "UNREACHABLE",
+    "evidence": "Schedules not saved; not checked",
+    "fix": ""
+   },
+   {
+    "claim": "IC-2 s. 4.2.4 and 2.2.1(e) require screening",
+    "verdict": "UNREACHABLE",
+    "evidence": "IC-2 schedule not saved; '?' stays",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "10.1.1 is discretionary ('may permit ... if the Director of Planning considers the impact ...'), not a requirement to screen"
+  ],
+  "overall": "ok"
+ },
+ "thGlobalSwitch2025": {
+  "where_read": "Committee report (mgConvert2PDF ID=252350) blocked by WebFetch provenance. Agenda item page (mgAi ID=162645, found by search) confirms PA/24/01932, Global Switch House, 3 Nutmeg Lane, SDC 23 Apr 2025, item 5.1; report itself not read",
+  "claims": [
+   {
+    "claim": "PA/24/01932, SDC 23 Apr 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "Agenda item: 'PA/24/01932: Global Switch House, 3 Nutmeg Lane ... Wednesday, 23 April 2025 ... (Item 5.1)'",
+    "fix": ""
+   },
+   {
+    "claim": "~10.7 m roof screen 'screening the bulk of the plant from view'",
+    "verdict": "UNREACHABLE",
+    "evidence": "report not reachable",
+    "fix": ""
+   },
+   {
+    "claim": "flues visible through ~10.5 m mesh screen",
+    "verdict": "UNREACHABLE",
+    "evidence": "report not reachable",
+    "fix": ""
+   },
+   {
+    "claim": "32 additional generators in the east extension",
+    "verdict": "UNREACHABLE",
+    "evidence": "report not reachable",
+    "fix": ""
+   },
+   {
+    "claim": "conditions on plant noise and grilles/louvres/vents/external plant",
+    "verdict": "UNREACHABLE",
+    "evidence": "report not reachable",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "All content figures rest on a single earlier check; not independently verified"
+  ],
+  "overall": "unreachable"
+ },
+ "abpHuntstown": {
+  "where_read": "saved full.pdf (ABP-313583-22 Board Order)",
+  "claims": [
+   {
+    "claim": "58 generators",
+    "verdict": "CONFIRMED",
+    "evidence": "'external plant and 58 number emergency generators located within a generator yard to the east and west of Buildings A and B at ground level'",
+    "fix": ""
+   },
+   {
+    "claim": "behind 'a circa 6.5 metres high louvred screen wall'",
+    "verdict": "CONFIRMED",
+    "evidence": "'The area is enclosed by a circa 6.5 metres high louvred screen wall'",
+    "fix": ""
+   },
+   {
+    "claim": "and berms",
+    "verdict": "CORRECTED",
+    "evidence": "'landscaping and berming (circa six metres high)' is listed among site works; not stated as screening the generators",
+    "fix": "Say 'site berming (c. 6 m)' separately; do not tie it to the generator yard"
+   },
+   {
+    "claim": "condition 18 bars plant above the parapet",
+    "verdict": "CORRECTED",
+    "evidence": "'18. No additional development shall take place above roof parapet level, including air handling equipment ... unless authorised by a further grant'",
+    "fix": "Condition 18 bars ADDITIONAL plant; the permission itself includes 'screened plant areas at roof levels' and height 'circa 32 metres including roof plant, roof vents and flues'"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "needs fix"
+ },
+ "abpCruiserath": {
+  "where_read": "saved full.pdf (PL 06F.248544 Board Order)",
+  "claims": [
+   {
+    "claim": "roof-level screened plant; 'screened plant' in development description",
+    "verdict": "CONFIRMED",
+    "evidence": "'screened plant and solar panels at roof level'",
+    "fix": ""
+   },
+   {
+    "claim": "parapet condition bars AHUs and tanks above the parapet",
+    "verdict": "CORRECTED",
+    "evidence": "Cond. 9: 'no additional development, other than that shown on submitted drawings, shall take place above roof parapet level including ... air handling equipment, storage tanks'",
+    "fix": "Name it Cond. 9 and say 'additional' plant beyond the drawings"
+   },
+   {
+    "claim": "flue-stack finishes agreed with planning authority (Cond. 6(a))",
+    "verdict": "CONFIRMED",
+    "evidence": "'6. ... (a) all proposed external finishes to the proposed buildings, including to the flue stacks, ... agreed in writing with, the planning authority.' '?' settled",
+    "fix": ""
+   },
+   {
+    "claim": "Cruiserath, Dublin 15",
+    "verdict": "CORRECTED",
+    "evidence": "Order says 'bound to the south by the R121/Cruiserath Road ... Hollywood Road, Dublin'; Fingal County Council; 'Dublin 15' not in the order",
+    "fix": "Use 'Cruiserath Road, Fingal (Dublin)' or source Dublin 15 elsewhere"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Generators and emission stacks are in an adjacent ground compound ('Emergency generators, emission stacks ... in the adjacent compound'), not on the roof; make sure the visibility row does not imply roof generators"
+  ],
+  "overall": "needs fix"
+ },
+ "drieeEtix2010": {
+  "where_read": "WebFetch of the entry URL (reachable once surfaced by WebSearch)",
+  "claims": [
+   {
+    "claim": "DRIEE Île-de-France inspection report, 2010",
+    "verdict": "CONFIRMED",
+    "evidence": "'Rapport de l'inspection des installations classées', DRIEE IdF, UT Seine-Saint-Denis, dated 23 Nov 2010",
+    "fix": ""
+   },
+   {
+    "claim": "Etix data centre in a former postal building, Pantin",
+    "verdict": "CONFIRMED",
+    "evidence": "'l'ancien bâtiment de tri postal de Pantin'; applicant SODEARIF, future operator ETIX DATA CENTER; site straddles Pantin and Bobigny",
+    "fix": ""
+   },
+   {
+    "claim": "26 generators in dedicated soundproofed containers on the roof terrace",
+    "verdict": "CONFIRMED",
+    "evidence": "'La terrasse du bâtiment principal inclura les 26 groupes électrogènes en conteneurs avec isolation acoustique intégrée' (8 of the 26 for emergency; one calculation uses 18)",
+    "fix": ""
+   },
+   {
+    "claim": "chillers with integrated dry coolers on the roof",
+    "verdict": "CONFIRMED",
+    "evidence": "Chillers 'en terrasse', 'tout-en-un' with integrated drycooler; 20 units; behind a louvred façade parapet",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "It is a 2010 pre-authorisation report on a proposal; built outcome not shown"
+  ],
+  "overall": "ok"
+ },
+ "spencerBldg": {
+  "where_read": "Smith + Andersen PDF not reachable (WebFetch provenance; not in search results). Permit claims checked against /mnt/attach/outputs/data/vancouver_permits_7sites.json",
+  "claims": [
+   {
+    "claim": "sheet: air-cooled chillers and generators 'utilizing the limited roof space available'; no screening info",
+    "verdict": "UNREACHABLE",
+    "evidence": "consultant sheet not reachable",
+    "fix": ""
+   },
+   {
+    "claim": "BP-2022-05512 (Apr 2023, Office -> Bulk Data Storage on floors 6, 8, 9; generators to L8 roof well)",
+    "verdict": "CONFIRMED",
+    "evidence": "Issued 2023-04-14: 'change of major occupancy from Office (group D) to Bulk Data Storage (group F2) ... entire 6th, 8th and 9th floors' ... 'Generators relocated from P1 to a new (exterior) roof well on L8'",
+    "fix": ""
+   },
+   {
+    "claim": "BP-2024-01976",
+    "verdict": "CONFIRMED",
+    "evidence": "Issued 2024-10-01: 'Interior alterations to replace generator in the parkade level P1'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Link from the sheet (no address) to 515 W Hastings is an inference; the permit text names 'the East Tower - The Spencer Building'",
+   "Smith + Andersen appear as engineers on BP-2024-01976 (Schedule B emails), which supports the link"
+  ],
+  "overall": "unreachable"
+ },
+ "bahnhofPionen": {
+  "where_read": "Bahnhof PDF not reachable (WebFetch provenance; search gave only Wikipedia/aggregators, not used)",
+  "claims": [
+   {
+    "claim": "former Cold War bunker 30 m into rock beneath Vita Bergen (operator claim)",
+    "verdict": "UNREACHABLE",
+    "evidence": "operator PDF not reached",
+    "fix": ""
+   },
+   {
+    "claim": "generators inside the rock, only entrance visible (inference)",
+    "verdict": "UNREACHABLE",
+    "evidence": "flagged '?' by the entry; cannot settle",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "The second claim is the register's own inference; keep it out of the tool until sourced"
+  ],
+  "overall": "unreachable"
+ },
+ "lpc50Hudson": {
+  "where_read": "saved full.pdf (LPC COFA-19-24537)",
+  "claims": [
+   {
+    "claim": "'installing mechanical units set behind a louvered screen'",
+    "verdict": "CONFIRMED",
+    "evidence": "'at the roof of the new addition, installing mechanical units set behind a louvered screen'",
+    "fix": ""
+   },
+   {
+    "claim": "mechanical bulkhead and penthouse judged not visible from public thoroughfares",
+    "verdict": "CONFIRMED",
+    "evidence": "'the mechanical bulkhead and glass-clad penthouse will not be visibile from any public throughfare' [sic]",
+    "fix": ""
+   },
+   {
+    "claim": "applies to the screened units?",
+    "verdict": "NOT FOUND",
+    "evidence": "Finding names only the bulkhead and penthouse; units not mentioned. '?' stays: cannot be extended to the units",
+    "fix": ""
+   },
+   {
+    "claim": "not documented as a data centre",
+    "verdict": "CONFIRMED",
+    "evidence": "Permit text has no data-centre reference; issued 06/20/18 to 50 Hudson LLC, Tribeca West HD",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "fairfaxDC2024": {
+  "where_read": "saved page.html (Fairfax news release, published 09/11/2024)",
+  "claims": [
+   {
+    "claim": "adopted 10 Sep 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "'On Sept. 10, the Board of Supervisors approved a data center zoning ordinance amendment' (published 09/11/2024)",
+    "fix": ""
+   },
+   {
+    "claim": "'all equipment must be enclosed or screened by a wall or similar barrier'",
+    "verdict": "CONFIRMED",
+    "evidence": "'all equipment must be enclosed or screened by a wall or similar barrier to reduce visual and noise impacts'",
+    "fix": ""
+   },
+   {
+    "claim": "generators 300 ft from residential lot line, or separated by the building; less by special exception",
+    "verdict": "CONFIRMED",
+    "evidence": "'back-up generators must be 300 feet from the lot line of residential property or separated ... by the data center building. Lesser distances may be allowed with special exception'",
+    "fix": ""
+   },
+   {
+    "claim": "noise studies before and after",
+    "verdict": "CONFIRMED",
+    "evidence": "'Pre- and post-construction noise studies must be submitted'",
+    "fix": ""
+   },
+   {
+    "claim": "May 2024 staff report",
+    "verdict": "NOT FOUND",
+    "evidence": "Release mentions only 'virtual community meetings in May'; no staff report",
+    "fix": "Drop or source the staff report separately"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "News release, not ordinance text (entry says so); also lists 200 ft building setback and 1 mile from Metro, not in entry"
+  ],
+  "overall": "ok"
+ },
+ "loudounDC": {
+  "where_read": "saved page.html (Zoning Ordinance Rewrite Change Highlights, Chapter 4; last updated 12/18/2023)",
+  "claims": [
+   {
+    "claim": "'fully-screened mechanical equipment', soundproofing roof or ground plant",
+    "verdict": "CORRECTED",
+    "evidence": "'New standards for data centers adjacent to residential property require ... soundproofing roof-top or ground-mounted mechanical equipment ... fully-screened mechanical equipment'",
+    "fix": "Add that these apply to data centres ADJACENT TO RESIDENTIAL property"
+   },
+   {
+    "claim": "principal facade treatment on all sides adjacent to residential and listed uses",
+    "verdict": "CONFIRMED",
+    "evidence": "'Principal façade building treatments must be provided on all sides ... adjacent to residential property or other uses, such as stand-alone religious assemblies, parks, farm wineries, and limited breweries'",
+    "fix": ""
+   },
+   {
+    "claim": "summary page, no section numbers",
+    "verdict": "CORRECTED",
+    "evidence": "Page is 'Chapter 4: Use-Specific Standards'",
+    "fix": "Cite as Chapter 4 summary"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "needs fix"
+ },
+ "amsterdamDC2020": {
+  "where_read": "saved full.pdf (Vestigingsbeleid datacenters 2020-2030, eerste herziening)",
+  "claims": [
+   {
+    "claim": "only 'intensief gestapeld'",
+    "verdict": "CONFIRMED",
+    "evidence": "s. 3.3.2: 'Datacentergebouwen mogen alleen intensief gestapeld uitgevoerd worden'",
+    "fix": ""
+   },
+   {
+    "claim": "underground encouraged",
+    "verdict": "CONFIRMED",
+    "evidence": "'wordt ondergronds bouwen van een datacenter aangemoedigd' (where technique allows and combined with other users)",
+    "fix": ""
+   },
+   {
+    "claim": "no roof-plant or screening rule",
+    "verdict": "CONFIRMED",
+    "evidence": "No roof ('dak') or screening clause found; s. 3.3.3 only assesses spatial design (relation to surroundings, volume, plinth)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "URL is hosted by odnzkg.nl (environment agency), not the City; note host"
+  ],
+  "overall": "ok"
+ },
+ "yorkClearance2024": {
+  "where_read": "WebFetch of the entry URL (surfaced by WebSearch)",
+  "claims": [
+   {
+    "claim": "10 Jun 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "'June 10, 2024'",
+    "fix": ""
+   },
+   {
+    "claim": "12 ft wall 6 ft from chiller, units up to 26 fans",
+    "verdict": "CONFIRMED",
+    "evidence": "'for units having up to 26 fans with a surrounding wall height of 12 feet placed at a distance six feet away'",
+    "fix": ""
+   },
+   {
+    "claim": ">4.5% capacity loss, >6.0% power rise",
+    "verdict": "CONFIRMED",
+    "evidence": "'the capacity was decreased by more than 4.5%' ... 'the power requirement increased by more than 6.0%'",
+    "fix": ""
+   },
+   {
+    "claim": "thin walls/fences no taller than unit 'without any negligible derating' [sic]",
+    "verdict": "CONFIRMED",
+    "evidence": "'without any negligible derating to capacity or increase in power required, providing the wall does not exceed the height of the chiller'",
+    "fix": ""
+   },
+   {
+    "claim": "vendor testing, manufacturer claim",
+    "verdict": "CONFIRMED",
+    "evidence": "First-person 'our testing'; YORK YVAA and YLAA units",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Result is for a solid wall/pit; the entry should keep 'solid wall' explicit"
+  ],
+  "overall": "ok"
+ },
+ "van_zdb_s2": {
+  "where_read": "saved full.pdf (Section 2 definitions)",
+  "claims": [
+   {
+    "claim": "Section 2, Bulk Data Storage definition",
+    "verdict": "CONFIRMED",
+    "evidence": "'Bulk Data Storage  The use of a wholly enclosed building for the storage of information on operating data servers.' Listed under Transportation and Storage Uses",
+    "fix": ""
+   },
+   {
+    "claim": "June 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "All footers 'June 2026'. '?' settled for this copy: no 2018 footers found",
+    "fix": ""
+   },
+   {
+    "claim": "By-law No. 3575",
+    "verdict": "NOT FOUND",
+    "evidence": "Number not printed in saved copy (confirms the entry's note)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Section 2 defines the use; it does not say where it is allowed or conditional. The zoning status comes from the district schedules"
+  ],
+  "overall": "ok"
+ },
+ "van_zdb_i2": {
+  "where_read": "saved full.pdf (also /mnt/attach/outputs/data/raw/codes/van_I-2_schedule.txt)",
+  "claims": [
+   {
+    "claim": "dated March 2025",
+    "verdict": "CORRECTED",
+    "evidence": "All 20 footers in the saved copy read 'June 2026' (local codes copy also June 2026)",
+    "fix": "Change to June 2026; '?' settled"
+   },
+   {
+    "claim": "supports zoning status",
+    "verdict": "CONFIRMED",
+    "evidence": "'Bulk Data Storage  Conditional  2.2.1, 2.2.7'; 2.2.7 'Bulk data storage is not permitted at the ground floor, except for entrances.'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "needs fix"
+ },
+ "van_zdb_i1c": {
+  "where_read": "saved full.pdf",
+  "claims": [
+   {
+    "claim": "dated November 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "All footers 'November 2025'; currency vs online not checked",
+    "fix": ""
+   },
+   {
+    "claim": "supports zoning status",
+    "verdict": "CONFIRMED",
+    "evidence": "'Bulk Data Storage  Conditional  2.2.1'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "van_zdb_i3": {
+  "where_read": "saved full.pdf",
+  "claims": [
+   {
+    "claim": "June 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Footers 'June 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 2.2.11",
+    "verdict": "CONFIRMED",
+    "evidence": "'2.2.11 Bulk data storage is not permitted at the ground floor, except for entrances.'; table: 'Bulk Data Storage, only in sub-area A  Conditional  2.2.1, 2.2.11'",
+    "fix": ""
+   },
+   {
+    "claim": "ss. 3.1.1-3.1.2",
+    "verdict": "CONFIRMED",
+    "evidence": "3.1 'All Uses in Sub-Area A': 3.1.1 Density (max FSR 3.00), 3.1.2 Building Form (max height 18.3 m)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "van_zdb_fc2": {
+  "where_read": "saved full.pdf",
+  "claims": [
+   {
+    "claim": "June 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Footers 'June 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 2.2.4",
+    "verdict": "CONFIRMED",
+    "evidence": "'2.2.4 Dwelling uses, office uses and bulk data storage are not permitted at grade, except for entrances.'; 'Bulk Data Storage  Conditional  2.2.1, 2.2.4'",
+    "fix": ""
+   },
+   {
+    "claim": "ss. 3.1-3.4",
+    "verdict": "CONFIRMED",
+    "evidence": "3.1 Sub-Areas A and B; 3.2 C1; 3.3 C2 and D; 3.4 E",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "van_cd1": {
+  "where_read": "saved page.html (saved from .../ByCD-1Number%20-%202.htm, a page of the index)",
+  "claims": [
+   {
+    "claim": "CD-1 by-laws index",
+    "verdict": "CONFIRMED",
+    "evidence": "'A separate CD-1 (comprehensive development district) by-law specifically made for the intended form of development exists for each area or site zoned CD-1.'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Index only; each CD-1 site's status needs its own by-law"
+  ],
+  "overall": "ok"
+ },
+ "edm_matrix": {
+  "where_read": "saved full.pdf",
+  "claims": [
+   {
+    "claim": "Land Use & Zoning Matrix: Uses in Standard Zones, October 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Cover: 'Land Use & Zoning Matrix: Uses in Standard Zones ... October 2026'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Matrix has no 'data centre' use; any status the tool reads from it relies on mapping data centres to another use class, which the matrix does not state. City says the matrix is 'created for convenience only'"
+  ],
+  "overall": "ok"
+ },
+ "edm_dcpage": {
+  "where_read": "/mnt/attach/outputs/data/raw/edm/data_centre_development_page.pdf (created 14 Oct 2026) and dcp-1.png",
+  "claims": [
+   {
+    "claim": "Data Centre Development web page, saved 14 Oct 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "PDF title 'Data Centre Development _ City of Edmonton', created 14 Oct 2026; page: 'The City's role is limited to overseeing land use plans and zoning regulations.'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Page notes an EETP application to allow data centres as permitted uses in the Medium Industrial Precinct (feedback to 25 Oct 2026); this is a proposal, not current zoning"
+  ],
+  "overall": "ok"
+ },
+ "edm_bl20001": {
+  "where_read": "/mnt/attach/outputs/data/raw/edm/bylaw/Bylaw20001.pdf (ModDate 3 Jan 2024) and b.txt",
+  "claims": [
+   {
+    "claim": "Charter Bylaw 20001 as adopted",
+    "verdict": "CONFIRMED",
+    "evidence": "'SIGNED and PASSED this 23rd day of October, A. D. 2023'; effective 'January 1, 2024'",
+    "fix": ""
+   },
+   {
+    "claim": "PDF 3 Jan 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "PDF ModDate 'Wed Jan 3 08:05:19 2024'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 2.130 IM, 2.140 IH, 5.70, 5.120, 8.10",
+    "verdict": "CONFIRMED",
+    "evidence": "TOC: '2.130 IM - Medium Industrial Zone', '2.140 IH - Heavy Industrial Zone', '5.70 Measuring Height and Grade', '5.120 Site Performance Standards', '8.10 Use Definitions'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "As-adopted text; later amendments not reflected"
+  ],
+  "overall": "ok"
+ },
+ "vanR3R4R5": {
+  "where_read": "saved full.pdf (Rezoning guide, 5 Jan 2026)",
+  "claims": [
+   {
+    "claim": "R3/R4/R5 approved by Council Oct 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'were approved by City Council in October 2025'",
+    "fix": ""
+   },
+   {
+    "claim": "heights 27.5, 47.0, 84.0 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'R3-2 27.5 m (90 ft)'; 'R4-1 47.0 m (154 ft)'; 'R5-2 84.0 m (276 ft)'",
+    "fix": ""
+   },
+   {
+    "claim": "guide 5 Jan 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'January 5, 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "heights are maximums for the standardized rezoning options",
+    "verdict": "CORRECTED",
+    "evidence": "Title: 'Rezoning to R3, R4, and R5 District Schedules in the Broadway Plan area'; 'R3, R4, and R5 district schedules also contain lower-density development options'",
+    "fix": "Add 'in the Broadway Plan area'"
+   },
+   {
+    "claim": "R1-1 and RT- small-scale districts",
+    "verdict": "NOT FOUND",
+    "evidence": "Not in this guide; '?' stays",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "needs fix"
+ },
+ "edmZBres": {
+  "where_read": "Online page blocked. Read as-adopted Bylaw 20001 (local b.txt) zone purpose statements",
+  "claims": [
+   {
+    "claim": "RS, RSF up to 3 storeys",
+    "verdict": "CONFIRMED",
+    "evidence": "RS and RSF: 'small scale Residential development up to 3 Storeys in Height'",
+    "fix": ""
+   },
+   {
+    "claim": "RSM 'up to 3 or 4 Storeys'",
+    "verdict": "CONFIRMED",
+    "evidence": "'up to 3 or 4 Storeys in Height'",
+    "fix": ""
+   },
+   {
+    "claim": "RM 4-8",
+    "verdict": "CONFIRMED",
+    "evidence": "'ranges from approximately 4 to 8 Storeys'. '?' settled",
+    "fix": ""
+   },
+   {
+    "claim": "RL 9-20",
+    "verdict": "CONFIRMED",
+    "evidence": "'ranges from approximately 9 to 20 Storeys'",
+    "fix": ""
+   },
+   {
+    "claim": "RR rural residential",
+    "verdict": "CONFIRMED",
+    "evidence": "'To allow for rural residential development'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Adopted 2023 text; online current version not checked"
+  ],
+  "overall": "ok"
+ },
+ "abConsult": {
+  "where_read": "saved page.html (alberta.ca/datacentres/indigenous)",
+  "claims": [
+   {
+    "claim": "'cannot receive its Water Act licence, its public lands disposition or its environmental approval' until consultation complete",
+    "verdict": "CONFIRMED",
+    "evidence": "'A project cannot receive its Water Act licence, its public lands disposition or its environmental approval until that requirement is satisfied.' '?' settled: quote is on the page",
+    "fix": "Add 'where the duty applies'"
+   },
+   {
+    "claim": "EPEA approval for backup generation over 50 MW (EPA fact sheet 20 Jul 2026)",
+    "verdict": "NOT FOUND",
+    "evidence": "Not on this page; separate document",
+    "fix": "Cite the fact sheet as its own entry"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Duty applies only where a project 'could adversely affect Treaty rights'; the page says this explicitly"
+  ],
+  "overall": "needs fix"
+ },
+ "vanUndrip": {
+  "where_read": "WebFetch of council.vancouver.ca/20221025/documents/p1.pdf (first 100k of 130k chars). Action Plan PDF not reachable",
+  "claims": [
+   {
+    "claim": "report 25 Oct 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "Cover date 'October 25, 2022'. '?' settled",
+    "fix": ""
+   },
+   {
+    "claim": "79 Calls to Action",
+    "verdict": "CONFIRMED",
+    "evidence": "79 Calls to Action",
+    "fix": ""
+   },
+   {
+    "claim": "1.18 first right of refusal on City land",
+    "verdict": "CONFIRMED",
+    "evidence": "'This should include first right of refusal for Musqueam, Squamish, and Tsleil-Waututh for City land dispositions.'",
+    "fix": ""
+   },
+   {
+    "claim": "2.3 'include this in permitting decisions'",
+    "verdict": "CONFIRMED",
+    "evidence": "'... assess current and future industrial infrastructure development through the lens of Indigenous rights and title, and environmental racism, and include this in permitting decisions.'",
+    "fix": ""
+   },
+   {
+    "claim": "3.10 free, prior and informed consent",
+    "verdict": "CONFIRMED",
+    "evidence": "'based on genuine free, prior and informed consent rather than mere consultation.'",
+    "fix": ""
+   },
+   {
+    "claim": "Action Plan 2024-28, endorsed 25 Jun 2024, 'early engagement threshold points'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Action Plan PDF not reachable; '?' stays",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "2.3 is a call to co-develop a policy, not an existing permitting rule"
+  ],
+  "overall": "ok"
+ },
+ "bcDeclarationAct": {
+  "where_read": "bclaws and gov.bc.ca guide URLs blocked (WebFetch provenance); not surfaced by search",
+  "claims": [
+   {
+    "claim": "DRIPA (2019) s. 3",
+    "verdict": "UNREACHABLE",
+    "evidence": "not reachable",
+    "fix": ""
+   },
+   {
+    "claim": "Interpretation Act amendment 23 Nov 2021",
+    "verdict": "UNREACHABLE",
+    "evidence": "not reachable",
+    "fix": ""
+   },
+   {
+    "claim": "Province's plan sets no local-government duties",
+    "verdict": "UNREACHABLE",
+    "evidence": "not reachable",
+    "fix": ""
+   },
+   {
+    "claim": "guide (rev. Dec 2014): no constitutional duty; statutory obligation 'to consider whether consultation ... is required'",
+    "verdict": "UNREACHABLE",
+    "evidence": "not reachable",
+    "fix": ""
+   },
+   {
+    "claim": "Province's duty includes 'decisions that affect private land'",
+    "verdict": "UNREACHABLE",
+    "evidence": "not reachable",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [],
+  "overall": "unreachable"
+ },
+ "bcEAthresholds": {
+  "where_read": "saved page.html (B.C. Reg. 243/2019, bclaws)",
+  "claims": [
+   {
+    "claim": "power plants ≥50 MW",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 7: 'A new project with a rated nameplate capacity of ≥ 50 MW of electricity' (hydro, thermal or other)",
+    "fix": ""
+   },
+   {
+    "claim": "transmission ≥345 kV and ≥40 km",
+    "verdict": "CONFIRMED",
+    "evidence": "'a new transmission line of 345 kV or higher voltage and of 40 km or more in length, if ... not alongside and contiguous to ... previously developed'",
+    "fix": ""
+   },
+   {
+    "claim": "groundwater ≥75 L/s",
+    "verdict": "CONFIRMED",
+    "evidence": "'extracted at a rate of ≥ 75 litres/second' (operated ≥ 1 year)",
+    "fix": ""
+   },
+   {
+    "claim": "data centres not listed",
+    "verdict": "CONFIRMED",
+    "evidence": "No data-centre category found in the regulation text",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Section 4 also makes any project emitting ≥380,000 t CO2e/yr reviewable; worth adding"
+  ],
+  "overall": "ok"
+ }
+}

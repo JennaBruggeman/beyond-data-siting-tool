@@ -1,0 +1,1102 @@
+{
+ "femp": {
+  "where_read": "saved copy femp/page.html (energy.gov BMP #10)",
+  "claims": [
+   {
+    "claim": "Make-up = evaporation + blowdown + drift",
+    "verdict": "CONFIRMED",
+    "evidence": "\"The sum of water that is lost from the tower must be replaced by make-up water: Make-Up = Evaporation + Blowdown + Drift\"",
+    "fix": ""
+   },
+   {
+    "claim": "cycles ≈ make-up ÷ blowdown",
+    "verdict": "CONFIRMED",
+    "evidence": "\"cycles of concentration are also approximately equal to the ratio of volume of make-up to blowdown water\"",
+    "fix": ""
+   },
+   {
+    "claim": "3→6 cycles cuts make-up ~20 %",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Increasing cycles from three to six reduces cooling tower make-up water by 20% and cooling tower blowdown by 50%.\"",
+    "fix": ""
+   },
+   {
+    "claim": "E ≤ Q/h_fg (~1.5 L/kWh), B = E/(C−1), WUE (ISO 30134-9) are own derivations, not in BMP #10",
+    "verdict": "CONFIRMED",
+    "evidence": "No h_fg, L/kWh, E/(C−1) or WUE text on the page; label is correct.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Role 'all coefficients' for evaporation overstates: BMP #10 gives only the water balance, the cycles ratio and the 3→6 example. The evaporation coefficient (~1.5 L/kWh) and blowdown = E/(C−1) are our own derivations and need their own engineering source (e.g. a thermodynamics text)."
+  ],
+  "overall": "ok"
+ },
+ "pspcLegionella": {
+  "where_read": "URL via WebFetch (after WebSearch surfaced it); page shows 'Chapter 3: Cooling towers and evaporative condensers'",
+  "claims": [
+   {
+    "claim": "\"minimum separation distance shall be 10 metres between the cooling tower and any air intake\"",
+    "verdict": "CORRECTED",
+    "evidence": "Cl. 3.2.2: \"The minimum separation distance shall be 10 metres between the cooling tower and any air intake or other critical receptor.\"",
+    "fix": "Quote is truncated mid-sentence; add 'or other critical receptor' and cite Cl. 3.2.2. Cl. 3.2.3 asks for more than 10 m where contamination risk is greater."
+   },
+   {
+    "claim": "drift eliminators",
+    "verdict": "CONFIRMED",
+    "evidence": "Cl. 3.2.6: \"Cooling towers shall be equipped with high-performance drift eliminators.\"",
+    "fix": ""
+   },
+   {
+    "claim": "PSPC Chapter 3, federal property",
+    "verdict": "CONFIRMED",
+    "evidence": "PSPC page, Chapter 3. VBBL Book II Table 1.3.1.2 cites it as 'PSPC MD 15161-2013 Control of Legionella in Mechanical Systems'.",
+    "fix": "Could name the document: MD 15161-2013."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Applies to federal property; for a Vancouver or Edmonton private data centre it is guidance only. VBBL 7.6 m governs in Vancouver."
+  ],
+  "overall": "needs fix"
+ },
+ "vanCTseminar2021": {
+  "where_read": "saved copy vanCTseminar2021/full.pdf",
+  "claims": [
+   {
+    "claim": "City of Vancouver operating permits seminar slides, Nov 2021",
+    "verdict": "CONFIRMED",
+    "evidence": "\"FALL 2021 CP UPDATE SEMINAR … City of Vancouver … NOVEMBER 4, 2021\"",
+    "fix": ""
+   },
+   {
+    "claim": "7.6 m from outdoor air intakes; 3 m from doors, operable windows and occupiable outdoor space; 2.15 m above sidewalks",
+    "verdict": "CONFIRMED",
+    "evidence": "\"7.6 m from outdoor air intakes, • 3 m from doors, operable windows and occupiable outdoor spaces, • 2.15 m above sidewalks and driveways.\"",
+    "fix": ""
+   },
+   {
+    "claim": "VBBL text in vbbl2025_63215 confirms the figures",
+    "verdict": "CONFIRMED",
+    "evidence": "VBBL 2025 Book I 6.3.2.15.(5)(a)–(d) gives the same 2.15 / 7.6 / 3 / 3 m (see vbbl2025_63215). The slides cite 'VBBL Book I, Article 6.3.2.15.' (2019 edition, in 2021).",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "vbbl2025_63215": {
+  "where_read": "local /mnt/attach/outputs/data/raw/codes/vbbl2025_v1.txt (Book I Vol 1, consolidated to 30 Sep 2026 v4.01), vbbl2025_v2.txt, vbbl2025_bookII_insert.txt",
+  "claims": [
+   {
+    "claim": "Art. 6.3.2.15 discharge 'away from the building … not less than a) 2.15 m … b) 7.6 m … c) 3 m … d) 3 m … from occupiable outdoor spaces'",
+    "verdict": "CONFIRMED",
+    "evidence": "6.3.2.15.(5): \"…discharge away from the building, so as to not re-enter it, to a distance not less than a) 2.15 m above sidewalks…b) 7.6 m from outdoor air intakes\"",
+    "fix": "Optional: (d) continues 'excluding maintenance spaces'. (5) is 'Except as provided in Sentence (6)' (health care facilities: CSA Z317.2)."
+   },
+   {
+    "claim": "drift eliminator",
+    "verdict": "CONFIRMED",
+    "evidence": "6.3.2.15.(1)(a) \"incorporate a drift eliminator or other means to minimize the dispersion of entrained water droplets\"",
+    "fix": ""
+   },
+   {
+    "claim": "drains and blow-downs to building drainage, Clause 2.4.2.1.(1)(e) Book II",
+    "verdict": "CONFIRMED",
+    "evidence": "6.3.2.15.(10) \"Drains, overflows and blow-downs shall be connected to the building's drainage system in accordance with Clause 2.4.2.1.(1)(e) of Division B of Book II\"",
+    "fix": ""
+   },
+   {
+    "claim": "operating permit per Book II Art. 2.2.11.6",
+    "verdict": "CONFIRMED",
+    "evidence": "Book II 2.2.11.6.(1): \"An operating permit shall be obtained for the installation of a cooling tower, or the retention of an existing cooling tower\"",
+    "fix": ""
+   },
+   {
+    "claim": "NFPA 855 not among NFPA standards Book I cites",
+    "verdict": "CONFIRMED",
+    "evidence": "Zero occurrences of '855' in vbbl2025_v1.txt and vbbl2025_v2.txt; NFPA list runs NFPA 10…96 without 855.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "abAIDCstrategy2024": {
+  "where_read": "saved copy abAIDCstrategy2024/full.pdf + page.html",
+  "claims": [
+   {
+    "claim": "Technology and Innovation, Dec 2024, ISBN 978-1-4601-6171-5",
+    "verdict": "CONFIRMED",
+    "evidence": "\"© 2024 Government of Alberta | Published: December, 2024 | ISBN 978-1-4601-6171-5\"",
+    "fix": ""
+   },
+   {
+    "claim": "three pillars: power capacity, sustainable cooling, economic growth",
+    "verdict": "CONFIRMED",
+    "evidence": "\"The three pillars of Alberta's AI data centre strategy—Power Capacity, Sustainable Cooling, and Economic Growth\"",
+    "fix": ""
+   },
+   {
+    "claim": "off-grid and grid-connected solutions 'that avoid compromising the affordability and reliability of electricity for Albertans'",
+    "verdict": "CONFIRMED",
+    "evidence": "\"evaluate both off-grid and grid-connected power solutions that avoid compromising the affordability and reliability of electricity for Albertans and local industries\"",
+    "fix": ""
+   },
+   {
+    "claim": "natural gas with renewables and possibly carbon capture",
+    "verdict": "CONFIRMED",
+    "evidence": "\"integration of renewable energy sources and may include investments in carbon capture technology\"",
+    "fix": ""
+   },
+   {
+    "claim": "'Alberta will explore innovative ways of capturing and utilizing the heat generated by AI data centres'",
+    "verdict": "CONFIRMED",
+    "evidence": "Pillar 2, p.9: \"Alberta will explore innovative ways of capturing and utilizing the heat generated by AI data centres.\"",
+    "fix": ""
+   },
+   {
+    "claim": "cooling strategies that respect the province's water capacity",
+    "verdict": "CONFIRMED",
+    "evidence": "\"best-in-class cooling strategies that respect the province's water capacity and resources\"",
+    "fix": ""
+   },
+   {
+    "claim": "Water Act allocation line in 'Water' section, p. 6, not under pillar (?)",
+    "verdict": "CORRECTED",
+    "evidence": "Water section ends on page with footer '…Technology and Innovation 7': \"Alberta's Water Act provides a regulatory framework that seeks to allocate water resources based on sustainable usage\"",
+    "fix": "Page 7, not 6 (PDF page 7, printed footer 7). Being outside the pillars is confirmed: pillars start p.8. Remove '?'."
+   },
+   {
+    "claim": "economic growth (tax and shared prosperity)",
+    "verdict": "CONFIRMED",
+    "evidence": "Pillar 3 has \"With Canada's lowest tax regime\" and a \"Shared prosperity\" heading.",
+    "fix": ""
+   },
+   {
+    "claim": "An intention, not a requirement",
+    "verdict": "CONFIRMED",
+    "evidence": "Wording is 'will evaluate', 'will explore', 'may include' throughout.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "needs fix"
+ },
+ "gridBC": {
+  "where_read": "saved copy gridBC/page.html (gov.bc.ca, last updated 26 May 2026)",
+  "claims": [
+   {
+    "claim": "2025 Integrated Grid 22.8 tCO2e/GWh",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 'B.C.'s grid electricity GHG emission intensity factors in tCO2e/GWh': 2025 Integrated Grid 22.8",
+    "fix": ""
+   },
+   {
+    "claim": "2024: 9.9",
+    "verdict": "CONFIRMED",
+    "evidence": "2024 row: 9.9",
+    "fix": ""
+   },
+   {
+    "claim": "consumption-based",
+    "verdict": "CONFIRMED",
+    "evidence": "\"The EEIFs are consumption-based estimate, meaning electricity imports are included and exports are excluded.\"",
+    "fix": ""
+   },
+   {
+    "claim": "Fort Nelson differs",
+    "verdict": "CONFIRMED",
+    "evidence": "\"The Fort Nelson Grid depends more on fossil fuels, resulting in a higher EEIF.\"",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Worth noting in the entry: the factor is a 4-year rolling window ('2025's EEIF uses data from 2021-2024'), so it is not a single-year value like the NIR series."
+  ],
+  "overall": "ok"
+ },
+ "gridAB": {
+  "where_read": "saved copy gridAB/page.html (alberta.ca)",
+  "claims": [
+   {
+    "claim": "Alberta 335 g CO2e/kWh (2024)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"…to 335 grams of carbon dioxide equivalent per kilowatt hour in 2024\"",
+    "fix": ""
+   },
+   {
+    "claim": "generation-based",
+    "verdict": "CONFIRMED",
+    "evidence": "Figure 7 axis: \"Generation Intensity (g CO₂ eq / kWh)\"; text: '…per kilowatt hour of electricity generated'",
+    "fix": ""
+   },
+   {
+    "claim": "citing NIR 2026 Table A7-10",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Source: Environment and Climate Change Canada, 2026 National Inventory Report 1990-2024 … Table A7-10, Annex 7.\"",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "abEGDF": {
+  "where_read": "saved copies abEGDF/older_v3-1_2023-01.pdf, older_v3-2_2025-08.pdf, full_v3-3_2026-08.pdf, page.html (open.alberta.ca)",
+  "claims": [
+   {
+    "claim": "Alberta Environment and Protected Areas, Handbook v3.1 (Feb 2023 ?: page shows updated 31 Jan 2023)",
+    "verdict": "CORRECTED",
+    "evidence": "v3.1 cover: \"Version 3.1 | Alberta Environment and Protected Areas © 2023 Government of Alberta | February 2, 2023\"; page resource 'created': '2023-01-31'",
+    "fix": "Settled: cover date 2 Feb 2023. 31 Jan 2023 is the open.alberta.ca upload date. Remove '?'."
+   },
+   {
+    "claim": "v3.2 (Aug 2025)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Version 3.2 … © 2025 Government of Alberta | August 20, 2025\"",
+    "fix": ""
+   },
+   {
+    "claim": "v3.3 (Aug 2026)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Version 3.3 … © 2026 Government of Alberta | August, 2026 | ISBN 978-1-4601-6624-6\"",
+    "fix": ""
+   },
+   {
+    "claim": "the Aug dates on alberta.ca are effective dates",
+    "verdict": "CORRECTED",
+    "evidence": "The page is open.alberta.ca, not alberta.ca. Its resource 'created' dates (2025-08-20, 2026-08-27) are upload dates, and they match the cover dates. Neither cover calls them effective dates.",
+    "fix": "Drop 'effective dates'. Cite the cover dates: v3.2 20 Aug 2025, v3.3 Aug 2026 (page modified 27 Aug 2026)."
+   },
+   {
+    "claim": "publisher not printed on the page ?",
+    "verdict": "CORRECTED",
+    "evidence": "Every cover/footer prints \"Carbon Offset Emission Factors Handbook Version 3.3 | Alberta Environment and Protected Areas\"; the page's organization is 'Environment and Protected Areas'.",
+    "fix": "Publisher is printed. Remove the '?' remark."
+   },
+   {
+    "claim": "Tables 1, 2, 5",
+    "verdict": "CONFIRMED",
+    "evidence": "v3.3 contents: 'Table 1: Electricity Grid Displacement Factors … 6', 'Table 2: Electricity Grid Displacement and Grid Usage Factors … 7', 'Table 5: Emission Factors for Combustion of Natural Gas and Natural Gas Liquids … 8'",
+    "fix": ""
+   },
+   {
+    "claim": "role: displacement schedule 0.49→0.34 t/MWh",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 1, renewable generation: 2024 0.4901 … 2029 0.3407 tCO2e/MWh; \"*The EGDF will align with the High Performance Benchmark in 2030\"",
+    "fix": "Note: 2024–2029 only. With line loss the values are 0.5226→0.3633. 2030+ is not given ('**')."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Table 1 is an offset-crediting schedule (a policy number), not a measured grid intensity. Keep it labelled 'rule' as now. Table 2 (0.52/0.55) applies only to projects initiated in 2023."
+  ],
+  "overall": "needs fix"
+ },
+ "nir2026": {
+  "where_read": "local /mnt/attach/outputs/data/NIR_2026_Part1.pdf, NIR_2026_Annex7_Electricity_Intensity.xlsx, nir2026_annex7_intensity_extract.json; saved nir2026/page.html",
+  "claims": [
+   {
+    "claim": "ECCC, NIR 1990–2024 (2026 submission), Part 1",
+    "verdict": "CONFIRMED",
+    "evidence": "Part 1 cover: \"NATIONAL INVENTORY REPORT 1990 – 2024 … 2026\"; \"Environment and Climate Change Canada. 2026.\"",
+    "fix": ""
+   },
+   {
+    "claim": "Annex 7 workbook Tables A7-1 (Canada), A7-10 (Alberta), A7-11 (BC)",
+    "verdict": "CONFIRMED",
+    "evidence": "Sheets: 'Table A7–1 … for Canada', 'Table A7–10 … for Alberta', 'Table A7–11 … for British Columbia'",
+    "fix": ""
+   },
+   {
+    "claim": "extract matches workbook",
+    "verdict": "CONFIRMED",
+    "evidence": "All generation and consumption intensity rows for A7-1, A7-10, A7-11 match the xlsx exactly (e.g. AB 2024 gen 334.757, cons 346.102; BC 2024 gen 16.712, cons 18.064).",
+    "fix": ""
+   },
+   {
+    "claim": "role: generation and consumption intensity, both provinces, 1990–2024",
+    "verdict": "CORRECTED",
+    "evidence": "Workbook columns are only 1990, 2005, 2010, 2015, 2019, 2020, 2021, 2022, 2023, 2024a",
+    "fix": "Not an annual 1990–2024 series. Say 'selected years 1990, 2005, 2010, 2015, 2019–2024'. 2024 is flagged 'a' in the source; check that footnote before treating 2024 as final."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "'1990–2024' implies annual data; the tables give 10 selected years."
+  ],
+  "overall": "needs fix"
+ },
+ "ecccEF2026": {
+  "where_read": "saved copy ecccEF2026/page.html (canada.ca)",
+  "claims": [
+   {
+    "claim": "Emission factors and reference values v4.0, Sep 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Version 4.0 September 2026\"; revision table \"4.0 September 9, 2026\"",
+    "fix": ""
+   },
+   {
+    "claim": "from NIR 1990-2024 Tables A6.1-1, A6.1-4",
+    "verdict": "CONFIRMED",
+    "evidence": "References: \"ECCC. (2026). NIR 1990-2024, Part 2, Table A6.1-1, 'CO2 Emission Factors for Marketable Natural Gas'\" and \"…Table A6.1-4, 'CH4 and N2O Emission Factors for Natural Gas'\"",
+    "fix": ""
+   },
+   {
+    "claim": "HHV Table 8, 38.39 MJ/m³",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Table 8: Higher heating values (HHV) of fuels (MJ/m 3)\" … \"Natural gas, gaseous 38.39\"",
+    "fix": ""
+   },
+   {
+    "claim": "ECCC takes HHV from the Clean Fuel Regulations Data Workbook",
+    "verdict": "CONFIRMED",
+    "evidence": "Footnote 52: \"HHV values are from the Clean Fuel Regulations Data Workbook\"",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "No roles recorded. If the tool uses it, add the role (e.g. natural-gas HHV for gas-genset/CHP fuel conversion)."
+  ],
+  "overall": "ok"
+ },
+ "abEF2026": {
+  "where_read": "saved copies abEGDF/full_v3-3_2026-08.pdf (same handbook) and abEF2026/page.html (open.alberta.ca)",
+  "claims": [
+   {
+    "claim": "Handbook v3.3, Aug 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Version 3.3 | Alberta Environment and Protected Areas © 2026 Government of Alberta | August, 2026\"",
+    "fix": ""
+   },
+   {
+    "claim": "?: the open.alberta.ca page read shows v3.1, 2022–23",
+    "verdict": "CORRECTED",
+    "evidence": "Saved page: \"Carbon offset emission factors handbook. Version 3.3\", 'Updated August 27, 2026'; v3.1 is listed as \"[SUPERSEDED]\"",
+    "fix": "Settled: the page lists v3.3 as current. Remove '?'."
+   },
+   {
+    "claim": "publisher not printed",
+    "verdict": "CORRECTED",
+    "evidence": "Cover prints \"Alberta Environment and Protected Areas\"",
+    "fix": "Publisher is printed; remove."
+   },
+   {
+    "claim": "Table 5 natural gas, commercial/institutional: CO2 1,962, CH4 0.037, N2O 0.035 g/m³",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 5: \"Residential, Construction, Commercial/Institutional, Agriculture 1962 0.037 0.035\"",
+    "fix": "Note v3.1 had CO2 1928 for this row; v3.2/v3.3 have 1962."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "No roles recorded. Duplicates abEGDF (same handbook and URL); consider merging."
+  ],
+  "overall": "needs fix"
+ },
+ "eccc": {
+  "where_read": "local /mnt/attach/outputs/data/en_1991-2020_Normals_*.csv and normals_1991_2020_extract.json; saved eccc/page.html",
+  "claims": [
+   {
+    "claim": "Canadian Climate Normals 1991–2020 station CSVs for Vancouver Intl and Edmonton Airport saved; Edmonton City from AB file",
+    "verdict": "CONFIRMED",
+    "evidence": "Files en_1991-2020_Normals_BC_VANCOUVER_INTERNATIONAL_AIRPORT.csv and …AB_EDMONTON_AIRPORT.csv present; extract has 'EDMONTON (CITY)'.",
+    "fix": ""
+   },
+   {
+    "claim": "humidex ≥30 days 5.7 / 10.5",
+    "verdict": "CONFIRMED",
+    "evidence": "\"VANCOUVER INTERNATIONAL (AIRPORT)\",…\"Days with Humidex >= 30\",…\"5.7\"; \"EDMONTON (AIRPORT)\",…\"Days with Humidex >= 30\",…\"10.5\"",
+    "fix": ""
+   },
+   {
+    "claim": "cold-need days (≤ −20 °C)",
+    "verdict": "CONFIRMED",
+    "evidence": "Extract holds 'Days with Maximum Temperature <= -20 °C': Edmonton Airport 6.5, Edmonton City 6.1, Vancouver 0.0 (matches CSV)",
+    "fix": "Make clear this is days with daily MAXIMUM ≤ −20 °C. Days with MINIMUM < −20 °C are 38.4/yr at Edmonton Airport (CSV), but that row is not in the extract."
+   },
+   {
+    "claim": "extract re-checked against CSVs",
+    "verdict": "CORRECTED",
+    "evidence": "For EDMONTON (AIRPORT), the extract's 'Extreme Humidex' holds the Long-Term row (Apr 30.0, Jun 37.3), not the Normal row (Apr 26.7, Jun 34.9).",
+    "fix": "Duplicate keys (Normal vs Long-Term) overwrite each other in the extract. The used fields are unaffected, but key by period."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Role 'generator_nox_pm — all coefficients' is wrong: climate normals supply no NOx/PM emission coefficients. At most they give a climate input such as cold-start or heating days. Fix or remove that role."
+  ],
+  "overall": "needs fix"
+ },
+ "mvBylaw1329": {
+  "where_read": "saved copy mvBylaw1329/full.pdf; Bylaw 1082 checked in saved mvBylaw1082/full.pdf",
+  "claims": [
+   {
+    "claim": "Title: Non-Road Diesel Engine Emission Regulation Bylaw No. 1329, 2021",
+    "verdict": "CORRECTED",
+    "evidence": "Footer: \"Metro Vancouver Regional District Non-Road Diesel Engine Emissions Regulation Bylaw No. 1329, 2021\"",
+    "fix": "'Emissions', plural."
+   },
+   {
+    "claim": "applies to non-road diesel engines of 25 hp or more",
+    "verdict": "CONFIRMED",
+    "evidence": "s.8 \"applies to all non-road diesel engines having a maximum power of 25 hp or greater (19 kW or greater)\"",
+    "fix": ""
+   },
+   {
+    "claim": "including stationary engines / emergency generators",
+    "verdict": "CONFIRMED",
+    "evidence": "\"'emergency engine' means an engine, including emergency generators and other stationary engines, intended for use only in an emergency\"",
+    "fix": ""
+   },
+   {
+    "claim": "emergency engines exempt from Parts 3–6 and 9 (registration, labelling, low/moderate-use registration, prohibitions and surcharges ?)",
+    "verdict": "CONFIRMED",
+    "evidence": "s.11 \"Emergency engines are exempt from Parts 3, 4, 5, 6 and 9.\" Headings: Part 3 Registration; 4 Labelling; 5 Low-Use Engine Registration; 6 Moderate-Use Engine Registration; 9 Operating Prohibitions and Surcharges",
+    "fix": "Settled; remove '?'."
+   },
+   {
+    "claim": "must be maintained to manufacturer procedures",
+    "verdict": "CORRECTED",
+    "evidence": "s.12 \"(a) operated in accordance with the manufacturer's operating procedures; and (b) inspected and maintained in accordance with the manufacturer's recommendations\"",
+    "fix": "Say: operated per manufacturer's operating procedures; inspected and maintained per manufacturer's recommendations."
+   },
+   {
+    "claim": "keep exhaust away from building openings and air intakes",
+    "verdict": "CONFIRMED",
+    "evidence": "s.13 \"must not result in: (a) The recirculation of its stack exhaust into the building; or (b) The entrainment of its stack exhaust into surrounding building openings or air ventilation intakes\"",
+    "fix": ""
+   },
+   {
+    "claim": "keep records",
+    "verdict": "CONFIRMED",
+    "evidence": "s.14 \"must keep maintenance records and other records stipulated by the district director and, within 72 hours of a request … submit records\"",
+    "fix": ""
+   },
+   {
+    "claim": "no limit on testing hours",
+    "verdict": "NOT FOUND",
+    "evidence": "The bylaw has no testing-hour clause for emergency engines. The definition limits them to engines 'intended for use only in an emergency'.",
+    "fix": "Reword: 'the bylaw sets no testing-hour limit (absence, not a stated permission)'. Vancouver By-law 6555 s.4.1(c) does limit testing noise (once a month, ≤60 min daytime; once a year ≤180 min; ≤80 dBA)."
+   },
+   {
+    "claim": "Bylaw 1082 has no engine-specific threshold",
+    "verdict": "CONFIRMED",
+    "evidence": "Bylaw 1082 copy: only engine mention is s.(9) exemption for 'steam powered or internal combustion engines in compliance … with the Motor Vehicle Act'; no hp/kW threshold.",
+    "fix": "This comes from a different document (Bylaw 1082); cite it separately."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Omission: Parts 10–12 are not exempted for emergency engines. These are s.53 opacity ≤20%, s.54 idling ≤5 min (testing excepted under s.55(a)) and s.57 'No person may operate a Tier 0 or Tier 1 engine within 100 metres of a sensitive receptor' (hospital, elementary school, day care, community care). These bear on generator_nox_pm/genset_test siting.",
+   "The bylaw sets no NOx/PM emission coefficients; it supports rules only, not quantities."
+  ],
+  "overall": "needs fix"
+ },
+ "abDCenv2026": {
+  "where_read": "saved copy abDCenv2026/full.pdf",
+  "claims": [
+   {
+    "claim": "Government of Alberta, Data Centres in Alberta: EPA regulatory role and environmental requirements (20 Jul 2026)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"©2026 Government of Alberta | July 20, 2026 | Environment and Protected Areas\"",
+    "fix": ""
+   },
+   {
+    "claim": "EPEA approval required for a larger combustion power plant or a backup power generation system over 50 MW",
+    "verdict": "CORRECTED",
+    "evidence": "\"an EPEA approval is required for a larger combustion-based electricity generation power plant, or a backup power generation system over 50 megawatts.\"",
+    "fix": "Use the exact wording 'larger combustion-based electricity generation power plant'. The 50 MW figure is attached to the backup system."
+   },
+   {
+    "claim": "approvals 'may include … emission limits'",
+    "verdict": "CONFIRMED",
+    "evidence": "\"the approval may include conditions for wastewater management, waste handling, emission limits, monitoring, reporting\"",
+    "fix": ""
+   },
+   {
+    "claim": "Alberta reviews wastewater, stormwater and cooling-water blowdown",
+    "verdict": "CONFIRMED",
+    "evidence": "\"EPA may review or regulate … wastewater, stormwater, cooling-water blowdown or other releases\"",
+    "fix": ""
+   },
+   {
+    "claim": "does not mention MSAPR or diesel; says 'emergency backup generators'",
+    "verdict": "CONFIRMED",
+    "evidence": "No 'Multi-Sector', 'MSAPR' or 'diesel' in text; \"air emissions from power generation, boilers, heaters, emergency backup generators\"",
+    "fix": "The '?' on MSAPR cannot be settled from this source; it needs its own source."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Supplies no NOx/PM numbers for generator_nox_pm, only that approvals 'may include … emission limits'. Use it for the rule/threshold (50 MW backup), not for a coefficient."
+  ],
+  "overall": "needs fix"
+ },
+ "iso9613": {
+  "where_read": "iso.org catalogue page (WebFetch); standard text paywalled, not read; NoiseModelling user guide (readthedocs)",
+  "claims": [
+   {
+    "claim": "ISO 9613-2:2024",
+    "verdict": "CONFIRMED",
+    "evidence": "iso.org: \"ISO 9613-2:2024 Acoustics — Attenuation of sound during propagation outdoors — Part 2: Engineering method…\" Edition 2, 2024-01",
+    "fix": ""
+   },
+   {
+    "claim": "screen Lp ≈ Lw − 20·log10(r) − 8 is our simplification, not from the standard",
+    "verdict": "UNREACHABLE",
+    "evidence": "Standard text is paywalled. The label 'our simplification' is appropriate (hemispherical free-field spreading; no ground, air or barrier terms).",
+    "fix": "Keep the label. A free textbook or open source for the −8 (hemispherical, Q=2) term would make it sourced."
+   },
+   {
+    "claim": "NoiseModelling (open source)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"a free and open-source Java library for producing environmental noise maps … distributed for free under GPL v3\"",
+    "fix": "NoiseModelling implements CNOSSOS-EU ('CNOSSOS-EU road and rail noise emission and propagation methods'), not ISO 9613-2, per its guide."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Role 'full method' pairs ISO 9613-2 with NoiseModelling, but the NoiseModelling guide names CNOSSOS-EU, not ISO 9613-2. State which method the 'full method' actually runs."
+  ],
+  "overall": "needs fix"
+ },
+ "daikinCAT624": {
+  "where_read": "URL via WebFetch (surfaced by WebSearch); small-model reading of PDF",
+  "claims": [
+   {
+    "claim": "Daikin Applied Trailblazer AGZ-E Catalog 624-23",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Trailblazer® Air-Cooled Scroll Compressor Chillers, Model AGZ-E (Catalog 624-23)\", ©2022",
+    "fix": ""
+   },
+   {
+    "claim": "AHRI 370 sound power table, p.18",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 6 \"60 Hz Sound Power without Sound Insulation\" on printed p.18; p.17 text says data are \"per AHRI Standard 370\"",
+    "fix": ""
+   },
+   {
+    "claim": "role: scroll chiller Lw 96–100 dBA",
+    "verdict": "CORRECTED",
+    "evidence": "Table 6 overall dBA ranges 88 (models 30/31) to 100 (model 241); 96–100 covers models 130–241 only",
+    "fix": "State the subset ('models 130–241, 96–100 dBA; full range 88–100') and the condition: 100% load, no sound insulation."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "The range is a size subset; say so."
+  ],
+  "overall": "needs fix"
+ },
+ "climavenetaIFX": {
+  "where_read": "URL via WebFetch (surfaced by WebSearch); small-model reading of PDF",
+  "claims": [
+   {
+    "claim": "Mitsubishi Electric / Climaveneta i-FX brochure",
+    "verdict": "CONFIRMED",
+    "evidence": "\"i-FX R513A Air Cooled Chillers\" (Outdoor installation, 477 to 1697 kW), \"Effective as of March 2021\"",
+    "fix": ""
+   },
+   {
+    "claim": "ISO 9614 sound power",
+    "verdict": "CONFIRMED",
+    "evidence": "Note 4: \"Sound power on the basis of measurements taken in compliance with ISO 9614.\"",
+    "fix": ""
+   },
+   {
+    "claim": "role: screw chiller Lw 99–103 dBA",
+    "verdict": "CORRECTED",
+    "evidence": "Standard version: 99 (model 2202, 478.6 kW) to 106 (7213/7223, ~1.65–1.7 MW); 99–103 is models 2202–4502 (≈479–932 kW). Low-noise version 92–97.",
+    "fix": "State the size subset (≈480–930 kW) or use 99–106. Also add the edition date (Mar 2021) and the inverter-screw compressor type."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Range is a size subset not stated in the entry."
+  ],
+  "overall": "needs fix"
+ },
+ "kelvionLF": {
+  "where_read": "URL via WebFetch (surfaced by WebSearch); small-model reading of datasheet",
+  "claims": [
+   {
+    "claim": "Kelvion dry cooler selection printout, EN 13487",
+    "verdict": "CONFIRMED",
+    "evidence": "\"DRY COOLER | LF-PD203T4H-080Y06D\"; \"Figures derived according to EN 13487.\"",
+    "fix": ""
+   },
+   {
+    "claim": "Lw 94 dBA",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Sound power LwA (2) 94 dB(A)\" under \"(PER FAN) (3)\"",
+    "fix": "94 dB(A) is PER FAN; unit has 6 fans."
+   },
+   {
+    "claim": "61 dBA @10 m",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Sound pressure LpA (10m) (2) 61 dB(A)\"; mean value, free field over reflective plane",
+    "fix": ""
+   },
+   {
+    "claim": "role note: unit total unresolved",
+    "verdict": "CORRECTED",
+    "evidence": "Datasheet gives Lw per fan and \"6 PIECE(S)\" fans",
+    "fix": "Can now be settled from the same source: unit total ≈ 94 + 10·log10(6) ≈ 101.8 dB(A). This is our arithmetic and should be labelled so. Whether 61 dB(A) @10 m is per fan or per unit is not stated."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Source is a used-equipment reseller copy (resale.de) of a Kelvion printout, not a Kelvion-hosted document. Label it so."
+  ],
+  "overall": "needs fix"
+ },
+ "mtuDS2250": {
+  "where_read": "URL via WebFetch (surfaced by WebSearch); small-model reading of PDF",
+  "claims": [
+   {
+    "claim": "mtu 16V4000 DS2250 spec",
+    "verdict": "CONFIRMED",
+    "evidence": "Title: \"mtu 16V4000 DS2250 (2,250 kWe) 50 °C - Standby - FCO\"",
+    "fix": ""
+   },
+   {
+    "claim": "98.7 dBA @7 m open",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Sound data is provided at 7 m (23 ft).\" … \"Level 0 (OPU): dB(A) 98.7\"",
+    "fix": "Add: standby full load, 'with infinite exhaust' (i.e. exhaust noise excluded)."
+   },
+   {
+    "claim": "ISO 8528-10",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Generator set tested in accordance with ISO 8528-10 and with infinite exhaust.\"",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "'Infinite exhaust' means the 98.7 dB(A) excludes exhaust noise. The open-set total is higher unless the exhaust is silenced separately."
+  ],
+  "overall": "ok"
+ },
+ "catTM9338": {
+  "where_read": "not read",
+  "claims": [
+   {
+    "claim": "Caterpillar 3516 performance sheet TM9338, mechanical and exhaust spectra at 7 m (printed in feet)",
+    "verdict": "UNREACHABLE",
+    "evidence": "WebFetch refused the URL (not in provenance). Two WebSearches (exact file name; GS2888/TM9338) did not surface this PDF. No saved or local copy.",
+    "fix": ""
+   },
+   {
+    "claim": "copy on used-equipment dealer site; no Caterpillar-hosted copy",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not checkable without the document.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "unknown",
+  "overreach": [],
+  "overall": "unreachable"
+ },
+ "cumminsS1443": {
+  "where_read": "URL via WebFetch (surfaced by WebSearch); small-model reading of PDF",
+  "claims": [
+   {
+    "claim": "Cummins S-1443, Enclosures and Tanks, 250–1,000 kW gensets, Aug 2018",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Enclosures and Tanks\" \"250-1000 kW Gensets\" \"©2018 Cummins Inc. | S-1443 (08/18)\"",
+    "fix": ""
+   },
+   {
+    "claim": "role: enclosed diesel 73–91 dBA @7 m",
+    "verdict": "CORRECTED",
+    "evidence": "Table at 7 m, full-load standby, steel: lowest 72 (250 DQDAA, QuietSite level 2), highest 91.3 (800 DQCC, weather protective)",
+    "fix": "Use 72–91 dB(A) @7 m. Note that weather-protective housings (87–91) are not acoustic enclosures, and aluminium enclosures read ~2 dB(A) higher."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [],
+  "overall": "needs fix"
+ },
+ "stulz": {
+  "where_read": "URL via WebFetch (surfaced by WebSearch); small-model reading of PDF",
+  "claims": [
+   {
+    "claim": "Stulz CyberAir 3PRO ASR units, brochure Sept 2016, German edition",
+    "verdict": "CONFIRMED",
+    "evidence": "German brochure CyberAir 3PRO DX ASR, code 110296 V1.1, dated '09-16'",
+    "fix": ""
+   },
+   {
+    "claim": "underfloor-fan",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Ventilatoren im Doppelboden\"",
+    "fix": ""
+   },
+   {
+    "claim": "downflow, DX",
+    "verdict": "CORRECTED",
+    "evidence": "DX confirmed ('DX – Kompressorkühlung'); the word 'downflow' does not appear",
+    "fix": "Mark 'downflow' as our description, not the brochure's."
+   },
+   {
+    "claim": "sound pressure @2 m",
+    "verdict": "CONFIRMED",
+    "evidence": "\"In 2 m Abstand unter Freifeldbedingungen\"; ASR range 48–62 dB(A)",
+    "fix": ""
+   },
+   {
+    "claim": "(\"CRAC\" ?)",
+    "verdict": "CORRECTED",
+    "evidence": "'CRAC' does not appear; the brochure says \"Präzisionsklimageräte\" (precision air-conditioning units)",
+    "fix": "Settled: CRAC is our generic label, not the source's. Mark it so and remove '?'."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "needs fix"
+ },
+ "oldsNIA": {
+  "where_read": "URL via WebFetch (surfaced by WebSearch); small-model reading of PDF",
+  "claims": [
+   {
+    "claim": "Synapse Olds NIA (OpenCycle, Rev 1, 24 Mar 2026)",
+    "verdict": "CONFIRMED",
+    "evidence": "Prepared for Synapse Real Estate Corporation by OpenCycle Technologies Inc.; \"Revision 1\" dated 2026-03-24; doc 007700-NIA-001 'Noise Impact Assessment' Stage-1.5",
+    "fix": ""
+   },
+   {
+    "claim": "Table 1",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 1 \"Olds Data Center Equipment Details\" (chillers, back-up generators, gas plants; quantities, sound power assumptions)",
+    "fix": ""
+   },
+   {
+    "claim": "Appendix D, Table D, octave-band PWL",
+    "verdict": "CONFIRMED",
+    "evidence": "Appendix D \"Sound Power Levels\", \"Table D: Source Octave Band Sound Power Levels\" (31.5 dBC, 63–8000 Hz, overall dBA)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Proponent-filed NIA: label the values as consultant/proponent assumptions, not measurements. A peer review exists on olds.ca (20260320 NIA peer review comments)."
+  ],
+  "overall": "ok"
+ },
+ "burlingtonNIA": {
+  "where_read": "URL via WebFetch (surfaced by WebSearch); small-model reading of PDF",
+  "claims": [
+   {
+    "claim": "Burlington ON data-centre noise study, SS Wilson, May 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "SS Wilson Associates, Report WA26-006, May 5, 2026, 'Proposed Data Centre Development, 3110 South Service Road'",
+    "fix": ""
+   },
+   {
+    "claim": "chillers Lw 92 dBA each",
+    "verdict": "CONFIRMED",
+    "evidence": "\"a total of 12 chillers is proposed\"; Table 6.5.5-1 lists CU-01 to CU-12 at 92 dBA each",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Consultant assumption in a filed study; label it so. Cite Table 6.5.5-1."
+  ],
+  "overall": "ok"
+ },
+ "traneRTAF": {
+  "where_read": "URL via WebFetch (surfaced by WebSearch); small-model reading of PDF",
+  "claims": [
+   {
+    "claim": "Trane Sintesis Prime RTAF brochure RTAF-SLB001-GB (2020)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Air-Cooled Screw Chillers RTAF 300-2090 kW\", RTAF-SLB001-GB, June 2020",
+    "fix": ""
+   },
+   {
+    "claim": "sound power table p.14",
+    "verdict": "CORRECTED",
+    "evidence": "Printed p.14 is 'RTAF HSS - Extra Low Noise - EC' (88–97). The 94–101 / 91–98 values are on p.13, 'RTAF HSE - Standard and Low Noise' (R134a), sizes 090–280 (333–1010 kW).",
+    "fix": "Cite p.13. Note size 245 is an outlier at 107/103 and sizes ≥310 run to 109."
+   },
+   {
+    "claim": "role: chiller Lw 94–101 / 91–98 dBA",
+    "verdict": "CORRECTED",
+    "evidence": "p.13 standard noise 94 (090) … 101 (280); low noise 91 … 98; excl. size 245 (107/103)",
+    "fix": "State subset: HSE R134a, sizes 090–280, excluding 245."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Range is a subset of one table; state which."
+  ],
+  "overall": "needs fix"
+ },
+ "maekawaISO": {
+  "where_read": "MDPI article via WebFetch (surfaced by WebSearch). SoundPLAN appendix and CadnaA docs: no URL given, not read.",
+  "claims": [
+   {
+    "claim": "Maekawa–Tatge IL = 10 log10(3 + 20N) (Bugaru et al., Computation 9:129, 2021)",
+    "verdict": "CONFIRMED",
+    "evidence": "Bugaru, Vasile, Neagoe, Computation 9(12):129 (2021), Eq. 5: \"A = … 10 log10 (3 + 20 N1)\"",
+    "fix": "The article labels it A (attenuation), not IL."
+   },
+   {
+    "claim": "N = 2δ/λ",
+    "verdict": "CONFIRMED",
+    "evidence": "\"N1 = 2 δ1 f / c\" (equivalent to 2δ/λ)",
+    "fix": ""
+   },
+   {
+    "claim": "ISO 9613-2:1996 Dz capped at 20 dB single / 25 dB double diffraction (SoundPLAN appendix, CadnaA documentation)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not in the MDPI article (which cites ISO 9613-2 only as the general method). The SoundPLAN/CadnaA documents have no URL in the entry; ISO text paywalled.",
+    "fix": "Add URLs for the SoundPLAN appendix and the CadnaA documentation, or mark the caps unverified."
+   },
+   {
+    "claim": "ISO text and Maekawa 1968 not read (paywalled)",
+    "verdict": "CONFIRMED",
+    "evidence": "Accurate disclosure.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "The ISO 9613-2 edition cited (1996) differs from iso9613 entry (2024). Reconcile which edition the cap refers to."
+  ],
+  "overall": "needs fix"
+ },
+ "arupManx2013": {
+  "where_read": "saved copy arupManx2013/page.md (planningportal.im markdown export)",
+  "claims": [
+   {
+    "claim": "Arup plant noise assessment, Manx Telecom hosting centre, Isle of Man (13/00726/REM)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Arup has been requested to undertake an assessment of noise breakout … Manx Telecom Data Centre in the Isle of Man\"; 'Ref 13/00726/REM'",
+    "fix": "Date: 15 August 2013, Job No 230750-00 TN01."
+   },
+   {
+    "claim": "dry cooler screened by \"A solid screen 3m high having a surface mass of 12kg/m²\"",
+    "verdict": "CONFIRMED",
+    "evidence": "\"A solid screen 3m high having a surface mass of 12kg/m² will be erected in the location shown\"",
+    "fix": ""
+   },
+   {
+    "claim": "limits 45 dB LAeq,1hr at the school, 30 dB at nearest homes; school 35 internal / 45 external",
+    "verdict": "CONFIRMED",
+    "evidence": "\"…school, office and meeting room shall not exceed 35dBLAeq,1hr internally and 45dBLAeq,1hr externally and at the nearest residential premises shall not exceed 30dBLAeq,1hr\"",
+    "fix": ""
+   },
+   {
+    "claim": "planningportal.im a copy of the Isle of Man public register ?",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Data sourced from the Isle of Man public planning register under the Isle of Man Open Government Licence\"",
+    "fix": "Settled. It is a third-party markdown export (tables omitted), not the government register itself. Remove '?'."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Tables 1–2 (sound power and results) are omitted in this copy, so no Lw values can be taken from it."
+  ],
+  "overall": "ok"
+ },
+ "cumminsF1493": {
+  "where_read": "URL via WebFetch (surfaced by WebSearch); small-model reading of PDF",
+  "claims": [
+   {
+    "claim": "Cummins enclosures F-1493",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Sound-attenuated and weather-protective enclosures\", CPG-623 F-1493, footer '(3/08)'",
+    "fix": "Brochure dates from March 2008; '2018-08' in the URL is only the upload folder. Add the date."
+   },
+   {
+    "claim": "1,000 kW set at 7 m — 90 weather housing, 80 Level I, 76 Level II",
+    "verdict": "CONFIRMED",
+    "evidence": "\"1000 DFHD 90 80 76\" / \"1000 DQFAD 90 80 76\"; \"* Full load at 7 meters, steel enclosures\"",
+    "fix": ""
+   },
+   {
+    "claim": "≈10–15 dB is Claude inference",
+    "verdict": "CONFIRMED",
+    "evidence": "The document states no attenuation figure; 90−80=10, 90−76=14 is arithmetic.",
+    "fix": "Label as our arithmetic (10 and 14 dB), not inference."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "The 1000 DQFAD values are the same as S-1443 (2018), which is the newer source."
+  ],
+  "overall": "ok"
+ },
+ "fhwaBarrier": {
+  "where_read": "saved copy fhwaBarrier/page.html (fhwa.dot.gov, updated 6/27/2017)",
+  "claims": [
+   {
+    "claim": "FHWA noise barrier inventory to 2010, 2010 $/ft²",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Summary of Noise Barriers Constructed by December 31, 2010 … Material Average Unit Cost (2010 $/square Foot)\"",
+    "fix": ""
+   },
+   {
+    "claim": "concrete 30, block 25, wood 20, metal 18, absorptive 28, berm 7",
+    "verdict": "CONFIRMED",
+    "evidence": "'ALL' row: Concrete 30, Block 25, Wood 20, Metal 18, Berm 7, Brick 32, Combination 21, Absorptive 28",
+    "fix": ""
+   },
+   {
+    "claim": "WSDOT $51.61/ft² not in this source",
+    "verdict": "CONFIRMED",
+    "evidence": "No WSDOT figure on the page; correctly flagged.",
+    "fix": "Needs its own source or removal."
+   },
+   {
+    "claim": "Highway walls, not rooftop screens",
+    "verdict": "CONFIRMED",
+    "evidence": "Page is the highway noise barrier inventory.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "US 2010 dollars; needs currency and inflation conversion before use in Canadian costs."
+  ],
+  "overall": "ok"
+ },
+ "vertivAFC": {
+  "where_read": "URL via WebFetch (surfaced by WebSearch); small-model reading of PDF",
+  "claims": [
+   {
+    "claim": "Vertiv Liebert AFC 900–1800 kW, SL-71060 (R09/24), 'Preliminary data'",
+    "verdict": "CONFIRMED",
+    "evidence": "\"SL-71060 (R09/24)\"; \"Air-cooled free cooling chiller from 900 - 1800 kW\"; spec note begins \"Preliminary data\"",
+    "fix": ""
+   },
+   {
+    "claim": "FIZ135 423 tons (1489 kW) at 95 °F ambient, 82/66 °F fluid, 30% ethylene glycol, 460 V/60 Hz",
+    "verdict": "CONFIRMED",
+    "evidence": "FIZ135: 423 tons (1489 kW); 95°F ambient, 82°F in / 66°F out, 30% ethylene glycol, 460V/3ph/60Hz",
+    "fix": ""
+   },
+   {
+    "claim": "478 × 93 × 114 in (12141 × 2362 × 2896 mm)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"478 x 93 x 114 in (12141 x 2362 x 2896 mm)\"",
+    "fix": ""
+   },
+   {
+    "claim": "'oversized free cooling coils'",
+    "verdict": "CONFIRMED",
+    "evidence": "Phrase appears in design bullets.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Used by noise_level with no role, yet the entry omits the sheet's sound data: FIZ135 83.0 dB(A) SPL 'calculated at 3.3ft (1m)'. Add it if used, as a manufacturer claim at 1 m."
+  ],
+  "overall": "ok"
+ },
+ "rule012": {
+  "where_read": "saved copy rule012/full.pdf; AUC Bulletin 2026-03 via WebFetch (surfaced by WebSearch)",
+  "claims": [
+   {
+    "claim": "AUC Rule 012 Noise Control, effective 30 Sep 2024, approved 5 Jun 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "\"The Alberta Utilities Commission approved amendments to this rule on June 5, 2024, which are effective on September 30, 2024.\"",
+    "fix": ""
+   },
+   {
+    "claim": "74 pp. ?",
+    "verdict": "CONFIRMED",
+    "evidence": "pdfinfo: Pages 74",
+    "fix": "Settled; remove '?'."
+   },
+   {
+    "claim": "\"consolidated\" ?",
+    "verdict": "NOT FOUND",
+    "evidence": "The word 'consolidated' does not appear in the PDF.",
+    "fix": "Drop 'consolidated'."
+   },
+   {
+    "claim": "Table 1 p.3",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Table 1 Basic sound level (BSL)\" on page with footer 'AUC Rule 012: Noise Control 3'",
+    "fix": ""
+   },
+   {
+    "claim": "role: Table 1 40–56 dBA night (+10 day)",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 1 values 40…56; \"The daytime adjustment is determined by adding 10 dBA to the nighttime basic sound level.\"",
+    "fix": ""
+   },
+   {
+    "claim": "lf_flag coefficients",
+    "verdict": "CONFIRMED",
+    "evidence": "s.4.5: low frequency noise condition when \"dBC – dBA value … is equal to or greater than 20 dB\" (plus a tonal criterion); (3) \"five dBA must be added\"",
+    "fix": ""
+   },
+   {
+    "claim": "Bulletin 2026-03 (17 Apr 2026 ?)",
+    "verdict": "CONFIRMED",
+    "evidence": "Bulletin 2026-03 \"Guidance and minor administrative changes to Rule 012\", dated April 17, 2026; changes \"do not alter existing requirements\"",
+    "fix": "Settled; remove '?'. The saved PDF (created 4 Jul 2024) predates these editorial changes, effective 17 Apr 2026. Check for a newer Rule 012 PDF."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Rule 012 governs AUC-jurisdiction facilities (power plants, substations), not data-centre mechanical plant under municipal bylaw. Use it as a benchmark unless the facility includes AUC-approved generation."
+  ],
+  "overall": "needs fix"
+ },
+ "bylaw6555": {
+  "where_read": "saved copy bylaw6555/full.pdf",
+  "claims": [
+   {
+    "claim": "cons. 14 Jul 2026 ? (one check reads 20 May 2025)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Consolidated for convenience only, amended to include By-law No. 14786 effective July 14, 2026\"",
+    "fix": "Settled: 14 Jul 2026. Remove '?'."
+   },
+   {
+    "claim": "continuous > 3 min in 15",
+    "verdict": "CONFIRMED",
+    "evidence": "\"'continuous sound' means any sound occurring for a duration of more than three minutes, or … totalling more than three minutes in any 15 minute period\"",
+    "fix": ""
+   },
+   {
+    "claim": "intermediate→quiet 60 day / 50 night",
+    "verdict": "CONFIRMED",
+    "evidence": "s.2.2(a)(i) \"exceeds a rating of 60 dBA … within a quiet zone\"; (b)(i) \"exceeds a rating of 50 dBA … within a quiet zone\"",
+    "fix": ""
+   },
+   {
+    "claim": "dBC for bass sound from commercial premises (amplified or not, s.3.1(a))",
+    "verdict": "CONFIRMED",
+    "evidence": "s.3.1(a) \"the bass noise or bass sound made by a radio, television, player … musical instrument, whether recorded or live, whether amplified or not, in commercial premises\" 70 dBC day / 65 night",
+    "fix": ""
+   },
+   {
+    "claim": "Rogers Arena exemption s.4.3(g) in dBC",
+    "verdict": "CONFIRMED",
+    "evidence": "s.4.3(g) \"emanates from Rogers Arena … does not exceed an average of 82 dBC … for a continuous period of 15 minutes\"",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "lf_flag 'parity': s.3.1(a) dBC limits cover only sound-playback, amplification and musical instruments, not mechanical plant. The by-law has no low-frequency rule for chillers or generators, so parity with Rule 012's dBC−dBA test is not supported.",
+   "Relevant clause missing: s.4.1(c) exempts emergency generator testing if it is done no more than once a month, daytime only, ≤60 min, plus once a year ≤180 min, and ≤80 dBA at the point of reception or 6.1 m. This matters for genset_test."
+  ],
+  "overall": "needs fix"
+ }
+}

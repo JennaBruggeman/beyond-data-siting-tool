@@ -1,0 +1,1026 @@
+{
+ "cie150": {
+  "where_read": "URL (WebFetch of ILP publication page, 29 Oct 2026); the GN01/21 PDF itself not on the page; no saved copy",
+  "claims": [
+   {
+    "claim": "ILP Guidance Note 01/21, 2021",
+    "verdict": "CONFIRMED",
+    "evidence": "Title: 'GN01 For the reduction of obtrusive light 2021'",
+    "fix": ""
+   },
+   {
+    "claim": "Page says it 'has just been revised' and cites CIE 150:2017",
+    "verdict": "CONFIRMED",
+    "evidence": "'This guidance note has just been revised to reflect the changes in international guidance regarding obtrusive light as detailed in CIE 150:2017 Guide.'",
+    "fix": ""
+   },
+   {
+    "claim": "Earlier note not named (?)",
+    "verdict": "CONFIRMED",
+    "evidence": "Page does not name the note it replaces; '?' cannot be settled from this source",
+    "fix": ""
+   },
+   {
+    "claim": "E3 zone limits 10 / 2 lx (light into windows)",
+    "verdict": "NOT FOUND",
+    "evidence": "Publication page gives no lux values; the GN01/21 document text was not available from the cited URL",
+    "fix": "Read the GN01/21 PDF (Table 3, vertical illuminance at windows) or CIE 150:2017 before using 10/2 lx; until then mark unverified"
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Role 'E3 zone limits 10 / 2 lx' (rule) not supported by the cited page; also a UK professional-body guidance note, not a BC/AB rule: label 'guidance (UK, ILP)', not 'rule'"
+  ],
+  "overall": "needs fix"
+ },
+ "edmBylaw20001": {
+  "where_read": "Local copy /mnt/attach/outputs/data/raw/edm/bylaw/b.txt (Charter Bylaw 20001 as adopted, eff. 1 Jan 2024); live URL blocked for WebFetch",
+  "claims": [
+   {
+    "claim": "s.5.80 Table 5.1.3 (stalls)",
+    "verdict": "CONFIRMED",
+    "evidence": "'5.1.3. comply with Table 5.1.3 ... Table 5.1.3. Minimum Parking Space Design Requirements' (s.5.80)",
+    "fix": "Table gives stall DIMENSIONS, not stall counts; say 'stall dimensions'"
+   },
+   {
+    "claim": "s.5.120 lighting, nuisance",
+    "verdict": "CONFIRMED",
+    "evidence": "5.120 Site Performance Standards: s.2 'Nuisances' (2.1.2 'full cutoff lighting ... to minimize lighting Nuisances'); s.3 'Lighting'",
+    "fix": ""
+   },
+   {
+    "claim": "s.5.120(3) qualitative glare rule",
+    "verdict": "CONFIRMED",
+    "evidence": "3.1.1 'be arranged, installed, and maintained to minimize glare and excessive lighting, and to deflect, shade, and focus light away from surrounding Sites'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "URL points to the 5.80 page, but the lighting rule is in 5.120; add the 5.120 URL"
+  ],
+  "overall": "ok"
+ },
+ "vanLight2019": {
+  "where_read": "Saved copy full.pdf (Untidy Premises By-law 4548, consolidated to 10 Sep 2019 / By-law 12521 eff. 1 Nov 2019); VBBL 2025 Book I local copy /mnt/attach/outputs/data/raw/codes/vbbl2025_v1.txt for the later 10.2.2.10 wording; the 3 Jun 2019 VBBL text not available",
+  "claims": [
+   {
+    "claim": "By-law 4548 s.7: no outdoor light casting light directly onto a neighbouring residential window and unreasonably disturbing; no lux value",
+    "verdict": "CONFIRMED",
+    "evidence": "s.7(a) 'casts light directly onto a window or other opening of a residential structure located across a street, or adjacent to'; (b) 'unreasonably disturbs the peace, rest...'; no lux value",
+    "fix": ""
+   },
+   {
+    "claim": "VBBL 2019 10.2.2.10(2) (3 Jun 2019): full cut-off/fully shielded, wall backlighting <=4 lux, <=2 lux average on reflective surfaces, minimize lighting of adjacent properties",
+    "verdict": "NOT FOUND",
+    "evidence": "2019 VBBL text not in saved copy (saved copy is By-law 4548 only)",
+    "fix": "Obtain and read the 2019 VBBL Book I; keep '?'"
+   },
+   {
+    "claim": "Lane-facing / 600 lumen / 4 m / dimmer-and-timer wording from 'a later version not yet read'",
+    "verdict": "CONFIRMED",
+    "evidence": "VBBL 2025 10.2.2.10(2): 'those parts of a building facing a lane' ... 'luminaires that emit over 600 lumens' ... 'no higher than 4 m above grade' ... 'dimmer and timer controls'",
+    "fix": "'?' settled: this wording is in VBBL 2025 Book I, 10.2.2.10(2) (local copy); cite that edition"
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "VBBL 10.2.2.10 is titled 'Lighting in Residential Buildings' and applies to residential occupancy / residential portion of multi-use buildings; it does not govern a data-centre (non-residential) building's own lighting. Use only as a benchmark",
+   "Register URL is By-law 4548 only; add a VBBL URL/edition for 10.2.2.10"
+  ],
+  "overall": "needs fix"
+ },
+ "solar": {
+  "where_read": "WebSearch for exact title, then WebFetch https://guidelines.vancouver.ca/guidelines-solar-access-downtown.pdf (29 Oct 2026)",
+  "claims": [
+   {
+    "claim": "Solar Access Guidelines for the Downtown Peninsula, approved 17 Sep 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "Title 'Solar Access Guidelines for the Downtown Peninsula'; approved by Council September 17, 2025",
+    "fix": ""
+   },
+   {
+    "claim": "'am. 2026' (?)",
+    "verdict": "NOT FOUND",
+    "evidence": "Document contains no amendment dates",
+    "fix": "Drop 'am. 2026' unless an amended edition is found"
+   },
+   {
+    "claim": "Equinox shadows 10 am to 4 pm PDT",
+    "verdict": "CONFIRMED",
+    "evidence": "Fall equinox, September 22, 10 am to 4 pm PDT (ss. 3.1.1, 3.2.1, 4.1.1)",
+    "fix": "Note exceptions: Robson Village 10-3 pm; Victory Square 11 Nov 10-12"
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Guideline protects public open spaces (parks, school sites, plazas, Davie/Robson Village sidewalks, Sun Yat-Sen garden), not neighbouring buildings; applies only to the Downtown Peninsula (a separate guideline covers areas outside downtown)",
+   "Add URL to register"
+  ],
+  "overall": "needs fix"
+ },
+ "edm7140sun": {
+  "where_read": "Local copy /mnt/attach/outputs/data/raw/edm/bylaw/b.txt (Charter Bylaw 20001, as adopted 23 Oct 2023, effective 1 Jan 2024)",
+  "claims": [
+   {
+    "claim": "Charter Bylaw 20001 effective 1 Jan 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "'to have an effective date of January 1, 2024'",
+    "fix": ""
+   },
+   {
+    "claim": "9.1 Development Planner MAY require study only for Discretionary Development",
+    "verdict": "CONFIRMED",
+    "evidence": "'may require a sun shadow impact study ... where the proposed development is a Discretionary Development'",
+    "fix": ""
+   },
+   {
+    "claim": "9.2.1 Alberta P.Eng. or architect",
+    "verdict": "CONFIRMED",
+    "evidence": "'prepared by a qualified Professional Engineer (P.Eng.) licensed by ... APEGA ... or registered Architect'",
+    "fix": ""
+   },
+   {
+    "claim": "9.2.3 every 3 hours sunrise-sunset MST on 21 Mar, 21 Jun, 21 Sep, 21 Dec",
+    "verdict": "CONFIRMED",
+    "evidence": "'every 3 hours between sunrise and sunset Mountain Standard Time on March 21, June 21, September 21 and December 21'",
+    "fix": ""
+   },
+   {
+    "claim": "9.3.1 difference between max allowed massing and proposed",
+    "verdict": "CONFIRMED",
+    "evidence": "'difference in shadow between the maximum allowable 3-dimensional building massing ... and the proposed 3-dimensional building massing'",
+    "fix": ""
+   },
+   {
+    "claim": "9.3.2-9.3.3 may refuse or require redesign",
+    "verdict": "CONFIRMED",
+    "evidence": "'may refuse the Development Permit application'; 'may require an applicant to revise'",
+    "fix": ""
+   },
+   {
+    "claim": "No shadow clause in BE, IM, IH",
+    "verdict": "CONFIRMED",
+    "evidence": "Search for 'shad' finds no hits between 2.120 BE (line 5812) and 2.150 (line ~6560)",
+    "fix": ""
+   },
+   {
+    "claim": "Shadow clauses for towers in RL/MU, UI, special areas",
+    "verdict": "CONFIRMED",
+    "evidence": "e.g. 'Towers must mitigate microclimatic impacts based on a Wind Impact Assessment and Sun Shadow Impact Study ... in compliance with Section 7.140'",
+    "fix": "Zone-by-zone attribution (RL, MU, UI, HOR, CMU, AED, RTCC, ALA) not individually re-traced; keep the '?'"
+   },
+   {
+    "claim": "3.50 Energy and Technology Park mentions shading only as tree planting",
+    "verdict": "CONFIRMED",
+    "evidence": "'tree and shrub plantings located in strategic areas to provide shading'",
+    "fix": ""
+   },
+   {
+    "claim": "2.140 IH: permitted uses only, no discretionary uses",
+    "verdict": "CONFIRMED",
+    "evidence": "IH s.2 'Permitted Uses' lists Major Industrial; 'Minor Industrial, limited to those existing as of January 1, 2024' ...; no Discretionary Uses heading",
+    "fix": "Permitted list also includes Natural Resource Development, Major/Minor Utility and signs"
+   },
+   {
+    "claim": "Bylaw names no data-centre use",
+    "verdict": "CONFIRMED",
+    "evidence": "No hit for 'data cent', 'data storage', 'server' in full text",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "As-adopted text only; later amendments not checked (as entry says)"
+  ],
+  "overall": "ok"
+ },
+ "vanSolarAccess": {
+  "where_read": "Same document as 'solar' (WebFetch of guidelines-solar-access-downtown.pdf)",
+  "claims": [
+   {
+    "claim": "Solar Access Guidelines (2024, amended 2026)",
+    "verdict": "CORRECTED",
+    "evidence": "'Approved by Council on September 17, 2025'; no amendment dates",
+    "fix": "Edition: Solar Access Guidelines for the Downtown Peninsula, approved 17 Sep 2025; add URL"
+   },
+   {
+    "claim": "Fall-equinox shadows 10:00-16:00",
+    "verdict": "CONFIRMED",
+    "evidence": "'Fall equinox, September 22, 10 am to 4 pm PDT'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": false,
+  "overreach": [
+   "Role 'Shadow on neighbours': guideline tests shadow on listed public parks, plazas and sidewalks, not on neighbouring properties; Downtown Peninsula only"
+  ],
+  "overall": "needs fix"
+ },
+ "ess": {
+  "where_read": "WebSearch for each exact document named, then WebFetch: JIBC EMD-ESS-Quick-Reference-Guide-20121102.pdf; City of Edmonton MinimumEmergencyShelterStandards.pdf; Health Canada guidance-cleaner-air-spaces-during-wildfire-smoke-events.html",
+  "claims": [
+   {
+    "claim": "JIBC ESS Quick Reference Guide 2012, from PHAC Emergency Lodging Service 2007: 3.5 m2 minimum sleeping area per person",
+    "verdict": "CONFIRMED",
+    "evidence": "'3.5 square metres (10 cubic metres) or 40 square feet (5'x8') minimum sleeping area per person' (Emergency Lodging Service, Public Health Agency of Canada, 2007)",
+    "fix": ""
+   },
+   {
+    "claim": "City of Edmonton Minimum Emergency Shelter Standards (2021) s.4: 2 m between beds in congregate settings",
+    "verdict": "CONFIRMED",
+    "evidence": "s.4 Sleeping Accommodations: '2 meters between beds, if in a congregate setting (although this is not a preferred setting).'",
+    "fix": ""
+   },
+   {
+    "claim": "Health Canada, Guidance for Cleaner Air Spaces during Wildfire Smoke Events (2020): MERV 13+",
+    "verdict": "CONFIRMED",
+    "evidence": "'Higher-efficiency filters (e.g., filters rated at MERV 13 or higher) are recommended.' Published September 2020",
+    "fix": ""
+   },
+   {
+    "claim": "Portable air cleaners sized for 2-3 room volumes per hour",
+    "verdict": "CONFIRMED",
+    "evidence": "'sized to provide a filtered airflow ... (CADR), for smoke at least two to three times the room volume per hour'",
+    "fix": "Say 'at least' 2-3 room volumes/h (minimum, not a range)"
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "The 'no primary named' internal notes can now be closed: all three primaries identified (add URLs)",
+   "JIBC guide gives 0.75 m between beds; Edmonton 2 m is a homeless-shelter operating standard, not emergency group lodging — label which applies"
+  ],
+  "overall": "needs fix"
+ },
+ "jibcGroupLodging": {
+  "where_read": "URL (WebFetch of JIBC PDF EMD-EMRG-1612 participant guide, 29 Oct 2026)",
+  "claims": [
+   {
+    "claim": "3.5 m2 minimum sleeping area per person; guide gives 1.5 x 2.5 m (3.75 m2)",
+    "verdict": "CONFIRMED",
+    "evidence": "p.35: 'The minimum sleeping area per person is 3.5 square metres (1.5 metres x 2.5 metres) or 40 square feet (5 feet x 8 feet) when possible.'",
+    "fix": "Add the qualifier 'when possible'"
+   },
+   {
+    "claim": "0.75 m between beds (p.35)",
+    "verdict": "CONFIRMED",
+    "evidence": "p.35: 'a distance of 0.75 metres (2.5 feet) between beds, bunks or sleeping bags should be maintained.'",
+    "fix": ""
+   },
+   {
+    "claim": "Facilities 'will only be opened up if they are suitable and have power' (p.44)",
+    "verdict": "CONFIRMED",
+    "evidence": "p.44: 'Facilities will only be opened up if they are suitable and have power.'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "smoke2026": {
+  "where_read": "Saved copy page.html (alberta.ca Air indicators: wildfire smoke, last updated February 2026)",
+  "claims": [
+   {
+    "claim": "Alberta smoke day = daily PM2.5 above 15 ug/m3",
+    "verdict": "CONFIRMED",
+    "evidence": "'wildfire smoke impacted days (daily average PM2.5 > 15 µg/m3)'",
+    "fix": ""
+   },
+   {
+    "claim": "Northern Alberta stations >100 smoke days in 2023",
+    "verdict": "CONFIRMED",
+    "evidence": "'In 2023, wildfire smoke impacted some northern Alberta stations for more than 100 days of the year'",
+    "fix": ""
+   },
+   {
+    "claim": "Edmonton values only in a chart",
+    "verdict": "CONFIRMED",
+    "evidence": "Text names Edmonton only qualitatively ('particularly Fort McMurray and Edmonton'); counts in Figure 3 chart",
+    "fix": ""
+   },
+   {
+    "claim": "Metro Vancouver: 14-day advisory 2018; two multi-day advisories 2023; smoke in 7 of last 10 years (2024 summary)",
+    "verdict": "NOT FOUND",
+    "evidence": "No mention of Vancouver/Metro Vancouver in the saved Alberta page",
+    "fix": "Needs its own Metro Vancouver source (as the '?' says); cannot be settled from this source"
+   },
+   {
+    "claim": "No official annual smoke-hour counts for either city",
+    "verdict": "CONFIRMED",
+    "evidence": "Page counts days only ('number of days ... impacted'), no hours",
+    "fix": "This is an inference from absence; label 'our reading'"
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Metro Vancouver figures carry the Alberta URL; split into a separate entry"
+  ],
+  "overall": "needs fix"
+ },
+ "healthCanada2026": {
+  "where_read": "Saved copy page.html (Health Canada, Guidance on upper indoor temperature limits: Protecting the health of older adults, June 2026)",
+  "claims": [
+   {
+    "claim": "Health Canada 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Page dated 'June 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "Upper indoor temperature limit 26 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "'this guidance recommends an upper indoor temperature limit of 26°C'",
+    "fix": "Note scope: older adults; health protection not comfort; 'may not fully safeguard individuals with severe frailty'"
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Role for clean_air_volume ('Clean-air room volume served', traced from ess) is not supported: this document is about indoor temperature, not filtration or room volume"
+  ],
+  "overall": "needs fix"
+ },
+ "vanUses2026": {
+  "where_read": "Saved copy full.pdf (Zoning and Development By-law s.2 Definitions, June 2026); local district schedules /mnt/attach/outputs/data/raw/codes/van_I-2_schedule.txt, raw/van/fc2.txt, raw/van/i3.txt; I-1C, M-1, IC-2, C-2 schedules not read",
+  "claims": [
+   {
+    "claim": "Parking Area/Garage 'may include the retail sale of electricity for the purpose of charging motor vehicles'",
+    "verdict": "CONFIRMED",
+    "evidence": "Parking Area: '... may include the retail sale of electricity for the purpose of charging motor vehicles.' (same in Parking Garage)",
+    "fix": ""
+   },
+   {
+    "claim": "No stand-alone EV charging use",
+    "verdict": "CONFIRMED",
+    "evidence": "Only 'Electric Vehicle Charging Equipment' (equipment, not a use) and charging as an add-on to Parking Area/Garage, Cardlock Fuel Station, Gasoline Station uses",
+    "fix": "Add that Cardlock Fuel Station and Gasoline Station definitions also allow electricity sales"
+   },
+   {
+    "claim": "Urban Farm - Class B (may be in a greenhouse)",
+    "verdict": "CONFIRMED",
+    "evidence": "'part or all of the use may take place in a greenhouse or other structure'",
+    "fix": ""
+   },
+   {
+    "claim": "No aquaculture term",
+    "verdict": "CONFIRMED",
+    "evidence": "No hit for 'aqua' in s.2",
+    "fix": ""
+   },
+   {
+    "claim": "Parking Uses conditional in I-2, I-3, FC-2",
+    "verdict": "CONFIRMED",
+    "evidence": "I-2/I-3/FC-2 schedules: 'Parking Uses  Conditional'",
+    "fix": ""
+   },
+   {
+    "claim": "Urban Farm - Class B conditional in I-2, I-3, FC-2",
+    "verdict": "CONFIRMED",
+    "evidence": "'Urban Farm - Class B  Conditional  2.2.1' in each",
+    "fix": ""
+   },
+   {
+    "claim": "Community Centre conditional in I-2, I-3, FC-2",
+    "verdict": "CONFIRMED",
+    "evidence": "'Community Centre or Neighbourhood House  Conditional'",
+    "fix": ""
+   },
+   {
+    "claim": "Bulk Data Storage conditional in I-2 (not at ground floor except entrances), FC-2, I-3 sub-area A",
+    "verdict": "CONFIRMED",
+    "evidence": "I-2 2.2.7 'not permitted at the ground floor, except for entrances'; FC-2 conditional; I-3 'Bulk Data Storage, only in sub-area A  Conditional'",
+    "fix": "Add FC-2 2.2.4: 'not permitted at grade, except for entrances'"
+   },
+   {
+    "claim": "Permissions in I-1C, M-1, IC-2, C-2",
+    "verdict": "NOT FOUND",
+    "evidence": "Those district schedules are not in the saved copy or local raw files",
+    "fix": "Read those schedules or mark unverified"
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Register URL (zoning-by-law-section-2.pdf) differs from saved copy URL (Sec02.pdf); s.2 holds definitions only, district permissions come from separate schedules that need their own citations"
+  ],
+  "overall": "needs fix"
+ },
+ "edmUses2026": {
+  "where_read": "Local copy /mnt/attach/outputs/data/raw/edm/bylaw/b.txt (as adopted 2024) for s.8.10 and zone sections; WebFetch of live 2.120 BE page for the shelter exception",
+  "claims": [
+   {
+    "claim": "No EV charging use in 8.10",
+    "verdict": "CONFIRMED",
+    "evidence": "No hit for 'electric vehicle' or 'charging' in the bylaw text",
+    "fix": ""
+   },
+   {
+    "claim": "Urban Agriculture includes 'hydroponic or aquaponic systems, and vertical farms'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Typical examples include: community gardens, food gardens, Hen Enclosures, hydroponic or aquaponic systems, and vertical farms'",
+    "fix": ""
+   },
+   {
+    "claim": "Urban Agriculture permitted in MU, IM, BE, CB, within or on a building; MU <=600 m2 (?)",
+    "verdict": "CONFIRMED",
+    "evidence": "Listed under Permitted Uses in MU 2.28, IM 2.16, BE 2.25, CB 2.28; each: 'must be located within or on a building'; MU 3.20.1 'maximum Floor Area is 600 m2'",
+    "fix": "'?' settled from same bylaw text"
+   },
+   {
+    "claim": "Community Service incl. shelters permitted in MU and BE",
+    "verdict": "CONFIRMED",
+    "evidence": "MU 2.19 and BE 2.19 'Community Service' (Permitted); definition examples include 'Seasonal Shelters, and Year-round Shelters'",
+    "fix": ""
+   },
+   {
+    "claim": "BE <=500 m2 except shelters",
+    "verdict": "CONFIRMED",
+    "evidence": "Live BE page 3.12.1: 'The maximum Floor Area is 500 m2 per individual establishment.' 'This does not apply to Year-Round Shelters or Seasonal Shelters.'",
+    "fix": "Shelter exception is not in the as-adopted 2024 text: cite the amended online version"
+   },
+   {
+    "claim": "Minor Utility includes 'district heating plants' (IM, BE)",
+    "verdict": "CONFIRMED",
+    "evidence": "Minor Utility: 'Typical examples include: communication towers, district heating plants...'; permitted in BE 2.22, IM 2.13",
+    "fix": ""
+   },
+   {
+    "claim": "Major Utility includes 'cooling plants'",
+    "verdict": "CONFIRMED",
+    "evidence": "Major Utility: 'Typical examples include: compost facilities, cooling plants...'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "energyPlusPeople": {
+  "where_read": "URL (WebFetch of Big Ladder EnergyPlus 9.0 I/O Reference page, 29 Oct 2026)",
+  "claims": [
+   {
+    "claim": "Seated 108 W",
+    "verdict": "CONFIRMED",
+    "evidence": "'Seated, quiet' 108 W (60 W/m2, 1 met)",
+    "fix": ""
+   },
+   {
+    "claim": "Standing 126 W",
+    "verdict": "CONFIRMED",
+    "evidence": "'Standing, relaxed' 126 W",
+    "fix": ""
+   },
+   {
+    "claim": "Walking 3.2 km/h 207 W",
+    "verdict": "CONFIRMED",
+    "evidence": "'Walking, 3.2 km/h' 207 W",
+    "fix": ""
+   },
+   {
+    "claim": "180 W 'walking about, office'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Walking about (Office Activities)' 180 W",
+    "fix": ""
+   },
+   {
+    "claim": "SECONDARY (ASHRAE Fundamentals via EnergyPlus)",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 'based on ... the 2005 ASHRAE Handbook of Fundamentals, page 8.6'; W/person from 1.8 m2 body area",
+    "fix": "Name the edition: ASHRAE Fundamentals 2005"
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Values are total metabolic heat (sensible+latent), not sensible load; check how the tool uses them",
+   "'traced from ess' link is wrong: this source does not derive from ess"
+  ],
+  "overall": "ok"
+ },
+ "ceud": {
+  "where_read": "Local primary files /mnt/attach/outputs/data/82007eb2-res_bc_e_2.xls, a1c75be6-res_ab_e_2.xls and extract /mnt/attach/outputs/data/nrcan_ceud_latest.json; raw zips raw/nrcan_ceud/*comab2023e.zip, *combct2023e.zip",
+  "claims": [
+   {
+    "claim": "2023 data, Residential Table 2 (BC; AB) and Commercial Table 3",
+    "verdict": "CONFIRMED",
+    "evidence": "XLS: 'Table 2: Secondary Energy Use and GHG Emissions by End-Use', years 2000-2023; extract keys res_bc_e_2, res_ab_e_2, com_bct_e_3, com_ab_e_3, latest_year 2023",
+    "fix": ""
+   },
+   {
+    "claim": "File names (?)",
+    "verdict": "CONFIRMED",
+    "evidence": "Files are saved as <hash>-res_bc_e_2.xls, <hash>-res_ab_e_2.xls, <hash>-com_bct_e_3.xls, <hash>-com_ab_e_3.xls in data/; zips named comab2023e.zip, combct2023e.zip",
+    "fix": "'?' settled"
+   },
+   {
+    "claim": "Space heat 33.1 / 76.9 GJ per household (BC / AB)",
+    "verdict": "CONFIRMED",
+    "evidence": "2023: BC 72.129 PJ / 2,177k households = 33.1; AB 128.462 PJ / 1,671k = 76.9",
+    "fix": "Derived (end-use PJ ÷ households), not printed in the table: label 'derived'"
+   },
+   {
+    "claim": "DHW 19.4 / 28.2 GJ per household",
+    "verdict": "CONFIRMED",
+    "evidence": "BC 42.331 / 2,177k = 19.4; AB 47.204 / 1,671k = 28.2",
+    "fix": "Label 'derived'"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Provincial averages (BC, AB), not Vancouver/Edmonton; BC table average includes milder and colder regions"
+  ],
+  "overall": "ok"
+ },
+ "statcanHousehold": {
+  "where_read": "Saved copy page.html (Open Government listing) and local CSV /mnt/attach/outputs/data/25100060.csv",
+  "claims": [
+   {
+    "claim": "Table 25-10-0060-01 Household energy consumption, Canada and provinces",
+    "verdict": "CONFIRMED",
+    "evidence": "Listing: 'Table 25100060; Formerly CANSIM Table 153-0161'",
+    "fix": ""
+   },
+   {
+    "claim": "2011-2021 (?), biennial (?)",
+    "verdict": "CORRECTED",
+    "evidence": "CSV REF_DATE values: 2011, 2013, 2015, 2019, 2021 (no 2017); listing text says 'data for years 2011-2019', frequency 'As Needed'",
+    "fix": "Years 2011, 2013, 2015, 2019, 2021; not strictly biennial (2017 missing); the listing's '2011-2019' is out of date"
+   },
+   {
+    "claim": "Gas-using share 60% / 90%",
+    "verdict": "CONFIRMED",
+    "evidence": "2021: BC 1,235,024 / 2,041,830 = 60.5%; AB 1,471,165 / 1,633,225 = 90.1% (Natural gas vs Total, Number of households)",
+    "fix": "Label 'derived, 2021'"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Provincial shares, not city"
+  ],
+  "overall": "needs fix"
+ },
+ "wsuEV": {
+  "where_read": "URL (WebFetch of WSU PDF, 'Updated 12-18-2023')",
+  "claims": [
+   {
+    "claim": "Level 2 7.4-19.2 kW",
+    "verdict": "CORRECTED",
+    "evidence": "Figure: 'Up to 19.2 kW power'; table lists Level 2 outputs of 7.4 kW, 11 kW and 22 kW",
+    "fix": "Source gives no single range; cite as 'up to 19.2 kW (North American J1772); table examples 7.4, 11, 22 kW'"
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Short extension handout (WSU Energy Program, M. Thiessen Spencer, updated 18 Dec 2023), not a standard; add date/author"
+  ],
+  "overall": "needs fix"
+ },
+ "vanDCFC": {
+  "where_read": "Saved copy full.pdf (Council report dated 22 Jun 2021, meeting 6 Jul 2021, RTS 14229)",
+  "claims": [
+   {
+    "claim": "Council report (6 Jul 2021) recommending EV charging requirements in new non-residential buildings",
+    "verdict": "CONFIRMED",
+    "evidence": "'Meeting Date: July 6, 2021' 'Requirements for Electric Vehicle Charging in New Non-Residential Buildings'",
+    "fix": "Report date is 22 Jun 2021"
+   },
+   {
+    "claim": "Draft Parking By-law 6059 amendment: DCFC 'typically' 25-400 kW",
+    "verdict": "CONFIRMED",
+    "evidence": "'DC Fast Charging means ... output voltage of 50-1000V and typically supplies output power between 25 and 400kW'",
+    "fix": ""
+   },
+   {
+    "claim": "Enacted wording not checked (?)",
+    "verdict": "NOT FOUND",
+    "evidence": "Report holds the draft by-law only",
+    "fix": "Cannot settle from this source; read the enacted Parking By-law 6059"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "silber2024": {
+  "where_read": "UNREACHABLE: WebFetch of the KIT URL was blocked (permission request not answered); no saved copy",
+  "claims": [
+   {
+    "claim": "Silber, Scheubner, Märtz 2024, IJEPES 155:109540",
+    "verdict": "UNREACHABLE",
+    "evidence": "KIT repository page blocked",
+    "fix": ""
+   },
+   {
+    "claim": "Simultaneity 0.5",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not read",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Coefficient 0.5 unverified; check what site type/size it applies to"
+  ],
+  "overall": "unreachable"
+ },
+ "inlL2_2015": {
+  "where_read": "Saved copy full.pdf (INL/EXT-15-36313, J. Francfort, December 2015)",
+  "claims": [
+   {
+    "claim": "INL/EXT-15-36313 (2015)",
+    "verdict": "CONFIRMED",
+    "evidence": "'INL/EXT-15-36313' ... 'December 2015'",
+    "fix": ""
+   },
+   {
+    "claim": "Public L2 starts concentrate at start of work day",
+    "verdict": "CONFIRMED",
+    "evidence": "'at the beginning of the work day (Figure 3)'",
+    "fix": ""
+   },
+   {
+    "claim": "Drivers 'rarely initiate their away-from-home charging before 6 a.m. or after 7 p.m.'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Drivers of both vehicles rarely initiate their away-from-home charging before 6 a.m. or after 7 p.m.'",
+    "fix": ""
+   },
+   {
+    "claim": "DCFC leans to end of work day",
+    "verdict": "CONFIRMED",
+    "evidence": "'DCFC use is done more frequently at the end of the work day'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "US data (Leaf and Volt drivers, EV Project era)"
+  ],
+  "overall": "ok"
+ },
+ "uclaWorkplace": {
+  "where_read": "URL (WebFetch of UCLA Luskin 'Full Report.pdf', 29 Oct 2026)",
+  "claims": [
+   {
+    "claim": "Winn, Electric Vehicle Charging at Work",
+    "verdict": "CONFIRMED",
+    "evidence": "Author Ryan Winn; 'Electric Vehicle Charging at Work: Understanding Workplace PEV Charging Behavior to Inform Pricing Policy and Investment Decisions'",
+    "fix": ""
+   },
+   {
+    "claim": "UCLA urban planning client project for ChargePoint, hosted by Luskin Center (?)",
+    "verdict": "CONFIRMED",
+    "evidence": "Prepared 'at the direction of the Department and of ChargePoint as a planning client'; UCLA MURP, Dept of Urban Planning, advisor J.R. DeShazo",
+    "fix": "Hosting confirmed by URL (innovation.luskin.ucla.edu); '?' can be dropped"
+   },
+   {
+    "claim": "ChargePoint data 2011-15",
+    "verdict": "CONFIRMED",
+    "evidence": "'between January 1, 2011 and December 31, 2015'",
+    "fix": ""
+   },
+   {
+    "claim": "Session-start shares 20.4/26.7/13.5/15.2/18.0/5.4/0.9%",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 1: 5-8 AM 20.4%, 8-10 AM 26.7%, 10-12 13.5%, 12-2 PM 15.2%, 2-6 PM 18.0%, 6 PM-12 AM 5.4%, 12-5 AM 0.9%",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Student capstone using operator (ChargePoint) data: label 'academic (student report, industry data)'"
+  ],
+  "overall": "ok"
+ },
+ "dunskyNRCan2024": {
+  "where_read": "UNREACHABLE: WebFetch of the register URL blocked (permission not answered); the NRCan pages reachable by search were a different Dunsky report (2022, 'Updated Projections...') and an undated executive summary, so not used",
+  "claims": [
+   {
+    "claim": "Table 12 installed cost per port: DCFC $160k@125 kW (2025), $240k@175 kW (2030); L2 $15k (2025), $10k (2030)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Report not read",
+    "fix": ""
+   },
+   {
+    "claim": "Utility upgrades included per s.2.5.1 vs excluded per executive summary",
+    "verdict": "UNREACHABLE",
+    "evidence": "Report not read",
+    "fix": ""
+   },
+   {
+    "claim": "Wider grid upgrades separate (s.5.3); fleets charge overnight at depots",
+    "verdict": "UNREACHABLE",
+    "evidence": "Report not read",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Do not confuse with Dunsky 2022 'Updated Projections of Canada's Public Charging Infrastructure Needs' (gives $50-100k+ DCFC, $2-10k L2, Table 3)"
+  ],
+  "overall": "unreachable"
+ },
+ "statcanSHS": {
+  "where_read": "Saved copy page.html (table 11-10-0222-01 shell; data cells not in saved HTML)",
+  "claims": [
+   {
+    "claim": "Table 11-10-0222-01, household spending",
+    "verdict": "CONFIRMED",
+    "evidence": "'Table: 11-10-0222-01 (formerly CANSIM 203-0021)' 'Household spending, Canada, regions and provinces'",
+    "fix": ""
+   },
+   {
+    "claim": "'Water, fuel and electricity for principal accommodation' $2,535 (2019 ?)",
+    "verdict": "NOT FOUND",
+    "evidence": "Saved page has no data cells (only table shell; reference period 2010-2023)",
+    "fix": "Download the CSV for the series and year; the '?' cannot be settled from the saved copy"
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Category includes water, so it overstates energy spend (entry notes this); geography (Canada vs BC/AB) not stated"
+  ],
+  "overall": "needs fix"
+ },
+ "statcanEP2024": {
+  "where_read": "Saved copy page.html (StatCan 46-28-0001, release date February 20, 2024)",
+  "claims": [
+   {
+    "claim": "46-28-0001, 20 Feb 2024, 2021 Census",
+    "verdict": "CONFIRMED",
+    "evidence": "'Release date: February 20, 2024'",
+    "fix": ""
+   },
+   {
+    "claim": "Threshold: energy bills >=10% of after-tax income",
+    "verdict": "CONFIRMED",
+    "evidence": "'Households were energy poor if 10% or more of household after-tax income' spent on energy",
+    "fix": ""
+   },
+   {
+    "claim": "Canada 5.6, BC 4.9, Alberta 7.3 (all households)",
+    "verdict": "CONFIRMED",
+    "evidence": "Chart 1 data table: 'Can. 5.6 ... Alta. 7.3 B.C. 4.9'",
+    "fix": ""
+   },
+   {
+    "claim": "Table 2: 5.5 / 4.8 / 7.2 for non-farm, non-reserve households",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 2 (direct payments only), All households: total 5.5; B.C. 4.8; Alta. 7.2",
+    "fix": "Add: including estimated indirect payments the rates are 7.1 / 6.4 / 9.3"
+   },
+   {
+    "claim": "Provinces and territories only",
+    "verdict": "CONFIRMED",
+    "evidence": "Chart 1 and Table 2 give provinces/territories, no CMA",
+    "fix": ""
+   },
+   {
+    "claim": "CUSP tool no longer at energypoverty.ca (our observation)",
+    "verdict": "CONFIRMED",
+    "evidence": "Labelled as own observation, not from source; fine",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "censusIncome2021": {
+  "where_read": "Saved copy page.html (The Daily, 2022-07-13); Focus on Geography Series not found by search",
+  "claims": [
+   {
+    "claim": "Vancouver CMA $79,500 (The Daily, 13 Jul 2022)",
+    "verdict": "CONFIRMED",
+    "evidence": "'while in Vancouver it was $79,500, up 16.1% from five years earlier' (median after-tax household income, 2020)",
+    "fix": ""
+   },
+   {
+    "claim": "Edmonton CMA $84,000 (Focus on Geography Series 2021)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not in The Daily page; the Focus on Geography page for Edmonton CMA not found by search",
+    "fix": "Read the Focus on Geography Edmonton CMA page or Table 98-10-0058-01"
+   },
+   {
+    "claim": "Table 98-10-0058-01, released 13 Jul 2022",
+    "verdict": "NOT FOUND",
+    "evidence": "Table number not on The Daily page",
+    "fix": "Values not read from the table (as the entry says)"
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Edmonton value carries the Daily URL but comes from a different product"
+  ],
+  "overall": "needs fix"
+ },
+ "goits": {
+  "where_read": "Saved copy full.pdf (GO-ITS 25.18 Physical Security Requirements for Data Centres, Version 1.2, © 2015, last review 2015-03-18)",
+  "claims": [
+   {
+    "claim": "Ontario GO-ITS 25.18 v1.2",
+    "verdict": "CONFIRMED",
+    "evidence": "'Number 25.18 Physical Security Requirements for Data Centres Version #: 1.2'",
+    "fix": ""
+   },
+   {
+    "claim": "10 m / 45 m standoff",
+    "verdict": "CONFIRMED",
+    "evidence": "'minimum 10 metre standoff requirement for all new facilities (45 metres for facilities that require enhanced safeguards)'; s.2.8.2 '10 metres of clear landscaped ground'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Ontario government IT standard for OPS data centres: not binding in BC/AB; label 'benchmark (Ontario gov. standard)', not 'rule'",
+   "45 m applies 'unless access control measures are [in] place'",
+   "Date is 2015 (URL path 2019)"
+  ],
+  "overall": "needs fix"
+ },
+ "gcpsg015": {
+  "where_read": "Saved copy page.html (RCMP GCPSG-015 (2024), page date 2024-09-23)",
+  "claims": [
+   {
+    "claim": "RCMP GCPSG-015 (2024)",
+    "verdict": "CONFIRMED",
+    "evidence": "'GCPSG-015 (2024) Guide to the Application of Physical Security Zones'; 'effective date ... 2024-07-01'",
+    "fix": ""
+   },
+   {
+    "claim": "Zone hierarchy",
+    "verdict": "CONFIRMED",
+    "evidence": "Zones listed: Public Zone, Reception Zone, Operations Zone, Security Zone, High Security Zone",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Federal guidance for Government of Canada facilities; not a municipal or building rule: label 'guidance (federal)'; gives no standoff distances"
+  ],
+  "overall": "needs fix"
+ },
+ "tia942": {
+  "where_read": "URL (WebFetch of tiaonline.org/?p=16534)",
+  "claims": [
+   {
+    "claim": "TIA-942 ratings",
+    "verdict": "CONFIRMED",
+    "evidence": "Rated-1 'limited protection against physical events' ... Rated-4 'protection against almost all physical events'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Page has no setback/standoff content; 'rating as proxy' for standoff is our inference: keep 'proxy' label and add 'industry standard (TIA)'"
+  ],
+  "overall": "ok"
+ },
+ "bylaw14600": {
+  "where_read": "URL (WebFetch of edmonton.ca C14600.pdf, consolidated October 22, 2024)",
+  "claims": [
+   {
+    "claim": "Consolidated 22 Oct 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "Consolidation date October 22, 2024",
+    "fix": ""
+   },
+   {
+    "claim": "Residential 65 dB(A) 7 a.m.-10 p.m. at property line (s.19)",
+    "verdict": "CONFIRMED",
+    "evidence": "s.19(1) 'any sound exceeding 65 dB(A), as measured at the property line of a property zoned for residential use'",
+    "fix": ""
+   },
+   {
+    "claim": "Allowances 70/2 h, 75/1 h, 80/30 min, 85/15 min a day",
+    "verdict": "CONFIRMED",
+    "evidence": "s.19(3)(a)-(d) '70 dB(A) for a total of no more than two hours in any one day' ... '85 dB(A) ... 15 minutes'",
+    "fix": ""
+   },
+   {
+    "claim": "Residential overnight 50 dB(A) (s.20)",
+    "verdict": "CONFIRMED",
+    "evidence": "s.20(1) 'any sound exceeding 50 dB(A)' 'before 7 a.m. or after 10 p.m.'",
+    "fix": ""
+   },
+   {
+    "claim": "Non-residential 75 day / 60 overnight (ss.21-22)",
+    "verdict": "CONFIRMED",
+    "evidence": "s.21(1) 75 dB(A); s.22(1) 60 dB(A)",
+    "fix": "Add non-residential day allowances s.21(3): 80 dB(A) 2 h, 85 dB(A) 1 h"
+   },
+   {
+    "claim": "No Leq or continuous-noise provision",
+    "verdict": "CONFIRMED",
+    "evidence": "No Leq or averaging period; limits are dB(A) thresholds with daily duration allowances",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "s.14 general 'disturbs the peace' prohibition applies regardless of dB level"
+  ],
+  "overall": "ok"
+ },
+ "van6555": {
+  "where_read": "Local copy /mnt/attach/outputs/data/raw/van/6555c.pdf (identical to van6555zones saved copy; consolidated to July 14, 2026)",
+  "claims": [
+   {
+    "claim": "Schedules A (activity), B and B.1 (intermediate)",
+    "verdict": "CONFIRMED",
+    "evidence": "'activity zone' means areas in Schedule A; 'intermediate zone' means areas in Schedule B and the portion shown on Schedule B.1",
+    "fix": ""
+   },
+   {
+    "claim": "ss.2.1-2.3 continuous-sound limits",
+    "verdict": "CONFIRMED",
+    "evidence": "Headings 'Continuous sound in intermediate zone' (2.2), '... activity zone or event zone' (2.3)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "No roles recorded; duplicate of van6555zones (same file): consider merging"
+  ],
+  "overall": "ok"
+ },
+ "van6555zones": {
+  "where_read": "Saved copy full.pdf (Noise Control By-law 6555, consolidated to July 14, 2026, By-law 14786)",
+  "claims": [
+   {
+    "claim": "Consolidated 14 Jul 2026 (?; one check reads 20 May 2025)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Consolidated for convenience only to July 14, 2026' 'amended to include By-law No. 14786 effective July 14, 2026'",
+    "fix": "'?' settled: 14 Jul 2026"
+   },
+   {
+    "claim": "quiet->quiet 55 day / 45 night",
+    "verdict": "CONFIRMED",
+    "evidence": "s.2.1(a)(i) 55 dBA; (b)(i) 45 dBA",
+    "fix": ""
+   },
+   {
+    "claim": "activity->quiet 60 / 55",
+    "verdict": "CONFIRMED",
+    "evidence": "s.2.3(a)(i) 60 dBA; (b)(i) 55 dBA",
+    "fix": ""
+   },
+   {
+    "claim": "intermediate->quiet 60 / 50",
+    "verdict": "CONFIRMED",
+    "evidence": "s.2.2(a)(i) 60 dBA; (b)(i) 50 dBA",
+    "fix": ""
+   },
+   {
+    "claim": "intermediate/activity->other 70 / 65",
+    "verdict": "CONFIRMED",
+    "evidence": "s.2.2(a)(ii)/(b)(ii) and s.2.3(a)(ii)/(b)(ii): 70 / 65 dBA",
+    "fix": "Also add quiet->other 60 / 55 (s.2.1(a)(ii), (b)(ii))"
+   },
+   {
+    "claim": "'background noise' credited only for commercial premises (s.3.1(b))",
+    "verdict": "CORRECTED",
+    "evidence": "s.3.1(b)(i): sound from playback/amplification/instruments 'in commercial premises' must not exceed '3 dBA above the background noise'",
+    "fix": "Not a credit: a +3 dBA-over-background limit for amplified sound/music in commercial premises; does not apply to mechanical equipment"
+   },
+   {
+    "claim": "No ambient credit for equipment (our reading)",
+    "verdict": "CONFIRMED",
+    "evidence": "ss.2.1-2.3 give fixed dBA limits with no background adjustment; labelled 'our reading'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "needs fix"
+ },
+ "munda": {
+  "where_read": "UNREACHABLE: no work, year or URL given, so the exact document cannot be identified; not searched to avoid substituting another document",
+  "claims": [
+   {
+    "claim": "Munda: non-compensatory multi-criteria method",
+    "verdict": "UNREACHABLE",
+    "evidence": "Document not identified",
+    "fix": "Name the work (e.g. author, title, year) before checking"
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Trade-off table method rests on an unidentified source"
+  ],
+  "overall": "unreachable"
+ },
+ "cinelli2014": {
+  "where_read": "UNREACHABLE: title, venue and URL not given; exact document cannot be identified",
+  "claims": [
+   {
+    "claim": "Cinelli et al. 2014: non-compensatory multi-criteria method",
+    "verdict": "UNREACHABLE",
+    "evidence": "Document not identified",
+    "fix": "Name the paper (title, journal) before checking"
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Trade-off table method rests on an unidentified source"
+  ],
+  "overall": "unreachable"
+ }
+}
