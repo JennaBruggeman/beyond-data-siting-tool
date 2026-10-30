@@ -61,3 +61,10 @@ Three routes:
 ## Not shown, by design
 
 Seismic, Nations named, urban heat, restriction history, interconnection, deep geothermal, aquifer storage, borefield, greywater and existing-building stock are register-only context. The floodplain is shown on the site card, not in the tabs.
+
+## Applied (30 Oct 2026, J.B.: "yes")
+
+- **Screen:** P-01/P-02 distribution-voltage label on the BC Hydro rate and the export rule (transmission RS 1830 not applied; threshold ?); P-03/P-04 EPCOR $2.50 / 7.99 % and one Edmonton price ($49.67/MWh) in both solar cards; P-06 Bylaw 19627 Sch. 2 s. 5.10, Metro Vancouver 300 m³ marked "?"; P-07 Gold Bar detail removed (EPCOR claim); P-08 afterlife, both views dated; P-11 one Vancouver water bill (water + sewer, "as proposed", sewer "?"); P-14 Div. B 2.2.10.3(2)–(3), GVRD datum, diesel as hazardous "our reading (?)"; P-15 fresh-water factors for rivers, no "sea" for a Fraser arm; P-16 one set of NRCan yields (892–1,006 / 947–1,243; vertical 718 / 990); P-17/P-23 Alberta export and greywater wording; make-up water now spans PUE 1.4–1.55.
+- **Register** (`register/patches/place_fixes_2026_10_30.py`): P-05, P-12, P-13 (Bylaw 14600 limits stated), P-14 (old Div. C 2.2.9.3 citation replaced), P-15, P-16, P-19 (unsourced dates removed from the text), P-20 (ATES × 1,000), P-21, P-22; P-18 logic panel now keeps 1,500 characters.
+- **P-09:** `tool/make_tool_opps.py` reads `register/formula_register.json` and runs on every rebuild; 49 source-kind labels that existed only in opps.json moved into the register (copy kept: `checks/place_check/opps_before_p09.json`). 39 quantities in opps.json had stale source lists; they now match the register.
+- **Golden:** all 8 lots identical. Display check: V339 and E06A tabs and the flood text read as intended; no page errors.
