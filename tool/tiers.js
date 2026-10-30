@@ -10,7 +10,7 @@
 const BD=window.BD; const {$,esc}=BD;
 const KEY='bd-tier';
 const TIERS=[
- {id:'resident',short:'Everyday',name:'What it means for me',who:'For residents and neighbours',does:'Only where it is. Everything else starts from a typical choice you can change.'},
+ {id:'resident',short:'Everyday',name:'What it means for me',who:'For residents and neighbours',does:'Only where it is, and whether the plant sits on the roof or in the yard. Everything else is a typical choice, shown.'},
  {id:'community',short:'Civic',name:'What it means for the neighbourhood',who:'For councillors, community groups and receivers of heat',does:'Every set-up choice; who gains and loses, the money, the approvals.'},
  {id:'full',short:'Technical',name:'How it is worked out',who:'For engineers, architects and bylaw professionals',does:'Everything, with formulas, sources and confidence.'}];
 const TYPICAL_MW=2.5;
@@ -87,21 +87,29 @@ function sizeSet(which){ const A=BD.S.answers; A.mw=null; BD.modelReset&&BD.mode
 function residentCard(){ const A=BD.S.answers, m=BD.model&&BD.model(); if(!m) return;
   if(A.mw==null||!A.mwPick) sizeSet(A.mwPick||'typ');
   const f=BD.eng.siteFacts(), fm=BD.fitMax?BD.fitMax():null, hi=fm!=null?fm:0, L=live(); // largest size where everything fits (J.B. 20 Oct)
-  const rows=L.map((d,j)=>{ const opts=d.opts(BD.model()), cur=d.k(A), o=opts.find(x=>x.v===cur)||opts[0]; const ot=d.id==='outside'&&o.v==='dry'&&(A.inside||'air')==='air'?'Air-cooled chillers':o.t; return `<li><span class="aq">${esc(d.q)}</span><span class="aa">${esc(ot)}</span><a href="#" data-j="${j}">Change</a></li>`; }).join('');
+  const rows=L.map((d,j)=>{ const opts=d.opts(BD.model()), cur=d.k(A), o=opts.find(x=>x.v===cur)||opts[0]; const ot=d.id==='outside'&&o.v==='dry'&&(A.inside||'air')==='air'?'Air-cooled chillers':o.t; return `<li><span class="aq">${esc(d.q)}</span><span class="aa">${esc(ot)}</span></li>`; }).join('');
+  const where=A.gens==='none'?(A.plantAt||'roof'):((A.plantAt||'roof')===(A.genAt||'yard')?A.plantAt:''), whereNow=where?'':`Now: cooling ${({roof:'on the roof',yard:'in the yard',split:'split'})[A.plantAt||'roof']}, generators ${({roof:'on the roof',yard:'in the yard'})[A.genAt||'yard']} (the tool's usual choice; which is more common is not sourced ?).`;
   // the floor the servers need (same figure the 3D label shows), not the zone's largest building
   const M=BD.model(); const fl=M&&(M.sizedTo?M.sizedTo.floor:M.footArea?M.footArea*Math.max(1,M.nF[0]-(M.Z&&M.Z.ground?1:0)):0); const store=fl?`about ${BD.fmt(Math.round(fl/100)*100)} m² (${BD.fmt(Math.round(fl*10.7639/1000)*1000)} ft²) of floor`:''; const foot='';
   const nothing=hi<0.05, probs=BD.setupProblems?BD.setupProblems():[];
   $('#side').innerHTML=`<div class="dk rset"><div class="kind">Set up the site</div><h2>What we assumed for you</h2>
-   <p>You only chose where. The rest starts from the tool's usual choices, <span class="k">a starting point, not a recommendation</span>. Change any of them.</p>
+   <p>You chose where. Choose roof or yard for the plant; the rest is the tool's usual choices, <span class="k">a starting point, not a recommendation</span>.</p>
+   <h3>Where the plant goes</h3><div class="dch" role="radiogroup">${[['roof','Roof'],['yard','Yard']].map(([v,t])=>`<button role="radio" data-pw="${v}" aria-checked="${(A.resPlant||where)===v}">${t}</button>`).join('')}</div>
+   <p class="sub">Cooling units and backup generators together. ${A.resNote?esc(A.resNote)+' ':''}${A.resPlant?(A.resPlant==='roof'?'The yard stays as free as the lot allows.':'The building gets shorter to leave the yard for plant.'):whereNow||(where==='roof'?'The yard stays free; whatever the roof cannot hold is placed in the yard.':'The building gets shorter to leave the yard for plant.')}</p>
    ${nothing?`<p class="dwarn">Nothing fits on this lot with these choices: ${esc(probs.join(' '))} Change a choice below, or try another lot.</p>`:`
-   <h3>How big</h3><div class="dch" role="radiogroup">${[['typ',`Typical (${Math.min(TYPICAL_MW,hi).toFixed(1)} MW)`],['mid','In between'],['large',`As large as fits (${hi.toFixed(1)} MW)`]].map(([v,t])=>`<button role="radio" data-sz="${v}" aria-checked="${(A.mwPick||'typ')===v}">${esc(t)}</button>`).join('')}</div>
-   <p class="sub">${M&&M.sizedTo?`${esc(A.mw.toFixed(1))} MW of servers: ${store}, any shape`:`The most the zone allows: ${store}, about ${f.mw[0].toFixed(1)}–${hi.toFixed(1)} MW of servers depending on how tightly racks are packed${hi>=40?' (the tool stops at 40 MW)':''}`}. "Typical" is the size of data centres already built inside Vancouver, Edmonton and Calgary, about 2–2.5 MW (operator claims)${hi<TYPICAL_MW?`; this lot fits only ${hi.toFixed(1)} MW`:''}.</p>`}
-   <h3>Everything else</h3><ul class="assumed">${rows}</ul>
+   <h3>How big</h3><p class="sub">${M&&M.sizedTo?`${esc(A.mw.toFixed(1))} MW of servers: ${store}, any shape`:`The most the zone allows: ${store}, about ${f.mw[0].toFixed(1)}–${hi.toFixed(1)} MW of servers depending on how tightly racks are packed${hi>=40?' (the tool stops at 40 MW)':''}`}. "Typical" is the size of data centres already built inside Vancouver, Edmonton and Calgary, about 2–2.5 MW (operator claims)${hi<TYPICAL_MW?`; this lot fits only ${hi.toFixed(1)} MW`:''}.</p>`}
+   <h3>Everything else, chosen for you</h3><ul class="assumed">${rows}</ul><p class="sub">To change these, set "Showing" at the top to the neighbourhood or how-it-is-worked-out view.</p>
    ${!nothing&&probs.length?`<div class="fstuck" role="alert"><b>This set-up doesn't work on this lot.</b><ul>${probs.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><div class="fsx"><button class="btn" id="rFit">Use the largest size that fits (${hi.toFixed(1)} MW)</button></div></div>`:''}
    <div class="dnav"><button class="sec" id="rB">← The site</button><button class="pri" id="rN" ${nothing||probs.length?'disabled':''}>${nothing||probs.length?'Fix the set-up to go on':'What fits here →'}</button></div></div>`;
   const sd=$('#side');
   sd.querySelectorAll('[data-sz]').forEach(b=>b.onclick=()=>{ sizeSet(b.dataset.sz); residentCard(); if(BD.showModel) BD.showModel(); });
-  sd.querySelectorAll('.assumed a').forEach(a=>a.onclick=e=>{ e.preventDefault(); A.residentEdit=true; BD.deck.show(+a.dataset.j); });
+  // roof or yard as far as the lot allows: if it does not fit, the generators go to the other place, then the cooling is split (the same fallbacks the tool's own fit search uses)
+  sd.querySelectorAll('[data-pw]').forEach(b=>b.onclick=()=>{ const w=b.dataset.pw, other=w==='roof'?'yard':'roof'; A.resPlant=w; A.resNote='';
+    const tries=[[w,w],[w,other],['split',w],['split',other]], ok=()=>{ sizeSet(A.mwPick||'typ'); const pr=BD.setupProblems?BD.setupProblems():[], fm=BD.fitMax?BD.fitMax():1; return !pr.length&&fm>=0.05; };
+    let done=false; for(const [pa,ga] of tries){ A.plantAt=pa; if(A.gens!=='none') A.genAt=ga; if(ok()){ done=true; break; } }
+    if(!done){ A.plantAt=w; if(A.gens!=='none') A.genAt=w; sizeSet(A.mwPick||'typ'); }
+    if(done&&(A.plantAt!==w||(A.gens!=='none'&&A.genAt!==w))) A.resNote=`The ${w} cannot hold all of it on this lot: ${A.plantAt==='split'?'the cooling is split between roof and yard':'the cooling is '+(A.plantAt==='roof'?'on the roof':'in the yard')}${A.gens!=='none'?', generators '+(A.genAt==='roof'?'on the roof':'in the yard'):''}.`;
+    residentCard(); if(BD.showModel) BD.showModel(); });
   { const rf=$('#rFit'); if(rf) rf.onclick=()=>{ sizeSet('large'); residentCard(); if(BD.showModel) BD.showModel(); }; }
   $('#rB').onclick=()=>{ if(BD.flow&&BD.flow.on) BD.flow.back(); else BD.card(); };
   $('#rN').onclick=()=>{ A.setupDone=true; if(BD.flow&&BD.flow.on) BD.flow.next(); else BD.fitsView(); };
@@ -111,6 +119,6 @@ function patchSetup(){ if(!BD.setup||!BD.deck) return setTimeout(patchSetup,200)
   BD.setup.start=()=>{ if(BD.tier()==='resident'&&!BD.S.answers.residentEdit) residentCard(); else orig(); }; }
 patchSetup();
 // a new parcel: residents start again from the assumed set-up
-let lastSel=''; setInterval(()=>{ const k=BD.S&&BD.S.sel?BD.S.sel.city+':'+BD.S.sel.id:''; if(k!==lastSel){ lastSel=k; if(BD.S&&BD.S.answers){ delete BD.S.answers.residentEdit; delete BD.S.answers.mwPick; } } },500);
+let lastSel=''; setInterval(()=>{ const k=BD.S&&BD.S.sel?BD.S.sel.city+':'+BD.S.sel.id:''; if(k!==lastSel){ lastSel=k; if(BD.S&&BD.S.answers){ delete BD.S.answers.residentEdit; delete BD.S.answers.mwPick; delete BD.S.answers.resPlant; delete BD.S.answers.resNote; } } },500);
 BD.TIERS=TIERS;
 })();
