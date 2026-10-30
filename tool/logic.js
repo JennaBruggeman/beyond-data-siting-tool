@@ -17,15 +17,15 @@ const tierNow=()=>(BD.tier&&BD.tier())||'full';
 
 /* ---------- what sits behind what ---------- */
 const STEP={
- setup:['start_case','cooling_type','zone','parcel','size_fit','cooling_units','generator_sets','rack_count','ups_modules','battery_cabinets','room_cooling_units','cdu_units','hall_layout','electrical_room','room_cooling_type'],
+ setup:['start_case','cooling_type','zone','parcel','size_fit','cooling_units','generator_sets','rack_count','ups_modules','battery_cabinets','room_cooling_units','cdu_units','hall_layout','electrical_room','room_cooling_type','fire_protection','transformers','security_layers'],
  fits:['envelope','size_fit','hall_area','component_space','floor_area'],
  prec:['it_load_claim','it_load_actual','floor_area'],
- heat:['heat_delivered','homes_heated','receivers_nearby','lcoh','hr_flow','hr_pipe_size','heat_pumps','phe_frames','buffer_tanks','hr_pumps','hr_plant_room'],
- energy:['spare_capacity','grid_headroom','flexible_load','power_bill_effect','grid_co2'],
+ heat:['heat_delivered','homes_heated','receivers_nearby','lcoh','hr_flow','hr_pipe_size','heat_pumps','phe_frames','buffer_tanks','hr_pumps','hr_plant_room','heat_sale_rules'],
+ energy:['power_allocation','spare_capacity','grid_headroom','flexible_load','power_bill_effect','grid_co2'],
  water:['evaporation','water_supply','rainwater','water_restriction_rule'],
  materials:['embodied_it','embodied_building','ewaste','copper_tonnes'],
  social:['noise_level','visibility','people_affected','standoff','air_vs_objective'],
- opps:['tradeoffs','receivers_nearby','homes_heated','ev_stalls','refuge_people'],
+ opps:['refuge_services','refuge_code','crisis_events','tradeoffs','receivers_nearby','homes_heated','ev_stalls','refuge_people'],
  opts:['tradeoffs','ledger','futures','commitment'],
  time:['horizons','futures','afterlife','homes_heated_2050s','free_cooling_hours_2050s'],
  cities:['zoning_status','grid_co2','free_cooling_hours','construction_time'],

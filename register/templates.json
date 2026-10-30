@@ -349,6 +349,70 @@
    ],
    "why": "the room the heat plant needs"
   },
+  "power_allocation": {
+   "tier": "community",
+   "parties": [
+    "operator",
+    "utility",
+    "city"
+   ],
+   "why": "whether and on what terms it gets power"
+  },
+  "heat_sale_rules": {
+   "tier": "full",
+   "parties": [
+    "operator",
+    "receiver",
+    "city"
+   ],
+   "why": "engineering and regulation"
+  },
+  "refuge_services": {
+   "tier": "community",
+   "parties": [
+    "neighbours",
+    "city"
+   ],
+   "why": "what a refuge needs: washrooms, showers, water"
+  },
+  "refuge_code": {
+   "tier": "full",
+   "parties": [
+    "city"
+   ],
+   "why": "code detail"
+  },
+  "crisis_events": {
+   "tier": "resident",
+   "parties": [
+    "neighbours",
+    "city"
+   ],
+   "why": "what the refuge is for in each crisis"
+  },
+  "fire_protection": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "engineering"
+  },
+  "transformers": {
+   "tier": "full",
+   "parties": [
+    "operator",
+    "utility"
+   ],
+   "why": "engineering"
+  },
+  "security_layers": {
+   "tier": "community",
+   "parties": [
+    "neighbours",
+    "operator"
+   ],
+   "why": "how closed the building is"
+  },
   "heat_rejected": {
    "tier": "community",
    "parties": [
@@ -2673,6 +2737,38 @@
    [
     "hr_plant_room",
     "size"
+   ],
+   [
+    "power_allocation",
+    "decide"
+   ],
+   [
+    "heat_sale_rules",
+    "decide"
+   ],
+   [
+    "refuge_services",
+    "opportunity"
+   ],
+   [
+    "refuge_code",
+    "test"
+   ],
+   [
+    "crisis_events",
+    "test"
+   ],
+   [
+    "fire_protection",
+    "size"
+   ],
+   [
+    "transformers",
+    "size"
+   ],
+   [
+    "security_layers",
+    "characterise"
    ]
   ],
   "edges": [
@@ -3891,12 +3987,56 @@
    [
     "hr_pumps",
     "hr_plant_room"
+   ],
+   [
+    "it_load_actual",
+    "power_allocation"
+   ],
+   [
+    "heat_delivered",
+    "heat_sale_rules"
+   ],
+   [
+    "refuge_people",
+    "refuge_services"
+   ],
+   [
+    "refuge_people",
+    "refuge_code"
+   ],
+   [
+    "importance_cat",
+    "refuge_code"
+   ],
+   [
+    "refuge_people",
+    "crisis_events"
+   ],
+   [
+    "clean_air_volume",
+    "crisis_events"
+   ],
+   [
+    "hall_area",
+    "fire_protection"
+   ],
+   [
+    "it_load_actual",
+    "transformers"
+   ],
+   [
+    "pue",
+    "transformers"
+   ],
+   [
+    "spare_cooling",
+    "transformers"
    ]
   ]
  },
- "resident_count": 45,
- "community_count": 130,
- "full_count": 212,
+ "resident_count": 46,
+ "community_count": 134,
+ "full_count": 220,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {
