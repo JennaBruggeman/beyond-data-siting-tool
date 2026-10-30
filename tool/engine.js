@@ -30,7 +30,7 @@ const R={
  monthRatio:{van:4.9,edm:5.0},       // busiest ÷ quietest month of heat demand: s × CWEC monthly HDD16 share + (1 − s) ÷ 12, s = space ÷ (space + water heating), CEUD residential 2018–22: BC 0.674, AB 0.761 (sweep M14; national 0.61 retired)
  grid:{van:18.1,edm:346.1},           // g CO2e/kWh, NIR 2026, consumption, 2024
  neuCredit:32.59,                     // $/MWh, By-law 9552 Sch. C
- reach:{pool:1000,housing:1200,greenhouse:1500}, reachGuide:1200,
+ reach:{pool:1000,housing:1200,greenhouse:1500}, reachGuide:1200, recvRadius:3000, /* register receiver_radius: search 3 km, let cost decide; RVO reaches retired as a cut (finding I-03) */
  jobsM2:464.5, kWPerRack:8,            // Uptime 2024 average 8 kW per rack (industry survey; register size_fit)
                         // 5,000 ft² per operating job, JLARC 2024 (transferred)
 };
@@ -105,7 +105,7 @@ function siteFactsRaw(){
   f.status=BD.statusOf(f.zone);
   // Edmonton IH needs a 1.0 ha site (Bylaw 20001 s. 2.140, 4.1.1; verification sweep M54)
   if(city==='edm'&&f.zone==='IH'&&f.lot&&f.lot<10000) f.status=Object.assign({},f.status,{k:'case',t:'Allowed use, lot under 1.0 ha',d:f.status.d+' This lot is '+fmt(f.lot)+' m², below IH\'s 1.0 ha minimum site area (s. 2.140, 4.1.1): it would need to be consolidated with neighbours or varied.'});
-  f.foot=blds.reduce((t,b)=>t+b.a,0); f.hmax=blds.length?Math.max(...blds.map(b=>b.h)):0; f.plate=blds.length?Math.max(...blds.map(b=>b.a)):0;
+  f.foot=blds.reduce((t,b)=>t+b.a,0); f.hmax=blds.some(b=>b.h>0)?Math.max(...blds.filter(b=>b.h>0).map(b=>b.h)):0; f.hUnknown=blds.some(b=>!(b.h>0)||b.f===6); /* finding I-06: −1 = no height recorded */ f.plate=blds.length?Math.max(...blds.map(b=>b.a)):0;
   f.c=s.ring?BD.centroid(s.ring):s.pt;
   f.downtown=city==='van'&&/^(DD|CWD|DEOD|BCPED|HA-1|HA-1A|HA-2)$/.test(f.zone);
   f.cpcn=city==='van'&&inCPCN(f.c); // BC Hydro's Downtown Vancouver Electricity Supply Study Area (sweep M23): the feeder limit applies here, not only in downtown zones
@@ -308,7 +308,7 @@ function fitsView(){
 /* ---------- who could take the heat ---------- */
 const TYPE={housing:'Non-market housing',school:'School',campus:'University or college campus',care:'Care home',hospital:'Hospital',rec:'Recreation centre',hall:'Community league hall',pool:'Pool',arena:'Indoor arena',apartment:'Apartment building',office:'Office building',hotel:'Hotel',commercial:'Commercial building'};
 const FIRM={completed:'existing','under construction':'committed',approved:'planned',proposed:'proposed'};
-function nearby(f,d){ const out=[]; for(const p of d.pts){ const dist=Math.hypot(p.x-f.c[0],p.y-f.c[1]); const reach=R.reach[p.t]||R.reachGuide; if(dist<=reach) out.push(Object.assign({dist,reach,guide:!R.reach[p.t]},p)); } return out.sort((a,b)=>a.dist-b.dist); }
+function nearby(f,d){ const out=[]; for(const p of d.pts){ const dist=Math.hypot(p.x-f.c[0],p.y-f.c[1]); const reach=R.recvRadius; if(dist<=reach) out.push(Object.assign({dist,reach,guide:false,rvo:R.reach[p.t]||R.reachGuide},p)); } return out.sort((a,b)=>a.dist-b.dist); } /* finding I-03 (30 Oct 2026): search to the register's 3 km (receiver_radius); the RVO reaches are kept only as a reference (rvo) */
 function netsAt(f,d){ return d.nets.map(n=>{ const inside=BD.pip(f.c[0],f.c[1],n.r); const e=distToRing(f.c[0],f.c[1],n.r); return Object.assign({inside,edge:e},n); }).filter(n=>n.inside||n.edge<1200).sort((a,b)=>(b.inside-a.inside)||(a.edge-b.edge)); } // inside first, then nearest (verification sweep M16)
 async function recvView(){
   const f=siteFacts(); BD.S.view2='recv'; const d=await loadRecv(f.city); const near=nearby(f,d), nets=netsAt(f,d);

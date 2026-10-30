@@ -117,7 +117,7 @@ function model(){
   const ftf=BD.eng?BD.eng.R.ftf:{ground:6,up:[5.5,6]};
   const nF=h=>[1+Math.max(0,Math.floor((h-ftf.ground)/ftf.up[1])),1+Math.max(0,Math.floor((h-ftf.ground)/ftf.up[0]))];
   if(A.built==='existing'){
-    const hmax=blds.length?Math.max(...blds.map(b=>b.h)):0; m.existing=true; m.H=hmax; m.nF=[Math.max(1,Math.floor(hmax/4)),Math.max(1,Math.floor(hmax/4))];
+    const hmax=blds.some(b=>b.h>0)?Math.max(...blds.filter(b=>b.h>0).map(b=>b.h)):4; m.hUnknown=blds.some(b=>!(b.h>0)||b.f===6); /* finding I-06: no recorded height → one storey at 4 m, labelled */ m.existing=true; m.H=hmax; m.nF=[Math.max(1,Math.floor(hmax/4)),Math.max(1,Math.floor(hmax/4))];
     { const big=blds.length?blds.reduce((x,b)=>b.a>x.a?b:x):null; m.foot=big?big.r:null; m.roofH=big?big.h:0; } // the roof the plant sits on is the largest part's own roof, at its own height
     m.feet=blds.map(b=>({r:b.r,h:b.h})); m.footArea=blds.reduce((t,b)=>t+b.a,0); // all parts (sweep M67: these sat inside the comment)
   } else {
@@ -229,7 +229,7 @@ function card(step){
       <h3>Loading</h3><p class="sub">${esc(LN.basis)}</p>${ch('loadIn',[{v:'',t:'Outside, at the rear',def:true,s:`a strip ${(LN.len+LN.aisle).toFixed(1)} m deep: space plus aisle`},{v:'1',t:'Inside the building',s:'a loading bay on the ground floor; no strip'}],A.loadIn||'')}`; }
   }
   if(step===3){
-    if(A.built==='existing') h+=`<p class="sub">The existing building is ${m.H.toFixed(1)} m tall (${S.city==='van'?'City LiDAR 2022':'City 3D buildings or estimate'}), about ${m.nF[0]} storeys at 4 m.</p>`;
+    if(A.built==='existing') h+=`<p class="sub">The existing building is ${m.H.toFixed(1)} m tall (${S.city==='van'?'City LiDAR 2022':'City 3D buildings or estimate'}), about ${m.nF[0]} storey${m.nF[0]>1?'s':''} at 4 m.${m.hUnknown?' <span class="draft">Some parts have no measured height; those are taken as one storey at 4 m (an assumption ?).</span>':''}</p>`;
     else {
       h+=`<p class="sub">${draft('Data-hall floors are tall: 5.5–6.0 m floor to floor, with a 6.0 m ground floor.')}</p>
       ${ch('hmode',[{v:'out',t:`Outright: ${Z.hOutright} m`,def:true,s:'what the zone allows without the City\'s discretion'}].concat(Z.hx&&!A.userH?[{v:'cond',t:`With the City's approval: ${Z.hx[0]===Z.hx[1]?Z.hx[0]:Z.hx[0]+'–'+Z.hx[1]} m`,s:'the City may allow this; the tool uses '+Z.hx[0]+' m'}]:[]).concat([{v:'storeys',t:'Set the storeys',s:'height follows from 6.0 m + 6.0 m a storey'}]),A.hmode)}
@@ -279,7 +279,7 @@ BD.setupHTML=function(st){ setDefaults(); const A=BD.S.answers, m=model(); if(!m
   const rows=[[1,'Building',`${lab.built[A.built]}, ${lab.extent[A.extent]}${A.extent==='part'&&A.floor?' ('+A.floor+')':''}`],
    [2,'Footprint',A.built==='existing'?`${fmt(m.footArea)} m² (existing)`:`${fmt(m.footArea||0)} m², ${lab.foot[A.foot]}`],
    [3,'Height',A.built==='existing'?`${(m.H||0).toFixed(1)} m (existing)`:`${(m.H||0).toFixed(1)} m, ${m.nF[0]===m.nF[1]?m.nF[0]:m.nF[0]+'–'+m.nF[1]} storeys${A.userH||A.userFSR?' (your limits)':''}`],
-   [4,'Cooling',`${lab.inside[A.inside]} inside; ${lab.outside[A.outside]} ${lab.plantAt[A.plantAt]}`],
+   [4,'Cooling',`${lab.inside[A.inside]} inside; ${A.outside==='dry'&&BD.dryName?BD.dryName():lab.outside[A.outside]} ${lab.plantAt[A.plantAt]}`],
    [5,'Standby',A.gens==='none'?'no generators':`generators in the ${A.genAt}`]];
   return `<h3>The site as set up</h3>${m.Z.warn?`<div class="warnbox">${m.Z.warn}</div>`:''}${rows.map(r=>`<div class="sumrow"><span>${r[1]}</span><span>${esc(r[2])}</span><a href="#" data-setup="${r[0]}">Change ›</a></div>`).join('')}
   <div class="next"><button id="fits">What fits here →</button><button id="setup1" style="background:transparent;border:1px solid var(--line-2);color:var(--fg)">Set up step by step</button></div>

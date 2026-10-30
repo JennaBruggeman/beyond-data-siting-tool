@@ -21,7 +21,7 @@
  "sel": {
   "city": "edm",
   "id": "146402",
-  "lotArea": 4274,
+  "lotArea": 4284,
   "a": [
    "64 AIRPORT ROAD NW",
    "BE",
@@ -41,7 +41,7 @@
  },
  "facts": {
   "city": "edm",
-  "lot": 4274,
+  "lot": 4284,
   "zone": "BE",
   "env": {
    "fsr": [
@@ -70,6 +70,7 @@
   },
   "foot": 0,
   "hmax": 0,
+  "hUnknown": false,
   "plate": 0,
   "c": [
    -1465.666667,
@@ -145,7 +146,7 @@
     "userSet": false
    },
    "city": "edm",
-   "lotArea": 4274,
+   "lotArea": 4284,
    "ring": "[ring 18]",
    "notes": [],
    "warn": [],
@@ -172,7 +173,7 @@
     "ht": 4,
     "aisle": 6.1,
     "cls": "loading space",
-    "basis": "1 loading space for 6,838 m² of floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site, with no backing onto streets or alleys (s. 5.80 subs. 7). Aisle: Vancouver's 6.1 m used as an assumption.",
+    "basis": "1 loading space for 6,854 m² of floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site, with no backing onto streets or alleys (s. 5.80 subs. 7). Aisle: Vancouver's 6.1 m used as an assumption.",
     "src": "edmZB580"
    },
    "loading": "[ring 8]",
@@ -441,7 +442,7 @@
    "footRect": "[ring 8]",
    "simpleMass": true,
    "serverFoot": "[ring 8]",
-   "footArea": 2070.533283
+   "footArea": 2089.219727
   },
   "envAssumed": false,
   "envH": 16,
@@ -455,8 +456,8 @@
    "ground": false
   },
   "hallS": [
-   1987.711951,
-   2981.567927
+   2005.650938,
+   3008.476407
   ],
   "hallL": null,
   "floors": 2,
@@ -465,54 +466,54 @@
    2
   ],
   "fpNote": "from the site setup: the most the zone allows, less setbacks, loading and the plant yard",
-  "fp": 2070.533283,
+  "fp": 2089.219727,
   "fpCalc": null,
   "indoorPlant": 0,
   "g": [
-   6838.4,
-   6838.4
+   6854.4,
+   6854.4
   ],
   "G": [
-   4141.066565,
-   4141.066565
+   4178.439454,
+   4178.439454
   ],
   "fullCover": "",
   "heightCut": true,
   "yardCut": true,
   "gross": [
-   4141.066565,
-   4141.066565
+   4178.439454,
+   4178.439454
   ],
-  "how": "lot 4,274 m² × floor-space ratio 1.6",
+  "how": "lot 4,284 m² × floor-space ratio 1.6",
   "hallGross": [
-   4141.066565,
-   4141.066565
+   4178.439454,
+   4178.439454
   ],
   "density": "typical",
   "mwS": [
-   3.155098,
-   10.232687
+   3.183573,
+   10.292735
   ],
   "mwL": null,
   "hall": [
-   1987.711951,
-   2981.567927
+   2005.650938,
+   3008.476407
   ],
   "mw": [
-   3.155098,
-   10.232687
+   3.183573,
+   10.292735
   ],
   "m2MW": [
    290,
    630
   ],
   "mwCheck": [
-   3.734055,
-   8.200132
+   3.767754,
+   8.274138
   ],
-  "mwTopRaw": 10.281269,
+  "mwTopRaw": 10.374057,
   "mwCapped": true,
-  "plantFor": 10.232687
+  "plantFor": 10.292735
  },
  "model": "[cycle]",
  "errors": []

@@ -56,3 +56,18 @@ Two independent routes, as for Size:
 
 - **D-1.** For an Edmonton lot whose assessment area is larger than its drawn outline, size on the outline (what can be built) and show the record as a note?
 - **D-2.** Fix the projection constant (I-10)? It moves every Vancouver area and distance up by about 0.6–0.9%, so all golden results shift a little and are re-baselined.
+
+## Applied 30 Oct 2026 (J.B.: yes to D-1 and D-2)
+
+- **Labels:**
+  - I-04, I-15: the Edmonton source line now names the right sources.
+  - I-06: missing heights are never shown as a height.
+  - I-07: made-up lot squares are labelled.
+  - I-08: the set-up summary names chillers when the plant uses them.
+- **I-09:** the floodplain test covers the whole lot. 339 1st Ave E now shows "partly, about 29%", 275 1st Ave E 48% and 1425 Clark Dr 36%, matching the independent check.
+- **I-03:** receivers are counted to 3 km.
+- **I-02:** the lot's tile and its 8 neighbours are loaded on selection.
+- **I-01 (D-1):** Edmonton is sized on the outline.
+- **I-10 (D-2):** areas are corrected by the true degree lengths. Lot areas are now within 0.05–0.4% of the independent check, against 0.5–0.9% low before. Distances are still in the data's metres; a full fix needs every data file rebuilt (Phase B).
+
+**Golden results re-baselined, by design.** Every lot area moves by +0.2% to +0.8%. The low end of "what fits" moves by under 1%, and the top end is unchanged except where the floor area sets it.
