@@ -278,7 +278,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "quantities": 204,
 "conditions": 101,
 "opportunities": 22,
-"sources": 824
+"sources": 826
 }
 },
 "stages": [
@@ -12068,7 +12068,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "size",
 "name": "Data-hall arrangement",
 "formula": "racks in back-to-back pairs: cold aisle | rack 1.2 m | hot aisle | rack 1.2 m; room cooling units along the long walls with their service clearance in front; corridors and travel distance to the building code; capacity check (29 Oct 2026): racks that fit by these rules on the floor plate × 7.1–8 kW per rack is shown against size_fit (the first hall floor holds the UPS and battery room; the others are counted by the same rules) — it checks, it does not change, the sizing",
-"coef": "aisles 1.2 m (middle of Vertiv's standard containment sizes 0.9 / 1.2 / 1.8 m), open at both ends onto 1.1 m cross aisles, which meets the NFC: aisles serving egress doorways ≥ 1 100 mm with two directions of travel, single-direction subsidiary aisles ≥ 900 mm and ≤ 7.5–15 m by occupancy (NFC 2020 / NFC(AE) 2023 2.7.1.2; a data hall's occupancy class is not stated in the codes read ?); racks 0.6 × 1.2 m; room cooling units: 0.864 m clear in front recommended (0.61 m minimum), 0.457 m at each end, not in alcoves or at the end of a long narrow room, near the heat load (Vertiv CW guide); Vertiv also asks for units 30–40 ft apart, which a hall of this load cannot meet with units of this size (conflict shown, not resolved ?); egress: public corridors 1.1 m, dead ends ≤ 6 m, travel distance to an exit ≤ 45 m sprinklered or 30 m otherwise (NBC 2020 3.3.1.9, 3.4.2.5; VBBL 2019 the same); aisles follow the NFC (2.7.1.2, above); Edmonton: NBC(AE) 2023 has the same articles (checked 29 Oct 2026); observed at VAN3 (tour, Oct 2026): a first-floor hall on an 18 in (457 mm) raised floor (her figure; measured or told ?) reached by a ramp, so the slab layout drawn here is one variant",
+"coef": "aisles 1.2 m (middle of Vertiv's standard containment sizes 0.9 / 1.2 / 1.8 m), open at both ends onto 1.1 m cross aisles, which meets the NFC: aisles serving egress doorways ≥ 1 100 mm with two directions of travel, single-direction subsidiary aisles ≥ 900 mm and ≤ 7.5–15 m by occupancy (NFC 2020 / NFC(AE) 2023 2.7.1.2; a data hall's occupancy class is not stated in the codes read ?); racks 0.6 × 1.2 m; room cooling units: 0.864 m clear in front recommended (0.61 m minimum), 0.457 m at each end, not in alcoves or at the end of a long narrow room, near the heat load (Vertiv CW guide); Vertiv also asks for units 30–40 ft apart, which a hall of this load cannot meet with units of this size (conflict shown, not resolved ?); egress: public corridors 1.1 m, dead ends ≤ 6 m, travel distance to an exit ≤ 45 m sprinklered or 30 m otherwise (NBC 2020 3.3.1.9, 3.4.2.5; VBBL 2019 the same); aisles follow the NFC (2.7.1.2, above); Edmonton: NBC(AE) 2023 has the same articles (checked 29 Oct 2026); observed at VAN3 (tour, Oct 2026): a first-floor hall on an 18 in (457 mm) raised floor (her figure; measured or told ?) reached by a ramp, so the slab layout drawn here is one variant; floor per rack (check 1, 30 Oct 2026): the tightest drawn layout is a rack 0.6 m wide × (1.2 m rack + 1.2 m aisle) = 1.44 m² a rack, before row ends, cross aisles and cooling units — at 7.1–8 kW a rack that is about 180–200 m² per MW (our arithmetic, no source gives it); Schneider counts 2.3–2.8 m² a rack with its share of aisles (schneiderWP46), about 290–390 m² per MW at the same rack power (our arithmetic); Intel's 2012 table works out to about 5.6 m² a rack with cooling units and PDUs in the room (intelHD2012, our arithmetic); built Canadian halls use 290–630 m² of hall per MW (size_fit, operator claims) — the rest is tenant enclosures, growth space and lower densities (tourVAN3, guide's claims). The 3D key says so",
 "unit": "m (clearances)",
 "sources": [
 "vertivVR3300",
@@ -12078,7 +12078,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "nbc2020_v1",
 "nfc2020_2712",
 "nbcAB2023",
-"tourVAN3"
+"tourVAN3",
+"schneiderWP46",
+"intelHD2012"
 ],
 "source_roles": [
 {
@@ -12136,6 +12138,20 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "check",
 "conf": 40,
 "verified": false
+},
+{
+"id": "schneiderWP46",
+"term": "floor per rack with aisles",
+"role": "check",
+"conf": 60,
+"verified": true
+},
+{
+"id": "intelHD2012",
+"term": "W per sq ft of room",
+"role": "check",
+"conf": 50,
+"verified": true
 }
 ],
 "conf": 50,
@@ -12146,14 +12162,15 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "rack_count",
 "room_cooling_units",
 "cdu_units",
-"hall_area"
+"hall_area",
+"size_fit"
 ],
 "upstream": 40,
 "city": {
 "van": 2,
 "edm": 2,
 "both": 0,
-"gen": 4
+"gen": 6
 }
 },
 {
@@ -14332,6 +14349,10 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 },
 {
 "from": "hall_area",
+"to": "hall_layout"
+},
+{
+"from": "size_fit",
 "to": "hall_layout"
 },
 {
@@ -18497,7 +18518,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "fortumTelia2022": "OPERATOR CLAIM: Fortum release 18 Jan 2022, Fortum and Telia agreement: Telia's Helsinki Data Center UPS systems (ABB) take part in grid balancing; the data centre 'has contributed several megawatts of capacity to Fingrid's Fast Frequency Reserve (FFR) market as part of the Fortum Spring's virtual battery'; batteries still carry the load until generators start in an outage — https://www.fortum.com/media/2022/01/fortum-and-telia-agree-new-data-center-connection-electricity-market",
 "txSB6_2025": "Texas S.B. 6 (89th Legislature), Senate Research Center bill analysis, enrolled version (5 Aug 2025): PUC to set a large-load threshold of 75 MW unless it decides a lower one is needed (s. 37.0561(c)); large loads disclose on-site backup generation, and ERCOT may direct them to 'deploy the customer's on-site backup generating facilities or curtail load' (s. 37.0561(e)); curtailment capability for loads interconnected after 31 Dec 2025, set through an ERCOT and utility protocol with exemptions (s. 39.170(a)); and ERCOT must 'competitively procure demand reductions from large load customers with a demand of at least 75 megawatts' (s. 39.170) — read from the analysis, not the enrolled bill text (?) — https://capitol.texas.gov/tlodocs/89R/analysis/html/SB00006F.htm",
 "cruLEU2025": "Commission for Regulation of Utilities (Ireland), news 'New Electricity Connection Policy for Data Centres' (18 Feb 2025; PROPOSED decision, comments to 4 Apr 2025): new data centres 'will be required to provide generation and/or storage capacity to match the requested data centre demand capacity', on site or nearby, taking part in the electricity market; annual reporting on renewable use and emissions; whether and how it was finalised: not read (?) — https://www.cru.ie/about-us/news/new-electricity-connection-policy-for-data-centre/",
-"uptime2024Survey": "Uptime Institute, Global Data Center Survey 2024 (UII Keynote Report 146M, July 2024; Donnellan, Lawrence, Bizo et al.; survey Mar–Apr 2024, 879 end users answered at least one question, n varies by question): 'one in four data centers in our survey is typically under 40% utilized by available UPS capacity' (p. 9; no question wording, bands or n given for this figure ?); typical rack density averages 8 kW, 7.1 kW without 11 sites over 50 kW; 4–6 kW racks most common (p. 10). Self-reported operator survey — https://datacenter.uptimeinstitute.com/rs/711-RIA-145/images/2024.GlobalDataCenterSurvey.Report.pdf"
+"uptime2024Survey": "Uptime Institute, Global Data Center Survey 2024 (UII Keynote Report 146M, July 2024; Donnellan, Lawrence, Bizo et al.; survey Mar–Apr 2024, 879 end users answered at least one question, n varies by question): 'one in four data centers in our survey is typically under 40% utilized by available UPS capacity' (p. 9; no question wording, bands or n given for this figure ?); typical rack density averages 8 kW, 7.1 kW without 11 sites over 50 kW; 4–6 kW racks most common (p. 10). Self-reported operator survey — https://datacenter.uptimeinstitute.com/rs/711-RIA-145/images/2024.GlobalDataCenterSurvey.Report.pdf",
+"schneiderWP46": "VENDOR WHITE PAPER: N. Rasmussen, 'Cooling Strategies for Ultra-High Density Racks and Blade Servers', Schneider Electric Data Center Science Center White Paper 46, Rev. 7 (undated; cites 2002–03 survey data): densities are taken over total floor area 'which includes space such as aisles' (p. 3); 'The rack and row densities in Figure 1 use a rack floor equivalent of 25 ft2', common values 25–30 ft² (2.3–2.8 m²) per rack (p. 2, note 1); its design table uses 30 ft² (2.79 m²) per enclosure (p. 4); what else besides aisles the equivalent covers (cooling units, PDUs, cross aisles) is not stated (?). Read from a copy hosted by FacilitiesNet (https://www.facilitiesnet.com/whitepapers/pdfs/20130227-SchneiderElectric.pdf); Schneider's listing: https://it-resource.schneider-electric.com/server-rooms-and-network-closets/wp-46-cooling-strategies-for-ultra-high-density-racks-and-blade-servers",
+"intelHD2012": "OPERATOR WHITE PAPER: J. Musilli and B. Ellison, 'Facilities Design for High-density Data Centers', IT@Intel White Paper (Jan 2012): Table 1 (p. 4) pairs 15 / 22.5 / 30 kW racks with 250 / 375 / 500 W per sq ft, 'based on a 5,000-square-foot room with cooling units and power distribution units (PDUs) in the same space'; no area per rack is stated (60 ft², about 5.6 m², per rack is our arithmetic from the table) — https://www.intel.cn/content/dam/www/public/us/en/documents/best-practices/data-center-facilities-paper.pdf"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -20855,7 +20878,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "txSB6_2025": "rule (legislative analysis)",
 "cruLEU2025": "regulator (proposed decision)",
 "uptime2024Survey": "industry survey (operator self-report)",
-"lbnl2024": "national lab report (modelling assumption)"
+"lbnl2024": "national lab report (modelling assumption)",
+"schneiderWP46": "vendor white paper",
+"intelHD2012": "operator white paper"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -21040,7 +21065,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "txSB6_2025": "claude",
 "cruLEU2025": "claude",
 "uptime2024Survey": "claude",
-"lbnl2024": "claude"
+"lbnl2024": "claude",
+"schneiderWP46": "claude",
+"intelHD2012": "claude"
 },
 "source_city": {
 "abgas": "edm",
@@ -21865,7 +21892,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "fortumTelia2022": "gen",
 "txSB6_2025": "gen",
 "cruLEU2025": "gen",
-"uptime2024Survey": "gen"
+"uptime2024Survey": "gen",
+"schneiderWP46": "gen",
+"intelHD2012": "gen"
 },
 "city_gaps": {
 "van": [
