@@ -1,0 +1,1115 @@
+{
+ "quEDM1_2026": {
+  "where_read": "Local repo copy /mnt/attach/outputs/data/raw/qu/EDM1.pdf (pdftotext); byte-identical (md5) to J.B.'s upload EDM1-Spec-Sheet.pdf in the session uploads. URL not re-fetched.",
+  "claims": [
+   {
+    "claim": "EDM1 in Edmonton, Financial Core District",
+    "verdict": "CONFIRMED",
+    "evidence": "'located in Edmonton's Financial Core District, Alberta'",
+    "fix": ""
+   },
+   {
+    "claim": "18,000 ft² building (≈1,672 m²)",
+    "verdict": "CONFIRMED",
+    "evidence": "'18,000 ft² Building'; 18,000×0.0929 = 1,672 m²",
+    "fix": ""
+   },
+   {
+    "claim": "15,712 ft² raised floor (≈1,460 m²)",
+    "verdict": "CONFIRMED",
+    "evidence": "'15712 ft² Raise Floor'; ×0.0929 = 1,460 m²",
+    "fix": ""
+   },
+   {
+    "claim": "2.5 MW capacity",
+    "verdict": "CONFIRMED",
+    "evidence": "'2.5MW Capacity' (POWER & BACKUP)",
+    "fix": ""
+   },
+   {
+    "claim": "248 tons of N+1 cooling (≈0.87 MW)",
+    "verdict": "CONFIRMED",
+    "evidence": "'248 Tons of N+1 cooling'; 248 × 3.517 kW = 872 kW",
+    "fix": ""
+   },
+   {
+    "claim": "~5–10 kW per rack",
+    "verdict": "CONFIRMED",
+    "evidence": "'designed for ~5-10kW per rack'",
+    "fix": ""
+   },
+   {
+    "claim": "No PUE and no heat recovery stated",
+    "verdict": "CONFIRMED",
+    "evidence": "No 'PUE', 'heat recovery' or 'reuse' anywhere on the one-page sheet",
+    "fix": ""
+   },
+   {
+    "claim": "Security, fuel, generator and carrier details deliberately not carried into the register or tool",
+    "verdict": "CONFIRMED",
+    "evidence": "Sheet does list them: 'N+1 1MW Generators (x3)', 'Onsite fuel for 24hr run time at full load'; register omits them",
+    "fix": "But the tool's backup_hours role is 'traced from opClaims' to this source — if backup_hours uses the 24 h fuel figure, the 'not carried into the tool' statement is false; reconcile."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "backup_hours is traced to this source although the register says fuel/generator details were deliberately not carried into the tool — either the register text or the role is wrong",
+   "All figures are operator claims (marketing spec sheet); must stay labelled as claims",
+   "Date '16 Oct 2026' download: local file has no date stamp; not verifiable (?)"
+  ],
+  "overall": "needs fix"
+ },
+ "edmRoads2026": {
+  "where_read": "Local CSV /mnt/attach/outputs/data/raw/edm/Road_Network_20261016.csv parsed with Python csv module (full file).",
+  "claims": [
+   {
+    "claim": "53,873 centrelines",
+    "verdict": "CONFIRMED",
+    "evidence": "53,873 data rows",
+    "fix": ""
+   },
+   {
+    "claim": "type (road, alley, railway)",
+    "verdict": "CONFIRMED",
+    "evidence": "CENTERLINE_TYPE: Road 39,644; Alley 12,105; Railway 2,124",
+    "fix": ""
+   },
+   {
+    "claim": "segment type, functional class (local, collector, arterial A–D) and surface fields",
+    "verdict": "CONFIRMED",
+    "evidence": "Columns ROAD_SEGMENT_TYPE_DESCRIPTION, FUNCTIONAL_CLASS_CODE_DESCRIPTION ('Arterial-Class A'…'Class D'), SURFACE_LAYER_TYPE",
+    "fix": "Functional class also includes Local-ParkWay, Local-Private, Alley-Residential/Commercial; 14,229 rows blank."
+   },
+   {
+    "claim": "Tool keeps roads and alleys: 50,755 segments after dropping ramps, overpasses and bridges",
+    "verdict": "CONFIRMED",
+    "evidence": "Road+Alley = 51,749; minus segment types containing ramp/overpass/bridge = 50,755",
+    "fix": "Note 'Structure - Underpass' (2) is kept."
+   },
+   {
+    "claim": "Gravel alleys are marked unpaved",
+    "verdict": "CONFIRMED",
+    "evidence": "ROAD_SEGMENT_TYPE_DESCRIPTION 'Unpaved - Gravel' = 714 alley rows",
+    "fix": ""
+   },
+   {
+    "claim": "J.B. download 16 Oct 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Filename Road_Network_20261016.csv (date from filename only)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Road centrelines say nothing about cost; distribution_cost may use them only for route length, cost rates need their own source"
+  ],
+  "overall": "ok"
+ },
+ "abWells2026": {
+  "where_read": "Saved page.html (Alberta Water Wells map help page) + 9 local reconnaissance reports /mnt/attach/outputs/data/raw/edm/wells/Reconnaissance_Report*.txt (printed 16 Oct 2026); my own rough Python re-parse of the text.",
+  "claims": [
+   {
+    "claim": "Alberta Water Well Information Database reconnaissance reports, nine reports downloaded 16 Oct 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "9 files; each 'Printed on 10/16/2026'",
+    "fix": ""
+   },
+   {
+    "claim": "Area Twp 51–54, Rge 22–26 W4M",
+    "verdict": "CONFIRMED",
+    "evidence": "Parsed TWP 51–54, RGE 22–26, M 4 dominate; reports also include ~20 Twp 50 rows and one Twp 39 row",
+    "fix": "Say the reports also return a few records outside that block."
+   },
+   {
+    "claim": "3,844 records parsed",
+    "verdict": "CORRECTED",
+    "evidence": "My parse: 3,979 unique GIC Well IDs inside Twp 51–54/Rge 22–26 (4,418 rows incl. duplicates across reports) (?)",
+    "fix": "Re-run the parse; record the dedup rule. Count ~3,980 (?) by independent parse."
+   },
+   {
+    "claim": "Uses mostly domestic (~2,810) and industrial (299)",
+    "verdict": "CONFIRMED",
+    "evidence": "My parse: Domestic 2,809; Industrial 296 (approx.)",
+    "fix": ""
+   },
+   {
+    "claim": "Median depth 145 ft domestic, 200 ft industrial",
+    "verdict": "CONFIRMED",
+    "evidence": "My parse: 146 ft domestic, 200 ft industrial (approx.)",
+    "fix": ""
+   },
+   {
+    "claim": "Records from 1898 to 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Parsed completion years min 1898, max 2026",
+    "fix": ""
+   },
+   {
+    "claim": "366 since 2000",
+    "verdict": "CORRECTED",
+    "evidence": "My parse: 376 completed in or after 2000 (354 after 2000) (?)",
+    "fix": "Re-check; state whether 2000 is included."
+   },
+   {
+    "claim": "No record mentions geoexchange, ground loops or heat",
+    "verdict": "CONFIRMED",
+    "evidence": "grep for geoexch/geotherm/ground loop/heat pump/closed loop in all 9 reports: no hits",
+    "fix": ""
+   },
+   {
+    "claim": "Closed-loop boreholes appear not to be recorded (inference)",
+    "verdict": "CONFIRMED",
+    "evidence": "Correctly labelled as inference; source does not state it. Blatchford geoexchange field is from another source",
+    "fix": ""
+   },
+   {
+    "claim": "Owner names not kept",
+    "verdict": "CONFIRMED",
+    "evidence": "Reports include WELL OWNER column; register omits them (tool-side choice, not checkable here)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Well records are drilling reports, not ground thermal properties; use for 'ground' only as context on depth/aquifer use"
+  ],
+  "overall": "needs fix"
+ },
+ "bcWQGtemp": {
+  "where_read": "Saved full.pdf /mnt/user-data/beyond-data-sources/public/bcWQGtemp/full.pdf (pdftotext).",
+  "claims": [
+   {
+    "claim": "Title 'Water Quality Guidelines for Temperature: Overview Report'",
+    "verdict": "CONFIRMED",
+    "evidence": "Cover: 'Water Quality Guidelines for Temperature / Overview Report'",
+    "fix": "Remove '?'"
+   },
+   {
+    "claim": "2001",
+    "verdict": "CONFIRMED",
+    "evidence": "'Original signed by Margaret Eckenfelder ... August 22, 2001'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 2.4 marine ±1 °C from natural",
+    "verdict": "CONFIRMED",
+    "evidence": "2.4 Marine and Estuarine: '+ or - 1 degree Celsius change from the natural condition'",
+    "fix": "Also: max human-induced change 0.5 °C per hour."
+   },
+   {
+    "claim": "s. 2.2 streams with fish ±1 °C beyond the most sensitive salmonid's optimum",
+    "verdict": "CONFIRMED",
+    "evidence": "'+ or - 1 degree Celsius beyond the optimum temperature range (see Table 2) for each life history phase of the most sensitive salmonid species present'",
+    "fix": "Also hourly rate of change 1 °C; bull trout/Dolly Varden streams (s. 2.1) have stricter absolute limits (15 °C max)."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "These are ambient water quality guidelines, not a discharge permit limit; label as guideline"
+  ],
+  "overall": "ok"
+ },
+ "dfoScreen": {
+  "where_read": "Saved page.html /mnt/user-data/beyond-data-sources/public/dfoScreen/page.html (text extracted; page 'Date modified: 2026-06-17').",
+  "claims": [
+   {
+    "claim": "Title: Water intake end-of-pipe fish screens",
+    "verdict": "CONFIRMED",
+    "evidence": "Page heading 'Water intake end-of-pipe fish screens'",
+    "fix": ""
+   },
+   {
+    "claim": "'interim mitigation standard'",
+    "verdict": "CORRECTED",
+    "evidence": "'This interim mitigation procedure provides ... national guidance'",
+    "fix": "Call it an 'interim mitigation procedure' (national guidance), not a standard."
+   },
+   {
+    "claim": "Openings ≤ 2.54 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "'Use a maximum slot or opening size of 2.54 mm'",
+    "fix": "Add: 1 mm where eels / small-bodied species at risk (<25 mm) present."
+   },
+   {
+    "claim": "Approach velocity default max 0.035 m/s (Table C-1)",
+    "verdict": "CONFIRMED",
+    "evidence": "Table C-1: 'the maximum approach velocity is 0.035 m/s for waterbodies'",
+    "fix": ""
+   },
+   {
+    "claim": "or 0.055 m/s (s. 3.1.1); page inconsistent",
+    "verdict": "CONFIRMED",
+    "evidence": "3.1.1: 'Implement a maximum design approach velocity of 0.055 m/s for water bodies where fish community or habitat data are not available'",
+    "fix": ""
+   },
+   {
+    "claim": "Up to 0.12 m/s only with enough sweeping velocity",
+    "verdict": "CONFIRMED",
+    "evidence": "'up to 0.12 m/s if the ambient flow is at least twice the design approach velocity'",
+    "fix": ""
+   },
+   {
+    "claim": "May not apply to large intakes",
+    "verdict": "CONFIRMED",
+    "evidence": "'may not be applicable to large water intakes or high withdrawal rates'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Guidance referenced via Fisheries Act authorizations, not a stand-alone rule; a data-centre-scale intake may be the 'large intake' case it excludes"
+  ],
+  "overall": "needs fix"
+ },
+ "abEUAdef2026": {
+  "where_read": "Local /mnt/attach/outputs/data/raw/E05P1_EUA.pdf (pdftotext), Office Consolidation current as of February 6, 2026.",
+  "claims": [
+   {
+    "claim": "Consolidation current to 6 Feb 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Current as of February 6, 2026 / Office Consolidation'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 1(1)(m) 'electric distribution system' wording",
+    "verdict": "CONFIRMED",
+    "evidence": "'(m) \"electric distribution system\" means the plant, works, equipment, systems and services necessary to distribute electricity in a service area'",
+    "fix": ""
+   },
+   {
+    "claim": "Excludes generating unit, transmission facility, energy storage resource in an energy storage facility unless approved under HEEA s. 25.1",
+    "verdict": "CONFIRMED",
+    "evidence": "'(iii) an energy storage resource that is a component of an energy storage facility, except as approved by the Commission in accordance with section 25.1 of the Hydro and Electric Energy Act'",
+    "fix": ""
+   },
+   {
+    "claim": "Amendments not in force include 2025 c8 (repeals and substitutes s. 18)",
+    "verdict": "CORRECTED",
+    "evidence": "'2025 c8 s1 ... amends ss1(1), 5 and 17; repeals and substitutes s18; ...'",
+    "fix": "2025 c8 also amends s. 1(1) — the definitions section quoted here; check the current version before relying on s. 1(1)(m) too."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "A definition alone does not state self-generation rules; self_gen_rules needs the operative provisions (and the Micro-generation Regulation etc.)"
+  ],
+  "overall": "needs fix"
+ },
+ "ab_ghgperf": {
+  "where_read": "Saved page.html /mnt/user-data/beyond-data-sources/public/ab_ghgperf/page.html (text extracted).",
+  "claims": [
+   {
+    "claim": "Title: Alberta's greenhouse gas emissions reduction performance (Government of Alberta), URL",
+    "verdict": "CONFIRMED",
+    "evidence": "Page title 'Alberta’s greenhouse gas emissions reduction performance | Alberta.ca'",
+    "fix": "Register entry states no figure; add the figure used, e.g. grid intensity '335 grams ... per kilowatt hour in 2024' (Fig. 7), or solar capacity 1,826 MW in 2025 (Fig. 6)."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Role pv_share ('share of the data centre's power from its own solar') is a site-level quantity; this page only gives provincial grid/renewable figures (e.g. 'wind, solar, and hydro ... approximately 21% of Alberta's total electricity generation' in 2025). It cannot source an on-site PV share",
+   "Government performance page (promotional framing); figures trace to ECCC NIR 2026 and AESO — cite those primaries"
+  ],
+  "overall": "needs fix"
+ },
+ "nfpa37clear": {
+  "where_read": "Saved full.pdf /mnt/user-data/beyond-data-sources/public/nfpa37clear/full.pdf (NC OSFM interpretation dated Aug 5, 2019), pdftotext.",
+  "claims": [
+   {
+    "claim": "NFPA 37 s. 4.1.4 reprinted by NC Office of State Fire Marshal",
+    "verdict": "CONFIRMED",
+    "evidence": "Footnote iii 'Reprint of NFPA 37 / 4.1.4 Engines Located Outdoors'",
+    "fix": ""
+   },
+   {
+    "claim": "Outdoor engines at least 5 ft from wall openings and from structures with combustible walls",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least 5 ft from opening in walls and at least 5 ft from structures having combustible walls'",
+    "fix": ""
+   },
+   {
+    "claim": "Reducible with a 1-hour wall or a tested enclosure",
+    "verdict": "CORRECTED",
+    "evidence": "'A minimum separation shall not be required where ... (1) ... fire resistance rating of at least 1 hr. (2) ... noncombustible ... demonstrated ...'",
+    "fix": "Separation is not required (eliminated), not merely reduced; enclosure must be noncombustible and shown by full-scale fire test or calculation (A.4.1.4(2))."
+   },
+   {
+    "claim": "US standard, edition not stated",
+    "verdict": "CONFIRMED",
+    "evidence": "Reprint gives no NFPA 37 edition; NC memo cites 2018 NC Fuel Gas Code",
+    "fix": ""
+   },
+   {
+    "claim": "Vancouver bulletin 2000-015 points to CSA C282",
+    "verdict": "NOT FOUND",
+    "evidence": "Not in this document (separate source, not checked here)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "US (NFPA/North Carolina) rule applied to Vancouver/Edmonton plant space; Canadian requirement is CSA C282/NBC — use only as a US reference figure, not a rule"
+  ],
+  "overall": "needs fix"
+ },
+ "bcNO2Guidance": {
+  "where_read": "Saved full.pdf /mnt/user-data/beyond-data-sources/public/bcNO2Guidance/full.pdf (pdftotext).",
+  "claims": [
+   {
+    "claim": "BC Ministry of Environment, NO2 modelling guidance, July 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "'GUIDANCE FOR NO2 DISPERSION MODELLING IN BRITISH COLUMBIA ... Version: July 2022'",
+    "fix": "Use exact title 'Guidance for NO2 Dispersion Modelling in British Columbia' (Ministry of Environment & Climate Change Strategy)."
+   },
+   {
+    "claim": "Tier 1 100% conversion",
+    "verdict": "CONFIRMED",
+    "evidence": "3.2.1.1 'models assume that 100% of NOX emissions ... are' converted to NO2",
+    "fix": ""
+   },
+   {
+    "claim": "ARM2 bounds 0.2–0.9",
+    "verdict": "CONFIRMED",
+    "evidence": "8.2.2: 'a curve with a maximum ratio of 90% and a minimum ratio of 20%'",
+    "fix": ""
+   },
+   {
+    "claim": "Diesel in-stack NO2/NOx 0.083",
+    "verdict": "CONFIRMED",
+    "evidence": "Table B-1: Reciprocating IC Engine, Diesel/Kerosene, 139 points, recommended ISR 0.083",
+    "fix": "Specify 'reciprocating IC engine' (diesel turbines 0.242, diesel boilers 0.035)."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Guidance document for permit dispersion modelling, used as 'rule' — label as guidance; BC-only (Edmonton needs Alberta guidance)"
+  ],
+  "overall": "ok"
+ },
+ "ashraeCh45": {
+  "where_read": "Local PDFs /mnt/attach/outputs/data/raw/papers/ashrae_hvacapps_ch45_intake_exhaust.pdf (2015 HVAC Applications SI, pp. 45.1–45.12) and ashrae_fund_ch24_airflow.pdf (2025 Fundamentals), pdftotext.",
+  "claims": [
+   {
+    "claim": "HVAC Applications SI 2015, Ch. 45 Building Air Intake and Exhaust Design",
+    "verdict": "CONFIRMED",
+    "evidence": "Footer '2015 ASHRAE Handbook—HVAC Applications (SI)'; 'CHAPTER 45 BUILDING AIR INTAKE AND EXHAUST DESIGN'",
+    "fix": ""
+   },
+   {
+    "claim": "Roof air 'considerably hotter', reducing capacity of cooling towers and air-cooled condensers",
+    "verdict": "CONFIRMED",
+    "evidence": "'air can be considerably hotter and at a higher wet-bulb temperature ... reduce the capacity of cooling towers and air-cooled condensers'",
+    "fix": ""
+   },
+   {
+    "claim": "Obstructions next to horizontal-discharge units 'can drastically reduce equipment performance'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Obstructions immediately adjacent to these horizontal-flow cooling towers can drastically reduce equipment performance'",
+    "fix": ""
+   },
+   {
+    "claim": "Recirculation 'can be a serious problem' for same-housing intake/exhaust (2015 SI wording not re-checked ?)",
+    "verdict": "CONFIRMED",
+    "evidence": "2015 SI: 'Exhaust-to-intake recirculation can be a serious problem for equipment that has an intake and exhaust on the same housing'",
+    "fix": "Remove '?'; 2015 SI wording confirmed. Also: 'Recirculation is even more serious than reduction in airflow rate'."
+   },
+   {
+    "claim": "Caused by adverse wind, upwind obstruction or close downwind obstruction",
+    "verdict": "CONFIRMED",
+    "evidence": "'caused by adverse wind direction, local disturbance of the airflow by an upwind obstruction, or by a close downwind obstruction'",
+    "fix": ""
+   },
+   {
+    "claim": "Wilson 1979 flat-roof zones: R = Bs^0.67 BL^0.33; Hc=0.22R at Xc=0.5R; Lc=0.9R; Lr=R; approximate",
+    "verdict": "CONFIRMED",
+    "evidence": "Eqs (1)–(5): 'Hc = 0.22R ... Xc = 0.5R ... Lc = 0.9R ... Lr = R'; 'These equations are approximate'",
+    "fix": "Add: turbulence from upwind obstacles 'can decrease the coefficients ... by up to a factor of two'."
+   },
+   {
+    "claim": "Cooling towers as far as possible from intakes, operable windows, outdoor public areas (Legionella)",
+    "verdict": "CONFIRMED",
+    "evidence": "'keeping cooling towers as far away as possible from intakes, operable windows, and outdoor public areas'",
+    "fix": "Source attributes this to ASHRAE Guideline 12; 'No specific minimum separation distance is provided'."
+   },
+   {
+    "claim": "Fundamentals 2025 Ch. 24: orient cooling towers to prevailing winds; leeward recirculation and reentrainment",
+    "verdict": "CONFIRMED",
+    "evidence": "'Cooling towers and similar equipment should be oriented to take advantage of prevailing wind directions, if possible'; 'Exhaust Reentrainment' section",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Handbook guidance (not code); fine for a 'method' flag"
+  ],
+  "overall": "ok"
+ },
+ "cologixVAN2web": {
+  "where_read": "WebFetch of https://cologix.com/data-centers/vancouver/van2/ (30 Oct 2026).",
+  "claims": [
+   {
+    "claim": "VAN2 at 1050 W Pender St",
+    "verdict": "CONFIRMED",
+    "evidence": "'1050 West Pender Street, Vancouver, British Columbia'",
+    "fix": ""
+   },
+   {
+    "claim": "'2 MW'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Site Capacity: 2 MW'",
+    "fix": "Quote as 'Site Capacity: 2 MW'."
+   },
+   {
+    "claim": "Utility ATS",
+    "verdict": "CONFIRMED",
+    "evidence": "'Utility automatic transfer switch (ATS) on both feeds before the building entrances'",
+    "fix": ""
+   },
+   {
+    "claim": "Operator claim",
+    "verdict": "CONFIRMED",
+    "evidence": "Operator marketing page",
+    "fix": "Fill 'kind' field: operator claim."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "'Site Capacity' is not stated to be IT load; using it as it_load_claim needs the label 'site capacity (operator claim), IT share not stated'"
+  ],
+  "overall": "needs fix"
+ },
+ "ljungqvist2023": {
+  "where_read": "J.B.'s uploaded PDF /root/.claude/uploads/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/32f6a281-1-s2.0-S2590174523001290-main.pdf (pdftotext).",
+  "claims": [
+   {
+    "claim": "Authors Ljungqvist, Risberg, Toffolo, Vesterlund 2023",
+    "verdict": "CONFIRMED",
+    "evidence": "'Hampus Markeby Ljungqvist, Mikael Risberg, Andrea Toffolo, Mattias Vesterlund'",
+    "fix": ""
+   },
+   {
+    "claim": "Title, Energy Conversion and Management: X 20:100473, doi",
+    "verdict": "CONFIRMED",
+    "evidence": "'Energy Conversion and Management: X 20 (2023) 100473'; 'https://doi.org/10.1016/j.ecmx.2023.100473'",
+    "fix": ""
+   },
+   {
+    "claim": "Peer-reviewed, open access",
+    "verdict": "CONFIRMED",
+    "evidence": "'This is an open access article under the CC BY license'",
+    "fix": ""
+   },
+   {
+    "claim": "Theoretical upper limit, no heat pump",
+    "verdict": "CONFIRMED",
+    "evidence": "'without incorporating heat pumps'; 'Finding an upper limit on the heat reuse of data centres'",
+    "fix": ""
+   },
+   {
+    "claim": "ERF 0.50–0.66 at 30–50 °C exhaust, reuse 13–18 °C, Luleå",
+    "verdict": "CONFIRMED",
+    "evidence": "'ideal heat reuse temperature in Luleå was 13, 17, and 18 °C with an exhaust temperature of 30, 40 and 50 °C. The resulting ERF was 0.50, 0.59 and 0.66'",
+    "fix": "Add: varying reuse temperature monthly 'improved the ERF further ... 11–31%'. Simulation, one year."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Study is for direct free AIR-cooled data centres; using it for liquid_capture needs a note that it is an air-cooled benchmark, not a liquid-capture rate"
+  ],
+  "overall": "ok"
+ },
+ "epcor_ccg": {
+  "where_read": "Saved large copy /mnt/user-data/beyond-data-sources/_large/epcor_ccg/full.pdf (332 pp.), pdftotext of cover, front matter and contents.",
+  "claims": [
+   {
+    "claim": "EPCOR Power Customer Connection Guide; title may be 'EDTI Customer Connection Guide', 1 Aug 2025 (?)",
+    "verdict": "CORRECTED",
+    "evidence": "Cover 'CUSTOMER CONNECTION GUIDE'; running header 'EDTI CUSTOMER CONNECTION GUIDE / Release Date: August 1, 2025 - Effective Date: August 1, 2025'",
+    "fix": "Cite as: EPCOR Distribution & Transmission Inc. (EDTI), Customer Connection Guide, released/effective 1 Aug 2025. Remove '?'."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Register text gives no figure or section; add the section used (e.g. 3.5 Selecting the Service Type; 6.4 Padmount Transformers; 3.10 Clearances; 3.14 Electrical Room)",
+   "Edmonton (EPCOR) only — not applicable to Vancouver"
+  ],
+  "overall": "needs fix"
+ },
+ "vertivCW181": {
+  "where_read": "WebFetch of the SL-18061 System Design Catalog PDF (Vertiv URL in register). Product page and guide spec SL-18061GS were not fetched (no URL given; web search budget exhausted).",
+  "claims": [
+   {
+    "claim": "Liebert CW System Design Catalog, 60 Hz, ©2024",
+    "verdict": "CONFIRMED",
+    "evidence": "'Proprietary and Confidential ©2024 Vertiv Group Corp.'",
+    "fix": ""
+   },
+   {
+    "claim": "Table 2.3 High Delta T, 50/64 °F: CW181 172 kW @80 °F DB, 210 @85, 246 @90; total = sensible",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 2.3 rows '80°F DB ... 172 (586,900) | 172', '85°F ... 210', '90°F ... 246'",
+    "fix": "Page 11 not verified (?)."
+   },
+   {
+    "claim": "p.7: 179 kW at 75 °F",
+    "verdict": "CORRECTED",
+    "evidence": "Table 2.1, CW181 75 °F DB/61 °F WB, 45 °F EWT 10 °F rise: 'Total 211 (720,000); Sensible 179 (610,800)'",
+    "fix": "Say '179 kW sensible (211 kW total) at 75 °F DB, 45 °F water, 10 °F rise'."
+   },
+   {
+    "claim": "Product page: 94 × 122 × 42 in (2388 × 3099 × 1067 mm), 177 kW",
+    "verdict": "UNREACHABLE",
+    "evidence": "Product page not fetched; catalog gives no cabinet dimensions (points to DPN003208/DPN003225 drawings)",
+    "fix": ""
+   },
+   {
+    "claim": "Guide spec SL-18061GS Rev. 9 (Oct 2021) p.1: CSA C22.2 No 236/UL 1995",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not in the catalog ('Neither standard is mentioned'); guide spec not fetched",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Manufacturer catalogue ratings — label as manufacturer claims; capacities depend on water temperatures, so use the row matching the tool's water temps"
+  ],
+  "overall": "needs fix"
+ },
+ "vertivCWguide": {
+  "where_read": "WebFetch of the Vertiv-hosted installer/user guide PDF at the register URL.",
+  "claims": [
+   {
+    "claim": "Liebert CW 38–181 kW Installer/User Guide SL-18060, ©2022, hosted by Vertiv",
+    "verdict": "CORRECTED",
+    "evidence": "Footers 'Proprietary and Confidential ©2022 Vertiv Group Corp.'; no 'SL-18060' printed on cover/footer; URL path contains 'for-internal-use-only'",
+    "fix": "Document number SL-18060 not printed (from URL only ?). Note the confidential marking."
+   },
+   {
+    "claim": "s.3 p.9 'Do not install ... in an alcove or at the end of a long, narrow room'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Do not install a Vertiv™ Liebert® CW in an alcove or at the end of a long, narrow room.'",
+    "fix": ""
+   },
+   {
+    "claim": "s.3.2 p.11 recommended ≈34 in (864 mm) left, right, front",
+    "verdict": "CONFIRMED",
+    "evidence": "'provide approximately 34 in. (864 mm) service clearance on the left, right and in front of the unit whenever possible'",
+    "fix": ""
+   },
+   {
+    "claim": "Minimum 18 in (457 mm) each end and 24 in (610 mm) front",
+    "verdict": "CONFIRMED",
+    "evidence": "'18 in. (457 mm) on the left end, 18 in. (457 mm) on the right end and 24 in. (610 mm) in front'",
+    "fix": ""
+   },
+   {
+    "claim": "'avoid installing units too close together' (30–40 ft)",
+    "verdict": "CONFIRMED",
+    "evidence": "'...reduce the effectiveness of the air distribution as compared to units located 30 to 40 ft (9 to 12 mm) apart'",
+    "fix": "Source misprints metric as 'mm' (should be 9–12 m)."
+   },
+   {
+    "claim": "s.3 p.9 'as close as possible to the largest heat load'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Install the units as close as possible to the largest heat load.'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Manufacturer installation guidance used as 'rule' — label as manufacturer guidance",
+   "Document marked 'Proprietary and Confidential' and URL says 'for-internal-use-only'; check it may be cited/quoted"
+  ],
+  "overall": "needs fix"
+ },
+ "esaBulletin299": {
+  "where_read": "WebFetch of the ESA PDF at the register URL (two passes).",
+  "claims": [
+   {
+    "claim": "ESA Ontario Bulletin 2-9-9 'Working space around electrical equipment' (May 2025)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Working space around electrical equipment'; 'Issued May 2025'",
+    "fix": ""
+   },
+   {
+    "claim": "On Canadian Electrical Code Rule 2-308",
+    "verdict": "CORRECTED",
+    "evidence": "Bulletin refers to the 'Ontario Electrical Safety Code (OESC)', Rules 2-308 and 2-310; does not mention the CEC",
+    "fix": "Say: on OESC Rules 2-308/2-310 (Ontario's adoption of CEC Part I); BC/AB equivalence not shown by this source (?)."
+   },
+   {
+    "claim": "Table B1: 1 m below 1200 A and ≤750 V; 1.5 m at/above 1200 A or >750 V",
+    "verdict": "CONFIRMED",
+    "evidence": "'Below 1200 A and 750 V or less ... 1 m'; '1200 A or above (any voltage), or above 750 V ... 1.5 m' (plus draw-out depth)",
+    "fix": "Add '+ depth of draw-out parts'."
+   },
+   {
+    "claim": "Note 2: 1 m → 1.5 m where a person cannot leave without passing a failure point",
+    "verdict": "CORRECTED",
+    "evidence": "'For equipment that has a nameplate rating of 1200 A and higher or over 750 V, Rule 2-310 2) requires ... increased from 1 m to 1.5 m ... if a person ... can NOT leave'",
+    "fix": "Add the condition (≥1200 A or >750 V); otherwise a second exit is required."
+   },
+   {
+    "claim": "2.2 m headroom at exposed live parts",
+    "verdict": "CONFIRMED",
+    "evidence": "'Rule 2-308 5) shall apply and a headroom of 2.2 m is the minimum required' (service switchboard with bare live parts; otherwise 2 m)",
+    "fix": ""
+   },
+   {
+    "claim": "Egress not less than 750 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "'OBC requires a minimum width of 750 mm with no obstruction for egress means (OBC Articles 3.3.1.22 and 9.9.5.5.)'",
+    "fix": "This is the Ontario Building Code, not the electrical code; check NBC/BCBC/ABC equivalents."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Ontario bulletin (OESC/OBC) used as a 'rule' for BC and Alberta sites; the 750 mm egress figure is an Ontario Building Code requirement"
+  ],
+  "overall": "needs fix"
+ },
+ "coolloopSpec": {
+  "where_read": "WebFetch of the Vertiv CoolLoop guide spec PDF at the register URL.",
+  "claims": [
+   {
+    "claim": "Vertiv CoolLoop Thermal Wall Guide Specifications SL-70701 (rev 11-25)",
+    "verdict": "CONFIRMED",
+    "evidence": "Header 'SL-70701_REV_11-25 Guide Specifications'; 'Vertiv™ CoolLoop Thermal Wall'",
+    "fix": ""
+   },
+   {
+    "claim": "s.1.2 standard 60 Hz units certified to UL 1995 (harmonized US/Canada)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Standard 60 Hz units shall be certified to the harmonized U.S. and Canadian product safety standard, UL 1995'",
+    "fix": ""
+   },
+   {
+    "claim": "s.1.4 'All service and maintenance shall be performed through the gallery side of the unit'",
+    "verdict": "CONFIRMED",
+    "evidence": "Same words, continuing 'including any component removal (except the chilled water coil)'",
+    "fix": "Add the chilled-water-coil exception."
+   },
+   {
+    "claim": "'No side access shall be required.'",
+    "verdict": "CONFIRMED",
+    "evidence": "'No side access shall be required.'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "A manufacturer guide specification ('shall' is spec language for one product) used as 'rule' — label as manufacturer specification/claim"
+  ],
+  "overall": "ok"
+ },
+ "nrelESIF2019": {
+  "where_read": "No saved copy; WebFetch refused the URL ('URL not in provenance set' — not circumvented) and the session's WebSearch budget was exhausted, so no official page could be surfaced. Both URLs (nrel.gov/docs/fy19osti/74464.pdf and the warm-water liquid cooling page) refused.",
+  "claims": [
+   {
+    "claim": "Van Geet (NREL), Data Center Optimization Strategies: NREL ESIF Data Center Energy and Water Savings, Aug 2019",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "24 °C cooling water supply",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "35–40 °C return used to heat offices and lab space",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "ERE 0.929 (first year of TSC operation)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "NREL page: building needs at least 95 °F on the coldest day",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "?",
+  "overreach": [
+   "No roles recorded; cannot judge. A single-facility case study (NREL HPC) should be labelled as a case, not a general rule"
+  ],
+  "overall": "unreachable"
+ },
+ "euReg2024_1364": {
+  "where_read": "No saved copy; WebFetch refused the URL ('URL not in provenance set' — not circumvented) and the session's WebSearch budget was exhausted, so no official page could be surfaced. EUR-Lex URL refused; register itself flags that details came from a reproduction.",
+  "claims": [
+   {
+    "claim": "Delegated Regulation (EU) 2024/1364, 14 Mar 2024, under EED 2023/1791",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "Threshold ≥ 500 kW IT",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "E_DC, E_IT (EN 50600-4-2)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "E_REUSE per EN 50600-4-6, outside the boundary only, at the handoff",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "T_WH average waste-heat temperature at the computer-room exchanger",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "Annex III ERF = E_REUSE ÷ E_DC",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "EU reporting regulation used as 'rule' for Canadian sites — use as a definition/method reference, not a Canadian rule",
+   "Still unverified at the primary (EUR-Lex); keep the '?'"
+  ],
+  "overall": "unreachable"
+ },
+ "uptime2025": {
+  "where_read": "No saved copy; WebFetch refused the URL ('URL not in provenance set' — not circumvented) and the session's WebSearch budget was exhausted, so no official page could be surfaced.",
+  "claims": [
+   {
+    "claim": "Uptime Global Data Center Survey 2025: weighted average PUE 1.54 (n=681)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "Facilities commissioned in the last five years 1.48",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "North America 1.49",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Industry survey (self-reported) used as a check — appropriate if labelled as survey"
+  ],
+  "overall": "unreachable"
+ },
+ "ipcc2019v3ch7": {
+  "where_read": "No saved copy; WebFetch refused the URL ('URL not in provenance set' — not circumvented) and the session's WebSearch budget was exhausted, so no official page could be surfaced.",
+  "claims": [
+   {
+    "claim": "IPCC 2019 Refinement Vol. 3 Ch. 7, Table 7.9 (Updated), p. 7.32",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "Chillers charge 10–2,000 kg",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "Lifetime 15–30 yr",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "Operating emission 2–15 % of initial charge per year, lower values for developed countries",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "?",
+  "overreach": [
+   "No roles recorded; national-inventory default ranges, not site measurements — use as a range"
+  ],
+  "overall": "unreachable"
+ },
+ "necbHDD": {
+  "where_read": "No saved copy; WebFetch refused the URL ('URL not in provenance set' — not circumvented) and the session's WebSearch budget was exhausted, so no official page could be surfaced. Also note the register cites a CBHCC public-review copy, not the published NECB 2020.",
+  "claims": [
+   {
+    "claim": "NECB 2020 Table C-1 (CBHCC public review copy)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "Edmonton HDD18 5,120",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "A public-review (proposed-change) page is not the enacted code; used as 'rule' — confirm the value in published NECB 2020 / NBC 2020 Appendix C"
+  ],
+  "overall": "unreachable"
+ },
+ "tt2025": {
+  "where_read": "No saved copy; WebFetch refused the URL ('URL not in provenance set' — not circumvented) and the session's WebSearch budget was exhausted, so no official page could be surfaced.",
+  "claims": [
+   {
+    "claim": "Turner & Townsend, Canada market intelligence Q4 2024–2025 cost data table",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "(role) Vancouver 910–1,200 CAD/ft² (data centre)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Consultant market cost range (not a published standard); figure 910–1,200 appears only in the role, not in register_text — add the figure, building type, and page to the register",
+   "Vancouver figure — check whether an Edmonton figure exists before applying to Edmonton"
+  ],
+  "overall": "unreachable"
+ },
+ "epcorDrainage2023": {
+  "where_read": "No saved copy; WebFetch refused the URL ('URL not in provenance set' — not circumvented) and the session's WebSearch budget was exhausted, so no official page could be surfaced. Local uploads hold the EPCOR drainage bylaw 19627, not this guide; not used as a substitute.",
+  "claims": [
+   {
+    "claim": "EPCOR Drainage Customer Connection Guide released 1 May 2023 (title ?)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "P.Eng. 'Signature and Seal' review",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "Approval letter with costs",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "'Details of any required sewer construction would be reviewed at the Development Permit stage' (One Water memos, Mar 2025)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "No timelines",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "?",
+  "overreach": [
+   "Two sources (guide + One Water memos) under one id; memos have no URL — split into separate register entries"
+  ],
+  "overall": "unreachable"
+ },
+ "satya2017": {
+  "where_read": "No saved copy and no URL in the register; WebSearch budget exhausted, so the source could not be located. Not read.",
+  "claims": [
+   {
+    "claim": "Satyanarayanan 2017, 'The Emergence of Edge Computing', Computer (Jan)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "Head-tracked VR needs latencies under 16 ms (p.32)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "'End-to-end latency of a few tens of milliseconds is a safe but achievable goal' (p.32)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Register has no URL/DOI — add it",
+   "A magazine essay figure used as a 'coefficient' latency threshold; label as an author's guideline"
+  ],
+  "overall": "unreachable"
+ },
+ "ciraIXP2023": {
+  "where_read": "No saved copy; WebFetch refused the URL ('URL not in provenance set' — not circumvented) and the session's WebSearch budget was exhausted, so no official page could be surfaced.",
+  "claims": [
+   {
+    "claim": "CIRA page 'IXPs make Canada's internet faster, cheaper, and more resilient' (16 May 2023, modified 31 Aug 2026; dates not printed ?)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "Lists Vancouver VANIX and Edmonton YEGIX",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Registry-operator page: fine for 'which IXPs exist' if labelled as CIRA claim"
+  ],
+  "overall": "unreachable"
+ },
+ "kindaichi2018": {
+  "where_read": "No saved copy; WebFetch refused the URL ('URL not in provenance set' — not circumvented) and the session's WebSearch budget was exhausted, so no official page could be surfaced. (RePEc index page refused).",
+  "claims": [
+   {
+    "claim": "Kindaichi & Nishina, 'Simple index for onsite operation management of ground source heat pump systems in cooling-dominant regions'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "Renewable Energy 127 (2018) 182–194",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "doi:10.1016/j.renene.2018.04.065",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "?",
+  "overreach": [
+   "Register gives no figure, yet role 'Ground warming over 20 years' is 'data' — add the figure and page; a cooling-dominant (Japan?) study applied to Vancouver/Edmonton needs a climate caveat"
+  ],
+  "overall": "unreachable"
+ },
+ "thermokeyGH2490": {
+  "where_read": "No saved copy; WebFetch refused the URL ('URL not in provenance set' — not circumvented) and the session's WebSearch budget was exhausted, so no official page could be surfaced. resale.de copy refused.",
+  "claims": [
+   {
+    "claim": "Thermokey GH2490.CX D/02 V QRAFS selection printout (Archimede 2019, 19 Aug 2019)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "737.6 kW at 32 °C air, 48 → 42.7 °C fluid",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "7,530 × 2,400 mm, 1,565 mm high, 1,866 kg",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "≈24.5 m² per MW (our arithmetic)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Manufacturer claim via a resale listing (not the manufacturer's site) — keep labelled. Arithmetic check: 7.53 × 2.40 = 18.07 m² ÷ 0.7376 MW = 24.5 m²/MW (footprint only, no clearances)"
+  ],
+  "overall": "unreachable"
+ },
+ "spxOlympusV": {
+  "where_read": "No saved copy and no URL in the register; WebSearch budget exhausted, so the source could not be located. Not read.",
+  "claims": [
+   {
+    "claim": "SPX Marley OlympusV TECH-OLYAD-26 (3/2026) dry ratings VWS20 4,983 MBH; VWS29 4,668 MBH at 115→105 °F, 95 °F DB, CTI-certified",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "Brochure OLYMPUSV-26 (1/2026) nominal width 2.90 m, height 3.05 m",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "?",
+  "overreach": [
+   "No URL in register — add it; manufacturer claims",
+   "Odd: larger model VWS29 rated lower than VWS20 — re-check the rating table (?)"
+  ],
+  "overall": "unreachable"
+ },
+ "alfaT20": {
+  "where_read": "No saved copy; WebFetch permission request for the alfalaval.in PDF was not answered in time (not retried, not circumvented); WebSearch budget exhausted.",
+  "claims": [
+   {
+    "claim": "Alfa Laval T20 leaflet CHE00078EN (2016-04)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "H 2145, W 780 mm",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "Frame length 930–3930 mm",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "DN200 ports",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   },
+   {
+    "claim": "Duty not printed",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened (see where_read)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Manufacturer leaflet; fine for frame size. Hosted on Alfa Laval India site — confirm it is the current global leaflet"
+  ],
+  "overall": "unreachable"
+ }
+}

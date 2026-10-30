@@ -1,0 +1,1083 @@
+{
+ "sunLuo2021": {
+  "where_read": "WebFetch of LBL ETA publication page (abstract and citation), 30 Oct 2026. Full paper not read.",
+  "claims": [
+   {
+    "claim": "Sun, Luo, Luo, Hong 2021, Energy & Buildings 231:110603",
+    "verdict": "CONFIRMED",
+    "evidence": "Page citation: 'Sun, K., Luo, N., Luo, X., & Hong, T. (2021) ... Energy and Buildings, 231, 110603'",
+    "fix": ""
+   },
+   {
+    "claim": "Title: prototype DC energy models",
+    "verdict": "CONFIRMED",
+    "evidence": "Title 'Prototype energy models for data centers'",
+    "fix": ""
+   },
+   {
+    "claim": "Modelled 1,076–5,382 W/m² (large DCs)",
+    "verdict": "CONFIRMED",
+    "evidence": "Abstract: stand-alone data center '100 and 500 W/ft2 (1,076 and 5,382 W/m2)'",
+    "fix": "Say 'stand-alone data centre' model inputs, not measured; computer-room model is 430–1,076 W/m²."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Values are prototype-model input load levels, not surveyed densities; fine as a bound if labelled 'modelled'."
+  ],
+  "overall": "ok"
+ },
+ "hut8Vault": {
+  "where_read": "WebFetch of canada.hut8.com refused (URL not in provenance; web search budget exhausted). No saved copy.",
+  "claims": [
+   {
+    "claim": "'1 MW designed power capacity'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Page could not be opened",
+    "fix": ""
+   },
+   {
+    "claim": "'560 kW UPS'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Page could not be opened",
+    "fix": ""
+   },
+   {
+    "claim": "'600 kW generator'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Page could not be opened",
+    "fix": ""
+   },
+   {
+    "claim": ">48 h fuel",
+    "verdict": "UNREACHABLE",
+    "evidence": "Page could not be opened",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Correctly labelled OPERATOR CLAIM; not verified this pass. Save a copy of the page."
+  ],
+  "overall": "unreachable"
+ },
+ "sethuramalingam2019": {
+  "where_read": "WebFetch of shura.shu.ac.uk PDF refused (provenance); no saved copy; search budget exhausted.",
+  "claims": [
+   {
+    "claim": "Authors, title, ICESF 2019 (Nottingham Trent)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "Sec. 3.3, p. 370: air-cooled 25–35 °C, liquid-cooled 50–60 °C",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "Secondary: cites Ebrahimi 2015 and Davies 2016",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Secondary review used for heat_temp; already flagged SECONDARY. Primary (Ebrahimi 2015) should be read for a thesis figure."
+  ],
+  "overall": "unreachable"
+ },
+ "blatchfordDG2025": {
+  "where_read": "WebFetch of Edmonton DESS Multi-Unit Lots Design Guide PDF (first 100,000 of 109,857 chars). Vancouver NEU Connectivity Guidelines not opened (no URL given; search budget exhausted).",
+  "claims": [
+   {
+    "claim": "City of Edmonton DESS Multi-Unit Lots Design Guide v8 (Jun 2025)",
+    "verdict": "CONFIRMED",
+    "evidence": "'District Energy Sharing System Design Guide, Multi-Unit Lots', Version 8, June 2025",
+    "fix": ""
+   },
+   {
+    "claim": "Table 8 Heat Pump Loop Water supply 8 °C winter – 32 °C summer",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 8: 'Varying between min. 8°C (winter) max. 32°C (summer)'",
+    "fix": ""
+   },
+   {
+    "claim": "Return 4 °C (winter)",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 8: '4°C (winter) (summer return temp may vary)'",
+    "fix": ""
+   },
+   {
+    "claim": "Design ΔT 5 °C (s. 6.1)",
+    "verdict": "CONFIRMED",
+    "evidence": "s.6.1: 'Heat pump water loop ... design delta-T: 5°C'",
+    "fix": ""
+   },
+   {
+    "claim": "Vancouver NEU Connectivity Guidelines rev. 1 (May 2026): supply min 65 °C, return max 45 °C",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not in the Edmonton PDF (65/45 °C not mentioned); Vancouver document not opened",
+    "fix": "Give the Vancouver guideline its own register id and URL."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "One id carries two documents from two cities; the Vancouver figures have no URL and are unverified.",
+   "'Ambient loop' is the register's gloss; the guide says 'Heat Pump Loop Water'."
+  ],
+  "overall": "needs fix"
+ },
+ "nrelRSF": {
+  "where_read": "pdftotext of saved copy /mnt/user-data/beyond-data-sources/public/nrelRSF/full.pdf (Van Geet slide deck).",
+  "claims": [
+   {
+    "claim": "NREL RSF data-centre case study (DOE)",
+    "verdict": "CONFIRMED",
+    "evidence": "Title slide: 'NREL Research Support Facility Data Center Case Study, Otto Van Geet, PE'",
+    "fix": "Note it is a slide deck by O. Van Geet (NREL), not a report."
+   },
+   {
+    "claim": "'Average ERE = 0.91 (calculated, not measured)'",
+    "verdict": "CONFIRMED",
+    "evidence": "Results slide, 'Oct ‘10 – July ‘11: Average ERE = 0.91 (calculated, not measured)'",
+    "fix": ""
+   },
+   {
+    "claim": "'Average PUE = 1.18 (measured)'",
+    "verdict": "CONFIRMED",
+    "evidence": "Same slide: 'Average PUE = 1.18 (measured)'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Role is 'erf' 'reported value', but the deck reports ERE, not ERF. ERF = 1 − ERE/PUE ≈ 0.23 is a derived value; label it derived and note ERE itself was calculated, not measured."
+  ],
+  "overall": "needs fix"
+ },
+ "nrcanEstarDC": {
+  "where_read": "WebFetch of natural-resources.canada.ca page refused (provenance); no saved copy.",
+  "claims": [
+   {
+    "claim": "Title 'Data Center Estimates in the United States and Canada' (?)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "Quote 'a sufficient survey assessing data center PUE is not currently available'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "No Canadian PUE figure",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Used as support for 'pue'; it is a source of absence (no figure), so it cannot set a PUE value itself."
+  ],
+  "overall": "unreachable"
+ },
+ "vanNEU2018": {
+  "where_read": "WebFetch of council.vancouver.ca pspc3.pdf, 30 Oct 2026.",
+  "claims": [
+   {
+    "claim": "City of Vancouver NEU expansion report, 21 Feb 2018",
+    "verdict": "CONFIRMED",
+    "evidence": "'Expansion of the False Creek Neighbourhood Energy Utility (\"NEU\")'; report dated 13 Feb 2018 for the 21 Feb 2018 meeting",
+    "fix": "Add report date 13 Feb 2018."
+   },
+   {
+    "claim": "Distribution capital '$13 to $37 million (2018$)'",
+    "verdict": "CONFIRMED",
+    "evidence": "'capital investment in the range of $13 to $37 million (2018$)'",
+    "fix": ""
+   },
+   {
+    "claim": "Base case $29M",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 1 Base Case: '$29M – Distribution' ('$72M - Total')",
+    "fix": "$29 million also appears for expansion within the existing service area; say which."
+   },
+   {
+    "claim": "No length or cost per metre",
+    "verdict": "CONFIRMED",
+    "evidence": "Report gives maps (Figs 2–5) but no pipe length or $/m",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Cannot yield a $/m rate; use only as a project-total check."
+  ],
+  "overall": "ok"
+ },
+ "oekoBSF": {
+  "where_read": "WebFetch of ccacoalition.org PDF refused (provenance); no saved copy.",
+  "claims": [
+   {
+    "claim": "Öko-Institut 2022, funded by UBA, workshop deck",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "BSF facility heat 3,404 kWh per Mg input, slide 4",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Single workshop slide used as a coefficient; check whether 3,404 kWh/t is heat demand or total energy."
+  ],
+  "overall": "unreachable"
+ },
+ "energiforsk2022life": {
+  "where_read": "WebFetch of energiforsk.se PDF (Energiforsk report 2022:872), 30 Oct 2026.",
+  "claims": [
+   {
+    "claim": "Authors Jakubowicz, Sällström, Vega, Yarahmadi",
+    "verdict": "CONFIRMED",
+    "evidence": "Authors listed (RISE Research Institutes of Sweden)",
+    "fix": ""
+   },
+   {
+    "claim": "Energiforsk report 2022:872, June 2022 (day ?)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Energiforsk report 2022:872', June 2022; no day printed (ISBN 978-91-7673-872-6)",
+    "fix": ""
+   },
+   {
+    "claim": "s. 8.2: 'EN 253 (2019) states that the service life shall be 30 years at 120 °C with single peaks of 140 °C' for 300 h/yr",
+    "verdict": "CONFIRMED",
+    "evidence": "s.8.2: '...30 years at 120 °C with single peaks of 140 °C for a total of 300 hours per year'",
+    "fix": ""
+   },
+   {
+    "claim": "50 years needs below 115 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "'If a service life of 50 years is desired, the temperatures must be below 115 °C.'",
+    "fix": ""
+   },
+   {
+    "claim": "Degradation ×2.5 per +10 °C (conclusions); s. 6.1 gives ×2 ?",
+    "verdict": "CORRECTED",
+    "evidence": "Conclusions: 'factor of 2.5 with each temperature increase of 10 °C'; s.6.1 gives ×2 as the common rule of thumb and Case II ×2.5 as better fit to field data",
+    "fix": "Write: s.6.1 states ×2 rule of thumb but finds ×2.5 (Case II) fits field data better; remove '?'."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "EN 253 requirement is quoted second-hand (EN 253 not read).",
+   "30 yr at 120 °C is a design-test basis for hot DH pipes; a low-temperature network would last longer, so 30 yr is conservative as a payback life — say so."
+  ],
+  "overall": "needs fix"
+ },
+ "m104": {
+  "where_read": "pdftotext of saved copy /mnt/user-data/beyond-data-sources/public/m104/full.pdf. BCUC G-66-19 PDF (URL from sources/06) refused (provenance).",
+  "claims": [
+   {
+    "claim": "BC Ministerial Order M104 (2019)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Ministerial Order No. M104' signed March 18, 2019, Minister Michelle Mungall, UCA s.88(3)",
+    "fix": ""
+   },
+   {
+    "claim": "Attachment is a draft 'G-xx-xx'; order number not in saved file",
+    "verdict": "CONFIRMED",
+    "evidence": "Attachment headed 'ORDER NUMBER G-xx-xx' ... 'DRAFT ORDER'",
+    "fix": ""
+   },
+   {
+    "claim": "BCUC G-66-19",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not in saved file; BCUC PDF could not be opened",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "M104 only approves BCUC making the exemption; the binding exemption is the BCUC order (G-66-19 ?), which is unverified. Exemption is from UCA Part 3 except ss.25 and 38 (safety), for persons not otherwise public utilities — the rule should cite that scope."
+  ],
+  "overall": "needs fix"
+ },
+ "gvsdd299": {
+  "where_read": "pdftotext of saved copy /mnt/user-data/beyond-data-sources/public/gvsdd299/full.pdf (unofficial consolidation).",
+  "claims": [
+   {
+    "claim": "GVS&DD Sewer Use Bylaw 299",
+    "verdict": "CONFIRMED",
+    "evidence": "'Greater Vancouver Sewerage and Drainage District Sewer Use Bylaw No. 299, 2007 – Unofficial Consolidation'",
+    "fix": ""
+   },
+   {
+    "claim": "Sch. A 4(b): 'Any Waste which will raise the temperature of Waste entering any Sewage Facility to 40 degrees Centigrade'",
+    "verdict": "CONFIRMED",
+    "evidence": "Sch. A 4(b): '...to 40 degrees Centigrade (104 degrees Fahrenheit) or more;'",
+    "fix": "Add 'or more'."
+   },
+   {
+    "claim": "Sch. A 4(c): non-domestic waste at 65 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "4(c): 'Any Non-Domestic Waste ... with a temperature of 65 degrees Centigrade (150 degrees Fahrenheit) or more.' (revised by Bylaw 347, 2021)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Metro Vancouver only; does not apply in Edmonton. Copy is an unofficial consolidation."
+  ],
+  "overall": "ok"
+ },
+ "thermalLimits": {
+  "where_read": "pdftotext of saved copy /mnt/user-data/beyond-data-sources/public/thermalLimits/full.pdf (BC WQG Temperature Overview, 2001).",
+  "claims": [
+   {
+    "claim": "BC Water Quality Guideline (temperature, 2001)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Water Quality Guidelines for Temperature, Overview Report' signed August 22, 2001",
+    "fix": ""
+   },
+   {
+    "claim": "Marine '+ or - 1 degree Celsius change from natural ambient background'",
+    "verdict": "CONFIRMED",
+    "evidence": "Summary table: 'Marine and Estuarine Aquatic Life + or - 1 degree Celsius change from natural ambient background'",
+    "fix": ""
+   },
+   {
+    "claim": "≤0.5 °C/h",
+    "verdict": "CONFIRMED",
+    "evidence": "s.2.4: 'maximum rate of any human-induced temperature change should not exceed 0.5 degrees Celsius per hour'",
+    "fix": ""
+   },
+   {
+    "claim": "CCME marine ±1 °C (as reprinted in the BC report)",
+    "verdict": "CONFIRMED",
+    "evidence": "Appendix (CCME), MARINE: 'Not to exceed a 1 degree Celsius change from natural background temperature.'",
+    "fix": ""
+   },
+   {
+    "claim": "Proposed Burrard Inlet objective 'No further increase in temperature' (Jul 2024 ?)",
+    "verdict": "NOT FOUND",
+    "evidence": "Not in this document",
+    "fix": "Cite its own source (library has burrardTemp2024); keep '?' until read."
+   },
+   {
+    "claim": "Alberta SWQG 1999 'Not to be increased by more than 3°C above ambient'",
+    "verdict": "NOT FOUND",
+    "evidence": "Not in this document; confirmed separately in abSWQG1999 p.9",
+    "fix": "Cite abSWQG1999 only."
+   }
+  ],
+  "roles_ok": false,
+  "overreach": [
+   "Role says 'thermal limit (binding)' rule, but the source is an ambient water-quality GUIDELINE ('establishes ambient water quality guidelines'); not binding unless written into a permit. Label as guideline.",
+   "Freshwater (Fraser River) streams use different criteria (±1 °C beyond optimum range, 1 °C/h), not the marine 0.5 °C/h."
+  ],
+  "overall": "needs fix"
+ },
+ "abSWQG1999": {
+  "where_read": "pdftotext of saved copy /mnt/user-data/beyond-data-sources/public/abSWQG1999/full.pdf.",
+  "claims": [
+   {
+    "claim": "Alberta Environment, Surface water quality guidelines for use in Alberta (Nov 1999)",
+    "verdict": "CONFIRMED",
+    "evidence": "Cover: 'SURFACE WATER QUALITY GUIDELINES FOR USE IN ALBERTA NOVEMBER 1999', Pub. No. T/483",
+    "fix": ""
+   },
+   {
+    "claim": "Table 1.0 p. 9: not more than 3 °C above ambient (aquatic life)",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 1.0 (Freshwater Aquatic Life), Temperature: 'Not to be increased by more than 3°C above ambient water temperature' (footnote 17: 'can be applied as chronic guidelines'); page footer 9",
+    "fix": ""
+   },
+   {
+    "claim": "2018 edition not read",
+    "verdict": "CONFIRMED",
+    "evidence": "Statement about the register's own reading; nothing to test",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "A guideline (freshwater aquatic life, chronic), not a discharge limit; label as guideline if used in surface_water_sink as a cap. Superseded by later editions (2018) — check current edition."
+  ],
+  "overall": "ok"
+ },
+ "canvecHydroBC": {
+  "where_read": "WebFetch of open.canada.ca dataset page refused (provenance). Local data/raw/canvec/BC holds only transformer_station files, no hydro extract found.",
+  "claims": [
+   {
+    "claim": "NRCan CanVec 50K Hydro, BC; Open Government Licence – Canada",
+    "verdict": "UNREACHABLE",
+    "evidence": "Dataset page could not be opened",
+    "fix": ""
+   },
+   {
+    "claim": "Download 20 Oct 2026; extract carries no metadata",
+    "verdict": "UNREACHABLE",
+    "evidence": "No hydro extract found under /mnt/attach/outputs/data/raw/canvec/BC",
+    "fix": ""
+   },
+   {
+    "claim": "Ocean, Fraser River and side-channel polygons",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not opened",
+    "fix": ""
+   },
+   {
+    "claim": "Source maps from 1980 on",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not opened",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Hydro extract path not found locally; record where the file lives."
+  ],
+  "overall": "unreachable"
+ },
+ "epcorDASSAS": {
+  "where_read": "pdftotext of saved DAS tariff /mnt/user-data/beyond-data-sources/public/epcorDASSAS/full.pdf; WebFetch of the SAS tariff PDF, 30 Oct 2026.",
+  "claims": [
+   {
+    "claim": "EPCOR D&T 2026 interim tariffs, effective 1 Jan 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Effective January 1, 2026'; '(2026 INTERIM RATE)'",
+    "fix": ""
+   },
+   {
+    "claim": "DAS-TOUP $67.45678/site/day + $0.13822/kW/day",
+    "verdict": "CONFIRMED",
+    "evidence": "DAS-TOUP1 '$67.45678' customer charge per day; DAS-TOUP2 '$0.13822' per kW per day; energy $0.00000",
+    "fix": ""
+   },
+   {
+    "claim": "SAS-TOUP $0.00250/kWh",
+    "verdict": "CONFIRMED",
+    "evidence": "SAS tariff: SAS-TOUP1 '$0.00250' per kWh",
+    "fix": ""
+   },
+   {
+    "claim": "Capacity $0.13497/kW/day",
+    "verdict": "CONFIRMED",
+    "evidence": "SAS-TOUP2 '$0.13497' per kW of billing demand per day",
+    "fix": ""
+   },
+   {
+    "claim": "Demand $0.28126/kW/day",
+    "verdict": "CONFIRMED",
+    "evidence": "SAS-TOUP5 '$0.28126' per kW of peak metered demand per day",
+    "fix": ""
+   },
+   {
+    "claim": "OR 7.99 % × pool price",
+    "verdict": "CONFIRMED",
+    "evidence": "SAS-TOUP4 '7.99%' of energy each hour × pool price",
+    "fix": ""
+   },
+   {
+    "claim": "DAS-CS (>5,000 kVA) closed to new service",
+    "verdict": "CONFIRMED",
+    "evidence": "DAS-CS: 'This rate is not available to new points of service.' (≥5,000 kVA in previous year)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Riders not included (Local Access Fee, Rider DG, Rider DJ true-up) — LAF applies to all Edmonton sites.",
+   "DAS billing demand = higher of metered, 85% ratchet, contract minimum, 50 kW.",
+   "SAS figures rest on a proposed 2026 AESO tariff (Proceeding 30427) and may change. A >5 MVA new DC may be transmission-connected (DAS-DC) instead."
+  ],
+  "overall": "ok"
+ },
+ "aesoConnect": {
+  "where_read": "WebFetch of aeso.ca Quick Reference Guide PDF refused (provenance); no saved copy.",
+  "claims": [
+   {
+    "claim": "AESO Connection Process Quick Reference Guide v2.1 (2021), stages 0–6",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "Stage weeks 14 / 39 / 55 / 30 (?)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "Targets, not achieved times",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "Newer V1 27 May 2025 gives no durations",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "Used when a SASR needs transmission facilities",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Week figures already marked uncertain; also they are for generation/storage, not load — don't apply to a data-centre load connection without saying so."
+  ],
+  "overall": "unreachable"
+ },
+ "gsa_gpg052": {
+  "where_read": "pdftotext of saved copy /mnt/user-data/beyond-data-sources/public/gsa_gpg052/full.pdf.",
+  "claims": [
+   {
+    "claim": "US GSA Green Proving Ground, Blowdown Recovery System for Cooling Towers",
+    "verdict": "CONFIRMED",
+    "evidence": "'General Services Administration ... BLOWDOWN RECOVERY SYSTEM FOR COOLING TOWERS'",
+    "fix": ""
+   },
+   {
+    "claim": "Findings GPG-052 (Aug 2023)",
+    "verdict": "CONFIRMED",
+    "evidence": "'GPG-052 AUGUST 2023' (file name dated 14Sep23)",
+    "fix": ""
+   },
+   {
+    "claim": "NREL evaluation",
+    "verdict": "CONFIRMED",
+    "evidence": "'Green Proving Ground (GPG) worked with researchers from the National Renewable Energy Laboratory (NREL)'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Single testbed: 1,150-ton chiller plant at a Las Vegas courthouse, not a data centre; 'reduced blowdown by 53% and overall water use by 16%'. The 93% figure is a vendor estimate ('The vendor estimates up to a 93% reduction') — must be labelled claim if used."
+  ],
+  "overall": "ok"
+ },
+ "zurmuhl2018": {
+  "where_read": "WebFetch of pangea.stanford.edu PDF refused (provenance); no saved copy.",
+  "claims": [
+   {
+    "claim": "Zurmuhl et al., 'Hybrid geothermal heat pumps for cooling telecommunications data centers', SGW 2018",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "43rd Workshop, 12–14 Feb 2018 (?)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Used as 'data' for borefield and 20-yr ground warming; register gives no figures or page — the actual numbers used are not indexed."
+  ],
+  "overall": "unreachable"
+ },
+ "majorowicz2021": {
+  "where_read": "WebFetch of mdpi.com article refused (provenance); no saved copy.",
+  "claims": [
+   {
+    "claim": "Majorowicz & Grasby, Deep Geothermal Heating Potential for the Communities of the WCSB, Energies 14(3):706 (2021)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Used as 'data' for deep_geo but register gives no figure or page."
+  ],
+  "overall": "unreachable"
+ },
+ "mfrDryCooler": {
+  "where_read": "pdftotext of local maker sheets /mnt/user-data/beyond-data-sources/private/maker_sheets/EVAPCO_EA26MRKT_2026.pdf and EVAPCO_270B_2020.pdf. Alfa Laval, Vertiv, LU-VE, Güntner sheets not available locally; web fetch/search not possible.",
+  "claims": [
+   {
+    "claim": "Generic ranges ~20–2,700 kW/unit; L 1.6–12 m; W 1.15–2.5 m; H 1.45–2.9 m; 160 kg–10.6 t",
+    "verdict": "UNREACHABLE",
+    "evidence": "Other makers' sheets not opened; EVAPCO 270B only says 'units up to 27 feet in length'",
+    "fix": ""
+   },
+   {
+    "claim": "EVAPCO EA26MRKT (©2026) p.13",
+    "verdict": "CONFIRMED",
+    "evidence": "'Bulletin EA26MRKT ©2026 EVAPCO, inc.'; table on page 13 'V Coil Configuration - EC Motor, Twin Fan, 8’ Wide Models'",
+    "fix": ""
+   },
+   {
+    "claim": "EAW-VD9120ZA, 20 fans",
+    "verdict": "CONFIRMED",
+    "evidence": "'EAW-VD9120ZA 20 4461 85.8 (63.9)'",
+    "fix": ""
+   },
+   {
+    "claim": "Two rows (twin fan)",
+    "verdict": "CONFIRMED",
+    "evidence": "Header 'Twin Fan' models",
+    "fix": ""
+   },
+   {
+    "claim": "12.04 × 2.38 m",
+    "verdict": "CONFIRMED",
+    "evidence": "L '39’ - 5-7/8”' (12.04 m); width '7' 9-7/8\"' (2.38 m) dry",
+    "fix": "Adiabatic width is 9’ 7/8” (2.77 m) — note if adiabatic option used."
+   },
+   {
+    "claim": "2.88 m high (9'-5-1/2\")",
+    "verdict": "CONFIRMED",
+    "evidence": "Drawing: '9' 5-1/2\"'",
+    "fix": ""
+   },
+   {
+    "claim": "4461 MBH = 1.31 MW (maker's claim)",
+    "verdict": "CONFIRMED",
+    "evidence": "Capacity 4461 MBH; '† Nominal Capacity 110°F-100°F at 92°F dry bulb temp.'",
+    "fix": "State rating condition: 110→100 °F fluid (43→38 °C) at 92 °F (33 °C) dry bulb."
+   },
+   {
+    "claim": "Ratings at standard conditions, not DC conditions",
+    "verdict": "CONFIRMED",
+    "evidence": "Same footnote gives a single nominal condition",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Range across other makers unverified this pass; correctly labelled maker claim. Operating weight of VD9120ZA is 22,410 lb (≈10.2 t), within range."
+  ],
+  "overall": "needs fix"
+ },
+ "femp2024dc": {
+  "where_read": "WebFetch of energy.gov PDF (two passes, incl. offset 90,000), 30 Oct 2026.",
+  "claims": [
+   {
+    "claim": "Van Geet & Sickinger (NREL) for DOE FEMP, Best Practices Guide for Energy-Efficient Data Center Design",
+    "verdict": "CONFIRMED",
+    "evidence": "Title and authors 'Otto Van Geet and David Sickinger, NREL'",
+    "fix": ""
+   },
+   {
+    "claim": "Rev. July 2024, DOE/GO-102024-6283",
+    "verdict": "CONFIRMED",
+    "evidence": "'Revised July 2024'; back page 'DOE/GO-102024-6283 ... July 2024'",
+    "fix": ""
+   },
+   {
+    "claim": "CRAH units on 55 °F or higher chilled water (s. 5.2.1, p. 16)",
+    "verdict": "CONFIRMED",
+    "evidence": "s.5.2.1 p.16: 'A CRAH unit that uses 55°F or higher chilled water, and efficient fans with VSD'",
+    "fix": ""
+   },
+   {
+    "claim": "Medium-temperature loop ≥55 °F (s. 5.3.2)",
+    "verdict": "CONFIRMED",
+    "evidence": "s.5.3.2 (p.17): 'using a water supply temperature of 55°F or higher improves chiller efficiency'",
+    "fix": ""
+   },
+   {
+    "claim": "12.8 °C (our conversion)",
+    "verdict": "CONFIRMED",
+    "evidence": "55 °F = 12.8 °C (arithmetic)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "A best-practice recommendation, not a requirement. Role 'Space for the plant' — the cited text is about water temperature, not plant space; check the link is the intended one."
+  ],
+  "overall": "ok"
+ },
+ "carrier61XWH": {
+  "where_read": "WebFetch of referenzen.meiertobler.ch PDF refused (provenance); no saved copy.",
+  "claims": [
+   {
+    "claim": "Carrier 61XWH-ZE data (2016/2017, preliminary), via Meier Tobler",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "Model 1501, 1,948 kW at 30/75 °C",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "4,850 × 1,350 mm → ≈3.4 m² per MW heat",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open; arithmetic 4.85×1.35/1.948 = 3.36 m²/MW is consistent",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Footprint excludes service clearances; preliminary data via a reseller. Labelled manufacturer claim (good)."
+  ],
+  "overall": "unreachable"
+ },
+ "linwood2023": {
+  "where_read": "WebFetch of structuremag.org article refused (provenance); no saved copy.",
+  "claims": [
+   {
+    "claim": "Linwood, STRUCTURE magazine, 1 Jan 2023",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "UFC 3-301-01 (2018) 150 psf for IT server spaces",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "ASCE 7-22 access floor 100 psf (+2,000 lb point ?)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "150 psf = 7.2 kPa",
+    "verdict": "CONFIRMED",
+    "evidence": "Arithmetic: 150 × 0.04788 = 7.18 kPa",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Secondary magazine; US military/US codes. In Canada NBC Table 4.1.5.3 governs live loads — the tool should cite NBC/BCBC for the rule and use this only as context."
+  ],
+  "overall": "unreachable"
+ },
+ "gunterShipes1971": {
+  "where_read": "Primary paper not opened (register gives only an internal audit path; maker-hosted PDF URL listed in /mnt/attach/outputs/audit/research_2026-10-19/B_local_heat_air.md not in provenance). Read only that audit note (secondary, not evidence).",
+  "claims": [
+   {
+    "claim": "Gunter & Shipes 1971, Hot air recirculation by air coolers (AIChE-ASME conf.)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Primary not opened; audit note: 'AIChE-ASME 12th National Heat Transfer Conf., Tulsa, Aug 1971'",
+    "fix": ""
+   },
+   {
+    "claim": "Authors from a manufacturer",
+    "verdict": "UNREACHABLE",
+    "evidence": "Audit note: 'authors from Hudson Products (manufacturer)'",
+    "fix": ""
+   },
+   {
+    "claim": "Field cases 13.6% and 24% recirculation; capacity down ~10% and ~35%",
+    "verdict": "UNREACHABLE",
+    "evidence": "Audit note quotes p.8 '13.6 percent recirculation' and p.9 '24 percent ... 35 percent reduction'",
+    "fix": ""
+   },
+   {
+    "claim": "Equations not usable",
+    "verdict": "UNREACHABLE",
+    "evidence": "Audit note: 'Equations garbled in extraction'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Register has no URL for the source itself — add the PDF URL and save a copy. Labelled CLAIM (good); 1971 process-plant air coolers, not DC dry coolers."
+  ],
+  "overall": "unreachable"
+ },
+ "nrcSeismic2020": {
+  "where_read": "WebFetch of seismescanada.rncan.gc.ca tool page refused (provenance). It is an interactive tool; values depend on coordinate input.",
+  "claims": [
+   {
+    "claim": "NRCan 2020 NBC Seismic Hazard Tool, date modified 2026-01-21",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "Site Class C, 2%/50 yr",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "Sa(0.2) V09 (49.269, −123.097) 1.08",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "E05 (53.555, −113.477) 0.152",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   },
+   {
+    "claim": "E06 (53.569, −113.522) 0.154",
+    "verdict": "UNREACHABLE",
+    "evidence": "Could not open",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Save tool output (screenshot/CSV) as the record. In NBC 2020 site class is set by Vs30; confirm 'Site Class C' is what the tool reports for these points."
+  ],
+  "overall": "unreachable"
+ },
+ "coolloopBr": {
+  "where_read": "WebFetch of vertiv.com brochure PDF, 30 Oct 2026.",
+  "claims": [
+   {
+    "claim": "Vertiv CoolLoop Thermal Wall brochure SL-80367 (R11/25)",
+    "verdict": "CONFIRMED",
+    "evidence": "'SL-80367 (R11/25)'",
+    "fix": ""
+   },
+   {
+    "claim": "'optimized for slab floors and gallery-side mounting'",
+    "verdict": "CONFIRMED",
+    "evidence": "'The turnkey thermal wall solution, optimized for slab floors and gallery-side mounting'",
+    "fix": ""
+   },
+   {
+    "claim": "CA60 360 kW net sensible, 60 × 120 × 144.3 in",
+    "verdict": "CONFIRMED",
+    "evidence": "CA60: 360 kW (High Technology Coil); Length 60, Width 120, Height 144.3 in",
+    "fix": ""
+   },
+   {
+    "claim": "CA80 500 kW, 60 × 156 × 144.5 in",
+    "verdict": "CONFIRMED",
+    "evidence": "CA80: 500 kW; Length 60, Width 156, Height 144.5 in",
+    "fix": ""
+   },
+   {
+    "claim": "Return air up to 45 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "'The maximum return air working temperature is up to 45°C'",
+    "fix": ""
+   },
+   {
+    "claim": "Rating water temperatures not printed (?)",
+    "verdict": "CONFIRMED",
+    "evidence": "Water temperatures for capacity ratings not printed in the brochure",
+    "fix": "Remove '?'."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Manufacturer claim; capacity without rating conditions — label as maker's nominal."
+  ],
+  "overall": "ok"
+ },
+ "nbc2020_v1": {
+  "where_read": "pdftotext of J.B.'s upload /root/.claude/uploads/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/d1d05d5a-NBC2020p2.pdf (NBC 2020 Vol. 1 Div. B, 2025 printing).",
+  "claims": [
+   {
+    "claim": "3.3.1.9.(1) public corridor 1 100 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "'The minimum width of a public corridor shall be 1 100 mm.'",
+    "fix": ""
+   },
+   {
+    "claim": "3.3.1.9.(5) dead-end corridor ≤ 6 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'a dead-end corridor is permitted provided it is not more than 6 m long' (except within a suite etc.)",
+    "fix": ""
+   },
+   {
+    "claim": "3.3.1.10.(1) aisles 'in conformance with the NFC'",
+    "verdict": "CONFIRMED",
+    "evidence": "'aisles shall be provided in conformance with the NFC.'",
+    "fix": ""
+   },
+   {
+    "claim": "3.4.2.5.(1)(c) 45 m sprinklered throughout",
+    "verdict": "CONFIRMED",
+    "evidence": "'c) 45 m in a floor area that contains an occupancy other than a high-hazard industrial occupancy, provided it is sprinklered throughout'",
+    "fix": ""
+   },
+   {
+    "claim": "3.4.2.5.(1)(b) 40 m business",
+    "verdict": "CONFIRMED",
+    "evidence": "'b) 40 m in a business and personal services occupancy'",
+    "fix": ""
+   },
+   {
+    "claim": "3.4.2.5.(1)(f) 30 m otherwise",
+    "verdict": "CONFIRMED",
+    "evidence": "'f) 30 m in any floor area other than those referred to in Clauses (a) to (e)'",
+    "fix": ""
+   },
+   {
+    "claim": "3.6.2.1.(6) CEC-required service rooms 1 h",
+    "verdict": "CONFIRMED",
+    "evidence": "'Electrical equipment that is required to be located in a service room according to CSA C22.1 ... not less than 1 h.'",
+    "fix": ""
+   },
+   {
+    "claim": "3.6.2.1.(7) service room in a storey not sprinklered throughout 1 h",
+    "verdict": "CONFIRMED",
+    "evidence": "'in a storey that is not sprinklered throughout, a service room that contains service equipment other than that addressed by Sentences (1) to (6) ... 1 h'",
+    "fix": ""
+   },
+   {
+    "claim": "3.6.2.1.(8) limited-quantity exemption",
+    "verdict": "CONFIRMED",
+    "evidence": "'Where a service room contains a limited quantity of service equipment ... the requirements for a fire separation shall not apply.'",
+    "fix": ""
+   },
+   {
+    "claim": "pp. 3-143, 3-161",
+    "verdict": "CONFIRMED",
+    "evidence": "3.4.2.5 ends 'Division B 3-143'; 3.6.2.1 ends '3-161'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "NBC 2020 is the model code: Vancouver uses VBBL 2025, rest of BC BCBC 2024, Alberta NBC(AE) 2023 — local copies exist in data/raw/codes; cite the adopted code.",
+   "3.4.2.5.(1) applies 'if more than one exit is required'; 3.3.1.9.(1) is for public corridors only.",
+   "Role 'service room 1 h where not sprinklered' understates (6): CEC-required electrical rooms need 1 h even when sprinklered; (7) covers other equipment."
+  ],
+  "overall": "needs fix"
+ },
+ "galaxyVXinstall": {
+  "where_read": "No URL in register and no saved copy found; web search budget exhausted. Not read.",
+  "claims": [
+   {
+    "claim": "Galaxy VX 1500 kW I/O Cabinet Installation 990-5783J-001 (11/2024) p.39: 'can be placed up against a wall with no requirement for rear or side access'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not opened",
+    "fix": ""
+   },
+   {
+    "claim": "Front/top clearances only in a figure (?)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not opened",
+    "fix": ""
+   },
+   {
+    "claim": "Galaxy VX 1000 kW 480 V: 1203 A (990-5451K-001 p.40)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not opened",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Register lacks URLs for both manuals; add them and save copies. Manufacturer claim — label so. 480 V is a North American US rating; Canadian 600 V models differ."
+  ],
+  "overall": "unreachable"
+ },
+ "ubc336100": {
+  "where_read": "WebFetch of technicalguidelines.ubc.ca PDF, 30 Oct 2026.",
+  "claims": [
+   {
+    "claim": "UBC Technical Guidelines 33 61 00, District Hot Water Energy Distribution (Nov 2025)",
+    "verdict": "CONFIRMED",
+    "evidence": "Section 33 61 00, revision date November 2025",
+    "fix": ""
+   },
+   {
+    "claim": "3.1.1 mains 2–3.5 m/s, service lines max 2 m/s",
+    "verdict": "CONFIRMED",
+    "evidence": "'Buried Mains & Mains in Tunnels 2 – 3.5 m/sec'; 'Max. Water Velocity in Service Lines 2 m/sec'",
+    "fix": ""
+   },
+   {
+    "claim": "3.2.1 based on 250 Pa/m",
+    "verdict": "CONFIRMED",
+    "evidence": "'Based on 250 Pa/m Pressure Gradient'",
+    "fix": ""
+   },
+   {
+    "claim": "3.1.2 supply 70 °C, ΔT 30 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "Table: 70 °C operating supply; 'System Operating delta-T 30°C' (also 'System Rated Supply Temp. 120°C')",
+    "fix": "Say '70 °C operating supply (system rated 120 °C)'."
+   },
+   {
+    "claim": "3.1.5 for preliminary sizing only",
+    "verdict": "CONFIRMED",
+    "evidence": "'...general in nature and are to be used for preliminary line sizing.'",
+    "fix": ""
+   },
+   {
+    "claim": "4.1.5 heat exchangers sized for maximum 5 °C approach",
+    "verdict": "CORRECTED",
+    "evidence": "Printed under 4.1.4.2: 'Each HX will be sized for a maximum 5°C approach on the hot side (DH side) outlet to cold side inlet.' 4.1.5 is a DHW pre-heat note",
+    "fix": "Change clause to 4.1.4.2."
+   },
+   {
+    "claim": "4.1.2 brazed plate for space heating",
+    "verdict": "CONFIRMED",
+    "evidence": "4.1.2 requires brazed plate HX for space heating; 'Shell & tube heat exchangers should not be used.'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "A UBC campus owner's standard used as a 'rule' for Vancouver/Edmonton sites; it binds only UBC's DES. Label as reference practice. 3.1.5 itself says preliminary sizing only."
+  ],
+  "overall": "needs fix"
+ },
+ "daikinEWWVZ": {
+  "where_read": "WebFetch of daikin.eu German-language manual PDF, 30 Oct 2026.",
+  "claims": [
+   {
+    "claim": "Daikin EWW(D/H/S)-VZ IOM manual D-EIMWC003H02-18 rev 13 (06-2026)",
+    "verdict": "CONFIRMED",
+    "evidence": "'D-EIMWC003H02-18_13DE', revision 13, 06-2026 (German, translated from English)",
+    "fix": ""
+   },
+   {
+    "claim": "s.2.10 p.25",
+    "verdict": "CONFIRMED",
+    "evidence": "Section 2.10, page 25/56",
+    "fix": ""
+   },
+   {
+    "claim": "Minimum water content 5 l/kW single circuit, 3.5 l/kW dual circuit",
+    "verdict": "CONFIRMED",
+    "evidence": "'5 lt/kW nominal' and '3,5 lt/kW nominal' (circuit labels inferred from garbled row labels ?)",
+    "fix": ""
+   },
+   {
+    "claim": "kW = nominal cooling at 12/7 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "'kWnominal = Kühlleistung bei 12/7°C OAT=35°C'",
+    "fix": "Add 'OAT = 35 °C' as printed."
+   },
+   {
+    "claim": "A minimum for stable control, not storage",
+    "verdict": "NOT FOUND",
+    "evidence": "Purpose wording not reported from the source this pass (?)",
+    "fix": "Mark as our interpretation unless quoted."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Chiller-specific minimum for one product line; fine as a coefficient for minimum buffer volume, labelled manufacturer claim."
+  ],
+  "overall": "ok"
+ }
+}

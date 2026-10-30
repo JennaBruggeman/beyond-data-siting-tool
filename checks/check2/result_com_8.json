@@ -1,0 +1,1185 @@
+{
+ "edmBEB6": {
+  "where_read": "Local copy of the report: /mnt/attach/outputs/data/raw/edm/beb/beb_year6.pdf (text y6.txt); same file as J.B. upload 86309150-BuildingEnergyBenchmarking-AnnualReport-Year6.pdf. Dashboard not opened.",
+  "claims": [
+   {
+    "claim": "Year 6 report, published June 2023, 2021 data",
+    "verdict": "CONFIRMED",
+    "evidence": "'Publication Date: June 2023'; 'benchmarked on their annual (January 1 to December 31) energy use for the year 2021' (p.6)",
+    "fix": ""
+   },
+   {
+    "claim": "BOMA Edmonton is 'a founding partner'",
+    "verdict": "CONFIRMED",
+    "evidence": "'BOMA Edmonton is a founding partner of this program' (BOMA message, p.4)",
+    "fix": ""
+   },
+   {
+    "claim": "programme 'voluntary' ?",
+    "verdict": "NOT FOUND",
+    "evidence": "Only use of 'voluntary' is about BOMA BEST: 'a unique, voluntary program designed by industry for industry' (p.4). Report never calls the City's benchmarking programme voluntary or mandatory.",
+    "fix": "Drop 'voluntary' or source it elsewhere (e.g. City programme page); do not attribute it to this report."
+   },
+   {
+    "claim": "468 properties, 1,014 buildings, 7,869,390 m2, 25 categories",
+    "verdict": "CONFIRMED",
+    "evidence": "'Year 6 included 468 properties (representing 1014 individual buildings) and 25 unique comparison categories'; 'combined gross floor area of 7,869,390 square metres' (p.8)",
+    "fix": ""
+   },
+   {
+    "claim": "largest: multifamily 139 properties, 1,865,615 m2",
+    "verdict": "CONFIRMED",
+    "evidence": "'The largest category was Multifamily Residential buildings (139 properties), representing 1,865,615 square metres' (p.8); table: Multifamily Housing 139 / 643 buildings",
+    "fix": "Note: largest by property count; by floor area 'Other - Recreation' (7 properties, 2,704,600 m2) is larger."
+   },
+   {
+    "claim": "office 54, 1,049,068 m2",
+    "verdict": "CONFIRMED",
+    "evidence": "'The Office category was the second largest category with 54 properties, representing 1,049,068 square metres'",
+    "fix": ""
+   },
+   {
+    "claim": "no data-centre category",
+    "verdict": "CONFIRMED",
+    "evidence": "Category table (p.9) lists 31 rows; none is data centre ('Distribution Center' is warehousing).",
+    "fix": ""
+   },
+   {
+    "claim": "average weather-normalized source EUI 1.3 GJ/m2",
+    "verdict": "CONFIRMED",
+    "evidence": "'The average weather normalized source EUI of all Year 6 properties was 1.3 GJ/m2' (p.10)",
+    "fix": ""
+   },
+   {
+    "claim": "average GHG intensity 125 kg CO2e/m2",
+    "verdict": "CONFIRMED",
+    "evidence": "'average greenhouse gas (GHG) emissions intensity of the Year 6 properties was 125 kg of CO2e per m2' (p.10)",
+    "fix": ""
+   },
+   {
+    "claim": "buildings in all six years cut EUI 20.2% on average",
+    "verdict": "CONFIRMED",
+    "evidence": "'for all six years, the average Year 1 to Year 6 change in EUI is -20.2%' (p.11); report adds reductions 'cannot be directly attributable to benchmarking'",
+    "fix": ""
+   },
+   {
+    "claim": "building-level data on online dashboard edmonton.ca/energybenchmarkingdashboard",
+    "verdict": "CONFIRMED",
+    "evidence": "'visit: edmonton.ca/energybenchmarkingdashboard'; dashboard lets users 'find category and building-specific detail' (p.12). Dashboard itself not read.",
+    "fix": ""
+   },
+   {
+    "claim": "Vancouver equivalent is required reporting (not in this source)",
+    "verdict": "NOT FOUND",
+    "evidence": "Correctly flagged as not in this source; belongs to vanEnergyReport.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Used by it_load_actual, but the report has no data-centre category, so it can only show absence of Edmonton data-centre benchmark data (context), not an IT-load figure.",
+   "'voluntary' attributed to the programme is not in the report (refers to BOMA BEST)."
+  ],
+  "overall": "needs fix"
+ },
+ "bcucC113": {
+  "where_read": "Saved full PDF /mnt/user-data/beyond-data-sources/public/bcucC113/full.pdf (pdftotext). Order C-1-13 (4 Feb 2013) + Appendix A Reasons, 48 pp.",
+  "claims": [
+   {
+    "claim": "BCUC Order C-1-13 with Reasons, Feb 2013, FortisBC Alternative Energy Services, TELUS Garden TES",
+    "verdict": "CONFIRMED",
+    "evidence": "'ORDER NUMBER C-1-13'; 'this 4th day of February 2013'; 'FortisBC TELUS Gardens TES'",
+    "fix": ""
+   },
+   {
+    "claim": "'A year round base load of 1,400 kW of heat is available on a 24/7 basis' from the TELUS data centre",
+    "verdict": "CONFIRMED",
+    "evidence": "'A year round base load of 1,400 kW of heat is available on a 24/7 basis in the form of warm water from the TELUS data centre' (Reasons p.15)",
+    "fix": ""
+   },
+   {
+    "claim": "development load 5,194 MWh heating / 4,591 MWh cooling",
+    "verdict": "CONFIRMED",
+    "evidence": "'4,591 MWh for cooling and 5,194 MWh for heating' (p.16); peaks 5.8 MW heat / 5.5 MW cool",
+    "fix": ""
+   },
+   {
+    "claim": "94 % of heating from recovery, steam peaking",
+    "verdict": "CONFIRMED",
+    "evidence": "'designed to meet 94 percent of the annual heating demand ... through the use of waste heat from the TELUS Data Centre and the new towers. CHDL will provide steam' (p.16)",
+    "fix": "Say 94 % from data-centre AND new-tower waste heat (design forecast), not data centre alone."
+   },
+   {
+    "claim": "TES capital $7.9 M + $0.35 M development = $8.3 M",
+    "verdict": "CONFIRMED",
+    "evidence": "'estimated at $7.9 million plus $350 thousand of FAES development costs or $8.3 million' (p.18); plus $2.2 M sustaining capital over 20 yr",
+    "fix": ""
+   },
+   {
+    "claim": "waste-heat option $3.2 M vs geo-exchange $6.8 M",
+    "verdict": "CONFIRMED",
+    "evidence": "'geo-exchange ... $6.8 million compared to $3.2 million according to the screening study' (p.17)",
+    "fix": ""
+   },
+   {
+    "claim": "'free waste heat supply from the TELUS Data Centre'",
+    "verdict": "CONFIRMED",
+    "evidence": "'longevity of the free waste heat supply from the TELUS Data Centre on the cost of service and rates' (p.14)",
+    "fix": ""
+   },
+   {
+    "claim": "proposed rate BC Hydro residential + 5–10 %",
+    "verdict": "CONFIRMED",
+    "evidence": "'BC Hydro residential electricity rates at 50 percent Tier 1 and 50 percent Tier 2 plus a 5 to 10 percent premium' (p.32)",
+    "fix": ""
+   },
+   {
+    "claim": "(G-155-12: $0.105–0.126/kWh 2014–18)",
+    "verdict": "CORRECTED",
+    "evidence": "G-155-12 here only 'established a Written Hearing process'; no $0.105 figure in the order. Only '$.126/KWh' appears, as FAES's levelized cost of service (p.21).",
+    "fix": "Remove the G-155-12 rate attribution; if needed cite '$0.126/kWh levelized cost of service (FAES forecast)'. Source the $0.105 elsewhere or mark unverified."
+   },
+   {
+    "claim": "denied by the Panel (Order para. 2)",
+    "verdict": "CONFIRMED",
+    "evidence": "Order para. 2: 'the rates and rate design established by the Service Agreements ... are denied.'",
+    "fix": ""
+   },
+   {
+    "claim": "annual actual-load report rescinded by G-2-15",
+    "verdict": "NOT FOUND",
+    "evidence": "C-1-13 directs the report ('file an annual report for actual energy load', p.16); the later rescission by G-2-15 is not in this document (separate order, not read).",
+    "fix": "Cite G-2-15 as its own source or mark '?'."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "heat_delivered: 94 % is a design forecast covering DC plus tower waste heat, not measured DC heat taken.",
+   "price_ceiling: '$105–126/MWh customer rate' is not in this order; the proposed rate was denied and $0.126/kWh is a levelized cost-of-service forecast, not a customer rate."
+  ],
+  "overall": "needs fix"
+ },
+ "alta117_2026": {
+  "where_read": "Saved catalogue page /mnt/user-data/beyond-data-sources/public/alta117_2026/page.html (open.alberta.ca, 'Updated June 9, 2026'); regulation text read from King's Printer extract text /mnt/attach/outputs/data/raw/ab/alta_reg_117_2026.txt (the PDF /mnt/attach/outputs/data/Alta_Reg_117_2026_Data_Centre_Regulation.pdf has garbled font encoding under pdftotext).",
+  "claims": [
+   {
+    "claim": "Alta Reg 117/2026 under Electric Utilities Act, King's Printer extract current as of 9 Jun 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'ELECTRIC UTILITIES ACT ... DATA CENTRE REGULATION ... Alberta Regulation 117/2026 ... Current as of June 9, 2026 ... Extract'",
+    "fix": ""
+   },
+   {
+    "claim": "saved file for this id is the catalogue page",
+    "verdict": "CONFIRMED",
+    "evidence": "page.html is open.alberta.ca 'Data Centre Regulation - Open Government' summary page",
+    "fix": ""
+   },
+   {
+    "claim": "s.1 data centre includes hosting/cloud, digital asset mining, AI/ML, content delivery",
+    "verdict": "CONFIRMED",
+    "evidence": "1(1) 'data hosting and cloud computing, digital asset mining, artificial intelligence and machine learning and digital services and content delivery'",
+    "fix": ""
+   },
+   {
+    "claim": "s.2 large data centre = max demand directly from transmission system >= 75 MW or lower AESO threshold for reliability",
+    "verdict": "CONFIRMED",
+    "evidence": "2(1) 'maximum demand directly from the transmission system equal to or greater than (a) 75 megawatts, or (b) a lower maximum demand threshold'",
+    "fix": ""
+   },
+   {
+    "claim": "s.3 AESO may aggregate integrated DCs on same/adjacent parcels with same owner or affiliate",
+    "verdict": "CONFIRMED",
+    "evidence": "s.3 'physically or operationally integrated ... same parcel or adjacent parcels' and 'the same person or an affiliate'",
+    "fix": "Strictly the test is the same person/affiliate receiving or requesting system access service, not 'owner'."
+   },
+   {
+    "claim": "s.5 tethered to new or added generation/storage able to supply at least its maximum demand, reliably and predictably",
+    "verdict": "CONFIRMED",
+    "evidence": "5(4)(c) 'equal to or greater than the maximum demand of the large data centre'; 5(4)(d) 'reliably and predictably under normal operating conditions'",
+    "fix": "Add: designation is discretionary ('may designate'); existing units qualify if capacity increased or declared underutilized (s.4, 5(4)(a))."
+   },
+   {
+    "claim": "Regulation does not limit the fuel; AESO's first intake does",
+    "verdict": "CONFIRMED",
+    "evidence": "No fuel or technology restriction anywhere in ss.1-12. The AESO intake half is not in this source (not checked here) ?",
+    "fix": "Cite the AESO intake document for the second half."
+   },
+   {
+    "claim": "s.6 tethered requests processed first",
+    "verdict": "CONFIRMED",
+    "evidence": "6 'must prioritize the processing of a system access service request for a tethered data centre over ... a large data centre that is not a tethered data centre'",
+    "fix": ""
+   },
+   {
+    "claim": "s.7 AESO may require site control, municipal zoning approvals, financing, permits or water licences",
+    "verdict": "CONFIRMED",
+    "evidence": "7(1) '(a) site control ... (b) municipal zoning approvals, (c) financing, and (d) the issuance of permits or water licences'",
+    "fix": ""
+   },
+   {
+    "claim": "s.8 no service above the tethered supply",
+    "verdict": "CONFIRMED",
+    "evidence": "8(2) 'must not provide system access service ... at a rate that exceeds the combined rate' of tethered units",
+    "fix": ""
+   },
+   {
+    "claim": "s.9 bridged service only once plant approved by AUC, max 3 years, AESO may cap each and all, suspend for unmet criteria",
+    "verdict": "CONFIRMED",
+    "evidence": "9(2)(a) 'approved by the Commission under section 11 or 13.01 of the Hydro and Electric Energy Act'; 9(5) 'maximum of 3 years'; 9(4)(b), 9(7) limits; 9(8)(a) suspend",
+    "fix": "'Commission' = AUC by the Act's definition (not restated in this extract) ?"
+   },
+   {
+    "claim": "s.10 bridged reduced before all others on inadequate supply; large DCs before others in mandatory load shed",
+    "verdict": "CONFIRMED",
+    "evidence": "10(a) 'reduction in demand for bridged data centres before ... all other electricity market participants'; 10(b) 'large data centres before a reduction in demand for other'",
+    "fix": ""
+   },
+   {
+    "claim": "s.12 review by 31 May 2030, expires 31 May 2035",
+    "verdict": "CONFIRMED",
+    "evidence": "12 'must be reviewed on or before May 31, 2030, and (b) expires on May 31, 2035'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "chp_heat 'tethered >= 75 MW' as a rule: tethering is optional (a priority route), not required; the 75 MW threshold can be lowered by AESO. The Regulation says nothing about heat or CHP.",
+   "flexible_load: s.10 load reduction applies to bridged and large (>=75 MW) DCs only; do not apply to smaller distribution-connected sites."
+  ],
+  "overall": "ok"
+ },
+ "abp317802": {
+  "where_read": "WebFetch of https://www.pleanala.ie/anbordpleanala/media/abp/cases/reports/317/r317802.pdf (first 100,000 of 128,292 characters; model summary with quotes).",
+  "claims": [
+   {
+    "claim": "An Bord Pleanála Inspector's Report ABP-317802-23, EdgeConneX DUB06, Lucan",
+    "verdict": "CONFIRMED",
+    "evidence": "'Applicant(s) EdgeConneX Ireland Limited'; 'townland of Ballymakaily, West of Newcastle Road (R120), Lucan, Co. Dublin'; 'data centre halls are known as DUB 06'",
+    "fix": "Case reference format 'ABP-317802-23' not seen verbatim in the fetched summary ?"
+   },
+   {
+    "claim": "GFA 15,274 m2",
+    "verdict": "CONFIRMED",
+    "evidence": "s.2.0 'overall gross floor area (GFA) of 15,274sq.m.'",
+    "fix": ""
+   },
+   {
+    "claim": "halls 12,859 m2 (84 %)",
+    "verdict": "CONFIRMED",
+    "evidence": "s.2.0 'DUB 06 and will have a GFA of 12,859sq.m.'; 12,859/15,274 = 84.2 % (calculated)",
+    "fix": "Mark 84 % as calculated."
+   },
+   {
+    "claim": "'circa 40 people, over a 24hr period'",
+    "verdict": "CONFIRMED",
+    "evidence": "s.2.0 'predicted maximum number of daily staff being in the region of circa 40 people' (24 h framing per summary ?)",
+    "fix": "Quote as 'maximum number of daily staff ... circa 40 people'."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "offerable_area: one Irish hyperscale-style application (planning figures, applicant's design); the 84 % hall share is one case, not a rule. Label it as an applicant's proposal."
+  ],
+  "overall": "ok"
+ },
+ "vanNEUguide": {
+  "where_read": "WebFetch (two passes) of https://guidelines.vancouver.ca/guidelines-neighbourhood-energy-utility-connectivity-requirements.pdf — 'Neighbourhood Energy Utility Connectivity Guidelines & Requirements', Engineering Services, March 2020 (model summary with quotes).",
+  "claims": [
+   {
+    "claim": "building-side supply 60 °C",
+    "verdict": "CORRECTED",
+    "evidence": "Table 1: building space heating max supply 70 °C (winter), 50 °C (summer); DHW 60 °C. 60 °C/45 °C appears only for 'Radiators HWS: 60°C HWR: 45°C' (6.2.3).",
+    "fix": "Space heating: max supply 70 °C winter / 50 °C summer; DHW 60 °C."
+   },
+   {
+    "claim": "return <=45 °C",
+    "verdict": "CORRECTED",
+    "evidence": "Table 1 max return 50 °C (winter), 30 °C (summer) for space heating",
+    "fix": "Max return 50 °C winter / 30 °C summer."
+   },
+   {
+    "claim": "ΔT >=15 °C",
+    "verdict": "CORRECTED",
+    "evidence": "Table 1 'Min. Temperature Differential' 20 °C; 6.2.3 'shall be regarded as a minimum requirement'",
+    "fix": "Minimum ΔT 20 °C."
+   },
+   {
+    "claim": "ETS room >=6 x 3 m under 13,940 m2, 6 x 4 m to 23,230 m2",
+    "verdict": "CONFIRMED",
+    "evidence": "6.1 Table 2: <150,000 ft2 (13,940 m2) 20 x 10 ft (6 x 3 m); 150,000–250,000 ft2 20 x 13 ft (6 x 4 m); larger: by NEU Engineer",
+    "fix": "Areas are building net floor area."
+   },
+   {
+    "claim": "2.7 m headroom",
+    "verdict": "CONFIRMED",
+    "evidence": "6.1 'minimum 2.7 m (10 ft.)'",
+    "fix": ""
+   },
+   {
+    "claim": "ETS owned by the NEU",
+    "verdict": "CONFIRMED",
+    "evidence": "3.3 'Each customer building will house an ETS that is owned by the NEU.'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Guideline (rule (guideline)) for buildings connecting to the City-owned NEU (SEFC); temperatures are maxima for customer buildings, not data-centre supply temperatures.",
+   "Dated March 2020; check for a newer edition before using as current."
+  ],
+  "overall": "needs fix"
+ },
+ "bcaGuideRes": {
+  "where_read": "WebFetch of https://www.bcassessment.ca/Files/Misc/UserGuide/Residential_Inventory_Extract_External_User_Guide0.1.pdf (found by WebSearch; fetch tool returns a model summary with quotes, not the raw PDF). Direct download was blocked by the proxy, so not retried.",
+  "claims": [
+   {
+    "claim": "External BCA User Guide for BCA Residential Inventory Extract v1.1 (8 Jul 2021)",
+    "verdict": "CONFIRMED",
+    "evidence": "Cover: 'External BCA User Guide for BCA Residential Inventory Extract', 'Version 1.1', 'July 8, 2021'",
+    "fix": ""
+   },
+   {
+    "claim": "field 9 total finished area (single-family)",
+    "verdict": "CONFIRMED",
+    "evidence": "Field 9 'MB Total Finished Area (Single family dwellings only)' — 'Total of all above-grade and finished basement living areas'",
+    "fix": "Note it is main-building (MB) area and includes finished basement."
+   },
+   {
+    "claim": "fields 34–36 occupancy code and unit of measure (STRLA strata lot area, STRPS parking)",
+    "verdict": "CONFIRMED",
+    "evidence": "34 'Inc Occupancy Code' (strata only; 2400–2404); 35 'Inc Unit of Measure Value'; 36 'Inc Unit of Measure Code': 'STRLA is Strata Lot Area', 'STRPS is Parking Space'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "receiver_demand: field 9 covers single-family only and strata areas come only via unit-of-measure codes; rental apartment (non-strata) floor area is not in this extract — needs the non-residential guide or another source."
+  ],
+  "overall": "ok"
+ },
+ "lukeRAS": {
+  "where_read": "WebFetch of the KAMK-hosted PDF https://kamk.fi/wp-content/uploads/2025/11/ESITYS_Hukkalampo-kalankasvatuksessa-KAMK-Webinar-Pasi-Laajala-Luke-29.10.2025.pdf (model summary with Finnish quotes; slide numbers not shown in extracted text).",
+  "claims": [
+   {
+    "claim": "Luke/KAMK webinar 29 Oct 2025 (Härkönen, Vielma, Laajala)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Laura Härkönen, Jouni Vielma, Pasi Laajala, Luonnonvarakeskus'; 'Webinaari 29.10.2025'",
+    "fix": ""
+   },
+   {
+    "claim": "4.6 GWh/yr lake-water heating, when below 15.5 °C (about 9 months)",
+    "verdict": "CONFIRMED",
+    "evidence": "'4,6 GWh/vuosi Oulujärven veden lämmittämiseen (kun järviveden lämpötila on alle 15,5 °C, noin 9 kuukauden ajan)'",
+    "fix": ""
+   },
+   {
+    "claim": "for 1,000 t/yr rainbow trout (Oulujärvi case; t/yr from kg ?)",
+    "verdict": "CONFIRMED",
+    "evidence": "'1 000 000 kg kirjolohta kiertovesijärjestelmässä vuodessa' ... 'käyttäen Oulujärven vettä' = 1,000 t/yr",
+    "fix": "Remove '?': slide gives 1,000,000 kg/yr. Note it is an estimate ('Arvioita' = estimates) for a RAS, not a running farm."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "aquaculture_tonnes '4.6 kWh/kg trout' is a derived ratio (4.6 GWh / 1,000,000 kg) from one Finnish estimate heating Oulujärvi lake intake water; it depends on intake water temperature and climate, so label it calculated and site-specific.",
+   "Webinar slides by a public research institute (Luke) — not peer-reviewed."
+  ],
+  "overall": "ok"
+ },
+ "wilsonWorrall": {
+  "where_read": "WebFetch of RSC landing page https://pubs.rsc.org/en/Content/ArticleLanding/2021/EW/D1EW00411E and open-access HTML full text https://pubs.rsc.org/en/content/articlehtml/2021/ew/d1ew00411e (two passes; model summaries with quotes).",
+  "claims": [
+   {
+    "claim": "Wilson & Worrall 2021, Environ. Sci.: Water Res. Technol. 7:1760",
+    "verdict": "CONFIRMED",
+    "evidence": "'M. P. Wilson and F. Worrall ... Environ. Sci.: Water Res. Technol., 2021, 7(10), 1760–1777. DOI: 10.1039/D1EW00411E'",
+    "fix": "Add title 'The heat recovery potential of \"wastewater\": a national analysis of sewage effluent discharge temperatures' and pages 1760–1777."
+   },
+   {
+    "claim": "(sewage_heat method) Q x 4.18 x ΔT",
+    "verdict": "CONFIRMED",
+    "evidence": "s.2.6 eqn (1): 'HP is heat potential (W), Q is the effluent flow rate ... c is the specific heat capacity ... ρ is the effluent density ... ΔT'; 'assumed to be 4.18 kJ kg−1 °C−1'",
+    "fix": "Formula also includes density ρ."
+   },
+   {
+    "claim": "(sewage_heat method) not below 6 °C",
+    "verdict": "NOT FOUND",
+    "evidence": "No 6 °C limit; only 'a maximum cooling limit of 0.5 °C has been suggested' (Introduction) for pre-treatment sewage",
+    "fix": "Source the 6 °C floor elsewhere or remove the attribution to this paper."
+   },
+   {
+    "claim": "(sewage_heat method) inflow >= 11 °C",
+    "verdict": "NOT FOUND",
+    "evidence": "No 11 °C threshold; s.3.2.1 crude sewage 'lowest in January (10.8 ± 0.2 °C)'; viability condition: 'If FSE is not warmer than local river or air temperatures then there is no benefit.'",
+    "fix": "Source the 11 °C threshold elsewhere or remove."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "sewage_heat cites this paper for 6 °C and 11 °C thresholds that are not in it.",
+   "Study is of final sewage effluent (FSE) at UK treatment works, not in-sewer recovery upstream of a plant; the paper flags a 0.5 °C cooling limit upstream of treatment."
+  ],
+  "overall": "needs fix"
+ },
+ "buffa2019": {
+  "where_read": "WebFetch of a full-text PDF of the article hosted by NYSERDA (https://www.nyserda.ny.gov/-/media/Project/Nyserda/Files/Programs/Community-Heat-Pump-Systems/5th-generation-district-heating-and-cooling-systems.pdf), confirmed as Buffa et al. RSER 104:504–522; FGZ factsheet read via WebFetch of https://www.zhaw.ch/.../decatherm/factsheet-fGZ.pdf (ZHAW). Both as model summaries with quotes.",
+  "claims": [
+   {
+    "claim": "Buffa et al. 2019, 5th generation district heating and cooling systems: a review of existing cases in Europe, RSER 104:504–522",
+    "verdict": "CONFIRMED",
+    "evidence": "Fetched PDF is the article, Renewable and Sustainable Energy Reviews 104 (2019) 504–522",
+    "fix": ""
+   },
+   {
+    "claim": "FGZ Friesenberg, Zürich (2014)",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 2 (p.518) ID 23 FGZ, start 2014; paper names it 'Familienheim-Genossenschaft' district in Zürich — the word 'Friesenberg' does not appear in the paper",
+    "fix": "Attribute 'Friesenberg' to the factsheet, not the paper."
+   },
+   {
+    "claim": "\"an HE is installed for direct heat recovery from a data center\" (p.515)",
+    "verdict": "CORRECTED",
+    "evidence": "Quote found on p.516 (s.4.2): 'Here an HE is installed for direct heat recovery from a data center.'",
+    "fix": "Page 516 (not 515) ? — page from fetched summary."
+   },
+   {
+    "claim": "network supply 8–28 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 2 (p.518) 8–28 °C; text s.4.2 says 'between 8 and 25 °C'",
+    "fix": "Note the paper's own inconsistency (8–25 °C in text)."
+   },
+   {
+    "claim": "in summer the warm pipe reaches about 30 °C after the data centre, limiting free cooling downstream",
+    "verdict": "CONFIRMED",
+    "evidence": "p.516 'the warm pipe in summer reaches about 30 °C after the heat rejection point of the data center' — prevents downstream free cooling",
+    "fix": ""
+   },
+   {
+    "claim": "borehole count inconsistent in the paper (332 vs 153)",
+    "verdict": "CONFIRMED",
+    "evidence": "p.512 s.3.2.5 and Table 2: 332 boreholes; p.516 s.4.2 '153 boreholes of 250m deep'",
+    "fix": ""
+   },
+   {
+    "claim": "FGZ factsheet (Swiss Federal Office of Energy support): DC waste heat 9 MW, 27 GWh/a, 450 boreholes as seasonal storage (18 GWh)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Factsheet erstellt mit Unterstützung des BFE'; 'Abwärme Rechenzentren' 9 MW, 27 GWh/a; '450 Erdsonden'; 'Erdsonden als saisonaler Speicher' 18 GWh",
+    "fix": "Name the publisher: ZHAW (decatherm project) factsheet, with BFE support."
+   },
+   {
+    "claim": "not stated as measured",
+    "verdict": "CONFIRMED",
+    "evidence": "Factsheet gives values without design/measured label; only date 'im Jahr 2024' is beside the CO2 figure",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Used by sewage_heat, but neither the paper's FGZ case nor the factsheet concerns sewage heat; it is a data-centre/BTES anergy network precedent. Re-map the role (e.g. to network temperatures or BTES)."
+  ],
+  "overall": "needs fix"
+ },
+ "danczak2018": {
+  "where_read": "WebFetch of the BazTech PDF https://yadda.icm.edu.pl/baztech/element/bwmeta1.element.baztech-9f3156b7-678b-4a46-a1c5-cbfeb9347b12/c/363-376_ppmp_2018_2.pdf (model summary with quotes and Table 6 values).",
+  "claims": [
+   {
+    "claim": "Authors Dańczak, Chojnacka, Matuska, Marcola, Leśniewicz, Wełna, Żak, Adamski, Rycerz 2018; title; PPMP 54(2):363–376",
+    "verdict": "CONFIRMED",
+    "evidence": "'The recycling-oriented material characterization of hard disk drives with special emphasis on NdFeB magnets'; PPMP 54(2) 363–376, 2018; DOI 10.5277/ppmp1843",
+    "fix": "Add DOI 10.5277/ppmp1843."
+   },
+   {
+    "claim": "peer-reviewed",
+    "verdict": "CONFIRMED",
+    "evidence": "First page: 'reviewed; accepted September 14, 2017' ?",
+    "fix": ""
+   },
+   {
+    "claim": "magnets 6–19 g per desktop HDD, 2–6 g per notebook HDD (p.369)",
+    "verdict": "CONFIRMED",
+    "evidence": "p.369 s.3.1: desktop 'fluctuates from 6 to 19 g'; 'in one Notebook HDD from 2 to 6 g'",
+    "fix": ""
+   },
+   {
+    "claim": "Nd 25–29 %, Pr 2–13 %, Dy 0.1–1.4 % of the magnet (Table 6, p.372)",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 6 (wt %), 4 samples: Nd 24.9–28.7, Pr 2.05–12.8, Dy 0.080–1.42",
+    "fix": "Rounded; note n = 4 magnets."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "rare_earth: Polish sample of consumer desktop/notebook HDDs (4 magnets analysed); enterprise data-centre HDDs may differ — label as proxy."
+  ],
+  "overall": "ok"
+ },
+ "ddeBizCase2025": {
+  "where_read": "Local PDF /mnt/attach/outputs/data/Edmonton_DDE_Business_Case_2025.pdf (same as J.B. upload 37c321c2-Attachment_3_-_IIS02765_-_Business_Case_-_Phase_1A_and_2_Development.pdf), pdftotext; title pages.",
+  "claims": [
+   {
+    "claim": "City of Edmonton, DDEI Business Case — Phase 1A and 2 Development",
+    "verdict": "CONFIRMED",
+    "evidence": "'Downtown District Energy Initiative  Business Case - Phase 1A and 2 ... Integrated Infrastructure Services | Renewable Energy Systems  City of Edmonton'",
+    "fix": "Printed title is 'Business Case - Phase 1A and 2' (the word 'Development' is only in the upload file name)."
+   },
+   {
+    "claim": "Attachment 3 to IIS02765",
+    "verdict": "CONFIRMED",
+    "evidence": "'Attachment 3' header; 'June 23, 2025 - Utility Committee | IIS02765'",
+    "fix": ""
+   },
+   {
+    "claim": "Utility Committee 23 Jun 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'June 23, 2025 - Utility Committee | IIS02765'; 'Date published: June 12, 2025'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "price_ceiling: no role text given in the input, so the figure the tool takes from this business case could not be checked here ?. It is a City utility proposal to committee; label any rate in it as proposed or forecast, not approved."
+  ],
+  "overall": "ok"
+ },
+ "lygnerud": {
+  "where_read": "Private saved text /mnt/user-data/beyond-data-sources/private/lygnerud/fulltext.txt (extracted from J.B.'s PDF of the article). Coefficients used by risk_term taken from /mnt/attach/outputs/register/formula_register.json and checked against Table 2 (p.434) and abstract.",
+  "claims": [
+   {
+    "claim": "Lygnerud & Werner 2018, Energy 151:430–441",
+    "verdict": "CONFIRMED",
+    "evidence": "'Energy 151 (2018) 430e441'; 'Kristina Lygnerud, Sven Werner, Halmstad University'",
+    "fix": ""
+   },
+   {
+    "claim": "Risk assessment of industrial excess heat recovery in district heating systems",
+    "verdict": "CONFIRMED",
+    "evidence": "Title as printed: 'Risk assessment of industrial excess heat recovery in district heating systems'",
+    "fix": ""
+   },
+   {
+    "claim": "full text (J.B. upload)",
+    "verdict": "CONFIRMED",
+    "evidence": "info.json: 'text extracted from J.B.'s copy'; licence 'copyrighted: keep this repo private'",
+    "fix": ""
+   },
+   {
+    "claim": "(risk_term coef) ≈6 % lost to terminated industry + substitution, 107 Swedish recoveries 1974–2014",
+    "verdict": "CONFIRMED",
+    "evidence": "Abstract: 'study of 107 excess heat recoveries in Sweden ... These two explanations correspond to approximately 6% of all annual average heat recoveries'",
+    "fix": ""
+   },
+   {
+    "claim": "(risk_term coef) all causes 13 % by volume (2.6 of 19.9 PJ), 33 of 107 by count",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 2: annual average heat delivery 19.9 PJ, terminated 2.6; terminated before 2014: 33 of 107; text '13% of the total heat delivery volumes were lost'",
+    "fix": ""
+   },
+   {
+    "claim": "(risk_term coef) heat-pump 14 of 19; small (<55 TJ/yr) 19 of 45; large (>300 TJ/yr) 0 of 16",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 2 columns: with heat pumps 19 / terminated 14; large 16 / 0; small 45 / 19; thresholds 'above 300 TJ/year', 'below 55 TJ/year'",
+    "fix": ""
+   },
+   {
+    "claim": "(risk_term coef) authors: premium lower than feasibility studies presume",
+    "verdict": "CONFIRMED",
+    "evidence": "'The risk premium ... should be considered to be lower than often presumed in feasibility studies.'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Swedish industrial excess heat 1974–2014; no data centres in the sample. Using termination shares as a data-centre risk coefficient is an analogy and should be labelled so.",
+   "Shares are cumulative over 40 years, not an annual rate; formula unit is '%/yr' — convert or relabel."
+  ],
+  "overall": "needs fix"
+ },
+ "statcanLives": {
+  "where_read": "Saved page /mnt/user-data/beyond-data-sources/public/statcanLives/page.html (Table C.1-1, archived, modified 2015-11-27; header cells parsed from HTML); Table 10 read via WebFetch of https://www150.statcan.gc.ca/n1/pub/15-206-x/2015039/t/tbl10-eng.htm.",
+  "claims": [
+   {
+    "claim": "15-206-X2015039 Table C.1-1, surveyed lives 1985–2010",
+    "verdict": "CONFIRMED",
+    "evidence": "Table C.1-1 'List of depreciation rates under the new asset code classification — Building construction'; column 'Surveyed lives (1985 to 2010)', unit 'years'",
+    "fix": ""
+   },
+   {
+    "claim": "office buildings 27.0 yr",
+    "verdict": "CONFIRMED",
+    "evidence": "'Office buildings (1013) 0.067 0.060 27.0'",
+    "fix": ""
+   },
+   {
+    "claim": "warehouses 25.4",
+    "verdict": "CONFIRMED",
+    "evidence": "'Warehouses, refrigerated storage, freight terminals (1006) 0.064 0.068 25.4'",
+    "fix": "Use full category name."
+   },
+   {
+    "claim": "other commercial construction 20.7",
+    "verdict": "CONFIRMED",
+    "evidence": "'Other commercial construction (1098) 0.101 0.085 20.7'",
+    "fix": ""
+   },
+   {
+    "claim": "computers 4.9 yr, Table 10, ex post and survey expected life, 1985–2010",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 10 'Ex post versus ex ante depreciation rates for machinery and equipment, 1985 to 2010': Computers ... (6002) expected life ex post 4.9, ex ante survey 4.9",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "horizons: no data-centre building class exists; office/warehouse lives are proxies and should be labelled so. Pages are archived (2015)."
+  ],
+  "overall": "ok"
+ },
+ "woodcroftDDR": {
+  "where_read": "Saved PDF /mnt/user-data/beyond-data-sources/public/woodcroftDDR/full.pdf (from AESO project 2582 URL), pdftotext; title page, revision table, executive summary.",
+  "claims": [
+   {
+    "claim": "EPCOR (EDTI) Distribution Deficiency Report, Woodcroft POD",
+    "verdict": "CONFIRMED",
+    "evidence": "'EPCOR DISTRIBUTION & TRANSMISSION INC. Distribution Deficiency Report (DDR) for Woodcroft Transformer Capacity Increase'",
+    "fix": "Use full title '... for Woodcroft Transformer Capacity Increase'."
+   },
+   {
+    "claim": "Rev 1, 12 Sep 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'Rev 1  September 12, 2025  Sana Adil  AESO Connection Process, Stage 3 Revision' (Rev 0 May 15, 2022)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "grid_headroom: figures are EDTI forecasts (e.g. N-1 exceeded 2032; 76.3 MVA in 2032; 89.3 MVA by 2049, 13.3 MVA over firm capacity) in a utility filing; label as forecasts, not measured headroom."
+  ],
+  "overall": "ok"
+ },
+ "abGuide": {
+  "where_read": "Saved PDF /mnt/user-data/beyond-data-sources/public/abGuide/full.pdf (byte-identical to /mnt/attach/outputs/data/AB_Guide_to_Groundwater_Authorization_2023.pdf), pdftotext.",
+  "claims": [
+   {
+    "claim": "Alberta Environment and Protected Areas, Guide to Groundwater Authorization (2023)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Guide to Groundwater Authorization | Environment and Protected Areas  © 2023 Government of Alberta | February 3, 2023'",
+    "fix": ""
+   },
+   {
+    "claim": "§2.2",
+    "verdict": "CONFIRMED",
+    "evidence": "'2.2 The report' — APEGA member must prepare report; diversions < 3650 m3/yr (10 m3/day) may not need a detailed report",
+    "fix": ""
+   },
+   {
+    "claim": "§6.2",
+    "verdict": "CONFIRMED",
+    "evidence": "'6.2 Groundwater diversion for geothermal purposes': open loop, no loss, same water body = 'activity' -> 'an approval is required'; different water bodies or losses -> 'a licence under the Water Act is required'",
+    "fix": ""
+   },
+   {
+    "claim": "Appendix 2",
+    "verdict": "CONFIRMED",
+    "evidence": "'APPENDIX 2: Minimum recommended length of aquifer test and information required for the maximum water diversion/drainage' (tiers up to 10, 10–35, 35–65, 65–265, >265 m3/day; 2+2 h to 72+72 h)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "licence_flag 'aquifer test tiers' as a rule: Appendix 2 is titled 'Minimum recommended' and notes longer tests may be required; treat durations as guidance minimums. The approval-vs-licence split (s.1.1, 6.2) reflects the Water Act and is fine as a rule.",
+   "Vertical closed-loop boreholes are covered by a separate note (driller/Wells Directive), not by the open-loop approval/licence test."
+  ],
+  "overall": "ok"
+ },
+ "abNewLicenceLast": {
+  "where_read": "Saved page /mnt/user-data/beyond-data-sources/public/abNewLicenceLast/page.html (alberta.ca/datacentres/water, 'Water | AI Data Centres in Alberta', saved 25 Oct 2026), tags stripped and read in full.",
+  "claims": [
+   {
+    "claim": "Government of Alberta, data centres and water page",
+    "verdict": "CONFIRMED",
+    "evidence": "Page title 'Water | AI Data Centres in Alberta' on alberta.ca; 'How do data centres use water?'",
+    "fix": "Name it 'Government of Alberta, AI Data Centres in Alberta: How do data centres use water? (alberta.ca, accessed 25 Oct 2026)'."
+   },
+   {
+    "claim": "'A brand-new data centre licence stands last'",
+    "verdict": "CONFIRMED",
+    "evidence": "'The oldest licences stand first in line. A brand-new data centre licence stands last.' (Section 1)",
+    "fix": ""
+   },
+   {
+    "claim": "(first in time, first in right)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Alberta allocates water by seniority, under a system called First In Time, First In Right.'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "water_supply 'rule': this is a government promotional/explainer page; the binding rule is the Water Act priority system. Cite the Water Act for the rule and this page as plain-language support.",
+   "The priority applies only to a site's own Water Act licence; a data centre on municipal supply (EPCOR) has no licence of its own, so 'stands last' does not apply directly.",
+   "Same page carries operator/vendor claims (NVIDIA 2.6M gal/MW/yr, Meta 'less water than a golf course'); do not reuse those without labelling them claims."
+  ],
+  "overall": "ok"
+ },
+ "voaComputerCentres": {
+  "where_read": "Saved page /mnt/user-data/beyond-data-sources/public/voaComputerCentres/page.html (GOV.UK, saved 25 Oct 2026), read in full incl. 2026, 2023 and 2017 practice notes.",
+  "claims": [
+   {
+    "claim": "UK Valuation Office Agency, Rating Manual section 5a / section 6 part 3, Computer centres ('s. 281' ?)",
+    "verdict": "CORRECTED",
+    "evidence": "Page heading 'Rating Manual section 5a: valuation of all property classes - Computer centres'; 'From: HM Revenue & Customs ... Updated: 21 September 2026'. 's. 281' appears only in the URL slug.",
+    "fix": "Cite as 'VOA Rating Manual section 5a: valuation of all property classes — Computer centres (GOV.UK, publisher shown as HM Revenue & Customs; updated 21 Sep 2026)'. Drop 'section 6 part 3' and 's. 281' (URL slug only)."
+   },
+   {
+    "claim": "Practice note 1 s.1 (2017)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Practice note 1: 2017 - computer centres  1. Market appraisal'",
+    "fix": ""
+   },
+   {
+    "claim": "vacated '1st generation' centres 'tend to remain unoccupied and are not readily adaptable'",
+    "verdict": "CONFIRMED",
+    "evidence": "2017 note: '1st generation Computer / data centres still exist, but once they become vacant they tend to remain unoccupied and are not readily adaptable for other uses.'",
+    "fix": "Add that this line is absent from the 2023 and 2026 practice notes, which instead say older centres are 'likely to be adapted warehouses or offices, capable of an alternative use within rebus' (4.2)."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "existing_building / afterlife: the 'not readily adaptable' line is from the superseded 2017 note; current 2026 note says 1st-generation centres are 'capable of an alternative use' and valued on that basis. Present both, or label the 2017 line as historical.",
+   "UK rating guidance for valuers, not Canadian evidence; context only (as roles say)."
+  ],
+  "overall": "needs fix"
+ },
+ "edmBL14380": {
+  "where_read": "Local PDF /mnt/attach/outputs/data/Edmonton_Bylaw_14380_Arterial_Roads.pdf, pdftotext; cover, recitals, Purpose, Cost Sharing, Effective Date.",
+  "claims": [
+   {
+    "claim": "City of Edmonton Bylaw 14380, Arterial Roads for Development",
+    "verdict": "CONFIRMED",
+    "evidence": "'BYLAW 14380  ARTERIAL ROADS FOR DEVELOPMENT'; adopted 'September 26, 2006'",
+    "fix": ""
+   },
+   {
+    "claim": "office consolidation May 2026 ?",
+    "verdict": "CONFIRMED",
+    "evidence": "Cover: 'Office Consolidation May 2026  Prepared by: City of Edmonton'",
+    "fix": "Remove the '?'."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "rezoning_price 'when arterial road assessments apply': the assessment is a condition of subdivision approval or development permit, not rezoning, and only for lands 'within any of the Catchments identified in the Schedules' (mostly growth areas); the officer 'may require' an agreement. A downtown/mature-area site outside a scheduled Catchment pays none. Applies to DPs/subdivisions granted on or after 1 Oct 2006."
+  ],
+  "overall": "ok"
+ },
+ "nasem2016": {
+  "where_read": "WebFetch of the National Academies OpenBook contents page https://www.nationalacademies.org/read/21866/chapter (titles, chapter list and URL numbers). Chapter 3 text itself not read.",
+  "claims": [
+   {
+    "claim": "National Academies, Using Graywater and Stormwater to Enhance Local Water Supplies: An Assessment of Risks, Costs, and Benefits (2016; subtitle ?)",
+    "verdict": "CONFIRMED",
+    "evidence": "Title 'Using Graywater and Stormwater to Enhance Local Water Supplies: An Assessment of Risks, Costs, and Benefits (2016)'",
+    "fix": "Remove '?' on subtitle."
+   },
+   {
+    "claim": "Ch. 3 at /read/21866/chapter/5",
+    "verdict": "CONFIRMED",
+    "evidence": "Contents: '3 Quantities Available for Beneficial Use and Potential Impacts on Water Demand' pp.39–61 = URL chapter 5",
+    "fix": "Add chapter title and pp.39–61."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "greywater_neighbours: Chapter 3 contents (the figures the tool uses) were not read in this check ?; the data are US household water-use figures and should be labelled as US, not Vancouver/Edmonton."
+  ],
+  "overall": "ok"
+ },
+ "atb2024_batt": {
+  "where_read": "WebFetch of https://atb.nrel.gov/electricity/2024/commercial_battery_storage (model summary with quotes).",
+  "claims": [
+   {
+    "claim": "NREL Annual Technology Baseline 2024, Commercial Battery Storage",
+    "verdict": "CONFIRMED",
+    "evidence": "Page title 'Commercial Battery Storage', ATB electricity 2024",
+    "fix": ""
+   },
+   {
+    "claim": "page now names the publisher NLR",
+    "verdict": "CONFIRMED",
+    "evidence": "Page text refers to 'National Laboratory of the Rockies's (NLR's)' work; references still say National Renewable Energy Laboratory",
+    "fix": ""
+   },
+   {
+    "claim": "a newer 2024b version exists ?",
+    "verdict": "CONFIRMED",
+    "evidence": "'You are viewing an older version of the ATB. The most recent version of this page is for 2024b.'",
+    "fix": "Remove '?'; consider citing 2024b (search also lists a 2025 page)."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "battery: US costs in 2022 USD (e.g. 4-hr pack $199/kWh, inverter $97.5/kWDC, 100–2,000 kW systems); convert currency/year and label as US benchmark. Page is superseded by 2024b."
+  ],
+  "overall": "ok"
+ },
+ "bch_drb": {
+  "where_read": "Saved PDF /mnt/user-data/beyond-data-sources/public/bch_drb/full.pdf (BC Hydro 'Customer Manual – Demand Response for Business', last updated 2026-08-05, 9 pp.), pdftotext, read in full.",
+  "claims": [
+   {
+    "claim": "BC Hydro, Demand Response for Business customer manual",
+    "verdict": "CONFIRMED",
+    "evidence": "'Customer Manual  Demand Response for Business  Last updated: 2026-08-05'",
+    "fix": "Add 'last updated 5 Aug 2026'."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Eligibility is limited to Small, Medium and Large General Service rates (1300–1311, 1500–1511, 1600–1611) (s.2.1); a large data centre on BC Hydro Transmission Service would not qualify — check the site's rate class before applying it.",
+   "peak_relief: terms are $50/kW-season, winter only (Nov–Mar), max 4 h/event, max 20 events/season, 6am–10pm weekdays, 50 % participation needed (s.2.4, 3.1, 3.6). Do not annualize beyond one winter season.",
+   "ups_flex: manual bars fuel switching to higher-GHG sources; 'Diesel and other fossil fuel generators are prohibited' (s.2.2.5). UPS battery discharge is not named as allowed or barred ?"
+  ],
+  "overall": "ok"
+ },
+ "agsGround2009": {
+  "where_read": "Saved PDF /mnt/user-data/beyond-data-sources/public/agsGround2009/full.pdf (ERCB/AGS Open File Report 2009-09, Grobe et al., June 2009), pdftotext; pp.9-23 read.",
+  "claims": [
+   {
+    "claim": "AGS OFR 2009-09, Hastings Lake, east of Edmonton",
+    "verdict": "CONFIRMED",
+    "evidence": "'ERCB/AGS Open File Report 2009-09' (June 2009); 'the Hastings Lake Community Hall east of Edmonton'",
+    "fix": ""
+   },
+   {
+    "claim": "ground 6.1 °C to about 25 m, measured 3 Mar 2008",
+    "verdict": "CONFIRMED",
+    "evidence": "'measurements taken in the deep borehole on March 3 ... relatively constant temperature of 6.1°C from surface to a depth of about 25 m' (p.11)",
+    "fix": ""
+   },
+   {
+    "claim": "\"undisturbed\" ?",
+    "verdict": "CORRECTED",
+    "evidence": "Report does not call the 6.1 °C undisturbed; it says it is 'relatively high' vs 3.1 °C mean air and 'may be due to' tree clearing beside a tennis court, snow cover, or warmer recent years (p.13). Gradient below 70 m extrapolates to ~3.7 °C at surface.",
+    "fix": "Drop 'undisturbed'; note the report's own caveat that 6.1 °C may be site-elevated (extrapolated deep gradient ~3.7 °C)."
+   },
+   {
+    "claim": "in-situ conductivity 1.74–2.01 W/m·K by line source",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 4 'Linear approximation ... 2.01 (HL-08-01) 1.74 (HL-08-02)'",
+    "fix": ""
+   },
+   {
+    "claim": "1.59–1.81 by numerical model",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 4 'Numerical analysis ... 1.81 ... 1.59'",
+    "fix": ""
+   },
+   {
+    "claim": "design 1.90",
+    "verdict": "CONFIRMED",
+    "evidence": "Modelling input 'Thermal conductivity: k = 1.90 W/m•K'; 'average value of 1.9 W/m•K measured through FTC testing' (p.22–23)",
+    "fix": "Call it the report's modelling value for a hypothetical 465 m2 building, not a design standard."
+   },
+   {
+    "claim": "Vancouver: no city-specific measurement found; national map 6–12 °C (GSC OF 6914, not checked ?)",
+    "verdict": "NOT FOUND",
+    "evidence": "Not in this source (Alberta report); correctly flagged as separate and unchecked.",
+    "fix": "Read GSC OF 6914 or keep '?'."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "One pilot site 15 km+ from Edmonton with two boreholes; values are site-specific (drift 42 m thick), so use as an Edmonton-region indication, not a citywide value.",
+   "btes: measurements are for small closed-loop GSHP; no seasonal-storage data."
+  ],
+  "overall": "needs fix"
+ },
+ "geaRedHP": {
+  "where_read": "No saved copy; not found in local data or uploads. WebSearch did not surface brochure 7757-3000-017. WebFetch of https://www.gea.com/assets/271745 returned a different document (GEA Refrigeration Germany RedAstrum product information L_661011_9, 19.02.2025), used only as a cross-check.",
+  "claims": [
+   {
+    "claim": "GEA, Red Heat Pumps brochure 7757-3000-017 (rev 10-26), GEA Systems North America, metric table p.17",
+    "verdict": "UNREACHABLE",
+    "evidence": "Brochure with this number not located online in this check.",
+    "fix": "Save J.B.'s copy to the sources folder so it can be checked."
+   },
+   {
+    "claim": "RedAstrum MH 1,575 kW at 40/35 -> 60/80 °C, 7050 x 2150 x 2450 mm",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not verifiable. Cross-check doc (EU, different conditions): 'RedAstrum MH 19' 1690 kW at 40/35 °C source, 40/70 °C sink; 7300 x 1800 x 2450 mm (+ frame <200 mm).",
+    "fix": ""
+   },
+   {
+    "claim": "RN 3,019 kW, 7900 x 2150 x 2750 mm",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not verifiable. Cross-check doc: 'RedAstrum RN 19' 2910 kW at 40/70 °C; 7900 x 2000 x 2450 mm.",
+    "fix": ""
+   },
+   {
+    "claim": "RedGenium 550 1,362 kW (35/30 -> 60/80, paired by column order), 6450 x 2150 x 2500 mm",
+    "verdict": "UNREACHABLE",
+    "evidence": "No RedGenium 550 data found.",
+    "fix": "'paired by column order' signals an inferred pairing; keep '?' until read."
+   },
+   {
+    "claim": "(manufacturer claims)",
+    "verdict": "CONFIRMED",
+    "evidence": "Correctly labelled as manufacturer claims.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "heat_pumps 'range across makers' / component_space: figures unverified in this check; capacities and footprints vary by model variant and conditions (the EU sheet gives different sizes at 40/70 °C)."
+  ],
+  "overall": "unreachable"
+ },
+ "bcAssessClasses": {
+  "where_read": "Saved page /mnt/user-data/beyond-data-sources/public/bcAssessClasses/page.html (gov.bc.ca, saved 25 Oct 2026), read in full.",
+  "claims": [
+   {
+    "claim": "BC Government, Local government property assessment and classes, updated 1 Dec 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "'Local government property assessment and classes  Last updated on December 1, 2022'",
+    "fix": ""
+   },
+   {
+    "claim": "Assessment Act",
+    "verdict": "CONFIRMED",
+    "evidence": "'BC Assessment, a Crown corporation that operates under the Assessment Act'; 'nine classes set out in the Assessment Act'",
+    "fix": ""
+   },
+   {
+    "claim": "Class 6 Business and Other takes property not in another class",
+    "verdict": "CONFIRMED",
+    "evidence": "'Class 6 (Business and Other): All land and improvements not included in any of the other classes.'",
+    "fix": ""
+   },
+   {
+    "claim": "Prescribed Classes of Property Regulation, BC Reg 438/81 (amendment date ?)",
+    "verdict": "NOT FOUND",
+    "evidence": "Page names only the Assessment Act; BC Reg 438/81 is not mentioned. Not read separately.",
+    "fix": "Read and cite BC Reg 438/81 directly, or drop it."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "property_tax 'Class 6 residual' as a rule: page does not say data centres fall in Class 6. Class 2 (Utilities) covers 'telecommunications' and Class 5 covers some storage/processing; actual classification is BC Assessment's call per property ?. Check the BCA classification of existing Vancouver data centres (e.g. Cologix) before treating Class 6 as fixed."
+  ],
+  "overall": "needs fix"
+ },
+ "nrcanEVinfra2024": {
+  "where_read": "Saved page /mnt/user-data/beyond-data-sources/public/nrcanEVinfra2024/page.html (NRCan HTML version of the report, date modified 2025-01-08), tags stripped and searched.",
+  "claims": [
+   {
+    "claim": "Dunsky and ICCT for NRCan, Electric Vehicle Charging Infrastructure for Canada (Feb 2024)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Electric Vehicle Charging Infrastructure for Canada ... February 2024 Prepared for: Natural Resources Canada ... Prepared by: Dunsky Energy + Climate Advisors ... With support from: The International Council on Clean Transportation (ICCT)'",
+    "fix": ""
+   },
+   {
+    "claim": "Table 12: Level 2 $15,000 a port (2025, 2022 $)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Table 12. Per-port installation and equipment cost estimates (2022 dollars) ... L2 $15,000 $10,000 $10,000 $10,000' (2025–2040)",
+    "fix": "Add: L2 falls to $10,000 from 2030; basis 7.2 kW port."
+   },
+   {
+    "claim": "DC fast $160,000 at 125 kW (2025, 2022 $)",
+    "verdict": "CONFIRMED",
+    "evidence": "'DCFC $160,000 (125 kW average) $240,000 (175 kW average)'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "ev_repay '$15k a port': national planning estimate for public charging (installation + equipment), not a quote; report notes on-street L2 'can easily exceed $20k per port' and expects $10k from 2030. Table 12 is from the 'High home charging access' scenario (footnote 43)."
+  ],
+  "overall": "ok"
+ },
+ "caAbMOU2026": {
+  "where_read": "WebFetch (two passes) of https://pm.gc.ca/en/news/backgrounders/2026/05/15/implementation-agreement-canada-alberta-memorandum-understanding (model summary with quotes).",
+  "claims": [
+   {
+    "claim": "Canada–Alberta Implementation Agreement backgrounder (15 May 2026)",
+    "verdict": "CONFIRMED",
+    "evidence": "Title 'Implementation Agreement for the Canada-Alberta Memorandum of Understanding of November 27, 2025'; May 15, 2026, Calgary",
+    "fix": "Use the full title."
+   },
+   {
+    "claim": "Clean Electricity Regulations held in abeyance while the CER Reference is before the Alberta Court of Appeal",
+    "verdict": "CONFIRMED",
+    "evidence": "s.2.1.1 'Canada will maintain the Clean Electricity Regulations (\"CER\") in abeyance' ... 'while the CER Reference is before the Alberta Court of Appeal'",
+    "fix": "Add conditions: subject to continued application of Part I (carbon markets) and other measures; extends through any appeal to the Supreme Court of Canada."
+   },
+   {
+    "claim": "TIER headline price $95/t (2026), $100 (2027–29), $115 (2030), rising to $130 (2035), then 1.5 %/yr to $140 (2040) (s.1.2.1.1)",
+    "verdict": "CONFIRMED",
+    "evidence": "s.1.2.1.1 '$95 in 2026', '$100 in 2027'–'2029', '$115 in 2030', $118/121/124/127, '$130 in 2035', '1.5% per year inflationary escalator starting in 2036 and ending at $140 in 2040'",
+    "fix": ""
+   },
+   {
+    "claim": "effective credit price to target $130 in 2040 (s.1.2.2.1)",
+    "verdict": "CONFIRMED",
+    "evidence": "s.1.2.2.1 'the Effective Price of credits in the TIER market will adjust over time and will target $130 in 2040'",
+    "fix": ""
+   },
+   {
+    "claim": "credit floor $60 (2030) to $110 (2040) (s.1.2.3.5)",
+    "verdict": "CONFIRMED",
+    "evidence": "s.1.2.3.5 'minimum transfer price for the trade of credits will be: $60 in 2030 ... $110 in 2040'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "chp_heat: headline TIER price is not the cost a facility actually pays; compliance cost depends on the effective credit price (target $130 only by 2040) and the facility's benchmark. Using $95–140 as the carbon cost on CHP gas would overstate it. No roles text given in input to confirm which figure is used ?"
+  ],
+  "overall": "ok"
+ },
+ "abDCpay": {
+  "where_read": "Saved page /mnt/user-data/beyond-data-sources/public/abDCpay/page.html (alberta.ca/powering-new-pathways-for-data-centres, saved 25 Oct 2026), read in full.",
+  "claims": [
+   {
+    "claim": "Government of Alberta, 'Powering new pathways for data centres'",
+    "verdict": "CONFIRMED",
+    "evidence": "Page title 'Powering new pathways for data centres | Alberta.ca'; about Utilities Statutes Amendment Act, 2025 (Bill 8), royal assent 11 Dec 2025",
+    "fix": ""
+   },
+   {
+    "claim": "data centres, not Alberta ratepayers, pay for any transmission upgrades they need",
+    "verdict": "CONFIRMED",
+    "evidence": "'align with Alberta's move towards a cost-causation framework for transmission, which means data centres (not Alberta ratepayers) will pay for any necessary transmission upgrades'",
+    "fix": "Word it as policy direction of the Act ('will pay'), with amendments 'in force on various dates'; not a tariff rule or amount."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "grid_refund: page states a policy principle only; it gives no cost-allocation mechanism, amount or refund terms. Any refund/contribution figures need the AUC-approved ISO tariff."
+  ],
+  "overall": "ok"
+ },
+ "nbc6215": {
+  "where_read": "J.B.'s copy NBC2020p2.pdf (/root/.claude/uploads/.../d1d05d5a-NBC2020p2.pdf), pdftotext, Div. B 6.2.1.5 and Table 1.3.1.2; NBC(AE) 2023 text /mnt/attach/outputs/data/raw/codes/nbc_ab2023.txt; also BCBC 2024 text bcbc2024.txt 6.2.1.5 for the Vancouver comparison.",
+  "claims": [
+   {
+    "claim": "NBC 2020 Div. B 6.2.1.5.(1)",
+    "verdict": "CONFIRMED",
+    "evidence": "'6.2.1.5. Installation Standards 1) Except as provided in Articles 6.9.4.2. and 6.3.1.4., the installation of heating and air-conditioning equipment, including mechanical refrigeration equipment'",
+    "fix": ""
+   },
+   {
+    "claim": "mechanical refrigeration equipment designed, constructed and installed to CSA B52",
+    "verdict": "CORRECTED",
+    "evidence": "Sentence covers 'the installation of ... mechanical refrigeration equipment, and including provisions for mounting, clearances and air supply'; nothing on design or construction.",
+    "fix": "Say 'installation (incl. mounting, clearances, air supply) shall conform to ... CSA B52'."
+   },
+   {
+    "claim": "subject to provincial or territorial requirements",
+    "verdict": "CONFIRMED",
+    "evidence": "'shall conform to appropriate provincial or territorial requirements or, in the absence of such requirements, to the requirements of ... b) CSA B52'",
+    "fix": "Make clear B52 applies only in the absence of provincial requirements. NBC 2020 references B52:18 (Table 1.3.1.2)."
+   },
+   {
+    "claim": "NBC(AE) 2023 the same with Alberta regulations",
+    "verdict": "CONFIRMED",
+    "evidence": "NBC(AE) 6.2.1.5.(1): 'shall conform to the requirements of a) the Pressure Equipment Safety Regulation ... b) CSA B52'; references 'CSA B52:23'",
+    "fix": "Note NBC(AE) names B52 directly (B52:23), without the 'in the absence of' wording."
+   },
+   {
+    "claim": "CSA B52:23 paywalled and not read ?",
+    "verdict": "CONFIRMED",
+    "evidence": "Not read in this check either; contents of B52 unverified.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "hr_plant_room 'CSA B52 applies': true for Edmonton via NBC(AE) 2023. For Vancouver, BCBC 2024 6.2.1.5 names only 'the Safety Standards Act and pursuant regulations' (B52 not listed); B52 reaches BC through the provincial refrigeration regulation (not read here ?). Cite the BC route separately.",
+   "Any plant-room sizes or rules drawn from B52 itself are unverified, since B52 was not read."
+  ],
+  "overall": "needs fix"
+ },
+ "stavangerBTES2023": {
+  "where_read": "Saved page /mnt/user-data/beyond-data-sources/public/stavangerBTES2023/page.html (Copernicus EGU23-16904 abstract), read in full.",
+  "claims": [
+   {
+    "claim": "EGU23-16904, University of Stavanger",
+    "verdict": "CONFIRMED",
+    "evidence": "'EGU23-16904 ... Raoof Gholami, University of Stavanger, Energy Resources, Norway'; title 'Thermal Energy Storage Integration with Waste Heat: What are the Challenges?'",
+    "fix": "Add author (Gholami, R.) and title."
+   },
+   {
+    "claim": "measured BTES simulated with 'a continuous supply of waste heat from a data center'",
+    "verdict": "CONFIRMED",
+    "evidence": "'results of a series of measurements on a BTES in Norway are presented and numerical simulations ... connected to a continuous supply of waste heat from a data center'",
+    "fix": ""
+   },
+   {
+    "claim": "borehole life 'may' fall 'from 30 to 10 years' when heat stored above 75 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "'capacity to store heat at a temperature of more than 75 C, but it may reduce its functionality over time and shorten its lifespan from 30 to 10 years'",
+    "fix": ""
+   },
+   {
+    "claim": "conference abstract",
+    "verdict": "CONFIRMED",
+    "evidence": "'EGU General Assembly 2023 ... EGU23-16904' (not peer-reviewed paper)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Not used by any rule. If used later: a single conference abstract, not peer reviewed; the 75 °C / 30-to-10-yr link is hedged ('it seems', 'may')."
+  ],
+  "overall": "ok"
+ },
+ "xealLaitent": {
+  "where_read": "WebFetch of https://www.financialcontent.com/article/bizwire-2026-9-18-xeal-to-launch-laitent-worlds-first-edge-inference-compute-using-idle-ev-charging-capacity (Business Wire press release syndicated by FinancialContent).",
+  "claims": [
+   {
+    "claim": "OPERATOR CLAIM: Xeal, Sep 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Published at September 18th 2026'; Business Wire release by Xeal; headline 'Xeal to Launch Laitent, World's First Edge Inference Compute Using Idle EV Charging Capacity'",
+    "fix": ""
+   },
+   {
+    "claim": "GPU pods at EV-charging sites using idle charging capacity",
+    "verdict": "CONFIRMED",
+    "evidence": "'edge inference compute network powered by idle EV charging capacity'; 'plans to deploy over 100,000 NVIDIA GPUs alongside EV charging infrastructure'",
+    "fix": ""
+   },
+   {
+    "claim": "first pod 'by the end of 2026' (announced)",
+    "verdict": "CONFIRMED",
+    "evidence": "'The first Laitent Pod will be brought online with partner JVM Realty by the end of 2026.'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Company press release (operator claim, correctly labelled); not used by any rule. URL is a syndication host — cite the Business Wire release as the original."
+  ],
+  "overall": "ok"
+ },
+ "yuan2023": {
+  "where_read": "WebFetch of the Aalto repository PDF https://acris.aalto.fi/ws/portalfiles/portal/124210750/1_s2.0_S1364032123006342_main.pdf (model summary with quotes; first attempt refused for provenance, succeeded after WebSearch surfaced the URL).",
+  "claims": [
+   {
+    "claim": "Yuan et al. 2023, Renewable and Sustainable Energy Reviews 188 (review of data-centre waste-heat recovery)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Waste heat recoveries in data centers: A review', Yuan, Liang, Hu, Xu, Chen, Kosonen; RSER 188, 113777, 2023",
+    "fix": "Add title and article number 113777."
+   },
+   {
+    "claim": "absorption cooling of a neighbouring office building appears only as a proposal (Lin et al.)",
+    "verdict": "CONFIRMED",
+    "evidence": "s.4.1.4 Lin et al. [16]: 'supply cooling to the surrounding office building in summer via the absorption refrigeration cycle' — modelled in MATLAB/REFPROP, not described as built",
+    "fix": "'only' rests on a full-text search by the fetch tool ?"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Not used by any rule."
+  ],
+  "overall": "ok"
+ }
+}

@@ -1,0 +1,1222 @@
+{
+ "eqix10k": {
+  "where_read": "Saved copy /mnt/attach/outputs/data/Equinix_10-K_FY2024.pdf (browser print of the SEC .htm, accession 0001628280-25-005126), pdftotext; Item 2 table p. 47 (PDF p. 88) and Capacity Trends (PDF p. 96).",
+  "claims": [
+   {
+    "claim": "Equinix Form 10-K for FY2024, filed Feb 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "Cover: 'As of February 11, 2025, a total of ...' shares; URL eqix-20241231.htm, accession 000162828025005126",
+    "fix": ""
+   },
+   {
+    "claim": "Item 2 Properties gives cabinet capacity, cabinets billed, utilisation and MRR per cabinet by region",
+    "verdict": "CONFIRMED",
+    "evidence": "Table: 'Total Cabinet Capacity | Cabinets Billed | Cabinet Utilization % | MRR per Cabinet'; Americas 144,100 / 116,700 / 81 % / $2,550",
+    "fix": ""
+   },
+   {
+    "claim": "Item 2 has an expansion table",
+    "verdict": "CONFIRMED",
+    "evidence": "Table headed 'Property | Property Location | Target Open Date | Sellable Cabinets | (in millions)'",
+    "fix": ""
+   },
+   {
+    "claim": "Item 7 Capacity Trends",
+    "verdict": "CONFIRMED",
+    "evidence": "'Capacity Trends: Our cabinet utilization rate ... approximately 78% and 79%, as of December 31, 2024 and 2023'",
+    "fix": ""
+   },
+   {
+    "claim": "Role: cabinet utilisation 81% Americas (power-limited)",
+    "verdict": "CONFIRMED",
+    "evidence": "Americas '81 %'; footnote (3): 'percentage of cabinet space billed versus total cabinet capacity, taking into consideration power limitations'",
+    "fix": "Say 'cabinet space billed ÷ capacity, adjusted for power limits' rather than 'power-limited'."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "81% is billed cabinet SPACE share (adjusted for power limits), not measured IT power draw vs design load; fine as a labelled proxy for it_load_actual only.",
+   "Equinix is a colocation operator; figure is an operator-reported metric (claim)."
+  ],
+  "overall": "ok"
+ },
+ "fjfAars2020": {
+  "where_read": "Saved copy /mnt/user-data/beyond-data-sources/private/fjfAars2020/full.pdf, pdftotext, pages 9 and 13 read in full; grepped whole report for temperatures and payment terms.",
+  "claims": [
+   {
+    "claim": "p. 9 production table note: 'Den høje virkningsgrad er ensbetydende med COP på 4,5'",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 9: '*** Den høje virkningsgrad er ensbetydende med COP på 4,5, hvor 1 energienhed el bliver til 4,5 energienheder varme.' Row 'Varmepumper (Facebook) El: 14.019.926 kWh 230 ... 457***'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 13: 2020 'første hele produktionsår' with 'en samlet varmelevering på 230 TJ'",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 13: '2020 har været første hele produktionsår med en samlet varmelevering på 230 TJ.'",
+    "fix": ""
+   },
+   {
+    "claim": "'Varmepumperne tilknyttet Facebook har forbrugt 14.020 MWh el svarende til COP 4,5'",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 13: 'Varmepumperne tilknyttet Facebook har forbrugt 14.020 MWh el svarende til COP 4,5.'",
+    "fix": ""
+   },
+   {
+    "claim": "Role cop: realised COP 4.5 at 27→15 / 40→75 °C",
+    "verdict": "NOT FOUND",
+    "evidence": "No source/sink temperatures for the Facebook heat pumps anywhere in the report (°C appears only for flue gas 45→20 °C and degree-days)",
+    "fix": "Cite the temperatures from their own source; this report supports COP 4.5 only (≈230 TJ ÷ 50.5 TJ el = 4.56)."
+   },
+   {
+    "claim": "Role capex_split: utility pays all; heat free",
+    "verdict": "NOT FOUND",
+    "evidence": "No statement on who paid for the heat pumps or heat price in this report",
+    "fix": "Source the capex split / free heat from another document or drop the link to fjfAars2020."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Temperatures 27→15 / 40→75 °C attached to this source are not in it.",
+   "capex_split 'utility pays all; heat free' is not supported by this report."
+  ],
+  "overall": "needs fix"
+ },
+ "neuConnect": {
+  "where_read": "Saved copy /mnt/user-data/beyond-data-sources/public/neuConnect/full.pdf, pdftotext; revision table, s.2.3, s.2.6.1, s.6.3, Table 2, s.6.3.1.",
+  "claims": [
+   {
+    "claim": "City of Vancouver NEU Connectivity Guidelines, May 2026 Rev. 1",
+    "verdict": "CONFIRMED",
+    "evidence": "Revision table: '1  May, 2026  Various amendments'",
+    "fix": ""
+   },
+   {
+    "claim": "network 'minimum 65°C'",
+    "verdict": "CONFIRMED",
+    "evidence": "s.6.3: 'The NEU distribution network temperature is minimum 65°C.'",
+    "fix": ""
+   },
+   {
+    "claim": "building supply 60 °C at design conditions ('year-round' is our word ?)",
+    "verdict": "CORRECTED",
+    "evidence": "s.6.3.1: 'The building side supply temperature is 60C year-round per Table 2.'",
+    "fix": "'year-round' is the source's own word; remove the '?'."
+   },
+   {
+    "claim": "'a maximum return water temperature of 45°C must be achieved under all conditions' except when DHW recirculation is the only load",
+    "verdict": "CONFIRMED",
+    "evidence": "'...must be achieved under all conditions regardless of time of year except for periods when DHWR heating is the only load.'",
+    "fix": ""
+   },
+   {
+    "claim": "the NEU does not provide cooling",
+    "verdict": "CONFIRMED",
+    "evidence": "s.2.3: 'The NEU currently does not provide cooling as an energy service to individual buildings.'",
+    "fix": ""
+   },
+   {
+    "claim": "waste heat from building cooling may be accepted for a bill credit",
+    "verdict": "CONFIRMED",
+    "evidence": "s.2.3 'there may be opportunity for the NEU to accept waste heat'; s.2.6.1 'a credit to the utility bill is provided based on the amount of thermal energy sent back'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Temperatures are customer-building (heat-receiving) requirements; using them as a 'rule' for what a data centre must deliver to the NEU is an inference. Acceptance of waste heat is case-by-case ('may be opportunity'), not a rule."
+  ],
+  "overall": "needs fix"
+ },
+ "ceudResTable2": {
+  "where_read": "Local /mnt/attach/outputs/data/82007eb2-res_bc_e_2.xls and a1c75be6-res_ab_e_2.xls (Residential Sector, Table 2 'Secondary Energy Use and GHG Emissions by End-Use'); recomputed with pandas.",
+  "claims": [
+   {
+    "claim": "NRCan CEUD Residential Sector Table 2, BC and Alberta",
+    "verdict": "CONFIRMED",
+    "evidence": "Sheet header 'Residential Sector / British Columbia1 / Table 2: Secondary Energy Use and GHG Emissions by End-Use' (and Alberta1)",
+    "fix": ""
+   },
+   {
+    "claim": "Edition '2023'",
+    "verdict": "CONFIRMED",
+    "evidence": "Year columns run 2000–2023 (edition year not printed in the rows read ?)",
+    "fix": ""
+   },
+   {
+    "claim": "BC (space + water heating) ÷ floor space, 2018–22 avg = 0.400 GJ/m²",
+    "verdict": "CONFIRMED",
+    "evidence": "Recomputed 0.3996 (ratio of means) / 0.3997 (mean of ratios) from rows 'Space Heating', 'Water Heating', 'Total Floor Space (million m2)'",
+    "fix": ""
+   },
+   {
+    "claim": "Alberta = 0.777 GJ/m²",
+    "verdict": "CONFIRMED",
+    "evidence": "Recomputed 0.7773 (mean of yearly ratios); 0.7764 as ratio of means",
+    "fix": ""
+   },
+   {
+    "claim": "per household BC 60.5, Alberta 119.3 GJ",
+    "verdict": "CONFIRMED",
+    "evidence": "Recomputed 60.51 and 119.31 GJ/household (mean of yearly ratios), using 'Total Households (thousands)'",
+    "fix": ""
+   },
+   {
+    "claim": "ratios not printed in the table (our calculation)",
+    "verdict": "CONFIRMED",
+    "evidence": "Table prints only total 'Energy Intensity (GJ/m2)' (BC 2018 0.515), not space+water ratios",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "saved_copies lists only the BC file; the Alberta file a1c75be6-res_ab_e_2.xls is also present and should be listed."
+  ],
+  "overall": "ok"
+ },
+ "ayuso2023": {
+  "where_read": "Saved full text /mnt/user-data/beyond-data-sources/private/ayuso2023/fulltext.txt (abstract, s.3.3–3.4, Table 2, conclusions).",
+  "claims": [
+   {
+    "claim": "Authors Ayuso-Virgili, Jafari, Lande-Sudall & Lümmen 2023; title; Aquacultural Engineering 101:102330",
+    "verdict": "CONFIRMED",
+    "evidence": "Header 'Aquacultural Engineering 101 (2023) 102330'; 'Gerard Ayuso-Virgili, Leila Jafari, David Lande-Sudall, Norbert Lümmen'",
+    "fix": ""
+   },
+   {
+    "claim": "energy demand of a salmon RAS (simulated)",
+    "verdict": "CONFIRMED",
+    "evidence": "'15 weeks of RAS operation were simulated to replicate the grow-out of Atlantic salmon ... from 42.5 to 322 g'",
+    "fix": "Add: post-smolt stage only (42.5→322 g, 15 weeks), not full grow-out to harvest."
+   },
+   {
+    "claim": "9.59 kWh/kg for the full grow-out",
+    "verdict": "CONFIRMED",
+    "evidence": "Abstract: 'The specific energy demand of the RAS was calculated at 9.59 kWh/kg for the full grow-out.'",
+    "fix": ""
+   },
+   {
+    "claim": "Role: 2.9 kWh/kg (make-up water only)",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 2 'Freshwater 2.887 (constant) / 2.905 (adjusted) kWh/kg'; thermal energy of freshwater 'between 5 °C and 12 °C'",
+    "fix": "Label as heat to warm make-up freshwater 5→12 °C; authors say 'In reality, the magnitude would be lower'."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "2.9 kWh/kg is a simulated freshwater-heating term for one Norwegian site (5→12 °C) and a 15-week post-smolt stage; authors note real value would be lower. Usable as a coefficient only with that label."
+  ],
+  "overall": "ok"
+ },
+ "edmParking": {
+  "where_read": "Saved page /mnt/user-data/beyond-data-sources/public/edmParking/page.html (text extracted); repeal checked in local Bylaw 20001 PDF /mnt/attach/outputs/data/raw/edm/bylaw/Bylaw20001.pdf.",
+  "claims": [
+   {
+    "claim": "Edmonton Zoning Bylaw 12800 s.54.1 (General On-Site Parking and Loading)",
+    "verdict": "CONFIRMED",
+    "evidence": "'54.1 General On-Site Parking and Loading Requirements Edmonton Zoning Bylaw 12800 Charter Bylaw 19275 ... Effective: July 2, 2020'",
+    "fix": ""
+   },
+   {
+    "claim": "Bylaw 12800 repealed when Zoning Bylaw 20001 took effect, 1 Jan 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "Bylaw 20001: '2. The previous land use bylaw ... Bylaw 12800, as amended, is hereby repealed. 3. ... effective date of January 1, 2024.'",
+    "fix": "Cite Bylaw 20001 s.2–3 for the repeal."
+   },
+   {
+    "claim": "the saved page does not say so",
+    "verdict": "CONFIRMED",
+    "evidence": "No 'repeal' or '20001' text in saved page",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "edmZB510": {
+  "where_read": "Local /mnt/attach/outputs/data/raw/edm/bylaw/Bylaw20001.pdf (pdftotext), s.5.10 cl. 11 (p. 803–804) and s.5.70 1.7–1.9.",
+  "claims": [
+   {
+    "claim": "Rooftop collectors may project 1.5 m from the roof 'in a residential Zone'",
+    "verdict": "CONFIRMED",
+    "evidence": "11.1 'may project a maximum of 1.5 m in Height from the surface of the roof of a building in a residential Zone.'",
+    "fix": ""
+   },
+   {
+    "claim": "and up to 1.5 m above the maximum height",
+    "verdict": "CONFIRMED",
+    "evidence": "11.1 'The Solar Collectors may extend up to 1.5 m above the maximum permitted Height of the Zone.'",
+    "fix": "Note: this second sentence is not itself qualified 'residential' (reading ambiguous ?)."
+   },
+   {
+    "claim": "must not extend beyond the eave or roof edge",
+    "verdict": "CONFIRMED",
+    "evidence": "11.2 'must not extend beyond the eave or the edge of a roof.'",
+    "fix": "11.2 and 11.3 are not limited to residential zones; they apply in all zones."
+   },
+   {
+    "claim": "wall-mounted 1.5 m into a setback, 0.6 m from the lot line",
+    "verdict": "CONFIRMED",
+    "evidence": "11.3 'may project a maximum of 1.5 m into any required Setback ... minimum distance of 0.6 m from the Lot line.'",
+    "fix": ""
+   },
+   {
+    "claim": "Non-residential zones: no projection limit stated — City to confirm",
+    "verdict": "CONFIRMED",
+    "evidence": "Only 11.1 is residential-specific; s.5.70 1.9 'no Height limit in any Zone' list does not name Solar Collectors",
+    "fix": "Add s.5.70 1.7 (roof top may extend 1.7 m above max Height) and 1.9 list as context; keep 'City to confirm'."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Non-residential (industrial) zone limit for a data-centre roof is unresolved; tool must not treat absence of a limit as permission without City confirmation."
+  ],
+  "overall": "ok"
+ },
+ "blatchfordRates2026": {
+  "where_read": "Saved page /mnt/user-data/beyond-data-sources/public/blatchfordRates2026/page.html; WebFetch of Bylaw C17943 consolidated 1 Jan 2024 (edmonton.ca/documents/Bylaws/C17943.pdf) and 1 Jan 2022 consolidation (blatchfordutility.ca PDF); WebFetch of blatchfordutility.ca/account-billing/.",
+  "claims": [
+   {
+    "claim": "Bylaw 17943 consolidated 1 Jan 2024: infrastructure fee $1,947.03/unit residential, $22.24/m² commercial",
+    "verdict": "CONFIRMED",
+    "evidence": "C17943: 'CONSOLIDATED ON JANUARY 1, 2024'; '$1,947.03 per unit'; '$22.24 per square meter'",
+    "fix": ""
+   },
+   {
+    "claim": "fixed $1.88/unit/day townhouse, $12.84/kW peak/month multi-unit; variable $0.0325/kWh",
+    "verdict": "CONFIRMED",
+    "evidence": "'$1.88 per unit per day'; '$12.84 per kW peak capacity per month'; '$0.0325 per kWh'",
+    "fix": ""
+   },
+   {
+    "claim": "2025 and 2026 rates frozen by Council 1 Dec 2025, citing federal policy changes",
+    "verdict": "CONFIRMED",
+    "evidence": "'On Dec. 1, City Council approved the following 2026 rates ... identical to 2025 rates'; 'prompted by recent federal policy changes'",
+    "fix": "Freeze is 'for 2026 only'."
+   },
+   {
+    "claim": "townhouse $2.07/unit/day + $0.0358/kWh; multi-unit $13.18/kW peak/month + $0.0358/kWh",
+    "verdict": "CONFIRMED",
+    "evidence": "'$2.07 per unit per day ... $0.0358 per kWh'; '$13.18 per kW peak capacity per month ... $0.0358 per kW'",
+    "fix": ""
+   },
+   {
+    "claim": "page prints 'per kW' (likely typo)",
+    "verdict": "CONFIRMED",
+    "evidence": "Multi-unit: 'Variable charge for heating and cooling of $0.0358 per kW'",
+    "fix": ""
+   },
+   {
+    "claim": "meter appears to measure heating and cooling energy drawn from the loop by the heat pump (operator equipment page; not stated outright)",
+    "verdict": "NOT FOUND",
+    "evidence": "Account & Billing page: 'thermal energy consumption will be reported in kilowatt hours'; 'energy used for heating, cooling, and hot water' — no statement of what the meter measures; equipment page not read",
+    "fix": "Keep '?' or cite the equipment page with a quote."
+   },
+   {
+    "claim": "Bylaw 17943 (2022 consolidation): variable rate $0.0269/kWh",
+    "verdict": "CONFIRMED",
+    "evidence": "Jan 1 2022 consolidation Schedule B: '$ 0.0269 per kWh'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Residential district-energy tariff; any use as a price for data-centre heat sales is a comparator only."
+  ],
+  "overall": "ok"
+ },
+ "oebCCIM": {
+  "where_read": "Saved copy /mnt/user-data/beyond-data-sources/public/oebCCIM/full.pdf (pdftotext), whole letter incl. Phase 2 section and Appendix A.",
+  "claims": [
+   {
+    "claim": "OEB letter, Distribution System Capacity Information Map – Phase 1 Implementation, 17 Oct 2024, EB-2019-0207",
+    "verdict": "CONFIRMED",
+    "evidence": "'October 17, 2024 ... Re: Distribution System Capacity Information Map – Phase 1 Implementation (EB-2019-0207)'",
+    "fix": ""
+   },
+   {
+    "claim": "App. A sets Phase 1 scope",
+    "verdict": "CONFIRMED",
+    "evidence": "'Appendix A – Phase 1 Scope and Implementation Details'",
+    "fix": ""
+   },
+   {
+    "claim": "Phase 1: each distributor posts its own map",
+    "verdict": "CONFIRMED",
+    "evidence": "'licensed electricity distributors will be expected to post capacity information maps using their existing systems'",
+    "fix": ""
+   },
+   {
+    "claim": "a centralized platform only to be explored in Phase 2",
+    "verdict": "CONFIRMED",
+    "evidence": "Phase 2: 'OEB staff expects to explore various approaches, including the possibility of a centralized platform'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Ontario jurisdiction: usable only as a format precedent for grid_headroom in BC/AB, not as a rule there.",
+   "Map bands top out at 'over 2,000 kVA' (feeders ≥8 kV, stations ≥7.5 MVA): far below data-centre loads, so the format cannot show headroom at data-centre scale."
+  ],
+  "overall": "ok"
+ },
+ "vanWater2026": {
+  "where_read": "Saved copy /mnt/user-data/beyond-data-sources/public/vanWater2026/full.pdf (spec1a, RTS 18253) via pdftotext; WebFetch of spec1b.pdf (RTS 18249) after WebSearch; WebFetch of vancouver.ca/home-property-development/metered-rates.aspx.",
+  "claims": [
+   {
+    "claim": "RTS 18253, 24 Oct 2025, for Council 12 Nov 2025; rates proposed",
+    "verdict": "CONFIRMED",
+    "evidence": "'Report Date: October 24, 2025 ... RTS No.: 18253 ... Meeting Date: November 12, 2025'; 'approve, in principle, proposed amendments'",
+    "fix": ""
+   },
+   {
+    "claim": "Water $5.128/unit (1 May–15 Oct), $4.091 (16 Oct–30 Apr), 'rate for all metered uses', unit = 2,831.6 L, Schedule D p. 11",
+    "verdict": "CONFIRMED",
+    "evidence": "Schedule D (p. 11): 'Unit (2,831.6 Litres) ... Rate for all metered uses ... October 16 - April 30 Per unit $4.091 ... May 1 - October 15 Per unit $5.128'",
+    "fix": ""
+   },
+   {
+    "claim": "1 unit = 100 ft³ = 2.83168466 m³",
+    "verdict": "CONFIRMED",
+    "evidence": "metered-rates page: 'One unit equals: 2,831.6 litres, 2.83168466 cubic metres, 623 Imperial gallons, 100 cubic feet'",
+    "fix": ""
+   },
+   {
+    "claim": "Sewer 'Metered Property Rate' $7.960 per unit (RTS 18249, 24 Oct 2025, Appendix B Part V, p. 13)",
+    "verdict": "CONFIRMED",
+    "evidence": "spec1b: 'Metered Property Rate $7.960', Appendix B, Part V 'UNIT-BASED RATES FOR METERED PROPERTY'; WebFetch reported page 14 (p. 13 vs 14 ?)",
+    "fix": "Check page number (13 or 14 ?)."
+   },
+   {
+    "claim": "unit not defined in the sewer report",
+    "verdict": "CONFIRMED",
+    "evidence": "spec1b defines no unit for Part V; only Part VI uses 'per cubic metre'",
+    "fix": ""
+   },
+   {
+    "claim": "City metered-rates page defines one unit for water and sewer meter rates as 2,831.6 L = 100 ft³",
+    "verdict": "CONFIRMED",
+    "evidence": "Page 'Utility meter rates for water, sewer, and energy': 'One unit equals ... 2,831.6 litres ... 100 cubic feet'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Rates are as proposed to Council ('approve, in principle'); the enacted 2026 by-law amendment was not checked. Label 'proposed' or cite the enacted by-law before treating as a rule."
+  ],
+  "overall": "ok"
+ },
+ "vanCAC": {
+  "where_read": "Saved copy /mnt/user-data/beyond-data-sources/public/vanCAC/full.pdf (pdftotext), cover, s.8 and Appendix Table 1.",
+  "claims": [
+   {
+    "claim": "Vancouver CAC Policy amended 30 Sep 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Cover: 'Last amended September 30, 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "s.8.2(c): rezonings submitted after 30 Sep 2026 that are 100% commercial, industrial and institutional (hospital, post-secondary, care facility) are exempt",
+    "verdict": "CONFIRMED",
+    "evidence": "8.2(c) 'Rezonings submitted after September 30, 2026 that include 100% commercial, industrial and institutional (hospital, post-secondary, care facility) developments'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Policy does not say a data centre is 'industrial'; classification of a data centre use under the Zoning and Development By-law needs its own source (?).",
+   "Exemption covers CACs only; other charges (e.g. DCLs) are not addressed by this source."
+  ],
+  "overall": "ok"
+ },
+ "cec2023pump": {
+  "where_read": "Saved copy /mnt/user-data/beyond-data-sources/public/cec2023pump/full.pdf (pdftotext), cover and s.2.2.2.",
+  "claims": [
+   {
+    "claim": "California Energy Commission CEC-500-2023-026 (UCLA, 2023)",
+    "verdict": "CONFIRMED",
+    "evidence": "'May 2023 | CEC-500-2023-026'; 'UCLA Luskin Center for Innovation'; prepared for California Energy Commission",
+    "fix": ""
+   },
+   {
+    "claim": "pressurisation energy 222 kWh per acre-foot",
+    "verdict": "CONFIRMED",
+    "evidence": "s.2.2.2: 'This results in a uniform requirement for pressurization energy of 222kWh/AF.'",
+    "fix": "Add assumptions: 70 psi system, 85% pump efficiency."
+   },
+   {
+    "claim": "≈0.18 kWh/m³ (Claude conversion)",
+    "verdict": "CONFIRMED",
+    "evidence": "222 ÷ 1,233.48 m³/AF = 0.180 kWh/m³ (arithmetic check)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Figure is a modelled pump-to-70 psi value for direct potable reuse in LA County, not a measured value for reclaimed make-up supply to a data centre; fine as a labelled estimate."
+  ],
+  "overall": "ok"
+ },
+ "aesoAMS2025wind": {
+  "where_read": "Saved copy /mnt/user-data/beyond-data-sources/public/aesoAMS2025wind/full.pdf (pdftotext), page footers checked; Figure 17 page and Table 7 page.",
+  "claims": [
+   {
+    "claim": "AESO Annual Market Statistics 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "Footer 'AESO 2025 Annual Market Statistics'",
+    "fix": ""
+   },
+   {
+    "claim": "Table 7 p. 27: wind achieved $23.18/MWh in 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'TABLE 7: 2025 Regional Wind Statistics ... Achieved price ($/MWh) $24.39 $22.70 $23.18' (printed p. 27)",
+    "fix": ""
+   },
+   {
+    "claim": "p. 23: wind 46.9% below average pool price; solar 17.4% below",
+    "verdict": "CORRECTED",
+    "evidence": "'Wind (-46.9 per cent) and solar (-17.4 per cent) were the only asset types to achieve a discount' — on printed p. 22 (Figure 17 page, PDF p. 29)",
+    "fix": "Change p. 23 to p. 22."
+   },
+   {
+    "claim": "average pool price $43.68",
+    "verdict": "CONFIRMED",
+    "evidence": "'The average pool price fell 30.4 per cent in 2025 to $43.68/MWh'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "needs fix"
+ },
+ "bchTS6": {
+  "where_read": "Saved copy /mnt/user-data/beyond-data-sources/public/bchTS6/full.pdf (scanned, pdftotext OCR layer), App. 1 s.5(e) and s.10.",
+  "claims": [
+   {
+    "claim": "BC Hydro Electric Tariff Supplement No. 6, Agreement for new transmission service customers, accepted for filing 1991",
+    "verdict": "CONFIRMED",
+    "evidence": "'Electric Tariff Supplement No. 6 / AGREEMENT FOR NEW TRANSMISSION SERVICE CUSTOMERS'; stamp 'APR 11 1991 Accepted for filing'",
+    "fix": ""
+   },
+   {
+    "claim": "App. 1 s.5(e): reinforcement payment recalculated and first customer refunded if a later customer uses it within 5 years",
+    "verdict": "CONFIRMED",
+    "evidence": "5(e) '...subsequent Customer will make use of the System Reinforcement during the first five years ... recalculate ... refund the appropriate amount to the first Customer'",
+    "fix": ""
+   },
+   {
+    "claim": "s.10: later customers pay share of replacement cost of common extension in proportion to contract demand",
+    "verdict": "CONFIRMED",
+    "evidence": "10(b)(i) 'share of the replacement cost ... in the proportion of their Contract Demands to the total of the Contract Demands'",
+    "fix": ""
+   },
+   {
+    "claim": "first customer paid depreciated value (3% a year)",
+    "verdict": "CONFIRMED",
+    "evidence": "10(b)(iii) 'based on the depreciated value ... original cost being depreciated at 3% per year'",
+    "fix": ""
+   },
+   {
+    "claim": "for 7 years capacity not excess if first customer shows it needs it within 3 years",
+    "verdict": "CONFIRMED",
+    "evidence": "10(a) 'During the first seven years ... not be considered to be excess if the Customer ... will require ... within three years'",
+    "fix": ""
+   },
+   {
+    "claim": "no payment if BC Hydro adds load ≤5% of capacity",
+    "verdict": "CONFIRMED",
+    "evidence": "10(d) 'added load ... not exceeding in aggregate 5% of the Nominal Capacity'",
+    "fix": ""
+   },
+   {
+    "claim": "no payment if first customer takes under 30% of contract demand for 36 months, unless it pays O&M and taxes ?",
+    "verdict": "CONFIRMED",
+    "evidence": "10(e) 'below 30% of its Contract Demand for thirty-six consecutive months or more, unless the operating, maintenance and taxes ... are paid by the Customer'",
+    "fix": "Remove '?': the 'unless' clause is in the text."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "1991 tariff supplement; whether it is still the current BCUC-accepted form was not checked (?)."
+  ],
+  "overall": "ok"
+ },
+ "iurc46276": {
+  "where_read": "Saved copy /mnt/user-data/beyond-data-sources/public/iurc46276/full.pdf (pdftotext), caption, paras 2–4, findings p. 9.",
+  "claims": [
+   {
+    "claim": "IURC Cause 46276 order, Indiana Michigan Power / Google, Fort Wayne",
+    "verdict": "CONFIRMED",
+    "evidence": "'CAUSE NO. 46276 ... APPROVED: APR 29 2026'; 'contract with Google LLC'; 'data center in Fort Wayne, Indiana'",
+    "fix": "Add order date 29 Apr 2026."
+   },
+   {
+    "claim": "Quote: 'The Contract also contains demand response obligations designed to reduce I&M's peak load and capacity obligations'",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 9: exact sentence, followed by 'Pet. Ex. 1, p. 13.'",
+    "fix": ""
+   },
+   {
+    "claim": "specified interruptible load and curtailment parameters",
+    "verdict": "CONFIRMED",
+    "evidence": "'These obligations include specified amounts of interruptible load, curtailment parameters, notification procedures'",
+    "fix": "Note amounts are not public ('certain confidential provisions')."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "US (Indiana/PJM) precedent; terms are confidential, so no quantities can be drawn from it."
+  ],
+  "overall": "ok"
+ },
+ "isedPrinciples": {
+  "where_read": "Saved page /mnt/user-data/beyond-data-sources/public/isedPrinciples/page.html (saved 25 Oct 2026, URL ised-isde.canada.ca/.../canadas-responsible-data-centre-development-principles), text extracted.",
+  "claims": [
+   {
+    "claim": "ISED, Canada's Responsible Data Centre Development Principles",
+    "verdict": "CONFIRMED",
+    "evidence": "Page title 'Canada's Responsible Data Centre Development Principles' on ised-isde.canada.ca",
+    "fix": ""
+   },
+   {
+    "claim": "dated 3 Sep 2026 ? (date not printed on saved page)",
+    "verdict": "NOT FOUND",
+    "evidence": "Only date on page: 'Date modified: 2026-10-20'",
+    "fix": "Cite 'Date modified: 2026-10-20'; 3 Sep 2026 needs its own source."
+   },
+   {
+    "claim": "local benefits",
+    "verdict": "CONFIRMED",
+    "evidence": "'1. Data centres must create lasting local benefits'",
+    "fix": ""
+   },
+   {
+    "claim": "'Proponents must pay the costs of connecting and serving their projects'",
+    "verdict": "CONFIRMED",
+    "evidence": "Principle 2: 'Proponents must pay the costs of connecting and serving their projects, including new generation, transmission, substations...'",
+    "fix": ""
+   },
+   {
+    "claim": "waste heat recovery one of several priority practices",
+    "verdict": "CONFIRMED",
+    "evidence": "Principle 3: 'Priority should be given to ... closed-loop or high efficiency water technologies, waste heat recovery, and low-emission energy sources'",
+    "fix": ""
+   },
+   {
+    "claim": "no siting criteria",
+    "verdict": "CONFIRMED",
+    "evidence": "Five principles; none sets location criteria (only 'respect local approval processes')",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Used as a 'rule' for grid_headroom, but it is a voluntary national framework with company signatories (page lists 'Signatories'), not a regulation; label as federal principle/policy, not a binding rule."
+  ],
+  "overall": "needs fix"
+ },
+ "epaQuincy": {
+  "where_read": "Saved page /mnt/user-data/beyond-data-sources/public/epaQuincy/page.html (epa.gov/node/286187), text extracted.",
+  "claims": [
+   {
+    "claim": "US EPA water reuse case study, Quincy WA reuse utility",
+    "verdict": "CONFIRMED",
+    "evidence": "'Location: Quincy, Washington ... Quincy Water Reuse Utility'",
+    "fix": ""
+   },
+   {
+    "claim": "operational 30 Jun 2021",
+    "verdict": "CONFIRMED",
+    "evidence": "'the QWRU officially became operational on June 30, 2021'",
+    "fix": ""
+   },
+   {
+    "claim": "$31 M operator-funded",
+    "verdict": "CONFIRMED",
+    "evidence": "'Microsoft would entirely finance the capital investments and related costs ($31 million) ... as well as all operational costs'",
+    "fix": "Add: city owns and operates; Microsoft pays a monthly fee."
+   },
+   {
+    "claim": "30-yr agreement",
+    "verdict": "CONFIRMED",
+    "evidence": "'Quincy and Microsoft signed a 30-year agreement to finance and operate the QWRU'",
+    "fix": ""
+   },
+   {
+    "claim": "138 M gal/yr saved (estimated; 'potable' ?)",
+    "verdict": "CONFIRMED",
+    "evidence": "'reduces the data center's reliance on potable groundwater ... saving an estimated 138 million gallons of water per year'",
+    "fix": "Remove '?': page ties the saving to potable groundwater."
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "US precedent; also 5% of make-up is still potable groundwater and make-up mainly from irrigation canal water (relevant to reclaimed_makeup)."
+  ],
+  "overall": "ok"
+ },
+ "abRFS2026": {
+  "where_read": "Saved page /mnt/user-data/beyond-data-sources/public/abRFS2026/page.html (alberta.ca/renewable-fuels-standard-resources), text and meta tags; fact sheet and regulation not read.",
+  "claims": [
+   {
+    "claim": "Alberta RFS, Alta Reg 29/2010 (regulation text blocked)",
+    "verdict": "NOT FOUND",
+    "evidence": "Page says 'The Renewable Fuels Standard (RFS) Regulation became law in March 2010' but gives no reg number",
+    "fix": "Reg number needs its own source (?)."
+   },
+   {
+    "claim": "minimum annual average 2% bio-based diesel in diesel and 5% renewable alcohol in gasoline",
+    "verdict": "CONFIRMED",
+    "evidence": "'requires a minimum annual average of 5% renewable alcohol in gasoline and 2% bio-based diesel in diesel fuel sold in Alberta'",
+    "fix": "'bio-based diesel' is the page's term; remove '?'."
+   },
+   {
+    "claim": "renewable fuels must show at least 25% lower life-cycle GHG",
+    "verdict": "CONFIRMED",
+    "evidence": "'renewable fuels must demonstrate at least 25% fewer greenhouse gas (GHG) emissions than the equivalent petroleum fuel'",
+    "fix": "Page does not say 'life-cycle' in that sentence (GHGenius life-cycle model is referenced separately)."
+   },
+   {
+    "claim": "RFS resources page dated 9 Oct 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "HTML meta 'published' content='2026-10-09T11:39:47-0600' (not printed on page)",
+    "fix": ""
+   },
+   {
+    "claim": "fact sheet 12 Jan 2024",
+    "verdict": "NOT FOUND",
+    "evidence": "Page links 'RFS Regulation Fact Sheet' but no date; fact sheet not read",
+    "fix": "Keep '?'."
+   },
+   {
+    "claim": "No carbon-intensity limit on the fuel pool, unlike BC (our reading)",
+    "verdict": "CONFIRMED",
+    "evidence": "No carbon-intensity pool limit mentioned on page (absence only; BC side not checked here)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "vanNEU2025": {
+  "where_read": "Saved page /mnt/user-data/beyond-data-sources/public/vanNEU2025/page.html, text and meta tags.",
+  "claims": [
+   {
+    "claim": "Page title 'Southeast False Creek Neighbourhood Energy Utility'",
+    "verdict": "CORRECTED",
+    "evidence": "Page title: 'False Creek Neighbourhood Energy Utility (NEU)'; serves 'Southeast False Creek, parts of Mount Pleasant, and the False Creek Flats'",
+    "fix": "Use 'False Creek Neighbourhood Energy Utility (NEU)'."
+   },
+   {
+    "claim": "modified 21 May 2025 ?",
+    "verdict": "CONFIRMED",
+    "evidence": "HTML meta 'modified' content='Wed, 21 May 2025 16:36:20'",
+    "fix": "Remove '?' (meta tag, not printed)."
+   },
+   {
+    "claim": "70% renewable, mostly sewage heat recovery",
+    "verdict": "CONFIRMED",
+    "evidence": "'The NEU currently generates 70% of its energy from renewable sources, mostly from sewage heat recovery.'",
+    "fix": ""
+   },
+   {
+    "claim": "6.6 MW sewage heat recovery added",
+    "verdict": "CONFIRMED",
+    "evidence": "'In 2024 ... Added 6.6 megawatts of sewage heat recovery capacity to the False Creek Energy Centre'",
+    "fix": "Add year 2024."
+   },
+   {
+    "claim": "City evaluating options for 100% renewable by 2030 (not a commitment)",
+    "verdict": "CONFIRMED",
+    "evidence": "'The next big step for the NEU is evaluating options for transitioning its energy supply to 100% renewable energy by 2030.'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Page does not name the non-renewable 30% (natural gas is not stated here); displaced_source must not assume it from this page."
+  ],
+  "overall": "ok"
+ },
+ "aesoBYOG2026": {
+  "where_read": "WebFetch of aesoengage.aeso.ca/pre-engagement-phase-ii-large-load-integration (page lists 'Proposed BYOG Process (June 26, 2026)'); WebFetch of the linked document (aesoengage.aeso.ca/49943/widgets/210873/documents/170854) returned only a download stub, no text; OCR of J.B.'s print of the engage page (uploads/5f7cfe05-...BYOG_Process___AESO_Engage.pdf) has no BYOG terms. The proposal PDF itself could not be read.",
+  "claims": [
+   {
+    "claim": "AESO Large Load Integration Phase 2A — Proposed BYOG Process, 26 Jun 2026, proposal, not final",
+    "verdict": "CONFIRMED",
+    "evidence": "Engage page: 'Proposed BYOG Process (June 26, 2026)'; Sept 8 2026 update: documents expected and intake to begin 'this fall'",
+    "fix": "Note the June proposal may be superseded by the fall 2026 final."
+   },
+   {
+    "claim": "Applies to transmission-connected loads ≥75 MW DTS, site-aggregated; excludes <75 MW, distribution-connected load and storage",
+    "verdict": "UNREACHABLE",
+    "evidence": "Proposal PDF not readable (download only)",
+    "fix": ""
+   },
+   {
+    "claim": "First intake gas-fired only, 'net new'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Engage page print mentions 'enable net new generation on the transmission system' but not gas-only; PDF not readable",
+    "fix": ""
+   },
+   {
+    "claim": "Tethering ratio: generator output at 25 °C, 40% humidity equals DTS contract capacity",
+    "verdict": "UNREACHABLE",
+    "evidence": "PDF not readable",
+    "fix": ""
+   },
+   {
+    "claim": "Data centres must show municipal zoning or ASP approval and accept data-centre connection requirements",
+    "verdict": "UNREACHABLE",
+    "evidence": "PDF not readable",
+    "fix": ""
+   },
+   {
+    "claim": "DTS commitment fee $15k/MW (refundable)",
+    "verdict": "UNREACHABLE",
+    "evidence": "PDF not readable",
+    "fix": ""
+   },
+   {
+    "claim": "Bridging ≤20/30/40% of DTS by generator milestone, 1,600 MW across intakes, up to 3 years",
+    "verdict": "UNREACHABLE",
+    "evidence": "PDF not readable",
+    "fix": ""
+   },
+   {
+    "claim": "Bridging load fully interruptible, reduced before other non-firm load; curtailment scheme TBD; suspension for failing to curtail",
+    "verdict": "UNREACHABLE",
+    "evidence": "PDF not readable",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Used as a 'rule' for power_allocation, but it is a proposal (June 2026) not a final AESO rule; label as proposed until the final process is read.",
+   "Applies only to ≥75 MW transmission-connected loads; smaller or distribution-connected data centres are out of scope."
+  ],
+  "overall": "unreachable"
+ },
+ "vanEmbodied": {
+  "where_read": "WebFetch of vancouver.ca/files/cov/embodied-carbon-guidelines.pdf (first 100,000 of 103,182 characters read; tail of Appendix A unread).",
+  "claims": [
+   {
+    "claim": "City of Vancouver Embodied Carbon Guidelines, Oct 2023, for VBBL s.10.4",
+    "verdict": "CONFIRMED",
+    "evidence": "Version 1.0, approved by CBO Oct 2023, last amended 18 Oct 2023; applies to 'requirements specified in Section 10.4 of the VBBL'",
+    "fix": ""
+   },
+   {
+    "claim": "benchmark 400 kg CO2e/m²",
+    "verdict": "CONFIRMED",
+    "evidence": "Absolute path: 'ECI = 400 kgCO2e/m2' × gross floor area excluding parkade",
+    "fix": "Say it is the absolute-path benchmark (the baseline path uses a modelled equivalent building)."
+   },
+   {
+    "claim": "new buildings at most 2× the baseline",
+    "verdict": "CONFIRMED",
+    "evidence": "'not be more than double a functionally-equivalent baseline' (f = 2.0)",
+    "fix": ""
+   },
+   {
+    "claim": "800 kg/m² on absolute path is our calculation, not printed",
+    "verdict": "CONFIRMED",
+    "evidence": "No absolute cap value printed; only benchmark × reduction factor",
+    "fix": ""
+   },
+   {
+    "claim": "further cut (10% or 20%) shown as proposed 2025 update",
+    "verdict": "CONFIRMED",
+    "evidence": "Proposed 2025 VBBL: 10% → f = 0.9, 20% → f = 0.8, 'approved in principle by City Council in May 2022'",
+    "fix": ""
+   },
+   {
+    "claim": "Edmonton has no requirement for private buildings (not from this source ?)",
+    "verdict": "NOT FOUND",
+    "evidence": "Edmonton not mentioned in text read (as the register already flags)",
+    "fix": "Needs its own source."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "400 kg/m² is a Vancouver compliance benchmark for buildings under VBBL 10.4, not a measured embodied-carbon coefficient; using it as 'coefficient' for embodied_building should be labelled as a regulatory benchmark. Check whether VBBL 10.4 scope covers a data-centre (industrial/Part 3) building (?)."
+  ],
+  "overall": "ok"
+ },
+ "itsp40006": {
+  "where_read": "WebFetch of cyber.gc.ca/en/guidance/it-media-sanitization-itsp40006 (first 100,000 of 116,310 characters). Alberta standard not read.",
+  "claims": [
+   {
+    "claim": "Canadian Centre for Cyber Security ITSP.40.006, IT Media Sanitization",
+    "verdict": "CONFIRMED",
+    "evidence": "Page title; 'ITSP.40.006 v2', 'July 2017', 'takes effect on (2017-07-07)'",
+    "fix": "Add version v2, July 2017."
+   },
+   {
+    "claim": "supersedes ITSG-06",
+    "verdict": "CONFIRMED",
+    "evidence": "'This publication supersedes ITSG-06 Clearing and Declassification of Electronic Data Storage Devices.'",
+    "fix": ""
+   },
+   {
+    "claim": "cites NIST SP 800-88 Rev. 1",
+    "verdict": "CONFIRMED",
+    "evidence": "References: 'Special Publication (SP) 800-88 revision 1 (SP800-88r1) Guidelines for Media Sanitization, December 2014'",
+    "fix": ""
+   },
+   {
+    "claim": "Government of Alberta Secure Digital Media Sanitization Standard v2.0 (2023) uses NIST terms (not checked ?)",
+    "verdict": "NOT FOUND",
+    "evidence": "Separate document, not read; Alberta not mentioned in ITSP text read",
+    "fix": "Keep '?' until read."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "ITSP.40.006 is federal Government of Canada guidance for GC departments; for a private data centre it is best practice, not a requirement."
+  ],
+  "overall": "ok"
+ },
+ "dkPriceCap": {
+  "where_read": "WebFetch of forsyningstilsynet.dk announcement page (after WebSearch). Memo PDF redirect to cdn1.gopublic.dk refused by fetch tool; not read.",
+  "claims": [
+   {
+    "claim": "Forsyningstilsynet 2025 surplus-heat price cap 95 DKK/GJ",
+    "verdict": "CONFIRMED",
+    "evidence": "'Prisloftet er beregnet til 95 kr. pr. GJ.'",
+    "fix": ""
+   },
+   {
+    "claim": "announcement 1 Nov 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "Page date '01-11-2024'",
+    "fix": ""
+   },
+   {
+    "claim": "VAT basis not stated",
+    "verdict": "CONFIRMED",
+    "evidence": "Announcement page does not say incl./excl. moms (memo PDF unread ?)",
+    "fix": ""
+   },
+   {
+    "claim": "memo PDF URL",
+    "verdict": "CONFIRMED",
+    "evidence": "Page links 'Udmeldelsesnotat' at forsyningstilsynet.dk/Media/638660516540345737/...2025.pdf (content not read)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Danish regulated cap used as comparator ('check') only — appropriate."
+  ],
+  "overall": "ok"
+ },
+ "nrelATB_crf": {
+  "where_read": "WebSearch, then WebFetch of atb.nrel.gov/electricity/2024/equations_&_variables (page says newest is 2024b; own edition not named).",
+  "claims": [
+   {
+    "claim": "NREL ATB defines CRF = i ÷ (1 − (1+i)^−n)",
+    "verdict": "CONFIRMED",
+    "evidence": "'CRF = WACC × [1 / (1 − 1/(1+WACC)^t)]', 'ratio of a constant annuity to the present value of receiving that annuity' — algebraically identical",
+    "fix": "Cite ATB Electricity 2024, 'Equations & Variables' page; i = WACC, n = t."
+   },
+   {
+    "claim": "edition and page not named; no URL",
+    "verdict": "CORRECTED",
+    "evidence": "Found: https://atb.nrel.gov/electricity/2024/equations_&_variables",
+    "fix": "Add URL and edition (ATB 2024)."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "ATB applies CRF with real WACC and t = 30-yr default cost-recovery period; lcoh/payback must state their own i and n."
+  ],
+  "overall": "needs fix"
+ },
+ "ashraeLife": {
+  "where_read": "WebSearch, then WebFetch of handbook.ashrae.org/Handbooks/A15/IP/A15_CH37/a15_ch37_ip.aspx (open, no login).",
+  "claims": [
+   {
+    "claim": "ASHRAE Handbook HVAC Applications 2015 ch.37",
+    "verdict": "CONFIRMED",
+    "evidence": "'CHAPTER 37. OWNING AND OPERATING COSTS' (A15)",
+    "fix": ""
+   },
+   {
+    "claim": "Table 3: centrifugal chiller >25 yr; cooling tower metal >22",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 3 (Abramson et al. 2005): 'Chillers, centrifugal >25'; 'Cooling towers, metal >22'",
+    "fix": ""
+   },
+   {
+    "claim": "Table 4 (Akalin 1978, footnoted as possibly outdated): air-cooled condenser 20; base-mounted pump 20; shell-and-tube HX 24; transformer 30",
+    "verdict": "CONFIRMED",
+    "evidence": "Akalin column 20 / 20 / 24 / 30; footnote 'data from Akalin (1978) ... may be outdated and not statistically relevant'",
+    "fix": ""
+   },
+   {
+    "claim": "Table 4 (Akalin): commercial water-to-air heat pump >24",
+    "verdict": "CORRECTED",
+    "evidence": "Akalin value 19 yr; '>24' is the Abramson et al. (2005) value",
+    "fix": "Write 'commercial water-to-air heat pump >24 (Abramson 2005; Akalin 1978: 19)'."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Median service lives are survey medians for commercial buildings, not design lives for data-centre plant; Akalin values are flagged by ASHRAE itself as possibly outdated."
+  ],
+  "overall": "needs fix"
+ },
+ "nrelBatt2025": {
+  "where_read": "WebSearch, then WebFetch of docs.nrel.gov/docs/fy25osti/93281.pdf.",
+  "claims": [
+   {
+    "claim": "Cole, Ramasamy, Turan, NREL TP-6A40-93281, 2025 Update, Jun 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'Wesley Cole, Vignesh Ramasamy, and Merve Turan'; NREL/TP-6A40-93281; June 2025",
+    "fix": ""
+   },
+   {
+    "claim": "US$334/kWh (2024$) 4 h",
+    "verdict": "CONFIRMED",
+    "evidence": "'The 2024 starting point of $334/kWh is derived from the bottom-up cost model.'",
+    "fix": ""
+   },
+   {
+    "claim": "fixed O&M 4% of the $/kW capacity cost (a year ?)",
+    "verdict": "CONFIRMED",
+    "evidence": "'The FOM value selected is 4% of the $/kW capacity cost for a 4-hour battery'; FOM in 2024$/kW-yr",
+    "fix": "Remove '?': per year."
+   },
+   {
+    "claim": "15-yr life",
+    "verdict": "CONFIRMED",
+    "evidence": "'The lifetime we selected is 15 years'",
+    "fix": ""
+   },
+   {
+    "claim": "85% round trip",
+    "verdict": "CONFIRMED",
+    "evidence": "'The round-trip efficiency is chosen to be 85%'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "US utility-scale costs in USD 2024; Canadian use needs currency/year conversion."
+  ],
+  "overall": "ok"
+ },
+ "rehlkoKD2000": {
+  "where_read": "WebSearch, then WebFetch of techcomm.kohler.com/techcomm/pdf/g5626.pdf.",
+  "claims": [
+   {
+    "claim": "Kohler/Rehlko Industrial Diesel Generator Set KD2000, G5-626 (rev 6/24d)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Industrial Diesel Generator Set - KD2000'; footer 'G5-626 (KD2000) 6/24d'",
+    "fix": ""
+   },
+   {
+    "claim": "2000 kW standby",
+    "verdict": "CONFIRMED",
+    "evidence": "Standby 2000 kW (2500 kVA)",
+    "fix": ""
+   },
+   {
+    "claim": "data-center continuous same as standby",
+    "verdict": "CONFIRMED",
+    "evidence": "DCC: 'Same as the Standby Rating below'",
+    "fix": ""
+   },
+   {
+    "claim": "Sound Level 2 enclosure 13493 × 3488 × 4777 mm max",
+    "verdict": "CONFIRMED",
+    "evidence": "'13493 x 3488 x 4777' mm (531 x 137 x 188 in.)",
+    "fix": ""
+   },
+   {
+    "claim": "Tier 2 EPA",
+    "verdict": "CONFIRMED",
+    "evidence": "'Tier 2 EPA-Certified for Stationary Emergency Applications'",
+    "fix": ""
+   },
+   {
+    "claim": "cULus UL 2200 and CSA C22.2 No. 100",
+    "verdict": "CONFIRMED",
+    "evidence": "'cULus listing (UL 2200 and CSA C22.2 No. 100)'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Vendor spec sheet: DCC rating is a manufacturer claim; label so. Tier 2 certification is for emergency use only (US EPA)."
+  ],
+  "overall": "ok"
+ },
+ "mvStageHistory": {
+  "where_read": "WebSearch, then WebFetch of metrovancouver.org/boards/GVWD/WD-2026-05-29-ADD-I1.pdf.",
+  "claims": [
+   {
+    "claim": "Metro Vancouver, Water Supply Preparedness for Summer 2026 (report 1 May 2026; Board addendum 29 May 2026)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Date: May 1, 2026 Meeting Date: May 13, 2026'; file is GVWD 29 May 2026 addendum (WD-2026-05-29-ADD-I1)",
+    "fix": ""
+   },
+   {
+    "claim": "2026 Stage 2 from 1 May",
+    "verdict": "CONFIRMED",
+    "evidence": "'Stage 2 water restrictions — which prohibit all lawn watering — starting on May 1'",
+    "fix": ""
+   },
+   {
+    "claim": "Stage 3 anticipated early June",
+    "verdict": "CONFIRMED",
+    "evidence": "'Stage 3 restrictions are anticipated to begin in early June.'",
+    "fix": ""
+   },
+   {
+    "claim": "2023 'the most recent escalation to Stage 2' before 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'The most recent escalation to Stage 2 was during the summer of 2023'",
+    "fix": ""
+   },
+   {
+    "claim": "Stage 3 2015; Stage 1 extended to 31 Oct 2022; Stage 2 4 Aug–15 Oct 2023; Stage 3 from 8 Jun 2026; Stage 1 from 1 Sep 2026 — not in this report",
+    "verdict": "CONFIRMED",
+    "evidence": "None of these dates appear; report says only 'summer of 2023', 'early June', Stage 1 'annually from May 1 to October 15'",
+    "fix": "Each needs its own source before use."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "restriction_history 'data' must not include the unsourced history dates until each is sourced."
+  ],
+  "overall": "ok"
+ },
+ "nbcAB2023": {
+  "where_read": "Local J.B. upload /root/.claude/uploads/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/e82e289b-abc_2023p2_20260804_NPARC_FINAL2.pdf ('National Building Code – 2023 Alberta Edition Volume 1', © NRC 2026), pdftotext; compared with local NBC 2020 (d1d05d5a-NBC2020p2.pdf). NRC page (WebFetch) confirms free PDF and DOI 10.4224/hz98-7h49.",
+  "claims": [
+   {
+    "claim": "NBC 2023 Alberta Edition, Vol. 1 Div. B, NRC 2026, free PDF doi 10.4224/hz98-7h49",
+    "verdict": "CONFIRMED",
+    "evidence": "Cover 'National Building Code – 2023 Alberta Edition Volume 1', '© ... National Research Council of Canada, 2026'; NRC page: 'Free PDF', DOI https://doi.org/10.4224/hz98-7h49",
+    "fix": ""
+   },
+   {
+    "claim": "3.3.1.9.(1) corridors 1 100 mm",
+    "verdict": "CORRECTED",
+    "evidence": "'(1) The minimum width of a public corridor shall be 1 100 mm.' (2) applies to corridors used by the public/classrooms/patients",
+    "fix": "Say 'public corridors 1 100 mm'; width of non-public corridors is set elsewhere (article not checked ?)."
+   },
+   {
+    "claim": "3.3.1.9.(5) dead ends ≤ 6 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'a dead-end corridor is permitted provided it is not more than 6 m long'",
+    "fix": ""
+   },
+   {
+    "claim": "3.3.1.10 aisles 'in conformance with the NFC(AE)'",
+    "verdict": "CONFIRMED",
+    "evidence": "'aisles shall be provided in conformance with the NFC(AE).'",
+    "fix": ""
+   },
+   {
+    "claim": "3.4.2.5.(1) travel distance 45 m sprinklered (c), 40 m business (b), 30 m otherwise (f), p. 3-143",
+    "verdict": "CONFIRMED",
+    "evidence": "'b) 40 m in a business and personal services occupancy, c) 45 m ... sprinklered throughout' (Division B 3-143); 'f) 30 m in any floor area other than...' (on next page)",
+    "fix": "(f) is on p. 3-144."
+   },
+   {
+    "claim": "3.6.2.1.(6) electrical equipment required in a service room by the Electrical Code Regulation (Safety Codes Act) → 1 h",
+    "verdict": "CONFIRMED",
+    "evidence": "'according to the Electrical Code Regulation made pursuant to the Safety Codes Act ... not less than 1 h'",
+    "fix": ""
+   },
+   {
+    "claim": "3.6.2.1.(7) service room in a storey not sprinklered throughout → 1 h",
+    "verdict": "CONFIRMED",
+    "evidence": "'in a storey that is not sprinklered throughout, a service room that contains service equipment other than ... (1) to (6) ... 1 h'",
+    "fix": "Add 'except as permitted by (8)'."
+   },
+   {
+    "claim": "same as NBC 2020 for these articles",
+    "verdict": "CORRECTED",
+    "evidence": "NBC 2020 3.6.2.1.(6) refers to 'CSA C22.1, Canadian Electrical Code, Part I' and 3.3.1.10 to 'the NFC'",
+    "fix": "Say 'same requirements; references changed to the Alberta Electrical Code Regulation and NFC(AE)'."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "1 100 mm applies to public corridors; data-hall service corridors may not be public corridors — check occupancy classification before applying.",
+   "Travel distance (b) 40 m applies only to business occupancy; a data centre's major occupancy (?) must be fixed first."
+  ],
+  "overall": "needs fix"
+ },
+ "mainovaWestville": {
+  "where_read": "WebSearch, then WebFetch of the Mainova press-release PDF (mainova.de/resource/blob/76624/.../pm-08072021-rz-abwaermenutzung-westville-data.pdf).",
+  "claims": [
+   {
+    "claim": "Mainova (utility) press release 8 Jul 2021",
+    "verdict": "CONFIRMED",
+    "evidence": "Dated '08.07.2021'",
+    "fix": ""
+   },
+   {
+    "claim": "Westville, Frankfurt, about 1,300 homes",
+    "verdict": "CONFIRMED",
+    "evidence": "'rund 1.300 Neubauwohnungen' (plus commercial units)",
+    "fix": ""
+   },
+   {
+    "claim": "at least 60% of heat from Telehouse data centre",
+    "verdict": "CONFIRMED",
+    "evidence": "'zu mindestens 60 Prozent' from the neighbouring data centre; rest Mainova district heat",
+    "fix": ""
+   },
+   {
+    "claim": "'Der Beginn der Wärmelieferung ist ab Anfang 2023 vorgesehen'",
+    "verdict": "CONFIRMED",
+    "evidence": "Exact sentence present",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Utility press release: a 2021 plan/claim, not evidence that delivery started or that 60% was achieved."
+  ],
+  "overall": "ok"
+ },
+ "quebecQScale": {
+  "where_read": "WebSearch, then WebFetch of cdn-contenu.quebec.ca/.../developpper-ia-decarboner-quebec.pdf.",
+  "claims": [
+   {
+    "claim": "Québec MELCCFP (waste-heat coordinator), Vecteur Environnement, Mar 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Vecteur Environnement 'Mars 2026', 'PAR STÉPHAN GAGNON, ing.', 'Coordonnateur de la valorisation des rejets thermiques' (MELCCFP)",
+    "fix": "Name the author; it is a signed magazine article hosted on quebec.ca, not a ministry publication."
+   },
+   {
+    "claim": "QScale Lévis heat to a 12 ha greenhouse park",
+    "verdict": "CONFIRMED",
+    "evidence": "'le nouveau parc de serres de 12 hectares' 'à proximité de l'immense centre de traitement de données d'IA ... QScale, à Lévis'",
+    "fix": ""
+   },
+   {
+    "claim": "Les fraises de l'île d'Orléans",
+    "verdict": "CONFIRMED",
+    "evidence": "Grower named as Les fraises de l'île d'Orléans",
+    "fix": ""
+   },
+   {
+    "claim": "under construction",
+    "verdict": "CONFIRMED",
+    "evidence": "Park 'devrait être terminée à temps' for next winter's strawberries",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ }
+}

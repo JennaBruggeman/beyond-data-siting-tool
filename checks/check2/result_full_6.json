@@ -1,0 +1,1014 @@
+{
+ "cologixVAN4web": {
+  "where_read": "WebFetch of https://cologix.com/data-centers/vancouver/van4/ on 30 Oct 2026 (summarised by fetch tool, not raw HTML)",
+  "claims": [
+   {
+    "claim": "Address 175 W Cordova St",
+    "verdict": "CONFIRMED",
+    "evidence": "'175 West Cordova Street, Vancouver, British Columbia'",
+    "fix": ""
+   },
+   {
+    "claim": "'4 MW of colocation capacity'",
+    "verdict": "CONFIRMED",
+    "evidence": "'4 MW of colocation capacity.'",
+    "fix": ""
+   },
+   {
+    "claim": "Page now prints 'Site Capacity: 6.5 MW' (check 2 note)",
+    "verdict": "NOT FOUND",
+    "evidence": "Fetch reports: 'The page gives no separate site-capacity figure.' (fetch summary ?)",
+    "fix": "Drop the 6.5 MW note or re-check in a browser; this read found only 4 MW"
+   },
+   {
+    "claim": "3–10 kW/cabinet",
+    "verdict": "CONFIRMED",
+    "evidence": "'Load design 3-10 kW per cabinet'",
+    "fix": ""
+   },
+   {
+    "claim": "'68K SQFT across four floors'",
+    "verdict": "CONFIRMED",
+    "evidence": "'68K SQFT across four floors'; FAQ '68,000 square feet of space'",
+    "fix": ""
+   },
+   {
+    "claim": "Page also shows 58K",
+    "verdict": "NOT FOUND",
+    "evidence": "Only 68K / 68,000 reported in this read ?",
+    "fix": "Drop '58K ?' unless seen again"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Labelled OPERATOR CLAIM: correct. Colocation capacity is not measured IT load; keep it as a claim/upper bound."
+  ],
+  "overall": "needs fix"
+ },
+ "oro2019": {
+  "where_read": "No saved copy; WebFetch of https://doi.org/10.1016/j.scs.2018.12.012 refused (provenance); web search budget used up",
+  "claims": [
+   {
+    "claim": "Authors, title, SCS 45:522–542",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "1 MW air-cooled model, Barcelona",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "Return air up to 47 °C / condenser up to 50 °C",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "Heat pump to 90 °C",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "ERF primary-energy basis 25–45% / ~55%, not ISO ERF",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Cannot confirm; roles list empty. A Barcelona modelling study used for heat_temp/liquid_capture should be labelled as a model result, not a measured value."
+  ],
+  "overall": "unreachable"
+ },
+ "pozgaj2025": {
+  "where_read": "No saved copy; WebFetch of https://doi.org/10.3390/app16010323 refused (provenance); search budget used up",
+  "claims": [
+   {
+    "claim": "Authors, Applied Sciences 16(1):323",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "108.5 kW HPC, Rijeka",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "~30% of heat to air via chilled-water rack coolers 10–15 °C",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "Heat pumps replace chillers",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "ERF 0.78–0.88",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Single 108.5 kW HPC case; generalising its ~30% air share to large data centres is an extrapolation ?"
+  ],
+  "overall": "unreachable"
+ },
+ "iso30134_6": {
+  "where_read": "No saved copy; WebFetch of BIS PDF refused (provenance)",
+  "claims": [
+   {
+    "claim": "ERF = E_Reuse/E_DC, 0–1",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "cl.4 only energy reused outside boundary counts",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "cl.5 heat pumps outside boundary 'shall not be included in the calculation'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "cl.6 measured 'at the logical boundary ... at the handoff point' by flow and temperature rise",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "Annex A.1.5.3 heat-pump output not reusable energy",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "BIS adoption text dated Oct 2023",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Used as 'rule'; ISO/IEC 30134-6 is a voluntary KPI standard, not a legal requirement in BC/AB. Call it a standard definition."
+  ],
+  "overall": "unreachable"
+ },
+ "cwec": {
+  "where_read": "Local EPW files /mnt/attach/outputs/data/51376785-CAN_BC_VANCOUVER-INTL-A_1108395_CWEC.epw and effbc917-CAN_AB_EDMONTON-INTL-A_3012216_CWEC.epw (headers and year column parsed); ECCC folder page refused (permission not answered)",
+  "claims": [
+   {
+    "claim": "File names CAN_BC_VANCOUVER-INTL-A_1108395_CWEC.epw, CAN_AB_EDMONTON-INTL-A_3012216_CWEC.epw",
+    "verdict": "CONFIRMED",
+    "evidence": "Files present in data/ (with hash prefixes 51376785-, effbc917-)",
+    "fix": ""
+   },
+   {
+    "claim": "Header 'CWEC2011' is a file-format label",
+    "verdict": "CONFIRMED",
+    "evidence": "COMMENTS 1: 'Custom DEF format for CWEC2011 formatted files.'",
+    "fix": ""
+   },
+   {
+    "claim": "Source months 2000–2017",
+    "verdict": "CONFIRMED",
+    "evidence": "Year column: Vancouver 2000–2017, Edmonton 2000–2017 (8760 rows each)",
+    "fix": ""
+   },
+   {
+    "claim": "ECCC v_2020 folder, posted Dec 2022, built on CWEEDS 2020",
+    "verdict": "UNREACHABLE",
+    "evidence": "ECCC page not opened; EPW header does not state CWEEDS 2020 or posting date",
+    "fix": ""
+   },
+   {
+    "claim": "Hourly data usable for temperature / dew point",
+    "verdict": "CONFIRMED",
+    "evidence": "8760 hourly rows each; DATA PERIODS 1/1–12/31",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "HDD16 shares from one typical year are fine as data; note a typical year is not a design or future-climate year."
+  ],
+  "overall": "ok"
+ },
+ "waterHardness2026": {
+  "where_read": "Saved Metro Vancouver 2025 Water Quality Annual Report Vol 1 (full.pdf, pdftotext) Appendix B pp. 37–39; EPCOR PDF refused by WebFetch (denied)",
+  "claims": [
+   {
+    "claim": "EPCOR 2021 Rossdale avg 170 (137–203), E.L. Smith 169 (143–201)",
+    "verdict": "UNREACHABLE",
+    "evidence": "No source given; not opened",
+    "fix": ""
+   },
+   {
+    "claim": "EPCOR Jan–May 2026 both plants 177.8 (146–204)",
+    "verdict": "UNREACHABLE",
+    "evidence": "EPCOR monthly summary fetch denied",
+    "fix": ""
+   },
+   {
+    "claim": "Metro Vancouver 2025 treated hardness Capilano 20.5",
+    "verdict": "CONFIRMED",
+    "evidence": "'2025 – Capilano Water System' ... 'Hardness as CaCO3 (mg/L) 3.6 20.5 18.8 - 22.2'",
+    "fix": ""
+   },
+   {
+    "claim": "Seymour 20.2",
+    "verdict": "CONFIRMED",
+    "evidence": "'2025 – Seymour Water System' ... 'Hardness as CaCO3 (mg/L) 4.8 20.2 18.1 - 22.1'",
+    "fix": ""
+   },
+   {
+    "claim": "Coquitlam 2.4",
+    "verdict": "CONFIRMED",
+    "evidence": "'2025 – Coquitlam Water System' ... 'Hardness as CaCO3 (mg/L) 2.4 2.4 2.2 - 2.7'",
+    "fix": ""
+   },
+   {
+    "claim": "Edmonton ~8× harder than Capilano/Seymour (our calculation)",
+    "verdict": "CONFIRMED",
+    "evidence": "170/20.5 = 8.3; 177.8/20.2 = 8.8 (arithmetic only; Edmonton input unverified this read)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "needs fix"
+ },
+ "vanStreets2026": {
+  "where_read": "Local files /mnt/attach/outputs/data/raw/van/public-streets.csv and streets/lanes_2026-10-18.geojson, rows counted with Python",
+  "claims": [
+   {
+    "claim": "17,072 street centreline segments",
+    "verdict": "CONFIRMED",
+    "evidence": "17072 rows; fields Geom;HBLOCK;STREETUSE;geo_point_2d",
+    "fix": ""
+   },
+   {
+    "claim": "By hundred block with street use (residential, collector, arterial, others)",
+    "verdict": "CONFIRMED",
+    "evidence": "STREETUSE: Residential 13171, Arterial 2264, Secondary Arterial 1087, Collector 542, Closed 4, Recreational 3, Leased 1",
+    "fix": ""
+   },
+   {
+    "claim": "7,856 lane segments",
+    "verdict": "CONFIRMED",
+    "evidence": "7856 features",
+    "fix": ""
+   },
+   {
+    "claim": "Lane surface not recorded",
+    "verdict": "CONFIRMED",
+    "evidence": "Properties only from_hundred_block, std_street, geo_point_2d",
+    "fix": ""
+   },
+   {
+    "claim": "Lanes updated by City 27 Jul 2026",
+    "verdict": "NOT FOUND",
+    "evidence": "No date in saved GeoJSON (register already flags ?)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Centrelines give routes, not pipe cost; distribution_cost still needs a cost source."
+  ],
+  "overall": "ok"
+ },
+ "vbblHDD": {
+  "where_read": "Saved page.html of VBBL 2014 ep001021.1, tags stripped",
+  "claims": [
+   {
+    "claim": "VBBL 2014 Table 1.1.3.1.A degree-days below 18 °C 2,925",
+    "verdict": "CONFIRMED",
+    "evidence": "'Table 1.1.3.1.A Climatic Data for the City of Vancouver – Except Granville & 41st ... 5. Degree-days below 18°C 2 925'",
+    "fix": ""
+   },
+   {
+    "claim": "Current edition value ?",
+    "verdict": "UNREACHABLE",
+    "evidence": "Only 2014 edition read",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "A design climatic value, not a rule for demand; and from a superseded 2014 edition. Table 1.1.3.1.B (Granville & 41st) also gives 2,925."
+  ],
+  "overall": "ok"
+ },
+ "vanNEURates2026": {
+  "where_read": "Saved full.pdf (council report), pdftotext",
+  "claims": [
+   {
+    "claim": "City of Vancouver, 2026 False Creek NEU customer rates",
+    "verdict": "CONFIRMED",
+    "evidence": "'SUBJECT: 2026 False Creek Neighbourhood Energy Utility Customer Rates'",
+    "fix": ""
+   },
+   {
+    "claim": "RTS 18251, 21 Oct 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'Report Date: October 21, 2025' 'RTS No.: 18251'",
+    "fix": ""
+   },
+   {
+    "claim": "Levelised rate approach",
+    "verdict": "CONFIRMED",
+    "evidence": "'the commercial utility rate models levelized rate approach (see Appendix B)'",
+    "fix": ""
+   },
+   {
+    "claim": "Commercial utility model with return on invested capital",
+    "verdict": "CONFIRMED",
+    "evidence": "'commercial utility model, recovering all NEU costs, including a return on invested capital'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [],
+  "overall": "ok"
+ },
+ "gwells": {
+  "where_read": "No saved copy; no GWELLS CSVs found under data/ or uploads; apps.nrs.gov.bc.ca/gwells fetch refused (provenance)",
+  "claims": [
+   {
+    "claim": "Export files well.csv, lithology.csv, screen.csv, pt_aquifer_parameters.csv",
+    "verdict": "UNREACHABLE",
+    "evidence": "Neither the files nor the GWELLS page could be opened",
+    "fix": ""
+   },
+   {
+    "claim": "J.B. upload",
+    "verdict": "NOT FOUND",
+    "evidence": "No such files found locally in data/ or uploads ?",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "'All coefficients' for ground rests on an export that cannot be located; well records are driller reports, not tested parameters (except pumping-test table)."
+  ],
+  "overall": "unreachable"
+ },
+ "mvWDP2021": {
+  "where_read": "Saved full.pdf (GVS&DD Waste Discharge Permit Application), pdftotext",
+  "claims": [
+   {
+    "claim": "Dated Dec 2021",
+    "verdict": "CONFIRMED",
+    "evidence": "Footer 'December 2021 Page 1 of 13'",
+    "fix": ""
+   },
+   {
+    "claim": "'cooling water' and 'boiler blow down' among non-domestic sources to describe",
+    "verdict": "CONFIRMED",
+    "evidence": "'Describe all sources of non-domestic wastewater ... cooling water, boiler blow down, contaminated storm waste, etc.'",
+    "fix": ""
+   },
+   {
+    "claim": "New industrial permit fee $1,000",
+    "verdict": "CONFIRMED",
+    "evidence": "'NEW PERMIT APPLICATION FEE ... Industrial Site $1000'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Form lists what to describe; it does not say cooling-tower blowdown will be permitted."
+  ],
+  "overall": "ok"
+ },
+ "burrardTemp2024": {
+  "where_read": "Saved full.pdf (TWN/BC Burrard Inlet Physical Parameters Technical Report), pdftotext",
+  "claims": [
+   {
+    "claim": "Jul 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "Cover: 'July 2024'",
+    "fix": ""
+   },
+   {
+    "claim": "Table 4 p. 31: bottom water 7.6–13.9 °C across seasons (2018–20)",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 4 (printed p. 30, PDF p. 31): lowest bottom 7.6 (Central winter), highest 11.7 - 13.9 (Central summer); 'Data collected by TWN cruises in 2018-2020'",
+    "fix": ""
+   },
+   {
+    "claim": "Proposed objective 'No further increase in temperature' (p. 5)",
+    "verdict": "CONFIRMED",
+    "evidence": "Printed p. 4 / PDF p. 5: 'No further increase in temperature; the natural temperature cycle ... should not be altered'",
+    "fix": ""
+   },
+   {
+    "claim": "False Creek not sampled",
+    "verdict": "CONFIRMED",
+    "evidence": "'in all sub-basins of Burrard Inlet except False Creek'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Note the proposed objective table includes a False Creek column, so the objective would apply there though no data; proposed objectives are not yet law."
+  ],
+  "overall": "ok"
+ },
+ "hawaiiSWAC2002": {
+  "where_read": "Saved full.pdf (Hawaii DBEDT SDC feasibility, Oct 2002), pdftotext",
+  "claims": [
+   {
+    "claim": "Oct 2002",
+    "verdict": "CONFIRMED",
+    "evidence": "Cover 'October 2002'",
+    "fix": ""
+   },
+   {
+    "claim": "Cold-water pipe US$12.05–12.47 M",
+    "verdict": "CONFIRMED",
+    "evidence": "'CWP $12,046,202' (PDF p. 61); 'CWP $12,470,858' (PDF p. 66)",
+    "fix": ""
+   },
+   {
+    "claim": "5.7–5.8 km pipe",
+    "verdict": "CONFIRMED",
+    "evidence": "10,360 + 8,320 ft = 5.69 km; 12,230 + 6,793 ft = 5.80 km",
+    "fix": ""
+   },
+   {
+    "claim": "≈US$2,120–2,150/m (our conversion)",
+    "verdict": "CONFIRMED",
+    "evidence": "12,046,202/5,694 m = 2,116; 12,470,858/5,798 m = 2,151 (round 2,120 is ~2,116)",
+    "fix": ""
+   },
+   {
+    "claim": "Intake ~457–488 m depth",
+    "verdict": "CONFIRMED",
+    "evidence": "'intake was located at the 1,500-foot contour'; 'located in 1,600 feet'",
+    "fix": ""
+   },
+   {
+    "claim": "92.5% energy saving (Exec Summary p. 4)",
+    "verdict": "CONFIRMED",
+    "evidence": "'case studies saved 92.5% of the energy typically used in CCSs' (p. 4)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "92.5% is a weighted average of three Honolulu case studies vs conventional chillers; deep tropical ocean, not Burrard Inlet."
+  ],
+  "overall": "ok"
+ },
+ "bennettBill22": {
+  "where_read": "WebFetch of Bennett Jones URL refused (provenance)",
+  "claims": [
+   {
+    "claim": "Post dated 11 Mar 2024",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "Bill 22 Royal Assent 31 May 2022; proclaimed 6 Mar 2024",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "Self-supply and export of surplus permitted when s. 2(1)(b) conditions met",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   }
+  ],
+  "roles_ok": false,
+  "overreach": [
+   "A law-firm summary used as a 'rule' role; register itself says it conflicts with the bill and consolidation. Use abEUA2026 for the rule, keep this as secondary context only."
+  ],
+  "overall": "unreachable"
+ },
+ "malecki2002": {
+  "where_read": "No saved copy, no URL; search budget used up",
+  "claims": [
+   {
+    "claim": "Economic Geography 78(4):399–424",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "Quote 'a global bias of Internet backbone networks toward world cities'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "Quote 'that serve as interconnection points'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Role tagged 'data'; it is a 2002 interpretive finding, better tagged context."
+  ],
+  "overall": "unreachable"
+ },
+ "yegixStatus": {
+  "where_read": "WebFetch of https://yegix.ca/status.html refused (provenance)",
+  "claims": [
+   {
+    "claim": "YEGIX Internet Exchange Community Ltd.",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "One named facility Wolfpaw, Scotia Place",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "Five initial peers",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Undated status page; labelled operator claim (correct). Should not be used as current peer count."
+  ],
+  "overall": "unreachable"
+ },
+ "bc_ef2026": {
+  "where_read": "Saved page.html (gov.bc.ca electricity page), tags stripped",
+  "claims": [
+   {
+    "claim": "Government of BC, Electricity emission intensity factors",
+    "verdict": "CONFIRMED",
+    "evidence": "Title 'Electricity emission intensity factors for grid-connected entities'",
+    "fix": "Use the full title"
+   },
+   {
+    "claim": "Updated 26 May 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Last updated on May 26, 2026'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Gives grid emission factors (EEIF); it says nothing about solar share. Supports converting PV kWh to avoided tCO2e only."
+  ],
+  "overall": "ok"
+ },
+ "ab_gshe2018": {
+  "where_read": "Local /mnt/attach/outputs/data/AB_Directive_Water_Wells_GSHE_2018.pdf, pdftotext",
+  "claims": [
+   {
+    "claim": "Alberta, Water Wells and Ground Source Heat Exchange Systems Directive (2018)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Title: Water Wells and Ground Source Heat Exchange Systems Directive' 'Effective Date: December 11, 2018' (AEP Water Quality 2018 No.3)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "It is a regulatory directive (rule) on drilling/construction of open-loop and vertical closed-loop wells, tagged 'data'. Does not itself licence groundwater use for ATES (Water Act licence separate ?)."
+  ],
+  "overall": "ok"
+ },
+ "src16": {
+  "where_read": "Local /mnt/attach/outputs/sources/16_dc_components_sizing.md; audit/plant_sources_2026-10-18.md",
+  "claims": [
+   {
+    "claim": "Internal note 16, 14 Oct 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Hunt 16, 14 Oct 2026.'",
+    "fix": ""
+   },
+   {
+    "claim": "Figures carry status labels sourced/manufacturer/operator/unverified",
+    "verdict": "CONFIRMED",
+    "evidence": "'Status labels. SOURCED = ... MANUFACTURER CLAIM ... OPERATOR CLAIM ... UNVERIFIED'",
+    "fix": ""
+   },
+   {
+    "claim": "'Mark' dry cooler AWSVN-58D-835M ≈30.5 m²/MW named only in audit file",
+    "verdict": "CONFIRMED",
+    "evidence": "audit line 19 'Mark AWSVN-58D-835M | 835 kW ... ≈ 30.5'; note 16 dry cooler is S25 '≈24.5 m² per MW'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Internal note is not a primary source; component_space must cite the primaries (S-ids). The 30.5 m²/MW dry-cooler figure has no primary document."
+  ],
+  "overall": "needs fix"
+ },
+ "mfrGenset": {
+  "where_read": "WebFetch of Cummins S-1443 (summarised). Rehlko KD2000/KD1000, Cat 3516C and Cummins T-030 not opened (no URL/search budget)",
+  "claims": [
+   {
+    "claim": "Rehlko KD2000 13.49×3.49×4.78 m; KD1000 8.43×2.62×3.71 m",
+    "verdict": "UNREACHABLE",
+    "evidence": "Rehlko sheets not opened (see rehlkoKD2000/KD1000)",
+    "fix": ""
+   },
+   {
+    "claim": "~2 MW Cat: 13.9×2.7 m, 3.9–5.0 m high",
+    "verdict": "UNREACHABLE",
+    "evidence": "Cat sheet not read",
+    "fix": ""
+   },
+   {
+    "claim": "0.6–1 MW: 6.6–8.6 × 2.5 m, 3.5–3.7 m high (8.6 m not seen ?)",
+    "verdict": "CONFIRMED",
+    "evidence": "S-1443 600–1000 kW: 98 in wide, lengths 260–338 in, heights 137–146 in = 6.60–8.59 × 2.49 m, 3.48–3.71 m",
+    "fix": "Remove '8.6 m not seen'; 338 in = 8.59 m"
+   },
+   {
+    "claim": "S-1443 prints inches",
+    "verdict": "CONFIRMED",
+    "evidence": "'102” lifting eye to lifting eye (600-1000 kW)'",
+    "fix": ""
+   },
+   {
+    "claim": "Sub-base tank optional; no-tank bases only to 500 kW",
+    "verdict": "CONFIRMED",
+    "evidence": "'Lifting base in lieu of a sub-base tank (250-500 kW)'; 600–1000 kW tanks 200–2400 gal listed",
+    "fix": "State: 600–1000 kW are shown only on sub-base tanks"
+   },
+   {
+    "claim": "≥1 m clearance (Cummins T-030)",
+    "verdict": "UNREACHABLE",
+    "evidence": "T-030 not opened; S-1443 'gives no general clearance requirements'",
+    "fix": ""
+   },
+   {
+    "claim": "No numeric stack-height guidance",
+    "verdict": "CONFIRMED",
+    "evidence": "No such content reported in S-1443 ?",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Manufacturer claims, labelled. Clearance 1 m remains unverified and should not drive layout."
+  ],
+  "overall": "needs fix"
+ },
+ "vertivCDU2300": {
+  "where_read": "WebFetch of vertiv.cn PDF refused (provenance). Note 16 S22 (secondary, internal) read",
+  "claims": [
+   {
+    "claim": "SL-80607 (08/26, preliminary)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Datasheet not opened; note 16 line 185 repeats it (internal)",
+    "fix": ""
+   },
+   {
+    "claim": "2,400 × 1,200 × 1,200 mm, 1,793 kg wet",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not opened",
+    "fix": ""
+   },
+   {
+    "claim": "≈0.63 m²/MW",
+    "verdict": "CONFIRMED",
+    "evidence": "Arithmetic: 1.2×1.2 = 1.44 m² / 2.3 MW = 0.626 (on unverified inputs)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Preliminary manufacturer data; footprint excludes service clearance."
+  ],
+  "overall": "unreachable"
+ },
+ "deltaLZH": {
+  "where_read": "No URL, no saved copy; search budget used up",
+  "claims": [
+   {
+    "claim": "© 2025 leaflet",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "'400 kW with 5 mins (BOL)' per rack",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "620 × 625 × 2185 mm with top-hat (1910 mm without)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "UL 1973, UL 9540A",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Register has no URL: add one. 'bound' role on a manufacturer BOL figure; derate for end-of-life."
+  ],
+  "overall": "unreachable"
+ },
+ "abDataCentreLevy": {
+  "where_read": "Saved Bill 12 first-reading PDF (pdftotext, ss. 92.2–92.3, 25.05); Bill 17 via WebFetch (summarised); alberta.ca Budget 2026 page refused",
+  "claims": [
+   {
+    "claim": "Part 9.1 'Data Centre Levy', ss. 92.2–92.5 via Bill 12, FSAA 2025 (No. 2)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Part 9.1 Data Centre Levy' '92.2(1) In this Part'; Bill 12 'FINANCIAL STATUTES AMENDMENT ACT, 2025 (NO. 2)'; Part runs to 92.92",
+    "fix": "Part continues past 92.5 (92.6–92.92)"
+   },
+   {
+    "claim": "Threshold 75 MW or greater",
+    "verdict": "CONFIRMED",
+    "evidence": "'electricity capacity of the particular data centre is 75 MW or greater'",
+    "fix": ""
+   },
+   {
+    "claim": "Levy (E + F) × R",
+    "verdict": "CONFIRMED",
+    "evidence": "'(E + F) x R'",
+    "fix": ""
+   },
+   {
+    "claim": "E = 45% of cost of equipment under 4 years",
+    "verdict": "CONFIRMED",
+    "evidence": "'E is the product of 45% ... less than 4 years old in age'",
+    "fix": ""
+   },
+   {
+    "claim": "F = 15% of older",
+    "verdict": "CONFIRMED",
+    "evidence": "'F is the product of 15% ... greater than 3 years old in age'",
+    "fix": ""
+   },
+   {
+    "claim": "R as passed 2025: 2% grid, 1% new capacity, 0% off-grid",
+    "verdict": "CONFIRMED",
+    "evidence": "'(((G – N)/T) x 0.02) + ((N/T) x 0.01)'; T includes self-generated power, so off-grid share weighs 0 (first-reading text; as-passed text not read ?)",
+    "fix": ""
+   },
+   {
+    "claim": "Bill 17 (FSMAA 2026) bases rate on actual consumption; 2%/1% split",
+    "verdict": "CONFIRMED",
+    "evidence": "Bill 17 (fetch): repeals s. 92.3(11); strikes ', directly or indirectly,' from G; formula keeps 0.02 and 0.01 weights ?",
+    "fix": "Remove 'not re-read ?' for the 2%/1% split; still check royal assent date"
+   },
+   {
+    "claim": "Bill 17 royal assent 26 Mar 2026",
+    "verdict": "UNREACHABLE",
+    "evidence": "Bill text does not show assent; alberta.ca not opened",
+    "fix": ""
+   },
+   {
+    "claim": "alberta.ca quotes 'actual power consumption', '0% rate'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Page refused",
+    "fix": ""
+   },
+   {
+    "claim": "From 1 Jan 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Bill 12: 'This section comes into force on January 1, 2026'; Bill 17 'deemed ... January 1, 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "Paid to the Province, creditable against Alberta corporate tax",
+    "verdict": "CONFIRMED",
+    "evidence": "'pay a levy to the Provincial Minister'; 'Division 7 Data Centre Levy Tax Credit' s. 25.05",
+    "fix": ""
+   },
+   {
+    "claim": "Equipment assessable under MGA excluded",
+    "verdict": "CONFIRMED",
+    "evidence": "'“computing equipment” ... does not include property that is assessable under the Municipal Government Act'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Bill text, not the consolidated Act; flag that the in-force wording should be checked in the consolidation."
+  ],
+  "overall": "needs fix"
+ },
+ "abModelGuideline": {
+  "where_read": "Saved full.pdf (AEP Air Quality Model Guideline), pdftotext",
+  "claims": [
+   {
+    "claim": "AEP, Air Quality Model Guideline (2021)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Date of publication: September 13, 2021'; effective November 15, 2021",
+    "fix": ""
+   },
+   {
+    "claim": "AERSCREEN 'the U.S. EPA recommended screening model'",
+    "verdict": "CONFIRMED",
+    "evidence": "'AERSCREEN is the U.S. EPA recommended screening model used to produce estimates of worst-case'",
+    "fix": ""
+   },
+   {
+    "claim": "Eq. 1.1233 × hours^-0.2906",
+    "verdict": "CONFIRMED",
+    "evidence": "'Impact parameter = 1.1233 * (averaging period in hours)-0.2906 (1)'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Equation is only for averaging periods without a built-in AERSCREEN factor (3, 8, 24 h, annual have their own). Alberta guideline: not applicable as a rule in Vancouver."
+  ],
+  "overall": "ok"
+ },
+ "galaxyVX": {
+  "where_read": "No URL, no saved copy; search budget used up",
+  "claims": [
+   {
+    "claim": "990-5451K-001 (11/2024)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "1000 kW GVX1000K1000NGS",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "UL 1778, CSA C22.2 No. 107.3",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   },
+   {
+    "claim": "990-6264J-001: 3600 × 900 × 1970 mm",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "No URL in register: add one so it can be checked."
+  ],
+  "overall": "unreachable"
+ },
+ "vertivContainment": {
+  "where_read": "WebFetch of SmartAisle brochure PDF (summarised). Data sheet SL-11422 not opened",
+  "claims": [
+   {
+    "claim": "MKA4L0CATKSE Rev.2 (04/2024)",
+    "verdict": "CONFIRMED",
+    "evidence": "'MKA4L0CATKSE-Rev.2, dated 04/2024'",
+    "fix": ""
+   },
+   {
+    "claim": "p.8, p.10 'Aisle width 1200 and 1800 mm'",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 8 'Aisle width 1200 and 1800 mm'; p. 10 'standard dimensions 1200 and 1800 mm +/- 50 mm'",
+    "fix": "p.10 wording differs slightly; also p.15 '900 to 1200 mm' wall-mount door"
+   },
+   {
+    "claim": "SL-11422 (R03/21): 900, 1200 or 1800 mm",
+    "verdict": "UNREACHABLE",
+    "evidence": "SL-11422 not opened; brochure p.15 gives 900–1200 mm for one door type",
+    "fix": ""
+   },
+   {
+    "claim": "Product sizes, not minimums",
+    "verdict": "CONFIRMED",
+    "evidence": "Brochure gives product ranges only",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Coefficient role fine if used as typical product sizes; not a code minimum (egress widths come from the building code)."
+  ],
+  "overall": "ok"
+ },
+ "vbbl2019_362": {
+  "where_read": "WebFetch of bcpublications VBBL 2019 page (summarised)",
+  "claims": [
+   {
+    "claim": "VBBL 2019, consolidated 1 Jul 2024",
+    "verdict": "UNREACHABLE",
+    "evidence": "Page shows 'Vancouver Building By-law 2019' but no consolidation date",
+    "fix": ""
+   },
+   {
+    "claim": "3.6.2.1.(6): equipment required by Electrical Safety Regulation in a service room, 1 h",
+    "verdict": "CONFIRMED",
+    "evidence": "'Electrical equipment that is required to be located in a service room according to the Electrical Safety Regulation' ... fire separation ≥1 h",
+    "fix": ""
+   },
+   {
+    "claim": "3.6.2.7 vaults 3 h unsprinklered / 2 h sprinklered",
+    "verdict": "CORRECTED",
+    "evidence": "'3 h if the vault is not protected by an automatic fire extinguishing system' / '2 h if ... protected'",
+    "fix": "Say 'protected / not protected by an automatic fire extinguishing system', not sprinklered"
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "VBBL 2019 superseded by VBBL 2025 (check register vbbl2025 entries) ?"
+  ],
+  "overall": "needs fix"
+ },
+ "vertivCWAds": {
+  "where_read": "WebFetch of Vertiv SL-70713 PDF (summarised)",
+  "claims": [
+   {
+    "claim": "SL-70713 (R11/22)",
+    "verdict": "CONFIRMED",
+    "evidence": "'SL-70713 (R11/22)'",
+    "fix": ""
+   },
+   {
+    "claim": "'around 400 W/ft2' vs 'around 150 W/ft2 for traditional CRAH'",
+    "verdict": "CONFIRMED",
+    "evidence": "'allowing a maximum of around 400 W/ft2 data hall density' ... 'around 150 W/ft2 for traditional CRAH'",
+    "fix": ""
+   },
+   {
+    "claim": "'around 250 W/ft2 for full face discharge CRAH'",
+    "verdict": "CONFIRMED",
+    "evidence": "'around 250 W/ft2 for full face discharge CRAH.'",
+    "fix": ""
+   },
+   {
+    "claim": "No test conditions",
+    "verdict": "CONFIRMED",
+    "evidence": "Fetch: 'None are stated.'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": false,
+  "overreach": [
+   "Used as 'rule' (150/250/400 W/ft² limits) but these are approximate manufacturer marketing claims with no conditions. Relabel as manufacturer-claim coefficients/indicative thresholds."
+  ],
+  "overall": "needs fix"
+ },
+ "kelvionNP": {
+  "where_read": "WebFetch of Kelvion NP-plate flyer PDF (summarised)",
+  "claims": [
+   {
+    "claim": "Version 01, 12/18",
+    "verdict": "CONFIRMED",
+    "evidence": "Footer 'Version 01' and '12/18'",
+    "fix": ""
+   },
+   {
+    "claim": "NP150X 640 × 2377 mm, DN150, 350 m³/h (1,541 USGPM), 32.3 barg",
+    "verdict": "CONFIRMED",
+    "evidence": "NP150X | 640 × 2377 | DN 150 | 350 | 1541 | 32.3 barg (468 psig)",
+    "fix": ""
+   },
+   {
+    "claim": "NP250L 895 × 2866 mm, DN250, '350 m³/h' beside '4,620 USGPM' (mismatch)",
+    "verdict": "CONFIRMED",
+    "evidence": "NP250L | 895 × 2866 | DN 250 | 350 | 4620 | 32.3 barg; 4620 USGPM ≈ 1,049 m³/h, 1541 USGPM ≈ 350 m³/h",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Role uses 350 m³/h per frame; for NP250L the flyer is internally inconsistent, so 350 m³/h may understate (if USGPM is right) — conservative but flag ?."
+  ],
+  "overall": "ok"
+ }
+}
