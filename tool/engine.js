@@ -624,7 +624,7 @@ function materialsView(){
   const ew=[servers*21.2/6/1000,servers*26.3/6/1000], cu=[mw*20,mw*40], eit=[servers*4.177*0.10/6,servers*4.177*0.15/6], eb=f.gross[1]*0.461;
   let h=tabBar('materials')+`<h2>What it is made of, and how often</h2><p class="draft">The building lasts decades; <span class="k">the servers are replaced every five to six years</span>.</p>
   <h3>The equipment</h3><dl><dt>Racks</dt><dd>about ${fmt(racks)} at 8 kW each</dd><dt>Servers</dt><dd>about ${fmt(servers)} at 600 W each</dd>
-  <dt>Electronic waste</dt><dd>${rng(ew[0],ew[1],'t/yr')} of servers alone, on a six-year refresh</dd><dt>Copper</dt><dd>${fmt(cu[0])}–${fmt(cu[1])} t in the facility (industry figure)</dd>
+  <dt>Electronic waste</dt><dd>${rng(ew[0],ew[1],'t/yr')} of servers alone, on a six-year refresh</dd><dt>Copper</dt><dd>${fmt(cu[0])}–${fmt(cu[1])} t in the facility (industry figure; only about 3 t per MW of it at rack level, so most sits outside the racks)</dd>
   <dt>Embodied carbon, servers</dt><dd>${rng(eit[0],eit[1],'t CO₂e/yr')} — the manufacturing share (10–15%) of one manufacturer's server assessment, spread over six years; uncertainty is large</dd></dl>${s3('srv')}${s3('ew')}${s3('cu')}${s3('eit')}
   <h3>The building</h3><dl>${A.built==='existing'?`<dt>Reuse</dt><dd>an existing building keeps its structure; precedents: 515 W Hastings offices (2023), Edmonton office and warehouse conversions</dd><dt>Watch for</dt><dd>floor strength, floor-to-floor height and room for plant</dd>`:`<dt>Embodied carbon, building</dt><dd>about ${fmt(eb)} t CO₂e for ${fmt(f.gross[1])} m² at 461 kg/m² — a general building median; no data-centre benchmark exists</dd>`}
   <dt>Lifespans</dt><dd>servers about 5–6 years · cooling and heat pumps 15–25 · building 25–27 (economic life, Statistics Canada) · pipe network 30–50, depending on water temperature</dd></dl>${A.built==='existing'?'':s3('eb')}
@@ -632,7 +632,7 @@ function materialsView(){
     `Racks: ${mw} MW × 1,000 ÷ ${R.kWPerRack} kW per rack = <b>${n0(racks)}</b>.`,
     `Servers: ${mw} MW × 1,000 ÷ 0.6 kW each = <b>${n0(servers)}</b>.`,
     `Electronic waste: ${n0(servers)} servers × 21.2–26.3 kg ÷ 6 years ÷ 1,000 = <b>${rng(ew[0],ew[1],'t/yr')}</b>.`,
-    `Copper: ${mw} MW × 20–40 t per MW = <b>${n0(cu[0])}–${n0(cu[1])} t</b>.`,
+    `Copper: ${mw} MW × 20–40 t per MW = <b>${n0(cu[0])}–${n0(cu[1])} t</b>; the same study puts nearly 3 t per MW at rack level.`,
     `Embodied carbon, servers: ${n0(servers)} × 4.177 t × 10–15% manufacturing ÷ 6 years = <b>${rng(eit[0],eit[1],'t CO₂e/yr')}</b>.`,
     A.built==='existing'?'':`Embodied carbon, building: ${n0(f.gross[1])} m² × 0.461 t/m² = <b>${n0(eb)} t CO₂e</b>.`].filter(Boolean),
     'Servers: LBNL 2024. Waste: server masses, 6-year refresh. Copper: Copper Development Association (industry). Embodied: Dell R760 LCA (manufacturer); building median 461 kg/m².')}

@@ -24,7 +24,7 @@ function setup(){
   tip=document.createElement('div'); tip.style.cssText='position:absolute;pointer-events:none;background:rgba(30,32,35,.95);border:1px solid #3c4148;border-radius:6px;padding:5px 8px;font:300 12px/1.35 "Open Sans",system-ui,sans-serif;color:#e9e6e1;display:none;max-width:260px;z-index:4';
   const bar=document.createElement('div'); bar.style.cssText='position:absolute;left:12px;top:12px;right:12px;display:flex;gap:6px;z-index:3;flex-wrap:wrap;pointer-events:none';
   bar.innerHTML='<button id="v3map" style="pointer-events:auto;background:rgba(30,32,35,.92);border:1px solid #3c4148;border-radius:6px;padding:4px 10px;color:#e9e6e1;cursor:pointer;font-size:12px">← Map</button><span id="v3note" style="background:rgba(30,32,35,.92);border:1px solid #30343a;border-radius:6px;padding:4px 10px;font-size:12px;color:#9d9a94;max-width:640px"></span>';
-  const key=document.createElement('div'); key.id='v3key'; key.style.cssText='position:absolute;left:12px;bottom:12px;background:rgba(30,32,35,.92);border:1px solid #30343a;border-radius:6px;padding:6px 10px;font:300 11.5px/1.5 "Open Sans",system-ui,sans-serif;color:#9d9a94;z-index:3;max-width:320px';
+  const key=document.createElement('div'); key.id='v3key'; key.addEventListener('click',ev=>{ const t=ev.target.closest&&ev.target.closest('[data-sl]'); if(!t) return; state.secure=t.dataset.sl; secureDraw(); key.innerHTML=modelKey(); }); key.style.cssText='position:absolute;left:12px;bottom:12px;background:rgba(30,32,35,.92);border:1px solid #30343a;border-radius:6px;padding:6px 10px;font:300 11.5px/1.5 "Open Sans",system-ui,sans-serif;color:#9d9a94;z-index:3;max-width:320px';
   wrap.appendChild(labels); wrap.appendChild(bar); wrap.appendChild(key); wrap.appendChild(tip); map.appendChild(wrap); for(const ev of ['pointerdown','wheel']) wrap.addEventListener(ev,e=>e.stopPropagation()); // the 2D map captures the pointer on pointerdown, which swallowed clicks on ← Map; pointerup must reach the document, where the orbit control listens for the release
   const ren=new T.WebGLRenderer({antialias:true,preserveDrawingBuffer:true}); ren.setPixelRatio(Math.min(window.devicePixelRatio||1,2)); ren.setClearColor(C.bg);
   wrap.insertBefore(ren.domElement,labels); ren.domElement.style.cssText='display:block;width:100%;height:100%';
@@ -261,7 +261,23 @@ function heightsNote(){ return BD.S.city==='van'?'Heights: City of Vancouver LiD
 
 function model(d){ plantLabels(); baseLabels(); const M=state.M, P=M&&M.plant;
   note((P&&P.miss&&P.miss.length?'Doesn\'t fit: '+P.miss.join('; ')+'. ':'')+heightsNote()+'. Neighbours drawn to 1.5 km.');
-  key(sw(C.acc,'the lot; dashed red: the building envelope (not a design)')+sw(C.grey,'setbacks (yards) and plant yard',true)+sw(C.edge,'plant to makers\' sizes: solid = unit, dashed = clearance')+sw(C.mat,'loading spaces')+roomsKey()); }
+  key(modelKey()); }
+function modelKey(){ return sw(C.acc,'the lot; dashed red: the building envelope (not a design)')+sw(C.grey,'setbacks (yards) and plant yard',true)+sw(C.edge,'plant to makers\' sizes: solid = unit, dashed = clearance')+sw(C.mat,'loading spaces')+roomsKey()+secureKey(); }
+/* secure line (prototype, overnight 30 Oct 2026, for J.B. to review): where the security line sits.
+   TODAY: at the lot line, as seen at Cologix VAN3 (fence with a gate intercom; register: security_layers, tour = observation, one site).
+   PROPOSAL: at the data-hall wall, with the ground floor (where the zone keeps it for other uses) or the yard as space that could face the street.
+   The proposal is speculative (a design inference, no source states it); nothing here is sized. */
+function secureKey(){ const M=state.M; if(!M||!M.ring||M.existing) return ''; const m=state.secure||'off', b=(v,t)=>`<button data-sl="${v}" style="font:inherit;font-size:11px;padding:1px 7px;margin:0 4px 0 0;border-radius:4px;cursor:pointer;border:1px solid ${m===v?'#CC746C':'#5a5d62'};background:${m===v?'rgba(204,116,108,.18)':'transparent'};color:inherit">${t}</button>`;
+  return `<div style="margin-top:6px;pointer-events:auto">Secure line: ${b('off','off')}${b('today','today')}${b('proposed','proposed')}</div>`+(m==='today'?'<div>the whole lot is secured: fence and gate intercom at the lot line (as at VAN3, one tour)</div>':m==='proposed'?'<div>secured only at the data-hall wall (solid red); the shaded ground floor, or where the zone does not keep one, the lot between the dashed lot line and the hall, could face the street (a proposal: speculative, not sized)</div>':''); }
+function secureDraw(){ const M=state.M; if(state.slG){ state.dc.remove(state.slG); state.slG=null; } const m=state.secure||'off'; if(!M||!M.ring||M.existing||m==='off') return;
+  const g=new T.Group(); state.slG=g; state.dc.add(g); const hall=M.serverFoot||M.foot;
+  if(m==='today'){ for(const z of [0.15,0.9,1.8]) g.add(ringLine(M.ring,z,C.acc,false,z<0.5?1:0.55)); }
+  else { if(hall) for(const z of [0.15,1.8,3.5]) g.add(ringLine(hall,z,C.acc,false,z<0.5?1:0.7));
+    const fh=M.H/Math.max(1,M.nF?M.nF[0]:1);
+    if(M.Z&&M.Z.ground&&M.foot) g.add(prism(M.foot,fh,0,C.acc,C.acc,0.6,0.16));
+    else g.add(ringLine(M.ring,0.2,C.acc,1.5,0.6)); }
+  if(R&&R.ren) R.dirty=true; }
+
 function roomsKey(){ const r=state.rooms; if(!r) return ''; const E=r.E, rg=a=>a[0]===a[1]?`${a[0]}`:`${a[0]}–${a[1]}`, gap=(k)=>r.got[k]<r.need[k]?` (${r.got[k]} drawn)`:'';
   const L=[`racks ${rg(E.racks)}: room for ${r.capacity} on ${r.floors} floor${r.floors>1?'s':''} (${r.got.racks} on this one, which holds the UPS room${r.floors>1?`; ${r.otherFloor} on each other floor`:''})${r.capacity<E.racks[1]?' — short of the high end':''}`,`UPS modules ${E.ups}${gap('ups')}`,`battery cabinets ${rg(E.batt)}${gap('battery')}`];
   if(E.room&&E.room.n[1]) L.push(`${E.room.name} ${rg(E.room.n)}${r.floors>1?`, about ${r.need.room} a floor`:''}${gap('room')} (hall about ${Math.round(E.room.wft2)} W/ft²: ${E.room.type==='crah'?'room units, up to about 150':E.room.type==='wall'?'thermal wall in a side gallery, up to about 400':'in-row coolers, above about 400'} by Vertiv's limits)`); if(E.cdu[1]) L.push(`coolant units ${rg(E.cdu)} (not placed: no placement rule found)`);

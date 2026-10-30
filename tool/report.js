@@ -131,7 +131,8 @@ const SPEC={ // what the data centre gives, how it moves, who receives it (for t
  'Meanwhile uses on land held for growth':['land','a lease while the lot waits','a community use',[]],
  'Warming centre, refuge, clean-air room':['shelter','a room with its own street door','people in a heat wave, cold snap or smoke',['care']],
  'Cooling for neighbours':['cooling','a chiller loop','buildings nearby',[]],
- 'Material bank: copper':['materials','what leaves at each refresh','recyclers and makers',[]]};
+ 'Material bank: copper':['materials','what leaves at refits and at closure','recyclers and makers',[]],
+ 'Batteries at end of life':['materials','UPS batteries leaving at replacement','recyclers',[]]};
 const specKey=()=>BD.S.sel?BD.S.sel.city+':'+BD.S.sel.id:'';
 BD.spec={ list(){ const k=specKey(); BD.S.specs=BD.S.specs||{}; return BD.S.specs[k]=BD.S.specs[k]||[]; },
   has(n){ return this.list().includes(n); }, toggle(n){ const L=this.list(), i=L.indexOf(n); if(i<0) L.push(n); else L.splice(i,1); return i<0; } };
