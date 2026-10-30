@@ -1,5 +1,7 @@
 # Check 2: decisions for you (30 Oct 2026)
 
+**Decided 30 Oct 2026 (J.B.): 17 kept, since the Vertiv guide is public; all others as suggested; applied by register/patches/decisions_2026_10_30.py. Correction: the heat-price order in 13 is Vancouver's Creative Energy (BCUC G-5-26), not a Calgary order.**
+
 The clear-cut corrections are applied to the tool and the register: 261 sources rewritten to what they say, 83 role labels corrected (for example a guideline used as a "rule" is now a "benchmark"), and 29 wording fixes in what the tool shows. **No calculated results changed**: the eight test lots give the same numbers. Full record: `checks/check2/fixes_proposed_2026_10_30.json`.
 
 146 open questions came out of check 2. About 110 are research I can do myself, such as finding a missing source, citing the code each province actually adopted, or merging duplicate entries. **These 18 are yours** because they change what the tool argues or shows. Each has my suggestion.
