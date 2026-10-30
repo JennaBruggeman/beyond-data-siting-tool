@@ -233,10 +233,10 @@ function racksFor(M){ const A=BD.S.answers, mw=A.mw||M.mwSized||1, E=BD.eng.equi
   const tight=Wd*(D+Lr.aisle), fr=Math.min(1,tight/(Lr.rackFloor||tight)), GAP=3, RUN=fr>=1?1e9:Math.max(1,Math.round(GAP*fr/(1-fr))), gapAt=k=>(k%(RUN+GAP))>=RUN;
   while(v+2*D+Lr.aisle<=v1-farZone-Lr.aisle+1e-6) { rowsV.push(v,v+D+Lr.aisle); v+=2*D+2*Lr.aisle; }
   // in-row coolers: at both ends of each row, then evenly along it (Vertiv CRV catalog E.2)
-  const crvPer=RT==='inrow'&&need.room&&rowsV.length?Math.max(2,Math.ceil(need.room/rowsV.length)):0; const crvAt=[];
+  let slots1=0; const crvPer=RT==='inrow'&&need.room&&rowsV.length?Math.max(2,Math.ceil(need.room/rowsV.length)):0; const crvAt=[];
   for(const vr of rowsV){ const slots=[]; for(let u=ua;u+Wd<=ub;u+=Wd){ if(inside(u+Wd/2,vr+D/2)) slots.push(u); } if(!slots.length) continue;
     const pick=new Set(); if(crvPer){ for(let k=0;k<crvPer&&k<slots.length;k++) pick.add(Math.round(k*(slots.length-1)/Math.max(1,crvPer-1))); }
-    slots.forEach((u,k)=>{ if(pick.has(k)&&crvAt.length<need.room) crvAt.push([u+Wd/2,vr+D/2]); else if(!gapAt(k)&&pts.length<need.racks) pts.push([u+Wd/2,vr+D/2]); }); }
+    slots.forEach((u,k)=>{ if(!pick.has(k)&&!gapAt(k)) slots1++; if(pick.has(k)&&crvAt.length<need.room) crvAt.push([u+Wd/2,vr+D/2]); else if(!gapAt(k)&&pts.length<need.racks) pts.push([u+Wd/2,vr+D/2]); }); }
   crvAt.forEach(([u,vv])=>put('crv',u,vv,0)); if(RT==='inrow') got.room=crvAt.length;
   // the other hall floors have no UPS and battery room: count their rack places by the same rules (not drawn)
   const slotsFrom=u_a=>{ let n=0; const ub2=u1-Lr.corridor; for(const vr of rowsV){ let k=0; for(let u=u_a;u+Wd<=ub2;u+=Wd){ if(inside(u+Wd/2,vr+D/2)){ if(!gapAt(k)) n++; k++; } } } return n-(RT==='inrow'?Math.min(need.room,rowsV.length*crvPer):0); };
@@ -255,7 +255,7 @@ function racksFor(M){ const A=BD.S.answers, mw=A.mw||M.mwSized||1, E=BD.eng.equi
   const im=new T.InstancedMesh(geo,mat,Math.max(1,all.length)); const m4=new T.Matrix4(), q=new T.Quaternion().setFromAxisAngle(new T.Vector3(0,1,0),ang), sc=new T.Vector3(1,1,1);
   all.forEach(([u,vv,dz],k)=>{ const [x,y]=F.toW(u,vv); m4.compose(V(x,y,z0+dz+S.rack.H/2),q,sc); im.setMatrixAt(k,m4); }); im.count=all.length; im.castShadow=true; state.dc.add(im);
   if(R.lights&&!R.lights[0].parent) R.lights.forEach(l=>R.scene.add(l));
-  state.rooms={E,need,got,floors,capacity:Math.min(need.racks,pts.length)+(floors-1)*Math.max(0,otherFloor),otherFloor};
+  state.rooms={E,need,got,floors,capacity:Math.min(need.racks,pts.length)+(floors-1)*Math.max(0,otherFloor),otherFloor,maxRacks:slots1+(floors-1)*Math.max(0,otherFloor)};
   return {obj:im,n:pts.length,drawn:all.length,per:need.racks,racks:E.racks[1],floors}; }
 /* ---------- overlays ---------- */
 function clearOverlay(){ if(R.ov) R.scene.remove(R.ov); R.ov=new T.Group(); R.scene.add(R.ov); R.ticks=[]; if(R.demoG){ R.scene.remove(R.demoG); R.demoG=null; } lab.splice(0); labels.innerHTML=''; resetTint(); R.onPick=null;
@@ -413,6 +413,13 @@ function applyCard(){ if(!R) return; const on=!!R.card; R.ctl.autoRotate=on; R.c
   if(R.nbMesh){ const m=R.nbMesh.material; const see=on&&!light3d(); m.transparent=see; m.opacity=see?0.22:1; m.depthWrite=!see; m.needsUpdate=true; /* light: solid white massing, as in the spreads */ }
   const fk=state.key+'|'+state.tab; if(on&&state.span&&!R.multi&&R.framed!==fk&&state.tab!=='heat'){ R.framed=fk; const sp=state.span*0.95, rf=state.roof||0; R.cam.position.set(sp*1.45,sp*0.95+rf*1.25,sp*1.65); R.ctl.target.set(0,rf*0.45,0); R.ctl.update(); } }
 function cardMode(on){ if(!R) return; R.card=!!on; if(!R.cardWired){ R.cardWired=true; R.ctl.addEventListener('start',()=>{ R.ctl.autoRotate=false; clearTimeout(idleT); }); R.ctl.addEventListener('end',()=>{ clearTimeout(idleT); idleT=setTimeout(()=>{ if(R.card) R.ctl.autoRotate=true; },6000); }); } applyCard(); }
-BD.scene3d={show,showOptions,hide,ensure,demo,cardMode,rig:()=>R /* camera access for scripted recordings (video, 20 Oct 2026) */,snap:(x,y)=>R&&R.nbList?snap(x,y):null,state:()=>state,isOpen:()=>!!wrap&&wrap.style.display!=='none'};
+function layoutCheck(){ const M=BD.model&&BD.model(); if(!T||!M||!M.foot||M.existing||!(M.footArea>200)||!BD.eng) return null;
+  const A=BD.S.answers, keep={mw:A.mw,dc:state.dc,rooms:state.rooms,hallZ:state.hallZ,elec:state.elecRoom,heat:state.heatRoom,opt:state.opt};
+  const Mf=Object.assign({},M,{serverFoot:M.foot}), kw=BD.eng.R.equip.kwRack; let mw=Math.max(0.5,(BD.fitMax&&BD.fitMax())||2), cap=0, floors=1;
+  try{ for(let i=0;i<3;i++){ A.mw=mw; state.dc=new T.Group(); state.opt=null; racksFor(Mf); cap=state.rooms.maxRacks; floors=state.rooms.floors; mw=Math.max(0.5,cap*kw[0]/1000); } }
+  catch(e){ cap=0; }
+  finally{ A.mw=keep.mw; state.dc=keep.dc; state.rooms=keep.rooms; state.hallZ=keep.hallZ; state.elecRoom=keep.elec; state.heatRoom=keep.heat; state.opt=keep.opt; }
+  return cap?{racks:cap,floors,mw:[cap*kw[0]/1000,cap*kw[1]/1000]}:null; }
+BD.scene3d={layoutCheck,show,showOptions,hide,ensure,demo,cardMode,rig:()=>R /* camera access for scripted recordings (video, 20 Oct 2026) */,snap:(x,y)=>R&&R.nbList?snap(x,y):null,state:()=>state,isOpen:()=>!!wrap&&wrap.style.display!=='none'};
 BD.showModel=()=>{ if(!BD.S.sel) return Promise.resolve(); return show('model',{}).catch(e=>console.warn(e)); };
 })();
