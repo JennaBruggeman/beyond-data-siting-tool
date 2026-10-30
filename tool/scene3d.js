@@ -139,9 +139,9 @@ function envelope(r,H,n){ const g=new T.Group(), fh=H/Math.max(1,n);
   for(let i=0;i<=n;i++) g.add(ringLine(r,i*fh+0.02,i===n||i===0?C.acc:C.grey,i===n||i===0?2.5:1.6,i===n||i===0?0.85:0.45)); // dashed floor lines, roof and base in the accent
   for(let i=0;i<r.length;i+=2) g.add(line([V(r[i],r[i+1],0),V(r[i],r[i+1],H)],C.acc,2.5,0.6));                               // dashed corners
   return g; }
-function buildSite(site){
+function buildSite(site,opt){
   const sc=R.scene; while(sc.children.length) sc.remove(sc.children[0]); lab.length=0; labels.innerHTML=''; R.ov=null;
-  state={c:site.c, site}; const S=BD.S, sel=S.sel, A=S.answers, M=BD.model?BD.model():null; state.M=M;
+  state={c:site.c, site, opt:opt||null}; const S=BD.S, sel=S.sel, A=S.answers, M=BD.model?BD.model():null; state.M=M;
   applyTheme();
   if(light3d()){ const gr=new T.Mesh(new T.PlaneGeometry(RAD*2.4,RAD*2.4),new T.MeshStandardMaterial({color:0xd9d7d0,roughness:1})); gr.rotation.x=-Math.PI/2; gr.position.y=-0.05; gr.receiveShadow=true; sc.add(gr); R.lights.forEach(l=>sc.add(l)); }
   else sc.add(new T.GridHelper(RAD*2.2,88,0x232629,0x1d1f22));
@@ -199,7 +199,17 @@ function racksFor(M){ const A=BD.S.answers, mw=A.mw||M.mwSized||1, E=BD.eng.equi
   if(ue>u0){ const r=BD.geo.rectW(F,u0,ue,v0,v1); state.dc.add(ringLine(r,z0+0.05,C.power,1.5,0.9)); state.dc.add(line([V(...F.toW(ue,v0),z0),V(...F.toW(ue,v0),z0+3.5)],C.power,1.2,0.7)); state.elecRoom=r; }
   // 2. room cooling by hall density (register: room_cooling_type): room units along both long walls, 0.457 m clear at each end;
   //    or a thermal wall in a side gallery (units side by side, gasketed gap, 1.1 m clear on the hall and gallery sides); or in-row coolers in the rows
-  const ua=ue+Lr.corridor, ub=u1-Lr.corridor, RT=E.room?E.room.type:'crah';
+  // 1b. heat-recovery plant at the other end (options with heat recovery only; register: heat_pumps, hr_plant_room, 29 Oct 2026):
+  //     heat pumps (Sabroe DualPAC 716-W, 1,991 kW) side by side with 1.1 m aisles; network connection room to the NEU table when heat goes to the network.
+  //     Pipes, pumps, heat exchangers and tanks are in the register but not drawn (J.B., 29 Oct: one block). Where the room sits: our choice (?)
+  let uh=u1; const o=state.opt;
+  if(o&&o.recover){ const Rg=BD.eng.R, kw=mw*1000*Rg.capture[1]*Rg.cop[0]/(Rg.cop[0]-1), kwLo=mw*1000*Rg.capture[0]*Rg.cop[1]/(Rg.cop[1]-1), hp=S.heatpump, ai=Lr.corridor;
+    const nHi=Math.ceil(kw/1991), nLo=Math.ceil(kwLo/1991); let n=0, col=0;
+    while(n<nHi&&col<4){ const uc=u1-ai-hp.W/2-col*(hp.W+ai); let v=v0+ai; while(n<nHi&&v+hp.L<=v1-ai){ if(inside(uc,v+hp.L/2)){ put('heatpump',uc,v+hp.L/2,Math.PI/2); n++; } v+=hp.L+ai; } col++; }
+    uh=u1-col*(hp.W+ai)-ai; const r=BD.geo.rectW(F,uh,u1,v0,v1); state.dc.add(ringLine(r,z0+0.05,C.heat,1.5,0.9)); state.dc.add(line([V(...F.toW(uh,v0),z0),V(...F.toW(uh,v0),z0+3.5)],C.heat,1.2,0.7));
+    let ets=null; if(o.to==='net'){ const big=(M.footArea||0)*(M.nF?M.nF[0]:1)>13940, ew=big?4:3; ets=BD.geo.rectW(F,uh-ew,uh,v1-6,v1); state.dc.add(ringLine(ets,z0+0.05,C.heat,0.6,0.9)); uh-=ew; }
+    state.heatRoom={n,nLo,nHi,area:Math.round((u1-uh)*(v1-v0)),ets:!!ets}; }
+  const ua=ue+Lr.corridor, ub=uh-Lr.corridor, RT=E.room?E.room.type:'crah';
   const wallRow=(kind,count,side)=>{ const s=S[kind]; let u=ua+Lr.crahEnd, n=0; while(n<count&&u+s.L<=ub-Lr.crahEnd){ const v=side<0?v0+s.W/2+0.05:v1-s.W/2-0.05; if(inside(u+s.L/2,v)){ put(kind,u+s.L/2,v,side<0?Math.PI:0); n++; } u+=s.L+2*Lr.crahEnd; } return n; };
   need.room=E.room?Math.ceil(E.room.n[1]/floors):0; got.room=0; let gallery=0;
   if(RT==='crah'&&need.room){ const a=wallRow('crah',Math.ceil(need.room/2),-1); got.room=a+wallRow('crah',need.room-a,1); }
@@ -221,7 +231,7 @@ function racksFor(M){ const A=BD.S.answers, mw=A.mw||M.mwSized||1, E=BD.eng.equi
     slots.forEach((u,k)=>{ if(pick.has(k)&&crvAt.length<need.room) crvAt.push([u+Wd/2,vr+D/2]); else if(pts.length<need.racks) pts.push([u+Wd/2,vr+D/2]); }); }
   crvAt.forEach(([u,vv])=>put('crv',u,vv,0)); if(RT==='inrow') got.room=crvAt.length;
   // the other hall floors have no UPS and battery room: count their rack places by the same rules (not drawn)
-  const slotsFrom=u_a=>{ let n=0; for(const vr of rowsV){ for(let u=u_a;u+Wd<=ub;u+=Wd){ if(inside(u+Wd/2,vr+D/2)) n++; } } return n-(RT==='inrow'?Math.min(need.room,rowsV.length*crvPer):0); };
+  const slotsFrom=u_a=>{ let n=0; const ub2=u1-Lr.corridor; for(const vr of rowsV){ for(let u=u_a;u+Wd<=ub2;u+=Wd){ if(inside(u+Wd/2,vr+D/2)) n++; } } return n-(RT==='inrow'?Math.min(need.room,rowsV.length*crvPer):0); };
   const otherFloor=floors>1?slotsFrom(u0+Lr.corridor):0;
   got.racks=pts.length;
   const geo=new T.BoxGeometry(Wd*0.98,S.rack.H,D*0.98); const mat=new T.MeshStandardMaterial({color:0x3a3d42,roughness:.8,flatShading:true,transparent:true,opacity:0.9});
@@ -324,20 +334,20 @@ async function showOptions(opts,data){
   if(R.cap) R.cap.forEach(c=>c.remove()); R.cap=[];
   // each option gets its own building and plant, sized for its own servers (J.B., 16 Oct: "the geometry looks the same in A, B and C")
   const A=BD.S.answers, mw0=A.mw, site=data.site||(BD.eng?BD.eng.siteFacts():null), built=[];
-  for(const o of opts){ A.mw=o.mw; if(BD.modelReset) BD.modelReset(); buildSite(site); clearOverlay(); R.scene.remove(R.ov);
+  for(const o of opts){ A.mw=o.mw; if(BD.modelReset) BD.modelReset(); buildSite(site,o); clearOverlay(); R.scene.remove(R.ov);
     built.push({kids:R.scene.children.slice(),st:state}); }
   A.mw=mw0; if(BD.modelReset) BD.modelReset();
-  R.multi=opts.map((o,i)=>{ const s=new T.Scene(); built[i].kids.forEach(ch=>s.add(ch)); state=built[i].st; R.ov=new T.Group(); s.add(R.ov);
+  R.multi=opts.map((o,i)=>{ const s=new T.Scene(); built[i].kids.forEach(ch=>s.add(ch)); if(light3d()){ built[i].kids.filter(ch=>ch.isLight).forEach(ch=>s.remove(ch)); R.lights.forEach(l=>{ const c=l.clone(); if(c.isDirectionalLight){ c.target=l.target.clone(); s.add(c.target); } s.add(c); }); } /* shared lights belong to one scene only: each option gets its own copy */ state=built[i].st; R.ov=new T.Group(); s.add(R.ov);
     const c=roofC(), src=V(c[0],c[1],state.roof+3);
     if(!o.recover){ for(const b of Object.values(state.plantGroups||{}).flat().slice(0,8)){ const cc=BD.centroid(b.ring); const a=V(cc[0],cc[1],b.base+b.h); R.ov.add(line(arc(a,a.clone().add(new T.Vector3(0,18,0)),3,8),0x9d9a94,true,0.9)); } }
     else if(o.to==='net'&&data.net){ const n=data.net, p=[]; for(let k=0;k<n.r.length;k+=2) p.push(V(n.r[k],n.r[k+1],0.6)); R.ov.add(line(p,C.heat,true,0.9)); const cc=BD.centroid(n.r); R.ov.add(line(arc(src,V(cc[0],cc[1],2),80),C.heat,false,0.9)); }
     else (data.near||[]).slice(0,o.n||8).forEach(p=>{ const nb=snap(p.x,p.y); const top=nb?V(nb.b.c[0],nb.b.c[1],nb.h):V(p.x,p.y,10); R.ov.add(line(arc(src,top,Math.min(120,p.dist*0.12)),C.heat,true,0.85)); });
-    const d=document.createElement('div'); d.style.cssText=`position:absolute;top:44px;left:calc(${i*33.333}% + 12px);width:calc(33.333% - 24px);font:300 12px/1.4 "Open Sans",system-ui,sans-serif;color:#e9e6e1;pointer-events:none`;
-    d.innerHTML=`<div style="font-size:11px;letter-spacing:.12em;color:#9d9a94;font-weight:600">${o.id.toUpperCase()}</div><div>${esc(o.name)}</div><div style="color:#9d9a94">${esc(o.caption)}</div>`; wrap.appendChild(d); R.cap.push(d);
+    const d=document.createElement('div'); d.style.cssText=`position:absolute;top:44px;left:calc(${i*33.333}% + 12px);width:calc(33.333% - 24px);font:300 12px/1.4 "IBM Plex Sans",system-ui,sans-serif;color:${light3d()?"#26282b":"#e9e6e1"};pointer-events:none`;
+    d.innerHTML=`<div style="font-size:11px;letter-spacing:.12em;color:${light3d()?"#6d6a65":"#9d9a94"};font-weight:600">${o.id.toUpperCase()}</div><div>${esc(o.name)}</div><div style="color:${light3d()?"#6d6a65":"#9d9a94"}">${esc(o.caption)}</div>${state.heatRoom?`<div style="color:${light3d()?"#6d6a65":"#9d9a94"}">heat plant: ${state.heatRoom.nLo===state.heatRoom.nHi?state.heatRoom.nHi:state.heatRoom.nLo+'–'+state.heatRoom.nHi} heat pumps${state.heatRoom.ets?' + network connection room':''}</div>`:''}`; wrap.appendChild(d); R.cap.push(d);
     return s; });
   state=built[1].st; state.key=null;
-  for(let i=1;i<3;i++){ const d=document.createElement('div'); d.style.cssText=`position:absolute;top:0;bottom:0;left:${i*33.333}%;border-left:1px solid #30343a;pointer-events:none`; wrap.appendChild(d); R.cap.push(d); }
-  { const sp=state.span; R.cam.position.set(sp*3.0,sp*2.6+state.roof*1.4,sp*3.4); R.ctl.target.set(0,state.roof*0.4,0); } note('Same site, same view: drag to orbit all three'); key(''); }
+  for(let i=1;i<3;i++){ const d=document.createElement('div'); d.style.cssText=`position:absolute;top:0;bottom:0;left:${i*33.333}%;border-left:1px solid ${light3d()?'#cfcbc4':'#30343a'};pointer-events:none`; wrap.appendChild(d); R.cap.push(d); }
+  { const sp=state.span; R.cam.position.set(sp*3.0,sp*2.6+state.roof*1.4,sp*3.4); R.ctl.target.set(0,state.roof*0.4,0); } note('Same site, same view: drag to orbit all three'+(state.heatRoom||built.some(b=>b.st.heatRoom)?'. Heat plant (amber dashes) at the far end of the first hall floor: where it sits is our choice (?); the network connection room follows the NEU table (6 × 3 m; the NEU asks for it one level below ground)':'')); key(''); }
 function hide(){ if(wrap) wrap.style.display='none'; if(R){ R.multi=null; if(R.cap){ R.cap.forEach(c=>c.remove()); R.cap=[]; } } }
 /* demos for the decision cards (J.B., 17 Oct): the option picked, animated on this site. Schematic massing, not a design. */
 function demo(kind){ if(!R||!state.M) return; const M=state.M, sel=BD.S.sel; if(R.demoG){ R.scene.remove(R.demoG); } const g=new T.Group(); R.demoG=g; R.scene.add(g); R.ticks=[]; /* one demo at a time: earlier loops stop (21 Oct) */
