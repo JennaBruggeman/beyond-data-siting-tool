@@ -1,0 +1,2159 @@
+{
+ "meta": {
+  "built": "2026-10-30",
+  "script": "checks/place_check/build_place_check.py",
+  "inputs": "checks/input_check/input_check.json; IT load per lot as given; register pue 1.4–1.55, load_factor 0.6",
+  "not_read": "tool/*.js, tool/index.html, checks/golden, checks/place_check/screen",
+  "vanix_points_located": [
+   "Cologix VAN2, 1050 W Pender",
+   "Cologix VAN3, 2828 Natal St",
+   "Cologix VAN4, 175 W Cordova",
+   "Harbour Centre MMR, 555 W Hastings"
+  ],
+  "seismic_point_to_lot_m": {
+   "V09": {
+    "V09": 0.0,
+    "CLARK": 1371.0,
+    "V339": 57.0,
+    "HAST": 2005.0
+   },
+   "E05": {
+    "E05": 0.0,
+    "E123": 4711.0,
+    "E06A": 3369.0,
+    "E06B": 3315.0
+   },
+   "E06": {
+    "E05": 3294.0,
+    "E123": 1582.0,
+    "E06A": 8.0,
+    "E06B": 0.0
+   }
+  },
+  "register_notes": [
+   {
+    "part": "surface_water_sink",
+    "kind": "contradiction",
+    "note": "Coef repeats the same \"19 Oct 2026 (K)\" block three times; the first copy says distance to shore is not computed (no shoreline file), the second says Vancouver \"not yet (CanVec Hydro to come)\", the third says Vancouver is from CanVec. Source canvecHydroBC check says no extract under data/raw/canvec/BC, but data/raw/hydro/canvec_van_water_extract.json exists."
+   },
+   {
+    "part": "surface_water_sink",
+    "kind": "unit/arithmetic",
+    "note": "\"24–49 L/s per MW at 10–5 °C\": with c = 4.18 kJ/kg·K the values are 23.9–47.8 L/s; 49 needs c ≈ 4.08 (sea water ≈ 3.99 gives 50)."
+   },
+   {
+    "part": "surface_water_sink",
+    "kind": "contradiction",
+    "note": "Coef uses the $2.25 \"heat exchange\" rental; source bcWSRfees separates \"cooling\" $1.30 (open question to J.B.). Both computed."
+   },
+   {
+    "part": "surface_water_sink",
+    "kind": "contradiction",
+    "note": "DFO approach velocity 0.035 vs 0.055 m/s (acknowledged internal conflict in source)."
+   },
+   {
+    "part": "rooftop_solar",
+    "kind": "contradiction",
+    "note": "128 / 159 kWh/m² cannot be rebuilt from register factors: 0.81 × 0.70 × 0.16–0.20 kWp/m² × NRCan yield gives 81–114 (Van) and 86–141 (Edm). 128/159 imply ≈0.224 kWp/m² at latitude-tilt yield, above pv_roof's 0.16–0.20. The formula names kWp/m² but gives no value. Source check: 128/159 not found in NRCan (our derivation). Radius not stated."
+   },
+   {
+    "part": "self_gen_rules",
+    "kind": "contradiction",
+    "note": "Coef says the \"same or adjacent parcel\" clause is not confirmed, but bchTariff2026 (tariff text read 28 Oct) states it. Source bchRS2289 still says \"RS 2289 tariff not read\"."
+   },
+   {
+    "part": "electricity_price",
+    "kind": "source gap",
+    "note": "Alberta pool $43.68 / $62.78 are cited to aesoStats2025, whose register text covers only operating reserves (Table 13); OPEN item asks to add the pool average. Unverified."
+   },
+   {
+    "part": "electricity_price",
+    "kind": "unit",
+    "note": "BC demand charges ($/kW, $/kVA) have no billing period in the register, so annual demand cost is not derivable; RS 1830 bills kVA but the tool load is kW (power factor not in register)."
+   },
+   {
+    "part": "electricity_price",
+    "kind": "scope",
+    "note": "EPCOR DAS-CS (>5,000 kVA) is closed to new service; every Edmonton lot here exceeds 5 MW peak, so the applicable DAS rate for such loads is not stated beyond DAS-TOUP."
+   },
+   {
+    "part": "service_class",
+    "kind": "unit",
+    "note": "Thresholds are in kVA (6.5 / 13 MVA; 2,500 kVA); IT × PUE gives kW. Power factor is not in the register, so only \"above\" results are certain. bch_primary entry quotes no clause for the thresholds (check 2)."
+   },
+   {
+    "part": "ambient_cover",
+    "kind": "contradiction",
+    "note": "Coef says \"Edmonton Bylaw 14600 limits pending\", but source bylaw14600 already gives 65/50 (residential) and 75/60 (non-residential) dB(A). Coef omits the intermediate→quiet 60/50 pair listed in van6555zones."
+   },
+   {
+    "part": "interconnection",
+    "kind": "contradiction",
+    "note": "Coef/status say exchange-point locations are not sourced, yet vanixFacilities lists VANIX addresses (operator claim, unreachable in check 2). 515 W Hastings could not be located in the tax report; eStruxture VAN-2 has no address. The 0.005 ms/km has no primary."
+   },
+   {
+    "part": "reclaimed_makeup",
+    "kind": "contradiction",
+    "note": "Coef cites LBNL 2024 for 0.32–0.36 L/kWh, but lbnl2024 role is relabelled \"not supported (?)\" and its text has no water figure. Make-up = E × C/(C − 1) agrees with blowdown (E + E/(C − 1))."
+   },
+   {
+    "part": "reclaimed_makeup",
+    "kind": "scope",
+    "note": "s (share substituted) is user-set 0–1; computed at the 0.74–0.99 operator-claim precedents. Evaporation is an upper bound (all heat evaporated); cooling type is another stage."
+   },
+   {
+    "part": "greywater_neighbours",
+    "kind": "gap",
+    "note": "Recovery share is a register gap, so \"used = min(V_gw × recovery, make-up)\" is not derivable; \"within reach\" radius not defined — 200 and 500 m (people_affected radii) used."
+   },
+   {
+    "part": "borefield",
+    "kind": "unit/basis",
+    "note": "q (12 / 19 W/m) was derived by dividing the 14.5 kW cooling load by length (register says so), but the formula divides heat to ground, which also includes compressor work → L understated for a heat-pump system. Edmonton 1.9/3.27 scaling gives 6.97–11.04 W/m (register 7–11 ✓). \"≈2 ha per MW\" holds at 12 W/m only (19 W/m → 1.26 ha; Edmonton 7 W/m → 3.4 ha). No Vancouver ground data: Ithaca q transferred."
+   },
+   {
+    "part": "ates",
+    "kind": "unit",
+    "note": "Formula \"flow = MW × 3.6 ÷ (4.18 × ΔT)\" gives 0.172 at 1 MW, 5 K; the coef says 172 m³/h per MW. Factor 1,000: it must be MW × 3,600 ÷ (4.18 × ΔT) (or kW × 3.6). Recovery 0.6 point vs 0.4–0.85 range; €300/kW stated at 2 MW only."
+   },
+   {
+    "part": "deep_geo",
+    "kind": "unstated input",
+    "note": "2.1–5.6 MWth at 30–80 kg/s implies ΔT ≈ 16.7 K (return ≈ 73 °C from 90 °C) with c = 4.18; T_return is not in the register. \"$4.7–8 M per well\" vs output \"per well pair\" — wells per pair cost unclear."
+   },
+   {
+    "part": "flood_exposure",
+    "kind": "gap",
+    "note": "FCL in GVRD datum; datum conversion not found; no plant floor elevation → m above/below not derivable. Edmonton FPO sets no FCL."
+   },
+   {
+    "part": "restriction_history",
+    "kind": "contradiction",
+    "note": "Coef gives \"Stage 3 2015; Stage 2 2023 (4 Aug–15 Oct); 2026 Stage 3 from 8 Jun\" as fact, but source mvStageHistory says these dates are not in the cited report and need their own sources (report: Stage 3 \"anticipated early June\"). Edmonton end date 2 Feb not confirmed (epcorStages ?)."
+   },
+   {
+    "part": "seismic_sa02",
+    "kind": "coverage",
+    "note": "Only three register points (V09, E05, \"E06\"). \"E06\" is ambiguous between E06A and E06B; the point is checked against each lot. Source not reopened in check 1 (unreachable)."
+   },
+   {
+    "part": "sewer_sink",
+    "kind": "contradiction",
+    "note": "UT-008 governs regional GVS&DD sewers only (check 2: municipal sewers need no GVS&DD approval) but the coef applies it generally. The \"≥11 °C KWL design rule\" is not in the kwlSewer source text. Source id edm18100 names a repealed bylaw; text is Bylaw 19627, which governs discharge, not heat extraction."
+   },
+   {
+    "part": "uhi_context",
+    "kind": "comparability",
+    "note": "Surface UHI values are different seasons and times (Van summer day 7.25 °C, Edm winter night 2.86 °C) — not comparable with each other."
+   },
+   {
+    "part": "pue",
+    "kind": "contradiction",
+    "note": "Register pue says use 1.4–1.55; the worked example in make_diagram_data.py (EX values) uses 1.4–1.6."
+   },
+   {
+    "part": "existing_building",
+    "kind": "gap",
+    "note": "No numeric rule for \"use and age suit conversion\" or for \"what policy steers to other uses\"; floor area for Vancouver lots is not in open data. Footprint, Edmonton assessed gross area and year built reported."
+   }
+  ]
+ },
+ "lots": {
+  "V09": {
+   "_lot": {
+    "label": "275 1st Ave E",
+    "city": "van",
+    "parcel_id": "63819363",
+    "it_mw": 2.5
+   },
+   "sewer_sink": {
+    "low": null,
+    "high": null,
+    "unit": "MW at the pipe",
+    "how": "not derivable: no sewer flow data at any parcel; ΔT not given in the register"
+   },
+   "surface_water_sink": {
+    "low": 50.239,
+    "high": 111.244,
+    "unit": "L/s of water for the average heat rejected",
+    "how": "average heat (IT × 0.6 × PUE 1.4–1.55) × 1000 ÷ (4.18 × 10–5 K); capacity at the outfall is unmodelled in the register",
+    "extra": {
+     "bc_rental_per_yr": [
+      2059.648,
+      7893.431
+     ],
+     "dist_to_water_m": 549,
+     "flow_per_MW_Ls": [
+      23.923,
+      47.847
+     ]
+    }
+   },
+   "rooftop_solar": {
+    "low": 3492.442,
+    "high": 31529.984,
+    "unit": "MWh/yr",
+    "how": "neighbour roofs within 200–500 m (radius not stated in the register): low = 200 m with register factors 0.81 × 0.70 × 0.16 kWp/m² × horizontal yield; high = 500 m × register coefficient 128 / 159 kWh/m²",
+    "extra": {
+     "200m": {
+      "roof_m2": 43158,
+      "register_coef": 5524.224,
+      "rebuilt": [
+       3492.442,
+       4928.376
+      ]
+     },
+     "500m": {
+      "roof_m2": 246328,
+      "register_coef": 31529.984,
+      "rebuilt": [
+       19933.414,
+       28129.13
+      ]
+     }
+    }
+   },
+   "electricity_price": {
+    "low": 903979.44,
+    "high": 1382919.3,
+    "unit": "$/yr energy charge only",
+    "how": "RS 1830 (4.914 ¢/kWh) at MWh low to LGS (6.79 ¢/kWh) at MWh high; demand charges per billing period not annualisable (period not in register)",
+    "extra": {
+     "lgs_demand_per_period": [
+      48405,
+      53591.25
+     ],
+     "rs1830_demand_per_period_at_least": 42623,
+     "mwh_per_yr": [
+      18396,
+      20367
+     ]
+    }
+   },
+   "water_supply": {
+    "low": 4.256,
+    "high": 4.622,
+    "unit": "$/m³",
+    "how": "potable water (+ sewer, Vancouver) at 2026 / placeholder tariffs; reclaimed price not published"
+   },
+   "existing_building": {
+    "low": 2806.5,
+    "high": 2806.5,
+    "unit": "m² footprint on the lot",
+    "how": "footprint of buildings on the lot (input_check); floor area only for Edmonton (assessed gross); conversion suitability not derivable",
+    "extra": {
+     "gross_floor_m2": "not derivable",
+     "year_built": "1956"
+    }
+   },
+   "reclaimed_makeup": {
+    "low": 24.503,
+    "high": 60.49,
+    "unit": "ML/yr",
+    "how": "s 0.74–0.99 (operator claim) × make-up; make-up = evaporation upper bound (MWh × 1.5 m³/MWh) × C/(C−1), C 6–2",
+    "extra": {
+     "makeup_m3": [
+      33112.8,
+      61101
+     ],
+     "lbnl_crosscheck_m3": [
+      4204.8,
+      7332.12
+     ],
+     "potable_cost_per_yr": [
+      140924.69,
+      282416.262
+     ],
+     "share_of_epcor_reclaimed": "n/a"
+    }
+   },
+   "greywater_neighbours": {
+    "low": 31.8,
+    "high": 228.928,
+    "unit": "ML/yr",
+    "how": "residents within 200 m (low) and 500 m (high) × 98 L/person/day × 365; recovery share is a register gap",
+    "extra": {
+     "residents": [
+      889,
+      6400,
+      227839
+     ],
+     "gw500_over_makeup": [
+      3.747,
+      6.914
+     ]
+    }
+   },
+   "borefield": {
+    "low": 26532,
+    "high": 77508,
+    "unit": "m² of borefield",
+    "how": "L = heat ÷ q (low: average heat, PUE 1.4, q high; high: peak heat, PUE 1.55, q low); boreholes = L ÷ 150 m, ROUNDUP; × 36 m²",
+    "extra": {
+     "length_m": [
+      110526.316,
+      322916.667
+     ],
+     "boreholes": [
+      737,
+      2153
+     ],
+     "times_lot_area": [
+      3.382,
+      9.879
+     ],
+     "q_W_per_m": [
+      12,
+      19
+     ]
+    }
+   },
+   "ates": {
+    "low": 361.722,
+    "high": 667.464,
+    "unit": "m³/h",
+    "how": "flow = MW × 3,600 ÷ (4.18 × 5 K) (register formula off by 1,000); low average MW at PUE 1.4, high peak MW at PUE 1.55",
+    "extra": {
+     "heat_returned_MWh": [
+      7358.4,
+      17311.95
+     ],
+     "cost_eur": [
+      630000,
+      1162500
+     ],
+     "register_formula_as_written": 0.667
+    }
+   },
+   "deep_geo": {
+    "low": null,
+    "high": null,
+    "unit": "MWth per well pair",
+    "how": "not plausible / unproven (register) — register Edmonton figure (Majorowicz & Grasby 2021); Vancouver not plausible / unproven",
+    "extra": {
+     "implied_dT_K": [
+      "n/a",
+      "n/a"
+     ],
+     "pairs_for_avg_heat": [
+      "n/a",
+      "n/a"
+     ]
+    }
+   },
+   "flood_exposure": {
+    "low": null,
+    "high": null,
+    "unit": "m above / below FCL",
+    "how": "not derivable: no floor elevation and no datum conversion; floodplain share and FCL reported",
+    "extra": {
+     "floodplain_share": 0.482,
+     "fcl_m": 4.6
+    }
+   },
+   "service_class": {
+    "low": 3500,
+    "high": 3875,
+    "unit": "kW peak (class in \"class\")",
+    "how": "IT × PUE 1.4–1.55 × 1000; compared with BC Hydro 6.5 / 13 MVA and EPCOR 2,500 kVA",
+    "extra": {
+     "cls": "below 6.5 MVA in kW (kVA depends on power factor)",
+     "reg117_share": "n/a",
+     "substation_m": 544
+    }
+   },
+   "interconnection": {
+    "low": 1.766,
+    "high": 1.766,
+    "unit": "km to nearest located VANIX point",
+    "how": "straight line from the lot edge; latency = km × 0.005 ms",
+    "extra": {
+     "nearest": "Cologix VAN4, 175 W Cordova",
+     "one_way_ms": 0.009
+    }
+   },
+   "seismic_sa02": {
+    "low": 1.08,
+    "high": 1.08,
+    "unit": "g",
+    "how": "register value from the NRCan tool where the register point lies on this lot"
+   },
+   "self_gen_rules": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "RS 2289 from 1 Jul 2026: export ≤100 kW per phase (or ≤100 kW nameplate) at $0.10/kWh, same or adjacent parcel; distribution voltage only, so a data centre on RS 1830 (≥60 kV) cannot use it; RS 2290 community generation ≤2 MW net injection."
+   },
+   "ambient_cover": {
+    "low": null,
+    "high": null,
+    "unit": "dBA allowed (rule)",
+    "how": "By-law 6555: quiet→quiet 55/45, activity→quiet 60/55, (source adds intermediate→quiet 60/50), intermediate or activity→other 70/65 dBA day/night; no ambient credit for equipment. Zone→by-law class mapping not in register, so the pair for each lot is not derivable."
+   },
+   "uhi_context": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Heat mapping; 30% canopy by 2050; surface UHI summer day 7.25 °C (Duan 2026); no rule on equipment heat."
+   },
+   "restriction_history": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Stage 3 2015; Stage 2 2023 (4 Aug–15 Oct); 2026 Stage 3 from 8 Jun."
+   },
+   "nations_named": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "xʷməθkʷəy̓əm (Musqueam), Sḵwx̱wú7mesh Úxwumixw (Squamish), səlilwətaɬ (Tsleil-Waututh); unceded territories; links to each Nation's referral page."
+   }
+  },
+  "E05": {
+   "_lot": {
+    "label": "8803 Stadium Rd NW",
+    "city": "edm",
+    "parcel_id": "51053",
+    "it_mw": 10.2
+   },
+   "sewer_sink": {
+    "low": null,
+    "high": null,
+    "unit": "MW at the pipe",
+    "how": "not derivable: no sewer flow data at any parcel; ΔT not given in the register"
+   },
+   "surface_water_sink": {
+    "low": 204.976,
+    "high": 453.876,
+    "unit": "L/s of water for the average heat rejected",
+    "how": "average heat (IT × 0.6 × PUE 1.4–1.55) × 1000 ÷ (4.18 × 10–5 K); capacity at the outfall is unmodelled in the register",
+    "extra": {
+     "bc_rental_per_yr": [
+      "n/a (Alberta)",
+      "n/a (Alberta)"
+     ],
+     "dist_to_water_m": 536,
+     "flow_per_MW_Ls": [
+      23.923,
+      47.847
+     ]
+    }
+   },
+   "rooftop_solar": {
+    "low": 3300.639,
+    "high": 33163.107,
+    "unit": "MWh/yr",
+    "how": "neighbour roofs within 200–500 m (radius not stated in the register): low = 200 m with register factors 0.81 × 0.70 × 0.16 kWp/m² × horizontal yield; high = 500 m × register coefficient 128 / 159 kWh/m²",
+    "extra": {
+     "200m": {
+      "roof_m2": 38541,
+      "register_coef": 6128.019,
+      "rebuilt": [
+       3300.639,
+       5436.963
+      ]
+     },
+     "500m": {
+      "roof_m2": 208573,
+      "register_coef": 33163.107,
+      "rebuilt": [
+       17862.125,
+       29423.31
+      ]
+     }
+    }
+   },
+   "electricity_price": {
+    "low": 6642544.042,
+    "high": 9065580.774,
+    "unit": "$/yr (riders excluded)",
+    "how": "MWh × (pool × 1.0799 + $2.50/MWh) + EPCOR DAS-TOUP + SAS-TOUP daily charges × 365 on peak kW; pool $43.68–62.78 unverified in register",
+    "extra": {
+     "all_in_per_MWh": [
+      88.502,
+      109.096
+     ],
+     "mwh_per_yr": [
+      75055.68,
+      83097.36
+     ]
+    }
+   },
+   "water_supply": {
+    "low": 2.532,
+    "high": 3.882,
+    "unit": "$/m³",
+    "how": "potable water (+ sewer, Vancouver) at 2026 / placeholder tariffs; reclaimed price not published"
+   },
+   "existing_building": {
+    "low": 1042,
+    "high": 1042,
+    "unit": "m² footprint on the lot",
+    "how": "footprint of buildings on the lot (input_check); floor area only for Edmonton (assessed gross); conversion suitability not derivable",
+    "extra": {
+     "gross_floor_m2": 877.162,
+     "year_built": "1980"
+    }
+   },
+   "reclaimed_makeup": {
+    "low": 99.974,
+    "high": 246.799,
+    "unit": "ML/yr",
+    "how": "s 0.74–0.99 (operator claim) × make-up; make-up = evaporation upper bound (MWh × 1.5 m³/MWh) × C/(C−1), C 6–2",
+    "extra": {
+     "makeup_m3": [
+      135100.224,
+      249292.08
+     ],
+     "lbnl_crosscheck_m3": [
+      17155.584,
+      29915.05
+     ],
+     "potable_cost_per_yr": [
+      342073.767,
+      967751.855
+     ],
+     "share_of_epcor_reclaimed": 0.058
+    }
+   },
+   "greywater_neighbours": {
+    "low": 29.296,
+    "high": 182.32,
+    "unit": "ML/yr",
+    "how": "residents within 200 m (low) and 500 m (high) × 98 L/person/day × 365; recovery share is a register gap",
+    "extra": {
+     "residents": [
+      819,
+      5097,
+      79286
+     ],
+     "gw500_over_makeup": [
+      0.731,
+      1.35
+     ]
+    }
+   },
+   "borefield": {
+    "low": 186300,
+    "high": 544212,
+    "unit": "m² of borefield",
+    "how": "L = heat ÷ q (low: average heat, PUE 1.4, q high; high: peak heat, PUE 1.55, q low); boreholes = L ÷ 150 m, ROUNDUP; × 36 m²",
+    "extra": {
+     "length_m": [
+      776104.155,
+      2267486.842
+     ],
+     "boreholes": [
+      5175,
+      15117
+     ],
+     "times_lot_area": [
+      21.164,
+      61.825
+     ],
+     "q_W_per_m": [
+      6.972,
+      11.04
+     ]
+    }
+   },
+   "ates": {
+    "low": 1475.828,
+    "high": 2723.254,
+    "unit": "m³/h",
+    "how": "flow = MW × 3,600 ÷ (4.18 × 5 K) (register formula off by 1,000); low average MW at PUE 1.4, high peak MW at PUE 1.55",
+    "extra": {
+     "heat_returned_MWh": [
+      30022.272,
+      70632.756
+     ],
+     "cost_eur": [
+      2570400,
+      4743000
+     ],
+     "register_formula_as_written": 2.723
+    }
+   },
+   "deep_geo": {
+    "low": 2.1,
+    "high": 5.6,
+    "unit": "MWth per well pair",
+    "how": "register Edmonton figure (Majorowicz & Grasby 2021); Vancouver not plausible / unproven",
+    "extra": {
+     "implied_dT_K": [
+      16.746,
+      16.746
+     ],
+     "pairs_for_avg_heat": [
+      1.53,
+      4.517
+     ]
+    }
+   },
+   "flood_exposure": {
+    "low": null,
+    "high": null,
+    "unit": "m above / below FCL",
+    "how": "not derivable: no floor elevation and no datum conversion; floodplain share and FCL reported",
+    "extra": {
+     "floodplain_share": "not derivable (no Edmonton floodplain layer; FPO sets no FCL)",
+     "fcl_m": "n/a"
+    }
+   },
+   "service_class": {
+    "low": 14280,
+    "high": 15810,
+    "unit": "kW peak (class in \"class\")",
+    "how": "IT × PUE 1.4–1.55 × 1000; compared with BC Hydro 6.5 / 13 MVA and EPCOR 2,500 kVA",
+    "extra": {
+     "cls": "above 2,500 kVA: EPCOR primary service typical",
+     "reg117_share": 0.211,
+     "substation_m": 1971
+    }
+   },
+   "interconnection": {
+    "low": null,
+    "high": null,
+    "unit": "km to nearest located VANIX point",
+    "how": "not derivable — not derivable: YEGIX site named (Scotia Place) but no address or coordinates in the register",
+    "extra": {
+     "nearest": "n/a",
+     "one_way_ms": "not derivable"
+    }
+   },
+   "seismic_sa02": {
+    "low": 0.152,
+    "high": 0.152,
+    "unit": "g",
+    "how": "register value from the NRCan tool where the register point lies on this lot"
+   },
+   "self_gen_rules": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Micro-generation ≤5 MW (lesser of 5 MW or service rating), retail credit <150 kW, wholesale above; sized to own use, on owned/leased/adjacent land; data centres paired with dedicated new generation or storage go to the front of the connection line (Alta Reg 117/2026, via government page)."
+   },
+   "ambient_cover": {
+    "low": 50,
+    "high": 75,
+    "unit": "dB(A) at property line (Bylaw 14600: residential night 50 … non-residential day 75)",
+    "how": "Coef: \"Bylaw 14600 limits pending\". Source bylaw14600: residential 65 day / 50 night, non-residential 75 / 60 dB(A) at the property line; AUC Rule 012 is a benchmark only."
+   },
+   "uhi_context": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Cool Edmonton (Action 9); days >30 °C ~1 → 16 by 2050s; surface UHI winter night 2.86 °C (Duan 2026); no rule on equipment heat."
+   },
+   "restriction_history": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "One mandatory ban 29 Jan–2 Feb 2024 (plant failure, not drought); restrictions not every year."
+   },
+   "nations_named": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Treaty 6 territory and the Métis homeland; peoples named, not individual Nations (Confederacy of Treaty No. 6 lists 15)."
+   }
+  },
+  "CLARK": {
+   "_lot": {
+    "label": "1425 Clark Dr",
+    "city": "van",
+    "parcel_id": "23060741",
+    "it_mw": 5.2
+   },
+   "sewer_sink": {
+    "low": null,
+    "high": null,
+    "unit": "MW at the pipe",
+    "how": "not derivable: no sewer flow data at any parcel; ΔT not given in the register"
+   },
+   "surface_water_sink": {
+    "low": 104.498,
+    "high": 231.388,
+    "unit": "L/s of water for the average heat rejected",
+    "how": "average heat (IT × 0.6 × PUE 1.4–1.55) × 1000 ÷ (4.18 × 10–5 K); capacity at the outfall is unmodelled in the register",
+    "extra": {
+     "bc_rental_per_yr": [
+      4284.068,
+      16418.336
+     ],
+     "dist_to_water_m": 1322,
+     "flow_per_MW_Ls": [
+      23.923,
+      47.847
+     ]
+    }
+   },
+   "rooftop_solar": {
+    "low": 4229.401,
+    "high": 30518.528,
+    "unit": "MWh/yr",
+    "how": "neighbour roofs within 200–500 m (radius not stated in the register): low = 200 m with register factors 0.81 × 0.70 × 0.16 kWp/m² × horizontal yield; high = 500 m × register coefficient 128 / 159 kWh/m²",
+    "extra": {
+     "200m": {
+      "roof_m2": 52265,
+      "register_coef": 6689.92,
+      "rebuilt": [
+       4229.401,
+       5968.339
+      ]
+     },
+     "500m": {
+      "roof_m2": 238426,
+      "register_coef": 30518.528,
+      "rebuilt": [
+       19293.966,
+       27226.771
+      ]
+     }
+    }
+   },
+   "electricity_price": {
+    "low": 1880277.235,
+    "high": 2876472.144,
+    "unit": "$/yr energy charge only",
+    "how": "RS 1830 (4.914 ¢/kWh) at MWh low to LGS (6.79 ¢/kWh) at MWh high; demand charges per billing period not annualisable (period not in register)",
+    "extra": {
+     "lgs_demand_per_period": [
+      100682.4,
+      111469.8
+     ],
+     "rs1830_demand_per_period_at_least": 88655.84,
+     "mwh_per_yr": [
+      38263.68,
+      42363.36
+     ]
+    }
+   },
+   "water_supply": {
+    "low": 4.256,
+    "high": 4.622,
+    "unit": "$/m³",
+    "how": "potable water (+ sewer, Vancouver) at 2026 / placeholder tariffs; reclaimed price not published"
+   },
+   "existing_building": {
+    "low": 1963.5,
+    "high": 1963.5,
+    "unit": "m² footprint on the lot",
+    "how": "footprint of buildings on the lot (input_check); floor area only for Edmonton (assessed gross); conversion suitability not derivable",
+    "extra": {
+     "gross_floor_m2": "not derivable",
+     "year_built": "1966"
+    }
+   },
+   "reclaimed_makeup": {
+    "low": 50.967,
+    "high": 125.819,
+    "unit": "ML/yr",
+    "how": "s 0.74–0.99 (operator claim) × make-up; make-up = evaporation upper bound (MWh × 1.5 m³/MWh) × C/(C−1), C 6–2",
+    "extra": {
+     "makeup_m3": [
+      68874.624,
+      127090.08
+     ],
+     "lbnl_crosscheck_m3": [
+      8745.984,
+      15250.81
+     ],
+     "potable_cost_per_yr": [
+      293123.356,
+      587425.825
+     ],
+     "share_of_epcor_reclaimed": "n/a"
+    }
+   },
+   "greywater_neighbours": {
+    "low": 16.204,
+    "high": 141.005,
+    "unit": "ML/yr",
+    "how": "residents within 200 m (low) and 500 m (high) × 98 L/person/day × 365; recovery share is a register gap",
+    "extra": {
+     "residents": [
+      453,
+      3942,
+      172890
+     ],
+     "gw500_over_makeup": [
+      1.109,
+      2.047
+     ]
+    }
+   },
+   "borefield": {
+    "low": 55188,
+    "high": 161208,
+    "unit": "m² of borefield",
+    "how": "L = heat ÷ q (low: average heat, PUE 1.4, q high; high: peak heat, PUE 1.55, q low); boreholes = L ÷ 150 m, ROUNDUP; × 36 m²",
+    "extra": {
+     "length_m": [
+      229894.737,
+      671666.667
+     ],
+     "boreholes": [
+      1533,
+      4478
+     ],
+     "times_lot_area": [
+      9.378,
+      27.393
+     ],
+     "q_W_per_m": [
+      12,
+      19
+     ]
+    }
+   },
+   "ates": {
+    "low": 752.383,
+    "high": 1388.325,
+    "unit": "m³/h",
+    "how": "flow = MW × 3,600 ÷ (4.18 × 5 K) (register formula off by 1,000); low average MW at PUE 1.4, high peak MW at PUE 1.55",
+    "extra": {
+     "heat_returned_MWh": [
+      15305.472,
+      36008.856
+     ],
+     "cost_eur": [
+      1310400,
+      2418000
+     ],
+     "register_formula_as_written": 1.388
+    }
+   },
+   "deep_geo": {
+    "low": null,
+    "high": null,
+    "unit": "MWth per well pair",
+    "how": "not plausible / unproven (register) — register Edmonton figure (Majorowicz & Grasby 2021); Vancouver not plausible / unproven",
+    "extra": {
+     "implied_dT_K": [
+      "n/a",
+      "n/a"
+     ],
+     "pairs_for_avg_heat": [
+      "n/a",
+      "n/a"
+     ]
+    }
+   },
+   "flood_exposure": {
+    "low": null,
+    "high": null,
+    "unit": "m above / below FCL",
+    "how": "not derivable: no floor elevation and no datum conversion; floodplain share and FCL reported",
+    "extra": {
+     "floodplain_share": 0.356,
+     "fcl_m": 4.6
+    }
+   },
+   "service_class": {
+    "low": 7280,
+    "high": 8060,
+    "unit": "kW peak (class in \"class\")",
+    "how": "IT × PUE 1.4–1.55 × 1000; compared with BC Hydro 6.5 / 13 MVA and EPCOR 2,500 kVA",
+    "extra": {
+     "cls": "above 6.5 MVA: two feeders may be required in 12.5 kV areas",
+     "reg117_share": "n/a",
+     "substation_m": 1654
+    }
+   },
+   "interconnection": {
+    "low": 2.494,
+    "high": 2.494,
+    "unit": "km to nearest located VANIX point",
+    "how": "straight line from the lot edge; latency = km × 0.005 ms",
+    "extra": {
+     "nearest": "Cologix VAN4, 175 W Cordova",
+     "one_way_ms": 0.012
+    }
+   },
+   "seismic_sa02": {
+    "low": null,
+    "high": null,
+    "unit": "g",
+    "how": "not derivable: no register value for a point on this lot; distances to the register points (m): {\"V09\": 1371.0}"
+   },
+   "self_gen_rules": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "RS 2289 from 1 Jul 2026: export ≤100 kW per phase (or ≤100 kW nameplate) at $0.10/kWh, same or adjacent parcel; distribution voltage only, so a data centre on RS 1830 (≥60 kV) cannot use it; RS 2290 community generation ≤2 MW net injection."
+   },
+   "ambient_cover": {
+    "low": null,
+    "high": null,
+    "unit": "dBA allowed (rule)",
+    "how": "By-law 6555: quiet→quiet 55/45, activity→quiet 60/55, (source adds intermediate→quiet 60/50), intermediate or activity→other 70/65 dBA day/night; no ambient credit for equipment. Zone→by-law class mapping not in register, so the pair for each lot is not derivable."
+   },
+   "uhi_context": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Heat mapping; 30% canopy by 2050; surface UHI summer day 7.25 °C (Duan 2026); no rule on equipment heat."
+   },
+   "restriction_history": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Stage 3 2015; Stage 2 2023 (4 Aug–15 Oct); 2026 Stage 3 from 8 Jun."
+   },
+   "nations_named": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "xʷməθkʷəy̓əm (Musqueam), Sḵwx̱wú7mesh Úxwumixw (Squamish), səlilwətaɬ (Tsleil-Waututh); unceded territories; links to each Nation's referral page."
+   }
+  },
+  "E123": {
+   "_lot": {
+    "label": "12603 123 Street NW",
+    "city": "edm",
+    "parcel_id": "883345",
+    "it_mw": 22.2
+   },
+   "sewer_sink": {
+    "low": null,
+    "high": null,
+    "unit": "MW at the pipe",
+    "how": "not derivable: no sewer flow data at any parcel; ΔT not given in the register"
+   },
+   "surface_water_sink": {
+    "low": 446.124,
+    "high": 987.847,
+    "unit": "L/s of water for the average heat rejected",
+    "how": "average heat (IT × 0.6 × PUE 1.4–1.55) × 1000 ÷ (4.18 × 10–5 K); capacity at the outfall is unmodelled in the register",
+    "extra": {
+     "bc_rental_per_yr": [
+      "n/a (Alberta)",
+      "n/a (Alberta)"
+     ],
+     "dist_to_water_m": 4826,
+     "flow_per_MW_Ls": [
+      23.923,
+      47.847
+     ]
+    }
+   },
+   "rooftop_solar": {
+    "low": 2557.886,
+    "high": 21126.489,
+    "unit": "MWh/yr",
+    "how": "neighbour roofs within 200–500 m (radius not stated in the register): low = 200 m with register factors 0.81 × 0.70 × 0.16 kWp/m² × horizontal yield; high = 500 m × register coefficient 128 / 159 kWh/m²",
+    "extra": {
+     "200m": {
+      "roof_m2": 29868,
+      "register_coef": 4749.012,
+      "rebuilt": [
+       2557.886,
+       4213.467
+      ]
+     },
+     "500m": {
+      "roof_m2": 132871,
+      "register_coef": 21126.489,
+      "rebuilt": [
+       11379.03,
+       18744.059
+      ]
+     }
+    }
+   },
+   "electricity_price": {
+    "low": 14428335.004,
+    "high": 19702003.184,
+    "unit": "$/yr (riders excluded)",
+    "how": "MWh × (pool × 1.0799 + $2.50/MWh) + EPCOR DAS-TOUP + SAS-TOUP daily charges × 365 on peak kW; pool $43.68–62.78 unverified in register",
+    "extra": {
+     "all_in_per_MWh": [
+      88.324,
+      108.936
+     ],
+     "mwh_per_yr": [
+      163356.48,
+      180858.96
+     ]
+    }
+   },
+   "water_supply": {
+    "low": 2.532,
+    "high": 3.882,
+    "unit": "$/m³",
+    "how": "potable water (+ sewer, Vancouver) at 2026 / placeholder tariffs; reclaimed price not published"
+   },
+   "existing_building": {
+    "low": 5781.7,
+    "high": 5781.7,
+    "unit": "m² footprint on the lot",
+    "how": "footprint of buildings on the lot (input_check); floor area only for Edmonton (assessed gross); conversion suitability not derivable",
+    "extra": {
+     "gross_floor_m2": 4353.065,
+     "year_built": "1990"
+    }
+   },
+   "reclaimed_makeup": {
+    "low": 217.591,
+    "high": 537.151,
+    "unit": "ML/yr",
+    "how": "s 0.74–0.99 (operator claim) × make-up; make-up = evaporation upper bound (MWh × 1.5 m³/MWh) × C/(C−1), C 6–2",
+    "extra": {
+     "makeup_m3": [
+      294041.664,
+      542576.88
+     ],
+     "lbnl_crosscheck_m3": [
+      37338.624,
+      65109.226
+     ],
+     "potable_cost_per_yr": [
+      744513.493,
+      2106283.448
+     ],
+     "share_of_epcor_reclaimed": 0.127
+    }
+   },
+   "greywater_neighbours": {
+    "low": 7.583,
+    "high": 46.751,
+    "unit": "ML/yr",
+    "how": "residents within 200 m (low) and 500 m (high) × 98 L/person/day × 365; recovery share is a register gap",
+    "extra": {
+     "residents": [
+      212,
+      1307,
+      58035
+     ],
+     "gw500_over_makeup": [
+      0.086,
+      0.159
+     ]
+    }
+   },
+   "borefield": {
+    "low": 405432,
+    "high": 1184436,
+    "unit": "m² of borefield",
+    "how": "L = heat ÷ q (low: average heat, PUE 1.4, q high; high: peak heat, PUE 1.55, q low); boreholes = L ÷ 150 m, ROUNDUP; × 36 m²",
+    "extra": {
+     "length_m": [
+      1689167.867,
+      4935118.421
+     ],
+     "boreholes": [
+      11262,
+      32901
+     ],
+     "times_lot_area": [
+      27.922,
+      81.573
+     ],
+     "q_W_per_m": [
+      6.972,
+      11.04
+     ]
+    }
+   },
+   "ates": {
+    "low": 3212.096,
+    "high": 5927.081,
+    "unit": "m³/h",
+    "how": "flow = MW × 3,600 ÷ (4.18 × 5 K) (register formula off by 1,000); low average MW at PUE 1.4, high peak MW at PUE 1.55",
+    "extra": {
+     "heat_returned_MWh": [
+      65342.592,
+      153730.116
+     ],
+     "cost_eur": [
+      5594400,
+      10323000
+     ],
+     "register_formula_as_written": 5.927
+    }
+   },
+   "deep_geo": {
+    "low": 2.1,
+    "high": 5.6,
+    "unit": "MWth per well pair",
+    "how": "register Edmonton figure (Majorowicz & Grasby 2021); Vancouver not plausible / unproven",
+    "extra": {
+     "implied_dT_K": [
+      16.746,
+      16.746
+     ],
+     "pairs_for_avg_heat": [
+      3.33,
+      9.831
+     ]
+    }
+   },
+   "flood_exposure": {
+    "low": null,
+    "high": null,
+    "unit": "m above / below FCL",
+    "how": "not derivable: no floor elevation and no datum conversion; floodplain share and FCL reported",
+    "extra": {
+     "floodplain_share": "not derivable (no Edmonton floodplain layer; FPO sets no FCL)",
+     "fcl_m": "n/a"
+    }
+   },
+   "service_class": {
+    "low": 31080,
+    "high": 34410,
+    "unit": "kW peak (class in \"class\")",
+    "how": "IT × PUE 1.4–1.55 × 1000; compared with BC Hydro 6.5 / 13 MVA and EPCOR 2,500 kVA",
+    "extra": {
+     "cls": "above 2,500 kVA: EPCOR primary service typical",
+     "reg117_share": 0.459,
+     "substation_m": 2054
+    }
+   },
+   "interconnection": {
+    "low": null,
+    "high": null,
+    "unit": "km to nearest located VANIX point",
+    "how": "not derivable — not derivable: YEGIX site named (Scotia Place) but no address or coordinates in the register",
+    "extra": {
+     "nearest": "n/a",
+     "one_way_ms": "not derivable"
+    }
+   },
+   "seismic_sa02": {
+    "low": null,
+    "high": null,
+    "unit": "g",
+    "how": "not derivable: no register value for a point on this lot; distances to the register points (m): {\"E05\": 4711.0, \"E06\": 1582.0}"
+   },
+   "self_gen_rules": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Micro-generation ≤5 MW (lesser of 5 MW or service rating), retail credit <150 kW, wholesale above; sized to own use, on owned/leased/adjacent land; data centres paired with dedicated new generation or storage go to the front of the connection line (Alta Reg 117/2026, via government page)."
+   },
+   "ambient_cover": {
+    "low": 50,
+    "high": 75,
+    "unit": "dB(A) at property line (Bylaw 14600: residential night 50 … non-residential day 75)",
+    "how": "Coef: \"Bylaw 14600 limits pending\". Source bylaw14600: residential 65 day / 50 night, non-residential 75 / 60 dB(A) at the property line; AUC Rule 012 is a benchmark only."
+   },
+   "uhi_context": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Cool Edmonton (Action 9); days >30 °C ~1 → 16 by 2050s; surface UHI winter night 2.86 °C (Duan 2026); no rule on equipment heat."
+   },
+   "restriction_history": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "One mandatory ban 29 Jan–2 Feb 2024 (plant failure, not drought); restrictions not every year."
+   },
+   "nations_named": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Treaty 6 territory and the Métis homeland; peoples named, not individual Nations (Confederacy of Treaty No. 6 lists 15)."
+   }
+  },
+  "V339": {
+   "_lot": {
+    "label": "339 1st Ave E",
+    "city": "van",
+    "parcel_id": "63819485",
+    "it_mw": 3.8
+   },
+   "sewer_sink": {
+    "low": null,
+    "high": null,
+    "unit": "MW at the pipe",
+    "how": "not derivable: no sewer flow data at any parcel; ΔT not given in the register"
+   },
+   "surface_water_sink": {
+    "low": 76.364,
+    "high": 169.091,
+    "unit": "L/s of water for the average heat rejected",
+    "how": "average heat (IT × 0.6 × PUE 1.4–1.55) × 1000 ÷ (4.18 × 10–5 K); capacity at the outfall is unmodelled in the register",
+    "extra": {
+     "bc_rental_per_yr": [
+      3130.665,
+      11998.015
+     ],
+     "dist_to_water_m": 638,
+     "flow_per_MW_Ls": [
+      23.923,
+      47.847
+     ]
+    }
+   },
+   "rooftop_solar": {
+    "low": 3312.39,
+    "high": 30325.376,
+    "unit": "MWh/yr",
+    "how": "neighbour roofs within 200–500 m (radius not stated in the register): low = 200 m with register factors 0.81 × 0.70 × 0.16 kWp/m² × horizontal yield; high = 500 m × register coefficient 128 / 159 kWh/m²",
+    "extra": {
+     "200m": {
+      "roof_m2": 40933,
+      "register_coef": 5239.424,
+      "rebuilt": [
+       3312.39,
+       4674.295
+      ]
+     },
+     "500m": {
+      "roof_m2": 236917,
+      "register_coef": 30325.376,
+      "rebuilt": [
+       19171.854,
+       27054.453
+      ]
+     }
+    }
+   },
+   "electricity_price": {
+    "low": 1374048.749,
+    "high": 2102037.336,
+    "unit": "$/yr energy charge only",
+    "how": "RS 1830 (4.914 ¢/kWh) at MWh low to LGS (6.79 ¢/kWh) at MWh high; demand charges per billing period not annualisable (period not in register)",
+    "extra": {
+     "lgs_demand_per_period": [
+      73575.6,
+      81458.7
+     ],
+     "rs1830_demand_per_period_at_least": 64786.96,
+     "mwh_per_yr": [
+      27961.92,
+      30957.84
+     ]
+    }
+   },
+   "water_supply": {
+    "low": 4.256,
+    "high": 4.622,
+    "unit": "$/m³",
+    "how": "potable water (+ sewer, Vancouver) at 2026 / placeholder tariffs; reclaimed price not published"
+   },
+   "existing_building": {
+    "low": 0,
+    "high": 0,
+    "unit": "m² footprint on the lot",
+    "how": "footprint of buildings on the lot (input_check); floor area only for Edmonton (assessed gross); conversion suitability not derivable",
+    "extra": {
+     "gross_floor_m2": "not derivable",
+     "year_built": "none recorded"
+    }
+   },
+   "reclaimed_makeup": {
+    "low": 37.245,
+    "high": 91.945,
+    "unit": "ML/yr",
+    "how": "s 0.74–0.99 (operator claim) × make-up; make-up = evaporation upper bound (MWh × 1.5 m³/MWh) × C/(C−1), C 6–2",
+    "extra": {
+     "makeup_m3": [
+      50331.456,
+      92873.52
+     ],
+     "lbnl_crosscheck_m3": [
+      6391.296,
+      11144.822
+     ],
+     "potable_cost_per_yr": [
+      214205.529,
+      429272.719
+     ],
+     "share_of_epcor_reclaimed": "n/a"
+    }
+   },
+   "greywater_neighbours": {
+    "low": 27.972,
+    "high": 202.995,
+    "unit": "ML/yr",
+    "how": "residents within 200 m (low) and 500 m (high) × 98 L/person/day × 365; recovery share is a register gap",
+    "extra": {
+     "residents": [
+      782,
+      5675,
+      223827
+     ],
+     "gw500_over_makeup": [
+      2.186,
+      4.033
+     ]
+    }
+   },
+   "borefield": {
+    "low": 40320,
+    "high": 117828,
+    "unit": "m² of borefield",
+    "how": "L = heat ÷ q (low: average heat, PUE 1.4, q high; high: peak heat, PUE 1.55, q low); boreholes = L ÷ 150 m, ROUNDUP; × 36 m²",
+    "extra": {
+     "length_m": [
+      168000,
+      490833.333
+     ],
+     "boreholes": [
+      1120,
+      3273
+     ],
+     "times_lot_area": [
+      8.99,
+      26.271
+     ],
+     "q_W_per_m": [
+      12,
+      19
+     ]
+    }
+   },
+   "ates": {
+    "low": 549.818,
+    "high": 1014.545,
+    "unit": "m³/h",
+    "how": "flow = MW × 3,600 ÷ (4.18 × 5 K) (register formula off by 1,000); low average MW at PUE 1.4, high peak MW at PUE 1.55",
+    "extra": {
+     "heat_returned_MWh": [
+      11184.768,
+      26314.164
+     ],
+     "cost_eur": [
+      957600,
+      1767000
+     ],
+     "register_formula_as_written": 1.015
+    }
+   },
+   "deep_geo": {
+    "low": null,
+    "high": null,
+    "unit": "MWth per well pair",
+    "how": "not plausible / unproven (register) — register Edmonton figure (Majorowicz & Grasby 2021); Vancouver not plausible / unproven",
+    "extra": {
+     "implied_dT_K": [
+      "n/a",
+      "n/a"
+     ],
+     "pairs_for_avg_heat": [
+      "n/a",
+      "n/a"
+     ]
+    }
+   },
+   "flood_exposure": {
+    "low": null,
+    "high": null,
+    "unit": "m above / below FCL",
+    "how": "not derivable: no floor elevation and no datum conversion; floodplain share and FCL reported",
+    "extra": {
+     "floodplain_share": 0.291,
+     "fcl_m": 4.6
+    }
+   },
+   "service_class": {
+    "low": 5320,
+    "high": 5890,
+    "unit": "kW peak (class in \"class\")",
+    "how": "IT × PUE 1.4–1.55 × 1000; compared with BC Hydro 6.5 / 13 MVA and EPCOR 2,500 kVA",
+    "extra": {
+     "cls": "below 6.5 MVA in kW (kVA depends on power factor)",
+     "reg117_share": "n/a",
+     "substation_m": 524
+    }
+   },
+   "interconnection": {
+    "low": 1.837,
+    "high": 1.837,
+    "unit": "km to nearest located VANIX point",
+    "how": "straight line from the lot edge; latency = km × 0.005 ms",
+    "extra": {
+     "nearest": "Cologix VAN4, 175 W Cordova",
+     "one_way_ms": 0.009
+    }
+   },
+   "seismic_sa02": {
+    "low": null,
+    "high": null,
+    "unit": "g",
+    "how": "not derivable: no register value for a point on this lot; distances to the register points (m): {\"V09\": 57.0}"
+   },
+   "self_gen_rules": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "RS 2289 from 1 Jul 2026: export ≤100 kW per phase (or ≤100 kW nameplate) at $0.10/kWh, same or adjacent parcel; distribution voltage only, so a data centre on RS 1830 (≥60 kV) cannot use it; RS 2290 community generation ≤2 MW net injection."
+   },
+   "ambient_cover": {
+    "low": null,
+    "high": null,
+    "unit": "dBA allowed (rule)",
+    "how": "By-law 6555: quiet→quiet 55/45, activity→quiet 60/55, (source adds intermediate→quiet 60/50), intermediate or activity→other 70/65 dBA day/night; no ambient credit for equipment. Zone→by-law class mapping not in register, so the pair for each lot is not derivable."
+   },
+   "uhi_context": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Heat mapping; 30% canopy by 2050; surface UHI summer day 7.25 °C (Duan 2026); no rule on equipment heat."
+   },
+   "restriction_history": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Stage 3 2015; Stage 2 2023 (4 Aug–15 Oct); 2026 Stage 3 from 8 Jun."
+   },
+   "nations_named": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "xʷməθkʷəy̓əm (Musqueam), Sḵwx̱wú7mesh Úxwumixw (Squamish), səlilwətaɬ (Tsleil-Waututh); unceded territories; links to each Nation's referral page."
+   }
+  },
+  "E06A": {
+   "_lot": {
+    "label": "74 Airport Rd NW",
+    "city": "edm",
+    "parcel_id": "176767",
+    "it_mw": 10.2
+   },
+   "sewer_sink": {
+    "low": null,
+    "high": null,
+    "unit": "MW at the pipe",
+    "how": "not derivable: no sewer flow data at any parcel; ΔT not given in the register"
+   },
+   "surface_water_sink": {
+    "low": 204.976,
+    "high": 453.876,
+    "unit": "L/s of water for the average heat rejected",
+    "how": "average heat (IT × 0.6 × PUE 1.4–1.55) × 1000 ÷ (4.18 × 10–5 K); capacity at the outfall is unmodelled in the register",
+    "extra": {
+     "bc_rental_per_yr": [
+      "n/a (Alberta)",
+      "n/a (Alberta)"
+     ],
+     "dist_to_water_m": 3546,
+     "flow_per_MW_Ls": [
+      23.923,
+      47.847
+     ]
+    }
+   },
+   "rooftop_solar": {
+    "low": 3592.413,
+    "high": 23765.571,
+    "unit": "MWh/yr",
+    "how": "neighbour roofs within 200–500 m (radius not stated in the register): low = 200 m with register factors 0.81 × 0.70 × 0.16 kWp/m² × horizontal yield; high = 500 m × register coefficient 128 / 159 kWh/m²",
+    "extra": {
+     "200m": {
+      "roof_m2": 41948,
+      "register_coef": 6669.732,
+      "rebuilt": [
+       3592.413,
+       5917.588
+      ]
+     },
+     "500m": {
+      "roof_m2": 149469,
+      "register_coef": 23765.571,
+      "rebuilt": [
+       12800.477,
+       21085.532
+      ]
+     }
+    }
+   },
+   "electricity_price": {
+    "low": 6642544.042,
+    "high": 9065580.774,
+    "unit": "$/yr (riders excluded)",
+    "how": "MWh × (pool × 1.0799 + $2.50/MWh) + EPCOR DAS-TOUP + SAS-TOUP daily charges × 365 on peak kW; pool $43.68–62.78 unverified in register",
+    "extra": {
+     "all_in_per_MWh": [
+      88.502,
+      109.096
+     ],
+     "mwh_per_yr": [
+      75055.68,
+      83097.36
+     ]
+    }
+   },
+   "water_supply": {
+    "low": 2.532,
+    "high": 3.882,
+    "unit": "$/m³",
+    "how": "potable water (+ sewer, Vancouver) at 2026 / placeholder tariffs; reclaimed price not published"
+   },
+   "existing_building": {
+    "low": 0,
+    "high": 0,
+    "unit": "m² footprint on the lot",
+    "how": "footprint of buildings on the lot (input_check); floor area only for Edmonton (assessed gross); conversion suitability not derivable",
+    "extra": {
+     "gross_floor_m2": 0,
+     "year_built": "1991"
+    }
+   },
+   "reclaimed_makeup": {
+    "low": 99.974,
+    "high": 246.799,
+    "unit": "ML/yr",
+    "how": "s 0.74–0.99 (operator claim) × make-up; make-up = evaporation upper bound (MWh × 1.5 m³/MWh) × C/(C−1), C 6–2",
+    "extra": {
+     "makeup_m3": [
+      135100.224,
+      249292.08
+     ],
+     "lbnl_crosscheck_m3": [
+      17155.584,
+      29915.05
+     ],
+     "potable_cost_per_yr": [
+      342073.767,
+      967751.855
+     ],
+     "share_of_epcor_reclaimed": 0.058
+    }
+   },
+   "greywater_neighbours": {
+    "low": 0.465,
+    "high": 7.977,
+    "unit": "ML/yr",
+    "how": "residents within 200 m (low) and 500 m (high) × 98 L/person/day × 365; recovery share is a register gap",
+    "extra": {
+     "residents": [
+      13,
+      223,
+      74485
+     ],
+     "gw500_over_makeup": [
+      0.032,
+      0.059
+     ]
+    }
+   },
+   "borefield": {
+    "low": 186300,
+    "high": 544212,
+    "unit": "m² of borefield",
+    "how": "L = heat ÷ q (low: average heat, PUE 1.4, q high; high: peak heat, PUE 1.55, q low); boreholes = L ÷ 150 m, ROUNDUP; × 36 m²",
+    "extra": {
+     "length_m": [
+      776104.155,
+      2267486.842
+     ],
+     "boreholes": [
+      5175,
+      15117
+     ],
+     "times_lot_area": [
+      40.848,
+      119.324
+     ],
+     "q_W_per_m": [
+      6.972,
+      11.04
+     ]
+    }
+   },
+   "ates": {
+    "low": 1475.828,
+    "high": 2723.254,
+    "unit": "m³/h",
+    "how": "flow = MW × 3,600 ÷ (4.18 × 5 K) (register formula off by 1,000); low average MW at PUE 1.4, high peak MW at PUE 1.55",
+    "extra": {
+     "heat_returned_MWh": [
+      30022.272,
+      70632.756
+     ],
+     "cost_eur": [
+      2570400,
+      4743000
+     ],
+     "register_formula_as_written": 2.723
+    }
+   },
+   "deep_geo": {
+    "low": 2.1,
+    "high": 5.6,
+    "unit": "MWth per well pair",
+    "how": "register Edmonton figure (Majorowicz & Grasby 2021); Vancouver not plausible / unproven",
+    "extra": {
+     "implied_dT_K": [
+      16.746,
+      16.746
+     ],
+     "pairs_for_avg_heat": [
+      1.53,
+      4.517
+     ]
+    }
+   },
+   "flood_exposure": {
+    "low": null,
+    "high": null,
+    "unit": "m above / below FCL",
+    "how": "not derivable: no floor elevation and no datum conversion; floodplain share and FCL reported",
+    "extra": {
+     "floodplain_share": "not derivable (no Edmonton floodplain layer; FPO sets no FCL)",
+     "fcl_m": "n/a"
+    }
+   },
+   "service_class": {
+    "low": 14280,
+    "high": 15810,
+    "unit": "kW peak (class in \"class\")",
+    "how": "IT × PUE 1.4–1.55 × 1000; compared with BC Hydro 6.5 / 13 MVA and EPCOR 2,500 kVA",
+    "extra": {
+     "cls": "above 2,500 kVA: EPCOR primary service typical",
+     "reg117_share": 0.211,
+     "substation_m": 587
+    }
+   },
+   "interconnection": {
+    "low": null,
+    "high": null,
+    "unit": "km to nearest located VANIX point",
+    "how": "not derivable — not derivable: YEGIX site named (Scotia Place) but no address or coordinates in the register",
+    "extra": {
+     "nearest": "n/a",
+     "one_way_ms": "not derivable"
+    }
+   },
+   "seismic_sa02": {
+    "low": null,
+    "high": null,
+    "unit": "g",
+    "how": "not derivable: no register value for a point on this lot; distances to the register points (m): {\"E05\": 3369.0, \"E06\": 8.0}"
+   },
+   "self_gen_rules": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Micro-generation ≤5 MW (lesser of 5 MW or service rating), retail credit <150 kW, wholesale above; sized to own use, on owned/leased/adjacent land; data centres paired with dedicated new generation or storage go to the front of the connection line (Alta Reg 117/2026, via government page)."
+   },
+   "ambient_cover": {
+    "low": 50,
+    "high": 75,
+    "unit": "dB(A) at property line (Bylaw 14600: residential night 50 … non-residential day 75)",
+    "how": "Coef: \"Bylaw 14600 limits pending\". Source bylaw14600: residential 65 day / 50 night, non-residential 75 / 60 dB(A) at the property line; AUC Rule 012 is a benchmark only."
+   },
+   "uhi_context": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Cool Edmonton (Action 9); days >30 °C ~1 → 16 by 2050s; surface UHI winter night 2.86 °C (Duan 2026); no rule on equipment heat."
+   },
+   "restriction_history": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "One mandatory ban 29 Jan–2 Feb 2024 (plant failure, not drought); restrictions not every year."
+   },
+   "nations_named": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Treaty 6 territory and the Métis homeland; peoples named, not individual Nations (Confederacy of Treaty No. 6 lists 15)."
+   }
+  },
+  "E06B": {
+   "_lot": {
+    "label": "64 Airport Rd NW",
+    "city": "edm",
+    "parcel_id": "146402",
+    "it_mw": 10.2
+   },
+   "sewer_sink": {
+    "low": null,
+    "high": null,
+    "unit": "MW at the pipe",
+    "how": "not derivable: no sewer flow data at any parcel; ΔT not given in the register"
+   },
+   "surface_water_sink": {
+    "low": 204.976,
+    "high": 453.876,
+    "unit": "L/s of water for the average heat rejected",
+    "how": "average heat (IT × 0.6 × PUE 1.4–1.55) × 1000 ÷ (4.18 × 10–5 K); capacity at the outfall is unmodelled in the register",
+    "extra": {
+     "bc_rental_per_yr": [
+      "n/a (Alberta)",
+      "n/a (Alberta)"
+     ],
+     "dist_to_water_m": 3519,
+     "flow_per_MW_Ls": [
+      23.923,
+      47.847
+     ]
+    }
+   },
+   "rooftop_solar": {
+    "low": 3011.434,
+    "high": 24717.504,
+    "unit": "MWh/yr",
+    "how": "neighbour roofs within 200–500 m (radius not stated in the register): low = 200 m with register factors 0.81 × 0.70 × 0.16 kWp/m² × horizontal yield; high = 500 m × register coefficient 128 / 159 kWh/m²",
+    "extra": {
+     "200m": {
+      "roof_m2": 35164,
+      "register_coef": 5591.076,
+      "rebuilt": [
+       3011.434,
+       4960.571
+      ]
+     },
+     "500m": {
+      "roof_m2": 155456,
+      "register_coef": 24717.504,
+      "rebuilt": [
+       13313.202,
+       21930.116
+      ]
+     }
+    }
+   },
+   "electricity_price": {
+    "low": 6642544.042,
+    "high": 9065580.774,
+    "unit": "$/yr (riders excluded)",
+    "how": "MWh × (pool × 1.0799 + $2.50/MWh) + EPCOR DAS-TOUP + SAS-TOUP daily charges × 365 on peak kW; pool $43.68–62.78 unverified in register",
+    "extra": {
+     "all_in_per_MWh": [
+      88.502,
+      109.096
+     ],
+     "mwh_per_yr": [
+      75055.68,
+      83097.36
+     ]
+    }
+   },
+   "water_supply": {
+    "low": 2.532,
+    "high": 3.882,
+    "unit": "$/m³",
+    "how": "potable water (+ sewer, Vancouver) at 2026 / placeholder tariffs; reclaimed price not published"
+   },
+   "existing_building": {
+    "low": 0,
+    "high": 0,
+    "unit": "m² footprint on the lot",
+    "how": "footprint of buildings on the lot (input_check); floor area only for Edmonton (assessed gross); conversion suitability not derivable",
+    "extra": {
+     "gross_floor_m2": 0,
+     "year_built": "1991"
+    }
+   },
+   "reclaimed_makeup": {
+    "low": 99.974,
+    "high": 246.799,
+    "unit": "ML/yr",
+    "how": "s 0.74–0.99 (operator claim) × make-up; make-up = evaporation upper bound (MWh × 1.5 m³/MWh) × C/(C−1), C 6–2",
+    "extra": {
+     "makeup_m3": [
+      135100.224,
+      249292.08
+     ],
+     "lbnl_crosscheck_m3": [
+      17155.584,
+      29915.05
+     ],
+     "potable_cost_per_yr": [
+      342073.767,
+      967751.855
+     ],
+     "share_of_epcor_reclaimed": 0.058
+    }
+   },
+   "greywater_neighbours": {
+    "low": 0.572,
+    "high": 8.263,
+    "unit": "ML/yr",
+    "how": "residents within 200 m (low) and 500 m (high) × 98 L/person/day × 365; recovery share is a register gap",
+    "extra": {
+     "residents": [
+      16,
+      231,
+      75657
+     ],
+     "gw500_over_makeup": [
+      0.033,
+      0.061
+     ]
+    }
+   },
+   "borefield": {
+    "low": 186300,
+    "high": 544212,
+    "unit": "m² of borefield",
+    "how": "L = heat ÷ q (low: average heat, PUE 1.4, q high; high: peak heat, PUE 1.55, q low); boreholes = L ÷ 150 m, ROUNDUP; × 36 m²",
+    "extra": {
+     "length_m": [
+      776104.155,
+      2267486.842
+     ],
+     "boreholes": [
+      5175,
+      15117
+     ],
+     "times_lot_area": [
+      43.567,
+      127.265
+     ],
+     "q_W_per_m": [
+      6.972,
+      11.04
+     ]
+    }
+   },
+   "ates": {
+    "low": 1475.828,
+    "high": 2723.254,
+    "unit": "m³/h",
+    "how": "flow = MW × 3,600 ÷ (4.18 × 5 K) (register formula off by 1,000); low average MW at PUE 1.4, high peak MW at PUE 1.55",
+    "extra": {
+     "heat_returned_MWh": [
+      30022.272,
+      70632.756
+     ],
+     "cost_eur": [
+      2570400,
+      4743000
+     ],
+     "register_formula_as_written": 2.723
+    }
+   },
+   "deep_geo": {
+    "low": 2.1,
+    "high": 5.6,
+    "unit": "MWth per well pair",
+    "how": "register Edmonton figure (Majorowicz & Grasby 2021); Vancouver not plausible / unproven",
+    "extra": {
+     "implied_dT_K": [
+      16.746,
+      16.746
+     ],
+     "pairs_for_avg_heat": [
+      1.53,
+      4.517
+     ]
+    }
+   },
+   "flood_exposure": {
+    "low": null,
+    "high": null,
+    "unit": "m above / below FCL",
+    "how": "not derivable: no floor elevation and no datum conversion; floodplain share and FCL reported",
+    "extra": {
+     "floodplain_share": "not derivable (no Edmonton floodplain layer; FPO sets no FCL)",
+     "fcl_m": "n/a"
+    }
+   },
+   "service_class": {
+    "low": 14280,
+    "high": 15810,
+    "unit": "kW peak (class in \"class\")",
+    "how": "IT × PUE 1.4–1.55 × 1000; compared with BC Hydro 6.5 / 13 MVA and EPCOR 2,500 kVA",
+    "extra": {
+     "cls": "above 2,500 kVA: EPCOR primary service typical",
+     "reg117_share": 0.211,
+     "substation_m": 565
+    }
+   },
+   "interconnection": {
+    "low": null,
+    "high": null,
+    "unit": "km to nearest located VANIX point",
+    "how": "not derivable — not derivable: YEGIX site named (Scotia Place) but no address or coordinates in the register",
+    "extra": {
+     "nearest": "n/a",
+     "one_way_ms": "not derivable"
+    }
+   },
+   "seismic_sa02": {
+    "low": 0.154,
+    "high": 0.154,
+    "unit": "g",
+    "how": "register value from the NRCan tool where the register point lies on this lot"
+   },
+   "self_gen_rules": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Micro-generation ≤5 MW (lesser of 5 MW or service rating), retail credit <150 kW, wholesale above; sized to own use, on owned/leased/adjacent land; data centres paired with dedicated new generation or storage go to the front of the connection line (Alta Reg 117/2026, via government page)."
+   },
+   "ambient_cover": {
+    "low": 50,
+    "high": 75,
+    "unit": "dB(A) at property line (Bylaw 14600: residential night 50 … non-residential day 75)",
+    "how": "Coef: \"Bylaw 14600 limits pending\". Source bylaw14600: residential 65 day / 50 night, non-residential 75 / 60 dB(A) at the property line; AUC Rule 012 is a benchmark only."
+   },
+   "uhi_context": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Cool Edmonton (Action 9); days >30 °C ~1 → 16 by 2050s; surface UHI winter night 2.86 °C (Duan 2026); no rule on equipment heat."
+   },
+   "restriction_history": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "One mandatory ban 29 Jan–2 Feb 2024 (plant failure, not drought); restrictions not every year."
+   },
+   "nations_named": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Treaty 6 territory and the Métis homeland; peoples named, not individual Nations (Confederacy of Treaty No. 6 lists 15)."
+   }
+  },
+  "HAST": {
+   "_lot": {
+    "label": "555 W Hastings",
+    "city": "van",
+    "parcel_id": "59013407",
+    "it_mw": 1.1
+   },
+   "sewer_sink": {
+    "low": null,
+    "high": null,
+    "unit": "MW at the pipe",
+    "how": "not derivable: no sewer flow data at any parcel; ΔT not given in the register"
+   },
+   "surface_water_sink": {
+    "low": 22.105,
+    "high": 48.947,
+    "unit": "L/s of water for the average heat rejected",
+    "how": "average heat (IT × 0.6 × PUE 1.4–1.55) × 1000 ÷ (4.18 × 10–5 K); capacity at the outfall is unmodelled in the register",
+    "extra": {
+     "bc_rental_per_yr": [
+      906.245,
+      3473.109
+     ],
+     "dist_to_water_m": 496,
+     "flow_per_MW_Ls": [
+      23.923,
+      47.847
+     ]
+    }
+   },
+   "rooftop_solar": {
+    "low": 6689.761,
+    "high": 44746.624,
+    "unit": "MWh/yr",
+    "how": "neighbour roofs within 200–500 m (radius not stated in the register): low = 200 m with register factors 0.81 × 0.70 × 0.16 kWp/m² × horizontal yield; high = 500 m × register coefficient 128 / 159 kWh/m²",
+    "extra": {
+     "200m": {
+      "roof_m2": 82669,
+      "register_coef": 10581.632,
+      "rebuilt": [
+       6689.761,
+       9440.287
+      ]
+     },
+     "500m": {
+      "roof_m2": 349583,
+      "register_coef": 44746.624,
+      "rebuilt": [
+       28289.039,
+       39920.211
+      ]
+     }
+    }
+   },
+   "electricity_price": {
+    "low": 397750.954,
+    "high": 608484.492,
+    "unit": "$/yr energy charge only",
+    "how": "RS 1830 (4.914 ¢/kWh) at MWh low to LGS (6.79 ¢/kWh) at MWh high; demand charges per billing period not annualisable (period not in register)",
+    "extra": {
+     "lgs_demand_per_period": [
+      21298.2,
+      23580.15
+     ],
+     "rs1830_demand_per_period_at_least": 18754.12,
+     "mwh_per_yr": [
+      8094.24,
+      8961.48
+     ]
+    }
+   },
+   "water_supply": {
+    "low": 4.256,
+    "high": 4.622,
+    "unit": "$/m³",
+    "how": "potable water (+ sewer, Vancouver) at 2026 / placeholder tariffs; reclaimed price not published"
+   },
+   "existing_building": {
+    "low": 5825.5,
+    "high": 5825.5,
+    "unit": "m² footprint on the lot",
+    "how": "footprint of buildings on the lot (input_check); floor area only for Edmonton (assessed gross); conversion suitability not derivable",
+    "extra": {
+     "gross_floor_m2": "not derivable",
+     "year_built": "1977"
+    }
+   },
+   "reclaimed_makeup": {
+    "low": 10.782,
+    "high": 26.616,
+    "unit": "ML/yr",
+    "how": "s 0.74–0.99 (operator claim) × make-up; make-up = evaporation upper bound (MWh × 1.5 m³/MWh) × C/(C−1), C 6–2",
+    "extra": {
+     "makeup_m3": [
+      14569.632,
+      26884.44
+     ],
+     "lbnl_crosscheck_m3": [
+      1850.112,
+      3226.133
+     ],
+     "potable_cost_per_yr": [
+      62006.864,
+      124263.155
+     ],
+     "share_of_epcor_reclaimed": "n/a"
+    }
+   },
+   "greywater_neighbours": {
+    "low": 45.821,
+    "high": 217.017,
+    "unit": "ML/yr",
+    "how": "residents within 200 m (low) and 500 m (high) × 98 L/person/day × 365; recovery share is a register gap",
+    "extra": {
+     "residents": [
+      1281,
+      6067,
+      183358
+     ],
+     "gw500_over_makeup": [
+      8.072,
+      14.895
+     ]
+    }
+   },
+   "borefield": {
+    "low": 11700,
+    "high": 34128,
+    "unit": "m² of borefield",
+    "how": "L = heat ÷ q (low: average heat, PUE 1.4, q high; high: peak heat, PUE 1.55, q low); boreholes = L ÷ 150 m, ROUNDUP; × 36 m²",
+    "extra": {
+     "length_m": [
+      48631.579,
+      142083.333
+     ],
+     "boreholes": [
+      325,
+      948
+     ],
+     "times_lot_area": [
+      1.864,
+      5.438
+     ],
+     "q_W_per_m": [
+      12,
+      19
+     ]
+    }
+   },
+   "ates": {
+    "low": 159.158,
+    "high": 293.684,
+    "unit": "m³/h",
+    "how": "flow = MW × 3,600 ÷ (4.18 × 5 K) (register formula off by 1,000); low average MW at PUE 1.4, high peak MW at PUE 1.55",
+    "extra": {
+     "heat_returned_MWh": [
+      3237.696,
+      7617.258
+     ],
+     "cost_eur": [
+      277200,
+      511500
+     ],
+     "register_formula_as_written": 0.294
+    }
+   },
+   "deep_geo": {
+    "low": null,
+    "high": null,
+    "unit": "MWth per well pair",
+    "how": "not plausible / unproven (register) — register Edmonton figure (Majorowicz & Grasby 2021); Vancouver not plausible / unproven",
+    "extra": {
+     "implied_dT_K": [
+      "n/a",
+      "n/a"
+     ],
+     "pairs_for_avg_heat": [
+      "n/a",
+      "n/a"
+     ]
+    }
+   },
+   "flood_exposure": {
+    "low": null,
+    "high": null,
+    "unit": "m above / below FCL",
+    "how": "not derivable: no floor elevation and no datum conversion; floodplain share and FCL reported",
+    "extra": {
+     "floodplain_share": 0,
+     "fcl_m": 4.6
+    }
+   },
+   "service_class": {
+    "low": 1540,
+    "high": 1705,
+    "unit": "kW peak (class in \"class\")",
+    "how": "IT × PUE 1.4–1.55 × 1000; compared with BC Hydro 6.5 / 13 MVA and EPCOR 2,500 kVA",
+    "extra": {
+     "cls": "below 6.5 MVA in kW (kVA depends on power factor)",
+     "reg117_share": "n/a",
+     "substation_m": 928
+    }
+   },
+   "interconnection": {
+    "low": 0,
+    "high": 0,
+    "unit": "km to nearest located VANIX point",
+    "how": "straight line from the lot edge; latency = km × 0.005 ms",
+    "extra": {
+     "nearest": "Harbour Centre MMR, 555 W Hastings",
+     "one_way_ms": 0
+    }
+   },
+   "seismic_sa02": {
+    "low": null,
+    "high": null,
+    "unit": "g",
+    "how": "not derivable: no register value for a point on this lot; distances to the register points (m): {\"V09\": 2005.0}"
+   },
+   "self_gen_rules": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "RS 2289 from 1 Jul 2026: export ≤100 kW per phase (or ≤100 kW nameplate) at $0.10/kWh, same or adjacent parcel; distribution voltage only, so a data centre on RS 1830 (≥60 kV) cannot use it; RS 2290 community generation ≤2 MW net injection."
+   },
+   "ambient_cover": {
+    "low": null,
+    "high": null,
+    "unit": "dBA allowed (rule)",
+    "how": "By-law 6555: quiet→quiet 55/45, activity→quiet 60/55, (source adds intermediate→quiet 60/50), intermediate or activity→other 70/65 dBA day/night; no ambient credit for equipment. Zone→by-law class mapping not in register, so the pair for each lot is not derivable."
+   },
+   "uhi_context": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Heat mapping; 30% canopy by 2050; surface UHI summer day 7.25 °C (Duan 2026); no rule on equipment heat."
+   },
+   "restriction_history": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "Stage 3 2015; Stage 2 2023 (4 Aug–15 Oct); 2026 Stage 3 from 8 Jun."
+   },
+   "nations_named": {
+    "low": null,
+    "high": null,
+    "unit": "rule",
+    "how": "xʷməθkʷəy̓əm (Musqueam), Sḵwx̱wú7mesh Úxwumixw (Squamish), səlilwətaɬ (Tsleil-Waututh); unceded territories; links to each Nation's referral page."
+   }
+  }
+ }
+}
