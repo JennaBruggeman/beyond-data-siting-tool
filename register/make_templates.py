@@ -35,6 +35,11 @@ T = {
  'hr_flow': (F, 'receiver', 'engineering'), 'hr_pipe_size': (F, 'receiver', 'engineering'), 'heat_pumps': (C, 'receiver operator', 'the heat pumps that lift the heat'),
  'phe_frames': (F, 'receiver', 'engineering'), 'buffer_tanks': (F, 'receiver', 'engineering'), 'hr_pumps': (F, 'receiver', 'engineering'),
  'hr_plant_room': (C, 'receiver host', 'the room the heat plant needs'),
+ # overnight pass 30 Oct 2026 (tiers drafted by Claude for J.B. to check)
+ 'power_allocation': (C, 'operator utility city', 'whether and on what terms it gets power'), 'heat_sale_rules': (F, 'operator receiver city', 'engineering and regulation'),
+ 'refuge_services': (C, 'neighbours city', 'what a refuge needs: washrooms, showers, water'), 'refuge_code': (F, 'city', 'code detail'),
+ 'crisis_events': (R, 'neighbours city', 'what the refuge is for in each crisis'), 'fire_protection': (F, 'operator', 'engineering'),
+ 'transformers': (F, 'operator utility', 'engineering'), 'security_layers': (C, 'neighbours operator', 'how closed the building is'),
  # characterise
  'heat_rejected': (C, 'receiver climate', 'the heat it gives off'), 'heat_temp': (F, 'receiver', 'engineering'), 'liquid_capture': (F, 'operator', 'engineering'),
  'cop': (F, 'receiver', 'engineering'), 'heat_captured': (F, 'operator', 'engineering'), 'heat_delivered': (C, 'receiver', 'heat that could be offered'),
