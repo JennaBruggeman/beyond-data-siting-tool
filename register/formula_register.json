@@ -1802,7 +1802,7 @@
    "Reserved capacity and batteries to the grid": {
     "readiness": "built_elsewhere",
     "provisional": false,
-    "basis": "Demand response: Google's contract with Indiana Michigan Power carries interruptible load and curtailment obligations (Indiana regulator, Cause 46276; operation not confirmed). UPS batteries: Digital Realty, nine Irish data centres in EirGrid frequency response (operator claim). Battery: Google St. Ghislain, Belgium, 2.75 MW proof of concept (vendor claim). None found in BC or Alberta. Precedent search 15 Oct 2026. Added 30 Oct 2026 (check 1): UPS batteries in fast frequency markets — Basefarm, Norway, 1.5 MW (2018, vendor claim) and Telia Helsinki, several MW (2022, operator claim); workload cuts — Google in Belgium, Taiwan and Omaha (operator claim) and Oracle Phoenix, 25% for 3 h on 256 GPUs (company preprint); rules — Texas S.B. 6 (75 MW+), Ireland proposed decision 2025.",
+    "basis": "Demand response: Google's contract with Indiana Michigan Power carries interruptible load and curtailment obligations (Indiana regulator, Cause 46276; operation not confirmed). UPS batteries: Digital Realty, nine Irish data centres in EirGrid frequency response (operator claim). Battery: Google St. Ghislain, Belgium, 2.75 MW proof of concept (vendor claim). None found in BC or Alberta. Precedent search 15 Oct 2026. Added 29 Oct 2026 (check 1): UPS batteries in fast frequency markets — Basefarm, Norway, 1.5 MW (2018, vendor claim) and Telia Helsinki, several MW (2022, operator claim); workload cuts — Google in Belgium, Taiwan and Omaha (operator claim) and Oracle Phoenix, 25% for 3 h on 256 GPUs (company preprint); rules — Texas S.B. 6 (75 MW+), Ireland proposed decision 2025.",
     "sources": [
      "iurc46276",
      "enelxDLR",
@@ -2315,7 +2315,7 @@
    "Batteries at end of life": {
     "readiness": "speculative",
     "provisional": false,
-    "basis": "Large UPS batteries fall outside BC's and Alberta's consumer recycling programs as read (register: afterlife). No case found of a data centre's batteries going to a local reuse or recycling stream. Added 30 Oct 2026 from the materials review.",
+    "basis": "Large UPS batteries fall outside BC's and Alberta's consumer recycling programs as read (register: afterlife). No case found of a data centre's batteries going to a local reuse or recycling stream. Added 29 Oct 2026 from the materials review.",
     "sources": [
      "bcRecyclingIT",
      "abElectronicsReg",
@@ -3075,292 +3075,525 @@
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "cologix.com VAN3 page",
      "what": "capacity, area, cooling, redundancy, tier, certifications"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "fixed at check 2: '2N' attributed to the guide, not the page",
+     "record": "scratchpad check2/result_A.json"
     }
    ],
    "bcReg8_2026": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "bcpublications text",
      "what": "s. 1 definitions, s. 2–4 thresholds; reading of the under-10 MW case"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "fixed at check 2: enabling section; third-year caps added (one read ?)",
+     "record": "scratchpad check2/result_A.json"
     }
    ],
    "bchCfDRfA": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "BC Hydro RFA PDF (1 Feb 2026)",
      "what": "Sch. 3 pp. 29–30 curtailment and weights; s. 9.2 Table 1 size; s. 1.1 allocations"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "confirmed",
+     "record": "scratchpad check2/result_A.json"
     }
    ],
    "bchCfDInfo2026": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "BC Hydro info-session PDF",
      "what": "slides 8, 10, 16"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "'heat recovery ready' undefined: settled",
+     "record": "scratchpad check2/result_A.json"
     }
    ],
    "cfdPage": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "J.B.'s print of the BC Hydro page (15 Oct 2026), read as page images",
      "what": "15 applications, ~800 MW, timeline extended, bids revise price and curtailment"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "confirmed",
+     "record": "scratchpad check2/result_A.json"
     }
    ],
    "bccsHeat2022": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "BC government news release",
      "what": "619; 98% indoors; 56% alone; 67% 70+; three recommendations"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "confirmed",
+     "record": "scratchpad check2/result_B.json"
     }
    ],
    "covHeat2025": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "City memo PDF",
      "what": "39 cooling centres; check-ins; no walking distance or backup power"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "fixed at check 2: memo title; City-owned non-market housing",
+     "record": "scratchpad check2/result_B.json"
     }
    ],
    "atcoDrake2024": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "ATCO page",
      "what": "decommissioning, reasons, 31 Oct 2024"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "confirmed",
+     "record": "scratchpad check2/result_B.json"
     }
    ],
    "aesoAlert2024": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "AESO release",
      "what": "times, cause, 100 / 200 MW"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "confirmed",
+     "record": "scratchpad check2/result_B.json"
     }
    ],
    "msDublinUPS2022": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "Microsoft story",
      "what": "Eaton, Enel X, EirGrid signal"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "fixed at check 2: signals via aggregators; spinning reserve reduced, not replaced",
+     "record": "scratchpad check2/result_C.json"
     }
    ],
    "hcCleanAir2020": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "canada.ca page",
      "what": "MERV 13, CADR 2–3 room volumes, recirculation, date"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "confirmed",
+     "record": "scratchpad check2/result_B.json"
     }
    ],
    "bcucG46_25": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "BCUC order text",
      "what": "exemption scope; threshold not stated"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "fixed at check 2: capital-cost threshold; Appendix A identified",
+     "record": "scratchpad check2/result_A.json"
     }
    ],
    "bcUCAs1": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "bcpublications consolidation current to 27 Oct 2026",
      "what": "s. 1 'public utility' (a) incl. 'light, heat, cold or power' and exclusions (c)–(g)"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "confirmed",
+     "record": "scratchpad check2/result_A.json"
     }
    ],
    "edmBylaw17943": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "local PDF (pdftotext)",
      "what": "s. 1 purpose; s. 10(1); search for customer supply"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "fixed at check 2: no supply-in provision confirmed from the full bylaw",
+     "record": "scratchpad check2/result_B.json"
     }
    ],
    "edmBlatchfordBP": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "local text",
      "what": "city-owned; mandatory connection; LRT supply/draw"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "confirmed",
+     "record": "scratchpad check2/result_B.json"
     }
    ],
    "bcbcGroupC": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "local BCBC 2024 text, line 2279; NBC text line 1901",
      "what": "Group C definition"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "confirmed",
+     "record": "scratchpad check2/result_B.json"
     }
    ],
    "nbcImportance": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "local BCBC 2024 text: Table 4.1.2.1, Note A-Table 4.1.2.1, Div. A post-disaster definition",
      "what": "community centres High; data centres not named; telephone exchanges post-disaster"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "confirmed",
+     "record": "scratchpad check2/result_B.json"
     }
    ],
    "jibcESSqrg2012": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "JIBC PDF",
      "what": "sleeping area, toilets, washbasins, showers, water"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "confirmed",
+     "record": "scratchpad check2/result_B.json"
     }
    ],
    "cologixVAN1_2026": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "local spec sheet (pdftotext)",
      "what": "'Dual interlocked pre-action dry pipe'; cooling N+1; 'N/N+1 Generator/UPS'"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "fixed at check 2: sheet dated April 2026",
+     "record": "scratchpad check2/result_B.json"
     }
    ],
    "cologixVAN4_2026": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "local spec sheet (pdftotext)",
      "what": "'Dual interlock pre-action with Nitrogen (N2) VESDA'; '5-to-make-4, distributed redundant'"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "confirmed",
+     "record": "scratchpad check2/result_B.json"
     }
    ],
    "bchTariff2026": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
-     "where": "local tariff text, T&C s. 3.12–3.13 (Revision 4, effective 1 Apr 2026)",
+     "date": "29 Oct 2026",
+     "where": "local tariff text, T&C s. 3.7 and 3.13 (Revision 4, effective 1 Apr 2026)",
      "what": "primary service: customer supplies transformation; equipment must also take 25 kV"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "fixed at check 2: 25 kV rule is s. 3.7, transformation s. 3.13; RS 1830 order; EV riders",
+     "record": "scratchpad check2/result_A.json"
     }
    ],
    "bchCustGen": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "BC Hydro community generation and benefitting-customer pages",
      "what": "RS 2290; ≤ 2 MW AC; surplus measured at the meter the facility connects to; benefitting customers anywhere in BC"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "fixed at check 2: 2 MW is net injection",
+     "record": "scratchpad check2/result_A.json"
     }
    ],
    "aucMicro2026": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "AUC Micro-generation Notice Submission Guideline 2026",
      "what": "s. 1(1)(h): supplies only a site the customer owns or leases; unit on that property or adjacent owned/leased property"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "fixed at check 2: page references (from a summary ?)",
+     "record": "scratchpad check2/result_B.json"
     }
    ],
    "aesoAMS2025": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "local AESO 2025 Annual Market Statistics text",
      "what": "gas-fired 76.8 per cent of Alberta's generation in 2025; wind, solar, hydro 21.0"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "fixed at check 2: pool-price wording; carbon already in marginal cost; gas share added",
+     "record": "scratchpad check2/result_B.json"
     }
    ],
    "tourVAN3": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
-     "where": "J.B.'s notes in chat, 30 Oct 2026",
+     "date": "29 Oct 2026",
+     "where": "J.B.'s notes in chat, 29 Oct 2026",
      "what": "transcribed as observations vs claims"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "rewritten at check 2: buckets corrected, omissions added, her wording kept",
+     "record": "scratchpad check2/result_D.json"
     }
    ],
    "googleFlex2025": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "Google blog page",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "fixed at check 2: 'first time' refers to the ML agreements",
+     "record": "scratchpad check2/result_C.json"
     }
    ],
    "emeraldPhoenix2025": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "arXiv HTML",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "confirmed",
+     "record": "scratchpad check2/result_C.json"
     }
    ],
    "epriDCFlexEU": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "EPRI Europe page",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "fixed at check 2: demo partners; self-reported label",
+     "record": "scratchpad check2/result_C.json"
     }
    ],
    "eatonBasefarm2018": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "Eaton release page",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "confirmed",
+     "record": "scratchpad check2/result_C.json"
     }
    ],
    "fortumTelia2022": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "Fortum release page",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "confirmed",
+     "record": "scratchpad check2/result_C.json"
     }
    ],
    "txSB6_2025": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "Texas Legislature bill analysis page",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "fixed at check 2: threshold may be lower; curtailment via protocol for loads after 2025",
+     "record": "scratchpad check2/result_C.json"
     }
    ],
    "cruLEU2025": [
     {
      "check": 1,
      "by": "Claude",
-     "date": "30 Oct 2026",
+     "date": "29 Oct 2026",
      "where": "CRU news page",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "confirmed",
+     "record": "scratchpad check2/result_C.json"
+    }
+   ],
+   "eatonCA022021": [
+    {
+     "check": 2,
+     "by": "independent agent run (no part in check 1)",
+     "date": "29 Oct 2026",
+     "result": "fixed at check 2: design guide; 5/15 kV vs 25/35 kV rows",
+     "record": "scratchpad check2/result_C.json"
     }
    ]
   },
-  "check_log_note": "check_log (30 Oct 2026): every source read during the overnight pass has a CHECK 1 entry (who, date, where, what). A second, independent check is open for all of them; until it is done the item is first-check only, whatever its 'verified' flag says."
+  "check_log_note": "check_log: CHECK 1 = first read (Claude, overnight pass 29 Oct 2026); CHECK 2 = independent agent re-read the same evening. 'confirmed' = both reads agree. 'fixed at check 2' = the second reader found a difference and the entry was corrected to the source wording it quoted: that new wording has one read, so it is the place for any third look. Items still marked '?' stay open."
  },
  "quantities": [
   {
@@ -4391,7 +4624,7 @@
    "inputs": [
     "it_load_actual"
    ],
-   "coef": "Emerald AI Phoenix 25% for 3 h (preprint); Call for Demand curtailment ≥10%, 4 h, 36 events; 2026 Call: 15 applications, close to 800 MW requested; results expected after the government transition (BC Hydro, Oct 2026); Microsoft's Dublin UPS batteries answer EirGrid signals through Enel X (operator claim, 2022); Alberta grid alert 13 Jan 2024: 100–200 MW dropped after a public appeal (AESO); BC's 2026 Call makes curtailment an entry condition (power_allocation); precedents (check 1, 30 Oct 2026 — mostly operator or vendor claims): workloads — Google shifted non-urgent compute in Belgium and Taiwan and cut ML load in 3 OPPD events, no MW given (googleFlex2025); Oracle Phoenix, 256 GPUs cut 25% for 3 h at two May 2025 peaks with zero SLA violations, flexible jobs only (emeraldPhoenix2025); UK DCFlex demo up to 30–40% within seconds, no site or MW (epriDCFlexEU); UPS batteries — Basefarm, Norway, 1.5 MW fast frequency response with Statnett, 2018 (eatonBasefarm2018); Telia Helsinki, several MW in Fingrid's FFR market, 2022 (fortumTelia2022); rules — Texas S.B. 6: loads of 75 MW and up must be curtailable and may be ordered onto their backup generators (txSB6_2025); Ireland proposed that new data centres bring generation or storage to match their demand (cruLEU2025, proposed). For a colocation building the UPS route is the one the operator controls (workload_control)",
+   "coef": "Emerald AI Phoenix 25% for 3 h (preprint); Call for Demand curtailment ≥10%, 4 h, 36 events; 2026 Call: 15 applications, close to 800 MW requested; results expected after the government transition (BC Hydro, Oct 2026); Microsoft's Dublin UPS batteries take part in EirGrid's market through Enel X and discharge on aggregator signals (operator claim, 2022); Alberta grid alert 13 Jan 2024: 100–200 MW dropped after a public appeal (AESO); BC's 2026 Call makes curtailment an entry condition (power_allocation); precedents (check 1, 29 Oct 2026 — mostly operator or vendor claims): workloads — Google shifted non-urgent compute in Belgium and Taiwan and cut ML load in 3 OPPD events, no MW given (googleFlex2025); Oracle Phoenix, 256 GPUs cut 25% for 3 h at two May 2025 peaks with zero SLA violations, flexible jobs only (emeraldPhoenix2025); UK DCFlex demo up to 30–40% within seconds, no site or MW (epriDCFlexEU); UPS batteries — Basefarm, Norway, 1.5 MW fast frequency response with Statnett, 2018 (eatonBasefarm2018); Telia Helsinki, several MW in Fingrid's FFR market, 2022 (fortumTelia2022); rules — Texas S.B. 6: loads of 75 MW and up (or a lower threshold the PUC sets) connected after 2025 need curtailment capability under an ERCOT protocol, and may be ordered onto their backup generators (txSB6_2025); Ireland proposed that new data centres bring generation or storage to match their demand (cruLEU2025, proposed). For a colocation building the UPS route is the one the operator controls (workload_control)",
    "sources": [
     "cfd",
     "bchEIC2026",
@@ -4458,14 +4691,14 @@
     },
     {
      "id": "msDublinUPS2022",
-     "term": "added 30 Oct 2026",
+     "term": "added 29 Oct 2026",
      "role": "check",
      "conf": 70,
      "verified": true
     },
     {
      "id": "aesoAlert2024",
-     "term": "added 30 Oct 2026",
+     "term": "added 29 Oct 2026",
      "role": "check",
      "conf": 70,
      "verified": true
@@ -5260,7 +5493,7 @@
    "inputs": [
     "offerable_area"
    ],
-   "coef": "Health Canada 2020; Health Canada 2020 read 30 Oct 2026 (check 1): MERV 13+, smoke CADR 2–3 room volumes an hour, a system that can switch to recirculation",
+   "coef": "Health Canada 2020; Health Canada 2020 read 29 Oct 2026 (check 1): MERV 13+, smoke CADR 2–3 room volumes an hour, a system that can switch to recirculation",
    "sources": [
     "ess",
     "smoke2026",
@@ -5294,7 +5527,7 @@
     },
     {
      "id": "hcCleanAir2020",
-     "term": "added 30 Oct 2026",
+     "term": "added 29 Oct 2026",
      "role": "check",
      "conf": 70,
      "verified": true
@@ -6406,7 +6639,7 @@
     },
     {
      "id": "tourVAN3",
-     "term": "added 30 Oct 2026",
+     "term": "added 29 Oct 2026",
      "role": "check",
      "conf": 40,
      "verified": false
@@ -9290,7 +9523,7 @@
     },
     {
      "id": "tourVAN3",
-     "term": "added 30 Oct 2026",
+     "term": "added 29 Oct 2026",
      "role": "check",
      "conf": 40,
      "verified": false
@@ -13089,7 +13322,7 @@
     "tourVAN3"
    ],
    "formula": "racks in back-to-back pairs: cold aisle | rack 1.2 m | hot aisle | rack 1.2 m; room cooling units along the long walls with their service clearance in front; corridors and travel distance to the building code; capacity check (29 Oct 2026): racks that fit by these rules on the floor plate × 7.1–8 kW per rack is shown against size_fit (the first hall floor holds the UPS and battery room; the others are counted by the same rules) — it checks, it does not change, the sizing",
-   "coef": "aisles 1.2 m (middle of Vertiv's standard containment sizes 0.9 / 1.2 / 1.8 m), open at both ends onto 1.1 m cross aisles, which meets the NFC: aisles serving egress doorways ≥ 1 100 mm with two directions of travel, single-direction subsidiary aisles ≥ 900 mm and ≤ 7.5–15 m by occupancy (NFC 2020 / NFC(AE) 2023 2.7.1.2; a data hall's occupancy class is not stated in the codes read ?); racks 0.6 × 1.2 m; room cooling units: 0.864 m clear in front recommended (0.61 m minimum), 0.457 m at each end, not in alcoves or at the end of a long narrow room, near the heat load (Vertiv CW guide); Vertiv also asks for units 30–40 ft apart, which a hall of this load cannot meet with units of this size (conflict shown, not resolved ?); egress: public corridors 1.1 m, dead ends ≤ 6 m, travel distance to an exit ≤ 45 m sprinklered or 30 m otherwise (NBC 2020 3.3.1.9, 3.4.2.5; VBBL 2019 the same); aisles follow the NFC (2.7.1.2, above); Edmonton: NBC(AE) 2023 has the same articles (checked 29 Oct 2026); observed at VAN3 (tour, Oct 2026): a first-floor hall on an 18 in (457 mm) raised floor reached by a ramp, so the slab layout drawn here is one variant",
+   "coef": "aisles 1.2 m (middle of Vertiv's standard containment sizes 0.9 / 1.2 / 1.8 m), open at both ends onto 1.1 m cross aisles, which meets the NFC: aisles serving egress doorways ≥ 1 100 mm with two directions of travel, single-direction subsidiary aisles ≥ 900 mm and ≤ 7.5–15 m by occupancy (NFC 2020 / NFC(AE) 2023 2.7.1.2; a data hall's occupancy class is not stated in the codes read ?); racks 0.6 × 1.2 m; room cooling units: 0.864 m clear in front recommended (0.61 m minimum), 0.457 m at each end, not in alcoves or at the end of a long narrow room, near the heat load (Vertiv CW guide); Vertiv also asks for units 30–40 ft apart, which a hall of this load cannot meet with units of this size (conflict shown, not resolved ?); egress: public corridors 1.1 m, dead ends ≤ 6 m, travel distance to an exit ≤ 45 m sprinklered or 30 m otherwise (NBC 2020 3.3.1.9, 3.4.2.5; VBBL 2019 the same); aisles follow the NFC (2.7.1.2, above); Edmonton: NBC(AE) 2023 has the same articles (checked 29 Oct 2026); observed at VAN3 (tour, Oct 2026): a first-floor hall on an 18 in (457 mm) raised floor (her figure; measured or told ?) reached by a ramp, so the slab layout drawn here is one variant",
    "source_roles": [
     {
      "id": "vertivContainment",
@@ -13142,7 +13375,7 @@
     },
     {
      "id": "tourVAN3",
-     "term": "added 30 Oct 2026",
+     "term": "added 29 Oct 2026",
      "role": "check",
      "conf": 40,
      "verified": false
@@ -13592,7 +13825,7 @@
    "unit": "rule",
    "stage": "decide",
    "conf": 70,
-   "status": "rules read 30 Oct 2026 (check 1)",
+   "status": "rules read 29 Oct 2026 (check 1)",
    "inputs": [
     "it_load_actual"
    ],
@@ -13604,7 +13837,7 @@
     "aesoBYOG2026"
    ],
    "formula": "BC: requests of 10 MW or more fall under the allocation regulation (B.C. Reg. 8/2026) and BC Hydro's competitive Call for Demand (10–145 MW); under 10 MW the regulation's definitions do not apply (our reading ?); Alberta: see grid_headroom",
-   "coef": "2026 Call: 300 MW for AI and 100 MW for storage data centres over two years from 1 Feb 2026; curtailment is a pass/fail entry condition — at least 10% of the load, 4 consecutive hours, 36 events and 144 hours a year, on 24 hours' notice, without compensation; scoring: cost and benefits to BC Hydro 30%, data sovereignty 30%, community and provincial economy 20% (brownfield sites named), environment 10% ('heat recovery ready', PUE, WUE — 'heat recovery ready' not defined ?), First Nations 10%; Oct 2026: 15 applications, close to 800 MW requested; bids could revise price and curtailment after feasibility studies; results after the government transition. Alberta's BYOG process for loads of 75 MW and up is a proposal (aesoBYOG2026)",
+   "coef": "2026 Call: 300 MW for AI and 100 MW for storage data centres over two years from 1 Feb 2026; curtailment is a pass/fail entry condition — at least 10% of the load, 4 consecutive hours, 36 events and 144 hours a year, on 24 hours' notice, without compensation; scoring: cost and benefits to BC Hydro 30%, data sovereignty 30%, community and provincial economy 20% (brownfield sites named), environment 10% ('heat recovery ready', 'power usage efficiency', 'water usage efficiency' — none defined), First Nations 10%; Oct 2026: 15 applications, close to 800 MW requested; bids could revise price and curtailment after feasibility studies; results after the government transition. Alberta's BYOG process for loads of 75 MW and up is a proposal (aesoBYOG2026)",
    "source_roles": [
     {
      "id": "bcReg8_2026",
@@ -13649,7 +13882,7 @@
    "unit": "rule",
    "stage": "decide",
    "conf": 60,
-   "status": "rules read 30 Oct 2026 (check 1)",
+   "status": "rules read 29 Oct 2026 (check 1)",
    "inputs": [
     "heat_delivered"
    ],
@@ -13660,8 +13893,8 @@
     "edmBlatchfordBP",
     "aucMicro2026"
    ],
-   "formula": "BC: whoever supplies electricity, steam or 'any other agent for the production of light, heat, cold or power' to the public or a corporation for compensation is a public utility (UCA s. 1), unless an exclusion or exemption applies; Edmonton (Blatchford): a city-owned utility with compulsory connection, and no route found for a customer to supply heat into it (?)",
-   "coef": "UCA exclusions include a municipality within its own boundaries and a person supplying only itself, its employees or tenants; BCUC exempts Micro TES providers from most of Part 3 (G-46-25; the dollar threshold is not stated in the order ?); whether a data centre selling heat to the City's NEU is a public utility: not settled in what was read (?); Blatchford Bylaw 17943 s. 10(1) bars reselling energy the City supplies; the utility plans to 'supply and draw thermal energy' with LRT utility complexes (city-owned); Alberta micro-generation (electricity) may serve only sites the customer owns or leases",
+   "formula": "BC: whoever supplies electricity, steam or 'any other agent for the production of light, heat, cold or power' to the public or a corporation for compensation is a public utility (UCA s. 1), unless an exclusion or exemption applies; Edmonton (Blatchford): a city-owned utility with compulsory connection, and no route in the bylaw for a customer to supply heat into it (bylaw read twice; the City Manager's service requirements not read ?)",
+   "coef": "UCA exclusions include a municipality within its own boundaries and a person supplying only itself, its employees or tenants; BCUC exempts Micro TES providers from most of Part 3 (G-46-25: a capital-cost threshold whose dollar value is not stated in the order ?); whether a data centre selling heat to the City's NEU is a public utility: not settled in what was read (?); Blatchford Bylaw 17943 s. 10(1) bars reselling energy the City supplies; the utility plans to 'supply and draw thermal energy' with LRT utility complexes (city-owned); Alberta micro-generation (electricity) may serve only sites the customer owns or leases",
    "source_roles": [
     {
      "id": "bcUCAs1",
@@ -13787,7 +14020,7 @@
     "aesoAlert2024"
    ],
    "formula": "per city, the events a refuge answers and what each needs: heat → cooling and reaching people who stay home; smoke → filtered, recirculated air; earthquake → structure, power and water (refuge_after_quake); cold → heat; grid alert → load taken off the grid",
-   "coef": "Vancouver heat 2021: 619 deaths, 98% indoors, 56% lived alone, 67% aged 70+ (BC Coroners Service 2022) — the people most at risk stayed home, so reach matters as much as capacity; the City runs 39 civic cooling centres and checks residents of non-market housing (memo 3 Jul 2025); smoke: MERV 13+ and recirculation (Health Canada 2020); Edmonton cold: warming spaces open at −20 °C with wind chill for 3 days; 6.1–6.5 days a year at or below −20 °C all day (ECCC 1991–2020); grid alert 13 Jan 2024: 100–200 MW dropped after a public appeal (AESO); how much spare cooling a data centre has in a heat wave, or with outside air shut off for smoke: not sourced (?)",
+   "coef": "Vancouver heat 2021: 619 deaths, 98% indoors, 56% lived alone, 67% aged 70+ (BC Coroners Service 2022) — the people most at risk stayed home, so reach matters as much as capacity; the City runs 39 civic cooling centres and checks residents of City-owned and operated non-market housing (memo 3 Jul 2025); smoke: MERV 13+ and recirculation (Health Canada 2020); Edmonton cold: warming spaces open at −20 °C with wind chill for 3 days; 6.1–6.5 days a year at or below −20 °C all day (ECCC 1991–2020); grid alert 13 Jan 2024: 100–200 MW dropped after a public appeal (AESO); how much spare cooling a data centre has in a heat wave, or with outside air shut off for smoke: not sourced (?)",
    "source_roles": [
     {
      "id": "bccsHeat2022",
@@ -13849,7 +14082,7 @@
     "tourVAN3"
    ],
    "formula": "type as built or claimed at Vancouver colocation sites; not drawn in the 3D",
-   "coef": "Cologix VAN1 'Dual interlocked pre-action dry pipe'; VAN4 'Dual interlock pre-action with Nitrogen (N2) VESDA' (spec sheets 05-2026, operator claims); VAN3: VESDA seen on the tour, suppression type not stated (?); room for pre-action valves and nitrogen equipment: no source read (?)",
+   "coef": "Cologix VAN1 'Dual interlocked pre-action dry pipe' (sheet dated April 2026); VAN4 'Dual interlock pre-action with Nitrogen (N2) VESDA' (spec sheets 05-2026, operator claims); VAN3: VESDA on the tour (her note, read as 'he showed me' ?), suppression type not stated (?); room for pre-action valves and nitrogen equipment: no source read (?)",
    "source_roles": [
     {
      "id": "cologixVAN1_2026",
@@ -13894,7 +14127,7 @@
     "fujiRedundancy"
    ],
    "formula": "n = ⌈facility peak ÷ 2,500 kVA⌉, then the set-up's spare rule (N+1 or 2N)",
-   "coef": "unit: Eaton 2,500 kVA substation transformer, 2.263 × 2.39 × 2.084 m (CA022021EN); facility kW taken as kVA (power factor 1: not sourced ?); at primary service the customer supplies the transformation and its equipment must also take 25 kV (BC Hydro T&C 3.12–3.13, effective 1 Apr 2026); built examples claim 'N+1 distributed redundant' (VAN3) and '5-to-make-4, distributed redundant' (VAN4); location and clearances not read (?); switchgear sections per transformer not sourced (?)",
+   "coef": "unit: Eaton 2,500 kVA oil-filled transformer (CA022021EN): 2.263 × 2.39 × 2.084 m with a 5/15 kV primary, 2.631 × 2.492 m footprint with a 25/35 kV primary — BC Hydro asks primary-service equipment to take 25 kV, so the larger row may apply in BC (?); facility kW taken as kVA (power factor 1: not sourced ?); at primary service the customer supplies the transformation and its equipment must also take 25 kV (BC Hydro T&C 3.7 and 3.13, effective 1 Apr 2026); built examples claim 'N+1 distributed redundant' (VAN3) and '5-to-make-4, distributed redundant' (VAN4); location and clearances not read (?); switchgear sections per transformer not sourced (?)",
    "source_roles": [
     {
      "id": "eatonCA022021",
@@ -13946,7 +14179,7 @@
     "cologixVAN3web"
    ],
    "formula": "count the controlled doors a visitor passes between the street and a tenant's servers",
-   "coef": "VAN3 (tour, Oct 2026): 5 — gate intercom, building door, vestibule door, single-person portal (weighs and measures; staff use a biometric and card door), tenant enclosure with its own biometrics and cameras; POP and meet-me rooms behind scanner doors; the lobby, client offices, kitchen, boardroom and showers sit inside the third door but outside the portal; Cologix lists ISO 27001 and SOC 2 Type 2 (claims); one site",
+   "coef": "VAN3 (tour, Oct 2026): 4 she passed — gate intercom, buzzed front door, buzzed door from the vestibule to the lobby, single-person portal (it weighed and measured her; the guide used a side door with 'biometrics AND a scanner'); then, by the guide's account, each tenant's enclosure with its own biometrics and cameras (5 to the servers); the first POP and meet-me room behind scanners; the lobby, client offices, kitchen, boardroom and showers sit inside the third door but outside the portal; Cologix lists ISO 27001 and SOC 2 Type 2 (claims); one site",
    "source_roles": [
     {
      "id": "tourVAN3",
@@ -16464,7 +16697,7 @@
   "malecki2002": "Malecki 2002, Economic Geography 78(4):399–424 (abstract): 'a global bias of Internet backbone networks toward world cities', tempered by urban areas 'that serve as interconnection points'",
   "satya2017": "Satyanarayanan 2017, 'The Emergence of Edge Computing', Computer (Jan): head-tracked VR needs latencies under 16 ms (p.32); 'End-to-end latency of a few tens of milliseconds is a safe but achievable goal' (p.32)",
   "isedPrinciples": "ISED, Canada's Responsible Data Centre Development Principles (3 Sep 2026 ?: date not printed on the saved page): local benefits; 'Proponents must pay the costs of connecting and serving their projects'; waste heat recovery one of several priority practices; no siting criteria",
-  "bchCfDRfA": "BC Hydro 2026 Call for Demand, Request for Applications: 300 MW AI + 100 MW storage data centres; projects 10–145 MW; scoring 30 % cost, 30 % data sovereignty, 20 % community (incl. brownfield), 10 % environment ('heat recovery ready', PUE, WUE), 10 % First Nations — https://app.bchydro.com/content/dam/BCHydro/customer-portal/documents/accounts-billing/electrical-connections/2026-cfd-request-for-applications.pdf",
+  "bchCfDRfA": "BC Hydro 2026 Call for Demand, Request for Applications: 300 MW AI + 100 MW storage data centres; projects 10–145 MW; scoring 30 % cost, 30 % data sovereignty, 20 % community (incl. brownfield), 10 % environment ('heat recovery ready', 'power usage efficiency', 'water usage efficiency' — none defined in the RFA or the information session), 10 % First Nations — https://app.bchydro.com/content/dam/BCHydro/customer-portal/documents/accounts-billing/electrical-connections/2026-cfd-request-for-applications.pdf",
   "receiversBCUC": "BCUC decisions on Vancouver-region networks: Creative Energy Core steam 971,259 klb forecast, >200 buildings (G-310-21A, 2021); NE False Creek 24 MW peak, 48,100 MWh/yr by 2024 (C-12-15); Sen̓áḵw DES 10,343 kW design heating peak, 11,218 MWh/yr modelled heating demand, Phases 1–2 (C-5-23); River District 11.0 → 26.1 MW peak, ~33,600 MWh/yr at full build-out, 2047 (C-3-23); SFU Burnaby Mountain 43,787 MWh/yr (G-279-21) — https://www.ordersdecisions.bcuc.com/",
   "edmReceivers": "Edmonton receivers: Downtown District Energy (City/EPCOR) Phase 1 three buildings, up to 50 by 2050, heat only in phases 1–2; Blatchford Renewable Energy Utility, a 'District Energy Sharing System'; 13.1 MW heating / 12.3 MW cooling is capacity supported by a 2024 federal grant, not stated as installed; University of Alberta district energy (not on these pages ?) — https://www.edmonton.ca/projects_plans/district-energy ; https://blatchfordutility.ca/about-us/",
   "edmFees2026": "City of Edmonton, 2026 Planning and Development Fee Schedules (effective 1 Jan 2026, updated Dec 2025) — https://www.edmonton.ca/sites/default/files/public-files/2026-Planning-and-Development-Fee-Schedules.pdf",
@@ -16616,7 +16849,7 @@
   "abEUA2026": "Electric Utilities Act, SA 2003, c E-5.1, current consolidation in force since 6 Feb 2026 (read by Claude 15 Oct 2026; saved copy is the King's Printer consolidation; amended by 2022 c 8 = Bill 22): s. 1(1)(vv.1) \"self-supply\"; s. 2(1)(b) the Act does not apply to self-supply \"consumed solely on that property by that owner or tenant\", except for Commission-approved tariff rates (s. 122(2)(b)); s. 18(2) \"All electric energy entering or leaving the interconnected electric system must be exchanged through the power pool\" unless ss. 39(1.1) or 105(1.1) or regulations provide otherwise. So surplus leaving the site goes through the power pool or the micro-generation rules; there is no separate export right — https://www.canlii.org/en/ab/laws/stat/sa-2003-c-e-5.1/latest/sa-2003-c-e-5.1.html",
   "nrcanPVmunic": "NRCan, Photovoltaic potential and solar resource maps of Canada — municipal values (CSV, J.B. download 15 Oct 2026; Canadian Forest Service with CanmetENERGY; CERES 1974–1993 insolation, 144 stations; performance ratio 0.75; \"within about 10%\" of lifetime averages). Annual kWh/kWp (re-checked against the CSV 28 Oct 2026) — Vancouver: horizontal 892, latitude tilt 1007, vertical 716; Edmonton: horizontal 944, latitude tilt 1244, vertical 989; Spruce Grove (proxy for Parkland County / Acheson): horizontal 942, latitude 1232 — https://natural-resources.canada.ca/energy-sources/renewable-energy/photovoltaic-potential-solar-resource-maps-canada",
   "aucDSI2021": "AUC, Distribution System Inquiry — Final Report, Proceeding 24116, 19 Feb 2021 (read by Claude 15 Oct 2026): p. 60 \"The question arose during the inquiry whether any regulatory oversight was required of EV charging stations that provide public access to charging services. Most parties were of the view that no additional regulatory oversight is required at this time\"; p. 68 \"most parties agree that EV charging stations, similar to electricity storage, are not defined clearly in legislation and their regulatory status within the evolving electricity system is unclear\"; p. 69 (?: pp. 60 and 69 not re-checked) no party suggested charging owners have \"any significant monopolistic advantages\" — https://media.auc.ab.ca/prd-wp-uploads/2021/12/24116_X_Distribution-System-Inquiry-Final-Report_000839.pdf",
-  "bchTariff2026": "BC Hydro Electric Tariff (PDF, J.B. download 15 Oct 2026; rates re-read from the saved PDF 28 Oct 2026): RS 1600/1601/1610/1611 Large General Service, Revision 16, effective 1 Apr 2026 (BCUC G-76-25): 29.99 ¢/day, $13.83/kW of billing demand, 6.79 ¢/kWh, for ≥150 kW or >550,000 kWh a year; RS 1830 Transmission Service, Revision 3, effective 1 Apr 2026: supply at 60 kV or higher, $12.178/kVA, 4.914 ¢/kWh; RS 2289 Self-Generation Service, original, effective 1 Jul 2026 (G-64-26): only for customers taking service at distribution voltage; clean or renewable facility ≤100 kW nameplate or ≤100 kW per phase net injection, on the same or an adjacent parcel; BC Hydro pays 10 ¢/kWh for net generation, credit balance paid out each 30 April; RS 4100 Public EV Charging (BC Hydro's own stations), effective 1 Apr 2026: Level 2 31.30 ¢/kWh, fast 40.29 ¢/kWh — https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/corporate/tariff-filings/electric-tariff/bchydro-electric-tariff.pdf",
+  "bchTariff2026": "BC Hydro Electric Tariff (PDF, J.B. download 15 Oct 2026; rates re-read from the saved PDF 28 Oct 2026): RS 1600/1601/1610/1611 Large General Service, Revision 16, effective 1 Apr 2026 (BCUC G-76-25): 29.99 ¢/day, $13.83/kW of billing demand, 6.79 ¢/kWh, for ≥150 kW or >550,000 kWh a year; RS 1830 Transmission Service, Revision 3, effective 1 Apr 2026 (BCUC G-63-26, per check 2): supply at 60 kV or higher, $12.178/kVA, 4.914 ¢/kWh; RS 2289 Self-Generation Service, original, effective 1 Jul 2026 (G-64-26): only for customers taking service at distribution voltage; clean or renewable facility ≤100 kW nameplate or ≤100 kW per phase net injection, on the same or an adjacent parcel; BC Hydro pays 10 ¢/kWh for net generation, credit balance paid out each 30 April; RS 4100 Public EV Charging (BC Hydro's own stations), effective 1 Apr 2026: Level 2 31.30 ¢/kWh, fast 40.29 ¢/kWh before rate riders (30.83 / 39.69 ¢/kWh after riders, check 2) — https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/corporate/tariff-filings/electric-tariff/bchydro-electric-tariff.pdf",
   "vbbl2025_272": "Vancouver Building By-law 2025, Book II, Div. B, Art. 2.7.1.2–2.7.1.3 and Table 2.7.1.3 (read by Claude 16 Oct 2026): a non-potable system may collect only rainwater, clear-water waste and Class R greywater used in the same dwelling unit; blackwater, groundwater, road runoff and perimeter drainage are not permitted; treated rainwater and clear-water waste may be used for \"make-up water for cooling towers, adiabatic cooling systems\"; operating permit (2.7.5.3) and professional design (2.7.6.1) required — https://vancouver.ca/files/cov/2025-vbbl-book-II-insert-pages.pdf",
   "abAltSol2021": "Government of Alberta, Notice: Alternative Solutions Guide for Small System Water Reuse and Stormwater Use (Jan 2021; read by Claude 16 Oct 2026): reuse 'may require an approved alternative solution' (toilet and urinal flushing and sub-surface irrigation 'may not'; ? one check reads the rest as overstated) from the local authority having jurisdiction; the municipality must support it and oversee monitoring; Water Act / EPEA authorisation from Alberta Environment and Parks may be needed; projects serving more than one property are led by AEP ? — https://open.alberta.ca/publications/notice-alternative-solutions-guide-small-system-water-reuse-stormwater-use",
   "pnnl2022fig43": "PNNL-33283 (Viswanathan et al., Aug 2022), Figure 4.3 p. 24, Li-ion LFP total installed cost, 2021 (US$/kWh): 1 MW 2 h 518.59, 4 h 448.34; 10 MW 2 h 461.15, 4 h 410.70; 2030: 1 MW 4 h 340.46, 10 MW 4 h 311.11; fixed O&M 1 MW 4 h $5.05/kW-yr; RTE 83%, 2,400 cycles at 80% DOD, 16-year calendar life (read by Claude 16 Oct 2026; J.B. download) — https://www.sandia.gov/app/uploads/sites/256/2024/02/ESGC-Cost-Performance-Report-2022-PNNL-33283.pdf",
@@ -16680,7 +16913,7 @@
   "bchDG100": "BC Hydro DG technical interconnection requirements ≤100 kW, Rev 3 (15 Jul 2026): covers \"customer‑owned generators and energy storage systems\" up to 100 kW net injection per phase; CSA C22.3 No. 9 and UL 1741; application and field-verification reviews. Larger (to 35 kV) per the 2010 requirements, which do not mention storage (?: not checked) — https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/distribution/standards/ds-dgi-100kw-and-below-requirements.pdf",
   "aesoConnect": "AESO Connection Process Quick Reference Guide v2.1 (2021): stages 0–6; generation and storage indicative weeks — Stage 1 14, Stage 2 39, Stage 3 55, Stage 4 30 (? the graphic's week figures read unclearly; a newer quick reference, V1 27 May 2025, gives no durations); targets, not achieved times; process used when a System Access Service Request needs transmission facilities — https://www.aeso.ca/assets/Uploads/connection-process/Connection-Process-Quick-Reference-Guide.pdf",
   "epcorDTtc2025": "EPCOR Distribution & Transmission terms and conditions (1 Jan 2025): \"Generating Facility\" includes storage; Distribution Interconnection Agreement required; customer pays \"all interconnection costs as determined by EDTI\"; exporters must be Power Pool participants; no micro-generation category; 5 MW is only the telemetry threshold (s. 8.3.5) — https://www.epcor.com/content/dam/epcor/documents/supporting-documents/2025-01_distribution-connection-services-terms-and-conditions.pdf",
-  "bcUCAs1": "BC Utilities Commission Act s. 1 \"public utility\" — includes supplying electricity \"to or for the public or a corporation for compensation\"; excludes \"a person not otherwise a public utility who provides the service or commodity only to the person or the person's employees or tenants, if the service or commodity is not resold to or used by others\"; s. 88(3) exemptions with the minister's approval. Supplying a neighbour for pay falls inside unless exempted (reading, not legal advice) — https://free.bcpublications.ca/civix/document/id/complete/statreg/96473_01 Re-read 30 Oct 2026 (current to 27 Oct 2026): para. (a) covers 'electricity, natural gas, steam or any other agent for the production of light, heat, cold or power to or for the public or a corporation for compensation'; exclusions (c) municipalities within their boundaries, (d) supply only to the person, employees or tenants, (e) petroleum, (f) geothermal, (g) designated agreements.",
+  "bcUCAs1": "BC Utilities Commission Act s. 1 \"public utility\" — includes supplying electricity \"to or for the public or a corporation for compensation\"; excludes \"a person not otherwise a public utility who provides the service or commodity only to the person or the person's employees or tenants, if the service or commodity is not resold to or used by others\"; s. 88(3) exemptions with the minister's approval. Supplying a neighbour for pay falls inside unless exempted (reading, not legal advice) — https://free.bcpublications.ca/civix/document/id/complete/statreg/96473_01 Re-read 29 Oct 2026 (current to 27 Oct 2026): para. (a) covers 'electricity, natural gas, steam or any other agent for the production of light, heat, cold or power to or for the public or a corporation for compensation'; exclusions (c) municipalities within their boundaries, (d) supply only to the person, employees or tenants, (e) petroleum, (f) geothermal, (g) designated agreements.",
   "aucCoaldale2025": "AUC Decision 29294-D01-2025 (Coaldale Renewables / McCain, 3 Jun 2025): under EUA s. 2(1)(b) \"the lands must, at a minimum, be contiguous\"; lines crossing a highway to the customer \"are an attempt to self-distribute and are not permitted\" (para. 23; one check ties this to the Hydro and Electric Energy Act ?). Permission to appeal granted in part (Sep 2025, per law-firm commentary); outcome not verified — https://prd-api-efiling20.auc.ab.ca/Anonymous/DownloadPublicDocumentAsync/836696",
   "vanQuebecSt2020": "City of Vancouver memo to Council (15 May 2020), NEU Mount Pleasant expansion on Quebec St 3rd–6th Ave: start 19 May, completion \"anticipated in fall 2020\" (≈5 months, our calculation; the PDF's cover email says 3rd–5th Ave and complete by October 2020) — https://vancouver.ca/files/cov/05-15-2020-quebec-st-phase-3.pdf",
   "inlL2_2015": "INL/EXT-15-36313 (2015), public Level 2 use: starts concentrate at the start of the work day; drivers \"rarely initiate their away-from-home charging before 6 a.m. or after 7 p.m.\"; DC fast charging leans to the end of the work day — https://inldigitallibrary.inl.gov/sites/sti/sti/6899530.pdf",
@@ -16704,7 +16937,7 @@
   "uptimeTiers": "Uptime Institute, Tier Classification System web page (J.B. save, 16 Oct 2026): Tier I — 'the basic capacity level' ('no redundant components' is our summary ?); Tier II — \"redundant capacity components for power and cooling\" (engine generators, energy storage, chillers, cooling units, UPS modules, pumps, heat rejection equipment, fuel tanks); Tier III — \"concurrently maintainable\", redundant distribution paths; Tier IV — \"several independent and physically isolated systems\", fault tolerant. The page does not use the terms N+1 or 2N; the tool's mapping (N+1 ≈ Tier II–III spares, 2N ≈ Tier IV) is Claude's reading — data/raw/codes/uptime_tiers.pdf",
   "r2Van2026": "SERI R2 certified facility directory, search within 100 miles of Vancouver (J.B. screenshot 16 Oct 2026): five active R2v3 facilities — FCM Recycling Inc., Delta BC (11 mi); Quantum Lifecycle Partners LP, Surrey BC (12 mi); CSI Electronics Processing Centre Ltd., Surrey BC (24 mi); 1PC LLC, Bellingham WA (45 mi); e-Cycle Solutions Inc., Chilliwack BC (54 mi). Directory listing, not an endorsement — https://www.sustainableelectronics.org/find-an-r2-certified-facility/",
   "r2Edm2026": "SERI R2 certified facility directory, search within 50 miles of Edmonton (J.B. screenshot 16 Oct 2026): two active R2v3 facilities — 1579568 Alberta Ltd. o/a Hi-Tech Recyclers, 10235 184 St NW, Edmonton (6 mi); Quantum Lifecycle Partners LP, 250 Aurum Road NE, Edmonton (8 mi). Directory listing, not an endorsement — https://www.sustainableelectronics.org/find-an-r2-certified-facility/",
-  "cologixVAN1_2026": "Cologix VAN1 spec sheet (05-2026, J.B. download 16 Oct 2026): 555 W Hastings (Harbour Centre), Cologix a tenant in an office building; site capacity 400 kW; data-centre space 5,000 ft² (≈465 m²) in two suites; cooling \"N+1 chilled water cooling, N+1 dry cooler … N+1 IRC\"; generator and UPS \"N/N+1\"; PUE 1.2 (claim). An operator example of N+1 cooling in Vancouver. Security details on the sheet deliberately not carried into the register or tool — data/raw/cologix_van1_2026-05.pdf",
+  "cologixVAN1_2026": "Cologix VAN1 spec sheet (footer 'VAN1.042026.R4', i.e. April 2026; file named 05-2026; J.B. download 16 Oct 2026): 555 W Hastings (Harbour Centre), Cologix a tenant in an office building; site capacity 400 kW; data-centre space 5,000 ft² (≈465 m²) in two suites; cooling \"N+1 chilled water cooling, N+1 dry cooler … N+1 IRC\"; generator and UPS \"N/N+1\"; PUE 1.2 (claim). An operator example of N+1 cooling in Vancouver. Security details on the sheet deliberately not carried into the register or tool — data/raw/cologix_van1_2026-05.pdf",
   "cologixVAN4_2026": "Cologix VAN4 spec sheet (05-2026, J.B. download 16 Oct 2026): 175 W Cordova St, a leased four-storey concrete-frame building, single tenant; site capacity 6.5 MW; data-centre space 40,000 ft² (≈3,716 m²), multiple halls per floor; cooling \"pumped refrigerant and air-cooled chilled water\"; generators and UPS \"5-to-make-4, distributed redundant\"; 6–8 kW per cabinet; PUE 1.5 (claim). (spec sheet re-read 28 Oct 2026; Cologix's web page also gives 6.5 MW site capacity but two other floor areas, 58K and 68,000 ft² ?) Security, fuel and fibre-entry details on the sheet deliberately not carried into the register or tool — data/raw/cologix_van4_2026-05.pdf",
   "vanStreets2026": "City of Vancouver Open Data, Public streets (J.B. download 16 Oct 2026): 17,072 street centreline segments (our row counts) by hundred block with street use (residential, collector, arterial and others); plus Lanes (download 18 Oct 2026, updated by the City 27 Jul 2026 ?: not in the saved file): 7,856 lane centreline segments, surface not recorded. Used to route pipes and to place street viewpoints for sight lines — data/raw/van/public-streets.csv, data/raw/van/streets/lanes_2026-10-18.geojson",
   "edmRoads2026": "City of Edmonton Open Data, Road Network (J.B. download 16 Oct 2026): 53,873 centrelines with type (road, alley, railway), segment type, functional class (local, collector, arterial classes A–D) and surface; the tool keeps roads and alleys (50,755 segments; ramps, overpasses and bridges dropped) for pipe routes and street viewpoints; gravel alleys are marked unpaved — data/raw/edm/Road_Network_20261016.csv",
@@ -16748,7 +16981,7 @@
   "alta117_2026": "Data Centre Regulation, Alta Reg 117/2026 under the Electric Utilities Act (King's Printer extract, current as of 9 Jun 2026; J.B. PDF 16 Oct 2026; the saved file for this id is the catalogue page, the text is under altaReg117). s. 1: data centre includes hosting/cloud, digital asset mining, AI/ML, content delivery. s. 2: \"large data centre\" = maximum demand directly from the transmission system of 75 MW or more, or a lower threshold the AESO sets for reliability. s. 3: AESO may aggregate integrated data centres on the same or adjacent parcels with the same owner or affiliate. s. 5: a large data centre may be \"tethered\" to new or added generating units or energy storage able to supply at least its maximum demand, reliably and predictably (the Regulation does not limit the fuel; AESO's first intake does). s. 6: tethered requests processed first. s. 7: AESO may require site control, municipal zoning approvals, financing, permits or water licences. s. 8: no service above the tethered supply. s. 9: bridged service before the supply runs only once the plant is approved by the AUC, max 3 years, AESO may cap each and all bridged loads and suspend for unmet criteria. s. 10: inadequate supply — bridged data centres reduced before all other market participants; mandatory load shed — large data centres reduced before all others. s. 12: review by 31 May 2030, expires 31 May 2035 — https://open.alberta.ca/publications/2026_117",
   "edm7140sun": "Edmonton Zoning Bylaw 20001 (Charter Bylaw 20001 as adopted, effective 1 Jan 2024; City PDF, OCR text, J.B. download 14 Oct 2026; later amendments not checked), s. 7.140 Special Information Requirements, subs. 9 Sun Shadow Impact Study (other zones' shadow clauses not fully listed ?): the Development Planner MAY require one only where the development is a Discretionary Development (9.1); prepared by an Alberta P.Eng. or architect (9.2.1); shadows every 3 hours between sunrise and sunset, Mountain Standard Time, on 21 Mar, 21 Jun, 21 Sep and 21 Dec (9.2.3); impact judged as the difference between the maximum massing the zone allows and the proposed massing (9.3.1); may refuse or require redesign (9.3.2–9.3.3). No shadow clause found in the standard industrial zones (BE, IM, IH); shadow clauses appear for towers in RL and MU (in compliance with 7.140), UI height variances, and special areas (HOR, CMU, AED, RTCC, ALA); 3.50 Energy and Technology Park mentions shading only as tree planting. s. 2.140 IH lists permitted uses only (Major Industrial; Minor Industrial limited to those existing at 1 Jan 2024) and no discretionary uses, so the study cannot be required there; the bylaw names no data-centre use (Minor/Major Industrial definitions, Part 8), so the use class is for the Development Planner to determine. Search of the full text for shad/shadow/sun — https://zoningbylaw.edmonton.ca/",
   "edmFPO2250": "Edmonton Zoning Bylaw 20001 (as adopted, effective 1 Jan 2024; later amendments not checked), s. 2.250 FPO Floodplain Protection Overlay: applies to the lands mapped in its Appendix I (floodplains of the North Saskatchewan River and tributaries), and to the whole lot if the boundary crosses it (2.2); the applicant must submit an Alberta P.Eng. or architect certificate that the development complies with the floodplain policies of the applicable statutory plans (3.1); the Development Planner may require the geodetic elevation of the building and of its lowest opening, and confirmation that habitable rooms, electrical panels, heating units and operable windows are flood-proofed, plus basement and site drainage (3.2); conditions must follow the certificate (3.4). The bylaw sets no flood construction level of its own (Vancouver: FCL 4.6 m) — the level comes from the statutory plans or provincial flood mapping — https://zoningbylaw.edmonton.ca/",
-  "aesoAMS2025": "AESO 2025 Annual Market Statistics (Mar 2026; J.B. PDF 16 Oct 2026), Table 1: Alberta pool price, daily average $/MWh — 2016 18.28, 2017 22.19, 2018 50.35, 2019 54.88, 2020 46.72, 2021 101.93, 2022 162.46, 2023 133.63, 2024 62.78, 2025 43.68 (lowest in eight years); 2025 on-peak 52.15, off-peak 26.74; 2025 estimated gas unit marginal cost 16.71 (7 GJ/MWh) to 48.68 (12 GJ/MWh), carbon cost 0.42–24.32; gas 1.61 $/GJ. Inflation-adjusted (2025 $) 10-year average 2016–2025 $78/MWh vs $113 for 2000–2009 (Figure 5). Average Alberta Internal Load 10,316 MW (+2.0%); all-time winter peak 12,785 MW, December 2025; operating reserve costs $218 M (−19.6%). Our reading, not from this source: Alberta is an energy-only market: the pool price is the hourly marginal price, not a long-run marginal cost like BC Hydro's IRP figure, so the two are compared as what a MWh is worth to each system, not as the same measure — https://www.aeso.ca/assets/Annual-Market-Stats-2025.pdf",
+  "aesoAMS2025": "AESO 2025 Annual Market Statistics (Mar 2026; J.B. PDF 16 Oct 2026), Table 1: Alberta pool price, daily average $/MWh — 2016 18.28, 2017 22.19, 2018 50.35, 2019 54.88, 2020 46.72, 2021 101.93, 2022 162.46, 2023 133.63, 2024 62.78, 2025 43.68 (lowest in eight years); 2025 on-peak 52.15, off-peak 26.74; 2025 estimated gas unit marginal cost 16.71 (7 GJ/MWh) to 48.68 (12 GJ/MWh), carbon cost 0.42–24.32 (already included in the marginal costs, which also include $5/MWh O&M — not to be added on top); gas 1.61 $/GJ. Inflation-adjusted (2025 $) 10-year average 2016–2025 $78/MWh vs $113 for 2000–2009 (Figure 5). Gas-fired generation 76.8% of Alberta's total in 2025; wind, solar and hydro 21.0%. Average Alberta Internal Load 10,316 MW (+2.0%); all-time winter peak 12,785 MW, December 2025; operating reserve costs $218 M (−19.6%). Our reading, not from this source: Alberta is an energy-only market: the pool price is the hourly average of the one-minute system marginal prices (AESO glossary), not a long-run marginal cost like BC Hydro's IRP figure, so the two are compared as what a MWh is worth to each system, not as the same measure — https://www.aeso.ca/assets/Annual-Market-Stats-2025.pdf",
   "edmPermitsDC2026": "City of Edmonton General Building Permits, full export 16 Oct 2026 (247,700 rows; J.B. download), job descriptions searched for data centre, data hall, server room: permit-declared construction values for data-centre work (value and floor area as entered on the permit; floor area may be the work area or the building; the dataset dictionary defines FLOOR_AREA as 'Square footage of floor area', so areas are ft²; no MW stated): Rogers, 17204 114 Ave NW (DC2/IM), 2020, \"Hall 7 & 8 expansion\" in an empty warehouse, $4,000,000 over 9,519 ft² ≈ $420/ft²; Rogers, 10450 178 St NW (BE), 2025, expanding the internal data hall, $2,100,000 over 7,617 ft² ≈ $276/ft²; EPCOR Data Centre, office tower P1, 10423 101 St NW (CCA), 2011, $3,399,000 over 3,911 ft² ≈ $869/ft²; Alberta Pensions Administration new data centre in an office building, 5103 Windermere Blvd SW (DC2), 2009, $2,000,000 over 2,200 ft² ≈ $909/ft²; 17204 114 Ave NW addition with data centre and mechanical equipment, 2015, $850,000 (no area). No new purpose-built data centre appears; all are fit-outs or expansions in existing buildings. Permits naming backup generators left out (security rule) — https://data.edmonton.ca/d/24uj-dj8v",
   "cfr2022_140": "Clean Fuel Regulations SOR/2022-140 (consolidated to 30 Sep 2026; last amended 30 Sep 2024): s. 5(3) baseline carbon intensity of diesel 93 gCO2e/MJ (gasoline 95); s. 5(1) diesel limits 89.5 (2023) falling 1.5 a year to 79.0 (2030 and after); Schedule 1 reference CI, liquid class, 89.2 (2022–23) to 80.1 (2030+) (?: not reached by either check); a liquid low-CI fuel must be at most 90% of the reference CI. Applies in Alberta and BC. ECCC announced targeted amendments 9 Nov 2025 (not yet in the consolidation) — https://laws-lois.justice.gc.ca/eng/regulations/SOR-2022-140/FullText.html",
   "bcLCFtech2023": "BC Low Carbon Fuels (Technical) Regulation B.C. Reg. 295/2023, Schedule 3 Table 1: base carbon intensity of diesel fuel 94.38 gCO2e/MJ (gasoline 93.67); General Regulation 282/2023: 30% reduction by 2030; BC requirements page (updated 6 Mar 2026): diesel target CI 79.28 (2024), 77.11 (2025), 74.94 (2026) to 66.07 (2030); renewable content in diesel 8% from 2025; from 1 Apr 2025 eligible renewable diesel must be produced in Canada (yearly targets from the government page; ? one check finds the regulations current to 20 Oct 2026) — https://www2.gov.bc.ca/gov/content/industry/electricity-alternative-energy/transportation-energies/renewable-low-carbon-fuels/requirements",
@@ -16906,8 +17139,8 @@
   "aesoTariff5": "AESO ISO Tariff s. 5.5 and 5.7 (effective 1 Jan 2025): within 20 years of the original connection, the ISO 'may assess' construction contributions to new participants (discretionary ?); the ISO 'may' refund the original customer; no adjustment (payment or refund) under $10,000 ? — https://www.aeso.ca/assets/documents/Section-5-effective-2025-01-01.pdf",
   "abDCpay": "Government of Alberta, Powering new pathways for data centres: data centres, not Alberta ratepayers, pay for any transmission upgrades they need — https://www.alberta.ca/powering-new-pathways-for-data-centres",
   "bchSelfGen2026": "BC Hydro, Self-generation rate updates (BCUC application ID 1323 ?): RS 2289 from 1 Jul 2026, exports up to 100 kW per phase at 10 ¢/kWh; RS 2290 community generation, net injection up to 2 MW, set by 24 kW per residential and 100 kW per commercial (General Service) beneficiary, bill credits only; BCUC G-64-26 sets net billing at 10 ¢/kWh for RS 2289 and RS 2290 (executive summary); beneficiaries 'can be located anywhere in the Province' and must be BC Hydro customers (community generation page). The self-generation page below returned 404 on 28 Oct 2026; terms read from BCUC G-64-26 (bcucG6426) and https://app.bchydro.com/accounts-billing/electrical-connections/customer-generation/community-generation.html — https://www.bchydro.com/toolbar/about/strategies-plans-regulatory/rate-design/self-generation-rate-updates.html",
-  "bchCustGen": "BC Hydro, Customer generation and Community generation pages: at least two benefitting customers, including the community generator itself; each takes at most 50% (≤ 4 accounts), 25% (5–9) or 10% (≥ 10) of the credits; beneficiaries 'can be located anywhere in the Province' (BC Hydro customers; Kingsgate-Yakh and Lardeau-Shutty Bench excluded); benefitting customers 'do not receive electricity directly from the facility' (Customer generation page) and must be BC Hydro account holders — https://app.bchydro.com/accounts-billing/electrical-connections/customer-generation/community-generation.html ; https://app.bchydro.com/accounts-billing/electrical-connections/customer-generation.html",
-  "aucMicro2026": "AUC, Micro-generation notice submission guideline (2026), p. 1, 4, 15: under the lesser of 5 MW or the service rating; on property the customer owns or leases, or adjacent owned or leased property; sized to the site's own use; revenue-seeking sites are commercial generators — https://media.auc.ab.ca/prd-wp-uploads/regulatory_documents/Reference/MicrogenerationNoticeSubmissionGuideline2026.pdf",
+  "bchCustGen": "BC Hydro, Customer generation and Community generation pages: at least two benefitting customers, including the community generator itself; each takes at most 50% (≤ 4 accounts), 25% (5–9) or 10% (≥ 10) of the credits; beneficiaries 'can be located anywhere in the Province' (BC Hydro customers; Kingsgate-Yakh and Lardeau-Shutty Bench excluded); benefitting customers 'do not receive electricity directly from the facility' (Customer generation page) and must be BC Hydro account holders; the 2 MW AC limit is on net injection to the grid — the facility itself 'can be any size' (check 2) — https://app.bchydro.com/accounts-billing/electrical-connections/customer-generation/community-generation.html ; https://app.bchydro.com/accounts-billing/electrical-connections/customer-generation.html",
+  "aucMicro2026": "AUC, Micro-generation notice submission guideline (2026), p. 1 and p. 3 (s. 1(1)(h) quoted), p. 8 sizing (pages per the second reader's WebFetch summary ?): under the lesser of 5 MW or the service rating; on property the customer owns or leases, or adjacent owned or leased property; sized to the site's own use; revenue-seeking sites are commercial generators — https://media.auc.ab.ca/prd-wp-uploads/regulatory_documents/Reference/MicrogenerationNoticeSubmissionGuideline2026.pdf",
   "vbbl2025_2425": "Vancouver Building By-law 2025, Book II, Div. B, Art. 2.4.2.5 (By-law 14343 as amended by 14488, effective 1 Jan 2026), p. 26–28: buildings manage rainwater on site (with the Sentence (2) exemptions: laneway and small infill, accessory buildings, float homes, temporary buildings); small sites (≤ 1,000 m² and FSR ≤ 1.0) a 3,400–7,200 L tank; otherwise released at no more than 5 L/s per hectare for the first 15 mm over the non-landscaped site, then 25 L/s per hectare (2100 IDF, 10-year) — https://vancouver.ca/files/cov/2025-vbbl-book-II-insert-pages.pdf",
   "vanRainPage": "City of Vancouver, Rainwater management on private property: Building By-law requirements since 1 Jan 2024, most new buildings from 1 Jul 2025; as of September 2025, 192 developments, 66 ha managed, about 7,400 L/s peak reduction; purpose to 'relieve sewer system capacity constraints' (page saved 25 Oct 2026) — https://vancouver.ca/home-property-development/rainwater-management.aspx",
   "epcorStorm": "EPCOR, Guidelines for Stormwater Management, Requirements for Individual Lot Development Areas between 0.16 ha to 3.0 ha (undated): control required for lots over 0.16 ha (method up to 3.0 ha); release 0.035 m³/s per ha; storage for C = 0.90: 100 m³/ha (5-year), 375 (100-year), 507 (200-year), Exhibit 2 — https://epcor.com/content/dam/epcor/documents/supporting-documents/onsite-stormwater-management-guidelines.pdf",
@@ -17051,28 +17284,28 @@
   "tsbcDBP202405": "Technical Safety BC, Directive D-BP 2024-05 Certification and Registration of Refrigeration Systems (issued 31 Dec 2024): certified factory-assembled systems exempt from design registration up to '500 kW for systems utilizing A1 or A2L type refrigerants' and '125 kW for systems utilizing a refrigerant type other than A1 or A2L'; refers to CSA B52:2023 — https://assets.contentstack.io/v3/assets/bltdec2ded849740f4d/bltc37381c7418e482e/6769e745b1ed3cc9addc5b84/D-BP-2024-05_-_Certification_and_Registration_of_Refrigeration_Systems.pdf",
   "tsbcIBDA202001": "Technical Safety BC, Information Bulletin IB-DA 2020-01 (19 Oct 2020): design registration for A1/A2/B1 refrigerants ≥ 125 kW prime mover, A3/B2/B3 ≥ 25 kW; refers to CSA B52 cl. 5.3 (read by agent only)",
   "nbc6215": "National Building Code of Canada 2020, Div. B 6.2.1.5.(1) (J.B.'s copy NBC2020p2.pdf): mechanical refrigeration equipment designed, constructed and installed to CSA B52, subject to provincial or territorial requirements; NBC(AE) 2023 the same with Alberta regulations. CSA B52:23 itself is paywalled and not read ?",
-  "cologixVAN3web": "Cologix, VAN3 facility page (2828 Natal St; read 30 Oct 2026): 'Site Capacity: 5 MW'; '42K SQFT'; 'Hot aisle containment'; 'Scalable N+1 distributed redundant electrical solution with N+1 mechanical'; 'Tier III construction with no single points of failure'; ISO 27001, HIPAA assessment, SOC 1 Type 2, SOC 2 Type 2, PCI DSS listed (OPERATOR CLAIMS; the tour guide said 2N) — https://cologix.com/data-centers/vancouver/van3/",
-  "bcReg8_2026": "B.C. Reg. 8/2026 (O.C. 25/2026, deposited 30 Jan 2026), Data Centre Facility and Hydrogen Production Facility Power Supply Regulation (Utilities Commission Act ss. 1 and 21.1): s. 1 project definitions each need 'at least 10 MW of capacity'; s. 2(1)(d)–(f) restrict 10 MW or more of incremental capacity to existing customers; s. 3 aggregate caps over two years from 1 Feb 2026; s. 4(3)(a) competitive-process requests not more than 145 MW. A request under 10 MW does not fall within those definitions (our reading of a text extract, not legal advice ?) — https://free.bcpublications.ca/civix/document/id/complete/statreg/8_2026",
-  "bchCfDInfo2026": "BC Hydro, 2026 Call for Demand information session (9 Feb 2026): slide 8 eligibility 10–145 MW; slide 10 curtailment minimums (10% of load, 4 consecutive hours, 5 days a week, 2 weeks a month, 36 events and 144 hours a year, 'without any incentive or compensation'); slide 16 environmental benefits (10%) 'including heat recovery ready, power usage efficiency and water usage efficiency' — 'heat recovery ready' is not defined (?) — https://app.bchydro.com/content/dam/BCHydro/customer-portal/documents/accounts-billing/electrical-connections/2026-cfd-info-session-2026feb09.pdf",
+  "cologixVAN3web": "Cologix, VAN3 facility page (2828 Natal St; read 29 Oct 2026): 'Site Capacity: 5 MW'; '42K SQFT'; 'Hot aisle containment'; 'Scalable N+1 distributed redundant electrical solution with N+1 mechanical'; 'Tier III construction with no single points of failure'; ISO 27001, HIPAA assessment, SOC 1 Type 2, SOC 2 Type 2, PCI DSS listed (OPERATOR CLAIMS; the page says N+1 — the '2N' in our notes comes from the tour guide, see tourVAN3, not from this page) — https://cologix.com/data-centers/vancouver/van3/",
+  "bcReg8_2026": "B.C. Reg. 8/2026 (O.C. 25/2026, deposited 30 Jan 2026), Data Centre Facility and Hydrogen Production Facility Power Supply Regulation (Utilities Commission Act s. 21.1 (2) to (4)): s. 1 project definitions each need 'at least 10 MW of capacity'; s. 2(1)(d)–(f) restrict 10 MW or more of incremental capacity to existing customers; s. 3 aggregate caps over two years from 1 Feb 2026, and for the following year (s. 3(4)–(6): 50 / 150 / 100 MW from 1 Feb 2028, per the second reader ?); s. 4(3)(a) competitive-process requests not more than 145 MW. A request under 10 MW does not fall within those definitions (our reading: no provision says so outright; not legal advice ?) — https://free.bcpublications.ca/civix/document/id/complete/statreg/8_2026",
+  "bchCfDInfo2026": "BC Hydro, 2026 Call for Demand information session (9 Feb 2026): slide 8 eligibility 10–145 MW; slide 10 curtailment minimums (10% of load, 4 consecutive hours, 5 days a week, 2 weeks a month, 36 events and 144 hours a year, 'without any incentive or compensation'); slide 16 environmental benefits (10%) 'including heat recovery ready, power usage efficiency and water usage efficiency' — 'heat recovery ready' is defined neither here nor in the RFA (settled at check 2) — https://app.bchydro.com/content/dam/BCHydro/customer-portal/documents/accounts-billing/electrical-connections/2026-cfd-info-session-2026feb09.pdf",
   "bccsHeat2022": "BC Coroners Service, Extreme Heat and Human Mortality (death review panel), news release 7 Jun 2022: '619 deaths later identified as heat-related'; '98% of deaths occurred indoors'; '56% of decedents lived alone'; '67% of decedents were 70 or older'; recommendations: a provincial heat alert and response system, identify and support the populations most at risk, prevention and long-term mitigation. Read from the release, not the report itself (?) — https://news.gov.bc.ca/releases/2022PSSG0042-000903",
-  "covHeat2025": "City of Vancouver, memo 'Extreme heat plans summer 2025' (S. Singh, Deputy City Manager, to Mayor and Council, 3 Jul 2025): 'Vancouver has designated 39 civic facilities (community centres and libraries) as cooling centres'; checks on residents of non-market housing during Heat Warnings and Extreme Heat Emergencies; 31 misting stations; no walking-distance or backup-power statement — https://vancouver.ca/files/cov/2025-07-03-memo-extreme-heat-plans-summer-2025.pdf",
-  "atcoDrake2024": "ATCO Gas, Decommissioning Drake Landing Solar Community (page read 30 Oct 2026): 'the Drake Landing Solar Community must be decommissioned'; critical components failing; natural-gas backup boilers now provide most of the heat; annual losses of $42,000–$62,000; all homes to move to another heat source by 31 Oct 2024 (gas furnace, gas furnace and tankless water heater, electric heat pump, or a cash payment) — https://gas.atco.com/Drake.html",
+  "covHeat2025": "City of Vancouver, memo 'Overview of Extreme Heat Plans and Actions 2025' (covering e-mail: 'Extreme Heat Plans - Summer 2025'; S. Singh, Deputy City Manager, to Mayor and Council, 3 Jul 2025): 'Vancouver has designated 39 civic facilities (community centres and libraries) as cooling centres'; checks on residents of City-owned and operated non-market housing during Heat Warnings and Extreme Heat Emergencies; 31 misting stations; no walking-distance or backup-power statement — https://vancouver.ca/files/cov/2025-07-03-memo-extreme-heat-plans-summer-2025.pdf",
+  "atcoDrake2024": "ATCO Gas, Decommissioning Drake Landing Solar Community (page read 29 Oct 2026): 'the Drake Landing Solar Community must be decommissioned'; critical components failing; natural-gas backup boilers now provide most of the heat; annual losses of $42,000–$62,000; all homes to move to another heat source by 31 Oct 2024 (gas furnace, gas furnace and tankless water heater, electric heat pump, or a cash payment) — https://gas.atco.com/Drake.html",
   "aesoAlert2024": "AESO, news release 13 Jan 2024: Grid Alert declared at 3:30 p.m. and ended 8:40 p.m., caused by 'extreme cold and high electricity demand'; after the public appeal, 'a significant 100 MW drop in electricity demand' and 'a 200 MW reduction within minutes' (both figures printed) — https://aeso.ca/aeso/media/aeso-thanks-albertans-for-quick-response-to-call-for-power-conservation/",
-  "msDublinUPS2022": "Microsoft, news story 7 Jul 2022 (OPERATOR CLAIM): a grid-interactive UPS developed and tested with Eaton at its Dublin datacenter; through Enel X it can receive EirGrid signals to 'discharge our batteries to compensate for our load', replacing fossil-fuel spinning reserve — https://news.microsoft.com/source/?p=782",
+  "msDublinUPS2022": "Microsoft, news story 7 Jul 2022 (OPERATOR CLAIM): a grid-interactive UPS developed and tested with Eaton at its Dublin datacenter; it takes part in EirGrid's market through Enel X, and signals from 'utilities, by way of aggregators' tell it to 'discharge our batteries to compensate for our load'; this 'reduces the need to maintain spinning reserve' (it would replace fossil-plant services only 'if' adopted widely) — https://news.microsoft.com/source/?p=782",
   "hcCleanAir2020": "Health Canada, Guidance for Cleaner Air Spaces during Wildfire Smoke Events (published Sep 2020): 'A MERV value of 13 or more is recommended to remove fine particulate matter'; portable air cleaners with a smoke CADR of 'at least two to three times the room volume per hour'; a ventilation system that 'can be switched from recirculation mode'; 'Recirculate the air when outdoor conditions are poor'; no per-person area (it refers to ASHRAE 62.1-2019) — https://www.canada.ca/en/health-canada/services/publications/healthy-living/guidance-cleaner-air-spaces-during-wildfire-smoke-events.html",
-  "bcucG46_25": "BCUC Order G-46-25, Thermal Energy Systems – Micro TES Exemption (26 Feb 2025): exempts Micro TES providers from most of Part 3 of the Utilities Commission Act (not ss. 23, 25, 38, 41–44); Micro TES is below 'a certain minimum dollar threshold as determined by the BCUC' — the value is not in the order's text (Appendix A is an image, not read ?) — https://www.ordersdecisions.bcuc.com/bcuc/orders/en/522653/1/document.do",
-  "edmBylaw17943": "City of Edmonton Bylaw 17943, Blatchford Renewable Energy Utility Bylaw (consolidated 1 Jan 2022; local copy data/raw/edm/blatchford_C17943_2022.pdf): s. 1 purpose — regulate connections between building systems and the District Energy Sharing System (DESS) and access to it; s. 10(1) no one may sell or supply energy the City supplies to them to others without approval; no provision found for a customer supplying heat into the DESS (?)",
+  "bcucG46_25": "BCUC Order G-46-25, Thermal Energy Systems – Micro TES Exemption (26 Feb 2025): exempts Micro TES providers from most of Part 3 of the Utilities Commission Act (not ss. 23, 25, 38, 41–44); Micro TES means 'a capital cost below a certain minimum dollar threshold' as determined by the BCUC — the dollar value is not in the order's text; Appendix A is the minister's approval letter of 18 Feb 2025, an image, not read (?) — https://www.ordersdecisions.bcuc.com/bcuc/orders/en/522653/1/document.do",
+  "edmBylaw17943": "City of Edmonton Bylaw 17943, Blatchford Renewable Energy Utility Bylaw (consolidated 1 Jan 2022; local copy data/raw/edm/blatchford_C17943_2022.pdf): s. 1 purpose — regulate connections between building systems and the District Energy Sharing System (DESS) and access to it; s. 10(1) no one may sell or supply energy the City supplies to them to others without approval; no provision for a customer supplying heat into the DESS — its definitions cover energy delivered from the system only (full bylaw read at check 2); the City Manager's separate service requirements not read (?)",
   "edmBlatchfordBP": "City of Edmonton, Blatchford Renewable Energy 2021–2024 Business Plan (report CR_8340, Attachment 1; local copy data/raw/edm/blatchford_business_plan_2021_2024.pdf): 'A new public, city owned utility'; it owns and operates the DESS; 'All buildings in Blatchford, with the exception of net-zero carbon buildings, must be connected'; sources geoexchange, sewer heat exchange and solar; LRT design studying 'the opportunity for Blatchford Renewable Energy to supply and draw thermal energy from nearby LRT utility complexes'; no data-centre heat source mentioned",
   "bcbcGroupC": "BCBC 2024 Div. A definitions (local copy; NBC 2020 has the same wording): 'Residential occupancy (Group C) means the occupancy or use of a building or part thereof by persons for whom sleeping accommodation is provided but who are not harboured for the purpose of receiving care or treatment and are not involuntarily detained.'",
   "jibcESSqrg2012": "JIBC, Emergency Social Services Quick Reference Guide (2012; standards attributed to the Public Health Agency of Canada Emergency Lodging Service, 2007), group lodging: '3.5 square metres … minimum sleeping area per person'; '5 toilets per 75-100 people, add 1 toilet for each additional 30 people'; '1 washbasin per 10 people, 1 shower per 50 people'; water about 2 L drinking, 12 L washing and 112 L sanitation per person per day. A 2012 guide: whether BC's current ESS standard is the same is not checked (?) — https://www.jibc.ca/sites/default/files/2020-05/EMD-ESS-Quick-Reference-Guide-20121102.pdf",
-  "eatonCA022021": "Eaton, substation transformer catalogue CA022021EN (Jan 2020) Table 14.1-20, 2,500 kVA: H 2084.1 × W 2263.1 × D 2390.1 mm; radiators 'may be mounted on the front and back' (equipment study 29 Oct 2026, kit3d basis; not re-read tonight)",
-  "tourVAN3": "J.B., guided tour of Cologix VAN3, 2828 Natal St, Vancouver (about 2 hours, Oct 2026; her notes and three lobby photos). OBSERVED: no clear front, entrance hard to find; perimeter fence with a video-and-voice intercom at the gate; ramp up to a buzzed building door; vestibule with a guard behind glazing, an ID slot, screens and cameras; visitor pass, buzzed door into a lobby; client hot desks, private client offices, client kitchen and boardroom; washrooms with lockers and showers; a technicians' room with two desks; a POP room and meet-me room at the front right and another pair at the back left, behind scanner doors; a single-person security portal that weighed and measured her; a staff door with biometric and card; a first-floor hall on an 18 in raised floor reached by a ramp; three tenant enclosures with their own biometrics and cameras; 400 A wall panels; VESDA; a humidifier; a loading bay with two docks and a client delivery room; a freight elevator to a second-floor hall. GUIDE'S CLAIMS: anti-ram ('K') fence sunk about 9 ft; 24/7 guard; three tenants on that floor; a sensor on every rack reporting temperature and humidity to an outside monitoring company; the second POP is for redundancy; some clients work overnight; power export 'is not a thing'; generator testing the only give-back; 2N (Cologix's page says N+1); industry moving to liquid-to-chip cooling in a closed loop; data cabling mostly fibre now. One visit: observations, not measurements.",
-  "googleFlex2025": "OPERATOR CLAIM: Google blog, 'How we're making data centers more flexible to benefit power grids' (M. Terrell, 4 Aug 2025): first data-centre demand response shifted non-urgent compute (e.g. processing a YouTube video) during grid stress with Centrica Energy and Elia (Belgium) and Taiwan Power Company; reduced ML workload demand in three grid events for Omaha Public Power District 'last year'; new agreements with Indiana Michigan Power (Fort Wayne) and TVA; no MW or hours given; flexibility 'early' and only at some locations; Search, Maps and some Cloud customers limit it — https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/how-were-making-data-centers-more-flexible-to-benefit-power-grids/",
+  "eatonCA022021": "Eaton, Secondary unit substation design guide CA022021EN (Jan 2020) Table 14.1-20 (oil-filled, 600 V class), 2,500 kVA: 5/15 kV primary row HTX 2084.1 × WTX 2263.1 × DTX 2390.1 mm; 25/35 kV primary row same height, WTX 2631.4 × DTX 2491.7 mm; 'Flat, tubular or panel radiators may be mounted on the front and back of the tank' (re-read at check 2, 29 Oct 2026) — https://www.eaton.com/content/dam/eaton/products/design-guides---consultant-audience/eaton-secondary-unit-substation-design-guide-ca022021en.pdf",
+  "tourVAN3": "J.B., guided tour of Cologix VAN3, 2828 Natal St, Vancouver (about 2 hours, late Oct 2026; her notes typed in chat and three lobby photos). Her words are kept where a reading could change the meaning. HER OWN DESCRIPTION OF THE SITE (where each fact came from is not stated ?): a converted industrial building, about 5 MW, multi-tenant colocation, outside-air free cooling plus magnetic-levitation chillers, Tier III. OBSERVED: no true front or arrival, entrance hard to find; a fence ('K gate fence', her words) with a video-and-voice intercom where she buzzed security; a ramp up to a front door that had to buzz her in; a vestibule with a guard in a closed-off room with 'bullet proof glass' (her words), a slot to slide ID under, massive screens and cameras; a pass, then a buzzed door into a bright lobby (photos: Cologix sign, seating, a round glass security portal, a black door marked 'NOTICE ENTER HERE' with a card reader, a glass meeting room); to the right of the lobby and open to it, a client hot-desk area with private client offices off it, a client kitchen and a client boardroom; a technicians' room down the hall with two desks and equipment; at the far right side a POP room with fibre running from the street, next to a meet-me room, both behind scanners; washrooms with lockers and showers; through the round portal ('the glass circle'), which 'weighed me and measured me' (how she knew: display or guide ?); the guide used the door to its right with 'biometrics AND a scanner'; a first-floor hall on an 18 in raised floor above the slab with a ramp up (measured or told ?); she could not see any servers; 'electrical boxes (400 A)' on the wall, VESDA and a humidifier (from 'he should be the electrical boxes…', read as 'he showed me' ?); out through a back side door at the back-left corner to a second POP and meet-me room; from that hallway a door to a loading bay with two docks and a room where clients' deliveries are stored; a freight elevator off that room. GUIDE'S CLAIMS: giving power back to the grid 'is not a thing and would never make sense' — expensive and insignificant; they cannot get enough power from the grid; even with on-site generation they would always need a substation connection and power guarantees for clients; latency-sensitive clients would never agree to share; uptime too important; maybe possible with one tenant of steady, predictable demand, still insignificant; generator testing 'the only realistic give-back'; multiple UPS systems and multiple feeds (2N) because they cannot risk an outage (Cologix's own page says N+1: cologixVAN3web); the industry is moving to liquid (glycol) to-chip cooling; 'it' is a closed loop (what 'it' refers to ?); they don't use much copper any more, it's mostly fibre; a fence 'drilled 9 feet underground'; a 24/7 guard; 'only three tenants downstairs', each in a private enclosure with 'the company biometrics and cameras' (whose company ?); every 'server box' has a sensor recording temperature and humidity, reported to a third party that monitors constantly; the second POP and meet-me room are for redundancy; clients 'come over night' (reason for the showers); the freight elevator goes to the second storey, a full floor of data hall. Unclear in her notes: 'about the with' in the client-area note (?). One visit: observations, not measurements.",
+  "googleFlex2025": "OPERATOR CLAIM: Google blog, 'How we're making data centers more flexible to benefit power grids' (M. Terrell, 4 Aug 2025): earlier data-centre demand response shifted non-urgent compute (e.g. processing a YouTube video) 'when the grid is strained', with Centrica Energy and Elia (Belgium) and Taiwan Power Company; reduced ML workload demand in three grid events for Omaha Public Power District 'last year'; new agreements with Indiana Michigan Power (Fort Wayne) and TVA, which the post calls the 'first time' it delivers demand response by targeting machine-learning workloads; no MW or hours given; flexibility 'early' and only at some locations; Search, Maps and some Cloud customers limit it — https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/how-were-making-data-centers-more-flexible-to-benefit-power-grids/",
   "emeraldPhoenix2025": "Colangelo, Coskun et al. (Emerald AI, NVIDIA, Salt River Project, EPRI), 'Turning AI Data Centers into Grid-Interactive Assets: Results from a Field Demonstration in Phoenix, Arizona', arXiv 2507.00909v1 (1 Jul 2025; company-authored preprint): Oracle Phoenix region, 256 NVIDIA A100 GPUs; '25% reduction in cluster power usage for three hours during peak grid events' on 1 May (APS peak) and 3 May 2025 (SRP peak), 15-minute ramps; zero SLA violations reported; only batch training, fine-tuning and some inference slowed or paused, real-time serving untouched; one cluster, no MW given; frequency regulation not tested — https://arxiv.org/html/2507.00909v1",
-  "epriDCFlexEU": "EPRI Europe press release 'DCFlex: Momentum Builds Across Europe' (undated page ?): UK's first live DCFlex demonstration with National Grid, Nebius, Kraken, Emerald AI and NVIDIA cut load 'up to 30–40% within seconds' 'without disrupting critical workloads'; ESB joined; no site, date or MW given (?) — https://europe.epri.com/press-releases/dcflex-momentum-builds-across-europe",
+  "epriDCFlexEU": "SELF-REPORTED: EPRI Europe press release 'DCFlex: Momentum Builds Across Europe' (page carries no date): UK's first live DCFlex demonstration with National Grid, Emerald AI, Nebius, NVIDIA and EPRI (Kraken joined DCFlex separately) cut load 'up to 30–40% within seconds' 'without disrupting critical workloads'; ESB joined; the page gives no site, date or MW (settled at check 2) — https://europe.epri.com/press-releases/dcflex-momentum-builds-across-europe",
   "eatonBasefarm2018": "VENDOR CLAIM: Eaton news release 7 Nov 2018, UPS-as-a-Reserve pilot: Basefarm (Norwegian data-centre company), project led by Statnett with Fortum, completed Q3 2018; 'the UPSs were now capable of providing 1.5 MW of capacity' for Fast Frequency Response; UPSs can reduce the data centre's demand 'and even return power to the grid' — https://www.eaton.com/kr/ko-kr/company/news-insights/news-releases/2018/UPSasR-pilot-Norway.html",
   "fortumTelia2022": "OPERATOR CLAIM: Fortum release 18 Jan 2022, Fortum and Telia agreement: Telia's Helsinki Data Center UPS systems (ABB) take part in grid balancing; the data centre 'has contributed several megawatts of capacity to Fingrid's Fast Frequency Reserve (FFR) market as part of the Fortum Spring's virtual battery'; batteries still carry the load until generators start in an outage — https://www.fortum.com/media/2022/01/fortum-and-telia-agree-new-data-center-connection-electricity-market",
-  "txSB6_2025": "Texas S.B. 6 (89th Legislature), Senate Research Center bill analysis, enrolled version (5 Aug 2025): PUC to set a large-load threshold of 75 MW (s. 37.0561(c)); large loads disclose on-site backup generation, and ERCOT may direct them to 'deploy the customer's on-site backup generating facilities or curtail load' (s. 37.0561(e)); transmission-voltage loads must have curtailment capability before interconnection, and ERCOT must 'competitively procure demand reductions from large load customers with a demand of at least 75 megawatts' (s. 39.170) — read from the analysis, not the enrolled bill text (?) — https://capitol.texas.gov/tlodocs/89R/analysis/html/SB00006F.htm",
+  "txSB6_2025": "Texas S.B. 6 (89th Legislature), Senate Research Center bill analysis, enrolled version (5 Aug 2025): PUC to set a large-load threshold of 75 MW unless it decides a lower one is needed (s. 37.0561(c)); large loads disclose on-site backup generation, and ERCOT may direct them to 'deploy the customer's on-site backup generating facilities or curtail load' (s. 37.0561(e)); curtailment capability for loads interconnected after 31 Dec 2025, set through an ERCOT and utility protocol with exemptions (s. 39.170(a)); and ERCOT must 'competitively procure demand reductions from large load customers with a demand of at least 75 megawatts' (s. 39.170) — read from the analysis, not the enrolled bill text (?) — https://capitol.texas.gov/tlodocs/89R/analysis/html/SB00006F.htm",
   "cruLEU2025": "Commission for Regulation of Utilities (Ireland), news 'New Electricity Connection Policy for Data Centres' (18 Feb 2025; PROPOSED decision, comments to 4 Apr 2025): new data centres 'will be required to provide generation and/or storage capacity to match the requested data centre demand capacity', on site or nearby, taking part in the electricity market; annual reporting on renewable use and emissions; whether and how it was finalised: not read (?) — https://www.cru.ie/about-us/news/new-electricity-connection-policy-for-data-centre/"
  },
  "old_sources": {
