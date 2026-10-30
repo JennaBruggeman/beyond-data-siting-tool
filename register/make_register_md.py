@@ -80,3 +80,8 @@ for i,g in enumerate(r['meta'].get('gaps',[]),1): L.append(f"{i}. {g}")
 open(os.path.join(here,'formula_register.md'),'w',encoding='utf-8').write('\n'.join(L)+'\n')
 missing=sorted({x for q in r['quantities'] for x in q['inputs'] if x not in Q and x not in ('*',)})
 print('written; non-quantity inputs:',missing)
+
+# 30 Oct 2026: the rebuild stops if any cited source has no check record (register/check_sources.py)
+import subprocess as _sp, sys as _sys
+if _sp.call([_sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'check_sources.py')]) != 0:
+    _sys.exit('register rebuild stopped: cited sources without a check record (see above)')

@@ -287,10 +287,17 @@ function modelKey(){ return sw(C.acc,'the lot; dashed red: the building envelope
    PROPOSAL: at the data-hall wall, with the ground floor (where the zone keeps it for other uses) or the yard as space that could face the street.
    The proposal is speculative (a design inference, no source states it); nothing here is sized. */
 function secureKey(){ const M=state.M; if(!M||!M.ring||M.existing) return ''; const m=state.secure||'off', b=(v,t)=>`<button data-sl="${v}" style="font:inherit;font-size:11px;padding:1px 7px;margin:0 4px 0 0;border-radius:4px;cursor:pointer;border:1px solid ${m===v?'#CC746C':'#5a5d62'};background:${m===v?'rgba(204,116,108,.18)':'transparent'};color:inherit">${t}</button>`;
-  return (m==='today'?'<div style="margin-top:6px">Secure line, today: the whole lot is secured: fence and gate intercom at the lot line (as at VAN3, one tour)</div>':m==='proposed'?'<div style="margin-top:6px">Secure line, proposed: secured only at the data-hall wall (solid red); the shaded ground floor, or where the zone does not keep one, the lot between the dashed lot line and the hall, could face the street (a proposal: speculative, not sized)</div>':''); }
+  return (m==='today'?'<div style="margin-top:6px">Secure line, today: the whole lot is secured: fence and gate intercom at the lot line (as at VAN3, one tour; fence drawn 1.8 m high, height not sourced ?)</div>':m==='proposed'?'<div style="margin-top:6px">Secure line, proposed: secured only at the data-hall wall (solid red); the shaded ground floor, or where the zone does not keep one, the lot between the dashed lot line and the hall, could face the street (a proposal: speculative, not sized)</div>':''); }
 function secureDraw(){ const M=state.M; if(state.slG){ state.dc.remove(state.slG); state.slG=null; } const m=state.secure||'off'; if(!M||!M.ring||M.existing||m==='off') return;
   const g=new T.Group(); state.slG=g; state.dc.add(g); const hall=M.serverFoot||M.foot;
-  if(m==='today'){ for(const z of [0.15,0.9,1.8]) g.add(ringLine(M.ring,z,C.acc,false,z<0.5?1:0.55)); }
+  if(m==='today'){ for(const z of [0.15,0.9,1.8]) g.add(ringLine(M.ring,z,C.acc,false,z<0.5?1:0.55));
+    // the fence as a see-through wall on the lot line (J.B., 30 Oct 2026: 'we would need to model the fence'); VAN3 tour: 'K gate fence drilled 9 feet underground';
+    // its height above ground is not sourced (?): drawn at 1.8 m, the top line the key already used
+    const fH=1.8, r=M.ring, pos=[]; for(let i=0;i<r.length;i+=2){ const j=(i+2)%r.length; const a=V(r[i],r[i+1],0), b=V(r[j],r[j+1],0), a2=V(r[i],r[i+1],fH), b2=V(r[j],r[j+1],fH);
+      pos.push(a.x,a.y,a.z,b.x,b.y,b.z,b2.x,b2.y,b2.z, a.x,a.y,a.z,b2.x,b2.y,b2.z,a2.x,a2.y,a2.z); }
+    const fg=new T.BufferGeometry(); fg.setAttribute('position',new T.Float32BufferAttribute(pos,3));
+    g.add(new T.Mesh(fg,new T.MeshBasicMaterial({color:C.acc,transparent:true,opacity:0.18,side:T.DoubleSide,depthWrite:false})));
+    for(let i=0;i<r.length;i+=2){ const j=(i+2)%r.length, L=Math.hypot(r[j]-r[i],r[j+1]-r[i+1]), n=Math.max(1,Math.floor(L/3)); for(let k=0;k<n;k++){ const t=k/n, x=r[i]+(r[j]-r[i])*t, y=r[i+1]+(r[j+1]-r[i+1])*t; g.add(line([V(x,y,0),V(x,y,fH)],C.acc,false,0.5)); } } }
   else { if(hall) for(const z of [0.15,1.8,3.5]) g.add(ringLine(hall,z,C.acc,false,z<0.5?1:0.7));
     const fh=M.H/Math.max(1,M.nF?M.nF[0]:1);
     if(M.Z&&M.Z.ground&&M.foot) g.add(prism(M.foot,fh,0,C.acc,C.acc,0.6,0.16));

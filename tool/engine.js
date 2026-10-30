@@ -324,7 +324,7 @@ async function recvView(){
     h+=`<div style="margin-top:10px"><b>${esc(TYPE[t])}</b> <span class="sub">${L.length} within ${kmOrM(L[0].reach)}${L[0].guide?' (no published reach for this type — the housing figure is used as a guide)':''}${t==='arena'?' · an ice plant is also a heat source':''}</span>
     <ul style="margin:4px 0 0;padding-left:18px;font-size:13px">${L.slice(0,5).map(p=>`<li>${esc(p.n||'—')} <span class="sub">${kmOrM(p.dist)}${p.u?` · ${p.u} homes`:''}${p.s&&FIRM[p.s]?` · ${FIRM[p.s]}`:''}</span></li>`).join('')}${L.length>5?`<li class="sub">and ${L.length-5} more</li>`:''}</ul></div>`; }
   { const A=BD.S.answers, mw=A.mw||1, r=calc({mw,recover:true,to:'near'},f,near,nets), it=r.itMWh;
-    h+=`<h3>Heat this size could offer</h3><p class="sub">${mw} MW of servers, liquid-cooled with a heat pump (option B on the Options tab).</p>
+    h+=`<h3>Heat this size could offer</h3><p class="sub">${mw} MW of servers, liquid-cooled with a heat pump (option B on the Options tab). Worked at full IT load: an upper bound, since halls rarely run full (no typical share sourced ?).</p>
     <dl><dt>Heat after the heat pump</dt><dd>${rng(r.avail[0]/1000,r.avail[1]/1000,'GWh/yr')}</dd><dt>Equal to the heating of</dt><dd>${rng(r.homes[0],r.homes[1],'homes')} (space and hot water, provincial average; available, not heated)</dd>
     <dt>Heat-pump electricity</dt><dd>${rng(r.hp[0]/1000,r.hp[1]/1000,'GWh/yr')} → ${rng(r.co2[0],r.co2[1],'t CO₂e/yr')}</dd></dl>${src('lf')}${src('cap')}${src('cop')}${src('homes')}${src('grid')}
     ${mathBox([

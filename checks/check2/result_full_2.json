@@ -1,0 +1,1079 @@
+{
+ "gvsddUT008": {
+  "where_read": "Local saved copy /mnt/user-data/beyond-data-sources/public/gvsddUT008/full.pdf (pdftotext, all 4 pages).",
+  "claims": [
+   {
+    "claim": "Metro Vancouver (GVS&DD) Policy UT-008 Sewage Waste Heat Recovery, rev. 29 Jul 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "p.1: 'SEWAGE AND WASTE: HEAT RECOVERY ... Effective Date: June 23, 2017 (revised July 29, 2022) ... Policy No. UT-008'",
+    "fix": "Exact title is 'Sewage and Waste: Heat Recovery'."
+   },
+   {
+    "claim": "access 'on a first-come first-served basis'",
+    "verdict": "CONFIRMED",
+    "evidence": "p.1: 'allocate access to untreated sewage for heat recovery on a first-come first-served basis'",
+    "fix": "Applies to GVS&DD untreated sewage (regional trunk sewers), and established projects keep priority."
+   },
+   {
+    "claim": "private applicants need a letter of support from the 'host member jurisdiction'",
+    "verdict": "CONFIRMED",
+    "evidence": "p.1: 'Private entities requesting access to waste heat must provide a letter of support from the host member jurisdiction'",
+    "fix": ""
+   },
+   {
+    "claim": "heat user pays access costs",
+    "verdict": "CONFIRMED",
+    "evidence": "p.2: 'GVS&DD will charge the heat user for all costs incurred to establish and maintain access to sewage.'",
+    "fix": ""
+   },
+   {
+    "claim": "no $/GJ",
+    "verdict": "CONFIRMED",
+    "evidence": "No $/GJ in the policy; p.2: 'The value of sewage will be assessed using business case processes'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Policy covers GVS&DD (regional) sewers only; p.1 'Projects that access heat from municipal sewers do not require GVS&DD approval.' The tool should not apply it to City of Vancouver municipal sewers."
+  ],
+  "overall": "ok"
+ },
+ "bcWSRfees": {
+  "where_read": "Local saved copy /mnt/user-data/beyond-data-sources/public/bcWSRfees/page.html (BC Laws HTML, 'consolidation is current to October 20, 2026'), Schedules 1 and 2 read.",
+  "claims": [
+   {
+    "claim": "BC Water Sustainability Fees, Rentals and Charges Tariff Regulation 37/2016",
+    "verdict": "CONFIRMED",
+    "evidence": "Header: 'Water Sustainability Fees, Rentals and Charges Tariff Regulation ... B.C. Reg. 37/2016'",
+    "fix": ""
+   },
+   {
+    "claim": "Sch.1: industrial 'cooling' application $1,000",
+    "verdict": "CONFIRMED",
+    "evidence": "Sch.1 Table 1: 'cooling | 1 000 | 500' (new / amendment application fee)",
+    "fix": ""
+   },
+   {
+    "claim": "Sch.2: 'heat exchange' annual rental $2.25 per 1,000 m³, minimum $200",
+    "verdict": "CONFIRMED",
+    "evidence": "Sch.2 Table 1: 'heat exchange | 200 | 2.25' ($/1 000 m3)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Register mixes purposes: application fee quoted for 'cooling' but rental for 'heat exchange'. 'cooling' rental is $1.30/1,000 m³ (min $200); 'heat exchange' application fee is also $1,000. Pick one purpose consistently.",
+   "BC only; must not be applied to the Edmonton (Alberta) site."
+  ],
+  "overall": "needs fix"
+ },
+ "bchExtension2026": {
+  "where_read": "Local copy /mnt/attach/outputs/data/raw/bchydro/tariff.txt (BC Hydro Electric Tariff text), T&C s.8.3 (Revision 1, effective 5 Jul 2025) and s.11.1/11.5 (Revision 3, effective 1 Apr 2026).",
+  "claims": [
+   {
+    "claim": "Extension Fee = extension cost + customer share of system improvement + service connection − BC Hydro maximum contribution",
+    "verdict": "CONFIRMED",
+    "evidence": "s.8.3.4: 'adding: (i) The Extension costs, (ii) The System Improvement costs payable... (iii) Any applicable Service Connection charge... and deducting relevant BC Hydro maximum contribution'",
+    "fix": ""
+   },
+   {
+    "claim": "system improvement under $1M not charged",
+    "verdict": "CONFIRMED",
+    "evidence": "s.8.3.2: 'If the estimated System Improvement costs are less than $1 million, the Customer is not required to pay any portion'",
+    "fix": ""
+   },
+   {
+    "claim": "at ≥1 MVA the customer pays the part above $1M per MVA and above $10M",
+    "verdict": "CONFIRMED",
+    "evidence": "s.8.3.2(2): 'must pay ... any portion ... that exceeds $1 million per MVA and any portion that exceeds $10 million.'",
+    "fix": ""
+   },
+   {
+    "claim": "maximum contribution, General Service $521 per kW of estimated billing demand",
+    "verdict": "CONFIRMED",
+    "evidence": "s.11.5: 'General Service $521 per kW of estimated Billing Demand'",
+    "fix": ""
+   },
+   {
+    "claim": "underground three-phase service connection charge ('minimum' ?) $1,520 (≤200 A) to $2,950 (≤400 A)",
+    "verdict": "CONFIRMED",
+    "evidence": "s.11.1 'Minimum Connection Charges' — Underground, Three Phase: 'Up to 200 Amp. $1,520.00'; '>200 up to 400 Amp. $2,950.00'",
+    "fix": "The '?' on 'minimum' can be removed: s.11.1 is titled 'Minimum Connection Charges'."
+   },
+   {
+    "claim": "effective 2025–26",
+    "verdict": "CONFIRMED",
+    "evidence": "s.8 'Effective: July 5, 2025'; s.11 'Effective: April 1, 2026'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "s.8 is Distribution Extensions; a multi-MW data centre supplied at ≥60 kV under RS 1830 would fall under transmission connection rules (e.g., Tariff Supplement 6), not s.8. Tool should apply s.8 only to distribution-voltage service.",
+   "s.11.5 contribution is adjusted every 1 April (s.8.3.3); date-stamp $521."
+  ],
+  "overall": "ok"
+ },
+ "bchLGS": {
+  "where_read": "Electric Tariff local copies /mnt/user-data/beyond-data-sources/public/bchTariff2026/full.pdf and /mnt/attach/outputs/data/raw/bchydro/tariff.txt (pdftotext). The business-rates web page could not be opened (WebFetch refused: URL not in provenance set; search budget exhausted).",
+  "claims": [
+   {
+    "claim": "LGS RS 1600–1611: basic 29.99 ¢/day, demand $13.83/kW, energy 6.79 ¢/kWh; LGS Revision 16 effective 1 Apr 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Rate Schedules 1600, 1601, 1610, 1611 – Revision 16 / Effective: April 1, 2026 ... Basic Charge: 29.99 ¢ per day ... $13.83 per kW ... 6.79 ¢ per kWh'",
+    "fix": ""
+   },
+   {
+    "claim": "Transmission Service RS 1830: $12.178/kVA, 4.914 ¢/kWh; Revision 3 effective 1 Apr 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Rate Schedule 1830 – Revision 3 / Effective: April 1, 2026 ... Demand Charge: $12.178 per kVA ... Energy Charge: 4.914 ȼ per kWh'",
+    "fix": ""
+   },
+   {
+    "claim": "RS 1823 cancelled 1 Apr 2026 (?)",
+    "verdict": "CONFIRMED",
+    "evidence": "Tariff: 'The RS 1823 Energy Charge B Tier 1 rate (cancelled as of April 1, 2026)'",
+    "fix": "Remove '?'; cite tariff text. (Strictly the tariff says the RS 1823 Energy Charge B rates are cancelled as of 1 Apr 2026.)"
+   },
+   {
+    "claim": "business-rates page shows older figures (28.82 ¢/day, $13.30/kW, 6.53 ¢/kWh, no date), no transmission section",
+    "verdict": "UNREACHABLE",
+    "evidence": "Page not opened (provenance block).",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "RS 1830 requires supply at 60 kV or higher ('Supply is at 60 kV or higher'); tool should only use it for transmission-connected loads. LGS figures exclude riders/discounts (1½% primary discount, transformation discount)."
+  ],
+  "overall": "ok"
+ },
+ "van_genroom": {
+  "where_read": "Local saved copy /mnt/user-data/beyond-data-sources/public/van_genroom/full.pdf (pdftotext, 3 pages).",
+  "claims": [
+   {
+    "claim": "City of Vancouver, Emergency generator rooms, Building By-law bulletin 2000-015",
+    "verdict": "CONFIRMED",
+    "evidence": "'BULLETIN 2000-015-BU/EL ... EMERGENCY GENERATOR ROOMS'",
+    "fix": "Bulletin number is 2000-015-BU/EL."
+   },
+   {
+    "claim": "rev. 5 Oct 2015",
+    "verdict": "CONFIRMED",
+    "evidence": "'Revised October 5, 2015' (attachment diagram 'Revised ... November 30, 2020')",
+    "fix": "Add: attachment revised 30 Nov 2020."
+   },
+   {
+    "claim": "Div. B 3.6.2.8",
+    "verdict": "CONFIRMED",
+    "evidence": "'Sentence 3.6.2.8.(1) of Division B of the VBBL requires emergency generator room contains only the generating set and equipment'",
+    "fix": ""
+   },
+   {
+    "claim": "VBBL edition not printed",
+    "verdict": "CONFIRMED",
+    "evidence": "Bulletin refers only to 'the Vancouver Building By-law (VBBL)' with no edition year.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Used for 'Space for the plant', but the bulletin gives no room size or clearance figures (it defers to CSA C282). It supports a 2 h separated, generator-only room, not an area.",
+   "Bulletin is about emergency (life-safety) generators; data-centre standby generators may not all be 'emergency' — label the applicability.",
+   "Pre-dates VBBL 2025; check the current by-law article numbering."
+  ],
+  "overall": "ok"
+ },
+ "duvenhageKroger1996": {
+  "where_read": "Local copy /mnt/attach/outputs/data/raw/papers/duvenhage_kroger_1996.pdf (pdftotext, full paper, pp.259–277).",
+  "claims": [
+   {
+    "claim": "J. Wind Eng. Ind. Aerodyn. 62, 259–277; numerical",
+    "verdict": "CONFIRMED",
+    "evidence": "'Journal of Wind Engineering and Industrial Aerodynamics 62 (1996) 259-277'; abstract: 'is investigated numerically'",
+    "fix": ""
+   },
+   {
+    "claim": "cross winds cut the air delivered by up-wind fans",
+    "verdict": "CONFIRMED",
+    "evidence": "Abstract: 'cross winds significantly reduce the air volume flow rate that is delivered by the up-wind fans'",
+    "fix": ""
+   },
+   {
+    "claim": "winds along the long axis raise hot-plume recirculation along its sides",
+    "verdict": "CONFIRMED",
+    "evidence": "Abstract: 'winds along the longitudinal axis cause increased hot plume air recirculation along the sides of the ACHE bank'",
+    "fix": ""
+   },
+   {
+    "claim": "a raised fan platform sees more wind and more up-wind recirculation",
+    "verdict": "CONFIRMED",
+    "evidence": "p.272–273: 'slight increase in recirculation with an increase in the height of the fan platform... wind velocity experienced by the fan platform will increase'",
+    "fix": "Say 'slight' increase; also note raising the platform improves up-wind fan performance ('the performance of the up-wind fan increases')."
+   },
+   {
+    "claim": "system effectiveness 83.5% (cross wind, mostly lost fan flow; 3.1% from recirculation) and 89.5% (long-axis wind, mostly recirculation)",
+    "verdict": "CONFIRMED",
+    "evidence": "p.276: 'cross wind: esys = 83.53% (primarily due to reduced air flow, % due to recirculation = 3.1%) ... longitudinal axis wind: esys = 89.50%'",
+    "fix": "Add conditions: 6-bay bank, 3.0 m plenum, 3.0 m/s wind at 5.7 m reference height."
+   },
+   {
+    "claim": "industrial bank with a 10.7 m fan platform",
+    "verdict": "CONFIRMED",
+    "evidence": "p.276: 'In the case of a fan platform height of 10.7 m, a plenum height of 3.0 m, an ACHE bank consisting of 6 bays'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Single numerical case for a large industrial ACHE bank (10.7 m platform); using the effectiveness figures as a coefficient for rooftop data-centre dry coolers is an extrapolation — use as a qualitative flag only, or label as indicative."
+  ],
+  "overall": "ok"
+ },
+ "nbc2020_4153": {
+  "where_read": "Local copy /mnt/attach/outputs/data/raw/codes/nbc.txt (NBC 2020 Vol. 1 text), Div. B 4.1.5.1–4.1.5.3 and Table 4.1.5.3.",
+  "claims": [
+   {
+    "claim": "NRC, National Building Code of Canada 2020, Vol. 1",
+    "verdict": "CONFIRMED",
+    "evidence": "Title page: 'National Building Code of Canada 2020 Volume 1'",
+    "fix": ""
+   },
+   {
+    "claim": "Div. B, Table 4.1.5.3",
+    "verdict": "CONFIRMED",
+    "evidence": "'Table 4.1.5.3. Specified Uniformly Distributed Live Loads on an Area of Floor or Roof' (p. 4-9)",
+    "fix": ""
+   },
+   {
+    "claim": "Sentence 4.1.5.1.(1)",
+    "verdict": "CONFIRMED",
+    "evidence": "4.1.5.1.(1): live load 'shall not be less than either the uniformly distributed load patterns listed in Article 4.1.5.3., the loads due to the intended use and occupancy, or the concentrated loads'",
+    "fix": ""
+   },
+   {
+    "claim": "doi:10.4224/w324-hv93",
+    "verdict": "NOT FOUND",
+    "evidence": "DOI string not in local text (only 10.4224/nqzr-dz38 for seismic data). ?",
+    "fix": "Check DOI on the NRC publications page."
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Table 4.1.5.3 has no data-hall/computer-room line; office areas expressly exclude 'record storage and computer rooms'. Data halls fall under 4.1.5.2 'Uses Not Stipulated' (analysis of actual equipment) — table values (e.g. 3.6 kPa equipment areas) are minimums only, not a data-hall design load.",
+   "Vancouver uses VBBL 2025 and Edmonton NBC(AE) 2023 — confirm same table in adopted codes."
+  ],
+  "overall": "ok"
+ },
+ "epsbNSR": {
+  "where_read": "Local file /mnt/attach/outputs/data/raw/hydro/nsr_epsb.geojson (file dated 19 Oct; 1 polygon feature). Hosted EPSB service not opened.",
+  "claims": [
+   {
+    "claim": "North Saskatchewan River polygon",
+    "verdict": "CONFIRMED",
+    "evidence": "properties: 'name': 'North Saskatchewan River', 'feature_ty': 'RIV-MAJ'; geometry 'Polygon'",
+    "fix": ""
+   },
+   {
+    "claim": "Altalis Base Features Hydrography",
+    "verdict": "NOT FOUND",
+    "evidence": "File carries 'bf_id': 538, 'feature_co': 'GA61850000' (consistent with a base-features schema ?) but no 'Altalis' text.",
+    "fix": "Record the provider statement from the EPSB layer page."
+   },
+   {
+    "claim": "shared by Edmonton Public Schools Data Analysis Team (azimuth.epsb.ca, Hosted/North_Saskatchewan_River layer 98)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Not in file metadata; service not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "J.B. download 19 Oct 2026; academic use",
+    "verdict": "NOT FOUND",
+    "evidence": "File modified 19 Oct (filesystem); licence/use terms not in file. ?",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Third-party re-hosting of Altalis data: licence ('academic use') should be confirmed from the publisher, not assumed."
+  ],
+  "overall": "needs fix"
+ },
+ "edmPermitsDC2026": {
+  "where_read": "Local copy /mnt/attach/outputs/data/raw/edm/permits/General_Building_Permits_20261016.csv; full-scan with Python for 'data cent|data hall|server room|data center' (77 hits) and named addresses. Dataset dictionary page not opened.",
+  "claims": [
+   {
+    "claim": "full export 16 Oct 2026, 247,700 rows",
+    "verdict": "CONFIRMED",
+    "evidence": "File General_Building_Permits_20261016.csv; 247,700 data rows counted.",
+    "fix": ""
+   },
+   {
+    "claim": "Rogers, 17204 114 Ave NW (DC2/IM), 2020, Hall 7 & 8 expansion in empty warehouse, $4,000,000 over 9,519 ft² ≈ $420/ft²",
+    "verdict": "CONFIRMED",
+    "evidence": "2020 '17204 - 114 AVENUE NW' 'DC2, IM' '$4,000,000' '9,518.95' '...HALL 7 & 8 EXPANSION - Expansion of Rogers data center within empty warehouse'",
+    "fix": ""
+   },
+   {
+    "claim": "Rogers, 10450 178 St NW (BE), 2025, expanding internal data hall, $2,100,000 over 7,617 ft² ≈ $276/ft²",
+    "verdict": "CONFIRMED",
+    "evidence": "2025 '10450 - 178 STREET NW' 'BE' '$2,100,000' '7,617.40' 'Expanding the internal data hall'",
+    "fix": ""
+   },
+   {
+    "claim": "EPCOR Data Centre, office tower P1, 10423 101 St NW (CCA), 2011, $3,399,000 over 3,911 ft² ≈ $869/ft²",
+    "verdict": "CONFIRMED",
+    "evidence": "2011 '10423 - 101 STREET NW' 'CCA' '$3,399,000' '3,910.52' '(P1 level - Epcor Data Centre)'",
+    "fix": ""
+   },
+   {
+    "claim": "Alberta Pensions Administration new data centre, 5103 Windermere Blvd SW (DC2), 2009, $2,000,000 over 2,200 ft² ≈ $909/ft²",
+    "verdict": "CONFIRMED",
+    "evidence": "2009 '5103 - WINDERMERE BOULEVARD SW' 'DC2' '$2,000,000' '2,200.00' 'New Data Center for Alberta Pensions Administration Corp.'",
+    "fix": ""
+   },
+   {
+    "claim": "17204 114 Ave NW addition with data centre and mechanical equipment, 2015, $850,000 (no area)",
+    "verdict": "CONFIRMED",
+    "evidence": "2015 '$850,000' FLOOR_AREA blank; 'addition and interior alterations ... (data centre and mechanical equipment)'",
+    "fix": ""
+   },
+   {
+    "claim": "No new purpose-built data centre appears; all fit-outs or expansions",
+    "verdict": "CONFIRMED",
+    "evidence": "All 77 keyword hits are interior/exterior alterations, one demolition ('sobeys data centre'), none new construction.",
+    "fix": ""
+   },
+   {
+    "claim": "dataset dictionary defines FLOOR_AREA as 'Square footage of floor area'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Dictionary page not opened. ?",
+    "fix": ""
+   },
+   {
+    "claim": "no MW stated",
+    "verdict": "CONFIRMED",
+    "evidence": "No MW/kW in the named job descriptions.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Permit 'construction value' is applicant-declared and for fit-outs in existing shells; using it as data-centre build cost ($/ft²) understates a new purpose-built facility and mixes office server rooms with colocation halls. Label as fit-out values, not new-build cost."
+  ],
+  "overall": "ok"
+ },
+ "bacS3000_2012": {
+  "where_read": "The cited 2012/20150914 handbook could not be opened (WebFetch provenance block). Cross-checked against a different edition held locally: /mnt/user-data/beyond-data-sources/private/maker_sheets/BAC_C015_Series3000_ED_20231020.pdf (2023).",
+  "claims": [
+   {
+    "claim": "Product & Application Handbook Vol. V, '2012' footer, b8_ct_s3000_20150914, p. B31",
+    "verdict": "UNREACHABLE",
+    "evidence": "Cited edition not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "S3E-1222-07Q 652 nominal tons; 11'-10\" × 21'-7\"",
+    "verdict": "CONFIRMED",
+    "evidence": "In 2023 edition only: 'S3E-1222-07Q 652 50 ... 11'-10\" 21'-7\"' ?",
+    "fix": "Same values in 2023 edition; 2012 edition itself unverified."
+   },
+   {
+    "claim": "nominal ton = 3 USGPM cooled 95→85 °F at 78 °F wb (=15,000 Btu/h per ton)",
+    "verdict": "CONFIRMED",
+    "evidence": "2023 ed.: 'cool 3 USGPM of water from a 95°F entering ... to an 85°F leaving ... at a 78°F entering wet-bulb' ?; 15,000 Btu/h is our arithmetic (3×8.33×60×10 ≈ 15,000)",
+    "fix": ""
+   },
+   {
+    "claim": "≈8.3 m² per MW (our calculation)",
+    "verdict": "CONFIRMED",
+    "evidence": "652 t × 15,000 Btu/h = 2.87 MW; 11.83 ft × 21.58 ft = 23.7 m² → 8.3 m²/MW (arithmetic check)",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "m² per MW is per MW of heat rejected at nominal (95/85/78 °F) conditions, unit footprint only — not per MW IT load and excludes service clearance/airflow spacing (BAC layout guidelines). Label as MANUFACTURER CLAIM (it is)."
+  ],
+  "overall": "unreachable"
+ },
+ "schneiderWP133": {
+  "where_read": "WebFetch of the PDF URL in the register (Schneider Electric download site).",
+  "claims": [
+   {
+    "claim": "Lin, Bunger, Avelar, Navigating Liquid Cooling Architectures for Data Centers with AI Workloads, WP 133 v2",
+    "verdict": "CONFIRMED",
+    "evidence": "'White Paper 133, Version 2. Authors: Paul Lin, Robert Bunger, and Victor Avelar.'",
+    "fix": ""
+   },
+   {
+    "claim": "(©2024)",
+    "verdict": "NOT FOUND",
+    "evidence": "Year not returned by the fetch. ?",
+    "fix": ""
+   },
+   {
+    "claim": "p.8: '60% to 90% of a liquid-cooled server's heat can be removed via the liquid'",
+    "verdict": "CONFIRMED",
+    "evidence": "p.8: '60% to 90% of a liquid-cooled server's heat can be removed via the liquid'",
+    "fix": ""
+   },
+   {
+    "claim": "p.8: 'The remaining heat is removed by air cooling.'",
+    "verdict": "CONFIRMED",
+    "evidence": "p.8: 'The remaining heat is removed by air cooling'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Vendor white paper (MANUFACTURER CLAIM) — not labelled as such in the register; label it.",
+   "Used as a 'rule' for room_cooling_units; it is a vendor estimate, so treat as a bound/assumption, not a rule."
+  ],
+  "overall": "needs fix"
+ },
+ "cambridgeApp5": {
+  "where_read": "WebFetch of the City of Cambridge PDF URL in the register (Appendix 5, Table 12).",
+  "claims": [
+   {
+    "claim": "City of Cambridge MA, net-zero LCESS Appendix 5",
+    "verdict": "CONFIRMED",
+    "evidence": "First page title: 'Appendix 5. Technology characteristics'",
+    "fix": "Use the printed title 'Appendix 5. Technology characteristics'."
+   },
+   {
+    "claim": "district pipe $/ft — DN100 336, DN200 571, DN300 896",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 12 'Specific estimated pipe prices for planning ($ / ft)': 4\"/DN100 336; 8\"/DN200 571; 12\"/DN300 896",
+    "fix": ""
+   },
+   {
+    "claim": "US$ ?",
+    "verdict": "NOT FOUND",
+    "evidence": "Only '$' used; 'None are mentioned' for US$/USD.",
+    "fix": "Keep '?' (US$ is inferred from a US city, not printed)."
+   },
+   {
+    "claim": "2027 planning prices",
+    "verdict": "CONFIRMED",
+    "evidence": "Price column labelled 2027 (per fetch).",
+    "fix": ""
+   },
+   {
+    "claim": "inclusions not stated",
+    "verdict": "CONFIRMED",
+    "evidence": "'The document does not say what the per-foot figures cover'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "US (Massachusetts) planning prices applied to Vancouver/Edmonton: needs currency conversion and regional cost adjustment, and should be labelled as a US planning estimate."
+  ],
+  "overall": "ok"
+ },
+ "vbbl2019_331": {
+  "where_read": "WebFetch of the BC Laws VBBL 2019 Div. B page in the register ('Consolidated changes to July 01, 2024').",
+  "claims": [
+   {
+    "claim": "VBBL 2019 consolidated 1 Jul 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "'Vancouver Building By-law 2019 Consolidated changes to July 01, 2024 Division B'",
+    "fix": ""
+   },
+   {
+    "claim": "3.3.1.4.(4)(a) travel distance to an exit not more than 45 m (sprinklered, public corridor)",
+    "verdict": "CONFIRMED",
+    "evidence": "'the travel distance from any part of the floor area to an exit is not more than 45 m,'",
+    "fix": "Note: this is a condition for omitting the corridor fire separation, not a general travel-distance limit (that is 3.4.2.5)."
+   },
+   {
+    "claim": "3.3.1.5.(1)(d)(i) 25 m to an egress doorway (sprinklered)",
+    "verdict": "CONFIRMED",
+    "evidence": "'the travel distance to an egress doorway is more than 25 m, or' (triggers a second egress doorway)",
+    "fix": ""
+   },
+   {
+    "claim": "3.3.1.9.(1) public corridor at least 1 100 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "'The minimum width of a public corridor shall be 1 100 mm.'",
+    "fix": ""
+   },
+   {
+    "claim": "3.3.1.9.(7) dead-end corridor not more than 6 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'a dead-end corridor is permitted provided it is not more than 6 m long.'",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "VBBL 2019 is superseded by VBBL 2025 for new permits (2025 by-law preface: 'This Building By-law replaces the 2019 Building By-law'); re-cite VBBL 2025 Div. B 3.3.1 for current rules.",
+   "45 m is a corridor-separation exemption condition; using it as the hall travel-distance limit is a misreading."
+  ],
+  "overall": "needs fix"
+ },
+ "tsbcIBEL201605": {
+  "where_read": "WebFetch of the Technical Safety BC PDF URL in the register.",
+  "claims": [
+   {
+    "claim": "IB-EL 2016-05 Rev 03 (Mar 2025), Section 2 general rules",
+    "verdict": "CONFIRMED",
+    "evidence": "'IB-EL 2016-05', Revision 03, 'Date of issue: March 04, 2025'",
+    "fix": ""
+   },
+   {
+    "claim": "working space at large equipment",
+    "verdict": "CONFIRMED",
+    "evidence": "Refers to rule 2-308 working space; extra clearance for serviceable sides of equipment 'rated 1200 A or more, or rated over 750 V'",
+    "fix": ""
+   },
+   {
+    "claim": "second means of egress at large equipment",
+    "verdict": "CORRECTED",
+    "evidence": "Phrase not used; bulletin: 'The electrical room should be laid out to permit workers to leave the room or area without passing any failed equipment.'",
+    "fix": "Reword: layout must let workers leave without passing failed equipment; otherwise 'the working space shall be increased to 1.5M'."
+   },
+   {
+    "claim": "does not print the 1 m figure",
+    "verdict": "CONFIRMED",
+    "evidence": "No 1 m working-space figure; only 1.5 m (and an unrelated 1 m gas-vent clearance).",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Bulletin interprets the CE Code for BC; it supports a check, not dimensions beyond 1.5 m. BC only — Edmonton needs the Alberta equivalent."
+  ],
+  "overall": "needs fix"
+ },
+ "vertivCWAiom": {
+  "where_read": "WebFetch of the Vertiv PDF URL in the register (full text incl. offset 100000).",
+  "claims": [
+   {
+    "claim": "Vertiv Liebert CWA Installer/User Guide (sl-70553 rev 3, 03-23)",
+    "verdict": "CONFIRMED",
+    "evidence": "Footer 'Vertiv™ Liebert® CWA Installer/User Guide'; cover '©2023 Vertiv Group Corp.'; SL-70553 rev 3 03-23 appears only in the file name ?",
+    "fix": "Mark the document number as taken from the file name."
+   },
+   {
+    "claim": "DPN005165 '1.1m (42 inch) minimum clearance for installation and service access (Data Hall & Gallary Sides)'",
+    "verdict": "CONFIRMED",
+    "evidence": "DPN005165 Rev B: '1.1m (42 inch) minimum clearance for installation and service access (Data Hall & Gallary Sides)'",
+    "fix": ""
+   },
+   {
+    "claim": "DPN005179 adjacent units with a gasketed minimum gap",
+    "verdict": "CONFIRMED",
+    "evidence": "'Minimum Gap to be filled with gasketing between units that do not have the gravity condensate connection conversion kit' (gap callout 19 mm / 0.75 in)",
+    "fix": "Add the 19 mm gap."
+   },
+   {
+    "claim": "152 mm with the gravity condensate kit",
+    "verdict": "CONFIRMED",
+    "evidence": "DPN005179: 'Apply 152 mm (6 in) of side clearance when a gravity condensate connection conversion kit is installed.'",
+    "fix": "Note DPN005165 misprints this as '52mm (6 inch)'."
+   },
+   {
+    "claim": "manual p.11, Appendix C p.65",
+    "verdict": "CONFIRMED",
+    "evidence": "p.11 Section 3.1 Planning Dimensions lists DPN005165/DPN005179; p.65 Appendix C Submittal Drawings.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "MANUFACTURER CLAIM (installer guide) used as a 'rule' — label as manufacturer requirement for this product, not a code rule."
+  ],
+  "overall": "ok"
+ },
+ "alfaManual": {
+  "where_read": "WebFetch of the Alfa Laval PDF URL in the register (test03.alfalaval.com host — a test/staging host ?).",
+  "claims": [
+   {
+    "claim": "Instruction manual BaseLine and M line 200000423-1-EN-GB (2019-02)",
+    "verdict": "CONFIRMED",
+    "evidence": "'200000423-1-EN-GB'; '© Alfa Laval Corporate AB 2019-02'",
+    "fix": ""
+   },
+   {
+    "claim": "s.4.2 p.20: 'Free space is required for lifting plates in and out'",
+    "verdict": "CONFIRMED",
+    "evidence": "s.4.2 p.20: 'Free space is required for lifting plates in and out.'",
+    "fix": ""
+   },
+   {
+    "claim": "'refer to the delivered PHE drawing for actual measurements' (no distance printed)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Please refer to the delivered PHE drawing for actual measurements.' No distance printed.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "URL is on a 'test03' Alfa Laval host; prefer the public alfalaval.com copy for the register."
+  ],
+  "overall": "ok"
+ },
+ "vbbl2025Seismic": {
+  "where_read": "Guide PDF: WebFetch refused (provenance). Cross-checked against local VBBL 2025 Book I Vol. 1 convenience copy /mnt/attach/outputs/data/raw/codes/vbbl2025_v1.txt (consolidated to 30 Sep 2026, v4.01), Div. C 3.3.1.4.",
+  "claims": [
+   {
+    "claim": "City of Vancouver, Guide to 2025 VBBL updates (22 Sep 2025)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Guide not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "new seismic rules apply to permits issued on or after 15 Sep 2026",
+    "verdict": "CORRECTED",
+    "evidence": "By-law 3.3.1.4.(1)(a): 2019 seismic rules allowed where 'a substantially complete application for a building permit is submitted ... before September 15, 2026'",
+    "fix": "The trigger is the application submission date, not permit issue date (per by-law; guide unverified)."
+   },
+   {
+    "claim": "in-stream projects before 8 Mar 2027 may use the old rules",
+    "verdict": "CONFIRMED",
+    "evidence": "3.3.1.4.(1)(b): application submitted 'before March 08, 2027' where a DP or rezoning application was submitted before the by-law's effective date",
+    "fix": "Add the DP/rezoning condition."
+   },
+   {
+    "claim": "guide internally inconsistent; p.9 says submitted before 15 Sep 2026; a newer v1.01 exists",
+    "verdict": "UNREACHABLE",
+    "evidence": "Guide not opened; the by-law text matches the 'submitted before' reading.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": true,
+  "overreach": [
+   "Cite the by-law (Div. C 3.3.1.4) rather than the guide for the transition rule."
+  ],
+  "overall": "needs fix"
+ },
+ "estruxtureVAN1ds": {
+  "where_read": "WebFetch refused (URL not in provenance set); web-search budget exhausted; no saved copy found under /mnt/user-data/beyond-data-sources or /mnt/attach/outputs/data/raw. Not circumvented.",
+  "claims": [
+   {
+    "claim": "eStruxture VAN-1 datasheet V5, 55 E 7th Ave, Vancouver",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "'2.4Mw critical IT load'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "'up to 30kW/cabinet'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "'10,000 sq. ft. total space'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "'7,500 sq. ft. of cabinet space'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "generator fuel ≥28 h",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Operator claim — correctly labelled. Datasheet figures are marketing capacity, not measured load."
+  ],
+  "overall": "unreachable"
+ },
+ "hut8VAN1": {
+  "where_read": "WebFetch refused (URL not in provenance set); web-search budget exhausted; no saved copy found under /mnt/user-data/beyond-data-sources or /mnt/attach/outputs/data/raw. Not circumvented.",
+  "claims": [
+   {
+    "claim": "'0.6 MW designed power capacity'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "'900kW UPS each for A and B side'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "'435 kW supplied by 2 generators'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "address linkage (900 W Hastings St per sources/01) unresolved",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Operator claim — labelled. Note 435 kW generation < 600 kW design capacity and < 900 kW UPS: internally inconsistent figures; do not derive backup ratio from them."
+  ],
+  "overall": "unreachable"
+ },
+ "upsiteASHRAE5": {
+  "where_read": "WebFetch refused (URL not in provenance set); web-search budget exhausted; no saved copy found under /mnt/user-data/beyond-data-sources or /mnt/attach/outputs/data/raw. Not circumvented.",
+  "claims": [
+   {
+    "claim": "facility water classes W17/W27/W32/W40/W45/W+ by upper limit",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "'several manufacturers' design around 40 °C",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "few above 45 °C",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": false,
+  "overreach": [
+   "Industry blog (vendor) used for ASHRAE classes — a popular/secondary source; the user's rule bars popular sources in thesis work. Replace with ASHRAE Thermal Guidelines (5th ed.) or ASHRAE TC 9.9 liquid-cooling white paper.",
+   "No roles recorded although used_by heat_temp."
+  ],
+  "overall": "unreachable"
+ },
+ "zimmermann2012": {
+  "where_read": "WebFetch refused (URL not in provenance set); web-search budget exhausted; no saved copy found under /mnt/user-data/beyond-data-sources or /mnt/attach/outputs/data/raw. Not circumvented.",
+  "claims": [
+   {
+    "claim": "Zimmermann et al. 2012, Energy 43:237–245",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "Aquasar hot-water cooling",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "'A heat recovery efficiency of 80% … with a water temperature of 60 °C'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "elision drops the 34% exergetic efficiency",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Aquasar was a prototype (IBM/ETH) — a single research system; using 80% as a general liquid-capture share is an extrapolation."
+  ],
+  "overall": "unreachable"
+ },
+ "skatOverskud": {
+  "where_read": "No URL given in register; WebFetch not possible without a provenance URL; search budget exhausted. Not circumvented.",
+  "claims": [
+   {
+    "claim": "Juridisk vejledning E.A.4.6.10.2–3: heat-pump electricity 'skal måles hver for sig'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "surplus-heat supplier responsible for metering",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "heat measured at heat-pump outlet, 3 × electricity deducted",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "at info.skat.dk E.A.4.6.10.6 'skal måles hver for sig' refers to taxed/tax-exempt surplus heat; heat-pump rule and 3× deduction not found",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": false,
+  "overreach": [
+   "Register itself says the core rule was not found at the official site (info.skat.dk) and came from a private mirror (tax.dk); yet role is 'rule'. Do not use as a rule until confirmed on info.skat.dk.",
+   "Danish tax law — wrong jurisdiction for BC/Alberta except as a precedent."
+  ],
+  "overall": "unreachable"
+ },
+ "uptimeRegional2025": {
+  "where_read": "WebFetch refused (URL not in provenance set); web-search budget exhausted; no saved copy found under /mnt/user-data/beyond-data-sources or /mnt/attach/outputs/data/raw. Not circumvented.",
+  "claims": [
+   {
+    "claim": "UII Data Report 183, Global Data Center Survey 2025: regional view",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "North America average annual PUE 1.49",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "operator-reported, not weighted",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "n=111",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "p. 1",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Industry survey of self-reported PUE (labelled). Use as context, not a site-specific PUE."
+  ],
+  "overall": "unreachable"
+ },
+ "dreyer2021": {
+  "where_read": "WebFetch refused (URL not in provenance set); web-search budget exhausted; no saved copy found under /mnt/user-data/beyond-data-sources or /mnt/attach/outputs/data/raw. Not circumvented.",
+  "claims": [
+   {
+    "claim": "Dreyer et al. 2021, Int J LCA 26:2232–2247",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "heating electricity 10.38 MJ per kg live mealworm",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "15.86 MJ in a colder winter",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Tool role 'mealworm 2.88 kWh/kg' = 10.38 MJ/3.6 (arithmetic OK) but is one Austrian farm's case — label as single-case LCA value."
+  ],
+  "overall": "unreachable"
+ },
+ "squamishNEU2010": {
+  "where_read": "WebFetch refused (URL not in provenance set); web-search budget exhausted; no saved copy found under /mnt/user-data/beyond-data-sources or /mnt/attach/outputs/data/raw. Not circumvented.",
+  "claims": [
+   {
+    "claim": "Compass Resource Management with FVB Energy and Hemmera, final report 15 Jun 2010",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "levelised cost over 30 years (pp. 27, 42)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "WACC 7.6% (5.6% real)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "ROE 10% (8% real) regulated by BCUC",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "debt 6%, 60/40",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "depreciation DPS 1.5%/yr, ETS 3%/yr (p. 44)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "2010 feasibility assumptions (pre-2010s rates) used as current payback coefficient; label as a 2010 BC precedent, not current BCUC-approved WACC."
+  ],
+  "overall": "unreachable"
+ },
+ "portPER2025": {
+  "where_read": "WebFetch of register URL denied by user. Not circumvented.",
+  "claims": [
+   {
+    "claim": "Port of Vancouver PER categories (10 Sep 2025)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "new/modified discharge to water is Category C, '60 to 120 business days'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "27 Dec 2023 categories PDF; Category D 120–170",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "Table 5 short-term C 10–60",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "water pipeline Category A only if 'less than 100 m in length' and no discharge",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Applies only on Port of Vancouver federal lands/water lot; flag applicability by site. No roles recorded."
+  ],
+  "overall": "unreachable"
+ },
+ "arden2021": {
+  "where_read": "WebFetch refused (URL not in provenance set); web-search budget exhausted; no saved copy found under /mnt/user-data/beyond-data-sources or /mnt/attach/outputs/data/raw. Not circumvented.",
+  "claims": [
+   {
+    "claim": "Arden et al., Onsite Non-potable Reuse for Large Buildings, Water Research 191:116635 (2021)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Register entry states no figures — the 'treatment_energy' data used by the tool are not recorded in the register, so they cannot be checked; add the figure, table and page. US EPA study of US buildings."
+  ],
+  "overall": "unreachable"
+ },
+ "nrcan_pvcost2024": {
+  "where_read": "No URL in register; URL from sources/15b (iea-pvps.org .../IEA-PVPS-Task-1-NSR-Canada-2024.pdf) refused by WebFetch (provenance). Not circumvented.",
+  "claims": [
+   {
+    "claim": "IEA PVPS National Survey Report of PV Power Applications in Canada 2024 (NRCan authors)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "CAD/W by size",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "report prints 'turnkey' prices ?",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Register entry gives no figures (defers to sources/15b: Tables 7 and 8, Dec 2025, URL iea-pvps.org NSR-Canada-2024 — also not fetchable). Put the actual CAD/W values and table numbers in the register."
+  ],
+  "overall": "unreachable"
+ },
+ "barth2026": {
+  "where_read": "WebFetch refused (URL not in provenance set); web-search budget exhausted; no saved copy found under /mnt/user-data/beyond-data-sources or /mnt/attach/outputs/data/raw. Not circumvented.",
+  "claims": [
+   {
+    "claim": "Barth, Schefel, Blum, Menberg, Potential of ATES for data centres in Germany, Geothermal Energy 14:11 (2026)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "Register gives no figure for the 'ates' data role — nothing checkable; German aquifers, not BC/Alberta hydrogeology."
+  ],
+  "overall": "unreachable"
+ },
+ "traneTCA2026": {
+  "where_read": "WebFetch refused (URL not in provenance set); web-search budget exhausted; no saved copy found under /mnt/user-data/beyond-data-sources or /mnt/attach/outputs/data/raw. Not circumvented.",
+  "claims": [
+   {
+    "claim": "TCA-SLB001-EN (05/07/2026); 'All values are estimated'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "300–850 TR (printed 'T')",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "27–52 m² (from inches)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   },
+   {
+    "claim": "≈17–26 m² per MW (our calc)",
+    "verdict": "UNREACHABLE",
+    "evidence": "Source not opened.",
+    "fix": ""
+   }
+  ],
+  "roles_ok": "partly",
+  "overreach": [
+   "MANUFACTURER CLAIM (labelled). Arithmetic is internally consistent (300 TR = 1.06 MW → 25.6 m²/MW; 850 TR = 2.99 MW → 17.4 m²/MW) but footprint excludes service/airflow clearance; m²/MW is per MW cooling, not IT."
+  ],
+  "overall": "unreachable"
+ }
+}
