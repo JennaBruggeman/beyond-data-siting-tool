@@ -263,7 +263,7 @@ function model(d){ plantLabels(); baseLabels(); const M=state.M, P=M&&M.plant;
   note((P&&P.miss&&P.miss.length?'Doesn\'t fit: '+P.miss.join('; ')+'. ':'')+heightsNote()+'. Neighbours drawn to 1.5 km.');
   key(modelKey()); }
 function modelKey(){ return sw(C.acc,'the lot; dashed red: the building envelope (not a design)')+sw(C.grey,'setbacks (yards) and plant yard',true)+sw(C.edge,'plant to makers\' sizes: solid = unit, dashed = clearance')+sw(C.mat,'loading spaces')+roomsKey()+secureKey(); }
-/* secure line (prototype, overnight 30 Oct 2026, for J.B. to review): where the security line sits.
+/* secure line (prototype, overnight 29 Oct 2026, for J.B. to review): where the security line sits.
    TODAY: at the lot line, as seen at Cologix VAN3 (fence with a gate intercom; register: security_layers, tour = observation, one site).
    PROPOSAL: at the data-hall wall, with the ground floor (where the zone keeps it for other uses) or the yard as space that could face the street.
    The proposal is speculative (a design inference, no source states it); nothing here is sized. */
