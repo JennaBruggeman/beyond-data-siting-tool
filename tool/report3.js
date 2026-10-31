@@ -166,7 +166,7 @@ function pFlows(D,no){ const {r,rec,mw,refs,f,e}=D; let s='';
 
 function pHeat(D,no){ const {heat,best,worth,f,rec,r,rL,m,note}=D; let s=''; const iso=siteIso({x0:M,y0:104,x1:PW-M-150,y1:380},{pipe:true,air:!rec}); s+=iso.s; const a=iso.a, PL=m.plant||{}, P_=PL.s||{};
   // numbered walk-through
-  const steps=[[a.top,'Servers',`${r1(D.mw)} MW; ${rec?'liquid to the chip catches 48–75% of the heat in water at 35–40 °C':'air-cooled: heat leaves at 25–35 °C'}`],
+  const steps=[[a.top,'Servers',`${r1(D.mw)} MW; ${rec?'liquid to the chip catches 57–75% of the heat in water at 35–40 °C':'air-cooled: heat leaves at 25–35 °C'}`],
    [a.roof,'Roof plant',`${PL.placed?PL.placed.cr:''} ${P_.k?P_.k.name:'coolers'}: ${rec?'reject what is not recovered':'carry all the heat to the air'}`],
    [a.side,'Heat pump',`lifts the warm water to heating temperatures, COP 3.0–4.5${rec?'':'; drawn as if liquid-cooled'}`],
    [a.pipe,'Twin pipe',best?`to ${best.G.length} building${best.G.length>1?'s':''}, ${fmt(Math.round(best.len/10)*10)} m along the streets`:'to buildings within reach'],
