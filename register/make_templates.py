@@ -52,7 +52,7 @@ T = {
  'generator_nox_pm': (R, 'neighbours', 'air near the site'), 'refrigerant_co2e': (F, 'climate', 'small, technical'), 'embodied_it': (C, 'climate', 'carbon in the servers'),
  'embodied_building': (C, 'climate', 'carbon in the building'), 'noise_level': (R, 'neighbours', 'what neighbours would hear'), 'lf_flag': (R, 'neighbours', 'low hum'),
  'light_at_window': (R, 'neighbours', 'light at night'), 'shadow': (R, 'neighbours', 'shade on neighbours'), 'visibility': (R, 'neighbours public', 'what is seen from the street'),
- 'watched_area': (R, 'neighbours public', 'cameras and fences'), 'jobs': (R, 'workers public', 'work created'), 'ground': (F, 'operator', 'engineering'),
+ 'watched_area': (R, 'neighbours public', 'cameras and fences'), 'ground': (F, 'operator', 'engineering'),
  'treatment_energy': (F, 'operator', 'engineering'), 'blowdown_recovery': (F, 'operator', 'engineering'), 'pv_roof': (C, 'climate', 'its own solar'), 'pv_facade': (C, 'climate neighbours', 'solar on the facade'),
  'genset_test': (R, 'neighbours', 'generator tests: noise and exhaust'), 'hvo_swap': (C, 'climate', 'cleaner generator fuel'), 'fuel_on_site': (R, 'neighbours city', 'fuel kept on site: amount and type only, never location'),
  'vibration_rank': (R, 'neighbours', 'vibration'), 'workload_control': (C, 'operator public', 'who controls the computing'),
@@ -153,7 +153,7 @@ PLAIN = {'pue': 'how much extra power cooling and losses take', 'liquid_capture'
  'plant_schedule': 'whether the cooling units are low-noise or standard models', 'receiver_demand': 'how much heat the buildings nearby use',
  'distribution_cost': 'what the pipe costs per metre', 'crf': 'the cost of borrowing (3 to 8%)', 'demand_profile': 'how many hours a year the heat pump runs',
  'cooling_type': 'how the servers are cooled (air or liquid)', 'component_space': 'how much room the plant needs per MW', 'envelope': 'floor heights', 'size_fit': 'the size chosen'}
-OUTN = {'fit': 'size_fit', 'floorMW': 'floor_area', 'elec': 'it_load_actual', 'co2': 'grid_co2', 'plant': 'component_space', 'noise': 'noise_level', 'jobs': 'jobs',
+OUTN = {'fit': 'size_fit', 'floorMW': 'floor_area', 'elec': 'it_load_actual', 'co2': 'grid_co2', 'plant': 'component_space', 'noise': 'noise_level',
  'heat': 'heat_delivered', 'homes': 'homes_heated', 'best': 'lcoh', 'cheapest': 'lcoh'}
 _SP = os.path.join(H, '..', 'audit', 'sensitivity_2026-10-20', 'summary.json')
 drivers = {}

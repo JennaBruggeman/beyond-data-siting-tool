@@ -61,3 +61,14 @@ Three checks: an independent workbook (`checks/emit_check/`), a math agent (`che
 - Cooling-tower cycles, 2 vs 3, at the high end of make-up water: find a source.
 - Edmonton water behind electricity, 1.6 L/kWh: basis.
 - Chiller sound per unit: the FH3135 source for 80 dB(A).
+
+## Applied (30 Oct 2026)
+
+J.B.: jobs dropped ("so irrelevant"); backup fuel and the rest as suggested; the 15 uncomputed parts held for her question.
+
+- **Decisions:** liquid capture 57–75 % (LBNL); jobs removed from the screen, the engine and the register (record kept in `meta.dropped_quantities`); backup fuel 12 h minimum plus 24–48 h typical (claims); Edmonton rain tank 82.7 mm (July); solar back to NRCan's published annual values (892–1,007 / 944–1,244; vertical 716 / 989), replacing P-16.
+- **Screen:** O-02, O-06 (CSA B139; NFC Part 4 for comparison only), O-07, O-08, O-15 (?), O-17 (yearly 180 min test), O-20, O-21, O-23, O-24, O-25. The rain tank text names its month.
+- **Register** (`register/patches/emit_fixes_2026_10_30.py`): heat_captured uses IT heat (O-13); free-cooling ≤; AP-42 cited for generators (O-16); refrigerant roles (O-18); water behind electricity marked ? (O-09); Westville ≈0.8 % (O-14); Allen peak cell (O-26); grid_co2 marginal not computed (O-11); treatment energy ? (O-19); blowdown recovery arithmetic noted.
+- **Not done yet:** counting the first server fit-out (O-15), the PM figure on generator tests (O-17), and the cooling-tower cycles source; these go to research.
+- **Golden:** unchanged on all 8 lots. Note: the golden files hold site and plant results only, not heat, water or fuel, so they can't catch changes in this stage; the workbook and screen dumps do.
+- **Display check** (V339, E06A): 57–75 %, the fuel row and the quieter/louder noise labels show; no jobs; no page errors.

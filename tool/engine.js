@@ -24,7 +24,7 @@ const R={
  plant:{ups:[2.4,3.3],batt:[1.0,1.8],dry:[19.5,30.5],chill:[16.4,30.5],towers:[4.7,16.5],hybrid:[24.5,50.1],hp:[5.6,15.1],cdu:[0.4,1.5]}, /* 29 Oct 2026 equipment study (checks/node_review/select_*.md): range across the makers compared; basis unit drawn = nearest the median */ // m² per MW; ups, batt, hp, cdu per MW of servers; dry and chill per MW of HEAT (× PUE), sweep M30/M31 18 Oct: dry coolers (liquid cooling) 19.5–30.5 (EVAPCO, Thermokey, Mark), air-cooled chillers (air cooling) 16.4–30.5 (Vertiv AFC, Airedale; equipment study 29 Oct); manufacturer claims, equipment only, spare units added when the plant is laid out
  pue:[1.4,1.55], lf:0.6, lwUnitDry:[98.5,102], // dry cooler, per unit at full fan speed: Güntner GFD 090.2D ≈ 2.5 MW, LWA 98.5 (Deerfield MA submittal); Thermokey 102 at 738 kW (manufacturer claims; sweep M32)
  lwUnit:[102.8,106.1], // sound power per chiller (basis 1.49 MW): Vertiv Liebert AFC SL-71060 R09/24 prints Lp at 1 m, 83.0 dB(A) FIZ135 (R1234ze) and 80.0 FH3135 (R513A, 1,481 kW); Lw = Lp + 10 log S with S the 1 m measurement box around the unit (ISO 3744 parallelepiped; our calculation, 29 Oct 2026). 'Preliminary data'; low-noise options not rated
-  capture:[0.48,0.75], cop:[3.0,4.5], // COP: DEA 2026 waste-heat HPs to 70 °C 3.0–3.6; observed Meta Odense 27→70 °C: 4.5 (2020), ≈3.9 combined 2022–24 (Fjernvarme Fyn annual reports)
+  capture:[0.57,0.75], /* 30 Oct 2026 (J.B.): LBNL 57–59 % typical to 67–75 % best; 48 % was in no source */ cop:[3.0,4.5], // COP: DEA 2026 waste-heat HPs to 70 °C 3.0–3.6; observed Meta Odense 27→70 °C: 4.5 (2020), ≈3.9 combined 2022–24 (Fjernvarme Fyn annual reports)
  fuelLkWh:0.263, fuelHours:12, fuelLimit:{low:20000,first:200000},
  homeMWh:{van:16.81,edm:33.14},       // CEUD residential space + water heating per household, 2018–22 average (2023, the warmest year, gave 14.58 / 29.19): BC 60.5 GJ, AB 119.3 GJ (J.B. 18 Oct, sweep M96)
  monthRatio:{van:4.9,edm:5.0},       // busiest ÷ quietest month of heat demand: s × CWEC monthly HDD16 share + (1 − s) ÷ 12, s = space ÷ (space + water heating), CEUD residential 2018–22: BC 0.674, AB 0.761 (sweep M14; national 0.61 retired)
@@ -39,7 +39,7 @@ const SRC2={
  size:'register: size_fit (built halls: eStruxture VAN-1, Hut 8 Vault, Qu EDM1, Cologix VAN5 — operator claims; LBNL prototypes, Sun et al. 2021; whole-building check: 111 E 5th RTS 19744, Ark UP4 committee report, Cologix VAN4 operator)',
  plant:'register: component_space (manufacturer claims, equipment only; clearances and switchgear rooms not sourced)',
  pue:'register: pue (LBNL 2023; Uptime 2025 industry survey)', lf:'register: load_factor (Fan et al. 2007)',
- cap:'register: liquid_capture (LBNL 2014, NREL — direct-to-chip 48–75%; air-cooled: no primary figure)',
+ cap:'register: liquid_capture (LBNL 2014 — direct-to-chip 57–75%: 57–59% typical, 67–75% best; air-cooled: no primary figure)',
  cop:'register: cop (DEA 2026 waste-heat heat pumps to 70 °C, 1–3 MW: 3.0–3.6; observed at Meta Odense, 27 → 70 °C: 4.5 in 2020; from 2021 Fjernvarme Fyn reports Meta\'s heat pumps together with others, about 3.9 combined — Fjernvarme Fyn annual reports)', fuel:'register: fuel_on_site (NFC 2020 Table 4.3.13.4.-B; fuel rate a manufacturer claim; Uptime ≥ 12 h)',
  svc:'register: service_class (BC Hydro primary guide; EPCOR connection guide)', homes:'register: homes_heated (NRCan CEUD residential, 2018–22 average)',
  grid:'register: grid_co2 (NIR 2026 Annex 7, consumption intensity 2024)', neu:'By-law 9552 Sch. A, C, s. 2.1 (consolidated 1 Jan 2026); service area traced ±45 m',
@@ -286,7 +286,7 @@ function fitsView(){
   <h3>What that size needs</h3><dl>
   <dt>Power at full load</dt><dd>${rng(fac[0],fac[1],'MW')} at the meter (servers × PUE 1.4–1.55); this sizes the grid connection and the cooling plant</dd><dt>Power on average</dt><dd>${rng(fac[0]*R.lf,fac[1]*R.lf,'MW')} (about ${Math.round(R.lf*100)}% of full load over a year); this sets the yearly energy</dd>
   <dt>Plant space</dt><dd>${rng(pl[0]*mw,pl[1]*mw,'m²')} with ${coolerFor(false).name}; ${rng(plR[0]*mw,plR[1]*mw,'m²')} with heat recovery — equipment only, before clearances</dd>
-  <dt>Standby fuel</dt><dd>${A.gens==='none'?'none: no generators chosen':`${rng(fuel[0],fuel[1],'L')} for 12 h; ${pos==='ground'?`a first-storey storage room may hold ${fmt(R.fuelLimit.first)} L`:pos?`a basement or upper-storey storage room may hold ${fmt(R.fuelLimit.low)} L (tanks of 2,500–20,000 L) or 45,000 L (tanks over 20,000 L)`:`a protected storage room may hold ${fmt(R.fuelLimit.first)} L on the first storey, or in a basement or upper storey ${fmt(R.fuelLimit.low)} L (tanks of 2,500–20,000 L) or 45,000 L (tanks over 20,000 L)`} (NFC 2020 Table 4.3.13.4.-B)${fuel[1]>(pos==='ground'||!pos?R.fuelLimit.first:45000)?' — <span class="draft">more than one room or an outdoor tank</span>':''}`}</dd>
+  <dt>Standby fuel</dt><dd>${A.gens==='none'?'none: no generators chosen':`${rng(fuel[0],fuel[1],'L')} for 12 h, Uptime's minimum; ${rng(fuel[0]*2,fuel[1]*4,'L')} at the 24–48 h operators report (claims). Tanks feeding emergency generators fall under CSA B139 (not read: paywalled ?), not the fire code's Part 4 (NFC 2020 Note A-4.1.1.1.(3)(b)). For comparison, Part 4 lets a protected storage room hold ${fmt(R.fuelLimit.first)} L on the first storey and ${fmt(R.fuelLimit.low)} L in a basement or upper storey (Table 4.3.13.4.-B)`}</dd>
   <dt>Electrical service</dt><dd>${esc(svc)}</dd>
   ${f.cpcn?`<dt>Grid</dt><dd class="draft">Downtown supply area (downtown peninsula east to Nanaimo St): no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures.</dd>`:''}
   ${pos==='upper'?`<dt>Floor strength</dt><dd class="draft">Office floors above grade are designed for 2.4 kPa; equipment rooms need at least 3.6 kPa, and data halls their actual load — likely strengthening.</dd>`:''}
@@ -335,7 +335,7 @@ async function recvView(){
       `Heat-pump electricity = heat out ÷ COP: ${n0(r.avail[0])} ÷ ${R.cop[1]} = ${n0(r.hp[0])} MWh; ${n0(r.avail[1])} ÷ ${R.cop[0]} = <b>${n0(r.hp[1])} MWh</b>.`,
       `Homes: heat ÷ (${R.homeMWh[f.city]} MWh of energy a home buys for heating × 0.85 boiler efficiency) a year = ${n1(r.homes[0])}–<b>${n1(r.homes[1])}</b>.`,
       `Carbon: heat-pump electricity × ${R.grid[f.city]} g/kWh = ${n1(r.co2[0])}–<b>${n1(r.co2[1])} t CO₂e</b>.`],
-      'Load factor: Fan et al. 2007. Capture: LBNL 2014, NREL (direct-to-chip). COP: DEA 2026 waste-heat heat pumps to 70 °C (3.0–3.6) and observed at Meta Odense (4.5, 2020). Homes: NRCan CEUD residential, 2018–22 average. Grid: NIR 2026.')}`; }
+      'Load factor: Fan et al. 2007. Capture: LBNL 2014 (direct-to-chip). COP: DEA 2026 waste-heat heat pumps to 70 °C (3.0–3.6) and observed at Meta Odense (4.5, 2020). Homes: NRCan CEUD residential, 2018–22 average. Grid: NIR 2026.')}`; }
   { const EC=BD.ECON; if(EC){ const v=EC.heatVal(f.city), pe=EC.elec[f.city], nb=v-pe/R.cop[1], nw=v-pe/R.cop[0];
     h+=`<p class="sub"><span class="draft">${esc(`The circle is the heat search's 3 km reach, a limit on street routing; the cost of each pipe decides who could take the heat. `+(nb<=0?`At ${f.city==='edm'?'Alberta':'BC'} prices the heat pump's electricity costs more than the gas the heat would replace ($${nw.toFixed(1)} to $${nb.toFixed(1)} per MWh), so no route pays back at any distance; each card shows what would have to change.`:`At ${f.city==='van'?'BC':'Alberta'} prices the heat is worth ${nw<0?`−$${(-nw).toFixed(1)} (COP 3.0: the heat pump's electricity costs more than the gas) to $${nb.toFixed(1)} (COP 4.5)`:`$${nw.toFixed(1)}–${nb.toFixed(1)}`} per MWh after the heat pump; each receiver's own break-even distance is on its card.`))}</span></p>`; } }
   h+=`${src('reach')}${src('recv')}<p class="sub" style="margin-top:10px">${f.city==='van'?'Vancouver pools and rinks are not separate records in the national database; recreation centres may contain them. Hospital records on one campus are shown as one site. Private housing and offices are not mapped yet.':'Edmonton care homes and most hospitals have no location in the national record; community league halls are shown apart from recreation centres (Vancouver has no such category); outdoor pools are marked summer-only; private housing and offices are not mapped yet.'}</p>
@@ -371,7 +371,7 @@ function calc(o,f,near,nets){
     const net=nets.find(n=>n.inside&&n.edge>=50&&n.src==='van9552'); if(o.to==='net'&&net) r.credit=r.avail.map(v=>v*R.neuCredit);
   }
   r.fuel=[fac[0]*1000*R.fuelHours*R.fuelLkWh,fac[1]*1000*R.fuelHours*R.fuelLkWh];
-  r.jobs=[Math.max(1,o.mw*f.m2MW[0]/R.hallShare[1]/R.jobsM2),Math.max(1,o.mw*f.m2MW[1]/R.hallShare[0]/R.jobsM2)];
+  /* jobs dropped 30 Oct 2026 (J.B.: not relevant to the tool) */
   return r;
 }
 /* M61: Edmonton Bylaw 14600 ss. 19–22 "zoned for use as residential" (not defined there). Read with Zoning Bylaw 20001 s. 1.8.10: a residential Zone"s
@@ -404,7 +404,7 @@ async function optionsView(){
    ['The operator',[
      ['Servers',o=>o.mw.toFixed(1)+' MW'],
      ['Plant space',o=>rng(o.r.plant[0],o.r.plant[1],'m²')+' (equipment only)'],
-     ['Standby fuel, 12 h',o=>BD.S.answers.gens==='none'?'none (no generators chosen)':rng(o.r.fuel[0],o.r.fuel[1],'L')],
+     ['Standby fuel, 12 h minimum (24–48 h typical, claims)',o=>BD.S.answers.gens==='none'?'none (no generators chosen)':rng(o.r.fuel[0],o.r.fuel[1],'L')],
      ['Zoning path',()=>`${state(zState)}${esc(f.status.t)}${zs==='no'?(f.city==='van'?' — about 15 months to a Vancouver decision':' — the City targets 160 calendar days for a complex rezoning (about 5.5 months, after a pre-application meeting), then a Council public hearing'):''}`]]],
    ['The utility and the grid',[
      ['Power at full load',o=>rng(o.r.fac[0],o.r.fac[1],'MW')],['Power on average',o=>rng(o.r.fac[0]*R.lf,o.r.fac[1]*R.lf,'MW')],
@@ -421,7 +421,6 @@ async function optionsView(){
      ['Heat-pump electricity',o=>o.recover?rng(o.r.hp[0]/1000,o.r.hp[1]/1000,'GWh/yr')+' → '+rng(o.r.co2[0],o.r.co2[1],'t CO₂e/yr'):'—'],
      ['Against what it replaces',o=>o.recover?`${state('cj')}depends on how the receivers heat now (gas, electric, district)`:'—']]],
    ['Neighbours',[[noiseRow(f)[0],()=>noiseRow(f)[1]],['Generator testing',()=>f.city==='van'?'exempt if ≤ 1 h a month in daytime, ≤ 80 dBA':'—']]],
-   ['Workers',[['Operating jobs',o=>rng(o.r.jobs[0],o.r.jobs[1],'')+' (Virginia ratio, transferred)']]],
   ];
   const fut=o=>[['As planned','the table above'],['Tenant changes cooling',o.recover?'back to air: heat offered drops to none':'to liquid: heat could be offered'],['Tenant leaves',o.recover?'receivers fall back on their own heating at full peak':'nothing depends on it'],['Receiver leaves',o.recover?`all heat goes back to the ${BD.dryName()} — keep their full size`:'—']].map(([a,b])=>`<div><b>${a}</b> <span class="sub">${b}</span></div>`).join('');
   let h=tabBar('opts')+`<h2>Three options, side by side, in no order</h2>
@@ -433,7 +432,7 @@ async function optionsView(){
   h+=`</tbody></table></div>
   <h3>Four futures</h3><div class="opts">${opts.map(o=>`<div class="opt"><div class="kind">${o.id.toUpperCase()}</div>${fut(o)}</div>`).join('')}</div>
   <div class="legend2">${state('met')}met ${state('chg')}met with a change ${state('not')}not met ${state('cj')}not yet known</div>
-  ${src('pue')}${src('lf')}${src('cap')}${src('cop')}${src('homes')}${src('grid')}${net?src('neu'):''}${src('noise')}${src('jobs')}
+  ${src('pue')}${src('lf')}${src('cap')}${src('cop')}${src('homes')}${src('grid')}${net?src('neu'):''}${src('noise')}
   <div class="draftnote">Ranges carry the register's confidence; "not yet known" names what is missing.</div>`;
   $('#side').innerHTML=h; document.body.classList.add('wide'); wireTabs(); BD.draw();
   if(BD.scene3d) BD.scene3d.showOptions(opts.map(o=>({id:o.id,mw:o.mw,name:o.name,recover:o.recover,to:o.to,n:o.id==='c'?14:6,plant:plantPerMW(o.recover)[1]*o.mw,
@@ -563,7 +562,7 @@ const s3=k=>`<div class="src">${badge(k==='lf'?'lf2':k)}${esc(SRC3[k])}</div>`;
 function energyView(){
   const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=[fac[0]*8760*R.lf,fac[1]*8760*R.lf];
   const roof=roofArea(f), plant=plantPerMW(false)[1]*mw, share=Math.min(0.9,roof?plant/roof:0);
-  const kwp=[roof*0.66*(1-share)*0.70*0.16,roof*0.66*(1-share)*0.70*0.20], yld=f.city==='van'?[892,1006]:[947,1243], pvMWh=kwp.map((v,i)=>v*yld[i]/1000);
+  const kwp=[roof*0.66*(1-share)*0.70*0.16,roof*0.66*(1-share)*0.70*0.20], yld=f.city==='van'?[892,1007]:[944,1244], pvMWh=kwp.map((v,i)=>v*yld[i]/1000);
   const co2=MWh.map(v=>v*R.grid[f.city]/1000);
   const cost=f.city==='van'?[MWh[0]*1000*0.0679+fac[0]*1000*13.83*12,MWh[1]*1000*0.0679+fac[1]*1000*13.83*12]:null;
   const Pg=f.M&&f.M.plant&&f.M.plant.s, gInst=Pg&&Pg.g?Pg.gN*Pg.g.mw:null; // installed sets, spares included (sweep M39)
@@ -576,7 +575,7 @@ function energyView(){
   <h3>Solar on its own roof</h3><dl><dt>Roof</dt><dd>${fmt(roof)} m², of which plant takes about ${Math.round(share*100)}%</dd><dt>Panels</dt><dd>${rng(kwp[0],kwp[1],'kWp')} → ${rng(pvMWh[0],pvMWh[1],'MWh/yr')}</dd><dt>Share of its own use</dt><dd>${rng(pvMWh[0]/MWh[1]*100,pvMWh[1]/MWh[0]*100,'%')} — a small share at data-centre densities</dd></dl>${s3('pv')}
   <h3>What it could offer the grid</h3><dl>
   <dt>Who decides</dt><dd>${state('cj')}only whoever runs the computing; in a shared (colocation) building that is each tenant. Training runs can pause at checkpoints; live services cannot.</dd>
-  <dt>The batteries it already has</dt><dd>${rng(ups[0],ups[1],'MWh')} for minutes (1–5 min of runtime, half kept for outages) — fast grid support, not a 4-hour peak; BC Hydro's storage incentive excludes an existing UPS</dd>
+  <dt>The batteries it already has</dt><dd>${rng(ups[0],ups[1],'MWh')} for minutes (1–5 min of runtime; half kept for outages is our assumption ?) — fast grid support, not a 4-hour peak; BC Hydro's storage incentive excludes an existing UPS</dd>
   <dt>A battery added for the grid</dt><dd>1 MW for 4 h takes ${fmt(4000/49)}–${fmt(4000/19)} m²; BC Hydro pays $50/kW a season for winter peak relief (fossil generators excluded)</dd>
   <dt>EV charging, if 1 MW were set aside</dt><dd>${fmt(1000/19.2)}–${fmt(1000/(0.5*7.4))} Level 2 stalls (7.4 kW table example to 19.2 kW maximum, WSU; from all charging at once to half at once, the share found for fast-charging sites, Silber et al. 2024), about ${fmt(1000/19.2*(f.city==="edm"?23.4:22))}–${fmt(1000/(0.5*7.4)*(f.city==="edm"?23.4:22))} m² of parking</dd></dl>${s3('ctl')}${s3('ups')}${s3('batt')}${s3('dr')}${s3('ev')}
   <h3>Standby generators</h3><dl><dt>Testing</dt><dd>about 4 full-load hours a year: ${rng(gen[0]*0.706/1000,gen[1]*0.706/1000,'t CO₂')} and ${rng(gen[0]*14.6/1000,gen[1]*14.6/1000,'kg NOₓ')} a year, testing every installed set (AP-42 factors for uncontrolled diesel engines)</dd></dl>${s3('gen')}
@@ -634,7 +633,7 @@ function materialsView(){
     `Servers: ${mw} MW × 1,000 ÷ 0.6 kW each = <b>${n0(servers)}</b>.`,
     `Electronic waste: ${n0(servers)} servers × 21.2–26.3 kg ÷ 6 years ÷ 1,000 = <b>${rng(ew[0],ew[1],'t/yr')}</b>.`,
     `Copper: ${mw} MW × 20–40 t per MW = <b>${n0(cu[0])}–${n0(cu[1])} t</b>; the same study puts nearly 3 t per MW at rack level.`,
-    `Embodied carbon, servers: ${n0(servers)} × 4.177 t × 10–15% manufacturing ÷ 6 years = <b>${rng(eit[0],eit[1],'t CO₂e/yr')}</b>.`,
+    `Embodied carbon, servers: ${n0(servers)} × 4.177 t × 10–15% manufacturing (?) ÷ 6 years = <b>${rng(eit[0],eit[1],'t CO₂e/yr')}</b>.`,
     A.built==='existing'?'':`Embodied carbon, building: ${n0(f.gross[1])} m² × 0.461 t/m² = <b>${n0(eb)} t CO₂e</b>.`].filter(Boolean),
     'Servers: LBNL 2024. Waste: server masses, 6-year refresh. Copper: Copper Development Association (industry). Embodied: Dell R760 LCA (manufacturer); building median 461 kg/m².')}
   `;
@@ -666,21 +665,20 @@ function socialView(){
   const d=BD.recv[f.city]||{pts:[]}; const homes=d.pts.filter(p=>p.t==='housing'&&Math.hypot(p.x-f.c[0],p.y-f.c[1])<=200).reduce((t,p)=>t+(p.u||0),0);
   const key='bd-notes-'+S.city+'-'+S.sel.id; let notes=''; try{ notes=localStorage.getItem(key)||''; }catch(e){}
   let h=tabBar('social')+`<h2>What neighbours would hear, see and feel</h2><p class="draft">Described as experienced, not scored. Measured where the data allows; your site observations sit beside it, labelled as yours.</p>
-  <h3>Sound</h3><dl><dt>Cooling plant</dt><dd>${n} ${CU.name} (as laid out, spares included), rated ${rng(lw[0],lw[1],'dBA')} together (${CU.name==='dry coolers'?'dry-cooler ratings at full fan speed, manufacturer claims':CU.name==='air-cooled chillers'?'air-cooled chiller ratings, low-noise to standard, manufacturer claim':'air-cooled chiller ratings used as a stand-in: no rating found for this kind'})</dd>
+  <h3>Sound</h3><dl><dt>Cooling plant</dt><dd>${n} ${CU.name} (as laid out, spares included), rated ${rng(lw[0],lw[1],'dBA')} together (${CU.name==='dry coolers'?'dry-cooler ratings at full fan speed, manufacturer claims':CU.name==='air-cooled chillers'?'air-cooled chiller ratings for two Vertiv models (FH3135, FIZ135), manufacturer claims; the lower one not yet indexed ?':'air-cooled chiller ratings used as a stand-in: no rating found for this kind'})</dd>
   <dt>Night limit</dt><dd>${f.city==='van'?`from this ${srcCls} zone: ${limQ} dBA at a quiet-zone neighbour, ${limO} dBA at any other`:'50 dBA next to homes, 60 dBA next to other uses'}</dd><dt>Quiet-zone limit reached at</dt><dd>${fmt(dist[0])}–${fmt(dist[1])} m from the plant, before walls, barriers or enclosures</dd>
-  <dt>Neighbours over their limit</dt><dd>${within[0]}–${within[1]} buildings within 600 m (low-noise to standard units), each judged against the limit for its own zone: ${f.city==='van'?`${limQ} dBA in a quiet zone, ${limO} dBA elsewhere`:'50 dBA next to homes, 60 dBA next to other uses'}${within[1]?` — ${byCls.quiet} in quiet${f.city==='van'?' zones':' (residential) zones'}, ${byCls.other} elsewhere${byCls.assumed?`, ${byCls.assumed} in mixed-use or Direct Control zones (residential limit assumed: the bylaws do not settle these)`:''}${byCls.unknown?`, ${byCls.unknown} with no parcel record (quiet limit used)`:''}`:''}. In the 3D view, red: over even with low-noise units; accent: over only with standard units.</dd>
+  <dt>Neighbours over their limit</dt><dd>${within[0]}–${within[1]} buildings within 600 m (quieter to louder unit rating), each judged against the limit for its own zone: ${f.city==='van'?`${limQ} dBA in a quiet zone, ${limO} dBA elsewhere`:'50 dBA next to homes, 60 dBA next to other uses'}${within[1]?` — ${byCls.quiet} in quiet${f.city==='van'?' zones':' (residential) zones'}, ${byCls.other} elsewhere${byCls.assumed?`, ${byCls.assumed} in mixed-use or Direct Control zones (residential limit assumed: the bylaws do not settle these)`:''}${byCls.unknown?`, ${byCls.unknown} with no parcel record (quiet limit used)`:''}`:''}. In the 3D view, red: over even with the quieter rating; accent: over only with the louder rating.</dd>
   <dt>Low hum</dt><dd>a tonal low-frequency sound adds 5 dBA in Alberta's rule for power plants and substations (AUC Rule 012, used here as a benchmark; no rule covers it for a data centre) — the kind neighbours describe most</dd></dl>${s3('snd')}${s3('lf')}${src('noise')}
   <h3>The edge</h3><dl><dt>Standoff</dt><dd>new facilities keep about 10 m between the building and the public (45 m unless access control is in place; Ontario government standard) — a fence, bollards or a blank setback, as experienced from the street</dd>
   <dt>Ground floor</dt><dd>${f.envAssumed?'not known: this zone\'s rules are not yet read':(f.envU&&f.envU.ground)?'this zone keeps the ground floor free of data storage: it could meet the street':'nothing in the zone requires another use at grade'}</dd>
   <dt>Watched area</dt><dd>${state('cj')}seen only on site: cameras and signs visible from public space, recorded as one person's account</dd>
   <dt>Light at night</dt><dd>${f.city==='van'?'Vancouver sets no lux limit, but bars an outdoor light that shines directly onto a residential window across the street or next door and unreasonably disturbs the neighbour (Untidy Premises By-law 4548 s. 7)':'Edmonton requires light directed downward and away (no number)'}; the international reference is 10 lx before and 2 lx after curfew at a window (CIE 150 via ILP guidance; not yet verified)</dd></dl>${s3('so')}${s3('watch')}${s3('light')}
-  <h3>Who is near</h3><dl><dt>Non-market homes within 200 m</dt><dd>${f.city==='van'?`${fmt(homes)} (City list; private housing not counted)`:'not known: no non-market housing list is loaded for Edmonton'}</dd>${peopleRows(f,dist)}<dt>Work</dt><dd>${(()=>{ const lo=mw*f.m2MW[0]/R.hallShare[1]/R.jobsM2, hi=mw*f.m2MW[1]/R.hallShare[0]/R.jobsM2; return hi<1?'fewer than 1':rng(Math.max(1,lo),hi,''); })()} operating jobs (Virginia ratio, transferred)</dd></dl>${s3('ppl')}${src('jobs')}
+  <h3>Who is near</h3><dl><dt>Non-market homes within 200 m</dt><dd>${f.city==='van'?`${fmt(homes)} (City list; private housing not counted)`:'not known: no non-market housing list is loaded for Edmonton'}</dd>${peopleRows(f,dist)}</dl>${s3('ppl')}
   ${mathBox([
-    `Cooling units: power at the meter ${n1(fac)} MW, about one unit per MW → <b>${n}</b> unit${n>1?'s':''} (an assumption).`,
+    `Cooling units: power at the meter ${n1(fac)} MW → <b>${n}</b> unit${n>1?'s':''}, from the plant sizing (${CU.name}, one spare included).`,
     `Together: Lw per unit ${LU[0]}–${LU[1]} dBA, + 10 × log₁₀(${n} units) = <b>${n1(lw[0])}–${n1(lw[1])} dBA</b>.`,
-    `Distance where the night limit is reached: r = 10^((Lw − 8 − ${lim}) ÷ 20) = <b>${n0(dist[0])}–${n0(dist[1])} m</b> (free field over hard ground, no walls or barriers).`,
-    `Jobs: ${mw} MW × ${n0(f.m2MW[0])}–${n0(f.m2MW[1])} m² hall per MW ÷ hall share ${R.hallShare[1]}–${R.hallShare[0]} ÷ ${R.jobsM2} m² per job = ${n1(mw*f.m2MW[0]/R.hallShare[1]/R.jobsM2)}–<b>${n1(mw*f.m2MW[1]/R.hallShare[0]/R.jobsM2)}</b>.`],
-    'Sound: Lp = Lw − 20 log r − 8 (hemispherical spreading); unit ratings from manufacturer data (Vertiv for chillers, our conversion from Lp at 1 m; Güntner, Thermokey for dry coolers). Limits: Noise Control By-law 6555 / Bylaw 14600. Jobs: Virginia JLARC 2024, transferred.')}
+    `Distance where the night limit is reached: r = 10^((Lw − 8 − ${lim}) ÷ 20) = <b>${n0(dist[0])}–${n0(dist[1])} m</b> (free field over hard ground, no walls or barriers).`],
+    'Sound: Lp = Lw − 20 log r − 8 (hemispherical spreading); unit ratings from manufacturer data (Vertiv for chillers, our conversion from Lp at 1 m; Güntner, Thermokey for dry coolers). Limits: Noise Control By-law 6555 / Bylaw 14600.')}
   <h3>Your observations on site</h3><textarea id="notes" rows="5" style="width:100%;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;padding:8px;color:var(--fg)" placeholder="What did you hear, see and feel at the edge? Time of day, where you stood.">${esc(notes)}</textarea><div class="src">Kept in this browser only; shown as your observation, never as a measurement.</div>
   <div class="draftnote">Sound is a screening estimate: manufacturer-rated levels, no barriers, ground or buildings.</div>`;
   $('#side').innerHTML=h; wireTabs(); $('#notes').oninput=e=>{ try{ localStorage.setItem(key,e.target.value); }catch(err){} }; BD.draw();

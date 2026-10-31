@@ -52,7 +52,7 @@ function nearSub(f){ if(!SUB) return null; const named=(SUB.named&&SUB.named[f.c
 BD.nearSub=nearSub;
 /* ---------- electricity ---------- */
 function solar(f){ const lay=BD.pvLayout&&BD.pvLayout(f); if(!lay||!lay.kwp[1]) return null; const pv=BD._pv, c=f.city;
-  const yl=pv?[pv[c].horizontal.reduce((s,v)=>s+v,0),pv[c].latitude.reduce((s,v)=>s+v,0)]:(c==='van'?[892,1006]:[947,1243]);
+  const yl=(c==='van'?[892,1007]:[944,1244]); /* 30 Oct 2026: NRCan's published annual values (data/nrcan_pv_annual.json); the monthly table sums 0–3 kWh differently from rounding */
   const M=f.M, z0=((M&&(M.roofH||M.H))||4)+0.5, pts=lay.slots.map(r=>BD.centroid(r)), sh=roofShade(f,pts,z0), keepF=sh?1-sh.loss:1;
   const kwp=lay.kwp, mwh=[kwp[0]*yl[0]/1000*keepF,kwp[1]*yl[1]/1000*keepF], cw=X.pv.cost(kwp[1]), capex=[kwp[0]*1000*cw[0],kwp[1]*1000*cw[1]], om=[kwp[0]*X.pv.om,kwp[1]*X.pv.om];
   const v=ECON().elec[c], k=crf(rate(),X.pv.life);
@@ -104,7 +104,7 @@ function waterRate(c){ if(c==='van') return {r:X.water.van,known:true,txt:'City 
   const o=X.water.edmOld; return {r:[o.w[0]+o.ww[0]+o.san,o.w[1]+o.ww[1]+o.san],known:false,txt:'EPCOR 2026 commercial rates not read: placeholder from the 2022–23 commercial water tiers ($0.95–1.61), the proposed 2025 wastewater treatment ($0.46–1.15) and the proposed sanitary rate ($1.12)'}; }
 function towerUse(f,outside){ const R=E().R, mw=A().mw||1, MWh=mw*R.pue[1]*8760*R.lf, MWh0=mw*R.pue[0]*8760*R.lf; const hyb=outside==='hybrid', share={van:0.124,edm:0.104}[f.city]; if(outside==='dry') return null;
   const evap=MWh*1.5*(hyb?share:1), evap0=MWh0*1.5*(hyb?share:1); return {evap,evap0,mk:[evap0*1.2,evap*2]}; } /* 30 Oct 2026: low end at PUE 1.4, high end at 1.55 */
-function rain(f,outside){ const roof=E().roofArea(f), mm=f.city==='van'?1159.5:422.5, wet=f.city==='van'?124:80, v=roof*mm/1000*0.8, tank=roof*wet/1000*0.8; const t=towerUse(f,outside);
+function rain(f,outside){ const roof=E().roofArea(f), mm=f.city==='van'?1159.5:422.5, wet=f.city==='van'?124:82.7, v=roof*mm/1000*0.8, tank=roof*wet/1000*0.8; const t=towerUse(f,outside);
   const used=t?Math.min(v,t.mk[0]):0; const wr=waterRate(f.city); if(!used) return {v,tank,used:0,wr};
   const cap=[tank*X.tank.cost[0],tank*X.tank.cost[1]], lc=[crf(rate(),X.tank.life[1])*cap[0]/used,crf(rate(),X.tank.life[0])*cap[1]/used];
   return {v,tank,used,cap,lc,wr,pay:[cap[0]/(used*wr.r[1]),cap[1]/(used*wr.r[0])]}; }
@@ -115,7 +115,7 @@ function waterSecs(f){ const sec=BD.sec, out=A().outside||'dry', wr=waterRate(f.
     `<dl><dt>Who is nearby</dt><dd>${nearCT(f)}</dd><dt>How much</dt><dd>${t?`${fmt(t.mk[0])}–${fmt(t.mk[1])} m³ of make-up a year (evaporation × 1.2–2, at 2–6 cycles; FEMP)`:`${BD.dryName()} use no water`}</dd><dt>Price</dt><dd>${esc(wr.txt)}</dd>
      <dt>Each cooling choice</dt><dd>${all.map(x=>`${x.o==='dry'?'dry coolers':x.o==='hybrid'?'hybrid coolers':'cooling towers'}: ${x.t?`${fmt(x.t.mk[0])}–${fmt(x.t.mk[1])} m³, ${money(x.t.mk[0]*wr.r[0])}–${money(x.t.mk[1]*wr.r[1])} a year`:'none'}`).join('; ')}. Dry coolers trade water for electricity and space (see the set-up cards)</dd></dl>`);
   h+=sec('x-rain','Rainwater for cooling',!r.used?`${fmt(r.v)} m³ of rain a year; ${out==='dry'?`${BD.dryName()} have no use for it`:'—'}`:`$${r.lc[0].toFixed(2)}–${r.lc[1].toFixed(2)} per m³ over its life, against $${wr.r[0].toFixed(2)}–${wr.r[1].toFixed(2)} for city water${wr.known?'':' (placeholder)'}`,
-    `<dl><dt>How much</dt><dd>${fmt(r.v)} m³ of rain on the roof a year (ECCC Normals × 0.8 runoff, assumed); tank about ${fmt(r.tank)} m³, one wet month (assumed)</dd><dt>Who takes it</dt><dd>${r.used?`the cooling: up to ${fmt(r.used)} m³ a year`:`${BD.dryName()} use none; toilets and irrigation only (demand not known)`+''}</dd>
+    `<dl><dt>How much</dt><dd>${fmt(r.v)} m³ of rain on the roof a year (ECCC Normals × 0.8 runoff, assumed); tank about ${fmt(r.tank)} m³, one wet month (${f.city==='van'?'124 mm, October':'82.7 mm, July'}, ECCC Normals; sizing a tank to one month is our assumption)</dd><dt>Who takes it</dt><dd>${r.used?`the cooling: up to ${fmt(r.used)} m³ a year`:`${BD.dryName()} use none; toilets and irrigation only (demand not known)`+''}</dd>
      <dt>What it is worth</dt><dd>${esc(wr.txt)}</dd>${r.used?`<dt>What it costs</dt><dd>${money(r.cap[0])}–${money(r.cap[1])} for the tank and pumps: $${X.tank.cost[0]}–${fmt(Math.round(X.tank.cost[1]))} per m³ of storage (City of Vancouver toolkit 2014, ±30%, to US EPA 2013 with pumps and controls, US$ converted, no inflation adjustment); tanks warranted 15–30 years (US DOE FEMP)</dd>
      <dt>Cost against worth</dt><dd><span class="k">$${r.lc[0].toFixed(2)}–${r.lc[1].toFixed(2)} per m³</span> against $${wr.r[0].toFixed(2)}–${wr.r[1].toFixed(2)}</dd><dt>Years to pay back</dt><dd>${yrs(r.pay[0])} to ${yrs(r.pay[1])}</dd>`:''}
      <dt>Best set-up found</dt><dd>${(()=>{ const ok=all.filter(x=>x.r.used).sort((a,b)=>a.r.lc[0]-b.r.lc[0]); return ok.length?`${ok[0].o==='towers'?'cooling towers':'hybrid coolers'} use the most rain (${fmt(ok[0].r.used)} m³ a year, $${ok[0].r.lc[0].toFixed(2)}–${ok[0].r.lc[1].toFixed(2)} per m³); they also buy the most water`:'none: with no tower water to replace, rain has no use here'; })()}</dd></dl>`);
