@@ -1,0 +1,840 @@
+{
+ "arch_nbc6331": {
+  "where_read": "local copies data/raw/codes/nbc.txt (6.3.3.1, Note A-6.3.3.1.(2)), bcbc2024.txt, nbc_ab2023.txt",
+  "items": [
+   {
+    "item": "6.3.3.1.(2) a)-d) quote",
+    "verdict": "DISAGREE",
+    "evidence": "Figures right, but quote d) stops mid-clause: code reads 'd) 3 m horizontally or vertically from occupiable outdoor spaces, excluding maintenance spaces.' Quote should carry the exclusion."
+   },
+   {
+    "item": "Note A-6.3.3.1.(2) (>15 min, examples, winds/adjacent structures)",
+    "verdict": "AGREE",
+    "evidence": "'more than fifteen minutes'; 'main entries, balconies, patios, decks, green roofs and other public assembly areas'; 'may need to be increased due to local conditions such as prevailing winds, adjacent structures'"
+   },
+   {
+    "item": "same in BCBC 2024 and NBC(AE) 2023",
+    "verdict": "AGREE",
+    "evidence": "identical 6.3.3.1.(2) text in bcbc2024.txt l.39484 and nbc_ab2023.txt l.37696 (the 7.6 m intake version nearby is 6.2.3 evaporative heat rejection, a different clause)"
+   },
+   {
+    "item": "scope flag: generator exhaust is interpretation",
+    "verdict": "AGREE",
+    "evidence": "(2) covers products of combustion 'other than those referred to in Sentence (1)' (oil-, gas-, solid-fuel-burning appliances). A diesel generator burns oil; whether it is an 'appliance' under (1) (vented per installation standard) or falls to (2) is not stated. Flag (?) must stay."
+   }
+  ],
+  "new_text": "RULE: National Building Code of Canada 2020, Div. B 6.3.3.1.(2) (same in BCBC 2024 and NBC(AE) 2023, local copies): vented products of combustion other than from oil-, gas- and solid-fuel-burning appliances discharged 'not less than a) 2.15 m above sidewalks and driveways, b) 3 m from outdoor air intakes, c) 3 m horizontally or vertically from doors and operable windows, and d) 3 m horizontally or vertically from occupiable outdoor spaces, excluding maintenance spaces'; Note A-6.3.3.1.(2): occupiable outdoor spaces = occupied >15 min, e.g. main entries, balconies, patios, decks, green roofs, public assembly areas; distances may need to increase for winds and adjacent structures. Application to generator engine exhaust is our reading (?) — data/raw/codes/nbc.txt ‖ SCOPE (check 2, 31 Oct 2026): Generator engine exhaust is not named; keep as interpretation (?). ‖ CHECK 3 (31 Oct 2026, fixed): quote d) completed with 'excluding maintenance spaces'; a diesel genset may instead fall under (1) (oil-burning), so the reading stays (?)",
+  "kind_change": null
+ },
+ "arch_ottawaOccLoad": {
+  "where_read": "ottawa.ca page (WebFetch 31 Oct 2026); NBC 2020, BCBC 2024, NBC(AE) 2023 Table 3.1.17.1 local copies",
+  "items": [
+   {
+    "item": "Ottawa values 0.75/0.95/0.40/1.10/1.85/2.80, n.d., OBC",
+    "verdict": "AGREE",
+    "evidence": "page rows exact; 'dining, alcoholic beverage and cafeteria space 1.10'; 'exhibition halls other than those classified in Group E 2.80'; no date; cites Ontario Building Code"
+   },
+   {
+    "item": "check 2 correction: NBC/BCBC dining 1.20, no exhibition row",
+    "verdict": "AGREE",
+    "evidence": "nbc.txt l.10568 and bcbc2024.txt l.10184 'dining, beverage and cafeteria space 1.20'; no exhibition-hall row in NBC table; NBC(AE) 2023 also 1.20 (l.9284)"
+   },
+   {
+    "item": "scope flag: Ontario values; use NBC/BCBC in BC/AB",
+    "verdict": "AGREE",
+    "evidence": "correct"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_r2_carbonTrustCTV058": {
+  "where_read": "Carbon Trust PDF (WebFetch 31 Oct 2026; direct download blocked by proxy, not pursued)",
+  "items": [
+   {
+    "item": "check 2 NOT FOUND 'government-funded' -> dropped",
+    "verdict": "AGREE",
+    "evidence": "back matter: 'The update of this publication has been funded through the Carbon Trust Green Business Fund'; no government statement"
+   },
+   {
+    "item": "p.24 28-30ºC; Table 3; air 1ºC above water",
+    "verdict": "AGREE",
+    "evidence": "'Swimming pool water is usually heated to 28-30ºC' after page marker 'Hospitality 24'; Table 3 Conventional 28, Leisure 29, Hydrotherapy 32-40, Spa 40 (CIBSE Guide G 2004); 'maintained at 1ºC above the water temperature'"
+   },
+   {
+    "item": "p.25 payback, spa/full-cover context",
+    "verdict": "AGREE",
+    "evidence": "paragraph opens 'Remember to put a cover on spa pools and jacuzzis too.' and ends 'payback period of 18 months to three years', on printed p.25"
+   },
+   {
+    "item": "kind_change (Green Business Fund, not government)",
+    "verdict": "AGREE",
+    "evidence": "already applied in current text"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_r2_chau2009": {
+  "where_read": "ScienceDirect abstract page (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "check 2 correction: figures from section snippets, not abstract",
+    "verdict": "AGREE",
+    "evidence": "abstract says only 'an average-sized greenhouse in British Columbia'; 'Lower Mainland of BC', 7.4/7.5 MW, 7.5 ha, C$1,459,234, C$8.25/GJ all in Section snippets"
+   },
+   {
+    "item": "bibliographic data",
+    "verdict": "AGREE",
+    "evidence": "Applied Energy 86(3):364-371, Mar 2009, doi 10.1016/j.apenergy.2008.05.010"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_r2_claIndustry": {
+  "where_read": "laundryassociation.org page (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "1,000-5,000 sq ft, 2014 avg 2,170; 3-8 TPD; ~29,500",
+    "verdict": "AGREE",
+    "evidence": "all verbatim"
+   },
+   {
+    "item": "optional kind_change to industry association claim",
+    "verdict": "AGREE",
+    "evidence": "page: 'the only national trade association for the coin laundry industry'; current label already says 'trade association'; no change needed"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_r2_e3s710": {
+  "where_read": "E3S reference page (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "check 2 correction: Benakcha Solar Energy 303:114107, 2026",
+    "verdict": "AGREE",
+    "evidence": "ref. 8: Y. Benakcha, M. Labat, I. Hazyuk, S. Ginestet, title as given, Solar Energy 303, 114107 (2026)"
+   },
+   {
+    "item": "710:02002, 54th AiCARR, 7 May 2026, doi; no authors on page",
+    "verdict": "AGREE",
+    "evidence": "confirmed"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_r2_giessenPauli2007": {
+  "where_read": "Stadtwerke Giessen page (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "check 2 NOT FOUND '/yr' on 90,000 kWh",
+    "verdict": "AGREE",
+    "evidence": "'Around 90 thousand kWh of heat are generated with the system.' no period"
+   },
+   {
+    "item": "7 t/day; 200->~100; 50->85; steam 180",
+    "verdict": "AGREE",
+    "evidence": "all verbatim; dated 27.07.2007"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_r2_gnwtInuvik2014": {
+  "where_read": "iti.gov.nt.ca file (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "check 2 NOT FOUND issuer",
+    "verdict": "AGREE",
+    "evidence": "no publisher line or logo text; document names the 'Canada/GNWT Growing Forward' programme and 'ITI agriculture staff' only; inference note is right"
+   },
+   {
+    "item": "former arena; ~140 plots; since 1999",
+    "verdict": "AGREE",
+    "evidence": "verbatim"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_r2_li2021Review": {
+  "where_read": "d-nb.info deposit (WebFetch); Springer DOI page link.springer.com/doi/10.1007/s12273-020-0669-3 (WebFetch 31 Oct 2026, reached via search)",
+  "items": [
+   {
+    "item": "check 2 UNREACHABLE: Building Simulation 14:421-440, 2021",
+    "verdict": "DISAGREE",
+    "evidence": "Springer page: Building Simulation vol 14, issue 3, pp 421-440, issue date June 2021, published online 22 Aug 2020. Original citation was right; the (?) can go. Deposit copy reads 2020 because it is the online-first version."
+   },
+   {
+    "item": "600-6,000 kWh/m2 (Trianti-Stourna 1998); Kampel ~3,991 kWh/m2; area basis not stated",
+    "verdict": "AGREE",
+    "evidence": "verbatim in deposit; denominator not defined"
+   }
+  ],
+  "new_text": "PEER-REVIEWED (review): Li Y., Nord N., Huang G. et al., Swimming pool heating technology: A state-of-the-art review, Building Simulation 14(3):421-440, Jun 2021 (online 22 Aug 2020; deposit copy dated 2020), doi:10.1007/s12273-020-0669-3 (read from German National Library deposit): s.1 'The annual energy use of a swimming pool facility varies from 600 kWh/m2 to 6,000 kWh/m2' (citing Trianti-Stourna 1998); Kampel et al. 'around 3,991 kWh/m2' (Norway); area basis not stated; no peak W/m2; no HX supply temperature — https://d-nb.info/1219408131/34 ‖ CHECK 2 (31 Oct 2026, fixed): quotes confirmed; volume/pages/2021 not shown in deposit copy (it reads 2020), publisher page not reached ‖ CHECK 3 (31 Oct 2026, fixed): vol 14(3), pp 421-440, 2021 confirmed on the Springer DOI page",
+  "kind_change": null
+ },
+ "arch_r2_lufaAhuntsic": {
+  "where_read": "Lufa blog page and montreal.lufa.com/en/farms (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "32,000 sq ft; 2010 vs farms page 31 000 / 2011",
+    "verdict": "AGREE",
+    "evidence": "blog: 'In 2010, we broke roof on our 32,000-square-foot farm'; farms page: Ahuntsic '31 000 square feet', '2011'"
+   },
+   {
+    "item": "no date on page; date from URL",
+    "verdict": "AGREE",
+    "evidence": "only a 2026 copyright footer"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_r2_oro2018": {
+  "where_read": "UdL portal record (WebFetch 31 Oct 2026); Li et al. deposit",
+  "items": [
+   {
+    "item": "check 2 NOT FOUND month",
+    "verdict": "AGREE",
+    "evidence": "portal gives 2018 only; no abstract"
+   },
+   {
+    "item": "metadata; Li et al. 18%",
+    "verdict": "AGREE",
+    "evidence": "vol 36, pp 185-203, doi 10.1016/J.SCS.2017.10.012; Li s.4.2.3 'the operating cost of the system was reduced by 18%'"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_r2_phiNonRes2013": {
+  "where_read": "passiv.de PDF (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "<=15 kWh/(m2a) or <=10 W/m2; TFA; 13 Sep 2013",
+    "verdict": "AGREE",
+    "evidence": "verbatim"
+   },
+   {
+    "item": "scope flag: whole-building target, not room peak load",
+    "verdict": "AGREE",
+    "evidence": "criteria apply to the building as a whole (TFA-weighted); 'Single units inside a multi-storey building cannot be certified'"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_r2_schnAquaPhysio2024": {
+  "where_read": "SCHN PDF (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "2020-212 v2, 5 Feb 2024; p.3 Background 32-36°C, no standard",
+    "verdict": "AGREE",
+    "evidence": "verbatim; no reference attached to the range"
+   },
+   {
+    "item": "kind_change HOSPITAL PROCEDURE",
+    "verdict": "AGREE",
+    "evidence": "issuer is the SCHN Policy Procedure and Guideline Committee of a hospital network; 'hospital procedure' is more exact than 'government health procedure'"
+   }
+  ],
+  "new_text": "HOSPITAL PROCEDURE (public health network, Australia): Aquatic Physiotherapy Services - SCH, Procedure 2020-212 v2, Sydney Children's Hospitals Network (NSW Health), effective 5 Feb 2024: Background p.3 'For optimal therapeutic benefit the temperature of the water is maintained between 32° - 36°C' (no standard cited) — https://resources.schn.health.nsw.gov.au/policies/policies/pdf/2020-212.pdf ‖ CHECK 3 (31 Oct 2026, fixed): kind relabelled to hospital procedure; figures re-confirmed",
+  "kind_change": "HOSPITAL PROCEDURE (public health network, Australia)"
+ },
+ "arch_r2_torontoCooling2021": {
+  "where_read": "toronto.ca PDF (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "rev. 28 Jul 2021; 50% or 1,000 (whichever less); O. Reg. 213/07; 2 m",
+    "verdict": "AGREE",
+    "evidence": "verbatim"
+   },
+   {
+    "item": "issuer Toronto Public Health",
+    "verdict": "AGREE",
+    "evidence": "header names no issuer; text refers to 'Toronto Public Health requirements' (inferred)"
+   },
+   {
+    "item": "scope flag: lapsed pandemic cap",
+    "verdict": "AGREE",
+    "evidence": "correct"
+   }
+  ],
+  "new_text": "GOVERNMENT GUIDE (pandemic rule, Ontario): COVID-19 Guidance for Cooling Rooms, Toronto Public Health (inferred; header names no issuer), rev. 28 Jul 2021: capacity 'does not exceed 50% capacity or 1,000 people (whichever is less)', 50% of maximum occupant load under O. Reg. 213/07; 2 m distancing — https://www.toronto.ca/wp-content/uploads/2020/05/958d-COVID-19_Fact-Sheet_Cooling-Rooms.pdf ‖ SCOPE (check 2, 31 Oct 2026): Pandemic-era capacity cap, now lapsed; not a design occupancy rule for a refuge room ‖ CHECK 3 (31 Oct 2026, ok): figures re-confirmed; issuer marked as inferred",
+  "kind_change": null
+ },
+ "arch_r2_trcOpl2017": {
+  "where_read": "CEC e-filing PDF TN 216326 (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "check 2 NOT FOUND 'coin laundries excluded' -> reworded",
+    "verdict": "AGREE",
+    "evidence": "s.2: COL named only in describing the earlier CASE report ('multi-family laundromats (MFL), coin-operated laundromats (COL), and on-premises laundromats (OPL)'); COL is not in the study's list of 11 OPL sectors assessed; s.5: dorm coin dryers 'classified as multi-family dryers'. Current wording is right but can be more exact."
+   },
+   {
+    "item": "88 lb; ~22,300 dryers",
+    "verdict": "AGREE",
+    "evidence": "'an average dryer capacity of 88 pounds'; 'approximately 22,300 installed clothes dryers in California'"
+   }
+  ],
+  "new_text": "CONSULTANT REPORT for utility (US benchmark): On-Premises Laundromat Dryers Market Survey, TRC Energy Services for PG&E, Mar 2015, rev. Feb 2017, CEC docket 17-AAER-01 (TN 216326): Executive Summary average installed OPL dryer capacity 88 lb; ~22,300 OPL dryers in California; coin-operated laundromats (COL) named as a separate market from OPL (s.2, citing the earlier CASE report) and not among the 11 OPL sectors assessed; no explicit exclusion — https://efiling.energy.ca.gov/GetDocument.aspx?tn=216326 ‖ CHECK 2 (31 Oct 2026, fixed): 88 lb and 22,300 confirmed; 'coin laundries excluded' not stated, reworded ‖ CHECK 3 (31 Oct 2026, ok): wording on COL made exact; figures re-confirmed",
+  "kind_change": null
+ },
+ "arch_r2_trianti1998": {
+  "where_read": "manuscript.isc.ac record (WebFetch); reference list of Benakcha et al., arXiv:2512.02586 (WebFetch 31 Oct 2026); doi.org not tried",
+  "items": [
+   {
+    "item": "check 2 NOT FOUND vol 27(2)",
+    "verdict": "DISAGREE",
+    "evidence": "record shows no volume; Benakcha et al. reference list gives 'Energy Build. 27, 123–135' with no issue. Volume 27 now has a second-hand source; issue (2) still unverified."
+   },
+   {
+    "item": "check 2 UNREACHABLE DOI",
+    "verdict": "DISAGREE",
+    "evidence": "Benakcha et al. list doi 10.1016/S0378-7788(97)00041-8 (second-hand; publisher page not read)"
+   },
+   {
+    "item": "nine authors, title, pp 123-135, 1998; abstract has no kWh/m2",
+    "verdict": "AGREE",
+    "evidence": "confirmed; abstract has no numbers at all"
+   }
+  ],
+  "new_text": "PEER-REVIEWED (metadata only; paywalled): Trianti-Stourna E., Spyropoulou K., Theofylaktos C., Droutsa K., Balaras C.A., Santamouris M., Asimakopoulos D.N., Lazaropoulou G., Papanikolaou N., Energy conservation strategies for sports centers: Part B. Swimming pools, Energy and Buildings 27(2 ?):123-135, 1998, doi:10.1016/S0378-7788(97)00041-8 (vol and DOI per Benakcha et al. arXiv:2512.02586 reference list; publisher page not read): energy audits of Greek indoor pools; abstract gives no kWh/m2 — https://manuscript.isc.ac/Inventory/10/418958.htm ‖ CHECK 2 (31 Oct 2026, fixed): title, authors, pages, year, no kWh/m2 confirmed; volume/issue and DOI not shown on record (?) ‖ CHECK 3 (31 Oct 2026, fixed): vol 27 and DOI corroborated by a citing paper; issue still unverified",
+  "kind_change": null
+ },
+ "arch_r2_vaLaundry2022": {
+  "where_read": "WBDG PDF (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "s.3.G lb/bed/day 18/20/12/8",
+    "verdict": "DISAGREE",
+    "evidence": "figures right, but the list is not in item G: Section 3 items run A-G and the list follows an unlettered lead-in 'Assume the following soiled linen quantities per bed per day (PB/PD):' after item G"
+   },
+   {
+    "item": "NTDG 1.15, BG 1.35; 260 days; 7 h/day, 1,820 h; Clean Linen 1,000-2,600; Receiving 300-1,500 NSF",
+    "verdict": "AGREE",
+    "evidence": "confirmed (s.3.C; s.3; s.5.B.6; s.5.B.1)"
+   },
+   {
+    "item": "scope flag: US hospital benchmark only",
+    "verdict": "AGREE",
+    "evidence": "correct"
+   }
+  ],
+  "new_text": "DESIGN GUIDE (US government benchmark): PG-18-9 Space Planning Criteria, Chapter 408 Environmental Management Service (EMS) Laundry and Linen Operation, US Department of Veterans Affairs (CFM), 1 Mar 2022: s.3.C net-to-department gross 1.15, building gross 1.35; s.3 (unlettered list after item G) soiled linen lb/bed/day general hospital 18, teaching 20, psychiatric 12, nursing home 8; s.3 '260 days of operation per year', equipment 7 h/day, 1,820 h/yr; s.5.B-5.C room NSF by tier 1-100 ... 401-500 beds (e.g. Clean Linen Processing 1,000/1,400/1,800/2,200/2,600 NSF; Receiving 300-1,500 NSF) — https://www.wbdg.org/FFC/VA/VASPACE/spChapter408.pdf ‖ SCOPE (check 2, 31 Oct 2026): US hospital laundry space criteria applied to a community/commercial laundry in Canada: benchmark only ‖ CHECK 3 (31 Oct 2026, fixed): lb/bed/day list located after item G, not in it; all figures re-confirmed",
+  "kind_change": null
+ },
+ "arch_r2_vanUrbanAg2009": {
+  "where_read": "guidelines.vancouver.ca PDF (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "20 Jan 2009; 3.1.5(d)(iv) 9 x 12 ft; 3.1.3(a) 30%/>100 sq ft; 3.1.3(b) 24 sq ft",
+    "verdict": "AGREE",
+    "evidence": "verbatim"
+   },
+   {
+    "item": "scope flag: residential, analogy only",
+    "verdict": "AGREE",
+    "evidence": "mainly multiple-dwelling residential; also mentions offices, schools, community centres; analogy flag right"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_r2_yuan2021Review": {
+  "where_read": "Aaltodoc record (WebFetch); Benakcha et al. arXiv:2512.02586 (WebFetch 31 Oct 2026); Aalto full-text PDF blocked by fetch provenance rule, not pursued",
+  "items": [
+   {
+    "item": "bibliographic data",
+    "verdict": "AGREE",
+    "evidence": "Building and Environment 205:108189, 2021, doi 10.1016/j.buildenv.2021.108189; abstract has no numbers"
+   },
+   {
+    "item": "check 2 NOT FOUND: 208 MWh originates here",
+    "verdict": "AGREE",
+    "evidence": "still not seen in Yuan text. Benakcha preprint: 'In (Yuan et al., 2021), a medium-sized SP (with an approximate usable surface area of' ~500 m2) 'consumes around 124 MWh of electricity and 208 MWh of heat per year'. Attribution by Benakcha confirmed; (?) stays."
+   }
+  ],
+  "new_text": "PEER-REVIEWED (abstract only; full text fetch refused): Yuan X., Chen Z., Liang Y., Pan Y., Jokisalo J., Kosonen R., Heating energy-saving potentials in HVAC system of swimming halls: A review, Building and Environment 205:108189, 2021, doi:10.1016/j.buildenv.2021.108189; original of the '208 MWh of heat' per year figure that Benakcha et al. (arXiv:2512.02586) attribute to a 'medium-sized' pool of ~500 m2 usable area (not confirmed in Yuan full text ?) — https://aaltodoc.aalto.fi/items/ae170925-bab6-4adf-812d-4383e49987ce/full ‖ CHECK 3 (31 Oct 2026, ok): Benakcha attribution confirmed from arXiv text; Yuan full text still not read",
+  "kind_change": null
+ },
+ "arch_sep_abStandataESS": {
+  "where_read": "cochrane.ca/media/1265 PDF (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "check 2 correction: single system <=20 kWh, residential",
+    "verdict": "AGREE",
+    "evidence": "'at a dwelling unit or residential occupancy not exceeding 20 kWh for any single ESS'"
+   },
+   {
+    "item": "64-926 1), 2); 64-1100 4), 7), 8), 9), 10); 64-1002 2)",
+    "verdict": "AGREE",
+    "evidence": "all confirmed; 7) reads 'within 1 m of any window or door, other than a vehicular access door, of a dwelling unit or residential occupancy'"
+   },
+   {
+    "item": "scope flag: analogue only",
+    "verdict": "AGREE",
+    "evidence": "correct"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_sep_edmAST": {
+  "where_read": "edmonton.ca PDF (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "issuer",
+    "verdict": "DISAGREE",
+    "evidence": "header reads 'Edmonton Fire Rescue Services' / 'Edmonton Fire Rescue Fire Prevention'; 'Fire Prevention – Technical Services' appears only as the drawing-submission office"
+   },
+   {
+    "item": "all distances, <250,000L, 110%, posts, vents, drawings; no generators",
+    "verdict": "AGREE",
+    "evidence": "'Distances to building and property line for tank <250,000L: NFC(AE) 4.3.2.1'; rest verbatim"
+   },
+   {
+    "item": "scope flag: 80,000 L Alberta-specific",
+    "verdict": "AGREE",
+    "evidence": "nfc.txt l.9442 50 000 L vs nfc_ab2023.txt l.9989 80 000 L"
+   }
+  ],
+  "new_text": "GOVERNMENT GUIDE: Edmonton Fire Rescue Services, Fire Prevention (drawings to Fire Prevention – Technical Services), Aboveground Storage Tank Checksheet (rev. 15 Aug 2019; cites NFC(AE) 2019): tanks <250 000 L, Class II/IIIA '3m to property line', '1.5m to building if tank > 2500L and < 80,000L', 'Zero to building if tank < 2500L', 'Zero if the tank is CAN/ULC S655'; 1 m between tanks; 60 m fire access; containment 110%, wall no closer than 1.5 m to shell; collision posts 1 m from shell at 1500 mm o.c. (4.3.7.4(3)); vents 1.5 m from openings; engineered drawings if one tank >8 000 L or total >20 000 L. Does not mention generator tanks — https://www.edmonton.ca/programs_services/documents/AbovegroundStorageTankChecksheet.pdf ‖ SCOPE (check 2, 31 Oct 2026): 80,000 L matches NFC(AE) 2023 4.3.2.1.(6)(a) (local copy: 'not more than 80 000 L'), not NFC 2020/BCFC (50 000 L): Alberta-specific ‖ CHECK 3 (31 Oct 2026, fixed): issuer line corrected; figures re-confirmed",
+  "kind_change": null
+ },
+ "arch_sep_ezbIndustrial": {
+  "where_read": "local copy data/raw/edm/bylaw/b.txt",
+  "items": [
+   {
+    "item": "IBES 7.18 / ILES 7.17; IBES 7.19 / ILES 7.18; 5.120 1.1.4",
+    "verdict": "AGREE",
+    "evidence": "l.32290-32296, l.32594-32599, l.51725 verbatim"
+   },
+   {
+    "item": "scope flag: Edmonton South zones (3.65, 3.66); 5.120 1.1 non-industrial only",
+    "verdict": "AGREE",
+    "evidence": "contents l.171-172; 5.120 '1. Non-Industrial Development Standards ... 1.1. Non-Industrial development must comply with'"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_sep_nfc4321": {
+  "where_read": "local copies data/raw/codes/nfc.txt, nfc_ab2023.txt",
+  "items": [
+   {
+    "item": "4.3.2.1.(2), Table, (6), (7); 4.3.2.2-4.3.2.4; 4.3.5.2; 4.1.2.1.(3)",
+    "verdict": "AGREE",
+    "evidence": "all re-read verbatim (nfc.txt l.9388-9488, 9550-9565, 8129-8132)"
+   },
+   {
+    "item": "scope flag: NFC(AE) 2023 80 000 L",
+    "verdict": "AGREE",
+    "evidence": "nfc_ab2023.txt l.9989"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_sep_nfcAB4321": {
+  "where_read": "local copy data/raw/codes/nfc_ab2023.txt vs nfc.txt",
+  "items": [
+   {
+    "item": "4.1.1.1.(3)(b) 2 500 L same as NFC 2020",
+    "verdict": "AGREE",
+    "evidence": "nfc_ab2023.txt l.8636 = nfc.txt l.8097"
+   },
+   {
+    "item": "(6)(a) 80 000 L vs 50 000 L; (6)(b) zero <=2 500 L",
+    "verdict": "AGREE",
+    "evidence": "confirmed"
+   },
+   {
+    "item": "scope flag",
+    "verdict": "AGREE",
+    "evidence": "(6) is to a building on the same property; correct"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_sep_nfcTankVeh": {
+  "where_read": "local copy data/raw/codes/nfc.txt",
+  "items": [
+   {
+    "item": "4.11.1.1; 4.11.2.4.(2) 15 m; 4.11.3.1; 4.11.3.2",
+    "verdict": "AGREE",
+    "evidence": "l.12378-12426 verbatim"
+   },
+   {
+    "item": "4.6.8.7 no smoking within 7.5 m",
+    "verdict": "DISAGREE",
+    "evidence": "text: 'Smoking and non-fixed sources of ignition shall not be permitted within 7.5 m of a dispenser at a fuel-dispensing station' (check 2 noted, left unchanged)"
+   },
+   {
+    "item": "4.6.3.3 6 m",
+    "verdict": "AGREE",
+    "evidence": "(1)(d) '6 m horizontally from any fixed source of ignition' (article covers fixed dispensers for Class I liquids)"
+   },
+   {
+    "item": "4.7.4.1 7.5/4.5 m; scope flag (bulk plants, reading ?)",
+    "verdict": "AGREE",
+    "evidence": "4.7.1.1 applies where liquids 'are received in bulk quantities'; flag right"
+   }
+  ],
+  "new_text": "RULE: NFC 2020 Div. B: 4.11.1.1 applies to tank vehicles on a property covered by the Code; 4.11.2.4.(2) unattended >1 h only in a parking space 'not less than 15 m from a building'; 4.11.3.1 loading/unloading per 'applicable provisions in Subsection 4.7.4'; 4.11.3.2 separated from ignition sources as for dispensers (4.6.3.3: 6 m horizontally from any fixed source of ignition; 4.6.8.7: no smoking or non-fixed sources of ignition within 7.5 m); 4.7.4.1 (Section 4.7 Bulk Plants) fill stem to a tank, building or property line 7.5 m Class I, 4.5 m Class II/IIIA — whether 4.7.4.1 applies to a non-bulk-plant fill point is our reading (?) — data/raw/codes/nfc.txt ‖ SCOPE (check 2, 31 Oct 2026): 4.7.4.1 sits in Section 4.7 (Bulk Plants); its use for a data-centre fuel fill point via 4.11.3.1 is an interpretation, correctly flagged (?). ‖ CHECK 3 (31 Oct 2026, fixed): 4.6.8.7 wording completed; all else re-confirmed",
+  "kind_change": null
+ },
+ "arch_sep_vanCT2023": {
+  "where_read": "council.vancouver.ca r1.pdf (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "check 2 WRONG -> By-law 10201, failing to provide test result / response, $500",
+    "verdict": "AGREE",
+    "evidence": "Appendix C amends By-law Notice Enforcement By-law No. 10201; 2.2.11.6.(4)(b) 'Failure to provide a Legionella pneumophila test result' 500; (8) 'Failure to conduct required response to meet Legionella standards' 500 (discount 250, surcharge 250)"
+   },
+   {
+    "item": "RTS 15653; 30 towers at 16 facilities",
+    "verdict": "AGREE",
+    "evidence": "p.2 verbatim"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_sep_vanLoadingSupp": {
+  "where_read": "guidelines.vancouver.ca PDF (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "3.4(a), (c); Class B/C dimensions; last amended 16 Feb 2024",
+    "verdict": "AGREE",
+    "evidence": "verbatim"
+   },
+   {
+    "item": "1.4.1 sight lines for ramps only",
+    "verdict": "AGREE",
+    "evidence": "1.4.1 'Corner Cuts' sits under ramp design and refers to top and bottom of ramps"
+   },
+   {
+    "item": "kind_change: guidance ('should')",
+    "verdict": "AGREE",
+    "evidence": "design criteria use 'should'; corner cuts 'required'; no 'shall'"
+   }
+  ],
+  "new_text": "GOVERNMENT GUIDE: City of Vancouver, Parking By-law No. 6059 Design Supplement (bulletin, last amended Feb 2024; guidance wording \"should\", not by-law text): s. 3.4(a) at least one Class A loading space at grade accessed from the lane where required; 3.4(c) stair-free internal access from loading to uses; s. 3.3/Fig. 5 Class B 3.4 m × 10.2 m (aisle 6.1 m), Class C 3.6 m × 23.1 m (aisle 14.0 m); 1.4.1 pedestrian sight lines for ramps only; no rule on loading vs pedestrian entrances or play areas — https://guidelines.vancouver.ca/bulletins/bulletin-parking-loading-design-supplement.pdf ‖ CHECK 3 (31 Oct 2026, ok): guidance status noted; figures re-confirmed",
+  "kind_change": null
+ },
+ "arch_sep_vbbl22116": {
+  "where_read": "local copy data/raw/codes/vbbl2025_v1.txt",
+  "items": [
+   {
+    "item": "check 2 correction: Book II (Plumbing) as amended in Book I 7.1.5",
+    "verdict": "AGREE",
+    "evidence": "l.30103 and l.30121-30168: definition in 7.1.5.1 Division A amendments to Book II"
+   },
+   {
+    "item": "(1), (2), (4), (7), (8) Table, (9); no siting distance",
+    "verdict": "AGREE",
+    "evidence": "l.30782-30860 verbatim"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_sep_vchNelson2017": {
+  "where_read": "vancouver.ca PDF (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "page numbers p.4 (?) / p.6 (?)",
+    "verdict": "AGREE",
+    "evidence": "Rec. 2 nearest marker '-4-'; noise recommendation nearest '-5-' (signature before '-6-'); markers' position (header/footer) not clear, so (?) is right"
+   },
+   {
+    "item": "quotes; kind_change to letter; scope flag",
+    "verdict": "AGREE",
+    "evidence": "'does not support a causal relationship'; '(70 meters)'; Rec. 2 and 3 verbatim; letter dated February 17, 2017, 'RE: BC Hydro seed project'"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_sintefCleantex": {
+  "where_read": "sintef.no project page (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "2018-2021; 17 laundries; ~90 GWh; HT heat pumps",
+    "verdict": "AGREE",
+    "evidence": "verbatim ('approximately 90 GWh corresponding to 3500 houses')"
+   },
+   {
+    "item": "scope flag: Norwegian benchmark",
+    "verdict": "AGREE",
+    "evidence": "correct"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_sportEngPoolsApp1": {
+  "where_read": "cibse.org PDF (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "check 2 corrections: appendix title, May Revision 004, 50 x 19 m row",
+    "verdict": "AGREE",
+    "evidence": "'Appendix 1 Pool types and technical design issues'; appendix pages read 'May Revision 004' (main cover reads 'April Revision 004'); ASA National 50 x 19/21, 8 lanes"
+   },
+   {
+    "item": "lane widths and table",
+    "verdict": "AGREE",
+    "evidence": "p.1 2.0 m and 2.5 m verbatim; p.3 table matches"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_ubcSeedsPool2010": {
+  "where_read": "sustain.ubc.ca PDF (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "check 2 correction: HX from appended SES study (3 Oct 2008); 5,274 m2",
+    "verdict": "AGREE",
+    "evidence": "p.44 'Lap Pool Heat Exchanger HX-1,2' 4,482,500 BTU/h, SES Consulting 'UBC Aquatic Centre and Empire Pool Energy Study', 3 Oct 2008; 5,274 m2 in that study"
+   },
+   {
+    "item": "p.9, p.13, p.23 figures",
+    "verdict": "AGREE",
+    "evidence": "confirmed"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_unhcrShelterStandards": {
+  "where_read": "UNHCR print PDF (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "3.5 m2 warm; 4.5-5.5 m2 cold; Sphere 2018; 21 Jan 2026",
+    "verdict": "AGREE",
+    "evidence": "verbatim"
+   },
+   {
+    "item": "scope flag: benchmark only",
+    "verdict": "AGREE",
+    "evidence": "correct"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_uwexGhEnergy": {
+  "where_read": "UW-Extension PDF (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "orientation sentences; A3907-01; Sanford; 2011",
+    "verdict": "AGREE",
+    "evidence": "verbatim"
+   },
+   {
+    "item": "kind_change: 'government' loose",
+    "verdict": "AGREE",
+    "evidence": "publisher 'University of Wisconsin-Extension, Cooperative Extension'; '© 2011 by the Board of Regents of the University of Wisconsin System'; USDA only a partial funder"
+   }
+  ],
+  "new_text": "UNIVERSITY EXTENSION GUIDE (US, public university system): Reducing Greenhouse Energy Consumption: An Overview A3907-01, University of Wisconsin-Extension (Sanford), 2011: single-span 'length runs east–west'; gutter-connected run north–south — https://fyi.extension.wisc.edu/energy/files/2018/07/reducing_greenhouse_energy_consumption_-_an_overview.pdf ‖ CHECK 3 (31 Oct 2026, fixed): kind relabelled; figures re-confirmed",
+  "kind_change": "UNIVERSITY EXTENSION GUIDE (US, public university system)"
+ },
+ "arch_vanCD1acoustic": {
+  "where_read": "cd1-bylaws.vancouver.ca PDF (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "No. 11291, 7 Jul 2015; s.7 35/40/45 dB(A) 24 h Leq",
+    "verdict": "AGREE",
+    "evidence": "verbatim; site 5030-5080 Quebec Street"
+   },
+   {
+    "item": "scope flag: one site, dwelling units only",
+    "verdict": "AGREE",
+    "evidence": "correct"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_vanCouncil2022": {
+  "where_read": "council.vancouver.ca b6.pdf (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "check 2 WRONG -> request via UBCM",
+    "verdict": "AGREE",
+    "evidence": "'AND BE IT FURTHER RESOLVED THAT UBCM request that the Government of B.C. modify the B.C. Building Code ... specifications, including design and placement standards, and load-bearing requirements'; motion forwarded first to LMLGA, then UBCM"
+   },
+   {
+    "item": "check 2 NOT FOUND 'no standard then' -> inference",
+    "verdict": "AGREE",
+    "evidence": "only 'no incentives' stated"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_vanParkMotion50m2025": {
+  "where_read": "parkboardmeetings.vancouver.ca PDF (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "WHEREAS 3 quote; 2 Jun 2025",
+    "verdict": "AGREE",
+    "evidence": "'The recent decision regarding the replacement of the Vancouver Aquatic Centre (VAC) opts for a 25-metre pool,' ...; submitted by Commissioner Virdi; notice 12 May 2025"
+   },
+   {
+    "item": "kind_change: commissioner position, not Board decision",
+    "verdict": "AGREE",
+    "evidence": "motion text; outcome not in this document"
+   }
+  ],
+  "new_text": "BOARD MOTION (Commissioner Virdi; position, not a Board decision): Think 50 Metres motion, Vancouver Park Board, 2 Jun 2025: WHEREAS 3 VAC replacement \"opts for a 25-metre pool, falling short of a 50-metre facility\" — https://parkboardmeetings.vancouver.ca/2025/20250602/MOTION-Think50Metres-20250602.pdf ‖ CHECK 3 (31 Oct 2026, fixed): kind relabelled; quote re-confirmed",
+  "kind_change": "BOARD MOTION (commissioner position, not a Board decision)"
+ },
+ "arch_vanPvCriteria": {
+  "where_read": "guidelines.vancouver.ca/bulletins/S009_b.pdf — WebFetch client_error at site (31 Oct 2026)",
+  "items": [
+   {
+    "item": "title, DBL, Aug 2016",
+    "verdict": "STILL UNREACHABLE",
+    "evidence": "fetch failed again"
+   },
+   {
+    "item": "Sec. 2 crit. 9 2 ft from perimeter/peak",
+    "verdict": "STILL UNREACHABLE",
+    "evidence": "fetch failed"
+   },
+   {
+    "item": "crit. 6 gap <=150 mm",
+    "verdict": "STILL UNREACHABLE",
+    "evidence": "fetch failed"
+   },
+   {
+    "item": "Sec. 1 full permit if wall-mounted or flat",
+    "verdict": "STILL UNREACHABLE",
+    "evidence": "fetch failed; a different City PDF (solar-pv-permit-process.pdf) turned up in search but is not this source and was not substituted"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_weidner": {
+  "where_read": "ORA file and ORA record page ora.ox.ac.uk/objects/uuid:b3e7133c-... (WebFetch 31 Oct 2026; record reached via search this time)",
+  "items": [
+   {
+    "item": "journal/year not confirmed",
+    "verdict": "DISAGREE",
+    "evidence": "ORA record: journal article, Energy Conversion and Management vol 243, article 114336, 2021 (ORA date 5 Jun 2021), doi 10.1016/j.enconman.2021.114336, Elsevier; file is the accepted manuscript"
+   },
+   {
+    "item": "check 2 kind_change: peer review not confirmed",
+    "verdict": "DISAGREE",
+    "evidence": "ORA record states 'Peer reviewed'; PEER-REVIEWED label stands, add accepted-manuscript note"
+   },
+   {
+    "item": "conclusion 'more energy-intensive than greenhouses in all climates'",
+    "verdict": "AGREE",
+    "evidence": "verbatim in file"
+   }
+  ],
+  "new_text": "PEER-REVIEWED (accepted manuscript): Weidner T., Yang A., Hamm M.W., Energy optimisation of plant factories and greenhouses for different climatic conditions, Energy Conversion and Management 243:114336, 2021, doi:10.1016/j.enconman.2021.114336 (per ORA record): conclusions, plant factories 'more energy-intensive than greenhouses in all climates' — https://ora.ox.ac.uk/objects/uuid:b3e7133c-8501-4c13-a056-e75e96feb5df/files/rkk91fk967 ‖ CHECK 3 (31 Oct 2026, fixed): journal, volume, article no., DOI and peer review confirmed on ORA record",
+  "kind_change": null
+ },
+ "arch_yorkClear": {
+  "where_read": "york.com Insights page (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "check 2 WRONG title -> 'Making the Most of Air-Cooled Chiller Efficiency'",
+    "verdict": "AGREE",
+    "evidence": "page title verbatim; 10 Jun 2024"
+   },
+   {
+    "item": "clearances and test figures with qualifiers",
+    "verdict": "AGREE",
+    "evidence": "'more than 2.5%' / 'nearly 3%'; '3.5%' / 'more than 4.0%'; 'more than 4.5%' / 'more than 6.0%'"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_zon_AbLegRefs2026": {
+  "where_read": "alberta.ca PDF (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "check 2 NOT FOUND 'successor'",
+    "verdict": "AGREE",
+    "evidence": "document does not mention the Subdivision and Development Regulation at all"
+   },
+   {
+    "item": "MGA and Alta Reg 84/2022 listings; Jan 2026",
+    "verdict": "AGREE",
+    "evidence": "verbatim; no issuer line, LPRT SDAB training material, hosted on alberta.ca"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_zon_EdmZones": {
+  "where_read": "local copy data/raw/edm/bylaw/b.txt",
+  "items": [
+   {
+    "item": "check 2 WRONG IM 2.7.2 -> 'animal hospitals and shelters'",
+    "verdict": "AGREE",
+    "evidence": "l.6183"
+   },
+   {
+    "item": "check 2 correction BE 3.2.1 outdoor exception",
+    "verdict": "AGREE",
+    "evidence": "l.5888 'except that loading, waste ...'"
+   },
+   {
+    "item": "BE 3.3.1/3.7.1/3.12.1 500 m2; 3.16.1; 3.18; 5.3.2; IM 3.5.1, 3.2.2; IH 33%",
+    "verdict": "AGREE",
+    "evidence": "re-read l.5812-6440; confirmed"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_zon_Lprt2025": {
+  "where_read": "decisions.lprt.alberta.ca (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "check 2 WRONG 'allowed in part' -> 'appeal is allowed', varied",
+    "verdict": "AGREE",
+    "evidence": "para 38 'The appeal is allowed and the decision of conditional approval of the SA is varied as follows'; original conditions 4 (road/transit dedication) and 5 (clearing and levelling) deleted; reserve conditions kept"
+   },
+   {
+    "item": "paras 1, 11, 31; claim not decided",
+    "verdict": "AGREE",
+    "evidence": "confirmed; reasons do not rule on the consolidation claim"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ },
+ "arch_zon_MgaToc": {
+  "where_read": "calgary.ca m26.pdf (WebFetch 31 Oct 2026)",
+  "items": [
+   {
+    "item": "Current as of 1 Apr 2024; TOC 616/623/652/658; text cut off",
+    "verdict": "AGREE",
+    "evidence": "verbatim; this fetch ended at s.47(3), first 100,000 characters only; section texts not read"
+   },
+   {
+    "item": "kind_change note (King's Printer, third-party host)",
+    "verdict": "AGREE",
+    "evidence": "already in label sense; no change needed"
+   }
+  ],
+  "new_text": null,
+  "kind_change": null
+ }
+}
