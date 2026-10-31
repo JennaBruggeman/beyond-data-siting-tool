@@ -479,13 +479,6 @@
    ],
    "why": "engineering"
   },
-  "erf": {
-   "tier": "full",
-   "parties": [
-    "operator"
-   ],
-   "why": "industry metric"
-  },
   "heat_in_water": {
    "tier": "full",
    "parties": [],
@@ -552,13 +545,6 @@
    ],
    "why": "engineering"
   },
-  "wue": {
-   "tier": "full",
-   "parties": [
-    "operator"
-   ],
-   "why": "industry metric"
-  },
   "water_behind_electricity": {
    "tier": "community",
    "parties": [
@@ -594,13 +580,6 @@
     "neighbours"
    ],
    "why": "air near the site"
-  },
-  "refrigerant_co2e": {
-   "tier": "full",
-   "parties": [
-    "climate"
-   ],
-   "why": "small, technical"
   },
   "embodied_it": {
    "tier": "community",
@@ -1413,13 +1392,6 @@
    ],
    "why": "tax detail"
   },
-  "computing_served": {
-   "tier": "community",
-   "parties": [
-    "public"
-   ],
-   "why": "who the computing serves"
-  },
   "afterlife": {
    "tier": "community",
    "parties": [
@@ -1456,35 +1428,6 @@
     "neighbours"
    ],
    "why": "urban heat in the area"
-  },
-  "genset_emission_rate": {
-   "tier": "full",
-   "parties": [
-    "neighbours"
-   ],
-   "why": "engineering"
-  },
-  "air_screen_1h": {
-   "tier": "full",
-   "parties": [
-    "neighbours"
-   ],
-   "why": "method"
-  },
-  "no2_at_receptor": {
-   "tier": "full",
-   "parties": [
-    "neighbours"
-   ],
-   "why": "method"
-  },
-  "air_vs_objective": {
-   "tier": "resident",
-   "parties": [
-    "neighbours",
-    "public"
-   ],
-   "why": "air at neighbours against the limits"
   },
   "air_permit_trigger": {
    "tier": "community",
@@ -2017,10 +1960,6 @@
     "characterise"
    ],
    [
-    "erf",
-    "characterise"
-   ],
-   [
     "heat_in_water",
     "characterise"
    ],
@@ -2057,10 +1996,6 @@
     "characterise"
    ],
    [
-    "wue",
-    "characterise"
-   ],
-   [
     "water_behind_electricity",
     "characterise"
    ],
@@ -2078,10 +2013,6 @@
    ],
    [
     "generator_nox_pm",
-    "characterise"
-   ],
-   [
-    "refrigerant_co2e",
     "characterise"
    ],
    [
@@ -2529,10 +2460,6 @@
     "test"
    ],
    [
-    "computing_served",
-    "characterise"
-   ],
-   [
     "afterlife",
     "decide"
    ],
@@ -2551,22 +2478,6 @@
    [
     "uhi_context",
     "place"
-   ],
-   [
-    "genset_emission_rate",
-    "characterise"
-   ],
-   [
-    "air_screen_1h",
-    "characterise"
-   ],
-   [
-    "no2_at_receptor",
-    "characterise"
-   ],
-   [
-    "air_vs_objective",
-    "test"
    ],
    [
     "air_permit_trigger",
@@ -2855,14 +2766,6 @@
     "hp_electricity"
    ],
    [
-    "heat_captured",
-    "erf"
-   ],
-   [
-    "heat_rejected",
-    "erf"
-   ],
-   [
     "weather",
     "free_cooling_hours"
    ],
@@ -2885,14 +2788,6 @@
    [
     "evaporation",
     "blowdown"
-   ],
-   [
-    "blowdown",
-    "wue"
-   ],
-   [
-    "it_load_actual",
-    "wue"
    ],
    [
     "it_load_actual",
@@ -2921,10 +2816,6 @@
    [
     "backup_hours",
     "generator_nox_pm"
-   ],
-   [
-    "cooling_type",
-    "refrigerant_co2e"
    ],
    [
     "servers",
@@ -3635,10 +3526,6 @@
     "untaxed_equipment"
    ],
    [
-    "interconnection",
-    "computing_served"
-   ],
-   [
     "horizons",
     "afterlife"
    ],
@@ -3668,26 +3555,6 @@
    ],
    [
     "genset_test",
-    "genset_emission_rate"
-   ],
-   [
-    "genset_emission_rate",
-    "air_screen_1h"
-   ],
-   [
-    "air_screen_1h",
-    "no2_at_receptor"
-   ],
-   [
-    "no2_at_receptor",
-    "air_vs_objective"
-   ],
-   [
-    "air_screen_1h",
-    "air_vs_objective"
-   ],
-   [
-    "genset_emission_rate",
     "air_permit_trigger"
    ],
    [
@@ -4064,9 +3931,9 @@
    ]
   ]
  },
- "resident_count": 45,
- "community_count": 134,
- "full_count": 221,
+ "resident_count": 44,
+ "community_count": 132,
+ "full_count": 213,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {

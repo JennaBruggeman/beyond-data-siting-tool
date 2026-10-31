@@ -114,6 +114,9 @@ T = {
  'fire_water': (R, 'neighbours public city', 'firefighting water after an earthquake'),
 }
 ids = [n['id'] for n in D['nodes']]
+# parts J.B. dropped (register meta.dropped_quantities) leave the templates too
+_DROP = set(json.load(open(os.path.join(H, 'formula_register.json'), encoding='utf-8'))['meta'].get('dropped_quantities', {}))
+for _k in _DROP: T.pop(_k, None)
 missing = [i for i in ids if i not in T]; extra = [i for i in T if i not in ids]
 assert not missing and not extra, (missing, extra)
 parties = {p['id'] for p in D['parties']}
