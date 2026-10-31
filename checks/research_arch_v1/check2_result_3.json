@@ -1,0 +1,1372 @@
+{
+ "arch_sep_nfcAB4321": {
+  "where_read": "Local copy data/raw/codes/nfc_ab2023.txt (NFC 2023 Alberta Edition), compared with data/raw/codes/nfc.txt (NFC 2020)",
+  "claims": [
+   {
+    "claim": "4.1.1.1.(3)(b) 2 500 L carve-back, same as NFC 2020",
+    "verdict": "CONFIRMED",
+    "evidence": "AB: 'except for aboveground storage tanks with an individual capacity exceeding 2 500 L'; identical wording in nfc.txt line 8097",
+    "fix": ""
+   },
+   {
+    "claim": "Table 4.3.2.1 same values as NFC 2020",
+    "verdict": "CONFIRMED",
+    "evidence": "Both: 250 000 L 3 m; 500 000 L 4.5 m; 2 500 000 L 9 m; 5 000 000 L 12 m; >5 000 000 L 15 m",
+    "fix": ""
+   },
+   {
+    "claim": "4.3.2.1.(6)(a) AB: 1.5 m if not more than 80 000 L",
+    "verdict": "CONFIRMED",
+    "evidence": "'a) 1.5 m provided the tank capacity is not more than 80 000 L, or'",
+    "fix": ""
+   },
+   {
+    "claim": "NFC 2020 (6)(a): 50 000 L",
+    "verdict": "CONFIRMED",
+    "evidence": "nfc.txt: 'a) 1.5 m provided the tank capacity is not more than 50 000 L, or'",
+    "fix": ""
+   },
+   {
+    "claim": "(6)(b) zero if <=2 500 L",
+    "verdict": "CONFIRMED",
+    "evidence": "'b) zero provided the tank capacity is not more than 2 500 L.'",
+    "fix": ""
+   },
+   {
+    "claim": "(6) applies to Class II/IIIA tank to a building",
+    "verdict": "CONFIRMED",
+    "evidence": "'from a storage tank containing only Class II or IIIA liquids to a building on the same property'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Alberta edition applies in Alberta (Edmonton) only; (6) reduction is to a building on the same property, not to a property line.",
+  "new_text": null
+ },
+ "arch_sep_nfcTankVeh": {
+  "where_read": "Local copy data/raw/codes/nfc.txt (NFC 2020 Div. B)",
+  "claims": [
+   {
+    "claim": "4.11.1.1 applies to tank vehicles on a property covered by the Code",
+    "verdict": "CONFIRMED",
+    "evidence": "'This Section applies to tank vehicles when located on a property covered in this Code.'",
+    "fix": ""
+   },
+   {
+    "claim": "4.11.2.4.(2) unattended >1 h only in a parking space not less than 15 m from a building",
+    "verdict": "CONFIRMED",
+    "evidence": "'more than 1 h, but only in a parking space a) that is located not less than 15 m from a building'",
+    "fix": ""
+   },
+   {
+    "claim": "4.11.3.1 loading/unloading per applicable provisions in Subsection 4.7.4",
+    "verdict": "CONFIRMED",
+    "evidence": "'in conformance with the applicable provisions in Subsection 4.7.4.'",
+    "fix": ""
+   },
+   {
+    "claim": "4.11.3.2 separation from ignition sources as for dispensers (4.6.3.3, 4.6.8.7)",
+    "verdict": "CONFIRMED",
+    "evidence": "'by distances conforming to the requirements for dispensers in Articles 4.6.3.3. and 4.6.8.7.'",
+    "fix": ""
+   },
+   {
+    "claim": "4.6.3.3: 6 m horizontally from any fixed source of ignition",
+    "verdict": "CONFIRMED",
+    "evidence": "4.6.3.3.(1)(d) '6 m horizontally from any fixed source of ignition' (article is for fixed dispensers for Class I liquids)",
+    "fix": ""
+   },
+   {
+    "claim": "4.6.8.7: no smoking within 7.5 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'Smoking and non-fixed sources of ignition shall not be permitted within 7.5 m of a dispenser'",
+    "fix": "Optional: say 'no smoking or non-fixed ignition sources within 7.5 m'"
+   },
+   {
+    "claim": "4.7.4.1 fill stem to tank, building or property line 7.5 m Class I, 4.5 m Class II/IIIA",
+    "verdict": "CONFIRMED",
+    "evidence": "'horizontal distance from the fill stem to an aboveground storage tank, a building or a property line shall be not less than a) 7.5 m for Class I liquids, and b) 4.5 m for Class II and IIIA liquids.'",
+    "fix": ""
+   },
+   {
+    "claim": "4.7.4.1 in Section 4.7 Bulk Plants; applicability to non-bulk fill point is a reading",
+    "verdict": "CONFIRMED",
+    "evidence": "4.7.1.1 Section applies where liquids 'are received in bulk quantities and are stored or handled for the purpose of being distributed'; 4.7.4.1.(1) itself says 'At a loading or unloading facility for tank vehicles or tank cars'. Reading flag is correct.",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "4.7.4.1 sits in Section 4.7 (Bulk Plants); its use for a data-centre fuel fill point via 4.11.3.1 is an interpretation, correctly flagged (?).",
+  "new_text": null
+ },
+ "arch_sep_tsbcESS": {
+  "where_read": "WebFetch of the URL (live page)",
+  "claims": [
+   {
+    "claim": "Rescinded by Technical Safety BC on March 4, 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'This information bulletin was rescinded by Technical Safety BC on March 4, 2025.'",
+    "fix": ""
+   },
+   {
+    "claim": "No requirements stated",
+    "verdict": "CONFIRMED",
+    "evidence": "Page gives only reference IB-EL 2023-06, status Rescinded; no operative text",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sep_vanCT2023": {
+  "where_read": "WebFetch of the URL (PDF)",
+  "claims": [
+   {
+    "claim": "RTS 15653, 25 May 2023, for 13 Jun 2023",
+    "verdict": "CONFIRMED",
+    "evidence": "RTS 15653; report date May 25, 2023; meeting June 13, 2023",
+    "fix": ""
+   },
+   {
+    "claim": "Amends Building By-law 12511 for Legionella",
+    "verdict": "CONFIRMED",
+    "evidence": "Appendix A: 'A By-law to amend Building By-law No. 12511'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 2: in 2021 '30 cooling towers at 16 facilities, including two hospitals, reported Legionella pneumophila'",
+    "verdict": "CONFIRMED",
+    "evidence": "'30 cooling towers at 16 facilities, including two hospitals, reported Legionella pneumophila concentrations'",
+    "fix": ""
+   },
+   {
+    "claim": "Adds ticketable offences for failing to test or respond (2.2.11.6.(4)(b), (8))",
+    "verdict": "WRONG",
+    "evidence": "Appendix C amends By-law Notice Enforcement By-law No. 10201 (not 12511): 2.2.11.6.(4)(b) 'Failure to provide a Legionella pneumophila test result'; (8) 'Failure to conduct required response to meet Legionella standards'; $500 penalty",
+    "fix": "Offences are 'failing to provide a test result' and 'failing to do the required response', added to By-law Notice Enforcement By-law 10201 (Appendix C)"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT REPORT: City of Vancouver, Council report RTS 15653 (25 May 2023, for 13 Jun 2023), amending Building By-law 12511 for Legionella: p. 2 in 2021 '30 cooling towers at 16 facilities, including two hospitals, reported Legionella pneumophila'; Appendix C adds ticketable offences to By-law Notice Enforcement By-law 10201 for failing to provide a Legionella test result (Div. B 2.2.11.6.(4)(b)) or to do the required response (2.2.11.6.(8)), $500 each — https://council.vancouver.ca/20230613/documents/r1.pdf ‖ CHECK 2 (31 Oct 2026, fixed): ticket offences are added to By-law 10201 (Appendix C), and are for failing to provide a test result, not failing to test"
+ },
+ "arch_sep_vanLoadingSupp": {
+  "where_read": "WebFetch of the URL (PDF)",
+  "claims": [
+   {
+    "claim": "Parking By-law No. 6059 Design Supplement, last amended Feb 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "'Parking By-Law No. 6059 Design Supplement'; last amended February 16, 2024",
+    "fix": ""
+   },
+   {
+    "claim": "3.4(a) at least one Class A loading space at grade accessed from the lane where required",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least one (1) Class A loading space should be accommodated at-grade, accessed from the lane' (where required by the Parking By-law or area plan)",
+    "fix": ""
+   },
+   {
+    "claim": "3.4(c) stair-free internal access from loading to uses",
+    "verdict": "CONFIRMED",
+    "evidence": "'Convenient, internal, stair-free access to and from all land uses should be provided on mixed-use sites'",
+    "fix": ""
+   },
+   {
+    "claim": "Class B 3.4 x 10.2 m (aisle 6.1 m); Class C 3.6 x 23.1 m (aisle 14.0 m)",
+    "verdict": "CONFIRMED",
+    "evidence": "Fig. 5 table: B aisle 6.1, width 3.4, length 10.2; C aisle 14.0, width 3.6, length 23.1",
+    "fix": ""
+   },
+   {
+    "claim": "1.4.1 pedestrian sight lines for ramps only",
+    "verdict": "CONFIRMED",
+    "evidence": "'Where views to pedestrians would otherwise be obstructed, diagonal corner cuts or view portals are required.'",
+    "fix": ""
+   },
+   {
+    "claim": "No rule on loading vs pedestrian entrances or play areas",
+    "verdict": "CONFIRMED",
+    "evidence": "No such provision found in document",
+    "fix": ""
+   }
+  ],
+  "kind_change": "Keep GOVERNMENT GUIDE; note it is guidance ('should'), not by-law text.",
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sep_vbbl22116": {
+  "where_read": "Local copy data/raw/codes/vbbl2025_v1.txt (VBBL 2025, consolidated to 30 Sep 2026 v4.01, convenience copy)",
+  "claims": [
+   {
+    "claim": "By-law No. 14343, consolidated to 30 Sep 2026, convenience copy",
+    "verdict": "CONFIRMED",
+    "evidence": "'Bylaw #14343 ... Consolidated to September 30, 2026 (v4.01) Convenience Copy'",
+    "fix": ""
+   },
+   {
+    "claim": "Div. A 1.4.1.2 cooling tower definition (quoted)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Cooling tower means a direct (open circuit) cooling tower, indirect (closed circuit) cooling tower, evaporative condenser, adiabatic cooler which recirculates non-evaporated water, or fluid cooler that is part of a recirculated water system ...'. Location: Book I Part 7, 7.1.5 amendments to Book II (Plumbing) Div. A 1.4.1.2",
+    "fix": "Say Book II (Plumbing Systems)"
+   },
+   {
+    "claim": "Div. B 2.2.11.6.(1) operating permit to install or retain",
+    "verdict": "CONFIRMED",
+    "evidence": "'An operating permit shall be obtained for the installation of a cooling tower, or the retention of an existing cooling tower'",
+    "fix": ""
+   },
+   {
+    "claim": "(2) 1-year service contract",
+    "verdict": "CONFIRMED",
+    "evidence": "'a service contract must be in place ... for a minimum of 1 year'",
+    "fix": ""
+   },
+   {
+    "claim": "(4) notify CBO within 5 days of start-up/shut-down and of each Legionella test",
+    "verdict": "CONFIRMED",
+    "evidence": "'a) within 5 days of any start-up or shut down ... b) within 5 days of any Legionella pneumophila test result'",
+    "fix": ""
+   },
+   {
+    "claim": "(7) monthly testing, <=33 days apart",
+    "verdict": "CONFIRMED",
+    "evidence": "'each calendar month of operation, with not more than 33 days between samples'",
+    "fix": ""
+   },
+   {
+    "claim": "(8) Table 2.2.11.6 >1 000 CFU/mL: immediate notice to MHO, stop aerosol dispersion",
+    "verdict": "CONFIRMED",
+    "evidence": "'Immediately, give notice to the Chief Building Official, the medical health officer and the owner'; 'implement measures that will eliminate water dispersion by aerosol'",
+    "fix": ""
+   },
+   {
+    "claim": "(9) offline cleaning at least yearly",
+    "verdict": "CONFIRMED",
+    "evidence": "'a minimum of once every calendar year'",
+    "fix": ""
+   },
+   {
+    "claim": "No siting distance",
+    "verdict": "CONFIRMED",
+    "evidence": "2.2.11.6 (1)-(11) contain no distance requirement",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: Vancouver Building By-law 2025 (No. 14343, consolidated to 30 Sep 2026, convenience copy), Book II (Plumbing Systems) as amended in Book I 7.1.5: Div. A 1.4.1.2 'Cooling tower means a direct (open circuit) cooling tower, indirect (closed circuit) cooling tower, evaporative condenser, adiabatic cooler which recirculates non-evaporated water, or fluid cooler that is part of a recirculated water system …'; Div. B 2.2.11.6: (1) operating permit to install or retain a cooling tower; (2) 1-year service contract; (4) notify CBO within 5 days of start-up/shut-down and of each Legionella test result; (7) monthly L. pneumophila testing (<=33 days apart); (8) Table 2.2.11.6 responses (>1 000 CFU/mL: immediate notice to medical health officer, stop aerosol dispersion); (9) offline cleaning at least yearly. No siting distance — data/raw/codes/vbbl2025_v1.txt ‖ CHECK 2 (31 Oct 2026, fixed): all figures confirmed; added that the clauses are Book II (Plumbing) provisions"
+ },
+ "arch_sep_vchNelson2017": {
+  "where_read": "WebFetch of the URL (PDF); page numbers read from text extraction only",
+  "claims": [
+   {
+    "claim": "VCH, P. Daly, Chief Medical Health Officer, letter 17 Feb 2017",
+    "verdict": "CONFIRMED",
+    "evidence": "'Patricia Daly MD, FRCPC, Vice-President, Public Health and Chief Medical Health Officer'; February 17, 2017; subject 'RE: BC Hydro seed project'",
+    "fix": ""
+   },
+   {
+    "claim": "Substations under Nelson and Emery Barnes parks",
+    "verdict": "CONFIRMED",
+    "evidence": "cables 'will run under the two downtown parks to feed the respective substations'; 'at both Emery Park and Nelson Park the noise levels from the ventilation openings'",
+    "fix": ""
+   },
+   {
+    "claim": "Evidence 'does not support a causal relationship' for chronic effects",
+    "verdict": "CONFIRMED",
+    "evidence": "'The current body of evidence as a whole does not support a causal relationship for this and other chronic health impacts.'",
+    "fix": ""
+   },
+   {
+    "claim": "School site '70 meters' from cables",
+    "verdict": "CONFIRMED",
+    "evidence": "'the distance between the proposed new school building site and the underground transmission cables (70 meters)'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 4 Rec. 2 'Maximize distance ... Lord Roberts Annex (already done) and playfield'",
+    "verdict": "CONFIRMED",
+    "evidence": "Quote exact. Page uncertain: extraction places it between page markers '-3' and '-4'; markers appear to be footers (a '-6-' follows the signature), which fits p. 4",
+    "fix": "Mark page as p. 4 (?)"
+   },
+   {
+    "claim": "Rec. 3 locate highly used park features away from cables",
+    "verdict": "CONFIRMED",
+    "evidence": "'If necessary, strategically locate highly used park features away from the underground transmission cables'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 6 investigate noise mitigation of substation ventilation",
+    "verdict": "CONFIRMED",
+    "evidence": "'We also recommend further investigation of noise mitigation measures in the design of the substation ventilation system.' Page uncertain (between markers '-5' and '-6-')",
+    "fix": "Mark page as p. 6 (?)"
+   }
+  ],
+  "kind_change": "HEALTH AUTHORITY LETTER (site-specific advice), not a guide",
+  "scope_flag": "Site-specific advice on EMF from underground transmission cables feeding two particular substations; not a general siting rule for substations near schools or play areas.",
+  "new_text": "HEALTH AUTHORITY LETTER (site-specific): Vancouver Coastal Health, P. Daly, Chief Medical Health Officer, letter on BC Hydro underground substations under Nelson and Emery Barnes parks (17 Feb 2017): evidence 'does not support a causal relationship' for chronic effects; school site '70 meters' from cables; p. 4 (?) Rec. 2 'Maximize distance between the transmission cables and the proposed Lord Roberts Annex (already done) and playfield'; Rec. 3 locate highly used park features away from cables; p. 6 (?) investigate noise mitigation of the substation ventilation — https://vancouver.ca/files/cov/nelson-park-impact-assessment-vancouver-coastal-health-letter.pdf ‖ CHECK 2 (31 Oct 2026, fixed): quotes confirmed; kind is a letter, not a guide; page numbers not certain from text extraction"
+ },
+ "arch_sintefCleantex": {
+  "where_read": "WebFetch of the URL (live page)",
+  "claims": [
+   {
+    "claim": "Project 2018-2021",
+    "verdict": "CONFIRMED",
+    "evidence": "'2018 - 2021'",
+    "fix": ""
+   },
+   {
+    "claim": "17 laundries in Norway",
+    "verdict": "CONFIRMED",
+    "evidence": "'17 laundries around Norway'",
+    "fix": ""
+   },
+   {
+    "claim": "'Total annual energy demand is approximately 90 GWh'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Total annual energy demand is approximately 90 GWh'",
+    "fix": ""
+   },
+   {
+    "claim": "Aim 'replacing some of the fossil fuel steam boilers with high temperature heat pumps'",
+    "verdict": "CONFIRMED",
+    "evidence": "'By replacing some of the fossil fuel steam boilers with high temperature heat pumps'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Norwegian industrial laundries; benchmark outside Canada.",
+  "new_text": null
+ },
+ "arch_sportEngPoolsApp1": {
+  "where_read": "WebFetch of the URL (PDF)",
+  "claims": [
+   {
+    "claim": "Sport England 2013, Appendix 1 (title 'Layouts and dimensions')",
+    "verdict": "CONFIRMED",
+    "evidence": "'Swimming Pools Design Guidance Note', Appendix 1 'Pool types and technical design issues'; Sport England 2013, May Revision 004",
+    "fix": "Title of Appendix 1 as printed is 'Pool types and technical design issues'"
+   },
+   {
+    "claim": "p.1 'The minimum lane width is 2.0 m for 25 m pools'",
+    "verdict": "CONFIRMED",
+    "evidence": "'The minimum lane width is 2.0 m for 25 m pools.'",
+    "fix": ""
+   },
+   {
+    "claim": "'Competition pools ... lanes of 2.5 m width'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Competition pools used at regional, national and international levels should be provided with lanes of 2.5 m width.'",
+    "fix": ""
+   },
+   {
+    "claim": "p.3 learner 10-20 x 7 m",
+    "verdict": "CONFIRMED",
+    "evidence": "Learner pool 10.00-20.00 x 7.00, 2 lanes",
+    "fix": ""
+   },
+   {
+    "claim": "community 25 m x 8.5/10.5/12.5 m (4/5/6 lanes)",
+    "verdict": "CONFIRMED",
+    "evidence": "Community 25 m: 8.50/10.50/12.50, 4/5/6 lanes",
+    "fix": ""
+   },
+   {
+    "claim": "competition 25 x 13 m (6); 25 x 17 m (8)",
+    "verdict": "CONFIRMED",
+    "evidence": "Competition 25 x 13.00, 6 lanes; Short Course Championship 25 x 17.00, 8 lanes",
+    "fix": ""
+   },
+   {
+    "claim": "50 x 21 m and 50 x 25 m (8)",
+    "verdict": "CONFIRMED",
+    "evidence": "FINA National 50 x 21, 8 lanes; FINA International 50 x 25, 8 lanes; also ASA National 50 x 19/21 (lanes 2.25/2.5)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "DESIGN GUIDE (UK benchmark): Swimming Pools Design Guidance Note 2013, Appendix 1 Pool types and technical design issues, Sport England (May Revision 004; hosted by CIBSE), 2013: p.1 \"The minimum lane width is 2.0 m for 25 m pools\"; \"Competition pools ... lanes of 2.5 m width\"; p.3 table: learner 10-20 x 7 m (2 lanes); community 25 m x 8.5/10.5/12.5 m (4/5/6 lanes); competition 25 x 13 m (6); short course championship 25 x 17 m (8); 50 x 19/21 m (8, ASA national), 50 x 21 m and 50 x 25 m (8, FINA) — https://cibse.org/media/ncnpiecq/swimming-pools-2013-appendix-1.pdf ‖ CHECK 2 (31 Oct 2026, fixed): table values confirmed from PDF (garble note removed); appendix title and revision corrected; 50 x 19 m row added"
+ },
+ "arch_sportEngPoolsDGN": {
+  "where_read": "WebFetch of the URL (PDF, full text in two reads)",
+  "claims": [
+   {
+    "claim": "Sport England 2013, Rev 004, marked draft for discussion",
+    "verdict": "CONFIRMED",
+    "evidence": "'May Revision 004'; 'DRAFT FOR DISCUSSION'; '© Sport England 2013'",
+    "fix": ""
+   },
+   {
+    "claim": "p.10 25 x 8.5 m 4-lane water area 212.5 m2",
+    "verdict": "CONFIRMED",
+    "evidence": "'with a water area of 212.5 m2 would accommodate a maximum ... 71 bathers'",
+    "fix": ""
+   },
+   {
+    "claim": "pp.8,26 shallow >=0.9 m (1.0 m with learner pool), deep 1.8 or 2.0 m",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 8: 'a minimum shallow water depth of 0.9 m (if there is no learner pool) and a deep end of 1.8 m or 2.0 m'; 'increased to 1.0 m'. p. 26 not separately checked",
+    "fix": ""
+   },
+   {
+    "claim": "p.23 4-lane hall flat ceiling min clear 3.5 m, profiled 4.5-6.0 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'for a 25 x 8.5 m (4-lane) pool a minimum clear height of 3.5 m may be considered'; 'between 4.5 and 6.0 m at the highest point'",
+    "fix": ""
+   },
+   {
+    "claim": "p.38 changing/sanitary roughly equal to water area",
+    "verdict": "CONFIRMED",
+    "evidence": "'the changing and sanitary zone area would be equal to the water area that it serves' (early-stage rule of thumb)",
+    "fix": ""
+   },
+   {
+    "claim": "pp.44-45 example 25 x 13 m = 325 m2 + learner 13 x 7 m = 91 m2",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 45: 'Pool 1 Main pool 25 x 13m 325.00 m2'; 'Pool 2 Learner pool 13 x 7m 91.00 m2'; total 416 m2",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_statcanSCIEU2019": {
+  "where_read": "WebFetch of the URL (live table)",
+  "claims": [
+   {
+    "claim": "Table 2 title, 2019, all provinces, SCIEU, 5 Aug 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "'Average energy use intensity by commercial and institutional building activity type, all provinces, 2019'; released 2022-08-05",
+    "fix": ""
+   },
+   {
+    "claim": "Library or archives 1.01 GJ/m2",
+    "verdict": "CONFIRMED",
+    "evidence": "1.01",
+    "fix": ""
+   },
+   {
+    "claim": "Recreation centre 1.07",
+    "verdict": "CONFIRMED",
+    "evidence": "1.07",
+    "fix": ""
+   },
+   {
+    "claim": "Office (non-medical) 1.04",
+    "verdict": "CONFIRMED",
+    "evidence": "'Office space (excluding medical offices)' 1.04",
+    "fix": ""
+   },
+   {
+    "claim": "Restaurant 2.58",
+    "verdict": "CONFIRMED",
+    "evidence": "2.58",
+    "fix": ""
+   },
+   {
+    "claim": "All 1.31",
+    "verdict": "CONFIRMED",
+    "evidence": "All activity types 1.31",
+    "fix": ""
+   },
+   {
+    "claim": "Total energy, not heat only",
+    "verdict": "CONFIRMED",
+    "evidence": "Table is energy use intensity (all energy), GJ/m2; no end-use split",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_ubcSeedsPool2010": {
+  "where_read": "WebFetch of the URL (PDF)",
+  "claims": [
+   {
+    "claim": "Giffin J., UBC SEEDS, CEEN 596, 6 Dec 2010",
+    "verdict": "CONFIRMED",
+    "evidence": "Jeff Giffin, CEEN 596 Final Project Report, December 6, 2010",
+    "fix": ""
+   },
+   {
+    "claim": "p.9 indoor 50 x 25 m, outdoor 50 x 20 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'50 x 25 meter lap pool'; '50 x 20 meter outdoor pool, the Empire Pool'",
+    "fix": ""
+   },
+   {
+    "claim": "p.9 building 5,300 m2",
+    "verdict": "CONFIRMED",
+    "evidence": "'the 5,300m2 (57,000ft2) Aquatic Center'; appended SES study gives 5,274 m2",
+    "fix": ""
+   },
+   {
+    "claim": "p.13 28 C water, 22-24 C air",
+    "verdict": "CONFIRMED",
+    "evidence": "'The pool is maintained at 28°C year round and air temperatures range from 22‐24°C.'",
+    "fix": ""
+   },
+   {
+    "claim": "p.23 both pools 'approximately 14,000 GJ/yr'",
+    "verdict": "CONFIRMED",
+    "evidence": "'To achieve the goal of heating both pools approximately 14,000 GJ/yr of annual energy will be required.'",
+    "fix": ""
+   },
+   {
+    "claim": "p.44 lap pool HX 4,482,500 BTU/h",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 44, 'Appendix A - Steam Devices Steam Consumption': 'Lap Pool Heat Exchanger HX-1,2 Indoor Pool 4,482,500'. Figure is from the appended SES Consulting Energy Study (3 Oct 2008), not the student's own work",
+    "fix": "Note source is appended SES Consulting study (2008)"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "STUDENT REPORT (low confidence): Giffin J., Evaluation and Implementation of Practical Energy Savings Measures for UBC's Indoor and Outdoor Swimming Pools, UBC SEEDS (CEEN 596), 6 Dec 2010: p.9 indoor 50 x 25 m, outdoor 50 x 20 m, building 5,300 m2 (appended SES study: 5,274 m2); p.13 indoor 28 C water, 22-24 C air; p.23 both pools \"approximately 14,000 GJ/yr\"; p.44 lap pool HX 4,482,500 BTU/h (from appended SES Consulting energy study, 3 Oct 2008) — https://www.sustain.ubc.ca/sites/sustain.ubc.ca/files/seedslibrary/CEEN Evaluation and Implementation of Practical Energy Savings Measures for UBC's Indoor and Outdoor Swimming Pools to SEEDS library jvd.pdf ‖ CHECK 2 (31 Oct 2026, fixed): all figures confirmed; HX rating is from the appended SES Consulting study, building area differs slightly there"
+ },
+ "arch_unhcrShelterStandards": {
+  "where_read": "WebFetch of the URL (PDF print of handbook page)",
+  "claims": [
+   {
+    "claim": "Emergency Shelter Solutions and Standards, UNHCR Emergency Handbook, 21 Jan 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Title as stated; '21 January 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "3.5 m2/person covered living space warm climate excl. cooking",
+    "verdict": "CONFIRMED",
+    "evidence": "'Minimum 3.5m2 of covered living space per person in tropical or warm climates, excluding cooking facilities or kitchen.'",
+    "fix": ""
+   },
+   {
+    "claim": "4.5-5.5 m2/person indoor cold climate",
+    "verdict": "CONFIRMED",
+    "evidence": "'Minimum 4.5m2 to 5.5m2 indoor living space per person.'",
+    "fix": ""
+   },
+   {
+    "claim": "Cites Sphere 2018 as minimum standards",
+    "verdict": "CONFIRMED",
+    "evidence": "Sphere (2018) referenced; 'these remain minimum standards'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Humanitarian camp/emergency shelter standard; if used for a Canadian building refuge floor it is a benchmark only, not a code or Canadian guideline.",
+  "new_text": null
+ },
+ "arch_uwexGhEnergy": {
+  "where_read": "WebFetch of the URL (PDF)",
+  "claims": [
+   {
+    "claim": "A3907-01, UW-Extension (Sanford), 2011",
+    "verdict": "CONFIRMED",
+    "evidence": "'Reducing Greenhouse Energy Consumption: An Overview', A3907-01, Scott Sanford, University of Wisconsin-Extension, 2011",
+    "fix": ""
+   },
+   {
+    "claim": "Single-span length runs east-west",
+    "verdict": "CONFIRMED",
+    "evidence": "'Generally, it's best to orient single-span greenhouses so the length runs east–west.'",
+    "fix": ""
+   },
+   {
+    "claim": "Gutter-connected run north-south",
+    "verdict": "CONFIRMED",
+    "evidence": "'Orient gutter-connected greenhouses with the length running north–south.'",
+    "fix": ""
+   }
+  ],
+  "kind_change": "University extension guide (US) — benchmark outside Canada; 'government' is loose (UW System Board of Regents publication).",
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_vanCD1acoustic": {
+  "where_read": "WebFetch of the URL (PDF)",
+  "claims": [
+   {
+    "claim": "CD-1 (615) By-law No. 11291, 7 Jul 2015",
+    "verdict": "CONFIRMED",
+    "evidence": "'By-law No. 11291'; 'ENACTED by Council this 7th day of July, 2015.'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 7 Acoustics: acoustic report required",
+    "verdict": "CONFIRMED",
+    "evidence": "'All development permit applications require evidence in the form of a report and recommendations prepared by a person trained in acoustics'",
+    "fix": ""
+   },
+   {
+    "claim": "24 h Leq: bedrooms 35, living/dining/recreation 40, kitchen/bathrooms/hallways 45 dB(A)",
+    "verdict": "CONFIRMED",
+    "evidence": "'A-weighted 24-hour equivalent (Leq) sound level'; 'Bedrooms 35'; 'Living, dining, recreation rooms 40'; 'Kitchen, bathrooms, hallways 45'",
+    "fix": ""
+   },
+   {
+    "claim": "Same clause in other district schedules not checked",
+    "verdict": "CONFIRMED",
+    "evidence": "Not checked here either; flag stays",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Site-specific CD-1 by-law for dwelling units; applies to one site. Use only as an example of Vancouver practice, not a general rule.",
+  "new_text": null
+ },
+ "arch_vanChildcare": {
+  "where_read": "WebFetch of the URL (PDF)",
+  "claims": [
+   {
+    "claim": "Approved 4 Feb 1993; amended to 19 Jan 2021",
+    "verdict": "CONFIRMED",
+    "evidence": "'Approved by Council February 4, 1993'; 'Last amended December 10, 2019, September 15, 2020 and January 19, 2021'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 1.1(a) avoid or mitigate listed uses",
+    "verdict": "CONFIRMED",
+    "evidence": "'commercial loading or service areas, major mechanical plants, building exhaust fans, electrical substations'; 'transformers or other noisy, noxious or dangerous uses should be avoided or mitigated'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 1.1(b) away from high-traffic arterials",
+    "verdict": "CONFIRMED",
+    "evidence": "'away from high traffic arterials'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 1.4(a) 3 h direct sun at winter solstice",
+    "verdict": "CONFIRMED",
+    "evidence": "'three hours of direct sunlight per day at the winter solstice'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 4.2(b) exhaust vents not adjacent to outdoor play areas",
+    "verdict": "CONFIRMED",
+    "evidence": "exhaust vents from buildings or parking garages should not be located adjacent to outdoor play areas (paraphrased by fetch tool; exact wording not returned)",
+    "fix": ""
+   },
+   {
+    "claim": "s. 4.7(b) rooftop play free of skylights, roof vents, mechanical equipment",
+    "verdict": "CONFIRMED",
+    "evidence": "'Play space should be free of skylights, roof vents and/or other mechanical equipment.'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_vanCouncil2022": {
+  "where_read": "WebFetch of the URL (PDF)",
+  "claims": [
+   {
+    "claim": "Council Members' Motion B6, 1 Mar 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "Motion 'B.6', submitted by Councillor Carr; date not printed in the PDF, URL path is /20220301/",
+    "fix": "Title: 'Increasing Provincial Incentives for Installing Solar (PV) Panels and Solar Hot Water'"
+   },
+   {
+    "claim": "Asks Province for 'design and placement standards, and load-bearing requirements, for solar (photovoltaic) panels' in BC codes",
+    "verdict": "WRONG",
+    "evidence": "Motion asks UBCM to request that the Government of B.C. include 'specifications, including design and placement standards, and load-bearing requirements, for solar (photovoltaic) panels and solar hot water systems' in the BC Building Code / a future Existing Buildings Alterations Code",
+    "fix": "Request is routed via UBCM (and LMLGA) to the Province"
+   },
+   {
+    "claim": "Evidence no such standard then",
+    "verdict": "NOT FOUND",
+    "evidence": "Motion does not state that no standard exists; only says 'there are no incentives for solar (photovoltaic) panels and solar hot water systems'",
+    "fix": "Mark as our inference (?)"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "COUNCIL MOTION: Council Members' Motion B.6 'Increasing Provincial Incentives for Installing Solar (PV) Panels and Solar Hot Water' (Clr. Carr), City of Vancouver, 1 Mar 2022 meeting: asks UBCM to request the Province include 'specifications, including design and placement standards, and load-bearing requirements, for solar (photovoltaic) panels and solar hot water systems' in the BC Building Code / a future Existing Buildings Alterations Code (that no such standard existed then is our inference ?) — https://council.vancouver.ca/20220301/documents/b6.pdf ‖ CHECK 2 (31 Oct 2026, fixed): request goes via UBCM; 'no standard then' is not stated, now marked as inference"
+ },
+ "arch_vanParkMotion50m2025": {
+  "where_read": "WebFetch of the URL (PDF)",
+  "claims": [
+   {
+    "claim": "Think 50 Metres motion, Vancouver Park Board, 2 Jun 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'Think 50 Metres'; for Park Board meeting June 2, 2025 (notice given 12 May 2025); submitted by Commissioner Virdi",
+    "fix": ""
+   },
+   {
+    "claim": "WHEREAS 3 VAC replacement 'opts for a 25-metre pool, falling short of a 50-metre facility'",
+    "verdict": "CONFIRMED",
+    "evidence": "'opts for a 25-metre pool, falling short of a 50-metre facility'",
+    "fix": ""
+   }
+  ],
+  "kind_change": "Board motion states a commissioner's position; it is a claim, not a Board decision.",
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_vanPvBulletin2021": {
+  "where_read": "WebFetch of the URL (PDF)",
+  "claims": [
+   {
+    "claim": "Bulletin 2021-001-EL Solar Photovoltaic Installations, 19 Apr 2021",
+    "verdict": "CONFIRMED",
+    "evidence": "'BULLETIN 2021-001-EL' 'SOLAR PHOTOVOLTAIC INSTALLATIONS', April 19, 2021",
+    "fix": ""
+   },
+   {
+    "claim": "CE Code Rule 64-218 rapid shutdown",
+    "verdict": "CONFIRMED",
+    "evidence": "'Rule 64-218 1) requires that PV rapid shutdown shall be provided for a solar PV system installed on or in buildings.'",
+    "fix": ""
+   },
+   {
+    "claim": "Initiator 'within sight and 9 m of the array or at the permanent access to the roof'",
+    "verdict": "CONFIRMED",
+    "evidence": "Quote exact; applies to other-than-dwelling units as the second of two initiators (first at consumer's service)",
+    "fix": ""
+   },
+   {
+    "claim": "No roof setback or pathway rule",
+    "verdict": "CONFIRMED",
+    "evidence": "No roof setback or fire access pathway provision in the bulletin",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_vanPvCriteria": {
+  "where_read": "WebFetch of the URL failed twice (client_error at site)",
+  "claims": [
+   {
+    "claim": "Solar PV Panel Permit Category Criteria, City of Vancouver DBL, Aug 2016",
+    "verdict": "UNREACHABLE",
+    "evidence": "Fetch failed: client_error",
+    "fix": ""
+   },
+   {
+    "claim": "Sec. 2 crit. 9 'Panels are placed a minimum of 2ft. from the perimeter of a roof or a roof peak'",
+    "verdict": "UNREACHABLE",
+    "evidence": "Fetch failed",
+    "fix": ""
+   },
+   {
+    "claim": "crit. 6 gap <=150 mm",
+    "verdict": "UNREACHABLE",
+    "evidence": "Fetch failed",
+    "fix": ""
+   },
+   {
+    "claim": "Sec. 1 full permit if wall-mounted or roof flat",
+    "verdict": "UNREACHABLE",
+    "evidence": "Fetch failed",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_vanSplash2017": {
+  "where_read": "WebFetch of the URL (PDF)",
+  "claims": [
+   {
+    "claim": "VanSplash presentation, Park Board, 11 Dec 2017",
+    "verdict": "CONFIRMED",
+    "evidence": "'Park Board Committee Meeting, December 11, 2017'; 'VanSplash Aquatic Strategy Final Report and 10 Year Implementation Plan'",
+    "fix": ""
+   },
+   {
+    "claim": "Slide 30 radii 2 / 3 / 4 km",
+    "verdict": "CONFIRMED",
+    "evidence": "'Neighbourhood – 2 km radius'; 'Community – 3 km radius'; 'City-Wide / Destination – 4 km radius'",
+    "fix": ""
+   },
+   {
+    "claim": "Slide 29 swim target",
+    "verdict": "CONFIRMED",
+    "evidence": "'Increase 2001 swim target of 4 to 5 swims/year/capita, building for up to 6'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_vanSplash2019": {
+  "where_read": "WebFetch of the URL (PDF)",
+  "claims": [
+   {
+    "claim": "Report Back, Park Board, 28 Oct 2019",
+    "verdict": "CONFIRMED",
+    "evidence": "'VANSPLASH: VANCOUVER AQUATICS STRATEGY', 'Monday, October 28, 2019'",
+    "fix": ""
+   },
+   {
+    "claim": "Slide 24 scale terms revised to 'Small, Medium, Large scale'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Facility scale terminology revised from Neighbourhood, Community, City-Wide to Small, Medium, Large scale'",
+    "fix": ""
+   },
+   {
+    "claim": "Slide 22 4 indoor pool facilities (1 new, 3 replacement)",
+    "verdict": "CONFIRMED",
+    "evidence": "'4 Indoor Pool Facilities (1 new and 3 replacement)'",
+    "fix": ""
+   },
+   {
+    "claim": "No tank sizes",
+    "verdict": "CONFIRMED",
+    "evidence": "No tank sizes for indoor pools; only slide 27 (outdoor rec. 8, Hillcrest feasibility) 'lane swimming (25m length lanes or 50m length lanes)'",
+    "fix": "Optional: note slide 27 lane-length option"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_vchCoolingSpaces": {
+  "where_read": "WebFetch of the URL (PDF)",
+  "claims": [
+   {
+    "claim": "VCH, 6 Jun 2023",
+    "verdict": "CONFIRMED",
+    "evidence": "Cover: 'JUNE 6TH 2023'",
+    "fix": ""
+   },
+   {
+    "claim": "'keep spaces at or below 26°C' (p. 5)",
+    "verdict": "CONFIRMED",
+    "evidence": "'keep spaces at or below 26°C (78°F) to reduce risk for individuals at highest risk'",
+    "fix": ""
+   },
+   {
+    "claim": "Accessible washrooms, drinking water (p. 5)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Drinking water'; 'Accessible washrooms'",
+    "fix": ""
+   },
+   {
+    "claim": "'Maximize air flow and filtration' (p. 7)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Maximize air flow and filtration where possible, including through building HVAC systems.'",
+    "fix": ""
+   },
+   {
+    "claim": "No m2/person or capacity",
+    "verdict": "CONFIRMED",
+    "evidence": "No area or occupancy figure; only a 'five-minute walk' coverage example (Barcelona, p. 6)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_vplFmpSpace2018": {
+  "where_read": "WebFetch of the URL (PDF)",
+  "claims": [
+   {
+    "claim": "VPL management report to Library Board, 18 Apr 2018",
+    "verdict": "CONFIRMED",
+    "evidence": "Management report, Patricia Chong to Library Board, April 18, 2018",
+    "fix": ""
+   },
+   {
+    "claim": "0.80 sq ft/capita end 2017; ARUPLO 1 sq ft/capita (p. 3)",
+    "verdict": "CONFIRMED",
+    "evidence": "'a ratio of 0.80 sq. ft. per capita at the end of 2017'; '1 sq. ft. per capita'",
+    "fix": ""
+   },
+   {
+    "claim": "East Fraserlands ~10,000 sq ft",
+    "verdict": "CONFIRMED",
+    "evidence": "'a new library branch of approximately 10,000 sq. ft.' (p. 5)",
+    "fix": ""
+   },
+   {
+    "claim": "Targets 10,000 (Collingwood) to 25,000 sq ft (Oakridge)",
+    "verdict": "CONFIRMED",
+    "evidence": "Priority table: Collingwood 10,000 to Oakridge 25,000 (Carnegie listed at 1,930 with no expansion)",
+    "fix": ""
+   },
+   {
+    "claim": "Existing branches 1,930-13,000 sq ft (p. 5)",
+    "verdict": "CONFIRMED",
+    "evidence": "Existing sizes in the table 1,930 (Carnegie) to 13,000 (Oakridge); table covers listed branches only",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_weidner": {
+  "where_read": "WebFetch of the URL (ORA file); ORA record page blocked by fetch provenance rule, not read",
+  "claims": [
+   {
+    "claim": "Weidner, Yang, Hamm, 'Energy optimisation of plant factories and greenhouses for different climatic conditions'",
+    "verdict": "CONFIRMED",
+    "evidence": "Till Weidner, Aidong Yang, Michael W. Hamm; title as stated",
+    "fix": ""
+   },
+   {
+    "claim": "Journal/year not confirmed",
+    "verdict": "CONFIRMED",
+    "evidence": "File gives no journal, year or DOI; still unconfirmed",
+    "fix": ""
+   },
+   {
+    "claim": "Conclusion 'more energy-intensive than greenhouses in all climates'",
+    "verdict": "CONFIRMED",
+    "evidence": "'plant factories (i.e. vertical indoor farming systems) are more energy-intensive than greenhouses in all climates.'",
+    "fix": ""
+   }
+  ],
+  "kind_change": "PEER-REVIEWED is not verified from the file (repository copy, no journal shown); label 'research paper (repository copy; peer review not confirmed ?)' until journal is found.",
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_yorkClear": {
+  "where_read": "WebFetch of the URL (live page)",
+  "claims": [
+   {
+    "claim": "Title 'Chiller Clearances vs. Efficiency'",
+    "verdict": "WRONG",
+    "evidence": "Page title: 'Making the Most of Air-Cooled Chiller Efficiency' (URL slug is chiller-clearances-vs-efficiency)",
+    "fix": "Use 'Making the Most of Air-Cooled Chiller Efficiency'"
+   },
+   {
+    "claim": "Insights, 10 Jun 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "June 10, 2024",
+    "fix": ""
+   },
+   {
+    "claim": "YVAA clearances side 6 ft, rear 6 ft, panel end 4 ft, top none, between units 10 ft",
+    "verdict": "CONFIRMED",
+    "evidence": "Side to wall 6 ft (1.8 m); rear 6 ft (1.8 m); control panel end 4 ft (1.2 m); top no obstructions; between units 10 ft (3 m)",
+    "fix": ""
+   },
+   {
+    "claim": "2 units 6 ft apart -2.5% / +3%",
+    "verdict": "CONFIRMED",
+    "evidence": "capacity dropped 'more than 2.5%', power rose 'nearly 3%'",
+    "fix": "Add 'more than' / 'nearly'"
+   },
+   {
+    "claim": "3+ in a row -3.5% / +4%",
+    "verdict": "CONFIRMED",
+    "evidence": "capacity -3.5%, power 'more than 4.0%'",
+    "fix": ""
+   },
+   {
+    "claim": "12 ft wall 6 ft away -4.5% / +6%",
+    "verdict": "CONFIRMED",
+    "evidence": "capacity 'more than 4.5%', power 'more than 6.0%'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "MAKER CLAIM: Johnson Controls YORK, 'Making the Most of Air-Cooled Chiller Efficiency', Insights, 10 Jun 2024: YVAA air-cooled chiller factory minimums side to wall 6 ft (1.8 m), rear 6 ft (1.8 m), control panel end 4 ft (1.2 m), top no obstructions, between units 10 ft (3 m); test: 2 units 6 ft apart capacity -2.5%+, power +~3%; 3+ in a row -3.5% / +4%+; behind 12 ft solid wall 6 ft away -4.5%+ / +6%+ — https://www.york.com/insights/2024/chiller-clearances-vs-efficiency ‖ CHECK 2 (31 Oct 2026, fixed): page title corrected; figures confirmed, stated as 'more than'/'nearly' in source"
+ },
+ "arch_zon_AbLegRefs2026": {
+  "where_read": "WebFetch of the URL (PDF)",
+  "claims": [
+   {
+    "claim": "Government of Alberta, LPRT, 'SDAB Legislative Reference Links' (Jan 2026)",
+    "verdict": "CONFIRMED",
+    "evidence": "Title 'SDAB Legislative Reference Links'; 'January 2026'; 'for use in conjunction with the LPRT Subdivision and Development Appeal Board (SDAB) training materials'; hosted on alberta.ca. Issuer not named on the page itself",
+    "fix": ""
+   },
+   {
+    "claim": "Lists MGA, RSA 2000, c M-26",
+    "verdict": "CONFIRMED",
+    "evidence": "'Municipal Government Act, RSA 2000, c M-26 (MGA)'",
+    "fix": ""
+   },
+   {
+    "claim": "Lists 'Matters Related to Subdivision and Development Regulation, Alta Reg 84/2022'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Matters Related to Subdivision and Development Regulation Alta Reg 84/2022 (Regulation)'",
+    "fix": ""
+   },
+   {
+    "claim": "(successor to the Subdivision and Development Regulation)",
+    "verdict": "NOT FOUND",
+    "evidence": "Page has no statement that it succeeds the Subdivision and Development Regulation",
+    "fix": "Remove or mark as not from this source (?)"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT: Government of Alberta (alberta.ca), Land and Property Rights Tribunal SDAB training material, 'SDAB Legislative Reference Links' (Jan 2026): lists Municipal Government Act, RSA 2000, c M-26 and 'Matters Related to Subdivision and Development Regulation Alta Reg 84/2022' (that it replaced the Subdivision and Development Regulation is not stated here ?) — https://www.alberta.ca/system/files/ma-lprt-sdab-legislative-reference-links-january-2026.pdf ‖ CHECK 2 (31 Oct 2026, fixed): 'successor' not in source, marked unverified"
+ },
+ "arch_zon_Edm720": {
+  "where_read": "Local copy data/raw/edm/bylaw/b.txt (Charter Bylaw 20001 as adopted)",
+  "claims": [
+   {
+    "claim": "Bylaw 20001 as adopted, effective 1 Jan 2024; s. 7.20 General Rules of Interpretation",
+    "verdict": "CONFIRMED",
+    "evidence": "'to have an effective date of January 1, 2024'; heading '7.20 General Rules of Interpretation'",
+    "fix": ""
+   },
+   {
+    "claim": "3.3.2 quote (deem most appropriate Use; always Discretionary)",
+    "verdict": "CONFIRMED",
+    "evidence": "'... the Development Planner may deem the purposes or activities to conform to a Use they consider to be the most appropriate. In this situation, despite any other Section of this Bylaw, the Use is always considered a Discretionary Use'",
+    "fix": ""
+   },
+   {
+    "claim": "3.3.3 'The list of Uses within each Zone determines the types of activities allowed within each Zone'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "1.8.3 'industrial building' = 'a building containing 1 or more Industrial Uses'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "1.8.7 'non-residential building' contains '1 or more non-Residential Uses'",
+    "verdict": "CONFIRMED",
+    "evidence": "'a building, other than a mixed use building, containing 1 or more non-Residential Uses'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_zon_Edm790": {
+  "where_read": "Local copy data/raw/edm/bylaw/b.txt",
+  "claims": [
+   {
+    "claim": "s. 7.90 subs. 1.1 'within 20 days after the receipt of an application for the subdivision of land the Subdivision Authority must'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Unless extended by an agreement in writing ..., within 20 days after the receipt of an application for the subdivision of land the Subdivision Authority must:'",
+    "fix": ""
+   },
+   {
+    "claim": "Completeness steps only; no consolidation clause",
+    "verdict": "CONFIRMED",
+    "evidence": "1.1-1.4 cover acknowledgement, incomplete notice, refusal, further information; 'consolidat' does not appear in 7.90",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_zon_EdmDefs": {
+  "where_read": "Local copy data/raw/edm/bylaw/b.txt",
+  "claims": [
+   {
+    "claim": "Minor Industrial definition and nuisance 'less impactful than ... Major Industrial'",
+    "verdict": "CONFIRMED",
+    "evidence": "'manufacturing, cleaning, servicing, repairing or testing materials, goods and equipment'; 'Any resulting Nuisance is less impactful than those permitted under the Major Industrial Use.'",
+    "fix": ""
+   },
+   {
+    "claim": "Minor Indoor Entertainment examples 'fitness facilities, gyms'",
+    "verdict": "CONFIRMED",
+    "evidence": "'... climbing facilities, fitness facilities, gyms, gymnastic facilities ...'",
+    "fix": ""
+   },
+   {
+    "claim": "Major Indoor Entertainment examples",
+    "verdict": "CONFIRMED",
+    "evidence": "'auditoriums, aquariums, arenas, ... museums, nightclubs, planetariums, and sports or entertainment complexes'",
+    "fix": ""
+   },
+   {
+    "claim": "Outdoor Sales and Service incl. 'plant nurseries'",
+    "verdict": "CONFIRMED",
+    "evidence": "'... and plant nurseries'",
+    "fix": ""
+   },
+   {
+    "claim": "Urban Agriculture 'hydroponic or aquaponic systems, and vertical farms'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "Food and Drink Service 'cafes, juice bars, and restaurants'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "Indoor Sales and Service 'retail, personal service'",
+    "verdict": "CONFIRMED",
+    "evidence": "'sales and services such as retail, personal service, or commercial school activities'",
+    "fix": ""
+   },
+   {
+    "claim": "Residential 'designed for people to live in'",
+    "verdict": "CONFIRMED",
+    "evidence": "'a building or part of a building is designed for people to live in'",
+    "fix": ""
+   },
+   {
+    "claim": "Minor Utility incl. 'switching centres, telecommunications centres'",
+    "verdict": "CONFIRMED",
+    "evidence": "'... switching centres, telecommunications centres ...' (list also has 'district heating plants')",
+    "fix": ""
+   },
+   {
+    "claim": "8.20 Accessory definition",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "Site = 1 or more Abutting Lots",
+    "verdict": "CONFIRMED",
+    "evidence": "'Site means an area of land consisting of 1 or more Abutting Lots.'",
+    "fix": ""
+   },
+   {
+    "claim": "Use definition",
+    "verdict": "CONFIRMED",
+    "evidence": "'Use means the purposes or activities for which a piece of land or its buildings are designed, arranged, developed or intended, or for which it is occupied or maintained.'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_zon_EdmSAPage": {
+  "where_read": "WebFetch of the URL (live page)",
+  "claims": [
+   {
+    "claim": "Under MGA s. 623 Council must appoint a subdivision authority",
+    "verdict": "CONFIRMED",
+    "evidence": "'Section 623 of the Municipal Government Act (MGA) requires City Council to appoint a subdivision authority'",
+    "fix": ""
+   },
+   {
+    "claim": "Delegated to City Manager, then to 'Chief Subdivision Officer'",
+    "verdict": "CONFIRMED",
+    "evidence": "Council to City Manager, who delegates to the 'Chief Subdivision Officer'",
+    "fix": ""
+   },
+   {
+    "claim": "No mention of lot consolidation",
+    "verdict": "CONFIRMED",
+    "evidence": "Not mentioned",
+    "fix": ""
+   },
+   {
+    "claim": "Undated",
+    "verdict": "CONFIRMED",
+    "evidence": "No date on page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_zon_EdmZones": {
+  "where_read": "Local copy data/raw/edm/bylaw/b.txt (as adopted)",
+  "claims": [
+   {
+    "claim": "BE permitted uses with numbers (2.3, 2.8, 2.10, 2.11, 2.12, 2.16, 2.18, 2.19, 2.22, 2.25)",
+    "verdict": "CONFIRMED",
+    "evidence": "BE 2.3 Minor Industrial; 2.8 Food and Drink Service; 2.10 Indoor Sales and Service; 2.11 Major / 2.12 Minor Indoor Entertainment; 2.16 Outdoor Sales and Service; 2.18 Child Care Service; 2.19 Community Service; 2.22 Minor Utility; 2.25 Urban Agriculture",
+    "fix": ""
+   },
+   {
+    "claim": "3.2.1 Minor Industrial 'must be located within an enclosed building'",
+    "verdict": "CONFIRMED",
+    "evidence": "'... within an enclosed building except that loading, waste collection, and storage activities may be located outdoors.'",
+    "fix": "Add the outdoor exception"
+   },
+   {
+    "claim": "3.3.1 Bars, Food and Drink, Health Services, Major Indoor Entertainment 500 m2",
+    "verdict": "CONFIRMED",
+    "evidence": "'The maximum Floor Area is 500 m2 per individual establishment.'",
+    "fix": ""
+   },
+   {
+    "claim": "3.7.1 Indoor Sales and Service 500 m2",
+    "verdict": "CONFIRMED",
+    "evidence": "500 m2, except existing as of 1 Jan 2024 and bulky-goods warehouse sales",
+    "fix": ""
+   },
+   {
+    "claim": "3.12.1 Community Services 500 m2; no shelter exception",
+    "verdict": "CONFIRMED",
+    "evidence": "'3.12.1. The maximum Floor Area is 500 m2 per individual establishment.' No exception",
+    "fix": ""
+   },
+   {
+    "claim": "3.16.1 Urban Agriculture 'within or on a building'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact (except outdoor display areas)",
+    "fix": ""
+   },
+   {
+    "claim": "3.18 variance to floor-area caps for 'on-Site or Abutting non-Industrial Uses'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "BE Table 4.1 height 16.0 m, FAR 1.6",
+    "verdict": "CONFIRMED",
+    "evidence": "16.0 m; 1.6",
+    "fix": ""
+   },
+   {
+    "claim": "5.3.2 max 10% Ground Floor windows covered",
+    "verdict": "CONFIRMED",
+    "evidence": "'A maximum of 10% of Ground Floor windows facing a Street or Surface Parking Lot may be covered by non-transparent material.'",
+    "fix": ""
+   },
+   {
+    "claim": "5.8 loading not between building and Street",
+    "verdict": "CONFIRMED",
+    "evidence": "'Loading, waste collection, storage, and service areas must not be located between a building and a Street'",
+    "fix": ""
+   },
+   {
+    "claim": "IM uses: Major Industrial existing (2.3), Minor Industrial (2.4), Office (2.8), Outdoor S&S (2.9), Special Event (2.11), Minor Utility (2.13), Urban Agriculture (2.16)",
+    "verdict": "CONFIRMED",
+    "evidence": "as listed",
+    "fix": ""
+   },
+   {
+    "claim": "IM 2.7 Indoor Sales and Service limited to existing or animal hospitals",
+    "verdict": "WRONG",
+    "evidence": "'2.7.1 Indoor Sales and Service existing as of January 1, 2024; 2.7.2 animal hospitals and shelters'",
+    "fix": "'animal hospitals and shelters'"
+   },
+   {
+    "claim": "IM Office 300 m2 (3.5.1)",
+    "verdict": "CONFIRMED",
+    "evidence": "'The maximum Floor Area for Offices is 300 m2 per individual establishment.'",
+    "fix": ""
+   },
+   {
+    "claim": "IM 3.2.2 accessory temporary employee sleeping not suitable as permanent residence",
+    "verdict": "CONFIRMED",
+    "evidence": "'must not be suitable for use as permanent residence' (3.2.2.1)",
+    "fix": ""
+   },
+   {
+    "claim": "IM Table 4.1 height 18.0 m, FAR 2.0",
+    "verdict": "CONFIRMED",
+    "evidence": "18.0 m; 2.0",
+    "fix": ""
+   },
+   {
+    "claim": "IH: Major Industrial (2.1), Minor Industrial existing (2.2), Major/Minor Utility (2.4, 2.5)",
+    "verdict": "CONFIRMED",
+    "evidence": "as listed",
+    "fix": ""
+   },
+   {
+    "claim": "IH 3.1.1 office/display <=33%",
+    "verdict": "CONFIRMED",
+    "evidence": "'maximum Floor Area for any indoor display, office, technical and administrative support, or retail sale operations is 33%' (exception if >50% of Site used outdoors)",
+    "fix": ""
+   },
+   {
+    "claim": "IH Table 4.1 min Site 1.0 ha, height 30.0 m, FAR 2.0",
+    "verdict": "CONFIRMED",
+    "evidence": "1.0 ha; 30.0 m; 2.0",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: City of Edmonton, Charter Bylaw 20001 Zoning Bylaw, as adopted (effective 1 Jan 2024; City PDF, local text data/raw/edm/bylaw/b.txt; amendments since not checked ?), s. 2.120 BE, s. 2.130 IM, s. 2.140 IH: BE permitted uses incl. Minor Industrial (2.3), Food and Drink Service (2.8), Indoor Sales and Service (2.10), Major and Minor Indoor Entertainment (2.11, 2.12), Outdoor Sales and Service (2.16), Child Care Service (2.18), Community Service (2.19), Minor Utility (2.22), Urban Agriculture (2.25); 3.2.1 Minor Industrial 'must be located within an enclosed building' (loading, waste and storage may be outdoors); 3.3.1 Bars, Food and Drink, Health Services, Major Indoor Entertainment 'maximum Floor Area is 500 m2 per individual establishment'; 3.7.1 Indoor Sales and Service 500 m2; 3.12.1 Community Services 'The maximum Floor Area is 500 m2 per individual establishment' (no shelter exception in adopted text); 3.16.1 Urban Agriculture 'within or on a building'; 3.18 variance to floor-area caps with mitigation for 'on-Site or Abutting non-Industrial Uses'; Table 4.1 height 16.0 m, FAR 1.6; 5.3.2 'A maximum of 10% of Ground Floor windows facing a Street ... may be covered by non-transparent material'; 5.8 loading not between building and Street. IM: Major Industrial 'limited to those existing as of January 1, 2024' (2.3), Minor Industrial (2.4), Indoor Sales and Service limited to existing or 'animal hospitals and shelters' (2.7), Office (2.8, 300 m2 per establishment 3.5.1), Outdoor Sales and Service (2.9), Special Event (2.11), Minor Utility (2.13), Urban Agriculture (2.16); 3.2.2 accessory temporary employee sleeping not 'suitable for use as permanent residence'; Table 4.1 height 18.0 m, FAR 2.0. IH: Major Industrial (2.1), Minor Industrial 'limited to those existing as of January 1, 2024' (2.2), Major and Minor Utility (2.4, 2.5); 3.1.1 office/display <=33%; Table 4.1 minimum Site 1.0 ha, height 30.0 m, FAR 2.0 — https://www.edmonton.ca/sites/default/files/public-files/assets/Bylaws/Bylaw20001.pdf ‖ CHECK 2 (31 Oct 2026, fixed): IM 2.7.2 is 'animal hospitals and shelters'; BE 3.2.1 outdoor exception added; all else confirmed"
+ },
+ "arch_zon_Lprt2025": {
+  "where_read": "WebFetch of the URL (decision document)",
+  "claims": [
+   {
+    "claim": "LPRT2025/MG0104, 2025 ABLPRT 104, 6 Mar 2025, City of Edmonton, File S24/EDMO/C-031",
+    "verdict": "CONFIRMED",
+    "evidence": "Cover page; 'this 6th day of March, 2025'",
+    "fix": ""
+   },
+   {
+    "claim": "'a subdivision to create two block shell parcels from three block shell parcels'",
+    "verdict": "CONFIRMED",
+    "evidence": "para. [1]: '... from three block shell parcels created in 2021'",
+    "fix": ""
+   },
+   {
+    "claim": "Conditionally approved by SA on 17 Oct 2024 (para. 11)",
+    "verdict": "CONFIRMED",
+    "evidence": "para. [11]: 'The Subdivision by Plan is APPROVED on October 17, 2024'",
+    "fix": ""
+   },
+   {
+    "claim": "Appellant's claim (not decided) para. 31",
+    "verdict": "CONFIRMED",
+    "evidence": "para. [31]: 'The proposed subdivision is a consolidation which could have been registered without subdivision approval'; reasons paras [41]-[50] address only dedication conditions",
+    "fix": ""
+   },
+   {
+    "claim": "Appeal allowed in part (para. 38)",
+    "verdict": "WRONG",
+    "evidence": "para. [38]: 'The appeal is allowed and the decision of conditional approval of the SA is varied as follows'; conditions 4 and 5 deleted, municipal reserve conditions kept",
+    "fix": "'appeal allowed; conditions 4-5 deleted, reserve conditions kept'"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "TRIBUNAL DECISION: Alberta Land and Property Rights Tribunal, Decision LPRT2025/MG0104 (2025 ABLPRT 104), 6 Mar 2025, City of Edmonton, File S24/EDMO/C-031: 'a subdivision to create two block shell parcels from three block shell parcels' (para. 1) conditionally approved by the City of Edmonton Subdivision Authority on 17 Oct 2024 (para. 11); appellant's claim (not decided): 'The proposed subdivision is a consolidation which could have been registered without subdivision approval' (para. 31); appeal allowed and conditional approval varied: conditions 4 and 5 (road/transit dedication, clearing) deleted, municipal reserve conditions kept (para. 38) — https://decisions.lprt.alberta.ca/alprt/sub/en/7502/1/document.do ‖ CHECK 2 (31 Oct 2026, fixed): tribunal says 'appeal is allowed' with conditions varied, not 'allowed in part'"
+ },
+ "arch_zon_MgaToc": {
+  "where_read": "WebFetch of the URL (PDF; text read to s. 55, rest not returned)",
+  "claims": [
+   {
+    "claim": "MGA RSA 2000 c M-26, 'Current as of April 1, 2024'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Current as of April 1, 2024'; King's Printer consolidation",
+    "fix": ""
+   },
+   {
+    "claim": "Hosted by City of Calgary ARB",
+    "verdict": "CONFIRMED",
+    "evidence": "URL calgary.ca/content/dam/arb/; document is an Alberta King's Printer consolidation",
+    "fix": ""
+   },
+   {
+    "claim": "Text cut off before Part 17",
+    "verdict": "CONFIRMED",
+    "evidence": "Fetched text ends at s. 55(1)(a)",
+    "fix": ""
+   },
+   {
+    "claim": "TOC headings 616, 623, 652, 658",
+    "verdict": "CONFIRMED",
+    "evidence": "'616 Definitions', '623 Subdivision authority and development authority', '652 Subdivision approval required', '658 Cancellation of plan of subdivision'",
+    "fix": ""
+   },
+   {
+    "claim": "Section texts not read",
+    "verdict": "CONFIRMED",
+    "evidence": "Still not read",
+    "fix": ""
+   }
+  ],
+  "kind_change": "Keep RULE (table of contents only); official source is Alberta King's Printer, this is a third-party hosted copy.",
+  "scope_flag": null,
+  "new_text": null
+ }
+}

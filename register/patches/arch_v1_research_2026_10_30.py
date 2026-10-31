@@ -12,6 +12,7 @@ n = 0
 for f in sorted(glob.glob(str(R / 'checks/research_arch_v1/*_sources.json'))):
     for k, v in json.load(open(f)).items():
         if k in d['new_sources']: continue
+        if k in ('arch_sep_cahsc42301_6', 'arch_sep_carbAtcm93115', 'arch_sep_waEcologyHIA2025', 'arch_sep_ccr2480'): continue  # dropped 31 Oct 2026 (J.B.)
         d['new_sources'][k] = v; n += 1
         kind = next((kk for pre, kk in KIND if v.upper().startswith(pre)), 'named in our notes, not yet checked')
         if '(US' in v[:60] or 'UK' in v[:60] or '(EU' in v[:60] or 'intl.' in v[:60]: kind += ' (benchmark, outside Canada)'
