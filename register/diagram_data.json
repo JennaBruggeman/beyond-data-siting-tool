@@ -6,7 +6,7 @@
 "rule": "A quantity's confidence is the lowest of its inputs; a condition's is the lowest of its quantities; a match fails at its weakest link; burdens are recorded beside, never netted.",
 "counts": {
 "inputs": 17,
-"quantities": 204,
+"quantities": 196,
 "conditions": 101,
 "opportunities": 22,
 "sources": 834
@@ -1240,83 +1240,6 @@
 }
 },
 {
-"id": "erf",
-"kind": "quantity",
-"stage": "characterise",
-"name": "Energy reuse factor",
-"formula": "ERF = E_reuse ÷ E_DC (ISO/IEC 30134-6; EU 2024/1364 Annex III): heat captured at the boundary ÷ total data-centre energy (IT × PUE); 0–1; heat-pump uplift and heat-pump electricity excluded",
-"coef": "EnEfG benchmark 10% → 20%; first attempt used heat_delivered ÷ IT energy — corrected 13 Oct 2026: Telia Helsinki reports ERF 0.75 (operator claim; basis not stated in the PDF); German HPC centres 0.01–0.20 (arXiv 2411.16204, non-ISO denominator); NREL RSF reports ERE 0.91 \"calculated, not measured\"",
-"unit": "—",
-"sources": [
-"euReg2024_1364",
-"iso30134_6",
-"nrelRSF",
-"teliaHKI2024",
-"enefg11",
-"greenGridWP29"
-],
-"source_roles": [
-{
-"id": "euReg2024_1364",
-"term": "definition",
-"role": "rule",
-"conf": 90,
-"verified": true
-},
-{
-"id": "iso30134_6",
-"term": "definition",
-"role": "rule",
-"conf": 90,
-"verified": true
-},
-{
-"id": "nrelRSF",
-"term": "reported value",
-"role": "check (derived from ERE and PUE)",
-"conf": 50,
-"verified": true,
-"relabel": "30 Oct 2026: check → check (derived from ERE and PUE) (ERF is not reported; it is our derivation)"
-},
-{
-"id": "teliaHKI2024",
-"term": "reported value",
-"role": "check",
-"conf": 50,
-"verified": true
-},
-{
-"id": "enefg11",
-"term": "Energy reuse factor",
-"role": "traced from heatPhys",
-"conf": 50,
-"verified": false
-},
-{
-"id": "greenGridWP29",
-"term": "Energy reuse factor",
-"role": "traced from heatPhys",
-"conf": 50,
-"verified": false
-}
-],
-"conf": 90,
-"status": "in hand",
-"direction": "",
-"trial": "",
-"inputs": [
-"heat_captured",
-"heat_rejected"
-],
-"upstream": 50,
-"city": {
-"van": 0,
-"edm": 0,
-"both": 2,
-"gen": 4
-}
-},
-{
 "id": "heat_in_water",
 "kind": "quantity",
 "stage": "characterise",
@@ -1337,7 +1260,7 @@
 }
 ],
 "conf": 100,
-"status": "in hand",
+"status": "NOT COMPUTED YET: to build with the Architecture mode (30 Oct 2026). in hand",
 "direction": "",
 "trial": "",
 "inputs": [],
@@ -1882,42 +1805,6 @@
 }
 },
 {
-"id": "wue",
-"kind": "quantity",
-"stage": "characterise",
-"name": "Water usage effectiveness",
-"formula": "site water ÷ E_IT",
-"coef": "DCRE cap 2 L/kWh",
-"unit": "L/kWh",
-"sources": [
-"femp"
-],
-"source_roles": [
-{
-"id": "femp",
-"term": "all coefficients",
-"role": "coefficient",
-"conf": 90,
-"verified": true
-}
-],
-"conf": 90,
-"status": "in hand",
-"direction": "",
-"trial": "",
-"inputs": [
-"blowdown",
-"it_load_actual"
-],
-"upstream": 50,
-"city": {
-"van": 0,
-"edm": 0,
-"both": 0,
-"gen": 1
-}
-},
-{
 "id": "water_behind_electricity",
 "kind": "quantity",
 "stage": "characterise",
@@ -2180,41 +2067,6 @@
 "van": 1,
 "edm": 1,
 "both": 1,
-"gen": 1
-}
-},
-{
-"id": "refrigerant_co2e",
-"kind": "quantity",
-"stage": "characterise",
-"name": "Refrigerant leakage",
-"formula": "charge × 3%/yr × GWP",
-"coef": "IPCC GWPs; chiller charge 10–2,000 kg and operating loss 2–15% of the initial charge a year, the lower end for developed countries (IPCC 2019 Refinement, Vol. 3 Ch. 7, Table 7.9, p. 7.32: default ranges, not measured here); the tool's 3%/yr sits near the lower end and its 50–600 kg per chiller inside the range",
-"unit": "tCO2e/yr",
-"sources": [
-"ipcc2019v3ch7"
-],
-"source_roles": [
-{
-"id": "ipcc2019v3ch7",
-"term": "charge and loss ranges, GWPs",
-"role": "coefficient",
-"conf": 60,
-"verified": true
-}
-],
-"conf": 60,
-"status": "default ranges from the IPCC inventory guidelines (read 19 Oct 2026); no Canadian or manufacturer figure for these chillers (M98)",
-"direction": "",
-"trial": "",
-"inputs": [
-"cooling_type"
-],
-"upstream": 60,
-"city": {
-"van": 0,
-"edm": 0,
-"both": 0,
 "gen": 1
 }
 },
@@ -2593,7 +2445,7 @@
 }
 ],
 "conf": 90,
-"status": "in hand",
+"status": "NOT COMPUTED YET: to build with the Architecture mode (30 Oct 2026). in hand",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -5955,7 +5807,7 @@
 }
 ],
 "conf": 80,
-"status": "Vancouver in hand (government export); Edmonton pending AWWID",
+"status": "PARKED 30 Oct 2026 (J.B.): kept in the register, built only if a design needs it. Vancouver in hand (government export); Edmonton pending AWWID",
 "direction": "place",
 "trial": "",
 "inputs": [
@@ -9317,7 +9169,7 @@
 }
 ],
 "conf": 40,
-"status": "ranked, no dB values",
+"status": "PARKED 30 Oct 2026 (J.B.): kept in the register, built only if a design needs it. ranked, no dB values",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -9901,59 +9753,6 @@
 }
 },
 {
-"id": "computing_served",
-"kind": "quantity",
-"stage": "characterise",
-"name": "Who the computing serves",
-"formula": "up to four sourced statements, no score: federal data-residency rule; provincial rule; the local internet exchange and its size; residency ≠ sovereignty",
-"coef": "Federal: Protected B and above stored in Canada; BC: data residency removed 2021, sensitive data abroad needs an assessment; Alberta: no rule found; Vancouver exchanges 158 participants across three, Edmonton YEGIX 9",
-"unit": "text",
-"sources": [
-"gcDataResidency",
-"bcFoippaAbroad",
-"isocPulseIXP"
-],
-"source_roles": [
-{
-"id": "gcDataResidency",
-"term": "federal residency",
-"role": "history",
-"conf": 90,
-"verified": true,
-"relabel": "30 Oct 2026: rule → history (source is archived; current rule is Directive req. 4.4.3.14, not yet read)"
-},
-{
-"id": "bcFoippaAbroad",
-"term": "BC rule",
-"role": "context",
-"conf": 90,
-"verified": true,
-"relabel": "30 Oct 2026: rule → context (binds public bodies only; not a rule for private data-centre customers)"
-},
-{
-"id": "isocPulseIXP",
-"term": "exchange sizes",
-"role": "data",
-"conf": 50,
-"verified": true
-}
-],
-"conf": 80,
-"status": "read",
-"direction": "",
-"trial": "",
-"inputs": [
-"interconnection"
-],
-"upstream": 50,
-"city": {
-"van": 1,
-"edm": 0,
-"both": 1,
-"gen": 1
-}
-},
-{
 "id": "afterlife",
 "kind": "quantity",
 "stage": "decide",
@@ -10022,7 +9821,7 @@
 }
 ],
 "conf": 70,
-"status": "arithmetic (100); city comparison value 70",
+"status": "NOT COMPUTED YET: to build with the Architecture mode (30 Oct 2026). arithmetic (100); city comparison value 70",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -10041,7 +9840,7 @@
 "kind": "quantity",
 "stage": "characterise",
 "name": "Warmer air near the cooling units",
-"formula": "at the coil: ΔT = Q ÷ (ρ·cp·airflow); at a neighbour: ΔT ≈ Q ÷ (ρ·cp) × (χ/Q)(x), the plume factor from air_screen_1h; heat treated as a passive tracer (buoyant rise ignored)",
+"formula": "at the coil: ΔT = Q ÷ (ρ·cp·airflow); at a neighbour: ΔT ≈ Q ÷ (ρ·cp) × (χ/Q)(x), a plume factor (dispersion method to be chosen with the Architecture mode spatial rules; air_screen_1h was dropped 30 Oct 2026); heat treated as a passive tracer (buoyant rise ignored)",
 "coef": "airflow from manufacturer data (claim, 50); screening estimate, not a measured air temperature. Measured (first field study, Phoenix, 36–169 MW): downwind air 0.7–0.9 °C warmer on average, up to 2.2 °C, detectable 100–500 m away; condenser discharge 8–14 °C above ambient. Placement: units on the roof warm street-level air less than units on walls (Berlin model: up to 0.6 K for wall units, smaller for rooftop; Jin et al. 2020). The effect is strongest at night: Phoenix AC waste heat added more than 1 °C at night at some locations, little by day (Salamanca et al. 2014). A land-surface preprint (+2 °C) is context only",
 "unit": "°C",
 "sources": [
@@ -10067,7 +9866,7 @@
 }
 ],
 "conf": 60,
-"status": "physics at the coil (100); at a neighbour derived (60); field range peer-reviewed but transferred from large desert sites (70)",
+"status": "NOT COMPUTED YET: to build with the Architecture mode (30 Oct 2026). physics at the coil (100); at a neighbour derived (60); field range peer-reviewed but transferred from large desert sites (70)",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -10180,179 +9979,11 @@
 }
 },
 {
-"id": "genset_emission_rate",
-"kind": "quantity",
-"stage": "characterise",
-"name": "Generator emission rate",
-"formula": "Q = emission factor (g/kWh) × generator kWe × load ÷ 3,600",
-"coef": "NOx 14.6 g/kWh uncontrolled (AP-42 upper bound, as genset_test); check: 2,000 kWe at full load → 8.1 g/s (29.2 kg/h); generic equipment only",
-"unit": "g/s",
-"sources": [
-"ap42_34"
-],
-"source_roles": [],
-"conf": 65,
-"status": "arithmetic on the genset_test factor",
-"direction": "",
-"trial": "",
-"inputs": [
-"genset_test"
-],
-"upstream": 65,
-"city": {
-"van": 0,
-"edm": 0,
-"both": 0,
-"gen": 1
-}
-},
-{
-"id": "air_screen_1h",
-"kind": "quantity",
-"stage": "characterise",
-"name": "Air at a neighbour (screening)",
-"formula": "C(1 h) = 10⁶ × Q ÷ (π·u·σy·σz) × exp(−H² ÷ 2σz²); urban dispersion coefficients; u = 1 m/s, neutral class as a stated worst-case pick; preferred: AERSCREEN tables precomputed for three generic stacks",
-"coef": "AERSCREEN is the screening tool in both provinces (\"preferred\" in BC, \"recommended\" in Alberta); label: screening — a regulator would require AERSCREEN or refined modelling; dispersion coefficient table to be checked against the final ISC3 edition",
-"unit": "µg/m³",
-"sources": [
-"bcDispersion",
-"abModelGuideline"
-],
-"source_roles": [
-{
-"id": "bcDispersion",
-"term": "AERSCREEN preferred",
-"role": "method",
-"conf": 90,
-"verified": true
-},
-{
-"id": "abModelGuideline",
-"term": "AERSCREEN recommended",
-"role": "method",
-"conf": 90,
-"verified": true
-}
-],
-"conf": 60,
-"status": "derived with stated assumptions",
-"direction": "",
-"trial": "",
-"inputs": [
-"genset_emission_rate"
-],
-"upstream": 60,
-"city": {
-"van": 0,
-"edm": 0,
-"both": 2,
-"gen": 0
-}
-},
-{
-"id": "no2_at_receptor",
-"kind": "quantity",
-"stage": "characterise",
-"name": "Nitrogen dioxide at a neighbour",
-"formula": "NO2 = NOx at the receptor × conversion ratio: 1.0 (Tier 1) to the ARM2 bounds 0.9–0.2; diesel in-stack ratio 0.083",
-"coef": "BC NO2 guidance (2022); Edmonton uses Tier 1 only until Alberta Model Guideline s. 7.3 is read",
-"unit": "µg/m³",
-"sources": [
-"bcNO2Guidance"
-],
-"source_roles": [
-{
-"id": "bcNO2Guidance",
-"term": "conversion tiers",
-"role": "rule",
-"conf": 90,
-"verified": true
-}
-],
-"conf": 90,
-"status": "rule read (BC); Alberta numbers not read",
-"direction": "",
-"trial": "",
-"inputs": [
-"air_screen_1h"
-],
-"upstream": 60,
-"city": {
-"van": 0,
-"edm": 0,
-"both": 1,
-"gen": 0
-}
-},
-{
-"id": "air_vs_objective",
-"kind": "quantity",
-"stage": "test",
-"name": "Air against the limits",
-"formula": "C(avg) = C(1 h) × averaging ratio (24 h 0.60, annual 0.10) + background; test against the city objective AND the federal standard: \"passes screen\" or \"refined modelling needed\"; no score",
-"coef": "Vancouver: Metro Vancouver NO2 1-h 79 µg/m³, annual 22.6; PM2.5 24-h 25; Clark Drive background NO2 ≈ 82 µg/m³ (1-h metric), already over the regional objectives; Edmonton: Alberta NO2 1-h 300 µg/m³ (hour by hour, reading 60), PM2.5 24-h 29; federal NO2 1-h 79 (2025), PM2.5 27 → 23 (2030); Edmonton short-term background a gap",
-"unit": "pass / refine",
-"sources": [
-"aerscreenGuide",
-"mvAAQO",
-"abAAQO",
-"caaqs",
-"bcAirBackground",
-"mvAirSummary2024",
-"acaEdmonton"
-],
-"source_roles": [
-{
-"id": "mvAAQO",
-"term": "Vancouver objectives",
-"role": "rule",
-"conf": 90,
-"verified": true
-},
-{
-"id": "abAAQO",
-"term": "Alberta objectives",
-"role": "rule",
-"conf": 90,
-"verified": true
-},
-{
-"id": "caaqs",
-"term": "federal standards",
-"role": "rule",
-"conf": 90,
-"verified": true
-},
-{
-"id": "aerscreenGuide",
-"term": "averaging ratios",
-"role": "method",
-"conf": 90,
-"verified": true
-}
-],
-"conf": 70,
-"status": "objectives read (90); background partial",
-"direction": "",
-"trial": "",
-"inputs": [
-"no2_at_receptor",
-"air_screen_1h"
-],
-"upstream": 60,
-"city": {
-"van": 3,
-"edm": 2,
-"both": 0,
-"gen": 2
-}
-},
-{
 "id": "air_permit_trigger",
 "kind": "quantity",
 "stage": "test",
 "name": "Air permit trigger",
-"formula": "Vancouver: daily NOx on a test day vs 5 kg/day (Bylaw 1082 s. 7(12)); Edmonton: emergency standby generators exempt from an EPEA approval",
+"formula": "Vancouver: daily NOx on a test day vs 5 kg/day (Bylaw 1082 s. 7(12)); Edmonton: emergency standby generators exempt from an EPEA approval (daily NOx = genset_test NOx factor × kWe × test hours; 30 Oct 2026, after genset_emission_rate was dropped)",
 "coef": "a 2 MW generator at full load passes 5 kg of NOx in about 10 minutes (arithmetic, 60: whether s. 7(9) exempts engines outright is unsettled)",
 "unit": "rule",
 "sources": [
@@ -10372,7 +10003,7 @@
 "direction": "",
 "trial": "",
 "inputs": [
-"genset_emission_rate"
+"genset_test"
 ],
 "upstream": 60,
 "city": {
@@ -10403,7 +10034,7 @@
 }
 ],
 "conf": 80,
-"status": "computed from the PCIC files (both cities, Intl stations, same method)",
+"status": "PARKED 30 Oct 2026 (J.B.): kept in the register, built only if a design needs it. computed from the PCIC files (both cities, Intl stations, same method)",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -13258,14 +12889,6 @@
 "to": "hp_electricity"
 },
 {
-"from": "heat_captured",
-"to": "erf"
-},
-{
-"from": "heat_rejected",
-"to": "erf"
-},
-{
 "from": "weather",
 "to": "free_cooling_hours"
 },
@@ -13288,14 +12911,6 @@
 {
 "from": "evaporation",
 "to": "blowdown"
-},
-{
-"from": "blowdown",
-"to": "wue"
-},
-{
-"from": "it_load_actual",
-"to": "wue"
 },
 {
 "from": "it_load_actual",
@@ -13324,10 +12939,6 @@
 {
 "from": "backup_hours",
 "to": "generator_nox_pm"
-},
-{
-"from": "cooling_type",
-"to": "refrigerant_co2e"
 },
 {
 "from": "servers",
@@ -14038,10 +13649,6 @@
 "to": "untaxed_equipment"
 },
 {
-"from": "interconnection",
-"to": "computing_served"
-},
-{
 "from": "horizons",
 "to": "afterlife"
 },
@@ -14071,26 +13678,6 @@
 },
 {
 "from": "genset_test",
-"to": "genset_emission_rate"
-},
-{
-"from": "genset_emission_rate",
-"to": "air_screen_1h"
-},
-{
-"from": "air_screen_1h",
-"to": "no2_at_receptor"
-},
-{
-"from": "no2_at_receptor",
-"to": "air_vs_objective"
-},
-{
-"from": "air_screen_1h",
-"to": "air_vs_objective"
-},
-{
-"from": "genset_emission_rate",
 "to": "air_permit_trigger"
 },
 {
@@ -14603,7 +14190,6 @@
 "name": "Metering at the boundary",
 "test": "ERE control volume definable",
 "quantities": [
-"erf",
 "heat_in_water"
 ],
 "move": [
@@ -15605,9 +15191,7 @@
 "heading": "5 Organizational",
 "name": "Data-sharing agreement",
 "test": "meters and sensors",
-"quantities": [
-"erf"
-],
+"quantities": [],
 "move": [
 "time"
 ],
@@ -15766,8 +15350,7 @@
 "name": "Mandates and incentives",
 "test": "move the window",
 "quantities": [
-"cfd_score",
-"erf"
+"cfd_score"
 ],
 "move": [
 "policy"
@@ -16045,9 +15628,7 @@
 "heading": "7 Security",
 "name": "Information security",
 "test": "metering reveals load",
-"quantities": [
-"erf"
-],
+"quantities": [],
 "move": [
 "money"
 ],
@@ -16177,9 +15758,7 @@
 "heading": "8 Social",
 "name": "Promises enforceable",
 "test": "condition in permit; monitoring",
-"quantities": [
-"erf"
-],
+"quantities": [],
 "move": [
 "policy"
 ],
@@ -16347,9 +15926,7 @@
 "heading": "8 Social",
 "name": "Work created",
 "test": "operating and construction jobs, and who gets them",
-"quantities": [
-"jobs"
-],
+"quantities": [],
 "move": [
 "choice"
 ],
@@ -16393,7 +15970,6 @@
 "quantities": [
 "evaporation",
 "blowdown",
-"wue",
 "water_behind_electricity"
 ],
 "move": [
@@ -16437,8 +16013,7 @@
 "quantities": [
 "noise_level",
 "light_at_window",
-"generator_nox_pm",
-"refrigerant_co2e"
+"generator_nox_pm"
 ],
 "move": [
 "money"
@@ -18591,11 +18166,6 @@
 "Q_out ÷ COP",
 40
 ],
-"erf": [
-"0.5–0.8",
-"E_reuse ÷ E_DC (ISO); equals the captured share",
-40
-],
 "free_cooling_hours": [
 "7,109 h at 18 °C; 8,645 h at 24 °C",
 "CWEC Vancouver Intl, computed",
@@ -18759,6 +18329,11 @@
 "heat_captured": [
 "4.5–25 GWh/yr",
 "heat rejected × capture 0.5–0.8, at the boundary (ISO/IEC 30134-6)",
+40
+],
+"erf": [
+"0.5–0.8",
+"E_reuse ÷ E_DC (ISO); equals the captured share",
 40
 ],
 "tradeoffs": [

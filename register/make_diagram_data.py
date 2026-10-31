@@ -61,7 +61,6 @@ EX = {
         'cop': ('3.0–3.6', 'Lorenz η 0.55, 30 → 70 °C; DEA 3 MW waste-heat 3.6', 70),
         'heat_delivered': ('12–34 GWh/yr (1.4–3.9 MW average)', 'Q × capture × COP ÷ (COP − 1)', 60),
         'hp_electricity': ('3–12 GWh/yr', 'Q_out ÷ COP', 60),
-        'erf': ('0.4–1.0 of IT energy reused', 'heat_delivered ÷ IT energy', 60),
         'free_cooling_hours': ('7,109 h at 18 °C; 8,645 h at 24 °C', 'CWEC Vancouver Intl, computed', 80),
         'spare_capacity': ('unknown; 13.8 kV primary + standby feeders (claim); BC Hydro primary-service upgrade 2022 (permit)', 'operator claim + permit', 40),
         'flexible_load': ('judged 10–30% of IT load', 'colocation, no public demand-response record', 40),

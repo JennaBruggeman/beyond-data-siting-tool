@@ -14998,6 +14998,340 @@
      "status": "range from two planning records (50); applicant figures are claims",
      "revised": "2026-10-19"
     }
+   },
+   "wue": {
+    "date": "30 Oct 2026",
+    "by": "J.B.",
+    "why": "not computed; too detailed for a studio design tool",
+    "was": {
+     "id": "wue",
+     "name": "Water usage effectiveness",
+     "unit": "L/kWh",
+     "formula": "site water ÷ E_IT",
+     "inputs": [
+      "blowdown",
+      "it_load_actual"
+     ],
+     "coef": "DCRE cap 2 L/kWh",
+     "sources": [
+      "femp"
+     ],
+     "conf": 90,
+     "status": "in hand",
+     "stage": "characterise",
+     "source_roles": [
+      {
+       "id": "femp",
+       "term": "all coefficients",
+       "role": "coefficient",
+       "conf": 90,
+       "verified": true
+      }
+     ]
+    }
+   },
+   "erf": {
+    "date": "30 Oct 2026",
+    "by": "J.B.",
+    "why": "not computed; too detailed for a studio design tool",
+    "was": {
+     "id": "erf",
+     "name": "Energy reuse factor",
+     "unit": "—",
+     "formula": "ERF = E_reuse ÷ E_DC (ISO/IEC 30134-6; EU 2024/1364 Annex III): heat captured at the boundary ÷ total data-centre energy (IT × PUE); 0–1; heat-pump uplift and heat-pump electricity excluded",
+     "inputs": [
+      "heat_captured",
+      "heat_rejected"
+     ],
+     "coef": "EnEfG benchmark 10% → 20%; first attempt used heat_delivered ÷ IT energy — corrected 13 Oct 2026: Telia Helsinki reports ERF 0.75 (operator claim; basis not stated in the PDF); German HPC centres 0.01–0.20 (arXiv 2411.16204, non-ISO denominator); NREL RSF reports ERE 0.91 \"calculated, not measured\"",
+     "sources": [
+      "euReg2024_1364",
+      "iso30134_6",
+      "nrelRSF",
+      "teliaHKI2024",
+      "enefg11",
+      "greenGridWP29"
+     ],
+     "conf": 90,
+     "status": "in hand",
+     "stage": "characterise",
+     "source_roles": [
+      {
+       "id": "euReg2024_1364",
+       "term": "definition",
+       "role": "rule",
+       "conf": 90,
+       "verified": true
+      },
+      {
+       "id": "iso30134_6",
+       "term": "definition",
+       "role": "rule",
+       "conf": 90,
+       "verified": true
+      },
+      {
+       "id": "nrelRSF",
+       "term": "reported value",
+       "role": "check (derived from ERE and PUE)",
+       "conf": 50,
+       "verified": true,
+       "relabel": "30 Oct 2026: check → check (derived from ERE and PUE) (ERF is not reported; it is our derivation)"
+      },
+      {
+       "id": "teliaHKI2024",
+       "term": "reported value",
+       "role": "check",
+       "conf": 50,
+       "verified": true
+      },
+      {
+       "id": "enefg11",
+       "term": "Energy reuse factor",
+       "role": "traced from heatPhys",
+       "conf": 50,
+       "verified": false
+      },
+      {
+       "id": "greenGridWP29",
+       "term": "Energy reuse factor",
+       "role": "traced from heatPhys",
+       "conf": 50,
+       "verified": false
+      }
+     ]
+    }
+   },
+   "refrigerant_co2e": {
+    "date": "30 Oct 2026",
+    "by": "J.B.",
+    "why": "not computed; too detailed for a studio design tool",
+    "was": {
+     "id": "refrigerant_co2e",
+     "name": "Refrigerant leakage",
+     "unit": "tCO2e/yr",
+     "formula": "charge × 3%/yr × GWP",
+     "inputs": [
+      "cooling_type"
+     ],
+     "coef": "IPCC GWPs; chiller charge 10–2,000 kg and operating loss 2–15% of the initial charge a year, the lower end for developed countries (IPCC 2019 Refinement, Vol. 3 Ch. 7, Table 7.9, p. 7.32: default ranges, not measured here); the tool's 3%/yr sits near the lower end and its 50–600 kg per chiller inside the range",
+     "sources": [
+      "ipcc2019v3ch7"
+     ],
+     "conf": 60,
+     "status": "default ranges from the IPCC inventory guidelines (read 19 Oct 2026); no Canadian or manufacturer figure for these chillers (M98)",
+     "stage": "characterise",
+     "source_roles": [
+      {
+       "id": "ipcc2019v3ch7",
+       "term": "charge and loss ranges, GWPs",
+       "role": "coefficient",
+       "conf": 60,
+       "verified": true
+      }
+     ]
+    }
+   },
+   "no2_at_receptor": {
+    "date": "30 Oct 2026",
+    "by": "J.B.",
+    "why": "not computed; too detailed for a studio design tool",
+    "was": {
+     "id": "no2_at_receptor",
+     "name": "Nitrogen dioxide at a neighbour",
+     "unit": "µg/m³",
+     "formula": "NO2 = NOx at the receptor × conversion ratio: 1.0 (Tier 1) to the ARM2 bounds 0.9–0.2; diesel in-stack ratio 0.083",
+     "inputs": [
+      "air_screen_1h"
+     ],
+     "coef": "BC NO2 guidance (2022); Edmonton uses Tier 1 only until Alberta Model Guideline s. 7.3 is read",
+     "sources": [
+      "bcNO2Guidance"
+     ],
+     "conf": 90,
+     "status": "rule read (BC); Alberta numbers not read",
+     "stage": "characterise",
+     "source_roles": [
+      {
+       "id": "bcNO2Guidance",
+       "term": "conversion tiers",
+       "role": "rule",
+       "conf": 90,
+       "verified": true
+      }
+     ],
+     "added": "2026-10-19"
+    }
+   },
+   "air_screen_1h": {
+    "date": "30 Oct 2026",
+    "by": "J.B.",
+    "why": "not computed; too detailed for a studio design tool",
+    "was": {
+     "id": "air_screen_1h",
+     "name": "Air at a neighbour (screening)",
+     "unit": "µg/m³",
+     "formula": "C(1 h) = 10⁶ × Q ÷ (π·u·σy·σz) × exp(−H² ÷ 2σz²); urban dispersion coefficients; u = 1 m/s, neutral class as a stated worst-case pick; preferred: AERSCREEN tables precomputed for three generic stacks",
+     "inputs": [
+      "genset_emission_rate"
+     ],
+     "coef": "AERSCREEN is the screening tool in both provinces (\"preferred\" in BC, \"recommended\" in Alberta); label: screening — a regulator would require AERSCREEN or refined modelling; dispersion coefficient table to be checked against the final ISC3 edition",
+     "sources": [
+      "bcDispersion",
+      "abModelGuideline"
+     ],
+     "conf": 60,
+     "status": "derived with stated assumptions",
+     "stage": "characterise",
+     "source_roles": [
+      {
+       "id": "bcDispersion",
+       "term": "AERSCREEN preferred",
+       "role": "method",
+       "conf": 90,
+       "verified": true
+      },
+      {
+       "id": "abModelGuideline",
+       "term": "AERSCREEN recommended",
+       "role": "method",
+       "conf": 90,
+       "verified": true
+      }
+     ],
+     "added": "2026-10-19"
+    }
+   },
+   "genset_emission_rate": {
+    "date": "30 Oct 2026",
+    "by": "J.B.",
+    "why": "not computed; too detailed for a studio design tool",
+    "was": {
+     "id": "genset_emission_rate",
+     "name": "Generator emission rate",
+     "unit": "g/s",
+     "formula": "Q = emission factor (g/kWh) × generator kWe × load ÷ 3,600",
+     "inputs": [
+      "genset_test"
+     ],
+     "coef": "NOx 14.6 g/kWh uncontrolled (AP-42 upper bound, as genset_test); check: 2,000 kWe at full load → 8.1 g/s (29.2 kg/h); generic equipment only",
+     "sources": [
+      "ap42_34"
+     ],
+     "conf": 65,
+     "status": "arithmetic on the genset_test factor",
+     "stage": "characterise",
+     "source_roles": [],
+     "added": "2026-10-19"
+    }
+   },
+   "computing_served": {
+    "date": "30 Oct 2026",
+    "by": "J.B.",
+    "why": "not computed; too detailed for a studio design tool",
+    "was": {
+     "id": "computing_served",
+     "name": "Who the computing serves",
+     "unit": "text",
+     "formula": "up to four sourced statements, no score: federal data-residency rule; provincial rule; the local internet exchange and its size; residency ≠ sovereignty",
+     "inputs": [
+      "interconnection"
+     ],
+     "coef": "Federal: Protected B and above stored in Canada; BC: data residency removed 2021, sensitive data abroad needs an assessment; Alberta: no rule found; Vancouver exchanges 158 participants across three, Edmonton YEGIX 9",
+     "sources": [
+      "gcDataResidency",
+      "bcFoippaAbroad",
+      "isocPulseIXP"
+     ],
+     "conf": 80,
+     "status": "read",
+     "stage": "characterise",
+     "source_roles": [
+      {
+       "id": "gcDataResidency",
+       "term": "federal residency",
+       "role": "history",
+       "conf": 90,
+       "verified": true,
+       "relabel": "30 Oct 2026: rule → history (source is archived; current rule is Directive req. 4.4.3.14, not yet read)"
+      },
+      {
+       "id": "bcFoippaAbroad",
+       "term": "BC rule",
+       "role": "context",
+       "conf": 90,
+       "verified": true,
+       "relabel": "30 Oct 2026: rule → context (binds public bodies only; not a rule for private data-centre customers)"
+      },
+      {
+       "id": "isocPulseIXP",
+       "term": "exchange sizes",
+       "role": "data",
+       "conf": 50,
+       "verified": true
+      }
+     ],
+     "added": "2026-10-19"
+    }
+   },
+   "air_vs_objective": {
+    "date": "30 Oct 2026",
+    "by": "J.B.",
+    "why": "not computed; too detailed for a studio design tool",
+    "was": {
+     "id": "air_vs_objective",
+     "name": "Air against the limits",
+     "unit": "pass / refine",
+     "formula": "C(avg) = C(1 h) × averaging ratio (24 h 0.60, annual 0.10) + background; test against the city objective AND the federal standard: \"passes screen\" or \"refined modelling needed\"; no score",
+     "inputs": [
+      "no2_at_receptor",
+      "air_screen_1h"
+     ],
+     "coef": "Vancouver: Metro Vancouver NO2 1-h 79 µg/m³, annual 22.6; PM2.5 24-h 25; Clark Drive background NO2 ≈ 82 µg/m³ (1-h metric), already over the regional objectives; Edmonton: Alberta NO2 1-h 300 µg/m³ (hour by hour, reading 60), PM2.5 24-h 29; federal NO2 1-h 79 (2025), PM2.5 27 → 23 (2030); Edmonton short-term background a gap",
+     "sources": [
+      "aerscreenGuide",
+      "mvAAQO",
+      "abAAQO",
+      "caaqs",
+      "bcAirBackground",
+      "mvAirSummary2024",
+      "acaEdmonton"
+     ],
+     "conf": 70,
+     "status": "objectives read (90); background partial",
+     "stage": "test",
+     "source_roles": [
+      {
+       "id": "mvAAQO",
+       "term": "Vancouver objectives",
+       "role": "rule",
+       "conf": 90,
+       "verified": true
+      },
+      {
+       "id": "abAAQO",
+       "term": "Alberta objectives",
+       "role": "rule",
+       "conf": 90,
+       "verified": true
+      },
+      {
+       "id": "caaqs",
+       "term": "federal standards",
+       "role": "rule",
+       "conf": 90,
+       "verified": true
+      },
+      {
+       "id": "aerscreenGuide",
+       "term": "averaging ratios",
+       "role": "method",
+       "conf": 90,
+       "verified": true
+      }
+     ],
+     "added": "2026-10-19"
+    }
    }
   }
  },
@@ -15741,73 +16075,6 @@
    ]
   },
   {
-   "id": "erf",
-   "name": "Energy reuse factor",
-   "unit": "—",
-   "formula": "ERF = E_reuse ÷ E_DC (ISO/IEC 30134-6; EU 2024/1364 Annex III): heat captured at the boundary ÷ total data-centre energy (IT × PUE); 0–1; heat-pump uplift and heat-pump electricity excluded",
-   "inputs": [
-    "heat_captured",
-    "heat_rejected"
-   ],
-   "coef": "EnEfG benchmark 10% → 20%; first attempt used heat_delivered ÷ IT energy — corrected 13 Oct 2026: Telia Helsinki reports ERF 0.75 (operator claim; basis not stated in the PDF); German HPC centres 0.01–0.20 (arXiv 2411.16204, non-ISO denominator); NREL RSF reports ERE 0.91 \"calculated, not measured\"",
-   "sources": [
-    "euReg2024_1364",
-    "iso30134_6",
-    "nrelRSF",
-    "teliaHKI2024",
-    "enefg11",
-    "greenGridWP29"
-   ],
-   "conf": 90,
-   "status": "in hand",
-   "stage": "characterise",
-   "source_roles": [
-    {
-     "id": "euReg2024_1364",
-     "term": "definition",
-     "role": "rule",
-     "conf": 90,
-     "verified": true
-    },
-    {
-     "id": "iso30134_6",
-     "term": "definition",
-     "role": "rule",
-     "conf": 90,
-     "verified": true
-    },
-    {
-     "id": "nrelRSF",
-     "term": "reported value",
-     "role": "check (derived from ERE and PUE)",
-     "conf": 50,
-     "verified": true,
-     "relabel": "30 Oct 2026: check → check (derived from ERE and PUE) (ERF is not reported; it is our derivation)"
-    },
-    {
-     "id": "teliaHKI2024",
-     "term": "reported value",
-     "role": "check",
-     "conf": 50,
-     "verified": true
-    },
-    {
-     "id": "enefg11",
-     "term": "Energy reuse factor",
-     "role": "traced from heatPhys",
-     "conf": 50,
-     "verified": false
-    },
-    {
-     "id": "greenGridWP29",
-     "term": "Energy reuse factor",
-     "role": "traced from heatPhys",
-     "conf": 50,
-     "verified": false
-    }
-   ]
-  },
-  {
    "id": "heat_in_water",
    "name": "Heat carried in water",
    "unit": "kWh",
@@ -15818,7 +16085,7 @@
     "greenGridWP29"
    ],
    "conf": 100,
-   "status": "in hand",
+   "status": "NOT COMPUTED YET: to build with the Architecture mode (30 Oct 2026). in hand",
    "stage": "characterise",
    "source_roles": [
     {
@@ -16284,32 +16551,6 @@
    ]
   },
   {
-   "id": "wue",
-   "name": "Water usage effectiveness",
-   "unit": "L/kWh",
-   "formula": "site water ÷ E_IT",
-   "inputs": [
-    "blowdown",
-    "it_load_actual"
-   ],
-   "coef": "DCRE cap 2 L/kWh",
-   "sources": [
-    "femp"
-   ],
-   "conf": 90,
-   "status": "in hand",
-   "stage": "characterise",
-   "source_roles": [
-    {
-     "id": "femp",
-     "term": "all coefficients",
-     "role": "coefficient",
-     "conf": 90,
-     "verified": true
-    }
-   ]
-  },
-  {
    "id": "water_behind_electricity",
    "name": "Water behind the electricity",
    "unit": "L/yr",
@@ -16527,31 +16768,6 @@
     }
    ],
    "revised": "2026-10-19"
-  },
-  {
-   "id": "refrigerant_co2e",
-   "name": "Refrigerant leakage",
-   "unit": "tCO2e/yr",
-   "formula": "charge × 3%/yr × GWP",
-   "inputs": [
-    "cooling_type"
-   ],
-   "coef": "IPCC GWPs; chiller charge 10–2,000 kg and operating loss 2–15% of the initial charge a year, the lower end for developed countries (IPCC 2019 Refinement, Vol. 3 Ch. 7, Table 7.9, p. 7.32: default ranges, not measured here); the tool's 3%/yr sits near the lower end and its 50–600 kg per chiller inside the range",
-   "sources": [
-    "ipcc2019v3ch7"
-   ],
-   "conf": 60,
-   "status": "default ranges from the IPCC inventory guidelines (read 19 Oct 2026); no Canadian or manufacturer figure for these chillers (M98)",
-   "stage": "characterise",
-   "source_roles": [
-    {
-     "id": "ipcc2019v3ch7",
-     "term": "charge and loss ranges, GWPs",
-     "role": "coefficient",
-     "conf": 60,
-     "verified": true
-    }
-   ]
   },
   {
    "id": "embodied_it",
@@ -16856,7 +17072,7 @@
     "vanSolarAccess"
    ],
    "conf": 90,
-   "status": "in hand",
+   "status": "NOT COMPUTED YET: to build with the Architecture mode (30 Oct 2026). in hand",
    "stage": "characterise",
    "source_roles": [
     {
@@ -19762,7 +19978,7 @@
     "abWells2026"
    ],
    "conf": 80,
-   "status": "Vancouver in hand (government export); Edmonton pending AWWID",
+   "status": "PARKED 30 Oct 2026 (J.B.): kept in the register, built only if a design needs it. Vancouver in hand (government export); Edmonton pending AWWID",
    "stage": "characterise",
    "source_roles": [
     {
@@ -22739,7 +22955,7 @@
     }
    ],
    "conf": 40,
-   "status": "ranked, no dB values",
+   "status": "PARKED 30 Oct 2026 (J.B.): kept in the register, built only if a design needs it. ranked, no dB values",
    "siting": true
   },
   {
@@ -23214,50 +23430,6 @@
    "added": "2026-10-19"
   },
   {
-   "id": "computing_served",
-   "name": "Who the computing serves",
-   "unit": "text",
-   "formula": "up to four sourced statements, no score: federal data-residency rule; provincial rule; the local internet exchange and its size; residency ≠ sovereignty",
-   "inputs": [
-    "interconnection"
-   ],
-   "coef": "Federal: Protected B and above stored in Canada; BC: data residency removed 2021, sensitive data abroad needs an assessment; Alberta: no rule found; Vancouver exchanges 158 participants across three, Edmonton YEGIX 9",
-   "sources": [
-    "gcDataResidency",
-    "bcFoippaAbroad",
-    "isocPulseIXP"
-   ],
-   "conf": 80,
-   "status": "read",
-   "stage": "characterise",
-   "source_roles": [
-    {
-     "id": "gcDataResidency",
-     "term": "federal residency",
-     "role": "history",
-     "conf": 90,
-     "verified": true,
-     "relabel": "30 Oct 2026: rule → history (source is archived; current rule is Directive req. 4.4.3.14, not yet read)"
-    },
-    {
-     "id": "bcFoippaAbroad",
-     "term": "BC rule",
-     "role": "context",
-     "conf": 90,
-     "verified": true,
-     "relabel": "30 Oct 2026: rule → context (binds public bodies only; not a rule for private data-centre customers)"
-    },
-    {
-     "id": "isocPulseIXP",
-     "term": "exchange sizes",
-     "role": "data",
-     "conf": 50,
-     "verified": true
-    }
-   ],
-   "added": "2026-10-19"
-  },
-  {
    "id": "afterlife",
    "name": "After the data centre",
    "unit": "text",
@@ -23309,7 +23481,7 @@
     "sailor2026"
    ],
    "conf": 70,
-   "status": "arithmetic (100); city comparison value 70",
+   "status": "NOT COMPUTED YET: to build with the Architecture mode (30 Oct 2026). arithmetic (100); city comparison value 70",
    "stage": "characterise",
    "source_roles": [
     {
@@ -23326,7 +23498,7 @@
    "id": "heat_plume_dT",
    "name": "Warmer air near the cooling units",
    "unit": "°C",
-   "formula": "at the coil: ΔT = Q ÷ (ρ·cp·airflow); at a neighbour: ΔT ≈ Q ÷ (ρ·cp) × (χ/Q)(x), the plume factor from air_screen_1h; heat treated as a passive tracer (buoyant rise ignored)",
+   "formula": "at the coil: ΔT = Q ÷ (ρ·cp·airflow); at a neighbour: ΔT ≈ Q ÷ (ρ·cp) × (χ/Q)(x), a plume factor (dispersion method to be chosen with the Architecture mode spatial rules; air_screen_1h was dropped 30 Oct 2026); heat treated as a passive tracer (buoyant rise ignored)",
    "inputs": [
     "heat_rejected",
     "plant_schedule"
@@ -23339,7 +23511,7 @@
     "dcLstPreprint"
    ],
    "conf": 60,
-   "status": "physics at the coil (100); at a neighbour derived (60); field range peer-reviewed but transferred from large desert sites (70)",
+   "status": "NOT COMPUTED YET: to build with the Architecture mode (30 Oct 2026). physics at the coil (100); at a neighbour derived (60); field range peer-reviewed but transferred from large desert sites (70)",
    "stage": "characterise",
    "source_roles": [
     {
@@ -23439,144 +23611,12 @@
    "added": "2026-10-19"
   },
   {
-   "id": "genset_emission_rate",
-   "name": "Generator emission rate",
-   "unit": "g/s",
-   "formula": "Q = emission factor (g/kWh) × generator kWe × load ÷ 3,600",
-   "inputs": [
-    "genset_test"
-   ],
-   "coef": "NOx 14.6 g/kWh uncontrolled (AP-42 upper bound, as genset_test); check: 2,000 kWe at full load → 8.1 g/s (29.2 kg/h); generic equipment only",
-   "sources": [
-    "ap42_34"
-   ],
-   "conf": 65,
-   "status": "arithmetic on the genset_test factor",
-   "stage": "characterise",
-   "source_roles": [],
-   "added": "2026-10-19"
-  },
-  {
-   "id": "air_screen_1h",
-   "name": "Air at a neighbour (screening)",
-   "unit": "µg/m³",
-   "formula": "C(1 h) = 10⁶ × Q ÷ (π·u·σy·σz) × exp(−H² ÷ 2σz²); urban dispersion coefficients; u = 1 m/s, neutral class as a stated worst-case pick; preferred: AERSCREEN tables precomputed for three generic stacks",
-   "inputs": [
-    "genset_emission_rate"
-   ],
-   "coef": "AERSCREEN is the screening tool in both provinces (\"preferred\" in BC, \"recommended\" in Alberta); label: screening — a regulator would require AERSCREEN or refined modelling; dispersion coefficient table to be checked against the final ISC3 edition",
-   "sources": [
-    "bcDispersion",
-    "abModelGuideline"
-   ],
-   "conf": 60,
-   "status": "derived with stated assumptions",
-   "stage": "characterise",
-   "source_roles": [
-    {
-     "id": "bcDispersion",
-     "term": "AERSCREEN preferred",
-     "role": "method",
-     "conf": 90,
-     "verified": true
-    },
-    {
-     "id": "abModelGuideline",
-     "term": "AERSCREEN recommended",
-     "role": "method",
-     "conf": 90,
-     "verified": true
-    }
-   ],
-   "added": "2026-10-19"
-  },
-  {
-   "id": "no2_at_receptor",
-   "name": "Nitrogen dioxide at a neighbour",
-   "unit": "µg/m³",
-   "formula": "NO2 = NOx at the receptor × conversion ratio: 1.0 (Tier 1) to the ARM2 bounds 0.9–0.2; diesel in-stack ratio 0.083",
-   "inputs": [
-    "air_screen_1h"
-   ],
-   "coef": "BC NO2 guidance (2022); Edmonton uses Tier 1 only until Alberta Model Guideline s. 7.3 is read",
-   "sources": [
-    "bcNO2Guidance"
-   ],
-   "conf": 90,
-   "status": "rule read (BC); Alberta numbers not read",
-   "stage": "characterise",
-   "source_roles": [
-    {
-     "id": "bcNO2Guidance",
-     "term": "conversion tiers",
-     "role": "rule",
-     "conf": 90,
-     "verified": true
-    }
-   ],
-   "added": "2026-10-19"
-  },
-  {
-   "id": "air_vs_objective",
-   "name": "Air against the limits",
-   "unit": "pass / refine",
-   "formula": "C(avg) = C(1 h) × averaging ratio (24 h 0.60, annual 0.10) + background; test against the city objective AND the federal standard: \"passes screen\" or \"refined modelling needed\"; no score",
-   "inputs": [
-    "no2_at_receptor",
-    "air_screen_1h"
-   ],
-   "coef": "Vancouver: Metro Vancouver NO2 1-h 79 µg/m³, annual 22.6; PM2.5 24-h 25; Clark Drive background NO2 ≈ 82 µg/m³ (1-h metric), already over the regional objectives; Edmonton: Alberta NO2 1-h 300 µg/m³ (hour by hour, reading 60), PM2.5 24-h 29; federal NO2 1-h 79 (2025), PM2.5 27 → 23 (2030); Edmonton short-term background a gap",
-   "sources": [
-    "aerscreenGuide",
-    "mvAAQO",
-    "abAAQO",
-    "caaqs",
-    "bcAirBackground",
-    "mvAirSummary2024",
-    "acaEdmonton"
-   ],
-   "conf": 70,
-   "status": "objectives read (90); background partial",
-   "stage": "test",
-   "source_roles": [
-    {
-     "id": "mvAAQO",
-     "term": "Vancouver objectives",
-     "role": "rule",
-     "conf": 90,
-     "verified": true
-    },
-    {
-     "id": "abAAQO",
-     "term": "Alberta objectives",
-     "role": "rule",
-     "conf": 90,
-     "verified": true
-    },
-    {
-     "id": "caaqs",
-     "term": "federal standards",
-     "role": "rule",
-     "conf": 90,
-     "verified": true
-    },
-    {
-     "id": "aerscreenGuide",
-     "term": "averaging ratios",
-     "role": "method",
-     "conf": 90,
-     "verified": true
-    }
-   ],
-   "added": "2026-10-19"
-  },
-  {
    "id": "air_permit_trigger",
    "name": "Air permit trigger",
    "unit": "rule",
-   "formula": "Vancouver: daily NOx on a test day vs 5 kg/day (Bylaw 1082 s. 7(12)); Edmonton: emergency standby generators exempt from an EPEA approval",
+   "formula": "Vancouver: daily NOx on a test day vs 5 kg/day (Bylaw 1082 s. 7(12)); Edmonton: emergency standby generators exempt from an EPEA approval (daily NOx = genset_test NOx factor × kWe × test hours; 30 Oct 2026, after genset_emission_rate was dropped)",
    "inputs": [
-    "genset_emission_rate"
+    "genset_test"
    ],
    "coef": "a 2 MW generator at full load passes 5 kg of NOx in about 10 minutes (arithmetic, 60: whether s. 7(9) exempts engines outright is unsettled)",
    "sources": [
@@ -23610,7 +23650,7 @@
     "pcicWx3"
    ],
    "conf": 80,
-   "status": "computed from the PCIC files (both cities, Intl stations, same method)",
+   "status": "PARKED 30 Oct 2026 (J.B.): kept in the register, built only if a design needs it. computed from the PCIC files (both cities, Intl stations, same method)",
    "stage": "characterise",
    "source_roles": [
     {
@@ -26029,7 +26069,6 @@
    "name": "Metering at the boundary",
    "test": "ERE control volume definable",
    "quantities": [
-    "erf",
     "heat_in_water"
    ],
    "move": [
@@ -26620,9 +26659,7 @@
    "heading": "5 Organizational",
    "name": "Data-sharing agreement",
    "test": "meters and sensors",
-   "quantities": [
-    "erf"
-   ],
+   "quantities": [],
    "move": [
     "time"
    ],
@@ -26727,8 +26764,7 @@
    "name": "Mandates and incentives",
    "test": "move the window",
    "quantities": [
-    "cfd_score",
-    "erf"
+    "cfd_score"
    ],
    "move": [
     "policy"
@@ -26840,9 +26876,7 @@
    "heading": "7 Security",
    "name": "Information security",
    "test": "metering reveals load",
-   "quantities": [
-    "erf"
-   ],
+   "quantities": [],
    "move": [
     "money"
    ],
@@ -26960,9 +26994,7 @@
    "heading": "8 Social",
    "name": "Promises enforceable",
    "test": "condition in permit; monitoring",
-   "quantities": [
-    "erf"
-   ],
+   "quantities": [],
    "move": [
     "policy"
    ],
@@ -27099,7 +27131,6 @@
    "quantities": [
     "evaporation",
     "blowdown",
-    "wue",
     "water_behind_electricity"
    ],
    "move": [
@@ -27139,8 +27170,7 @@
    "quantities": [
     "noise_level",
     "light_at_window",
-    "generator_nox_pm",
-    "refrigerant_co2e"
+    "generator_nox_pm"
    ],
    "move": [
     "money"
@@ -27410,9 +27440,7 @@
    "heading": "8 Social",
    "name": "Work created",
    "test": "operating and construction jobs, and who gets them",
-   "quantities": [
-    "jobs"
-   ],
+   "quantities": [],
    "move": [
     "choice"
    ],
