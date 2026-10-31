@@ -23,3 +23,10 @@ Check 1 only (four research agents; sources in the register with check records).
 
 ## Paywalled (UBC Library)
 ASHRAE 62.1 Table 5-1; CSA C282; CSA B139; NFPA 37 full text.
+
+## Round 2 (31 Oct 2026): zoning.md, separations.md, gaps_round2.md
+
+- **Zoning:** data centres are conditional in Vancouver I-2, I-3 (sub-area A), I-1C, FC-2; I-3 s. 2.2.11 (adopted June 2026): no bulk data storage at the ground floor except entrances. Edmonton has no data-centre use: deemed Minor or heavy industrial, always discretionary (BE, IM, IH). Other uses in Vancouver I-2/I-3 share ≤1.00 FSR. Programs by zone: see zoning.md (e.g. Edmonton BE allows community, recreation, laundromat ≤500 m² each; IM and IH allow almost none; Vancouver allows urban farms in all four, no pool use listed, housing only in FC-2 sub-areas and not at grade).
+- **Separations:** fuel correction (tanks over 2,500 L follow NFC Part 4); tanks 3 m from property lines and buildings (1.5 m up to 50,000 L, Alberta 80,000 L); batteries 3 m from exits, 1.5 m from openings (electrical code via Alberta STANDATA); fuel truck left over 1 h: 15 m from buildings; cooling towers need a Vancouver operating permit, no distance rule; no BC/AB distance rule for generators beyond Bylaw 1329's 100 m (US benchmarks: Washington 120–400 m to housing by run hours; California notice within 1,000 ft of a school); no Canadian EMF distance.
+- **Gaps filled:** greenhouse ≈99 W/m² of floor peak (Lower Mainland, Chau 2009), cover-to-floor ≈1.55; Swimming Canada lanes 2.5 m (1.8 club), 25–28 °C; therapy pools 32–36 °C; institutional laundry ≈386 m² net for 1–100 beds (US VA); laundromats 1,000–5,000 ft² (trade association claim).
+- **Still ?:** pool peak W/m² of water and supply temperature; Canadian laundry sizes; Edmonton consolidation clause; cooling/clean-air capacities.
