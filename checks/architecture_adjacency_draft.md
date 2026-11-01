@@ -53,3 +53,10 @@ From checks/research_arch_v1/adj_occupancy.md, adj_service.md, adj_programs.md, 
 - Flood: site above the 500-year flood level plus 0.3–0.6 m freeboard; 152 m from wave impact.
 - Air: the data hall's air system independent of other spaces; data rooms kept at positive pressure to neighbours; intakes not exposed to combustibles.
 - Ceilings at most 9 m.
+
+## NFPA 37 (2024), US benchmark
+- Generator rooms inside a building: 1 h walls, floors, ceilings; attached rooms 1 h common wall; fire doors and dampers on openings.
+- Outdoors or on a roof: 1.5 m from any opening in a wall (no exception); 1.5 m from combustible walls unless that wall is 1 h, or a fire test or calculation shows it's safe.
+- Detached generator building: 1.5 m from openings and combustible walls, unless a wall is 1 h or the generator building is sprinklered.
+- Roof units need an oil-containment curb and a noncombustible surface 300 mm beyond. NFPA 37 allows roofs; FM 5-32 advises against.
+- Fuel indoors: over 2,500 L per tank, or 5,000 L in total, needs its own room.
