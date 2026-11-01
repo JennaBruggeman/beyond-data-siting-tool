@@ -40,3 +40,9 @@ Claude's suggestions (unresearched, J.B. to confirm): botanical conservatory or 
 - Checks on any line: required rooms inside; public programs (refuge, public ground floor, café, pool entrance) outside or flagged; each shared system crossing the line flagged (meters, valves, keys); entrances (public, staff, truck; dock 7.5 m from intakes; parked fuel truck 15 m from buildings); a fence is 2.4 m anti-climb mesh and may not block battery or plant airflow (NFPA 855 4.7.7.2); emergency mode: can the refuge open while the data centre stays locked.
 - Shown side by side, not judged: street frontage to public use, controlled doors from street to servers, share of the lot the public can reach.
 - Replaces the removed Off/Today/Proposed toggle in Architecture mode; Engineering keeps the single fence on/off.
+
+## Heat hand-over across the secure line (research 1 Nov 2026: checks/research_arch_v1/handover.md, check 1 only)
+- District energy practice: an energy transfer station (ETS) room for the utility's equipment, on an outside wall, utility keyed access. Vancouver NEU: min 6 × 3 m (below 13,940 m² of floor), 6 × 4 m (to 23,230 m²), first basement, hand-over at the first valve on the building side. Blatchford: 12–55 m², ground floor or first parkade level, 2 h separation, utility owns heat pumps, exchanger and meter, card-reader door.
+- Data-centre cases (TELUS Garden, BC regulator orders; Odense, claims): the utility or receiver owns the heat pump; no source says whether the utility enters the data centre.
+- Meters: Measurement Canada-approved for billing (unapproved non-exempt meters out of use by 1 Jan 2028); no rule on meter location.
+- No source for a room straddling a secure line. Tool proposal (our design, not a rule): a hand-over room on the line, one door from each side, sized at the NEU minimum (?) until a per-MW source is found.
