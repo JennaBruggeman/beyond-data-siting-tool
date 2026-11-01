@@ -60,3 +60,11 @@ From checks/research_arch_v1/adj_occupancy.md, adj_service.md, adj_programs.md, 
 - Detached generator building: 1.5 m from openings and combustible walls, unless a wall is 1 h or the generator building is sprinklered.
 - Roof units need an oil-containment curb and a noncombustible surface 300 mm beyond. NFPA 37 allows roofs; FM 5-32 advises against.
 - Fuel indoors: over 2,500 L per tank, or 5,000 L in total, needs its own room.
+
+## NFPA 75 (2024), US benchmark
+- The IT area is separated from other occupancies by rated construction, **at least 1 h**, slab to slab; doors ¾ h (1 h walls) or 1½ h (2 h walls). A fire risk assessment can set another separation.
+- Not above, below or beside hazardous processes unless protected.
+- Access restricted to authorized persons.
+- A window into the hall (e.g. a public viewing window) is allowed only as a fire-rated window or with a fire shutter that closes automatically on smoke or fire.
+- Only IT and support equipment in the IT room; sprinklered building; leak removal under the IT floor.
+- The risk assessment must cover people in adjacent spaces and the public.

@@ -22,7 +22,7 @@ Kept by Claude; updated as research finds more. "Why" = what the tool needs from
 | NFPA 855, full text (free-access reader only) | Battery storage distances; register holds screenshots of the 2026 reader only | Architecture mode separations |
 | UL 9540A (battery fire test method) | Units tested to it may follow the maker's spacing instead of CEC 64-926 distances | Architecture mode separations |
 | CSA C22.2 No. 107.3 (UPS equipment) | UPS batteries sit outside the CEC ESS rules; siting rules for them ? | Architecture mode separations |
-| NFPA 75 (Fire Protection of Information Technology Equipment) | Whether the data hall itself must be a fire-rated room (1 h or 2 h), separate from what the building code asks | Architecture mode: hall separation (J.B. 31 Oct: her understanding is 2 h) |
+| NFPA 75 (2024): OBTAINED 1 Nov 2026 (Ch. 4–9 parts, register nfpa75_2024) | Whether the data hall itself must be a fire-rated room (1 h or 2 h), separate from what the building code asks | Architecture mode: hall separation (J.B. 31 Oct: her understanding is 2 h) |
 | ~~FM Global Data Sheet 5-32~~ | OBTAINED 1 Nov 2026 (J.B. upload; free at fm.com/datasheets); in the register as fmDS0532. Related FM sheets it cites, also free: 5-23 (emergency power), 5-28 (DC batteries), 13-26 (engines), 7-88 (outdoor tanks), 1-40 (flood) | Same |
 | ASHRAE TC 9.9 Thermal Guidelines for Data Processing Environments | Server-room air filtration (MERV levels for recirculated and outdoor air) | Clean air in the hall |
 | CSA B52 (Mechanical refrigeration code) | Refrigeration machinery-room rules (exits, detection, ventilation, what may adjoin a chiller room); NBC/NBC(AE) 6.2.1.5 defer to it; BCBC defers to the Safety Standards Act | Architecture mode adjacency (adj_service) |
