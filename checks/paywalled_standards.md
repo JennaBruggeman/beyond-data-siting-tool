@@ -7,7 +7,7 @@ Kept by Claude; updated as research finds more. "Why" = what the tool needs from
 | ASHRAE 62.1, Table 5-1 (minimum separation distances, exhaust to air intakes) | Generator and cooling-unit exhaust distances to a refuge, pool or greenhouse intake | Architecture mode spatial rules |
 | CSA C282 (emergency electrical power supply for buildings) | Generator rooms, testing, exhaust; whether it covers a data centre's IT generators | Generator testing; plant schedule |
 | CSA B139 (installation code for oil-burning equipment, incl. generator fuel tanks) | Fuel tank limits and siting (the fire code's Part 4 does not apply) | fuel_on_site |
-| NFPA 37 (stationary combustion engines), full text | 1.5 m to walls and openings, and its two exceptions ("and" or "or") | Plant clearances |
+| NFPA 37 (2024) | PARTLY OBTAINED 1 Nov 2026 (pp. 37-8 to 37-12, register nfpa37_2024). Still needed: 6.3.5–6.3.6 (fuel rooms, p. 37-13) and the exhaust chapter | Plant clearances |
 | Canadian Electrical Code (CSA C22.1) | Working space; customer-owned substations | Plant schedule |
 | TIA-942 | Data-hall floor loads by rating | Floor loads |
 | ASTM F2656 | Crash ratings (M30–M50) | Fence (not drawn) |
