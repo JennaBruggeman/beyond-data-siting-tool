@@ -78,3 +78,4 @@ From checks/research_arch_v1/adj_occupancy.md, adj_service.md, adj_programs.md, 
 - Outdoors (battery containers in the yard): 3 m from lot lines, public ways, buildings, combustibles (0.9 m with a 1 h barrier, a blank noncombustible wall or a 2 h enclosure); battery exhaust 4.57 m from intakes, windows, doors, loading docks; 3 m from exits.
 - Roof: 1.5 m from the edge, 3 m from the fire access point, 3 m from neighbouring buildings and lot lines.
 - Dedicated battery building: no other occupancy allowed.
+- Battery room indoors: **2 h** walls and floors (4.7.14); reachable by fire-department ladders; not below the exit level unless approved; accessible to first responders; locked; outward-opening egress doors with panic hardware; nothing unrelated stored in it.
