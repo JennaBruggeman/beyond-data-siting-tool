@@ -9,7 +9,7 @@
 "quantities": 196,
 "conditions": 101,
 "opportunities": 22,
-"sources": 1073
+"sources": 1089
 }
 },
 "stages": [
@@ -18328,7 +18328,23 @@
 "arch_ref_vanHubs2016": "GOVERNMENT MEMO: City of Vancouver, 'Earthquake Preparedness Strategy project update: Disaster Support Hubs', 15 Mar 2016, p. 3: hubs 'at or near facilities that are included in the City's plans'; chosen as 'trusted locations' with 'sufficient outdoor space'; 'people will meet on the outdoor grounds'; activities may move indoors 'As buildings are assessed for safety'. No building, power or seismic standard stated — https://vancouver.ca/files/cov/2016-03-15-earthquake-preparedness-strategy-project-update-disaster-support-hubs.PDF",
 "arch_ref_vanEssContainer": "RULE (bulletin): City of Vancouver, 'Emergency Social Service Containers' bulletin, Dec 2009: Director of Planning may exempt from a development permit an ESS supply container (not more than 15 m2) placed on an 'Emergency Reception Centre site, as outlined in the ESS Program' or a K-12 school site, treated as accessory to the principal use; must not reduce required parking/loading or block exit or firefighting access — https://guidelines.vancouver.ca/bulletins/bulletin-emergency-social-service-containers.pdf",
 "arch_ref_vanSec2SSC": "RULE: Vancouver Zoning and Development By-law 3575, Section 2 Definitions (saved 25 Oct 2026, sources/library/public/van3575s2/full.pdf): 'Social Service Centre' = 'The use of premises by a non-profit society: (a) providing information, referral, counselling, advocacy or health care services; (b) dispensing aid in the nature of food or clothing; or (c) providing drop in or activity space, but does not include premises used for residential purposes or Detoxification Centre.' No 'shelter' use defined (only Animal Clinic or Shelter) — https://bylaws.vancouver.ca/zoning/Sec02.pdf",
-"arch_ref_van2001Shelter": "GOVERNMENT REPORT (old): City of Vancouver, 'Emergency Temporary Winter Shelters - 1321 Richards and the Hastings Corridor', 14 Nov 2001 (Council 20 Nov 2001): shelters 'classified as Social Service Centres', 'a permitted use within their respective district schedules'; 'only temporary development permits be considered', 'not renewable'. Predates the current definition's residential exclusion ? — https://council.vancouver.ca/011120/A8.htm"
+"arch_ref_van2001Shelter": "GOVERNMENT REPORT (old): City of Vancouver, 'Emergency Temporary Winter Shelters - 1321 Richards and the Hastings Corridor', 14 Nov 2001 (Council 20 Nov 2001): shelters 'classified as Social Service Centres', 'a permitted use within their respective district schedules'; 'only temporary development permits be considered', 'not renewable'. Predates the current definition's residential exclusion ? — https://council.vancouver.ca/011120/A8.htm",
+"arch_sec_nbcFireAccess": "RULE: National Building Code of Canada 2020, Div. B, NRC (same in BCBC 2024 and NBC(AE) 2023; VBBL 2025 rewrites 3.2.5.4–3.2.5.5, see adj_service.md): 3.2.5.4.(1) access routes for a building 'more than 3 storeys in building height or more than 600 m2 in building area'; 3.2.5.5.(1) principal entrance and access openings 'not less than 3 m and not more than 15 m from the closest portion of the access route'; 3.2.5.5.(2)(c) firefighter path 'not more than 45 m'; 3.2.5.5.(4) 'If a portion of a building is completely cut off from the remainder of the building … the unobstructed path of travel from the vehicle to one entrance of each portion of the building is not more than 45 m'; 3.2.5.6.(1) clear width 6 m, centre-line radius 12 m, overhead 5 m — data/raw/codes/nbc.txt",
+"arch_sec_nbcGlazing": "RULE: NBC 2020 Div. B (same wording BCBC 2024, NBC(AE) 2023; VBBL 2025 same article numbers): 3.1.8.4.(1) closure ratings by CAN/ULC-S104 (doors), CAN/ULC-S106 (windows and glass block), S112 (dampers); Table 3.1.8.4 closure rating per separation: 45 min→45 min, 1 h→45 min, 1.5 h→1 h, 2 h→1.5 h, 3 h→2 h, 4 h→3 h; 3.1.8.5.(2) window assemblies in a required fire separation installed per NFPA 80; 3.1.8.16.(1) 'an opening in a fire separation having a fire-resistance rating not more than 1 h is permitted to be protected with fixed wired glass assemblies or glass blocks'; 3.1.8.18 and Table 3.1.8.17 glazing area limits only for dead-end corridors, exit enclosures (0.0645 m2; 0.8 m2 in buildings ≤3 storeys) and firewalls (0.0645 or 0 m2); 3.1.8.19 waiver for vestibules — data/raw/codes/nbc.txt pp. 3-25 to 3-30",
+"arch_sec_nbcRoof": "RULE: NBC 2020 Div. B (same NBC(AE) 2023; BCBC/VBBL egress differs, see arch_sec_bcRoofEgress): 3.2.2.13.(1) 'A portion of a roof that supports an occupancy shall be constructed in conformance with the fire separation requirements … for floor assemblies'; 3.2.5.3.(1) building more than 3 storeys, roof slope less than 1 in 4: 'all main roof areas shall be provided with direct access from the floor areas immediately below, either by a) a stairway, or b) a hatch not less than 550 mm by 900 mm with a fixed ladder' (VBBL adds (2) exception for residential ≤4 storeys); 3.3.1.3.(3) 'Means of egress shall be provided from every roof which is intended for occupancy'; 3.3.1.3.(4) 'At least two separate means of egress shall be provided from a roof, used or intended for an occupant load more than 60, to stairs designed in conformance with the requirements regarding exit stairs'; 3.3.1.18.(1)(a) guard 'not less than 1 070 mm high … around any roof to which access is provided for purposes other than maintenance'; 3.3.1.18.(2) 100 mm sphere — data/raw/codes/nbc.txt p. 3-117, 3-123",
+"arch_sec_bcRoofEgress": "RULE: BCBC 2024 Div. B and VBBL 2025 Book I (same wording): 3.3.1.3.(3) means of egress from every roof intended for occupancy 'to exits in conformance with the requirements of Section 3.4'; (5) 'a means of egress at the roof level, designed in conformance with the requirements for exits in Section 3.4., shall be provided from an occupancy on a roof'; (6) 'At least two separate means of egress at the roof level … from a roof used or intended for an occupant load more than 60'; (7) 'the occupied area of the occupancy on a roof shall be used in place of floor area'; (8)–(9) rooftop enclosures; VBBL Note A-3.3.1.3: (4)–(9) 'intended for roof-top areas, including terraces where the area is at the highest elevation'; VBBL 3.2.2.14.(4) rooftop stair enclosure for a single dwelling unit need not be rated — data/raw/codes/bcbc2024.txt l. 15742; vbbl2025_v1.txt l. 10990–11010",
+"arch_sec_nbcExits": "RULE: NBC 2020 (same BCBC, NBC(AE), VBBL numbering): Div. A 1.4.1.2 'Exit means that part of a means of egress … that leads from the floor area it serves to a separate building, an open public thoroughfare, or an exterior open space protected from fire exposure from the building and having access to an open public thoroughfare'; Div. B 3.4.4.4.(1) exit fire separation 'shall have no openings except' piping, wiring serving the exit, exit doorways and wired glass per 3.1.8.16; (6) exit may also serve as access to a floor area; (7) 'A service room shall not open directly into an exit'; 3.4.6.16.(1) exit doors openable from inside 'without requiring keys'; 3.4.6.16.(5) electromagnetic locks allowed if the building has a fire alarm and the lock releases on alarm, on power loss, by a switch for authorized personnel, and within 15 s of a 90 N push; 3.4.6.18.(1) 'doors providing access to floor areas from exit stairs shall not have locking devices to prevent entry into any floor area from which the travel distance up or down to an unlocked door is more than 2 storeys'; (2) electromagnetic locks permitted per 3.4.6.16.(5)–(6); (4)(b) locked doors openable with a master key for firefighters — data/raw/codes/nbc.txt pp. 3-146 to 3-151",
+"arch_sec_abRoofHvac": "RULE (Alberta only): NBC(AE) 2023 Div. B 3.6.4.7.(1) 'A building shall be provided with access to the roof in conformance with Clauses 4.14.5 and 4.14.6 of CSA B149.1 … if heating, ventilating or air-conditioning equipment is installed on the roof'; (2) fixed access on sloped roofs; 3.2.5.3 cross-refers to 3.6.4.7 — data/raw/codes/nbc_ab2023.txt",
+"arch_sec_edm580": "RULE: City of Edmonton Zoning Bylaw 20001 (as adopted, local copy data/raw/edm/bylaw/b.txt), s. 5.80: 3.1.1 'Vehicle, pedestrian, and active mobility … access and travel routes must be designed to provide clearly defined, safe, efficient, and convenient circulation patterns'; 3.1.2 non-residential buildings 'must provide direct Pathways with a minimum width of 1.8 m' from main entrances to sidewalks, transit stops, Parking Areas, Public Amenity Areas; 4.2.3 a Parkade must 'provide pedestrian access at ground level that is separate from vehicle access'; 7.1 loading spaces wholly on-Site, no backing or turning interfering with Abutting Streets or Alleys; Table 7.1.4 9.0 m × 3.0 m (3.1 m / 3.3 m with obstructions), 4.0 m clearance; Table 7.2 non-Residential: <2,500 m2 0, 2,500–7,500 m2 1, >7,500 m2 2 — https://zoningbylaw.edmonton.ca/part-5-general-development-regulations/580-parking-access-site-circulation-and-bike-parking (online page blocked to this session 1 Nov 2026; read from local copy)",
+"arch_sec_edmZoneLoading": "RULE: Edmonton Zoning Bylaw 20001 (as adopted, local copy): BE 5.3.1 'Main entrances for public access to a building must be visible from a Street or Surface Parking Lot'; BE 5.8 'Loading, waste collection, storage, and service areas must not be located between a building and a Street and must be screened'; IM 5.1 and IH 5.1 loading not within a required Setback; IM 5.2 'Storage, waste collection and service areas' and IH 5.2 'Storage and service areas must not be located between a principal building and a Street' (loading not named; exceptions where the Street is a Local Road serving IH/IM or the abutting site is IH/IM); rear-or-sides rule only in UF 5.3 ('must be located at the rear or sides of a principal' building), PU 5.3 and CN 6.3 — data/raw/edm/bylaw/b.txt l. 4892, 6111–6145, 6333–6344, 6531–6542, 7217, 7451",
+"arch_sec_gcpsg014": "GOVERNMENT GUIDE: RCMP Lead Security Agency for Physical Security, GCPSG-014 (2024) Physical Security Considerations in Facility Design, effective 2024-07-01 (guidance for GC facilities, 'should'): 6.3 stand-off distance set by factors and a TRA, no figure; 6.6 'Elevators should only allow access between the same zones'; 6.7 'Pedestrian circulation routes from PZ to OZ should pass through a RZ'; 'All stairs required as a means of egress for PZ should be located in the PZ'; 6.12 utility spaces not adjacent to entrances to more restrictive zones, roof hatches and air intakes safeguarded; 6.15 'Mailrooms should be managed as an OZ at minimum'; 6.16 'Loading docks should be located away from and not directly linked or adjacent to RAAs', shipping and receiving preferably separated; 6.18 'Computer and server rooms should be managed as RAAs'; classified servers in a Security Zone; 7.1.1.1 'Roof access door or roof hatch should be locked with heavy-duty commercial hardware'; 7.1.1.4 RAAs on upper floors 'to limit sightlines from other buildings'; 7.1.4 'there should not be space at main or side entrances for parking, stopping, or drop-off points' — https://rcmp.ca/sites/default/files/doc/gcpsg-gsmgc-014-eng.pdf",
+"arch_sec_gcpsg015AppC": "GOVERNMENT GUIDE: RCMP, GCPSG-015 (2024) Guide to the Application of Physical Security Zones (approved 2024-10-07; page dated 2026-02-10; baseline guidance for GC departments): 5.3 zones Public, Reception, Operations, Security, High Security, implemented 'in a progressively restrictive manner'; OZ and SZ 'Must be indicated by a recognizable perimeter or a secure perimeter as indicated by the TRA'; 6.1 zones 'should not be skipped, by-passed or omitted'; Appendix C 1.1 server room zone by data: Protected A/B Operations Zone, Protected C and up to Secret Security Zone, Top Secret High Security Zone, 'minimum requirements'; App. C 2 servers 'in a separate room with access control'; walls 'from the floor slab to the underside of the floor/roof slab above'; 'Rooms with walls that extend to the underside of a suspended ceiling would not meet the requirements'; App. C 2.3 Secure Data Centre 'continuously monitored by personnel occupying a control room'; 'The glazing should permit observation of the servers'; perimeter to Secure Demising Wall standard — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-015-2024-guide-application-physical-security-zones",
+"arch_sec_gcpsg013": "GOVERNMENT GUIDE: RCMP, GCPSG-013 (2024) Fundamentals of Glazing in Physical Security, effective 2024-05-01: 5.1 annealed glass 'does not provide realistic protection against forced entry'; 5.2 tempered about 3–5 times annealed strength; 5.5 laminated glass 'greatly increases the forced entry delay factor'; 6.2 ballistic ratings UL 752 (preferred) and NIJ 0108.01; 6.5 one-way glass limited to covert observation; 7.1 security film; does not address interior glazing into server rooms — https://rcmp.ca/en/lead-security-agency-physical-security/gcpsg-013-2024-fundamentals-glazing-physical-security",
+"arch_sec_gcpsg023": "GOVERNMENT GUIDE: RCMP, GCPSG-023 (2025) Physical Security Considerations in Shared Space, effective 2025-10-20 (shared GC workspaces, not public programs): 5.6 'clearly defined boundaries between public and controlled areas'; Table 1 access control preventing tailgating, progressive access control between zones; 5.7 and 6.7 blinds or privacy film on glazed partitions in private spaces and security zones; loading docks, roofs and stairs not addressed — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-023-2025-physical-security-considerations-shared-space",
+"arch_sec_gcpsg002": "GOVERNMENT GUIDE: RCMP, GCPSG-002 Blast Mitigation Considerations Guide (effective 2020-03-04; Amendment 2, 2026-04-27; applies where a TRA finds a likelihood of explosive attack, 4.1): 6.1 'The Exclusion Zone should extend out from the façade a minimum of 3m (10 ft.)'; 'The Watch Zone shall extend out from the façade minimum of 30 m (100 ft.) on average'; items of 25 kg or more scrutinized; 6.2 'parking around the perimeter of the building needs to be minimized within the watch zone'; vehicles on adjacent roadways vetted and inspected; 4.1 'freight areas' among elements needing blast mitigation; 'setback is your savior' — https://grc.ca/sites/default/files/doc/gcpsg-gsmgc-002-eng.pdf",
+"arch_sec_pspcCSM": "GOVERNMENT GUIDE: Public Services and Procurement Canada, Contract Security Manual, Chapter 5 Facility protection and Annex B Guidelines for facility protection (no date shown; for organizations holding a facility security clearance): ch. 5.2 'Organizations holding a DSC must have a proper number of progressively restrictive zones'; 'Zones must have a recognizable perimeter'; Annex B II.C operations zone 'should preferably be accessible from a reception zone'; II.D security zone 'should be separated from an operations zone with a secure perimeter', continuously monitored; II.E high-security zone accessible 'only from security zones'; IV.C parking lots should prohibit 'parking close to buildings' and discourage 'the casual use of exit doors and shipping or receiving areas'; IV.E 'Windows should preferably be non-opening' — https://tpsgc-pwgsc.gc.ca/esc-src/msc-csm/chap5-eng.html ; https://www.tpsgc-pwgsc.gc.ca/esc-src/msc-csm/xb-eng.html",
+"arch_sec_ufc401001": "US RULE (benchmark; DoD buildings only): UFC 4-010-01 DoD Minimum Antiterrorism Standards for Buildings, 12 Dec 2018, Change 3 (24 May 2024), US Department of Defense: 1-6 applies to DoD inhabited buildings; Standard 1 (3-2.1) standoff 20 ft (6 m) from the controlled perimeter where there is a 30 ft (9 m) clear zone or more outside it, minimum aggregate 50 ft (15 m), 15 m with no outer clear zone; Standard 2 (3-3) unobstructed space to the inner clear zone or 33 ft (10 m), whichever is less; Standard 13 (3-14) mail rooms and loading docks on the building perimeter, 'as far from heavily populated areas of buildings' as possible; Standard 14 (3-15) eliminate external roof access, internal stairs or ladders. Table B-1 not read (page truncated) — https://legacy.wbdg.org/FFC/DOD/UFC/ufc_4_010_01_2018_c3.pdf",
+"arch_sec_nwscTours": "OPERATOR CLAIM: NSF NCAR / UCAR CISL, 'NWSC Visitor Center: All ages welcome!' (page © 2026, no date): NCAR-Wyoming Supercomputing Center, Cheyenne; 'a guided tour into the supercomputer room requires the attendees to be 9th grade or older'; self-guided exhibit area 'generally not staffed'; tours Monday–Friday by booking; no viewing window mentioned — https://www.cisl.ucar.edu/outreach/nwsc-tours"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -21035,7 +21051,23 @@
 "arch_ref_vanHubs2016": "government",
 "arch_ref_vanEssContainer": "rule",
 "arch_ref_vanSec2SSC": "rule",
-"arch_ref_van2001Shelter": "government"
+"arch_ref_van2001Shelter": "government",
+"arch_sec_nbcFireAccess": "rule",
+"arch_sec_nbcGlazing": "rule",
+"arch_sec_nbcRoof": "rule",
+"arch_sec_bcRoofEgress": "rule",
+"arch_sec_nbcExits": "rule",
+"arch_sec_abRoofHvac": "rule",
+"arch_sec_edm580": "rule",
+"arch_sec_edmZoneLoading": "rule",
+"arch_sec_gcpsg014": "government",
+"arch_sec_gcpsg015AppC": "government",
+"arch_sec_gcpsg013": "government",
+"arch_sec_gcpsg023": "government",
+"arch_sec_gcpsg002": "government",
+"arch_sec_pspcCSM": "government",
+"arch_sec_ufc401001": "named in our notes, not yet checked",
+"arch_sec_nwscTours": "operator claim"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -21522,7 +21554,23 @@
 "arch_ref_vanHubs2016": "claude",
 "arch_ref_vanEssContainer": "claude",
 "arch_ref_vanSec2SSC": "claude",
-"arch_ref_van2001Shelter": "claude"
+"arch_ref_van2001Shelter": "claude",
+"arch_sec_nbcFireAccess": "claude",
+"arch_sec_nbcGlazing": "claude",
+"arch_sec_nbcRoof": "claude",
+"arch_sec_bcRoofEgress": "claude",
+"arch_sec_nbcExits": "claude",
+"arch_sec_abRoofHvac": "claude",
+"arch_sec_edm580": "claude",
+"arch_sec_edmZoneLoading": "claude",
+"arch_sec_gcpsg014": "claude",
+"arch_sec_gcpsg015AppC": "claude",
+"arch_sec_gcpsg013": "claude",
+"arch_sec_gcpsg023": "claude",
+"arch_sec_gcpsg002": "claude",
+"arch_sec_pspcCSM": "claude",
+"arch_sec_ufc401001": "claude",
+"arch_sec_nwscTours": "claude"
 },
 "source_city": {
 "abgas": "edm",
@@ -22596,7 +22644,23 @@
 "arch_ref_vanHubs2016": "van",
 "arch_ref_vanEssContainer": "van",
 "arch_ref_vanSec2SSC": "van",
-"arch_ref_van2001Shelter": "van"
+"arch_ref_van2001Shelter": "van",
+"arch_sec_nbcFireAccess": "van",
+"arch_sec_nbcGlazing": "van",
+"arch_sec_nbcRoof": "van",
+"arch_sec_bcRoofEgress": "van",
+"arch_sec_nbcExits": "van",
+"arch_sec_abRoofHvac": "edm",
+"arch_sec_edm580": "edm",
+"arch_sec_edmZoneLoading": "edm",
+"arch_sec_gcpsg014": "gen",
+"arch_sec_gcpsg015AppC": "gen",
+"arch_sec_gcpsg013": "gen",
+"arch_sec_gcpsg023": "gen",
+"arch_sec_gcpsg002": "gen",
+"arch_sec_pspcCSM": "gen",
+"arch_sec_ufc401001": "gen",
+"arch_sec_nwscTours": "gen"
 },
 "city_gaps": {
 "van": [
