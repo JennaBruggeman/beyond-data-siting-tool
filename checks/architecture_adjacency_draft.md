@@ -7,7 +7,7 @@ From checks/research_arch_v1/adj_occupancy.md, adj_service.md, adj_programs.md, 
 - Tool assumption until settled: **F-2 (?)**, the stricter reading. Shown as "?" with the alternatives.
 
 ## The data hall itself
-- Building code: no rating for the hall as such. NFPA 75 (6.1.3.2): IT equipment area separated by "not less than 1 hour" (from NFPA's public record; standard paywalled). J.B. understands 2 h: operator or insurer practice (FM Global 5-32, not read ?). Tool: 1 h minimum (NFPA 75), 2 h shown as "operator practice ?" until a source confirms.
+- Building code: no rating for the hall as such. NFPA 75 (6.1.3.2): IT equipment area separated by "not less than 1 hour" (from NFPA's public record; standard paywalled). J.B. understands 2 h: operator or insurer practice (FM Global 5-32, not read ?). Tool (J.B., 1 Nov 2026): **assume 2 h**, labelled "operator and insurer practice (J.B.); NFPA 75 minimum 1 h; FM Global 5-32 not read ?".
 - Service rooms: electrical 1 h (3.6.2.1); diesel equipment 1 h (3.6.2.1.(5), our reading); life-safety generator room 2 h (3.6.2.8); transformer vault 3 h, or 2 h sprinklered (3.6.2.7); indoor fuel tanks: 2 h dedicated room, limits by storey (NFC 4.3.13–4.3.14). No service room directly under a required exit (3.6.2.2) or opening into an exit (3.4.4.4.(7)).
 - Batteries/UPS: no clause in any of the six codes; electrical code via Alberta STANDATA: 3 m from exits, 1.5 m from openings.
 
