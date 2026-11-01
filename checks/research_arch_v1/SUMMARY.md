@@ -18,7 +18,7 @@ Check 1 only (four research agents; sources in the register with check records).
 - Fire separations (Table 3.1.3.1): industrial F-2 to assembly, pools, housing 2 h; F-3 to assembly and housing 1 h; F-2 or F-3 next to shops (E): none required (corrected in check 2). An F-2 building may hold only one dwelling suite. Assembly may sit above industrial floors (3.2.2.7).
 - Which group a data centre falls in (F-2 or F-3) has no Canadian guidance found (?): it turns on fire load (50 kg/m²).
 - Childcare: Edmonton s. 6.40 (no site next to a Major Utility; play space 2 m from mechanical equipment and exhaust); Vancouver guideline (no exhaust beside play areas; 3 h of winter-solstice sun).
-- Loading: Edmonton puts loading at the rear or sides, never between building and street.
+- Loading: Edmonton BE: loading not between building and street; 'rear or side only' applies in UF, PU, CN zones only (corrected 1 Nov 2026, security_rest.md).
 - Noise by-laws measure at the property line; nothing found for windows on the same lot (one Vancouver CD-1 sets 35/40/45 dBA inside dwellings).
 
 ## Paywalled (UBC Library)
