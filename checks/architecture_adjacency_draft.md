@@ -7,7 +7,7 @@ From checks/research_arch_v1/adj_occupancy.md, adj_service.md, adj_programs.md, 
 - Tool assumption until settled: **F-2 (?)**, the stricter reading. Shown as "?" with the alternatives.
 
 ## The data hall itself
-- Building code: no rating for the hall as such. NFPA 75 (6.1.3.2): IT equipment area separated by "not less than 1 hour" (from NFPA's public record; standard paywalled). J.B. understands 2 h: operator or insurer practice (FM Global 5-32, not read ?). Tool (J.B., 1 Nov 2026): **assume 2 h**, labelled "operator and insurer practice (J.B.); NFPA 75 minimum 1 h; FM Global 5-32 not read ?".
+- Building code: no rating for the hall as such. NFPA 75 (6.1.3.2): IT equipment area separated by "not less than 1 hour" (from NFPA's public record; standard paywalled). J.B. understands 2 h: operator or insurer practice (FM Global 5-32, not read ?). Tool (J.B., 1 Nov 2026): **assume 2 h**, labelled "operator and insurer practice (J.B.)". FM Global 5-32 (read 1 Nov 2026): 1 h walls around each data room, network room and generator room; **2 h between data rooms** where there are several; ¾ h doors, few windows; walls slab to slab.
 - Service rooms: electrical 1 h (3.6.2.1); diesel equipment 1 h (3.6.2.1.(5), our reading); life-safety generator room 2 h (3.6.2.8); transformer vault 3 h, or 2 h sprinklered (3.6.2.7); indoor fuel tanks: 2 h dedicated room, limits by storey (NFC 4.3.13–4.3.14). No service room directly under a required exit (3.6.2.2) or opening into an exit (3.4.4.4.(7)).
 - Batteries/UPS: no clause in any of the six codes; electrical code via Alberta STANDATA: 3 m from exits, 1.5 m from openings.
 
@@ -46,3 +46,10 @@ From checks/research_arch_v1/adj_occupancy.md, adj_service.md, adj_programs.md, 
 - Whether IT standby generators count as "emergency generators" (NFC 4.3.13.1).
 - BC Fire Code 2024 text not in the repo.
 - Paywalled: see checks/paywalled_standards.md.
+
+## Insurer guidance (FM Global 5-32, Jan 2026; not law, but what an insured operator is held to)
+- Generators: separate building first, then the yard, then ground floor; **never on the roof or in a basement**.
+- Diesel tanks: buried first, then outdoor above ground; never inside, in the basement or on the roof. 24 h of fuel.
+- Flood: site above the 500-year flood level plus 0.3–0.6 m freeboard; 152 m from wave impact.
+- Air: the data hall's air system independent of other spaces; data rooms kept at positive pressure to neighbours; intakes not exposed to combustibles.
+- Ceilings at most 9 m.
