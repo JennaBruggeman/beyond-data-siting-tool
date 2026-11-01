@@ -46,3 +46,10 @@ Claude's suggestions (unresearched, J.B. to confirm): botanical conservatory or 
 - Data-centre cases (TELUS Garden, BC regulator orders; Odense, claims): the utility or receiver owns the heat pump; no source says whether the utility enters the data centre.
 - Meters: Measurement Canada-approved for billing (unapproved non-exempt meters out of use by 1 Jan 2028); no rule on meter location.
 - No source for a room straddling a secure line. Tool proposal (our design, not a rule): a hand-over room on the line, one door from each side, sized at the NEU minimum (?) until a per-MW source is found.
+
+## Refuge placement (1 Nov 2026, J.B.: "three options")
+All three offered in Architecture mode, no default; each shows its consequences (research: checks/research_arch_v1/refuge_placement.md, check 1):
+- **Own building on the lot:** spacing between buildings or a 4 h firewall if joined; overnight sleeping allowed; keeps its own seismic category.
+- **Side by side in the data centre's building:** 2 h wall; overnight sleeping limited by the one-residential-suite rule in an F-2 building; shared structure takes the higher seismic category unless split.
+- **Ground floor under the hall:** 2 h floor; same overnight limit; whole building takes the refuge's seismic category; best fit with Vancouver's no-data-storage-at-grade rule.
+- All: generator power legal on the owner's own lot (owner or tenant); code needs only 30 min emergency lighting, so heat, cooling and filtered air in a blackout are design choices; Edmonton allows the refuge only in BE (≤500 m²); no rule keeps the refuge reachable when the host is locked: the tool flags it.
