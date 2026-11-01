@@ -33,3 +33,10 @@ Fourth template. Full becomes Engineering. Opportunity triage: checks/opportunit
 From the triage: fish farming; bathhouse or Nordic spa; drying (food, lumber, sludge); heated public space (winter garden, atrium, covered plaza, shelter); EV charging hub; housing (tested case); river or inlet cooling (waterfront lots); borefield; rain tank; meanwhile uses.
 J.B.'s new ideas: hospital; aquarium.
 Claude's suggestions (unresearched, J.B. to confirm): botanical conservatory or tropical house; indoor recreation or climbing gym; therapy or rehab pool; community or commercial kitchen; covered winter market; care home or seniors' housing (tested case, as housing); neighbourhood heat plant room (the start of a network).
+
+## Secure line (1 Nov 2026, J.B.)
+- A design choice, not fixed: the user sets it (lot line, building wall, hall wall, or drawn anywhere between); the tool tests the consequences.
+- **Starting line suggested by the tool** (J.B.: "suggested starting line is fine"): the tightest line that keeps every required room inside (data hall, battery/UPS/electrical rooms, generators and fuel, loading dock), with firefighter access to the battery room. The user then moves it.
+- Checks on any line: required rooms inside; public programs (refuge, public ground floor, café, pool entrance) outside or flagged; each shared system crossing the line flagged (meters, valves, keys); entrances (public, staff, truck; dock 7.5 m from intakes; parked fuel truck 15 m from buildings); a fence is 2.4 m anti-climb mesh and may not block battery or plant airflow (NFPA 855 4.7.7.2); emergency mode: can the refuge open while the data centre stays locked.
+- Shown side by side, not judged: street frontage to public use, controlled doors from street to servers, share of the lot the public can reach.
+- Replaces the removed Off/Today/Proposed toggle in Architecture mode; Engineering keeps the single fence on/off.
