@@ -19,7 +19,7 @@ Kept by Claude; updated as research finds more. "Why" = what the tool needs from
 | ASHRAE 188 (Legionellosis risk management for building water systems) | Whether it sets any cooling-tower distance to intakes or hospitals | Architecture mode separations |
 | ASHRAE Guideline 12 (minimizing Legionellosis risk), s. 7.6.2 | Cooling-tower water treatment the NBC requires (6.3.2.15.(9)) | Architecture mode separations |
 | CAN/ULC-S655 (protected aboveground tank assemblies) | A listed protected tank waives the fire-code tank distances (NFC 4.3.2.1.(7)) | Architecture mode separations; fuel_on_site |
-| NFPA 855, full text (free-access reader only) | Battery storage distances; register holds screenshots of the 2026 reader only | Architecture mode separations |
+| NFPA 855 (2026): MOSTLY OBTAINED 1 Nov 2026 (Ch. 1, 9; register nfpa855_2026). Still needed: Chapter 4's indoor room separation | Battery storage distances; register holds screenshots of the 2026 reader only | Architecture mode separations |
 | UL 9540A (battery fire test method) | Units tested to it may follow the maker's spacing instead of CEC 64-926 distances | Architecture mode separations |
 | CSA C22.2 No. 107.3 (UPS equipment) | UPS batteries sit outside the CEC ESS rules; siting rules for them ? | Architecture mode separations |
 | NFPA 75 (2024): OBTAINED 1 Nov 2026 (Ch. 4–9 parts, register nfpa75_2024) | Whether the data hall itself must be a fire-rated room (1 h or 2 h), separate from what the building code asks | Architecture mode: hall separation (J.B. 31 Oct: her understanding is 2 h) |

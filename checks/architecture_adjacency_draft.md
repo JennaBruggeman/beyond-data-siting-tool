@@ -71,3 +71,10 @@ From checks/research_arch_v1/adj_occupancy.md, adj_service.md, adj_programs.md, 
 - Fuel rooms (NFPA 37): up to 5,000 L, 1 h room, 1 h self-closing door, 380 mm round each tank, vented outside; over 5,000 L, 3 h room and doors.
 - Tank fill and vent pipes: at least 600 mm from any building opening at the same or lower level. Tanks, vents and fuel piping not near the engine's air intake or exhaust.
 - Generator exhaust: NFPA 37 sets **no distance** to windows or air intakes, only "a safe location" and not toward combustibles. So the distance still comes from the building code's 3 m (6.3.3.1.(2), our reading) or ASHRAE 62.1 (not read).
+
+## NFPA 855 (2026), US benchmark: UPS batteries
+- Applies above 20 kWh of lithium-ion; the UPS exemptions cover only lead-acid and similar, **not lithium-ion** (our reading).
+- Indoors: groups of at most 50 kWh, 0.9 m apart and from walls; may share the room with the equipment they serve; locked cabinet or authorized-only room; never in or opening onto sleeping rooms (matters for an overnight refuge or housing).
+- Outdoors (battery containers in the yard): 3 m from lot lines, public ways, buildings, combustibles (0.9 m with a 1 h barrier, a blank noncombustible wall or a 2 h enclosure); battery exhaust 4.57 m from intakes, windows, doors, loading docks; 3 m from exits.
+- Roof: 1.5 m from the edge, 3 m from the fire access point, 3 m from neighbouring buildings and lot lines.
+- Dedicated battery building: no other occupancy allowed.
