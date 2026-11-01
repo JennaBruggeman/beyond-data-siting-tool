@@ -79,3 +79,8 @@ From checks/research_arch_v1/adj_occupancy.md, adj_service.md, adj_programs.md, 
 - Roof: 1.5 m from the edge, 3 m from the fire access point, 3 m from neighbouring buildings and lot lines.
 - Dedicated battery building: no other occupancy allowed.
 - Battery room indoors: **2 h** walls and floors (4.7.14); reachable by fire-department ladders; not below the exit level unless approved; accessible to first responders; locked; outward-opening egress doors with panic hardware; nothing unrelated stored in it.
+
+## ASHRAE 62.1-2022, US benchmark: air intakes and exhaust
+- Air intakes (including windows used for ventilation) to: combustion vents and flues **5 m** (our reading for generator exhaust); cooling-tower exhaust 7.5 m; truck dock or bus idling 7.5 m; busy road 7.5 m; loading area or garage entry 5 m; dumpsters 5 m; street or parking 1.5 m.
+- Combustion and cooling-tower exhaust must keep the full distance from operable windows and doors, **including on neighbouring lots**; no credit for height if the exhaust is less than 20 m below.
+- Outdoor air MERV 11 where fine particulate exceeds the national standard (Vancouver's own bylaw asks MERV 13).
