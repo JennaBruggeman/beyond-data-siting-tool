@@ -1,0 +1,1050 @@
+{
+ "arch_svc_nbcae72": {
+  "where_read": "data/raw/codes/nbc_ab2023.txt (local copy, lines ~38819–39500)",
+  "claims": [
+   {
+    "claim": "Title NBC – 2023 Alberta Edition, Div. B Section 7.2 Aquatic Facilities",
+    "verdict": "CONFIRMED",
+    "evidence": "'National Building Code – 2023 Alberta Edition'; 'Section 7.2. Aquatic Facilities'; page header '7-12 Division B'",
+    "fix": null
+   },
+   {
+    "claim": "7.2.1.1 applies to public and semi-public pools",
+    "verdict": "CONFIRMED",
+    "evidence": "'this Section applies to a) public swimming pools and semi-public swimming pools' (also water theme parks, spray parks, steam/sauna rooms)",
+    "fix": null
+   },
+   {
+    "claim": "7.2.3.38.(1) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'reasonably accessible from the swimming pool enclosure, using doors that are locked to unauthorized persons'",
+    "fix": null
+   },
+   {
+    "claim": "7.2.3.38.(2) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'Additional outside access for public swimming pools shall be provided to the equipment and mechanical room.'",
+    "fix": null
+   },
+   {
+    "claim": "7.2.3.39.(2) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'shall not be near heating equipment nor have direct access to areas that are accessible to the public'",
+    "fix": null
+   },
+   {
+    "claim": "7.2.3.45.(1)(a) gas-tight, mechanically vented, not less than 1 h",
+    "verdict": "CONFIRMED",
+    "evidence": "'reasonably gas-tight, corrosion-resistant and mechanically vented enclosure having not less than a 1 h fire-resistance rating'",
+    "fix": null
+   },
+   {
+    "claim": "7.2.3.45.(1)(b) only chlorination equipment",
+    "verdict": "CONFIRMED",
+    "evidence": "'only chlorination equipment shall be kept in the chlorine room'",
+    "fix": null
+   },
+   {
+    "claim": "7.2.3.45.(1)(c) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'at ground level with access to the outside through outwardly opening doors'",
+    "fix": null
+   },
+   {
+    "claim": "7.2.3.45.(1)(g) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'so as not to contaminate air inlets to buildings or areas used by people'",
+    "fix": null
+   },
+   {
+    "claim": "7.2.3.45.(1)(i) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'in a location not used by the public'",
+    "fix": null
+   },
+   {
+    "claim": "Issuer NRC/Alberta, 2023",
+    "verdict": "CONFIRMED",
+    "evidence": "'Issued by the National Research Council of Canada'; '2023 Alberta Edition' (copyright line reads 2026)",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_svc_abStandata19bci008": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (PDF)",
+  "claims": [
+   {
+    "claim": "STANDATA 19-BCI-008 Rooms Containing Gaseous Chlorine",
+    "verdict": "CONFIRMED",
+    "evidence": "'ROOMS CONTAINING GASEOUS CHLORINE'; '19-BCI-008'",
+    "fix": null
+   },
+   {
+    "claim": "Alberta Municipal Affairs, Dec 2019",
+    "verdict": "CONFIRMED",
+    "evidence": "Alberta Municipal Affairs; dated December 2019",
+    "fix": null
+   },
+   {
+    "claim": "On NBC(AE) 2019 7.2.3.45",
+    "verdict": "CONFIRMED",
+    "evidence": "interprets Article 7.2.3.45. of the National Building Code-2019 Alberta Edition",
+    "fix": null
+   },
+   {
+    "claim": "Ground level with outward-opening exterior door that serves as an emergency exit",
+    "verdict": "CONFIRMED",
+    "evidence": "code 7.2.3.45.(1)(c) quoted; Interp. 3: door must open outward and, as an 'emergency exit', have release hardware on the inside",
+    "fix": "cite Interp. 3 for the emergency-exit point, not 2a"
+   },
+   {
+    "claim": "1 h fire separation",
+    "verdict": "WRONG",
+    "evidence": "the document quotes clause (a): enclosure with 'a fire-resistance rating of not less than 1 h' – a rating on the enclosure, not called a fire separation",
+    "fix": "say '1 h fire-resistance-rated enclosure (code clause (a))'"
+   },
+   {
+    "claim": "No doorways or operable windows to the rest of the building (Interp. 2a)",
+    "verdict": "CONFIRMED",
+    "evidence": "Item 2a: no doorways or operable windows between the chlorine room and the rest of the building",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT INTERPRETATION: STANDATA 19-BCI-008 Rooms Containing Gaseous Chlorine, Alberta Municipal Affairs, Dec 2019 (on NBC(AE) 2019 7.2.3.45): chlorine room at ground level with outward-opening exterior door (code 7.2.3.45.(1)(c)), which serves as an emergency exit with inside release hardware (Interp. 3); enclosure with not less than 1 h fire-resistance rating (code clause (a)); no doorways or operable windows to the rest of the building (Interp. 2a) — https://open.alberta.ca/dataset/b5d1d6b9-6429-4a1a-96af-e7c0500d5017/resource/dcd023de-4e23-40ba-8b36-5a0fdc180e7b/download/ma-standata-19-bci-008-rooms-containing-gaseous-chlorine.pdf ‖ CHECK 2 (1 Nov 2026, fixed): emergency exit is Interp. 3, not 2a; the 1 h is a fire-resistance rating on the enclosure (code clause (a)), not a 'fire separation'."
+ },
+ "arch_svc_abPoolStd2014": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (PDF)",
+  "claims": [
+   {
+    "claim": "Pool Standards, Alberta Health, July 2014 (amended, effective 24 Aug 2017)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Pool Standards, July 2014 (amended 2017)'; Alberta Health; effective August 24, 2017 (a 3 Nov 2017 Notice of Change corrects 1.2 and 9.4)",
+    "fix": null
+   },
+   {
+    "claim": "10.1(k) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'information on the safe handling and storage of pool treatment chemicals and other related chemicals'",
+    "fix": null
+   },
+   {
+    "claim": "2.4 quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'must protect against the buildup of chlorine gas or disinfection by-products'",
+    "fix": null
+   },
+   {
+    "claim": "No clauses on chemical room location or exterior access",
+    "verdict": "CONFIRMED",
+    "evidence": "no such clause found; nearest are 4.7 and 5.1(h), neither on location or access",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_svc_bcPoolDesign2025": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (PDF, read in two parts; text ends inside 9.9)",
+  "claims": [
+   {
+    "claim": "B.C. Guidelines for Pool Design, Version 3",
+    "verdict": "CONFIRMED",
+    "evidence": "title 'B.C. Guidelines for Pool Design'; Version 3",
+    "fix": null
+   },
+   {
+    "claim": "Health Protection Branch, BC Ministry of Health",
+    "verdict": "CONFIRMED",
+    "evidence": "'HEALTH PROTECTION BRANCH' 'MINISTRY OF HEALTH'",
+    "fix": null
+   },
+   {
+    "claim": "April 2025",
+    "verdict": "NOT FOUND",
+    "evidence": "cover shows '2025' only; 'April' appears only in the file name (bc-guidelines-for-pool-design-v3-april-2025.pdf)",
+    "fix": "write '2025 (file name: April 2025)'"
+   },
+   {
+    "claim": "3.2 (p. 7) ambulance gurney quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'There should be sufficient room for an ambulance gurney to pass easily.' (p. 7)",
+    "fix": null
+   },
+   {
+    "claim": "1.2 m deck around obstructions",
+    "verdict": "CONFIRMED",
+    "evidence": "'Maintain a minimum 1.2 m (4 ft) wide deck around obstructions'",
+    "fix": null
+   },
+   {
+    "claim": "9.8 quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'Equipment rooms must be designed to the B.C. Building Code.'",
+    "fix": null
+   },
+   {
+    "claim": "9.9 quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'The BC Fire Code details chemical storage room design requirements including clearance, storage of liquids'",
+    "fix": null
+   },
+   {
+    "claim": "9.8/9.9 on p. 41",
+    "verdict": "NOT FOUND",
+    "evidence": "a '41' page marker sits just before 9.8, so 9.8 may start on p. 41 or p. 42; page not fixed",
+    "fix": "write 'p. 41–42'"
+   },
+   {
+    "claim": "rest of 9.9 not reached",
+    "verdict": "CONFIRMED",
+    "evidence": "my read also ends mid-9.9 ('...during tank filling and chemical m'); no exterior-access or delivery text reached",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE: B.C. Guidelines for Pool Design, Version 3, Health Protection Branch, BC Ministry of Health, 2025 (file name: April 2025; hosted by Island Health): 3.2 (p. 7) 'sufficient room for an ambulance gurney to pass easily', 1.2 m deck around obstructions; 9.8 (p. 41–42) 'Equipment rooms must be designed to the B.C. Building Code'; 9.9 (p. 41–42) 'The BC Fire Code details chemical storage room design requirements including clearance'; rest of 9.9 not reached — https://islandhealth.ca/sites/default/files/environment/documents/bc-guidelines-for-pool-design-v3-april-2025.pdf ‖ CHECK 2 (1 Nov 2026, fixed): cover gives 2025 only (April from file name); 9.8/9.9 page is 41 or 42."
+ },
+ "arch_svc_vanPkg5": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (PDF)",
+  "claims": [
+   {
+    "claim": "5.2.3 community centre, hospital, pool with spectator facilities, fitness centre: Class A no requirement",
+    "verdict": "CONFIRMED",
+    "evidence": "Class A: 'No Requirement.'",
+    "fix": null
+   },
+   {
+    "claim": "5.2.3 Class B quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'A minimum of one space for each 2 800 square metres of gross floor area' (none under 100 m2)",
+    "fix": null
+   },
+   {
+    "claim": "Hospital Class C 1 at 2,000–5,000 m2, 2 above",
+    "verdict": "CONFIRMED",
+    "evidence": "'At least one space for each 2 000 square metres to 5 000 square metres' ... 'at least two spaces for more than 5 000 square metres'",
+    "fix": null
+   },
+   {
+    "claim": "5.2.5 restaurant/retail Class B quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'one space for the first 465 square metres ... plus one space for any portion of the next 1 860 square metres and one additional space for each additional 2 325 square metres'",
+    "fix": null
+   },
+   {
+    "claim": "5.1.4 unlisted uses by similar use, Director of Planning",
+    "verdict": "CONFIRMED",
+    "evidence": "'If a use is not listed in the tables, the number of loading spaces shall be calculated on the basis of a similar use'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Laundromat, urban farm and refuge are not listed; the topic file's 'similar use' readings (e.g. laundromat as retail) are our reading, decided in practice by the Director of Planning.",
+  "new_text": null
+ },
+ "arch_svc_vanPkg7": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (PDF)",
+  "claims": [
+   {
+    "claim": "7.2.2.1 Community Care Facility Class B quote 15–119 beds",
+    "verdict": "CONFIRMED",
+    "evidence": "'A minimum of one space for any facility with 15 or more beds up to a maximum of 119 beds'",
+    "fix": null
+   },
+   {
+    "claim": "Class A one space at 80–159 beds",
+    "verdict": "CONFIRMED",
+    "evidence": "'A minimum of one space for any facility with 80 or more beds up to a maximum of 159 beds'",
+    "fix": null
+   },
+   {
+    "claim": "7.2.3 Cultural and Recreational: no requirement",
+    "verdict": "CONFIRMED",
+    "evidence": "'No Requirement.' (Classes A, B, C)",
+    "fix": null
+   },
+   {
+    "claim": "7.3.2 Class A 2.9 m wide, 2.3 m clear",
+    "verdict": "WRONG",
+    "evidence": "'a minimum width of 4 m' for the first space; 'the minimum width of spaces must be 2.9 m' for the rest; 2.3 m clearance confirmed",
+    "fix": "first Class A space 4 m wide, others 2.9 m"
+   },
+   {
+    "claim": "7.4.2 Class B quote 4.0 m wide, 3.5 m clear",
+    "verdict": "CONFIRMED",
+    "evidence": "'All spaces shall be a minimum 4.0 metres in width and shall have a minimum vertical clearance of 3.5 metres' (length 14.0 m parallel / 7.5 m right-angle for first space)",
+    "fix": null
+   },
+   {
+    "claim": "7.5.2 Class C 14.0 m long, 4.3 m clear",
+    "verdict": "CONFIRMED",
+    "evidence": "'minimum 14.0 metres in length'; 'minimum vertical clearance of 4.3 metres'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "A refuge is not a listed use; using Community Care Facility or Class B size for a refuge drop-off is our reading, not the by-law.",
+  "new_text": "RULE: Parking By-law No. 6059, Section 7 Off-Street Passenger Space Regulations, City of Vancouver: 7.2.2.1 Community Care Facility Class B 'A minimum of one space for any facility with 15 or more beds up to a maximum of 119 beds', Class A one space at 80–159 beds; 7.2.3 Cultural and Recreational: no requirement; 7.3.2 Class A first space 4 m wide, others 2.9 m, 2.3 m clear; 7.4.2 Class B 'minimum 4.0 metres in width … minimum vertical clearance of 3.5 metres'; 7.5.2 Class C 14.0 m long, 4.3 m clear — https://bylaws.vancouver.ca/parking/sec07.pdf ‖ CHECK 2 (1 Nov 2026, fixed): Class A first space is 4 m wide; 2.9 m applies to the others."
+ },
+ "arch_svc_vanGarbageSupp": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (PDF)",
+  "claims": [
+   {
+    "claim": "Title, City of Vancouver Engineering Services, May 2011 rev. July 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "'Garbage and Recycling Storage Amenity Design Supplement'; Engineering Services; original May 2011, last revised July 2022",
+    "fix": null
+   },
+   {
+    "claim": "1.1 at grade quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'located at grade (ground level)' ... 'adjacent to the area where collection vehicles are allowed access to the amenity'",
+    "fix": null
+   },
+   {
+    "claim": "1.1 else no more than one level down",
+    "verdict": "CONFIRMED",
+    "evidence": "'the amenity should be placed no more than one level down from grade'",
+    "fix": null
+   },
+   {
+    "claim": "1.1 separate amenities for different occupants",
+    "verdict": "CONFIRMED",
+    "evidence": "'separate solid waste amenities should be provided for different types of occupants'",
+    "fix": null
+   },
+   {
+    "claim": "1.2 area 2.0–2.5 x container footprint, 7 days",
+    "verdict": "CONFIRMED",
+    "evidence": "'about 2.0 to 2.5 times the physical footprint of the containers'; 'minimum of 7 days'",
+    "fix": null
+   },
+   {
+    "claim": "2.0 generation rates per m2 per week; size = containers x footprint x 2.25",
+    "verdict": "CONFIRMED",
+    "evidence": "commercial table 'Estimated weekly volume generated per floor area (L/m2/week)'; 'A value of 2.25 can be used'",
+    "fix": null
+   },
+   {
+    "claim": "2.1.2 tables by use and floor area",
+    "verdict": "CONFIRMED",
+    "evidence": "hospitality, office, retail, restaurant, large venue tables by floor area band",
+    "fix": null
+   },
+   {
+    "claim": "1.4 pad ±2%, 28,000 kg",
+    "verdict": "CONFIRMED",
+    "evidence": "'relatively flat (+/-2% grade)'; 'withstand a 28,000 kg collection vehicle'",
+    "fix": null
+   },
+   {
+    "claim": "1.6 4.5 m clear, 6.5–7.5 m front-end tipping, forward motion",
+    "verdict": "CONFIRMED",
+    "evidence": "'Vertical clearance of 4.5 m'; 'allow 6.5 m – 7.5 m vertical clearance'; 'exit the site in a forward motion'",
+    "fix": null
+   },
+   {
+    "claim": "App. B truck 3.2 m, 10.0/12.8 m radii, 15.2 m",
+    "verdict": "CONFIRMED",
+    "evidence": "Appendix B 'Typical Collection Truck Dimensions (approximate)': 3.2 m, 10.0 m, 12.8 m, 15.2 m",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_svc_mvGarbageSpecs": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (PDF)",
+  "claims": [
+   {
+    "claim": "Issuer not named",
+    "verdict": "CONFIRMED",
+    "evidence": "no organization named; text uses '<Municipality Name>' placeholders",
+    "fix": null
+   },
+   {
+    "claim": "Title, June 2015 update",
+    "verdict": "CONFIRMED",
+    "evidence": "'Technical Specifications for Recycling and Garbage Amenities in Multi-family and Commercial Developments'; 'June 2015 Update'",
+    "fix": null
+   },
+   {
+    "claim": "6.5 formulas retail/office/large venue/restaurant and minimums",
+    "verdict": "CONFIRMED",
+    "evidence": "Retail 0.0182x+3.7; Office 0.0089x+3.3; Large Venue 0.0244x+6; Restaurant 0.0331x+6.8; min '10 m2 for Retail, Office and Large Venue and 14 m2 for Restaurant'",
+    "fix": null
+   },
+   {
+    "claim": "6.6 max 101 m2",
+    "verdict": "WRONG",
+    "evidence": "101 m2 applies above the development-size threshold; below it caps are Retail 41, Office 66, Large Venue 66, Restaurant 56 m2",
+    "fix": "give both caps"
+   },
+   {
+    "claim": "7.1 on the lot, ground level or no more than one storey below",
+    "verdict": "CONFIRMED",
+    "evidence": "'on the lot of the structure served'; 'at ground level, or no more than one storey below grade'",
+    "fix": null
+   },
+   {
+    "claim": "8.1(c) no dimension under 2 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'no horizontal dimension (width or depth) is less than 2 m'",
+    "fix": null
+   },
+   {
+    "claim": "10.2 pad 28 t, 7.5 x 6.0 x 15.0 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'28-tonne collection vehicle'; '7.5 m high, 6.0 m wide, and 15.0 m long'",
+    "fix": null
+   },
+   {
+    "claim": "11.3 4.5 m (6 m at entry), 4.4 m clear, 12.5 m radius, <=6%, no reversing onto road",
+    "verdict": "CONFIRMED",
+    "evidence": "'minimum width of 4.5 m'; '6 m at the points of entrance and exit'; '4.4 m'; '12.5 m'; 'does not exceed 6%'; 'not required to reverse onto a public road'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "A model template for municipalities to adapt; not in force anywhere by itself (benchmark only).",
+  "new_text": "MODEL SPECIFICATION (issuer not named on document; hosted by Metro Vancouver): Technical Specifications for Recycling and Garbage Amenities in Multi-family and Commercial Developments, June 2015 update: 6.5 combined garbage and recycling space: retail 0.0182 x floor m2 + 3.7 (min 10), office 0.0089 x m2 + 3.3 (min 10), large venue 0.0244 x m2 + 6 (min 10), restaurant 0.0331 x m2 + 6.8 (min 14); 6.6 max 101 m2 above the development-size threshold (below it: retail 41, office 66, large venue 66, restaurant 56 m2); 7.1 on the lot, at ground level or no more than one storey below; 8.1(c) no dimension under 2 m; 10.2 pad 28 t, 7.5 m high x 6.0 m wide x 15.0 m long; 11.3 route 4.5 m wide (6 m at entry), 4.4 m clear, 12.5 m radius, slope <=6%, no reversing onto a public road — https://metrovancouver.org/services/solid-waste/Documents/multi-family-commercial-technical-specs-storage-space-access-recycling-2015.pdf ‖ CHECK 2 (1 Nov 2026, fixed): 101 m2 cap applies only above the size threshold; lower caps added."
+ },
+ "arch_svc_edmWasteStd2026": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (PDF)",
+  "claims": [
+   {
+    "claim": "Title, City of Edmonton Waste Services, Rev. 1.0, 2 Mar 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Revision 1.0, March 2, 2026, 'initial creation of the document'",
+    "fix": null
+   },
+   {
+    "claim": "p. 7 applies to developments with a residential component",
+    "verdict": "CONFIRMED",
+    "evidence": "'The Standards apply to any development on a property with a residential component' (p. 07)",
+    "fix": null
+   },
+   {
+    "claim": "p. 25 non-residential separate, private hauler",
+    "verdict": "CONFIRMED",
+    "evidence": "'any non-residential waste must be collected by a private hauler in separate containers' (p. 25)",
+    "fix": null
+   },
+   {
+    "claim": "p. 26 'less than 45 m away from any entrance'",
+    "verdict": "CONFIRMED",
+    "evidence": "'the waste disposal area must be less than 45 m away from any entrance to the building' (p. 26)",
+    "fix": null
+   },
+   {
+    "claim": "cart moving distance <=9.10 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'must be equal to or less than 9.10 m' (p. 26)",
+    "fix": null
+   },
+   {
+    "claim": "rooms at grade with direct exterior access",
+    "verdict": "CONFIRMED",
+    "evidence": "'Waste rooms must be at grade with the road surface or at ground level'; 'have direct exterior access with no slope or steps' (p. 26)",
+    "fix": null
+   },
+   {
+    "claim": "p. 22 3.0 m from hydrants and FDCs",
+    "verdict": "WRONG",
+    "evidence": "'must be at least 3.0 m away from fire protection equipment' is on p. 21 (curbside carts 1.5 m, p. 11)",
+    "fix": "p. 21"
+   },
+   {
+    "claim": "p. 27 7.0 m drive aisles",
+    "verdict": "CONFIRMED",
+    "evidence": "'the minimum width for internal drive aisles must be 7.0 m' (p. 27)",
+    "fix": null
+   },
+   {
+    "claim": "p. 33 reversing <36 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'must be less than 36 m' (p. 33)",
+    "fix": null
+   },
+   {
+    "claim": "App. B turning radii 12.8–14.4 m",
+    "verdict": "CONFIRMED",
+    "evidence": "Appendix B 'Collection Vehicles Specifications' pp. 39–41: side-load 14.4, front-load 13.8, roll-off 12.8 m",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Residential-only standard; for a data centre with café/pool/refuge it is a benchmark only — non-residential waste goes to a private hauler (p. 25).",
+  "new_text": "GOVERNMENT STANDARD: Development Standards for Residential Waste Collection: Single and Multi-Unit Developments, City of Edmonton Waste Services, Rev. 1.0, 2 Mar 2026: p. 7 applies to developments with a residential component; p. 25 mixed use keeps non-residential containers separate, non-residential waste to a private hauler; p. 26 waste area 'less than 45 m away from any entrance', cart moving distance <=9.10 m, rooms at grade with direct exterior access; p. 21 3.0 m from hydrants and FDCs; p. 27 7.0 m drive aisles; p. 33 reversing <36 m; App. B turning radii 12.8–14.4 m — https://www.edmonton.ca/sites/default/files/public-files/documents/development-standards-for-waste-collection.pdf ‖ CHECK 2 (1 Nov 2026, fixed): 3.0 m clearance is on p. 21, not p. 22."
+ },
+ "arch_svc_wsbcPart11": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "Online, non-official version",
+    "verdict": "CONFIRMED",
+    "evidence": "'The online Act and Regulation are not the official versions'",
+    "fix": null
+   },
+   {
+    "claim": "11.2(1) 3 m (10 ft)",
+    "verdict": "CONFIRMED",
+    "evidence": "'from which a fall of 3 m (10 ft) or more may occur'",
+    "fix": null
+   },
+   {
+    "claim": "11.2(2)–(5) hierarchy",
+    "verdict": "CONFIRMED",
+    "evidence": "(2) guardrails 'when practicable'; (3) 'another fall restraint system'; (4) 'a fall arrest system' or rope access; (5) 'work procedures that are acceptable to the Board'",
+    "fix": null
+   },
+   {
+    "claim": "11.3(1)(a) written plan at 7.5 m without permanent guardrails",
+    "verdict": "CONFIRMED",
+    "evidence": "'not protected by permanent guardrails, and from which a fall of 7.5 m (25 ft) or more may occur'",
+    "fix": null
+   },
+   {
+    "claim": "11.6(4) 22 kN any direction",
+    "verdict": "CONFIRMED",
+    "evidence": "'an ultimate load capacity in any direction ... of at least 22 kN (5 000 lbs)'",
+    "fix": null
+   },
+   {
+    "claim": "No roof-edge setback clause",
+    "verdict": "CONFIRMED",
+    "evidence": "no setback or warning-line distance in Part 11 text read (related guidelines not read)",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_svc_ahsRecepSite": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (PDF)",
+  "claims": [
+   {
+    "claim": "Title, AHS, PUB-0539-202405",
+    "verdict": "CONFIRMED",
+    "evidence": "'Reception Centres: A Guide for Municipalities'; Alberta Health Services, Safe Healthy Environments; PUB-0539-202405",
+    "fix": null
+   },
+   {
+    "claim": "p. 3 site selection by municipality; four factors",
+    "verdict": "CONFIRMED",
+    "evidence": "'The selection of the reception centre site is the responsibility of the municipal or local authority'; 'Proximity to the event and resources', 'Transportation', 'Building accessibility', 'Population served'",
+    "fix": null
+   },
+   {
+    "claim": "p. 6 laundry separate from food areas",
+    "verdict": "CONFIRMED",
+    "evidence": "'Laundry must be done in an area separate from food preparation and consumption areas.'",
+    "fix": null
+   },
+   {
+    "claim": "p. 8 garbage away from living spaces, shaded secure bins",
+    "verdict": "CONFIRMED",
+    "evidence": "'Place garbage in an area away from living spaces'; 'store garbage in shaded locations in secure bins'",
+    "fix": null
+   },
+   {
+    "claim": "p. 17 EMS pathway quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'a clear and designated pathway for emergency medical services (EMS) transport and delivery of supplies and equipment' (healthcare area)",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Written for evacuation reception centres (emergency lodging); applying it to a cooling/warming refuge is by analogy.",
+  "new_text": null
+ },
+ "arch_svc_bcCoronerHeat2022": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (PDF, first 100,000 characters incl. tables pp. 38–39)",
+  "claims": [
+   {
+    "claim": "Title, BC Coroners Service, report to the Chief Coroner, 7 Jun 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "title as given; 'Report to the Chief Coroner of British Columbia'; released June 7, 2022",
+    "fix": null
+   },
+   {
+    "claim": "619 deaths (p. 4)",
+    "verdict": "CONFIRMED",
+    "evidence": "619 (pp. 4, 11)",
+    "fix": null
+   },
+   {
+    "claim": "67% aged 70+, 90% over 60 (pp. 5, 13)",
+    "verdict": "WRONG",
+    "evidence": "67% aged 70+ on pp. 4 and 13; 90% over 60 on p. 13; p. 5 not seen",
+    "fix": "pp. 4, 13"
+   },
+   {
+    "claim": "56.1% lived alone (p. 17, Table 8)",
+    "verdict": "CONFIRMED",
+    "evidence": "56% in text (pp. 4, 17); Table 8 (p. 39) 347 = 56.1%",
+    "fix": null
+   },
+   {
+    "claim": "98% indoors in a residence",
+    "verdict": "CONFIRMED",
+    "evidence": "'almost all (98%)' indoors in a residence (pp. 4, 17)",
+    "fix": null
+   },
+   {
+    "claim": "39% multi-unit, 10% social/SRO/supportive (p. 17, Table 7)",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 17; Table 7 (p. 38) 39.1% (242), 10.0% (62)",
+    "fix": null
+   },
+   {
+    "claim": "28% / 33% most deprived quintiles (p. 16, Tables 5–6)",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 16; Table 5 27.5%, Table 6 33.0% (p. 38)",
+    "fix": null
+   },
+   {
+    "claim": "3 homeless (Table 8)",
+    "verdict": "CONFIRMED",
+    "evidence": "3 decedents, 0.5% (Table 8, p. 39)",
+    "fix": null
+   },
+   {
+    "claim": "AC in 7% (p. 19)",
+    "verdict": "CONFIRMED",
+    "evidence": "46 decedents, about 7% (p. 19); Table 11 7.4%",
+    "fix": null
+   },
+   {
+    "claim": "Mobility/distance barriers, mobile centres, shuttles (p. 26)",
+    "verdict": "CONFIRMED",
+    "evidence": "'people with mobility issues may not be able to access them and distance could be a further impediment'; 'mobile cooling centres, or cooling shuttles'",
+    "fix": null
+   },
+   {
+    "claim": "Rec. 1(C), 2(A) (pp. 31–32)",
+    "verdict": "CONFIRMED",
+    "evidence": "1(C) p. 31 (HARS pilot to local governments incl. cooling centres); 2(A) p. 32 (Home and Community Care prioritize clients incl. those who live alone)",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT REPORT: Extreme Heat and Human Mortality: A Review of Heat-Related Deaths in B.C. in Summer 2021, BC Coroners Service, report to the Chief Coroner, released 7 Jun 2022: 619 heat-related deaths (p. 4); 67% aged 70+, 90% over 60 (pp. 4, 13); 56.1% lived alone (p. 17, Table 8); 98% indoors in a residence; 39% multi-unit, 10% social/SRO/supportive housing (p. 17, Table 7); 28% most materially deprived, 33% most socially deprived quintile (p. 16, Tables 5–6); 3 homeless (Table 8); AC in 7% (p. 19); mobility and distance barriers to cooling centres, mobile centres and shuttles (p. 26); Rec. 1(C), 2(A) (pp. 31–32) — https://www2.gov.bc.ca/assets/gov/birth-adoption-death-marriage-and-divorce/deaths/coroners-service/death-review-panel/extreme_heat_death_review_panel_report.pdf ‖ CHECK 2 (1 Nov 2026, fixed): 67%/90% pages are 4 and 13 (90% on p. 13); all figures confirmed."
+ },
+ "arch_svc_hcWhoAtRisk": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "Title, Health Canada, mod. 7 May 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "'Extreme heat events: Health risks and who is at risk of extreme heat events'; Date modified 2024-05-07",
+    "fix": null
+   },
+   {
+    "claim": "List of at-risk groups",
+    "verdict": "CONFIRMED",
+    "evidence": "'older adults'; 'infants and young children'; 'people with chronic illnesses (like breathing problems, mental illness and heart problems)'; 'people who are unable to keep their living space cool'; 'people who work in the heat (indoors or outdoors)'; 'people who exercise in the heat ...'; 'people experiencing homelessness'; 'people with low incomes'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_svc_hcHarsGuide": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (read in two parts)",
+  "claims": [
+   {
+    "claim": "Title, H129-9/2011E, web 17 Dec 2020",
+    "verdict": "CONFIRMED",
+    "evidence": "title as given; catalogue H129-9/2011E; date modified 2020-12-17",
+    "fix": null
+   },
+   {
+    "claim": "3.2 higher floors without AC, social isolation, older housing",
+    "verdict": "CONFIRMED",
+    "evidence": "'higher residential floors without air conditioning'; 'Social isolation--limited access to heat-health information and services'; 'living in older housing that may gain heat and retain it'",
+    "fix": null
+   },
+   {
+    "claim": "3.2 cooling options quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'easy-to-access cooling options (e.g. places with air conditioning, community pools)'",
+    "fix": null
+   },
+   {
+    "claim": "3.5.1 back-up energy, water, cots",
+    "verdict": "CONFIRMED",
+    "evidence": "'cooling facilities should have back-up energy sources in case of power failures'; 'drinking water'; 'cots, if needed'",
+    "fix": null
+   },
+   {
+    "claim": "Box 3 transport quote, extend hours",
+    "verdict": "CONFIRMED",
+    "evidence": "'Identify transportation options to get people to and from cooling facilities'; 'Extend hours of air-conditioned facilities ...'",
+    "fix": null
+   },
+   {
+    "claim": "No siting distance",
+    "verdict": "CONFIRMED",
+    "evidence": "no distance for locating cooling facilities found",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_svc_edmC620": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (PDF)",
+  "claims": [
+   {
+    "claim": "C620 title, City of Edmonton, approved 16 Jul 2019",
+    "verdict": "CONFIRMED",
+    "evidence": "'C620'; 'Supporting Vulnerable People During Extreme Weather Conditions'; 'City Council July 16, 2019'",
+    "fix": null
+   },
+   {
+    "claim": "Vulnerable People definition incl. 'in particular persons experiencing homelessness'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Persons who are vulnerable to serious, critical, or potentially fatal health impacts ... in particular persons experiencing homelessness.'",
+    "fix": null
+   },
+   {
+    "claim": "No site location criteria",
+    "verdict": "CONFIRMED",
+    "evidence": "none found",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_svc_edmEWOverview": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (PDF)",
+  "claims": [
+   {
+    "claim": "Title 'Extreme Weather Overview 2019–2025'",
+    "verdict": "WRONG",
+    "evidence": "document title is 'Extreme Weather Response Summary'; only date shown is March 2025 (file label 'Extreme Weather Response Summary - March 2025'); '2019–2025' appears only in the URL",
+    "fix": "Extreme Weather Response Summary, City of Edmonton, Mar 2025"
+   },
+   {
+    "claim": "Rec centres and libraries as respite for cold, heat and poor air",
+    "verdict": "CONFIRMED",
+    "evidence": "'respite from the cold ... such as recreation centres and libraries'; heat & poor air: 'Provides respite in open City facilities, such as recreation centers and libraries.'",
+    "fix": null
+   },
+   {
+    "claim": "Winter Shelter Shuttles two routes, one more on activation",
+    "verdict": "CONFIRMED",
+    "evidence": "'overnight Winter Shelter Shuttles on two designated routes, with an additional route during activations'",
+    "fix": null
+   },
+   {
+    "claim": "Up to 50 overnight spaces (Al Rashid Mosque)",
+    "verdict": "CONFIRMED",
+    "evidence": "'up to 50 temporary overnight emergency shelter spaces during extreme cold activations' (Al Rashid Mosque, City funding)",
+    "fix": null
+   },
+   {
+    "claim": "No site criteria",
+    "verdict": "CONFIRMED",
+    "evidence": "none found",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT: Extreme Weather Response Summary, City of Edmonton, Mar 2025 (supplements arch_edmExtremeWeather): recreation centres and libraries as respite for cold, heat and poor air; 'overnight Winter Shelter Shuttles on two designated routes', one more on activation; up to 50 overnight spaces (Al Rashid Mosque); no site criteria — https://www.gov.edmonton.ab.ca/sites/default/files/public-files/assets/PDF/Extreme-Weather-Overview-2019-2025.pdf ‖ CHECK 2 (1 Nov 2026, fixed): title on the document is 'Extreme Weather Response Summary' (Mar 2025); '2019–2025' is only in the URL."
+ },
+ "arch_svc_vanSplash2019": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (PDF, first 100,000 characters)",
+  "claims": [
+   {
+    "claim": "Title, Proposed Revised Strategy Report, Vancouver Board of Parks and Recreation, Oct 2019",
+    "verdict": "CONFIRMED",
+    "evidence": "'VanSplash: Vancouver Aquatics Strategy' (Proposed Revised Strategy Report); Board of Parks and Recreation; October 2019",
+    "fix": null
+   },
+   {
+    "claim": "Glossary service radius quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'Service radiuses have been set at 4km and over for City-Wide pools, 3km for Community pools and 2km for Neighbourhood pools.'",
+    "fix": null
+   },
+   {
+    "claim": "p. 20 indoor 'within about 2-3' (unit cut off)",
+    "verdict": "CONFIRMED",
+    "evidence": "my read also ends at 'within about 2-3' with no unit",
+    "fix": null
+   },
+   {
+    "claim": "p. 20 outdoor 45 min walk, 12 min cycle, 6 min drive",
+    "verdict": "CONFIRMED",
+    "evidence": "'ensure reach (approximately a 45 minute walk, 12 minute cycle or 6 minute drive)'",
+    "fix": null
+   },
+   {
+    "claim": "Spray parks 1–2 km",
+    "verdict": "CONFIRMED",
+    "evidence": "'within about 1 – 2km of their residence' (p. 20)",
+    "fix": null
+   },
+   {
+    "claim": "Small pools 60,000–90,000 residents",
+    "verdict": "CONFIRMED",
+    "evidence": "'a local area of 60,000 to 90,000 residents' (p. 20)",
+    "fix": null
+   },
+   {
+    "claim": "p. 33 south-central gap",
+    "verdict": "CONFIRMED",
+    "evidence": "'There is a small area in south central Vancouver that is not within the service delivery area of an indoor pool.'",
+    "fix": null
+   },
+   {
+    "claim": "p. 65 spray parks by need",
+    "verdict": "CONFIRMED",
+    "evidence": "'based on greatest social and geographic need'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_svc_edmRecApproach2018": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (PDF, first 100,000 characters)",
+  "claims": [
+   {
+    "claim": "Title, City of Edmonton, Oct 2018",
+    "verdict": "CONFIRMED",
+    "evidence": "'Approach to Community Recreation Facility Planning in Edmonton'; October 2018",
+    "fix": null
+   },
+   {
+    "claim": "p. 34 indoor 'within 5 kilometres of their residence', outdoor 'within 400 metres'",
+    "verdict": "CONFIRMED",
+    "evidence": "both on p. 34",
+    "fix": null
+   },
+   {
+    "claim": "p. 36 Metropolitan, District, Neighbourhood",
+    "verdict": "CONFIRMED",
+    "evidence": "'Metropolitan (city-wide)', 'District', 'Neighbourhood' (p. 36)",
+    "fix": null
+   },
+   {
+    "claim": "p. 20 low income in mature neighbourhoods around downtown",
+    "verdict": "CONFIRMED",
+    "evidence": "'disproportionately high rate of low-income residents in mature neighbourhoods around downtown'",
+    "fix": null
+   },
+   {
+    "claim": "pp. 45–46 financial accessibility and inclusion",
+    "verdict": "CONFIRMED",
+    "evidence": "Criterion 7 Financial Accessibility, Criterion 8 Social Inclusion (p. 45); scoring weights 4 each (p. 46)",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_svc_edmRecMasterPlan2004": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (PDF, first 100,000 characters)",
+  "claims": [
+   {
+    "claim": "Title, City of Edmonton, approved 31 Aug 2004",
+    "verdict": "CONFIRMED",
+    "evidence": "'Recreation Facility Master Plan, 2005-2015'; footer 'Approved by City Council August 31, 2004'",
+    "fix": null
+   },
+   {
+    "claim": "Fig. 1.2 p. 9 district 40,000–80,000; 20–30 min walk/bike/transit; 15–20 min drive",
+    "verdict": "CONFIRMED",
+    "evidence": "Fig. 1.2 (p. 9) as stated; p. 8 'between 40,000 and 80,000 residents'",
+    "fix": null
+   },
+   {
+    "claim": "Rec. 8 p. 17 quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'All new aquatic facilities should be part of larger multi-purpose district-serving recreation complexes.' (p. 17)",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Older plan (2005–2015), likely superseded by the 2018 Approach; label kept as 'older'.",
+  "new_text": null
+ },
+ "arch_svc_vanFoodStrategy2013": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026 (PDF, read in two parts)",
+  "claims": [
+   {
+    "claim": "Title, Jan 2013",
+    "verdict": "CONFIRMED",
+    "evidence": "'What feeds us: Vancouver Food Strategy'; January 2013",
+    "fix": null
+   },
+   {
+    "claim": "City of Vancouver with Vancouver Food Policy Council",
+    "verdict": "WRONG",
+    "evidence": "Council only wrote the 'Forward from Vancouver Food Policy Council' (co-chairs Brent Mansfield and Trish Kelly); strategy is the City's",
+    "fix": "City of Vancouver (foreword by Vancouver Food Policy Council)"
+   },
+   {
+    "claim": "p. 45 Goal 3 quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'within a reasonable walking, transit or cycling distance' (p. 45)",
+    "fix": null
+   },
+   {
+    "claim": "p. 28 35% per $10,000 within one kilometre, B.C. cities, cited study",
+    "verdict": "CONFIRMED",
+    "evidence": "'In B.C. cities, with every $10,000 increase in neighbourhood income, the likelihood of accessing a large grocery store or fresh food store within one kilometre decreases by 35 per cent' (Table 3, p. 28; Black et al., 2011)",
+    "fix": null
+   },
+   {
+    "claim": "p. 29 groups associated with food insecurity",
+    "verdict": "CONFIRMED",
+    "evidence": "'populations groups commonly associated with household food insecurity': children, seniors, recent immigrants, low income, unemployed, lone parents",
+    "fix": null
+   },
+   {
+    "claim": "p. 56 Action 1.9 plots 3,640 to 5,000 by 2020",
+    "verdict": "CONFIRMED",
+    "evidence": "'from 3,640 to 5,000 by the year 2020'",
+    "fix": null
+   },
+   {
+    "claim": "p. 61 Action 1.16 urban farms 17 to 35",
+    "verdict": "CONFIRMED",
+    "evidence": "'from 17 to 35 by the year 2020'",
+    "fix": null
+   },
+   {
+    "claim": "p. 97 food network staff in community centres/neighbourhood houses",
+    "verdict": "CONFIRMED",
+    "evidence": "Action 3.2: 'office space to accommodate neighbourhood food network coordinators' in community centres and/or neighbourhood houses (p. 97)",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT STRATEGY: Vancouver Food Strategy: What feeds us, City of Vancouver (foreword by Vancouver Food Policy Council), Jan 2013: p. 45 Goal 3 access 'within a reasonable walking, transit or cycling distance'; p. 28 likelihood of a large or fresh-food store 'within one kilometre' falls 35% per $10,000 neighbourhood income (B.C. cities, Black et al. 2011); p. 29 groups associated with food insecurity; p. 56 Action 1.9 plots 3,640 to 5,000 by 2020; p. 61 Action 1.16 urban farms 17 to 35; p. 97 food network staff in community centres/neighbourhood houses — https://vancouver.ca/files/cov/vancouver-food-strategy-final.PDF ‖ CHECK 2 (1 Nov 2026, fixed): Food Policy Council wrote the foreword only; cited study is Black et al. 2011."
+ },
+ "arch_svc_edmFresh": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "Direction 1 Edmonton Food Council by 1 Jun 2013",
+    "verdict": "CONFIRMED",
+    "evidence": "'Establish the Edmonton Food Council (EFC) by June 1, 2013'",
+    "fix": null
+   },
+   {
+    "claim": "Direction 4 quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'Assist in improving neighbourhood-scale food infrastructure'",
+    "fix": null
+   },
+   {
+    "claim": "Direction 6 quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'promote convenient pedestrian access to healthy food sources'",
+    "fix": null
+   },
+   {
+    "claim": "No distance",
+    "verdict": "CONFIRMED",
+    "evidence": "no distance figure",
+    "fix": null
+   },
+   {
+    "claim": "Strategy 2012",
+    "verdict": "NOT FOUND",
+    "evidence": "no strategy year on the page read",
+    "fix": "write 'strategy 2012 ?' until checked against the strategy document"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT STRATEGY: fresh: Edmonton's Food and Urban Agriculture Strategy, strategic directions page, City of Edmonton (n.d.; strategy year 2012 ? not on page): Direction 1 establish Edmonton Food Council by 1 Jun 2013; Direction 4 'neighbourhood-scale food infrastructure'; Direction 6 'convenient pedestrian access to healthy food sources'; no distance — https://www.edmonton.ca/city_government/initiatives_innovation/food_and_agriculture/fresh-strategic-directions ‖ CHECK 2 (1 Nov 2026, fixed): directions confirmed; strategy year not shown on the page."
+ },
+ "arch_svc_statcanHES2007": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "Title, EnviroStats 16-002-X vol. 3 no. 3, Statistics Canada, 24 Sep 2009",
+    "verdict": "CONFIRMED",
+    "evidence": "'Quick fact: Canadians hang it out to dry—Clothesline and drying rack use in Canada'; Vol. 3 no 3 (Fall 2009); 2009-09-24",
+    "fix": null
+   },
+   {
+    "claim": "2007 Households and the Environment Survey",
+    "verdict": "CONFIRMED",
+    "evidence": "'Data from the 2007 Households and the Environment Survey reveal that...'",
+    "fix": null
+   },
+   {
+    "claim": "61% quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'61% of Canadian households used a clothesline or drying rack'",
+    "fix": null
+   },
+   {
+    "claim": "No washer/dryer figures by tenure",
+    "verdict": "CONFIRMED",
+    "evidence": "none on page",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_svc_vanHygiene": {
+  "where_read": "WebFetch of the register URL, 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "Free showers",
+    "verdict": "CONFIRMED",
+    "evidence": "'clean, private showers with towels, soap, shampoo, razors, and shaving foam available for use, free of charge'",
+    "fix": null
+   },
+   {
+    "claim": "Laundry quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'You can drop off a load of laundry in the morning and pick it up at night.'",
+    "fix": null
+   },
+   {
+    "claim": "404 Alexander St",
+    "verdict": "CONFIRMED",
+    "evidence": "'404 Alexander St' 'Vancouver BC, V6A 1C5'",
+    "fix": null
+   },
+   {
+    "claim": "Page title 'Health services', n.d.",
+    "verdict": "CONFIRMED",
+    "evidence": "no date on page; page title not captured by the fetch (URL slug health-services)",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ }
+}
