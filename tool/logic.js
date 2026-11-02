@@ -8,8 +8,8 @@
 (function(){
 'use strict';
 const BD=window.BD; const {$,esc}=BD;
-const RANK={resident:0,community:1,full:2};
-const WHO={resident:'residents',community:'the neighbourhood',full:'professionals'};
+const RANK={resident:0,community:1,full:2,arch:1,arch_only:9};
+const WHO={resident:'residents',community:'the neighbourhood',full:'engineers',arch:'architects',arch_only:'the Architecture template'};
 const LEVEL={resident:'What it means for me',community:'What it means for the neighbourhood',full:'How it is worked out'};
 let L=null, UP={}, ORDER={};
 fetch('logic.json').then(r=>r.ok?r.json():null).then(d=>{ if(!d) return; L=d; Object.keys(d.nodes).forEach((k,i)=>ORDER[k]=i); for(const [a,b] of d.edges) (UP[b]=UP[b]||[]).push(a); render(); }).catch(()=>{});
@@ -63,7 +63,7 @@ const known=ids=>(ids||[]).filter(i=>!L||L.nodes[i]);
 function secNodes(step,title){ return known(SEC[step+':'+title]||null); }
 function oppNodes(name){ const o=O(); return known(o&&o.opp_quantities&&o.opp_quantities[name]); }
 function addonNodes(id){ const o=O(), a=o&&(o.addons||[]).find(x=>x.id===id||x.name===id); return known(a&&a.quantities); }
-function tierOf(ids){ if(!L||!ids||!ids.length) return null; let r=9; for(const i of ids){ const n=L.nodes[i]; if(n) r=Math.min(r,RANK[n.t]); } return r===9?null:Object.keys(RANK)[r]; }
+function tierOf(ids){ if(!L||!ids||!ids.length) return null; let r=9; for(const i of ids){ const n=L.nodes[i]; if(n) r=Math.min(r,RANK[n.t]); } return r===9?null:['resident','community','full'][r]; }
 const shows=(ids,t)=>{ const x=tierOf(ids); return x===null||RANK[x]<=RANK[t||tierNow()]; };
 BD.shownMore=BD.shownMore||new Set();
 const siteKey=()=>{ const a=BD.S&&BD.S.sel&&BD.S.sel.a; return (a&&a[0])||''; };
@@ -149,7 +149,7 @@ function panelEl(){ const vis=document.querySelector('#wc .wcvis'); if(!vis) ret
     $('#wc3d').appendChild(b); }
   return p; }
 function render(){ const p=panelEl(); if(!p||!L) return; p.hidden=!open; if(!open) return; const t=tierNow();
-  const T=new Set(target.ids), V=new Set(Object.keys(L.nodes).filter(k=>RANK[L.nodes[k].t]<=RANK[t])); T.forEach(k=>V.add(k));
+  const T=new Set(target.ids), V=new Set(Object.keys(L.nodes).filter(k=>L.nodes[k].t==='arch_only'?t==='arch':RANK[L.nodes[k].t]<=RANK[t])); T.forEach(k=>V.add(k));
   const A=ancestors(target.ids), lit=new Set([...A].filter(k=>V.has(k)));
   const st=L.stages.map(s=>s[0]), cols={}; st.forEach(s=>cols[s]=[]); [...V].sort((a,b)=>ORDER[a]-ORDER[b]).forEach(k=>{ const s=L.nodes[k].s; (cols[s]||(cols[s]=[])).push(k); });
   const Wd=470, Ht=230, mx=12, top=34, bot=8, cw=(Wd-2*mx)/st.length, P={};

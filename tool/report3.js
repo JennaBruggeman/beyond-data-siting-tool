@@ -328,7 +328,7 @@ function pLogic(D,no){ const G=BD.TPL&&BD.TPL.graph, N=BD.TPL&&BD.TPL.nodes; if(
   st.forEach(([c,name],j)=>{ const L=col[c]||[]; const key=id=>{ const f=(ins[id]||[]).map(k=>pos[k]).filter(Boolean); return f.length?f.reduce((a,q)=>a+q[1],0)/f.length:1e4+L.indexOf(id); }; const nc=Math.ceil(L.length/34), rows=Math.ceil(L.length/nc), gy=(Y1-Y0)/34;
     L.sort((a,b)=>key(a)-key(b)).forEach((id,i)=>{ pos[id]=[X0+j*cwid+10+(i%nc)*12, Y0+Math.floor(i/nc)*gy+(34-rows)*gy/2]; });
     s+=T(X0+j*cwid+6,Y0-22,wrap(name,16).slice(0,2),{fs:6.4,w:600}); s+=`<line x1="${X0+j*cwid}" y1="${Y0-30}" x2="${X0+j*cwid}" y2="${Y1+6}" stroke="${K.line}" stroke-width=".4"/>`; });
-  const TC={resident:K.ink,community:K.heat,full:K.faint}; const rank={resident:0,community:1,full:2};
+  const TC={resident:K.ink,community:K.heat,full:K.faint,arch_only:K.faint}; const rank={resident:0,community:1,full:2,arch:1};
   for(const [a,b] of G.edges){ const p=pos[a], q=pos[b]; if(!p||!q) continue; s+=`<path d="M${p[0]},${p[1]} C${(p[0]+q[0])/2},${p[1]} ${(p[0]+q[0])/2},${q[1]} ${q[0]},${q[1]}" fill="none" stroke="${K.dim}" stroke-width=".35" opacity=".5"/>`; }
   for(const [id,[x,y]] of Object.entries(pos)){ const t=(N[id]||{}).tier||'full'; s+=dot(x,y,2.2,TC[t]); }
   let y=Y1+30; s+=caps(M,y,'Each dot is one part of the tool; colour is the first report that shows it'); y+=14; let x=M;

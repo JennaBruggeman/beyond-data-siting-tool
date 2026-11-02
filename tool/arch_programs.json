@@ -1,0 +1,3351 @@
+{
+ "meta": {
+  "date": "2026-11-02",
+  "built_from": "checks/research_arch_v1/ (architecture_mode_notes_2026-10-30.md, pool_laundry, greenhouse_solar, refuge_publicfloor, refuge_placement, adj_programs, adj_occupancy, adj_service, spatial_rules, servicing_social, prog_wet, prog_grow, prog_public, prog_housing, sys, fish_species, temps_public, zoning, handover, security_more, uploads_2026_11_02); src ids from register new_sources",
+  "note": "Data centre assumed F-2 (tool default). null + '?' = no source. 'our arithmetic' / 'our reading' labelled. Separation per register arch_nbc3131 (F-2 vs D, E, F-3 none; vs A, B, C 2 h). Check 3 applied 2 Nov 2026."
+ },
+ "programs": [
+  {
+   "id": "refuge",
+   "name": "Refuge (warming, cooling, cleaner-air room)",
+   "group": "care",
+   "kind": "mass",
+   "size": {
+    "typical_m2": 175,
+    "min_m2": null,
+    "max_m2": null,
+    "step": {
+     "unit": "person",
+     "m2_per_unit": 3.5,
+     "units_typ": 50,
+     "units_min": null
+    },
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "arch_ahsReceptionCentres",
+     "arch_edmExtremeWeather"
+    ],
+    "note": "our arithmetic: 50 spaces (Edmonton cold site) × 3.5 m²/person (AHS); up to 9 m² for wheelchair users"
+   },
+   "occ": {
+    "group": "A-2",
+    "sep_h_from_F2": 2,
+    "src": [
+     "arch_nbc3131",
+     "arch_ref_part3Scope",
+     "arch_pub_nbcA3121"
+    ],
+    "note": "day use A-2 (community hall): our reading; overnight C, see warming_shelter"
+   },
+   "heat": {
+    "setpoint_C": [
+     19,
+     26
+    ],
+    "supply_C": null,
+    "kWh_m2_yr": [
+     160,
+     160
+    ],
+    "W_m2_peak": null,
+    "uses": "heat",
+    "lift_needed": null,
+    "src": [
+     "arch_ahsReceptionCentres",
+     "arch_vchCoolingSpaces",
+     "arch_statcanSCIEU2019",
+     "arch_nrcanTrends2020"
+    ],
+    "note": "19–22 °C warming (AHS), ≤26 °C cooling (VCH); 160 = our arithmetic, existing library stock proxy; also a cooling load"
+   },
+   "zoning": {
+    "van": {
+     "status": "conditional",
+     "use": "Community Centre or Neighbourhood House; Social Service Centre",
+     "districts": "I-2, I-3 (A), FC-2; I-1C Social Service Centre only",
+     "src": [
+      "van_zdb_i2",
+      "van_zdb_i3",
+      "van_zdb_i1c",
+      "van_zdb_fc2"
+     ]
+    },
+    "edm": {
+     "status": "permitted",
+     "use": "Community Service",
+     "zones": "BE only (IM, IH not permitted)",
+     "cap_m2": 500,
+     "src": [
+      "arch_edmZB20001_BE",
+      "arch_zon_EdmZones"
+     ]
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": true,
+    "outside_wall": null,
+    "public": true,
+    "inside_secure": false,
+    "src": [
+     "arch_up_vanZDB10",
+     "van_zdb_i3"
+    ],
+    "note": "own street entrance (Van 10.21.1); data storage barred at ground floor fits refuge under hall; no at-grade rule: at grade only for the under-hall option (our reading)"
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": false,
+     "src": [
+      "arch_hcCleanerAirSpaces"
+     ],
+     "note": "fuel-burning generators away and downwind of clean-air intakes (guide)"
+    },
+    {
+     "rule": "must near",
+     "with": "street",
+     "m": null,
+     "hard": false,
+     "src": [
+      "arch_svc_vanPkg7"
+     ],
+     "note": "drop-off at own entrance: Class B passenger space 4.0 m wide, 3.5 m clear; refuge not a listed use: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [
+    {
+     "id": "own_building",
+     "name": "Own building on the lot",
+     "effect": "spacing or 4 h firewall if joined; overnight sleeping allowed; own seismic category; Van: accessory building or rezoning (10.34.1)"
+    },
+    {
+     "id": "side_by_side",
+     "name": "Side by side in the data-centre building",
+     "effect": "2 h wall; overnight limited to one residential suite (F-2); shared structure takes the higher seismic category unless split"
+    },
+    {
+     "id": "under_hall",
+     "name": "Ground floor under the hall",
+     "effect": "2 h floor; same overnight limit; whole building takes the refuge's seismic category; fits Van no-data-at-grade rule"
+    }
+   ],
+   "social": {
+    "serves": "heat-dome risk groups: aged 70+, living alone, at home indoors; Health Canada at-risk groups",
+    "catchment": null,
+    "src": [
+     "arch_svc_bcCoronerHeat2022",
+     "arch_svc_hcWhoAtRisk"
+    ]
+   },
+   "flags": [
+    "Code needs only 30 min emergency lighting; heat, cooling and filtered air in a blackout are design choices [arch_ref_emergPower]",
+    "Generator power legal if the refuge user is the owner or a tenant [bcUCAs1]",
+    "Alberta self-supply only for owner or tenant on that property [euaS2]",
+    "Seismic High only if counted a community centre; post-disaster only if designated [arch_ref_nbcT4121]",
+    "No rule keeps the refuge reachable when the host is locked: tool flags it (research finding: none found; no source)",
+    "Filter MERV 13+, staged entry vestibule, emergency power (guide) [arch_hcCleanerAirSpaces]",
+    "Van I-2/I-3: 1.00 FSR for all non-industrial uses combined [van_zdb_i3]",
+    "Van: one principal building per site; own building = accessory or rezoning [arch_up_vanZDB10]"
+   ]
+  },
+  {
+   "id": "pool",
+   "name": "Public indoor pool",
+   "group": "wet",
+   "kind": "mass",
+   "size": {
+    "typical_m2": 2131,
+    "min_m2": 949,
+    "max_m2": null,
+    "step": {
+     "unit": "lane",
+     "m2_per_unit": 223,
+     "units_typ": 6,
+     "units_min": 4
+    },
+    "storeys_typ": null,
+    "floor_height_m": 3.5,
+    "src": [
+     "arch_edmEastglen2017",
+     "arch_sportEngPoolsDGN",
+     "arch_sportEngPoolsApp1"
+    ],
+    "note": "typ. Eastglen 2,131 m² gross, 6 lanes; min/step our arithmetic: water + deck 1.1 + change 1.0 + plant 1/3, × 1.3 gross; 3.5 m = min clear (UK); step model gives 1,395 m² for 6 lanes vs 2,131 m² typical (Eastglen): mismatch, typical kept as sourced"
+   },
+   "occ": {
+    "group": "A-3",
+    "sep_h_from_F2": 2,
+    "src": [
+     "arch_wet_nbcA3121",
+     "arch_nbc3131"
+    ],
+    "note": "indoor swimming pool A-3"
+   },
+   "heat": {
+    "setpoint_C": [
+     27,
+     30
+    ],
+    "supply_C": null,
+    "kWh_m2_yr": [
+     416,
+     416
+    ],
+    "W_m2_peak": null,
+    "uses": "heat",
+    "lift_needed": null,
+    "src": [
+     "arch_carbonTrustCTG009",
+     "arch_benakcha2025",
+     "arch_bcPoolReg296"
+    ],
+    "note": "water 27–30 °C by use (UK benchmark), air ~1 °C above (≈28–31 °C); 416 = our arithmetic per m² usable, benchmark outside Canada (French preprint citing Yuan 2021), low conf."
+   },
+   "zoning": {
+    "van": {
+     "status": "rezoning",
+     "use": "Swimming Pool (not listed)",
+     "districts": "not listed in I-2, I-3, I-1C, FC-2",
+     "src": [
+      "van_zdb_i2",
+      "van_zdb_i3",
+      "van_zdb_fc2",
+      "van3575s2",
+      "van_zdb_i1c"
+     ]
+    },
+    "edm": {
+     "status": "permitted",
+     "use": "Community Service (recreation centres)",
+     "zones": "BE only",
+     "cap_m2": 500,
+     "src": [
+      "arch_zon_EdmZones",
+      "arch_edmZB20001_BE",
+      "arch_edmCommunityServiceDef"
+     ]
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": true,
+    "outside_wall": true,
+    "public": true,
+    "inside_secure": false,
+    "src": [
+     "arch_svc_nbcae72",
+     "arch_up_vanZDB10"
+    ],
+    "note": "AB only: plant room needs an outside door; gas chlorine room at grade on an outside wall; BC: not found"
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "hall",
+     "m": null,
+     "hard": false,
+     "src": [
+      "arch_adj_bcPoolDesign"
+     ],
+     "note": "should (BC guide 3.1, 9.8): no shared plant room with data-centre equipment; no direct access from other buildings"
+    },
+    {
+     "rule": "keep apart",
+     "with": "intakes",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_adj_nbcAE72"
+     ],
+     "note": "AB: chlorine-room exhaust ≥3 m from any intake, intake not below it"
+    },
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [],
+   "social": {
+    "serves": "residents without a pool in reach",
+    "catchment": "2 km neighbourhood / 3 km community / 4 km city-wide (Van); 5 km indoor recreation (Edm)",
+    "src": [
+     "arch_svc_vanSplash2019",
+     "arch_svc_edmRecApproach2018"
+    ]
+   },
+   "flags": [
+    "AB: plant room reasonably accessible from the pool enclosure, locked [arch_adj_nbcAE72]",
+    "BC: construction permit, plans sealed by engineer or architect [arch_bcPoolReg296]",
+    "BC: barrier with controlled access around pool and walkways [arch_adj_bcPoolReg]",
+    "AB: chlorine room 1 h, outward door to outside, no door into the building [arch_adj_abStandataCl]",
+    "Edm BE 500 m² cap: needs a variance (3.18) [arch_zon_EdmZones]",
+    "Pool covers cut total energy 10–30 % [arch_carbonTrustCTG009]",
+    "Sewer: non-domestic waste ≥65 °C prohibited (Metro Van) [arch_mvSewerBylaw299]"
+   ]
+  },
+  {
+   "id": "laundry",
+   "name": "Laundry (laundromat or community/commercial)",
+   "group": "wet",
+   "kind": "mass",
+   "size": {
+    "typical_m2": null,
+    "min_m2": null,
+    "max_m2": 300,
+    "step": null,
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "van3575s2"
+    ],
+    "note": "max 300 m²: Van Laundromat definition, self-service option in Vancouver only; commercial: no max (?); no Canadian floor-area or throughput source (?)"
+   },
+   "occ": {
+    "group": "D",
+    "sep_h_from_F2": 0,
+    "src": [
+     "arch_nbc3131",
+     "arch_wet_nbcA3121",
+     "arch_nbcDefF"
+    ],
+    "note": "self-service D; commercial F-2; both none from F-2"
+   },
+   "heat": {
+    "setpoint_C": null,
+    "supply_C": [
+     71,
+     130
+    ],
+    "kWh_m2_yr": null,
+    "W_m2_peak": null,
+    "uses": "heat",
+    "lift_needed": true,
+    "src": [
+     "arch_bobak2010",
+     "arch_euEMAStourism2016",
+     "arch_cmsLaundry2013",
+     "arch_fiaschi2019"
+    ],
+    "note": "wash ≥71 °C (CMS, US healthcare rule), drying air 115–130 °C (Fiaschi, Italian dry-cleaning); 0.53–0.88 kWh/kg wash heat (our arithmetic, Bobák, Czech); all outside Canada; lift: our reading"
+   },
+   "zoning": {
+    "van": {
+     "status": "conditional",
+     "use": "Laundromat (Laundry or Cleaning Plant if commercial)",
+     "districts": "Laundromat: I-2, I-1C (C); plant: I-2, I-1C (O), I-3, FC-2 (C)",
+     "src": [
+      "van_zdb_i2",
+      "van_zdb_i3",
+      "van_zdb_i1c",
+      "van_zdb_fc2",
+      "van3575s2"
+     ]
+    },
+    "edm": {
+     "status": "permitted",
+     "use": "Indoor Sales and Service (our reading); Minor Industrial if commercial",
+     "zones": "BE; commercial also IM",
+     "cap_m2": 500,
+     "src": [
+      "arch_zon_EdmZones"
+     ]
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": true,
+    "inside_secure": false,
+    "src": [],
+    "note": ""
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [
+    {
+     "id": "self_service",
+     "name": "Laundromat (self-service)",
+     "effect": "Group D; Van ≤300 m², C in I-2, I-1C"
+    },
+    {
+     "id": "commercial",
+     "name": "Commercial / institutional laundry",
+     "effect": "Group F-2; Van Laundry or Cleaning Plant; non-domestic sewer waste"
+    }
+   ],
+   "social": {
+    "serves": "no sourced need criterion; renters, low income are proxies only (unsourced)",
+    "catchment": null,
+    "src": [
+     "arch_svc_vanHygiene"
+    ]
+   },
+   "flags": [
+    "Commercial laundry is Non-Domestic Waste; ≥65 °C prohibited, mixed flow ≤40 °C [arch_mvSewerBylaw299]",
+    "Heat recovery from waste water and exhaust air is best practice [arch_euEMAStourism2016]",
+    "Benchmark ≤2.0 kWh and ≤7 L per kg textiles (small on-site) [arch_euEMAStourism2016]",
+    "Van loading: laundromat not listed, Director sets 'similar use' [arch_svc_vanPkg5]",
+    "Edm: no loading required below 2,500 m² [arch_sec_edm580]",
+    "No data-centre-heat-to-laundry precedent found (research search finding, pool_laundry.md; no source)"
+   ]
+  },
+  {
+   "id": "spa",
+   "name": "Bathhouse / Nordic spa",
+   "group": "wet",
+   "kind": "mass",
+   "size": {
+    "typical_m2": 870,
+    "min_m2": null,
+    "max_m2": null,
+    "step": null,
+    "storeys_typ": 3,
+    "floor_height_m": null,
+    "src": [
+     "arch_wet_vanCD1Ogden",
+     "arch_wet_vanRTS16473",
+     "arch_wet_bcPoolDesignHT"
+    ],
+    "note": "Vancouver barge example 870 m² on 3 levels; hot tub bench 0.6 m per person; sauna ≤3.6 m high"
+   },
+   "occ": {
+    "group": "A-3",
+    "sep_h_from_F2": 2,
+    "src": [
+     "arch_wet_nbcA3121",
+     "arch_nbc3131"
+    ],
+    "note": "pools/hot tubs A-3: our reading; sauna and treatment rooms alone could be D (none)"
+   },
+   "heat": {
+    "setpoint_C": [
+     32,
+     40
+    ],
+    "supply_C": null,
+    "kWh_m2_yr": null,
+    "W_m2_peak": null,
+    "uses": "heat",
+    "lift_needed": null,
+    "src": [
+     "arch_bcPoolReg296",
+     "arch_abPoolStd2014",
+     "arch_r2_carbonTrustCTV058",
+     "arch_wet_ncceh2026",
+     "arch_wet_abPoolStdSauna"
+    ],
+    "note": "hot water ≤40 °C (BC, AB), hydrotherapy 32–40 °C (UK); dry sauna 80–100 °C (AB cap 85), steam ≤60 °C"
+   },
+   "zoning": {
+    "van": {
+     "status": "conditional",
+     "use": "Beauty and Wellness Centre (hydrotherapy, thermal therapy)",
+     "districts": "I-2, I-3, FC-2, I-1C and other industrial",
+     "src": [
+      "van_zdb_i2",
+      "van_zdb_i3",
+      "van_zdb_fc2",
+      "arch_wet_vanRTS16473"
+     ]
+    },
+    "edm": {
+     "status": "?",
+     "use": "none defined (Indoor Sales and Service or Minor Indoor Entertainment ?)",
+     "zones": "BE ?",
+     "cap_m2": null,
+     "src": [
+      "arch_zon_EdmDefs",
+      "arch_zon_EdmZones"
+     ]
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": true,
+    "inside_secure": false,
+    "src": [
+     "arch_wet_vanRTS16473"
+    ],
+    "note": "Van: allowed outdoors too; roofs and upper floors not addressed (?); no siting or distance rule found"
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [],
+   "social": {
+    "serves": "Van policy: wellness amenities connected with pools",
+    "catchment": null,
+    "src": [
+     "arch_wet_vanSplashStrategy2019"
+    ]
+   },
+   "flags": [
+    "BC: hot tub = pool; sauna = personal service establishment [arch_wet_bcRAR161]",
+    "Cold plunge = pool unless drained and refilled after each use [arch_wet_vanRTS16473]",
+    "BC: barrier with controlled access around pools [arch_wet_bcPoolRegDefs]",
+    "AB: whirlpools on independent circulation, poolside shut-off [arch_wet_nbcAE726]",
+    "Hot tub turnover: BC 30 min; AB 15–20 min [arch_wet_bcPoolDesignHT, arch_wet_nbcAE726]"
+   ]
+  },
+  {
+   "id": "therapy_pool",
+   "name": "Therapy / rehab pool",
+   "group": "wet",
+   "kind": "mass",
+   "size": {
+    "typical_m2": 134,
+    "min_m2": 90,
+    "max_m2": null,
+    "step": null,
+    "storeys_typ": null,
+    "floor_height_m": 4.5,
+    "src": [
+     "arch_wet_atacp2019"
+    ],
+    "note": "our arithmetic (ATACP, UK benchmark): water 46.75 / 24 m² (24 = smallest example, 12 bathers, not a stated minimum) + concourse 2 m two sides, 1.5 m others + plant 30 % water + Changing Places 12 m² (ATACP s. 2.11, not in register text ?)"
+   },
+   "occ": {
+    "group": "A-3",
+    "sep_h_from_F2": 2,
+    "src": [
+     "arch_wet_nbcA3121",
+     "arch_nbc3131"
+    ],
+    "note": "inside a D clinic the pool part stays A-3 ?; B-2 if rehab with treatment"
+   },
+   "heat": {
+    "setpoint_C": [
+     32,
+     35.5
+    ],
+    "supply_C": null,
+    "kWh_m2_yr": null,
+    "W_m2_peak": null,
+    "uses": "heat",
+    "lift_needed": null,
+    "src": [
+     "arch_wet_atacp2019",
+     "arch_bcPoolReg296"
+    ],
+    "note": "water 32–35.5 °C (ideal 34.5–35.5), air 25–30 °C, RH ≤60 % (ATACP, UK benchmark); BC cap 37 °C"
+   },
+   "zoning": {
+    "van": {
+     "status": "?",
+     "use": "Swimming Pool not listed; accessory to Health Care Office (C) ?",
+     "districts": "I-2; I-1C; I-3 (A, not ground floor); FC-2 (A, E)",
+     "src": [
+      "van_zdb_i2",
+      "van_zdb_i3",
+      "van_zdb_fc2",
+      "van_zdb_i1c"
+     ]
+    },
+    "edm": {
+     "status": "permitted",
+     "use": "Health Service",
+     "zones": "BE (MU also)",
+     "cap_m2": 500,
+     "src": [
+      "arch_wet_edmDefs",
+      "arch_zon_EdmZones",
+      "arch_wet_edmMU"
+     ]
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": true,
+    "inside_secure": false,
+    "src": [
+     "arch_wet_atacp2019"
+    ],
+    "note": "plant room not accessed from the concourse"
+   },
+   "adj": [
+    {
+     "rule": "prefer near",
+     "with": "clinic",
+     "m": null,
+     "hard": false,
+     "src": [
+      "arch_wet_vanSplashStrategy2019"
+     ],
+     "note": "Van offers therapy at Medium and Large pools; pairing with clinic: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [],
+   "social": {
+    "serves": "rehab and therapy users",
+    "catchment": "2 / 3 / 4 km pool catchments (Van); 5 km indoor recreation (Edm)",
+    "src": [
+     "arch_wet_vanSplashStrategy2019",
+     "arch_wet_edmRec2018"
+    ]
+   },
+   "flags": [
+    "Plant room as close as possible to the pool, typ. 15–30 % of water area (guide) [arch_wet_atacp2019]",
+    "AB: special purpose pool under Part 7 unless drained after every use [arch_wet_nbcAE726]",
+    "BC: no therapy exemption; physiotherapy pools are public pools [arch_wet_bcPoolRegDefs]",
+    "Van: health care office not at ground floor in I-3 [van_zdb_i3]",
+    "Ventilation 10 L/s per m² water + wet surrounds, 6 ACH (guide) [arch_wet_atacp2019]"
+   ]
+  },
+  {
+   "id": "aquarium",
+   "name": "Public aquarium",
+   "group": "wet",
+   "kind": "mass",
+   "size": {
+    "typical_m2": 5400,
+    "min_m2": null,
+    "max_m2": null,
+    "step": null,
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "arch_wet_thyer2018"
+    ],
+    "note": "Reef HQ (Australia, benchmark): ~5,400 m² building, 4 ML seawater"
+   },
+   "occ": {
+    "group": "A-2",
+    "sep_h_from_F2": 2,
+    "src": [
+     "arch_wet_nbcA3121",
+     "arch_nbc3131"
+    ],
+    "note": "museum-like A-2: our reading"
+   },
+   "heat": {
+    "setpoint_C": [
+     27,
+     28
+    ],
+    "supply_C": null,
+    "kWh_m2_yr": null,
+    "W_m2_peak": null,
+    "uses": "cooling",
+    "lift_needed": null,
+    "src": [
+     "arch_wet_thyer2018"
+    ],
+    "note": "tropical tank water; HVAC ~50 %, pumps ~40 %, no central heating; 451 kWh/m²·yr electricity (not heat); Reef HQ is tropical (Townsville): Canadian heating need ?"
+   },
+   "zoning": {
+    "van": {
+     "status": "rezoning",
+     "use": "no aquarium use (Zoo or Botanical Garden, Museum not listed)",
+     "districts": "not listed in I-2, I-3, I-1C, FC-2",
+     "src": [
+      "van3575s2",
+      "van_zdb_i2",
+      "van_zdb_i3",
+      "van_zdb_fc2",
+      "van_zdb_i1c"
+     ]
+    },
+    "edm": {
+     "status": "permitted",
+     "use": "Major Indoor Entertainment",
+     "zones": "BE; MU (>1 ha site uncapped)",
+     "cap_m2": 500,
+     "src": [
+      "arch_zon_EdmDefs",
+      "arch_zon_EdmZones",
+      "arch_wet_edmMU"
+     ]
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": true,
+    "inside_secure": false,
+    "src": [],
+    "note": ""
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [],
+   "social": {
+    "serves": "regional or city attraction",
+    "catchment": null,
+    "src": [
+     "arch_wet_edmDefs"
+    ]
+   },
+   "flags": [
+    "Adds to site heat rejection: a cooling load, not a heat user (our reading, tropical benchmark; Canadian heating need ?) [arch_wet_thyer2018]",
+    "AB: life-support heating, cooling, aeration, filtration need alarms and backup [arch_wet_abZooStd2015]",
+    "AB Zoo Standards marked Archived; currency ? [arch_wet_abZooStd2015]",
+    "Edm 500 m² cap far below benchmark: variance [arch_zon_EdmZones]"
+   ]
+  },
+  {
+   "id": "fish_farm",
+   "name": "Fish farm (RAS, tilapia or barramundi)",
+   "group": "grow",
+   "kind": "mass",
+   "size": {
+    "typical_m2": 1000,
+    "min_m2": null,
+    "max_m2": null,
+    "step": {
+     "unit": "t/yr",
+     "m2_per_unit": 28,
+     "units_typ": 36,
+     "units_min": null
+    },
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "arch_fish_savidov2015",
+     "arch_fish_bergman2020",
+     "arch_fish_faoBarra"
+    ],
+    "note": "AB tilapia model 36 t/yr on 1,000 m²; ≈28 m² per t/yr (our arithmetic); Sweden 33 m²·a per t"
+   },
+   "occ": {
+    "group": "F-2",
+    "sep_h_from_F2": 0,
+    "src": [
+     "arch_wet_nbcA3121",
+     "arch_nbc3131",
+     "arch_wet_nbcPart2G"
+    ],
+    "note": "off farmland → Part 3, F-2: our reading"
+   },
+   "heat": {
+    "setpoint_C": [
+     25,
+     31
+    ],
+    "supply_C": [
+     35,
+     45
+    ],
+    "kWh_m2_yr": null,
+    "W_m2_peak": null,
+    "uses": "heat",
+    "lift_needed": null,
+    "src": [
+     "arch_fish_omafraTilapia",
+     "arch_fish_katersky2007",
+     "arch_wet_geofood2022",
+     "arch_berenschotHK"
+    ],
+    "note": "tilapia best 28 °C, barramundi ~31.4 °C; heating water 35–45 °C (NL RAS); lift depends on cooling type: air-cooled 25–35 °C (register heat_temp) needs a lift; liquid-cooled 50–60 °C may not (our reading)"
+   },
+   "zoning": {
+    "van": {
+     "status": "rezoning",
+     "use": "no use (Urban Farm excludes fish)",
+     "districts": "none",
+     "src": [
+      "van3575s2"
+     ]
+    },
+    "edm": {
+     "status": "permitted",
+     "use": "Urban Agriculture (aquaponic systems; fish-only RAS ?)",
+     "zones": "BE, IM",
+     "cap_m2": null,
+     "src": [
+      "arch_wet_edmDefs",
+      "arch_zon_EdmZones"
+     ]
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": false,
+    "inside_secure": false,
+    "src": [],
+    "note": ""
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [
+    {
+     "id": "tilapia",
+     "name": "Nile tilapia",
+     "effect": "tank 25–30 °C; AB Table 1 (contained waters); BC: ITC review ?"
+    },
+    {
+     "id": "barramundi",
+     "name": "Barramundi",
+     "effect": "max growth ~31.4 °C; AB Table 1 Cat. 2; BC: ITC review ?; RAS density ~15 kg/m³ (FAO)"
+    }
+   ],
+   "social": {
+    "serves": "food production; harvest, processing and sale out of scope",
+    "catchment": null,
+    "src": [
+     "arch_wet_abFishCulture"
+    ]
+   },
+   "flags": [
+    "BC: federal DFO land-based aquaculture licence [arch_wet_dfoAuthBC2025]",
+    "BC: new species need an Introductions and Transfers Committee review [arch_fish_dfoITC]",
+    "BC: waste registration before construction begins [arch_wet_bcLBFWCR]",
+    "BC: water licence to divert, use or store water [arch_wet_dfoAuthBC2025]",
+    "AB: commercial fish culture licence; species from Table 1 only [arch_wet_abFishCulture]",
+    "Electricity 3,086 kWh/t tilapia incl. heating (Sweden) [arch_fish_bergman2020]",
+    "Sewer: non-domestic waste ≥65 °C prohibited (Metro Van) [arch_mvSewerBylaw299]"
+   ]
+  },
+  {
+   "id": "greenhouse",
+   "name": "Greenhouse (incl. indoor/vertical farm)",
+   "group": "grow",
+   "kind": "mass",
+   "size": {
+    "typical_m2": 153,
+    "min_m2": null,
+    "max_m2": null,
+    "step": null,
+    "storeys_typ": 1,
+    "floor_height_m": null,
+    "src": [
+     "arch_etsBaieComeau",
+     "arch_abGhProfile2014"
+    ],
+    "note": "153 m² = only data-centre-heat precedent (Baie-Comeau); AB mean ≈5,955 m² (our arithmetic; skewed)"
+   },
+   "occ": {
+    "group": "?",
+    "sep_h_from_F2": null,
+    "src": [
+     "arch_adj_bcbcFarm",
+     "arch_nbcDefF"
+    ],
+    "note": "not farmland → not Group G; F-2, F-3 or A-2 open (AHJ)"
+   },
+   "heat": {
+    "setpoint_C": [
+     16,
+     20
+    ],
+    "supply_C": [
+     35,
+     60
+    ],
+    "kWh_m2_yr": [
+     413,
+     583
+    ],
+    "W_m2_peak": [
+     627,
+     627
+    ],
+    "uses": "heat",
+    "lift_needed": null,
+    "src": [
+     "arch_asabeEp406",
+     "arch_etsBaieComeau",
+     "arch_mbGhEnergy",
+     "arch_ahamed2019",
+     "arch_berenschotHK",
+     "arch_bcbcAppC",
+     "arch_doeSslHort2017"
+    ],
+    "note": "Prairie double poly 413–583 kWh/m²·yr (our arithmetic); 627 W/m² floor Quebec (our arithmetic: 96 kW, ÉTS secondary estimate / 153 m²); Van ≈92 W/m² cover (our arithmetic); lift depends on cooling type: bench/floor heating 35–40 °C fits liquid-cooled heat, air-cooled ~25 °C needs a lift (our reading)"
+   },
+   "zoning": {
+    "van": {
+     "status": "conditional",
+     "use": "Urban Farm - Class B",
+     "districts": "I-2, I-3, I-1C, FC-2",
+     "src": [
+      "van_zdb_i2",
+      "van_zdb_i3",
+      "van_zdb_i1c",
+      "van_zdb_fc2"
+     ]
+    },
+    "edm": {
+     "status": "permitted",
+     "use": "Urban Agriculture",
+     "zones": "BE, IM",
+     "cap_m2": null,
+     "src": [
+      "arch_edmZB20001_BE",
+      "arch_edmZB20001_IM",
+      "arch_zon_EdmZones"
+     ]
+    }
+   },
+   "place": {
+    "grade": "roof ok",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": false,
+    "inside_secure": false,
+    "src": [
+     "arch_sec_nbcRoof",
+     "arch_zon_EdmZones"
+    ],
+    "note": "Edm Urban Agriculture \"within or on a building\" (3.16.1); roof greenhouse needs a goods lift (our reading); hatch serves maintenance only"
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "hall",
+     "m": null,
+     "hard": false,
+     "src": [
+      "arch_marcelis2006"
+     ],
+     "note": "keep off the data centre's shadow side: yield −0.7–1 % per 1 % light"
+    },
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [
+    {
+     "id": "glasshouse",
+     "name": "Glasshouse",
+     "effect": "heat user; 35–60 °C supply; CO2 source must be found"
+    },
+    {
+     "id": "vertical_farm",
+     "name": "Indoor / vertical farm",
+     "effect": "LED ~187 W/m² grow area, ≈1,175 kWh/m²·yr electricity (our arithmetic, US DOE benchmark); little heat use"
+    }
+   ],
+   "social": {
+    "serves": "food access; no distance standard",
+    "catchment": null,
+    "src": [
+     "arch_svc_vanFoodStrategy2013",
+     "arch_svc_edmFresh"
+    ]
+   },
+   "flags": [
+    "Single-span greenhouse runs east–west (US guide) [arch_uwexGhEnergy]",
+    "Replacing gas heat loses CO2: an alternative CO2 source is needed [arch_berenschotHK]",
+    "AB CO2 8-h limit 5,000 ppm for workers [arch_adj_abOHSco2]",
+    "BC farm building needs farmland: Part 3 applies here [arch_adj_bcbcFarm]",
+    "Van: greenhouse with public admittance must be sprinklered (our reading: inverse of VBBL 1.3.3.6.(2)(j) exemption) [arch_adj_bcbcFarm]",
+    "Air-cooled heat (~25 °C) needs a heat pump [arch_berenschotHK]",
+    "Plastic glazing on a data-centre mass: FM Approved only (our reading) [arch_up_fm0157]"
+   ]
+  },
+  {
+   "id": "conservatory",
+   "name": "Botanical conservatory / tropical house",
+   "group": "grow",
+   "kind": "mass",
+   "size": {
+    "typical_m2": 1400,
+    "min_m2": null,
+    "max_m2": null,
+    "step": null,
+    "storeys_typ": 1,
+    "floor_height_m": 18,
+    "src": [
+     "arch_pg_vanVDBStrategy2021",
+     "arch_pg_edmMuttartPyr"
+    ],
+    "note": "Bloedel 0.14 ha dome ≈1,400 m² (our arithmetic); 18 m = apex of Muttart arid pyramid (≈390 m², smaller example), not Bloedel"
+   },
+   "occ": {
+    "group": "A-2",
+    "sep_h_from_F2": 2,
+    "src": [
+     "arch_pg_nbcA3121",
+     "arch_nbc3131"
+    ],
+    "note": "public conservatory A-2: our reading"
+   },
+   "heat": {
+    "setpoint_C": [
+     18,
+     20
+    ],
+    "supply_C": null,
+    "kWh_m2_yr": [
+     590,
+     590
+    ],
+    "W_m2_peak": [
+     100,
+     185
+    ],
+    "uses": "heat",
+    "lift_needed": null,
+    "src": [
+     "arch_pg_ward2013Kew",
+     "arch_pg_kewPOWC",
+     "arch_asabeEp406",
+     "arch_bcbcAppC",
+     "arch_pg_abClimateEdm"
+    ],
+    "note": "Kew wet tropics 20/18 °C; 590 kWh/m²·yr (our arithmetic, London; 4,500 m² is a Kew operator claim); peak per m² glazing Van 100 / Edm 185 (our arithmetic)"
+   },
+   "zoning": {
+    "van": {
+     "status": "rezoning",
+     "use": "Zoo or Botanical Garden (not listed)",
+     "districts": "not listed in I-2, I-3, I-1C, FC-2",
+     "src": [
+      "van_zdb_i2",
+      "van_zdb_i3",
+      "van_zdb_i1c",
+      "van_zdb_fc2",
+      "arch_pg_vanZoningUses"
+     ]
+    },
+    "edm": {
+     "status": "permitted",
+     "use": "Major Indoor Entertainment (indoor botanical gardens)",
+     "zones": "BE (≤500 m²); MU also (uncapped >1 ha)",
+     "cap_m2": 500,
+     "src": [
+      "arch_pg_edmUseDefs",
+      "arch_edmZB20001_BE",
+      "arch_wet_edmMU",
+      "arch_zon_EdmZones"
+     ]
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": true,
+    "inside_secure": false,
+    "src": [],
+    "note": ""
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "hall",
+     "m": null,
+     "hard": false,
+     "src": [
+      "arch_marcelis2006"
+     ],
+     "note": "keep off the data centre's shadow side"
+    },
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [],
+   "social": {
+    "serves": "visitors: Bloedel 'tens of thousands' a year",
+    "catchment": null,
+    "src": [
+     "arch_pg_vanVDBStrategy2021"
+    ]
+   },
+   "flags": [
+    "Edm 500 m² cap below Bloedel or one large Muttart pyramid: variance (3.18) [arch_zon_EdmZones]",
+    "Van: needs rezoning or CD-1 [arch_pg_vanZoningUses]",
+    "City and consultant disagree on Muttart pyramid sizes [arch_pg_williamsMuttart]"
+   ]
+  },
+  {
+   "id": "food_drying",
+   "name": "Food drying",
+   "group": "grow",
+   "kind": "mass",
+   "size": {
+    "typical_m2": null,
+    "min_m2": null,
+    "max_m2": null,
+    "step": null,
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [],
+    "note": "no floor area per throughput found (?)"
+   },
+   "occ": {
+    "group": "F-2",
+    "sep_h_from_F2": 0,
+    "src": [
+     "arch_pg_nbcA3121",
+     "arch_nbcDefF",
+     "arch_nbc3131"
+    ],
+    "note": "F-2 or F-3 by fire load (none from F-2); F-1 if milling"
+   },
+   "heat": {
+    "setpoint_C": null,
+    "supply_C": [
+     30,
+     60
+    ],
+    "kWh_m2_yr": null,
+    "W_m2_peak": null,
+    "uses": "heat",
+    "lift_needed": null,
+    "src": [
+     "arch_pg_zhu2025HP"
+    ],
+    "note": "heat-pump drying air 30–60 °C; SMER 1.33 kg water per kWh electric"
+   },
+   "zoning": {
+    "van": {
+     "status": "permitted",
+     "use": "Food or Beverage Products Manufacturing - Class B",
+     "districts": "I-2, I-1C, FC-2 (O); I-3 (C)",
+     "src": [
+      "van_zdb_i2",
+      "van_zdb_i3",
+      "van_zdb_i1c",
+      "van_zdb_fc2",
+      "arch_pg_vanZoningUses"
+     ]
+    },
+    "edm": {
+     "status": "permitted",
+     "use": "Minor Industrial",
+     "zones": "BE (enclosed), IM",
+     "cap_m2": null,
+     "src": [
+      "arch_pg_edmUseDefs",
+      "arch_edmZB20001_BE",
+      "arch_zon_EdmZones"
+     ]
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": false,
+    "inside_secure": false,
+    "src": [],
+    "note": ""
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 30,
+     "hard": false,
+     "src": [
+      "arch_adj_abFoodCode"
+     ],
+     "note": "AB: 30 m from contamination sources recommended (by analogy: retail/foodservice code); generators count: our reading ?"
+    },
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [],
+   "social": {
+    "serves": "neighbourhood food infrastructure (no standard)",
+    "catchment": null,
+    "src": [
+     "arch_svc_vanFoodStrategy2013",
+     "arch_svc_edmFresh"
+    ]
+   },
+   "flags": [
+    "Federal licence only for export or interprovincial trade [arch_pg_cfiaSFCR]",
+    "BC: plans approved by a health officer before construction [arch_adj_bcFPR]",
+    "F-1 milling would bar A, B, C uses in the building [arch_nbc3131]"
+   ]
+  },
+  {
+   "id": "lumber_drying",
+   "name": "Lumber drying (kiln)",
+   "group": "grow",
+   "kind": "mass",
+   "size": {
+    "typical_m2": null,
+    "min_m2": null,
+    "max_m2": null,
+    "step": null,
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "arch_pg_ukyKiln",
+     "arch_pg_fplDH2008"
+    ],
+    "note": "kilns sized in board feet: DH 4,000–20,000 bf; smallest documented 600 bf; m² per bf ?"
+   },
+   "occ": {
+    "group": "F-2",
+    "sep_h_from_F2": 0,
+    "src": [
+     "arch_pg_nbcA3121",
+     "arch_nbc3131"
+    ],
+    "note": "kiln + lumber storage F-2: our reading"
+   },
+   "heat": {
+    "setpoint_C": null,
+    "supply_C": [
+     55,
+     116
+    ],
+    "kWh_m2_yr": null,
+    "W_m2_peak": null,
+    "uses": "heat",
+    "lift_needed": null,
+    "src": [
+     "arch_pg_fplDH2008",
+     "arch_pg_ukyKiln"
+    ],
+    "note": "DH kiln peak ~55 °C; conventional <82 °C, southern pine 116 °C; 500–750 kWh per MBF (US)"
+   },
+   "zoning": {
+    "van": {
+     "status": "permitted",
+     "use": "Wood Products Manufacturing - Class B",
+     "districts": "I-2, I-1C, FC-2 (O); I-3 (C)",
+     "src": [
+      "van_zdb_i2",
+      "van_zdb_i3",
+      "van_zdb_i1c",
+      "van_zdb_fc2",
+      "arch_pg_vanZoningUses"
+     ]
+    },
+    "edm": {
+     "status": "permitted",
+     "use": "Minor Industrial (our reading)",
+     "zones": "BE (enclosed), IM",
+     "cap_m2": null,
+     "src": [
+      "arch_pg_edmUseDefs",
+      "arch_zon_EdmZones"
+     ]
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": false,
+    "inside_secure": false,
+    "src": [],
+    "note": ""
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [
+    {
+     "id": "dehumidification",
+     "name": "Dehumidification kiln",
+     "effect": "peak ~55 °C: within liquid-cooling heat (our reading)"
+    },
+    {
+     "id": "conventional",
+     "name": "Conventional kiln",
+     "effect": "up to 82 °C (hardwood), 116 °C (high-temp softwood): needs lift (our reading)"
+    }
+   ],
+   "social": {
+    "serves": "none found",
+    "catchment": null,
+    "src": []
+   },
+   "flags": [
+    "DC heat to wood-chip drying 30–35 °C (Sweden, funder page) [arch_pg_vinnovaDC2BD]",
+    "Class A sawmills and planing mills not listed in Van districts [arch_pg_vanZoningUses]"
+   ]
+  },
+  {
+   "id": "public_ground",
+   "name": "Public ground floor",
+   "group": "public",
+   "kind": "mass",
+   "size": {
+    "typical_m2": 930,
+    "min_m2": null,
+    "max_m2": null,
+    "step": null,
+    "storeys_typ": 1,
+    "floor_height_m": 6.0,
+    "src": [
+     "arch_vplFmpSpace2018",
+     "van_zdb_i3"
+    ],
+    "note": "VPL small branch ~10,000 sq ft ≈930 m² (our arithmetic); first floor ≥6.0 m: Van I-3 (A) only"
+   },
+   "occ": {
+    "group": "A-2",
+    "sep_h_from_F2": 2,
+    "src": [
+     "arch_nbc3131",
+     "arch_wet_nbcA3121",
+     "arch_pub_nbcA3121"
+    ],
+    "note": "library, café, community room A-2; BC/VBBL suite ≤30 persons may be D (3.1.2.7, no register id ?)"
+   },
+   "heat": {
+    "setpoint_C": null,
+    "supply_C": null,
+    "kWh_m2_yr": [
+     20,
+     160
+    ],
+    "W_m2_peak": null,
+    "uses": "heat",
+    "lift_needed": null,
+    "src": [
+     "arch_covEnergyTargets",
+     "arch_statcanSCIEU2019",
+     "arch_nrcanTrends2020"
+    ],
+    "note": "20 = Van TEDI cap office/retail (30 on LCES); 160 = our arithmetic, existing library stock"
+   },
+   "zoning": {
+    "van": {
+     "status": "conditional",
+     "use": "Community Centre, Hall, Social Service Centre; Restaurant ≤300 m²; Artist Studio (O); Library not listed",
+     "districts": "I-2, I-3 (A), FC-2",
+     "src": [
+      "van_zdb_i2",
+      "van_zdb_i3",
+      "van_zdb_i1c",
+      "van_zdb_fc2"
+     ]
+    },
+    "edm": {
+     "status": "permitted",
+     "use": "Community Service; Food and Drink Service; Indoor Sales and Service",
+     "zones": "BE only",
+     "cap_m2": 500,
+     "src": [
+      "arch_edmZB20001_BE",
+      "arch_zon_EdmZones"
+     ]
+    }
+   },
+   "place": {
+    "grade": "at grade",
+    "street_entrance": true,
+    "outside_wall": true,
+    "public": true,
+    "inside_secure": false,
+    "src": [
+     "van_zdb_i3",
+     "arch_ezbLoad",
+     "arch_zon_EdmZones",
+     "arch_up_vanZDB10"
+    ],
+    "note": "Van: no data storage at ground floor; Edm: main entrance visible from street, ≤10 % opaque ground-floor glazing"
+   },
+   "adj": [
+    {
+     "rule": "must near",
+     "with": "street",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_up_vanZDB10"
+     ],
+     "note": "each separate use's main entrance directly from a street (Van 10.21.1)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "garbage",
+     "m": 4.5,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "own intakes ≥4.5 m from garbage and dumpsters"
+    },
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [],
+   "social": {
+    "serves": "library service: new point at 20,000 people with none within 4–5 km (Edm)",
+    "catchment": "4–5 km (EPL)",
+    "src": [
+     "arch_eplPolicyB2002",
+     "arch_vplFmpSpace2018"
+    ]
+   },
+   "flags": [
+    "Van I-2/I-3: 1.00 FSR for all non-industrial uses combined [van_zdb_i3]",
+    "Van: public amenity exclusion lesser of 20 % or 100 m² [van_zdb_i3]",
+    "Edm Community Service excludes libraries; Library not listed in Van I-districts [arch_edmCommunityServiceDef]",
+    "Café garbage room ≈14 m² min. (model spec, benchmark), at grade by the truck stop (our arithmetic) [arch_svc_mvGarbageSpecs]"
+   ]
+  },
+  {
+   "id": "winter_garden",
+   "name": "Winter garden / atrium",
+   "group": "public",
+   "kind": "mass",
+   "size": {
+    "typical_m2": null,
+    "min_m2": null,
+    "max_m2": null,
+    "step": null,
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [],
+    "note": "no Canadian example with m² found (?)"
+   },
+   "occ": {
+    "group": "A-2",
+    "sep_h_from_F2": 2,
+    "src": [
+     "arch_pub_nbcA3121",
+     "arch_pub_nbc3131full"
+    ],
+    "note": "A-2 by analogy (community or exhibition hall): our reading"
+   },
+   "heat": {
+    "setpoint_C": [
+     18,
+     20
+    ],
+    "supply_C": [
+     45,
+     49
+    ],
+    "kWh_m2_yr": null,
+    "W_m2_peak": [
+     100,
+     185
+    ],
+    "uses": "heat",
+    "lift_needed": null,
+    "src": [
+     "arch_pg_ward2013Kew",
+     "arch_tmp_vanNEU2020",
+     "arch_tmp_edmDESS2025",
+     "arch_asabeEp406",
+     "arch_bcbcAppC",
+     "arch_pg_abClimateEdm",
+     "arch_berenschotHK"
+    ],
+    "note": "Kew winter garden 20/18 °C (benchmark, London); radiant 45/35 °C, Edm ≤49 °C; glazing peak Van 100 / Edm 185 W/m² (our arithmetic); lift depends on cooling type: air-cooled 25–35 °C (register heat_temp) needs a lift; liquid-cooled 50–60 °C may not (our reading)"
+   },
+   "zoning": {
+    "van": {
+     "status": "conditional",
+     "use": "Hall; Community Centre; Park or Playground",
+     "districts": "I-3, FC-2 (Hall); I-2 (no Hall)",
+     "src": [
+      "arch_pub_vanSched"
+     ]
+    },
+    "edm": {
+     "status": "permitted",
+     "use": "Community Service (our reading)",
+     "zones": "BE only",
+     "cap_m2": 500,
+     "src": [
+      "arch_pub_edmZB"
+     ]
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": true,
+    "inside_secure": false,
+    "src": [
+     "arch_pub_edmWinter2016"
+    ],
+    "note": "Edm guide: glazing and transitional spaces on the south side"
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "hall",
+     "m": null,
+     "hard": false,
+     "src": [
+      "arch_pub_edmWinter2016"
+     ],
+     "note": "minimum shade on winter spaces (guide); hall shadow side: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [],
+   "social": {
+    "serves": "public, all",
+    "catchment": null,
+    "src": [
+     "arch_pub_edmWinter2016"
+    ]
+   },
+   "flags": [
+    "Multi-storey atrium: interconnected floor space rules 3.2.8 (not read; no register source ?)",
+    "Fan coils and make-up air need 65–70 °C: avoid or lift [arch_tmp_vanNEU2020]",
+    "No Canadian code set point for non-residential spaces [arch_tmp_nbc62]"
+   ]
+  },
+  {
+   "id": "covered_plaza",
+   "name": "Covered (heated) plaza",
+   "group": "public",
+   "kind": "mass",
+   "size": {
+    "typical_m2": null,
+    "min_m2": null,
+    "max_m2": null,
+    "step": null,
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "arch_pub_vanPlazaDG"
+    ],
+    "note": "Van plaza guide sets no dimensions or storeys (?)"
+   },
+   "occ": {
+    "group": "?",
+    "sep_h_from_F2": null,
+    "src": [
+     "arch_pub_nbcDefs"
+    ],
+    "note": "open canopy likely a 'building': our reading ?"
+   },
+   "heat": {
+    "setpoint_C": null,
+    "supply_C": [
+     55,
+     55
+    ],
+    "kWh_m2_yr": null,
+    "W_m2_peak": [
+     630,
+     950
+    ],
+    "uses": "heat",
+    "lift_needed": null,
+    "src": [
+     "ashrae2015ch51",
+     "arch_berenschotHK"
+    ],
+    "note": "snow-melt fluid heater 630–950 W/m² (US data), mean fluid 55 °C (ASHRAE ch. 51; prog_public.md, not in register text ?); lift depends on cooling type: air-cooled 25–35 °C (register heat_temp) needs a lift; liquid-cooled 50–60 °C may not (our reading)"
+   },
+   "zoning": {
+    "van": {
+     "status": "conditional",
+     "use": "Park or Playground",
+     "districts": "I-2, I-3, I-1C, FC-2",
+     "src": [
+      "arch_pub_vanSched"
+     ]
+    },
+    "edm": {
+     "status": "?",
+     "use": "no plaza use (Special Event in BE, IM)",
+     "zones": "BE, IM ?",
+     "cap_m2": null,
+     "src": [
+      "arch_pub_edmZB"
+     ]
+    }
+   },
+   "place": {
+    "grade": "at grade",
+    "street_entrance": true,
+    "outside_wall": null,
+    "public": true,
+    "inside_secure": false,
+    "src": [
+     "arch_pub_vanPlazaDG"
+    ],
+    "note": "≤1.0 m above or below street"
+   },
+   "adj": [
+    {
+     "rule": "must near",
+     "with": "street",
+     "m": null,
+     "hard": false,
+     "src": [
+      "arch_pub_vanPlazaDG"
+     ],
+     "note": "plaza level close to the street (guide)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative discharge 3 m from occupiable outdoor space"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": false,
+     "src": [
+      "arch_nbc6331"
+     ],
+     "note": "combustion vent 3 m from doors, windows, occupiable outdoor space; applies to gensets: our reading ?"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    }
+   ],
+   "options": [],
+   "social": {
+    "serves": "public, all",
+    "catchment": null,
+    "src": [
+     "arch_pub_vanPlazaDG"
+    ]
+   },
+   "flags": [
+    "Sun and wind shelter can feel 10 °C warmer [arch_pub_edmWinter2016]",
+    "Snow-melt design data are US cities only [ashrae2015ch51]",
+    "Overhead weather protection at waiting points and routes [arch_pub_vanPlazaDG]"
+   ]
+  },
+  {
+   "id": "warming_shelter",
+   "name": "Warming shelter",
+   "group": "care",
+   "kind": "mass",
+   "size": {
+    "typical_m2": 56,
+    "min_m2": null,
+    "max_m2": null,
+    "step": {
+     "unit": "guest",
+     "m2_per_unit": 3.5,
+     "units_typ": 16,
+     "units_min": null
+    },
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "arch_pub_vanWarm2021",
+     "arch_ahsReceptionCentres"
+    ],
+    "note": "our arithmetic: 16 guests (Van centre) × 3.5 m² sleeping; washrooms extra ?"
+   },
+   "occ": {
+    "group": "A-2",
+    "sep_h_from_F2": 2,
+    "src": [
+     "arch_pub_nbcA3121",
+     "arch_pub_nbc3131full",
+     "arch_pub_nbcDefs"
+    ],
+    "note": "day A-2 (our reading); overnight C, 2 h + one-suite limit in F-2"
+   },
+   "heat": {
+    "setpoint_C": [
+     19,
+     22
+    ],
+    "supply_C": null,
+    "kWh_m2_yr": null,
+    "W_m2_peak": null,
+    "uses": "heat",
+    "lift_needed": null,
+    "src": [
+     "arch_ahsReceptionCentres"
+    ],
+    "note": "reception centre 19–22 °C"
+   },
+   "zoning": {
+    "van": {
+     "status": "conditional",
+     "use": "Social Service Centre (day); overnight: no listed use ?",
+     "districts": "I-2, I-3, I-1C, FC-2",
+     "src": [
+      "van_zdb_i2",
+      "van_zdb_i3",
+      "van_zdb_i1c",
+      "van_zdb_fc2",
+      "arch_ref_vanSec2SSC"
+     ]
+    },
+    "edm": {
+     "status": "permitted",
+     "use": "Community Service (incl. shelters)",
+     "zones": "BE only",
+     "cap_m2": 500,
+     "src": [
+      "arch_edmZB20001_BE",
+      "arch_zon_EdmZones"
+     ]
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": true,
+    "outside_wall": null,
+    "public": true,
+    "inside_secure": false,
+    "src": [
+     "arch_up_vanZDB10"
+    ],
+    "note": "own street entrance (Van 10.21.1)"
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [
+    {
+     "id": "day",
+     "name": "Day only",
+     "effect": "A-2; 2 h from F-2; can share the data-centre building"
+    },
+    {
+     "id": "overnight",
+     "name": "Overnight",
+     "effect": "Group C; one-suite limit in an F-2 building → separate building; Van: no listed use ?"
+    }
+   ],
+   "social": {
+    "serves": "people experiencing homelessness; welcoming to all",
+    "catchment": null,
+    "src": [
+     "arch_pub_vanCold2023",
+     "arch_svc_edmC620"
+    ]
+   },
+   "flags": [
+    "Van staffing: 2 Community Services staff + 1 guard per centre [arch_pub_vanWarm2021]",
+    "Activation: Van 'feels like −5 °C' (2021) / −4 °C (2023); Edm −20 °C 3+ days [arch_pub_vanCold2023, arch_edmExtremeWeather]",
+    "VBBL temporary shelter rules apply to existing buildings only [arch_ref_vbblPart13]",
+    "Edm BE 500 m² cap: shelter exception conflict, adopted vs online [arch_zon_EdmZones]"
+   ]
+  },
+  {
+   "id": "gym",
+   "name": "Gym (incl. climbing)",
+   "group": "public",
+   "kind": "mass",
+   "size": {
+    "typical_m2": 372,
+    "min_m2": null,
+    "max_m2": null,
+    "step": null,
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "arch_pub_vanPlayFac2018",
+     "arch_pub_en12572cat"
+    ],
+    "note": "Trout Lake fitness 4,000 sf ≈372 m² (our arithmetic; called undersized); bouldering wall ≤4.5 m (EN benchmark) is a wall height, not a storey height: floor height ?"
+   },
+   "occ": {
+    "group": "A-2",
+    "sep_h_from_F2": 2,
+    "src": [
+     "arch_pub_nbcA3121",
+     "arch_pub_nbc3131full"
+    ],
+    "note": "gymnasia A-2; climbing by analogy (our reading)"
+   },
+   "heat": {
+    "setpoint_C": [
+     16,
+     20
+    ],
+    "supply_C": [
+     45,
+     49
+    ],
+    "kWh_m2_yr": [
+     168,
+     168
+    ],
+    "W_m2_peak": null,
+    "uses": "heat",
+    "lift_needed": null,
+    "src": [
+     "arch_tmp_dudzinska2021",
+     "arch_tmp_vanNEU2020",
+     "arch_tmp_edmDESS2025",
+     "arch_statcanSCIEU2019",
+     "arch_nrcanTrends2020",
+     "arch_berenschotHK"
+    ],
+    "note": "16 °C benchmark (Poland), sports halls 18–20; radiant 45 / Edm ≤49 °C; 168 rough (our arithmetic); lift depends on cooling type: air-cooled 25–35 °C (register heat_temp) needs a lift; liquid-cooled 50–60 °C may not (our reading)"
+   },
+   "zoning": {
+    "van": {
+     "status": "conditional",
+     "use": "Fitness Centre (Class 1 ≤200 m², Class 2 >200 m²)",
+     "districts": "I-3, I-1C, FC-2 (not I-2)",
+     "src": [
+      "arch_pub_vanSched",
+      "arch_pub_vanS2"
+     ]
+    },
+    "edm": {
+     "status": "permitted",
+     "use": "Minor Indoor Entertainment",
+     "zones": "BE (MU also)",
+     "cap_m2": null,
+     "src": [
+      "arch_pub_edmZB"
+     ]
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": true,
+    "inside_secure": false,
+    "src": [],
+    "note": ""
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [],
+   "social": {
+    "serves": "indoor recreation within 5 km (Edm); gym space at a premium (Van)",
+    "catchment": "5 km (Edm)",
+    "src": [
+     "arch_svc_edmRecApproach2018",
+     "arch_pub_vanPlayFac2018"
+    ]
+   },
+   "flags": [
+    "Van: public fitness amenity excluded from floor area up to 100 m² [van_zdb_i3]",
+    "Boulder impact area kept clear of obstructions [arch_pub_ifsc2025]",
+    "No gym row in occupant load table: AHJ [arch_pub_nbc31171]"
+   ]
+  },
+  {
+   "id": "ev_hub",
+   "name": "EV charging hub",
+   "group": "energy",
+   "kind": "mass",
+   "size": {
+    "typical_m2": null,
+    "min_m2": null,
+    "max_m2": null,
+    "step": {
+     "unit": "stall",
+     "m2_per_unit": 22,
+     "units_typ": null,
+     "units_min": null
+    },
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "arch_pub_vanStall"
+    ],
+    "note": "stall 2.5 × 5.5 m, aisle 6.6 m → ≈22 m² per stall double-loaded (our arithmetic)"
+   },
+   "occ": {
+    "group": "F-3",
+    "sep_h_from_F2": 1.5,
+    "src": [
+     "arch_pub_nbcA3121",
+     "arch_pub_nbc3131full"
+    ],
+    "note": "enclosed parkade = storage garage: 1.5 h to other occupancies (3.3.5.6)"
+   },
+   "heat": {
+    "setpoint_C": null,
+    "supply_C": null,
+    "kWh_m2_yr": null,
+    "W_m2_peak": null,
+    "uses": "electricity",
+    "lift_needed": null,
+    "src": [
+     "arch_pub_nrcanEV2024",
+     "arch_pub_vanEV2021"
+    ],
+    "note": "electric load: L2 ≤7.2 kW (our arithmetic: 240 V × 30 A), DCFC 25–400 kW per port (avg 125 kW 2025)"
+   },
+   "zoning": {
+    "van": {
+     "status": "conditional",
+     "use": "Parking Uses (may include retail sale of electricity)",
+     "districts": "I-2, I-3, I-1C, FC-2",
+     "src": [
+      "arch_pub_vanS2",
+      "arch_pub_vanSched"
+     ]
+    },
+    "edm": {
+     "status": "?",
+     "use": "no EV use (Vehicle Support Service ?)",
+     "zones": "BE, IM",
+     "cap_m2": null,
+     "src": [
+      "arch_pub_edmZB",
+      "arch_zon_Edm720"
+     ]
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": true,
+    "inside_secure": false,
+    "src": [],
+    "note": ""
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "intakes",
+     "m": 1.5,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intakes ≥1.5 m from a parking space, 4.5 m from garage entry"
+    }
+   ],
+   "options": [],
+   "social": {
+    "serves": "drivers without home charging (dense apartments)",
+    "catchment": null,
+    "src": [
+     "arch_pub_edmEVstudy",
+     "arch_pub_nrcanEV2024"
+    ]
+   },
+   "flags": [
+    "Grid: pick sites where capacity upgrades are minimized (EPCOR) [arch_pub_edmEVstudy]",
+    "Garage to stairs serving other floors through a vestibule [arch_pub_nbcDefs]",
+    "Canada 2030: one public port per 21 EVs [arch_pub_nrcanEV2024]",
+    "Van I-3: gasoline station only in sub-area B, not with data [arch_pub_vanSched, van_zdb_i3]"
+   ]
+  },
+  {
+   "id": "clinic",
+   "name": "Outpatient clinic (urgent and primary care)",
+   "group": "care",
+   "kind": "mass",
+   "size": {
+    "typical_m2": 767,
+    "min_m2": null,
+    "max_m2": null,
+    "step": {
+     "unit": "exam room",
+     "m2_per_unit": 17.3,
+     "units_typ": 13,
+     "units_min": null
+    },
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "arch_hsg_vchUpccNV",
+     "arch_hsg_bcUpccSurrey2026",
+     "arch_hsg_bcUpccWL2025",
+     "arch_hsg_bcUpccCowichan2024",
+     "arch_hsg_abGFNA2021"
+    ],
+    "note": "our arithmetic: median of 4 BC UPCCs (490–931 m²); exam room 12.0 m² net × 1.44 dept. gross"
+   },
+   "occ": {
+    "group": "D",
+    "sep_h_from_F2": 0,
+    "src": [
+     "arch_hsg_nbcOcc",
+     "arch_hsg_nbc3131D"
+    ],
+    "note": "medical offices D; NBC/AB 1 h if built to 3.2.2.57; B-2 (2 h) if overnight"
+   },
+   "heat": {
+    "setpoint_C": null,
+    "supply_C": [
+     45,
+     70
+    ],
+    "kWh_m2_yr": [
+     20,
+     30
+    ],
+    "W_m2_peak": null,
+    "uses": "heat",
+    "lift_needed": null,
+    "src": [
+     "arch_hsg_vbblZEBP",
+     "arch_tmp_vanNEU2020"
+    ],
+    "note": "Van TEDI cap 20 (30 on LCES); radiant 45 °C to fan coils 70 °C supply"
+   },
+   "zoning": {
+    "van": {
+     "status": "conditional",
+     "use": "Health Care Office",
+     "districts": "I-2 (office combined ≤ greater of 235 m² or 33.3 %), I-3 (A), I-1C, FC-2 (A, E)",
+     "src": [
+      "van_zdb_i2",
+      "van_zdb_i3",
+      "van_zdb_i1c",
+      "van_zdb_fc2"
+     ]
+    },
+    "edm": {
+     "status": "permitted",
+     "use": "Health Service",
+     "zones": "BE (MU also)",
+     "cap_m2": 500,
+     "src": [
+      "arch_zon_EdmZones",
+      "arch_zon_EdmDefs",
+      "arch_wet_edmMU"
+     ]
+    }
+   },
+   "place": {
+    "grade": "not at grade",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": true,
+    "inside_secure": false,
+    "src": [
+     "van_zdb_i3",
+     "van_zdb_fc2"
+    ],
+    "note": "Van I-3 and FC-2 only: not at ground floor except entrances (tool applies it only there); I-2, I-1C, Edm: no rule"
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [],
+   "social": {
+    "serves": "unattached patients; e.g. North Shore UPCC catchment ≈69,000",
+    "catchment": null,
+    "src": [
+     "arch_hsg_vchUpccNV"
+    ]
+   },
+   "flags": [
+    "Not a Metro Van sensitive receptor (our reading) [arch_mv1329]",
+    "Health-care HVAC to CSA Z317.2 (paywalled) [arch_adj_csaZ3172]",
+    "Edm 500 m² cap below 3 of 4 BC examples: variance [arch_zon_EdmZones]"
+   ]
+  },
+  {
+   "id": "community_kitchen",
+   "name": "Community / commercial kitchen",
+   "group": "public",
+   "kind": "mass",
+   "size": {
+    "typical_m2": null,
+    "min_m2": null,
+    "max_m2": null,
+    "step": null,
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "arch_hsg_vanKitchenDG2018"
+    ],
+    "note": "size 'varies greatly'; teaching ≈12 participants; no m² (?)"
+   },
+   "occ": {
+    "group": "?",
+    "sep_h_from_F2": null,
+    "src": [
+     "arch_hsg_nbcOcc",
+     "arch_hsg_nbc3131D"
+    ],
+    "note": "restaurant/teaching A-2 (2 h); production F-3 or D (none): open"
+   },
+   "heat": {
+    "setpoint_C": null,
+    "supply_C": [
+     60,
+     71
+    ],
+    "kWh_m2_yr": null,
+    "W_m2_peak": null,
+    "uses": "heat",
+    "lift_needed": true,
+    "src": [
+     "arch_hsg_ihFoodPlans2026",
+     "arch_tmp_edmDESS2025"
+    ],
+    "note": "DHW 60 °C (Blatchford guide); dishwasher final rinse ≥71 °C at plate; lift or booster: our reading"
+   },
+   "zoning": {
+    "van": {
+     "status": "permitted",
+     "use": "Catering Establishment",
+     "districts": "I-2, I-1C, FC-2 (O); I-3 (C)",
+     "src": [
+      "van_zdb_i2",
+      "van_zdb_i3",
+      "van_zdb_i1c",
+      "van_zdb_fc2",
+      "van3575s2"
+     ]
+    },
+    "edm": {
+     "status": "?",
+     "use": "Custom Manufacturing (commercial kitchens) ? (prog_housing.md only, not in register text)",
+     "zones": "BE (enclosed), IM ? (not in register text)",
+     "cap_m2": null,
+     "src": [
+      "arch_zon_EdmDefs",
+      "arch_zon_EdmZones"
+     ]
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": true,
+    "inside_secure": false,
+    "src": [],
+    "note": ""
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "intakes",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "kitchen exhaust ≥3.0 m from any outdoor air intake"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 30,
+     "hard": false,
+     "src": [
+      "arch_adj_abFoodCode"
+     ],
+     "note": "AB: 30 m from contamination sources recommended; generators count: our reading ?"
+    },
+    {
+     "rule": "keep apart",
+     "with": "loading",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": 3.0,
+     "hard": true,
+     "src": [
+      "arch_nbc6329"
+     ],
+     "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+    },
+    {
+     "rule": "keep apart",
+     "with": "generators",
+     "m": null,
+     "hard": true,
+     "src": [
+      "arch_mv1329"
+     ],
+     "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+    },
+    {
+     "rule": "keep apart",
+     "with": "chillers",
+     "m": 7.6,
+     "hard": true,
+     "src": [
+      "arch_nbc63215"
+     ],
+     "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+    }
+   ],
+   "options": [
+    {
+     "id": "teaching",
+     "name": "Teaching / community kitchen",
+     "effect": "A-2; 2 h from F-2"
+    },
+    {
+     "id": "production",
+     "name": "Production / catering kitchen",
+     "effect": "F-3 or D (our reading); none from F-2"
+    }
+   ],
+   "social": {
+    "serves": "food access (no distance standard)",
+    "catchment": null,
+    "src": [
+     "arch_svc_vanFoodStrategy2013",
+     "arch_svc_edmFresh"
+    ]
+   },
+   "flags": [
+    "Van: VCH permit decides whether it can serve the public [arch_hsg_vanKitchenDG2018]",
+    "BC: plans approved by a health officer; no direct access to living quarters [arch_adj_bcFPR]",
+    "Edm: plans reviewed through Planning & Development [arch_hsg_ahsFoodEdm2019]",
+    "AB: no food storage in mechanical rooms [arch_adj_abFoodCode]",
+    "Make-up air tempered to indoor design temperature [arch_hsg_nbc6316]"
+   ]
+  },
+  {
+   "id": "heat_plant",
+   "name": "Neighbourhood heat plant room",
+   "group": "energy",
+   "kind": "mass",
+   "size": {
+    "typical_m2": null,
+    "min_m2": null,
+    "max_m2": null,
+    "step": {
+     "unit": "MW",
+     "m2_per_unit": 44,
+     "units_typ": null,
+     "units_min": null
+    },
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "arch_sys_ubcAdes2019",
+     "arch_sys_ubcCecBldg"
+    ],
+    "note": "UBC boiler plant 41–44 m² per MW (our arithmetic); heat-pump plant ?"
+   },
+   "occ": {
+    "group": "?",
+    "sep_h_from_F2": null,
+    "src": [
+     "arch_nbc3628"
+    ],
+    "note": "own occupancy F-2/F-3 not determined; fuel-fired service room 1 h"
+   },
+   "heat": {
+    "setpoint_C": null,
+    "supply_C": [
+     10,
+     95
+    ],
+    "kWh_m2_yr": null,
+    "W_m2_peak": null,
+    "uses": "heat",
+    "lift_needed": null,
+    "src": [
+     "arch_ho_vanNEUconn2020",
+     "arch_sys_breIdea2021",
+     "arch_tmp_vanNEU2020"
+    ],
+    "note": "Van NEU supply 65–95 °C (never <65); Blatchford ambient loop 10–25 °C (claim)"
+   },
+   "zoning": {
+    "van": {
+     "status": "?",
+     "use": "Public Utility (private centre counts ?)",
+     "districts": "I-2 outright ≥61 m from R district, else C",
+     "src": [
+      "arch_sys_vanI2Utility"
+     ]
+    },
+    "edm": {
+     "status": "permitted",
+     "use": "Minor Utility (district heating plants)",
+     "zones": "BE, IM, IH",
+     "cap_m2": null,
+     "src": [
+      "arch_sys_edmUtilityUses"
+     ]
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": null,
+    "outside_wall": true,
+    "public": false,
+    "inside_secure": false,
+    "src": [
+     "arch_ho_breMultiUnit2025"
+    ],
+    "note": "ETS room on an exterior wall, ground floor or first parkade level (Blatchford): ETS rule applied to the plant room by analogy (our reading)"
+   },
+   "adj": [],
+   "options": [
+    {
+     "id": "van_neu",
+     "name": "Join a hot network (Vancouver NEU)",
+     "effect": "supply ≥65 °C: data-centre heat needs a heat pump (our reading)"
+    },
+    {
+     "id": "ambient_loop",
+     "name": "Grow an ambient loop (Blatchford type)",
+     "effect": "loop 10–25 °C: heat enters without lift; heat pumps in each ETS (our reading)"
+    }
+   ],
+   "social": {
+    "serves": "buildings on the network; no catchment standard",
+    "catchment": null,
+    "src": [
+     "arch_sys_neuSlides2021"
+    ]
+   },
+   "flags": [
+    "NEU may accept waste heat from customer cooling loads, with bill credit [neuConnect]",
+    "Van ETS room min 6 × 3 m (<13,940 m² floor), 6 × 4 m to 23,230 m² [arch_ho_vanNEUconn2020]",
+    "Blatchford ETS 12–55 m² by units; card-reader door [arch_ho_breMultiUnit2025]",
+    "Edm cooling plants are Major Utility: IH or PU only; blocks abutting childcare [arch_ezb640, arch_sys_edmUtilityUses]",
+    "Installed 47–56 W per m² served (47 if the 5 MW boiler sits inside the 24 MW; 58 ?: assumed 2025 plant), incl. backup boilers (our arithmetic) [arch_sys_neuSlides2021, arch_sys_ubcAdes2019]",
+    "Ammonia or refrigerant plant room to CSA B52 (paywalled; NBC and AB; BC route via provincial regulation ?) [nbc6215]",
+    "Van energy-centre guidelines: traffic, noise, odour (not verified) [arch_sys_vanNES2012]"
+   ]
+  },
+  {
+   "id": "roof_solar",
+   "name": "Roof solar",
+   "group": "energy",
+   "kind": "surface",
+   "size": {
+    "typical_m2": null,
+    "min_m2": null,
+    "max_m2": null,
+    "step": null,
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "arch_vanPvCriteria",
+     "arch_abInfraPv2017",
+     "arch_sec2_fm115"
+    ],
+    "note": "no roof max (?): FM 1-15 caps each array at 46 × 46 m, more arrays with 1.2 m aisles; setbacks: Van 0.6 m edge (simple permit), AB gov 3 m edge, 1.2 m rows"
+   },
+   "occ": {
+    "group": "?",
+    "sep_h_from_F2": null,
+    "src": [],
+    "note": "surface, not an occupancy"
+   },
+   "heat": {
+    "setpoint_C": null,
+    "supply_C": null,
+    "kWh_m2_yr": null,
+    "W_m2_peak": null,
+    "uses": "electricity",
+    "lift_needed": null,
+    "src": [],
+    "note": "produces electricity; yield from tool PV data, not this catalogue"
+   },
+   "zoning": {
+    "van": {
+     "status": "?",
+     "use": "not researched; flat roof needs a full building permit",
+     "districts": "?",
+     "src": [
+      "arch_vanPvCriteria"
+     ]
+    },
+    "edm": {
+     "status": "?",
+     "use": "not researched",
+     "zones": "?",
+     "cap_m2": null,
+     "src": []
+    }
+   },
+   "place": {
+    "grade": "roof ok",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": false,
+    "inside_secure": false,
+    "src": [
+     "arch_vanPvCriteria"
+    ],
+    "note": "row spacing ≈3.2× (Van) / 4.3× (Edm) row height at noon winter solstice: our arithmetic, geometry"
+   },
+   "adj": [],
+   "options": [],
+   "social": {
+    "serves": "none",
+    "catchment": null,
+    "src": []
+   },
+   "flags": [
+    "Van simple permit: panels ≥0.6 m from roof perimeter or peak [arch_vanPvCriteria]",
+    "AB gov projects: 3 m perimeter, 1.2 m between rows [arch_abInfraPv2017]",
+    "Rapid shutdown initiator within sight and 9 m of array or at roof access [arch_vanPvBulletin2021]",
+    "No BCBC/VBBL firefighter pathway clause for PV (our inference ?) [arch_vanCouncil2022]",
+    "FM 1-15: each array ≤46 × 46 m (2,116 m², our arithmetic); more arrays allowed with 1.2 m aisles [arch_sec2_fm115]",
+    "US benchmark: 6 ft perimeter, 4 ft if an axis ≤250 ft [arch_mnIfc1204]",
+    "Roof access >3 storeys: stair or 550 × 900 mm hatch [arch_sec_nbcRoof]"
+   ]
+  },
+  {
+   "id": "facade_solar",
+   "name": "Facade solar",
+   "group": "energy",
+   "kind": "surface",
+   "size": {
+    "typical_m2": null,
+    "min_m2": null,
+    "max_m2": null,
+    "step": null,
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "arch_sec2_nbc3155"
+    ],
+    "note": "no typical storeys (?); limit ≤3 storeys unless sprinklered (3.1.5.5), see flag"
+   },
+   "occ": {
+    "group": "?",
+    "sep_h_from_F2": null,
+    "src": [],
+    "note": "surface, not an occupancy"
+   },
+   "heat": {
+    "setpoint_C": null,
+    "supply_C": null,
+    "kWh_m2_yr": null,
+    "W_m2_peak": null,
+    "uses": "electricity",
+    "lift_needed": null,
+    "src": [],
+    "note": "produces electricity"
+   },
+   "zoning": {
+    "van": {
+     "status": "?",
+     "use": "not researched; wall-mounted needs a full building permit",
+     "districts": "?",
+     "src": [
+      "arch_vanPvCriteria"
+     ]
+    },
+    "edm": {
+     "status": "?",
+     "use": "not researched",
+     "zones": "?",
+     "cap_m2": null,
+     "src": []
+    }
+   },
+   "place": {
+    "grade": "any",
+    "street_entrance": null,
+    "outside_wall": true,
+    "public": false,
+    "inside_secure": false,
+    "src": [
+     "arch_sec2_nbc3155"
+    ],
+    "note": "on exterior walls"
+   },
+   "adj": [],
+   "options": [],
+   "social": {
+    "serves": "none",
+    "catchment": null,
+    "src": []
+   },
+   "flags": [
+    "Combustible cladding: sprinklered (or ≤3 storeys) and CAN/ULC-S134 full-wall test [arch_sec2_nbc3155]",
+    "FM 1-57: FM Approved BIPV only; glass-glass counts as combustible [arch_up_fm0157]",
+    "FM tests: fire reached the top on 3 of 4 double-glass systems [arch_sec2_fmBipv2025]",
+    "Flagged option, not a default (needs a tested assembly) [arch_up_fm0157]"
+   ]
+  },
+  {
+   "id": "river_cooling",
+   "name": "River or inlet cooling",
+   "group": "system",
+   "kind": "system",
+   "size": {
+    "typical_m2": null,
+    "min_m2": null,
+    "max_m2": null,
+    "step": null,
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "arch_sys_dfoScreen"
+    ],
+    "note": "our arithmetic: ≈21 kW per L/s at ΔT 5 K (ΔT unsourced ?) (≈48 L/s per MW); intake screen ≈0.9 m² per MW at 0.055 m/s, ≈1.4 m² at 0.035 m/s (Table C-1); DFO: may not apply to large intakes"
+   },
+   "occ": {
+    "group": "?",
+    "sep_h_from_F2": null,
+    "src": [],
+    "note": "system, no mass"
+   },
+   "heat": {
+    "setpoint_C": null,
+    "supply_C": null,
+    "kWh_m2_yr": null,
+    "W_m2_peak": null,
+    "uses": "cooling",
+    "lift_needed": null,
+    "src": [
+     "arch_sys_bcWqgTemp"
+    ],
+    "note": "rejects heat; discharge ±1 °C from natural background (marine)"
+   },
+   "zoning": {
+    "van": {
+     "status": "?",
+     "use": "n/a",
+     "districts": "waterfront lots only",
+     "src": []
+    },
+    "edm": {
+     "status": "?",
+     "use": "n/a",
+     "zones": "waterfront lots only",
+     "cap_m2": null,
+     "src": []
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": false,
+    "inside_secure": false,
+    "src": [],
+    "note": "waterfront lots only; pump house, intake and outfall sizes ?"
+   },
+   "adj": [],
+   "options": [],
+   "social": {
+    "serves": "none",
+    "catchment": null,
+    "src": []
+   },
+   "flags": [
+    "Discharge: ±1 °C from background, ≤0.5 °C per hour (BC marine) [arch_sys_bcWqgTemp]",
+    "Heated water can be a deleterious substance (Fisheries Act) [arch_sys_fishAct]",
+    "HADD needs Minister's authorization; DFO review [arch_sys_dfoReview]",
+    "Intake screen approach ≤0.055 m/s, 2.54 mm openings [arch_sys_dfoScreen]",
+    "BC water licence: cooling is an industrial purpose [arch_sys_bcWSReg]",
+    "Port PER permit on Burrard Inlet / Fraser: 60–120 business days [arch_sys_vfpaPER]",
+    "AB: Water Act licence to divert and use water [arch_sys_abWaterLic]"
+   ]
+  },
+  {
+   "id": "borefield",
+   "name": "Borefield (closed-loop geoexchange)",
+   "group": "system",
+   "kind": "system",
+   "size": {
+    "typical_m2": null,
+    "min_m2": null,
+    "max_m2": null,
+    "step": {
+     "unit": "bore",
+     "m2_per_unit": 36,
+     "units_typ": null,
+     "units_min": null
+    },
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "arch_sys_mcs022",
+     "arch_sys_ornl2018",
+     "arch_sys_edmBorefield"
+    ],
+    "note": "6 m spacing (MCS, UK benchmark) → 36 m² per bore (our arithmetic); depth ~100 m avg (ORNL, US benchmark); W per m ? ; Blatchford 570 × 150 m"
+   },
+   "occ": {
+    "group": "?",
+    "sep_h_from_F2": null,
+    "src": [],
+    "note": "system, no mass; can sit under a pond (Blatchford)"
+   },
+   "heat": {
+    "setpoint_C": null,
+    "supply_C": [
+     0,
+     35
+    ],
+    "kWh_m2_yr": null,
+    "W_m2_peak": null,
+    "uses": "cooling",
+    "lift_needed": null,
+    "src": [
+     "arch_sys_ahmadfard2019"
+    ],
+    "note": "heat-pump inlet ≥0 °C heating, ≤35 °C cooling (practice)"
+   },
+   "zoning": {
+    "van": {
+     "status": "?",
+     "use": "n/a",
+     "districts": "?",
+     "src": []
+    },
+    "edm": {
+     "status": "?",
+     "use": "n/a",
+     "zones": "?",
+     "cap_m2": null,
+     "src": []
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": false,
+    "inside_secure": false,
+    "src": [
+     "abDirective"
+    ],
+    "note": "AB setbacks: 1 m buildings, 3 m property line"
+   },
+   "adj": [],
+   "options": [],
+   "social": {
+    "serves": "none",
+    "catchment": null,
+    "src": []
+   },
+   "flags": [
+    "AB vertical loop setbacks: 1 m buildings, 3 m property line, 15 m water wells [abDirective]",
+    "BC: registered geoexchange driller; seal full length; report within 90 days [arch_sys_bcGWPR]",
+    "BC: no closed-loop setback in the regulation; CSA C448 paywalled [arch_sys_bcGWPR]",
+    "AB: Approval to Drill; certified Earth Loop Technician [arch_sys_abGwPage]",
+    "Van: artesian risk over large aquifer areas [arch_sys_vanArtesian]"
+   ]
+  },
+  {
+   "id": "rain_tank",
+   "name": "Rain tank",
+   "group": "system",
+   "kind": "system",
+   "size": {
+    "typical_m2": null,
+    "min_m2": null,
+    "max_m2": null,
+    "step": null,
+    "storeys_typ": null,
+    "floor_height_m": null,
+    "src": [
+     "arch_sys_calgaryRwh",
+     "arch_sys_ecccVan",
+     "src_fill_ecccEdmCity",
+     "arch_sys_vbblRain",
+     "arch_sys_vanRain2024"
+    ],
+    "note": "net yield ≈0.90 m³ (Van) / 0.26 m³ (Edm) per m² roof per year (our arithmetic, gross of first-flush and wetting loss); Van small-site detention tank example 7.5–12.5 m², ~1.5 m deep, not a harvest-tank minimum"
+   },
+   "occ": {
+    "group": "?",
+    "sep_h_from_F2": null,
+    "src": [],
+    "note": "system, no mass"
+   },
+   "heat": {
+    "setpoint_C": null,
+    "supply_C": null,
+    "kWh_m2_yr": null,
+    "W_m2_peak": null,
+    "uses": "cooling",
+    "lift_needed": null,
+    "src": [
+     "arch_sys_vbblRain"
+    ],
+    "note": "Van: cooling-tower and adiabatic make-up allowed; stored water <20 °C"
+   },
+   "zoning": {
+    "van": {
+     "status": "?",
+     "use": "n/a",
+     "districts": "?",
+     "src": []
+    },
+    "edm": {
+     "status": "?",
+     "use": "n/a",
+     "zones": "?",
+     "cap_m2": null,
+     "src": []
+    }
+   },
+   "place": {
+    "grade": "?",
+    "street_entrance": null,
+    "outside_wall": null,
+    "public": false,
+    "inside_secure": false,
+    "src": [
+     "arch_sys_abRwh2010"
+    ],
+    "note": "AB: buried below frost or in a heated space"
+   },
+   "adj": [
+    {
+     "rule": "keep apart",
+     "with": "hall",
+     "m": null,
+     "hard": false,
+     "src": [
+      "arch_sys_vbblRain"
+     ],
+     "note": "keep stored water <20 °C: away from data-centre heat (our reading)"
+    }
+   ],
+   "options": [],
+   "social": {
+    "serves": "none",
+    "catchment": null,
+    "src": []
+   },
+   "flags": [
+    "Van: water <20 °C, monitored; Legionella <10 CFU/mL [arch_sys_vbblRain]",
+    "Van: least rain in Jul–Aug, the peak cooling months [arch_sys_ecccVan]",
+    "AB: only toilets, urinals, subsurface irrigation; other uses need an alternative solution [arch_sys_abReuse2021]",
+    "Van: no road runoff; P.Eng. design; operating permit [arch_sys_vbblRain]"
+   ]
+  }
+ ]
+}

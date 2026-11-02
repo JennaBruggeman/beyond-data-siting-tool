@@ -1,0 +1,5392 @@
+{
+ "refuge": [
+  {
+   "field": "size.typical_m2",
+   "value": 175,
+   "verdict": "ARITHMETIC",
+   "evidence": "50 × 3.5 = 175 ✓. 50 = Edmonton overnight spaces (Al Rashid Mosque); 3.5 m²/person AHS p. 4.",
+   "fix": ""
+  },
+  {
+   "field": "size.step",
+   "value": {
+    "unit": "person",
+    "m2_per_unit": 3.5,
+    "units_typ": 50,
+    "units_min": null
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_ahsReceptionCentres, arch_edmExtremeWeather register text",
+   "fix": ""
+  },
+  {
+   "field": "occ.group",
+   "value": "A-2",
+   "verdict": "CONFIRMED",
+   "evidence": "A-2 community halls in Note A-3.1.2.1 (arch_pub_nbcA3121); arch_ref_part3Scope only sets Part 3 scope. Labelled our reading.",
+   "fix": "cite arch_pub_nbcA3121"
+  },
+  {
+   "field": "occ.sep_h_from_F2",
+   "value": 2,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_nbc3131, arch_ref_part3Scope register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.setpoint_C",
+   "value": [
+    19,
+    26
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_ahsReceptionCentres, arch_vchCoolingSpaces, arch_statcanSCIEU2019, arch_nrcanTrends2020 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.kWh_m2_yr",
+   "value": [
+    160,
+    160
+   ],
+   "verdict": "ARITHMETIC",
+   "evidence": "1.01 GJ/m² × 56.6 % = 0.572 GJ = 159 kWh ✓ (≈160). Mixes 2019 EUI with 2020 heating share; library stock proxy.",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_ahsReceptionCentres, arch_vchCoolingSpaces, arch_statcanSCIEU2019, arch_nrcanTrends2020",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "at grade",
+   "verdict": "UNSUPPORTED",
+   "evidence": "No cited source requires at grade. 10.21.1 needs street access only; I-3 2.2.11 bars data at ground floor, not the refuge elsewhere.",
+   "fix": "'?' or 'our reading' (true for under_hall option only)"
+  },
+  {
+   "field": "place.street_entrance",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_up_vanZDB10, van_zdb_i3 register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "conditional",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Community Centre or Neighbourhood House; Social Service Centre",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "I-2, I-3 (A), FC-2; I-1C Social Service Centre only",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmZB20001_BE, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Community Service",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmZB20001_BE, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE only (IM, IH not permitted)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmZB20001_BE, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.cap_m2",
+   "value": 500,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmZB20001_BE, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": false,
+    "src": [
+     "arch_hcCleanerAirSpaces"
+    ],
+    "note": "fuel-burning generators away and downwind of clean-air intakes (guide)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_hcCleanerAirSpaces: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "must near",
+    "with": "street",
+    "m": null,
+    "hard": false,
+    "src": [
+     "arch_svc_vanPkg7"
+    ],
+    "note": "drop-off at own entrance: Class B passenger space 4.0 m wide, 3.5 m clear"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "4.0 m wide, 3.5 m clear = Class B (7.4.2). Register SCOPE: a refuge is not a listed use, so this is our reading.",
+   "fix": "add 'our reading' to note"
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[4]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[5]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "options[0]",
+   "value": {
+    "id": "own_building",
+    "name": "Own building on the lot",
+    "effect": "spacing or 4 h firewall if joined; overnight sleeping allowed; own seismic category; Van: accessory building or rezoning (10.34.1)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "matches notes decisions and the program's cited sources",
+   "fix": ""
+  },
+  {
+   "field": "options[1]",
+   "value": {
+    "id": "side_by_side",
+    "name": "Side by side in the data-centre building",
+    "effect": "2 h wall; overnight limited to one residential suite (F-2); shared structure takes the higher seismic category unless split"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "matches notes decisions and the program's cited sources",
+   "fix": ""
+  },
+  {
+   "field": "options[2]",
+   "value": {
+    "id": "under_hall",
+    "name": "Ground floor under the hall",
+    "effect": "2 h floor; same overnight limit; whole building takes the refuge's seismic category; fits Van no-data-at-grade rule"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "matches notes decisions and the program's cited sources",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "heat-dome risk groups: aged 70+, living alone, at home indoors; Health Canada at-risk groups",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_svc_bcCoronerHeat2022, arch_svc_hcWhoAtRisk",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Code needs only 30 min emergency lighting; heat, cooling and filtered air in a blackout are design choices [arch_ref_emergPower]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_ref_emergPower register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "Generator power legal if the refuge user is the owner or a tenant [bcUCAs1]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches bcUCAs1 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "Alberta self-supply only for owner or tenant on that property [euaS2]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches euaS2 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "Seismic High only if counted a community centre; post-disaster only if designated [arch_ref_nbcT4121]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_ref_nbcT4121 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[4]",
+   "value": "No rule keeps the refuge reachable when the host is locked: tool flags it [arch_ahsReceptionCentres]",
+   "verdict": "UNSUPPORTED",
+   "evidence": "arch_ahsReceptionCentres says nothing about a locked host; this is an absence finding (notes, refuge_placement.md).",
+   "fix": "drop the bracket id or cite the research file"
+  },
+  {
+   "field": "flags[5]",
+   "value": "Filter MERV 13+, staged entry vestibule, emergency power (guide) [arch_hcCleanerAirSpaces]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_hcCleanerAirSpaces register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[6]",
+   "value": "Van I-2/I-3: 1.00 FSR for all non-industrial uses combined [van_zdb_i3]",
+   "verdict": "CONFIRMED",
+   "evidence": "I-2/I-3 A 1.00 FSR for all other uses combined (zoning.md l. 47, 50; van_zdb register text is a title only).",
+   "fix": ""
+  },
+  {
+   "field": "flags[7]",
+   "value": "Van: one principal building per site; own building = accessory or rezoning [arch_up_vanZDB10]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_up_vanZDB10 register text",
+   "fix": ""
+  }
+ ],
+ "pool": [
+  {
+   "field": "size.typical_m2",
+   "value": 2131,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmEastglen2017, arch_sportEngPoolsDGN, arch_sportEngPoolsApp1 register text",
+   "fix": ""
+  },
+  {
+   "field": "size.min_m2",
+   "value": 949,
+   "verdict": "ARITHMETIC",
+   "evidence": "212.5 × (1 + 1.1 + 1.0 + 0.333) × 1.3 = 948.5 ✓. Deck 1.1 = Eastglen 366/326 = 1.12.",
+   "fix": ""
+  },
+  {
+   "field": "size.step",
+   "value": {
+    "unit": "lane",
+    "m2_per_unit": 223,
+    "units_typ": 6,
+    "units_min": 4
+   },
+   "verdict": "ARITHMETIC",
+   "evidence": "Lane 2.0 m × 25 m = 50 m² × 3.433 × 1.3 = 223 ✓; 4 lanes = smallest community pool (App. 1). But 949 + 2 × 223 = 1,395 m² for 6 lanes, not the 2,131 typical.",
+   "fix": "note the mismatch, or derive typical from the same formula"
+  },
+  {
+   "field": "size.floor_height_m",
+   "value": 3.5,
+   "verdict": "CONFIRMED",
+   "evidence": "4-lane hall flat ceiling min clear 3.5 m (UK). A clear height, not floor-to-floor.",
+   "fix": ""
+  },
+  {
+   "field": "occ.group",
+   "value": "A-3",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_nbcA3121, arch_nbc3131 register text",
+   "fix": ""
+  },
+  {
+   "field": "occ.sep_h_from_F2",
+   "value": 2,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_nbcA3121, arch_nbc3131 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.setpoint_C",
+   "value": [
+    27,
+    30
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "27–30 °C is water (CTG009 p. 15, UK); air ~1 °C above.",
+   "fix": "say water; air 28–31 °C"
+  },
+  {
+   "field": "heat.kWh_m2_yr",
+   "value": [
+    416,
+    416
+   ],
+   "verdict": "ARITHMETIC",
+   "evidence": "208 MWh / 500 m² = 416 ✓.",
+   "fix": "label 'benchmark outside Canada (French preprint citing Yuan 2021)'"
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_carbonTrustCTG009, arch_benakcha2025, arch_bcPoolReg296",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_svc_nbcae72, arch_up_vanZDB10 register text",
+   "fix": ""
+  },
+  {
+   "field": "place.street_entrance",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_svc_nbcae72, arch_up_vanZDB10 register text",
+   "fix": ""
+  },
+  {
+   "field": "place.outside_wall",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "AB only: 7.2.3.38.(2) outside access; BC not found.",
+   "fix": "say AB only"
+  },
+  {
+   "field": "place.public",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "rezoning",
+   "verdict": "CONFIRMED",
+   "evidence": "Swimming Pool not listed in I-2, I-3, FC-2 (zoning.md l. 26).",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Swimming Pool (not listed)",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_fc2, van3575s2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "not listed in I-2, I-3, FC-2",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_fc2, van3575s2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmZones, arch_edmZB20001_BE register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Community Service (recreation centres)",
+   "verdict": "CONFIRMED",
+   "evidence": "Community Service includes 'community recreation centres' (arch_edmCommunityServiceDef).",
+   "fix": "add arch_edmCommunityServiceDef"
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE only",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmZones, arch_edmZB20001_BE register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.cap_m2",
+   "value": 500,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmZones, arch_edmZB20001_BE register text",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "hall",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_adj_bcPoolDesign"
+    ],
+    "note": "no shared plant room with data-centre equipment (BC guide 9.8); no direct access from other buildings"
+   },
+   "verdict": "WRONG",
+   "evidence": "BC Guidelines 3.1 and 9.8 are 'should' guidance, not a rule.",
+   "fix": "hard: false"
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "intakes",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_adj_nbcAE72"
+    ],
+    "note": "AB: chlorine-room exhaust ≥3 m from any intake, intake not below it"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_adj_nbcAE72: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[4]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[5]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "residents without a pool in reach",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_svc_vanSplash2019, arch_svc_edmRecApproach2018",
+   "fix": ""
+  },
+  {
+   "field": "social.catchment",
+   "value": "2 km neighbourhood / 3 km community / 4 km city-wide (Van); 5 km indoor recreation (Edm)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_svc_vanSplash2019, arch_svc_edmRecApproach2018",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "AB: plant room reasonably accessible from the pool enclosure, locked [arch_adj_nbcAE72]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_adj_nbcAE72 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "BC: construction permit, plans sealed by engineer or architect [arch_bcPoolReg296]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_bcPoolReg296 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "BC: barrier with controlled access around pool and walkways [arch_adj_bcPoolReg]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_adj_bcPoolReg register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "AB: chlorine room 1 h, outward door to outside, no door into the building [arch_adj_abStandataCl]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_adj_abStandataCl register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[4]",
+   "value": "Edm BE 500 m² cap: needs a variance (3.18) [arch_zon_EdmZones]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[5]",
+   "value": "Pool covers cut total energy 10–30 % [arch_carbonTrustCTG009]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_carbonTrustCTG009 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[6]",
+   "value": "Sewer: non-domestic waste ≥65 °C prohibited (Metro Van) [arch_mvSewerBylaw299]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_mvSewerBylaw299 register text",
+   "fix": ""
+  }
+ ],
+ "laundry": [
+  {
+   "field": "size.max_m2",
+   "value": 300,
+   "verdict": "CONFIRMED",
+   "evidence": "Van Laundromat definition ≤300 m² (van3575s2).",
+   "fix": "applies to the self-service option in Vancouver only; null for commercial"
+  },
+  {
+   "field": "occ.group",
+   "value": "D",
+   "verdict": "UNSUPPORTED",
+   "evidence": "arch_wet_nbcA3121 lists no laundries. arch_nbcDefF has D 'Laundries, self-service', F-2 'Laundries, except self-service'. Value right.",
+   "fix": "add arch_nbcDefF"
+  },
+  {
+   "field": "occ.sep_h_from_F2",
+   "value": 0,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_nbc3131, arch_wet_nbcA3121 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.supply_C",
+   "value": [
+    71,
+    130
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "71 °C (CMS p. 1), 115–130 °C drying air (Fiaschi Table 1).",
+   "fix": "label CMS as US healthcare rule and Fiaschi as Italian dry-cleaning (outside Canada)"
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_bobak2010, arch_euEMAStourism2016, arch_cmsLaundry2013, arch_fiaschi2019",
+   "fix": ""
+  },
+  {
+   "field": "heat.lift_needed",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_bobak2010, arch_euEMAStourism2016, arch_cmsLaundry2013, arch_fiaschi2019 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.note",
+   "value": "wash ≥71 °C hot wash (CMS), drying air 115–130 °C (dry-cleaning); 0.53–0.88 kWh/kg wash heat (our arithmetic); lift: our reading",
+   "verdict": "ARITHMETIC",
+   "evidence": "1,890/3,600 = 0.525; 3,150/3,600 = 0.875 kWh/kg ✓ (Bobák, Czech).",
+   "fix": "label Bobák outside Canada"
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "conditional",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2, van3575s2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Laundromat (Laundry or Cleaning Plant if commercial)",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2, van3575s2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "Laundromat: I-2, I-1C (C); plant: I-2, I-1C (O), I-3, FC-2 (C)",
+   "verdict": "CONFIRMED",
+   "evidence": "Laundromat C in I-2, I-1C; NP I-3, FC-2. Plant O I-2, I-1C; C I-3, FC-2 (zoning.md l. 28–29).",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Indoor Sales and Service (our reading); Minor Industrial if commercial",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE; commercial also IM",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.cap_m2",
+   "value": 500,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "options[0]",
+   "value": {
+    "id": "self_service",
+    "name": "Laundromat (self-service)",
+    "effect": "Group D; Van ≤300 m², C in I-2, I-1C"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "matches notes decisions and the program's cited sources",
+   "fix": ""
+  },
+  {
+   "field": "options[1]",
+   "value": {
+    "id": "commercial",
+    "name": "Commercial / institutional laundry",
+    "effect": "Group F-2; Van Laundry or Cleaning Plant; non-domestic sewer waste"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "matches notes decisions and the program's cited sources",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "no sourced need criterion; renters, low income are proxies only (unsourced)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_svc_vanHygiene",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Commercial laundry is Non-Domestic Waste; ≥65 °C prohibited, mixed flow ≤40 °C [arch_mvSewerBylaw299]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_mvSewerBylaw299 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "Heat recovery from waste water and exhaust air is best practice [arch_euEMAStourism2016]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_euEMAStourism2016 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "Benchmark ≤2.0 kWh and ≤7 L per kg textiles (small on-site) [arch_euEMAStourism2016]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_euEMAStourism2016 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "Van loading: laundromat not listed, Director sets 'similar use' [arch_svc_vanPkg5]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_svc_vanPkg5 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[4]",
+   "value": "Edm: no loading required below 2,500 m² [arch_sec_edm580]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sec_edm580 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[5]",
+   "value": "No data-centre-heat-to-laundry precedent found [arch_sintefCleantex]",
+   "verdict": "UNSUPPORTED",
+   "evidence": "SINTEF page is about laundry heat pumps; 'no precedent found' is a search result, not in the source.",
+   "fix": "cite the research file"
+  }
+ ],
+ "spa": [
+  {
+   "field": "size.typical_m2",
+   "value": 870,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_vanCD1Ogden, arch_wet_vanRTS16473 register text",
+   "fix": ""
+  },
+  {
+   "field": "size.storeys_typ",
+   "value": 3,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_vanCD1Ogden, arch_wet_vanRTS16473 register text",
+   "fix": ""
+  },
+  {
+   "field": "size.note",
+   "value": "Vancouver barge example 870 m² on 3 levels; hot tub bench 0.6 m per person; sauna ≤3.6 m high",
+   "verdict": "UNSUPPORTED",
+   "evidence": "0.6 m bench per person is in arch_wet_bcPoolDesignHT s. 8.7, not in the cited ids.",
+   "fix": "add arch_wet_bcPoolDesignHT"
+  },
+  {
+   "field": "occ.group",
+   "value": "A-3",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_nbcA3121, arch_nbc3131 register text",
+   "fix": ""
+  },
+  {
+   "field": "occ.sep_h_from_F2",
+   "value": 2,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_nbcA3121, arch_nbc3131 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.setpoint_C",
+   "value": [
+    32,
+    40
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_bcPoolReg296, arch_abPoolStd2014, arch_r2_carbonTrustCTV058, arch_wet_ncceh2026, arch_wet_abPoolStdSauna register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_bcPoolReg296, arch_abPoolStd2014, arch_r2_carbonTrustCTV058, arch_wet_ncceh2026, arch_wet_abPoolStdSauna",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "any",
+   "verdict": "UNSUPPORTED",
+   "evidence": "RTS 16473 allows outdoor saunas and plunges; nothing on roofs or upper floors.",
+   "fix": "'?' or 'our reading'"
+  },
+  {
+   "field": "place.public",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "conditional",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_fc2, arch_wet_vanRTS16473",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Beauty and Wellness Centre (hydrotherapy, thermal therapy)",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_fc2, arch_wet_vanRTS16473",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "I-2, I-3, FC-2, I-1C and other industrial",
+   "verdict": "CONFIRMED",
+   "evidence": "RTS 16473 App. A; zoning.md l. 26 (I-1C no limit).",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "none defined (Indoor Sales and Service or Minor Indoor Entertainment ?)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmDefs, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE ?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmDefs, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "Van policy: wellness amenities connected with pools",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_vanSplashStrategy2019",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "BC: hot tub = pool; sauna = personal service establishment [arch_wet_bcRAR161]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_bcRAR161 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "Cold plunge = pool unless drained and refilled after each use [arch_wet_vanRTS16473]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_vanRTS16473 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "BC: barrier with controlled access around pools [arch_wet_bcPoolRegDefs]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_bcPoolRegDefs register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "AB: whirlpools on independent circulation, poolside shut-off [arch_wet_nbcAE726]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_nbcAE726 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[4]",
+   "value": "Hot tub turnover: BC 30 min; AB 15–20 min [arch_wet_bcPoolDesignHT]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_bcPoolDesignHT register text",
+   "fix": ""
+  }
+ ],
+ "therapy_pool": [
+  {
+   "field": "size.typical_m2",
+   "value": 134,
+   "verdict": "ARITHMETIC",
+   "evidence": "(5.5+2+1.5) × (8.5+2+1.5) = 108 + 30 % × 46.75 = 14.0 + 12 = 134.0 ✓. Changing Places 3 × 4 m is ATACP s. 2.11 (prog_wet.md l. 153), not in the register text.",
+   "fix": "label UK benchmark; add Changing Places to register text"
+  },
+  {
+   "field": "size.min_m2",
+   "value": 90,
+   "verdict": "ARITHMETIC",
+   "evidence": "(4+3.5) × (6+3.5) = 71.3 + 7.2 + 12 = 90.5 ✓. 24 m² pool is ATACP's 12-bather example, not a stated minimum.",
+   "fix": "label 'smallest example (UK)'"
+  },
+  {
+   "field": "size.floor_height_m",
+   "value": 4.5,
+   "verdict": "CONFIRMED",
+   "evidence": "ATACP s. 3.1 '~4.5 m ceiling' (UK).",
+   "fix": ""
+  },
+  {
+   "field": "occ.group",
+   "value": "A-3",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_nbcA3121, arch_nbc3131 register text",
+   "fix": ""
+  },
+  {
+   "field": "occ.sep_h_from_F2",
+   "value": 2,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_nbcA3121, arch_nbc3131 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.setpoint_C",
+   "value": [
+    32,
+    35.5
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "Water 32–35.5 °C (ATACP p. 5, UK); BC cap 37 °C.",
+   "fix": "label UK"
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_wet_atacp2019, arch_bcPoolReg296",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_atacp2019 register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Swimming Pool not listed; accessory to Health Care Office (C) ?",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_fc2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "I-2; I-3 (A, not ground floor); FC-2 (A, E)",
+   "verdict": "WRONG",
+   "evidence": "Omits I-1C: Health Care Office C there (prog_housing.md l. 45).",
+   "fix": "I-2; I-1C; I-3 (A, not ground floor); FC-2 (A, E)"
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "Health Service BE O ≤500 m² (prog_wet.md l. 146; arch_zon_EdmZones 3.3.1).",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Health Service",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_edmDefs, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE (MU also)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_edmDefs, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.cap_m2",
+   "value": 500,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_edmDefs, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "prefer near",
+    "with": "clinic",
+    "m": null,
+    "hard": false,
+    "src": [
+     "arch_wet_vanSplashStrategy2019"
+    ],
+    "note": "Van offers therapy at Medium and Large pools; pairing with clinic: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_wet_vanSplashStrategy2019: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[4]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "rehab and therapy users",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_vanSplashStrategy2019, arch_wet_edmRec2018",
+   "fix": ""
+  },
+  {
+   "field": "social.catchment",
+   "value": "2 / 3 / 4 km pool catchments (Van); 5 km indoor recreation (Edm)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_vanSplashStrategy2019, arch_wet_edmRec2018",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Plant room as close as possible to the pool, typ. 15–30 % of water area (guide) [arch_wet_atacp2019]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_atacp2019 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "AB: special purpose pool under Part 7 unless drained after every use [arch_wet_nbcAE726]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_nbcAE726 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "BC: no therapy exemption; physiotherapy pools are public pools [arch_wet_bcPoolRegDefs]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_bcPoolRegDefs register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "Van: health care office not at ground floor in I-3 [van_zdb_i3]",
+   "verdict": "CONFIRMED",
+   "evidence": "I-3 2.2.6 (zoning.md l. 38).",
+   "fix": ""
+  },
+  {
+   "field": "flags[4]",
+   "value": "Ventilation 10 L/s per m² water + wet surrounds, 6 ACH (guide) [arch_wet_atacp2019]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_atacp2019 register text",
+   "fix": ""
+  }
+ ],
+ "aquarium": [
+  {
+   "field": "size.typical_m2",
+   "value": 5400,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_thyer2018 register text",
+   "fix": ""
+  },
+  {
+   "field": "occ.group",
+   "value": "A-2",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_nbcA3121, arch_nbc3131 register text",
+   "fix": ""
+  },
+  {
+   "field": "occ.sep_h_from_F2",
+   "value": 2,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_nbcA3121, arch_nbc3131 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.setpoint_C",
+   "value": [
+    27,
+    28
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_thyer2018 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "cooling",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_wet_thyer2018",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "rezoning",
+   "verdict": "CONFIRMED",
+   "evidence": "No aquarium use; Zoo or Botanical Garden / Museum not listed (prog_wet.md l. 173).",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "no aquarium use (Zoo or Botanical Garden, Museum not listed)",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van3575s2, van_zdb_i2, van_zdb_i3, van_zdb_fc2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "not listed in I-2, I-3, FC-2",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van3575s2, van_zdb_i2, van_zdb_i3, van_zdb_fc2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmDefs, arch_zon_EdmZones, arch_wet_edmMU register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Major Indoor Entertainment",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmDefs, arch_zon_EdmZones, arch_wet_edmMU register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE; MU (>1 ha site uncapped)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmDefs, arch_zon_EdmZones, arch_wet_edmMU register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.cap_m2",
+   "value": 500,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmDefs, arch_zon_EdmZones, arch_wet_edmMU register text",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "regional or city attraction",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_edmDefs",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Adds to site heat rejection: a cooling load, not a heat user (our reading) [arch_wet_thyer2018]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_thyer2018 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "AB: life-support heating, cooling, aeration, filtration need alarms and backup [arch_wet_abZooStd2015]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_abZooStd2015 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "AB Zoo Standards marked Archived; currency ? [arch_wet_abZooStd2015]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_abZooStd2015 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "Edm 500 m² cap far below benchmark: variance [arch_zon_EdmZones]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmZones register text",
+   "fix": ""
+  }
+ ],
+ "fish_farm": [
+  {
+   "field": "size.typical_m2",
+   "value": 1000,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_fish_savidov2015, arch_fish_bergman2020 register text",
+   "fix": ""
+  },
+  {
+   "field": "size.step",
+   "value": {
+    "unit": "t/yr",
+    "m2_per_unit": 28,
+    "units_typ": 36,
+    "units_min": null
+   },
+   "verdict": "ARITHMETIC",
+   "evidence": "1,000 / 36 = 27.8 ≈ 28 ✓; 36 t/yr ✓.",
+   "fix": ""
+  },
+  {
+   "field": "occ.group",
+   "value": "F-2",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_nbcA3121, arch_nbc3131, arch_wet_nbcPart2G register text",
+   "fix": ""
+  },
+  {
+   "field": "occ.sep_h_from_F2",
+   "value": 0,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_nbcA3121, arch_nbc3131, arch_wet_nbcPart2G register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.setpoint_C",
+   "value": [
+    25,
+    31
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_fish_omafraTilapia, arch_fish_katersky2007, arch_wet_geofood2022 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.supply_C",
+   "value": [
+    35,
+    45
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_fish_omafraTilapia, arch_fish_katersky2007, arch_wet_geofood2022 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_fish_omafraTilapia, arch_fish_katersky2007, arch_wet_geofood2022",
+   "fix": ""
+  },
+  {
+   "field": "heat.lift_needed",
+   "value": false,
+   "verdict": "UNSUPPORTED",
+   "evidence": "lift=false is our reading; air-cooled DC heat ~25 °C needs a heat pump (arch_berenschotHK; greenhouse entry says so). Only liquid-cooled 45–60 °C might not.",
+   "fix": "null, or 'depends on DC cooling type'"
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "rezoning",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van3575s2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "no use (Urban Farm excludes fish)",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van3575s2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "none",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van3575s2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_edmDefs, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Urban Agriculture (aquaponic systems; fish-only RAS ?)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_edmDefs, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE, IM",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_edmDefs, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "options[0]",
+   "value": {
+    "id": "tilapia",
+    "name": "Nile tilapia",
+    "effect": "tank 25–30 °C; AB Table 1 (contained waters); BC: ITC review ?"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "OMAFRA 25–30 °C; AB Table 1 'contained waters only' (fish_species.md l. 25).",
+   "fix": ""
+  },
+  {
+   "field": "options[1]",
+   "value": {
+    "id": "barramundi",
+    "name": "Barramundi",
+    "effect": "max growth ~31.4 °C; AB Table 1 Cat. 2; BC: ITC review ?; RAS density ~15 kg/m³"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "31.4 °C (Katersky); AB Cat. 2 (fish_species.md l. 44); 15 kg/m³ is arch_fish_faoBarra (FAO), not cited.",
+   "fix": "add arch_fish_faoBarra"
+  },
+  {
+   "field": "social.serves",
+   "value": "food production; harvest, processing and sale out of scope",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_abFishCulture",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "BC: federal DFO land-based aquaculture licence [arch_wet_dfoAuthBC2025]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_dfoAuthBC2025 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "BC: new species need an Introductions and Transfers Committee review [arch_fish_dfoITC]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_fish_dfoITC register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "BC: waste registration before construction begins [arch_wet_bcLBFWCR]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_bcLBFWCR register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "BC: water licence to divert, use or store water [arch_wet_dfoAuthBC2025]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_dfoAuthBC2025 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[4]",
+   "value": "AB: commercial fish culture licence; species from Table 1 only [arch_wet_abFishCulture]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_wet_abFishCulture register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[5]",
+   "value": "Electricity 3,086 kWh/t tilapia incl. heating (Sweden) [arch_fish_bergman2020]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_fish_bergman2020 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[6]",
+   "value": "Sewer: non-domestic waste ≥65 °C prohibited (Metro Van) [arch_mvSewerBylaw299]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_mvSewerBylaw299 register text",
+   "fix": ""
+  }
+ ],
+ "greenhouse": [
+  {
+   "field": "size.typical_m2",
+   "value": 153,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_etsBaieComeau, arch_abGhProfile2014 register text",
+   "fix": ""
+  },
+  {
+   "field": "size.storeys_typ",
+   "value": 1,
+   "verdict": "CONFIRMED",
+   "evidence": "single gothic-arch structure (ÉTS).",
+   "fix": ""
+  },
+  {
+   "field": "size.note",
+   "value": "153 m² = only data-centre-heat precedent (Baie-Comeau); AB mean ≈5,900 m² (skewed)",
+   "verdict": "ARITHMETIC",
+   "evidence": "14,743,207 ft² / 230 = 64,101 ft² = 5,955 m², not ≈5,900.",
+   "fix": "≈6,000 m²"
+  },
+  {
+   "field": "occ.group",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_adj_bcbcFarm, arch_nbcDefF register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.setpoint_C",
+   "value": [
+    16,
+    20
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_asabeEp406, arch_etsBaieComeau, arch_mbGhEnergy, arch_ahamed2019, arch_berenschotHK register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.supply_C",
+   "value": [
+    35,
+    60
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_asabeEp406, arch_etsBaieComeau, arch_mbGhEnergy, arch_ahamed2019, arch_berenschotHK register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.kWh_m2_yr",
+   "value": [
+    413,
+    583
+   ],
+   "verdict": "ARITHMETIC",
+   "evidence": "1,486 / 3.6 = 413 (Sask., Ahamed); 2,100 / 3.6 = 583 (Manitoba) ✓.",
+   "fix": ""
+  },
+  {
+   "field": "heat.W_m2_peak",
+   "value": [
+    627,
+    627
+   ],
+   "verdict": "ARITHMETIC",
+   "evidence": "96 kW / 153 m² = 627 ✓.",
+   "fix": "label 'our arithmetic'; 96 kW is ÉTS's secondary estimate"
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_asabeEp406, arch_etsBaieComeau, arch_mbGhEnergy, arch_ahamed2019, arch_berenschotHK",
+   "fix": ""
+  },
+  {
+   "field": "heat.lift_needed",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_asabeEp406, arch_etsBaieComeau, arch_mbGhEnergy, arch_ahamed2019, arch_berenschotHK register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.note",
+   "value": "Prairie double poly 413–583 kWh/m²·yr (our arithmetic); 627 W/m² floor Quebec; Van ≈92 W/m² cover (our arithmetic)",
+   "verdict": "ARITHMETIC",
+   "evidence": "Van 4.0 × (16 − (−7)) = 92 W/m² ✓.",
+   "fix": "add arch_bcbcAppC to src"
+  },
+  {
+   "field": "place.grade",
+   "value": "roof ok",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sec_nbcRoof register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "conditional",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Urban Farm - Class B",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "I-2, I-3, I-1C, FC-2",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmZB20001_BE, arch_edmZB20001_IM register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Urban Agriculture",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmZB20001_BE, arch_edmZB20001_IM register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE, IM",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmZB20001_BE, arch_edmZB20001_IM register text",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "hall",
+    "m": null,
+    "hard": false,
+    "src": [
+     "arch_marcelis2006"
+    ],
+    "note": "keep off the data centre's shadow side: yield −0.7–1 % per 1 % light"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_marcelis2006: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[4]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "options[0]",
+   "value": {
+    "id": "glasshouse",
+    "name": "Glasshouse",
+    "effect": "heat user; 35–60 °C supply; CO2 source must be found"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "matches notes decisions and the program's cited sources",
+   "fix": ""
+  },
+  {
+   "field": "options[1]",
+   "value": {
+    "id": "vertical_farm",
+    "name": "Indoor / vertical farm",
+    "effect": "LED ~187 W/m² grow area, ≈1,175 kWh/m²·yr electricity (our arithmetic); little heat use"
+   },
+   "verdict": "ARITHMETIC",
+   "evidence": "17.4 W/ft² × 10.764 = 187; × 6,278 h = 1,175 ✓ (greenhouse_solar.md A7).",
+   "fix": "cite arch_doeSslHort2017; label US benchmark"
+  },
+  {
+   "field": "social.serves",
+   "value": "food access; no distance standard",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_svc_vanFoodStrategy2013, arch_svc_edmFresh",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Single-span greenhouse runs east–west (US guide) [arch_uwexGhEnergy]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_uwexGhEnergy register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "Replacing gas heat loses CO2: an alternative CO2 source is needed [arch_berenschotHK]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_berenschotHK register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "AB CO2 8-h limit 5,000 ppm for workers [arch_adj_abOHSco2]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_adj_abOHSco2 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "BC farm building needs farmland: Part 3 applies here [arch_adj_bcbcFarm]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_adj_bcbcFarm register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[4]",
+   "value": "Van: greenhouse with public admittance must be sprinklered [arch_adj_bcbcFarm]",
+   "verdict": "CONFIRMED",
+   "evidence": "Inverse of VBBL 1.3.3.6.(2)(j) exemption.",
+   "fix": "label 'our reading'"
+  },
+  {
+   "field": "flags[5]",
+   "value": "Air-cooled heat (~25 °C) needs a heat pump [arch_berenschotHK]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_berenschotHK register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[6]",
+   "value": "Plastic glazing on a data-centre mass: FM Approved only (our reading) [arch_up_fm0157]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_up_fm0157 register text",
+   "fix": ""
+  }
+ ],
+ "conservatory": [
+  {
+   "field": "size.typical_m2",
+   "value": 1400,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_vanVDBStrategy2021, arch_pg_edmMuttartPyr register text",
+   "fix": ""
+  },
+  {
+   "field": "size.storeys_typ",
+   "value": 1,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_vanVDBStrategy2021, arch_pg_edmMuttartPyr register text",
+   "fix": ""
+  },
+  {
+   "field": "size.floor_height_m",
+   "value": 18,
+   "verdict": "CONFIRMED",
+   "evidence": "59 ft = 18.0 m: apex of the 390 m² arid pyramid, not Bloedel.",
+   "fix": "say it is an apex height of a smaller example"
+  },
+  {
+   "field": "occ.group",
+   "value": "A-2",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_nbcA3121, arch_nbc3131 register text",
+   "fix": ""
+  },
+  {
+   "field": "occ.sep_h_from_F2",
+   "value": 2,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_nbcA3121, arch_nbc3131 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.setpoint_C",
+   "value": [
+    18,
+    20
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_ward2013Kew, arch_pg_kewPOWC, arch_asabeEp406, arch_bcbcAppC, arch_pg_abClimateEdm register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.kWh_m2_yr",
+   "value": [
+    590,
+    590
+   ],
+   "verdict": "ARITHMETIC",
+   "evidence": "3,109 MWh × 0.85 / 4,500 m² = 587 ✓ (prog_grow.md l. 40).",
+   "fix": "label 4,500 m² an operator claim (Kew)"
+  },
+  {
+   "field": "heat.W_m2_peak",
+   "value": [
+    100,
+    185
+   ],
+   "verdict": "ARITHMETIC",
+   "evidence": "3.7 × (20+7) = 100; 3.7 × (20+30) = 185 ✓.",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_pg_ward2013Kew, arch_pg_kewPOWC, arch_asabeEp406, arch_bcbcAppC, arch_pg_abClimateEdm",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "rezoning",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2, arch_pg_vanZoningUses",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Zoo or Botanical Garden (not listed)",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2, arch_pg_vanZoningUses",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "not listed in I-2, I-3, I-1C, FC-2",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2, arch_pg_vanZoningUses",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_edmUseDefs, arch_edmZB20001_BE register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Major Indoor Entertainment (indoor botanical gardens)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_edmUseDefs, arch_edmZB20001_BE register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE only",
+   "verdict": "CONFIRMED",
+   "evidence": "MIE in BE; not IM/IH.",
+   "fix": "MU also (arch_wet_edmMU), uncapped >1 ha"
+  },
+  {
+   "field": "zoning.edm.cap_m2",
+   "value": 500,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_edmUseDefs, arch_edmZB20001_BE register text",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "hall",
+    "m": null,
+    "hard": false,
+    "src": [
+     "arch_marcelis2006"
+    ],
+    "note": "keep off the data centre's shadow side"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_marcelis2006: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[4]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "visitors: Bloedel 'tens of thousands' a year",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_vanVDBStrategy2021",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Edm 500 m² cap below Bloedel or one large Muttart pyramid: variance (3.18) [arch_edmZB20001_BE]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmZB20001_BE register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "Van: needs rezoning or CD-1 [arch_pg_vanZoningUses]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_vanZoningUses register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "City and consultant disagree on Muttart pyramid sizes [arch_pg_williamsMuttart]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_williamsMuttart register text",
+   "fix": ""
+  }
+ ],
+ "food_drying": [
+  {
+   "field": "occ.group",
+   "value": "F-2",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_nbcA3121, arch_nbcDefF, arch_nbc3131 register text",
+   "fix": ""
+  },
+  {
+   "field": "occ.sep_h_from_F2",
+   "value": 0,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_nbcA3121, arch_nbcDefF, arch_nbc3131 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.supply_C",
+   "value": [
+    30,
+    60
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_zhu2025HP register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_pg_zhu2025HP",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Food or Beverage Products Manufacturing - Class B",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "I-2, I-1C, FC-2 (O); I-3 (C)",
+   "verdict": "CONFIRMED",
+   "evidence": "Class B O in I-2, I-1C, FC-2; C in I-3 (arch_pg_vanZoningUses).",
+   "fix": "add arch_pg_vanZoningUses"
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_edmUseDefs, arch_edmZB20001_BE register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Minor Industrial",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_edmUseDefs, arch_edmZB20001_BE register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE (enclosed), IM",
+   "verdict": "UNSUPPORTED",
+   "evidence": "IM Minor Industrial is in arch_zon_EdmZones (IM 2.4), not cited.",
+   "fix": "add arch_zon_EdmZones"
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 30,
+    "hard": false,
+    "src": [
+     "arch_adj_abFoodCode"
+    ],
+    "note": "AB: 30 m from contamination sources recommended; generators count: our reading ?"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "AB Food Retail Code s. 2.1(b) 30 m 'recommended'; soft is right.",
+   "fix": "label 'by analogy: retail/foodservice code'"
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[4]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "neighbourhood food infrastructure (no standard)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_svc_vanFoodStrategy2013, arch_svc_edmFresh",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Federal licence only for export or interprovincial trade [arch_pg_cfiaSFCR]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_cfiaSFCR register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "BC: plans approved by a health officer before construction [arch_adj_bcFPR]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_adj_bcFPR register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "F-1 milling would bar A, B, C uses in the building [arch_nbc3131]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_nbc3131 register text",
+   "fix": ""
+  }
+ ],
+ "lumber_drying": [
+  {
+   "field": "occ.group",
+   "value": "F-2",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_nbcA3121, arch_nbc3131 register text",
+   "fix": ""
+  },
+  {
+   "field": "occ.sep_h_from_F2",
+   "value": 0,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_nbcA3121, arch_nbc3131 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.supply_C",
+   "value": [
+    55,
+    116
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "131.7 °F = 55.4; 240 °F = 115.6 °C ✓.",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_pg_fplDH2008, arch_pg_ukyKiln",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2, arch_pg_vanZoningUses",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Wood Products Manufacturing - Class B",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2, arch_pg_vanZoningUses",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "I-2, I-1C, FC-2 (O); I-3 (C)",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2, arch_pg_vanZoningUses",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_edmUseDefs register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Minor Industrial (our reading)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_edmUseDefs register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE (enclosed), IM",
+   "verdict": "UNSUPPORTED",
+   "evidence": "BE/IM zones are in arch_zon_EdmZones, not cited.",
+   "fix": "add arch_zon_EdmZones"
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "options[0]",
+   "value": {
+    "id": "dehumidification",
+    "name": "Dehumidification kiln",
+    "effect": "peak ~55 °C: within liquid-cooling heat (our reading)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "matches notes decisions and the program's cited sources",
+   "fix": ""
+  },
+  {
+   "field": "options[1]",
+   "value": {
+    "id": "conventional",
+    "name": "Conventional kiln",
+    "effect": "82–116 °C: needs heat-pump lift (our reading)"
+   },
+   "verdict": "WRONG",
+   "evidence": "Conventional hardwood kilns run below 82 °C (180 °F); 116 °C is high-temp southern pine.",
+   "fix": "'up to 82 °C (hardwood), 116 °C (high-temp softwood): needs lift (our reading)'"
+  },
+  {
+   "field": "social.serves",
+   "value": "none found",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "DC heat to wood-chip drying 30–35 °C (Sweden, funder page) [arch_pg_vinnovaDC2BD]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_vinnovaDC2BD register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "Class A sawmills and planing mills not listed in Van districts [arch_pg_vanZoningUses]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_vanZoningUses register text",
+   "fix": ""
+  }
+ ],
+ "public_ground": [
+  {
+   "field": "size.typical_m2",
+   "value": 930,
+   "verdict": "ARITHMETIC",
+   "evidence": "10,000 ft² = 929 m² ✓.",
+   "fix": ""
+  },
+  {
+   "field": "size.storeys_typ",
+   "value": 1,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_vplFmpSpace2018, van_zdb_i3 register text",
+   "fix": ""
+  },
+  {
+   "field": "size.floor_height_m",
+   "value": 6.0,
+   "verdict": "CONFIRMED",
+   "evidence": "I-3 3.1.2.9 sub-area A (zoning.md l. 39).",
+   "fix": "label I-3 only"
+  },
+  {
+   "field": "occ.group",
+   "value": "A-2",
+   "verdict": "CONFIRMED",
+   "evidence": "A-2 community halls, libraries, restaurants (arch_pub_nbcA3121). Note's '≤30 persons D (3.1.2.7)' has no register id.",
+   "fix": "cite arch_pub_nbcA3121; mark 3.1.2.7 '?'"
+  },
+  {
+   "field": "occ.sep_h_from_F2",
+   "value": 2,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_nbc3131, arch_wet_nbcA3121 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.kWh_m2_yr",
+   "value": [
+    20,
+    160
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_covEnergyTargets, arch_statcanSCIEU2019, arch_nrcanTrends2020 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_covEnergyTargets, arch_statcanSCIEU2019, arch_nrcanTrends2020",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "at grade",
+   "verdict": "CONFIRMED",
+   "evidence": "matches van_zdb_i3, arch_ezbLoad, arch_zon_EdmZones, arch_up_vanZDB10 register text",
+   "fix": ""
+  },
+  {
+   "field": "place.street_entrance",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "matches van_zdb_i3, arch_ezbLoad, arch_zon_EdmZones, arch_up_vanZDB10 register text",
+   "fix": ""
+  },
+  {
+   "field": "place.outside_wall",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "matches van_zdb_i3, arch_ezbLoad, arch_zon_EdmZones, arch_up_vanZDB10 register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "conditional",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Community Centre, Hall, Social Service Centre; Restaurant ≤300 m²; Artist Studio (O); Library not listed",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md l. 23–31.",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "I-2, I-3 (A), FC-2",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmZB20001_BE, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Community Service; Food and Drink Service; Indoor Sales and Service",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmZB20001_BE, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE only",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmZB20001_BE, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.cap_m2",
+   "value": 500,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmZB20001_BE, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "must near",
+    "with": "street",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_up_vanZDB10"
+    ],
+    "note": "each separate use's main entrance directly from a street (Van 10.21.1)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_up_vanZDB10: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "intakes",
+    "m": 4.5,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "own intakes ≥4.5 m from garbage and dumpsters"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "Table 6.3.2.9 garbage 4.5 m.",
+   "fix": "'with' should be garbage, not intakes"
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[4]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[5]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "library service: new point at 20,000 people with none within 4–5 km (Edm)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_eplPolicyB2002, arch_vplFmpSpace2018",
+   "fix": ""
+  },
+  {
+   "field": "social.catchment",
+   "value": "4–5 km (EPL)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_eplPolicyB2002, arch_vplFmpSpace2018",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Van I-2/I-3: 1.00 FSR for all non-industrial uses combined [van_zdb_i3]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches van_zdb_i3 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "Van: public amenity exclusion lesser of 20 % or 100 m² [van_zdb_i3]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches van_zdb_i3 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "Edm Community Service excludes libraries; Library not listed in Van I-districts [arch_edmCommunityServiceDef]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmCommunityServiceDef register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "Café garbage room ≈14 m² min., at grade by the truck stop (our arithmetic) [arch_svc_mvGarbageSpecs]",
+   "verdict": "ARITHMETIC",
+   "evidence": "0.0331 × 150 + 6.8 = 11.8 → model minimum 14 m² governs ✓.",
+   "fix": "label model spec (benchmark)"
+  }
+ ],
+ "winter_garden": [
+  {
+   "field": "occ.group",
+   "value": "A-2",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_nbcA3121, arch_pub_nbc3131full register text",
+   "fix": ""
+  },
+  {
+   "field": "occ.sep_h_from_F2",
+   "value": 2,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_nbcA3121, arch_pub_nbc3131full register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.setpoint_C",
+   "value": [
+    18,
+    20
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "Kew winter garden 20/18 °C.",
+   "fix": "label benchmark outside Canada (London)"
+  },
+  {
+   "field": "heat.supply_C",
+   "value": [
+    45,
+    49
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pg_ward2013Kew, arch_tmp_vanNEU2020, arch_tmp_edmDESS2025, arch_asabeEp406, arch_bcbcAppC, arch_pg_abClimateEdm register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.W_m2_peak",
+   "value": [
+    100,
+    185
+   ],
+   "verdict": "ARITHMETIC",
+   "evidence": "Same as conservatory: 100 / 185 ✓.",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_pg_ward2013Kew, arch_tmp_vanNEU2020, arch_tmp_edmDESS2025, arch_asabeEp406, arch_bcbcAppC, arch_pg_abClimateEdm",
+   "fix": ""
+  },
+  {
+   "field": "heat.lift_needed",
+   "value": false,
+   "verdict": "UNSUPPORTED",
+   "evidence": "lift=false is our reading; air-cooled DC heat ~25 °C needs a heat pump (arch_berenschotHK; greenhouse entry says so). Only liquid-cooled 45–60 °C might not.",
+   "fix": "null, or 'depends on DC cooling type'"
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_edmWinter2016 register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "conditional",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; arch_pub_vanSched",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Hall; Community Centre; Park or Playground",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; arch_pub_vanSched",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "I-3, FC-2 (Hall); I-2 (no Hall)",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; arch_pub_vanSched",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_edmZB register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Community Service (our reading)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_edmZB register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE only",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_edmZB register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.cap_m2",
+   "value": 500,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_edmZB register text",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "hall",
+    "m": null,
+    "hard": false,
+    "src": [
+     "arch_pub_edmWinter2016"
+    ],
+    "note": "minimum shade on winter spaces (guide); hall shadow side: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_pub_edmWinter2016: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[4]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "public, all",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_edmWinter2016",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Multi-storey atrium: interconnected floor space rules 3.2.8 [arch_pub_nbc3131full]",
+   "verdict": "UNSUPPORTED",
+   "evidence": "Register text of arch_pub_nbc3131full has no 3.2.8; prog_public.md l. 51 marks it 'not re-read ?'.",
+   "fix": "add '?'"
+  },
+  {
+   "field": "flags[1]",
+   "value": "Fan coils and make-up air need 65–70 °C: avoid or lift [arch_tmp_vanNEU2020]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_tmp_vanNEU2020 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "No Canadian code set point for non-residential spaces [arch_tmp_nbc62]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_tmp_nbc62 register text",
+   "fix": ""
+  }
+ ],
+ "covered_plaza": [
+  {
+   "field": "size.storeys_typ",
+   "value": 1,
+   "verdict": "UNSUPPORTED",
+   "evidence": "Plaza guide gives no storeys.",
+   "fix": "null"
+  },
+  {
+   "field": "occ.group",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_nbcDefs register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.supply_C",
+   "value": [
+    55,
+    55
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "55 °C mean fluid, ASHRAE ch. 51 Table 6 (prog_public.md l. 38); not in register text.",
+   "fix": "add to register text"
+  },
+  {
+   "field": "heat.W_m2_peak",
+   "value": [
+    630,
+    950
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "630–950 W/m² fluid heater (prog_public.md l. 37); register text shows only Seattle 420/647.",
+   "fix": "add to register text; label US data"
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with ashrae2015ch51",
+   "fix": ""
+  },
+  {
+   "field": "heat.lift_needed",
+   "value": false,
+   "verdict": "UNSUPPORTED",
+   "evidence": "'Can run on district return' is in no source.",
+   "fix": "null or 'our reading'"
+  },
+  {
+   "field": "place.grade",
+   "value": "at grade",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_vanPlazaDG register text",
+   "fix": ""
+  },
+  {
+   "field": "place.street_entrance",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_vanPlazaDG register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.note",
+   "value": "≤1.0 m above or below street; not screened from street",
+   "verdict": "UNSUPPORTED",
+   "evidence": "'Not screened from street' is not in the plaza guide text.",
+   "fix": "drop or label"
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "conditional",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; arch_pub_vanSched",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Park or Playground",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; arch_pub_vanSched",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "I-2, I-3, I-1C, FC-2",
+   "verdict": "CONFIRMED",
+   "evidence": "Park or Playground C in all four (prog_public.md l. 57–59); register text omits I-2, FC-2.",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "no plaza use (Special Event in BE, IM)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_edmZB register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE, IM ?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_edmZB register text",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "must near",
+    "with": "street",
+    "m": null,
+    "hard": false,
+    "src": [
+     "arch_pub_vanPlazaDG"
+    ],
+    "note": "plaza level close to the street (guide)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_pub_vanPlazaDG: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative discharge 3 m from occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": false,
+    "src": [
+     "arch_nbc6331"
+    ],
+    "note": "combustion vent 3 m from doors, windows, occupiable outdoor space; applies to gensets: our reading ?"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6331: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "public, all",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_vanPlazaDG",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Sun and wind shelter can feel 10 °C warmer [arch_pub_edmWinter2016]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_edmWinter2016 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "Snow-melt design data are US cities only [ashrae2015ch51]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches ashrae2015ch51 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "Overhead weather protection at waiting points and routes [arch_pub_vanPlazaDG]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_vanPlazaDG register text",
+   "fix": ""
+  }
+ ],
+ "warming_shelter": [
+  {
+   "field": "size.typical_m2",
+   "value": 56,
+   "verdict": "ARITHMETIC",
+   "evidence": "16 × 3.5 = 56 ✓. VBBL Part 13 uses 3.7 m²/bed (existing buildings only).",
+   "fix": ""
+  },
+  {
+   "field": "size.step",
+   "value": {
+    "unit": "guest",
+    "m2_per_unit": 3.5,
+    "units_typ": 16,
+    "units_min": null
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_vanWarm2021, arch_ahsReceptionCentres register text",
+   "fix": ""
+  },
+  {
+   "field": "occ.group",
+   "value": "A-2",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_nbcA3121, arch_pub_nbc3131full, arch_pub_nbcDefs register text",
+   "fix": ""
+  },
+  {
+   "field": "occ.sep_h_from_F2",
+   "value": 2,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_nbcA3121, arch_pub_nbc3131full, arch_pub_nbcDefs register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.setpoint_C",
+   "value": [
+    19,
+    22
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_ahsReceptionCentres register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_ahsReceptionCentres",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_up_vanZDB10 register text",
+   "fix": ""
+  },
+  {
+   "field": "place.street_entrance",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_up_vanZDB10 register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "conditional",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2, arch_ref_vanSec2SSC",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Social Service Centre (day); overnight: no listed use ?",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2, arch_ref_vanSec2SSC",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "I-2, I-3, I-1C, FC-2",
+   "verdict": "CONFIRMED",
+   "evidence": "Social Service Centre C in all four (zoning.md l. 23).",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmZB20001_BE, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Community Service (incl. shelters)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmZB20001_BE, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE only",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmZB20001_BE, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.cap_m2",
+   "value": 500,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_edmZB20001_BE, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "options[0]",
+   "value": {
+    "id": "day",
+    "name": "Day only",
+    "effect": "A-2; 2 h from F-2; can share the data-centre building"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "matches notes decisions and the program's cited sources",
+   "fix": ""
+  },
+  {
+   "field": "options[1]",
+   "value": {
+    "id": "overnight",
+    "name": "Overnight",
+    "effect": "Group C; one-suite limit in an F-2 building → separate building; Van: no listed use ?"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "matches notes decisions and the program's cited sources",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "people experiencing homelessness; welcoming to all",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_vanCold2023, arch_svc_edmC620",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Van staffing: 2 Community Services staff + 1 guard per centre [arch_pub_vanWarm2021]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_vanWarm2021 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "Activation: Van 'feels like −5 °C' (2021) / −4 °C (2023); Edm −20 °C 3+ days [arch_pub_vanCold2023]",
+   "verdict": "CONFIRMED",
+   "evidence": "Van −5 / −4 °C ✓.",
+   "fix": "Edm −20 °C is arch_edmExtremeWeather: add it"
+  },
+  {
+   "field": "flags[2]",
+   "value": "VBBL temporary shelter rules apply to existing buildings only [arch_ref_vbblPart13]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_ref_vbblPart13 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "Edm BE 500 m² cap: shelter exception conflict, adopted vs online [arch_zon_EdmZones]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmZones register text",
+   "fix": ""
+  }
+ ],
+ "gym": [
+  {
+   "field": "size.typical_m2",
+   "value": 372,
+   "verdict": "ARITHMETIC",
+   "evidence": "4,000 ft² = 371.6 m² ✓ (called undersized).",
+   "fix": ""
+  },
+  {
+   "field": "size.floor_height_m",
+   "value": 4.5,
+   "verdict": "CONFIRMED",
+   "evidence": "Bouldering wall ≤4.5 m (EN catalogue paraphrase, outside Canada). Wall height, not storey height.",
+   "fix": ""
+  },
+  {
+   "field": "occ.group",
+   "value": "A-2",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_nbcA3121, arch_pub_nbc3131full register text",
+   "fix": ""
+  },
+  {
+   "field": "occ.sep_h_from_F2",
+   "value": 2,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_nbcA3121, arch_pub_nbc3131full register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.setpoint_C",
+   "value": [
+    16,
+    20
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_tmp_dudzinska2021, arch_tmp_vanNEU2020, arch_tmp_edmDESS2025, arch_statcanSCIEU2019, arch_nrcanTrends2020 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.supply_C",
+   "value": [
+    45,
+    49
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_tmp_dudzinska2021, arch_tmp_vanNEU2020, arch_tmp_edmDESS2025, arch_statcanSCIEU2019, arch_nrcanTrends2020 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.kWh_m2_yr",
+   "value": [
+    168,
+    168
+   ],
+   "verdict": "ARITHMETIC",
+   "evidence": "1.07 GJ × 0.566 / 0.0036 = 168 ✓.",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_tmp_dudzinska2021, arch_tmp_vanNEU2020, arch_tmp_edmDESS2025, arch_statcanSCIEU2019, arch_nrcanTrends2020",
+   "fix": ""
+  },
+  {
+   "field": "heat.lift_needed",
+   "value": false,
+   "verdict": "UNSUPPORTED",
+   "evidence": "lift=false is our reading; air-cooled DC heat ~25 °C needs a heat pump (arch_berenschotHK; greenhouse entry says so). Only liquid-cooled 45–60 °C might not.",
+   "fix": "null, or 'depends on DC cooling type'"
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "conditional",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; arch_pub_vanSched, arch_pub_vanS2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Fitness Centre (Class 1 ≤200 m², Class 2 >200 m²)",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; arch_pub_vanSched, arch_pub_vanS2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "I-3, I-1C, FC-2 (not I-2)",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; arch_pub_vanSched, arch_pub_vanS2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_edmZB register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Minor Indoor Entertainment",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_edmZB register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE (MU also)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_edmZB register text",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "indoor recreation within 5 km (Edm); gym space at a premium (Van)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_svc_edmRecApproach2018, arch_pub_vanPlayFac2018",
+   "fix": ""
+  },
+  {
+   "field": "social.catchment",
+   "value": "5 km (Edm)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_svc_edmRecApproach2018, arch_pub_vanPlayFac2018",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Van: public fitness amenity excluded from floor area up to 100 m² [van_zdb_i3]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches van_zdb_i3 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "Boulder impact area kept clear of obstructions [arch_pub_ifsc2025]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_ifsc2025 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "No gym row in occupant load table: AHJ [arch_pub_nbc31171]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_nbc31171 register text",
+   "fix": ""
+  }
+ ],
+ "ev_hub": [
+  {
+   "field": "size.step",
+   "value": {
+    "unit": "stall",
+    "m2_per_unit": 22,
+    "units_typ": null,
+    "units_min": null
+   },
+   "verdict": "ARITHMETIC",
+   "evidence": "2.5 × (5.5 + 6.6/2) = 22.0 ✓.",
+   "fix": ""
+  },
+  {
+   "field": "occ.group",
+   "value": "F-3",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_nbcA3121, arch_pub_nbc3131full register text",
+   "fix": ""
+  },
+  {
+   "field": "occ.sep_h_from_F2",
+   "value": 1.5,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_nbcA3121, arch_pub_nbc3131full register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "electricity",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_pub_nrcanEV2024, arch_pub_vanEV2021",
+   "fix": ""
+  },
+  {
+   "field": "heat.note",
+   "value": "electric load: L2 ≤7.2 kW, DCFC 25–400 kW per port (avg 125 kW 2025)",
+   "verdict": "ARITHMETIC",
+   "evidence": "L2 240 V × 30 A = 7.2 kW ✓; DCFC 25–400 kW (Van), avg 125 kW (NRCan).",
+   "fix": "label 7.2 kW our arithmetic"
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "conditional",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; arch_pub_vanS2, arch_pub_vanSched",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Parking Uses (may include retail sale of electricity)",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; arch_pub_vanS2, arch_pub_vanSched",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "I-2, I-3, I-1C, FC-2",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; arch_pub_vanS2, arch_pub_vanSched",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "no EV use (Vehicle Support Service ?)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_edmZB, arch_zon_Edm720 register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE, IM",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_edmZB, arch_zon_Edm720 register text",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "intakes",
+    "m": 1.5,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intakes ≥1.5 m from a parking space, 4.5 m from garage entry"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "drivers without home charging (dense apartments)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_edmEVstudy, arch_pub_nrcanEV2024",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Grid: pick sites where capacity upgrades are minimized (EPCOR) [arch_pub_edmEVstudy]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_edmEVstudy register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "Garage to stairs serving other floors through a vestibule [arch_pub_nbcDefs]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_nbcDefs register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "Canada 2030: one public port per 21 EVs [arch_pub_nrcanEV2024]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_pub_nrcanEV2024 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "Van I-3: gasoline station only in sub-area B, not with data [arch_pub_vanSched]",
+   "verdict": "CONFIRMED",
+   "evidence": "'only in sub-area B' (vanSched); data only in sub-area A (zoning.md l. 10).",
+   "fix": "add van_zdb_i3"
+  }
+ ],
+ "clinic": [
+  {
+   "field": "size.typical_m2",
+   "value": 767,
+   "verdict": "ARITHMETIC",
+   "evidence": "Median of 490, 604, 930, 931 = 767 ✓.",
+   "fix": ""
+  },
+  {
+   "field": "size.step",
+   "value": {
+    "unit": "exam room",
+    "m2_per_unit": 17.3,
+    "units_typ": 13,
+    "units_min": null
+   },
+   "verdict": "ARITHMETIC",
+   "evidence": "12.0 × 1.44 = 17.28 ✓; 13 rooms (North Van).",
+   "fix": ""
+  },
+  {
+   "field": "occ.group",
+   "value": "D",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_hsg_nbcOcc, arch_hsg_nbc3131D register text",
+   "fix": ""
+  },
+  {
+   "field": "occ.sep_h_from_F2",
+   "value": 0,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_hsg_nbcOcc, arch_hsg_nbc3131D register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.supply_C",
+   "value": [
+    45,
+    70
+   ],
+   "verdict": "UNSUPPORTED",
+   "evidence": "neuConnect gives 60 °C building supply; 45 radiant / 70 fan coil are arch_tmp_vanNEU2020.",
+   "fix": "cite arch_tmp_vanNEU2020"
+  },
+  {
+   "field": "heat.kWh_m2_yr",
+   "value": [
+    20,
+    30
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "VBBL Table 10.2.2.5 D TEDI 20; LCES 30.",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_hsg_vbblZEBP, neuConnect",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "not at grade",
+   "verdict": "WRONG",
+   "evidence": "Ground-floor bar is only in I-3 and FC-2; I-2, I-1C, Edmonton have none.",
+   "fix": "'?' (district-dependent); keep the note"
+  },
+  {
+   "field": "place.public",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "conditional",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Health Care Office",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "I-2 (office ≤235 m² or 33.3 %), I-3 (A), I-1C, FC-2 (A, E)",
+   "verdict": "CONFIRMED",
+   "evidence": "prog_housing.md l. 43–46.",
+   "fix": "I-2 cap is 'the greater of 235 m² or 33.3 %' (office combined)"
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmZones, arch_zon_EdmDefs register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Health Service",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmZones, arch_zon_EdmDefs register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE (MU also)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmZones, arch_zon_EdmDefs register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.cap_m2",
+   "value": 500,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmZones, arch_zon_EdmDefs register text",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "unattached patients; e.g. North Shore UPCC catchment ≈69,000",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_hsg_vchUpccNV",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Not a Metro Van sensitive receptor (our reading) [arch_mv1329]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_mv1329 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "Health-care HVAC to CSA Z317.2 (paywalled) [arch_adj_csaZ3172]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_adj_csaZ3172 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "Edm 500 m² cap below 3 of 4 BC examples: variance [arch_zon_EdmZones]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmZones register text",
+   "fix": ""
+  }
+ ],
+ "community_kitchen": [
+  {
+   "field": "occ.group",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_hsg_nbcOcc, arch_hsg_nbc3131D register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.supply_C",
+   "value": [
+    60,
+    71
+   ],
+   "verdict": "UNSUPPORTED",
+   "evidence": "neuConnect 60 °C is space-heating supply, not DHW; IH 60 °C is hot holding. 71 °C rinse ✓.",
+   "fix": "cite DHW 60 °C from arch_tmp_edmDESS2025 or relabel"
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with neuConnect, arch_hsg_ihFoodPlans2026",
+   "fix": ""
+  },
+  {
+   "field": "heat.lift_needed",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "matches neuConnect, arch_hsg_ihFoodPlans2026 register text",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2, van3575s2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Catering Establishment",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; van_zdb_i2, van_zdb_i3, van_zdb_i1c, van_zdb_fc2, van3575s2",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "I-2, I-1C, FC-2 (O); I-3 (C)",
+   "verdict": "CONFIRMED",
+   "evidence": "Catering: I-2 O, I-3 C, I-1C O, FC-2 O (prog_housing.md l. 145).",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_zon_EdmDefs, arch_zon_EdmZones register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Custom Manufacturing (commercial kitchens)",
+   "verdict": "UNSUPPORTED",
+   "evidence": "'Custom Manufacturing' / 'commercial kitchens' is not in the register text of arch_zon_EdmDefs or arch_zon_EdmZones; only prog_housing.md l. 146.",
+   "fix": "add clause text to register, or mark '?'"
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE (enclosed), IM",
+   "verdict": "UNSUPPORTED",
+   "evidence": "Same: BE 3.6.1, IM 2.6 not in register text.",
+   "fix": "as above"
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "intakes",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "kitchen exhaust ≥3.0 m from any outdoor air intake"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[1]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 30,
+    "hard": false,
+    "src": [
+     "arch_adj_abFoodCode"
+    ],
+    "note": "AB: 30 m from contamination sources recommended; generators count: our reading ?"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_adj_abFoodCode: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[2]",
+   "value": {
+    "rule": "keep apart",
+    "with": "loading",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "outdoor air intake ≥7.6 m from truck dock (Table 6.3.2.9)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[3]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": 3.0,
+    "hard": true,
+    "src": [
+     "arch_nbc6329"
+    ],
+    "note": "intake ≥3.0 m from a combustion vent; genset stack as vent: our reading"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc6329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[4]",
+   "value": {
+    "rule": "keep apart",
+    "with": "generators",
+    "m": null,
+    "hard": true,
+    "src": [
+     "arch_mv1329"
+    ],
+    "note": "Metro Van s. 13: no stack exhaust drawn into openings or intakes (no distance; Vancouver only)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_mv1329: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "adj[5]",
+   "value": {
+    "rule": "keep apart",
+    "with": "chillers",
+    "m": 7.6,
+    "hard": true,
+    "src": [
+     "arch_nbc63215"
+    ],
+    "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_nbc63215: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "options[0]",
+   "value": {
+    "id": "teaching",
+    "name": "Teaching / community kitchen",
+    "effect": "A-2; 2 h from F-2"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "matches notes decisions and the program's cited sources",
+   "fix": ""
+  },
+  {
+   "field": "options[1]",
+   "value": {
+    "id": "production",
+    "name": "Production / catering kitchen",
+    "effect": "F-3 or D (our reading); none from F-2"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "matches notes decisions and the program's cited sources",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "food access (no distance standard)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_svc_vanFoodStrategy2013, arch_svc_edmFresh",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Van: VCH permit decides whether it can serve the public [arch_hsg_vanKitchenDG2018]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_hsg_vanKitchenDG2018 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "BC: plans approved by a health officer; no direct access to living quarters [arch_adj_bcFPR]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_adj_bcFPR register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "Edm: plans reviewed through Planning & Development [arch_hsg_ahsFoodEdm2019]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_hsg_ahsFoodEdm2019 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "AB: no food storage in mechanical rooms [arch_adj_abFoodCode]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_adj_abFoodCode register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[4]",
+   "value": "Make-up air tempered to indoor design temperature [arch_hsg_nbc6316]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_hsg_nbc6316 register text",
+   "fix": ""
+  }
+ ],
+ "heat_plant": [
+  {
+   "field": "size.step",
+   "value": {
+    "unit": "MW",
+    "m2_per_unit": 44,
+    "units_typ": null,
+    "units_min": null
+   },
+   "verdict": "ARITHMETIC",
+   "evidence": "2,000 / 45 = 44.4; 1,858 / 45 = 41.3 ✓ (boilers only).",
+   "fix": ""
+  },
+  {
+   "field": "occ.group",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_nbc3628 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.supply_C",
+   "value": [
+    10,
+    95
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "65–95 °C NEU (sys.md l. 25); register text holds it under arch_tmp_vanNEU2020. 10–25 °C Blatchford claim.",
+   "fix": "add arch_tmp_vanNEU2020"
+  },
+  {
+   "field": "heat.uses",
+   "value": "heat",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_ho_vanNEUconn2020, arch_sys_breIdea2021",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_ho_breMultiUnit2025 register text",
+   "fix": ""
+  },
+  {
+   "field": "place.outside_wall",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_ho_breMultiUnit2025 register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "Public Utility (private centre counts ?)",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; arch_sys_vanI2Utility",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "I-2 outright ≥61 m from R district, else C",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; arch_sys_vanI2Utility",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.status",
+   "value": "permitted",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_edmUtilityUses register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "Minor Utility (district heating plants)",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_edmUtilityUses register text",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "BE, IM, IH",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_edmUtilityUses register text",
+   "fix": ""
+  },
+  {
+   "field": "options[0]",
+   "value": {
+    "id": "van_neu",
+    "name": "Join a hot network (Vancouver NEU)",
+    "effect": "supply ≥65 °C: data-centre heat needs a heat pump (our reading)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "matches notes decisions and the program's cited sources",
+   "fix": ""
+  },
+  {
+   "field": "options[1]",
+   "value": {
+    "id": "ambient_loop",
+    "name": "Grow an ambient loop (Blatchford type)",
+    "effect": "loop 10–25 °C: heat enters without lift; heat pumps in each ETS (our reading)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "matches notes decisions and the program's cited sources",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "buildings on the network; no catchment standard",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_neuSlides2021",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "NEU may accept waste heat from customer cooling loads, with bill credit [arch_ho_vanNEUconn2020]",
+   "verdict": "UNSUPPORTED",
+   "evidence": "Waste-heat bill credit is in neuConnect (2026), not arch_ho_vanNEUconn2020.",
+   "fix": "cite neuConnect"
+  },
+  {
+   "field": "flags[1]",
+   "value": "Van ETS room min 6 × 3 m (<13,940 m² floor), 6 × 4 m to 23,230 m² [arch_ho_vanNEUconn2020]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_ho_vanNEUconn2020 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "Blatchford ETS 12–55 m² by units; card-reader door [arch_ho_breMultiUnit2025]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_ho_breMultiUnit2025 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "Edm cooling plants are Major Utility: IH only; blocks abutting childcare [arch_ezb640]",
+   "verdict": "CONFIRMED",
+   "evidence": "Major Utility in IH and PU (arch_sys_edmUtilityUses); childcare 6.40 1.2.",
+   "fix": "'IH or PU'"
+  },
+  {
+   "field": "flags[4]",
+   "value": "Installed 48–58 W per m² served, incl. backup boilers (our arithmetic) [arch_sys_neuSlides2021]",
+   "verdict": "ARITHMETIC",
+   "evidence": "UBC 45 MW / 929,000 m² = 48 ✓; NEU 32.2 MW / 576,000 m² = 56 ✓. 58 rests on an assumed 2025 plant (sys.md l. 31 '?'); the 5 MW Mount Pleasant boiler may sit inside the 24 MW.",
+   "fix": "'48–56 W/m² (58 ?)'; add arch_sys_ubcAdes2019"
+  },
+  {
+   "field": "flags[5]",
+   "value": "Ammonia or refrigerant plant room to CSA B52 (paywalled) [arch_nbc3628]",
+   "verdict": "UNSUPPORTED",
+   "evidence": "arch_nbc3628 text has no B52 or ammonia; sys.md l. 47 gives no id.",
+   "fix": "cite the 6.2.1.5 source (adj_service.md) or drop the id"
+  },
+  {
+   "field": "flags[6]",
+   "value": "Van energy-centre guidelines: traffic, noise, odour (not verified) [arch_sys_vanNES2012]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_vanNES2012 register text",
+   "fix": ""
+  }
+ ],
+ "roof_solar": [
+  {
+   "field": "size.max_m2",
+   "value": 2116,
+   "verdict": "WRONG",
+   "evidence": "46 × 46 = 2,116 m² is FM's cap per array; more arrays allowed with 1.2 m aisles.",
+   "fix": "null; keep 2,116 m² per array in a flag"
+  },
+  {
+   "field": "occ.group",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "electricity",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with no src",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "roof ok",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_vanPvCriteria register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.note",
+   "value": "row spacing ≈3.2× (Van) / 4.3× (Edm) row height at noon winter solstice: our arithmetic, geometry",
+   "verdict": "ARITHMETIC",
+   "evidence": "Noon solstice altitude Van 90 − 49.25 − 23.44 = 17.3° → 3.2×; Edm 13.0° → 4.3× ✓.",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "not researched; flat roof needs a full building permit",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; arch_vanPvCriteria",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "not researched",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "none",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Van simple permit: panels ≥0.6 m from roof perimeter or peak [arch_vanPvCriteria]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_vanPvCriteria register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "AB gov projects: 3 m perimeter, 1.2 m between rows [arch_abInfraPv2017]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_abInfraPv2017 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "Rapid shutdown initiator within sight and 9 m of array or at roof access [arch_vanPvBulletin2021]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_vanPvBulletin2021 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "No BCBC/VBBL firefighter pathway clause for PV [arch_vanCouncil2022]",
+   "verdict": "CONFIRMED",
+   "evidence": "Motion asks for standards.",
+   "fix": "register: 'no standard then' is our inference (?)"
+  },
+  {
+   "field": "flags[4]",
+   "value": "FM 1-15: 1.2 m aisles between arrays [arch_sec2_fm115]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sec2_fm115 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[5]",
+   "value": "US benchmark: 6 ft perimeter, 4 ft if an axis ≤250 ft [arch_mnIfc1204]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_mnIfc1204 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[6]",
+   "value": "Roof access >3 storeys: stair or 550 × 900 mm hatch [arch_sec_nbcRoof]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sec_nbcRoof register text",
+   "fix": ""
+  }
+ ],
+ "facade_solar": [
+  {
+   "field": "size.storeys_typ",
+   "value": 3,
+   "verdict": "WRONG",
+   "evidence": "3 storeys is the 3.1.5.5 limit without sprinklers, not a typical value.",
+   "fix": "null; limit stays in flag"
+  },
+  {
+   "field": "occ.group",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "electricity",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with no src",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "any",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sec2_nbc3155 register text",
+   "fix": ""
+  },
+  {
+   "field": "place.outside_wall",
+   "value": true,
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sec2_nbc3155 register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.use",
+   "value": "not researched; wall-mounted needs a full building permit",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; arch_vanPvCriteria",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.use",
+   "value": "not researched",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "none",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Combustible cladding: sprinklered (or ≤3 storeys) and CAN/ULC-S134 full-wall test [arch_sec2_nbc3155]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sec2_nbc3155 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "FM 1-57: FM Approved BIPV only; glass-glass counts as combustible [arch_up_fm0157]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_up_fm0157 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "FM tests: fire reached the top on 3 of 4 double-glass systems [arch_sec2_fmBipv2025]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sec2_fmBipv2025 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "Flagged option, not a default (needs a tested assembly) [arch_up_fm0157]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_up_fm0157 register text",
+   "fix": ""
+  }
+ ],
+ "river_cooling": [
+  {
+   "field": "size.note",
+   "value": "our arithmetic: ≈21 kW per L/s at ΔT 5 K (≈48 L/s per MW); intake screen ≈0.9 m² per MW",
+   "verdict": "ARITHMETIC",
+   "evidence": "4.186 × 5 = 20.9 kW per L/s; 1,000 / 20.9 = 48 L/s; 0.048 / 0.055 = 0.87 m² ✓. ΔT 5 K is unsourced; at 0.035 m/s (Table C-1) 1.37 m²/MW; DFO says may not apply to large intakes.",
+   "fix": "label ΔT '?'; show both velocities"
+  },
+  {
+   "field": "occ.group",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "cooling",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_sys_bcWqgTemp",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "zoning.van.districts",
+   "value": "waterfront lots only",
+   "verdict": "CONFIRMED",
+   "evidence": "zoning.md §1 / prog md tables; no src",
+   "fix": ""
+  },
+  {
+   "field": "zoning.edm.zones",
+   "value": "waterfront lots only",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "none",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Discharge: ±1 °C from background, ≤0.5 °C per hour (BC marine) [arch_sys_bcWqgTemp]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_bcWqgTemp register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "Heated water can be a deleterious substance (Fisheries Act) [arch_sys_fishAct]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_fishAct register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "HADD needs Minister's authorization; DFO review [arch_sys_dfoReview]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_dfoReview register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "Intake screen approach ≤0.055 m/s, 2.54 mm openings [arch_sys_dfoScreen]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_dfoScreen register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[4]",
+   "value": "BC water licence: cooling is an industrial purpose [arch_sys_bcWSReg]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_bcWSReg register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[5]",
+   "value": "Port PER permit on Burrard Inlet / Fraser: 60–120 business days [arch_sys_vfpaPER]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_vfpaPER register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[6]",
+   "value": "AB: Water Act licence to divert and use water [arch_sys_abWaterLic]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_abWaterLic register text",
+   "fix": ""
+  }
+ ],
+ "borefield": [
+  {
+   "field": "size.step",
+   "value": {
+    "unit": "bore",
+    "m2_per_unit": 36,
+    "units_typ": null,
+    "units_min": null
+   },
+   "verdict": "ARITHMETIC",
+   "evidence": "6 × 6 = 36 ✓.",
+   "fix": "label MCS (UK) and ORNL ~100 m depth (US) as benchmarks"
+  },
+  {
+   "field": "occ.group",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.supply_C",
+   "value": [
+    0,
+    35
+   ],
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_ahmadfard2019 register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "cooling",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_sys_ahmadfard2019",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches abDirective register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.note",
+   "value": "AB setbacks: 1 m buildings, 3 m property line",
+   "verdict": "CONFIRMED",
+   "evidence": "Directive Table 4 (sys.md l. 14, 101); abDirective register text is a title only.",
+   "fix": "add Table 4 text to register"
+  },
+  {
+   "field": "social.serves",
+   "value": "none",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "AB vertical loop setbacks: 1 m buildings, 3 m property line, 15 m water wells [abDirective]",
+   "verdict": "CONFIRMED",
+   "evidence": "As above: 1 m, 3 m, 15 m.",
+   "fix": "as above"
+  },
+  {
+   "field": "flags[1]",
+   "value": "BC: registered geoexchange driller; seal full length; report within 90 days [arch_sys_bcGWPR]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_bcGWPR register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "BC: no closed-loop setback in the regulation; CSA C448 paywalled [arch_sys_bcGWPR]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_bcGWPR register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "AB: Approval to Drill; certified Earth Loop Technician [arch_sys_abGwPage]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_abGwPage register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[4]",
+   "value": "Van: artesian risk over large aquifer areas [arch_sys_vanArtesian]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_vanArtesian register text",
+   "fix": ""
+  }
+ ],
+ "rain_tank": [
+  {
+   "field": "size.min_m2",
+   "value": 7.5,
+   "verdict": "UNSUPPORTED",
+   "evidence": "7.5–12.5 m² is arch_sys_vanRain2024 p. 6 (not cited), for small-site detention, not a harvest-tank minimum.",
+   "fix": "null, or cite arch_sys_vanRain2024 as a small-site example"
+  },
+  {
+   "field": "size.note",
+   "value": "net yield ≈0.90 m³ (Van) / 0.26 m³ (Edm) per m² roof per year (our arithmetic); small-site tank 7.5–12.5 m², ~1.5 m deep",
+   "verdict": "ARITHMETIC",
+   "evidence": "1,119.2 × 0.8 = 0.895; 329.3 × 0.8 = 0.263 m³/m² ✓. No first-flush or 1.5 mm wetting loss taken off.",
+   "fix": "say gross of first-flush"
+  },
+  {
+   "field": "occ.group",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src register text",
+   "fix": ""
+  },
+  {
+   "field": "heat.uses",
+   "value": "cooling",
+   "verdict": "CONFIRMED",
+   "evidence": "consistent with arch_sys_vbblRain",
+   "fix": ""
+  },
+  {
+   "field": "place.grade",
+   "value": "?",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_abRwh2010 register text",
+   "fix": ""
+  },
+  {
+   "field": "place.public",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "place.inside_secure",
+   "value": false,
+   "verdict": "CONFIRMED",
+   "evidence": "design default (notes: secure line, public programs outside)",
+   "fix": ""
+  },
+  {
+   "field": "adj[0]",
+   "value": {
+    "rule": "keep apart",
+    "with": "hall",
+    "m": null,
+    "hard": false,
+    "src": [
+     "arch_sys_vbblRain"
+    ],
+    "note": "keep stored water <20 °C: away from data-centre heat (our reading)"
+   },
+   "verdict": "CONFIRMED",
+   "evidence": "arch_sys_vbblRain: distance and rule as quoted in register",
+   "fix": ""
+  },
+  {
+   "field": "social.serves",
+   "value": "none",
+   "verdict": "CONFIRMED",
+   "evidence": "matches no src",
+   "fix": ""
+  },
+  {
+   "field": "flags[0]",
+   "value": "Van: water <20 °C, monitored; Legionella <10 CFU/mL [arch_sys_vbblRain]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_vbblRain register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[1]",
+   "value": "Van: least rain in Jul–Aug, the peak cooling months [arch_sys_ecccVan]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_ecccVan register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[2]",
+   "value": "AB: only toilets, urinals, subsurface irrigation; other uses need an alternative solution [arch_sys_abReuse2021]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_abReuse2021 register text",
+   "fix": ""
+  },
+  {
+   "field": "flags[3]",
+   "value": "Van: no road runoff; P.Eng. design; operating permit [arch_sys_vbblRain]",
+   "verdict": "CONFIRMED",
+   "evidence": "matches arch_sys_vbblRain register text",
+   "fix": ""
+  }
+ ]
+}

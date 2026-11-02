@@ -112,6 +112,11 @@ T = {
  'snowmelt_area': (R, 'neighbours public', 'sidewalks kept clear by its heat'), 'backup_neighbours': (R, 'neighbours public', 'power for neighbours in a blackout'),
  'grid_refund': (C, 'utility ratepayers neighbours', 'first payer refunded when neighbours connect'), 'community_solar': (R, 'neighbours', "bill credits from solar on neighbours' roofs"),
  'fire_water': (R, 'neighbours public city', 'firefighting water after an earthquake'),
+ # Architecture mode (2 Nov 2026): shown only in the Architecture template
+ 'arch_program_catalogue': ('arch_only', 'host city neighbours', 'the programs a site could hold'), 'arch_placement': ('arch_only', 'host neighbours', 'where each program is drawn'),
+ 'arch_space_budget': ('arch_only', 'host city', 'the floor the programs share'), 'arch_heat_budget': ('arch_only', 'receiver host', 'the heat the programs share'),
+ 'arch_heat_lift': ('arch_only', 'receiver', 'whether a program can take the heat directly'), 'arch_secure_line': ('arch_only', 'operator neighbours', 'where the locked part ends'),
+ 'arch_rules': ('arch_only', 'city neighbours', 'the rules an arrangement passes or fails'), 'arch_compare': ('arch_only', 'host city neighbours', 'arrangements side by side'),
 }
 ids = [n['id'] for n in D['nodes']]
 # 2 Nov 2026 fix pass: A-eng (engineering only, J.B. triage 30 Oct): hvo_swap, clean_power_price, greywater_neighbours set to F above
@@ -124,11 +129,13 @@ parties = {p['id'] for p in D['parties']}
 for k, (t, p, r) in T.items():
     for q in p.split():
         assert q in parties, (k, q)
-rank = {R: 0, C: 1, F: 2}
+rank = {R: 0, C: 1, F: 2, 'arch_only': 9}
+shows = lambda nt, tid: (nt == 'arch_only' or rank[nt] <= 1) if tid == 'arch' else rank[nt] <= rank[tid]
 out = {'date': '2026-10-19', 'status': 'draft: judged by Claude from each node\'s meaning; no user testing yet; sensitivity test to follow',
        'tiers': [{'id': 'resident', 'short': 'Everyday', 'name': 'What it means for me', 'who': 'residents and other laypeople', 'asks': 'where, and maybe how big; other answers assumed, shown and changeable'},
                  {'id': 'community', 'short': 'Civic', 'name': 'What it means for the neighbourhood', 'who': 'councillors, community groups, receivers, policy planners', 'asks': 'every setup question'},
-                 {'id': 'full', 'short': 'Technical', 'name': 'How it is worked out', 'who': 'engineers, architects, bylaw professionals', 'asks': 'every setup question'}],
+                 {'id': 'full', 'short': 'Engineering', 'name': 'How it is worked out', 'who': 'engineers, bylaw professionals', 'asks': 'every setup question'},
+                 {'id': 'arch', 'short': 'Architecture', 'name': 'What it could hold', 'who': 'architects and designers', 'asks': 'every setup question; then programs, arrangement, comparison'}],
        'rule': 'every node runs in every tier; a tier sets what is asked and shown; facts are never switched off',
        'nodes': {k: {'tier': t, 'parties': p.split(), 'why': r} for k, (t, p, r) in T.items()}}
 # the report each template gets (J.B. 20 Oct 2026: "3 different reports for each of the templates, and this should be diagrammed in the template").
@@ -149,6 +156,7 @@ PAGES = [
  ('sources', R, 'Sources', 'as text'),
 ]
 out['reports'] = {tid: [{'id': i, 'title': t, 'what': w} for i, r, t, w in PAGES if rank[r] <= rank[tid]] for tid in ('resident', 'community', 'full')}
+out['reports']['arch'] = [{'id': i, 'title': t, 'what': w} for i, r, t, w in PAGES if i in ('cover', 'fits', 'flows', 'heat', 'sources')]  # 2 Nov 2026; an arrangements page comes with the report work
 # sensitivity test (step 7, 20 Oct 2026; audit/sensitivity_2026-10-20.md). J.B.'s rule: when a part a template hides moves a result it shows by 25% or
 # more (or 3 dB of sound), the card names that part in plain words as what most of the range comes from; 10–25% is listed as also behind the range;
 # under 10% nothing is said. Plain names drafted by Claude for J.B. to check.
@@ -182,8 +190,8 @@ _D = json.load(open(os.path.join(H, 'diagram_data.json')))
 out['graph'] = {'stages': [[s['id'], s['name']] for s in _D['stages']],
                 'nodes': [[n['id'], n['stage']] for n in _D['nodes']],
                 'edges': [[e['from'], e['to']] for e in _D['edges']]}
-for tid in ('resident', 'community', 'full'):
-    out[tid + '_count'] = sum(1 for v in T.values() if rank[v[0]] <= rank[tid])
+for tid in ('resident', 'community', 'full', 'arch'):
+    out[tid + '_count'] = sum(1 for v in T.values() if shows(v[0], tid))
 # node details for the tool's logic panel (step 3, 20 Oct 2026): what each part is, how it is worked out, how sure, from what
 def _cut(t, n):
     t = (t or '').strip()
@@ -202,4 +210,4 @@ for on, rows in out_drivers['by_result'].items():
             out['nodes'][pn]['sens'] = (out['nodes'][pn].get('sens', '') + ('; ' if out['nodes'][pn].get('sens') else '') + t)
 for path in (os.path.join(H, 'templates.json'), os.path.join(H, '..', 'tool', 'templates.json')):
     json.dump(out, open(path, 'w'), ensure_ascii=False, indent=1)
-print({k: out[k + '_count'] for k in ('resident', 'community', 'full')})
+print({k: out[k + '_count'] for k in ('resident', 'community', 'full', 'arch')})

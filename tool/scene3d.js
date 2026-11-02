@@ -150,7 +150,7 @@ function buildSite(site,opt){
   sc.add(buildNeighbours(site));
   const dc=new T.Group(); state.dc=dc; sc.add(dc);
   // the lot, the setbacks, loading, plant yard
-  if(M&&M.ring) dc.add(ringLine(M.ring,0.35,C.acc,false,1));
+  if(M&&M.ring){ state.lotL=ringLine(M.ring,0.35,C.acc,false,1); dc.add(state.lotL); }
   if(M&&M.inset&&!M.existing) dc.add(ringLine(BD.geo.clip(M.ring,M.inset),0.3,C.grey,1.5,0.5));
   if(M&&M.loading){ dc.add(ringLine(M.loading,0.3,C.mat,2,0.8)); (M.loadSpaces||[]).forEach(r=>dc.add(ringLine(r,0.32,C.mat,false,0.7))); }
   if(M&&M.plant&&M.plant.yard) dc.add(ringLine(BD.geo.clip(M.ring,M.plant.yard),0.3,C.grey,2,0.6));
@@ -161,7 +161,7 @@ function buildSite(site,opt){
   else if(M&&M.foot&&M.footArea>5){ foot=M.foot; roof=M.H; const nF=M.nF[0];
     // equipment only (J.B., 16 Oct: "its not a massing tool"): no building; the floor the servers need is a flat outline, any shape
     // the building as a dashed, see-through envelope (J.B., 28 Oct 2026): the form is not prescribed; the equipment is shown
-    dc.add(envelope(foot,M.H,nF)); const sf=M.serverFoot||foot; dc.add(ringLine(sf,0.25,C.acc,2,0.9)); foot=sf;
+    state.envG=envelope(foot,M.H,nF); dc.add(state.envG); const sf=M.serverFoot||foot; state.sfL=ringLine(sf,0.25,C.acc,2,0.9); dc.add(state.sfL); foot=sf;
     roof=M.H; state.envelope=true; state.hallZ=0.3; }
   else if(sel.pt){ foot=new Float64Array(circlePts(sel.pt[0],sel.pt[1],25,0,8).flatMap(v=>[v.x+site.c[0],-v.z+site.c[1]])); roof=18; dc.add(prism(foot,roof,0,0x221d1e,C.acc,1)); }
   state.foot=foot; state.roof=roof;
@@ -355,7 +355,15 @@ function social(d){ plantLabels(C.senses); baseLabels();
   key(sw(C.bad,'over its night limit even with the quieter unit rating')+sw(C.acc,'over only with the louder rating')+sw(C.senses,'standoff; sound distance',true)+(d.sight&&d.sight.length?sw(C.senses,'sight line: cooling plant seen from a home or the street')+sw(C.faint,'sight line blocked',true):'')); }
 function opp(d){ baseLabels(); (d.boxes||[]).forEach(b=>{ R.ov.add(prism(b.ring,Math.max(0.1,b.h),b.base||0,0x26292e,C.acc,0.85,b.h>1?0.25:0.6)); if(b.label){ const c=BD.centroid(b.ring); label(b.label,V(c[0],c[1],(b.base||0)+b.h+10),'#e39a93',{prio:9,from:V(c[0],c[1],(b.base||0)+b.h)}); } });
   note((d.note?d.note+' ':'What this opportunity would occupy on this site, drawn generically. ')+heightsNote()+'.'); key(sw(C.acc,'the opportunity, generic')+sw(C.edge,'plant')); }
-const FN={model,heat,energy,water,materials,social,opp};
+function arch(d){ /* Architecture mode (2 Nov 2026): the hall and each program as simple boxes; explode pulls storeys apart with dashed drop lines; selected or flagged in red; the secure line dashed on the ground */
+  if(state.envG) state.envG.visible=false; if(state.racks&&state.racks.obj) state.racks.obj.visible=false; plantLabels();
+  const gap=d.explode?14:0, top=Math.max(0,...(d.boxes||[]).filter(b=>typeof b.level==='number').map(b=>b.level)), lift=b=>typeof b.level==='number'?b.level*gap:(b.level==='roof'||String(b.level).startsWith('top'))?(top+1+(+String(b.level).replace(/\D/g,'')||0))*gap:0;
+  (d.boxes||[]).forEach(b=>{ const z=b.base+lift(b), col=b.bad||b.sel?C.acc:b.hall?C.grey:C.edge; R.ov.add(prism(b.ring,Math.max(0.2,b.h),z,b.hall?0x2a2d31:0x26292e,col,b.bad||b.sel?1:0.8,b.hall?0.55:0.35));
+    if(gap&&lift(b)>0){ for(let i=0;i<b.ring.length;i+=2) R.ov.add(line([V(b.ring[i],b.ring[i+1],b.base),V(b.ring[i],b.ring[i+1],z)],C.faint,1.2,0.6)); }
+    if(b.label){ const c=BD.centroid(b.ring); label(b.label,V(c[0],c[1],z+b.h+6),b.bad||b.sel?'#e39a93':'#c8c2b8',{prio:b.sel?9:5,from:V(c[0],c[1],z+b.h)}); } });
+  (d.secure||[]).forEach(r=>R.ov.add(ringLine(r,0.45,C.grey,2.5,0.9))); if(state.M&&state.M.ring) R.ov.add(ringLine(state.M.ring,0.35,C.faint,false,0.9));
+  note('Simple massing: where each block sits is drawn by the tool, not a design. '+heightsNote()+'.'); key(sw(C.grey,'data hall; dashed: secure line')+sw(C.edge,'programs')+sw(C.acc,'selected or a rule flagged')); }
+const FN={model,heat,energy,water,materials,social,opp,arch};
 
 async function ensureTiles(c){ if(!BD.loadTile) return; const S=BD.S, m=S.meta[S.city]; if(!m) return; const T0=m.T, keys=[];
   for(let i=Math.floor((c[0]-RAD)/T0);i<=Math.floor((c[0]+RAD)/T0);i++) for(let j=Math.floor((c[1]-RAD)/T0);j<=Math.floor((c[1]+RAD)/T0);j++){ const k=i+'_'+j; if(m.tileset.has(k)&&!S.tiles[S.city+':'+k]) keys.push(k); }
@@ -364,7 +372,7 @@ function siteKey(){ const S=BD.S, M=BD.model?BD.model():null; return S.city+'|'+
 async function show(tab,data){ await ensure(); if(!R) setup(); R.multi=null; if(R.cap){ R.cap.forEach(c=>c.remove()); R.cap=[]; } wrap.style.display='';
   const site=data.site||(BD.eng?BD.eng.siteFacts():null); if(!site) return; await ensureTiles(site.c);
   const k=siteKey(); if(state.key!==k||!state.site){ buildSite(site); state.key=k; }
-  clearOverlay(); const prev=state.tab; state.tab=tab; if(tab!=='heat'&&prev==='heat') frameSite(); (FN[tab]||model)(data||{}); if(R.card) applyCard(); }
+  clearOverlay(); [state.envG,state.lotL,state.sfL].forEach(o=>{ if(o) o.visible=(tab!=='arch'); }); if(state.racks&&state.racks.obj) state.racks.obj.visible=(tab!=='arch'); const prev=state.tab; state.tab=tab; if(tab!=='heat'&&prev==='heat') frameSite(); (FN[tab]||model)(data||{}); if(R.card) applyCard(); }
 /* three options side by side: one camera, three scenes sharing the site model (J.B., 15 Oct) */
 async function showOptions(opts,data){
   await show('model',{site:data.site}); clearOverlay(); R.scene.remove(R.ov);

@@ -12,7 +12,8 @@ const KEY='bd-tier';
 const TIERS=[
  {id:'resident',short:'Everyday',name:'What it means for me',who:'For residents and neighbours',does:'Only where it is, and whether the plant sits on the roof or in the yard. Everything else is a typical choice, shown.'},
  {id:'community',short:'Civic',name:'What it means for the neighbourhood',who:'For councillors, community groups and receivers of heat',does:'Every set-up choice; who gains and loses, the money, the approvals.'},
- {id:'full',short:'Technical',name:'How it is worked out',who:'For engineers, architects and bylaw professionals',does:'Everything, with formulas, sources and confidence.'}];
+ {id:'full',short:'Engineering',name:'How it is worked out',who:'For engineers and bylaw professionals',does:'Everything, with formulas, sources and confidence.'},
+ {id:'arch',short:'Architecture',name:'What it could hold',who:'For architects and designers',does:'Place public programs with the data centre as simple massing, and test the space and heat they share. Nothing is scored.'}];
 const TYPICAL_MW=2.5;
 let tier=null; try{ tier=localStorage.getItem(KEY); }catch(e){}
 if(!TIERS.some(t=>t.id===tier)) tier=null;
@@ -24,8 +25,8 @@ BD.TPL=null;
 fetch('templates.json').then(r=>r.ok?r.json():null).then(d=>{ BD.TPL=d; }).catch(()=>{});
 /* 2 Nov 2026 fix pass: A-eng (J.B. triage 30 Oct 2026): an add-on whose register try_menu entry has tier 'full' (greywater, blackwater,
    blowdown recovery, condensate, cleaner backup fuel, hot or chilled water tank, buying new clean power) shows only in that template */
-BD.tierAllows=t=>{ const rank={resident:0,community:1,full:2}; return !t||!(t in rank)||rank[t]<=rank[BD.tier()]; };
-BD.tierShows=(node,t)=>{ const T=BD.TPL; if(!T||!T.nodes[node]) return true; const rank={resident:0,community:1,full:2}; return rank[T.nodes[node].tier]<=rank[t||BD.tier()]; };
+BD.tierAllows=t=>{ const rank={resident:0,community:1,full:2,arch:1}; return !t||!(t in rank)||rank[t]<=rank[BD.tier()]; };
+BD.tierShows=(node,t)=>{ const T=BD.TPL; if(!T||!T.nodes[node]) return true; const rank={resident:0,community:1,full:2,arch:1}, nt=T.nodes[node].tier, tt=t||BD.tier(); return nt==='arch_only'?tt==='arch':rank[nt]<=rank[tt]; };
 
 /* ---------- the choice, inside the landing card ---------- */
 // thumbnail of the real diagram: one column per stage, the same wires; this tier's parts lit, the rest faded
@@ -38,7 +39,7 @@ function layout(){ const G=BD.TPL&&BD.TPL.graph; if(!G) return null; if(LAY) ret
     const nc=Math.ceil(L.length/MAXR), rows=Math.ceil(L.length/nc);
     L.sort((a,b)=>key(a)-key(b)).forEach((id,i)=>pos[id]=[x+(i%nc)*sub,6+Math.floor(i/nc)*gy+(MAXR-rows)*gy/2]); x+=(nc-1)*sub+gap; });
   const H=12+(MAXR-1)*gy, W=x-gap+6; return LAY={pos,W,H,edges:G.edges}; }
-function preview(id){ const T=BD.TPL, Y=layout(); if(!T||!Y) return ''; const rank={resident:0,community:1,full:2}; const lit=k=>T.nodes[k]&&rank[T.nodes[k].tier]<=rank[id];
+function preview(id){ const T=BD.TPL, Y=layout(); if(!T||!Y) return ''; const rank={resident:0,community:1,full:2,arch:1}; const lit=k=>T.nodes[k]&&(T.nodes[k].tier==='arch_only'?id==='arch':rank[T.nodes[k].tier]<=rank[id]);
   const ids=Object.keys(T.nodes), n=ids.length, on=ids.filter(lit).length;
   const wires=Y.edges.filter(([a,b])=>Y.pos[a]&&Y.pos[b]).map(([a,b])=>{ const [x1,y1]=Y.pos[a],[x2,y2]=Y.pos[b], on2=lit(a)&&lit(b); return `<path d="M${x1} ${y1}C${(x1+x2)/2} ${y1} ${(x1+x2)/2} ${y2} ${x2} ${y2}" fill="none" stroke="${on2?'var(--accent)':'var(--line-2)'}" stroke-opacity="${on2?.55:.35}" stroke-width=".5"/>`; }).join('');
   const dots=ids.filter(k=>Y.pos[k]).map(k=>{ const [x,y]=Y.pos[k]; return `<circle cx="${x}" cy="${y}" r="1.6" fill="${lit(k)?'var(--accent)':'var(--line-2)'}"/>`; }).join('');
