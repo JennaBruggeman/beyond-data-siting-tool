@@ -1,0 +1,1098 @@
+{
+ "arch_open_airdrie": {
+  "where_read": "WebFetch of https://www.airdrie.ca/getDocument.cfm?ID=1181 (1 Nov 2026)",
+  "claims": [
+   {
+    "claim": "Title 'Building Classification Guideline'",
+    "verdict": "CONFIRMED",
+    "evidence": "heading 'Building Classification Guideline'",
+    "fix": null
+   },
+   {
+    "claim": "Issuer City of Airdrie Building Inspections",
+    "verdict": "CONFIRMED",
+    "evidence": "document names only 'Building Inspections Department'; hosted on airdrie.ca (city not printed on the page)",
+    "fix": "Note: open_items.md table calls it 'Town of Airdrie'; register's 'City of Airdrie' is the better label"
+   },
+   {
+    "claim": "NBC(AE) 2023",
+    "verdict": "CONFIRMED",
+    "evidence": "'2023 National Building Code (Alberta Edition)'",
+    "fix": null
+   },
+   {
+    "claim": "undated",
+    "verdict": "CONFIRMED",
+    "evidence": "no date stated",
+    "fix": null
+   },
+   {
+    "claim": "'Radio stations' Group D",
+    "verdict": "CONFIRMED",
+    "evidence": "Group D: 'Radio stations'",
+    "fix": null
+   },
+   {
+    "claim": "'Electrical substations' F-2",
+    "verdict": "CONFIRMED",
+    "evidence": "Group F, Division 2: 'Electrical substations'",
+    "fix": null
+   },
+   {
+    "claim": "'Power plants' F-3",
+    "verdict": "CONFIRMED",
+    "evidence": "Group F, Division 3: 'Power plants'",
+    "fix": null
+   },
+   {
+    "claim": "no data-centre entry",
+    "verdict": "CONFIRMED",
+    "evidence": "no entry with data centre, computer, server or telecommunication",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_open_cambridge": {
+  "where_read": "WebFetch of https://www.cambridge.ca/business-building-development/building-planning/data-centres/ (1 Nov 2026)",
+  "claims": [
+   {
+    "claim": "City of Cambridge (Ont.), page 'Data Centres'",
+    "verdict": "CONFIRMED",
+    "evidence": "title 'Data Centres | City of Cambridge'",
+    "fix": null
+   },
+   {
+    "claim": "2026",
+    "verdict": "CONFIRMED",
+    "evidence": "page dated items Aug 2026; '© 2026 City of Cambridge'",
+    "fix": null
+   },
+   {
+    "claim": "permit 'must be issued' once OBC met",
+    "verdict": "CONFIRMED",
+    "evidence": "'A building permit must be issued once the applicant demonstrates that all requirements' ... 'of the Ontario Building Code have been met.'",
+    "fix": null
+   },
+   {
+    "claim": "zoning use 'Information and Data Processing'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Information and Data Processing'",
+    "fix": null
+   },
+   {
+    "claim": "no occupancy stated",
+    "verdict": "CONFIRMED",
+    "evidence": "OBC mentioned, no occupancy or group classification",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_open_mboa": {
+  "where_read": "WebFetch of the MBOA-hosted PDF (1 Nov 2026)",
+  "claims": [
+   {
+    "claim": "Title 'Industrial Building Classification F2 versus F3'",
+    "verdict": "CONFIRMED",
+    "evidence": "full title 'Industrial Building Classification: F2 versus F3, What Makes the Difference?'",
+    "fix": "give full title"
+   },
+   {
+    "claim": "DGH Engineering; R. Fidler, J. Crichton, D. Hodgkinson",
+    "verdict": "CONFIRMED",
+    "evidence": "Ryan Fidler, P.Eng.; Jarrid Crichton, B.Env.D.; Dennis Hodgkinson, P.Eng., FEC; DGH Engineering Ltd.",
+    "fix": null
+   },
+   {
+    "claim": "Oct 2015",
+    "verdict": "CONFIRMED",
+    "evidence": "'October 2015'",
+    "fix": null
+   },
+   {
+    "claim": "Manitoba Building Officials Association (event)",
+    "verdict": "NOT FOUND",
+    "evidence": "PDF names no event; only the host (mboa.mb.ca) and file name '20151020_MBOA' tie it to MBOA",
+    "fix": "say 'hosted by MBOA'"
+   },
+   {
+    "claim": "NBC 2010 F-3 limit '50 kg/m2 or 1200 MJ/m2'",
+    "verdict": "CONFIRMED",
+    "evidence": "NBCC 2010 Div. A 1.4.1.2: 'combustible content is not more than 50 kg/m2 or 1200 MJ/m2 of floor area'",
+    "fix": null
+   },
+   {
+    "claim": "no data-centre or electronics fire-load values",
+    "verdict": "CONFIRMED",
+    "evidence": "no mention of data centres, computer rooms, electronics or servers",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "PROFESSIONAL PRESENTATION: DGH Engineering (R. Fidler, J. Crichton, D. Hodgkinson), 'Industrial Building Classification: F2 versus F3, What Makes the Difference?', Oct 2015, hosted by the Manitoba Building Officials Association (event not named in the PDF): quotes NBC 2010 F-3 limit '50 kg/m2 or 1200 MJ/m2'; no data-centre or electronics fire-load values — https://mboa.mb.ca/uploads/files/DGH_20151020_MBOA%20website(1).pdf ‖ CHECK 2 (1 Nov 2026, fixed): full title; MBOA is the host, the PDF names no event"
+ },
+ "arch_open_iccDC": {
+  "where_read": "WebFetch of the ICC Building Safety Journal page (1 Nov 2026)",
+  "claims": [
+   {
+    "claim": "K. McOsker (ICC)",
+    "verdict": "CONFIRMED",
+    "evidence": "Kevin McOsker, Vice President of Technical Services, ICC Government Relations",
+    "fix": null
+   },
+   {
+    "claim": "title",
+    "verdict": "CONFIRMED",
+    "evidence": "'Data Centers, the I-Codes and a New Data Center Guideline'",
+    "fix": null
+   },
+   {
+    "claim": "Building Safety Journal, 10 Mar 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "March 10, 2026",
+    "fix": null
+   },
+   {
+    "claim": "2024 IBC 'does not explicitly assign data centers'",
+    "verdict": "CONFIRMED",
+    "evidence": "'does not explicitly assign data centers to a specific occupancy group in Chapter 3' (2024 IBC)",
+    "fix": null
+   },
+   {
+    "claim": "classified as Group B, F-1 or S-1 by code officials",
+    "verdict": "CONFIRMED",
+    "evidence": "'have commonly been classified under several different occupancy groups': B, F-1, S-1",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_open_fireRev1": {
+  "where_read": "WebFetch of https://www.mdpi.com/2571-6255/9/4/151 (DOI redirect), first 100,000 of 112,641 characters",
+  "claims": [
+   {
+    "claim": "Punari et al. 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Riza Hadafi Punari, Kadir Arifin, et al.; published 8 Apr 2026",
+    "fix": null
+   },
+   {
+    "claim": "title",
+    "verdict": "CONFIRMED",
+    "evidence": "'Reframing Data Center Fire Safety as a Socio-Technical Reliability System: A Systematic Review'",
+    "fix": null
+   },
+   {
+    "claim": "Fire 9(4):151",
+    "verdict": "CONFIRMED",
+    "evidence": "Vol. 9, Issue 4, Article 151",
+    "fix": null
+   },
+   {
+    "claim": "no fire-load figure",
+    "verdict": "CONFIRMED",
+    "evidence": "no MJ/m2 or kg/m2 figure; only 'dense equipment layouts and combustible materials'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_open_fireRev2": {
+  "where_read": "WebFetch of the ScienceDirect page (open access, full text visible)",
+  "claims": [
+   {
+    "claim": "Kareck, Li, Wang, Gollner, Wang 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "Tylee L. Kareck, Chi-Yang Li, Jiejia Wang, Michael J. Gollner, Qingsheng Wang; Apr 2026 issue (online 17 Dec 2025)",
+    "fix": null
+   },
+   {
+    "claim": "title",
+    "verdict": "CONFIRMED",
+    "evidence": "'From incident to insight: Fire risk in modern data centers'",
+    "fix": null
+   },
+   {
+    "claim": "J. Loss Prev. Process Ind. 100:105890",
+    "verdict": "CONFIRMED",
+    "evidence": "Vol. 100, article 105890",
+    "fix": null
+   },
+   {
+    "claim": "no fire-load figure",
+    "verdict": "CONFIRMED",
+    "evidence": "fuel described qualitatively only",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_open_nrc1985": {
+  "where_read": "WebFetch of the NRC publications page, full text (0–120,522 characters)",
+  "claims": [
+   {
+    "claim": "Title and issuer: NRC Associate Committee on the NBC, Commentary on Part 3 of NBC 1985",
+    "verdict": "CONFIRMED",
+    "evidence": "'Commentary on Part 3 (Use and Occupancy) of the National Building Code of Canada 1985'; Associate Committee on the National Building Code, NRC",
+    "fix": null
+   },
+   {
+    "claim": "no data-centre fire load",
+    "verdict": "CONFIRMED",
+    "evidence": "no data processing, data centre or telephone exchange terms; fire load only in general terms ('relatively high fire load')",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_open_tbsEDP": {
+  "where_read": "WebFetch of the tbs-sct.canada.ca URL (1 Nov 2026)",
+  "claims": [
+   {
+    "claim": "tbs-sct.canada.ca returned 'Request Rejected'",
+    "verdict": "CONFIRMED",
+    "evidence": "'The requested URL was rejected. Please consult with your administrator.'",
+    "fix": null
+   },
+   {
+    "claim": "title and rescinded 1 Apr 2010",
+    "verdict": "UNREACHABLE",
+    "evidence": "page not reached; no archive used per brief",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_open_nfc43131": {
+  "where_read": "data/raw/codes/nfc.txt l. 10007–10013; nfc_ab2023.txt l. 10566",
+  "claims": [
+   {
+    "claim": "NFC 2020 Div. B 4.3.13.1.(1) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'be permitted in a) industrial occupancies, and b) occupancies other than industrial occupancies where combustible liquids are stored and used as fuel for oil-burning equipment, emergency generators and fire pumps.'",
+    "fix": "Sentence opens 'Except as provided in Article 4.3.13.2.' (stationary combustion engines) - worth stating"
+   },
+   {
+    "claim": "same NFC(AE) 2023",
+    "verdict": "CONFIRMED",
+    "evidence": "nfc_ab2023.txt l. 10566 same wording",
+    "fix": null
+   },
+   {
+    "claim": "lines 10005–10013",
+    "verdict": "CONFIRMED",
+    "evidence": "Article heading l. 10007, text to l. 10013",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: NFC 2020 Div. B 4.3.13.1.(1) (same NFC(AE) 2023): 'Except as provided in Article 4.3.13.2.' (stationary combustion engines), tanks inside buildings 'permitted in a) industrial occupancies, and b) occupancies other than industrial occupancies where combustible liquids are stored and used as fuel for oil-burning equipment, emergency generators and fire pumps.' — data/raw/codes/nfc.txt l. 10005–10013 ‖ CHECK 2 (1 Nov 2026, fixed): quote confirmed; added the opening exception to 4.3.13.2"
+ },
+ "arch_open_nfcA4113b": {
+  "where_read": "data/raw/codes/nfc.txt l. 14225–14227; nfc_ab2023.txt l. 15075–15077",
+  "claims": [
+   {
+    "claim": "Note A-4.1.1.1.(3)(b) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'includes storage tanks and piping that supply oil-burning equipment, diesel-engine-driven emergency generators and fire pumps. Part 4 of the NFC does not apply to such tanks and piping systems.'",
+    "fix": null
+   },
+   {
+    "claim": "same NFC(AE)",
+    "verdict": "CONFIRMED",
+    "evidence": "same, reading 'Part 4 of the NFC(AE)'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_open_nfc43136": {
+  "where_read": "data/raw/codes/nfc.txt l. 10107–10111",
+  "claims": [
+   {
+    "claim": "NFC 2020 4.3.13.6.(1) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'4.3.13.6. Piping Systems 1) Piping systems serving oil-burning equipment, diesel-engine-driven emergency generators and fire pumps shall conform to CSA B139 Series'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_open_nfc6511": {
+  "where_read": "data/raw/codes/nfc.txt l. 16972–16997; nfc_ab2023.txt l. 17986–18006",
+  "claims": [
+   {
+    "claim": "6.5.1.1.(1) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'Except as provided in Articles 6.5.1.2. to 6.5.1.5., emergency power systems shall be inspected, tested and maintained in conformance with CSA C282'",
+    "fix": "add the opening exception"
+   },
+   {
+    "claim": "6.5.1.4.(1) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'Written records shall be maintained as required in CSA C282'",
+    "fix": null
+   },
+   {
+    "claim": "same NFC(AE)",
+    "verdict": "CONFIRMED",
+    "evidence": "nfc_ab2023.txt l. 17986, 18005 same",
+    "fix": null
+   },
+   {
+    "claim": "lines 16969–16997",
+    "verdict": "CONFIRMED",
+    "evidence": "l. 16972–16997",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: NFC 2020 6.5.1.1.(1) and 6.5.1.4.(1) (same NFC(AE)): 'Except as provided in Articles 6.5.1.2. to 6.5.1.5., emergency power systems shall be inspected, tested and maintained in conformance with CSA C282'; 'Written records shall be maintained as required in CSA C282' — data/raw/codes/nfc.txt l. 16969–16997 ‖ CHECK 2 (1 Nov 2026, fixed): quotes confirmed; added the opening exception"
+ },
+ "arch_open_nfcAB2247": {
+  "where_read": "data/raw/codes/nfc_ab2023.txt l. 18250–18256 and 19663–19683",
+  "claims": [
+   {
+    "claim": "Div. C 2.2.4.7.(1)–(2) qualifications for ITM of 'emergency power systems installed in conformance with CSA C282'",
+    "verdict": "CONFIRMED",
+    "evidence": "l. 19663–19683: '2.2.4.7. Emergency Power Systems 1) Persons are considered qualified to perform the inspection, testing and maintenance of emergency power systems installed in conformance with CSA C282'",
+    "fix": null
+   },
+   {
+    "claim": "Note A-6.5.1.5.(1) fuel conditioning per 'Table 5 of CSA C282'",
+    "verdict": "CONFIRMED",
+    "evidence": "'(b) drain, filter and condition existing fuel in accordance with Table 5 of CSA C282'",
+    "fix": null
+   },
+   {
+    "claim": "line refs l. 18249–18257 (2.2.4.7) and 19665–19685 (A-6.5.1.5)",
+    "verdict": "WRONG",
+    "evidence": "the ranges are swapped: A-6.5.1.5.(1) is at l. 18250–18256; 2.2.4.7 is at l. 19663–19683",
+    "fix": "swap the line references"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE (Alberta only): NFC(AE) 2023 Div. C 2.2.4.7.(1)–(2): qualifications for inspection, testing and maintenance of 'emergency power systems installed in conformance with CSA C282'; Note A-6.5.1.5.(1) adds fuel conditioning per 'Table 5 of CSA C282' — data/raw/codes/nfc_ab2023.txt l. 19663–19683 (2.2.4.7), 18250–18256 (A-6.5.1.5.(1)) ‖ CHECK 2 (1 Nov 2026, fixed): quotes confirmed; line ranges were swapped"
+ },
+ "arch_open_nbc3275": {
+  "where_read": "nbc.txt l. 15127; bcbc2024.txt l. 15417; vbbl2025_v1.txt l. 10672; nbc_ab2023.txt l. 13835",
+  "claims": [
+   {
+    "claim": "3.2.7.5.(1) quote, same in NBC, BCBC, VBBL, NBC(AE)",
+    "verdict": "CONFIRMED",
+    "evidence": "all four: 'Except as required by Articles 3.2.7.6. and 3.2.7.7., an emergency electrical power supply system shall be installed in conformance with CSA C282'",
+    "fix": null
+   },
+   {
+    "claim": "line numbers 15126 / 15415 / 10672 / 13834",
+    "verdict": "WRONG",
+    "evidence": "15127 / 15417 / 10672 / 13835 (off by 1–2 lines)",
+    "fix": "correct line numbers"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: NBC 2020 / BCBC 2024 / VBBL 2025 / NBC(AE) 2023 Div. B 3.2.7.5.(1): 'Except as required by Articles 3.2.7.6. and 3.2.7.7., an emergency electrical power supply system shall be installed in conformance with CSA C282' — data/raw/codes/nbc.txt l. 15127; bcbc2024.txt l. 15417; vbbl2025_v1.txt l. 10672; nbc_ab2023.txt l. 13835 ‖ CHECK 2 (1 Nov 2026, fixed): quote confirmed in all four; line numbers corrected"
+ },
+ "arch_open_nbc3628": {
+  "where_read": "nbc.txt l. 18418–18427; bcbc2024.txt l. 18859; vbbl2025_v1.txt l. 13341–13346; nbc_ab2023.txt l. 17108–17114",
+  "claims": [
+   {
+    "claim": "3.6.2.8.(1) quotes, 2 h separation",
+    "verdict": "CONFIRMED",
+    "evidence": "'a generator intended to supply emergency power for lighting, fire safety and life safety systems' ... 'fire-resistance rating not less than 2 h' ... 'contains only the generating set and equipment related to the emergency power supply system'",
+    "fix": null
+   },
+   {
+    "claim": "same BCBC, VBBL, NBC(AE)",
+    "verdict": "CONFIRMED",
+    "evidence": "same wording in all three",
+    "fix": null
+   },
+   {
+    "claim": "nbc.txt l. 18419",
+    "verdict": "CONFIRMED",
+    "evidence": "l. 18420 (heading at 18418)",
+    "fix": null
+   },
+   {
+    "claim": "(omitted) exception",
+    "verdict": "CONFIRMED",
+    "evidence": "'except where such building is used solely for the purpose of housing the generator and its ancillary equipment'",
+    "fix": "add exception for stand-alone generator buildings"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: NBC 2020 3.6.2.8.(1) (same BCBC, VBBL, NBC(AE)): 'a generator intended to supply emergency power for lighting, fire safety and life safety systems' in a room with 2 h fire separation that 'contains only the generating set and equipment related to the emergency power supply system'; not required where the building is 'used solely for the purpose of housing the generator and its ancillary equipment' — data/raw/codes/nbc.txt l. 18420–18427 ‖ CHECK 2 (1 Nov 2026, fixed): quotes confirmed in all four; added the stand-alone generator building exception"
+ },
+ "arch_open_nbcA3278": {
+  "where_read": "nbc.txt l. 24816–24818; bcbc2024.txt l. 26881–26886; vbbl2025_v1.txt l. 19541",
+  "claims": [
+   {
+    "claim": "Note A-3.2.7.8.(3) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'If the operation of emergency generators or batteries is intended for other than fire emergency conditions, such as power failures, fuel supplies or battery capacity must be increased'",
+    "fix": null
+   },
+   {
+    "claim": "BCBC cites 'British Columbia Fire Code'",
+    "verdict": "CONFIRMED",
+    "evidence": "bcbc2024 l. 26884: 'as indicated in the British Columbia Fire Code'",
+    "fix": null
+   },
+   {
+    "claim": "VBBL same",
+    "verdict": "CONFIRMED",
+    "evidence": "vbbl2025_v1.txt l. 19541 same sentence",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_open_vbbl32520": {
+  "where_read": "data/raw/codes/vbbl2025_v1.txt l. 10407–10432",
+  "claims": [
+   {
+    "claim": "VBBL 2025 3.2.5.20.(3)(j) ≥98% coverage in 'emergency generator room'",
+    "verdict": "CONFIRMED",
+    "evidence": "'3) A radio antenna system shall provide not less than 98% coverage ... j) emergency generator room,'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_open_csaC282scope": {
+  "where_read": "csagroup.org URL redirects to store.csastandards.org; that host refused by the fetch tool (provenance block) - not circumvented",
+  "claims": [
+   {
+    "claim": "Clause 1.1 scope, Notes 3, 5, 6, Clause 1.2, 'C282:24'",
+    "verdict": "UNREACHABLE",
+    "evidence": "store page not reached",
+    "fix": null
+   },
+   {
+    "claim": "scope: 'required by the National Building Code of Canada (NBCC)' and CSA Z32 Clause 6; battery supplies excluded",
+    "verdict": "CONFIRMED",
+    "evidence": "indirect only: SCC notice of intent for the new edition gives 'is required by the National Building Code of Canada (NBCC)', Z32 Clause 6 health care, and excludes battery/UPS supplies (not the :24 store page)",
+    "fix": null
+   },
+   {
+    "claim": "Note 3 wording 'an generator set'",
+    "verdict": "UNREACHABLE",
+    "evidence": "IAEI 2019 quotes an earlier edition's Note 3 as '... where an emergency generator is used' - the :24 wording could not be checked",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "STANDARD (publisher scope page; standard paywalled): CSA C282:24, Clause 1.1: applies to 'generator sets and associated equipment for providing an emergency electrical power supply' where 'an emergency electrical power supply is required by the National Building Code of Canada (NBCC)', and HCF essential systems per CSA Z32 Clause 6; Note 3 'Normative provisions of this Standard are not limited to the installations where an generator set is used as the NBCC required emergency power supply source'; Note 5 other equipment 'could be connected to the generator set (see Clause 6.4.1)'; Note 6 other systems 'should meet the requirements of this Standard, where practical' (Annex E); Clause 1.2 excludes battery supplies — https://www.csagroup.org/store/product/CSA_C282%3A24/ ‖ CHECK 2 (1 Nov 2026, ok): store page not re-reachable (redirect host blocked); scope wording supported only indirectly by the SCC notice; Notes 3, 5, 6 unverified (?)"
+ },
+ "arch_open_sccC282": {
+  "where_read": "WebFetch of the SCC notice page (1 Nov 2026)",
+  "claims": [
+   {
+    "claim": "CSA C282 new edition, 'Proceeding to development'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Standard Development Activity: New Edition'; 'Status: Proceeding to development'",
+    "fix": null
+   },
+   {
+    "claim": "scope 'emergency generators … required by the National Building Code of Canada (NBCC)'",
+    "verdict": "CONFIRMED",
+    "evidence": "'applies to the design, installation, operation, maintenance, and testing of emergency generators' ... 'is required by the National Building Code of Canada (NBCC)'",
+    "fix": null
+   },
+   {
+    "claim": "(date)",
+    "verdict": "CONFIRMED",
+    "evidence": "none given: comment-period and posted-on fields blank",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_open_vanBul2000015": {
+  "where_read": "WebFetch of https://vancouver.ca/files/cov/2000-015-emergency-generator-rooms.pdf (1 Nov 2026)",
+  "claims": [
+   {
+    "claim": "Bulletin 2000-015-BU/EL 'Emergency Generator Rooms'",
+    "verdict": "CONFIRMED",
+    "evidence": "'2000-015-BU/EL', 'EMERGENCY GENERATOR ROOMS'",
+    "fix": null
+   },
+   {
+    "claim": "rev. 5 Oct 2015; attachment rev. 30 Nov 2020",
+    "verdict": "CONFIRMED",
+    "evidence": "'Revised October 5, 2015'; diagram 'Revised November 30, 2020'",
+    "fix": null
+   },
+   {
+    "claim": "CBO and Deputy City Electrician",
+    "verdict": "CONFIRMED",
+    "evidence": "P. Ryan, Chief Building Official; W. White, Manager Trades Inspection, Deputy City Electrician",
+    "fix": null
+   },
+   {
+    "claim": "'contains only the generating set', 'equipment related to the emergency power supply system'",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted from 3.6.2.8.(1)",
+    "fix": null
+   },
+   {
+    "claim": "rejects reading 'equipment' as 'any electrical equipment supplied by the emergency generator that includes life safety and non-life safety loads'",
+    "verdict": "CONFIRMED",
+    "evidence": "bulletin reports this broad reading by some designers; its Requirements adopt the narrower one (word 'rejects' is our reading)",
+    "fix": "mark 'rejects' as our reading"
+   },
+   {
+    "claim": "C282: rooms 'used solely for the generator sets and all auxiliary equipment'",
+    "verdict": "CONFIRMED",
+    "evidence": "'used solely for the generator sets and all auxiliary equipment'",
+    "fix": null
+   },
+   {
+    "claim": "diagram ATS2 'Transfer switch for equipment not defined by CE Code Rule 46-002 as life safety system'",
+    "verdict": "CONFIRMED",
+    "evidence": "label text confirmed; its pairing with ATS2 is from the diagram layout (non-life-safety loads on D-ATS2)",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT BULLETIN: City of Vancouver Building Bulletin 2000-015-BU/EL 'Emergency Generator Rooms', rev. 5 Oct 2015 (attachment rev. 30 Nov 2020), CBO and Deputy City Electrician: room 'contains only the generating set' and 'equipment related to the emergency power supply system'; rejects (our reading: it adopts the narrower reading against) reading 'equipment' as 'any electrical equipment supplied by the emergency generator that includes life safety and non-life safety loads'; C282: rooms 'used solely for the generator sets and all auxiliary equipment'; diagram ATS2 'Transfer switch for equipment not defined by CE Code Rule 46-002 as life safety system' — https://vancouver.ca/files/cov/2000-015-emergency-generator-rooms.pdf ‖ CHECK 2 (1 Nov 2026, fixed): all quotes, dates and signatories confirmed; 'rejects' marked as our reading"
+ },
+ "arch_open_iaeiTsisserev": {
+  "where_read": "WebFetch of the IAEI Magazine article (1 Nov 2026)",
+  "claims": [
+   {
+    "claim": "A. Tsisserev, chair, CE Code Technical Committee",
+    "verdict": "CONFIRMED",
+    "evidence": "bio: 'currently the chair of the Technical Committee for the Canadian Electrical Code'; also president, EFS Engineering Solutions",
+    "fix": null
+   },
+   {
+    "claim": "title",
+    "verdict": "CONFIRMED",
+    "evidence": "'Application and installation requirements for emergency generators: The discussion continues'",
+    "fix": null
+   },
+   {
+    "claim": "IAEI Magazine, 10 Jul 2019",
+    "verdict": "CONFIRMED",
+    "evidence": "July 10, 2019 (May/June 2019 issue)",
+    "fix": null
+   },
+   {
+    "claim": "standby/backup generators should follow C282 (Notes 3, 6)",
+    "verdict": "CONFIRMED",
+    "evidence": "'not only the NBC-required emergency generators, but also the generators used for a standby' ...; quotes Notes 3 and 6",
+    "fix": null
+   },
+   {
+    "claim": "cites CE Code Rule 46-202(3)(c)",
+    "verdict": "WRONG",
+    "evidence": "body text cites 'Rule 42-202(3)'; the block quote is headed '46-202 Types of emergency power supply' with c) 'in conformance with CSA C282' - the article is internally inconsistent",
+    "fix": "say 'cites CE Code Rule 46-202 (printed once as 42-202(3)) item (c)'"
+   },
+   {
+    "claim": "(note) Notes quoted are from an earlier C282 edition",
+    "verdict": "CONFIRMED",
+    "evidence": "article's Note 3: 'where an emergency generator is used' vs register's C282:24 'where an generator set is used'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "PRACTITIONER COMMENTARY (not an authority): A. Tsisserev (chair, CE Code Technical Committee), 'Application and installation requirements for emergency generators: the discussion continues', IAEI Magazine, 10 Jul 2019: standby/backup generators should follow C282 (Notes 3, 6); cites CE Code Rule 46-202, item c) 'in conformance with CSA C282' (body text prints it as 'Rule 42-202(3)'); quotes an earlier C282 edition's Notes — https://iaeimagazine.org/columns/canadian/application-and-installation-requirements-for-emergency-generators-the-discussion-continues/ ‖ CHECK 2 (1 Nov 2026, fixed): rule number printed inconsistently in the article; Notes quoted are pre-2024 wording"
+ },
+ "arch_open_bcfcPage": {
+  "where_read": "WebFetch of the BC Fire Code page (1 Nov 2026)",
+  "claims": [
+   {
+    "claim": "'an adopted National Fire Code (NFC) with a few amendments'",
+    "verdict": "CONFIRMED",
+    "evidence": "same words",
+    "fix": null
+   },
+   {
+    "claim": "'British Columbia will not be producing a consolidated BCFC document'",
+    "verdict": "CONFIRMED",
+    "evidence": "same words",
+    "fix": null
+   },
+   {
+    "claim": "links Schedule PDF and Ministerial Order FSA 2023 1",
+    "verdict": "CONFIRMED",
+    "evidence": "'Schedule' (bcfc_2024.pdf); 'Ministerial Order No. FSA 2023 1'",
+    "fix": null
+   },
+   {
+    "claim": "free BC Publications link is 2018 edition",
+    "verdict": "CONFIRMED",
+    "evidence": "'BC Fire Code 2018' under 'Previous BC Fire Code'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_open_bcfcSchedule": {
+  "where_read": "WebFetch of bcfc_2024.pdf (1 Nov 2026)",
+  "claims": [
+   {
+    "claim": "13 items",
+    "verdict": "CONFIRMED",
+    "evidence": "items 1 to 13",
+    "fix": null
+   },
+   {
+    "claim": "Schedule to Ministerial Order FSA 2023 1",
+    "verdict": "CONFIRMED",
+    "evidence": "Schedule PDF names no order; the link is on the BC page ('Ministerial Order No. FSA 2023 1')",
+    "fix": null
+   },
+   {
+    "claim": "item 11 quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'Sentence (3) of Article 4.1.1.1. of Division B is amended by adding the following' ... 'e) the storage of flammable liquids or combustible liquids on isolated construction projects.'",
+    "fix": null
+   },
+   {
+    "claim": "item 12 quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'Sentence (4) of Article 4.1.1.1. of Division B is repealed.'",
+    "fix": null
+   },
+   {
+    "claim": "item 1: B-4, Group G, Sections 2.14 and 4.12 not adopted",
+    "verdict": "CONFIRMED",
+    "evidence": "'a) Group B, Division 4 ... b) Group G ... c) Division B, Section 2.14. Farm Buildings d) Division B, Section 4.12. Farms'",
+    "fix": null
+   },
+   {
+    "claim": "Div. A 1.1.2.2 'NFC' read as 'the British Columbia Fire Code'",
+    "verdict": "CONFIRMED",
+    "evidence": "'are to be read as references to \"the British Columbia Fire Code\", except in a) Sentence 1.3.2.1.(1) of Division B'",
+    "fix": null
+   },
+   {
+    "claim": "Div. B 1.3.1.3 CSA C22.1-18 and NBC 2020 read as BCBC 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "'CSA C22.1-18 Canadian Electrical Code, Part I (24th edition)'; NBC 2020 replaced by 'British Columbia Building Code Book I (General) 2024'",
+    "fix": null
+   },
+   {
+    "claim": "no 'generator', '4.3.13', '4.3.14', '4.3.2', '3.2.7', '6.5'",
+    "verdict": "CONFIRMED",
+    "evidence": "none found",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_open_nfc4111": {
+  "where_read": "data/raw/codes/nfc.txt l. 8077–8103; BCFC Schedule items 1, 11, 12",
+  "claims": [
+   {
+    "claim": "4.1.1.1.(3)(b) quote incl. 2 500 L exception",
+    "verdict": "CONFIRMED",
+    "evidence": "'b) appliances and their ancillary equipment within the scope of CSA B139 Series ... except for aboveground storage tanks with an individual capacity exceeding 2 500 L'",
+    "fix": null
+   },
+   {
+    "claim": "(4) farm storage per Section 4.12, repealed in BC",
+    "verdict": "CONFIRMED",
+    "evidence": "NFC (4): 'shall be in conformance with Section 4.12'; BCFC item 12 repeals (4), item 1 does not adopt 4.12",
+    "fix": null
+   },
+   {
+    "claim": "BCFC 2024 same for (3)(b)",
+    "verdict": "CONFIRMED",
+    "evidence": "Schedule only adds (3)(e)",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_open_nfc43141": {
+  "where_read": "data/raw/codes/nfc.txt l. 10178–10197; nfc_ab2023.txt l. 10735–10743",
+  "claims": [
+   {
+    "claim": "2 h fire separation",
+    "verdict": "CONFIRMED",
+    "evidence": "'separated from the rest of the building by a fire separation having a fire-resistance rating of at least 2 h'",
+    "fix": null
+   },
+   {
+    "claim": "spill containment 100% of largest tank",
+    "verdict": "CONFIRMED",
+    "evidence": "'designed to contain a spill equal to at least 100% of the volume of the largest storage tank, or to drain away spilled flammable liquids or combustible liquids'",
+    "fix": "add the drain-away alternative"
+   },
+   {
+    "claim": "liquid-tight; 'used for no other purposes'",
+    "verdict": "CONFIRMED",
+    "evidence": "'made liquid-tight where the walls join the floor'; 'used for no other purposes than the storage and handling of flammable liquids or combustible liquids'",
+    "fix": null
+   },
+   {
+    "claim": "4.3.14.2 550 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "'A minimum clear space of 550 mm'",
+    "fix": null
+   },
+   {
+    "claim": "NFC(AE) same; BCFC same",
+    "verdict": "CONFIRMED",
+    "evidence": "nfc_ab2023 same text; BCFC Schedule silent on 4.3.14",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: NFC 2020 4.3.14.1.(1) (BCFC 2024 and NFC(AE) same): tank rooms 'separated from the rest of the building by a fire separation having a fire-resistance rating of at least 2 h', spill containment 100% of largest tank 'or to drain away spilled flammable liquids or combustible liquids', liquid-tight, 'used for no other purposes'; 4.3.14.2 '550 mm' clearance — data/raw/codes/nfc.txt l. 10178–10200 ‖ CHECK 2 (1 Nov 2026, fixed): confirmed; added the drain-away alternative in (b)"
+ },
+ "arch_open_nfc4321": {
+  "where_read": "data/raw/codes/nfc.txt l. 9383–9410",
+  "claims": [
+   {
+    "claim": "Table 4.3.2.1: 3 m up to 250 000 L",
+    "verdict": "CONFIRMED",
+    "evidence": "'250 000 3'",
+    "fix": null
+   },
+   {
+    "claim": "halved with 4.3.2.5.(2) protection",
+    "verdict": "CONFIRMED",
+    "evidence": "'a) half those in Table 4.3.2.1., where protection is provided ... in conformance with Sentence 4.3.2.5.(2)' (for stable liquids, working pressure ≤17 kPa)",
+    "fix": null
+   },
+   {
+    "claim": "BCFC 2024 same",
+    "verdict": "CONFIRMED",
+    "evidence": "Schedule has no '4.3.2'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_open_nfc3276": {
+  "where_read": "data/raw/codes/nfc.txt l. 6205–6208; adj_check.md l. 208",
+  "claims": [
+   {
+    "claim": "3.2.7.6.(1) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'dangerous goods shall be separated from other dangerous goods in conformance with Table 3.2.7.6.' (l. 6207; cited l. 6204 is 3 lines early)",
+    "fix": null
+   },
+   {
+    "claim": "oxidizer row confirmed PDF p. 126 in adj_check.md",
+    "verdict": "CONFIRMED",
+    "evidence": "adj_check.md: 'PDF p. 126, oxidizer row: acids X, bases 1m, flammable liquids X, toxic gases 1m'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "fmDS0532": {
+  "where_read": "/tmp/fm/fm.txt (text of J.B.'s upload)",
+  "claims": [
+   {
+    "claim": "Title, issuer, January 2026, interim revision July 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'5-32 January 2026 Interim Revision July 2026'; 'DATA CENTERS AND RELATED FACILITIES'; '©2026 Factory Mutual Insurance Company'",
+    "fix": null
+   },
+   {
+    "claim": "free at fm.com/datasheets",
+    "verdict": "NOT FOUND",
+    "evidence": "not stated in the upload; not checked online",
+    "fix": "mark (?)"
+   },
+   {
+    "claim": "2.2.4.1 one-hour walls for data processing, network/fibre, tape, generator rooms",
+    "verdict": "CONFIRMED",
+    "evidence": "'Provide one-hour fire-rated interior walls and partitions ... Data processing equipment rooms, Network/fiber optic rooms, Tape cartridge storage rooms, Emergency/standby power generation rooms'",
+    "fix": null
+   },
+   {
+    "claim": "2.2.4.1.1 two-hour compartmentation",
+    "verdict": "CONFIRMED",
+    "evidence": "'If multiple data processing equipment rooms are within the data center, provide two-hour fire-rated interior walls for compartmentation'",
+    "fix": null
+   },
+   {
+    "claim": "2.2.4.3 slab to slab or roof",
+    "verdict": "CONFIRMED",
+    "evidence": "'from the structural floor of the room to the structural floor above (or to the roof)'",
+    "fix": null
+   },
+   {
+    "claim": "2.2.2.1 windows/doors, tempered or wired glass, ¾-hour doors",
+    "verdict": "CONFIRMED",
+    "evidence": "'use tempered or wired glass for windows and minimum ¾-hour fire-rated doors'",
+    "fix": null
+   },
+   {
+    "claim": "2.2.5.2 ceilings ≤30 ft (9 m)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Limit the maximum height of ceilings in data centers to 30 ft (9 m)'",
+    "fix": null
+   },
+   {
+    "claim": "2.2.13.1 flood site, 500 ft (152 m), 2 m/s",
+    "verdict": "CONFIRMED",
+    "evidence": "'above the predicted 0.2% annual exceedance (500-year) flood elevation and includes 1 to 2 ft (0.3 to 0.6 m) of freeboard' ... 'at least 500 ft (152 m) from direct wave impacts and/or high flood-flow velocities (i.e., above 7 fps [2 m/s])'",
+    "fix": null
+   },
+   {
+    "claim": "2.6.4.3 generator location order",
+    "verdict": "CONFIRMED",
+    "evidence": "'A. In a separate, purpose-built building with adequate protection B. In the yard with adequate space separation to important buildings C. At the ground-floor level in the data center'",
+    "fix": null
+   },
+   {
+    "claim": "2.6.4.3.1 not roof or basement",
+    "verdict": "CONFIRMED",
+    "evidence": "'Do not locate emergency generators at roof level or in basement areas.'",
+    "fix": null
+   },
+   {
+    "claim": "2.6.4.4 24-hour fuel or refuelling plan",
+    "verdict": "CONFIRMED",
+    "evidence": "'A. A 24-hour fuel supply B. A documented service interruption plan (SIP) ... refueled ... for 24 hours'",
+    "fix": null
+   },
+   {
+    "claim": "2.6.4.4.1 buried, then outdoor aboveground",
+    "verdict": "CONFIRMED",
+    "evidence": "'A. Buried tanks B. Outdoor aboveground tanks'",
+    "fix": null
+   },
+   {
+    "claim": "2.6.4.4.1.1 no tanks inside, basement or roof",
+    "verdict": "CONFIRMED",
+    "evidence": "'Do not locate diesel fuel tanks inside the data center, including the basement, or at roof level.'",
+    "fix": null
+   },
+   {
+    "claim": "2.6.6.2.2 independent air paths",
+    "verdict": "CONFIRMED",
+    "evidence": "'independent from those connected to other building spaces'",
+    "fix": null
+   },
+   {
+    "claim": "2.6.6.2.3 ≥3 mm w.g. positive pressure",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least 0.05 in. (3 mm) water gauge ... relative to adjacent areas'",
+    "fix": null
+   },
+   {
+    "claim": "2.2.1.3.1 air intakes",
+    "verdict": "CONFIRMED",
+    "evidence": "'Do not expose the air intake(s) of the building to combustible materials.'",
+    "fix": null
+   },
+   {
+    "claim": "2.6.5.1 UPS per DS 5-28",
+    "verdict": "CONFIRMED",
+    "evidence": "'in accordance with Data Sheet 5-28, DC Battery Systems'",
+    "fix": null
+   },
+   {
+    "claim": "Li-ion: 'cooling the surroundings is a critical factor' (3.x)",
+    "verdict": "CONFIRMED",
+    "evidence": "3.3.3.3.2 Battery Back-Up Units (BBUs): gaseous systems 'not recommended'; 'FM research has shown that cooling the surroundings is a critical factor'",
+    "fix": "clause is 3.3.3.3.2 and concerns BBUs"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "INSURER GUIDANCE: FM Property Loss Prevention Data Sheet 5-32, Data Centers and Related Facilities, Factory Mutual Insurance Company, January 2026, interim revision July 2026 (free at fm.com/datasheets (?, not checked); J.B. upload 1 Nov 2026): 2.2.4.1 'Provide one-hour fire-rated interior walls and partitions' for data processing equipment rooms, network/fibre rooms, tape storage rooms and emergency/standby power generation rooms; 2.2.4.1.1 'If multiple data processing equipment rooms are within the data center, provide two-hour fire-rated interior walls for compartmentation'; 2.2.4.3 rated walls from structural floor to structural floor above or roof; 2.2.2.1 minimize interior windows and doors to the data room, tempered or wired glass, minimum ¾-hour doors; 2.2.5.2 ceilings at most 30 ft (9 m); 2.2.13.1 'Select a building site that is above the predicted 0.2% annual exceedance (500-year) flood elevation and includes 1 to 2 ft (0.3 to 0.6 m) of freeboard', at least 500 ft (152 m) from direct wave impacts or flood flow above 2 m/s; 2.6.4.3 locate generators, in order of preference, 'In a separate, purpose-built building', 'In the yard with adequate space separation to important buildings', 'At the ground-floor level in the data center'; 2.6.4.3.1 'Do not locate emergency generators at roof level or in basement areas'; 2.6.4.4 24-hour fuel supply, or a refuelling plan for 24 h; 2.6.4.4.1 buried tanks preferred, then outdoor aboveground; 2.6.4.4.1.1 'Do not locate diesel fuel tanks inside the data center, including the basement, or at roof level'; 2.6.6.2.2 air-handling equipment and air paths 'independent from those connected to other building spaces'; 2.6.6.2.3 positive pressure of at least 3 mm water gauge in data rooms relative to adjacent areas; 2.2.1.3.1 'Do not expose the air intake(s) of the building to combustible materials'; 2.6.5.1 UPS batteries per Data Sheet 5-28; Li-ion battery back-up units (BBUs): gaseous agents 'not recommended' as they don't cool, and 'cooling the surroundings is a critical factor' (3.3.3.3.2). An insurer's recommendations: what an FM-insured operator would be held to, not a code requirement. ‖ CHECK 2 (1 Nov 2026, fixed): all clauses confirmed against the upload; Li-ion clause number and BBU scope corrected; 'free' note unverified"
+ },
+ "nfpa37_2024": {
+  "where_read": "not re-opened: NFPA Free Access needs a login; no public NFPA page checked; other copies not used per brief (data/raw/codes/nfpa855_2026_screens.pdf exists but was not used)",
+  "claims": [
+   {
+    "claim": "title, 2024 edition, pp. 37-8 to 37-18",
+    "verdict": "UNREACHABLE",
+    "evidence": "not reachable",
+    "fix": null
+   },
+   {
+    "claim": "all clause quotes and distances (4.1.1.1–4.1.4.2, 6.3.2–6.7.1.1, 8.2.3–8.4, 11.1)",
+    "verdict": "UNREACHABLE",
+    "evidence": "not reachable",
+    "fix": null
+   },
+   {
+    "claim": "(internal) '4.1.4.2.2.3 (calculations)'",
+    "verdict": "UNREACHABLE",
+    "evidence": "numbering breaks the pattern of 4.1.3.2.1–4.1.3.2.3 and 4.1.4.2.1–4.1.4.2.2; likely 4.1.4.2.3 (?)",
+    "fix": "flag as (?) until re-read"
+   },
+   {
+    "claim": "(internal) 6.3.2.2 'larger tanks in a room per 6.3.5 or 6.3.6 (not read ?)'",
+    "verdict": "UNREACHABLE",
+    "evidence": "the same text later reports 6.3.5 and 6.3.6 as read (pp. 37-13 to 37-18)",
+    "fix": "drop the stale '(not read ?)'"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "STANDARD (US, benchmark; paywalled, read on NFPA Free Access): NFPA 37, Installation and Use of Stationary Combustion Engines and Gas Turbines, 2024 edition (pp. 37-8 to 37-12): 4.1.1.1 engines 'readily accessible for maintenance, repair, and firefighting'; 4.1.1.2 air supply designed 'to prevent flue gas products from being drawn from stacks or flues'; 4.1.2.1.1 engine rooms within structures: walls, floors and ceilings 'of at least 1-hour fire resistance rating'; 4.1.2.1.4 attached engine rooms: common wall at least 1 h; 4.1.2.1.5 openings with self-closing fire doors or dampers to match; 4.1.2.2.2 dedicated detached structures at least 1.5 m (5 ft) from openings in walls and from structures with combustible walls, no minimum where the exposing or exposed wall is 1 h or the detached structure is sprinklered; 4.1.3 on roofs: 4.1.3.1 at least 1.5 m from any openings in the walls of structures; 4.1.3.2 1.5 m from combustible walls unless 1 h (4.1.3.2.1), a fire test (4.1.3.2.2) or engineering calculations (4.1.3.2.3); 4.1.3.3 oil containment curb or dike holding the full lube-oil or fuel capacity; 4.1.3.4 noncombustible surface 300 mm beyond the engine and dike; 4.1.4 outdoors: 4.1.4.1 'at least 1.5 m (5 ft) from any openings in the walls of structures' (no exceptions); 4.1.4.2 1.5 m from structures having combustible walls, except 4.1.4.2.1 (structure within 1.5 m rated at least 1 h), 4.1.4.2.2 (fire test) or 4.1.4.2.2.3 (? numbering) (calculations) — the exceptions apply to combustible walls only, not to openings (our reading of the clause structure); 6.3.2.2 fuel tanks not in a room of their own at most 2,500 L; larger tanks in a room per 6.3.5 or 6.3.6 (read later, see below); 6.3.2.3 aggregate in a structure at most 5,000 L unless the excess is in such a room; 6.3.2.2.1 and 6.3.2.3.1 any size within engine rooms if engineered with fire detection, suppression and containment. Roof installation is permitted by NFPA 37 (contrast FM Global 5-32 2.6.4.3.1). ‖ pp. 37-13 to 37-18 (read 1 Nov 2026): 6.3.3 outdoor tanks follow NFPA 30 (not read ?); 6.3.4 roof tanks on noncombustible supports with spill containment for the largest tank; 6.3.5 rooms holding only tanks up to 5,000 L: walls, floor, ceiling 'not less than 1 hour', 380 mm clearance round each tank, self-closing 1 h door if it opens inside, spill containment, ventilation keeping vapours at or below 25 % of the LFL and discharging outside 'without recirculation'; 6.3.6 over 5,000 L: 3 h walls, floor, ceiling, 3 h self-closing doors, curbs at openings; 6.5.5 'Overflows, vents, fuel piping, and fuel tanks shall not be located at or near engine air intake, exhaust piping, mufflers, or filters'; 6.6.3.3 fill pipe on an exterior wall 'at least 600 mm (24 in.) from any building opening at the same or lower level'; 6.7.1.1 tank vent pipe outside, at least 600 mm from any building opening at the same or lower level; 8.2.3.1 exhaust 'shall terminate outside the structure at a point where hot gases, sparks, or products of combustion will discharge to a safe location' — no distance to windows or air intakes is given; 8.2.3.2 not directed toward combustible materials or structures; 8.3.1 unlisted exhaust pipes 457 mm from combustible materials; 8.3–8.4 refer to NFPA 211 (not read ?); 11.1 a fire risk evaluation covers each engine installation's design and layout. ‖ CHECK 2 (1 Nov 2026, fixed): not re-checkable (NFPA login); only internal fixes: stale '(not read ?)' removed, odd clause number flagged"
+ },
+ "nfpa75_2024": {
+  "where_read": "not re-opened: NFPA Free Access needs a login; no public NFPA page checked; other copies not used per brief (data/raw/codes/nfpa855_2026_screens.pdf exists but was not used)",
+  "claims": [
+   {
+    "claim": "title, 2024 edition",
+    "verdict": "UNREACHABLE",
+    "evidence": "not reachable",
+    "fix": null
+   },
+   {
+    "claim": "all clause quotes and ratings (4.2.3–4.2.4, 6.1.1–6.6.3, 7.1.1, 7.3.4, 9.1.1, A.1.3.2)",
+    "verdict": "UNREACHABLE",
+    "evidence": "not reachable",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "nfpa855_2026": {
+  "where_read": "not re-opened: NFPA Free Access needs a login; no public NFPA page checked; other copies not used per brief (data/raw/codes/nfpa855_2026_screens.pdf exists but was not used)",
+  "claims": [
+   {
+    "claim": "title, 2026 edition",
+    "verdict": "UNREACHABLE",
+    "evidence": "not reachable",
+    "fix": null
+   },
+   {
+    "claim": "all thresholds, distances and clause numbers (1.3, Ch. 4, Ch. 9)",
+    "verdict": "UNREACHABLE",
+    "evidence": "not reachable",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "ashrae621_2022": {
+  "where_read": "/tmp/a.txt (text of J.B.'s upload)",
+  "claims": [
+   {
+    "claim": "ANSI/ASHRAE 62.1-2022 title",
+    "verdict": "CONFIRMED",
+    "evidence": "'ANSI/ASHRAE Standard 62.1-2022 ... Ventilation and Acceptable Indoor Air Quality'",
+    "fix": null
+   },
+   {
+    "claim": "5.4.1 intakes incl. natural-ventilation openings, Table 5-1 or Appendix B",
+    "verdict": "CONFIRMED",
+    "evidence": "'Outdoor air intakes (including openings that are required as part of a natural ventilation system)' ... 'a. the separation distance in Table 5-1 or b. the calculation methods in Normative Appendix B'",
+    "fix": null
+   },
+   {
+    "claim": "Table 5-1 (p. 10) values: Class 2 3 m, Class 3 5 m, Class 4 10 m, cooling-tower exhaust 7.5 m, intake/basin 5 m, street/parking 1.5 m, garage/loading 5 m, garbage 5 m, high-traffic 7.5 m, truck/bus 7.5 m, combustion flues 5 m, surface below 0.3 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'10 (3)', '15 (5)', '30 (10)', '25 (7.5)', '15 (5)', '5 (1.5)', 'Garage entry, automobile loading area, or drive-in queue 15 (5)', '15 (5)', '25 (7.5)', '25 (7.5)', 'Vents, chimneys, and flues from combustion appliances and equipment 15 (5)', '1 (0.30)'; table follows p. 9 footer",
+    "fix": null
+   },
+   {
+    "claim": "5.4.1.2 NFPA 54, 31, 211",
+    "verdict": "CONFIRMED",
+    "evidence": "'ANSI Z223.1/NFPA 54 ... NFPA 31 ... NFPA 211'",
+    "fix": null
+   },
+   {
+    "claim": "B1.3 full L for Class 3/4, cooling tower, combustion exhaust from operable openings; half L otherwise",
+    "verdict": "CONFIRMED",
+    "evidence": "'shall be half of the distance (L)' ... 'Class 3, Class 4, cooling tower, or combustion appliance/equipment exhaust ... equal to the distance (L)'; B1.3 says 'operable openings to occupiable spaces'",
+    "fix": null
+   },
+   {
+    "claim": "B1.3 'both those on the subject property and those on adjacent properties'",
+    "verdict": "WRONG",
+    "evidence": "phrase is in the B1 general paragraph (about outlets vs intakes and operable windows, skylights, doors), not in B1.3",
+    "fix": "attribute to B1"
+   },
+   {
+    "claim": "B1.4 no vertical credit within 20 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'exhausts located less than 65 ft (20 m) vertically below outdoor air intakes or operable windows and doors' ... 'no credit may be taken for any vertical separation'",
+    "fix": null
+   },
+   {
+    "claim": "B1.6 property line half L; exception Class 3/4/combustion ≥3 m above grade by a public way",
+    "verdict": "CONFIRMED",
+    "evidence": "'half of the distance (L)'; 'no minimum separation is required if exhaust termination is at least 10 ft (3 m) above grade'",
+    "fix": null
+   },
+   {
+    "claim": "Table B-1 Class 3 5 m, Class 4 10 m; Appendix B pp. 40–41",
+    "verdict": "CONFIRMED",
+    "evidence": "'15 (5)', '30 (10)'; B text on p. 40, Table B-1 after p. 40 footer",
+    "fix": null
+   },
+   {
+    "claim": "6.1.4.2 MERV 11 where PM2.5 exceeded",
+    "verdict": "CONFIRMED",
+    "evidence": "'a MERV of not less than 11' (or ISO ePM2.5)",
+    "fix": null
+   },
+   {
+    "claim": "no generator-specific row in 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "no 'generator' in Table 5-1 or Appendix B",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "STANDARD (US, benchmark; J.B. upload 1 Nov 2026): ANSI/ASHRAE Standard 62.1-2022, Ventilation and Acceptable Indoor Air Quality: 5.4.1 outdoor air intakes (incl. natural-ventilation openings) at least the Table 5-1 distance from each source, or per Normative Appendix B; Table 5-1 (p. 10): Class 2 exhaust/relief outlet 3 m; Class 3 5 m; Class 4 10 m; evaporative heat-rejection (cooling tower) exhaust 7.5 m, intake or basin 5 m; driveway, street or parking 1.5 m; garage entry or loading area 5 m; garbage or dumpsters 5 m; thoroughfare with high traffic 7.5 m; truck loading area or dock, bus parking/idling 7.5 m; vents, chimneys and flues from combustion appliances and equipment 5 m; surface below intake 0.3 m; 5.4.1.2 fuel-burning equipment distances follow NFPA 54, NFPA 31, NFPA 211 (not read ?); Appendix B (p. 40–41): B1 applies to operable windows, skylights and doors 'both those on the subject property and those on adjacent properties'; B1.3 Class 3, Class 4, cooling-tower and combustion exhaust must be the full distance L from operable openings to occupiable spaces (other exhaust half L); B1.4 no credit for vertical separation where exhaust is less than 20 m below an intake or window; B1.6 exhaust to property line half L, except Class 3/4 or combustion exhaust at least 3 m above grade beside a public way; Table B-1 Class 3 5 m, Class 4 10 m; 6.1.4.2 outdoor air filtered to MERV 11 or better where PM2.5 exceeds the national standard. The 2022 edition has no generator-specific row (the 'diesel generator' dilution factor is in a later addendum, see arch_ashrae621ag); this edition's combustion-flue row (5 m) is our closest reading for generator exhaust (?). ‖ CHECK 2 (1 Nov 2026, fixed): all figures confirmed; adjacent-property phrase moved to B1 (general), where it sits"
+ }
+}
