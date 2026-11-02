@@ -73,3 +73,9 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - Insurers: FM 1-15 caps roof PV arrays at 46 × 46 m with 1.2 m aisles; facade PV to FM 1-57 (not read); FM's 2025 tests: fire reached the top of the wall on 3 of 4 double-glass facade PV systems (insurer test data). OP Insurance (Finland): an unmanned data hall as a windowless room in the middle of the building (insurer guidance). No insurer source on public uses next to a data hall.
 - Exterior: combustible cladding incl. facade PV needs a sprinklered building (or ≤3 storeys) and a CAN/ULC-S134 full-wall test (NBC/BCBC/VBBL/NBC(AE) 3.1.5.5); RCMP G13-02 slab-to-slab steel-stud wall with steel mesh or sheet for the hall; no forced-entry or ballistic rule in the building code.
 - FM sheets J.B. to download (fm.com refused): 9-1, 9-16, 1-20, 1-3, 1-57 (and 5-23, 5-28, 13-26, 7-88, 1-40 from before).
+
+## Guards, perimeter, vehicle entry (research 1 Nov 2026: security_perimeter.md, check 1)
+- Guards: 24/7 on-site staff is operator practice (four operators' claims); no rule requires guards (RCMP: by threat and risk assessment). Staff washroom: industrial table, up to 10 staff per washroom with a sink (VBBL up to 25); BC toilet within 60 m of each post (federal summary, ?). Break room: RCMP practice only.
+- Fence height: Vancouver caps fences in required yards at 1.9 m (below the RCMP 2.4 m minimum): a taller fence needs Director of Planning approval, a spot behind the yard line, or the building wall as the line. Edmonton: no non-residential cap; fence behind a 3–6 m planted setback (our reading).
+- Crash ratings: barrier run-out drawn by rating: P1 under 1 m, P2 up to 7 m.
+- Gate: Vancouver wants a stopped vehicle fully on the lot before the gate; design trucks SU-9 and WB-17, so the gate sits about 17 m+ in (our arithmetic, ?).
