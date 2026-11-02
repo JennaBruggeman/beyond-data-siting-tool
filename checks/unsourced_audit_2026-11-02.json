@@ -1,0 +1,502 @@
+[
+ {
+  "file": "tool/engine.js",
+  "line": 154,
+  "what": "Existing-building floor area shown as a band: estimate × 0.48 to × 1.23, from our own check against 255 Vancouver buildings (19% low to 109% high); storey height ÷ 4 m",
+  "value": "0.48; 1.23; 4 m",
+  "status": "UNSOURCED",
+  "register_id": "floor_area",
+  "severity": "high",
+  "area": "What fits"
+ },
+ {
+  "file": "tool/site.js",
+  "line": 156,
+  "what": "Building sized to a chosen MW at single midpoints: 460 m² of hall per MW ÷ 0.6 hall share (midpoints of 290–630 and 0.48–0.72); sets the drawn building and feeds the \"largest that fits\" search",
+  "value": "460 m²/MW; 0.6",
+  "status": "UNSOURCED",
+  "register_id": "size_fit; hall_area",
+  "severity": "high",
+  "area": "What fits"
+ },
+ {
+  "file": "tool/engine.js",
+  "line": 257,
+  "what": "Service class thresholds compare facility MW directly with MVA/kVA (power factor 1). Register service_class marks this \"our assumption ?\"; screen gives no \"?\"",
+  "value": "PF = 1 (MW = MVA)",
+  "status": "UNSOURCED",
+  "register_id": "service_class",
+  "severity": "high",
+  "area": "What fits"
+ },
+ {
+  "file": "tool/site.js",
+  "line": 157,
+  "what": "Server floor drawn at least 12 m deep when sized down",
+  "value": "12 m",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "low",
+  "area": "What fits"
+ },
+ {
+  "file": "tool/site.js",
+  "line": 111,
+  "what": "A lot known only as a point is drawn as a square of at least 900 m²",
+  "value": "900 m²",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "medium",
+  "area": "What fits"
+ },
+ {
+  "file": "tool/site.js",
+  "line": 254,
+  "what": "Set-up text: UPS \"about 2.0–2.4 m² per MW plus 2.2 m² for batteries\"; register component_space now gives UPS 2.4–3.3, batteries 1.0–1.8 m² per MW (29 Oct study)",
+  "value": "2.0–2.4; 2.2",
+  "status": "UNSOURCED",
+  "register_id": "component_space",
+  "severity": "medium",
+  "area": "What fits"
+ },
+ {
+  "file": "tool/site.js",
+  "line": 142,
+  "what": "0.6 m gap between loading bays",
+  "value": "0.6 m",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "low",
+  "area": "What fits"
+ },
+ {
+  "file": "tool/plant.js",
+  "line": 66,
+  "what": "Plant yard capped at 90% of the buildable depth",
+  "value": "0.9",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "low",
+  "area": "What fits"
+ },
+ {
+  "file": "tool/extras.js",
+  "line": 261,
+  "what": "Map layer \"Size that fits, middle case\": MW = floor × 0.6 ÷ 460, storeys from 6 m + 5.75 m floors; midpoints, no setbacks or plant; method in legend, no register quantity",
+  "value": "0.6; 460; 5.75 m",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "medium",
+  "area": "What fits"
+ },
+ {
+  "file": "tool/engine.js",
+  "line": 250,
+  "what": "\"About the size of\" a precedent when within ×0.85–×1.18",
+  "value": "0.85; 1.18",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "low",
+  "area": "What fits"
+ },
+ {
+  "file": "tool/engine.js",
+  "line": 34,
+  "what": "jobsM2 464.5 (5,000 ft²) still defined; jobs dropped 30 Oct, not shown",
+  "value": "464.5",
+  "status": "UNSOURCED",
+  "register_id": "jobs",
+  "severity": "low",
+  "area": "What fits"
+ },
+ {
+  "file": "tool/compare.js",
+  "line": 26,
+  "what": "Comparison rows built on \"our choices\"",
+  "value": "set-up choices",
+  "status": "LABELLED",
+  "register_id": null,
+  "severity": "low",
+  "area": "What fits"
+ },
+ {
+  "file": "tool/plant.js",
+  "line": 57,
+  "what": "Provisional plant size until a size is set (floor × 0.48 ÷ 630), labelled provisional",
+  "value": "0.48; 630",
+  "status": "LABELLED",
+  "register_id": "hall_area; size_fit",
+  "severity": "low",
+  "area": "What fits"
+ },
+ {
+  "file": "tool/engine.js",
+  "line": 370,
+  "what": "Gas boiler efficiency 0.85 converts energy bought to heat (homes heated, heat value, CO2). Register uses it in price_ceiling/payback, but receiver_demand says \"boiler efficiency not yet sourced\"; no source text gives 0.85",
+  "value": "0.85",
+  "status": "UNSOURCED",
+  "register_id": "price_ceiling; homes_heated; receiver_demand",
+  "severity": "high",
+  "area": "Heat"
+ },
+ {
+  "file": "tool/cards.js",
+  "line": 63,
+  "what": "Gas CO2 uses 1,964 g/m³ for both provinces (mean of BC 1,966 and AB 1,962); register lists the provincial values",
+  "value": "1964",
+  "status": "UNSOURCED",
+  "register_id": "grid_co2",
+  "severity": "low",
+  "area": "Heat"
+ },
+ {
+  "file": "tool/cards.js",
+  "line": 204,
+  "what": "Receiver group grows to at most 40 buildings",
+  "value": "40",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "low",
+  "area": "Heat"
+ },
+ {
+  "file": "tool/engine.js",
+  "line": 438,
+  "what": "Options 3D draws 14 receivers for C, 6 for A and B",
+  "value": "14; 6",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "low",
+  "area": "Heat"
+ },
+ {
+  "file": "tool/xecon.js",
+  "line": 35,
+  "what": "Solar roof shading loss (beam shading from CWEC sun bins + sky-view diffuse loss; NREL SAM method, Antonanzas-Torres 2018, Ruiz-Arias 2010; obstacles within 500 m). Method and sources not in the register; pv_roof has no shading term",
+  "value": "method; 500 m",
+  "status": "UNSOURCED",
+  "register_id": "pv_roof",
+  "severity": "medium",
+  "area": "Energy"
+ },
+ {
+  "file": "tool/engine.js",
+  "line": 565,
+  "what": "Dead view (overridden by addons.js energyIndex) still holds the retired PV formula roof × 0.66 × (1 − share) × 0.70 and share cap 0.9",
+  "value": "0.66; 0.70; 0.9",
+  "status": "UNSOURCED",
+  "register_id": "pv_roof",
+  "severity": "low",
+  "area": "Energy"
+ },
+ {
+  "file": "tool/addons.js",
+  "line": 192,
+  "what": "Edmonton rain tank = one wet month of 82.7 mm; register rainwater gives Jun–Aug 213 mm, no 82.7 (Vancouver 124 mm is traced). Also xecon.js:107,118 and addons.js:220",
+  "value": "82.7 mm",
+  "status": "UNSOURCED",
+  "register_id": "rainwater",
+  "severity": "medium",
+  "area": "Water"
+ },
+ {
+  "file": "tool/addons.js",
+  "line": 212,
+  "what": "Edmonton water hardness about 178 mg/L CaCO3 (EPCOR 2026, \"not confirmed ?\"); Vancouver about 20; neither in the register",
+  "value": "178; 20 mg/L",
+  "status": "LABELLED",
+  "register_id": null,
+  "severity": "low",
+  "area": "Water"
+ },
+ {
+  "file": "tool/addons.js",
+  "line": 40,
+  "what": "Hybrid coolers wet above 18 °C: 30 °C loop, 12 K approach \"assumed\"",
+  "value": "30 °C; 12 K",
+  "status": "LABELLED",
+  "register_id": "free_cooling_hours",
+  "severity": "low",
+  "area": "Water"
+ },
+ {
+  "file": "tool/xecon.js",
+  "line": 118,
+  "what": "Rain runoff 0.8 and tank = one wet month, both shown as \"assumed\" (register says the same)",
+  "value": "0.8",
+  "status": "LABELLED",
+  "register_id": "rainwater",
+  "severity": "low",
+  "area": "Water"
+ },
+ {
+  "file": "tool/addons.js",
+  "line": 229,
+  "what": "Cooling and heat pumps \"replaced N times (15–25 years)\": count uses 20 years (Math.floor(yr/20)), a point from the range",
+  "value": "20 yr",
+  "status": "UNSOURCED",
+  "register_id": "horizons",
+  "severity": "medium",
+  "area": "Materials"
+ },
+ {
+  "file": "tool/engine.js",
+  "line": 624,
+  "what": "Dead view (overridden by addons.js materialsIndex) uses 0.461 t CO2e/m²; register embodied_building now uses the Vancouver 400 kg/m² benchmark. The live tab shows no building embodied carbon",
+  "value": "0.461",
+  "status": "UNSOURCED",
+  "register_id": "embodied_building",
+  "severity": "low",
+  "area": "Materials"
+ },
+ {
+  "file": "tool/addons.js",
+  "line": 229,
+  "what": "Server manufacturing share 10–15% \"?\"",
+  "value": "10–15%",
+  "status": "LABELLED",
+  "register_id": "embodied_it",
+  "severity": "low",
+  "area": "Materials"
+ },
+ {
+  "file": "tool/engine.js",
+  "line": 656,
+  "what": "Vancouver source in a quiet zone: 55 dBA night at a non-quiet neighbour (limO quiet 55; text line 394 \"55 elsewhere\"). van6555zones lists quiet→quiet, activity→quiet, intermediate→quiet, intermediate/activity→other only",
+  "value": "55 dBA",
+  "status": "UNSOURCED",
+  "register_id": "noise_limit",
+  "severity": "high",
+  "area": "People"
+ },
+ {
+  "file": "tool/engine.js",
+  "line": 670,
+  "what": "\"Neighbours over their limit\" counted within 600 m (3D tints to 650 m, scene3d.js:349); minimum distance 5 m",
+  "value": "600 m; 650 m; 5 m",
+  "status": "UNSOURCED",
+  "register_id": "noise_level",
+  "severity": "medium",
+  "area": "People"
+ },
+ {
+  "file": "tool/addons.js",
+  "line": 249,
+  "what": "Plant sight-line count over buildings within 350 m; register visibility is a field ledger, not a computed count",
+  "value": "350 m",
+  "status": "UNSOURCED",
+  "register_id": "visibility",
+  "severity": "medium",
+  "area": "People"
+ },
+ {
+  "file": "tool/addons.js",
+  "line": 69,
+  "what": "Roof screen height = unit + 0.9 m (\"2–3 ft taller\", SM&W 2021 acoustic consultant memo): source not in the register",
+  "value": "0.9 m",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "medium",
+  "area": "People"
+ },
+ {
+  "file": "tool/addons.js",
+  "line": 69,
+  "what": "Barrier example: 2 m behind, listener 30 m, 500 Hz; ISO 9613-2 20 dB cap \"not verified\"; \"an illustration, not this site\"",
+  "value": "2 m; 30 m; 20 dB",
+  "status": "LABELLED",
+  "register_id": null,
+  "severity": "low",
+  "area": "People"
+ },
+ {
+  "file": "tool/addons.js",
+  "line": 63,
+  "what": "Enclosure attenuation \"not yet verified for coolers\"",
+  "value": "10–15 dB",
+  "status": "LABELLED",
+  "register_id": null,
+  "severity": "low",
+  "area": "People"
+ },
+ {
+  "file": "tool/opps.js",
+  "line": 56,
+  "what": "New district: demand verdict \"yes\" if non-market homes take ≥ 20% of the heat offered, else \"maybe\"",
+  "value": "0.2",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "high",
+  "area": "Opportunities"
+ },
+ {
+  "file": "tool/opps.js",
+  "line": 103,
+  "what": "Meanwhile uses: land verdict \"yes\" if more than 200 m² is free, else \"no\"",
+  "value": "200 m²",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "high",
+  "area": "Opportunities"
+ },
+ {
+  "file": "tool/opps.js",
+  "line": 62,
+  "what": "Seasonal storage: wording switches at 1,000 m² of free yard (verdict unchanged)",
+  "value": "1,000 m²",
+  "status": "UNSOURCED",
+  "register_id": "borefield",
+  "severity": "low",
+  "area": "Opportunities"
+ },
+ {
+  "file": "tool/opps.js",
+  "line": 65,
+  "what": "BC allocation regulation read as applying at 10 MW or more: \"our reading ?\"",
+  "value": "10 MW",
+  "status": "LABELLED",
+  "register_id": "power_allocation",
+  "severity": "low",
+  "area": "Opportunities"
+ },
+ {
+  "file": "tool/scene3d.js",
+  "line": 166,
+  "what": "Point-only site drawn as a 25 m-radius octagon, 18 m high",
+  "value": "25 m; 18 m",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "low",
+  "area": "3D"
+ },
+ {
+  "file": "tool/scene3d.js",
+  "line": 177,
+  "what": "Indoor plant floor drawn at max(6, H − 6) m (a 6 m plant storey)",
+  "value": "6 m",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "low",
+  "area": "3D"
+ },
+ {
+  "file": "tool/scene3d.js",
+  "line": 176,
+  "what": "Acoustic housings drawn 0.6 m out and 1.0 m above each unit; roof screen ring offset 0.5 m",
+  "value": "0.6; 1.0; 0.5 m",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "low",
+  "area": "3D"
+ },
+ {
+  "file": "tool/scene3d.js",
+  "line": 200,
+  "what": "UPS and battery rows set 0.3 m off the room walls; register: UPS against the wall, batteries 25 mm",
+  "value": "0.3 m",
+  "status": "UNSOURCED",
+  "register_id": "electrical_room",
+  "severity": "low",
+  "area": "3D"
+ },
+ {
+  "file": "tool/scene3d.js",
+  "line": 200,
+  "what": "Electrical room stops 10 m short of the far end; racks drawn only if footprint > 200 m² (also :179, :411)",
+  "value": "10 m; 200 m²",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "low",
+  "area": "3D"
+ },
+ {
+  "file": "tool/scene3d.js",
+  "line": 127,
+  "what": "Receivers snap to a building within 25 m",
+  "value": "25 m",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "low",
+  "area": "3D"
+ },
+ {
+  "file": "tool/kit3d.js",
+  "line": 57,
+  "what": "Switchgear spec (Siemens Type WL) not in the register; not drawn at present",
+  "value": "0.813 × 1.778 × 2.438 m",
+  "status": "UNSOURCED",
+  "register_id": null,
+  "severity": "low",
+  "area": "3D"
+ },
+ {
+  "file": "tool/scene3d.js",
+  "line": 305,
+  "what": "Rack arrangement inside each 2.32 m²: \"our choice ?\"; heat-recovery room location \"our choice (?)\" (:209, :232, :387)",
+  "value": "layout",
+  "status": "LABELLED",
+  "register_id": "hall_layout; hr_plant_room",
+  "severity": "low",
+  "area": "3D"
+ },
+ {
+  "file": "tool/scene3d.js",
+  "line": 289,
+  "what": "Fence post spacing \"not sourced (?)\"",
+  "value": "—",
+  "status": "LABELLED",
+  "register_id": "security_layers",
+  "severity": "low",
+  "area": "3D"
+ },
+ {
+  "file": "tool/plant.js",
+  "line": 13,
+  "what": "Generators 1 m clear around each set \"not checked ?\"; Mark dry-cooler document \"?\" (:10)",
+  "value": "1 m",
+  "status": "LABELLED",
+  "register_id": "component_space; generator_sets",
+  "severity": "low",
+  "area": "3D"
+ },
+ {
+  "file": "tool/kit3d.js",
+  "line": 46,
+  "what": "Drawn equipment details in each SPEC \"unsure\" list (fan Ø, basin and pad heights, radiator depth, BESS cooling unit, CRV height 2.0 m, tank count)",
+  "value": "various",
+  "status": "LABELLED",
+  "register_id": null,
+  "severity": "low",
+  "area": "3D"
+ },
+ {
+  "file": "tool/scene3d.js",
+  "line": 304,
+  "what": "Room-cooling W/ft² bands \"approximate\"; CDUs \"not placed: no placement rule found\"",
+  "value": "150; 400 W/ft²",
+  "status": "LABELLED",
+  "register_id": "room_cooling_type; cdu_units",
+  "severity": "low",
+  "area": "3D"
+ },
+ {
+  "file": "register/formula_register.json",
+  "line": null,
+  "what": "window and tes_volume have no sources (window is arithmetic; tes_volume physics with 0.85 usable share and tank heights assumed)",
+  "value": "—",
+  "status": "UNSOURCED",
+  "register_id": "window; tes_volume",
+  "severity": "low",
+  "area": "Register"
+ },
+ {
+  "file": "register/formula_register.json",
+  "line": null,
+  "what": "it_load_outside still lists Cologix VAN2 ≈619 among \"five built halls\", dropped 30 Oct",
+  "value": "619",
+  "status": "UNSOURCED",
+  "register_id": "it_load_outside",
+  "severity": "low",
+  "area": "Register"
+ }
+]
