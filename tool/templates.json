@@ -18,10 +18,17 @@
   },
   {
    "id": "full",
-   "short": "Technical",
+   "short": "Engineering",
    "name": "How it is worked out",
-   "who": "engineers, architects, bylaw professionals",
+   "who": "engineers, bylaw professionals",
    "asks": "every setup question"
+  },
+  {
+   "id": "arch",
+   "short": "Architecture",
+   "name": "What it could hold",
+   "who": "architects and designers",
+   "asks": "every setup question; then programs, arrangement, comparison"
   }
  ],
  "rule": "every node runs in every tier; a tier sets what is asked and shown; facts are never switched off",
@@ -1548,6 +1555,71 @@
     "city"
    ],
    "why": "firefighting water after an earthquake"
+  },
+  "arch_program_catalogue": {
+   "tier": "arch_only",
+   "parties": [
+    "host",
+    "city",
+    "neighbours"
+   ],
+   "why": "the programs a site could hold"
+  },
+  "arch_placement": {
+   "tier": "arch_only",
+   "parties": [
+    "host",
+    "neighbours"
+   ],
+   "why": "where each program is drawn"
+  },
+  "arch_space_budget": {
+   "tier": "arch_only",
+   "parties": [
+    "host",
+    "city"
+   ],
+   "why": "the floor the programs share"
+  },
+  "arch_heat_budget": {
+   "tier": "arch_only",
+   "parties": [
+    "receiver",
+    "host"
+   ],
+   "why": "the heat the programs share"
+  },
+  "arch_heat_lift": {
+   "tier": "arch_only",
+   "parties": [
+    "receiver"
+   ],
+   "why": "whether a program can take the heat directly"
+  },
+  "arch_secure_line": {
+   "tier": "arch_only",
+   "parties": [
+    "operator",
+    "neighbours"
+   ],
+   "why": "where the locked part ends"
+  },
+  "arch_rules": {
+   "tier": "arch_only",
+   "parties": [
+    "city",
+    "neighbours"
+   ],
+   "why": "the rules an arrangement passes or fails"
+  },
+  "arch_compare": {
+   "tier": "arch_only",
+   "parties": [
+    "host",
+    "city",
+    "neighbours"
+   ],
+   "why": "arrangements side by side"
   }
  },
  "reports": {
@@ -1710,6 +1782,33 @@
     "id": "logic",
     "title": "How it is worked out",
     "what": "every part of the tool, by stage"
+   },
+   {
+    "id": "sources",
+    "title": "Sources",
+    "what": "as text"
+   }
+  ],
+  "arch": [
+   {
+    "id": "cover",
+    "title": "The lot",
+    "what": "address, the site drawn, four numbers"
+   },
+   {
+    "id": "fits",
+    "title": "What fits",
+    "what": "plan, section, how big"
+   },
+   {
+    "id": "flows",
+    "title": "What moves in and out",
+    "what": "electricity, heat, water, carbon"
+   },
+   {
+    "id": "heat",
+    "title": "Heat",
+    "what": "who could take it, at what cost"
    },
    {
     "id": "sources",
@@ -2561,6 +2660,38 @@
    [
     "plant_weight",
     "size"
+   ],
+   [
+    "arch_program_catalogue",
+    "decide"
+   ],
+   [
+    "arch_placement",
+    "decide"
+   ],
+   [
+    "arch_space_budget",
+    "decide"
+   ],
+   [
+    "arch_heat_budget",
+    "decide"
+   ],
+   [
+    "arch_heat_lift",
+    "decide"
+   ],
+   [
+    "arch_secure_line",
+    "decide"
+   ],
+   [
+    "arch_rules",
+    "decide"
+   ],
+   [
+    "arch_compare",
+    "decide"
    ]
   ],
   "edges": [
@@ -3731,12 +3862,109 @@
    [
     "battery_cabinets",
     "plant_weight"
+   ],
+   [
+    "zone",
+    "arch_program_catalogue"
+   ],
+   [
+    "envelope",
+    "arch_placement"
+   ],
+   [
+    "size_fit",
+    "arch_placement"
+   ],
+   [
+    "generator_sets",
+    "arch_placement"
+   ],
+   [
+    "cooling_units",
+    "arch_placement"
+   ],
+   [
+    "arch_program_catalogue",
+    "arch_placement"
+   ],
+   [
+    "envelope",
+    "arch_space_budget"
+   ],
+   [
+    "floor_area",
+    "arch_space_budget"
+   ],
+   [
+    "arch_program_catalogue",
+    "arch_space_budget"
+   ],
+   [
+    "heat_captured",
+    "arch_heat_budget"
+   ],
+   [
+    "heat_delivered",
+    "arch_heat_budget"
+   ],
+   [
+    "arch_program_catalogue",
+    "arch_heat_budget"
+   ],
+   [
+    "heat_temp",
+    "arch_heat_lift"
+   ],
+   [
+    "cop",
+    "arch_heat_lift"
+   ],
+   [
+    "arch_program_catalogue",
+    "arch_heat_lift"
+   ],
+   [
+    "security_layers",
+    "arch_secure_line"
+   ],
+   [
+    "arch_placement",
+    "arch_secure_line"
+   ],
+   [
+    "arch_program_catalogue",
+    "arch_rules"
+   ],
+   [
+    "arch_placement",
+    "arch_rules"
+   ],
+   [
+    "arch_secure_line",
+    "arch_rules"
+   ],
+   [
+    "arch_space_budget",
+    "arch_compare"
+   ],
+   [
+    "arch_heat_budget",
+    "arch_compare"
+   ],
+   [
+    "arch_rules",
+    "arch_compare"
+   ],
+   [
+    "arch_secure_line",
+    "arch_compare"
    ]
   ]
  },
  "resident_count": 42,
  "community_count": 119,
  "full_count": 202,
+ "arch_count": 127,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {

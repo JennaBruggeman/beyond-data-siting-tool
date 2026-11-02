@@ -162,7 +162,7 @@ function model(){
   if(m.foot&&!m.existing&&m.footArea<20) m.warn.push('After setbacks, loading and plant there is almost no room left for a building on this lot.');
   if(BD.plant&&BD.plant.roof) BD.plant.roof(m);
   cache={key,m}; return m; }
-BD.model=model; BD.modelReset=()=>{ cache.key=null; };
+BD.siteGeo={rectW,inscribe,clip,frameOf}; BD.model=model; BD.modelReset=()=>{ cache.key=null; };
 /* a set-up that does not work (J.B. 20 Oct: "a set up that doesnt work shouldnt ever let you click next"): everything that stops it, in words */
 function setupProblems(noFloor){ const m=model(); if(!m||!m.F) return []; const p=(m.warn||[]).slice();
   if(m.plant&&m.plant.miss) p.push(...m.plant.miss.map(x=>x.charAt(0).toUpperCase()+x.slice(1)+'.'));

@@ -6,13 +6,14 @@
 (function(){
 'use strict';
 const BD=window.BD; const {$,esc}=BD;
-const GROUPS=[['site','Site'],['fits','What fits'],['ex','Exchanges'],['opps','Opportunities'],['opts','Options'],['report','Report']];
+const GROUPS=[['site','Site'],['fits','What fits'],['ex','Exchanges'],['opps','Opportunities'],['opts','Options'],['design','Design'],['report','Report']];
 const BASE=[
  {k:'site',g:'site',t:'Pick a site'},{k:'setup',g:'site',t:'Set up the site'},
  {k:'fits',g:'fits',t:'What fits'},{k:'prec',g:'fits',t:'Real buildings'},
  {k:'heat',g:'ex',t:'Heat'},{k:'energy',g:'ex',t:'Electricity'},{k:'water',g:'ex',t:'Water'},{k:'materials',g:'ex',t:'Materials'},{k:'social',g:'ex',t:'People'},
  {k:'opps',g:'opps',t:'Opportunities'},{k:'spec',g:'opps',t:'Could become'},
  {k:'opts',g:'opts',t:'Three options'},{k:'time',g:'opts',t:'Over time'},
+ {k:'aprog',g:'design',t:'Programs'},{k:'aarr',g:'design',t:'Arrange'},{k:'acmp',g:'design',t:'Compare'},
  {k:'cities',g:'report',t:'Two cities'},{k:'report',g:'report',t:'Report'}];
 const F=BD.flow={on:true,steps:BASE.slice(),i:0,max:0,notes:{},busy:false};
 document.body.classList.add('flow');
@@ -107,9 +108,10 @@ function findFit(){ if(!BD.S.sel||!BD.fitMax) return null; const A=BD.S.answers,
   Object.assign(A,base,best?best.t:{}); if(best){ A.mw=best.v; A.mwPick='large'; A.mwSite=BD.S.sel.id; } BD.modelReset&&BD.modelReset(); return best; }
 F.findFit=findFit;
 /* ---------- the bar at the top and the buttons at the bottom of the panel ---------- */
-function bar(){ const st=F.steps[F.i], gi=GROUPS.findIndex(g=>g[0]===st.g); const inG=F.steps.filter(s=>s.g===st.g), j=inG.indexOf(st);
-  const reachG=g=>F.steps.findIndex((s,k)=>s.g===g&&k<=F.max)>=0;
-  return `<div class="flowbar"><nav class="path" aria-label="Steps">${GROUPS.map(([g,l],k)=>`<button data-fg="${g}" title="${l}" aria-label="${k+1} ${l}" ${k===gi?'aria-current="step"':''} ${reachG(g)?'':'disabled'}><span>${k+1}</span>${k===gi?l:`<span class="pl">${l}</span>`}</button>`).join('')}</nav>
+function bar(){ const st=F.steps[F.i], tt=(BD.tier&&BD.tier())||'full', sk=s=>!!(SKIP[tt]&&SKIP[tt].has(s.k)); /* 2 Nov 2026: only the groups and steps this template walks */
+  const GR=GROUPS.filter(([g])=>F.steps.some(s=>s.g===g&&!sk(s))), gi=GR.findIndex(g=>g[0]===st.g); const inG=F.steps.filter(s=>s.g===st.g&&!sk(s)), j=inG.indexOf(st);
+  const reachG=g=>F.steps.findIndex((s,k)=>s.g===g&&k<=F.max&&!sk(s))>=0;
+  return `<div class="flowbar"><nav class="path" aria-label="Steps">${GR.map(([g,l],k)=>`<button data-fg="${g}" title="${l}" aria-label="${k+1} ${l}" ${k===gi?'aria-current="step"':''} ${reachG(g)?'':'disabled'}><span>${k+1}</span>${k===gi?l:`<span class="pl">${l}</span>`}</button>`).join('')}</nav>
   ${inG.length>1?`<div class="fsub"><span class="fst">${esc(st.t)} · ${j+1} of ${inG.length}</span><span class="fseg" title="${esc(st.t)}: ${j+1} of ${inG.length}">${inG.map((x,q)=>`<i class="${q<j?'done':q===j?'on':''}"></i>`).join('')}</span></div>`:''}</div>`; }
 /* a set-up that does not work stops the walk (J.B. 20 Oct: "a set up that doesnt work shouldnt ever let you click next … If there is not room
    then it should say that and make you change the size etc. to fix it"): the reasons, then the two ways out */
@@ -141,7 +143,9 @@ async function expandOpps(){ const k=F.steps.findIndex(s=>s.k==='opps'); if(k<0)
   const add=[{k:'opps-best',g:'opps',t:'Set-ups that open the most'}].concat(BD.oppFams.map(f=>({k:'fam:'+f,g:'opps',t:f+' opportunities',fam:f})));
   F.steps.splice(k,1,...add); }
 /* sweep 20 Oct 2026: a step whose every section is shown only in fuller templates is skipped there (residents: Real buildings, which was an empty page) */
-const SKIP={resident:new Set(['prec'])};
+const DES=['aprog','aarr','acmp'];
+const SKIP={resident:new Set(['prec',...DES]),community:new Set(DES),full:new Set(DES),
+  arch:new Set(['prec','energy','water','materials','social','opps','spec','opts','time','cities'])}; /* 2 Nov 2026: Architecture mode = site, set-up, what fits, heat, then its own three steps */
 async function go(i){ { const t=(BD.tier&&BD.tier())||'full', dir=i>=F.i?1:-1; while(i>0&&i<F.steps.length-1&&SKIP[t]&&SKIP[t].has(F.steps[i].k)) i+=dir; }
   if(i<0||i>=F.steps.length) return; invalidate(); capture(); F.i=i; F.max=Math.max(F.max,i); document.body.classList.remove('wide');
   if(F.steps[i].k==='opps'){ await expandOpps(); }
@@ -150,7 +154,8 @@ async function go(i){ { const t=(BD.tier&&BD.tier())||'full', dir=i>=F.i?1:-1; w
   decorate(); const sd=$('#side'); if(sd) sd.scrollTop=0; const tx=document.getElementById('wcTx'); if(tx) tx.scrollTop=0; }
 function next(){ if(F.steps[F.i].k==='site'&&!BD.S.sel) return; if(stuck()) { decorate(); return; } go(F.i+1); }
 function back(){ go(F.i-1); }
-async function show(st){ const k=st.k;
+async function show(st){ const k=st.k; if(BD.archHide&&!['aprog','aarr','acmp'].includes(k)) BD.archHide();
+  if(k==='aprog'||k==='aarr'||k==='acmp') return BD.views[k]();
   if(k==='site'){ BD.S.view2=null; BD.scene3d&&BD.scene3d.hide(); if(BD.S.sel) BD.card(); else BD.intro(); BD.draw(); return; }
   if(k==='setup'){ BD.S.view2=null; BD.scene3d&&BD.scene3d.hide(); BD.card(); BD.setup.start(); return; }
   if(k==='fits'){ BD.scene3d&&BD.scene3d.hide(); BD.fitsView(); return; }
@@ -194,7 +199,7 @@ function facts(){ const e=BD.eng, f=e.siteFacts(), A=BD.S.answers, a=BD.S.sel.a|
    ['Set-up',`${A.built==='existing'?'existing building':'new building'}, ${A.inside||'air'} cooling inside, ${(A.outside||'dry')==='dry'?((A.inside||'air')==='air'?'air-cooled chillers':'dry coolers'):(A.outside==='towers'?'cooling towers':'hybrid coolers')} outside`]]
    .concat(BD.tier&&BD.tier()==='resident'&&!A.residentEdit?[['Chosen for you','the size and set-up above are the tool\'s usual choices, not yours; change them in step 1 and the report follows']]:[]); }
 const ORDERG=['site','fits','ex','opps','opts','report'];
-const RK={resident:0,community:1,full:2};
+const RK={resident:0,community:1,full:2,arch:1};
 /* the report follows the tier (J.B. and Xun, 19 Oct 2026): residents a plain page or two (what affects them, what was assumed); the neighbourhood
    who gains and loses, money, approvals, comparisons (with tables); professionals everything, each result with the parts it is worked out from.
    A section counts at a tier if any part behind it is drawn at that tier (logic.js); one the reader brought back with "Show more" stays in. */
