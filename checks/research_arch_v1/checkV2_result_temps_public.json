@@ -1,0 +1,402 @@
+{
+ "arch_tmp_nbc62": {
+  "where_read": "local data/raw/codes/nbc.txt l. 35933-35937, 38281-38296, 65844-65860; bcbc2024.txt l. 38927, 70242; nbc_ab2023.txt l. 37088, 65867; vbbl2025_v1.txt l. 28774",
+  "claims": [
+   {
+    "claim": "6.2.1.1.(1) good engineering practice incl. ASHRAE Handbooks and Standards, HRAI Digest, Hydronics Institute Manuals, CSA B214; p. 6-1",
+    "verdict": "CONFIRMED",
+    "evidence": "'a) the ASHRAE Handbooks and Standards, b) the HRAI Digest, c) the Hydronics Institute Manuals ... g) CSA B214'; footer 'Division B 6-1'",
+    "fix": "list also has NFPA, SMACNA, ACGIH, CSA Z317.2 (not exhaustive: fine)"
+   },
+   {
+    "claim": "5.2.1.2.(1) interior loads per good practice, p. 5-3",
+    "verdict": "CONFIRMED",
+    "evidence": "'Interior environmental loads shall be determined in accordance with good practice as described in Sentence 6.2.1.1.(1) based on the intended use of the space'; footer 'Division B 5-3'",
+    "fix": ""
+   },
+   {
+    "claim": "9.33.3.1.(1) 22 °C living spaces, 18 °C unfinished basements, p. 9-223, residential only",
+    "verdict": "CONFIRMED",
+    "evidence": "'a) 22°C in all living spaces, b) 18°C in unfinished basements'; 9.33.1.1 'Residential buildings'; footer 'Division B 9-223'",
+    "fix": ""
+   },
+   {
+    "claim": "same wording in BCBC 2024, NBC(AE) 2023, VBBL 2025 (line refs)",
+    "verdict": "CONFIRMED",
+    "evidence": "matches at bcbc2024 l. 38927/70242, nbc_ab2023 l. 37088/65867, vbbl2025_v1 l. 28774 (register line numbers within a few lines; VBBL 9.33.3.1 in vbbl2025_v2 l. 10333)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: National Building Code of Canada 2020, NRC, Div. B (local text data/raw/codes/nbc.txt l. 35933-35937, 38281-38296, 65844-65860): 6.2.1.1.(1) p. 6-1 HVAC systems 'shall be designed, constructed and installed in conformance with good engineering practice such as that described in, but not limited to, a) the ASHRAE Handbooks and Standards' (also HRAI Digest, Hydronics Institute Manuals, CSA B214); 5.2.1.2.(1) p. 5-3 'Interior environmental loads shall be determined in accordance with good practice as described in Sentence 6.2.1.1.(1) based on the intended use of the space'; 9.33.3.1.(1) p. 9-223 (residential only) '22°C in all living spaces', '18°C in unfinished basements'; same 6.2.1.1 and 9.33.3.1 wording in BCBC 2024 (l. 38918, 70238), NBC(AE) 2023 (l. 37084, 65864), VBBL 2025 (l. 28771) — https://nrc-publications.canada.ca (local copy) ‖ CHECK 2 (2 Nov 2026, ok): all clauses, quotes and pages confirmed in local NBC, BCBC, NBC(AE), VBBL text."
+ },
+ "arch_tmp_ccohsComfort": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "last revised 30 Jul 2025, page mod. 20 Oct 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Fact sheet last revised: 2025-07-30'; 'Date modified: 2026-10-20'",
+    "fix": ""
+   },
+   {
+    "claim": "Table 1 at 50% RH: 0.65 clo 21-25 °C; 1.0 clo 18-23 °C (from ASHRAE 55)",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 1 rows 0.65 / 21 / 25 and 1.0 / 18 / 23; cites ASHRAE Standard 55",
+    "fix": ""
+   },
+   {
+    "claim": "'there are no established lower humidity limits for thermal comfort'",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted on page",
+    "fix": ""
+   },
+   {
+    "claim": "CSA Z412 not cited",
+    "verdict": "CONFIRMED",
+    "evidence": "not mentioned",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Office-work guide applied to a winter garden atrium and a winter market: use as comfort benchmark only (already labelled 'summary of standard').",
+  "new_text": "GOVERNMENT GUIDE: Thermal Comfort for Office Work (OSH Answers), Canadian Centre for Occupational Health and Safety, last revised 30 Jul 2025 (page mod. 20 Oct 2026): Table 1 (from ASHRAE 55) at 50% RH: clothing 0.65 clo 21-25 °C; 1.0 clo 18-23 °C; 'there are no established lower humidity limits for thermal comfort'; CSA Z412 not cited — https://www.ccohs.ca/oshanswers/phys_agents/thermal_comfort.html ‖ CHECK 2 (2 Nov 2026, ok): all figures and dates confirmed; scope is office work, so benchmark only for atrium/market."
+ },
+ "arch_tmp_ccohsLeg": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026; COHSR s. 9.9 page also fetched",
+  "claims": [
+   {
+    "claim": "last revised 18 Feb 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'Fact sheet last revised: 2025-02-18'",
+    "fix": ""
+   },
+   {
+    "claim": "Federal s. 9.9 '18°C minimum/29°C maximum'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Section 9.9: personal service room and food preparation area: 18°C minimum/29°C maximum'",
+    "fix": ""
+   },
+   {
+    "claim": "COHSR s. 9.9 text and version 2019-06-25 to 2026-09-30",
+    "verdict": "CONFIRMED",
+    "evidence": "'shall, if feasible, be maintained at a level of not less than 18°C and not more than 29°C'; 'Version of section 9.9 from 2019-06-25 to 2026-09-30' (page marked archived)",
+    "fix": "note a newer version of s. 9.9 is in force from 2026-10-01; current wording not checked"
+   },
+   {
+    "claim": "Alberta 23-28 °C summer, 20-25 °C winter, RH ~30%",
+    "verdict": "CONFIRMED",
+    "evidence": "'Non-regulatory guideline recommends an indoor temperature of 23-28°C in the summer and 20-25°C in the winter' 'when relative humidity is closer to 30%'",
+    "fix": ""
+   },
+   {
+    "claim": "BC heat ss. 7.27-7.32, cold ss. 7.33-7.38, ACGIH TLVs",
+    "verdict": "CONFIRMED",
+    "evidence": "'Heat: Sections 7.27 to 7.32: current ACGIH TLVs®'; 'Cold: Sections 7.33 to 7.38: current ACGIH TLVs®'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "COHSR applies to federally regulated workplaces only (already flagged in md).",
+  "new_text": "GOVERNMENT SUMMARY: Temperature Conditions - Legislation (OSH Answers), CCOHS, last revised 18 Feb 2025 (page mod. 20 Oct 2026): Federal COHSR s. 9.9 'personal service room and food preparation area: 18°C minimum/29°C maximum' (s. 9.9 text: 'shall, if feasible, be maintained at a level of not less than 18°C and not more than 29°C', SOR/86-304, version 2019-06-25 to 2026-09-30, https://laws-lois.justice.gc.ca/eng/regulations/SOR-86-304/section-9.9-20190625.html); Alberta 'Non-regulatory guideline recommends an indoor temperature of 23-28°C in the summer' and '20-25°C in the winter when relative humidity is closer to 30%' (guideline not named ?); BC: only 'Heat: Sections 7.27 to 7.32' and 'Cold: Sections 7.33 to 7.38: current ACGIH TLVs' — https://www.ccohs.ca/oshanswers/phys_agents/temp_legislation.html ‖ CHECK 2 (2 Nov 2026, ok): all quotes confirmed; the cited s. 9.9 version is archived (ended 2026-09-30), current version not checked (?)."
+ },
+ "arch_tmp_abGH014": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "title, GH014, Government of Alberta, updated Dec 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "'Indoor air quality', 'GH014', 'December 2022'",
+    "fix": ""
+   },
+   {
+    "claim": "'about 22 degrees Celsius' and 'Work settings ... different temperatures'",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "RH 'about 30 to 60 percent'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Comfortable relative humidity levels range from about 30 to 60 percent.'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 2 (inferred)",
+    "verdict": "NOT FOUND",
+    "evidence": "document shows no page numbers; text sits under 'Factors that impact indoor air quality'",
+    "fix": "cite section, not page"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Office-based statement ('Most people in offices'); benchmark only for a market.",
+  "new_text": "GOVERNMENT GUIDE: Indoor air quality, OHS information bulletin GH014, Government of Alberta, updated Dec 2022: section 'Factors that impact indoor air quality' (no page numbers) 'Most people in offices are comfortable when the air temperature is about 22 degrees Celsius'; 'Work settings and activities may require different temperatures'; 'Comfortable relative humidity levels range from about 30 to 60 percent' — https://ohs-pubstore.labour.alberta.ca/download/sample/69 ‖ CHECK 2 (2 Nov 2026, fixed): quotes confirmed; page number removed (none printed)."
+ },
+ "arch_tmp_abInfraIAQ": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "title, Technical Resources and Standards Branch, Alberta Infrastructure, 12 Apr 2002",
+    "verdict": "CONFIRMED",
+    "evidence": "'Indoor Air Quality Guideline'; April 12, 2002",
+    "fix": ""
+   },
+   {
+    "claim": "App. 3 p. 7 '22oC with a 2oC upswing at peak outdoor design temperature (summer) in air-conditioned buildings'",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted verbatim; marked '* Comfort parameters'; 'These parameters are those of the Alberta Personnel Administration Office (PAO)'",
+    "fix": ""
+   },
+   {
+    "claim": "RH 20% at -35, 30% at >0, 60% max",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "no winter temperature given (md: 22 °C read as summer only)",
+    "verdict": "WRONG",
+    "evidence": "22 °C carries no season; only the 2 °C upswing is tied to summer peak",
+    "fix": "22 °C is the base comfort parameter (no season stated: year-round, our reading); +2 °C upswing at summer peak in air-conditioned buildings"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Written for Government of Alberta occupied facilities ('at Government of Alberta occupied facilities'); benchmark only for a market.",
+  "new_text": "GOVERNMENT GUIDE: Indoor Air Quality Guideline, Technical Resources and Standards Branch, Alberta Infrastructure, 12 Apr 2002: App. 3 p. 7 '22oC with a 2oC upswing at peak outdoor design temperature (summer) in air-conditioned buildings'; RH '20% at outdoor temperature of -35oC', '30% at outdoor temperature >0oC', '60% maximum' (comfort parameters of the Alberta Personnel Administration Office); 22 °C has no season stated (year-round, our reading), only the +2 °C upswing is summer; scope 'Government of Alberta occupied facilities' — https://www.infrastructure.alberta.ca/Content/docType486/Production/IndoorAirQuality.pdf ‖ CHECK 2 (2 Nov 2026, fixed): quotes confirmed; 22 °C is not summer-only."
+ },
+ "arch_tmp_ashrae55fs": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "scope 'Specifies thermal environmental conditions acceptable for healthy adults in indoor spaces'",
+    "verdict": "CONFIRMED",
+    "evidence": "continues '... designed for human occupancy for at least 15 minutes'",
+    "fix": ""
+   },
+   {
+    "claim": "'floor temperature, radiant asymmetry, temperature stratification and draft'",
+    "verdict": "CONFIRMED",
+    "evidence": "'local environmental factors of floor temperature, radiant asymmetry, temperature stratification and draft'",
+    "fix": ""
+   },
+   {
+    "claim": "no °C values",
+    "verdict": "CONFIRMED",
+    "evidence": "no temperature values in either unit",
+    "fix": ""
+   },
+   {
+    "claim": "ASHRAE Government Affairs, Dec 2018",
+    "verdict": "NOT FOUND",
+    "evidence": "issuer confirmed from footer; no date on the sheet itself, 'Dec2018' appears only in the file name",
+    "fix": "say 'Dec 2018 (file name)'"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "STANDARD (public fact sheet; full standard paywalled): ANSI/ASHRAE Standard 55-2017 fact sheet, ASHRAE Government Affairs, Dec 2018 (date from file name only): 'Specifies thermal environmental conditions acceptable for healthy adults in indoor spaces'; covers 'floor temperature, radiant asymmetry, temperature stratification and draft'; no fixed set points or °C values on the sheet — https://www.ashrae.org/File Library/About/Government Affairs/Advocacy Toolkit/Virtual Packet/55-2017-Fact-Sheet_Dec2018.pdf ‖ CHECK 2 (2 Nov 2026, fixed): quotes confirmed; date is from the file name, not printed."
+ },
+ "arch_tmp_vanNEU2020": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "title, City of Vancouver Engineering Services NEU, Mar 2020",
+    "verdict": "CONFIRMED",
+    "evidence": "'NEU Connectivity Guidelines & Requirements', March 2020",
+    "fix": ""
+   },
+   {
+    "claim": "s. 3.4 p. 11 'never less than 65°C'",
+    "verdict": "CONFIRMED",
+    "evidence": "'The NEU supply temperature fluctuates based on outdoor air temperature but is never less than 65°C.'",
+    "fix": ""
+   },
+   {
+    "claim": "Table 1 p. 11 space heating 70/50 winter, 50/30 summer, min. ΔT 20",
+    "verdict": "CONFIRMED",
+    "evidence": "Building Space Heating: max supply 70 / 50, max return 50 / 30, min. differential 20 / 20 (extracted alignment still only our reading)",
+    "fix": ""
+   },
+   {
+    "claim": "radiant floor 45/35, convectors 70/50, radiators 60/45 on p. 20",
+    "verdict": "CONFIRMED",
+    "evidence": "listed p. 20",
+    "fix": ""
+   },
+   {
+    "claim": "fan coils 70/50, hybrid heat pumps 52/32, make-up air coils 65/45 on p. 20",
+    "verdict": "WRONG",
+    "evidence": "these three are on p. 21",
+    "fix": "p. 21"
+   },
+   {
+    "claim": "'should be regarded as guidelines only'",
+    "verdict": "CONFIRMED",
+    "evidence": "'should be regarded as guidelines only, and the Developer's Mechanical Engineer shall be responsible for the final (building-specific) design'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "UTILITY GUIDE: NEU Connectivity Guidelines & Requirements, City of Vancouver Engineering Services, Neighbourhood Energy Utility, Mar 2020: s. 3.4 p. 11 'The NEU supply temperature fluctuates based on outdoor air temperature but is never less than 65°C'; Table 1 p. 11 space heating max supply winter 70 °C / summer 50 °C, max return 50 / 30 °C, min. differential 20 °C (min. differential under both building space-heating columns: our reading; NEU network design 95/55 winter, 65/50 summer); s. 6.2.3 pp. 20-21 terminal design: p. 20 radiant floor HWS 45 °C / HWR 35 °C, fin-type convectors 70/50, perimeter radiators 60/45; p. 21 fan coils 70/50, hybrid heat pumps 52/32, ventilation make-up air coils 65/45; figures 'should be regarded as guidelines only' — https://guidelines.vancouver.ca/guidelines-neighbourhood-energy-utility-connectivity-requirements.pdf ‖ CHECK 2 (2 Nov 2026, fixed): figures confirmed; fan coils, hybrid HP and make-up air coils are on p. 21, not p. 20."
+ },
+ "arch_tmp_edmDESS2025": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026 (full text incl. final part)",
+  "claims": [
+   {
+    "claim": "title, Version 8, Blatchford Renewable Energy, Jun 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'District Energy Sharing System Design Guide, Multi-Unit Lots', Version 8, June 2025",
+    "fix": ""
+   },
+   {
+    "claim": "s. 6.1 p. 14 'maximum heating water supply temperature of 49°C (120°F) at design condition'",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "reset 49 → 30 °C between -5 and 15 °C (Fig. 2 p. 15)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Above 15°C outdoor air temperature, heating water supply temperature is maintained at 30°C'; 49 °C below -5 °C (pp. 14-15)",
+    "fix": ""
+   },
+   {
+    "claim": "min. design delta-T 11 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "'minimum design delta-T: 11°C' (s. 6.1, p. 15)",
+    "fix": ""
+   },
+   {
+    "claim": "Table 6 p. 21 return ≤38 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "'Heating water return temperatures at design condition must not exceed 38°C.'",
+    "fix": ""
+   },
+   {
+    "claim": "permitted terminals",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 1 p. 11 'Compatible systems include water-air heat pump, water source variable refrigerant flow, in-floor radiant' plus low-temperature radiators and fan coils; Table 6 radiators, convectors, fan coils",
+    "fix": ""
+   },
+   {
+    "claim": "Table 8 p. 28 loop 8-32 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "'Varying between min. 8°C (winter) max. 32°C (summer)'",
+    "fix": ""
+   },
+   {
+    "claim": "last ~10% not read",
+    "verdict": "CONFIRMED",
+    "evidence": "now read: checklist and forms only; no new heating temperatures (DHW 60 °C only)",
+    "fix": "drop the 'not read' note"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "UTILITY GUIDE: District Energy Sharing System Design Guide, Multi-Unit Lots, Version 8, Blatchford Renewable Energy (City of Edmonton), Jun 2025: s. 6.1 p. 14 'maximum heating water supply temperature of 49°C (120°F) at design condition'; example reset 49 °C to 30 °C between -5 °C and 15 °C outdoor (Fig. 2 p. 15); min. design delta-T 11 °C; Table 6 p. 21 'Heating water return temperatures at design condition must not exceed 38°C'; permitted: water-air heat pumps, water-source VRF, in-floor radiant, 'Hydronic radiators, convectors, or fan coils'; Table 8 p. 28 loop 'Varying between min. 8°C (winter) max. 32°C (summer)'; remaining text (checklists, forms) has no further heating temperatures (DHW 60 °C only) — https://www.gov.edmonton.ab.ca/sites/default/files/public-files/documents/district-energy-sharing-system-multi-unit-lots-design-guide.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all figures confirmed; unread tail now read, nothing new."
+ },
+ "arch_tmp_vadiee2020": {
+  "where_read": "WebFetch of https://mdpi.com/2075-5309/10/1/5 (2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "authors, title, Buildings 10(1):5, 2020, doi",
+    "verdict": "CONFIRMED",
+    "evidence": "Vadiee, Dodoo, Jalilzadehazhari (2020) Buildings 10(1), 5, 10.3390/buildings10010005",
+    "fix": ""
+   },
+   {
+    "claim": "s. 2.2 rigid floors 45-50 °C; suspended 55-60 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "'the supply water temperature for rigid floors is recommended as 45–50 °C based on the design outdoor temperature'",
+    "fix": ""
+   },
+   {
+    "claim": "measured 42/36 °C at -15 °C design outdoor",
+    "verdict": "CONFIRMED",
+    "evidence": "'the supply and return temperatures for a floor heating system were measured as 42 °C and 36 °C'; -15 °C design outdoor described as 'assumed'",
+    "fix": "note it is a cited experimental study (secondary)"
+   },
+   {
+    "claim": "s. 2.1 radiator supply 'must be lower than 55 °C for most cases'",
+    "verdict": "CONFIRMED",
+    "evidence": "'the radiator design supply temperature is restricted and must be lower than 55 °C'; up to 60 °C in special cases",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Single-family house in Sweden applied to a public winter garden floor: benchmark outside Canada, residential scope.",
+  "new_text": "PEER-REVIEWED: Vadiee A., Dodoo A., Jalilzadehazhari E., Heat Supply Comparison in a Single-Family House with Radiator and Floor Heating Systems, Buildings 10(1):5, 2020, doi:10.3390/buildings10010005: s. 2.2 'the supply water temperature for rigid floors is recommended as 45–50 °C based on the design outdoor temperature' (suspended floors 55-60 °C); measured floor system 42 °C supply / 36 °C return (cited experimental study) at an 'assumed' -15 °C design outdoor; s. 2.1 Swedish radiator design supply 'must be lower than 55 °C for most cases' (up to 60 °C in special cases) — https://mdpi.com/2075-5309/10/1/5 ‖ CHECK 2 (2 Nov 2026, ok): figures confirmed; Swedish single-family house, so benchmark only for a public floor."
+ },
+ "arch_tmp_dudzinska2021": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026 (full text)",
+  "claims": [
+   {
+    "claim": "author, title, Energies 14(12):3535, 2021, doi",
+    "verdict": "CONFIRMED",
+    "evidence": "Dudzińska A., Energies 14(12) 3535, 10.3390/en14123535",
+    "fix": ""
+   },
+   {
+    "claim": "s. 3.1 Polish gymnasium design temperature 16 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "'provide a design temperature, used in the design of gymnasiums, of 16 °C'",
+    "fix": ""
+   },
+   {
+    "claim": "CIBSE 12-18 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "'the optimal operative temperature may be between 12 and 18 °C depending on the type of activity'",
+    "fix": ""
+   },
+   {
+    "claim": "Trianti-Stourna 18-20 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "'desirable indoor conditions for sports hall facilities are temperature between 18 and 20 °C'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 3.2 ISO 7730 cooling-season upper limit 26 °C",
+    "verdict": "CONFIRMED",
+    "evidence": "'the upper limit of optimal operative temperature for cooling season equal 26 °C, in accordance with PN-EN ISO 7730: 2006'",
+    "fix": ""
+   },
+   {
+    "claim": "last ~6% not read",
+    "verdict": "CONFIRMED",
+    "evidence": "now read: reference list only",
+    "fix": "drop the note"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "PEER-REVIEWED: Dudzińska A., Efficiency of Solar Shading Devices to Improve Thermal Comfort in a Sports Hall, Energies 14(12):3535, 2021, doi:10.3390/en14123535: s. 3.1 Polish regulations 'provide a design temperature, used in the design of gymnasiums, of 16 °C'; CIBSE (cited) for multi-purpose halls 'the optimal operative temperature may be between 12 and 18 °C depending on the type of activity'; Trianti-Stourna et al. (cited) sports halls 'temperature between 18 and 20 °C'; s. 3.2 ISO 7730 (cited) cooling-season upper limit 26 °C for low activity; no supply temperature or kWh/m² for the hall; remaining text is reference list only — https://www.mdpi.com/1996-1073/14/12/3535/htm ‖ CHECK 2 (2 Nov 2026, fixed): all quotes confirmed; unread tail is references only."
+ },
+ "arch_tmp_necbIntent": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "NECB 2017 Sentence 8.4.3.2.(3) intent page",
+    "verdict": "CONFIRMED",
+    "evidence": "provision 'Sentence 8.4.3.2.(3)'; edition only from URL path '17NECB'",
+    "fix": ""
+   },
+   {
+    "claim": "intent quotes",
+    "verdict": "CONFIRMED",
+    "evidence": "'To supersede the requirement of Sentence 8.4.4.1.(4) and permit a different set-point temperature in the reference and proposed buildings, where the set-point temperature is lower than 18°C.'",
+    "fix": ""
+   },
+   {
+    "claim": "sentence text not read",
+    "verdict": "CONFIRMED",
+    "evidence": "page gives intent only, not the sentence wording",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE (intent statement): NECB 2017 Sentence 8.4.3.2.(3) intent, NRC Codes Canada intent pages: 'To supersede the requirement of Sentence 8.4.4.1.(4)'; 'permit a different set-point temperature in the reference and proposed buildings' 'where the set-point temperature is lower than 18°C'; sentence text itself not read (?) — https://codes-guides.nrc.ca/IA/17NECB/intents-intentions/i005677-eng.html ‖ CHECK 2 (2 Nov 2026, ok): intent wording confirmed; edition from URL path only; sentence text still not read (?)."
+ }
+}

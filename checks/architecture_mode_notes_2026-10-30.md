@@ -114,3 +114,4 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - J.B. (2 Nov 2026): yes to the graphics proposal (plan/section toggles, budget bars, red rule flags, greys + red selected, right-angled leaders, heat lines, dashed secure line) and to check 3 on the new research. Plans: one per storey (storey picker); sections likewise can be several. Simple massing throughout. References sent: exploded axonometric zoning diagram (floors pulled apart, dashed drop lines, legend off the drawing), program bubble diagram, stacked axon with flow arrows and storey heights.
 - J.B.: ignore the reference colours; they show the massing idea only (palette stays greys + red).
 - J.B. (2 Nov 2026): no heat arrows on the massing. Instead a heat view: (a) a heat gradient laid over plan and section showing direction; (b) a mode that shows only direction and amount.
+- J.B. (2 Nov 2026): heat gradient uses a separate warm-to-cool scale, used only in the heat view.
