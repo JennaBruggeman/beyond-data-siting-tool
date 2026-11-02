@@ -86,3 +86,15 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - Refuge drop-off: Vancouver passenger space 4.0 m wide, 3.5 m clear; no ambulance-bay rule.
 - Fire access: principal entrance 3–15 m from the fire route, 45 m hose distance (NBC 3.2.5).
 - Social fit: refuge by heat-dome risk groups (BC coroner 2022: 619 deaths, 67 % aged 70+, 56 % lived alone, 98 % indoors at home; distance a barrier, no walking standard); pool catchments 2/3/4 km (VanSplash), indoor recreation within 5 km (Edmonton); laundromat and greenhouse only stand-in indicators (renters, low income, seniors), unsourced. Data lacking: living alone, deprivation index, homelessness counts, food stores, Vancouver pool locations.
+
+## From J.B.'s uploads (2 Nov 2026: uploads_2026_11_02.md, check 1)
+- Vancouver 10.34.1: one principal building per site; a separate refuge or generator building only as an accessory building, if the district allows, or by rezoning. 10.21.1: each principal building and separate use has its main entrance from a street. Schedule C still not obtained.
+- FM 5-23: generators outside important buildings first; inside, a 1 h room on an outside wall reachable by firefighters; switchgear its own 1 h room. Conflict: FM 5-23 allows a 3 h basement vault, FM 5-32 says never in a basement.
+- FM 7-88: diked fuel tanks 7.5 m from a noncombustible building; listed double-walled 1.5 m; a fuel truck unloading without containment 23 m.
+- FM 5-28: UPS battery rooms with HVAC separate from the hall, above the flood level; lithium-ion is in FM 5-33 (to get). Conflict: FM 1 h vs NFPA 855 2 h (tool keeps 2 h, the stricter).
+- FM 1-20 (Apr 2025): distances moved to FM 1-42 (to get); dumpsters 9 m from buildings.
+- FM 1-57: facade PV must be an FM Approved system; glass-glass panels count as combustible.
+- FM 1-40: 339 1st Ave E fails FM's site test (29 % in the floodplain); its 500-year level vs Vancouver's 4.6 m FCL not compared yet.
+- FM 9-1: heavy metal bar fence or concrete wall, no chain-link, around plant and tanks; one-lane sliding vehicle gate; separate visitor and staff entrances. Conflicts: no power-dependent locks (vs code maglocks on exits); cameras on neighbouring property (vs privacy guidance); fence 2 m with barbed wire (FM 9-16) vs RCMP 2.4 m vs Vancouver 1.9 m cap.
+- FM 13-26: not for emergency generators. BC Fire Code 2024: no changes for tanks, batteries, generators or pools.
+- Edmonton access guide (COE-IM-GUIDE-0023, 2023): driveway 11.5–13.5 m two-way for large trucks; a security gate set so the largest design vehicle queues fully on site; throat 15 m (arterial) for light industrial under 1 ha.
