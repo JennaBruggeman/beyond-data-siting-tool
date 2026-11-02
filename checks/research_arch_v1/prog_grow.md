@@ -71,7 +71,7 @@ Research 2 Nov 2026 per BRIEF_v2.md and BRIEF.md. New ids → `prog_grow_sources
 | Vancouver fallback | "Urban Farm - Class B": growing "for sale", may be "in a greenhouse": C in I-2, I-3, I-1C, FC-2 (production, not a public display) | van3575s2; zoning.md; arch_pg_vanZoningUses | Sec. 2 p. 47; s. 2.1 | rule | 85 |
 | Edmonton use name | Major Indoor Entertainment, examples incl. "indoor botanical gardens, museums" | arch_pg_edmUseDefs | 8.10 (online, read 2 Nov 2026; no amendment date shown on the page) | rule | 95 |
 | Edmonton BE | permitted (2.12); "The maximum Floor Area is 500 m2 per individual establishment" (3.3.1); variance possible (3.18) | arch_edmZB20001_BE | 2.12, 3.3.1, 3.18 | rule | 90 |
-| Edmonton IM / IH | IM: not listed (NP); IH: ? (use list not returned by fetch) | arch_edmZB20001_IM | s. 2 | rule | 80 / ? |
+| Edmonton IM / IH | IM: not listed (NP); IH: not listed (IH s. 2 lists Major/Minor Industrial, Natural Resource Development, Major/Minor Utility, signs only) → NP | arch_edmZB20001_IM; arch_pub_edmZB | s. 2 | rule | 80 |
 | Edmonton production greenhouse | Urban Agriculture: O in BE (3.16.1) and IM (3.8.1), "within or on a building" | arch_edmZB20001_BE; arch_edmZB20001_IM | 3.16.1; 3.8.1 | rule | 90 |
 
 ### Adjacency
@@ -110,13 +110,13 @@ Research 2 Nov 2026 per BRIEF_v2.md and BRIEF.md. New ids → `prog_grow_sources
 | what | value | source id | where | kind | conf. |
 |---|---|---|---|---|---|
 | Conventional hardwood kiln | "typically operate at temperatures below 180°F" (82 °C); southern pine "240°F" (116 °C) | arch_pg_ukyKiln | text (FOR-128, from URL only) | university extension manual (US; benchmark outside Canada) | 70 |
-| Dehumidification kiln | peak 131.7 °F (≈55 °C) in a 600 bf test kiln | arch_pg_fplDH2008 | App. C Table 3, p. 15 | government research note (US) | 75 |
-| Energy, commercial kilns | "500 to 750 kW-h per thousand board foot" (≈210–320 kWh/m³ nominal, our arithmetic at 2.36 m³/MBF); energy type not split ? | arch_pg_fplDH2008 | p. 9 | government (US) | 60 |
-| Energy, small DH kiln | 1,440–2,890 kWh per 10³ bf (Table 1); Discussion gives 3,180/2,120 — internal inconsistency | arch_pg_fplDH2008 | Table 1 p. 7; Discussion p. 9 | government (US) | 55 |
+| Dehumidification kiln | peak 131.7 °F (≈55 °C) in a 600 bf test kiln | arch_pg_fplDH2008 | App. C Table 3 (p. 15 or 16 ?) | government research note (US) | 75 |
+| Energy, commercial kilns | "500 to 750 kW-h per thousand board foot" (≈210–320 kWh/m³ nominal, our arithmetic at 2.36 m³/MBF); energy type not split ? | arch_pg_fplDH2008 | Discussion (p. 9 or 10 ?) | government (US) | 60 |
+| Energy, small DH kiln | 1,440–2,890 kWh per 10³ bf (Table 1); Discussion gives 3,180/2,120 — internal inconsistency | arch_pg_fplDH2008 | Table 1 (p. 7 or 8 ?); Discussion (p. 9 or 10 ?) | government (US) | 55 |
 | Whole sawmill (US softwood) | "355 MJ of electricity and 2730 MJ of processed energy per cubic meter" (not drying alone) | arch_pg_bergman2010 | abstract | peer-reviewed | 60 |
 | Canada-wide | potential kiln energy cut "5.5 PJ per year" (attributed to "some researchers") | arch_pg_fpiKiln | summary | research institute (secondary) | 40 |
 | Kiln sizes (size steps) | steam "40,000 board foot capacity or more"; hot-water "4000 ... to 60,000"; DH "4000–20,000" total for small mills; vacuum "500 ... to over 10,000" | arch_pg_ukyKiln | text | university extension manual (US; benchmark outside Canada) | 65 |
-| Minimum sensible size | ≈600 bf DH kiln (≈1.4 m³ nominal, our arithmetic) as smallest documented | arch_pg_fplDH2008 | p. 2 | government (US) | 45 |
+| Minimum sensible size | ≈600 bf DH kiln (≈1.4 m³ nominal, our arithmetic) as smallest documented | arch_pg_fplDH2008 | intro (p. 2 or 3 ?) | government (US) | 45 |
 | Kiln floor area per bf | ? | — | — | — | — |
 | NBC class | F-2 ("Planing mills", "Woodworking factories", "Storage rooms") — our reading for a kiln + lumber storage | arch_pg_nbcA3121 | Note A-3.1.2.1.(1) | our reading of rule | 60 |
 | Separation from F-2 | "—" | arch_nbc3131 | Table 3.1.3.1 | rule | 85 |
@@ -141,7 +141,7 @@ Research 2 Nov 2026 per BRIEF_v2.md and BRIEF.md. New ids → `prog_grow_sources
 | NBC class | not named; dust explosion risk points to F-1 (our reading ?) → 2 h from F-2 and **no A, B or C in the same building** (3.1.3.2.(1)) | arch_pg_nbcA3121; arch_nbc3131 | — | our reading | 40 |
 | Condensate / wash water to sewer | Metro Vancouver: prohibited ≥65 °C non-domestic; ≤40 °C mixed | arch_mvSewerBylaw299 | Sched. A s. 4 | rule | 85 |
 | Vancouver zoning | "Waste Disposal Facility" incl. "treatment ... of ... sewage": C in I-2 only, but "limited to the transfer, sorting or recycling of refuse or garbage" (2.2.9) → sludge drying NP in all four districts (our reading) | van3575s2; van_zdb_i2; arch_pg_vanZoningUses | Sec. 2 p. 47; I-2 2.2.9 | rule + our reading | 75 |
-| Edmonton zoning | Major Utility ("sewage treatment plants", "sludge disposal beds"): not in BE or IM; IH ? | arch_pg_edmUseDefs; arch_edmZB20001_BE/IM | 8.10; s. 2 | rule | 80 |
+| Edmonton zoning | Major Utility ("sewage treatment plants", "sludge disposal beds"): not in BE or IM; **permitted in IH** (2.4 Major Utility) | arch_pg_edmUseDefs; arch_edmZB20001_BE/IM; arch_pub_edmZB | 8.10; s. 2; IH 2.4 | rule | 80 |
 | Edmonton knock-on | Child Care not "on a Site Abutting ... a Major Utilities Use" | arch_ezb640 | 6.40 1.2 | rule | 85 |
 | Alberta approval | ? (EPEA wastewater approval route not read) | — | — | — | — |
 
@@ -149,13 +149,13 @@ Research 2 Nov 2026 per BRIEF_v2.md and BRIEF.md. New ids → `prog_grow_sources
 
 | what | value | source id | kind | conf. |
 |---|---|---|---|---|
-| RISE / Vinnova DC2BD (Sweden, 2017–18) | wood chips; drying "best in the temperature range 30 - 35°C on the waste heat"; SEK 960,000 | arch_pg_vinnovaDC2BD | government funder page | 60 |
+| RISE / Vinnova DC2BD (Sweden, 2017–18; RISE with SICS North) | wood chips; drying "best in the temperature range 30 - 35°C on the waste heat"; SEK 960,000 | arch_pg_vinnovaDC2BD | government funder page | 60 |
 | RISE trials report (2021) | "evaluating data center excess heat as heat source for biomass drying"; figures ? | arch_pg_riseDCbiomass2021 | research institute report | 50 |
-| Kajaani, Finland (2024–25) | "drying biomass" named only as a possible use | arch_pg_lukeHukka | government-funded project page (plan) | 35 |
+| Kajaani, Finland (dates ?) | "drying biomass" named only as a possible use | arch_pg_lukeHukka | government-funded project page (plan) | 35 |
 | Food, lumber or sludge drying with DC heat | ? none found in primary sources | — | — | — |
 
 ## Gaps (?)
-- Conservatory: Canadian annual and peak heat (Muttart, Bloedel); supply temperature; humidity set points; minimum size; Muttart pyramid base shape and cover area; IH use list.
+- Conservatory: Canadian annual and peak heat (Muttart, Bloedel); supply temperature; humidity set points; minimum size; Muttart pyramid base shape and cover area.
 - Vancouver: whether "Zoo or Botanical Garden" could come in as Public Authority use or CD-1 only.
 - Food drying: hot-air kWh/kg water from a Canadian source; floor area per throughput; minimum size.
 - Lumber: Canadian kiln temperatures and energy; floor area per MBF; minimum commercial kiln.
@@ -166,7 +166,9 @@ Research 2 Nov 2026 per BRIEF_v2.md and BRIEF.md. New ids → `prog_grow_sources
 - NRCan CanmetENERGY drying report 2009-003 (redirect to natural-resources.canada.ca refused, provenance) — https://www.nrcan.gc.ca/sites/www.nrcan.gc.ca/files/canmetenergy/files/pubs/2009-003.pdf
 - USDA FPL Dry Kiln Operator's Manual (AH-188, 1991) chapters 2 and 11 (server error / proxy 403) and full PDF (provenance) — https://www.fpl.fs.usda.gov/documnts/usda/ah188/chapter11.pdf
 - Bennamoun et al. 2013 sludge-drying review (abstract only, no figures; full text paywalled) — doi 10.1016/j.rser.2013.07.043
-- Edmonton IH zone use list (page returned no Section 2).
+- Edmonton IH zone use list (page returned no Section 2); now read from local bylaw text (Check 3).
 - CSA standards: none needed here.
 
 Check 2 applied (2 Nov 2026)
+
+Check 3 applied (2 Nov 2026)

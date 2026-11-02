@@ -24,7 +24,7 @@ Labels: "?" = not confirmed. "our reading" = our interpretation. "our arithmetic
 | Real example, North Vancouver UPCC | "approximately 604 square metres (6,500 square feet)"; 13 exam rooms, 1 treatment room, 3 stretcher bays; 14 FTE practitioners; 8 a.m.–10 p.m. Mon–Sat; second floor of 221 Esplanade W | arch_hsg_vchUpccNV | VCH information bulletin (undated, c. 2019) | government | 75 |
 | Real example, South Surrey UPCC | "931-square-metre (10,016 square feet)"; "approximately 57,000 patient visits annually"; "48th in the province" | arch_hsg_bcUpccSurrey2026 | BC news release 10 Apr 2026 | government | 85 |
 | Real example, Williams Lake UPCC | "490 square-metre (5,300 square feet)"; "more than 42,000 visits per year" | arch_hsg_bcUpccWL2025 | BC news release 28 Feb 2025 | government | 85 |
-| Real example, Cowichan UPCC | "approximately 930 square metres (10,000 square feet)" | arch_hsg_bcUpccCowichan2024 | BC news release 2 Jul 2024 | government | 80 |
+| Real example, Cowichan UPCC | "approximately 930 square metres (10,000 square feet)" (planned, "coming soon" at release) | arch_hsg_bcUpccCowichan2024 | BC news release 2 Jul 2024 | government | 80 |
 | Typical size (BC UPCC) | 490–931 m² (four examples above); ≈61 visits per m² per year at Surrey (57,000 ÷ 931) and ≈86 at Williams Lake (42,000 ÷ 490) (our arithmetic) | above | — | our arithmetic | 60 |
 | Size step: exam room | 12.0 m² net (Type 1.1); 14.0 dual access; 13.0 stretcher; 16.0 bariatric | arch_hsg_abGFNA2021 | Table 2, p. 7 | government guide (AB) | 85 |
 | Grossing, community health centre | departmental net→gross 1.44 (Ambulatory Care, CHC); building factors: component 1.20–1.26, circulation 1.14–1.18, core mech/elec 1.05–1.07 ("compounded") | arch_hsg_abGFNA2021 | pp. 12–13 | government guide (AB) | 85 |
@@ -49,7 +49,7 @@ Labels: "?" = not confirmed. "our reading" = our interpretation. "our arithmetic
 | Zoning, Edmonton | "Health Service" = "physical or mental health services on an out-patient basis" (medical offices, health clinics): BE O, "maximum Floor Area is 500 m2 per individual establishment"; MU O; IM, IH NP | arch_zon_EdmZones; arch_zon_EdmDefs | BE 2.9, 3.3.1; MU 2.8; 8.10 | rule | 90 |
 | Edmonton fit | 500 m² cap is below 3 of 4 BC UPCC examples; variance possible under BE 3.18 (our reading) | arch_zon_EdmZones | BE 3.18 | our reading | 60 |
 | Adjacency: air intakes | outdoor air intake ≥7.6 m from truck loading/dock; ≥1.5 m from street/parking (7.6 m from arterial); ≥4.5 m from garbage; ≥3.0 m from "Vent for combustion products" and kitchen exhaust; ≥7.6 m from evaporative heat rejection | arch_nbc6329 | NBC/BC/AB Table 6.3.2.9 | rule | 90 |
-| Adjacency: generators | Metro Vancouver "sensitive receptor" = hospital, elementary school, day care, community care facility; clinic not named (our reading) | arch_mv1329 | s. 1, s. 57 | rule | 80 |
+| Adjacency: generators | Metro Vancouver "sensitive receptor" = hospital, elementary school, day care, community care facility; clinic not named (our reading) | arch_mv1329 | s. 4, s. 57 | rule | 80 |
 | Adjacency: street | ? (no clinic-specific siting rule found in BC or AB guidance read) | — | — | — | — |
 | Social fit | UPCC "serves all North Shore residents"; North Vancouver Central PCN catchment ≈69,000; >33,000 unattached patients on the North Shore. No provincial catchment standard found | arch_hsg_vchUpccNV | bulletin | government | 60 |
 
@@ -111,7 +111,7 @@ Labels: "?" = not confirmed. "our reading" = our interpretation. "our arithmetic
 | Peak kW/m² | ? | — | — | — | — |
 | Supply temperature | taps ≤49 °C (BC); DHW stored/supplied 60 °C (NEU); space heat as housing | arch_hsg_bcRCR; neuConnect | s. 17; s. 6.2.4 | rule / gov. guide | 80 |
 | Code group | NBC 2020: care without treatment = B-3 ("Assisted/supportive living facilities", "Nursing homes without treatment"); with treatment = B-2 | arch_hsg_nbcOcc | Note A-3.1.2.1.(1) | rule | 90 |
-| BC guide (older) | assisted living "categorized as a Group C (Residential) occupancy"; residential care with "more than six persons in care" "Group B, Division 2"; small-facility threshold given as "six or fewer" (p. 12) and "between three and six" (pp. 18, 34) (pre-2020 code labels, undated) | arch_hsg_bcFLS | pp. 12, 18, 34 | government guide | 55 |
+| BC guide (older) | assisted living "classified as a Group C (Residential) occupancy" (p. 12); residential care with "more than six persons in care" "Group B, Division 2"; small-facility threshold given as "six or fewer" (p. 12) and "between three and six" (pp. 18, 21 and later) (pre-2020 code labels, undated) | arch_hsg_bcFLS | pp. 12, 18, 21 | government guide | 55 |
 | AB minimum class | "designed and constructed to a minimum B3 occupancy classification" | arch_hsg_abCCDS2023 | s. F.I.1, p. 55 | government standard | 85 |
 | Separation from F-2 | B-3: 2 h; B-2: 2 h; C (assisted living, independent seniors): 2 h + one-suite limit | arch_hsg_nbc3131D; arch_nbc3131 | Table 3.1.3.1; 3.1.3.2.(2) | rule | 90 |
 | Zoning, Vancouver | Community Care or Assisted Living Facility (Class A ≤6, Class B ≥7 persons) and Seniors Supportive or Independent Living Housing: **not listed** in I-2, I-3, I-1C, FC-2 (NP, our reading); FC-2 Mixed-Use Residential Building might hold seniors' apartments ? | van3575s2; van_zdb_* | Sec. 2; 2.1 of each schedule | rule | 80 |
@@ -130,7 +130,7 @@ Labels: "?" = not confirmed. "our reading" = our interpretation. "our arithmetic
 | Minimum sensible size | ? | — | — | — | — |
 | Equipment | high-heat sanitizing commercial dishwasher preferred; separate hand sink; 2- or 3-compartment sink; mop sink; grease interceptor accessible (e.g. parkade) | arch_hsg_vanKitchenDG2018 | 3.vii, 3.x, 4.v–vi | government guide | 75 |
 | Hood class | Class 1 grease → Type I hood; Class 2 steam/heat → Type II; Class 3 domestic-level → domestic hood | arch_hsg_vanKitchenDG2018 | Subappendix 2b | government guide | 75 |
-| Permit (Vancouver) | VCH permit needed; design "determines whether an appropriate VCH permit can be obtained"; permit types incl. "No Grease Laden Vapors" and exempt social-service agencies | arch_hsg_vanKitchenDG2018; arch_hsg_vanKitchenWork2017 | 2.2; guide (Nov 2017) | government guide | 75 |
+| Permit (Vancouver) | a VCH permit is what lets a kitchen serve the public; design "determines whether an appropriate VCH permit can be obtained"; permit types incl. "No Grease Laden Vapors" and exempt social-service agencies | arch_hsg_vanKitchenDG2018; arch_hsg_vanKitchenWork2017 | 2.2; guide (Nov 2017) | government guide | 75 |
 | Plan approval (BC) | plans "approved by a health officer" before construction; premises separate from and without direct access to living quarters | arch_adj_bcFPR | FPR s. 3(1), 4(1)(d) | rule | 90 |
 | BC health authority items | hand sinks separate; 3-compartment sink (<50 seats, manual); high-temp dishwasher "final rinse temperature of at least 71°C (160°F) at plate level"; low-temp chemical ≥38 °C; hot holding ≥60 °C; washrooms not opening into food rooms | arch_hsg_ihFoodPlans2026 | HP-FS-9042 pp. 2–4 (Interior Health, not VCH) | government guide | 75 |
 | Plan approval (AB, Edmonton) | Food Regulation s. 16: no construction "unless plans and specifications" approved; in Edmonton "all plans are reviewed through the Planning & Development office" (p. 5); permit applied ≥14 days before opening | arch_hsg_ahsFoodEdm2019 | pp. 4–5 | government guide | 80 |
@@ -154,7 +154,7 @@ Labels: "?" = not confirmed. "our reading" = our interpretation. "our arithmetic
 |---|---|---|---|
 | truck dock / loading | intake ≥7.6 m | arch_nbc6329 | 90 |
 | generator exhaust ("vent for combustion products") | intake ≥3.0 m; Metro Van s. 13: no entrainment into intakes (no distance) | arch_nbc6329; arch_mv1329 | 80 |
-| cooling towers / hybrid coolers | intake ≥7.6 m; doors, windows, occupiable outdoor space ≥3 m; health care per Z317.2 | arch_nbc6329; arch_sep_nbc63215full | 85 |
+| cooling towers / hybrid coolers | intake ≥7.6 m; doors, windows, occupiable outdoor space ≥3 m; health care facilities: Z317.2 instead (6.3.2.15.(6)) | arch_nbc6329; arch_sep_nbc63215full | 85 |
 | dry coolers, chillers, transformers | no code distance (earlier files) | — | — |
 | F-2 floor below another occupancy | floor rating set by the lower occupancy (3.2.2.7.(2)); 10 % exemption not for F-2 | arch_nbc3227 | 85 |
 
@@ -179,3 +179,5 @@ Labels: "?" = not confirmed. "our reading" = our interpretation. "our arithmetic
 - Not fetched (tool provenance rule): CSA store page store.csastandards.org.
 
 Check 2 applied (2 Nov 2026)
+
+Check 3 applied (2 Nov 2026)
