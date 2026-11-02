@@ -53,3 +53,7 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - **Side by side in the data centre's building:** 2 h wall; overnight sleeping limited by the one-residential-suite rule in an F-2 building; shared structure takes the higher seismic category unless split.
 - **Ground floor under the hall:** 2 h floor; same overnight limit; whole building takes the refuge's seismic category; best fit with Vancouver's no-data-storage-at-grade rule.
 - All: generator power legal on the owner's own lot (owner or tenant); code needs only 30 min emergency lighting, so heat, cooling and filtered air in a blackout are design choices; Edmonton allows the refuge only in BE (≤500 m²); no rule keeps the refuge reachable when the host is locked: the tool flags it.
+
+## Glazing (1 Nov 2026)
+- J.B.: bullet-resistant glass is used, per operators and insurers (her statement; VAN3 tour: the guard's room behind 'bullet proof glass', her words). Recorded as operator practice (claim), not a code rule.
+- Open (?): whether any one glazing product is both bullet-resistant (e.g. UL 752 levels, paywalled) and fire-rated (1.5 h in a 2 h wall). Research needed before a viewing window into the hall is offered.
