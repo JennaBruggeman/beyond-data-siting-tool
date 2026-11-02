@@ -1,0 +1,4860 @@
+{
+ "meta": {
+  "built": "2026-11-01",
+  "script": "checks/nearby_opp_check/build_nearby_opp_check.py",
+  "stages": {
+   "prospect (Who is nearby)": [
+    "competing_sources",
+    "deprivation",
+    "distribution_cost",
+    "heat_density",
+    "linear_heat_density",
+    "offerable_area",
+    "people_affected",
+    "receiver_demand",
+    "receiver_radius",
+    "receivers_nearby"
+   ],
+   "opportunity (What it could become)": [
+    "absorption",
+    "algae_kg",
+    "aquaculture_tonnes",
+    "backup_neighbours",
+    "battery",
+    "btes",
+    "chp_heat",
+    "clean_air_volume",
+    "community_solar",
+    "cooling_centre_people",
+    "copper_tonnes",
+    "distributed_servers_homes",
+    "ev_area",
+    "ev_stalls",
+    "ewaste",
+    "fire_water",
+    "greenhouse_area",
+    "homes_heated",
+    "homes_heated_2050s",
+    "insect_check",
+    "rare_earth",
+    "refuge_people",
+    "refuge_services",
+    "sewage_heat",
+    "snowmelt_area",
+    "storage_footprint",
+    "stored_heat",
+    "tes_volume",
+    "ups_flex"
+   ]
+  },
+  "dropped_skipped": [],
+  "inputs": "register (stages prospect, opportunity) + new/old_sources; data/raw/census (DA CSV + lda_000b21a_e), data/raw/van/public-streets.csv + lanes, data/raw/edm/Road_Network_20261016.csv, data/networks/*.geojson, data/vancouver_parcels_2026.geojson, data/raw/edm/lots, CWEC + PCIC 2050s EPW; tool/receivers_van.json, tool/receivers_edm.json; checks/input_check, place_check (rooftop_solar), emit_check (heat_delivered, heat_captured, backup_hours); IT load per lot as given",
+  "not_read": "tool/*.js, tool/index.html, checks/golden, */screen, checks/agents",
+  "licensed": "Vancouver BCA-derived receiver rows keep only the tool file's derived demand (address withheld, no floor area); Edmonton lot geometry used for distances only",
+  "assumptions": [
+   "it_load_actual = IT × 0.6 (load_factor); facility peak = IT × 1.55",
+   "heat_delivered / heat_captured from emit_check (liquid-cooled run, COP 3.0–4.5): available heat, not receiver-limited",
+   "distances are straight-line, lot edge to receiver point (as input_check 7)",
+   "receiver demand units MWh/yr (inferred; Edmonton rows recomputed from area × CEUD intensity)"
+  ],
+  "part_status": {
+   "offerable_area": "computed",
+   "receiver_radius": "computed",
+   "heat_density": "computed",
+   "linear_heat_density": "computed",
+   "distribution_cost": "computed",
+   "receiver_demand": "computed",
+   "deprivation": "not computable",
+   "people_affected": "computed",
+   "receivers_nearby": "computed",
+   "competing_sources": "computed",
+   "refuge_people": "computed",
+   "clean_air_volume": "not computable",
+   "cooling_centre_people": "not computable",
+   "homes_heated": "computed",
+   "greenhouse_area": "computed",
+   "aquaculture_tonnes": "computed",
+   "algae_kg": "computed",
+   "insect_check": "computed",
+   "distributed_servers_homes": "not computable",
+   "ev_stalls": "not computable",
+   "ev_area": "not computable",
+   "stored_heat": "not computable",
+   "storage_footprint": "not computable",
+   "sewage_heat": "not computable",
+   "copper_tonnes": "computed",
+   "ewaste": "not computable",
+   "rare_earth": "not computable",
+   "battery": "computed",
+   "ups_flex": "computed",
+   "btes": "computed",
+   "tes_volume": "not computable",
+   "absorption": "not computable",
+   "homes_heated_2050s": "computed",
+   "chp_heat": "computed",
+   "snowmelt_area": "computed",
+   "backup_neighbours": "qualitative",
+   "community_solar": "qualitative",
+   "fire_water": "qualitative",
+   "refuge_services": "computed"
+  },
+  "status_summary": {
+   "prospect": {
+    "computed": 9,
+    "not computable": 1
+   },
+   "opportunity": {
+    "computed": 14,
+    "not computable": 12,
+    "qualitative": 3
+   }
+  },
+  "formula_errors": [],
+  "register_notes": [
+   {
+    "part": "heat_density",
+    "kind": "unusable as written",
+    "note": "Formula q_L = population density × floor space per capita × specific demand: floor space per capita is not stated anywhere in the part; inputs name receiver_demand and \"area\" but no area size. Computed instead from census households × CEUD household heat + non-residential receivers over DA land within 3 km (and 500 m). \"1,000 GJ/ha\" is credited to RVO, which is not in this part's sources (persson only)."
+   },
+   {
+    "part": "heat_density",
+    "kind": "unit",
+    "note": "Classes \"200 / 500 / 1,200 / 3,000 GJ/ha (20/50/120/300 MJ/m²)\" are consistent (1 GJ/ha = 0.1 MJ/m²)."
+   },
+   {
+    "part": "linear_heat_density",
+    "kind": "input",
+    "note": "Inputs name plot_ratio, which input_check finds not derivable (no storeys). w therefore only bounded 5–60 m; the street-length route (pipe proxy) is ours. Register check: 137.5 × 0.4 + 5 = 60 (consistent). Vancouver street files cover the City only, so 3 km buffers that reach Burnaby / the North Shore undercount street length (raises q_L,w)."
+   },
+   {
+    "part": "distribution_cost",
+    "kind": "unit / currency",
+    "note": "Coefficients are 2015 € (persson2019 text); coef says \"convert to CAD\" without a rate or year. d_a needs q_L,w in GJ/m; below about 1 GJ/m the term d_a becomes small and the cost rises steeply."
+   },
+   {
+    "part": "receiver_demand",
+    "kind": "basis",
+    "note": "Tool data files give demand in MWh/yr (our inference: Edmonton assessed records equal area × 1.40 or 0.777 GJ/m² ÷ 3.6 — see column Q on Receivers). Vancouver BCA-derived values cannot be recomputed (licensed inputs, \"inputs not shown\"); used as given and labelled. Delivered fuel, not useful heat (boiler efficiency not sourced). Receivers with no floor area, units or demand are counted, not summed. edmReceivers relabelled \"context (no heat demand figures)\"."
+   },
+   {
+    "part": "receiver_demand",
+    "kind": "coverage",
+    "note": "Commercial / apartment receivers exist only above the reporting thresholds (≥ 4,645 / 9,290 m²), so sums are a lower bound on area demand."
+   },
+   {
+    "part": "receivers_nearby",
+    "kind": "source roles",
+    "note": "sources list 13 ids but source_roles covers 11 (bcResCare and abCCcompliance2026 have no role). Count matches input_check 7 (independent) where the ratio row is 1."
+   },
+   {
+    "part": "competing_sources",
+    "kind": "source roles",
+    "note": "neuTraced and van9552 are in sources but have no source_role; the traced NEU area (±45 m) is the main input. Other data centres and per-receiver sewage heat are not in data/."
+   },
+   {
+    "part": "deprivation",
+    "kind": "data gap",
+    "note": "CIMD (cimd) is named but no CIMD file is under data/; the noise contour level that bounds the area is not stated."
+   },
+   {
+    "part": "people_affected",
+    "kind": "method",
+    "note": "Register spreads DA counts onto a 100 m grid (tool/census_*.json, grid origin not stated in the register); here the raw DA CSV × polygon area share is used (same counts, different spreading). \"Sound distance\" has no stated dB level."
+   },
+   {
+    "part": "offerable_area",
+    "kind": "source gap",
+    "note": "Ground-floor bar confirmed only for I-2 (vanI2Ground OPEN item); I-3 sub-area A and FC-2 marked ?. Support block 200–600 m² rests on plans \"traced from bins\" (unverified, conf 20). I-3 sub-area membership of V09 / V339 is not in data/."
+   },
+   {
+    "part": "cooling_centre_people",
+    "kind": "basis",
+    "note": "0.108 kW is total metabolic heat (sensible + latent; energyPlusPeople check 2), not sensible load; envelope gains not stated."
+   },
+   {
+    "part": "clean_air_volume",
+    "kind": "source roles",
+    "note": "healthCanada2026 (upper indoor temperature) is linked to clean-air volume; check 2 asks to remove it. Formula needs cleaned airflow (plant)."
+   },
+   {
+    "part": "homes_heated_2050s",
+    "kind": "basis",
+    "note": "Space / water split taken from CEUD 2023 shares (46.2 / 27.1 %; 63.1 / 23.2 %) rescaled to the 2018–22 household totals (16.81 / 33.14 MWh) — mixing years, as the register does. HDD check rows compare our CWEC / PCIC daily-mean HDD18 with the register values."
+   },
+   {
+    "part": "chp_heat",
+    "kind": "consistency",
+    "note": "Register \"0.8–2.0 MW heat per MW power (recip.), 0.9–1.7 (turbines)\" = 1 ÷ epaCHP2015 power-to-heat 1.2–0.5 and 1.1–0.6: consistent. From the efficiency endpoints alone (27–41 % electric, 77–80 % total) heat per MW electric spans 0.88–1.96. Input named it_load_actual; a plant supplying the whole facility would scale with PUE."
+   },
+   {
+    "part": "copper_tonnes",
+    "kind": "basis",
+    "note": "t/MW (CDA, industry claim; metric vs short tons not stated) is per MW of capacity, but the input is it_load_actual (average load = 0.6 × IT). Both shown."
+   },
+   {
+    "part": "ups_flex",
+    "kind": "basis",
+    "note": "\"IT load\" in the formula vs input it_load_actual: average used; nameplate in extra. UPS minutes are vendor / operator claims; aeso_or role \"context\", unverified."
+   },
+   {
+    "part": "battery",
+    "kind": "basis",
+    "note": "Formula gives no MW basis; it_load_actual (the named input) used. Fire-code basis (NFPA 855 adoption) unconfirmed. Areal density is utility-scale (reber2023 check 2)."
+   },
+   {
+    "part": "btes",
+    "kind": "input",
+    "note": "Charge W and heat stored are not defined; upper bound takes all captured heat as charged evenly over 8,760 h. Li 2021 check: 0.9 MW ÷ (240 × 55 m) = 68 W/m, inside 47–83. Heat-pump COP for the lift is a register gap."
+   },
+   {
+    "part": "tes_volume",
+    "kind": "consistency",
+    "note": "Coef values 144 L/kWh (6 K) and 29 L/kWh (30 K) omit the ÷ 0.85 in the formula (with it: 169 and 34 L/kWh). sources list is empty."
+   },
+   {
+    "part": "rare_earth",
+    "kind": "source roles / arithmetic",
+    "note": "sources = [danczak2018] but source_roles credits dell. From danczak2018 figures: 2.5\" 0.5–2.6 g, 3.5\" 1.6–8.2 g per drive (our arithmetic, sum of Nd + Pr + Dy shares), wider than the register's \"about 1–4 g\"."
+   },
+   {
+    "part": "ev_stalls",
+    "kind": "source text",
+    "note": "Formula DCFC 50–350 kW; vanDCFC text says \"typically 25–400 kW\". silber2024 SF 0.5 unreachable in check 2."
+   },
+   {
+    "part": "aquaculture_tonnes",
+    "kind": "transfer",
+    "note": "2.9 kWh/kg is a simulated freshwater-heating term for one Norwegian post-smolt stage (5→12 °C); 4.6 is a derived Finnish ratio. Only make-up water heating, not whole-farm heat."
+   },
+   {
+    "part": "greenhouse_area",
+    "kind": "source label",
+    "note": "Coef calls 1.63 GJ/m² \"Ontario measured\"; source iesoGH (check 2) says modelled typical, not measured. 2.1 GJ/m² is a September–May season (Manitoba)."
+   },
+   {
+    "part": "absorption",
+    "kind": "unusable at lot temperature",
+    "note": "heat_temp 25–60 °C is below absorption's 70–90 °C; adsorption from ~45 °C (operator / preprint) has no COP in the register. Only a conditional \"if lifted to ≥ 90 °C\" value can be shown; the lift's electricity is not counted."
+   },
+   {
+    "part": "snowmelt_area",
+    "kind": "basis",
+    "note": "Design W/m² is the 99 % storm load; dividing average heat by it gives the area held clear during a design storm if all heat went to snowmelt. Vancouver uses Seattle (transferred). nrcCBD160 unreachable in check 2."
+   },
+   {
+    "part": "refuge_services",
+    "kind": "gap",
+    "note": "Toilet rule starts at 75–100 people; below 75 not stated. 2012 guide; current BC ESS standard not checked."
+   },
+   {
+    "part": "refuge_people",
+    "kind": "basis",
+    "note": "Usable area = offerable_area; only the support block (200–600 m²) is known before the size stage. Edmonton spacing (2 m between beds, homeless-shelter standard) vs JIBC 0.75 m: OPEN item."
+   },
+   {
+    "part": "distributed_servers_homes",
+    "kind": "basis",
+    "note": "Liu 2011 figures are 2011 US modelling assumptions; Qarnot / heata are operator claims."
+   },
+   {
+    "part": "fire_water",
+    "kind": "gap",
+    "note": "On-site volume formula for Edmonton (NBC(AE) 3.2.5.7) not given; NFPA 1142 not read."
+   }
+  ]
+ },
+ "lots": {
+  "V09": {
+   "_lot": {
+    "label": "275 1st Ave E",
+    "city": "van",
+    "parcel_id": "63819363",
+    "it_mw": 2.5
+   },
+   "offerable_area": {
+    "stage": "prospect",
+    "status": "computed (support block only; ground floor area needs size stage)",
+    "unit": "m²",
+    "how": "support block 200–600 m² (from plans, unverified); ground floor added where zoning bars data storage at grade (I-2; I-3 / FC-2 marked ?) — its area is size stage; growth space judged, not counted",
+    "low": 200,
+    "high": 600,
+    "extra": {
+     "ground_floor_rule": "yes (ground floor offerable; area needs size stage)",
+     "zone": "I-3"
+    }
+   },
+   "receiver_radius": {
+    "stage": "prospect",
+    "status": "computed (register value)",
+    "unit": "m",
+    "how": "register: search to 3 km in a straight line",
+    "value": 3000
+   },
+   "heat_density": {
+    "stage": "prospect",
+    "status": "computed (our route: floor space per capita not stated)",
+    "unit": "GJ/ha·yr",
+    "how": "(census households within 3 km × 16.81 / 33.14 MWh + non-residential receivers within 3 km, low–high) × 3.6 ÷ land area (DA boundaries); 500 m in extra",
+    "low": 3621.0473,
+    "high": 4014.926,
+    "extra": {
+     "at_500m": [
+      3133.366,
+      3410.1487
+     ],
+     "class_3km_high": "≥3,000",
+     "high_over_rvo_1000": [
+      4.0149,
+      3.4101
+     ],
+     "residential_GJ_3km": 7232581.8432,
+     "land_m2_500_3000": [
+      970942,
+      26097577
+     ]
+    }
+   },
+   "linear_heat_density": {
+    "stage": "prospect",
+    "status": "computed (street length as pipe proxy)",
+    "unit": "GJ/m·yr",
+    "how": "heat within 3 km ÷ street + lane centreline length within 3 km (pipe-length proxy); register-width route and 500 m in extra",
+    "low": 17.4105,
+    "high": 19.3043,
+    "extra": {
+     "at_500m": [
+      17.6152,
+      19.1712
+     ],
+     "implied_width_m_500_3000": [
+      56.2181,
+      48.0814
+     ],
+     "register_width_route_w5_w60": [
+      2.0075,
+      24.0896
+     ],
+     "high_over_1.5": 12.8696,
+     "street_m_500_3000": [
+      17271,
+      542779
+     ]
+    }
+   },
+   "distribution_cost": {
+    "stage": "prospect",
+    "status": "computed (EUR; CAD not computable)",
+    "unit": "€/GJ (2015 €)",
+    "how": "a(C1 + C2·d_a) ÷ q_L,w with Persson coefficients; CAD conversion not stated",
+    "low": 2.2651,
+    "high": 2.4458,
+    "extra": {
+     "at_500m": [
+      2.2768,
+      2.4248
+     ],
+     "d_a_m": 0.1446,
+     "cost_at_1.5_GJ_per_m": 10.3051,
+     "CAD": "not computable: coef says \"convert to CAD\" but states no rate or year (?)"
+    }
+   },
+   "receiver_demand": {
+    "stage": "prospect",
+    "status": "computed",
+    "unit": "MWh/yr (sum within 3 km)",
+    "how": "per receiver: disclosed (measured) else BCA-derived file estimate (Van) / assessed area × 1.40 or 0.777 GJ/m² (Edm, recomputed) / non-market units × 16.81 MWh / floor area × 0.57 or 1.40 GJ/m² (hospitals 1.90 / 2.46 × heating share); estimates ÷ 1.7 for the low end; tenants 0",
+    "low": 1392219.9483,
+    "high": 1919783.4608,
+    "extra": {
+     "non_residential_MWh": [
+      615965.0983,
+      901500.6108
+     ],
+     "non_residential_500m_MWh": [
+      19558.3167,
+      27023.3167
+     ],
+     "GJ": [
+      5011991.814,
+      6911220.459
+     ],
+     "low_over_heat_delivered_high": 1
+    }
+   },
+   "deprivation": {
+    "stage": "prospect",
+    "status": "not computable (CIMD not in data/; noise contour level not stated)",
+    "unit": "index",
+    "how": "CIMD by DA within noise contour and receiver radius"
+   },
+   "people_affected": {
+    "stage": "prospect",
+    "status": "computed (200 / 500 m; sound distance not stated)",
+    "unit": "people",
+    "how": "raw 2021 DA counts × area share within 200 m (low) and 500 m (high); households, 65+, under 15, renters, shelter 30 %+, low income in extra; sound distance not computable",
+    "low": 889.3,
+    "high": 6400.4,
+    "extra": {
+     "households_200_500_3000": [
+      562.5,
+      3863.8,
+      119515.2
+     ],
+     "age65_200_500_3000": [
+      59,
+      595.6,
+      31645.6
+     ],
+     "under15_200_500_3000": [
+      47.4,
+      449.3,
+      21925.2
+     ],
+     "renters_200_500_3000": [
+      317.1,
+      2228,
+      72216.8
+     ],
+     "shelter30_200_500_3000": [
+      199.1,
+      1239.4,
+      40091.7
+     ],
+     "low_income_200_500_3000": [
+      91,
+      667.4,
+      32401.3
+     ],
+     "people_200_500_3000": [
+      889.3,
+      6400.4,
+      227838.5
+     ]
+    }
+   },
+   "receivers_nearby": {
+    "stage": "prospect",
+    "status": "computed",
+    "unit": "receivers within 3 km",
+    "how": "tool/receivers_*.json points, lot edge to point ≤ 3,000 m; counts by type in extra",
+    "value": 1082,
+    "extra": {
+     "with_demand": 1015,
+     "tenants": 59,
+     "nearest_m": 85.1,
+     "over_input_check_count": 1
+    }
+   },
+   "competing_sources": {
+    "stage": "prospect",
+    "status": "computed (networks and rinks only)",
+    "unit": "receivers within 3 km inside a network outline",
+    "how": "data/networks outlines (NEU traced, Creative Energy, River District, Blatchford, DDEI); arenas as ice-rink sources; sewage heat and other data centres not in data",
+    "value": 370,
+    "extra": {
+     "demand_inside_MWh_high": 878897.3983,
+     "share_inside": 0.4578,
+     "rinks_3km": 0,
+     "lot": "inside"
+    }
+   },
+   "refuge_people": {
+    "stage": "opportunity",
+    "status": "computed (support block only)",
+    "unit": "people",
+    "how": "offerable_area (support block 200–600 m²) ÷ 3.5 m²; ground floor would add more where offerable",
+    "low": 57,
+    "high": 171,
+    "extra": {
+     "fuel_hours_low": 12
+    }
+   },
+   "clean_air_volume": {
+    "stage": "opportunity",
+    "status": "not computable (cleaned airflow is a plant figure)",
+    "unit": "m³",
+    "how": "cleaned airflow ÷ 2–3 ACH"
+   },
+   "cooling_centre_people": {
+    "stage": "opportunity",
+    "status": "not computable (spare_cooling operator claim / judged; envelope gains not stated); per-kW reference shown",
+    "unit": "people per kW of spare cooling",
+    "how": "spare cooling kW ÷ (0.108 + envelope)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": 9.2593
+    }
+   },
+   "homes_heated": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "homes",
+    "how": "heat_delivered (emit) ÷ 16.81 MWh (BC) / 33.14 MWh (AB); available heat, not receiver-limited",
+    "low": 703.5098,
+    "high": 1453.9203,
+    "extra": {
+     "checks_MWh": [
+      16.8056,
+      16.808
+     ],
+     "high_over_households_500m": 0.3763
+    }
+   },
+   "greenhouse_area": {
+    "stage": "opportunity",
+    "status": "computed (transferred coefficients)",
+    "unit": "m²",
+    "how": "heat_delivered × 3.6 ÷ 2.1–1.63 GJ/m²",
+    "low": 20273.1429,
+    "high": 53978.7975,
+    "extra": {
+     "temperature": "heat_temp 25–60 °C: root-zone only without a lift (liquid-cooled run)"
+    }
+   },
+   "aquaculture_tonnes": {
+    "stage": "opportunity",
+    "status": "computed (transferred coefficients)",
+    "unit": "t/yr",
+    "how": "heat_delivered ÷ 4.6–2.9 kWh/kg",
+    "low": 2570.8696,
+    "high": 8427.7241
+   },
+   "algae_kg": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "kg DW/yr",
+    "how": "heat_delivered ÷ 217 kWh/kg",
+    "low": 54497.6959,
+    "high": 112628.5714
+   },
+   "insect_check": {
+    "stage": "opportunity",
+    "status": "computed (coefficient)",
+    "unit": "kWh/kg live (mealworm)",
+    "how": "register coefficient 2.88 kWh/kg (10.38 MJ); mealworm and BSF tonnes the heat could serve in extra",
+    "value": 2.88,
+    "extra": {
+     "check_MJ": 2.8833,
+     "mealworm_t": [
+      4106.25,
+      8486.25
+     ],
+     "bsf_substrate_t_hi": 7179.906
+    }
+   },
+   "distributed_servers_homes": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: server count); conditional IT kW ÷ 0.35 shown",
+    "unit": "homes",
+    "how": "servers ÷ 37–114",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      62.6566,
+      193.0502
+     ]
+    }
+   },
+   "ev_stalls": {
+    "stage": "opportunity",
+    "status": "not computable (needs spare_capacity: size stage); per-MW reference shown",
+    "unit": "stalls per MW reserved",
+    "how": "P_reserved ÷ (SF × P_charger)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      2.8571,
+      270.2703
+     ]
+    }
+   },
+   "ev_area": {
+    "stage": "opportunity",
+    "status": "not computable (needs ev_stalls); per-stall area shown",
+    "unit": "m² per stall",
+    "how": "stalls × 13.75–22 (Van) / 14.3–23.4 (Edm)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "checks": [
+      13.75,
+      22
+     ],
+     "reference_shown": [
+      13.75,
+      22
+     ]
+    }
+   },
+   "stored_heat": {
+    "stage": "opportunity",
+    "status": "not computable (store volume and ΔT not stated)",
+    "unit": "MWh",
+    "how": "ρ c V ΔT × η"
+   },
+   "storage_footprint": {
+    "stage": "opportunity",
+    "status": "not computable (needs store volume)",
+    "unit": "m²",
+    "how": "20.15 V^0.61",
+    "extra": {
+     "check_100000m3": [
+      22608.6719,
+      22004.967
+     ]
+    }
+   },
+   "sewage_heat": {
+    "stage": "opportunity",
+    "status": "not computable (sewer flow not derivable: input_check 5)",
+    "unit": "kW",
+    "how": "Q × 4.18 × ΔT"
+   },
+   "copper_tonnes": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "t",
+    "how": "it_load_actual × 20–40 t/MW (industry claim; IT nameplate route in extra)",
+    "low": 30,
+    "high": 60,
+    "extra": {
+     "on_IT_nameplate_hi": 100
+    }
+   },
+   "ewaste": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: server count); per-server value shown",
+    "unit": "kg/yr per server",
+    "how": "servers × 21.2–26.3 kg ÷ 6 yr",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      3.5333,
+      4.3833
+     ]
+    }
+   },
+   "rare_earth": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: drive count)",
+    "unit": "g",
+    "how": "drives × 1–4 g",
+    "extra": {
+     "check_g_2.5in": [
+      0.542,
+      2.604
+     ],
+     "check_g_3.5in": [
+      1.626,
+      8.246
+     ]
+    }
+   },
+   "battery": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MWh",
+    "how": "it_load_actual × 1–8 h; area at 4 h ÷ 49–19 kWh/m²; cost CAD 467–627/kWh in extra",
+    "low": 1.5,
+    "high": 12,
+    "extra": {
+     "default_4h_MWh": 6,
+     "area_m2_4h": [
+      122.449,
+      176.4706,
+      315.7895
+     ],
+     "area_hi_over_lot": 0.0403,
+     "cost_CAD_4h": [
+      2802000,
+      3762000
+     ],
+     "cost_checks": [
+      466.8652,
+      626.6897
+     ]
+    }
+   },
+   "ups_flex": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MWh",
+    "how": "it_load_actual × 1–15 min ÷ 60 × 0.5 (vendor claims)",
+    "low": 0.0125,
+    "high": 0.1875,
+    "extra": {
+     "on_IT_nameplate_hi": 0.3125
+    }
+   },
+   "btes": {
+    "stage": "opportunity",
+    "status": "computed (upper bound: all captured heat stored)",
+    "unit": "MWh/yr heat out",
+    "how": "upper bound: heat_captured (emit) stored, × η 0.32–0.56; boreholes = captured W ÷ 83–47 W/m ÷ 55–35 m",
+    "low": 2943.36,
+    "high": 9124.416,
+    "extra": {
+     "boreholes": [
+      231,
+      1131
+     ],
+     "borefield_m2_hi": 8779.3875,
+     "over_lot": 1.119,
+     "li2021_W_per_m": 68.1818,
+     "over_receiver_demand_low": 0.0066
+    }
+   },
+   "tes_volume": {
+    "stage": "opportunity",
+    "status": "not computable (needs demand_profile); per-kWh value shown",
+    "unit": "L per kWh stored",
+    "how": "3,600 ÷ (4.18 ΔT) ÷ 0.85, ΔT 30–6 K",
+    "low": null,
+    "high": null,
+    "extra": {
+     "checks_no_0.85": [
+      143.5407,
+      28.7081
+     ],
+     "reference_shown": [
+      33.7743,
+      168.8714
+     ]
+    }
+   },
+   "absorption": {
+    "stage": "opportunity",
+    "status": "not computable (temperature does not allow; adsorption COP not stated); conditional lifted value shown",
+    "unit": "kW cooling",
+    "how": "recovered heat × COP if temperature allows; 25–60 °C is below absorption's 70–90 °C; adsorption COP not stated",
+    "low": null,
+    "high": null,
+    "extra": {
+     "temperature": "no: 25–60 °C is below 70 °C (absorption); adsorption from ~45 °C (liquid run) but its COP is not stated",
+     "reference_shown": [
+      630,
+      1302
+     ]
+    }
+   },
+   "homes_heated_2050s": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "homes",
+    "how": "heat ÷ (household heat × (space share × HDD2050s ÷ HDDnow + water share)); HDD18 daily mean from CWEC and PCIC 2050s files",
+    "low": 806.2167,
+    "high": 1739.1699,
+    "extra": {
+     "HDD_now_245_585": [
+      2755.125,
+      2198.2583,
+      2038.1792
+     ],
+     "HDD_over_register": [
+      1.0,
+      1.0001,
+      1.0001
+     ]
+    }
+   },
+   "chp_heat": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MW heat",
+    "how": "it_load_actual ÷ power-to-heat 1.2–0.5 (reciprocating); turbines and thresholds in extra",
+    "low": 1.25,
+    "high": 3,
+    "extra": {
+     "gas_turbine_MW": [
+      1.3636,
+      2.5
+     ],
+     "check_recip_from_eff": [
+      0.878,
+      1.963
+     ],
+     "peak_over_25MW": 0.155,
+     "peak_over_75MW": "n/a (BC)"
+    }
+   },
+   "snowmelt_area": {
+    "stage": "opportunity",
+    "status": "computed (all heat to snowmelt; design-storm basis)",
+    "unit": "m²",
+    "how": "heat_delivered average W ÷ 700–430 (Edm) / 647–420 (Van) W/m²",
+    "low": 2086.5533,
+    "high": 6642.8571,
+    "extra": {
+     "van_annual_route_m2": 678900,
+     "check_W_m2": [
+      430.556,
+      699.6535
+     ]
+    }
+   },
+   "backup_neighbours": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: only behind the data centre's own transfer switch, on a private line, with the utility's written approval; never through utility lines. BC: supplying others makes it a public utility unless exempted (UCA s. 22 / s. 88(3)); EPCOR bars extending wiring beyond the property (T&C s. 4.4) and islanding without written approval. Spare generator capacity is what redundancy leaves (not sized). Count of care homes and hospitals within 1 km shown.",
+    "extra": {
+     "care_hospital_1km": 1
+    }
+   },
+   "community_solar": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: BC RS 2290 community generation, ≤ 2 MW net injection, 24 kW per residential / 100 kW per commercial beneficiary, bill credits at 10 ¢/kWh, not power; Alberta micro-generation ≤ lesser of 5 MW and service rating, on owned / leased / adjacent property, sized to own use (roof lease as \"leased property\" not confirmed).",
+    "extra": {
+     "households_for_2MW": 84,
+     "neighbour_roof_solar_500m_MWh": 31529.984
+    }
+   },
+   "fire_water": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: a non-potable tank on the lot for the fire department after an earthquake; drinking water would make the operator a water supplier (BC DWPR permits; Alberta PWR s. 1(1)(l)). Volume not sized (NFPA 1142 / ISO fire-flow guide not read); Edmonton NBC(AE) 3.2.5.7.(1): municipal supply ≥ 3,800 L/min at 140 kPa for buildings over 3 storeys or 600 m², else an on-site volume by formula (formula not in the register)."
+   },
+   "refuge_services": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "L/day",
+    "how": "refuge_people × 126 L; toilets, basins, showers in extra",
+    "low": 7182,
+    "high": 21546,
+    "extra": {
+     "toilets": [
+      "not stated (< 75 people)",
+      8
+     ],
+     "basins_hi": 18,
+     "showers_hi": 4
+    }
+   }
+  },
+  "E05": {
+   "_lot": {
+    "label": "8803 Stadium Rd NW",
+    "city": "edm",
+    "parcel_id": "51053",
+    "it_mw": 10.2
+   },
+   "offerable_area": {
+    "stage": "prospect",
+    "status": "computed (support block only; ground floor area needs size stage)",
+    "unit": "m²",
+    "how": "support block 200–600 m² (from plans, unverified); ground floor added where zoning bars data storage at grade (I-2; I-3 / FC-2 marked ?) — its area is size stage; growth space judged, not counted",
+    "low": 200,
+    "high": 600,
+    "extra": {
+     "ground_floor_rule": "no ground-floor rule",
+     "zone": "IM"
+    }
+   },
+   "receiver_radius": {
+    "stage": "prospect",
+    "status": "computed (register value)",
+    "unit": "m",
+    "how": "register: search to 3 km in a straight line",
+    "value": 3000
+   },
+   "heat_density": {
+    "stage": "prospect",
+    "status": "computed (our route: floor space per capita not stated)",
+    "unit": "GJ/ha·yr",
+    "how": "(census households within 3 km × 16.81 / 33.14 MWh + non-residential receivers within 3 km, low–high) × 3.6 ÷ land area (DA boundaries); 500 m in extra",
+    "low": 3057.9776,
+    "high": 3795.9792,
+    "extra": {
+     "at_500m": [
+      3474.9891,
+      3517.5795
+     ],
+     "class_3km_high": "≥3,000",
+     "high_over_rvo_1000": [
+      3.796,
+      3.5176
+     ],
+     "residential_GJ_3km": 4966685.172,
+     "land_m2_500_3000": [
+      984688,
+      29388230
+     ]
+    }
+   },
+   "linear_heat_density": {
+    "stage": "prospect",
+    "status": "computed (street length as pipe proxy)",
+    "unit": "GJ/m·yr",
+    "how": "heat within 3 km ÷ street + lane centreline length within 3 km (pipe-length proxy); register-width route and 500 m in extra",
+    "low": 16.9863,
+    "high": 21.0857,
+    "extra": {
+     "at_500m": [
+      20.8531,
+      21.1086
+     ],
+     "implied_width_m_500_3000": [
+      60.009,
+      55.5476
+     ],
+     "register_width_route_w5_w60": [
+      1.898,
+      22.7759
+     ],
+     "high_over_1.5": 14.0572,
+     "street_m_500_3000": [
+      16409,
+      529064
+     ]
+    }
+   },
+   "distribution_cost": {
+    "stage": "prospect",
+    "status": "computed (EUR; CAD not computable)",
+    "unit": "€/GJ (2015 €)",
+    "how": "a(C1 + C2·d_a) ÷ q_L,w with Persson coefficients; CAD conversion not stated",
+    "low": 2.12,
+    "high": 2.4909,
+    "extra": {
+     "at_500m": [
+      2.1183,
+      2.1378
+     ],
+     "d_a_m": 0.1489,
+     "cost_at_1.5_GJ_per_m": 10.3051,
+     "CAD": "not computable: coef says \"convert to CAD\" but states no rate or year (?)"
+    }
+   },
+   "receiver_demand": {
+    "stage": "prospect",
+    "status": "computed",
+    "unit": "MWh/yr (sum within 3 km)",
+    "how": "per receiver: disclosed (measured) else BCA-derived file estimate (Van) / assessed area × 1.40 or 0.777 GJ/m² (Edm, recomputed) / non-market units × 16.81 MWh / floor area × 0.57 or 1.40 GJ/m² (hospitals 1.90 / 2.46 × heating share); estimates ÷ 1.7 for the low end; tenants 0",
+    "low": 1288949.9392,
+    "high": 2011975.2648,
+    "extra": {
+     "non_residential_MWh": [
+      1116713.7965,
+      1719173.8223
+     ],
+     "non_residential_500m_MWh": [
+      4477.8268,
+      5642.7778
+     ],
+     "GJ": [
+      4640219.781,
+      7243110.9532
+     ],
+     "low_over_heat_delivered_high": 1
+    }
+   },
+   "deprivation": {
+    "stage": "prospect",
+    "status": "not computable (CIMD not in data/; noise contour level not stated)",
+    "unit": "index",
+    "how": "CIMD by DA within noise contour and receiver radius"
+   },
+   "people_affected": {
+    "stage": "prospect",
+    "status": "computed (200 / 500 m; sound distance not stated)",
+    "unit": "people",
+    "how": "raw 2021 DA counts × area share within 200 m (low) and 500 m (high); households, 65+, under 15, renters, shelter 30 %+, low income in extra; sound distance not computable",
+    "low": 818.6,
+    "high": 5097.4,
+    "extra": {
+     "households_200_500_3000": [
+      431.5,
+      2733,
+      41630.5
+     ],
+     "age65_200_500_3000": [
+      77.4,
+      665.9,
+      12034.9
+     ],
+     "under15_200_500_3000": [
+      91.9,
+      551.2,
+      8546.2
+     ],
+     "renters_200_500_3000": [
+      388.8,
+      2198.1,
+      27122.3
+     ],
+     "shelter30_200_500_3000": [
+      150.5,
+      945.1,
+      13073.4
+     ],
+     "low_income_200_500_3000": [
+      166.1,
+      1104.1,
+      14360.2
+     ],
+     "people_200_500_3000": [
+      818.6,
+      5097.4,
+      79285.8
+     ]
+    }
+   },
+   "receivers_nearby": {
+    "stage": "prospect",
+    "status": "computed",
+    "unit": "receivers within 3 km",
+    "how": "tool/receivers_*.json points, lot edge to point ≤ 3,000 m; counts by type in extra",
+    "value": 267,
+    "extra": {
+     "with_demand": 232,
+     "tenants": 24,
+     "nearest_m": 216.6,
+     "over_input_check_count": 1
+    }
+   },
+   "competing_sources": {
+    "stage": "prospect",
+    "status": "computed (networks and rinks only)",
+    "unit": "receivers within 3 km inside a network outline",
+    "how": "data/networks outlines (NEU traced, Creative Energy, River District, Blatchford, DDEI); arenas as ice-rink sources; sewage heat and other data centres not in data",
+    "value": 56,
+    "extra": {
+     "demand_inside_MWh_high": 834042.8056,
+     "share_inside": 0.4145,
+     "rinks_3km": 3,
+     "lot": "outside"
+    }
+   },
+   "refuge_people": {
+    "stage": "opportunity",
+    "status": "computed (support block only)",
+    "unit": "people",
+    "how": "offerable_area (support block 200–600 m²) ÷ 3.5 m²; ground floor would add more where offerable",
+    "low": 57,
+    "high": 171,
+    "extra": {
+     "fuel_hours_low": 12
+    }
+   },
+   "clean_air_volume": {
+    "stage": "opportunity",
+    "status": "not computable (cleaned airflow is a plant figure)",
+    "unit": "m³",
+    "how": "cleaned airflow ÷ 2–3 ACH"
+   },
+   "cooling_centre_people": {
+    "stage": "opportunity",
+    "status": "not computable (spare_cooling operator claim / judged; envelope gains not stated); per-kW reference shown",
+    "unit": "people per kW of spare cooling",
+    "how": "spare cooling kW ÷ (0.108 + envelope)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": 9.2593
+    }
+   },
+   "homes_heated": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "homes",
+    "how": "heat_delivered (emit) ÷ 16.81 MWh (BC) / 33.14 MWh (AB); available heat, not receiver-limited",
+    "low": 1455.9469,
+    "high": 3008.9569,
+    "extra": {
+     "checks_MWh": [
+      33.1389,
+      33.142
+     ],
+     "high_over_households_500m": 1.101
+    }
+   },
+   "greenhouse_area": {
+    "stage": "opportunity",
+    "status": "computed (transferred coefficients)",
+    "unit": "m²",
+    "how": "heat_delivered × 3.6 ÷ 2.1–1.63 GJ/m²",
+    "low": 82714.4229,
+    "high": 220233.494,
+    "extra": {
+     "temperature": "heat_temp 25–60 °C: root-zone only without a lift (liquid-cooled run)"
+    }
+   },
+   "aquaculture_tonnes": {
+    "stage": "opportunity",
+    "status": "computed (transferred coefficients)",
+    "unit": "t/yr",
+    "how": "heat_delivered ÷ 4.6–2.9 kWh/kg",
+    "low": 10489.1478,
+    "high": 34385.1145
+   },
+   "algae_kg": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "kg DW/yr",
+    "how": "heat_delivered ÷ 217 kWh/kg",
+    "low": 222350.5991,
+    "high": 459524.5714
+   },
+   "insect_check": {
+    "stage": "opportunity",
+    "status": "computed (coefficient)",
+    "unit": "kWh/kg live (mealworm)",
+    "how": "register coefficient 2.88 kWh/kg (10.38 MJ); mealworm and BSF tonnes the heat could serve in extra",
+    "value": 2.88,
+    "extra": {
+     "check_MJ": 2.8833,
+     "mealworm_t": [
+      16753.5,
+      34623.9
+     ],
+     "bsf_substrate_t_hi": 29294.0165
+    }
+   },
+   "distributed_servers_homes": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: server count); conditional IT kW ÷ 0.35 shown",
+    "unit": "homes",
+    "how": "servers ÷ 37–114",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      255.6391,
+      787.6448
+     ]
+    }
+   },
+   "ev_stalls": {
+    "stage": "opportunity",
+    "status": "not computable (needs spare_capacity: size stage); per-MW reference shown",
+    "unit": "stalls per MW reserved",
+    "how": "P_reserved ÷ (SF × P_charger)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      2.8571,
+      270.2703
+     ]
+    }
+   },
+   "ev_area": {
+    "stage": "opportunity",
+    "status": "not computable (needs ev_stalls); per-stall area shown",
+    "unit": "m² per stall",
+    "how": "stalls × 13.75–22 (Van) / 14.3–23.4 (Edm)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "checks": [
+      14.3,
+      23.4
+     ],
+     "reference_shown": [
+      14.3,
+      23.4
+     ]
+    }
+   },
+   "stored_heat": {
+    "stage": "opportunity",
+    "status": "not computable (store volume and ΔT not stated)",
+    "unit": "MWh",
+    "how": "ρ c V ΔT × η"
+   },
+   "storage_footprint": {
+    "stage": "opportunity",
+    "status": "not computable (needs store volume)",
+    "unit": "m²",
+    "how": "20.15 V^0.61",
+    "extra": {
+     "check_100000m3": [
+      22608.6719,
+      22004.967
+     ]
+    }
+   },
+   "sewage_heat": {
+    "stage": "opportunity",
+    "status": "not computable (sewer flow not derivable: input_check 5)",
+    "unit": "kW",
+    "how": "Q × 4.18 × ΔT"
+   },
+   "copper_tonnes": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "t",
+    "how": "it_load_actual × 20–40 t/MW (industry claim; IT nameplate route in extra)",
+    "low": 122.4,
+    "high": 244.8,
+    "extra": {
+     "on_IT_nameplate_hi": 408
+    }
+   },
+   "ewaste": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: server count); per-server value shown",
+    "unit": "kg/yr per server",
+    "how": "servers × 21.2–26.3 kg ÷ 6 yr",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      3.5333,
+      4.3833
+     ]
+    }
+   },
+   "rare_earth": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: drive count)",
+    "unit": "g",
+    "how": "drives × 1–4 g",
+    "extra": {
+     "check_g_2.5in": [
+      0.542,
+      2.604
+     ],
+     "check_g_3.5in": [
+      1.626,
+      8.246
+     ]
+    }
+   },
+   "battery": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MWh",
+    "how": "it_load_actual × 1–8 h; area at 4 h ÷ 49–19 kWh/m²; cost CAD 467–627/kWh in extra",
+    "low": 6.12,
+    "high": 48.96,
+    "extra": {
+     "default_4h_MWh": 24.48,
+     "area_m2_4h": [
+      499.5918,
+      720,
+      1288.4211
+     ],
+     "area_hi_over_lot": 0.1464,
+     "cost_CAD_4h": [
+      11432160,
+      15348960
+     ],
+     "cost_checks": [
+      466.8652,
+      626.6897
+     ]
+    }
+   },
+   "ups_flex": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MWh",
+    "how": "it_load_actual × 1–15 min ÷ 60 × 0.5 (vendor claims)",
+    "low": 0.051,
+    "high": 0.765,
+    "extra": {
+     "on_IT_nameplate_hi": 1.275
+    }
+   },
+   "btes": {
+    "stage": "opportunity",
+    "status": "computed (upper bound: all captured heat stored)",
+    "unit": "MWh/yr heat out",
+    "how": "upper bound: heat_captured (emit) stored, × η 0.32–0.56; boreholes = captured W ÷ 83–47 W/m ÷ 55–35 m",
+    "low": 12008.9088,
+    "high": 37227.6173,
+    "extra": {
+     "boreholes": [
+      939,
+      4614
+     ],
+     "borefield_m2_hi": 35816.175,
+     "over_lot": 4.0689,
+     "li2021_W_per_m": 68.1818,
+     "over_receiver_demand_low": 0.0289
+    }
+   },
+   "tes_volume": {
+    "stage": "opportunity",
+    "status": "not computable (needs demand_profile); per-kWh value shown",
+    "unit": "L per kWh stored",
+    "how": "3,600 ÷ (4.18 ΔT) ÷ 0.85, ΔT 30–6 K",
+    "low": null,
+    "high": null,
+    "extra": {
+     "checks_no_0.85": [
+      143.5407,
+      28.7081
+     ],
+     "reference_shown": [
+      33.7743,
+      168.8714
+     ]
+    }
+   },
+   "absorption": {
+    "stage": "opportunity",
+    "status": "not computable (temperature does not allow; adsorption COP not stated); conditional lifted value shown",
+    "unit": "kW cooling",
+    "how": "recovered heat × COP if temperature allows; 25–60 °C is below absorption's 70–90 °C; adsorption COP not stated",
+    "low": null,
+    "high": null,
+    "extra": {
+     "temperature": "no: 25–60 °C is below 70 °C (absorption); adsorption from ~45 °C (liquid run) but its COP is not stated",
+     "reference_shown": [
+      2570.4,
+      5312.16
+     ]
+    }
+   },
+   "homes_heated_2050s": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "homes",
+    "how": "heat ÷ (household heat × (space share × HDD2050s ÷ HDDnow + water share)); HDD18 daily mean from CWEC and PCIC 2050s files",
+    "low": 1615.9356,
+    "high": 3487.7889,
+    "extra": {
+     "HDD_now_245_585": [
+      5389.2083,
+      4659.4625,
+      4377.3042
+     ],
+     "HDD_over_register": [
+      1.0,
+      1.0001,
+      1.0001
+     ]
+    }
+   },
+   "chp_heat": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MW heat",
+    "how": "it_load_actual ÷ power-to-heat 1.2–0.5 (reciprocating); turbines and thresholds in extra",
+    "low": 5.1,
+    "high": 12.24,
+    "extra": {
+     "gas_turbine_MW": [
+      5.5636,
+      10.2
+     ],
+     "check_recip_from_eff": [
+      0.878,
+      1.963
+     ],
+     "peak_over_25MW": 0.6324,
+     "peak_over_75MW": 0.2108
+    }
+   },
+   "snowmelt_area": {
+    "stage": "opportunity",
+    "status": "computed (all heat to snowmelt; design-storm basis)",
+    "unit": "m²",
+    "how": "heat_delivered average W ÷ 700–430 (Edm) / 647–420 (Van) W/m²",
+    "low": 7868.5714,
+    "high": 26472.5581,
+    "extra": {
+     "van_annual_route_m2": "n/a (no Edmonton annual figure)",
+     "check_W_m2": [
+      430.556,
+      699.6535
+     ]
+    }
+   },
+   "backup_neighbours": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: only behind the data centre's own transfer switch, on a private line, with the utility's written approval; never through utility lines. BC: supplying others makes it a public utility unless exempted (UCA s. 22 / s. 88(3)); EPCOR bars extending wiring beyond the property (T&C s. 4.4) and islanding without written approval. Spare generator capacity is what redundancy leaves (not sized). Count of care homes and hospitals within 1 km shown.",
+    "extra": {
+     "care_hospital_1km": 6
+    }
+   },
+   "community_solar": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: BC RS 2290 community generation, ≤ 2 MW net injection, 24 kW per residential / 100 kW per commercial beneficiary, bill credits at 10 ¢/kWh, not power; Alberta micro-generation ≤ lesser of 5 MW and service rating, on owned / leased / adjacent property, sized to own use (roof lease as \"leased property\" not confirmed).",
+    "extra": {
+     "households_for_2MW": 84,
+     "neighbour_roof_solar_500m_MWh": 33163.107
+    }
+   },
+   "fire_water": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: a non-potable tank on the lot for the fire department after an earthquake; drinking water would make the operator a water supplier (BC DWPR permits; Alberta PWR s. 1(1)(l)). Volume not sized (NFPA 1142 / ISO fire-flow guide not read); Edmonton NBC(AE) 3.2.5.7.(1): municipal supply ≥ 3,800 L/min at 140 kPa for buildings over 3 storeys or 600 m², else an on-site volume by formula (formula not in the register)."
+   },
+   "refuge_services": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "L/day",
+    "how": "refuge_people × 126 L; toilets, basins, showers in extra",
+    "low": 7182,
+    "high": 21546,
+    "extra": {
+     "toilets": [
+      "not stated (< 75 people)",
+      8
+     ],
+     "basins_hi": 18,
+     "showers_hi": 4
+    }
+   }
+  },
+  "CLARK": {
+   "_lot": {
+    "label": "1425 Clark Dr",
+    "city": "van",
+    "parcel_id": "23060741",
+    "it_mw": 5.2
+   },
+   "offerable_area": {
+    "stage": "prospect",
+    "status": "computed (support block only; ground floor area needs size stage)",
+    "unit": "m²",
+    "how": "support block 200–600 m² (from plans, unverified); ground floor added where zoning bars data storage at grade (I-2; I-3 / FC-2 marked ?) — its area is size stage; growth space judged, not counted",
+    "low": 200,
+    "high": 600,
+    "extra": {
+     "ground_floor_rule": "yes (ground floor offerable; area needs size stage)",
+     "zone": "I-2"
+    }
+   },
+   "receiver_radius": {
+    "stage": "prospect",
+    "status": "computed (register value)",
+    "unit": "m",
+    "how": "register: search to 3 km in a straight line",
+    "value": 3000
+   },
+   "heat_density": {
+    "stage": "prospect",
+    "status": "computed (our route: floor space per capita not stated)",
+    "unit": "GJ/ha·yr",
+    "how": "(census households within 3 km × 16.81 / 33.14 MWh + non-residential receivers within 3 km, low–high) × 3.6 ÷ land area (DA boundaries); 500 m in extra",
+    "low": 2489.2367,
+    "high": 2732.9817,
+    "extra": {
+     "at_500m": [
+      1877.8419,
+      2138.5499
+     ],
+     "class_3km_high": "1,200–3,000",
+     "high_over_rvo_1000": [
+      2.733,
+      2.1385
+     ],
+     "residential_GJ_3km": 5081268.3012,
+     "land_m2_500_3000": [
+      946438,
+      24965512
+     ]
+    }
+   },
+   "linear_heat_density": {
+    "stage": "prospect",
+    "status": "computed (street length as pipe proxy)",
+    "unit": "GJ/m·yr",
+    "how": "heat within 3 km ÷ street + lane centreline length within 3 km (pipe-length proxy); register-width route and 500 m in extra",
+    "low": 11.7825,
+    "high": 12.9362,
+    "extra": {
+     "at_500m": [
+      10.9115,
+      12.4264
+     ],
+     "implied_width_m_500_3000": [
+      58.1065,
+      47.3338
+     ],
+     "register_width_route_w5_w60": [
+      1.3665,
+      16.3979
+     ],
+     "high_over_1.5": 8.6242,
+     "street_m_500_3000": [
+      16288,
+      527435
+     ]
+    }
+   },
+   "distribution_cost": {
+    "stage": "prospect",
+    "status": "computed (EUR; CAD not computable)",
+    "unit": "€/GJ (2015 €)",
+    "how": "a(C1 + C2·d_a) ÷ q_L,w with Persson coefficients; CAD conversion not stated",
+    "low": 3.0377,
+    "high": 3.2475,
+    "extra": {
+     "at_500m": [
+      3.1266,
+      3.4288
+     ],
+     "d_a_m": 0.1251,
+     "cost_at_1.5_GJ_per_m": 10.3051,
+     "CAD": "not computable: coef says \"convert to CAD\" but states no rate or year (?)"
+    }
+   },
+   "receiver_demand": {
+    "stage": "prospect",
+    "status": "computed",
+    "unit": "MWh/yr (sum within 3 km)",
+    "how": "per receiver: disclosed (measured) else BCA-derived file estimate (Van) / assessed area × 1.40 or 0.777 GJ/m² (Edm, recomputed) / non-market units × 16.81 MWh / floor area × 0.57 or 1.40 GJ/m² (hospitals 1.90 / 2.46 × heating share); estimates ÷ 1.7 for the low end; tenants 0",
+    "low": 805677.17,
+    "high": 1086957.0242,
+    "extra": {
+     "non_residential_MWh": [
+      314788.5,
+      483822.3542
+     ],
+     "non_residential_500m_MWh": [
+      12236.75,
+      19090.75
+     ],
+     "GJ": [
+      2900437.812,
+      3913045.287
+     ],
+     "low_over_heat_delivered_high": 1
+    }
+   },
+   "deprivation": {
+    "stage": "prospect",
+    "status": "not computable (CIMD not in data/; noise contour level not stated)",
+    "unit": "index",
+    "how": "CIMD by DA within noise contour and receiver radius"
+   },
+   "people_affected": {
+    "stage": "prospect",
+    "status": "computed (200 / 500 m; sound distance not stated)",
+    "unit": "people",
+    "how": "raw 2021 DA counts × area share within 200 m (low) and 500 m (high); households, 65+, under 15, renters, shelter 30 %+, low income in extra; sound distance not computable",
+    "low": 453.2,
+    "high": 3942.3,
+    "extra": {
+     "households_200_500_3000": [
+      238,
+      2208.9,
+      83965.7
+     ],
+     "age65_200_500_3000": [
+      71,
+      783.4,
+      24808.8
+     ],
+     "under15_200_500_3000": [
+      60.3,
+      401,
+      18382.3
+     ],
+     "renters_200_500_3000": [
+      187.1,
+      1623,
+      48594.1
+     ],
+     "shelter30_200_500_3000": [
+      50.1,
+      595.7,
+      25559.7
+     ],
+     "low_income_200_500_3000": [
+      129,
+      757.3,
+      23297.1
+     ],
+     "people_200_500_3000": [
+      453.2,
+      3942.3,
+      172890
+     ]
+    }
+   },
+   "receivers_nearby": {
+    "stage": "prospect",
+    "status": "computed",
+    "unit": "receivers within 3 km",
+    "how": "tool/receivers_*.json points, lot edge to point ≤ 3,000 m; counts by type in extra",
+    "value": 744,
+    "extra": {
+     "with_demand": 700,
+     "tenants": 37,
+     "nearest_m": 65,
+     "over_input_check_count": 1
+    }
+   },
+   "competing_sources": {
+    "stage": "prospect",
+    "status": "computed (networks and rinks only)",
+    "unit": "receivers within 3 km inside a network outline",
+    "how": "data/networks outlines (NEU traced, Creative Energy, River District, Blatchford, DDEI); arenas as ice-rink sources; sewage heat and other data centres not in data",
+    "value": 229,
+    "extra": {
+     "demand_inside_MWh_high": 501191.025,
+     "share_inside": 0.4611,
+     "rinks_3km": 0,
+     "lot": "outside"
+    }
+   },
+   "refuge_people": {
+    "stage": "opportunity",
+    "status": "computed (support block only)",
+    "unit": "people",
+    "how": "offerable_area (support block 200–600 m²) ÷ 3.5 m²; ground floor would add more where offerable",
+    "low": 57,
+    "high": 171,
+    "extra": {
+     "fuel_hours_low": 12
+    }
+   },
+   "clean_air_volume": {
+    "stage": "opportunity",
+    "status": "not computable (cleaned airflow is a plant figure)",
+    "unit": "m³",
+    "how": "cleaned airflow ÷ 2–3 ACH"
+   },
+   "cooling_centre_people": {
+    "stage": "opportunity",
+    "status": "not computable (spare_cooling operator claim / judged; envelope gains not stated); per-kW reference shown",
+    "unit": "people per kW of spare cooling",
+    "how": "spare cooling kW ÷ (0.108 + envelope)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": 9.2593
+    }
+   },
+   "homes_heated": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "homes",
+    "how": "heat_delivered (emit) ÷ 16.81 MWh (BC) / 33.14 MWh (AB); available heat, not receiver-limited",
+    "low": 1463.3004,
+    "high": 3024.1542,
+    "extra": {
+     "checks_MWh": [
+      16.8056,
+      16.808
+     ],
+     "high_over_households_500m": 1.3691
+    }
+   },
+   "greenhouse_area": {
+    "stage": "opportunity",
+    "status": "computed (transferred coefficients)",
+    "unit": "m²",
+    "how": "heat_delivered × 3.6 ÷ 2.1–1.63 GJ/m²",
+    "low": 42168.1371,
+    "high": 112275.8989,
+    "extra": {
+     "temperature": "heat_temp 25–60 °C: root-zone only without a lift (liquid-cooled run)"
+    }
+   },
+   "aquaculture_tonnes": {
+    "stage": "opportunity",
+    "status": "computed (transferred coefficients)",
+    "unit": "t/yr",
+    "how": "heat_delivered ÷ 4.6–2.9 kWh/kg",
+    "low": 5347.4087,
+    "high": 17529.6662
+   },
+   "algae_kg": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "kg DW/yr",
+    "how": "heat_delivered ÷ 217 kWh/kg",
+    "low": 113355.2074,
+    "high": 234267.4286
+   },
+   "insect_check": {
+    "stage": "opportunity",
+    "status": "computed (coefficient)",
+    "unit": "kWh/kg live (mealworm)",
+    "how": "register coefficient 2.88 kWh/kg (10.38 MJ); mealworm and BSF tonnes the heat could serve in extra",
+    "value": 2.88,
+    "extra": {
+     "check_MJ": 2.8833,
+     "mealworm_t": [
+      8541,
+      17651.4
+     ],
+     "bsf_substrate_t_hi": 14934.2045
+    }
+   },
+   "distributed_servers_homes": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: server count); conditional IT kW ÷ 0.35 shown",
+    "unit": "homes",
+    "how": "servers ÷ 37–114",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      130.3258,
+      401.5444
+     ]
+    }
+   },
+   "ev_stalls": {
+    "stage": "opportunity",
+    "status": "not computable (needs spare_capacity: size stage); per-MW reference shown",
+    "unit": "stalls per MW reserved",
+    "how": "P_reserved ÷ (SF × P_charger)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      2.8571,
+      270.2703
+     ]
+    }
+   },
+   "ev_area": {
+    "stage": "opportunity",
+    "status": "not computable (needs ev_stalls); per-stall area shown",
+    "unit": "m² per stall",
+    "how": "stalls × 13.75–22 (Van) / 14.3–23.4 (Edm)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "checks": [
+      13.75,
+      22
+     ],
+     "reference_shown": [
+      13.75,
+      22
+     ]
+    }
+   },
+   "stored_heat": {
+    "stage": "opportunity",
+    "status": "not computable (store volume and ΔT not stated)",
+    "unit": "MWh",
+    "how": "ρ c V ΔT × η"
+   },
+   "storage_footprint": {
+    "stage": "opportunity",
+    "status": "not computable (needs store volume)",
+    "unit": "m²",
+    "how": "20.15 V^0.61",
+    "extra": {
+     "check_100000m3": [
+      22608.6719,
+      22004.967
+     ]
+    }
+   },
+   "sewage_heat": {
+    "stage": "opportunity",
+    "status": "not computable (sewer flow not derivable: input_check 5)",
+    "unit": "kW",
+    "how": "Q × 4.18 × ΔT"
+   },
+   "copper_tonnes": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "t",
+    "how": "it_load_actual × 20–40 t/MW (industry claim; IT nameplate route in extra)",
+    "low": 62.4,
+    "high": 124.8,
+    "extra": {
+     "on_IT_nameplate_hi": 208
+    }
+   },
+   "ewaste": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: server count); per-server value shown",
+    "unit": "kg/yr per server",
+    "how": "servers × 21.2–26.3 kg ÷ 6 yr",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      3.5333,
+      4.3833
+     ]
+    }
+   },
+   "rare_earth": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: drive count)",
+    "unit": "g",
+    "how": "drives × 1–4 g",
+    "extra": {
+     "check_g_2.5in": [
+      0.542,
+      2.604
+     ],
+     "check_g_3.5in": [
+      1.626,
+      8.246
+     ]
+    }
+   },
+   "battery": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MWh",
+    "how": "it_load_actual × 1–8 h; area at 4 h ÷ 49–19 kWh/m²; cost CAD 467–627/kWh in extra",
+    "low": 3.12,
+    "high": 24.96,
+    "extra": {
+     "default_4h_MWh": 12.48,
+     "area_m2_4h": [
+      254.6939,
+      367.0588,
+      656.8421
+     ],
+     "area_hi_over_lot": 0.1116,
+     "cost_CAD_4h": [
+      5828160,
+      7824960
+     ],
+     "cost_checks": [
+      466.8652,
+      626.6897
+     ]
+    }
+   },
+   "ups_flex": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MWh",
+    "how": "it_load_actual × 1–15 min ÷ 60 × 0.5 (vendor claims)",
+    "low": 0.026,
+    "high": 0.39,
+    "extra": {
+     "on_IT_nameplate_hi": 0.65
+    }
+   },
+   "btes": {
+    "stage": "opportunity",
+    "status": "computed (upper bound: all captured heat stored)",
+    "unit": "MWh/yr heat out",
+    "how": "upper bound: heat_captured (emit) stored, × η 0.32–0.56; boreholes = captured W ÷ 83–47 W/m ÷ 55–35 m",
+    "low": 6122.1888,
+    "high": 18978.7853,
+    "extra": {
+     "boreholes": [
+      479,
+      2352
+     ],
+     "borefield_m2_hi": 18257.4,
+     "over_lot": 3.1023,
+     "li2021_W_per_m": 68.1818,
+     "over_receiver_demand_low": 0.0236
+    }
+   },
+   "tes_volume": {
+    "stage": "opportunity",
+    "status": "not computable (needs demand_profile); per-kWh value shown",
+    "unit": "L per kWh stored",
+    "how": "3,600 ÷ (4.18 ΔT) ÷ 0.85, ΔT 30–6 K",
+    "low": null,
+    "high": null,
+    "extra": {
+     "checks_no_0.85": [
+      143.5407,
+      28.7081
+     ],
+     "reference_shown": [
+      33.7743,
+      168.8714
+     ]
+    }
+   },
+   "absorption": {
+    "stage": "opportunity",
+    "status": "not computable (temperature does not allow; adsorption COP not stated); conditional lifted value shown",
+    "unit": "kW cooling",
+    "how": "recovered heat × COP if temperature allows; 25–60 °C is below absorption's 70–90 °C; adsorption COP not stated",
+    "low": null,
+    "high": null,
+    "extra": {
+     "temperature": "no: 25–60 °C is below 70 °C (absorption); adsorption from ~45 °C (liquid run) but its COP is not stated",
+     "reference_shown": [
+      1310.4,
+      2708.16
+     ]
+    }
+   },
+   "homes_heated_2050s": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "homes",
+    "how": "heat ÷ (household heat × (space share × HDD2050s ÷ HDDnow + water share)); HDD18 daily mean from CWEC and PCIC 2050s files",
+    "low": 1676.9308,
+    "high": 3617.4734,
+    "extra": {
+     "HDD_now_245_585": [
+      2755.125,
+      2198.2583,
+      2038.1792
+     ],
+     "HDD_over_register": [
+      1.0,
+      1.0001,
+      1.0001
+     ]
+    }
+   },
+   "chp_heat": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MW heat",
+    "how": "it_load_actual ÷ power-to-heat 1.2–0.5 (reciprocating); turbines and thresholds in extra",
+    "low": 2.6,
+    "high": 6.24,
+    "extra": {
+     "gas_turbine_MW": [
+      2.8364,
+      5.2
+     ],
+     "check_recip_from_eff": [
+      0.878,
+      1.963
+     ],
+     "peak_over_25MW": 0.3224,
+     "peak_over_75MW": "n/a (BC)"
+    }
+   },
+   "snowmelt_area": {
+    "stage": "opportunity",
+    "status": "computed (all heat to snowmelt; design-storm basis)",
+    "unit": "m²",
+    "how": "heat_delivered average W ÷ 700–430 (Edm) / 647–420 (Van) W/m²",
+    "low": 4340.0309,
+    "high": 13817.1429,
+    "extra": {
+     "van_annual_route_m2": 1412112,
+     "check_W_m2": [
+      430.556,
+      699.6535
+     ]
+    }
+   },
+   "backup_neighbours": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: only behind the data centre's own transfer switch, on a private line, with the utility's written approval; never through utility lines. BC: supplying others makes it a public utility unless exempted (UCA s. 22 / s. 88(3)); EPCOR bars extending wiring beyond the property (T&C s. 4.4) and islanding without written approval. Spare generator capacity is what redundancy leaves (not sized). Count of care homes and hospitals within 1 km shown.",
+    "extra": {
+     "care_hospital_1km": 3
+    }
+   },
+   "community_solar": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: BC RS 2290 community generation, ≤ 2 MW net injection, 24 kW per residential / 100 kW per commercial beneficiary, bill credits at 10 ¢/kWh, not power; Alberta micro-generation ≤ lesser of 5 MW and service rating, on owned / leased / adjacent property, sized to own use (roof lease as \"leased property\" not confirmed).",
+    "extra": {
+     "households_for_2MW": 84,
+     "neighbour_roof_solar_500m_MWh": 30518.528
+    }
+   },
+   "fire_water": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: a non-potable tank on the lot for the fire department after an earthquake; drinking water would make the operator a water supplier (BC DWPR permits; Alberta PWR s. 1(1)(l)). Volume not sized (NFPA 1142 / ISO fire-flow guide not read); Edmonton NBC(AE) 3.2.5.7.(1): municipal supply ≥ 3,800 L/min at 140 kPa for buildings over 3 storeys or 600 m², else an on-site volume by formula (formula not in the register)."
+   },
+   "refuge_services": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "L/day",
+    "how": "refuge_people × 126 L; toilets, basins, showers in extra",
+    "low": 7182,
+    "high": 21546,
+    "extra": {
+     "toilets": [
+      "not stated (< 75 people)",
+      8
+     ],
+     "basins_hi": 18,
+     "showers_hi": 4
+    }
+   }
+  },
+  "E123": {
+   "_lot": {
+    "label": "12603 123 Street NW",
+    "city": "edm",
+    "parcel_id": "883345",
+    "it_mw": 22.2
+   },
+   "offerable_area": {
+    "stage": "prospect",
+    "status": "computed (support block only; ground floor area needs size stage)",
+    "unit": "m²",
+    "how": "support block 200–600 m² (from plans, unverified); ground floor added where zoning bars data storage at grade (I-2; I-3 / FC-2 marked ?) — its area is size stage; growth space judged, not counted",
+    "low": 200,
+    "high": 600,
+    "extra": {
+     "ground_floor_rule": "no ground-floor rule",
+     "zone": "IH"
+    }
+   },
+   "receiver_radius": {
+    "stage": "prospect",
+    "status": "computed (register value)",
+    "unit": "m",
+    "how": "register: search to 3 km in a straight line",
+    "value": 3000
+   },
+   "heat_density": {
+    "stage": "prospect",
+    "status": "computed (our route: floor space per capita not stated)",
+    "unit": "GJ/ha·yr",
+    "how": "(census households within 3 km × 16.81 / 33.14 MWh + non-residential receivers within 3 km, low–high) × 3.6 ÷ land area (DA boundaries); 500 m in extra",
+    "low": 1285.7361,
+    "high": 1422.6681,
+    "extra": {
+     "at_500m": [
+      715.2027,
+      776.0907
+     ],
+     "class_3km_high": "1,200–3,000",
+     "high_over_rvo_1000": [
+      1.4227,
+      0.7761
+     ],
+     "residential_GJ_3km": 2875202.5392,
+     "land_m2_500_3000": [
+      1082350,
+      29941217
+     ]
+    }
+   },
+   "linear_heat_density": {
+    "stage": "prospect",
+    "status": "computed (street length as pipe proxy)",
+    "unit": "GJ/m·yr",
+    "how": "heat within 3 km ÷ street + lane centreline length within 3 km (pipe-length proxy); register-width route and 500 m in extra",
+    "low": 7.7292,
+    "high": 8.5524,
+    "extra": {
+     "at_500m": [
+      4.5383,
+      4.9247
+     ],
+     "implied_width_m_500_3000": [
+      63.4549,
+      60.1151
+     ],
+     "register_width_route_w5_w60": [
+      0.7113,
+      8.536
+     ],
+     "high_over_1.5": 5.7016,
+     "street_m_500_3000": [
+      17057,
+      498065
+     ]
+    }
+   },
+   "distribution_cost": {
+    "stage": "prospect",
+    "status": "computed (EUR; CAD not computable)",
+    "unit": "€/GJ (2015 €)",
+    "how": "a(C1 + C2·d_a) ÷ q_L,w with Persson coefficients; CAD conversion not stated",
+    "low": 4.0595,
+    "high": 4.3469,
+    "extra": {
+     "at_500m": [
+      5.8097,
+      6.1051
+     ],
+     "d_a_m": 0.105,
+     "cost_at_1.5_GJ_per_m": 10.3051,
+     "CAD": "not computable: coef says \"convert to CAD\" but states no rate or year (?)"
+    }
+   },
+   "receiver_demand": {
+    "stage": "prospect",
+    "status": "computed",
+    "unit": "MWh/yr (sum within 3 km)",
+    "how": "per receiver: disclosed (measured) else BCA-derived file estimate (Van) / assessed area × 1.40 or 0.777 GJ/m² (Edm, recomputed) / non-market units × 16.81 MWh / floor area × 0.57 or 1.40 GJ/m² (hospitals 1.90 / 2.46 × heating share); estimates ÷ 1.7 for the low end; tenants 0",
+    "low": 324450.5387,
+    "high": 475976.3381,
+    "extra": {
+     "non_residential_MWh": [
+      270679.9804,
+      384566.3889
+     ],
+     "non_residential_500m_MWh": [
+      3398.3856,
+      5229
+     ],
+     "GJ": [
+      1168021.9394,
+      1713514.817
+     ],
+     "low_over_heat_delivered_high": 1
+    }
+   },
+   "deprivation": {
+    "stage": "prospect",
+    "status": "not computable (CIMD not in data/; noise contour level not stated)",
+    "unit": "index",
+    "how": "CIMD by DA within noise contour and receiver radius"
+   },
+   "people_affected": {
+    "stage": "prospect",
+    "status": "computed (200 / 500 m; sound distance not stated)",
+    "unit": "people",
+    "how": "raw 2021 DA counts × area share within 200 m (low) and 500 m (high); households, 65+, under 15, renters, shelter 30 %+, low income in extra; sound distance not computable",
+    "low": 211.7,
+    "high": 1306.7,
+    "extra": {
+     "households_200_500_3000": [
+      93,
+      546.3,
+      24099.8
+     ],
+     "age65_200_500_3000": [
+      21.3,
+      142.3,
+      8819.2
+     ],
+     "under15_200_500_3000": [
+      39.8,
+      246.9,
+      10060.2
+     ],
+     "renters_200_500_3000": [
+      50.7,
+      305.3,
+      11337.1
+     ],
+     "shelter30_200_500_3000": [
+      28.6,
+      173.4,
+      6193.2
+     ],
+     "low_income_200_500_3000": [
+      32,
+      203,
+      7914.9
+     ],
+     "people_200_500_3000": [
+      211.7,
+      1306.7,
+      58034.5
+     ]
+    }
+   },
+   "receivers_nearby": {
+    "stage": "prospect",
+    "status": "computed",
+    "unit": "receivers within 3 km",
+    "how": "tool/receivers_*.json points, lot edge to point ≤ 3,000 m; counts by type in extra",
+    "value": 135,
+    "extra": {
+     "with_demand": 126,
+     "tenants": 3,
+     "nearest_m": 478.3,
+     "over_input_check_count": 1
+    }
+   },
+   "competing_sources": {
+    "stage": "prospect",
+    "status": "computed (networks and rinks only)",
+    "unit": "receivers within 3 km inside a network outline",
+    "how": "data/networks outlines (NEU traced, Creative Energy, River District, Blatchford, DDEI); arenas as ice-rink sources; sewage heat and other data centres not in data",
+    "value": 6,
+    "extra": {
+     "demand_inside_MWh_high": 63745.8889,
+     "share_inside": 0.1339,
+     "rinks_3km": 2,
+     "lot": "outside"
+    }
+   },
+   "refuge_people": {
+    "stage": "opportunity",
+    "status": "computed (support block only)",
+    "unit": "people",
+    "how": "offerable_area (support block 200–600 m²) ÷ 3.5 m²; ground floor would add more where offerable",
+    "low": 57,
+    "high": 171,
+    "extra": {
+     "fuel_hours_low": 12
+    }
+   },
+   "clean_air_volume": {
+    "stage": "opportunity",
+    "status": "not computable (cleaned airflow is a plant figure)",
+    "unit": "m³",
+    "how": "cleaned airflow ÷ 2–3 ACH"
+   },
+   "cooling_centre_people": {
+    "stage": "opportunity",
+    "status": "not computable (spare_cooling operator claim / judged; envelope gains not stated); per-kW reference shown",
+    "unit": "people per kW of spare cooling",
+    "how": "spare cooling kW ÷ (0.108 + envelope)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": 9.2593
+    }
+   },
+   "homes_heated": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "homes",
+    "how": "heat_delivered (emit) ÷ 16.81 MWh (BC) / 33.14 MWh (AB); available heat, not receiver-limited",
+    "low": 3168.8256,
+    "high": 6548.9062,
+    "extra": {
+     "checks_MWh": [
+      33.1389,
+      33.142
+     ],
+     "high_over_households_500m": 11.9877
+    }
+   },
+   "greenhouse_area": {
+    "stage": "opportunity",
+    "status": "computed (transferred coefficients)",
+    "unit": "m²",
+    "how": "heat_delivered × 3.6 ÷ 2.1–1.63 GJ/m²",
+    "low": 180025.5086,
+    "high": 479331.7222,
+    "extra": {
+     "temperature": "heat_temp 25–60 °C: root-zone only without a lift (liquid-cooled run)"
+    }
+   },
+   "aquaculture_tonnes": {
+    "stage": "opportunity",
+    "status": "computed (transferred coefficients)",
+    "unit": "t/yr",
+    "how": "heat_delivered ÷ 4.6–2.9 kWh/kg",
+    "low": 22829.3217,
+    "high": 74838.1903
+   },
+   "algae_kg": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "kg DW/yr",
+    "how": "heat_delivered ÷ 217 kWh/kg",
+    "low": 483939.5392,
+    "high": 1000141.7143
+   },
+   "insect_check": {
+    "stage": "opportunity",
+    "status": "computed (coefficient)",
+    "unit": "kWh/kg live (mealworm)",
+    "how": "register coefficient 2.88 kWh/kg (10.38 MJ); mealworm and BSF tonnes the heat could serve in extra",
+    "value": 2.88,
+    "extra": {
+     "check_MJ": 2.8833,
+     "mealworm_t": [
+      36463.5,
+      75357.9
+     ],
+     "bsf_substrate_t_hi": 63757.5652
+    }
+   },
+   "distributed_servers_homes": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: server count); conditional IT kW ÷ 0.35 shown",
+    "unit": "homes",
+    "how": "servers ÷ 37–114",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      556.391,
+      1714.2857
+     ]
+    }
+   },
+   "ev_stalls": {
+    "stage": "opportunity",
+    "status": "not computable (needs spare_capacity: size stage); per-MW reference shown",
+    "unit": "stalls per MW reserved",
+    "how": "P_reserved ÷ (SF × P_charger)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      2.8571,
+      270.2703
+     ]
+    }
+   },
+   "ev_area": {
+    "stage": "opportunity",
+    "status": "not computable (needs ev_stalls); per-stall area shown",
+    "unit": "m² per stall",
+    "how": "stalls × 13.75–22 (Van) / 14.3–23.4 (Edm)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "checks": [
+      14.3,
+      23.4
+     ],
+     "reference_shown": [
+      14.3,
+      23.4
+     ]
+    }
+   },
+   "stored_heat": {
+    "stage": "opportunity",
+    "status": "not computable (store volume and ΔT not stated)",
+    "unit": "MWh",
+    "how": "ρ c V ΔT × η"
+   },
+   "storage_footprint": {
+    "stage": "opportunity",
+    "status": "not computable (needs store volume)",
+    "unit": "m²",
+    "how": "20.15 V^0.61",
+    "extra": {
+     "check_100000m3": [
+      22608.6719,
+      22004.967
+     ]
+    }
+   },
+   "sewage_heat": {
+    "stage": "opportunity",
+    "status": "not computable (sewer flow not derivable: input_check 5)",
+    "unit": "kW",
+    "how": "Q × 4.18 × ΔT"
+   },
+   "copper_tonnes": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "t",
+    "how": "it_load_actual × 20–40 t/MW (industry claim; IT nameplate route in extra)",
+    "low": 266.4,
+    "high": 532.8,
+    "extra": {
+     "on_IT_nameplate_hi": 888
+    }
+   },
+   "ewaste": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: server count); per-server value shown",
+    "unit": "kg/yr per server",
+    "how": "servers × 21.2–26.3 kg ÷ 6 yr",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      3.5333,
+      4.3833
+     ]
+    }
+   },
+   "rare_earth": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: drive count)",
+    "unit": "g",
+    "how": "drives × 1–4 g",
+    "extra": {
+     "check_g_2.5in": [
+      0.542,
+      2.604
+     ],
+     "check_g_3.5in": [
+      1.626,
+      8.246
+     ]
+    }
+   },
+   "battery": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MWh",
+    "how": "it_load_actual × 1–8 h; area at 4 h ÷ 49–19 kWh/m²; cost CAD 467–627/kWh in extra",
+    "low": 13.32,
+    "high": 106.56,
+    "extra": {
+     "default_4h_MWh": 53.28,
+     "area_m2_4h": [
+      1087.3469,
+      1567.0588,
+      2804.2105
+     ],
+     "area_hi_over_lot": 0.1931,
+     "cost_CAD_4h": [
+      24881760,
+      33406560
+     ],
+     "cost_checks": [
+      466.8652,
+      626.6897
+     ]
+    }
+   },
+   "ups_flex": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MWh",
+    "how": "it_load_actual × 1–15 min ÷ 60 × 0.5 (vendor claims)",
+    "low": 0.111,
+    "high": 1.665,
+    "extra": {
+     "on_IT_nameplate_hi": 2.775
+    }
+   },
+   "btes": {
+    "stage": "opportunity",
+    "status": "computed (upper bound: all captured heat stored)",
+    "unit": "MWh/yr heat out",
+    "how": "upper bound: heat_captured (emit) stored, × η 0.32–0.56; boreholes = captured W ÷ 83–47 W/m ÷ 55–35 m",
+    "low": 26137.0368,
+    "high": 81024.8141,
+    "extra": {
+     "boreholes": [
+      2043,
+      10041
+     ],
+     "borefield_m2_hi": 77943.2625,
+     "over_lot": 5.368,
+     "li2021_W_per_m": 68.1818,
+     "over_receiver_demand_low": 0.2497
+    }
+   },
+   "tes_volume": {
+    "stage": "opportunity",
+    "status": "not computable (needs demand_profile); per-kWh value shown",
+    "unit": "L per kWh stored",
+    "how": "3,600 ÷ (4.18 ΔT) ÷ 0.85, ΔT 30–6 K",
+    "low": null,
+    "high": null,
+    "extra": {
+     "checks_no_0.85": [
+      143.5407,
+      28.7081
+     ],
+     "reference_shown": [
+      33.7743,
+      168.8714
+     ]
+    }
+   },
+   "absorption": {
+    "stage": "opportunity",
+    "status": "not computable (temperature does not allow; adsorption COP not stated); conditional lifted value shown",
+    "unit": "kW cooling",
+    "how": "recovered heat × COP if temperature allows; 25–60 °C is below absorption's 70–90 °C; adsorption COP not stated",
+    "low": null,
+    "high": null,
+    "extra": {
+     "temperature": "no: 25–60 °C is below 70 °C (absorption); adsorption from ~45 °C (liquid run) but its COP is not stated",
+     "reference_shown": [
+      5594.4,
+      11561.76
+     ]
+    }
+   },
+   "homes_heated_2050s": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "homes",
+    "how": "heat ÷ (household heat × (space share × HDD2050s ÷ HDDnow + water share)); HDD18 daily mean from CWEC and PCIC 2050s files",
+    "low": 3517.0362,
+    "high": 7591.07,
+    "extra": {
+     "HDD_now_245_585": [
+      5389.2083,
+      4659.4625,
+      4377.3042
+     ],
+     "HDD_over_register": [
+      1.0,
+      1.0001,
+      1.0001
+     ]
+    }
+   },
+   "chp_heat": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MW heat",
+    "how": "it_load_actual ÷ power-to-heat 1.2–0.5 (reciprocating); turbines and thresholds in extra",
+    "low": 11.1,
+    "high": 26.64,
+    "extra": {
+     "gas_turbine_MW": [
+      12.1091,
+      22.2
+     ],
+     "check_recip_from_eff": [
+      0.878,
+      1.963
+     ],
+     "peak_over_25MW": 1.3764,
+     "peak_over_75MW": 0.4588
+    }
+   },
+   "snowmelt_area": {
+    "stage": "opportunity",
+    "status": "computed (all heat to snowmelt; design-storm basis)",
+    "unit": "m²",
+    "how": "heat_delivered average W ÷ 700–430 (Edm) / 647–420 (Van) W/m²",
+    "low": 17125.7143,
+    "high": 57616.7442,
+    "extra": {
+     "van_annual_route_m2": "n/a (no Edmonton annual figure)",
+     "check_W_m2": [
+      430.556,
+      699.6535
+     ]
+    }
+   },
+   "backup_neighbours": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: only behind the data centre's own transfer switch, on a private line, with the utility's written approval; never through utility lines. BC: supplying others makes it a public utility unless exempted (UCA s. 22 / s. 88(3)); EPCOR bars extending wiring beyond the property (T&C s. 4.4) and islanding without written approval. Spare generator capacity is what redundancy leaves (not sized). Count of care homes and hospitals within 1 km shown.",
+    "extra": {
+     "care_hospital_1km": 0
+    }
+   },
+   "community_solar": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: BC RS 2290 community generation, ≤ 2 MW net injection, 24 kW per residential / 100 kW per commercial beneficiary, bill credits at 10 ¢/kWh, not power; Alberta micro-generation ≤ lesser of 5 MW and service rating, on owned / leased / adjacent property, sized to own use (roof lease as \"leased property\" not confirmed).",
+    "extra": {
+     "households_for_2MW": 84,
+     "neighbour_roof_solar_500m_MWh": 21126.489
+    }
+   },
+   "fire_water": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: a non-potable tank on the lot for the fire department after an earthquake; drinking water would make the operator a water supplier (BC DWPR permits; Alberta PWR s. 1(1)(l)). Volume not sized (NFPA 1142 / ISO fire-flow guide not read); Edmonton NBC(AE) 3.2.5.7.(1): municipal supply ≥ 3,800 L/min at 140 kPa for buildings over 3 storeys or 600 m², else an on-site volume by formula (formula not in the register)."
+   },
+   "refuge_services": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "L/day",
+    "how": "refuge_people × 126 L; toilets, basins, showers in extra",
+    "low": 7182,
+    "high": 21546,
+    "extra": {
+     "toilets": [
+      "not stated (< 75 people)",
+      8
+     ],
+     "basins_hi": 18,
+     "showers_hi": 4
+    }
+   }
+  },
+  "V339": {
+   "_lot": {
+    "label": "339 1st Ave E",
+    "city": "van",
+    "parcel_id": "63819485",
+    "it_mw": 3.8
+   },
+   "offerable_area": {
+    "stage": "prospect",
+    "status": "computed (support block only; ground floor area needs size stage)",
+    "unit": "m²",
+    "how": "support block 200–600 m² (from plans, unverified); ground floor added where zoning bars data storage at grade (I-2; I-3 / FC-2 marked ?) — its area is size stage; growth space judged, not counted",
+    "low": 200,
+    "high": 600,
+    "extra": {
+     "ground_floor_rule": "yes (ground floor offerable; area needs size stage)",
+     "zone": "I-3"
+    }
+   },
+   "receiver_radius": {
+    "stage": "prospect",
+    "status": "computed (register value)",
+    "unit": "m",
+    "how": "register: search to 3 km in a straight line",
+    "value": 3000
+   },
+   "heat_density": {
+    "stage": "prospect",
+    "status": "computed (our route: floor space per capita not stated)",
+    "unit": "GJ/ha·yr",
+    "how": "(census households within 3 km × 16.81 / 33.14 MWh + non-residential receivers within 3 km, low–high) × 3.6 ÷ land area (DA boundaries); 500 m in extra",
+    "low": 3555.3032,
+    "high": 3946.4889,
+    "extra": {
+     "at_500m": [
+      3000.0136,
+      3287.6822
+     ],
+     "class_3km_high": "≥3,000",
+     "high_over_rvo_1000": [
+      3.9465,
+      3.2877
+     ],
+     "residential_GJ_3km": 7067960.1684,
+     "land_m2_500_3000": [
+      934200,
+      26068793
+     ]
+    }
+   },
+   "linear_heat_density": {
+    "stage": "prospect",
+    "status": "computed (street length as pipe proxy)",
+    "unit": "GJ/m·yr",
+    "how": "heat within 3 km ÷ street + lane centreline length within 3 km (pipe-length proxy); register-width route and 500 m in extra",
+    "low": 17.0809,
+    "high": 18.9602,
+    "extra": {
+     "at_500m": [
+      16.7681,
+      18.3759
+     ],
+     "implied_width_m_500_3000": [
+      55.8933,
+      48.0433
+     ],
+     "register_width_route_w5_w60": [
+      1.9732,
+      23.6789
+     ],
+     "high_over_1.5": 12.6402,
+     "street_m_500_3000": [
+      16714,
+      542610
+     ]
+    }
+   },
+   "distribution_cost": {
+    "stage": "prospect",
+    "status": "computed (EUR; CAD not computable)",
+    "unit": "€/GJ (2015 €)",
+    "how": "a(C1 + C2·d_a) ÷ q_L,w with Persson coefficients; CAD conversion not stated",
+    "low": 2.2957,
+    "high": 2.4807,
+    "extra": {
+     "at_500m": [
+      2.3498,
+      2.5147
+     ],
+     "d_a_m": 0.1437,
+     "cost_at_1.5_GJ_per_m": 10.3051,
+     "CAD": "not computable: coef says \"convert to CAD\" but states no rate or year (?)"
+    }
+   },
+   "receiver_demand": {
+    "stage": "prospect",
+    "status": "computed",
+    "unit": "MWh/yr (sum within 3 km)",
+    "how": "per receiver: disclosed (measured) else BCA-derived file estimate (Van) / assessed area × 1.40 or 0.777 GJ/m² (Edm, recomputed) / non-market units × 16.81 MWh / floor area × 0.57 or 1.40 GJ/m² (hospitals 1.90 / 2.46 × heating share); estimates ÷ 1.7 for the low end; tenants 0",
+    "low": 1360916.4517,
+    "high": 1868384.9642,
+    "extra": {
+     "non_residential_MWh": [
+      611190.6317,
+      894461.1442
+     ],
+     "non_residential_500m_MWh": [
+      19558.3167,
+      27023.3167
+     ],
+     "GJ": [
+      4899299.226,
+      6726185.871
+     ],
+     "low_over_heat_delivered_high": 1
+    }
+   },
+   "deprivation": {
+    "stage": "prospect",
+    "status": "not computable (CIMD not in data/; noise contour level not stated)",
+    "unit": "index",
+    "how": "CIMD by DA within noise contour and receiver radius"
+   },
+   "people_affected": {
+    "stage": "prospect",
+    "status": "computed (200 / 500 m; sound distance not stated)",
+    "unit": "people",
+    "how": "raw 2021 DA counts × area share within 200 m (low) and 500 m (high); households, 65+, under 15, renters, shelter 30 %+, low income in extra; sound distance not computable",
+    "low": 782.2,
+    "high": 5675.3,
+    "extra": {
+     "households_200_500_3000": [
+      491.7,
+      3467.7,
+      116794.9
+     ],
+     "age65_200_500_3000": [
+      56.8,
+      531.4,
+      31100.6
+     ],
+     "under15_200_500_3000": [
+      42.8,
+      378.7,
+      21764.7
+     ],
+     "renters_200_500_3000": [
+      281.5,
+      2027.9,
+      69872.4
+     ],
+     "shelter30_200_500_3000": [
+      171.5,
+      1097.6,
+      38865.2
+     ],
+     "low_income_200_500_3000": [
+      82.6,
+      587.5,
+      31674.6
+     ],
+     "people_200_500_3000": [
+      782.2,
+      5675.3,
+      223826.8
+     ]
+    }
+   },
+   "receivers_nearby": {
+    "stage": "prospect",
+    "status": "computed",
+    "unit": "receivers within 3 km",
+    "how": "tool/receivers_*.json points, lot edge to point ≤ 3,000 m; counts by type in extra",
+    "value": 1067,
+    "extra": {
+     "with_demand": 1001,
+     "tenants": 58,
+     "nearest_m": 22.1,
+     "over_input_check_count": 1
+    }
+   },
+   "competing_sources": {
+    "stage": "prospect",
+    "status": "computed (networks and rinks only)",
+    "unit": "receivers within 3 km inside a network outline",
+    "how": "data/networks outlines (NEU traced, Creative Energy, River District, Blatchford, DDEI); arenas as ice-rink sources; sewage heat and other data centres not in data",
+    "value": 363,
+    "extra": {
+     "demand_inside_MWh_high": 846645.3983,
+     "share_inside": 0.4531,
+     "rinks_3km": 0,
+     "lot": "inside"
+    }
+   },
+   "refuge_people": {
+    "stage": "opportunity",
+    "status": "computed (support block only)",
+    "unit": "people",
+    "how": "offerable_area (support block 200–600 m²) ÷ 3.5 m²; ground floor would add more where offerable",
+    "low": 57,
+    "high": 171,
+    "extra": {
+     "fuel_hours_low": 12
+    }
+   },
+   "clean_air_volume": {
+    "stage": "opportunity",
+    "status": "not computable (cleaned airflow is a plant figure)",
+    "unit": "m³",
+    "how": "cleaned airflow ÷ 2–3 ACH"
+   },
+   "cooling_centre_people": {
+    "stage": "opportunity",
+    "status": "not computable (spare_cooling operator claim / judged; envelope gains not stated); per-kW reference shown",
+    "unit": "people per kW of spare cooling",
+    "how": "spare cooling kW ÷ (0.108 + envelope)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": 9.2593
+    }
+   },
+   "homes_heated": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "homes",
+    "how": "heat_delivered (emit) ÷ 16.81 MWh (BC) / 33.14 MWh (AB); available heat, not receiver-limited",
+    "low": 1069.3349,
+    "high": 2209.9588,
+    "extra": {
+     "checks_MWh": [
+      16.8056,
+      16.808
+     ],
+     "high_over_households_500m": 0.6373
+    }
+   },
+   "greenhouse_area": {
+    "stage": "opportunity",
+    "status": "computed (transferred coefficients)",
+    "unit": "m²",
+    "how": "heat_delivered × 3.6 ÷ 2.1–1.63 GJ/m²",
+    "low": 30815.1771,
+    "high": 82047.7723,
+    "extra": {
+     "temperature": "heat_temp 25–60 °C: root-zone only without a lift (liquid-cooled run)"
+    }
+   },
+   "aquaculture_tonnes": {
+    "stage": "opportunity",
+    "status": "computed (transferred coefficients)",
+    "unit": "t/yr",
+    "how": "heat_delivered ÷ 4.6–2.9 kWh/kg",
+    "low": 3907.7217,
+    "high": 12810.1407
+   },
+   "algae_kg": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "kg DW/yr",
+    "how": "heat_delivered ÷ 217 kWh/kg",
+    "low": 82836.4977,
+    "high": 171195.4286
+   },
+   "insect_check": {
+    "stage": "opportunity",
+    "status": "computed (coefficient)",
+    "unit": "kWh/kg live (mealworm)",
+    "how": "register coefficient 2.88 kWh/kg (10.38 MJ); mealworm and BSF tonnes the heat could serve in extra",
+    "value": 2.88,
+    "extra": {
+     "check_MJ": 2.8833,
+     "mealworm_t": [
+      6241.5,
+      12899.1
+     ],
+     "bsf_substrate_t_hi": 10913.4571
+    }
+   },
+   "distributed_servers_homes": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: server count); conditional IT kW ÷ 0.35 shown",
+    "unit": "homes",
+    "how": "servers ÷ 37–114",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      95.2381,
+      293.4363
+     ]
+    }
+   },
+   "ev_stalls": {
+    "stage": "opportunity",
+    "status": "not computable (needs spare_capacity: size stage); per-MW reference shown",
+    "unit": "stalls per MW reserved",
+    "how": "P_reserved ÷ (SF × P_charger)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      2.8571,
+      270.2703
+     ]
+    }
+   },
+   "ev_area": {
+    "stage": "opportunity",
+    "status": "not computable (needs ev_stalls); per-stall area shown",
+    "unit": "m² per stall",
+    "how": "stalls × 13.75–22 (Van) / 14.3–23.4 (Edm)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "checks": [
+      13.75,
+      22
+     ],
+     "reference_shown": [
+      13.75,
+      22
+     ]
+    }
+   },
+   "stored_heat": {
+    "stage": "opportunity",
+    "status": "not computable (store volume and ΔT not stated)",
+    "unit": "MWh",
+    "how": "ρ c V ΔT × η"
+   },
+   "storage_footprint": {
+    "stage": "opportunity",
+    "status": "not computable (needs store volume)",
+    "unit": "m²",
+    "how": "20.15 V^0.61",
+    "extra": {
+     "check_100000m3": [
+      22608.6719,
+      22004.967
+     ]
+    }
+   },
+   "sewage_heat": {
+    "stage": "opportunity",
+    "status": "not computable (sewer flow not derivable: input_check 5)",
+    "unit": "kW",
+    "how": "Q × 4.18 × ΔT"
+   },
+   "copper_tonnes": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "t",
+    "how": "it_load_actual × 20–40 t/MW (industry claim; IT nameplate route in extra)",
+    "low": 45.6,
+    "high": 91.2,
+    "extra": {
+     "on_IT_nameplate_hi": 152
+    }
+   },
+   "ewaste": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: server count); per-server value shown",
+    "unit": "kg/yr per server",
+    "how": "servers × 21.2–26.3 kg ÷ 6 yr",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      3.5333,
+      4.3833
+     ]
+    }
+   },
+   "rare_earth": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: drive count)",
+    "unit": "g",
+    "how": "drives × 1–4 g",
+    "extra": {
+     "check_g_2.5in": [
+      0.542,
+      2.604
+     ],
+     "check_g_3.5in": [
+      1.626,
+      8.246
+     ]
+    }
+   },
+   "battery": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MWh",
+    "how": "it_load_actual × 1–8 h; area at 4 h ÷ 49–19 kWh/m²; cost CAD 467–627/kWh in extra",
+    "low": 2.28,
+    "high": 18.24,
+    "extra": {
+     "default_4h_MWh": 9.12,
+     "area_m2_4h": [
+      186.1224,
+      268.2353,
+      480
+     ],
+     "area_hi_over_lot": 0.107,
+     "cost_CAD_4h": [
+      4259040,
+      5718240
+     ],
+     "cost_checks": [
+      466.8652,
+      626.6897
+     ]
+    }
+   },
+   "ups_flex": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MWh",
+    "how": "it_load_actual × 1–15 min ÷ 60 × 0.5 (vendor claims)",
+    "low": 0.019,
+    "high": 0.285,
+    "extra": {
+     "on_IT_nameplate_hi": 0.475
+    }
+   },
+   "btes": {
+    "stage": "opportunity",
+    "status": "computed (upper bound: all captured heat stored)",
+    "unit": "MWh/yr heat out",
+    "how": "upper bound: heat_captured (emit) stored, × η 0.32–0.56; boreholes = captured W ÷ 83–47 W/m ÷ 55–35 m",
+    "low": 4473.9072,
+    "high": 13869.1123,
+    "extra": {
+     "boreholes": [
+      350,
+      1719
+     ],
+     "borefield_m2_hi": 13343.7375,
+     "over_lot": 2.9751,
+     "li2021_W_per_m": 68.1818,
+     "over_receiver_demand_low": 0.0102
+    }
+   },
+   "tes_volume": {
+    "stage": "opportunity",
+    "status": "not computable (needs demand_profile); per-kWh value shown",
+    "unit": "L per kWh stored",
+    "how": "3,600 ÷ (4.18 ΔT) ÷ 0.85, ΔT 30–6 K",
+    "low": null,
+    "high": null,
+    "extra": {
+     "checks_no_0.85": [
+      143.5407,
+      28.7081
+     ],
+     "reference_shown": [
+      33.7743,
+      168.8714
+     ]
+    }
+   },
+   "absorption": {
+    "stage": "opportunity",
+    "status": "not computable (temperature does not allow; adsorption COP not stated); conditional lifted value shown",
+    "unit": "kW cooling",
+    "how": "recovered heat × COP if temperature allows; 25–60 °C is below absorption's 70–90 °C; adsorption COP not stated",
+    "low": null,
+    "high": null,
+    "extra": {
+     "temperature": "no: 25–60 °C is below 70 °C (absorption); adsorption from ~45 °C (liquid run) but its COP is not stated",
+     "reference_shown": [
+      957.6,
+      1979.04
+     ]
+    }
+   },
+   "homes_heated_2050s": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "homes",
+    "how": "heat ÷ (household heat × (space share × HDD2050s ÷ HDDnow + water share)); HDD18 daily mean from CWEC and PCIC 2050s files",
+    "low": 1225.4494,
+    "high": 2643.5382,
+    "extra": {
+     "HDD_now_245_585": [
+      2755.125,
+      2198.2583,
+      2038.1792
+     ],
+     "HDD_over_register": [
+      1.0,
+      1.0001,
+      1.0001
+     ]
+    }
+   },
+   "chp_heat": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MW heat",
+    "how": "it_load_actual ÷ power-to-heat 1.2–0.5 (reciprocating); turbines and thresholds in extra",
+    "low": 1.9,
+    "high": 4.56,
+    "extra": {
+     "gas_turbine_MW": [
+      2.0727,
+      3.8
+     ],
+     "check_recip_from_eff": [
+      0.878,
+      1.963
+     ],
+     "peak_over_25MW": 0.2356,
+     "peak_over_75MW": "n/a (BC)"
+    }
+   },
+   "snowmelt_area": {
+    "stage": "opportunity",
+    "status": "computed (all heat to snowmelt; design-storm basis)",
+    "unit": "m²",
+    "how": "heat_delivered average W ÷ 700–430 (Edm) / 647–420 (Van) W/m²",
+    "low": 3171.5611,
+    "high": 10097.1429,
+    "extra": {
+     "van_annual_route_m2": 1031928,
+     "check_W_m2": [
+      430.556,
+      699.6535
+     ]
+    }
+   },
+   "backup_neighbours": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: only behind the data centre's own transfer switch, on a private line, with the utility's written approval; never through utility lines. BC: supplying others makes it a public utility unless exempted (UCA s. 22 / s. 88(3)); EPCOR bars extending wiring beyond the property (T&C s. 4.4) and islanding without written approval. Spare generator capacity is what redundancy leaves (not sized). Count of care homes and hospitals within 1 km shown.",
+    "extra": {
+     "care_hospital_1km": 1
+    }
+   },
+   "community_solar": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: BC RS 2290 community generation, ≤ 2 MW net injection, 24 kW per residential / 100 kW per commercial beneficiary, bill credits at 10 ¢/kWh, not power; Alberta micro-generation ≤ lesser of 5 MW and service rating, on owned / leased / adjacent property, sized to own use (roof lease as \"leased property\" not confirmed).",
+    "extra": {
+     "households_for_2MW": 84,
+     "neighbour_roof_solar_500m_MWh": 30325.376
+    }
+   },
+   "fire_water": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: a non-potable tank on the lot for the fire department after an earthquake; drinking water would make the operator a water supplier (BC DWPR permits; Alberta PWR s. 1(1)(l)). Volume not sized (NFPA 1142 / ISO fire-flow guide not read); Edmonton NBC(AE) 3.2.5.7.(1): municipal supply ≥ 3,800 L/min at 140 kPa for buildings over 3 storeys or 600 m², else an on-site volume by formula (formula not in the register)."
+   },
+   "refuge_services": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "L/day",
+    "how": "refuge_people × 126 L; toilets, basins, showers in extra",
+    "low": 7182,
+    "high": 21546,
+    "extra": {
+     "toilets": [
+      "not stated (< 75 people)",
+      8
+     ],
+     "basins_hi": 18,
+     "showers_hi": 4
+    }
+   }
+  },
+  "E06A": {
+   "_lot": {
+    "label": "74 Airport Rd NW",
+    "city": "edm",
+    "parcel_id": "176767",
+    "it_mw": 10.2
+   },
+   "offerable_area": {
+    "stage": "prospect",
+    "status": "computed (support block only; ground floor area needs size stage)",
+    "unit": "m²",
+    "how": "support block 200–600 m² (from plans, unverified); ground floor added where zoning bars data storage at grade (I-2; I-3 / FC-2 marked ?) — its area is size stage; growth space judged, not counted",
+    "low": 200,
+    "high": 600,
+    "extra": {
+     "ground_floor_rule": "no ground-floor rule",
+     "zone": "BE"
+    }
+   },
+   "receiver_radius": {
+    "stage": "prospect",
+    "status": "computed (register value)",
+    "unit": "m",
+    "how": "register: search to 3 km in a straight line",
+    "value": 3000
+   },
+   "heat_density": {
+    "stage": "prospect",
+    "status": "computed (our route: floor space per capita not stated)",
+    "unit": "GJ/ha·yr",
+    "how": "(census households within 3 km × 16.81 / 33.14 MWh + non-residential receivers within 3 km, low–high) × 3.6 ÷ land area (DA boundaries); 500 m in extra",
+    "low": 2033.0593,
+    "high": 2230.4588,
+    "extra": {
+     "at_500m": [
+      2233.5577,
+      2639.815
+     ],
+     "class_3km_high": "1,200–3,000",
+     "high_over_rvo_1000": [
+      2.2305,
+      2.6398
+     ],
+     "residential_GJ_3km": 4322491.2936,
+     "land_m2_500_3000": [
+      924479,
+      29048178
+     ]
+    }
+   },
+   "linear_heat_density": {
+    "stage": "prospect",
+    "status": "computed (street length as pipe proxy)",
+    "unit": "GJ/m·yr",
+    "how": "heat within 3 km ÷ street + lane centreline length within 3 km (pipe-length proxy); register-width route and 500 m in extra",
+    "low": 10.6317,
+    "high": 11.664,
+    "extra": {
+     "at_500m": [
+      17.5376,
+      20.7275
+     ],
+     "implied_width_m_500_3000": [
+      78.5187,
+      52.2943
+     ],
+     "register_width_route_w5_w60": [
+      1.1152,
+      13.3828
+     ],
+     "high_over_1.5": 7.776,
+     "street_m_500_3000": [
+      11774,
+      555475
+     ]
+    }
+   },
+   "distribution_cost": {
+    "stage": "prospect",
+    "status": "computed (EUR; CAD not computable)",
+    "unit": "€/GJ (2015 €)",
+    "how": "a(C1 + C2·d_a) ÷ q_L,w with Persson coefficients; CAD conversion not stated",
+    "low": 3.2709,
+    "high": 3.492,
+    "extra": {
+     "at_500m": [
+      2.1475,
+      2.4327
+     ],
+     "d_a_m": 0.1201,
+     "cost_at_1.5_GJ_per_m": 10.3051,
+     "CAD": "not computable: coef says \"convert to CAD\" but states no rate or year (?)"
+    }
+   },
+   "receiver_demand": {
+    "stage": "prospect",
+    "status": "computed",
+    "unit": "MWh/yr (sum within 3 km)",
+    "how": "per receiver: disclosed (measured) else BCA-derived file estimate (Van) / assessed area × 1.40 or 0.777 GJ/m² (Edm, recomputed) / non-market units × 16.81 MWh / floor area × 0.57 or 1.40 GJ/m² (hospitals 1.90 / 2.46 × heating share); estimates ÷ 1.7 for the low end; tenants 0",
+    "low": 533054.6434,
+    "high": 757633.693,
+    "extra": {
+     "non_residential_MWh": [
+      439770.9689,
+      599051.4463
+     ],
+     "non_residential_500m_MWh": [
+      54441.3791,
+      64874.0556
+     ],
+     "GJ": [
+      1918996.7164,
+      2727481.2948
+     ],
+     "low_over_heat_delivered_high": 1
+    }
+   },
+   "deprivation": {
+    "stage": "prospect",
+    "status": "not computable (CIMD not in data/; noise contour level not stated)",
+    "unit": "index",
+    "how": "CIMD by DA within noise contour and receiver radius"
+   },
+   "people_affected": {
+    "stage": "prospect",
+    "status": "computed (200 / 500 m; sound distance not stated)",
+    "unit": "people",
+    "how": "raw 2021 DA counts × area share within 200 m (low) and 500 m (high); households, 65+, under 15, renters, shelter 30 %+, low income in extra; sound distance not computable",
+    "low": 13.3,
+    "high": 223,
+    "extra": {
+     "households_200_500_3000": [
+      3.7,
+      88,
+      36230.9
+     ],
+     "age65_200_500_3000": [
+      1.3,
+      31.1,
+      10489.4
+     ],
+     "under15_200_500_3000": [
+      1,
+      23.6,
+      10297.8
+     ],
+     "renters_200_500_3000": [
+      1.2,
+      27.5,
+      22172.2
+     ],
+     "shelter30_200_500_3000": [
+      0.7,
+      15.7,
+      10848.1
+     ],
+     "low_income_200_500_3000": [
+      0.8,
+      18,
+      12525.8
+     ],
+     "people_200_500_3000": [
+      13.3,
+      223,
+      74485.5
+     ]
+    }
+   },
+   "receivers_nearby": {
+    "stage": "prospect",
+    "status": "computed",
+    "unit": "receivers within 3 km",
+    "how": "tool/receivers_*.json points, lot edge to point ≤ 3,000 m; counts by type in extra",
+    "value": 175,
+    "extra": {
+     "with_demand": 157,
+     "tenants": 8,
+     "nearest_m": 142.8,
+     "over_input_check_count": 1
+    }
+   },
+   "competing_sources": {
+    "stage": "prospect",
+    "status": "computed (networks and rinks only)",
+    "unit": "receivers within 3 km inside a network outline",
+    "how": "data/networks outlines (NEU traced, Creative Energy, River District, Blatchford, DDEI); arenas as ice-rink sources; sewage heat and other data centres not in data",
+    "value": 6,
+    "extra": {
+     "demand_inside_MWh_high": 63745.8889,
+     "share_inside": 0.0841,
+     "rinks_3km": 3,
+     "lot": "inside"
+    }
+   },
+   "refuge_people": {
+    "stage": "opportunity",
+    "status": "computed (support block only)",
+    "unit": "people",
+    "how": "offerable_area (support block 200–600 m²) ÷ 3.5 m²; ground floor would add more where offerable",
+    "low": 57,
+    "high": 171,
+    "extra": {
+     "fuel_hours_low": 12
+    }
+   },
+   "clean_air_volume": {
+    "stage": "opportunity",
+    "status": "not computable (cleaned airflow is a plant figure)",
+    "unit": "m³",
+    "how": "cleaned airflow ÷ 2–3 ACH"
+   },
+   "cooling_centre_people": {
+    "stage": "opportunity",
+    "status": "not computable (spare_cooling operator claim / judged; envelope gains not stated); per-kW reference shown",
+    "unit": "people per kW of spare cooling",
+    "how": "spare cooling kW ÷ (0.108 + envelope)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": 9.2593
+    }
+   },
+   "homes_heated": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "homes",
+    "how": "heat_delivered (emit) ÷ 16.81 MWh (BC) / 33.14 MWh (AB); available heat, not receiver-limited",
+    "low": 1455.9469,
+    "high": 3008.9569,
+    "extra": {
+     "checks_MWh": [
+      33.1389,
+      33.142
+     ],
+     "high_over_households_500m": 34.1927
+    }
+   },
+   "greenhouse_area": {
+    "stage": "opportunity",
+    "status": "computed (transferred coefficients)",
+    "unit": "m²",
+    "how": "heat_delivered × 3.6 ÷ 2.1–1.63 GJ/m²",
+    "low": 82714.4229,
+    "high": 220233.494,
+    "extra": {
+     "temperature": "heat_temp 25–60 °C: root-zone only without a lift (liquid-cooled run)"
+    }
+   },
+   "aquaculture_tonnes": {
+    "stage": "opportunity",
+    "status": "computed (transferred coefficients)",
+    "unit": "t/yr",
+    "how": "heat_delivered ÷ 4.6–2.9 kWh/kg",
+    "low": 10489.1478,
+    "high": 34385.1145
+   },
+   "algae_kg": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "kg DW/yr",
+    "how": "heat_delivered ÷ 217 kWh/kg",
+    "low": 222350.5991,
+    "high": 459524.5714
+   },
+   "insect_check": {
+    "stage": "opportunity",
+    "status": "computed (coefficient)",
+    "unit": "kWh/kg live (mealworm)",
+    "how": "register coefficient 2.88 kWh/kg (10.38 MJ); mealworm and BSF tonnes the heat could serve in extra",
+    "value": 2.88,
+    "extra": {
+     "check_MJ": 2.8833,
+     "mealworm_t": [
+      16753.5,
+      34623.9
+     ],
+     "bsf_substrate_t_hi": 29294.0165
+    }
+   },
+   "distributed_servers_homes": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: server count); conditional IT kW ÷ 0.35 shown",
+    "unit": "homes",
+    "how": "servers ÷ 37–114",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      255.6391,
+      787.6448
+     ]
+    }
+   },
+   "ev_stalls": {
+    "stage": "opportunity",
+    "status": "not computable (needs spare_capacity: size stage); per-MW reference shown",
+    "unit": "stalls per MW reserved",
+    "how": "P_reserved ÷ (SF × P_charger)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      2.8571,
+      270.2703
+     ]
+    }
+   },
+   "ev_area": {
+    "stage": "opportunity",
+    "status": "not computable (needs ev_stalls); per-stall area shown",
+    "unit": "m² per stall",
+    "how": "stalls × 13.75–22 (Van) / 14.3–23.4 (Edm)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "checks": [
+      14.3,
+      23.4
+     ],
+     "reference_shown": [
+      14.3,
+      23.4
+     ]
+    }
+   },
+   "stored_heat": {
+    "stage": "opportunity",
+    "status": "not computable (store volume and ΔT not stated)",
+    "unit": "MWh",
+    "how": "ρ c V ΔT × η"
+   },
+   "storage_footprint": {
+    "stage": "opportunity",
+    "status": "not computable (needs store volume)",
+    "unit": "m²",
+    "how": "20.15 V^0.61",
+    "extra": {
+     "check_100000m3": [
+      22608.6719,
+      22004.967
+     ]
+    }
+   },
+   "sewage_heat": {
+    "stage": "opportunity",
+    "status": "not computable (sewer flow not derivable: input_check 5)",
+    "unit": "kW",
+    "how": "Q × 4.18 × ΔT"
+   },
+   "copper_tonnes": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "t",
+    "how": "it_load_actual × 20–40 t/MW (industry claim; IT nameplate route in extra)",
+    "low": 122.4,
+    "high": 244.8,
+    "extra": {
+     "on_IT_nameplate_hi": 408
+    }
+   },
+   "ewaste": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: server count); per-server value shown",
+    "unit": "kg/yr per server",
+    "how": "servers × 21.2–26.3 kg ÷ 6 yr",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      3.5333,
+      4.3833
+     ]
+    }
+   },
+   "rare_earth": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: drive count)",
+    "unit": "g",
+    "how": "drives × 1–4 g",
+    "extra": {
+     "check_g_2.5in": [
+      0.542,
+      2.604
+     ],
+     "check_g_3.5in": [
+      1.626,
+      8.246
+     ]
+    }
+   },
+   "battery": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MWh",
+    "how": "it_load_actual × 1–8 h; area at 4 h ÷ 49–19 kWh/m²; cost CAD 467–627/kWh in extra",
+    "low": 6.12,
+    "high": 48.96,
+    "extra": {
+     "default_4h_MWh": 24.48,
+     "area_m2_4h": [
+      499.5918,
+      720,
+      1288.4211
+     ],
+     "area_hi_over_lot": 0.2825,
+     "cost_CAD_4h": [
+      11432160,
+      15348960
+     ],
+     "cost_checks": [
+      466.8652,
+      626.6897
+     ]
+    }
+   },
+   "ups_flex": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MWh",
+    "how": "it_load_actual × 1–15 min ÷ 60 × 0.5 (vendor claims)",
+    "low": 0.051,
+    "high": 0.765,
+    "extra": {
+     "on_IT_nameplate_hi": 1.275
+    }
+   },
+   "btes": {
+    "stage": "opportunity",
+    "status": "computed (upper bound: all captured heat stored)",
+    "unit": "MWh/yr heat out",
+    "how": "upper bound: heat_captured (emit) stored, × η 0.32–0.56; boreholes = captured W ÷ 83–47 W/m ÷ 55–35 m",
+    "low": 12008.9088,
+    "high": 37227.6173,
+    "extra": {
+     "boreholes": [
+      939,
+      4614
+     ],
+     "borefield_m2_hi": 35816.175,
+     "over_lot": 7.853,
+     "li2021_W_per_m": 68.1818,
+     "over_receiver_demand_low": 0.0698
+    }
+   },
+   "tes_volume": {
+    "stage": "opportunity",
+    "status": "not computable (needs demand_profile); per-kWh value shown",
+    "unit": "L per kWh stored",
+    "how": "3,600 ÷ (4.18 ΔT) ÷ 0.85, ΔT 30–6 K",
+    "low": null,
+    "high": null,
+    "extra": {
+     "checks_no_0.85": [
+      143.5407,
+      28.7081
+     ],
+     "reference_shown": [
+      33.7743,
+      168.8714
+     ]
+    }
+   },
+   "absorption": {
+    "stage": "opportunity",
+    "status": "not computable (temperature does not allow; adsorption COP not stated); conditional lifted value shown",
+    "unit": "kW cooling",
+    "how": "recovered heat × COP if temperature allows; 25–60 °C is below absorption's 70–90 °C; adsorption COP not stated",
+    "low": null,
+    "high": null,
+    "extra": {
+     "temperature": "no: 25–60 °C is below 70 °C (absorption); adsorption from ~45 °C (liquid run) but its COP is not stated",
+     "reference_shown": [
+      2570.4,
+      5312.16
+     ]
+    }
+   },
+   "homes_heated_2050s": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "homes",
+    "how": "heat ÷ (household heat × (space share × HDD2050s ÷ HDDnow + water share)); HDD18 daily mean from CWEC and PCIC 2050s files",
+    "low": 1615.9356,
+    "high": 3487.7889,
+    "extra": {
+     "HDD_now_245_585": [
+      5389.2083,
+      4659.4625,
+      4377.3042
+     ],
+     "HDD_over_register": [
+      1.0,
+      1.0001,
+      1.0001
+     ]
+    }
+   },
+   "chp_heat": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MW heat",
+    "how": "it_load_actual ÷ power-to-heat 1.2–0.5 (reciprocating); turbines and thresholds in extra",
+    "low": 5.1,
+    "high": 12.24,
+    "extra": {
+     "gas_turbine_MW": [
+      5.5636,
+      10.2
+     ],
+     "check_recip_from_eff": [
+      0.878,
+      1.963
+     ],
+     "peak_over_25MW": 0.6324,
+     "peak_over_75MW": 0.2108
+    }
+   },
+   "snowmelt_area": {
+    "stage": "opportunity",
+    "status": "computed (all heat to snowmelt; design-storm basis)",
+    "unit": "m²",
+    "how": "heat_delivered average W ÷ 700–430 (Edm) / 647–420 (Van) W/m²",
+    "low": 7868.5714,
+    "high": 26472.5581,
+    "extra": {
+     "van_annual_route_m2": "n/a (no Edmonton annual figure)",
+     "check_W_m2": [
+      430.556,
+      699.6535
+     ]
+    }
+   },
+   "backup_neighbours": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: only behind the data centre's own transfer switch, on a private line, with the utility's written approval; never through utility lines. BC: supplying others makes it a public utility unless exempted (UCA s. 22 / s. 88(3)); EPCOR bars extending wiring beyond the property (T&C s. 4.4) and islanding without written approval. Spare generator capacity is what redundancy leaves (not sized). Count of care homes and hospitals within 1 km shown.",
+    "extra": {
+     "care_hospital_1km": 1
+    }
+   },
+   "community_solar": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: BC RS 2290 community generation, ≤ 2 MW net injection, 24 kW per residential / 100 kW per commercial beneficiary, bill credits at 10 ¢/kWh, not power; Alberta micro-generation ≤ lesser of 5 MW and service rating, on owned / leased / adjacent property, sized to own use (roof lease as \"leased property\" not confirmed).",
+    "extra": {
+     "households_for_2MW": 84,
+     "neighbour_roof_solar_500m_MWh": 23765.571
+    }
+   },
+   "fire_water": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: a non-potable tank on the lot for the fire department after an earthquake; drinking water would make the operator a water supplier (BC DWPR permits; Alberta PWR s. 1(1)(l)). Volume not sized (NFPA 1142 / ISO fire-flow guide not read); Edmonton NBC(AE) 3.2.5.7.(1): municipal supply ≥ 3,800 L/min at 140 kPa for buildings over 3 storeys or 600 m², else an on-site volume by formula (formula not in the register)."
+   },
+   "refuge_services": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "L/day",
+    "how": "refuge_people × 126 L; toilets, basins, showers in extra",
+    "low": 7182,
+    "high": 21546,
+    "extra": {
+     "toilets": [
+      "not stated (< 75 people)",
+      8
+     ],
+     "basins_hi": 18,
+     "showers_hi": 4
+    }
+   }
+  },
+  "E06B": {
+   "_lot": {
+    "label": "64 Airport Rd NW",
+    "city": "edm",
+    "parcel_id": "146402",
+    "it_mw": 10.2
+   },
+   "offerable_area": {
+    "stage": "prospect",
+    "status": "computed (support block only; ground floor area needs size stage)",
+    "unit": "m²",
+    "how": "support block 200–600 m² (from plans, unverified); ground floor added where zoning bars data storage at grade (I-2; I-3 / FC-2 marked ?) — its area is size stage; growth space judged, not counted",
+    "low": 200,
+    "high": 600,
+    "extra": {
+     "ground_floor_rule": "no ground-floor rule",
+     "zone": "BE"
+    }
+   },
+   "receiver_radius": {
+    "stage": "prospect",
+    "status": "computed (register value)",
+    "unit": "m",
+    "how": "register: search to 3 km in a straight line",
+    "value": 3000
+   },
+   "heat_density": {
+    "stage": "prospect",
+    "status": "computed (our route: floor space per capita not stated)",
+    "unit": "GJ/ha·yr",
+    "how": "(census households within 3 km × 16.81 / 33.14 MWh + non-residential receivers within 3 km, low–high) × 3.6 ÷ land area (DA boundaries); 500 m in extra",
+    "low": 2086.5167,
+    "high": 2289.8603,
+    "extra": {
+     "at_500m": [
+      2246.6683,
+      2654.6502
+     ],
+     "class_3km_high": "1,200–3,000",
+     "high_over_rvo_1000": [
+      2.2899,
+      2.6547
+     ],
+     "residential_GJ_3km": 4418018.0064,
+     "land_m2_500_3000": [
+      920571,
+      29026205
+     ]
+    }
+   },
+   "linear_heat_density": {
+    "stage": "prospect",
+    "status": "computed (street length as pipe proxy)",
+    "unit": "GJ/m·yr",
+    "how": "heat within 3 km ÷ street + lane centreline length within 3 km (pipe-length proxy); register-width route and 500 m in extra",
+    "low": 10.8721,
+    "high": 11.9316,
+    "extra": {
+     "at_500m": [
+      17.3406,
+      20.4896
+     ],
+     "implied_width_m_500_3000": [
+      77.1838,
+      52.1064
+     ],
+     "register_width_route_w5_w60": [
+      1.1449,
+      13.7392
+     ],
+     "high_over_1.5": 7.9544,
+     "street_m_500_3000": [
+      11927,
+      557056
+     ]
+    }
+   },
+   "distribution_cost": {
+    "stage": "prospect",
+    "status": "computed (EUR; CAD not computable)",
+    "unit": "€/GJ (2015 €)",
+    "how": "a(C1 + C2·d_a) ÷ q_L,w with Persson coefficients; CAD conversion not stated",
+    "low": 3.2185,
+    "high": 3.4376,
+    "extra": {
+     "at_500m": [
+      2.1662,
+      2.4531
+     ],
+     "d_a_m": 0.1212,
+     "cost_at_1.5_GJ_per_m": 10.3051,
+     "CAD": "not computable: coef says \"convert to CAD\" but states no rate or year (?)"
+    }
+   },
+   "receiver_demand": {
+    "stage": "prospect",
+    "status": "computed",
+    "unit": "MWh/yr (sum within 3 km)",
+    "how": "per receiver: disclosed (measured) else BCA-derived file estimate (Van) / assessed area × 1.40 or 0.777 GJ/m² (Edm, recomputed) / non-market units × 16.81 MWh / floor area × 0.57 or 1.40 GJ/m² (hospitals 1.90 / 2.46 × heating share); estimates ÷ 1.7 for the low end; tenants 0",
+    "low": 557734.4325,
+    "high": 793533.4788,
+    "extra": {
+     "non_residential_MWh": [
+      455096.6683,
+      619049.2797
+     ],
+     "non_residential_500m_MWh": [
+      54441.3791,
+      64874.0556
+     ],
+     "GJ": [
+      2007843.957,
+      2856720.5238
+     ],
+     "low_over_heat_delivered_high": 1
+    }
+   },
+   "deprivation": {
+    "stage": "prospect",
+    "status": "not computable (CIMD not in data/; noise contour level not stated)",
+    "unit": "index",
+    "how": "CIMD by DA within noise contour and receiver radius"
+   },
+   "people_affected": {
+    "stage": "prospect",
+    "status": "computed (200 / 500 m; sound distance not stated)",
+    "unit": "people",
+    "how": "raw 2021 DA counts × area share within 200 m (low) and 500 m (high); households, 65+, under 15, renters, shelter 30 %+, low income in extra; sound distance not computable",
+    "low": 16.5,
+    "high": 230.5,
+    "extra": {
+     "households_200_500_3000": [
+      5.1,
+      90.8,
+      37031.6
+     ],
+     "age65_200_500_3000": [
+      1.8,
+      32.3,
+      10695.5
+     ],
+     "under15_200_500_3000": [
+      1.4,
+      24.2,
+      10320.1
+     ],
+     "renters_200_500_3000": [
+      1.6,
+      28.2,
+      22814
+     ],
+     "shelter30_200_500_3000": [
+      0.9,
+      16.1,
+      11126.4
+     ],
+     "low_income_200_500_3000": [
+      1,
+      18.5,
+      12781.3
+     ],
+     "people_200_500_3000": [
+      16.5,
+      230.5,
+      75656.7
+     ]
+    }
+   },
+   "receivers_nearby": {
+    "stage": "prospect",
+    "status": "computed",
+    "unit": "receivers within 3 km",
+    "how": "tool/receivers_*.json points, lot edge to point ≤ 3,000 m; counts by type in extra",
+    "value": 183,
+    "extra": {
+     "with_demand": 163,
+     "tenants": 8,
+     "nearest_m": 108,
+     "over_input_check_count": 1
+    }
+   },
+   "competing_sources": {
+    "stage": "prospect",
+    "status": "computed (networks and rinks only)",
+    "unit": "receivers within 3 km inside a network outline",
+    "how": "data/networks outlines (NEU traced, Creative Energy, River District, Blatchford, DDEI); arenas as ice-rink sources; sewage heat and other data centres not in data",
+    "value": 8,
+    "extra": {
+     "demand_inside_MWh_high": 75092.5,
+     "share_inside": 0.0946,
+     "rinks_3km": 3,
+     "lot": "inside"
+    }
+   },
+   "refuge_people": {
+    "stage": "opportunity",
+    "status": "computed (support block only)",
+    "unit": "people",
+    "how": "offerable_area (support block 200–600 m²) ÷ 3.5 m²; ground floor would add more where offerable",
+    "low": 57,
+    "high": 171,
+    "extra": {
+     "fuel_hours_low": 12
+    }
+   },
+   "clean_air_volume": {
+    "stage": "opportunity",
+    "status": "not computable (cleaned airflow is a plant figure)",
+    "unit": "m³",
+    "how": "cleaned airflow ÷ 2–3 ACH"
+   },
+   "cooling_centre_people": {
+    "stage": "opportunity",
+    "status": "not computable (spare_cooling operator claim / judged; envelope gains not stated); per-kW reference shown",
+    "unit": "people per kW of spare cooling",
+    "how": "spare cooling kW ÷ (0.108 + envelope)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": 9.2593
+    }
+   },
+   "homes_heated": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "homes",
+    "how": "heat_delivered (emit) ÷ 16.81 MWh (BC) / 33.14 MWh (AB); available heat, not receiver-limited",
+    "low": 1455.9469,
+    "high": 3008.9569,
+    "extra": {
+     "checks_MWh": [
+      33.1389,
+      33.142
+     ],
+     "high_over_households_500m": 33.1383
+    }
+   },
+   "greenhouse_area": {
+    "stage": "opportunity",
+    "status": "computed (transferred coefficients)",
+    "unit": "m²",
+    "how": "heat_delivered × 3.6 ÷ 2.1–1.63 GJ/m²",
+    "low": 82714.4229,
+    "high": 220233.494,
+    "extra": {
+     "temperature": "heat_temp 25–60 °C: root-zone only without a lift (liquid-cooled run)"
+    }
+   },
+   "aquaculture_tonnes": {
+    "stage": "opportunity",
+    "status": "computed (transferred coefficients)",
+    "unit": "t/yr",
+    "how": "heat_delivered ÷ 4.6–2.9 kWh/kg",
+    "low": 10489.1478,
+    "high": 34385.1145
+   },
+   "algae_kg": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "kg DW/yr",
+    "how": "heat_delivered ÷ 217 kWh/kg",
+    "low": 222350.5991,
+    "high": 459524.5714
+   },
+   "insect_check": {
+    "stage": "opportunity",
+    "status": "computed (coefficient)",
+    "unit": "kWh/kg live (mealworm)",
+    "how": "register coefficient 2.88 kWh/kg (10.38 MJ); mealworm and BSF tonnes the heat could serve in extra",
+    "value": 2.88,
+    "extra": {
+     "check_MJ": 2.8833,
+     "mealworm_t": [
+      16753.5,
+      34623.9
+     ],
+     "bsf_substrate_t_hi": 29294.0165
+    }
+   },
+   "distributed_servers_homes": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: server count); conditional IT kW ÷ 0.35 shown",
+    "unit": "homes",
+    "how": "servers ÷ 37–114",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      255.6391,
+      787.6448
+     ]
+    }
+   },
+   "ev_stalls": {
+    "stage": "opportunity",
+    "status": "not computable (needs spare_capacity: size stage); per-MW reference shown",
+    "unit": "stalls per MW reserved",
+    "how": "P_reserved ÷ (SF × P_charger)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      2.8571,
+      270.2703
+     ]
+    }
+   },
+   "ev_area": {
+    "stage": "opportunity",
+    "status": "not computable (needs ev_stalls); per-stall area shown",
+    "unit": "m² per stall",
+    "how": "stalls × 13.75–22 (Van) / 14.3–23.4 (Edm)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "checks": [
+      14.3,
+      23.4
+     ],
+     "reference_shown": [
+      14.3,
+      23.4
+     ]
+    }
+   },
+   "stored_heat": {
+    "stage": "opportunity",
+    "status": "not computable (store volume and ΔT not stated)",
+    "unit": "MWh",
+    "how": "ρ c V ΔT × η"
+   },
+   "storage_footprint": {
+    "stage": "opportunity",
+    "status": "not computable (needs store volume)",
+    "unit": "m²",
+    "how": "20.15 V^0.61",
+    "extra": {
+     "check_100000m3": [
+      22608.6719,
+      22004.967
+     ]
+    }
+   },
+   "sewage_heat": {
+    "stage": "opportunity",
+    "status": "not computable (sewer flow not derivable: input_check 5)",
+    "unit": "kW",
+    "how": "Q × 4.18 × ΔT"
+   },
+   "copper_tonnes": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "t",
+    "how": "it_load_actual × 20–40 t/MW (industry claim; IT nameplate route in extra)",
+    "low": 122.4,
+    "high": 244.8,
+    "extra": {
+     "on_IT_nameplate_hi": 408
+    }
+   },
+   "ewaste": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: server count); per-server value shown",
+    "unit": "kg/yr per server",
+    "how": "servers × 21.2–26.3 kg ÷ 6 yr",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      3.5333,
+      4.3833
+     ]
+    }
+   },
+   "rare_earth": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: drive count)",
+    "unit": "g",
+    "how": "drives × 1–4 g",
+    "extra": {
+     "check_g_2.5in": [
+      0.542,
+      2.604
+     ],
+     "check_g_3.5in": [
+      1.626,
+      8.246
+     ]
+    }
+   },
+   "battery": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MWh",
+    "how": "it_load_actual × 1–8 h; area at 4 h ÷ 49–19 kWh/m²; cost CAD 467–627/kWh in extra",
+    "low": 6.12,
+    "high": 48.96,
+    "extra": {
+     "default_4h_MWh": 24.48,
+     "area_m2_4h": [
+      499.5918,
+      720,
+      1288.4211
+     ],
+     "area_hi_over_lot": 0.3013,
+     "cost_CAD_4h": [
+      11432160,
+      15348960
+     ],
+     "cost_checks": [
+      466.8652,
+      626.6897
+     ]
+    }
+   },
+   "ups_flex": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MWh",
+    "how": "it_load_actual × 1–15 min ÷ 60 × 0.5 (vendor claims)",
+    "low": 0.051,
+    "high": 0.765,
+    "extra": {
+     "on_IT_nameplate_hi": 1.275
+    }
+   },
+   "btes": {
+    "stage": "opportunity",
+    "status": "computed (upper bound: all captured heat stored)",
+    "unit": "MWh/yr heat out",
+    "how": "upper bound: heat_captured (emit) stored, × η 0.32–0.56; boreholes = captured W ÷ 83–47 W/m ÷ 55–35 m",
+    "low": 12008.9088,
+    "high": 37227.6173,
+    "extra": {
+     "boreholes": [
+      939,
+      4614
+     ],
+     "borefield_m2_hi": 35816.175,
+     "over_lot": 8.3757,
+     "li2021_W_per_m": 68.1818,
+     "over_receiver_demand_low": 0.0667
+    }
+   },
+   "tes_volume": {
+    "stage": "opportunity",
+    "status": "not computable (needs demand_profile); per-kWh value shown",
+    "unit": "L per kWh stored",
+    "how": "3,600 ÷ (4.18 ΔT) ÷ 0.85, ΔT 30–6 K",
+    "low": null,
+    "high": null,
+    "extra": {
+     "checks_no_0.85": [
+      143.5407,
+      28.7081
+     ],
+     "reference_shown": [
+      33.7743,
+      168.8714
+     ]
+    }
+   },
+   "absorption": {
+    "stage": "opportunity",
+    "status": "not computable (temperature does not allow; adsorption COP not stated); conditional lifted value shown",
+    "unit": "kW cooling",
+    "how": "recovered heat × COP if temperature allows; 25–60 °C is below absorption's 70–90 °C; adsorption COP not stated",
+    "low": null,
+    "high": null,
+    "extra": {
+     "temperature": "no: 25–60 °C is below 70 °C (absorption); adsorption from ~45 °C (liquid run) but its COP is not stated",
+     "reference_shown": [
+      2570.4,
+      5312.16
+     ]
+    }
+   },
+   "homes_heated_2050s": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "homes",
+    "how": "heat ÷ (household heat × (space share × HDD2050s ÷ HDDnow + water share)); HDD18 daily mean from CWEC and PCIC 2050s files",
+    "low": 1615.9356,
+    "high": 3487.7889,
+    "extra": {
+     "HDD_now_245_585": [
+      5389.2083,
+      4659.4625,
+      4377.3042
+     ],
+     "HDD_over_register": [
+      1.0,
+      1.0001,
+      1.0001
+     ]
+    }
+   },
+   "chp_heat": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MW heat",
+    "how": "it_load_actual ÷ power-to-heat 1.2–0.5 (reciprocating); turbines and thresholds in extra",
+    "low": 5.1,
+    "high": 12.24,
+    "extra": {
+     "gas_turbine_MW": [
+      5.5636,
+      10.2
+     ],
+     "check_recip_from_eff": [
+      0.878,
+      1.963
+     ],
+     "peak_over_25MW": 0.6324,
+     "peak_over_75MW": 0.2108
+    }
+   },
+   "snowmelt_area": {
+    "stage": "opportunity",
+    "status": "computed (all heat to snowmelt; design-storm basis)",
+    "unit": "m²",
+    "how": "heat_delivered average W ÷ 700–430 (Edm) / 647–420 (Van) W/m²",
+    "low": 7868.5714,
+    "high": 26472.5581,
+    "extra": {
+     "van_annual_route_m2": "n/a (no Edmonton annual figure)",
+     "check_W_m2": [
+      430.556,
+      699.6535
+     ]
+    }
+   },
+   "backup_neighbours": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: only behind the data centre's own transfer switch, on a private line, with the utility's written approval; never through utility lines. BC: supplying others makes it a public utility unless exempted (UCA s. 22 / s. 88(3)); EPCOR bars extending wiring beyond the property (T&C s. 4.4) and islanding without written approval. Spare generator capacity is what redundancy leaves (not sized). Count of care homes and hospitals within 1 km shown.",
+    "extra": {
+     "care_hospital_1km": 1
+    }
+   },
+   "community_solar": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: BC RS 2290 community generation, ≤ 2 MW net injection, 24 kW per residential / 100 kW per commercial beneficiary, bill credits at 10 ¢/kWh, not power; Alberta micro-generation ≤ lesser of 5 MW and service rating, on owned / leased / adjacent property, sized to own use (roof lease as \"leased property\" not confirmed).",
+    "extra": {
+     "households_for_2MW": 84,
+     "neighbour_roof_solar_500m_MWh": 24717.504
+    }
+   },
+   "fire_water": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: a non-potable tank on the lot for the fire department after an earthquake; drinking water would make the operator a water supplier (BC DWPR permits; Alberta PWR s. 1(1)(l)). Volume not sized (NFPA 1142 / ISO fire-flow guide not read); Edmonton NBC(AE) 3.2.5.7.(1): municipal supply ≥ 3,800 L/min at 140 kPa for buildings over 3 storeys or 600 m², else an on-site volume by formula (formula not in the register)."
+   },
+   "refuge_services": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "L/day",
+    "how": "refuge_people × 126 L; toilets, basins, showers in extra",
+    "low": 7182,
+    "high": 21546,
+    "extra": {
+     "toilets": [
+      "not stated (< 75 people)",
+      8
+     ],
+     "basins_hi": 18,
+     "showers_hi": 4
+    }
+   }
+  },
+  "HAST": {
+   "_lot": {
+    "label": "555 W Hastings",
+    "city": "van",
+    "parcel_id": "59013407",
+    "it_mw": 1.1
+   },
+   "offerable_area": {
+    "stage": "prospect",
+    "status": "computed (support block only; ground floor area needs size stage)",
+    "unit": "m²",
+    "how": "support block 200–600 m² (from plans, unverified); ground floor added where zoning bars data storage at grade (I-2; I-3 / FC-2 marked ?) — its area is size stage; growth space judged, not counted",
+    "low": 200,
+    "high": 600,
+    "extra": {
+     "ground_floor_rule": "no ground-floor rule",
+     "zone": "DD"
+    }
+   },
+   "receiver_radius": {
+    "stage": "prospect",
+    "status": "computed (register value)",
+    "unit": "m",
+    "how": "register: search to 3 km in a straight line",
+    "value": 3000
+   },
+   "heat_density": {
+    "stage": "prospect",
+    "status": "computed (our route: floor space per capita not stated)",
+    "unit": "GJ/ha·yr",
+    "how": "(census households within 3 km × 16.81 / 33.14 MWh + non-residential receivers within 3 km, low–high) × 3.6 ÷ land area (DA boundaries); 500 m in extra",
+    "low": 4669.8055,
+    "high": 5226.005,
+    "extra": {
+     "at_500m": [
+      7535.833,
+      10302.2152
+     ],
+     "class_3km_high": "≥3,000",
+     "high_over_rvo_1000": [
+      5.226,
+      10.3022
+     ],
+     "residential_GJ_3km": 6456548.8656,
+     "land_m2_500_3000": [
+      948819,
+      18466171
+     ]
+    }
+   },
+   "linear_heat_density": {
+    "stage": "prospect",
+    "status": "computed (street length as pipe proxy)",
+    "unit": "GJ/m·yr",
+    "how": "heat within 3 km ÷ street + lane centreline length within 3 km (pipe-length proxy); register-width route and 500 m in extra",
+    "low": 29.2659,
+    "high": 32.7516,
+    "extra": {
+     "at_500m": [
+      43.5374,
+      59.5198
+     ],
+     "implied_width_m_500_3000": [
+      57.7738,
+      62.6705
+     ],
+     "register_width_route_w5_w60": [
+      2.613,
+      31.356
+     ],
+     "high_over_1.5": 21.8344,
+     "street_m_500_3000": [
+      16423,
+      294655
+     ]
+    }
+   },
+   "distribution_cost": {
+    "stage": "prospect",
+    "status": "computed (EUR; CAD not computable)",
+    "unit": "€/GJ (2015 €)",
+    "how": "a(C1 + C2·d_a) ÷ q_L,w with Persson coefficients; CAD conversion not stated",
+    "low": 1.5137,
+    "high": 1.6514,
+    "extra": {
+     "at_500m": [
+      0.944,
+      1.211
+     ],
+     "d_a_m": 0.1703,
+     "cost_at_1.5_GJ_per_m": 10.3051,
+     "CAD": "not computable: coef says \"convert to CAD\" but states no rate or year (?)"
+    }
+   },
+   "receiver_demand": {
+    "stage": "prospect",
+    "status": "computed",
+    "unit": "MWh/yr (sum within 3 km)",
+    "how": "per receiver: disclosed (measured) else BCA-derived file estimate (Van) / assessed area × 1.40 or 0.777 GJ/m² (Edm, recomputed) / non-market units × 16.81 MWh / floor area × 0.57 or 1.40 GJ/m² (hospitals 1.90 / 2.46 × heating share); estimates ÷ 1.7 for the low end; tenants 0",
+    "low": 1414199.4333,
+    "high": 1978998.5333,
+    "extra": {
+     "non_residential_MWh": [
+      601887.1533,
+      887189.2533
+     ],
+     "non_residential_500m_MWh": [
+      144986.1,
+      217897.1
+     ],
+     "GJ": [
+      5091117.96,
+      7124394.72
+     ],
+     "low_over_heat_delivered_high": 1
+    }
+   },
+   "deprivation": {
+    "stage": "prospect",
+    "status": "not computable (CIMD not in data/; noise contour level not stated)",
+    "unit": "index",
+    "how": "CIMD by DA within noise contour and receiver radius"
+   },
+   "people_affected": {
+    "stage": "prospect",
+    "status": "computed (200 / 500 m; sound distance not stated)",
+    "unit": "people",
+    "how": "raw 2021 DA counts × area share within 200 m (low) and 500 m (high); households, 65+, under 15, renters, shelter 30 %+, low income in extra; sound distance not computable",
+    "low": 1281.1,
+    "high": 6066.9,
+    "extra": {
+     "households_200_500_3000": [
+      683,
+      3190.3,
+      106691.6
+     ],
+     "age65_200_500_3000": [
+      133.6,
+      657,
+      27454.2
+     ],
+     "under15_200_500_3000": [
+      76.9,
+      317.5,
+      13238.1
+     ],
+     "renters_200_500_3000": [
+      539.6,
+      2224.5,
+      71509.3
+     ],
+     "shelter30_200_500_3000": [
+      309.8,
+      1362.6,
+      39940.7
+     ],
+     "low_income_200_500_3000": [
+      278,
+      1283.8,
+      30634.6
+     ],
+     "people_200_500_3000": [
+      1281.1,
+      6066.9,
+      183358.1
+     ]
+    }
+   },
+   "receivers_nearby": {
+    "stage": "prospect",
+    "status": "computed",
+    "unit": "receivers within 3 km",
+    "how": "tool/receivers_*.json points, lot edge to point ≤ 3,000 m; counts by type in extra",
+    "value": 1011,
+    "extra": {
+     "with_demand": 948,
+     "tenants": 57,
+     "nearest_m": 11.9,
+     "over_input_check_count": 1
+    }
+   },
+   "competing_sources": {
+    "stage": "prospect",
+    "status": "computed (networks and rinks only)",
+    "unit": "receivers within 3 km inside a network outline",
+    "how": "data/networks outlines (NEU traced, Creative Energy, River District, Blatchford, DDEI); arenas as ice-rink sources; sewage heat and other data centres not in data",
+    "value": 377,
+    "extra": {
+     "demand_inside_MWh_high": 907197.3983,
+     "share_inside": 0.4584,
+     "rinks_3km": 0,
+     "lot": "inside"
+    }
+   },
+   "refuge_people": {
+    "stage": "opportunity",
+    "status": "computed (support block only)",
+    "unit": "people",
+    "how": "offerable_area (support block 200–600 m²) ÷ 3.5 m²; ground floor would add more where offerable",
+    "low": 57,
+    "high": 171,
+    "extra": {
+     "fuel_hours_low": 12
+    }
+   },
+   "clean_air_volume": {
+    "stage": "opportunity",
+    "status": "not computable (cleaned airflow is a plant figure)",
+    "unit": "m³",
+    "how": "cleaned airflow ÷ 2–3 ACH"
+   },
+   "cooling_centre_people": {
+    "stage": "opportunity",
+    "status": "not computable (spare_cooling operator claim / judged; envelope gains not stated); per-kW reference shown",
+    "unit": "people per kW of spare cooling",
+    "how": "spare cooling kW ÷ (0.108 + envelope)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": 9.2593
+    }
+   },
+   "homes_heated": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "homes",
+    "how": "heat_delivered (emit) ÷ 16.81 MWh (BC) / 33.14 MWh (AB); available heat, not receiver-limited",
+    "low": 309.5443,
+    "high": 639.7249,
+    "extra": {
+     "checks_MWh": [
+      16.8056,
+      16.808
+     ],
+     "high_over_households_500m": 0.2005
+    }
+   },
+   "greenhouse_area": {
+    "stage": "opportunity",
+    "status": "computed (transferred coefficients)",
+    "unit": "m²",
+    "how": "heat_delivered × 3.6 ÷ 2.1–1.63 GJ/m²",
+    "low": 8920.1829,
+    "high": 23750.6709,
+    "extra": {
+     "temperature": "heat_temp 25–60 °C: root-zone only without a lift (liquid-cooled run)"
+    }
+   },
+   "aquaculture_tonnes": {
+    "stage": "opportunity",
+    "status": "computed (transferred coefficients)",
+    "unit": "t/yr",
+    "how": "heat_delivered ÷ 4.6–2.9 kWh/kg",
+    "low": 1131.1826,
+    "high": 3708.1986
+   },
+   "algae_kg": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "kg DW/yr",
+    "how": "heat_delivered ÷ 217 kWh/kg",
+    "low": 23978.9862,
+    "high": 49556.5714
+   },
+   "insect_check": {
+    "stage": "opportunity",
+    "status": "computed (coefficient)",
+    "unit": "kWh/kg live (mealworm)",
+    "how": "register coefficient 2.88 kWh/kg (10.38 MJ); mealworm and BSF tonnes the heat could serve in extra",
+    "value": 2.88,
+    "extra": {
+     "check_MJ": 2.8833,
+     "mealworm_t": [
+      1806.75,
+      3733.95
+     ],
+     "bsf_substrate_t_hi": 3159.1586
+    }
+   },
+   "distributed_servers_homes": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: server count); conditional IT kW ÷ 0.35 shown",
+    "unit": "homes",
+    "how": "servers ÷ 37–114",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      27.5689,
+      84.9421
+     ]
+    }
+   },
+   "ev_stalls": {
+    "stage": "opportunity",
+    "status": "not computable (needs spare_capacity: size stage); per-MW reference shown",
+    "unit": "stalls per MW reserved",
+    "how": "P_reserved ÷ (SF × P_charger)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      2.8571,
+      270.2703
+     ]
+    }
+   },
+   "ev_area": {
+    "stage": "opportunity",
+    "status": "not computable (needs ev_stalls); per-stall area shown",
+    "unit": "m² per stall",
+    "how": "stalls × 13.75–22 (Van) / 14.3–23.4 (Edm)",
+    "low": null,
+    "high": null,
+    "extra": {
+     "checks": [
+      13.75,
+      22
+     ],
+     "reference_shown": [
+      13.75,
+      22
+     ]
+    }
+   },
+   "stored_heat": {
+    "stage": "opportunity",
+    "status": "not computable (store volume and ΔT not stated)",
+    "unit": "MWh",
+    "how": "ρ c V ΔT × η"
+   },
+   "storage_footprint": {
+    "stage": "opportunity",
+    "status": "not computable (needs store volume)",
+    "unit": "m²",
+    "how": "20.15 V^0.61",
+    "extra": {
+     "check_100000m3": [
+      22608.6719,
+      22004.967
+     ]
+    }
+   },
+   "sewage_heat": {
+    "stage": "opportunity",
+    "status": "not computable (sewer flow not derivable: input_check 5)",
+    "unit": "kW",
+    "how": "Q × 4.18 × ΔT"
+   },
+   "copper_tonnes": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "t",
+    "how": "it_load_actual × 20–40 t/MW (industry claim; IT nameplate route in extra)",
+    "low": 13.2,
+    "high": 26.4,
+    "extra": {
+     "on_IT_nameplate_hi": 44
+    }
+   },
+   "ewaste": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: server count); per-server value shown",
+    "unit": "kg/yr per server",
+    "how": "servers × 21.2–26.3 kg ÷ 6 yr",
+    "low": null,
+    "high": null,
+    "extra": {
+     "reference_shown": [
+      3.5333,
+      4.3833
+     ]
+    }
+   },
+   "rare_earth": {
+    "stage": "opportunity",
+    "status": "not computable (needs size stage: drive count)",
+    "unit": "g",
+    "how": "drives × 1–4 g",
+    "extra": {
+     "check_g_2.5in": [
+      0.542,
+      2.604
+     ],
+     "check_g_3.5in": [
+      1.626,
+      8.246
+     ]
+    }
+   },
+   "battery": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MWh",
+    "how": "it_load_actual × 1–8 h; area at 4 h ÷ 49–19 kWh/m²; cost CAD 467–627/kWh in extra",
+    "low": 0.66,
+    "high": 5.28,
+    "extra": {
+     "default_4h_MWh": 2.64,
+     "area_m2_4h": [
+      53.8776,
+      77.6471,
+      138.9474
+     ],
+     "area_hi_over_lot": 0.0221,
+     "cost_CAD_4h": [
+      1232880,
+      1655280
+     ],
+     "cost_checks": [
+      466.8652,
+      626.6897
+     ]
+    }
+   },
+   "ups_flex": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MWh",
+    "how": "it_load_actual × 1–15 min ÷ 60 × 0.5 (vendor claims)",
+    "low": 0.0055,
+    "high": 0.0825,
+    "extra": {
+     "on_IT_nameplate_hi": 0.1375
+    }
+   },
+   "btes": {
+    "stage": "opportunity",
+    "status": "computed (upper bound: all captured heat stored)",
+    "unit": "MWh/yr heat out",
+    "how": "upper bound: heat_captured (emit) stored, × η 0.32–0.56; boreholes = captured W ÷ 83–47 W/m ÷ 55–35 m",
+    "low": 1295.0784,
+    "high": 4014.743,
+    "extra": {
+     "boreholes": [
+      102,
+      498
+     ],
+     "borefield_m2_hi": 3865.725,
+     "over_lot": 0.616,
+     "li2021_W_per_m": 68.1818,
+     "over_receiver_demand_low": 0.0028
+    }
+   },
+   "tes_volume": {
+    "stage": "opportunity",
+    "status": "not computable (needs demand_profile); per-kWh value shown",
+    "unit": "L per kWh stored",
+    "how": "3,600 ÷ (4.18 ΔT) ÷ 0.85, ΔT 30–6 K",
+    "low": null,
+    "high": null,
+    "extra": {
+     "checks_no_0.85": [
+      143.5407,
+      28.7081
+     ],
+     "reference_shown": [
+      33.7743,
+      168.8714
+     ]
+    }
+   },
+   "absorption": {
+    "stage": "opportunity",
+    "status": "not computable (temperature does not allow; adsorption COP not stated); conditional lifted value shown",
+    "unit": "kW cooling",
+    "how": "recovered heat × COP if temperature allows; 25–60 °C is below absorption's 70–90 °C; adsorption COP not stated",
+    "low": null,
+    "high": null,
+    "extra": {
+     "temperature": "no: 25–60 °C is below 70 °C (absorption); adsorption from ~45 °C (liquid run) but its COP is not stated",
+     "reference_shown": [
+      277.2,
+      572.88
+     ]
+    }
+   },
+   "homes_heated_2050s": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "homes",
+    "how": "heat ÷ (household heat × (space share × HDD2050s ÷ HDDnow + water share)); HDD18 daily mean from CWEC and PCIC 2050s files",
+    "low": 354.7354,
+    "high": 765.2348,
+    "extra": {
+     "HDD_now_245_585": [
+      2755.125,
+      2198.2583,
+      2038.1792
+     ],
+     "HDD_over_register": [
+      1.0,
+      1.0001,
+      1.0001
+     ]
+    }
+   },
+   "chp_heat": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "MW heat",
+    "how": "it_load_actual ÷ power-to-heat 1.2–0.5 (reciprocating); turbines and thresholds in extra",
+    "low": 0.55,
+    "high": 1.32,
+    "extra": {
+     "gas_turbine_MW": [
+      0.6,
+      1.1
+     ],
+     "check_recip_from_eff": [
+      0.878,
+      1.963
+     ],
+     "peak_over_25MW": 0.0682,
+     "peak_over_75MW": "n/a (BC)"
+    }
+   },
+   "snowmelt_area": {
+    "stage": "opportunity",
+    "status": "computed (all heat to snowmelt; design-storm basis)",
+    "unit": "m²",
+    "how": "heat_delivered average W ÷ 700–430 (Edm) / 647–420 (Van) W/m²",
+    "low": 918.0835,
+    "high": 2922.8571,
+    "extra": {
+     "van_annual_route_m2": 298716,
+     "check_W_m2": [
+      430.556,
+      699.6535
+     ]
+    }
+   },
+   "backup_neighbours": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: only behind the data centre's own transfer switch, on a private line, with the utility's written approval; never through utility lines. BC: supplying others makes it a public utility unless exempted (UCA s. 22 / s. 88(3)); EPCOR bars extending wiring beyond the property (T&C s. 4.4) and islanding without written approval. Spare generator capacity is what redundancy leaves (not sized). Count of care homes and hospitals within 1 km shown.",
+    "extra": {
+     "care_hospital_1km": 5
+    }
+   },
+   "community_solar": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: BC RS 2290 community generation, ≤ 2 MW net injection, 24 kW per residential / 100 kW per commercial beneficiary, bill credits at 10 ¢/kWh, not power; Alberta micro-generation ≤ lesser of 5 MW and service rating, on owned / leased / adjacent property, sized to own use (roof lease as \"leased property\" not confirmed).",
+    "extra": {
+     "households_for_2MW": 84,
+     "neighbour_roof_solar_500m_MWh": 44746.624
+    }
+   },
+   "fire_water": {
+    "stage": "opportunity",
+    "status": "qualitative",
+    "unit": "rule",
+    "register_says": "Rule: a non-potable tank on the lot for the fire department after an earthquake; drinking water would make the operator a water supplier (BC DWPR permits; Alberta PWR s. 1(1)(l)). Volume not sized (NFPA 1142 / ISO fire-flow guide not read); Edmonton NBC(AE) 3.2.5.7.(1): municipal supply ≥ 3,800 L/min at 140 kPa for buildings over 3 storeys or 600 m², else an on-site volume by formula (formula not in the register)."
+   },
+   "refuge_services": {
+    "stage": "opportunity",
+    "status": "computed",
+    "unit": "L/day",
+    "how": "refuge_people × 126 L; toilets, basins, showers in extra",
+    "low": 7182,
+    "high": 21546,
+    "extra": {
+     "toilets": [
+      "not stated (< 75 people)",
+      8
+     ],
+     "basins_hi": 18,
+     "showers_hi": 4
+    }
+   }
+  }
+ }
+}
