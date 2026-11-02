@@ -57,3 +57,4 @@ All three offered in Architecture mode, no default; each shows its consequences 
 ## Glazing (1 Nov 2026)
 - J.B.: bullet-resistant glass is used, per operators and insurers (her statement; VAN3 tour: the guard's room behind 'bullet proof glass', her words). Recorded as operator practice (claim), not a code rule.
 - Open (?): whether any one glazing product is both bullet-resistant (e.g. UL 752 levels, paywalled) and fire-rated (1.5 h in a 2 h wall). Research needed before a viewing window into the hall is offered.
+- J.B. (1 Nov 2026): biometric access control is used (VAN3 tour: the guide used a door with 'biometrics AND a scanner'; a single-person portal 'weighed me and measured me'). Operator practice (claim). Architectural effects to research: portal/mantrap footprints at each layer, a security control room, and the code limit that locked doors on an exit path must still release (NBC 3.4.6.16, electromagnetic locks).
