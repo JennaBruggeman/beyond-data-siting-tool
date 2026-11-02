@@ -79,3 +79,10 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - Fence height: Vancouver caps fences in required yards at 1.9 m (below the RCMP 2.4 m minimum): a taller fence needs Director of Planning approval, a spot behind the yard line, or the building wall as the line. Edmonton: no non-residential cap; fence behind a 3–6 m planted setback (our reading).
 - Crash ratings: barrier run-out drawn by rating: P1 under 1 m, P2 up to 7 m.
 - Gate: Vancouver wants a stopped vehicle fully on the lot before the gate; design trucks SU-9 and WB-17, so the gate sits about 17 m+ in (our arithmetic, ?).
+
+## Servicing and social fit (research 1 Nov 2026: servicing_social.md, check 1)
+- Pool (Alberta, NBC(AE) 7.2.3.38/.45, STANDATA 19-BCI-008): plant room with an outside door; chlorine-gas room at grade, outward door to outside, no door into the building: the pool's plant side faces a yard or lane. BC: not found yet.
+- Garbage (Vancouver): at grade beside the truck stop, 4.5 m clear, truck in and out forwards; ≈14 m² for a 150 m² café (our arithmetic, Metro Vancouver model). Edmonton commercial waste: private haulers.
+- Refuge drop-off: Vancouver passenger space 4.0 m wide, 3.5 m clear; no ambulance-bay rule.
+- Fire access: principal entrance 3–15 m from the fire route, 45 m hose distance (NBC 3.2.5).
+- Social fit: refuge by heat-dome risk groups (BC coroner 2022: 619 deaths, 67 % aged 70+, 56 % lived alone, 98 % indoors at home; distance a barrier, no walking standard); pool catchments 2/3/4 km (VanSplash), indoor recreation within 5 km (Edmonton); laundromat and greenhouse only stand-in indicators (renters, low income, seniors), unsourced. Data lacking: living alone, deprivation index, homelessness counts, food stores, Vancouver pool locations.

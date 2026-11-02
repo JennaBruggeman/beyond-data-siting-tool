@@ -1,0 +1,1360 @@
+{
+ "arch_acc_nbcRevolving": {
+  "where_read": "data/raw/codes/nbc.txt + nbc2020_v2.pdf (page lookup with PyMuPDF); bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt compared",
+  "claims": [
+   {
+    "claim": "3.4.6.15.(1) a)-d) collapsible, adjacent hinged doors, ground floor exit only, not at foot of stair",
+    "verdict": "CONFIRMED",
+    "evidence": "'a) be collapsible, b) have hinged doors providing equivalent exiting capacity located adjacent to it, c) be used as an exit from the ground floor level only, d) not be used at the foot of any stairway'",
+    "fix": null
+   },
+   {
+    "claim": "(1)(e) glass CAN/CGSB-12.1 / CAN/CGSB-12.11-M",
+    "verdict": "CONFIRMED",
+    "evidence": "'i) CAN/CGSB-12.1, \"Safety Glazing,\" or ii) CAN/CGSB-12.11-M, \"Wired Safety Glass.\"'",
+    "fix": null
+   },
+   {
+    "claim": "(2) not more than 45 persons",
+    "verdict": "CONFIRMED",
+    "evidence": "'shall not be considered to have an exiting capacity for more than 45 persons'",
+    "fix": null
+   },
+   {
+    "claim": "(3) powered door exemption: collapse under 3.4.6.16.(2) force, openable without keys etc., capacity from collapsed clear width, signs 1000-1500 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "'(3)(a)...force not more than that specified in Sentence 3.4.6.16.(2)'; '(d) ... centre line is between 1 000 mm and 1 500 mm above the floor'",
+    "fix": null
+   },
+   {
+    "claim": "Identical wording in BCBC 2024, NBC(AE) 2023, VBBL 2025 Book I",
+    "verdict": "CONFIRMED",
+    "evidence": "Normalised text of 3.4.6.15 matches in bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt (punctuation of quote marks only)",
+    "fix": null
+   },
+   {
+    "claim": "PDF pp. 3-153 to 3-154",
+    "verdict": "CONFIRMED",
+    "evidence": "(1)-(2) on p. 3-153 (PDF p. 298); (3) on p. 3-154",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_acc_nbcDoorRelease": {
+  "where_read": "data/raw/codes/nbc.txt + nbc2020_v2.pdf (page lookup with PyMuPDF); bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt compared",
+  "claims": [
+   {
+    "claim": "3.3.1.13.(2) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'a door in an access to exit shall be readily openable in travelling to an exit without requiring keys, special devices or specialized knowledge of the door-opening mechanism' (identical in BCBC, AE, VBBL)",
+    "fix": null
+   },
+   {
+    "claim": "3.3.1.13.(7) maglock per 3.4.6.16.(5) or (6)",
+    "verdict": "CONFIRMED",
+    "evidence": "'7) A door in an access to exit is permitted to be equipped with an electromagnetic lock conforming to Sentence 3.4.6.16.(5) or (6).'",
+    "fix": null
+   },
+   {
+    "claim": "3.4.6.16.(1) 'with not more than one releasing operation'",
+    "verdict": "CONFIRMED",
+    "evidence": "'readily opened from the inside with not more than one releasing operation'",
+    "fix": null
+   },
+   {
+    "claim": "3.4.6.16.(5) a)-e), g)-i), k) quotes incl. 90 N / 15 s, not high-hazard industrial",
+    "verdict": "CONFIRMED",
+    "evidence": "'other than those leading directly from a high-hazard industrial occupancy'; '(e) a force of not more than 90 N ... release the locking device within 15 s'; '(i) the total time delay for all electromagnetic locks in any path of egress to release is not more than 15 s'",
+    "fix": null
+   },
+   {
+    "claim": "(6) B-2/B-3 switch 'at a constantly attended location within the locked space'",
+    "verdict": "CONFIRMED",
+    "evidence": "'(b)(iii) ... readily accessible at a constantly attended location within the locked space'",
+    "fix": null
+   },
+   {
+    "claim": "(7) hardware 900-1100 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "'installed between 900 mm and 1 100 mm above the finished floor'",
+    "fix": null
+   },
+   {
+    "claim": "3.4.6.17 key-locked exits for banks and retail only",
+    "verdict": "CONFIRMED",
+    "evidence": "3.4.6.17.(1) waives 3.4.6.16.(1) for floor areas used exclusively for 'a) a bank, or b) the sale of retail merchandise' (paraphrase 'key-locked' acceptable)",
+    "fix": null
+   },
+   {
+    "claim": "Note A-3.4.6.16.(5) quotes",
+    "verdict": "CONFIRMED",
+    "evidence": "'They are not intended for indiscriminate use as alternative locking devices' ; 'one switch will release and reset all devices simultaneously' (p. 3-264)",
+    "fix": null
+   },
+   {
+    "claim": "BCBC 2024, NBC(AE) 2023 identical",
+    "verdict": "CONFIRMED",
+    "evidence": "3.4.6.16.(5) text matches in bcbc2024.txt and nbc_ab2023.txt",
+    "fix": null
+   },
+   {
+    "claim": "Page 3-121 for 3.3.1.13",
+    "verdict": "WRONG",
+    "evidence": "3.3.1.13 (2) and (7) are on printed p. 3-122 (PDF p. 267)",
+    "fix": "3-122"
+   },
+   {
+    "claim": "Pages 3-154 to 3-156, 3-264",
+    "verdict": "CONFIRMED",
+    "evidence": "3.4.6.16.(1)-(5)(e) p. 3-154; (5)(f)-(6) p. 3-155; (7) p. 3-156; Note p. 3-264",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: NBC 2020 Div. B (identical BCBC 2024, NBC(AE) 2023; VBBL adds, see arch_acc_vbblMaglock): 3.3.1.13.(2) 'a door in an access to exit shall be readily openable in travelling to an exit without requiring keys, special devices or specialized knowledge of the door-opening mechanism'; (7) such a door 'is permitted to be equipped with an electromagnetic lock conforming to Sentence 3.4.6.16.(5) or (6)'; 3.4.6.16.(1) principal entrance and exit doors openable from inside 'with not more than one releasing operation'; (5) electromagnetic locks without latches permitted, except on doors 'leading directly from a high-hazard industrial occupancy', provided a) fire alarm system, b) 'the locking device releases upon actuation of the alarm signal from the building's fire alarm system', c) 'releases immediately upon loss of power', d) manual switch 'readily accessible only to authorized personnel', e) 'a force of not more than 90 N applied to the door opening hardware initiates an irreversible process that will release the locking device within 15 s', g)-h) visual and tactile signs, i) 'the total time delay for all electromagnetic locks in any path of egress to release is not more than 15 s', k) emergency lighting; (6) B-2/B-3 version incl. switch 'at a constantly attended location within the locked space'; (7) hardware 900–1100 mm; 3.4.6.17 key-locked exits for banks and retail only; Note A-3.4.6.16.(5) maglocks 'are intended for use where there is a need for security additional to that provided by traditional exit hardware. They are not intended for indiscriminate use'; 'one switch will release and reset all devices simultaneously' — data/raw/codes/nbc.txt (PDF pp. 3-122, 3-154 to 3-156, 3-264) ‖ CHECK 2 (1 Nov 2026, fixed): all clauses and quotes confirmed; 3.3.1.13 page corrected 3-121 to 3-122"
+ },
+ "arch_acc_vbblMaglock": {
+  "where_read": "data/raw/codes/vbbl2025_v1.txt",
+  "claims": [
+   {
+    "claim": "3.4.6.16.(8) alternative to (5)(e),(f),(g) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'As an alternative to the requirements of Clauses (e), (f) and (g) in Sentence (5), acceptable door release hardware for an electromagnetic lock shall be located in close proximity to the egress door'",
+    "fix": null
+   },
+   {
+    "claim": "push button + motion sensor or pressure pad; button 'directly connected to the electrical circuit that provides power to the locking device'; 'EXIT' >=25 mm; LED; 'DOOR RELEASE'",
+    "verdict": "CONFIRMED",
+    "evidence": "'embossed with the word \"EXIT\" ... no less than 25 mm'; 'internally illuminated by a permanent LED type light source'; 'labeled \"DOOR RELEASE\"'",
+    "fix": null
+   },
+   {
+    "claim": "auto reset not before 15 s, manual only after fire alarm",
+    "verdict": "CONFIRMED",
+    "evidence": "'automatic reset feature that is not activated for at least 15 seconds, and iii) can only be reset by manual means after the activation of the fire alarm system'",
+    "fix": null
+   },
+   {
+    "claim": "3.4.6.16.(1) excepts 3.4.6.20; security gates per Fire By-law; A, D, E, F-2, F-3 only",
+    "verdict": "CONFIRMED",
+    "evidence": "'and except as permitted by ... Article 3.4.6.17. and 3.4.6.20.'; 3.4.6.20 applies to assembly, business and personal services, mercantile, medium and low hazard industrial; 'provided the installation and use conform to the Fire By-law'",
+    "fix": null
+   },
+   {
+    "claim": "3.3.1.13.(11) maglocks on egress through Group D suites where acceptable to the CBO",
+    "verdict": "CONFIRMED",
+    "evidence": "'provides a means of egress through a suite of Group D occupancy to an exit may, where acceptable to the Chief Building Official, be provided with an electromagnetic locking device'",
+    "fix": null
+   },
+   {
+    "claim": "Note A-3.3.1.13.(7) quotes",
+    "verdict": "CONFIRMED",
+    "evidence": "'are to demonstrate that the requirements of the By-law have been met. This demonstration is to include a sequence of operation for the installation of any new maglocks and similar security devices that could singly or in combination, prevent, impede, or otherwise delay occupant egress or emergency responder access'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_acc_nbcObstruction": {
+  "where_read": "data/raw/codes/nbc.txt + nbc2020_v2.pdf (page lookup with PyMuPDF); bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt compared",
+  "claims": [
+   {
+    "claim": "3.3.1.24.(1) quote 750 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "'No obstruction shall be permitted in any occupancy that would restrict the width of a normal means of egress from any part of a floor area to less than 750 mm unless an alternative means of egress is provided adjacent to, accessible from, and plainly visible from the obstructed means of egress' (same BCBC, AE, VBBL)",
+    "fix": null
+   },
+   {
+    "claim": "Note A-3.3.1.24.(1) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'Obstructions including posts, counters or turnstiles should not be located in a manner that would restrict the width of a normal means of egress' (p. 3-257)",
+    "fix": null
+   },
+   {
+    "claim": "3.4.3.3.(1) quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'no fixture, turnstile or construction shall project into or be fixed within the required width of an exit' (opens 'Except as permitted by Sentences (2) and (4)')",
+    "fix": null
+   },
+   {
+    "claim": "p. 3-125 for 3.3.1.24",
+    "verdict": "CONFIRMED",
+    "evidence": "PDF p. 270, printed 3-125",
+    "fix": null
+   },
+   {
+    "claim": "p. 3-151 for 3.4.3.3",
+    "verdict": "WRONG",
+    "evidence": "3.4.3.3 is on printed p. 3-146 (PDF p. 291)",
+    "fix": "3-146; Note A-3.3.1.24.(1) on p. 3-257"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: NBC 2020 Div. B (same BCBC 2024, NBC(AE) 2023): 3.3.1.24.(1) 'No obstruction shall be permitted in any occupancy that would restrict the width of a normal means of egress from any part of a floor area to less than 750 mm unless an alternative means of egress is provided adjacent to, accessible from, and plainly visible from the obstructed means of egress'; Note A-3.3.1.24.(1) 'Obstructions including posts, counters or turnstiles should not be located in a manner that would restrict the width of a normal means of egress'; 3.4.3.3.(1) 'no fixture, turnstile or construction shall project into or be fixed within the required width of an exit' — data/raw/codes/nbc.txt (pp. 3-125, 3-146; Note p. 3-257) ‖ CHECK 2 (1 Nov 2026, fixed): quotes confirmed in NBC, BCBC, AE, VBBL; 3.4.3.3 page corrected 3-151 to 3-146"
+ },
+ "arch_acc_nbcAccessible": {
+  "where_read": "data/raw/codes/nbc.txt, bcbc2024.txt, vbbl2025_v1.txt",
+  "claims": [
+   {
+    "claim": "3.8.2.2.(1) all pedestrian entrances barrier-free except service entrances",
+    "verdict": "CONFIRMED",
+    "evidence": "'Except for service entrances and entrances to suites ... all pedestrian entrances to a barrier-free storey ... shall be barrier-free'",
+    "fix": null
+   },
+   {
+    "claim": "3.8.2.2.(3) one doorway per entrance",
+    "verdict": "CONFIRMED",
+    "evidence": "'only one of the doorways is required to be designed in accordance with Subsection 3.8.3.'",
+    "fix": null
+   },
+   {
+    "claim": "3.8.2.3.(1) 'within all other normally occupied floor areas'",
+    "verdict": "CONFIRMED",
+    "evidence": "NBC: 'within all other normally occupied floor areas'; BCBC reads 'normally occupied areas of the building'",
+    "fix": null
+   },
+   {
+    "claim": "3.8.2.3.(2) not to service rooms, service spaces",
+    "verdict": "CONFIRMED",
+    "evidence": "'a) to service rooms ... d) to service spaces'",
+    "fix": null
+   },
+   {
+    "claim": "'BCBC (2)(i) not within high-hazard industrial occupancies' (implies BCBC only)",
+    "verdict": "WRONG",
+    "evidence": "NBC 3.8.2.3.(2)(i) also reads 'i) within high-hazard industrial occupancies'",
+    "fix": "NBC and BCBC (2)(i)"
+   },
+   {
+    "claim": "3.8.2.7.(1) power operators at entrances incl. vestibule inner doors and on path to rooms off a public corridor",
+    "verdict": "CONFIRMED",
+    "evidence": "'in an entrance ... including the interior doors of a vestibule where provided, b) ... between the entrance ... and the entrance doors to suites or rooms served by a public corridor'",
+    "fix": null
+   },
+   {
+    "claim": "VBBL 3.8.2.7 same as BCBC",
+    "verdict": "CONFIRMED",
+    "evidence": "vbbl2025_v1.txt 3.8.2.7.(1) text matches BCBC ('accessible path of travel')",
+    "fix": null
+   },
+   {
+    "claim": "3.8.3.6.(2) 850 mm; BCBC measured at 90 deg to the stop",
+    "verdict": "CONFIRMED",
+    "evidence": "NBC 'clear width not less than 850 mm when the door is in the open position'; BCBC 'in the open position of 90° to the doorway, to the outside edge of the stop'",
+    "fix": null
+   },
+   {
+    "claim": "3.8.3.6.(6) controls 900-1100 and 150-300 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "'operable from a height between 150 mm and 300 mm as well as between 900 mm and 1 100 mm above the floor'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Section 3.8 applies to all buildings except per 3.8.2.1.(1), incl. (c) 'buildings that are not intended to be occupied on a daily or full-time basis, including automatic telephone exchanges, pumphouses and substations'; a staffed data centre with public program is in scope, but an unstaffed data-hall building could be argued out.",
+  "new_text": "RULE: NBC 2020 Div. B Section 3.8 (NBC(AE) 2023 same; BCBC 2024 says 'accessible' for 'barrier-free'; VBBL 3.8.2.7 same as BCBC): 3.8.2.2.(1) 'all pedestrian entrances … shall be barrier-free [accessible]' except service entrances; (3) only one doorway per entrance need comply; 3.8.2.3.(1) path of travel 'within all other normally occupied floor areas'; (2) not required to service rooms, service spaces, etc.; (2)(i) not within high-hazard industrial occupancies (NBC and BCBC); 3.8.2.7.(1) power door operators on self-closing doors at entrances incl. vestibule inner doors and on the path to rooms off a public corridor; 3.8.3.6.(2) doorways 'clear width not less than 850 mm' (BCBC: measured at 90° to the stop); (6) operator controls 900–1100 mm and 150–300 mm — data/raw/codes/nbc.txt, bcbc2024.txt ‖ CHECK 2 (1 Nov 2026, fixed): all clauses confirmed; (2)(i) high-hazard exclusion is in NBC too, not BCBC only"
+ },
+ "arch_acc_boonSolo": {
+  "where_read": "https://www.boonedam.com/products/mantrap-security-doors-and-portals/circlelock-solo (WebFetch, 1 Nov 2026)",
+  "claims": [
+   {
+    "claim": "1000 x 2200 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "'1000 x 2200 mm'",
+    "fix": null
+   },
+   {
+    "claim": "584 mm throat, 200 mm canopy, two wings",
+    "verdict": "CONFIRMED",
+    "evidence": "'584mm throat opening, 200mm canopy height, two door wings'",
+    "fix": null
+   },
+   {
+    "claim": "Level Up high 2100-2600; wide 1500 mm diameter",
+    "verdict": "CONFIRMED",
+    "evidence": "'2100–2600 mm / canopy height 200-600mm'; '1500 mm diameter'",
+    "fix": null
+   },
+   {
+    "claim": "750 Kg",
+    "verdict": "CONFIRMED",
+    "evidence": "'750 Kg'",
+    "fix": null
+   },
+   {
+    "claim": "5-6 per minute",
+    "verdict": "CONFIRMED",
+    "evidence": "'5-6, dependent on access control system'",
+    "fix": null
+   },
+   {
+    "claim": "StereoVision; integrated sensors; biometric option",
+    "verdict": "CONFIRMED",
+    "evidence": "'StereoVision Piggybacking detection, Biometric authorisation'; 'Integrated sensors confirm the user is alone'",
+    "fix": null
+   },
+   {
+    "claim": "Supervised disabled entry; fail-safe standard, fail-secure optional; emergency egress subject to local regulations; fire alarm",
+    "verdict": "CONFIRMED",
+    "evidence": "'Supervised disabled entry is possible'; 'Fail-safe operation as standard, fail-secure optional'; 'Support for emergency egress (subject to local regulations)'; 'fire alarm connection'",
+    "fix": null
+   },
+   {
+    "claim": "burglar/bullet packages, standards not named",
+    "verdict": "CONFIRMED",
+    "evidence": "'Burglar or bullet resistant protection packages'; no standard named",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_acc_boonPDS2014": {
+  "where_read": "https://www.barbourproductsearch.info/BEL_PDS_Circlelock-file045225.pdf (WebFetch)",
+  "claims": [
+   {
+    "claim": "version 2014-01",
+    "verdict": "CONFIRMED",
+    "evidence": "'Version 2014-01'",
+    "fix": null
+   },
+   {
+    "claim": "1000/1500 mm; throat 584/937; capacity 5/4",
+    "verdict": "CONFIRMED",
+    "evidence": "rows '1000 · 1x · 5 · 2 · 1077 · 584 ...' and '1500 · 1x · 4 · 2 · 1577 · 937 ...'",
+    "fix": null
+   },
+   {
+    "claim": "height under canopy 2100-2600 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "both rows carry '2100-2600' then '200-600' (canopy height); headers garbled",
+    "fix": null
+   },
+   {
+    "claim": "detection options quotes",
+    "verdict": "CONFIRMED",
+    "evidence": "'Weight System; detects tailgating and piggybacking', 'Contact Mats; detects piggybacking', 'Sensor System; basic piggybacking detection', 'StereoVision; ...'",
+    "fix": null
+   },
+   {
+    "claim": "emergency button quote; fail-safe; escape route",
+    "verdict": "CONFIRMED",
+    "evidence": "'The Circlelock is always equipped with an emergency button mounted inside the door.'; 'As standard, the Circlelock is supplied with fail-safe operation.'; 'Escape route requirements are subject to local regulations'",
+    "fix": null
+   },
+   {
+    "claim": "glass P4A, P6B, BR2NS/BR4NS",
+    "verdict": "CONFIRMED",
+    "evidence": "'Vandalism (P4A), burglary (P6B) or bullet resistant (BR2NS / BR4NS) glass'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_acc_boonCombi": {
+  "where_read": "boonedam.com Circlelock Combi page + PDS PDF (WebFetch)",
+  "claims": [
+   {
+    "claim": "1500 x 2200 mm; 584 mm throat",
+    "verdict": "CONFIRMED",
+    "evidence": "page: '1500 x 2200 mm'; '584mm throat opening, 200mm canopy height, two door wings' — but PDS row reads '1500 1 x 5 1 1030 937 2100-2600 200-600' (garbled), which appears to give a 937 mm throat: page and PDS may disagree",
+    "fix": "note the possible 937 mm throat in the PDS"
+   },
+   {
+    "claim": "680 Kg; 5-6 per min",
+    "verdict": "CONFIRMED",
+    "evidence": "'680 Kg'; '5-6, dependent on access control system'",
+    "fix": null
+   },
+   {
+    "claim": "supervised disabled entry; fail-safe, fire alarm",
+    "verdict": "CONFIRMED",
+    "evidence": "'Supervised disabled entry is possible'; 'Fail-safe operation, fire alarm connection, vandal resistant'",
+    "fix": null
+   },
+   {
+    "claim": "attaches to standard or fire/smoke-rated swing doors",
+    "verdict": "CONFIRMED",
+    "evidence": "'Attaches to existing swing door (standard or fire/smoke/airtight-rated)'",
+    "fix": null
+   },
+   {
+    "claim": "PDS V2-1224",
+    "verdict": "CONFIRMED",
+    "evidence": "'V2-1224'",
+    "fix": null
+   },
+   {
+    "claim": "Weight System; escape route; RC3/BR2NS/BR4NS",
+    "verdict": "CONFIRMED",
+    "evidence": "'Weight System; detects tailgating and piggybacking'; 'Escape route requirements are subject to local regulations.'; 'burglary-resistant (RC3) or bullet-resistant (BR2NS / BR4NS) glass or solid panels'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "MAKER CLAIM: Boon Edam, Circlelock Combi product page and product data sheet V2-1224 (2025 file): unit '1500 x 2200 mm', '584mm throat opening' (page; the PDS table row, garbled in extraction, reads '1030 937', which may be a 937 mm throat — unresolved), weight '680 Kg', '5-6, dependent on access control system' per minute; 'Supervised disabled entry is possible'; 'Fail-safe operation, fire alarm connection'; attaches to standard or fire/smoke-rated swing doors; PDS: Weight System 'detects tailgating and piggybacking'; 'Escape route requirements are subject to local regulations'; glass 'burglary-resistant (RC3) or bullet-resistant (BR2NS / BR4NS)' — https://www.boonedam.com/products/half-security-portal/circlelock-combi ; https://websaweprd.blob.core.windows.net/cms-assets-uk/2025-01/BEL_Circlelock%20Combi_A4%20PDS_2025.pdf ‖ CHECK 2 (1 Nov 2026, fixed): all quotes confirmed; page/PDS throat discrepancy noted"
+ },
+ "arch_acc_boonTourlock": {
+  "where_read": "boonedam.com Tourlock 180 page (WebFetch)",
+  "claims": [
+   {
+    "claim": "1600 x 2200 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "'1600 x 2200 mm'",
+    "fix": null
+   },
+   {
+    "claim": "1038 mm throat, 200 mm canopy, four wings",
+    "verdict": "CONFIRMED",
+    "evidence": "'1038mm throat opening, 200mm canopy height, four door wings'",
+    "fix": null
+   },
+   {
+    "claim": "Level Up wide 1800-2200 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "'1800-2200 mm in increments of 200 mm'",
+    "fix": null
+   },
+   {
+    "claim": "900 Kg; 18 per min",
+    "verdict": "CONFIRMED",
+    "evidence": "'900 Kg'; '18, dependent on access control system'",
+    "fix": null
+   },
+   {
+    "claim": "StereoVision; fail-safe, fire alarm; BR4NS package",
+    "verdict": "CONFIRMED",
+    "evidence": "'Piggybacking detection with StereoVision'; 'Fail-safe operation, fire alarm connection, vandal resistant'; 'Bullet-Resistance Protection Package (BR4NS)'",
+    "fix": null
+   },
+   {
+    "claim": "no egress or accessibility statement",
+    "verdict": "CONFIRMED",
+    "evidence": "none found on the page",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_acc_boonDCtips": {
+  "where_read": "content.boonedam.com PDF (WebFetch)",
+  "claims": [
+   {
+    "claim": "title '5 Tips for Securing Data Centers', no date",
+    "verdict": "CONFIRMED",
+    "evidence": "'5 TIPS FOR SECURING DATA CENTERS.'; no date",
+    "fix": null
+   },
+   {
+    "claim": "Layer 1 perimeter full-height turnstiles",
+    "verdict": "CONFIRMED",
+    "evidence": "'Layer 1 - The Perimeter - Full height turnstiles are'",
+    "fix": null
+   },
+   {
+    "claim": "Layer 2 building entrance security revolving door",
+    "verdict": "CONFIRMED",
+    "evidence": "'Layer 2 - The Building Entrance - Installing a security revolving door'",
+    "fix": null
+   },
+   {
+    "claim": "Layer 3 revolving door between lobby and rest of building",
+    "verdict": "CONFIRMED",
+    "evidence": "'Layer 3 - The Building Interior - A third layer can be installed' with 'a security revolving door' (lobby wording is a paraphrase)",
+    "fix": null
+   },
+   {
+    "claim": "Layer 4 interlocking mantrap portals",
+    "verdict": "CONFIRMED",
+    "evidence": "'Layer 4 - The Server Room - Interlocking mantrap portals enforce a single entry'",
+    "fix": null
+   },
+   {
+    "claim": "names SOC 1/2/3, ISO 27001, PCI DSS",
+    "verdict": "CONFIRMED",
+    "evidence": "'ISO 27001,' 'HITRUST, PCI DSS, SOC 1, SOC 2, SOC 3, ITAR' (also GLBA, FISMA)",
+    "fix": null
+   },
+   {
+    "claim": "no egress statement",
+    "verdict": "CONFIRMED",
+    "evidence": "none found",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_acc_gunneboHiSec": {
+  "where_read": "gunneboentrancecontrol.com HiSec2 page (WebFetch)",
+  "claims": [
+   {
+    "claim": "HiSec2 6 1050x1050, 600; 7 1150x1150, 700; 9 1500x1500, 900; 10 1800x1800, 1050",
+    "verdict": "CONFIRMED",
+    "evidence": "'1050 × 1050 mm overall, 600 mm clear passage' ... '1800 × 1800 mm overall, 1050 mm clear passage' (page names them HiSec² 9 and HiSec² 10)",
+    "fix": null
+   },
+   {
+    "claim": "'typically meeting wheelchair access regulations'",
+    "verdict": "WRONG",
+    "evidence": "'The HiSec² 10 has a 1500 mm internal diameter and is typically suitable for wheelchair access regulations.'",
+    "fix": "'typically suitable for wheelchair access regulations' (1500 mm internal diameter)"
+   },
+   {
+    "claim": "ultrasound measures 'the volume inside the portal'",
+    "verdict": "WRONG",
+    "evidence": "'Ultrasound detection utilises high-frequency waves to measure the volume within the portal'",
+    "fix": "'measure the volume within the portal'"
+   },
+   {
+    "claim": "load cell modes maximum, banding, actual; double contact mat",
+    "verdict": "CONFIRMED",
+    "evidence": "'Maximum Weight Mode (standalone), Weight Banding Mode, and Actual Weight Mode'; 'Double Contact Matt'",
+    "fix": null
+   },
+   {
+    "claim": "detection 'up to 2.1m'",
+    "verdict": "CONFIRMED",
+    "evidence": "'functions effectively at all passage heights, including up to 2.1m'",
+    "fix": null
+   },
+   {
+    "claim": "EN 16005; LPS 1175 Issue 8; FB3 - EN 1522",
+    "verdict": "CONFIRMED",
+    "evidence": "'EN 16005'; 'LPS 1175: Issue 8'; 'FB3 – EN1522'",
+    "fix": null
+   },
+   {
+    "claim": "second person: entry door reopens",
+    "verdict": "CONFIRMED",
+    "evidence": "'If a second person is detected, the system stops, reopens the entry door'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "MAKER CLAIM: Gunnebo Entrance Control, HiSec² security portal page (no date): HiSec² 6 '1050 × 1050 mm', 600 mm clear passage; HiSec² 7 1150 × 1150, 700 mm; HiSec² 9 1500 × 1500, 900 mm; HiSec² 10 1800 × 1800, 1050 mm, 1500 mm internal diameter, 'typically suitable for wheelchair access regulations'; detection: ultrasound waves 'measure the volume within the portal'; load cell weight modes (maximum, banding, actual); double contact mat; detection at passage heights 'up to 2.1m'; EN 16005; LPS 1175 Issue 8; FB3 – EN 1522; on a second person the entry door reopens — https://www.gunneboentrancecontrol.com/en/products/security-portals/hisec2/ ‖ CHECK 2 (1 Nov 2026, fixed): figures confirmed; two quotes corrected to the page wording"
+ },
+ "arch_acc_gcpsg006": {
+  "where_read": "rcmp.ca GCPSG-006 page (WebFetch)",
+  "claims": [
+   {
+    "claim": "effective 2024-01-15",
+    "verdict": "CONFIRMED",
+    "evidence": "'The effective date of GCPSC-006 Access Management Guide is 2024-01-15.' (page typo GCPSC)",
+    "fix": null
+   },
+   {
+    "claim": "6.1 Fig. 1b reception desk relocated",
+    "verdict": "CONFIRMED",
+    "evidence": "'the reception desk has been relocated to allow for observation of the entry area'",
+    "fix": null
+   },
+   {
+    "claim": "6.4 'must never endanger the safety of personnel'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Access management systems and procedures must never endanger the safety of personnel within GC properties.'",
+    "fix": null
+   },
+   {
+    "claim": "6.4.1 exits circumvent access control; interior activation only",
+    "verdict": "CONFIRMED",
+    "evidence": "'these exits can also be used to circumvent access control methods'; 'Interior activation (opening) only;'",
+    "fix": null
+   },
+   {
+    "claim": "7 access controlled for the OZ and higher",
+    "verdict": "CONFIRMED",
+    "evidence": "'access is controlled for the OZ and higher'",
+    "fix": null
+   },
+   {
+    "claim": "7.4.3 biometrics less appropriate for high traffic; PIA",
+    "verdict": "CONFIRMED",
+    "evidence": "'Biometric systems are generally less appropriate for high-traffic areas,'; 'should complete a Privacy Impact Assessment (PIA)'",
+    "fix": null
+   },
+   {
+    "claim": "7.5.3 fire regulations 'may limit the use'",
+    "verdict": "CONFIRMED",
+    "evidence": "'building code and fire regulations restrictions may limit the use and security offered by this type of lock'",
+    "fix": null
+   },
+   {
+    "claim": "7.5.4 turnstiles one at a time; airlocks one door at a time, several users",
+    "verdict": "CONFIRMED",
+    "evidence": "'designed to allow only one person to enter at a time'; 'only one door can be activated/opened at a time'; 'Airlocks allow for multiple users to enter the space between doors at one time'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "new_text": null
+ },
+ "arch_acc_gcpsg011": {
+  "where_read": "rcmp.ca GCPSG-011 page (WebFetch)",
+  "claims": [
+   {
+    "claim": "effective 2024-05-15",
+    "verdict": "CONFIRMED",
+    "evidence": "'The effective date of GCPSG-011 – Guide to CCTV/CCVE Systems is 2024-05-15.'",
+    "fix": null
+   },
+   {
+    "claim": "5.1 recordings 'contain personal information'; not for employee performance",
+    "verdict": "CONFIRMED",
+    "evidence": "'which advises video recordings and images contain personal information'; 'should not be employed for the purpose of monitoring employee performance or attendance'",
+    "fix": null
+   },
+   {
+    "claim": "5.1.3 monitored within or immediately adjacent to SOC",
+    "verdict": "CONFIRMED",
+    "evidence": "'should be monitored and controlled within, or immediately adjacent to, a' Security Operations Centre",
+    "fix": null
+   },
+   {
+    "claim": "6.1 areas incl. parking, perimeter, entrances and exits; PIA and signage questions",
+    "verdict": "CONFIRMED",
+    "evidence": "'may include parking facilities, perimeter border(s) of the property,'; PIA question; 'the Authority Having Jurisdiction (AHJ) sets what is required for signage'",
+    "fix": null
+   },
+   {
+    "claim": "7.1.1 domes well suited for entrances...",
+    "verdict": "CONFIRMED",
+    "evidence": "'well suited for entrances, stairwells, reception lobbies, and security screening areas'",
+    "fix": null
+   },
+   {
+    "claim": "7.3.2 out of reach of public",
+    "verdict": "CONFIRMED",
+    "evidence": "'most CCTV camera locations should be out of reach to the general public'",
+    "fix": null
+   },
+   {
+    "claim": "7.6 avoid in-camera storage",
+    "verdict": "CONFIRMED",
+    "evidence": "'Use of \"in-camera/onboard\" storage should be avoided'",
+    "fix": null
+   },
+   {
+    "claim": "no coverage-resolution targets",
+    "verdict": "CONFIRMED",
+    "evidence": "no pixel-density figures; App. A gives only sensor resolutions by technology",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "new_text": null
+ },
+ "arch_acc_gcpsg015RZ": {
+  "where_read": "rcmp.ca GCPSG-015 page (WebFetch)",
+  "claims": [
+   {
+    "claim": "5.3.2 RZ 'Where the transition from a PZ to an RAA is demarcated and controlled'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": null
+   },
+   {
+    "claim": "'Typically located at the entry to the facility where initial contact between visitors and the department or agency occurs'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Typically located at the entry to the facility where initial contact between visitors' (sentence continues)",
+    "fix": null
+   },
+   {
+    "claim": "RZ may be 'a reception desk, where there will be personnel present to monitor entrance' (placed under 5.3.2)",
+    "verdict": "WRONG",
+    "evidence": "quote found, but in 5.3 (discussion of Figures 1 and 2), not 5.3.2",
+    "fix": "cite as 5.3"
+   },
+   {
+    "claim": "5.3 range to 'a sophisticated biometric access control system when entering an HSZ'",
+    "verdict": "CONFIRMED",
+    "evidence": "'up to a sophisticated biometric access control system when entering an HSZ'",
+    "fix": null
+   },
+   {
+    "claim": "App. C 2 'a mechanical lock or electronic card reader'",
+    "verdict": "CONFIRMED",
+    "evidence": "'access control measures such as a mechanical lock or electronic card reader'",
+    "fix": null
+   },
+   {
+    "claim": "App. C 2.3 glazed window/wall; 'The glazing should permit observation of the servers'; occupied while access permitted",
+    "verdict": "CONFIRMED",
+    "evidence": "'control room with a glazed window or wall'; 'The glazing should permit observation of the servers.'; 'The monitoring room must be occupied during hours in which access to the servers is permitted.'",
+    "fix": null
+   },
+   {
+    "claim": "no sizes, no ballistic glazing, no document slot",
+    "verdict": "CONFIRMED",
+    "evidence": "none found",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "new_text": "GOVERNMENT GUIDE: RCMP, GCPSG-015 (2024) Guide to the Application of Physical Security Zones (see also arch_sec_gcpsg015AppC): 5.3.2 Reception Zone 'Where the transition from a PZ to an RAA is demarcated and controlled'; 'Typically located at the entry to the facility where initial contact between visitors and the department or agency occurs'; 5.3 (Figs. 1-2) entry may be watched from 'a reception desk, where there will be personnel present to monitor entrance'; 5.3 controls range from a guard checking badges to 'a sophisticated biometric access control system when entering an HSZ'; App. C 2 server room 'a mechanical lock or electronic card reader'; App. C 2.3 control room behind 'a glazed window or wall', 'The glazing should permit observation of the servers', occupied while access is permitted; no sizes, no ballistic glazing, no document slot — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-015-2024-guide-application-physical-security-zones ‖ CHECK 2 (1 Nov 2026, fixed): quotes confirmed; reception-desk quote moved from 5.3.2 to 5.3"
+ },
+ "arch_acc_opcBiometrics": {
+  "where_read": "priv.gc.ca biometrics guidance for businesses (WebFetch)",
+  "claims": [
+   {
+    "claim": "date 2025-08-11",
+    "verdict": "WRONG",
+    "evidence": "page shows 'Published: 2025' and 'Date modified: 2025-08-11'",
+    "fix": "published 2025; modified 2025-08-11"
+   },
+   {
+    "claim": "PIPEDA",
+    "verdict": "CONFIRMED",
+    "evidence": "page uses 'PIPEDA' throughout",
+    "fix": null
+   },
+   {
+    "claim": "sensitive information quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'Biometric information that can uniquely identify an individual is sensitive information'",
+    "fix": null
+   },
+   {
+    "claim": "'express consent would be the appropriate form of consent'",
+    "verdict": "CONFIRMED",
+    "evidence": "'as a general rule, express consent would be the appropriate form of consent for the collection, use, or disclosure of that information'",
+    "fix": null
+   },
+   {
+    "claim": "non-essential uses: other means of access",
+    "verdict": "CONFIRMED",
+    "evidence": "'you must provide individuals with other means of access or participation'",
+    "fix": null
+   },
+   {
+    "claim": "less intrusive means",
+    "verdict": "CONFIRMED",
+    "evidence": "'Assess whether there are less intrusive means of achieving the purpose'",
+    "fix": null
+   },
+   {
+    "claim": "fingerprint to gain access to a building",
+    "verdict": "CONFIRMED",
+    "evidence": "'Examples of recognition include the use of a fingerprint to gain access to a building'",
+    "fix": null
+   },
+   {
+    "claim": "verification over identification; avoid centralized databases",
+    "verdict": "CONFIRMED",
+    "evidence": "'Use verification over identification, where possible'; 'You should avoid creating large, centralized databases of biometric information if alternatives are viable.'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE: Office of the Privacy Commissioner of Canada, 'Guidance for processing biometrics – for businesses', published 2025, modified 2025-08-11 (PIPEDA): 'Biometric information that can uniquely identify an individual is sensitive information'; 'express consent would be the appropriate form of consent'; for non-essential uses 'you must provide individuals with other means of access or participation'; assess 'less intrusive means'; example 'the use of a fingerprint to gain access to a building'; 'Use verification over identification, where possible'; 'avoid creating large, centralized databases of biometric information if alternatives are viable' — https://www.priv.gc.ca/en/privacy-topics/health-genetic-and-other-body-information/biometrics/gd_bio_org-final ‖ CHECK 2 (1 Nov 2026, fixed): quotes confirmed; date is the 'modified' date"
+ },
+ "arch_acc_video2008": {
+  "where_read": "priv.gc.ca gl_vs_080306; oipc.bc.ca/guidance-documents/1453; oipc.ab.ca/resource/video-surveillance (WebFetch)",
+  "claims": [
+   {
+    "claim": "title, March 2008",
+    "verdict": "CONFIRMED",
+    "evidence": "'Guidelines for Overt Video Surveillance in the Private Sector'; OPC metadata 2008-03-06; BC and AB pages 'March 2008'",
+    "fix": null
+   },
+   {
+    "claim": "issued by OPC with the Alberta and BC commissioners",
+    "verdict": "NOT FOUND",
+    "evidence": "no page names joint authorship; text says 'we have developed these Guidelines'; OPC metadata names OPC; the same text is hosted by OIPC BC and OIPC AB",
+    "fix": "say: same text published by the OPC, OIPC BC and OIPC AB"
+   },
+   {
+    "claim": "names PIPEDA and Alberta and BC PIPAs",
+    "verdict": "CONFIRMED",
+    "evidence": "PIPEDA, Alberta PIPA, BC PIPA (and Quebec's private-sector act) named",
+    "fix": null
+   },
+   {
+    "claim": "scope quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'These Guidelines apply to overt video surveillance of the public by private sector organizations in publicly accessible areas.'",
+    "fix": null
+   },
+   {
+    "claim": "positioning; passersby; heightened expectation (e.g. windows); limit viewing range",
+    "verdict": "CONFIRMED",
+    "evidence": "'Cameras should be positioned to reduce capturing images of individuals who are not being targeted.'; 'Cameras should not be aimed at areas where people have a heightened expectation of privacy, for example, showers or into windows.'; 'Limit the use and viewing range of cameras as much as possible.'",
+    "fix": null
+   },
+   {
+    "claim": "store camera not recording passersby",
+    "verdict": "CONFIRMED",
+    "evidence": "example on OPC page (paraphrased by fetch tool; wording not captured verbatim)",
+    "fix": null
+   },
+   {
+    "claim": "notice before entry; retention; less invasive alternatives",
+    "verdict": "CONFIRMED",
+    "evidence": "notice before entering premises; 'Recordings should only be kept as long as necessary to fulfill the purpose'; 'Determine whether a less privacy-invasive alternative to video surveillance would meet your needs.'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE: 'Guidelines for Overt Video Surveillance in the Private Sector', March 2008, published by the Office of the Privacy Commissioner of Canada and also hosted by the Alberta and BC information and privacy commissioners (same text on all three sites; joint authorship not stated on the pages; names PIPEDA and the Alberta and BC PIPAs): apply to 'overt video surveillance of the public by private sector organizations in publicly accessible areas'; 'Cameras should be positioned to reduce capturing images of individuals who are not being targeted'; 'a store security camera should not be recording passersby outside the store'; 'Cameras should not be aimed at areas where people have a heightened expectation of privacy' (e.g. 'showers or into windows'); 'Limit the use and viewing range of cameras as much as possible'; notice before individuals enter; 'Recordings should only be kept as long as necessary'; consider less privacy-invasive alternatives — https://www.priv.gc.ca/en/privacy-topics/surveillance/video-surveillance-by-businesses/gl_vs_080306/ ; https://www.oipc.bc.ca/guidance-documents/1453 ; https://oipc.ab.ca/resource/video-surveillance/ ‖ CHECK 2 (1 Nov 2026, fixed): quotes confirmed; joint authorship not stated on any of the three pages"
+ },
+ "arch_acc_fmSecurity": {
+  "where_read": "J.B. upload FMDS0532.pdf (pdftotext), p. 1 and section 2.8.9",
+  "claims": [
+   {
+    "claim": "Data Sheet 5-32, January 2026, interim revision July 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'5-32 January 2026 Interim Revision July 2026'",
+    "fix": null
+   },
+   {
+    "claim": "2.2.1.7 quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'2.2.1.7 Provide supervision of the data center to prevent unauthorized access to the premises and assets in accordance with Data Sheet 9-1, Supervision of Property.'",
+    "fix": null
+   },
+   {
+    "claim": "2.8.9.1 per DS 9-1; 2.8.9.2 per DS 9-16",
+    "verdict": "CONFIRMED",
+    "evidence": "'Design buildings to prevent unauthorized access in accordance with Data Sheet 9-1'; 'in accordance with Data Sheet 9-16, Burglary and Theft'",
+    "fix": null
+   },
+   {
+    "claim": "2.8.9.2.1 quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'Install an FM Approved Level 1 or better intrusion alarm system for data and record storage rooms, if these areas have emergency doors that exit outside the secure area.'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_acc_tgpPyrostopBR": {
+  "where_read": "fireglass.com Pyrostop BR fact sheet PDF (WebFetch)",
+  "claims": [
+   {
+    "claim": "© 2026, no date",
+    "verdict": "CONFIRMED",
+    "evidence": "'R261009 © 2026 Technical Glass Products, Inc.'",
+    "fix": null
+   },
+   {
+    "claim": "'Fire-rated for up to 120 minutes with required hose stream test'; 45-120 min rows",
+    "verdict": "CONFIRMED",
+    "evidence": "exact; rows 45, 60, 90, 120",
+    "fix": null
+   },
+   {
+    "claim": "tests UL 9, NFPA 80, CAN4 S-104, ASTM E119, NIJ 0108.01, UL 10B, CAN4 S-106, UL 10C, CAN/ULC-S101, UL 263, UL 752",
+    "verdict": "CONFIRMED",
+    "evidence": "'UL 9 NFPA 80 CAN4 S-104 ASTM E119 MEA 241-00-M NIJ 0108.01'; 'UL 10B NFPA 252 CAN4 S-106'; 'UL 10C NFPA 257 CAN/ULC-S101'; 'UL 263'; 'UL 752'",
+    "fix": null
+   },
+   {
+    "claim": "Pyrostop BR up to Level 3; to Level 8 with Smartgard",
+    "verdict": "CONFIRMED",
+    "evidence": "Pyrostop BR rows Level I-III; 'UL 752 Level 1 to UL 752 Level 8 available'; Smartgard BR8 Level VIII",
+    "fix": null
+   },
+   {
+    "claim": "Level I 60 min 27 mm 63.00 kg/m2",
+    "verdict": "CONFIRMED",
+    "evidence": "'Level I | 60 min | 27 mm | 63.00 kg/m²'",
+    "fix": null
+   },
+   {
+    "claim": "Level II 120 min single 41 mm 91.00",
+    "verdict": "CONFIRMED",
+    "evidence": "'Level II | 120 min | 41 mm ... single glazing | 91.00 kg/m²'",
+    "fix": null
+   },
+   {
+    "claim": "Level II/III 120 min IGU 62 mm 126.00, 2.40 m2, 2.81 x 2.81",
+    "verdict": "CONFIRMED",
+    "evidence": "'62 mm ... I.G. | 126.00 kg/m² | 2.40 m² | 2.81 m | 2.81 m'",
+    "fix": null
+   },
+   {
+    "claim": "UL and ULC classification; files R13377, R38725",
+    "verdict": "CONFIRMED",
+    "evidence": "'Classified and labeled by Underwriters Laboratories, Inc. ® and Underwriters Laboratories of Canada.'; 'R13377 (45 minutes) and R38725 (60-120 minutes)'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_acc_saftiGPX": {
+  "where_read": "safti.com press release (WebFetch)",
+  "claims": [
+   {
+    "claim": "3 Nov 2005",
+    "verdict": "CONFIRMED",
+    "evidence": "'November 3, 2005'",
+    "fix": null
+   },
+   {
+    "claim": "'listed by ITS and UL for 60, 90 and 120-minute applications'",
+    "verdict": "CONFIRMED",
+    "evidence": "'GPX fire-rated framing systems are listed by ITS and UL for 60, 90 and 120-minute applications.'",
+    "fix": null
+   },
+   {
+    "claim": "'met UL 752 (1995), Level 3' (Intertek)",
+    "verdict": "CONFIRMED",
+    "evidence": "'met UL 752 (1995), Level 3, requirements for bullet resistance'; 'tests conducted by Intertek Testing Services'",
+    "fix": null
+   },
+   {
+    "claim": "ASTM F1592 Grade 1",
+    "verdict": "CONFIRMED",
+    "evidence": "'ASTM F 1592-01 Impact Test requirements, Grade 1'",
+    "fix": null
+   },
+   {
+    "claim": "no Canadian listing named",
+    "verdict": "CONFIRMED",
+    "evidence": "release names no ULC listing",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sec2_gcpsg004": {
+  "where_read": "rcmp.ca GCPSG-004 page (WebFetch)",
+  "claims": [
+   {
+    "claim": "effective 2020-12-02; line names another guide",
+    "verdict": "CONFIRMED",
+    "evidence": "'The effective date of the Transport, Transmittal and Storage of Protected and Classified Material Guide is 2020-12-02.'",
+    "fix": null
+   },
+   {
+    "claim": "7.2 CCVE 20 lux, 0.33, 1.5 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'Average light level should be at least 20 lux. Minimum 0.33 uniformity ratio. Measured vertically from 1.5m off the ground'",
+    "fix": null
+   },
+   {
+    "claim": "perimeter 20 lux 3 m patrol / 9 m approach; tight beam control",
+    "verdict": "CONFIRMED",
+    "evidence": "'an average light level of 20 lux from 3m on the patrol side to 9m on the approach side'; 'Tight beam control should be used to limit light spill onto neighboring properties and roads'",
+    "fix": null
+   },
+   {
+    "claim": "staff entrances 50-200 lux 3-4 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'50-200 lux using wall mounted luminaires 3-4m above ground level.'",
+    "fix": null
+   },
+   {
+    "claim": "paths 20 lux, 5 lux at 5 m; parking 25/65; sally ports 100",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least 20 lux on the path and at least 5 lux at 5m perpendicular'; 'at least 25 lux'; 'at least 65 lux'; 'at least 100 lux'",
+    "fix": null
+   },
+   {
+    "claim": "luminaires above and behind cameras",
+    "verdict": "CONFIRMED",
+    "evidence": "'Mount luminaires above and behind security cameras to prevent light flare'",
+    "fix": null
+   },
+   {
+    "claim": "7.1 backlight < 4x front; 8 below 40 lux; 6.4 CRI 80+",
+    "verdict": "CONFIRMED",
+    "evidence": "'backlighting is less than four times the measured front light'; 'drop below 40 lux'; 'CRI of 80+'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "new_text": null
+ },
+ "arch_sec2_gcpsg009b": {
+  "where_read": "rcmp.ca GCPSG-009 page (WebFetch)",
+  "claims": [
+   {
+    "claim": "9.1 outer setback 'often cleared and trimmed'; inner clear; no widths",
+    "verdict": "CONFIRMED",
+    "evidence": "'often cleared and trimmed to provide visibility'; 'Inner setbacks should be kept clear of any obstructions'; no widths",
+    "fix": null
+   },
+   {
+    "claim": "9.6 disturbance and taut wire; combining technologies",
+    "verdict": "CONFIRMED",
+    "evidence": "'detects noise from fence motion'; 'Taut wire sensors'; 'Detection is more reliable when combining more than one type of sensing technology.'",
+    "fix": null
+   },
+   {
+    "claim": "10.1 video surveillance alone 'is not an effective method of detection'",
+    "verdict": "CONFIRMED",
+    "evidence": "'simply using CCVE, whether intermittent or even continuous video surveillance of the fence is not an effective method of detection' ('alone' is a paraphrase)",
+    "fix": null
+   },
+   {
+    "claim": "10.2 spacing at least twice fence height",
+    "verdict": "CONFIRMED",
+    "evidence": "'The recommended spacing is at least twice the fence height.'",
+    "fix": null
+   },
+   {
+    "claim": "10.6 gates weakest",
+    "verdict": "CONFIRMED",
+    "evidence": "'Gates are typically the weakest portion of any fence without the addition of security features.'",
+    "fix": null
+   },
+   {
+    "claim": "10.7 'Aim towards the unsecured side'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": null
+   },
+   {
+    "claim": "10.10 gravel 300 mm deep, 900 mm either side",
+    "verdict": "CONFIRMED",
+    "evidence": "'to a depth of 300mm and extending at least 900mm on either side'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "new_text": null
+ },
+ "arch_sec2_gcpsg011b": {
+  "where_read": "rcmp.ca GCPSG-011 page (WebFetch)",
+  "claims": [
+   {
+    "claim": "7.3.2 'capable of capturing/viewing the entire space intended'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": null
+   },
+   {
+    "claim": "7.3.2 mounting in ceiling corners, building tops, lighting poles",
+    "verdict": "CONFIRMED",
+    "evidence": "'Mounting CCTV cameras in ceiling corners, on top of building structures, or on top of security lighting poles'",
+    "fix": null
+   },
+   {
+    "claim": "7.1.1 fixed cameras for perimeter fencing",
+    "verdict": "CONFIRMED",
+    "evidence": "'Commonly used for 24/7 monitoring of perimeter fencing and open spaces.'",
+    "fix": null
+   },
+   {
+    "claim": "5.1.2 blind spots, poor coverage",
+    "verdict": "CONFIRMED",
+    "evidence": "'poor or insufficient camera coverage of the space'",
+    "fix": null
+   },
+   {
+    "claim": "6.2.1 lighting per GCPSG-004, assess at night",
+    "verdict": "CONFIRMED",
+    "evidence": "'Ensure the coverage areas are assessed during lowlight and night-time conditions'; points to GCPSG-004",
+    "fix": null
+   },
+   {
+    "claim": "6.1 signage set by the AHJ",
+    "verdict": "CONFIRMED",
+    "evidence": "'the Authority Having Jurisdiction (AHJ) sets what is required for signage'",
+    "fix": null
+   },
+   {
+    "claim": "no mounting heights, lux, pixel density",
+    "verdict": "CONFIRMED",
+    "evidence": "none given",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "new_text": null
+ },
+ "arch_sec2_gcpsg014b": {
+  "where_read": "rcmp.ca GCPSG-014 page (WebFetch)",
+  "claims": [
+   {
+    "claim": "6.2 incentives to cross zoning boundaries (washrooms, cafeterias)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Incentives for unauthorized personnel to cross zoning boundaries'; 'washrooms or a cafeteria'",
+    "fix": null
+   },
+   {
+    "claim": "6.9 glazing in design phase, GCPSG-013",
+    "verdict": "CONFIRMED",
+    "evidence": "'security and safety glazing included in the design phase'; GCPSG-013",
+    "fix": null
+   },
+   {
+    "claim": "6.12 intakes, ducts, hatches; utility spaces not adjacent",
+    "verdict": "CONFIRMED",
+    "evidence": "'air intakes, mechanical ducts, roof hatches and water supplies'; 'Utility spaces should not be located adjacent to entrances to more restrictive zones.'",
+    "fix": null
+   },
+   {
+    "claim": "6.13 adjacent occupants",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": null
+   },
+   {
+    "claim": "7.1.1.1 fencing; 7.1.1.2 GCPSG-004; 7.1.1.3 sight lines; 7.1.1.4 observable unless TRA",
+    "verdict": "CONFIRMED",
+    "evidence": "'Fencing should be used for the perimeter of the site.'; GCPSG-004; 'clear lines of sight at eye level to and from the building'; 'The building and the site should be observable from the roadway by first responders and passers-by' ... 'deemed undesirable based on the TRA'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "new_text": null
+ },
+ "arch_sec2_gcpsg021": {
+  "where_read": "rcmp.ca GCPSG-021 page (WebFetch)",
+  "claims": [
+   {
+    "claim": "effective 2025-04-25",
+    "verdict": "CONFIRMED",
+    "evidence": "'is 2025-04-25'",
+    "fix": null
+   },
+   {
+    "claim": "vibration detectors on fences; perimeter fence first layer; CCTV recording on trigger; contact sensors doors and windows",
+    "verdict": "CONFIRMED",
+    "evidence": "all four quotes exact ('They are most commonly employed on doors and windows')",
+    "fix": null
+   },
+   {
+    "claim": "Table 2 OZ 'Restrict surveillance to access points and travel routes'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": null
+   },
+   {
+    "claim": "no clear-zone widths, buried, microwave or IR systems",
+    "verdict": "CONFIRMED",
+    "evidence": "none for clear zones, buried, microwave; IR named once only in passing ('complex multilayered infrared camera systems')",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "new_text": null
+ },
+ "arch_sec2_gcpsg003": {
+  "where_read": "rcmp.ca GCPSG-003 page (WebFetch)",
+  "claims": [
+   {
+    "claim": "effective 2021-08-09",
+    "verdict": "CONFIRMED",
+    "evidence": "'is 2021-08-09'",
+    "fix": null
+   },
+   {
+    "claim": "4.3 out of sight but within audible range",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": null
+   },
+   {
+    "claim": "6.6 Security Zone nested in OZ",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": null
+   },
+   {
+    "claim": "items 2, 5, 8, 9 (under 6.6)",
+    "verdict": "CONFIRMED",
+    "evidence": "'clear enough to identify all individuals entering through portals into each respective space'; 'should not view the interior of the space'; 'protected on all six sides from brute force entry attack'; 'Doors and Frames providing brute force attack protection'; 'A vestibule outside the SOC should be equipped with an interlock'",
+    "fix": null
+   },
+   {
+    "claim": "6.3 SPC 85",
+    "verdict": "CONFIRMED",
+    "evidence": "'An SPC rating of 85 is typically recommended for the SOC control room.'",
+    "fix": null
+   },
+   {
+    "claim": "6.4 wheelchair 1200 x 900 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "'1200mm for length of wheelchair' ... '900mm for width of wheelchair and clearance'",
+    "fix": null
+   },
+   {
+    "claim": "7-14 ER adjacent, 1.5 m around racks, 50% spare",
+    "verdict": "CONFIRMED",
+    "evidence": "'located adjacent to the SOC Control Suite'; 'at least 1.5m on all sides'; 'at least 50% spare capacity'",
+    "fix": null
+   },
+   {
+    "claim": "no room area figures",
+    "verdict": "CONFIRMED",
+    "evidence": "6.2 lists 'Required Area' as a field only",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "new_text": null
+ },
+ "arch_sec2_g1302": {
+  "where_read": "rcmp.ca G13-02 PDF (WebFetch)",
+  "claims": [
+   {
+    "claim": "Lead Agency Publication G13-02, Secure Demising Wall, 2013-01-15",
+    "verdict": "CONFIRMED",
+    "evidence": "'Lead Agency Publication G13-02'; header 'RCMP Lead Agency Guide G13-02 1 2013-01-15'",
+    "fix": null
+   },
+   {
+    "claim": "named by GCPSG-015 App. C 2.3",
+    "verdict": "CONFIRMED",
+    "evidence": "GCPSG-015 App. C 2.3: perimeter 'should meet the construction standards for a Secure Demising Wall (SDW)' per G13-02",
+    "fix": null
+   },
+   {
+    "claim": "p. 7 slab-to-slab, floors/roofs reinforced, no pass-throughs",
+    "verdict": "CONFIRMED",
+    "evidence": "'Secure Demising Walls should be slab-to-slab'; 'steel reinforced the same as the walls'; 'Do not locate pass-throughs in the Critical Attack Area around doors.'",
+    "fix": null
+   },
+   {
+    "claim": "p. 10 studs 2x6 18 ga 300 oc, welds or rivets 'not screws'",
+    "verdict": "WRONG",
+    "evidence": "on page headed 'RCMP Lead Agency Guide G13-02 9 2013-01-15': 'Space studs at 300 mm oc and secure to the top and bottom track with welds or rivets (not screws).'; '2” x 6”, 18ga ... (preferred option)'",
+    "fix": "p. 9"
+   },
+   {
+    "claim": "p. 11 EMMA 557-99 Style 3/4-9F 0.120 in; 16 ga sheet; screws NOT acceptable",
+    "verdict": "CONFIRMED",
+    "evidence": "'To EMMA 557-99. Style ¾-9F: nominal strand thickness of 0.120”'; 'Sheet Steel: 16 ga'; 'Screws (including “security screws”) are NOT acceptable'",
+    "fix": null
+   },
+   {
+    "claim": "p. 12 3/16 in rivets 200 mm oc",
+    "verdict": "CONFIRMED",
+    "evidence": "'Steel sheet: 3/16” Steel rivets at 200mm oc'",
+    "fix": null
+   },
+   {
+    "claim": "p. 13 16 ga inside, 1200 mm from door edge",
+    "verdict": "CONFIRMED",
+    "evidence": "'Install 16 ga sheet steel on the inside of the room and extend 1200 mm from the edge of the door frame.'",
+    "fix": null
+   },
+   {
+    "claim": "p. 6 two layers 16 mm gypsum, 150 mm batts",
+    "verdict": "CONFIRMED",
+    "evidence": "'Two layers of 16 mm fire-rated gypsum board'; '150 mm thick glass fiber batts'",
+    "fix": null
+   },
+   {
+    "claim": "p. 8 'moderate resistance to force attacks'",
+    "verdict": "CONFIRMED",
+    "evidence": "'should provide moderate resistance to force attacks'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "new_text": "GOVERNMENT GUIDE: RCMP Lead Agency Publication G13-02, Secure Demising Wall, 2013-01-15 (named by GCPSG-015 App. C 2.3 for a secure data centre perimeter): p. 7 slab-to-slab, wood or steel-frame floors and roofs reinforced to match, no pass-throughs in the critical attack area; p. 9 2\" x 6\" 18 ga studs at 300 mm oc, welded or riveted 'not screws'; p. 11 expanded metal mesh EMMA 557-99 Style 3/4-9F (0.120\" strand) or 16 ga sheet steel on the attack side; 'Screws ... are NOT acceptable'; p. 12 3/16\" rivets at 200 mm oc; p. 13 16 ga sheet steel inside the room extending 1200 mm from the door edge; p. 6 two layers 16 mm fire-rated gypsum, 150 mm batts; p. 8 doors and windows 'moderate resistance to force attacks' — https://rcmp.ca/sites/default/files/doc/g13-02-eng.pdf ‖ CHECK 2 (1 Nov 2026, fixed): all figures confirmed; stud page corrected p. 10 to p. 9 (printed page header)"
+ },
+ "arch_sec2_equinix5": {
+  "where_read": "equinix.com infographic page (WebFetch)",
+  "claims": [
+   {
+    "claim": "title 'IBX Data Center Security Measures' infographic",
+    "verdict": "WRONG",
+    "evidence": "visible H1 is '5 layers of security at Equinix IBX data centers'; 'Equinix IBX Data Center Security Measures' appears only in the page title metadata",
+    "fix": "'5 layers of security at Equinix IBX data centers'"
+   },
+   {
+    "claim": "undated",
+    "verdict": "WRONG",
+    "evidence": "no visible date; metadata og:updated_time 2024-08-09",
+    "fix": "no visible date (metadata updated 2024-08-09)"
+   },
+   {
+    "claim": "security lobby; government photo ID check-in",
+    "verdict": "CONFIRMED",
+    "evidence": "'Authorized access required before entry into the IBX.'; 'Identity verification with government-issued photo ID and visitor log tracking.'",
+    "fix": null
+   },
+   {
+    "claim": "Mantrap entry quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'Controls ingress/egress with security personnel managing lockdown capabilities.'",
+    "fix": null
+   },
+   {
+    "claim": "colocation and customer space security",
+    "verdict": "CONFIRMED",
+    "evidence": "'colocation area access, and customer space security'",
+    "fix": null
+   },
+   {
+    "claim": "perimeter fencing quote; 24/7 internal and external surveillance",
+    "verdict": "CONFIRMED",
+    "evidence": "'video monitoring and perimeter fencing with advanced detection devices provide 24/7 surveillance and protection.'; '24/7 internal and external surveillance covering all critical areas.'",
+    "fix": null
+   },
+   {
+    "claim": "no retention, camera placement or window statements",
+    "verdict": "CONFIRMED",
+    "evidence": "none found",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "OPERATOR CLAIM: Equinix, '5 layers of security at Equinix IBX data centers' infographic (page title 'Equinix IBX Data Center Security Measures'; no visible date, metadata updated 2024-08-09): security lobby, physical check-in with government photo ID, 'Mantrap entry: Controls ingress/egress with security personnel managing lockdown capabilities', colocation and customer space security; 'video monitoring and perimeter fencing with advanced detection devices provide 24/7 surveillance'; '24/7 internal and external surveillance covering all critical areas'; no retention, camera placement or window statements — https://www.equinix.com/resources/infographics/5-layers-of-security ‖ CHECK 2 (1 Nov 2026, fixed): claims confirmed; title and date corrected"
+ },
+ "arch_sec2_cologixVan1": {
+  "where_read": "cologix.com VAN1 page (WebFetch)",
+  "claims": [
+   {
+    "claim": "555 W Hastings, Vancouver",
+    "verdict": "CONFIRMED",
+    "evidence": "'555 West Hastings Street, Vancouver, British Columbia'",
+    "fix": null
+   },
+   {
+    "claim": "undated",
+    "verdict": "CONFIRMED",
+    "evidence": "no visible date (metadata modified 2026-09-22)",
+    "fix": null
+   },
+   {
+    "claim": "five security quotes",
+    "verdict": "CONFIRMED",
+    "evidence": "'24x7x365 secure access'; 'HID access cards and biometric authentication'; 'Closed-circuit television (CCTV) system'; 'Customized security for dedicated pods'; 'Dual interlocking doors in the building lobby'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ }
+}
