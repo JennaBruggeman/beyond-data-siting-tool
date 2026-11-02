@@ -110,3 +110,4 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - J.B. (2 Nov 2026): fish farm warm species only (tilapia or barramundi); cold species dropped (adds cooling load, no exchange). BC: flag the new-species review (Introductions and Transfers Committee).
 - J.B. (2 Nov 2026): what happens to the fish after harvest (processing, selling, food security) is out of scope.
 - J.B. (2 Nov 2026): seniors' programs dropped (assisted living and care home).
+- J.B. (2 Nov 2026): secure line starts with presets only (lot line, building wall, hall wall, from the tool's suggested line); draw-your-own later.
