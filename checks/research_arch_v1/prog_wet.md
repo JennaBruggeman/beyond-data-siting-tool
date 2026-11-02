@@ -55,7 +55,7 @@ Labels: "?" = not found / not confirmed. "our reading" = our interpretation. "ou
 | Personal-service class | D lists "Beauty parlours", "Barber and hairdressing shops" | arch_wet_nbcA3121 | A-3.1.2.1.(1) | rule (note) | 90 |
 | Separation to F-2 | A-3: **2 h**; D: **—** (none) | arch_nbc3131 | Table 3.1.3.1 | rule | 90 |
 | Which class a spa is | ? Not named in any code. Our reading: rooms with pools/hot tubs = A-3; sauna and treatment rooms alone could be D | — | — | our reading | 40 |
-| BC health rules | hot tub = pool under Pool Regulation; sauna = "personal service establishment" (Regulated Activities Reg. s. 2(1)); cold plunge = pool "unless they are drained, cleaned, sanitized and refilled after each use" | arch_wet_bcPoolRegDefs; arch_wet_bcRAR161; arch_wet_vanRTS16473 | s. 1, s. 2(1)(c); s. 2(1); report p. 6 | rule / government report | 85 |
+| BC health rules | hot tub = pool under Pool Regulation; sauna = "personal service establishment" (Regulated Activities Reg. s. 2(1)); cold plunge = pool "unless they are drained, cleaned, sanitized and refilled after each use" | arch_wet_bcPoolRegDefs; arch_wet_bcRAR161; arch_wet_vanRTS16473 | s. 1, s. 2(1)(c); s. 2(1); report p. 5 | rule / government report | 85 |
 | BC fence | "fence or other barrier with controlled access" around pool and walkways | arch_wet_bcPoolRegDefs | s. 7(1) | rule | 90 |
 | AB health rules | Pool Standards cover whirlpools and saunas; exempt: single-family use, natural pools, pools drained after each user, floatation tanks | arch_wet_abPoolStdSauna | Part 1 | rule (marked "Archived"; still current ?) | 80 |
 | AB building code | whirlpools on "independent circulation system"; emergency shut-off at poolside | arch_wet_nbcAE726 | 7.2.6.2.(2), (10) | rule | 90 |
@@ -76,7 +76,7 @@ Labels: "?" = not found / not confirmed. "our reading" = our interpretation. "ou
 
 | what | value | source id | where | kind | conf. |
 |---|---|---|---|---|---|
-| No siting or distance rule | none in BC Pool Reg., Regulated Activities Reg., AB Pool Standards (siting "not addressed") | arch_wet_bcPoolRegDefs; arch_wet_bcRAR161; arch_wet_abPoolStdSauna | read to end | rule (absence) | 70 |
+| No siting or distance rule | none in BC Pool Reg., Regulated Activities Reg., AB Pool Standards (no siting rule found) | arch_wet_bcPoolRegDefs; arch_wet_bcRAR161; arch_wet_abPoolStdSauna | read to end | rule (absence) | 70 |
 | Pool chemicals / chlorine room (AB) | see adj_programs.md (arch_adj_nbcAE72, arch_adj_abStandataCl): exhaust ≥3 m from intakes | — | — | rule | — |
 | Noise / setback for outdoor spa (Vancouver) | none set; parks: "specified footprint" | arch_wet_vanRTS16473 | App. D p. 5 | government report | 70 |
 | Distance to generators, coolers, loading | ? none found | — | — | — | — |
@@ -276,3 +276,5 @@ Labels: "?" = not found / not confirmed. "our reading" = our interpretation. "ou
 - Edmonton Nordic spa and Glenrose pool: only news or foundation pages found; news not used.
 
 Check 2 applied (2 Nov 2026)
+
+Check 3 applied (2 Nov 2026)

@@ -30,7 +30,7 @@ Labels: "?" = not found. "our reading" = interpretation. "our arithmetic" = deri
 | Energy per tonne | electricity **3,086 kWh/t** live weight, which includes heating, lighting and ice; heating "not possible to separate"; water ~30 °C; Sweden (benchmark outside Canada) | arch_fish_bergman2020 | Table 1; Methods | peer-reviewed | 80 |
 | Heat supply temp. | heating water 35–45 °C (NL research RAS) | arch_wet_geofood2022 | p. 15 | research report (WUR) | 65 |
 | Heat kWh per t or per m³ (heat only) | ? (GeoFood gives W/m² equations and graphs only; Energy Reports 2022 abstract has no figures) | arch_wet_geofood2022 | p. 15 | — | — |
-| Tank density | 60–120 kg/m³ (FAO); ≤100 kg/m³ with oxygen (OMAFRA); 60 kg/m³ at slaughter (Sweden) | arch_wet_faoTilapia; arch_fish_omafraTilapia; arch_fish_bergman2020 | — | FAO / gov. / peer-reviewed | 80 |
+| Tank density | 60–120 kg/m³ (FAO); ≤100 kg/m³ with oxygen (OMAFRA); 60 kg/m³ before slaughter (Sweden) | arch_wet_faoTilapia; arch_fish_omafraTilapia; arch_fish_bergman2020 | — | FAO / gov. / peer-reviewed | 80 |
 | Tank volume per t/yr | **~20 m³** per t/yr (73 m³ ÷ 3.7 t/yr, our arithmetic, Brooks pilot) | arch_fish_savidov2015 | pilot-system slide | our arithmetic | 50 |
 | Area per t/yr | **33 m²·a per t** grow-out land (Sweden); **~28 m²** per t/yr (1,000 m² ÷ 36 t, our arithmetic, AB model) | arch_fish_bergman2020; arch_fish_savidov2015 | Table 1; tilapia model slide | peer-reviewed / our arithmetic | 60 |
 
@@ -52,7 +52,7 @@ Labels: "?" = not found. "our reading" = interpretation. "our arithmetic" = deri
 |---|---|---|---|---|---|
 | Channel catfish temp. | grow-out water "ideally 26-30 °C"; RAS "has been attempted", few economic farms | arch_fish_faoCatfish | Production systems | FAO fact sheet | 75 |
 | African catfish (*Clarias*) temp. | ~30 °C farm water (Sweden) | arch_fish_bergman2020 | Methods | peer-reviewed | 75 |
-| African catfish energy | electricity **771 kWh/t** (incl. heating); 250 kg/m³ at slaughter; **15 m²·a per t** | arch_fish_bergman2020 | Table 1; Results | peer-reviewed | 80 |
+| African catfish energy | electricity **771 kWh/t** (incl. heating); 250 kg/m³ before slaughter; **15 m²·a per t** | arch_fish_bergman2020 | Table 1; Results | peer-reviewed | 80 |
 | BC legal: channel catfish | **banned.** "All fish species of the family Ictaluridae [including bullheads, channel catfish and madtoms]"; "must not possess" | arch_fish_bcCAS | Sched. 3 s. 1(5); s. 7(1) | rule | 95 |
 | BC legal: African catfish | not listed in Sched. 3; ITC review ? | arch_fish_bcCAS | Sched. 3 | rule | 60 |
 | AB legal | no catfish on Table 1 → "A licensing will not be issued" | arch_wet_abFishCulture | Table 1 | government | 90 |
@@ -65,8 +65,8 @@ Labels: "?" = not found. "our reading" = interpretation. "our arithmetic" = deri
 | Temperature | sea growth best where extremes are within "6-16 °C"; eggs <10 °C; no freshwater grow-out optimum | arch_fish_faoAtlSalmon | Ongrowing; Seed supply | FAO fact sheet | 70 |
 | Kuterra (BC RAS) | cohort means 13.7–15.1 °C (all-group average 14.5 °C); "15C optimum" (quarantine); mechanical-room surplus heat sent to tanks; "improving the cooling system" | arch_fish_kuterra2016 | pp. 4, 22, 30 | grant report (operator) | 55 |
 | Density | ≤80 kg/m³ (small studies); nursery ≥50 kg/m³ | arch_wet_dfoSAR2008; arch_fish_faoAtlSalmon | p. 9; Nursery | government / FAO | 70 |
-| BC legal | land-based Atlantic salmon licensed: Kuterra ('Namgis) "first closed containment facility", "current production capacity of 250 metric tonnes" | arch_fish_dfoQP2020 | QP note, 9 Mar 2020 | government | 85 |
-| AB legal | **not** on current Table 1 (the 2006 profile listed Atlantic salmon; it has since been dropped) | arch_wet_abFishCulture; arch_fish_abProfile2006 | Table 1; p. 2 | government | 85 |
+| BC legal | land-based Atlantic salmon licensed: Kuterra ('Namgis) "first closed containment facility designed and built in North America", "current production capacity of 250 metric tonnes" | arch_fish_dfoQP2020 | QP note, 9 Mar 2020 | government | 85 |
+| AB legal | **not** on current Table 1 (the 2006 profile listed Atlantic salmon; it has since been dropped) | arch_wet_abFishCulture; arch_fish_abProfile2006 | Table 1; p. 1 | government | 85 |
 | Kuterra size | design "370mt (live wt) of product per year"; tanks 250 m³ and 500 m³; 100 m³ purge; building area ? | arch_fish_kuterra2016 | pp. 3, 18, 31 | grant report | 55 |
 | Electricity | 7,509 kWh/t live weight (China RAS) | arch_wet_song2019 | abstract | peer-reviewed | 75 |
 | Electricity (NO) | grow-out 6–10 kWh/kg | arch_wet_ntnuRAS | listing | unconfirmed publication | 45 |
@@ -144,7 +144,7 @@ Our reading: for **Edmonton**, tilapia or barramundi take heat and are on the AB
 | Norway: lobster + trout | Green Mountain to "reuse the heat from two of its rural data centres in land-based lobster and trout farming" | arch_fish_investNorway2023 | government promotion repeating operator claims | 35 |
 | Peer-reviewed mention | fish and lobster farming "is tried in Norway" (no project, no figures) | arch_fish_terenius2023 | peer-reviewed (qualitative) | 50 |
 | Greenhouse residual heat → tilapia | "a 6500 m2 RAS can be sustained by the residual heat of a 5 ha geothermally heated tomato greenhouse" (model) | arch_wet_geofood2022 | research report | 60 |
-| Data centre heat → farm (China) | 9.6 MW data centre → dairy farm, 2,622 MWh/yr; case study has **no fish**. Introduction cites (second-hand) a Ningxia data centre whose heat "was able to regulate the temperature of the fish pond" and an eel farm using data-centre water; no fish figures | arch_fish_chen2024 | peer-reviewed (benchmark outside Canada) | 70 |
+| Data centre heat → farm (China) | 9.6 MW data centre → dairy farm, 2,622 MWh/yr; case study has **no fish**. Introduction cites (second-hand) a Ningxia Technology Group data centre (placed in Xizang) whose heat "was able to regulate the temperature of the fish pond" and an eel farm using data-centre water (Hokkaido, Japan); no fish figures | arch_fish_chen2024 | peer-reviewed (benchmark outside Canada) | 70 |
 | Canada | ? none found | — | — | — |
 
 ## Gaps (?)
@@ -163,3 +163,5 @@ Our reading: for **Edmonton**, tilapia or barramundi take heat and are on the AB
 - Alberta Agdex 2014 profile: server error.
 
 Check 2 applied (2 Nov 2026)
+
+Check 3 applied (2 Nov 2026)

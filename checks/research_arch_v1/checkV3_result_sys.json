@@ -1,0 +1,962 @@
+{
+ "arch_sys_neuSlides2021": {
+  "where_read": "URL (WebFetch cleanairpartnership PDF)",
+  "claims": [
+   {
+    "claim": "presenter, event, 7 Dec 2021",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Linda Parkinson, Manager\"; \"Clean Air Partnership: Energy Recovery Webinar\"",
+    "fix": ""
+   },
+   {
+    "claim": "slide 12 3.2 MW, +6.6 MW, 24 MW boilers",
+    "verdict": "CONFIRMED",
+    "evidence": "\"3.2 MW sewage heat recovery capacity\"; \"+ 6.6 MW of additional sewage heat recovery capacity\"; \"24 MW boiler capacity for peak and resiliency\"",
+    "fix": ""
+   },
+   {
+    "claim": "slide 15 3 MW; Mount Pleasant 5 MW",
+    "verdict": "CONFIRMED",
+    "evidence": "\"3 MW sewage heat recovery\"; \"5 MW boiler capacity\"",
+    "fix": ""
+   },
+   {
+    "claim": "slide 8 6.2 M sq ft; 22 M sq ft over 20 years; no temperatures",
+    "verdict": "CONFIRMED",
+    "evidence": "\"6.2 million sqft of buildings connected\"; none stated",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_neuRates2026": {
+  "where_read": "URL (WebFetch council.vancouver.ca PDF, first 100,000 chars)",
+  "claims": [
+   {
+    "claim": "RTS 18251; 21 Oct 2025; Council 12 Nov 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Report Date: October 21, 2025\"; \"RTS No.: 18251\"",
+    "fix": ""
+   },
+   {
+    "claim": "p. 2 667,000 m2; 47 buildings; ~2,000,000 m2",
+    "verdict": "CONFIRMED",
+    "evidence": "\"667,000 square metres (7,180,000 square feet)\"; \"Full system build-out is forecast at ~2,000,000 square metres\"",
+    "fix": ""
+   },
+   {
+    "claim": "p. 3 8.2 MWh per 75 m2 suite",
+    "verdict": "CONFIRMED",
+    "evidence": "\"average energy demand of 8.2 megawatt-hours (MWh) per year\"",
+    "fix": ""
+   },
+   {
+    "claim": "App. B pp. 1, 6, 7, 8; App. D p. 4",
+    "verdict": "CONFIRMED",
+    "evidence": "\"1890 Spyglass Place\"; \"adding 6.6 MWh of reliable\"; \"and data centres\"; \"electric boilers as future peaking resources\"; \"planned data centers\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_neuRates2022": {
+  "where_read": "URL (WebFetch council.vancouver.ca PDF)",
+  "claims": [
+   {
+    "claim": "9 Nov 2021 / 1 Dec 2021; p. 3 603,000 m2, 43 customers, 2,050,000 m2",
+    "verdict": "CONFIRMED",
+    "evidence": "\"603,000 square metres (6,491,000 square feet)\"; \"43 residential, commercial and institutional customers\"",
+    "fix": ""
+   },
+   {
+    "claim": "p. 13 6.6 MW; p. 12 700 MW.h 1%; App. B gas back-up",
+    "verdict": "CONFIRMED",
+    "evidence": "\"This project will add 6.6MW of renewable capacity\"; \"recover 700 MW.h of energy, which accounts for 1%\"; \"natural gas boilers are used for back-up purposes\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_vanSefcPage": {
+  "where_read": "URL (WebFetch vancouver.ca page)",
+  "claims": [
+   {
+    "claim": "heading; 6.6 MW 2024; over 300%; 70% renewable; City-owned self-funded",
+    "verdict": "CONFIRMED",
+    "evidence": "\"False Creek Neighbourhood Energy Utility (NEU)\"; \"Added 6.6 megawatts of sewage heat recovery capacity\"; \"efficiencies of over 300%\"; \"70% of its energy from renewable sources\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": "efficiency \"over 300%\" and 70% share are City claims about its own utility (operator claim, trust 50) if used as figures",
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_vanNES2012": {
+  "where_read": "URL (WebFetch vancouver.ca PDF): client error, nothing retrieved",
+  "claims": [
+   {
+    "claim": "all figures (50 MW, Bylaw 1087, traffic/noise/odour, truck hours, 50% GHG, 80,094 m2 query)",
+    "verdict": "UNREACHABLE",
+    "evidence": "\"failed at its site (client_error)\"",
+    "fix": "keep unverified; J.B. to open the PDF"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_ubcAdes2019": {
+  "where_read": "URL (WebFetch UBC PDF, page numbers from running headers)",
+  "claims": [
+   {
+    "claim": "3 x 15.0 MWt; 6 MWt gasifier; 2 MWe",
+    "verdict": "CONFIRMED",
+    "evidence": "\"3 x 15.0 MWt Boilers\"; \"three 15 MWt (51.2 MMBtu/hr) hot water boilers\" (p. 5); \"6 MWt\"; \"2 MWe cogeneration unit\"",
+    "fix": ""
+   },
+   {
+    "claim": "p. 19 +12 MWt 2020",
+    "verdict": "CONFIRMED",
+    "evidence": "\"addition of 12 MWt (41 MMBtu/hr) of new hot water boiler capacity\"; \"expected to be operational in 2020\"",
+    "fix": ""
+   },
+   {
+    "claim": "pp. 2, 9 say 2021",
+    "verdict": "WRONG",
+    "evidence": "2021 appears on p. 6 (\"halved again in 2021\") and p. 9 (\"planned 2021 expansion\")",
+    "fix": "pp. 6, 9"
+   },
+   {
+    "claim": "Fast Facts 10 M sq ft, 162 buildings",
+    "verdict": "CONFIRMED",
+    "evidence": "\"10 million square feet, made up of 162 buildings\" (p. 2)",
+    "fix": ""
+   },
+   {
+    "claim": "p. 4 115 buildings / 102 ETS",
+    "verdict": "CONFIRMED",
+    "evidence": "\"converted 115 buildings ... through 102 energy transfer stations\"; p. 3 says \"more than 141 buildings\" (conflict)",
+    "fix": "note conflict"
+   },
+   {
+    "claim": "p. 5 89 GWh hot water",
+    "verdict": "CONFIRMED",
+    "evidence": "diagram label \"89 GWh HOT WATER\"; flow meaning not stated",
+    "fix": "label only"
+   },
+   {
+    "claim": "p. 4 steam peak 120 MWt; no supply temperatures",
+    "verdict": "CONFIRMED",
+    "evidence": "\"peak steam load of 120 MWt\"; none stated",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "INSTITUTION (utility report): UBC Academic District Energy System, UBC Energy & Water Services, FY 2018/19: p. 5 Campus Energy Centre '3 x 15.0 MWt Boilers' = 45 MWt; bioenergy 6 MWt gasifier, 2 MWe cogeneration; p. 19 +12 MWt planned 2020 (pp. 6, 9 say 2021); Fast Facts box: about '10 million square feet, made up of 162 buildings'; p. 4 conversion of 115 buildings via 102 ETS (p. 3 says 'more than 141 buildings' off steam: internal conflict ?); p. 5 energy-balance diagram label '89 GWh HOT WATER' (meaning of flow not stated); p. 4 pre-conversion steam peak 120 MWt; no supply temperatures — https://vpfo-facilities.sites.olt.ubc.ca/files/2025/02/2019-UBC_EWS_DES.pdf ‖ CHECK 2 (2 Nov 2026, fixed): 115 bldgs / 102 ETS on p. 4; 10 M sq ft in Fast Facts box; 2020 vs 2021 timing noted. ‖ CHECK 3 (2 Nov 2026, fixed): 2021 is on pp. 6 and 9; 141-vs-115 conflict and 89 GWh label noted"
+ },
+ "arch_sys_ubcCecBldg": {
+  "where_read": "URL (WebFetch facilities.ubc.ca and planning.ubc.ca)",
+  "claims": [
+   {
+    "claim": "52100; 6130 Agronomy Rd; 2016; 21,528 sq ft (2000.000 m2); modified 2026-02-04",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Building gross area: 21,528 sq. ft. (2000.000 sq. m)\"",
+    "fix": ""
+   },
+   {
+    "claim": "DP 12029 (BP13094), Nov 2013, 1,858 m2, hot water plant, updated 26 Feb 2020",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Development Permit issued November 2013\"; \"hot water plant (thermal) with future alternative energy expansion\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_breIdea2021": {
+  "where_read": "URL (WebFetch higherlogic PDF)",
+  "claims": [
+   {
+    "claim": "City of Edmonton; C. Felske, Director; undated",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Director Renewable Energy Systems\"; no date",
+    "fix": ""
+   },
+   {
+    "claim": "570 boreholes ~150 m; 1 MW ammonia; first 3 MW; 35 and 46 MW; 10-25 C; no antifreeze; up to six ECs",
+    "verdict": "CONFIRMED",
+    "evidence": "\"570 geoexchange boreholes roughly 150 meters underground\"; \"1 Megawatt capacity\"; \"35 and 46 Megawatts\"; \"(10 to 25 C)\"; \"up to six Energy Centres\"",
+    "fix": ""
+   },
+   {
+    "claim": "Phase 2 sewer: 2.4 m, 17 m, 500 L/s, 25 C, 13/23 MW; COP >10",
+    "verdict": "CONFIRMED",
+    "evidence": "\"2.4-metre diameter trunk sewer\"; \"up to 500 litres-per-second\"; \"up to 13 Megawatts of heating and 23 Megawatts of cooling capacity\"; \"greater than 10\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_edmBorefield": {
+  "where_read": "URL (WebFetch transforming.edmonton.ca)",
+  "claims": [
+   {
+    "claim": "570 boreholes; 150 m; under stormwater pond; energy centre houses DESS equipment; undated",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Crews have drilled 570 boreholes\"; 150 m each; no date",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_breBP2020": {
+  "where_read": "URL (WebFetch edmonton.ca PDF)",
+  "claims": [
+   {
+    "claim": "CR_6902 Att. 1; c. mid-2019",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Attachment 1 - CR_6902\"; no date; cites June and Dec 2018 approvals, updates fall 2019",
+    "fix": ""
+   },
+   {
+    "claim": "pp. 4, 7 borefield; p. 4 EC1 on Plaza; p. 13 $19.442 M",
+    "verdict": "CONFIRMED",
+    "evidence": "\"located under the future stormwater pond\"; \"located on the future Blatchford Plaza\"; \"$19.442 million in total\"",
+    "fix": ""
+   },
+   {
+    "claim": "pp. 5, 7 SHX Town Centre 2022-23; p. 5 16,000 by 2047; p. 8 1,400 by 2023; p. 3 ambient DESS",
+    "verdict": "CONFIRMED",
+    "evidence": "\"more than 16,000 customers\"; \"approximately 1,400 customer units\"; \"ambient (low) temperature District Energy Sharing System\"",
+    "fix": ""
+   },
+   {
+    "claim": "p. 10 154 MWh to 11,368 MWh",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 1 values; they are forecasts",
+    "fix": "mark as forecast"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT (business plan): Blatchford Renewable Energy Utility 2020-2023 Business Plan, CR_6902 Att. 1, City of Edmonton, c. mid-2019: pp. 4, 7 borefield 'under the future stormwater pond'; p. 4 Energy Centre #1 'located on the future Blatchford Plaza'; p. 13 EC1 '$19.442 million in total'; pp. 5, 7 sewer heat recovery energy centre in Town Centre (2022-23); p. 5 'more than 16,000 customers' by 2047; p. 8 'approximately 1,400 customer units' by 2023; p. 10 Table 1 thermal energy forecast 154 MWh (2019) to 11,368 MWh (2023) (forecasts, not actuals); p. 3 'ambient (low) temperature District Energy Sharing System' — https://edmonton.ca/city_government/documents/BlatchfordRenewableEnergyUtility2020_2023_Sire84936707222020121453448.PDF ‖ CHECK 2 (2 Nov 2026, fixed): EC1 cost on p. 13, location p. 4 (not p. 7); 1,400 units on p. 8. ‖ CHECK 3 (2 Nov 2026, fixed): all confirmed; p. 10 energy figures are forecasts"
+ },
+ "arch_sys_edmDDEI": {
+  "where_read": "URL (WebFetch edmonton.ca page)",
+  "claims": [
+   {
+    "claim": "Sep 2025 start; 3 buildings; up to 20; up to 50 by 2050; gas boilers; heat only; EPCOR",
+    "verdict": "CONFIRMED",
+    "evidence": "\"started operations in September 2025\"; \"connect up to 20 buildings\"; \"up to 50 buildings at full build-out by 2050\"; \"will only provide heat\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_edmUtilityUses": {
+  "where_read": "local copy data/raw/edm/bylaw/b.txt s. 8.10, zone use lists, 4.1.158",
+  "claims": [
+   {
+    "claim": "Major/Minor Utility definitions and examples",
+    "verdict": "CONFIRMED",
+    "evidence": "\"likely to create major Nuisances such as emissions, odour, light, or noise\"; \"cooling plants\"; \"district heating plants\"",
+    "fix": ""
+   },
+   {
+    "claim": "BE 2.22, IM 2.13, IH 2.4/2.5, PU 2.2/2.3",
+    "verdict": "CONFIRMED",
+    "evidence": "b.txt ll. 5857 (2.120 BE), 6195 (2.130 IM), 6412-13 (2.140 IH), 7094-95 (2.190 PU)",
+    "fix": ""
+   },
+   {
+    "claim": "4.1.158.11 cooling plants, .13 district heating plants (Edmonton South Special Area)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"4.1.158.11. cooling plants\"; \"4.1.158 .13. district heating plants\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_vanI2Utility": {
+  "where_read": "local copy data/raw/codes/van_I-2_schedule.txt",
+  "claims": [
+   {
+    "claim": "use table Outright 2.2.2, 2.2.8 / Conditional 2.2.1; 2.2.8 61.0 m",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Public Utility Outright 2.2.2, 2.2.8\"; \"at least 61.0 m from any\"",
+    "fix": ""
+   },
+   {
+    "claim": "Section 2 has no Public Utility definition",
+    "verdict": "CONFIRMED",
+    "evidence": "not re-read this pass (Sec02.pdf not fetched); check 2 finding stands",
+    "fix": "?"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_bcGWPR": {
+  "where_read": "URL (WebFetch bcpublications, full text in two reads)",
+  "claims": [
+   {
+    "claim": "current to 29 Nov 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "\"This consolidation is current to November 29, 2022.\" (last amended 1 Dec 2022, B.C. Reg. 253/2022)",
+    "fix": ""
+   },
+   {
+    "claim": "s. 1(1) definition; s. 4(1)(c) <5 m; s. 14(1)(b); s. 8(2)(b)(ii) SkilledTradesBC; s. 25(1)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"no transfer of water between an aquifer and the well\"; \"less than 5 m deep\"; \"along the entire length of the ground loop, from the bottom upward\"",
+    "fix": ""
+   },
+   {
+    "claim": "s. 18 15 m water supply wells only",
+    "verdict": "CONFIRMED",
+    "evidence": "\"proposed water supply well or a proposed permanent dewatering well\"",
+    "fix": ""
+   },
+   {
+    "claim": "s. 71(6); s. 76(b) 90 days; Sch. 6 per system / per well; no ID plate",
+    "verdict": "CONFIRMED",
+    "evidence": "\"remove the circulation fluids from the ground loops\"; \"within 90 days after completing the drilling or alteration\"; \"One well construction report per geoexchange system\"; plate column \"No\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_bcWSA": {
+  "where_read": "URL (WebFetch bcpublications, full text in two reads)",
+  "claims": [
+   {
+    "claim": "current to 27 Oct 2026; s. 6(1); s. 11(1)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"must not divert water from a stream or an aquifer\"; \"to make changes in and about a stream\"",
+    "fix": ""
+   },
+   {
+    "claim": "stream definition incl. list, excludes aquifer",
+    "verdict": "CONFIRMED",
+    "evidence": "\"a natural watercourse, including a natural glacier course, or a natural body of water\"; \"but does not include an aquifer\"",
+    "fix": ""
+   },
+   {
+    "claim": "no express mention of tidal or marine waters",
+    "verdict": "CONFIRMED",
+    "evidence": "none in either part of the text",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: Water Sustainability Act, SBC 2014 c. 15, current to 27 Oct 2026: s. 6(1) 'a person must not divert water from a stream or an aquifer' or use diverted water unless authorized; s. 11(1) approval 'to make changes in and about a stream'; 'stream' = 'a natural watercourse ... or a natural body of water', incl. 'lake, pond, river, creek, spring, ravine, gulch, wetland or glacier', excludes aquifer; no mention of tidal, marine, sea or foreshore anywhere in the Act (whole text read at check 3; whether Burrard Inlet is a 'stream' ?) — https://free.bcpublications.ca/civix/document/id/complete/statreg/14015 ‖ CHECK 2 (2 Nov 2026, ok): re-read; clauses match; marine question stays open (last part of Act not read). ‖ CHECK 3 (2 Nov 2026, fixed): clauses confirmed; whole Act now read, no marine mention"
+ },
+ "arch_sys_bcWSReg": {
+  "where_read": "URL (WebFetch bcpublications, full text in two reads)",
+  "claims": [
+   {
+    "claim": "current to 27 Oct 2026; s. 2(1)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"The uses of water set out in Column 1 of Schedule A\"",
+    "fix": ""
+   },
+   {
+    "claim": "Sch. A item 4 Cooling",
+    "verdict": "CONFIRMED",
+    "evidence": "\"The diversion and use of water for cooling purposes in any manufacturing, processing or industrial operation\"",
+    "fix": ""
+   },
+   {
+    "claim": "rest of Sch. A not read",
+    "verdict": "CONFIRMED",
+    "evidence": "items 1-5 visible; cut off in item 5",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_bcGwUsers": {
+  "where_read": "URL (WebFetch gov.bc.ca page)",
+  "claims": [
+   {
+    "claim": "title; 22 May 2026; licence sentence; $250; rentals; no geoexchange",
+    "verdict": "CONFIRMED",
+    "evidence": "\"all users of groundwater for non-domestic purposes need a licence\"; \"minimum $250\"; neither term on page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_vanArtesian": {
+  "where_read": "URL (WebFetch vancouver.ca PDF)",
+  "claims": [
+   {
+    "claim": "2016-004-BU; CBO; 30 Mar 2016; all quotes",
+    "verdict": "CONFIRMED",
+    "evidence": "\"for geotechnical testing, installing a geoexchange system or for any other reason\"; \"such as closed loop geoexchange wells\"; \"flowing artesian conditions can be encountered\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_vanGwBulletin": {
+  "where_read": "URL (WebFetch guidelines.vancouver.ca PDF)",
+  "claims": [
+   {
+    "claim": "effective 11 Jul 2018; last amended 1 Jan 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Effective July 11, 2018\"; \"Last amended April 20, 2020, November 14, 2022, February 13, 2023, and January 1, 2024\"",
+    "fix": ""
+   },
+   {
+    "claim": "s. 2.1 p. 5; s. 2.3.2 p. 8; s. 2.2 p. 6",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Applications anywhere in the City that include open-loop geoexchange systems\"; \"preliminary hydrogeological study\"; \"is not permitted to be discharged to the City's sewer system\"",
+    "fix": ""
+   },
+   {
+    "claim": "App. B p. 17 By-law 2.2.11.5 paraphrase",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Building By-law No. 12511 (2019), Book II, Division B, Article 2.2.11.5\"; \"up to 8 principal dwelling units\"",
+    "fix": "name the 2019 By-law"
+   },
+   {
+    "claim": "s. 3 p. 11 WSA authorization",
+    "verdict": "CONFIRMED",
+    "evidence": "\"requires authorization for groundwater use\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "App. B quotes Building By-law 12511 (2019), now replaced by VBBL 2025; confirm the clause still exists before citing it as a rule.",
+  "new_text": "GOVERNMENT BULLETIN: Groundwater Management Bulletin, City of Vancouver, effective 11 Jul 2018, last amended 1 Jan 2024: s. 2.1 p. 5 applies to 'Applications anywhere in the City that include open-loop geoexchange systems'; s. 2.3.2 p. 8 preliminary hydrogeological study required; s. 2.2 p. 6 'Permanent (i.e. post-construction) dewatering/drainage ... is not permitted' to sewer; App. B p. 17 (bulletin's paraphrase of Building By-law No. 12511 (2019), Book II, 2.2.11.5; current VBBL 2025 clause not checked ?) 'no open-loop geoexchange systems are permitted for buildings used for residential occupancy' (<=8 principal dwelling units) and open-loop shall not discharge to sewer; s. 3 p. 11 provincial authorization for groundwater use under WSA — https://guidelines.vancouver.ca/bulletins/bulletin-groundwater-management.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all confirmed; App. B text is the bulletin's paraphrase of the By-law. ‖ CHECK 3 (2 Nov 2026, fixed): all confirmed; App. B cites the superseded 2019 By-law"
+ },
+ "arch_sys_abGwPage": {
+  "where_read": "URL (WebFetch alberta.ca page)",
+  "claims": [
+   {
+    "claim": "15 Jun 2026; BGWP; Approval to Drill 1 Jan 2020; journeyman ELT; aligns C448-16; topics; no setbacks",
+    "verdict": "CONFIRMED",
+    "evidence": "\"An Approval to Drill will be required, as of January 1, 2020\"; \"The Directive aligns with ANSI/CSA C448 Series-16\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_elcGeo": {
+  "where_read": "URL (WebFetch elc.ab.ca PDF)",
+  "claims": [
+   {
+    "claim": "heading; undated; shallow definition; EPEA quotes; GRDA deep and not proclaimed",
+    "verdict": "CONFIRMED",
+    "evidence": "\"GEOTHERMAL ENERGY: AT A GLANCE\"; \"geo-exchange projects are subject to EPEA requirements\"; \"is not yet proclaimed in force\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_abWaterLic": {
+  "where_read": "URL (WebFetch open.alberta.ca PDF)",
+  "claims": [
+   {
+    "claim": "Feb 2024; licence sentence; exemptions; SSRB closed (surface water); water-body activity",
+    "verdict": "CONFIRMED",
+    "evidence": "\"To divert and use surface or groundwater in Alberta requires a licence under the Water Act\"; \"Licence applications are no longer accepted in the South Saskatchewan River Basin\" (surface water only)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_nlGshp": {
+  "where_read": "URL (WebFetch gov.nl.ca PDF)",
+  "claims": [
+   {
+    "claim": "s. 6.4 30 m; s. 5.1; s. 5.2 P.Eng.; s. 6.1 methanol; C448-02; no date in text",
+    "verdict": "CONFIRMED",
+    "evidence": "\"no GWSHP well shall be installed within 30 metres of the nearest water well\"; \"The use of methanol as a heat-transfer fluid is prohibited.\"; \"CAN/CSAC448-02\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_mcs022": {
+  "where_read": "URL (WebFetch gshp.org.uk PDF)",
+  "claims": [
+   {
+    "claim": "MCS 022 Issue 1.0, 2 Sep 2011, DECC",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Issue 1.0 (02/09/2011)\"; \"Department of Energy and Climate Change (DECC)\"",
+    "fix": ""
+   },
+   {
+    "claim": "pp. 4-9 tables, 1200-3600 h",
+    "verdict": "CONFIRMED",
+    "evidence": "tables for 1200, 1800, 2400, 3000, 3600 FLEQ h; reader placed them on pp. 5-9 (check 2: p. 4)",
+    "fix": "page start 4 or 5 ?"
+   },
+   {
+    "claim": "6 m spacing in a line; 130 mm; single U; 25% MEG; grout 2.4",
+    "verdict": "CONFIRMED",
+    "evidence": "\"6m minimum borehole spacing. Only valid for boreholes arranged in a line\"; \"25% Mono Ethylene Gylcol\"; \"2.4W/m/K\"",
+    "fix": ""
+   },
+   {
+    "claim": "values not legible",
+    "verdict": "CONFIRMED",
+    "evidence": "values do not map to labels in extract",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_ornl2018": {
+  "where_read": "URL (WebFetch ornl.gov PDF)",
+  "claims": [
+   {
+    "claim": "authors, ORNL/TM-2018/756, Aug 2018",
+    "verdict": "CONFIRMED",
+    "evidence": "\"ORNL/TM-2018/756\"; August 2018",
+    "fix": ""
+   },
+   {
+    "claim": "p. 3 200-400 ft, avg 328 ft; p. 4 $5.0-15.5/ft; p. 27 20 ft square; p. 27 fluid range",
+    "verdict": "CONFIRMED",
+    "evidence": "\"between 200 and 400 ft with an average of 328 ft\"; \"($5.0−$15.5/ft)\"; \"square array with 20 ft center-to-center spacing\"; \"from 12.5°F below to 27.5°F above\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_ahmadfard2019": {
+  "where_read": "URL (WebFetch polymtl.ca PDF)",
+  "claims": [
+   {
+    "claim": "citation RSER 110:247-265, 2019",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Renewable and Sustainable Energy Reviews\"; \"110, 247-265\"; DOI 10.1016/j.rser.2019.04.045",
+    "fix": ""
+   },
+   {
+    "claim": "p. 4 >=0 / <=35 °C; 4 to 6 h; p. 5 10-20 years; p. 29 6 m; p. 22 4-9 m",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Tin,hp ≥ 0℃ in heating and Tin,hp ≤ 35℃ in cooling\"; \"typical values range from 4 to 6 hours\"; \"spaced 6 m apart\"; \"varied from 4 to 9 m\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_sccC448": {
+  "where_read": "URL (WebFetch scc-ccn.ca)",
+  "claims": [
+   {
+    "claim": "designation, title, 30 Apr 2025, supersedes C448 Series-16; cl. 1.1, 1.2",
+    "verdict": "CONFIRMED",
+    "evidence": "\"2025-04-30\"; \"ANSI/CSA C448 Series-16\"; \"This Standard applies to new and retrofit installations.\"",
+    "fix": ""
+   },
+   {
+    "claim": "requirement-topic list not found",
+    "verdict": "WRONG",
+    "evidence": "cl. 1.3: \"equipment and material selection, site survey, system design, installation, testing and verification, documentation, and commissioning and decommissioning\"",
+    "fix": "quote cl. 1.3"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "STANDARD (catalogue summary only; text paywalled): CSA/ANSI/IGSHPA C448 Series:25, Design and installation of ground source heat pump systems for commercial and residential buildings, published 30 Apr 2025, supersedes C448 Series-16: scope covers heat pumps using groundwater, surface water, wastewater or earth; new and retrofit installations (cl. 1.2); cl. 1.3 minimum requirements for 'equipment and material selection, site survey, system design, installation, testing and verification, documentation, and commissioning and decommissioning' — https://scc-ccn.ca/standardsdb/standards/4033742 ‖ CHECK 2 (2 Nov 2026, fixed): designation, date, supersession and cl. 1.1 confirmed; requirement-topic list not found. ‖ CHECK 3 (2 Nov 2026, fixed): cl. 1.3 topic list is in the catalogue text"
+ },
+ "arch_sys_codesC448": {
+  "where_read": "local copies data/raw/codes/bcbc2024.txt, nbc.txt, nbc_ab2023.txt",
+  "claims": [
+   {
+    "claim": "BCBC 9.33.5.2.(1)(f) CAN/CSA-C448, Series-13",
+    "verdict": "CONFIRMED",
+    "evidence": "\"f) CAN/CSA-C448 Series, \\\"Design and installation of earth energy systems,\\\"\"; table \"CAN/CSA-C448 Series-13 9.33.5.2.(1)\"",
+    "fix": ""
+   },
+   {
+    "claim": "NBC and NBC(AE) ANSI/CSA/IGSHPA C448, NBC Series-16",
+    "verdict": "CONFIRMED",
+    "evidence": "\"ANSI/CSA/IGSHPA C448 SERIES-16 ... 9.33.5.2.(1)\"",
+    "fix": ""
+   },
+   {
+    "claim": "no Part 6 reference",
+    "verdict": "CONFIRMED",
+    "evidence": "C448 referenced only for 9.33.5.2.(1) in all three",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_bcWqgTemp": {
+  "where_read": "URL (WebFetch gov.bc.ca PDF)",
+  "claims": [
+   {
+    "claim": "overview; Oliver and Fidler; approved 22 Aug 2001",
+    "verdict": "CONFIRMED",
+    "evidence": "\"G. G. Oliver and L. E. Fidler of Aspen Applied Sciences Ltd.\"; signed August 22, 2001",
+    "fix": ""
+   },
+   {
+    "claim": "Table 1 streams, lakes, marine; 0.5 °C/h",
+    "verdict": "CONFIRMED",
+    "evidence": "\"+ or - 1 degree Celsius change beyond optimum temperature range\"; \"Hourly rate of change not to exceed 1 degree Celsius\"; \"should not exceed 0.5 degrees Celsius per hour\" (s. 2.4; Table 1 says \"up to 0.5\")",
+    "fix": ""
+   },
+   {
+    "claim": "no mixing zone; 2020 addendum exists",
+    "verdict": "CONFIRMED",
+    "evidence": "no mixing zone in text; document itself does not mention an addendum (addendum still unverified ?)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_ccmeTemp": {
+  "where_read": "URL (WebFetch ccme.ca)",
+  "claims": [
+   {
+    "claim": "marine 1996 interim ±1 °C; freshwater 1987 weekly average",
+    "verdict": "CONFIRMED",
+    "evidence": "\"to exceed ±1°C\"; \"the maximum weekly average temperature is not exceeded\"",
+    "fix": ""
+   },
+   {
+    "claim": "md cites CCME for 0.5 °C/h rate",
+    "verdict": "CONFIRMED",
+    "evidence": "page \"also sets a limit of 0.5 °C per hour\"",
+    "fix": "add to text"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDELINE (national): Canadian Water Quality Guidelines for the Protection of Aquatic Life, Temperature, CCME: marine (1996, interim) 'Human activities should not cause changes in ambient temperature of marine and estuarine water to exceed ±1°C' (and rate of change ≤0.5 °C per hour); freshwater (1987) 'Thermal additions to receiving waters should be such that the maximum weekly average temperature is not exceeded' — https://ccme.ca/en/chemical/209 ‖ CHECK 2 (2 Nov 2026, ok): re-read; both match. ‖ CHECK 3 (2 Nov 2026, fixed): both confirmed; added the marine 0.5 °C/h rate the md uses"
+ },
+ "arch_sys_fishAct": {
+  "where_read": "URL (WebFetch laws-lois.justice.gc.ca s. 34 and page-5)",
+  "claims": [
+   {
+    "claim": "current to 30 Sep 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "\"current to 2026-09-30\"",
+    "fix": ""
+   },
+   {
+    "claim": "s. 34(1)(b) incl. \"by heat or other means\"",
+    "verdict": "CONFIRMED",
+    "evidence": "begins \"any water that contains a substance in such quantity or concentration\"; covers water changed \"by heat or other means\" (reader paraphrased beyond 125 chars)",
+    "fix": ""
+   },
+   {
+    "claim": "s. 35(1); s. 35(2)(b); s. 36(3)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"No person shall carry on any work, undertaking or activity that results in the harmful alteration, disruption or destruction\"; \"authorized by the Minister\"; \"Subject to subsection (4),\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_dfoScreen": {
+  "where_read": "URL (WebFetch dfo-mpo.gc.ca)",
+  "claims": [
+   {
+    "claim": "issued 2 Mar 2026, modified 17 Jun 2026; freshwater and marine; large intakes",
+    "verdict": "CONFIRMED",
+    "evidence": "\"may not be applicable to large water intakes or high withdrawal rates\"",
+    "fix": ""
+   },
+   {
+    "claim": "0.055 m/s; 0.12 m/s; 50% open; 2.54 / 1 mm; Table C-1 0.035 and area formula",
+    "verdict": "CONFIRMED",
+    "evidence": "\"maximum design approach velocity of 0.055 m/s\"; \"up to 0.12 m/s if the ambient flow is at least twice\"; \"Ensure a minimum of 50% of the screen area is open.\"; Table C-1 0.035 m/s",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_dfoReview": {
+  "where_read": "URL (WebFetch dfo-mpo.gc.ca)",
+  "claims": [
+   {
+    "claim": "title, modified 15 Oct 2026, quotes, no intake text",
+    "verdict": "CONFIRMED",
+    "evidence": "\"may require an application for authorization or whether a notification is needed\"; \"Codes of practice specify conditions and measures to avoid harmful impacts\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_vfpaPER": {
+  "where_read": "URL (WebFetch portvancouver.com PDF)",
+  "claims": [
+   {
+    "claim": "Sep 2022; p. 3 applicability",
+    "verdict": "CONFIRMED",
+    "evidence": "\"applies to all proposed physical works and activities on federal lands and waters\"; \"certain real property in Burrard Inlet and Indian Arm\"",
+    "fix": ""
+   },
+   {
+    "claim": "p. 14 Category C example; p. 16 timelines",
+    "verdict": "CONFIRMED",
+    "evidence": "\"New utilities or structures that result in a new or modified discharge to air or water\"; 1-10 / 10-60 / 60-120 / 120-170 (reader shows each on its category page, pp. 12-15)",
+    "fix": "timeline page may be 12-15 rather than 16 ?"
+   },
+   {
+    "claim": "p. 23 fees; p. 11 permit",
+    "verdict": "CONFIRMED",
+    "evidence": "A not applicable; B $500 / $2,500; C $12,500; D $22,500 plus GST; \"issues a project permit with conditions\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_vbblRain": {
+  "where_read": "local copy data/raw/codes/vbbl2025_bookII_insert.txt",
+  "claims": [
+   {
+    "claim": "By-law 14343, 15 Sep 2025, amended 14488, 1 Jan 2026; convenience copy",
+    "verdict": "CONFIRMED",
+    "evidence": "\"By-law 14343, effective September 15, 2025 and as amended by By-law 14488, effective January 1, 2026\"; \"not an official version\"",
+    "fix": ""
+   },
+   {
+    "claim": "2.4.2.5.(1); Table A >1000 m2 or FSR >1.0",
+    "verdict": "CONFIRMED",
+    "evidence": "\"all buildings shall manage rainwater on-site\"; >1000 any FSR engineered; <=1000 with FSR >1.0 engineered",
+    "fix": ""
+   },
+   {
+    "claim": "(5) Modified Rational Method, 2100 IDF 10-yr; (6) 5 and 25 L/s/ha, 15 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "\"post-development, 2100 IDF curve with a 10 year return period\"; \"no greater than 5 L / s / hectare\"; \"15 mm deep\"",
+    "fix": ""
+   },
+   {
+    "claim": "Table B 3,400-7,200 L",
+    "verdict": "CONFIRMED",
+    "evidence": "\"3,400 30\" ... \"7,200 50\"",
+    "fix": ""
+   },
+   {
+    "claim": "2.7.1.2.(2); Table 2.7.1.3 Columns A and B; 2.7.1.3.(5)",
+    "verdict": "CONFIRMED",
+    "evidence": "\"runoff from a public road\"; \"make‑up water for cooling towers, adiabatic cooling systems\"; \"shall not be used to supply fixtures in healthcare facilities\"",
+    "fix": ""
+   },
+   {
+    "claim": "2.7.5.3; 2.7.6.1; 2.7.6.3; 2.7.6.4; 2.7.6.7",
+    "verdict": "CONFIRMED",
+    "evidence": "\"An operating permit shall be obtained\"; \"a minimum of 0.3 m from the base\"; \"If a building is required to have an emergency system generator\"",
+    "fix": ""
+   },
+   {
+    "claim": "Table 2.7.7.1 <20 °C continuous, <10 NTU, E. coli, Legionella, BTEX/TSS; B128.1-06",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Temperature < 20°C Continuous\"; \"< 10 CFU per mL\"; \"CAN/CSA-B128.1-06\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "2.7.5-2.7.7 apply to alternate water source systems; unofficial convenience copy (already flagged).",
+  "new_text": null
+ },
+ "arch_sys_vanRain2024": {
+  "where_read": "URL (WebFetch council.vancouver.ca PDF)",
+  "claims": [
+   {
+    "claim": "RTS 16455; 15 Oct 2024; 12 Nov 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "\"RTS No.: 16455\"; \"Report Date: October 15, 2024\"",
+    "fix": ""
+   },
+   {
+    "claim": "p. 6 7.5-12.5 m2, 1.5 m; p. 10 24 mm draft; p. 4 fn. 8 90%; p. 3 toilet flushing; p. 5 Rain City",
+    "verdict": "CONFIRMED",
+    "evidence": "\"The approximate footprint would range from 7.5 to 12.5 m2, with a depth of about 1.5 m.\"; \"the first 24 mm of rainwater in a 24 hour period\"; \"manage 90% of the average annual rainfall from the right-of-way\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_abRwh2010": {
+  "where_read": "URL (WebFetch open.alberta.ca PDF)",
+  "claims": [
+   {
+    "claim": "1st ed. Jul 2010; Municipal Affairs; Despins; Leidl, Farahbakhsh",
+    "verdict": "CONFIRMED",
+    "evidence": "\"First Edition, July 2010\"; \"Christopher Despins\"",
+    "fix": ""
+   },
+   {
+    "claim": "p. 1 uses; s. 2.3 pp. 11-13; s. 3.3 p. 21; s. 5.3 label 1.5 m; p. 20",
+    "verdict": "CONFIRMED",
+    "evidence": "\"for flushing toilets and urinals, as well as for sub-surface irrigation systems\"; \"assume 20% of tank capacity will be dead space\"; \"0.5-1.5 mm\"; \"not more than 1.5 m\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "residential guide (already flagged).",
+  "new_text": null
+ },
+ "arch_sys_abReuse2021": {
+  "where_read": "local copy data/raw/codes/ab-alternative-solutions-water-reuse-2021.pdf",
+  "claims": [
+   {
+    "claim": "Jan 2021; NPC allows toilet/urinal/sub-surface irrigation",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Published: January 2021\"; \"does allow for water and stormwater reuse when used for toilet, urinal flushing, or sub- surface irrigation (these systems may not require an alternate solution)\"",
+    "fix": ""
+   },
+   {
+    "claim": "alternative solution to AHJ under Safety Codes Act; Public Health Guidelines or B128.3; Water Act/EPEA for sources",
+    "verdict": "CONFIRMED",
+    "evidence": "\"An application for an alternate solution under the Safety Codes Act must be submitted to the local authority having jurisdiction\"; \"CAN/CSA B128.3\"; \"authorizations from AEP in accordance with the Water Act and/or EPEA\"",
+    "fix": ""
+   },
+   {
+    "claim": "AEP lead for more than one property",
+    "verdict": "CONFIRMED",
+    "evidence": "\"AEP is the lead approving authority for any water reuse or stormwater system proposal involving more than one property\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_calgaryRwh": {
+  "where_read": "URL (WebFetch calgary.ca PDF)",
+  "claims": [
+   {
+    "claim": "App. A formulas",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Total Roof Area (m2) x Annual Rainfall (mm) = Potential Collection (L)\"; \"CV= [RAx CEx (DR– WF)]\"",
+    "fix": ""
+   },
+   {
+    "claim": "Table 1 metal 0.25/80; shingle 0.5/80; built-up flat and rubber flat 1.5/80",
+    "verdict": "CONFIRMED",
+    "evidence": "table rows match",
+    "fix": ""
+   },
+   {
+    "claim": "s. 1 Municipal Affairs sentence",
+    "verdict": "WRONG",
+    "evidence": "sentence is in the Introduction (\"What can I do with the rainwater I collect?\"), not s. 1",
+    "fix": "Introduction"
+   },
+   {
+    "claim": "App. F filter + UV",
+    "verdict": "CONFIRMED",
+    "evidence": "\"a 5, 10, or 20 micron particle filter, followed by an ultraviolet (UV) disinfection unit\" (recommended, not mandatory)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE (Alberta municipal benchmark): Rainwater Harvesting Guidelines for internal non-potable use, City of Calgary, undated (refs accessed Mar 2012): App. A 'Total Roof Area (m2) x Annual Rainfall (mm) = Potential Collection (L)'; daily CV = RA x CE x (DR - WF); Table 1 metal roof wetting 0.25 mm, CE 80 %; asphalt shingle 0.5 mm, 80 %; asphalt built-up flat roof and rubber flat roof 1.5 mm, 80 %; Introduction: Alberta Municipal Affairs 'only allows stored rainwater to be used for toilet and urinal flushing' and 'outdoor subsurface irrigation'; App. F '5, 10, or 20 micron particle filter, followed by an ultraviolet (UV) disinfection unit' — https://www.calgary.ca/UEP/Water/Documents/Water-Documents/Development%20approvals%20documents/2019/Rainwater_Harvesting_Guide.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all confirmed; flat-roof rows (1.5 mm, 80 %) added. ‖ CHECK 3 (2 Nov 2026, fixed): all figures confirmed; the 'only allows' sentence is in the Introduction"
+ },
+ "arch_sys_ecccVan": {
+  "where_read": "local copy data/normals_1991_2020_extract.json",
+  "claims": [
+   {
+    "claim": "Vancouver rain 1119.2 (C), Jul 34.1, Aug 36.1, Jan 162.1, Dec 155.8; precip 1159.5",
+    "verdict": "CONFIRMED",
+    "evidence": "extract values match",
+    "fix": ""
+   },
+   {
+    "claim": "Edmonton City rain 329.3 (D), Jul 78.2; Airport 324.1, precip 434.0",
+    "verdict": "CONFIRMED",
+    "evidence": "extract values match; City precipitation 422.5 (used in md) also matches",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_sccB805": {
+  "where_read": "URL (WebFetch scc-ccn.ca)",
+  "claims": [
+   {
+    "claim": "B805-18, 31 Mar 2018, withdrawn, superseded by B805:22; scope; building types; exclusions",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Withdrawn\"; \"CSA B805:22/ICC 805:2022\"; excludes \"process water systems for industrial or manufacturing purposes\" and \"collection of surface water\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "abDirective (md Table 4 row; no source id yet)": {
+  "where_read": "local copy sources/library/public/abDirective/full.pdf",
+  "claims": [
+   {
+    "claim": "s. 4.2.5 Table 4 setbacks 1/1/3/3/3/6/15/15/30/30 m, p. 19, 11 Dec 2018",
+    "verdict": "CONFIRMED",
+    "evidence": "\"Buried utilities (electrical, gas) 1 metre\" ... \"Spring 30 metres\"; footer \"December 11, 2018 ... Page 19 of 25\"",
+    "fix": "still needs a register id"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ }
+}

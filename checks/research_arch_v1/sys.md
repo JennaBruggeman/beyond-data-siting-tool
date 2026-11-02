@@ -32,15 +32,15 @@ Group E per BRIEF_v2.md. New ids → `sys_sources.json` (`arch_sys_*`). Reused, 
 | Per-unit heat demand | 75 m² suite "average energy demand of 8.2 megawatt-hours (MWh) per year" (≈109 kWh/m²·yr, our arithmetic) | arch_sys_neuRates2026 | p. 3 | government report | 80 |
 | NEU renewable share | "70% ... mostly from sewage heat recovery"; gas boilers back-up | arch_sys_vanSefcPage; arch_sys_neuRates2022 | page; App. B p. 1 | government | 80 |
 | NEU and data centres | data centres named as a potential source; no connection confirmed | arch_sys_neuRates2026 | App. B p. 7; App. D pp. 3–4 | government report | 80 |
-| Vancouver energy centre guidelines | centres "up to 50 megawatts"; address "traffic, noise, and/or odour" (no numbers); MV Bylaw 1087 (air) applies; truck hours may be controlled | arch_sys_vanNES2012 | App. A s. 2.2, 3.0, 3.2 | government policy (PDF unreachable at check 2; not re-verified ?) | 60 |
+| Vancouver energy centre guidelines | centres "up to 50 megawatts"; address "traffic, noise, and/or odour" (no numbers); MV Bylaw 1087 (air) applies; truck hours may be controlled | arch_sys_vanNES2012 | App. A s. 2.2, 3.0, 3.2 | government policy (PDF unreachable at checks 2 and 3; not verified ?) | 60 |
 | UBC Campus Energy Centre | 3 × 15.0 MWt boilers = 45 MWt; building 1,858 m² (DP) / 2,000 m² (facilities record) | arch_sys_ubcAdes2019; arch_sys_ubcCecBldg | p. 5; DP 12029 | institution | 80 |
 | **m² per MW (boiler plant)** | 1,858–2,000 m² ÷ 45 MW ≈ **41–44 m²/MW** | our arithmetic | — | our arithmetic | 55 |
-| UBC W/m² served | 45 MW ÷ ~929,000 m² ≈ 48 W/m² (boilers only) | our arithmetic from arch_sys_ubcAdes2019 | Fast Facts box (10 M sq ft), p. 5 | our arithmetic | 50 |
+| UBC W/m² served | 45 MW ÷ ~929,000 m² ≈ 48 W/m² (boilers only) | our arithmetic from arch_sys_ubcAdes2019 | Fast Facts box (10 M sq ft) p. 2; boilers p. 5 | our arithmetic | 50 |
 | m² per MW (heat-pump plant) | not found (Danish Energy Agency catalogue truncated in fetch) | — | — | — | ? |
 | Blatchford central plant | 1 MW ammonia heat pump; Phase 1 "3 Megawatts"; full 35–46 MW; "up to six Energy Centres" | arch_sys_breIdea2021 | award entry | operator claim | 55 |
 | Blatchford loop temperature | "10 to 25 C"; kept above 10 C, no antifreeze | arch_sys_breIdea2021 | award entry | operator claim | 55 |
 | Blatchford sewer heat (Phase 2) | trunk up to 500 L/s at 25 C; "up to 13 Megawatts of heating and 23 Megawatts of cooling" | arch_sys_breIdea2021 | award entry | operator claim | 50 |
-| Blatchford energy and growth | 154 MWh (2019) → 11,368 MWh (2023); ~1,400 units by 2023; ">16,000 customers" by 2047; EC1 cost "$19.442 million in total", on the future Blatchford Plaza | arch_sys_breBP2020 | energy p. 10; units p. 8; customers p. 5; EC1 cost p. 13, location p. 4 | government business plan | 75 |
+| Blatchford energy and growth | 154 MWh (2019) → 11,368 MWh (2023) (forecasts, Table 1); ~1,400 units by 2023; ">16,000 customers" by 2047; EC1 cost "$19.442 million in total", on the future Blatchford Plaza | arch_sys_breBP2020 | energy p. 10; units p. 8; customers p. 5; EC1 cost p. 13, location p. 4 | government business plan | 75 |
 | Edmonton DDEI | running since Sep 2025; 3 buildings; Phase 2 "up to 20 buildings"; 50 by 2050; gas boilers at first; heat only (phases 1–2) | arch_sys_edmDDEI | web page | government | 80 |
 | Fire separation (code) | fuel-fired appliances in a service room with ≥1 h separation (3.6.2.1.(1)); other service equipment 1 h if the storey is not sprinklered (3.6.2.1.(7)); not needed for limited, non-hazardous equipment (3.6.2.1.(8)) | arch_nbc3628 (nbc.txt) | NBC 3.6.2.1 | rule | 90 |
 | Fire separation vs F-2 data hall | energy centre as its own major occupancy (F-2? F-3?): not determined | — | Table 3.1.3.1 | — | ? |
@@ -73,7 +73,7 @@ Group E per BRIEF_v2.md. New ids → `sys_sources.json` (`arch_sys_*`). Reused, 
 | BC in-stream works | approval "to make changes in and about a stream" | arch_sys_bcWSA | s. 11(1) | rule | 85 |
 | Is Burrard Inlet a WSA "stream"? | definition silent on marine waters | arch_sys_bcWSA | s. 1 | — | ? |
 | Port lands and waters (Vancouver) | Port PER permit for works on federal lands and waters (Burrard Inlet, Fraser); a new discharge to water = Category C example; 60–120 business days; fee $12,500 + GST (Category A "N/A"; B $500 or $2,500; D $22,500; all plus GST); port authority "issues a project permit with conditions" | arch_sys_vfpaPER | pp. 3, 11, 14, 16, 23 | government agency guide | 75 |
-| Alberta water licence | "To divert and use surface or groundwater ... requires a licence under the Water Act"; South Saskatchewan basin closed (Edmonton is in the North Saskatchewan basin, so it is not affected) | arch_sys_abWaterLic | fact sheet | government guide | 80 |
+| Alberta water licence | "To divert and use surface or groundwater ... requires a licence under the Water Act"; South Saskatchewan basin closed to new surface-water licences (Edmonton is in the North Saskatchewan basin, so it is not affected) | arch_sys_abWaterLic | fact sheet | government guide | 80 |
 | Alberta discharge approval (EPEA) | not confirmed | — | — | — | ? |
 | Edmonton river valley development limits | not checked | — | — | — | ? |
 | River water temperature (Fraser, North Saskatchewan) | not found | — | — | — | ? |
@@ -96,22 +96,22 @@ Group E per BRIEF_v2.md. New ids → `sys_sources.json` (`arch_sys_*`). Reused, 
 | BC: exemption | horizontal loops <5 m deep exempt | arch_sys_bcGWPR | s. 4(1)(c) | rule | 85 |
 | BC: setbacks | none found for closed-loop wells (s. 18's 15 m applies to water supply wells only) | arch_sys_bcGWPR | s. 18 | rule | 70 |
 | BC: water licence | closed loop: no diversion, so likely none (our reading); open loop: licence for non-domestic groundwater use | arch_sys_bcGWPR; arch_sys_bcGwUsers | s. 1(1); page "Requirements for groundwater users" | rule; government guide | 70 |
-| Vancouver | artesian risk "large areas of the City located over aquifers"; open loop: hydrogeological study, no sewer discharge, not for ≤8-unit residential | arch_sys_vanArtesian; arch_sys_vanGwBulletin | 2016-004-BU; s. 2.1, 2.3.2, App. B | government bulletin | 80 |
+| Vancouver | artesian risk "large areas of the City located over aquifers"; open loop: hydrogeological study, no sewer discharge, not for ≤8-unit residential (bulletin quotes the 2019 By-law 12511; VBBL 2025 clause ?) | arch_sys_vanArtesian; arch_sys_vanGwBulletin | 2016-004-BU; s. 2.1, 2.3.2, App. B | government bulletin | 80 |
 | Alberta | Water Wells and Ground Source Heat Exchange Systems Directive (above the Base of Groundwater Protection); Approval to Drill since 1 Jan 2020; certified journeyman Earth Loop Technician; aligns with C448-16 | arch_sys_abGwPage | web page | government | 80 |
 | Alberta setbacks (vertical closed loop) | buried electrical/gas 1 m; existing or planned building or above-ground structure 1 m; property line 3 m; buried water 3 m; gravity sewer lateral 3 m; pumped sewer lateral 6 m; water well 15 m; septic tank 15 m; subsurface sewage leaching field 30 m; spring 30 m | — (Water Wells and GSHE Systems Directive, AEP Water Quality 2018 No.3, eff. 11 Dec 2018; local copy sources/library/public/abDirective/full.pdf; new source id needed ?) | s. 4.2.5, Table 4, p. 19 | rule | 85 |
 | Alberta reporting | not read this pass ? | — | — | — | ? |
 | Alberta EPEA | geoexchange "subject to EPEA requirements" (secondary summary, not primary) | arch_sys_elcGeo | one-pager | legal NGO summary | 40 |
 | Canadian benchmark setback | NL: no well within 30 m of the nearest water well; no methanol | arch_sys_nlGshp | s. 6.4, 6.1 | government guide (NL) | 70 |
 | Codes | C448 cited only for Part 9 housing (9.33.5.2.(1)(f)); BCBC cites old Series-13 | arch_sys_codesC448 | 9.33.5.2 | rule | 85 |
-| CSA C448:25 | scope only: GSHP using groundwater, surface water, wastewater or earth; new and retrofit installations (cl. 1.2); list of requirement topics ? | arch_sys_sccC448 | catalogue cl. 1.1–1.2 | standard summary | 50 |
+| CSA C448:25 | scope only: GSHP using groundwater, surface water, wastewater or earth; new and retrofit installations (cl. 1.2); cl. 1.3 topics: equipment and materials, site survey, design, installation, testing, documentation, commissioning and decommissioning | arch_sys_sccC448 | catalogue cl. 1.1–1.2 | standard summary | 50 |
 | Edmonton by-law for boreholes | not found | — | — | — | ? |
 
 ## 4. Rain tank
 
 | what | value | source id | where | kind | conf. |
 |---|---|---|---|---|---|
-| Yield formula | roof m² × rainfall mm = litres; 80 % collection efficiency (metal and asphalt roofs) | arch_sys_calgaryRwh | App. A, Table 1 | government guide (Calgary) | 75 |
-| Flat membrane roof efficiency | not found | — | — | — | ? |
+| Yield formula | roof m² × rainfall mm = litres; 80 % collection efficiency (metal, asphalt shingle and flat roofs) | arch_sys_calgaryRwh | App. A, Table 1 | government guide (Calgary) | 75 |
+| Flat roof efficiency | 80 % for asphalt built-up flat and rubber flat roofs (wetting loss 1.5 mm) | arch_sys_calgaryRwh | App. A, Table 1 | government guide (Calgary) | 75 |
 | Rainfall, Vancouver | 1119.2 mm/yr rain (precipitation 1159.5); July 34.1 mm, Aug 36.1 mm | arch_sys_ecccVan (eccc) | normals 1991–2020 | government data | 90 |
 | Rainfall, Edmonton | 329.3 mm/yr rain (City); precipitation 422.5 mm | arch_sys_ecccVan; src_fill_ecccEdmCity | normals | government data | 90 |
 | **Net yield per m² roof** | Vancouver ≈ **0.90 m³/m²·yr**; Edmonton ≈ **0.26 m³/m²·yr** (rain only × 0.8) | our arithmetic | — | our arithmetic | 60 |
@@ -139,7 +139,7 @@ Group E per BRIEF_v2.md. New ids → `sys_sources.json` (`arch_sys_*`). Reused, 
 - Whether Burrard Inlet is a WSA "stream"; the rest of WSR Schedule A and its rentals.
 - Edmonton Drainage Bylaw temperature limit; whether a private energy centre is a Vancouver "Public Utility" (no definition in Section 2); zoning for plant rooms in I-1, I-3, M-1, M-2, IC.
 - Code occupancy of a stand-alone energy centre and its separation from F-2.
-- Collection efficiency for flat membrane roofs; whether roof rainwater needs a water licence.
+- Whether roof rainwater needs a water licence.
 
 ## Paywalled / blocked
 - CSA C448:25 (and C448-16), CSA B805:22, CSA B52, CSA B128.1/.3, VDI 4640, ASHRAE geothermal chapters: paywalled (catalogue summaries only).
@@ -151,3 +151,5 @@ Group E per BRIEF_v2.md. New ids → `sys_sources.json` (`arch_sys_*`). Reused, 
 - Fisheries Act page-8 URL refused (provenance); sections read from other official pages instead.
 
 Check 2 applied (2 Nov 2026)
+
+Check 3 applied (2 Nov 2026)

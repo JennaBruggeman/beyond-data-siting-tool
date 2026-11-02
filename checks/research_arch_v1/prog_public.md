@@ -281,3 +281,5 @@ Group C per BRIEF_v2.md. Source ids → `prog_public_sources.json` (`arch_pub_*`
 - UK DfE GDB Annex 2F: withdrawn, redirected.
 
 Check 2 applied (2 Nov 2026)
+
+Check 3 applied (2 Nov 2026)
