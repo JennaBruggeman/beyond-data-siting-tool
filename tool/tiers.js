@@ -22,6 +22,9 @@ BD.setTier=t=>{ tier=t; try{ localStorage.setItem(KEY,t); }catch(e){} document.b
 if(tier) document.body.dataset.tier=tier;
 BD.TPL=null;
 fetch('templates.json').then(r=>r.ok?r.json():null).then(d=>{ BD.TPL=d; }).catch(()=>{});
+/* 2 Nov 2026 fix pass: A-eng (J.B. triage 30 Oct 2026): an add-on whose register try_menu entry has tier 'full' (greywater, blackwater,
+   blowdown recovery, condensate, cleaner backup fuel, hot or chilled water tank, buying new clean power) shows only in that template */
+BD.tierAllows=t=>{ const rank={resident:0,community:1,full:2}; return !t||!(t in rank)||rank[t]<=rank[BD.tier()]; };
 BD.tierShows=(node,t)=>{ const T=BD.TPL; if(!T||!T.nodes[node]) return true; const rank={resident:0,community:1,full:2}; return rank[T.nodes[node].tier]<=rank[t||BD.tier()]; };
 
 /* ---------- the choice, inside the landing card ---------- */
@@ -97,7 +100,7 @@ function residentCard(){ const A=BD.S.answers, m=BD.model&&BD.model(); if(!m) re
    <h3>Where the plant goes</h3><div class="dch" role="radiogroup">${[['roof','Roof'],['yard','Yard']].map(([v,t])=>`<button role="radio" data-pw="${v}" aria-checked="${(A.resPlant||where)===v}">${t}</button>`).join('')}</div>
    <p class="sub">Cooling units and backup generators together. ${A.resNote?esc(A.resNote)+' ':''}${A.resPlant?(A.resPlant==='roof'?'The yard stays as free as the lot allows.':'The building gets shorter to leave the yard for plant.'):whereNow||(where==='roof'?'The yard stays free; whatever the roof cannot hold is placed in the yard.':'The building gets shorter to leave the yard for plant.')}</p>
    ${nothing?`<p class="dwarn">Nothing fits on this lot with these choices: ${esc(probs.join(' '))} Change a choice below, or try another lot.</p>`:`
-   <h3>How big</h3><p class="sub">${M&&M.sizedTo?`${esc(A.mw.toFixed(1))} MW of servers: ${store}, any shape`:`The most the zone allows: ${store}, about ${f.mw[0].toFixed(1)}–${hi.toFixed(1)} MW of servers depending on how tightly racks are packed${hi>=40?' (the tool stops at 40 MW)':''}`}. "Typical" is the size of data centres already built inside Vancouver, Edmonton and Calgary, about 2–2.5 MW (operator claims)${hi<TYPICAL_MW?`; this lot fits only ${hi.toFixed(1)} MW`:''}.</p>`}
+   <h3>How big</h3><p class="sub">${M&&M.sizedTo?`${esc(A.mw.toFixed(1))} MW of servers: ${store}, any shape (our arithmetic: 460 m² of hall per MW ÷ 0.6 hall share, the midpoints)${''/* 2 Nov 2026 fix pass: D-arith */}`:`The most the zone allows: ${store}, about ${f.mw[0].toFixed(1)}–${hi.toFixed(1)} MW of servers depending on how tightly racks are packed${hi>=40?' (the tool stops at 40 MW)':''}`}. "Typical" is the size of data centres already built inside Vancouver, Edmonton and Calgary, about 2–2.5 MW (operator claims)${hi<TYPICAL_MW?`; this lot fits only ${hi.toFixed(1)} MW`:''}.</p>`}
    <h3>Everything else, chosen for you</h3><ul class="assumed">${rows}</ul><p class="sub">To change these, set "Showing" at the top to the neighbourhood or how-it-is-worked-out view.</p>
    ${!nothing&&probs.length?`<div class="fstuck" role="alert"><b>This set-up doesn't work on this lot.</b><ul>${probs.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><div class="fsx"><button class="btn" id="rFit">Use the largest size that fits (${hi.toFixed(1)} MW)</button></div></div>`:''}
    <div class="dnav"><button class="sec" id="rB">← The site</button><button class="pri" id="rN" ${nothing||probs.length?'disabled':''}>${nothing||probs.length?'Fix the set-up to go on':'What fits here →'}</button></div></div>`;

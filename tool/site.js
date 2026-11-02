@@ -251,7 +251,7 @@ function card(step){
     h+=`<p class="sub">${draft('Standby generators carry the load if the grid fails; batteries (UPS) carry it for the minutes until they start. Shown as generic equipment only.')}</p>
     ${ch('gens',[{v:'yes',t:'Standby generators',def:true,s:'sized to the peak load'},{v:'none',t:'None',s:'relies on the grid and UPS batteries only'}],A.gens)}
     ${A.gens!=='none'?`<h3>Where</h3>${ch('genAt',[{v:'yard',t:'Yard',def:true},{v:'roof',t:'Roof',s:'done on a Paris-region conversion (DRIEE 2010); heavy'}],A.genAt)}<h3>Spares</h3>${ch('genSpares',[{v:'n',t:'None (N)'},{v:'n1',t:'One spare (N+1)',def:true},{v:'2n',t:'Double (2N)'}],A.genSpares)}`:''}
-    <p class="sub">UPS batteries sit inside, in the electrical rooms (about 2.0–2.4 m² per MW plus 2.2 m² for batteries; manufacturer claims). A battery for the grid is an add-on, off by default.</p>
+    <p class="sub">UPS batteries sit inside, in the electrical rooms (about 2.4–3.3 m² per MW for the UPS plus 1.0–1.8 m² for lithium-ion batteries; manufacturer claims, register component_space).</p>${''/* 2 Nov 2026 fix pass: D-ups (register figures of 29 Oct; grid battery struck) */}
     ${P.genLines?`<h3>Sized from the load</h3><ul class="lim">${P.genLines.map(l=>`<li>${l}</li>`).join('')}</ul>`:''}`;
   }
   if(m.warn.length) h+=m.warn.map(w=>`<div class="warnbox">${esc(w)}</div>`).join('');

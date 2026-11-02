@@ -54,13 +54,13 @@ T = {
  'light_at_window': (R, 'neighbours', 'light at night'), 'shadow': (R, 'neighbours', 'shade on neighbours'), 'visibility': (R, 'neighbours public', 'what is seen from the street'),
  'watched_area': (R, 'neighbours public', 'cameras and fences'), 'ground': (F, 'operator', 'engineering'),
  'treatment_energy': (F, 'operator', 'engineering'), 'blowdown_recovery': (F, 'operator', 'engineering'), 'pv_roof': (C, 'climate', 'its own solar'), 'pv_facade': (C, 'climate neighbours', 'solar on the facade'),
- 'genset_test': (R, 'neighbours', 'generator tests: noise and exhaust'), 'hvo_swap': (C, 'climate', 'cleaner generator fuel'), 'fuel_on_site': (R, 'neighbours city', 'fuel kept on site: amount and type only, never location'),
+ 'genset_test': (R, 'neighbours', 'generator tests: noise and exhaust'), 'hvo_swap': (F, 'climate', 'cleaner generator fuel'), 'fuel_on_site': (R, 'neighbours city', 'fuel kept on site: amount and type only, never location'),
  'vibration_rank': (R, 'neighbours', 'vibration'), 'workload_control': (C, 'operator public', 'who controls the computing'),
  # place
  'sewer_sink': (F, 'utility', 'engineering'), 'surface_water_sink': (F, 'utility nations', 'engineering'), 'rooftop_solar': (C, 'neighbours', 'solar on roofs nearby'),
  'self_gen_rules': (F, 'utility', 'rules detail'), 'electricity_price': (F, 'operator', "operator's cost"), 'water_supply': (C, 'utility public', 'water the city can supply'),
  'existing_building': (C, 'host city', 'reusing a building'), 'ambient_cover': (F, 'neighbours', 'engineering'), 'interconnection': (F, 'operator', "operator's choice"),
- 'reclaimed_makeup': (C, 'utility', 'reusing treated water'), 'greywater_neighbours': (C, 'neighbours utility', "neighbours' greywater"), 'borefield': (F, 'operator', 'engineering'),
+ 'reclaimed_makeup': (C, 'utility', 'reusing treated water'), 'greywater_neighbours': (F, 'neighbours utility', "neighbours' greywater"), 'borefield': (F, 'operator', 'engineering'),
  'ates': (F, 'operator utility', 'engineering'), 'deep_geo': (F, 'operator', 'engineering'), 'flood_exposure': (C, 'city', 'flood risk'), 'service_class': (F, 'utility', 'engineering'),
  # prospect
  'offerable_area': (C, 'host public', 'space it could share'), 'receiver_radius': (F, 'receiver', 'method'), 'heat_density': (F, 'receiver', 'method'),
@@ -107,13 +107,14 @@ T = {
  'heat_value_split': (C, 'operator utility receiver', 'who keeps the value of the heat'), 'power_bill_effect': (R, 'ratepayers neighbours', 'effect on household power bills'),
  'ev_repay': (C, 'neighbours operator', 'how much an EV port must sell to repay itself'), 'pv_lcoe': (C, 'operator', 'what rooftop solar costs per MWh'),
  # added 19 Oct 2026 (ten avenues; tiers confirmed by J.B. 19 Oct)
- 'clean_power_price': (C, 'utility ratepayers climate', 'what new clean power costs and who can buy it'), 'chp_heat': (C, 'operator neighbours climate', 'heat from its own gas plant'),
+ 'clean_power_price': (F, 'utility ratepayers climate', 'what new clean power costs and who can buy it'), 'chp_heat': (C, 'operator neighbours climate', 'heat from its own gas plant'),
  'condensate': (F, 'operator', 'engineering'), 'stormwater_volume': (C, 'city neighbours', 'rain held back from the sewers'),
  'snowmelt_area': (R, 'neighbours public', 'sidewalks kept clear by its heat'), 'backup_neighbours': (R, 'neighbours public', 'power for neighbours in a blackout'),
  'grid_refund': (C, 'utility ratepayers neighbours', 'first payer refunded when neighbours connect'), 'community_solar': (R, 'neighbours', "bill credits from solar on neighbours' roofs"),
  'fire_water': (R, 'neighbours public city', 'firefighting water after an earthquake'),
 }
 ids = [n['id'] for n in D['nodes']]
+# 2 Nov 2026 fix pass: A-eng (engineering only, J.B. triage 30 Oct): hvo_swap, clean_power_price, greywater_neighbours set to F above
 # parts J.B. dropped (register meta.dropped_quantities) leave the templates too
 _DROP = set(json.load(open(os.path.join(H, 'formula_register.json'), encoding='utf-8'))['meta'].get('dropped_quantities', {}))
 for _k in _DROP: T.pop(_k, None)
