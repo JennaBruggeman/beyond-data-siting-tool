@@ -1,0 +1,1596 @@
+{
+ "arch_sec2_cologixVan4": {
+  "where_read": "WebFetch of the Cologix VAN4 FAQ page (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "Title 'FAQs: How secure is my data and infrastructure at VAN4?', 15 Jul 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "Title as given; 'July 15, 2025'",
+    "fix": null
+   },
+   {
+    "claim": "'Security begins at the perimeter and extends through every part of the facility'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "'multiple layers of security'",
+    "verdict": "CONFIRMED",
+    "evidence": "'built with multiple layers of security'",
+    "fix": null
+   },
+   {
+    "claim": "'biometric scanning and multi-factor authentication'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Strict access controls include biometric scanning and multi-factor authentication'",
+    "fix": null
+   },
+   {
+    "claim": "'24/7 surveillance, monitoring, and on-site staff'",
+    "verdict": "CONFIRMED",
+    "evidence": "'24/7 surveillance, monitoring, and on-site staff provide constant oversight'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sec2_estruxVan2": {
+  "where_read": "WebFetch of the eStruxture VAN-2 datasheet PDF (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "VAN-2 datasheet V5",
+    "verdict": "CONFIRMED",
+    "evidence": "'V5' is in the file name only; the sheet text shows 'VAN-2 DC SPECIFICATIONS' with no printed version label",
+    "fix": null
+   },
+   {
+    "claim": "555 West Hastings St, Suite 2605",
+    "verdict": "CONFIRMED",
+    "evidence": "'555 West Hastings Street, Suite 2605'",
+    "fix": null
+   },
+   {
+    "claim": "28-floor multi-tenant building, four data halls on two floors, 14,500 sq ft",
+    "verdict": "CONFIRMED",
+    "evidence": "'28 Floor multi-tenant building'; '4 Data Halls on 2 different floors'; '14,500 sq. ft. of total space'",
+    "fix": null
+   },
+   {
+    "claim": "'Advanced video surveillance, minimum 90 days of video retention'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "'CCTV video monitoring, security card access, and on-site security teams'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "'24 / 7 / 365 Building Security Guards'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "'Centralized card access control system with dual factor biometric authentication'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "mantraps listed",
+    "verdict": "CONFIRMED",
+    "evidence": "'MANTRAPS Yes'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sec2_fm115": {
+  "where_read": "WebFetch of FM DS 1-15 PDF (URL in text), first 100,000 of 107,215 characters, 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "Data Sheet 1-15, Roof-Mounted Solar Photovoltaic Panels, April 2026 (full revision)",
+    "verdict": "CONFIRMED",
+    "evidence": "'April 2026. Full revision.'",
+    "fix": null
+   },
+   {
+    "claim": "1.0 roof PV only; refers to DS 1-57 for wall-mounted BIPV façades",
+    "verdict": "CONFIRMED",
+    "evidence": "1.0 points to Data Sheet 1-57, Plastics in Construction, for wall-mounted BIPV façade systems",
+    "fix": null
+   },
+   {
+    "claim": "2.0 Class 1A rating 'negated once PV panels are placed above it' unless system FM Approved",
+    "verdict": "CONFIRMED",
+    "evidence": "'will have the FM Approved Class 1A rating negated once PV panels are placed above it'",
+    "fix": null
+   },
+   {
+    "claim": "2.1.1.4 A 'Use only noncombustible frames and mounting systems'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Use only noncombustible frames and mounting systems. Use PV panels that are glass backed.'",
+    "fix": "Add the second sentence: glass-backed panels."
+   },
+   {
+    "claim": "B arrays max 150 x 150 ft (46 x 46 m)",
+    "verdict": "CONFIRMED",
+    "evidence": "'150 ft (46 m) by 150 ft (46 m)'",
+    "fix": null
+   },
+   {
+    "claim": "C min 4 ft (1.2 m) aisle to next array",
+    "verdict": "CONFIRMED",
+    "evidence": "minimum 4 ft (1.2 m) space or aisle to the next array",
+    "fix": null
+   },
+   {
+    "claim": "D 4 ft to expansion joints",
+    "verdict": "CONFIRMED",
+    "evidence": "minimum 4 ft (1.2 m) between PV panels and roof expansion joints",
+    "fix": null
+   },
+   {
+    "claim": "E 6 ft to skylights",
+    "verdict": "CONFIRMED",
+    "evidence": "'6 ft (1.8m)' clearance to all skylights",
+    "fix": "Add metric 1.8 m."
+   },
+   {
+    "claim": "3.2 encapsulants, backsheets and adhesives 'can ignite'",
+    "verdict": "WRONG",
+    "evidence": "3.2: 'Components of common rigid PV panels—such as plastic frames, backsheets and adhesives—can ignite.' Encapsulants are in 1.2.1: 'These encapsulants provide additional fuel that can worsen a roof-level fire.'",
+    "fix": "3.2 names plastic frames, backsheets and adhesives; encapsulants (EVA) are fuel per 1.2.1."
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "INSURER GUIDE: FM Property Loss Prevention Data Sheet 1-15, Roof-Mounted Solar Photovoltaic Panels, April 2026 (full revision): 1.0 roof PV only; 'See ... Data Sheet 1-57, Plastics in Construction, for wall-mounted, building-integrated photovoltaic (BIPV) façade systems'; 2.0 an FM Approved Class 1A roof has the rating 'negated once PV panels are placed above it' unless the system is FM Approved; 2.1.1.4 A 'Use only noncombustible frames and mounting systems. Use PV panels that are glass backed.'; B arrays max 150 x 150 ft (46 x 46 m); C min 4 ft (1.2 m) aisle to next array; D 4 ft to expansion joints; E 6 ft (1.8 m) to skylights; 3.2 'plastic frames, backsheets and adhesives' 'can ignite'; 1.2.1 encapsulants (EVA) 'provide additional fuel' — https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/01-construction/fmds0115.pdf ‖ CHECK 2 (1 Nov 2026, fixed): 3.2 names plastic frames, backsheets and adhesives, not encapsulants (those are 1.2.1); glass-backed panels and 1.8 m added."
+ },
+ "arch_sec2_fmBipv2025": {
+  "where_read": "WebFetch of FM technical report PDF (URL in text), first 100,000 of 105,233 characters, 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "G. Agarwal, title, FM technical report, Nov 2025, project RW000606",
+    "verdict": "CONFIRMED",
+    "evidence": "'Prepared by Gaurav Agarwal'; 'November 2025'; 'Project ID: RW000606'",
+    "fix": null
+   },
+   {
+    "claim": "ANSI/FM 4411 16-ft parallel panel test",
+    "verdict": "CONFIRMED",
+    "evidence": "'ANSI/FM 4411' ... '16 ft (4.9 m) high parallel panel test (16-ft PPT)'",
+    "fix": null
+   },
+   {
+    "claim": "three of four double-sided glass cavity-wall BIPV exceeded peak HRR thresholds",
+    "verdict": "CONFIRMED",
+    "evidence": "7.1.1: 'all uncharged BIPV systems, except for –6mm OC in Test #4, exceeded both peak HRR thresholds' (from 7.1.1, not the executive summary)",
+    "fix": null
+   },
+   {
+    "claim": "6 mm glass system ~780 kW, fire confined to ~8 ft",
+    "verdict": "CONFIRMED",
+    "evidence": "'lowest peak HRR of 780 kW for the –6mm module (Test #4)'; 'restricted to 8 ft (2.4 m) height'",
+    "fix": null
+   },
+   {
+    "claim": "flexible BIPV ~11 MW, flames >30 ft (9.1 m)",
+    "verdict": "CONFIRMED",
+    "evidence": "~11 MW within 100 s; 'a maximum flame height greater than 30 ft (9.1 m)'",
+    "fix": null
+   },
+   {
+    "claim": "EN 13501-1 and UL 1703 accreditation did not correlate",
+    "verdict": "CONFIRMED",
+    "evidence": "7.1.1: 'these accreditations do not correlate with their façade fire performance'",
+    "fix": null
+   },
+   {
+    "claim": "proposed FM 4483 peak HRR <=830 kW (unlimited height)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Peak HRR ≤ 830 kW for unlimited height and 830 kW < peak HRR ≤ 1100 kW for 50-ft (15 m) height installation'",
+    "fix": "Optional: add the 830–1100 kW band for 50 ft (15 m)."
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sec2_axaPrc205": {
+  "where_read": "WebFetch of AXA XL PRC.2.0.5 PDF (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "AXA XL Risk Consulting, PRC.2.0.5 Protection of Buildings from Exterior Fire Exposures, (c) 2020",
+    "verdict": "CONFIRMED",
+    "evidence": "'PRC.2.0.5'; 'Copyright 2020, AXA XL Risk Consulting'",
+    "fix": null
+   },
+   {
+    "claim": "separation per NFPA 80A guide numbers, (guide number x height) + 5 ft (1.5 m)",
+    "verdict": "CONFIRMED",
+    "evidence": "shown only in the worked example: '(2.55 × 25 ft (7.6 m)) + 5 ft (1.5 m) = 68.75 ft (21 m)'; no general formula stated",
+    "fix": "Say the formula is read from the worked example."
+   },
+   {
+    "claim": "example 100 ft x 25 ft wall, 25% openings, severe, guide no. 2.55 -> 68.75 ft (21 m)",
+    "verdict": "CONFIRMED",
+    "evidence": "100 ft (30.5 m) x 25 ft (7.6 m); 25%; severe; 2.55; 68.75 ft (21 m)",
+    "fix": null
+   },
+   {
+    "claim": "within half the distance a blank 3 h wall",
+    "verdict": "CONFIRMED",
+    "evidence": "blank exterior 3 h fire-resistive wall within one-half the separation distance (text partly garbled)",
+    "fix": null
+   },
+   {
+    "claim": "openings within 5 ft filled or 3 h shutters; within 10 ft 1 1/2 h; within half 3/4 h",
+    "verdict": "CONFIRMED",
+    "evidence": "'3 h fire rated shutters and doors'; 1½ h; half-distance value printed garbled '#/4 h' — 3/4 h is inferred",
+    "fix": null
+   },
+   {
+    "claim": "beyond half wired glass and deluge water curtain",
+    "verdict": "CONFIRMED",
+    "evidence": "wired glass; automatic deluge water curtain per NFPA 13 and PRC.12.1.1.0",
+    "fix": null
+   },
+   {
+    "claim": "lower-roof table not needed if exposing roof concrete or >=1 h",
+    "verdict": "CONFIRMED",
+    "evidence": "'the exposing building has a concrete or a minimum 1 hr. fire resistance rated roof assembly'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "US insurer guide built on NFPA 80A (US standard); benchmark outside Canadian code — NBC 3.2.3 spatial separation governs.",
+  "new_text": "INSURER GUIDE: AXA XL Risk Consulting, PRC.2.0.5 Protection of Buildings from Exterior Fire Exposures, (c) 2020: separation per NFPA 80A guide numbers, (guide number x height) + 5 ft (1.5 m) (formula read from the worked example); example 100 ft x 25 ft wall, 25% openings, severe, guide no. 2.55 -> 68.75 ft (21 m); within half the distance a blank 3 h wall; openings within 5 ft (1.5 m) filled or 3 h shutters, within 10 ft (3 m) 1 1/2 h, within half the distance 3/4 h (printed garbled, inferred); beyond half wired glass and deluge water curtain; lower-roof table not needed if exposing roof is concrete or >=1 h (some text garbled in extraction) — https://qac-cms.axaxl.com/-/media/axaxl/files/pdfs/prc-guidelines/prc-2/prc205protectionofbuildingsfromexteriorfireexposuresv1.pdf ‖ CHECK 2 (1 Nov 2026, fixed): all figures confirmed; formula only shown in the worked example and the 3/4 h value is garbled in the source."
+ },
+ "arch_sec2_opS710": {
+  "where_read": "WebFetch of OP S710 PDF (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "OP Insurance Ltd / A-Insurance Ltd (Finland), S710 'Data centres', valid from 1 Jan 2018",
+    "verdict": "CONFIRMED",
+    "evidence": "'Valid as of 1 January 2018'; footer 'OP Insurance Ltd' and 'A-Insurance Ltd'",
+    "fix": null
+   },
+   {
+    "claim": "4.2 'Any unmanned data centre should be located in the middle of a building in a windowless room'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "'It must not be possible to remove the construction or any part of it from the outside without breaking it'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "'A Class 3 anti-burglar wall'",
+    "verdict": "CONFIRMED",
+    "evidence": "'A Class 3 anti-burglar wall must fulfil the above requirements.'",
+    "fix": null
+   },
+   {
+    "claim": "crime detection at least Class 3 (SFS-EN 50131-1), 24 h manned centre, duplicated transmission, anti-mask, sirens inside and outside",
+    "verdict": "CONFIRMED",
+    "evidence": "'of at least Class 3 (SFS-EN 50131-1)'; 'manned around the clock'; 'at least duplicated'; 'anti-mask detection feature'; 'a local alarm (a siren) both inside and outside the premises'",
+    "fix": null
+   },
+   {
+    "claim": "4.4/4.9 ventilation plant and standby power in separate fire compartments",
+    "verdict": "CONFIRMED",
+    "evidence": "4.4 'machinery of which must be located in a separate fire compartment'; 4.9 'Any auxiliary power machinery must be located in a fire compartment of its own' (fuel too)",
+    "fix": null
+   },
+   {
+    "claim": "4.5 consider toilets, heating water, roof above the hall",
+    "verdict": "CONFIRMED",
+    "evidence": "4.5 lists 'toilets and washrooms, water-circulation central heating', 'production processes, roof' — 'roof above the hall' is a paraphrase",
+    "fix": "Use the source's wording."
+   },
+   {
+    "claim": "above ground floor or raised",
+    "verdict": "CONFIRMED",
+    "evidence": "'The premises must be built above ground floor or the equipment must be on a raised platform.'",
+    "fix": null
+   }
+  ],
+  "kind_change": "INSURER GUIDE (benchmark outside Canada, Finland)",
+  "scope_flag": "Finnish insurer rule; benchmark only, not binding in BC or Alberta.",
+  "new_text": "INSURER GUIDE (benchmark outside Canada, Finland): OP Insurance Ltd / A-Insurance Ltd (Finland), Safety Regulation S710 'Data centres', valid from 1 Jan 2018: 4.2 'Any unmanned data centre should be located in the middle of a building in a windowless room'; 'It must not be possible to remove the construction or any part of it from the outside without breaking it'; 'A Class 3 anti-burglar wall'; high-protection centres need an insurer-approved crime detection system, at least Class 3 (SFS-EN 50131-1), to a 24 h manned centre, duplicated transmission, anti-mask detectors, local sirens inside and outside; 4.4/4.9 ventilation plant and standby power in separate fire compartments; 4.5 water hazards above: 'toilets and washrooms, water-circulation central heating', production processes, roof; 'built above ground floor or the equipment must be on a raised platform' — https://www.op.fi/documents/20556/65462/Data+centres+S710/e7c01200-baf9-44ef-b89a-db06a715cf8c ‖ CHECK 2 (1 Nov 2026, fixed): all clauses confirmed; 4.5 put in source wording; kind marked as benchmark outside Canada."
+ },
+ "arch_sec2_zurich2026": {
+  "where_read": "WebFetch of Zurich NA whitepaper page (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "'Data center risks right now' whitepaper, 2026 U.S. edition (Apr 2026)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Data center risks right now: 6 critical questions to enable a resilient buildout'; '2026 U.S. Edition'; 'Originally published April 2026'",
+    "fix": null
+   },
+   {
+    "claim": "'hail-rated roof assemblies as construction-phase enhancements'",
+    "verdict": "CONFIRMED",
+    "evidence": "'hail guards, metal protectors and hail-rated roof assemblies as construction-phase enhancements' (Jimmy Durkin)",
+    "fix": null
+   },
+   {
+    "claim": "'If they see flammable or combustible insulation materials in the plan, they can recommend alternatives'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim (Bill Ingram)",
+    "fix": null
+   },
+   {
+    "claim": "no security, facade or mixed-use guidance",
+    "verdict": "CONFIRMED",
+    "evidence": "security mentioned only as national security/geopolitics; no facade or mixed-use content",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sec2_allianz2025": {
+  "where_read": "WebFetch of Allianz Commercial report PDF (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "Title, Nov 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'The data center construction boom' / 'Emerging risk trends in the global buildout'; November 2025 (p. 28)",
+    "fix": null
+   },
+   {
+    "claim": "p. 22 wildfire and 'vegetation management'",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 22: 'making vegetation management extremely important to minimize exposure'",
+    "fix": null
+   },
+   {
+    "claim": "p. 24 water damage 'can cause multi-milliondollar losses'",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 24: 'water damage in a server room ... can cause multi-milliondollar losses' (also p. 7 'multi-million-dollar losses')",
+    "fix": null
+   },
+   {
+    "claim": "p. 19 site security named only",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 19: '... fire suppression, and site security.'",
+    "fix": null
+   },
+   {
+    "claim": "no construction, facade, security or mixed-use guidance",
+    "verdict": "CONFIRMED",
+    "evidence": "none found",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sec2_nbc3155": {
+  "where_read": "data/raw/codes/nbc.txt, bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt (whitespace-normalized text compared)",
+  "claims": [
+   {
+    "claim": "3.1.5.4.(2) 'Combustible vertical glazing installed no higher than the second storey is permitted in a building required to be of noncombustible construction'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim in all four",
+    "fix": null
+   },
+   {
+    "claim": "FSR <=75 (<=150 if <=25% of wall with conditions)",
+    "verdict": "CONFIRMED",
+    "evidence": "3.1.5.4.(3) 'not more than 75'; (4) 'not more than 150 if the aggregate area of glazing is not more than 25% of the wall area' + (a) 1 storey, (b) 3.2.3.17 separation, or (c) sprinklered",
+    "fix": null
+   },
+   {
+    "claim": "3.1.5.5.(1) 'not more than 3 storeys' or 'sprinklered throughout' and CAN/ULC-S134",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim in all four",
+    "fix": null
+   },
+   {
+    "claim": "'does not spread more than 5 m above the opening'; 'not more than 35 kW/m2 measured at 3.5 m above the opening'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim (NBC/AB/VBBL text prints 'kW/m 2')",
+    "fix": null
+   },
+   {
+    "claim": "(2) Table 3.2.3.7 where limiting distance permits <=10% unprotected openings",
+    "verdict": "CONFIRMED",
+    "evidence": "'permits an area of unprotected openings of not more than 10% ... Table 3.2.3.7. shall be met'",
+    "fix": null
+   },
+   {
+    "claim": "(4) Appendix D-6 deemed to comply",
+    "verdict": "CONFIRMED",
+    "evidence": "'Section D-6 of Appendix D are deemed to comply with Clause (1)(b)'",
+    "fix": null
+   },
+   {
+    "claim": "3.1.5.6 same test or 25 mm masonry/concrete cladding",
+    "verdict": "CONFIRMED",
+    "evidence": "'protected by masonry or concrete cladding not less than 25 mm thick'",
+    "fix": null
+   },
+   {
+    "claim": "A-3.1.5.5.(1)(b)(ii) 'flame does not spread on the exterior surface ... where the heat flux is less than 35 kW/m2'",
+    "verdict": "CONFIRMED",
+    "evidence": "identical Note text in all four",
+    "fix": null
+   },
+   {
+    "claim": "identical text in BCBC 2024, VBBL 2025 and NBC(AE) 2023",
+    "verdict": "CONFIRMED",
+    "evidence": "same wording found in all four copies",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_per_nbcWC": {
+  "where_read": "data/raw/codes/nbc.txt, bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt",
+  "claims": [
+   {
+    "claim": "3.7.2.1.(2) industrial occupant load 'permitted to be based solely on the total number of staff ... transitory'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim in all four",
+    "fix": null
+   },
+   {
+    "claim": "Note A-3.7.2.1.(2) 'Substations and parking garages are examples'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Substations and parking garages are examples of industrial occupancies where staff presence may be permanent or may be intermittent'",
+    "fix": null
+   },
+   {
+    "claim": "3.7.2.2.(2) single WC both sexes if occupant load 'not more than 10' (VBBL 'not more than 25')",
+    "verdict": "CONFIRMED",
+    "evidence": "NBC/AB/BCBC '... is not more than 10'; VBBL '... is not more than 25'",
+    "fix": null
+   },
+   {
+    "claim": "Table 3.7.2.2.-C industrial: 1-10 1, 11-25 2, 26-50 3, 51-75 4, 76-100 5, over 100 6 plus 1 per 30",
+    "verdict": "CONFIRMED",
+    "evidence": "table identical in NBC, AB, VBBL",
+    "fix": null
+   },
+   {
+    "claim": "Table 3.7.2.2.-B business: 1-25 1, 26-50 2, over 50 3 plus 1 per 50",
+    "verdict": "CONFIRMED",
+    "evidence": "table identical",
+    "fix": null
+   },
+   {
+    "claim": "3.7.2.3.(1) at least one lavatory per room with 1 or 2 WCs",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least one lavatory shall be provided in a room containing one or 2 water closets or urinals'",
+    "fix": null
+   },
+   {
+    "claim": "NBC(AE) only 3.7.2.1.(6) 'plumbing fixtures are not required for a building of low human occupancy' (Note: 'pump houses, equipment storage shacks')",
+    "verdict": "CONFIRMED",
+    "evidence": "'Notwithstanding the requirements of this Subsection, plumbing fixtures are not required for a building of low human occupancy'; Note 'may include pump houses, equipment storage shacks, etc.'",
+    "fix": null
+   },
+   {
+    "claim": "BCBC 3.8.2.8.(4) 'at least one universal washroom shall be provided in the entrance storey' unless accessible path",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim in BCBC; also verbatim in VBBL 2025. NBC and NBC(AE) 3.8.2.8.(4) instead require 'at least one barrier-free water closet ... in the entrance storey'",
+    "fix": "Name VBBL too and give the NBC/NBC(AE) barrier-free WC version."
+   },
+   {
+    "claim": "VBBL 3.7.2.9.(1) occupant load over 200 needs at least one gender-neutral washroom facility",
+    "verdict": "CONFIRMED",
+    "evidence": "'a building or non-residential suite with an occupant load exceeding 200 persons, at least one gender neutral washroom facility'",
+    "fix": null
+   },
+   {
+    "claim": "No code clause requires a break room or lunchroom (our reading)",
+    "verdict": "CONFIRMED",
+    "evidence": "only Notes mention 'staff lunchrooms' (restaurant accessibility) and 'lunch rooms' (accessibility lists); no requirement found",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Industrial tables apply only if the data centre is classed Group F; a Group D (business) classification uses Table 3.7.2.2.-B. Missed: VBBL 3.7.2.2.(15) lets two unisex toilet rooms serve an industrial or business occupancy of ≤200 m² and ≤60 persons.",
+  "new_text": "RULE: National Building Code of Canada 2020, Div. B 3.7.2 (repo copy nbc.txt; BCBC 2024, NBC(AE) 2023 and VBBL 2025 compared word by word in bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt): 3.7.2.1.(2) industrial occupant load for washrooms 'permitted to be based solely on the total number of staff for which the floor area is designed, where the floor area is only intermittently occupied or where the presence of occupants is transitory' (Note A-3.7.2.1.(2): 'Substations and parking garages are examples'); 3.7.2.2.(2) both sexes may share a single water closet if occupant load 'not more than 10' (VBBL: 'not more than 25'); Table 3.7.2.2.-C industrial, per sex: 1-10 persons 1 WC, 11-25 2, 26-50 3, 51-75 4, 76-100 5, over 100 6 plus 1 per 30; Table 3.7.2.2.-B business and personal services: 1-25 1, 26-50 2, over 50 3 plus 1 per 50; 3.7.2.3.(1) at least one lavatory per room with 1 or 2 WCs. NBC(AE) only: 3.7.2.1.(6) 'plumbing fixtures are not required for a building of low human occupancy' (Note: 'pump houses, equipment storage shacks'). BCBC and VBBL 3.8.2.8.(4): where WCs are required, 'at least one universal washroom shall be provided in the entrance storey' unless an accessible path leads to one elsewhere (NBC and NBC(AE) 3.8.2.8.(4): 'at least one barrier-free water closet'). VBBL 3.7.2.2.(15): two unisex toilet rooms may serve an industrial or business occupancy if suite ≤200 m² and occupant load ≤60. VBBL 3.7.2.9.(1): occupant load over 200 needs at least one gender-neutral washroom facility. No code clause requires a break room or lunchroom (our reading of NBC Part 3). ‖ CHECK 2 (1 Nov 2026, fixed): all clauses confirmed; 3.8.2.8.(4) is in VBBL too (NBC/AB wording is barrier-free WC); VBBL 3.7.2.2.(15) added."
+ },
+ "arch_per_ccohsSanitation": {
+  "where_read": "WebFetch of CCOHS page (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "date modified 2026-10-20 (fact sheet revised 2025-08-19)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Date modified: 2026-10-20'; fact sheet first published and last revised 2025-08-19",
+    "fix": null
+   },
+   {
+    "claim": "BC OHS Regulation 4.85, Guideline G4.85(1)-1",
+    "verdict": "CONFIRMED",
+    "evidence": "'4.85 Washroom facilities'; 'G4.85(1)-1 Washroom facilities – Sufficient facilities'",
+    "fix": null
+   },
+   {
+    "claim": "toilets 'within 60 metres of the work area' and not more than one floor above or below",
+    "verdict": "CONFIRMED",
+    "evidence": "'within 60 metres of the work area'; 'not more than one floor above or below the work area' (stated for federal and BC)",
+    "fix": null
+   },
+   {
+    "claim": "one facility for both sexes if 9 or fewer workers and lockable from inside",
+    "verdict": "CONFIRMED",
+    "evidence": "'9 or fewer' workers; door 'can be locked from the inside' (BC and NB)",
+    "fix": null
+   },
+   {
+    "claim": "Alberta OHS Code 357, 359, 360, 361, Schedule 7",
+    "verdict": "CONFIRMED",
+    "evidence": "'357 Toilet facilities', '359 Hand cleaning facilities', '360 Supplies and waste receptacle', '361 Condition of facilities', 'Schedule 7 Toilets at a Work Site'",
+    "fix": null
+   },
+   {
+    "claim": "'must not place unreasonable restrictions on a worker's use of or access to toilet facilities'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim (attributed to Alberta and Manitoba)",
+    "fix": null
+   },
+   {
+    "claim": "Eating areas not covered",
+    "verdict": "CONFIRMED",
+    "evidence": "only a passing mention that wash basins be near toilet facilities and eating areas",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_per_bcSecReg": {
+  "where_read": "WebFetch of BC Laws page (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "B.C. Reg. 207/2008, deposited 27 Jun 2008, last amended 1 May 2025 by B.C. Reg. 48/2025",
+    "verdict": "CONFIRMED",
+    "evidence": "deposited June 27, 2008; last amended May 1, 2025 by B.C. Reg. 48/2025",
+    "fix": null
+   },
+   {
+    "claim": "licence categories 'Security guard' and 'Armoured car guard' (s. 15(4) table)",
+    "verdict": "CONFIRMED",
+    "evidence": "s. 15(4) table: item 1 'Armoured car guard', item 12 'Security guard'",
+    "fix": null
+   },
+   {
+    "claim": "s. 4(3)(a) 'addresses of locations from which the security business will be carried on'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "s. 10 vehicles marked 'SECURITY', letters 'not less than 7.5 cm high'",
+    "verdict": "CONFIRMED",
+    "evidence": "s. 10(4)(a): 'the word \"SECURITY\" on both sides ... in letters not less than 7.5 cm high'",
+    "fix": null
+   },
+   {
+    "claim": "s. 12 uniforms; s. 11 restricted equipment",
+    "verdict": "CONFIRMED",
+    "evidence": "headings: s. 11 'Equipment', s. 12 'Uniforms'",
+    "fix": null
+   },
+   {
+    "claim": "No section on premises where guards are posted",
+    "verdict": "CONFIRMED",
+    "evidence": "no guard room, booth, washroom or break-room provision found",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_per_abSSIA": {
+  "where_read": "WebFetch of the policy manual PDF (URL in text; fetch returned text ending in 8.3.2) and open.alberta.ca/publications/s04p7, 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "Alberta Justice and Solicitor General, Policy Manual Version 4.0 (June 2010, amended July 2015)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Version 4.0'; 'June 2010'; amended July 2015 (footers 'Summer 2015'); Ministry of Justice and Solicitor General",
+    "fix": null
+   },
+   {
+    "claim": "business licence needs an Alberta address and a list of branch offices (3.6.2, 3.7.2)",
+    "verdict": "CONFIRMED",
+    "evidence": "3.6.2 'an address in the province of Alberta'; 3.7.2 checklist 'List of all branch operations (store locations or other offices where services are performed)'",
+    "fix": null
+   },
+   {
+    "claim": "licence displayed at all offices",
+    "verdict": "CONFIRMED",
+    "evidence": "3.7.2: 'The business certificate licence must be displayed at all offices.'",
+    "fix": null
+   },
+   {
+    "claim": "TOC lists 8.6.1 'Holding/Detention Rooms' and Appendix C",
+    "verdict": "CONFIRMED",
+    "evidence": "both listed in the table of contents",
+    "fix": null
+   },
+   {
+    "claim": "text of 8.6.1 and Appendix C not reached",
+    "verdict": "CONFIRMED",
+    "evidence": "second read at offset 100,000 still ends partway through 8.3.2; neither section reached",
+    "fix": null
+   },
+   {
+    "claim": "Act summary page updated 16 Nov 2022, no premises rules",
+    "verdict": "CONFIRMED",
+    "evidence": "'November 16, 2022'; no guard rooms, offices or facilities mentioned",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_per_gcpsg010": {
+  "where_read": "WebFetch of RCMP GCPSG-010 page (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "effective 2022-12-05",
+    "verdict": "CONFIRMED",
+    "evidence": "effective date 2022-12-05 (approved 2022-12-08)",
+    "fix": null
+   },
+   {
+    "claim": "7.6.7 'If a TRA identifies a security requirement to employ security guards'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim; guard type, duties, training, equipment, safety 'should be addressed'; no figures",
+    "fix": null
+   },
+   {
+    "claim": "6.2.2 Reception Zone 'areas where interaction with security guards occurs'",
+    "verdict": "CONFIRMED",
+    "evidence": "'interaction with security guards occurs'",
+    "fix": null
+   },
+   {
+    "claim": "7.4.1 'by personnel, guards or automated means'",
+    "verdict": "CONFIRMED",
+    "evidence": "'effective monitoring, screening or control by personnel, guards or automated means'",
+    "fix": null
+   },
+   {
+    "claim": "7.4.3 docks and mail rooms 'should not be directly linked' to restricted areas",
+    "verdict": "CONFIRMED",
+    "evidence": "'should not be directly linked or adjacent to restricted-access areas'",
+    "fix": null
+   },
+   {
+    "claim": "7.3.2 perimeter control incl. 'gates'",
+    "verdict": "CONFIRMED",
+    "evidence": "'alarm systems, gates and fences should be considered'",
+    "fix": null
+   },
+   {
+    "claim": "7.3.8 'Fences, walls and other barriers'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "7.3.1 easements 'limit the tenant's ability to control access'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "7.6.4 SOC 'a focal point for monitoring'",
+    "verdict": "CONFIRMED",
+    "evidence": "'focal point for monitoring the various systems'",
+    "fix": null
+   },
+   {
+    "claim": "No guard-booth location, staffing level or vehicle-barrier figures",
+    "verdict": "CONFIRMED",
+    "evidence": "none found; defers to TRA",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Federal Government of Canada facility guidance; benchmark for a private data centre, not binding.",
+  "new_text": null
+ },
+ "arch_per_gcpsg003support": {
+  "where_read": "WebFetch of RCMP GCPSG-003 page (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "effective 2021-08-09",
+    "verdict": "CONFIRMED",
+    "evidence": "'The effective date ... is 2021-08-09'",
+    "fix": null
+   },
+   {
+    "claim": "6.2 'Rest Area/Break Room', 'Washroom/Shower/Changing Room(s)', 'Kitchenette', 'Locker Room'",
+    "verdict": "CONFIRMED",
+    "evidence": "items 03, 04, 05, 11 verbatim",
+    "fix": null
+   },
+   {
+    "claim": "6.3 item 9 supporting spaces; lockers 'or a locker room depending on its size'",
+    "verdict": "CONFIRMED",
+    "evidence": "'lockers (or a locker room depending on its size)'",
+    "fix": null
+   },
+   {
+    "claim": "4.1 'A SOC typically provides 24 hour surveillance'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "5.5 '8 or 12 hours shifts'",
+    "verdict": "CONFIRMED",
+    "evidence": "'scheduled (ie. 8 or 12 hours shifts)'",
+    "fix": null
+   },
+   {
+    "claim": "staffing per position 'TBD'; no m² per operator",
+    "verdict": "CONFIRMED",
+    "evidence": "5.4 'Number per shift: TBD'; no area per operator",
+    "fix": null
+   },
+   {
+    "claim": "6.4 wheelchair clearances 1200 mm × 900 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "6.4 item 5: '1200mm for length of wheelchair' and '900mm for width of wheelchair and clearance'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_per_rcmpIndex": {
+  "where_read": "WebFetch of RCMP guidance index page (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "no current guide on vehicle barriers, guard posts or gatehouses",
+    "verdict": "CONFIRMED",
+    "evidence": "current list GCPSG-001 to -024 and G-series; none dedicated to these topics (GCPSG-009 fencing touches HVM)",
+    "fix": null
+   },
+   {
+    "claim": "G1-008 'Guidelines for Guard Services' (04/2001)",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "G1-013 'Security Control Room Space Requirements' (09/2006)",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "G1-015 'Entry Controls for Overhead Doors' (12/1981)",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "archived, GC employees only, request by email",
+    "verdict": "CONFIRMED",
+    "evidence": "'an employee of the Canadian government' may request a PDF by email",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_per_gcpsg009hvm": {
+  "where_read": "WebFetch of RCMP GCPSG-009 page (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "effective 2022-01-27, approved 2022-03-16, page modified 2025-11-03",
+    "verdict": "CONFIRMED",
+    "evidence": "all three dates as given",
+    "fix": null
+   },
+   {
+    "claim": "8.2 ASTM F2656 'details the requirements for the Hostile Vehicle Mitigation measures'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "M30 (K4) 30 mph, M40 (K8) 40 mph, M50 (K12) 50 mph, 15,000 lb",
+    "verdict": "CONFIRMED",
+    "evidence": "48/64/80 km/h; '15,000 lb (6,800 kg)'",
+    "fix": null
+   },
+   {
+    "claim": "P1 <1 m, P2 1.1-7 m, P3 7-30 m, P4 ≥30.1 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'P1: less than 3.3' (1 m)'; 'P2 ... 1.1 m - 7 m'; 'P3 ... 7 m - 30 m'; 'P4 ... 30.1 m and more'",
+    "fix": null
+   },
+   {
+    "claim": "'there is no limit to how far the vehicle can travel past the barrier to be certified'",
+    "verdict": "CONFIRMED",
+    "evidence": "'there is no limit to how far the vehicle can travel past the barrier'",
+    "fix": null
+   },
+   {
+    "claim": "'the setback and standoff distances' set by a TRA",
+    "verdict": "CONFIRMED",
+    "evidence": "phrase present",
+    "fix": null
+   },
+   {
+    "claim": "9.1 bollards, large planters or rocks 'larger, more robust vehicular security barriers'; back-filled retaining wall; 'Blast pressure falls off with increased standoff'",
+    "verdict": "CONFIRMED",
+    "evidence": "all three in 9.1",
+    "fix": null
+   },
+   {
+    "claim": "9.1, 9.5 ditches and berms",
+    "verdict": "CONFIRMED",
+    "evidence": "9.1 'drainage ditches or berms'; 9.5 'Ditches/berms'",
+    "fix": null
+   },
+   {
+    "claim": "10.3.2, 10.5 fences with 'integral crash beams or cables'",
+    "verdict": "WRONG",
+    "evidence": "phrase is in 10.3.2 only; 10.5 (posts/foundations) does not contain it",
+    "fix": "Cite 10.3.2 only."
+   },
+   {
+    "claim": "10.6 gate barriers and 'the first choice to protect a gate is to limit the approach speed of a vehicle'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim; bollards, wedge/ramp, locking arm, cable barriers",
+    "fix": null
+   },
+   {
+    "claim": "halving speed cuts impact force to a quarter",
+    "verdict": "CONFIRMED",
+    "evidence": "'reduce the speed of the vehicle by half, the impact force is then reduced to one quarter'",
+    "fix": null
+   },
+   {
+    "claim": "gates latch 'approximately every four feet of vertical height'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "10.1 minimum security fence 2.4 m, high security ≥3.6 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'minimum height for a security fence should be 2.4 meters'; 'at least 3.6 meters'",
+    "fix": null
+   },
+   {
+    "claim": "5 and 9.4 provincial/municipal laws and AHJ height limits",
+    "verdict": "CONFIRMED",
+    "evidence": "5: 'Provincial or municipal laws or bylaws may restrict...'; 9.4: 'Often the major factor will be the fence height limit.'",
+    "fix": null
+   },
+   {
+    "claim": "No bollard spacing",
+    "verdict": "CONFIRMED",
+    "evidence": "none given",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Federal Government of Canada facility guidance; benchmark for a private data centre.",
+  "new_text": "GOVERNMENT GUIDE: RCMP, GCPSG-009 (2022) Security Fencing Considerations Guide, effective 2022-01-27, approved 2022-03-16, page modified 2025-11-03 (official RCMP page; supplements register rcmpGCPSG009 and arch_sec2_gcpsg009b): 8.2 ASTM F2656 'details the requirements for the Hostile Vehicle Mitigation measures'; M30 (K4) 30 mph, M40 (K8) 40 mph, M50 (K12) 50 mph, 15,000 lb vehicle; P1 <1 m, P2 1.1-7 m, P3 7-30 m, P4 ≥30.1 m penetration; 'there is no limit to how far the vehicle can travel past the barrier to be certified'; protection depends on 'the setback and standoff distances' set by a TRA. 9.1 bollards, large planters or rocks as 'larger, more robust vehicular security barriers' where pedestrian traffic is high; back-filled retaining wall as a vehicle barrier; 'Blast pressure falls off with increased standoff'. 9.1, 9.5 ditches and berms. 10.3.2 fences with 'integral crash beams or cables'. 10.6 gate barriers: fixed or movable bollards, wedge/ramp barriers, locking arms, cable barriers; 'the first choice to protect a gate is to limit the approach speed of a vehicle' (curves, chicanes, parallel approach); halving speed cuts impact force to a quarter; gates latch 'approximately every four feet of vertical height'. 10.1 minimum security fence 2.4 m, high security ≥3.6 m. 5 and 9.4: provincial or municipal laws and AHJ height limits may restrict fences. No bollard spacing. — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-009-2022-security-fencing-considerations-guide ‖ CHECK 2 (1 Nov 2026, fixed): 10.5 does not contain 'integral crash beams or cables'; cited 10.3.2 only. All other figures confirmed."
+ },
+ "arch_per_gcpsg002hvm": {
+  "where_read": "WebFetch of RCMP GCPSG-002 page (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "effective 2020-03-04; amended 2021-06-30 and 2026-04-27; listed as 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "effective 2020-03-04; amendments 2021-06-30 and 2026-04-27; title 'GCPSG-002 (2026)'",
+    "fix": null
+   },
+   {
+    "claim": "6.3 'Protective measures capable of holding back an impacting vehicle are required'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "furniture and planters 'generally not able to restrain a vehicle deliberately driven at a high rate of speed'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "designed to 'the expected design vehicle class'",
+    "verdict": "CONFIRMED",
+    "evidence": "'the expected design vehicle class (vehicle mass)'",
+    "fix": null
+   },
+   {
+    "claim": "6.2 'vehicle inspection facilities and barrier systems ... remain fully functional'; vetted, inspected vehicles; minimize perimeter parking in watch zone",
+    "verdict": "CONFIRMED",
+    "evidence": "'remain fully functional'; 'fully vetted and inspected'; 'needs to be minimized within the \"watch zone\"'",
+    "fix": null
+   },
+   {
+    "claim": "6.1 Exclusion Zone ≥3 m, Watch Zone ≥30 m on average",
+    "verdict": "CONFIRMED",
+    "evidence": "'a minimum of 3m (10 ft.)'; 'a minimum of 30 m (100 ft.) on average'",
+    "fix": null
+   },
+   {
+    "claim": "names CSA S850-12 for blast design",
+    "verdict": "CONFIRMED",
+    "evidence": "5.2: CSA S850-12 'should be used as the primary design reference'",
+    "fix": null
+   },
+   {
+    "claim": "Only where a TRA finds a blast threat",
+    "verdict": "CONFIRMED",
+    "evidence": "4.1: for facilities 'identified as having a likelihood of explosive attack based on a TRA'; not stated as 'only' but the guide is framed on TRA findings",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_per_nactsoHvm": {
+  "where_read": "WebFetch of GOV.UK page (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "WITHDRAWN 30 May 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "'This guidance was withdrawn on 30 May 2022'",
+    "fix": null
+   },
+   {
+    "claim": "published 2 Nov 2020, page updated 7 Jan 2026",
+    "verdict": "WRONG",
+    "evidence": "published 2 November 2020; 7 January 2026 appears only as a metadata timestamp — no visible update note",
+    "fix": "Drop 'page updated 7 Jan 2026' or say 'metadata timestamp 7 Jan 2026'."
+   },
+   {
+    "claim": "gap 'no greater than 1200mm', measured at 600 mm above ground",
+    "verdict": "CONFIRMED",
+    "evidence": "'no greater than 1200mm'; 'at a height of 600mm above ground level'",
+    "fix": null
+   },
+   {
+    "claim": "barrier types: active, retractable and passive bollards, gates, planters and strengthened street furniture; ditches, bunds and berms",
+    "verdict": "CONFIRMED",
+    "evidence": "'bollards (active, retractable and passive static)', 'gates', 'planters and strengthened street furniture'; 'Ditches, bunds and berms'",
+    "fix": null
+   },
+   {
+    "claim": "stand-off 'the single most important factor'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "static barriers preferred, active where frequent access needed",
+    "verdict": "CONFIRMED",
+    "evidence": "active 'generally more expensive and less secure than a static security barrier system'",
+    "fix": null
+   },
+   {
+    "claim": "PAS 68 and IWA 14-1; Anti-Terrorism Traffic Regulation Order",
+    "verdict": "CONFIRMED",
+    "evidence": "both named",
+    "fix": null
+   },
+   {
+    "claim": "Superseded by ProtectUK guidance",
+    "verdict": "CONFIRMED",
+    "evidence": "withdrawal notice points to ProtectUK",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE (UK benchmark, WITHDRAWN 30 May 2022): NaCTSO, Crowded Places Guidance, 'Hostile Vehicle Mitigation (HVM)', published 2 Nov 2020 (7 Jan 2026 is a metadata timestamp only): maximum gap between adjacent vehicle security barriers 'no greater than 1200mm', measured between structural elements at 600 mm above ground; barrier types: active, retractable and passive bollards, gates, planters and strengthened street furniture; ditches, bunds and berms; stand-off 'the single most important factor'; static barriers preferred, active barriers where frequent access is needed; test standards PAS 68 and IWA 14-1; road restrictions via an Anti-Terrorism Traffic Regulation Order. Superseded by ProtectUK guidance (not read). — https://www.gov.uk/government/publications/crowded-places-guidance/hostile-vehicle-mitigation-hvm ‖ CHECK 2 (1 Nov 2026, fixed): no visible update after publication; all figures confirmed."
+ },
+ "arch_per_vanS10": {
+  "where_read": "WebFetch of bylaws.vancouver.ca Section 10 PDF (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "April 2025 headers",
+    "verdict": "CONFIRMED",
+    "evidence": "'City of Vancouver, April 2025'",
+    "fix": null
+   },
+   {
+    "claim": "10.10.1 fence includes 'arbors, archways, boundary fences, gates, pergolas, screens, trellises, walls and similar structures'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "10.10.2 height measured from ground at fence line",
+    "verdict": "CONFIRMED",
+    "evidence": "'measured from any point on the ground level of the site at the structure or fence line'",
+    "fix": null
+   },
+   {
+    "claim": "10.10.3 'does not exceed 1.9 m in height'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "10.10.4 1.2 m front yard in C-1 or any R district",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "10.10.5 reduced by half the retaining wall height within 1.0 m",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "10.10.6 Director may permit after notifying owners",
+    "verdict": "CONFIRMED",
+    "evidence": "'must first notify such property owners as the Director of Planning deems necessary'",
+    "fix": null
+   },
+   {
+    "claim": "10.7.1 M, I, CD-1 sites on Schedule C streets: 'no building or structure of any kind', no manoeuvring/parking/loading; 'fully graded and landscaped'; 'open ornamental fences ...'; walks or driveways",
+    "verdict": "CONFIRMED",
+    "evidence": "10.7.1(b), (c), (d)(ii), (d)(iii) verbatim",
+    "fix": null
+   },
+   {
+    "claim": "10.13.1 no development in a required yard except as provided",
+    "verdict": "CONFIRMED",
+    "evidence": "'No building or development is permitted in any required yard'",
+    "fix": null
+   },
+   {
+    "claim": "No barbed-wire or lighting clause",
+    "verdict": "CONFIRMED",
+    "evidence": "none found",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_per_vanI3yards": {
+  "where_read": "data/raw/van/i3.txt (June 2026), data/raw/codes/van_I-2_schedule.txt (June 2026), data/raw/van/fc2.txt, and a scratch text copy of I-1C (November 2025; library id van_zdb_i1c)",
+  "claims": [
+   {
+    "claim": "I-3 sub-area A 3.1.2.2 front yard 0.6 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'3.1.2.2 Minimum front yard depth 0.6 m'",
+    "fix": null
+   },
+   {
+    "claim": "3.1.2.4 side yard 7.6 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'3.1.2.4 Minimum side yard width 7.6 m'",
+    "fix": null
+   },
+   {
+    "claim": "3.1.2.6 rear yard 3.1 m, reduced where abuts lane (3.1.2.17)",
+    "verdict": "CONFIRMED",
+    "evidence": "'3.1.2.6 Minimum rear yard depth 3.1 m'; 3.1.2.17 lane reduction",
+    "fix": null
+   },
+   {
+    "claim": "I-3 4.5.1 fence/wall/landscaping 'must facilitate pedestrian interest'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "I-2 (all areas except sub-area B) 3.1.2: side yard 'not required' unless adjoining R; rear 3.1 m; no front yard",
+    "verdict": "CONFIRMED",
+    "evidence": "3.1.2.2(c) 'not required'; RM 1.5 m, R1/RT/RA 0.9 m; 3.1.2.3 rear 3.1 m; no front yard row",
+    "fix": null
+   },
+   {
+    "claim": "I-1C, I-2, I-3, FC-2 2.2 outdoor storage 'enclosed by a suitable fence or wall restricting public access'",
+    "verdict": "CONFIRMED",
+    "evidence": "present in 2.2.1 of all four schedules (I-1C copy dated November 2025, not June 2026)",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_per_vanEncroach": {
+  "where_read": "WebFetch of bylaws.vancouver.ca/4243c.pdf, 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "consolidated to 8 Dec 2021, incl. By-law 13191 eff. 1 Jan 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "'Consolidated for convenience only to December 8, 2021'; By-law No. 13191 effective January 1, 2022",
+    "fix": null
+   },
+   {
+    "claim": "s. 3(1) 'any encroachment upon, under or over a street'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "s. 3(3) 'grassed areas, access sidewalks, steps, fences, rockeries, hedges or garden areas' if Engineer satisfied as to safety",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim; 'satisfied as to the safety and advisability'",
+    "fix": null
+   },
+   {
+    "claim": "Schedule D lists 'planters', 'retaining walls', 'bulkheads', no annual charge",
+    "verdict": "CONFIRMED",
+    "evidence": "Schedule Part D 'ENCROACHMENTS NOT REQUIRING AN ANNUAL CHARGE' lists all three",
+    "fix": null
+   },
+   {
+    "claim": "s. 9A revoke and require removal; s. 13 indemnity",
+    "verdict": "CONFIRMED",
+    "evidence": "both verbatim",
+    "fix": null
+   },
+   {
+    "claim": "bollards not mentioned",
+    "verdict": "CONFIRMED",
+    "evidence": "'bollard' absent",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_per_vanPkgSupp": {
+  "where_read": "WebFetch of the Parking By-law Design Supplement PDF (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "bulletin eff. 12 Jul 1988, last amended 16 Feb 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "'July 12, 1988'; 'February 16, 2024'",
+    "fix": null
+   },
+   {
+    "claim": "1.5 'positioned such that a vehicle is fully on private property when stopped to activate the door' (driveway from a street)",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim, for driveways from a street",
+    "fix": null
+   },
+   {
+    "claim": "narrower two-way driveways 'should be activated by a remote-control unit in the vehicle'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "2.6 ticket dispensers 'not less than 15 m inside the property line', booths normally ≥30 m",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim; 15 m applies if the attendant controls only the exit lane",
+    "fix": null
+   },
+   {
+    "claim": "1.2 'The maximum ramp slope allowed in the first 6.1 m from the property line is 10%'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "1.3 Table 1 ramp widths 3.6 m or 6.1 m",
+    "verdict": "CONFIRMED",
+    "evidence": "3.6 m / 6.1 m by street type and number of spaces",
+    "fix": null
+   },
+   {
+    "claim": "Figure 5 aisle widths Class A 6.1 m, B 6.1 m, C 14.0 m",
+    "verdict": "CONFIRMED",
+    "evidence": "Figure 5 is 'Loading Aisle Widths'",
+    "fix": "Say loading aisle widths."
+   },
+   {
+    "claim": "Table 3 design vehicles P, SU-9, WB-17",
+    "verdict": "CONFIRMED",
+    "evidence": "Class A Passenger (P), B SU-9, C WB-17",
+    "fix": null
+   },
+   {
+    "claim": "2.8 no backing 'for more than 10 m', exit 'in a forward direction'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim (exceptions: lane used as aisle, RS and RT zones)",
+    "fix": null
+   },
+   {
+    "claim": "No queue length before a gate",
+    "verdict": "CONFIRMED",
+    "evidence": "none given",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "DESIGN GUIDE (City by-law supplement): City of Vancouver, Parking By-law No. 6059 Design Supplement (bulletin eff. 12 Jul 1988, last amended 16 Feb 2024) (supplements arch_sep_vanLoadingSupp): 1.5 security gates and overhead doors 'should be positioned such that a vehicle is fully on private property when stopped to activate the door' (driveway from a street, not a lane); on narrower two-way driveways the door 'should be activated by a remote-control unit in the vehicle'; 2.6 automatic ticket dispensers 'not less than 15 m inside the property line', attendant booths normally ≥30 m; 1.2 'The maximum ramp slope allowed in the first 6.1 m from the property line is 10%'; 1.3 Table 1 ramp widths 3.6 m or 6.1 m; Figure 5 loading aisle widths Class A 6.1 m, B 6.1 m, C 14.0 m; Table 3 design vehicles: Class A 'Passenger (P)', Class B 'SU-9', Class C 'WB-17'; 2.8 no backing 'for more than 10 m', exit 'in a forward direction'. No queue length before a gate. — https://guidelines.vancouver.ca/bulletins/bulletin-parking-loading-design-supplement.pdf ‖ CHECK 2 (1 Nov 2026, fixed): all figures confirmed; Figure 5 is loading aisle widths."
+ },
+ "arch_per_edmFence": {
+  "where_read": "data/raw/edm/bylaw/b.txt (Zoning Bylaw 20001 text)",
+  "claims": [
+   {
+    "claim": "8.20 'Fence means a structure ... visual screening'",
+    "verdict": "CONFIRMED",
+    "evidence": "'...mark a boundary, or provide visual screening, noise reduction, or Landscaping'",
+    "fix": null
+   },
+   {
+    "claim": "Setback definition incl. 'only applies to development on or above ground level'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "5.100 applies 'only to Fences and Privacy Screens that are constructed within residential Zones or Sites within non-residential Zones that are developed with a Residential Use'",
+    "verdict": "CONFIRMED",
+    "evidence": "5.100 1.1 verbatim",
+    "fix": null
+   },
+   {
+    "claim": "5.120 1.1.5 (non-industrial development) barbed wire not permitted",
+    "verdict": "CONFIRMED",
+    "evidence": "5.120 '1. Non-Industrial Development Standards' ... '1.1.5. Fences that contain, or are constructed of, hazardous materials such as barbed wire, are not permitted'",
+    "fix": null
+   },
+   {
+    "claim": "7.120 9.1.5 (Edmonton South Special Area) chain-link security Fence ≤2.5 m no permit",
+    "verdict": "CONFIRMED",
+    "evidence": "'9. Edmonton South Special Area Exemptions' ... 'chain-link security Fence less than or equal to 2.5 m in height'",
+    "fix": null
+   },
+   {
+    "claim": "5.60 2.2 all Setback areas 'must be Landscaped' except pathways, parking and circulation",
+    "verdict": "CONFIRMED",
+    "evidence": "'2.2. All open space, including Yards, Setback areas, and Common Amenity Areas must be Landscaped ... except ... Pathways or parking and vehicle circulation'",
+    "fix": null
+   },
+   {
+    "claim": "4.1.1 1 tree and 2 shrubs per 30 m² of setback",
+    "verdict": "CONFIRMED",
+    "evidence": "'4.1.1. Total Setback area ... 1 tree and 2 shrubs per 30.0 m2'",
+    "fix": null
+   },
+   {
+    "claim": "4.7 loading and service areas screened, Landscape Buffer 'minimum Height of 1.8 m'",
+    "verdict": "CONFIRMED",
+    "evidence": "5.60 4.7 verbatim",
+    "fix": null
+   },
+   {
+    "claim": "BE 4.1.3-4.1.4 street setback 6.0 m (4.5 m collector/local)",
+    "verdict": "CONFIRMED",
+    "evidence": "BE Table 4.1: 4.1.3 6.0 m; 4.1.4 4.5 m",
+    "fix": null
+   },
+   {
+    "claim": "IM 4.1.3 and IH 4.1.4 street setback 3.0 m",
+    "verdict": "CONFIRMED",
+    "evidence": "IM '4.1.3 Minimum Setback Abutting a Street 3.0 m'; IH '4.1.4. Minimum Setback Abutting a ... Street 3.0 m'",
+    "fix": null
+   },
+   {
+    "claim": "IM 5.3 max screening height 3.7 m",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "BE 5.2 equipment, transformers, cooling towers screened from Streets",
+    "verdict": "CONFIRMED",
+    "evidence": "'must be screened from view from Abutting Streets and Sites in non-industrial Zones'",
+    "fix": null
+   },
+   {
+    "claim": "5.80 1.1 access locations need Development Planner approval",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "4.2.2 Parkade entrances 'do not block an Abutting Pathway or sidewalk...'",
+    "verdict": "CONFIRMED",
+    "evidence": "5.80 4.2.2 verbatim",
+    "fix": null
+   },
+   {
+    "claim": "6.110 7 queuing spaces 6.5 × 3.0 m (drive-through and vehicle support services only)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Each queuing space associated with Vehicle Support Services and Uses with Drive-through Services must be a minimum of 6.5 m long and 3.0 m wide'",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_per_edmRow": {
+  "where_read": "WebFetch of edmonton.ca page (URL in text), two reads, 1 Nov 2026; direct download blocked by this session's proxy (not circumvented)",
+  "claims": [
+   {
+    "claim": "page undated",
+    "verdict": "WRONG",
+    "evidence": "page metadata last modified 2026-08-20 (footer © 2026)",
+    "fix": "Give 'modified 20 Aug 2026'."
+   },
+   {
+    "claim": "Licence of Occupation 'allows the road right-of-way for commercial or residential purposes'",
+    "verdict": "NOT FOUND",
+    "evidence": "'commercial or residential purposes' not on the page; closest: Parking and Storage licence 'allows commercial and industrial businesses to use the road right-of-way as temporary parking and storage areas'; Landscaping licence 'allows a resident or business to use the road right-of-way space for enhanced landscaping purposes'",
+    "fix": "Replace with the page's wording."
+   },
+   {
+    "claim": "'such as parking and storage areas, landscaping and gardening, walls and fences'",
+    "verdict": "NOT FOUND",
+    "evidence": "'walls and fences' and 'gardening' not found on the page",
+    "fix": "Remove."
+   },
+   {
+    "claim": "'Planters on boulevards and sidewalks need to meet the attached guidelines and need to be approved by the City'",
+    "verdict": "NOT FOUND",
+    "evidence": "'planters' not found on the page",
+    "fix": "Remove."
+   },
+   {
+    "claim": "names Bylaw 5590 (Traffic Bylaw) for signs only",
+    "verdict": "CONFIRMED",
+    "evidence": "Bridge Banner section: sign placement under Traffic Bylaw 5590",
+    "fix": null
+   },
+   {
+    "claim": "Bollards not mentioned",
+    "verdict": "CONFIRMED",
+    "evidence": "'bollard' not found",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE (City web page): City of Edmonton, 'Road Right-of-Way (Regulated Road Use)' (modified 20 Aug 2026, read 1 Nov 2026): a Parking and Storage Licence of Occupation 'allows commercial and industrial businesses to use the road right-of-way as temporary parking and storage areas'; a Landscaping Licence of Occupation 'allows a resident or business to use the road right-of-way space for enhanced landscaping purposes'; names Bylaw 5590 (Traffic Bylaw) for signs only. Walls, fences, planters and bollards not mentioned. Licence of Occupation guideline PDF and COE-IM-GUIDE-0023 refused (robots). — https://www.edmonton.ca/business_economy/road-rights-of-way ‖ CHECK 2 (1 Nov 2026, fixed): 'walls and fences', 'gardening', 'commercial or residential purposes' and the planters sentence are not on the current page; replaced with the page's licence wording."
+ },
+ "arch_per_ufc402201": {
+  "where_read": "WebFetch of WBDG UFC 4-022-01 PDF (URL in text), characters 0–100,000 and from 100,000 (text ends partway through 5-6.1), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "UFC 4-022-01, 27 Jul 2017",
+    "verdict": "CONFIRMED",
+    "evidence": "'27 July 2017'; no change notice",
+    "fix": null
+   },
+   {
+    "claim": "4-1.1.1 'Provide adequate stacking distance for vehicles waiting for entry'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "5-3 'Maximize the length of the approach zone to provide optimal stacking distance'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "3-2 queue from 'peak hour demand volume'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Current peak hour demand volume for both POVs and commercial vehicles'",
+    "fix": null
+   },
+   {
+    "claim": "2-2.3.2 'truck processing must be segregated from POV processing'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "4-1.3 Response Zone runs to final denial AVB",
+    "verdict": "CONFIRMED",
+    "evidence": "zone runs from end of Access Control Zone to the final denial AVB",
+    "fix": null
+   },
+   {
+    "claim": "5-5.1.5 'not assume less than 2 seconds for AVB deployment'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Threat calculations must not assume less than 2 seconds for AVB deployment.'",
+    "fix": null
+   },
+   {
+    "claim": "5-4 'Provide a gatehouse for each ECF/ACP', median or side; 'guard booths for each entry lane'; 0.9 m from face of curb",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim; 'Provide guard booths for each entry lane within the ID check area'; 3 ft (0.9 m) setback",
+    "fix": null
+   },
+   {
+    "claim": "Guard washroom and break-area clauses (5-7.7, 5-7.8) not reached",
+    "verdict": "CONFIRMED",
+    "evidence": "second read ends partway through 5-6.1; 5-7 not reached",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "US military entry-control criteria; benchmark only, far beyond what a civilian data centre needs.",
+  "new_text": null
+ },
+ "arch_per_dlrIad12": {
+  "where_read": "WebFetch of Digital Realty IAD12 page (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "'Perimeter fencing, manned guard gates, berms, and hardscaping make this campus a fortress for your data'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "'24x7 onsite security personnel'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "'CCTV with 90 day backup'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "'Biometric/ Photo badge access'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "undated, © 2026; no crash ratings",
+    "verdict": "CONFIRMED",
+    "evidence": "footer '2026 Digital Realty Trust'; no crash ratings",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "US (Virginia) campus; benchmark outside Canada.",
+  "new_text": null
+ },
+ "arch_per_estruxCal2": {
+  "where_read": "WebFetch of eStruxture CAL-2 datasheet PDF (URL in text), 1 Nov 2026",
+  "claims": [
+   {
+    "claim": "datasheet V4",
+    "verdict": "CONFIRMED",
+    "evidence": "'V4' in the file name only; no printed version label",
+    "fix": null
+   },
+   {
+    "claim": "149 High Plains Place, Rocky View County, AB",
+    "verdict": "CONFIRMED",
+    "evidence": "'149 High Plains Place, Rocky View County, No 44, AB, T4A 0W7'",
+    "fix": null
+   },
+   {
+    "claim": "single-floor 92,839 sq ft building, built 2021, data centre 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "'Single floor'; '92,839 sq. ft. (7,322 m2)'; 'Building - 2021'; 'Data Center - 2022'",
+    "fix": null
+   },
+   {
+    "claim": "'Data center perimeter and equipment yard secured by fencing. Gates controlled by central security'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "'Site completely secured by perimeter fencing, security monitored with controlled gates'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "'24/7 on site security and support'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "mantraps with card and biometric access",
+    "verdict": "CONFIRMED",
+    "evidence": "'Card and biometric access control at mantraps.'",
+    "fix": null
+   },
+   {
+    "claim": "CCTV exterior, entrances, interior, ≥90 days retention",
+    "verdict": "CONFIRMED",
+    "evidence": "'CCTV coverage across exterior, entrances and interior.'; 'stored for minimum 90 days'",
+    "fix": null
+   },
+   {
+    "claim": "No vehicle barriers named",
+    "verdict": "CONFIRMED",
+    "evidence": "none",
+    "fix": null
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_per_cologixVan4Sheet": {
+  "where_read": "data/raw/cologix_van4_2026-05.pdf and data/raw/cologix_van1_2026-05.pdf (pdftotext)",
+  "claims": [
+   {
+    "claim": "175 West Cordova Street, Vancouver; 40K sq ft downtown; VAN4.E.052026.R2",
+    "verdict": "CONFIRMED",
+    "evidence": "'VAN4 is a 40K SQFT ... facility located at 175 West Cordova Street in downtown Vancouver'; 'VAN4.E.052026.R2'",
+    "fix": null
+   },
+   {
+    "claim": "'Cameras: Closed-circuit television (CCTV) system'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "'Access: Biometric and badged access'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "'Security Personnel 24/7/365'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "'Parking: Limited onsite parking available'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": null
+   },
+   {
+    "claim": "VAN1 sheet same line",
+    "verdict": "WRONG",
+    "evidence": "VAN1 (VAN1.042026.R4) reads 'Closed-circuit TV (CCTV) systems/cameras located at all facility main entrances and critical infrastructure locations'; 'HID access cards and biometric authentication'; 'Security Personnel 24/7/365'; no parking line seen",
+    "fix": "Give VAN1's own wording."
+   },
+   {
+    "claim": "No fence, gate or vehicle barrier listed (urban building on the street line)",
+    "verdict": "CONFIRMED",
+    "evidence": "none listed; 'on the street line' is our reading, not on the sheet (sheet: 'Leased building, single tenant'; '4-story concrete frame')",
+    "fix": "Mark 'on the street line' as our reading."
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "OPERATOR CLAIM: Cologix, VAN4 datasheet (175 West Cordova Street, Vancouver; 40K sq ft downtown; 'Leased building, single tenant', '4-story concrete frame'; VAN4.E.052026.R2, local copy data/raw/cologix_van4_2026-05.pdf): Security: 'Cameras: Closed-circuit television (CCTV) system'; 'Access: Biometric and badged access'; 'Security Personnel 24/7/365'; 'Parking: Limited onsite parking available'. VAN1 sheet (VAN1.042026.R4, data/raw/cologix_van1_2026-05.pdf): 'Closed-circuit TV (CCTV) systems/cameras located at all facility main entrances and critical infrastructure locations'; 'HID access cards and biometric authentication'; 'Security Personnel 24/7/365'. No fence, gate or vehicle barrier listed on either (our reading: urban building on the street line). ‖ CHECK 2 (1 Nov 2026, fixed): VAN1 wording differs from VAN4, now quoted; 'on the street line' marked as our reading."
+ }
+}

@@ -2928,7 +2928,7 @@
    "arch_sec2_fm115": "named in our notes, not yet checked",
    "arch_sec2_fmBipv2025": "named in our notes, not yet checked",
    "arch_sec2_axaPrc205": "named in our notes, not yet checked",
-   "arch_sec2_opS710": "named in our notes, not yet checked (benchmark, outside Canada)",
+   "arch_sec2_opS710": "INSURER GUIDE (benchmark outside Canada, Finland)",
    "arch_sec2_zurich2026": "named in our notes, not yet checked",
    "arch_sec2_allianz2025": "named in our notes, not yet checked",
    "arch_sec2_nbc3155": "rule",
@@ -2951,7 +2951,30 @@
    "arch_per_ufc402201": "named in our notes, not yet checked",
    "arch_per_dlrIad12": "operator claim",
    "arch_per_estruxCal2": "operator claim",
-   "arch_per_cologixVan4Sheet": "operator claim"
+   "arch_per_cologixVan4Sheet": "operator claim",
+   "arch_svc_nbcae72": "rule",
+   "arch_svc_abStandata19bci008": "government",
+   "arch_svc_abPoolStd2014": "rule",
+   "arch_svc_bcPoolDesign2025": "government",
+   "arch_svc_vanPkg5": "rule",
+   "arch_svc_vanPkg7": "rule",
+   "arch_svc_vanGarbageSupp": "design guide",
+   "arch_svc_mvGarbageSpecs": "named in our notes, not yet checked",
+   "arch_svc_edmWasteStd2026": "government",
+   "arch_svc_wsbcPart11": "rule",
+   "arch_svc_ahsRecepSite": "government",
+   "arch_svc_bcCoronerHeat2022": "government",
+   "arch_svc_hcWhoAtRisk": "government",
+   "arch_svc_hcHarsGuide": "government",
+   "arch_svc_edmC620": "rule",
+   "arch_svc_edmEWOverview": "government",
+   "arch_svc_vanSplash2019": "government",
+   "arch_svc_edmRecApproach2018": "government",
+   "arch_svc_edmRecMasterPlan2004": "government",
+   "arch_svc_vanFoodStrategy2013": "government",
+   "arch_svc_edmFresh": "government",
+   "arch_svc_statcanHES2007": "government",
+   "arch_svc_vanHygiene": "government"
   },
   "source_check": {
    "mfrDryCooler": "agent",
@@ -3511,7 +3534,30 @@
    "arch_per_ufc402201": "claude",
    "arch_per_dlrIad12": "claude",
    "arch_per_estruxCal2": "claude",
-   "arch_per_cologixVan4Sheet": "claude"
+   "arch_per_cologixVan4Sheet": "claude",
+   "arch_svc_nbcae72": "claude",
+   "arch_svc_abStandata19bci008": "claude",
+   "arch_svc_abPoolStd2014": "claude",
+   "arch_svc_bcPoolDesign2025": "claude",
+   "arch_svc_vanPkg5": "claude",
+   "arch_svc_vanPkg7": "claude",
+   "arch_svc_vanGarbageSupp": "claude",
+   "arch_svc_mvGarbageSpecs": "claude",
+   "arch_svc_edmWasteStd2026": "claude",
+   "arch_svc_wsbcPart11": "claude",
+   "arch_svc_ahsRecepSite": "claude",
+   "arch_svc_bcCoronerHeat2022": "claude",
+   "arch_svc_hcWhoAtRisk": "claude",
+   "arch_svc_hcHarsGuide": "claude",
+   "arch_svc_edmC620": "claude",
+   "arch_svc_edmEWOverview": "claude",
+   "arch_svc_vanSplash2019": "claude",
+   "arch_svc_edmRecApproach2018": "claude",
+   "arch_svc_edmRecMasterPlan2004": "claude",
+   "arch_svc_vanFoodStrategy2013": "claude",
+   "arch_svc_edmFresh": "claude",
+   "arch_svc_statcanHES2007": "claude",
+   "arch_svc_vanHygiene": "claude"
   },
   "research_pass": {
    "date": "16 Oct 2026",
@@ -20193,6 +20239,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "data/raw/codes/nbc.txt + nbc2020_v2.pdf (page lookup with PyMuPDF); bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt compared",
+     "what": "ok"
     }
    ],
    "arch_acc_nbcDoorRelease": [
@@ -20202,6 +20255,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "data/raw/codes/nbc.txt + nbc2020_v2.pdf (page lookup with PyMuPDF); bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt compared",
+     "what": "1 claim(s) corrected or unconfirmed; see checkR4_result_0.json"
     }
    ],
    "arch_acc_vbblMaglock": [
@@ -20211,6 +20271,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "data/raw/codes/vbbl2025_v1.txt",
+     "what": "ok"
     }
    ],
    "arch_acc_nbcObstruction": [
@@ -20220,6 +20287,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "data/raw/codes/nbc.txt + nbc2020_v2.pdf (page lookup with PyMuPDF); bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt compared",
+     "what": "1 claim(s) corrected or unconfirmed; see checkR4_result_0.json"
     }
    ],
    "arch_acc_nbcAccessible": [
@@ -20229,6 +20303,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "data/raw/codes/nbc.txt, bcbc2024.txt, vbbl2025_v1.txt",
+     "what": "1 claim(s) corrected or unconfirmed; see checkR4_result_0.json"
     }
    ],
    "arch_acc_boonSolo": [
@@ -20238,6 +20319,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "https://www.boonedam.com/products/mantrap-security-doors-and-portals/circlelock-solo (WebFetch, 1 Nov 2026)",
+     "what": "ok"
     }
    ],
    "arch_acc_boonPDS2014": [
@@ -20247,6 +20335,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "https://www.barbourproductsearch.info/BEL_PDS_Circlelock-file045225.pdf (WebFetch)",
+     "what": "ok"
     }
    ],
    "arch_acc_boonCombi": [
@@ -20256,6 +20351,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "boonedam.com Circlelock Combi page + PDS PDF (WebFetch)",
+     "what": "ok"
     }
    ],
    "arch_acc_boonTourlock": [
@@ -20265,6 +20367,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "boonedam.com Tourlock 180 page (WebFetch)",
+     "what": "ok"
     }
    ],
    "arch_acc_boonDCtips": [
@@ -20274,6 +20383,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "content.boonedam.com PDF (WebFetch)",
+     "what": "ok"
     }
    ],
    "arch_acc_gunneboHiSec": [
@@ -20283,6 +20399,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "gunneboentrancecontrol.com HiSec2 page (WebFetch)",
+     "what": "2 claim(s) corrected or unconfirmed; see checkR4_result_0.json"
     }
    ],
    "arch_acc_gcpsg006": [
@@ -20292,6 +20415,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "rcmp.ca GCPSG-006 page (WebFetch)",
+     "what": "ok"
     }
    ],
    "arch_acc_gcpsg011": [
@@ -20301,6 +20431,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "rcmp.ca GCPSG-011 page (WebFetch)",
+     "what": "ok"
     }
    ],
    "arch_acc_gcpsg015RZ": [
@@ -20310,6 +20447,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "rcmp.ca GCPSG-015 page (WebFetch)",
+     "what": "1 claim(s) corrected or unconfirmed; see checkR4_result_0.json"
     }
    ],
    "arch_acc_opcBiometrics": [
@@ -20319,6 +20463,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "priv.gc.ca biometrics guidance for businesses (WebFetch)",
+     "what": "1 claim(s) corrected or unconfirmed; see checkR4_result_0.json"
     }
    ],
    "arch_acc_video2008": [
@@ -20328,6 +20479,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "priv.gc.ca gl_vs_080306; oipc.bc.ca/guidance-documents/1453; oipc.ab.ca/resource/video-surveillance (WebFetch)",
+     "what": "1 claim(s) corrected or unconfirmed; see checkR4_result_0.json"
     }
    ],
    "arch_acc_fmSecurity": [
@@ -20337,6 +20495,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "J.B. upload FMDS0532.pdf (pdftotext), p. 1 and section 2.8.9",
+     "what": "ok"
     }
    ],
    "arch_acc_tgpPyrostopBR": [
@@ -20346,6 +20511,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "fireglass.com Pyrostop BR fact sheet PDF (WebFetch)",
+     "what": "ok"
     }
    ],
    "arch_acc_saftiGPX": [
@@ -20355,6 +20527,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/access_control.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "safti.com press release (WebFetch)",
+     "what": "ok"
     }
    ],
    "arch_sec2_gcpsg004": [
@@ -20364,6 +20543,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "rcmp.ca GCPSG-004 page (WebFetch)",
+     "what": "ok"
     }
    ],
    "arch_sec2_gcpsg009b": [
@@ -20373,6 +20559,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "rcmp.ca GCPSG-009 page (WebFetch)",
+     "what": "ok"
     }
    ],
    "arch_sec2_gcpsg011b": [
@@ -20382,6 +20575,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "rcmp.ca GCPSG-011 page (WebFetch)",
+     "what": "ok"
     }
    ],
    "arch_sec2_gcpsg014b": [
@@ -20391,6 +20591,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "rcmp.ca GCPSG-014 page (WebFetch)",
+     "what": "ok"
     }
    ],
    "arch_sec2_gcpsg021": [
@@ -20400,6 +20607,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "rcmp.ca GCPSG-021 page (WebFetch)",
+     "what": "ok"
     }
    ],
    "arch_sec2_gcpsg003": [
@@ -20409,6 +20623,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "rcmp.ca GCPSG-003 page (WebFetch)",
+     "what": "ok"
     }
    ],
    "arch_sec2_g1302": [
@@ -20418,6 +20639,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "rcmp.ca G13-02 PDF (WebFetch)",
+     "what": "1 claim(s) corrected or unconfirmed; see checkR4_result_0.json"
     }
    ],
    "arch_sec2_equinix5": [
@@ -20427,6 +20655,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "equinix.com infographic page (WebFetch)",
+     "what": "2 claim(s) corrected or unconfirmed; see checkR4_result_0.json"
     }
    ],
    "arch_sec2_cologixVan1": [
@@ -20436,6 +20671,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "cologix.com VAN1 page (WebFetch)",
+     "what": "ok"
     }
    ],
    "arch_sec2_cologixVan4": [
@@ -20445,6 +20687,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of the Cologix VAN4 FAQ page (URL in text), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_sec2_estruxVan2": [
@@ -20454,6 +20703,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of the eStruxture VAN-2 datasheet PDF (URL in text), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_sec2_fm115": [
@@ -20463,6 +20719,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of FM DS 1-15 PDF (URL in text), first 100,000 of 107,215 characters, 1 Nov 2026",
+     "what": "1 claim(s) corrected or unconfirmed; see checkR4_result_1.json"
     }
    ],
    "arch_sec2_fmBipv2025": [
@@ -20472,6 +20735,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of FM technical report PDF (URL in text), first 100,000 of 105,233 characters, 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_sec2_axaPrc205": [
@@ -20481,6 +20751,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of AXA XL PRC.2.0.5 PDF (URL in text), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_sec2_opS710": [
@@ -20490,6 +20767,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of OP S710 PDF (URL in text), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_sec2_zurich2026": [
@@ -20499,6 +20783,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of Zurich NA whitepaper page (URL in text), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_sec2_allianz2025": [
@@ -20508,6 +20799,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of Allianz Commercial report PDF (URL in text), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_sec2_nbc3155": [
@@ -20517,6 +20815,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_more.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "data/raw/codes/nbc.txt, bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt (whitespace-normalized text compared)",
+     "what": "ok"
     }
    ],
    "arch_per_nbcWC": [
@@ -20526,6 +20831,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "data/raw/codes/nbc.txt, bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt",
+     "what": "ok"
     }
    ],
    "arch_per_ccohsSanitation": [
@@ -20535,6 +20847,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of CCOHS page (URL in text), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_per_bcSecReg": [
@@ -20544,6 +20863,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of BC Laws page (URL in text), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_per_abSSIA": [
@@ -20553,6 +20879,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of the policy manual PDF (URL in text; fetch returned text ending in 8.3.2) and open.alberta.ca/publications/s04p7, 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_per_gcpsg010": [
@@ -20562,6 +20895,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of RCMP GCPSG-010 page (URL in text), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_per_gcpsg003support": [
@@ -20571,6 +20911,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of RCMP GCPSG-003 page (URL in text), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_per_rcmpIndex": [
@@ -20580,6 +20927,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of RCMP guidance index page (URL in text), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_per_gcpsg009hvm": [
@@ -20589,6 +20943,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of RCMP GCPSG-009 page (URL in text), 1 Nov 2026",
+     "what": "1 claim(s) corrected or unconfirmed; see checkR4_result_1.json"
     }
    ],
    "arch_per_gcpsg002hvm": [
@@ -20598,6 +20959,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of RCMP GCPSG-002 page (URL in text), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_per_nactsoHvm": [
@@ -20607,6 +20975,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of GOV.UK page (URL in text), 1 Nov 2026",
+     "what": "1 claim(s) corrected or unconfirmed; see checkR4_result_1.json"
     }
    ],
    "arch_per_vanS10": [
@@ -20616,6 +20991,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of bylaws.vancouver.ca Section 10 PDF (URL in text), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_per_vanI3yards": [
@@ -20625,6 +21007,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "data/raw/van/i3.txt (June 2026), data/raw/codes/van_I-2_schedule.txt (June 2026), data/raw/van/fc2.txt, and a scratch text copy of I-1C (November 2025; library id van_zdb_i1c)",
+     "what": "ok"
     }
    ],
    "arch_per_vanEncroach": [
@@ -20634,6 +21023,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of bylaws.vancouver.ca/4243c.pdf, 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_per_vanPkgSupp": [
@@ -20643,6 +21039,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of the Parking By-law Design Supplement PDF (URL in text), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_per_edmFence": [
@@ -20652,6 +21055,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "data/raw/edm/bylaw/b.txt (Zoning Bylaw 20001 text)",
+     "what": "ok"
     }
    ],
    "arch_per_edmRow": [
@@ -20661,6 +21071,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of edmonton.ca page (URL in text), two reads, 1 Nov 2026; direct download blocked by this session's proxy (not circumvented)",
+     "what": "4 claim(s) corrected or unconfirmed; see checkR4_result_1.json"
     }
    ],
    "arch_per_ufc402201": [
@@ -20670,6 +21087,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of WBDG UFC 4-022-01 PDF (URL in text), characters 0–100,000 and from 100,000 (text ends partway through 5-6.1), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_per_dlrIad12": [
@@ -20679,6 +21103,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of Digital Realty IAD12 page (URL in text), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_per_estruxCal2": [
@@ -20688,6 +21119,13 @@
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
      "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "WebFetch of eStruxture CAL-2 datasheet PDF (URL in text), 1 Nov 2026",
+     "what": "ok"
     }
    ],
    "arch_per_cologixVan4Sheet": [
@@ -20696,6 +21134,220 @@
      "by": "Claude (research agent)",
      "date": "30 Oct 2026",
      "where": "checks/research_arch_v1/security_perimeter.md",
+     "what": "figures quoted in the source entry"
+    },
+    {
+     "check": 2,
+     "by": "Claude (independent agent)",
+     "date": "1 Nov 2026",
+     "where": "data/raw/cologix_van4_2026-05.pdf and data/raw/cologix_van1_2026-05.pdf (pdftotext)",
+     "what": "1 claim(s) corrected or unconfirmed; see checkR4_result_1.json"
+    }
+   ],
+   "arch_svc_nbcae72": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_abStandata19bci008": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_abPoolStd2014": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_bcPoolDesign2025": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_vanPkg5": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_vanPkg7": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_vanGarbageSupp": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_mvGarbageSpecs": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_edmWasteStd2026": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_wsbcPart11": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_ahsRecepSite": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_bcCoronerHeat2022": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_hcWhoAtRisk": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_hcHarsGuide": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_edmC620": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_edmEWOverview": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_vanSplash2019": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_edmRecApproach2018": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_edmRecMasterPlan2004": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_vanFoodStrategy2013": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_edmFresh": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_statcanHES2007": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
+     "what": "figures quoted in the source entry"
+    }
+   ],
+   "arch_svc_vanHygiene": [
+    {
+     "check": 1,
+     "by": "Claude (research agent)",
+     "date": "30 Oct 2026",
+     "where": "checks/research_arch_v1/servicing_social.md",
      "what": "figures quoted in the source entry"
     }
    ]
@@ -35169,62 +35821,85 @@
   "arch_sec_ufc401001": "US RULE (benchmark; DoD buildings only): UFC 4-010-01 DoD Minimum Antiterrorism Standards for Buildings, 12 Dec 2018, Change 3 (24 May 2024), US Department of Defense: 1-6 applies to DoD inhabited buildings; Standard 1 (3-2.1) standoff 20 ft (6 m) from the controlled perimeter where there is a 30 ft (9 m) clear zone or more outside it, minimum aggregate 50 ft (15 m), 15 m with no outer clear zone; Standard 2 (3-3) unobstructed space to the inner clear zone or 33 ft (10 m), whichever is less; Standard 13 (3-14; quote at 3-14.1.1) mail rooms and loading docks on the building perimeter, 'as far from heavily populated areas of buildings' as possible; Standard 14 (3-15.1, new construction) eliminate external roof access by providing 'access from internal stairways or ladders'. Table B-1 not read (page truncated) — https://legacy.wbdg.org/FFC/DOD/UFC/ufc_4_010_01_2018_c3.pdf ‖ CHECK 2 (1 Nov 2026, fixed): paragraph refs sharpened (3-14.1.1; 3-15.1 new construction)",
   "arch_sec_nwscTours": "OPERATOR CLAIM: NSF NCAR / UCAR CISL, 'NWSC Visitor Center: All ages welcome!' (page © 2026, no date): NCAR-Wyoming Supercomputing Center, Cheyenne; 'a guided tour into the supercomputer room requires the attendees to be 9th grade or older'; self-guided exhibit area 'generally not staffed'; tours Monday–Friday by booking; no viewing window mentioned — https://www.cisl.ucar.edu/outreach/nwsc-tours",
   "arch_acc_nbcRevolving": "RULE: NBC 2020 Div. B 3.4.6.15 (identical wording in BCBC 2024, NBC(AE) 2023 and VBBL 2025 Book I, compared word by word from repo copies): (1) a revolving door, if used, shall 'a) be collapsible, b) have hinged doors providing equivalent exiting capacity located adjacent to it, c) be used as an exit from the ground floor level only, d) not be used at the foot of any stairway', e) glass to CAN/CGSB-12.1 'Safety Glazing' or CAN/CGSB-12.11-M 'Wired Safety Glass'; (2) 'a revolving door shall not be considered to have an exiting capacity for more than 45 persons'; (3) electrically powered revolving doors exempt if leaves collapse under the 3.4.6.16.(2) force, open from inside 'without requiring keys, special devices, or specialized knowledge', capacity from collapsed clear width, signs 1000–1500 mm — data/raw/codes/nbc.txt (PDF pp. 3-153 to 3-154)",
-  "arch_acc_nbcDoorRelease": "RULE: NBC 2020 Div. B (identical BCBC 2024, NBC(AE) 2023; VBBL adds, see arch_acc_vbblMaglock): 3.3.1.13.(2) 'a door in an access to exit shall be readily openable in travelling to an exit without requiring keys, special devices or specialized knowledge of the door-opening mechanism'; (7) such a door 'is permitted to be equipped with an electromagnetic lock conforming to Sentence 3.4.6.16.(5) or (6)'; 3.4.6.16.(1) principal entrance and exit doors openable from inside 'with not more than one releasing operation'; (5) electromagnetic locks without latches permitted, except on doors 'leading directly from a high-hazard industrial occupancy', provided a) fire alarm system, b) 'the locking device releases upon actuation of the alarm signal from the building's fire alarm system', c) 'releases immediately upon loss of power', d) manual switch 'readily accessible only to authorized personnel', e) 'a force of not more than 90 N applied to the door opening hardware initiates an irreversible process that will release the locking device within 15 s', g)-h) visual and tactile signs, i) 'the total time delay for all electromagnetic locks in any path of egress to release is not more than 15 s', k) emergency lighting; (6) B-2/B-3 version incl. switch 'at a constantly attended location within the locked space'; (7) hardware 900–1100 mm; 3.4.6.17 key-locked exits for banks and retail only; Note A-3.4.6.16.(5) maglocks 'are intended for use where there is a need for security additional to that provided by traditional exit hardware. They are not intended for indiscriminate use'; 'one switch will release and reset all devices simultaneously' — data/raw/codes/nbc.txt (PDF pp. 3-121, 3-154 to 3-156, 3-264)",
+  "arch_acc_nbcDoorRelease": "RULE: NBC 2020 Div. B (identical BCBC 2024, NBC(AE) 2023; VBBL adds, see arch_acc_vbblMaglock): 3.3.1.13.(2) 'a door in an access to exit shall be readily openable in travelling to an exit without requiring keys, special devices or specialized knowledge of the door-opening mechanism'; (7) such a door 'is permitted to be equipped with an electromagnetic lock conforming to Sentence 3.4.6.16.(5) or (6)'; 3.4.6.16.(1) principal entrance and exit doors openable from inside 'with not more than one releasing operation'; (5) electromagnetic locks without latches permitted, except on doors 'leading directly from a high-hazard industrial occupancy', provided a) fire alarm system, b) 'the locking device releases upon actuation of the alarm signal from the building's fire alarm system', c) 'releases immediately upon loss of power', d) manual switch 'readily accessible only to authorized personnel', e) 'a force of not more than 90 N applied to the door opening hardware initiates an irreversible process that will release the locking device within 15 s', g)-h) visual and tactile signs, i) 'the total time delay for all electromagnetic locks in any path of egress to release is not more than 15 s', k) emergency lighting; (6) B-2/B-3 version incl. switch 'at a constantly attended location within the locked space'; (7) hardware 900–1100 mm; 3.4.6.17 key-locked exits for banks and retail only; Note A-3.4.6.16.(5) maglocks 'are intended for use where there is a need for security additional to that provided by traditional exit hardware. They are not intended for indiscriminate use'; 'one switch will release and reset all devices simultaneously' — data/raw/codes/nbc.txt (PDF pp. 3-122, 3-154 to 3-156, 3-264) ‖ CHECK 2 (1 Nov 2026, fixed): all clauses and quotes confirmed; 3.3.1.13 page corrected 3-121 to 3-122",
   "arch_acc_vbblMaglock": "RULE (Vancouver only): VBBL 2025 Book I Div. B: 3.4.6.16.(8) 'As an alternative to the requirements of Clauses (e), (f) and (g) in Sentence (5), acceptable door release hardware for an electromagnetic lock shall be located in close proximity to the egress door' with a push button plus motion sensor or pressure pad releasing immediately, a push button 'directly connected to the electrical circuit that provides power to the locking device', embossed 'EXIT' ≥25 mm, LED lit, labelled 'DOOR RELEASE', and a lock that resets automatically not before 15 s and only manually after fire alarm; 3.4.6.16.(1) also excepts 3.4.6.20 (security gates in front of exterior exit doors per the Fire By-law, A, D, E, F-2, F-3 only); 3.3.1.13.(11) maglocks on egress doors through Group D suites where acceptable to the CBO; Note A-3.3.1.13.(7) designers 'are to demonstrate that the requirements of the By-law have been met. This demonstration is to include a sequence of operation for the installation of any new maglocks and similar security devices that could singly or in combination, prevent, impede, or otherwise delay occupant egress or emergency responder access' — data/raw/codes/vbbl2025_v1.txt",
-  "arch_acc_nbcObstruction": "RULE: NBC 2020 Div. B (same BCBC 2024, NBC(AE) 2023): 3.3.1.24.(1) 'No obstruction shall be permitted in any occupancy that would restrict the width of a normal means of egress from any part of a floor area to less than 750 mm unless an alternative means of egress is provided adjacent to, accessible from, and plainly visible from the obstructed means of egress'; Note A-3.3.1.24.(1) 'Obstructions including posts, counters or turnstiles should not be located in a manner that would restrict the width of a normal means of egress'; 3.4.3.3.(1) 'no fixture, turnstile or construction shall project into or be fixed within the required width of an exit' — data/raw/codes/nbc.txt (pp. 3-125, 3-151)",
-  "arch_acc_nbcAccessible": "RULE: NBC 2020 Div. B Section 3.8 (NBC(AE) 2023 same; BCBC 2024 says 'accessible' for 'barrier-free'; VBBL 3.8.2.7 same as BCBC): 3.8.2.2.(1) 'all pedestrian entrances … shall be barrier-free [accessible]' except service entrances; (3) only one doorway per entrance need comply; 3.8.2.3.(1) path of travel 'within all other normally occupied floor areas'; (2) not required to service rooms, service spaces, etc.; BCBC (2)(i) not within high-hazard industrial occupancies; 3.8.2.7.(1) power door operators on self-closing doors at entrances incl. vestibule inner doors and on the path to rooms off a public corridor; 3.8.3.6.(2) doorways 'clear width not less than 850 mm' (BCBC: measured at 90° to the stop); (6) operator controls 900–1100 mm and 150–300 mm — data/raw/codes/nbc.txt, bcbc2024.txt",
+  "arch_acc_nbcObstruction": "RULE: NBC 2020 Div. B (same BCBC 2024, NBC(AE) 2023): 3.3.1.24.(1) 'No obstruction shall be permitted in any occupancy that would restrict the width of a normal means of egress from any part of a floor area to less than 750 mm unless an alternative means of egress is provided adjacent to, accessible from, and plainly visible from the obstructed means of egress'; Note A-3.3.1.24.(1) 'Obstructions including posts, counters or turnstiles should not be located in a manner that would restrict the width of a normal means of egress'; 3.4.3.3.(1) 'no fixture, turnstile or construction shall project into or be fixed within the required width of an exit' — data/raw/codes/nbc.txt (pp. 3-125, 3-146; Note p. 3-257) ‖ CHECK 2 (1 Nov 2026, fixed): quotes confirmed in NBC, BCBC, AE, VBBL; 3.4.3.3 page corrected 3-151 to 3-146",
+  "arch_acc_nbcAccessible": "RULE: NBC 2020 Div. B Section 3.8 (NBC(AE) 2023 same; BCBC 2024 says 'accessible' for 'barrier-free'; VBBL 3.8.2.7 same as BCBC): 3.8.2.2.(1) 'all pedestrian entrances … shall be barrier-free [accessible]' except service entrances; (3) only one doorway per entrance need comply; 3.8.2.3.(1) path of travel 'within all other normally occupied floor areas'; (2) not required to service rooms, service spaces, etc.; (2)(i) not within high-hazard industrial occupancies (NBC and BCBC); 3.8.2.7.(1) power door operators on self-closing doors at entrances incl. vestibule inner doors and on the path to rooms off a public corridor; 3.8.3.6.(2) doorways 'clear width not less than 850 mm' (BCBC: measured at 90° to the stop); (6) operator controls 900–1100 mm and 150–300 mm — data/raw/codes/nbc.txt, bcbc2024.txt ‖ CHECK 2 (1 Nov 2026, fixed): all clauses confirmed; (2)(i) high-hazard exclusion is in NBC too, not BCBC only ‖ SCOPE (check 2, 31 Oct 2026): Section 3.8 applies to all buildings except per 3.8.2.1.(1), incl. (c) 'buildings that are not intended to be occupied on a daily or full-time basis, including automatic telephone exchanges, pumphouses and substations'; a staffed data centre with public program is in scope, but an unstaffed data-hall building could be argued out.",
   "arch_acc_boonSolo": "MAKER CLAIM: Boon Edam, Circlelock Solo product page (no date; read 1 Nov 2026): standard unit size 'w x h' '1000 x 2200 mm'; '584mm throat opening, 200mm canopy height, two door wings'; Level Up high '2100–2600 mm'; Level Up wide '1500 mm diameter'; weight '750 Kg'; capacity '5-6, dependent on access control system' per minute one way; 'StereoVision Piggybacking detection'; 'Integrated sensors confirm the user is alone'; biometric authorisation option; 'Supervised disabled entry is possible'; 'Fail-safe operation as standard, fail-secure optional'; 'Support for emergency egress (subject to local regulations)'; fire alarm connection; burglar or bullet resistant packages (standards not named). Brochure link refused by this session — https://www.boonedam.com/products/mantrap-security-doors-and-portals/circlelock-solo",
   "arch_acc_boonPDS2014": "MAKER CLAIM: Boon Edam, 'Circlelock' product data sheet, version 2014-01 (older; hosted on Barbour Product Search): models 1000 and 1500 mm diameter; throat 584 / 937 mm; capacity 5 / 4 per min; height under canopy 2100–2600 mm; detection options 'Weight System; detects tailgating and piggybacking', 'Contact Mats; detects piggybacking', 'Sensor System; basic piggybacking detection', 'StereoVision'; 'The Circlelock is always equipped with an emergency button mounted inside the door'; fail-safe standard; 'Escape route requirements are subject to local regulations'; glass options P4A, P6B, BR2NS / BR4NS (table columns garbled in extraction) — https://www.barbourproductsearch.info/BEL_PDS_Circlelock-file045225.pdf",
-  "arch_acc_boonCombi": "MAKER CLAIM: Boon Edam, Circlelock Combi product page and product data sheet V2-1224 (2025 file): unit '1500 x 2200 mm', '584mm throat opening', weight '680 Kg', '5-6, dependent on access control system' per minute; 'Supervised disabled entry is possible'; 'Fail-safe operation, fire alarm connection'; attaches to standard or fire/smoke-rated swing doors; PDS: Weight System 'detects tailgating and piggybacking'; 'Escape route requirements are subject to local regulations'; glass 'burglary-resistant (RC3) or bullet-resistant (BR2NS / BR4NS)' — https://www.boonedam.com/products/half-security-portal/circlelock-combi ; https://websaweprd.blob.core.windows.net/cms-assets-uk/2025-01/BEL_Circlelock%20Combi_A4%20PDS_2025.pdf",
+  "arch_acc_boonCombi": "MAKER CLAIM: Boon Edam, Circlelock Combi product page and product data sheet V2-1224 (2025 file): unit '1500 x 2200 mm', '584mm throat opening' (page; the PDS table row, garbled in extraction, reads '1030 937', which may be a 937 mm throat — unresolved), weight '680 Kg', '5-6, dependent on access control system' per minute; 'Supervised disabled entry is possible'; 'Fail-safe operation, fire alarm connection'; attaches to standard or fire/smoke-rated swing doors; PDS: Weight System 'detects tailgating and piggybacking'; 'Escape route requirements are subject to local regulations'; glass 'burglary-resistant (RC3) or bullet-resistant (BR2NS / BR4NS)' — https://www.boonedam.com/products/half-security-portal/circlelock-combi ; https://websaweprd.blob.core.windows.net/cms-assets-uk/2025-01/BEL_Circlelock%20Combi_A4%20PDS_2025.pdf ‖ CHECK 2 (1 Nov 2026, fixed): all quotes confirmed; page/PDS throat discrepancy noted",
   "arch_acc_boonTourlock": "MAKER CLAIM: Boon Edam, Tourlock 180 product page (no date): '1600 x 2200 mm'; '1038mm throat opening, 200mm canopy height, four door wings'; Level Up wide '1800-2200 mm'; '900 Kg'; capacity '18, dependent on access control system' per minute; StereoVision; 'Fail-safe operation, fire alarm connection'; 'Bullet-Resistance Protection Package (BR4NS)'; no egress or accessibility statement — https://www.boonedam.com/products/mantrap-security-doors-and-portals/tourlock-180",
   "arch_acc_boonDCtips": "MAKER CLAIM: Boon Edam, '5 Tips for Securing Data Centers' (no date): four layers — Layer 1 perimeter full-height turnstiles; Layer 2 building entrance security revolving door; Layer 3 revolving door between entrance lobby and the rest of the building; Layer 4 server room interlocking mantrap portals; names SOC 1/2/3, ISO 27001, PCI DSS; no egress statement — https://content.boonedam.com/hubfs/USA_5%20Tips%20for%20Securing%20Data%20Centers-1.pdf",
-  "arch_acc_gunneboHiSec": "MAKER CLAIM: Gunnebo Entrance Control, HiSec² security portal page (no date): HiSec² 6 '1050 × 1050 mm', 600 mm clear passage; HiSec² 7 1150 × 1150, 700 mm; HiSec 9 1500 × 1500, 900 mm; HiSec 10 1800 × 1800, 1050 mm, 'typically meeting wheelchair access regulations'; detection: ultrasound measures 'the volume inside the portal'; load cell weight modes (maximum, banding, actual); double contact mat; detection at passage heights 'up to 2.1m'; EN 16005; LPS 1175 Issue 8; FB3 – EN 1522; on a second person the entry door reopens — https://www.gunneboentrancecontrol.com/en/products/security-portals/hisec2/",
-  "arch_acc_gcpsg006": "GOVERNMENT GUIDE: RCMP Lead Security Agency for Physical Security, GCPSG-006 (2024) Access Management Guide, effective 2024-01-15: 6.1 Fig. 1b reception desk relocated 'to allow for observation of the entry area'; 6.4 'Access management systems and procedures must never endanger the safety of personnel'; 6.4.1 exits 'can also be used to circumvent access control'; interior activation only; 7 access controlled 'for the OZ and higher'; 7.4.3 'Biometric systems are generally less appropriate for high-traffic areas'; PIA before biometrics; 7.5.3 fire regulations 'may limit the use' of locks interfering with egress; 7.5.4 turnstiles 'allow only one person to enter at a time'; airlocks one door at a time but several users between doors — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-006-2024-access-management-guide",
-  "arch_acc_gcpsg011": "GOVERNMENT GUIDE: RCMP, GCPSG-011 (2024) Guide to CCTV/CCVE Systems, effective 2024-05-15: 5.1 recordings 'contain personal information'; not for monitoring employee performance; 5.1.3 CCTV 'should be monitored and controlled within, or immediately adjacent to,' a Security Operations Centre; 6.1 areas 'may include parking facilities, perimeter border(s) of the property, entrances and exits'; PIA and signage questions; 7.1.1 domes 'well suited for entrances, stairwells, reception lobbies, and security screening areas'; 7.3.2 cameras 'out of reach to the general public'; 7.6 avoid in-camera storage; no coverage-resolution targets — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-011-2024-guide-closed-circuit-televisionclosed-circuit-video-equipment-systems",
-  "arch_acc_gcpsg015RZ": "GOVERNMENT GUIDE: RCMP, GCPSG-015 (2024) Guide to the Application of Physical Security Zones (see also arch_sec_gcpsg015AppC): 5.3.2 Reception Zone 'Where the transition from a PZ to an RAA is demarcated and controlled'; 'Typically located at the entry to the facility where initial contact between visitors and the department or agency occurs'; may be 'a reception desk, where there will be personnel present to monitor entrance'; 5.3 controls range from a guard checking badges to 'a sophisticated biometric access control system when entering an HSZ'; App. C 2 server room 'a mechanical lock or electronic card reader'; App. C 2.3 control room behind 'a glazed window or wall', 'The glazing should permit observation of the servers', occupied while access is permitted; no sizes, no ballistic glazing, no document slot — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-015-2024-guide-application-physical-security-zones",
-  "arch_acc_opcBiometrics": "GOVERNMENT GUIDE: Office of the Privacy Commissioner of Canada, 'Guidance for processing biometrics – for businesses', 2025-08-11 (PIPEDA): 'Biometric information that can uniquely identify an individual is sensitive information'; 'express consent would be the appropriate form of consent'; for non-essential uses 'you must provide individuals with other means of access or participation'; assess 'less intrusive means'; example 'the use of a fingerprint to gain access to a building'; 'Use verification over identification, where possible'; 'avoid creating large, centralized databases of biometric information if alternatives are viable' — https://www.priv.gc.ca/en/privacy-topics/health-genetic-and-other-body-information/biometrics/gd_bio_org-final",
-  "arch_acc_video2008": "GOVERNMENT GUIDE: 'Guidelines for Overt Video Surveillance in the Private Sector', March 2008, Office of the Privacy Commissioner of Canada with the Alberta and BC information and privacy commissioners (same text on all three sites; names PIPEDA and the Alberta and BC PIPAs): apply to 'overt video surveillance of the public by private sector organizations in publicly accessible areas'; 'Cameras should be positioned to reduce capturing images of individuals who are not being targeted'; 'a store security camera should not be recording passersby outside the store'; 'Cameras should not be aimed at areas where people have a heightened expectation of privacy' (e.g. windows); 'Limit the use and viewing range of cameras as much as possible'; notice before individuals enter; 'Recordings should only be kept as long as necessary'; consider less privacy-invasive alternatives — https://www.priv.gc.ca/en/privacy-topics/surveillance/video-surveillance-by-businesses/gl_vs_080306/ ; https://www.oipc.bc.ca/guidance-documents/1453 ; https://oipc.ab.ca/resource/video-surveillance/",
+  "arch_acc_gunneboHiSec": "MAKER CLAIM: Gunnebo Entrance Control, HiSec² security portal page (no date): HiSec² 6 '1050 × 1050 mm', 600 mm clear passage; HiSec² 7 1150 × 1150, 700 mm; HiSec² 9 1500 × 1500, 900 mm; HiSec² 10 1800 × 1800, 1050 mm, 1500 mm internal diameter, 'typically suitable for wheelchair access regulations'; detection: ultrasound waves 'measure the volume within the portal'; load cell weight modes (maximum, banding, actual); double contact mat; detection at passage heights 'up to 2.1m'; EN 16005; LPS 1175 Issue 8; FB3 – EN 1522; on a second person the entry door reopens — https://www.gunneboentrancecontrol.com/en/products/security-portals/hisec2/ ‖ CHECK 2 (1 Nov 2026, fixed): figures confirmed; two quotes corrected to the page wording",
+  "arch_acc_gcpsg006": "GOVERNMENT GUIDE: RCMP Lead Security Agency for Physical Security, GCPSG-006 (2024) Access Management Guide, effective 2024-01-15: 6.1 Fig. 1b reception desk relocated 'to allow for observation of the entry area'; 6.4 'Access management systems and procedures must never endanger the safety of personnel'; 6.4.1 exits 'can also be used to circumvent access control'; interior activation only; 7 access controlled 'for the OZ and higher'; 7.4.3 'Biometric systems are generally less appropriate for high-traffic areas'; PIA before biometrics; 7.5.3 fire regulations 'may limit the use' of locks interfering with egress; 7.5.4 turnstiles 'allow only one person to enter at a time'; airlocks one door at a time but several users between doors — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-006-2024-access-management-guide ‖ SCOPE (check 2, 31 Oct 2026): Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "arch_acc_gcpsg011": "GOVERNMENT GUIDE: RCMP, GCPSG-011 (2024) Guide to CCTV/CCVE Systems, effective 2024-05-15: 5.1 recordings 'contain personal information'; not for monitoring employee performance; 5.1.3 CCTV 'should be monitored and controlled within, or immediately adjacent to,' a Security Operations Centre; 6.1 areas 'may include parking facilities, perimeter border(s) of the property, entrances and exits'; PIA and signage questions; 7.1.1 domes 'well suited for entrances, stairwells, reception lobbies, and security screening areas'; 7.3.2 cameras 'out of reach to the general public'; 7.6 avoid in-camera storage; no coverage-resolution targets — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-011-2024-guide-closed-circuit-televisionclosed-circuit-video-equipment-systems ‖ SCOPE (check 2, 31 Oct 2026): Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "arch_acc_gcpsg015RZ": "GOVERNMENT GUIDE: RCMP, GCPSG-015 (2024) Guide to the Application of Physical Security Zones (see also arch_sec_gcpsg015AppC): 5.3.2 Reception Zone 'Where the transition from a PZ to an RAA is demarcated and controlled'; 'Typically located at the entry to the facility where initial contact between visitors and the department or agency occurs'; 5.3 (Figs. 1-2) entry may be watched from 'a reception desk, where there will be personnel present to monitor entrance'; 5.3 controls range from a guard checking badges to 'a sophisticated biometric access control system when entering an HSZ'; App. C 2 server room 'a mechanical lock or electronic card reader'; App. C 2.3 control room behind 'a glazed window or wall', 'The glazing should permit observation of the servers', occupied while access is permitted; no sizes, no ballistic glazing, no document slot — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-015-2024-guide-application-physical-security-zones ‖ CHECK 2 (1 Nov 2026, fixed): quotes confirmed; reception-desk quote moved from 5.3.2 to 5.3 ‖ SCOPE (check 2, 31 Oct 2026): Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "arch_acc_opcBiometrics": "GOVERNMENT GUIDE: Office of the Privacy Commissioner of Canada, 'Guidance for processing biometrics – for businesses', published 2025, modified 2025-08-11 (PIPEDA): 'Biometric information that can uniquely identify an individual is sensitive information'; 'express consent would be the appropriate form of consent'; for non-essential uses 'you must provide individuals with other means of access or participation'; assess 'less intrusive means'; example 'the use of a fingerprint to gain access to a building'; 'Use verification over identification, where possible'; 'avoid creating large, centralized databases of biometric information if alternatives are viable' — https://www.priv.gc.ca/en/privacy-topics/health-genetic-and-other-body-information/biometrics/gd_bio_org-final ‖ CHECK 2 (1 Nov 2026, fixed): quotes confirmed; date is the 'modified' date",
+  "arch_acc_video2008": "GOVERNMENT GUIDE: 'Guidelines for Overt Video Surveillance in the Private Sector', March 2008, published by the Office of the Privacy Commissioner of Canada and also hosted by the Alberta and BC information and privacy commissioners (same text on all three sites; joint authorship not stated on the pages; names PIPEDA and the Alberta and BC PIPAs): apply to 'overt video surveillance of the public by private sector organizations in publicly accessible areas'; 'Cameras should be positioned to reduce capturing images of individuals who are not being targeted'; 'a store security camera should not be recording passersby outside the store'; 'Cameras should not be aimed at areas where people have a heightened expectation of privacy' (e.g. 'showers or into windows'); 'Limit the use and viewing range of cameras as much as possible'; notice before individuals enter; 'Recordings should only be kept as long as necessary'; consider less privacy-invasive alternatives — https://www.priv.gc.ca/en/privacy-topics/surveillance/video-surveillance-by-businesses/gl_vs_080306/ ; https://www.oipc.bc.ca/guidance-documents/1453 ; https://oipc.ab.ca/resource/video-surveillance/ ‖ CHECK 2 (1 Nov 2026, fixed): quotes confirmed; joint authorship not stated on any of the three pages",
   "arch_acc_fmSecurity": "INSURER GUIDANCE: FM Property Loss Prevention Data Sheet 5-32, Data Centers and Related Facilities, January 2026, interim revision July 2026 (J.B. upload; same document as fmDS0532): 2.2.1.7 'Provide supervision of the data center to prevent unauthorized access to the premises and assets in accordance with Data Sheet 9-1, Supervision of Property'; 2.8.9.1 design to prevent unauthorized access per DS 9-1; 2.8.9.2 security per DS 9-16; 2.8.9.2.1 'Install an FM Approved Level 1 or better intrusion alarm system for data and record storage rooms, if these areas have emergency doors that exit outside the secure area' — fm.com/datasheets (local PDF upload)",
   "arch_acc_tgpPyrostopBR": "MAKER CLAIM: Technical Glass Products (with Pilkington North America), 'Pilkington Pyrostop BR' fact sheet (no date; © 2026): fire-rated and bullet-resistant transparent wall panel, 'Fire-rated for up to 120 minutes with required hose stream test' (45, 60, 90, 120 min rows); tests listed UL 9, NFPA 80, 'CAN4 S-104', ASTM E119, NIJ 0108.01, UL 10B, 'CAN4 S-106', UL 10C, CAN/ULC-S101, UL 263, UL 752; up to UL 752 Level 3 (to Level 8 with Smartgard); Level I 60 min single 27 mm, 63.00 kg/m²; Level II 120 min single 41 mm, 91.00 kg/m²; Level II/III 120 min IGU 62 mm, 126.00 kg/m², max 2.40 m², 2.81 × 2.81 m; 'Classified and labeled by Underwriters Laboratories, Inc. ® and Underwriters Laboratories of Canada' (files R13377, R38725) — https://www.fireglass.com/resources/product-downloads/fact-sheets/doc/pilkington-pyrostop-BR-fact-sheet.pdf",
   "arch_acc_saftiGPX": "MAKER CLAIM: SAFTI FIRST press release, 3 Nov 2005: GPX aluminium fire-rated frames 'listed by ITS and UL for 60, 90 and 120-minute applications'; 'met UL 752 (1995), Level 3, requirements for bullet resistance' (Intertek tests); ASTM F1592 Grade 1; no Canadian listing named — https://safti.com/press-release/fire-rated-framing-that-resists-the-bullet-and-hammer/",
-  "arch_sec2_gcpsg004": "GOVERNMENT GUIDE: RCMP Lead Security Agency, GCPSG-004 (2020) Security Lighting Considerations Guide, effective 2020-12-02 (the page's effective-date line names another guide): 7.2 CCVE surveillance zones 'Average light level should be at least 20 lux. Minimum 0.33 uniformity ratio. Measured vertically from 1.5m off the ground'; patrolled/sensored perimeters 'average light level of 20 lux from 3m on the patrol side to 9m on the approach side', 'Tight beam control should be used to limit light spill onto neighboring properties and roads'; staff entrances '50-200 lux using wall mounted luminaires 3-4m above ground level'; paths 20 lux, 5 lux at 5 m; open parking 25 lux, enclosed 65 lux; sally ports 100 lux; luminaires 'above and behind security cameras'; 7.1 backlight less than four times front light; 8 switch on below 40 lux; 6.4 CRI 80+ — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-004-2020-security-lighting-considerations-guide",
-  "arch_sec2_gcpsg009b": "GOVERNMENT GUIDE: RCMP, GCPSG-009 (2022) Security Fencing Considerations Guide (official RCMP page; supplements register rcmpGCPSG009): 9.1 outer setback 'often cleared and trimmed', 'Inner setbacks should be kept clear of any obstructions', no widths; 9.6 fence disturbance and deflection (taut wire) detection, 'Detection is more reliable when combining more than one type of sensing technology'; 10.1 video surveillance alone 'is not an effective method of detection'; 10.2 double fences 'The recommended spacing is at least twice the fence height'; 10.6 'Gates are typically the weakest portion of any fence'; 10.7 LED fence lighting, 'Aim towards the unsecured side'; 10.10 compacted gravel 300 mm deep 'extending at least 900mm on either side' — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-009-2022-security-fencing-considerations-guide",
-  "arch_sec2_gcpsg011b": "GOVERNMENT GUIDE: RCMP, GCPSG-011 (2024) Guide to CCTV/CCVE Systems (supplements arch_acc_gcpsg011): 7.3.2 cameras 'capable of capturing/viewing the entire space intended' where no overlap; 'Mounting CCTV cameras in ceiling corners, on top of building structures, or on top of security lighting poles'; 7.1.1 fixed cameras 'Commonly used for 24/7 monitoring of perimeter fencing and open spaces'; 5.1.2 blind spots and poor coverage as detection limits; 6.2.1 lighting per GCPSG-004, assess at night; 6.1 signage set by the AHJ; no mounting heights, lux or pixel-density figures — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-011-2024-guide-closed-circuit-televisionclosed-circuit-video-equipment-systems",
-  "arch_sec2_gcpsg014b": "GOVERNMENT GUIDE: RCMP, GCPSG-014 (2024) Physical Security Considerations in Facility Design (supplements arch_sec_gcpsg014): 6.2 avoid 'Incentives for unauthorized personnel to cross zoning boundaries' (e.g. washrooms, cafeterias); 6.9 'security and safety glazing included in the design phase', per GCPSG-013; 6.12 air intakes, ducts, roof hatches safeguarded, 'Utility spaces should not be located adjacent to entrances to more restrictive zones'; 6.13 'The impact of departmental operations on adjacent occupants should be considered'; 7.1.1.1 'Fencing should be used for the perimeter of the site'; 7.1.1.2 general illumination per GCPSG-004; 7.1.1.3 'clear lines of sight at eye level to and from the building'; 7.1.1.4 'The building and the site should be observable from the roadway by first responders and passers-by' unless a TRA says otherwise — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-014-2024-physical-security-considerations-facility-design",
-  "arch_sec2_gcpsg021": "GOVERNMENT GUIDE: RCMP, GCPSG-021 (2025) Fundamentals of Detection Systems in Physical Security, effective 2025-04-25: 'Vibration detectors are most commonly installed on fences'; 'A perimeter fence is the most common first layer of defense'; 'CCTV systems can be programed to begin recording an area anytime a detection device is triggered'; contact sensors 'most commonly employed on doors and windows'; Table 2 Operations Zone 'Restrict surveillance to access points and travel routes'; no clear-zone widths, buried, microwave or IR systems — https://rcmp.ca/en/lead-security-agency-physical-security/gcpsg-021-2025-fundamentals-detection-systems-physical-security",
-  "arch_sec2_gcpsg003": "GOVERNMENT GUIDE: RCMP, GCPSG-003 (2021) Security Operations Centre Design Considerations Guide, effective 2021-08-09: 4.3 'Typically, the SOC should be out of sight but within audible range of the public'; 6.6 'The SOC should be designated as a Security Zone and be nested within an Operations Zone'; item 5 'protected on all six sides from brute force entry attack'; item 8 brute-force doors and frames; item 9 interlocked vestibule; item 2 video 'clear enough to identify all individuals entering through portals into each respective space', 'should not view the interior of the space'; 6.3 SPC 85 for the control room; 6.4 wheelchair clearances 1200 x 900 mm; 7-14 equipment room adjacent, 1.5 m round racks, 50% spare capacity; no room area figures — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-003-2021-security-operations-centre-design-considerations-guide",
-  "arch_sec2_g1302": "GOVERNMENT GUIDE: RCMP Lead Agency Publication G13-02, Secure Demising Wall, 2013-01-15 (named by GCPSG-015 App. C 2.3 for a secure data centre perimeter): p. 7 slab-to-slab, wood or steel-frame floors and roofs reinforced to match, no pass-throughs in the critical attack area; p. 10 2\" x 6\" 18 ga studs at 300 mm oc, welded or riveted 'not screws'; p. 11 expanded metal mesh EMMA 557-99 Style 3/4-9F (0.120\" strand) or 16 ga sheet steel on the attack side; 'Screws ... are NOT acceptable'; p. 12 3/16\" rivets at 200 mm oc; p. 13 16 ga sheet steel inside the room extending 1200 mm from the door edge; p. 6 two layers 16 mm fire-rated gypsum, 150 mm batts; p. 8 doors and windows 'moderate resistance to force attacks' — https://rcmp.ca/sites/default/files/doc/g13-02-eng.pdf",
-  "arch_sec2_equinix5": "OPERATOR CLAIM: Equinix, 'IBX Data Center Security Measures' infographic (undated): security lobby, physical check-in with government photo ID, 'Mantrap entry: Controls ingress/egress with security personnel managing lockdown capabilities', colocation and customer space security; 'video monitoring and perimeter fencing with advanced detection devices provide 24/7 surveillance'; '24/7 internal and external surveillance covering all critical areas'; no retention, camera placement or window statements — https://www.equinix.com/resources/infographics/5-layers-of-security",
+  "arch_sec2_gcpsg004": "GOVERNMENT GUIDE: RCMP Lead Security Agency, GCPSG-004 (2020) Security Lighting Considerations Guide, effective 2020-12-02 (the page's effective-date line names another guide): 7.2 CCVE surveillance zones 'Average light level should be at least 20 lux. Minimum 0.33 uniformity ratio. Measured vertically from 1.5m off the ground'; patrolled/sensored perimeters 'average light level of 20 lux from 3m on the patrol side to 9m on the approach side', 'Tight beam control should be used to limit light spill onto neighboring properties and roads'; staff entrances '50-200 lux using wall mounted luminaires 3-4m above ground level'; paths 20 lux, 5 lux at 5 m; open parking 25 lux, enclosed 65 lux; sally ports 100 lux; luminaires 'above and behind security cameras'; 7.1 backlight less than four times front light; 8 switch on below 40 lux; 6.4 CRI 80+ — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-004-2020-security-lighting-considerations-guide ‖ SCOPE (check 2, 31 Oct 2026): Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "arch_sec2_gcpsg009b": "GOVERNMENT GUIDE: RCMP, GCPSG-009 (2022) Security Fencing Considerations Guide (official RCMP page; supplements register rcmpGCPSG009): 9.1 outer setback 'often cleared and trimmed', 'Inner setbacks should be kept clear of any obstructions', no widths; 9.6 fence disturbance and deflection (taut wire) detection, 'Detection is more reliable when combining more than one type of sensing technology'; 10.1 video surveillance alone 'is not an effective method of detection'; 10.2 double fences 'The recommended spacing is at least twice the fence height'; 10.6 'Gates are typically the weakest portion of any fence'; 10.7 LED fence lighting, 'Aim towards the unsecured side'; 10.10 compacted gravel 300 mm deep 'extending at least 900mm on either side' — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-009-2022-security-fencing-considerations-guide ‖ SCOPE (check 2, 31 Oct 2026): Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "arch_sec2_gcpsg011b": "GOVERNMENT GUIDE: RCMP, GCPSG-011 (2024) Guide to CCTV/CCVE Systems (supplements arch_acc_gcpsg011): 7.3.2 cameras 'capable of capturing/viewing the entire space intended' where no overlap; 'Mounting CCTV cameras in ceiling corners, on top of building structures, or on top of security lighting poles'; 7.1.1 fixed cameras 'Commonly used for 24/7 monitoring of perimeter fencing and open spaces'; 5.1.2 blind spots and poor coverage as detection limits; 6.2.1 lighting per GCPSG-004, assess at night; 6.1 signage set by the AHJ; no mounting heights, lux or pixel-density figures — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-011-2024-guide-closed-circuit-televisionclosed-circuit-video-equipment-systems ‖ SCOPE (check 2, 31 Oct 2026): Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "arch_sec2_gcpsg014b": "GOVERNMENT GUIDE: RCMP, GCPSG-014 (2024) Physical Security Considerations in Facility Design (supplements arch_sec_gcpsg014): 6.2 avoid 'Incentives for unauthorized personnel to cross zoning boundaries' (e.g. washrooms, cafeterias); 6.9 'security and safety glazing included in the design phase', per GCPSG-013; 6.12 air intakes, ducts, roof hatches safeguarded, 'Utility spaces should not be located adjacent to entrances to more restrictive zones'; 6.13 'The impact of departmental operations on adjacent occupants should be considered'; 7.1.1.1 'Fencing should be used for the perimeter of the site'; 7.1.1.2 general illumination per GCPSG-004; 7.1.1.3 'clear lines of sight at eye level to and from the building'; 7.1.1.4 'The building and the site should be observable from the roadway by first responders and passers-by' unless a TRA says otherwise — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-014-2024-physical-security-considerations-facility-design ‖ SCOPE (check 2, 31 Oct 2026): Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "arch_sec2_gcpsg021": "GOVERNMENT GUIDE: RCMP, GCPSG-021 (2025) Fundamentals of Detection Systems in Physical Security, effective 2025-04-25: 'Vibration detectors are most commonly installed on fences'; 'A perimeter fence is the most common first layer of defense'; 'CCTV systems can be programed to begin recording an area anytime a detection device is triggered'; contact sensors 'most commonly employed on doors and windows'; Table 2 Operations Zone 'Restrict surveillance to access points and travel routes'; no clear-zone widths, buried, microwave or IR systems — https://rcmp.ca/en/lead-security-agency-physical-security/gcpsg-021-2025-fundamentals-detection-systems-physical-security ‖ SCOPE (check 2, 31 Oct 2026): Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "arch_sec2_gcpsg003": "GOVERNMENT GUIDE: RCMP, GCPSG-003 (2021) Security Operations Centre Design Considerations Guide, effective 2021-08-09: 4.3 'Typically, the SOC should be out of sight but within audible range of the public'; 6.6 'The SOC should be designated as a Security Zone and be nested within an Operations Zone'; item 5 'protected on all six sides from brute force entry attack'; item 8 brute-force doors and frames; item 9 interlocked vestibule; item 2 video 'clear enough to identify all individuals entering through portals into each respective space', 'should not view the interior of the space'; 6.3 SPC 85 for the control room; 6.4 wheelchair clearances 1200 x 900 mm; 7-14 equipment room adjacent, 1.5 m round racks, 50% spare capacity; no room area figures — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-003-2021-security-operations-centre-design-considerations-guide ‖ SCOPE (check 2, 31 Oct 2026): Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "arch_sec2_g1302": "GOVERNMENT GUIDE: RCMP Lead Agency Publication G13-02, Secure Demising Wall, 2013-01-15 (named by GCPSG-015 App. C 2.3 for a secure data centre perimeter): p. 7 slab-to-slab, wood or steel-frame floors and roofs reinforced to match, no pass-throughs in the critical attack area; p. 9 2\" x 6\" 18 ga studs at 300 mm oc, welded or riveted 'not screws'; p. 11 expanded metal mesh EMMA 557-99 Style 3/4-9F (0.120\" strand) or 16 ga sheet steel on the attack side; 'Screws ... are NOT acceptable'; p. 12 3/16\" rivets at 200 mm oc; p. 13 16 ga sheet steel inside the room extending 1200 mm from the door edge; p. 6 two layers 16 mm fire-rated gypsum, 150 mm batts; p. 8 doors and windows 'moderate resistance to force attacks' — https://rcmp.ca/sites/default/files/doc/g13-02-eng.pdf ‖ CHECK 2 (1 Nov 2026, fixed): all figures confirmed; stud page corrected p. 10 to p. 9 (printed page header) ‖ SCOPE (check 2, 31 Oct 2026): Written for Government of Canada departments' facilities (RCMP Lead Security Agency guidance); not binding on a private data centre: use as a federal benchmark, not a requirement.",
+  "arch_sec2_equinix5": "OPERATOR CLAIM: Equinix, '5 layers of security at Equinix IBX data centers' infographic (page title 'Equinix IBX Data Center Security Measures'; no visible date, metadata updated 2024-08-09): security lobby, physical check-in with government photo ID, 'Mantrap entry: Controls ingress/egress with security personnel managing lockdown capabilities', colocation and customer space security; 'video monitoring and perimeter fencing with advanced detection devices provide 24/7 surveillance'; '24/7 internal and external surveillance covering all critical areas'; no retention, camera placement or window statements — https://www.equinix.com/resources/infographics/5-layers-of-security ‖ CHECK 2 (1 Nov 2026, fixed): claims confirmed; title and date corrected",
   "arch_sec2_cologixVan1": "OPERATOR CLAIM: Cologix, VAN1 data centre page (555 W Hastings, Vancouver; undated): '24x7x365 secure access'; 'HID access cards and biometric authentication'; 'Closed-circuit television (CCTV) system'; 'Customized security for dedicated pods'; 'Dual interlocking doors in the building lobby' — https://www.cologix.com/data-centers/vancouver/van1/",
   "arch_sec2_cologixVan4": "OPERATOR CLAIM: Cologix, 'FAQs: How secure is my data and infrastructure at VAN4?', 15 Jul 2025: 'Security begins at the perimeter and extends through every part of the facility'; 'multiple layers of security'; 'biometric scanning and multi-factor authentication'; '24/7 surveillance, monitoring, and on-site staff' — https://cologix.com/resources/infographic-and-videos/faqs-how-secure-is-my-data-and-infrastructure-at-van4/",
   "arch_sec2_estruxVan2": "OPERATOR CLAIM: eStruxture, VAN-2 datasheet V5 (555 West Hastings St, Suite 2605; 28-floor multi-tenant building, four data halls on two floors, 14,500 sq ft): 'Advanced video surveillance, minimum 90 days of video retention'; 'CCTV video monitoring, security card access, and on-site security teams'; '24 / 7 / 365 Building Security Guards'; 'Centralized card access control system with dual factor biometric authentication'; mantraps listed — https://www.estruxture.com/hubfs/site-files/eStruxture_Datasheet_VAN2_EN-V5.pdf",
-  "arch_sec2_fm115": "INSURER GUIDE: FM Property Loss Prevention Data Sheet 1-15, Roof-Mounted Solar Photovoltaic Panels, April 2026 (full revision): 1.0 roof PV only; 'See ... Data Sheet 1-57, Plastics in Construction, for wall-mounted, building-integrated photovoltaic (BIPV) façade systems'; 2.0 an FM Approved Class 1A roof has the rating 'negated once PV panels are placed above it' unless the system is FM Approved; 2.1.1.4 A 'Use only noncombustible frames and mounting systems'; B arrays max 150 x 150 ft (46 x 46 m); C min 4 ft (1.2 m) aisle to next array; D 4 ft to expansion joints; E 6 ft to skylights; 3.2 encapsulants, backsheets and adhesives 'can ignite' — https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/01-construction/fmds0115.pdf",
+  "arch_sec2_fm115": "INSURER GUIDE: FM Property Loss Prevention Data Sheet 1-15, Roof-Mounted Solar Photovoltaic Panels, April 2026 (full revision): 1.0 roof PV only; 'See ... Data Sheet 1-57, Plastics in Construction, for wall-mounted, building-integrated photovoltaic (BIPV) façade systems'; 2.0 an FM Approved Class 1A roof has the rating 'negated once PV panels are placed above it' unless the system is FM Approved; 2.1.1.4 A 'Use only noncombustible frames and mounting systems. Use PV panels that are glass backed.'; B arrays max 150 x 150 ft (46 x 46 m); C min 4 ft (1.2 m) aisle to next array; D 4 ft to expansion joints; E 6 ft (1.8 m) to skylights; 3.2 'plastic frames, backsheets and adhesives' 'can ignite'; 1.2.1 encapsulants (EVA) 'provide additional fuel' — https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/01-construction/fmds0115.pdf ‖ CHECK 2 (1 Nov 2026, fixed): 3.2 names plastic frames, backsheets and adhesives, not encapsulants (those are 1.2.1); glass-backed panels and 1.8 m added.",
   "arch_sec2_fmBipv2025": "INSURER RESEARCH: G. Agarwal, 'Fire Performance Evaluation of Building Integrated Photovoltaic (BIPV) Façade Systems', FM technical report, Nov 2025 (project RW000606), ANSI/FM 4411 16-ft parallel panel test: three of four double-sided glass cavity-wall BIPV exceeded peak HRR thresholds with fire to the top; the 6 mm glass system ~780 kW, fire confined to ~8 ft; flexible BIPV ~11 MW, flames >30 ft (9.1 m); EN 13501-1 and UL 1703 accreditation did not correlate with façade performance; proposed FM 4483 criteria peak HRR <=830 kW (unlimited height) (read from executive summary; text truncated after 7.1.2) — https://www.fm.com/-/media/project/publicwebsites/fm/files/resources/research-technical-reports/2025_agarwal_bipv_fire_performance_evaluation_public_release_format_final.pdf",
-  "arch_sec2_axaPrc205": "INSURER GUIDE: AXA XL Risk Consulting, PRC.2.0.5 Protection of Buildings from Exterior Fire Exposures, (c) 2020: separation per NFPA 80A guide numbers, (guide number x height) + 5 ft (1.5 m); example 100 ft x 25 ft wall, 25% openings, severe, guide no. 2.55 -> 68.75 ft (21 m); within half the distance a blank 3 h wall; openings within 5 ft (1.5 m) filled or 3 h shutters, within 10 ft (3 m) 1 1/2 h, within half the distance 3/4 h; beyond half wired glass and deluge water curtain; lower-roof table not needed if exposing roof is concrete or >=1 h (some text garbled in extraction) — https://qac-cms.axaxl.com/-/media/axaxl/files/pdfs/prc-guidelines/prc-2/prc205protectionofbuildingsfromexteriorfireexposuresv1.pdf",
-  "arch_sec2_opS710": "INSURER GUIDE (EU): OP Insurance Ltd / A-Insurance Ltd (Finland), Safety Regulation S710 'Data centres', valid from 1 Jan 2018: 4.2 'Any unmanned data centre should be located in the middle of a building in a windowless room'; 'It must not be possible to remove the construction or any part of it from the outside without breaking it'; 'A Class 3 anti-burglar wall'; high-protection centres need an insurer-approved crime detection system, at least Class 3 (SFS-EN 50131-1), to a 24 h manned centre, duplicated transmission, anti-mask detectors, local sirens inside and outside; 4.4/4.9 ventilation plant and standby power in separate fire compartments; 4.5 consider toilets, heating water, roof above the hall; above ground floor or raised — https://www.op.fi/documents/20556/65462/Data+centres+S710/e7c01200-baf9-44ef-b89a-db06a715cf8c",
+  "arch_sec2_axaPrc205": "INSURER GUIDE: AXA XL Risk Consulting, PRC.2.0.5 Protection of Buildings from Exterior Fire Exposures, (c) 2020: separation per NFPA 80A guide numbers, (guide number x height) + 5 ft (1.5 m) (formula read from the worked example); example 100 ft x 25 ft wall, 25% openings, severe, guide no. 2.55 -> 68.75 ft (21 m); within half the distance a blank 3 h wall; openings within 5 ft (1.5 m) filled or 3 h shutters, within 10 ft (3 m) 1 1/2 h, within half the distance 3/4 h (printed garbled, inferred); beyond half wired glass and deluge water curtain; lower-roof table not needed if exposing roof is concrete or >=1 h (some text garbled in extraction) — https://qac-cms.axaxl.com/-/media/axaxl/files/pdfs/prc-guidelines/prc-2/prc205protectionofbuildingsfromexteriorfireexposuresv1.pdf ‖ CHECK 2 (1 Nov 2026, fixed): all figures confirmed; formula only shown in the worked example and the 3/4 h value is garbled in the source. ‖ SCOPE (check 2, 31 Oct 2026): US insurer guide built on NFPA 80A (US standard); benchmark outside Canadian code — NBC 3.2.3 spatial separation governs.",
+  "arch_sec2_opS710": "INSURER GUIDE (benchmark outside Canada, Finland): OP Insurance Ltd / A-Insurance Ltd (Finland), Safety Regulation S710 'Data centres', valid from 1 Jan 2018: 4.2 'Any unmanned data centre should be located in the middle of a building in a windowless room'; 'It must not be possible to remove the construction or any part of it from the outside without breaking it'; 'A Class 3 anti-burglar wall'; high-protection centres need an insurer-approved crime detection system, at least Class 3 (SFS-EN 50131-1), to a 24 h manned centre, duplicated transmission, anti-mask detectors, local sirens inside and outside; 4.4/4.9 ventilation plant and standby power in separate fire compartments; 4.5 water hazards above: 'toilets and washrooms, water-circulation central heating', production processes, roof; 'built above ground floor or the equipment must be on a raised platform' — https://www.op.fi/documents/20556/65462/Data+centres+S710/e7c01200-baf9-44ef-b89a-db06a715cf8c ‖ CHECK 2 (1 Nov 2026, fixed): all clauses confirmed; 4.5 put in source wording; kind marked as benchmark outside Canada. ‖ SCOPE (check 2, 31 Oct 2026): Finnish insurer rule; benchmark only, not binding in BC or Alberta.",
   "arch_sec2_zurich2026": "INSURER REPORT: Zurich North America, 'Data center risks right now' whitepaper, 2026 U.S. edition (Apr 2026): staff quotes only: 'hail-rated roof assemblies as construction-phase enhancements'; 'If they see flammable or combustible insulation materials in the plan, they can recommend alternatives'; no security, facade or mixed-use guidance — https://www.zurichna.com/knowledge/whitepapers/data-center-risks",
   "arch_sec2_allianz2025": "INSURER REPORT: Allianz Commercial, 'The data center construction boom: Emerging risk trends in the global buildout', Nov 2025: p. 22 wildfire and 'vegetation management'; p. 24 water damage 'can cause multi-milliondollar losses' (insurer statement); p. 19 site security named only; no construction, facade, security or mixed-use guidance — https://commercial.allianz.com/content/dam/onemarketing/commercial/commercial/reports/commercial-data-center-construction-risks.pdf",
   "arch_sec2_nbc3155": "RULE: NBC 2020 Div. B 3.1.5.4–3.1.5.6 (identical text in BCBC 2024, VBBL 2025 and NBC(AE) 2023, repo copies data/raw/codes/): 3.1.5.4.(2) 'Combustible vertical glazing installed no higher than the second storey is permitted in a building required to be of noncombustible construction', FSR <=75 (<=150 if <=25% of wall with conditions); 3.1.5.5.(1) combustible cladding permitted if building 'not more than 3 storeys' or 'sprinklered throughout' and CAN/ULC-S134 wall test: flaming 'does not spread more than 5 m above the opening' and heat flux 'not more than 35 kW/m2 measured at 3.5 m above the opening'; (2) Table 3.2.3.7 governs where limiting distance permits <=10% unprotected openings; (4) Appendix D-6 assemblies deemed to comply; 3.1.5.6 combustible components: same test or 25 mm masonry/concrete cladding; A-3.1.5.5.(1)(b)(ii) 'flame does not spread on the exterior surface ... where the heat flux is less than 35 kW/m2' — local copy of NBC 2020 (NRC)",
-  "arch_per_nbcWC": "RULE: National Building Code of Canada 2020, Div. B 3.7.2 (repo copy nbc.txt; BCBC 2024, NBC(AE) 2023 and VBBL 2025 compared word by word in bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt): 3.7.2.1.(2) industrial occupant load for washrooms 'permitted to be based solely on the total number of staff for which the floor area is designed, where the floor area is only intermittently occupied or where the presence of occupants is transitory' (Note A-3.7.2.1.(2): 'Substations and parking garages are examples'); 3.7.2.2.(2) both sexes may share a single water closet if occupant load 'not more than 10' (VBBL: 'not more than 25'); Table 3.7.2.2.-C industrial, per sex: 1-10 persons 1 WC, 11-25 2, 26-50 3, 51-75 4, 76-100 5, over 100 6 plus 1 per 30; Table 3.7.2.2.-B business and personal services: 1-25 1, 26-50 2, over 50 3 plus 1 per 50; 3.7.2.3.(1) at least one lavatory per room with 1 or 2 WCs. NBC(AE) only: 3.7.2.1.(6) 'plumbing fixtures are not required for a building of low human occupancy' (Note: 'pump houses, equipment storage shacks'). BCBC 3.8.2.8.(4): where WCs are required, 'at least one universal washroom shall be provided in the entrance storey' unless an accessible path leads to one elsewhere. VBBL 3.7.2.9.(1): occupant load over 200 needs at least one gender-neutral washroom facility. No code clause requires a break room or lunchroom (our reading of NBC Part 3).",
+  "arch_per_nbcWC": "RULE: National Building Code of Canada 2020, Div. B 3.7.2 (repo copy nbc.txt; BCBC 2024, NBC(AE) 2023 and VBBL 2025 compared word by word in bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt): 3.7.2.1.(2) industrial occupant load for washrooms 'permitted to be based solely on the total number of staff for which the floor area is designed, where the floor area is only intermittently occupied or where the presence of occupants is transitory' (Note A-3.7.2.1.(2): 'Substations and parking garages are examples'); 3.7.2.2.(2) both sexes may share a single water closet if occupant load 'not more than 10' (VBBL: 'not more than 25'); Table 3.7.2.2.-C industrial, per sex: 1-10 persons 1 WC, 11-25 2, 26-50 3, 51-75 4, 76-100 5, over 100 6 plus 1 per 30; Table 3.7.2.2.-B business and personal services: 1-25 1, 26-50 2, over 50 3 plus 1 per 50; 3.7.2.3.(1) at least one lavatory per room with 1 or 2 WCs. NBC(AE) only: 3.7.2.1.(6) 'plumbing fixtures are not required for a building of low human occupancy' (Note: 'pump houses, equipment storage shacks'). BCBC and VBBL 3.8.2.8.(4): where WCs are required, 'at least one universal washroom shall be provided in the entrance storey' unless an accessible path leads to one elsewhere (NBC and NBC(AE) 3.8.2.8.(4): 'at least one barrier-free water closet'). VBBL 3.7.2.2.(15): two unisex toilet rooms may serve an industrial or business occupancy if suite ≤200 m² and occupant load ≤60. VBBL 3.7.2.9.(1): occupant load over 200 needs at least one gender-neutral washroom facility. No code clause requires a break room or lunchroom (our reading of NBC Part 3). ‖ CHECK 2 (1 Nov 2026, fixed): all clauses confirmed; 3.8.2.8.(4) is in VBBL too (NBC/AB wording is barrier-free WC); VBBL 3.7.2.2.(15) added. ‖ SCOPE (check 2, 31 Oct 2026): Industrial tables apply only if the data centre is classed Group F; a Group D (business) classification uses Table 3.7.2.2.-B. Missed: VBBL 3.7.2.2.(15) lets two unisex toilet rooms serve an industrial or business occupancy of ≤200 m² and ≤60 persons.",
   "arch_per_ccohsSanitation": "GOVERNMENT GUIDE (federal agency summary, secondary): Canadian Centre for Occupational Health and Safety, 'Health and Safety Legislation - Sanitation and Toilet Facilities in the Workplace', date modified 2026-10-20 (fact sheet revised 2025-08-19): BC: OHS Regulation 4.85 (washroom facilities), Guideline G4.85(1)-1; toilets 'within 60 metres of the work area' and not more than one floor above or below; one facility for both sexes if 9 or fewer workers and lockable from inside. Alberta: OHS Code 357 (toilet facilities), 359 (hand cleaning), 360, 361, Schedule 7; employer 'must not place unreasonable restrictions on a worker's use of or access to toilet facilities'. Eating areas not covered by the page. Regulation text itself not read (WorkSafeBC page refused by this session) — https://www.ccohs.ca/oshanswers/legisl/legislation/health-and-safety-legislation-sanitation-and-toilet-facilities-in-the-workplace.html",
   "arch_per_bcSecReg": "RULE: Security Services Regulation, B.C. Reg. 207/2008 under the Security Services Act, S.B.C. 2007, c. 30 (deposited 27 Jun 2008, last amended 1 May 2025 by B.C. Reg. 48/2025): licence categories incl. 'Security guard' and 'Armoured car guard' (s. 15(4) table); s. 4(3)(a) business applicant gives 'addresses of locations from which the security business will be carried on'; s. 10 guard vehicles marked 'SECURITY', letters 'not less than 7.5 cm high'; s. 12 uniforms; s. 11 restricted equipment. No section on the premises where guards are posted: no guard room, booth, washroom or break-room rule (read 1 Nov 2026) — https://free.bcpublications.ca/civix/document/id/complete/statreg/207_2008",
   "arch_per_abSSIA": "GOVERNMENT GUIDE: Alberta Justice and Solicitor General, Security Services and Investigators Act Policy Manual, Version 4.0 (June 2010, amended July 2015): business licence needs an Alberta address and a list of branch offices (3.6.2, 3.7.2); licence displayed at all offices. Table of contents lists 8.6.1 'Holding/Detention Rooms' and Appendix C 'Guidelines on Safety and Construction of Facilities Used for the Detention of Arrested Persons' — text not reached (only first ~100,000 characters read; direct download refused by this session's proxy). Act summary page (open.alberta.ca/publications/s04p7, updated 16 Nov 2022) mentions no premises rules. — https://open.alberta.ca/dataset/e85337d1-c497-413a-aa67-f4a309b8a1cf/resource/388370a7-05ac-47d1-9159-d18b5c61f017/download/ssia-policy-manual-4-0-amended-2015-2.pdf",
-  "arch_per_gcpsg010": "GOVERNMENT GUIDE: RCMP Lead Security Agency, GCPSG-010 (2022) Operational Physical Security Guide, effective 2022-12-05: 7.6.7 'If a TRA identifies a security requirement to employ security guards' then guard type, duties, training, equipment and safety are addressed (no figures); 6.2.2 Reception Zone includes 'areas where interaction with security guards occurs'; 7.4.1 entry points channel traffic to be controlled 'by personnel, guards or automated means'; 7.4.3 docks and mail rooms 'should not be directly linked' to restricted areas; 7.3.2 perimeter control incl. 'gates'; 7.3.8 landscape security: 'Fences, walls and other barriers'; 7.3.1 easements for utility, public or emergency access can 'limit the tenant's ability to control access'; 7.6.4 SOC 'a focal point for monitoring'. No guard-booth location, staffing level or vehicle-barrier figures. — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-010-2022-operational-physical-security-guide",
+  "arch_per_gcpsg010": "GOVERNMENT GUIDE: RCMP Lead Security Agency, GCPSG-010 (2022) Operational Physical Security Guide, effective 2022-12-05: 7.6.7 'If a TRA identifies a security requirement to employ security guards' then guard type, duties, training, equipment and safety are addressed (no figures); 6.2.2 Reception Zone includes 'areas where interaction with security guards occurs'; 7.4.1 entry points channel traffic to be controlled 'by personnel, guards or automated means'; 7.4.3 docks and mail rooms 'should not be directly linked' to restricted areas; 7.3.2 perimeter control incl. 'gates'; 7.3.8 landscape security: 'Fences, walls and other barriers'; 7.3.1 easements for utility, public or emergency access can 'limit the tenant's ability to control access'; 7.6.4 SOC 'a focal point for monitoring'. No guard-booth location, staffing level or vehicle-barrier figures. — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-010-2022-operational-physical-security-guide ‖ SCOPE (check 2, 31 Oct 2026): Federal Government of Canada facility guidance; benchmark for a private data centre, not binding.",
   "arch_per_gcpsg003support": "GOVERNMENT GUIDE: RCMP, GCPSG-003 (2021) Security Operations Centre Design Considerations Guide, effective 2021-08-09 (supplements arch_sec2_gcpsg003): 6.2 spaces to consider: 'Rest Area/Break Room', 'Washroom/Shower/Changing Room(s)', 'Kitchenette', 'Locker Room'; 6.3 item 9 'The SOC may also include supporting spaces such as rest areas, washrooms, kitchenette facilities', lockers 'or a locker room depending on its size'; 4.1 'A SOC typically provides 24 hour surveillance'; 5.5 '8 or 12 hours shifts'; staffing per position 'TBD'; no m² per operator; 6.4 wheelchair clearances 1200 mm × 900 mm. — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-003-2021-security-operations-centre-design-considerations-guide",
   "arch_per_rcmpIndex": "GOVERNMENT GUIDE (index page): RCMP, 'Guidance and publications' list of current and archived physical security guides (read 1 Nov 2026): no current guide on vehicle barriers, guard posts or gatehouses. Archived, GC employees only (request by email): G1-008 'Guidelines for Guard Services' (04/2001); G1-013 'Security Control Room Space Requirements' (09/2006); G1-015 'Entry Controls for Overhead Doors' (12/1981). — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications",
-  "arch_per_gcpsg009hvm": "GOVERNMENT GUIDE: RCMP, GCPSG-009 (2022) Security Fencing Considerations Guide, effective 2022-01-27, approved 2022-03-16, page modified 2025-11-03 (official RCMP page; supplements register rcmpGCPSG009 and arch_sec2_gcpsg009b): 8.2 ASTM F2656 'details the requirements for the Hostile Vehicle Mitigation measures'; M30 (K4) 30 mph, M40 (K8) 40 mph, M50 (K12) 50 mph, 15,000 lb vehicle; P1 <1 m, P2 1.1-7 m, P3 7-30 m, P4 ≥30.1 m penetration; 'there is no limit to how far the vehicle can travel past the barrier to be certified'; protection depends on 'the setback and standoff distances' set by a TRA. 9.1 bollards, large planters or rocks as 'larger, more robust vehicular security barriers' where pedestrian traffic is high; back-filled retaining wall as a vehicle barrier; 'Blast pressure falls off with increased standoff'. 9.1, 9.5 ditches and berms. 10.3.2, 10.5 fences with 'integral crash beams or cables'. 10.6 gate barriers: fixed or movable bollards, wedge/ramp barriers, locking arms, cable barriers; 'the first choice to protect a gate is to limit the approach speed of a vehicle' (curves, chicanes, parallel approach); halving speed cuts impact force to a quarter; gates latch 'approximately every four feet of vertical height'. 10.1 minimum security fence 2.4 m, high security ≥3.6 m. 5 and 9.4: provincial or municipal laws and AHJ height limits may restrict fences. No bollard spacing. — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-009-2022-security-fencing-considerations-guide",
+  "arch_per_gcpsg009hvm": "GOVERNMENT GUIDE: RCMP, GCPSG-009 (2022) Security Fencing Considerations Guide, effective 2022-01-27, approved 2022-03-16, page modified 2025-11-03 (official RCMP page; supplements register rcmpGCPSG009 and arch_sec2_gcpsg009b): 8.2 ASTM F2656 'details the requirements for the Hostile Vehicle Mitigation measures'; M30 (K4) 30 mph, M40 (K8) 40 mph, M50 (K12) 50 mph, 15,000 lb vehicle; P1 <1 m, P2 1.1-7 m, P3 7-30 m, P4 ≥30.1 m penetration; 'there is no limit to how far the vehicle can travel past the barrier to be certified'; protection depends on 'the setback and standoff distances' set by a TRA. 9.1 bollards, large planters or rocks as 'larger, more robust vehicular security barriers' where pedestrian traffic is high; back-filled retaining wall as a vehicle barrier; 'Blast pressure falls off with increased standoff'. 9.1, 9.5 ditches and berms. 10.3.2 fences with 'integral crash beams or cables'. 10.6 gate barriers: fixed or movable bollards, wedge/ramp barriers, locking arms, cable barriers; 'the first choice to protect a gate is to limit the approach speed of a vehicle' (curves, chicanes, parallel approach); halving speed cuts impact force to a quarter; gates latch 'approximately every four feet of vertical height'. 10.1 minimum security fence 2.4 m, high security ≥3.6 m. 5 and 9.4: provincial or municipal laws and AHJ height limits may restrict fences. No bollard spacing. — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-009-2022-security-fencing-considerations-guide ‖ CHECK 2 (1 Nov 2026, fixed): 10.5 does not contain 'integral crash beams or cables'; cited 10.3.2 only. All other figures confirmed. ‖ SCOPE (check 2, 31 Oct 2026): Federal Government of Canada facility guidance; benchmark for a private data centre.",
   "arch_per_gcpsg002hvm": "GOVERNMENT GUIDE: RCMP, GCPSG-002 Blast Mitigation Considerations Guide (effective 2020-03-04; amended 2021-06-30 and 2026-04-27; listed as 2026) (supplements arch_sec_gcpsg002): 6.3 'Protective measures capable of holding back an impacting vehicle are required'; furniture and planters 'generally not able to restrain a vehicle deliberately driven at a high rate of speed'; restraints are bollards, barriers, walls, designed to 'the expected design vehicle class'; 6.2 'vehicle inspection facilities and barrier systems at a buildings perimeter remain fully functional'; roadway access limited to vetted, inspected vehicles; minimize perimeter parking in the watch zone; 6.1 Exclusion Zone ≥3 m, Watch Zone ≥30 m on average; names CSA S850-12 for blast design. Only where a TRA finds a blast threat. — https://rcmp.ca/en/lead-security-agency-physical-security/guidance-and-publications/gcpsg-002-2021-blast-mitigation-considerations-guide",
-  "arch_per_nactsoHvm": "GOVERNMENT GUIDE (UK benchmark, WITHDRAWN 30 May 2022): NaCTSO, Crowded Places Guidance, 'Hostile Vehicle Mitigation (HVM)', published 2 Nov 2020, page updated 7 Jan 2026: maximum gap between adjacent vehicle security barriers 'no greater than 1200mm', measured between structural elements at 600 mm above ground; barrier types: active, retractable and passive bollards, gates, planters and strengthened street furniture; ditches, bunds and berms; stand-off 'the single most important factor'; static barriers preferred, active barriers where frequent access is needed; test standards PAS 68 and IWA 14-1; road restrictions via an Anti-Terrorism Traffic Regulation Order. Superseded by ProtectUK guidance (not read). — https://www.gov.uk/government/publications/crowded-places-guidance/hostile-vehicle-mitigation-hvm",
+  "arch_per_nactsoHvm": "GOVERNMENT GUIDE (UK benchmark, WITHDRAWN 30 May 2022): NaCTSO, Crowded Places Guidance, 'Hostile Vehicle Mitigation (HVM)', published 2 Nov 2020 (7 Jan 2026 is a metadata timestamp only): maximum gap between adjacent vehicle security barriers 'no greater than 1200mm', measured between structural elements at 600 mm above ground; barrier types: active, retractable and passive bollards, gates, planters and strengthened street furniture; ditches, bunds and berms; stand-off 'the single most important factor'; static barriers preferred, active barriers where frequent access is needed; test standards PAS 68 and IWA 14-1; road restrictions via an Anti-Terrorism Traffic Regulation Order. Superseded by ProtectUK guidance (not read). — https://www.gov.uk/government/publications/crowded-places-guidance/hostile-vehicle-mitigation-hvm ‖ CHECK 2 (1 Nov 2026, fixed): no visible update after publication; all figures confirmed.",
   "arch_per_vanS10": "RULE: City of Vancouver Zoning and Development By-law No. 3575, Section 10 General Regulations (April 2025 headers; read 1 Nov 2026): 10.10.1 'fence' includes 'arbors, archways, boundary fences, gates, pergolas, screens, trellises, walls and similar structures'; 10.10.2 height measured from ground at the fence line; 10.10.3 a fence is permitted in a required yard if it 'does not exceed 1.9 m in height' (all districts); 10.10.4 1.2 m in a required front yard in C-1 or any R district only; 10.10.5 reduced by half the retaining wall height within 1.0 m of a boundary retaining wall; 10.10.6 Director of Planning may permit a non-complying fence after notifying owners. 10.7.1 M, I and CD-1 sites abutting streets listed in Schedule C: setback at the Schedule C depth; 'no building or structure of any kind', no manoeuvring aisle, parking or loading in it; 'fully graded and landscaped'; Director may allow 'open ornamental fences if necessary for the protection and preservation of landscaping' and access walks or driveways. 10.13.1 no development in a required yard except as provided. No barbed-wire or lighting clause. Schedule C itself not read (fetch failed). — https://bylaws.vancouver.ca/zoning/zoning-by-law-section-10.pdf",
   "arch_per_vanI3yards": "RULE: City of Vancouver Zoning and Development By-law, I-3 District Schedule (June 2026, local copy data/raw/van/i3.txt = van_zdb_i3) and I-2 District Schedule (June 2026, van_zdb_i2/full.pdf): I-3 sub-area A 3.1.2.2 minimum front yard 0.6 m; 3.1.2.4 side yard 7.6 m; 3.1.2.6 rear yard 3.1 m (reduced where the rear abuts a lane, 3.1.2.17); I-3 4.5.1 'Any fence, wall, or landscaping located along the street property line abutting a street but not a lane must facilitate pedestrian interest to the satisfaction of the Director of Planning'. I-2 (all areas except sub-area B) 3.1.2: side yard 'not required' unless adjoining R districts; rear yard 3.1 m; no front yard listed. I-1C, I-2, I-3, FC-2 2.2 outdoor storage only if 'enclosed by a suitable fence or wall restricting public access'.",
   "arch_per_vanEncroach": "RULE: City of Vancouver Encroachment By-law No. 4243 (consolidated to 8 Dec 2021, incl. By-law 13191 eff. 1 Jan 2022): s. 3(1) an agreement with the City is needed before constructing, using or maintaining 'any encroachment upon, under or over a street'; s. 3(3) 'Permission is hereby granted for the use and existence of all encroachments which comprise only grassed areas, access sidewalks, steps, fences, rockeries, hedges or garden areas' if the Engineer is satisfied as to safety; Schedule D lists 'planters', 'retaining walls', 'bulkheads' as encroachments with no annual charge; s. 9A Engineer may revoke and require removal; s. 13 owner indemnifies the City; bollards not mentioned. — https://bylaws.vancouver.ca/4243c.pdf",
-  "arch_per_vanPkgSupp": "DESIGN GUIDE (City by-law supplement): City of Vancouver, Parking By-law No. 6059 Design Supplement (bulletin eff. 12 Jul 1988, last amended 16 Feb 2024) (supplements arch_sep_vanLoadingSupp): 1.5 security gates and overhead doors 'should be positioned such that a vehicle is fully on private property when stopped to activate the door' (driveway from a street, not a lane); on narrower two-way driveways the door 'should be activated by a remote-control unit in the vehicle'; 2.6 automatic ticket dispensers 'not less than 15 m inside the property line', attendant booths normally ≥30 m; 1.2 'The maximum ramp slope allowed in the first 6.1 m from the property line is 10%'; 1.3 Table 1 ramp widths 3.6 m or 6.1 m; Figure 5 aisle widths Class A 6.1 m, B 6.1 m, C 14.0 m; Table 3 design vehicles: Class A 'Passenger (P)', Class B 'SU-9', Class C 'WB-17'; 2.8 no backing 'for more than 10 m', exit 'in a forward direction'. No queue length before a gate. — https://guidelines.vancouver.ca/bulletins/bulletin-parking-loading-design-supplement.pdf",
+  "arch_per_vanPkgSupp": "DESIGN GUIDE (City by-law supplement): City of Vancouver, Parking By-law No. 6059 Design Supplement (bulletin eff. 12 Jul 1988, last amended 16 Feb 2024) (supplements arch_sep_vanLoadingSupp): 1.5 security gates and overhead doors 'should be positioned such that a vehicle is fully on private property when stopped to activate the door' (driveway from a street, not a lane); on narrower two-way driveways the door 'should be activated by a remote-control unit in the vehicle'; 2.6 automatic ticket dispensers 'not less than 15 m inside the property line', attendant booths normally ≥30 m; 1.2 'The maximum ramp slope allowed in the first 6.1 m from the property line is 10%'; 1.3 Table 1 ramp widths 3.6 m or 6.1 m; Figure 5 loading aisle widths Class A 6.1 m, B 6.1 m, C 14.0 m; Table 3 design vehicles: Class A 'Passenger (P)', Class B 'SU-9', Class C 'WB-17'; 2.8 no backing 'for more than 10 m', exit 'in a forward direction'. No queue length before a gate. — https://guidelines.vancouver.ca/bulletins/bulletin-parking-loading-design-supplement.pdf ‖ CHECK 2 (1 Nov 2026, fixed): all figures confirmed; Figure 5 is loading aisle widths.",
   "arch_per_edmFence": "RULE: City of Edmonton Zoning Bylaw 20001 (as adopted, local copy data/raw/edm/bylaw/b.txt): 8.20 'Fence means a structure that is constructed at ground level and used to prevent or restrict passage, mark a boundary, or provide visual screening'; 'Setback means the distance that a development, or a specified portion of a development, must be from a Lot line … only applies to development on or above ground level'; 5.100 fence height table applies 'only to Fences and Privacy Screens that are constructed within residential Zones or Sites within non-residential Zones that are developed with a Residential Use' (no non-residential fence height section found); 5.120 1.1.5 (non-industrial development) 'Fences that contain, or are constructed of, hazardous materials such as barbed wire, are not permitted'; 7.120 9.1.5 (Edmonton South Special Area only) no permit needed for 'in a non-residential area a chain-link security Fence less than or equal to 2.5 m in height'; 5.60 2.2 all Setback areas 'must be Landscaped' except pathways, parking and circulation; 4.1.1 1 tree and 2 shrubs per 30 m² of setback; 4.7 loading and service areas screened from non-industrial zones and Streets with a Landscape Buffer 'minimum Height of 1.8 m'. BE 4.1.3-4.1.4 street setback 6.0 m (4.5 m on collector or local road); IM 4.1.3 and IH 4.1.4 street setback 3.0 m; IM 5.3 'The maximum Height of screening specified in Subsection 5.2 is 3.7 m'; BE 5.2 equipment, transformers, cooling towers screened from Streets. 5.80 1.1 'All vehicle access locations and curb crossings require the approval of the Development Planner'; 4.2.2 Parkade entrances so vehicles 'do not block an Abutting Pathway or sidewalk, or interfere with vehicle traffic flow'; 6.110 7 queuing spaces 6.5 × 3.0 m (drive-through and vehicle support services only).",
-  "arch_per_edmRow": "GOVERNMENT GUIDE (City web page): City of Edmonton, 'Road Right-of-Way (Regulated Road Use)' (undated, read 1 Nov 2026): a Licence of Occupation 'allows the road right-of-way for commercial or residential purposes' 'such as parking and storage areas, landscaping and gardening, walls and fences'; 'Planters on boulevards and sidewalks need to meet the attached guidelines and need to be approved by the City'; names Bylaw 5590 (Traffic Bylaw) for signs only. Bollards not mentioned. Licence of Occupation guideline PDF and COE-IM-GUIDE-0023 refused (robots). — https://www.edmonton.ca/business_economy/road-rights-of-way",
-  "arch_per_ufc402201": "US GOVERNMENT CRITERIA (benchmark, military entry points): UFC 4-022-01 Security Engineering: Entry Control Facilities / Access Control Points, 27 Jul 2017 (first ~100,000 of 116,000 characters read): 4-1.1.1 'Provide adequate stacking distance for vehicles waiting for entry' so public highway traffic is minimally affected; 5-3 'Maximize the length of the approach zone to provide optimal stacking distance'; 3-2 queue from 'peak hour demand volume'; 2-2.3.2 'truck processing must be segregated from POV processing'; 4-1.3 Response Zone runs to the final denial active vehicle barrier; 5-5.1.5 'not assume less than 2 seconds for AVB deployment'; 5-4 'Provide a gatehouse for each ECF/ACP', central control for barriers, lighting, surveillance, on a median or to the side; 'guard booths for each entry lane'; 0.9 m from face of curb to guard facilities. Guard washroom and break-area clauses (5-7.7, 5-7.8) not reached. — https://www.wbdg.org/FFC/DOD/UFC/ufc_4_022_01_2017.pdf",
-  "arch_per_dlrIad12": "OPERATOR CLAIM: Digital Realty, IAD12 data centre page (Ashburn, Virginia; undated, © 2026): 'Perimeter fencing, manned guard gates, berms, and hardscaping make this campus a fortress for your data'; '24x7 onsite security personnel'; 'CCTV with 90 day backup'; 'Biometric/ Photo badge access'. No crash ratings. — https://www.digitalrealty.com/data-centers/americas/northern-virginia/iad12",
+  "arch_per_edmRow": "GOVERNMENT GUIDE (City web page): City of Edmonton, 'Road Right-of-Way (Regulated Road Use)' (modified 20 Aug 2026, read 1 Nov 2026): a Parking and Storage Licence of Occupation 'allows commercial and industrial businesses to use the road right-of-way as temporary parking and storage areas'; a Landscaping Licence of Occupation 'allows a resident or business to use the road right-of-way space for enhanced landscaping purposes'; names Bylaw 5590 (Traffic Bylaw) for signs only. Walls, fences, planters and bollards not mentioned. Licence of Occupation guideline PDF and COE-IM-GUIDE-0023 refused (robots). — https://www.edmonton.ca/business_economy/road-rights-of-way ‖ CHECK 2 (1 Nov 2026, fixed): 'walls and fences', 'gardening', 'commercial or residential purposes' and the planters sentence are not on the current page; replaced with the page's licence wording.",
+  "arch_per_ufc402201": "US GOVERNMENT CRITERIA (benchmark, military entry points): UFC 4-022-01 Security Engineering: Entry Control Facilities / Access Control Points, 27 Jul 2017 (first ~100,000 of 116,000 characters read): 4-1.1.1 'Provide adequate stacking distance for vehicles waiting for entry' so public highway traffic is minimally affected; 5-3 'Maximize the length of the approach zone to provide optimal stacking distance'; 3-2 queue from 'peak hour demand volume'; 2-2.3.2 'truck processing must be segregated from POV processing'; 4-1.3 Response Zone runs to the final denial active vehicle barrier; 5-5.1.5 'not assume less than 2 seconds for AVB deployment'; 5-4 'Provide a gatehouse for each ECF/ACP', central control for barriers, lighting, surveillance, on a median or to the side; 'guard booths for each entry lane'; 0.9 m from face of curb to guard facilities. Guard washroom and break-area clauses (5-7.7, 5-7.8) not reached. — https://www.wbdg.org/FFC/DOD/UFC/ufc_4_022_01_2017.pdf ‖ SCOPE (check 2, 31 Oct 2026): US military entry-control criteria; benchmark only, far beyond what a civilian data centre needs.",
+  "arch_per_dlrIad12": "OPERATOR CLAIM: Digital Realty, IAD12 data centre page (Ashburn, Virginia; undated, © 2026): 'Perimeter fencing, manned guard gates, berms, and hardscaping make this campus a fortress for your data'; '24x7 onsite security personnel'; 'CCTV with 90 day backup'; 'Biometric/ Photo badge access'. No crash ratings. — https://www.digitalrealty.com/data-centers/americas/northern-virginia/iad12 ‖ SCOPE (check 2, 31 Oct 2026): US (Virginia) campus; benchmark outside Canada.",
   "arch_per_estruxCal2": "OPERATOR CLAIM: eStruxture, CAL-2 datasheet V4 (149 High Plains Place, Rocky View County, AB; single-floor 92,839 sq ft building, built 2021, data centre 2022): 'Data center perimeter and equipment yard secured by fencing. Gates controlled by central security'; 'Site completely secured by perimeter fencing, security monitored with controlled gates'; '24/7 on site security and support'; mantraps with card and biometric access; CCTV exterior, entrances, interior, ≥90 days retention. No vehicle barriers named. — https://info.estruxture.com/hubfs/site-files/eStruxture_Datasheet_CAL2-V4-EN.pdf",
-  "arch_per_cologixVan4Sheet": "OPERATOR CLAIM: Cologix, VAN4 datasheet (175 West Cordova Street, Vancouver; 40K sq ft downtown; VAN4.E.052026.R2, local copy data/raw/cologix_van4_2026-05.pdf; VAN1 sheet data/raw/cologix_van1_2026-05.pdf same line): Security: 'Cameras: Closed-circuit television (CCTV) system'; 'Access: Biometric and badged access'; 'Security Personnel 24/7/365'; 'Parking: Limited onsite parking available'. No fence, gate or vehicle barrier listed (urban building on the street line)."
+  "arch_per_cologixVan4Sheet": "OPERATOR CLAIM: Cologix, VAN4 datasheet (175 West Cordova Street, Vancouver; 40K sq ft downtown; 'Leased building, single tenant', '4-story concrete frame'; VAN4.E.052026.R2, local copy data/raw/cologix_van4_2026-05.pdf): Security: 'Cameras: Closed-circuit television (CCTV) system'; 'Access: Biometric and badged access'; 'Security Personnel 24/7/365'; 'Parking: Limited onsite parking available'. VAN1 sheet (VAN1.042026.R4, data/raw/cologix_van1_2026-05.pdf): 'Closed-circuit TV (CCTV) systems/cameras located at all facility main entrances and critical infrastructure locations'; 'HID access cards and biometric authentication'; 'Security Personnel 24/7/365'. No fence, gate or vehicle barrier listed on either (our reading: urban building on the street line). ‖ CHECK 2 (1 Nov 2026, fixed): VAN1 wording differs from VAN4, now quoted; 'on the street line' marked as our reading.",
+  "arch_svc_nbcae72": "RULE: National Building Code – 2023 Alberta Edition, Div. B Section 7.2 Aquatic Facilities (local copy data/raw/codes/nbc_ab2023.txt): 7.2.1.1 applies to public and semi-public pools; 7.2.3.38.(1) equipment room 'reasonably accessible from the swimming pool enclosure, using doors that are locked to unauthorized persons'; (2) 'Additional outside access for public swimming pools shall be provided to the equipment and mechanical room'; 7.2.3.39.(2) chemical storage 'shall not be near heating equipment nor have direct access to areas that are accessible to the public'; 7.2.3.45.(1) gaseous chlorine: (a) gas-tight, mechanically vented enclosure, not less than 1 h; (b) only chlorination equipment; (c) 'at ground level with access to the outside through outwardly opening doors'; (g) exhaust discharge 'so as not to contaminate air inlets to buildings or areas used by people'; (i) vent hose 'in a location not used by the public' — local copy (NRC/Alberta, 2023)",
+  "arch_svc_abStandata19bci008": "GOVERNMENT INTERPRETATION: STANDATA 19-BCI-008 Rooms Containing Gaseous Chlorine, Alberta Municipal Affairs, Dec 2019 (on NBC(AE) 2019 7.2.3.45): chlorine room at ground level with outward-opening exterior door that serves as an emergency exit; 1 h fire separation; no doorways or operable windows to the rest of the building (Interp. 2a) — https://open.alberta.ca/dataset/b5d1d6b9-6429-4a1a-96af-e7c0500d5017/resource/dcd023de-4e23-40ba-8b36-5a0fdc180e7b/download/ma-standata-19-bci-008-rooms-containing-gaseous-chlorine.pdf",
+  "arch_svc_abPoolStd2014": "RULE: Pool Standards, Alberta Health, July 2014 (amended, effective 24 Aug 2017): 10.1(k) safety plan includes 'information on the safe handling and storage of pool treatment chemicals'; 2.4 ventilation 'must protect against the buildup of chlorine gas'; no clauses on chemical room location or exterior access — https://open.alberta.ca/dataset/f2e84a9a-2e3c-43b4-8542-5762624c499a/resource/ef958320-f00b-43df-881d-0ecf6e67236e/download/Standards-Pools.pdf",
+  "arch_svc_bcPoolDesign2025": "GOVERNMENT GUIDE: B.C. Guidelines for Pool Design, Version 3, Health Protection Branch, BC Ministry of Health, April 2025 (hosted by Island Health): 3.2 (p. 7) 'sufficient room for an ambulance gurney to pass easily', 1.2 m deck around obstructions; 9.8 (p. 41) 'Equipment rooms must be designed to the B.C. Building Code'; 9.9 (p. 41) 'The BC Fire Code details chemical storage room design requirements including clearance'; rest of 9.9 (p. 42) not reached — https://islandhealth.ca/sites/default/files/environment/documents/bc-guidelines-for-pool-design-v3-april-2025.pdf",
+  "arch_svc_vanPkg5": "RULE: Parking By-law No. 6059, Section 5 Off-Street Loading Space Regulations, City of Vancouver: 5.2.3 community centre, hospital, pool 'with spectator facilities', fitness centre: Class A no requirement, Class B 'A minimum of one space for each 2 800 square metres of gross floor area'; hospital Class C 1 at 2,000–5,000 m2, 2 above; 5.2.5 restaurant and retail: Class B 'one space for the first 465 square metres … plus one space for any portion of the next 1 860 square metres and one additional space for each additional 2 325 square metres'; 5.1.4 unlisted uses set by the Director of Planning by similar use — https://bylaws.vancouver.ca/parking/sec05.pdf",
+  "arch_svc_vanPkg7": "RULE: Parking By-law No. 6059, Section 7 Off-Street Passenger Space Regulations, City of Vancouver: 7.2.2.1 Community Care Facility Class B 'A minimum of one space for any facility with 15 or more beds up to a maximum of 119 beds', Class A one space at 80–159 beds; 7.2.3 Cultural and Recreational: no requirement; 7.3.2 Class A 2.9 m wide, 2.3 m clear; 7.4.2 Class B 'minimum 4.0 metres in width … minimum vertical clearance of 3.5 metres'; 7.5.2 Class C 14.0 m long, 4.3 m clear — https://bylaws.vancouver.ca/parking/sec07.pdf",
+  "arch_svc_vanGarbageSupp": "DESIGN GUIDE (City): Garbage and Recycling Storage Amenity Design Supplement, City of Vancouver Engineering Services, May 2011 rev. July 2022: 1.1 'at grade (ground level) and adjacent to the area where collection vehicles are allowed access', else no more than one level down; separate amenities 'for different types of occupants'; 1.2 area 2.0–2.5 x container footprint, 7 days of waste; 2.0 generation rates per m2 per week, size = containers x footprint x 2.25; 2.1.2 tables by use and floor area; 1.4 pad ±2%, 28,000 kg; 1.6 4.5 m clear height, 6.5–7.5 m at front-end tipping, forward motion; App. B truck 3.2 m wide, 10.0/12.8 m radii, 15.2 m length clearance — https://guidelines.vancouver.ca/guidelines-garbage-recycling-storage-facility-design.pdf",
+  "arch_svc_mvGarbageSpecs": "MODEL SPECIFICATION (issuer not named on document; hosted by Metro Vancouver): Technical Specifications for Recycling and Garbage Amenities in Multi-family and Commercial Developments, June 2015 update: 6.5 combined garbage and recycling space: retail 0.0182 x floor m2 + 3.7 (min 10), office 0.0089 x m2 + 3.3 (min 10), large venue 0.0244 x m2 + 6 (min 10), restaurant 0.0331 x m2 + 6.8 (min 14); 6.6 max 101 m2; 7.1 on the lot, at ground level or no more than one storey below; 8.1(c) no dimension under 2 m; 10.2 pad 28 t, 7.5 m high x 6.0 m wide x 15.0 m long; 11.3 route 4.5 m wide (6 m at entry), 4.4 m clear, 12.5 m radius, slope <=6%, no reversing onto a public road — https://metrovancouver.org/services/solid-waste/Documents/multi-family-commercial-technical-specs-storage-space-access-recycling-2015.pdf",
+  "arch_svc_edmWasteStd2026": "GOVERNMENT STANDARD: Development Standards for Residential Waste Collection: Single and Multi-Unit Developments, City of Edmonton Waste Services, Rev. 1.0, 2 Mar 2026: p. 7 applies to developments with a residential component; p. 25 mixed use keeps non-residential containers separate, non-residential waste to a private hauler; p. 26 waste area 'less than 45 m away from any entrance', cart moving distance <=9.10 m, rooms at grade with direct exterior access; p. 22 3.0 m from hydrants and FDCs; p. 27 7.0 m drive aisles; p. 33 reversing <36 m; App. B turning radii 12.8–14.4 m — https://www.edmonton.ca/sites/default/files/public-files/documents/development-standards-for-waste-collection.pdf",
+  "arch_svc_wsbcPart11": "RULE: Occupational Health and Safety Regulation, Part 11 Fall Protection, WorkSafeBC (online, non-official version): 11.2(1) fall protection where 'a fall of 3 m (10 ft) or more may occur'; 11.2(2)–(5) guardrails when practicable, then fall restraint, then fall arrest, then work procedures; 11.3(1)(a) written plan at 7.5 m without permanent guardrails; 11.6(4) permanent anchors 22 kN in any direction; no roof-edge setback clause — https://www.worksafebc.com/en/law-policy/occupational-health-safety/searchable-ohs-regulation/ohs-regulation/part-11-fall-protection",
+  "arch_svc_ahsRecepSite": "GOVERNMENT GUIDE: Reception Centres: A Guide for Municipalities, Alberta Health Services, PUB-0539-202405 (supplements arch_ahsReceptionCentres): p. 3 site selection by the municipality; factors 'Transportation', 'Building accessibility', 'Population served', 'Proximity to the event and resources'; p. 6 laundry separate from food areas; p. 8 garbage away from living spaces, shaded secure bins; p. 17 'a clear and designated pathway for emergency medical services (EMS) transport and delivery of supplies and equipment' — https://www.albertahealthservices.ca/assets/wf/eph/wf-eph-reception-centres-municipalities.pdf",
+  "arch_svc_bcCoronerHeat2022": "GOVERNMENT REPORT: Extreme Heat and Human Mortality: A Review of Heat-Related Deaths in B.C. in Summer 2021, BC Coroners Service, report to the Chief Coroner, released 7 Jun 2022: 619 heat-related deaths (p. 4); 67% aged 70+, 90% over 60 (pp. 5, 13); 56.1% lived alone (p. 17, Table 8); 98% indoors in a residence; 39% multi-unit, 10% social/SRO/supportive housing (p. 17, Table 7); 28% most materially deprived, 33% most socially deprived quintile (p. 16, Tables 5–6); 3 homeless (Table 8); AC in 7% (p. 19); mobility and distance barriers to cooling centres, mobile centres and shuttles (p. 26); Rec. 1(C), 2(A) (pp. 31–32) — https://www2.gov.bc.ca/assets/gov/birth-adoption-death-marriage-and-divorce/deaths/coroners-service/death-review-panel/extreme_heat_death_review_panel_report.pdf",
+  "arch_svc_hcWhoAtRisk": "GOVERNMENT GUIDE: Extreme heat events: Health risks and who is at risk of extreme heat events, Health Canada, mod. 7 May 2024: 'older adults'; 'infants and young children'; 'people with chronic illnesses (like breathing problems, mental illness and heart problems)'; 'people who are unable to keep their living space cool'; people who work or exercise in the heat; 'people experiencing homelessness'; 'people with low incomes' — https://www.canada.ca/en/health-canada/services/climate-change-health/extreme-heat/who-is-at-risk.html",
+  "arch_svc_hcHarsGuide": "GOVERNMENT GUIDE: Heat Alert and Response Systems to Protect Health: Best Practices Guidebook, Health Canada (H129-9/2011E; web 17 Dec 2020): 3.2 vulnerability factors incl. higher floors without AC, social isolation, older housing; 'easy-to-access cooling options (e.g. places with air conditioning, community pools)'; 3.5.1 cooling facilities 'should have back-up energy sources', water, cots; Box 3 'Identify transportation options to get people to and from cooling facilities', extend hours; no siting distance — https://www.canada.ca/en/health-canada/services/environmental-workplace-health/reports-publications/climate-change-health/heat-alert-response-systems-protect-health-best-practices-guidebook.html",
+  "arch_svc_edmC620": "RULE (Council policy): C620 Supporting Vulnerable People During Extreme Weather Conditions, City of Edmonton, approved 16 Jul 2019: Vulnerable People at risk of serious or fatal health effects, 'in particular persons experiencing homelessness'; no site location criteria — https://www.gov.edmonton.ab.ca/sites/default/files/public-files/assets/PoliciesDirectives/C620.pdf",
+  "arch_svc_edmEWOverview": "GOVERNMENT: Extreme Weather Overview 2019–2025, City of Edmonton (supplements arch_edmExtremeWeather): recreation centres and libraries as respite for cold, heat and poor air; 'overnight Winter Shelter Shuttles on two designated routes', one more on activation; up to 50 overnight spaces (Al Rashid Mosque); no site criteria — https://www.gov.edmonton.ab.ca/sites/default/files/public-files/assets/PDF/Extreme-Weather-Overview-2019-2025.pdf",
+  "arch_svc_vanSplash2019": "GOVERNMENT STRATEGY: VanSplash: Vancouver Aquatic Strategy, Proposed Revised Strategy Report, Vancouver Board of Parks and Recreation, Oct 2019: Glossary 'Service radiuses have been set at 4km and over for City-Wide pools, 3km for Community pools and 2km for Neighbourhood pools'; p. 20 indoor pools 'within about 2-3' (unit cut off in text read), outdoor 'approximately a 45 minute walk, 12 minute cycle or 6 minute drive', spray parks 1–2 km, small pools for 'a local area of 60,000 to 90,000 residents'; p. 33 south-central gap; p. 65 spray parks 'based on greatest social and geographic need' — https://vancouver.ca/files/cov/vansplash-vancouver-aquatics-strategy.pdf",
+  "arch_svc_edmRecApproach2018": "GOVERNMENT STRATEGY: Approach to Community Recreation Facility Planning in Edmonton, City of Edmonton, Oct 2018: p. 34 Basic Commitment indoor 'within 5 kilometres of their residence', outdoor 'within 400 metres'; p. 36 Metropolitan, District, Neighbourhood tiers; p. 20 low income concentrated in mature neighbourhoods around downtown; pp. 45–46 financial accessibility and inclusion in prioritization — https://edmonton.ca/sites/default/files/public-files/assets/Approach_to_Community_Recreation_Facility_Planning_in_Edmonton-October_2018.pdf",
+  "arch_svc_edmRecMasterPlan2004": "GOVERNMENT PLAN (older): Recreation Facility Master Plan 2005–2015, City of Edmonton, approved 31 Aug 2004: Fig. 1.2 p. 9 district tier 40,000–80,000 residents, 20–30 min walk/bike/transit, 15–20 min drive; Rec. 8 p. 17 'All new aquatic facilities should be part of larger multi-purpose district-serving recreation complexes'; service ratio tables 4.1/4.4 not read — https://www.edmonton.ca/activities_parks_recreation/documents/PDF/RecFacilityMasterPlanAugust2004FullDoc.pdf",
+  "arch_svc_vanFoodStrategy2013": "GOVERNMENT STRATEGY: Vancouver Food Strategy: What feeds us, City of Vancouver with Vancouver Food Policy Council, Jan 2013: p. 45 Goal 3 access 'within a reasonable walking, transit or cycling distance'; p. 28 likelihood of a large or fresh-food store 'within one kilometre' falls 35% per $10,000 neighbourhood income (B.C. cities, cited study); p. 29 groups associated with food insecurity; p. 56 Action 1.9 plots 3,640 to 5,000 by 2020; p. 61 Action 1.16 urban farms 17 to 35; p. 97 food network staff in community centres/neighbourhood houses — https://vancouver.ca/files/cov/vancouver-food-strategy-final.PDF",
+  "arch_svc_edmFresh": "GOVERNMENT STRATEGY: fresh: Edmonton's Food and Urban Agriculture Strategy, strategic directions page, City of Edmonton (n.d.; strategy 2012): Direction 1 establish Edmonton Food Council by 1 Jun 2013; Direction 4 'neighbourhood-scale food infrastructure'; Direction 6 'convenient pedestrian access to healthy food sources'; no distance — https://www.edmonton.ca/city_government/initiatives_innovation/food_and_agriculture/fresh-strategic-directions",
+  "arch_svc_statcanHES2007": "GOVERNMENT STATISTICS: Quick fact: Canadians hang it out to dry, EnviroStats 16-002-X vol. 3 no. 3, Statistics Canada, 24 Sep 2009 (2007 Households and the Environment Survey): '61% of Canadian households used a clothesline or drying rack'; no washer/dryer figures by tenure on page — https://www150.statcan.gc.ca/n1/pub/16-002-x/2009003/article/clothesline-linge-eng.htm",
+  "arch_svc_vanHygiene": "GOVERNMENT: Health services page, City of Vancouver (n.d.): free showers; 'You can drop off a load of laundry in the morning and pick it up at night'; 404 Alexander St — https://vancouver.ca/parks-recreation-culture/health-services.aspx"
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ (UCA default rates, ATCO Gas area); ATCO Gas North Mid Use variable delivery $1.045/GJ (ATCO Gas North Rate Schedules, p. 11, eff. 1 Jan 2026; riders T $1.289/GJ and L $0.087/GJ not included) → (1.045 + 1.458) × 3.6 ÷ 0.85 boiler efficiency ≈ $10.6/MWh heat at the October rate (our arithmetic; the tool uses the 12-month mean commodity, ≈ $13/MWh) — https://www.ucahelps.alberta.ca/regulated-rates.aspx ; https://gas.atco.com/content/dam/web/for-home/natural-gas/natural-gas-north-rate-schedule.pdf",
