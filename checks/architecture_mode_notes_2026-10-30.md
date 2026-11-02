@@ -115,3 +115,4 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - J.B.: ignore the reference colours; they show the massing idea only (palette stays greys + red).
 - J.B. (2 Nov 2026): no heat arrows on the massing. Instead a heat view: (a) a heat gradient laid over plan and section showing direction; (b) a mode that shows only direction and amount.
 - J.B. (2 Nov 2026): heat gradient uses a separate warm-to-cool scale, used only in the heat view.
+- J.B. (2 Nov 2026): winter market dropped. Winter garden kept; gym kept (16 °C benchmark label); climbing gym folded into gym.
