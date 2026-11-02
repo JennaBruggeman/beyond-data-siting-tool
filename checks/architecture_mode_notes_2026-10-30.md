@@ -66,3 +66,10 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - Cameras: 2008 federal/BC/Alberta guidelines: avoid passers-by, don't record beyond the premises; the owner's plaza with signs and narrow views, not the street (our reading).
 - Guard room: in the reception zone at the entry (RCMP zone guides); no source for its size, glazing level or document slot.
 - Glazing: Pilkington Pyrostop BR claims fire ratings to 120 min with Canadian tests and bullet resistance to UL 752 Level 3; 27–62 mm, 63–126 kg/m² (maker claims); whether the Canadian listing covers 90 min not confirmed (?).
+
+## Cameras, insurers, exterior (research 1 Nov 2026: security_more.md, check 1)
+- Cameras (RCMP): on rooftops, light poles, ceiling corners; face-identification at every portal; a fence needs intrusion sensors, cameras alone are not detection; camera areas lit to at least 20 lux; fence line lit to 20 lux from 3 m inside to 9 m outside, little spill. Clash: a fence on the street line lights and films the sidewalk, which privacy guidance says to avoid. Spacing and pixel targets: IEC 62676-4 (paywalled).
+- FM 5-32 2.8.9: FM Approved Level 1 intrusion alarm where data rooms have emergency doors exiting outside the secure area.
+- Insurers: FM 1-15 caps roof PV arrays at 46 × 46 m with 1.2 m aisles; facade PV to FM 1-57 (not read); FM's 2025 tests: fire reached the top of the wall on 3 of 4 double-glass facade PV systems (insurer test data). OP Insurance (Finland): an unmanned data hall as a windowless room in the middle of the building (insurer guidance). No insurer source on public uses next to a data hall.
+- Exterior: combustible cladding incl. facade PV needs a sprinklered building (or ≤3 storeys) and a CAN/ULC-S134 full-wall test (NBC/BCBC/VBBL/NBC(AE) 3.1.5.5); RCMP G13-02 slab-to-slab steel-stud wall with steel mesh or sheet for the hall; no forced-entry or ballistic rule in the building code.
+- FM sheets J.B. to download (fm.com refused): 9-1, 9-16, 1-20, 1-3, 1-57 (and 5-23, 5-28, 13-26, 7-88, 1-40 from before).
