@@ -110,29 +110,22 @@ async function optionsBlock(c,pal){ const {e,f,near,nets,A}=c; const opts=e.opti
   return out; }
 
 /* ---------- the speculative section: the reader's picks ---------- */
-const SPEC={ // what the data centre gives, how it moves, who receives it (for the flow); and what to show on the plan
+const SPEC={ // 2 Nov 2026 fix pass: A-strike, A-merge (struck cards removed; renamed cards). What the data centre gives, how it moves, who receives it (for the flow); and what to show on the plan
  'District heat to a network':['heat','a pipe to the network','homes and buildings on the network',['net']],
  'Hospital or campus anchor':['heat','one pipe to one large building','a hospital or campus',['hospital','campus']],
  'New district with the data centre as heat plant':['heat','a new network laid with the district','homes in a future district',['housing','apartment']],
  'Greenhouse':['heat','warm water through the glasshouse','growers',[]],
- 'Aquaculture / insects / algae':['heat','warm water to the tanks','a food producer',[]],
- 'Seasonal storage in the ground':['summer heat','boreholes under a lot or park','heating in winter',[]],
+ 'Aquaculture (fish)':['heat','warm water to the tanks','a fish farm',[]],
+ 'Seasonal heat store':['summer heat','boreholes or an aquifer under a lot or park','heating in winter',[]],
  'Snowmelt on sidewalks and streets':['heat','pipes under the sidewalk','people walking past',[]],
  'Sewage heat as comparator source':['heat (compared)','beside the sewer\'s own heat','the same receivers',['net']],
- 'Distributed servers as heaters':['computing','servers placed in homes','households',['housing']],
- 'Reserved capacity and batteries to the grid':['flexibility','batteries and curtailable load','the grid at its peak',[]],
  'EV charging hub':['power','chargers on the lot','drivers nearby',[]],
- 'Backup power for neighbours in a blackout':['backup power','a private line behind a transfer switch','a care home or neighbour',['care','hospital']],
- 'Grid upgrades shared with neighbours':['grid capacity','a larger feeder or substation','customers who connect later',[]],
- "Solar on neighbours' roofs":['a buyer for solar','credits on the bill','households with roofs',['housing','apartment']],
- 'Rainwater, condensate and water reuse':['water','a tank and treatment','cooling make-up and toilets',[]],
+ 'Rainwater and reclaimed water':['water','a tank, or a pipe from a treatment plant','cooling make-up and toilets',[]],
  'Stormwater held for the neighbourhood':['storage','a tank under the yard','the sewer in a storm',[]],
  'Emergency water for neighbours':['water','a tank with a street connection','neighbours and firefighters',[]],
  'Meanwhile uses on land held for growth':['land','a lease while the lot waits','a community use',[]],
  'Warming centre, refuge, clean-air room':['shelter','a room with its own street door','people in a heat wave, cold snap or smoke',['care']],
- 'Cooling for neighbours':['cooling','a chiller loop','buildings nearby',[]],
- 'Material bank: copper':['materials','what leaves at refits and at closure','recyclers and makers',[]],
- 'Batteries at end of life':['materials','UPS batteries leaving at replacement','recyclers',[]]};
+ };
 const specKey=()=>BD.S.sel?BD.S.sel.city+':'+BD.S.sel.id:'';
 BD.spec={ list(){ const k=specKey(); BD.S.specs=BD.S.specs||{}; return BD.S.specs[k]=BD.S.specs[k]||[]; },
   has(n){ return this.list().includes(n); }, toggle(n){ const L=this.list(), i=L.indexOf(n); if(i<0) L.push(n); else L.splice(i,1); return i<0; } };

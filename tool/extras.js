@@ -182,7 +182,7 @@ function citiesView(){
    ['Grid carbon',`${R.grid.van} g/kWh`,`${R.grid.edm} g/kWh`,'NIR 2026, consumption intensity, 2024','record'],
    ['Carbon of its electricity',rng(v.co2[0],v.co2[1],'t CO₂e/yr'),rng(d.co2[0],d.co2[1],'t CO₂e/yr'),'electricity × grid carbon','physics'],
    ['Heat offered (liquid-cooled, heat pump)',rng(v.avail[0]/1000,v.avail[1]/1000,'GWh/yr'),rng(d.avail[0]/1000,d.avail[1]/1000,'GWh/yr'),'same physics in both cities','physics'],
-   ['Equal to the heating of',rng(v.homes[0],v.homes[1],'homes'),rng(d.homes[0],d.homes[1],'homes'),`a home buys ${R.homeMWh.van} MWh a year for heat in BC, ${R.homeMWh.edm} in Alberta (NRCan CEUD, 2018–22 average); the heat it needs is that × 0.85, the gas boiler it replaces`,'record'],
+   ['Equal to the heating of',rng(v.homes[0],v.homes[1],'homes'),rng(d.homes[0],d.homes[1],'homes'),`a home buys ${R.homeMWh.van} MWh a year for heat in BC, ${R.homeMWh.edm} in Alberta (NRCan CEUD, 2018–22 average); the heat it needs is that × 0.85, the gas boiler it replaces (0.85: our assumption, within NRCan's rated range, existing 0.55–0.89, new 0.90–0.98)`,'record'], /* 2 Nov 2026 fix pass: C-boiler */
    ['Heat-pump carbon',rng(v.hpco2[0],v.hpco2[1],'t CO₂e/yr'),rng(d.hpco2[0],d.hpco2[1],'t CO₂e/yr'),'heat-pump electricity × grid carbon','physics'],
    ['Busiest to quietest heating month',`about ${R.monthRatio.van.toFixed(1)} : 1`,`about ${R.monthRatio.edm.toFixed(1)} : 1`,'homes: space heating by CWEC monthly degree-days, hot water flat; provincial shares, NRCan CEUD 2018–22','peer'],
    ['Solar yield, roof','892–1,007 kWh per kWp a year','944–1,244 kWh per kWp a year','NRCan municipal values (flat to latitude tilt)','record'],
@@ -269,7 +269,7 @@ BD.views.feedback=feedbackView;
     if(prev) prev(ctx,s,lw); };
   const btn=document.createElement('button'); btn.className='scrbtn'; btn.textContent='Layer: size that fits';
   const leg=document.createElement('div'); leg.className='scrleg'; leg.hidden=true;
-  leg.innerHTML=`<b>Size that fits, middle case</b><div class="sub">MW of servers on a new building, where a data centre is allowed case by case. A quantity, not a ranking. Shown when zoomed in.</div>${BINS.map((b,i)=>`<div><i style="background:rgba(204,116,108,${ALPHA[i]})"></i>${b[0]}–${b[1]>40?40:b[1]} MW</div>`).join('')}<div class="src">Middle case: floor-space ratio × lot, hall share 0.6, 460 m² of hall per MW; yards not applied. Click a lot for its full range.</div>`;
+  leg.innerHTML=`<b>Size that fits, middle case</b><div class="sub">MW of servers on a new building, where a data centre is allowed case by case. A quantity, not a ranking. Shown when zoomed in.</div>${BINS.map((b,i)=>`<div><i style="background:rgba(204,116,108,${ALPHA[i]})"></i>${b[0]}–${b[1]>40?40:b[1]} MW</div>`).join('')}<div class="src">Middle case, our arithmetic: floor-space ratio × lot, hall share 0.6 and 460 m² of hall per MW (midpoints of the ranges), storeys from 6 m plus 5.75 m floors (our assumption ?); yards not applied. Click a lot for its full range.</div>`; /* 2 Nov 2026 fix pass: D-arith */
   btn.onclick=()=>{ BD.screen=!BD.screen; btn.setAttribute('aria-pressed',BD.screen); leg.hidden=!BD.screen; BD.draw(); };
   for(const el of [btn,leg]) for(const ev of ['pointerdown','wheel']) el.addEventListener(ev,e=>e.stopPropagation());
   const map=document.getElementById('map'); if(map){ map.appendChild(btn); map.appendChild(leg); }

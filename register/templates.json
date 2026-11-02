@@ -683,7 +683,7 @@
    "why": "generator tests: noise and exhaust"
   },
   "hvo_swap": {
-   "tier": "community",
+   "tier": "full",
    "parties": [
     "climate"
    ],
@@ -726,13 +726,6 @@
     "nations"
    ],
    "why": "engineering"
-  },
-  "rooftop_solar": {
-   "tier": "community",
-   "parties": [
-    "neighbours"
-   ],
-   "why": "solar on roofs nearby"
   },
   "self_gen_rules": {
    "tier": "full",
@@ -786,7 +779,7 @@
    "why": "reusing treated water"
   },
   "greywater_neighbours": {
-   "tier": "community",
+   "tier": "full",
    "parties": [
     "neighbours",
     "utility"
@@ -954,27 +947,6 @@
    ],
    "why": "fish"
   },
-  "algae_kg": {
-   "tier": "community",
-   "parties": [
-    "receiver"
-   ],
-   "why": "algae"
-  },
-  "insect_check": {
-   "tier": "full",
-   "parties": [
-    "receiver"
-   ],
-   "why": "check only"
-  },
-  "distributed_servers_homes": {
-   "tier": "community",
-   "parties": [
-    "neighbours"
-   ],
-   "why": "servers as heaters in homes"
-  },
   "ev_stalls": {
    "tier": "resident",
    "parties": [
@@ -1042,14 +1014,6 @@
    ],
    "why": "batteries for the grid"
   },
-  "ups_flex": {
-   "tier": "community",
-   "parties": [
-    "utility",
-    "ratepayers"
-   ],
-   "why": "backup batteries lent to the grid"
-  },
   "btes": {
    "tier": "community",
    "parties": [
@@ -1064,14 +1028,6 @@
     "receiver"
    ],
    "why": "engineering"
-  },
-  "absorption": {
-   "tier": "community",
-   "parties": [
-    "neighbours",
-    "receiver"
-   ],
-   "why": "cooling for neighbours"
   },
   "demand_profile": {
    "tier": "full",
@@ -1289,14 +1245,6 @@
     "operator"
    ],
    "why": "operator's cost"
-  },
-  "peak_relief": {
-   "tier": "community",
-   "parties": [
-    "utility",
-    "ratepayers"
-   ],
-   "why": "easing the grid at peak"
   },
   "ground_warming": {
    "tier": "full",
@@ -1561,22 +1509,13 @@
    "why": "what rooftop solar costs per MWh"
   },
   "clean_power_price": {
-   "tier": "community",
+   "tier": "full",
    "parties": [
     "utility",
     "ratepayers",
     "climate"
    ],
    "why": "what new clean power costs and who can buy it"
-  },
-  "chp_heat": {
-   "tier": "community",
-   "parties": [
-    "operator",
-    "neighbours",
-    "climate"
-   ],
-   "why": "heat from its own gas plant"
   },
   "condensate": {
    "tier": "full",
@@ -1600,30 +1539,6 @@
     "public"
    ],
    "why": "sidewalks kept clear by its heat"
-  },
-  "backup_neighbours": {
-   "tier": "resident",
-   "parties": [
-    "neighbours",
-    "public"
-   ],
-   "why": "power for neighbours in a blackout"
-  },
-  "grid_refund": {
-   "tier": "community",
-   "parties": [
-    "utility",
-    "ratepayers",
-    "neighbours"
-   ],
-   "why": "first payer refunded when neighbours connect"
-  },
-  "community_solar": {
-   "tier": "resident",
-   "parties": [
-    "neighbours"
-   ],
-   "why": "bill credits from solar on neighbours' roofs"
   },
   "fire_water": {
    "tier": "resident",
@@ -2088,18 +2003,6 @@
     "opportunity"
    ],
    [
-    "algae_kg",
-    "opportunity"
-   ],
-   [
-    "insect_check",
-    "opportunity"
-   ],
-   [
-    "distributed_servers_homes",
-    "opportunity"
-   ],
-   [
     "ev_stalls",
     "opportunity"
    ],
@@ -2256,10 +2159,6 @@
     "place"
    ],
    [
-    "rooftop_solar",
-    "place"
-   ],
-   [
     "self_gen_rules",
     "place"
    ],
@@ -2340,14 +2239,6 @@
     "opportunity"
    ],
    [
-    "ups_flex",
-    "opportunity"
-   ],
-   [
-    "peak_relief",
-    "test"
-   ],
-   [
     "genset_test",
     "characterise"
    ],
@@ -2377,10 +2268,6 @@
    ],
    [
     "tes_volume",
-    "opportunity"
-   ],
-   [
-    "absorption",
     "opportunity"
    ],
    [
@@ -2552,10 +2439,6 @@
     "test"
    ],
    [
-    "chp_heat",
-    "opportunity"
-   ],
-   [
     "condensate",
     "characterise"
    ],
@@ -2565,18 +2448,6 @@
    ],
    [
     "snowmelt_area",
-    "opportunity"
-   ],
-   [
-    "backup_neighbours",
-    "opportunity"
-   ],
-   [
-    "grid_refund",
-    "test"
-   ],
-   [
-    "community_solar",
     "opportunity"
    ],
    [
@@ -2918,26 +2789,6 @@
     "aquaculture_tonnes"
    ],
    [
-    "heat_delivered",
-    "algae_kg"
-   ],
-   [
-    "heat_temp",
-    "algae_kg"
-   ],
-   [
-    "heat_temp",
-    "insect_check"
-   ],
-   [
-    "servers",
-    "distributed_servers_homes"
-   ],
-   [
-    "spare_capacity",
-    "ev_stalls"
-   ],
-   [
     "ev_stalls",
     "ev_area"
    ],
@@ -3118,10 +2969,6 @@
     "surface_water_sink"
    ],
    [
-    "massing",
-    "rooftop_solar"
-   ],
-   [
     "parcel",
     "electricity_price"
    ],
@@ -3258,26 +3105,6 @@
     "battery"
    ],
    [
-    "it_load_actual",
-    "ups_flex"
-   ],
-   [
-    "flexible_load",
-    "ups_flex"
-   ],
-   [
-    "battery",
-    "peak_relief"
-   ],
-   [
-    "ups_flex",
-    "peak_relief"
-   ],
-   [
-    "electricity_price",
-    "peak_relief"
-   ],
-   [
     "generator_co2",
     "genset_test"
    ],
@@ -3336,14 +3163,6 @@
    [
     "demand_profile",
     "tes_volume"
-   ],
-   [
-    "heat_temp",
-    "absorption"
-   ],
-   [
-    "heat_captured",
-    "absorption"
    ],
    [
     "parcel",
@@ -3658,10 +3477,6 @@
     "clean_power_price"
    ],
    [
-    "it_load_actual",
-    "chp_heat"
-   ],
-   [
     "heat_rejected",
     "condensate"
    ],
@@ -3672,18 +3487,6 @@
    [
     "heat_delivered",
     "snowmelt_area"
-   ],
-   [
-    "backup_hours",
-    "backup_neighbours"
-   ],
-   [
-    "interconnection",
-    "grid_refund"
-   ],
-   [
-    "rooftop_solar",
-    "community_solar"
    ],
    [
     "water_supply",
@@ -3931,9 +3734,9 @@
    ]
   ]
  },
- "resident_count": 44,
- "community_count": 132,
- "full_count": 213,
+ "resident_count": 42,
+ "community_count": 119,
+ "full_count": 202,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {

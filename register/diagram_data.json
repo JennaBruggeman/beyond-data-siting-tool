@@ -6,10 +6,10 @@
 "rule": "A quantity's confidence is the lowest of its inputs; a condition's is the lowest of its quantities; a match fails at its weakest link; burdens are recorded beside, never netted.",
 "counts": {
 "inputs": 17,
-"quantities": 196,
-"conditions": 101,
-"opportunities": 22,
-"sources": 1181
+"quantities": 185,
+"conditions": 100,
+"opportunities": 14,
+"sources": 1193
 }
 },
 "stages": [
@@ -1853,7 +1853,7 @@
 "stage": "characterise",
 "name": "Harvestable rainwater",
 "formula": "V = A × R × C; A = roof area: a new building's footprint as drawn from the site setup (else the footprint the yards leave), an existing building's roofs added together (M47, 18 Oct 2026)",
-"coef": "ECCC Normals 1991–2020: Vancouver Intl precipitation 1,159.5 mm/yr (rain 1,119.2; Oct–Jan ≥124 mm/mo, Jul 34 mm); Edmonton City 422.5 mm/yr (Edmonton Airport 434.0; Jun–Aug 213 mm, Dec–Feb 43 mm, mostly snow); C = 0.8 assumed (CSA B805 not read); tank = one wet month, assumed | 19 Oct 2026: storage CAD 667/m³ (Vancouver toolkit 2014) to 2,955 (US EPA 2013 with pumps and controls, US$ converted); 15–30 yr (warranties); cost per m³ used at 5.6% real against water + sewer rates; Alberta's rainwater guideline is written for houses: a benchmark for a data centre [decision 30 Oct 2026]",
+"coef": "ECCC Normals 1991–2020: Vancouver Intl precipitation 1,159.5 mm/yr (rain 1,119.2; Oct–Jan ≥124 mm/mo, Jul 34 mm); Edmonton City 422.5 mm/yr (Edmonton Airport 434.0; Jun–Aug 213 mm, July 82.7 mm (the tank month; src_fill_ecccEdmCity), Dec–Feb 43 mm, mostly snow); C = 0.8 assumed (CSA B805 not read); tank = one wet month, assumed | 19 Oct 2026: storage CAD 667/m³ (Vancouver toolkit 2014) to 2,955 (US EPA 2013 with pumps and controls, US$ converted); 15–30 yr (warranties); cost per m³ used at 5.6% real against water + sewer rates; Alberta's rainwater guideline is written for houses: a benchmark for a data centre [decision 30 Oct 2026]",
 "unit": "m³/yr",
 "sources": [
 "femp",
@@ -1861,7 +1861,8 @@
 "abRainwater2010",
 "epaRain2013",
 "vanISMP2014",
-"femRain"
+"femRain",
+"src_fill_ecccEdmCity"
 ],
 "source_roles": [
 {
@@ -1885,6 +1886,14 @@
 "conf": 50,
 "verified": false,
 "relabel": "30 Oct 2026 (J.B. decision): pending build → benchmark"
+},
+{
+"id": "src_fill_ecccEdmCity",
+"term": "Edmonton (City) July normal 82.7 mm",
+"role": "data",
+"conf": 80,
+"verified": true,
+"added": "2 Nov 2026"
 }
 ],
 "conf": 80,
@@ -1900,7 +1909,7 @@
 "van": 1,
 "edm": 1,
 "both": 1,
-"gen": 3
+"gen": 4
 }
 },
 {
@@ -2497,7 +2506,7 @@
 }
 ],
 "conf": 80,
-"status": "in hand",
+"status": "NOT COMPUTED YET (2 Nov 2026): To build with the Architecture mode. in hand",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -2557,7 +2566,7 @@
 }
 ],
 "conf": 80,
-"status": "in hand",
+"status": "NOT COMPUTED YET (2 Nov 2026): To build with the Architecture mode. in hand",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -2624,7 +2633,7 @@
 }
 ],
 "conf": 60,
-"status": "derived",
+"status": "NOT COMPUTED YET (2 Nov 2026): To build with the Architecture mode. derived",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -2724,7 +2733,7 @@
 }
 ],
 "conf": 60,
-"status": "ground floor by rule (90) in three Vancouver zones; support block from plans (60); growth space judged (20)",
+"status": "NOT COMPUTED YET (2 Nov 2026): ground floor by rule (90) in three Vancouver zones; support block from plans (60); growth space judged (20)",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -2848,7 +2857,7 @@
 "kind": "quantity",
 "stage": "prospect",
 "name": "Distribution capital cost",
-"formula": "C_d = a(C1 + C2·d_a) ÷ q_L,w; d_a = 0.0486 ln(q_L,w) + 0.0007; C1 212 €/m; C2 4,464 €/m²; a 0.051",
+"formula": "cost per metre of trench, DN100: CAD 1,038–2,620 per m (658 € and (160 + 1,500) € per m × 1.5782 CAD/€); other sizes scaled by (212 + 4,464 d) ÷ (212 + 446.4); annualised at 5.6 % real over 30 years (factor 0.0696); the tool's method since 19 Oct 2026",
 "coef": "convert to CAD",
 "unit": "€/GJ",
 "sources": [
@@ -2936,7 +2945,7 @@
 }
 ],
 "conf": 70,
-"status": "confirmed",
+"status": "per-metre method as the tool uses it (2 Nov 2026, N-06); the Persson formula and the heat_density / linear_heat_density classes are not computed",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -2956,7 +2965,7 @@
 "stage": "prospect",
 "name": "Receiver heat demand",
 "formula": "disclosed data (Energize Vancouver) else floor area × type intensity × heating share (space + water heating, CEUD 2023 by province)",
-"coef": "heating-only intensity, CEUD 2023: BC 0.57 / AB 1.40 GJ/m² overall; offices 0.45 / 1.13; heat is 48–63% of energy in BC, 62–83% in Alberta; hospitals from SCIEU 2024 (BC 1.90, AB 2.46 GJ/m² total); type medians NRCan ENERGY STAR; delivered fuel, not useful heat (boiler efficiency not yet sourced); 2023 a warm year | 19 Oct 2026 (make_bigrecv.py): large buildings added at the Vancouver GHG by-law reporting thresholds in both cities (commercial ≥ 4,645 m², multi-family and hotels ≥ 9,290 m²). Vancouver: owner-reported floor area × reported heat energy intensity (measured, disclosed buildings only: 200 added). Edmonton: assessment gross area of Other Residential × 0.777 GJ/m² and Commercial × 1.40 GJ/m² (estimate; 1,048 added). Condominiums not caught in Edmonton; non-disclosing buildings not caught in Vancouver (BC Assessment to follow) | 20 Oct 2026 (J.B.; make_bigrecv.py, bca/bca_derive.py): Vancouver buildings over the same thresholds that did not disclose are added from BC Assessment: homes x 16.81 MWh + other floor area x CEUD 2023 BC intensity, worked out on J.B.'s computer and rounded (inputs not shown). Roll joined to the City's folio on its last 12 digits (99.4% non-residential, 99.96% residential rows matched); strata buildings counted once per parcel (each strata lot's row repeats the building's gross area); strata lot areas x 1.15 for the size test (BCA's own common-area allowance, commercial guide, borrowed). Check against 238 measured Vancouver buildings: estimate / measured median 1.74, quartiles 1.0 and 3.2. Shown as a range in both cities: estimate / 1.7 to the estimate (J.B. 20 Oct); Edmonton could not be checked (no measured data published). 699 added in Vancouver (others within 40 m of a measured building or another receiver)",
+"coef": "heating-only intensity, CEUD 2023: BC 0.57 / AB 1.40 GJ/m² overall; offices 0.45 / 1.13; heat is 48–63% of energy in BC, 62–83% in Alberta; hospitals and care homes: the heat search uses CEUD 2023 \"Health Care and Social Assistance\" (BC 1.096, AB 2.348 GJ/m², heating only, the whole sector); SCIEU 2024 hospitals (BC 1.90, AB 2.46 GJ/m²) is total energy, not heating, shown for comparison only (2 Nov 2026); type medians NRCan ENERGY STAR; delivered fuel, not useful heat: × 0.85 boiler efficiency, our assumption within NRCan's rated range (existing 0.55–0.89, new 0.90–0.98; src_fill_eer2016_317, src_fill_nrcanComBoiler, src_fill_nrcanFurnace, src_fill_nrcanHeatingGas2012; rated, not measured in use ?); 2023 a warm year | 19 Oct 2026 (make_bigrecv.py): large buildings added at the Vancouver GHG by-law reporting thresholds in both cities (commercial ≥ 4,645 m², multi-family and hotels ≥ 9,290 m²). Vancouver: owner-reported floor area × reported heat energy intensity (measured, disclosed buildings only: 200 added). Edmonton: assessment gross area of Other Residential × 0.777 GJ/m² and Commercial × 1.40 GJ/m² (estimate; 1,048 added). Condominiums not caught in Edmonton; non-disclosing buildings not caught in Vancouver (BC Assessment to follow) | 20 Oct 2026 (J.B.; make_bigrecv.py, bca/bca_derive.py): Vancouver buildings over the same thresholds that did not disclose are added from BC Assessment: homes x 16.81 MWh + other floor area x CEUD 2023 BC intensity, worked out on J.B.'s computer and rounded (inputs not shown). Roll joined to the City's folio on its last 12 digits (99.4% non-residential, 99.96% residential rows matched); strata buildings counted once per parcel (each strata lot's row repeats the building's gross area); strata lot areas x 1.15 for the size test (BCA's own common-area allowance, commercial guide, borrowed). Check against 238 measured Vancouver buildings: estimate / measured median 1.74, quartiles 1.0 and 3.2. Shown as a range in both cities: estimate / 1.7 to the estimate (J.B. 20 Oct); Edmonton could not be checked (no measured data published). 699 added in Vancouver (others within 40 m of a measured building or another receiver)",
 "unit": "GJ/yr",
 "sources": [
 "energize",
@@ -2981,7 +2990,11 @@
 "bcAssess2026",
 "bcaGuideCom",
 "bcaGuideRes",
-"vanTaxReport"
+"vanTaxReport",
+"src_fill_eer2016_317",
+"src_fill_nrcanComBoiler",
+"src_fill_nrcanFurnace",
+"src_fill_nrcanHeatingGas2012"
 ],
 "source_roles": [
 {
@@ -3119,6 +3132,38 @@
 "conf": 60,
 "verified": true,
 "relabel": "30 Oct 2026: coefficient → coefficient (our interpretation; strata office/retail only) (source says \"multiplied by 15 percent\"; × 1.15 is our reading)"
+},
+{
+"id": "src_fill_eer2016_317",
+"term": "boiler and furnace efficiency, rated range (0.85 is our point)",
+"role": "bound",
+"conf": 95,
+"verified": true,
+"added": "2 Nov 2026"
+},
+{
+"id": "src_fill_nrcanComBoiler",
+"term": "boiler and furnace efficiency, rated range (0.85 is our point)",
+"role": "bound",
+"conf": 85,
+"verified": true,
+"added": "2 Nov 2026"
+},
+{
+"id": "src_fill_nrcanFurnace",
+"term": "boiler and furnace efficiency, rated range (0.85 is our point)",
+"role": "bound",
+"conf": 85,
+"verified": true,
+"added": "2 Nov 2026"
+},
+{
+"id": "src_fill_nrcanHeatingGas2012",
+"term": "boiler and furnace efficiency, rated range (0.85 is our point)",
+"role": "bound",
+"conf": 85,
+"verified": true,
+"added": "2 Nov 2026"
 }
 ],
 "conf": 60,
@@ -3133,7 +3178,7 @@
 "van": 10,
 "edm": 5,
 "both": 6,
-"gen": 2
+"gen": 6
 }
 },
 {
@@ -3366,135 +3411,12 @@
 }
 },
 {
-"id": "algae_kg",
-"kind": "quantity",
-"stage": "opportunity",
-"name": "Algae dry mass supported",
-"formula": "Q ÷ 217 kWh/kgDW at 24 °C",
-"coef": "Chlorella, industrial plant, Italy",
-"unit": "kg/yr",
-"sources": [
-"gurreri2023"
-],
-"source_roles": [
-{
-"id": "gurreri2023",
-"term": "all coefficients",
-"role": "coefficient",
-"conf": 70,
-"verified": true
-}
-],
-"conf": 70,
-"status": "peer-reviewed, transferred",
-"direction": "",
-"trial": "",
-"inputs": [
-"heat_delivered",
-"heat_temp"
-],
-"upstream": 50,
-"city": {
-"van": 0,
-"edm": 0,
-"both": 0,
-"gen": 1
-}
-},
-{
-"id": "insect_check",
-"kind": "quantity",
-"stage": "opportunity",
-"name": "Insect rearing heat",
-"formula": "mealworm: 2.88 kWh heating per kg live (Dreyer et al. 2021, Austria); BSF: 3,404 kWh heat per tonne substrate input (Öko-Institut 2022); rearing 27–35 °C",
-"coef": "",
-"unit": "kWh/kg",
-"sources": [
-"dreyer2021",
-"oekoBSF",
-"schon2024"
-],
-"source_roles": [
-{
-"id": "dreyer2021",
-"term": "mealworm 2.88 kWh/kg",
-"role": "coefficient",
-"conf": 70,
-"verified": true
-},
-{
-"id": "oekoBSF",
-"term": "BSF 3,404 kWh/t substrate",
-"role": "coefficient",
-"conf": 70,
-"verified": true
-},
-{
-"id": "schon2024",
-"term": "rearing 27–35 °C",
-"role": "check",
-"conf": 70,
-"verified": true
-}
-],
-"conf": 70,
-"status": "peer-reviewed (mealworm) and government-commissioned (BSF)",
-"direction": "",
-"trial": "",
-"inputs": [
-"heat_temp"
-],
-"upstream": 70,
-"city": {
-"van": 0,
-"edm": 0,
-"both": 0,
-"gen": 3
-}
-},
-{
-"id": "distributed_servers_homes",
-"kind": "quantity",
-"stage": "opportunity",
-"name": "Homes heated by distributed servers",
-"formula": "servers ÷ (37–114 servers per home at 0.35 kW)",
-"coef": "Liu et al. 2011 (US climate zones); Qarnot/heata operator claims",
-"unit": "homes",
-"sources": [
-"liu2011"
-],
-"source_roles": [
-{
-"id": "liu2011",
-"term": "all coefficients",
-"role": "assumption (2011 US)",
-"conf": 40,
-"verified": true,
-"relabel": "30 Oct 2026: coefficient → assumption (2011 US) (workshop-paper assumptions, not measured; none indexed with page)"
-}
-],
-"conf": 40,
-"status": "design paper only",
-"direction": "",
-"trial": "",
-"inputs": [
-"servers"
-],
-"upstream": 40,
-"city": {
-"van": 0,
-"edm": 0,
-"both": 0,
-"gen": 1
-}
-},
-{
 "id": "ev_stalls",
 "kind": "quantity",
 "stage": "opportunity",
 "name": "EV charging stalls supported",
-"formula": "P_reserved ÷ (SF × P_charger), SF 0.5–1 (corrected 18 Oct 2026: SF divides, it does not multiply)",
-"coef": "Level 2 7.4–19.2 kW; DCFC 50–350 kW; SF 0.5 is the value Silber, Scheubner and Märtz 2024 found for fast-charging sites (“in most cases”; checked 18 Oct 2026); for Level 2 it is a transfer, so the range runs to SF 1 (all at once)",
+"formula": "stalls = P_connection ÷ (SF × P_charger), per MW of the chargers' own new grid connection (no spare data-centre capacity: J.B. triage 30 Oct 2026, applied 2 Nov 2026); SF 0.5–1 (corrected 18 Oct 2026: SF divides, it does not multiply)",
+"coef": "Level 2 7.4–19.2 kW; DCFC 25–400 kW (vanDCFC); SF 0.5 is the value Silber, Scheubner and Märtz 2024 found for fast-charging sites (“in most cases”; checked 18 Oct 2026); for Level 2 it is a transfer, so the range runs to SF 1 (all at once)",
 "unit": "stalls",
 "sources": [
 "wsuEV",
@@ -3568,10 +3490,8 @@
 "status": "confirmed",
 "direction": "",
 "trial": "",
-"inputs": [
-"spare_capacity"
-],
-"upstream": 50,
+"inputs": [],
+"upstream": 70,
 "city": {
 "van": 2,
 "edm": 1,
@@ -3623,7 +3543,7 @@
 "inputs": [
 "ev_stalls"
 ],
-"upstream": 50,
+"upstream": 70,
 "city": {
 "van": 1,
 "edm": 2,
@@ -3652,7 +3572,7 @@
 }
 ],
 "conf": 80,
-"status": "in hand",
+"status": "NOT COMPUTED YET (2 Nov 2026): in hand",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -3704,7 +3624,7 @@
 }
 ],
 "conf": 80,
-"status": "confirmed",
+"status": "NOT COMPUTED YET (2 Nov 2026): confirmed",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -3836,7 +3756,7 @@
 }
 ],
 "conf": 80,
-"status": "flow gap",
+"status": "NOT COMPUTED YET (2 Nov 2026): flow gap",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -3997,15 +3917,16 @@
 ],
 "source_roles": [
 {
-"id": "dell",
-"term": "all coefficients",
-"role": "coefficient",
+"id": "danczak2018",
+"term": "NdFeB 6–19 g (3.5\") and 2–6 g (2.5\") per HDD; Nd, Pr, Dy shares (Table 6)",
+"role": "proxy",
 "conf": 70,
-"verified": true
+"verified": true,
+"relabel": "2 Nov 2026 (N-23): role was filed under dell; the figures come from Dańczak 2018; consumer HDDs, so a proxy for data-centre drives"
 }
 ],
 "conf": 70,
-"status": "in hand",
+"status": "NOT COMPUTED YET (2 Nov 2026): in hand",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -4040,7 +3961,7 @@
 }
 ],
 "conf": 80,
-"status": "confirmed",
+"status": "NOT COMPUTED YET (2 Nov 2026): confirmed",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -5367,7 +5288,8 @@
 "bylaw6555",
 "rule012",
 "van6555",
-"van6555zones"
+"van6555zones",
+"src_fill_van6555s21"
 ],
 "source_roles": [
 {
@@ -5398,6 +5320,14 @@
 "role": "rule",
 "conf": 90,
 "verified": true
+},
+{
+"id": "src_fill_van6555s21",
+"term": "quiet-zone source to a non-quiet neighbour: 55 dBA night",
+"role": "rule",
+"conf": 90,
+"verified": true,
+"added": "2 Nov 2026"
 }
 ],
 "conf": 90,
@@ -5409,7 +5339,7 @@
 ],
 "upstream": 50,
 "city": {
-"van": 3,
+"van": 4,
 "edm": 2,
 "both": 0,
 "gen": 0
@@ -6254,43 +6184,6 @@
 "edm": 5,
 "both": 1,
 "gen": 3
-}
-},
-{
-"id": "rooftop_solar",
-"kind": "quantity",
-"stage": "place",
-"name": "Solar from roofs nearby",
-"formula": "Σ roof footprint × 0.81 usable × yield (kWh/kWp, NRCan municipal) × kWp/m² × 0.70 over roofs within the radius",
-"coef": "≈ 128 kWh/m² of footprint a year (Vancouver) and 159 (Edmonton): NRCan CanmetENERGY 2024 usable-area and yield factors transferred (neither city in the sample); the data centre's own roof is pv_roof | 19 Oct 2026 (L): how neighbours could share it — see community_solar",
-"unit": "MWh/yr",
-"sources": [
-"nrcanPV2024",
-"bchSelfGen2026",
-"aucMicro2026"
-],
-"source_roles": [
-{
-"id": "nrcanPV2024",
-"term": "roof factors 0.81 / 0.70",
-"role": "coefficient",
-"conf": 70,
-"verified": true
-}
-],
-"conf": 70,
-"status": "factors read (round 2 confirmed); transferred to both cities",
-"direction": "place",
-"trial": "",
-"inputs": [
-"massing"
-],
-"upstream": 70,
-"city": {
-"van": 1,
-"edm": 1,
-"both": 1,
-"gen": 0
 }
 },
 {
@@ -7835,122 +7728,6 @@
 }
 },
 {
-"id": "ups_flex",
-"kind": "quantity",
-"stage": "opportunity",
-"name": "UPS batteries offered to the grid",
-"formula": "flexible MWh = IT load × UPS minutes ÷ 60 × 0.5 (half held for outages)",
-"coef": "UPS runtime 1–2 min (hyperscale), ~5 min (colocation), 10–15 min (financial) — vendor figures, operator claim; useful for fast frequency response, not for 4-hour peaks",
-"unit": "MWh; minutes",
-"sources": [
-"aeso_or",
-"bch_drb"
-],
-"source_roles": [
-{
-"id": "aeso_or",
-"term": "UPS batteries offered to the grid",
-"role": "context",
-"conf": 45,
-"verified": false,
-"relabel": "30 Oct 2026: data → context (page does not mention batteries or UPS)"
-},
-{
-"id": "bch_drb",
-"term": "research pass 16 Oct 2026 (earlier source)",
-"role": "parity: the other city",
-"conf": 70,
-"verified": true
-}
-],
-"conf": 45,
-"status": "operator claims only",
-"direction": "",
-"trial": "opportunity",
-"inputs": [
-"it_load_actual",
-"flexible_load"
-],
-"upstream": 40,
-"city": {
-"van": 1,
-"edm": 1,
-"both": 0,
-"gen": 0
-}
-},
-{
-"id": "peak_relief",
-"kind": "quantity",
-"stage": "test",
-"name": "Peak relief and what it earns",
-"formula": "MW = min(battery MW, MWh × √RTE ÷ event hours); $ = programme rate × kW",
-"coef": "BC Hydro: Demand Response for Business $50/kW-season, events ≤4 h, Nov–Mar, diesel and fossil generators prohibited; Energy Storage Incentive ≤80 % of eligible cost, new non-exporting batteries ≥25 kW, 10-yr contract (an existing UPS does not qualify); LGS demand charge $13.83/kW·month; AESO reserves need ≥5 MW (supplemental) or ≥10 MW (spinning), smaller sites via an aggregator | 19 Oct 2026: ESI pays up to 80% of eligible cost (LGS, ≥25 kW, non-exporting, 10-yr); AESO reserve averages per MW-hour procured: active $43.71 (2024) / $34.75 (2025), standby $14.03 / $11.28 (Table 13, cost ÷ volume; not by product); all-hours value shown as an upper bound",
-"unit": "MW; $/yr",
-"sources": [
-"bch_drb",
-"bch_esi",
-"aeso_or",
-"bchDR2026",
-"aesoStats2025",
-"bchESI2026"
-],
-"source_roles": [
-{
-"id": "bch_drb",
-"term": "Peak relief and what it earns",
-"role": "data",
-"conf": 75,
-"verified": true
-},
-{
-"id": "bch_esi",
-"term": "Peak relief and what it earns",
-"role": "data",
-"conf": 75,
-"verified": true
-},
-{
-"id": "aeso_or",
-"term": "Peak relief and what it earns",
-"role": "context",
-"conf": 75,
-"verified": true,
-"relabel": "30 Oct 2026: data → context (page gives no prices or earnings)"
-},
-{
-"id": "bchDR2026",
-"term": "research pass 16 Oct 2026 (utility)",
-"role": "pending build",
-"conf": 50,
-"verified": false
-},
-{
-"id": "aesoStats2025",
-"term": "research pass 16 Oct 2026 (system operator)",
-"role": "pending build",
-"conf": 50,
-"verified": false
-}
-],
-"conf": 75,
-"status": "in hand",
-"direction": "",
-"trial": "opportunity",
-"inputs": [
-"battery",
-"ups_flex",
-"electricity_price"
-],
-"upstream": 40,
-"city": {
-"van": 4,
-"edm": 2,
-"both": 0,
-"gen": 0
-}
-},
-{
 "id": "genset_test",
 "kind": "quantity",
 "stage": "characterise",
@@ -8245,7 +8022,7 @@
 }
 ],
 "conf": 60,
-"status": "in hand; COP a gap",
+"status": "NOT COMPUTED YET (2 Nov 2026): in hand; COP a gap",
 "direction": "",
 "trial": "opportunity",
 "inputs": [
@@ -8370,12 +8147,12 @@
 "stage": "opportunity",
 "name": "Hot or chilled water tank",
 "formula": "litres per kWh = 3,600 ÷ (4.18 × ΔT) ÷ 0.85",
-"coef": "144 L/kWh at ΔT 6 K, 29 L/kWh at 30 K (physics); ice ≈ 10.5 kg per kWh; usable share 0.85 and tank heights are assumptions; costs too wide to use (IRENA range)",
+"coef": "169 L/kWh at ΔT 6 K, 34 L/kWh at 30 K (3,600 ÷ (4.18 × ΔT) ÷ 0.85; corrected 2 Nov 2026, N-22: the 0.85 had been left out); ice ≈ 10.5 kg per kWh (latent heat alone gives 3,600 ÷ 334 = 10.8 ?); usable share 0.85 and tank heights are assumptions; costs too wide to use (IRENA range)",
 "unit": "m³",
 "sources": [],
 "source_roles": [],
 "conf": 75,
-"status": "physics; costs a gap",
+"status": "NOT COMPUTED YET: physics; 0.85 usable share our assumption (no source found ?); costs a gap",
 "direction": "",
 "trial": "opportunity",
 "inputs": [
@@ -8388,44 +8165,6 @@
 "edm": 0,
 "both": 0,
 "gen": 0
-}
-},
-{
-"id": "absorption",
-"kind": "quantity",
-"stage": "opportunity",
-"name": "Cooling for neighbours from waste heat",
-"formula": "cooling = recovered heat × COP, if temperature allows",
-"coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): absorption ≥70–90 °C (single-effect ≥90, two-stage 70–80; Chen et al. 2026); adsorption from about 45–65 °C (LRZ CoolMUC-2 from 45 °C, operator; Meyer et al. 2013, ~65 °C, preprint). Air-cooled 25–47 °C: heat pump first (possible with a change); liquid-cooled 50–60 °C: adsorption possible, absorption with a heat pump. Earlier: single-effect absorption needs ≥90 °C, COP 0.6–0.7; two-stage 70–80 °C, COP <0.4 (Energies 2026); data-centre heat 25–35 °C air-cooled (no), 50–60 °C liquid-cooled (only with a heat-pump lift)",
-"unit": "kW cooling",
-"sources": [
-"absorption2026",
-"lrzCoolMUC",
-"meyer2013"
-],
-"source_roles": [
-{
-"id": "absorption2026",
-"term": "Cooling for neighbours from waste heat",
-"role": "data",
-"conf": 65,
-"verified": true
-}
-],
-"conf": 65,
-"status": "in hand",
-"direction": "",
-"trial": "opportunity",
-"inputs": [
-"heat_temp",
-"heat_captured"
-],
-"upstream": 50,
-"city": {
-"van": 0,
-"edm": 0,
-"both": 0,
-"gen": 3
 }
 },
 {
@@ -9190,11 +8929,12 @@
 "stage": "place",
 "name": "Electrical service",
 "formula": "IT load × PUE → the utility service class and what it brings (second feeder, transmission, clearances)",
-"coef": "BC Hydro: above 6.5 MVA (12.5 kV areas) or 13 MVA (25 kV areas) a two-feeder supply may be required; 60 kV and above under transmission rules. EPCOR: primary service typical above 2,500 kVA; transformer clearances 3.0 m / 2.0 m; access road 4.6 m in a 6.5 m strip P-12 (30 Oct 2026): power factor taken as 1, so kW = kVA (our assumption ?).",
+"coef": "BC Hydro: above 6.5 MVA (12.5 kV areas) or 13 MVA (25 kV areas) a two-feeder supply may be required; 60 kV and above under transmission rules. EPCOR: primary service typical above 2,500 kVA; transformer clearances 3.0 m / 2.0 m; access road 4.6 m in a 6.5 m strip P-12 (30 Oct 2026): power factor taken as 1, so kW = kVA (our assumption ?); 2 Nov 2026: replaced by a band, MVA = MW ÷ power factor 0.90–1.0 (our band; server power supplies ≥ 0.95, ENERGY STAR Servers v4.0, src_fill_estarServers4; facility value ?).",
 "unit": "class of connection",
 "sources": [
 "bch_primary",
-"epcor_ccg"
+"epcor_ccg",
+"src_fill_estarServers4"
 ],
 "source_roles": [
 {
@@ -9210,6 +8950,14 @@
 "role": "data",
 "conf": 75,
 "verified": true
+},
+{
+"id": "src_fill_estarServers4",
+"term": "server PSU power factor ≥ 0.90–0.95",
+"role": "bound",
+"conf": 85,
+"verified": true,
+"added": "2 Nov 2026"
 }
 ],
 "conf": 75,
@@ -9225,7 +8973,7 @@
 "van": 1,
 "edm": 1,
 "both": 0,
-"gen": 0
+"gen": 1
 }
 },
 {
@@ -9328,6 +9076,22 @@
 "role": "data",
 "conf": 70,
 "verified": true
+},
+{
+"id": "bcResCare",
+"term": "Vancouver care homes, licensed places",
+"role": "data",
+"conf": 80,
+"verified": true,
+"added": "2 Nov 2026"
+},
+{
+"id": "abCCcompliance2026",
+"term": "Edmonton continuing-care homes",
+"role": "data",
+"conf": 80,
+"verified": true,
+"added": "2 Nov 2026"
 }
 ],
 "conf": 70,
@@ -9384,10 +9148,26 @@
 "role": "traced from neuTraced",
 "conf": 50,
 "verified": false
+},
+{
+"id": "neuTraced",
+"term": "NEU service area (traced from By-law 9552 Sch. A, ±45 m)",
+"role": "site fact",
+"conf": 60,
+"verified": true,
+"added": "2 Nov 2026"
+},
+{
+"id": "van9552",
+"term": "NEU connection rule and 50% credit",
+"role": "rule",
+"conf": 90,
+"verified": true,
+"added": "2 Nov 2026"
 }
 ],
 "conf": 60,
-"status": "two networks sourced; others per receiver",
+"status": "NOT COMPUTED YET (2 Nov 2026): (networks listed only; other sources per receiver not listed) two networks sourced; others per receiver",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -10079,7 +9859,7 @@
 }
 ],
 "conf": 60,
-"status": "derived with a stated assumption",
+"status": "NOT COMPUTED YET (2 Nov 2026): derived with a stated assumption",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -10587,7 +10367,7 @@
 "inputs": [
 "ev_stalls"
 ],
-"upstream": 50,
+"upstream": 60,
 "city": {
 "van": 2,
 "edm": 0,
@@ -10693,61 +10473,6 @@
 "edm": 2,
 "both": 0,
 "gen": 0
-}
-},
-{
-"id": "chp_heat",
-"kind": "quantity",
-"stage": "opportunity",
-"name": "Own gas plant: heat with the power",
-"formula": "heat = electric output ÷ power-to-heat ratio; total efficiency 66–80%",
-"coef": "reciprocating engines 0.8–2.0 MW of heat per MW of power (27–41% electric, 77–80% total, HHV); gas turbines 0.9–1.7 (24–36%, 66–71%) (US EPA 2015, derived from Table 1-3). Rules: Clean Electricity Regulations, units ≥ 25 MW on fossil fuel, 65 t CO2/GWh from 2035 (held in abeyance in Alberta); Alberta TIER $95/t in 2026, sites ≥ 100,000 t a year; BC: waste discharge authorization above 5 MW of combustion; self-supply legal in BC (UCA s. 1(d)) and Alberta (EUA s. 2(1)(b): consumed solely on the producer's own or rented property); Alberta Reg 117/2026 (read in full): data centres of 75 MW or more from the transmission system may be tethered to new generation or storage able to supply at least their maximum demand, located anywhere (no location is set) and of any fuel (the AESO's first intake is gas only, a proposal); tethered requests are processed first (s. 6); bridged service up to 3 years (s. 9); in a supply shortfall large data centres are cut before everyone else (s. 10); the AESO may require zoning approvals and water licences first (s. 7); the regulation expires 31 May 2035",
-"unit": "MW heat per MW electric",
-"sources": [
-"epaCHP2015",
-"sor2024_263",
-"caAbMOU2026",
-"emaWDA",
-"bcUCAs1",
-"euaS2",
-"alta117_2026"
-],
-"source_roles": [
-{
-"id": "epaCHP2015",
-"term": "power-to-heat 0.5–1.2",
-"role": "coefficient",
-"conf": 80,
-"verified": true
-},
-{
-"id": "sor2024_263",
-"term": "≥ 25 MW, 65 t/GWh",
-"role": "rule",
-"conf": 90,
-"verified": true
-},
-{
-"id": "alta117_2026",
-"term": "tethered ≥ 75 MW, s. 2, 5, 6",
-"role": "rule",
-"conf": 95,
-"verified": true
-}
-],
-"conf": 70,
-"status": "derived 19 Oct 2026",
-"direction": "",
-"trial": "",
-"inputs": [
-"it_load_actual"
-],
-"upstream": 50,
-"city": {
-"van": 2,
-"edm": 3,
-"both": 0,
-"gen": 2
 }
 },
 {
@@ -10903,158 +10628,6 @@
 "edm": 4,
 "both": 1,
 "gen": 3
-}
-},
-{
-"id": "backup_neighbours",
-"kind": "quantity",
-"stage": "opportunity",
-"name": "Backup power for neighbours in a blackout",
-"formula": "only behind the data centre's own transfer switch, on a private line, with the utility's written approval; never through the utility's lines",
-"coef": "BC: supplying anyone but itself, its employees or tenants makes it a public utility unless the minister (UCA s. 22) or BCUC (s. 88(3)) exempts it; an affiliate is a separate person (2026 BCCA 93, law-firm summary); BC Hydro: never energize a de-energized line. Edmonton: EPCOR bars extending a customer's wiring beyond its property (T&C s. 4.4, exception in Art. 8.3 not yet verified) and islanding without written approval (s. 7.6, 7.8). Spare generator capacity in a blackout is what the data centre's redundancy leaves, not sized here. Vancouver has 25 disaster support hubs, backup power not stated | 20 Oct 2026 (opps.js): who would need power most, within 1 km: care homes and hospitals (receivers: provincial licence lists, see receivers_nearby); buildings over 21 m from measured heights (Vancouver LiDAR 2022, Edmonton City 3D buildings) and over 39 m, read against BCBC 2024 / NBC(AE) 3.2.6.1 (residential top floor over 18 m: high building), 3.2.6.5 (firefighters' elevator), 3.2.7.9 (over 36 m: 2 h generator for elevators, fire pumps and smoke fans only); heights to the roof, so approximate. Main heating by CMA, SHEU 2019 Table 4.1: Vancouver furnace 39.25%, boiler 22.77% (M), electric baseboard or radiant 28.95%; Edmonton furnace 75.24%, boiler 19.21% (M), electric baseboard U (not published). BC Assessment's care beds, elevators and heating type exist for Vancouver only and are not used, to keep the cities equal",
-"unit": "rule",
-"sources": [
-"bcUCAs1",
-"fasken2026",
-"bchCTT2024",
-"epcorIG2022",
-"epcorTC2025s44",
-"vanHubs",
-"bcbc2024_326",
-"sheu2019cma",
-"bcResCare",
-"abCCcompliance2026"
-],
-"source_roles": [
-{
-"id": "bcUCAs1",
-"term": "public utility",
-"role": "rule",
-"conf": 90,
-"verified": true
-},
-{
-"id": "bchCTT2024",
-"term": "never energize",
-"role": "rule",
-"conf": 90,
-"verified": true
-},
-{
-"id": "epcorTC2025s44",
-"term": "s. 4.4",
-"role": "rule",
-"conf": 80,
-"verified": true
-}
-],
-"conf": 70,
-"status": "rules read 19 Oct 2026",
-"direction": "",
-"trial": "",
-"inputs": [
-"backup_hours"
-],
-"upstream": 70,
-"city": {
-"van": 6,
-"edm": 3,
-"both": 1,
-"gen": 0
-}
-},
-{
-"id": "grid_refund",
-"kind": "quantity",
-"stage": "test",
-"name": "First payer refunded when neighbours connect",
-"formula": "the customer who pays for an extension or substation is refunded a share when later customers connect to it",
-"coef": "BC Hydro distribution: automatic refund reviews at the 5th anniversary (fee $25k to under $1M), 5th and 10th ($1–4.99M), 5th, 10th and 15th (≥ $5M); BC Hydro transmission (Tariff Supplement 6, read): a reinforcement payment is refunded if a later customer uses it within 5 years; later customers on a shared extension pay a share of replacement cost, and the first customer gets the depreciated value (3% a year), unless BC Hydro's added load is 5% of capacity or less. AESO: within 20 years later customers pay a share and the ISO may refund (no refund under $10,000); data centres pay their own upgrades (Alberta). EPCOR: refund if a new customer shares the extension in the initial term",
-"unit": "rule",
-"sources": [
-"bchDEP2025",
-"bchTS6",
-"bchTCIP2026",
-"aesoTariff4",
-"aesoTariff5",
-"abDCpay",
-"epcorTC2025s44"
-],
-"source_roles": [
-{
-"id": "bchDEP2025",
-"term": "5/10/15-yr reviews",
-"role": "rule",
-"conf": 90,
-"verified": true
-},
-{
-"id": "aesoTariff5",
-"term": "20 yr, may refund",
-"role": "rule",
-"conf": 90,
-"verified": true
-}
-],
-"conf": 80,
-"status": "rules read 19 Oct 2026",
-"direction": "",
-"trial": "",
-"inputs": [
-"interconnection"
-],
-"upstream": 50,
-"city": {
-"van": 3,
-"edm": 4,
-"both": 0,
-"gen": 0
-}
-},
-{
-"id": "community_solar",
-"kind": "quantity",
-"stage": "opportunity",
-"name": "Solar on neighbours' roofs",
-"formula": "BC: RS 2290 community generation, neighbours credited on their bills; Alberta: micro-generation on owned, leased or adjacent property, sized to own use",
-"coef": "BC: net injection up to 2 MW, set by 24 kW per residential and 100 kW per commercial beneficiary (so 2 MW needs at least 84 households); beneficiaries get bill credits, not power; selling power directly to a neighbour fails the UCA s. 1(d) exclusion; credits at 10 ¢/kWh (BCUC G-64-26); each beneficiary takes at most 10–50% of the credits, by group size. Alberta: under the lesser of 5 MW and the service rating, on property owned or leased or adjacent to it, not more than the site's own use; panels on a leased neighbour's roof could serve the data centre (whether a roof lease counts as leased property is not confirmed); revenue-seeking sites are commercial generators",
-"unit": "rule",
-"sources": [
-"bchSelfGen2026",
-"bchCustGen",
-"bcucG6426",
-"bcUCAs1",
-"aucMicro2026"
-],
-"source_roles": [
-{
-"id": "bchSelfGen2026",
-"term": "RS 2290 2 MW; 24/100 kW",
-"role": "rule",
-"conf": 80,
-"verified": true
-},
-{
-"id": "aucMicro2026",
-"term": "owned, leased or adjacent",
-"role": "rule",
-"conf": 90,
-"verified": true
-}
-],
-"conf": 70,
-"status": "rules read 19 Oct 2026",
-"direction": "",
-"trial": "",
-"inputs": [
-"rooftop_solar"
-],
-"upstream": 70,
-"city": {
-"van": 4,
-"edm": 1,
-"both": 0,
-"gen": 0
 }
 },
 {
@@ -12230,7 +11803,7 @@
 }
 ],
 "conf": 70,
-"status": "rules read 29 Oct 2026 (check 1)",
+"status": "rules read 29 Oct 2026 (check 1); 2 Nov 2026: reserved capacity moved here from the opportunities (J.B. triage 30 Oct 2026, item 30); the curtailment entry condition is shown in Energy, Getting connected",
 "direction": "",
 "trial": "",
 "inputs": [
@@ -13041,26 +12614,6 @@
 "to": "aquaculture_tonnes"
 },
 {
-"from": "heat_delivered",
-"to": "algae_kg"
-},
-{
-"from": "heat_temp",
-"to": "algae_kg"
-},
-{
-"from": "heat_temp",
-"to": "insect_check"
-},
-{
-"from": "servers",
-"to": "distributed_servers_homes"
-},
-{
-"from": "spare_capacity",
-"to": "ev_stalls"
-},
-{
 "from": "ev_stalls",
 "to": "ev_area"
 },
@@ -13241,10 +12794,6 @@
 "to": "surface_water_sink"
 },
 {
-"from": "massing",
-"to": "rooftop_solar"
-},
-{
 "from": "parcel",
 "to": "electricity_price"
 },
@@ -13381,26 +12930,6 @@
 "to": "battery"
 },
 {
-"from": "it_load_actual",
-"to": "ups_flex"
-},
-{
-"from": "flexible_load",
-"to": "ups_flex"
-},
-{
-"from": "battery",
-"to": "peak_relief"
-},
-{
-"from": "ups_flex",
-"to": "peak_relief"
-},
-{
-"from": "electricity_price",
-"to": "peak_relief"
-},
-{
 "from": "generator_co2",
 "to": "genset_test"
 },
@@ -13459,14 +12988,6 @@
 {
 "from": "demand_profile",
 "to": "tes_volume"
-},
-{
-"from": "heat_temp",
-"to": "absorption"
-},
-{
-"from": "heat_captured",
-"to": "absorption"
 },
 {
 "from": "parcel",
@@ -13781,10 +13302,6 @@
 "to": "clean_power_price"
 },
 {
-"from": "it_load_actual",
-"to": "chp_heat"
-},
-{
 "from": "heat_rejected",
 "to": "condensate"
 },
@@ -13795,18 +13312,6 @@
 {
 "from": "heat_delivered",
 "to": "snowmelt_area"
-},
-{
-"from": "backup_hours",
-"to": "backup_neighbours"
-},
-{
-"from": "interconnection",
-"to": "grid_refund"
-},
-{
-"from": "rooftop_solar",
-"to": "community_solar"
 },
 {
 "from": "water_supply",
@@ -16288,30 +15793,6 @@
 "next_action": "a supplier quote or a rule check for the addition"
 },
 {
-"id": "a_absorption_temp",
-"heading": "11 What if we added",
-"name": "The heat is hot enough to make cooling",
-"test": "heat temperature ≥ the absorption chiller's minimum",
-"quantities": [
-"absorption",
-"heat_temp"
-],
-"move": [
-"physics",
-"choice"
-],
-"parties": [
-"operator",
-"neighbours"
-],
-"constraint": true,
-"note": "Air-cooled heat cannot drive absorption cooling; liquid-cooled heat can only with a heat-pump lift or a low-COP two-stage machine.",
-"sources": [
-"absorption2026"
-],
-"next_action": "a supplier quote or a rule check for the addition"
-},
-{
 "id": "a_storage_fire",
 "heading": "11 What if we added",
 "name": "Battery storage meets fire rules on an urban site",
@@ -16344,8 +15825,7 @@
 "heat_delivered",
 "homes_heated",
 "window",
-"distribution_cost",
-"tes_volume"
+"distribution_cost"
 ],
 "labels": {
 "readiness": "built_here",
@@ -16421,88 +15901,6 @@
 }
 },
 {
-"name": "Seasonal storage in the ground",
-"quantities": [
-"stored_heat",
-"storage_footprint",
-"licence_flag",
-"btes"
-],
-"labels": {
-"readiness": "built_elsewhere",
-"provisional": false,
-"basis": "Aquifer store: Equinix Amsterdam with the University of Amsterdam (RVO, Dutch government; Equinix 2012 claim). Borehole store with data-centre heat: studies only (Stavanger 2023 warns borehole life could fall from 30 to 10 years; Li et al. 2021). Built here with solar heat only: Drake Landing, Okotoks AB — decommissioned in 2024 (failing parts, gas boilers supplying most heat; ATCO). Precedent search 15 Oct 2026.",
-"sources": [
-"rvoDatacenters",
-"equinixAM3",
-"stavangerBTES2023",
-"li2021_dcbtes",
-"drake_landing",
-"atcoDrake2024"
-],
-"rules": [
-{
-"rung": "Ground licence",
-"van": [
-"approval",
-"registered driller; report"
-],
-"edm": [
-"approval",
-"setbacks (2018 directive)"
-],
-"sources": [
-"wsa",
-"abDirective"
-]
-}
-],
-"unknowns": [
-"land for the borefield on or next to the parcel"
-],
-"visual": "borefield drawn under a lot or park"
-}
-},
-{
-"name": "Aquaculture / insects / algae",
-"quantities": [
-"aquaculture_tonnes",
-"insect_check",
-"algae_kg",
-"heat_temp"
-],
-"labels": {
-"readiness": "built_elsewhere",
-"provisional": false,
-"basis": "Fish: Green Mountain DC-Telemark → Hima Seafood trout farm, Rjukan, Norway, 800 m apart, operating at test capacity (operator claim); White Data Center eel farm, Hokkaido, since Jan 2024 (operator claim). Algae (Data4, Paris-Saclay) and mealworms (RISE, Sweden) are pilots. Operator claims only — no independent source yet. Precedent search 15 Oct 2026.",
-"sources": [
-"greenMountainHima",
-"whiteDCeel",
-"data4algae",
-"riseMealworm"
-],
-"rules": [
-{
-"rung": "Zoning",
-"van": [
-"unknown",
-"food production in industrial zones not yet read"
-],
-"edm": [
-"unknown",
-"not yet read"
-],
-"sources": []
-}
-],
-"unknowns": [
-"a built precedent",
-"food-safety rules"
-],
-"visual": "tank or rearing-room footprint to scale"
-}
-},
-{
 "name": "Warming centre, refuge, clean-air room",
 "quantities": [
 "refuge_people",
@@ -16549,101 +15947,6 @@
 }
 },
 {
-"name": "Reserved capacity and batteries to the grid",
-"quantities": [
-"spare_capacity",
-"flexible_load",
-"backup_hours",
-"lrmc_bc",
-"battery",
-"ups_flex",
-"power_allocation"
-],
-"labels": {
-"readiness": "built_elsewhere",
-"provisional": false,
-"basis": "Demand response: Google's contract with Indiana Michigan Power carries interruptible load and curtailment obligations (Indiana regulator, Cause 46276; operation not confirmed). UPS batteries: Digital Realty, nine Irish data centres in EirGrid frequency response (operator claim). Battery: Google St. Ghislain, Belgium, 2.75 MW proof of concept (vendor claim). None found in BC or Alberta. Precedent search 15 Oct 2026. Added 29 Oct 2026 (check 1): UPS batteries in fast frequency markets — Basefarm, Norway, 1.5 MW (2018, vendor claim) and Telia Helsinki, several MW (2022, operator claim); workload cuts — Google in Belgium, Taiwan and Omaha (operator claim) and Oracle Phoenix, 25% for 3 h on 256 GPUs (company preprint); rules — Texas S.B. 6 (75 MW+), Ireland proposed decision 2025.",
-"sources": [
-"iurc46276",
-"enelxDLR",
-"fluenceStGhislain",
-"cfd",
-"aeso_or",
-"eatonBasefarm2018",
-"fortumTelia2022",
-"googleFlex2025",
-"emeraldPhoenix2025",
-"txSB6_2025",
-"cruLEU2025"
-],
-"rules": [
-{
-"rung": "Utility programme",
-"van": [
-"allowed",
-"BC Hydro 2026 Call: curtail ≥10% on 24 h notice, ≥144 h a year"
-],
-"edm": [
-"allowed",
-"AESO operating reserve ≥5 MW, or through an aggregator"
-],
-"sources": [
-"cfd",
-"aeso_or"
-]
-},
-{
-"rung": "Condition on large loads",
-"van": [
-"approval",
-"BC Hydro 2026 Call: curtailable ≥10% on 24 h notice, ≥144 h a year"
-],
-"edm": [
-"approval",
-"Data Centre Regulation (Alta Reg 117/2026), ≥75 MW from transmission: may tether to new generation or storage covering its peak; in mandatory load shed, large data centres cut before all others; bridged load (≤3 yr) cut first when supply is short. AESO process (proposal, Jun 2026): first intake gas only, bridging ≤40%. Under 75 MW or on distribution: no flexibility term found"
-],
-"sources": [
-"cfd",
-"alta117_2026",
-"aesoBYOG2026",
-"aesoP2Aupd2026"
-]
-},
-{
-"rung": "UPS batteries to the grid",
-"van": [
-"no_rule",
-"no BC programme found"
-],
-"edm": [
-"allowed",
-"AESO reserves ≥5 MW or via aggregator"
-],
-"sources": [
-"aeso_or"
-]
-},
-{
-"rung": "Fire code (battery room)",
-"van": [
-"unknown",
-"code path unconfirmed"
-],
-"edm": [
-"unknown",
-"code path unconfirmed"
-],
-"sources": []
-}
-],
-"unknowns": [
-"data-centre participation precedent",
-"battery fire-code path"
-],
-"visual": "daily power curve with the share given back"
-}
-},
-{
 "name": "EV charging hub",
 "quantities": [
 "ev_stalls",
@@ -16654,7 +15957,7 @@
 "labels": {
 "readiness": "speculative",
 "provisional": false,
-"basis": "No built case of a data centre sharing its capacity or site with public charging. The reverse is announced in the US: GPU pods at EV-charging sites using idle capacity (Xeal, Sep 2026, operator claim). Precedent search 15 Oct 2026.",
+"basis": "No built case of a data centre sharing its capacity or site with public charging. The reverse is announced in the US: GPU pods at EV-charging sites using idle capacity (Xeal, Sep 2026, operator claim). Precedent search 15 Oct 2026. Here (30 Oct 2026 triage, applied 2 Nov 2026): chargers on the data centre's lot with their own new grid connection; the data centre has no spare capacity to set aside.",
 "sources": [
 "xealLaitent"
 ],
@@ -16729,98 +16032,6 @@
 "who would use it"
 ],
 "visual": "lot phasing over time"
-}
-},
-{
-"name": "Rainwater, condensate and water reuse",
-"quantities": [
-"rainwater",
-"blowdown"
-],
-"labels": {
-"readiness": "built_elsewhere",
-"provisional": false,
-"basis": "Blowdown recovery: Quincy Water Reuse Utility, WA, treats and returns a Microsoft data centre's cooling water since 2021 (US EPA). Reclaimed wastewater: Loudoun Water pipes reclaimed water to data centres for cooling (utility). Rainwater: Microsoft claims partial use in the Netherlands and Ireland, no figures (operator claim). Greywater or blackwater for cooling: none found. None found in Canada. Precedent search 15 Oct 2026.",
-"sources": [
-"epaQuincy",
-"loudounWater",
-"msWaterFacts"
-],
-"rules": "try:rainwater,reclaimed,greywater,blackwater",
-"unknowns": [
-"a data-centre precedent"
-],
-"visual": "roof catchment and tank"
-}
-},
-{
-"name": "Material bank: copper",
-"quantities": [
-"copper_tonnes",
-"ewaste",
-"rare_earth"
-],
-"labels": {
-"readiness": "speculative",
-"provisional": false,
-"basis": "Corporate reuse exists (Microsoft Circular Centers: 83% reuse, 17% recycle of critical parts — operator claim), but recovered material returns to company or global supply chains. No case of a data centre planned as a city material bank. Precedent search 15 Oct 2026.",
-"sources": [
-"msCircular",
-"cda2023"
-],
-"rules": [
-{
-"rung": "Rules",
-"van": [
-"na",
-""
-],
-"edm": [
-"na",
-""
-],
-"sources": []
-}
-],
-"unknowns": [
-"who would take the material and when"
-],
-"visual": "over-time view of materials leaving at refits and at closure"
-}
-},
-{
-"name": "Distributed servers as heaters",
-"quantities": [
-"distributed_servers_homes",
-"servers"
-],
-"labels": {
-"readiness": "pilot",
-"provisional": false,
-"basis": "Qarnot's computing heaters were deployed under an EU-funded project (CORDIS EeHPC, 2014–15); British Gas is trialling Heata units in 10 homes (2025, operator claim). Current scale not confirmed; several firms have closed. Precedent search 15 Oct 2026.",
-"sources": [
-"qarnotCordis",
-"heataCentrica",
-"liu2011"
-],
-"rules": [
-{
-"rung": "Building code",
-"van": [
-"unknown",
-"not yet read"
-],
-"edm": [
-"unknown",
-"not yet read"
-],
-"sources": []
-}
-],
-"unknowns": [
-"a built precedent"
-],
-"visual": "map of homes, not the site"
 }
 },
 {
@@ -16931,174 +16142,6 @@
 ],
 "unknowns": [],
 "visual": "side by side with data-centre heat"
-}
-},
-{
-"name": "Cooling for neighbours",
-"quantities": [
-"absorption",
-"heat_temp"
-],
-"labels": {
-"readiness": "speculative",
-"provisional": false,
-"basis": "Data-centre heat has driven chillers only to cool the centre's own equipment (LRZ CoolMUC-2, Garching, adsorption, 2016–2024, now shut down). Cooling a neighbouring building appears only as a proposal (Yuan et al. 2023 review). Needs roughly 65 °C or more: liquid-cooled only. Precedent search 15 Oct 2026.",
-"sources": [
-"lrzCoolMUC",
-"wilde2017",
-"yuan2023",
-"absorption2026"
-],
-"rules": [
-{
-"rung": "Rules",
-"van": [
-"na",
-"physics gate first"
-],
-"edm": [
-"na",
-"physics gate first"
-],
-"sources": []
-}
-],
-"unknowns": [
-"heat temperature at the site"
-],
-"visual": "temperature bar against the chiller's minimum"
-}
-},
-{
-"name": "Backup power for neighbours in a blackout",
-"quantities": [
-"backup_neighbours",
-"backup_hours",
-"fuel_on_site"
-],
-"labels": {
-"readiness": "speculative",
-"provisional": false,
-"basis": "No data centre found powering neighbours in an outage in BC or Alberta; Vancouver's 25 disaster support hubs do not state backup power. Research 19 Oct 2026.",
-"sources": [
-"vanHubs"
-],
-"rules": [
-{
-"rung": "Utility law",
-"van": [
-"approval",
-"supplying anyone but itself, its employees or tenants makes it a public utility unless the minister or BCUC exempts it (UCA s. 1, 22, 88(3)); an affiliate counts as another person"
-],
-"edm": [
-"approval",
-"the Electric Utilities Act exempts only power consumed solely on the producer's own or rented property (s. 1(1)(vv.1), 2(1)(b)); supplying a neighbour falls under the Act"
-],
-"sources": [
-"bcUCAs1",
-"fasken2026",
-"euaS2"
-]
-},
-{
-"rung": "Utility wiring",
-"van": [
-"approval",
-"never energize a de-energized BC Hydro line (closed-transition rules)"
-],
-"edm": [
-"not_allowed",
-"a customer may not extend its wiring beyond its own property (EPCOR T&C s. 4.4; the exception in Art. 8.3 not yet verified); islanding only with written approval"
-],
-"sources": [
-"bchCTT2024",
-"epcorTC2025s44",
-"epcorIG2022"
-]
-}
-],
-"unknowns": [
-"spare generator capacity during a blackout",
-"who on the next lot needs it"
-],
-"visual": "a private line from the generator yard to one neighbour, behind a transfer switch"
-}
-},
-{
-"name": "Grid upgrades shared with neighbours",
-"quantities": [
-"grid_refund",
-"grid_headroom",
-"lead_time"
-],
-"labels": {
-"readiness": "built_here",
-"provisional": false,
-"basis": "The refund rules run for every customer extension in both provinces (BC Hydro, AESO, EPCOR); no case found of a data centre oversizing for neighbours. Research 19 Oct 2026.",
-"sources": [
-"bchDEP2025",
-"aesoTariff5"
-],
-"rules": [
-{
-"rung": "Utility tariff",
-"van": [
-"allowed",
-"automatic refund reviews at years 5, 10 and 15 (distribution); transmission refund when added load exceeds 5%"
-],
-"edm": [
-"allowed",
-"AESO: later customers share within 20 years, refund at the ISO's discretion; EPCOR: refund within the initial term"
-],
-"sources": [
-"bchDEP2025",
-"bchTCIP2026",
-"aesoTariff5",
-"epcorTC2025s44"
-]
-}
-],
-"unknowns": [
-"who would connect later, and when"
-],
-"visual": "the feeder or substation the data centre pays for, with the neighbours who could join it"
-}
-},
-{
-"name": "Solar on neighbours' roofs",
-"quantities": [
-"community_solar",
-"rooftop_solar"
-],
-"labels": {
-"readiness": "speculative",
-"provisional": false,
-"basis": "BC Hydro's community generation rate (RS 2290) is new in 2026; no data-centre case found in either city. Research 19 Oct 2026.",
-"sources": [
-"bchSelfGen2026"
-],
-"rules": [
-{
-"rung": "Utility rate",
-"van": [
-"allowed",
-"RS 2290: up to 2 MW, neighbours credited on their bills at 10 ¢/kWh (BCUC G-64-26); selling power to them directly makes it a public utility"
-],
-"edm": [
-"approval",
-"micro-generation on owned, leased or adjacent property, up to the site's own use; it cannot sell to the neighbour"
-],
-"sources": [
-"bchSelfGen2026",
-"bchCustGen",
-"aucMicro2026"
-]
-}
-],
-"unknowns": [
-"Alberta: whether a roof lease counts as leased property"
-],
-"visual": "panels on the roofs nearby, credits or power flowing back"
 }
 },
 {
@@ -17217,42 +16260,106 @@
 }
 },
 {
-"name": "Batteries at end of life",
+"name": "Seasonal heat store",
 "quantities": [
-"battery_cabinets",
-"afterlife"
+"stored_heat",
+"storage_footprint",
+"licence_flag",
+"btes",
+"ates"
 ],
 "labels": {
-"readiness": "speculative",
+"readiness": "built_elsewhere",
 "provisional": false,
-"basis": "Large UPS batteries fall outside BC's and Alberta's consumer recycling programs as read (register: afterlife). No case found of a data centre's batteries going to a local reuse or recycling stream. Added 29 Oct 2026 from the materials review.",
+"basis": "Aquifer store: Equinix Amsterdam with the University of Amsterdam (RVO, Dutch government; Equinix 2012 claim). Borehole store with data-centre heat: studies only (Stavanger 2023 warns borehole life could fall from 30 to 10 years; Li et al. 2021). Built here with solar heat only: Drake Landing, Okotoks AB — decommissioned in 2024 (failing parts, gas boilers supplying most heat; ATCO). Precedent search 15 Oct 2026.",
 "sources": [
-"bcRecyclingIT",
-"abElectronicsReg",
-"vertivLi5"
+"rvoDatacenters",
+"equinixAM3",
+"stavangerBTES2023",
+"li2021_dcbtes",
+"drake_landing",
+"atcoDrake2024"
 ],
 "rules": [
 {
-"rung": "Stewardship programs",
+"rung": "Ground licence",
 "van": [
-"no_rule",
-"IT products covered; large UPS batteries not found in the program as read"
+"approval",
+"boreholes: registered driller; report. Aquifer store: water licence"
 ],
 "edm": [
-"no_rule",
-"computer equipment designated; large UPS batteries not found as read"
+"approval",
+"boreholes: setbacks (2018 directive). Aquifer store: Water Act approval or licence"
 ],
 "sources": [
-"bcRecyclingIT",
-"abElectronicsReg"
+"wsa",
+"abDirective"
 ]
 }
 ],
 "unknowns": [
-"battery service life (not read ?)",
-"who would take them"
+"land for the borefield on or next to the parcel",
+"whether an aquifer lies under the site"
 ],
-"visual": "battery cabinets leaving through the loading dock"
+"visual": "borefield drawn under a lot or park",
+"merged": "2 Nov 2026: seasonal ground store (10) and aquifer heat store (12) merged into one card (J.B. triage 30 Oct 2026)"
+}
+},
+{
+"name": "Aquaculture (fish)",
+"quantities": [
+"aquaculture_tonnes",
+"heat_temp"
+],
+"labels": {
+"readiness": "built_elsewhere",
+"provisional": false,
+"basis": "Fish: Green Mountain DC-Telemark → Hima Seafood trout farm, Rjukan, Norway, 800 m apart, operating at test capacity (operator claim); White Data Center eel farm, Hokkaido, since Jan 2024 (operator claim). Operator claims only — no independent source yet. Precedent search 15 Oct 2026.",
+"sources": [
+"greenMountainHima",
+"whiteDCeel"
+],
+"rules": [
+{
+"rung": "Zoning",
+"van": [
+"unknown",
+"food production in industrial zones not yet read"
+],
+"edm": [
+"unknown",
+"not yet read"
+],
+"sources": []
+}
+],
+"unknowns": [
+"a built precedent",
+"food-safety rules"
+],
+"visual": "tank or rearing-room footprint to scale"
+}
+},
+{
+"name": "Rainwater and reclaimed water",
+"quantities": [
+"rainwater",
+"blowdown"
+],
+"labels": {
+"readiness": "built_elsewhere",
+"provisional": false,
+"basis": "Reclaimed wastewater: Loudoun Water pipes reclaimed water to data centres for cooling (utility). Rainwater: Microsoft claims partial use in the Netherlands and Ireland, no figures (operator claim). None found in Canada. Precedent search 15 Oct 2026.",
+"sources": [
+"loudounWater",
+"msWaterFacts"
+],
+"rules": "try:rainwater,reclaimed",
+"unknowns": [
+"a data-centre precedent"
+],
+"visual": "roof catchment and tank",
+"engineering_only": "2 Nov 2026 (J.B. triage 30 Oct 2026): blowdown recovery, condensate, greywater and blackwater are shown in the engineering (full) template only (try_menu tier \"full\"); the Quincy precedent stays on try_menu blowdown"
 }
 }
 ],
@@ -17455,7 +16562,7 @@
 "mvReclaimed": "Metro Vancouver Interim Reclaimed Water Policy UT-019 (29 Sep 2023): industrial uses case-by-case; no rates — https://metrovancouver.org/boards/Policies/interim-reclaimed-water.pdf ‖ CHECK 2 (30 Oct 2026, ok): overreach: Interim board policy, not a supply entitlement: 'will consider' and 'pending evaluation'. Treat as a possible route, not a rule granting supply.; roles: partly supported",
 "vanOfficeConv": "City of Vancouver, Office Conversion Policy (adopted Jun 2009, amended Oct 2009): applies to buildings with ≥50,000 sq ft of office in DODP Areas C2, C3, G, H, L1, L2, M and N, ≥30,000 sq ft in HA-2 (Gastown) and HA-3 (Yaletown); addresses conversion to residential only (triggers a report to Council); not a rule for office-to-data-centre conversion — https://guidelines.vancouver.ca/policy-downtown-office-conversion.pdf ‖ CHECK 2 fixes applied (30 Oct 2026): DODP areas named (C2, C3, G, H, L1, L2, M, N); added residential-only, not a data-centre rule",
 "edmPermits": "City of Edmonton General Building Permits (open data 24uj-dj8v): 'DATA CENT' records incl. a new data centre inside an office (2009), alterations to data centres in offices (2011), an addition to an industrial building for a data centre (17204 114 Ave NW, 2015) and the expansion of a data centre into an empty warehouse there (2020); dataset id not in the export ?, and a 2021 demolition of a 'Sobeys Data Centre'; occupancy dates for non-residential permits completed since 2024 — https://data.edmonton.ca/d/24uj-dj8v ‖ CHECK 2 fixes applied (30 Oct 2026): 2011 = alterations, not new; only 2020 is warehouse expansion, 2015 an industrial addition; '?' settled",
-"van6555zones": "Vancouver Noise Control By-law 6555 (consolidated to 14 Jul 2026, By-law 14786, per the saved copy), continuous sound ss.2.1–2.3: quiet→quiet 55 day / 45 night; activity→quiet 60 / 55; intermediate→quiet 60 / 50; intermediate/activity→other 70 / 65; 'background noise' appears only in s.3.1(b)(i): amplified sound in commercial premises ≤ 3 dBA above background (a limit, not a credit; not for mechanical equipment); no ambient credit for equipment (our reading: not stated) — https://bylaws.vancouver.ca/6555c.PDF ‖ CHECK 2 fixes applied (30 Oct 2026): s.3.1(b) is a +3 dBA limit for amplified sound, not a background credit; consolidation date settled from saved copy",
+"van6555zones": "Vancouver Noise Control By-law 6555 (consolidated to 14 Jul 2026, By-law 14786, per the saved copy), continuous sound ss.2.1–2.3: quiet→quiet 55 day / 45 night; activity→quiet 60 / 55; intermediate→quiet 60 / 50; quiet→intermediate/activity/event 60 day / 55 night (s. 2.1(a)(ii), (b)(ii); src_fill_van6555s21, added 2 Nov 2026); intermediate/activity→other 70 / 65; 'background noise' appears only in s.3.1(b)(i): amplified sound in commercial premises ≤ 3 dBA above background (a limit, not a credit; not for mechanical equipment); no ambient credit for equipment (our reading: not stated) — https://bylaws.vancouver.ca/6555c.PDF ‖ CHECK 2 fixes applied (30 Oct 2026): s.3.1(b) is a +3 dBA limit for amplified sound, not a background credit; consolidation date settled from saved copy",
 "lbnlLife": "Shehabi et al. 2024 (LBNL) p. 30: 'the lifetime assumption for 2000–2019 is 4.4 years', increasing to 5 years in 2020, and to 5.7 years by 2023' (US installed-base modelling assumption) — https://climate.mit.edu/sites/default/files/2025-02/lbnl-2024-united-states-data-center-energy-usage-report.pdf (an MIT-hosted copy; LBNL record https://eta-publications.lbl.gov/bibcite/reference/36455 ?) ‖ CHECK 2 fixes applied (30 Oct 2026): p. 31 → p. 30; labelled a US modelling assumption",
 "tenK_life": "Company filings on server useful life: Microsoft FY2022 four → six years (?: one check reads FY2023, decided Jul 2022); Alphabet FY2023 servers four → six (network equipment five → six); Amazon six (2024 ?: filing and section not found), a subset back to five (2025, 'increased pace of technology development'); Meta 4–5 → 5.5 years for most servers and network assets (2025; prior range ?) — SEC filings (OPERATOR FILING) ‖ CHECK 2 fixes applied (30 Oct 2026): Amazon six years (2024) marked '?' (not found in FY2024 10-K text)",
 "ashraeLife": "ASHRAE Handbook HVAC Applications 2015, ch.37 Table 3 (median service life): centrifugal chiller >25 yr; cooling tower metal >22; Table 4 (Akalin 1978, which ASHRAE footnotes as possibly outdated): air-cooled condenser 20; commercial water-to-air heat pump >24 (Abramson 2005; Akalin 1978: 19); base-mounted pump 20; shell-and-tube heat exchanger 24; transformer 30. Survey medians for commercial buildings, not design lives for data-centre plant — https://handbook.ashrae.org/Handbooks/A15/IP/A15_CH37/a15_ch37_ip.aspx ‖ CHECK 2 fixes applied (30 Oct 2026): heat pump >24 attributed to Abramson 2005 (Akalin: 19); 'survey medians, commercial buildings' qualifier added",
@@ -18436,7 +17543,19 @@
 "arch_up_fm0140": "INSURER GUIDANCE (not law): FM Property Loss Prevention Data Sheet 1-40, Flood, FM Global, October 2016, interim revision October 2025: 2.2.1.1 entire site and all access routes outside 0.2% (500-year) flood zones 'by both elevation and footprint'; 2.2.1.2 above 500-year elevation with 1 to 2 ft (0.3 to 0.6 m) freeboard, 'at least 500 ft (152 m) from direct wave impacts' or flows >2 m/s; 2.2.1.3 'not in an area protected by a levee or other man-made flood control works'; 2.2.2.9 floors and openings >=0.3 m above 100-year stormwater elevation; 2.2.3–2.2.5 fallbacks (raise site, raise buildings/equipment, lessen damage); 2.3.1 flood-prone areas 'used solely for nonessential operations'; 2.3.3 A emergency power above 500-year + freeboard; 2.6.3 HVAC, chillers above; 2.6.5 boilers above; 2.7.1 generators, transformers, batteries, UPS, switchboards above 500-year + 0.3–0.6 m; 2.7.3.1 otherwise IPX8 — J.B. upload 2 Nov 2026 (PDF not in repo; text extract read)",
 "arch_up_fm0901": "INSURER GUIDANCE (not law): FM Property Loss Prevention Data Sheet 9-1, Supervision of Property, FM Global, April 2017, interim revision January 2021: 1.0 passive-protection recommendations take precedence over DS 9-16 and over DS 10-6 s. 2.2.1; 2.2.1.2.1 zones Unsecured-Open, Unsecured-Protected, Secured-Controlled, Secured-Restricted; 2.3.1.1 A 'metal fences of heavy industrial-grade construction with bars spaced closely together. Chain-link fences and gates should not be used. Walls should be reinforced masonry or concrete', anti-climb, pedestrian gates swing outward, vehicle gates sliding or cantilevered one lane, barriers 'also protect cooling equipment, generators, fuel tanks, and utilities'; B guard houses enclosed, secondary egress, ballistic and bollards if needed; C parking away from the building, separate visitor/employee entrances, vehicle screening area; D continuous lighting incl. transformers and emergency generators; 2.3.1.2 lights on roof or poles; cameras at entry/exit, parking, 'Neighboring property', garbage bins, power and cooling; 2.3.2.1 C exterior doors metal, force-resistant glazing, deadbolt >=1 in., tamper-proof hinges; D 'Do not use locks that require electrical power, e.g. electromagnetic locks, to secure physical access'; I openings >0.3 m tamper-proof grills; O camera coverage of building perimeter, roof access, exterior equipment; 2.3.3 walls deck to deck, limited interior windows (tempered or wired), no signs on high-value rooms, one visitor at a time; 2.3.3.6 air openings >620 cm2 barred; 2.3.5.2 cables not in public areas; 2.3.7.2 monitors in a constantly attended area, footage >=90 days; 3.1.5 tours hourly when unoccupied, one per shift with video — J.B. upload 2 Nov 2026 (PDF not in repo; text extract read) ‖ SCOPE (check 2, 31 Oct 2026): 2.3.2.1 D (no power-dependent locks) is insurer guidance for securing doors; exit doors still follow the building code (NBC/BCBC electromagnetic-lock provisions). Already flagged in uploads_2026_11_02.md.",
 "arch_up_fm0916": "INSURER GUIDANCE (not law): FM Property Loss Prevention Data Sheet 9-16, Burglary and Theft, FM Global, January 2000, interim revision April 2025 (reaffirmed): 1.0 scope manufacturing, warehouse, limited mercantile; 2.1.1.1 alarm level = sum of components, Table 1 Levels 2–5 by probability and loss expectancy; 2.1.1.2 (1) lighting 'ten ft (three m) on either side of fences, and areas within 40 ft (12 m) of building entrances'; (2) ground-reachable windows not fronting main roads blocked or barred, bars inside glass, flat bars <=13 cm vertical spacing; (3) fences 'flush with the ground and a minimum of 7 ft (2 m) in height, with barbed wire at the top tilted toward the outside'; (4) doors >=1.5 in. (4 cm), deadbolt (source prints '1 in. (25 cm)'); (5) tenant cutoffs 'solid masonry construction, complete from the floor to the underside of the roof'; 3.4.3.1 Perimeter 5/4/2/1 levels; walls >=5.5 m above ground need not be protected (P5); reinforced or precast concrete walls need not be protected (P2, P4) — J.B. upload 2 Nov 2026 (PDF not in repo; text extract read) ‖ SCOPE (check 2, 31 Oct 2026): Scope is manufacturing, warehouse and limited mercantile; a data centre is outside it, and 9-1 s. 1.0 says 9-1 governs passive building protection. Use 9-16 only for alarm levels and as background.",
-"arch_up_edmAccess2023": "GOVERNMENT GUIDE: City of Edmonton, Access Management Guidelines, COE-IM-GUIDE-0023 Version 03, 21 Dec 2023 (J.B. upload 2 Nov 2026): Table 5.10 access width at the property line for commercial, industrial and mixed uses: two-way passenger vehicles 7.5–9.0 m, medium trucks 9.0–11.5 m, large trucks and transit buses 11.5–13.5 m, one-way 5.0 m (6.0 m may be needed for emergency vehicles); 5.6 'For sites with controlled access (e.g., security gates), the access control should be positioned such that at least one vehicle can queue entirely on-site and clear of the public road right-of-way', vehicle length from the largest design vehicle; throat length at least 12 m on collector roads, 6 m on local roads, none on alleys; Table 5.12 minimum throat length, light industrial (our category for a data centre; the table has none) under 10,000 m² site: 15 m (arterial), 40 m (principal roadway); over 10,000 m²: 30 m / 70 m; swept paths with the largest anticipated design vehicle 'may be required' (2.2.2) and are required where widths fall outside Table 5.10/5.11 (5.5). A guideline, not a bylaw. ‖ CHECK 2 (1 Nov 2026, fixed): all widths and throat lengths confirmed; swept-path wording corrected; light-industrial category marked as our reading. ‖ SCOPE (check 2, 31 Oct 2026): Table 5.12 has no data-centre land use; 'Light Industrial' is our choice of category (a reading, not the guide's), mark as such."
+"arch_up_edmAccess2023": "GOVERNMENT GUIDE: City of Edmonton, Access Management Guidelines, COE-IM-GUIDE-0023 Version 03, 21 Dec 2023 (J.B. upload 2 Nov 2026): Table 5.10 access width at the property line for commercial, industrial and mixed uses: two-way passenger vehicles 7.5–9.0 m, medium trucks 9.0–11.5 m, large trucks and transit buses 11.5–13.5 m, one-way 5.0 m (6.0 m may be needed for emergency vehicles); 5.6 'For sites with controlled access (e.g., security gates), the access control should be positioned such that at least one vehicle can queue entirely on-site and clear of the public road right-of-way', vehicle length from the largest design vehicle; throat length at least 12 m on collector roads, 6 m on local roads, none on alleys; Table 5.12 minimum throat length, light industrial (our category for a data centre; the table has none) under 10,000 m² site: 15 m (arterial), 40 m (principal roadway); over 10,000 m²: 30 m / 70 m; swept paths with the largest anticipated design vehicle 'may be required' (2.2.2) and are required where widths fall outside Table 5.10/5.11 (5.5). A guideline, not a bylaw. ‖ CHECK 2 (1 Nov 2026, fixed): all widths and throat lengths confirmed; swept-path wording corrected; light-industrial category marked as our reading. ‖ SCOPE (check 2, 31 Oct 2026): Table 5.12 has no data-centre land use; 'Light Industrial' is our choice of category (a reading, not the guide's), mark as such.",
+"src_fill_van6555s21": "RULE: Noise Control By-law No. 6555, City of Vancouver (consolidated for convenience only to July 14, 2026, incl. By-law No. 14786), Part 2 s. 2.1 Continuous sound in quiet zone: (a)(i) daytime 'exceeds a rating of 55 dBA ... at a point of reception within a quiet zone', (a)(ii) '60 dBA ... within an intermediate zone, an activity zone or an event zone'; (b)(i) nighttime '45 dBA ... within a quiet zone', (b)(ii) '55 dBA ... within an intermediate zone, an activity zone or an event zone'. s. 2.2(b): intermediate source, night 50 (quiet) / 65 (intermediate, activity or event). s. 2.3(b): activity or event source, night 55 (quiet) / 65 ('within an intermediate zone or an activity zone'; event-zone receiver not named) — saved copy data/raw/van/6555c.pdf (text data/raw/van/6555.txt lines 183-250), https://bylaws.vancouver.ca/6555c.PDF (read from saved copy 2 Nov 2026; page numbers not printed in the text extract ?)",
+"src_fill_eer2016_317": "RULE: Energy Efficiency Regulations, 2016 (SOR/2016-311), s. 317 Gas boilers, Justice Laws Website (current to page read 2 Nov 2026). Household gas boilers, Table 1: hot water 'Annual fuel utilization efficiency ≥ 80%' (31 Dec 1998 to 1 Sep 2010); '≥ 82%' (1 Sep 2010 to 1 Jul 2023); items 5.1 and 7 '≥ 90%' 'On or after July 1, 2023'; low pressure steam '≥ 75%' (1998-2010), '≥ 80%' (2010 to 15 Jan 2021), '≥ 82%' 'On or after January 15, 2021'. Commercial gas boilers, s. 317(3) and Table 2, 'manufactured on or after January 1, 2025': 87.92-732.68 kW hot water 'Thermal efficiency ≥ 90%'; >732.68-2 930.71 kW hot water 'Combustion efficiency ≥ 90%'; low pressure steam 'Thermal efficiency ≥ 81%' / '≥ 82%'. The 2017-2019 version of s. 317 has no commercial rows (no federal commercial gas-boiler minimum before 2025, our reading) — https://laws-lois.justice.gc.ca/eng/regulations/SOR-2016-311/page-18.html ; https://laws-lois.justice.gc.ca/eng/Regulations/SOR-2016-311/section-317-20170628.html",
+"src_fill_nrcanComBoiler": "GOVERNMENT GUIDE: Gas boilers - commercial, Natural Resources Canada, Energy Efficiency Regulations guide (date modified 2025-11-18): hot water 87.92-732.68 kW 'Thermal efficiency of ≥ 90%'; >732.68-2 930.71 kW 'Combustion efficiency of ≥ 90%'; low-pressure steam '≥ 81%' / '≥ 82%'; for boilers 'manufactured on or after January 1, 2025' — https://natural-resources.canada.ca/energy-efficiency/energy-efficiency-regulations/gas-boilers-commercial",
+"src_fill_nrcanFurnace": "GOVERNMENT GUIDE: Gas furnaces, Natural Resources Canada, Guide to Canada's Energy Efficiency Regulations (date modified not filled in ?): input ≤ 65.92 kW (225,000 Btu/h), single-phase, without integrated cooling: AFUE '95%', 'Manufactured on or after July 3, 2019' — https://natural-resources.canada.ca/energy-efficiency/energy-efficiency-regulations/guide-canadas-energy-efficiency-regulations/gas-furnaces/6879",
+"src_fill_nrcanHeatingGas2012": "GOVERNMENT GUIDE: Heating with Gas, Natural Resources Canada, Office of Energy Efficiency (revised October 2012): Table 1 p. 35 seasonal efficiency (AFUE %): 'Naturally aspirated furnace' 60; 'Naturally aspirated boiler' 55-65 (60-70 with electronic ignition and vent damper); 'Power-vented' furnace and boiler 78-84; 'Condensing furnace' 90-98. Table 3 p. 38: 'obsolete furnace/boiler circa 1970' 60; 'furnace circa 1985' 78-84; 'boiler circa 1985' 80-88; 'condensing boiler' 89-99. p. 25: 'non-condensing boilers, which typically have AFUE ratings of 82 to 89 percent'; 'A condensing boiler can have an AFUE rating of 90 percent or higher'. Rated AFUE (CSA P.2 test), not measured in-use efficiency — https://prod-natural-resources.azure.cloud.nrcan-rncan.gc.ca/sites/nrcan/files/energy/pdf/energystar/Heating_With_Gas.pdf",
+"src_fill_bcHEES2023": "GOVERNMENT POLICY (consultation, not law): Highest Efficiency Equipment Standards - Point of Sale Policy Consultation (Regulatory Bulletin), BC Ministry of Energy, Mines and Low Carbon Innovation, Energy Efficiency Branch, December 2023: 'all new space and water heating equipment sold and installed in B.C. to be high-efficiency, low carbon equipment' from 'January 1st, 2030' (no number given; status in 2026 ?; page ?) — https://www2.gov.bc.ca/assets/gov/farming-natural-resources-and-industry/electricity-alternative-energy/energy-efficiency/highest_efficiency_equipment_standards_-_counsultation_-_point_of_sale_policy_announcement.pdf",
+"src_fill_estarServers4": "GOVERNMENT PROGRAM SPECIFICATION (US EPA, used by NRCan for ENERGY STAR in Canada): ENERGY STAR Program Requirements for Computer Servers, Version 4.0, Final Specification; s. 3.2.3 Power Supply Power Factor Criteria (p. 10 of 17): servers 'must be configured with only PSUs that meet or exceed the applicable power factor requirements specified in Table 2' at loads ≥ 75 W; Table 2 (p. 11): ac-dc multi-output 20% 0.80 / 50% 0.90 / 100% 0.95; single-output ≤ 500 W 0.80 / 0.95 / 0.95; 500-1,000 W 10% 0.65, 20% 0.80, 50% 0.95, 100% 0.95; >1,000 W 10% 0.80, 20% 0.90, 50% 0.95, 100% 0.95; s. 7.1.1 (p. 17): 'shall take effect on January 12, 2024'. Minimum per server power supply, not a facility power factor at the utility meter — https://www.energystar.gov/sites/default/files/asset/document/ENERGY%20STAR%20Version%204.0%20Computer%20Servers%20Final%20Specification.pdf",
+"src_fill_rule012_s13": "RULE (Alberta AUC-jurisdiction facilities only; benchmark for a data centre): AUC Rule 012: Noise Control, effective 30 Sep 2024, s. 1.3 sidebar, p. 1: 'A noise receptor is any dwelling located within 1.5 km of the facility property boundary. If there is no dwelling within 1.5 km, a noise receptor is any point at 1.5 km from the facility property boundary.' s. 2.3(1), p. 9: new dwellings 'within 1.5 km from the boundary of an existing and operational facility' — data/AUC_Rule_012_2024-09-30.pdf ; https://media.auc.ab.ca/prd-consultation/sites/2/2023/11/2024-09-30-Rule012.pdf",
+"src_fill_smw2021": "CONSULTANT CLAIM (US, one project): Steve Volaric, Shen Milsom & Wilke (SM&W), Rooftop Equipment Acoustic Review Summary, Project 242T, United Therapeutics Corp., 8800 Cameron St., Silver Spring MD, memo to Jennifer Wampler (EwingCole), 23 Feb 2021, p. 1, 'Cooling Towers': 'Maximize the height of the sound barrier screen wall surrounding the towers, which would ideally be approx. 2-3 feet taller than the height of the units'; filed with Montgomery County Planning Board (exhibit 'G Acoustic Reviews') — https://montgomeryplanningboard.org/wp-content/uploads/2021/04/G-Acoustic-Reviews.pdf",
+"src_fill_ruizArias2009": "PEER-REVIEWED: Ruiz-Arias J.A., Tovar-Pescador J., Pozo-Vázquez D., Alsamamra H., A comparative analysis of DEM-based models to estimate the solar radiation in mountainous terrain, International Journal of Geographical Information Science 23(8):1049-1076, 2009, doi:10.1080/13658810802022806 (citation only; SVF formula not read ?). The tool cites it as 'Ruiz-Arias et al. 2010' (year ?) — https://investigacion.ujaen.es/documentos/5f1cdef029995265e44d7eba",
+"src_fill_fempChillers": "GOVERNMENT GUIDE: Purchasing Energy-Efficient Electric Chillers, US DOE Federal Energy Management Program (guidance updated Oct 2024; page modified 12 Nov 2025): Tables 4 and 5 cost examples use 'Lifetime Energy Cost (23 years)' for air-cooled and water-cooled chillers; basis of the 23 years not stated on the page (separate 'Calculation Assumptions' link not read ?). An analysis period, not a measured service life — https://www.energy.gov/node/849931",
+"src_fill_ecccEdmCity": "GOVERNMENT DATA: ECCC Canadian Climate Normals 1991-2020, EDMONTON (CITY), Precipitation (mm), monthly: Jan 19.6, Feb 11.8, Mar 16.8, Apr 28.6, May 44.2, Jun 69.9, Jul 82.7, Aug 60.7, Sep 38.5, Oct 20.5, Nov 17.5, Dec 11.8; year 422.5; normals code D — saved extract data/normals_1991_2020_extract.json (already under register id eccc; the 82.7 is the July value)"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -19100,7 +18219,9 @@
 "rule_sources": [
 "vbbl2025_272",
 "abAltSol2021"
-]
+],
+"tier": "full",
+"tier_note": "engineering only (J.B. triage 30 Oct 2026, item 41; applied 2 Nov 2026)"
 },
 {
 "id": "blackwater",
@@ -19131,7 +18252,9 @@
 "rule_sources": [
 "vbbl2025_272",
 "abAltSol2021"
-]
+],
+"tier": "full",
+"tier_note": "engineering only (J.B. triage 30 Oct 2026, item 42; applied 2 Nov 2026)"
 },
 {
 "id": "blowdown",
@@ -19158,7 +18281,9 @@
 "readiness_basis": "Quincy Water Reuse Utility, operating since 2021 (US EPA).",
 "readiness_sources": [
 "epaQuincy"
-]
+],
+"tier": "full",
+"tier_note": "engineering only (J.B. triage 30 Oct 2026, item 43; applied 2 Nov 2026)"
 },
 {
 "id": "pv",
@@ -19238,62 +18363,6 @@
 ]
 },
 {
-"id": "battery",
-"name": "Battery storage",
-"family": "power",
-"status": "sized",
-"quantities": [
-"battery",
-"peak_relief"
-],
-"rules": {
-"vancouver": "fire code path unconfirmed",
-"edmonton": "fire code path unconfirmed"
-},
-"changes": [
-"grid peak ↓",
-"space ↑",
-"earnings from programmes"
-],
-"kind": "opportunity",
-"rule_state": {
-"vancouver": "unknown",
-"edmonton": "unknown"
-},
-"readiness": "pilot",
-"readiness_basis": "Google St. Ghislain, Belgium, 2.75 MW / 5.5 MWh proof of concept (vendor claim).",
-"readiness_sources": [
-"fluenceStGhislain"
-]
-},
-{
-"id": "ups",
-"name": "Offer UPS batteries to the grid",
-"family": "power",
-"status": "screening",
-"quantities": [
-"ups_flex"
-],
-"rules": {
-"vancouver": "no BC programme found",
-"edmonton": "AESO reserves ≥5 MW or via aggregator"
-},
-"changes": [
-"fast grid support",
-"no new space"
-],
-"kind": "opportunity",
-"rule_state": {
-"vancouver": "no_rule",
-"edmonton": "allowed"
-},
-"readiness": "built_elsewhere",
-"readiness_basis": "Digital Realty, nine Irish data centres in EirGrid frequency response (operator claim).",
-"readiness_sources": [
-"enelxDLR"
-]
-},
-{
 "id": "genset",
 "name": "Cleaner backup power",
 "family": "carbon",
@@ -19320,7 +18389,9 @@
 "readiness_sources": [
 "lclHVO",
 "msSweden2021"
-]
+],
+"tier": "full",
+"tier_note": "engineering only (J.B. triage 30 Oct 2026, item 36; applied 2 Nov 2026)"
 },
 {
 "id": "borefield",
@@ -19354,19 +18425,21 @@
 },
 {
 "id": "btes",
-"name": "Seasonal ground store for neighbours",
+"name": "Seasonal heat store",
 "family": "heat_use",
-"status": "sized",
+"status": "screening",
 "quantities": [
-"btes"
+"btes",
+"ates"
 ],
 "rules": {
-"vancouver": "as borefield",
-"edmonton": "as borefield"
+"vancouver": "boreholes as borefield; aquifer store: water licence",
+"edmonton": "boreholes as borefield; aquifer store: Water Act approval or licence"
 },
 "changes": [
 "winter heat ↑",
 "land ↑",
+"licence time ↑",
 "first years weak"
 ],
 "kind": "opportunity",
@@ -19374,40 +18447,15 @@
 "vancouver": "approval",
 "edmonton": "approval"
 },
-"readiness": "speculative",
-"readiness_basis": "Borehole store with data-centre heat: studies only (Stavanger 2023; Li et al. 2021).",
+"readiness": "built_elsewhere",
+"readiness_basis": "Aquifer store: Equinix Amsterdam with the University of Amsterdam (RVO). Borehole store with data-centre heat: studies only (Stavanger 2023; Li et al. 2021).",
 "readiness_sources": [
 "stavangerBTES2023",
-"li2021_dcbtes"
-]
-},
-{
-"id": "ates",
-"name": "Aquifer heat store",
-"family": "ground",
-"status": "screening",
-"quantities": [
-"ates"
-],
-"rules": {
-"vancouver": "water licence",
-"edmonton": "Water Act approval or licence"
-},
-"changes": [
-"winter heat ↑",
-"licence time ↑"
-],
-"kind": "place",
-"rule_state": {
-"vancouver": "approval",
-"edmonton": "approval"
-},
-"readiness": "built_elsewhere",
-"readiness_basis": "Equinix Amsterdam with the University of Amsterdam (RVO).",
-"readiness_sources": [
+"li2021_dcbtes",
 "rvoDatacenters",
 "equinixAM3"
-]
+],
+"merged": "2 Nov 2026: aquifer heat store merged in (J.B. triage 30 Oct 2026)"
 },
 {
 "id": "deep_geo",
@@ -19461,34 +18509,9 @@
 "readiness_sources": [
 "cordisModerator",
 "seaiTallaght"
-]
-},
-{
-"id": "absorption",
-"name": "Cooling for neighbours",
-"family": "heat_use",
-"status": "gate",
-"quantities": [
-"absorption"
 ],
-"rules": {
-"vancouver": "temperature gate",
-"edmonton": "temperature gate"
-},
-"changes": [
-"cooling to neighbours (liquid-cooled only)"
-],
-"kind": "opportunity",
-"rule_state": {
-"vancouver": "na",
-"edmonton": "na"
-},
-"readiness": "speculative",
-"readiness_basis": "For neighbours: proposal only. Own-equipment cooling ran at LRZ 2016–2024.",
-"readiness_sources": [
-"yuan2023",
-"lrzCoolMUC"
-]
+"tier": "full",
+"tier_note": "engineering only (J.B. triage 30 Oct 2026, item 11; applied 2 Nov 2026)"
 },
 {
 "id": "ppa",
@@ -19525,43 +18548,9 @@
 "sources": [
 "bchCall2025",
 "bchEPA2026"
-]
-},
-{
-"id": "chp",
-"name": "Own gas power plant with heat",
-"family": "carbon",
-"status": "screening",
-"quantities": [
-"chp_heat"
 ],
-"kind": "technology",
-"rules": {
-"vancouver": "self-supply is legal (UCA s. 1(d)); a waste discharge authorization above 5 MW of combustion; Clean Electricity Regulations for units of 25 MW or more (65 t CO2/GWh from 2035); no explicit gas ban found",
-"edmonton": "Alberta Reg 117/2026: data centres of 75 MW or more tethered to new generation or storage get connection priority (s. 5–6; any fuel in the regulation, the AESO's first intake gas only, a proposal); TIER $95/t in 2026; Clean Electricity Regulations in abeyance in Alberta (federal–Alberta agreement)"
-},
-"rule_state": {
-"vancouver": "approval",
-"edmonton": "allowed"
-},
-"changes": [
-"heat for neighbours ↑ (0.8–2.0 MW per MW of power)",
-"gas burned and CO₂ ↑",
-"air permits and stacks ↑"
-],
-"readiness": "unknown",
-"readiness_basis": "No data-centre CHP precedent searched yet; Alberta policy favours tethered gas for large data centres.",
-"readiness_sources": [],
-"rule_sources": [
-"bcUCAs1",
-"emaWDA",
-"sor2024_263",
-"alta117_2026",
-"caAbMOU2026"
-],
-"sources": [
-"epaCHP2015"
-]
+"tier": "full",
+"tier_note": "engineering only (J.B. triage 30 Oct 2026, item 34; applied 2 Nov 2026)"
 },
 {
 "id": "water_cooling",
@@ -19637,33 +18626,9 @@
 "sources": [
 "ashraeTC99card",
 "cwec"
-]
-},
-{
-"id": "wind",
-"name": "Small wind",
-"family": "power",
-"status": "excluded",
-"quantities": [],
-"rules": {},
-"changes": [],
-"reason": "Building-mounted turbines in UK urban and suburban trials made ≤200 kWh/yr each, load factor ≤3 % (Energy Saving Trust 2009; Energy Policy 2010); shown so users can see why it is out.",
-"sources": [
-"est_wind2009"
 ],
-"kind": "technology"
-},
-{
-"id": "biomass",
-"name": "Biomass or renewable gas",
-"family": "carbon",
-"status": "excluded",
-"quantities": [],
-"rules": {},
-"changes": [],
-"reason": "Adds combustion to the urban airshed (in Vancouver, Metro Vancouver requires dispersion modelling for biomass boilers; the Edmonton rule is not yet read), the data centre already has surplus heat, and renewable gas is a fuel-accounting choice with limited supply.",
-"sources": [],
-"kind": "technology"
+"tier": "full",
+"tier_note": "engineering only (J.B. triage 30 Oct 2026, item 44; applied 2 Nov 2026)"
 }
 ],
 "try_menu_note": "What would happen if we added X: any option can try these. Each is sorted by which way the exchange runs — an opportunity (the data centre gives the place), something the place gives the data centre, or the data centre's own technology choice. Sources: sources/15a–15d (14 Oct 2026).",
@@ -21251,7 +20216,19 @@
 "arch_up_fm0140": "named in our notes, not yet checked",
 "arch_up_fm0901": "named in our notes, not yet checked",
 "arch_up_fm0916": "named in our notes, not yet checked",
-"arch_up_edmAccess2023": "government"
+"arch_up_edmAccess2023": "government",
+"src_fill_van6555s21": "rule",
+"src_fill_eer2016_317": "rule",
+"src_fill_nrcanComBoiler": "government",
+"src_fill_nrcanFurnace": "government",
+"src_fill_nrcanHeatingGas2012": "government",
+"src_fill_bcHEES2023": "government",
+"src_fill_estarServers4": "government (benchmark, outside Canada)",
+"src_fill_rule012_s13": "rule",
+"src_fill_smw2021": "named in our notes, not yet checked (benchmark, outside Canada)",
+"src_fill_ruizArias2009": "peer-reviewed",
+"src_fill_fempChillers": "government",
+"src_fill_ecccEdmCity": "government"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -21846,7 +20823,19 @@
 "arch_up_fm0140": "claude",
 "arch_up_fm0901": "claude",
 "arch_up_fm0916": "claude",
-"arch_up_edmAccess2023": "claude"
+"arch_up_edmAccess2023": "claude",
+"src_fill_van6555s21": "claude",
+"src_fill_eer2016_317": "claude",
+"src_fill_nrcanComBoiler": "claude",
+"src_fill_nrcanFurnace": "claude",
+"src_fill_nrcanHeatingGas2012": "claude",
+"src_fill_bcHEES2023": "claude",
+"src_fill_estarServers4": "claude",
+"src_fill_rule012_s13": "claude",
+"src_fill_smw2021": "claude",
+"src_fill_ruizArias2009": "claude",
+"src_fill_fempChillers": "claude",
+"src_fill_ecccEdmCity": "claude"
 },
 "source_city": {
 "abgas": "edm",
@@ -23028,7 +22017,19 @@
 "arch_up_fm0140": "gen",
 "arch_up_fm0901": "gen",
 "arch_up_fm0916": "gen",
-"arch_up_edmAccess2023": "edm"
+"arch_up_edmAccess2023": "edm",
+"src_fill_van6555s21": "van",
+"src_fill_eer2016_317": "gen",
+"src_fill_nrcanComBoiler": "gen",
+"src_fill_nrcanFurnace": "gen",
+"src_fill_nrcanHeatingGas2012": "gen",
+"src_fill_bcHEES2023": "van",
+"src_fill_estarServers4": "gen",
+"src_fill_rule012_s13": "edm",
+"src_fill_smw2021": "gen",
+"src_fill_ruizArias2009": "gen",
+"src_fill_fempChillers": "gen",
+"src_fill_ecccEdmCity": "gen"
 },
 "city_gaps": {
 "van": [
