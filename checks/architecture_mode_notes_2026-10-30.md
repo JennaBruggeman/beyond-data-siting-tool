@@ -106,3 +106,4 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - J.B. (2 Nov 2026): likes Claude's suggested programs (now confirmed); wants research for the whole backlog and all of it moved into the first version.
 - J.B. (2 Nov 2026): hospital cut. River/inlet cooling, borefield and rain tank to be systems feeding the budgets (proposed); meanwhile uses a label.
 - J.B. (2 Nov 2026): outpatient clinic added in place of hospital ("clinic is better").
+- J.B. (2 Nov 2026) on the added programs: housing dropped; overnight vs day-only shelter is a design move (user picks, tool shows consequences: overnight = Group C, separate building); sludge drying dropped; conservatory, aquarium and fish farm kept in Vancouver too (flagged as needing rezoning); fish farm warm vs cold species: research first.
