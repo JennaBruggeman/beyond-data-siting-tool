@@ -109,3 +109,4 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - J.B. (2 Nov 2026) on the added programs: housing dropped; overnight vs day-only shelter is a design move (user picks, tool shows consequences: overnight = Group C, separate building); sludge drying dropped; conservatory, aquarium and fish farm kept in Vancouver too (flagged as needing rezoning); fish farm warm vs cold species: research first.
 - J.B. (2 Nov 2026): fish farm warm species only (tilapia or barramundi); cold species dropped (adds cooling load, no exchange). BC: flag the new-species review (Introductions and Transfers Committee).
 - J.B. (2 Nov 2026): what happens to the fish after harvest (processing, selling, food security) is out of scope.
+- J.B. (2 Nov 2026): seniors' programs dropped (assisted living and care home).
