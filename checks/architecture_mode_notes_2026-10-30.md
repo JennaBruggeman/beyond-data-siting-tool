@@ -98,3 +98,11 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - FM 9-1: heavy metal bar fence or concrete wall, no chain-link, around plant and tanks; one-lane sliding vehicle gate; separate visitor and staff entrances. Conflicts: no power-dependent locks (vs code maglocks on exits); cameras on neighbouring property (vs privacy guidance); fence 2 m with barbed wire (FM 9-16) vs RCMP 2.4 m vs Vancouver 1.9 m cap.
 - FM 13-26: not for emergency generators. BC Fire Code 2024: no changes for tanks, batteries, generators or pools.
 - Edmonton access guide (COE-IM-GUIDE-0023, 2023): driveway 11.5–13.5 m two-way for large trucks; a security gate set so the largest design vehicle queues fully on site; throat 15 m (arterial) for light industrial under 1 ha.
+
+## Graphics and use (2 Nov 2026, J.B.)
+- Main drawing: 3D massing (J.B.: "the 3d i think"). Plan and section as toggles (proposed, not yet confirmed).
+- Refuge is one of the programs in the pick list, not a separate step (J.B.). Its three placements (own building, side by side, under the hall) sit on its row once picked (proposed).
+- Proposed, awaiting J.B.: four steps (Site, Programs, Arrange, Compare); space and heat budget bars split by program; broken rules drawn red in the 3D, passing rules quiet; greys with red for the selected program, labels with right-angled leaders; heat lines from hall to program, thickness by heat share; secure line dashed.
+- J.B. (2 Nov 2026): likes Claude's suggested programs (now confirmed); wants research for the whole backlog and all of it moved into the first version.
+- J.B. (2 Nov 2026): hospital cut. River/inlet cooling, borefield and rain tank to be systems feeding the budgets (proposed); meanwhile uses a label.
+- J.B. (2 Nov 2026): outpatient clinic added in place of hospital ("clinic is better").

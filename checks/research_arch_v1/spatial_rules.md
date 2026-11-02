@@ -43,9 +43,9 @@ Program classes used below (NBC 2020 Note A-3.1.2.1.(1) examples; BCBC 3.1.2.8 f
 
 | what | value | source id | where | kind | conf |
 |---|---|---|---|---|---|
-| F-2 adjoining A-1, A-2, A-3, A-4, B, C, E | 2 h (C/F-2: see note 6) | arch_nbc3131 | NBC, BCBC and NBC(AE) Table 3.1.3.1 | rule | 90 |
-| F-3 adjoining A-1 to A-4 and C | 1 h; F-3/E 2 h | arch_nbc3131 | same | rule | 90 |
-| D adjoining A and C | 1 h; D/F-2 3 h | arch_nbc3131 | same | rule | 90 |
+| F-2 adjoining A-1, A-2, A-3, A-4, B, C, E | 2 h (C/F-2: see note 6) | arch_nbc3131 | NBC, BCBC and NBC(AE) Table 3.1.3.1 | rule | 90 | **Superseded (2 Nov 2026): see register arch_nbc3131; F-2/D, F-2/E, F-3/E and D/F-2 are "—" (none); 3 h is D/F-1.**
+| F-3 adjoining A-1 to A-4 and C | 1 h; F-3/E 2 h | arch_nbc3131 | same | rule | 90 | **Superseded (2 Nov 2026): see register arch_nbc3131; F-2/D, F-2/E, F-3/E and D/F-2 are "—" (none); 3 h is D/F-1.**
+| D adjoining A and C | 1 h; D/F-2 3 h | arch_nbc3131 | same | rule | 90 | **Superseded (2 Nov 2026): see register arch_nbc3131; F-2/D, F-2/E, F-3/E and D/F-2 are "—" (none); 3 h is D/F-1.**
 | Housing in an F-2 building | "Not more than one suite of residential occupancy shall be contained within a building classified as a Group F, Division 2 major occupancy." | arch_nbc3131 | 3.1.3.2.(2) (all three codes) | rule | 90 |
 | F-1 (high hazard) | no F-1 in a building with Group A, B or C | arch_nbc3131 | 3.1.3.2.(1) | rule | 90 |
 | Assembly above an industrial floor | Allowed; no prohibition found outside F-1. Each portion follows its own construction rules, and the floor between "shall be determined on the basis of … the lower major occupancy". | arch_nbc3227 | NBC 3.2.2.7.(1)–(2); 3.2.2.6 | rule | 80 |
