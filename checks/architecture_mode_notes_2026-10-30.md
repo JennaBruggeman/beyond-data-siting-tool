@@ -58,3 +58,11 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - J.B.: bullet-resistant glass is used, per operators and insurers (her statement; VAN3 tour: the guard's room behind 'bullet proof glass', her words). Recorded as operator practice (claim), not a code rule.
 - Open (?): whether any one glazing product is both bullet-resistant (e.g. UL 752 levels, paywalled) and fire-rated (1.5 h in a 2 h wall). Research needed before a viewing window into the hall is offered.
 - J.B. (1 Nov 2026): biometric access control is used (VAN3 tour: the guide used a door with 'biometrics AND a scanner'; a single-person portal 'weighed me and measured me'). Operator practice (claim). Architectural effects to research: portal/mantrap footprints at each layer, a security control room, and the code limit that locked doors on an exit path must still release (NBC 3.4.6.16, electromagnetic locks).
+
+## Access control, cameras, guard room, glazing (research 1 Nov 2026: access_control.md, check 1)
+- Security portal (the VAN3 'glass tube'): maker claims, Boon Edam Circlelock Solo 1000 × 2200 mm, 5–6 people a minute; Gunnebo HiSec 1050–1800 mm square (1800 mm is the wheelchair model); both offer weighing floors, Gunnebo volume sensing. Not an exit (our reading of NBC 3.4.6.15): a swing door beside each portal, 850 mm accessible door at each layer.
+- Locked exit doors (NBC/BCBC/NBC(AE) 3.4.6.16): maglocks release on fire alarm and power loss, and within 15 s of pushing; Vancouver adds a push-button option and a written sequence of operation.
+- Biometrics: federal privacy guidance asks consent and another way in for those who decline (data rule, not architecture).
+- Cameras: 2008 federal/BC/Alberta guidelines: avoid passers-by, don't record beyond the premises; the owner's plaza with signs and narrow views, not the street (our reading).
+- Guard room: in the reception zone at the entry (RCMP zone guides); no source for its size, glazing level or document slot.
+- Glazing: Pilkington Pyrostop BR claims fire ratings to 120 min with Canadian tests and bullet resistance to UL 752 Level 3; 27–62 mm, 63–126 kg/m² (maker claims); whether the Canadian listing covers 90 min not confirmed (?).

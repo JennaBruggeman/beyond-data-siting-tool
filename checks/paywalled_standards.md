@@ -49,3 +49,11 @@ Kept by Claude; updated as research finds more. "Why" = what the tool needs from
 | UFC 4-010-01 Table B-1 (free at wbdg.org) | Not paywalled; fetch truncated before Appendix B. J.B. to save the PDF for the standoff table | Architecture mode entrances (security_rest) |
 | Vancouver Parking By-law 6059 s. 5 (free, bylaws.vancouver.ca) and Edmonton ZB 20001 s. 5.80 online page | Not paywalled; permission prompts went unanswered in this session (1 Nov 2026). Needed: loading bays for public programs (library, pool, café); current Edmonton wording | Architecture mode entrances (security_rest) |
 | Barcelona Supercomputing Center visit page (bsc.es) | Not paywalled; blocked by a bot wall. Needed: how the public views MareNostrum (precedent for a viewing window) | Architecture mode viewing window (security_rest) |
+| UL 752 (Bullet-resisting equipment) | Levels 1–8 for a guard-room window and portal glass; what level VAN3-type operators use | Architecture mode access control (access_control) |
+| EN 1063 (BR classes) / EN 1522 (FB classes) / EN 1627 (RC classes) | Boon Edam and Gunnebo portal glass options (BR2NS, BR4NS, FB3, RC3) | Architecture mode access control (access_control) |
+| LPS 1175 (LPCB, Issue 8) | Gunnebo portal attack rating | Architecture mode access control (access_control) |
+| EN 16005 (power-operated pedestrian doors, safety) | Safety basis Gunnebo names for its portals | Architecture mode access control (access_control) |
+| TIA-942, security annex | Access-control layers and mantrap placement for a rated data centre | Architecture mode access control (access_control) |
+| FM Global Data Sheet 9-1 (Supervision of Property) | Not paywalled (free at fm.com/datasheets), not read: FM 5-32 2.2.1.7 defers camera and guard supervision to it | Architecture mode access control (access_control) |
+| CAN/CGSB-12.1 (Safety glazing) | Free (publications.gc.ca) but fetch returned an archive notice only: scope (is ballistic or security glazing covered?) | Architecture mode access control (access_control) |
+| Boon Edam Circlelock Solo and High Security brochures (maker blob store) | Not paywalled; fetch refused by this session's provenance rule: egress update and weight-system detail | Architecture mode access control (access_control) |
