@@ -1,0 +1,1262 @@
+{
+ "arch_hsg_nbcOcc": {
+  "where_read": "local copy data/raw/codes/nbc.txt (Div. A 1.4.1.2, Note A-1.4.1.2.(1), Div. B Note A-3.1.2.1.(1) pp. 3-226 to 3-228, App. C); bcbc2024.txt, vbbl2025_v1.txt, nbc_ab2023.txt for B-2 wording",
+  "claims": [
+   {
+    "claim": "B-2 definition 'provision of treatment, and where overnight accommodation is available to facilitate the treatment'",
+    "verdict": "CONFIRMED",
+    "evidence": "nbc.txt l.2000: 'for the provision of treatment, and where overnight accommodation is available to facilitate the treatment'; identical in bcbc2024 l.2382, vbbl2025_v1 l.1928, nbc_ab2023 l.2332",
+    "fix": ""
+   },
+   {
+    "claim": "B-3 definition '... where care is provided to residents'",
+    "verdict": "CONFIRMED",
+    "evidence": "'other than a home-type care occupancy, where care is provided to residents' (NBC, AB, VBBL); BCBC 2024 l.1886 omits 'other than a home-type care occupancy'",
+    "fix": "Minor: BCBC wording differs (no home-type clause); ellipsis covers it"
+   },
+   {
+    "claim": "Group C definition (sleeping accommodation, not harboured for care or treatment)",
+    "verdict": "CONFIRMED",
+    "evidence": "'persons for whom sleeping accommodation is provided but who are not harboured for the purpose of receiving care or treatment'",
+    "fix": ""
+   },
+   {
+    "claim": "Group D definition 'rendering or receiving of professional or personal services'",
+    "verdict": "CONFIRMED",
+    "evidence": "'transaction of business or the rendering or receiving of professional or personal services'",
+    "fix": ""
+   },
+   {
+    "claim": "Note A-1.4.1.2.(1) treatments text and 'dentistry or day procedures'",
+    "verdict": "CONFIRMED",
+    "evidence": "'“Treatments” may include such things as surgery, intensive care, and emergency medical intervention. ... business and personal services occupancies like dentistry or day procedures.'",
+    "fix": ""
+   },
+   {
+    "claim": "Note A-3.1.2.1.(1) examples: B-2 Hospitals, Nursing homes with treatment; B-3 Assisted/supportive living, Nursing homes without treatment; C Apartments; D Medical offices, Dental offices; A-2 Restaurants",
+    "verdict": "CONFIRMED",
+    "evidence": "nbc.txt ll.22927-22996, all listed under the stated groups",
+    "fix": ""
+   },
+   {
+    "claim": "App. C HDD Vancouver 2825, Edmonton 5120",
+    "verdict": "CONFIRMED",
+    "evidence": "nbc.txt l.41227 'Vancouver ... 2825'; l.41295 'Edmonton ... 5120'",
+    "fix": "Vancouver 2825 is the 40 m elevation row; 120 m row is 2925"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_hsg_nbc3131D": {
+  "where_read": "local copy data/raw/codes/nbc.txt Table 3.1.3.1 p. 3-3; bcbc2024.txt; nbc_ab2023.txt; 3.2.2.57 titles",
+  "claims": [
+   {
+    "claim": "Row D values A-1 1, A-2 1(4), A-3 1, A-4 1, B 2/2/2, C 1, D —, E —(8), F-1 3, F-2 —(8), F-3 —(8)",
+    "verdict": "CONFIRMED",
+    "evidence": "NBC row 'D 1 1 (4) 1 1 2 2 2 1 — — (8) 3 — (8) — (8)'; AB identical; BCBC 'D 1 1 (4) 1 1 2 2 2 1 - - 3 - -'",
+    "fix": ""
+   },
+   {
+    "claim": "Row F-2 values A 2, B 2, C 2(6), D —(8), E —, F-1 2",
+    "verdict": "CONFIRMED",
+    "evidence": "NBC 'F-2 2 2 2 2 2 2 2 2 (6) — (8) — 2 — —'",
+    "fix": ""
+   },
+   {
+    "claim": "Note (8) wording",
+    "verdict": "CONFIRMED",
+    "evidence": "'Where the building or part thereof is constructed in accordance with Article 3.2.2.57., a fire separation with a 1 h fire-resistance rating is required between the Group D and Group E or Group F, Division 2 or 3 major occupancies.'",
+    "fix": ""
+   },
+   {
+    "claim": "3.2.2.57 = 'Group D, up to 12 storeys, Sprinklered'",
+    "verdict": "CONFIRMED",
+    "evidence": "nbc.txt l.11984, nbc_ab2023 l.10595, bcbc2024 l.11639",
+    "fix": ""
+   },
+   {
+    "claim": "NBC(AE) 2023 identical; BCBC 2024 same values without note 8",
+    "verdict": "CONFIRMED",
+    "evidence": "AB table matches NBC; BCBC lacks notes (7) and (8)",
+    "fix": "Add: BCBC also lacks note (7) and its notes (3),(4) cite only 3.2.2.51/3.2.2.60"
+   },
+   {
+    "claim": "'Corrects register text D vs F-2 3'",
+    "verdict": "CONFIRMED",
+    "evidence": "register/formula_register.json arch_nbc3131 already reads 'D vs ... F-1 3, E/F-2/F-3 none' after check 2/3 (31 Oct 2026)",
+    "fix": "Correction now done in register; reword as already applied. spatial_rules.md 'D/F-2 3 h' lines are superseded"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: NBC 2020 Div. B Table 3.1.3.1 (local nbc.txt; NBC(AE) 2023 identical; BCBC 2024 same values without note 8): row D: A-1 1, A-2 1(4), A-3 1, A-4 1, B-1 2, B-2 2, B-3 2, C 1, D —, E —(8), F-1 3, F-2 —(8), F-3 —(8); row F-2: A 2, B-1/B-2/B-3 2, C 2(6), D —(8), E —, F-1 2; note (8) 'Where the building or part thereof is constructed in accordance with Article 3.2.2.57., a fire separation with a 1 h fire-resistance rating is required between the Group D and Group E or Group F, Division 2 or 3 major occupancies'; 3.2.2.57 = 'Group D, up to 12 storeys, Sprinklered'. Agrees with corrected register arch_nbc3131 (3 h is D vs F-1; D vs F-2 none); spatial_rules.md 'D/F-2 3 h' superseded; BCBC 2024 also lacks note (7) — data/raw/codes/nbc.txt, bcbc2024.txt, nbc_ab2023.txt ‖ CHECK 2 (2 Nov 2026, fixed): all table values, note (8) and 3.2.2.57 title confirmed in all three local copies; stale 'corrects register' wording updated since arch_nbc3131 is already corrected"
+ },
+ "arch_hsg_nbcFirewall": {
+  "where_read": "local copy data/raw/codes/nbc.txt 3.1.10.2-3.1.10.3, Div. A 1.4.1.2; bcbc2024.txt",
+  "claims": [
+   {
+    "claim": "Firewall definition",
+    "verdict": "CONFIRMED",
+    "evidence": "'Firewall means a type of fire separation of noncombustible construction that subdivides a building or separates adjoining buildings to resist the spread of fire ...'",
+    "fix": ""
+   },
+   {
+    "claim": "3.1.10.2.(1) E or F-1/F-2: not less than 4 h; upper portion 2 h",
+    "verdict": "CONFIRMED",
+    "evidence": "'containing a Group E or a Group F, Division 1 or 2 major occupancy ... not less than 4 h, except that where the upper portion ... not less than 2 h'",
+    "fix": ""
+   },
+   {
+    "claim": "3.1.10.2.(2) other occupancies 2 h",
+    "verdict": "CONFIRMED",
+    "evidence": "'other than Group E or Group F, Division 1 or 2 ... not less than 2 h'",
+    "fix": ""
+   },
+   {
+    "claim": "3.1.10.2.(3) rating by masonry or concrete",
+    "verdict": "CONFIRMED",
+    "evidence": "'Except as permitted by Sentence (4), ... shall be provided by masonry or concrete'",
+    "fix": "(4) exempts firewalls of not more than 2 h only, so 4 h F-2 firewalls must be masonry/concrete"
+   },
+   {
+    "claim": "3.1.10.3.(1) continuity quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'A firewall shall extend from the ground continuously through, or adjacent to, all storeys of a building or buildings so separated, except ... above a basement storage garage'",
+    "fix": "Exception for basement storage garage omitted; minor"
+   },
+   {
+    "claim": "BCBC 2024 identical",
+    "verdict": "CONFIRMED",
+    "evidence": "bcbc2024.txt 3.1.10.2 and l.9544 same wording",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_hsg_nbc6316": {
+  "where_read": "local copy data/raw/codes/nbc.txt, bcbc2024.txt, nbc_ab2023.txt",
+  "claims": [
+   {
+    "claim": "6.3.1.6.(1) to conform to NFPA 96",
+    "verdict": "CONFIRMED",
+    "evidence": "'Except as provided in Article 3.6.3.5., systems for the ventilation of commercial cooking equipment shall be designed, constructed and installed to conform to NFPA 96'",
+    "fix": ""
+   },
+   {
+    "claim": "6.3.2.8.(1)-(3) makeup air interlocked; tempered 'to maintain the indoor design temperature'",
+    "verdict": "CONFIRMED",
+    "evidence": "'(2) ... interlocked with the exhaust devices they serve'; '(3) ... means of tempering that air to maintain the indoor design temperature' (same in BCBC, AB)",
+    "fix": ""
+   },
+   {
+    "claim": "NFPA 96 paywalled",
+    "verdict": "CONFIRMED",
+    "evidence": "not re-tested (no fetch); standard is sold by NFPA",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_hsg_vbblZEBP": {
+  "where_read": "local copy data/raw/codes/vbbl2025_v1.txt 10.2.2.5 (ll.32812-32885)",
+  "claims": [
+   {
+    "claim": "Table A: C<=6 storeys 110/25/3.0; C>6 120/30/3.0; hotel/motel 140/20/4.0; D and E except office 120/20/3.0; office 100/20/3.0",
+    "verdict": "CONFIRMED",
+    "evidence": "table rows as stated",
+    "fix": ""
+   },
+   {
+    "claim": "All other occupancies GHGI '50% lower than GHGI of the reference building modelled using only fossil-fuel systems'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact wording",
+    "fix": ""
+   },
+   {
+    "claim": "Table B Group C 100/15",
+    "verdict": "CONFIRMED",
+    "evidence": "'Group C occupancies 100 15 NA'",
+    "fix": ""
+   },
+   {
+    "claim": "Table C: C<=6 110/25/3.0; >6 130/40/3.0; D or E except office 170/30/3.0; office 130/30/3.0",
+    "verdict": "CONFIRMED",
+    "evidence": "Table C rows; D/E row is worded 'Business and Personal Services or Mercantile occupancies, except Office'; hotel row 170/30/4.0 not listed in text",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_hsg_bcbcStep9": {
+  "where_read": "local copy data/raw/codes/bcbc2024.txt Tables 9.36.6.3.-A and -D",
+  "claims": [
+   {
+    "claim": "HDD <3000: Step 3 <=30, Step 4 <=20, Step 5 <=15",
+    "verdict": "CONFIRMED",
+    "evidence": "'Thermal energy demand intensity ≤ 30 / ≤ 20 / ≤ 15 kWh/(m²•year)'",
+    "fix": "Each step also allows a TEDI 'calculated in accordance with Sentence (4)'"
+   },
+   {
+    "claim": "HDD 5000-5999: 70/55/35",
+    "verdict": "CONFIRMED",
+    "evidence": "Table -D: '≤ 70', '≤ 55', '≤ 35'",
+    "fix": ""
+   },
+   {
+    "claim": "Benchmark only, not binding in Alberta",
+    "verdict": "CONFIRMED",
+    "evidence": "our reading; BCBC applies in BC",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "BC Part 9 values used as climate benchmark for an Edmonton Part 3 building; already labelled as benchmark",
+  "new_text": null
+ },
+ "arch_hsg_stepMetrics2018": {
+  "where_read": "URL (WebFetch, gov.bc.ca PDF)",
+  "claims": [
+   {
+    "claim": "Title, version 2018-09-18, prepared for BC Housing and Energy Step Code Council; Integral Group, Morrison Hershfield, E3 Eco Group",
+    "verdict": "CONFIRMED",
+    "evidence": "'Version – 2018-09-18 (2018 Update)'; 'A report prepared for BC Housing and the Energy Step Code Council'; consultant team s. 1.3",
+    "fix": ""
+   },
+   {
+    "claim": "Table 2 p. 5 Group C Step 2 45/130, Step 3 30/120, Step 4 15/100; D,E Step 2 30/170, Step 3 20/120",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 2 values as stated",
+    "fix": ""
+   },
+   {
+    "claim": "p. 9 'DHW can make up 12% to 40% of total energy use'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact quote p. 9",
+    "fix": ""
+   },
+   {
+    "claim": "Tables 6-9 pp. 14-15 Part 9 MURB TEDI CZ4 30/20/15; CZ6 50/40/25; CZ7a 70/55/35",
+    "verdict": "CONFIRMED",
+    "evidence": "values confirmed (CZ4 Table 6 p. 14; CZ6 Table 8, CZ7a Table 9 p. 15)",
+    "fix": "Captions read 'Step Structure and Requirements/Targets for Part 9 – Climate Zone ...'; 'MURB' is not in the captions; say 'Part 9' instead"
+   },
+   {
+    "claim": "No peak heating load W/m2",
+    "verdict": "CONFIRMED",
+    "evidence": "none found",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT REPORT: 2018 Metrics Research Full Report Update (v. 2018-09-18), prepared for BC Housing and the Energy Step Code Council (Integral Group, Morrison Hershfield, E3 Eco Group): Table 2 p. 5 Part 3 targets: Multifamily Residential (Group C) Step 2 TEDI 45 TEUI 130, Step 3 TEDI 30 TEUI 120, Step 4 TEDI 15 TEUI 100; Other Commercial (D, E) Step 2 30/170, Step 3 20/120; p. 9 'DHW can make up 12% to 40% of total energy use'; Tables 6-9 pp. 14-15 Part 9 TEDI (captions 'Part 9 – Climate Zone'; not MURB-specific) CZ4 Step 3 30, Step 4 20, Step 5 15; CZ6 50/40/25; CZ7a 70/55/35. No peak heating load W/m2 — https://www2.gov.bc.ca/assets/gov/farming-natural-resources-and-industry/construction-industry/building-codes-and-standards/step-code-resources/reports-and-guides/2018-metrics_research_report_update_2018-09-18.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all figures confirmed; Tables 6-9 are Part 9 by climate zone, not MURB-specific"
+ },
+ "arch_hsg_nrcanMedian2018": {
+  "where_read": "URL (WebFetch, natural-resources.canada.ca PDF)",
+  "claims": [
+   {
+    "claim": "Title 'ENERGY STAR Portfolio Manager Technical Reference, Canadian National Median Reference Values ...', Aug 2018",
+    "verdict": "WRONG",
+    "evidence": "Header 'Technical Reference' / 'Canadian Energy Use Intensity by Property Type'; p. 3 'Canadian National Median Reference Values for All Portfolio Manager Property Types'; 'August 2018'; 'ENERGY STAR Portfolio Manager' not in text",
+    "fix": "Title: 'Technical Reference: Canadian Energy Use Intensity by Property Type' (table: Canadian National Median Reference Values ...); issuer shown only by NRCan URL"
+   },
+   {
+    "claim": "Values are site EUI GJ/m2",
+    "verdict": "CONFIRMED",
+    "evidence": "column 'Site EUI (GJ/m2)'",
+    "fix": ""
+   },
+   {
+    "claim": "Medical Office 0.98; Urgent Care/Clinic/Other Outpatient 1.02; Ambulatory Surgical Centre 1.02",
+    "verdict": "CONFIRMED",
+    "evidence": "as listed",
+    "fix": ""
+   },
+   {
+    "claim": "Residential Care Facility 1.04; Senior Care Community 1.04",
+    "verdict": "CONFIRMED",
+    "evidence": "as listed",
+    "fix": ""
+   },
+   {
+    "claim": "Hospital 2.22",
+    "verdict": "CONFIRMED",
+    "evidence": "'Hospital (General Medical & Surgical)' 2.22",
+    "fix": "Label as Hospital (General Medical & Surgical)"
+   },
+   {
+    "claim": "Restaurant / Food Service 3.17",
+    "verdict": "CONFIRMED",
+    "evidence": "'Restaurant' 3.17 and 'Food Service' 3.17 (separate rows)",
+    "fix": ""
+   },
+   {
+    "claim": "Multifamily Housing N/A",
+    "verdict": "CONFIRMED",
+    "evidence": "no value listed",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT: Technical Reference, 'Canadian Energy Use Intensity by Property Type' (table 'Canadian National Median Reference Values for All Portfolio Manager Property Types'), Aug 2018, hosted by Natural Resources Canada: median site EUI GJ/m2 (total energy, all fuels): Medical Office 0.98; Urgent Care/Clinic/Other Outpatient 1.02; Ambulatory Surgical Centre 1.02; Residential Care Facility 1.04; Senior Care Community 1.04; Hospital (General Medical & Surgical) 2.22; Restaurant 3.17; Food Service 3.17; Multifamily Housing N/A — https://natural-resources.canada.ca/sites/www.nrcan.gc.ca/files/energy/pdf/Canadian%20National%20Median%20Tables-EN-Aug2018-7.pdf ‖ CHECK 2 (2 Nov 2026, fixed): figures confirmed; title corrected ('ENERGY STAR Portfolio Manager' not in text); hospital row label made exact"
+ },
+ "arch_hsg_scieu2019": {
+  "where_read": "URL (WebFetch t001d-eng.htm and linked Daily article dq220805d-eng.htm)",
+  "claims": [
+   {
+    "claim": "Survey 5034, 2019, The Daily 5 Aug 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "'Survey of Commercial and Institutional Energy Use, 2019 (5034)'; released 2022-08-05",
+    "fix": ""
+   },
+   {
+    "claim": "Hospitals 2.54 GJ/m2",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 1 'Hospital ... 2.54'",
+    "fix": ""
+   },
+   {
+    "claim": "774 hospitals, 23.4 million m2",
+    "verdict": "CONFIRMED",
+    "evidence": "774 'Total campuses'; 23,418,802 m2",
+    "fix": "Unit is hospital campuses, not hospitals/buildings"
+   },
+   {
+    "claim": "All commercial and institutional buildings 1.31 GJ/m2",
+    "verdict": "NOT FOUND",
+    "evidence": "Table 1 is 'Profile of Energy Use by Hospitals and Post-Secondary Campuses, Canada, 2019'; Daily article covers only hospitals and campuses",
+    "fix": "Remove 1.31 or cite the separate SCIEU commercial/institutional buildings release after reading it"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT STATISTICS: Statistics Canada, Survey of Commercial and Institutional Energy Use 2019 (survey 5034), The Daily, 5 Aug 2022, Table 1 'Profile of Energy Use by Hospitals and Post-Secondary Campuses, Canada, 2019': hospitals 2.54 GJ/m2 average EUI (774 hospital campuses, 23.4 million m2); post-secondary campuses 1.41. All-buildings average not in this table ? — https://www150.statcan.gc.ca/n1/daily-quotidien/220805/t001d-eng.htm ‖ CHECK 2 (2 Nov 2026, fixed): hospital figures confirmed (unit is campuses); '1.31 GJ/m2 all C&I buildings' not in this source, removed"
+ },
+ "arch_hsg_vchUpccNV": {
+  "where_read": "URL (WebFetch vch.ca)",
+  "claims": [
+   {
+    "claim": "Information bulletin, undated c. 2019",
+    "verdict": "CONFIRMED",
+    "evidence": "labelled 'Information bulletin'; no date shown",
+    "fix": ""
+   },
+   {
+    "claim": "'about 604 m2 (6,500 sq ft)'",
+    "verdict": "WRONG",
+    "evidence": "'approximately 604 square metres (6,500 square feet)'",
+    "fix": "quote as 'approximately 604 square metres (6,500 square feet)'"
+   },
+   {
+    "claim": "13 exam rooms, a treatment room, three stretcher bays; 14 FTE practitioners",
+    "verdict": "CONFIRMED",
+    "evidence": "'13 exam rooms'; 'a treatment room'; 'three stretcher bays'; '14 full-time equivalent practitioners'",
+    "fix": ""
+   },
+   {
+    "claim": "Mon-Sat 8 a.m.-10 p.m., Sun 9-5",
+    "verdict": "CONFIRMED",
+    "evidence": "'Monday to Saturday from 8 a.m. to 10 p.m., and on Sundays from 9 a.m. to 5 p.m.'",
+    "fix": ""
+   },
+   {
+    "claim": "second floor, 221 Esplanade West",
+    "verdict": "CONFIRMED",
+    "evidence": "'the second floor of 221 Esplanade West'",
+    "fix": ""
+   },
+   {
+    "claim": "PCN catchment about 69,000; over 33,000 unattached",
+    "verdict": "CONFIRMED",
+    "evidence": "'approximately 69,000'; 'More than 33,000 patients across the North Shore are considered unattached (16%)'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT: Vancouver Coastal Health, information bulletin, North Vancouver urgent and primary care centre (undated, c. 2019): 'approximately 604 square metres (6,500 square feet)'; 13 exam rooms, a treatment room, three stretcher bays; 14 FTE practitioners; Mon-Sat 8 a.m.-10 p.m., Sun 9-5; second floor, 221 Esplanade West; North Vancouver Central PCN catchment about 69,000; over 33,000 unattached patients on the North Shore — https://vch.ca/en/news/urgent-and-primary-care-centre-opens-north-vancouver ‖ CHECK 2 (2 Nov 2026, fixed): all figures confirmed; area quote wording corrected"
+ },
+ "arch_hsg_bcUpccSurrey2026": {
+  "where_read": "URL (WebFetch news.gov.bc.ca)",
+  "claims": [
+   {
+    "claim": "2026HLTH0036-000397, title, 10 Apr 2026, Ministry of Health",
+    "verdict": "CONFIRMED",
+    "evidence": "'Friday, April 10, 2026'; 'Ministry of Health'; title as stated",
+    "fix": ""
+   },
+   {
+    "claim": "'931-square-metre (10,016 square feet) facility'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "'approximately 57,000 patient visits annually'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "9 a.m.-8 p.m. daily",
+    "verdict": "CONFIRMED",
+    "evidence": "'from 9 a.m. until 8 p.m. daily, including statutory holidays'",
+    "fix": ""
+   },
+   {
+    "claim": "'the 48th in the province'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_hsg_bcUpccWL2025": {
+  "where_read": "URL (WebFetch news.gov.bc.ca)",
+  "claims": [
+   {
+    "claim": "2025HLTH0010-000156, title, 28 Feb 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'Friday, February 28, 2025'; title exact",
+    "fix": ""
+   },
+   {
+    "claim": "'490 square-metre (5,300 square feet)'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "'more than 42,000 visits per year'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "47 Cameron St.",
+    "verdict": "CONFIRMED",
+    "evidence": "'47 Cameron St.'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_hsg_bcUpccCowichan2024": {
+  "where_read": "URL (WebFetch news.gov.bc.ca)",
+  "claims": [
+   {
+    "claim": "2024HLTH0098-001039, title, 2 Jul 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "'Tuesday, July 2, 2024'; title exact",
+    "fix": ""
+   },
+   {
+    "claim": "'approximately 930 square metres (10,000 square feet)'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "940 Government St., Duncan; seven days a week",
+    "verdict": "CONFIRMED",
+    "evidence": "'940 Government St. in downtown Duncan'; 'seven days a week'",
+    "fix": "Planned centre ('coming soon'), not yet open at release"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_hsg_abGFNA2021": {
+  "where_read": "URL (WebFetch alberta.ca PDF)",
+  "claims": [
+   {
+    "claim": "Title; Alberta Infrastructure, Alberta Health, AHS, Altus Planning; June 2021",
+    "verdict": "CONFIRMED",
+    "evidence": "title exact; issuers and 'Altus Planning Inc.'; 'June 2021'",
+    "fix": ""
+   },
+   {
+    "claim": "Document code GFNA062021",
+    "verdict": "NOT FOUND",
+    "evidence": "no code in document text; only the file name 'tr-gnfa062021'",
+    "fix": "Drop code or label as file name"
+   },
+   {
+    "claim": "Table 2 p. 7 exam rooms 12.0 / 14.0 / 13.0 / 16.0",
+    "verdict": "CONFIRMED",
+    "evidence": "A-1.1 12.0, A-1.2 14.0 'dual access', A-2.1 13.0 'stretcher access', A-2.2 16.0 'bariatric' NSM",
+    "fix": ""
+   },
+   {
+    "claim": "Patient Room Single 28.5 m2; Continuing Care Bedroom incl. WC 32.0 m2 (pp. 8-9)",
+    "verdict": "CONFIRMED",
+    "evidence": "E-2 28.5 NSM p. 8; L-1 32.0 NSM p. 9",
+    "fix": ""
+   },
+   {
+    "claim": "p. 12 departmental grossing CHC 1.44, Hospital 1.46",
+    "verdict": "CONFIRMED",
+    "evidence": "Ambulatory Care: Hospital 1.46, Community Health Centre 1.44",
+    "fix": ""
+   },
+   {
+    "claim": "p. 13 CHC component 1.20-1.26, circulation 1.14-1.18, core 1.05-1.07, 'compounded'",
+    "verdict": "CONFIRMED",
+    "evidence": "values and 'Total Building Grossing Factors are compounded'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 3 'not meant as absolute limits'",
+    "verdict": "WRONG",
+    "evidence": "'These areas are not meant as absolute limits on maximum or minimum space sizes.' on printed p. 4",
+    "fix": "p. 4"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE: Grossing Factors & Net Areas Guidelines for Healthcare Facilities in Alberta, Alberta Infrastructure, Alberta Health, Alberta Health Services (with Altus Planning), June 2021: Table 2 p. 7 Examination Room Type 1.1 12.0 m2, Type 1.2 14.0, Type 2.1 13.0, Type 2.2 16.0; pp. 8-9 Patient Room Single 28.5 m2, Continuing Care Bedroom incl. WC 32.0 m2; p. 12 departmental grossing Ambulatory Care Community Health Centre 1.44, Hospital 1.46; p. 13 CHC building factors component 1.20-1.26, circulation 1.14-1.18, core mech/elec 1.05-1.07, 'compounded'; p. 4 'not meant as absolute limits' — https://www.alberta.ca/system/files/custom_downloaded_images/tr-gnfa062021.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all areas and factors confirmed; no document code in text; 'not meant as absolute limits' is on p. 4"
+ },
+ "arch_hsg_sccZ8000": {
+  "where_read": "URL (WebFetch scc-ccn.ca)",
+  "claims": [
+   {
+    "claim": "CSA Z8000:18, reaffirmation, 'Proceeding to development', no date",
+    "verdict": "CONFIRMED",
+    "evidence": "'CSA Z8000:18'; 'Reaffirmation'; 'Proceeding to development'; date fields blank",
+    "fix": ""
+   },
+   {
+    "claim": "Scope quote 'essential elements and specific requirements for the planning, design, and construction of HCFs'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "Covers outpatient facilities, hospitals, residential care facilities",
+    "verdict": "CONFIRMED",
+    "evidence": "'facilities providing outpatient diagnosis and treatment services'; 'inpatient, outpatient, or combined hospitals'; 'specialty inpatient centres and residential care facilities'",
+    "fix": ""
+   },
+   {
+    "claim": "Full text paywalled",
+    "verdict": "CONFIRMED",
+    "evidence": "not re-tested; SCC notice gives scope only",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_hsg_vanHDTG2025": {
+  "where_read": "URL (WebFetch guidelines.vancouver.ca PDF, full text in two reads)",
+  "claims": [
+   {
+    "claim": "HDTG v11, Mar 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'Version 11', 'Issue Date: March, 2025'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 1.1 applies to 'any Housing secured by the City of Vancouver as a capital asset'",
+    "verdict": "CONFIRMED",
+    "evidence": "'...any Housing secured by the City of Vancouver as a capital asset.'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 5.2 pp. 11-12 studio 37, 1-bed 46, 2-bed 66, 3-bed 84; studio 'can be reduced to 30 sq.m. (320 sq.ft). as per Zoning and Development Bylaw'",
+    "verdict": "CONFIRMED",
+    "evidence": "table p. 12: 37/400, 46/500, 66/700, 84/900; footnote exact",
+    "fix": ""
+   },
+   {
+    "claim": "s. 4.2(g) clear ceiling >=2438 mm, floor-to-floor 2946 mm recommended",
+    "verdict": "CONFIRMED",
+    "evidence": "4.2(g) 'Clear underside of ceiling heights to be a minimum of 2438 mm' and 'A floor-to-floor height of 2946 mm (9'-8\") is recommended.'",
+    "fix": "4.2 is 'Indoor Amenity, Program and Office Spaces'; same wording for units is s. 5.3.2(b) (Living Area). Cite 5.3.2(b) for units"
+   },
+   {
+    "claim": "s. 9.3.2(b) low-temperature hydronic and NEU connection 'if located in the service area of the City owned NEU'",
+    "verdict": "CONFIRMED",
+    "evidence": "'... if located in the service area of the City owned NEU and if deemed feasible by the City Engineer/General Manager of Engineering Services.'",
+    "fix": "Add the feasibility condition"
+   },
+   {
+    "claim": "Div. 23 .5(b) 'All air intakes to be located away from sources of fumes or dust'",
+    "verdict": "CONFIRMED",
+    "evidence": "Division 23, 23 00 00, Part 1, .5 Ventilation, item b (p. 38)",
+    "fix": ""
+   },
+   {
+    "claim": "rooftop units on sound isolation pads",
+    "verdict": "CONFIRMED",
+    "evidence": "'Any rooftop units to be on sound isolation pads.' Div. 23 Part 3 Execution item a (p. 39)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Applies only to City-secured housing (capital assets); used here as a general Vancouver unit-size benchmark, already labelled",
+  "new_text": "GOVERNMENT GUIDE: City of Vancouver, Housing Design and Technical Guidelines v11, Mar 2025 (applies to 'any Housing secured by the City of Vancouver as a capital asset', s. 1.1): s. 5.2 pp. 11-12 minimum net unit areas studio 37 m2 (400 sq ft; 'can be reduced to 30 sq.m. (320 sq.ft). as per Zoning and Development Bylaw'), 1-bed 46, 2-bed 66, 3-bed 84; s. 5.3.2(b) (living area; same in 4.2(g) amenity) clear ceiling >=2438 mm, floor-to-floor 2946 mm recommended; s. 9.3.2(b) 'Buildings must be designed with low-temperature hydronic heating systems and connect to neighbourhood energy systems if located in the service area of the City owned NEU and if deemed feasible by the City Engineer'; Div. 23 .5(b) 'All air intakes to be located away from sources of fumes or dust'; Div. 23 Part 3 (a) 'Any rooftop units to be on sound isolation pads' — https://guidelines.vancouver.ca/guidelines-technical-housing-design.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all figures confirmed; ceiling clause for units is 5.3.2(b) (4.2(g) is amenity space); NEU clause carries a feasibility condition"
+ },
+ "arch_hsg_bc508Powell2025": {
+  "where_read": "URL (WebFetch news.gov.bc.ca)",
+  "claims": [
+   {
+    "claim": "2025HMA0120-001257, title, 15 Dec 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'Monday, December 15, 2025'; title exact",
+    "fix": ""
+   },
+   {
+    "claim": "508 Powell St., 114 homes (micro-dwellings to 3-bed), seven storeys",
+    "verdict": "CONFIRMED",
+    "evidence": "'114 new affordable homes'; 'micro-dwellings, studios and one-, two- and three-bedroom units'; 'the seven-storey building'",
+    "fix": ""
+   },
+   {
+    "claim": "homes floors 3-7, commercial floor 2",
+    "verdict": "CONFIRMED",
+    "evidence": "'affordable homes on floors 3 to 7'; 'Commercial spaces occupy the second floor.'",
+    "fix": ""
+   },
+   {
+    "claim": "ground-floor resource centre over 7,500 sq ft",
+    "verdict": "CONFIRMED",
+    "evidence": "Powell Street Getaway Resource Centre on 'the first floor', 'more than 7,500 square feet', incl. a commercial kitchen",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_hsg_bcRCR": {
+  "where_read": "URL (WebFetch bclaws.gov.bc.ca, full text)",
+  "claims": [
+   {
+    "claim": "current to 4 Feb 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'current to February 4, 2025'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 16(1) 'safe and comfortable'",
+    "verdict": "CONFIRMED",
+    "evidence": "'temperature in each bedroom, bathroom and common room is safe and comfortable'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 17 not 'heated to more than 49 degrees Celsius'",
+    "verdict": "CONFIRMED",
+    "evidence": "'to more than 49° Celsius'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 20 smoke alarms, sprinklers per BCBC, 30 min emergency lighting (<7 persons)",
+    "verdict": "CONFIRMED",
+    "evidence": "'a community care facility having fewer than 7 persons in care'; 'interconnected smoke alarms'; 'sprinklers that conform to the British Columbia Building Code'; 'at least 30 minutes'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 22(1)(a) 'well ventilated'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "s. 25 separate bedroom, sharing <5%",
+    "verdict": "CONFIRMED",
+    "evidence": "'each person in care has a separate bedroom'; '(2)(a) fewer than 5% of the maximum number of persons in care ...'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 27(1) 8 / 11 / 14 / 18 m2",
+    "verdict": "CONFIRMED",
+    "evidence": "(a) 8 m2, (b) 11 m2 mobility aid, (c) 14 m2 two persons, (d) 18 m2 two, at least one with aid",
+    "fix": ""
+   },
+   {
+    "claim": "s. 31 one washbasin and toilet per 3 (non-LTC); s. 32(c) per bedroom LTC",
+    "verdict": "CONFIRMED",
+    "evidence": "'one washbasin and one toilet for every 3 persons in care'; 'a washbasin and toilet for the exclusive use of the occupants of the bedroom'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 33(b) dining 2 m2; s. 34 lounge 2 m2 (LTC 1.5 + recreation 1)",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least 2 m2 of usable floor space for each person in care'; lounge 2 m2; LTC 1.5 m2 and 'at least 1 m2'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 36(1)(a) outdoor 1.5 m2/person",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least 1.5 m2 of space for each person in care'",
+    "fix": ""
+   },
+   {
+    "claim": "Sch. B item 5 site plan with property boundaries; no siting distances",
+    "verdict": "CONFIRMED",
+    "evidence": "'a site plan, drawn to scale' showing '(a) ... including the property boundaries'; (b) outdoor recreation area; '(c) on request of a medical health officer, (i) elevation and grade ... (ii) the sound levels of the proposed site'",
+    "fix": "Add (c)(ii): MHO may ask for site sound levels; relevant next to data-centre plant"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: Residential Care Regulation, B.C. Reg. 96/2009 (Community Care and Assisted Living Act), current to 4 Feb 2025: s. 16(1) temperature 'safe and comfortable'; s. 17 water accessible to persons in care not 'heated to more than 49 degrees Celsius'; s. 20 smoke alarms, sprinklers per BCBC, 30 min emergency lighting (<7 persons); s. 22(1)(a) 'well ventilated'; s. 25 'each person in care has a separate bedroom' (sharing <5%); s. 27(1) usable bedroom floor 8 m2 / 11 m2 with mobility aid / 14 m2 two persons / 18 m2 two with aid; s. 31 one washbasin and toilet per 3 (non-LTC); s. 32(c) LTC washbasin and toilet per bedroom; s. 33(b) dining 2 m2/person; s. 34 lounge 2 m2 (LTC 1.5 m2 + recreation 1 m2); s. 36(1)(a) outdoor 1.5 m2/person; Sch. B item 5 site plan with property boundaries and outdoor recreation area, and (c)(ii) 'on request of a medical health officer' 'the sound levels of the proposed site'; no siting distances — https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/96_2009 ‖ CHECK 2 (2 Nov 2026, fixed): all clauses confirmed; added Sch. B 5(c)(ii) site sound levels on MHO request"
+ },
+ "arch_hsg_bcCCALA": {
+  "where_read": "URL (WebFetch bclaws.gov.bc.ca)",
+  "claims": [
+   {
+    "claim": "current to 1 Oct 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "'This Act is current to October 1, 2024'",
+    "fix": ""
+   },
+   {
+    "claim": "community care facility '3 or more persons who are not related by blood or marriage'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "assisted living residence '3 or more adults' who 'do not require, on a regular basis, unscheduled professional health services'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "s. 5 licence required",
+    "verdict": "CONFIRMED",
+    "evidence": "'A person who does not hold a licence must not' operate ...",
+    "fix": ""
+   },
+   {
+    "claim": "s. 26(1) must be registered",
+    "verdict": "CONFIRMED",
+    "evidence": "'A person must not operate an assisted living residence that is not registered under section 25 (1).'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_hsg_bcFLS": {
+  "where_read": "URL (WebFetch gov.bc.ca PDF, first 100,000 characters)",
+  "claims": [
+   {
+    "claim": "Issuers: Community Care Licensing Branch, Building and Safety Policy Branch, Office of the Assisted Living Registrar",
+    "verdict": "CONFIRMED",
+    "evidence": "project sponsors as stated (ministries of Healthy Living and Sport; Housing and Social Development); developed by an advisory committee",
+    "fix": ""
+   },
+   {
+    "claim": "undated; pre-2020 code labels",
+    "verdict": "CONFIRMED",
+    "evidence": "no date; refers to 'BC Building Code' without edition",
+    "fix": "Ministry names suggest c. 2009-2010 (our reading)"
+   },
+   {
+    "claim": "p. 12 'assisted living residences are classified as a Group C (Residential) occupancy'",
+    "verdict": "WRONG",
+    "evidence": "'assisted living residences are categorized as a Group C (Residential) occupancy'",
+    "fix": "'categorized', not 'classified'"
+   },
+   {
+    "claim": "p. 12 'residential care facilities with more than six persons in care are categorized as a Group B, Division 2'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "small facility thresholds 'six or fewer' p. 12, 'between three and six' pp. 17, 34",
+    "verdict": "WRONG",
+    "evidence": "'six or fewer' p. 12; 'between three and six persons in care' p. 18; 'three to six persons in care' p. 34",
+    "fix": "p. 18, not p. 17"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE: Assisted Living and Residential Care: Fire and Life Safety, BC Community Care Licensing Branch, Building and Safety Policy Branch and Office of the Assisted Living Registrar (undated; pre-2020 code labels): p. 12 'assisted living residences are categorized as a Group C (Residential) occupancy'; 'residential care facilities with more than six persons in care are categorized as a Group B, Division 2'; small facilities may be Group C if ambulatory, sprinklered, interconnected smoke alarms (threshold stated as 'six or fewer' p. 12, 'between three and six' pp. 18, 34) — https://www2.gov.bc.ca/assets/gov/health/accessing-health-care/finding-assisted-living-residential-care-facilities/residential-care-facilities/assisted_living_and_residential_care_-_fire_and_life_safety.pdf ‖ CHECK 2 (2 Nov 2026, fixed): group labels confirmed; quote wording 'categorized' and page 18 corrected"
+ },
+ "arch_hsg_abCCDS2023": {
+  "where_read": "URL (WebFetch open.alberta.ca PDF, full text in two reads)",
+  "claims": [
+   {
+    "claim": "Title; Alberta Ministry of Health; Oct 2023",
+    "verdict": "CONFIRMED",
+    "evidence": "title exact; Ministry of Health; October 2023 cover",
+    "fix": ""
+   },
+   {
+    "claim": "issued 28 Feb 2024",
+    "verdict": "NOT FOUND",
+    "evidence": "copyright page: 'Published: February 2024' (no day)",
+    "fix": "Use 'published Feb 2024'"
+   },
+   {
+    "claim": "s. B.I items 1-2 p. 18 one resident; 32.5 m2 (350 ft2)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Each resident room shall accommodate one resident.'; 'The minimum room size shall be 32.5 m2 (350 ft2).'",
+    "fix": ""
+   },
+   {
+    "claim": "s. B note p. 18 81 m2 (871 ft2) per resident",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "s. C.II item 2 p. 25 max 14 residents",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "C.IV item 12 and C.VI item 12 mechanical cooling",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 30 'mechanical cooling ... in living rooms and activity spaces'; p. 34 '... in each dining room' ('should')",
+    "fix": ""
+   },
+   {
+    "claim": "s. C.VIII item 2 p. 36 'minimum of 2 m2 per resident'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "s. F.I.1 p. 55 'minimum B3 occupancy classification'",
+    "verdict": "CONFIRMED",
+    "evidence": "F.I item 1 'shall be designed and constructed to a minimum B3 occupancy classification' (read as p. 54); also in s. A.VI p. 17 '... as defined in the current NBC–AE'",
+    "fix": "Page 54 or 55 (page read not certain); add A.VI p. 17"
+   },
+   {
+    "claim": "F.I.2 'maximum of 200 resident units'",
+    "verdict": "CONFIRMED",
+    "evidence": "'the building size should be limited to a maximum of 200 resident units' ('should')",
+    "fix": ""
+   },
+   {
+    "claim": "cites CSA Z8000-18",
+    "verdict": "CONFIRMED",
+    "evidence": "'CSA Z8000-18' in s. B items 3 and 16",
+    "fix": ""
+   },
+   {
+    "claim": "'Continuing Care Design Standards 2025' on capital program page not found",
+    "verdict": "UNREACHABLE",
+    "evidence": "capital program page not re-read in this check",
+    "fix": "Keep '?'"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT STANDARD: Continuing Care Design Standards and Best Practices in Alberta, 2023 (CCDS), Alberta Ministry of Health, Oct 2023 (published Feb 2024): s. B.I item 1 p. 18 'Each resident room shall accommodate one resident'; item 2 'The minimum room size shall be 32.5 m2 (350 ft2)'; s. B note p. 18 'Total building gross area should not be less than 81 m2 (871 ft2) per resident'; s. C.II item 2 p. 25 'Individual households shall have up to a maximum of 14 residents'; s. C.IV item 12 and C.VI item 12 mechanical cooling in living, activity, dining rooms; s. C.VIII item 2 p. 36 outdoor 'minimum of 2 m2 per resident'; s. F.I.1 p. 54-55 and s. A.VI p. 17 'minimum B3 occupancy classification'; F.I.2 'maximum of 200 resident units'; cites CSA Z8000-18. Capital program page (2026) refers to a 'Continuing Care Design Standards 2025' not found on open.alberta.ca ? — https://open.alberta.ca/dataset/c03d9f2f-3f40-4b85-b6c9-7d0e9442bc9b/resource/5abc3aaf-dc58-4680-ad66-d96b71e5c401/download/hlth-continuing-care-design-standards-best-practices-alberta-2023.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all figures confirmed; publication date has no day; B3 also in s. A.VI p. 17"
+ },
+ "arch_hsg_abCCOperator": {
+  "where_read": "URL (WebFetch alberta.ca)",
+  "claims": [
+   {
+    "claim": "published 2 Oct 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "page metadata '2026-10-02'",
+    "fix": ""
+   },
+   {
+    "claim": "supportive living 'intended to house four or more adult residents not related to the operator'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "Type A complex medical; Type B various levels; Type C publicly funded hospice",
+    "verdict": "CONFIRMED",
+    "evidence": "'for people with complex medical needs'; 'for people with various levels of medical needs'; 'publicly funded hospice care'",
+    "fix": ""
+   },
+   {
+    "claim": "application: zoning, safety code approval, fire inspection within 1 year, environmental health inspection within 1 year",
+    "verdict": "CONFIRMED",
+    "evidence": "'proof of zoning approval'; 'proof of safety code approval'; 'a recent fire inspection (completed within 1 year)'; 'a recent environmental health inspection (within 1 year)'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_hsg_abSLAccomStd2024": {
+  "where_read": "URL (WebFetch open.alberta.ca PDF)",
+  "claims": [
+   {
+    "claim": "Alberta Health, Continuing Care Branch, Apr 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "'Last Updated: April 2024'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 3 mandatory 'Pursuant to the Continuing Care Regulation under the Continuing Care Act'",
+    "verdict": "WRONG",
+    "evidence": "quote confirmed, on the page before the Standards Index (labelled p. 3), i.e. p. 2",
+    "fix": "p. 2"
+   },
+   {
+    "claim": "Std 1(1) changes meet NBC(AE)",
+    "verdict": "CONFIRMED",
+    "evidence": "'must meet the requirements of the National Building Code – Alberta Edition'",
+    "fix": ""
+   },
+   {
+    "claim": "Std 4(1) temperature wording",
+    "verdict": "CONFIRMED",
+    "evidence": "'a temperature that supports the safety of all residents and the comfort of the majority of the residents'",
+    "fix": ""
+   },
+   {
+    "claim": "Std 16(1) 'failure of electrical power'",
+    "verdict": "CONFIRMED",
+    "evidence": "'(a) the failure of electrical power or other utilities'",
+    "fix": ""
+   },
+   {
+    "claim": "Std 21(1) hot water ABC maximum, no figure",
+    "verdict": "CONFIRMED",
+    "evidence": "'does not exceed the maximum safe level established in the Alberta Building Code'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE (incorporated): Accommodation Standards - Supportive Living Accommodation Information Guide, Alberta Health, Continuing Care Branch, Apr 2024: p. 2 adherence mandatory 'Pursuant to the Continuing Care Regulation under the Continuing Care Act'; Std 1(1) changes meet NBC(AE); Std 4(1) temperature 'that supports the safety of all residents and the comfort of the majority'; Std 16(1) contingency plans for 'failure of electrical power'; Std 21(1) hot water 'does not exceed the maximum safe level established in the Alberta Building Code' (no figure) — https://open.alberta.ca/dataset/cdab6ef6-5f51-41f9-9fd8-50a626f1f5b8/resource/6ecaaea0-32e9-4a9f-aa1d-34b98093840c/download/hlth-accommodation-standards-supportive-living-accommodation-information-guide.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all standards confirmed; mandatory statement is on p. 2"
+ },
+ "arch_hsg_abSmallCareSpec2023": {
+  "where_read": "URL (WebFetch alberta.ca PDF)",
+  "claims": [
+   {
+    "claim": "title, Government of Alberta, 24 Apr 2023",
+    "verdict": "CONFIRMED",
+    "evidence": "'Design Guidelines for Specialty Populations | Continuing Care Capital Program - Small Care Home Stream'; April 24, 2023",
+    "fix": ""
+   },
+   {
+    "claim": "p. 10 brain injury 20.7 m2; ventilation 18.2-20.7 m2",
+    "verdict": "CONFIRMED",
+    "evidence": "'The bed area for a resident with a brain injury is 20.7 m2'; 'ventilation care is 18.2-20.7 m2'",
+    "fix": ""
+   },
+   {
+    "claim": "no resident count",
+    "verdict": "CONFIRMED",
+    "evidence": "none stated",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_hsg_bcOSA2025": {
+  "where_read": "URL (WebFetch seniorsadvocatebc.ca PDF)",
+  "claims": [
+   {
+    "claim": "title, Jul 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'FROM SHORTFALL TO CRISIS: GROWING DEMAND FOR LONG-TERM CARE BEDS IN B.C.', July 2025",
+    "fix": ""
+   },
+   {
+    "claim": "p. 7 about 33,000 beds in 407 facilities",
+    "verdict": "CONFIRMED",
+    "evidence": "'over 33,000 long-term care beds across 407 provincially-regulated facilities'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 12 7,212 waiting (31 Mar 2025)",
+    "verdict": "CONFIRMED",
+    "evidence": "'rose from 2,381 to 7,212'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 17 28,840 subsidized beds",
+    "verdict": "CONFIRMED",
+    "evidence": "'from 26,744 to 28,840 beds'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 18 '58 beds per 1,000 (75+)' (77 earlier)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Currently, there are 58 beds per 1,000 (75+) population compared to 77 ... ten years ago'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 21 assisted living 13 -> 9 per 1,000 75+",
+    "verdict": "CONFIRMED",
+    "evidence": "'from 13 units to 9 units per capita'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 27 projected 41 by 2035/36",
+    "verdict": "CONFIRMED",
+    "evidence": "'is estimated to drop to 41 beds per capita by 2035/36'",
+    "fix": "Projection of subsidized LTC beds per 1,000 75+"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_hsg_ihFoodPlans2026": {
+  "where_read": "URL (WebFetch interiorhealth.ca PDF)",
+  "claims": [
+   {
+    "claim": "HP-FS-9042, Aug 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Requirements for Floor/Building Plans' HP-FS-9042, August 2026",
+    "fix": ""
+   },
+   {
+    "claim": "p. 2 separate hand sinks; storage 15 cm off floor",
+    "verdict": "CONFIRMED",
+    "evidence": "'Handwashing sinks must be separate from food preparation sinks and dishwashing sinks'; 'a minimum of 15 cm (6 inches) off the floor'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 3 three-compartment sink; dishwasher rinse 71 C at plate; low-temp 38 C at manifold; hot holding 60 C",
+    "verdict": "CONFIRMED",
+    "evidence": "3-compartment 'generally for premises <50 seats'; 'at least 71°C (160°F) at plate level'; 'a minimum temperature of 38°C (100°F) at the manifold'; 'no less than 60°C (140°F)'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 4 washrooms 'may not open directly into any room where food is served, handled, prepared or stored'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "ventilation per BC Building Code and NFPA",
+    "verdict": "CONFIRMED",
+    "evidence": "ventilation per 'BC Building and National Fire Protection Association codes' (p. 3)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Interior Health guide, not VCH; already labelled",
+  "new_text": null
+ },
+ "arch_hsg_vanKitchenDG2018": {
+  "where_read": "URL (WebFetch vancouver.ca PDF)",
+  "claims": [
+   {
+    "claim": "Social Amenity Design Guidelines App. 2, Jan 2018",
+    "verdict": "CONFIRMED",
+    "evidence": "'Appendix 2 City-affiliated facility kitchens design guidelines', January 2018",
+    "fix": ""
+   },
+   {
+    "claim": "s. 2.2 VCH permit quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'A kitchen's design determines whether an appropriate VCH permit can be obtained.'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 3.i size varies, next to dining, no route through other program rooms, loading to coolers, away from quiet programs",
+    "verdict": "CONFIRMED",
+    "evidence": "'Kitchen size varies greatly with intended use'; 'next to a space that can be used as a dining area'; 'without passing through another program room'; 'loading area' ... 'walk in coolers'; 'programming spaces that may require quiet times or scent-free times'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 3.iii-iv ~12 participants",
+    "verdict": "CONFIRMED",
+    "evidence": "'walkway space for approximately 12 people'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 3.x grease interceptor accessible",
+    "verdict": "CONFIRMED",
+    "evidence": "accessible for cleaning; parkade example",
+    "fix": ""
+   },
+   {
+    "claim": "s. 4.ii-iii >50 people commercial ranges/ovens",
+    "verdict": "CONFIRMED",
+    "evidence": "'regularly serving >50 people'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 4.iv 'exhaust scrubbing' in mixed-use",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "s. 4.v high-heat sanitizing dishwasher, 2 or 3 compartment sinks",
+    "verdict": "CONFIRMED",
+    "evidence": "'non-domestic 2 or 3 compartment sinks'; 'High heat sanitizing commercial dishwashers are recommended'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 4.vi separate hand sink",
+    "verdict": "CONFIRMED",
+    "evidence": "separate handwashing sink",
+    "fix": ""
+   },
+   {
+    "claim": "Subappendix 2b Class 1 Type I, Class 2 Type II, Class 3 domestic",
+    "verdict": "CONFIRMED",
+    "evidence": "as stated",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_hsg_vanKitchenWork2017": {
+  "where_read": "URL (WebFetch vancouver.ca PDF)",
+  "claims": [
+   {
+    "claim": "Heinze and Lim, for CoV Social Policy and Park Board, Nov 2017",
+    "verdict": "CONFIRMED",
+    "evidence": "'Chashma Heinze & Stephanie Lim'; 'City of Vancouver, Social Policy Department and the Vancouver Board of Parks and Recreation'; November 2017",
+    "fix": ""
+   },
+   {
+    "claim": "VCH health permit to serve food to public",
+    "verdict": "CONFIRMED",
+    "evidence": "'Health Permit' for a publicly accessible kitchen",
+    "fix": ""
+   },
+   {
+    "claim": "permit types FSE, 'No Grease Laden Vapors', exempt social-service agencies",
+    "verdict": "CONFIRMED",
+    "evidence": "as stated; exempt = social service agency (reduced or exempt rate)",
+    "fix": ""
+   },
+   {
+    "claim": "'A food safety plan is required for a permitted kitchen'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact",
+    "fix": ""
+   },
+   {
+    "claim": "no count or sizes of kitchens",
+    "verdict": "CONFIRMED",
+    "evidence": "none given",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_hsg_ahsFoodEdm2019": {
+  "where_read": "URL (WebFetch albertahealthservices.ca PDF)",
+  "claims": [
+   {
+    "claim": "PUB-0420-201903 (2019)",
+    "verdict": "CONFIRMED",
+    "evidence": "code shown; '©2019 Alberta Health Services'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 4 Food Regulation s. 16 'unless plans and specifications'",
+    "verdict": "CONFIRMED",
+    "evidence": "'A person must not construct or make alterations to a commercial food establishment unless plans and specifications' ...",
+    "fix": ""
+   },
+   {
+    "claim": "in Edmonton plans go to Planning & Development (p. 4)",
+    "verdict": "WRONG",
+    "evidence": "'Within the City of Edmonton, all plans are reviewed through the Planning & Development office.' on p. 5",
+    "fix": "p. 5"
+   },
+   {
+    "claim": "p. 5 permit application at least 14 days before opening",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least 14 days prior to the proposed opening day'",
+    "fix": ""
+   },
+   {
+    "claim": "no sink or temperature specs",
+    "verdict": "CONFIRMED",
+    "evidence": "none given",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE: Alberta Health Services, 'Starting a Food Business in Edmonton and Surrounding Areas', PUB-0420-201903 (2019): p. 4 Food Regulation s. 16 no construction or alteration of a commercial food establishment 'unless plans and specifications' are approved; p. 5 in Edmonton 'all plans are reviewed through the Planning & Development office'; food handling permit application at least 14 days before opening; no sink or temperature specifications — https://albertahealthservices.ca/assets/wf/eph/wf-eph-starting-food-bus-edmonton.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all items confirmed; Edmonton plan-review statement is on p. 5"
+ },
+ "arch_hsg_edmMU": {
+  "where_read": "local copy data/raw/edm/bylaw/b.txt (Zoning Bylaw 20001 adopted text; amendments not checked)",
+  "claims": [
+   {
+    "claim": "s. 2.80 MU permitted Residential limited to Lodging House, Multi-unit Housing, Row Housing, Secondary Suites, Supportive Housing",
+    "verdict": "CONFIRMED",
+    "evidence": "b.txt l.3724ff: '2.2. Residential, limited to: 2.2.1. Lodging House 2.2.2. Multi-unit Housing 2.2.3. Row Housing 2.2.4. Secondary Suites 2.2.5. Supportive Housing'",
+    "fix": ""
+   },
+   {
+    "claim": "MU 2.6 Custom Manufacturing; 2.7 Food and Drink Service; 2.8 Health Service; 2.25 Health Care Facility",
+    "verdict": "CONFIRMED",
+    "evidence": "MU list: '2.6. Custom Manufacturing', '2.7. Food and Drink Service', '2.8. Health Service', '2.25. Health Care Facility'",
+    "fix": ""
+   },
+   {
+    "claim": "MU has no Minor or Major Industrial",
+    "verdict": "CONFIRMED",
+    "evidence": "only Industrial Use listed is '2.17. Indoor Self Storage'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 6.80.1 Supportive Housing or Lodging House 'must only be located in' listed building types",
+    "verdict": "CONFIRMED",
+    "evidence": "'must only be located in the following building types ...: Backyard Housing, Single Detached Housing, Semi-detached Housing, Duplex Housing, Row Housing, or Multi-unit Housing'",
+    "fix": "6.80.2 also allows Supportive Housing in a building that contains or contained a Hotel; add"
+   },
+   {
+    "claim": "s. 8.10 Health Care Facility definition incl. 'continuing care facilities'",
+    "verdict": "CONFIRMED",
+    "evidence": "'institutional facilities provide health services, medical treatment, and accommodations for people requiring care ... Typical examples include auxiliary hospitals, continuing care facilities ...'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 8.10 Supportive Housing definition",
+    "verdict": "CONFIRMED",
+    "evidence": "'1 or more Sleeping Units or Dwellings that provide accommodations and on-Site or off-Site social, physical, or mental health supports'",
+    "fix": ""
+   },
+   {
+    "claim": "BE 2.7 Custom Manufacturing, 2.9 Health Service; 3.3.1 max 500 m2 per establishment",
+    "verdict": "CONFIRMED",
+    "evidence": "BE '2.7. Custom Manufacturing', '2.9. Health Service'; '3.3.1. The maximum Floor Area is 500 m2 per individual establishment' (applies to Bars, Food and Drink Services, Health Services, Major Indoor Entertainment)",
+    "fix": ""
+   },
+   {
+    "claim": "IM 2.6 Custom Manufacturing",
+    "verdict": "CONFIRMED",
+    "evidence": "IM '2.6. Custom Manufacturing'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: City of Edmonton Zoning Bylaw 20001 (adopted text, local data/raw/edm/bylaw/b.txt; amendments not checked ?): s. 2.80 MU Mixed Use Zone permitted uses incl. 2.2 Residential limited to Lodging House, Multi-unit Housing, Row Housing, Secondary Suites, Supportive Housing; 2.6 Custom Manufacturing; 2.7 Food and Drink Service; 2.8 Health Service; 2.25 Health Care Facility; no Minor or Major Industrial; s. 6.80.1 Supportive Housing or Lodging House 'must only be located in' Backyard, Single Detached, Semi-detached, Duplex, Row or Multi-unit Housing (6.80.2: Supportive Housing also in a current or former Hotel building); s. 8.10 'Health Care Facility ... institutional facilities provide health services, medical treatment, and accommodations for people requiring care ... continuing care facilities'; 'Supportive Housing ... Sleeping Units or Dwellings that provide accommodations and on-Site or off-Site social, physical, or mental health supports'; BE 2.7/2.9 Custom Manufacturing and Health Service permitted, 3.3.1 Health Service max 500 m2 per establishment; IM 2.6 Custom Manufacturing — https://www.edmonton.ca/ (local copy) ‖ CHECK 2 (2 Nov 2026, fixed): all uses, clauses and definitions confirmed in adopted text; added 6.80.2 hotel exception"
+ }
+}
