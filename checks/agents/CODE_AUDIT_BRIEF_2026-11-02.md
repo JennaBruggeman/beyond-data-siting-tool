@@ -1,0 +1,12 @@
+# Brief: hard-rule audit of the Beyond Data tool (2 Nov 2026)
+
+J.B.'s rule (2 Nov 2026): "All building codes should operate like this … when there are hard rules we have to abide by them." A hard rule (building code, fire code, zoning by-law limit, electrical code, environmental regulation, noise by-law limit, health regulation) must BLOCK: the tool may not draw, size, place or offer anything that breaks it; it says which rule stops it. A rezoning or a conditional/discretionary approval is a design choice and may stay a flagged option. Guidance, insurer practice (FM), operator practice and standards bodies' recommendations are NOT hard rules unless a code adopts them; say which.
+
+For your files, find every place the tool checks, uses or ignores a regulatory rule, and classify each:
+- ENFORCED: the tool blocks (cannot proceed / not drawn / clamps) and names the rule.
+- FLAG ONLY: the tool lets it break the rule and only warns, labels or colours it. (This is the main thing to find.)
+- NOT CHECKED: a hard rule that applies to what the tool draws or sizes, is in the register or research (register/formula_register.json, checks/research_arch_v1/*.md, checks/findings_*.md), but the code never tests it.
+- DESIGN CHOICE (OK): rezoning, conditional use, or guidance correctly treated as a choice.
+For each: file:line, the rule and its source id, what the tool does now, what it should do, and whether the source text is enough to enforce it (or "?"/paywalled). Examples to look for: setbacks and yards, height and storeys, floor-space ratio, site coverage, loading spaces and their size, parking, fence height (Vancouver 1.9 m in required yards vs the tool's 2.4 m fence), generator and fuel-tank placement and distances (NFC, CSA B139 paywalled), battery rooms (NFPA 855 is a US standard, check whether a Canadian code adopts it), transformer clearances, noise limits at receivers (Vancouver Noise Control By-law, Edmonton Community Standards Bylaw), air intakes (NBC 6.3.2.9), exits and fire access (NBC 3.2.5), flood construction levels, fire separations, occupancy combinations (NBC 3.1.3.2), Vancouver no data storage at grade, water and sewer by-laws, permits.
+
+Do not edit any tool file. Write your findings to checks/agents/2026-11-02_code_audit_<part>.md: a table sorted with FLAG ONLY and NOT CHECKED first, then a short list of the most serious five. No commits. Reply under 120 words with counts per class and the top three.

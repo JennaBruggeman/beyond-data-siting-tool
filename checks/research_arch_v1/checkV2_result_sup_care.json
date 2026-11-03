@@ -1,0 +1,634 @@
+{
+ "arch_sup_nbcWashrooms": {
+  "where_read": "local data/raw/codes/nbc.txt l. 18838-18960 (3.7.2.2-3.7.2.3), 19237-19292 (3.8.2.8), 19795-19835 (3.8.3.13); bcbc2024.txt l. 19295-19360; vbbl2025_v1.txt l. 13679-13680; nbc_ab2023.txt l. 17567",
+  "claims": [
+   {
+    "claim": "3.7.2.2.(2) single shared WC if load not more than 10",
+    "verdict": "CONFIRMED",
+    "evidence": "'is not more than 10' (applies to occupancies in Sentences (4), (8), (10), (11), (12), (14)); BCBC and NBC(AE) same",
+    "fix": ""
+   },
+   {
+    "claim": "VBBL 25",
+    "verdict": "CONFIRMED",
+    "evidence": "VBBL l. 13680: 'is not more than 25'",
+    "fix": ""
+   },
+   {
+    "claim": "Table 3.7.2.2.-A rows 1-25 1/1; 26-50 1/2; 51-75 2/3; 76-100 2/4; over 400 7+1/200 M, 13+1/100 F",
+    "verdict": "CONFIRMED",
+    "evidence": "table text matches; BCBC identical",
+    "fix": ""
+   },
+   {
+    "claim": "Table A on p. 3-170",
+    "verdict": "CONFIRMED",
+    "evidence": "table sits between footers 3-169 and 3-170",
+    "fix": ""
+   },
+   {
+    "claim": "3.7.2.2.(8) 'at least one for each 10 persons of each sex'",
+    "verdict": "CONFIRMED",
+    "evidence": "'shall be at least one for each 10 persons of each sex'",
+    "fix": ""
+   },
+   {
+    "claim": "3.7.2.3.(1) lavatories, p. 3-171",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least one lavatory ... in a room containing one or 2 water closets or urinals, and at least one additional lavatory ... for each additional 2'",
+    "fix": ""
+   },
+   {
+    "claim": "3.8.2.8.(1) universal washroom at each washroom location on barrier-free storey, p. 3-175",
+    "verdict": "CONFIRMED",
+    "evidence": "'at each location where washrooms are provided in a storey to which a barrier-free path of travel is required ... at least one universal washroom'; (3) exempts washrooms within a suite of care or residential occupancy",
+    "fix": ""
+   },
+   {
+    "claim": "3.8.2.8.(13) universal dressing and shower room",
+    "verdict": "CONFIRMED",
+    "evidence": "'for use by the general public or customers, or as part of a common-use area for employees' — on p. 3-176, not 3-175 (no page given in text; fine)",
+    "fix": ""
+   },
+   {
+    "claim": "3.8.3.13.(1)(j) 1 700 mm turning circle, p. 3-183",
+    "verdict": "WRONG",
+    "evidence": "Article 3.8.3.13 starts on p. 3-183; Clause (j) falls after the 3-183 footer, i.e. p. 3-184",
+    "fix": "p. 3-183-184"
+   },
+   {
+    "claim": "no floor area in m2",
+    "verdict": "CONFIRMED",
+    "evidence": "no m2 in 3.8.3.13",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Which table applies to a shelter or refuge depends on its major occupancy (not fixed: A-2, C or B assumed by our reading); 3.8.2.8.(3) exempts washrooms inside a suite of care or residential occupancy from (1)-(2).",
+  "new_text": "RULE: National Building Code of Canada 2020, Div. B (local copy data/raw/codes/nbc.txt; BCBC 2024 bcbc2024.txt l. 19300-19370 same wording for 3.7.2.2.(2), Table 3.7.2.2.-A and (8)): 3.7.2.2.(2) both sexes may share a single water closet if occupant load 'not more than 10' (VBBL 25, see arch_per_nbcWC); Table 3.7.2.2.-A Water Closets for an Assembly Occupancy (p. 3-170), persons of each sex 1-25: 1 male / 1 female; 26-50: 1/2; 51-75: 2/3; 76-100: 2/4; ... over 400: 7 plus 1 per 200 males / 13 plus 1 per 100 females; 3.7.2.2.(8) care or residential occupancy 'at least one for each 10 persons of each sex'; 3.7.2.3.(1) at least one lavatory in a room with one or 2 WCs or urinals, plus one per additional 2 (p. 3-171); 3.8.2.8.(1) 'at each location where washrooms are provided in a storey to which a barrier-free path of travel is required ... at least one universal washroom' (p. 3-175); 3.8.2.8.(13) where showering is provided for the public or staff, 'at least one universal dressing and shower room'; 3.8.3.13.(1)(j) universal washroom permits a wheelchair to turn in an open space 'not less than 1 700 mm in diameter' (pp. 3-183-184); no floor area in m2 is given — local copy data/raw/codes/nbc.txt (NBC 2020, National Research Council of Canada) ‖ CHECK 2 (2 Nov 2026, fixed): all clauses confirmed in local NBC and BCBC text; 3.8.3.13.(1)(j) is on p. 3-184; 3.8.2.8.(3) exempts washrooms inside a care or residential suite"
+ },
+ "arch_sup_nbcOccLoadOther": {
+  "where_read": "local data/raw/codes/nbc.txt l. 10530-10612",
+  "claims": [
+   {
+    "claim": "care, treatment and sleeping room areas 10.00",
+    "verdict": "CONFIRMED",
+    "evidence": "'care, treatment and sleeping room areas 10.00'",
+    "fix": ""
+   },
+   {
+    "claim": "offices 9.30; personal services shops 4.60",
+    "verdict": "CONFIRMED",
+    "evidence": "rows read",
+    "fix": ""
+   },
+   {
+    "claim": "kitchens 9.30; storage 46.00, p. 3-43",
+    "verdict": "WRONG",
+    "evidence": "both rows are under 'Other uses' in 'Table 3.1.17.1. (Continued)', after the 3-43 footer, i.e. p. 3-44",
+    "fix": "p. 3-43 to 3-44"
+   },
+   {
+    "claim": "3.1.17.1.(1)(c) 'but not less than' unless shown otherwise",
+    "verdict": "CONFIRMED",
+    "evidence": "'the number of persons for which the area is designed, but not less than that determined from Table 3.1.17.1. ... unless it can be shown that the area will be occupied by fewer persons'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: National Building Code of Canada 2020, Div. B Table 3.1.17.1 Occupant Load, pp. 3-43-44 (local copy data/raw/codes/nbc.txt l. 10551-10615; rows not in arch_pub_nbc31171): 'care, treatment and sleeping room areas' 10.00 m2/person; 'offices' 9.30; 'personal services shops' 4.60; 'kitchens' 9.30; 'storage' 46.00; 3.1.17.1.(1)(c) load = persons the area is designed for 'but not less than' the table value unless shown otherwise. Egress densities, not comfort or space standards — local copy data/raw/codes/nbc.txt (NBC 2020, National Research Council of Canada) ‖ CHECK 2 (2 Nov 2026, fixed): all values confirmed; kitchens and storage rows are on p. 3-44"
+ },
+ "arch_sup_torTSS2022": {
+  "where_read": "WebFetch of the URL (full text read in two parts)",
+  "claims": [
+   {
+    "claim": "Version 5, SSHA, adopted 2015 revised 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "'TORONTO SHELTER STANDARDS VERSION 5'; 'adopted by City Council in 2015 and revised in 2022'",
+    "fix": ""
+   },
+   {
+    "claim": "file dated 28 Mar 2023",
+    "verdict": "CONFIRMED",
+    "evidence": "from URL path 230328 only; not printed",
+    "fix": ""
+   },
+   {
+    "claim": "9.3.1 3.5 m2 personal space per client",
+    "verdict": "CONFIRMED",
+    "evidence": "9.3.1(c) 'a minimum of 3.5 m.2 of personal space per client in sleeping areas'",
+    "fix": ""
+   },
+   {
+    "claim": "0.75 m lateral; 1.1 m vertical",
+    "verdict": "CONFIRMED",
+    "evidence": "9.3.1(e)",
+    "fix": ""
+   },
+   {
+    "claim": "mattress 0.76 x 1.82 m",
+    "verdict": "CONFIRMED",
+    "evidence": "9.3.1(h) 'The minimum mattress size is 0.76 m. x 1.82 m. x 0.89 m.' (third figure as printed)",
+    "fix": ""
+   },
+   {
+    "claim": "sleeping areas separated from dining",
+    "verdict": "CONFIRMED",
+    "evidence": "9.3.1(a) 'physically separated from dining areas and other communal areas'",
+    "fix": ""
+   },
+   {
+    "claim": "toilet ratio 'up to the first' [number cut]",
+    "verdict": "WRONG",
+    "evidence": "9.3.2(a)(ii) 'up to the first onehundred (100) clients' — number is in the text",
+    "fix": "100 confirmed in TSS itself"
+   },
+   {
+    "claim": "1 per 30 thereafter; urinals up to half",
+    "verdict": "CONFIRMED",
+    "evidence": "9.3.2(a)(ii)",
+    "fix": ""
+   },
+   {
+    "claim": "washbasin 1 per 15",
+    "verdict": "CONFIRMED",
+    "evidence": "9.3.2(a)(iii)",
+    "fix": ""
+   },
+   {
+    "claim": "shower 1 per 20",
+    "verdict": "CONFIRMED",
+    "evidence": "9.3.2(a)(v)",
+    "fix": ""
+   },
+   {
+    "claim": "9.3 lockers",
+    "verdict": "CONFIRMED",
+    "evidence": "9.3(b) 'lockers or other secure forms of storage'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Toronto operating standard for City-funded shelters; a benchmark outside BC and Alberta (already labelled).",
+  "new_text": "GOVERNMENT STANDARD (Ontario, Canadian benchmark): Toronto Shelter Standards, Version 5, City of Toronto, Shelter, Support and Housing Administration, adopted by Council 2015, revised 2022 (file dated 28 Mar 2023): 9.3.1(c) 'a minimum of 3.5 m.2 of personal space per client in sleeping areas'; 9.3.1(e) 'lateral separation of at least 0.75 m. between beds'; vertical separation at least 1.1 m below overhead objects; 9.3.1(h) minimum mattress 0.76 m x 1.82 m (x 0.89 m as printed); 9.3.1(a) sleeping areas physically separated from dining and other communal areas; 9.3.2(a)(ii) toilets 'one (1) toilet for every fifteen (15) clients up to the first onehundred (100) clients' then 'one (1) toilet for every thirty (30) clients thereafter'; urinals may replace up to half of toilets in men's washrooms; 9.3.2(a)(iii) 'one (1) washbasin for every fifteen (15) clients'; 9.3.2(a)(v) 'one (1) shower for every twenty (20) clients'; 9.3(b) lockers or other secure storage (no m2) — https://www.toronto.ca/wp-content/uploads/2023/03/9828-Toronto-Shelter-Standards230328AODA.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all figures confirmed; the toilet threshold 100 is in the TSS text itself; clause letters added"
+ },
+ "arch_sup_torRespite": {
+  "where_read": "WebFetch of the URL",
+  "claims": [
+   {
+    "claim": "title, issuer not named, undated",
+    "verdict": "CONFIRMED",
+    "evidence": "'Key Space Related Standards' quick reference to the 24-Hour Respite Site Standards; no issuer or date printed; refers to 'TSSS'",
+    "fix": ""
+   },
+   {
+    "claim": "9.3.1(h) 3.5 m2 in resting areas",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted",
+    "fix": ""
+   },
+   {
+    "claim": "9.3.1(i) 'at least 0.75 m²', 1.1 m vertical",
+    "verdict": "CONFIRMED",
+    "evidence": "'lateral separation of at least 0.75 m² between resting spaces' (unit as printed)",
+    "fix": ""
+   },
+   {
+    "claim": "9.3.2(a) one barrier-free non-gender washroom and one shower per site",
+    "verdict": "CONFIRMED",
+    "evidence": "(a)(i) washroom; (a)(ii) shower",
+    "fix": ""
+   },
+   {
+    "claim": "toilets 1/15 to 100 then 1/30",
+    "verdict": "CONFIRMED",
+    "evidence": "(a)(iii)",
+    "fix": ""
+   },
+   {
+    "claim": "washbasins 1/15",
+    "verdict": "CONFIRMED",
+    "evidence": "(a)(iv); alcohol sanitizer stations may count up to one third",
+    "fix": ""
+   },
+   {
+    "claim": "showers 1/20",
+    "verdict": "CONFIRMED",
+    "evidence": "(a)(vi)",
+    "fix": ""
+   },
+   {
+    "claim": "11.3(h) 21-26 C",
+    "verdict": "CONFIRMED",
+    "evidence": "minimum heated 21°C, maximum cooling 26°C",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT STANDARD (Ontario, Canadian benchmark): Key Space Related Standards, quick reference to the 24-Hour Respite Site Standards, City of Toronto (issuer from URL; not named in text; undated, file uploaded Dec 2025): 9.3.1(h) 'a minimum of 3.5 m² of personal space per client in resting areas'; 9.3.1(i) lateral separation 'at least 0.75 m²' (unit as printed) between resting spaces, 1.1 m vertical clearance; 9.3.2(a)(i)-(ii) at least one barrier-free, accessible, non-gender-specific washroom and one such shower per site; toilets 1 per 15 clients up to the first 100, then 1 per 30; washbasins 1 per 15 (sanitizer stations may count up to one third); showers 1 per 20; 11.3(h) indoor 21-26 C — https://www.toronto.ca/wp-content/uploads/2025/12/8e07-TRSQuickReferenceSpace-Related-Standards.pdf ‖ CHECK 2 (2 Nov 2026, ok): all figures confirmed"
+ },
+ "arch_sup_torSDTG2021": {
+  "where_read": "WebFetch of the URL (text to p. 51)",
+  "claims": [
+   {
+    "claim": "Hilditch Architect principal author, SSHA",
+    "verdict": "CONFIRMED",
+    "evidence": "'Prepared by Hilditch Architect Inc. for Shelter, Support and Housing Administration'",
+    "fix": ""
+   },
+   {
+    "claim": "'essentially complete in March 2020'",
+    "verdict": "CONFIRMED",
+    "evidence": "Preface p. i",
+    "fix": ""
+   },
+   {
+    "claim": "3.3.2 p. 27 20% of beds accessible",
+    "verdict": "CONFIRMED",
+    "evidence": "'increasing the number of accessible spaces to 20% of all available shelter beds' (a 2015 staff report goal)",
+    "fix": ""
+   },
+   {
+    "claim": "wheelchair turning space 1500 mm p. 29",
+    "verdict": "WRONG",
+    "evidence": "p. 29: 1500 mm for a 180° turn for 75% of users; '2100 mm ... required for 95%' for a 360° turn",
+    "fix": "1500 mm (180°, 75% of users); 2100 mm (360°, 95%)"
+   },
+   {
+    "claim": "doors at least 950 mm p. 29",
+    "verdict": "CONFIRMED",
+    "evidence": "'All doors into and within functional components should be at least 950 mm wide'",
+    "fix": ""
+   },
+   {
+    "claim": "3.6.3.4 p. 51 defers to 5.3.1",
+    "verdict": "CONFIRMED",
+    "evidence": "'For requirements for floor area and separation of beds refer to 5.3.1 Sleeping areas.'",
+    "fix": ""
+   },
+   {
+    "claim": "Section 5 not read; text ends p. 51",
+    "verdict": "CONFIRMED",
+    "evidence": "text ends p. 51 mid-sentence; TOC lists 5.3.1 on p. 160",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE (Ontario, Canadian benchmark): City of Toronto Shelter Design and Technical Guidelines, Shelter, Support and Housing Administration, Hilditch Architect principal author, 'essentially complete in March 2020' (file Jan 2021): 3.3.2 (p. 27) goal of 20% of beds accessible; wheelchair turning space 1500 mm for a 180° turn (75% of users), 2100 mm for a 360° turn (95%) (p. 29); doors within functional components at least 950 mm (p. 29); 3.6.3.4 (p. 51) floor area and bed separation deferred to 5.3.1 Sleeping Areas. Section 5 room sizes (5.3.1 p. 160, 5.3.2 Washrooms p. 177, 5.6.1 Central Food Services p. 206, 5.6.2 Laundry p. 219, 5.6.5 Building Service Rooms p. 230) not read: text extraction ends at p. 51; direct download refused by proxy (not circumvented) — https://www.toronto.ca/wp-content/uploads/2021/01/8cea-shelter-design-and-technical-guidelines.pdf ‖ CHECK 2 (2 Nov 2026, fixed): 1500 mm is the 180° turn for 75% of users; 360° needs 2100 mm; rest confirmed"
+ },
+ "arch_sup_abGFNARooms": {
+  "where_read": "WebFetch of the URL",
+  "claims": [
+   {
+    "claim": "title, issuers, Altus, June 2021",
+    "verdict": "CONFIRMED",
+    "evidence": "cover and p. 1",
+    "fix": ""
+   },
+   {
+    "claim": "A-3 15.5, A-4 22.5, A-5 12.0 p. 7",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 2; A-5 'Does not accommodate physical examinations'",
+    "fix": ""
+   },
+   {
+    "claim": "A-11.1/11.2/11.3 9.5/11.0/13.0",
+    "verdict": "CONFIRMED",
+    "evidence": "'recliner or stretcher' / 'stretcher or bed; partially enclosed' / 'chair or stretcher; enclosed'",
+    "fix": ""
+   },
+   {
+    "claim": "M-3 10.0, M-4 11.0, M-5 13.5, M-10 7.0/11.0 p. 9",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted",
+    "fix": ""
+   },
+   {
+    "claim": "Z-7 4.6/5.5 note",
+    "verdict": "CONFIRMED",
+    "evidence": "'5.5NSM is for inward swinging door with no overlap' (text cut 'with no overlap')",
+    "fix": ""
+   },
+   {
+    "claim": "Z-8 per Building Code; Z-9 by users; Z-10 0.4 NSM/FTE p. 10",
+    "verdict": "CONFIRMED",
+    "evidence": "Z-10 'suggested allowance: 0.4 NSM/FTE for kitchenette & dining area'",
+    "fix": ""
+   },
+   {
+    "claim": "Z-14 0.1 p. 11",
+    "verdict": "CONFIRMED",
+    "evidence": "'0.1NSM is the footprint of 0.3mx0.3m full height locker and exclude required circulation'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 12 Food Services 1.25, Admin 1.30-1.35, Emergency CHC 1.50",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted",
+    "fix": ""
+   },
+   {
+    "claim": "Table 4 hospital ≤100 beds 1.30-1.34, 1.18-1.20, 1.10-1.12; compounded; penthouse; BGA definition",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 13; BGA definition Table 1 p. 5",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Healthcare guide; Z-7, M-10 and grossing used for refuge, shelter and kitchen are by analogy (md marks).",
+  "new_text": "GOVERNMENT GUIDE: Grossing Factors & Net Areas Guidelines for Healthcare Facilities in Alberta, Alberta Infrastructure, Alberta Health, Alberta Health Services (with Altus Planning), June 2021 (rows not in arch_hsg_abGFNA2021): p. 7 A-3 Procedure Room Type 1 15.5 NSM, A-4 Type 2 22.5; A-5 Consultation Room / Small Group Room 12.0; A-11.1/11.2/11.3 Treatment Station 9.5/11.0/13.0; p. 9 M-3 Medication Room (Community) 10.0; M-4 Clean Supply 11.0; M-5 Soiled Holding 13.5; M-10 Housekeeping 7.0/11.0 'decentralized and centralized'; p. 10 Z-7 Public Washroom, Single Person, Barrier-free 4.6/5.5 NSM: '4.6NSM is for outward swinging door or sliding door; 5.5NSM is for inward swinging door with no overlap'; Z-8 multi-stall per Building Code; Z-9 Waiting Room 'Net area to be determined by number of anticipated users'; Z-10 Staff Oasis (Lounge) '0.4 NSM/FTE for kitchenette & dining area'; p. 11 Z-14 Staff Locker 0.1 (footprint of a 0.3 x 0.3 m locker, excludes circulation); p. 12 departmental Food Services 1.25, Administration 1.30-1.35, Emergency CHC (urgent care) 1.50; p. 13 Table 4 Hospital up to 100 beds component 1.30-1.34, circulation 1.18-1.20, core mech/elec 1.10-1.12; 'Total Building Grossing Factors are compounded'; CHC factor 'does not typically allow for fully enclosed mechanical penthouse service spaces'; Building Gross Area includes 'mechanical and electrical space and exterior walls' — https://www.alberta.ca/system/files/custom_downloaded_images/tr-gnfa062021.pdf ‖ CHECK 2 (2 Nov 2026, ok): all areas and factors confirmed; quotes completed"
+ },
+ "arch_sup_eastglenRooms": {
+  "where_read": "WebFetch of the URL",
+  "claims": [
+   {
+    "claim": "2.1 Control Desk 15 p. 36",
+    "verdict": "CONFIRMED",
+    "evidence": "'Unit Area Size: 15sm'",
+    "fix": ""
+   },
+   {
+    "claim": "2.2 Cash Office 4 p. 37",
+    "verdict": "CONFIRMED",
+    "evidence": "'4sm'",
+    "fix": ""
+   },
+   {
+    "claim": "2.3 Foreman's Office 8 p. 38",
+    "verdict": "CONFIRMED",
+    "evidence": "'2.3 Facility Foreman's Office' 8sm",
+    "fix": ""
+   },
+   {
+    "claim": "2.5 First Aid 6, gurney pp. 17, 40",
+    "verdict": "CONFIRMED",
+    "evidence": "'Must be sufficiently large enough for a gurney to be maneuvered in and out' (p. 17)",
+    "fix": ""
+   },
+   {
+    "claim": "2.6 Admin Storage 20 p. 41",
+    "verdict": "CONFIRMED",
+    "evidence": "'20sm'",
+    "fix": ""
+   },
+   {
+    "claim": "2.7 MPR 139; 'Ideally 130 sm to 140 sm' pp. 18, 42",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted",
+    "fix": ""
+   },
+   {
+    "claim": "2.10 Staff Break 19 with kitchenette p. 45",
+    "verdict": "CONFIRMED",
+    "evidence": "'Kitchenette with sink, dishwasher, counter and uppers'",
+    "fix": ""
+   },
+   {
+    "claim": "2.11 Laundry 6 p. 46",
+    "verdict": "CONFIRMED",
+    "evidence": "'6 sm'",
+    "fix": ""
+   },
+   {
+    "claim": "3.1 Universal Change 6 p. 47",
+    "verdict": "CONFIRMED",
+    "evidence": "'6 SM'",
+    "fix": ""
+   },
+   {
+    "claim": "3.8 Staff Universal Change and Lockers 20 p. 54",
+    "verdict": "CONFIRMED",
+    "evidence": "'20sm'",
+    "fix": ""
+   },
+   {
+    "claim": "circulation 12-15% p. 20; 'in the order of 15%' p. 23",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted",
+    "fix": ""
+   },
+   {
+    "claim": "mechanical 5-7% of gross p. 21 vs 5% of assigned p. 23",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted; different bases",
+    "fix": ""
+   },
+   {
+    "claim": "electrical 'Per code' p. 21",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted",
+    "fix": ""
+   },
+   {
+    "claim": "net-to-gross 1:1.45 p. 4",
+    "verdict": "CONFIRMED",
+    "evidence": "'1:1.45 or 69% assignable-to-gross area ratio'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Recreation centre program; room sizes used for refuge and shelter are by analogy (md marks).",
+  "new_text": "GOVERNMENT (functional program): Eastglen Leisure Centre Program Final Report, City of Edmonton, June 2017 (room data sheets; figures not in arch_edmEastglen2017): 2.1 Control Desk 15 sm (p. 36); 2.2 Cash Office 4 (p. 37); 2.3 Foreman's Office 8 (p. 38); 2.5 First Aid Room 6, 'sufficiently large enough for a gurney' (pp. 17, 40); 2.6 Administration Storage 20 (p. 41); 2.7 Multi-Purpose Room 139, 'Ideally 130 sm to 140 sm, if 90 sm or less too small to be sub-dividable' (pp. 18, 42); 2.10 Staff Break Room 19 with kitchenette (p. 45); 2.11 Laundry 6 (p. 46); 3.1 Universal Change with Shower/WC 6 (p. 47); 3.8 Staff Universal Change and Lockers 20 (p. 54); circulation 'By allowance 12-15% plus allocation for lobby' (p. 20), 'in the order of 15%' (p. 23); 'building mechanical should be 5-7% of gross building area' (p. 21) vs '5% of total assigned area' (p. 23); electrical room 'Size: Per code' (p. 21); new program net-to-gross '1:1.45' (p. 4) — https://www.gov.edmonton.ab.ca/activities_parks_recreation/documents/PDF/Eastglen_Program_Final_Report_June_2017.pdf ‖ CHECK 2 (2 Nov 2026, ok): all figures and pages confirmed"
+ },
+ "arch_sup_edmMillWoodsFP2013": {
+  "where_read": "WebFetch of the URL (to 100,000 of 111,480 characters)",
+  "claims": [
+   {
+    "claim": "RPG for City of Edmonton, 3 Oct 2013",
+    "verdict": "CONFIRMED",
+    "evidence": "'2013 October 3'; cover names no client, disclaimer page names the City of Edmonton",
+    "fix": ""
+   },
+   {
+    "claim": "Table 2 p. 1-8 factors 1.10 arena to 1.35 admin",
+    "verdict": "CONFIRMED",
+    "evidence": "'Arena 5,163.5 1.10 5,680'; 'Community Services Administrative & Staff Support Space 115.5 1.35 155'",
+    "fix": ""
+   },
+   {
+    "claim": "661.5 x 1.20 = 795; 613.5 x 1.20 = 735; 427.0 x 1.15 = 490; 242.0 x 1.15 = 280",
+    "verdict": "CONFIRMED",
+    "evidence": "rows as printed (products 793.8, 736.2, 491.1, 278.3 rounded to nearest 5 by RPG)",
+    "fix": ""
+   },
+   {
+    "claim": "new construction grossing 18%",
+    "verdict": "CONFIRMED",
+    "evidence": "'Grossing Area - New Construction Only (at 18%)'",
+    "fix": ""
+   },
+   {
+    "claim": "support corridors 1800 mm p. 3-10",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted",
+    "fix": ""
+   },
+   {
+    "claim": "NAR 1800 x 2400 p. 3-18",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT (functional program): Mill Woods Recreation Centre Functional Program, Resource Planning Group Inc. for the City of Edmonton, 3 Oct 2013: Table 2 (p. 1-8) component grossing factors 1.10 (arena) to 1.35 (Community Services Administration); Entrance/Lobby/Service Desk/Food Services 661.5 NSM x 1.20 = 795 CGSM; Multipurpose/Meeting/Partner 613.5 NSM x 1.20 = 735; Dry change/lockers 427.0 x 1.15 = 490; Maintenance/Janitorial/Back-of-House 242.0 x 1.15 = 280; new construction additional grossing allowance 18%; support corridors at least 1800 mm (p. 3-10); network access rooms min 1800 x 2400 mm (p. 3-18). Room-level Section 4 not read (text read to ~100,000 of 111,480 characters) — https://www.gov.edmonton.ab.ca/sites/default/files/public-files/documents/MillWoods_Recreation_Centre_Functional_Program.pdf ‖ CHECK 2 (2 Nov 2026, ok): all figures confirmed; CGSM values are RPG roundings"
+ },
+ "_reused_rows": {
+  "where_read": "local nbc.txt, vbbl2025_v1.txt; WebFetch for vch.ca UPCC, vancouver.ca kitchen DG, Edmonton extreme weather, Park Board memo, Alberta GFNA, Eastglen. AHS reception centres, VCH cooling spaces and Health Canada cleaner-air pages refused by fetch tool (not in provenance set; not circumvented)",
+  "claims": [
+   {
+    "claim": "arch_per_nbcWC: Table B 1-25 → 1, 26-50 → 2; VBBL ≤25",
+    "verdict": "CONFIRMED",
+    "evidence": "nbc.txt Table 3.7.2.2.-B; vbbl l. 13680",
+    "fix": ""
+   },
+   {
+    "claim": "arch_pub_nbc31171: dining 1.20, dormitories 4.60",
+    "verdict": "CONFIRMED",
+    "evidence": "nbc.txt Table 3.1.17.1",
+    "fix": ""
+   },
+   {
+    "claim": "arch_edmEastglen2017: '1:1.3 to 1:1.5' and 'in the order of 15%' p. 23",
+    "verdict": "CONFIRMED",
+    "evidence": "WebFetch p. 23",
+    "fix": ""
+   },
+   {
+    "claim": "arch_edmExtremeWeather: 50 people (Extreme Cold)",
+    "verdict": "CONFIRMED",
+    "evidence": "'up to 50 temporary overnight emergency shelter spaces'; no m2",
+    "fix": ""
+   },
+   {
+    "claim": "arch_pub_vanWarm2021: 16 guests; two staff plus one guard",
+    "verdict": "CONFIRMED",
+    "evidence": "'up to sixteen guests'; 'a minimum of two Community Services staff plus one security guard'",
+    "fix": ""
+   },
+   {
+    "claim": "arch_ref_vbblPart13: 13.4.4.1.(1)(a),(b),(c),(d),(j),(k)",
+    "verdict": "CONFIRMED",
+    "evidence": "vbbl2025_v1.txt l. 36796-36812",
+    "fix": ""
+   },
+   {
+    "claim": "arch_hsg_abGFNA2021: exam 12.0 p. 7; CHC 1.44 p. 12; Table 4 CHC 1.20-1.26, 1.14-1.18, 1.05-1.07",
+    "verdict": "CONFIRMED",
+    "evidence": "WebFetch p. 12-13",
+    "fix": ""
+   },
+   {
+    "claim": "arch_hsg_vchUpccNV: 604 m2, 13 exam, 1 treatment, 3 stretcher bays, 14 FTE",
+    "verdict": "CONFIRMED",
+    "evidence": "'approximately 604 square metres'; '14 full-time equivalent practitioners' (practitioners only, so lounge/locker counts omit other staff)",
+    "fix": ""
+   },
+   {
+    "claim": "arch_hsg_vanKitchenDG2018 rows 3.i, 3.iii-iv, 3.v, 3.vii, 3.x, 4.i",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted; 3.v 'securable area'; 3.x parkade 'for larger operations'",
+    "fix": ""
+   },
+   {
+    "claim": "arch_hsg_vanKitchenDG2018 3.viii 'Waste room'",
+    "verdict": "WRONG",
+    "evidence": "'adequate space for separated waste management streams' — a space/area, not a room",
+    "fix": "waste area"
+   },
+   {
+    "claim": "arch_ahsReceptionCentres: 3.5 m2, up to 9 m2 p. 4; 1 toilet per 20-25 p. 5; 2 L p. 4",
+    "verdict": "UNREACHABLE",
+    "evidence": "fetch refused (provenance); register text stands",
+    "fix": ""
+   },
+   {
+    "claim": "arch_vchCoolingSpaces: drinking water p. 5",
+    "verdict": "UNREACHABLE",
+    "evidence": "fetch refused (provenance)",
+    "fix": ""
+   },
+   {
+    "claim": "arch_hcCleanerAirSpaces: staging entry, MERV 13, CADR 2-3x, emergency power",
+    "verdict": "UNREACHABLE",
+    "evidence": "fetch refused (provenance)",
+    "fix": ""
+   },
+   {
+    "claim": "sup_care 2a omits a shower",
+    "verdict": "WRONG",
+    "evidence": "torRespite 9.3.2(a)(ii) 'A minimum of one (1) shower that is barrier-free ... in each 24-Hour Respite Site'",
+    "fix": "add shower 6 m2 (Eastglen 3.1 analogy): net 79.2, gross ≈103-119"
+   }
+  ]
+ },
+ "_our_arithmetic": {
+  "where_read": "recomputed",
+  "claims": [
+   {
+    "claim": "Refuge net 202.8; gross 264-304; +51 to +74%",
+    "verdict": "CONFIRMED",
+    "evidence": "202.8 x 1.3 = 263.6; x 1.5 = 304.2; /175 = 1.51, 1.74",
+    "fix": ""
+   },
+   {
+    "claim": "2a net 73.2; gross 95-110",
+    "verdict": "CONFIRMED",
+    "evidence": "73.2 x 1.3 = 95.2; x 1.5 = 109.8 (superseded by shower fix: 79.2 → 103-119)",
+    "fix": ""
+   },
+   {
+    "claim": "2b net 107.6; gross 140-161; 2.5-2.9x",
+    "verdict": "CONFIRMED",
+    "evidence": "139.9, 161.4; /56 = 2.50, 2.88",
+    "fix": ""
+   },
+   {
+    "claim": "Clinic net 288",
+    "verdict": "CONFIRMED",
+    "evidence": "156+15.5+33+12+10+11+13.5+7+23+5.6+1.4 = 288",
+    "fix": ""
+   },
+   {
+    "claim": "Clinic gross ≈497-523",
+    "verdict": "WRONG",
+    "evidence": "288 x 1.44 = 414.7; x 1.197 = 496.4, x 1.20 = 497.7; x 1.2626 = 523.6 — with rounded 1.20-1.26: 497.7-522.5",
+    "fix": "≈498-523"
+   },
+   {
+    "claim": "gap to 604 ≈80-107",
+    "verdict": "WRONG",
+    "evidence": "604 - 522.5 = 81.5; 604 - 497.7 = 106.3",
+    "fix": "≈81-106"
+   },
+   {
+    "claim": "38-40 m2 per exam room; 46.5",
+    "verdict": "CONFIRMED",
+    "evidence": "497.7/13 = 38.3; 522.5/13 = 40.2; 604/13 = 46.5",
+    "fix": ""
+   },
+   {
+    "claim": "Clinic washrooms ≈65 people, 33 per sex → 2 per sex + 1 = 5",
+    "verdict": "CONFIRMED",
+    "evidence": "604/9.30 = 64.9",
+    "fix": ""
+   },
+   {
+    "claim": "Kitchen 111.6; 14.4; net 137.6 / 142.2; gross 179-213",
+    "verdict": "CONFIRMED",
+    "evidence": "137.6 x 1.3 = 178.9; 142.2 x 1.5 = 213.3",
+    "fix": ""
+   },
+   {
+    "claim": "Kitchen Edmonton washrooms 1 M + 1 F with no universal",
+    "verdict": "WRONG",
+    "evidence": "NBC 3.8.2.8.(1) needs ≥1 universal washroom at each washroom location (refuge row adds one); kitchen row omits it — inconsistent (our reading)",
+    "fix": "flag in md; unchanged pending decision on whether a universal room can count as a sex-specific WC"
+   }
+  ]
+ }
+}

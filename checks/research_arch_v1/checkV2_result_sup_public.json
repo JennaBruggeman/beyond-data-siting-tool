@@ -1,0 +1,510 @@
+{
+ "arch_sup_aruplo2017": {
+  "where_read": "live PDF via WebFetch text extraction (fopl.ca), 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "title, 3rd ed., ARUPLO, revised 20 Sep 2017",
+    "verdict": "CONFIRMED",
+    "evidence": "'Guidelines For Rural/Urban Public Library Systems'; 'revised September 20, 2017'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 3.3.1 p. 6 Small 2,500-5,000 / Medium 5,000-10,000 / Large 10,000-35,000 sq ft",
+    "verdict": "CONFIRMED",
+    "evidence": "'2,500–5,000 5,000–10,000 10,000–35,000 35,000+'; contents '3.3.1 Facilities . . . 6'",
+    "fix": "running footer reads '3rd edition 7': cite p. 6 (contents) / 7 (footer)"
+   },
+   {
+    "claim": "s. 4.1.1 p. 11 '5 user spaces per 1,000 capita @ 35 sq. ft. per user space', work room 15%",
+    "verdict": "CONFIRMED",
+    "evidence": "quote exact; '15% of total library space'; contents '4.1.1 ... 11'",
+    "fix": "footer reads 12: cite p. 11 (contents) / 12 (footer)"
+   },
+   {
+    "claim": "App. B p. 14 all sample medium rows, subtotal 4,010-7,995, non-assignable 1,003-1,999, gross 5,013-9,994",
+    "verdict": "CONFIRMED",
+    "evidence": "all rows match; contents 'Appendix B – Sample Worksheet . . . 14'; PDF page 15",
+    "fix": "add PDF p. 15"
+   },
+   {
+    "claim": "non-assignable includes corridors ... mechanical",
+    "verdict": "CONFIRMED",
+    "evidence": "'Corridors, foyer, waiting areas, public washrooms, including universal;' list is in App. B only",
+    "fix": "md cites 'App. A p. 13' for the list: App. A only has the 25% row"
+   },
+   {
+    "claim": "App. A small-branch column alignment unclear (?)",
+    "verdict": "WRONG",
+    "evidence": "now read: subtotal 1,855-4,115; 'Non-assignable space (25%)' 464-1,029; components total 2,319-5,144 (contents p. 13, footer 14)",
+    "fix": "replace '?' with figures"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Ontario association guideline, not a BC/AB rule (already labelled benchmark)",
+  "new_text": "DESIGN GUIDE (library administrators' association, Ontario; benchmark outside BC/AB): Guidelines for Rural/Urban Public Library Systems, 3rd ed., Administrators of Rural and Urban Public Libraries of Ontario (ARUPLO), revised 20 Sep 2017: s. 3.3.1 p. 6 (contents; page footer 7) net branch space Small 2,500-5,000 sq ft, Medium 5,000-10,000, Large 10,000-35,000; s. 4.1.1 p. 11 (contents; footer 12) '5 user spaces per 1,000 capita @ 35 sq. ft. per user space', staff work room 15% of total; App. B p. 14 (contents; PDF p. 15) sample medium branch: collections 1,200-2,400 + 370-740, local history 100-200, user seating 1,050-2,100, program room '30 @ 15 s.f. per user' 450-750, study 165-330, maker 300, service desk 250-350, work room 300-600, staff lunchroom and lockers 100-200, staff washroom 25; subtotal 4,010-7,995; 'Non-assignable space (25%)' 1,003-1,999; gross 5,013-9,994 sq ft; non-assignable includes 'Corridors, foyer, waiting areas, public washrooms, including universal; Loading areas, garbage, recycling, custodian, storage, closets; Wall thicknesses, building services, chases, mechanical' (list in App. B only); App. A p. 13 (contents; footer 14) small branch: subtotal 1,855-4,115, 'Non-assignable space (25%)' 464-1,029, total 2,319-5,144 — https://fopl.ca/wp-content/uploads/2018/01/ARUPLO-Guidelines-3rd-edition.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all figures confirmed; contents vs footer page numbers both given; App. A small-branch figures read)"
+ },
+ "arch_sup_edmEastglenRooms": {
+  "where_read": "live PDF via WebFetch text extraction (gov.edmonton.ab.ca), pages by running header, chars 0-100,000 of 106,349",
+  "claims": [
+   {
+    "claim": "room sheets 2.1-2.11, 3.1, 3.8 areas, occupants, heights, pages",
+    "verdict": "CONFIRMED",
+    "evidence": "'15sm' p. 36; '4sm' 37; '8sm' 38; '6sm' 40; '20sm' 41; '139sm' 'Nominal 30 ... maximum of 80' 'Clear span, 3.3-3.6m clear height' 42; '20sm' 43; '186sm' 'Over-height (min. 3.3 metres)' 44; '19sm' 'Nominally 2, maximum 4' 45; '6 sm' 46; '6 SM' 47; '20sm' 54",
+    "fix": ""
+   },
+   {
+    "claim": "circulation 12-15% (p. 20), 'in the order of 15%' (p. 23)",
+    "verdict": "CONFIRMED",
+    "evidence": "'By allowance 12-15% plus allocation for lobby' p. 20; p. 23",
+    "fix": ""
+   },
+   {
+    "claim": "electrical/IT 'Size: Per code' p. 21; mechanical 5-7% of gross p. 21 vs 5% of assigned p. 23",
+    "verdict": "CONFIRMED",
+    "evidence": "both quotes found; internal conflict real",
+    "fix": ""
+   },
+   {
+    "claim": "washrooms 5-6 female, 3 male WCs (p. 20)",
+    "verdict": "CONFIRMED",
+    "evidence": "'A minimum of 5 water closets or ideally 6 WCs will be required for females and 3 water closets for males'",
+    "fix": ""
+   },
+   {
+    "claim": "grossing adds circulation and lobby, washrooms, mechanical, electrical (p. 23)",
+    "verdict": "CONFIRMED",
+    "evidence": "'grossing factors are added for circulation and lobby, washrooms,' then mechanical, electrical, pool mechanical, walls/structure",
+    "fix": ""
+   },
+   {
+    "claim": "program at 1:1.45 (p. 5)",
+    "verdict": "WRONG",
+    "evidence": "'a more efficient 1:1.45 or 69% assignable-to-gross area ratio' after page 4 header; p. 9 '1:1.3 to 1:1.45'",
+    "fix": "p. 4"
+   },
+   {
+    "claim": "Fig. 5 summary is an image (not read)",
+    "verdict": "CONFIRMED",
+    "evidence": "Fig. 5 'Functional Space Program' p. 24: caption only in text",
+    "fix": "add p. 24"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT (functional program; same document as arch_edmEastglen2017, room data sheets): Eastglen Leisure Centre Program Final Report, City of Edmonton, June 2017: 2.1 Control Desk 15 sm, 1-2 persons (p. 36); 2.2 Cash Office 4 (p. 37); 2.3 Foreman's Office 8 (p. 38); 2.5 First Aid Room 6 (p. 40); 2.6 Administration Storage 20 (p. 41); 2.7 Multi-Purpose Room 139 sm, 'Nominal 30 (for exercise classes) to maximum of 80 for assemblies', 'Clear span, 3.3-3.6m clear height' (p. 42); 2.8 Lifeguard/Program Office 20 (p. 43); 2.9 Fitness Centre 186 sm, 'Nominally 4-6 users, maximum 20 or 25 concurrent users', 'Over-height (min. 3.3 metres)' (p. 44); 2.10 Staff Break Room 19, 'Nominally 2, maximum 4' (p. 45); 2.11 Laundry 6 (p. 46); 3.1 Universal Change with Shower/WC 6 SM (p. 47); 3.8 Staff Universal Change and Lockers 20 (p. 54); circulation 'By allowance 12-15% plus allocation for lobby' (p. 20), 'in the order of 15%' (p. 23); electrical and IT/AV rooms 'Size: Per code' (p. 21); 'building mechanical should be 5-7% of gross building area' (p. 21) vs '5% of total assigned area' (p. 23); washrooms 'A minimum of 5 water closets or ideally 6 WCs will be required for females and 3 water closets for males' (p. 20); grossing adds 'circulation and lobby, washrooms, mechanical and electrical space' (p. 23); program at 1:1.45, '69% assignable-to-gross' (p. 4); Fig. 5 'Functional Space Program' summary (p. 24) is an image (not read ?) — https://www.gov.edmonton.ab.ca/activities_parks_recreation/documents/PDF/Eastglen_Program_Final_Report_June_2017.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all room sheets confirmed; 1:1.45 is on p. 4, not p. 5)"
+ },
+ "arch_sup_edmMillWoods2013": {
+  "where_read": "live PDF via WebFetch text extraction (gov.edmonton.ab.ca), chars 0-100,000 of 111,480",
+  "claims": [
+   {
+    "claim": "title, Resource Planning Group Inc., 3 Oct 2013",
+    "verdict": "CONFIRMED",
+    "evidence": "'2013 October 3'",
+    "fix": ""
+   },
+   {
+    "claim": "Table 2 p. 1-8 all eight rows NSM/factor/CGSM; total 11,951.5 / 13,835",
+    "verdict": "CONFIRMED",
+    "evidence": "all rows match; sums re-added: NSM 11,951.5, CGSM 13,835",
+    "fix": ""
+   },
+   {
+    "claim": "18% new-build grossing 825; total 14,660 excl. existing",
+    "verdict": "CONFIRMED",
+    "evidence": "'Total Building Area (excludes Grossing Areas for Existing Facilities)'; 13,835 + 825 = 14,660",
+    "fix": ""
+   },
+   {
+    "claim": "p. 3-10 corridors min 1800 mm; p. 3-18 electrical rooms",
+    "verdict": "CONFIRMED",
+    "evidence": "'Corridors in support areas should be a minimum of 1800mm in width'; 'dedicated electrical rooms should be provided'",
+    "fix": ""
+   },
+   {
+    "claim": "md: Mill Woods component factors 1.15-1.35, compounded 1.36-1.59",
+    "verdict": "WRONG",
+    "evidence": "Table 2 includes Arena 1.10 and Aquatics 1.30",
+    "fix": "component 1.10-1.35; 1.10 x 1.18 = 1.30 to 1.35 x 1.18 = 1.59"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT (consultant functional program): Mill Woods Recreation Centre Detailed Functional Program, Resource Planning Group Inc. for the City of Edmonton, 3 Oct 2013: Table 2 p. 1-8 (NSM / factor / CGSM): Entrance/Lobby, Public Service Desk & Food Services 661.5 / 1.20 / 795; Multipurpose Rooms, Meeting Rooms & Partner/Tenant Space 613.5 / 1.20 / 735; Fitness Centre, Gymnasium and Fitness Studios 2,958.5 / 1.15 / 3,400; Dry Change and Locker Rooms 427.0 / 1.15 / 490; Aquatics 1,770.0 / 1.30 / 2,300; Arena 5,163.5 / 1.10 / 5,680; Administrative & Staff Support 115.5 / 1.35 / 155; Maintenance, Janitorial & Back-of-House 242.0 / 1.15 / 280; total 11,951.5 / 13,835; 'Grossing Area - New Construction Only (at 18%)' 825; Total Building Area 14,660 ('excludes Grossing Areas for Existing Facilities'); p. 3-10 support corridors 'minimum of 1800mm'; p. 3-18 'dedicated electrical rooms should be provided' (no m2); room-level sheets (s. 4) beyond readable text ? — https://www.gov.edmonton.ab.ca/sites/default/files/public-files/documents/MillWoods_Recreation_Centre_Functional_Program.pdf ‖ CHECK 2 (2 Nov 2026, ok): all Table 2 rows and sums confirmed; component factors span 1.10-1.35)"
+ },
+ "arch_sup_calgaryRecFP2012": {
+  "where_read": "live PDF via WebFetch text extraction (calgary.ca), chars 0-100,000 of 122,209",
+  "claims": [
+   {
+    "claim": "title, GEC Architecture, 19 Jun 2012",
+    "verdict": "CONFIRMED",
+    "evidence": "cover 'June 19, 2012'; 'Prepared by GEC Architecture'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 14 grossing definition; partitions, internal/external structure, shafts; 'subject to change'",
+    "verdict": "CONFIRMED",
+    "evidence": "'includes constituents of gross such as partitions, internal structure, external structure, shafts' (+ vertical and horizontal circulation)",
+    "fix": ""
+   },
+   {
+    "claim": "p. 15 facility factors Seton 1.18 (25,831/30,578), Quarry Park 1.12, Great Plains 1.16 (6,781/7,891), Rocky Ridge 1.19, all 1.18",
+    "verdict": "CONFIRMED",
+    "evidence": "'TOTAL NET AND GROSS FLOOR AREA ... 64,177 1.18 75,415'",
+    "fix": "note future-phase variants (GP 1.15, RR 1.13)"
+   },
+   {
+    "claim": "p. 21 Great Plains rows 8.0, 14.0, 15.0, 16.0 (158), 17.0",
+    "verdict": "CONFIRMED",
+    "evidence": "131/1.20/157; 65/1.20/78; 55/1.40/77; 158; 687/1.11/759",
+    "fix": ""
+   },
+   {
+    "claim": "17.0 contains washrooms, security, first aid, mechanical, electrical",
+    "verdict": "CONFIRMED",
+    "evidence": "'Public WCs, Security, First Aid, Interfaith, Mechanical, Electrical, Garbage/ Recycling, Janitor, Bike Storage'",
+    "fix": "list is longer: add interfaith, garbage/recycling, janitor, bike storage"
+   },
+   {
+    "claim": "p. 23 Rocky Ridge climbing wall 50/1.20/60; fitness 1.17 Seton/RR, 1.14 QP; multipurpose 1.20; admin 1.38-1.40",
+    "verdict": "CONFIRMED",
+    "evidence": "as stated; fitness pp. 17, 19, 23",
+    "fix": ""
+   },
+   {
+    "claim": "md: Calgary component factors 1.05-1.40 (table) / 1.10-1.40 (headline)",
+    "verdict": "WRONG",
+    "evidence": "Theatre 1.45 (Seton p. 17, RR p. 23); QP Support Spaces 0.98 (p. 19); parking 1.00",
+    "fix": "component range 0.98-1.45 (most 1.05-1.20)"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT (consultant report): The City of Calgary Recreation Facilities: Functional Program and Concept Design Report, GEC Architecture for The City of Calgary, 19 Jun 2012: p. 14 'A grossing factor is applied to the net assignable area to determine the component gross area'; gross includes 'partitions, internal structure, external structure, shafts'; p. 15 facility factors Seton 1.18 (25,831 to 30,578 m2), Quarry Park 1.12, Great Plains 1.16 (6,781 to 7,891), Rocky Ridge 1.19, all four 1.18 (64,177 to 75,415); p. 21 Great Plains: 8.0 Multipurpose Rooms 131 / 1.20 / 157; 14.0 Dry Common Change Rooms (50 lockers) 65 / 1.20 / 78; 15.0 Administrative (3 FTE) 55 / 1.40 / 77; 16.0 programmable circulation 3% of GFA (158); 17.0 Support Spaces ('Public WCs, Security, First Aid, Interfaith, Mechanical, Electrical, Garbage/ Recycling, Janitor, Bike Storage') 687 / 1.11 / 759; p. 23 Rocky Ridge '6.0 CLIMBING WALL' 50 / 1.20 / 60; fitness centre 1.17 (Seton, Rocky Ridge), 1.14 (Quarry Park); multipurpose 1.20; administrative 1.38-1.40; all component factors 0.98 (Quarry Park support, p. 19) to 1.45 (theatre, pp. 17, 23); p. 14 areas 'subject to change' (read via text extractor; table layout not checked against PDF ?) — https://www.calgary.ca/CSPS/Recreation/Documents/Research-and-development/Functional-Program-and-Concept-Design-Report.pdf ‖ CHECK 2 (2 Nov 2026, fixed): figures confirmed; support list completed; full component range 0.98-1.45 added)"
+ },
+ "arch_sup_nbcT3722A": {
+  "where_read": "local data/raw/codes/nbc.txt l. 18839-18900, 19700-19760, 19795-19840; bcbc2024.txt l. 19304-19356; nbc_ab2023.txt l. 17568-17599; vbbl2025_v1.txt l. 13679-13708",
+  "claims": [
+   {
+    "claim": "Table 3.7.2.2.-A all rows and over-400 rule, p. 3-170",
+    "verdict": "CONFIRMED",
+    "evidence": "rows 1-25 1/1 ... 351-400 6/12; '7, plus 1 for each additional increment of 200 males'; '13, plus 1 ... 100 females'; table before footer '3-170'",
+    "fix": ""
+   },
+   {
+    "claim": "identical in BCBC, NBC(AE), VBBL",
+    "verdict": "CONFIRMED",
+    "evidence": "same rows in all three files",
+    "fix": ""
+   },
+   {
+    "claim": "3.7.2.2.(2) one shared WC if load not more than 10",
+    "verdict": "CONFIRMED",
+    "evidence": "NBC, BCBC, NBC(AE) 'not more than 10'",
+    "fix": "VBBL 3.7.2.2.(2) reads 'not more than 25': add"
+   },
+   {
+    "claim": "3.7.2.2.(3) urinals two thirds",
+    "verdict": "CONFIRMED",
+    "evidence": "'Urinals are permitted to be substituted for two thirds of the number of water closets required ... for males'",
+    "fix": ""
+   },
+   {
+    "claim": "3.8.2.8.(1), (13), (15) pp. 3-175 to 3-176",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least one universal washroom'; 'at least one universal dressing and shower room'; '(15) ... occupant load of more than 500 ... accessible change space'",
+    "fix": ""
+   },
+   {
+    "claim": "3.8.3.13.(1)(j) 1 700 mm; (2) 810 x 1 830 plus 900 x 1 350, pp. 3-183 to 3-184",
+    "verdict": "CONFIRMED",
+    "evidence": "'not less than 1 700 mm in diameter'; 'clear floor space ... 810 mm wide by 1 830 mm long'; 'clear transfer space of 900 mm by 1 350 mm'",
+    "fix": ""
+   },
+   {
+    "claim": "md 1b: 80 designed persons governs WCs",
+    "verdict": "NOT FOUND",
+    "evidence": "3.1.17.1.(1)(c) designed number 'but not less than that determined from Table 3.1.17.1. ... unless it can be shown that the area will be occupied by fewer persons'; (4) multi-use room uses 'the value which gives the greatest number of persons'",
+    "fix": "our reading: the 185-person (0.75) count likely governs a room used for assemblies; keep 80 only with a posted sign and proof of fewer persons"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: NBC 2020 Div. B (local text data/raw/codes/nbc.txt; Table 3.7.2.2.-A identical in bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt): 3.7.2.2.(4) assembly WCs per Table 3.7.2.2.-A, persons of each sex (male / female): 1-25 1/1; 26-50 1/2; 51-75 2/3; 76-100 2/4; 101-125 3/5; 126-150 3/6; 151-175 4/7; 176-200 4/8; 201-250 5/9; 251-300 5/10; 301-350 6/11; 351-400 6/12; over 400 7 + 1 per 200 males / 13 + 1 per 100 females (p. 3-170); 3.7.2.2.(2) one shared WC if occupant load not more than 10 (VBBL: 'not more than 25'); 3.7.2.2.(3) urinals for two thirds of male WCs; 3.8.2.8.(1) 'at least one universal washroom' at each washroom location on a barrier-free storey; (13) public showers need 'at least one universal dressing and shower room'; (15) Group A, B-2 or E with occupant load over 500: universal washroom with accessible change space (p. 3-175 to 3-176); 3.8.3.13.(1)(j) wheelchair turning 'not less than 1 700 mm in diameter'; (2) adult change table clear floor 810 x 1 830 mm plus transfer 900 x 1 350 mm (p. 3-183 to 3-184); 3.1.17.1.(1)(c) a designed load may not be less than Table 3.1.17.1 'unless it can be shown that the area will be occupied by fewer persons', and (4) a room used for different occupancies takes the value giving the greatest number; no m2 for a universal washroom in the code — data/raw/codes/nbc.txt ‖ CHECK 2 (2 Nov 2026, fixed): all clauses confirmed in local NBC/BCBC/NBC(AE)/VBBL text; VBBL 3.7.2.2.(2) and 3.1.17.1.(1)(c),(4) added)"
+ },
+ "arch_sup_vanWashroomTG2024": {
+  "where_read": "live PDF via WebFetch text extraction (guidelines.vancouver.ca)",
+  "claims": [
+   {
+    "claim": "title, REFM Facility Planning and Development, Jul 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "cover 'PUBLIC WASHROOM DESIGN & TECHNICAL GUIDELINES'; 'July 2024'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 3.3 p. 10 2500 x 2500 min, 3150 x 3150 preferred, 2130 x 2130 renovations only",
+    "verdict": "CONFIRMED",
+    "evidence": "'Dimensions may be reduced to 2130 x 2130 mm only when necessary, in renovating or upgrading existing facilities.'",
+    "fix": ""
+   },
+   {
+    "claim": "accessible stall 1600 x 1500, 1700 x 1700 in front",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least 1600 × 1500 mm' p. 10; '1700 x 1700 mm clear space in front' (pp. 10-11)",
+    "fix": ""
+   },
+   {
+    "claim": "s. 4.9 p. 17 janitor room; p. 9 service spaces; no stall counts",
+    "verdict": "CONFIRMED",
+    "evidence": "'Provide a separate lockable janitor room with floor sink'; 'This requirement may vary based on the facility'; no total stall counts (baby change table in each multi-stall, universal, unisex washroom p. 31)",
+    "fix": "add 'may vary by facility'"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "applies to City of Vancouver-delivered facilities; a private data-centre building is outside its scope (already labelled)",
+  "new_text": "GOVERNMENT GUIDE (City-delivered facilities): Public Washroom Design & Technical Guidelines, City of Vancouver, Real Estate, Environment and Facilities Management (Facility Planning and Development), Jul 2024: s. 3.3 p. 10 'A minimum of one universal washroom with 2500 x 2500 mm internal clear space is to be provided'; 'Increase the clear space to 3150 x 3150 mm whenever possible'; 'Dimensions may be reduced to 2130 x 2130 mm only when necessary, in renovating or upgrading existing facilities'; accessible stall 'at least 1600 x 1500 mm' with '1700 x 1700 mm clear space in front'; s. 4.9 p. 17 'a separate lockable janitor room with floor sink' (no m2; 'may vary based on the facility'); 'Service spaces shall be adequately sized for the particular need of each facility' (p. 9); no stall counts by use — https://guidelines.vancouver.ca/guidelines-technical-public-washroom-design.pdf ‖ CHECK 2 (2 Nov 2026, ok): all quotes and pages confirmed)"
+ },
+ "arch_sup_bchFastCharge2024": {
+  "where_read": "live PDF via WebFetch text extraction (bchydro.com), pages by running header 'EV Fast Charging Design & Operational Guidelines | N' (checked against contents), chars 0-100,000 of 109,723",
+  "claims": [
+   {
+    "claim": "title, v1.2, CS-4203, Feb 2024",
+    "verdict": "CONFIRMED",
+    "evidence": "'Version 1.2'; 'CS-4203'; 'Published: February 2024'",
+    "fix": ""
+   },
+   {
+    "claim": "BC Hydro with Powertech Labs",
+    "verdict": "NOT FOUND",
+    "evidence": "cover 'Prepared by:' / 'In consultation with:' names not in text; disclaimer 'Neither British Columbia Hydro and Power Authority nor Powertech Labs Inc.'; Powertech in drawing title blocks pp. 49, 51",
+    "fix": "say 'BC Hydro (Powertech Labs named in disclaimer and drawings)'"
+   },
+   {
+    "claim": "p. 14 '1.5 stalls per charger' and 'Are public washrooms close by?'",
+    "verdict": "WRONG",
+    "evidence": "both sit between headers '| 13' and '| 14'",
+    "fix": "p. 13"
+   },
+   {
+    "claim": "p. 16 four vehicles, bollards 1.2-1.7 m, 108 lux at 1.5 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'enough cables to charge at least four vehicles at the same time'; 'A distance of 1.2 metres (4 feet) to 1.7 metres (5.5 feet) between bollards'; 'Face of charger lighting 108 Lux measured out to a distance of 1.5 metres'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 20 accessible stall 3.7 m, weather protection, crane clearance; p. 27 pull-through",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least 3.7 metres (12 feet) wide'; 'clearance from the roof ... crane chargers'; 'a pull-through design is a great option'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 44 southern BC 8-10 spaces for 4-8 stalls, northern 3-6 for 2-4",
+    "verdict": "CONFIRMED",
+    "evidence": "'8–10 spaces for sites in southern B.C. (to fit 4–8 charging stalls)'",
+    "fix": "md hub of 6 stalls is below the 8-10 spaces for southern BC: flag"
+   },
+   {
+    "claim": "p. 49 pad 1200 x 1200 x 270; p. 51 kiosk 2200 x 1000 x 254; no transformer pad",
+    "verdict": "CONFIRMED",
+    "evidence": "quotes exact; p. 46 kiosk houses transformers, no pad size",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "UTILITY GUIDE (not a standard): EV Fast Charging Design & Operational Guidelines, v1.2, CS-4203, BC Hydro, Feb 2024 (Powertech Labs named in disclaimer and drawing title blocks; cover preparer names not in text ?): p. 13 'a minimum of 1.5 stalls per charger to accommodate charging equipment and accessibility requirements'; 'Are public washrooms close by?' (p. 13); p. 16 'enough cables to charge at least four vehicles at the same time'; bollards 1.2-1.7 m apart; face-of-charger lighting 108 lux at 1.5 m; p. 20 accessible stall 'at least 3.7 metres (12 feet) wide'; weather protection where possible, crane clearance; p. 27 pull-through for trucks/trailers; p. 44 checklist: southern BC 8-10 spaces for 4-8 charging stalls, northern 3-6 for 2-4; p. 49 DCFC precast pad 1200 x 1200 x 270 mm; p. 51 main switch kiosk pad 2200 x 1000 x 254 mm; no transformer pad area or total site m2 (?) — https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/power-smart/electric-vehicles/ev-fast-charging-design-operational-guidelines-2024-feb.pdf ‖ CHECK 2 (2 Nov 2026, fixed): figures confirmed; stalls and washroom quotes are p. 13, not 14; Powertech role not stated)"
+ },
+ "arch_sup_abUniversalWR2019": {
+  "where_read": "live PDF via WebFetch text extraction (alberta.ca)",
+  "claims": [
+   {
+    "claim": "title, v1.1, Alberta Infrastructure TSPB, Feb 2019",
+    "verdict": "CONFIRMED",
+    "evidence": "cover 'UNIVERSAL WASHROOM FACILITIES FOR ALBERTA INFRASTRUCTURE FACILITIES' 'February 2019 - Version 1.1'; p. 2 'Design Standards for Universal Washroom Facilities in Public Buildings'; footer 'Technical Services and Procurement Branch'",
+    "fix": "add cover title"
+   },
+   {
+    "claim": "options 1-4 pp. 7-10; 'Impact on floor area requirements are minimal' p. 10; baby change p. 5; no m2",
+    "verdict": "CONFIRMED",
+    "evidence": "quotes exact; plan views only",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "applies to Alberta Infrastructure (provincial) facilities",
+  "new_text": "GOVERNMENT GUIDE (checked, no dimensions): Guidelines for Inclusive Design: Universal Washroom Facilities for Alberta Infrastructure Facilities (cover; p. 2 subtitle 'Design Standards for Universal Washroom Facilities in Public Buildings'), v1.1, Alberta Infrastructure, Technical Services and Procurement Branch, Feb 2019: layout options 1-4 (pp. 7-10), 'Impact on floor area requirements are minimal' (p. 10); baby change tables 'Recommended in facilities, or in public areas (lobbies), which serve the public' (p. 5); no m2 or room dimensions — https://www.alberta.ca/system/files/custom_downloaded_images/tr-guide-universal-washroom.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all items confirmed; cover title added)"
+ },
+ "arch_sup_vanCCfp2025": {
+  "where_read": "live PDF via WebFetch (parkboardmeetings.vancouver.ca)",
+  "claims": [
+   {
+    "claim": "title, S. Jackson GM, 3 Jun 2025; 'base program' text; 'typically have similar sizes'; Q1 2026 anticipated; no sizes",
+    "verdict": "CONFIRMED",
+    "evidence": "'Q1 2026 (anticipated)' for 'Project Completion'; no figures",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT MEMO (checked, no sizes): Community Centre Strategy Implementation - High-Level Functional Program, Board Briefing Memo, S. Jackson, General Manager, Vancouver Board of Parks and Recreation, 3 Jun 2025: consultants to 'recommend a \"base program\" (spaces present in all community centres) complete with associated component sizes'; core components 'typically have similar sizes' (no figures); completion anticipated Q1 2026 (result not found ?) — https://parkboardmeetings.vancouver.ca/files/MEMO-CommunityCentreStrategyImplementation-HighLevelFunctionalProgram-2025-06-03.pdf ‖ CHECK 2 (2 Nov 2026, ok): all items confirmed)"
+ },
+ "_reused_rows": {
+  "where_read": "register/formula_register.json new_sources text (all Check 2/3 confirmed) plus live re-read where noted",
+  "claims": [
+   {
+    "claim": "arch_pub_nbc31171: 0.75 / 1.85 / 0.40; no gymnasia row",
+    "verdict": "CONFIRMED",
+    "evidence": "nbc.txt l. 10560-10600 table rows",
+    "fix": ""
+   },
+   {
+    "claim": "arch_pub_nbcA3121: libraries Group A-2",
+    "verdict": "CONFIRMED",
+    "evidence": "register: A-2 'Libraries'",
+    "fix": ""
+   },
+   {
+    "claim": "arch_vplFmpSpace2018 p. 5 ~10,000 sq ft",
+    "verdict": "CONFIRMED",
+    "evidence": "live: East Fraserlands 'approximately 10,000 sq. ft.' p. 5",
+    "fix": ""
+   },
+   {
+    "claim": "arch_edmEastglen2017 p. 23 1:1.3 to 1:1.5",
+    "verdict": "CONFIRMED",
+    "evidence": "live: '1:1.3 to 1:1.5 is within the range common for recreation facilities'",
+    "fix": ""
+   },
+   {
+    "claim": "arch_pub_vanS2 Class 1 <=200 m2",
+    "verdict": "CONFIRMED",
+    "evidence": "register: 'do not exceed 200 m2'",
+    "fix": ""
+   },
+   {
+    "claim": "arch_pub_en12572cat <=4.5 m",
+    "verdict": "CONFIRMED",
+    "evidence": "register: max 4,500 mm (catalogue paraphrase)",
+    "fix": ""
+   },
+   {
+    "claim": "arch_pub_vanPlayFac2018 p. 142 Trout Lake 4000 sf",
+    "verdict": "CONFIRMED",
+    "evidence": "live: 'even the largest, 4000sf at Trout Lake, is undersized'",
+    "fix": ""
+   },
+   {
+    "claim": "arch_pub_vanPlazaDG no size, s. 2-4",
+    "verdict": "CONFIRMED",
+    "evidence": "live: no minimum size",
+    "fix": ""
+   },
+   {
+    "claim": "arch_pub_vanStall 2.5 x 5.5, aisle 6.6",
+    "verdict": "CONFIRMED",
+    "evidence": "live Fig. 1 and s. 2.3",
+    "fix": ""
+   },
+   {
+    "claim": "arch_pub_nrcanEV2024 125 kW avg 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "register quote",
+    "fix": ""
+   },
+   {
+    "claim": "bchES54F 1 m / 3 m front / 1 m sides",
+    "verdict": "CONFIRMED",
+    "evidence": "register quote",
+    "fix": ""
+   },
+   {
+    "claim": "epcor_ccg s. 6.4(g) 'can be as high as 6.0m'",
+    "verdict": "CONFIRMED",
+    "evidence": "register quote",
+    "fix": ""
+   },
+   {
+    "claim": "cec2024, tsbcIBEL201605 1 m / 1.5 m at >=1200 A or >750 V",
+    "verdict": "CONFIRMED",
+    "evidence": "register: Rule 2-308, 2-310",
+    "fix": ""
+   },
+   {
+    "claim": "arch_per_nbcWC 3.7.2.1.(2) 'solely'; Note parking garages",
+    "verdict": "CONFIRMED",
+    "evidence": "register quote",
+    "fix": ""
+   },
+   {
+    "claim": "arch_hsg_abGFNA2021 1.20-1.26 x 1.14-1.18 x 1.05-1.07",
+    "verdict": "CONFIRMED",
+    "evidence": "register p. 13",
+    "fix": ""
+   }
+  ]
+ },
+ "_our_arithmetic": {
+  "where_read": "recomputed, 1 sq ft = 0.0929 m2",
+  "claims": [
+   {
+    "claim": "1a main space max 6,070 sq ft = 564 m2",
+    "verdict": "CONFIRMED",
+    "evidence": "3,340+2,100+330+300 = 6,070 x 0.0929 = 563.9",
+    "fix": ""
+   },
+   {
+    "claim": "1a main space lower column ≈268 m2",
+    "verdict": "WRONG",
+    "evidence": "1,670+1,050+165+300 = 3,185 sq ft x 0.0929 = 295.9 (268 omits maker space)",
+    "fix": "≈296 m2"
+   },
+   {
+    "claim": "1a gross 5,013-9,994 sq ft = 466-929 m2",
+    "verdict": "WRONG",
+    "evidence": "9,994 x 0.0929 = 928.4",
+    "fix": "466-928 m2"
+   },
+   {
+    "claim": "1a other conversions (42-70, 23-33, 28-56, 9-19, 2.3, 373-743, 3.3)",
+    "verdict": "CONFIRMED",
+    "evidence": "all within rounding",
+    "fix": ""
+   },
+   {
+    "claim": "1a occupant load ≈136 → 68/sex → 2 M, 3 F",
+    "verdict": "CONFIRMED",
+    "evidence": "2,100 sq ft = 195 m2 / 1.85 = 105.5 + 30 = 135.5",
+    "fix": ""
+   },
+   {
+    "claim": "1b net 219; 80 → 1 M 2 F; 185 → 93/sex → 2 M 4 F; gross 285-329",
+    "verdict": "CONFIRMED",
+    "evidence": "219 x 1.3 = 284.7, x 1.5 = 328.5",
+    "fix": ""
+   },
+   {
+    "claim": "2 gym net 311, gross 404-467, 1.1-1.3 x catalogue, 13/sex → 1/1, 1.15 x 1.18 ≈ 1.36",
+    "verdict": "CONFIRMED",
+    "evidence": "311 x 1.3 = 404.3, x 1.5 = 466.5; 404/372 = 1.09, 467/372 = 1.26",
+    "fix": ""
+   },
+   {
+    "claim": "3 winter garden 100 m2: 133 → 67/sex → 2/3; 54 → 27/sex → 1/2",
+    "verdict": "CONFIRMED",
+    "evidence": "100/0.75 = 133.3; 100/1.85 = 54.1",
+    "fix": ""
+   },
+   {
+    "claim": "5 EV: 6 stalls, 22 m2/stall, +10.6, 5.8, 2.2, ≈150, 500 kW",
+    "verdict": "CONFIRMED",
+    "evidence": "2.5 x 8.8 = 22.0; 1.2 x 8.8 = 10.56; 132+10.6+5.8+2.2 = 150.6",
+    "fix": ""
+   },
+   {
+    "claim": "Mill Woods compounded 1.36-1.59",
+    "verdict": "WRONG",
+    "evidence": "min component 1.10 (arena)",
+    "fix": "1.30-1.59"
+   }
+  ]
+ }
+}

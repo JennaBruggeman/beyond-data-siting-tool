@@ -1,0 +1,637 @@
+{
+ "arch_sup_nbcAE7Pools": {
+  "where_read": "local data/raw/codes/nbc_ab2023.txt (Part 7 TOC, 7.2.1.1, 7.2.3.15, 7.2.3.39, 7.2.4.1-7.2.4.10, 7.2.9; Div. A definitions)",
+  "claims": [
+   {
+    "claim": "Part 7 'Public Swimming Pools', Section 7.2 pp. 7-1 to 7-14",
+    "verdict": "WRONG",
+    "evidence": "TOC: 'Part 7 Plumbing Services and Aquatic Facilities'; '7.2. Aquatic Facilities 7.2.1. General ... 7-2'",
+    "fix": "Part 7 Plumbing Services and Aquatic Facilities; Section 7.2 Aquatic Facilities pp. 7-2 to 7-14"
+   },
+   {
+    "claim": "7.2.3.15.(1)(a) deck 'not less than 1.8 m wide' around entire pool",
+    "verdict": "CONFIRMED",
+    "evidence": "'a) be provided around the entire swimming pool, solely for the use of bathers, not less than 1.8 m wide' (except 7.2.6.2.(7)-(9), 7.2.7.3.(19)-(20))",
+    "fix": ""
+   },
+   {
+    "claim": "7.2.3.39 chemical storage room, not near heating, no direct public access",
+    "verdict": "CONFIRMED",
+    "evidence": "'A storage room shall be provided for all operating chemicals.' 'shall not be near heating equipment nor have direct access to areas that are accessible to the public.'",
+    "fix": ""
+   },
+   {
+    "claim": "7.2.4.1.(1) 1 per 1.5 m2 pool, 1 per 1.0 m2 whirlpool, or circulation design load, whichever lesser",
+    "verdict": "CONFIRMED",
+    "evidence": "'one bather for each 1.5 m2 of swimming pool area or the maximum design bathing load for the water circulation system, whichever is lesser'",
+    "fix": ""
+   },
+   {
+    "claim": "7.2.4.2 50% male / 50% female",
+    "verdict": "CONFIRMED",
+    "evidence": "'designed on the basis of 50% male and 50% female, or as dictated from experience or proposed use'",
+    "fix": ""
+   },
+   {
+    "claim": "7.2.4.3.(1) 0.5 m2 each male and female dressing, p. 7-13",
+    "verdict": "CONFIRMED",
+    "evidence": "'Exclusive of washroom and shower areas, 0.5 m2 for each male and 0.5 m2 for each female is required for dressing room space on the basis of the bathing load.' before footer 'Division B 7-13'",
+    "fix": ""
+   },
+   {
+    "claim": "7.2.4.7.(2) one per 50 bathers, not less than 3 per dressing room",
+    "verdict": "CONFIRMED",
+    "evidence": "'one for each 50 bathers and not less than 3 showers per dressing room' (p. 7-14)",
+    "fix": ""
+   },
+   {
+    "claim": "7.2.4.8 WCs etc. based on bathing load per 3.7.2.2 and 3.7.2.3",
+    "verdict": "CONFIRMED",
+    "evidence": "'shall be based on the bathing load and determined in accordance with Articles 3.7.2.2. and 3.7.2.3.'",
+    "fix": ""
+   },
+   {
+    "claim": "7.2.4.10 non-bather fixtures outside dressing/wet areas per 3.7.2, p. 7-14",
+    "verdict": "CONFIRMED",
+    "evidence": "'shall be provided outside the dressing room and wet traffic areas and shall be in conformance with Subsection 3.7.2.' before footer '7-14'",
+    "fix": ""
+   },
+   {
+    "claim": "(missed) scope and whirlpool definition",
+    "verdict": "CONFIRMED",
+    "evidence": "7.2.1.1: 'this Section applies to a) public swimming pools and semi-public swimming pools ... d) steam rooms and sauna rooms'; Whirlpool: 'above 30°C ... uses hydrojet circulation or air induction bubbles, or both'",
+    "fix": "added; settles therapy-pool rate (a) unless jetted"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Alberta only; BC pools follow the BC guideline. Hot-pool rate 1 per 1.0 m2 applies only to a jetted pool (whirlpool definition).",
+  "new_text": "RULE: National Building Code - 2023 Alberta Edition, Div. B Part 7 Plumbing Services and Aquatic Facilities (local text data/raw/codes/nbc_ab2023.txt, Section 7.2 Aquatic Facilities, pp. 7-2 to 7-14): 7.2.3.15.(1)(a) deck 'not less than 1.8 m wide' around the entire pool; 7.2.3.39 'A storage room shall be provided for all operating chemicals', 'not be near heating equipment nor have direct access to areas that are accessible to the public'; 7.2.4.1.(1) bathing load 'one bather for each 1.5 m2 of swimming pool area' (pool), 'one bather for each 1.0 m2' (whirlpool), or the circulation design load, whichever is lesser; 7.2.4.2 design on '50% male and 50% female'; 7.2.4.3.(1) 'Exclusive of washroom and shower areas, 0.5 m2 for each male and 0.5 m2 for each female is required for dressing room space on the basis of the bathing load' (p. 7-13); 7.2.4.7.(2) 'one for each 50 bathers and not less than 3 showers per dressing room'; 7.2.4.8 WCs, lavatories, urinals 'based on the bathing load' per 3.7.2.2 and 3.7.2.3; 7.2.4.10 non-bather fixtures 'outside the dressing room and wet traffic areas' per 3.7.2 (p. 7-14); 7.2.1.1 Section applies to 'public swimming pools and semi-public swimming pools', water theme parks, spray parks and 'steam rooms and sauna rooms'; Div. A: 'Whirlpool' is a pool 'above 30°C' that 'uses hydrojet circulation or air induction bubbles, or both' (a therapy pool without jets is a 'Special purpose swimming pool', rate (a)); 7.2.9 steam and sauna rooms: finishes, outward-swinging doors, viewing panel, staff-only thermostat, no sizes (p. 7-19) — https://open.alberta.ca (NBC(AE) 2023; local copy in repo) ‖ CHECK 2 (2 Nov 2026, fixed): Part 7 title is 'Plumbing Services and Aquatic Facilities', Section 7.2 runs pp. 7-2 to 7-14; all quoted clauses confirmed; 7.2.1.1 scope, whirlpool definition and 7.2.9 added"
+ },
+ "arch_sup_nbc372": {
+  "where_read": "local nbc.txt pp. 3-169 to 3-171; bcbc2024.txt pp. 3-265 to 3-267",
+  "claims": [
+   {
+    "claim": "3.7.2.1.(1) occupant load per 3.1.17",
+    "verdict": "CONFIRMED",
+    "evidence": "'the occupant load shall be determined in accordance with Subsection 3.1.17.'",
+    "fix": ""
+   },
+   {
+    "claim": "3.7.2.2.(1) equal split unless known",
+    "verdict": "CONFIRMED",
+    "evidence": "'assuming that the occupant load is equally divided between males and females, unless ...'",
+    "fix": ""
+   },
+   {
+    "claim": "3.7.2.2.(2) single WC if not more than 10",
+    "verdict": "CONFIRMED",
+    "evidence": "'if the occupant load in an occupancy referred to in Sentence (4), (8), (10), (11), (12) or (14) is not more than 10'",
+    "fix": "add occupancy limits"
+   },
+   {
+    "claim": "3.7.2.2.(3) urinals for two thirds of male WCs",
+    "verdict": "CONFIRMED",
+    "evidence": "'except that if only 2 water closets are required for males, one urinal is permitted to be substituted for one of the water closets'",
+    "fix": "add exception"
+   },
+   {
+    "claim": "Table 3.7.2.2.-A all rows",
+    "verdict": "CONFIRMED",
+    "evidence": "rows 1-25 1/1 ... 351-400 6/12; 'Over 400 7, plus 1 ... 200 males ... 13, plus 1 ... 100 females'",
+    "fix": ""
+   },
+   {
+    "claim": "(8) care/residential 1 per 10 per sex",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least one for each 10 persons of each sex'",
+    "fix": ""
+   },
+   {
+    "claim": "Table -B 1-25 1, 26-50 2, over 50 3 + 1/50",
+    "verdict": "CONFIRMED",
+    "evidence": "'Over 50 3, plus 1 for each additional increment of 50'",
+    "fix": ""
+   },
+   {
+    "claim": "(11) mercantile 1/300 males, 1/150 females",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least one for each 300 males and one for each 150 females'",
+    "fix": ""
+   },
+   {
+    "claim": "Table -C industrial rows",
+    "verdict": "CONFIRMED",
+    "evidence": "'1 - 10 1 ... Over 100 6, plus 1 for each additional increment of 30'",
+    "fix": ""
+   },
+   {
+    "claim": "3.7.2.3.(1) lavatories",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least one lavatory shall be provided in a room containing one or 2 water closets or urinals, and at least one additional lavatory ... for each additional 2'",
+    "fix": ""
+   },
+   {
+    "claim": "NBC pp. 3-169 to 3-171",
+    "verdict": "CONFIRMED",
+    "evidence": "footers 3-169, 3-170, 3-171 bracket the text",
+    "fix": ""
+   },
+   {
+    "claim": "BCBC same wording, Tables A, B pp. 3-265 to 3-266",
+    "verdict": "WRONG",
+    "evidence": "BCBC (1) before footer '3-265'; Table A before '3-266'; Table B after it (p. 3-267). Wording same except (5) adds 'daycare facilities for children'",
+    "fix": "pp. 3-265 to 3-267"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: National Building Code of Canada 2020, Div. B 3.7.2 Plumbing Facilities (local text data/raw/codes/nbc.txt, pp. 3-169 to 3-171; BCBC 2024 3.7.2.2 same wording and Tables A, B, pp. 3-265 to 3-267): 3.7.2.1.(1) occupant load per 3.1.17; 3.7.2.2.(1) equal split by sex unless known; (2) single WC for both sexes if occupant load 'not more than 10' (only occupancies in Sentences (4), (8), (10), (11), (12), (14)) (VBBL: 25, see arch_per_nbcWC); (3) urinals for two thirds of male WCs, but where only 2 male WCs are required, one urinal for one WC; Table 3.7.2.2.-A Assembly, per sex male/female: 1-25 1/1, 26-50 1/2, 51-75 2/3, 76-100 2/4, 101-125 3/5, 126-150 3/6, 151-175 4/7, 176-200 4/8, 201-250 5/9, 251-300 5/10, 301-350 6/11, 351-400 6/12, over 400 7 + 1 per 200 males / 13 + 1 per 100 females; (8) care/residential 1 per 10 persons per sex; Table 3.7.2.2.-B Business and personal services, per sex: 1-25 1, 26-50 2, over 50 3 + 1 per 50; (11) mercantile 1 per 300 males, 1 per 150 females; Table 3.7.2.2.-C Industrial, per sex: 1-10 1, 11-25 2, 26-50 3, 51-75 4, 76-100 5, over 100 6 + 1 per 30; 3.7.2.3.(1) one lavatory per room with 1 or 2 WCs/urinals, +1 per 2 more — https://nrc-publications.canada.ca (NBC 2020; local copy in repo) ‖ CHECK 2 (2 Nov 2026, fixed): all table values confirmed; (2) scope and (3) two-WC exception added; BCBC tables run to p. 3-267"
+ },
+ "arch_sup_nbcT31171": {
+  "where_read": "local nbc.txt 3.1.17.1 and Table 3.1.17.1 (pp. 3-43 to 3-44)",
+  "claims": [
+   {
+    "claim": "3.1.17.1.(1)(c) not less than Table unless shown fewer; (2) posted sign",
+    "verdict": "CONFIRMED",
+    "evidence": "'but not less than that determined from Table 3.1.17.1. ... unless it can be shown that the area will be occupied by fewer persons'; (2) 'a permanent sign indicating that occupant load shall be posted'",
+    "fix": ""
+   },
+   {
+    "claim": "values 0.75, 0.40, 1.20, 4.60, 9.30",
+    "verdict": "CONFIRMED",
+    "evidence": "'space with non-fixed seats 0.75', 'standing space 0.40', 'dining, beverage and cafeteria space 1.20', 'personal services shops 4.60', 'offices 9.30'",
+    "fix": ""
+   },
+   {
+    "claim": "'reading rooms or lounges 1.85'",
+    "verdict": "WRONG",
+    "evidence": "'reading or writing rooms or lounges 1.85'",
+    "fix": "reading or writing rooms or lounges"
+   },
+   {
+    "claim": "cleaning and repair goods 4.60, kitchens 9.30, storage 46.00",
+    "verdict": "CONFIRMED",
+    "evidence": "'Other uses cleaning and repair goods 4.60 kitchens 9.30 storage 46.00'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 3-43",
+    "verdict": "WRONG",
+    "evidence": "'Other uses' rows follow footer 'Division B 3-43' (Table continued)",
+    "fix": "pp. 3-43 to 3-44"
+   },
+   {
+    "claim": "no row for pools, aquarium galleries or spas",
+    "verdict": "CONFIRMED",
+    "evidence": "full table read; no such rows",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: National Building Code of Canada 2020, Div. B 3.1.17.1 and Table 3.1.17.1 Occupant Load (local text data/raw/codes/nbc.txt, pp. 3-43 to 3-44): occupant load = persons the area is designed for 'but not less than that determined from Table 3.1.17.1.' unless shown fewer, with a posted sign (3.1.17.1.(1)(c), (2)); m2 per person: space with non-fixed seats 0.75, standing space 0.40, dining 1.20, reading or writing rooms or lounges 1.85, personal services shops 4.60, offices 9.30, 'Other uses' (p. 3-44): cleaning and repair goods 4.60, kitchens 9.30, storage 46.00; no row for pools, aquarium galleries or spas — https://nrc-publications.canada.ca (NBC 2020; local copy in repo) ‖ CHECK 2 (2 Nov 2026, fixed): all values confirmed; row name is 'reading or writing rooms or lounges'; 'Other uses' rows are on p. 3-44"
+ },
+ "arch_sup_nbcUniversal": {
+  "where_read": "local nbc.txt 3.8.2.8, 3.8.3.13, 3.8.3.17, Note A-3.8.2.8.(13); bcbc2024.txt 3.8.3.13",
+  "claims": [
+   {
+    "claim": "3.8.2.8.(1) universal washroom at each washroom location",
+    "verdict": "CONFIRMED",
+    "evidence": "'at each location where washrooms are provided in a storey to which a barrier-free path of travel is required ... at least one universal washroom'",
+    "fix": ""
+   },
+   {
+    "claim": "(12) one barrier-free shower per group",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least one shower stall in each group of showers shall comply with Subsection 3.8.3.'",
+    "fix": ""
+   },
+   {
+    "claim": "(13) universal dressing and shower room",
+    "verdict": "CONFIRMED",
+    "evidence": "'where a showering facility is provided for use by the general public or customers, or as part of a common-use area for employees, at least one universal dressing and shower room'",
+    "fix": ""
+   },
+   {
+    "claim": "(15) change space, A, B-2 or E over 500",
+    "verdict": "CONFIRMED",
+    "evidence": "'Group A, Group B, Division 2 or Group E major occupancies where at least one ... has an occupant load of more than 500'",
+    "fix": ""
+   },
+   {
+    "claim": "3.8.3.13.(1)(j) 1 700 mm turning",
+    "verdict": "CONFIRMED",
+    "evidence": "'an open space not less than 1 700 mm in diameter'",
+    "fix": ""
+   },
+   {
+    "claim": "3.8.3.13.(2) 810 x 1 830 + 900 x 1 350",
+    "verdict": "CONFIRMED",
+    "evidence": "'810 mm wide by 1 830 mm long' ... 'clear transfer space of 900 mm by 1 350 mm'",
+    "fix": ""
+   },
+   {
+    "claim": "3.8.3.17.(1)(a),(b)",
+    "verdict": "CONFIRMED",
+    "evidence": "'not less than 1 500 mm wide and 900 mm deep'; 'clear floor space at the entrance ... not less than 900 mm deep'",
+    "fix": ""
+   },
+   {
+    "claim": "(missed) 3.8.3.17.(2) dressing-and-shower room contents",
+    "verdict": "CONFIRMED",
+    "evidence": "'a bench that is at least 1 830 mm long by 760 mm wide' ... 'clear transfer space ... 900 mm wide and as long as the bench'",
+    "fix": "added"
+   },
+   {
+    "claim": "Note A-3.8.2.8.(13) near each bank of showers",
+    "verdict": "CONFIRMED",
+    "evidence": "'available within close proximity to each bank of showers in a floor area'",
+    "fix": ""
+   },
+   {
+    "claim": "pages 3-175, 3-183",
+    "verdict": "WRONG",
+    "evidence": "(12)-(15) after footer 3-175; 3.8.3.13 (b)-(2) after footer 3-183; 3.8.3.17 before footer 3-186",
+    "fix": "pp. 3-175 to 3-176, 3-183 to 3-184, 3-186"
+   },
+   {
+    "claim": "BCBC 3.8.3.13 adds (1)(k) emergency lighting p. 3-283",
+    "verdict": "CONFIRMED",
+    "evidence": "'k) provide emergency lighting conforming to Article 3.2.7.3.' before footer 'Division B 3-283'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: National Building Code of Canada 2020, Div. B 3.8.2.8 and 3.8.3.13, 3.8.3.17 (local text data/raw/codes/nbc.txt, pp. 3-175 to 3-176, 3-183 to 3-184, 3-186; BCBC 2024 3.8.3.13 same plus (1)(k) emergency lighting, p. 3-283): 3.8.2.8.(1) 'at each location where washrooms are provided in a storey to which a barrier-free path of travel is required ... at least one universal washroom'; (12) one barrier-free shower stall per group of showers; (13) 'where a showering facility is provided for use by the general public or customers ... at least one universal dressing and shower room'; (15) accessible change space in a universal washroom where Group A, B-2 or E occupant load is more than 500; 3.8.3.13.(1)(j) wheelchair turning space 'not less than 1 700 mm in diameter' (no room area given); (2) change table clear space 810 x 1 830 mm plus 900 x 1 350 mm transfer space; 3.8.3.17.(1)(a) shower 'not less than 1 500 mm wide and 900 mm deep', (b) clear floor space at entrance not less than 900 mm deep; 3.8.3.17.(2) universal dressing and shower room: lavatory and mirror, a shower to (1), bench 'at least 1 830 mm long by 760 mm wide', clear transfer space '900 mm wide and as long as the bench', lockable door (p. 3-186); Note A-3.8.2.8.(13): one universal dressing and shower room near each bank of showers — https://nrc-publications.canada.ca (NBC 2020; local copy in repo) ‖ CHECK 2 (2 Nov 2026, fixed): all quoted clauses confirmed; 3.8.3.17.(2) dressing-and-shower-room bench and transfer space added; pages corrected"
+ },
+ "arch_sup_nbcA3121Laundry": {
+  "where_read": "local nbc.txt Note A-3.1.2.1.(1) pp. 3-227 to 3-228",
+  "claims": [
+   {
+    "claim": "Group D 'Laundries, self-service'",
+    "verdict": "CONFIRMED",
+    "evidence": "Group D list: 'Laundries, self-service'",
+    "fix": ""
+   },
+   {
+    "claim": "Group D 'Dry cleaning establishments, self-service, not using flammable or explosive solvents or cleaners'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim in Group D list",
+    "fix": ""
+   },
+   {
+    "claim": "F-2 'Laundries, except self-service'",
+    "verdict": "CONFIRMED",
+    "evidence": "Group F, Division 2 list",
+    "fix": ""
+   },
+   {
+    "claim": "F-2 'Dry cleaning establishments not using flammable or explosive solvents or cleaners'",
+    "verdict": "CONFIRMED",
+    "evidence": "Group F, Division 2 list ('Dry cleaning plants' are F-1)",
+    "fix": ""
+   },
+   {
+    "claim": "pp. 3-227 to 3-228",
+    "verdict": "CONFIRMED",
+    "evidence": "Group D heading before footer 3-227; entries before footer 3-228",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sup_eastglenRooms": {
+  "where_read": "URL via WebFetch, 2 Nov 2026 (full text in two parts)",
+  "claims": [
+   {
+    "claim": "room sheets 1.1-3.8 areas and pages 30-54",
+    "verdict": "CONFIRMED",
+    "evidence": "sheet table: 1.1 Pool Tank 326 sm p.30 ... 3.8 Staff Universal Change and Lockers 20 sm p.54 (all 25 match)",
+    "fix": ""
+   },
+   {
+    "claim": "3.2 33 (11 x 3)",
+    "verdict": "CONFIRMED",
+    "evidence": "'33sm (11 x 3sm)', '1-3 persons per cubicle x 11 cubicles'",
+    "fix": "clarify 11 cubicles of 3 m2"
+   },
+   {
+    "claim": "p. 51 / p. 53 fixture text",
+    "verdict": "CONFIRMED",
+    "evidence": "'3 showers, 4 toilets and sinks (5th required toilet in 3.1)'; '3 showers, 3 toilets and sinks'",
+    "fix": ""
+   },
+   {
+    "claim": "hot pool occupant load 20 p. 32; steam max 12 p. 33",
+    "verdict": "CONFIRMED",
+    "evidence": "'Occupant Load: 20 persons maximum'; 'Maximum 12 persons'",
+    "fix": ""
+   },
+   {
+    "claim": "chemical 3 p. 58; custodial 10 p. 59; mechanical 'By allowance' p. 57 (inferred)",
+    "verdict": "CONFIRMED",
+    "evidence": "'3sm' p.58; '10sm' p.59; Mechanical Spaces 'By allowance' p.57",
+    "fix": "pages now read, not inferred"
+   },
+   {
+    "claim": "electrical 'Size: Per code' p. 21",
+    "verdict": "CONFIRMED",
+    "evidence": "p.21 'Size: Per code' (IT/AV Room, Electrical Room)",
+    "fix": ""
+   },
+   {
+    "claim": "p. 20 circulation, WCs, showers",
+    "verdict": "CONFIRMED",
+    "evidence": "'By allowance 12-15% plus allocation for lobby'; 'A minimum of 5 water closets or ideally 6 WCs ...'; 'three showers will be required for each gender change room'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 22 pool mechanical grossing allowance",
+    "verdict": "CONFIRMED",
+    "evidence": "'The pool mechanical space, in area roughly ½ of the water surface area is considered a grossing allowance'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 23 building mechanical 5 %, circulation 15 %, 0.5m per bather, 135 sm",
+    "verdict": "CONFIRMED",
+    "evidence": "'building mechanical should be 5% of total assigned area'; 'in the order of 15%'; 'ABC bather load or 0.5m per bather'; '135 sm'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 23 '217 persons (rounded to 220) in the main tank and 40 in the hot pool'",
+    "verdict": "WRONG",
+    "evidence": "on p. 22 (Natatorium); p. 15 '217 bathers rounded to 220 for planning purposes'",
+    "fix": "p. 22"
+   },
+   {
+    "claim": "p. 21 building mechanical 5-7% of gross",
+    "verdict": "CONFIRMED",
+    "evidence": "'building mechanical should be 5-7% of gross building area'",
+    "fix": ""
+   },
+   {
+    "claim": "(missed) 1:1.45 ratio used in sup_wet.md",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 4 'a more efficient 1:1.45 or 69% assignable-to-gross area ratio'",
+    "fix": "added"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT (functional program): Eastglen Leisure Centre Program Final Report, City of Edmonton, June 2017 (room data sheets, Section 7; see also arch_edmEastglen2017): net m2: 1.1 pool tank 326 (p. 30; bather load 220), 1.2 deck 366 (p. 31), 1.3 hot pool 40 incl. ramp (p. 32; occupant load 20), 1.4 steam room 18 (p. 33; max 12), 1.5 pool storage 44 (p. 34), 1.6 on-deck shower 1, 2.1 control desk 15 (p. 36), 2.2 cash office 4, 2.3 foreman's office 8, 2.4 pool viewing 35, 2.5 first aid 6 (p. 40), 2.6 administration storage 20, 2.7 multipurpose 139, 2.8 lifeguard/program office 20 (p. 43), 2.9 fitness 186, 2.10 staff break 19 (p. 45), 2.11 laundry 6 (p. 46), 3.1 universal change with shower/WC 6 (p. 47), 3.2 universal change with shower 33 (p. 48: '11 x 3sm', 11 cubicles), 3.3 universal change lockers/circulation 37, 3.4 female change/lockers 33, 3.5 female WCs/showers 28 (p. 51: '3 showers, 4 toilets and sinks (5th required toilet in 3.1)'), 3.6 male change/lockers 33, 3.7 male WCs/showers 28 (p. 53: '3 showers, 3 toilets and sinks'), 3.8 staff universal change and lockers 20 (p. 54), pool chemical storage 3 (p. 58), custodial closet 10 (p. 59); mechanical spaces 'By allowance' (p. 57); electrical 'Size: Per code' (p. 21); p. 20 circulation '12-15% plus allocation for lobby', 'A minimum of 5 water closets or ideally 6 WCs will be required for females and 3 water closets for males', 'three showers will be required for each gender change room'; p. 22 'The pool mechanical space, in area roughly ½ of the water surface area is considered a grossing allowance'; p. 23 'building mechanical should be 5% of total assigned area', 'Circulation allowance for this building type is in the order of 15%', change area 'driven by the ABC bather load or 0.5m per bather', 'locker and change area (excluding showers and WCs) of 135 sm', p. 22 '217 persons (rounded to 220) in the main tank and 40 in the hot pool' (p. 15: '217 bathers rounded to 220'); p. 4 new program 'a more efficient 1:1.45 or 69% assignable-to-gross area ratio' (existing building 57 %); p. 21 building mechanical '5-7% of gross building area' — https://www.gov.edmonton.ab.ca/activities_parks_recreation/documents/PDF/Eastglen_Program_Final_Report_June_2017.pdf (read 2 Nov 2026 via fetch; room-sheet pages confirmed: circulation 'By allowance' p. 55, mechanical p. 57, chemical p. 58, custodial p. 59; Figure 5 p. 24 'Functional Space Program' contents not in the text, not read ?) ‖ CHECK 2 (2 Nov 2026, fixed): all room areas and pages confirmed; '217 persons ... 40 in the hot pool' is on p. 22, not p. 23; 1:1.45 (p. 4) added"
+ },
+ "arch_sup_bcPoolDesign5": {
+  "where_read": "URL via WebFetch, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "s. 5.1 p. 21 0.32 m2/bather",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least 0.32 m2/bather (3.44 sq ft)'",
+    "fix": ""
+   },
+   {
+    "claim": "change area excludes gang showers etc.",
+    "verdict": "CONFIRMED",
+    "evidence": "'excludes gang showers, washrooms, halls, exits and entrances'",
+    "fix": ""
+   },
+   {
+    "claim": "2 shower heads first 100 users, +1 per 50",
+    "verdict": "CONFIRMED",
+    "evidence": "'... each additional 50 male or female users or fraction thereof'; public pools, not commercial",
+    "fix": "add 'or fraction thereof'"
+   },
+   {
+    "claim": "60 m walking distance",
+    "verdict": "CONFIRMED",
+    "evidence": "'no more than 60 m (197 ft) walking distance'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 5.2 p. 22 fountain per 250 bathers",
+    "verdict": "CONFIRMED",
+    "evidence": "'for each 250 bathers'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 8.7 p. 34 formula, D, S",
+    "verdict": "CONFIRMED",
+    "evidence": "'Metric: Maximum Bathing Load = (D/2.5) + (S/0.93)'; D 'greater than or equal to 1.5 m'",
+    "fix": ""
+   },
+   {
+    "claim": "hot tubs 60 cm bench per person",
+    "verdict": "CONFIRMED",
+    "evidence": "'increments of 60 cm (2 ft) of bench seating per person'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 3.4 p. 12 lifeguard stations",
+    "verdict": "CONFIRMED",
+    "evidence": "'greater than 150 m2 but not greater than 230 m2, at least one'; 'greater than 230 m2 at least two'",
+    "fix": ""
+   },
+   {
+    "claim": "title, issuer, v3, 2025, April from file name",
+    "verdict": "CONFIRMED",
+    "evidence": "cover: B.C. Guidelines for Pool Design, Version 3, 2025, Health Protection Branch, Ministry of Health",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "guideline, not a rule; BC only",
+  "new_text": "GOVERNMENT GUIDE: B.C. Guidelines for Pool Design v3, BC Ministry of Health (Health Protection Branch), 2025 (file name April 2025; see also arch_bcPoolDesign2025, arch_wet_bcPoolDesignHT): s. 5.1 p. 21 'The minimum change room area required for each bather should be at least 0.32 m2/bather (3.44 sq ft)', 'The change room area excludes gang showers, washrooms, halls, exits and entrances', 'a minimum of 2 shower heads shall be provided for the first 100 users of each sex', 'One additional shower head for each sex shall be added for each additional 50 male or female users or fraction thereof' (public pools, not commercial pools), change rooms, toilets and showers within '60 m (197 ft) walking distance'; s. 5.2 p. 22 one drinking fountain 'for each 250 bathers'; s. 8.7 p. 34 'Metric: Maximum Bathing Load = (D/2.5) + (S/0.93)', D = area with depth >= 1.5 m, S = area < 1.5 m; hot tubs 60 cm bench per person; s. 3.4 p. 12 pools over 150 m2 up to 230 m2 at least one lifeguard station, over 230 m2 at least two — https://islandhealth.ca/sites/default/files/environment/documents/bc-guidelines-for-pool-design-v3-april-2025.pdf ‖ CHECK 2 (2 Nov 2026, ok): all figures and pages confirmed; 'or fraction thereof' and public-pool scope of shower rule added"
+ },
+ "arch_sup_atacpSupport": {
+  "where_read": "URL via WebFetch, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "s. 2.6 p. 12 concourse 2 m on 2 sides, 1.5 m others",
+    "verdict": "CONFIRMED",
+    "evidence": "'a minimum width of 2m on at least 2 sides'; 'a minimum of 1.5m on the other 2 sides for emergency access'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 2.11 p. 16 maximum potential numbers; 10 -> 20",
+    "verdict": "CONFIRMED",
+    "evidence": "'If there were group sessions of 10 users, there could be 20 users either changing to enter or exit the pool.'",
+    "fix": ""
+   },
+   {
+    "claim": "pp. 16-17 Changing Places 3m x 4m gold standard",
+    "verdict": "CONFIRMED",
+    "evidence": "quote found on p. 16; p. 17 not confirmed",
+    "fix": "p. 16"
+   },
+   {
+    "claim": "s. 2.12 p. 18 2m x 2.2m (Sport England), 2.4m x 2.5m, 1:6",
+    "verdict": "CONFIRMED",
+    "evidence": "'Sport England state a minimum area for a wheelchair accessible shower cubicle is 2m x 2.2m'; 'a shower and WC cubicle is 2.4m x 2.5m'; 'ratio of 1:6 toilets with a minimum of one being wheelchair accessible'",
+    "fix": "note both sizes cite Sport England"
+   },
+   {
+    "claim": "s. 2.13 p. 19 reception may be required, rest area drinking water",
+    "verdict": "WRONG",
+    "evidence": "s. 2.13 on p. 18: 'A reception area may be required'; 'The rest area must have the provision of drinking water'",
+    "fix": "p. 18"
+   },
+   {
+    "claim": "s. 2.14 p. 19 office desk, lockable storage, view; staff changing",
+    "verdict": "CONFIRMED",
+    "evidence": "'An office with a desk ... and lockable storage'; 'should ideally have a full view of the pool'; 'separate changing area with shower and toilet for staff with lockers'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 2.15 p. 19 several storage areas, no sizes",
+    "verdict": "CONFIRMED",
+    "evidence": "'several storage areas for cleaning and therapy equipment'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 2.16 p. 19 plant 15-30 %; p. 20 chemicals separate secure, bunded 110 %",
+    "verdict": "CONFIRMED",
+    "evidence": "'typically be 15-30% of the pool water area'; 'Stored in separate, secure rooms'; 'taking 110% of the volume stored'",
+    "fix": ""
+   },
+   {
+    "claim": "title, ATACP, 2019",
+    "verdict": "CONFIRMED",
+    "evidence": "cover '© ATACP 2019'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "UK benchmark, not Canadian",
+  "new_text": "DESIGN GUIDE (UK professional body, benchmark): Hydrotherapy Pools: Expert Clinical Considerations in Planning and Design, ATACP, 2019 (support spaces; see also arch_wet_atacp2019): s. 2.6 p. 12 concourse 'minimum width of 2m on at least 2 sides', 'minimum of 1.5m on the other 2 sides'; s. 2.11 p. 16 changing 'calculated based on the maximum potential numbers', group of 10 users -> up to 20 changing; p. 16 'The Changing Places standards of 3m x 4m space with tracking hoist into the pool would be gold standard'; s. 2.12 p. 18 wheelchair shower cubicle '2m x 2.2m' and shower and WC cubicle '2.4m x 2.5m' (both citing Sport England), toilets 'ratio of 1:6 ... minimum of one being wheelchair accessible'; s. 2.13 p. 18 reception 'may be required', rest area with drinking water; s. 2.14 p. 19 staff office with desk and lockable storage, 'ideally' a full view of the pool; 'separate changing area with shower and toilet for staff with lockers'; s. 2.15 p. 19 'several storage areas for cleaning and therapy equipment' (no sizes); s. 2.16 p. 19 plant room '15-30% of the pool water area'; p. 20 chemicals in 'separate, secure rooms' bunded to 110 %; no total suite area — https://atacp.csp.org.uk/system/files/documents/2020-03/Purchase%20complete%20-%20download%20your%20document.pdf ‖ CHECK 2 (2 Nov 2026, fixed): s. 2.13 is on p. 18, not p. 19; Changing Places quote on p. 16; both cubicle sizes cite Sport England; other figures confirmed"
+ },
+ "arch_sup_vanHDTG": {
+  "where_read": "URL via WebFetch, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "title, Version 11, March 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'Version 11, Issue Date March 2025'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 4.2.6 p. 7 one set per 10 units",
+    "verdict": "CONFIRMED",
+    "evidence": "'Shared washers and dryers to be provided at one set for every 10 units in common laundry rooms.'",
+    "fix": ""
+   },
+   {
+    "claim": "programmed space; seating area",
+    "verdict": "CONFIRMED",
+    "evidence": "'shall be part of a programmed space'; 'Provide a seating area adjacent to the laundry area.'",
+    "fix": ""
+   },
+   {
+    "claim": "1500 mm sorting table and central floor drain",
+    "verdict": "CONFIRMED",
+    "evidence": "'a minimum of 1500 mm (5'0\" long) long sorting table/counter and a central floor drain'",
+    "fix": ""
+   },
+   {
+    "claim": "card-operated, card-reload unit",
+    "verdict": "CONFIRMED",
+    "evidence": "'card-operated appliances'; 'A unit in the laundry room to allow tenants to reload credit'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 5.6 p. 13 closets 6'-0\" x 3'-6\", 3'-0\" x 3'-6\"",
+    "verdict": "CONFIRMED",
+    "evidence": "'6'-0\" wide by 3'-6'' deep minimum'; '3'-0\" wide by 3'-6'' deep minimum'",
+    "fix": ""
+   },
+   {
+    "claim": "scope: City-owned/City-led housing; private ?",
+    "verdict": "CONFIRMED",
+    "evidence": "s. 1.1 p. 3 'any Housing secured by the City of Vancouver'",
+    "fix": "replace '?' with sourced scope"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "City-secured social housing only; a benchmark for other buildings",
+  "new_text": "GOVERNMENT DESIGN GUIDELINE: Housing Design and Technical Guidelines, Version 11, City of Vancouver, March 2025: s. 4.2.6 p. 7 Common Laundry 'Shared washers and dryers to be provided at one set for every 10 units in common laundry rooms', 'part of a programmed space', 'a minimum of 1500 mm (5'0\" long) long sorting table/counter and a central floor drain', 'Provide a seating area adjacent to the laundry area', card-operated appliances and a card-reload unit; s. 5.6 p. 13 in-suite hook-up closet 6'-0\" x 3'-6\" side-by-side, 3'-0\" x 3'-6\" stacked; no room m2 per machine set — https://guidelines.vancouver.ca/guidelines-technical-housing-design.pdf (s. 1.1 p. 3: 'To be applied to the design and construction, renovation or conversion of any Housing secured by the City of Vancouver', incl. in-kind CAC housing; s. 4.2.6 applies 'In lieu of an Operator'; benchmark only for private buildings) ‖ CHECK 2 (2 Nov 2026, fixed): all quotes and pages confirmed; scope now sourced (City-secured housing, s. 1.1 p. 3)"
+ },
+ "_sup_wet_md": {
+  "where_read": "sup_wet.md rows re-checked against new and reused ids; all 'our arithmetic' re-done",
+  "claims": [
+   {
+    "claim": "Pool net ≈739 / ≈608 m², gross ≈960–1,110 / lean ≈790",
+    "verdict": "WRONG",
+    "evidence": "sum of sized rows = 759.5 / 628.5 m²; 739/608 leave out admin storage 20 m² with no note",
+    "fix": "≈760 / ≈629 net; ≈990–1,140 gross; lean ≈820 (summary and catalogue note updated)"
+   },
+   {
+    "claim": "Spa net ≈228 m², gross ≈300–345",
+    "verdict": "WRONG",
+    "evidence": "sum of sized rows = 248.6 m²; 228 leaves out staff change 20 m²",
+    "fix": "≈249 net; ≈325–375 gross"
+   },
+   {
+    "claim": "Universal dressing and shower room ≈2.7 m²",
+    "verdict": "WRONG",
+    "evidence": "NBC 3.8.3.17.(2) adds bench 1 830 x 760 mm and 900 mm transfer space",
+    "fix": "≈5.7 m² of clear spaces before lavatory; matches Eastglen 6 m²"
+   },
+   {
+    "claim": "Eastglen '217 persons (rounded to 220)' p. 23",
+    "verdict": "WRONG",
+    "evidence": "on p. 22",
+    "fix": "p. 22"
+   },
+   {
+    "claim": "Eastglen 1:1.45 cited p. 4; circulation 15 % p. 23",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 4 '1:1.45 or 69%'; p. 23 'in the order of 15%'",
+    "fix": "pages split per figure"
+   },
+   {
+    "claim": "WCs: urinals may replace ⅔ of male WCs (2 male WCs)",
+    "verdict": "WRONG",
+    "evidence": "3.7.2.2.(3): 'if only 2 water closets are required for males, one urinal is permitted to be substituted for one'",
+    "fix": "one may be a urinal"
+   },
+   {
+    "claim": "Therapy-pool Part 7 scope '?'",
+    "verdict": "CONFIRMED",
+    "evidence": "7.2.1.1 applies to public and semi-public pools; therapy pool = special purpose pool (rate a unless jetted)",
+    "fix": "'?' removed"
+   },
+   {
+    "claim": "ATACP s. 2.13 p. 19; Changing Places pp. 16–17",
+    "verdict": "WRONG",
+    "evidence": "s. 2.13 on p. 18; quote on p. 16",
+    "fix": "p. 18; p. 16"
+   },
+   {
+    "claim": "Other arithmetic: deck 133.6; bathing load 141.7→142; dressing 71 / 45.4; showers 3+3; Table A at 71/sex 2 M / 3 F; plant 70.8–106; Eastglen 1,484 net, ×1.45 = 2,152; non-pool 418; 1,066 × 1.3–1.5 = 1,386–1,599; therapy concourse 47.25 / 61.25; loads 16 / 31; changing 8 / 15.5; plant 3.6–7.2 / 7.0–14.0; nets 107.45 / 158.5 → 140–161 / 206–238; hot-pool deck 32.8; dressing 20; plant 13.3–20; plunge 1.62; laundromat 300/4.6 = 65 → 33/sex → 2 WCs, 150 m² → 1; Thyer 775/5,400 = 14.4 %",
+    "verdict": "CONFIRMED",
+    "evidence": "recomputed",
+    "fix": ""
+   },
+   {
+    "claim": "Reused ids: arch_sportEngPoolsDGN p.10 212.5; arch_bcPoolDesign2025 s.3.2 1.2 m; arch_edmEastglen2017 pp.30–31, p.23 1/3–½ and 1:1.3–1:1.5; arch_wet_atacp2019 s.2.6 p.11, s.2.16 p.19; arch_wet_nbcAE726 7.2.6.2.(7)–(9); arch_hsg_abGFNA2021 p.12 1.44; arch_wet_vanRTS16473 App. D pp.1–2; arch_wet_bcPoolDesignHT s.8.7; arch_wet_nbcA3121 Museums A-2; van3575s2 p.22 300 m2; arch_r2_vaLaundry2022 s.3.C, 5.B–5.C; arch_wet_thyer2018; arch_zon_EdmZones 3.3.1",
+    "verdict": "CONFIRMED",
+    "evidence": "each row matches the register text of that id",
+    "fix": ""
+   },
+   {
+    "claim": "arch_wet_vanCD1Ogden p. 6 '870 sq. m … over three levels', no rooms/capacity/staff",
+    "verdict": "CONFIRMED",
+    "evidence": "URL read: p. 6 'a floor area of 870 sq. m (9,365 sq. ft.) over three levels'; no breakdown",
+    "fix": ""
+   },
+   {
+    "claim": "arch_zon_EdmZones Major Indoor Entertainment examples include 'aquariums'",
+    "verdict": "CONFIRMED",
+    "evidence": "local b.txt: 'Typical examples include: auditoriums, aquariums, arenas, ...'",
+    "fix": ""
+   }
+  ]
+ }
+}

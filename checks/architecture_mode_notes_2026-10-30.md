@@ -118,3 +118,5 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - J.B. (2 Nov 2026): winter market dropped. Winter garden kept; gym kept (16 °C benchmark label); climbing gym folded into gym.
 - J.B. (2 Nov 2026): the four defaults stand (roof generators flagged; no public viewing window; own stair for public roof programs; F-2). Paywalled sources coming from J.B. 3 Nov.
 - J.B. (2 Nov 2026): everything must follow the code; limits block, never just warn (height, floor-space ratio, BE caps).
+- J.B. (2 Nov 2026): every program's massing must be a working whole (main space + support spaces: mechanical, washrooms, change rooms, storage, staff, circulation), each part rooted in research (a general overview, less deep than the data centre) and stated in the panel and the report. Research this and the limits on rezoning before the code-blocking build.
+- J.B. (2 Nov 2026): hard rules block everywhere in the tool (audit: checks/agents/2026-11-02_code_audit_*.md); rezonings and conditional uses stay as chosen options. Noise block rule proposed (block when the quieter units exceed, flag when only standard do): awaiting J.B.

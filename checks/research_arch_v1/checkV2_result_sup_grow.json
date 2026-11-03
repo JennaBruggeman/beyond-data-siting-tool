@@ -1,0 +1,468 @@
+{
+ "arch_sup_nbcA3722": {
+  "where_read": "repo copy data/raw/codes/nbc.txt (+ bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt for Table 3.7.2.2.-A)",
+  "claims": [
+   {
+    "claim": "3.1.17.1.(1)(c) designed number, not less than Table 3.1.17.1",
+    "verdict": "CONFIRMED",
+    "evidence": "'c) the number of persons for which the area is designed, but not less than that determined from Table 3.1.17.1.'",
+    "fix": ""
+   },
+   {
+    "claim": "3.1.17.1.(2) permanent sign",
+    "verdict": "CONFIRMED",
+    "evidence": "'a permanent sign indicating that occupant load shall be posted in a conspicuous location'",
+    "fix": ""
+   },
+   {
+    "claim": "Table 3.1.17.1 p. 3-43: standing 0.40, offices 9.30, manufacturing/process 4.60, storage 46.00; no exhibition/display-garden row",
+    "verdict": "CONFIRMED",
+    "evidence": "values as listed; table starts before the '3-43' footer; no exhibition row",
+    "fix": ""
+   },
+   {
+    "claim": "3.7.2.1.(1) occupant load per 3.1.17",
+    "verdict": "CONFIRMED",
+    "evidence": "'occupant load shall be determined in accordance with Subsection 3.1.17.'",
+    "fix": ""
+   },
+   {
+    "claim": "3.7.2.2.(1) equally divided",
+    "verdict": "CONFIRMED",
+    "evidence": "'assuming that the occupant load is equally divided between males and females'",
+    "fix": ""
+   },
+   {
+    "claim": "Table 3.7.2.2.-A p. 3-170, all rows 1-25 ... over 400",
+    "verdict": "CONFIRMED",
+    "evidence": "rows match exactly in nbc.txt; identical in bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt",
+    "fix": ""
+   },
+   {
+    "claim": "3.7.2.3.(1) p. 3-171 lavatory quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least one lavatory shall be provided in a room containing one or 2 water closets or urinals, and at least one additional lavatory shall be provided for each additional 2'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: National Building Code of Canada 2020, Div. B (repo copy data/raw/codes/nbc.txt; Table 3.7.2.2.-A identical in bcbc2024.txt, nbc_ab2023.txt, vbbl2025_v1.txt): 3.1.17.1.(1)(c) occupant load = 'the number of persons for which the area is designed, but not less than that determined from Table 3.1.17.1.'; (2) a different design load needs 'a permanent sign'; Table 3.1.17.1 (p. 3-43) e.g. standing space 0.40, offices 9.30, manufacturing or process rooms 4.60, storage 46.00 m2/person (no exhibition or display-garden row); 3.7.2.1.(1) washroom occupant load per 3.1.17; 3.7.2.2.(1) 'occupant load is equally divided between males and females'; Table 3.7.2.2.-A (p. 3-170) assembly WCs male/female: 1-25 1/1, 26-50 1/2, 51-75 2/3, 76-100 2/4, 101-125 3/5, 126-150 3/6, 151-175 4/7, 176-200 4/8, 201-250 5/9, 251-300 5/10, 301-350 6/11, 351-400 6/12, over 400 7 plus 1 per 200 males / 13 plus 1 per 100 females; 3.7.2.3.(1) (p. 3-171) 'at least one lavatory shall be provided in a room containing one or 2 water closets or urinals, and at least one additional lavatory ... for each additional 2' — data/raw/codes/nbc.txt ‖ CHECK 2 (2 Nov 2026, ok): all figures, quotes and pages confirmed"
+ },
+ "arch_sup_bcbc3813": {
+  "where_read": "repo copy data/raw/codes/bcbc2024.txt (3.8.3.13, p. 3-282 to 3-283)",
+  "claims": [
+   {
+    "claim": "(1)(c) one lavatory, (d) one WC, (e) lateral transfer, (k) emergency lighting",
+    "verdict": "CONFIRMED",
+    "evidence": "'c) have one lavatory ... d) have one water closet ... e) have a clear lateral transfer space ... k) provide emergency lighting'",
+    "fix": ""
+   },
+   {
+    "claim": "(1)(j) 1 700 mm turning",
+    "verdict": "CONFIRMED",
+    "evidence": "'be designed to permit a wheelchair to turn in an open space not less than 1 700 mm in diameter'",
+    "fix": ""
+   },
+   {
+    "claim": "(2) adult change table where 3.8.2.8.(15) requires",
+    "verdict": "CONFIRMED",
+    "evidence": "'required to have an accessible change space as stipulated in Sentence 3.8.2.8.(15) shall a) be equipped with an adult-sized change table'",
+    "fix": ""
+   },
+   {
+    "claim": "no floor area in m2",
+    "verdict": "CONFIRMED",
+    "evidence": "none in 3.8.3.13",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: British Columbia Building Code 2024, Div. B 3.8.3.13 Universal Washrooms (repo copy data/raw/codes/bcbc2024.txt): (1)(c) one lavatory, (d) one water closet, (e) clear lateral transfer space, (j) 'be designed to permit a wheelchair to turn in an open space not less than 1 700 mm in diameter', (k) emergency lighting; (2) adult change table where 3.8.2.8.(15) requires an accessible change space; no floor area in m2 — data/raw/codes/bcbc2024.txt ‖ CHECK 2 (2 Nov 2026, ok): all figures, quotes and pages confirmed"
+ },
+ "arch_sup_abGFNArooms": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "title, issuers, June 2021",
+    "verdict": "CONFIRMED",
+    "evidence": "'Grossing Factors & Net Areas Guidelines for Healthcare Facilities in Alberta', June 2021; Alberta Infrastructure, Alberta Health, Alberta Health Services",
+    "fix": ""
+   },
+   {
+    "claim": "Z-7 4.6 / 5.5 NSM, door conditions, p. 10",
+    "verdict": "CONFIRMED",
+    "evidence": "'4.6NSM is for outward swinging door or sliding door'; '5.5NSM is for inward swinging door with no overlap between wheelchair turning radius and door swing'",
+    "fix": ""
+   },
+   {
+    "claim": "Z-8 no area, refers to Building Code, p. 10",
+    "verdict": "CONFIRMED",
+    "evidence": "'clearances and minimum sizes as per Building Code'",
+    "fix": ""
+   },
+   {
+    "claim": "Z-10 0.4 NSM/FTE, p. 10",
+    "verdict": "CONFIRMED",
+    "evidence": "'suggested allowance: 0.4 NSM/FTE for kitchenette & dining area'",
+    "fix": ""
+   },
+   {
+    "claim": "Z-14 0.1 NSM per locker footprint excl. circulation, p. 11",
+    "verdict": "CONFIRMED",
+    "evidence": "'0.1NSM is the footprint of 0.3mx0.3m full height locker and exclude required circulation in front of locker'",
+    "fix": ""
+   },
+   {
+    "claim": "M-10 7.0 / 11.0, p. 9",
+    "verdict": "CONFIRMED",
+    "evidence": "'7.0/11.0' 'decentralized and centralized housekeeping rooms'",
+    "fix": ""
+   },
+   {
+    "claim": "M-1 Bariatric WC 8.0, p. 9",
+    "verdict": "CONFIRMED",
+    "evidence": "'Bariatric WC' 8.0, no remark",
+    "fix": ""
+   },
+   {
+    "claim": "no electrical, mechanical, storage or office room areas",
+    "verdict": "WRONG",
+    "evidence": "storage-type rooms are listed: Clean Supply M-4 11.0 NSM (p. 9), Copy/Print Z-15 10.0 NSM (p. 11); no electrical, mechanical or office rooms",
+    "fix": "no electrical, mechanical or office room areas; storage only as healthcare rooms (M-4 Clean Supply 11.0 NSM)"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Healthcare room templates applied to a greenhouse, conservatory, fish farm and kiln: by analogy only (already labelled).",
+  "new_text": "GOVERNMENT GUIDE (healthcare room types, used by analogy): Grossing Factors & Net Areas Guidelines for Healthcare Facilities in Alberta, Alberta Infrastructure, Alberta Health, Alberta Health Services, June 2021 (same document as arch_hsg_abGFNA2021): Z-7 'Public Washroom, Single Person, Barrier-free' 4.6 NSM (outward or sliding door) / 5.5 NSM (inward swinging door 'with no overlap between wheelchair turning radius and door swing') (p. 10); Z-8 multi-stall: no area, refers to Building Code clearances (p. 10); Z-10 'Staff Oasis (Lounge)' 0.4 NSM per FTE for kitchenette and dining (p. 10); Z-14 'Staff Locker' 0.1 NSM = footprint of a 0.3 m x 0.3 m full-height locker, excluding circulation (p. 11); M-10 'Housekeeping' 7.0 NSM decentralised / 11.0 centralised (p. 9); M-1 'Bariatric WC' 8.0 NSM (p. 9); no electrical, mechanical or office room areas (storage only as healthcare rooms, e.g. M-4 Clean Supply 11.0 NSM, p. 9) (pages from printed footers) — https://www.alberta.ca/system/files/custom_downloaded_images/tr-gnfa062021.pdf ‖ CHECK 2 (2 Nov 2026, fixed): figures confirmed; storage rooms do exist (M-4 Clean Supply 11.0 NSM); Z-7 and Z-14 remarks quoted fully"
+ },
+ "arch_sup_purdueHO346": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "Nemali K., HO-346-W, Purdue Extension, Jan 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Krishna Nemali'; 'HO-346-W'; 'January 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 2 'at least 10% of the greenhouse area'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Headhouse area should be at least 10% of the greenhouse area and ideally located in the middle section'",
+    "fix": ""
+   },
+   {
+    "claim": "uses: offices, storage, planting or harvesting",
+    "verdict": "CONFIRMED",
+    "evidence": "'used for offices, storage, and operations such as planting or harvesting'",
+    "fix": ""
+   },
+   {
+    "claim": "no washroom or mechanical room figures",
+    "verdict": "CONFIRMED",
+    "evidence": "none in the text",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "UNIVERSITY EXTENSION GUIDE (US benchmark): Nemali K., Greenhouse Construction, HO-346-W, Purdue Extension, Purdue University, Jan 2026: p. 2 'Headhouse area should be at least 10% of the greenhouse area'; 'ideally located in the middle section of the greenhouse'; used 'for offices, storage, and operations such as planting or harvesting'; no washroom or mechanical room figures — https://edustore.purdue.edu/media/wysiwyg/downloads/pubs/HO/HO-346-W.pdf ‖ CHECK 2 (2 Nov 2026, ok): all figures, quotes and pages confirmed"
+ },
+ "arch_sup_bartokRMRS2002": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "citation RMRS-P-24, 2002, pp. 354-357",
+    "verdict": "CONFIRMED",
+    "evidence": "'Proceedings RMRS-P-24' ... Rocky Mountain Research Station: 354-357; 2002",
+    "fix": ""
+   },
+   {
+    "claim": "'A headhouse ... is desirable'",
+    "verdict": "CONFIRMED",
+    "evidence": "'A headhouse, either one section of the greenhouse or an attached building, is desirable.'",
+    "fix": ""
+   },
+   {
+    "claim": "contents quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'It should contain a work area for flat filling and transplanting, receiving and shipping area, utility room, office and' ... employee room",
+    "fix": ""
+   },
+   {
+    "claim": "'Build it high enough so that storage can be overhead'",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted exactly",
+    "fix": ""
+   },
+   {
+    "claim": "no sizes",
+    "verdict": "CONFIRMED",
+    "evidence": "no headhouse dimensions",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT PROCEEDINGS PAPER (US benchmark): Bartok J. W. Jr., Design and Layout of a Small Commercial Greenhouse Operation, in National Proceedings: Forest and Conservation Nursery Associations 1999, 2000 and 2001, Proceedings RMRS-P-24, USDA Forest Service Rocky Mountain Research Station, 2002, pp. 354-357: 'A headhouse, either one section of the greenhouse or an attached building, is desirable'; 'It should contain a work area for flat filling and transplanting, receiving and shipping area, utility room, office and employee room'; 'Build it high enough so that storage can be overhead'; no sizes — https://www.fs.usda.gov/rm/pubs/rmrs_p024/rmrs_p024_354_357.pdf ‖ CHECK 2 (2 Nov 2026, ok): all figures, quotes and pages confirmed"
+ },
+ "arch_sup_abGhVeg2018": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "title, Agdex 250/830-2, Alberta Agriculture and Forestry, Sept 2018",
+    "verdict": "CONFIRMED",
+    "evidence": "'Agdex 250/830-2'; 'Revised September 2018'",
+    "fix": ""
+   },
+   {
+    "claim": "Table 7 'Building (sq. m.) 9,043 11,374 3,682'",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted exactly",
+    "fix": ""
+   },
+   {
+    "claim": "Table 8 production area 8,637 / 11,374 / 3,682; tomato conflict",
+    "verdict": "CONFIRMED",
+    "evidence": "'8,637 11,374 3,682'; source does not explain the difference",
+    "fix": ""
+   },
+   {
+    "claim": "p. 5 packing shed/header house",
+    "verdict": "CONFIRMED",
+    "evidence": "'Do you have an appropriately sized packing shed/header house?'",
+    "fix": ""
+   },
+   {
+    "claim": "page numbers p. 11 and p. 5",
+    "verdict": "NOT FOUND",
+    "evidence": "page digits in the extracted text may be headers or footers: Tables 7-8 on p. 10 or 11, packing shed on p. 5 or 6",
+    "fix": "p. 10 or 11 ?; p. 5 or 6 ?"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Ratio from large commercial houses (3,682-11,374 m2) applied to a 153 m2 house: benchmark only.",
+  "new_text": "GOVERNMENT GUIDE: Commercial Greenhouse Vegetable Production, Agdex 250/830-2, Alberta Agriculture and Forestry, revised Sept 2018: Table 7 (p. 10 or 11 ?) 'Building (sq. m.) 9,043 11,374 3,682' (tomato, cucumber, pepper); Table 8 (p. 10 or 11 ?) production area 8,637 / 11,374 / 3,682 (tomato building vs production differ; may be an internal inconsistency ?); p. 5 or 6 (?) asks whether there is 'an appropriately sized packing shed/header house' (no size); page digits may be headers or footers — https://www1.agriculture.alberta.ca/$department/deptdocs.nsf/all/agdex1443/$file/250_830-2.pdf ‖ CHECK 2 (2 Nov 2026, fixed): figures and quotes confirmed; printed page numbers ambiguous, marked ?"
+ },
+ "arch_sup_savidovTanks": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "'Area for Tilapia production = 1,000m2'",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted exactly",
+    "fix": ""
+   },
+   {
+    "claim": "'Tank size = 32 tanks – 10 feet round'",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted exactly",
+    "fix": ""
+   },
+   {
+    "claim": "'Greenhouse area for basil production = 4,000m2'",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted exactly",
+    "fix": ""
+   },
+   {
+    "claim": "no building, filtration, feed, processing or staff areas",
+    "verdict": "CONFIRMED",
+    "evidence": "only 'Filtration tanks with limestone' (no size); feed and labour as cost items",
+    "fix": ""
+   },
+   {
+    "claim": "AAEA Visions 2015",
+    "verdict": "NOT FOUND",
+    "evidence": "event and year from file name only (see arch_fish_savidov2015 CHECK 3)",
+    "fix": "add '(from file name only)'"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT RESEARCHER PRESENTATION: Savidov N., New Developments in Sustainable Agriculture: Aquaponics and Beyond, Alberta Agriculture & Rural Development (CDC South, Brooks), AAEA Visions 2015 (event and year from file name only; same file as arch_fish_savidov2015): slide 'Tilapia production': 'Area for Tilapia production = 1,000m2', 'Tank size = 32 tanks – 10 feet round'; slide 'Aquaponics basil production': 'Greenhouse area for basil production = 4,000m2'; no building, filtration, feed, processing or staff areas — https://aaea.ualberta.ca/wp-content/uploads/sites/36/2018/05/2015Visions_8_New_Developments_in_Sustainable_Agriculture_Nick_Savidov.pdf ‖ CHECK 2 (2 Nov 2026, fixed): figures confirmed; event year from file name only"
+ },
+ "arch_sup_lsuGhTilapia1998": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "Lutz C. G., Pub. 2705, LSU AgCenter / Louisiana Cooperative Extension Service, June 1998",
+    "verdict": "CONFIRMED",
+    "evidence": "'C. Greg Lutz'; 'Pub. 2705 (1 M) 6/98'; 'Louisiana Cooperative Extension Service'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 7 'annual production level of 100,000 pounds'",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted exactly",
+    "fix": ""
+   },
+   {
+    "claim": "three tanks 16 x 80 x 5 ft",
+    "verdict": "CONFIRMED",
+    "evidence": "'three 16 feet wide by 80 feet long by 5 feet deep grow-out tanks'",
+    "fix": ""
+   },
+   {
+    "claim": "'5,990 square feet greenhouse for enclosure'; 0.9 acres",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted exactly, p. 7",
+    "fix": ""
+   },
+   {
+    "claim": "p. 8 Table 1 'Greenhouse, sqft. 5,990'",
+    "verdict": "CONFIRMED",
+    "evidence": "'Greenhouse, sqft. 5,990 $3.25 $19,469'",
+    "fix": ""
+   },
+   {
+    "claim": "bead filters; adjoining storage; office and restroom (p. 8)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Open-top automated air-washed bead filters'; 'an adjoining storage area'; 'New construction of an office and restroom with an onsite septic system'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 9 labour",
+    "verdict": "CONFIRMED",
+    "evidence": "'One full-time laborer at $20,000 annual salary and one quarter-time laborer paid at the same rate'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "UNIVERSITY EXTENSION PUBLICATION (US benchmark): Lutz C. G., Greenhouse Tilapia Production in Louisiana, Pub. 2705, Louisiana State University Agricultural Center / Louisiana Cooperative Extension Service, June 1998: p. 7 'annual production level of 100,000 pounds'; three tanks '16 feet wide by 80 feet long by 5 feet deep'; 'require a 5,990 square feet greenhouse for enclosure'; 'Land requirements total 0.9 acres'; p. 8 Table 1 'Greenhouse, sqft. 5,990'; 'Open-top automated air-washed bead filters'; 'adjoining storage area' (no size); 'New construction of an office and restroom' (no size); p. 9 'One full-time laborer at $20,000 annual salary and one quarter-time laborer' — https://extension.rwfm.tamu.edu/wp-content/uploads/sites/8/2013/09/Greenhouse-Tilapia-Production-in-Louisiana.pdf ‖ CHECK 2 (2 Nov 2026, ok): all figures, quotes and pages confirmed"
+ },
+ "arch_sup_faoRasGuide2022": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026 (read through the web reader as before)",
+  "claims": [
+   {
+    "claim": "Bregnballe J., FAO and Eurofish, 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "'Bregnballe, J. 2022. Rome. FAO and Eurofish International Organisation'",
+    "fix": ""
+   },
+   {
+    "claim": "'roughly about 1 000 m2 per 100 tonnes fish'",
+    "verdict": "CONFIRMED",
+    "evidence": "'In general, the footprint of a recirculation facility is roughly about 1 000 m2 per 100 tonnes fish.'",
+    "fix": ""
+   },
+   {
+    "claim": "'a large fish farm of 1 000 tonnes will require only around 7 000 m2'",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted exactly",
+    "fix": ""
+   },
+   {
+    "claim": "'More land will often be needed for surrounding works ...'",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted exactly",
+    "fix": ""
+   },
+   {
+    "claim": "p. 54",
+    "verdict": "NOT FOUND",
+    "evidence": "page marker '- 55 -' follows the passage; previous marker '- 53 -'; no '- 54 -' marker",
+    "fix": "p. 54 or 55 ?"
+   },
+   {
+    "claim": "tonnes basis (used as t/yr in the md)",
+    "verdict": "NOT FOUND",
+    "evidence": "'100 tonnes' has no qualifier; nearby text says 'per 100 tonnes produced'",
+    "fix": "say basis not stated; t/yr is our reading"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "INTERGOVERNMENTAL GUIDE: Bregnballe J., A guide to recirculation aquaculture: An introduction to the new environmentally friendly and highly productive closed fish farming systems, FAO and Eurofish International Organisation, 2022: p. 54 or 55 ? (page marker '- 55 -' follows the passage) 'the footprint of a recirculation facility is roughly about 1 000 m2 per 100 tonnes fish' (tonnes basis not stated; per tonne of annual production is our reading); 'a large fish farm of 1 000 tonnes will require only around 7 000 m2'; 'More land will often be needed for surrounding works such as water intake, water discharge treatment, fish loading, roads, etc.'; no room breakdown; read through the web reader (direct download refused by this session's proxy; Eurofish copy form-gated, not used) — https://www.fao.org/3/cc2390en/cc2390en.pdf ‖ CHECK 2 (2 Nov 2026, fixed): quotes confirmed; page 54 or 55 ?; tonnes basis not stated"
+ },
+ "arch_sup_osuDHkiln2007": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "authors, PUB-FR-396, 2007",
+    "verdict": "CONFIRMED",
+    "evidence": "'PUB-FR-396 2007'; Bowe, Molzahn, Bond, Bergman, Mace, Hubbard",
+    "fix": ""
+   },
+   {
+    "claim": "title 'small-scale dehumidification dry kiln construction'",
+    "verdict": "NOT FOUND",
+    "evidence": "no title printed in the text read",
+    "fix": "mark title as descriptive (not printed)"
+   },
+   {
+    "claim": "USDA FS funding; issuer not printed",
+    "verdict": "CONFIRMED",
+    "evidence": "Acknowledgements p. 6: USDA Forest Service State and Private Forestry Economic Action Program; no publisher named",
+    "fix": ""
+   },
+   {
+    "claim": "p. 1 600 bf",
+    "verdict": "CONFIRMED",
+    "evidence": "'this kiln can dry approximately 600 board feet of 4/4\" lumber'",
+    "fix": ""
+   },
+   {
+    "claim": "'custom fit'",
+    "verdict": "CONFIRMED",
+    "evidence": "'The kiln volume can be modified to custom fit the individual's needs.'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 4 12 in front / 30 in rear",
+    "verdict": "CONFIRMED",
+    "evidence": "'approximately 12 inches of clearance on the front side of the stack' / '30 inches of clearance on the rear side'",
+    "fix": ""
+   },
+   {
+    "claim": "drawings not to scale; no chamber dimensions",
+    "verdict": "CONFIRMED",
+    "evidence": "'These drawings are not to scale'; no overall dimensions in text",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT-FUNDED EXTENSION PUBLICATION (US benchmark): Bowe S., Molzahn P., Bond B., Bergman R., Mace T., Hubbard S., [small-scale dehumidification dry kiln construction: descriptive, no title printed in the text read], PUB-FR-396, 2007 (Acknowledgements p. 6: funded by USDA Forest Service State and Private Forestry Economic Action Program; issuer not printed; hosted by Oregon State University OWIC): p. 1 'this kiln can dry approximately 600 board feet of 4/4\" lumber'; volume 'can be modified to custom fit'; p. 4 'approximately 12 inches of clearance on the front side of the stack and approximately 30 inches of clearance on the rear side'; drawings 'not to scale'; no chamber or building dimensions — https://owic.oregonstate.edu/sites/default/files/pubs/dhkilns.pdf ‖ CHECK 2 (2 Nov 2026, fixed): figures confirmed; title is descriptive, not printed"
+ },
+ "arch_sup_vtSolarKiln2020": {
+  "where_read": "WebFetch of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "420-030 (ANR-121P), Virginia Cooperative Extension, 8 Dec 2020, no authors",
+    "verdict": "CONFIRMED",
+    "evidence": "'420-030 (ANR-121P)'; 'December 8, 2020'; no authors listed",
+    "fix": ""
+   },
+   {
+    "claim": "'holds 750 to 1,000 board feet'",
+    "verdict": "CONFIRMED",
+    "evidence": "'The version described here holds 750 to 1,000 board feet of lumber.'",
+    "fix": ""
+   },
+   {
+    "claim": "1-foot clearance",
+    "verdict": "CONFIRMED",
+    "evidence": "'Lumber should then be stacked in the kiln with a 1-foot clearance on either side of the stack'",
+    "fix": ""
+   },
+   {
+    "claim": "stickers 3/4 in every 12-18 in",
+    "verdict": "CONFIRMED",
+    "evidence": "'typically 3/4-inch thick'; 'every 12 to 18 inches'",
+    "fix": ""
+   },
+   {
+    "claim": "no footprint dimensions",
+    "verdict": "CONFIRMED",
+    "evidence": "none given",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "UNIVERSITY EXTENSION PUBLICATION (US benchmark): Design and Operation of a Solar-Heated Dry Kiln, 420-030 (ANR-121P), Virginia Cooperative Extension, 8 Dec 2020 (authors not named on page): 'The version described here holds 750 to 1,000 board feet of lumber'; 'Lumber should then be stacked in the kiln with a 1-foot clearance on either side of the stack'; stickers 3/4 in. thick every 12-18 in.; no footprint dimensions on the web page — https://pubs.ext.vt.edu/420/420-030/420-030.html ‖ CHECK 2 (2 Nov 2026, ok): all figures, quotes and pages confirmed"
+ }
+}

@@ -1,0 +1,336 @@
+{
+ "arch_sup_nbcWashrooms": {
+  "where_read": "local data/raw/codes/nbc.txt; local bcbc2024.txt",
+  "claims": [
+   {
+    "claim": "3.7.2.2.(2) ≤10",
+    "verdict": "CONFIRMED",
+    "evidence": "'not more than 10'",
+    "fix": ""
+   },
+   {
+    "claim": "Table A rows, p. 3-170",
+    "verdict": "CONFIRMED",
+    "evidence": "table between footers 3-169 and 3-170",
+    "fix": ""
+   },
+   {
+    "claim": "(8) care/residential 1 per 10 per sex",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least one for each 10 persons of each sex'",
+    "fix": ""
+   },
+   {
+    "claim": "3.7.2.3.(1), p. 3-171",
+    "verdict": "CONFIRMED",
+    "evidence": "above footer 3-171",
+    "fix": ""
+   },
+   {
+    "claim": "3.8.2.8.(1) p. 3-175; (3) suite exemption; (13) public or staff",
+    "verdict": "CONFIRMED",
+    "evidence": "(13) 'general public or customers, or as part of a common-use area for employees'; (3) 'within a suite of residential occupancy or a suite of care occupancy need not conform'",
+    "fix": ""
+   },
+   {
+    "claim": "3.8.3.13.(1)(j) 1 700 mm, p. 3-184; no m2",
+    "verdict": "CONFIRMED",
+    "evidence": "'not less than 1 700 mm in diameter'; no area",
+    "fix": ""
+   },
+   {
+    "claim": "BCBC same wording",
+    "verdict": "CONFIRMED",
+    "evidence": "bcbc2024.txt 3.7.2.2 from l. 19293, same (2), Table A and (8)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sup_nbcOccLoadOther": {
+  "where_read": "local data/raw/codes/nbc.txt Table 3.1.17.1",
+  "claims": [
+   {
+    "claim": "care sleeping 10.00; offices 9.30; personal services 4.60 (p. 3-43)",
+    "verdict": "CONFIRMED",
+    "evidence": "'care, treatment and sleeping room areas 10.00'; 'offices 9.30'; 'personal services shops 4.60'",
+    "fix": ""
+   },
+   {
+    "claim": "kitchens 9.30, storage 46.00 (p. 3-44)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Other uses ... kitchens 9.30 storage 46.00' before footer 3-44",
+    "fix": ""
+   },
+   {
+    "claim": "3.1.17.1.(1)(c)",
+    "verdict": "CONFIRMED",
+    "evidence": "'but not less than that determined from Table 3.1.17.1.'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sup_torTSS2022": {
+  "where_read": "WebFetch of the toronto.ca TSS PDF URL (2 Nov 2026), both parts",
+  "claims": [
+   {
+    "claim": "Version 5, SSHA, adopted 2015 revised 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "'TORONTO SHELTER STANDARDS VERSION 5'; 'adopted by City Council in 2015 and revised in 2022'",
+    "fix": ""
+   },
+   {
+    "claim": "9.3.1(c) 3.5 m.2",
+    "verdict": "CONFIRMED",
+    "evidence": "'a minimum of 3.5 m.2 of personal space per client in sleeping areas'",
+    "fix": ""
+   },
+   {
+    "claim": "9.3.1(e) 0.75 m; 1.1 m vertical",
+    "verdict": "CONFIRMED",
+    "evidence": "'lateral separation of at least 0.75 m. between beds'; 'vertical separation of at least 1.1 m.'",
+    "fix": ""
+   },
+   {
+    "claim": "9.3.1(h) mattress",
+    "verdict": "CONFIRMED",
+    "evidence": "'0.76 m. x 1.82 m. x 0.89 m.'",
+    "fix": ""
+   },
+   {
+    "claim": "9.3.1(a) sleeping separated from dining",
+    "verdict": "NOT FOUND",
+    "evidence": "not returned in the fetched text; clause not re-confirmed this check",
+    "fix": "keep; marked not re-confirmed"
+   },
+   {
+    "claim": "9.3.2(a)(ii) toilets 1/15 to 100, then 1/30; urinals half",
+    "verdict": "CONFIRMED",
+    "evidence": "'up to the first onehundred (100) clients, and one (1) toilet for every thirty (30) clients thereafter'; 'Urinals may replace up to half'",
+    "fix": ""
+   },
+   {
+    "claim": "(iii) washbasins 1/15; (v) showers 1/20",
+    "verdict": "CONFIRMED",
+    "evidence": "'one (1) washbasin for every fifteen (15) clients'; 'one (1) shower for every twenty (20) clients'",
+    "fix": ""
+   },
+   {
+    "claim": "9.3(b) lockers",
+    "verdict": "CONFIRMED",
+    "evidence": "'lockers or other secure forms of storage'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sup_torRespite": {
+  "where_read": "WebFetch of the toronto.ca respite PDF URL (2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "issuer not named in text",
+    "verdict": "WRONG",
+    "evidence": "text names 'TSSS' (abbreviation only) as the approving body",
+    "fix": "issuer: City of Toronto (URL); text says 'TSSS' only"
+   },
+   {
+    "claim": "9.3.1(h) 3.5 m2; 9.3.1(i) 0.75 m2 (as printed), 1.1 m",
+    "verdict": "CONFIRMED",
+    "evidence": "'a minimum of 3.5 m² of personal space per client'; 'at least 0.75 m²' lateral; 1.1 m vertical",
+    "fix": ""
+   },
+   {
+    "claim": "9.3.2(a)(i)-(ii) BF washroom and shower",
+    "verdict": "CONFIRMED",
+    "evidence": "one barrier-free, accessible, non-gender-specific washroom (i) and shower (ii) per site",
+    "fix": ""
+   },
+   {
+    "claim": "toilets 1/15 to 100 then 1/30; washbasins 1/15, sanitizer ≤1/3; showers 1/20",
+    "verdict": "CONFIRMED",
+    "evidence": "(iii), (iv), (vi) as stated",
+    "fix": ""
+   },
+   {
+    "claim": "11.3(h) 21-26 C",
+    "verdict": "CONFIRMED",
+    "evidence": "'minimum heated temperature of 21°C'; at or below 26 °C when cooled",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT STANDARD (Ontario, Canadian benchmark): Key Space Related Standards, quick reference to the 24-Hour Respite Site Standards, City of Toronto (issuer from URL; text names only 'TSSS'; undated, file uploaded Dec 2025): 9.3.1(h) 'a minimum of 3.5 m² of personal space per client in resting areas'; 9.3.1(i) lateral separation 'at least 0.75 m²' (unit as printed) between resting spaces, 1.1 m vertical clearance; 9.3.2(a)(i)-(ii) at least one barrier-free, accessible, non-gender-specific washroom and one such shower per site; toilets 1 per 15 clients up to the first 100, then 1 per 30; washbasins 1 per 15 (sanitizer stations may count up to one third); showers 1 per 20; 11.3(h) indoor 21-26 C — https://www.toronto.ca/wp-content/uploads/2025/12/8e07-TRSQuickReferenceSpace-Related-Standards.pdf ‖ CHECK 2 (2 Nov 2026, ok): all figures confirmed ‖ CHECK 3 (2 Nov 2026, fixed): text names 'TSSS' (abbreviation) as approver; all figures re-read"
+ },
+ "arch_sup_torSDTG2021": {
+  "where_read": "WebFetch of the toronto.ca SDTG PDF URL (2 Nov 2026), text to p. 51",
+  "claims": [
+   {
+    "claim": "Hilditch principal author; 'essentially complete in March 2020'",
+    "verdict": "CONFIRMED",
+    "evidence": "p. iii Hilditch Architect Inc.; p. i 'was essentially complete in March 2020'",
+    "fix": ""
+   },
+   {
+    "claim": "3.3.2 p. 27 20 % accessible beds",
+    "verdict": "CONFIRMED",
+    "evidence": "goal of 20% of beds accessible (citing 2015 staff report)",
+    "fix": ""
+   },
+   {
+    "claim": "p. 29 1500 mm 180° (75 %), 2100 mm 360° (95 %)",
+    "verdict": "CONFIRMED",
+    "evidence": "1500 mm for 75% (180°); 2100 mm for 95% (360°). Missed: 1700 mm covers about 95% for a 180° turn",
+    "fix": "add 1700 mm / 95 % for 180°"
+   },
+   {
+    "claim": "doors 950 mm, p. 29",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least 950 mm wide'",
+    "fix": ""
+   },
+   {
+    "claim": "3.6.3.4 p. 51 defers to 5.3.1",
+    "verdict": "CONFIRMED",
+    "evidence": "'For requirements for floor area and separation of beds refer to 5.3.1 Sleeping areas.'",
+    "fix": ""
+   },
+   {
+    "claim": "Section 5 not read",
+    "verdict": "UNREACHABLE",
+    "evidence": "text ends at p. 51 mid-word; not circumvented",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE (Ontario, Canadian benchmark): City of Toronto Shelter Design and Technical Guidelines, Shelter, Support and Housing Administration, Hilditch Architect principal author, 'essentially complete in March 2020' (file Jan 2021): 3.3.2 (p. 27) goal of 20% of beds accessible; wheelchair turning space 1500 mm for a 180° turn (75% of users), 1700 mm covers about 95% for a 180° turn, 2100 mm for a 360° turn (95%) (p. 29); doors within functional components at least 950 mm (p. 29); 3.6.3.4 (p. 51) floor area and bed separation deferred to 5.3.1 Sleeping Areas. Section 5 room sizes (5.3.1 p. 160, 5.3.2 Washrooms p. 177, 5.6.1 Central Food Services p. 206, 5.6.2 Laundry p. 219, 5.6.5 Building Service Rooms p. 230) not read: text extraction ends at p. 51; direct download refused by proxy (not circumvented) — https://www.toronto.ca/wp-content/uploads/2021/01/8cea-shelter-design-and-technical-guidelines.pdf ‖ CHECK 2 (2 Nov 2026, fixed): 1500 mm is the 180° turn for 75% of users; 360° needs 2100 mm; rest confirmed ‖ CHECK 3 (2 Nov 2026, fixed): 1700 mm / 95 % for 180° added; rest re-read; Section 5 still not read"
+ },
+ "arch_sup_abGFNARooms": {
+  "where_read": "WebFetch of the alberta.ca GFNA PDF URL (2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "p. 7 A-3 15.5, A-4 22.5, A-5 12.0, A-11.1/2/3 9.5/11.0/13.0",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 2 p. 7 values as stated",
+    "fix": ""
+   },
+   {
+    "claim": "p. 9 M-3 10.0, M-4 11.0, M-5 13.5, M-10 7.0/11.0",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 9 'Decentralized / centralized'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 10 Z-7 4.6/5.5 with door note; Z-8; Z-9; Z-10 0.4 NSM/FTE",
+    "verdict": "CONFIRMED",
+    "evidence": "'4.6NSM is for outward swinging door or sliding door'; Z-9 'to be determined by number of anticipated users'; Z-10 0.4 NSM/FTE",
+    "fix": ""
+   },
+   {
+    "claim": "p. 11 Z-14 0.1",
+    "verdict": "CONFIRMED",
+    "evidence": "footprint of a 0.3 m x 0.3 m locker, excluding circulation",
+    "fix": ""
+   },
+   {
+    "claim": "p. 12 Food 1.25, Admin 1.30-1.35, Emergency CHC 1.50",
+    "verdict": "CONFIRMED",
+    "evidence": "Table 3 p. 12",
+    "fix": ""
+   },
+   {
+    "claim": "p. 13 Table 4 hospital ≤100 beds 1.30-1.34/1.18-1.20/1.10-1.12; compounded; penthouse",
+    "verdict": "CONFIRMED",
+    "evidence": "'Total Building Grossing Factors are compounded'; 'does not typically allow for fully enclosed mechanical penthouse service spaces'",
+    "fix": ""
+   },
+   {
+    "claim": "Building Gross Area includes mech/elec and exterior walls",
+    "verdict": "CONFIRMED",
+    "evidence": "definition p. 5 (page not stated in text before)",
+    "fix": "add p. 5"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "healthcare room sizes used by analogy for refuge, shelter and kitchen (md says so)",
+  "new_text": "GOVERNMENT GUIDE: Grossing Factors & Net Areas Guidelines for Healthcare Facilities in Alberta, Alberta Infrastructure, Alberta Health, Alberta Health Services (with Altus Planning), June 2021 (rows not in arch_hsg_abGFNA2021): p. 7 A-3 Procedure Room Type 1 15.5 NSM, A-4 Type 2 22.5; A-5 Consultation Room / Small Group Room 12.0; A-11.1/11.2/11.3 Treatment Station 9.5/11.0/13.0; p. 9 M-3 Medication Room (Community) 10.0; M-4 Clean Supply 11.0; M-5 Soiled Holding 13.5; M-10 Housekeeping 7.0/11.0 'decentralized and centralized'; p. 10 Z-7 Public Washroom, Single Person, Barrier-free 4.6/5.5 NSM: '4.6NSM is for outward swinging door or sliding door; 5.5NSM is for inward swinging door with no overlap'; Z-8 multi-stall per Building Code; Z-9 Waiting Room 'Net area to be determined by number of anticipated users'; Z-10 Staff Oasis (Lounge) '0.4 NSM/FTE for kitchenette & dining area'; p. 11 Z-14 Staff Locker 0.1 (footprint of a 0.3 x 0.3 m locker, excludes circulation); p. 12 departmental Food Services 1.25, Administration 1.30-1.35, Emergency CHC (urgent care) 1.50; p. 13 Table 4 Hospital up to 100 beds component 1.30-1.34, circulation 1.18-1.20, core mech/elec 1.10-1.12; 'Total Building Grossing Factors are compounded'; CHC factor 'does not typically allow for fully enclosed mechanical penthouse service spaces'; Building Gross Area (definition, p. 5) includes 'mechanical and electrical space and exterior walls' — https://www.alberta.ca/system/files/custom_downloaded_images/tr-gnfa062021.pdf ‖ CHECK 2 (2 Nov 2026, ok): all areas and factors confirmed; quotes completed ‖ CHECK 3 (2 Nov 2026, fixed): definition page added (p. 5); all areas and factors re-read"
+ },
+ "arch_sup_eastglenRooms": {
+  "where_read": "WebFetch of Eastglen PDF URL (2 Nov 2026), pp. 4-59 via page footers",
+  "claims": [
+   {
+    "claim": "2.1 15 p. 36; 2.2 4 p. 37; 2.3 8 p. 38; 2.6 20 p. 41; 2.10 19 p. 45; 2.11 6 p. 46; 3.1 6 p. 47; 3.8 20 p. 54",
+    "verdict": "CONFIRMED",
+    "evidence": "room sheets as stated",
+    "fix": ""
+   },
+   {
+    "claim": "2.5 first aid 6, gurney (pp. 17, 40)",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 17 'Must be sufficiently large enough for a gurney to be maneuvered in and out'; p. 40 '6sm'",
+    "fix": ""
+   },
+   {
+    "claim": "2.7 139; 'Ideally 130 sm to 140 sm ...' (pp. 18, 42)",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 18 'Ideally 130 sm to 140 sm, if 90 sm or less too small to be sub-dividable.'",
+    "fix": ""
+   },
+   {
+    "claim": "staff break with kitchenette",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 45 'Kitchenette with sink, dishwasher, counter and uppers'",
+    "fix": ""
+   },
+   {
+    "claim": "circulation p. 20, p. 23; mechanical p. 21 vs p. 23; electrical p. 21; 1:1.45 p. 4",
+    "verdict": "CONFIRMED",
+    "evidence": "quotes as stated",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Same id has a different, longer text in sup_wet_sources.json; merge to one text",
+  "new_text": "GOVERNMENT (functional program): Eastglen Leisure Centre Program Final Report, City of Edmonton, June 2017 (room data sheets; figures not in arch_edmEastglen2017): 2.1 Control Desk 15 sm (p. 36); 2.2 Cash Office 4 (p. 37); 2.3 Foreman's Office 8 (p. 38); 2.5 First Aid Room 6, 'sufficiently large enough for a gurney' (pp. 17, 40); 2.6 Administration Storage 20 (p. 41); 2.7 Multi-Purpose Room 139, 'Ideally 130 sm to 140 sm, if 90 sm or less too small to be sub-dividable' (pp. 18, 42); 2.10 Staff Break Room 19 with kitchenette (p. 45); 2.11 Laundry 6 (p. 46); 3.1 Universal Change with Shower/WC 6 (p. 47); 3.8 Staff Universal Change and Lockers 20 (p. 54); circulation 'By allowance 12-15% plus allocation for lobby' (p. 20), 'in the order of 15%' (p. 23); 'building mechanical should be 5-7% of gross building area' (p. 21) vs '5% of total assigned area' (p. 23); electrical room 'Size: Per code' (p. 21); new program net-to-gross '1:1.45' (p. 4); staff break kitchenette 'with sink, dishwasher, counter and uppers' (p. 45) — https://www.gov.edmonton.ab.ca/activities_parks_recreation/documents/PDF/Eastglen_Program_Final_Report_June_2017.pdf ‖ CHECK 2 (2 Nov 2026, ok): all figures and pages confirmed ‖ CHECK 3 (2 Nov 2026, fixed): all figures and pages re-read. Same id has a different text in sup_wet_sources.json: merge"
+ },
+ "arch_sup_edmMillWoodsFP2013": {
+  "where_read": "WebFetch of the Mill Woods FP PDF URL (2 Nov 2026), to ~100,000 of 111,480 chars",
+  "claims": [
+   {
+    "claim": "RPG for City of Edmonton, 3 Oct 2013",
+    "verdict": "CONFIRMED",
+    "evidence": "'Resource Planning Group Inc.'; '2013 October 3'",
+    "fix": ""
+   },
+   {
+    "claim": "Table 2 p. 1-8 factors 1.10 arena to 1.35 admin; four component rows",
+    "verdict": "CONFIRMED",
+    "evidence": "661.5 x 1.20 = 795; 613.5 x 1.20 = 735; 427.0 x 1.15 = 490; 242.0 x 1.15 = 280",
+    "fix": ""
+   },
+   {
+    "claim": "18 % new construction allowance",
+    "verdict": "CONFIRMED",
+    "evidence": "18%, adding 825 to the total (p. 1-8)",
+    "fix": ""
+   },
+   {
+    "claim": "corridors 1800 mm p. 3-10; NAR 1800 x 2400 p. 3-18",
+    "verdict": "CONFIRMED",
+    "evidence": "'minimum of 1800mm in width'; 'minimum of 1800mm X 2400mm'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ }
+}
