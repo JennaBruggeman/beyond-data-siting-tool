@@ -159,7 +159,7 @@ Kind: rule · gov. guide · design guide · peer-reviewed · insurer guide · st
 |---|---|---|---|---|---|
 | Count, Vancouver | Class B: 1 for first 465 m², +1 next 1,860 m², +1 per 2,325 m²; 10.2 × 3.4 × 3.8 m | vanParking5 | s. 5.2.5 | rule | 80 |
 | Count, Edmonton | <2,500 m² 0; 2,500–7,500 m² 1; >7,500 m² 2; 9.0 × 3.0 m, 4.0 m clear | edmZB580; arch_sec_edm580 | s. 5.80 Table 7.2 | rule | 85 |
-| Built | 2 docks (VAN3); "LOADING / GARBAGE ROOM" 45 m² (Burlington); 4 loading for 21,244 m² (Mississauga) | tourVAN3; burlingtonPlans2026; arch_dc_missSitePlan | — | site fact; filed plans | 50 |
+| Built | 2 docks (VAN3); "LOADING / GARBAGE ROOM" 45 m² (Burlington); Mississauga loading count not legible ? | tourVAN3; burlingtonPlans2026; arch_dc_missSitePlan | — | site fact; filed plans | 50 |
 | Keep from | intakes 7.6 m from a truck dock | arch_nbc6329 | Table 6.3.2.9 | rule | 90 |
 | Keep from | not between building and street (Edmonton BE) | arch_ezbLoad | BE 5.8 | rule | 85 |
 | Keep from | restricted areas: dock not linked to them | arch_per_gcpsg010 | 7.4.3 | gov. guide | 70 |
@@ -216,7 +216,7 @@ Kind: rule · gov. guide · design guide · peer-reviewed · insurer guide · st
 | One shared WC | occupant load ≤10 (V: ≤25) | arch_per_nbcWC | 3.7.2.2.(2) | rule | 90 |
 | Showers | not required; if provided, one accessible stall per group, 1,500 × 900 mm; universal shower room for employee common use | arch_dc_nbcJanitorShower | N 3.8.2.8.(12)–(13), 3.8.3.17 | rule | 85 |
 | Distance (BC) | within 60 m of the work area, ≤1 floor away | arch_per_ccohsSanitation | OHS Reg 4.85 (summary) | gov. summary | 65 |
-| Staff per MW | ≈1 per MW on site at once (≈29, 28 MW, UK); 50–100 jobs ≈1.8–3.6 per MW (our arithmetic) | hillingdon_up4 | sources/16 C10 | applicant claim | 45 |
+| Staff per MW | ≈1 per MW on site in business hours (≈29, 28 MW, UK); 50–100 jobs ≈1.8–3.6 per MW (our arithmetic) | hillingdon_up4 | sources/16 C10 | applicant claim | 45 |
 | Staff per area | ≈1 full-time worker per 5,000 ft² (≈465 m²) | jlarc2024 | Rpt 598 | operator claim (relayed by gov.) | 50 |
 | Staff, other | ≈40 per 24 h (15,274 m², Ireland); >45 jobs (Ireland); 300 jobs, 1.19 M ft² (US) | abp317802; abp317446; arch_dc_pwcVillagePlace | — | applicant claims | 45 |
 | Built | showers and lockers before the portal (VAN3) | tourVAN3 | tour | site fact | 40 |
@@ -266,7 +266,7 @@ Checked, no hall/support split: Mississauga Prologis plans (21,244 m², 2 storey
 
 - **Paywalled (not read):** TIA-942 (hall height, entrance room size, rooms list), BICSI 002, NFPA 13 (valve rooms), NFPA 2001 (cylinders per m³), NFPA 76, CSA B52, CSA C22.1 vault and switchgear-room rules, FM 5-19, FM 5-33 (Li-ion). Logged in checks/paywalled_standards.md except BICSI 002, NFPA 76, FM 5-19, FM 5-33 (to add).
 - **No source found:** m² per MW for MV switchgear, telecom rooms, storage/staging, security and NOC rooms; any rule preferring roof or yard for heat rejection; whether IT sets are life-safety (3.6.2.8); the hall's major occupancy.
-- **Blocked this session:** eStruxture CAL-1 sheet and Hong Kong TPB papers (provenance refused); used from sources/16 (14–15 Oct reading), not re-read.
+- **Blocked this session:** eStruxture CAL-1 sheet, Hong Kong TPB papers and Kidde sheet (provenance refused); used from sources/16 (14–15 Oct reading), not re-read.
 - **No US filed plan set** with a hall/support split was found; the share rests on Burlington plus operator sheets.
 - **Staff per MW:** only one stated pair (Ark UP4, applicant). No Canadian figure.
 - VAN3 layout is one visit (site fact, conf 40).
@@ -274,3 +274,5 @@ Checked, no hall/support split: Mississauga Prologis plans (21,244 m², 2 storey
 ---
 
 Check 2 applied (3 Nov 2026): source texts corrected per checkV2_result_dc_rooms.json; table rows fixed (F-2/D separations, generator set sizes, UAlberta room and conduit, Edmonton BE screening, Village Place pages and 5.8 %, washroom table scope, staff per MW, ETS table numbers, Mississauga GFA conflict); support-share arithmetic re-done and confirmed (Burlington 72 / 48 %, CAL-1 51–52 %, VAN4 59 %, VAN-1 75 %, EDM1 87 %, Lucan 84 %; median support 27–33 %). eStruxture CAL-1, Hong Kong TPB papers and Kidde sheet unreachable (provenance refused).
+
+Check 3 applied (2 Nov 2026): per checkV3_result_dc_rooms.json. RTS 19744 loading quote is p. 6 (not 5), address adds 2060 Quebec St; Mississauga loading 4 / 4 not legible (removed), PJR parking is 611 required vs 40 provided; Ark UP4 staff 'in business hours'. Reused-id rows (fmDS0532, NBC 3.6.2.7, register coefs) and all support-share and per-MW arithmetic re-done and confirmed. CAL-1, Hong Kong TPB and Kidde still unreachable.

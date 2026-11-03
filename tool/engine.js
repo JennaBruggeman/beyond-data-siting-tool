@@ -443,33 +443,98 @@ function noiseRecv(){ const S=BD.S, s=S.sel; if(!s) return []; const city=s.city
   NREC={key,list}; return list; }
 /* the check for one model (one size and set-up): a small summary; the level at each neighbouring building goes to NLEV for the 3D */
 const NLEV=new WeakMap();
+/* ---------- sourced mitigation (3 Nov 2026; research checks/research_arch_v1/noise_mitigation.md, checks 1–3 applied; register noise_level, noise_limit) ----------
+   Only reductions a source gives with numbers. Path: (1) a solid screen around outdoor cooling plant: the LOWER of NSW 2021 s. 4.3 (8 dB if solid, within 20 m
+   of the source, at least 4 m above the source floor, breaking line of sight to the receiver; register arch_nz_nswDcNoise) and FHWA s. 3.5.1 (5 dB at
+   line-of-sight break + 1.5 dB per metre above it, cap 20 dB s. 3.4.2; highway line sources, so used here only to lower the NSW credit, our extension ?;
+   arch_nz_fhwaNBDH). (2) cooling plant indoors (Seen or hidden: Bring it indoors): NSW 2021 s. 4.3 plant room, 25 dB (solid walls, roof sheeting RW 47 or
+   better, gaps sealed, louvres at least Table 4-5). Source: (3) air-cooled chillers: a low-noise variant, Trane RTAF size 280 low noise, Lw 98 dBA a
+   1,010 kW unit (101 standard; maker claim, register traneRTAF), capacity for capacity; (4) dry coolers: night fan speed, ΔLw = 50 log(N2/N1) (AMCA 301 as
+   stated, arch_nz_amcaMathson p. 4), only down to 0.6 × full speed (Annex A.2), so at most 11.1 dB; heat rejection at that speed not checked (?).
+   Source changes and path reductions add in dB through Lp = Lw − 20 log r − 8 − reduction; plant groups (roof, yard, indoors) are summed logarithmically
+   (NSW s. 4.1; FHWA s. 3.1). Order tried: none → source → screen → both (Ottawa ENCG Intro p. 1: barriers only after other measures). No credit: unit
+   housings ('enclose'), silencers (case values only), towers (SPX: 50 log is an upper bound), hybrid coolers. */
+const NMIT={scr:{dB:8,minH:4,within:20,fh0:5,fhM:1.5,cap:20},room:{dB:25},ln:{lw:98,std:101,mw:1.010},fan:{k:50,min:0.6}};
+function rayExit(px,py,ux,uy,r){ let t=1e9; for(let i=0;i<r.length;i+=2){ const j=(i+2)%r.length, ax=r[i], ay=r[i+1], ex=r[j]-ax, ey=r[j+1]-ay, den=ux*ey-uy*ex; if(Math.abs(den)<1e-12) continue;
+    const s=((ax-px)*ey-(ay-py)*ex)/den, q=((ax-px)*uy-(ay-py)*ux)/den; if(s>=0&&q>=-1e-9&&q<=1+1e-9&&s<t) t=s; } return t; }
 function noiseCheck(m){ const s=BD.S.sel; if(!m||!m.plant||!m.plant.s||!s) return null; const P=m.plant, k=P.s.k, n=P.s.n; if(!n) return null;
   const LU=k.name==='dry coolers'?R.lwUnitDry:R.lwUnit, lw=[LU[0]+10*Math.log10(n),LU[1]+10*Math.log10(n)];
-  const cb=(P.boxes||[]).filter(b=>b.name===k.name), cool=cb.map(b=>BD.centroid(b.ring)), ind=P.coolRoofIndoor>0;
-  const src=noiseSrc(s); let pc=cool.length?[cool.reduce((t,p)=>t+p[0],0)/cool.length,cool.reduce((t,p)=>t+p[1],0)/cool.length]:null;
-  if(!pc){ const fr=m.serverFoot||m.foot; pc=fr?BD.centroid(fr):src.c; } if(!pc) return null;
-  const yd=cb.some(b=>b.kind==='yard'), rf=cb.some(b=>b.kind==='roof'), where=ind&&!yd?'indoors':yd&&(rf||ind)?'roof and yard':yd?'yard':'roof';
-  const list=noiseRecv(); let wQ=null, wS=null, nQ=0, nS=0, nIn=0, strict=null; const bc={quiet:0,other:0,unknown:0,assumed:0}; let nB=0; const rNeed=Math.pow(10,(lw[1]-8-45)/20);
-  for(const r of list){ const bb=r.bb, lb=Math.max(0,bb[0]-pc[0],pc[0]-bb[2])**2+Math.max(0,bb[1]-pc[1],pc[1]-bb[3])**2; if(lb>NRAD*NRAD) continue;
-    const [d0,px,py]=ringD(pc[0],pc[1],r.ring), d=Math.max(5,d0), lo=lw[0]-20*Math.log10(d)-8, hi=lw[1]-20*Math.log10(d)-8; nIn++;
-    const v={lo,hi,L:r.L,Ls:r.Ls,sec:r.sec,lot:r.lot,d:d0}; r.blds.forEach(b=>NLEV.set(b,v));
+  const cb=(P.boxes||[]).filter(b=>b.name===k.name), ind=P.coolRoofIndoor>0;
+  const src=noiseSrc(s);
+  /* plant groups: each placed group of cooling units at its own centre; units indoors at the centre of the building they sit in */
+  const G=[]; for(const kind of ['roof','yard']){ const bx=cb.filter(b=>b.kind===kind); if(!bx.length) continue; const u=bx.map(b=>BD.centroid(b.ring));
+    let hull=null; try{ const pts=[]; bx.forEach(b=>{ for(let i=0;i<b.clear.length;i++) pts.push(b.clear[i]); }); hull=new Float64Array(BD.geo.hull(new Float64Array(pts)).flat()); if(BD.geo.offset) hull=BD.geo.offset(hull,0.5); }catch(e){ hull=null; }
+    const H=Math.max(...bx.map(b=>b.h)); G.push({kind,n:bx.length,c:[u.reduce((t,p)=>t+p[0],0)/u.length,u.reduce((t,p)=>t+p[1],0)/u.length],u,base:bx[0].base,H,hull,hs:Math.ceil(Math.max(NMIT.scr.minH,H+2)*10)/10,room:0}); }
+  if(ind){ const fr=(m.sizedTo&&m.serverFoot)||m.serverFoot||m.foot, c=fr?BD.centroid(fr):src.c; if(c) G.push({kind:'indoors',n:P.coolRoofIndoor,c,u:[c],room:NMIT.room.dB}); }
+  if(!G.length){ const fr=m.serverFoot||m.foot, c=fr?BD.centroid(fr):src.c; if(!c) return null; G.push({kind:'roof',n,c,u:[c],room:0}); }
+  { const placed=G.reduce((t,g)=>t+g.n,0); if(placed<n) G[0].n+=n-placed; } /* units that did not fit (that set-up is blocked anyway) counted with the first group */
+  const pc=[G.reduce((t,g)=>t+g.c[0]*g.n,0)/n,G.reduce((t,g)=>t+g.c[1]*g.n,0)/n];
+  const yd=G.some(g=>g.kind==='yard'), rf=G.some(g=>g.kind==='roof'), where=ind&&!yd&&!rf?'indoors':yd&&(rf||ind)?'roof and yard':yd?'yard':ind?'roof and indoors':'roof';
+  const chill=k.name==='air-cooled chillers', dry=k.name==='dry coolers', outG=G.filter(g=>g.kind!=='indoors'&&g.hull);
+  const lnN=g=>Math.ceil(g.n*k.mw/NMIT.ln.mw-1e-9);
+  const lwG=(g,rho,o)=>o.ln?NMIT.ln.lw+10*Math.log10(lnN(g)):LU[rho]+10*Math.log10(g.n);
+  /* the screen's credit at one receiver for one group: 0 where a NSW condition fails or the receiver's height is not recorded (?) */
+  const scrAt=(r,i)=>{ r.sc=r.sc||[]; if(r.sc[i]!=null) return r.sc[i]; const g=G[i], p=r.gd[i]; let c=0;
+    if(g.hull&&g.kind!=='indoors'&&r.zr!=null){ const zs=g.base+g.H, zb=g.base+g.hs; let e=1e9, ok=true;
+      for(const u of g.u){ const dx=p.px-u[0], dy=p.py-u[1], D=Math.hypot(dx,dy); if(D<1e-6){ ok=false; break; } const a=rayExit(u[0],u[1],dx/D,dy/D,g.hull);
+        if(!(a<=NMIT.scr.within&&a<D)){ ok=false; break; } e=Math.min(e,zb-(zs+(r.zr-zs)*a/D)); } /* every unit: screen within 20 m of it toward the receiver, and the line of sight from its top */
+      if(ok&&e>=0) c=Math.min(NMIT.scr.dB,NMIT.scr.fh0+NMIT.scr.fhM*e,NMIT.scr.cap); }
+    return r.sc[i]=c; };
+  const lev=(r,rho,o,noRoom)=>{ let e=0; G.forEach((g,i)=>{ e+=Math.pow(10,(lwG(g,rho,o)+r.gd[i].t+(noRoom?g.room:0)-(o.scr?scrAt(r,i):0))/10); }); return 10*Math.log10(e)-(o.fan||0); };
+  const list0=noiseRecv(), list=[]; let nIn=0;
+  for(const r of list0){ const bb=r.bb, lb=Math.max(0,bb[0]-pc[0],pc[0]-bb[2])**2+Math.max(0,bb[1]-pc[1],pc[1]-bb[3])**2; if(lb>NRAD*NRAD) continue; nIn++;
+    r.gd=G.map(g=>{ const [d0,px,py]=ringD(g.c[0],g.c[1],r.ring); return {d0,px,py,t:-20*Math.log10(Math.max(5,d0))-8-g.room}; }); r.sc=null;
+    const hs=r.blds.map(b=>b.h).filter(h=>h>0); r.zr=hs.length?Math.max(...hs):null; list.push(r); }
+  /* options, in the order tried */
+  const fanMax=-NMIT.fan.k*Math.log10(NMIT.fan.min);
+  const O=[{id:'none'}]; if(chill) O.push({id:'ln',ln:true}); if(dry) O.push({id:'fan',fan:'auto'}); if(outG.length){ O.push({id:'scr',scr:true}); if(chill) O.push({id:'ln+scr',ln:true,scr:true}); if(dry) O.push({id:'fan+scr',fan:'auto',scr:true}); }
+  /* worst excess over the limit (Ls: the limit that blocks; L: the strict one) for a rating and option; the screen is only worked out where it matters */
+  const worstEx=(rho,o,lim)=>{ const o0=Object.assign({},o,{fan:0}); let ex=-1e9; for(const r of list){ const L=lim==='Ls'?r.Ls:r.L; let x=lev(r,rho,Object.assign({},o0,{scr:false}))-L; if(x>0&&o.scr) x=lev(r,rho,o0)-L; if(x>ex) ex=x; } return ex; };
+  const solve=(rho,lim)=>{ for(let i=0;i<O.length;i++){ const o=O[i], ex=worstEx(rho,o,lim); if(o.fan==='auto'){ if(ex<=0) continue; if(ex<=fanMax){ const ratio=Math.floor(Math.pow(10,-ex/NMIT.fan.k)*100)/100; if(ratio>=NMIT.fan.min) return {i,o:Object.assign({},o,{fan:-NMIT.fan.k*Math.log10(ratio),ratio}),ex}; } continue; }
+      if(ex<=0) return {i,o:Object.assign({},o,{fan:0}),ex}; } return null; };
+  const q=solve(0,'Ls'), sd=solve(1,'L');
+  const strongest=Object.assign({},O[O.length-1],O[O.length-1].fan==='auto'?{fan:fanMax,ratio:NMIT.fan.min}:{fan:0});
+  const Fo=q?q.o:strongest;
+  /* the levels under the option used (the one that passes, or the strongest modelled one when none does) */
+  let wQ=null, wS=null, nQ=0, nS=0, strict=null; const bc={quiet:0,other:0,unknown:0,assumed:0}; let nB=0; const rNeed=Math.pow(10,(lw[1]-8-45)/20);
+  let w0=null; /* the receiver that sets the mitigation: worst without it, quieter rating */
+  for(const r of list){ const lo=lev(r,0,Fo), hi=lev(r,1,Fo), lo0=lev(r,0,{id:'none'},true), hi0=lev(r,1,{id:'none'},true); const d0=Math.min(...r.gd.map(x=>x.d0)), gi=r.gd.findIndex(x=>x.d0===d0), pt=[r.gd[gi].px,r.gd[gi].py];
+    const v={lo,hi,lo0,hi0,L:r.L,Ls:r.Ls,sec:r.sec,lot:r.lot,d:d0,mit:Fo.id!=='none'||ind}; r.blds.forEach(b=>NLEV.set(b,v));
     if(!strict||r.L<strict.L) strict={L:r.L,sec:r.sec};
+    if(!w0||lo0-r.Ls>w0.ex) w0={r,lo:lo0,hi:hi0,d:d0,ex:lo0-r.Ls,pt};
     if(hi>r.L){ bc[r.cls]=(bc[r.cls]||0)+1; if(!r.lot) nB++; }
-    if(lo>r.Ls){ nQ++; if(!wQ||lo-r.Ls>wQ.ex) wQ={r,lo,hi,d:d0,ex:lo-r.Ls,pt:[px,py]}; }
-    else if(hi>r.L){ nS++; if(!wS||hi-r.L>wS.ex) wS={r,lo,hi,d:d0,ex:hi-r.L,pt:[px,py]}; } }
+    if(lo>r.Ls){ nQ++; if(!wQ||lo-r.Ls>wQ.ex) wQ={r,lo,hi,d:d0,ex:lo-r.Ls,pt}; }
+    else if(hi>r.L){ nS++; if(!wS||hi-r.L>wS.ex) wS={r,lo,hi,d:d0,ex:hi-r.L,pt}; } }
+  const roomNeed=ind&&list.some(r=>lev(r,0,Fo,true)>r.Ls);
   const lab=w=>`${w.r.addr?w.r.addr+' ':''}(${w.r.zt})${w.r.lot?'':' (building, not property line: reads low ?)'}`;
   const at=w=>w.r.lot?(s.city==='van'?'at the point of reception beside':'at the property line of'):'at';
-  const lvl=w=>`about ${Math.round(w.lo)}–${Math.round(w.hi)} dBA (quieter–standard unit rating)`;
-  const fixes=['a smaller size (fewer units)',`the cooling plant ${{roof:'in the yard or split',yard:'on the roof or split','roof and yard':'all on the roof or all in the yard',indoors:'in the yard'}[where]}, if that moves it further from this lot`];
-  if(k.name==='air-cooled chillers') fixes.push('liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims)');
-  const cav='Plant indoors or enclosed (Seen or hidden) gets no sound reduction in the tool yet: no verified dBA figure (?).';
+  const lvl=w=>Math.abs(w.hi-w.lo)<0.05?`about ${Math.round(w.lo)} dBA (low-noise units: one rating)`:`about ${Math.round(w.lo)}–${Math.round(w.hi)} dBA (quieter–standard unit rating)`;
+  const scrG=o=>o.scr?outG:[];
+  const mitTxt=(o,full)=>{ const t=[];
+    if(o.ln){ const nT=G.reduce((a,g)=>a+lnN(g),0); t.push(full?`${nT} low-noise chillers: Trane RTAF 280 low-noise, Lw ${NMIT.ln.lw} dBA per ${fmt(NMIT.ln.mw*1000)} kW, ${NMIT.ln.std} standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?)`:`low-noise chillers (Trane RTAF 280 LN, maker claim)`); }
+    if(o.fan){ t.push(full?`night fan speed ≤ ${Math.round(o.ratio*100)}% of full: −${o.fan.toFixed(1)} dB, fan law 50 log(N2/N1), valid down to 60% (arch_nz_amcaMathson; EC fans: arch_nz_kaltraDC, maker claim). Heat rejection at that speed not checked (?)`:`night fan speed ≤ ${Math.round(o.ratio*100)}% (fan law, −${o.fan.toFixed(1)} dB)`); }
+    if(o.scr){ const gs=scrG(o), hs=Math.max(...gs.map(g=>g.hs)), w=gs.map(g=>g.kind).join(' and ');
+      t.push(full?`a ${hs.toFixed(1)} m solid screen around the ${w} plant, no gaps, ≥ 20 kg/m²: −${NMIT.scr.dB} dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?)`:`a ${hs.toFixed(1)} m solid screen (${w}; NSW 2021, −${NMIT.scr.dB} dB)`); }
+    return t; };
+  const roomTxt=full=>full?`a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −${NMIT.room.dB} dB (arch_nz_nswDcNoise)`:`a plant room to the NSW 2021 terms (−${NMIT.room.dB} dB)`;
   const govern=wQ?{L:wQ.r.Ls,sec:wQ.r.sec}:wS?{L:wS.r.L,sec:wS.r.sec}:strict;
   const sum=w=>({addr:w.r.addr,zt:w.r.zt,lot:w.r.lot,d:Math.round(w.d*10)/10,lo:Math.round(w.lo*10)/10,hi:Math.round(w.hi*10)/10,L:w.r.L,Ls:w.r.Ls,sec:w.r.sec});
-  const out={lw:lw.map(x=>Math.round(x*10)/10),n,src:pc.map(x=>Math.round(x*10)/10),where,tested:nIn,overQ:nQ,overS:nS,limit:govern?govern.L:null,sec:govern?govern.sec:null,beyond:rNeed>NRAD,byCls:bc,bldOnly:nB,block:null,flag:null,worst:null};
-  if(wQ){ out.worst=sum(wQ);
-    out.block=`Noise: the cooling plant (${where}) would give ${lvl(wQ)} ${at(wQ)} ${lab(wQ)}, ${fmt(wQ.d)} m away: over the ${wQ.r.Ls} dBA night limit even with the quieter rating (${wQ.r.sec}; the plant runs 24 h, so the night limit governs)${nQ>1?`. ${nQ} neighbouring lots are over`:''}. To bring it under: ${fixes.join('; ')}. ${cav}`; }
-  else if(wS){ out.worst=sum(wS);
-    out.flag=wS.lo>wS.r.L?`Noise: the plant would exceed the ${wS.r.L} dBA night limit ${at(wS)} ${lab(wS)} (${lvl(wS)}, ${wS.r.sec}) if that lot takes the stricter limit; its zoning is not known, so this is a note, not a block${nS>1?` (${nS} lots in all over a limit with the louder rating)`:''}.`:`Noise: with the standard (louder) unit rating the plant would exceed the ${wS.r.L} dBA night limit ${at(wS)} ${lab(wS)} (${lvl(wS)}, ${wS.r.sec})${nS>1?`; ${nS} lots in all`:''}. With the quieter rating it is under, so this is not blocked: quieter units would need to be chosen.`; }
+  const need=q?q.o:null, needT=need?mitTxt(need,true).concat(roomNeed?[roomTxt(true)]:[]):[], needS=need?mitTxt(need,false).concat(roomNeed?[roomTxt(false)]:[]):[];
+  const mit={option:need?need.id:null,tried:O.map(o=>o.id),screen:need&&need.scr?{h:Math.max(...outG.map(g=>g.hs)),on:outG.map(g=>g.kind),src:'arch_nz_nswDcNoise'}:null,
+    ln:need&&need.ln?{n:G.reduce((a,g)=>a+lnN(g),0),src:'traneRTAF'}:null,fan:need&&need.fan?{ratio:need.ratio,dB:Math.round(need.fan*10)/10,src:'arch_nz_amcaMathson'}:null,room:roomNeed?{dB:NMIT.room.dB,src:'arch_nz_nswDcNoise'}:null,
+    short:needS.join(' + ')||null,std:sd?sd.o.id:null};
+  const out={lw:lw.map(x=>Math.round(x*10)/10),n,src:pc.map(x=>Math.round(x*10)/10),where,groups:G.map(g=>({kind:g.kind,n:g.n})),tested:nIn,overQ:nQ,overS:nS,limit:govern?govern.L:null,sec:govern?govern.sec:null,beyond:rNeed>NRAD,byCls:bc,bldOnly:nB,block:null,flag:null,req:null,worst:null,mit};
+  const fixes=['a smaller size (fewer units)',`the cooling plant ${{roof:'in the yard or split',yard:'on the roof or split','roof and yard':'all on the roof or all in the yard',indoors:'in the yard','roof and indoors':'all indoors or in the yard'}[where]}, if that moves it further from this lot`];
+  if(chill) fixes.push('liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims)');
+  if(!ind&&rf) fixes.push(`the roof plant indoors (Seen or hidden: Bring it indoors), credited ${NMIT.room.dB} dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise)`);
+  const cav='Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?).';
+  if(wQ){ out.worst=sum(wQ); const best=mitTxt(strongest,false).concat(ind?[roomTxt(false)]:[]);
+    out.block=`Noise: the cooling plant (${where}) would give ${lvl(wQ)} ${at(wQ)} ${lab(wQ)}, ${fmt(wQ.d)} m away${best.length?`, even with ${best.join(' + ')}`:''}: over the ${wQ.r.Ls} dBA night limit with the quieter rating (${wQ.r.sec}; the plant runs 24 h, so the night limit governs)${nQ>1?`. ${nQ} neighbouring lots are over`:''}. No modelled option brings it under. To bring it under: ${fixes.join('; ')}. ${cav}`; }
+  else { if(needT.length&&w0&&w0.ex>0){ out.worst=sum(w0);
+      out.req=`Noise: needs ${needT.join('; and ')}. Without it: ${lvl(w0)} ${at(w0)} ${lab(w0)}, ${fmt(w0.d)} m away; limit ${w0.r.Ls} dBA at night (${w0.r.sec}).`; }
+    if(wS){ if(!out.worst) out.worst=sum(wS); const more=sd?mitTxt(sd.o,false).concat(roomNeed?[roomTxt(false)]:[]).join(' + '):null;
+      out.flag=wS.lo>wS.r.L?`Noise: the plant would exceed the ${wS.r.L} dBA night limit ${at(wS)} ${lab(wS)} (${lvl(wS)}${need&&need.id!=='none'?` with ${needS.join(' + ')}`:''}, ${wS.r.sec}) if that lot takes the stricter limit; its zoning is not known, so this is a note, not a block${nS>1?` (${nS} lots in all over a limit with the louder rating)`:''}.`
+        :`Noise: with the standard (louder) unit rating the plant would exceed the ${wS.r.L} dBA night limit ${at(wS)} ${lab(wS)} (${lvl(wS)}${need&&need.id!=='none'?` with ${needS.join(' + ')}`:''}, ${wS.r.sec})${nS>1?`; ${nS} lots in all`:''}. With the quieter rating it is under, so this is not blocked: ${more&&(sd.o.id!==(need?need.id:'none')||(sd.o.fan||0)>((need&&need.fan)||0)+1e-9)?`standard units would need ${more}`:more?'quieter units would need to be chosen':'no modelled option brings standard units under, so quieter units would need to be chosen'}.`; } }
   return out; }
 function noiseRow(f){
   if(f.city==='edm') return ['Night limit at the property line','50 dBA next to homes, 60 dBA next to other uses (Bylaw 14600)','noise'];
@@ -744,7 +809,7 @@ function socialView(){
   let h=tabBar('social')+`<h2>What neighbours would hear, see and feel</h2><p class="draft">Described as experienced, not scored. Measured where the data allows; your site observations sit beside it, labelled as yours.</p>
   <h3>Sound</h3><dl><dt>Cooling plant</dt><dd>${n} ${CU.name} (as laid out, spares included), rated ${rng(lw[0],lw[1],'dBA')} together (${CU.name==='dry coolers'?'dry-cooler ratings at full fan speed, manufacturer claims':CU.name==='air-cooled chillers'?'air-cooled chiller ratings for two Vertiv models (FH3135, FIZ135), manufacturer claims; the lower one not yet indexed ?':'air-cooled chiller ratings used as a stand-in: no rating found for this kind'})</dd>
   <dt>Night limit</dt><dd>${f.city==='van'?`from this ${srcCls} zone: ${limQ} dBA at a quiet-zone neighbour, ${limO} dBA at any other`:'50 dBA next to homes, 60 dBA next to other uses'}</dd><dt>Quiet-zone limit reached at</dt><dd>${fmt(dist[0])}–${fmt(dist[1])} m from the plant, before walls, barriers or enclosures</dd>
-  <dt>Neighbours over their limit</dt><dd>${within[0]}–${within[1]} neighbouring lots within 1.5 km (quieter to louder unit rating), each at its point nearest the plant (${f.city==='van'?'By-law 6555 s. 1.2, point of reception':'Bylaw 14600 ss. 20(1), 22(1), at the property line'}) and against the night limit for its own zone: ${f.city==='van'?`${limQ} dBA in a quiet zone, ${limO} dBA elsewhere`:'50 dBA next to homes, 60 dBA next to other uses'}${within[1]?` — ${byCls.quiet} in quiet${f.city==='van'?' zones':' (residential) zones'}, ${byCls.other} elsewhere${byCls.assumed?`, ${byCls.assumed} in mixed-use or Direct Control zones (residential limit assumed: the bylaws do not settle these)`:''}${byCls.unknown?`, ${byCls.unknown} with no parcel record (quiet limit used)`:''}${nc&&nc.bldOnly?`; ${nc.bldOnly} measured at the building, not the property line (reads low ?)`:''}`:''}${nc&&nc.beyond?'. Lots beyond 1.5 km are not tested (?)':''}${nc&&nc.block?'. <span class="k">Over even with the quieter rating: this set-up is blocked</span>':nc&&nc.flag?'. Over only with the louder rating: a note, not a block':''}. In the 3D view, red: over even with the quieter rating; accent: over only with the louder rating.</dd>${''/* 2 Nov 2026 fix pass: D-radius (600 m: our study radius) */}
+  <dt>Neighbours over their limit</dt><dd>${within[0]}–${within[1]} neighbouring lots within 1.5 km (quieter to louder unit rating), each at its point nearest the plant (${f.city==='van'?'By-law 6555 s. 1.2, point of reception':'Bylaw 14600 ss. 20(1), 22(1), at the property line'}) and against the night limit for its own zone: ${f.city==='van'?`${limQ} dBA in a quiet zone, ${limO} dBA elsewhere`:'50 dBA next to homes, 60 dBA next to other uses'}${within[1]?` — ${byCls.quiet} in quiet${f.city==='van'?' zones':' (residential) zones'}, ${byCls.other} elsewhere${byCls.assumed?`, ${byCls.assumed} in mixed-use or Direct Control zones (residential limit assumed: the bylaws do not settle these)`:''}${byCls.unknown?`, ${byCls.unknown} with no parcel record (quiet limit used)`:''}${nc&&nc.bldOnly?`; ${nc.bldOnly} measured at the building, not the property line (reads low ?)`:''}`:''}${nc&&nc.beyond?'. Lots beyond 1.5 km are not tested (?)':''}${nc&&nc.mit&&nc.mit.short&&!nc.block?`, counted with the mitigation this set-up needs: ${esc(nc.mit.short)}`:''}${nc&&nc.block?'. <span class="k">Over even with the quieter rating and every modelled mitigation: this set-up is blocked</span>':nc&&nc.flag?'. Over only with the louder rating: a note, not a block':''}. In the 3D view, red: over even with the quieter rating; accent: over only with the louder rating.</dd>${''/* 2 Nov 2026 fix pass: D-radius (600 m: our study radius) */}
   <dt>Low hum</dt><dd>a tonal low-frequency sound adds 5 dBA in Alberta's rule for power plants and substations (AUC Rule 012, used here as a benchmark; no rule covers it for a data centre) — the kind neighbours describe most</dd></dl>${s3('snd')}${s3('lf')}${src('noise')}
   <h3>The edge</h3><dl><dt>Standoff</dt><dd>new facilities keep about 10 m between the building and the public (45 m unless access control is in place; Ontario government standard) — a fence, bollards or a blank setback, as experienced from the street</dd>
   <dt>Ground floor</dt><dd>${f.envAssumed?'not known: this zone\'s rules are not yet read':(f.envU&&f.envU.ground)?'this zone keeps the ground floor free of data storage: it could meet the street':'nothing in the zone requires another use at grade'}</dd>
@@ -754,7 +819,7 @@ function socialView(){
   ${mathBox([
     `Cooling units: power at the meter ${n1(fac)} MW → <b>${n}</b> unit${n>1?'s':''}, from the plant sizing (${CU.name}, one spare included).`,
     `Together: Lw per unit ${LU[0]}–${LU[1]} dBA, + 10 × log₁₀(${n} units) = <b>${n1(lw[0])}–${n1(lw[1])} dBA</b>.`,
-    `Distance where the night limit is reached: r = 10^((Lw − 8 − ${lim}) ÷ 20) = <b>${n0(dist[0])}–${n0(dist[1])} m</b> (free field over hard ground, no walls or barriers).`].concat(nc&&nc.worst?[`By-law check, worst lot: ${esc(nc.worst.addr||'a neighbouring lot')} (${esc(nc.worst.zt)}), ${n1(nc.worst.d)} m from the centre of the cooling units (${nc.where}) to its nearest point${nc.worst.lot?'':' (building outline: reads low ?)'}: Lp = Lw − 20 log₁₀(${n1(Math.max(5,nc.worst.d))}) − 8 = <b>${n1(nc.worst.lo)}–${n1(nc.worst.hi)} dBA</b> against ${nc.worst.block!==false&&nc.block?nc.worst.Ls:nc.worst.L} dBA at night (${esc(nc.worst.sec)}) → <b>${nc.block?'blocked':'note only'}</b>.`]:[]),
+    `Distance where the night limit is reached: r = 10^((Lw − 8 − ${lim}) ÷ 20) = <b>${n0(dist[0])}–${n0(dist[1])} m</b> (free field over hard ground, no walls or barriers).`].concat(nc&&nc.worst?[`By-law check, worst lot: ${esc(nc.worst.addr||'a neighbouring lot')} (${esc(nc.worst.zt)}), ${n1(nc.worst.d)} m from the centre of the cooling units (${nc.where}) to its nearest point${nc.worst.lot?'':' (building outline: reads low ?)'}: Lp = Lw − 20 log₁₀(${n1(Math.max(5,nc.worst.d))}) − 8${nc.groups&&nc.groups.length>1?' for each plant group, summed logarithmically':''}${nc.req?' (before the mitigation)':nc.block&&nc.mit?' − every modelled mitigation':nc.mit&&nc.mit.short?' − '+esc(nc.mit.short):''} = <b>${n1(nc.worst.lo)}–${n1(nc.worst.hi)} dBA</b> against ${nc.worst.block!==false&&nc.block?nc.worst.Ls:nc.worst.L} dBA at night (${esc(nc.worst.sec)}) → <b>${nc.block?'blocked':nc.req?'passes only with '+esc(nc.mit.short):'note only'}</b>.`]:[]),
     'Sound: Lp = Lw − 20 log r − 8 (hemispherical spreading); unit ratings from manufacturer data (Vertiv for chillers, our conversion from Lp at 1 m; Güntner, Thermokey for dry coolers). Limits: Noise Control By-law 6555 / Bylaw 14600.')}
   <h3>Your observations on site</h3><textarea id="notes" rows="5" style="width:100%;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;padding:8px;color:var(--fg)" placeholder="What did you hear, see and feel at the edge? Time of day, where you stood.">${esc(notes)}</textarea><div class="src">Kept in this browser only; shown as your observation, never as a measurement.</div>
   <div class="draftnote">Sound is a screening estimate: manufacturer-rated levels, no barriers, ground or buildings.</div>`;
@@ -811,6 +876,6 @@ async function precView(){
 }
 /* sweep 20 Oct 2026: air-cooled halls get air-cooled chillers, not dry coolers (plant.js, sweep M31); every 'dry coolers' a user reads says which */
 BD.dryName=()=>{ const A=BD.S.answers; return (A.inside||'air')==='air'&&(A.outside||'dry')==='dry'?'air-cooled chillers':'dry coolers'; };
-BD.eng={R,vZone,siteFacts,plantPerMW,coolUnits,equip,noiseLw,noiseCheck,noiseLevel:b=>NLEV.get(b)||null,calc,rng,f1,n0,n1,mathBox,tabBar,wireTabs,show3d,nearby,netsAt,loadRecv,badge,src,s3,rangeBar,state,roofArea,optionSet};
+BD.eng={R,NMIT,vZone,siteFacts,plantPerMW,coolUnits,equip,noiseLw,noiseCheck,noiseLevel:b=>NLEV.get(b)||null,calc,rng,f1,n0,n1,mathBox,tabBar,wireTabs,show3d,nearby,netsAt,loadRecv,badge,src,s3,rangeBar,state,roofArea,optionSet};
 BD.fitsView=fitsView; BD.recvView=recvView; BD.optionsView=optionsView; BD.tabView=tabView;
 })();

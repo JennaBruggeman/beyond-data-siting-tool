@@ -183,8 +183,10 @@ function model(){
     m.fuel={L:Lf,lim,at:'roof'}; if(Lf>lim+0.5){ const mwMax=Math.floor(lim/(R.pue[1]*1000*R.fuelHours*R.fuelLkWh)*10)/10; m.warn.push(`Generators on the roof: ${R.fuelHours} h of fuel for ${m.mwSized} MW is about ${fmt(Math.round(Lf/100)*100)} L above the first storey; the fire code allows 20,000 L in one storage area there (NFC 2020 Table 4.3.13.4.-B; register nfc2020_4313; applying it to rooftop tanks is our reading ?). Put the generators in the yard, or test ${mwMax.toFixed(1)} MW or less.`); } }
   /* 2 Nov 2026 (J.B.): noise by-law limits are hard rules (engine.js noiseCheck; Van By-law 6555 ss. 1.2, 2.1–2.3; Edm Bylaw 14600 ss. 20, 22).
      Over the night limit at any neighbouring lot even with the quieter unit rating: a set-up problem (blocks fitMax, the flow, the report plans).
-     Over only with the standard rating: a note, not a block (m.notes). */
-  m.notes=[]; if(BD.eng&&BD.eng.noiseCheck){ let nc=null; try{ nc=BD.eng.noiseCheck(m); }catch(e){ console.warn(e); } m.noise=nc; if(nc&&nc.block) m.warn.push(nc.block); else if(nc&&nc.flag) m.notes.push(nc.flag); }
+     Over only with the standard rating: a note, not a block (m.notes).
+     3 Nov 2026: sourced mitigation (engine NMIT): blocked only when no modelled option brings the quieter rating under; an option that does is named as
+     required (nc.req, in m.notes, before the flag). */
+  m.notes=[]; if(BD.eng&&BD.eng.noiseCheck){ let nc=null; try{ nc=BD.eng.noiseCheck(m); }catch(e){ console.warn(e); } m.noise=nc; if(nc&&nc.block) m.warn.push(nc.block); else { if(nc&&nc.req) m.notes.push(nc.req); if(nc&&nc.flag) m.notes.push(nc.flag); } }
   cache={key,m}; return m; }
 BD.siteGeo={rectW,inscribe,clip,frameOf}; BD.model=model; BD.modelReset=()=>{ cache.key=null; };
 /* a set-up that does not work (J.B. 20 Oct: "a set up that doesnt work shouldnt ever let you click next"): everything that stops it, in words */
