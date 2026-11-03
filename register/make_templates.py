@@ -117,6 +117,11 @@ T = {
  'arch_space_budget': ('arch_only', 'host city', 'the floor the programs share'), 'arch_heat_budget': ('arch_only', 'receiver host', 'the heat the programs share'),
  'arch_heat_lift': ('arch_only', 'receiver', 'whether a program can take the heat directly'), 'arch_secure_line': ('arch_only', 'operator neighbours', 'where the locked part ends'),
  'arch_rules': ('arch_only', 'city neighbours', 'the rules an arrangement passes or fails'), 'arch_compare': ('arch_only', 'host city neighbours', 'arrangements side by side'),
+ # Architecture rebuild part 1 (3 Nov 2026): the data centre's own rooms and the site ratios
+ 'arch_dc_hall': ('arch_only', 'operator host', 'how much hall each MW needs'), 'arch_dc_electrical': ('arch_only', 'operator', 'the UPS room'),
+ 'arch_dc_battery': ('arch_only', 'operator city', 'the battery room'), 'arch_dc_ets': ('arch_only', 'utility receiver', 'the heat hand-over room'),
+ 'arch_dc_portal': ('arch_only', 'operator', 'the security portals'), 'arch_dc_washrooms': ('arch_only', 'operator workers', 'staff washrooms'),
+ 'arch_dc_rooms': ('arch_only', 'operator host city', "the data centre's rooms"), 'arch_ratios': ('arch_only', 'host city', 'how the lot and the floor are split'),
 }
 ids = [n['id'] for n in D['nodes']]
 # 2 Nov 2026 fix pass: A-eng (engineering only, J.B. triage 30 Oct): hvo_swap, clean_power_price, greywater_neighbours set to F above

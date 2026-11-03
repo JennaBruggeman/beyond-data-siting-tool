@@ -1,0 +1,74 @@
+{
+ "_about": "The data centre's own rooms (Architecture mode; register arch_dc_rooms and the arch_dc_* quantities; research checks/research_arch_v1/dc_rooms.md, checks 1-3). perMW: m² per MW of IT unless 'per' says otherwise. 'split': counted when a floor-area share is turned into MW (Ratios). A room with no size source has no number and shows '?'.",
+ "rooms": [
+  {
+   "id": "hall", "name": "Data hall", "split": true, "where": "floor",
+   "perMW": {"v": [290, 630], "src": ["arch_dc_hall", "it_load_outside", "estruxtureVAN1ds", "hut8Vault", "quEDM1_2026"]},
+   "kind": "operator claims",
+   "rules": [
+    {"t": "Not at the ground floor in Vancouver I-2, I-3, FC-2 (entrances only)", "src": ["van_zdb_i2", "van_zdb_i3", "van_zdb_fc2"]},
+    {"t": "If F-2: 2 h to assembly, care and residential uses (NBC Table 3.1.3.1)", "src": ["arch_pub_nbc3131full"]},
+    {"t": "Ceiling at most 9 m (FM 5-32, insurer guidance)", "src": ["fmDS0532"]}
+   ]
+  },
+  {
+   "id": "electrical", "name": "Electrical room (UPS), equipment only", "split": true, "where": "floor",
+   "perMW": {"v": [2.4, 3.3], "src": ["arch_dc_electrical", "component_space", "vertivEXLS1", "galaxyVX"]},
+   "kind": "maker claims",
+   "rules": [
+    {"t": "1 h service-room separation (NBC 3.6.2.1)", "src": ["nbc2020_v1", "electrical_room"]},
+    {"t": "Working space 1.5 m in front of the UPS (CEC 2-310)", "src": ["cec2024", "electrical_room"]}
+   ]
+  },
+  {
+   "id": "battery", "name": "Battery room, lithium-ion (about 5 min)", "split": true, "where": "floor",
+   "perMW": {"v": [1.0, 1.8], "src": ["arch_dc_battery", "component_space", "vertivLi5", "deltaLZH"]},
+   "kind": "maker claims",
+   "rules": [
+    {"t": "HVAC separate from the hall; above the 500-year flood level (FM 5-28, insurer guidance)", "src": ["arch_up_fm0528"]},
+    {"t": "2 h room kept (NFPA 855, US standard; stricter than FM's 1 h)", "src": ["nfpa855_2026", "arch_up_fm0528"]}
+   ]
+  },
+  {
+   "id": "heat_recovery", "name": "Heat-recovery heat pumps, equipment only", "split": false, "where": "floor or yard",
+   "perMW": {"v": [5.6, 15.1], "src": ["component_space", "hr_plant_room", "sabroeDualPAC", "geaRedHP"]}, "per": "MW of heat",
+   "kind": "maker claims",
+   "_why": "per MW of heat, not of IT; whether it sits indoors is a design choice, so it is not counted in the split"
+  },
+  {
+   "id": "ets", "name": "Energy transfer station (heat network)", "split": false, "where": "floor",
+   "van": {"m": [[6, 3], [6, 4]], "below_m2": 13940, "to_m2": 23230, "src": ["arch_dc_ets", "neuETS"]},
+   "edm": {"m2": [27, 55], "src": ["arch_dc_ets", "arch_ho_breMultiUnit2025"], "_note": "Blatchford residential table, a benchmark here"},
+   "kind": "government guide (Vancouver); utility design guide (Edmonton)",
+   "_why": "only when the site joins a heat network"
+  },
+  {
+   "id": "transformers", "name": "Transformers", "split": false, "where": "yard or vault",
+   "count": {"kva": 2500, "src": ["transformers", "eatonCA022021"]},
+   "kind": "maker claim (count rule); utility rules for clearances",
+   "rules": [{"t": "BC Hydro pads 1 m from buildings, 3 m clear in front", "src": ["bchES54F"]}]
+  },
+  {"id": "generators", "name": "Standby generators and fuel", "split": false, "where": "yard", "byTool": true, "src": ["generator_sets", "component_space"], "kind": "drawn by the set-up (plant)"},
+  {"id": "cooling", "name": "Chillers or dry coolers", "split": false, "where": "roof or yard", "byTool": true, "src": ["cooling_units", "component_space"], "kind": "drawn by the set-up (plant)"},
+  {"id": "loading", "name": "Shipping and receiving (loading)", "split": false, "where": "at grade", "byTool": true, "src": ["vanParking5", "edmZB580"], "kind": "rule (count by floor area)"},
+  {
+   "id": "portals", "name": "Security portals", "split": false, "where": "floor",
+   "side_m": {"v": [1.0, 1.8], "src": ["arch_dc_portal", "arch_acc_boonSolo", "arch_acc_gunneboHiSec"]},
+   "kind": "maker claims", "_why": "count per zone line ? (no source)"
+  },
+  {
+   "id": "washrooms", "name": "Staff washrooms", "split": false, "where": "floor",
+   "wc": {"v": [[10, 1], [25, 2], [50, 3]], "src": ["arch_dc_washrooms", "arch_per_nbcWC"], "_note": "staff per sex up to → water closets (if Group F)"},
+   "kind": "rule (count); room area ?"
+  },
+  {"id": "mv", "name": "MV switchgear / main electrical", "split": false, "src": ["arch_dc_rooms"], "kind": "no size source (?)"},
+  {"id": "telecom", "name": "Telecom entrance and meet-me rooms", "split": false, "src": ["arch_dc_rooms"], "kind": "no size source (?): TIA-942 paywalled"},
+  {"id": "fire", "name": "Fire suppression (valve room, cylinders)", "split": false, "src": ["arch_dc_rooms"], "kind": "no size source (?): NFPA 13 and 2001 paywalled"},
+  {"id": "storage", "name": "Storage and staging", "split": false, "src": ["arch_dc_rooms"], "kind": "no size source (?)"},
+  {"id": "security", "name": "Security control and guard room", "split": false, "src": ["arch_dc_rooms"], "kind": "no size source (?)"},
+  {"id": "office", "name": "Offices and NOC", "split": false, "src": ["arch_dc_rooms"], "kind": "no size source (?); Vancouver I-2 caps office at the greater of 235 m² or 33.3 %", "cap_src": ["van_zdb_i2"]},
+  {"id": "break", "name": "Break room", "split": false, "src": ["arch_dc_rooms"], "kind": "no size source (?)"},
+  {"id": "janitor", "name": "Janitor", "split": false, "src": ["arch_dc_rooms"], "kind": "no size source (?)"}
+ ],
+ "coverLimit": {"none": ["I-2"], "src": ["envelope", "van_zdb_i2"], "_note": "I-2 ss. 3.1.2.2-3: no site coverage limit. No other zone's coverage limit is in the register: shown as ?"}
+}
