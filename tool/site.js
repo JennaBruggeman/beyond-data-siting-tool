@@ -181,6 +181,10 @@ function model(){
      Sets in the yard stand outdoors at grade: the table does not apply (outdoor tanks follow NFC 4.3.2, not tested here). */
   if(BD.eng&&m.plant&&m.plant.s&&m.plant.s.g&&(A.genAt||'yard')==='roof'&&A.gens!=='none'){ const R=BD.eng.R, Lf=m.mwSized*R.pue[1]*1000*R.fuelHours*R.fuelLkWh, lim=R.fuelLimit.low;
     m.fuel={L:Lf,lim,at:'roof'}; if(Lf>lim+0.5){ const mwMax=Math.floor(lim/(R.pue[1]*1000*R.fuelHours*R.fuelLkWh)*10)/10; m.warn.push(`Generators on the roof: ${R.fuelHours} h of fuel for ${m.mwSized} MW is about ${fmt(Math.round(Lf/100)*100)} L above the first storey; the fire code allows 20,000 L in one storage area there (NFC 2020 Table 4.3.13.4.-B; register nfc2020_4313; applying it to rooftop tanks is our reading ?). Put the generators in the yard, or test ${mwMax.toFixed(1)} MW or less.`); } }
+  /* 2 Nov 2026 (J.B.): noise by-law limits are hard rules (engine.js noiseCheck; Van By-law 6555 ss. 1.2, 2.1–2.3; Edm Bylaw 14600 ss. 20, 22).
+     Over the night limit at any neighbouring lot even with the quieter unit rating: a set-up problem (blocks fitMax, the flow, the report plans).
+     Over only with the standard rating: a note, not a block (m.notes). */
+  m.notes=[]; if(BD.eng&&BD.eng.noiseCheck){ let nc=null; try{ nc=BD.eng.noiseCheck(m); }catch(e){ console.warn(e); } m.noise=nc; if(nc&&nc.block) m.warn.push(nc.block); else if(nc&&nc.flag) m.notes.push(nc.flag); }
   cache={key,m}; return m; }
 BD.siteGeo={rectW,inscribe,clip,frameOf}; BD.model=model; BD.modelReset=()=>{ cache.key=null; };
 /* a set-up that does not work (J.B. 20 Oct: "a set up that doesnt work shouldnt ever let you click next"): everything that stops it, in words */
@@ -277,6 +281,7 @@ function card(step){
     ${P.genLines?`<h3>Sized from the load</h3><ul class="lim">${P.genLines.map(l=>`<li>${l}</li>`).join('')}</ul>`:''}`;
   }
   if(m.warn.length) h+=m.warn.map(w=>`<div class="warnbox">${esc(w)}</div>`).join('');
+  if(m.notes&&m.notes.length) h+=m.notes.map(w=>`<p class="src nflag" style="border-left:2px solid var(--line-2);padding-left:8px">${esc(w)}</p>`).join(''); /* noise flag (2 Nov 2026): a note, not a block */
   h+=liveBox();
   h+=`<div class="navb">${step>1?'<button class="sec" id="sb">← Back</button>':''}<button class="pri" id="sn">${step<5?'Next →':'What fits here →'}</button><span class="sub">or keep the defaults</span></div>`;
   BD.drawer.open(h,el=>{

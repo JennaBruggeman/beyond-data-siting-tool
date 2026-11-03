@@ -278,7 +278,11 @@ function peopleExtra(){ const e=E(); if(BD.S.tab!=='social'){ BD.afterSocial=nul
     const NL=e.noiseLw(A().mw||(f.M&&f.M.mwSized)||1), n=NL.n, lw=NL.lw;
     const people=near.slice(0,20).map(p=>({x:p.x,y:p.y,n:p.n||TYPE[p.t],kind:TYPE[p.t],col:0xb9a3cf}));
     const seenL=s.lines.filter(l=>l.seen), blk=s.lines.filter(l=>!l.seen); const draw=seenL.slice(0,40).concat(blk.slice(0,15));
-    BD.scene3d&&BD.scene3d.show('social',{site:f,noise:BD._noise||{lw,limit:50,src:psrc},sight:A().vis==='indoors'?[]:draw,people}); },400); }
+    BD.scene3d&&BD.scene3d.show('social',{site:f,noise:BD._noise||noiseFallback(f,lw,psrc),sight:A().vis==='indoors'?[]:draw,people}); },400); }
+/* 2 Nov 2026 (J.B.; exchanges F12): no unsourced 50 dBA contour. Without the People tab's figures, the governing limit comes from the by-law
+   check (engine noiseCheck: the binding lot's night limit, else the strictest limit among the neighbouring lots), with its section */
+function noiseFallback(f,lw,psrc){ const nc=f.M&&f.M.noise; if(!nc||nc.limit==null) return {lw,src:psrc,level:e=>E().noiseLevel(e)};
+  const L=nc.limit; return {lw:nc.lw,limit:L,limLab:`governing night limit ${L} dBA (${nc.sec})`,level:b=>E().noiseLevel(b),dist:nc.lw.map(x=>Math.pow(10,(x-8-L)/20)),src:nc.src}; }
 function personCard(f,p,TYPE){ const NL=E().noiseLw(A().mw||(f.M&&f.M.mwSized)||1), n=NL.n, lw=NL.lw, r=Math.max(5,p.dist); const lp=lw.map(L=>L-20*Math.log10(r)-8);
   BD.drawer.open(`<div class="kind">People · neighbour</div><h2>${esc(p.n||TYPE[p.t])}</h2><p class="sub">${esc(TYPE[p.t])}${p.u?' · '+p.u+' homes':''} · ${fmt(p.dist)} m from the site</p>
   <dl><dt>Would hear</dt><dd>about ${Math.round(Math.max(0,lp[0]))}–${Math.round(lp[1])} dBA from the cooling plant, before walls, barriers or enclosures (screening estimate)</dd><dt>Would see</dt><dd>see the sight-line count on the People tab</dd><dt>Could gain</dt><dd>${p.t==='housing'||p.t==='school'||p.t==='care'||p.t==='rec'||p.t==='pool'?'heat, if it can take low-temperature heat (Heat tab)':'—'}${p.t==='rec'||p.t==='school'?'; a warming or cooling room, if the rules allow it (opportunities)':''}</dd><dt>Who they are</dt><dd>${draft('a record in a national or City list; how the people there would feel is for engagement, not the tool')}</dd></dl>

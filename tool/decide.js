@@ -146,7 +146,7 @@ function show(i){ const A=BD.S.answers; const L=live(); at=Math.max(0,Math.min(L
    ${!no?`<div class="dfeas" style="--fc:${F[1]}"><b>${F[2]} ${F[0]}</b>${fs.why?` <span>${esc(fs.why)}</span>`:''}</div>`:''}${!no&&d.extra?d.extra(A):''}
    <div class="dud${no?' off':''}"><div><div class="dh up">Upsides</div><ul>${o.up.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div><div><div class="dh dn">Downsides</div><ul>${o.down.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div>
    ${CH[d.id]?'<div class="dchart" id="dchart"></div><p class="dcap" id="dcap"></p>':''}
-   <p class="dres">${no?'Nothing changes: the site stays as set up, ':''}${res}${shortTxt}${m.warn&&m.warn.length?`<br><span class="dwarn">${esc(m.warn[0])}</span>`:''}${m.hClamp&&d.id!=='height'?`<br><span class="dwarn">${esc(m.hClamp.text)}</span>`:''}</p>
+   <p class="dres">${no?'Nothing changes: the site stays as set up, ':''}${res}${shortTxt}${m.warn&&m.warn.length?`<br><span class="dwarn">${esc(m.warn[0])}</span>`:''}${m.notes&&m.notes.length&&!(m.warn&&m.warn.length)?`<br><span class="src nflag">${esc(m.notes[0])}</span>`:''}${m.hClamp&&d.id!=='height'?`<br><span class="dwarn">${esc(m.hClamp.text)}</span>`:''}</p>
    <div class="dnav"><button class="sec" id="dB">← ${at?'Back':'The site'}</button><button class="pri" id="dN">${at<L.length-1?'Next →':'What fits here →'}</button></div></div>`;
   const el=$('#side');
   el.querySelectorAll('.dch button').forEach(b=>b.onclick=()=>{ const v=b.dataset.v; if(feas(d.id,v).s==='no'){ pv[d.id]=v; show(at); return; } pv[d.id]=null; d.set(A,v); changed(); });
