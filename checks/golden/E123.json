@@ -5,11 +5,11 @@
   "extent": "whole",
   "floor": "",
   "host": {},
-  "mw": 21.9,
+  "mw": 3.2,
   "foot": "max",
   "cover": 70,
   "hmode": "out",
-  "plantAt": "roof",
+  "plantAt": "split",
   "outside": "dry",
   "inside": "air",
   "spares": "n1",
@@ -233,12 +233,17 @@
     "ground": false,
     "yards": "[cycle]",
     "yardsKnown": true,
-    "userSet": false
+    "userSet": false,
+    "srcId": "edm_bl20001",
+    "screen": null
    },
    "city": "edm",
    "lotArea": 14565,
    "ring": "[ring 82]",
-   "notes": [],
+   "notes": [
+    "Noise: needs 8 low-noise chillers: Trane RTAF 280 low-noise, Lw 98 dBA per 1,010 kW, 101 standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?); and a 4.9 m solid screen around the roof and yard plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 66–69 dBA (quieter–standard unit rating) at the property line of 12311 126 AVENUE NW (IH), 52 m away; limit 60 dBA…",
+    "Noise: the plant would exceed the 50 dBA night limit at the property line of (no parcel record: residential limit assumed ?) (about 52 dBA (low-noise units: one rating) with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof and yard; NSW 2021, −8 dB), Bylaw 14600 s. 20(1)) if that lot takes the stricter limit; its zoning is not known, so this is a note, not a block."
+   ],
    "warn": [],
    "F": {
     "cx": -2220.989964,
@@ -248,35 +253,27 @@
     "L": 245.092333,
     "W": 105.268275
    },
+   "maxStoreys": 5,
    "H": 30,
    "hmode": "outright",
    "nF": [
     5,
     5
    ],
+   "yardRect": "[ring 8]",
    "inset": "[ring 8]",
    "yardNote": "",
    "loadingNeed": {
-    "n": 2,
+    "n": 0,
     "len": 9,
     "wid": 3.3,
     "ht": 4,
     "aisle": 6.1,
     "cls": "loading space",
-    "basis": "2 loading spaces for 16,790 m² of floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site, with no backing onto streets or alleys (s. 5.80 subs. 7). Aisle: Vancouver's 6.1 m used as an assumption.",
+    "basis": "0 loading spaces for 2,453 m² of floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site, with no backing onto streets or alleys (s. 5.80 subs. 7). Aisle: Vancouver's 6.1 m used as an assumption.",
     "src": "edmZB580"
    },
-   "loading": "[ring 6]",
-   "loadV": [
-    -52.634137,
-    52.634137
-   ],
-   "loadDepth": 15.1,
-   "loadSpaces": [
-    "[ring 8]",
-    "[ring 8]"
-   ],
-   "plantYardStart": 107.446167,
+   "plantYardStart": 122.546167,
    "dir": -1,
    "v": [
     -52.634137,
@@ -285,13 +282,13 @@
    "uFront": -119.546167,
    "footMode": "max",
    "uBuild": [
-    107.446167,
+    122.546167,
     -119.546167
    ],
-   "mwSized": 21.9,
+   "mwSized": 3.2,
    "plant": {
     "s": {
-     "Q": 33.945,
+     "Q": 4.96,
      "k": {
       "name": "air-cooled chillers",
       "L": 12.141,
@@ -307,8 +304,8 @@
        4.3
       ]
      },
-     "need": 23,
-     "n": 24,
+     "need": 4,
+     "n": 5,
      "g": {
       "name": "standby generators",
       "L": 13.493,
@@ -324,8 +321,8 @@
        2
       ]
      },
-     "gNeed": 17,
-     "gN": 18,
+     "gNeed": 3,
+     "gN": 4,
      "src": "Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit nearest the middle of …"
     },
     "boxes": [
@@ -357,281 +354,17 @@
       "ring": "[ring 8]",
       "clear": "[ring 8]",
       "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 30,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
       "base": 0,
       "kind": "yard",
-      "name": "standby generators"
+      "name": "air-cooled chillers"
      },
      {
       "ring": "[ring 8]",
       "clear": "[ring 8]",
-      "h": 4.777,
+      "h": 2.896,
       "base": 0,
       "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
+      "name": "air-cooled chillers"
      },
      {
       "ring": "[ring 8]",
@@ -667,46 +400,120 @@
      }
     ],
     "lines": [
-     "Sized for <b>22 MW</b> of servers: heat to reject ≈ 22 × PUE 1.55 = <b>33.9 MW</b> at peak.",
-     "23 air-cooled chillers carry it; with spares, <b>24</b>. Placed: 24 on the roof, 0 in the yard.",
+     "Sized for <b>3.2 MW</b> of servers: heat to reject ≈ 3.2 × PUE 1.55 = <b>5.0 MW</b> at peak.",
+     "4 air-cooled chillers carry it; with spares, <b>5</b>. Placed: 3 on the roof, 2 in the yard.",
      "Each unit about 12.141 × 2.362 m, 2.896 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
      "<span class=\"src\">Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit near…"
     ],
     "genLines": [
-     "17 generator sets of about 2 MW carry 33.9 MW; with spares, <b>18</b>. Placed: 0 on the roof, 18 in the yard.",
+     "3 generator sets of about 2 MW carry 5.0 MW; with spares, <b>4</b>. Placed: 0 on the roof, 4 in the yard.",
      "Each about 13.493 × 3.488 m, 4.777 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).",
      "<span class=\"src\">Standby diesel generator sets in Sound Level 2 enclosures with sub-base tanks. Basis units: Rehlko (Kohler) KD2000, 2,000 kW standby (data-centre continuous rating the same), 13.49 × 3.49 m, up to 4.78 m high (G5-626, rev 6/24); KD1000, 1,000 kW, 8.43 × 2.62 m, 3.71 m high with the 12 h tank (G6-154, 12/23). Both EPA Tier 2, cULus (UL 2200, CSA C22.2 No. 100); manufacturer claims. Chosen 29 Oct 2026 as the middle of Cat, Rehlko and Generac: 2 MW 18.5–38.4 m² per MW, 1 MW 19.5–22.4. 1 m clear around each set (Cummins application manual; not checked ?); 1.5 m from wall openings…"
     ],
     "short": "",
-    "coolYard": 0,
-    "coolRoof": 24,
-    "genYard": 18,
+    "coolYard": 2,
+    "coolRoof": 3,
+    "genYard": 4,
     "genRoof": 0,
     "yard": "[ring 8]",
     "yardU": [
-     89.982167,
-     107.446167
+     109.496167,
+     122.546167
     ],
     "indoor": 0,
     "miss": [],
     "placed": {
-     "cr": 24,
-     "cy": 0,
+     "cr": 3,
+     "cy": 2,
      "gr": 0,
-     "gy": 18
+     "gy": 4
     }
    },
-   "plantYardDepth": 17.464,
+   "plantYardDepth": 13.05,
    "serverFoot": "[ring 8]",
    "sizedTo": {
-    "mw": 21.9,
-    "floor": 16790,
+    "mw": 3.2,
+    "floor": 2453.333333,
     "perMW": 766.666667
    },
-   "foot": "[ring 84]",
+   "foot": "[ring 86]",
    "footRect": "[ring 8]",
    "simpleMass": true,
-   "footArea": 13365.878897
+   "footArea": 14368.506217,
+   "noise": {
+    "lw": [
+     109.8,
+     113.1
+    ],
+    "n": 5,
+    "src": [
+     -2227.1,
+     4719.1
+    ],
+    "where": "roof and yard",
+    "groups": [
+     {
+      "kind": "roof",
+      "n": 3
+     },
+     {
+      "kind": "yard",
+      "n": 2
+     }
+    ],
+    "tested": 3819,
+    "overQ": 0,
+    "overS": 1,
+    "limit": 50,
+    "sec": "Bylaw 14600 s. 20(1)",
+    "beyond": false,
+    "byCls": {
+     "quiet": 0,
+     "other": 0,
+     "unknown": 1,
+     "assumed": 0
+    },
+    "bldOnly": 0,
+    "block": null,
+    "flag": "Noise: the plant would exceed the 50 dBA night limit at the property line of (no parcel record: residential limit assumed ?) (about 52 dBA (low-noise units: one rating) with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof and yard; NSW 2021, −8 dB), Bylaw 14600 s. 20(1)) if that lot takes the stricter limit; its zoning is not known, so this is a note, not a block.",
+    "req": "Noise: needs 8 low-noise chillers: Trane RTAF 280 low-noise, Lw 98 dBA per 1,010 kW, 101 standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?); and a 4.9 m solid screen around the roof and yard plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 66–69 dBA (quieter–standard unit rating) at the property line of 12311 126 AVENUE NW (IH), 52 m away; limit 60 dBA…",
+    "worst": {
+     "addr": "12311 126 AVENUE NW",
+     "zt": "IH",
+     "lot": true,
+     "d": 52.4,
+     "lo": 66.1,
+     "hi": 69.4,
+     "L": 60,
+     "Ls": 60,
+     "sec": "Bylaw 14600 s. 22(1)"
+    },
+    "mit": {
+     "option": "ln+scr",
+     "tried": [
+      "none",
+      "ln",
+      "scr",
+      "ln+scr"
+     ],
+     "screen": {
+      "h": 4.9,
+      "on": [
+       "roof",
+       "yard"
+      ],
+      "src": "arch_nz_nswDcNoise"
+     },
+     "ln": {
+      "n": 8,
+      "src": "traneRTAF"
+     },
+     "fan": null,
+     "room": null,
+     "short": "low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof and yard; NSW 2021, −8 dB)",
+     "std": null
+    }
+   }
   },
   "envAssumed": false,
   "envH": 30,
@@ -729,7 +536,7 @@
    5
   ],
   "fpNote": "from the site setup: the most the zone allows, less setbacks, loading and the plant yard",
-  "fp": 12191.58747,
+  "fp": 10910.378011,
   "fpCalc": null,
   "indoorPlant": 0,
   "g": [

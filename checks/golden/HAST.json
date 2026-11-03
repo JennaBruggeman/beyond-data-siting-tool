@@ -5,17 +5,18 @@
   "extent": "part",
   "floor": "upper",
   "host": {},
-  "mw": 1.9,
+  "mw": 2.5,
   "foot": "max",
   "cover": 70,
   "hmode": "out",
-  "plantAt": "split",
+  "plantAt": "roof",
   "outside": "dry",
   "inside": "air",
   "spares": "n1",
   "gens": "yes",
   "genAt": "roof",
   "genSpares": "n1",
+  "vis": "indoors",
   "mwSite": "59013407"
  },
  "sel": {
@@ -228,12 +229,16 @@
     "ground": true,
     "yards": "[cycle]",
     "yardsKnown": true,
-    "userSet": false
+    "userSet": false,
+    "srcId": "van_zdb_i2",
+    "screen": null
    },
    "city": "van",
    "lotArea": 6294,
    "ring": "[ring 10]",
-   "notes": [],
+   "notes": [
+    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 64–67 dBA (quieter–standard unit rating) at the point of reception beside 550 HASTINGS ST W (CD-1 (316), quiet zone), 69 m away; limit 55 dBA at night (Noise Control By-law 6555 s. 2.3(b)(i))."
+   ],
    "warn": [],
    "F": {
     "cx": 589.5,
@@ -295,10 +300,12 @@
     }
    ],
    "footArea": 6038.64267,
-   "mwSized": 1.9,
+   "inset": "[ring 8]",
+   "yardRect": "[cycle]",
+   "mwSized": 2.5,
    "plant": {
     "s": {
-     "Q": 2.945,
+     "Q": 3.875,
      "k": {
       "name": "air-cooled chillers",
       "L": 12.141,
@@ -314,14 +321,14 @@
        4.3
       ]
      },
-     "need": 2,
-     "n": 3,
+     "need": 3,
+     "n": 4,
      "g": {
       "name": "standby generators",
-      "L": 8.434,
-      "W": 2.616,
-      "H": 3.706,
-      "mw": 1,
+      "L": 13.493,
+      "W": 3.488,
+      "H": 4.777,
+      "mw": 2,
       "wall": [
        1.5,
        1.5
@@ -331,39 +338,15 @@
        2
       ]
      },
-     "gNeed": 3,
-     "gN": 4,
+     "gNeed": 2,
+     "gN": 3,
      "src": "Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit nearest the middle of …"
     },
     "boxes": [
      {
       "ring": "[ring 8]",
       "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 42,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 42,
-      "kind": "roof",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 2.896,
-      "base": 0,
-      "kind": "yard",
-      "name": "air-cooled chillers"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 3.706,
+      "h": 4.777,
       "base": 42,
       "kind": "roof",
       "name": "standby generators"
@@ -371,7 +354,7 @@
      {
       "ring": "[ring 8]",
       "clear": "[ring 8]",
-      "h": 3.706,
+      "h": 4.777,
       "base": 42,
       "kind": "roof",
       "name": "standby generators"
@@ -379,43 +362,102 @@
      {
       "ring": "[ring 8]",
       "clear": "[ring 8]",
-      "h": 3.706,
-      "base": 42,
-      "kind": "roof",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 3.706,
+      "h": 4.777,
       "base": 42,
       "kind": "roof",
       "name": "standby generators"
      }
     ],
     "lines": [
-     "Sized for <b>1.9 MW</b> of servers: heat to reject ≈ 1.9 × PUE 1.55 = <b>2.9 MW</b> at peak.",
-     "2 air-cooled chillers carry it; with spares, <b>3</b>. Placed: 2 on the roof, 1 in the yard.",
+     "Sized for <b>2.5 MW</b> of servers: heat to reject ≈ 2.5 × PUE 1.55 = <b>3.9 MW</b> at peak.",
+     "3 air-cooled chillers carry it; with spares, <b>4</b>. Placed: 0 on the roof, 0 in the yard.",
      "Each unit about 12.141 × 2.362 m, 2.896 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
      "<span class=\"src\">Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit near…"
     ],
     "genLines": [
-     "3 generator sets of about 1 MW carry 2.9 MW; with spares, <b>4</b>. Placed: 4 on the roof, 0 in the yard.",
-     "Each about 8.434 × 2.616 m, 3.706 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).",
+     "2 generator sets of about 2 MW carry 3.9 MW; with spares, <b>3</b>. Placed: 3 on the roof, 0 in the yard.",
+     "Each about 13.493 × 3.488 m, 4.777 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).",
      "<span class=\"src\">Standby diesel generator sets in Sound Level 2 enclosures with sub-base tanks. Basis units: Rehlko (Kohler) KD2000, 2,000 kW standby (data-centre continuous rating the same), 13.49 × 3.49 m, up to 4.78 m high (G5-626, rev 6/24); KD1000, 1,000 kW, 8.43 × 2.62 m, 3.71 m high with the 12 h tank (G6-154, 12/23). Both EPA Tier 2, cULus (UL 2200, CSA C22.2 No. 100); manufacturer claims. Chosen 29 Oct 2026 as the middle of Cat, Rehlko and Generac: 2 MW 18.5–38.4 m² per MW, 1 MW 19.5–22.4. 1 m clear around each set (Cummins application manual; not checked ?); 1.5 m from wall openings…"
     ],
     "short": "",
-    "coolYard": 1,
-    "coolRoof": 2,
+    "coolYard": 0,
+    "coolRoof": 0,
     "genYard": 0,
-    "genRoof": 4,
-    "indoor": 0,
+    "genRoof": 3,
+    "indoor": 371.499768,
+    "coolRoofIndoor": 4,
     "miss": [],
     "placed": {
-     "cr": 2,
-     "cy": 1,
-     "gr": 4,
+     "cr": 0,
+     "cy": 0,
+     "gr": 3,
      "gy": 0
+    }
+   },
+   "fuel": {
+    "L": 12229.5,
+    "lim": 20000,
+    "at": "roof"
+   },
+   "noise": {
+    "lw": [
+     108.8,
+     112.1
+    ],
+    "n": 4,
+    "src": [
+     610.6,
+     3819.7
+    ],
+    "where": "indoors",
+    "groups": [
+     {
+      "kind": "indoors",
+      "n": 4
+     }
+    ],
+    "tested": 1575,
+    "overQ": 0,
+    "overS": 0,
+    "limit": 55,
+    "sec": "Noise Control By-law 6555 s. 2.3(b)(i)",
+    "beyond": false,
+    "byCls": {
+     "quiet": 0,
+     "other": 0,
+     "unknown": 0,
+     "assumed": 0
+    },
+    "bldOnly": 0,
+    "block": null,
+    "flag": null,
+    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 64–67 dBA (quieter–standard unit rating) at the point of reception beside 550 HASTINGS ST W (CD-1 (316), quiet zone), 69 m away; limit 55 dBA at night (Noise Control By-law 6555 s. 2.3(b)(i)).",
+    "worst": {
+     "addr": "550 HASTINGS ST W",
+     "zt": "CD-1 (316), quiet zone",
+     "lot": true,
+     "d": 69.4,
+     "lo": 64,
+     "hi": 67.3,
+     "L": 55,
+     "Ls": 55,
+     "sec": "Noise Control By-law 6555 s. 2.3(b)(i)"
+    },
+    "mit": {
+     "option": "none",
+     "tried": [
+      "none",
+      "ln"
+     ],
+     "screen": null,
+     "ln": null,
+     "fan": null,
+     "room": {
+      "dB": 25,
+      "src": "arch_nz_nswDcNoise"
+     },
+     "short": "a plant room to the NSW 2021 terms (−25 dB)",
+     "std": "none"
     }
    }
   },
