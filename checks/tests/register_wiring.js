@@ -5,7 +5,7 @@
 // 2. Scans tool/*.js for numeric literals >= 2 left in code that are not on a line marked /* drawing */
 //    and not listed in checks/agents/2026-11-03_refactor_unsourced.md. Report-only for now; it fails
 //    once the unsourced list is empty (set WIRING_STRICT=1 to fail now).
-//    Arithmetic constants are not counted as figures: x/2, 2*x, i+=2, 10*Math.log10, hex sizes, sentinels >= 1e9.
+//    Arithmetic constants are not counted as figures: x/2, 2*x, i+=2, 10*Math.log10, array indexes like e[3], hex sizes, sentinels >= 1e9.
 // Usage: node checks/tests/register_wiring.js [--list]   (from the repo root or anywhere)
 const fs = require('fs'), path = require('path');
 const ROOT = path.resolve(__dirname, '..', '..');
@@ -78,6 +78,7 @@ const isArith = (src, { value, at, len, hex }) => { const b = src.slice(Math.max
   if (hex || value >= 1e9) return true;
   if (value === 2 && (/[\/*%]$|[+\-]=$/.test(b) || /^\*/.test(a))) return true;
   if (value === 10 && /^\*Math\.log10/.test(a)) return true;
+  if (Number.isInteger(value) && /[\w$\])]\[$/.test(src.slice(Math.max(0, at - 2), at)) && /^\]/.test(a)) return true; // array index, e.g. e[3]
   return false; };
 for (const f of JS) {
   if (f === 'gfa_van.js') continue; // generated data file (make_gfa_reported.py)
@@ -90,7 +91,7 @@ for (const f of JS) {
     left++; per[f] = (per[f] || 0) + 1; if (LIST) console.log(`  tool/${f}:${line}  ${value}`);
   }
 }
-console.log(`code: ${left} numeric literals >= 2 left in tool/*.js (not marked drawing, not listed unsourced); ${drawing} on drawing lines; ${unsourced} listed unsourced; ${arith} arithmetic (halves, strides, 10 log10, sentinels)`);
+console.log(`code: ${left} numeric literals >= 2 left in tool/*.js (not marked drawing, not listed unsourced); ${drawing} on drawing lines; ${unsourced} listed unsourced; ${arith} arithmetic (halves, strides, indexes, 10 log10, sentinels)`);
 console.log('  by file: ' + Object.entries(per).map(([f, c]) => f + ' ' + c).join(', '));
 if (left && (listed.size === 0 || process.env.WIRING_STRICT)) { if (listed.size === 0 && !process.env.WIRING_STRICT) console.log('  (fail mode: the unsourced list is empty)'); fail++; }
 else if (left) console.log('  (report-only while the unsourced list has entries)');
