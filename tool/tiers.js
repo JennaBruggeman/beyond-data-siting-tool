@@ -31,20 +31,20 @@ BD.tierShows=(node,t)=>{ const T=BD.TPL; if(!T||!T.nodes[node]) return true; con
 /* ---------- the choice, inside the landing card ---------- */
 // thumbnail of the real diagram: one column per stage, the same wires; this tier's parts lit, the rest faded
 let LAY=null;
-function layout(){ const G=BD.TPL&&BD.TPL.graph; if(!G) return null; if(LAY) return LAY;
-  const st=G.stages.map(x=>x[0]), col={}; st.forEach(c=>col[c]=[]); G.nodes.forEach(([id,sg])=>(col[sg]||(col[sg]=[])).push(id));
-  const ins={}; G.edges.forEach(([a,b])=>(ins[b]=ins[b]||[]).push(a)); const pos={}, MAXR=17, gy=5, sub=5, gap=16; let x=6;
+function layout(){ const G=BD.TPL&&BD.TPL.graph; if(!G) return null; if(LAY) return LAY; /* drawing */
+  const st=G.stages.map(x=>x[0]), col={}; st.forEach(c=>col[c]=[]); G.nodes.forEach(([id,sg])=>(col[sg]||(col[sg]=[])).push(id)); /* drawing */
+  const ins={}; G.edges.forEach(([a,b])=>(ins[b]=ins[b]||[]).push(a)); const pos={}, MAXR=17, gy=5, sub=5, gap=16; let x=6; /* drawing */
   st.forEach(c=>{ const L=col[c]; // order by the mean height of what feeds each node (fewer crossings); long stages wrap into sub-columns
-    const key=id=>{ const f=(ins[id]||[]).map(k=>pos[k]).filter(Boolean); return f.length?f.reduce((s,q)=>s+q[1],0)/f.length:1e3+L.indexOf(id); };
-    const nc=Math.ceil(L.length/MAXR), rows=Math.ceil(L.length/nc);
-    L.sort((a,b)=>key(a)-key(b)).forEach((id,i)=>pos[id]=[x+(i%nc)*sub,6+Math.floor(i/nc)*gy+(MAXR-rows)*gy/2]); x+=(nc-1)*sub+gap; });
-  const H=12+(MAXR-1)*gy, W=x-gap+6; return LAY={pos,W,H,edges:G.edges}; }
-function preview(id){ const T=BD.TPL, Y=layout(); if(!T||!Y) return ''; const rank={resident:0,community:1,full:2,arch:1}; const lit=k=>T.nodes[k]&&(T.nodes[k].tier==='arch_only'?id==='arch':rank[T.nodes[k].tier]<=rank[id]);
-  const ids=Object.keys(T.nodes), n=ids.length, on=ids.filter(lit).length;
-  const wires=Y.edges.filter(([a,b])=>Y.pos[a]&&Y.pos[b]).map(([a,b])=>{ const [x1,y1]=Y.pos[a],[x2,y2]=Y.pos[b], on2=lit(a)&&lit(b); return `<path d="M${x1} ${y1}C${(x1+x2)/2} ${y1} ${(x1+x2)/2} ${y2} ${x2} ${y2}" fill="none" stroke="${on2?'var(--accent)':'var(--line-2)'}" stroke-opacity="${on2?.55:.35}" stroke-width=".5"/>`; }).join('');
-  const dots=ids.filter(k=>Y.pos[k]).map(k=>{ const [x,y]=Y.pos[k]; return `<circle cx="${x}" cy="${y}" r="1.6" fill="${lit(k)?'var(--accent)':'var(--line-2)'}"/>`; }).join('');
-  const RP=T.reports&&T.reports[id]; const pg=RP?RP.filter(p=>p.id!=='sources'):[];
-  const strip=pg.length?`<span class="trep"><svg viewBox="0 0 ${pg.length*9} 11" width="${pg.length*9}" height="11" aria-hidden="true">${pg.map((p,i)=>`<rect x="${i*9+0.5}" y=".5" width="7" height="10" rx=".8" fill="none" stroke="var(--accent)" stroke-width=".8"><title>${esc(p.title)}</title></rect>`).join('')}</svg> Report: ${pg.length} sections, ${esc(pg.map(p=>p.title).join(', '))}</span>`:'';
+    const key=id=>{ const f=(ins[id]||[]).map(k=>pos[k]).filter(Boolean); return f.length?f.reduce((s,q)=>s+q[1],0)/f.length:1e3+L.indexOf(id); }; /* drawing */
+    const nc=Math.ceil(L.length/MAXR), rows=Math.ceil(L.length/nc); /* drawing */
+    L.sort((a,b)=>key(a)-key(b)).forEach((id,i)=>pos[id]=[x+(i%nc)*sub,6+Math.floor(i/nc)*gy+(MAXR-rows)*gy/2]); x+=(nc-1)*sub+gap; }); /* drawing */
+  const H=12+(MAXR-1)*gy, W=x-gap+6; return LAY={pos,W,H,edges:G.edges}; } /* drawing */
+function preview(id){ const T=BD.TPL, Y=layout(); if(!T||!Y) return ''; const rank={resident:0,community:1,full:2,arch:1}; const lit=k=>T.nodes[k]&&(T.nodes[k].tier==='arch_only'?id==='arch':rank[T.nodes[k].tier]<=rank[id]); /* drawing */
+  const ids=Object.keys(T.nodes), n=ids.length, on=ids.filter(lit).length; /* drawing */
+  const wires=Y.edges.filter(([a,b])=>Y.pos[a]&&Y.pos[b]).map(([a,b])=>{ const [x1,y1]=Y.pos[a],[x2,y2]=Y.pos[b], on2=lit(a)&&lit(b); return `<path d="M${x1} ${y1}C${(x1+x2)/2} ${y1} ${(x1+x2)/2} ${y2} ${x2} ${y2}" fill="none" stroke="${on2?'var(--accent)':'var(--line-2)'}" stroke-opacity="${on2?.55:.35}" stroke-width=".5"/>`; }).join(''); /* drawing */
+  const dots=ids.filter(k=>Y.pos[k]).map(k=>{ const [x,y]=Y.pos[k]; return `<circle cx="${x}" cy="${y}" r="1.6" fill="${lit(k)?'var(--accent)':'var(--line-2)'}"/>`; }).join(''); /* drawing */
+  const RP=T.reports&&T.reports[id]; const pg=RP?RP.filter(p=>p.id!=='sources'):[]; /* drawing */
+  const strip=pg.length?`<span class="trep"><svg viewBox="0 0 ${pg.length*9} 11" width="${pg.length*9}" height="11" aria-hidden="true">${pg.map((p,i)=>`<rect x="${i*9+0.5}" y=".5" width="7" height="10" rx=".8" fill="none" stroke="var(--accent)" stroke-width=".8"><title>${esc(p.title)}</title></rect>`).join('')}</svg> Report: ${pg.length} sections, ${esc(pg.map(p=>p.title).join(', '))}</span>`:''; /* drawing */
   return strip+`<svg class="tprev" viewBox="0 0 ${Y.W} ${Y.H}" role="img" aria-label="The tool's logic diagram: ${on} of ${n} parts shown in this choice">${wires}${dots}</svg><span class="tcount">${on} of ${n} parts shown</span>`; }
 function chooser(card,cont){
   card.innerHTML=`<div class="kind">Beyond Data</div><h2 id="wTitle">What do you want to know?</h2>

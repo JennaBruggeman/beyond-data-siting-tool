@@ -31,3 +31,4 @@ To clear one: add its source to the register through `register/patches/*.py`, mo
 | tool/addons.js | 105 | 6, 2 | PV layout block, 6 × 2 m, with 1 m and 0.5–1.5 m clearances. A layout choice. register pv_roof describes the layout but gives no block size. |
 | tool/addons.js | 107 | 12 | Area of one PV block, 6 × 2 = 12 m². Follows from line 105. |
 | tool/addons.js | 115 | 67.9, 49.67 | Fallback electricity price, $/MWh, used when BD.ECON has not loaded. 67.9 matches BC LGS 6.79 ¢/kWh (register electricity_price). 49.67 for Edmonton has no register text. |
+| tool/tiers.js | 17 | 2.5 | `TYPICAL_MW`, the residents' "typical" size. The register calls "2–4 MW typical downtown colocation" an internal note read across operator claims, with no primary source. |
