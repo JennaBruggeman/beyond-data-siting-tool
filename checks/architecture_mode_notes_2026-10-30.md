@@ -154,3 +154,7 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - Ratios is its own tab before Arrange (coverage, then floor-area split; DC share sets MW). Arrange shows the split as one line with "Edit ratios".
 - Compare is its own tab; the Report shows the chosen arrangement plus a short table of the others.
 - Build order: Ratios, Arrange with DC rooms, Exchange, Compare, Report.
+
+## Edmonton site (J.B., 3 Nov 2026)
+- Edmonton design site is 64 Airport Road NW (E06B) only. 74 Airport Road NW (E06A) is dropped as a site: building there would block the hotel's view.
+- E06A stays in the test lots (golden, arch baseline) as a check case only; mockups and design work move to 64 Airport Rd.
