@@ -7,11 +7,11 @@ Method: web pages read with the fetch tool (short extracts); two saved PDFs re-r
 
 ## 0. Key findings
 
-- **Edmonton: backup generators of 1 MW or more need AUC approval**, "even" for "on-site use, temporary or backup generation". The total counts across the site, so splitting sets doesn't avoid it. 1–10 MW: checklist, approved within five business days of a complete application. Rule 012 noise applies to testing (arch_mun_aucAnn2026, arch_mun_aucPowerPlant). A 2.5 MW data centre with N+1 sets is over 1 MW (our reading).
-- **Edmonton conflict on air approval:** the AUC page says "thermal power plants above one MW" need EPEA approval. The Alberta EPA guide says EPEA approval is for "a backup power generation system over 50 megawatts" (abDCenv2026). → "?" until the Activities Designation Regulation is read.
-- **Vancouver: the conditional-use permit is a staff decision**, made by the Director of Planning or the Development Permit Board (four senior staff). No Council vote. The Board "cannot deny a development permit if it meets the zoning and ODP and guidelines". Notice to neighbours is discretionary ("may notify").
-- **Edmonton: discretionary permit decided by the Development Planner.** The planner may refuse "even if it meets the requirements of this Bylaw". Approved discretionary permits are mailed within 7 days to owners within 60.0 m (wider if impacts reach further). Anyone affected may appeal to SDAB within 21 days.
-- **Appeals:** Vancouver Board of Variance, 30 days, fee $3,060. Development Permit Board decisions can be appealed only on "relaxation". Edmonton SDAB, 21 days. Hearing within 30 days, written decision within 15 days.
+- **Edmonton: backup generators of 1 MW or more need AUC approval**, including plant "intended solely for on-site consumption, temporary generation, emergency and/or backup generation". The total counts across the site, so splitting sets doesn't avoid it. 1–10 MW: checklist, approved within five business days of a complete application. Rule 012 noise applies to testing (arch_mun_aucAnn2026, arch_mun_aucPowerPlant). A 2.5 MW data centre with N+1 sets is over 1 MW (our reading).
+- **Edmonton air approval (settled at check 2):** no conflict. The Activities Designation Regulation defines a "power plant" as over 1 MW, but leaves out a backup system that is "only used" when grid power is interrupted, "not connected to the electric distribution system", and no more than 50 MW (s. 2(2)(vv)(iii); abADR276). So: AUC approval from 1 MW; EPEA approval only above 50 MW for true backup sets. Whether testing or grid-parallel use breaks the exclusion: ? (our reading).
+- **Vancouver: the conditional-use permit is a staff decision**, made by the Director of Planning or the Development Permit Board (four senior staff). No Council vote. The Board "cannot deny a development permit if it meets the zoning and ODP and guidelines". Notice to neighbours is discretionary ("may notify"). Referral to the Board is mandatory where public response warrants it ("shall refer").
+- **Edmonton: discretionary permit decided by the Development Planner.** The planner may refuse "even if it meets the requirements of this Bylaw". Approved discretionary permits are mailed within 7 days to owners within 60.0 m (wider if impacts reach further). No site sign by default on industrial zones. Anyone affected may appeal to SDAB within 21 days.
+- **Appeals:** Vancouver Board of Variance, 30 days (late up to 75). City page: only the owner may appeal. Fee $3,060 and the "relaxation" limit are not re-confirmed (?). Edmonton SDAB, 21 days. Hearing within 30 days, written decision within 15 days.
 - **Power, Vancouver:** BC Hydro "major distribution" starts at 2,500 kW (12 kV areas) or 5,000 kW (25 kV areas). Detailed design takes 1–2 years and construction 6–18 months; a 7–15 % design deposit is paid up front. At 10 MW or more, B.C. Reg. 8/2026 applies (existing id bcReg8_2026).
 - **Air, Vancouver:** Bylaw 1082 s. 5 bars any business air discharge unless s. 7 exempts it. The engine exemption (7(9)) is unsettled, as already logged. A permit means public notification (site posting for 30 days plus newspapers) and takes "several months to a year or more".
 - **Sewer, Vancouver:** Bylaw 299 s. 5.1 needs a Waste Discharge Permit for a "High Volume Discharge" (over 300 m³ in 30 days) and for any "Uncontaminated Water" (e.g. once-through cooling water) put into a sewer.
@@ -28,18 +28,19 @@ Order (our reading of the sources below): pre-application → development permit
 | what | rule | source id | where | kind | conf. |
 |---|---|---|---|---|---|
 | Who decides a DP | Director of Planning or Development Permit Board may grant "either unconditionally or subject to conditions" or refuse | arch_mun_vanZDB4 | ZDB s. 4.3.1 | rule | 80 |
-| Referral to DP Board | Director must refer if "the public response to the application is such that review by the Development Permit Board is warranted" | arch_mun_vanZDB4 | s. 4.3.7(h) | rule | 80 |
+| Referral to DP Board | Director "shall refer" if "the public response to the application is such that review by the Development Permit Board is warranted" | arch_mun_vanZDB4 | s. 4.3.7(h) | rule | 80 |
 | DP Board | "reviews, makes recommendations and approves major developments" of "significant importance because of scale, complexity, or public interest"; "four senior staff members, including the chairperson and an advisory panel"; meetings "open to the public"; "cannot deny a development permit if it meets the zoning and ODP and guidelines" | arch_mun_vanDPB | City page (undated) | government guide | 75 |
 | DP Board size thresholds | ? not stated on the page | ? | ? | ? | 0 |
-| Notification | Board or Director "may notify such property owners and tenants it deems necessary" (discretionary) | arch_mun_vanZDB4 | s. 4.3.8 | rule | 80 |
+| Notification | Board or Director may refer to the Urban Design Panel "and may notify such property owners and tenants it deems necessary" (discretionary) | arch_mun_vanZDB4 | s. 4.3.8 (PDF footer March 2022) | rule | 80 |
 | Application life | DP application "void 12 months from the date of application"; extensions ≤ 12 months total | arch_mun_vanZDB4 | s. 4.2.1–4.2.2 | rule | 80 |
 | Deemed refusal | no permit within 30 days after all required information is in (or an agreed longer time) → deemed refused, appealable | arch_mun_vanZDB4 | s. 4.2.3 | rule | 75 |
 | Permit life | void 12 months after issue unless work started or BP issued; void 24 months after issue unless complete | arch_mun_vanZDB4 | s. 4.6.1–4.6.2 | rule | 80 |
 | DP before BP | step 5 "Development permit issued and apply for a building permit"; excavation and shoring "may be eligible to receive their building permit in advance" | arch_mun_vanDPpage | City page | government guide | 70 |
 | DP fee | conditional, "all other uses": $2,530 per 100 m² to 500 m², then $1,570 (max $366,600); values as proposed for 2026 | vanFees2026 | RTS 18094 App. A p. 3 | government report (proposed) | 60 |
 | Board of Variance: what | Charter s. 573(1)(a) zoning decisions by an official; (b) hardship on "siting, size, shape, or design"; (e) decisions of a delegated body that may relax the by-law | arch_mun_vanBoV10200 | By-law 10200 (consol. 29 Mar 2022), quoting Charter s. 573 | rule | 75 |
-| BoV: time and fee | 30 days from the decision; late appeal up to 75 days if the Board is satisfied; fee "$3,060 appeal legality fee" | arch_mun_vanBoV10200; arch_mun_vanBoVpage | s. 3.2; City page | rule; government guide | 75 |
-| BoV: DP Board decisions | appealable only to the extent they dealt with "relaxation" | arch_mun_vanBoVpage | City page | government guide | 70 |
+| BoV: time and fee | 30 days from the decision; late appeal up to 75 days if the Board is satisfied; fee "$3,060 appeal legality fee" (fee not re-confirmed at check 2 ?) | arch_mun_vanBoV10200; arch_mun_vanBoVpage | s. 3.2; City page | rule; government guide | 60 |
+| BoV: who appeals | "Only a property owner (or an agent on their behalf) who is seeking to develop or use their property may file an appeal" (City page; Charter s. 573(1)(a) says "any person aggrieved": ?) | arch_mun_vanBoVpage | City page | government guide | 65 |
+| BoV: DP Board decisions | appealable only to the extent they dealt with "relaxation" (not re-confirmed at check 2 ?) | arch_mun_vanBoVpage | City page | government guide | 50 |
 | BoV: notice | Board "shall give notice to such owners ... as the Board may deem to be affected" | arch_mun_vanBoV10200 | Charter s. 573(3) as quoted | rule | 70 |
 | Rezoning instead (CD-1) | Council; hearing unless ODP-consistent | arch_rz_vanCharter28; arch_rz_vanDAPfaq | rezoning.md §1 | rule | 85 |
 | Building permit | VBBL 2025 permit clauses not read; DP first (above) | ? | ? | ? | 0 |
@@ -58,9 +59,9 @@ Order: pre-application → DP (discretionary) → 21-day appeal period → BP an
 | Discretion | may approve "with or without conditions", with "regulations more restrictive than those required"; "may refuse an application for Discretionary Development even if it meets the requirements of this Bylaw" | arch_mun_edm7100 | 7.100 1.1.9, 1.1.10 | rule | 85 |
 | Variance test | no undue interference with "amenities of the neighbourhood"; complies with MDP and statutory plans | arch_mun_edm7100 | 7.100 5.2–5.3 | rule | 85 |
 | Notice (discretionary) | within 7 days of approval, by mail to owners "within 60.0 m of the boundaries of the Site", community league, BIA; Planner "must increase the 60.0 m notification boundary" if impacts are likely beyond it; all permits online within 7 days | arch_mun_edm7160 | 7.160 1.2–1.4 | rule | 85 |
-| Site sign | new principal building: sign within 2.0 m of the front lot line, within 14 days of the permit becoming valid, kept to final occupancy | arch_mun_edm7160 | 7.160 2.2 | rule | 85 |
+| Site sign | only in RS, RSM, RM, RL, CN, MUN, MU zones or where the Planner requires: for new principal buildings, within 2.0 m of a front or flanking lot line, within 14 days of the permit becoming valid, kept to final occupancy. Not by default on BE/IM/IH | arch_mun_edm7160 | 7.160 2.2 | rule | 85 |
 | Appeal | to SDAB; applicant 21 days after the decision; "any person affected" 21 days after notice | arch_mun_edm7170 | 7.170 1–2 | rule | 85 |
-| SDAB timing | hearing "within 30 days of the notice of appeal being filed"; notice "at least 5 days before"; written decision "within 15 days after concluding the hearing" (no MGA section cited) | arch_mun_abSdabTimelines | fact sheet (undated) | government guide | 70 |
+| SDAB timing | hearing "within 30 days of the notice of appeal being filed"; notice "at least 5 days before"; written decision "within 15 days after concluding the hearing" (only MGA s. 645 cited) | arch_mun_abSdabTimelines | fact sheet (undated, marked "Archived") | government guide | 70 |
 | SDAB and Direct Control | SDAB "cannot hear a development permit appeal for Direct Control District lands" where Council decides; limited appeal where delegated | arch_mun_abSdabManual2011 | MGA s. 641 summary, p. 16 (2011) | government guide (old) | 50 |
 | Rezoning / DC instead | Council at public hearing; DC needs 21-day pre-application notice | arch_rz_edmRezoning | rezoning.md §3 | government guide | 85 |
 | Processing times | actuals Apr–Jun 2026; from complete application to decision; leave out notice and appeal | edmProcTimes | saved PDF | government data | 70 |
@@ -82,7 +83,7 @@ Order: pre-application → DP (discretionary) → 21-day appeal period → BP an
 | EPCOR connection | Customer Connection Guide: clearances, right-of-way, truck access; no timeline recorded | epcor_ccg | s. 6.4, 3.10 | utility guide | 75 |
 | EPCOR timeline | ? not read | ? | ? | ? | 0 |
 | Alberta ≥ 75 MW transmission | "large data centre"; AESO may require "municipal zoning approvals" and permits; tethering; bridging only after AUC plant approval | alta117_2026; aesoBYOG2026 | ss. 2, 7, 9 | rule | 85 |
-| AUC: generators | approval "before building or operating any power plant ... of 1 MW or more", including "temporary or backup generation"; cumulative at the site | arch_mun_aucAnn2026 | announcement 26 Oct 2026 | regulator notice | 85 |
+| AUC: generators | approval "before constructing or operating any power plant" of 1 MW or more, including "emergency and/or backup generation"; "cumulative capability of all generating units located at the site" | arch_mun_aucAnn2026 | announcement 26 Oct 2026 | regulator notice | 85 |
 | AUC: route | ≥ 10 MW full application with participant involvement; 1 to < 10 MW checklist, approval "within five business days" of a complete one; legal basis HEEA s. 11 | arch_mun_aucPowerPlant | AUC page (eff. 25 Apr 2022) | regulator guide | 80 |
 | AUC noise | "Temporary or backup generation is not exempt from Rule 012"; testing is non-emergency | arch_mun_aucAnn2026; rule012 | same | regulator notice | 85 |
 | AUC precedent | Amazon Data Services Canada, testing schedule | auc_27938 | paras 8, 10 | regulator decision | 80 |
@@ -97,8 +98,9 @@ Order: pre-application → DP (discretionary) → 21-day appeal period → BP an
 | MV emergency engines | exempt from Parts 3–6, 9; s. 13 exhaust; s. 57 Tier 0/1 100 m | arch_mv1329; mvBylaw1329 | register | rule | 85 |
 | MV permit process | public notification for new permits: post "for 30 days" within 15 days of signing; newspapers; BC Gazette; "several months to a year or more"; apply "at least one year in advance"; standby fuels often "a maximum of 350 hours per year"; appeals under EMA Part 8 | arch_mun_mvAirGuide2020 | pp. 6–9, 34, 50 | government guide | 80 |
 | Does a data centre's genset need an MV permit? | ? depends on 7(9) and 7(12) and on hours; not settled | — | — | ? | 30 |
-| Alberta EPEA | approval for "a backup power generation system over 50 megawatts" | abDCenv2026; arch_sep_abEpaDC2026 | EPA guide 20 Jul 2026 | government guide | 80 |
-| Alberta EPEA (conflict) | "thermal power plants above one MW" need EPEA approval | arch_mun_aucPowerPlant | AUC page | regulator guide | 50 |
+| Alberta EPEA: rule | approval for "the construction, operation or reclamation of a power plant"; "power plant" = over "one megawatt under peak load", excluding a backup system that is "only used" when the principal source is interrupted, "is not connected to the electric distribution system" and is "no more than 50 megawatts" | abADR276 (add s. 2(2)(vv), Sch. 1 Div. 2 Part 9(i) to entry) | ADR s. 2(2)(vv)(iii); Sch. 1 Div. 2 Part 9 (CanLII, consol. to 177/2026) | rule | 85 |
+| Alberta EPEA: guides | EPA: "a backup power generation system over 50 megawatts"; AUC page: "thermal power plants above one MW". Both match the ADR (backup exclusion vs general rule) | abDCenv2026 (= arch_sep_abEpaDC2026, same PDF); arch_mun_aucPowerPlant | EPA guide 20 Jul 2026; AUC page | government guide; regulator guide | 80 |
+| Testing and grid-parallel sets | whether routine testing or a grid-connected set falls outside the backup exclusion | — | — | our reading ? | 30 |
 
 ### 1e. Sewer and water
 
@@ -109,7 +111,7 @@ Order: pre-application → DP (discretionary) → 21-day appeal period → BP an
 | Uncontaminated Water | water "not substantially changed ... as to chemical or biochemical qualities or temperature" | gvsdd299 | s. 2 definition | rule | 85 |
 | Storm sewer | only "Stormwater, Uncontaminated Water and water from the provision of municipal services" | gvsdd299 | s. 3.3 | rule | 85 |
 | Temperature | 40 °C at the sewage facility; 65 °C for non-domestic waste | gvsdd299; arch_mvSewerBylaw299 | Sch. A 4(b), (c) | rule | 85 |
-| Who issues in Vancouver | City Environmental Protection issues the wastewater permit; Metro bills treatment charges | arch_mun_vanWWpage | City page | government guide | 70 |
+| Who issues in Vancouver | City issues the wastewater permit; Metro bills treatment charges; application $1,000; first review about three months | arch_mun_vanWWpage | City page | government guide | 70 |
 | City sewer capacity | data centre goes to Low Impact analysis, then City Engineer review | vanSewerCap2025 | register | government policy | 80 |
 | Vancouver Sewer and Watercourse By-law 8093 | ? PDF fetch failed (client error) | ? | ? | ? | 0 |
 | Edmonton cooling water | non-contact cooling water to sanitary only with prior written EWSI approval | edm18100 | Bylaw 19627 Sch. 2 s. 5.10(i) | rule | 85 |
@@ -125,12 +127,12 @@ Order: pre-application → DP (discretionary) → 21-day appeal period → BP an
 | what | rule | source id | where | kind | conf. |
 |---|---|---|---|---|---|
 | Review applies | PER "applies to all proposed physical works and activities on federal lands and waters" | arch_sys_vfpaPER | Guide Sep 2022 p. 3 | agency guide | 85 |
-| Categories | A minor, maybe temporary; B minor but needs technical analysis; C larger or more complex; D large, complicated | arch_sys_vfpaPER | p. 9 | agency guide | 85 |
-| Times | A 1–10, B 10–60, C 60–120, D 120–170 business days (estimates, from a complete application) | arch_sys_vfpaPER | pp. 11–16 | agency guide | 85 |
-| Public engagement | A none; B "May require a 30 calendar day public comment period"; C and D engagement, Indigenous consultation, 30-day registry comment | arch_sys_vfpaPER (add p. 9 engagement) | p. 9 | agency guide | 80 |
-| Fees | A N/A; B $500 or $2,500; C $12,500; D $22,500 (plus GST); deposit 1 % of cost, $1,500–10,000 | arch_sys_vfpaPER | pp. 24–25 | agency guide | 80 |
-| Building permits | "The Vancouver Fraser Port Authority issues building permits for buildings and structures" (NBC 2020) | arch_sys_vfpaPER (add p. 23) | p. 23 | agency guide | 80 |
-| Utilities | "major utilities serving port property are provided by local municipalities"; trade permits "Typically ... obtained from the British Columbia Safety Authority" (now Technical Safety BC: our note, not in the guide) | arch_sys_vfpaPER (add p. 7) | p. 7 | agency guide | 75 |
+| Categories | A minor, maybe temporary; B minor but needs technical analysis; C larger or more complex; D large, complicated | arch_sys_vfpaPER | p. 8 | agency guide | 85 |
+| Times | A 1–10, B 10–60, C 60–120, D 120–170 business days (estimates, from a complete application) | arch_sys_vfpaPER | pp. 12–15 | agency guide | 85 |
+| Public engagement | A none; B "May require a 30 calendar day public comment period"; C and D engagement, Indigenous consultation, 30-day registry comment | arch_sys_vfpaPER (add p. 8 engagement) | p. 8 | agency guide | 80 |
+| Fees | A N/A; B $2,500 "if consultation required" ($500 otherwise ?); C $12,500; D $22,500 (plus GST); deposit 1 % of cost, $1,500–10,000 | arch_sys_vfpaPER | pp. 23–24 | agency guide | 80 |
+| Building permits | "The Vancouver Fraser Port Authority issues building permits for buildings and structures" (NBC 2020) | arch_sys_vfpaPER (add p. 22) | p. 22 | agency guide | 80 |
+| Utilities | "major utilities serving port property are provided by local municipalities"; trade permits "Typically ... obtained from the British Columbia Safety Authority" (now Technical Safety BC: our note, not in the guide) | arch_sys_vfpaPER (add p. 6) | p. 6 | agency guide | 75 |
 | Land use | Land Use Plan designations; projects must conform | arch_rz_vfpaLup2026; arch_rz_canMarineAct48 | rezoning.md §5 | rule / guide | 80 |
 | IAA s. 82 | authority must decide if "significant adverse environmental effects" are likely before a permit; Notice of Intent; comment "at least 30 days (subsection 86(2))" | arch_mun_iaaS82guide | IAAC guidance (Dec 2021, mod. 17 Dec 2025) | government guide | 80 |
 | City zoning on port land | not stated in any source read; VFPA issuing its own building permits supports it (our reading) | ? | ? | our reading | 45 |
@@ -141,7 +143,7 @@ Order: pre-application → DP (discretionary) → 21-day appeal period → BP an
 | what | rule | source id | where | kind | conf. |
 |---|---|---|---|---|---|
 | MGA text | King's Printer and edmontontribunals.ca refused (robots); open.alberta.ca catalogue (21 Jun 2024) has no PDF; Calgary (1 Apr 2024) and Lethbridge copies cut off before Part 17 | arch_zon_MgaToc | TOC only | — | 0 |
-| Section titles | 606 advertising; 619 NRCB/AER/AUC authorizations; 640 land use bylaw; 642 permitted and discretionary uses; 684 deemed refused; 685 grounds for appeal; 686 appeals; 687 hearing and decision; 692 planning bylaws | arch_zon_MgaToc | TOC | rule (titles) | 70 |
+| Section titles | 606 "Requirements for advertising"; 619 "NRCB, ERCB, AER, AEUB or AUC authorizations"; 640 "Land use bylaw"; 641 "Designation of direct control districts"; 642 "Permitted and discretionary uses"; 684 "Permit deemed refused"; 685 "Grounds for appeal"; 686 "Appeals"; 687 "Hearing and decision"; 692 "Planning bylaws" (confirmed at check 2) | arch_zon_MgaToc (add these titles to entry) | TOC (current as of 1 Apr 2024) | rule (titles) | 80 |
 | Permitted use | "the development authority must issue the permit" if it conforms | arch_mun_abSdabManual2011 | p. 15 (s. 642) | government guide (old) | 50 |
 | Discretionary use | may "refuse the application, approve the application or approve the application with conditions" | arch_mun_abSdabManual2011 | p. 15 (s. 640) | government guide (old) | 50 |
 | Deemed refusal | "within the 40 days" (s. 684); matches Bylaw 20001 7.100 2.5 | arch_mun_abSdabManual2011; arch_mun_edm7100 | p. 24 | guide (old) + rule | 75 |
@@ -160,21 +162,21 @@ J.B. could get the MGA consolidation through UBC Library or from King's Printer 
 |---|---|---|---|---|---|---|
 | Haarlemmermeer (NL, outside Canada) | location | only "Polanenpark, Schiphol-Rijk, Schiphol Trade Park (STP) en Corneliahoeve"; "geen datacenters ... in het buitengebied"; outside these, extensions ≤ 10 % | arch_mun_hmmParaplu2020 | Gemeenteblad 2020, 306084, s. 5.1, 5.3 | government policy | 80 |
 | Haarlemmermeer | heat | waste heat to an existing or planned network "op een bruikbare temperatuur"; otherwise keep "ruimte ... voor toekomstige levering van restwarmte" | arch_mun_hmmParaplu2020 | s. 6.3.2 | government policy | 80 |
-| Haarlemmermeer | energy and power | "PUE < 1,2"; buy renewable electricity; > 80 MVA builds own 150 kV station; 750 MVA cap to 2030 | arch_mun_hmmParaplu2020 | s. 6.2, 6.2.1, 6.3.2 | government policy | 80 |
+| Haarlemmermeer | energy and power | "PUE < 1,2"; "dragen bij aan de stimulering van opwek van hernieuwbare energie" (help stimulate renewable generation); > 80 MVA builds own 150 kV station; 750 MVA cap to 2030 | arch_mun_hmmParaplu2020 | s. 6.2, 6.2.1, 6.3.2 | government policy | 80 |
 | Haarlemmermeer | design | nature-inclusive, rainwater capture, solar built in; no large fences | arch_mun_hmmParaplu2020 | s. 6.1 | government policy | 75 |
-| Amsterdam (NL) | pause | council 12 Jul 2019 "voorbereidingsbesluit" for the whole city, one year: change of use barred, building permits "aangehouden" (whether it names data centres only: title says so; text extract did not ?) | arch_mun_amsVoorb2019 | Staatscourant 2019, 42491 | rule | 70 |
+| Amsterdam (NL) | pause | council 12 Jul 2019 "voorbereidingsbesluit" for the whole city, "met betrekking tot datacenters", one year: change of use barred, building permits "aangehouden" | arch_mun_amsVoorb2019 | Staatscourant 2019, 42491 | rule | 80 |
 | Amsterdam (NL) | form | 2020–2030 policy: "intensief gestapeld" | amsterdamDC2020 | register | government policy | 75 |
 | Ireland (outside Canada) | power | new data centres provide generation and/or storage "either onsite or local in proximity" to match maximum import; it must "participate in the wholesale electricity market"; ≥ 80 % of annual demand from additional renewables (6-year glide path); location test constrained vs unconstrained | arch_mun_cruDec2025 | CRU page 12 Dec 2025 (decision CRU2025236 ?) | regulator decision | 80 |
 | Singapore (outside Canada) | allocation | DC-CFA2 (1 Dec 2025): "At least 200MW"; "PUE of 1.25 (at 100% IT load) or better"; "at least 50% powered by eligible green energy pathways"; SS 715:2025 IT efficiency; no heat-reuse or location condition stated | arch_mun_sgDCCFA2 | EDB/IMDA fact sheet | government | 80 |
 | Frankfurt / Germany | location and heat | Rechenzentrenkonzept 2022 (heat "anzustreben", no quota); EnEfG § 11 PUE and ERF | src20 | research note 20 | rule / policy | 75 |
 | Fairfax and Loudoun (US) | setback, noise | Fairfax 200 ft building / 300 ft equipment from R lots; pre- and post-construction noise studies; Loudoun SPEX only | src19; loudounDC | research note 19 | rule | 75 |
 | Prince William County (US) | permission | DCOZOD adopted 22 Sep 2026 (Ord. 26-67): outside the overlay new proposals need a Special Use Permit; PC recommended 500 ft from homes and schools for pathway 5 (not confirmed in ordinance ?) | arch_mun_pwcDCOZOD | County page | government | 70 |
-| Quebec (Canada) | power allocation | Hydro-Québec's duty to distribute "does not apply" to requests "for 5,000 kilowatts or more"; needs "the authorization of the Minister" | arch_mun_qcBill2023 | 2023 c. 1 s. 10 | rule | 85 |
+| Quebec (Canada) | power allocation | Hydro-Québec's duty to distribute "does not apply" to requests "for 5,000 kilowatts or more"; needs "the authorization of the Minister". Transitional: applies "until" a regulation under the Régie Act s. 112 takes effect (now? ?) | arch_mun_qcBill2023 | 2023 c. 1 s. 10 | rule | 85 |
 | Quebec (Canada) | criteria | grid capacity; "retombées sur l'économie et le développement régional"; "l'impact environnemental et social"; policy fit | arch_mun_qcNews2023 | quebec.ca 12 May 2023 | government | 75 |
 | Quebec (Canada) | application form | binding commitments if a block is awarded | arch_mun_hq5MW | HQ form 963-3367 (2026-06) | utility form | 70 |
 | Quebec (Canada) | capacity maps | indicative only | hqZones | register | utility | 70 |
 | Ontario (Canada) | connection approval | Bill 40 amendments to Electricity Act: covered data centres need "approval from the Minister of Energy and Mines to connect"; threshold not set (50 MW given only as an example) | arch_mun_onERO251001 | ERO 025-1001 (5 Sep 2025) | government proposal | 70 |
-| Ontario (Canada) | criteria | proposed three pillars: economic development, data sovereignty, community benefits (incl. "limited strain on host communities and their utilities"); no heat | arch_mun_onERO260853 | ERO 026-0853 (13 Aug 2026), proposal | government proposal | 65 |
+| Ontario (Canada) | criteria | proposed three pillars: economic development, data sovereignty, communities and public trust (incl. "minimal impacts on the technical and fiscal capacity of host communities and their utilities"); no heat; "greater than 1 MW" as an example only | arch_mun_onERO260853 | ERO 026-0853 (13 Aug 2026), proposal | government proposal | 65 |
 | Calgary / Rocky View (Canada) | zoning | no Calgary data-centre use; Rocky View S-DAT district, 30 m setback, Rule 012 | src21 | research note 21 | rule | 70 |
 
 What they require, in short: **heat** only Haarlemmermeer and Germany (EU EED > 1 MW); **noise and setback** in the US counties and Rocky View; **location** in Haarlemmermeer, Amsterdam, Ireland (grid), Prince William; **power** in Ireland, Singapore, Quebec, Ontario, Alberta (AESO).
@@ -182,13 +184,17 @@ What they require, in short: **heat** only Haarlemmermeer and Germany (EU EED > 
 ## 5. Gaps "?"
 
 - MGA ss. 606, 619, 640–642, 684–687, 692: text not read (robots; truncated copies). Only Alberta summaries, one from 2011.
-- Alberta EPEA trigger for generators: 1 MW (AUC page) vs 50 MW backup (EPA guide). Activities Designation Regulation not read.
+- Alberta EPEA trigger: settled (ADR s. 2(2)(vv)). Open: does routine testing or a grid-parallel set lose the backup exclusion?
+- Vancouver BoV fee ($3,060) and the "relaxation" limit: City page sections collapsed in the check-2 extract.
 - Vancouver DP Board referral thresholds; DP and BP processing times; BP fees; VBBL permit clauses.
 - Vancouver Sewer and Watercourse By-law 8093 (fetch failed) and Waterworks By-law.
 - Edmonton 2026 fee schedule (robots); building permit steps; EPCOR power and drainage timelines.
 - Whether Bylaw 1082 s. 7(9) exempts stationary standby gensets (carried over).
 - Is Bylaw 1082 still the current air bylaw (2020 consolidation)? ?
 - City zoning on port land: no clause read; other federal land not researched.
+- Fairfax/Loudoun, Frankfurt, Calgary rows cite internal notes (src19–21): swap for the primary ids (e.g. fairfaxDC2024).
 - Loudoun in-force text; Prince William ordinance text; CRU decision paper itself (CRU publications page refused, robots).
 - Edmonton SDAB procedures PDF refused (robots).
 - portvancouver.com category and PER pages: client error; guide read instead.
+
+Check 2 applied (3 Nov 2026)

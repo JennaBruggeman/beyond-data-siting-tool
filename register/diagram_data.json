@@ -9,7 +9,7 @@
 "quantities": 193,
 "conditions": 100,
 "opportunities": 14,
-"sources": 1434
+"sources": 1449
 }
 },
 "stages": [
@@ -2173,8 +2173,8 @@
 "kind": "quantity",
 "stage": "characterise",
 "name": "Sound level at receptor",
-"formula": "screen Lp ≈ Lw − 20·log10(r) − 8; full ISO 9613-2 (NoiseModelling)",
-"coef": "18 Oct 2026 (sweep M30–M32; audit/plant_sources_2026-10-18.md): unit count = the units the plant lays out (spares included); Lw per unit: air-cooled chillers 102.8–106.1 dBA per 1.49 MW free-cooling chiller (Vertiv Liebert AFC FH3135/FIZ135, Lp at 1 m 80.0/83.0 dB(A) converted to Lw by the ISO 3744 1 m box, our calculation; 'Preliminary data'; low-noise options not rated), dry coolers 98.5–102 dBA at full fan speed (Güntner GFD ≈2.5 MW; Thermokey 738 kW); towers and hybrid coolers use the chiller ratings as a stand-in (labelled). starter set: scroll chiller 450–850 kW Lw 96–100 dBA (Daikin, AHRI 370); Trane Sintesis Prime RTAF HSE 333–1,010 kW Lw 94–101 standard / 91–98 low-noise, plus size 245 (877 kW) printed as 107 / 103, out of line with its neighbours (brochure RTAF-SLB001-GB p.13; sound rows sit under the 'Eurovent performances' heading but are not labelled Eurovent; checked 18 Oct 2026); the tool takes the 1,010 kW unit (size 280), 98 low-noise / 101 standard, as one unit per MW; screw chiller 99–103 (ISO 9614); dry cooler: Kelvion LF-PD203T4H 94 dBA per fan, 6 fans ≈ 101.8 dBA per unit (our sum of the printed per-fan value), 61 dBA @10 m per fan; seller copy, not on kelvion.com; Güntner small unit Lw 67 dBA (permit submittal); standby diesel open 98–99 dBA @7 m (ISO 8528-10); enclosed: Cummins QuietSite L2 73–76, L1 78–87, weather-protective 89–91 dBA @7 m; CRAC 48–62 dBA @2 m (Stulz, 30–150 kW); transformer 62–63 dB (NEMA contour, unverified edition)",
+"formula": "screen Lp ≈ Lw − 20·log10(r) − 8; full ISO 9613-2 (NoiseModelling) ‖ 3 Nov 2026 (mitigation): Lp = Lw − 20·log10(r) − 8 − (path reduction), summed logarithmically over the plant groups (roof, yard, indoors; NSW 2021 s. 4.1 'summed logarithmically'; FHWA s. 3.1 energy addition). Only sourced reductions are credited: (1) solid screen around outdoor cooling plant: the lower of NSW 2021 s. 4.3 (8 dB if solid, within 20 m of the source, at least 4 m above the source floor, breaking line of sight to the receiver, 2 m beyond the source if not surrounding it) and FHWA s. 3.5.1 (5 dB at line-of-sight break + 1.5 dB per metre above it; cap 20 dB, s. 3.4.2); FHWA figures are for highway line sources and are used here only to lower the NSW credit (our extension ?); (2) cooling plant indoors in a plant room: NSW 2021 s. 4.3, 25 dB (solid walls, roof sheeting at least RW 47, gaps sealed, louvres at least the Table 4-5 insertion loss); (3) low-noise chiller variant (maker claim): Trane RTAF size 280, 1,010 kW, Lw 98 dBA low-noise vs 101 standard, replacing the basis chiller capacity for capacity; (4) night fan-speed reduction for dry coolers: ΔLw = 50·log10(N2/N1) (AMCA 301 as stated in Mathson 2008 p. 4), only for 0.6 ≤ N2/N1 (Annex A.2, informative), so at most 11.1 dB; heat rejection at the lower speed not checked (?). Source changes (3, 4) and path reductions (1, 2) add in dB through the formula; screens and plant rooms are not combined. No credit: per-unit housings ('enclose'), silencers (case values only), cooling towers (SPX gives 50 log as an upper bound, 'no greater than'), hybrid coolers.",
+"coef": "18 Oct 2026 (sweep M30–M32; audit/plant_sources_2026-10-18.md): unit count = the units the plant lays out (spares included); Lw per unit: air-cooled chillers 102.8–106.1 dBA per 1.49 MW free-cooling chiller (Vertiv Liebert AFC FH3135/FIZ135, Lp at 1 m 80.0/83.0 dB(A) converted to Lw by the ISO 3744 1 m box, our calculation; 'Preliminary data'; low-noise options not rated), dry coolers 98.5–102 dBA at full fan speed (Güntner GFD ≈2.5 MW; Thermokey 738 kW); towers and hybrid coolers use the chiller ratings as a stand-in (labelled). starter set: scroll chiller 450–850 kW Lw 96–100 dBA (Daikin, AHRI 370); Trane Sintesis Prime RTAF HSE 333–1,010 kW Lw 94–101 standard / 91–98 low-noise, plus size 245 (877 kW) printed as 107 / 103, out of line with its neighbours (brochure RTAF-SLB001-GB p.13; sound rows sit under the 'Eurovent performances' heading but are not labelled Eurovent; checked 18 Oct 2026); the tool takes the 1,010 kW unit (size 280), 98 low-noise / 101 standard, as one unit per MW; screw chiller 99–103 (ISO 9614); dry cooler: Kelvion LF-PD203T4H 94 dBA per fan, 6 fans ≈ 101.8 dBA per unit (our sum of the printed per-fan value), 61 dBA @10 m per fan; seller copy, not on kelvion.com; Güntner small unit Lw 67 dBA (permit submittal); standby diesel open 98–99 dBA @7 m (ISO 8528-10); enclosed: Cummins QuietSite L2 73–76, L1 78–87, weather-protective 89–91 dBA @7 m; CRAC 48–62 dBA @2 m (Stulz, 30–150 kW); transformer 62–63 dB (NEMA contour, unverified edition) ‖ 3 Nov 2026 (mitigation): screen height = max(4 m above the source floor, unit height + 2 m) so both methods reach 8 dB for a receiver level with the unit tops (FHWA 5 + 1.5 × 2 = 8); per receiver the credit is min(8, 5 + 1.5·e) where e = screen top − line of sight from the unit top (receiver height = tallest recorded building on the receiving lot; none recorded → no screen credit there ?); the 20 m test uses the farthest any unit lies from the screen toward the receiver. Mass: solid, at least 20 kg/m² (FHWA s. 3.4.2: transmission loss at least 20 dB(A); Ottawa ENCG allows 10 kg/m² on rooftops with justification). A screen taller than the units conflicts with EVAPCO's layout rule that unit tops be level with or above any wall around them at these clearances (maker; more space or the maker's approval ?); a 3.7 m wall 1.8 m from a chiller cut capacity ≥ 4.5% and raised power ≥ 6% (York, maker claim). Low-noise count: ceil(basis units × 1.489 / 1.010); the layout is still drawn with the basis unit (the Trane unit's size is not in the register ?). Case evidence (not used as credits): TELUS Regent, Vancouver (BKL 2025, FOI 2026-098): rooftop barrier −2 to −7 dBA, with silencers R1 57 → 48; Olds AB (OpenCycle 2026): combined measures −23.6 to −26.1 dBA, no per-measure split.",
 "unit": "dBA",
 "sources": [
 "iso9613",
@@ -2192,7 +2192,19 @@
 "arupManx2013",
 "cumminsF1493",
 "fhwaBarrier",
-"vertivAFC"
+"vertivAFC",
+"arch_nz_nswDcNoise",
+"arch_nz_fhwaNBDH",
+"arch_nz_ottawaENCG",
+"arch_nz_amcaMathson",
+"arch_nz_kaltraDC",
+"arch_nz_spxAEJB21A",
+"arch_nz_bklTelusRegent",
+"arch_nz_oldsNIAmit",
+"arch_nz_cnossosDiv",
+"arch_nz_cnossosDiff",
+"arch_nz_hkEpdEM",
+"arch_nz_piercyISO"
 ],
 "source_roles": [
 {
@@ -2299,6 +2311,110 @@
 "role": "pending build",
 "conf": 50,
 "verified": false
+},
+{
+"id": "arch_nz_nswDcNoise",
+"term": "screen 8 dB (conditions); plant room 25 dB; louvre IL Table 4-5; summed logarithmically",
+"role": "coefficient",
+"conf": 80,
+"verified": true,
+"added": "3 Nov 2026"
+},
+{
+"id": "arch_nz_fhwaNBDH",
+"term": "screen 5 dB at line-of-sight break + 1.5 dB/m, cap 20 dB; 20 kg/m²; energy addition",
+"role": "coefficient",
+"conf": 85,
+"verified": true,
+"added": "3 Nov 2026"
+},
+{
+"id": "arch_nz_ottawaENCG",
+"term": "rooftop barrier ≥ 10 kg/m²; barriers after other measures",
+"role": "rule",
+"conf": 85,
+"verified": true,
+"added": "3 Nov 2026"
+},
+{
+"id": "traneRTAF",
+"term": "low-noise variant Lw 98 vs 101 at 1,010 kW (size 280)",
+"role": "coefficient",
+"conf": 50,
+"verified": true,
+"added": "3 Nov 2026"
+},
+{
+"id": "arch_nz_amcaMathson",
+"term": "fan law 50 log(N2/N1); valid from 0.6 × base speed",
+"role": "method",
+"conf": 75,
+"verified": true,
+"added": "3 Nov 2026"
+},
+{
+"id": "arch_nz_kaltraDC",
+"term": "EC fans limited at night to reduce noise (no dB)",
+"role": "context",
+"conf": 50,
+"verified": true,
+"added": "3 Nov 2026"
+},
+{
+"id": "arch_nz_spxAEJB21A",
+"term": "towers: 50 log is an upper bound (\"no greater than\"): not credited",
+"role": "context",
+"conf": 70,
+"verified": true,
+"added": "3 Nov 2026"
+},
+{
+"id": "arch_nz_bklTelusRegent",
+"term": "Vancouver case: rooftop barrier −2 to −7 dBA; generator enclosure 65 dBA @ 7 m",
+"role": "benchmark",
+"conf": 80,
+"verified": true,
+"added": "3 Nov 2026"
+},
+{
+"id": "arch_nz_oldsNIAmit",
+"term": "Olds AB case: combined −23.6 to −26.1 dBA",
+"role": "benchmark",
+"conf": 75,
+"verified": true,
+"added": "3 Nov 2026"
+},
+{
+"id": "arch_nz_cnossosDiv",
+"term": "point source divergence 20 lg d + 11",
+"role": "method",
+"conf": 90,
+"verified": true,
+"added": "3 Nov 2026"
+},
+{
+"id": "arch_nz_cnossosDiff",
+"term": "diffraction cap 25 dB (horizontal edge)",
+"role": "benchmark",
+"conf": 85,
+"verified": true,
+"added": "3 Nov 2026"
+},
+{
+"id": "arch_nz_hkEpdEM",
+"term": "barriers 5 to 10 dB(A); enclosure where > 20 dB(A)",
+"role": "benchmark",
+"conf": 70,
+"verified": true,
+"added": "3 Nov 2026"
+},
+{
+"id": "arch_nz_piercyISO",
+"term": "ISO 9613-2 accuracy ±3 dB",
+"role": "context",
+"conf": 60,
+"verified": true,
+"added": "3 Nov 2026"
 }
 ],
 "conf": 50,
@@ -2311,10 +2427,10 @@
 ],
 "upstream": 50,
 "city": {
-"van": 0,
-"edm": 0,
+"van": 1,
+"edm": 1,
 "both": 0,
-"gen": 16
+"gen": 26
 }
 },
 {
@@ -5280,8 +5396,8 @@
 "kind": "quantity",
 "stage": "test",
 "name": "Local noise limit",
-"formula": "Edmonton Bylaw 14600 at the property line, no averaging period stated: residential 65 day / 50 night, non-residential 75 / 60 (s.19–22); Vancouver by zone pair, continuous: quiet→quiet 55/45, activity→quiet 60/55, other 70/65; AUC Rule 012 Leq 40–56 + tonal +5 for the grid connection and any tethered generation ‖ 2 Nov 2026 (J.B.): hard rule: BLOCK a set-up or size when the level from the cooling plant with the QUIETER unit rating (low end of noise_level) exceeds the night limit at any neighbouring lot; FLAG (note, not a block) when only the STANDARD (louder) rating exceeds it. Night limit governs: the plant runs 24 h. Measured at the point of the receiving lot nearest the centre of the cooling units: Vancouver By-law 6555 s. 1.2 'point of reception' (a point in the lane or street adjacent to but outside the recipient's property, at the shortest distance to the source; where no lane, street or other public property lies between, any point outside the source's property line); Edmonton Bylaw 14600 ss. 20(1), 22(1) 'as measured at the property line of a property zoned for …'. Where no lot outline holds a neighbouring building, its outline is used, labelled (building, not property line: reads low ?). A lot with no zoning record, or an Edmonton mixed-use or Direct Control lot, blocks only above the looser possible limit (Van 55/65 by source zone; Edm 60) and is flagged above the stricter one.",
-"coef": "AUC Rule 012 (30 Sep 2024 consolidation; Bulletin 2026-03 of 17 Apr 2026 added guidance only) Table 1 basic sound level, night-time dBA Leq, all 15 cells confirmed: Category 1 (≥500 m from heavily travelled road/rail): 40 / 43 / 46 / 48 / 53 for 1–8 / 9–160 / 161–400 / 401–1,000 (suburban) / >1,000 (urban) dwellings per quarter section (451 m radius); Category 2 (30–500 m): 45 / 48 / 51 / 51 / 53; Category 3 (<30 m or frequent flyovers): 50 / 53 / 56 / 56 / 56; daytime = +10 dBA; minimum night BSL 40; Class A (seasonal/ambient) and B (temporary) adjustments may add; receptor = any dwelling within 1.5 km of the property boundary, else a point at 1.5 km; cumulative with other energy-related facilities; no-net-increase rule (s.2.8) for areas already at the limit. Note: Rule 012 binds AUC-regulated facilities (substations, generation); a data centre itself falls under Edmonton Bylaw 14600 — the rule applies to its grid connection and any generation it tethers to; 13 Oct 2026: Vancouver zone pairs confirmed — quiet→quiet 55/45, activity→quiet 60/55, intermediate/activity→other 70/65; no standing variance for operating noise (111 E 5th amended the by-law's schedule instead); 14 Oct 2026: Edmonton Bylaw 14600 (consolidated 22 Oct 2024) read in full — s.19 residential day 65 dB(A) at the property line 7 a.m.–10 p.m., with allowances 70/2 h, 75/1 h, 80/30 min, 85/15 min per day; s.20 residential night 50; s.21 non-residential day 75 (allowances 80/2 h, 85/1 h); s.22 non-residential night 60; no averaging period stated (read as instantaneous); s.14 a disturbance can be an offence whether or not a level is measured or exceeded; s.16 construction 7 a.m.–9 p.m. (Sun/holidays 9 a.m.–7 p.m.); Vancouver zones (By-law 6555 Sch. A/B/B.1, read 15 Oct): activity = MC-1, MC-2, DD, M-1, M-1A, M-1B, M-2, IC-1–3, I-1, I-1A–C, I-2, I-3, I-4, CWD, DEOD and listed CD-1s; intermediate = C-1, C-2, C-2A–C, C-2C1, C-3A, C-5, C-5A, C-6, C-7, C-8, FC-1, FC-2, FCCDD, BCPED, HA-1, HA-1A, HA-2–4, R3-1–3, R4-1, R5-1–4, RR-3A–C and the B.1 outline (north False Creek shore); quiet = all else. From an activity zone: to quiet 60/55, to intermediate or activity 70/65 dBA day/night; Edmonton: AUC Rule 012 is for power plants and substations, used as a benchmark; the City's own noise bylaw still to be read (?) [decision 30 Oct 2026] ‖ 2 Nov 2026 (J.B.): hard rule: limits used, night, by source zone → receiving zone (sections): Van quiet source s. 2.1(b)(i) 45 / (ii) 55; intermediate s. 2.2(b)(i) 50 / (ii) 65; activity or event s. 2.3(b)(i) 55 / (ii) 65; Edm residential s. 20(1) 50, other s. 22(1) 60. Lp = Lw − 20 log r − 8, r ≥ 5 m (tool near-field floor), horizontal distance; receivers: lots holding a building within 1.5 km. No reduction credited for screens, enclosures or indoor plant (no verified dBA figure ?). Generator testing (By-law 6555 s. 4.1(c): ≤ once a month, daytime, ≤ 60 min, plus once a year ≤ 180 min, ≤ 80 dBA at the point of reception or 6.1 m, whichever is greater): not checked (?), no rated generator sound level with a source in the register.",
+"formula": "Edmonton Bylaw 14600 at the property line, no averaging period stated: residential 65 day / 50 night, non-residential 75 / 60 (s.19–22); Vancouver by zone pair, continuous: quiet→quiet 55/45, activity→quiet 60/55, other 70/65; AUC Rule 012 Leq 40–56 + tonal +5 for the grid connection and any tethered generation ‖ 2 Nov 2026 (J.B.): hard rule: BLOCK a set-up or size when the level from the cooling plant with the QUIETER unit rating (low end of noise_level) exceeds the night limit at any neighbouring lot; FLAG (note, not a block) when only the STANDARD (louder) rating exceeds it. Night limit governs: the plant runs 24 h. Measured at the point of the receiving lot nearest the centre of the cooling units: Vancouver By-law 6555 s. 1.2 'point of reception' (a point in the lane or street adjacent to but outside the recipient's property, at the shortest distance to the source; where no lane, street or other public property lies between, any point outside the source's property line); Edmonton Bylaw 14600 ss. 20(1), 22(1) 'as measured at the property line of a property zoned for …'. Where no lot outline holds a neighbouring building, its outline is used, labelled (building, not property line: reads low ?). A lot with no zoning record, or an Edmonton mixed-use or Direct Control lot, blocks only above the looser possible limit (Van 55/65 by source zone; Edm 60) and is flagged above the stricter one. ‖ 3 Nov 2026 (mitigation): BLOCK only when no modelled option, alone or combined (source change + screen, or source change + plant room), brings the QUIETER rating under the night limit at every receiver; when one does, the set-up passes with that option named as required. Options are tried source first (low-noise units or night fan speed), then the screen, then both (Ottawa ENCG Intro p. 1: barriers only after other measures; Part 1 s. 3.3). FLAG when the STANDARD rating would need more than the option the quieter rating needs, or no option is enough for it. Neither by-law limits how the level is met: only the received level counts (Van 6555 ss. 2.1–2.3 'when received at a point of reception'; Edm 14600 ss. 19–22 'as measured at the property line'); Edmonton s. 14(3) nuisance applies whatever the dB level (not modelled).",
+"coef": "AUC Rule 012 (30 Sep 2024 consolidation; Bulletin 2026-03 of 17 Apr 2026 added guidance only) Table 1 basic sound level, night-time dBA Leq, all 15 cells confirmed: Category 1 (≥500 m from heavily travelled road/rail): 40 / 43 / 46 / 48 / 53 for 1–8 / 9–160 / 161–400 / 401–1,000 (suburban) / >1,000 (urban) dwellings per quarter section (451 m radius); Category 2 (30–500 m): 45 / 48 / 51 / 51 / 53; Category 3 (<30 m or frequent flyovers): 50 / 53 / 56 / 56 / 56; daytime = +10 dBA; minimum night BSL 40; Class A (seasonal/ambient) and B (temporary) adjustments may add; receptor = any dwelling within 1.5 km of the property boundary, else a point at 1.5 km; cumulative with other energy-related facilities; no-net-increase rule (s.2.8) for areas already at the limit. Note: Rule 012 binds AUC-regulated facilities (substations, generation); a data centre itself falls under Edmonton Bylaw 14600 — the rule applies to its grid connection and any generation it tethers to; 13 Oct 2026: Vancouver zone pairs confirmed — quiet→quiet 55/45, activity→quiet 60/55, intermediate/activity→other 70/65; no standing variance for operating noise (111 E 5th amended the by-law's schedule instead); 14 Oct 2026: Edmonton Bylaw 14600 (consolidated 22 Oct 2024) read in full — s.19 residential day 65 dB(A) at the property line 7 a.m.–10 p.m., with allowances 70/2 h, 75/1 h, 80/30 min, 85/15 min per day; s.20 residential night 50; s.21 non-residential day 75 (allowances 80/2 h, 85/1 h); s.22 non-residential night 60; no averaging period stated (read as instantaneous); s.14 a disturbance can be an offence whether or not a level is measured or exceeded; s.16 construction 7 a.m.–9 p.m. (Sun/holidays 9 a.m.–7 p.m.); Vancouver zones (By-law 6555 Sch. A/B/B.1, read 15 Oct): activity = MC-1, MC-2, DD, M-1, M-1A, M-1B, M-2, IC-1–3, I-1, I-1A–C, I-2, I-3, I-4, CWD, DEOD and listed CD-1s; intermediate = C-1, C-2, C-2A–C, C-2C1, C-3A, C-5, C-5A, C-6, C-7, C-8, FC-1, FC-2, FCCDD, BCPED, HA-1, HA-1A, HA-2–4, R3-1–3, R4-1, R5-1–4, RR-3A–C and the B.1 outline (north False Creek shore); quiet = all else. From an activity zone: to quiet 60/55, to intermediate or activity 70/65 dBA day/night; Edmonton: AUC Rule 012 is for power plants and substations, used as a benchmark; the City's own noise bylaw still to be read (?) [decision 30 Oct 2026] ‖ 2 Nov 2026 (J.B.): hard rule: limits used, night, by source zone → receiving zone (sections): Van quiet source s. 2.1(b)(i) 45 / (ii) 55; intermediate s. 2.2(b)(i) 50 / (ii) 65; activity or event s. 2.3(b)(i) 55 / (ii) 65; Edm residential s. 20(1) 50, other s. 22(1) 60. Lp = Lw − 20 log r − 8, r ≥ 5 m (tool near-field floor), horizontal distance; receivers: lots holding a building within 1.5 km. No reduction credited for screens, enclosures or indoor plant (no verified dBA figure ?). Generator testing (By-law 6555 s. 4.1(c): ≤ once a month, daytime, ≤ 60 min, plus once a year ≤ 180 min, ≤ 80 dBA at the point of reception or 6.1 m, whichever is greater): not checked (?), no rated generator sound level with a source in the register. ‖ 3 Nov 2026 (mitigation): generator testing (Van 6555 s. 4.1(c)) stays not checked (?): the research gives only a design intent for one generator enclosure (TELUS Regent, 65 dBA at 7 m), not a rated level for the tool's generator sets.",
 "unit": "dBA",
 "sources": [
 "bylaw14600",
@@ -5289,7 +5405,10 @@
 "rule012",
 "van6555",
 "van6555zones",
-"src_fill_van6555s21"
+"src_fill_van6555s21",
+"arch_nz_van6555s44",
+"arch_nz_edm14600s14",
+"arch_nz_ottawaENCG"
 ],
 "source_roles": [
 {
@@ -5328,6 +5447,30 @@
 "conf": 90,
 "verified": true,
 "added": "2 Nov 2026"
+},
+{
+"id": "arch_nz_van6555s44",
+"term": "acoustic report only for construction or special-event exceptions",
+"role": "rule",
+"conf": 90,
+"verified": true,
+"added": "3 Nov 2026"
+},
+{
+"id": "arch_nz_edm14600s14",
+"term": "s. 14(3) nuisance whatever the dB level; s. 24(b) City Manager permit",
+"role": "rule",
+"conf": 90,
+"verified": true,
+"added": "3 Nov 2026"
+},
+{
+"id": "arch_nz_ottawaENCG",
+"term": "order: source measures before barriers",
+"role": "rule",
+"conf": 85,
+"verified": true,
+"added": "3 Nov 2026"
 }
 ],
 "conf": 90,
@@ -5339,10 +5482,10 @@
 ],
 "upstream": 50,
 "city": {
-"van": 4,
-"edm": 2,
+"van": 5,
+"edm": 3,
 "both": 0,
-"gen": 0
+"gen": 1
 }
 },
 {
@@ -18368,7 +18511,22 @@
 "arch_rz_emrbRef2024": "GOVERNMENT GUIDE: EMRB Planning Toolkit (REF), Edmonton Metropolitan Region Board, updated Mar 2024: p. 4 Growth Plan approved 'pursuant to Section 708.1 of the Municipal Government Act'; p. 7 REF in Ministerial Order MSD:088/20 (14 Dec 2020); REF 4.1 new statutory plans; 4.3 amendments referred incl. (c) unplanned regional infrastructure or >8 ha ASP/IDP/urban service area boundary increase, (d) outside Downtown Edmonton converting more than 32 ha of a major employment area to non-employment uses or changing its boundaries, (e) regional water/wastewater, (f) within 0.8 km of future pipeline corridor, (j) within 0.4 km of planned LRT or TOD Centre, or includes a Park and Ride; s. 8.1 p. 18 test: consistent with the Growth Plan; p. 8 EMRB recommendation within 25 working days of a complete application; 28-day appeal period if approval recommended; pp. 39-40 Edmonton district plans need REF submission; land use bylaws not described as referred — https://emrb.ca/wp-content/uploads/2024/05/EMRB-REF-Toolkit-2024.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all confirmed; 4.3(c), (j) completed; pages added. ‖ CHECK 3 (2 Nov 2026, fixed): 25 working days is for the recommendation, not the Board decision.",
 "arch_rz_canMarineAct48": "RULE: Canada Marine Act, SC 1998 c. 10, s. 48(1), Justice Laws (current to 19 Oct 2026, last amended 27 Nov 2024): 'A port authority shall, within twelve months after the issuance of its letters patent, develop a detailed land-use plan' ... 'and zoning by-laws that apply to neighbouring lands' (the plan takes neighbouring municipal zoning into account; it does not say municipal zoning does not apply) — https://laws-lois.justice.gc.ca/eng/acts/C-6.7/section-48.html ‖ CHECK 2 (2 Nov 2026, fixed): confirmed; added the neighbouring-zoning limb. ‖ CHECK 3 (2 Nov 2026, ok): all re-confirmed.",
 "arch_rz_vfpaLup2026": "GOVERNMENT AGENCY GUIDE (federal port authority): Backgrounder, 2026 Land use plan amendments, Vancouver Fraser Port Authority, 18 Aug 2026: 'The procedure to amend the Land Use Plan and designate lands is set out in the Canada Marine Act, Section 48'; eight designations; 'Port Terminal' 'primarily for deep-sea marine and river terminals that handle a variety of cargo'; future projects must conform to Land Use Plan uses; 805 and 1105 Powell Street listed with 'Former municipal zoning' 'Industrial (M2)'; does not state in words that municipal zoning does not apply ? — https://www.portvancouver.com/media/documents/backgrounder-land-use-plan-amendment-2026 ‖ CHECK 2 (2 Nov 2026, fixed): Powell St wording is 'Former municipal zoning' 'Industrial (M2)'; 'before acquisition' not in source. ‖ CHECK 3 (2 Nov 2026, ok): all re-confirmed.",
-"arch_rz_alcBylawGuide": "GOVERNMENT GUIDE: Agricultural Land Commission Bylaw Review Guide: A Resource for Local and First Nation Governments, ALC (BC), 2024: s. 2.1 (ALCA s. 46(4)) inconsistent bylaw 'has, to the extent of the inconsistency, no force or effect'; (ALCA s. 18) 'L/FNGs may only permit uses or structures on ALR land if it is permitted under the ALCA'; s. 4.2 redesignation support 'can only be achieved via a resolution of the Executive Committee'; 'A future ALC application is still required' — https://www.alc.gov.bc.ca/assets/alc/assets/library/land-use-planning/alc_bylaw_review_guide.pdf ‖ CHECK 2 (2 Nov 2026, ok): all confirmed. ‖ CHECK 3 (2 Nov 2026, ok): all re-confirmed."
+"arch_rz_alcBylawGuide": "GOVERNMENT GUIDE: Agricultural Land Commission Bylaw Review Guide: A Resource for Local and First Nation Governments, ALC (BC), 2024: s. 2.1 (ALCA s. 46(4)) inconsistent bylaw 'has, to the extent of the inconsistency, no force or effect'; (ALCA s. 18) 'L/FNGs may only permit uses or structures on ALR land if it is permitted under the ALCA'; s. 4.2 redesignation support 'can only be achieved via a resolution of the Executive Committee'; 'A future ALC application is still required' — https://www.alc.gov.bc.ca/assets/alc/assets/library/land-use-planning/alc_bylaw_review_guide.pdf ‖ CHECK 2 (2 Nov 2026, ok): all confirmed. ‖ CHECK 3 (2 Nov 2026, ok): all re-confirmed.",
+"arch_nz_fhwaNBDH": "GOVERNMENT GUIDE (US): Noise Barrier Design Handbook, US Federal Highway Administration (web edition, page updated 28 Jun 2017): s. 3.4 Fresnel number 'N0 = ±2(δ0/λ)', attenuation only charted (Fig. 11, 550 Hz); s. 3.4.2 'the maximum noise reduction that can be achieved by a barrier is 20 dB(A) for thin walls and 23 dB(A) for berms'; 'any material weighing 20 kg/m2 (4 lbs/ft2) or more has a transmission loss of at least 20 dB(A)'; s. 3.5.1 'a 5-dB(A) IL can be expected for receivers whose line-of-sight to the roadway is just blocked', 'each additional 1 m of barrier height above line-of-sight blockage will provide about 1.5 dB(A)'; s. 3.3.1 point source '6 dB(A) per doubling of distance'; s. 3.1 energy addition, two identical 60 dB events 'produce an SPL of 63 dB' (highway line-source context) — https://www.fhwa.dot.gov/Environment/noise/noise_barriers/design_construction/design/design03.cfm ‖ CHECK 2 (2 Nov 2026, ok): all claims confirmed; scope: highway line source, use on rooftop plant is our extension",
+"arch_nz_cnossosDiff": "RULE (EU): Commission Directive (EU) 2015/996, Annex, 2.5.6 'Pure diffraction' (CNOSSOS-EU; read on legislation.gov.uk): 'δ is the path difference between the diffracted path and the direct path'; C″ = 1 for a single diffraction; 'if Δ dif > 25: Δ dif = 25 dB for a diffraction on a horizontal edge'; 'if Δ dif < 0: Δ dif = 0 dB'; equation 2.5.21 printed as an image, not read (?) — http://www.legislation.gov.uk/eudr/2015/996/annex/division/ASSESSMENT/division/2/division/2.5/division/2.5.6/division/9 ‖ CHECK 2 (2 Nov 2026, ok): all claims confirmed; EU benchmark outside Canada; later EU amendment not checked ?",
+"arch_nz_cnossosDiv": "RULE (EU): Commission Directive (EU) 2015/996, Annex, 2.5.6 'Geometrical divergence', eq. 2.5.12: 'For a point sound source in free field' Adiv = 20 × lg(d) + 11, d = 3D slant distance — http://www.legislation.gov.uk/eudr/2015/996/annex/division/ASSESSMENT/division/2/division/2.5/division/2.5.6/division/1 ‖ CHECK 2 (2 Nov 2026, ok): all claims confirmed; EU benchmark outside Canada",
+"arch_nz_nswDcNoise": "GOVERNMENT-COMMISSIONED STUDY: Complying Development Pathway for Data Centres: Noise Study, RWDI Australia for NSW Department of Planning, Industry and Environment, 22 Feb 2021 (Version A, Final; s. 4.1 p. 11 \"the following complying development pathway is proposed\"; adoption not stated ?): s. 4.3 p. 16 'Acoustic Barrier – 8 dB reduction' (solid, within 20 m of the source, at least 4 m above the source FFL, breaks line of sight, 2 m beyond the source if not surrounding); 'Enclosed Plantroom/Internal to the building – 25 dB reduction' (solid walls, 'Roof sheeting is to be RW 47 at a minimum', gaps sealed); Table 4-5 louvre minimum insertion loss 63–8k Hz: 6, 12, 16, 22, 27, 27, 24, 23 dB; p. 15 'Lw = Lp + 20 log(R) + 8'; s. 4.1 p. 11 plant Lw 'summed logarithmically'; s. 4.3 p. 15 sound power per operating mode (high/medium/low) required — https://shared-drupal-s3fs.s3-ap-southeast-2.amazonaws.com/master-test/fapub_pdf/00+-+Planning+Portal+Exhibitions/Building+better+business/Attachment+G+-+RWDI_Data+Centres+Noise+Report.pdf ‖ CHECK 2 (2 Nov 2026, fixed): figures confirmed; proposal status quoted; operating-mode clause located at s. 4.3 p. 15; NSW benchmark outside Canada",
+"arch_nz_ottawaENCG": "GOVERNMENT GUIDE (municipal, Ontario): Environmental Noise Control Guidelines, City of Ottawa (Intro/Glossary and Part 1 12 Jul 2017; Parts 2–4 Jan 2016): Glossary p. 4 acoustic barrier 'The minimum surface density (face weight) is 20 kg/m2', 'no lower than 10 kg/m2 for: • rooftop barriers' (subject to technical justification), no cracks or gaps; Part 1 s. 3.3 p. 11 'The City requires that stationary noise be addressed at its source' (equipment selection, timing, 'equipment sound barriers and equipment sound attenuation'); s. 3.2 p. 10 stationary limits from MECP NPC-300 ; Intro p. 1 'Acoustic barriers should only be used when other noise control measures have been considered' — https://documents.ottawa.ca/sites/default/files/documents/enviro_noise_guideline_en.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all claims confirmed; added Intro p. 1 quote behind the barriers-last row ‖ CHECK 3 (2 Nov 2026, fixed): s. 3.3 p. 10→p. 11, s. 3.2 p. 9→p. 10 (printed footers); rest confirmed",
+"arch_nz_hkEpdEM": "GOVERNMENT GUIDE (Hong Kong): Good Practices on the Control of Noise from Electrical & Mechanical Systems, Environmental Protection Department (web edition, © 2025; read in Chinese, our translation): s. 7.6 barriers 'reduce noise levels by 5 to 10 dB(A)', length not less than five times height, surface density not less than 10 kg/m²; s. 7.4 complete enclosure generally needed where airborne reduction of more than 20 dB(A) is required, 50 mm absorptive lining, silenced ventilation; s. 7.11 acoustic louvres specified by transmission loss in each frequency band, a \"very short silencer\" only for low required reduction (no dB values in text ?); s. 7.2 +3 dB(A) façade correction (not re-read in Check 2 ?) — https://noiseenm.epd.gov.hk//section/7.6 ; https://noiseenm.epd.gov.hk/section/7.4 ; https://noiseenm.epd.gov.hk//section/7.11 ‖ CHECK 2 (2 Nov 2026, fixed): 7.6 and 7.4 confirmed; 7.11 \"octave-band\" → frequency band, low-reduction use only; 7.2 not re-read",
+"arch_nz_bklTelusRegent": "FILED STUDY (City of Vancouver FOI release 2026-098, 21 Apr 2026): BKL Consultants, 'TELUS Regent Central Office, Vancouver, Exterior Noise Assessment of Mechanical Equipment', file 4160-25A-R0, 21 Aug 2025, 2212 W 10th Ave (C-7, intermediate zone): Cadna/A (p. 5); design target 50 dBA night at R1 against a by-law 65 (p. 5); Trane AMC 30 ton module with 'Low Noise Fans and Compressor Wraps' 70 dBA, 'Sound pressure data captured at 3 ft from source' (Table 3, p. 6), 6 of 7 modules running; generator enclosure intent 65 dBA @ 7 m (pp. 6–7); no barrier R1 57, R2 51, R3/R4 45 dBA (Table 4, p. 7); rooftop barrier absorptive, at least 1 m above the tallest equipment (3.27 m), at least 10 kg/m², no gaps (pp. 10–11) → R1 54, R2 49, R3/R4 38 (Table 6, p. 11); chiller silencer minimum IL 63–4k Hz 1, 2, 2, 5, 7, 7, 8 dB (Table 7, p. 12); with barrier R1 48 (Table 8, p. 12); daytime generator testing per by-law; penthouse with silencers for night testing (p. 13) — https://vancouver.ca/files/cov/2026-098-release.pdf ‖ CHECK 2 (2 Nov 2026, fixed): figures confirmed; silencer IL table is Table 7 p. 12; md barrier change is −2 to −7, not −3 to −7",
+"arch_nz_oldsNIAmit": "FILED STUDY (proponent; hosted by Town of Olds): OpenCycle, Synapse Olds data centre Noise Impact Assessment Stage-1.5 Rev 1, 24 Mar 2026 (OpenCycle ID 007700-NIA-001; file name 30732_x0011; AUC exhibit no. not printed), CadnaA per ISO 9613 (pp. 19–20): night mitigation Table 5 p. 26 chillers '≤85 dBA PWL per unit' (from 110 'initially assumed', p. 17; Appendix D Table D overall 111 ?), step-up transformers ≤80, inlet filter house silencers ≤85, barrier ≥7.5 m at NW corner with absorption 0.84 both sides; Table 6 p. 27 facility reduction 23.6–26.1 dBA, R01-2nd storey facility 72.4 → 47.3 (−25.1), cumulative with ASL 48.0 → 50.7 dBA vs PSL 53 (no per-measure insertion loss); chillers modelled at highest fan speed (p. 17) — https://www.olds.ca/media/egilzm3p/30732_x0011_tp-31-noise-impact-assessment_000011.pdf ‖ CHECK 2 (2 Nov 2026, fixed): figures confirmed; exhibit no. only in file name; 107 from Appendix D ?; cumulative includes ambient 48.0; md \"peer-reviewed\" and \"AUC denied\" not in this source ‖ CHECK 3 (2 Nov 2026, fixed): Appendix D chiller value reads 111, not ≈107 (extraction hard to read ?); doc ID added",
+"arch_nz_amcaMathson": "STANDARDS-BODY CONFERENCE PAPER: Mathson, 'Treatment of Tonal Sound in the Development of Fan Sound Ratings', AMCA International Engineering Conference, Paper 5252-08, 2–4 Mar 2008 (author from Greenheck, a fan maker): p. 4 AMCA 301 generalized sound power Lw2 = Lw1 + 40 log(N2/N1) + 70 log(D2/D1) + 10 log(bandwidth ratio), simplified to Lw2 = Lw1 + 50 log(N2/N1) + 70 log(D2/D1); p. 3 geometric similarity required; p. 9 (Annex A.2, informative) 'Intermediate catalogue speeds should fall between 0.6 and 1.6 times the base test speed' (≈ −11 to +10 dB, our arithmetic); pp. 3–4 dipole 60 log N + 80 log D (page numbers from extracted page markers ?) — https://www.amca.org/assets/resources/public/researcharticle/12p_Mathson_paper.pdf ‖ CHECK 2 (2 Nov 2026, fixed): equation p. 3→p. 4 and shown as 40 log N + bandwidth term → 50 log N; 0.6–1.6 p. 8→p. 9; dipole p. 2→pp. 3–4 ‖ CHECK 3 (2 Nov 2026, fixed): all confirmed; Annex A is informative; arithmetic re-done",
+"arch_nz_spxAEJB21A": "MAKER CLAIM: SPX Cooling Tech, 'Understanding and Evaluating Cooling Tower Sound Levels Among Manufacturers', AE-JB-21A, 04/2026, p. 5 (page not shown in extract ?; sections 'Fans and Their Effect on Sound', 'Attenuation Baffles'): reduced fan speed 'no greater than 50log10(new speed/old speed)', 'sound reduction of up to 15dBA could result' at half speed, floor = 'fans off/water only' level; inlet and/or discharge attenuation 'can reduce sound levels 5dBA or more' — https://spxcooling.com/wp-content/uploads/AE-JB-21A.pdf ‖ CHECK 2 (2 Nov 2026, ok): all claims confirmed ‖ CHECK 3 (2 Nov 2026, fixed): quotes confirmed; p. 5 not confirmable",
+"arch_nz_kaltraDC": "MAKER CLAIM: Kaltra, 'Dry cooler selection: what do you need to know?', web page 14 Jul 2021 (modified 9 Aug 2025): 'select EC-driven fans to reduce noise output, e.g., at night time, by limiting fan rotation speed'; no dB figure for EC fans (diffusers: 'up to 7 dB(A) lower with the same airflow') — https://www.kaltra.com/?p=8543 ‖ CHECK 2 (2 Nov 2026, ok): all claims confirmed ‖ CHECK 3 (2 Nov 2026, fixed): page does give one dB figure (diffusers); none for EC fans",
+"arch_nz_daikinEWADTZXS": "MAKER CLAIM: Daikin (Middle East and Africa site), EWAD-TZ XS air-cooled inverter screw chiller specification table (read 2 Nov 2026): nominal cooling 179.6 kW (EWAD180TZXS) to 682.3 kW (EWAD690TZXS); sound power 96–101 dB(A) (e.g. 440.9 kW 100; 682.3 kW 101), 'ISO 9614 and Eurovent 8/1'; sound pressure 77–80 dB(A) (distance not stated ?); capacity EN 14511, temperatures not stated ? — https://www.daikinmea.com/en_us/products/ewad-tzxs.table.html ‖ CHECK 2 (2 Nov 2026, fixed): figures not re-verified: table is script-rendered; treat as unverified until read from a maker PDF ‖ CHECK 3 (2 Nov 2026, fixed): still unreachable (script table); all figures unverified ?",
+"arch_nz_van6555s44": "RULE: Noise Control By-law No. 6555, City of Vancouver (consolidated to 14 Jul 2026), s. 4.4: exceptions only for construction work or special events (at most 180 days); s. 4.4(a) the Chief Building Official or Chief Licence Inspector 'may require additional documentation ... including a report from a registered professional acoustical engineer'; no other acoustic-report, equipment or mitigation clause; ss. 2.1–2.3 judge the level 'when received at a point of reception' (s. 1.2) — saved copy data/raw/van/6555.txt lines 128–135, 183–250, 529–543; https://bylaws.vancouver.ca/6555c.PDF ‖ CHECK 2 (2 Nov 2026, ok): all claims confirmed against the saved consolidation",
+"arch_nz_edm14600s14": "RULE: City of Edmonton Bylaw 14600 Community Standards Bylaw (consolidated 22 Oct 2024), s. 14(1) no noise 'that disturbs the peace of another individual'; s. 14(3) guilty 'whether or not the decibel level: (a) is measured; or (b) if measured, exceeds any limit' (p. 12); s. 15 criteria (type, volume, duration, time, area, dB if measured); s. 24(b) exception where 'the City Manager has issued a permit allowing the production of certain sounds on whatever conditions the City Manager deems appropriate' (p. 15); no acoustic-report or mitigation clause — https://www.edmonton.ca/sites/default/files/public-files/C14600.pdf ‖ CHECK 2 (2 Nov 2026, ok): all claims confirmed against saved consolidation",
+"arch_nz_piercyISO": "JOURNAL ITEM (two pages; review status not shown ?): Piercy (National Research Council Canada), 'The Draft International Standard Method (ISO/DIS 9613-2) for Calculating the Attenuation of Sound during Propagation Outdoors', Canadian Acoustics (journal name from host site, not printed ?), pp. 123–124 (volume/year not shown ?): octave bands 63–8000 Hz, point sources; Table 1 accuracy e.g. ±3 dB downwind for 0–100 m at heights 0–5 m; equations not given — https://jcaa.caa-aca.ca/index.php/jcaa/article/download/880/597/987 ‖ CHECK 2 (2 Nov 2026, fixed): figures confirmed; peer review not shown, relabelled ‖ CHECK 3 (2 Nov 2026, fixed): figures confirmed; journal name inferred from host; describes the draft, not the final standard"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -21449,7 +21607,22 @@
 "reflexH5000": "manufacturer claim",
 "logstor2014": "manufacturer claim",
 "armstrong4030": "manufacturer claim",
-"tsbcIBDA202001": "regulator bulletin"
+"tsbcIBDA202001": "regulator bulletin",
+"arch_nz_fhwaNBDH": "government guide (benchmark, outside Canada)",
+"arch_nz_cnossosDiff": "RULE (EU; benchmark outside Canada)",
+"arch_nz_cnossosDiv": "RULE (EU; benchmark outside Canada)",
+"arch_nz_nswDcNoise": "GOVERNMENT-COMMISSIONED STUDY (benchmark outside Canada; proposal)",
+"arch_nz_ottawaENCG": "government guide",
+"arch_nz_hkEpdEM": "GOVERNMENT GUIDE (Hong Kong; benchmark outside Canada)",
+"arch_nz_bklTelusRegent": "filed study (consultant report for a proponent, hosted by a government)",
+"arch_nz_oldsNIAmit": "filed study (consultant report for a proponent, hosted by a government)",
+"arch_nz_amcaMathson": "CONFERENCE PAPER (standards-body conference; author from a fan maker)",
+"arch_nz_spxAEJB21A": "manufacturer claim",
+"arch_nz_kaltraDC": "manufacturer claim",
+"arch_nz_daikinEWADTZXS": "manufacturer claim",
+"arch_nz_van6555s44": "rule",
+"arch_nz_edm14600s14": "rule",
+"arch_nz_piercyISO": "JOURNAL ITEM (Canadian Acoustics; review status not shown)"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -22298,7 +22471,22 @@
 "arch_rz_emrbRef2024": "claude",
 "arch_rz_canMarineAct48": "claude",
 "arch_rz_vfpaLup2026": "claude",
-"arch_rz_alcBylawGuide": "claude"
+"arch_rz_alcBylawGuide": "claude",
+"arch_nz_fhwaNBDH": "claude",
+"arch_nz_cnossosDiff": "claude",
+"arch_nz_cnossosDiv": "claude",
+"arch_nz_nswDcNoise": "claude",
+"arch_nz_ottawaENCG": "claude",
+"arch_nz_hkEpdEM": "claude",
+"arch_nz_bklTelusRegent": "claude",
+"arch_nz_oldsNIAmit": "claude",
+"arch_nz_amcaMathson": "claude",
+"arch_nz_spxAEJB21A": "claude",
+"arch_nz_kaltraDC": "claude",
+"arch_nz_daikinEWADTZXS": "claude",
+"arch_nz_van6555s44": "claude",
+"arch_nz_edm14600s14": "claude",
+"arch_nz_piercyISO": "claude"
 },
 "source_city": {
 "abgas": "edm",
@@ -23733,7 +23921,22 @@
 "arch_rz_emrbRef2024": "edm",
 "arch_rz_canMarineAct48": "gen",
 "arch_rz_vfpaLup2026": "van",
-"arch_rz_alcBylawGuide": "van"
+"arch_rz_alcBylawGuide": "van",
+"arch_nz_fhwaNBDH": "gen",
+"arch_nz_cnossosDiff": "gen",
+"arch_nz_cnossosDiv": "gen",
+"arch_nz_nswDcNoise": "gen",
+"arch_nz_ottawaENCG": "gen",
+"arch_nz_hkEpdEM": "gen",
+"arch_nz_bklTelusRegent": "van",
+"arch_nz_oldsNIAmit": "edm",
+"arch_nz_amcaMathson": "gen",
+"arch_nz_spxAEJB21A": "gen",
+"arch_nz_kaltraDC": "gen",
+"arch_nz_daikinEWADTZXS": "gen",
+"arch_nz_van6555s44": "van",
+"arch_nz_edm14600s14": "edm",
+"arch_nz_piercyISO": "gen"
 },
 "city_gaps": {
 "van": [

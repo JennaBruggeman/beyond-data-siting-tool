@@ -1,0 +1,892 @@
+{
+ "arch_inv_edmPermitRows": {
+  "where_read": "local export data/raw/edm/permits/General_Building_Permits_20261016.csv (247,700 rows), re-queried by address and job description 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "2023-02-17, 303 10060 Jasper Ave, Wolfpaw server room, $150,000, 1,915.97 ft², coords",
+    "verdict": "CONFIRMED",
+    "evidence": "'demo demising wall to expand computer server room) on the 3rd floor ... (Rice Howard Place - tower 1). - Wolfpaw Data Center' | $150,000 | 1,915.97 | 53.54136607 -113.49260303",
+    "fix": ""
+   },
+   {
+    "claim": "2024-08-13, 4130 95 St NW, IM, Communication Buildings (470), two RTUs, $120,000, 1,140 ft²",
+    "verdict": "CONFIRMED",
+    "evidence": "'Installation of two new RTU's (AC Only) with removal of old condenser units' | Communication Buildings (470) | $120,000 | 1,140.00",
+    "fix": ""
+   },
+   {
+    "claim": "2016-03-31, 10450 178 St NW (BE), UPS room, Shaw Cable, $700,000",
+    "verdict": "CONFIRMED",
+    "evidence": "'create 1 hr rated UPS Room and upgrade mechanical). ( Shaw Cable)' | $700,000",
+    "fix": ""
+   },
+   {
+    "claim": "2025-07-30 Rogers West Edmonton data hall, $2,100,000, 7,617.40 ft², coords",
+    "verdict": "CONFIRMED",
+    "evidence": "'Expanding the internal data hall in the building' ... '--Rogers West Edmonton--' | $2,100,000 | 7,617.40",
+    "fix": ""
+   },
+   {
+    "claim": "2026-09-23 structural repairs, 26,909.75 ft²",
+    "verdict": "CONFIRMED",
+    "evidence": "'structural repairs ... Rogers West Edmonton' | $400,000 | 26,909.75",
+    "fix": ""
+   },
+   {
+    "claim": "2011-02-09 6707 59 St NW, 2 rooftop units, Churchill Data Centre, $260,000",
+    "verdict": "CONFIRMED",
+    "evidence": "'installing 2 new rooftop units) ... (Churchill Data Centre)' | $260,000 | 425.00",
+    "fix": ""
+   },
+   {
+    "claim": "2021-08-26 Sobeys Data Centre demolition, $128,000",
+    "verdict": "CONFIRMED",
+    "evidence": "'To demolish a Business And Personal Services use building - Sobeys Data Centre.' | $128,000",
+    "fix": ""
+   },
+   {
+    "claim": "2011-08-19 EPCOR Data Centre P1, $3,399,000, 3,910.52 ft²",
+    "verdict": "CONFIRMED",
+    "evidence": "'(P1 level - Epcor Data Centre)' | $3,399,000 | 3,910.52",
+    "fix": ""
+   },
+   {
+    "claim": "2009-06-19 APA new data center, DC2, $2,000,000, 2,200 ft²",
+    "verdict": "CONFIRMED",
+    "evidence": "'New Data Center for Alberta Pensions Administration Corp.' | DC2 | $2,000,000 | 2,200.00",
+    "fix": ""
+   },
+   {
+    "claim": "10200 102 Ave: 2011 Primus $231,000; 2013 data room + fuel tank room $1,000,000, 12,538 ft²; 2019 Powerhouse Unit 302G",
+    "verdict": "CONFIRMED",
+    "evidence": "rows 2011-09-20, 2013-02-14, 2019-04-26 as quoted; 2013 row building type is 'Retail and Shops (510)', 2011 'Malls, Office/Retail (512)'; none of the three names Qu",
+    "fix": "note building type differs by row"
+   },
+   {
+    "claim": "17204 114 Ave: 2015 addition $850,000; 2019 two generator buildings; 2020 Hall 7 & 8 $4,000,000, 9,518.95 ft²; 2020 exterior generator",
+    "verdict": "CONFIRMED",
+    "evidence": "rows as quoted; also 2018-10-16 'Fire Alarm Alteration. Rogers Data Center.' $180,000 (not listed)",
+    "fix": "add the 2018 row"
+   },
+   {
+    "claim": "2012-04-26 screening walls permit names CAREFACTOR",
+    "verdict": "CONFIRMED",
+    "evidence": "'screening walls for exterior mechanical equipment AND INTERIOR ALTERATIONS for CAREFACTOR'",
+    "fix": ""
+   },
+   {
+    "claim": "No row at 14315 118 Ave NW or 17008 90 St NW names a data centre",
+    "verdict": "CONFIRMED",
+    "evidence": "14315: 12 rows, all office/retail tenant fit-outs (Nexus Business Park); 17008 - 90 STREET: 0 rows",
+    "fix": ""
+   },
+   {
+    "claim": "file path data/raw/edm/permits/...",
+    "verdict": "CONFIRMED",
+    "evidence": "file present at that path",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "MUNICIPAL PERMIT DATA: City of Edmonton General Building Permits, local export data/raw/edm/permits/General_Building_Permits_20261016.csv (J.B. download 16 Oct 2026), job descriptions searched 2 Nov 2026 for data cent / data hall / data room / server room / colocation and for operator names; PERMIT_NUMBER is blank in this export, rows cited by date; LATITUDE/LONGITUDE are the City's permit geocode: 2023-02-17, 303 10060 Jasper Ave NW (CCA, Office Buildings), 'demo demising wall to expand computer server room ... (Rice Howard Place - tower 1). - Wolfpaw Data Center', $150,000, 1,915.97 ft², 53.54136607 -113.49260303; 2024-08-13, 4130 95 St NW (IM, 'Communication Buildings (470)'), 'Installation of two new RTU's (AC Only) with removal of old condenser units', $120,000, 1,140 ft², 53.47743252 -113.47612931; 2016-03-31, 10450 178 St NW (BE), 'existing control room ... create 1 hr rated UPS Room and upgrade mechanical ( Shaw Cable)', $700,000; 2025-07-30, same address, 'Expanding the internal data hall in the building ... --Rogers West Edmonton--', $2,100,000, 7,617.40 ft², 53.54813069 -113.63010528; 2026-09-23, same, structural repairs 'Rogers West Edmonton', 26,909.75 ft²; 2011-02-09, 6707 59 St NW (IM), '2 new rooftop units ... (Churchill Data Centre)', $260,000, 53.50353931 -113.42350843; 2021-08-26, 12831 163 St NW (IM), 'To demolish a Business And Personal Services use building - Sobeys Data Centre', $128,000, 53.58830363 -113.59704853; 2011-08-19, 10423 101 St NW (CCA), 'office tower (P1 level - Epcor Data Centre)', $3,399,000, 3,910.52 ft², 53.54752572 -113.49185571; 2009-06-19, 5103 Windermere Blvd SW (DC2), 'New Data Center for Alberta Pensions Administration Corp.', $2,000,000, 2,200 ft², 53.43314510 -113.59381295; 10200 102 Ave NW (CCA, 'Malls, Office/Retail'), 2011-09-20 '\"Primus Data Centre\" City Centre West' $231,000; 2013-02-14 'Data room ... to the 3rd. floor of an exiting office/retail building, add a fuel tank room in basement level and roof top concrete pad and curbs' $1,000,000, 12,538 ft²; 2019-04-26 'data room (Powerhouse Data Centre Group, Unit 302G)'; 53.54357557 -113.49570454; 17204 114 Ave NW (DC2, IM, Armstrong Industrial), 2015-05-12 'addition ... (data centre and mechanical equipment). new RTU on roof' $850,000; 2019-11-07 'fire alarm in 2 generator buildings - Rogers EDC2 - Phase 1A'; 2020-05-21 'EDMONTON DC2 HALL 7 & 8 EXPANSION - Expansion of Rogers data center within empty warehouse' $4,000,000, 9,518.95 ft²; 2020-09-17 'exterior self-enclosed, non ABC required Generator'; 2018-10-16 'Fire Alarm Alteration. Rogers Data Center.' $180,000; 53.56421000 -113.61885309; the 2012-04-26 'screening walls for exterior mechanical equipment' permit at this address names CAREFACTOR, not Rogers (sources/01 §13 linked it to the Rogers era: overreach). No row at 14315 118 Ave NW or 17008 90 St NW names a data centre. — https://data.edmonton.ca/d/24uj-dj8v ‖ CHECK 2 (2 Nov 2026, fixed): all rows confirmed in the local export; added the 2018 'Rogers Data Center' row; no row at 10200 102 Ave or 17204 114 Ave names Qu; other data-centre rows not carried: 2014 Expo Centre basement 'new computer data centre' (7515 118 Ave NW), 2011/2016 WCB rooms"
+ },
+ "arch_inv_quEdmPage": {
+  "where_read": "https://qudatacentres.com/locations/edmonton-data-centre (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "EDM2 '35,000 ft² across two expandable phases, 1,450 tons of N+1 cooling, five carriers'",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "EDM2 8 MW design capacity",
+    "verdict": "CONFIRMED",
+    "evidence": "'EDM2 is the larger facility at 35,000 ft² with 8 MW design capacity'",
+    "fix": ""
+   },
+   {
+    "claim": "Uptime Tier III",
+    "verdict": "CONFIRMED",
+    "evidence": "'Uptime Institute Tier III certified' (EDM2)",
+    "fix": ""
+   },
+   {
+    "claim": "carriers Rogers, Shaw, Axia, Telus, Bell",
+    "verdict": "CONFIRMED",
+    "evidence": "EDM2 list; EDM1 has six: Rogers, Shaw, Axia, Telus, Bell, Zayo",
+    "fix": "say these are EDM2's; EDM1 adds Zayo"
+   },
+   {
+    "claim": "serves government, oil and gas, health, finance",
+    "verdict": "CONFIRMED",
+    "evidence": "'provincial government agencies, oil and gas operators, healthcare organizations, and financial services firms'",
+    "fix": ""
+   },
+   {
+    "claim": "EDM1 Downtown / Financial Core, closest to legislature",
+    "verdict": "CONFIRMED",
+    "evidence": "'EDM1 in the Financial Core District provides a downtown presence for government, financial, and enterprise workloads'; legislature sentence not re-quoted by the fetch",
+    "fix": "legislature quote not re-seen: keep, low risk"
+   },
+   {
+    "claim": "EDM1 18,000 ft²; 2.5 MW listing vs 1 MW FAQ",
+    "verdict": "CONFIRMED",
+    "evidence": "'18,000 ft² building'; 'EDM1 ... with 1 MW design capacity'; listing '2.5 MW'",
+    "fix": ""
+   },
+   {
+    "claim": "FM200, VESDA",
+    "verdict": "CONFIRMED",
+    "evidence": "'FM200 and VESDA protected environment' (EDM1); EDM2 'VESDA early warning fire detection'",
+    "fix": ""
+   },
+   {
+    "claim": "undated; no street addresses",
+    "verdict": "CONFIRMED",
+    "evidence": "no addresses; only '© 2026'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "OPERATOR CLAIM: Qu Data Centres, Edmonton data centre location page (read 2 Nov 2026; undated): EDM2 'Qu's larger Edmonton facility. 35,000 ft² across two expandable phases, 1,450 tons of N+1 cooling, five carriers'; '8 MW' design capacity; Uptime Tier III; EDM2 carriers Rogers, Shaw, Axia, Telus, Bell (EDM1: six, adds Zayo); serves 'provincial government agencies, oil and gas operators, healthcare organizations, and financial services firms'; EDM1 'Downtown Edmonton' / 'Financial Core', 'The closest Qu facility to provincial government offices and the Alberta legislature', 18,000 ft² building, listing says 2.5 MW but the FAQ says 1 MW design capacity (conflict ?); FM200, VESDA; no street addresses — https://qudatacentres.com/locations/edmonton-data-centre ‖ CHECK 2 (2 Nov 2026, fixed): all figures re-read; carrier list is EDM2's; page gives no address, so Qu at 10200 102 Ave and 17204 114 Ave rests on the directory LEAD plus permits naming Primus / Rogers, not Qu"
+ },
+ "arch_inv_incentreAbout": {
+  "where_read": "https://incentre.net/about/ (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "'we operate a secure 3,000 sqft data centre'",
+    "verdict": "CONFIRMED",
+    "evidence": "'secure 3,000 sqft data centre'",
+    "fix": ""
+   },
+   {
+    "claim": "cloud hosting, co-location",
+    "verdict": "CONFIRMED",
+    "evidence": "'cloud hosting environment, co-location for clients'",
+    "fix": ""
+   },
+   {
+    "claim": "redundant power & connectivity; own Edmonton facility",
+    "verdict": "CONFIRMED",
+    "evidence": "'redundant power & connectivity systems'; 'our own Edmonton facility'",
+    "fix": ""
+   },
+   {
+    "claim": "1993 CCI Networks; RackNine 2018",
+    "verdict": "CONFIRMED",
+    "evidence": "'started out as CCI Networks in 1993'; 'In 2018 we merged with RackNine'",
+    "fix": ""
+   },
+   {
+    "claim": "footer address 4130 95 Street NW",
+    "verdict": "CONFIRMED",
+    "evidence": "'4130 95 Street NW, Edmonton, AB T6E 6H5'",
+    "fix": ""
+   },
+   {
+    "claim": "undated",
+    "verdict": "WRONG",
+    "evidence": "page metadata: published 2024-06-11, modified 2026-08-12",
+    "fix": "say 'page metadata: published 11 Jun 2024, modified 12 Aug 2026'"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "OPERATOR CLAIM: The Internet Centre, About page (read 2 Nov 2026; page metadata published 11 Jun 2024, modified 12 Aug 2026): 'we operate a secure 3,000 sqft data centre'; 'a cloud hosting environment, co-location for clients'; 'redundant power & connectivity systems'; 'Internet, phone and hosting run from our own Edmonton facility'; company from 1993 (CCI Networks), merged with RackNine 2018; footer address 4130 95 Street NW (the page does not say the data centre is at that address ?) — https://incentre.net/about/ ‖ CHECK 2 (2 Nov 2026, fixed): quotes confirmed; date added from page metadata; data centre at the footer address still not stated (J.B. observed operator sign there: fieldJB)"
+ },
+ "arch_inv_wolfpawPage": {
+  "where_read": "not opened: WebFetch refused the URL (provenance rule, not a site block); not circumvented",
+  "claims": [
+   {
+    "claim": "EDM1 'Downtown Edmonton'",
+    "verdict": "UNREACHABLE",
+    "evidence": "page not opened 2 Nov 2026; relies on sources/01 §9 (9 Oct 2026)",
+    "fix": ""
+   },
+   {
+    "claim": "'Dual Power Grid', 'Natural Gas & Diesel Backup Generator', 'Redundant UPS', 'Fully Redundant HVAC'",
+    "verdict": "UNREACHABLE",
+    "evidence": "page not opened 2 Nov 2026; relies on sources/01 §9 (9 Oct 2026)",
+    "fix": ""
+   },
+   {
+    "claim": "Tier 3 standard",
+    "verdict": "UNREACHABLE",
+    "evidence": "page not opened 2 Nov 2026; relies on sources/01 §9 (9 Oct 2026)",
+    "fix": ""
+   },
+   {
+    "claim": "no kW/MW/ft²; no street address",
+    "verdict": "UNREACHABLE",
+    "evidence": "page not opened 2 Nov 2026; relies on sources/01 §9 (9 Oct 2026)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "OPERATOR CLAIM (read by the 9 Oct 2026 hunt, sources/01 §9; not re-read 2 Nov): Wolfpaw, Edmonton data centre page: EDM1 'Downtown Edmonton', 'Dual Power Grid', 'Natural Gas & Diesel Backup Generator', 'Redundant UPS', 'Fully Redundant HVAC', Tier 3 standard; no kW, MW or ft²; no street address — https://www.wolfpaw.com/edmonton-ab-data-center/ ‖ CHECK 2 (2 Nov 2026, ok): unreachable from this check (fetch not permitted); text unchanged, still unconfirmed since 9 Oct ?"
+ },
+ "arch_inv_goaNumbers": {
+  "where_read": "https://www.alberta.ca/datacentres/numbers (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "Table 3, Sturgeon County",
+    "verdict": "CONFIRMED",
+    "evidence": "'Table 3 · The Sturgeon County project (Meta)'",
+    "fix": ""
+   },
+   {
+    "claim": "2.9 million ft², 1,750 acres, 8 Jul 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Campus site in Alberta's Industrial Heartland, with about 2.9 million square feet of facility space' | Jul 8, 2026",
+    "fix": ""
+   },
+   {
+    "claim": "33rd data centre, first in Canada; $13 billion+",
+    "verdict": "CONFIRMED",
+    "evidence": "quoted verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "Greenlight built by Pembina, MSIP, Kineticor; $4.6 billion; 932 MW nameplate; ~150 MMcf/day",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim; these rows dated Jul 2, 2026 and cite Pembina's FID release",
+    "fix": "add date 2 Jul 2026"
+   },
+   {
+    "claim": "970 MW Phase 1 allocation; 1,800 MW full build-out",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim; cite 'GoA release' linked to sturgeoncounty.ca",
+    "fix": ""
+   },
+   {
+    "claim": "250 MW Capital Power",
+    "verdict": "CONFIRMED",
+    "evidence": "'Long-term (more than 10 years) energy supply agreement'",
+    "fix": ""
+   },
+   {
+    "claim": "3,000+ / 300 jobs; golf course water claim; ~$60 million",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "page metadata 2022-11-23",
+    "verdict": "CONFIRMED",
+    "evidence": "'meta-published: 2022-11-23'",
+    "fix": ""
+   },
+   {
+    "claim": "GoA-release citations link to Sturgeon County URL",
+    "verdict": "CONFIRMED",
+    "evidence": "links to sturgeoncounty.ca; one row (property tax) cites a St. Albert Gazette article (popular source; not carried)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT PAGE relaying OPERATOR CLAIMS: Government of Alberta, Data centres: By the numbers (Table 3, Sturgeon County; entries dated Jul 2026; page metadata 2022-11-23, stale ?): Meta campus in 'Alberta's Industrial Heartland, with about 2.9 million square feet of facility space' (1,750 acres, 8 Jul 2026); 'Meta's 33rd data centre worldwide and its first in Canada'; $13 billion+; 'The Greenlight Electricity Centre gas power plant, built by Pembina, Morgan Stanley Infrastructure Partners and Kineticor' ($4.6 billion; 932 MW nameplate; ~150 MMcf/day gas; these rows dated 2 Jul 2026, from Pembina's FID release); 'Meta's AESO-approved Phase 1 load allocation' 970 MW; 'Campus power draw at full build-out (grid plus on-site generation over time)' 1,800 MW; 250 MW Capital Power supply agreement; 3,000+ construction / 300 permanent jobs; 'the campus will use less water annually than a typical golf course' (Meta statement); ~$60 million local road and water infrastructure; the GoA-release citations link to a Sturgeon County URL — https://www.alberta.ca/datacentres/numbers ‖ CHECK 2 (2 Nov 2026, fixed): all figures confirmed; the page's property-tax row cites a newspaper: not carried"
+ },
+ "arch_inv_aucGreenlight": {
+  "where_read": "https://www.auc.ab.ca/featured/greenlight-electricity-centre/ (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "Proceeding 30261; Decision 30261-D02-2026, 25 Jun 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Decision 30261-D02-2026 issued on June 25, 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "applicant Greenlight Electricity Centre GP Ltd.",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "'1,864-megawatt (MW)' combined-cycle, two stages",
+    "verdict": "CONFIRMED",
+    "evidence": "'1,864-megawatt (MW) combined-cycle power generation facility'; 'two stages'",
+    "fix": ""
+   },
+   {
+    "claim": "8.5 km east of Gibbons; E½ 10-56-22-W4",
+    "verdict": "CONFIRMED",
+    "evidence": "'approximately 8.5 kilometres east of Gibbons'; 'the east half of Section 10, Township 56, Range 22, west of the Fourth Meridian'",
+    "fix": ""
+   },
+   {
+    "claim": "approved; no data centre named",
+    "verdict": "CONFIRMED",
+    "evidence": "'The AUC has approved the power plant development application'; no data centre or Meta",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_inv_iaacGreenlight": {
+  "where_read": "https://iaac-aeic.gc.ca/050/evaluations/proj/89790 (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "proponent Greenlight Electricity Centre Limited Partnership",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "four gas/steam line-ups up to 1,864 MW",
+    "verdict": "CONFIRMED",
+    "evidence": "'combined production capacity of up to 1,864 megawatts'",
+    "fix": ""
+   },
+   {
+    "claim": "about 10 km east of Gibbons, Sturgeon County",
+    "verdict": "CONFIRMED",
+    "evidence": "'about 10 kilometres east of Gibbons'",
+    "fix": ""
+   },
+   {
+    "claim": "'no further assessment is required'; notice 6 Oct 2025; 21 Nov 2025 ?",
+    "verdict": "CONFIRMED",
+    "evidence": "'Notice of Early Decision with Reasons: October 6, 2025'; 21 Nov 2025 is the date of the latest-update post announcing it, not a second decision",
+    "fix": "resolve the '?'"
+   },
+   {
+    "claim": "no data centre named",
+    "verdict": "CONFIRMED",
+    "evidence": "none; 'Beacon AI Centers Heartland Project' appears only under 'Nearby assessments', no number shown",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "FEDERAL REGISTRY: Impact Assessment Agency of Canada, Greenlight Electricity Centre Project (89790): proponent Greenlight Electricity Centre Limited Partnership; 'four gas/steam turbine line-ups with a combined production capacity of up to 1,864 megawatts'; about 10 km east of Gibbons, Sturgeon County; early decision 'no further assessment is required' (Notice of Early Decision 6 Oct 2025; 21 Nov 2025 = date of the update post announcing it); no data centre named — https://iaac-aeic.gc.ca/050/evaluations/proj/89790 ‖ CHECK 2 (2 Nov 2026, fixed): all confirmed; the 21 Nov date explained"
+ },
+ "arch_inv_pembinaGreenlight2025": {
+  "where_read": "Business Wire PDF (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "Oct 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'CALGARY, ALBERTA, October 6, 2025'",
+    "fix": "give 6 Oct 2025"
+   },
+   {
+    "claim": "Sturgeon County; up to ~1,800 MW; first phase ~900 MW",
+    "verdict": "CONFIRMED",
+    "evidence": "'up to approximately 1,800 megawatts'; 'The first phase, at approximately 900 MW'",
+    "fix": ""
+   },
+   {
+    "claim": "'potential customer (the \"Customer\")', not named",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "grid access 'as early as 2027'; start-up 'as early as 2030'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "land sale conditional, Q4 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'subject to certain conditions'; 'expected to close in the fourth quarter of 2025'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "OPERATOR CLAIM: Pembina Pipeline, Greenlight project update news release (Business Wire distribution of Pembina's own release, 6 Oct 2025): 'to be located in Sturgeon County, Alberta', 'up to approximately 1,800 megawatts', first phase about 900 MW; a 'potential customer (the \"Customer\")' for an 'innovation infrastructure development' (not named); Customer grid access 'as early as 2027'; plant start-up 'as early as 2030'; land sale to the Customer conditional, expected Q4 2025 — https://mms.businesswire.com/media/20251006451860/en/2600381/1/Pembina_Greenlight_Project_Update_-_vF.pdf?download=1 ‖ CHECK 2 (2 Nov 2026, fixed): all confirmed; Business Wire is a wire copy of the operator's release, not news"
+ },
+ "arch_inv_aucHeartlandApp": {
+  "where_read": "AUC application summary PDF (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "filed 19 Dec 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'December 19th, 2025'",
+    "fix": ""
+   },
+   {
+    "claim": "Heartland Power Generation LP / Northbridge Power GPC Inc.",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "920 MWe nominal",
+    "verdict": "CONFIRMED",
+    "evidence": "'920 MWe (nominal capacity)'",
+    "fix": ""
+   },
+   {
+    "claim": "200 × 4.6 MWe Jenbacher J624, 40 modules of five",
+    "verdict": "CONFIRMED",
+    "evidence": "'200, 4.6 MWe INNIO Jenbacher J624 lean-burn'; '40 ... (QPAC) modules, each containing five (5) engines'",
+    "fix": ""
+   },
+   {
+    "claim": "~800 MWe to data halls; ~7 km east of Gibbons",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "Municipal Engagement Form; NIA; IAAC IPD; EPEA concurrent",
+    "verdict": "CONFIRMED",
+    "evidence": "all verbatim",
+    "fix": ""
+   }
+  ],
+  "kind_change": "label as APPLICANT CLAIM in a regulator filing (figures are the applicant's, not the AUC's findings)",
+  "scope_flag": null,
+  "new_text": "REGULATOR FILING, APPLICANT CLAIMS: AUC Proceeding 30518, Beacon AI Centers Heartland Project application summary (filed 19 Dec 2025): 'Heartland Power Generation LP, by its general partner Northbridge Power GPC Inc.'; 'a 920 MWe (nominal capacity) natural gas-fired power plant'; '200, 4.6 MWe INNIO Jenbacher J624 lean-burn natural gas-fired' engines in 40 modules of five; 'will supply ~800 MWe to co-located, on-site data halls'; 'approximately seven (7) km east of Gibbons'; Sturgeon County Municipal Engagement Form received; Noise Impact Assessment completed (limits not in summary); IAAC Initial Project Description filed; EPEA application concurrent — https://media.auc.ab.ca/prd-wp-uploads/Shared%20Documents/Projects/30518-BeaconAICentersHeartlandProject.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all figures confirmed; kind made explicit as applicant claims"
+ },
+ "arch_inv_aucHeartlandNotice": {
+  "where_read": "AUC Notice of Hearing PDF (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "issued 27 Mar 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Issued on March 27, 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "Sec. 15-56-22-W4; ~7 km east of Gibbons",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "920 MW total capability; ~800 MW to data halls; AI/HPC wording",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "written hearing; evidence 22 May 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Written evidence is due May 22, 2026'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_inv_aucHeartlandDecision": {
+  "where_read": "AUC featured page (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "'approved, with conditions', Decision 30518-D01-2026, 23 Oct 2026; application 30518-A001",
+    "verdict": "CONFIRMED",
+    "evidence": "'The AUC approved, with conditions, an application from Heartland Power Generation LP'; 'issued October 23, 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "co-located data centre for AI and HPC",
+    "verdict": "CONFIRMED",
+    "evidence": "'for artificial-intelligence and high-performing-computing facilities'",
+    "fix": ""
+   },
+   {
+    "claim": "conditions not read",
+    "verdict": "CONFIRMED",
+    "evidence": "page lists no conditions; refers to the decision",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_inv_beaconRelease2025": {
+  "where_read": "Business Wire release (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "15 May 2025 per URL",
+    "verdict": "CONFIRMED",
+    "evidence": "no dateline in text; URL '20250515'",
+    "fix": ""
+   },
+   {
+    "claim": "sites Chestermere, High River, Acheson, Sturgeon County, Langdon, Beaumont",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "'Initial 4.5 GW'; 4.9 GW North America",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "cooling sentence; energize 'as early as 2027'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim; the 2027 date is for Alberta sites generally, not per site",
+    "fix": ""
+   },
+   {
+    "claim": "no per-site MW; hyperscalers not named",
+    "verdict": "CONFIRMED",
+    "evidence": "'compute capacity to hyperscalers'; also 'serve both public and private sector partners'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "OPERATOR CLAIM: Beacon AI Centers news release (Business Wire, 15 May 2025 per URL): Alberta sites at Chestermere, High River, Acheson, Sturgeon County, Langdon and Beaumont; 'Initial 4.5 GW' Alberta commitment, 4.9 GW North American pipeline; 'Each data center will incorporate advanced cooling systems, energy-efficient design, and robust connectivity'; 'energize sites in Alberta as early as 2027'; no per-site MW; customers 'hyperscalers' (not named) — https://www.businesswire.com/news/home/20250515695441/en ‖ CHECK 2 (2 Nov 2026, ok): all confirmed; 'as early as 2027' is for Alberta sites generally, not one site"
+ },
+ "arch_inv_leducCountyDC": {
+  "where_read": "Leduc County page (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "last updated 26 Jun 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Page last updated on June 26, 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "no data centres approved; no DPs",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "LUB 14-25, 'information service', discretionary GI/LI, permitted GP overlay",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "factors considered",
+    "verdict": "CONFIRMED",
+    "evidence": "'water consumption, noise and visual impacts, and other potential nuisance factors'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_inv_leducTA25": {
+  "where_read": "Leduc County notice (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "posted 18 Feb 2025; LUB 7-08; TA25-0001; s. 9.16.3 GP overlay; add Information Service as Permitted",
+    "verdict": "CONFIRMED",
+    "evidence": "'Posted on Feb 18, 2025'; 'amend Section 9.16.3 of the Genesee Power Project Overlay District'; 'to add the Information Service land use to the list of Permitted Uses'",
+    "fix": ""
+   },
+   {
+    "claim": "applicant, hearing date, outcome not on page",
+    "verdict": "CONFIRMED",
+    "evidence": "none stated",
+    "fix": ""
+   },
+   {
+    "claim": "'so adopted ?'",
+    "verdict": "NOT FOUND",
+    "evidence": "the 2026 page cites a newer bylaw (LUB 14-25), so it shows the use is permitted now, not that TA25-0001 to LUB 7-08 was adopted",
+    "fix": "reword: outcome of TA25-0001 not shown; current permitted status rests on arch_inv_leducCountyDC"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "MUNICIPAL NOTICE: Leduc County, Notice of public hearing, proposed amendment to Land Use Bylaw 7-08 (TA25-0001), posted 18 Feb 2025: 'add the Information Service land use to the list of Permitted Uses' in s. 9.16.3, Genesee Power Project Overlay District; applicant not named; hearing date and outcome not on the page (outcome of TA25-0001 not shown; current permitted status in the GP overlay rests on LUB 14-25, arch_inv_leducCountyDC) — https://www.leduc-county.com/county-government/notices/post/notice-of-public-hearing-proposed-amendment-to-land-use-bylaw-7-08-ta25-0001 ‖ CHECK 2 (2 Nov 2026, fixed): notice confirmed; 'adopted' inference dropped"
+ },
+ "arch_inv_cpGeneseeWinter2025": {
+  "where_read": "Capital Power newsletter PDF (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "'on Capital Power owned land within the Genesee Mine Permit Area'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "'may require up to 1,500 MW'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "partnership with an unnamed developer",
+    "verdict": "CONFIRMED",
+    "evidence": "'through a partnership with a data centre developer'",
+    "fix": ""
+   },
+   {
+    "claim": "Phase 2 of LLIP; 'not advancing the project immediately'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim; also 'We did not receive a high enough allocation of megawatts under the AESO's Phase 1 interim approach'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "OPERATOR CLAIM: Capital Power, Genesee Generating Station Newsletter, Winter 2025: data centre proposed 'on Capital Power owned land within the Genesee Mine Permit Area'; 'may require up to 1,500 MW'; 'through a partnership with a data centre developer' (not named); 'will now be considered under Phase 2 of the Large Load Integration Program'; 'we are not advancing the project immediately'; 'We did not receive a high enough allocation of megawatts under the AESO's Phase 1 interim approach'; layout may include 'new transmission lines, a substation and facility specific emergency backup power supply systems' — https://www.capitalpower.com/wp-content/uploads/2025/12/Capital-Power-Genesee-Generating-Station-Newsletter-Winter-2025.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all confirmed; Phase 1 allocation and layout quotes added"
+ },
+ "arch_inv_cpGeneseeSummer2026": {
+  "where_read": "Capital Power newsletter PDF (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "section 'Proposed Genesee Data Centre Update'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "'could require up to 1,500 MW of new power generation'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "'continuing to evaluate the potential co-location'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "details 'are still being developed'",
+    "verdict": "CONFIRMED",
+    "evidence": "campus and power infrastructure 'still being developed'",
+    "fix": ""
+   },
+   {
+    "claim": "250 MW deal for 'Meta's new data centre in Sturgeon County'",
+    "verdict": "CONFIRMED",
+    "evidence": "'provide 250 MW of capacity and energy from our Alberta generation fleet' for Meta's Sturgeon County data centre; the exact quoted phrase was not returned verbatim",
+    "fix": "drop quote marks round the Meta phrase"
+   },
+   {
+    "claim": "(row E16) dedicated power facility considered",
+    "verdict": "CONFIRMED",
+    "evidence": "reviewing how Genesee could support development incl. 'a dedicated power facility'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "OPERATOR CLAIM: Capital Power, Genesee Generating Station Newsletter, Summer 2026 ('Proposed Genesee Data Centre Update'): 'A potential data centre at Genesee could require up to 1,500 MW of new power generation'; 'We are continuing to evaluate the potential co-location of a large-scale data centre at Genesee'; details 'are still being developed'; separately 'provide 250 MW of capacity and energy from our Alberta generation fleet' to Meta's Sturgeon County data centre; reviewing 'a dedicated power facility' at Genesee — https://www.capitalpower.com/wp-content/uploads/2026/08/Capital-Power-Genesee-Generating-Station-Newsletter-Summer-2026.pdf ‖ CHECK 2 (2 Nov 2026, fixed): confirmed; Meta phrase reworded to the confirmed quote"
+ },
+ "arch_inv_transaltaKeephills": {
+  "where_read": "TransAlta page (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "'a 230 MW data centre development at TransAlta's Keephills facility'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "'exclusive site and power provider'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "'still in the early planning stage' (Stage 1)",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "ASP and LUB approved Sep 2025; 'allows for potential data centre development in the future'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim; amended Keephills DC District and created a new DC district",
+    "fix": ""
+   },
+   {
+    "claim": "no DP submitted",
+    "verdict": "CONFIRMED",
+    "evidence": "input 'prior to any submission of a Development Permit Application'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_inv_transaltaMOU2026": {
+  "where_read": "TransAlta release PDF (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "27 Feb 2026; MOU with CPP Investments and Brookfield",
+    "verdict": "CONFIRMED",
+    "evidence": "'CALGARY, Alberta (February 27, 2026)'",
+    "fix": ""
+   },
+   {
+    "claim": "~230 MW long-term PPA, Keephills, Parkland County",
+    "verdict": "CONFIRMED",
+    "evidence": "'an initial long-term power purchase agreement for approximately 230 MW'",
+    "fix": ""
+   },
+   {
+    "claim": "'aggregating up to 1 GW of load'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "power from on-site generation and existing gas infrastructure",
+    "verdict": "CONFIRMED",
+    "evidence": "'existing transmission, natural gas and water infrastructure, as well as on-site generation'",
+    "fix": "quote fully"
+   },
+   {
+    "claim": "'subject to regulatory approvals and ... definitive binding agreements'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "OPERATOR CLAIM: TransAlta news release, 27 Feb 2026: non-binding MOU with CPP Investments and Brookfield; 'approximately 230 MW' under a long-term PPA at the Keephills site, Parkland County; evaluation of further development 'aggregating up to 1 GW of load'; 'existing transmission, natural gas and water infrastructure, as well as on-site generation'; 'subject to regulatory approvals and the parties reaching definitive binding agreements' — https://transalta.com/wp-content/uploads/2026/02/TransAlta-Enters-Memorandum-of-Understanding-for-Data-Centre-Development-at-Keephills-Site-with-Potential-to-Scale-Up-to-1-GW.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all confirmed; infrastructure quote completed"
+ },
+ "arch_inv_parklandDCpage": {
+  "where_read": "Parkland County page (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "one proposed development 'Boreal Technology Hub Application', linked to yourparkland.ca/transaltadatacentre",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim; link https://yourparkland.ca/transaltadatacentre",
+    "fix": ""
+   },
+   {
+    "claim": "developer not named; contact datacentres@parklandcounty.com; © 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "linked page not opened",
+    "verdict": "UNREACHABLE",
+    "evidence": "not opened; not circumvented",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "MUNICIPAL PAGE: Parkland County, What are Data Centres? (undated, © 2026): lists one proposed development, 'Boreal Technology Hub Application', linked to yourparkland.ca/transaltadatacentre (developer not named on the page; linked page not opened: fetch not permitted ?); contact datacentres@parklandcounty.com — https://www.parklandcounty.com/business-development/what-are-data-centres/ ‖ CHECK 2 (2 Nov 2026, ok): confirmed; the link slug 'transaltadatacentre' suggests TransAlta (E14 or E15) but the page names no developer ?"
+ },
+ "arch_inv_parklandHighvale": {
+  "where_read": "Parkland County news post (WebFetch 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "posted 13 Jan 2025; open house 23 Jan 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'Jan 13, 2025'; 'Thursday January 23, 2025'",
+    "fix": ""
+   },
+   {
+    "claim": "text amendments to LUB 2017-18 'to allow investments ... existing power generation and distribution infrastructure'",
+    "verdict": "CONFIRMED",
+    "evidence": "verbatim",
+    "fix": ""
+   },
+   {
+    "claim": "aligned with the AI data centre strategy",
+    "verdict": "CONFIRMED",
+    "evidence": "'Alberta's Artificial Intelligence (AI) Data Centres Strategy' (provincial, Dec 2024)",
+    "fix": "name it as the provincial strategy"
+   },
+   {
+    "claim": "no parcel, MW or decision",
+    "verdict": "CONFIRMED",
+    "evidence": "none stated; no mention of Sundance or TransAlta",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "page is a proposal; inv_edm.md row E15 called the district 'amended' — wrong, fixed to 'amendments proposed'",
+  "new_text": "MUNICIPAL NOTICE: Parkland County, Proposed amendments to Highvale End Land Use Direct Control District (posted 13 Jan 2025; open house 23 Jan 2025): text amendments to LUB 2017-18 'to allow investments into the County that take advantage of existing power generation and distribution infrastructure', aligned with 'Alberta's Artificial Intelligence (AI) Data Centres Strategy' (provincial, Dec 2024); no parcel, MW or decision on the page — https://www.parklandcounty.com/news/posts/proposed-amendments-to-highvale-end-land-use-direct-control-district/ ‖ CHECK 2 (2 Nov 2026, fixed): confirmed; proposal only (no decision), no Sundance/TransAlta named"
+ },
+ "arch_inv_parklandLUB": {
+  "where_read": "local copy data/raw/edm/parkland_LUB_2025-12.pdf (pdftotext 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "Bylaw 2025-12",
+    "verdict": "CONFIRMED",
+    "evidence": "'Parkland County Land Use Bylaw 2025-12'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 5.80, p. 98",
+    "verdict": "WRONG",
+    "evidence": "5.80 starts on p. 98 (1.1 measuring rules); the setback table 1.2 and 2.1 noise clause are on p. 99",
+    "fix": "pp. 98–99"
+   },
+   {
+    "claim": "setback with on-site generation 'At the Discretion of the Development Authority in consultation with the Alberta Utilities Commission'; without: 'Setback must align with the Building regulations of the district'",
+    "verdict": "CONFIRMED",
+    "evidence": "1.2.1 / 1.2.2 verbatim; table applies to setback 'from Residential Uses'",
+    "fix": ""
+   },
+   {
+    "claim": "2.1 noise impact assessment / mitigation plan with monitoring",
+    "verdict": "CONFIRMED",
+    "evidence": "'A noise impact assessment may be required by the Development Authority. If deemed necessary ... a noise mitigation plan that includes a noise monitoring system will be required.'",
+    "fix": ""
+   },
+   {
+    "claim": "definition",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 150: 'Means a Building, or part of a Building, used to house computer systems ... Typical Uses include centres for artificial intelligence or digital currency processing.'",
+    "fix": "add p. 150"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: Parkland County Land Use Bylaw 2025-12 (local copy data/raw/edm/parkland_LUB_2025-12.pdf, read 2 Nov 2026), s. 5.80 Data Processing Facility, pp. 98–99: 1.2 setback from Residential Uses with on-site power generation 'At the Discretion of the Development Authority in consultation with the Alberta Utilities Commission'; without it, 'Setback must align with the Building regulations of the district'; 2.1 'A noise impact assessment may be required ... a noise mitigation plan that includes a noise monitoring system will be required'; definition (p. 150): 'a Building, or part of a Building, used to house computer systems ... Typical Uses include centres for artificial intelligence or digital currency processing' — local file ‖ CHECK 2 (2 Nov 2026, fixed): quotes confirmed; pages corrected to 98–99, definition p. 150"
+ },
+ "arch_inv_leadDirectory": {
+  "where_read": "https://www.datacentermap.com/canada/edmonton/ (WebFetch 2 Nov 2026) — lead only",
+  "claims": [
+   {
+    "claim": "header '17 Facilities from 7 Operators' vs 20 rows",
+    "verdict": "CONFIRMED",
+    "evidence": "title '17 Facilities from 7 Operators'; body '20 data centers'; 13 operators listed",
+    "fix": ""
+   },
+   {
+    "claim": "Wolfpaw EDM2 10200 102 Ave; EDM3 17204 114 Ave",
+    "verdict": "CONFIRMED",
+    "evidence": "listed as such",
+    "fix": ""
+   },
+   {
+    "claim": "4WEB 14315 118 Ave NW",
+    "verdict": "CONFIRMED",
+    "evidence": "listed",
+    "fix": ""
+   },
+   {
+    "claim": "Five Nine, 17008 90 St NW #403",
+    "verdict": "WRONG",
+    "evidence": "listed as '17008 90 St NW T6T 1L6', no '#403'",
+    "fix": "drop '#403'"
+   },
+   {
+    "claim": "Meta 56111 Range Rd 223; Beacon addresses; TransAlta Sundance/Keephills; Genesee 1 and 2",
+    "verdict": "CONFIRMED",
+    "evidence": "listed; directory also gives Qu EDM1/EDM2, Kyndryl 9672 279 St, ThinkTel 10250 101 St; and Bitdeer Fox Creek and Crusoe Alsike (outside scope)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "LEAD only; never evidence. The directory is also the only source for Qu EDM1/EDM2 street addresses, Kyndryl's street number and ThinkTel's address: rows E1, E2, E6, E10 now say so",
+  "new_text": "LEAD ONLY (popular directory, not evidence): Data Center Map, Edmonton listing (read 2 Nov 2026; header '17 Facilities from 7 Operators' in the title vs 20 rows and 13 operators in the body): used only to find names and to mark addresses '?': Qu Edmonton 1 at 10200 102 Ave NW and Qu Edmonton 2 at 17204 114 Ave NW; Kyndryl Acheson at 9672 279 St; ThinkTel at 10250 101 St NW; Wolfpaw EDM2 at 10200 102 Ave and EDM3 at 17204 114 Ave; 4WEB, 14315 118 Ave NW; Five Nine, 17008 90 St NW; Meta, 56111 Range Rd 223, Sturgeon County; Beacon Harry Smith AI Hub, Range Rd 264 & Twp Rd 524, Acheson; Beacon Saunders Lake AI Hub, 24549 Twp Rd 502 (Rolly View); Beacon Heartland, Range Rd 215; TransAlta Sundance and Keephills; Capital Power Genesee 1 and 2 — https://www.datacentermap.com/canada/edmonton/ ‖ CHECK 2 (2 Nov 2026, fixed): lead list re-read; Qu, Kyndryl and ThinkTel addresses added as lead-only; '#403' not on the page"
+ }
+}

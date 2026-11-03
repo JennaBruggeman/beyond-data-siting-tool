@@ -1,0 +1,534 @@
+{
+ "arch_dc_fm0532rooms": {
+  "where_read": "/tmp/fm/fm.txt (text extract of J.B. upload, 2 Nov 2026)",
+  "claims": [
+   {
+    "claim": "2.3.1.1.1 no packing materials in hall or critical areas, p. 7",
+    "verdict": "CONFIRMED",
+    "evidence": "'Do not store packing materials or other combustibles ... battery rooms, etc.,)' (line between Page 7 and 8 headers)",
+    "fix": ""
+   },
+   {
+    "claim": "2.3.1.1.2 de-box outside, p. 7",
+    "verdict": "CONFIRMED",
+    "evidence": "'2.3.1.1 2 De-box equipment outside the data processing equipment rooms'",
+    "fix": ""
+   },
+   {
+    "claim": "2.4.3.2.3.7 permanently connected reserve, p. 19",
+    "verdict": "CONFIRMED",
+    "evidence": "'Provide a permanently connected reserve of clean agent supply cylinder(s) for the halocarbon or inert gas'",
+    "fix": ""
+   },
+   {
+    "claim": "2.4.3.10.1–2 DS 8-9 / DS 7-112, p. 23",
+    "verdict": "CONFIRMED",
+    "evidence": "'Protect storage areas in accordance with Data Sheet 8-9'; 'new or decommissioned Li-ion ... Data Sheet 7-112'",
+    "fix": ""
+   },
+   {
+    "claim": "2.6.6.4.2 alarms at a constantly attended location, p. 28",
+    "verdict": "CONFIRMED",
+    "evidence": "'Provide audible and visual alarms in the vicinity of the equipment and at a constantly attended location.'",
+    "fix": ""
+   },
+   {
+    "claim": "3.5.2.1 spaces in different parts, pp. 47–48",
+    "verdict": "CONFIRMED",
+    "evidence": "'These spaces are typically located in different parts of the facility'",
+    "fix": ""
+   },
+   {
+    "claim": "UPS 10-15 minutes; centralized or per hall, p. 50",
+    "verdict": "CONFIRMED",
+    "evidence": "'typically for 10-15 minutes'; 'dedicated battery rooms or electrical rooms'; 'UPS systems dedicated to each data hall'",
+    "fix": ""
+   },
+   {
+    "claim": "title, date, issuer",
+    "verdict": "CONFIRMED",
+    "evidence": "'5-32 January 2026 Interim Revision July 2026', 'DATA CENTERS AND RELATED FACILITIES'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_dc_schneiderWP144": {
+  "where_read": "WebFetch of http://www.apcc.wang/pdf/VAVR-6KYMZ7_R1_EN.pdf (third-party host)",
+  "claims": [
+   {
+    "claim": "title, authors, WP 144 Rev 1",
+    "verdict": "CONFIRMED",
+    "evidence": "'Data Center Projects: Establishing a Floor Plan', Rasmussen and Torell, White Paper 144, Revision 1",
+    "fix": ""
+   },
+   {
+    "claim": "28 sq ft / rack, pp. 4–5",
+    "verdict": "CONFIRMED",
+    "evidence": "'can be estimated by dividing the room area by 28 sq ft / rack'",
+    "fix": ""
+   },
+   {
+    "claim": "row-end 2 tiles plain walls, p. 17",
+    "verdict": "CONFIRMED",
+    "evidence": "'For plain walls, a minimum of 2 tiles is an acceptable spacing for a row-end'",
+    "fix": ""
+   },
+   {
+    "claim": "no support-space ratio",
+    "verdict": "CONFIRMED",
+    "evidence": "no support-to-total ratio in the paper",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_dc_rts19744cond": {
+  "where_read": "WebFetch of council.vancouver.ca/20260714/documents/rr1.pdf",
+  "claims": [
+   {
+    "claim": "RTS 19744, 30 Jun 2026, 111 E 5th Ave",
+    "verdict": "CONFIRMED",
+    "evidence": "'RTS No.: 19744', 'June 30, 2026', '111 East 5th Avenue and 2060 Quebec Street'",
+    "fix": "add 2060 Quebec St"
+   },
+   {
+    "claim": "floorplans not provided, p. 4",
+    "verdict": "CONFIRMED",
+    "evidence": "'detailed building floorplans were not provided by the applicant'",
+    "fix": ""
+   },
+   {
+    "claim": "1.13(a) ETS room, p. 16",
+    "verdict": "CONFIRMED",
+    "evidence": "'on the highest below-grade level, located along an exterior wall adjacent to NEU distribution piping ... free of any other equipment or obstructions ... to be confirmed through detailed design'",
+    "fix": ""
+   },
+   {
+    "claim": "1.13(b) NEU room(s), same location, p. 17",
+    "verdict": "CONFIRMED",
+    "evidence": "'dedicated NEU Room(s) to support waste heat recovery and delivery ... on the highest below-grade level, located along an exterior wall'",
+    "fix": ""
+   },
+   {
+    "claim": "1.16 transformers and kiosks on private property, p. 18",
+    "verdict": "CONFIRMED",
+    "evidence": "'pad mounted transformers, low profile transformers and kiosks as well as telecommunications kiosks are to be located on private property'",
+    "fix": ""
+   },
+   {
+    "claim": "loading finalized at DP, p. 5",
+    "verdict": "WRONG",
+    "evidence": "'Parking, loading ... are finalized at the time of development permit' is on p. 6",
+    "fix": "p. 6"
+   },
+   {
+    "claim": "no staff count",
+    "verdict": "CONFIRMED",
+    "evidence": "no headcount in report",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT REPORT: City of Vancouver, Referral Report RTS 19744, CD-1 rezoning 111 E 5th Ave and 2060 Quebec St, 30 Jun 2026 (supplements van_rts19744): 'detailed building floorplans were not provided by the applicant' (p. 4); cond. 1.13(a) Energy Transfer Station room 'on the highest below-grade level, located along an exterior wall adjacent to NEU distribution piping', 'free of any other equipment or obstructions', final size 'to be confirmed through detailed design' (p. 16); 1.13(b) 'Adequate and appropriate dedicated NEU Room(s) to support waste heat recovery and delivery', at the same location (p. 17); 1.16 'pad mounted transformers, low profile transformers and kiosks as well as telecommunications kiosks' to be located on private property (p. 18); no staff count; loading 'finalized at the time of development permit' (p. 6) — https://council.vancouver.ca/20260714/documents/rr1.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all quotes and pages confirmed; 1.13(b) location and telecom kiosks added ‖ CHECK 3 (2 Nov 2026, fixed): loading quote is p. 6 not p. 5; address adds 2060 Quebec St; other quotes and pages re-read and confirmed"
+ },
+ "arch_dc_pwcVillagePlace": {
+  "where_read": "WebFetch of eservice.pwcgov.org/planning/documents/REZ2020-00024.pdf",
+  "claims": [
+   {
+    "claim": "1,188,143 ft² incl. 60,000 ft² offices, p. 2, repeated p. 15",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 2 'up to 1,188,143 square feet of data center uses, including 60,000 square feet of offices'; p. 15 '1,188,143 square feet of data center uses'",
+    "fix": ""
+   },
+   {
+    "claim": "~1,033,000 ft², p. 24",
+    "verdict": "CONFIRMED",
+    "evidence": "'approximately 1,033,000 square feet of data center use' (p. 24)",
+    "fix": ""
+   },
+   {
+    "claim": "300 jobs, p. 25, applicant",
+    "verdict": "CONFIRMED",
+    "evidence": "'The Applicant provided the following information...' 'an estimated 300 jobs' (p. 25)",
+    "fix": ""
+   },
+   {
+    "claim": "70 ft max height, p. 2",
+    "verdict": "CONFIRMED",
+    "evidence": "'Maximum Building Height 70 feet' (p. 2 table; also p. 16)",
+    "fix": ""
+   },
+   {
+    "claim": "staff report 9 Apr 2021; REZ2020-00024 / SUP2020-00037",
+    "verdict": "CONFIRMED",
+    "evidence": "'April 9, 2021'; both case numbers p. 1",
+    "fix": ""
+   },
+   {
+    "claim": "no MW",
+    "verdict": "CONFIRMED",
+    "evidence": "no MW figure found",
+    "fix": ""
+   },
+   {
+    "claim": "5.0 % / 5.8 % / ≈3,960 ft² per job (our arithmetic)",
+    "verdict": "CONFIRMED",
+    "evidence": "60,000/1,188,143=5.05 %; 60,000/1,033,000=5.81 %; 1,188,143/300=3,960",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_dc_missSitePlan": {
+  "where_read": "WebFetch of both mississauga.ca PDFs",
+  "claims": [
+   {
+    "claim": "A.100-1a rev 2, 4 Mar 2026, Petroff, Prologis Inc. (Canada), SP 25-63",
+    "verdict": "CONFIRMED",
+    "evidence": "'2 MAR 4, 2026 ISSUED FOR SPA'; petroff.com; 'Prologis Inc. (Canada)'; 'SP 25-63 W9'",
+    "fix": ""
+   },
+   {
+    "claim": "Level 1 and 2 10,622 m², total 21,244; other table 10,522; callout ±21,224",
+    "verdict": "CONFIRMED",
+    "evidence": "later table 10,622.00 ×2, total 21,244.00; earlier 10,522.00; 'TOTAL GFA: ±21,224 SM'",
+    "fix": ""
+   },
+   {
+    "claim": "2 storeys",
+    "verdict": "CONFIRMED",
+    "evidence": "'PROPOSED 2-STOREY DATA CENTRE'",
+    "fix": ""
+   },
+   {
+    "claim": "loading 4 / 4",
+    "verdict": "NOT FOUND",
+    "evidence": "headers 'LOADING SPACES PROPOSED REQUIRED' present, values not legibly mapped to the data centre",
+    "fix": "remove; mark ?"
+   },
+   {
+    "claim": "parking 40 / 637",
+    "verdict": "CONFIRMED",
+    "evidence": "'40' and '632'/'637' without clear column headers",
+    "fix": "keep header doubt"
+   },
+   {
+    "claim": "PJR Mainline Planning, 19 Aug 2025; height 17 m (20.9 m) p. 3 s. 3.1",
+    "verdict": "CONFIRMED",
+    "evidence": "'The building height is 17m (20.9m including mechanical screen).'",
+    "fix": ""
+   },
+   {
+    "claim": "PJR GFA 10,219 m² (s. 3.1)",
+    "verdict": "CONFIRMED",
+    "evidence": "'The building envelope GFA is 10,219 sq m' (p. 3)",
+    "fix": "add p. 3"
+   },
+   {
+    "claim": "parking on 20,338 m² for 611 spaces, Table 1 p. 6",
+    "verdict": "CONFIRMED",
+    "evidence": "'(20,338 m2 / 100 m2) x 3.0 spaces = 611 spaces' required; 40 provided (exception)",
+    "fix": "say 611 required, 40 provided"
+   },
+   {
+    "claim": "no staff count",
+    "verdict": "CONFIRMED",
+    "evidence": "none in PJR",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "FILED PLANS (Ontario): Petroff (title block) for Prologis Inc. (Canada), Overall Site Plan, Data Centre, OZ 25/21 W9 (SP 25-63), drawing A.100-1a, rev. 2, 4 Mar 2026 (posted May 2026): 'DATA CENTRE - LEVEL 1' 10,622.00 m², 'LEVEL 2' 10,622.00 m², total 21,244 m² (another table shows 10,522 m² per level and a callout '±21,224 SM'; conflict); 2 storeys; loading count not legible in the text (?); parking 40 and 632/637 without clear headers; no data-hall, office or plant split — https://www.mississauga.ca/wp-content/uploads/2026/01/07151438/Overall-Site-Plan-Data-Centre-revised-OZ-25-21-W9-May-2026.pdf ; Planning Justification Report (Mainline Planning, 19 Aug 2025): 'The building height is 17m (20.9m including mechanical screen)' (p. 3, s. 3.1); 'The building envelope GFA is 10,219 sq m' (s. 3.1) (p. 3) and parking 'required' 611 on 20,338 m², 40 provided (exception) (Table 1, p. 6), neither matching the site plan; no staff count — https://www.mississauga.ca/wp-content/uploads/2026/01/08125422/Planning-Justification-Report-Data-Centre-OZ-25-21-W9-December-2025.pdf ‖ CHECK 2 (2 Nov 2026, fixed): figures confirmed; ±21,224 m² callout, PJR GFA conflict and header doubt added ‖ CHECK 3 (2 Nov 2026, fixed): site plan figures and PJR quotes confirmed; loading 4 / 4 not legible, removed; PJR parking is 611 required vs 40 provided"
+ },
+ "arch_dc_ualbertaTelecom": {
+  "where_read": "WebFetch of ualberta.ca telecommunications-design-guidelines.pdf",
+  "claims": [
+   {
+    "claim": "v4.1a, revised Oct 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Cabling Standards (version 4.1a)', 'Revised October 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "§8.3.C ideal 8 × 10 ft",
+    "verdict": "CONFIRMED",
+    "evidence": "'Ideal size for a telecommunications room is 8 ft X 10 ft or 2438 mm X 3048mm.'",
+    "fix": ""
+   },
+   {
+    "claim": "§8.3.H ceiling 2,591 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "'The minimum acceptable ceiling height is 8.5' or 2591 mm.'",
+    "fix": ""
+   },
+   {
+    "claim": "§8.3.B no electrical/mechanical equipment, water",
+    "verdict": "CONFIRMED",
+    "evidence": "'should not contain electrical and mechanical equipment, fire alarm panels'",
+    "fix": ""
+   },
+   {
+    "claim": "§8.3.E door 2,032 × 910, no sills or windows, 180° out",
+    "verdict": "CONFIRMED",
+    "evidence": "'a minimum of 2032mm x 910mm wide with no door sills or windows'; 'open 180 degrees outward'",
+    "fix": ""
+   },
+   {
+    "claim": "§8.3.F ≥490 kg/m²",
+    "verdict": "CONFIRMED",
+    "evidence": "'no less than 490 kg/m2'",
+    "fix": ""
+   },
+   {
+    "claim": "§8.3.G fire-stopped, no room rating",
+    "verdict": "CONFIRMED",
+    "evidence": "'all wall penetrations within a TR must be fire stopped with proper rating'",
+    "fix": ""
+   },
+   {
+    "claim": "§8.1 110 mm + 63 mm; 63 mm to fire alarm/RCMS",
+    "verdict": "CONFIRMED",
+    "evidence": "'At minimum one 110mm (4\") and one 63mm (2\") conduit'; 'The 63mm conduits are to be routed to the fire alarm panel, ... (RCMS) panel'",
+    "fix": ""
+   },
+   {
+    "claim": "§8.4 no dimensions",
+    "verdict": "CONFIRMED",
+    "evidence": "EF defined, no dimensions",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "office/campus telecom-room guideline used as a benchmark for a data-centre entrance room; already labelled benchmark",
+  "new_text": null
+ },
+ "arch_dc_vbblFDC": {
+  "where_read": "data/raw/codes/vbbl2025_v1.txt line 10381",
+  "claims": [
+   {
+    "claim": "3.2.5.15.(2) sprinkler FDC within 5 m, 1 m access, visible from street",
+    "verdict": "CONFIRMED",
+    "evidence": "'The fire department connection for an automatic sprinkler system shall be located horizontally within 5 m of the principal entrance ... visible from the street.'",
+    "fix": ""
+   },
+   {
+    "claim": "(1) same for standpipes",
+    "verdict": "CONFIRMED",
+    "evidence": "'The fire department connection for a standpipe system shall be located horizontally within 5 m'",
+    "fix": ""
+   },
+   {
+    "claim": "valve room near FDC is our reading",
+    "verdict": "CONFIRMED",
+    "evidence": "labelled our reading",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_dc_nbcJanitorShower": {
+  "where_read": "data/raw/codes nbc.txt, bcbc2024.txt, vbbl2025_v1.txt, nbc_ab2023.txt",
+  "claims": [
+   {
+    "claim": "3.3.1.22.(1)–(3) 1 h / 45 min / none if sprinklered",
+    "verdict": "CONFIRMED",
+    "evidence": "'fire-resistance rating not less than 1 h'; 'not less than 45 min'; 'not required ... if the floor area ... is sprinklered throughout' (all four codes)",
+    "fix": ""
+   },
+   {
+    "claim": "3.8.2.8.(12) one stall in each group; NBC(AE) no 'in each group'",
+    "verdict": "CONFIRMED",
+    "evidence": "NBC/BCBC/VBBL 'at least one shower stall in each group of showers'; NBC(AE) 'at least one shower stall shall comply'",
+    "fix": ""
+   },
+   {
+    "claim": "3.8.2.8.(13) universal dressing and shower room for employee common-use area",
+    "verdict": "CONFIRMED",
+    "evidence": "'or as part of a common-use area for employees, at least one universal dressing and shower room'",
+    "fix": ""
+   },
+   {
+    "claim": "3.8.3.17.(1)(a) 1,500 × 900 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "'be not less than 1 500 mm wide and 900 mm deep'",
+    "fix": ""
+   },
+   {
+    "claim": "no clause requires showers",
+    "verdict": "CONFIRMED",
+    "evidence": "(12) and (13) apply only 'where showers are provided'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_dc_ezb5120": {
+  "where_read": "data/raw/edm/bylaw/b.txt",
+  "claims": [
+   {
+    "claim": "5.120 1.1 and 1.1.2 concealment, non-industrial",
+    "verdict": "CONFIRMED",
+    "evidence": "'Non-Industrial development must comply with the following'; 'All mechanical equipment, except for Solar Collectors, must be concealed by screening'",
+    "fix": ""
+   },
+   {
+    "claim": "BE 5.2 screening from streets and non-industrial sites",
+    "verdict": "CONFIRMED",
+    "evidence": "'All mechanical and electrical equipment, transformers, ducts, cooling towers ... screened from view from Abutting Streets and Sites in non-industrial Zones.' (line 6105, BE section)",
+    "fix": ""
+   },
+   {
+    "claim": "no such clause in IM",
+    "verdict": "CONFIRMED",
+    "evidence": "IM 5.2 screens only storage, waste and service areas",
+    "fix": ""
+   },
+   {
+    "claim": "5.70 1.9.5 no height limit",
+    "verdict": "CONFIRMED",
+    "evidence": "'1.9. ... no Height limit in any Zone: ... 1.9.5. ventilating equipment, plumbing stacks, and mechanical penthouse'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_dc_estruxCal1": {
+  "where_read": "not opened: WebFetch PROVENANCE_REQUIRED; curl CONNECT 403 (egress policy); no local copy",
+  "claims": [
+   {
+    "claim": "65,000 ft² total; 33,000/33,700 IT; 9 MW; 2N UPS; 25/19 ft ceilings",
+    "verdict": "UNREACHABLE",
+    "evidence": "text matches sources/16_dc_components_sizing.md (C1 / addendum / S29)",
+    "fix": ""
+   },
+   {
+    "claim": "IT share 51–52 % (our arithmetic)",
+    "verdict": "CONFIRMED",
+    "evidence": "33,000/65,000=50.8 %; 33,700/65,000=51.8 %",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_dc_hkTpb480": {
+  "where_read": "not opened: WebFetch PROVENANCE_REQUIRED; curl CONNECT 403 (egress policy); no local copy",
+  "claims": [
+   {
+    "claim": "para 11.4 6 m floor-to-floor; 22 storeys; no MW",
+    "verdict": "UNREACHABLE",
+    "evidence": "text matches sources/16_dc_components_sizing.md (C1 / addendum / S29)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_dc_hkTpb510": {
+  "where_read": "not opened: WebFetch PROVENANCE_REQUIRED; curl CONNECT 403 (egress policy); no local copy",
+  "claims": [
+   {
+    "claim": "para 1.6 5.5 / 6.0 / 11 m; no MW",
+    "verdict": "UNREACHABLE",
+    "evidence": "text matches sources/16_dc_components_sizing.md (C1 / addendum / S29)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_dc_kiddeIG541": {
+  "where_read": "not opened: WebFetch PROVENANCE_REQUIRED; curl CONNECT 403 (egress policy); no local copy",
+  "claims": [
+   {
+    "claim": "80 L 267 × 1,880 mm, 126.6/136.1 kg; 140 L 360 × 1,865 mm, 255.9 kg",
+    "verdict": "UNREACHABLE",
+    "evidence": "text matches sources/16_dc_components_sizing.md (C1 / addendum / S29)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "_reused_ids_and_arithmetic": {
+  "where_read": "register/formula_register.json; sources/16_dc_components_sizing.md; local codes; /tmp/fm/fm.txt",
+  "claims": [
+   {
+    "claim": "fmDS0532 2.2.4.1 (1 h, incl. network/fiber rooms), 2.2.4.1.1 (2 h between halls), 2.2.4.3 slab to slab, 2.2.5.2 30 ft ceiling, 2.2.1.6 piping, 2.6.4.3/2.6.4.3.1/2.6.4.4.1.1 generator order",
+    "verdict": "CONFIRMED",
+    "evidence": "all found verbatim in fm.txt at the pages cited",
+    "fix": ""
+   },
+   {
+    "claim": "arch_nbc3628 vault 3 h / 2 h",
+    "verdict": "CONFIRMED",
+    "evidence": "NBC 3.6.2.7.(2) '3 h if the vault is not protected by an automatic fire extinguishing system ... 2 h if' protected",
+    "fix": ""
+   },
+   {
+    "claim": "register values (component_space, ups_modules, battery_cabinets, generator_sets, transformers, fuel_on_site, hr_plant_room, rack_count, it_load_outside, fire_protection)",
+    "verdict": "CONFIRMED",
+    "evidence": "dc_rooms.md figures match the register coef text",
+    "fix": ""
+   },
+   {
+    "claim": "hillingdon_up4 '≈1 per MW on site at once'",
+    "verdict": "WRONG",
+    "evidence": "sources/16 C10 table: 'about 29 on site in business hours' (s. 34 says 'at once'; internal conflict)",
+    "fix": "'on site in business hours'"
+   },
+   {
+    "claim": "Cat 3516C ≈6.4 m²/MW",
+    "verdict": "CONFIRMED",
+    "evidence": "6,800 × 2,339 mm = 15.9 m² ÷ 2.5 MW = 6.4",
+    "fix": ""
+   },
+   {
+    "claim": "VRLA 3.3–6.0 m²/MW",
+    "verdict": "CONFIRMED",
+    "evidence": "1.0/0.3=3.33; 1.8/0.3=6.0",
+    "fix": ""
+   },
+   {
+    "claim": "fuel 6.3 m³/MW/24 h",
+    "verdict": "CONFIRMED",
+    "evidence": "0.263 L/kWh × 1,000 kW × 24 h = 6,312 L",
+    "fix": ""
+   },
+   {
+    "claim": "rack 25 ft² = 2.32 m²; 28 ft² = 2.6 m²; 5,000 ft² ≈465 m²; staff 1.8–3.6/MW",
+    "verdict": "CONFIRMED",
+    "evidence": "2.323; 2.601; 464.5; 50/28=1.79, 100/28=3.57",
+    "fix": ""
+   },
+   {
+    "claim": "support shares: Burlington 72/48 %, CAL-1 51–52 %, VAN4 59 %, VAN-1 75 %, EDM1 87 %, Lucan 84 %; range 13–52 %; median 27–33 %",
+    "verdict": "CONFIRMED",
+    "evidence": "3710/5163=71.9; 3710/7770=47.7; 40000/68000=58.8; 7500/10000=75; 15712/18000=87.3; 12859/15274=84.2; medians (25+28)/2=26.5, (25+41)/2=33",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ }
+}

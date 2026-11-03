@@ -1,0 +1,1256 @@
+{
+ "arch_mun_vanZDB4": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "May 2026 version",
+    "verdict": "WRONG",
+    "evidence": "every page footer reads 'March 2022'; no other date",
+    "fix": "Say footer 'March 2022' (City-served current PDF)"
+   },
+   {
+    "claim": "4.2.1 void 12 months",
+    "verdict": "CONFIRMED",
+    "evidence": "'any development permit application shall be void 12 months from the date of application'",
+    "fix": ""
+   },
+   {
+    "claim": "4.2.2 extensions total 12 months",
+    "verdict": "CONFIRMED",
+    "evidence": "'In no case shall any extension or extensions exceed in total 12 months'",
+    "fix": ""
+   },
+   {
+    "claim": "4.2.3 deemed refused after 30 days",
+    "verdict": "CONFIRMED",
+    "evidence": "'within 30 days or such longer period as may be agreed by the applicant' ... 'deemed to have been refused'",
+    "fix": ""
+   },
+   {
+    "claim": "4.3.1 grant unconditionally or with conditions",
+    "verdict": "CONFIRMED",
+    "evidence": "'the Director of Planning or the Development Permit Board' ... 'grant such permits either unconditionally or subject to conditions'",
+    "fix": ""
+   },
+   {
+    "claim": "4.3.7(h) referral on public response",
+    "verdict": "CONFIRMED",
+    "evidence": "'(h) the public response ... is such that review by the Development Permit Board is warranted' ... 'the Director of Planning shall refer'",
+    "fix": "Note 'shall' (mandatory)"
+   },
+   {
+    "claim": "4.3.8 may notify owners and tenants",
+    "verdict": "CONFIRMED",
+    "evidence": "'may refer any application ... to the Urban Design Panel for advice and may notify such property owners and tenants it deems necessary'",
+    "fix": "Note same sentence as UDP referral"
+   },
+   {
+    "claim": "4.4.7 issue per BoV decision",
+    "verdict": "CONFIRMED",
+    "evidence": "'shall upon application being made therefor issue a development permit'",
+    "fix": ""
+   },
+   {
+    "claim": "4.6.1 / 4.6.2 / 4.6.4",
+    "verdict": "CONFIRMED",
+    "evidence": "'void 12 months after the date of issue' unless commenced or BP 'issued and is unexpired'; 'void 24 months'; 'renew on one occasion only, and for a period not exceeding 12 months'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: City of Vancouver Zoning and Development By-law No. 3575, Section 4 (City-served PDF, page footers 'March 2022'), read 2 Nov 2026 via fetch-tool extract: s. 4.2.1 DP application 'shall be void 12 months from the date of application'; 4.2.2 extensions 'In no case shall any extension or extensions exceed in total 12 months'; 4.2.3 deemed refused if no permit within 30 days after all required information (appealable); 4.3.1 Director of Planning or Development Permit Board may grant 'either unconditionally or subject to conditions' or refuse; 4.3.7(h) Director 'shall refer' to DP Board if 'the public response to the application is such that review by the Development Permit Board is warranted'; 4.3.8 may refer to the Urban Design Panel 'and may notify such property owners and tenants it deems necessary'; 4.4.7 issue per Board of Variance decision; 4.6.1 void 12 months after issue unless commenced or BP issued; 4.6.2 void 24 months unless complete; 4.6.4 one renewal up to 12 months — https://bylaws.vancouver.ca/zoning/zoning-by-law-section-4.pdf ‖ CHECK 2 (2 Nov 2026, fixed): footer date is March 2022, not May 2026; 4.3.7(h) is 'shall')"
+ },
+ "arch_mun_vanDPB": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "role quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'reviews, makes recommendations and approves major developments'",
+    "fix": ""
+   },
+   {
+    "claim": "significant importance: scale, complexity, public interest",
+    "verdict": "CONFIRMED",
+    "evidence": "page ties 'significant importance' to scale, complexity, or public interest",
+    "fix": ""
+   },
+   {
+    "claim": "four senior staff incl. chair and advisory panel",
+    "verdict": "CONFIRMED",
+    "evidence": "'The board is composed of four senior staff members, including the chairperson and an advisory panel'",
+    "fix": ""
+   },
+   {
+    "claim": "open to public",
+    "verdict": "CONFIRMED",
+    "evidence": "'The meetings are open to the public.'",
+    "fix": ""
+   },
+   {
+    "claim": "cannot deny if meets zoning, ODP, guidelines",
+    "verdict": "CONFIRMED",
+    "evidence": "'The board cannot deny a development permit if it meets the zoning and ODP and guidelines.'",
+    "fix": ""
+   },
+   {
+    "claim": "procedures adopted 8 Aug 2023",
+    "verdict": "CONFIRMED",
+    "evidence": "'adopted on August 8, 2023'",
+    "fix": ""
+   },
+   {
+    "claim": "no size thresholds",
+    "verdict": "CONFIRMED",
+    "evidence": "none stated",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE: City of Vancouver, Development Permit Board web page (undated; meeting procedures adopted 8 Aug 2023): board 'reviews, makes recommendations and approves major developments' of 'significant importance because of scale, complexity, or public interest'; 'composed of four senior staff members, including the chairperson and an advisory panel'; 'The meetings are open to the public'; 'cannot deny a development permit if it meets the zoning and ODP and guidelines'; no size thresholds stated — https://vancouver.ca/home-property-development/development-permit-board.aspx ‖ CHECK 2 (2 Nov 2026, ok): all confirmed)"
+ },
+ "arch_mun_vanDPpage": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "step 5",
+    "verdict": "CONFIRMED",
+    "evidence": "'Development permit issued and apply for a building permit'",
+    "fix": ""
+   },
+   {
+    "claim": "excavation and shoring BP in advance",
+    "verdict": "CONFIRMED",
+    "evidence": "'new developments who require excavation and shoring may be eligible to receive their building permit in advance'",
+    "fix": ""
+   },
+   {
+    "claim": "no processing times; undated",
+    "verdict": "CONFIRMED",
+    "evidence": "none stated; no dates",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE: City of Vancouver, Development permit web page (undated): step 5 'Development permit issued and apply for a building permit'; developments needing excavation and shoring 'may be eligible to receive their building permit in advance of their development permit'; no processing times stated — https://vancouver.ca/home-property-development/development-permit.aspx ‖ CHECK 2 (2 Nov 2026, ok): all confirmed)"
+ },
+ "arch_mun_vanBoVpage": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026 (expandable sections not in the extract)",
+  "claims": [
+   {
+    "claim": "appeal if refused or approved with conditions",
+    "verdict": "CONFIRMED",
+    "evidence": "'If your permit application was refused, or was approved with conditions you would like removed'",
+    "fix": ""
+   },
+   {
+    "claim": "DP Board decisions appealable only on 'relaxation'",
+    "verdict": "UNREACHABLE",
+    "evidence": "expandable section text not in extract",
+    "fix": "mark ?"
+   },
+   {
+    "claim": "30 days, extendable to 75",
+    "verdict": "UNREACHABLE",
+    "evidence": "not in extract (By-law 10200 s. 3.2 confirms 30/75 days)",
+    "fix": "cite arch_mun_vanBoV10200 for the days"
+   },
+   {
+    "claim": "'$3,060 appeal legality fee'",
+    "verdict": "UNREACHABLE",
+    "evidence": "not in extract",
+    "fix": "mark ?"
+   },
+   {
+    "claim": "'adjourn the hearing for a neighbourhood notification'",
+    "verdict": "UNREACHABLE",
+    "evidence": "not in extract",
+    "fix": "mark ?"
+   },
+   {
+    "claim": "metadata 22 Oct 2026; last modified 14 Jan 2019",
+    "verdict": "NOT FOUND",
+    "evidence": "'Last modified date: Not shown' in extract",
+    "fix": "mark ?"
+   },
+   {
+    "claim": "(new) who may appeal",
+    "verdict": "CONFIRMED",
+    "evidence": "'Only a property owner (or an agent on their behalf) who is seeking to develop or use their property may file an appeal.'",
+    "fix": "add: neighbours cannot appeal under this page"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE: City of Vancouver, Appeal decisions to the Board of Variance or Parking Variance Board (dates not shown in the extract ?): appeal if a permit 'was refused, or was approved with conditions you would like removed'; 'Only a property owner (or an agent on their behalf) who is seeking to develop or use their property may file an appeal'; first reading (collapsed sections) also gave: DP Board decisions appealable only on 'relaxation', 'Within 30 days ... extendable to 75 days', '$3,060 appeal legality fee', hearing may be adjourned 'for a neighbourhood notification' (not re-confirmed at check 2: collapsed sections not in extract ?) — https://vancouver.ca/home-property-development/appealing-decisions-to-the-board-of-variance-or-parking-variance-board.aspx ‖ CHECK 2 (2 Nov 2026, fixed): fee, relaxation, 75 days and notification not re-confirmed (collapsed text); added owner-only appeal)"
+ },
+ "arch_mun_vanBoV10200": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "consolidated to 29 Mar 2022 (By-law 13292)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Consolidated for convenience only to March 29, 2022'; 'By-law No. 13292'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 3.2 30 days / 75 days",
+    "verdict": "CONFIRMED",
+    "evidence": "'within 30 days after the date of the decision'; 'within 75 days after the date of that decision'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 4.2 five days",
+    "verdict": "CONFIRMED",
+    "evidence": "'At least five days before the date of a hearing'",
+    "fix": ""
+   },
+   {
+    "claim": "Charter s. 573(1)(a),(b),(e), 573(3) as quoted",
+    "verdict": "CONFIRMED",
+    "evidence": "'any person aggrieved by a decision on a question of zoning'; 'siting, size, shape, or design of a building'; 'such owners of real property as the Board may deem to be affected by the appeal'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: City of Vancouver Board of Variance By-law No. 10200, consolidated for convenience to 29 Mar 2022 (By-law 13292), with Vancouver Charter s. 573 as quoted in it (Charter itself not opened: BC Laws refuses robots): s. 3.2 notice of appeal 'within 30 days after the date of the decision', late up to 'within 75 days'; s. 4.2 mail notice at least five days before hearing; Charter s. 573(1)(a) zoning decision of an official, (b) hardship on 'siting, size, shape, or design of a building', (e) decisions of a delegated body that may relax the by-law; s. 573(3) 'The Board shall give notice to such owners of real property as the Board may deem to be affected by the appeal' — https://bylaws.vancouver.ca/10200c.PDF ‖ CHECK 2 (2 Nov 2026, ok): all confirmed)"
+ },
+ "arch_mun_vanWWpage": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "three quotes",
+    "verdict": "CONFIRMED",
+    "evidence": "'We issue your permit and invoice you annually'; 'Metro Vancouver calculates your industrial treatment fees'; 'We enforce a municipal and regional district bylaw'",
+    "fix": ""
+   },
+   {
+    "claim": "no cooling-water text",
+    "verdict": "CONFIRMED",
+    "evidence": "none",
+    "fix": ""
+   },
+   {
+    "claim": "no thresholds",
+    "verdict": "WRONG",
+    "evidence": "page lists application fee $1,000, minor amendment $250, major $500; initial review about three months, each further review about one month",
+    "fix": "add fees and review times"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE: City of Vancouver, Wastewater discharge permit (industry or manufacturing) page (undated): 'We issue your permit and invoice you annually for your permit administration fees'; 'Metro Vancouver calculates your industrial treatment fees and invoices you quarterly'; 'We enforce a municipal and regional district bylaw'; initial application fee $1,000, amendments $250 (minor) / $500 (major); initial review about three months, each further review about one month; no cooling-water text, no volume thresholds — https://vancouver.ca/doing-business/wastewater-discharge-permit-for-industry-or-manufacturing.aspx ‖ CHECK 2 (2 Nov 2026, fixed): added fees and review times)"
+ },
+ "arch_mun_edm7100": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "2.1 20 days",
+    "verdict": "CONFIRMED",
+    "evidence": "'within 20 days after the receipt of a Development Permit application'",
+    "fix": ""
+   },
+   {
+    "claim": "2.5 40 days deemed refused",
+    "verdict": "CONFIRMED",
+    "evidence": "'If no decision is made on an application within 40 days'",
+    "fix": ""
+   },
+   {
+    "claim": "1.1.9",
+    "verdict": "CONFIRMED",
+    "evidence": "'with or without conditions'; 'regulations more restrictive than those required by this Bylaw'",
+    "fix": ""
+   },
+   {
+    "claim": "1.1.10",
+    "verdict": "CONFIRMED",
+    "evidence": "'even if it meets the requirements of this Bylaw'",
+    "fix": ""
+   },
+   {
+    "claim": "5.2-5.3 variance tests",
+    "verdict": "CONFIRMED",
+    "evidence": "5.2.1 neighbourhood amenities, use/enjoyment/value of neighbouring properties; 5.3.1 MDP and Statutory Plans; also 5.3.2 Zone purpose, 5.3.3 'sound land use planning principles'",
+    "fix": ""
+   },
+   {
+    "claim": "amendment date ?",
+    "verdict": "CONFIRMED",
+    "evidence": "none shown",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: City of Edmonton Zoning Bylaw 20001, s. 7.100 Authority and Responsibility of the Development Planner (online version, read 2 Nov 2026; amendment date ?): 2.1 within 20 days acknowledge a complete application; 2.5 'If no decision is made on an application within 40 days' (from the acknowledgment) the application is 'at the option of the applicant, deemed to be refused'; 1.1.9 may approve 'with or without conditions' and 'regulations more restrictive than those required by this Bylaw'; 1.1.10 'may refuse an application for Discretionary Development even if it meets the requirements of this Bylaw'; 5.2-5.3 variance tests (amenities of the neighbourhood; MDP and statutory plans) — https://zoningbylaw.edmonton.ca/part-7-administrative-and-interpretive-clauses/responsibilities/7100-authority-and-responsibility-development-planner ‖ CHECK 2 (2 Nov 2026, ok): all confirmed)"
+ },
+ "arch_mun_edm7160": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "1.2 online 7 days",
+    "verdict": "CONFIRMED",
+    "evidence": "'Within 7 days of a Development Permit being issued'",
+    "fix": ""
+   },
+   {
+    "claim": "1.3, 1.3.2 60.0 m, league, BIA",
+    "verdict": "CONFIRMED",
+    "evidence": "'wholly or partially within 60.0 m of the boundaries of the Site'",
+    "fix": ""
+   },
+   {
+    "claim": "1.4 increase boundary",
+    "verdict": "CONFIRMED",
+    "evidence": "'must increase the 60.0 m notification boundary'",
+    "fix": ""
+   },
+   {
+    "claim": "2.2 site sign for new principal buildings",
+    "verdict": "WRONG",
+    "evidence": "2.2 applies to lands zoned 'RS, RSM, RM, RL, CN, MUN, or MU', or any site the Planner chooses; 2.2.1 'demolition or new principal building construction'",
+    "fix": "not automatic on BE/IM/IH industrial lots: only if the Planner requires it"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "site-sign rule is for residential and mixed-use zones; an industrial data-centre lot gets a sign only at the Planner's choice",
+  "new_text": "RULE: City of Edmonton Zoning Bylaw 20001, s. 7.160 Notification of Development Permit Decisions (online version, read 2 Nov 2026): 1.2 all permits published online within 7 days; 1.3 discretionary approvals mailed within 7 days to owners 'within 60.0 m of the boundaries of the Site' (1.3.2), community league, BIA; 1.4 Planner 'must increase the 60.0 m notification boundary' where impacts are likely beyond it; 2.2 site sign, only on lands zoned RS, RSM, RM, RL, CN, MUN or MU or where the Planner requires (so not by default on BE/IM/IH), for demolition or new principal buildings, within 2.0 m of a front or flanking lot line, within 14 days of the permit becoming valid, until final occupancy — https://zoningbylaw.edmonton.ca/part-7-administrative-and-interpretive-clauses/development-permits/7160-notification-development-permit-decisions ‖ CHECK 2 (2 Nov 2026, fixed): site-sign rule limited to residential/mixed-use zones)"
+ },
+ "arch_mun_edm7170": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "appeal body, subject to MGA",
+    "verdict": "CONFIRMED",
+    "evidence": "'Subdivision and Development Appeal Board or any other applicable appeal board'; 'Subject to the provisions of the Municipal Government Act'",
+    "fix": ""
+   },
+   {
+    "claim": "applicant 21 days",
+    "verdict": "CONFIRMED",
+    "evidence": "'within 21 days after the date a decision ... was given'",
+    "fix": ""
+   },
+   {
+    "claim": "any person affected 21 days after notice",
+    "verdict": "CONFIRMED",
+    "evidence": "'within 21 days after notice of the decision ... was given'",
+    "fix": ""
+   },
+   {
+    "claim": "deemed refusals appealable",
+    "verdict": "CONFIRMED",
+    "evidence": "subs. 3: 'deemed to be refused in accordance with Subsection 2.5 of Section 7.100'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: City of Edmonton Zoning Bylaw 20001, s. 7.170 Development Permit Appeals (online version, read 2 Nov 2026): appeal 'to the Subdivision and Development Appeal Board or any other applicable appeal board', subject to the MGA; applicant 'within 21 days after the date a decision regarding the Development Permit application was given'; 'any person affected' 'within 21 days after notice of the decision ... was given'; deemed refusals appealable — https://zoningbylaw.edmonton.ca/part-7-administrative-and-interpretive-clauses/development-permits/7170-development-permit-appeals ‖ CHECK 2 (2 Nov 2026, ok): all confirmed)"
+ },
+ "arch_mun_abSdabTimelines": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "date and branch not printed",
+    "verdict": "CONFIRMED",
+    "evidence": "none shown; page marked 'Archived'",
+    "fix": "add 'archived'"
+   },
+   {
+    "claim": "21 days",
+    "verdict": "CONFIRMED",
+    "evidence": "'must be filed within 21 days of:' decision date or deemed refusal",
+    "fix": ""
+   },
+   {
+    "claim": "hearing within 30 days",
+    "verdict": "CONFIRMED",
+    "evidence": "'The SDAB must hold a hearing within 30 days of the notice of appeal being filed.'",
+    "fix": ""
+   },
+   {
+    "claim": "notice 5 days",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least 5 days before the scheduled date of the hearing'",
+    "fix": ""
+   },
+   {
+    "claim": "decision within 15 days",
+    "verdict": "CONFIRMED",
+    "evidence": "written decision and reasons within 15 days after the hearing ends",
+    "fix": ""
+   },
+   {
+    "claim": "no MGA sections cited",
+    "verdict": "WRONG",
+    "evidence": "cites 's. 645 of the MGA' (stop orders)",
+    "fix": "say only s. 645 is cited"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE: Government of Alberta (open.alberta.ca), 'Timelines for Appeals to the SDAB' fact sheet (Attachment 4; marked 'Archived' on open.alberta.ca; date and issuing branch not printed ?): development appeal 'must be filed within 21 days'; 'The SDAB must hold a hearing within 30 days of the notice of appeal being filed'; notice 'at least 5 days before the scheduled date of the hearing'; 'written decision and reasons within 15 days after concluding the hearing'; only MGA s. 645 (stop orders) cited — https://open.alberta.ca/dataset/75cd7ff7-410f-4619-bc65-40d2f00bc52c/resource/bdd5283f-dda9-4de6-a702-a3b2d0321716/download/attachment-4-sdab-factsheet-timelines-for-appeals-to-the-sdab.pdf ‖ CHECK 2 (2 Nov 2026, fixed): archived; s. 645 is cited)"
+ },
+ "arch_mun_abSdabManual2011": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026 (first 100,000 characters)",
+  "claims": [
+   {
+    "claim": "p. 15 permitted, s. 642",
+    "verdict": "CONFIRMED",
+    "evidence": "'the development authority must issue the permit' (p. 15)",
+    "fix": ""
+   },
+   {
+    "claim": "discretionary s. 640",
+    "verdict": "CONFIRMED",
+    "evidence": "'may refuse the application, approve the application or approve the application with' (pp. 15-16)",
+    "fix": ""
+   },
+   {
+    "claim": "p. 24 40 days s. 684",
+    "verdict": "CONFIRMED",
+    "evidence": "'where a permit is not issued within the 40 days'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 31 14 days s. 686",
+    "verdict": "CONFIRMED",
+    "evidence": "'must be filed within 14 days after the date on which the applicant received notice of the decision'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 5 confirm, revoke or vary",
+    "verdict": "CONFIRMED",
+    "evidence": "'may confirm, revoke or vary the order, decision or development permit'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 16 Direct Control",
+    "verdict": "CONFIRMED",
+    "evidence": "'The SDAB cannot hear a development permit appeal for Direct Control District lands'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 7 s. 619 prevail",
+    "verdict": "CONFIRMED",
+    "evidence": "'prevail over any statutory plan, land use bylaw, or municipal subdivision or planning decisions that conflict' (pp. 6-7)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE (OUT OF DATE, 2011): SDAB Training Manual, Alberta Municipal Affairs, 2011, summarising MGA (not statutory text): p. 15 permitted use 'the development authority must issue the permit' (s. 642); discretionary: 'refuse the application, approve the application or approve the application with conditions' (s. 640); p. 24 deemed refusal 'within the 40 days' (s. 684); p. 31 appeal 'within 14 days' (s. 686; superseded: now 21 days per arch_mun_abSdabTimelines and Bylaw 20001 7.170); p. 5 SDAB 'may confirm, revoke or vary' (s. 687); p. 16 SDAB 'cannot hear a development permit appeal for Direct Control District lands' where Council decides (s. 641); p. 7 NRCB/ERCB/AEUB/AUC authorizations 'prevail over any statutory plan, land use bylaw' that conflicts (s. 619) — https://open.alberta.ca/dataset/373bc611-6c7b-4191-8a16-be3ad08fa655/resource/db1d21ef-d6c5-488d-a263-0fbd73f0feab/download/5328042-2011-subdivision-development-appeal-board-training-manual.pdf ‖ CHECK 2 (2 Nov 2026, ok): all confirmed; s. 619 text runs pp. 6-7)"
+ },
+ "arch_mun_aucPowerPlant": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "effective 25 Apr 2022",
+    "verdict": "CONFIRMED",
+    "evidence": "'Effective April 25, 2022'",
+    "fix": ""
+   },
+   {
+    "claim": "all new power plants require AUC approval",
+    "verdict": "CONFIRMED",
+    "evidence": "'all new power plants, including power plants that are used for mining cryptocurrency, require approval by the AUC'",
+    "fix": ""
+   },
+   {
+    "claim": ">= 10 MW must obtain approval",
+    "verdict": "CONFIRMED",
+    "evidence": "'any power plant with a capability of 10 megawatts or greater must obtain AUC approval'",
+    "fix": ""
+   },
+   {
+    "claim": "1 to <10 MW checklist",
+    "verdict": "CONFIRMED",
+    "evidence": "'equal to or greater than one megawatt and less than 10 megawatts can file a checklist application form'",
+    "fix": ""
+   },
+   {
+    "claim": "five business days",
+    "verdict": "CONFIRMED",
+    "evidence": "'issue an approval for a complete checklist application within five business days'",
+    "fix": ""
+   },
+   {
+    "claim": "HEEA s. 11; Rule 012; Rule 007",
+    "verdict": "CONFIRMED",
+    "evidence": "'Section 11 of the Hydro and Electric Energy Act'; 'AUC Rule 012'; 'AUC Rule 007'",
+    "fix": ""
+   },
+   {
+    "claim": "'thermal power plants above one MW' need EPEA approval",
+    "verdict": "CONFIRMED",
+    "evidence": "'thermal power plants above one MW in Alberta require approval under the Environmental Protection and Enhancement Act' (also Alberta Air Emission Standards/Guidelines for Electricity Generation)",
+    "fix": ""
+   },
+   {
+    "claim": "conflict with abDCenv2026 50 MW (?)",
+    "verdict": "WRONG",
+    "evidence": "No conflict: Activities Designation Regulation s. 2(2)(vv) defines 'power plant' as >1 MW but excludes a backup system used only when the principal source is interrupted, not connected to the distribution system, <=50 MW (abADR276, CanLII consol. to 177/2026)",
+    "fix": "replace '?' with the ADR reading"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "REGULATOR GUIDE: Alberta Utilities Commission, 'Proposing a power plant application' page (effective 25 Apr 2022; no update date): 'all new power plants ... require approval by the AUC'; 'any power plant with a capability of 10 megawatts or greater must obtain AUC approval' with participant involvement per Rule 007; 1 MW to under 10 MW 'can file a checklist application form'; 'issue an approval for a complete checklist application within five business days'; legal basis 'Section 11 of the Hydro and Electric Energy Act'; Rule 012 compliance; 'thermal power plants above one MW' require EPEA approval (consistent with abDCenv2026 once read with the Activities Designation Regulation, Alta Reg 276/2003 s. 2(2)(vv): 'power plant' = >1 MW but excludes a backup system used only when the principal source is interrupted, not connected to the distribution system and <=50 MW; abADR276) — https://www.auc.ab.ca/proposing-a-power-plant-application/ ‖ CHECK 2 (2 Nov 2026, fixed): EPEA 1 MW vs 50 MW conflict settled by ADR s. 2(2)(vv))"
+ },
+ "arch_mun_aucAnn2026": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "26 Oct 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'October 26, 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "approval before building or operating >=1 MW incl. storage",
+    "verdict": "CONFIRMED",
+    "evidence": "'AUC approval is required before constructing or operating any power plant' ... 'energy storage facility with a total capability of one megawatt (MW) or greater'",
+    "fix": ""
+   },
+   {
+    "claim": "on-site, temporary, backup, non-exporting",
+    "verdict": "CONFIRMED",
+    "evidence": "'intended solely for on-site consumption, temporary generation, emergency and/or backup generation'; 'generation that will not ordinarily export electricity to the grid'",
+    "fix": "quote the actual words"
+   },
+   {
+    "claim": "cumulative capability",
+    "verdict": "CONFIRMED",
+    "evidence": "'the cumulative capability of all generating units located at the site'",
+    "fix": ""
+   },
+   {
+    "claim": "checklist 1-10 MW Rule 007",
+    "verdict": "CONFIRMED",
+    "evidence": "'equal to or greater than one MW and less than 10 MW'",
+    "fix": ""
+   },
+   {
+    "claim": "Rule 012 not exempt; emergency; testing",
+    "verdict": "CONFIRMED",
+    "evidence": "'Temporary or backup generation is not exempt from Rule 012'; 'merely because it is unplanned or unscheduled'; 'testing, maintenance, commissioning, and other non-emergency activities'",
+    "fix": ""
+   },
+   {
+    "claim": "data centres not named",
+    "verdict": "CONFIRMED",
+    "evidence": "not mentioned; EPEA also not mentioned",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "REGULATOR NOTICE: Alberta Utilities Commission, Announcement, 26 Oct 2026: AUC approval required before building or operating any power plant or energy storage facility of 1 MW or more total capability, including facilities 'intended solely for on-site consumption, temporary generation, emergency and/or backup generation' and 'generation that will not ordinarily export electricity to the grid'; thresholds apply to 'the cumulative capability of all generating units located at the site'; checklist route 1-10 MW under Rule 007; 'Temporary or backup generation is not exempt from Rule 012'; 'an operation does not qualify as an emergency merely because it is unplanned or unscheduled'; testing, maintenance, commissioning are non-emergency; data centres and EPEA not named — https://media.auc.ab.ca/prd-wp-uploads/News/2026/2026-10-26-Announcement.pdf ‖ CHECK 2 (2 Nov 2026, fixed): exact wording of the on-site/backup clause)"
+ },
+ "arch_mun_mvAirGuide2020": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "Oct 2020, doc 36860215",
+    "verdict": "CONFIRMED",
+    "evidence": "'36860215'; 'October 2020'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 5 combustion",
+    "verdict": "CONFIRMED",
+    "evidence": "'Combustion of solid, liquid or gaseous fuels'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 6 exemptions, engines",
+    "verdict": "CONFIRMED",
+    "evidence": "'Steam or internal combustion engines in compliance with BC's Motor Vehicle Act.'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 6 several months to a year",
+    "verdict": "CONFIRMED",
+    "evidence": "'anywhere from several months to a year or more'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 7 public notification, meeting",
+    "verdict": "CONFIRMED",
+    "evidence": "'require that all applications for new permits and significant amendments undergo public notification'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 8 one year in advance",
+    "verdict": "CONFIRMED",
+    "evidence": "'submit your application at least one year in advance'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 9 terms 10 years, Bylaw 1083, EMA Part 8",
+    "verdict": "WRONG",
+    "evidence": "term 'A typical term limit is 10 years' and Bylaw 1083 on p. 8; appeals 'Part 8 of the BC Environmental Management Act' on p. 9",
+    "fix": "p. 8-9"
+   },
+   {
+    "claim": "p. 34 350 hours",
+    "verdict": "CONFIRMED",
+    "evidence": "'Permits often limit standby fuels to a maximum of 350 hours per year of operation.'",
+    "fix": ""
+   },
+   {
+    "claim": "p. 50 notice",
+    "verdict": "CONFIRMED",
+    "evidence": "post 30 days within 15 days of signing; newspapers; 'British Columbia Gazette Part 1'",
+    "fix": ""
+   },
+   {
+    "claim": "emergency generators not addressed",
+    "verdict": "CONFIRMED",
+    "evidence": "no mention",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE: Metro Vancouver, Guidance for Air Permit Applications (version Oct 2020, doc 36860215): p. 5 'Combustion of solid, liquid or gaseous fuels' generally needs authorization; p. 6 exemptions per Bylaw 1082 s. 7 incl. 'Steam or internal combustion engines in compliance with BC's Motor Vehicle Act'; p. 6 'This process can take anywhere from several months to a year or more'; p. 7 new permits and significant amendments 'undergo public notification', possible public meeting; p. 8 'submit your application at least one year in advance'; p. 8 terms typically 10 years, fees per Bylaw 1083; p. 9 appeals under EMA Part 8; p. 34 'Permits often limit standby fuels to a maximum of 350 hours per year'; p. 50 post notice for 30 days within 15 days of signing, newspapers, BC Gazette; emergency generators not addressed — https://metrovancouver.org/services/air-quality-climate-action/Documents/air-permit-application-guide.pdf ‖ CHECK 2 (2 Nov 2026, fixed): page for term and fees is p. 8)"
+ },
+ "arch_mun_bchMajorDist": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "thresholds",
+    "verdict": "CONFIRMED",
+    "evidence": "'greater than 5,000 kW in a 25 kV service area, or 2,500 kW in a 12 kV service area'",
+    "fix": ""
+   },
+   {
+    "claim": "steps, times, costs",
+    "verdict": "CONFIRMED",
+    "evidence": "'One to two weeks'; 'No cost'; 'One to two months for most projects'; 'One to two years'; 'typically 7% to 15% of the full project estimate'; 'Six to 18 months'; 'must be paid in full'",
+    "fix": ""
+   },
+   {
+    "claim": "capture date 28 May 2024; footer 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "timestamp '2024-05-28T16:48:25' (unlabelled); '© 2026 BC Hydro'",
+    "fix": ""
+   },
+   {
+    "claim": "BCUC not mentioned",
+    "verdict": "CONFIRMED",
+    "evidence": "not mentioned",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "UTILITY GUIDE: BC Hydro, Major distribution connections page (capture date 28 May 2024 shown; footer 2026 ?): 'greater than 5,000 kW in a 25 kV service area, or 2,500 kW in a 12 kV service area'; request 'One to two weeks'; conceptual review 'No cost', 'One to two months for most projects'; detailed design 'One to two years', design deposit 'typically 7% to 15% of the full project estimate'; construction 'Six to 18 months', 'paid in full' before it starts; BCUC not mentioned — https://app.bchydro.com/accounts-billing/electrical-connections/large-load/distribution.html ‖ CHECK 2 (2 Nov 2026, ok): all confirmed)"
+ },
+ "arch_mun_iaaS82guide": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026 (first 100,000 characters)",
+  "claims": [
+   {
+    "claim": "Dec 2021; modified 17 Dec 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'2021-12-15'; '2025-12-17'",
+    "fix": ""
+   },
+   {
+    "claim": "2024 amendments may not be reflected",
+    "verdict": "WRONG",
+    "evidence": "page states the Budget Implementation Act, 2024 'brought into force amendments to the Impact Assessment Act'",
+    "fix": "say the page addresses the 2024 amendments"
+   },
+   {
+    "claim": "determine before acting, incl. permit",
+    "verdict": "CONFIRMED",
+    "evidence": "'before taking action or making a decision that would enable a project to proceed' ('i.e. issues a permit, authorization, etc.')",
+    "fix": ""
+   },
+   {
+    "claim": "authority incl. Schedule 4",
+    "verdict": "CONFIRMED",
+    "evidence": "'any other body that is set out in Schedule 4 of the IAA'",
+    "fix": ""
+   },
+   {
+    "claim": "30 days s. 86(2)",
+    "verdict": "CONFIRMED",
+    "evidence": "'for a period of at least 30 days (subsection 86(2))'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT GUIDE: Impact Assessment Agency of Canada, Projects on federal lands and outside Canada: Guidance on Sections 81 to 91 of the Impact Assessment Act (Dec 2021; modified 17 Dec 2025; page notes the 2024 amendments under the Budget Implementation Act, 2024): authority must determine whether a project is likely to cause significant adverse environmental effects 'before taking action or making a decision that would enable a project to proceed', incl. issuing a permit; authority = federal authority 'and any other body that is set out in Schedule 4'; Notice of Intent with comment period 'at least 30 days (subsection 86(2))' — https://www.canada.ca/en/impact-assessment-agency/services/policy-guidance/projects-federal-lands-outside-canada/guidance-sections-81-to-91-impact-assessment-act.html ‖ CHECK 2 (2 Nov 2026, fixed): page does address 2024 amendments)"
+ },
+ "arch_mun_hmmParaplu2020": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "plan 2020.0002098 adopted 22 Oct 2020",
+    "verdict": "CONFIRMED",
+    "evidence": "'vaststelling op 22 oktober 2020 van het bestemmingsplan Parapluplan datacenters met nummer 2020.0002098'",
+    "fix": ""
+   },
+   {
+    "claim": "in force 24 Nov 2020",
+    "verdict": "NOT FOUND",
+    "evidence": "not stated; 24 Nov 2020 is the Gemeenteblad publication date",
+    "fix": "say 'published 24 Nov 2020'"
+   },
+   {
+    "claim": "5.1 four parks; not in buitengebied",
+    "verdict": "CONFIRMED",
+    "evidence": "'Polanenpark, Schiphol-Rijk' ...; 'geen datacenters toestaan in het buitengebied van Haarlemmermeer'",
+    "fix": ""
+   },
+   {
+    "claim": "5.3 extensions <=10 %",
+    "verdict": "CONFIRMED",
+    "evidence": "'uitbereiding van maximaal 10% van het bruto vloeroppervlak van bestaande bouwwerken'",
+    "fix": ""
+   },
+   {
+    "claim": "6.1 nature, rainwater, solar",
+    "verdict": "CONFIRMED",
+    "evidence": "'Natuur inclusief, hemelwateropvang en zonne-energie'; fences: 'ongewenst om terreinen met grote hekwerken te omzomen'",
+    "fix": ""
+   },
+   {
+    "claim": "6.2 750 MVA; 6.2.1 80 MVA",
+    "verdict": "CONFIRMED",
+    "evidence": "'750 MVA tot 2030'; 'groter dan 80 MVA'",
+    "fix": ""
+   },
+   {
+    "claim": "6.3.2 heat, PUE",
+    "verdict": "CONFIRMED",
+    "evidence": "'restwarmte op een bruikbare temperatuur te leveren aan het warmtenet'; 'ruimte beschikbaar te blijven'; 'PUE < 1,2'",
+    "fix": ""
+   },
+   {
+    "claim": "renewable electricity purchase",
+    "verdict": "WRONG",
+    "evidence": "'Datacenters dragen bij aan de stimulering van opwek van hernieuwbare energie'",
+    "fix": "say 'contribute to stimulating renewable generation'"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT POLICY (Netherlands, outside Canada): Gemeente Haarlemmermeer, Gemeenteblad 2020, 306084, data-centre siting policy with Parapluplan datacenters (bestemmingsplan 2020.0002098, adopted 22 Oct 2020, published 24 Nov 2020; in-force date not stated ?): s. 5.1 only 'Polanenpark, Schiphol-Rijk, Schiphol Trade Park (STP) en Corneliahoeve'; 'geen datacenters toestaan in het buitengebied'; s. 5.3 outside these no new data centres, extensions <= 10 %; s. 6.1 'Natuur inclusief, hemelwateropvang en zonne-energie dienen integraal in het ontwerp opgenomen te worden'; s. 6.2 750 MVA municipal cap to 2030; s. 6.2.1 > 80 MVA own 150 kV station; s. 6.3.2 waste heat to an existing or planned network 'op een bruikbare temperatuur', otherwise 'ruimte beschikbaar te blijven voor toekomstige levering van restwarmte'; 'PUE < 1,2'; 'dragen bij aan de stimulering van opwek van hernieuwbare energie' (contribute to stimulating renewable generation); s. 6.1 large perimeter fences 'ongewenst' (translations by Claude) — https://zoek.officielebekendmakingen.nl/gmb-2020-306084.html ‖ CHECK 2 (2 Nov 2026, fixed): 24 Nov is publication date; renewable wording)"
+ },
+ "arch_mun_amsVoorb2019": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "council 12 Jul 2019, published 31 Jul 2019",
+    "verdict": "CONFIRMED",
+    "evidence": "'in zijn vergadering van 12 juli 2019'; 'Amsterdam, 31 juli 2019'",
+    "fix": ""
+   },
+   {
+    "claim": "whole city; change of use barred; permits held; one year",
+    "verdict": "CONFIRMED",
+    "evidence": "'gehele grondgebied van Amsterdam'; 'het verboden is het gebruik van de gronden en of bouwwerken te wijzigen'; 'aangehouden'; 'voor de periode van één jaar'",
+    "fix": ""
+   },
+   {
+    "claim": "limited to data centres ?",
+    "verdict": "CONFIRMED",
+    "evidence": "operative words 'met betrekking tot datacenters'",
+    "fix": "settle '?'"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE (Netherlands, outside Canada): Gemeente Amsterdam, Voorbereidingsbesluit datacenters, Staatscourant 2019, 42491 (council 12 Jul 2019, published 31 Jul 2019): 'voor het gehele grondgebied van Amsterdam'; 'het verboden is het gebruik van de gronden en of bouwwerken te wijzigen'; 'omgevingsvergunningen voor de activiteit bouwen te worden aangehouden'; 'geldt voor de periode van één jaar' scope 'met betrekking tot datacenters' (translations by Claude) — https://zoek.officielebekendmakingen.nl/stcrt-2019-42491.pdf ‖ CHECK 2 (2 Nov 2026, fixed): scope to data centres confirmed)"
+ },
+ "arch_mun_cruDec2025": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "12 Dec 2025; CRU2025236",
+    "verdict": "CONFIRMED",
+    "evidence": "'12th December 2025'; PDF 'CRU2025236_Large_Energy_User_connection_policy_decision_paper.pdf'",
+    "fix": ""
+   },
+   {
+    "claim": "onsite or local generation/storage; wholesale market",
+    "verdict": "CONFIRMED",
+    "evidence": "'either onsite or local in proximity to match the requested data centre maximum import demand capacity'; 'participate in the wholesale electricity market'",
+    "fix": ""
+   },
+   {
+    "claim": "80 %, exclusions, 6-year glide path",
+    "verdict": "CONFIRMED",
+    "evidence": "'at least 80% of their annual demand'; 'REFIT, RESS, ORESS) cannot be used'; '6-year glide path'",
+    "fix": ""
+   },
+   {
+    "claim": "constrained/unconstrained; 31 Mar 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'constrained or unconstrained location'; 'by 31 March 2026'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "REGULATOR DECISION (Ireland, outside Canada): Commission for Regulation of Utilities, news page 'The CRU Publishes its Decision on New Electricity Connection Policy for Data Centres', 12 Dec 2025 (linked paper CRU2025236; paper itself not read, CRU publications page refuses robots): generation and/or storage 'either onsite or local in proximity' to match requested maximum import; must 'participate in the wholesale electricity market'; 'at least 80% of their annual demand with additional renewable electricity projects' (REFIT/RESS/ORESS excluded), six-year glide path; System Operators assess 'constrained or unconstrained location'; connection process by 31 Mar 2026 — https://www.cru.ie/about-us/news/the-cru-publishes-its-decision-on-new-electricity-connection-policy-for-data-centres/ ‖ CHECK 2 (2 Nov 2026, ok): all confirmed; paper itself still not read)"
+ },
+ "arch_mun_sgDCCFA2": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "EDB/IMDA 1 Dec 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'The Singapore Economic Development Board (EDB) and the Infocomm Media Development Authority (IMDA)'",
+    "fix": ""
+   },
+   {
+    "claim": "200MW; PUE 1.25; 50 %; SS 715:2025; investment; no heat/location",
+    "verdict": "CONFIRMED",
+    "evidence": "'At least 200MW of DC capacity'; 'of 1.25 (at 100% IT load) or better'; 'at least 50% powered by eligible green energy pathways'; 'SS 715:2025'; 'indicate the fixed asset investments and total business expenditure'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT (Singapore, outside Canada): EDB and IMDA, Fact sheet, Launch of second Data Centre - Call for Application (DC-CFA2), 1 Dec 2025: 'At least 200MW of DC capacity'; 'PUE of 1.25 (at 100% IT load) or better'; 'at least 50% powered by eligible green energy pathways'; IT equipment per SS 715:2025; fixed asset investment and business expenditure; no heat-reuse or location condition stated — https://www.edb.gov.sg/content/dam/edb-en/about-edb/media-releases/news/launch-of-second-data-centre-call-for-application/Launch%20of%20second%20data%20centre-call%20for%20application.pdf ‖ CHECK 2 (2 Nov 2026, ok): all confirmed)"
+ },
+ "arch_mun_pwcDCOZOD": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "adopted 22 Sep 2026, Ord. 26-67",
+    "verdict": "CONFIRMED",
+    "evidence": "'On September 22, 2026, the Prince William Board of County Supervisors adopted DPA2026-00006'; 'Ord. No. 26-67'",
+    "fix": ""
+   },
+   {
+    "claim": "five pathways keep by-right; SUP elsewhere",
+    "verdict": "CONFIRMED",
+    "evidence": "'may continue to exercise existing by-right data center development permissions'; 'must now proceed through the Special Use Permit (SUP) process'",
+    "fix": ""
+   },
+   {
+    "claim": "PC 500-foot recommendation",
+    "verdict": "CONFIRMED",
+    "evidence": "'a minimum 500-foot setback between data center structures and existing homes and schools' (PC hearing 9 Sep 2026; adoption not confirmed)",
+    "fix": ""
+   },
+   {
+    "claim": "closes 21 Dec 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'After the final eligibility period closes on December 21, 2026'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT (US, outside Canada): Prince William County Planning Office, DPA2026-00006 Data Center Opportunity Zone Overlay District page (undated; latest date 22 Sep 2026): 'On September 22, 2026, the Prince William Board of County Supervisors adopted DPA2026-00006 (DCOZOD ZTA) (See Ord. No. 26-67)'; overlay parcels meeting one of five pathways keep by-right permission; elsewhere new proposals in listed districts need a Special Use Permit; PC recommended 'minimum 500-foot setback between data center structures and existing homes and schools' for the fifth pathway (adopted text not read ?); eligibility closes 21 Dec 2026 — https://www.pwcva.gov/department/planning-office/dpa2026-00006-data-center-opportunity-zone-overlay-district-dcozod ‖ CHECK 2 (2 Nov 2026, ok): all confirmed)"
+ },
+ "arch_mun_qcBill2023": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "title, 2023 c. 1, Bill 2",
+    "verdict": "CONFIRMED",
+    "evidence": "'(2023, chapter 1)'; 'Bill 2'",
+    "fix": ""
+   },
+   {
+    "claim": "s. 10 quotes",
+    "verdict": "CONFIRMED",
+    "evidence": "'the first paragraph of section 76'; 'does not apply to any new request'; 'which is for 5,000 kilowatts or more'; 'must obtain the authorization of the Minister'",
+    "fix": ""
+   },
+   {
+    "claim": "(omitted) transitional and carve-out",
+    "verdict": "WRONG",
+    "evidence": "s. 10 applies 'until' the first regulation under 'subparagraph 2.4 of the first paragraph of section 112' takes effect; excludes requests with a financial-commitment agreement signed 'before 2 December 2022'; Minister weighs connection capacity and economic, social and environmental impacts",
+    "fix": "add; whether that regulation is now in force ?"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE (Quebec, Canada): An Act mainly to cap the indexation rate for Hydro-Québec domestic distribution rate prices and to further regulate the obligation to distribute electricity, SQ 2023 c. 1 (Bill 2), s. 10: 'the obligation to distribute electric power set out in the first paragraph of section 76' 'does not apply to any new request, any request for an additional load or any request from a customer' 'which is for 5,000 kilowatts or more of power'; 'the holder of exclusive rights must obtain the authorization of the Minister' ; transitional: applies 'until' the first regulation under 'subparagraph 2.4 of the first paragraph of section 112' of the Act respecting the Régie de l'énergie takes effect (whether it has: ?); excludes requests with a financial-commitment agreement signed 'before 2 December 2022'; Minister weighs connection capacity and economic, social and environmental impacts — https://www.publicationsduquebec.gouv.qc.ca/fileadmin/gazette/pdf_encrypte/lois_reglements/2023A/106158.pdf ‖ CHECK 2 (2 Nov 2026, fixed): added transitional limit and 2 Dec 2022 carve-out)"
+ },
+ "arch_mun_qcNews2023": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "title, 12 May 2023",
+    "verdict": "CONFIRMED",
+    "evidence": "'12 mai 2023'",
+    "fix": ""
+   },
+   {
+    "claim": "ministerial authorization",
+    "verdict": "CONFIRMED",
+    "evidence": "'doivent obtenir l'autorisation du ministre de l'Économie, de l'Innovation et de l'Énergie'",
+    "fix": ""
+   },
+   {
+    "claim": "criteria",
+    "verdict": "CONFIRMED",
+    "evidence": "grid capacity and impacts; economic and regional development; environmental and social impacts; government orientations (exact quotes paraphrased in extract)",
+    "fix": ""
+   },
+   {
+    "claim": "data centres not named",
+    "verdict": "CONFIRMED",
+    "evidence": "not mentioned",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT (Quebec, Canada): Gouvernement du Québec news, 'Raccordement des projets d'une puissance de 5 MW et plus: les critères d'analyse ...', 12 May 2023: projects 'doivent obtenir l'autorisation du ministre de l'Économie, de l'Innovation et de l'Énergie avant de pouvoir être raccordés'; criteria: grid capacity and impacts, 'les retombées sur l'économie et le développement régional', 'l'impact environnemental et social', policy fit; data centres not named (translations by Claude) — https://www.quebec.ca/nouvelles/actualites/details/raccordement-des-projets-dune-puissance-de-5-mw-et-plus-les-criteres-danalyse-pour-loctroi-dun-bloc-delectricite-rendus-publics-47778 ‖ CHECK 2 (2 Nov 2026, ok): all confirmed)"
+ },
+ "arch_mun_hq5MW": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "963-3367 (2026-06; p. 8 2025-11)",
+    "verdict": "CONFIRMED",
+    "evidence": "'963-3367 (2026-06)'; p. 8 '963-3367 (2025-11)'",
+    "fix": ""
+   },
+   {
+    "claim": "binding",
+    "verdict": "CONFIRMED",
+    "evidence": "'will constitute conditions that will be binding' ... 'if you are awarded a block of electricity'",
+    "fix": ""
+   },
+   {
+    "claim": "legal basis not stated",
+    "verdict": "CONFIRMED",
+    "evidence": "no Act cited",
+    "fix": ""
+   },
+   {
+    "claim": "(omitted) data-centre appendix",
+    "verdict": "WRONG",
+    "evidence": "Appendix 2 is for data centres",
+    "fix": "add"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "UTILITY FORM (Quebec, Canada): Hydro-Québec, Development project of 5 MW or more, form 963-3367 (2026-06; p. 8 2025-11): project, demand, demand response, efficiency, implementation guarantees, GHG, economic and social impacts, Indigenous communities; Appendix 2 is specific to data centres; information 'will constitute conditions that will be binding' if a block is awarded; legal basis not stated — https://www.hydroquebec.com/data/affaires/pdf/development-project-of-5mw-form.pdf?v=20231213 ‖ CHECK 2 (2 Nov 2026, fixed): form has a data-centre appendix)"
+ },
+ "arch_mun_onERO251001": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "posted 5 Sep, updated 8 Sep, closed 4 Nov 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "'September 5, 2025'; 'September 8, 2025'; 'November 4, 2025'",
+    "fix": ""
+   },
+   {
+    "claim": "Bill 40; Minister approval to connect",
+    "verdict": "CONFIRMED",
+    "evidence": "'receive approval from the Minister of Energy and Mines to connect to the provincial electricity grid'",
+    "fix": ""
+   },
+   {
+    "claim": "'local, strategic and economic benefits'",
+    "verdict": "CONFIRMED",
+    "evidence": "'deliver local, strategic and economic benefits'",
+    "fix": ""
+   },
+   {
+    "claim": "50 MW example only",
+    "verdict": "CONFIRMED",
+    "evidence": "'(e.g., greater than 50 megawatts)'",
+    "fix": ""
+   },
+   {
+    "claim": "status",
+    "verdict": "CONFIRMED",
+    "evidence": "'Proposal Updated'; no decision shown; Bill 40 passage not confirmed on the page",
+    "fix": "note"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT PROPOSAL (Ontario, Canada): Environmental Registry of Ontario 025-1001, New Requirements for Data Centres Seeking to Connect to the Electricity Grid in Ontario (posted 5 Sep 2025, updated 8 Sep 2025; comments closed 4 Nov 2025): Bill 40 amendments to the Electricity Act, 1998 would let a regulation require covered data centres to 'receive approval from the Minister of Energy and Mines to connect'; priority for 'local, strategic and economic benefits'; size threshold not set ('greater than 50 megawatts' as an example only) ; stage 'Proposal Updated', no decision posted (Bill 40 status not on page ?) — https://ero.ontario.ca/notice/025-1001 ‖ CHECK 2 (2 Nov 2026, ok): all confirmed; status added)"
+ },
+ "arch_mun_onERO260853": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026",
+  "claims": [
+   {
+    "claim": "posted 13 Aug, closed 12 Sep 2026, proposal",
+    "verdict": "CONFIRMED",
+    "evidence": "'August 13, 2026'; 'September 12, 2026'; 'Proposal'",
+    "fix": ""
+   },
+   {
+    "claim": "three pillars",
+    "verdict": "CONFIRMED",
+    "evidence": "'Advance Economic Development'; 'Protect Data Security and Digital Sovereignty'; 'Invest in Communities and Earn Public Trust'",
+    "fix": ""
+   },
+   {
+    "claim": "'limited strain on host communities and their utilities'",
+    "verdict": "WRONG",
+    "evidence": "not found; text: 'minimal impacts on the technical and fiscal capacity of host communities and their utilities'",
+    "fix": "replace quote"
+   },
+   {
+    "claim": "'closed-loop cooling to limit water use'",
+    "verdict": "CONFIRMED",
+    "evidence": "'such as closed-loop cooling to limit water use'",
+    "fix": ""
+   },
+   {
+    "claim": "no heat",
+    "verdict": "CONFIRMED",
+    "evidence": "not mentioned",
+    "fix": ""
+   },
+   {
+    "claim": "no MW threshold",
+    "verdict": "WRONG",
+    "evidence": "'greater than 1 MW' as example of a large new data centre; rate class '(e.g., 1 MW)'",
+    "fix": "say 1 MW given as an example only"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT PROPOSAL (Ontario, Canada): Environmental Registry of Ontario 026-0853, Economic and Strategic Assessment Framework for New Data Centres (posted 13 Aug 2026; comments closed 12 Sep 2026; proposal): three pillars: economic development; data security and digital sovereignty; 'Invest in Communities and Earn Public Trust' incl. 'minimal impacts on the technical and fiscal capacity of host communities and their utilities'; 'closed-loop cooling to limit water use' as an example; no heat; 'greater than 1 MW' as an example only, no threshold set — https://ero.ontario.ca/notice/026-0853 ‖ CHECK 2 (2 Nov 2026, fixed): quote corrected; 1 MW example)"
+ },
+ "abDCenv2026": {
+  "where_read": "local copy sources/library/public/abDCenv2026/full.pdf (20 Jul 2026)",
+  "claims": [
+   {
+    "claim": "'a backup power generation system over 50 megawatts'",
+    "verdict": "CONFIRMED",
+    "evidence": "'an EPEA approval is required for a larger combustion-based electricity generation power plant, or a backup power generation system over 50 megawatts'",
+    "fix": ""
+   },
+   {
+    "claim": "date 20 Jul 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'©2026 Government of Alberta | July 20, 2026 | Environment and Protected Areas'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "same document as arch_sep_abEpaDC2026 (two ids, one source): merge in register",
+  "new_text": null
+ },
+ "arch_sep_abEpaDC2026": {
+  "where_read": "same local copy",
+  "claims": [
+   {
+    "claim": "50 MW; receptors; municipal light/noise",
+    "verdict": "CONFIRMED",
+    "evidence": "'light, noise and visual impacts are often addressed through municipal'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "duplicate of abDCenv2026",
+  "new_text": null
+ },
+ "abADR276": {
+  "where_read": "local copy data/raw/codes/ab_activities_designation_reg_276_2003.pdf (CanLII print, consolidated up to 177/2026, retrieved 19 Oct 2026; OCR by Claude, text layer garbled)",
+  "claims": [
+   {
+    "claim": "(new for this row) s. 2(2) definitions for Sch. 1 Div. 2: (vv) 'power plant'",
+    "verdict": "CONFIRMED",
+    "evidence": "'\"power plant\" means a plant that produces steam or thermal electrical power and has a rated production output of greater than one megawatt under peak load, but does not include' ... '(iii) a backup power generating system that (A) is only used to provide power to a facility when the facility's principal source of power is interrupted, (B) is not connected to the electric distribution system, and (C) has a total rated production output of no more than 50 megawatts under peak load'",
+    "fix": ""
+   },
+   {
+    "claim": "Sch. 1 Div. 2 Part 9 approval",
+    "verdict": "CONFIRMED",
+    "evidence": "'Part 9: Power Plants (i) the construction, operation or reclamation of a power plant'; s. 5(1) Sch. 1 activities need an approval",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "register entry covers only waterworks (Div. 5); add s. 2(2)(vv) and Sch. 1 Div. 2 Part 9(i)",
+  "new_text": null
+ },
+ "_conflict_AUC_1MW_vs_EPEA_50MW": {
+  "where_read": "AUC page, AUC announcement 26 Oct 2026, EPA fact sheet (local), ADR (local OCR)",
+  "claims": [
+   {
+    "claim": "conflict",
+    "verdict": "CONFIRMED",
+    "evidence": "Settled: no conflict. Two separate approvals. (1) AUC (HEEA s. 11): any generation >=1 MW cumulative at the site, backup included (arch_mun_aucAnn2026). (2) EPEA (ADR Sch. 1 Div. 2 Part 9): 'power plant' >1 MW, but backup sets used only when grid supply is interrupted, not connected to the distribution system, <=50 MW total are excluded (abADR276 s. 2(2)(vv)(iii)). The AUC page's 'thermal power plants above one MW' is the general definition; the EPA guide's 50 MW is the backup exclusion.",
+    "fix": "Our reading (?): routine testing and grid-parallel or peak-shaving use may take a set outside 'only used ... when ... interrupted' and 'not connected'; not settled by the text"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_sys_vfpaPER": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026 of https://www.portvancouver.com/wp-content/uploads/2023/06/2022-09-26-Guide-PER-Application-1.pdf",
+  "claims": [
+   {
+    "claim": "md pages: categories p. 9, times pp. 11-16, fees pp. 24-25, BP p. 23, utilities p. 7",
+    "verdict": "WRONG",
+    "evidence": "extract pages: categories and engagement p. 8; times pp. 12-15; fees p. 23; deposit p. 24; building permits and NBC 2020 p. 22; utilities and 'British Columbia Safety Authority' p. 6",
+    "fix": "md pages run one high; use extract pages (match register p. 8, p. 23)"
+   },
+   {
+    "claim": "Category B fee $500 or $2,500",
+    "verdict": "WRONG",
+    "evidence": "fee table shows 'Category B (if consultation required) $2,500'; $500 not in extract",
+    "fix": "mark $500 ?"
+   },
+   {
+    "claim": "quotes",
+    "verdict": "CONFIRMED",
+    "evidence": "'applies to all proposed physical works and activities on federal lands and waters'; 'May require a 30 calendar day public comment period'; 'issues building permits for buildings and structures'; 'major utilities serving port property are provided by local municipalities'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "arch_zon_MgaToc": {
+  "where_read": "WebFetch extract of the URL, 2 Nov 2026 of https://www.calgary.ca/content/dam/arb/pdf/m26.pdf (TOC)",
+  "claims": [
+   {
+    "claim": "md section titles 606, 619, 640, 642, 684-687, 692",
+    "verdict": "CONFIRMED",
+    "evidence": "'Requirements for advertising'; 'NRCB, ERCB, AER, AEUB or AUC authorizations'; 'Land use bylaw'; 'Designation of direct control districts' (641); 'Permitted and discretionary uses'; 'Permit deemed refused'; 'Grounds for appeal'; 'Appeals'; 'Hearing and decision'; 'Planning bylaws'; 'April 1, 2024'",
+    "fix": "titles not in the register entry: add"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "gvsdd299": {
+  "where_read": "local copy sources/library/public/gvsdd299/full.pdf (unofficial consolidation)",
+  "claims": [
+   {
+    "claim": "s. 5.1(a),(c),(d),(e) and 5.2 permit",
+    "verdict": "CONFIRMED",
+    "evidence": "'no person shall discharge ... a) a High Volume Discharge ... c) Stormwater, d) Uncontaminated Water, e) Groundwater'; 5.2 'first obtained a valid and subsisting Waste Discharge Permit'",
+    "fix": ""
+   },
+   {
+    "claim": "HVD 300 m3/30 days or 30 L/min",
+    "verdict": "CONFIRMED",
+    "evidence": "'in excess of 300 cubic metres over any consecutive 30 day period or any instantaneous discharge ... in excess of 30 litres per minute'",
+    "fix": ""
+   },
+   {
+    "claim": "Uncontaminated Water; s. 3.3",
+    "verdict": "CONFIRMED",
+    "evidence": "'not substantially changed ... as to chemical or biochemical qualities or temperature'; s. 3.3 'Stormwater, Uncontaminated Water and water from the provision of municipal services'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "register entry lacks s. 5.1-5.2, s. 2 and 3.3: add",
+  "new_text": null
+ },
+ "mvBylaw1082": {
+  "where_read": "local copy sources/library/public/mvBylaw1082/full.pdf (consol., Bylaw 1308 adopted 29 May 2020)",
+  "claims": [
+   {
+    "claim": "s. 5 prohibition",
+    "verdict": "CONFIRMED",
+    "evidence": "'Subject to section 7, no person may in the course of conducting an industry, trade or business of whatsoever kind or nature discharge ... any air contaminant'",
+    "fix": ""
+   },
+   {
+    "claim": "7(9), 7(12)",
+    "verdict": "CONFIRMED",
+    "evidence": "'steam powered or internal combustion engines in compliance, if applicable, with the Motor Vehicle Act'; 'less than 100 kilograms per day of carbon monoxide'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "src19": {
+  "where_read": "sources/19_precedent_fairfax_loudoun.md",
+  "claims": [
+   {
+    "claim": "Fairfax/Loudoun row figures",
+    "verdict": "CONFIRMED",
+    "evidence": "figures match the note (e.g. 200 ft / 300 ft, SPEX; 'anzustreben', EnEfG s. 11; S-DAT, 30 m, Rule 012)",
+    "fix": ""
+   }
+  ],
+  "kind_change": "internal research note, not a primary source",
+  "scope_flag": "row should cite the primary ids the note quotes (e.g. fairfaxDC2024 for Fairfax; Loudoun 4.06.02 in-force status unverified in the note)",
+  "new_text": null
+ },
+ "src20": {
+  "where_read": "sources/20_precedent_frankfurt_germany_eu.md",
+  "claims": [
+   {
+    "claim": "Frankfurt row figures",
+    "verdict": "CONFIRMED",
+    "evidence": "figures match the note (e.g. 200 ft / 300 ft, SPEX; 'anzustreben', EnEfG s. 11; S-DAT, 30 m, Rule 012)",
+    "fix": ""
+   }
+  ],
+  "kind_change": "internal research note, not a primary source",
+  "scope_flag": "row should cite the primary ids the note quotes (e.g. fairfaxDC2024 for Fairfax; Loudoun 4.06.02 in-force status unverified in the note)",
+  "new_text": null
+ },
+ "src21": {
+  "where_read": "sources/21_precedent_calgary_alberta.md",
+  "claims": [
+   {
+    "claim": "Calgary/Rocky View row figures",
+    "verdict": "CONFIRMED",
+    "evidence": "figures match the note (e.g. 200 ft / 300 ft, SPEX; 'anzustreben', EnEfG s. 11; S-DAT, 30 m, Rule 012)",
+    "fix": ""
+   }
+  ],
+  "kind_change": "internal research note, not a primary source",
+  "scope_flag": "row should cite the primary ids the note quotes (e.g. fairfaxDC2024 for Fairfax; Loudoun 4.06.02 in-force status unverified in the note)",
+  "new_text": null
+ },
+ "loudounDC": {
+  "where_read": "register text (formula_register.json new_sources) read against municipal.md rows",
+  "claims": [
+   {
+    "claim": "'Loudoun SPEX only'",
+    "verdict": "NOT FOUND",
+    "evidence": "register text covers screening/soundproofing adjacent to residential; SPEX is from src19 (ZOAM-2024-0001)",
+    "fix": "cite src19's primary for SPEX"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ },
+ "_reused_rows_ok": {
+  "where_read": "register text (formula_register.json new_sources) read against municipal.md rows",
+  "claims": [
+   {
+    "claim": "rows match register text",
+    "verdict": "CONFIRMED",
+    "evidence": "arch_zon_Edm720, arch_rz_edmRezoning, arch_rz_vanCharter28, arch_rz_vanDAPfaq, vanFees2026 (proposed), edmProcTimes, bchDEP2025, bchExtension2026, bchTransmission, bcReg8_2026, bchCfDRfA, wes, epcor_ccg, alta117_2026, aesoBYOG2026 (proposal), auc_27938, rule012, arch_mv1329, mvBylaw1329, arch_mvSewerBylaw299, vanSewerCap2025, edm18100, edmBylaw18100 (id names repealed bylaw), epcorStorm, epcorDrainage2023 (conf 40, unread), arch_sys_bcWSA, bcWSRfees, arch_sys_abWaterLic, abNewLicenceLast, arch_sys_fishAct, arch_sys_dfoReview, dfoScreen, abConsult, arch_rz_vfpaLup2026, arch_rz_canMarineAct48, arch_zon_AbLegRefs2026, amsterdamDC2020 (host odnzkg.nl), hqZones",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": null
+ }
+}
