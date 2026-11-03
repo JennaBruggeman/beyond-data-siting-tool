@@ -129,3 +129,4 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - J.B. (2 Nov 2026): Architecture mode does not include the Exchanges steps; they stay in Engineering. (Arrange keeps its own heat budget.)
 - J.B. (2 Nov 2026, clarified): Architecture mode includes the MIXED-PROGRAM exchange (between the data centre and the programs on its own site); Engineering mode is about the greater URBAN exchange (neighbours, networks, the city). The 15139b3 skip removes the urban Exchanges steps from Architecture; an on-site exchange step replaces them.
 - J.B. (2 Nov 2026): Architecture mode starts by setting site ratios: first how much of the site to build on, then the split of program (e.g. 1/3 data centre, 2/3 pool); the massing, heat, layout and rules follow from those ratios.
+- J.B. (2 Nov 2026): the ratio splits FLOOR AREA (all storeys), not footprint.
