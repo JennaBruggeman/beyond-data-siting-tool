@@ -8,7 +8,7 @@
    15.448466375143676
   ],
   "L": 34.468,
-  "hd": 19.28914530284332,
+  "hd": 17.66854843197937,
   "F": [
    112.22830165742971,
    46.09693275028735
@@ -22,43 +22,43 @@
   "bu": [
    [
     -31.75,
-    -21.75
+    -3.75
    ],
    [
     -31.75,
-    -21.75
+    -17.75
    ],
    [
     -31.75,
-    -23.75
+    -15.75
+   ],
+   [
+    -31.75,
+    -15.75
+   ],
+   [
+    -31.75,
+    -17.75
    ]
   ],
   "plant": [
    [
     "air-cooled chillers",
     "roof",
-    -16,
-    -4,
+    -14,
+    -2,
     -13,
     -11
    ],
    [
     "air-cooled chillers",
     "roof",
-    -16,
-    -4,
+    -14,
+    -2,
     -7,
     -4
    ],
    [
-    "air-cooled chillers",
-    "roof",
-    -16,
-    -4,
-    0,
-    2
-   ],
-   [
     "standby generators",
     "yard",
     4,
@@ -79,14 +79,6 @@
     "yard",
     4,
     7,
-    -4,
-    5
-   ],
-   [
-    "standby generators",
-    "yard",
-    9,
-    11,
     -4,
     5
    ]
@@ -160,7 +152,7 @@
    "refuge",
    [
     -32,
-    -22
+    -4
    ],
    true,
    265,
@@ -170,80 +162,155 @@
    6
   ],
   [
+   "warming_shelter",
+   [
+    -32,
+    -18
+   ],
+   true,
+   100,
+   100,
+   0,
+   0,
+   6
+  ],
+  [
    "spa",
    [
     -32,
-    -22
+    -16
    ],
-   false,
+   true,
    320,
    320,
-   1,
-   6,
+   0,
+   0,
    12
   ],
   [
    "ev_hub",
    [
     -32,
-    -24
+    -16
    ],
    false,
    150,
    150,
    1,
    6,
-   12
+   6
+  ],
+  [
+   "greenhouse",
+   [
+    -32,
+    -18
+   ],
+   false,
+   190,
+   190,
+   2,
+   12,
+   6
   ]
  ],
  "hall": [
   0,
   18
  ],
+ "hallPick": {
+  "tried": 14,
+  "passed": 10,
+  "n": 14,
+  "under": false,
+  "best": {
+   "key": "2:-15.0,2.7:17.7",
+   "k": 2,
+   "st": 3,
+   "top": 18,
+   "along": "back",
+   "a": 1,
+   "fa": 312.1776036931977,
+   "drawn": 1025
+  },
+  "fails": [
+   [
+    "2:-9.8,2.7:25.0",
+    "1 of 2 air-cooled chillers do not fit on the roof."
+   ],
+   [
+    "2:-7.5,2.7:30.6",
+    "Noise: the cooling plant (roof) would give about 67 dBA (low-noise units: one rating) at the point of reception beside 275 1ST AVE E (I-3, activity zone), 24 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "2:-7.4,2.7:30.9",
+    "Noise: the cooling plant (roof) would give about 67 dBA (low-noise units: one rating) at the point of reception beside 275 1ST AVE E (I-3, activity zone), 24 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "2:-22.3,2.7:12.5",
+    "1 of 2 air-cooled chillers do not fit on the roof."
+   ]
+  ]
+ },
+ "hallUV": [
+  [
+   -15,
+   3
+  ],
+  [
+   -15,
+   2
+  ]
+ ],
+ "hallStoreys": 3,
  "space": {
-  "hall": 1192,
-  "prog": 735,
+  "hall": 624,
+  "prog": 1025,
   "cap": 5675.9564307854125
  },
  "heat": {
   "avail": [
-   6933.414857142857,
-   10643.4
+   3466.7074285714284,
+   5321.7
   ],
   "need": [
-   42.4,
-   42.4
+   120.87,
+   153.17
   ],
   "unknown": [
-   "spa"
+   "spa",
+   "warming_shelter"
   ]
  },
  "rules": [
-  "bad: Public indoor pool: no room that meets its placement rules (on the street front, for its own street entrance (Vancouver 10.21.1)); not drawn.",
-  "bad: Warming shelter: no room below the 18 m height limit that meets its placement rules (on the street front, for its own street entrance (Vancouver 10.21.1)); not drawn.",
-  "bad: Outpatient clinic: no room below the 18 m height limit that meets its placement rules (not at grade); not drawn.",
+  "bad: Public indoor pool: not drawn. Stopped by minimum size or sides: no free area of its size with sides of at least 11 × 27 m is left beside the hall, the plant, the plant yard and loading.",
+  "bad: Outpatient clinic: not drawn. Stopped by height: the 18 m limit (register van_zdb_i3).",
   "bad: Bathhouse / Nordic spa: 320 m² does not fit on one floor here; drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
-  "bad: EV charging hub: 150 m² does not fit on one floor here; drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
-  "bad: Greenhouse: no room below the 18 m height limit that meets its placement rules (flat on the ground or on what is built); not drawn.",
-  "bad: Fish farm: no room below the 18 m height limit that meets its placement rules (flat on the ground or on what is built); not drawn.",
+  "bad: Fish farm: 685 m² would pass the programs' share of the floor (1,703 m², 678 m² left); not drawn. Edit ratios to give programs more.",
   "note: Refuge in I-3: conditional (Community Centre or Neighbourhood House; Social Service Centre).",
   "note: Refuge: A-2, 2 h fire separation from the data centre (F-2).",
   "q: Refuge: keep-apart rules not checked here: generators (no distance in the source).",
+  "note: Warming shelter in I-3: conditional (Social Service Centre (day); overnight: no listed use ?).",
+  "note: Warming shelter: A-2, 2 h fire separation from the data centre (F-2).",
+  "q: Warming shelter: keep-apart rules not checked here: generators (no distance in the source).",
   "note: Bathhouse / Nordic spa in I-3: conditional (Beauty and Wellness Centre (hydrotherapy, thermal therapy)).",
   "note: Bathhouse / Nordic spa: A-3, 2 h fire separation from the data centre (F-2).",
   "q: Bathhouse / Nordic spa: keep-apart rules not checked here: generators (no distance in the source).",
   "note: EV charging hub in I-3: conditional (Parking Uses (may include retail sale of electricity)).",
   "note: EV charging hub: F-3, 1.5 h fire separation from the data centre (F-2).",
-  "q: EV charging hub: keep-apart rules not checked here: intakes (not modelled)."
+  "q: EV charging hub: keep-apart rules not checked here: intakes (not modelled).",
+  "note: Greenhouse in I-3: conditional (Urban Farm - Class B).",
+  "q: Greenhouse: fire separation from the data centre (F-2) ? (occupancy ?).",
+  "q: Greenhouse: keep-apart rules not checked here: hall (no distance in the source); generators (no distance in the source)."
  ],
  "side": "Arrange",
  "ratios": {
   "ratio": {
    "cover": 1892,
-   "dc": 21,
-   "prog": 79,
+   "dc": 11,
+   "prog": 30,
    "end": "low",
-   "mw": 1.8
+   "mw": 0.9
   },
   "base": {
    "lot": 4503,
@@ -261,18 +328,18 @@
    "allowed": 5676,
    "by": "envelope",
    "dcMax": 3784,
-   "dcM2": 1192,
-   "progM2": 4484,
-   "unused": 0,
+   "dcM2": 624,
+   "progM2": 1703,
+   "unused": 3349,
    "mw": [
-    1.88,
-    4.06
+    0.98,
+    2.13
    ],
-   "mwTest": 1.8
+   "mwTest": 0.9
   },
   "answers": {
-   "mw": 1.8,
-   "dcFloor": 1192
+   "mw": 0.9,
+   "dcFloor": 624
   },
   "side": [
    "Ratios"
@@ -286,19 +353,19 @@
   "stuck": false,
   "next": "Next: Programs"
  },
- "split": "Data centre 21% · 1,192 m² · 1.8–4.0 MW (testing 1.8) · programs 79% · 4,484 m² · unused 0% arch_ratios Edit ratios",
+ "split": "Data centre 11% · 624 m² · 0.9–2.1 MW (testing 0.9) · programs 30% · 1,703 m² · unused 59% arch_ratios Edit ratios",
  "saved": [
   [
    "suggest",
-   7,
-   16,
+   4,
+   19,
    27,
-   0.7052113621113845
+   0.7682845001118318
   ],
   [
    "lot",
-   10,
-   19,
+   8,
+   23,
    27,
    0
   ]

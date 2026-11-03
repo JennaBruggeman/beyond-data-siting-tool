@@ -20,7 +20,7 @@ To clear one: add its source to the register through `register/patches/*.py`, mo
 | tool/plant.js | 60 | 2, 40 | Provisional size before one is set: 2 storeys if the model has none, capped at 40 MW (the top of the slider). Tool choices. |
 | tool/site.js | 86 | 100 | Vancouver: no loading bay under 100 m² of floor. Not in the Parking By-law text the register quotes (vanParking5). |
 | tool/site.js | 112 | 4, 4, 4 | An existing building with no recorded height is taken as one storey at 4 m, and storeys as 4 m each (finding I-06, labelled in the tool). An assumption. |
-| tool/site.js | 160 | 12, 12 | A sized-down data hall is kept at least 12 m deep. A tool choice. |
+| tool/site.js | 162 | 12, 12 | A sized-down data hall is kept at least 12 m deep. A tool choice. |
 | tool/decide.js | 60 | 70, 70 | Default coverage 70 % on the coverage slider (`A.cover||70`). A UI default. |
 | tool/decide.js | 64 | 12 | Storeys input capped at 12 (input max). A UI limit. |
 | tool/decide.js | 101 | 8 | A building under 8 m tall is read as "one or two storeys" (lease feasibility). An assumption, no source. |
@@ -33,10 +33,14 @@ To clear one: add its source to the register through `register/patches/*.py`, mo
 | tool/addons.js | 115 | 67.9, 49.67 | Fallback electricity price, $/MWh, used when BD.ECON has not loaded. 67.9 matches BC LGS 6.79 ¢/kWh (register electricity_price). 49.67 for Edmonton has no register text. |
 | tool/tiers.js | 17 | 2.5 | `TYPICAL_MW`, the residents' "typical" size. The register calls "2–4 MW typical downtown colocation" an internal note read across operator claims, with no primary source. |
 | tool/arch.js | 59 | 6, 6 | Smallest side of any block except the pool, 6 × 6 m. The code comment calls it "a drawing rule, not a code rule". No source. |
-| tool/arch.js | 78 | 2 | Placement grid cell, 2 m (`cs`). Blocks are sized and placed in 2 m steps. A tool choice. |
-| tool/arch.js | 106 | 2 | Refuge as its own building: one 2 m cell kept clear all round ("drawn, not a rule"). A tool choice. |
-| tool/arch.js | 108 | 8 | Placement tries up to 8 storeys for a block. A tool limit. |
-| tool/arch.js | 362 | 6 | Storeys typed for a block clamped to 1–6. A UI limit. |
-| tool/arch.js | 364 | 10, 100 | Resize step when a program has no step: 10 % of its size, at least 10 m² (100 m² taken when size is not set). A UI choice. |
-| tool/arch.js | 374 | 12 | Up to 12 passes when shrinking other blocks to make room. A loop limit. |
-| tool/arch.js | 279 | 4 | Ratios: up to 4 passes to settle the data centre's cap while the plant yard moves with the MW (rebuild part 1, 3 Nov 2026). A loop limit. |
+| tool/arch.js | 102 | 2 | Placement grid cell, 2 m (`cs`). Blocks are sized and placed in 2 m steps. A tool choice. |
+| tool/arch.js | 135 | 2 | Refuge as its own building: one 2 m cell kept clear all round ("drawn, not a rule"). A tool choice. |
+| tool/arch.js | 139 | 8 | Placement tries up to 8 storeys for a block. A tool limit. |
+| tool/arch.js | 411 | 6 | Storeys typed for a block clamped to 1–6. A UI limit. |
+| tool/arch.js | 413 | 10, 100 | Resize step when a program has no step: 10 % of its size, at least 10 m² (100 m² taken when size is not set). A UI choice. |
+| tool/arch.js | 423 | 12 | Up to 12 passes when shrinking other blocks to make room. A loop limit. |
+| tool/arch.js | 325 | 4 | Ratios: up to 4 passes to settle the data centre's cap while the plant yard moves with the MW (rebuild part 1, 3 Nov 2026). A loop limit. |
+| tool/site.js | 197 | 6 | Hall fix (3 Nov 2026): a hall footprint option has no side under 6 m (the same drawing rule as the program blocks). A tool choice. |
+| tool/site.js | 199 | 2, 3, 4 | Hall fix: hall footprint proportions tried, 1, 1.5, 2, 3 and 4 : 1, then full width or length. A tool choice, not a rule. |
+| tool/arch.js | 82 | 10000 | Hall fix: tie-break weight that ranks an option leaving a street-entrance program undrawn after every option that draws it. Arithmetic for the ranking. |
+| tool/arch.js | 160 | 8 | Hall fix: the "not drawn" text gives the block's floor over 1 to 8 storeys, the placement limit above. |

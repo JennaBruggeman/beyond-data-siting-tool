@@ -1,0 +1,263 @@
+{
+ "dbg": {
+  "a0": 10.129510344571166,
+  "uf": -31.205510344571167,
+  "dir": -1,
+  "v": [
+   -29.021238789634026,
+   29.021238789634026
+  ],
+  "L": 41.33502068914233,
+  "hd": 37.292470251031894,
+  "F": [
+   74.41102068914233,
+   58.04247757926805
+  ],
+  "uBuild": [
+   22.105510344571165,
+   -31.205510344571167
+  ],
+  "pyd": 11.975999999999999,
+  "front": -31.205510344571167,
+  "bu": [],
+  "plant": [
+   [
+    "standby generators",
+    "yard",
+    12,
+    15,
+    -28,
+    -14
+   ],
+   [
+    "standby generators",
+    "yard",
+    17,
+    21,
+    -28,
+    -14
+   ],
+   [
+    "standby generators",
+    "yard",
+    12,
+    15,
+    -12,
+    1
+   ],
+   [
+    "standby generators",
+    "yard",
+    17,
+    21,
+    -12,
+    1
+   ],
+   [
+    "standby generators",
+    "yard",
+    12,
+    15,
+    3,
+    17
+   ],
+   [
+    "standby generators",
+    "yard",
+    17,
+    21,
+    3,
+    17
+   ]
+  ],
+  "yard": [
+   [
+    10,
+    -29
+   ],
+   [
+    22,
+    -29
+   ],
+   [
+    22,
+    29
+   ],
+   [
+    10,
+    29
+   ]
+  ],
+  "load": [
+   [
+    23,
+    -29
+   ],
+   [
+    36,
+    -29
+   ],
+   [
+    36,
+    23
+   ],
+   [
+    23,
+    23
+   ]
+  ]
+ },
+ "steps": [
+  "site",
+  "setup",
+  "fits",
+  "prec",
+  "heat",
+  "energy",
+  "water",
+  "materials",
+  "social",
+  "opps",
+  "spec",
+  "opts",
+  "time",
+  "arat",
+  "aprog",
+  "aarr",
+  "acmp",
+  "cities",
+  "report"
+ ],
+ "bar": [
+  "Site",
+  "People",
+  "Design",
+  "Report"
+ ],
+ "boxes": [],
+ "hall": [
+  0,
+  12
+ ],
+ "hallPick": {
+  "tried": 2,
+  "passed": 2,
+  "n": 2,
+  "under": false,
+  "best": {
+   "key": "2:-27.2,10.1:55.1",
+   "k": 2,
+   "st": 2,
+   "top": 12,
+   "along": "back",
+   "a": 1.5,
+   "fa": 2056.32,
+   "drawn": 0
+  }
+ },
+ "hallUV": [
+  [
+   -27,
+   10
+  ],
+  [
+   -29,
+   26
+  ]
+ ],
+ "hallStoreys": 2,
+ "space": {
+  "hall": 4113,
+  "prog": 0,
+  "cap": 6854.400000000001
+ },
+ "heat": {
+  "avail": [
+   24652.141714285714,
+   37843.200000000004
+  ],
+  "need": [
+   0,
+   0
+  ],
+  "unknown": []
+ },
+ "rules": [
+  "bad: Refuge: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 16 m limit (register edm_bl20001).",
+  "bad: Public indoor pool: 1,065 m² is over the 500 m² this use may have in BE; not drawn. Its sourced minimum (815 m²) is over the cap, so it cannot go on a BE lot.",
+  "bad: Warming shelter: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 16 m limit (register edm_bl20001).",
+  "bad: Outpatient clinic: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 16 m limit (register edm_bl20001).",
+  "bad: Bathhouse / Nordic spa: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 16 m limit (register edm_bl20001).",
+  "bad: EV charging hub: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 16 m limit (register edm_bl20001).",
+  "bad: Greenhouse: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 16 m limit (register edm_bl20001).",
+  "bad: Fish farm: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 16 m limit (register edm_bl20001)."
+ ],
+ "side": "Arrange",
+ "ratios": {
+  "ratio": {
+   "cover": 3935,
+   "dc": 60,
+   "prog": 30,
+   "end": "low",
+   "mw": 6.4
+  },
+  "base": {
+   "lot": 4284,
+   "build": 3935,
+   "floors": 2,
+   "dataFl": 2,
+   "fsr": 1.6,
+   "coverNone": false,
+   "perMW": [
+    293.4,
+    635.0999999999999
+   ]
+  },
+  "calc": {
+   "allowed": 6854,
+   "by": "fsr",
+   "dcMax": 6854,
+   "dcM2": 4113,
+   "progM2": 2056,
+   "unused": 685,
+   "mw": [
+    6.48,
+    14.02
+   ],
+   "mwTest": 6.4
+  },
+  "answers": {
+   "mw": 6.4,
+   "dcFloor": 4113
+  },
+  "side": [
+   "Ratios"
+  ],
+  "tabs": [
+   "Ratios *",
+   "Arrange (off)",
+   "Exchange (off)",
+   "Compare (off)"
+  ],
+  "stuck": false,
+  "next": "Next: Programs"
+ },
+ "split": "Data centre 60% · 4,113 m² · 6.4–14.0 MW (testing 6.4) · programs 30% · 2,056 m² · unused 10% arch_ratios Edit ratios",
+ "saved": [
+  [
+   "suggest",
+   8,
+   8,
+   0,
+   0.19288742345737164
+  ],
+  [
+   "lot",
+   8,
+   8,
+   0,
+   0
+  ]
+ ],
+ "errors": []
+}

@@ -95,7 +95,7 @@ let cache={key:null,m:null};
 function model(){
   const S=BD.S, s=S.sel, A=S.answers; if(!s) return null; if(!A.built) A.built='new'; if(!A.extent) A.extent='whole'; /* the labelled defaults (lot test 20 Oct) */
   { const a0=s.a||[], Z0=zoneLimits(s.city,s.city==='van'?(a0[1]||''):(a0[2]||a0[1]||'')); if(Z0.screen&&(!A.vis||A.vis==='reveal')) A.vis='screen'; } /* 2 Nov 2026 hard rules: screening required (Z.screen) */
-  const key=JSON.stringify([s.city,s.id,A.built,A.extent,A.floor,A.foot,A.cover,A.loadIn,A.flip,A.hmode,A.storeys,A.userFSR,A.userH,A.plantAt,A.outside,A.inside,A.spares,A.gens,A.genAt,A.genSpares,A.mw,A.vis,A.subB,A.dcFloor,A.dcSite]);
+  const key=JSON.stringify([s.city,s.id,A.built,A.extent,A.floor,A.foot,A.cover,A.loadIn,A.flip,A.hmode,A.storeys,A.userFSR,A.userH,A.plantAt,A.outside,A.inside,A.spares,A.gens,A.genAt,A.genSpares,A.mw,A.vis,A.subB,A.dcFloor,A.dcSite,A.hallOpt]);
   if(cache.key===key) return cache.m;
   const a=s.a||[], city=s.city, zraw=city==='van'?(a[1]||''):(a[2]||a[1]||'');
   const Z=zoneLimits(city,zraw);
@@ -155,15 +155,25 @@ function model(){
       // J.B., 16 Oct: "the server amount changes but the building doesnt shrink" — when a size is set, the building is only as big as that size needs:
       // floor = MW × 460 m² of hall per MW (built Canadian halls 290–630, operator claims) ÷ 0.6 hall share (48–72%), spread over the storeys; centred in the buildable rectangle
       if(A.mw&&m.footMode==='max'&&BD.eng){ const R=BD.eng.R, perMW=(R.m2PerMW[0]+R.m2PerMW[1])/2/((R.hallShare[0]+R.hallShare[1])/2), floors=Math.max(1,m.Z&&m.Z.ground?m.nF[0]-1:m.nF[0]), /* 29 Oct 2026: data floors only where the zone keeps the ground floor for other uses (as the 3D and the hall count already do) */ dcF=A.dcFloor&&A.dcSite===BD.S.sel.id?A.dcFloor:null, need=(dcF||A.mw*perMW)/floors, W=q[1]-q[0], H=q[3]-q[2];
-        if(dcF&&need<=W*H+0.01){ /* 3 Nov 2026 (Architecture Ratios): the full width at the back of the buildable area, so the street front stays free for the programs (a drawing choice, not a rule) */
-          const du=need/H, frontLo=Math.abs(q[0]-m.uFront)<=Math.abs(q[1]-m.uFront), ua=frontLo?q[1]-du:q[0], ub=frontLo?q[1]:q[0]+du; m.serverFoot=rectW(F,ua,ub,q[2],q[3]); m.sizedTo={mw:A.mw,floor:dcF,perMW:dcF/A.mw,ratio:true}; }
+        if(dcF&&need<=W*H+0.01){ /* 3 Nov 2026 (Architecture Ratios): the full width at the back of the buildable area, to the height limit (a drawing choice, not a rule).
+            Hall fix (3 Nov 2026, HALLFIX brief): this is now only the fallback ("full"). The hall's footprint options (hallOptions) are tried below, before the roof plant is placed. */
+          const du=need/H, frontLo=Math.abs(q[0]-m.uFront)<=Math.abs(q[1]-m.uFront), ua=frontLo?q[1]-du:q[0], ub=frontLo?q[1]:q[0]+du; m.serverFoot=rectW(F,ua,ub,q[2],q[3]); m.sizedTo={mw:A.mw,floor:dcF,perMW:dcF/A.mw,ratio:true};
+          m.hallFull=m.serverFoot; m.hallOpts=hallOptions(q,dcF,floors,m,ftf,frontLo); }
         else if(need<W*H*0.98){ const k=Math.sqrt(need/(W*H)), cu=(q[0]+q[1])/2, cv=(q[2]+q[3])/2; let w=W*k, h=H*k; if(h<12){ h=Math.min(H,12); w=need/h; } m.serverFoot=rectW(F,cu-w/2,cu+w/2,cv-h/2,cv+h/2); m.sizedTo=dcF?{mw:A.mw,floor:dcF,perMW:dcF/A.mw,ratio:true}:{mw:A.mw,floor:A.mw*perMW,perMW}; } }
       // capacity is always worked out on the most the lot allows; the drawn floor is only the chosen size (no feedback into "what fits")
       const rr=rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); m.foot=clip(ring,rr); m.footRect=rr; m.simpleMass=true;
       if(!m.serverFoot) m.serverFoot=rectW(F,q[0],q[1],q[2],q[3]); } else { const r=rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); m.foot=clip(ring,r); m.footRect=r; } }
   if(m.foot&&!m.footArea) m.footArea=BD.area(m.foot);
   if(m.foot&&!m.existing&&m.footArea<20) m.warn.push('After setbacks, loading and plant there is almost no room left for a building on this lot.');
-  if(BD.plant&&BD.plant.roof) BD.plant.roof(m);
+  if(BD.plant&&BD.plant.roof){
+    /* hall fix (3 Nov 2026): with a ratio set, the hall takes the option Arrange chose (A.hallOpt). With none chosen, the first option, smallest footprint first,
+       whose roof holds the roof plant; if none does, the full-width fallback. "full" keeps the fallback (the refuge under the hall). */
+    const HO=m.hallOpts&&m.hallOpts.length&&A.hallOpt!=='full'?m.hallOpts:null;
+    if(HO){ const P=m.plant, keep=P?{coolRoof:P.coolRoof,short:P.short}:null;
+      const tryO=o=>{ if(P) Object.assign(P,keep); setHall(m,o); BD.plant.roof(m); return !(m.plant&&m.plant.miss&&m.plant.miss.length); };
+      const pick=HO.find(o=>o.key===A.hallOpt); let ok=false;
+      if(pick) tryO(pick); else { for(const o of HO){ if(tryO(o)){ ok=true; break; } } if(!ok){ setHall(m,null); if(P) Object.assign(P,keep); BD.plant.roof(m); } } }
+    else BD.plant.roof(m); }
   /* 2 Nov 2026 hard rules (site audit 4): fuel on site against NFC 2020 Table 4.3.13.4.-B (register nfc2020_4313). Generator sets on the roof keep
      their sub-base tanks above the first storey: at most 20,000 L in one storage area there (tanks over 2,500 L each). The table is written for tanks
      inside buildings; rooftop outdoor tanks are not covered by the text read, so the tool applies the upper-storey limit to them (our reading ?).
@@ -177,6 +187,23 @@ function model(){
      required (nc.req, in m.notes, before the flag). */
   m.notes=[]; if(BD.eng&&BD.eng.noiseCheck){ let nc=null; try{ nc=BD.eng.noiseCheck(m); }catch(e){ console.warn(e); } m.noise=nc; if(nc&&nc.block) m.warn.push(nc.block); else { if(nc&&nc.req) m.notes.push(nc.req); if(nc&&nc.flag) m.notes.push(nc.flag); } }
   cache={key,m}; return m; }
+/* hall fix (3 Nov 2026, HALLFIX brief): with a ratio set, the hall's footprint options. Its floor (the data centre's share) over k data storeys, k from the most the
+   height holds down to 1; storey heights from the register (ground 6.0 m: envelope, van_zdb_i2/i3; hall floors 6.0 m: burlingtonPlans2026 — engine R.ftf).
+   Where the zone keeps the ground floor for other uses (Z.ground: I-2, I-3, FC-2) the hall stands on one ground storey that is not data hall, as before.
+   Each footprint sits at the back end of the buildable area (inside the yards, behind loading and the plant yard), against one side: along the back
+   (long side across the lot) or along the side (long side front to back), from compact (square) to long (1.5, 2, 3, 4 : 1, then full width or length).
+   Order: smallest footprint first, then compact before long, back before side. Which one is drawn is chosen in Arrange (arch.js). Where it sits, its
+   proportions and the 6 m least side are drawing rules, not code rules. */
+function hallOptions(q,D,kMax,m,ftf,frontLo){ const g=m.Z&&m.Z.ground?1:0, Lq=q[1]-q[0], Wq=q[3]-q[2], out=[], seen=new Set(), MIN=6;
+  for(let k=Math.max(1,kMax);k>=1;k--){ const fa=D/k; if(fa>Lq*Wq+0.01) break; const top=ftf.ground+(k+g-1)*ftf.up[1]; if(top>m.H+0.01) continue;
+    for(const along of ['back','side']) for(const a of [1,1.5,2,3,4,0]){ let du,dv;
+      if(along==='back'){ dv=a?Math.min(Wq,Math.sqrt(fa*a)):Wq; du=fa/dv; } else { du=a?Math.min(Lq,Math.sqrt(fa*a)):Lq; dv=fa/du; }
+      if(du>Lq+0.01||dv>Wq+0.01||Math.min(du,dv)<MIN-0.01) continue;
+      const u=frontLo?[q[1]-du,q[1]]:[q[0],q[0]+du], v=[q[2],q[2]+dv], key=k+':'+u.map(x=>x.toFixed(1)).join(',')+':'+dv.toFixed(1); if(seen.has(key)) continue; seen.add(key);
+      out.push({key,k,st:k+g,top,along,a,u,v,fa}); } }
+  return out; }
+function setHall(m,o){ if(!o){ m.serverFoot=m.hallFull; delete m.hallTop; delete m.hallStoreys; delete m.hallData; delete m.hallOpt; m.hallFallback=true; return; }
+  m.serverFoot=rectW(m.F,o.u[0],o.u[1],o.v[0],o.v[1]); m.hallTop=o.top; m.hallStoreys=o.st; m.hallData=o.k; m.hallOpt=o.key; m.hallFallback=false; }
 BD.siteGeo={rectW,inscribe,clip,frameOf}; BD.model=model; BD.modelReset=()=>{ cache.key=null; };
 /* a set-up that does not work (J.B. 20 Oct: "a set up that doesnt work shouldnt ever let you click next"): everything that stops it, in words */
 function setupProblems(noFloor){ const m=model(); if(!m||!m.F) return []; const p=(m.warn||[]).slice();

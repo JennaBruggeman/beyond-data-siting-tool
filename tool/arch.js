@@ -58,30 +58,59 @@ function industrialUse(q,code){ if(['heat_plant','food_drying','lumber_drying','
    1.8 m in Alberta (NBC(AE) 7.2.3.15, arch_sup_nbcAE7Pools), 1.2 m in BC (arch_bcPoolDesign2025 s. 3.2). Every other block: 6 m, a drawing rule, not a code rule. */
 function minDims(id,city){ if(id==='pool'){ const d=AD.poolDeck[city==='edm'?'edm':'van']; return [AD.poolTank[0]+2*d,AD.poolTank[1]+2*d]; } return [6,6]; } // pool: tool/data/arch.json
 function zoneCode(){ const s=BD.S.sel||{}, a=s.a||[]; return String(s.city==='van'?(a[1]||''):(a[2]||a[1]||'')).toUpperCase().trim(); }
-function place(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,uf,ftf}=s; const out={s,boxes:[],flags:[],hall:null,levels:[]};
+/* hall fix (3 Nov 2026, HALLFIX brief): with a ratio set, the hall is drawn at the storeys its floor needs over one of its footprint options (site.js hallOptions).
+   Arrange tries every option whose set-up passes (site.js setupProblems: plant on the roof and in the yard, loading, fuel, noise), places the programs on
+   each, and keeps the one that draws the most of the programs' floor share. Ties: fewer programs spread over more storeys than their own, then street-entrance
+   programs nearest the street, then the option order (smallest footprint first). Deterministic. No ratio: unchanged. The refuge under the hall keeps the
+   full-width hall ("full"). If no option passes, the full-width hall is drawn, as before, and said. */
+let hallPick={key:null,opt:null,info:null};
+function place(){ const An=BD.S.answers; if(!ratioNow()){ hallPick.key=null; return placeOnce(); }
+  const refuge=pickOf('refuge'), under=!!(refuge&&refuge.opt==='under_hall');
+  const key=JSON.stringify([selId(),A.picks,A.ratio,Object.assign({},An,{hallOpt:null})]);
+  if(hallPick.key!==key){ let info={tried:0,passed:0,n:0,under,best:null};
+    if(under){ An.hallOpt='full'; }
+    else { An.hallOpt=null; BD.modelReset(); const M0=BD.model(), opts=(M0&&M0.hallOpts)||[]; info.n=opts.length; let best=null;
+      for(const o of opts){ An.hallOpt=o.key; BD.modelReset(); info.tried++; { const pr=BD.setupProblems(true); if(pr.length){ (info.fails=info.fails||[]).push([o.key,pr[0]]); continue; } } const P=placeOnce(); if(!P||!P.s.M.hallOpt) continue; info.passed++;
+        const sc=hallScore(P); if(!best||sc[0]>best.sc[0]+0.5||(Math.abs(sc[0]-best.sc[0])<=0.5&&(sc[1]<best.sc[1]||(sc[1]===best.sc[1]&&sc[2]<best.sc[2]-0.01)))) best={o,sc}; }
+      An.hallOpt=best?best.o.key:'full'; info.best=best&&{key:best.o.key,k:best.o.k,st:best.o.st,top:best.o.top,along:best.o.along,a:best.o.a,fa:best.o.fa,drawn:best.sc[0]}; }
+    BD.modelReset(); hallPick={key,opt:An.hallOpt,info}; }
+  else if(An.hallOpt!==hallPick.opt){ An.hallOpt=hallPick.opt; BD.modelReset(); }
+  const P=placeOnce(); if(!P) return P; P.hallPick=hallPick.info;
+  if(!under&&An.hallOpt==='full') P.flags.unshift({t:`Data hall: none of its ${hallPick.info.n} footprint options passes the set-up here (plant on its roof, loading, fuel or noise), so it is drawn full width at the back, to the height limit, as before (a drawing choice, not a rule).`,src:['arch_ratios'],sev:'note'});
+  return P; }
+function hallScore(P){ const drawn=P.boxes.reduce((t,b)=>t+(b.q.m2||0),0), spread=P.boxes.filter(b=>b.spread).length;
+  const street=P.boxes.filter(b=>b.p.place&&b.p.place.street_entrance).reduce((t,b)=>t+Math.min(Math.abs(b.u[0]-P.s.uf),Math.abs(b.u[1]-P.s.uf)),0)+(P.notDrawn||[]).filter(id=>{ const p=CAT.byId[id]; return p&&p.place&&p.place.street_entrance; }).length*1e4;
+  return [drawn,spread,street]; }
+function placeOnce(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,uf,ftf}=s; const out={s,boxes:[],flags:[],hall:null,levels:[]};
   const refuge=pickOf('refuge'), under=refuge&&refuge.opt==='under_hall';
   const toL=r=>{ const o=[]; for(let k=0;k<r.length;k+=2) o.push(F.toL(r[k],r[k+1])); return o; }, ext=r=>{ const L=toL(r); return [Math.min(...L.map(p=>p[0])),Math.max(...L.map(p=>p[0])),Math.min(...L.map(p=>p[1])),Math.max(...L.map(p=>p[1]))]; };
   // the hall where the set-up's model puts it (centred in the buildable area; its roof plant sits on it)
   const hf=s.M.serverFoot||s.M.foot; let [hu0,hu1,hv0,hv1]=ext(hf); const um=[Math.min(a0,uf),Math.max(a0,uf)];
   if(under){ /* the hall gives up its ground floor: the same floor over one floor fewer (our arithmetic) */ const k=s.floors/Math.max(1,s.floors-1), cu=(hu0+hu1)/2; const wu=Math.min((hu1-hu0)*k,um[1]-um[0]); hu0=Math.max(um[0],cu-wu/2); hu1=Math.min(um[1],hu0+wu); }
-  const hallBase=under?ftf.ground:0, hallH=Math.max(ftf.ground,s.H-hallBase), hallTop=hallBase+hallH;
-  out.hall={ring:G.rectW(F,hu0,hu1,hv0,hv1),base:hallBase,h:hallH,u:[hu0,hu1],v:[hv0,hv1],kind:'hall'};
+  const hallOwn=!under&&s.M.hallTop?s.M.hallTop:null; /* hall fix: a ratio-set hall at its own storeys (site.js setHall) */
+  const hallBase=under?ftf.ground:0, hallH=hallOwn?hallOwn:Math.max(ftf.ground,s.H-hallBase), hallTop=hallBase+hallH;
+  out.hall={ring:G.rectW(F,hu0,hu1,hv0,hv1),base:hallBase,h:hallH,u:[hu0,hu1],v:[hv0,hv1],kind:'hall',storeys:hallOwn?s.M.hallStoreys:s.floors,own:!!hallOwn};
   if(under) out.flags.push({t:`The refuge under the hall takes the hall's ground floor; the hall's floor is spread over the ${Math.max(1,s.floors-1)} floor${s.floors-1===1?'':'s'} above (our arithmetic). The rest of that ground floor is drawn empty.`,src:['arch_up_vanZDB10'],sev:'note'});
   const keep=w=>Math.max(0,...A.picks.map(q=>CAT.byId[q.id]).filter(Boolean).flatMap(p=>(p.adj||[]).filter(a=>a.rule==='keep apart'&&a.hard&&a.m!=null&&a.with===w&&!/evaporative/i.test(a.note||'')).map(a=>a.m)));
   const kG=keep('generators'), kC=keep('chillers'), kL=keep('loading'), kE=Math.max(0,...A.picks.map(q=>CAT.byId[q.id]).filter(Boolean).flatMap(p=>(p.adj||[]).filter(a=>a.rule==='keep apart'&&a.hard&&a.m!=null&&a.with==='chillers'&&/evaporative/i.test(a.note||'')).map(a=>a.m)));
   // what is already there: [u0,u1,v0,v1,zBase,zTop,noGo]
   const occ=[[hu0,hu1,hv0,hv1,0,hallTop,false]]; // the hall: built from the ground (or the refuge's floor) to its roof
-  for(const b of (s.M.plant&&s.M.plant.boxes||[])){ const e=ext(b.clear||b.ring); const k0=b.name.indexOf('generator')>=0?kG:/tower|evapor|adiabatic|hybrid/i.test(b.name)?Math.max(kC,kE):kC; if(b.kind==='roof'){ occ.push([e[0]-k0,e[1]+k0,e[2]-k0,e[3]+k0,0,1e9,true]); continue; } // roof plant: open to the sky, nothing built over it (review 2, N2)
-    occ.push([e[0]-k0,e[1]+k0,e[2]-k0,e[3]+k0,0,1e9,true]); } // NBC 6.3.2.9 and 6.3.2.15.(5) distances widen the no-go (code audit F5, F6)
+  for(const b of (s.M.plant&&s.M.plant.boxes||[])){ const e=ext(b.clear||b.ring); const k0=b.name.indexOf('generator')>=0?kG:/tower|evapor|adiabatic|hybrid/i.test(b.name)?Math.max(kC,kE):kC; if(b.kind==='roof'){ occ.push([e[0],e[1],e[2],e[3],0,1e9,true,k0]); continue; } // roof plant: open to the sky, nothing built over it (review 2, N2)
+    occ.push([e[0],e[1],e[2],e[3],0,1e9,true,k0]); } // NBC 6.3.2.9 and 6.3.2.15.(5) distances widen the no-go (code audit F5, F6); [7] = the widening, so a program stopped only by it can be named (hall fix)
   if(s.M.plant&&s.M.plant.yard){ const y=BD.geo.clip(s.M.ring,s.M.plant.yard); if(y&&y.length>=6){ const e=ext(y); occ.push([e[0],e[1],e[2],e[3],0,1e9,true]); } }
-  if(s.M.loading){ const e=ext(s.M.loading); occ.push([e[0]-kL,e[1]+kL,e[2]-kL,e[3]+kL,0,1e9,true]); }
+  if(s.M.loading){ const e=ext(s.M.loading); occ.push([e[0],e[1],e[2],e[3],0,1e9,true,kL]); }
   const bu0=um[0], bu1=um[1], bw=v1-v0, bl=bu1-bu0, cs=2, nU=Math.max(1,Math.floor(bl/cs)), nV=Math.max(1,Math.floor(bw/cs));
   // a 2 m height grid over the buildable area: the top of what stands on each cell, or no-go (review 2, N1: a block must rest flat on what is under it)
   /* a cell is taken if anything overlaps any part of it (not just its centre), and cells not wholly inside the lot are no-go (review of J.B.'s screenshot, 2 Nov 2026) */
   const lotR=s.M.ring, inLot=(u,v)=>{ const w=F.toW(u,v); return inside(w,lotR); };
-  const HG=()=>{ const g=new Float64Array(nU*nV); for(let i=0;i<nU;i++) for(let j=0;j<nV;j++){ const ua=dir<0?bu0+i*cs:bu1-(i+1)*cs, ub=ua+cs, va=v0+j*cs, vb=va+cs; let t=0;
+  const HG=(noKeep)=>{ const g=new Float64Array(nU*nV); for(let i=0;i<nU;i++) for(let j=0;j<nV;j++){ const ua=dir<0?bu0+i*cs:bu1-(i+1)*cs, ub=ua+cs, va=v0+j*cs, vb=va+cs; let t=0;
       if(!(inLot(ua+0.05,va+0.05)&&inLot(ub-0.05,va+0.05)&&inLot(ua+0.05,vb-0.05)&&inLot(ub-0.05,vb-0.05))){ g[i*nV+j]=Infinity; continue; }
-      for(const o of occ){ if(ua<o[1]-0.01&&o[0]<ub-0.01&&va<o[3]-0.01&&o[2]<vb-0.01){ if(o[6]){ t=Infinity; break; } t=Math.max(t,o[5]); } } g[i*nV+j]=t; } return g; };
+      for(const o of occ){ const k=noKeep?0:(o[7]||0); if(ua<o[1]+k-0.01&&o[0]-k<ub-0.01&&va<o[3]+k-0.01&&o[2]-k<vb-0.01){ if(o[6]){ t=Infinity; break; } t=Math.max(t,o[5]); } } g[i*nV+j]=t; } return g; };
+  /* the street front, per column of cells: the first row wholly inside the lot. Hall fix (3 Nov 2026): on CLARK row 0 lies outside the lot along most of the front,
+     so no street-entrance program could ever be drawn; with a ratio set a block is on the street front when it reaches that row in at least one of its columns.
+     Without a ratio, row 0 as before (unchanged behaviour). */
+  const fRow=(()=>{ const r=new Int32Array(nV); for(let j=0;j<nV;j++){ r[j]=ratioNow()?nU:0; if(!ratioNow()) continue; for(let i=0;i<nU;i++){ const ua=dir<0?bu0+i*cs:bu1-(i+1)*cs, ub=ua+cs, va=v0+j*cs, vb=va+cs; if(inLot(ua+0.05,va+0.05)&&inLot(ub-0.05,va+0.05)&&inLot(ua+0.05,vb-0.05)&&inLot(ub-0.05,vb-0.05)){ r[j]=i; break; } } } return r; })();
+  const onFront=(i,j,wc)=>{ for(let b=j;b<j+wc;b++) if(fRow[b]===i) return true; return false; };
   const masses=A.picks.map(q=>({q,p:CAT.byId[q.id]})).filter(x=>x.p&&x.p.kind==='mass'&&!(x.q.id==='refuge'&&under));
   const prio=x=>(x.p.place&&x.p.place.street_entrance?0:x.p.place&&x.p.place.grade==='at grade'?1:x.p.place&&x.p.place.public?2:3);
   masses.sort((a,b)=>prio(a)-prio(b));
@@ -104,23 +133,40 @@ function place(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,
     if(capF!=null&&floorUsed+q.m2>capF+0.5){ out.flags.push({t:`${nm}: ${n0(q.m2)} m² would pass the floor-space ratio (${n0(capF)} m² on this lot, ${n0(Math.max(0,capF-floorUsed))} m² left); not drawn.`,src:s.city==='van'?['van_zdb_i2','van_zdb_i3']:['edm_bl20001'],sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
     const grade=p.place&&p.place.grade, mustSt=s.city==='van'&&p.place&&p.place.street_entrance&&!(q.id==='refuge'&&q.opt==='side_by_side'&&false), atG=grade==='at grade'||mustSt, notG=grade==='not at grade'&&notAtGradeHere(p), roof=q.place==='roof';
     const sh=(p.size&&p.size.floor_height_m||ftf.ground), own=q.id==='refuge'&&q.opt==='own_building', gc=own?2:0; // own building: one 2 m cell clear all round (drawn, not a rule)
-    const g=HG(); let tall=false, covHit=false, best=null, st0=Math.max(1,q.storeys||1), st=st0;
-    for(;st<=8&&!best;st++){ const fp=q.m2/st;
-      const [mA,mB]=minDims(q.id,s.city); // short and long sides a program needs to work
-      for(const [wc0,dc0] of [[nV,Math.ceil(fp/(nV*cs*cs))],...[1,0.5,2,0.25,4].map(a=>{ const w=Math.sqrt(fp/a)/cs, d=fp/(w*cs*cs); return [Math.ceil(w),Math.ceil(d)]; })]){ const wc=Math.min(wc0,nV), dc=Math.ceil(fp/(wc*cs*cs)); if(dc>nU||wc<1) continue;
-        { const a=Math.min(wc,dc)*cs, b=Math.max(wc,dc)*cs; if(a<mA-0.01||b<mB-0.01) continue; }
-        for(let i=0;i+dc<=nU;i++) for(let j=0;j+wc<=nV;j++){ let base=-1, ok=true;
-          for(let a=i-gc;a<i+dc+gc&&ok;a++) for(let b=j-gc;b<j+wc+gc;b++){ if(a<0||b<0||a>=nU||b>=nV){ if(gc) continue; ok=false; break; } const t=g[a*nV+b]; const inF=a>=i&&a<i+dc&&b>=j&&b<j+wc;
-            if(t===Infinity){ ok=false; break; } if(!inF){ if(t>0) { ok=false; break; } continue; } if(base<0) base=t; else if(Math.abs(t-base)>0.1){ ok=false; break; } if(own&&t>0){ ok=false; break; } }
-          if(!ok) continue; if(base+sh*st>Hmax+0.01){ tall=true; continue; } if(roof&&base<hallTop-0.01) continue; if(atG&&base>0) continue; if(RT&&base===0&&gUsed+fp>RT.cover+0.5){ covHit=true; continue; } /* coverage set in Ratios */ if(mustSt&&i!==0) continue; /* Vancouver 10.21.1: its main entrance from a street (arch_up_vanZDB10) */ if(notG&&base===0) continue;
-          const sc=base*1e4+i*10+j*0.01; if(!best||sc<best.sc) best={sc,base,i,j,dc,wc}; }
-      }
-      if(best) break; }
-    if(!best){ out.flags.push({t:`${nm}: no room ${tall?'below the '+n0(Hmax)+' m height limit ':''}${covHit?'within the building coverage set in Ratios ('+n0(RT.cover)+' m²) ':''}that meets its placement rules (${mustSt?'on the street front, for its own street entrance (Vancouver 10.21.1)':atG?'at grade':notG?'not at grade':roof?'on the hall roof':'flat on the ground or on what is built'}); not drawn.`,src:p.place&&p.place.src,sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
+    const st0=Math.max(1,q.storeys||1), [mA,mB]=minDims(q.id,s.city); // short and long sides a program needs to work
+    /* the search; why records what stopped the spots it tried (hall fix, 3 Nov 2026: a program not drawn names the rule) */
+    const search=(g,why)=>{ let best=null, st=st0;
+      for(;st<=8&&!best;st++){ const fp=q.m2/st;
+        for(const [wc0,dc0] of [[nV,Math.ceil(fp/(nV*cs*cs))],...[1,0.5,2,0.25,4].map(a=>{ const w=Math.sqrt(fp/a)/cs, d=fp/(w*cs*cs); return [Math.ceil(w),Math.ceil(d)]; })]){ const wc=Math.min(wc0,nV), dc=Math.ceil(fp/(wc*cs*cs)); if(dc>nU||wc<1) continue;
+          { const a=Math.min(wc,dc)*cs, b=Math.max(wc,dc)*cs; if(a<mA-0.01||b<mB-0.01) continue; } why.shape=true;
+          for(let i=0;i+dc<=nU;i++) for(let j=0;j+wc<=nV;j++){ let base=-1, ok=true;
+            for(let a=i-gc;a<i+dc+gc&&ok;a++) for(let b=j-gc;b<j+wc+gc;b++){ if(a<0||b<0||a>=nU||b>=nV){ if(gc) continue; ok=false; break; } const t=g[a*nV+b]; const inF=a>=i&&a<i+dc&&b>=j&&b<j+wc;
+              if(t===Infinity){ ok=false; break; } if(!inF){ if(t>0) { ok=false; break; } continue; } if(base<0) base=t; else if(Math.abs(t-base)>0.1){ ok=false; break; } if(own&&t>0){ ok=false; break; } }
+            if(!ok) continue; why.free=true; if(base===0) why.freeG=true; if(base+sh*st>Hmax+0.01){ why.tall=true; continue; } if(roof&&base<hallTop-0.01){ why.grade=true; continue; } if(atG&&base>0){ if(mustSt) why.street=true; else why.grade=true; continue; } if(RT&&base===0&&gUsed+fp>RT.cover+0.5){ why.cov=true; continue; } /* coverage set in Ratios */ if(mustSt&&!onFront(i,j,wc)){ why.street=true; continue; } /* Vancouver 10.21.1: its main entrance from a street (arch_up_vanZDB10) */ if(notG&&base===0){ why.grade=true; continue; }
+            const sc=base*1e4+i*10+(RT&&mustSt?wc*0.4:0)+j*0.01; if(!best||sc<best.sc) best={sc,base,i,j,dc,wc}; } /* hall fix: with a ratio set, a street-entrance program takes the narrowest street front that holds it, so the next one finds front too (a drawing choice, not a rule) */
+        }
+        if(best) break; }
+      return best?Object.assign(best,{st}):null; };
+    const why={}; let best=search(HG(),why), st=best?best.st:st0;
+    if(!best){ /* name what stops it, each with its register id */ const R=[], src=[]; const add=(t,ids)=>{ R.push(t); (ids||[]).forEach(x=>{ if(!src.includes(x)) src.push(x); }); };
+      const zs=s.M.Z&&s.M.Z.srcId?[s.M.Z.srcId]:(s.city==='van'?['van_zdb_i2','van_zdb_i3']:['edm_bl20001']);
+      const sideSrc=q.id==='pool'?['arch_fina_FR2020','arch_sportEngPoolsDGN',s.city==='edm'?'arch_sup_nbcAE7Pools':'arch_bcPoolDesign2025']:null;
+      const sides=`${n0(mA)} × ${n0(mB)} m${sideSrc?'':' (a drawing rule, not a code rule: register id ?)'}`;
+      if(why.free&&!why.freeG&&!atG) add(`room at grade: no free area of its size with sides of at least ${sides} is left beside the hall, the plant, the plant yard and loading`,sideSrc);
+      if(why.tall) add(`height: the ${n0(Hmax)} m limit (register ${zs.join(', ')})`,zs);
+      if(why.cov) add(`coverage: the ${n0(RT.cover)} m² footprint set in Ratios, ${n0(Math.max(0,RT.cover-gUsed))} m² left at grade (register arch_ratios)`,['arch_ratios']);
+      if(why.street) add('street entrance: it must sit on the street front (Vancouver 10.21.1; register arch_up_vanZDB10)',['arch_up_vanZDB10']);
+      if(why.grade){ const ps=p.place&&p.place.src||[]; add(`placement: ${atG&&!mustSt?'at grade':notG?'not at grade ('+code+')':roof?'on the hall roof':'at grade'} (register ${ps.length?ps.join(', '):'?'})`,ps); }
+      if(!why.shape) add(`minimum sides: no block of ${n0(q.m2/8)}–${n0(q.m2/st0)} m² with sides of at least ${sides} fits the buildable area`,sideSrc);
+      else if(!why.free){ const w2={}; const b2=search(HG(true),w2);
+        if(b2||w2.free){ const ka=[...new Set((p.adj||[]).filter(a=>a.rule==='keep apart'&&a.hard&&a.m!=null&&['generators','chillers','loading'].includes(a.with)).map(a=>`${a.m} m from the ${a.with}`))], kaS=[...new Set((p.adj||[]).filter(a=>a.rule==='keep apart'&&a.hard&&a.m!=null&&['generators','chillers','loading'].includes(a.with)).flatMap(a=>a.src||[]))];
+          add(`keep-apart: the free room left is within ${ka.join(', ')} (register ${kaS.join(', ')||'?'})`,kaS); }
+        else add(`minimum size or sides: no free area of its size with sides of at least ${sides} is left beside the hall, the plant, the plant yard and loading`,sideSrc); }
+      out.flags.push({t:`${nm}: not drawn. Stopped by ${R.join('; ')}.`,src,sev:'bad',id:q.id,stop:R}); out.notDrawn.push(q.id); continue; }
     if(st>st0) out.flags.push({t:`${nm}: ${n0(q.m2)} m² does not fit on one floor here${mustSt?' along the street front (it needs its own street entrance)':''}; drawn over ${st} storeys only to show its size. Whether it can be split across floors is a design question.`,src:[],sev:'bad',id:q.id});
-    const {base,i,j,dc,wc}=best, hh=sh*st, uA=dir<0?bu0+i*cs:bu1-(i+dc)*cs, uB=uA+dc*cs, vA=v0+j*cs, vB=vA+Math.min(wc*cs,q.m2/st/(dc*cs)), gap=gc*cs; // exact area: full cells along u, the width trimmed to the size
+    const {base,i,j,dc,wc}=best, hh=sh*st, spread=st>st0, uA=dir<0?bu0+i*cs:bu1-(i+dc)*cs, uB=uA+dc*cs, vA=v0+j*cs, vB=vA+Math.min(wc*cs,q.m2/st/(dc*cs)), gap=gc*cs; // exact area: full cells along u, the width trimmed to the size
     floorUsed+=q.m2; progUsed+=q.m2; if(base===0) gUsed+=q.m2/st; if(!industrialUse(q,code)) nonInd+=q.m2; occ.push([uA,uB,vA,vB,base,base+hh,false]); if(own) occ.push([uA-gap,uB+gap,vA-gap,vB+gap,0,1e9,true]);
-    out.boxes.push({id:q.id,p,q,ring:G.rectW(F,uA,uB,vA,vB),base,h:hh,storeys:st,sh,front:base===0&&Math.abs((dir<0?uA:uB)-uf)<cs+0.01,top:base>=hallTop-0.01,roof,u:[uA,uB],v:[vA,vB],gap,own}); }
+    out.boxes.push({id:q.id,p,q,ring:G.rectW(F,uA,uB,vA,vB),base,h:hh,storeys:st,sh,front:base===0&&Math.abs((dir<0?uA:uB)-uf)<cs+0.01,top:base>=hallTop-0.01,roof,u:[uA,uB],v:[vA,vB],gap,own,spread}); }
   const top=Math.max(hallTop,...out.boxes.map(b=>b.base+b.h));
   if(s.H&&top>s.H+0.01) out.flags.push({t:`Check: something is drawn to ${n0(top)} m, over this zone's ${n0(s.H)} m limit. This should not happen; please report it.`,src:s.city==='van'?['van_zdb_i2','van_zdb_i3']:['edm_bl20001'],sev:'bad'});
   out.boxes.forEach(b=>{ const sh=b.sh||ftf.ground; b.level=Math.floor(b.base/ftf.ground+0.01); b.levels=[...new Set(Array.from({length:b.storeys||1},(_,k)=>Math.floor((b.base+k*sh)/ftf.ground+0.01)))]; }); // plan storeys by height, each storey at its own height (review 2, N12)
@@ -342,7 +388,7 @@ async function viewArrange(){ await ready(); BD.S.view2='tab'; const sd=$('#side
   if(!P){ sd.innerHTML=`${tabsHTML('aarr')}<h2>Arrange</h2><p class="lead">Architecture mode needs a new building on a lot with a known shape. Pick a lot and set it up as a new build.</p>`; return; }
   const B=budgets(P), RL=rules(P); A.last={P,B,RL};
   const presets=[['suggest','Suggested'],['lot','Lot line'],['wall','Building wall'],['hall','Hall wall']];
-  sd.innerHTML=`${tabsHTML('aarr')}<h2>Arrange</h2><p class="lead">The tool places each program by its rules; you resize, lock, delete and choose options. Nothing is scored.</p>${splitLine(P.ratio)}${budHTML(B)}${A.msg?`<div class="aflag bad">${esc(A.msg)}</div>`:''}
+  sd.innerHTML=`${tabsHTML('aarr')}<h2>Arrange</h2><p class="lead">The tool places each program by its rules; you resize, lock, delete and choose options. Nothing is scored.</p>${splitLine(P.ratio)}${hallLine(P)}${budHTML(B)}${A.msg?`<div class="aflag bad">${esc(A.msg)}</div>`:''}
    <div class="abar ctl" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px">Secure line ${presets.map(([k,l])=>`<button data-sec="${k}" aria-pressed="${A.secure===k}">${l}</button>`).join('')} ${chips(['arch_sec_gcpsg015AppC'])}</div>
    <p class="sub" style="font-size:11.5px">Suggested: the tightest line that keeps the hall, its plant and loading inside. A design choice, not a rule (J.B., 1 Nov 2026).</p>
    ${A.picks.length?A.picks.map(rowHTML).join(''):'<p class="sub">No programs yet. Go back to add some.</p>'}
@@ -351,6 +397,9 @@ async function viewArrange(){ await ready(); BD.S.view2='tab'; const sd=$('#side
    <p class="sub" style="font-size:11.5px">Drawn by the tool, not rules: where each block sits (a 2 m grid, front to back), its proportions (no side under 6 m; a pool block at least its tank and deck), a separate refuge building 3 m away, and storeys at ${n0(P.s.ftf.ground)} m where a program's own height has no source (${P.s.city==='van'?'the I-2/I-3 ground-floor minimum':'Vancouver\'s I-2/I-3 ground-floor minimum, used here only as a drawing height'}).</p>
    <p><button id="aSave" class="btn">Save this arrangement</button> <span class="sub">${A.saved.length} saved</span></p>`;
   wire(sd); draw3d(P); }
+/* hall fix (3 Nov 2026): the hall Arrange chose, in one line */
+function hallLine(P){ const h=P.hallPick; if(!h||!P.hall.own||!h.best) return ''; const b=h.best, ftf=P.s.ftf, g=b.st-b.k;
+  return `<p class="sub asplit">Data hall: ${b.k} hall storey${b.k>1?'s':''}${g?' on a ground storey kept for other uses':''}, ${n0(b.top)} m tall (ground ${ftf.ground.toFixed(1)} m, hall floors ${ftf.up[1].toFixed(1)} m) ${chips(['envelope','burlingtonPlans2026'])}, ${n0(b.fa)} m² a floor, along the ${b.along==='back'?'back':'side'}. Of ${h.passed} footprint option${h.passed===1?'':'s'} that pass the set-up, the one that draws the most of the programs' share (a drawing choice, not a rule) ${chips(['arch_ratios'])}.</p>`; }
 function wire(sd){ const re=()=>{ A.msg=null; viewArrange(); }, reK=()=>viewArrange(); wireTabs(sd);
   sd.querySelectorAll('[data-editr]').forEach(a=>a.onclick=e=>{ e.preventDefault(); BD.flow&&BD.flow.to('arat'); });
   sd.querySelectorAll('[data-sec]').forEach(b=>b.onclick=()=>{ A.secure=b.dataset.sec; re(); });
@@ -396,7 +445,7 @@ async function viewCompare(){ await ready(); BD.S.view2='tab'; const sd=$('#side
 /* ---------- drawing: 3D, plan per storey, section; heat view ---------- */
 function warmCool(t){ if(t==null) return null; const k=Math.max(0,Math.min(1,(t-15)/(60-15))); const a=[93,127,153], b=[209,163,94]; return `rgb(${a.map((x,i)=>Math.round(x+(b[i]-x)*k)).join(',')})`; } // heat view only: warm-to-cool, separate from the red accent (J.B., 2 Nov 2026) /* drawing */
 async function draw3d(P){ P=P||place(); if(!P||!BD.scene3d) return; if(!P.secRing) rules(P);
-  const nf=Math.max(1,P.s.floors-(P.hall.base>0?1:0)), fh=P.hall.h/nf, lv0=P.hall.base>0?1:0;
+  const nf=Math.max(1,(P.hall.storeys||P.s.floors)-(P.hall.base>0?1:0)), fh=P.hall.h/nf /* hall fix: the hall's own storeys */, lv0=P.hall.base>0?1:0;
   const hallB=A.explode?Array.from({length:nf},(_,k)=>({ring:P.hall.ring,base:P.hall.base+k*fh,h:fh,hall:true,level:k+lv0,label:k===nf-1?'Data hall':null})):[{ring:P.hall.ring,base:P.hall.base,h:P.hall.h,hall:true,label:'Data hall'}];
   const boxes=hallB.concat(P.boxes.map(b=>({ring:b.ring,base:b.base,h:b.h,sel:A.sel===b.id,bad:!!b.bad,label:b.p.name.split(' (')[0],level:b.level})));
   await BD.scene3d.show('arch',{site:BD.eng.siteFacts(),boxes,explode:A.explode,secure:P.secRing}); bar(P); const pl=$('#aPlan'); if(A.view!=='3d') plan(P); else if(pl) pl.style.display='none'; }

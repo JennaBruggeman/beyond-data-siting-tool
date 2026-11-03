@@ -22,7 +22,11 @@
   "bu": [
    [
     -40.75292387661898,
-    -16.75292387661898
+    -12.75292387661898
+   ],
+   [
+    -40.75292387661898,
+    5.247076123381021
    ],
    [
     -40.75292387661898,
@@ -30,15 +34,23 @@
    ],
    [
     -40.75292387661898,
-    -28.75292387661898
+    -16.75292387661898
    ],
    [
-    -40.75292387661898,
-    -20.75292387661898
+    -16.75292387661898,
+    1.2470761233810208
    ],
    [
     -22.75292387661898,
-    3.247076123381021
+    -6.752923876618979
+   ],
+   [
+    -16.75292387661898,
+    -2.752923876618979
+   ],
+   [
+    -40.75292387661898,
+    -4.752923876618979
    ]
   ],
   "plant": [
@@ -165,6 +177,45 @@
  ],
  "boxes": [
   [
+   "refuge",
+   [
+    -41,
+    -13
+   ],
+   true,
+   265,
+   265,
+   0,
+   0,
+   6
+  ],
+  [
+   "pool",
+   [
+    -41,
+    5
+   ],
+   true,
+   1065,
+   1065,
+   0,
+   0,
+   4
+  ],
+  [
+   "warming_shelter",
+   [
+    -41,
+    -23
+   ],
+   true,
+   100,
+   100,
+   0,
+   0,
+   6
+  ],
+  [
    "clinic",
    [
     -41,
@@ -180,10 +231,10 @@
   [
    "spa",
    [
-    -41,
-    -23
+    -17,
+    1
    ],
-   true,
+   false,
    320,
    320,
    0,
@@ -193,10 +244,10 @@
   [
    "ev_hub",
    [
-    -41,
-    -29
+    -23,
+    -7
    ],
-   true,
+   false,
    150,
    150,
    0,
@@ -206,10 +257,10 @@
   [
    "greenhouse",
    [
-    -41,
-    -21
+    -17,
+    -3
    ],
-   true,
+   false,
    190,
    190,
    0,
@@ -219,14 +270,14 @@
   [
    "fish_farm",
    [
-    -23,
-    3
+    -41,
+    -5
    ],
    false,
    685,
    685,
    0,
-   0,
+   4,
    6
   ]
  ],
@@ -234,9 +285,110 @@
   0,
   18
  ],
+ "hallPick": {
+  "tried": 19,
+  "passed": 1,
+  "n": 19,
+  "under": false,
+  "best": {
+   "key": "2:6.5,16.9:74.8",
+   "k": 2,
+   "st": 3,
+   "top": 18,
+   "along": "back",
+   "a": 0,
+   "fa": 776.980339507969,
+   "drawn": 3380
+  },
+  "fails": [
+   [
+    "2:-11.0,16.9:27.9",
+    "Noise: the cooling plant (roof) would give about 68 dBA (low-noise units: one rating) at the point of reception beside 1147 GRANT ST (I-2, activity zone), 32 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). 2 neighbouring lots are over. No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "2:-5.9,16.9:34.1",
+    "Noise: the cooling plant (roof) would give about 68 dBA (low-noise units: one rating) at the point of reception beside 1147 GRANT ST (I-2, activity zone), 32 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "2:-2.8,16.9:39.4",
+    "Noise: the cooling plant (roof) would give about 68 dBA (low-noise units: one rating) at the point of reception beside 1147 GRANT ST (I-2, activity zone), 32 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "2:0.8,16.9:48.3",
+    "Noise: the cooling plant (roof) would give about 68 dBA (low-noise units: one rating) at the point of reception beside 1147 GRANT ST (I-2, activity zone), 32 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "2:2.9,16.9:55.7",
+    "Noise: the cooling plant (roof) would give about 67 dBA (low-noise units: one rating) at the point of reception beside 1147 GRANT ST (I-2, activity zone), 33 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). 3 neighbouring lots are over. No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "2:-17.3,16.9:22.8",
+    "Noise: the cooling plant (roof) would give about 66 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 39 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "2:-22.6,16.9:19.7",
+    "Noise: the cooling plant (roof) would give about 67 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 34 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "2:-31.4,16.9:16.1",
+    "Noise: the cooling plant (roof) would give about 69 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 29 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "2:-38.9,16.9:13.9",
+    "Noise: the cooling plant (roof) would give about 71 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 21 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "2:-39.8,16.9:13.7",
+    "Noise: the cooling plant (roof) would give about 68 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 31 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "1:-22.6,16.9:39.4",
+    "Noise: the cooling plant (roof) would give about 67 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 34 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "1:-15.3,16.9:48.3",
+    "Noise: the cooling plant (roof) would give about 65 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 41 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "1:-11.0,16.9:55.7",
+    "Noise: the cooling plant (roof) would give about 68 dBA (low-noise units: one rating) at the point of reception beside 1147 GRANT ST (I-2, activity zone), 32 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). 2 neighbouring lots are over. No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "1:-5.9,16.9:68.3",
+    "Noise: the cooling plant (roof) would give about 68 dBA (low-noise units: one rating) at the point of reception beside 1147 GRANT ST (I-2, activity zone), 32 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "1:-3.9,16.9:74.8",
+    "Noise: the cooling plant (roof) would give about 68 dBA (low-noise units: one rating) at the point of reception beside 1147 GRANT ST (I-2, activity zone), 32 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "1:-31.4,16.9:32.2",
+    "Noise: the cooling plant (roof) would give about 69 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 29 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "1:-38.9,16.9:27.9",
+    "Noise: the cooling plant (roof) would give about 71 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 21 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ],
+   [
+    "1:-39.8,16.9:27.4",
+    "Noise: the cooling plant (roof) would give about 68 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 31 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
+   ]
+  ]
+ },
+ "hallUV": [
+  [
+   6,
+   17
+  ],
+  [
+   -39,
+   36
+  ]
+ ],
+ "hallStoreys": 3,
  "space": {
   "hall": 1554,
-  "prog": 1950,
+  "prog": 3380,
   "cap": 17266.229766843757
  },
  "heat": {
@@ -245,18 +397,25 @@
    14191.199999999999
   ],
   "need": [
-   90.57,
-   128.92
+   576.01,
+   614.36
   ],
   "unknown": [
    "spa",
-   "fish_farm"
+   "fish_farm",
+   "warming_shelter"
   ]
  },
  "rules": [
-  "bad: Refuge: no room below the 18 m height limit that meets its placement rules (on the street front, for its own street entrance (Vancouver 10.21.1)); not drawn.",
-  "bad: Public indoor pool: no room that meets its placement rules (on the street front, for its own street entrance (Vancouver 10.21.1)); not drawn.",
-  "bad: Warming shelter: no room below the 18 m height limit that meets its placement rules (on the street front, for its own street entrance (Vancouver 10.21.1)); not drawn.",
+  "note: Refuge in I-2: conditional (Community Centre or Neighbourhood House; Social Service Centre).",
+  "note: Refuge: A-2, 2 h fire separation from the data centre (F-2).",
+  "q: Refuge: keep-apart rules not checked here: generators (no distance in the source).",
+  "bad: Public indoor pool in I-2: rezoning (Swimming Pool (not listed)).",
+  "note: Public indoor pool: A-3, 2 h fire separation from the data centre (F-2).",
+  "q: Public indoor pool: keep-apart rules not checked here: hall (no distance in the source); intakes (not modelled); generators (no distance in the source).",
+  "note: Warming shelter in I-2: conditional (Social Service Centre (day); overnight: no listed use ?).",
+  "note: Warming shelter: A-2, 2 h fire separation from the data centre (F-2).",
+  "q: Warming shelter: keep-apart rules not checked here: generators (no distance in the source).",
   "note: Outpatient clinic in I-2: conditional (Health Care Office).",
   "q: Outpatient clinic: keep-apart rules not checked here: generators (no distance in the source).",
   "note: Bathhouse / Nordic spa in I-2: conditional (Beauty and Wellness Centre (hydrotherapy, thermal therapy)).",
@@ -276,7 +435,7 @@
   "ratio": {
    "cover": 5755,
    "dc": 9,
-   "prog": 91,
+   "prog": 30,
    "end": "low",
    "mw": 2.4
   },
@@ -297,8 +456,8 @@
    "by": "envelope",
    "dcMax": 11511,
    "dcM2": 1554,
-   "progM2": 15712,
-   "unused": 0,
+   "progM2": 5180,
+   "unused": 10532,
    "mw": [
     2.45,
     5.3
@@ -318,23 +477,23 @@
    "Exchange (off)",
    "Compare (off)"
   ],
-  "stuck": false,
-  "next": "Next: Programs"
+  "stuck": true,
+  "next": "Fix the set-up to go on"
  },
- "split": "Data centre 9% · 1,554 m² · 2.4–5.2 MW (testing 2.4) · programs 91% · 15,712 m² · unused 0% arch_ratios Edit ratios",
+ "split": "Data centre 9% · 1,554 m² · 2.4–5.2 MW (testing 2.4) · programs 30% · 5,180 m² · unused 61% arch_ratios Edit ratios",
  "saved": [
   [
    "suggest",
-   4,
-   16,
-   55,
+   2,
+   22,
+   63,
    0.7484070948854831
   ],
   [
    "lot",
-   7,
-   19,
-   55,
+   8,
+   28,
+   63,
    0
   ]
  ],
