@@ -18,3 +18,6 @@ To clear one: add its source to the register through `register/patches/*.py`, mo
 | tool/plant.js | 19 | 4, 6, 2, 2, 2, 2 | Side-to-side gap between tower cells, 4.0 m (small plant) and 6.0 m (large), and 2.0 m between generator sets ("assumed from the 1 m service clearance"). The 1.8 m end gap for towers sits on the same line. BAC's layout guide (bacLayout2023) gives the 1.8 m and the air-inlet distance but not the side gaps. |
 | tool/plant.js | 26 | 6, 6 | Over 6 MW of heat, the "large" tower spacing is used. Chillers switch at the same point but keep the same unit. No source. |
 | tool/plant.js | 60 | 2, 40 | Provisional size before one is set: 2 storeys if the model has none, capped at 40 MW (the top of the slider). Tool choices. |
+| tool/site.js | 86 | 100 | Vancouver: no loading bay under 100 m² of floor. Not in the Parking By-law text the register quotes (vanParking5). |
+| tool/site.js | 112 | 4, 4, 4 | An existing building with no recorded height is taken as one storey at 4 m, and storeys as 4 m each (finding I-06, labelled in the tool). An assumption. |
+| tool/site.js | 156 | 12, 12 | A sized-down data hall is kept at least 12 m deep. A tool choice. |

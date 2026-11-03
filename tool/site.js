@@ -7,23 +7,8 @@ const BD=window.BD; const {$,esc,fmt}=BD;
 const draft=t=>`<span class="draft">${t}</span>`;
 
 /* ---------- zone limits, with the clause each number comes from ---------- */
-const ZV={
- 'I-2':{fsr:[3,3],h:18.3,hx:[30.5,30.5],ground:true,yards:{front:0,side:0,rear:3.1},known:'yards',
-   cl:[['Floor area','up to 3.0 × the lot','I-2 District Schedule'],['Height','18.3 m; the Director of Planning or Development Permit Board may allow up to 30.5 m','I-2 ss. 3.1.2.1, 3.1.2.5 (outside sub-area B)'],['Yards','no front yard; rear yard 3.1 m; side yard 1.5 m beside an RM site, 0.9 m beside an R1, RT or RA site (no lane between), otherwise none; no site coverage limit','I-2 ss. 3.1.2.2–3 (outside sub-area B)'],['Ground floor','"Bulk data storage is not permitted at the ground floor, except for entrances"','I-2 s. 2.2.7']]},
- 'I-2B':{fsr:[3,3],h:18.3,hx:[36.5,36.5],ground:true,yards:{front:0.6,side:7.6,rear:3.1,max:61},known:'yards',
-   cl:[['Floor area','up to 3.0 × the lot for a data centre (transportation and storage uses are capped at 3.00); the City may allow 4.0 in total only with at least 1.0 of the uses in s. 3.2.1.1(c), so not for the data centre itself','I-2 ss. 3.2.1.1(a)(iv), 3.2.1.2 (sub-area B)'],['Height','18.3 m; the Director of Planning or Development Permit Board may allow up to 36.5 m','I-2 ss. 3.2.2.1, 3.2.2.10 (sub-area B)'],['Yards','front 0.6 m, sides 7.6 m, rear 3.1 m (less where the rear abuts a lane); deeper setbacks above 18.3 m (front 3.7 m, sides 10.7 m) and above 30.5 m (front 6.1 m, sides 12.2 m) not drawn; building at most 61.0 m wide and deep','I-2 ss. 3.2.2.2–8, 3.2.2.15 (sub-area B)'],['Floor heights','first floor at least 6.1 m floor to floor, upper floors at least 4.0 m (new buildings)','I-2 s. 3.2.2.9'],['Ground floor','"Bulk data storage is not permitted at the ground floor, except for entrances"','I-2 s. 2.2.7']]},
- 'I-1C':{fsr:[6,6],h:46.5,hx:[50.3,50.3],ground:false,yards:null,known:'',
-   cl:[['Floor area','up to 6.0 × the lot, at least a third of it industrial-type uses','I-1C District Schedule'],['Height','46.5 m (21.0 m near street edges; up to 50.3 m)','I-1C District Schedule'],['Yards','not yet read — whole lot assumed','—']]},
- 'I-3':{fsr:[3,3],h:18.3,hx:[30.5,45.7],ground:true,yards:{front:0.6,side:7.6,rear:3.1,max:61},known:'yards',
-   cl:[['Floor area','up to 3.0 × the lot (the extra 2.0 does not apply to storage uses); sub-area A only','I-3 District Schedule (June 2026)'],['Height','18.3 m; the City may allow 30.5 m, and in sub-area A up to 45.7 m','I-3 ss. 3.1.2.10–11 (June 2026)'],['Yards','front 0.6 m, sides 7.6 m, rear 3.1 m; building at most 61 m wide and deep','I-3 District Schedule (2022 draft figures)'],['Ground floor','6.0 m floor-to-floor; no data storage at the ground floor','I-3 District Schedule']]},
- 'FC-2':{fsr:[1,5],h:22.9,hx:[51.8,51.8],ground:true,yards:{front:0.6,side:0,rear:0.6},known:'yards',
-   cl:[['Floor area','1.0 to 5.0 × the lot by sub-area (6.5 at the City\'s discretion)','FC-2 District Schedule (June 2026)'],['Height','22.9 m in sub-areas A and B, 10.7 m in C1, C2 and D, 18.3 m in E (the City may allow up to 51.8 m); the tool does not yet know the sub-area and uses 22.9 m','FC-2 ss. 3.1.2.1, 3.2.2.1, 3.3.2.1, 3.4.2.1'],['Yards','front and rear 0.6 m; no side yards','FC-2 District Schedule (2022 draft figures)'],['Ground floor','no data storage at grade','FC-2 District Schedule']]},
-};
-const ZE={
- IH:{fsr:[2,2],h:30,hx:null,ground:false,yards:{front:3,side:0,rear:0},known:'yards',cl:[['Floor area','up to 2.0 × the lot','Zoning Bylaw 20001, IH'],['Height','30.0 m; the City may vary it for operating features','Bylaw 20001, IH'],['Setbacks','3.0 m from a street; minimum site 1.0 ha','Bylaw 20001, IH']]},
- IM:{fsr:[2,2],h:18,hx:null,ground:false,yards:{front:3,side:0,rear:0},known:'yards',cl:[['Floor area','up to 2.0 × the lot','Bylaw 20001, IM'],['Height','18.0 m','Bylaw 20001, IM'],['Setbacks','3.0 m from a street; 6.0 m next to a non-industrial zone (neighbours not read, not applied); none to other industrial lots','Bylaw 20001, IM']]},
- BE:{fsr:[1.6,1.6],h:16,hx:null,ground:false,yards:{front:6,side:0,rear:0},known:'yards',cl:[['Floor area','up to 1.6 × the lot','Bylaw 20001, BE'],['Height','16.0 m','Bylaw 20001, BE'],['Setbacks','6.0 m from a street (4.5 m on a collector or local road; road class not read, so 6.0 m is used); none to other sites or alleys; 6.0 m next to a residential zone (neighbours not read, not applied)','Bylaw 20001, BE Table 4.1'],['Screening','"All mechanical and electrical equipment … cooling towers … must be screened from view from Abutting Streets and Sites in non-industrial Zones"','Bylaw 20001, BE s. 5.2']]},
-};
+/* lean refactor 3 Nov 2026: the zone tables live in tool/data/zones.json, each row with its register ids (envelope; van_zdb_*, edm_bl20001, arch_zon_EdmZones) */
+const ZD=BD.data.zones, ZV=ZD.ZV, ZE=ZD.ZE, LD=ZD.loading;
 const ROOFNOTE={van:['Roof equipment','the Director of Planning may let mechanical equipment and its screening exceed the height limit','Zoning and Development By-law s. 10.1.1'],
                 edm:['Roof equipment','ventilating equipment, plumbing stacks and mechanical penthouses are not counted in height','Bylaw 20001 s. 5.70 cl. 1.9.5']};
 // Edmonton map modifiers: "h" = maximum height in metres, "f" = maximum floor area ratio (Bylaw 20001 s. 8.20; e.g. MU s. 4.1.1, 4.1.3)
@@ -98,11 +83,11 @@ BD.geo={frameOf,rectW,clip,hull};
 /* loading spaces: Vancouver Parking By-law 6059 s. 5 (Class B; row 5.2.5 as the "similar use" — the Director of Planning decides, s. 5.1.4);
    Edmonton Bylaw 20001 s. 5.80 subs. 7. Aisle: Vancouver's 6.1 m (s. 5.4.1) used in both cities as an assumption. */
 function loadingNeed(city,gfa){
-  if(city==='van'){ const n=gfa<100?0:1+(gfa>465?1:0)+Math.max(0,Math.ceil((gfa-2325)/2325)); const nC=gfa<2000?0:gfa<=5000?1:2;
-    return {n,len:10.2,wid:3.4,ht:3.8,aisle:6.1,cls:'truck loading bay',nC,
+  if(city==='van'){ const L=LD.van, n=gfa<100?0:1+(gfa>L.bayFirst?1:0)+Math.max(0,Math.ceil((gfa-L.bayEach)/L.bayEach)); const nC=gfa<L.classC[0]?0:gfa<=L.classC[1]?1:2; // tool/data/zones.json loading (vanParking5); under 100 m² no bay: unsourced list
+    return {n,len:L.len,wid:L.wid,ht:L.ht,aisle:L.aisle,cls:'truck loading bay',nC,
       basis:`${n} truck loading bays for ${fmt(gfa)} m² of floor. The Parking By-law calls this size Class B, its mid-size bay: 10.2 × 3.4 m with 3.8 m clearance (Class C is the 23.1 m bay for the largest trucks). The count uses row 5.2.5: the by-law does not name data centres, but the City classes them as a Transportation and Storage use (RTS 19744), which row 5.2.5 lists. Each bay is reached by a 6.1 m aisle (s. 5.4.1).${nC?` If the City reads a data centre as a storage warehouse, ${nC} Class C space${nC>1?'s':''} (23.1 × 3.6 m, 14.0 m aisle) would also be needed.`:''}`,src:'vanParking5'}; }
-  const n=gfa<2500?0:gfa<=7500?1:2;
-  return {n,len:9.0,wid:3.3,ht:4.0,aisle:6.1,cls:'loading space',
+  const L=LD.edm, n=gfa<L.spaces[0]?0:gfa<=L.spaces[1]?1:2; // tool/data/zones.json loading (edmZB580; aisle vanParking5)
+  return {n,len:L.len,wid:L.wid,ht:L.ht,aisle:L.aisle,cls:'loading space',
     basis:`${n} loading space${n===1?'':'s'} for ${fmt(gfa)} m² of floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site, with no backing onto streets or alleys (s. 5.80 subs. 7). Aisle: Vancouver's 6.1 m used as an assumption.`,src:'edmZB580'}; }
 
 /* the model the numbers and the 3D share */
