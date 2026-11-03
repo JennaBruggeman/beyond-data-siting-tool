@@ -21,3 +21,8 @@ To clear one: add its source to the register through `register/patches/*.py`, mo
 | tool/site.js | 86 | 100 | Vancouver: no loading bay under 100 m² of floor. Not in the Parking By-law text the register quotes (vanParking5). |
 | tool/site.js | 112 | 4, 4, 4 | An existing building with no recorded height is taken as one storey at 4 m, and storeys as 4 m each (finding I-06, labelled in the tool). An assumption. |
 | tool/site.js | 156 | 12, 12 | A sized-down data hall is kept at least 12 m deep. A tool choice. |
+| tool/decide.js | 60 | 70, 70 | Default coverage 70 % on the coverage slider (`A.cover||70`). A UI default. |
+| tool/decide.js | 64 | 12 | Storeys input capped at 12 (input max). A UI limit. |
+| tool/decide.js | 101 | 8 | A building under 8 m tall is read as "one or two storeys" (lease feasibility). An assumption, no source. |
+| tool/decide.js | 104 | 8 | Same 8 m threshold: under it, no upper floor to lease. |
+| tool/decide.js | 154 | 12 | Storeys typed in clamped to 1–12 (matches the input max on line 64). |
