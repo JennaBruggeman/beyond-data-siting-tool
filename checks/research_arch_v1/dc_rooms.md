@@ -20,12 +20,12 @@ Kind: rule · gov. guide · design guide · peer-reviewed · insurer guide · st
 | Floor | not at the ground floor in Vancouver I-2, I-3, FC-2 (entrances only) | van_zdb_i2; van_zdb_i3; van_zdb_fc2 | hall_area coef | rule | 85 |
 | Floor-to-floor | ≥6.0 m ground / ≥4.0 m above (Vancouver I-3 zoning minimum, not a hall height) | van_zdb_i3 | envelope coef | rule | 85 |
 | Floor-to-floor, built | ≈6.0 m (Burlington, 2 storeys); 5.5–6.0 m (two Hong Kong filings) | burlingtonPlans2026; arch_dc_hkTpb480; arch_dc_hkTpb510 | sources/16 §2.13, addendum | filed plans | 60 |
-| Clear height | room 4 m + raised floor 0.6–0.8 m (prototype); raised floor ≥0.61 m (FEMP); VAN3 457 mm raised floor | lbnl_proto2021; femp2024dc; tourVAN3 | Tables 3–4; sources/16 S3; tour | peer-reviewed; gov. guide; site fact | 60 |
+| Clear height | room 4 m + raised floor 0.6–0.8 m (prototype); raised floor ≥0.61 m (FEMP); VAN3 457 mm raised floor (her figure; measured or told ?) | lbnl_proto2021; femp2024dc; tourVAN3 | Tables 3–4; sources/16 S3; tour | peer-reviewed; gov. guide; site fact | 60 |
 | Ceiling, upper limit | "Limit the maximum height of ceilings in data centers to 30 ft (9 m)" | fmDS0532 | 2.2.5.2, p. 6 | insurer guide | 90 |
 | Minimum clear height (TIA-942) | ? paywalled | — | — | — | 0 |
 | Fire separation from other occupancies | ≥1 h "commensurate with the exposure" | nfpa75_2024 | 6.1.3.2 | standard (US) | 80 |
 | Fire separation | 1 h walls; 2 h between halls; slab to slab | fmDS0532 | 2.2.4.1, 2.2.4.1.1, 2.2.4.3, p. 5–6 | insurer guide | 90 |
-| Fire separation (code) | depends on the hall's class, which no code names. If F-2: 2 h to A, B, C; none to D, E, F-3 | arch_pub_nbc3131full; arch_nbcDefF | N/B/V/A Table 3.1.3.1 | rule | 70 |
+| Fire separation (code) | depends on the hall's class, which no code names. If F-2: 2 h to A, B, C, F-1; none to D, E, F-3 (D: 1 h if built to 3.2.2.57, NBC/NBC(AE) note 8) | arch_pub_nbc3131full; arch_nbcDefF | N/B/V/A Table 3.1.3.1 | rule | 70 |
 | Keep from | "hazardous processes" above, below or beside | nfpa75_2024 | 6.3.1 | standard (US) | 80 |
 | Keep from | cooling or domestic liquid piping above | fmDS0532 | 2.2.1.6 | insurer guide | 90 |
 | Keep from | packing, cardboard; de-box outside the hall | arch_dc_fm0532rooms | 2.3.1.1.1–2, p. 7 | insurer guide | 90 |
@@ -54,7 +54,7 @@ Kind: rule · gov. guide · design guide · peer-reviewed · insurer guide · st
 | VRLA room | "minimum one-hour fire-rated room"; ventilation ≥5.1 L/s per m², suction at roof | arch_up_fm0528 | 2.2.4; 2.3.2.3 A | insurer guide | 90 |
 | Li-ion room | FM 5-33 (not uploaded) ? | arch_up_fm0528 | 1.0 | — | 0 |
 | HVAC | "separate from the equipment areas" | arch_up_fm0528 | 2.3.2.1.1 A | insurer guide | 90 |
-| Li-ion spacing | groups ≤50 kWh, 0.9 m apart and from walls; Li-ion UPS not exempt | nfpa855_2026 | 9.5.1.1–9.5.1.2; 9.2.1.1(3) | standard (US) | 75 |
+| Li-ion spacing | groups ≤50 kWh, 0.9 m apart and from walls; Li-ion UPS not exempt (our reading) | nfpa855_2026 | 9.5.1.1–9.5.1.2; 9.2.1.1(3) | standard (US) + our reading | 75 |
 | Cabinets | 0.914 m clear in front, 25 mm to wall | electrical_room | Vertiv Li5 manual | maker claim | 60 |
 | Canadian code | no battery-room clause; hydrogen hook only (3.3.1.21) | adj_service.md | §3 | rule (absence) | 80 |
 | Floor | above 500-year flood + 0.3–0.6 m | arch_up_fm0528 | 2.2.3 | insurer guide | 90 |
@@ -67,7 +67,7 @@ Kind: rule · gov. guide · design guide · peer-reviewed · insurer guide · st
 | Size per MW | ? none public | sources/16 #3 | — | — | 0 |
 | Built (combined) | "Electrical/Network Room" 115–128 m² per floor | burlingtonPlans2026 | sources/16 C5 | filed plans | 50 |
 | Fire separation | separate from generators and fuel, "minimum 1-hour"; liquid-tight if adjacent | arch_up_fm0523 | 2.2.12 | insurer guide | 90 |
-| Fire separation (code) | 1 h if the electrical code puts it in a service room; vault 3 h (2 h sprinklered) | arch_nbc3628 | N/B/V/A 3.6.2.1.(6), 3.6.2.7.(2) | rule | 85 |
+| Fire separation (code) | 1 h if the electrical code puts it in a service room; vault 3 h (2 h sprinklered) | nbc2020_v1; arch_nbc3628 | N/B/V/A 3.6.2.1.(6), 3.6.2.7.(2) | rule | 85 |
 | Keep from | not directly under a required exit (transformers) | arch_nbc3628 | 3.6.2.2 | rule | 85 |
 | Working space | 1 m; 1.5 m ≥1200 A; 0.76 m round a withdrawn breaker (US) | cec2024; sources/16 S8 | CEC 2-308, 2-310; UFC 3-540-01 2-5.4.3 | rule; US rule | 70 |
 | Floor | below flood construction level only if protected (Vancouver) | adj_service.md | V Div. C 2.2.10.3.(2) | rule | 85 |
@@ -90,8 +90,8 @@ Kind: rule · gov. guide · design guide · peer-reviewed · insurer guide · st
 
 | what | value | source id | where | kind | conf |
 |---|---|---|---|---|---|
-| Count | ⌈P_IT × PUE ÷ 2,000 kW⌉ + N+1 | generator_sets | register | maker claim | 50 |
-| Per MW (open set) | ≈6.4 m² (Cat 3516C 6.80 × 2.34 m) | cat3516c | sources/16 §2.4 | maker claim | 50 |
+| Count | ⌈P_IT × PUE ÷ set rating⌉ + N+1 (2,000 kW sets above 3 MW facility load, else 1,000 kW) | generator_sets | register | maker claim | 50 |
+| Per MW (open set) | ≈6.4 m² (Cat 3516C 6.80 × 2.34 m ÷ 2.5 MW; sheet not re-opened, register sets use Rehlko) | cat3516c | sources/16 §2.4 | maker claim | 50 |
 | Fuel | ≈6.3 m³ per MW per 24 h; tank room 550 mm clear | fuel_on_site; nfc2020_4313 | NFC 4.3.14 | rule; maker claim | 70 |
 | Location order | separate building → yard → ground floor; never roof or basement; no diesel tanks inside | fmDS0532 | 2.6.4.3, 2.6.4.3.1, 2.6.4.4.1.1, p. 26–27 | insurer guide | 90 |
 | Room at grade | ≥1 h room on an outside wall, openings reachable by firefighters | arch_up_fm0523 | 2.2.3 A | insurer guide | 90 |
@@ -99,7 +99,7 @@ Kind: rule · gov. guide · design guide · peer-reviewed · insurer guide · st
 | Fuel room | 2 h; used for no other purpose | nfc2020_4313 | NFC 4.3.14.1–2 | rule | 90 |
 | Exhaust | 3 m from intakes, doors, windows, occupiable outdoor space (if 6.3.3.1.(2) applies ?) | arch_nbc6331 | 6.3.3.1.(2) | rule | 55 |
 | Keep from | Tier 0/1 engines ≥100 m from hospital, elementary school, day care, community care | arch_mv1329 | s. 57 | rule (Metro Vancouver) | 90 |
-| Conflict | separate generator building = second principal building (one per site) | arch_up_vanZDB10 | 10.34.1 | rule | 90 |
+| Conflict | separate generator building = second principal building (one per site) | arch_up_vanZDB10 | 10.34.1 | rule + our reading | 80 |
 | Secure side | inside the fence (tool preset holds yard plant) | arch_secure_line | register | our reading | 40 |
 
 ## 7. Chillers, dry coolers, cooling towers
@@ -110,7 +110,7 @@ Kind: rule · gov. guide · design guide · peer-reviewed · insurer guide · st
 | Spacing (one maker) | 1.8 m to walls; 3 m between units | arch_yorkClear | Insights 10 Jun 2024 | maker claim | 50 |
 | Roof | Vancouver: mechanical equipment may exceed height at the Director's discretion | arch_up_vanZDB10 | 10.1.1(b) | rule | 90 |
 | Roof | Edmonton: no height limit for mechanical penthouses, ventilating equipment | edm_bl20001 | s. 5.70(1.9) | rule | 85 |
-| Screening | Edmonton, non-industrial development: mechanical equipment concealed or inside the building (industrial: zone rules) | arch_dc_ezb5120 | 5.120 1.1.2 | rule | 85 |
+| Screening | Edmonton, non-industrial development: mechanical equipment concealed or inside the building (BE 5.2: screened from streets and non-industrial sites) | arch_dc_ezb5120; arch_ezbLoad | 5.120 1.1.2; BE 5.2 | rule | 85 |
 | Evaporative units | 7.6 m from intakes; 3 m from doors, windows, occupiable outdoor space | arch_nbc63215 | 6.3.2.15.(5) | rule | 85 |
 | Towers, Vancouver | operating permit, monthly Legionella tests | adj_service.md | V Book II 2.2.11.6 | rule | 85 |
 | Indoor chiller room | CSA B52 (paywalled); 1 h if storey unsprinklered | adj_service.md | 6.2.1.5; 3.6.2.1.(7) | rule | 70 |
@@ -124,8 +124,8 @@ Kind: rule · gov. guide · design guide · peer-reviewed · insurer guide · st
 | Built | combined "Electrical/Network Room" 115–128 m² | burlingtonPlans2026 | sources/16 C5 | filed plans | 50 |
 | Count | two POP + meet-me rooms (redundancy), fibre from the street | tourVAN3 | tour | site fact | 40 |
 | Fire separation | "network/fiber optic rooms": 1 h | fmDS0532 | 2.2.4.1, p. 5 | insurer guide | 90 |
-| Room rules (office bldgs, benchmark) | 2.4 × 3.0 m typical; ≥2.59 m clear; no pipes, sinks, ducts or building power; no windows | arch_dc_ualbertaTelecom | §4, §8.3 | design guide (institution) | 50 |
-| Conduit entry | ≥1 × 110 mm + 1 × 63 mm | arch_dc_ualbertaTelecom | §8.1 | design guide | 50 |
+| Room rules (office bldgs, benchmark) | 2.44 × 3.05 m ideal; ≥2.59 m clear; no pipes, sinks, ducts or building power; door without sills or windows | arch_dc_ualbertaTelecom | §8.3 | design guide (institution) | 50 |
+| Conduit entry | ≥1 × 110 mm (the 63 mm conduit serves fire alarm and RCMS panels) | arch_dc_ualbertaTelecom | §8.1 | design guide | 50 |
 | Secure side | inside, "behind scanners" | tourVAN3 | tour | site fact | 40 |
 
 ## 9. Fire suppression (valve room, clean-agent cylinders)
@@ -192,9 +192,9 @@ Kind: rule · gov. guide · design guide · peer-reviewed · insurer guide · st
 | what | value | source id | where | kind | conf |
 |---|---|---|---|---|---|
 | Built | open office 100 m²; conference 90 m²; lobby 70 m² (Burlington); office 603 m² (DUB13, Ireland) | burlingtonPlans2026; abp317446 | sources/16 C5, C12 | filed plans | 50 |
-| Share (US) | 60,000 ft² offices in up to 1,188,143 ft² ≈ 5.0 % (our arithmetic) | arch_dc_pwcVillagePlace | p. 2 | gov. report | 60 |
+| Share (US) | 60,000 ft² offices in up to 1,188,143 ft² ≈ 5.0 % (5.8 % on p. 24's 1,033,000 ft²; our arithmetic) | arch_dc_pwcVillagePlace | pp. 2, 24 | gov. report | 60 |
 | Cap, Vancouver | I-2: general office ≤ greater of 235 m² or 33.3 % of GFA; I-3: conditional office ≤33 % | van_zdb_i2; van_zdb_i3 | 3.1.1 | rule | 85 |
-| Separation | D (office) to F-2: none | arch_hsg_nbc3131D | Table 3.1.3.1 | rule | 80 |
+| Separation | D (office) to F-2: none (1 h if built to 3.2.2.57, NBC/NBC(AE) note 8) | arch_hsg_nbc3131D | Table 3.1.3.1 | rule | 80 |
 | Secure side | outside the portal (VAN3: client offices, boardroom) | tourVAN3 | tour | site fact | 40 |
 | NOC size | ? | — | — | — | 0 |
 
@@ -212,11 +212,11 @@ Kind: rule · gov. guide · design guide · peer-reviewed · insurer guide · st
 
 | what | value | source id | where | kind | conf |
 |---|---|---|---|---|---|
-| WCs | industrial, per sex: 1–10 → 1, 11–25 → 2, 26–50 → 3; count staff only where intermittently occupied | arch_per_nbcWC | 3.7.2.1.(2); Table 3.7.2.2.-C | rule | 90 |
+| WCs | industrial, per sex: 1–10 → 1, 11–25 → 2, 26–50 → 3; count staff only where intermittently occupied; if Group F (Group D: Table 3.7.2.2.-B) | arch_per_nbcWC | 3.7.2.1.(2); Table 3.7.2.2.-C | rule | 90 |
 | One shared WC | occupant load ≤10 (V: ≤25) | arch_per_nbcWC | 3.7.2.2.(2) | rule | 90 |
 | Showers | not required; if provided, one accessible stall per group, 1,500 × 900 mm; universal shower room for employee common use | arch_dc_nbcJanitorShower | N 3.8.2.8.(12)–(13), 3.8.3.17 | rule | 85 |
 | Distance (BC) | within 60 m of the work area, ≤1 floor away | arch_per_ccohsSanitation | OHS Reg 4.85 (summary) | gov. summary | 65 |
-| Staff per MW | ≈1 per MW (≈29 on site at once, 28 MW, UK) | hillingdon_up4 | sources/16 C10 | applicant claim | 45 |
+| Staff per MW | ≈1 per MW on site at once (≈29, 28 MW, UK); 50–100 jobs ≈1.8–3.6 per MW (our arithmetic) | hillingdon_up4 | sources/16 C10 | applicant claim | 45 |
 | Staff per area | ≈1 full-time worker per 5,000 ft² (≈465 m²) | jlarc2024 | Rpt 598 | operator claim (relayed by gov.) | 50 |
 | Staff, other | ≈40 per 24 h (15,274 m², Ireland); >45 jobs (Ireland); 300 jobs, 1.19 M ft² (US) | abp317802; abp317446; arch_dc_pwcVillagePlace | — | applicant claims | 45 |
 | Built | showers and lockers before the portal (VAN3) | tourVAN3 | tour | site fact | 40 |
@@ -234,7 +234,7 @@ Kind: rule · gov. guide · design guide · peer-reviewed · insurer guide · st
 | what | value | source id | where | kind | conf |
 |---|---|---|---|---|---|
 | Heat pumps | 5.6–15.1 m² per MW heat (equipment); 1.1 m aisles | component_space; hr_plant_room | register | maker claim | 50 |
-| ETS, Vancouver | ≥6 × 3 m (<13,940 m²) / 6 × 4 m; 2.7 m headroom; P1 on the perimeter | neuETS; arch_ho_vanNEUconn2020 | Table 2, s. 6.1 | gov. guide | 85 |
+| ETS, Vancouver | ≥6 × 3 m (<13,940 m²) / 6 × 4 m; 2.7 m headroom; P1 on the perimeter | neuETS; arch_ho_vanNEUconn2020 | Table 1 (Rev 1, 2026) / Table 2 (2020), s. 6.1 | gov. guide | 85 |
 | 111 E 5th | ETS on "the highest below-grade level, located along an exterior wall"; dedicated NEU room(s) for heat recovery | arch_dc_rts19744cond | cond. 1.13(a)–(b), pp. 16–17 | gov. report | 85 |
 | ETS, Blatchford | 27–55 m² by units; 2 h separation; card reader for the utility | arch_ho_breMultiUnit2025 | Table 9; 6.4.2; 6.4.5 | design guide (utility) | 85 |
 | Refrigeration | CSA B52 (paywalled); TSBC registration ≥ exemption | hr_plant_room | register | rule | 70 |
@@ -254,11 +254,11 @@ Support = gross area minus data hall. Definitions differ (raised floor, IT space
 | eStruxture VAN-1, Vancouver | 7,500 ft² | 10,000 ft² | 75 % | 25 % | estruxtureVAN1ds | operator claim | 45 |
 | Qu EDM1, Edmonton | 15,712 ft² raised floor | 18,000 ft² | 87 % | 13 % | quEDM1_2026 | operator claim | 45 |
 | EdgeConneX Lucan, Ireland (benchmark; plant in yard) | 12,859 m² | 15,274 m² | 84 % | 16 % | abp317802 | filed (inspector) | 50 |
-| Village Place, Virginia (US staff report) | — | 1,188,143 ft² | ? | office alone 5.0 % | arch_dc_pwcVillagePlace | gov. report | 55 |
+| Village Place, Virginia (US staff report) | — | 1,188,143 ft² | ? | office alone 5.0 % (5.8 % on 1,033,000 ft²) | arch_dc_pwcVillagePlace | gov. report | 55 |
 
 **Range:** support 13–52 % (one filed Canadian plan set, four Canadian operator sheets). Median of the six whole-building cases ≈27–33 %, depending on which Burlington GFA is used (our arithmetic). Not a rule.
 
-Checked, no hall/support split: Mississauga Prologis plans (21,244 m², 2 storeys), Walsh, Sequoia, Laurelwood (California CEC), CoreSite LA3 (Los Angeles), 111 E 5th (no floor plans filed: RTS 19744 p. 4).
+Checked, no hall/support split: Mississauga Prologis plans (21,244 m², 2 storeys; PJR gives a 10,219 m² envelope GFA, conflict), Walsh, Sequoia, Laurelwood (California CEC), CoreSite LA3 (Los Angeles), 111 E 5th (no floor plans filed: RTS 19744 p. 4).
 
 ---
 
@@ -270,3 +270,7 @@ Checked, no hall/support split: Mississauga Prologis plans (21,244 m², 2 storey
 - **No US filed plan set** with a hall/support split was found; the share rests on Burlington plus operator sheets.
 - **Staff per MW:** only one stated pair (Ark UP4, applicant). No Canadian figure.
 - VAN3 layout is one visit (site fact, conf 40).
+
+---
+
+Check 2 applied (3 Nov 2026): source texts corrected per checkV2_result_dc_rooms.json; table rows fixed (F-2/D separations, generator set sizes, UAlberta room and conduit, Edmonton BE screening, Village Place pages and 5.8 %, washroom table scope, staff per MW, ETS table numbers, Mississauga GFA conflict); support-share arithmetic re-done and confirmed (Burlington 72 / 48 %, CAL-1 51–52 %, VAN4 59 %, VAN-1 75 %, EDM1 87 %, Lucan 84 %; median support 27–33 %). eStruxture CAL-1, Hong Kong TPB papers and Kidde sheet unreachable (provenance refused).

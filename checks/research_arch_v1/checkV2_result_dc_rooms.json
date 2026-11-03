@@ -1,0 +1,556 @@
+{
+ "arch_dc_fm0532rooms": {
+  "where_read": "/tmp/fm/fm.txt (text extract of J.B.'s upload /tmp/fm/fm.pdf, PDF title 'DS 5-32 Data Centers and Related Facilities'); not in repo",
+  "claims": [
+   {
+    "claim": "Title, FM Global, January 2026, interim revision July 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 1: '5-32 … January 2026 … Interim Revision July 2026'; 'DATA CENTERS AND RELATED FACILITIES'",
+    "fix": ""
+   },
+   {
+    "claim": "2.3.1.1.1 packing/combustibles quote, p. 7",
+    "verdict": "CONFIRMED",
+    "evidence": "'Do not store packing materials or other combustibles (e.g., cardboard, plastic containers, etc.,) in the data processing equipment room or other critical areas (e.g., utility, UPS rooms, battery rooms, etc.,).' (p. 7)",
+    "fix": ""
+   },
+   {
+    "claim": "2.3.1.1.2 de-box quote, p. 7",
+    "verdict": "CONFIRMED",
+    "evidence": "'De-box equipment outside the data processing equipment rooms or other critical areas (e.g., utility, UPS rooms, etc.,)' (printed '2.3.1.1 2' in the extract)",
+    "fix": ""
+   },
+   {
+    "claim": "2.4.3.2.3.7 reserve cylinders, p. 19",
+    "verdict": "CONFIRMED",
+    "evidence": "'Provide a permanently connected reserve of clean agent supply cylinder(s) for the halocarbon or inert gas (clean agent) fire extinguishing system in accordance with Data Sheet 4-9' (p. 19)",
+    "fix": ""
+   },
+   {
+    "claim": "2.4.3.10.1–2 storage per DS 8-9, Li-ion per DS 7-112, p. 23",
+    "verdict": "CONFIRMED",
+    "evidence": "'Protect storage areas in accordance with Data Sheet 8-9'; 'new or decommissioned Li-ion … Data Sheet 7-112' (p. 23)",
+    "fix": ""
+   },
+   {
+    "claim": "2.6.6.4.2 alarms at constantly attended location, p. 28",
+    "verdict": "CONFIRMED",
+    "evidence": "'Provide audible and visual alarms in the vicinity of the equipment and at a constantly attended location.' (p. 28, under 2.6.6.4 Controlling HVAC Systems)",
+    "fix": ""
+   },
+   {
+    "claim": "3.5.2.1 spaces 'typically located in different parts of the facility', pp. 47–48",
+    "verdict": "CONFIRMED",
+    "evidence": "'These spaces are typically located in different parts of the facility' (p. 47, runs to p. 48)",
+    "fix": ""
+   },
+   {
+    "claim": "UPS 10-15 minutes; centralized battery/electrical rooms or per-hall UPS, p. 50",
+    "verdict": "CONFIRMED",
+    "evidence": "'typically for 10-15 minutes while backup/emergency generators activate'; 'centralized with batteries located inside dedicated battery rooms or electrical rooms'; 'UPS systems dedicated to each data hall' (p. 50, still within 3.5.2.1)",
+    "fix": ""
+   },
+   {
+    "claim": "Kind: insurer guidance",
+    "verdict": "CONFIRMED",
+    "evidence": "FM data sheet; recommendations, not law",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "INSURER GUIDANCE (not law): FM Property Loss Prevention Data Sheet 5-32, Data Centers and Related Facilities, FM Global, January 2026, interim revision July 2026 (J.B. upload 1 Nov 2026; text extract /tmp/fm/fm.txt, read 2 Nov 2026; supplements register fmDS0532): 2.3.1.1.1 'Do not store packing materials or other combustibles (e.g., cardboard, plastic containers, etc.,) in the data processing equipment room or other critical areas (e.g., utility, UPS rooms, battery rooms, etc.,)'; 2.3.1.1.2 'De-box equipment outside the data processing equipment rooms or other critical areas' (p. 7); 2.4.3.2.3.7 'Provide a permanently connected reserve of clean agent supply cylinder(s)' (p. 19); 2.4.3.10.1–2 storage areas per DS 8-9, new or decommissioned Li-ion per DS 7-112 (p. 23); 2.6.6.4.2 'Provide audible and visual alarms in the vicinity of the equipment and at a constantly attended location' (p. 28); 3.5.2.1 electrical, IT and mechanical spaces 'are typically located in different parts of the facility' (pp. 47–48); UPS 'providing power to critical systems typically for 10-15 minutes while backup/emergency generators activate'; 'UPS architecture can be centralized with batteries located inside dedicated battery rooms or electrical rooms', or 'UPS systems dedicated to each data hall' (p. 50) — fm.com/datasheets (PDF not in repo) ‖ CHECK 2 (2 Nov 2026, ok): all clauses, quotes and pages re-read in the text extract; 2.3.1.1.2 is printed '2.3.1.1 2' in the extract"
+ },
+ "arch_dc_schneiderWP144": {
+  "where_read": "WebFetch of http://www.apcc.wang/pdf/VAVR-6KYMZ7_R1_EN.pdf (third-party host, as the text says)",
+  "claims": [
+   {
+    "claim": "Title, authors, WP 144 Rev. 1",
+    "verdict": "CONFIRMED",
+    "evidence": "'Data Center Projects: Establishing a Floor Plan', Neil Rasmussen and Wendy Torell, White Paper 144, Rev 1",
+    "fix": ""
+   },
+   {
+    "claim": "28 sq ft / rack (2.6 m²), pp. 4–5",
+    "verdict": "CONFIRMED",
+    "evidence": "'can be estimated by dividing the room area by 28 sq ft / rack' (starts p. 4, ends p. 5)",
+    "fix": ""
+   },
+   {
+    "claim": "Row-end minimum 2 tiles for plain walls, p. 17",
+    "verdict": "CONFIRMED",
+    "evidence": "'For plain walls, a minimum of 2 tiles is an acceptable spacing for a row-end' (p. 17)",
+    "fix": ""
+   },
+   {
+    "claim": "No support-space ratio or room list",
+    "verdict": "CONFIRMED",
+    "evidence": "no ratio found; only a column can take up to three rack locations (p. 7)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "MAKER CLAIM (vendor white paper): N. Rasmussen and W. Torell, 'Data Center Projects: Establishing a Floor Plan', Schneider Electric Data Center Science Center White Paper 144, Rev. 1 (undated): IT rack locations 'can be estimated by dividing the room area by 28 sq ft / rack (2.6 sq meters / rack)' (pp. 4–5); row-end 'a minimum of 2 tiles' for plain walls (p. 17); no support-space ratio or room list — read from a copy at http://www.apcc.wang/pdf/VAVR-6KYMZ7_R1_EN.pdf (third-party host; Schneider listing not opened ?) ‖ CHECK 2 (2 Nov 2026, ok): title, figures and pages confirmed on the third-party copy"
+ },
+ "arch_dc_rts19744cond": {
+  "where_read": "WebFetch of https://council.vancouver.ca/20260714/documents/rr1.pdf",
+  "claims": [
+   {
+    "claim": "RTS 19744, report date 30 Jun 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'Report Date: June 30, 2026'; 'RTS No.: 19744' (p. 1)",
+    "fix": ""
+   },
+   {
+    "claim": "'detailed building floorplans were not provided by the applicant' (p. 4)",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 4 exact",
+    "fix": ""
+   },
+   {
+    "claim": "1.13(a) ETS room 'on the highest below-grade level, located along an exterior wall adjacent to NEU distribution piping' (p. 16)",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 16; also 'free of any other equipment or obstructions', final size 'to be confirmed through detailed design'",
+    "fix": ""
+   },
+   {
+    "claim": "1.13(b) 'Adequate and appropriate dedicated NEU Room(s) to support waste heat recovery and delivery' (p. 17)",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 17; the clause goes on 'on the highest below-grade level, located along an exterior wall adjacent to NEU distribution piping'",
+    "fix": "add the location wording to 1.13(b)"
+   },
+   {
+    "claim": "1.16 pad-mount transformers and kiosks on private property (p. 18)",
+    "verdict": "CONFIRMED",
+    "evidence": "'pad mounted transformers, low profile transformers and kiosks as well as telecommunications kiosks are to be' located on private property (p. 18)",
+    "fix": "add telecommunications kiosks"
+   },
+   {
+    "claim": "No staff count",
+    "verdict": "CONFIRMED",
+    "evidence": "no employment figure in the report",
+    "fix": ""
+   },
+   {
+    "claim": "Loading 'finalized at the time of development permit' (p. 5)",
+    "verdict": "CONFIRMED",
+    "evidence": "'Parking, loading, bicycle and passenger loading spaces are finalized at the time of development permit' (p. 5, s. 6)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "GOVERNMENT REPORT: City of Vancouver, Referral Report RTS 19744, CD-1 rezoning 111 E 5th Ave, 30 Jun 2026 (supplements van_rts19744): 'detailed building floorplans were not provided by the applicant' (p. 4); cond. 1.13(a) Energy Transfer Station room 'on the highest below-grade level, located along an exterior wall adjacent to NEU distribution piping', free of other equipment, final size 'to be confirmed through detailed design' (p. 16); 1.13(b) 'Adequate and appropriate dedicated NEU Room(s) to support waste heat recovery and delivery', at the same location (p. 17); 1.16 'pad mounted transformers, low profile transformers and kiosks as well as telecommunications kiosks' to be located on private property (p. 18); no staff count; loading 'finalized at the time of development permit' (p. 5) — https://council.vancouver.ca/20260714/documents/rr1.pdf ‖ CHECK 2 (2 Nov 2026, fixed): all quotes and pages confirmed; 1.13(b) location and telecom kiosks added"
+ },
+ "arch_dc_pwcVillagePlace": {
+  "where_read": "WebFetch of https://eservice.pwcgov.org/planning/documents/REZ2020-00024.pdf",
+  "claims": [
+   {
+    "claim": "Staff report 9 Apr 2021",
+    "verdict": "CONFIRMED",
+    "evidence": "'April 9, 2021' (p. 2); PC meeting 21 Apr 2021 (p. 1)",
+    "fix": ""
+   },
+   {
+    "claim": "'1,188,143 square feet' incl. '60,000 square feet of offices' (p. 2)",
+    "verdict": "CONFIRMED",
+    "evidence": "p. 2 'up to 1,188,143 square feet of data center uses, including 60,000 square feet of offices'; repeated p. 15",
+    "fix": ""
+   },
+   {
+    "claim": "'approximately 1,033,000 square feet' on p. 25",
+    "verdict": "WRONG",
+    "evidence": "on p. 24 (Transportation Plan Analysis): 'approximately 1,033,000 square feet of data center use'",
+    "fix": "p. 25 → p. 24"
+   },
+   {
+    "claim": "'an estimated 300 jobs' (p. 26, applicant figure ?)",
+    "verdict": "WRONG",
+    "evidence": "on p. 25, and the report says 'The Applicant provided the following information regarding jobs'",
+    "fix": "p. 26 → p. 25; applicant figure confirmed, '?' removed"
+   },
+   {
+    "claim": "70 ft maximum height",
+    "verdict": "CONFIRMED",
+    "evidence": "'Maximum Building Height 70 feet' (p. 2); parapets and mechanical areas may extend above",
+    "fix": ""
+   },
+   {
+    "claim": "No MW, no data-hall split",
+    "verdict": "CONFIRMED",
+    "evidence": "none in readable text (power letters pp. 69–104 are images, not read ?)",
+    "fix": ""
+   },
+   {
+    "claim": "Office share 5.0 %; ≈3,960 ft² per job (our arithmetic)",
+    "verdict": "CONFIRMED",
+    "evidence": "60,000 ÷ 1,188,143 = 5.05 %; 1,188,143 ÷ 300 = 3,960; on 1,033,000 ft²: 5.8 % and 3,443 ft²",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "US county staff report; benchmark outside Canada",
+  "new_text": "GOVERNMENT REPORT (US): Prince William County Planning Office, staff report, Village Place Technology Park, REZ2020-00024 / SUP2020-00037 (staff report 9 Apr 2021): up to '1,188,143 square feet' of data center uses 'including 60,000 square feet of offices' (p. 2, repeated p. 15; p. 24 gives 'approximately 1,033,000 square feet', not reconciled); 'an estimated 300 jobs' (p. 25, applicant figure); 70 ft maximum height (p. 2); no MW, no data-hall split (power letters pp. 69–104 are images, not read ?). Office share 5.0 % (5.8 % on 1,033,000 ft²) and ≈3,960 ft² per job are our arithmetic — https://eservice.pwcgov.org/planning/documents/REZ2020-00024.pdf ‖ CHECK 2 (2 Nov 2026, fixed): 1,033,000 is p. 24 not 25; jobs p. 25 not 26 and stated as applicant's; arithmetic confirmed"
+ },
+ "arch_dc_missSitePlan": {
+  "where_read": "WebFetch of both Mississauga PDFs",
+  "claims": [
+   {
+    "claim": "Petroff Partnership Architects for Prologis",
+    "verdict": "CONFIRMED",
+    "evidence": "title block 'Petroff', 10 Aviva Way, Markham; 'Prologis Inc. (Canada)' (roles not labelled on the sheet)",
+    "fix": ""
+   },
+   {
+    "claim": "A.100-1a, rev. 2, 4 Mar 2026; SP 25-63",
+    "verdict": "CONFIRMED",
+    "evidence": "'A.100-1a OVERALL SITE PLAN'; '2 MAR 4, 2026 ISSUED FOR SPA'",
+    "fix": ""
+   },
+   {
+    "claim": "Level 1 and 2 10,622.00 m², total 21,244 m²; 10,522 m² conflict",
+    "verdict": "CONFIRMED",
+    "evidence": "10,622.00 m² per level, GFA 21,244.00 m²; earlier table 10,522.00 m²; a callout also reads '±21,224 SM'",
+    "fix": "add the ±21,224 m² callout"
+   },
+   {
+    "claim": "2 storeys",
+    "verdict": "CONFIRMED",
+    "evidence": "'PROPOSED 2-STOREY DATA CENTRE'",
+    "fix": ""
+   },
+   {
+    "claim": "Loading 4 provided / 4 required",
+    "verdict": "CONFIRMED",
+    "evidence": "row 'DATA CENTRE 4 4' (column headers garbled; which is which ?)",
+    "fix": ""
+   },
+   {
+    "claim": "Parking 40 / 637",
+    "verdict": "CONFIRMED",
+    "evidence": "row 'DATA CENTRE 40 637' (headers unclear ?); the PJR computes 611 required (Table 1, p. 6)",
+    "fix": "add header doubt and PJR 611"
+   },
+   {
+    "claim": "No data-hall, office or plant split",
+    "verdict": "CONFIRMED",
+    "evidence": "none tied to the data centre (a tenant office, mechanical and electrical room appear near Block B, assignment unclear)",
+    "fix": ""
+   },
+   {
+    "claim": "PJR, Mainline Planning, 19 Aug 2025",
+    "verdict": "CONFIRMED",
+    "evidence": "letter dated August 19, 2025; Andy Mok, Mainline Planning Services",
+    "fix": ""
+   },
+   {
+    "claim": "'The building height is 17m (20.9m including mechanical screen)' (p. 3, s. 3.1)",
+    "verdict": "CONFIRMED",
+    "evidence": "exact, p. 3, s. 3.1",
+    "fix": ""
+   },
+   {
+    "claim": "No staff count",
+    "verdict": "CONFIRMED",
+    "evidence": "'high-quality jobs', no number",
+    "fix": ""
+   },
+   {
+    "claim": "(not in text) PJR GFA",
+    "verdict": "NOT FOUND",
+    "evidence": "PJR s. 3.1: 'The building envelope GFA is 10,219 sq m'; parking uses 20,338 m²; neither matches 21,244 m²",
+    "fix": "add as conflict"
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "FILED PLANS (Ontario): Petroff (title block) for Prologis Inc. (Canada), Overall Site Plan, Data Centre, OZ 25/21 W9 (SP 25-63), drawing A.100-1a, rev. 2, 4 Mar 2026 (posted May 2026): 'DATA CENTRE - LEVEL 1' 10,622.00 m², 'LEVEL 2' 10,622.00 m², total 21,244 m² (another table shows 10,522 m² per level and a callout '±21,224 SM'; conflict); 2 storeys; loading 4 / 4 and parking 40 / 637 (column headers garbled; provided vs required ?); no data-hall, office or plant split — https://www.mississauga.ca/wp-content/uploads/2026/01/07151438/Overall-Site-Plan-Data-Centre-revised-OZ-25-21-W9-May-2026.pdf ; Planning Justification Report (Mainline Planning, 19 Aug 2025): 'The building height is 17m (20.9m including mechanical screen)' (p. 3, s. 3.1); 'The building envelope GFA is 10,219 sq m' (s. 3.1) and parking on 20,338 m² for 611 spaces (Table 1, p. 6), neither matching the site plan; no staff count — https://www.mississauga.ca/wp-content/uploads/2026/01/08125422/Planning-Justification-Report-Data-Centre-OZ-25-21-W9-December-2025.pdf ‖ CHECK 2 (2 Nov 2026, fixed): figures confirmed; ±21,224 m² callout, PJR GFA conflict and header doubt added"
+ },
+ "arch_dc_ualbertaTelecom": {
+  "where_read": "WebFetch of https://www.ualberta.ca/en/information-services-and-technology/media-library/pdf/telecommunications-design-guidelines.pdf",
+  "claims": [
+   {
+    "claim": "Cabling Standards v4.1a, revised Oct 2026",
+    "verdict": "CONFIRMED",
+    "evidence": "'University of Alberta Cabling Standards (version 4.1a)', 'Revised October 2026'",
+    "fix": ""
+   },
+   {
+    "claim": "§8.3.C typical telecom room 8 ft x 10 ft",
+    "verdict": "WRONG",
+    "evidence": "'ideal' size '8 ft X 10 ft or 2438 mm X 3048mm'; depends on function and area served",
+    "fix": "typical → ideal; 2.44 × 3.05 m"
+   },
+   {
+    "claim": "§8.3.H ceiling ≥8.5 ft (2,591 mm) unobstructed",
+    "verdict": "CONFIRMED",
+    "evidence": "'minimum acceptable ceiling height is 8.5' or 2591 mm'",
+    "fix": ""
+   },
+   {
+    "claim": "§8.3.B no electrical/mechanical equipment, sinks, water, piping, ductwork, building power",
+    "verdict": "CONFIRMED",
+    "evidence": "'should not contain electrical and mechanical equipment' or 'sinks or other sources of water'; fire alarm panels case by case",
+    "fix": "note 'should'"
+   },
+   {
+    "claim": "§8.3.E door ≥910 × 2,032 mm, no sills or windows",
+    "verdict": "CONFIRMED",
+    "evidence": "'a minimum of 2032mm x 910mm wide with no door sills or windows'; opens 180° outward",
+    "fix": "the no-windows rule is about the door"
+   },
+   {
+    "claim": "§8.3.F floor ≥490 kg/m²",
+    "verdict": "CONFIRMED",
+    "evidence": "'no less than 490 kg/m2'",
+    "fix": ""
+   },
+   {
+    "claim": "§8.1 one 110 mm and one 63 mm entry conduit",
+    "verdict": "CONFIRMED",
+    "evidence": "'At minimum one 110mm (4\") and one 63mm (2\") conduit'; the 63 mm goes to fire alarm and RCMS panels, not the TR",
+    "fix": "say so"
+   },
+   {
+    "claim": "No fire rating",
+    "verdict": "CONFIRMED",
+    "evidence": "no room rating; only penetrations fire-stopped (8.3.G)",
+    "fix": "add 8.3.G"
+   },
+   {
+    "claim": "No data-centre entrance-room size",
+    "verdict": "CONFIRMED",
+    "evidence": "8.4 Entrance Facility: requirements named, no dimensions",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "campus/office telecom rooms; not written for a data-centre entrance or meet-me room (benchmark only, already labelled)",
+  "new_text": "DESIGN GUIDE (institution, office/campus buildings; benchmark only): University of Alberta IST, Telecommunications Design Guidelines (Cabling Standards v4.1a, revised Oct 2026): §8.3.C ideal telecom room '8 ft X 10 ft or 2438 mm X 3048mm', size depends on function and total area served; §8.3.H ceiling min. 8.5 ft (2,591 mm) unobstructed; §8.3.B 'should not contain electrical and mechanical equipment', sinks or water, nor piping, ductwork or building power distribution (fire alarm panels case by case); §8.3.E door ≥2,032 × 910 mm 'with no door sills or windows', opening 180° outward; §8.3.F floor ≥490 kg/m²; §8.3.G penetrations fire-stopped, no room fire rating; §8.1 at least one 110 mm and one 63 mm conduit into a new building (the 63 mm serves fire alarm and RCMS panels, not the telecom room); §8.4 entrance facility: no dimensions; no data-centre entrance-room size — https://www.ualberta.ca/en/information-services-and-technology/media-library/pdf/telecommunications-design-guidelines.pdf ‖ CHECK 2 (2 Nov 2026, fixed): 'typical' → 'ideal'; 63 mm conduit is for fire alarm/RCMS; door no-window rule; 8.3.G fire-stopping added"
+ },
+ "arch_dc_vbblFDC": {
+  "where_read": "data/raw/codes/vbbl2025_v1.txt l. 10381–10389",
+  "claims": [
+   {
+    "claim": "3.2.5.15.(2) sprinkler FDC quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'The fire department connection for an automatic sprinkler system shall be located horizontally within 5 m of the principal entrance of a building, have unobstructed access for a distance of not less than 1 m and be visible from the street.'",
+    "fix": ""
+   },
+   {
+    "claim": "(1) same for standpipes",
+    "verdict": "CONFIRMED",
+    "evidence": "'(1) The fire department connection for a standpipe system shall be located horizontally within 5 m …'",
+    "fix": ""
+   },
+   {
+    "claim": "Valve room near the FDC is our reading",
+    "verdict": "CONFIRMED",
+    "evidence": "no clause places the valve room",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: Vancouver Building By-law 2025, Book I, Div. B 3.2.5.15.(2) (local text data/raw/codes/vbbl2025_v1.txt): 'The fire department connection for an automatic sprinkler system shall be located horizontally within 5 m of the principal entrance of a building, have unobstructed access for a distance of not less than 1 m and be visible from the street'; (1) same for standpipes. Placing the sprinkler valve room near the FDC is our reading — VBBL 2025 Book I ‖ CHECK 2 (2 Nov 2026, ok): wording of (1) and (2) confirmed in the local VBBL text"
+ },
+ "arch_dc_nbcJanitorShower": {
+  "where_read": "data/raw/codes/nbc.txt, bcbc2024.txt, vbbl2025_v1.txt, nbc_ab2023.txt",
+  "claims": [
+   {
+    "claim": "3.3.1.22.(1) 1 h quote",
+    "verdict": "CONFIRMED",
+    "evidence": "'shall be separated from the remainder of the building by a fire separation having a fire-resistance rating not less than 1 h' (all four codes)",
+    "fix": ""
+   },
+   {
+    "claim": "(2) 45 min; (3) no rating if sprinklered throughout",
+    "verdict": "CONFIRMED",
+    "evidence": "'not less than 45 min'; 'not required to have a fire-resistance rating if the floor area … is sprinklered throughout'",
+    "fix": ""
+   },
+   {
+    "claim": "3.8.2.8.(12) one shower stall in each group",
+    "verdict": "CONFIRMED",
+    "evidence": "NBC: 'Except within a suite of care occupancy or a suite of residential occupancy, where showers are provided in a building, at least one shower stall in each group of showers shall comply with Subsection 3.8.3.' (same BCBC, VBBL)",
+    "fix": ""
+   },
+   {
+    "claim": "Same wording in NBC(AE) 2023",
+    "verdict": "WRONG",
+    "evidence": "NBC(AE) (12): 'Where showers are provided in a building, at least one shower stall shall comply with Subsection 3.8.3., except where showers are provided within a) a suite of care occupancy' … (no 'in each group')",
+    "fix": "note the AE wording"
+   },
+   {
+    "claim": "(13) universal dressing and shower room for employee common-use areas",
+    "verdict": "CONFIRMED",
+    "evidence": "'or as part of a common-use area for employees, at least one universal dressing and shower room' (all four)",
+    "fix": ""
+   },
+   {
+    "claim": "3.8.3.17.(1)(a) 1 500 × 900 mm",
+    "verdict": "CONFIRMED",
+    "evidence": "'be not less than 1 500 mm wide and 900 mm deep' (all four)",
+    "fix": ""
+   },
+   {
+    "claim": "No clause requires showers",
+    "verdict": "CONFIRMED",
+    "evidence": "clauses apply only 'where showers are provided'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "RULE: NBC 2020 Div. B (local text data/raw/codes/nbc.txt; same wording in BCBC 2024, VBBL 2025, NBC(AE) 2023 copies): 3.3.1.22.(1) a room for janitorial supplies 'shall be separated from the remainder of the building by a fire separation having a fire-resistance rating not less than 1 h'; (2) 45 min where the floor assembly may be less than 1 h; (3) no rating 'if the floor area in which the room or space is located is sprinklered throughout'; 3.8.2.8.(12) 'where showers are provided in a building, at least one shower stall in each group of showers shall comply with Subsection 3.8.3.' (NBC(AE) 2023: 'at least one shower stall', no 'in each group'); (13) where showering is provided 'as part of a common-use area for employees, at least one universal dressing and shower room'; 3.8.3.17.(1)(a) shower 'not less than 1 500 mm wide and 900 mm deep'. No clause requires showers — NBC 2020 ‖ CHECK 2 (2 Nov 2026, fixed): all quotes confirmed in the four local codes; NBC(AE) 3.8.2.8.(12) wording differs (no 'in each group')"
+ },
+ "arch_dc_ezb5120": {
+  "where_read": "data/raw/edm/bylaw/b.txt (l. 51705–51717, 47934–47944, 6104–6108, 36864, 42803, 43686)",
+  "claims": [
+   {
+    "claim": "5.120 1.1 'Non-Industrial development must comply with the following'",
+    "verdict": "CONFIRMED",
+    "evidence": "exact (5.120 1. Non-Industrial Development Standards)",
+    "fix": ""
+   },
+   {
+    "claim": "1.1.2 mechanical equipment except Solar Collectors concealed",
+    "verdict": "CONFIRMED",
+    "evidence": "'All mechanical equipment, except for Solar Collectors, must be concealed by screening in a manner compatible with the architectural character of the building or by incorporating it within the building.'",
+    "fix": ""
+   },
+   {
+    "claim": "Industrial zones carry own clauses, e.g. 'All mechanical equipment, including roof mechanical units, must be concealed by screening'",
+    "verdict": "WRONG",
+    "evidence": "that wording is in special-area zones (Riverview Town Centre 5.8, ALA 6.10, AUVC 7.9), not industrial zones. BE 5.2: 'All mechanical and electrical equipment, transformers, ducts, cooling towers, materials handling equipment or other similar exposed projections must be screened from view from Abutting Streets and Sites in non-industrial Zones.' No such clause found in IM (our search ?)",
+    "fix": "replace the example with BE 5.2"
+   },
+   {
+    "claim": "5.70 1.9.5 no Height limit for ventilating equipment, mechanical penthouse",
+    "verdict": "CONFIRMED",
+    "evidence": "1.9 'have no Height limit in any Zone: … 1.9.5. ventilating equipment, plumbing stacks, and mechanical penthouse'",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "5.120 1.1 applies to non-industrial development only; a data centre in an industrial or BE zone follows that zone's clause",
+  "new_text": "RULE: City of Edmonton Zoning Bylaw 20001 (local copy data/raw/edm/bylaw/b.txt, as adopted Jan 2024): 5.120 1.1 'Non-Industrial development must comply with the following', 1.1.2 'All mechanical equipment, except for Solar Collectors, must be concealed by screening in a manner compatible with the architectural character of the building or by incorporating it within the building'; business and industrial zones carry their own clauses, e.g. BE 5.2 'All mechanical and electrical equipment, transformers, ducts, cooling towers, materials handling equipment or other similar exposed projections must be screened from view from Abutting Streets and Sites in non-industrial Zones' (no such clause found in IM ?); 5.70 1.9.5 'ventilating equipment, plumbing stacks, and mechanical penthouse' have 'no Height limit in any Zone' — https://zoningbylaw.edmonton.ca/ ‖ CHECK 2 (2 Nov 2026, fixed): the 'including roof mechanical units' example is from special-area zones (Riverview, ALA, AUVC), not industrial; replaced with BE 5.2"
+ },
+ "arch_dc_estruxCal1": {
+  "where_read": "UNREACHABLE (provenance refused); compared with sources/16_dc_components_sizing.md",
+  "claims": [
+   {
+    "claim": "'65,000 sq. ft. of total space'",
+    "verdict": "UNREACHABLE",
+    "evidence": "WebFetch refused (provenance), 2 Nov 2026; no local copy in repo; matches sources/16 (C1 / addendum / S29)",
+    "fix": ""
+   },
+   {
+    "claim": "'33,000' / '33,700 sq. ft.' IT space",
+    "verdict": "UNREACHABLE",
+    "evidence": "WebFetch refused (provenance), 2 Nov 2026; no local copy in repo; matches sources/16 (C1 / addendum / S29)",
+    "fix": ""
+   },
+   {
+    "claim": "'9MW total power'",
+    "verdict": "UNREACHABLE",
+    "evidence": "WebFetch refused (provenance), 2 Nov 2026; no local copy in repo; matches sources/16 (C1 / addendum / S29)",
+    "fix": ""
+   },
+   {
+    "claim": "2N UPS",
+    "verdict": "UNREACHABLE",
+    "evidence": "WebFetch refused (provenance), 2 Nov 2026; no local copy in repo; matches sources/16 (C1 / addendum / S29)",
+    "fix": ""
+   },
+   {
+    "claim": "ceilings 25 ft / 19 ft",
+    "verdict": "UNREACHABLE",
+    "evidence": "WebFetch refused (provenance), 2 Nov 2026; no local copy in repo; matches sources/16 (C1 / addendum / S29)",
+    "fix": ""
+   },
+   {
+    "claim": "≈51–52 % IT share (our arithmetic)",
+    "verdict": "CONFIRMED",
+    "evidence": "33,000 ÷ 65,000 = 50.8 %; 33,700 ÷ 65,000 = 51.8 %",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "OPERATOR CLAIM: eStruxture, CAL-1 Data Sheet (2022), 7007 54 St SE, Calgary: '65,000 sq. ft. of total space'; '33,000' / '33,700 sq. ft.' of IT space (≈51–52 %, our arithmetic); '9MW total power'; 2N UPS; ceilings 25 ft / 19 ft. Taken from sources/16 C1 (read 14 Oct 2026); re-read refused 2 Nov 2026 (provenance) ? — https://www.estruxture.com/hubfs/site-files/eStruxture_CAL-1_Data_Sheet__2022.pdf ‖ CHECK 2 (2 Nov 2026, ok): unreachable (provenance refused, no local copy); text matches sources/16 ; IT share arithmetic confirmed"
+ },
+ "arch_dc_hkTpb480": {
+  "where_read": "UNREACHABLE (provenance refused); compared with sources/16_dc_components_sizing.md",
+  "claims": [
+   {
+    "claim": "para 11.4 'requires a floor-to-floor height of 6m'",
+    "verdict": "UNREACHABLE",
+    "evidence": "WebFetch refused (provenance), 2 Nov 2026; no local copy in repo; matches sources/16 (C1 / addendum / S29)",
+    "fix": ""
+   },
+   {
+    "claim": "22 storeys",
+    "verdict": "UNREACHABLE",
+    "evidence": "WebFetch refused (provenance), 2 Nov 2026; no local copy in repo; matches sources/16 (C1 / addendum / S29)",
+    "fix": ""
+   },
+   {
+    "claim": "no MW",
+    "verdict": "UNREACHABLE",
+    "evidence": "WebFetch refused (provenance), 2 Nov 2026; no local copy in repo; matches sources/16 (C1 / addendum / S29)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Hong Kong benchmark, applicant's justification",
+  "new_text": "FILED PLANNING PAPER (Hong Kong, benchmark): Town Planning Board, MPC Paper A/KC/480 (45-51 Tai Lin Pai Rd, Kwai Chung): para 11.4 the Tier III data centre 'requires a floor-to-floor height of 6m' (applicant's justification); 22 storeys; no MW. From sources/16 addendum (read 15 Oct 2026), not re-read ? — https://www.tpb.gov.hk/uploads/page/meetings/MPC/A_KC_480/A_KC_480_MainPaper.pdf ‖ CHECK 2 (2 Nov 2026, ok): unreachable (provenance refused, no local copy); text matches sources/16"
+ },
+ "arch_dc_hkTpb510": {
+  "where_read": "UNREACHABLE (provenance refused); compared with sources/16_dc_components_sizing.md",
+  "claims": [
+   {
+    "claim": "para 1.6 data hall and M&E floors 5.5 m; 1/F–3/F 6.0 m; G/F 11 m",
+    "verdict": "UNREACHABLE",
+    "evidence": "WebFetch refused (provenance), 2 Nov 2026; no local copy in repo; matches sources/16 (C1 / addendum / S29)",
+    "fix": ""
+   },
+   {
+    "claim": "no MW",
+    "verdict": "UNREACHABLE",
+    "evidence": "WebFetch refused (provenance), 2 Nov 2026; no local copy in repo; matches sources/16 (C1 / addendum / S29)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": "Hong Kong benchmark, applicant's justification",
+  "new_text": "FILED PLANNING PAPER (Hong Kong, benchmark): Town Planning Board, MPC Paper A/KC/510B (KCTL 145): para 1.6 data hall and M&E floors 5.5 m; 1/F–3/F 6.0 m; G/F 11 m (transformer, loading); no MW. From sources/16 addendum (read 15 Oct 2026), not re-read ? — https://www.tpb.gov.hk/uploads/page/meetings/20251010/A_KC_510_MainPaper.pdf ‖ CHECK 2 (2 Nov 2026, ok): unreachable (provenance refused, no local copy); text matches sources/16"
+ },
+ "arch_dc_kiddeIG541": {
+  "where_read": "UNREACHABLE (provenance refused); compared with sources/16_dc_components_sizing.md",
+  "claims": [
+   {
+    "claim": "KDS 38-41XXX1-541 rev AC, Mar 2022",
+    "verdict": "UNREACHABLE",
+    "evidence": "WebFetch refused (provenance), 2 Nov 2026; no local copy in repo; matches sources/16 (C1 / addendum / S29)",
+    "fix": ""
+   },
+   {
+    "claim": "80 L 267 × 1,880 mm, 126.6/136.1 kg",
+    "verdict": "UNREACHABLE",
+    "evidence": "WebFetch refused (provenance), 2 Nov 2026; no local copy in repo; matches sources/16 (C1 / addendum / S29)",
+    "fix": ""
+   },
+   {
+    "claim": "140 L 360 × 1,865 mm, 255.9 kg",
+    "verdict": "UNREACHABLE",
+    "evidence": "WebFetch refused (provenance), 2 Nov 2026; no local copy in repo; matches sources/16 (C1 / addendum / S29)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "scope_flag": null,
+  "new_text": "MAKER CLAIM: Kidde (KFI UK), IG-541 Agent Cylinder Assembly, KDS 38-41XXX1-541 rev AC, Mar 2022: 80 L cylinder 267 mm × 1,880 mm, 126.6/136.1 kg full (200/300 bar); 140 L 360 × 1,865 mm, 255.9 kg. From sources/16 S29 (read 14 Oct 2026), not re-read ? — https://kidde.com/fire-suppression/en/uk/media/KDS%2038-41XXX1-541%20REV-AC_tcm1137-190095.pdf ‖ CHECK 2 (2 Nov 2026, ok): unreachable (provenance refused, no local copy); text matches sources/16"
+ }
+}
