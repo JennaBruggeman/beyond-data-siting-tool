@@ -1620,6 +1620,69 @@
     "neighbours"
    ],
    "why": "arrangements side by side"
+  },
+  "arch_dc_hall": {
+   "tier": "arch_only",
+   "parties": [
+    "operator",
+    "host"
+   ],
+   "why": "how much hall each MW needs"
+  },
+  "arch_dc_electrical": {
+   "tier": "arch_only",
+   "parties": [
+    "operator"
+   ],
+   "why": "the UPS room"
+  },
+  "arch_dc_battery": {
+   "tier": "arch_only",
+   "parties": [
+    "operator",
+    "city"
+   ],
+   "why": "the battery room"
+  },
+  "arch_dc_ets": {
+   "tier": "arch_only",
+   "parties": [
+    "utility",
+    "receiver"
+   ],
+   "why": "the heat hand-over room"
+  },
+  "arch_dc_portal": {
+   "tier": "arch_only",
+   "parties": [
+    "operator"
+   ],
+   "why": "the security portals"
+  },
+  "arch_dc_washrooms": {
+   "tier": "arch_only",
+   "parties": [
+    "operator",
+    "workers"
+   ],
+   "why": "staff washrooms"
+  },
+  "arch_dc_rooms": {
+   "tier": "arch_only",
+   "parties": [
+    "operator",
+    "host",
+    "city"
+   ],
+   "why": "the data centre's rooms"
+  },
+  "arch_ratios": {
+   "tier": "arch_only",
+   "parties": [
+    "host",
+    "city"
+   ],
+   "why": "how the lot and the floor are split"
   }
  },
  "reports": {
@@ -2692,6 +2755,38 @@
    [
     "arch_compare",
     "decide"
+   ],
+   [
+    "arch_dc_hall",
+    "size"
+   ],
+   [
+    "arch_dc_electrical",
+    "size"
+   ],
+   [
+    "arch_dc_battery",
+    "size"
+   ],
+   [
+    "arch_dc_ets",
+    "size"
+   ],
+   [
+    "arch_dc_portal",
+    "size"
+   ],
+   [
+    "arch_dc_washrooms",
+    "size"
+   ],
+   [
+    "arch_dc_rooms",
+    "size"
+   ],
+   [
+    "arch_ratios",
+    "size"
    ]
   ],
   "edges": [
@@ -3958,13 +4053,121 @@
    [
     "arch_secure_line",
     "arch_compare"
+   ],
+   [
+    "it_load_outside",
+    "arch_dc_hall"
+   ],
+   [
+    "size_fit",
+    "arch_dc_hall"
+   ],
+   [
+    "hall_area",
+    "arch_dc_hall"
+   ],
+   [
+    "component_space",
+    "arch_dc_electrical"
+   ],
+   [
+    "ups_modules",
+    "arch_dc_electrical"
+   ],
+   [
+    "electrical_room",
+    "arch_dc_electrical"
+   ],
+   [
+    "component_space",
+    "arch_dc_battery"
+   ],
+   [
+    "battery_cabinets",
+    "arch_dc_battery"
+   ],
+   [
+    "hr_plant_room",
+    "arch_dc_ets"
+   ],
+   [
+    "floor_area",
+    "arch_dc_ets"
+   ],
+   [
+    "security_layers",
+    "arch_dc_portal"
+   ],
+   [
+    "arch_dc_hall",
+    "arch_dc_washrooms"
+   ],
+   [
+    "arch_dc_hall",
+    "arch_dc_rooms"
+   ],
+   [
+    "arch_dc_electrical",
+    "arch_dc_rooms"
+   ],
+   [
+    "arch_dc_battery",
+    "arch_dc_rooms"
+   ],
+   [
+    "arch_dc_ets",
+    "arch_dc_rooms"
+   ],
+   [
+    "arch_dc_portal",
+    "arch_dc_rooms"
+   ],
+   [
+    "arch_dc_washrooms",
+    "arch_dc_rooms"
+   ],
+   [
+    "component_space",
+    "arch_dc_rooms"
+   ],
+   [
+    "transformers",
+    "arch_dc_rooms"
+   ],
+   [
+    "generator_sets",
+    "arch_dc_rooms"
+   ],
+   [
+    "cooling_units",
+    "arch_dc_rooms"
+   ],
+   [
+    "envelope",
+    "arch_ratios"
+   ],
+   [
+    "arch_dc_hall",
+    "arch_ratios"
+   ],
+   [
+    "arch_dc_electrical",
+    "arch_ratios"
+   ],
+   [
+    "arch_dc_battery",
+    "arch_ratios"
+   ],
+   [
+    "arch_space_budget",
+    "arch_ratios"
    ]
   ]
  },
  "resident_count": 42,
  "community_count": 119,
  "full_count": 202,
- "arch_count": 127,
+ "arch_count": 135,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {
