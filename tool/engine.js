@@ -187,7 +187,7 @@ function equip(mw,A){ A=A||BD.S.answers; const sp=A.spares||'n1', red=n=>sp==='2
     crah:[0,0],
     cdu:toLiq[1]>0?[red(Math.ceil(toLiq[0]/E.cduKW)),red(Math.ceil(toLiq[1]/E.cduKW))]:[0,0]};
   // room cooling type from hall density (register: room_cooling_type; Vertiv SL-70713 limits, manufacturer claims)
-  let M=null; try{ M=BD.model&&BD.model(); }catch(e){} const fl=M&&M.nF?Math.max(1,M.Z&&M.Z.ground?M.nF[0]-1:M.nF[0]):1, fa=M&&(M.serverFoot||M.foot)?BD.area(M.serverFoot||M.foot):0;
+  let M=null; try{ M=BD.model&&BD.model(); }catch(e){} const fl=M&&M.hallData?M.hallData:M&&M.nF?Math.max(1,M.Z&&M.Z.ground?M.nF[0]-1:M.nF[0]):1, /* hall fix 3 Nov 2026: a ratio-set hall's own data storeys */ fa=M&&(M.serverFoot||M.foot)?BD.area(M.serverFoot||M.foot):0;
   const wft2=fa?toAir[1]/fl*1000/(fa*10.7639):null; const type=wft2==null||wft2<=E.wfCrah?'crah':wft2<=E.wfWall?'wall':'inrow';
   const per={crah:[E.crahKW[0],E.crahKW[1]],wall:[E.wallKW,E.wallKW],inrow:[E.rowKW/E.rowOver,E.rowKW/E.rowOver]}[type];
   const room=toAir[1]>0?[red(Math.ceil(toAir[0]/per[0])),red(Math.ceil(toAir[1]/per[1]))]:[0,0];

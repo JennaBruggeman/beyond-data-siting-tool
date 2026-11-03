@@ -77,7 +77,7 @@ BD.plant={
   // J.B. 20 Oct (examples that 'did not fit'): once a size is set the building is only as big as that size needs (m.sizedTo, site.js); the plant
   // goes on that building's roof and in the yard around it, not around the most the lot could hold
   const bld=m.sizedTo&&m.serverFoot?m.serverFoot:m.foot;
-  const roofRing=bld, roofH=m.existing?(m.roofH||m.H):m.H;
+  const roofRing=bld, roofH=m.existing?(m.roofH||m.H):(m.hallTop||m.H); // hall fix 3 Nov 2026: a ratio-set hall has its own roof height (site.js setHall)
   const [ru0,ru1,rv0,rv1]=localBounds(F,roofRing);
   const put=(k,count,base,where)=>{ if(!count||!k) return 0; let got=[];
     if(where==='roof'){ got=pack(F,roofRing,[],ru0,ru1,rv0,rv1,k,count,false); // then turned 90° where the roof's shape suits that better (a C-shaped tower roof, 20 Oct)
