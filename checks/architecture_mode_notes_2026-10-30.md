@@ -136,3 +136,9 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - J.B. (2 Nov 2026): make the whole INTERFACE white, crisp and clean, like her white Blender section models (white walls, soft grey shading, black section poke, hairline type, grey zone bands). Replaces the 30 Oct "dark again" choice.
 - J.B. (2 Nov 2026): white only (no dark option).
 - J.B. (3 Nov 2026): do whichever order gives the best build with the fewest bugs: lean refactor first (constants and tables out of code, every displayed figure wired to its register entry with a failing test), then the builds.
+
+## White interface (J.B., 3 Nov 2026)
+- White look approved; keep it quiet (greys, one red for selected or flagged only).
+- Drawing is zoomable. Labels sit on shared rows above and below the drawing; leader elbows share one line; labels keep screen size as you zoom and hide once zoomed in too close.
+- Labels on/off toggle beside the view buttons.
+- If the leaders can't do all of that, switch to numbers keyed to a list.
