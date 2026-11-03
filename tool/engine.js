@@ -281,7 +281,8 @@ function fitsView(){
   <dt></dt><dd>${rng(f.hallL[0],f.hallL[1],'m²')} <span class="draft">if support rooms (electrical, generators, loading) may sit on the ground floor — for the City to confirm</span></dd>`:`<dt>Data hall</dt><dd>${rng(f.hall[0],f.hall[1],'m²')}</dd>`}
   <dt>Share of floor</dt><dd>48–72% (Burlington plan set; its own figures disagree)</dd></dl>${src('hall')}
   <h3>Largest data centre that fits</h3>${f.mw[1]<0.05?`<p style="font-size:16px;margin:4px 0"><span class="k">Nothing fits</span> <span class="sub">— after setbacks, loading and plant, no floor is left for servers (lot ${BD.fmt(f.lot||0)} m²)</span></p>`:(()=>{ let fm=null; try{ fm=BD.fitMax?BD.fitMax():null; }catch(e){} /* sweep 20 Oct: the headline is the size that fits with its plant, generators and loading; the floor-only range follows (it read as the answer before) */
-    return fm?`<p style="font-size:22px;font-weight:300;margin:4px 0">${fm.toFixed(1)} MW <span class="sub">of servers, with its plant, generators and loading; ${rng(f.mw[0],f.mw[1],'MW')} counting floor space only</span></p>`:`<p style="font-size:22px;font-weight:300;margin:4px 0">${rng(f.mw[0],f.mw[1],'MW')} <span class="sub">of servers counting floor space only; with the plant, generators and loading as set up, none fits</span></p>`; })()}
+    return fm?`<p style="font-size:22px;font-weight:300;margin:4px 0">${fm.toFixed(1)} MW <span class="sub">of servers, with its plant, generators and loading, within the noise by-law; ${rng(f.mw[0],f.mw[1],'MW')} counting floor space only</span></p>`:`<p style="font-size:22px;font-weight:300;margin:4px 0">${rng(f.mw[0],f.mw[1],'MW')} <span class="sub">of servers counting floor space only; with the plant, generators, loading and the noise by-law as set up, none fits</span></p>`; })()}
+  ${(()=>{ const M=BD.model&&BD.model(); return M&&M.notes&&M.notes.length?M.notes.map(t=>`<p class="src nflag" style="border-left:2px solid var(--line-2);padding-left:8px">${esc(t)}</p>`).join(''):''; })()/* noise flag (2 Nov 2026): a note, not a block */}
   ${(()=>{ let lc=null; try{ lc=A.built==='new'&&BD.scene3d&&BD.scene3d.layoutCheck?BD.scene3d.layoutCheck():null; }catch(e){} return lc?`<p class="sub">Rack layout check: the hall floors hold about <b>${BD.fmt(lc.racks)} racks</b> on ${lc.floors} floor${lc.floors>1?'s':''} at Schneider's spacing, with corridors, room cooling and the UPS room, ≈ <b>${rng(lc.mw[0],lc.mw[1],'MW')}</b> at 7.1–8 kW a rack (our arithmetic; register: hall_layout, rack_count). ${(()=>{ let fm=null; try{ fm=BD.fitMax?BD.fitMax():null; }catch(e){} return fm&&lc.mw[1]<fm?`<span class="k">Below the ${fm.toFixed(1)} MW above: the rack layout is the tighter limit here.</span>`:'The layout holds the size above.'; })()}</p>`:''; })()}
   ${rangeBar([{lo:f.mwS[0],hi:f.mwS[1],lab:f.mwL?'strict':'range'}].concat(f.mwL?[{lo:f.mwL[0],hi:f.mwL[1],lab:'lenient'}]:[]).concat(f.mwCheck?[{lo:f.mwCheck[0],hi:f.mwCheck[1],lab:'real buildings',ghost:true}]:[]))}
   ${f.mwL?`<p class="sub">${rng(f.mwS[0],f.mwS[1],'MW')} on the strict reading; ${rng(f.mwL[0],f.mwL[1],'MW')} if support may sit on the ground floor.</p>`:''}
@@ -401,6 +402,75 @@ function vZone(z,x,y){ if(!z) return null; const m=/^CD-1 \((\w+)\)/.exec(z), cd
   if(x!=null&&VZ.B1.some(r=>BD.pip(x,y,r))) return 'intermediate';
   if(cd) return VZ.B.has(cd)?'intermediate':VZ.A.has(cd)?'activity':'quiet';
   return VACT.test(z)?'activity':VMID.test(z)?'intermediate':'quiet'; }
+/* ---------- noise by-law as a hard rule (J.B., 2 Nov 2026; site audit 1, 23; exchanges F12) ----------
+   Measured where each by-law measures. Vancouver By-law 6555 s. 1.2 'point of reception': a point in the lane or street next to, but outside,
+   the recipient's property, at the shortest distance between that property and the source; where nothing public lies between, any point
+   outside the source's property line. Edmonton Bylaw 14600 ss. 20(1), 22(1): 'as measured at the property line of a property zoned for …'.
+   Both read here as the point of the receiving lot nearest the plant (register src_fill_van6555s21, van6555zones, bylaw14600, arch_adj_edm14600).
+   Where no lot outline holds a neighbouring building, its own outline is used and labelled (building, not property line: reads low ?).
+   Night limit governs: the plant runs 24 h (Van ss. 2.1(b)–2.3(b); Edm ss. 20, 22). Level: Lp = Lw − 20 log r − 8 (register noise_level),
+   r = horizontal distance from the cooling units' centre to that point, at least 5 m (the tool's existing near-field floor). No credit for
+   screens, enclosures or indoor plant (no verified dBA reduction ?). BLOCK: over the limit at any receiver even with the quieter unit rating.
+   FLAG: over only with the standard (louder) rating. Receivers: neighbouring lots that hold a building, within 1.5 km (the tiles loaded). */
+const NRAD=1500, VSEC={quiet:'2.1',intermediate:'2.2',activity:'2.3'};
+let NREC={key:null,list:null};
+function aRec(city,id){ for(const k in BD.S.tiles){ if(!k.startsWith(city+':')) continue; const a=BD.S.tiles[k].A[id]; if(a) return a; } return null; }
+function ringD(x,y,r){ let d=1e9, px=0, py=0; for(let i=0;i<r.length;i+=2){ const j=(i+2)%r.length, ax=r[i], ay=r[i+1], dx=r[j]-ax, dy=r[j+1]-ay, L2=dx*dx+dy*dy; let t=L2?((x-ax)*dx+(y-ay)*dy)/L2:0; t=Math.max(0,Math.min(1,t)); const qx=ax+t*dx, qy=ay+t*dy, e=Math.hypot(x-qx,y-qy); if(e<d){ d=e; px=qx; py=qy; } } return [d,px,py]; }
+function noiseSrc(s){ const city=s.city, a=s.a||[], z=city==='van'?(a[1]||'').trim():String(a[2]||a[1]||'').trim().split(/\s+/)[0].toUpperCase(), c=s.ring?BD.centroid(s.ring):s.pt;
+  return {city,zone:z,c,cls:city==='van'?(vZone(z,c&&c[0],c&&c[1])||'quiet'):null}; }
+/* the limit at one receiving lot, by source zone and receiving zone, at night (register texts only) */
+function noiseLimitAt(src,z,x,y){
+  if(src.city==='van'){ const rc=z?vZone(z,x,y):null, q=rc===null||rc==='quiet', sc=src.cls;
+    const L=q?{quiet:45,intermediate:50,activity:55}[sc]:{quiet:55,intermediate:65,activity:65}[sc];
+    /* Ls: the limit that applies under every reading. A lot with no zoning record could be either: the strict limit is shown and flagged, only the looser one blocks */
+    return {L,Ls:rc===null?{quiet:55,intermediate:65,activity:65}[sc]:L,cls:rc===null?'unknown':q?'quiet':'other',zt:z?`${z}, ${rc} zone`:'no parcel record: quiet zone assumed ?',sec:`Noise Control By-law 6555 s. ${VSEC[sc]}(b)(${q?'i':'ii'})`}; }
+  const c0=z&&String(z).split(' ')[0], res=z&&EDM_RES.has(c0), mix=z&&EDM_MIX.has(c0), r=z==null||res||mix;
+  return {L:r?50:60,Ls:z==null||mix?60:r?50:60,cls:z==null?'unknown':res?'quiet':mix?'assumed':'other',zt:z?`${c0}${mix?', residential limit assumed ?':''}`:'no parcel record: residential limit assumed ?',sec:`Bylaw 14600 s. ${r?20:22}(1)`}; }
+function noiseRecv(){ const S=BD.S, s=S.sel; if(!s) return []; const city=s.city, nT=Object.keys(S.tiles).filter(k=>k.startsWith(city+':')).length, key=city+'|'+s.id+'|'+nT;
+  if(NREC.key===key) return NREC.list; const src=noiseSrc(s), c=src.c; if(!c) return [];
+  const own=new Set((s.rings||[]).concat(s.ring?[s.ring]:[])), mine=p=>own.has(p.r)||(city==='van'?p.id===s.id:(p.ids||[]).includes(s.id));
+  const G=new Map(), C=50, cell=(x,y)=>Math.floor(x/C)+'_'+Math.floor(y/C), far=(bb,Rr)=>bb[2]<c[0]-Rr||bb[0]>c[0]+Rr||bb[3]<c[1]-Rr||bb[1]>c[1]+Rr;
+  for(const k in S.tiles){ if(!k.startsWith(city+':')) continue; for(const p of S.tiles[k].par){ if(far(p.bb,NRAD+200)||mine(p)) continue;
+    for(let i=Math.floor(p.bb[0]/C);i<=Math.floor(p.bb[2]/C);i++) for(let j=Math.floor(p.bb[1]/C);j<=Math.floor(p.bb[3]/C);j++){ const q=i+'_'+j; if(!G.has(q)) G.set(q,[]); G.get(q).push(p); } } }
+  const siteB=new Set(s.blds||[]), byP=new Map(), list=[], ownR=[...own];
+  for(const k in S.tiles){ if(!k.startsWith(city+':')) continue; for(const b of S.tiles[k].bld){ if(b.f===3||siteB.has(b)||Math.hypot(b.c[0]-c[0],b.c[1]-c[1])>NRAD) continue;
+      if(ownR.some(r=>BD.pip(b.c[0],b.c[1],r))) continue; let hit=null, ha=0;
+      for(const p of G.get(cell(b.c[0],b.c[1]))||[]){ const bb=p.bb; if(b.c[0]<bb[0]||b.c[0]>bb[2]||b.c[1]<bb[1]||b.c[1]>bb[3]||!BD.pip(b.c[0],b.c[1],p.r)) continue; const ar=BD.area(p.r); if(!hit||ar<ha){ hit=p; ha=ar; } }
+      if(hit){ let Rv=byP.get(hit); if(!Rv){ const id=hit.ids?hit.ids[0]:hit.id, a=id!=null?aRec(city,id):null, z=a?(city==='van'?((a[1]||'').trim()||null):(a[2]||a[1]||null)):null;
+          Rv=Object.assign({ring:hit.r,bb:hit.bb,lot:true,addr:a&&a[0]?String(a[0]).trim():'',blds:[]},noiseLimitAt(src,z,b.c[0],b.c[1])); byP.set(hit,Rv); list.push(Rv); } Rv.blds.push(b); }
+      else { let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9; for(let i=0;i<b.r.length;i+=2){ x0=Math.min(x0,b.r[i]); y0=Math.min(y0,b.r[i+1]); x1=Math.max(x1,b.r[i]); y1=Math.max(y1,b.r[i+1]); }
+        list.push(Object.assign({ring:b.r,bb:[x0,y0,x1,y1],lot:false,addr:'',blds:[b]},noiseLimitAt(src,null,b.c[0],b.c[1]))); } } }
+  NREC={key,list}; return list; }
+/* the check for one model (one size and set-up): a small summary; the level at each neighbouring building goes to NLEV for the 3D */
+const NLEV=new WeakMap();
+function noiseCheck(m){ const s=BD.S.sel; if(!m||!m.plant||!m.plant.s||!s) return null; const P=m.plant, k=P.s.k, n=P.s.n; if(!n) return null;
+  const LU=k.name==='dry coolers'?R.lwUnitDry:R.lwUnit, lw=[LU[0]+10*Math.log10(n),LU[1]+10*Math.log10(n)];
+  const cb=(P.boxes||[]).filter(b=>b.name===k.name), cool=cb.map(b=>BD.centroid(b.ring)), ind=P.coolRoofIndoor>0;
+  const src=noiseSrc(s); let pc=cool.length?[cool.reduce((t,p)=>t+p[0],0)/cool.length,cool.reduce((t,p)=>t+p[1],0)/cool.length]:null;
+  if(!pc){ const fr=m.serverFoot||m.foot; pc=fr?BD.centroid(fr):src.c; } if(!pc) return null;
+  const yd=cb.some(b=>b.kind==='yard'), rf=cb.some(b=>b.kind==='roof'), where=ind&&!yd?'indoors':yd&&(rf||ind)?'roof and yard':yd?'yard':'roof';
+  const list=noiseRecv(); let wQ=null, wS=null, nQ=0, nS=0, nIn=0, strict=null; const bc={quiet:0,other:0,unknown:0,assumed:0}; let nB=0; const rNeed=Math.pow(10,(lw[1]-8-45)/20);
+  for(const r of list){ const bb=r.bb, lb=Math.max(0,bb[0]-pc[0],pc[0]-bb[2])**2+Math.max(0,bb[1]-pc[1],pc[1]-bb[3])**2; if(lb>NRAD*NRAD) continue;
+    const [d0,px,py]=ringD(pc[0],pc[1],r.ring), d=Math.max(5,d0), lo=lw[0]-20*Math.log10(d)-8, hi=lw[1]-20*Math.log10(d)-8; nIn++;
+    const v={lo,hi,L:r.L,Ls:r.Ls,sec:r.sec,lot:r.lot,d:d0}; r.blds.forEach(b=>NLEV.set(b,v));
+    if(!strict||r.L<strict.L) strict={L:r.L,sec:r.sec};
+    if(hi>r.L){ bc[r.cls]=(bc[r.cls]||0)+1; if(!r.lot) nB++; }
+    if(lo>r.Ls){ nQ++; if(!wQ||lo-r.Ls>wQ.ex) wQ={r,lo,hi,d:d0,ex:lo-r.Ls,pt:[px,py]}; }
+    else if(hi>r.L){ nS++; if(!wS||hi-r.L>wS.ex) wS={r,lo,hi,d:d0,ex:hi-r.L,pt:[px,py]}; } }
+  const lab=w=>`${w.r.addr?w.r.addr+' ':''}(${w.r.zt})${w.r.lot?'':' (building, not property line: reads low ?)'}`;
+  const at=w=>w.r.lot?(s.city==='van'?'at the point of reception beside':'at the property line of'):'at';
+  const lvl=w=>`about ${Math.round(w.lo)}–${Math.round(w.hi)} dBA (quieter–standard unit rating)`;
+  const fixes=['a smaller size (fewer units)',`the cooling plant ${{roof:'in the yard or split',yard:'on the roof or split','roof and yard':'all on the roof or all in the yard',indoors:'in the yard'}[where]}, if that moves it further from this lot`];
+  if(k.name==='air-cooled chillers') fixes.push('liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims)');
+  const cav='Plant indoors or enclosed (Seen or hidden) gets no sound reduction in the tool yet: no verified dBA figure (?).';
+  const govern=wQ?{L:wQ.r.Ls,sec:wQ.r.sec}:wS?{L:wS.r.L,sec:wS.r.sec}:strict;
+  const sum=w=>({addr:w.r.addr,zt:w.r.zt,lot:w.r.lot,d:Math.round(w.d*10)/10,lo:Math.round(w.lo*10)/10,hi:Math.round(w.hi*10)/10,L:w.r.L,Ls:w.r.Ls,sec:w.r.sec});
+  const out={lw:lw.map(x=>Math.round(x*10)/10),n,src:pc.map(x=>Math.round(x*10)/10),where,tested:nIn,overQ:nQ,overS:nS,limit:govern?govern.L:null,sec:govern?govern.sec:null,beyond:rNeed>NRAD,byCls:bc,bldOnly:nB,block:null,flag:null,worst:null};
+  if(wQ){ out.worst=sum(wQ);
+    out.block=`Noise: the cooling plant (${where}) would give ${lvl(wQ)} ${at(wQ)} ${lab(wQ)}, ${fmt(wQ.d)} m away: over the ${wQ.r.Ls} dBA night limit even with the quieter rating (${wQ.r.sec}; the plant runs 24 h, so the night limit governs)${nQ>1?`. ${nQ} neighbouring lots are over`:''}. To bring it under: ${fixes.join('; ')}. ${cav}`; }
+  else if(wS){ out.worst=sum(wS);
+    out.flag=wS.lo>wS.r.L?`Noise: the plant would exceed the ${wS.r.L} dBA night limit ${at(wS)} ${lab(wS)} (${lvl(wS)}, ${wS.r.sec}) if that lot takes the stricter limit; its zoning is not known, so this is a note, not a block${nS>1?` (${nS} lots in all over a limit with the louder rating)`:''}.`:`Noise: with the standard (louder) unit rating the plant would exceed the ${wS.r.L} dBA night limit ${at(wS)} ${lab(wS)} (${lvl(wS)}, ${wS.r.sec})${nS>1?`; ${nS} lots in all`:''}. With the quieter rating it is under, so this is not blocked: quieter units would need to be chosen.`; }
+  return out; }
 function noiseRow(f){
   if(f.city==='edm') return ['Night limit at the property line','50 dBA next to homes, 60 dBA next to other uses (Bylaw 14600)','noise'];
   const zc=vZone(f.zone,f.c[0],f.c[1]), act=zc==='activity', mid=zc==='intermediate';
@@ -433,7 +503,7 @@ async function optionsView(){
    ['The climate',[
      ['Heat-pump electricity',o=>o.recover?rng(o.r.hp[0]/1000,o.r.hp[1]/1000,'GWh/yr')+' → '+rng(o.r.co2[0],o.r.co2[1],'t CO₂e/yr'):'—'],
      ['Against what it replaces',o=>o.recover?`${state('cj')}depends on how the receivers heat now (gas, electric, district)`:'—']]],
-   ['Neighbours',[[noiseRow(f)[0],()=>noiseRow(f)[1]],['Generator testing',()=>f.city==='van'?'exempt if ≤ 1 h a month in daytime, ≤ 80 dBA':'—']]],
+   ['Neighbours',[[noiseRow(f)[0],()=>noiseRow(f)[1]],['Generator testing',()=>f.city==='van'?'exempt if ≤ 1 h a month in daytime (plus once a year ≤ 3 h), ≤ 80 dBA at the point of reception or 6.1 m, whichever is greater (By-law 6555 s. 4.1(c)). Not checked (?): no rated generator sound level with a source in the register':'not checked (?): no rated generator sound level with a source in the register']]],
   ];
   const fut=o=>[['As planned','the table above'],['Tenant changes cooling',o.recover?'back to air: heat offered drops to none':'to liquid: heat could be offered'],['Tenant leaves',o.recover?'receivers fall back on their own heating at full peak':'nothing depends on it'],['Receiver leaves',o.recover?`all heat goes back to the ${BD.dryName()} — keep their full size`:'—']].map(([a,b])=>`<div><b>${a}</b> <span class="sub">${b}</span></div>`).join('');
   let h=tabBar('opts')+`<h2>Three options, side by side, in no order</h2>
@@ -663,24 +733,18 @@ function socialView(){
   const lim=f.city==='van'?({activity:55,intermediate:50}[vZone(f.zone,f.c[0],f.c[1])]||45):50;
   const dist=lw.map(L=>Math.pow(10,(L-8-lim)/20));
   // each neighbour gets the limit for ITS zone (By-law 6555 ss. 2.1–2.3: the limit depends on the source zone and the receiving zone)
-  const S=BD.S; let within=[0,0], over=[0,0], byCls={quiet:0,other:0,unknown:0,assumed:0};
-  const vcls=(z,x,y)=>vZone(z,x,y);
+  const S=BD.S; const vcls=(z,x,y)=>vZone(z,x,y);
   const srcCls=f.city==='van'?vcls(f.zone,f.c[0],f.c[1])||'quiet':null;
   const limQ={quiet:45,intermediate:50,activity:55}[srcCls]||45, limO={quiet:55,intermediate:65,activity:65}[srcCls]||55;
-  const zoneOf=(T,x,y)=>{ let best=null; for(const p of T.par){ const bb=p.bb; if(x<bb[0]||x>bb[2]||y<bb[1]||y>bb[3]) continue; if(BD.pip(x,y,p.r)){ const id=p.ids?p.ids[0]:p.id; const a=T.A[id]; if(a){ best=f.city==='van'?a[1]:(a[2]||a[1]); break; } } } return best; };
-  const limitFor=b=>{ if(b._lim!=null) return b._lim; let z=null; for(const id in S.tiles){ if(!id.startsWith(S.city+':')) continue; const T=S.tiles[id]; const bb=T.par.length?null:null; z=zoneOf(T,b.c[0],b.c[1]); if(z) break; }
-    let L; if(f.city==='van'){ const c=vcls(z,b.c[0],b.c[1]); L=c===null?limQ:c==='quiet'?limQ:limO; b._cls=c===null?'unknown':c==='quiet'?'quiet':'other'; }
-    else { const c0=z&&String(z).split(" ")[0], res=z&&EDM_RES.has(c0), mix=z&&EDM_MIX.has(c0); L=z==null||res||mix?50:60; b._cls=z==null?'unknown':res?'quiet':mix?'assumed':'other'; }
-    b._lim=L; return L; };
-  for(const id in S.tiles){ if(!id.startsWith(S.city+':')) continue; for(const b of S.tiles[id].bld){ if(b.f===3||(f.blds||[]).includes(b)) continue; const r=Math.max(5,Math.hypot(b.c[0]-f.c[0],b.c[1]-f.c[1])); if(r>600) continue;
-      b._lim=null; const L=limitFor(b); const lo=lw[0]-20*Math.log10(r)-8, hi=lw[1]-20*Math.log10(r)-8;
-      if(hi>L){ within[1]++; byCls[b._cls]++; } if(lo>L) within[0]++; } }
+  /* 2 Nov 2026 (J.B.): counted with the by-law check (noiseCheck): each neighbouring lot at its point nearest the plant, against the night limit for its zone */
+  const Mn=BD.model?BD.model():null, nc=(Mn&&Mn.noise)||null; const within=nc?[nc.overQ,nc.overQ+nc.overS]:[0,0], byCls=nc?nc.byCls:{quiet:0,other:0,unknown:0,assumed:0};
+  const limitFor=b=>{ const v=NLEV.get(b); return v?v.L:limQ; };
   const d=BD.recv[f.city]||{pts:[]}; const homes=d.pts.filter(p=>p.t==='housing'&&Math.hypot(p.x-f.c[0],p.y-f.c[1])<=200).reduce((t,p)=>t+(p.u||0),0);
   const key='bd-notes-'+S.city+'-'+S.sel.id; let notes=''; try{ notes=localStorage.getItem(key)||''; }catch(e){}
   let h=tabBar('social')+`<h2>What neighbours would hear, see and feel</h2><p class="draft">Described as experienced, not scored. Measured where the data allows; your site observations sit beside it, labelled as yours.</p>
   <h3>Sound</h3><dl><dt>Cooling plant</dt><dd>${n} ${CU.name} (as laid out, spares included), rated ${rng(lw[0],lw[1],'dBA')} together (${CU.name==='dry coolers'?'dry-cooler ratings at full fan speed, manufacturer claims':CU.name==='air-cooled chillers'?'air-cooled chiller ratings for two Vertiv models (FH3135, FIZ135), manufacturer claims; the lower one not yet indexed ?':'air-cooled chiller ratings used as a stand-in: no rating found for this kind'})</dd>
   <dt>Night limit</dt><dd>${f.city==='van'?`from this ${srcCls} zone: ${limQ} dBA at a quiet-zone neighbour, ${limO} dBA at any other`:'50 dBA next to homes, 60 dBA next to other uses'}</dd><dt>Quiet-zone limit reached at</dt><dd>${fmt(dist[0])}–${fmt(dist[1])} m from the plant, before walls, barriers or enclosures</dd>
-  <dt>Neighbours over their limit</dt><dd>${within[0]}–${within[1]} buildings within 600 m, our study radius (quieter to louder unit rating), each judged against the limit for its own zone: ${f.city==='van'?`${limQ} dBA in a quiet zone, ${limO} dBA elsewhere`:'50 dBA next to homes, 60 dBA next to other uses'}${within[1]?` — ${byCls.quiet} in quiet${f.city==='van'?' zones':' (residential) zones'}, ${byCls.other} elsewhere${byCls.assumed?`, ${byCls.assumed} in mixed-use or Direct Control zones (residential limit assumed: the bylaws do not settle these)`:''}${byCls.unknown?`, ${byCls.unknown} with no parcel record (quiet limit used)`:''}`:''}. In the 3D view, red: over even with the quieter rating; accent: over only with the louder rating.</dd>${''/* 2 Nov 2026 fix pass: D-radius (600 m: our study radius) */}
+  <dt>Neighbours over their limit</dt><dd>${within[0]}–${within[1]} neighbouring lots within 1.5 km (quieter to louder unit rating), each at its point nearest the plant (${f.city==='van'?'By-law 6555 s. 1.2, point of reception':'Bylaw 14600 ss. 20(1), 22(1), at the property line'}) and against the night limit for its own zone: ${f.city==='van'?`${limQ} dBA in a quiet zone, ${limO} dBA elsewhere`:'50 dBA next to homes, 60 dBA next to other uses'}${within[1]?` — ${byCls.quiet} in quiet${f.city==='van'?' zones':' (residential) zones'}, ${byCls.other} elsewhere${byCls.assumed?`, ${byCls.assumed} in mixed-use or Direct Control zones (residential limit assumed: the bylaws do not settle these)`:''}${byCls.unknown?`, ${byCls.unknown} with no parcel record (quiet limit used)`:''}${nc&&nc.bldOnly?`; ${nc.bldOnly} measured at the building, not the property line (reads low ?)`:''}`:''}${nc&&nc.beyond?'. Lots beyond 1.5 km are not tested (?)':''}${nc&&nc.block?'. <span class="k">Over even with the quieter rating: this set-up is blocked</span>':nc&&nc.flag?'. Over only with the louder rating: a note, not a block':''}. In the 3D view, red: over even with the quieter rating; accent: over only with the louder rating.</dd>${''/* 2 Nov 2026 fix pass: D-radius (600 m: our study radius) */}
   <dt>Low hum</dt><dd>a tonal low-frequency sound adds 5 dBA in Alberta's rule for power plants and substations (AUC Rule 012, used here as a benchmark; no rule covers it for a data centre) — the kind neighbours describe most</dd></dl>${s3('snd')}${s3('lf')}${src('noise')}
   <h3>The edge</h3><dl><dt>Standoff</dt><dd>new facilities keep about 10 m between the building and the public (45 m unless access control is in place; Ontario government standard) — a fence, bollards or a blank setback, as experienced from the street</dd>
   <dt>Ground floor</dt><dd>${f.envAssumed?'not known: this zone\'s rules are not yet read':(f.envU&&f.envU.ground)?'this zone keeps the ground floor free of data storage: it could meet the street':'nothing in the zone requires another use at grade'}</dd>
@@ -690,13 +754,13 @@ function socialView(){
   ${mathBox([
     `Cooling units: power at the meter ${n1(fac)} MW → <b>${n}</b> unit${n>1?'s':''}, from the plant sizing (${CU.name}, one spare included).`,
     `Together: Lw per unit ${LU[0]}–${LU[1]} dBA, + 10 × log₁₀(${n} units) = <b>${n1(lw[0])}–${n1(lw[1])} dBA</b>.`,
-    `Distance where the night limit is reached: r = 10^((Lw − 8 − ${lim}) ÷ 20) = <b>${n0(dist[0])}–${n0(dist[1])} m</b> (free field over hard ground, no walls or barriers).`],
+    `Distance where the night limit is reached: r = 10^((Lw − 8 − ${lim}) ÷ 20) = <b>${n0(dist[0])}–${n0(dist[1])} m</b> (free field over hard ground, no walls or barriers).`].concat(nc&&nc.worst?[`By-law check, worst lot: ${esc(nc.worst.addr||'a neighbouring lot')} (${esc(nc.worst.zt)}), ${n1(nc.worst.d)} m from the centre of the cooling units (${nc.where}) to its nearest point${nc.worst.lot?'':' (building outline: reads low ?)'}: Lp = Lw − 20 log₁₀(${n1(Math.max(5,nc.worst.d))}) − 8 = <b>${n1(nc.worst.lo)}–${n1(nc.worst.hi)} dBA</b> against ${nc.worst.block!==false&&nc.block?nc.worst.Ls:nc.worst.L} dBA at night (${esc(nc.worst.sec)}) → <b>${nc.block?'blocked':'note only'}</b>.`]:[]),
     'Sound: Lp = Lw − 20 log r − 8 (hemispherical spreading); unit ratings from manufacturer data (Vertiv for chillers, our conversion from Lp at 1 m; Güntner, Thermokey for dry coolers). Limits: Noise Control By-law 6555 / Bylaw 14600.')}
   <h3>Your observations on site</h3><textarea id="notes" rows="5" style="width:100%;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;padding:8px;color:var(--fg)" placeholder="What did you hear, see and feel at the edge? Time of day, where you stood.">${esc(notes)}</textarea><div class="src">Kept in this browser only; shown as your observation, never as a measurement.</div>
   <div class="draftnote">Sound is a screening estimate: manufacturer-rated levels, no barriers, ground or buildings.</div>`;
   $('#side').innerHTML=h; wireTabs(); $('#notes').oninput=e=>{ try{ localStorage.setItem(key,e.target.value); }catch(err){} }; BD.draw();
   const pb=(f.M&&f.M.plant&&f.M.plant.boxes)||[]; const psrc=pb.length?[pb.reduce((t,b)=>t+BD.centroid(b.ring)[0],0)/pb.length,pb.reduce((t,b)=>t+BD.centroid(b.ring)[1],0)/pb.length]:null;
-  BD._noise={lw,limit:lim,limitFor,dist,src:psrc};
+  BD._noise={lw,limit:lim,limLab:`${f.city==='van'?'quiet-zone':'residential'} night limit ${lim} dBA (${f.city==='van'?`By-law 6555 s. ${VSEC[srcCls]||'2.1'}(b)(i)`:'Bylaw 14600 s. 20(1)'})`,limitFor,level:b=>NLEV.get(b)||null,dist,src:nc?nc.src:psrc};
   if(BD.afterSocial) BD.afterSocial(); else show3d('social',{site:f,noise:BD._noise});
 }
 
@@ -747,6 +811,6 @@ async function precView(){
 }
 /* sweep 20 Oct 2026: air-cooled halls get air-cooled chillers, not dry coolers (plant.js, sweep M31); every 'dry coolers' a user reads says which */
 BD.dryName=()=>{ const A=BD.S.answers; return (A.inside||'air')==='air'&&(A.outside||'dry')==='dry'?'air-cooled chillers':'dry coolers'; };
-BD.eng={R,vZone,siteFacts,plantPerMW,coolUnits,equip,noiseLw,calc,rng,f1,n0,n1,mathBox,tabBar,wireTabs,show3d,nearby,netsAt,loadRecv,badge,src,s3,rangeBar,state,roofArea,optionSet};
+BD.eng={R,vZone,siteFacts,plantPerMW,coolUnits,equip,noiseLw,noiseCheck,noiseLevel:b=>NLEV.get(b)||null,calc,rng,f1,n0,n1,mathBox,tabBar,wireTabs,show3d,nearby,netsAt,loadRecv,badge,src,s3,rangeBar,state,roofArea,optionSet};
 BD.fitsView=fitsView; BD.recvView=recvView; BD.optionsView=optionsView; BD.tabView=tabView;
 })();
