@@ -131,3 +131,4 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - J.B. (2 Nov 2026): Architecture mode starts by setting site ratios: first how much of the site to build on, then the split of program (e.g. 1/3 data centre, 2/3 pool); the massing, heat, layout and rules follow from those ratios.
 - J.B. (2 Nov 2026): the ratio splits FLOOR AREA (all storeys), not footprint.
 - J.B. (2 Nov 2026): the community/municipal template is to be revamped: no design; regulatory overviews instead (proposal pending).
+- J.B. (2 Nov 2026): municipal template plan agreed (one city first, comparison last): Claude Doc https://claude.ai/artifact/9WuA4zPVKKKe1SuhcpvoXr
