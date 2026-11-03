@@ -1,0 +1,342 @@
+{
+ "dbg": {
+  "a0": 16.86492387661898,
+  "uf": -42.75292387661898,
+  "dir": -1,
+  "v": [
+   -39.35988108921515,
+   39.35988108921515
+  ],
+  "L": 59.61784775323796,
+  "hd": 10.389691469513064,
+  "F": [
+   85.50584775323796,
+   78.7197621784303
+  ],
+  "uBuild": [
+   23.35292387661898,
+   -42.75292387661898
+  ],
+  "pyd": 6.4879999999999995,
+  "front": -42.75292387661898,
+  "bu": [
+   [
+    -40.75292387661898,
+    -16.75292387661898
+   ],
+   [
+    -40.75292387661898,
+    -22.75292387661898
+   ],
+   [
+    -40.75292387661898,
+    -28.75292387661898
+   ],
+   [
+    -40.75292387661898,
+    -20.75292387661898
+   ],
+   [
+    -22.75292387661898,
+    3.247076123381021
+   ]
+  ],
+  "plant": [
+   [
+    "air-cooled chillers",
+    "roof",
+    9,
+    11,
+    -38,
+    -26
+   ],
+   [
+    "air-cooled chillers",
+    "roof",
+    9,
+    11,
+    -24,
+    -12
+   ],
+   [
+    "air-cooled chillers",
+    "roof",
+    9,
+    11,
+    -10,
+    2
+   ],
+   [
+    "air-cooled chillers",
+    "roof",
+    9,
+    11,
+    4,
+    16
+   ],
+   [
+    "standby generators",
+    "yard",
+    18,
+    22,
+    -38,
+    -24
+   ],
+   [
+    "standby generators",
+    "yard",
+    18,
+    22,
+    -22,
+    -9
+   ],
+   [
+    "standby generators",
+    "yard",
+    -41,
+    -28,
+    -38,
+    -34
+   ]
+  ],
+  "yard": [
+   [
+    17,
+    -39
+   ],
+   [
+    23,
+    -39
+   ],
+   [
+    23,
+    39
+   ],
+   [
+    17,
+    39
+   ]
+  ],
+  "load": [
+   [
+    32,
+    -34
+   ],
+   [
+    40,
+    -34
+   ],
+   [
+    40,
+    1
+   ],
+   [
+    32,
+    1
+   ]
+  ]
+ },
+ "steps": [
+  "site",
+  "setup",
+  "fits",
+  "prec",
+  "heat",
+  "energy",
+  "water",
+  "materials",
+  "social",
+  "opps",
+  "spec",
+  "opts",
+  "time",
+  "arat",
+  "aprog",
+  "aarr",
+  "acmp",
+  "cities",
+  "report"
+ ],
+ "bar": [
+  "Site",
+  "People",
+  "Design",
+  "Report"
+ ],
+ "boxes": [
+  [
+   "clinic",
+   [
+    -41,
+    -17
+   ],
+   true,
+   605,
+   605,
+   0,
+   0,
+   6
+  ],
+  [
+   "spa",
+   [
+    -41,
+    -23
+   ],
+   true,
+   320,
+   320,
+   0,
+   0,
+   6
+  ],
+  [
+   "ev_hub",
+   [
+    -41,
+    -29
+   ],
+   true,
+   150,
+   150,
+   0,
+   0,
+   6
+  ],
+  [
+   "greenhouse",
+   [
+    -41,
+    -21
+   ],
+   true,
+   190,
+   190,
+   0,
+   0,
+   6
+  ],
+  [
+   "fish_farm",
+   [
+    -23,
+    3
+   ],
+   false,
+   685,
+   685,
+   0,
+   0,
+   6
+  ]
+ ],
+ "hall": [
+  0,
+  18
+ ],
+ "space": {
+  "hall": 1554,
+  "prog": 1950,
+  "cap": 17266.229766843757
+ },
+ "heat": {
+  "avail": [
+   9244.553142857143,
+   14191.199999999999
+  ],
+  "need": [
+   90.57,
+   128.92
+  ],
+  "unknown": [
+   "spa",
+   "fish_farm"
+  ]
+ },
+ "rules": [
+  "bad: Refuge: no room below the 18 m height limit that meets its placement rules (on the street front, for its own street entrance (Vancouver 10.21.1)); not drawn.",
+  "bad: Public indoor pool: no room that meets its placement rules (on the street front, for its own street entrance (Vancouver 10.21.1)); not drawn.",
+  "bad: Warming shelter: no room below the 18 m height limit that meets its placement rules (on the street front, for its own street entrance (Vancouver 10.21.1)); not drawn.",
+  "note: Outpatient clinic in I-2: conditional (Health Care Office).",
+  "q: Outpatient clinic: keep-apart rules not checked here: generators (no distance in the source).",
+  "note: Bathhouse / Nordic spa in I-2: conditional (Beauty and Wellness Centre (hydrotherapy, thermal therapy)).",
+  "note: Bathhouse / Nordic spa: A-3, 2 h fire separation from the data centre (F-2).",
+  "q: Bathhouse / Nordic spa: keep-apart rules not checked here: generators (no distance in the source).",
+  "note: EV charging hub in I-2: conditional (Parking Uses (may include retail sale of electricity)).",
+  "note: EV charging hub: F-3, 1.5 h fire separation from the data centre (F-2).",
+  "q: EV charging hub: keep-apart rules not checked here: intakes (not modelled).",
+  "note: Greenhouse in I-2: conditional (Urban Farm - Class B).",
+  "q: Greenhouse: fire separation from the data centre (F-2) ? (occupancy ?).",
+  "q: Greenhouse: keep-apart rules not checked here: hall (no distance in the source); generators (no distance in the source).",
+  "bad: Fish farm in I-2: rezoning (no use (Urban Farm excludes fish)).",
+  "q: Fish farm: keep-apart rules not checked here: generators (no distance in the source)."
+ ],
+ "side": "Arrange",
+ "ratios": {
+  "ratio": {
+   "cover": 5755,
+   "dc": 9,
+   "prog": 91,
+   "end": "low",
+   "mw": 2.4
+  },
+  "base": {
+   "lot": 5882,
+   "build": 5755,
+   "floors": 3,
+   "dataFl": 2,
+   "fsr": 3,
+   "coverNone": true,
+   "perMW": [
+    293.4,
+    635.0999999999999
+   ]
+  },
+  "calc": {
+   "allowed": 17266,
+   "by": "envelope",
+   "dcMax": 11511,
+   "dcM2": 1554,
+   "progM2": 15712,
+   "unused": 0,
+   "mw": [
+    2.45,
+    5.3
+   ],
+   "mwTest": 2.4
+  },
+  "answers": {
+   "mw": 2.4,
+   "dcFloor": 1554
+  },
+  "side": [
+   "Ratios"
+  ],
+  "tabs": [
+   "Ratios *",
+   "Arrange (off)",
+   "Exchange (off)",
+   "Compare (off)"
+  ],
+  "stuck": false,
+  "next": "Next: Programs"
+ },
+ "split": "Data centre 9% · 1,554 m² · 2.4–5.2 MW (testing 2.4) · programs 91% · 15,712 m² · unused 0% arch_ratios Edit ratios",
+ "saved": [
+  [
+   "suggest",
+   4,
+   16,
+   55,
+   0.7484070948854831
+  ],
+  [
+   "lot",
+   7,
+   19,
+   55,
+   0
+  ]
+ ],
+ "errors": []
+}

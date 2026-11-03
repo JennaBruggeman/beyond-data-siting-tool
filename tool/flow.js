@@ -16,7 +16,7 @@ const BASE=[
  {k:'heat',g:'ex',t:'Heat'},{k:'energy',g:'ex',t:'Electricity'},{k:'water',g:'ex',t:'Water'},{k:'materials',g:'ex',t:'Materials'},{k:'social',g:'ex',t:'People'},
  {k:'opps',g:'opps',t:'Opportunities'},{k:'spec',g:'opps',t:'Could become'},
  {k:'opts',g:'opts',t:'Three options'},{k:'time',g:'opts',t:'Over time'},
- {k:'aprog',g:'design',t:'Programs'},{k:'aarr',g:'design',t:'Arrange'},{k:'acmp',g:'design',t:'Compare'},
+ {k:'arat',g:'design',t:'Ratios'},{k:'aprog',g:'design',t:'Programs'},{k:'aarr',g:'design',t:'Arrange'},{k:'acmp',g:'design',t:'Compare'},
  {k:'cities',g:'report',t:'Two cities'},{k:'report',g:'report',t:'Report'}];
 const F=BD.flow={on:true,steps:BASE.slice(),i:0,max:0,notes:{},busy:false};
 document.body.classList.add('flow');
@@ -152,7 +152,7 @@ async function expandOpps(){ const k=F.steps.findIndex(s=>s.k==='opps'); if(k<0)
   const add=[{k:'opps-best',g:'opps',t:'Set-ups that open the most'}].concat(BD.oppFams.map(f=>({k:'fam:'+f,g:'opps',t:f+' opportunities',fam:f})));
   F.steps.splice(k,1,...add); }
 /* sweep 20 Oct 2026: a step whose every section is shown only in fuller templates is skipped there (residents: Real buildings, which was an empty page) */
-const DES=['aprog','aarr','acmp'];
+const DES=['arat','aprog','aarr','acmp'];
 const SKIP={resident:new Set(['prec',...DES]),community:new Set(DES),full:new Set(DES),
   arch:new Set(['prec','heat','energy','water','materials','opps','spec','opts','time','cities'])}; /* 2 Nov 2026: Architecture mode = site, set-up, what fits, then its own steps; the Exchanges stay in Engineering (J.B.). 3 Nov 2026: People (social) shown just before Design, context only, nothing scored (J.B.) */
 async function go(i){ { const t=(BD.tier&&BD.tier())||'full', dir=i>=F.i?1:-1; while(i>0&&i<F.steps.length-1&&SKIP[t]&&SKIP[t].has(F.steps[i].k)) i+=dir; }
@@ -163,8 +163,8 @@ async function go(i){ { const t=(BD.tier&&BD.tier())||'full', dir=i>=F.i?1:-1; w
   decorate(); const sd=$('#side'); if(sd) sd.scrollTop=0; const tx=document.getElementById('wcTx'); if(tx) tx.scrollTop=0; }
 function next(){ if(F.steps[F.i].k==='site'&&!BD.S.sel) return; if(stuck()) { decorate(); return; } go(F.i+1); }
 function back(){ go(F.i-1); }
-async function show(st){ const k=st.k; if(BD.archHide&&!['aprog','aarr','acmp'].includes(k)) BD.archHide();
-  if(k==='aprog'||k==='aarr'||k==='acmp') return BD.views[k]();
+async function show(st){ const k=st.k; if(BD.archHide&&!DES.includes(k)) BD.archHide();
+  if(DES.includes(k)) return BD.views[k]();
   if(k==='site'){ BD.S.view2=null; BD.scene3d&&BD.scene3d.hide(); if(BD.S.sel) BD.card(); else BD.intro(); BD.draw(); return; }
   if(k==='setup'){ BD.S.view2=null; BD.scene3d&&BD.scene3d.hide(); BD.card(); BD.setup.start(); return; }
   if(k==='fits'){ BD.scene3d&&BD.scene3d.hide(); BD.fitsView(); return; }

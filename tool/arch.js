@@ -10,10 +10,12 @@
 const BD=window.BD; const {$,esc}=BD;
 const CAT={list:null,byId:{},src:{},kind:{}};
 const AD=BD.data.arch; // lean refactor 3 Nov 2026: arch.js's own figures with their register ids (tool/data/arch.json)
-const A=BD.arch={picks:[],secure:'suggest',view:'3d',explode:false,heat:null,storey:0,sel:null,saved:[],ready:null};
+const DR=BD.data.dc_rooms; // 3 Nov 2026: the data centre's rooms with their register ids (tool/data/dc_rooms.json; register arch_dc_rooms)
+const A=BD.arch={picks:[],secure:'suggest',view:'3d',explode:false,heat:null,storey:0,sel:null,saved:[],ready:null,ratio:null};
 const n0=v=>v==null||!isFinite(v)?'?':Math.round(v).toLocaleString('en-CA');
 const rg=(a,u)=>!a?'?':(a[0]===a[1]?n0(a[0]):n0(a[0])+'–'+n0(a[1]))+(u?' '+u:'');
 const mid=a=>a?(a[0]+a[1])/2:null;
+const mwR=a=>!a||!(a[1]>0)?'?':a[0].toFixed(1)+'–'+a[1].toFixed(1)+' MW'; // an MW range to 0.1, ends floored so the share always holds them
 
 /* ---------- data ---------- */
 A.ready=Promise.all([fetch('arch_programs.json').then(r=>r.json()),fetch('opps.json').then(r=>r.ok?r.json():{}).catch(()=>({}))]).then(([P,O])=>{
@@ -86,6 +88,9 @@ function place(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,
   if(under&&refuge&&refuge.m2){ const fp=Math.min(refuge.m2,(hu1-hu0)*(hv1-hv0)), d=Math.min(hu1-hu0,fp/Math.max(1,hv1-hv0)); const ua=dir<0?hu0:hu1-d, ub=dir<0?hu0+d:hu1;
     out.boxes.push({id:'refuge',p:CAT.byId.refuge,q:refuge,ring:G.rectW(F,ua,ub,hv0,hv1),base:0,h:ftf.ground,storeys:1,sh:ftf.ground,front:Math.abs((dir<0?ua:ub)-uf)<0.6,underHall:true,u:[ua,ub],v:[hv0,hv1]}); }
   out.notDrawn=[]; const Hmax=s.H||Infinity, capF=s.fsr&&s.lot?s.lot*s.fsr[1]:null, code=zoneCode(); let floorUsed=s.hallM2+out.boxes.reduce((t,b)=>t+(b.q.m2||0),0), nonInd=out.boxes.reduce((t,b)=>t+(industrialUse(b.q,code)?0:(b.q.m2||0)),0);
+  /* 3 Nov 2026 (Ratios, J.B.): the programs share the floor the ratios give them; the building covers no more of the lot than the coverage set */
+  const RT=ratioNow(); out.ratio=RT; let progUsed=out.boxes.reduce((t,b)=>t+(b.q.m2||0),0), gUsed=(hu1-hu0)*(hv1-hv0);
+  if(RT&&s.hallM2<RT.dcM2-1) out.flags.push({t:`Data centre: its share (${n0(RT.dcM2)} m²) does not fit beside loading and the plant yard here; ${n0(s.hallM2)} m² drawn. Edit ratios or the set-up.`,src:['arch_ratios'],sev:'bad'});
   /* code limits block, they never just warn (J.B., 2 Nov 2026: "everything needs to follow the code"): no block above the zone's height limit,
      none past the floor-space ratio, none over an Edmonton BE area cap; setbacks and the hard distances are already no-go above */
   for(const x of masses){ const {q,p}=x, nm=p.name.split(' (')[0];
@@ -95,10 +100,11 @@ function place(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,
     if(s.city==='van'&&/^I-[23]/.test(code)&&!industrialUse(q,code)&&nonInd+q.m2>s.lot*1.0+0.5){ out.flags.push({t:`${nm}: ${n0(q.m2)} m² would pass the 1.00 floor-space ratio ${code} allows for non-industrial uses combined (${n0(s.lot)} m² on this lot, ${n0(Math.max(0,s.lot-nonInd))} m² left); not drawn.`,src:[/I-2/.test(code)?'van_zdb_i2':'van_zdb_i3'],sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
     if(s.city==='van'&&/^I-2/.test(code)&&q.id==='clinic'){ const lim=Math.max(AD.i2Office.m2,AD.i2Office.share*(floorUsed+q.m2)); /* tool/data/arch.json (van_zdb_i2) */ if(q.m2>lim+0.5){ out.flags.push({t:`${nm}: in I-2, general and health care office together may have the greater of 235 m² or 33.3% of all floor area (${n0(lim)} m² here); ${n0(q.m2)} m² is over it; not drawn.`,src:['van_zdb_i2'],sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; } }
     { const z=p.zoning&&p.zoning[s.city]; if(z&&zoneMatch(s.city==='van'?z.districts:z.zones,code)==='no'){ out.flags.push({t:`${nm}: not permitted in ${code||'this zone'}${z.use?' ('+z.use+')':''}; not drawn. A rezoning would be a separate council decision.`,src:z.src,sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; } }
+    if(RT&&progUsed+q.m2>RT.progM2+0.5){ out.flags.push({t:`${nm}: ${n0(q.m2)} m² would pass the programs' share of the floor (${n0(RT.progM2)} m², ${n0(Math.max(0,RT.progM2-progUsed))} m² left); not drawn. Edit ratios to give programs more.`,src:['arch_ratios'],sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
     if(capF!=null&&floorUsed+q.m2>capF+0.5){ out.flags.push({t:`${nm}: ${n0(q.m2)} m² would pass the floor-space ratio (${n0(capF)} m² on this lot, ${n0(Math.max(0,capF-floorUsed))} m² left); not drawn.`,src:s.city==='van'?['van_zdb_i2','van_zdb_i3']:['edm_bl20001'],sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
     const grade=p.place&&p.place.grade, mustSt=s.city==='van'&&p.place&&p.place.street_entrance&&!(q.id==='refuge'&&q.opt==='side_by_side'&&false), atG=grade==='at grade'||mustSt, notG=grade==='not at grade'&&notAtGradeHere(p), roof=q.place==='roof';
     const sh=(p.size&&p.size.floor_height_m||ftf.ground), own=q.id==='refuge'&&q.opt==='own_building', gc=own?2:0; // own building: one 2 m cell clear all round (drawn, not a rule)
-    const g=HG(); let tall=false, best=null, st0=Math.max(1,q.storeys||1), st=st0;
+    const g=HG(); let tall=false, covHit=false, best=null, st0=Math.max(1,q.storeys||1), st=st0;
     for(;st<=8&&!best;st++){ const fp=q.m2/st;
       const [mA,mB]=minDims(q.id,s.city); // short and long sides a program needs to work
       for(const [wc0,dc0] of [[nV,Math.ceil(fp/(nV*cs*cs))],...[1,0.5,2,0.25,4].map(a=>{ const w=Math.sqrt(fp/a)/cs, d=fp/(w*cs*cs); return [Math.ceil(w),Math.ceil(d)]; })]){ const wc=Math.min(wc0,nV), dc=Math.ceil(fp/(wc*cs*cs)); if(dc>nU||wc<1) continue;
@@ -106,14 +112,14 @@ function place(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,
         for(let i=0;i+dc<=nU;i++) for(let j=0;j+wc<=nV;j++){ let base=-1, ok=true;
           for(let a=i-gc;a<i+dc+gc&&ok;a++) for(let b=j-gc;b<j+wc+gc;b++){ if(a<0||b<0||a>=nU||b>=nV){ if(gc) continue; ok=false; break; } const t=g[a*nV+b]; const inF=a>=i&&a<i+dc&&b>=j&&b<j+wc;
             if(t===Infinity){ ok=false; break; } if(!inF){ if(t>0) { ok=false; break; } continue; } if(base<0) base=t; else if(Math.abs(t-base)>0.1){ ok=false; break; } if(own&&t>0){ ok=false; break; } }
-          if(!ok) continue; if(base+sh*st>Hmax+0.01){ tall=true; continue; } if(roof&&base<hallTop-0.01) continue; if(atG&&base>0) continue; if(mustSt&&i!==0) continue; /* Vancouver 10.21.1: its main entrance from a street (arch_up_vanZDB10) */ if(notG&&base===0) continue;
+          if(!ok) continue; if(base+sh*st>Hmax+0.01){ tall=true; continue; } if(roof&&base<hallTop-0.01) continue; if(atG&&base>0) continue; if(RT&&base===0&&gUsed+fp>RT.cover+0.5){ covHit=true; continue; } /* coverage set in Ratios */ if(mustSt&&i!==0) continue; /* Vancouver 10.21.1: its main entrance from a street (arch_up_vanZDB10) */ if(notG&&base===0) continue;
           const sc=base*1e4+i*10+j*0.01; if(!best||sc<best.sc) best={sc,base,i,j,dc,wc}; }
       }
       if(best) break; }
-    if(!best){ out.flags.push({t:`${nm}: no room ${tall?'below the '+n0(Hmax)+' m height limit ':''}that meets its placement rules (${mustSt?'on the street front, for its own street entrance (Vancouver 10.21.1)':atG?'at grade':notG?'not at grade':roof?'on the hall roof':'flat on the ground or on what is built'}); not drawn.`,src:p.place&&p.place.src,sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
+    if(!best){ out.flags.push({t:`${nm}: no room ${tall?'below the '+n0(Hmax)+' m height limit ':''}${covHit?'within the building coverage set in Ratios ('+n0(RT.cover)+' m²) ':''}that meets its placement rules (${mustSt?'on the street front, for its own street entrance (Vancouver 10.21.1)':atG?'at grade':notG?'not at grade':roof?'on the hall roof':'flat on the ground or on what is built'}); not drawn.`,src:p.place&&p.place.src,sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
     if(st>st0) out.flags.push({t:`${nm}: ${n0(q.m2)} m² does not fit on one floor here${mustSt?' along the street front (it needs its own street entrance)':''}; drawn over ${st} storeys only to show its size. Whether it can be split across floors is a design question.`,src:[],sev:'bad',id:q.id});
     const {base,i,j,dc,wc}=best, hh=sh*st, uA=dir<0?bu0+i*cs:bu1-(i+dc)*cs, uB=uA+dc*cs, vA=v0+j*cs, vB=vA+Math.min(wc*cs,q.m2/st/(dc*cs)), gap=gc*cs; // exact area: full cells along u, the width trimmed to the size
-    floorUsed+=q.m2; if(!industrialUse(q,code)) nonInd+=q.m2; occ.push([uA,uB,vA,vB,base,base+hh,false]); if(own) occ.push([uA-gap,uB+gap,vA-gap,vB+gap,0,1e9,true]);
+    floorUsed+=q.m2; progUsed+=q.m2; if(base===0) gUsed+=q.m2/st; if(!industrialUse(q,code)) nonInd+=q.m2; occ.push([uA,uB,vA,vB,base,base+hh,false]); if(own) occ.push([uA-gap,uB+gap,vA-gap,vB+gap,0,1e9,true]);
     out.boxes.push({id:q.id,p,q,ring:G.rectW(F,uA,uB,vA,vB),base,h:hh,storeys:st,sh,front:base===0&&Math.abs((dir<0?uA:uB)-uf)<cs+0.01,top:base>=hallTop-0.01,roof,u:[uA,uB],v:[vA,vB],gap,own}); }
   const top=Math.max(hallTop,...out.boxes.map(b=>b.base+b.h));
   if(s.H&&top>s.H+0.01) out.flags.push({t:`Check: something is drawn to ${n0(top)} m, over this zone's ${n0(s.H)} m limit. This should not happen; please report it.`,src:s.city==='van'?['van_zdb_i2','van_zdb_i3']:['edm_bl20001'],sev:'bad'});
@@ -127,6 +133,7 @@ function budgets(P){ const s=P.s, nd=new Set(P.notDrawn||[]); const r=BD.eng.cal
   const use=A.picks.filter(q=>!nd.has(q.id)).map(q=>{ const p=CAT.byId[q.id]; const k=p&&p.heat&&p.heat.kWh_m2_yr; return {id:q.id,p,m2:q.m2,mwh:(k&&q.m2!=null)?[k[0]*q.m2/1000,k[1]*q.m2/1000]:null}; });
   const progM2=use.filter(u=>u.p&&u.p.kind==='mass'&&u.m2!=null).reduce((t,u)=>t+u.m2,0);
   const capF=s.fsr&&s.lot?s.lot*s.fsr[1]:null, capE=s.L*s.W*s.floors, cap=capF!=null?Math.min(capF,capE):capE; const space={hall:s.hallM2,prog:progM2,cap,capF,capE,left:cap!=null?cap-s.hallM2-progM2:null,items:use.filter(u=>u.p&&u.p.kind==='mass'&&u.m2!=null)};
+  const RT=P.ratio; if(RT){ space.ratio=RT; space.cap=RT.allowed; space.progCap=RT.progM2; space.left=RT.progM2-progM2; } // 3 Nov 2026: the programs' share from Ratios (register arch_ratios)
   const heatUse=use.filter(u=>u.mwh), heatQ=use.filter(u=>u.p&&u.p.kind==='mass'&&!u.mwh&&u.p.heat&&u.p.heat.uses==='heat');
   const need=[heatUse.reduce((t,u)=>t+u.mwh[0],0),heatUse.reduce((t,u)=>t+u.mwh[1],0)];
   return {space,heat:{avail:r.avail||null,need,items:heatUse,unknown:heatQ},notDrawn:[...nd]}; }
@@ -193,6 +200,10 @@ const CSS=`.arow{border-top:1px solid var(--line);padding:8px 0;display:grid;gap
 .apick{display:flex;justify-content:space-between;gap:8px;padding:3px 0;font-size:12.5px;border-bottom:1px solid var(--line)}.apick small{color:var(--muted)}.agrp{margin-top:12px}
 .aview{position:absolute;left:64px;bottom:12px;z-index:5;display:flex;gap:6px;flex-wrap:wrap;background:rgba(23,24,26,.85);padding:6px;border-radius:6px}
 #aPlan{position:absolute;left:0;right:0;top:0;bottom:56px;z-index:4;background:var(--bg);display:none;padding:12px 16px}#aPlan svg{width:100%;height:100%}
+.atabs{display:flex;gap:16px;font-size:12.5px;margin:2px 0 10px;border-bottom:1px solid var(--line)}.atabs button{font:inherit;background:none;border:0;border-bottom:1px solid transparent;padding:0 0 5px;color:var(--muted);cursor:pointer}.atabs button[aria-selected=true]{color:var(--fg);border-bottom-color:var(--fg)}.atabs button:disabled{cursor:default;opacity:.55}
+.arat{border-top:1px solid var(--line);padding:10px 0 12px;display:grid;gap:6px}.arh b{font-size:14px;font-weight:500}.arh{display:flex;justify-content:space-between;align-items:baseline;gap:10px}.arh span{font-size:11.5px;color:var(--muted)}
+.arl{display:flex;justify-content:space-between;font-size:12.5px}.arl span+span{color:var(--muted)}.arat input[type=range]{width:100%;accent-color:var(--fg)}.agrid{display:grid;grid-template-columns:1fr auto;gap:5px 14px;font-size:12.5px}.agrid .ar{text-align:right;color:var(--muted)}
+.asplit{font-size:12px}.asplit a{color:var(--fg)}
 .acmp{width:100%;border-collapse:collapse;font-size:12px}.acmp td,.acmp th{border-top:1px solid var(--line);padding:4px;text-align:left;vertical-align:top;font-weight:300}.acmp th{color:var(--muted)}`;
 function css(){ if(!document.getElementById('archCss')){ const st=document.createElement('style'); st.id='archCss'; st.textContent=CSS; document.head.appendChild(st); } }
 
@@ -220,24 +231,118 @@ function detail(p){ const h=p.heat||{}, o=p.occ||{}, L=lift(p);
    ${(p.flags||[]).map(f=>`<li>${esc(f.replace(/\s*\[[^\]]+\]\s*$/,''))} ${chips((f.match(/\[([^\]]+)\]\s*$/)||[,''])[1].split(/[,;]\s*/).filter(Boolean))}</li>`).join('')}</ul>`; }
 function budHTML(B){ const S=B.space, H=B.heat; const cap=S.cap, tot=S.hall+S.prog;
   const seg=(v,of,c,t)=>of?`<i class="${c}" style="width:${Math.max(0,Math.min(100,v/of*100))}%" title="${esc(t)}"></i>`:'';
+  if(S.ratio) return `<div class="abud"><div class="lab"><span>Programs: ${n0(S.prog)} of ${n0(S.progCap)} m², their share of the floor ${chips(['arch_ratios'])}</span><span>${S.left<0?'over by '+n0(-S.left):n0(S.left)+' left'}</span></div><div class="bar">${S.items.map(u=>seg(u.m2,Math.max(S.progCap,S.prog)||1,A.sel===u.id?'s':'',u.p.name+' '+n0(u.m2)+' m²')).join('')}</div></div>`+heatHTML(B)+ndHTML(B);
   const sp=cap?`<div class="abud"><div class="lab"><span>Space: ${n0(tot)} of ${n0(cap)} m² of floor ${S.capF!=null&&S.capF<S.capE?'the zone allows (floor-space ratio)':'that fits inside the setbacks, below the height limit'} ${chips(BD.S.sel&&BD.S.sel.city==='edm'?['edm_bl20001']:['van_zdb_i2','van_zdb_i3'])}</span><span>${S.left<0?'over by '+n0(-S.left):n0(S.left)+' left'}</span></div><div class="bar">${seg(S.hall,Math.max(cap,tot),'h','data centre '+n0(S.hall)+' m²')}${S.items.map(u=>seg(u.m2,Math.max(cap,tot),A.sel===u.id?'s':'',u.p.name+' '+n0(u.m2)+' m²')).join('')}</div></div>`:`<div class="abud"><div class="lab">Space: floor-area limit for this zone not known (?)</div></div>`;
+  return sp+heatHTML(B)+ndHTML(B); }
+function ndHTML(B){ const nd=(B.notDrawn||[]).map(i=>CAT.byId[i]&&CAT.byId[i].name.split(' (')[0]).filter(Boolean); return nd.length?`<div class="abud"><div class="lab">Not drawn, not counted: ${esc(nd.join(', '))}</div></div>`:''; }
+function heatHTML(B){ const H=B.heat; const seg=(v,of,c,t)=>of?`<i class="${c}" style="width:${Math.max(0,Math.min(100,v/of*100))}%" title="${esc(t)}"></i>`:'';
   const av=H.avail, aM=av?av[0]:null; const ht=av?`<div class="abud"><div class="lab"><span>Heat: ${rg(H.need,'MWh/yr')} of ${rg(av,'MWh/yr')} the hall offers (after the heat pump) ${chips(['dea','dfKatalog2022'])}</span><span>${n0(H.need[1]/av[0]*100)}% at most</span></div><div class="bar">${H.items.map(u=>seg(mid(u.mwh),Math.max(aM,H.need[1]),A.sel===u.id?'s':'o',u.p.name+' '+rg(u.mwh,'MWh/yr'))).join('')}</div>${H.unknown.length?`<div class="lab"><span>Not counted, heat demand ?: ${esc(H.unknown.map(u=>u.p.name.split(' (')[0]).join(', '))}</span></div>`:''}</div>`:'';
-  const nd=(B.notDrawn||[]).map(i=>CAT.byId[i]&&CAT.byId[i].name.split(' (')[0]).filter(Boolean); return sp+ht+(nd.length?`<div class="abud"><div class="lab">Not drawn, not counted: ${esc(nd.join(', '))}</div></div>`:''); }
+  return ht; }
+
+/* ---------- ratios (3 Nov 2026, J.B.: "Architecture mode starts by setting site ratios"; register arch_ratios) ----------
+   Coverage first, then the floor-area split (all storeys, not footprint). Allowed floor = min(lot × floor-space ratio, footprint × storeys under the
+   height limit). The data centre's share is turned into MW through the rooms with a size per MW (tool/data/dc_rooms.json: hall, UPS, Li-ion): a range,
+   no midpoint. Arrange tests one end of it (low end by default: the size the share holds even at the roomiest hall). Rooms with no size source are not counted. */
+const selId=()=>BD.S.sel?BD.S.sel.city+':'+BD.S.sel.id:'';
+function ratioBase(){ const M=BD.model&&BD.model(); if(!M||!M.F||M.existing||!M.ring) return null; const Z=M.Z||{}, code=zoneCode();
+  const yard=M.inset?BD.geo.clip(M.ring,M.inset):null, build=yard&&yard.length>=6?BD.area(yard):M.lotArea;
+  const floors=Math.max(1,M.nF[0]), dataFl=Math.max(1,Z.ground?floors-1:floors), fsr=Z.fsr?Z.fsr[1]:null;
+  const split=DR.rooms.filter(r=>r.split&&r.perMW), lo=split.reduce((t,r)=>t+r.perMW[0],0), hi=split.reduce((t,r)=>t+r.perMW[1],0);
+  return {M,Z,code,lot:M.lotArea,build,yard,floors,dataFl,fsr,coverNone:(DR.coverLimit.none||[]).includes(code),split,perMW:[lo,hi],city:M.city}; }
+function ratioCalc(b,r){ const cover=Math.min(r.cover,b.build), capF=b.fsr&&b.lot?b.lot*b.fsr:Infinity, capE=cover*b.floors, allowed=Math.min(capF,capE);
+  const dcMax=Math.min(allowed,cover*b.dataFl), dcM2=Math.min(dcMax,r.dc/100*allowed), progM2=Math.min(allowed-dcM2,r.prog/100*allowed);
+  const mw=[dcM2/b.perMW[1],dcM2/b.perMW[0]], pick=r.end==='high'?mw[1]:mw[0], mwTest=Math.floor(pick*10+1e-9)/10;
+  return {cover,allowed,capF,capE,by:capF<=capE?'fsr':'envelope',dcMax,dcM2,progM2,unused:Math.max(0,allowed-dcM2-progM2),mw,mwTest:mwTest>=0.1?mwTest:null}; }
+/* the largest size every hard rule allows with this set-up (site.js fitMax: plant, generators, fuel, noise), worked out without the ratio's floor */
+function fitNoRatio(){ const An=BD.S.answers, keep=An.dcFloor; delete An.dcFloor; BD.modelReset&&BD.modelReset(); let fm=null; try{ fm=BD.fitMax?BD.fitMax():null; }finally{ if(keep!=null) An.dcFloor=keep; BD.modelReset&&BD.modelReset(); } return fm; }
+/* the most of the floor the data centre may take: the hall off the ground floor where the zone says so, and no more MW than the hard rules allow at the end Arrange tests */
+function dcCapPct(b,r,fm){ const c=ratioCalc(b,Object.assign({},r,{dc:100,prog:0})), M=BD.model(), room=M&&M.hallRoom?M.hallRoom*b.dataFl:Infinity; // room: the hall footprint the set-up leaves after loading and the plant yard (site.js), on the floors data may use
+  const geo=Math.floor(Math.min(c.dcMax,room)/c.allowed*100+1e-9), byRoom=room<c.dcMax; if(fm==null) return {pct:0,geo,fm,byRoom,room};
+  const per=r.end==='high'?b.perMW[0]:b.perMW[1]; return {pct:Math.min(geo,Math.floor(fm*per/c.allowed*100+1e-9)),geo,fm,byRoom,room}; }
+function ratioInit(b,fm){ const r={site:selId(),cover:b.build,dc:0,prog:0,end:'low'}, mw=BD.S.answers.mw, c=ratioCalc(b,Object.assign({},r,{dc:100,prog:0})), cap=dcCapPct(b,r,fm).pct;
+  r.dc=mw?Math.max(Math.min(1,cap),Math.min(cap,Math.floor(mw*b.perMW[1]/c.allowed*100+1e-9))):cap; r.prog=100-r.dc; return r; } // starts at the set-up's own size (its MW at the low end), the rest to programs
+function ratioApply(){ const b=ratioBase(), r=A.ratio; if(!b||!r) return null; const c=ratioCalc(b,r), An=BD.S.answers;
+  if(c.mwTest){ An.mw=c.mwTest; An.dcFloor=c.dcM2; An.dcSite=BD.S.sel.id; An.mwPick='ratio'; An.mwSite=BD.S.sel.id; r.mw=c.mwTest; } else { delete An.dcFloor; r.mw=null; }
+  BD.modelReset&&BD.modelReset(); return c; }
+/* the ratios in force for Arrange: only when set for this lot and the size has not been changed elsewhere since */
+function ratioNow(){ const r=A.ratio; if(!r||r.site!==selId()||!r.mw||BD.S.answers.mw!==r.mw) return null; const b=ratioBase(); if(!b) return null; const c=ratioCalc(b,r); return Object.assign(c,{r,b}); }
+function tabsHTML(k){ const F=BD.flow, T=[['arat','Ratios',['arat']],['aprog','Arrange',['aprog','aarr']],['aexc','Exchange',[]],['acmp','Compare',['acmp']]];
+  return `<div class="atabs" role="tablist" aria-label="Design">${T.map(([to,l,ks])=>{ const i=F?F.steps.findIndex(s=>s.k===to):-1, on=ks.includes(k), ok=i>=0&&i<=F.max;
+    return `<button role="tab" data-tab2="${to}" aria-selected="${on}" ${ks.length&&ok?'':'disabled'} ${ks.length?'':'title="Exchange: the on-site exchange step comes next in the build"'}>${l}</button>`; }).join('')}</div>`; }
+function wireTabs(sd){ sd.querySelectorAll('[data-tab2]').forEach(b=>b.onclick=()=>{ if(!b.disabled&&BD.flow) BD.flow.to(b.dataset.tab2); }); }
+function splitLine(RT){ if(!RT) return `<p class="sub asplit">Ratios not set for this lot: the space budget below is the zone's whole allowance. <a href="#" data-editr>Set ratios</a></p>`;
+  const pc=v=>n0(v/RT.allowed*100)+'%';
+  return `<p class="sub asplit">Data centre ${pc(RT.dcM2)} · ${n0(RT.dcM2)} m² · ${mwR(RT.mw.map(x=>Math.floor(x*10)/10))} (testing ${RT.mwTest}) · programs ${pc(RT.progM2)} · ${n0(RT.progM2)} m² · unused ${pc(RT.unused)} ${chips(['arch_ratios'])} <a href="#" data-editr>Edit ratios</a></p>`; }
+async function viewRatios(){ await ready(); BD.S.view2='tab'; const sd=$('#side'); const b=ratioBase();
+  if(!b){ sd.innerHTML=`${tabsHTML('arat')}<h2>Ratios</h2><p class="lead">Ratios need a new building on a lot with a known shape. Pick a lot and set it up as a new build.</p>`; wireTabs(sd); return; }
+  const fm=fitNoRatio(), fresh=!A.ratio||A.ratio.site!==selId(); if(fresh) A.ratio=ratioInit(b,fm);
+  const r=A.ratio; let cap=null, c=null; for(let k=0;k<4;k++){ c=ratioApply()||ratioCalc(b,r); cap=dcCapPct(b,r,fm); if(r.dc<=cap.pct) break; r.dc=cap.pct; } // the plant yard moves with the MW: settle the cap
+  r.prog=fresh?100-r.dc:Math.min(r.prog,100-r.dc); c=ratioApply()||ratioCalc(b,r); const M=BD.model(), S=b.city==='van'?(/I-2/.test(b.code)?['van_zdb_i2']:['van_zdb_i3']):['edm_bl20001'];
+  const pctDcMax=cap.pct, mwH=c.mwTest?BD.eng.calc({mw:c.mwTest,recover:true},BD.eng.siteFacts(),[],[]):null;
+  const rooms=b.split.map(x=>{ const raw=(BD.data.raw.dc_rooms.rooms.find(y=>y.id===x.id)||{}).perMW||{}; return `<span>${esc(x.name)}</span><span class="ar">${c.mwTest?rg([c.mwTest*x.perMW[0],c.mwTest*x.perMW[1]],'m²'):'?'} ${chips(raw.src)}</span>`; }).join('');
+  const qRooms=DR.rooms.filter(x=>!x.split&&/no size source/.test(x.kind||'')).map(x=>x.name.split(' (')[0]);
+  const covLim=b.coverNone?`none (${esc(b.code)})`:'limit ?';
+  sd.innerHTML=`${tabsHTML('arat')}<h2>Ratios</h2><p class="lead">Set how much of the lot is built on, then split the floor area. The data centre's share sets its size.</p>
+   <div class="arat"><div class="arh"><b>Building coverage</b><span>${covLim} ${chips(b.coverNone?['van_zdb_i2']:[])}</span></div>
+    <label class="arl"><span>Footprint</span><span>${n0(c.cover)} of ${n0(b.build)} m² inside the yards</span></label>
+    <input type="range" id="rCov" min="${Math.max(1,Math.round(b.build*0.05))}" max="${Math.floor(b.build)}" step="1" value="${Math.round(c.cover)}" aria-label="Building footprint, m²">
+    <p class="src">Yards and height limit: ${esc(b.code||'zone')} ${chips(S)}. ${b.coverNone?'':'No coverage limit for this zone is in the register, so the slider stops at the buildable area inside the yards.'}</p></div>
+   <div class="arat"><div class="arh"><b>Floor area split</b><span>${n0(c.allowed)} m² allowed</span></div>
+    <p class="src">${c.by==='fsr'?`Floor-space ratio ${b.fsr} × ${n0(b.lot)} m² lot`:`Footprint × ${b.floors} storeys under the ${n0(M.H)} m height limit`} (the lower of the two) ${chips(S)}</p>
+    <label class="arl"><span>Data centre</span><span>${r.dc}% · ${n0(c.dcM2)} m²</span></label>
+    <input type="range" id="rDc" min="0" max="${pctDcMax}" step="1" value="${Math.min(r.dc,pctDcMax)}" aria-label="Data centre share, %">
+    ${cap.byRoom&&cap.geo<100?`<p class="src">Loading and the plant yard leave room for ${n0(cap.room)} m² of hall${b.dataFl<b.floors?' (not on the ground floor here)':''}, so the data centre takes at most ${cap.geo}% ${chips(S)}.</p>`:b.dataFl<b.floors&&cap.geo<100?`<p class="src">The hall may not use the ground floor here, so the data centre takes at most ${cap.geo}% ${chips(S)}.</p>`:''}
+    ${cap.fm==null?`<p class="src k">No size passes the hard rules with this set-up (plant, generators, fuel or noise). Change the set-up.</p>`:cap.pct<cap.geo?`<p class="src">Hard rules stop it at ${cap.fm} MW with this set-up (plant, generators, fuel, noise), so at most ${cap.pct}% at the ${r.end==='high'?'high':'low'} end. Change the set-up for more.</p>`:''}
+    <label class="arl"><span>Programs</span><span>${r.prog}% · ${n0(c.progM2)} m²</span></label>
+    <input type="range" id="rPg" min="0" max="${100-r.dc}" step="1" value="${Math.min(r.prog,100-r.dc)}" aria-label="Programs share, %">
+    <p class="sub">Unused ${n0(c.unused/c.allowed*100)}% · ${n0(c.unused)} m²</p>
+    ${b.city==='van'&&/^I-[23]/.test(b.code)?`<p class="src">${esc(b.code)}: non-industrial uses together at most 1.00 × the lot (${n0(b.lot)} m²); Arrange blocks programs past it ${chips(S)}.</p>`:''}</div>
+   <div class="arat"><div class="arh"><b>What that gives</b><span></span></div>
+    <div class="agrid"><span>Data centre size</span><span class="ar">${c.dcM2>0?mwR(c.mw.map(x=>Math.floor(x*10)/10)):'?'} ${chips(['arch_ratios'])}</span>
+     <span>Arrange tests</span><span class="ar"><select id="rEnd" aria-label="Which end of the range Arrange tests"><option value="low"${r.end!=='high'?' selected':''}>low end</option><option value="high"${r.end==='high'?' selected':''}>high end</option></select> ${c.mwTest!=null?c.mwTest+' MW':'?'}</span>
+     ${rooms}
+     <span>Not counted, no size source</span><span class="ar">? ${chips(['arch_dc_rooms'])}</span>
+     <span>Heat the hall offers</span><span class="ar">${mwH&&mwH.avail?rg(mwH.avail,'MWh/yr'):'?'} ${chips(['dea','dfKatalog2022'])}</span></div>
+    <p class="src">Hall per MW: five built Canadian halls (operator claims); UPS and Li-ion per MW: maker claims, equipment only. Low end: the share at ${n0(b.perMW[1])} m² per MW; high end: at ${n0(b.perMW[0])}. No size source, not counted: ${esc(qRooms.join(', '))}.</p></div>`;
+  wireTabs(sd);
+  const re=()=>{ ratioApply(); viewRatios(); };
+  $('#rCov').onchange=e=>{ r.cover=+e.target.value; re(); };
+  $('#rDc').onchange=e=>{ r.dc=+e.target.value; r.prog=Math.min(r.prog,100-r.dc); re(); };
+  $('#rPg').onchange=e=>{ r.prog=Math.min(+e.target.value,100-r.dc); re(); };
+  $('#rEnd').onchange=e=>{ r.end=e.target.value; re(); };
+  ratioPlan(b,c); }
+/* the Ratios drawing: the lot, the line of the yards, the data centre as the set-up now draws it, and two bars (coverage; floor split) */
+function ratioPlan(b,c){ const host=document.getElementById('v3d'); if(!host) return; BD.archHide&&BD.archHide(); let d=$('#aPlan'); if(!d||d.parentElement!==host){ if(d) d.remove(); d=document.createElement('div'); d.id='aPlan'; host.appendChild(d); } d.style.display='block';
+  const M=BD.model()||b.M, F=M.F, toUV=r=>{ const o=[]; for(let i=0;i<r.length;i+=2) o.push(F.toL(r[i],r[i+1])); return o; }; // the model after the ratios were applied
+  const lot=toUV(M.ring), us=lot.map(p=>p[0]), vs=lot.map(p=>p[1]), u0=Math.min(...us), u1=Math.max(...us), v0=Math.min(...vs), v1=Math.max(...vs);
+  const pad=24, Wd=560, Hd=330, k=Math.min((Wd-2*pad)/Math.max(1,u1-u0),(Hd-2*pad)/Math.max(1,v1-v0)), X=u=>pad+(u-u0)*k, Y=v=>pad+(v-v0)*k, pts=a=>a.map(p=>X(p[0])+','+Y(p[1])).join(' '); /* drawing */
+  let svg=`<polygon points="${pts(lot)}" fill="none" stroke="var(--line-2)" stroke-width="1"/>`;
+  if(b.yard) svg+=`<polygon points="${pts(toUV(b.yard))}" fill="none" stroke="var(--muted)" stroke-dasharray="4 3" stroke-width=".8"/>`;
+  const hf=M.serverFoot||M.foot; if(hf) svg+=`<polygon points="${pts(toUV(hf))}" fill="none" stroke="var(--fg)" stroke-width="1.3"/>`;
+  const labs=[[lot,'Lot, '+n0(b.lot)+' m²'],[b.yard?toUV(b.yard):null,'Inside the yards, '+n0(b.build)+' m²'],[hf?toUV(hf):null,'Data centre as drawn now']].filter(x=>x[0]);
+  const right=X(u1)+30; labs.forEach(([uv,t],i)=>{ const ly=pad+14+i*22, cx=Math.max(...uv.map(p=>X(p[0]))), cy=Math.min(Y(Math.min(...uv.map(p=>p[1])))+14+i*18,Y(Math.max(...uv.map(p=>p[1])))-4); const kx=right-8-6*i; /* drawing */
+    svg+=`<polyline points="${cx},${cy} ${kx},${cy} ${kx},${ly} ${right-3},${ly}" fill="none" stroke="var(--line-2)" stroke-width=".8"/><text x="${right}" y="${ly+4}" font-size="13" fill="var(--fg)">${esc(t)}</text>`; }); /* drawing */
+  const bar=(y,title,parts)=>{ let x=pad, s=`<text x="${pad}" y="${y-8}" font-size="12" fill="var(--muted)">${esc(title)}</text>`; const W=Wd+180-2*pad; /* drawing */
+    parts.forEach(([v,of,lab,fill])=>{ const w=Math.max(0,W*v/of); s+=`<rect x="${x}" y="${y}" width="${w}" height="16" fill="${fill}" stroke="var(--bg)"/>`+(w>40?`<text x="${x}" y="${y+32}" font-size="12" fill="var(--fg)">${esc(lab)}</text><text x="${x}" y="${y+47}" font-size="12" fill="var(--muted)">${n0(v/of*100)}%</text>`:''); x+=w; }); return s; }; /* drawing */
+  svg+=bar(Hd+34,`Building coverage: ${n0(c.cover)} of ${n0(b.build)} m² inside the yards`,[[c.cover,b.build,'Footprint','#8a8780'],[b.build-c.cover,b.build,'Not built on','var(--line)']]); /* drawing */
+  svg+=bar(Hd+118,`Floor area: ${n0(c.allowed)} m² allowed`,[[c.dcM2,c.allowed,'Data centre','#6b6964'],[c.progM2,c.allowed,'Programs','#a9a6a0'],[c.unused,c.allowed,'Not used','var(--line)']]); /* drawing */
+  d.innerHTML=`<svg viewBox="0 0 ${Wd+200} ${Hd+190}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Lot plan with the line of the yards, the data centre as drawn now, and the coverage and floor-area split">${svg}</svg><div class="sub" style="position:absolute;left:16px;right:16px;bottom:4px;font-size:11px">Plan · the split is by floor area, not lot area</div>`; } /* drawing */
 
 /* ---------- steps ---------- */
 async function ready(){ css(); await A.ready; if(!CAT.list) throw new Error('arch_programs.json did not load'); }
 async function viewPrograms(){ await ready(); BD.S.view2='tab'; const sd=$('#side');
   const groups=GROUP.map(([g,l])=>{ const L=CAT.list.filter(p=>p.group===g); if(!L.length) return ''; return `<div class="agrp"><h4 class="spf">${esc(l)}</h4>${L.map(p=>{ const on=!!pickOf(p.id); const s=p.size||{};
       return `<div class="apick"><span>${esc(p.name)}<br><small>${p.kind==='mass'?(s.typical_m2!=null?'typical '+n0(s.typical_m2)+' m²':'size ?'):esc(p.kind)} · ${esc((p.occ&&p.occ.group)||'?')}</small></span><button data-add="${p.id}" aria-pressed="${on}">${on?'Added':'Add'}</button></div>`; }).join('')}</div>`; }).join('');
-  sd.innerHTML=`<h2>Programs</h2><p class="lead">Pick what the site could hold with the data centre. Each starts at a sourced typical size; you set it in the next step.</p>
+  sd.innerHTML=`${tabsHTML('aprog')}<h2>Programs</h2><p class="lead">Pick what the site could hold with the data centre. Each starts at a sourced typical size; you set it in the next step.</p>
    <p class="sub">${A.picks.length?`${A.picks.length} picked.`:'Nothing picked yet.'} Hover a grey tag to read its source; "?" means no source was found.</p>${groups}`;
   sd.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>{ const id=b.dataset.add; pickOf(id)?del(id):add(id); viewPrograms(); });
+  wireTabs(sd);
   draw3d(); }
 async function viewArrange(){ await ready(); BD.S.view2='tab'; const sd=$('#side'); const P=place();
-  if(!P){ sd.innerHTML=`<h2>Arrange</h2><p class="lead">Architecture mode needs a new building on a lot with a known shape. Pick a lot and set it up as a new build.</p>`; return; }
+  if(!P){ sd.innerHTML=`${tabsHTML('aarr')}<h2>Arrange</h2><p class="lead">Architecture mode needs a new building on a lot with a known shape. Pick a lot and set it up as a new build.</p>`; return; }
   const B=budgets(P), RL=rules(P); A.last={P,B,RL};
   const presets=[['suggest','Suggested'],['lot','Lot line'],['wall','Building wall'],['hall','Hall wall']];
-  sd.innerHTML=`<h2>Arrange</h2><p class="lead">The tool places each program by its rules; you resize, lock, delete and choose options. Nothing is scored.</p>${budHTML(B)}${A.msg?`<div class="aflag bad">${esc(A.msg)}</div>`:''}
+  sd.innerHTML=`${tabsHTML('aarr')}<h2>Arrange</h2><p class="lead">The tool places each program by its rules; you resize, lock, delete and choose options. Nothing is scored.</p>${splitLine(P.ratio)}${budHTML(B)}${A.msg?`<div class="aflag bad">${esc(A.msg)}</div>`:''}
    <div class="abar ctl" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px">Secure line ${presets.map(([k,l])=>`<button data-sec="${k}" aria-pressed="${A.secure===k}">${l}</button>`).join('')} ${chips(['arch_sec_gcpsg015AppC'])}</div>
    <p class="sub" style="font-size:11.5px">Suggested: the tightest line that keeps the hall, its plant and loading inside. A design choice, not a rule (J.B., 1 Nov 2026).</p>
    ${A.picks.length?A.picks.map(rowHTML).join(''):'<p class="sub">No programs yet. Go back to add some.</p>'}
@@ -246,7 +351,8 @@ async function viewArrange(){ await ready(); BD.S.view2='tab'; const sd=$('#side
    <p class="sub" style="font-size:11.5px">Drawn by the tool, not rules: where each block sits (a 2 m grid, front to back), its proportions (no side under 6 m; a pool block at least its tank and deck), a separate refuge building 3 m away, and storeys at ${n0(P.s.ftf.ground)} m where a program's own height has no source (${P.s.city==='van'?'the I-2/I-3 ground-floor minimum':'Vancouver\'s I-2/I-3 ground-floor minimum, used here only as a drawing height'}).</p>
    <p><button id="aSave" class="btn">Save this arrangement</button> <span class="sub">${A.saved.length} saved</span></p>`;
   wire(sd); draw3d(P); }
-function wire(sd){ const re=()=>{ A.msg=null; viewArrange(); }, reK=()=>viewArrange();
+function wire(sd){ const re=()=>{ A.msg=null; viewArrange(); }, reK=()=>viewArrange(); wireTabs(sd);
+  sd.querySelectorAll('[data-editr]').forEach(a=>a.onclick=e=>{ e.preventDefault(); BD.flow&&BD.flow.to('arat'); });
   sd.querySelectorAll('[data-sec]').forEach(b=>b.onclick=()=>{ A.secure=b.dataset.sec; re(); });
   sd.querySelectorAll('[data-x]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); del(b.dataset.x); re(); });
   sd.querySelectorAll('[data-sel]').forEach(h=>h.onclick=()=>{ A.sel=A.sel===h.dataset.sel?null:h.dataset.sel; re(); });
@@ -268,14 +374,14 @@ function resize(id,v){ const q=pickOf(id), p=CAT.byId[id]; if(!q) return; const 
   if(over>0){ const noMin=[]; for(let pass=0;pass<12&&over>0.5;pass++){ const others=A.picks.filter(o=>o!==q&&!o.lock&&o.m2!=null&&CAT.byId[o.id].kind==='mass'&&minOf(CAT.byId[o.id])!=null&&o.m2>minOf(CAT.byId[o.id])+0.5);
       if(!others.length) break; const tot=others.reduce((t,x)=>t+x.m2-minOf(CAT.byId[x.id]),0); for(const o of others){ const can=o.m2-minOf(CAT.byId[o.id]), take=Math.min(can,over*can/tot); o.m2-=take; } over-=Math.min(over,tot); }
     A.picks.forEach(o=>{ if(o!==q&&!o.lock&&o.m2!=null&&CAT.byId[o.id].kind==='mass'&&minOf(CAT.byId[o.id])==null) noMin.push(CAT.byId[o.id].name.split(' (')[0]); });
-    if(over>0.5){ q.m2=Math.max(old,v-over); A.msg=`Stopped at ${n0(q.m2)} m²: ${B.space.capF!=null&&B.space.capF<B.space.capE?'the zone\'s floor-space ratio':'the room inside the setbacks and height limit'} is used up. Locked programs, programs at their minimum${noMin.length?', and those with no sourced minimum ('+noMin.join(', ')+')':''} keep the rest.`; } }
+    if(over>0.5){ q.m2=Math.max(old,v-over); A.msg=`Stopped at ${n0(q.m2)} m²: ${B.space.ratio?'the programs\' share of the floor (set in Ratios)':B.space.capF!=null&&B.space.capF<B.space.capE?'the zone\'s floor-space ratio':'the room inside the setbacks and height limit'} is used up. Locked programs, programs at their minimum${noMin.length?', and those with no sourced minimum ('+noMin.join(', ')+')':''} keep the rest.`; } }
  }
 function snapshot(){ const L=A.last; if(!L) return; const P=L.P, B=L.B, s=P.s; const [m,n]=secArea(P);
   const front=P.boxes.filter(b=>b.front&&b.p.place&&b.p.place.public&&b.v).reduce((t,b)=>t+Math.abs(b.v[1]-b.v[0]),0);
   A.saved.push({n:A.saved.length+1,secure:A.secure,picks:JSON.parse(JSON.stringify(A.picks)),space:B.space,heat:B.heat,bad:L.RL.filter(r=>r.sev==='bad').length,notes:L.RL.length,front,W:s.W,pubShare:n?(n-m)/n:null}); }
 async function viewCompare(){ await ready(); BD.S.view2='tab'; const sd=$('#side'); const S=A.saved;
   const row=(l,f)=>`<tr><th>${l}</th>${S.map(x=>`<td>${f(x)}</td>`).join('')}</tr>`;
-  sd.innerHTML=`<h2>Compare</h2><p class="lead">Saved arrangements side by side. No total score: each row is a different kind of good.</p>
+  sd.innerHTML=`${tabsHTML('acmp')}<h2>Compare</h2><p class="lead">Saved arrangements side by side. No total score: each row is a different kind of good.</p>
    ${S.length?`<div style="overflow-x:auto"><table class="acmp"><tr><th></th>${S.map(x=>`<th>Arrangement ${x.n}</th>`).join('')}</tr>
    ${row('Programs',x=>esc(x.picks.map(q=>CAT.byId[q.id].name.split(' (')[0]+(q.m2!=null?' '+n0(q.m2)+' m²':'')).join(', ')))}
    ${row('Secure line',x=>esc({suggest:'suggested',lot:'lot line',wall:'building wall',hall:'hall wall'}[x.secure]))}
@@ -285,7 +391,7 @@ async function viewCompare(){ await ready(); BD.S.view2='tab'; const sd=$('#side
    ${row('Share of the lot the public can reach',x=>x.pubShare==null?'?':n0(x.pubShare*100)+'%')}
    ${row('Rules flagged',x=>`${x.bad} (of ${x.notes} notes)`)}
    ${row('Controlled doors from street to servers',x=>'? (not modelled yet)')}</table></div>`:'<p class="sub">Save an arrangement in the Arrange step to compare it here.</p>'}
-   <p class="sub" style="font-size:11.5px">Street front and public share are our arithmetic on the drawn massing (public share sampled on a 1 m grid); floor and heat carry their sources in Arrange; heat counts only programs with a sourced demand. No row is a source-backed score.</p>`; draw3d(); }
+   <p class="sub" style="font-size:11.5px">Street front and public share are our arithmetic on the drawn massing (public share sampled on a 1 m grid); floor and heat carry their sources in Arrange; heat counts only programs with a sourced demand. No row is a source-backed score.</p>`; wireTabs(sd); draw3d(); }
 
 /* ---------- drawing: 3D, plan per storey, section; heat view ---------- */
 function warmCool(t){ if(t==null) return null; const k=Math.max(0,Math.min(1,(t-15)/(60-15))); const a=[93,127,153], b=[209,163,94]; return `rgb(${a.map((x,i)=>Math.round(x+(b[i]-x)*k)).join(',')})`; } // heat view only: warm-to-cool, separate from the red accent (J.B., 2 Nov 2026) /* drawing */
@@ -326,7 +432,7 @@ function plan(P){ const host=document.getElementById('v3d'); if(!host||!P) retur
   const srcIds=[...new Set(vis.filter(b=>!b.hall).flatMap(b=>(b.src||[])))];
   d.innerHTML=`<svg viewBox="0 0 ${Wd+250} ${Hd+30}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${sec?'Section':'Plan'} of the arrangement">${svg}</svg><div class="sub" style="position:absolute;left:16px;right:16px;bottom:4px;font-size:11px">${A.heat==='grad'?'Temperatures: '+chips(srcIds)+' · hall: register heat_temp '+chips(['yuan2025','nrelESIF2019'])+' · ':''}${sec&&s.H?'Height limit: '+chips(s.city==='van'?['van_zdb_i2','van_zdb_i3']:['edm_bl20001']):''}</div>`; } /* drawing */
 
-BD.views=BD.views||{}; BD.views.aprog=viewPrograms; BD.views.aarr=viewArrange; BD.views.acmp=viewCompare;
+BD.views=BD.views||{}; BD.views.arat=viewRatios; BD.views.aprog=viewPrograms; BD.views.aarr=viewArrange; BD.views.acmp=viewCompare;
 BD.archHide=()=>{ const v=$('#aView'); if(v) v.style.display='none'; const p=$('#aPlan'); if(p) p.style.display='none'; };
-BD.archTest={place,budgets,rules,add,del,resize,CAT};
+BD.archTest={place,budgets,rules,add,del,resize,CAT,ratioBase,ratioCalc,ratioNow};
 })();
