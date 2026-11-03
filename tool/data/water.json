@@ -1,0 +1,51 @@
+{
+ "_about": "Water on site (register: evaporation, blowdown, rainwater, free_cooling_hours_2050s). engine.js waterView.",
+ "wet": {
+  "v": {
+   "van": [
+    1085,
+    0.124
+   ],
+   "edm": [
+    914,
+    0.104
+   ]
+  },
+  "src": [
+   "free_cooling_hours_2050s",
+   "cwec"
+  ],
+  "_note": "CWEC hours above 18 °C dry-bulb (30 °C loop, 12 K approach) and that share of 8,760 h; hybrid coolers run wet only then"
+ },
+ "evapLkWh": {
+  "v": 1.5,
+  "src": [
+   "evaporation",
+   "femp"
+  ],
+  "_note": "≤ 1.5 L per kWh of heat (latent heat ceiling)"
+ },
+ "cycles": {
+  "v": [
+   2,
+   6
+  ],
+  "src": [
+   "blowdown",
+   "femp"
+  ],
+  "_note": "cycles of concentration"
+ },
+ "rainMm": {
+  "v": {
+   "van": 1159.5,
+   "edm": 422.5
+  },
+  "src": [
+   "rainwater",
+   "eccc",
+   "src_fill_ecccEdmCity"
+  ],
+  "_note": "ECCC Normals 1991–2020: Vancouver Intl, Edmonton City"
+ }
+}

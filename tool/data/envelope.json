@@ -1,0 +1,137 @@
+{
+ "_about": "Zone envelopes (register: envelope; condition z_envelope). engine.js R.envVan, R.envEdm, R.ftf.",
+ "envVan": {
+  "I-2": {
+   "fsr": [
+    3,
+    3
+   ],
+   "h": 18.3,
+   "hx": "30.5–36.5",
+   "ground": true,
+   "yards": {
+    "front": 0,
+    "side": 0,
+    "rear": 3.1,
+    "note": "I-2 outside sub-area B: no front yard; rear yard 3.1 m; side yards only beside residential zones without a lane (0.9–1.5 m, not applied); no site coverage limit (ss. 3.1.2.2–3); sub-area B has deeper yards and is not yet mapped"
+   },
+   "src": [
+    "envelope",
+    "van_zdb_i2"
+   ]
+  },
+  "I-1C": {
+   "fsr": [
+    6,
+    6
+   ],
+   "h": 46.5,
+   "hx": "50.3",
+   "ground": false,
+   "src": [
+    "envelope",
+    "van_zdb_i1c"
+   ]
+  },
+  "I-3": {
+   "fsr": [
+    3,
+    3
+   ],
+   "h": 18.3,
+   "hx": "30.5",
+   "ground": true,
+   "w": 61,
+   "yards": {
+    "front": 0.6,
+    "side": 7.6,
+    "rear": 3.1,
+    "max": 61,
+    "note": "I-3 sub-area A: front yard 0.6 m, side yards 7.6 m, rear yard 3.1 m, building no wider or deeper than 61 m (2022 draft schedule)"
+   },
+   "src": [
+    "envelope",
+    "van_zdb_i3"
+   ]
+  },
+  "FC-2": {
+   "fsr": [
+    1,
+    5
+   ],
+   "h": 22.9,
+   "hx": "51.8",
+   "ground": true,
+   "yards": {
+    "front": 0.6,
+    "side": 0,
+    "rear": 0.6,
+    "note": "FC-2: front and rear yards 0.6 m, no side yards (2022 draft schedule)"
+   },
+   "src": [
+    "envelope",
+    "van_zdb_fc2"
+   ]
+  }
+ },
+ "envEdm": {
+  "IH": {
+   "fsr": [
+    2,
+    2
+   ],
+   "h": 30,
+   "src": [
+    "envelope",
+    "edm_bl20001"
+   ]
+  },
+  "IM": {
+   "fsr": [
+    2,
+    2
+   ],
+   "h": 18,
+   "yards": {
+    "front": 3.0,
+    "side": 0,
+    "rear": 0,
+    "note": "IM: 3.0 m from the street; 6.0 m next to non-industrial zones (not applied — neighbours not read)"
+   },
+   "src": [
+    "envelope",
+    "edm_bl20001"
+   ]
+  },
+  "BE": {
+   "fsr": [
+    1.6,
+    1.6
+   ],
+   "h": 16,
+   "yards": {
+    "front": 6.0,
+    "side": 0,
+    "rear": 0,
+    "note": "BE: 6.0 m from the street (4.5 m on a collector or local road; road class not read); 6.0 m next to a residential zone (not applied — neighbours not read)"
+   },
+   "src": [
+    "envelope",
+    "edm_bl20001"
+   ]
+  }
+ },
+ "ftf": {
+  "ground": {
+   "v": 6.0,
+   "src": [
+    "envelope",
+    "van_zdb_i2",
+    "van_zdb_i3",
+    "burlingtonPlans2026"
+   ],
+   "_note": "zoning minimum (I-2/I-3) and Burlington"
+  },
+  "_up": "data-hall floors 5.5–6.0 m: 6.0 Burlington; 5.5 HK TPB A/KC/510B has no register id — kept in engine.js and listed unsourced"
+ }
+}

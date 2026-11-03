@@ -8,31 +8,26 @@ const f1=n=>n==null?'—':(n<10?n.toFixed(1):Math.round(n).toLocaleString('en-CA
 const rng=(a,b,u)=>a==null?'—':(f1(a)===f1(b)?f1(a):f1(a)+'–'+f1(b))+(u?' '+u:'');
 const kmOrM=d=>d>=1000?(d/1000).toFixed(2)+' km':Math.round(d)+' m';
 
-/* ---------- register values used here (id → value, source) ---------- */
+/* ---------- register values used here (id → value, source) ----------
+   Lean refactor 3 Nov 2026: the figures live in tool/data/*.json with their register ids (data.js loads them as BD.data).
+   What is still written here has no register id yet and is listed in checks/agents/2026-11-03_refactor_unsourced.md. */
+const DE=BD.data.envelope, DS=BD.data.size, DQ=BD.data.equipment, DN=BD.data.noise, DH=BD.data.heat;
 const R={
- envVan:{ 'I-2':{fsr:[3,3],h:18.3,hx:'30.5–36.5',ground:true,yards:{front:0,side:0,rear:3.1,note:'I-2 outside sub-area B: no front yard; rear yard 3.1 m; side yards only beside residential zones without a lane (0.9–1.5 m, not applied); no site coverage limit (ss. 3.1.2.2–3); sub-area B has deeper yards and is not yet mapped'}}, 'I-1C':{fsr:[6,6],h:46.5,hx:'50.3',ground:false},
-          'I-3':{fsr:[3,3],h:18.3,hx:'30.5',ground:true,w:61,yards:{front:0.6,side:7.6,rear:3.1,max:61,note:'I-3 sub-area A: front yard 0.6 m, side yards 7.6 m, rear yard 3.1 m, building no wider or deeper than 61 m (2022 draft schedule)'}}, 'FC-2':{fsr:[1,5],h:22.9,hx:'51.8',ground:true,yards:{front:0.6,side:0,rear:0.6,note:'FC-2: front and rear yards 0.6 m, no side yards (2022 draft schedule)'}} },
- envEdm:{ IH:{fsr:[2,2],h:30}, IM:{fsr:[2,2],h:18,yards:{front:3.0,side:0,rear:0,note:'IM: 3.0 m from the street; 6.0 m next to non-industrial zones (not applied — neighbours not read)'}}, BE:{fsr:[1.6,1.6],h:16,yards:{front:6.0,side:0,rear:0,note:'BE: 6.0 m from the street (4.5 m on a collector or local road; road class not read); 6.0 m next to a residential zone (not applied — neighbours not read)'}} },
- ftf:{ground:6.0, up:[5.5,6.0]},     // ground: zoning minimum (I-2/I-3) and Burlington; data-hall floors 5.5–6.0 m: Burlington ≈6.0, HK TPB A/KC/510B 5.5, A/KC/480 6.0 (15 Oct check; zoning's 4.0 m is a minimum, not a hall height)
- hallShare:[0.48,0.72],               // hall_area: Burlington plan set (internally inconsistent: 48% or 72%); single-storey and operator cases 51–87% not used for multi-storey
- m2PerMW:[290,630],                   // built Canadian halls, operator claims: eStruxture VAN-1 ≈290, Hut 8 Vault ≈557, Qu EDM1 ≈584, VAN5 ≈627 (sources/16 §2.7); Cologix VAN2 ≈619 dropped 30 Oct 2026 (J.B.): its 2 MW is site capacity, not IT load
- m2PerMWHigh:[250,290],               // high-density / liquid-cooled option: NEXTDC S3 250 and QScale Q01 255 (operator claims, AI-ready halls); 290 = densest built Canadian hall (VAN-1)
- m2PerMWModel:[186,2325],             // LBNL prototypes (Sun et al. 2021), shown as outer bounds only
- grossPerMW:[505,1109],               // check: whole building per MW IT — min–max of the 11 benchmark buildings in bench/benchmarks.json (6 approved, 2 proposed, 1 refused, 1 under construction, 1 unknown; applicant or filed figures; test_size_chain.py keeps this in sync)
- cases:{van:[{mw:1.6,n:'Cologix VAN5'},{mw:2.4,n:'eStruxture VAN-1'},{mw:40,n:'111 E 5th (proposed)'}], edm:[{mw:2.5,n:'Qu EDM1'}]}, // operator or applicant figures
- steps:[0.1,0.2,0.3,0.5,0.75,1,1.5,2,2.5,3,4,5,6,8,10,12,15,20,25,30,40],
- plant:{ups:[2.4,3.3],batt:[1.0,1.8],dry:[19.5,30.5],chill:[16.4,30.5],towers:[4.7,16.5],hybrid:[24.5,50.1],hp:[5.6,15.1],cdu:[0.4,1.5]}, /* 29 Oct 2026 equipment study (checks/node_review/select_*.md): range across the makers compared; basis unit drawn = nearest the median */ // m² per MW; ups, batt, hp, cdu per MW of servers; dry and chill per MW of HEAT (× PUE), sweep M30/M31 18 Oct: dry coolers (liquid cooling) 19.5–30.5 (EVAPCO, Thermokey, Mark), air-cooled chillers (air cooling) 16.4–30.5 (Vertiv AFC, Airedale; equipment study 29 Oct); manufacturer claims, equipment only, spare units added when the plant is laid out
- pue:[1.4,1.55], lf:0.6, lwUnitDry:[98.5,102], // dry cooler, per unit at full fan speed: Güntner GFD 090.2D ≈ 2.5 MW, LWA 98.5 (Deerfield MA submittal); Thermokey 102 at 738 kW (manufacturer claims; sweep M32)
- lwUnit:[102.8,106.1], // sound power per chiller (basis 1.49 MW): Vertiv Liebert AFC SL-71060 R09/24 prints Lp at 1 m, 83.0 dB(A) FIZ135 (R1234ze) and 80.0 FH3135 (R513A, 1,481 kW); Lw = Lp + 10 log S with S the 1 m measurement box around the unit (ISO 3744 parallelepiped; our calculation, 29 Oct 2026). 'Preliminary data'; low-noise options not rated
-  capture:[0.57,0.75], /* 30 Oct 2026 (J.B.): LBNL 57–59 % typical to 67–75 % best; 48 % was in no source */ cop:[3.0,4.5], // COP: DEA 2026 waste-heat HPs to 70 °C 3.0–3.6; observed Meta Odense 27→70 °C: 4.5 (2020), ≈3.9 combined 2022–24 (Fjernvarme Fyn annual reports)
- fuelLkWh:0.263, fuelHours:12, fuelLimit:{low:20000,first:200000},
- homeMWh:{van:16.81,edm:33.14},       // CEUD residential space + water heating per household, 2018–22 average (2023, the warmest year, gave 14.58 / 29.19): BC 60.5 GJ, AB 119.3 GJ (J.B. 18 Oct, sweep M96)
- monthRatio:{van:4.9,edm:5.0},       // busiest ÷ quietest month of heat demand: s × CWEC monthly HDD16 share + (1 − s) ÷ 12, s = space ÷ (space + water heating), CEUD residential 2018–22: BC 0.674, AB 0.761 (sweep M14; national 0.61 retired)
- grid:{van:18.1,edm:346.1},           // g CO2e/kWh, NIR 2026, consumption, 2024
- neuCredit:32.59,                     // $/MWh, By-law 9552 Sch. C
- reach:{pool:1000,housing:1200,greenhouse:1500}, reachGuide:1200, recvRadius:3000, /* register receiver_radius: search 3 km, let cost decide; RVO reaches retired as a cut (finding I-03) */
- jobsM2:464.5, kWPerRack:8,            // Uptime 2024 average 8 kW per rack (industry survey; register size_fit)
-                        // 5,000 ft² per operating job, JLARC 2024 (transferred)
+ envVan:DE.envVan, envEdm:DE.envEdm,
+ ftf:{ground:DE.ftf.ground, up:[5.5,6.0]},     // data-hall floors 5.5–6.0 m: Burlington ≈6.0 (burlingtonPlans2026); HK TPB A/KC/510B 5.5 has no register id (unsourced list)
+ hallShare:DS.hallShare,
+ m2PerMW:DS.m2PerMW,
+ m2PerMWHigh:DS.m2PerMWHigh,
+ m2PerMWModel:DS.m2PerMWModel,
+ grossPerMW:[505,1109],               // check: whole building per MW IT — min–max of the 11 benchmark buildings in bench/benchmarks.json (no register id: unsourced list; test_size_chain.py keeps this in sync)
+ cases:{van:[{mw:1.6,n:'Cologix VAN5'}].concat(DS.cases.van), edm:DS.cases.edm}, // operator or applicant figures; VAN5's 1.6 MW has no register id (unsourced list)
+ steps:[0.1,0.2,0.3,0.5,0.75,1,1.5,2,2.5,3,4,5,6,8,10,12,15,20,25,30,40], // size slider steps: a tool choice, no source (unsourced list)
+ plant:DQ.plant, pue:DQ.pue, lf:DQ.lf, lwUnitDry:DN.lwUnitDry, lwUnit:DN.lwUnit,
+ capture:DH.capture, cop:DH.cop,
+ fuelLkWh:DQ.fuelLkWh, fuelHours:DQ.fuelHours, fuelLimit:DQ.fuelLimit,
+ homeMWh:DH.homeMWh, monthRatio:DH.monthRatio, grid:DH.grid, neuCredit:DH.neuCredit,
+ reach:DH.reach, reachGuide:DH.reachGuide, recvRadius:DH.recvRadius,
+ jobsM2:DS.jobsM2, kWPerRack:DS.kWPerRack,
 };
 const SRC2={
  env:'formula register: envelope (zone schedules; sources 17, 18)', hall:'register: hall_area (one calibration case, confidence 50); ground-floor rule: I-2 s. 2.2.7; floor heights: Burlington plans, HK TPB A/KC/480, A/KC/510B',
@@ -454,7 +449,7 @@ const NLEV=new WeakMap();
    Source changes and path reductions add in dB through Lp = Lw − 20 log r − 8 − reduction; plant groups (roof, yard, indoors) are summed logarithmically
    (NSW s. 4.1; FHWA s. 3.1). Order tried: none → source → screen → both (Ottawa ENCG Intro p. 1: barriers only after other measures). No credit: unit
    housings ('enclose'), silencers (case values only), towers (SPX: 50 log is an upper bound), hybrid coolers. */
-const NMIT={scr:{dB:8,minH:4,within:20,fh0:5,fhM:1.5,cap:20},room:{dB:25},ln:{lw:98,std:101,mw:1.010},fan:{k:50,min:0.6}};
+const NMIT=DN.mit; // tool/data/noise.json (mit), with register ids
 function rayExit(px,py,ux,uy,r){ let t=1e9; for(let i=0;i<r.length;i+=2){ const j=(i+2)%r.length, ax=r[i], ay=r[i+1], ex=r[j]-ax, ey=r[j+1]-ay, den=ux*ey-uy*ex; if(Math.abs(den)<1e-12) continue;
     const s=((ax-px)*ey-(ay-py)*ex)/den, q=((ax-px)*uy-(ay-py)*ux)/den; if(s>=0&&q>=-1e-9&&q<=1+1e-9&&s<t) t=s; } return t; }
 function noiseCheck(m){ const s=BD.S.sel; if(!m||!m.plant||!m.plant.s||!s) return null; const P=m.plant, k=P.s.k, n=P.s.n; if(!n) return null;
@@ -744,10 +739,10 @@ function waterView(){
   const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=[fac[0]*8760*R.lf,fac[1]*8760*R.lf];
   const towers=A.outside==='towers', hybrid=A.outside==='hybrid';
   // hybrid coolers run wet only when the air is too warm for the loop (30 °C loop, 12 K approach → above 18 °C dry-bulb): CWEC hours per city (J.B. parity audit A2, 16 Oct 2026)
-  const WET={van:[1085,0.124],edm:[914,0.104]}, wet=hybrid?WET[f.city][1]:1;
-  const evap=MWh.map(v=>v*1000*1.5*wet/1000); // m³: ≤ 1.5 L/kWh of heat, × the wet share for hybrids
-  const mk=[evap[1]*(1+1/(6-1)),evap[1]*(1+1/(2-1))], bd=[evap[1]/(6-1),evap[1]/(2-1)];
-  const roof=roofArea(f), mm=f.city==='van'?1159.5:422.5, rain=roof*mm/1000*0.8;
+  const DW=BD.data.water, WET=DW.wet, wet=hybrid?WET[f.city][1]:1, CY=DW.cycles; // tool/data/water.json, with register ids
+  const evap=MWh.map(v=>v*1000*DW.evapLkWh*wet/1000); // m³: ≤ 1.5 L/kWh of heat, × the wet share for hybrids
+  const mk=[evap[1]*(1+1/(CY[1]-1)),evap[1]*(1+1/(CY[0]-1))], bd=[evap[1]/(CY[1]-1),evap[1]/(CY[0]-1)];
+  const roof=roofArea(f), mm=DW.rainMm[f.city==='van'?'van':'edm'], rain=roof*mm/1000*0.8; // 0.8 runoff: assumed in the register (rainwater), unsourced list
   const wbe=[MWh[0]*1000*1.25/1000,MWh[1]*1000*16.8/1000];
   let h=tabBar('water')+`<h2>Water in, water out</h2><p class="draft">From almost none to a great deal: <span class="k">it depends on the cooling</span>.</p>
   <div class="q"><div class="lab">How it rejects heat</div><div class="seg" data-c="1"><button data-v="dry" aria-pressed="${A.outside!=='towers'&&A.outside!=='hybrid'}">Dry coolers</button><button data-v="towers" aria-pressed="${towers}">Cooling towers</button><button data-v="hybrid" aria-pressed="${A.outside==='hybrid'}">Hybrid</button></div></div>
