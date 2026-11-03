@@ -153,6 +153,13 @@ function siteFactsRaw(){
       else if(rep){ f.gross=[rep.gfa,rep.gfa]; f.gfaRep=rep; f.how=`${fmt(rep.gfa)} m² gross floor area reported by the owner to the City (Annual Greenhouse Gas and Energy Limits By-law reporting, disclosed data, reporting year 2025${rep.n>1?`; one building across ${rep.n} parcels with this address`:''})`; }
       else { f.gross=[Math.round(per*0.48),Math.round(per*1.23)]; f.gfaEst=per; f.how=`estimated: each building part's footprint × its own storeys (height ÷ 4 m) = ${fmt(per)} m²; shown as ${fmt(f.gross[0])}–${fmt(f.gross[1])} m², because against the floor areas 255 Vancouver buildings report to the City this method came out between 19% low and 109% high for the middle 80% of them (median 14% high); the band is our arithmetic (estimate ÷ 2.09 to ÷ 0.81)`; /* 2 Nov 2026 fix pass: D-arith */ }
       f.hallGross=f.gross.slice(); }
+    /* 2 Nov 2026 hard rules (site audit 14): I-2 s. 2.2.7, I-3 s. 2.2.11, FC-2 s. 2.2.4: no bulk data storage at the ground floor (registers
+       van_zdb_i2, van_zdb_i3, van_zdb_fc2). A whole existing building in those zones: the ground floor (the buildings' footprints) is not data hall.
+       Both readings, as for a new building: strict (the hall share of the floors above), lenient (support rooms at grade). */
+    if(blds.length&&A.extent!=='part'&&f.env&&f.env.ground&&M&&M.Z&&!M.Z.assumed){ const gf=f.foot, hs=R.hallShare, up=f.gross.map(g=>Math.max(0,g-gf));
+      f.ground=[Math.min(gf,f.gross[0]),Math.min(gf,f.gross[1])]; f.groundEx=gf; f.hallGross=up;
+      f.hallS=[up[0]*hs[0],up[1]*hs[1]]; f.hallL=[Math.min(up[0],f.gross[0]*hs[0]),Math.min(up[1],f.gross[1]*hs[1])];
+      f.how+=`; the ground floor (${fmt(gf)} m², the buildings' footprints) is left out of the data hall: zone ${f.zone} allows no bulk data storage at the ground floor`; }
   }
   if(!f.hallS){ f.hallS=[f.hallGross[0]*R.hallShare[0],f.hallGross[1]*R.hallShare[1]]; }
   const m2MW=A.density==='high'?R.m2PerMWHigh:R.m2PerMW; f.density=A.density==='high'?'high':'typical'; const toMW=h=>[Math.min(40,h[0]/m2MW[1]),Math.min(40,h[1]/m2MW[0])];
@@ -220,6 +227,7 @@ function mathFits(f){
     } else L.push(`Data hall: ${n0(f.hallGross[0])} × ${hs[0]} = ${n0(f.hall[0])} m², up to ${n0(f.hallGross[1])} × ${hs[1]} = <b>${n0(f.hall[1])} m²</b>.`);
   } else {
     L.push(`Floor area: ${esc(f.how)} = <b>${rng(f.gross[0],f.gross[1],'m²')}</b>.`);
+    if(f.groundEx!=null) L.push(`Ground floor left out (no bulk data storage at the ground floor; ${({'I-2':'I-2 s. 2.2.7','I-3':'I-3 s. 2.2.11','FC-2':'FC-2 s. 2.2.4'})[f.zone]||'zone schedule'}): ${rng(f.gross[0],f.gross[1],'m²')} − ${n0(f.groundEx)} m² = <b>${rng(f.hallGross[0],f.hallGross[1],'m²')}</b> on the floors above; the lenient reading puts support rooms at grade (smaller of the floors above and the hall share of the whole): <b>${rng(f.hallL[0],f.hallL[1],'m²')}</b>.`);
     L.push(`Data hall: ${n0(f.hallGross[0])} × ${hs[0]} = ${n0(f.hallS[0])} m², up to ${n0(f.hallGross[1])} × ${hs[1]} = <b>${n0(f.hallS[1])} m²</b>.`);
   }
   const top=f.mwCapped?f.mwTopRaw:f.mw[1], lo0=Math.min(40,f.hall[0]/m[1]);
@@ -252,7 +260,10 @@ function fitsView(){
   const mw=A.mw, fac=[mw*R.pue[0],mw*R.pue[1]], pl=plantPerMW(false), plR=plantPerMW(true);
   const fuel=[fac[0]*1000*R.fuelHours*R.fuelLkWh,fac[1]*1000*R.fuelHours*R.fuelLkWh];
   const pos=A.built==='existing'&&A.extent==='part'?A.floor:'';
-  const fuelLim=pos==='ground'?R.fuelLimit.first:R.fuelLimit.low;
+  /* 2 Nov 2026 hard rules (site audit 4): the limit follows where the fuel is, i.e. where the generators are (NFC 2020 Table 4.3.13.4.-B, register
+     nfc2020_4313): on the roof, above the first storey, 20,000 L (rooftop tanks: our reading ?), checked in site.js and blocking above it;
+     in the yard the sets stand outdoors at grade, where the table (tanks inside buildings) does not apply. */
+  const fuelAt=A.gens==='none'?null:(A.genAt||'yard'), fuelLim=fuelAt==='roof'?R.fuelLimit.low:null, fuelOver=fuelLim&&fuel[1]>fuelLim;
   let svc;
   const mva=fac[1]/0.90; /* 2 Nov 2026 fix pass: D-pf — MVA = MW ÷ power factor 0.90–1.0 (our band), high end used for the thresholds */
   if(f.city==='van') svc=mva>13?'above 13 MVA: a two-feeder supply may be required in 25 kV areas; larger loads move toward transmission rules':mva>6.5?'above 6.5 MVA: a two-feeder supply may be required in 12.5 kV areas':'within a single primary service';
@@ -288,7 +299,7 @@ function fitsView(){
   <h3>What that size needs</h3><dl>
   <dt>Power at full load</dt><dd>${rng(fac[0],fac[1],'MW')} at the meter (servers × PUE 1.4–1.55); this sizes the grid connection and the cooling plant</dd><dt>Power on average</dt><dd>${rng(fac[0]*R.lf,fac[1]*R.lf,'MW')} (about ${Math.round(R.lf*100)}% of full load over a year); this sets the yearly energy</dd>
   <dt>Plant space</dt><dd>${rng(pl[0]*mw,pl[1]*mw,'m²')} with ${coolerFor(false).name}; ${rng(plR[0]*mw,plR[1]*mw,'m²')} with heat recovery — equipment only, before clearances</dd>
-  <dt>Standby fuel</dt><dd>${A.gens==='none'?'none: no generators chosen':`${rng(fuel[0],fuel[1],'L')} for 12 h, Uptime's minimum; ${rng(fuel[0]*2,fuel[1]*4,'L')} at the 24–48 h operators report (claims). Generator tanks over 2,500 L, as here, fall under the fire code's Part 4 (smaller ones under CSA B139, NFC 2020 4.1.1.1.(3)(b)): Part 4 lets a protected storage room hold ${fmt(R.fuelLimit.first)} L on the first storey and ${fmt(R.fuelLimit.low)} L in a basement or upper storey (Table 4.3.13.4.-B)`}</dd>
+  <dt>Standby fuel</dt><dd>${A.gens==='none'?'none: no generators chosen':`${rng(fuel[0],fuel[1],'L')} for 12 h, Uptime's minimum; ${rng(fuel[0]*2,fuel[1]*4,'L')} at the 24–48 h operators report (claims). Generator tanks over 2,500 L, as here, fall under the fire code's Part 4 (smaller ones under CSA B139, NFC 2020 4.1.1.1.(3)(b)): Part 4 lets a protected storage room hold ${fmt(R.fuelLimit.first)} L on the first storey and ${fmt(R.fuelLimit.low)} L in a basement or upper storey (Table 4.3.13.4.-B). ${fuelAt==='roof'?(fuelOver?`<span class="k">Over the limit:</span> the generators are on the roof, above the first storey, and ${fmt(Math.round(fuel[1]/100)*100)} L is more than ${fmt(fuelLim)} L, so this size is blocked with roof generators (applying the table to rooftop tanks is our reading ?)`:`The generators are on the roof, above the first storey: within the ${fmt(fuelLim)} L limit (applying the table to rooftop tanks is our reading ?)`):'The generators stand in the yard, outdoors at grade: the table is for tanks inside buildings, so it does not limit them; outdoor tank siting (NFC 4.3.2) is not tested here'}`}</dd>
   <dt>Electrical service</dt><dd>${esc(svc)}</dd>
   ${f.cpcn?`<dt>Grid</dt><dd class="draft">Downtown supply area (downtown peninsula east to Nanaimo St): no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures.</dd>`:''}
   ${pos==='upper'?`<dt>Floor strength</dt><dd class="draft">Office floors above grade are designed for 2.4 kPa; equipment rooms need at least 3.6 kPa, and data halls their actual load — likely strengthening.</dd>`:''}

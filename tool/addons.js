@@ -54,7 +54,7 @@ BD.coolingCard=coolingCard;
 
 /* ---------- seen or hidden (J.B., 16 Oct): reveal / screen / enclose / indoors for the heat-rejection plant ---------- */
 function nearestHome(f){ const T=BD.scene3d&&BD.scene3d.state&&BD.scene3d.state(); return null; }
-function visCard(){ const a=A(), f=E().siteFacts(), M=f.M, P=M&&M.plant, k=P?P.s.k:null, cur=a.vis||'reveal';
+function visCard(){ const a=A(), f=E().siteFacts(), M=f.M, P=M&&M.plant, k=P?P.s.k:null, cur=a.vis||'reveal', req=M&&M.Z&&M.Z.screen; /* 2 Nov 2026 hard rules (exchanges F9): screening required here → no "reveal" */
   // barrier: Maekawa–Tatge at 500 Hz (λ 0.686 m) for a screen 0.9 m taller than the unit, unit 2 m behind it, a listener 30 m away at the unit's base height
   const lam=0.686, hS=(k?k.H:2.9)+0.9, a1=2, b1=30; const path=(Math.hypot(a1,hS-(k?k.H:2.9)/2)+Math.hypot(b1,hS))-(a1+b1); const N=2*path/lam; const IL=Math.min(20,10*Math.log10(3+20*N));
   const ch=[['reveal','Leave it seen','the units as they are',`none beyond distance (see People)`,'clearances only','none','Edmonton s. 5.120: non-industrial sites must conceal mechanical equipment; IM and IH have no such rule; BE screens from streets and non-industrial zones. Vancouver industrial schedules: no roof screening rule','what it is, legible from the street: precedents leave flues visible through mesh (Global Switch, London)'],
@@ -65,11 +65,12 @@ function visCard(){ const a=A(), f=E().siteFacts(), M=f.M, P=M&&M.plant, k=P?P.s
   BD.drawer.open(`<div class="kind">Seen or hidden</div><h2>Should the cooling plant be seen?</h2>
   <p class="sub">${draft('Four ways to treat the heat-rejection plant. Each trades sound, space, efficiency, cost, code and what the building tells the street. No choice is ranked.')}</p>
   <table class="cmp"><tr><th></th>${ch.map(x=>`<th class="${x[0]===cur?'on':''}">${x[1]}</th>`).join('')}</tr>${row('What',2)}${row('Sound',3)}${row('Space',4)}${row('Efficiency, cost',5)}${row('Code',6)}${row('Legibility',7)}
-  <tr><td></td>${ch.map(x=>`<td><button data-vis="${x[0]}" style="background:transparent;border:1px solid ${x[0]===cur?'var(--accent)':'var(--line-2)'};border-radius:6px;color:var(--fg);padding:2px 8px;cursor:pointer">${x[0]===cur?'Chosen':'Choose'}</button></td>`).join('')}</tr></table>
+  <tr><td></td>${ch.map(x=>`<td>${req&&x[0]==='reveal'?'<span class="src">Not allowed here</span>':`<button data-vis="${x[0]}" style="background:transparent;border:1px solid ${x[0]===cur?'var(--accent)':'var(--line-2)'};border-radius:6px;color:var(--fg);padding:2px 8px;cursor:pointer">${x[0]===cur?'Chosen':'Choose'}</button>`}</td>`).join('')}</tr></table>
+  ${req?`<div class="warnbox">${esc(req.why)}</div>`:''}
   ${E().mathBox([`Screen height: unit ${(k?k.H:2.9)} m + 0.9 m = <b>${hS.toFixed(1)} m</b> (screens ideally 2–3 ft taller than the units: consultant claim, SM&W 2021, one US project).`,`Path difference δ = √(${a1}² + ${(hS-(k?k.H:2.9)/2).toFixed(2)}²) + √(${b1}² + ${hS.toFixed(1)}²) − ${a1+b1} = ${path.toFixed(3)} m; Fresnel number N = 2δ ÷ λ (0.686 m at 500 Hz) = ${N.toFixed(2)}.`,`Insertion loss = 10 log₁₀(3 + 20N) = <b>${IL.toFixed(1)} dB</b>, capped at 20 dB for one edge.`],'Maekawa–Tatge approximation (Bugaru et al. 2021); ISO 9613-2 caps as quoted in SoundPLAN and CadnaA documentation (not verified). Geometry is an illustration, not this site.')/* 2 Nov 2026 fix pass: D-screen (consultant claim) */}
   <h3>Sources</h3>${src(['maekawaISO','yorkClearance2024','evapcoLayout2026','fhwaBarrier','cumminsF1493','edmZB5120','edmZB2120','vanZDBs10','thGlobalSwitch2025','abpHuntstown','bahnhofPionen'])}
   <div class="draftnote">Generators, fuel and electrical equipment are not part of this choice.</div>`,
-  el=>el.querySelectorAll('[data-vis]').forEach(b=>b.onclick=()=>{ a.vis=b.dataset.vis; refresh(); visCard(); })); }
+  el=>el.querySelectorAll('[data-vis]').forEach(b=>b.onclick=()=>{ if(req&&b.dataset.vis==='reveal') return; a.vis=b.dataset.vis; refresh(); visCard(); })); }
 BD.visCard=visCard;
 
 /* ---------- add-ons: off by default, each with Add › (J.B., 16 Oct) ---------- */
@@ -207,11 +208,15 @@ function waterIndex(){ if(BD.loadWP&&!waterIndex.q){ waterIndex.q=BD.loadWP().th
    waterRule('greywater','Neighbours\' greywater',f.city==='van'?'not allowed: greywater only within the same dwelling (VBBL 2025)':'no rule found for sharing greywater between properties; it would need an alternative solution through the province (?)',['vbbl2025_272','abAltSol2021']),
    waterRule('blackwater','Blackwater',f.city==='van'?'not permitted in buildings (VBBL 2025)':'an alternative solution from the City; Alberta Environment authorisation likely',['vbbl2025_272']),
   ].filter(it=>!BD.tierAllows||BD.tierAllows(it.x.tier)); /* 2 Nov 2026 fix pass: A-eng (greywater, blackwater: engineering template only) */
+  /* 2 Nov 2026 hard rules (exchanges F10): a connection the city's rules do not permit (rule_state not_allowed, e.g. Vancouver greywater and
+     blackwater, VBBL 2025 Art. 2.7.1.2, register vbbl2025_272) is listed under "Not here", not offered to explore */
+  const CK={van:'vancouver',edm:'edmonton'}, notHere=it=>((it.x.rule_state||{})[CK[f.city]])==='not_allowed';
   let h=e.tabBar('water')+`<h2>Water in, water out</h2><p class="draft">From almost none to a great deal: <span class="k">it depends on the cooling</span>.</p>
   <div class="hfig"><div><b>${towers?fmt(evap)+' m³':'none'}</b><span>evaporated a year, at most${towers?(hyb?` (hybrid: wet ${(WETS[f.city][1]*100).toFixed(1)}% of the year, the ${fmt(WETS[f.city][0])} h above 18 °C; CWEC, computed)`:''):` (${BD.dryName()})`}</span></div><div><b>${towers?fmt(mk[0])+'–'+fmt(mk[1])+' m³':'—'}</b><span>make-up water a year (2–6 cycles)</span></div><div><b>${fmt(rain)} m³</b><span>rain on the roof a year</span></div><div><b>${f.city==='edm'?'about '+fmt(MWh[1]*1.6)+' m³':fmt(MWh[0]*1.25)+'–'+fmt(MWh[1]*16.8)+' m³'}</b><span>water behind its electricity a year${f.city==='edm'?' (Alberta 2021: 85% coal and gas at ~1.25 L/kWh, 3% hydro at ~16.8; Canada Energy Regulator profile, not yet verified)':' (BC generation shares by source not found; hydro is about 86% of capacity, so nearer the hydro end)'}</span></div></div>
   ${!towers?'':`<p class="sub">${draft(`Water hardness sets how often tower water must be bled off: Edmonton's treated water is about 178 mg/L as CaCO₃ (EPCOR, 2026; not confirmed ?), Vancouver's about 20 (Metro Vancouver, 2025), so the same tower runs fewer cycles and blows down more in Edmonton.`)}</p>`}
   ${BD.xecon?BD.xecon.waterSecs(f):''}
-  <h3>Connections</h3>${items.map(it=>`<div class="addrow"><div>${esc(it.name)} ${it.x.readiness?rd(it.x.readiness):''}<div class="src">${esc(it.lines)} · Vancouver ${rs((it.x.rule_state||{}).vancouver||'unknown')} Edmonton ${rs((it.x.rule_state||{}).edmonton||'unknown')}</div></div><div><button class="btn" data-wc="${it.id}">Explore ›</button></div></div>`).join('')}
+  <h3>Connections</h3>${items.filter(it=>!notHere(it)).map(it=>`<div class="addrow"><div>${esc(it.name)} ${it.x.readiness?rd(it.x.readiness):''}<div class="src">${esc(it.lines)} · Vancouver ${rs((it.x.rule_state||{}).vancouver||'unknown')} Edmonton ${rs((it.x.rule_state||{}).edmonton||'unknown')}</div></div><div><button class="btn" data-wc="${it.id}">Explore ›</button></div></div>`).join('')}
+  ${items.some(notHere)?`<div class="famno"><div class="fnh">Not here</div>${items.filter(notHere).map(it=>`<div class="addrow"><div>${esc(it.name)}<div class="src">${esc(it.lines)} (${esc(((it.x.rules||{})[CK[f.city]])||'')}; register ${esc(it.ids[0])})</div></div></div>`).join('')}</div>`:''}
   <h3>Add-ons</h3>${addRow('rainwater','Rainwater for cooling')}${addRow('water_cooling')}${addRow('condensate')}
   <div class="draftnote">Water mains and sewer connections are not drawn.</div>`;
   $('#side').innerHTML=h; e.wireTabs(); wireAdds(); BD.draw();

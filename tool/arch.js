@@ -47,6 +47,10 @@ function site(){ const M=BD.model&&BD.model(); const G=BD.siteGeo; if(!M||!M.F||
    nothing floats. Yard plant, the plant yard and loading are no-go, widened by the largest hard distance a picked program must keep from them.
    Lowest base wins, then nearest the street. At-grade programs only at grade; programs that must not be at grade only above it. If a program
    does not fit on one floor it is drawn over more storeys and the tool says so. Review 2 Nov 2026 (checks/agents/2026-11-02_arch_mode_review.md). */
+/* Vancouver I-2 / I-3 s. 3.1.1.1: 3.00 FSR for industrial-type uses, 1.00 for all other uses combined (van_zdb_i2, van_zdb_i3). Which bucket a program is in
+   is our reading of the use it would be: utility (heat plant), manufacturing (drying), parking (EV hub), and in I-2 the listed service uses catering
+   (community kitchen) and laundry or cleaning plant (commercial laundry). Everything else counts against the 1.00. */
+function industrialUse(q,code){ if(['heat_plant','food_drying','lumber_drying','ev_hub'].includes(q.id)) return true; if(/I-2/.test(code)&&(q.id==='community_kitchen'||(q.id==='laundry'&&q.opt==='commercial'))) return true; return false; }
 function zoneCode(){ const s=BD.S.sel||{}, a=s.a||[]; return String(s.city==='van'?(a[1]||''):(a[2]||a[1]||'')).toUpperCase().trim(); }
 function place(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,uf,ftf}=s; const out={s,boxes:[],flags:[],hall:null,levels:[]};
   const refuge=pickOf('refuge'), under=refuge&&refuge.opt==='under_hall';
@@ -58,11 +62,11 @@ function place(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,
   out.hall={ring:G.rectW(F,hu0,hu1,hv0,hv1),base:hallBase,h:hallH,u:[hu0,hu1],v:[hv0,hv1],kind:'hall'};
   if(under) out.flags.push({t:`The refuge under the hall takes the hall's ground floor; the hall's floor is spread over the ${Math.max(1,s.floors-1)} floor${s.floors-1===1?'':'s'} above (our arithmetic). The rest of that ground floor is drawn empty.`,src:['arch_up_vanZDB10'],sev:'note'});
   const keep=w=>Math.max(0,...A.picks.map(q=>CAT.byId[q.id]).filter(Boolean).flatMap(p=>(p.adj||[]).filter(a=>a.rule==='keep apart'&&a.hard&&a.m!=null&&a.with===w&&!/evaporative/i.test(a.note||'')).map(a=>a.m)));
-  const kG=keep('generators'), kC=keep('chillers'), kL=keep('loading');
+  const kG=keep('generators'), kC=keep('chillers'), kL=keep('loading'), kE=Math.max(0,...A.picks.map(q=>CAT.byId[q.id]).filter(Boolean).flatMap(p=>(p.adj||[]).filter(a=>a.rule==='keep apart'&&a.hard&&a.m!=null&&a.with==='chillers'&&/evaporative/i.test(a.note||'')).map(a=>a.m)));
   // what is already there: [u0,u1,v0,v1,zBase,zTop,noGo]
   const occ=[[hu0,hu1,hv0,hv1,0,hallTop,false]]; // the hall: built from the ground (or the refuge's floor) to its roof
-  for(const b of (s.M.plant&&s.M.plant.boxes||[])){ const e=ext(b.clear||b.ring); if(b.kind==='roof'){ occ.push([e[0],e[1],e[2],e[3],0,1e9,true]); continue; } // roof plant: open to the sky, nothing built over it (review 2, N2)
-    const k=b.name.indexOf('generator')>=0?kG:kC; occ.push([e[0]-k,e[1]+k,e[2]-k,e[3]+k,0,1e9,true]); }
+  for(const b of (s.M.plant&&s.M.plant.boxes||[])){ const e=ext(b.clear||b.ring); const k0=b.name.indexOf('generator')>=0?kG:/tower|evapor|adiabatic|hybrid/i.test(b.name)?Math.max(kC,kE):kC; if(b.kind==='roof'){ occ.push([e[0]-k0,e[1]+k0,e[2]-k0,e[3]+k0,0,1e9,true]); continue; } // roof plant: open to the sky, nothing built over it (review 2, N2)
+    occ.push([e[0]-k0,e[1]+k0,e[2]-k0,e[3]+k0,0,1e9,true]); } // NBC 6.3.2.9 and 6.3.2.15.(5) distances widen the no-go (code audit F5, F6)
   if(s.M.plant&&s.M.plant.yard){ const y=BD.geo.clip(s.M.ring,s.M.plant.yard); if(y&&y.length>=6){ const e=ext(y); occ.push([e[0],e[1],e[2],e[3],0,1e9,true]); } }
   if(s.M.loading){ const e=ext(s.M.loading); occ.push([e[0]-kL,e[1]+kL,e[2]-kL,e[3]+kL,0,1e9,true]); }
   const bu0=um[0], bu1=um[1], bw=v1-v0, bl=bu1-bu0, cs=2, nU=Math.max(1,Math.floor(bl/cs)), nV=Math.max(1,Math.floor(bw/cs));
@@ -73,15 +77,18 @@ function place(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,
   masses.sort((a,b)=>prio(a)-prio(b));
   if(under&&refuge&&refuge.m2){ const fp=Math.min(refuge.m2,(hu1-hu0)*(hv1-hv0)), d=Math.min(hu1-hu0,fp/Math.max(1,hv1-hv0)); const ua=dir<0?hu0:hu1-d, ub=dir<0?hu0+d:hu1;
     out.boxes.push({id:'refuge',p:CAT.byId.refuge,q:refuge,ring:G.rectW(F,ua,ub,hv0,hv1),base:0,h:ftf.ground,storeys:1,sh:ftf.ground,front:Math.abs((dir<0?ua:ub)-uf)<0.6,underHall:true,u:[ua,ub],v:[hv0,hv1]}); }
-  out.notDrawn=[]; const Hmax=s.H||Infinity, capF=s.fsr&&s.lot?s.lot*s.fsr[1]:null, code=zoneCode(); let floorUsed=s.hallM2+out.boxes.reduce((t,b)=>t+(b.q.m2||0),0);
+  out.notDrawn=[]; const Hmax=s.H||Infinity, capF=s.fsr&&s.lot?s.lot*s.fsr[1]:null, code=zoneCode(); let floorUsed=s.hallM2+out.boxes.reduce((t,b)=>t+(b.q.m2||0),0), nonInd=out.boxes.reduce((t,b)=>t+(industrialUse(b.q,code)?0:(b.q.m2||0)),0);
   /* code limits block, they never just warn (J.B., 2 Nov 2026: "everything needs to follow the code"): no block above the zone's height limit,
      none past the floor-space ratio, none over an Edmonton BE area cap; setbacks and the hard distances are already no-go above */
   for(const x of masses){ const {q,p}=x, nm=p.name.split(' (')[0];
     if(q.m2==null){ out.flags.push({t:`${nm}: no sourced typical size; type one to place it.`,src:p.size&&p.size.src,sev:'q'}); continue; }
     if(q.id==='refuge'&&!q.opt){ out.flags.push({t:'Refuge: choose a placement (own building, side by side, or under the hall). There is no default (J.B., 1 Nov 2026).',src:[],sev:'q'}); out.notDrawn.push(q.id); continue; }
     { const z=p.zoning&&p.zoning[s.city]; if(z&&z.cap_m2&&s.city==='edm'&&code==='BE'&&q.m2>z.cap_m2){ out.flags.push({t:`${nm}: ${n0(q.m2)} m² is over the ${n0(z.cap_m2)} m² this use may have in BE; not drawn. ${minOf(p)!=null&&minOf(p)>z.cap_m2?'Its sourced minimum ('+n0(minOf(p))+' m²) is over the cap, so it cannot go on a BE lot.':'Make it '+n0(z.cap_m2)+' m² or less.'}`,src:z.src,sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; } }
+    if(s.city==='van'&&/^I-[23]/.test(code)&&!industrialUse(q,code)&&nonInd+q.m2>s.lot*1.0+0.5){ out.flags.push({t:`${nm}: ${n0(q.m2)} m² would pass the 1.00 floor-space ratio ${code} allows for non-industrial uses combined (${n0(s.lot)} m² on this lot, ${n0(Math.max(0,s.lot-nonInd))} m² left); not drawn.`,src:[/I-2/.test(code)?'van_zdb_i2':'van_zdb_i3'],sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
+    if(s.city==='van'&&/^I-2/.test(code)&&q.id==='clinic'){ const lim=Math.max(235,0.333*(floorUsed+q.m2)); if(q.m2>lim+0.5){ out.flags.push({t:`${nm}: in I-2, general and health care office together may have the greater of 235 m² or 33.3% of all floor area (${n0(lim)} m² here); ${n0(q.m2)} m² is over it; not drawn.`,src:['van_zdb_i2'],sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; } }
+    { const z=p.zoning&&p.zoning[s.city]; if(z&&zoneMatch(s.city==='van'?z.districts:z.zones,code)==='no'){ out.flags.push({t:`${nm}: not permitted in ${code||'this zone'}${z.use?' ('+z.use+')':''}; not drawn. A rezoning would be a separate council decision.`,src:z.src,sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; } }
     if(capF!=null&&floorUsed+q.m2>capF+0.5){ out.flags.push({t:`${nm}: ${n0(q.m2)} m² would pass the floor-space ratio (${n0(capF)} m² on this lot, ${n0(Math.max(0,capF-floorUsed))} m² left); not drawn.`,src:s.city==='van'?['van_zdb_i2','van_zdb_i3']:['edm_bl20001'],sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
-    const grade=p.place&&p.place.grade, atG=grade==='at grade', notG=grade==='not at grade'&&notAtGradeHere(p), roof=q.place==='roof';
+    const grade=p.place&&p.place.grade, mustSt=s.city==='van'&&p.place&&p.place.street_entrance&&!(q.id==='refuge'&&q.opt==='side_by_side'&&false), atG=grade==='at grade'||mustSt, notG=grade==='not at grade'&&notAtGradeHere(p), roof=q.place==='roof';
     const sh=(p.size&&p.size.floor_height_m||ftf.ground), own=q.id==='refuge'&&q.opt==='own_building', gc=own?2:0; // own building: one 2 m cell clear all round (drawn, not a rule)
     const g=HG(); let tall=false, best=null, st0=Math.max(1,q.storeys||1), st=st0;
     for(;st<=8&&!best;st++){ const fp=q.m2/st;
@@ -89,14 +96,14 @@ function place(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,
         for(let i=0;i+dc<=nU;i++) for(let j=0;j+wc<=nV;j++){ let base=-1, ok=true;
           for(let a=i-gc;a<i+dc+gc&&ok;a++) for(let b=j-gc;b<j+wc+gc;b++){ if(a<0||b<0||a>=nU||b>=nV){ if(gc) continue; ok=false; break; } const t=g[a*nV+b]; const inF=a>=i&&a<i+dc&&b>=j&&b<j+wc;
             if(t===Infinity){ ok=false; break; } if(!inF){ if(t>0) { ok=false; break; } continue; } if(base<0) base=t; else if(Math.abs(t-base)>0.1){ ok=false; break; } if(own&&t>0){ ok=false; break; } }
-          if(!ok) continue; if(base+sh*st>Hmax+0.01){ tall=true; continue; } if(roof&&base<hallTop-0.01) continue; if(atG&&base>0) continue; if(notG&&base===0) continue;
+          if(!ok) continue; if(base+sh*st>Hmax+0.01){ tall=true; continue; } if(roof&&base<hallTop-0.01) continue; if(atG&&base>0) continue; if(mustSt&&i!==0) continue; /* Vancouver 10.21.1: its main entrance from a street (arch_up_vanZDB10) */ if(notG&&base===0) continue;
           const sc=base*1e4+i*10+j*0.01; if(!best||sc<best.sc) best={sc,base,i,j,dc,wc}; }
       }
       if(best) break; }
-    if(!best){ out.flags.push({t:`${nm}: no room ${tall?'below the '+n0(Hmax)+' m height limit ':''}that meets its placement rules (${atG?'at grade':notG?'not at grade':roof?'on the hall roof':'flat on the ground or on what is built'}); not drawn.`,src:p.place&&p.place.src,sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
+    if(!best){ out.flags.push({t:`${nm}: no room ${tall?'below the '+n0(Hmax)+' m height limit ':''}that meets its placement rules (${mustSt?'on the street front, for its own street entrance (Vancouver 10.21.1)':atG?'at grade':notG?'not at grade':roof?'on the hall roof':'flat on the ground or on what is built'}); not drawn.`,src:p.place&&p.place.src,sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
     if(st>st0) out.flags.push({t:`${nm}: ${n0(q.m2)} m² does not fit on one floor here; drawn over ${st} storeys only to show its size. Whether it can be split across floors is a design question.`,src:[],sev:'bad',id:q.id});
     const {base,i,j,dc,wc}=best, hh=sh*st, uA=dir<0?bu0+i*cs:bu1-(i+dc)*cs, uB=uA+dc*cs, vA=v0+j*cs, vB=vA+Math.min(wc*cs,q.m2/st/(dc*cs)), gap=gc*cs; // exact area: full cells along u, the width trimmed to the size
-    floorUsed+=q.m2; occ.push([uA,uB,vA,vB,base,base+hh,false]); if(own) occ.push([uA-gap,uB+gap,vA-gap,vB+gap,0,1e9,true]);
+    floorUsed+=q.m2; if(!industrialUse(q,code)) nonInd+=q.m2; occ.push([uA,uB,vA,vB,base,base+hh,false]); if(own) occ.push([uA-gap,uB+gap,vA-gap,vB+gap,0,1e9,true]);
     out.boxes.push({id:q.id,p,q,ring:G.rectW(F,uA,uB,vA,vB),base,h:hh,storeys:st,sh,front:base===0&&Math.abs((dir<0?uA:uB)-uf)<cs+0.01,top:base>=hallTop-0.01,roof,u:[uA,uB],v:[vA,vB],gap,own}); }
   const top=Math.max(hallTop,...out.boxes.map(b=>b.base+b.h));
   if(s.H&&top>s.H+0.01) out.flags.push({t:`Check: something is drawn to ${n0(top)} m, over this zone's ${n0(s.H)} m limit. This should not happen; please report it.`,src:s.city==='van'?['van_zdb_i2','van_zdb_i3']:['edm_bl20001'],sev:'bad'});
@@ -156,7 +163,7 @@ function rules(P){ const s=P.s, M=s.M, city=s.city, code=zoneCode(), out=[...P.f
       if(a.m==null||!tg){ const t=`${a.with} (${a.m==null?'no distance in the source':'not modelled'})`; if(!nc.includes(t)){ nc.push(t); ncS.push(...(a.src||[])); } continue; } if(!tg.length) continue;
       const d=Math.min(...tg.map(r=>dist3(b,r))); if(d<a.m){ out.push({t:`${nm} is ${n0(d)} m from the ${a.with}; ${a.note||('keep '+a.m+' m')}.`,src:a.src,sev:a.hard?'bad':'note',id:b.id}); if(a.hard) b.bad=true; } }
     if(nc.length) out.push({t:`${nm}: keep-apart rules not checked here: ${nc.join('; ')}.`,src:[...new Set(ncS)],sev:'q',id:b.id});
-    if(p.place&&p.place.street_entrance&&!b.front) out.push({t:`${nm} needs its own street entrance; it is not on the street front here.`,src:p.place.src,sev:'note',id:b.id});
+    if(city==='van'&&p.place&&p.place.street_entrance&&!b.front&&!b.underHall) out.push({t:`${nm} needs its own street entrance; it is not on the street front here.`,src:p.place.src,sev:'note',id:b.id});
   }
   return out; }
 
@@ -172,6 +179,7 @@ const CSS=`.arow{border-top:1px solid var(--line);padding:8px 0;display:grid;gap
 .abud{margin:6px 0 10px}.abud .lab{font-size:11.5px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}.abud .bar{display:flex;height:10px;border:1px solid var(--line-2);border-radius:3px;overflow:hidden;margin-top:3px}
 .abud .bar i{display:block;height:100%;border-right:1px solid var(--bg);background:var(--line-2)}.abud .bar i.h{background:#6b6964}.abud .bar i.s{background:var(--accent)}.abud .bar i.o{background:#8a8780}
 .aflag{font-size:12px;margin:3px 0;padding-left:12px;position:relative}.aflag:before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--line-2)}.aflag.bad:before{background:var(--accent)}.aflag.q:before{background:transparent;border:1px dashed var(--line-2)}
+.aparts{font-size:11.5px;color:var(--muted);line-height:1.5}.aparts span{white-space:normal}
 .apick{display:flex;justify-content:space-between;gap:8px;padding:3px 0;font-size:12.5px;border-bottom:1px solid var(--line)}.apick small{color:var(--muted)}.agrp{margin-top:12px}
 .aview{position:absolute;left:64px;bottom:12px;z-index:5;display:flex;gap:6px;flex-wrap:wrap;background:rgba(23,24,26,.85);padding:6px;border-radius:6px}
 #aPlan{position:absolute;left:0;right:0;top:0;bottom:56px;z-index:4;background:var(--bg);display:none;padding:12px 16px}#aPlan svg{width:100%;height:100%}
@@ -189,11 +197,13 @@ function rowHTML(q){ const p=CAT.byId[q.id]; if(!p) return ''; const s=p.size||{
   return `<div class="arow${sel?' sel':''}" data-row="${q.id}"><h4 data-sel="${q.id}"><span class="nm">${esc(p.name)}</span><button data-x="${q.id}" title="delete">✕</button></h4>
    <div class="ctl">${size}${opt}</div>
    <div class="sub" style="font-size:11.5px">${p.kind==='mass'?`Typical ${s.typical_m2!=null?n0(s.typical_m2)+' m²':'?'}${mn!=null?`, minimum ${n0(mn)} m²`:', minimum ?'}${s.step&&s.step.unit?` · steps of one ${esc(s.step.unit)}${s.step.m2_per_unit?' ('+s.step.m2_per_unit+' m²)':''}`:''} ${chips(s.src)}${s.note?'<br>'+esc(s.note):''}`:`${esc(s.note||'')} ${chips(s.src)}`}</div>
+   ${p.kind==='mass'&&(s.parts||[]).length?`<div class="aparts">What the ${s.typical_m2!=null?n0(s.typical_m2)+' m² ':''}holds: ${s.parts.map(x=>`<span>${esc(x.part)} ${x.m2?rg(x.m2,'m²'):'?'} ${chips(x.src)}</span>`).join(' · ')}</div>`:''}
    ${q.capped?`<div class="sub" style="font-size:11.5px">Starts at ${n0(capOf(p))} m², the most this use may have in BE (typical ${n0(s.typical_m2)} m²). ${chips(p.zoning.edm.src)}</div>`:''}${ch?`<div class="sub" style="font-size:11.5px">${esc(ch.effect)}</div>`:''}
    ${sel?detail(p):''}</div>`; }
 function detail(p){ const h=p.heat||{}, o=p.occ||{}, L=lift(p);
   const z=['van','edm'].map(c=>{ const v=p.zoning&&p.zoning[c]; return v?`<li>${c==='van'?'Vancouver':'Edmonton'}: ${esc(v.status||'?')}${v.use?' ('+esc(v.use)+')':''}${v.cap_m2?', up to '+n0(v.cap_m2)+' m²':''} ${chips(v.src)}</li>`:''; }).join('');
   return `<ul class="sub" style="font-size:11.5px;margin:4px 0 0 14px;padding:0">
+   ${(p.size&&p.size.parts||[]).map(x=>`<li>${esc(x.part)}: ${x.m2?rg(x.m2,'m²'):'?'}${x.basis?' — '+esc(x.basis):''} ${chips(x.src)}</li>`).join('')}
    <li>Code: ${esc(o.group||'?')}, ${o.sep_h_from_F2==null?'separation ?':o.sep_h_from_F2+' h from the hall'} ${chips(o.src)}${o.note?' — '+esc(o.note):''}</li>
    <li>Heat: room ${rg(h.setpoint_C,'°C')}, supply ${rg(h.supply_C,'°C')}, ${rg(h.kWh_m2_yr,'kWh/m²·yr')}${L?` · ${L==='direct'?'the hall\'s heat can serve it directly':L==='partly'?'direct only at the warm end of the hall\'s range, else a heat pump':L==='heat pump'?'needs a heat pump (to 70 °C)':'hotter than a heat pump reaches (70 °C)'} (hall ${rg(dcTemp(),'°C')}, register heat_temp; liquid range unverified)`:''} ${chips(h.src)}${h.note?' — '+esc(h.note):''}</li>${z}
    ${(p.adj||[]).map(a=>`<li>${esc(a.rule)} ${esc(a.with)}${a.m!=null?' '+a.m+' m':''}${a.hard?'':' (preference)'}: ${esc(a.note||'')} ${chips(a.src)}</li>`).join('')}

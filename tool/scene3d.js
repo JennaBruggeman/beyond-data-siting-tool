@@ -286,13 +286,22 @@ function modelKey(){ return sw(C.acc,'the lot; dashed red: the building envelope
    TODAY: at the lot line, as seen at Cologix VAN3 (fence with a gate intercom; register: security_layers, tour = observation, one site).
    30 Oct 2026 (J.B.): one fence only, toggled on or off; the 'proposed' line at the hall wall is dropped. */
 function secureKey(){ const M=state.M; if(!M||!M.ring||M.existing) return ''; const m=state.secure||'off', b=(v,t)=>`<button data-sl="${v}" style="font:inherit;font-size:11px;padding:1px 7px;margin:0 4px 0 0;border-radius:4px;cursor:pointer;border:1px solid ${m===v?'#CC746C':'#5a5d62'};background:${m===v?'rgba(204,116,108,.18)':'transparent'};color:inherit">${t}</button>`;
-  return m==='on'?'<div style="margin-top:6px">Secure line: one fence at the lot line, 2.4 m anti-climb welded mesh, the RCMP\'s minimum for a security fence (GCPSG-009 s. 10.1; the US military asks 2.44 m, UFC 4-022-03). Tier III and IV set no fence (Uptime: Tiers do not prescribe security). Crash rating not drawn; post spacing not sourced (?). Register: security_layers</div>':''; }
+  return m==='on'?`<div style="margin-top:6px">Secure line: one fence, 2.4 m anti-climb welded mesh, the RCMP's minimum for a security fence (GCPSG-009 s. 10.1; the US military asks 2.44 m, UFC 4-022-03). Tier III and IV set no fence (Uptime: Tiers do not prescribe security). Crash rating not drawn; post spacing not sourced (?). Register: security_layers. ${fenceWhy(M)}</div>`:''; }
+/* 2 Nov 2026 hard rules (site audit 11, 12): where the fence may stand.
+   Vancouver Zoning and Development By-law s. 10.10.3: a fence in a required yard may be at most 1.9 m ("fence" includes walls and screens, s. 10.10.1;
+   register arch_per_vanS10). The 2.4 m fence is drawn on the line of the required yards, behind them; where a yard is 0 m that line is the lot line.
+   Edmonton Bylaw 20001 s. 8.20: a fence is a structure, and setbacks apply to development (register arch_per_edmFence): drawn behind the street setback
+   (our reading ?). */
+function fenceLine(M){ return M.yardRect?BD.geo.clip(M.ring,M.yardRect):M.ring; }
+function fenceWhy(M){ const y=(M.Z&&M.Z.yards)||null, any=y&&(y.front||y.side||y.rear);
+  if(M.city==='van') return any?`It stands on the line of the required yards (front ${y.front} m, sides ${y.side} m, rear ${y.rear} m), not on the lot line: a fence in a required yard may be at most 1.9 m (Zoning and Development By-law s. 10.10.3; register arch_per_vanS10). A higher fence there only if the Director of Planning permits it (s. 10.10.6).`:`No required yards in this zone as read, so it stands on the lot line (a fence in a required yard would be capped at 1.9 m, s. 10.10.3; register arch_per_vanS10).`;
+  return any?`It stands behind the ${y.front} m street setback, not on the lot line: a fence is a structure and setbacks apply to development (Bylaw 20001 s. 8.20; register arch_per_edmFence; our reading ?).`:'No setbacks in this zone as read, so it stands on the lot line (register arch_per_edmFence).'; }
 function secureDraw(){ const M=state.M; if(state.slG){ state.dc.remove(state.slG); state.slG=null; } const m=state.secure||'off'; if(!M||!M.ring||M.existing||m==='off') return;
   const g=new T.Group(); state.slG=g; state.dc.add(g); const hall=M.serverFoot||M.foot;
   if(m==='on'){ const fH=2.4; /* 30 Oct 2026, J.B.: one fence, the type expected at a Tier III/IV site: RCMP GCPSG-009 s. 10.1 minimum security fence 2.4 m; anti-climb welded mesh s. 9.5 */
-    for(const z of [0.15,fH]) g.add(ringLine(M.ring,z,C.acc,false,z<0.5?1:0.7));
+    const FR=fenceLine(M); for(const z of [0.15,fH]) g.add(ringLine(FR,z,C.acc,false,z<0.5?1:0.7));
     // the fence as a see-through wall on the lot line (J.B., 30 Oct 2026: 'we would need to model the fence'); VAN3 tour: 'K gate fence drilled 9 feet underground';
-    const r=M.ring, pos=[]; for(let i=0;i<r.length;i+=2){ const j=(i+2)%r.length; const a=V(r[i],r[i+1],0), b=V(r[j],r[j+1],0), a2=V(r[i],r[i+1],fH), b2=V(r[j],r[j+1],fH);
+    const r=FR, pos=[]; for(let i=0;i<r.length;i+=2){ const j=(i+2)%r.length; const a=V(r[i],r[i+1],0), b=V(r[j],r[j+1],0), a2=V(r[i],r[i+1],fH), b2=V(r[j],r[j+1],fH);
       pos.push(a.x,a.y,a.z,b.x,b.y,b.z,b2.x,b2.y,b2.z, a.x,a.y,a.z,b2.x,b2.y,b2.z,a2.x,a2.y,a2.z); }
     const fg=new T.BufferGeometry(); fg.setAttribute('position',new T.Float32BufferAttribute(pos,3));
     g.add(new T.Mesh(fg,new T.MeshBasicMaterial({color:C.acc,transparent:true,opacity:0.28,side:T.DoubleSide,depthWrite:false})));
