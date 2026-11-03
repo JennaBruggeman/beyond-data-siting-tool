@@ -7,7 +7,7 @@
 (function(){
 'use strict';
 const BD=window.BD=window.BD||{};
-const FILES=['envelope','size','equipment','noise','heat','water'];
+const FILES=['envelope','size','equipment','noise','heat','water','plant_units'];
 const plain=o=>{
   if(Array.isArray(o)) return o.map(plain);
   if(o&&typeof o==='object'){
