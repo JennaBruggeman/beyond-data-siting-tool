@@ -1,0 +1,295 @@
+{
+ "dbg": {
+  "a0": 10.39997365615536,
+  "uf": -31.47597365615536,
+  "dir": -1,
+  "v": [
+   -30.456754563202594,
+   30.456754563202594
+  ],
+  "L": 41.87594731231072,
+  "hd": 34.1088973755793,
+  "F": [
+   74.95194731231072,
+   60.91350912640519
+  ],
+  "uBuild": [
+   22.37597365615536,
+   -31.47597365615536
+  ],
+  "pyd": 11.975999999999999,
+  "front": -31.47597365615536,
+  "bu": [
+   [
+    -31.47597365615536,
+    -25.47597365615536
+   ],
+   [
+    -31.47597365615536,
+    -25.47597365615536
+   ],
+   [
+    -31.47597365615536,
+    -25.47597365615536
+   ]
+  ],
+  "plant": [
+   [
+    "standby generators",
+    "yard",
+    12,
+    15,
+    -29,
+    -15
+   ],
+   [
+    "standby generators",
+    "yard",
+    17,
+    21,
+    -29,
+    -15
+   ],
+   [
+    "standby generators",
+    "yard",
+    12,
+    15,
+    -13,
+    0
+   ],
+   [
+    "standby generators",
+    "yard",
+    17,
+    21,
+    -13,
+    0
+   ],
+   [
+    "standby generators",
+    "yard",
+    12,
+    15,
+    2,
+    16
+   ],
+   [
+    "standby generators",
+    "yard",
+    17,
+    21,
+    2,
+    16
+   ]
+  ],
+  "yard": [
+   [
+    10,
+    -30
+   ],
+   [
+    22,
+    -30
+   ],
+   [
+    22,
+    30
+   ],
+   [
+    10,
+    30
+   ]
+  ],
+  "load": [
+   [
+    23,
+    -30
+   ],
+   [
+    37,
+    -30
+   ],
+   [
+    37,
+    27
+   ],
+   [
+    23,
+    27
+   ]
+  ]
+ },
+ "steps": [
+  "site",
+  "setup",
+  "fits",
+  "prec",
+  "heat",
+  "energy",
+  "water",
+  "materials",
+  "social",
+  "opps",
+  "spec",
+  "opts",
+  "time",
+  "arat",
+  "aprog",
+  "aarr",
+  "acmp",
+  "cities",
+  "report"
+ ],
+ "bar": [
+  "Site",
+  "People",
+  "Design",
+  "Report"
+ ],
+ "boxes": [
+  [
+   "refuge",
+   [
+    -31,
+    -25
+   ],
+   true,
+   265,
+   265,
+   0,
+   0,
+   6
+  ],
+  [
+   "warming_shelter",
+   [
+    -31,
+    -25
+   ],
+   false,
+   100,
+   100,
+   1,
+   6,
+   6
+  ],
+  [
+   "ev_hub",
+   [
+    -31,
+    -25
+   ],
+   false,
+   150,
+   150,
+   1,
+   6,
+   6
+  ]
+ ],
+ "hall": [
+  0,
+  16
+ ],
+ "space": {
+  "hall": 3948,
+  "prog": 515,
+  "cap": 7310.400000000001
+ },
+ "heat": {
+  "avail": [
+   23881.76228571428,
+   36660.6
+  ],
+  "need": [
+   42.4,
+   42.4
+  ],
+  "unknown": [
+   "warming_shelter"
+  ]
+ },
+ "rules": [
+  "bad: Public indoor pool: 1,065 m² is over the 500 m² this use may have in BE; not drawn. Its sourced minimum (815 m²) is over the cap, so it cannot go on a BE lot.",
+  "bad: Outpatient clinic: no room below the 16 m height limit that meets its placement rules (flat on the ground or on what is built); not drawn.",
+  "bad: Bathhouse / Nordic spa: no room below the 16 m height limit that meets its placement rules (flat on the ground or on what is built); not drawn.",
+  "bad: Greenhouse: no room below the 16 m height limit that meets its placement rules (flat on the ground or on what is built); not drawn.",
+  "bad: Fish farm: no room below the 16 m height limit that meets its placement rules (flat on the ground or on what is built); not drawn.",
+  "note: Refuge: A-2, 2 h fire separation from the data centre (F-2).",
+  "q: Refuge: keep-apart rules not checked here: generators (no distance in the source).",
+  "note: Warming shelter: A-2, 2 h fire separation from the data centre (F-2).",
+  "q: Warming shelter: keep-apart rules not checked here: generators (no distance in the source).",
+  "q: EV charging hub in BE: zoning not confirmed (?) (no EV use (Vehicle Support Service ?)).",
+  "note: EV charging hub: F-3, 1.5 h fire separation from the data centre (F-2).",
+  "q: EV charging hub: keep-apart rules not checked here: intakes (not modelled)."
+ ],
+ "side": "Arrange",
+ "ratios": {
+  "ratio": {
+   "cover": 4207,
+   "dc": 54,
+   "prog": 46,
+   "end": "low",
+   "mw": 6.2
+  },
+  "base": {
+   "lot": 4569,
+   "build": 4207,
+   "floors": 2,
+   "dataFl": 2,
+   "fsr": 1.6,
+   "coverNone": false,
+   "perMW": [
+    293.4,
+    635.0999999999999
+   ]
+  },
+  "calc": {
+   "allowed": 7310,
+   "by": "fsr",
+   "dcMax": 7310,
+   "dcM2": 3948,
+   "progM2": 3363,
+   "unused": 0,
+   "mw": [
+    6.22,
+    13.45
+   ],
+   "mwTest": 6.2
+  },
+  "answers": {
+   "mw": 6.2,
+   "dcFloor": 3948
+  },
+  "side": [
+   "Ratios"
+  ],
+  "tabs": [
+   "Ratios *",
+   "Arrange (off)",
+   "Exchange (off)",
+   "Compare (off)"
+  ],
+  "stuck": false,
+  "next": "Next: Programs →"
+ },
+ "split": "Data centre 54% · 3,948 m² · 6.2–13.4 MW (testing 6.2) · programs 46% · 3,363 m² · unused 0% arch_ratios Edit ratios",
+ "saved": [
+  [
+   "suggest",
+   5,
+   12,
+   44,
+   0.22060123784261715
+  ],
+  [
+   "lot",
+   8,
+   15,
+   44,
+   0
+  ]
+ ],
+ "errors": []
+}

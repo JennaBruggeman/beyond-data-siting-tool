@@ -95,7 +95,7 @@ let cache={key:null,m:null};
 function model(){
   const S=BD.S, s=S.sel, A=S.answers; if(!s) return null; if(!A.built) A.built='new'; if(!A.extent) A.extent='whole'; /* the labelled defaults (lot test 20 Oct) */
   { const a0=s.a||[], Z0=zoneLimits(s.city,s.city==='van'?(a0[1]||''):(a0[2]||a0[1]||'')); if(Z0.screen&&(!A.vis||A.vis==='reveal')) A.vis='screen'; } /* 2 Nov 2026 hard rules: screening required (Z.screen) */
-  const key=JSON.stringify([s.city,s.id,A.built,A.extent,A.floor,A.foot,A.cover,A.loadIn,A.flip,A.hmode,A.storeys,A.userFSR,A.userH,A.plantAt,A.outside,A.inside,A.spares,A.gens,A.genAt,A.genSpares,A.mw,A.vis,A.subB]);
+  const key=JSON.stringify([s.city,s.id,A.built,A.extent,A.floor,A.foot,A.cover,A.loadIn,A.flip,A.hmode,A.storeys,A.userFSR,A.userH,A.plantAt,A.outside,A.inside,A.spares,A.gens,A.genAt,A.genSpares,A.mw,A.vis,A.subB,A.dcFloor,A.dcSite]);
   if(cache.key===key) return cache.m;
   const a=s.a||[], city=s.city, zraw=city==='van'?(a[1]||''):(a[2]||a[1]||'');
   const Z=zoneLimits(city,zraw);
@@ -133,7 +133,9 @@ function model(){
     // loading: rear end of the buildable area (the end with the rear yard; which end faces the street is not known in the tool)
     // J.B. 20 Oct: once a size is set, loading is counted from the floor that size needs, not the most the zone allows (capped at that)
     const R0=BD.eng&&BD.eng.R, perMW0=R0?(R0.m2PerMW[0]+R0.m2PerMW[1])/2/((R0.hallShare[0]+R0.hallShare[1])/2):0;
-    const gfaGuess=A.mw&&perMW0?Math.min(lotArea*Z.fsr[1],A.mw*perMW0):lotArea*Z.fsr[1];
+    /* 3 Nov 2026 (Architecture Ratios): the data centre's floor-area share, when set for this lot, replaces MW × the per-MW guess (arch.js; register arch_ratios) */
+    const dcF=A.dcFloor&&A.dcSite===s.id?A.dcFloor:null;
+    const gfaGuess=dcF?Math.min(lotArea*Z.fsr[1],dcF):A.mw&&perMW0?Math.min(lotArea*Z.fsr[1],A.mw*perMW0):lotArea*Z.fsr[1];
     const LN=loadingNeed(city,gfaGuess); m.loadingNeed=LN;
     const rearEnd=fl>0?u1:u0, dir=fl>0?-1:1; let cur=rearEnd;
     if(LN.n&&!A.loadIn&&A.foot!=='existing'){ const dep=LN.len+LN.aisle; const a0=cur, a1=cur+dir*dep; { const q=inscribe(F,ring,a0,a1,v0,v1); m.loading=q?rectW(F,q[0],q[1],q[2],q[3]):clip(ring,rectW(F,Math.min(a0,a1),Math.max(a0,a1),v0,v1)); m.loadV=q?[q[2],q[3]]:[v0,v1]; } m.loadDepth=dep; cur=a1;
@@ -149,11 +151,13 @@ function model(){
   if(BD.plant) BD.plant.place(m); // sizes units, may shorten the footprint to leave a plant yard, places roof and yard units
   if(!m.existing&&!m.foot&&m.uBuild){ let [a0,a1]=m.uBuild; if(m.plantYardDepth) a0=a0+m.dir*m.plantYardDepth;
     if(m.footMode==='cover'&&A.cover){ const want=lotArea*A.cover/100, wv=m.v[1]-m.v[0]; const len=Math.min(Math.abs(a1-a0),want/Math.max(wv,1)); a0=a1+Math.sign(a0-a1||1)*len; }
-    const q=inscribe(F,ring,a0,a1,m.v[0],m.v[1]); if(q){
+    const q=inscribe(F,ring,a0,a1,m.v[0],m.v[1]); if(q&&A.dcFloor&&A.dcSite===BD.S.sel.id) m.hallRoom=(q[1]-q[0])*(q[3]-q[2]); /* Architecture Ratios: the footprint the hall can have */ if(q){
       // J.B., 16 Oct: "the server amount changes but the building doesnt shrink" — when a size is set, the building is only as big as that size needs:
       // floor = MW × 460 m² of hall per MW (built Canadian halls 290–630, operator claims) ÷ 0.6 hall share (48–72%), spread over the storeys; centred in the buildable rectangle
-      if(A.mw&&m.footMode==='max'&&BD.eng){ const R=BD.eng.R, perMW=(R.m2PerMW[0]+R.m2PerMW[1])/2/((R.hallShare[0]+R.hallShare[1])/2), floors=Math.max(1,m.Z&&m.Z.ground?m.nF[0]-1:m.nF[0]), /* 29 Oct 2026: data floors only where the zone keeps the ground floor for other uses (as the 3D and the hall count already do) */ need=A.mw*perMW/floors, W=q[1]-q[0], H=q[3]-q[2];
-        if(need<W*H*0.98){ const k=Math.sqrt(need/(W*H)), cu=(q[0]+q[1])/2, cv=(q[2]+q[3])/2; let w=W*k, h=H*k; if(h<12){ h=Math.min(H,12); w=need/h; } m.serverFoot=rectW(F,cu-w/2,cu+w/2,cv-h/2,cv+h/2); m.sizedTo={mw:A.mw,floor:A.mw*perMW,perMW}; } }
+      if(A.mw&&m.footMode==='max'&&BD.eng){ const R=BD.eng.R, perMW=(R.m2PerMW[0]+R.m2PerMW[1])/2/((R.hallShare[0]+R.hallShare[1])/2), floors=Math.max(1,m.Z&&m.Z.ground?m.nF[0]-1:m.nF[0]), /* 29 Oct 2026: data floors only where the zone keeps the ground floor for other uses (as the 3D and the hall count already do) */ dcF=A.dcFloor&&A.dcSite===BD.S.sel.id?A.dcFloor:null, need=(dcF||A.mw*perMW)/floors, W=q[1]-q[0], H=q[3]-q[2];
+        if(dcF&&need<=W*H+0.01){ /* 3 Nov 2026 (Architecture Ratios): the full width at the back of the buildable area, so the street front stays free for the programs (a drawing choice, not a rule) */
+          const du=need/H, frontLo=Math.abs(q[0]-m.uFront)<=Math.abs(q[1]-m.uFront), ua=frontLo?q[1]-du:q[0], ub=frontLo?q[1]:q[0]+du; m.serverFoot=rectW(F,ua,ub,q[2],q[3]); m.sizedTo={mw:A.mw,floor:dcF,perMW:dcF/A.mw,ratio:true}; }
+        else if(need<W*H*0.98){ const k=Math.sqrt(need/(W*H)), cu=(q[0]+q[1])/2, cv=(q[2]+q[3])/2; let w=W*k, h=H*k; if(h<12){ h=Math.min(H,12); w=need/h; } m.serverFoot=rectW(F,cu-w/2,cu+w/2,cv-h/2,cv+h/2); m.sizedTo=dcF?{mw:A.mw,floor:dcF,perMW:dcF/A.mw,ratio:true}:{mw:A.mw,floor:A.mw*perMW,perMW}; } }
       // capacity is always worked out on the most the lot allows; the drawn floor is only the chosen size (no feedback into "what fits")
       const rr=rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); m.foot=clip(ring,rr); m.footRect=rr; m.simpleMass=true;
       if(!m.serverFoot) m.serverFoot=rectW(F,q[0],q[1],q[2],q[3]); } else { const r=rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); m.foot=clip(ring,r); m.footRect=r; } }

@@ -47,6 +47,12 @@ const CLEAN = `(o)=>{ const seen=new WeakSet(); return JSON.parse(JSON.stringify
     await p.evaluate(x => { window.__EX.push(x); const w = document.getElementById('welcome'); if (w) w.remove(); window.__run(window.__EX.length - 1); }, LOTS[key]);
     await p.waitForTimeout(9000);
     const shot=process.env.SHOTDIR||out;
+    /* 3 Nov 2026 (rebuild part 1): the Ratios step first, at its defaults (the set-up's own size, the rest to programs; low end of the MW range) */
+    const rat = await p.evaluate(async()=>{ await BD.arch.ready; BD.flow.to('arat'); await new Promise(r=>setTimeout(r,1500)); const b=BD.archTest.ratioBase(), RT=BD.archTest.ratioNow();
+      return {ratio:BD.arch.ratio&&{cover:Math.round(BD.arch.ratio.cover),dc:BD.arch.ratio.dc,prog:BD.arch.ratio.prog,end:BD.arch.ratio.end,mw:BD.arch.ratio.mw}, base:b&&{lot:Math.round(b.lot),build:Math.round(b.build),floors:b.floors,dataFl:b.dataFl,fsr:b.fsr,coverNone:b.coverNone,perMW:b.perMW},
+        calc:RT&&{allowed:Math.round(RT.allowed),by:RT.by,dcMax:Math.round(RT.dcMax),dcM2:Math.round(RT.dcM2),progM2:Math.round(RT.progM2),unused:Math.round(RT.unused),mw:RT.mw.map(x=>Math.round(x*100)/100),mwTest:RT.mwTest},
+        answers:{mw:BD.S.answers.mw,dcFloor:Math.round(BD.S.answers.dcFloor||0)}, side:[...document.querySelectorAll('#side h2,#side h3')].map(x=>x.textContent), tabs:[...document.querySelectorAll('.atabs button')].map(b=>b.textContent+(b.disabled?' (off)':'')+(b.getAttribute('aria-selected')==='true'?' *':'')), stuck:!!document.querySelector('.fstuck'), next:(document.getElementById('fNext')||{}).textContent }; });
+    await p.screenshot({path:path.join(process.env.SHOTDIR||out,key+'_ratios.png')});
     const r1 = await p.evaluate(async([process_mw,REF])=>{ await BD.arch.ready; BD.flow.to('aprog'); await new Promise(r=>setTimeout(r,800));
       BD.S.answers.mw=+(process_mw)||BD.S.answers.mw; BD.modelReset(); ['refuge','pool','greenhouse','clinic','spa','fish_farm','roof_solar','warming_shelter','ev_hub'].forEach(id=>BD.archTest.add(id));
       BD.arch.picks.find(q=>q.id==='refuge').opt=REF||'side_by_side';
@@ -59,6 +65,7 @@ const CLEAN = `(o)=>{ const seen=new WeakSet(); return JSON.parse(JSON.stringify
     await p.evaluate(async()=>{ BD.arch.view='section'; BD.arch.heat='flow'; BD.views.aarr(); await new Promise(r=>setTimeout(r,800)); }); await p.screenshot({path:path.join(shot,key+'_section.png')});
     await p.evaluate(async()=>{ document.getElementById('aSave').click(); BD.arch.secure='lot'; BD.views.aarr(); await new Promise(r=>setTimeout(r,300)); document.getElementById('aSave').click(); BD.flow.to('acmp'); await new Promise(r=>setTimeout(r,800)); });
     await p.screenshot({path:path.join(shot,key+'_compare.png')});
+    r1.ratios=rat; r1.split=await p.evaluate(()=>{ BD.flow.to('aarr'); return new Promise(r=>setTimeout(()=>r((document.querySelector('.asplit')||{}).textContent||null),1200)); });
     r1.saved=await p.evaluate(()=>BD.arch.saved.map(x=>[x.secure,x.bad,x.notes,Math.round(x.front),x.pubShare])); r1.errors=errs; fs.writeFileSync(path.join(out, key + '_arch.json'), JSON.stringify(r1, null, 1)); console.log(key,'arch', errs.length?'errors: '+errs.join(' | '):'');
     await p.close();
   }
