@@ -52,5 +52,33 @@
    "dea"
   ],
   "_note": "waste-heat heat pumps to 70 °C forward (DEA)"
+ },
+ "storeyMin": {
+  "I-3": {
+   "ground": 6.0,
+   "above": 4.0
+  },
+  "src": [
+   "arch_hb_vanI3"
+  ],
+  "_note": "Vancouver I-3 s. 3.1.2.9 (p. 12): floor-to-floor at least 6.0 m on the first floor and 4.0 m on floors above (buildings after 31 Oct 2017). Used for program storeys on I-3 lots. Elsewhere a program's own storey height has no source (?): it is drawn at the hall's 6.0 m (engine R.ftf; register envelope, burlingtonPlans2026)."
+ },
+ "roofEquip": {
+  "edm": "exempt",
+  "van": "discretion",
+  "src": [
+   "arch_hb_edm570",
+   "arch_up_vanZDB10"
+  ],
+  "_note": "Edmonton Bylaw 20001 s. 5.70 1.9: ventilating equipment and mechanical penthouses have no Height limit (dry coolers and chillers: our reading). Vancouver ZDBL s. 10.1.1: the Director of Planning may permit mechanical equipment and its screening above the height limit."
+ },
+ "belowGrade": {
+  "src": [
+   "arch_hb_vanI3",
+   "arch_hb_edmDefs",
+   "arch_hb_nbcDefs",
+   "arch_up2_fm0532"
+  ],
+  "_note": "A basement counts toward floor area (Vancouver I-3 4.1.1; Edmonton FAR unless storage or service to the building) but not toward height or storeys (NBC 1.4.1.2; Edmonton Storey definition). FM 5-32 2.6.4.3.1 and 2.6.4.4.1.1 (insurer guidance): no generators or diesel tanks in basements or on the roof."
  }
 }

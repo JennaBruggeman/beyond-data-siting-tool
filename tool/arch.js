@@ -132,7 +132,8 @@ function placeOnce(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W
     if(RT&&progUsed+q.m2>RT.progM2+0.5){ out.flags.push({t:`${nm}: ${n0(q.m2)} m² would pass the programs' share of the floor (${n0(RT.progM2)} m², ${n0(Math.max(0,RT.progM2-progUsed))} m² left); not drawn. Edit ratios to give programs more.`,src:['arch_ratios'],sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
     if(capF!=null&&floorUsed+q.m2>capF+0.5){ out.flags.push({t:`${nm}: ${n0(q.m2)} m² would pass the floor-space ratio (${n0(capF)} m² on this lot, ${n0(Math.max(0,capF-floorUsed))} m² left); not drawn.`,src:s.city==='van'?['van_zdb_i2','van_zdb_i3']:['edm_bl20001'],sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
     const grade=p.place&&p.place.grade, mustSt=s.city==='van'&&p.place&&p.place.street_entrance&&!(q.id==='refuge'&&q.opt==='side_by_side'&&false), atG=grade==='at grade'||mustSt, notG=grade==='not at grade'&&notAtGradeHere(p), roof=q.place==='roof';
-    const sh=(p.size&&p.size.floor_height_m||ftf.ground), own=q.id==='refuge'&&q.opt==='own_building', gc=own?2:0; // own building: one 2 m cell clear all round (drawn, not a rule)
+    /* Build 2 (3 Nov 2026): on Vancouver I-3 lots a program's storeys are drawn at the schedule's minimums, 6.0 m on the first floor and 4.0 m above (s. 3.1.2.9; tool/data/arch.json storeyMin, register arch_hb_vanI3), or its own sourced height if taller. Elsewhere the hall's 6.0 m storey (ftf.ground), the hall's figure, not a program's (?). */
+    const own0=p.size&&p.size.floor_height_m, SM=s.city==='van'&&AD.storeyMin&&AD.storeyMin[code]||null, sh=(own0||ftf.ground), hOf=(b0,n)=>SM?(b0<0.01?Math.max(own0||0,SM.ground)+Math.max(own0||0,SM.above)*(n-1):Math.max(own0||0,SM.above)*n):sh*n, own=q.id==='refuge'&&q.opt==='own_building', gc=own?2:0; // own building: one 2 m cell clear all round (drawn, not a rule)
     const st0=Math.max(1,q.storeys||1), [mA,mB]=minDims(q.id,s.city); // short and long sides a program needs to work
     /* the search; why records what stopped the spots it tried (hall fix, 3 Nov 2026: a program not drawn names the rule) */
     const search=(g,why)=>{ let best=null, st=st0;
@@ -142,7 +143,7 @@ function placeOnce(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W
           for(let i=0;i+dc<=nU;i++) for(let j=0;j+wc<=nV;j++){ let base=-1, ok=true;
             for(let a=i-gc;a<i+dc+gc&&ok;a++) for(let b=j-gc;b<j+wc+gc;b++){ if(a<0||b<0||a>=nU||b>=nV){ if(gc) continue; ok=false; break; } const t=g[a*nV+b]; const inF=a>=i&&a<i+dc&&b>=j&&b<j+wc;
               if(t===Infinity){ ok=false; break; } if(!inF){ if(t>0) { ok=false; break; } continue; } if(base<0) base=t; else if(Math.abs(t-base)>0.1){ ok=false; break; } if(own&&t>0){ ok=false; break; } }
-            if(!ok) continue; why.free=true; if(base===0) why.freeG=true; if(base+sh*st>Hmax+0.01){ why.tall=true; continue; } if(roof&&base<hallTop-0.01){ why.grade=true; continue; } if(atG&&base>0){ if(mustSt) why.street=true; else why.grade=true; continue; } if(RT&&base===0&&gUsed+fp>RT.cover+0.5){ why.cov=true; continue; } /* coverage set in Ratios */ if(mustSt&&!onFront(i,j,wc)){ why.street=true; continue; } /* Vancouver 10.21.1: its main entrance from a street (arch_up_vanZDB10) */ if(notG&&base===0){ why.grade=true; continue; }
+            if(!ok) continue; why.free=true; if(base===0) why.freeG=true; if(base+hOf(base,st)>Hmax+0.01){ why.tall=true; continue; } if(roof&&base<hallTop-0.01){ why.grade=true; continue; } if(atG&&base>0){ if(mustSt) why.street=true; else why.grade=true; continue; } if(RT&&base===0&&gUsed+fp>RT.cover+0.5){ why.cov=true; continue; } /* coverage set in Ratios */ if(mustSt&&!onFront(i,j,wc)){ why.street=true; continue; } /* Vancouver 10.21.1: its main entrance from a street (arch_up_vanZDB10) */ if(notG&&base===0){ why.grade=true; continue; }
             const sc=base*1e4+i*10+(RT&&mustSt?wc*0.4:0)+j*0.01; if(!best||sc<best.sc) best={sc,base,i,j,dc,wc}; } /* hall fix: with a ratio set, a street-entrance program takes the narrowest street front that holds it, so the next one finds front too (a drawing choice, not a rule) */
         }
         if(best) break; }
@@ -164,9 +165,9 @@ function placeOnce(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W
         else add(`minimum size or sides: no free area of its size with sides of at least ${sides} is left beside the hall, the plant, the plant yard and loading`,sideSrc); }
       out.flags.push({t:`${nm}: not drawn. Stopped by ${R.join('; ')}.`,src,sev:'bad',id:q.id,stop:R}); out.notDrawn.push(q.id); continue; }
     if(st>st0) out.flags.push({t:`${nm}: ${n0(q.m2)} m² does not fit on one floor here${mustSt?' along the street front (it needs its own street entrance)':''}; drawn over ${st} storeys only to show its size. Whether it can be split across floors is a design question.`,src:[],sev:'bad',id:q.id});
-    const {base,i,j,dc,wc}=best, hh=sh*st, spread=st>st0, uA=dir<0?bu0+i*cs:bu1-(i+dc)*cs, uB=uA+dc*cs, vA=v0+j*cs, vB=vA+Math.min(wc*cs,q.m2/st/(dc*cs)), gap=gc*cs; // exact area: full cells along u, the width trimmed to the size
+    const {base,i,j,dc,wc}=best, hh=hOf(base,st), spread=st>st0, uA=dir<0?bu0+i*cs:bu1-(i+dc)*cs, uB=uA+dc*cs, vA=v0+j*cs, vB=vA+Math.min(wc*cs,q.m2/st/(dc*cs)), gap=gc*cs; // exact area: full cells along u, the width trimmed to the size
     floorUsed+=q.m2; progUsed+=q.m2; if(base===0) gUsed+=q.m2/st; if(!industrialUse(q,code)) nonInd+=q.m2; occ.push([uA,uB,vA,vB,base,base+hh,false]); if(own) occ.push([uA-gap,uB+gap,vA-gap,vB+gap,0,1e9,true]);
-    out.boxes.push({id:q.id,p,q,ring:G.rectW(F,uA,uB,vA,vB),base,h:hh,storeys:st,sh,front:base===0&&Math.abs((dir<0?uA:uB)-uf)<cs+0.01,top:base>=hallTop-0.01,roof,u:[uA,uB],v:[vA,vB],gap,own,spread}); }
+    out.boxes.push({id:q.id,p,q,ring:G.rectW(F,uA,uB,vA,vB),base,h:hh,storeys:st,sh:hh/st,shSrc:SM?['arch_hb_vanI3']:own0?(p.size.src||[]):null,front:base===0&&Math.abs((dir<0?uA:uB)-uf)<cs+0.01,top:base>=hallTop-0.01,roof,u:[uA,uB],v:[vA,vB],gap,own,spread}); }
   const top=Math.max(hallTop,...out.boxes.map(b=>b.base+b.h));
   if(s.H&&top>s.H+0.01) out.flags.push({t:`Check: something is drawn to ${n0(top)} m, over this zone's ${n0(s.H)} m limit. This should not happen; please report it.`,src:s.city==='van'?['van_zdb_i2','van_zdb_i3']:['edm_bl20001'],sev:'bad'});
   out.boxes.forEach(b=>{ const sh=b.sh||ftf.ground; b.level=Math.floor(b.base/ftf.ground+0.01); b.levels=[...new Set(Array.from({length:b.storeys||1},(_,k)=>Math.floor((b.base+k*sh)/ftf.ground+0.01)))]; }); // plan storeys by height, each storey at its own height (review 2, N12)
@@ -228,6 +229,11 @@ function rules(P){ const s=P.s, M=s.M, city=s.city, code=zoneCode(), out=[...P.f
     if(nc.length) out.push({t:`${nm}: keep-apart rules not checked here: ${nc.join('; ')}.`,src:[...new Set(ncS)],sev:'q',id:b.id});
     if(city==='van'&&p.place&&p.place.street_entrance&&!b.front&&!b.underHall) out.push({t:`${nm} needs its own street entrance; it is not on the street front here.`,src:p.place.src,sev:'note',id:b.id});
   }
+  /* Build 2 (3 Nov 2026): roof plant over the zone's height (tool/data/arch.json roofEquip). Edmonton s. 5.70 1.9: ventilating equipment and mechanical penthouses
+     have no Height limit (arch_hb_edm570; coolers as ventilating equipment is our reading). Vancouver s. 10.1.1: only if the Director of Planning permits it (arch_up_vanZDB10). */
+  { const rt=Math.max(0,...((M.plant&&M.plant.boxes)||[]).filter(b=>b.kind==='roof').map(b=>(b.base||0)+(b.h||0))); if(s.H&&rt>s.H+0.01){
+    if(city==='edm') out.push({t:`Roof plant reaches ${rt.toFixed(1)} m, over the ${s.H.toFixed(1)} m height: in Edmonton ventilating equipment and mechanical penthouses are not counted in height (s. 5.70 cl. 1.9; dry coolers and chillers as ventilating equipment is our reading).`,src:['arch_hb_edm570'],sev:'note'});
+    else out.push({t:`Roof plant reaches ${rt.toFixed(1)} m, over the ${s.H.toFixed(1)} m height limit: allowed only if the Director of Planning permits it (s. 10.1.1), which is not known here (?).`,src:['arch_up_vanZDB10'],sev:'q'}); } }
   return out; }
 
 /* ---------- the heat a program needs, against what the hall gives ---------- */
@@ -294,7 +300,7 @@ function ratioBase(){ const M=BD.model&&BD.model(); if(!M||!M.F||M.existing||!M.
   const yard=M.inset?BD.geo.clip(M.ring,M.inset):null, build=yard&&yard.length>=6?BD.area(yard):M.lotArea;
   const floors=Math.max(1,M.nF[0]), dataFl=Math.max(1,Z.ground?floors-1:floors), fsr=Z.fsr?Z.fsr[1]:null;
   const split=DR.rooms.filter(r=>r.split&&r.perMW), lo=split.reduce((t,r)=>t+r.perMW[0],0), hi=split.reduce((t,r)=>t+r.perMW[1],0);
-  return {M,Z,code,lot:M.lotArea,build,yard,floors,dataFl,fsr,coverNone:(DR.coverLimit.none||[]).includes(code),split,perMW:[lo,hi],city:M.city}; }
+  return {M,Z,code,lot:M.lotArea,build,yard,floors,dataFl,fsr,coverNone:(DR.coverLimit.none||[]).includes(code),coverZ:(BD.data.raw.dc_rooms.coverLimit.byZone||{})[code]||null,split,perMW:[lo,hi],city:M.city}; }
 function ratioCalc(b,r){ const cover=Math.min(r.cover,b.build), capF=b.fsr&&b.lot?b.lot*b.fsr:Infinity, capE=cover*b.floors, allowed=Math.min(capF,capE);
   const dcMax=Math.min(allowed,cover*b.dataFl), dcM2=Math.min(dcMax,r.dc/100*allowed), progM2=Math.min(allowed-dcM2,r.prog/100*allowed);
   const mw=[dcM2/b.perMW[1],dcM2/b.perMW[0]], pick=r.end==='high'?mw[1]:mw[0], mwTest=Math.floor(pick*10+1e-9)/10;
@@ -327,12 +333,12 @@ async function viewRatios(){ await ready(); BD.S.view2='tab'; const sd=$('#side'
   const pctDcMax=cap.pct, mwH=c.mwTest?BD.eng.calc({mw:c.mwTest,recover:true},BD.eng.siteFacts(),[],[]):null;
   const rooms=b.split.map(x=>{ const raw=(BD.data.raw.dc_rooms.rooms.find(y=>y.id===x.id)||{}).perMW||{}; return `<span>${esc(x.name)}</span><span class="ar">${c.mwTest?rg([c.mwTest*x.perMW[0],c.mwTest*x.perMW[1]],'m²'):'?'} ${chips(raw.src)}</span>`; }).join('');
   const qRooms=DR.rooms.filter(x=>!x.split&&/no size source/.test(x.kind||'')).map(x=>x.name.split(' (')[0]);
-  const covLim=b.coverNone?`none (${esc(b.code)})`:'limit ?';
+  const covLim=b.coverNone?`none (${esc(b.code)})`:'limit ?', covSrc=b.coverZ?b.coverZ.src:[]; /* Build 2: by zone, with the clause (tool/data/dc_rooms.json coverLimit.byZone) */
   sd.innerHTML=`${tabsHTML('arat')}<h2>Ratios</h2><p class="lead">Set how much of the lot is built on, then split the floor area. The data centre's share sets its size.</p>
-   <div class="arat"><div class="arh"><b>Building coverage</b><span>${covLim} ${chips(b.coverNone?['van_zdb_i2']:[])}</span></div>
+   <div class="arat"><div class="arh"><b>Building coverage</b><span>${covLim} ${chips(covSrc)}</span></div>
     <label class="arl"><span>Footprint</span><span>${n0(c.cover)} of ${n0(b.build)} m² inside the yards</span></label>
     <input type="range" id="rCov" min="${Math.max(1,Math.round(b.build*0.05))}" max="${Math.floor(b.build)}" step="1" value="${Math.round(c.cover)}" aria-label="Building footprint, m²">
-    <p class="src">Yards and height limit: ${esc(b.code||'zone')} ${chips(S)}. ${b.coverNone?'':'No coverage limit for this zone is in the register, so the slider stops at the buildable area inside the yards.'}</p></div>
+    <p class="src">Yards and height limit: ${esc(b.code||'zone')} ${chips(S)}. ${b.coverNone?(b.coverZ?esc(b.coverZ.cl)+': the slider stops at the buildable area inside the yards.':''):'No coverage limit for this zone is in the register, so the slider stops at the buildable area inside the yards.'}</p></div>
    <div class="arat"><div class="arh"><b>Floor area split</b><span>${n0(c.allowed)} m² allowed</span></div>
     <p class="src">${c.by==='fsr'?`Floor-space ratio ${b.fsr} × ${n0(b.lot)} m² lot`:`Footprint × ${b.floors} storeys under the ${n0(M.H)} m height limit`} (the lower of the two) ${chips(S)}</p>
     <label class="arl"><span>Data centre</span><span>${r.dc}% · ${n0(c.dcM2)} m²</span></label>
@@ -349,6 +355,7 @@ async function viewRatios(){ await ready(); BD.S.view2='tab'; const sd=$('#side'
      ${rooms}
      <span>Not counted, no size source</span><span class="ar">? ${chips(['arch_dc_rooms'])}</span>
      <span>Heat the hall offers</span><span class="ar">${mwH&&mwH.avail?rg(mwH.avail,'MWh/yr'):'?'} ${chips(['dea','dfKatalog2022'])}</span></div>
+    <p class="src">Below grade: the tool draws no basement. A basement would count toward floor area (Vancouver I-3 s. 4.1.1; Edmonton floor area ratio unless it is only storage or service to the building) but not toward height or storeys ${chips(BD.data.raw.arch.belowGrade.src.slice(0,3))}. Generators and diesel tanks stay out of basements and off the roof (FM 5-32, insurer guidance, not law) ${chips(['arch_up2_fm0532'])}.</p>
     <p class="src">Hall per MW: five built Canadian halls (operator claims); UPS and Li-ion per MW: maker claims, equipment only. Low end: the share at ${n0(b.perMW[1])} m² per MW; high end: at ${n0(b.perMW[0])}. No size source, not counted: ${esc(qRooms.join(', '))}.</p></div>`;
   wireTabs(sd);
   const re=()=>{ ratioApply(); viewRatios(); };
@@ -394,7 +401,7 @@ async function viewArrange(){ await ready(); BD.S.view2='tab'; const sd=$('#side
    ${A.picks.length?A.picks.map(rowHTML).join(''):'<p class="sub">No programs yet. Go back to add some.</p>'}
    <h3 style="font-size:13px;margin-top:14px">Rules ${RL.filter(r=>r.sev==='bad').length?`<span class="k">${RL.filter(r=>r.sev==='bad').length}</span> flagged`:''}</h3>
    ${RL.length?RL.map(r=>`<div class="aflag ${r.sev}">${esc(r.t)} ${chips(r.src)}</div>`).join(''):'<p class="sub">No rule flags.</p>'}
-   <p class="sub" style="font-size:11.5px">Drawn by the tool, not rules: where each block sits (a 2 m grid, front to back), its proportions (no side under 6 m; a pool block at least its tank and deck), a separate refuge building 3 m away, and storeys at ${n0(P.s.ftf.ground)} m where a program's own height has no source (${P.s.city==='van'?'the I-2/I-3 ground-floor minimum':'Vancouver\'s I-2/I-3 ground-floor minimum, used here only as a drawing height'}).</p>
+   <p class="sub" style="font-size:11.5px">Drawn by the tool, not rules: where each block sits (a 2 m grid, front to back), its proportions (no side under 6 m; a pool block at least its tank and deck), a separate refuge building 3 m away, and ${P.s.city==='van'&&AD.storeyMin[zoneCode()]?`program storeys at the ${esc(zoneCode())} minimums, 6.0 m on the first floor and 4.0 m above (s. 3.1.2.9) ${chips(['arch_hb_vanI3'])}`:`program storeys at ${n0(P.s.ftf.ground)} m: the hall's storey height, not a program's; a program's own storey height has no source here (?) ${chips(['envelope','burlingtonPlans2026'])}`}.</p>
    <p><button id="aSave" class="btn">Save this arrangement</button> <span class="sub">${A.saved.length} saved</span></p>`;
   wire(sd); draw3d(P); }
 /* hall fix (3 Nov 2026): the hall Arrange chose, in one line */

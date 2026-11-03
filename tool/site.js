@@ -174,12 +174,12 @@ function model(){
       const pick=HO.find(o=>o.key===A.hallOpt); let ok=false;
       if(pick) tryO(pick); else { for(const o of HO){ if(tryO(o)){ ok=true; break; } } if(!ok){ setHall(m,null); if(P) Object.assign(P,keep); BD.plant.roof(m); } } }
     else BD.plant.roof(m); }
-  /* 2 Nov 2026 hard rules (site audit 4): fuel on site against NFC 2020 Table 4.3.13.4.-B (register nfc2020_4313). Generator sets on the roof keep
-     their sub-base tanks above the first storey: at most 20,000 L in one storage area there (tanks over 2,500 L each). The table is written for tanks
-     inside buildings; rooftop outdoor tanks are not covered by the text read, so the tool applies the upper-storey limit to them (our reading ?).
-     Sets in the yard stand outdoors at grade: the table does not apply (outdoor tanks follow NFC 4.3.2, not tested here). */
-  if(BD.eng&&m.plant&&m.plant.s&&m.plant.s.g&&(A.genAt||'yard')==='roof'&&A.gens!=='none'){ const R=BD.eng.R, Lf=m.mwSized*R.pue[1]*1000*R.fuelHours*R.fuelLkWh, lim=R.fuelLimit.low;
-    m.fuel={L:Lf,lim,at:'roof'}; if(Lf>lim+0.5){ const mwMax=Math.floor(lim/(R.pue[1]*1000*R.fuelHours*R.fuelLkWh)*10)/10; m.warn.push(`Generators on the roof: ${R.fuelHours} h of fuel for ${m.mwSized} MW is about ${fmt(Math.round(Lf/100)*100)} L above the first storey; the fire code allows 20,000 L in one storage area there (NFC 2020 Table 4.3.13.4.-B; register nfc2020_4313; applying it to rooftop tanks is our reading ?). Put the generators in the yard, or test ${mwMax.toFixed(1)} MW or less.`); } }
+  /* Build 2 (3 Nov 2026; replaces the 2 Nov NFC Table 4.3.13.4.-B reading for rooftop tanks, which was marked ?): CSA B139.1.1:24 6.5.3 (register arch_csa_b139),
+     the code the fire code defers to for generator fuel (NFC 4.1.1.1.(3)(b), 4.3.13.6): tanks supplying engines outside above the ground-level storey hold at most
+     1,250 L each and 2,500 L on one supply line. The tool keeps each set's share of the fuel in its sub-base tank, one supply line a set (our reading ?), so a set on
+     the roof may hold at most 2,500 L. Sets in the yard: B139.1.0 Table 2 distances (plant.js). FM 5-32 2.6.4.3.1 (insurer guidance, not law): not on the roof. */
+  if(BD.eng&&m.plant&&m.plant.s&&m.plant.s.g&&(A.genAt||'yard')==='roof'&&A.gens!=='none'){ const R=BD.eng.R, Lf=m.mwSized*R.pue[1]*1000*R.fuelHours*R.fuelLkWh, RT=BD.data.equipment.roofTank, per=Lf/m.plant.s.gNeed;
+    m.fuel={L:Lf,per,lim:RT.line,at:'roof'}; if(per>RT.line+0.5){ const mwMax=Math.floor(RT.line/(R.pue[1]*1000*R.fuelHours*R.fuelLkWh)*10)/10; m.warn.push(`Generators on the roof: ${R.fuelHours} h of fuel for ${m.mwSized} MW is about ${fmt(Math.round(per/100)*100)} L in each set's tank; on a roof a tank supplying an engine may hold at most 1,250 L, and 2,500 L on one supply line (CSA B139.1.1 6.5.3; register arch_csa_b139). Put the generators in the yard${mwMax>=0.1?`, or test ${mwMax.toFixed(1)} MW or less`:''}.`); } }
   /* 2 Nov 2026 (J.B.): noise by-law limits are hard rules (engine.js noiseCheck; Van By-law 6555 ss. 1.2, 2.1–2.3; Edm Bylaw 14600 ss. 20, 22).
      Over the night limit at any neighbouring lot even with the quieter unit rating: a set-up problem (blocks fitMax, the flow, the report plans).
      Over only with the standard rating: a note, not a block (m.notes).
@@ -216,8 +216,8 @@ function setupProblems(noFloor){ const m=model(); if(!m||!m.F) return []; const 
 function fitMax(){ const A=BD.S.answers, keep=A.mw; A.mw=null; cache.key=null; let hi=0; try{ hi=BD.eng.siteFacts().mw[1]; }catch(e){}
   const ok=mw=>{ A.mw=mw; cache.key=null; return !setupProblems(true).length; };
   let lo=0, best=null, top=Math.floor((hi||0)*10);
-  /* 2 Nov 2026 hard rules: with generators on the roof no size above the fuel limit passes (model(), NFC Table 4.3.13.4.-B), so the search starts there */
-  if(BD.eng&&A.gens!=='none'&&(A.genAt||'yard')==='roof'){ const R=BD.eng.R; top=Math.min(top,Math.floor(R.fuelLimit.low/(R.pue[1]*1000*R.fuelHours*R.fuelLkWh)*10)); }
+  /* 2 Nov 2026 hard rules: with generators on the roof no size above the fuel limit passes (model(); Build 2: CSA B139.1.1 6.5.3), so the search starts there */
+  if(BD.eng&&A.gens!=='none'&&(A.genAt||'yard')==='roof'){ const R=BD.eng.R; top=Math.min(top,Math.floor(BD.data.equipment.roofTank.line/(R.pue[1]*1000*R.fuelHours*R.fuelLkWh)*10)); } /* Build 2: B139.1.1 6.5.3, one set (register arch_csa_b139) */
   if(top>=1&&ok(top/10)) best=top/10; else { let a=1, b=top-1; while(a<=b){ const mid=(a+b)>>1; if(ok(mid/10)){ best=mid/10; a=mid+1; } else b=mid-1; } }
   A.mw=keep; cache.key=null; return best; }
 BD.setupProblems=setupProblems; BD.fitMax=fitMax;

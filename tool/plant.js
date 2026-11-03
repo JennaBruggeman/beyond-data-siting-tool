@@ -16,7 +16,11 @@ const SRC={
    Gaps between tower cells (4.0 / 6.0 m across) and between generator sets (2.0 m, assumed from the 1 m service clearance) have no
    register id: they are set here and listed in checks/agents/2026-11-03_refactor_unsourced.md. */
 const PU=BD.data.plant_units, KIND=PU.kind, PROV=[BD.data.size.hallShare[0],BD.data.size.m2PerMW[1]]; // provisional size: hall share low end ÷ m² per MW top (register hall_area, it_load_outside)
-KIND.towerS.gap=[1.8,4.0]; KIND.towerL.gap=[1.8,6.0]; KIND.gen1.gap=[2.0,2.0]; KIND.gen2.gap=[2.0,2.0];
+KIND.towerS.gap=[1.8,4.0]; KIND.towerL.gap=[1.8,6.0]; /* Build 2 (3 Nov 2026): the 2.0 m between generator sets is now in plant_units.json (CSA C282 6.5.1.1: 1 m clear all round, register arch_csa_c282) */
+/* Build 2 (3 Nov 2026): yard generator sets keep their sub-base tanks the CSA B139.1.0 Table 2 distances (B139.1.1 6.5.2; register arch_csa_b139): by the fuel
+   one set holds (the running sets share the fuel on site), the distance to the property line and to the building. Over 250,000 L a set: not in the table (?). */
+const EQ=BD.data.equipment; function genTank(mw,s){ const R=BD.eng?BD.eng.R:{pue:EQ.pue,fuelHours:EQ.fuelHours,fuelLkWh:EQ.fuelLkWh}; if(!s||!s.g||!s.gNeed) return null;
+  const L=mw*R.pue[1]*1000*R.fuelHours*R.fuelLkWh/s.gNeed, row=EQ.genTankSep.rows.find(r=>L<=r[0]); return {L,bld:row?row[1]:null,pl:row?row[2]:null,over:!row}; }
 // heat to reject ≈ the facility's peak power (servers × the high PUE): almost all electricity ends as heat. Sized in full even with heat recovery:
 // if a receiver leaves, all heat goes back to the coolers (register: horizons, four futures).
 const spare=(n,s)=>s==='2n'?n*2:s==='n1'?n+1:n;
@@ -44,7 +48,7 @@ function pack(F,region,forbid,u0,u1,v0,v1,k,count,rot){
   for(let v=v0+wv+W/2; v<=v1-wv-W/2+1e-6 && out.length<count; v+=W+gv)
     for(let u=u0+wu+L/2; u<=u1-wu-L/2+1e-6 && out.length<count; u+=L+gu){
       const cs=[[u-L/2-wu+e,v-W/2-wv+e],[u+L/2+wu-e,v-W/2-wv+e],[u+L/2+wu-e,v+W/2+wv-e],[u-L/2-wu+e,v+W/2+wv-e],[u,v],[u-L/2,v],[u+L/2,v],[u,v-W/2],[u,v+W/2]];
-      if(cs.every(([a,b])=>okPt(a,b))&&(!(k.evap&&EDGE)||[[u-L/2,v-W/2],[u+L/2,v-W/2],[u+L/2,v+W/2],[u-L/2,v+W/2],[u-L/2,v],[u+L/2,v],[u,v-W/2],[u,v+W/2]].every(([a,b])=>{ const [x,y]=F.toW(a,b); return BD.pip(x,y,EDGE.ring)&&edgeD(x,y,EDGE.ring)>=EDGE.d-1e-6; }))) out.push({u,v,L,W}); }
+      if(cs.every(([a,b])=>okPt(a,b))&&(!((k.evap||k.lotSep)&&EDGE)||[[u-L/2,v-W/2],[u+L/2,v-W/2],[u+L/2,v+W/2],[u-L/2,v+W/2],[u-L/2,v],[u+L/2,v],[u,v-W/2],[u,v+W/2]].every(([a,b])=>{ const [x,y]=F.toW(a,b); return BD.pip(x,y,EDGE.ring)&&edgeD(x,y,EDGE.ring)>=EDGE.d-1e-6; }))) out.push({u,v,L,W}); }
   return out; }
 function boxOf(F,p,k,base,kind){ const r=BD.geo.rectW(F,p.u-p.L/2,p.u+p.L/2,p.v-p.W/2,p.v+p.W/2);
   const wu=p.L===k.L?k.wall[0]:k.wall[1], wv=p.L===k.L?k.wall[1]:k.wall[0];
@@ -65,7 +69,8 @@ BD.plant={
   // reserve a strip for yard plant on a new building whose footprint the tool sets
   if(!m.existing&&m.uBuild&&(P.coolYard||P.genYard)){ const wv=m.v[1]-m.v[0]; let depth=0;
     const rowDepth=(k,n)=>{ const per=Math.max(0,Math.floor((wv-2*k.wall[0]+k.gap[0])/(k.L+k.gap[0]))); if(!per) return null; const r=Math.ceil(n/per); return 2*k.wall[1]+r*k.W+(r-1)*k.gap[1]; };
-    for(const [k,n] of [[s.k,P.coolYard],[s.g,P.genYard]]){ if(!n||!k) continue; const d=rowDepth(k,n); if(d==null){ P.short+=`The lot is too narrow for a ${k.L} m ${k.name.replace(/s$/,'')} across it. `; continue; } depth+=d; }
+    const gt=genTank(mw,s); P.genTank=gt; /* Build 2: B139 Table 2 (register arch_csa_b139) */
+    for(const [k,n] of [[s.k,P.coolYard],[s.g,P.genYard]]){ if(!n||!k) continue; let d=rowDepth(k,n); if(d!=null&&k===s.g&&gt&&gt.pl!=null&&!m.loading){ const rearY=Math.abs(m.plantYardStart-(m.dir<0?F.L/2:-F.L/2)); d+=Math.max(0,gt.pl-rearY-k.wall[1]); } if(d==null){ P.short+=`The lot is too narrow for a ${k.L} m ${k.name.replace(/s$/,'')} across it. `; continue; } depth+=d; }
     const avail=Math.abs(m.uBuild[1]-m.uBuild[0]); if(depth>avail*0.9){ P.short+='The plant yard would take almost the whole buildable area. '; depth=Math.min(depth,avail*0.9); }
     m.plantYardDepth=depth; const a0=m.plantYardStart, a1=a0+m.dir*depth; P.yard=BD.geo.rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); P.yardU=[Math.min(a0,a1),Math.max(a0,a1)];
   }
@@ -96,7 +101,8 @@ BD.plant={
   const cr=put(s.k,P.coolRoof,roofH,'roof'), cy=put(s.k,P.coolYard,0,'yard');
   // generators: never on top of coolers; roof sets go where coolers left room
   let gr=0; if(P.genRoof){ const used=P.boxes.filter(b=>b.kind==='roof').map(b=>b.clear); let got=pack(F,roofRing,used,ru0,ru1,rv0,rv1,s.g,P.genRoof,false); if(got.length<P.genRoof) got=got.concat(pack(F,roofRing,used.concat(got.map(p=>BD.geo.rectW(F,p.u-p.L/2-1,p.u+p.L/2+1,p.v-p.W/2-1,p.v+p.W/2+1))),ru0,ru1,rv0,rv1,s.g,P.genRoof-got.length,true)); got.forEach(p=>P.boxes.push(boxOf(F,p,s.g,roofH,'roof'))); gr=got.length; }
-  const gy=put(s.g,P.genYard,0,'yard'); EDGE=null;
+  /* Build 2: yard sets kept the B139 Table 2 distance from the property line (genTank; register arch_csa_b139); the building distance is the larger of it and the 1.5 m clearance */
+  const gt=P.genTank||genTank(m.mwSized,s); let gy=0; if(s.g&&P.genYard){ const keepW=s.g.wall; if(gt&&gt.bld!=null) s.g.wall=keepW.map(w=>Math.max(w,gt.bld)); EDGE=gt&&gt.pl!=null&&m.ring?{ring:m.ring,d:gt.pl}:null; s.g.lotSep=!!EDGE; gy=put(s.g,P.genYard,0,'yard'); s.g.wall=keepW; delete s.g.lotSep; } EDGE=null;
   const kname=s.k.name, miss=[];
   if(cr<P.coolRoof) miss.push(`${P.coolRoof-cr} of ${P.coolRoof} ${kname} do not fit on the roof`);
   if(cy<P.coolYard) miss.push(`${P.coolYard-cy} of ${P.coolYard} ${kname} do not fit in the yard`);
@@ -110,7 +116,7 @@ BD.plant={
    `Each unit about ${s.k.L} × ${s.k.W} m, ${s.k.H} m high, with ${s.k.wall[0]}–${s.k.wall[1]} m to walls and ${s.k.gap[0]}–${s.k.gap[1]} m between units (dashed in 3D).`,
    ...(s.k.evap?[`Evaporative discharge: each unit kept at least ${s.k.evap} m inside the lot line, because the code keeps it 3 m from doors, operable windows and outdoor spaces, and the neighbours' are not known (NBC 2020 6.3.2.15.(5); register arch_sep_nbc63215full). 7.6 m from air intakes: no intakes are drawn, so not tested (?).`]:[]),
    `<span class="src">${s.src}</span>`];
-  P.genLines=s.g?[`${s.gNeed} generator set${s.gNeed>1?'s':''} of about ${s.g.mw} MW carry ${s.Q.toFixed(1)} MW; with spares, <b>${s.gN}</b>. Placed: ${gr} on the roof, ${gy} in the yard.`,`Each about ${s.g.L} × ${s.g.W} m, ${s.g.H} m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).`,`<span class="src">${SRC.gens}</span>`]:['No generators.'];
+  P.genLines=s.g?[`${s.gNeed} generator set${s.gNeed>1?'s':''} of about ${s.g.mw} MW carry ${s.Q.toFixed(1)} MW; with spares, <b>${s.gN}</b>. Placed: ${gr} on the roof, ${gy} in the yard.`,`Each about ${s.g.L} × ${s.g.W} m, ${s.g.H} m high; 1.5 m from the building, 2 m between sets (1 m clear all round, CSA C282 6.5.1.1; register arch_csa_c282).`,...(gt?[`Fuel in each set's sub-base tank: about ${Math.round(gt.L/100)*100} L. In the yard: ${gt.pl!=null?gt.pl+' m from the property line and '+gt.bld+' m from the building':'? (over 250,000 L, not in the table)'} (CSA B139.1.0 Table 2; register arch_csa_b139). On a roof: at most 1,250 L a tank and 2,500 L a supply line (B139.1.1 6.5.3). FM 5-32 (insurer guidance, not law): not on the roof or in a basement.`]:[]),`<span class="src">${SRC.gens}</span>`]:['No generators.'];
  }
 };
 })();

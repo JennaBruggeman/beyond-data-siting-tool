@@ -78,5 +78,36 @@
    "fuel_on_site",
    "nfc2020_4313"
   ]
+ },
+ "genTankSep": {
+  "rows": [
+   [
+    2500,
+    0.1,
+    1.5
+   ],
+   [
+    50000,
+    1.5,
+    3.0
+   ],
+   [
+    250000,
+    3.0,
+    3.0
+   ]
+  ],
+  "src": [
+   "arch_csa_b139"
+  ],
+  "_note": "CSA B139.1.0:24 Table 2 (p. 85), for engine supply tanks outdoors at grade (B139.1.1 6.5.2): [largest individual tank, L; m to the nearest building on the same property; m to the property line]. Municipal bylaws may ask more."
+ },
+ "roofTank": {
+  "each": 1250,
+  "line": 2500,
+  "src": [
+   "arch_csa_b139"
+  ],
+  "_note": "CSA B139.1.1:24 6.5.3 (p. 235): tanks supplying engines outside above the ground-level storey (a roof): at most 1,250 L each and 2,500 L in all on one supply line"
  }
 }
