@@ -26,8 +26,10 @@ function pickOf(id){ return A.picks.find(q=>q.id===id); }
 function add(id){ const p=CAT.byId[id]; if(!p||pickOf(id)) return; const s=p.size||{};
   const q={id, m2:s.typical_m2!=null?s.typical_m2:null, lock:false, opt:p.options&&p.options[0]?p.options[0].id:null, storeys:Math.max(1,s.storeys_typ||1), place:'lot'};
   if(id==='refuge') q.opt=null; /* J.B. 1 Nov 2026: three options, no default */
+  { const c=capOf(p), mn=minOf(p); if(c!=null&&q.m2!=null&&q.m2>c&&(mn==null||mn<=c)){ q.m2=c; q.capped=true; } } // starts legal: at the BE cap, not over it
   A.picks.push(q); }
 function del(id){ A.picks=A.picks.filter(q=>q.id!==id); if(A.sel===id) A.sel=null; }
+function capOf(p){ const S=BD.S.sel; if(!S||S.city!=='edm'||zoneCode()!=='BE') return null; const z=p.zoning&&p.zoning.edm; return z&&z.cap_m2||null; }
 function minOf(p){ const s=p.size||{}; if(s.min_m2!=null) return s.min_m2; if(s.step&&s.step.units_min!=null&&s.step.m2_per_unit!=null) return s.step.units_min*s.step.m2_per_unit; return null; }
 function stepOf(p){ const s=p.size||{}; return s.step&&s.step.m2_per_unit?s.step.m2_per_unit:null; }
 
@@ -71,29 +73,33 @@ function place(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,
   masses.sort((a,b)=>prio(a)-prio(b));
   if(under&&refuge&&refuge.m2){ const fp=Math.min(refuge.m2,(hu1-hu0)*(hv1-hv0)), d=Math.min(hu1-hu0,fp/Math.max(1,hv1-hv0)); const ua=dir<0?hu0:hu1-d, ub=dir<0?hu0+d:hu1;
     out.boxes.push({id:'refuge',p:CAT.byId.refuge,q:refuge,ring:G.rectW(F,ua,ub,hv0,hv1),base:0,h:ftf.ground,storeys:1,sh:ftf.ground,front:Math.abs((dir<0?ua:ub)-uf)<0.6,underHall:true,u:[ua,ub],v:[hv0,hv1]}); }
-  out.notDrawn=[];
+  out.notDrawn=[]; const Hmax=s.H||Infinity, capF=s.fsr&&s.lot?s.lot*s.fsr[1]:null, code=zoneCode(); let floorUsed=s.hallM2+out.boxes.reduce((t,b)=>t+(b.q.m2||0),0);
+  /* code limits block, they never just warn (J.B., 2 Nov 2026: "everything needs to follow the code"): no block above the zone's height limit,
+     none past the floor-space ratio, none over an Edmonton BE area cap; setbacks and the hard distances are already no-go above */
   for(const x of masses){ const {q,p}=x, nm=p.name.split(' (')[0];
     if(q.m2==null){ out.flags.push({t:`${nm}: no sourced typical size; type one to place it.`,src:p.size&&p.size.src,sev:'q'}); continue; }
     if(q.id==='refuge'&&!q.opt){ out.flags.push({t:'Refuge: choose a placement (own building, side by side, or under the hall). There is no default (J.B., 1 Nov 2026).',src:[],sev:'q'}); out.notDrawn.push(q.id); continue; }
+    { const z=p.zoning&&p.zoning[s.city]; if(z&&z.cap_m2&&s.city==='edm'&&code==='BE'&&q.m2>z.cap_m2){ out.flags.push({t:`${nm}: ${n0(q.m2)} m² is over the ${n0(z.cap_m2)} m² this use may have in BE; not drawn. ${minOf(p)!=null&&minOf(p)>z.cap_m2?'Its sourced minimum ('+n0(minOf(p))+' m²) is over the cap, so it cannot go on a BE lot.':'Make it '+n0(z.cap_m2)+' m² or less.'}`,src:z.src,sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; } }
+    if(capF!=null&&floorUsed+q.m2>capF+0.5){ out.flags.push({t:`${nm}: ${n0(q.m2)} m² would pass the floor-space ratio (${n0(capF)} m² on this lot, ${n0(Math.max(0,capF-floorUsed))} m² left); not drawn.`,src:s.city==='van'?['van_zdb_i2','van_zdb_i3']:['edm_bl20001'],sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
     const grade=p.place&&p.place.grade, atG=grade==='at grade', notG=grade==='not at grade'&&notAtGradeHere(p), roof=q.place==='roof';
     const sh=(p.size&&p.size.floor_height_m||ftf.ground), own=q.id==='refuge'&&q.opt==='own_building', gc=own?2:0; // own building: one 2 m cell clear all round (drawn, not a rule)
-    const g=HG(); let best=null, st0=Math.max(1,q.storeys||1), st=st0;
+    const g=HG(); let tall=false, best=null, st0=Math.max(1,q.storeys||1), st=st0;
     for(;st<=8&&!best;st++){ const fp=q.m2/st;
       for(const [wc0,dc0] of [[nV,Math.ceil(fp/(nV*cs*cs))],...[1,0.5,2,0.25,4].map(a=>{ const w=Math.sqrt(fp/a)/cs, d=fp/(w*cs*cs); return [Math.ceil(w),Math.ceil(d)]; })]){ const wc=Math.min(wc0,nV), dc=Math.ceil(fp/(wc*cs*cs)); if(dc>nU||wc<1) continue;
         for(let i=0;i+dc<=nU;i++) for(let j=0;j+wc<=nV;j++){ let base=-1, ok=true;
           for(let a=i-gc;a<i+dc+gc&&ok;a++) for(let b=j-gc;b<j+wc+gc;b++){ if(a<0||b<0||a>=nU||b>=nV){ if(gc) continue; ok=false; break; } const t=g[a*nV+b]; const inF=a>=i&&a<i+dc&&b>=j&&b<j+wc;
             if(t===Infinity){ ok=false; break; } if(!inF){ if(t>0) { ok=false; break; } continue; } if(base<0) base=t; else if(Math.abs(t-base)>0.1){ ok=false; break; } if(own&&t>0){ ok=false; break; } }
-          if(!ok) continue; if(roof&&base<hallTop-0.01) continue; if(atG&&base>0) continue; if(notG&&base===0) continue;
+          if(!ok) continue; if(base+sh*st>Hmax+0.01){ tall=true; continue; } if(roof&&base<hallTop-0.01) continue; if(atG&&base>0) continue; if(notG&&base===0) continue;
           const sc=base*1e4+i*10+j*0.01; if(!best||sc<best.sc) best={sc,base,i,j,dc,wc}; }
       }
       if(best) break; }
-    if(!best){ out.flags.push({t:`${nm}: no room that meets its placement rules (${atG?'at grade':notG?'not at grade':roof?'on the hall roof':'flat on the ground or on what is built'}); not drawn.`,src:p.place&&p.place.src,sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
+    if(!best){ out.flags.push({t:`${nm}: no room ${tall?'below the '+n0(Hmax)+' m height limit ':''}that meets its placement rules (${atG?'at grade':notG?'not at grade':roof?'on the hall roof':'flat on the ground or on what is built'}); not drawn.`,src:p.place&&p.place.src,sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
     if(st>st0) out.flags.push({t:`${nm}: ${n0(q.m2)} m² does not fit on one floor here; drawn over ${st} storeys only to show its size. Whether it can be split across floors is a design question.`,src:[],sev:'bad',id:q.id});
     const {base,i,j,dc,wc}=best, hh=sh*st, uA=dir<0?bu0+i*cs:bu1-(i+dc)*cs, uB=uA+dc*cs, vA=v0+j*cs, vB=vA+Math.min(wc*cs,q.m2/st/(dc*cs)), gap=gc*cs; // exact area: full cells along u, the width trimmed to the size
-    occ.push([uA,uB,vA,vB,base,base+hh,false]); if(own) occ.push([uA-gap,uB+gap,vA-gap,vB+gap,0,1e9,true]);
+    floorUsed+=q.m2; occ.push([uA,uB,vA,vB,base,base+hh,false]); if(own) occ.push([uA-gap,uB+gap,vA-gap,vB+gap,0,1e9,true]);
     out.boxes.push({id:q.id,p,q,ring:G.rectW(F,uA,uB,vA,vB),base,h:hh,storeys:st,sh,front:base===0&&Math.abs((dir<0?uA:uB)-uf)<cs+0.01,top:base>=hallTop-0.01,roof,u:[uA,uB],v:[vA,vB],gap,own}); }
   const top=Math.max(hallTop,...out.boxes.map(b=>b.base+b.h));
-  if(s.H&&top>s.H+0.01) out.flags.push({t:`Stacked to about ${n0(top)} m; this zone allows ${n0(s.H)} m.`,src:s.city==='van'?['van_zdb_i2','van_zdb_i3']:['edm_bl20001'],sev:'bad'});
+  if(s.H&&top>s.H+0.01) out.flags.push({t:`Check: something is drawn to ${n0(top)} m, over this zone's ${n0(s.H)} m limit. This should not happen; please report it.`,src:s.city==='van'?['van_zdb_i2','van_zdb_i3']:['edm_bl20001'],sev:'bad'});
   out.boxes.forEach(b=>{ const sh=b.sh||ftf.ground; b.level=Math.floor(b.base/ftf.ground+0.01); b.levels=[...new Set(Array.from({length:b.storeys||1},(_,k)=>Math.floor((b.base+k*sh)/ftf.ground+0.01)))]; }); // plan storeys by height, each storey at its own height (review 2, N12)
   out.levels=[...new Set(out.boxes.flatMap(b=>b.levels))].sort((a,b)=>a-b);
   out.hallDepth=hu1-hu0; out.hallTop=hallTop; return out; }
@@ -183,7 +189,7 @@ function rowHTML(q){ const p=CAT.byId[q.id]; if(!p) return ''; const s=p.size||{
   return `<div class="arow${sel?' sel':''}" data-row="${q.id}"><h4 data-sel="${q.id}"><span class="nm">${esc(p.name)}</span><button data-x="${q.id}" title="delete">✕</button></h4>
    <div class="ctl">${size}${opt}</div>
    <div class="sub" style="font-size:11.5px">${p.kind==='mass'?`Typical ${s.typical_m2!=null?n0(s.typical_m2)+' m²':'?'}${mn!=null?`, minimum ${n0(mn)} m²`:', minimum ?'}${s.step&&s.step.unit?` · steps of one ${esc(s.step.unit)}${s.step.m2_per_unit?' ('+s.step.m2_per_unit+' m²)':''}`:''} ${chips(s.src)}${s.note?'<br>'+esc(s.note):''}`:`${esc(s.note||'')} ${chips(s.src)}`}</div>
-   ${ch?`<div class="sub" style="font-size:11.5px">${esc(ch.effect)}</div>`:''}
+   ${q.capped?`<div class="sub" style="font-size:11.5px">Starts at ${n0(capOf(p))} m², the most this use may have in BE (typical ${n0(s.typical_m2)} m²). ${chips(p.zoning.edm.src)}</div>`:''}${ch?`<div class="sub" style="font-size:11.5px">${esc(ch.effect)}</div>`:''}
    ${sel?detail(p):''}</div>`; }
 function detail(p){ const h=p.heat||{}, o=p.occ||{}, L=lift(p);
   const z=['van','edm'].map(c=>{ const v=p.zoning&&p.zoning[c]; return v?`<li>${c==='van'?'Vancouver':'Edmonton'}: ${esc(v.status||'?')}${v.use?' ('+esc(v.use)+')':''}${v.cap_m2?', up to '+n0(v.cap_m2)+' m²':''} ${chips(v.src)}</li>`:''; }).join('');
@@ -235,6 +241,7 @@ function wire(sd){ const re=()=>{ A.msg=null; viewArrange(); }, reK=()=>viewArra
    from unlocked programs (down to their minimums), repeating until the growth is covered; heat-using programs also stop at the heat the hall offers. */
 function resize(id,v){ const q=pickOf(id), p=CAT.byId[id]; if(!q) return; const mn=minOf(p); A.msg=null;
   if(v!=null&&mn!=null&&v<mn){ v=mn; A.msg=`${p.name}: ${n0(mn)} m² is its sourced minimum.`; }
+  { const c=capOf(p); if(v!=null&&c!=null&&v>c){ v=c; A.msg=`${p.name}: ${n0(c)} m² is the most this use may have in BE.`; } }
   if(v!=null&&v<0) v=0; const old=q.m2||0; q.m2=v; if(v==null||v<=old) return; let P=place(); if(!P) return; let B=budgets(P);
   { const k=p.heat&&p.heat.kWh_m2_yr; if(k&&B.heat.avail&&B.heat.need[1]>B.heat.avail[0]){ const ex=(B.heat.need[1]-B.heat.avail[0])*1000/k[1]; v=Math.max(old,v-ex); q.m2=v; A.msg=`Held at ${n0(v)} m²: the heat it needs would pass the ${n0(B.heat.avail[0])} MWh/yr the hall offers at the low end.`; if(v<=old) return; P=place(); B=budgets(P); } } // heat ceiling first (review 2, N7)
   let over=Math.min(v-old,B.space.left!=null?-B.space.left:0);

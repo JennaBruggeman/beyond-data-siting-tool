@@ -117,3 +117,4 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - J.B. (2 Nov 2026): heat gradient uses a separate warm-to-cool scale, used only in the heat view.
 - J.B. (2 Nov 2026): winter market dropped. Winter garden kept; gym kept (16 °C benchmark label); climbing gym folded into gym.
 - J.B. (2 Nov 2026): the four defaults stand (roof generators flagged; no public viewing window; own stair for public roof programs; F-2). Paywalled sources coming from J.B. 3 Nov.
+- J.B. (2 Nov 2026): everything must follow the code; limits block, never just warn (height, floor-space ratio, BE caps).
