@@ -1,0 +1,83 @@
+{
+ "_about": "Add-on figures (register: pv_roof, pv_cost, condensate). addons.js solarCard, pvLayout, HERE.condensate.",
+ "pvYield": {
+  "v": {
+   "van": [
+    892,
+    1007
+   ],
+   "edm": [
+    944,
+    1244
+   ]
+  },
+  "src": [
+   "pv_roof",
+   "nrcanPVmunic"
+  ],
+  "_note": "kWh per kWp a year, NRCan municipal values: horizontal (low) to latitude tilt (high)"
+ },
+ "pvKwpM2": {
+  "v": [
+   0.16,
+   0.2
+  ],
+  "src": [
+   "pv_roof",
+   "nrel_bench2023"
+  ],
+  "_note": "module density, kWp per m²: 2014 median to current (NREL)"
+ },
+ "pvCost": {
+  "v": [
+   [
+    100,
+    [
+     2.0,
+     3.2
+    ]
+   ],
+   [
+    250,
+    [
+     1.9,
+     2.4
+    ]
+   ],
+   [
+    null,
+    [
+     1.68,
+     2.22
+    ]
+   ]
+  ],
+  "src": [
+   "pv_cost",
+   "nrcan_pvcost2024"
+  ],
+  "_note": "CAD per W: under 100 kW, 100–250 kW, above 250 kW (NRCan/IEA PVPS Canada 2024)"
+ },
+ "condensate": {
+  "hours": {
+   "van": 417,
+   "edm": 117
+  },
+  "src": [
+   "condensate",
+   "cwec"
+  ],
+  "_note": "hours a year with outdoor dew point above 15 °C (CWEC, computed)"
+ },
+ "dewPeak": {
+  "v": {
+   "van": 13,
+   "edm": 12
+  },
+  "src": [
+   "condensate",
+   "ecccNormals2020"
+  ],
+  "_note": "July–August average dew point, °C (ECCC normals)"
+ }
+}
