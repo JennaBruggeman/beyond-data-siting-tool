@@ -1,0 +1,56 @@
+{
+ "_about": "Architecture-mode figures written in arch.js (programme figures live in arch_programs.json). Register ids per entry.",
+ "poolTank": {
+  "v": [
+   8.5,
+   25
+  ],
+  "src": [
+   "arch_sportEngPoolsDGN",
+   "arch_fina_FR2020"
+  ],
+  "_note": "4-lane 25 × 8.5 m pool water area"
+ },
+ "poolDeck": {
+  "v": {
+   "van": 1.2,
+   "edm": 1.8
+  },
+  "src": [
+   "arch_bcPoolDesign2025",
+   "arch_svc_bcPoolDesign2025",
+   "arch_sup_nbcAE7Pools"
+  ],
+  "_note": "deck all round: 1.2 m BC guideline s. 3.2; 1.8 m NBC(AE) 7.2.3.15"
+ },
+ "i2Office": {
+  "m2": 235,
+  "share": 0.333,
+  "src": [
+   "van_zdb_i2"
+  ],
+  "_note": "I-2: general and health care office together, the greater of 235 m² or 33.3 % of all floor area"
+ },
+ "dcTemp": {
+  "air": [
+   25,
+   35
+  ],
+  "liquid": [
+   50,
+   60
+  ],
+  "src": [
+   "heat_temp"
+  ],
+  "_note": "data-hall heat temperature by cooling type, °C; the liquid figure is marked unverified (?) in arch.js"
+ },
+ "hpMaxC": {
+  "v": 70,
+  "src": [
+   "cop",
+   "dea"
+  ],
+  "_note": "waste-heat heat pumps to 70 °C forward (DEA)"
+ }
+}
