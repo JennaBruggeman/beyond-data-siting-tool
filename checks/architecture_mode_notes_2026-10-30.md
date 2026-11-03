@@ -135,3 +135,4 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - J.B. (2 Nov 2026): yes to the bug sweep and a check round for the ~260 under-checked sources, before the Architecture rebuild.
 - J.B. (2 Nov 2026): make the whole INTERFACE white, crisp and clean, like her white Blender section models (white walls, soft grey shading, black section poke, hairline type, grey zone bands). Replaces the 30 Oct "dark again" choice.
 - J.B. (2 Nov 2026): white only (no dark option).
+- J.B. (3 Nov 2026): do whichever order gives the best build with the fewest bugs: lean refactor first (constants and tables out of code, every displayed figure wired to its register entry with a failing test), then the builds.
