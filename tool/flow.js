@@ -6,7 +6,10 @@
 (function(){
 'use strict';
 const BD=window.BD; const {$,esc}=BD;
-const GROUPS=[['site','Site'],['fits','What fits'],['ex','Exchanges'],['opps','Opportunities'],['opts','Options'],['design','Design'],['report','Report']];
+const GROUPS=[['site','Site'],['fits','What fits'],['people','People'],['ex','Exchanges'],['opps','Opportunities'],['opts','Options'],['design','Design'],['report','Report']];
+/* 3 Nov 2026 (J.B., wireframes "Beyond Data white interface"): Architecture mode walks Site, People, Design, Report. Its set-up and What fits sit
+   under Site, and the People step (social) under its own People group; other templates keep their groups. */
+const GMAP={arch:{fits:'site',ex:'people'}}; const gOf=(s,t)=>((GMAP[t||((BD.tier&&BD.tier())||'full')]||{})[s.g]||s.g);
 const BASE=[
  {k:'site',g:'site',t:'Pick a site'},{k:'setup',g:'site',t:'Set up the site'},
  {k:'fits',g:'fits',t:'What fits'},{k:'prec',g:'fits',t:'Real buildings'},
@@ -76,7 +79,7 @@ const EXAMPLES=[
 function welcome(){ let w=$('#welcome'); if(w) w.remove(); w=document.createElement('div'); w.id='welcome'; w.setAttribute('role','dialog'); w.setAttribute('aria-modal','true'); w.setAttribute('aria-labelledby','wTitle');
   w.innerHTML=`<div class="wcard"><div class="kind">Beyond Data</div><h2 id="wTitle">What could a data centre exchange with the city around it?</h2>
   <p>Pick one lot. The tool walks you through <span class="k">heat, electricity, water, materials and people</span>, then every opportunity that could work there, then three options and a report.</p>
-  <ol class="wsteps">${GROUPS.map(([,l],k)=>`<li><span>${k+1}</span>${l}</li>`).join('')}</ol>
+  <ol class="wsteps">${GROUPS.filter(g=>g[0]!=='people').map(([,l],k)=>`<li><span>${k+1}</span>${l}</li>`).join('')}</ol>
   <div class="wbtns"><button class="pri" id="wEx">See a worked example</button><button class="sec" id="wOwn">Start with my own site</button></div>
   <div id="wList" hidden>${EXAMPLES.map((x,i)=>`<button class="ex" data-i="${i}"><b>${esc(x.lab)}</b><span>${esc(x.sub)}</span></button>`).join('')}</div>
   <p class="sub"><a href="#" id="wAbout">What this tool can't tell you</a></p></div>`;
@@ -111,16 +114,17 @@ function findFit(){ if(!BD.S.sel||!BD.fitMax) return null; const A=BD.S.answers,
   Object.assign(A,base,best?best.t:{}); if(best){ A.mw=best.v; A.mwPick='large'; A.mwSite=BD.S.sel.id; } BD.modelReset&&BD.modelReset(); return best; }
 F.findFit=findFit;
 /* ---------- the bar at the top and the buttons at the bottom of the panel ---------- */
-function bar(){ const st=F.steps[F.i], tt=(BD.tier&&BD.tier())||'full', sk=s=>!!(SKIP[tt]&&SKIP[tt].has(s.k)); /* 2 Nov 2026: only the groups and steps this template walks */
-  const GR=GROUPS.filter(([g])=>F.steps.some(s=>s.g===g&&!sk(s))), gi=GR.findIndex(g=>g[0]===st.g); const inG=F.steps.filter(s=>s.g===st.g&&!sk(s)), j=inG.indexOf(st);
-  const reachG=g=>F.steps.findIndex((s,k)=>s.g===g&&k<=F.max&&!sk(s))>=0;
+function bar(){ const st=F.steps[F.i], tt=(BD.tier&&BD.tier())||'full', sk=s=>!!(SKIP[tt]&&SKIP[tt].has(s.k)), G=s=>gOf(s,tt); /* 2 Nov 2026: only the groups and steps this template walks */
+  const GR=GROUPS.filter(([g])=>F.steps.some(s=>G(s)===g&&!sk(s))), gi=GR.findIndex(g=>g[0]===G(st)); const inG=F.steps.filter(s=>G(s)===G(st)&&!sk(s)), j=inG.indexOf(st);
+  const reachG=g=>F.steps.findIndex((s,k)=>G(s)===g&&k<=F.max&&!sk(s))>=0;
   return `<div class="flowbar"><nav class="path" aria-label="Steps">${GR.map(([g,l],k)=>`<button data-fg="${g}" title="${l}" aria-label="${k+1} ${l}" ${k===gi?'aria-current="step"':''} ${reachG(g)?'':'disabled'}><span>${k+1}</span>${k===gi?l:`<span class="pl">${l}</span>`}</button>`).join('')}</nav>
   ${inG.length>1?`<div class="fsub"><span class="fst">${esc(st.t)} · ${j+1} of ${inG.length}</span><span class="fseg" title="${esc(st.t)}: ${j+1} of ${inG.length}">${inG.map((x,q)=>`<i class="${q<j?'done':q===j?'on':''}"></i>`).join('')}</span></div>`:''}</div>`; }
 /* a set-up that does not work stops the walk (J.B. 20 Oct: "a set up that doesnt work shouldnt ever let you click next … If there is not room
    then it should say that and make you change the size etc. to fix it"): the reasons, then the two ways out */
 function stuck(){ const st=F.steps[F.i]; if(!st||st.k==='site'||!BD.S.sel||!BD.setupProblems) return null; const p=BD.setupProblems(); if(!p.length) return null;
   const fm=BD.fitMax?BD.fitMax():null; return {p,fm}; }
-function foot(){ const st=F.steps[F.i], nx=F.steps[F.i+1], pv=F.steps[F.i-1]; const S=stuck(); F.stuck=!!S; const blocked=(st.k==='site'&&!BD.S.sel)||!!S;
+function foot(){ const st=F.steps[F.i], tt=(BD.tier&&BD.tier())||'full', sk=s=>!!(s&&SKIP[tt]&&SKIP[tt].has(s.k)); /* 3 Nov 2026: name the next and previous step this template walks, not a skipped one */
+  let ni=F.i+1; while(ni<F.steps.length-1&&sk(F.steps[ni])) ni++; let pi=F.i-1; while(pi>0&&sk(F.steps[pi])) pi--; const nx=F.steps[ni], pv=F.steps[pi]; const S=stuck(); F.stuck=!!S; const blocked=(st.k==='site'&&!BD.S.sel)||!!S;
   const note=S?`<div class="fstuck" role="alert"><b>This set-up doesn't work on this lot.</b><ul>${S.p.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
     <div class="fsx">${S.fm?`<button class="btn" id="fFit">Use the largest size that fits (${S.fm.toFixed(1)} MW)</button>`:`<span class="src">No size fits with these choices.</span><button class="btn" id="fFind">Find a set-up that fits</button>`}${st.k!=='setup'?'<button class="btn" id="fSetup">Change the set-up</button>':''}</div></div>`:'';
   /* noise flag (2 Nov 2026, J.B.): over the by-law only with the louder unit rating: a note, not a block */
@@ -129,7 +133,7 @@ function foot(){ const st=F.steps[F.i], nx=F.steps[F.i+1], pv=F.steps[F.i-1]; co
 function decorate(){ const sd=$('#side'); if(!sd||!F.on) return; F.busy=true;
   try{ sd.querySelectorAll(':scope > .flowbar, :scope > .flowfoot, .fstuck, .fnote').forEach(x=>x.remove()); sd.insertAdjacentHTML('afterbegin',bar()); sd.insertAdjacentHTML('beforeend',foot());
     { const st=F.steps[F.i], tk=BD.explain&&BD.explain.topicFor(st.k); if(tk&&!sd.querySelector('.xpbtn')){ const at=sd.querySelector('.lead')||sd.querySelector('h2'); if(at){ const b=document.createElement('button'); b.className='xpbtn'; b.innerHTML='How it works <span>›</span>'; b.onclick=()=>BD.explain.open(tk); at.after(b); } } }
-    sd.querySelectorAll('.flowbar [data-fg]').forEach(b=>b.onclick=()=>{ const k=F.steps.findIndex(s=>s.g===b.dataset.fg); if(k>=0&&k<=F.max&&!(F.stuck&&k>F.i)) go(k); });
+    sd.querySelectorAll('.flowbar [data-fg]').forEach(b=>b.onclick=()=>{ const tt=(BD.tier&&BD.tier())||'full'; const k=F.steps.findIndex(s=>gOf(s,tt)===b.dataset.fg&&!(SKIP[tt]&&SKIP[tt].has(s.k))); if(k>=0&&k<=F.max&&!(F.stuck&&k>F.i)) go(k); });
     { const fit=$('#fFit'); if(fit) fit.onclick=()=>{ const v=BD.fitMax(); if(v){ BD.S.answers.mw=v; BD.S.answers.mwPick='large'; BD.S.answers.mwSite=BD.S.sel.id; BD.modelReset&&BD.modelReset(); go(F.i); } };
       const ff=$('#fFind'); if(ff) ff.onclick=()=>{ const b=findFit(); if(!b){ ff.disabled=true; ff.textContent='No set-up fits this lot'; return; } go(F.i); };
       const su=$('#fSetup'); if(su) su.onclick=()=>{ const k=F.steps.findIndex(s=>s.k==='setup'); if(k>=0) go(k); }; }
@@ -150,7 +154,7 @@ async function expandOpps(){ const k=F.steps.findIndex(s=>s.k==='opps'); if(k<0)
 /* sweep 20 Oct 2026: a step whose every section is shown only in fuller templates is skipped there (residents: Real buildings, which was an empty page) */
 const DES=['aprog','aarr','acmp'];
 const SKIP={resident:new Set(['prec',...DES]),community:new Set(DES),full:new Set(DES),
-  arch:new Set(['prec','heat','energy','water','materials','social','opps','spec','opts','time','cities'])}; /* 2 Nov 2026: Architecture mode = site, set-up, what fits, then its own three steps; the Exchanges stay in Engineering (J.B.) */
+  arch:new Set(['prec','heat','energy','water','materials','opps','spec','opts','time','cities'])}; /* 2 Nov 2026: Architecture mode = site, set-up, what fits, then its own steps; the Exchanges stay in Engineering (J.B.). 3 Nov 2026: People (social) shown just before Design, context only, nothing scored (J.B.) */
 async function go(i){ { const t=(BD.tier&&BD.tier())||'full', dir=i>=F.i?1:-1; while(i>0&&i<F.steps.length-1&&SKIP[t]&&SKIP[t].has(F.steps[i].k)) i+=dir; }
   if(i<0||i>=F.steps.length) return; invalidate(); capture(); F.i=i; F.max=Math.max(F.max,i); document.body.classList.remove('wide');
   if(F.steps[i].k==='opps'){ await expandOpps(); }
@@ -213,7 +217,7 @@ function forTier(n,t,left){ const secs=[]; for(const r of n.secs){ if(keepAt(r[2
   const rows=[]; (n.rows||[]).forEach((r,i)=>{ const rt=(n.rowT||[])[i]||['',true]; if(keepAt(rt[0],rt[1],n.tierAt,t)) rows.push(r); else left.push(r.split(/\s+(?:not yet known|built here|built elsewhere|pilot|speculative)/)[0]); });
   return Object.assign({},n,{secs,rows,tables:t==='resident'?[]:n.tables}); }
 const RHEAD={resident:'What it would mean for you: what affects neighbours, and every choice the tool made for you.',community:'What it would mean for the neighbourhood: who gains and who gives up, money, approvals and comparisons.',full:'How it is worked out: every result, with the parts of the tool\'s logic each one comes from.'};
-function reportData(){ const t=(BD.tier&&BD.tier())||'full', groups=[], left=[]; for(const [g,l] of GROUPS){ const items=F.steps.filter(s=>s.g===g&&F.notes[s.k]).map(s=>Object.assign(forTier(F.notes[s.k],t,left),{k:s.k})); if(items.length) groups.push({g,l,items}); }
+function reportData(){ const t=(BD.tier&&BD.tier())||'full', groups=[], left=[]; for(const [g,l] of GROUPS){ const items=F.steps.filter(s=>gOf(s,t)===g&&F.notes[s.k]).map(s=>Object.assign(forTier(F.notes[s.k],t,left),{k:s.k})); if(items.length) groups.push({g,l,items}); }
   const seen=new Set(), srcs=[]; for(const s of Object.values(F.notes).flatMap(n=>n.srcs)){ const key=s.toLowerCase().replace(/[^a-z0-9]/g,''); /* whole string: blocks sharing a preamble are kept (sweep M78) */ if(!seen.has(key)){ seen.add(key); srcs.push(s); } } return {facts:facts(),groups,srcs,date:new Date().toISOString().slice(0,10),tier:t,level:(BD.logic&&BD.logic.LEVEL[t])||'',left:[...new Set(left)]}; }
 const pathText=p=>p.length>14?p.slice(0,14).join(' · ')+` and ${p.length-14} more`:p.join(' · ');
 function stepHTML(n,wide){ let h=`<h3>${esc(n.title)}</h3>${n.sig&&n.sig!==sigOf()?`<p class="rl"><b>Recorded with earlier choices</b> — the set-up has changed since; open this step again to update it (sweep M77).</p>`:''}${n.lead?`<p class="rl">${esc(n.lead)}</p>`:''}`;
