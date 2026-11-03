@@ -147,7 +147,7 @@ async function expandOpps(){ const k=F.steps.findIndex(s=>s.k==='opps'); if(k<0)
 /* sweep 20 Oct 2026: a step whose every section is shown only in fuller templates is skipped there (residents: Real buildings, which was an empty page) */
 const DES=['aprog','aarr','acmp'];
 const SKIP={resident:new Set(['prec',...DES]),community:new Set(DES),full:new Set(DES),
-  arch:new Set(['prec','energy','water','materials','social','opps','spec','opts','time','cities'])}; /* 2 Nov 2026: Architecture mode = site, set-up, what fits, heat, then its own three steps */
+  arch:new Set(['prec','heat','energy','water','materials','social','opps','spec','opts','time','cities'])}; /* 2 Nov 2026: Architecture mode = site, set-up, what fits, then its own three steps; the Exchanges stay in Engineering (J.B.) */
 async function go(i){ { const t=(BD.tier&&BD.tier())||'full', dir=i>=F.i?1:-1; while(i>0&&i<F.steps.length-1&&SKIP[t]&&SKIP[t].has(F.steps[i].k)) i+=dir; }
   if(i<0||i>=F.steps.length) return; invalidate(); capture(); F.i=i; F.max=Math.max(F.max,i); document.body.classList.remove('wide');
   if(F.steps[i].k==='opps'){ await expandOpps(); }
