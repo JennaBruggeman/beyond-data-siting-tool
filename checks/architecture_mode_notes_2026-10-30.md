@@ -132,3 +132,5 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - J.B. (2 Nov 2026): the ratio splits FLOOR AREA (all storeys), not footprint.
 - J.B. (2 Nov 2026): the community/municipal template is to be revamped: no design; regulatory overviews instead (proposal pending).
 - J.B. (2 Nov 2026): municipal template plan agreed (one city first, comparison last): Claude Doc https://claude.ai/artifact/9WuA4zPVKKKe1SuhcpvoXr
+- J.B. (2 Nov 2026): yes to the bug sweep and a check round for the ~260 under-checked sources, before the Architecture rebuild.
+- J.B. (2 Nov 2026): make the whole INTERFACE white, crisp and clean, like her white Blender section models (white walls, soft grey shading, black section poke, hairline type, grey zone bands). Replaces the 30 Oct "dark again" choice.
