@@ -51,6 +51,9 @@ function site(){ const M=BD.model&&BD.model(); const G=BD.siteGeo; if(!M||!M.F||
    is our reading of the use it would be: utility (heat plant), manufacturing (drying), parking (EV hub), and in I-2 the listed service uses catering
    (community kitchen) and laundry or cleaning plant (commercial laundry). Everything else counts against the 1.00. */
 function industrialUse(q,code){ if(['heat_plant','food_drying','lumber_drying','ev_hub'].includes(q.id)) return true; if(/I-2/.test(code)&&(q.id==='community_kitchen'||(q.id==='laundry'&&q.opt==='commercial'))) return true; return false; }
+/* the smallest side lengths a block may have. Pool: the 25 × 8.5 m tank (4 lanes; arch_fina_FR2020, arch_sportEngPoolsDGN) plus the deck all round:
+   1.8 m in Alberta (NBC(AE) 7.2.3.15, arch_sup_nbcAE7Pools), 1.2 m in BC (arch_bcPoolDesign2025 s. 3.2). Every other block: 6 m, a drawing rule, not a code rule. */
+function minDims(id,city){ if(id==='pool'){ const d=city==='edm'?1.8:1.2; return [8.5+2*d,25+2*d]; } return [6,6]; }
 function zoneCode(){ const s=BD.S.sel||{}, a=s.a||[]; return String(s.city==='van'?(a[1]||''):(a[2]||a[1]||'')).toUpperCase().trim(); }
 function place(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,uf,ftf}=s; const out={s,boxes:[],flags:[],hall:null,levels:[]};
   const refuge=pickOf('refuge'), under=refuge&&refuge.opt==='under_hall';
@@ -71,7 +74,11 @@ function place(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,
   if(s.M.loading){ const e=ext(s.M.loading); occ.push([e[0]-kL,e[1]+kL,e[2]-kL,e[3]+kL,0,1e9,true]); }
   const bu0=um[0], bu1=um[1], bw=v1-v0, bl=bu1-bu0, cs=2, nU=Math.max(1,Math.floor(bl/cs)), nV=Math.max(1,Math.floor(bw/cs));
   // a 2 m height grid over the buildable area: the top of what stands on each cell, or no-go (review 2, N1: a block must rest flat on what is under it)
-  const HG=()=>{ const g=new Float64Array(nU*nV); for(let i=0;i<nU;i++) for(let j=0;j<nV;j++){ const u=dir<0?bu0+(i+0.5)*cs:bu1-(i+0.5)*cs, v=v0+(j+0.5)*cs; let t=0; for(const o of occ){ if(u>o[0]&&u<o[1]&&v>o[2]&&v<o[3]){ if(o[6]){ t=Infinity; break; } t=Math.max(t,o[5]); } } g[i*nV+j]=t; } return g; };
+  /* a cell is taken if anything overlaps any part of it (not just its centre), and cells not wholly inside the lot are no-go (review of J.B.'s screenshot, 2 Nov 2026) */
+  const lotR=s.M.ring, inLot=(u,v)=>{ const w=F.toW(u,v); return inside(w,lotR); };
+  const HG=()=>{ const g=new Float64Array(nU*nV); for(let i=0;i<nU;i++) for(let j=0;j<nV;j++){ const ua=dir<0?bu0+i*cs:bu1-(i+1)*cs, ub=ua+cs, va=v0+j*cs, vb=va+cs; let t=0;
+      if(!(inLot(ua+0.05,va+0.05)&&inLot(ub-0.05,va+0.05)&&inLot(ua+0.05,vb-0.05)&&inLot(ub-0.05,vb-0.05))){ g[i*nV+j]=Infinity; continue; }
+      for(const o of occ){ if(ua<o[1]-0.01&&o[0]<ub-0.01&&va<o[3]-0.01&&o[2]<vb-0.01){ if(o[6]){ t=Infinity; break; } t=Math.max(t,o[5]); } } g[i*nV+j]=t; } return g; };
   const masses=A.picks.map(q=>({q,p:CAT.byId[q.id]})).filter(x=>x.p&&x.p.kind==='mass'&&!(x.q.id==='refuge'&&under));
   const prio=x=>(x.p.place&&x.p.place.street_entrance?0:x.p.place&&x.p.place.grade==='at grade'?1:x.p.place&&x.p.place.public?2:3);
   masses.sort((a,b)=>prio(a)-prio(b));
@@ -92,7 +99,9 @@ function place(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,
     const sh=(p.size&&p.size.floor_height_m||ftf.ground), own=q.id==='refuge'&&q.opt==='own_building', gc=own?2:0; // own building: one 2 m cell clear all round (drawn, not a rule)
     const g=HG(); let tall=false, best=null, st0=Math.max(1,q.storeys||1), st=st0;
     for(;st<=8&&!best;st++){ const fp=q.m2/st;
+      const [mA,mB]=minDims(q.id,s.city); // short and long sides a program needs to work
       for(const [wc0,dc0] of [[nV,Math.ceil(fp/(nV*cs*cs))],...[1,0.5,2,0.25,4].map(a=>{ const w=Math.sqrt(fp/a)/cs, d=fp/(w*cs*cs); return [Math.ceil(w),Math.ceil(d)]; })]){ const wc=Math.min(wc0,nV), dc=Math.ceil(fp/(wc*cs*cs)); if(dc>nU||wc<1) continue;
+        { const a=Math.min(wc,dc)*cs, b=Math.max(wc,dc)*cs; if(a<mA-0.01||b<mB-0.01) continue; }
         for(let i=0;i+dc<=nU;i++) for(let j=0;j+wc<=nV;j++){ let base=-1, ok=true;
           for(let a=i-gc;a<i+dc+gc&&ok;a++) for(let b=j-gc;b<j+wc+gc;b++){ if(a<0||b<0||a>=nU||b>=nV){ if(gc) continue; ok=false; break; } const t=g[a*nV+b]; const inF=a>=i&&a<i+dc&&b>=j&&b<j+wc;
             if(t===Infinity){ ok=false; break; } if(!inF){ if(t>0) { ok=false; break; } continue; } if(base<0) base=t; else if(Math.abs(t-base)>0.1){ ok=false; break; } if(own&&t>0){ ok=false; break; } }
@@ -101,7 +110,7 @@ function place(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,
       }
       if(best) break; }
     if(!best){ out.flags.push({t:`${nm}: no room ${tall?'below the '+n0(Hmax)+' m height limit ':''}that meets its placement rules (${mustSt?'on the street front, for its own street entrance (Vancouver 10.21.1)':atG?'at grade':notG?'not at grade':roof?'on the hall roof':'flat on the ground or on what is built'}); not drawn.`,src:p.place&&p.place.src,sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
-    if(st>st0) out.flags.push({t:`${nm}: ${n0(q.m2)} m² does not fit on one floor here; drawn over ${st} storeys only to show its size. Whether it can be split across floors is a design question.`,src:[],sev:'bad',id:q.id});
+    if(st>st0) out.flags.push({t:`${nm}: ${n0(q.m2)} m² does not fit on one floor here${mustSt?' along the street front (it needs its own street entrance)':''}; drawn over ${st} storeys only to show its size. Whether it can be split across floors is a design question.`,src:[],sev:'bad',id:q.id});
     const {base,i,j,dc,wc}=best, hh=sh*st, uA=dir<0?bu0+i*cs:bu1-(i+dc)*cs, uB=uA+dc*cs, vA=v0+j*cs, vB=vA+Math.min(wc*cs,q.m2/st/(dc*cs)), gap=gc*cs; // exact area: full cells along u, the width trimmed to the size
     floorUsed+=q.m2; if(!industrialUse(q,code)) nonInd+=q.m2; occ.push([uA,uB,vA,vB,base,base+hh,false]); if(own) occ.push([uA-gap,uB+gap,vA-gap,vB+gap,0,1e9,true]);
     out.boxes.push({id:q.id,p,q,ring:G.rectW(F,uA,uB,vA,vB),base,h:hh,storeys:st,sh,front:base===0&&Math.abs((dir<0?uA:uB)-uf)<cs+0.01,top:base>=hallTop-0.01,roof,u:[uA,uB],v:[vA,vB],gap,own}); }
@@ -233,7 +242,7 @@ async function viewArrange(){ await ready(); BD.S.view2='tab'; const sd=$('#side
    ${A.picks.length?A.picks.map(rowHTML).join(''):'<p class="sub">No programs yet. Go back to add some.</p>'}
    <h3 style="font-size:13px;margin-top:14px">Rules ${RL.filter(r=>r.sev==='bad').length?`<span class="k">${RL.filter(r=>r.sev==='bad').length}</span> flagged`:''}</h3>
    ${RL.length?RL.map(r=>`<div class="aflag ${r.sev}">${esc(r.t)} ${chips(r.src)}</div>`).join(''):'<p class="sub">No rule flags.</p>'}
-   <p class="sub" style="font-size:11.5px">Drawn by the tool, not rules: where each block sits (a 2 m grid, front to back), its proportions, a separate refuge building 3 m away, and storeys at ${n0(P.s.ftf.ground)} m where a program's own height has no source (${P.s.city==='van'?'the I-2/I-3 ground-floor minimum':'Vancouver\'s I-2/I-3 ground-floor minimum, used here only as a drawing height'}).</p>
+   <p class="sub" style="font-size:11.5px">Drawn by the tool, not rules: where each block sits (a 2 m grid, front to back), its proportions (no side under 6 m; a pool block at least its tank and deck), a separate refuge building 3 m away, and storeys at ${n0(P.s.ftf.ground)} m where a program's own height has no source (${P.s.city==='van'?'the I-2/I-3 ground-floor minimum':'Vancouver\'s I-2/I-3 ground-floor minimum, used here only as a drawing height'}).</p>
    <p><button id="aSave" class="btn">Save this arrangement</button> <span class="sub">${A.saved.length} saved</span></p>`;
   wire(sd); draw3d(P); }
 function wire(sd){ const re=()=>{ A.msg=null; viewArrange(); }, reK=()=>viewArrange();
