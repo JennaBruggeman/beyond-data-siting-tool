@@ -158,3 +158,12 @@ All three offered in Architecture mode, no default; each shows its consequences 
 ## Edmonton site (J.B., 3 Nov 2026)
 - Edmonton design site is 64 Airport Road NW (E06B) only. 74 Airport Road NW (E06A) is dropped as a site: building there would block the hotel's view.
 - E06A stays in the test lots (golden, arch baseline) as a check case only; mockups and design work move to 64 Airport Rd.
+
+## Decisions (J.B., 3 Nov 2026, after hall fix 7e3fa46)
+- Programs list: side list inside the Arrange tab.
+- Arrange tests the low end of the Ratios MW range by default, with a switch to the high end.
+- Transformer counted in the Ratios split once sourced; heat recovery and ETS only when an exchange is chosen.
+- Coverage limits: source them from the by-laws (I-3, BE, others); "?" until then.
+- 74 Airport Rd (E06A) kept as a hidden test lot.
+- View check for 64 Airport Rd: the Comfort Inn's view (People step, sight line).
+- Climbing wall kept (EN 12572-3 received).
