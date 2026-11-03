@@ -32,3 +32,10 @@ To clear one: add its source to the register through `register/patches/*.py`, mo
 | tool/addons.js | 107 | 12 | Area of one PV block, 6 × 2 = 12 m². Follows from line 105. |
 | tool/addons.js | 115 | 67.9, 49.67 | Fallback electricity price, $/MWh, used when BD.ECON has not loaded. 67.9 matches BC LGS 6.79 ¢/kWh (register electricity_price). 49.67 for Edmonton has no register text. |
 | tool/tiers.js | 17 | 2.5 | `TYPICAL_MW`, the residents' "typical" size. The register calls "2–4 MW typical downtown colocation" an internal note read across operator claims, with no primary source. |
+| tool/arch.js | 57 | 6, 6 | Smallest side of any block except the pool, 6 × 6 m. The code comment calls it "a drawing rule, not a code rule". No source. |
+| tool/arch.js | 76 | 2 | Placement grid cell, 2 m (`cs`). Blocks are sized and placed in 2 m steps. A tool choice. |
+| tool/arch.js | 100 | 2 | Refuge as its own building: one 2 m cell kept clear all round ("drawn, not a rule"). A tool choice. |
+| tool/arch.js | 102 | 8 | Placement tries up to 8 storeys for a block. A tool limit. |
+| tool/arch.js | 256 | 6 | Storeys typed for a block clamped to 1–6. A UI limit. |
+| tool/arch.js | 258 | 10, 100 | Resize step when a program has no step: 10 % of its size, at least 10 m² (100 m² taken when size is not set). A UI choice. |
+| tool/arch.js | 268 | 12 | Up to 12 passes when shrinking other blocks to make room. A loop limit. |
