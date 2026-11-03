@@ -15,7 +15,7 @@ To clear one: add its source to the register through `register/patches/*.py`, mo
 | tool/engine.js | 746 | 1.25, 16.8 | Water behind electricity, thermal ~1.25 and hydro ~16.8 L/kWh. The register (water_behind_electricity, O-09) says their source is not indexed. |
 | tool/engine.js | 749 | 4.256, 4.622 | Vancouver water and sewer rates per m³ of make-up (2026, as proposed; sewer rate marked ?). No register id found. |
 | tool/data.js | 20 | 200 | HTTP status code. Not a figure. |
-| tool/plant.js | 19 | 4, 6, 2, 2, 2, 2 | Side-to-side gap between tower cells, 4.0 m (small plant) and 6.0 m (large), and 2.0 m between generator sets ("assumed from the 1 m service clearance"). The 1.8 m end gap for towers sits on the same line. BAC's layout guide (bacLayout2023) gives the 1.8 m and the air-inlet distance but not the side gaps. |
+| tool/plant.js | 19 | 4, 6 | Side-to-side gap between tower cells, 4.0 m (small plant) and 6.0 m (large), and 2.0 m between generator sets ("assumed from the 1 m service clearance"). The 1.8 m end gap for towers sits on the same line. BAC's layout guide (bacLayout2023) gives the 1.8 m and the air-inlet distance but not the side gaps. |
 | tool/plant.js | 26 | 6, 6 | Over 6 MW of heat, the "large" tower spacing is used. Chillers switch at the same point but keep the same unit. No source. |
 | tool/plant.js | 60 | 2, 40 | Provisional size before one is set: 2 storeys if the model has none, capped at 40 MW (the top of the slider). Tool choices. |
 | tool/site.js | 86 | 100 | Vancouver: no loading bay under 100 m² of floor. Not in the Parking By-law text the register quotes (vanParking5). |
