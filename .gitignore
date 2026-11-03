@@ -1,5 +1,7 @@
 # large or licensed data stays out of the repository
 data/
+# the tool's register-wired figures (lean refactor, 3 Nov 2026): small JSON written by hand, not raw data
+!tool/data/
 sources/*.pdf
 *.pdf
 *.xls

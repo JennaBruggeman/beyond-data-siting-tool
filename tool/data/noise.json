@@ -1,0 +1,96 @@
+{
+ "_about": "Noise sources and mitigation (register: noise_level, noise_limit). engine.js R.lwUnit*, NMIT.",
+ "lwUnitDry": {
+  "v": [
+   98.5,
+   102
+  ],
+  "src": [
+   "noise_level",
+   "mfrDryCooler",
+   "thermokeyGH2490"
+  ],
+  "_note": "Güntner GFD 090.2D LWA 98.5; Thermokey 102 at 738 kW (manufacturer claims; sweep M32)"
+ },
+ "lwUnit": {
+  "v": [
+   102.8,
+   106.1
+  ],
+  "src": [
+   "noise_level",
+   "vertivAFC"
+  ],
+  "_note": "Vertiv AFC Lp at 1 m → Lw by ISO 3744 box (our calculation)"
+ },
+ "mit": {
+  "scr": {
+   "dB": {
+    "v": 8,
+    "src": [
+     "arch_nz_nswDcNoise"
+    ]
+   },
+   "minH": {
+    "v": 4,
+    "src": [
+     "arch_nz_nswDcNoise"
+    ]
+   },
+   "within": {
+    "v": 20,
+    "src": [
+     "arch_nz_nswDcNoise"
+    ]
+   },
+   "fh0": {
+    "v": 5,
+    "src": [
+     "arch_nz_fhwaNBDH"
+    ]
+   },
+   "fhM": {
+    "v": 1.5,
+    "src": [
+     "arch_nz_fhwaNBDH"
+    ]
+   },
+   "cap": {
+    "v": 20,
+    "src": [
+     "arch_nz_fhwaNBDH"
+    ]
+   }
+  },
+  "room": {
+   "dB": {
+    "v": 25,
+    "src": [
+     "arch_nz_nswDcNoise"
+    ]
+   }
+  },
+  "ln": {
+   "lw": 98,
+   "std": 101,
+   "mw": 1.01,
+   "src": [
+    "traneRTAF"
+   ]
+  },
+  "fan": {
+   "k": {
+    "v": 50,
+    "src": [
+     "arch_nz_amcaMathson"
+    ]
+   },
+   "min": {
+    "v": 0.6,
+    "src": [
+     "arch_nz_amcaMathson"
+    ]
+   }
+  }
+ }
+}

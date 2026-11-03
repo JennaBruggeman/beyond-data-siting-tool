@@ -1,0 +1,99 @@
+{
+ "_about": "Size chain (register: hall_area, size_fit, rack_count). engine.js R.",
+ "hallShare": {
+  "v": [
+   0.48,
+   0.72
+  ],
+  "src": [
+   "hall_area",
+   "burlingtonPlans2026"
+  ],
+  "_note": "Burlington plan set (internally inconsistent: 48% or 72%)"
+ },
+ "m2PerMW": {
+  "v": [
+   290,
+   630
+  ],
+  "src": [
+   "it_load_outside",
+   "size_fit",
+   "estruxtureVAN1ds",
+   "hut8Vault",
+   "quEDM1_2026"
+  ],
+  "_note": "built Canadian halls, operator claims: eStruxture VAN-1 ≈290 … VAN5 ≈627 (sources/16 §2.7); register it_load_outside states 290–630"
+ },
+ "m2PerMWHigh": {
+  "v": [
+   250,
+   290
+  ],
+  "src": [
+   "it_load_outside",
+   "estruxtureVAN1ds"
+  ],
+  "_note": "high density ≈250 (NEXTDC S3, QScale; operator claims, register it_load_outside); 290 = densest built Canadian hall (VAN-1)"
+ },
+ "m2PerMWModel": {
+  "v": [
+   186,
+   2325
+  ],
+  "src": [
+   "size_fit",
+   "lbnl_proto2021"
+  ],
+  "_note": "LBNL prototypes (Sun et al. 2021), outer bounds only"
+ },
+ "_cases": "Cologix VAN5 1.6 MW has no register id: it stays first in engine.js R.cases.van and is listed unsourced",
+ "cases": {
+  "van": [
+   {
+    "mw": {
+     "v": 2.4,
+     "src": [
+      "estruxtureVAN1ds"
+     ]
+    },
+    "n": "eStruxture VAN-1"
+   },
+   {
+    "mw": {
+     "v": 40,
+     "src": [
+      "van_rts19744"
+     ]
+    },
+    "n": "111 E 5th (proposed)"
+   }
+  ],
+  "edm": [
+   {
+    "mw": {
+     "v": 2.5,
+     "src": [
+      "quEDM1_2026",
+      "opClaims"
+     ]
+    },
+    "n": "Qu EDM1"
+   }
+  ]
+ },
+ "kWPerRack": {
+  "v": 8,
+  "src": [
+   "rack_count",
+   "uptime2024survey"
+  ]
+ },
+ "jobsM2": {
+  "v": 464.5,
+  "src": [
+   "jlarc2024"
+  ],
+  "_note": "5,000 ft² per operating job, JLARC 2024 (transferred)"
+ }
+}

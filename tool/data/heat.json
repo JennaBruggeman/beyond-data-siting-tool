@@ -1,0 +1,85 @@
+{
+ "_about": "Heat chain and receivers (register: liquid_capture, cop, homes_heated, demand_profile, grid_co2, price_ceiling, receiver_radius).",
+ "capture": {
+  "v": [
+   0.57,
+   0.75
+  ],
+  "src": [
+   "liquid_capture",
+   "lbnlCapture"
+  ]
+ },
+ "cop": {
+  "v": [
+   3.0,
+   4.5
+  ],
+  "src": [
+   "cop",
+   "dea",
+   "fjfAars2020"
+  ]
+ },
+ "homeMWh": {
+  "v": {
+   "van": 16.81,
+   "edm": 33.14
+  },
+  "src": [
+   "homes_heated",
+   "ceud"
+  ]
+ },
+ "monthRatio": {
+  "v": {
+   "van": 4.9,
+   "edm": 5.0
+  },
+  "src": [
+   "demand_profile",
+   "ceud",
+   "cwec"
+  ]
+ },
+ "grid": {
+  "v": {
+   "van": 18.1,
+   "edm": 346.1
+  },
+  "src": [
+   "grid_co2",
+   "nir2026"
+  ]
+ },
+ "neuCredit": {
+  "v": 32.59,
+  "src": [
+   "neu9552"
+  ]
+ },
+ "reach": {
+  "v": {
+   "pool": 1000,
+   "housing": 1200,
+   "greenhouse": 1500
+  },
+  "src": [
+   "receiver_radius",
+   "rvo2018"
+  ]
+ },
+ "reachGuide": {
+  "v": 1200,
+  "src": [
+   "receiver_radius",
+   "rvo2018"
+  ]
+ },
+ "recvRadius": {
+  "v": 3000,
+  "src": [
+   "receiver_radius"
+  ]
+ }
+}

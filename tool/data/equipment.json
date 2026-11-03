@@ -1,0 +1,82 @@
+{
+ "_about": "Plant space and load (register: component_space, pue, load_factor, fuel_on_site). engine.js R.plant, R.pue, R.lf, R.fuel*.",
+ "plant": {
+  "ups": [
+   2.4,
+   3.3
+  ],
+  "batt": [
+   1.0,
+   1.8
+  ],
+  "dry": [
+   19.5,
+   30.5
+  ],
+  "chill": [
+   16.4,
+   30.5
+  ],
+  "towers": [
+   4.7,
+   16.5
+  ],
+  "hybrid": [
+   24.5,
+   50.1
+  ],
+  "hp": [
+   5.6,
+   15.1
+  ],
+  "cdu": [
+   0.4,
+   1.5
+  ],
+  "src": [
+   "component_space",
+   "equipStudy2026"
+  ],
+  "_note": "m² per MW; ups, batt, hp, cdu per MW of servers; dry and chill per MW of heat (× PUE); equipment study 29 Oct 2026, range across the makers compared"
+ },
+ "pue": {
+  "v": [
+   1.4,
+   1.55
+  ],
+  "src": [
+   "pue",
+   "lbnl2024",
+   "uptime2025"
+  ]
+ },
+ "lf": {
+  "v": 0.6,
+  "src": [
+   "load_factor",
+   "fan2007"
+  ]
+ },
+ "fuelLkWh": {
+  "v": 0.263,
+  "src": [
+   "fuel_on_site",
+   "cat3516c"
+  ]
+ },
+ "fuelHours": {
+  "v": 12,
+  "src": [
+   "fuel_on_site",
+   "uptimeHeslin2014"
+  ]
+ },
+ "fuelLimit": {
+  "low": 20000,
+  "first": 200000,
+  "src": [
+   "fuel_on_site",
+   "nfc2020_4313"
+  ]
+ }
+}
