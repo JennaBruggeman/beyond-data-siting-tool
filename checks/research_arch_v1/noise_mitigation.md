@@ -19,7 +19,7 @@ Kinds: rule · government guide · government-commissioned study (a consultant's
 | Typical barrier result | "5 to 10 dB(A)" | arch_nz_hkEpdEM | s. 7.6 | government guide (Hong Kong) | 70 |
 | Rooftop barrier mass | minimum 20 kg/m²; "no lower than 10 kg/m2 for: • rooftop barriers" (with technical justification) | arch_nz_ottawaENCG | Intro & Glossary p. 4 | government guide (municipal, ON) | 90 |
 | Barrier length; mass | length "not less than five times its height"; at least 10 kg/m² | arch_nz_hkEpdEM | s. 7.6 | government guide (HK) | 70 |
-| Barriers last | Ottawa: noise is "addressed at its source"; "Acoustic barriers should only be used when other noise control measures have been considered" (Intro p. 1) | arch_nz_ottawaENCG | Part 1 s. 3.3, p. 10; Intro | government guide | 85 |
+| Barriers last | Ottawa: noise is "addressed at its source"; "Acoustic barriers should only be used when other noise control measures have been considered" (Intro p. 1) | arch_nz_ottawaENCG | Part 1 s. 3.3, p. 11; Intro | government guide | 85 |
 | Rooftop screen vs airflow | a 12 ft (3.7 m) solid wall 6 ft (1.8 m) from a chiller: capacity −4.5%+, power +6%+ | arch_yorkClear (existing) | — | maker claim | 70 |
 | Vancouver case: rooftop barrier | absorptive, ≥1 m above the tallest unit (3.27 m), ≥10 kg/m², no gaps; night levels R1 57→54, R2 51→49, R3/R4 45→38 dBA (−2 to −7, our arithmetic from Tables 4 and 6) | arch_nz_bklTelusRegent | pp. 7, 11 | filed study (FOI release, City of Vancouver) | 80 |
 
@@ -35,7 +35,7 @@ Kinds: rule · government guide · government-commissioned study (a consultant's
 | Acoustic louvre rating | rated by transmission loss in each frequency band; a "very short silencer", only where the required reduction is low; no dB values in the text | arch_nz_hkEpdEM | s. 7.11 | government guide | 60 |
 | Chiller silencer stack (Vancouver case) | minimum IL 63–4k Hz: 1, 2, 2, 5, 7, 7, 8 dB; with the barrier, R1 48 dBA (from 57) | arch_nz_bklTelusRegent | p. 12, Tables 7–8 | filed study | 75 |
 | Generator enclosure (Vancouver case) | design intent 65 dBA @ 7 m | arch_nz_bklTelusRegent | pp. 6–7 | filed study | 70 |
-| Cooling-tower inlet/discharge attenuators | "5dBA or more" | arch_nz_spxAEJB21A | p. 5 | maker claim | 60 |
+| Cooling-tower inlet/discharge attenuators | "5dBA or more" | arch_nz_spxAEJB21A | p. 5 ? ("Attenuation Baffles") | maker claim | 60 |
 | Generator sets in enclosures | Cummins QuietSite figures already in the register | sources/08 (existing) | — | maker claim | — |
 
 ## 3. Low-noise variants
@@ -45,7 +45,7 @@ Kinds: rule · government guide · government-commissioned study (a consultant's
 | Trane RTAF 090–280 (333–1,010 kW; excl. size 245) | Lw 94–101 standard / 91–98 low noise (−3 dB at the range ends, our arithmetic) | traneRTAF (existing) | p. 13 | maker claim | 80 |
 | Climaveneta i-FX ≈480–930 kW | Lw 99–103 standard; low-noise version 92–97 (register does not tie 92–97 to this size range ?) | climavenetaIFX (existing) | — | maker claim | 75 |
 | Daikin EWAD-TZ XS (179.6–682.3 kW) | Lw 96–101 dB(A) (e.g. 682.3 kW → 101) at ISO 9614 / Eurovent 8/1 standard conditions; not re-verified in Check 2 (table script-rendered) ?; reduced-noise variant values ? | arch_nz_daikinEWADTZXS | spec table | maker claim | 40 |
-| Recommended chiller limit (Olds AB NIA) | chillers "≤85 dBA PWL per unit" (from 110 "initially assumed", p. 17; Appendix D ≈107 ?) | arch_nz_oldsNIAmit | Table 5, p. 26 | filed study | 75 |
+| Recommended chiller limit (Olds AB NIA) | chillers "≤85 dBA PWL per unit" (from 110 "initially assumed", p. 17; Appendix D reads 111 ?) | arch_nz_oldsNIAmit | Table 5, p. 26 | filed study | 75 |
 | Burlington ON data centre | 12 rooftop chillers, Lw 92 dBA each; "no mitigation measures are required" | burlingtonNIA (existing) | s. 6.5.5, 6.5.8 | filed study | 75 |
 | Trane AMC 30 t module with "Low Noise Fans and Compressor Wraps" | 70 dBA sound pressure "at 3 ft"; not Lw | arch_nz_bklTelusRegent | Table 3, p. 6 | filed study (maker data) | 70 |
 | Low-noise dry coolers with capacity | ? (not found on a maker-hosted sheet) | — | — | — | — |
@@ -55,10 +55,10 @@ Kinds: rule · government guide · government-commissioned study (a consultant's
 | what | value | source id | where | kind | conf. |
 |---|---|---|---|---|---|
 | Fan law (AMCA 301 as stated) | AMCA 301 form Lw2 = Lw1 + 40 log(N2/N1) + 70 log(D2/D1) + bandwidth term, simplified to + 50 log(N2/N1) + 70 log(D2/D1); valid range 0.6–1.6 × base test speed (≈ −11 to +10 dB, our arithmetic); needs geometric similarity | arch_nz_amcaMathson | pp. 3–4, 9 (Annex A.2) | standards-body conference paper (AMCA; Greenheck author) | 75 |
-| Cooling towers on VFD | "no greater than 50log10(new speed/old speed)"; half speed "up to 15dBA"; floor = fans-off level | arch_nz_spxAEJB21A | p. 5 | maker claim | 70 |
+| Cooling towers on VFD | "no greater than 50log10(new speed/old speed)"; half speed "up to 15dBA"; floor = fans-off level | arch_nz_spxAEJB21A | p. 5 ? ("Fans and Their Effect on Sound") | maker claim | 70 |
 | Our arithmetic, 50 log | 0.9 → −2.3; 0.8 → −4.8; 0.7 → −7.7; 0.6 → −11.1 dB (0.5 → −15.1 is outside AMCA's 0.6 floor) | — | — | our arithmetic | — |
 | Data-centre night modes | NSW wants Lw for each operating mode (high/medium/low); no rule of thumb | arch_nz_nswDcNoise | s. 4.3, p. 15 | government-commissioned study | 75 |
-| EC-fan night limiting | "reduce noise output, e.g., at night time, by limiting fan rotation speed"; no dB | arch_nz_kaltraDC | web page 2021 | maker claim | 50 |
+| EC-fan night limiting | "reduce noise output, e.g., at night time, by limiting fan rotation speed"; no dB for EC fans | arch_nz_kaltraDC | web page 2021 | maker claim | 50 |
 
 Caveat: reduced speed also reduces heat rejection, so this credit is only valid when night load or ambient allows (?).
 
@@ -121,3 +121,4 @@ Lw 102.8 dBA (one unit), smallest distance that meets the limit:
 - Edmonton and Vancouver data-centre acoustic reports beyond TELUS Regent: ?
 
 Check 2 applied (2 Nov 2026)
+Check 3 applied (2 Nov 2026)

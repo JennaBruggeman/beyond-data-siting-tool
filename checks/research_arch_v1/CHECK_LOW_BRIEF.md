@@ -1,0 +1,6 @@
+# Check round for under-checked register sources (2–3 Nov 2026, overnight)
+
+These sources in register/formula_register.json → new_sources have fewer than two recorded checks (meta.check_log). Your batch is one key in checks/research_arch_v1/checkLow_batches.json, named in your prompt.
+For each id: read its register text; open the URL (or the local copy under data/, sources/ or sources/library/ when it says local); for every figure, quote, clause, page, date, title and issuer: CONFIRMED / WRONG (give the right value) / NOT FOUND / UNREACHABLE, with short exact evidence. Check the KIND label (meta.source_kinds). If the text needs changing, write new_text (full corrected text, same style, with " ‖ CHECK (2–3 Nov 2026, ok|fixed): <one line>" appended).
+Rules: never circumvent a block or paywall (mark UNREACHABLE); don't invent; Canadian spelling; edit no file except your output. Many of these are older tool sources (operator claims, permits, utility tariffs): label claims as claims.
+Output: checks/research_arch_v1/checkLow_result_<batch>.json, {"<id>": {"where_read": "...", "claims": [{"claim","verdict","evidence","fix"}], "kind_change": null or "...", "scope_flag": null or "...", "new_text": null or "..."}}. Final message under 100 words: counts by verdict, most serious problems.
