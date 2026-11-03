@@ -142,3 +142,9 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - Drawing is zoomable. Labels sit on shared rows above and below the drawing; leader elbows share one line; labels keep screen size as you zoom and hide once zoomed in too close.
 - Labels on/off toggle beside the view buttons.
 - If the leaders can't do all of that, switch to numbers keyed to a list.
+
+## Decisions (J.B., 3 Nov 2026)
+- Golden re-baselined to today's results (1080fab).
+- Noise screen vs EVAPCO layout rule: screen allowed (by-law is the hard rule; EVAPCO is maker advice). Conflict flagged on screen; how to keep air reaching the units (e.g. gap at the screen base) is "?" until sourced.
+- Trane RTAF low-noise units: allowed, labelled maker claim; footprint "?".
+- People step in Architecture: yes, context only, no scoring, just before Arrange; includes who is near and the sight-line view.
