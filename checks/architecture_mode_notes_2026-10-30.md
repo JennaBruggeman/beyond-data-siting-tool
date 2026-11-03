@@ -148,3 +148,9 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - Noise screen vs EVAPCO layout rule: screen allowed (by-law is the hard rule; EVAPCO is maker advice). Conflict flagged on screen; how to keep air reaching the units (e.g. gap at the screen base) is "?" until sourced.
 - Trane RTAF low-noise units: allowed, labelled maker claim; footprint "?".
 - People step in Architecture: yes, context only, no scoring, just before Arrange; includes who is near and the sight-line view.
+
+## Flow (J.B., 3 Nov 2026; wireframes in the Design artifact "Beyond Data white interface")
+- Steps: Site, People, Design, Report. Design tabs: Ratios, Arrange, Exchange, Compare.
+- Ratios is its own tab before Arrange (coverage, then floor-area split; DC share sets MW). Arrange shows the split as one line with "Edit ratios".
+- Compare is its own tab; the Report shows the chosen arrangement plus a short table of the others.
+- Build order: Ratios, Arrange with DC rooms, Exchange, Compare, Report.
