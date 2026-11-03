@@ -16,9 +16,9 @@ const KIND={
  dry:{name:'dry coolers',L:12.0,W:2.4,H:2.88,mw:28.8/24.5,wall:[0.9,2.1],gap:[1.8,4.3]},
  chillS:{name:'air-cooled chillers',L:12.141,W:2.362,H:2.896,mw:1.489,wall:[0.9,2.1],gap:[1.8,4.3]},
  chillL:{name:'air-cooled chillers',L:12.141,W:2.362,H:2.896,mw:1.489,wall:[0.9,2.1],gap:[1.8,4.3]},
- hybrid:{name:'hybrid coolers',L:12.0,W:2.8,H:2.88,mw:0.67,mwHi:1.37,wall:[0.9,2.1],gap:[1.8,4.3]},
- towerS:{name:'cooling tower cells',L:6.579,W:3.607,H:3.886,mw:3.03,wall:[2.7,2.7],gap:[1.8,4.0]},
- towerL:{name:'cooling tower cells',L:6.579,W:3.607,H:3.886,mw:3.03,wall:[2.7,2.7],gap:[1.8,6.0]},
+ hybrid:{name:'hybrid coolers',L:12.0,W:2.8,H:2.88,mw:0.67,mwHi:1.37,wall:[0.9,2.1],gap:[1.8,4.3],evap:3},
+ towerS:{name:'cooling tower cells',L:6.579,W:3.607,H:3.886,mw:3.03,wall:[2.7,2.7],gap:[1.8,4.0],evap:3},
+ towerL:{name:'cooling tower cells',L:6.579,W:3.607,H:3.886,mw:3.03,wall:[2.7,2.7],gap:[1.8,6.0],evap:3},
  gen1:{name:'standby generators',L:8.434,W:2.616,H:3.706,mw:1.0,wall:[1.5,1.5],gap:[2.0,2.0]},
  gen2:{name:'standby generators',L:13.493,W:3.488,H:4.777,mw:2.0,wall:[1.5,1.5],gap:[2.0,2.0]},
 };
@@ -33,6 +33,14 @@ function sizeFor(mw,A){
   const g=A.gens==='none'?null:(Q>3?KIND.gen2:KIND.gen1); const gNeed=g?Math.max(1,Math.ceil(Q/g.mw)):0, gN=g?spare(gNeed,A.genSpares||'n1'):0;
   return {Q,k,need,n,g,gNeed,gN,src:SRC[out==='towers'?'towers':out==='dry'&&air?'chill':out]};
 }
+/* 2 Nov 2026 hard rules (site audit 3): NBC 2020 / BCBC 2024 / NBC(AE) 2023 Div. B 6.3.2.15.(5): evaporative heat-rejection discharge at least
+   2.15 m above sidewalks and driveways, 7.6 m from outdoor air intakes, 3 m from exterior doors, operable windows and occupiable outdoor spaces
+   (register arch_sep_nbc63215full). Towers and hybrid coolers (k.evap): the neighbours' doors, windows and outdoor spaces are not known, so the
+   whole unit (its discharge) is kept k.evap = 3 m inside the lot line. Units are at least 2.88 m tall, so 2.15 m holds. No air intakes are drawn,
+   so 7.6 m is not tested (?). Units that cannot be placed are reported as not fitting, which blocks the set-up. */
+let EDGE=null; // {ring, d}: the lot ring and the least distance a unit may come to it
+function segD(px,py,ax,ay,bx,by){ const dx=bx-ax, dy=by-ay, L2=dx*dx+dy*dy; let t=L2?((px-ax)*dx+(py-ay)*dy)/L2:0; t=Math.max(0,Math.min(1,t)); return Math.hypot(px-ax-t*dx,py-ay-t*dy); }
+function edgeD(x,y,r){ let d=1e9; for(let i=0;i<r.length;i+=2){ const j=(i+2)%r.length; d=Math.min(d,segD(x,y,r[i],r[i+1],r[j],r[j+1])); } return d; }
 /* pack w × d rectangles (long side along the frame's u axis unless rot) inside a region, with wall and unit clearances */
 function pack(F,region,forbid,u0,u1,v0,v1,k,count,rot){
   const L=rot?k.W:k.L, W=rot?k.L:k.W, wu=rot?k.wall[1]:k.wall[0], wv=rot?k.wall[0]:k.wall[1], gu=rot?k.gap[1]:k.gap[0], gv=rot?k.gap[0]:k.gap[1];
@@ -41,7 +49,7 @@ function pack(F,region,forbid,u0,u1,v0,v1,k,count,rot){
   for(let v=v0+wv+W/2; v<=v1-wv-W/2+1e-6 && out.length<count; v+=W+gv)
     for(let u=u0+wu+L/2; u<=u1-wu-L/2+1e-6 && out.length<count; u+=L+gu){
       const cs=[[u-L/2-wu+e,v-W/2-wv+e],[u+L/2+wu-e,v-W/2-wv+e],[u+L/2+wu-e,v+W/2+wv-e],[u-L/2-wu+e,v+W/2+wv-e],[u,v],[u-L/2,v],[u+L/2,v],[u,v-W/2],[u,v+W/2]];
-      if(cs.every(([a,b])=>okPt(a,b))) out.push({u,v,L,W}); }
+      if(cs.every(([a,b])=>okPt(a,b))&&(!(k.evap&&EDGE)||[[u-L/2,v-W/2],[u+L/2,v-W/2],[u+L/2,v+W/2],[u-L/2,v+W/2],[u-L/2,v],[u+L/2,v],[u,v-W/2],[u,v+W/2]].every(([a,b])=>{ const [x,y]=F.toW(a,b); return BD.pip(x,y,EDGE.ring)&&edgeD(x,y,EDGE.ring)>=EDGE.d-1e-6; }))) out.push({u,v,L,W}); }
   return out; }
 function boxOf(F,p,k,base,kind){ const r=BD.geo.rectW(F,p.u-p.L/2,p.u+p.L/2,p.v-p.W/2,p.v+p.W/2);
   const wu=p.L===k.L?k.wall[0]:k.wall[1], wv=p.L===k.L?k.wall[1]:k.wall[0];
@@ -70,6 +78,7 @@ BD.plant={
  /* after the footprint: put units on the roof and in the yard, and report what does not fit */
  roof(m){
   const A=BD.S.answers, P=m.plant, F=m.F; if(!P||!F||!m.foot) return; const s=P.s;
+  EDGE=s.k.evap&&m.ring?{ring:m.ring,d:s.k.evap}:null; // evaporative discharge kept inside the lot line (NBC 6.3.2.15.(5), above)
   // J.B. 20 Oct (examples that 'did not fit'): once a size is set the building is only as big as that size needs (m.sizedTo, site.js); the plant
   // goes on that building's roof and in the yard around it, not around the most the lot could hold
   const bld=m.sizedTo&&m.serverFoot?m.serverFoot:m.foot;
@@ -92,7 +101,7 @@ BD.plant={
   const cr=put(s.k,P.coolRoof,roofH,'roof'), cy=put(s.k,P.coolYard,0,'yard');
   // generators: never on top of coolers; roof sets go where coolers left room
   let gr=0; if(P.genRoof){ const used=P.boxes.filter(b=>b.kind==='roof').map(b=>b.clear); let got=pack(F,roofRing,used,ru0,ru1,rv0,rv1,s.g,P.genRoof,false); if(got.length<P.genRoof) got=got.concat(pack(F,roofRing,used.concat(got.map(p=>BD.geo.rectW(F,p.u-p.L/2-1,p.u+p.L/2+1,p.v-p.W/2-1,p.v+p.W/2+1))),ru0,ru1,rv0,rv1,s.g,P.genRoof-got.length,true)); got.forEach(p=>P.boxes.push(boxOf(F,p,s.g,roofH,'roof'))); gr=got.length; }
-  const gy=put(s.g,P.genYard,0,'yard');
+  const gy=put(s.g,P.genYard,0,'yard'); EDGE=null;
   const kname=s.k.name, miss=[];
   if(cr<P.coolRoof) miss.push(`${P.coolRoof-cr} of ${P.coolRoof} ${kname} do not fit on the roof`);
   if(cy<P.coolYard) miss.push(`${P.coolYard-cy} of ${P.coolYard} ${kname} do not fit in the yard`);
@@ -104,6 +113,7 @@ BD.plant={
   P.lines=[`Sized for <b>${mwT} MW</b> of servers${m.mwProvisional?' (a provisional size until one is set on the What fits page)':''}: heat to reject ≈ ${mwT} × PUE 1.55 = <b>${s.Q.toFixed(1)} MW</b> at peak.`,
    `${s.need} ${kname} carry it${s.k===KIND.hybrid?` (at the low end of 0.67–1.37 MW a unit; ${Math.ceil(s.Q/1.37)} at the high end)`:''}; with spares, <b>${s.n}</b>. Placed: ${cr} on the roof, ${cy} in the yard.`,
    `Each unit about ${s.k.L} × ${s.k.W} m, ${s.k.H} m high, with ${s.k.wall[0]}–${s.k.wall[1]} m to walls and ${s.k.gap[0]}–${s.k.gap[1]} m between units (dashed in 3D).`,
+   ...(s.k.evap?[`Evaporative discharge: each unit kept at least ${s.k.evap} m inside the lot line, because the code keeps it 3 m from doors, operable windows and outdoor spaces, and the neighbours' are not known (NBC 2020 6.3.2.15.(5); register arch_sep_nbc63215full). 7.6 m from air intakes: no intakes are drawn, so not tested (?).`]:[]),
    `<span class="src">${s.src}</span>`];
   P.genLines=s.g?[`${s.gNeed} generator set${s.gNeed>1?'s':''} of about ${s.g.mw} MW carry ${s.Q.toFixed(1)} MW; with spares, <b>${s.gN}</b>. Placed: ${gr} on the roof, ${gy} in the yard.`,`Each about ${s.g.L} × ${s.g.W} m, ${s.g.H} m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).`,`<span class="src">${SRC.gens}</span>`]:['No generators.'];
  }

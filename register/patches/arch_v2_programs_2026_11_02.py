@@ -5,7 +5,7 @@ import json, pathlib
 R = pathlib.Path(__file__).resolve().parents[2]
 A = R / 'checks/research_arch_v1'
 D = '2 Nov 2026'
-STEMS = ['prog_wet', 'prog_grow', 'prog_public', 'prog_housing', 'sys', 'fish_species', 'temps_public']
+STEMS = ['prog_wet', 'prog_grow', 'prog_public', 'prog_housing', 'sys', 'fish_species', 'temps_public', 'sup_wet', 'sup_care', 'sup_public', 'sup_grow', 'rezoning']
 p = R / 'register/formula_register.json'; d = json.loads(p.read_text()); m = d['meta']; S = d['new_sources']
 KIND = [('OPERATOR CLAIM', 'operator claim'), ('MAKER CLAIM', 'manufacturer claim'), ('PEER-REVIEWED', 'peer-reviewed'), ('PREPRINT', 'preprint (not peer-reviewed)'),
         ('CONSULTANT REPORT', 'consultant report'), ('RULE', 'rule'), ('MUNICIPAL', 'rule'), ('STANDARD', 'standard'), ('DESIGN GUIDE', 'design guide'),

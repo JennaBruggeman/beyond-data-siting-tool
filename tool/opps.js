@@ -15,7 +15,7 @@ const USE={
  van:{farm:z=>VSEVEN.includes(z)?['chg','Urban Farm – Class B (may be in a greenhouse) is a conditional use in '+z]:['nk','not read for zone '+z],
       community:z=>['I-2','I-3','FC-2','M-1','C-2'].includes(z)?['chg','Community Centre is a conditional use in '+z]:['I-1C','IC-2'].includes(z)?['no','Community Centre is not listed in '+z]:['nk','not read for zone '+z],
       parking:z=>VSEVEN.includes(z)?['chg','Parking Uses (which may include selling electricity to charge vehicles) are conditional in '+z]:['nk','not read for zone '+z],
-      food:z=>z==='I-2'?['chg','in I-2, uses must not involve keeping live animals (s. 2.2.1(b), 2.2.2(b)), so fish farming is ruled out there']/* 2 Nov 2026 fix pass: A-aqua (fish only) */:['I-1C','FC-2','M-1','IC-2'].includes(z)?['nk','Food or Beverage Products Manufacturing – Class B is outright in '+z+', but whether live animals may be kept there was not read (I-2 bans it)']:['nk','no aquaculture term; food manufacturing not read for '+z]},
+      food:z=>z==='I-2'?['no','in I-2, uses must not involve keeping live animals (s. 2.2.1(b), 2.2.2(b); register van_zdb_i2), so fish farming is ruled out there']/* 2 Nov 2026 hard rules (exchanges F7): a rule that rules it out is 'no', not 'possible with a change' *//* 2 Nov 2026 fix pass: A-aqua (fish only) */:['I-1C','FC-2','M-1','IC-2'].includes(z)?['nk','Food or Beverage Products Manufacturing – Class B is outright in '+z+', but whether live animals may be kept there was not read (I-2 bans it)']:['nk','no aquaculture term; food manufacturing not read for '+z]},
  edm:{farm:z=>['MU','IM','BE','CB'].includes(z)?['yes','Urban Agriculture (incl. hydroponic and aquaponic systems, vertical farms) is permitted in '+z+', within or on a building']:['nk','not read for zone '+z],
       community:z=>['MU','BE'].includes(z)?['yes','Community Service (incl. shelters) is permitted in '+z+(z==='BE'?', at most 500 m² except shelters':'')]:z==='IM'?['no','Community Service is not listed in IM']:['nk','not read for zone '+z],
       parking:z=>['nk','no EV-charging use term in Bylaw 20001; Vehicle Support Service does not mention charging'],
@@ -149,7 +149,10 @@ function oppBody(n,c){ const {L,G}=gates(n,c);
   ${Array.isArray(L.rules)&&L.rules.length&&L.rules.every(x=>x.van[0]==='na'&&x.edm[0]==='na')?'':`<h3>Rules, rung by rung</h3>${ladderHTML(L)}`/* J.B. 20 Oct: no rules, no row */}
   <h3>Not yet known</h3><p class="sub">${esc((L.unknowns||[]).join('; ')||'—')}</p><h3>How proven</h3><p class="sub">${esc(L.basis||'')}</p>${L.visual?`<p class="sub">Drawn as: ${esc(L.visual)}</p>`:''}
   <h3>Sources</h3>${BD.srcList((L.sources||[]).concat(...(Array.isArray(L.rules)?L.rules.map(x=>x.sources||[]):[]),['vanUses2026','edmUses2026']))}`; }
-function opp3d(n,c){ const M=c.M, d={site:c.f,boxes:[]}; if(M&&M.F&&M.ring){ const F=M.F;
+function opp3d(n,c){ const M=c.M, d={site:c.f,boxes:[]};
+  /* 2 Nov 2026 hard rules (exchanges F8): an opportunity whose rules gate is 'not here' is not drawn on the lot */
+  { const g=gates(n,c).G; if(g.rules&&g.rules[0]==='no'){ d.note=`Not drawn: the rules do not allow it here (${g.rules[1]}).`; E().show3d('opp',d); return; } }
+  if(M&&M.F&&M.ring){ const F=M.F;
 
     if(n==='EV charging hub'&&BD.plant){ const k={name:'stalls',L:5.5,W:2.5,H:0.1,wall:[0.5,0.5],gap:[0,6.6]}; const lotR=M.inset?BD.geo.clip(M.ring,M.inset):M.ring; const forbid=[].concat(M.foot?[M.foot]:[],M.loading?[M.loading]:[],(M.plant&&M.plant.boxes||[]).filter(b=>b.kind==='yard').map(b=>b.clear)); const [a,b,c2,d2]=BD.plant.localBounds(F,lotR); BD.plant.pack(F,lotR,forbid,a,b,c2,d2,k,120,false).forEach(p=>d.boxes.push({ring:BD.geo.rectW(F,p.u-p.L/2,p.u+p.L/2,p.v-p.W/2,p.v+p.W/2),h:0.1,base:0,label:''})); if(d.boxes.length) d.boxes[0].label=`${d.boxes.length} stalls on the open lot`; else d.note='No open ground is left for stalls in this setup. A smaller footprint (setup card 2) or an adjacent lot would make room.'; }
     if(n==='Greenhouse'&&M.foot&&!M.existing){ d.boxes.push({ring:BD.geo.offset(M.serverFoot||M.foot,-3),h:4,base:0.4,label:'rooftop greenhouse (where the plant leaves room; shown at grade)'}); }

@@ -497,3 +497,43 @@ From catalogue_check3.json (635 values: 595 confirmed, 33 arithmetic re-done, 3 
 - heat_plant: CSA B52 flag: NBC/AB only; BC route ?
 
 Supported only by the research .md, not register text (to add to the register): therapy_pool Changing Places 12 m² and covered_plaza 55 °C / 630–950 W/m² (both carry "?"); borefield AB setbacks (sys.md, Directive Table 4); barramundi AB Cat. 2 (fish_species.md). Basis note: conservatory and winter_garden W/m² are per m² glazing; greenhouse per m² floor.
+
+## Massing parts applied (2 Nov 2026)
+
+From sup_wet, sup_care, sup_public, sup_grow (Check 3 applied). size.parts added to every mass; typical = middle of the small working version's gross, rounded to 5 m² (our arithmetic). Where the Eastglen 1.3–1.5 factor is used, pool plant and public washrooms sit inside it (sup_wet p. 22, sup_public p. 23) and are not added again: this lowers the sup_care, therapy-pool and spa totals. Ids found only in sup_*_sources.json, not yet in register new_sources: listed in the reply.
+
+- pool: 2,131 → 1,065 (4-lane pool only, 987–1,139); min 949 → 815 (lean); step (6 lanes) unchanged
+- therapy_pool: 134 → 140 (24 m² pool, 130–150, plant inside factor); min 90 → 130
+- spa: 870 → 320 (297–346, plant inside factor); sauna, rest area ?
+- laundry: null kept; all parts ?
+- aquarium: 5,400 kept; main tanks 775 m², rest ?
+- fish_farm: 1,000 → 685 (365–1,005, FAO to AB); step 28 m²/t unchanged
+- greenhouse: 153 → 190 (181–199)
+- conservatory: 1,400 → 480 (one biome, 475–488; universal WC inside factor)
+- food_drying: null kept; washroom 4.6 m² only
+- lumber_drying: null kept; washroom 4.6 m² only
+- heat_plant: null kept (per-MW step); ETS room 18 m²
+- public_ground: 930 → 695 (ARUPLO 466–928); option community_room added (285–329)
+- winter_garden: null kept; all parts ?
+- covered_plaza: null kept; universal WC 6.25 m² if provided
+- refuge: 175 → 265 (246–284; research 264–304 added washrooms on top of factor)
+- warming_shelter: 56 → 100 (day, 91–105); overnight 128–148 in note only; step unchanged
+- gym: 372 → 445 (412–476 incl. 6 m² universal change the research net left out; +60 climbing)
+- ev_hub: null → 150; min 150 (4 chargers, 6 stalls; transformer zone ?)
+- clinic: 767 → 510 (498–523; waiting, reception, offices ?); step 17.3 unchanged
+- community_kitchen: null → 185 (173–200, low confidence; research 179–213 added washrooms)
+
+- Claude 2 Nov 2026: clinic 510 → 605 m² (waiting, reception, offices 81–106 m² from the gap to the built North Vancouver UPCC, arch_hsg_vchUpccNV); public ground 695 → 930 m² (VPL branch, top of the ARUPLO range) so a working branch is not undersized.
+- Claude 2 Nov 2026: spa storeys_typ 3 → null (the 3 levels were the 870 m² barge, not the 320 m² working version).
+
+## Parts check (2 Nov 2026)
+
+Independent check of size.parts / typical / min / note against sup_wet, sup_care, sup_public, sup_grow. All 25 programs re-summed (python); all part src ids are in register new_sources. Every sized typical sits in its parts range (within rounding); public_ground 930 is the top of 466–928 by choice, aquarium 5,400 is a benchmark with parts mostly ?.
+
+- conservatory: typical 480 → 490 (481–495, research total): universal WC 4.6 m² restored as its own part; the 1.3–1.5 factor sits on the 65.5 m² production glass only, so it cannot hold the biome's washroom (Bloedel-size note already added it)
+- conservatory: part added "visitor washrooms (A-2)" null ? (Table 3.7.2.2.-A by designed load; research "WCs beyond one universal ?")
+- therapy_pool: part added "bather showers and WCs" null ? (NBC(AE) 7.2.4.7.(2) ≥3 showers per dressing room via 7.2.6.1; WCs 1 M + 1 F at 16 bathers, our arithmetic); typical kept, likely low
+- fish_farm: part added "circulation, walls, mech/elec" null ? (no grossing sourced)
+- pool: dressing basis: 0.32 m² is a BC guideline (Vancouver only); 0.5 m² is the AB rule → Alberta lean ≈851 m² (our arithmetic) in note; min 815 kept as Vancouver lean
+- pool: grossing basis: at 1.3, plant + mech + circulation already ≈31–37 % of net before walls (our arithmetic): low end may be short
+- refuge: emergency power added to the unsized vestibule / storage / filtration part (Health Canada cleaner-air spaces)

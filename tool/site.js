@@ -47,6 +47,12 @@ function zoneLimits(city,zraw){
   const hx=base.hx;
   out.fsr=fsr; out.hOutright=hOut; out.hx=hx; out.ground=base.ground; out.yards=base.yards; out.yardsKnown=!!base.known;
   out.userSet=!!(A.userFSR||A.userH);
+  /* 2 Nov 2026 hard rules (J.B.): the register source of the zone's limits, for every rule text that cites them */
+  out.srcId=city==='edm'?'edm_bl20001':({'I-2':'van_zdb_i2','I-2B':'van_zdb_i2','I-3':'van_zdb_i3','FC-2':'van_zdb_fc2','I-1C':'van_zdb_i1c'}[key==='I-2'&&A.subB?'I-2B':(assumed?'I-2':key)]||'van_zdb_i2');
+  /* 2 Nov 2026 hard rules (site audit 8, exchanges F9): where Edmonton's bylaw requires the equipment screened, "leave it seen" is not offered */
+  out.screen=null;
+  if(city==='edm'&&key==='BE') out.screen={src:'arch_ezbLoad',why:'Edmonton BE s. 5.2: mechanical and electrical equipment, transformers and cooling towers "must be screened from view from Abutting Streets and Sites in non-industrial Zones" (register arch_ezbLoad). The plant is screened by default; "leave it seen" is not offered here.'};
+  else if(city==='edm'&&assumed) out.screen={src:'edmZB5120',why:'This lot\'s zone today is not an industrial zone. Edmonton s. 5.120 subs. 1.1.2: for non-industrial development "All mechanical equipment, except for Solar Collectors, must be concealed by screening" (register edmZB5120). The tool applies it until a rezoning settles which rules hold (our reading ?). "Leave it seen" is not offered here.'};
   return out; }
 BD.zoneLimits=zoneLimits;
 
@@ -103,6 +109,7 @@ function loadingNeed(city,gfa){
 let cache={key:null,m:null};
 function model(){
   const S=BD.S, s=S.sel, A=S.answers; if(!s) return null; if(!A.built) A.built='new'; if(!A.extent) A.extent='whole'; /* the labelled defaults (lot test 20 Oct) */
+  { const a0=s.a||[], Z0=zoneLimits(s.city,s.city==='van'?(a0[1]||''):(a0[2]||a0[1]||'')); if(Z0.screen&&(!A.vis||A.vis==='reveal')) A.vis='screen'; } /* 2 Nov 2026 hard rules: screening required (Z.screen) */
   const key=JSON.stringify([s.city,s.id,A.built,A.extent,A.floor,A.foot,A.cover,A.loadIn,A.flip,A.hmode,A.storeys,A.userFSR,A.userH,A.plantAt,A.outside,A.inside,A.spares,A.gens,A.genAt,A.genSpares,A.mw,A.vis,A.subB]);
   if(cache.key===key) return cache.m;
   const a=s.a||[], city=s.city, zraw=city==='van'?(a[1]||''):(a[2]||a[1]||'');
@@ -120,15 +127,22 @@ function model(){
     const hmax=blds.some(b=>b.h>0)?Math.max(...blds.filter(b=>b.h>0).map(b=>b.h)):4; m.hUnknown=blds.some(b=>!(b.h>0)||b.f===6); /* finding I-06: no recorded height → one storey at 4 m, labelled */ m.existing=true; m.H=hmax; m.nF=[Math.max(1,Math.floor(hmax/4)),Math.max(1,Math.floor(hmax/4))];
     { const big=blds.length?blds.reduce((x,b)=>b.a>x.a?b:x):null; m.foot=big?big.r:null; m.roofH=big?big.h:0; } // the roof the plant sits on is the largest part's own roof, at its own height
     m.feet=blds.map(b=>({r:b.r,h:b.h})); m.footArea=blds.reduce((t,b)=>t+b.a,0); // all parts (sweep M67: these sat inside the comment)
+    /* 2 Nov 2026 hard rules (site audit 16): yard plant beside an existing building stays out of the zone's required yards too (zone source: Z.srcId).
+       The 61 m building width is not a yard and is not applied to an existing building. */
+    if(Z.yards){ const y=Z.yards, fl=A.flip?-1:1; m.inset=rectW(F,-F.L/2+(fl>0?y.front:y.rear),F.L/2-(fl>0?y.rear:y.front),-F.W/2+y.side,F.W/2-y.side); m.yardRect=m.inset; }
   } else {
     let H=Z.hOutright, hn='outright';
     if(A.hmode==='cond'&&Z.hx&&!A.userH){ H=Z.hx[0]; hn='conditional'; }
-    if(A.hmode==='storeys'&&A.storeys){ const want=ftf.ground+(A.storeys-1)*ftf.up[1]; H=want; hn='storeys';
-      const lim=Z.hx&&!A.userH?Z.hx[1]:Z.hOutright; if(want>lim+0.01) m.warn.push(`${A.storeys} storeys need about ${want.toFixed(1)} m; the most this zone allows is ${lim} m${Z.hx&&!A.userH?' (with the City\'s discretion)':''}.`); }
-    m.H=H; m.hmode=hn; m.nF=A.hmode==='storeys'&&A.storeys?[A.storeys,A.storeys]:nF(H);
+    /* 2 Nov 2026 hard rules (J.B.; site audit 2): set storeys never go above the zone's height. They are capped at the most storeys the
+       outright limit holds (or your own limit, a rezoning you chose); more height needs the City's approval, which is its own choice ("With approval"). */
+    const maxSt=Math.max(1,1+Math.floor((Z.hOutright-ftf.ground)/ftf.up[1]+1e-9)); m.maxStoreys=maxSt; let stU=null;
+    if(A.hmode==='storeys'&&A.storeys){ stU=Math.min(A.storeys,maxSt); const want=ftf.ground+(A.storeys-1)*ftf.up[1]; H=ftf.ground+(stU-1)*ftf.up[1]; hn='storeys';
+      if(A.storeys>maxSt) m.hClamp={asked:A.storeys,st:maxSt,want,lim:Z.hOutright,src:Z.srcId,text:`${A.storeys} storeys need about ${want.toFixed(1)} m, above the ${Z.hOutright} m ${A.userH?'you set':'this zone allows outright'} (${A.userH?'your limits':`zone ${Z.zone}${Z.assumed?', as if rezoned':''}; register ${Z.srcId}`}). The tool uses ${maxSt} storeys (${H.toFixed(1)} m), the most that height holds.${Z.hx&&!A.userH?` Taller needs the City's approval: choose "With approval" (up to ${Z.hx[1]} m).`:A.userH?'':' Taller needs a rezoning: set your own limits.'}`}; }
+    m.H=H; m.hmode=hn; m.nF=stU?[stU,stU]:nF(H);
     // setbacks
     const y=Z.yards||{front:0,side:0,rear:0}; const fl=A.flip?-1:1;
     let u0=-F.L/2+(fl>0?y.front:y.rear), u1=F.L/2-(fl>0?y.rear:y.front), v0=-F.W/2+y.side, v1=F.W/2-y.side;
+    m.yardRect=Z.yards?rectW(F,u0,u1,v0,v1):null; /* 2 Nov 2026: the line of the required yards, before the 61 m width cap (the fence stands on it) */
     if(y.max){ if(u1-u0>y.max){ const c=(u0+u1)/2; u0=c-y.max/2; u1=c+y.max/2; } if(v1-v0>y.max){ const c=(v0+v1)/2; v0=c-y.max/2; v1=c+y.max/2; } }
     m.inset=rectW(F,u0,u1,v0,v1); m.yardNote=Z.yardsKnown?'':'Yards and setbacks for this zone are not yet read, so the building may cover the whole lot.';
     // loading: rear end of the buildable area (the end with the rear yard; which end faces the street is not known in the tool)
@@ -161,6 +175,12 @@ function model(){
   if(m.foot&&!m.footArea) m.footArea=BD.area(m.foot);
   if(m.foot&&!m.existing&&m.footArea<20) m.warn.push('After setbacks, loading and plant there is almost no room left for a building on this lot.');
   if(BD.plant&&BD.plant.roof) BD.plant.roof(m);
+  /* 2 Nov 2026 hard rules (site audit 4): fuel on site against NFC 2020 Table 4.3.13.4.-B (register nfc2020_4313). Generator sets on the roof keep
+     their sub-base tanks above the first storey: at most 20,000 L in one storage area there (tanks over 2,500 L each). The table is written for tanks
+     inside buildings; rooftop outdoor tanks are not covered by the text read, so the tool applies the upper-storey limit to them (our reading ?).
+     Sets in the yard stand outdoors at grade: the table does not apply (outdoor tanks follow NFC 4.3.2, not tested here). */
+  if(BD.eng&&m.plant&&m.plant.s&&m.plant.s.g&&(A.genAt||'yard')==='roof'&&A.gens!=='none'){ const R=BD.eng.R, Lf=m.mwSized*R.pue[1]*1000*R.fuelHours*R.fuelLkWh, lim=R.fuelLimit.low;
+    m.fuel={L:Lf,lim,at:'roof'}; if(Lf>lim+0.5){ const mwMax=Math.floor(lim/(R.pue[1]*1000*R.fuelHours*R.fuelLkWh)*10)/10; m.warn.push(`Generators on the roof: ${R.fuelHours} h of fuel for ${m.mwSized} MW is about ${fmt(Math.round(Lf/100)*100)} L above the first storey; the fire code allows 20,000 L in one storage area there (NFC 2020 Table 4.3.13.4.-B; register nfc2020_4313; applying it to rooftop tanks is our reading ?). Put the generators in the yard, or test ${mwMax.toFixed(1)} MW or less.`); } }
   cache={key,m}; return m; }
 BD.siteGeo={rectW,inscribe,clip,frameOf}; BD.model=model; BD.modelReset=()=>{ cache.key=null; };
 /* a set-up that does not work (J.B. 20 Oct: "a set up that doesnt work shouldnt ever let you click next"): everything that stops it, in words */
@@ -174,6 +194,8 @@ function setupProblems(noFloor){ const m=model(); if(!m||!m.F) return []; const 
 function fitMax(){ const A=BD.S.answers, keep=A.mw; A.mw=null; cache.key=null; let hi=0; try{ hi=BD.eng.siteFacts().mw[1]; }catch(e){}
   const ok=mw=>{ A.mw=mw; cache.key=null; return !setupProblems(true).length; };
   let lo=0, best=null, top=Math.floor((hi||0)*10);
+  /* 2 Nov 2026 hard rules: with generators on the roof no size above the fuel limit passes (model(), NFC Table 4.3.13.4.-B), so the search starts there */
+  if(BD.eng&&A.gens!=='none'&&(A.genAt||'yard')==='roof'){ const R=BD.eng.R; top=Math.min(top,Math.floor(R.fuelLimit.low/(R.pue[1]*1000*R.fuelHours*R.fuelLkWh)*10)); }
   if(top>=1&&ok(top/10)) best=top/10; else { let a=1, b=top-1; while(a<=b){ const mid=(a+b)>>1; if(ok(mid/10)){ best=mid/10; a=mid+1; } else b=mid-1; } }
   A.mw=keep; cache.key=null; return best; }
 BD.setupProblems=setupProblems; BD.fitMax=fitMax;
@@ -233,7 +255,7 @@ function card(step){
     else {
       h+=`<p class="sub">${draft('Data-hall floors are tall: 5.5–6.0 m floor to floor, with a 6.0 m ground floor.')}</p>
       ${ch('hmode',[{v:'out',t:`Outright: ${Z.hOutright} m`,def:true,s:'what the zone allows without the City\'s discretion'}].concat(Z.hx&&!A.userH?[{v:'cond',t:`With the City's approval: ${Z.hx[0]===Z.hx[1]?Z.hx[0]:Z.hx[0]+'–'+Z.hx[1]} m`,s:'the City may allow this; the tool uses '+Z.hx[0]+' m'}]:[]).concat([{v:'storeys',t:'Set the storeys',s:'height follows from 6.0 m + 6.0 m a storey'}]),A.hmode)}
-      ${A.hmode==='storeys'?`<div class="numin"><label>Storeys <input type="number" id="sto" min="1" max="12" value="${A.storeys||2}"></label></div>`:''}
+      ${A.hmode==='storeys'?`<div class="numin"><label>Storeys <input type="number" id="sto" min="1" max="${m.maxStoreys||12}" value="${A.storeys||2}"></label></div>${m.hClamp?`<div class="warnbox">${esc(m.hClamp.text)}</div>`:''}`:''}
       <p class="sub">Gives about ${m.nF[0]===m.nF[1]?m.nF[0]:m.nF[0]+'–'+m.nF[1]} storeys in ${m.H.toFixed(1)} m.</p>
       <h3>The zone's limits</h3>${Z.warn?`<div class="warnbox">${Z.warn}</div>`:''}${clauses(Z)}
       <h3>Your own limits</h3><p class="sub">If you know this lot's limits differ (a rezoning, a CD-1, a variance), set them here. They replace the zone's figures above.</p>

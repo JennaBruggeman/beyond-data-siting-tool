@@ -11,7 +11,7 @@
    "group": "care",
    "kind": "mass",
    "size": {
-    "typical_m2": 175,
+    "typical_m2": 265,
     "min_m2": null,
     "max_m2": null,
     "step": {
@@ -24,9 +24,69 @@
     "floor_height_m": null,
     "src": [
      "arch_ahsReceptionCentres",
-     "arch_edmExtremeWeather"
+     "arch_edmExtremeWeather",
+     "arch_sup_eastglenRooms",
+     "arch_hcCleanerAirSpaces",
+     "arch_edmEastglen2017",
+     "arch_sup_nbcWashrooms"
     ],
-    "note": "our arithmetic: 50 spaces (Edmonton cold site) × 3.5 m²/person (AHS); up to 9 m² for wheelchair users"
+    "note": "our arithmetic: 50 people × 3.5 m² + office + first aid × 1.3–1.5 ≈246–284 m² (washrooms inside factor; research total 264–304 added them too); storage, vestibule ?; earlier: 175 m² (main room only)",
+    "parts": [
+     {
+      "part": "main room (50 people)",
+      "m2": [
+       175,
+       175
+      ],
+      "basis": "3.5 m² per person (AHS); wheelchair users up to 9 m², share ?",
+      "src": [
+       "arch_ahsReceptionCentres",
+       "arch_edmExtremeWeather"
+      ]
+     },
+     {
+      "part": "staff office",
+      "m2": [
+       8,
+       8
+      ],
+      "basis": "Eastglen foreman office (analogy)",
+      "src": [
+       "arch_sup_eastglenRooms"
+      ]
+     },
+     {
+      "part": "first aid",
+      "m2": [
+       6,
+       6
+      ],
+      "basis": "Eastglen, gurney access (analogy)",
+      "src": [
+       "arch_sup_eastglenRooms"
+      ]
+     },
+     {
+      "part": "entry vestibule, cot and supply storage, filtration plant, emergency power",
+      "m2": null,
+      "basis": "? vestibule, MERV 13 / CADR and emergency power required, no m²",
+      "src": [
+       "arch_hcCleanerAirSpaces"
+      ]
+     },
+     {
+      "part": "circulation, walls, washrooms, mech/elec",
+      "m2": [
+       56.7,
+       94.5
+      ],
+      "basis": "Eastglen 1.3–1.5 includes washrooms (1 M + 1 F + universal, NBC Table A): not added again (our arithmetic)",
+      "src": [
+       "arch_edmEastglen2017",
+       "arch_sup_nbcWashrooms"
+      ]
+     }
+    ]
    },
    "occ": {
     "group": "A-2",
@@ -198,8 +258,8 @@
    "group": "wet",
    "kind": "mass",
    "size": {
-    "typical_m2": 2131,
-    "min_m2": 949,
+    "typical_m2": 1065,
+    "min_m2": 815,
     "max_m2": null,
     "step": {
      "unit": "lane",
@@ -212,9 +272,129 @@
     "src": [
      "arch_edmEastglen2017",
      "arch_sportEngPoolsDGN",
-     "arch_sportEngPoolsApp1"
+     "arch_sportEngPoolsApp1",
+     "arch_sup_nbcAE7Pools",
+     "arch_sup_bcPoolDesign5",
+     "arch_sup_eastglenRooms",
+     "arch_sup_nbcUniversal"
     ],
-    "note": "typ. Eastglen 2,131 m² gross, 6 lanes; min/step our arithmetic: water + deck 1.1 + change 1.0 + plant 1/3, × 1.3 gross; 3.5 m = min clear (UK); step model gives 1,395 m² for 6 lanes vs 2,131 m² typical (Eastglen): mismatch, typical kept as sourced"
+    "note": "our arithmetic: 4-lane 25 m pool-only, Eastglen rooms × 1.3–1.5 (plant inside factor) ≈987–1,139 m²; lean (AB code deck, BC dressing guideline) ≈817 m², Vancouver only; Alberta lean (dressing 0.5 m² rule) ≈851; 6-lane pool-only ≈1,386–1,599; step unchanged; earlier: 2,131 m² (Eastglen whole leisure centre, 6 lanes, ≈600 m² fitness/leisure) and min 949",
+    "parts": [
+     {
+      "part": "pool tank (4 lanes, 25 × 8.5 m)",
+      "m2": [
+       212.5,
+       212.5
+      ],
+      "basis": "Sport England DGN p. 10 (UK benchmark)",
+      "src": [
+       "arch_sportEngPoolsDGN"
+      ]
+     },
+     {
+      "part": "pool deck",
+      "m2": [
+       134,
+       239
+      ],
+      "basis": "NBC(AE) 7.2.3.15 ≥1.8 m all round (134) to Eastglen deck:tank 1.12 (239) (our arithmetic)",
+      "src": [
+       "arch_sup_nbcAE7Pools",
+       "arch_edmEastglen2017"
+      ]
+     },
+     {
+      "part": "dressing rooms",
+      "m2": [
+       45,
+       71
+      ],
+      "basis": "142 bathers × 0.32 m² (BC guideline, Vancouver only) to 0.5 m² (NBC(AE) 7.2.4.3, a rule in Alberta) (our arithmetic)",
+      "src": [
+       "arch_sup_bcPoolDesign5",
+       "arch_sup_nbcAE7Pools"
+      ]
+     },
+     {
+      "part": "shower and WC rooms",
+      "m2": [
+       56,
+       56
+      ],
+      "basis": "Eastglen 28 m² per sex (3 showers, 3–4 WCs); NBC(AE) ≥3 showers per room",
+      "src": [
+       "arch_sup_eastglenRooms",
+       "arch_sup_nbcAE7Pools"
+      ]
+     },
+     {
+      "part": "universal dressing and shower room",
+      "m2": [
+       6,
+       6
+      ],
+      "basis": "required (NBC 3.8.2.8.(13)); Eastglen 6 m²",
+      "src": [
+       "arch_sup_nbcUniversal",
+       "arch_sup_eastglenRooms"
+      ]
+     },
+     {
+      "part": "front desk, first aid, offices, staff rooms",
+      "m2": [
+       92,
+       92
+      ],
+      "basis": "Eastglen: desk + cash 19, first aid 6, lifeguard + foreman 28, staff break + change 39",
+      "src": [
+       "arch_sup_eastglenRooms"
+      ]
+     },
+     {
+      "part": "storage (pool, admin, chemicals)",
+      "m2": [
+       67,
+       67
+      ],
+      "basis": "Eastglen: pool 44, admin 20, chemical 3 (chemical room required, NBC(AE) 7.2.3.39)",
+      "src": [
+       "arch_sup_eastglenRooms",
+       "arch_sup_nbcAE7Pools"
+      ]
+     },
+     {
+      "part": "laundry and custodial",
+      "m2": [
+       16,
+       16
+      ],
+      "basis": "Eastglen: laundry 6, custodial 10",
+      "src": [
+       "arch_sup_eastglenRooms"
+      ]
+     },
+     {
+      "part": "electrical, garbage, non-bather washrooms",
+      "m2": null,
+      "basis": "? electrical \"per code\"; garbage none in Eastglen; non-bather WCs required (7.2.4.10), inside grossing",
+      "src": [
+       "arch_sup_eastglenRooms",
+       "arch_sup_nbcAE7Pools"
+      ]
+     },
+     {
+      "part": "circulation, walls, building mech and pool plant",
+      "m2": [
+       188.6,
+       379.8
+      ],
+      "basis": "Eastglen grossing 1.3–1.5 includes pool plant (⅓–½ water area, p. 22), mech 5 %, circulation ≈15 % (our arithmetic); at 1.3 the sourced allowances (plant 71–106 + mech 5 % + circulation 15 %) already reach ≈31–37 % of net before walls (our arithmetic): low end may be short",
+      "src": [
+       "arch_edmEastglen2017",
+       "arch_sup_eastglenRooms"
+      ]
+     }
+    ]
    },
    "occ": {
     "group": "A-3",
@@ -376,9 +556,47 @@
     "storeys_typ": null,
     "floor_height_m": null,
     "src": [
-     "van3575s2"
+     "van3575s2",
+     "arch_sup_nbcA3121Laundry",
+     "arch_sup_nbcT31171",
+     "arch_sup_nbc372",
+     "arch_sup_nbcUniversal",
+     "arch_r2_vaLaundry2022"
     ],
-    "note": "max 300 m²: Van Laundromat definition, self-service option in Vancouver only; commercial: no max (?); no Canadian floor-area or throughput source (?)"
+    "note": "no sourced typical size (?): max 300 m² = Van Laundromat whole premises; parts unsized; community laundry 1 machine set per 10 units (Van HDTG), room m² ?; earlier: null (same)",
+    "parts": [
+     {
+      "part": "machine floor",
+      "m2": null,
+      "basis": "? no primary source for m² per washer or dryer",
+      "src": []
+     },
+     {
+      "part": "washrooms",
+      "m2": null,
+      "basis": "Group D (self-service): 300 m² → 65 people (4.60 m²/p) → 2 WCs per sex + universal (our arithmetic); size ?",
+      "src": [
+       "arch_sup_nbcA3121Laundry",
+       "arch_sup_nbcT31171",
+       "arch_sup_nbc372",
+       "arch_sup_nbcUniversal"
+      ]
+     },
+     {
+      "part": "staff, storage, electrical, mechanical, garbage",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     },
+     {
+      "part": "circulation and walls",
+      "m2": null,
+      "basis": "? no laundromat factor; US hospital laundry 1.15 dept / 1.35 building (benchmark)",
+      "src": [
+       "arch_r2_vaLaundry2022"
+      ]
+     }
+    ]
    },
    "occ": {
     "group": "D",
@@ -516,18 +734,159 @@
    "group": "wet",
    "kind": "mass",
    "size": {
-    "typical_m2": 870,
+    "typical_m2": 320,
     "min_m2": null,
     "max_m2": null,
     "step": null,
-    "storeys_typ": 3,
+    "storeys_typ": null,
     "floor_height_m": null,
     "src": [
      "arch_wet_vanCD1Ogden",
      "arch_wet_vanRTS16473",
-     "arch_wet_bcPoolDesignHT"
+     "arch_wet_bcPoolDesignHT",
+     "arch_sup_eastglenRooms",
+     "arch_wet_nbcAE726",
+     "arch_sup_nbcAE7Pools",
+     "arch_sup_nbcUniversal",
+     "arch_edmEastglen2017"
     ],
-    "note": "Vancouver barge example 870 m² on 3 levels; hot tub bench 0.6 m per person; sauna ≤3.6 m high"
+    "note": "our arithmetic: small working spa from code rules + Eastglen proxies × 1.3–1.5 (plant inside) ≈297–346 m², plus sauna and rest area ?; low confidence; earlier: 870 m² (Ogden barge, 3-level destination spa, no breakdown); storeys: the 3 levels were the barge example, not the small working version (drawn on one storey)",
+    "parts": [
+     {
+      "part": "hot pool",
+      "m2": [
+       40,
+       40
+      ],
+      "basis": "Eastglen hot pool incl. ramp (proxy)",
+      "src": [
+       "arch_sup_eastglenRooms"
+      ]
+     },
+     {
+      "part": "hot-pool deck",
+      "m2": [
+       33,
+       35
+      ],
+      "basis": "NBC(AE) 7.2.6.2 whirlpool deck (jetted only), 5 × 8 m pool, shape assumed (our arithmetic)",
+      "src": [
+       "arch_wet_nbcAE726"
+      ]
+     },
+     {
+      "part": "steam room",
+      "m2": [
+       18,
+       18
+      ],
+      "basis": "Eastglen, max 12 people (proxy)",
+      "src": [
+       "arch_sup_eastglenRooms"
+      ]
+     },
+     {
+      "part": "cold plunge",
+      "m2": [
+       1.6,
+       1.6
+      ],
+      "basis": "tub ≈1.8 × 0.9 m (Van operator survey; our arithmetic)",
+      "src": [
+       "arch_wet_vanRTS16473"
+      ]
+     },
+     {
+      "part": "sauna",
+      "m2": null,
+      "basis": "? only max height 3.6 m; NBC(AE) 7.2.9 gives no size",
+      "src": [
+       "arch_wet_vanRTS16473",
+       "arch_sup_nbcAE7Pools"
+      ]
+     },
+     {
+      "part": "rest / relaxation area",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     },
+     {
+      "part": "dressing rooms",
+      "m2": [
+       20,
+       20
+      ],
+      "basis": "40 bathers (1 per 1.0 m², 7.2.4.1.(1)(b)) × 0.5 m² (our arithmetic)",
+      "src": [
+       "arch_sup_nbcAE7Pools"
+      ]
+     },
+     {
+      "part": "shower and WC rooms",
+      "m2": [
+       56,
+       56
+      ],
+      "basis": "Eastglen 28 m² per sex (proxy, sized for a bigger pool); ≥3 showers per room (7.2.4.7)",
+      "src": [
+       "arch_sup_eastglenRooms",
+       "arch_sup_nbcAE7Pools"
+      ]
+     },
+     {
+      "part": "universal dressing and shower room",
+      "m2": [
+       6,
+       6
+      ],
+      "basis": "required (3.8.2.8.(13)); Eastglen 6 m²",
+      "src": [
+       "arch_sup_nbcUniversal",
+       "arch_sup_eastglenRooms"
+      ]
+     },
+     {
+      "part": "reception, staff change",
+      "m2": [
+       35,
+       35
+      ],
+      "basis": "Eastglen desk 15 + staff change 20 (proxy)",
+      "src": [
+       "arch_sup_eastglenRooms"
+      ]
+     },
+     {
+      "part": "chemicals, towel laundry, custodial",
+      "m2": [
+       19,
+       19
+      ],
+      "basis": "Eastglen 3 + 6 + 10 (proxy); chemical room required (7.2.3.39)",
+      "src": [
+       "arch_sup_eastglenRooms",
+       "arch_sup_nbcAE7Pools"
+      ]
+     },
+     {
+      "part": "office, storage, garbage",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     },
+     {
+      "part": "circulation, walls, mech and pool plant",
+      "m2": [
+       68.6,
+       115.3
+      ],
+      "basis": "Eastglen grossing 1.3–1.5 includes pool plant (⅓–½ water = 13–20 m², not added again) (our arithmetic)",
+      "src": [
+       "arch_edmEastglen2017"
+      ]
+     }
+    ]
    },
    "occ": {
     "group": "A-3",
@@ -655,16 +1014,123 @@
    "group": "wet",
    "kind": "mass",
    "size": {
-    "typical_m2": 134,
-    "min_m2": 90,
+    "typical_m2": 140,
+    "min_m2": 130,
     "max_m2": null,
     "step": null,
     "storeys_typ": null,
     "floor_height_m": 4.5,
     "src": [
-     "arch_wet_atacp2019"
+     "arch_wet_atacp2019",
+     "arch_sup_atacpSupport",
+     "arch_sup_nbcAE7Pools",
+     "arch_sup_nbcUniversal",
+     "arch_sup_eastglenRooms",
+     "arch_edmEastglen2017",
+     "arch_sup_nbc372"
     ],
-    "note": "our arithmetic (ATACP, UK benchmark): water 46.75 / 24 m² (24 = smallest example, 12 bathers, not a stated minimum) + concourse 2 m two sides, 1.5 m others + plant 30 % water + Changing Places 12 m² (ATACP s. 2.11, not in register text ?)"
+    "note": "our arithmetic: 24 m² ATACP pool + concourse, changing, Changing Places, accessible shower × 1.3–1.5 (plant inside) ≈130–150 m²; 46.75 m² pool ≈188–217; office, rest, storage and AB bather showers (≥3 per dressing room) ?; earlier: 134 m² (water + concourse + plant + Changing Places, no grossing), min 90",
+    "parts": [
+     {
+      "part": "pool tank (4 × 6 m)",
+      "m2": [
+       24,
+       24
+      ],
+      "basis": "ATACP s. 2.6: 12 bathers at 2 m², smallest example (UK benchmark)",
+      "src": [
+       "arch_wet_atacp2019"
+      ]
+     },
+     {
+      "part": "concourse",
+      "m2": [
+       47.2,
+       47.2
+      ],
+      "basis": "ATACP: 2 m on 2 sides, 1.5 m on others (our arithmetic); AB deck rule 7.2.3.15 applies via 7.2.6.1",
+      "src": [
+       "arch_sup_atacpSupport",
+       "arch_sup_nbcAE7Pools"
+      ]
+     },
+     {
+      "part": "changing",
+      "m2": [
+       8,
+       8
+      ],
+      "basis": "16 bathers (1 per 1.5 m²) × 0.5 m², NBC(AE) 7.2.4.1, 7.2.4.3 (our arithmetic)",
+      "src": [
+       "arch_sup_nbcAE7Pools",
+       "arch_sup_atacpSupport"
+      ]
+     },
+     {
+      "part": "Changing Places room",
+      "m2": [
+       12,
+       12
+      ],
+      "basis": "ATACP s. 2.11: 3 × 4 m with hoist into pool",
+      "src": [
+       "arch_sup_atacpSupport"
+      ]
+     },
+     {
+      "part": "accessible shower and WC",
+      "m2": [
+       6,
+       6
+      ],
+      "basis": "ATACP s. 2.12: 2.4 × 2.5 m; universal room required (NBC 3.8.2.8)",
+      "src": [
+       "arch_sup_atacpSupport",
+       "arch_sup_nbcUniversal"
+      ]
+     },
+     {
+      "part": "chemical store",
+      "m2": [
+       3,
+       3
+      ],
+      "basis": "required, bunded (ATACP s. 2.16); Eastglen 3 m² as proxy",
+      "src": [
+       "arch_sup_atacpSupport",
+       "arch_sup_eastglenRooms"
+      ]
+     },
+     {
+      "part": "bather showers and WCs",
+      "m2": null,
+      "basis": "? Section 7.2 applies (7.2.6.1): ≥3 showers per dressing room (NBC(AE) 7.2.4.7.(2)); WCs from bathing load, 16 → 8 per sex → 1 M + 1 F (Table 3.7.2.2.-A, 7.2.4.8) (our arithmetic); m² ?",
+      "src": [
+       "arch_sup_nbcAE7Pools",
+       "arch_sup_nbc372"
+      ]
+     },
+     {
+      "part": "staff office, staff change, rest area, reception, storage",
+      "m2": null,
+      "basis": "? named by ATACP ss. 2.13–2.15, no size",
+      "src": [
+       "arch_sup_atacpSupport"
+      ]
+     },
+     {
+      "part": "circulation, walls, mech and pool plant",
+      "m2": [
+       30.1,
+       50.1
+      ],
+      "basis": "Eastglen grossing 1.3–1.5 includes pool plant (ATACP 15–30 % of water = 3.6–7.2 m², not added again) (our arithmetic)",
+      "src": [
+       "arch_edmEastglen2017",
+       "arch_wet_atacp2019"
+      ]
+     }
+    ]
    },
    "occ": {
     "group": "A-3",
@@ -808,9 +1274,57 @@
     "storeys_typ": null,
     "floor_height_m": null,
     "src": [
-     "arch_wet_thyer2018"
+     "arch_wet_thyer2018",
+     "arch_sup_nbcT31171",
+     "arch_sup_nbc372"
     ],
-    "note": "Reef HQ (Australia, benchmark): ~5,400 m² building, 4 ML seawater"
+    "note": "Reef HQ ~5,400 m² usable (Australian large benchmark); no small version or support split sourced (?); Edm BE caps the use at 500 m²; earlier: 5,400 m² (same)",
+    "parts": [
+     {
+      "part": "main tanks",
+      "m2": [
+       775,
+       775
+      ],
+      "basis": "Reef HQ: area under the two main tanks ≈14 % of building (Australian benchmark)",
+      "src": [
+       "arch_wet_thyer2018"
+      ]
+     },
+     {
+      "part": "galleries and visitor areas",
+      "m2": null,
+      "basis": "? occupant load by design count (3.1.17.1.(1)(c)); WCs Table A once set",
+      "src": [
+       "arch_sup_nbcT31171",
+       "arch_sup_nbc372"
+      ]
+     },
+     {
+      "part": "life support (filtration, pumps)",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     },
+     {
+      "part": "quarantine, husbandry, food prep",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     },
+     {
+      "part": "office, storage",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     },
+     {
+      "part": "circulation and walls",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     }
+    ]
    },
    "occ": {
     "group": "A-2",
@@ -933,7 +1447,7 @@
    "group": "grow",
    "kind": "mass",
    "size": {
-    "typical_m2": 1000,
+    "typical_m2": 685,
     "min_m2": null,
     "max_m2": null,
     "step": {
@@ -947,9 +1461,72 @@
     "src": [
      "arch_fish_savidov2015",
      "arch_fish_bergman2020",
-     "arch_fish_faoBarra"
+     "arch_fish_faoBarra",
+     "arch_sup_faoRasGuide2022",
+     "arch_sup_lsuGhTilapia1998",
+     "arch_per_nbcWC",
+     "arch_sup_abGFNArooms"
     ],
-    "note": "AB tilapia model 36 t/yr on 1,000 m²; ≈28 m² per t/yr (our arithmetic); Sweden 33 m²·a per t"
+    "note": "our arithmetic: 36 t/yr tilapia at 10–28 m² per t/yr (FAO, LSU, AB) + universal WC ≈365–1,005 m²; filtration, feed, purge, grossing ?; step 28 m²/t unchanged (AB top end); earlier: 1,000 m² (AB model, top of range)",
+    "parts": [
+     {
+      "part": "production hall (tanks and aisles)",
+      "m2": [
+       360,
+       1000
+      ],
+      "basis": "36 t/yr × 10 m² per t (FAO; per t/yr our reading) to AB model 1,000 m²; LSU ≈442 (our arithmetic)",
+      "src": [
+       "arch_sup_faoRasGuide2022",
+       "arch_sup_lsuGhTilapia1998",
+       "arch_fish_savidov2015"
+      ]
+     },
+     {
+      "part": "filtration",
+      "m2": null,
+      "basis": "? bead filters named, no m²",
+      "src": [
+       "arch_sup_lsuGhTilapia1998"
+      ]
+     },
+     {
+      "part": "feed storage",
+      "m2": null,
+      "basis": "? \"adjoining storage area\", no m²",
+      "src": [
+       "arch_sup_lsuGhTilapia1998"
+      ]
+     },
+     {
+      "part": "office and washroom",
+      "m2": [
+       4.6,
+       4.6
+      ],
+      "basis": "staff ≤10 → 1 WC (3.7.2.2.(2)); universal 4.6 m² (AB healthcare guide, by analogy); office ?",
+      "src": [
+       "arch_per_nbcWC",
+       "arch_sup_abGFNArooms",
+       "arch_sup_lsuGhTilapia1998"
+      ]
+     },
+     {
+      "part": "purge, harvest, packing",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     },
+     {
+      "part": "circulation, walls, mech/elec",
+      "m2": null,
+      "basis": "? no grossing factor sourced (FAO 10 m²/t is a footprint, AB 1,000 m² is production area)",
+      "src": [
+       "arch_sup_faoRasGuide2022",
+       "arch_fish_savidov2015"
+      ]
+     }
+    ]
    },
    "occ": {
     "group": "F-2",
@@ -1088,7 +1665,7 @@
    "group": "grow",
    "kind": "mass",
    "size": {
-    "typical_m2": 153,
+    "typical_m2": 190,
     "min_m2": null,
     "max_m2": null,
     "step": null,
@@ -1096,9 +1673,74 @@
     "floor_height_m": null,
     "src": [
      "arch_etsBaieComeau",
-     "arch_abGhProfile2014"
+     "arch_abGhProfile2014",
+     "arch_sup_purdueHO346",
+     "arch_sup_bartokRMRS2002",
+     "arch_per_nbcWC",
+     "arch_sup_abGFNArooms",
+     "arch_sup_abGhVeg2018",
+     "neuETS"
     ],
-    "note": "153 m² = only data-centre-heat precedent (Baie-Comeau); AB mean ≈5,955 m² (our arithmetic; skewed)"
+    "note": "our arithmetic: 153 m² house + 10 % headhouse + WC × 1.047 ≈181 m², ≈199 with an 18 m² heat-transfer room; staff count ?; earlier: 153 m² (growing house only)",
+    "parts": [
+     {
+      "part": "growing house",
+      "m2": [
+       153,
+       153
+      ],
+      "basis": "Baie-Comeau data-centre-heat greenhouse",
+      "src": [
+       "arch_etsBaieComeau"
+      ]
+     },
+     {
+      "part": "headhouse (work, storage, office, staff)",
+      "m2": [
+       15.3,
+       15.3
+      ],
+      "basis": "≥10 % of greenhouse area (Purdue HO-346, US benchmark) (our arithmetic)",
+      "src": [
+       "arch_sup_purdueHO346",
+       "arch_sup_bartokRMRS2002"
+      ]
+     },
+     {
+      "part": "washroom",
+      "m2": [
+       4.6,
+       4.6
+      ],
+      "basis": "staff ≤10 → 1 WC both sexes; universal required (BCBC 3.8.2.8.(4)); 4.6 m² (AB healthcare, by analogy)",
+      "src": [
+       "arch_per_nbcWC",
+       "arch_sup_abGFNArooms"
+      ]
+     },
+     {
+      "part": "circulation and walls",
+      "m2": [
+       8.1,
+       8.1
+      ],
+      "basis": "AB building ÷ production area ≈1.047 (large tomato houses, benchmark) (our arithmetic)",
+      "src": [
+       "arch_sup_abGhVeg2018"
+      ]
+     },
+     {
+      "part": "heat-transfer room",
+      "m2": [
+       0,
+       18
+      ],
+      "basis": "only if fed like a NEU building: 6 × 3 m (by analogy)",
+      "src": [
+       "neuETS"
+      ]
+     }
+    ]
    },
    "occ": {
     "group": "?",
@@ -1263,7 +1905,7 @@
    "group": "grow",
    "kind": "mass",
    "size": {
-    "typical_m2": 1400,
+    "typical_m2": 490,
     "min_m2": null,
     "max_m2": null,
     "step": null,
@@ -1271,9 +1913,77 @@
     "floor_height_m": 18,
     "src": [
      "arch_pg_vanVDBStrategy2021",
-     "arch_pg_edmMuttartPyr"
+     "arch_pg_edmMuttartPyr",
+     "arch_pg_edmMuttartGH",
+     "arch_pg_williamsMuttart",
+     "arch_edmEastglen2017",
+     "arch_sup_nbcA3722",
+     "arch_sup_abGFNArooms",
+     "arch_per_nbcWC"
     ],
-    "note": "Bloedel 0.14 ha dome ≈1,400 m² (our arithmetic); 18 m = apex of Muttart arid pyramid (≈390 m², smaller example), not Bloedel"
+    "note": "our arithmetic: one ≈390 m² biome + (production glass + universal WC) × 1.3–1.5 ≈481–495 m² (research total; the factor is applied to support only, so the biome's washroom is not inside it); visitor WCs beyond one universal ?; Bloedel-size ≈1,711–1,759; Edm BE cap 500 m²; entry, shop, offices ?; earlier: 1,400 m² (Bloedel dome alone)",
+    "parts": [
+     {
+      "part": "display biome",
+      "m2": [
+       390,
+       390
+      ],
+      "basis": "Muttart arid pyramid 4,200 sq ft (smallest Canadian biome)",
+      "src": [
+       "arch_pg_edmMuttartPyr"
+      ]
+     },
+     {
+      "part": "production greenhouse",
+      "m2": [
+       65.5,
+       65.5
+      ],
+      "basis": "Muttart production house ≈17 % of display area (our arithmetic)",
+      "src": [
+       "arch_pg_edmMuttartGH",
+       "arch_pg_williamsMuttart"
+      ]
+     },
+     {
+      "part": "entry, shop, office, plant rooms, storage",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     },
+     {
+      "part": "universal washroom",
+      "m2": [
+       4.6,
+       4.6
+      ],
+      "basis": "required where WCs are required (BCBC 3.8.2.8.(4); NBC 3.8.2.8.(1)); 4.6 m² (AB healthcare guide, by analogy)",
+      "src": [
+       "arch_per_nbcWC",
+       "arch_sup_abGFNArooms"
+      ]
+     },
+     {
+      "part": "visitor washrooms (A-2)",
+      "m2": null,
+      "basis": "? Table 3.7.2.2.-A by designed occupant load (3.1.17.1.(1)(c)), number of persons ?",
+      "src": [
+       "arch_sup_nbcA3722"
+      ]
+     },
+     {
+      "part": "circulation, walls (support only)",
+      "m2": [
+       21.0,
+       35.1
+      ],
+      "basis": "Eastglen 1.3–1.5 on support only (production glass + universal WC = 70.1 m²), by analogy (our arithmetic)",
+      "src": [
+       "arch_edmEastglen2017"
+      ]
+     }
+    ]
    },
    "occ": {
     "group": "A-2",
@@ -1422,8 +2132,48 @@
     "step": null,
     "storeys_typ": null,
     "floor_height_m": null,
-    "src": [],
-    "note": "no floor area per throughput found (?)"
+    "src": [
+     "arch_per_nbcWC",
+     "arch_sup_abGFNArooms",
+     "arch_hsg_ihFoodPlans2026",
+     "arch_r2_vaLaundry2022"
+    ],
+    "note": "no floor area per throughput found (?); only washroom and food-premises rules sourced; earlier: null (same)",
+    "parts": [
+     {
+      "part": "dryer room",
+      "m2": null,
+      "basis": "? no m² per throughput found",
+      "src": []
+     },
+     {
+      "part": "storage, packing, office, mechanical",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     },
+     {
+      "part": "washroom",
+      "m2": [
+       4.6,
+       4.6
+      ],
+      "basis": "F-2/F-3 by staff (Table 3.7.2.2.-C); universal 4.6 m² (by analogy); may not open into food rooms",
+      "src": [
+       "arch_per_nbcWC",
+       "arch_sup_abGFNArooms",
+       "arch_hsg_ihFoodPlans2026"
+      ]
+     },
+     {
+      "part": "circulation and walls",
+      "m2": null,
+      "basis": "? (US industrial-type 1.15 dept / 1.35 building, by analogy; no net to apply it to)",
+      "src": [
+       "arch_r2_vaLaundry2022"
+      ]
+     }
+    ]
    },
    "occ": {
     "group": "F-2",
@@ -1565,9 +2315,49 @@
     "floor_height_m": null,
     "src": [
      "arch_pg_ukyKiln",
-     "arch_pg_fplDH2008"
+     "arch_pg_fplDH2008",
+     "arch_sup_osuDHkiln2007",
+     "arch_sup_vtSolarKiln2020",
+     "arch_per_nbcWC",
+     "arch_sup_abGFNArooms"
     ],
-    "note": "kilns sized in board feet: DH 4,000–20,000 bf; smallest documented 600 bf; m² per bf ?"
+    "note": "kilns sized in board feet (DH 4,000–20,000 bf; smallest 600 bf); m² per bf ?; earlier: null (same)",
+    "parts": [
+     {
+      "part": "kiln chamber",
+      "m2": null,
+      "basis": "? smallest kilns 600 bf (DH) / 750–1,000 bf (solar); stack clearance 12 in front, 30 in rear; no chamber m²",
+      "src": [
+       "arch_sup_osuDHkiln2007",
+       "arch_sup_vtSolarKiln2020",
+       "arch_pg_fplDH2008"
+      ]
+     },
+     {
+      "part": "lumber yard and forklift aisle",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     },
+     {
+      "part": "washroom",
+      "m2": [
+       4.6,
+       4.6
+      ],
+      "basis": "F-2 by staff; universal 4.6 m² (by analogy)",
+      "src": [
+       "arch_per_nbcWC",
+       "arch_sup_abGFNArooms"
+      ]
+     },
+     {
+      "part": "circulation and walls",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     }
+    ]
    },
    "occ": {
     "group": "F-2",
@@ -1705,9 +2495,71 @@
     "floor_height_m": 6.0,
     "src": [
      "arch_vplFmpSpace2018",
-     "van_zdb_i3"
+     "van_zdb_i3",
+     "arch_sup_aruplo2017",
+     "arch_sup_nbcT3722A",
+     "arch_pub_nbc31171"
     ],
-    "note": "VPL small branch ~10,000 sq ft ≈930 m² (our arithmetic); first floor ≥6.0 m: Van I-3 (A) only"
+    "note": "library branch: ARUPLO sample 466–928 m² gross (×1.25 includes washrooms, mech); 930 m² = VPL small branch, at the top of that range; option: community room; earlier: 930 m² (same)",
+    "parts": [
+     {
+      "part": "collections, seating, study, maker space",
+      "m2": [
+       268.0,
+       563.9
+      ],
+      "basis": "ARUPLO medium sample branch, lower to max column (Ontario guideline)",
+      "src": [
+       "arch_sup_aruplo2017"
+      ]
+     },
+     {
+      "part": "program room (30 users)",
+      "m2": [
+       41.8,
+       69.7
+      ],
+      "basis": "ARUPLO App. B",
+      "src": [
+       "arch_sup_aruplo2017"
+      ]
+     },
+     {
+      "part": "service desk",
+      "m2": [
+       23.2,
+       32.5
+      ],
+      "basis": "ARUPLO App. B",
+      "src": [
+       "arch_sup_aruplo2017"
+      ]
+     },
+     {
+      "part": "staff work room, lunchroom, washroom",
+      "m2": [
+       39.5,
+       76.6
+      ],
+      "basis": "ARUPLO: work 300–600, lunch/lockers 100–200, staff WC 25 sq ft",
+      "src": [
+       "arch_sup_aruplo2017"
+      ]
+     },
+     {
+      "part": "public washrooms, storage, garbage, walls, mech",
+      "m2": [
+       93.2,
+       185.7
+      ],
+      "basis": "ARUPLO non-assignable 25 % (includes washrooms, mech); WCs 2 M / 3 F + universal at ≈136 people (our arithmetic)",
+      "src": [
+       "arch_sup_aruplo2017",
+       "arch_sup_nbcT3722A",
+       "arch_pub_nbc31171"
+      ]
+     }
+    ]
    },
    "occ": {
     "group": "A-2",
@@ -1835,7 +2687,13 @@
      "note": "evaporative units only: 7.6 m to intakes, 3 m to doors, windows, occupiable outdoor space"
     }
    ],
-   "options": [],
+   "options": [
+    {
+     "id": "community_room",
+     "name": "Community room",
+     "effect": "≈285–329 m² gross: Eastglen 139 m² multi-purpose room (30–80 people) + desk, office, break, first aid, storage = 219 net × 1.3–1.5 (our arithmetic); WCs by 185-person table load likely govern"
+    }
+   ],
    "social": {
     "serves": "library service: new point at 20,000 people with none within 4–5 km (Edm)",
     "catchment": "4–5 km (EPL)",
@@ -1863,8 +2721,40 @@
     "step": null,
     "storeys_typ": null,
     "floor_height_m": null,
-    "src": [],
-    "note": "no Canadian example with m² found (?)"
+    "src": [
+     "arch_pub_nbc31171",
+     "arch_sup_nbcT3722A"
+    ],
+    "note": "no Canadian main-space size found (?); only washroom rules sourced; earlier: null (same)",
+    "parts": [
+     {
+      "part": "main space",
+      "m2": null,
+      "basis": "? no primary source (operator and press pages only)",
+      "src": []
+     },
+     {
+      "part": "washrooms",
+      "m2": null,
+      "basis": "per 100 m²: 1 M / 2 F to 2 M / 3 F + universal by row 1.85 or 0.75 m²/p (our arithmetic); m² ?",
+      "src": [
+       "arch_pub_nbc31171",
+       "arch_sup_nbcT3722A"
+      ]
+     },
+     {
+      "part": "mechanical, storage, staff",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     },
+     {
+      "part": "circulation and walls",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     }
+    ]
    },
    "occ": {
     "group": "A-2",
@@ -2011,9 +2901,45 @@
     "storeys_typ": null,
     "floor_height_m": null,
     "src": [
-     "arch_pub_vanPlazaDG"
+     "arch_pub_vanPlazaDG",
+     "arch_sup_vanWashroomTG2024"
     ],
-    "note": "Van plaza guide sets no dimensions or storeys (?)"
+    "note": "no main-space size found (?); washroom 6.25 m² only if one is provided; earlier: null (same)",
+    "parts": [
+     {
+      "part": "covered plaza",
+      "m2": null,
+      "basis": "? Van plaza guide sets no size",
+      "src": [
+       "arch_pub_vanPlazaDG"
+      ]
+     },
+     {
+      "part": "universal washroom (if provided)",
+      "m2": [
+       6.2,
+       6.2
+      ],
+      "basis": "City of Vancouver facility minimum 2.5 × 2.5 m; whether Part 3 requires WCs ?",
+      "src": [
+       "arch_sup_vanWashroomTG2024"
+      ]
+     },
+     {
+      "part": "janitor room",
+      "m2": null,
+      "basis": "? \"separate lockable janitor room with floor sink\", no m²",
+      "src": [
+       "arch_sup_vanWashroomTG2024"
+      ]
+     },
+     {
+      "part": "snow-melt plant, storage, electrical",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     }
+    ]
    },
    "occ": {
     "group": "?",
@@ -2134,7 +3060,7 @@
    "group": "care",
    "kind": "mass",
    "size": {
-    "typical_m2": 56,
+    "typical_m2": 100,
     "min_m2": null,
     "max_m2": null,
     "step": {
@@ -2147,9 +3073,70 @@
     "floor_height_m": null,
     "src": [
      "arch_pub_vanWarm2021",
-     "arch_ahsReceptionCentres"
+     "arch_ahsReceptionCentres",
+     "arch_sup_torRespite",
+     "arch_sup_nbcWashrooms",
+     "arch_sup_eastglenRooms",
+     "arch_edmEastglen2017"
     ],
-    "note": "our arithmetic: 16 guests (Van centre) × 3.5 m² sleeping; washrooms extra ?"
+    "note": "our arithmetic, day option: 16 guests ≈91–105 m²; overnight (59.2 sleeping VBBL 13.4.4.1 + 19.2 dining + 6 shower + 6 laundry + 8 office) × 1.3–1.5 ≈128–148; washrooms inside factor; earlier: 56 m² (resting area only)",
+    "parts": [
+     {
+      "part": "resting area (16 guests)",
+      "m2": [
+       56,
+       56
+      ],
+      "basis": "3.5 m² per client (Toronto respite standard; AHS)",
+      "src": [
+       "arch_sup_torRespite",
+       "arch_ahsReceptionCentres"
+      ]
+     },
+     {
+      "part": "universal dressing and shower room",
+      "m2": [
+       6,
+       6
+      ],
+      "basis": "≥1 barrier-free shower (respite 9.3.2); required 3.8.2.8.(13); Eastglen 6 m²",
+      "src": [
+       "arch_sup_torRespite",
+       "arch_sup_nbcWashrooms",
+       "arch_sup_eastglenRooms"
+      ]
+     },
+     {
+      "part": "staff office",
+      "m2": [
+       8,
+       8
+      ],
+      "basis": "Eastglen (analogy); 2 staff + 1 guard (Van)",
+      "src": [
+       "arch_sup_eastglenRooms",
+       "arch_pub_vanWarm2021"
+      ]
+     },
+     {
+      "part": "storage, lockers",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     },
+     {
+      "part": "circulation, walls, washrooms, mech/elec",
+      "m2": [
+       21.0,
+       35.0
+      ],
+      "basis": "Eastglen 1.3–1.5 includes washrooms (2 toilets, 1 per 15): not added again (our arithmetic)",
+      "src": [
+       "arch_edmEastglen2017",
+       "arch_sup_torRespite"
+      ]
+     }
+    ]
    },
    "occ": {
     "group": "A-2",
@@ -2286,7 +3273,7 @@
    "group": "public",
    "kind": "mass",
    "size": {
-    "typical_m2": 372,
+    "typical_m2": 445,
     "min_m2": null,
     "max_m2": null,
     "step": null,
@@ -2294,9 +3281,82 @@
     "floor_height_m": null,
     "src": [
      "arch_pub_vanPlayFac2018",
-     "arch_pub_en12572cat"
+     "arch_pub_en12572cat",
+     "arch_sup_edmEastglenRooms",
+     "arch_sup_calgaryRecFP2012",
+     "arch_sup_nbcT3722A",
+     "arch_edmEastglen2017"
     ],
-    "note": "Trout Lake fitness 4,000 sf ≈372 m² (our arithmetic; called undersized); bouldering wall ≤4.5 m (EN benchmark) is a wall height, not a storey height: floor height ?"
+    "note": "our arithmetic: Eastglen fitness + Calgary change + universal change + support (317 net) × 1.3–1.5 ≈412–476 m² (research 404–467 left out the 6 m² universal change), +60 with climbing wall; earlier: 372 m² (Trout Lake fitness floor only)",
+    "parts": [
+     {
+      "part": "fitness floor",
+      "m2": [
+       186,
+       186
+      ],
+      "basis": "Eastglen fitness centre, max 20–25 users",
+      "src": [
+       "arch_sup_edmEastglenRooms"
+      ]
+     },
+     {
+      "part": "dry change and lockers",
+      "m2": [
+       65,
+       65
+      ],
+      "basis": "Calgary 50 lockers, net",
+      "src": [
+       "arch_sup_calgaryRecFP2012"
+      ]
+     },
+     {
+      "part": "universal change with shower and WC",
+      "m2": [
+       6,
+       6
+      ],
+      "basis": "Eastglen; required where showers serve the public (3.8.2.8.(13))",
+      "src": [
+       "arch_sup_edmEastglenRooms",
+       "arch_sup_nbcT3722A"
+      ]
+     },
+     {
+      "part": "reception, office, break room, first aid",
+      "m2": [
+       60,
+       60
+      ],
+      "basis": "Eastglen 15 + 20 + 19 + 6",
+      "src": [
+       "arch_sup_edmEastglenRooms"
+      ]
+     },
+     {
+      "part": "circulation, walls, washrooms, mech/elec",
+      "m2": [
+       95.1,
+       158.5
+      ],
+      "basis": "Eastglen grossing 1.3–1.5: adds circulation ≈15 %, walls, building mech/elec, public washrooms (our arithmetic: net × 0.3–0.5)",
+      "src": [
+       "arch_edmEastglen2017"
+      ]
+     },
+     {
+      "part": "climbing wall (if included)",
+      "m2": [
+       0,
+       60
+      ],
+      "basis": "Calgary rec-centre wall 50 m² net × 1.20, already gross",
+      "src": [
+       "arch_sup_calgaryRecFP2012"
+      ]
+     }
+    ]
    },
    "occ": {
     "group": "A-2",
@@ -2425,8 +3485,8 @@
    "group": "energy",
    "kind": "mass",
    "size": {
-    "typical_m2": null,
-    "min_m2": null,
+    "typical_m2": 150,
+    "min_m2": 150,
     "max_m2": null,
     "step": {
      "unit": "stall",
@@ -2437,9 +3497,66 @@
     "storeys_typ": null,
     "floor_height_m": null,
     "src": [
-     "arch_pub_vanStall"
+     "arch_pub_vanStall",
+     "arch_sup_bchFastCharge2024",
+     "bchES54F",
+     "epcor_ccg",
+     "arch_per_nbcWC"
     ],
-    "note": "stall 2.5 × 5.5 m, aisle 6.6 m → ≈22 m² per stall double-loaded (our arithmetic)"
+    "note": "our arithmetic: smallest BC Hydro hub, 4 chargers / 6 stalls ≈150 m² surface, excl. transformer zone; 8–10 spaces ≈195–239; earlier: null (22 m² per stall only)",
+    "parts": [
+     {
+      "part": "charging stalls (4 chargers, 6 stalls)",
+      "m2": [
+       132,
+       132
+      ],
+      "basis": "≥4 vehicles at once, ≥1.5 stalls per charger (BC Hydro); 22 m² per stall incl. half aisle (our arithmetic)",
+      "src": [
+       "arch_sup_bchFastCharge2024",
+       "arch_pub_vanStall"
+      ]
+     },
+     {
+      "part": "accessible stall extra width",
+      "m2": [
+       10.6,
+       10.6
+      ],
+      "basis": "≥3.7 m wide → +1.2 × 8.8 m (our arithmetic)",
+      "src": [
+       "arch_sup_bchFastCharge2024"
+      ]
+     },
+     {
+      "part": "charger and switch kiosk pads",
+      "m2": [
+       8.0,
+       8.0
+      ],
+      "basis": "4 × 1.2 × 1.2 m + 2.2 × 1.0 m",
+      "src": [
+       "arch_sup_bchFastCharge2024"
+      ]
+     },
+     {
+      "part": "utility transformer zone",
+      "m2": null,
+      "basis": "? pad size not sourced; BC 3 m clear in front, 1 m sides; Edm up to 6.0 m",
+      "src": [
+       "bchES54F",
+       "epcor_ccg"
+      ]
+     },
+     {
+      "part": "washrooms",
+      "m2": null,
+      "basis": "none required if unstaffed (our reading of 3.7.2.1.(2))",
+      "src": [
+       "arch_per_nbcWC"
+      ]
+     }
+    ]
    },
    "occ": {
     "group": "F-3",
@@ -2527,7 +3644,7 @@
    "group": "care",
    "kind": "mass",
    "size": {
-    "typical_m2": 767,
+    "typical_m2": 605,
     "min_m2": null,
     "max_m2": null,
     "step": {
@@ -2543,9 +3660,106 @@
      "arch_hsg_bcUpccSurrey2026",
      "arch_hsg_bcUpccWL2025",
      "arch_hsg_bcUpccCowichan2024",
-     "arch_hsg_abGFNA2021"
+     "arch_hsg_abGFNA2021",
+     "arch_sup_abGFNARooms",
+     "arch_per_nbcWC",
+     "arch_sup_nbcOccLoadOther"
     ],
-    "note": "our arithmetic: median of 4 BC UPCCs (490–931 m²); exam room 12.0 m² net × 1.44 dept. gross"
+    "note": "working 13-exam UPCC: rooms from GFNA × grossing ≈498–523 m² plus waiting, reception and offices taken from the built North Vancouver UPCC (604 m²); earlier: 767 m² (median of 4 BC UPCCs)",
+    "parts": [
+     {
+      "part": "exam rooms (13)",
+      "m2": [
+       156,
+       156
+      ],
+      "basis": "12.0 m² each (AB GFNA); 13 as at North Vancouver UPCC",
+      "src": [
+       "arch_hsg_abGFNA2021",
+       "arch_hsg_vchUpccNV"
+      ]
+     },
+     {
+      "part": "treatment room and stretcher bays",
+      "m2": [
+       48.5,
+       48.5
+      ],
+      "basis": "Procedure Type 1 15.5 + 3 × 11.0 (match our reading)",
+      "src": [
+       "arch_sup_abGFNARooms"
+      ]
+     },
+     {
+      "part": "consult, medication, clean and soiled, housekeeping",
+      "m2": [
+       53.5,
+       53.5
+      ],
+      "basis": "GFNA 12.0 + 10.0 + 11.0 + 13.5 + 7.0",
+      "src": [
+       "arch_sup_abGFNARooms"
+      ]
+     },
+     {
+      "part": "washrooms",
+      "m2": [
+       23,
+       23
+      ],
+      "basis": "≈65 people (Group D) → 2 per sex + universal = 5 × 4.6 m² (our arithmetic)",
+      "src": [
+       "arch_per_nbcWC",
+       "arch_sup_nbcOccLoadOther",
+       "arch_sup_abGFNARooms"
+      ]
+     },
+     {
+      "part": "staff lounge and lockers",
+      "m2": [
+       7,
+       7
+      ],
+      "basis": "14 FTE × 0.4 + 14 × 0.1 m² (GFNA)",
+      "src": [
+       "arch_sup_abGFNARooms"
+      ]
+     },
+     {
+      "part": "waiting, reception, offices, garbage",
+      "m2": [
+       81,
+       106
+      ],
+      "basis": "our arithmetic: the gap between the room-by-room total and the built North Vancouver UPCC (604 m²)",
+      "src": [
+       "arch_hsg_vchUpccNV"
+      ]
+     },
+     {
+      "part": "department circulation and partitions",
+      "m2": [
+       126.7,
+       126.7
+      ],
+      "basis": "AB GFNA CHC departmental grossing 1.44 (our arithmetic)",
+      "src": [
+       "arch_hsg_abGFNA2021"
+      ]
+     },
+     {
+      "part": "building circulation, mech/elec, exterior walls",
+      "m2": [
+       82.9,
+       107.8
+      ],
+      "basis": "AB GFNA building grossing 1.20–1.26 (our arithmetic)",
+      "src": [
+       "arch_hsg_abGFNA2021",
+       "arch_sup_abGFNARooms"
+      ]
+     }
+    ]
    },
    "occ": {
     "group": "D",
@@ -2673,16 +3887,79 @@
    "group": "public",
    "kind": "mass",
    "size": {
-    "typical_m2": null,
+    "typical_m2": 185,
     "min_m2": null,
     "max_m2": null,
     "step": null,
     "storeys_typ": null,
     "floor_height_m": null,
     "src": [
-     "arch_hsg_vanKitchenDG2018"
+     "arch_hsg_vanKitchenDG2018",
+     "arch_sup_nbcOccLoadOther",
+     "arch_pub_nbc31171",
+     "arch_sup_abGFNARooms",
+     "arch_edmEastglen2017",
+     "arch_sup_nbcWashrooms"
     ],
-    "note": "size 'varies greatly'; teaching ≈12 participants; no m² (?)"
+    "note": "our arithmetic, low confidence: indicative kitchen + dining + janitor × 1.3–1.5 ≈173–200 m² (washrooms inside factor; research total 179–213 added them); storage, cooler ?; earlier: null",
+    "parts": [
+     {
+      "part": "teaching kitchen (12 participants)",
+      "m2": [
+       111.6,
+       111.6
+      ],
+      "basis": "12 × 9.30 m²/p code kitchen density: indicative, not a size rule (our arithmetic)",
+      "src": [
+       "arch_sup_nbcOccLoadOther",
+       "arch_hsg_vanKitchenDG2018"
+      ]
+     },
+     {
+      "part": "dining next to kitchen",
+      "m2": [
+       14.4,
+       14.4
+      ],
+      "basis": "12 × 1.20 m²/p (code floor; our arithmetic)",
+      "src": [
+       "arch_hsg_vanKitchenDG2018",
+       "arch_pub_nbc31171"
+      ]
+     },
+     {
+      "part": "janitor / mop sink",
+      "m2": [
+       7,
+       7
+      ],
+      "basis": "required; GFNA housekeeping 7.0 m² (analogy)",
+      "src": [
+       "arch_hsg_vanKitchenDG2018",
+       "arch_sup_abGFNARooms"
+      ]
+     },
+     {
+      "part": "dry storage, walk-in cooler, waste, grease interceptor, loading",
+      "m2": null,
+      "basis": "? required or advised (Van kitchen guide), no m²",
+      "src": [
+       "arch_hsg_vanKitchenDG2018"
+      ]
+     },
+     {
+      "part": "circulation, walls, washrooms, mech/elec",
+      "m2": [
+       39.9,
+       66.5
+      ],
+      "basis": "Eastglen 1.3–1.5 includes washrooms (Van 1 universal; Edm 1 M + 1 F + universal ?): not added again (our arithmetic)",
+      "src": [
+       "arch_edmEastglen2017",
+       "arch_sup_nbcWashrooms"
+      ]
+     }
+    ]
    },
    "occ": {
     "group": "?",
@@ -2851,9 +4128,53 @@
     "floor_height_m": null,
     "src": [
      "arch_sys_ubcAdes2019",
-     "arch_sys_ubcCecBldg"
+     "arch_sys_ubcCecBldg",
+     "neuETS",
+     "arch_per_nbcWC"
     ],
-    "note": "UBC boiler plant 41–44 m² per MW (our arithmetic); heat-pump plant ?"
+    "note": "sized per MW: 44 m²/MW gross (UBC boiler plant, step); heat-pump plant ?; ETS room 18 m²; earlier: null (same)",
+    "parts": [
+     {
+      "part": "plant hall (boilers)",
+      "m2": null,
+      "basis": "41–44 m² per MW, already gross (UBC); MW not set here",
+      "src": [
+       "arch_sys_ubcAdes2019",
+       "arch_sys_ubcCecBldg"
+      ]
+     },
+     {
+      "part": "heat-pump plant",
+      "m2": null,
+      "basis": "? no m² per MW published",
+      "src": []
+     },
+     {
+      "part": "network connection (ETS) room",
+      "m2": [
+       18,
+       18
+      ],
+      "basis": "Vancouver NEU 6 × 3 m (<13,940 m² building), ≥2.7 m high",
+      "src": [
+       "neuETS"
+      ]
+     },
+     {
+      "part": "electrical, control room, office",
+      "m2": null,
+      "basis": "?",
+      "src": []
+     },
+     {
+      "part": "washroom",
+      "m2": null,
+      "basis": "staff-based load (3.7.2.1.(2)); AB: none for low human occupancy (3.7.2.1.(6))",
+      "src": [
+       "arch_per_nbcWC"
+      ]
+     }
+    ]
    },
    "occ": {
     "group": "?",

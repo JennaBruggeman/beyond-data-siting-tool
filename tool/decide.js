@@ -61,7 +61,7 @@ const DECK=[
  {id:'height',when:A=>A.built==='new',q:'How tall?',k:A=>A.hmode||'out',opts:m=>{ const Z=m.Z; return [
    {v:'out',t:`Outright: ${Z.hOutright} m`,up:['No discretion needed from the City'],down:['Fewer storeys of tall data-hall floors']}]
    .concat(Z.hx&&!BD.S.answers.userH?[{v:'cond',t:`With approval: ${Z.hx[0]===Z.hx[1]?Z.hx[0]:Z.hx[0]+'–'+Z.hx[1]} m`,up:['More storeys, more that fits'],down:['Depends on the City\'s discretion and a longer review']}]:[])
-   .concat([{v:'storeys',t:'Set the storeys',up:['Test a specific building'],down:['May exceed what the zone allows (the tool warns)']}]); },set:(A,v)=>{ A.hmode=v; },anim:(v,m)=>A_.height(v,m),extra:A=>A.hmode==='storeys'?`<label class="dnum">Storeys <input type="number" id="dsto" min="1" max="12" value="${A.storeys||2}"></label>`:''},
+   .concat([{v:'storeys',t:'Set the storeys',up:['Test a specific building'],down:[`Capped at the zone's ${Z.hOutright} m: at most ${(BD.model()||{}).maxStoreys||'—'} storeys here`]}]); },set:(A,v)=>{ A.hmode=v; },anim:(v,m)=>A_.height(v,m),extra:A=>{ if(A.hmode!=='storeys') return ''; const m=BD.model()||{}; return `<label class="dnum">Storeys <input type="number" id="dsto" min="1" max="${m.maxStoreys||12}" value="${A.storeys||2}"></label>${m.hClamp?`<div class="dwarn">${esc(m.hClamp.text)}</div>`:''}`; }},
  {id:'inside',q:'How are the servers cooled?',k:A=>A.inside||'air',opts:()=>[
    {v:'air',t:'Air',up:['The most common: 75% of operators surveyed use perimeter (room) air cooling, often alongside other types (Uptime Institute Cooling Systems Survey 2025, n = 512; industry survey)','Simple, well known'],down:['Heat leaves at about 25–35 °C, too cool to reuse without a heat pump']},
    {v:'plate',t:'Liquid to the chip',up:['57–75% of the heat caught in liquid (LBNL)','Warmer heat, easier to reuse'],down:['Plumbing to every server','The rest of the heat still needs air']},
@@ -89,12 +89,16 @@ const live=()=>DECK.filter(d=>!d.when||d.when(BD.S.answers));
    yes = possible here · chg = possible, with a condition · nk = not yet known · no = not possible here, with the reason */
 function site(){ const f=BD.eng.siteFacts(), sel=BD.S.sel, bl=(sel.blds||[]).filter(b=>b.f!==3), hmax=bl.length?Math.max(...bl.map(b=>b.h||0)):0;
   return {f,bl,hmax,src:f.city==='van'?'City LiDAR 2022':'City 3D buildings',z:f.zone||'—',st:f.status||{k:'',t:''},env:f.env}; }
+/* the zone's status for a data centre (index.html statusOf): a rezoning or a conditional use stays a choice, but it is always named.
+   2 Nov 2026 hard rules (site audit 15): retrofit and lease show it too, not only a new building. */
+const zoneFeas=x=>x.st.k==='no'||x.st.k==='low'?{s:'chg',why:`Zone ${x.z} does not allow a data centre: a rezoning would come first.`}:x.st.k==='site'?{s:'chg',why:`Zone ${x.z} has site-specific rules; the tool uses ${x.f&&x.f.city==='edm'?'IM':'I-2'} limits as if rezoned, for comparison.`}:x.st.k==='case'?{s:'chg',why:`Zone ${x.z}: ${x.st.t.toLowerCase()}. ${String(x.st.d||'').replace(/<[^>]+>/g,'')}`}:{s:'yes',why:`A data centre is ${x.st.t.toLowerCase()} in zone ${x.z}.`};
+const withZone=(x,r)=>{ if(r.s==='no') return r; const z=zoneFeas(x); return z.s==='yes'?{s:r.s,why:(r.why?r.why+' ':'')+z.why}:{s:r.s==='nk'?'nk':'chg',why:z.why+(r.why?' '+r.why:'')}; };
 const FEAS={
  built:{
-  new:x=>x.st.k==='no'||x.st.k==='low'?{s:'chg',why:`Zone ${x.z} does not allow a data centre: a rezoning would come first.`}:x.st.k==='site'?{s:'chg',why:`Zone ${x.z} has site-specific rules; the tool uses ${x.f&&x.f.city==='edm'?'IM':'I-2'} limits as if rezoned, for comparison.`}:x.st.k==='case'?{s:'chg',why:`Zone ${x.z}: ${x.st.t.toLowerCase()}. ${String(x.st.d||'').replace(/<[^>]+>/g,'')}`}:{s:'yes',why:`A data centre is ${x.st.t.toLowerCase()} in zone ${x.z}.`},
+  new:x=>zoneFeas(x),
   shared:x=>x.env&&x.env.ground?{s:'chg',why:`Zone ${x.z} keeps data storage off the ground floor, so a shared building, with another use at the street, is the form the zone points to. Whether homes or offices may go above has not been read.`}:{s:'nk',why:`Whether other uses may share a data-centre building in zone ${x.z} has not been read.`},
-  retrofit:x=>x.bl.length?{s:'yes',why:`${x.bl.length} building${x.bl.length>1?'s':''} on the lot, the tallest ${x.hmax.toFixed(0)} m (${x.src}). Whether its floors carry server loads is not checked here.`}:{s:'no',why:`No building is recorded on this lot (${x.src}), so there is nothing to retrofit.`},
-  lease:x=>!x.bl.length?{s:'no',why:`No building is recorded on this lot (${x.src}), so there is no space to lease.`}:x.hmax<8?{s:'chg',why:`The building is about ${x.hmax.toFixed(0)} m tall: one or two storeys, so a floor is most of it.`}:{s:'yes',why:`A building of about ${x.hmax.toFixed(0)} m stands here (${x.src}).`}},
+  retrofit:x=>withZone(x,x.bl.length?{s:'yes',why:`${x.bl.length} building${x.bl.length>1?'s':''} on the lot, the tallest ${x.hmax.toFixed(0)} m (${x.src}). Whether its floors carry server loads is not checked here.${x.env&&x.env.ground?` Zone ${x.z} keeps data storage off the ground floor, so the ground floor is not counted as data hall.`:''}`}:{s:'no',why:`No building is recorded on this lot (${x.src}), so there is nothing to retrofit.`}),
+  lease:x=>withZone(x,!x.bl.length?{s:'no',why:`No building is recorded on this lot (${x.src}), so there is no space to lease.`}:x.hmax<8?{s:'chg',why:`The building is about ${x.hmax.toFixed(0)} m tall: one or two storeys, so a floor is most of it.`}:{s:'yes',why:`A building of about ${x.hmax.toFixed(0)} m stands here (${x.src}).`})},
  floor:{
   basement:x=>({s:'nk',why:'Whether the building has a basement is not recorded.'}),
   upper:x=>x.hmax<8?{s:'no',why:`The building is about ${x.hmax.toFixed(0)} m tall: there is no upper floor.`}:{s:'yes',why:''},
@@ -102,7 +106,7 @@ const FEAS={
  foot:{ existing:x=>x.bl.length?{s:'yes',why:''}:{s:'no',why:`No building is recorded on this lot (${x.src}) to match.`} },
  inside:{ immersion:x=>({s:'nk',why:'How much of the heat immersion catches is not yet verified.'}) },
  outside:{ towers:x=>({s:'chg',why:x.f.city==='van'?'Needs an operating permit and monthly Legionella testing (VBBL).':'Needs water treatment and Legionella control.'}), hybrid:x=>x.f.city==='van'?{s:'chg',why:'Vancouver treats them like a cooling tower: the same permit.'}:{s:'yes',why:''} },
- gens:{ roof:x=>({s:'chg',why:'Fuel on an upper storey is limited by the fire code (NFC 2020); the roof must carry the sets.'}) },
+ gens:{ roof:x=>{ const R=BD.eng.R, mx=Math.floor(R.fuelLimit.low/(R.pue[1]*1000*R.fuelHours*R.fuelLkWh)*10)/10; return {s:'chg',why:`Fuel above the first storey: at most ${fmt(R.fuelLimit.low)} L in one storage area (NFC 2020 Table 4.3.13.4.-B; register nfc2020_4313; applied to rooftop tanks as our reading ?), which is ${R.fuelHours} h of fuel for about ${mx.toFixed(1)} MW of servers. Larger sizes are blocked with roof generators. The roof must carry the sets.`}; } },
 };
 const feas=(id,v)=>{ const F=FEAS[id]&&FEAS[id][v]; return F?F(site()):{s:'yes',why:''}; };
 const FS={yes:['Possible here','#8fb996','✓'],chg:['Possible, with a condition','#cdb07a','~'],nk:['Not yet known','#9d9a94','?'],no:['Not possible here','#e39a93','✕']};
@@ -142,7 +146,7 @@ function show(i){ const A=BD.S.answers; const L=live(); at=Math.max(0,Math.min(L
    ${!no?`<div class="dfeas" style="--fc:${F[1]}"><b>${F[2]} ${F[0]}</b>${fs.why?` <span>${esc(fs.why)}</span>`:''}</div>`:''}${!no&&d.extra?d.extra(A):''}
    <div class="dud${no?' off':''}"><div><div class="dh up">Upsides</div><ul>${o.up.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div><div><div class="dh dn">Downsides</div><ul>${o.down.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div>
    ${CH[d.id]?'<div class="dchart" id="dchart"></div><p class="dcap" id="dcap"></p>':''}
-   <p class="dres">${no?'Nothing changes: the site stays as set up, ':''}${res}${shortTxt}${m.warn&&m.warn.length?`<br><span class="dwarn">${esc(m.warn[0])}</span>`:''}</p>
+   <p class="dres">${no?'Nothing changes: the site stays as set up, ':''}${res}${shortTxt}${m.warn&&m.warn.length?`<br><span class="dwarn">${esc(m.warn[0])}</span>`:''}${m.hClamp&&d.id!=='height'?`<br><span class="dwarn">${esc(m.hClamp.text)}</span>`:''}</p>
    <div class="dnav"><button class="sec" id="dB">← ${at?'Back':'The site'}</button><button class="pri" id="dN">${at<L.length-1?'Next →':'What fits here →'}</button></div></div>`;
   const el=$('#side');
   el.querySelectorAll('.dch button').forEach(b=>b.onclick=()=>{ const v=b.dataset.v; if(feas(d.id,v).s==='no'){ pv[d.id]=v; show(at); return; } pv[d.id]=null; d.set(A,v); changed(); });
