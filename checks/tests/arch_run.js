@@ -48,7 +48,7 @@ const CLEAN = `(o)=>{ const seen=new WeakSet(); return JSON.parse(JSON.stringify
     await p.waitForTimeout(9000);
     const shot=process.env.SHOTDIR||out;
     const r1 = await p.evaluate(async([process_mw,REF])=>{ await BD.arch.ready; BD.flow.to('aprog'); await new Promise(r=>setTimeout(r,800));
-      BD.S.answers.mw=+(process_mw)||BD.S.answers.mw; BD.modelReset(); ['refuge','pool','greenhouse','clinic','spa','fish_farm','roof_solar','warming_shelter'].forEach(id=>BD.archTest.add(id));
+      BD.S.answers.mw=+(process_mw)||BD.S.answers.mw; BD.modelReset(); ['refuge','pool','greenhouse','clinic','spa','fish_farm','roof_solar','warming_shelter','ev_hub'].forEach(id=>BD.archTest.add(id));
       BD.arch.picks.find(q=>q.id==='refuge').opt=REF||'side_by_side';
       BD.flow.to('aarr'); await new Promise(r=>setTimeout(r,2500));
       const P=BD.archTest.place(), B=BD.archTest.budgets(P), R=BD.archTest.rules(P);
