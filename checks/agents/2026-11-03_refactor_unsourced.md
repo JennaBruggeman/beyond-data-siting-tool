@@ -26,3 +26,8 @@ To clear one: add its source to the register through `register/patches/*.py`, mo
 | tool/decide.js | 101 | 8 | A building under 8 m tall is read as "one or two storeys" (lease feasibility). An assumption, no source. |
 | tool/decide.js | 104 | 8 | Same 8 m threshold: under it, no upper floor to lease. |
 | tool/decide.js | 154 | 12 | Storeys typed in clamped to 1–12 (matches the input max on line 64). |
+| tool/addons.js | 91 | 3500, 3500 | BC Hydro's 2025 call, about 3,500 GWh a year (power purchase add-on). The register's clean_power_price entry gives the call's prices but not 3,500 GWh. |
+| tool/addons.js | 93 | 24, 49, 23.9, 47.8 | Litres per second per MW of heat at a 10–5 °C rise (P-15: sea water 4.0 kJ/kg·K × 1.025 kg/L; fresh water 4.18). Derived in code. The heat capacities have no register id. |
+| tool/addons.js | 105 | 6, 2 | PV layout block, 6 × 2 m, with 1 m and 0.5–1.5 m clearances. A layout choice. register pv_roof describes the layout but gives no block size. |
+| tool/addons.js | 107 | 12 | Area of one PV block, 6 × 2 = 12 m². Follows from line 105. |
+| tool/addons.js | 115 | 67.9, 49.67 | Fallback electricity price, $/MWh, used when BD.ECON has not loaded. 67.9 matches BC LGS 6.79 ¢/kWh (register electricity_price). 49.67 for Edmonton has no register text. |
