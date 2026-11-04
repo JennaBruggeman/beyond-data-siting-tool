@@ -189,4 +189,5 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - M3 (111 E 5th Ave): 8,305 m² above grade, the City draft by-law figure (J.B., 4 Nov 2026); below grade ?.
 - TELUS Garden data centre: kept (BCUC orders), placed "next to TELUS Garden, address ?"; find the address in City permits (J.B., 4 Nov 2026).
 - SFU Cedar: PUE 1.07 (SFU and BC Hydro), J.B. 4 Nov 2026; the engineer's 1.097 design target kept as a conflict.
-- Remaining conflicts without a sheet: see the chat of 4 Nov (Qu EDM2 sheet's own 2.5 vs 3 MW, Meta size, Wolfpaw sites).
+- Qu EDM2: 3 MW (Tier III, operator sheet), whole site; phases ≈2 MW + 1 MW from N+1 generators (our arithmetic). J.B. 4 Nov 2026.
+- Remaining conflicts without a sheet: see the chat of 4 Nov (Meta size, Wolfpaw sites).
