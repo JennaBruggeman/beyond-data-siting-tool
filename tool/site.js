@@ -20,11 +20,16 @@ BD.lowDensity=lowDensity;
 
 function zoneLimits(city,zraw){
   const A=BD.S.answers, z=String(zraw||'').trim(), key=city==='edm'?z.split(/\s+/)[0].toUpperCase():z;
-  let base=city==='van'?ZV[key==='I-2'&&A.subB?'I-2B':key]:ZE[key], assumed=false, mods=city==='edm'?edmMods(z):{};
+  /* Build 2 (3 Nov 2026, part 7): FC-2 by sub-area (A.fcSub; zones.json 'FC-2 A' … 'FC-2 E'), I-2 sub-area B (A.subB) */
+  const vkey=key==='I-2'&&A.subB?'I-2B':key==='FC-2'&&A.fcSub&&ZV['FC-2 '+A.fcSub]?'FC-2 '+A.fcSub:key;
+  let base=city==='van'?ZV[vkey]:ZE[key], assumed=false, mods=city==='edm'?edmMods(z):{};
   const out={zone:z,key,city,cl:[],warn:''};
   if(!base){ assumed=true; base=city==='van'?ZV['I-2']:ZE.IM;
     out.warn=`Zone ${esc(z||'(none recorded)')} has no data-centre limits in the tool. The numbers use ${city==='van'?'I-2':'IM'} limits as if the lot were rezoned — an assumption for comparison, not a prediction. Set your own limits below if you know them.`;
     if(mods.h||mods.f) out.warn+=` The zoning map gives this lot ${mods.h?`a ${mods.h} m height`:''}${mods.h&&mods.f?' and ':''}${mods.f?`a floor area ratio of ${mods.f}`:''} (Bylaw 20001 modifiers, s. 8.20); these are shown, not used, because they belong to a zone where a data centre is not an allowed use.`; }
+  /* Build 2: fields the by-law does not give (base.q, e.g. EETC floor area ratio and height) stay '?': the tool borrows IM's figures only so it can draw, and says so */
+  if(base.q&&base.q.length){ const F={fsr:'floor area ratio',h:'height'}, b2=Object.assign({},base); base.q.forEach(f=>{ b2[f]=ZE.IM[f]; }); base=b2;
+    out.q=base.q; out.warn=`Zone ${esc(key)}: the by-law gives no ${base.q.map(f=>F[f]||f).join(' or ')} (?). To draw something, the tool borrows IM's ${base.q.map(f=>f==='fsr'?'floor area ratio '+ZE.IM.fsr[1]:f==='h'?'height '+ZE.IM.h+' m':f).join(' and ')}: not this zone's limits.`; }
   out.assumed=assumed; out.base=base; out.mods=mods;
   out.cl=base.cl.slice(); out.cl.push(ROOFNOTE[city]);
   // user limits (J.B., 16 Oct: users can set their own height and FSR)
@@ -33,7 +38,7 @@ function zoneLimits(city,zraw){
   out.fsr=fsr; out.hOutright=hOut; out.hx=hx; out.ground=base.ground; out.yards=base.yards; out.yardsKnown=!!base.known;
   out.userSet=!!(A.userFSR||A.userH);
   /* 2 Nov 2026 hard rules (J.B.): the register source of the zone's limits, for every rule text that cites them */
-  out.srcId=city==='edm'?'edm_bl20001':({'I-2':'van_zdb_i2','I-2B':'van_zdb_i2','I-3':'van_zdb_i3','FC-2':'van_zdb_fc2','I-1C':'van_zdb_i1c'}[key==='I-2'&&A.subB?'I-2B':(assumed?'I-2':key)]||'van_zdb_i2');
+  out.srcId=city==='edm'?(({EETB:1,EETC:1,EETL:1,EETM:1,EETIM:1})[key]&&!assumed?'arch_zns_edmEETP':({EIB:1,EIM:1})[key]&&!assumed?'arch_zns_edmEllerslie':'edm_bl20001'):({'I-2':'van_zdb_i2','I-2B':'van_zdb_i2','I-3':'van_zdb_i3','FC-2':'van_zdb_fc2','I-1C':'van_zdb_i1c'}[key==='I-2'&&A.subB?'I-2B':(assumed?'I-2':key)]||'van_zdb_i2'); out.vkey=vkey;
   /* 2 Nov 2026 hard rules (site audit 8, exchanges F9): where Edmonton's bylaw requires the equipment screened, "leave it seen" is not offered */
   out.screen=null;
   if(city==='edm'&&key==='BE') out.screen={src:'arch_ezbLoad',why:'Edmonton BE s. 5.2: mechanical and electrical equipment, transformers and cooling towers "must be screened from view from Abutting Streets and Sites in non-industrial Zones" (register arch_ezbLoad). The plant is screened by default; "leave it seen" is not offered here.'};
@@ -95,7 +100,7 @@ let cache={key:null,m:null};
 function model(){
   const S=BD.S, s=S.sel, A=S.answers; if(!s) return null; if(!A.built) A.built='new'; if(!A.extent) A.extent='whole'; /* the labelled defaults (lot test 20 Oct) */
   { const a0=s.a||[], Z0=zoneLimits(s.city,s.city==='van'?(a0[1]||''):(a0[2]||a0[1]||'')); if(Z0.screen&&(!A.vis||A.vis==='reveal')) A.vis='screen'; } /* 2 Nov 2026 hard rules: screening required (Z.screen) */
-  const key=JSON.stringify([s.city,s.id,A.built,A.extent,A.floor,A.foot,A.cover,A.loadIn,A.flip,A.hmode,A.storeys,A.userFSR,A.userH,A.plantAt,A.outside,A.inside,A.spares,A.gens,A.genAt,A.genSpares,A.mw,A.vis,A.subB,A.dcFloor,A.dcSite,A.hallOpt]);
+  const key=JSON.stringify([s.city,s.id,A.built,A.extent,A.floor,A.foot,A.cover,A.loadIn,A.flip,A.hmode,A.storeys,A.userFSR,A.userH,A.plantAt,A.outside,A.inside,A.spares,A.gens,A.genAt,A.genSpares,A.mw,A.vis,A.subB,A.fcSub,A.dcFloor,A.dcSite,A.hallOpt]);
   if(cache.key===key) return cache.m;
   const a=s.a||[], city=s.city, zraw=city==='van'?(a[1]||''):(a[2]||a[1]||'');
   const Z=zoneLimits(city,zraw);
@@ -343,7 +348,14 @@ function changed(step){ const A=BD.S.answers; A.mw=null; if(A.built==='existing'
 /* Build 2: the lot-side facts and "Swap the ends" for the decision card (decide.js, footprint) */
 function sideBox(){ const m=model(); if(!m||!m.F) return ''; const A=BD.S.answers;
   return `<div class="dside"><h3>What each side faces</h3>${sideHTML(m)}<p class="sub">${m.side&&m.side.any?'The street end is the front; the rear yard and loading go to the other end.':'No street was found beside this lot in the City\'s street file, so which end faces the street is not known; the rear yard and loading are put at one end.'} <a href="#" id="flip">Swap the ends</a>${A.flip?' (swapped)':''}</p>${A.flip&&m.side&&m.side.any?`<div class="warnbox">Swapped: the rear yard and loading now face the street.${m.city==='edm'&&m.Z&&m.Z.key==='BE'?' BE s. 2.120 5.8 keeps loading from between a building and a street (register arch_hb_edmBE).':''}</div>`:''}</div>`; }
-BD.setup={card,model,STEPS,start:()=>card(1),sideBox};
+/* Build 2 (part 7): the zone's sub-area, where the limits differ by sub-area and the tool does not map them (I-2 B; FC-2 A–E; I-3 note) */
+function subBox(){ const m=model(); if(!m||!m.Z||m.Z.assumed||m.city!=='van') return ''; const A=BD.S.answers, k=m.Z.key;
+  if(k==='FC-2'){ const o=[['','Not chosen'],['A','A'],['B','B'],['C1','C1'],['C2','C2'],['D','D'],['E','E']];
+    return `<div class="dside"><h3>FC-2 sub-area</h3><p class="sub">Floor area and height differ by sub-area (FC-2 ss. 3.1–3.4; register van_zdb_fc2). The tool does not map them: check the FC-2 map.</p><label class="dnum">Sub-area <select data-zsub="fcSub">${o.map(([v,t])=>`<option value="${v}"${(A.fcSub||'')===v?' selected':''}>${t}</option>`).join('')}</select></label></div>`; }
+  if(k==='I-2') return `<div class="dside"><h3>I-2 sub-area</h3><p class="sub">Sub-area B has its own yards and limits (I-2 s. 3.2; register van_zdb_i2). The tool does not map it: check Map 1.</p><label class="dnum">Sub-area <select data-zsub="subB"><option value=""${A.subB?'':' selected'}>Not in sub-area B</option><option value="1"${A.subB?' selected':''}>In sub-area B</option></select></label></div>`;
+  if(k==='I-3') return `<div class="dside"><p class="sub">I-3: a data centre is allowed only in sub-area A (I-3 s. 2.1; register van_zdb_i3). The tool does not map the sub-areas: check the I-3 map.</p></div>`;
+  return ''; }
+BD.setup={card,model,STEPS,start:()=>card(1),sideBox,subBox};
 
 /* the site card's last section: a summary of the five cards, each with Change › */
 BD.setupHTML=function(st){ setDefaults(); const A=BD.S.answers, m=model(); if(!m) return '';

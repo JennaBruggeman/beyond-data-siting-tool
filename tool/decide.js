@@ -57,7 +57,7 @@ const DECK=[
  {id:'foot',when:A=>A.built==='new',q:'How much of the lot does it cover?',k:A=>A.foot||'max',opts:m=>[
    {v:'max',t:'Most the zone allows',up:['The most floor area, so the most that fits'],down:['Least open land left for other uses, rain, or a borefield']},
    {v:'existing',t:'Match the existing building',up:['Keeps today\'s footprint and the land around it'],down:['Less floor area'+(m&&m.footArea?'':''),'Only possible where a building is recorded']},
-   {v:'cover',t:'Set the coverage',up:['Choose the trade between floor area and open land'],down:['Less floor area, so less fits']}],set:(A,v)=>{ A.foot=v; },anim:(v,m)=>A_.foot(v,m),extra:A=>(A.foot==='cover'?`<label class="dnum">Coverage <input type="range" id="dcov" min="20" max="100" step="5" value="${A.cover||70}"> <b id="dcovv">${A.cover||70}%</b></label>`:'')+(BD.setup.sideBox?BD.setup.sideBox():'')}, /* Build 2: lot-side facts and Swap the ends */
+   {v:'cover',t:'Set the coverage',up:['Choose the trade between floor area and open land'],down:['Less floor area, so less fits']}],set:(A,v)=>{ A.foot=v; },anim:(v,m)=>A_.foot(v,m),extra:A=>(A.foot==='cover'?`<label class="dnum">Coverage <input type="range" id="dcov" min="20" max="100" step="5" value="${A.cover||70}"> <b id="dcovv">${A.cover||70}%</b></label>`:'')+(BD.setup.subBox?BD.setup.subBox():'')+(BD.setup.sideBox?BD.setup.sideBox():'')}, /* Build 2: lot-side facts and Swap the ends */
  {id:'height',when:A=>A.built==='new',q:'How tall?',k:A=>A.hmode||'out',opts:m=>{ const Z=m.Z; return [
    {v:'out',t:`Outright: ${Z.hOutright} m`,up:['No discretion needed from the City'],down:['Fewer storeys of tall data-hall floors']}]
    .concat(Z.hx&&!BD.S.answers.userH?[{v:'cond',t:`With approval: ${Z.hx[0]===Z.hx[1]?Z.hx[0]:Z.hx[0]+'–'+Z.hx[1]} m`,up:['More storeys, more that fits'],down:['Depends on the City\'s discretion and a longer review']}]:[])
@@ -152,6 +152,7 @@ function show(i){ const A=BD.S.answers; const L=live(); at=Math.max(0,Math.min(L
   el.querySelectorAll('.dch button').forEach(b=>b.onclick=()=>{ const v=b.dataset.v; if(feas(d.id,v).s==='no'){ pv[d.id]=v; show(at); return; } pv[d.id]=null; d.set(A,v); changed(); });
   const cov=$('#dcov'); if(cov){ cov.oninput=()=>{ $('#dcovv').textContent=cov.value+'%'; }; cov.onchange=()=>{ A.cover=+cov.value; changed(); }; }
   const sto=$('#dsto'); if(sto) sto.onchange=()=>{ A.storeys=Math.max(1,Math.min(12,+sto.value||1)); changed(); };
+  el.querySelectorAll('[data-zsub]').forEach(x=>x.onchange=()=>{ A[x.dataset.zsub]=x.value||''; changed(); }); /* Build 2: zone sub-area */
   const flp=el.querySelector('#flip'); if(flp) flp.onclick=e=>{ e.preventDefault(); A.flip=!A.flip; changed(); }; /* Build 2: Swap the ends stays an override */
   $('#dB').onclick=()=>{ pv[d.id]=null; if(at) show(at-1); else if(BD.flow&&BD.flow.on) BD.flow.back(); else BD.card(); };
   $('#dN').onclick=()=>{ pv[d.id]=null; if(at<live().length-1) show(at+1); else { A.setupDone=true; if(BD.flow&&BD.flow.on) BD.flow.next(); else BD.fitsView(); } };

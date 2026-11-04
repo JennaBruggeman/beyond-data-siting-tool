@@ -362,7 +362,15 @@
    "FC-2",
    "BE",
    "IM",
-   "IH"
+   "IH",
+   "I-1C",
+   "EETB",
+   "EETC",
+   "EETL",
+   "EETM",
+   "EETIM",
+   "EIB",
+   "EIM"
   ],
   "byZone": {
    "I-2": {
@@ -401,6 +409,54 @@
     "src": [
      "arch_hb_edmIH"
     ]
+   },
+   "I-1C": {
+    "cl": "I-1C schedule (November 2025): no site coverage clause",
+    "src": [
+     "van_zdb_i1c"
+    ]
+   },
+   "EETB": {
+    "cl": "Bylaw 20001 EETB (s. 3.5x) Table 5.1: no site coverage row",
+    "src": [
+     "arch_zns_edmEETP"
+    ]
+   },
+   "EETC": {
+    "cl": "Bylaw 20001 EETC (s. 3.5x) Table 5.1: no site coverage row",
+    "src": [
+     "arch_zns_edmEETP"
+    ]
+   },
+   "EETL": {
+    "cl": "Bylaw 20001 EETL (s. 3.5x) Table 5.1: no site coverage row",
+    "src": [
+     "arch_zns_edmEETP"
+    ]
+   },
+   "EETM": {
+    "cl": "Bylaw 20001 EETM (s. 3.5x) Table 5.1: no site coverage row",
+    "src": [
+     "arch_zns_edmEETP"
+    ]
+   },
+   "EETIM": {
+    "cl": "Bylaw 20001 EETIM (s. 3.5x) Table 5.1: no site coverage row",
+    "src": [
+     "arch_zns_edmEETP"
+    ]
+   },
+   "EIB": {
+    "cl": "Bylaw 20001 EIB (s. 3.18x) Table 5.1: no site coverage row",
+    "src": [
+     "arch_zns_edmEllerslie"
+    ]
+   },
+   "EIM": {
+    "cl": "Bylaw 20001 EIM (s. 3.18x) Table 5.1: no site coverage row",
+    "src": [
+     "arch_zns_edmEllerslie"
+    ]
    }
   },
   "src": [
@@ -410,8 +466,11 @@
    "arch_hb_vanFC2",
    "arch_hb_edmBE",
    "arch_hb_edmIM",
-   "arch_hb_edmIH"
+   "arch_hb_edmIH",
+   "van_zdb_i1c",
+   "arch_zns_edmEETP",
+   "arch_zns_edmEllerslie"
   ],
-  "_note": "Build 2 (3 Nov 2026): no coverage limit in these zones (research heights_basement.md s. 3, check 2 against the local by-law texts). Any other zone: shown as ?"
+  "_note": "Build 2 (3 Nov 2026): no coverage limit in these zones (research heights_basement.md s. 3, check 2 against the local by-law texts). Any other zone: shown as ? Build 2 part 7 (3 Nov 2026): I-1C, EETB, EETC, EETL, EETM, EETIM, EIB, EIM added (zones.md s. 1, 2; 'coverage' not in their texts, check 2)."
  }
 }
