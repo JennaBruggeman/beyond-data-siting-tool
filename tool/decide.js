@@ -7,15 +7,15 @@
 'use strict';
 const BD=window.BD; const {$,esc,fmt}=BD;
 const K=t=>`<span class="k">${t}</span>`;
-const C={acc:'#CC746C',heat:'#d0705f',water:'#3f97c6',power:'#b8861c',place:'#3fa57e',mat:'#9184e0',edge:'#55585d',line:'#3c4148',ink:'#e9e6e1',muted:'#9d9a94'};
+const C={acc:'#CC746C',heat:'#D1A35E',water:'#5D7F99',power:'#4F4F4C',place:'#6E6E6B',mat:'#8D8C87',edge:'#8D8C87',line:'#D7D7D4',ink:'#1F2022',muted:'#6E6E6B'};
 
 /* ---------- small animated drawings (schematic, not to scale) ---------- */
 const NS='http://www.w3.org/2000/svg';
 function S(inner,label){ return `<svg viewBox="0 0 460 300" role="img" aria-label="${esc(label)}"><line x1="20" y1="260" x2="440" y2="260" stroke="${C.line}"/>${inner}</svg>`; }
 const T=(x,y,s,o)=>{ o=o||{}; return `<text x="${x}" y="${y}" fill="${o.c||C.muted}" font-size="${o.s||11.5}" text-anchor="${o.a||'start'}">${esc(s)}</text>`; }; /* drawing */
-const floors=(x,y0,w,n,h,o)=>{ o=o||{}; let s=''; for(let i=0;i<n;i++){ const y=y0-(i+1)*h; s+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${o.hi&&o.hi.includes(i)?'rgba(204,116,108,.18)':'#1b1c1f'}" stroke="${o.hi&&o.hi.includes(i)?C.acc:C.edge}" stroke-width="1.2" class="${o.rise?'drise':''}" style="animation-delay:${(i*0.18).toFixed(2)}s"/>`; } return s; }; /* drawing */
+const floors=(x,y0,w,n,h,o)=>{ o=o||{}; let s=''; for(let i=0;i<n;i++){ const y=y0-(i+1)*h; s+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${o.hi&&o.hi.includes(i)?'rgba(204,116,108,.18)':'#FFFFFF'}" stroke="${o.hi&&o.hi.includes(i)?C.acc:C.edge}" stroke-width="1.2" class="${o.rise?'drise':''}" style="animation-delay:${(i*0.18).toFixed(2)}s"/>`; } return s; }; /* drawing */
 const racks=(x,y,n,c)=>{ let s=''; for(let i=0;i<n;i++) s+=`<rect x="${x+i*16}" y="${y}" width="10" height="${c||22}" rx="1.5" fill="none" stroke="${C.ink}" stroke-width="1" class="dfade" style="animation-delay:${(0.6+i*0.08).toFixed(2)}s"/>`; return s; }; /* drawing */
-const coolers=(x,y,n,o)=>{ o=o||{}; let s=''; for(let i=0;i<n;i++) s+=`<g class="dfade" style="animation-delay:${(0.9+i*0.1).toFixed(2)}s"><rect x="${x+i*30}" y="${y}" width="24" height="10" fill="#1b1c1f" stroke="${o.c||C.ink}" stroke-width="1"/><circle cx="${x+i*30+12}" cy="${y+5}" r="3.5" fill="none" stroke="${o.c||C.ink}" class="dspin"/></g>`; return s; }; /* drawing */
+const coolers=(x,y,n,o)=>{ o=o||{}; let s=''; for(let i=0;i<n;i++) s+=`<g class="dfade" style="animation-delay:${(0.9+i*0.1).toFixed(2)}s"><rect x="${x+i*30}" y="${y}" width="24" height="10" fill="#FFFFFF" stroke="${o.c||C.ink}" stroke-width="1"/><circle cx="${x+i*30+12}" cy="${y+5}" r="3.5" fill="none" stroke="${o.c||C.ink}" class="dspin"/></g>`; return s; }; /* drawing */
 const flowP=(d,c,o)=>`<path d="${d}" stroke="${c}" stroke-width="${(o&&o.w)||2}" fill="none" class="xflow${o&&o.slow?' slow':''}${o&&o.rev?' rev':''}" stroke-linecap="round"/>`; /* drawing */
 const A_={
  new:()=>S(`<rect x="70" y="252" width="320" height="8" fill="none" stroke="${C.acc}" stroke-dasharray="4 3"/>${floors(110,260,240,3,40,{rise:1})}${racks(130,196,12)}${T(70,280,'the lot: a new building sized to the zone')}`,'A new building rising on the lot'), /* drawing */
@@ -28,7 +28,7 @@ const A_={
  height:(k,m)=>{ const n=m&&m.nF?m.nF[0]:3, lim=m?m.H:18; return S(`${floors(170,260,120,Math.min(7,n),Math.min(36,200/Math.max(1,n)),{rise:1})}<line x1="140" x2="320" y1="${260-Math.min(220,lim*6)}" y2="${260-Math.min(220,lim*6)}" stroke="${C.acc}" stroke-dasharray="5 4"/>${T(325,264-Math.min(220,lim*6),`${lim.toFixed(1)} m`,{c:C.acc})}${T(20,280,'data-hall floors are tall: 5.5–6.0 m each')}`,'Storeys under the height limit'); }, /* drawing */
  air:()=>S(`${racks(80,170,8,60)}${flowP('M70,250 C120,250 120,160 180,160 C240,160 240,250 300,250',C.water,{})}${flowP('M300,150 C340,140 360,100 400,90',C.heat,{})}${T(300,80,'warm air, 25–35 °C')}${T(70,280,'fans move air through the racks and coils')}`,'Air cooling'), /* drawing */
  plate:()=>S(`${racks(80,170,8,60)}${[0,1,2,3,4,5,6,7].map(i=>flowP(`M${85+i*16},180 V150 H230`,C.heat,{w:1.4})).join('')}${flowP('M230,150 C300,150 320,110 400,100',C.heat,{w:3})}${T(260,90,'warm liquid, easier to reuse')}${T(70,280,'pipes carry heat from each chip')}`,'Liquid to the chip'), /* drawing */
- immersion:()=>S(`<rect x="90" y="170" width="200" height="80" rx="4" fill="rgba(63,151,198,.15)" stroke="${C.water}"/>${racks(105,180,10,58)}${[0,1,2,3,4,5].map(i=>`<circle cx="${120+i*30}" cy="230" r="2.5" fill="${C.water}" class="dbub" style="animation-delay:${i*0.3}s"/>`).join('')}${flowP('M290,200 C340,200 360,140 400,130',C.heat,{w:3})}${T(70,280,'servers sit in a fluid bath')}`,'Immersion cooling'), /* drawing */
+ immersion:()=>S(`<rect x="90" y="170" width="200" height="80" rx="4" fill="rgba(93,127,153,.12)" stroke="${C.water}"/>${racks(105,180,10,58)}${[0,1,2,3,4,5].map(i=>`<circle cx="${120+i*30}" cy="230" r="2.5" fill="${C.water}" class="dbub" style="animation-delay:${i*0.3}s"/>`).join('')}${flowP('M290,200 C340,200 360,140 400,130',C.heat,{w:3})}${T(70,280,'servers sit in a fluid bath')}`,'Immersion cooling'), /* drawing */
  dry:()=>S(`${floors(80,260,140,2,40)}${coolers(240,200,6)}${[0,1,2].map(i=>flowP(`M${252+i*60},195 V120`,C.muted,{slow:1})).join('')}${T(240,110,'fans; no water')}${T(70,280,'a closed loop to coils outside')}`,'Dry coolers'), /* drawing */
  towers:()=>S(`${floors(80,260,140,2,40)}<rect x="260" y="150" width="110" height="90" fill="none" stroke="${C.water}"/>${[0,1,2,3].map(i=>flowP(`M${280+i*24},160 V232`,C.water,{w:1.3})).join('')}${flowP('M315,150 C305,120 335,110 325,80',C.muted,{slow:1})}${T(335,95,'vapour')}${flowP('M315,240 V270 H420',C.water,{slow:1})}${T(330,290,'blowdown to the sewer')}`,'Cooling towers'), /* drawing */
  hybrid:()=>S(`${floors(80,260,140,2,40)}${coolers(240,200,6)}<g class="dspray">${[0,1,2,3,4,5].map(i=>flowP(`M${248+i*30},180 v14`,C.water,{w:1.3})).join('')}${T(240,170,'spray on hot days',{c:C.water})}</g>${T(70,280,'dry most of the year')}`,'Hybrid coolers'), /* drawing */
@@ -57,7 +57,7 @@ const DECK=[
  {id:'foot',when:A=>A.built==='new',q:'How much of the lot does it cover?',k:A=>A.foot||'max',opts:m=>[
    {v:'max',t:'Most the zone allows',up:['The most floor area, so the most that fits'],down:['Least open land left for other uses, rain, or a borefield']},
    {v:'existing',t:'Match the existing building',up:['Keeps today\'s footprint and the land around it'],down:['Less floor area'+(m&&m.footArea?'':''),'Only possible where a building is recorded']},
-   {v:'cover',t:'Set the coverage',up:['Choose the trade between floor area and open land'],down:['Less floor area, so less fits']}],set:(A,v)=>{ A.foot=v; },anim:(v,m)=>A_.foot(v,m),extra:A=>A.foot==='cover'?`<label class="dnum">Coverage <input type="range" id="dcov" min="20" max="100" step="5" value="${A.cover||70}"> <b id="dcovv">${A.cover||70}%</b></label>`:''},
+   {v:'cover',t:'Set the coverage',up:['Choose the trade between floor area and open land'],down:['Less floor area, so less fits']}],set:(A,v)=>{ A.foot=v; },anim:(v,m)=>A_.foot(v,m),extra:A=>(A.foot==='cover'?`<label class="dnum">Coverage <input type="range" id="dcov" min="20" max="100" step="5" value="${A.cover||70}"> <b id="dcovv">${A.cover||70}%</b></label>`:'')+(BD.setup.sideBox?BD.setup.sideBox():'')}, /* Build 2: lot-side facts and Swap the ends */
  {id:'height',when:A=>A.built==='new',q:'How tall?',k:A=>A.hmode||'out',opts:m=>{ const Z=m.Z; return [
    {v:'out',t:`Outright: ${Z.hOutright} m`,up:['No discretion needed from the City'],down:['Fewer storeys of tall data-hall floors']}]
    .concat(Z.hx&&!BD.S.answers.userH?[{v:'cond',t:`With approval: ${Z.hx[0]===Z.hx[1]?Z.hx[0]:Z.hx[0]+'–'+Z.hx[1]} m`,up:['More storeys, more that fits'],down:['Depends on the City\'s discretion and a longer review']}]:[])
@@ -109,7 +109,7 @@ const FEAS={
  gens:{ roof:x=>{ const R=BD.eng.R, mx=Math.floor(BD.data.equipment.roofTank.line/(R.pue[1]*1000*R.fuelHours*R.fuelLkWh)*10)/10; return {s:'chg',why:`Fuel on the roof: a tank supplying an engine may hold at most 1,250 L, and 2,500 L on one supply line (CSA B139.1.1 6.5.3; register arch_csa_b139), which is ${R.fuelHours} h of fuel for about ${mx.toFixed(1)} MW of servers on one set. Larger sizes are blocked with roof generators. FM 5-32 (insurer guidance, not law) advises against generators on the roof. The roof must carry the sets.`}; } },
 };
 const feas=(id,v)=>{ const F=FEAS[id]&&FEAS[id][v]; return F?F(site()):{s:'yes',why:''}; };
-const FS={yes:['Possible here','#8fb996','✓'],chg:['Possible, with a condition','#cdb07a','~'],nk:['Not yet known','#9d9a94','?'],no:['Not possible here','#e39a93','✕']};
+const FS={yes:['Possible here','#4F4F4C','✓'],chg:['Possible, with a condition','#6F6E69','~'],nk:['Not yet known','#6E6E6B','?'],no:['Not possible here','#B5544B','✕']};
 
 /* what each option would mean here, worked out with the model itself (answers swapped in, then put back) */
 function tryAnswers(set,fn){ const A=BD.S.answers, keep=JSON.stringify(A); Object.assign(A,set,{mw:null}); BD.modelReset(); let r; try{ r=fn(); }catch(e){ r=null; } const back=JSON.parse(keep); for(const k of Object.keys(A)) delete A[k]; Object.assign(A,back); BD.modelReset(); return r; }
@@ -152,6 +152,7 @@ function show(i){ const A=BD.S.answers; const L=live(); at=Math.max(0,Math.min(L
   el.querySelectorAll('.dch button').forEach(b=>b.onclick=()=>{ const v=b.dataset.v; if(feas(d.id,v).s==='no'){ pv[d.id]=v; show(at); return; } pv[d.id]=null; d.set(A,v); changed(); });
   const cov=$('#dcov'); if(cov){ cov.oninput=()=>{ $('#dcovv').textContent=cov.value+'%'; }; cov.onchange=()=>{ A.cover=+cov.value; changed(); }; }
   const sto=$('#dsto'); if(sto) sto.onchange=()=>{ A.storeys=Math.max(1,Math.min(12,+sto.value||1)); changed(); };
+  const flp=el.querySelector('#flip'); if(flp) flp.onclick=e=>{ e.preventDefault(); A.flip=!A.flip; changed(); }; /* Build 2: Swap the ends stays an override */
   $('#dB').onclick=()=>{ pv[d.id]=null; if(at) show(at-1); else if(BD.flow&&BD.flow.on) BD.flow.back(); else BD.card(); };
   $('#dN').onclick=()=>{ pv[d.id]=null; if(at<live().length-1) show(at+1); else { A.setupDone=true; if(BD.flow&&BD.flow.on) BD.flow.next(); else BD.fitsView(); } };
   if(CH[d.id]&&BD.viz){ try{ const cap=CH[d.id](el.querySelector('#dchart'),d,opts); el.querySelector('#dcap').textContent=cap||''; }catch(e){ console.warn(e); } }

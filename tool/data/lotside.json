@@ -1,0 +1,128 @@
+{
+ "_about": "Build 2 (3 Nov 2026): lot-side facts. Which edge of a lot faces a street (City street centrelines: vanStreets2026, edmRoads2026), its Edmonton road class, and whether a neighbouring lot is in a residential zone (tile zone codes: vanTax, edmZoningGeo). tool/lotside.js finds them; site.js feeds them into the yards and into which end is the street front. The probe distances in lotside.js are analysis choices, not rules (listed unsourced).",
+ "edmResidential": {
+  "part2": [
+   "RS",
+   "RSF",
+   "RSM",
+   "RM",
+   "RL",
+   "RR"
+  ],
+  "special": [
+   "HOR",
+   "RMU",
+   "BRH",
+   "BLMR",
+   "BMR",
+   "RCES",
+   "RAES",
+   "CCHD",
+   "CCMD",
+   "CCLD",
+   "CCSD",
+   "OLD",
+   "ORH",
+   "ORA",
+   "SLD",
+   "SRH",
+   "SRA",
+   "RTCR",
+   "RVRH",
+   "PRH",
+   "ALA",
+   "GLD",
+   "GRH",
+   "GLRA",
+   "GLDF",
+   "GMRA"
+  ],
+  "src": [
+   "edm_bl20001",
+   "arch_hb_edmBE"
+  ],
+  "_note": "Bylaw 20001 table of contents: Part 2 'Residential Zones' (2.10-2.60). Special Area zones named Residential, Row Housing or Apartment (Part 3) are counted as residential zones too: our reading (?). Direct Control zones are not classed (?)."
+ },
+ "edmIndustrial": {
+  "zones": [
+   "BE",
+   "IM",
+   "IH"
+  ],
+  "src": [
+   "edm_bl20001"
+  ],
+  "_note": "Bylaw 20001 Part 2 'Industrial Zones' (2.120-2.140); IM 4.1.5-4.1.6 sets setbacks by industrial or non-industrial neighbours"
+ },
+ "edmSetback": {
+  "BE": {
+   "street": 6.0,
+   "streetCL": 4.5,
+   "alley": 0,
+   "site": 0,
+   "res": 6.0,
+   "src": [
+    "arch_hb_edmBE"
+   ],
+   "_note": "s. 2.120 Table 4.1: 4.1.3 abutting streets 6.0 m, 4.1.4 abutting a Collector or Local Road 4.5 m, 4.1.5 abutting sites 0 m, 4.1.6 abutting a site in a residential zone 6.0 m, 4.1.7 alleys 0 m"
+  },
+  "IM": {
+   "street": 3.0,
+   "alley": 0,
+   "site": 0,
+   "nonInd": 6.0,
+   "src": [
+    "arch_hb_edmIM"
+   ],
+   "_note": "s. 2.130 Table 4.1: 4.1.3 street 3.0 m, 4.1.4 alley 0 m, 4.1.5 abutting a site in a non-industrial zone 6.0 m, 4.1.6 industrial zone 0 m"
+  },
+  "IH": {
+   "street": 3.0,
+   "alley": 0,
+   "site": 0,
+   "src": [
+    "arch_hb_edmIH"
+   ],
+   "_note": "s. 2.140 Table 4.1: 4.1.4 street 3.0 m, 4.1.5 alley or an abutting site 0 m"
+  }
+ },
+ "classes": {
+  "edm": {
+   "Arterial": "arterial",
+   "Collector": "collector",
+   "Local": "local",
+   "Alley": "alley",
+   "Road": "unclassified"
+  },
+  "van": {
+   "Arterial": "arterial",
+   "Secondary Arterial": "arterial",
+   "Collector": "collector",
+   "Residential": "local",
+   "Lane": "alley",
+   "Leased": "unclassified",
+   "Recreational": "unclassified",
+   "Closed": "unclassified"
+  },
+  "src": [
+   "edmRoads2026",
+   "vanStreets2026"
+  ],
+  "_note": "street use or functional class as the City files give it; 'Road' (Edmonton) and leased, recreational or closed streets (Vancouver) carry no class: '?'"
+ },
+ "vanResidential": {
+  "prefix": [
+   "R1-",
+   "RS-",
+   "RT-",
+   "RM-",
+   "RA-",
+   "FM-",
+   "RR-"
+  ],
+  "src": [
+   "vanTax"
+  ],
+  "_note": "Vancouver residential districts read from the district names in the tax report's zoning field: our reading (?). Used for the lot-side facts only; no Vancouver yard in the tool depends on it yet."
+ }
+}

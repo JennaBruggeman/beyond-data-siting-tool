@@ -44,3 +44,7 @@ To clear one: add its source to the register through `register/patches/*.py`, mo
 | tool/site.js | 199 | 2, 3, 4 | Hall fix: hall footprint proportions tried, 1, 1.5, 2, 3 and 4 : 1, then full width or length. A tool choice, not a rule. |
 | tool/arch.js | 82 | 10000 | Hall fix: tie-break weight that ranks an option leaving a street-entrance program undrawn after every option that draws it. Arithmetic for the ranking. |
 | tool/arch.js | 160 | 8 | Hall fix: the "not drawn" text gives the block's floor over 1 to 8 storeys, the placement limit above. |
+| tool/lotside.js | 10 | 35, 2, 2 | Build 2 (3 Nov 2026): lot-side probe distances: a street centreline within 35 m outside an edge, a neighbouring lot looked for 2 m outside, edges under 2 m skipped. Analysis choices, not rules. |
+| tool/lotside.js | 11 | 4, 3, 2 | Build 2: street class ranking (arterial over collector over local) for which end is the street front. An ordering, not a figure. |
+| tool/lotside.js | 15 | 100 | Build 2: grid cell for the street index (100 m). Arithmetic for the search. |
+| tool/index.html | 646 | 5 | Build 2: parcels kept for the lot-side search, within the street probe plus 5 m of the lot's box. A speed filter, not a rule. |
