@@ -18,9 +18,9 @@ To clear one: add its source to the register through `register/patches/*.py`, mo
 | tool/plant.js | 19 | 4, 6 | Side-to-side gap between tower cells, 4.0 m (small plant) and 6.0 m (large), and 2.0 m between generator sets ("assumed from the 1 m service clearance"). The 1.8 m end gap for towers sits on the same line. BAC's layout guide (bacLayout2023) gives the 1.8 m and the air-inlet distance but not the side gaps. |
 | tool/plant.js | 26 | 6, 6 | Over 6 MW of heat, the "large" tower spacing is used. Chillers switch at the same point but keep the same unit. No source. |
 | tool/plant.js | 60 | 2, 40 | Provisional size before one is set: 2 storeys if the model has none, capped at 40 MW (the top of the slider). Tool choices. |
-| tool/site.js | 86 | 100 | Vancouver: no loading bay under 100 m² of floor. Not in the Parking By-law text the register quotes (vanParking5). |
-| tool/site.js | 112 | 4, 4, 4 | An existing building with no recorded height is taken as one storey at 4 m, and storeys as 4 m each (finding I-06, labelled in the tool). An assumption. |
-| tool/site.js | 162 | 12, 12 | A sized-down data hall is kept at least 12 m deep. A tool choice. |
+| tool/site.js | 88 | 100 | Vancouver: no loading bay under 100 m² of floor. Not in the Parking By-law text the register quotes (vanParking5). |
+| tool/site.js | 136 | 4, 4, 4 | An existing building with no recorded height is taken as one storey at 4 m, and storeys as 4 m each (finding I-06, labelled in the tool). An assumption. |
+| tool/site.js | 191 | 12, 12 | A sized-down data hall is kept at least 12 m deep. A tool choice. |
 | tool/decide.js | 60 | 70, 70 | Default coverage 70 % on the coverage slider (`A.cover||70`). A UI default. |
 | tool/decide.js | 64 | 12 | Storeys input capped at 12 (input max). A UI limit. |
 | tool/decide.js | 101 | 8 | A building under 8 m tall is read as "one or two storeys" (lease feasibility). An assumption, no source. |
@@ -40,11 +40,13 @@ To clear one: add its source to the register through `register/patches/*.py`, mo
 | tool/arch.js | 413 | 10, 100 | Resize step when a program has no step: 10 % of its size, at least 10 m² (100 m² taken when size is not set). A UI choice. |
 | tool/arch.js | 423 | 12 | Up to 12 passes when shrinking other blocks to make room. A loop limit. |
 | tool/arch.js | 325 | 4 | Ratios: up to 4 passes to settle the data centre's cap while the plant yard moves with the MW (rebuild part 1, 3 Nov 2026). A loop limit. |
-| tool/site.js | 197 | 6 | Hall fix (3 Nov 2026): a hall footprint option has no side under 6 m (the same drawing rule as the program blocks). A tool choice. |
-| tool/site.js | 199 | 2, 3, 4 | Hall fix: hall footprint proportions tried, 1, 1.5, 2, 3 and 4 : 1, then full width or length. A tool choice, not a rule. |
+| tool/site.js | 261 | 6 | Hall fix (3 Nov 2026): a hall footprint option has no side under 6 m (the same drawing rule as the program blocks). A tool choice. |
+| tool/site.js | 228 | 2, 3, 4 | Hall fix: hall footprint proportions tried, 1, 1.5, 2, 3 and 4 : 1, then full width or length. A tool choice, not a rule. |
 | tool/arch.js | 82 | 10000 | Hall fix: tie-break weight that ranks an option leaving a street-entrance program undrawn after every option that draws it. Arithmetic for the ranking. |
 | tool/arch.js | 160 | 8 | Hall fix: the "not drawn" text gives the block's floor over 1 to 8 storeys, the placement limit above. |
-| tool/lotside.js | 10 | 35, 2, 2 | Build 2 (3 Nov 2026): lot-side probe distances: a street centreline within 35 m outside an edge, a neighbouring lot looked for 2 m outside, edges under 2 m skipped. Analysis choices, not rules. |
+| tool/lotside.js | 10 | 35, 2 | Build 2 (3 Nov 2026): lot-side probe distances: a street centreline within 35 m outside an edge, a neighbouring lot looked for 2 m outside; edges under 0.5 m skipped (LOTLINES 4 Nov 2026, was 2 m). Analysis choices, not rules. |
+| tool/lotside.js | 51 | 2 | LOTLINES (4 Nov 2026): consecutive edges turning under 2 degrees are one lot line (also the slack for a corner cut); street lines within 0.5 m are equal; rear lines within 0.5 m of the furthest count as furthest. Analysis choices (data precision), not rules. |
+| tool/lotside.js | 53 | 180, 180 | LOTLINES: degrees arithmetic (180 minus the 135 degree corner angle, register lot_edm_820_lines; radians to degrees). Arithmetic. |
 | tool/lotside.js | 11 | 4, 3, 2 | Build 2: street class ranking (arterial over collector over local) for which end is the street front. An ordering, not a figure. |
 | tool/lotside.js | 15 | 100 | Build 2: grid cell for the street index (100 m). Arithmetic for the search. |
 | tool/index.html | 646 | 5 | Build 2: parcels kept for the lot-side search, within the street probe plus 5 m of the lot's box. A speed filter, not a rule. |
