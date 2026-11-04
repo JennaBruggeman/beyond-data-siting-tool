@@ -23,6 +23,10 @@ function run(city) {
   const zc = rec => rec ? String((city === 'edm' ? (rec[2] || rec[1]) : rec[1]) || '').trim().split(/\s+/)[0].toUpperCase() : null;
   const want = new Set(Object.keys(city === 'van' ? ZON.ZV : ZON.ZE).map(z => z.split(' ')[0].replace(/^I-2B$/, 'I-2')));
   const keys = meta.tiles.map(t => t[0] + '_' + t[1]); keys.forEach(tile);
+  // J.B. 4 Nov 2026: a parcel with no zone on record takes its zone from the City zoning map (Edmonton; meta.json overview, register edmZoningGeo)
+  const OV = city === 'edm' ? (meta.overview || []).map(([zi, a]) => { const r = decode(a, 0, 0, q); return { zi, r, bb: bbox(r) }; }) : [];
+  const pip = (x, y, r) => { let c = false; for (let i = 0, j = r.length - 2; i < r.length; j = i, i += 2) { const xi = r[i], yi = r[i + 1], xj = r[j], yj = r[j + 1]; if (((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) c = !c; } return c; };
+  const zoneAt = OV.length ? (x, y) => { for (const o of OV) { const b = o.bb; if (x < b[0] || x > b[2] || y < b[1] || y > b[3]) continue; if (pip(x, y, o.r)) return String(meta.zones[o.zi] || '').trim().split(/\s+/)[0].toUpperCase() || null; } return null; } : null;
   const cand = {}; const seen = new Set();
   for (const k of keys) { const T = tile(k); if (!T) continue; for (const p of T.par) { const rec = p.ids.map(i => REC[i]).find(Boolean); if (!rec) continue; const z = zc(rec); if (!want.has(z)) continue;
       if (seen.has(p.id)) continue; seen.add(p.id); if (area(p.r) < 50) continue; (cand[z] = cand[z] || []).push({ k, p, rec }); } }
@@ -33,7 +37,7 @@ function run(city) {
       for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) { const t2 = tile((ti + dx) + '_' + (tj + dy)); if (!t2) continue;
         for (const o of t2.par) { if (o.bb[2] < p.bb[0] - 40 || o.bb[0] > p.bb[2] + 40 || o.bb[3] < p.bb[1] - 40 || o.bb[1] > p.bb[3] + 40) continue; const r2 = o.ids.map(i => REC[i]).find(Boolean) || null;
           parcels.push({ r: o.r, bb: o.bb, zone: zc(r2), rec: !!r2, own: city === 'van' ? o.id === p.id : o === p }); } }
-      const E = LSF.lotEdges(p.r, { city, streets: ST, parcels, classMap: LSD.classes[city] }), K = LSF.classify(E, city, LINES);
+      const E = LSF.lotEdges(p.r, { city, streets: ST, parcels, classMap: LSD.classes[city], zoneAt }), K = LSF.classify(E, city, LINES);
       res.lots++; if (K.corner) res.corner++; if (K.dbl) res.dbl++; if (!K.lines.some(l => l.street)) res.lotsNoStreet++;
       for (const l of K.lines) { res.lines[l.kind] = (res.lines[l.kind] || 0) + 1; Z.lines[l.kind] = (Z.lines[l.kind] || 0) + 1; res.edges[l.kind] = (res.edges[l.kind] || 0) + l.e.length; }
       for (const l of K.lines) if (l.kind === 'unclear') { const w = l.why.replace(/ \(.*$/, ''); res.unclearWhy[w] = (res.unclearWhy[w] || 0) + 1; }

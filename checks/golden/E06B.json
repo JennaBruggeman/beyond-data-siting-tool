@@ -17,7 +17,6 @@
   "genAt": "yard",
   "genSpares": "n1",
   "vis": "indoors",
-  "mwPick": "large",
   "mwSite": "146402"
  },
  "sel": {
@@ -163,8 +162,7 @@
    "lotArea": 4284,
    "ring": "[ring 18]",
    "notes": [
-    "Lot lines: what one of this lot's edges abuts is not known (no lot or street found, or a parcel with no zone on record), so which setback it has is not known (?); the deepest is applied (see Lot lines).",
-    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 62–65 dBA (quieter–standard unit rating) at the property line of 8065 CEDRIC MAH ROAD NW (BRH), 98 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1))."
+    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 62–65 dBA (quieter–standard unit rating) at the property line of 8065 CEDRIC MAH ROAD NW (BRH), 101 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1))."
    ],
    "warn": [],
    "F": {
@@ -328,7 +326,7 @@
    ],
    "yards": {
     "front": 4.5,
-    "rear": 6,
+    "rear": 0,
     "s0": 0,
     "s1": 0,
     "by": "abutting, per line",
@@ -416,9 +414,9 @@
       "kind": "rear",
       "cand": null,
       "why": "furthest from and opposite the Front Lot Line (s. 8.20 Rear Lot Line)",
-      "d": 6,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 38.577843
      },
      {
@@ -451,14 +449,14 @@
      }
     ],
     "unclear": 0,
-    "unAbut": 1
+    "unAbut": 0
    },
    "yardRect": "[ring 8]",
    "inset": "[ring 8]",
    "yardNote": "",
    "edgeYards": "[cycle]",
-   "yardOff": "[ring 18]",
-   "yardLine": "[ring 20]",
+   "yardOff": "[ring 16]",
+   "yardLine": "[ring 16]",
    "yardOffBad": false,
    "loadingNeed": {
     "n": 1,
@@ -472,14 +470,14 @@
    },
    "loading": "[ring 8]",
    "loadV": [
-    -28.295708,
-    23.942522
+    -29.021239,
+    23.216991
    ],
    "loadDepth": 15.1,
    "loadSpaces": [
     "[ring 8]"
    ],
-   "plantYardStart": 16.10551,
+   "plantYardStart": 22.10551,
    "dir": -1,
    "v": [
     -29.021239,
@@ -488,7 +486,7 @@
    "uFront": -32.70551,
    "footMode": "max",
    "uBuild": [
-    16.10551,
+    22.10551,
     -32.70551
    ],
    "mwSized": 3.8,
@@ -590,8 +588,8 @@
     },
     "yard": "[ring 8]",
     "yardU": [
-     4.12951,
-     16.10551
+     10.12951,
+     22.10551
     ],
     "indoor": 464.37471,
     "coolRoofIndoor": 5,
@@ -610,10 +608,10 @@
     "floor": 2913.333333,
     "perMW": 766.666667
    },
-   "foot": "[ring 8]",
+   "foot": "[ring 10]",
    "footRect": "[ring 8]",
    "simpleMass": true,
-   "footArea": 2145.431139,
+   "footArea": 2492.799781,
    "noise": {
     "lw": [
      109.8,
@@ -621,8 +619,8 @@
     ],
     "n": 5,
     "src": [
-     -1455.5,
-     3178.3
+     -1458.2,
+     3176.5
     ],
     "where": "indoors",
     "groups": [
@@ -631,7 +629,7 @@
       "n": 5
      }
     ],
-    "tested": 2478,
+    "tested": 2483,
     "overQ": 0,
     "overS": 0,
     "limit": 50,
@@ -646,14 +644,14 @@
     "bldOnly": 0,
     "block": null,
     "flag": null,
-    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 62–65 dBA (quieter–standard unit rating) at the property line of 8065 CEDRIC MAH ROAD NW (BRH), 98 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1)).",
+    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 62–65 dBA (quieter–standard unit rating) at the property line of 8065 CEDRIC MAH ROAD NW (BRH), 101 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1)).",
     "worst": {
      "addr": "8065 CEDRIC MAH ROAD NW",
      "zt": "BRH",
      "lot": true,
-     "d": 98,
-     "lo": 62,
-     "hi": 65.3,
+     "d": 101.1,
+     "lo": 61.7,
+     "hi": 65,
      "L": 50,
      "Ls": 50,
      "sec": "Bylaw 14600 s. 20(1)"
@@ -688,8 +686,8 @@
    "ground": false
   },
   "hallS": [
-   1351.338993,
-   2027.00849
+   1642.460717,
+   2463.691075
   ],
   "hallL": null,
   "floors": 2,
@@ -698,54 +696,54 @@
    2
   ],
   "fpNote": "from the site setup: the most the zone allows, less setbacks, loading and the plant yard",
-  "fp": 1825.582024,
+  "fp": 2175.27129,
   "fpCalc": null,
-  "indoorPlant": 835.874478,
+  "indoorPlant": 928.74942,
   "g": [
    6854.4,
    6854.4
   ],
   "G": [
-   2815.28957,
-   2815.28957
+   3421.79316,
+   3421.79316
   ],
   "fullCover": "",
   "heightCut": true,
   "yardCut": true,
   "gross": [
-   2815.28957,
-   2815.28957
+   3421.79316,
+   3421.79316
   ],
   "how": "lot 4,284 m² × floor-space ratio 1.6",
   "hallGross": [
-   2815.28957,
-   2815.28957
+   3421.79316,
+   3421.79316
   ],
   "density": "typical",
   "mwS": [
-   2.144983,
-   6.954706
+   2.607081,
+   8.485459
   ],
   "mwL": null,
   "hall": [
-   1351.338993,
-   2027.00849
+   1642.460717,
+   2463.691075
   ],
   "mw": [
-   2.144983,
-   6.954706
+   2.607081,
+   8.485459
   ],
   "m2MW": [
    290,
    630
   ],
   "mwCheck": [
-   2.538584,
-   5.574831
+   3.085476,
+   6.775828
   ],
-  "mwTopRaw": 6.989684,
+  "mwTopRaw": 8.495486,
   "mwCapped": true,
-  "plantFor": 6.954706
+  "plantFor": 8.485459
  },
  "model": "[cycle]",
  "errors": []

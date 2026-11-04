@@ -216,8 +216,7 @@
    "lotArea": 8826,
    "ring": "[ring 10]",
    "notes": [
-    "Lot lines: what one of this lot's edges abuts is not known (no lot or street found, or a parcel with no zone on record), so which setback it has is not known (?); the deepest is applied (see Lot lines).",
-    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 69–73 dBA (quieter–standard unit rating) at the property line of 8720 106A AVENUE NW (RM), 97 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1))."
+    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 70–73 dBA (quieter–standard unit rating) at the property line of 8720 106A AVENUE NW (RM), 94 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1))."
    ],
    "warn": [],
    "F": {
@@ -300,7 +299,9 @@
      "road": null,
      "d": null,
      "alley": false,
-     "nbr": []
+     "nbr": [
+      "IM"
+     ]
     },
     "u1": {
      "street": "arterial",
@@ -341,7 +342,7 @@
    ],
    "yards": {
     "front": 3,
-    "rear": 6,
+    "rear": 0,
     "s0": 0,
     "s1": 0,
     "by": "abutting, per line",
@@ -359,9 +360,9 @@
       "kind": "rear",
       "cand": null,
       "why": "furthest from and opposite the Front Lot Line (s. 8.20 Rear Lot Line)",
-      "d": 6,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 115.108644
      },
      {
@@ -408,14 +409,14 @@
      }
     ],
     "unclear": 0,
-    "unAbut": 1
+    "unAbut": 0
    },
    "yardRect": "[ring 8]",
    "inset": "[ring 8]",
    "yardNote": "",
    "edgeYards": "[cycle]",
    "yardOff": "[ring 8]",
-   "yardLine": "[ring 8]",
+   "yardLine": "[ring 10]",
    "yardOffBad": false,
    "loadingNeed": {
     "n": 2,
@@ -437,7 +438,7 @@
     "[ring 8]",
     "[ring 8]"
    ],
-   "plantYardStart": -16.896712,
+   "plantYardStart": -22.896712,
    "dir": 1,
    "v": [
     -57.804086,
@@ -446,7 +447,7 @@
    "uFront": 34.996712,
    "footMode": "max",
    "uBuild": [
-    -16.896712,
+    -22.896712,
     34.996712
    ],
    "mwSized": 23.2,
@@ -668,8 +669,8 @@
     },
     "yard": "[ring 8]",
     "yardU": [
-     -16.896712,
-     0.567288
+     -22.896712,
+     -5.432712
     ],
     "indoor": 2414.748492,
     "coolRoofIndoor": 26,
@@ -686,7 +687,7 @@
    "footRect": "[ring 8]",
    "simpleMass": true,
    "serverFoot": "[ring 8]",
-   "footArea": 3998.891278,
+   "footArea": 4695.776237,
    "noise": {
     "lw": [
      116.9,
@@ -694,8 +695,8 @@
     ],
     "n": 26,
     "src": [
-     1484.8,
-     1683.6
+     1487.2,
+     1682
     ],
     "where": "indoors",
     "groups": [
@@ -719,14 +720,14 @@
     "bldOnly": 0,
     "block": null,
     "flag": null,
-    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 69–73 dBA (quieter–standard unit rating) at the property line of 8720 106A AVENUE NW (RM), 97 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1)).",
+    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 70–73 dBA (quieter–standard unit rating) at the property line of 8720 106A AVENUE NW (RM), 94 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1)).",
     "worst": {
      "addr": "8720 106A AVENUE NW",
      "zt": "RM",
      "lot": true,
-     "d": 96.6,
-     "lo": 69.3,
-     "hi": 72.6,
+     "d": 93.7,
+     "lo": 69.5,
+     "hi": 72.8,
      "L": 50,
      "Ls": 50,
      "sec": "Bylaw 14600 s. 20(1)"
@@ -761,8 +762,8 @@
    "ground": false
   },
   "hallS": [
-   4599.324163,
-   6898.986245
+   5513.678561,
+   8270.517842
   ],
   "hallL": null,
   "floors": 3,
@@ -771,54 +772,54 @@
    3
   ],
   "fpNote": "from the site setup: the most the zone allows, less setbacks, loading and the plant yard",
-  "fp": 3998.891278,
+  "fp": 4695.776237,
   "fpCalc": null,
-  "indoorPlant": 2414.748492,
+  "indoorPlant": 2600.498376,
   "g": [
    17652,
    17652
   ],
   "G": [
-   9581.925341,
-   9581.925341
+   11486.830335,
+   11486.830335
   ],
   "fullCover": "",
   "heightCut": true,
   "yardCut": true,
   "gross": [
-   9581.925341,
-   9581.925341
+   11486.830335,
+   11486.830335
   ],
   "how": "lot 8,826 m² × floor-space ratio 2",
   "hallGross": [
-   9581.925341,
-   9581.925341
+   11486.830335,
+   11486.830335
   ],
   "density": "typical",
   "mwS": [
-   7.300515,
-   23.763171
+   8.751871,
+   25.791668
   ],
   "mwL": null,
   "hall": [
-   4599.324163,
-   6898.986245
+   5513.678561,
+   8270.517842
   ],
   "mw": [
-   7.300515,
-   23.763171
+   8.751871,
+   25.791668
   ],
   "m2MW": [
    290,
    630
   ],
   "mwCheck": [
-   8.640149,
-   18.97411
+   10.357827,
+   22.746199
   ],
-  "mwTopRaw": 23.789608,
+  "mwTopRaw": 28.519027,
   "mwCapped": true,
-  "plantFor": 23.763171
+  "plantFor": 25.791668
  },
  "model": "[cycle]",
  "errors": []
