@@ -16,7 +16,6 @@
   "gens": "yes",
   "genAt": "yard",
   "genSpares": "n1",
-  "mwPick": "large",
   "mwSite": "883345"
  },
  "sel": {
@@ -249,8 +248,7 @@
    "lotArea": 14565,
    "ring": "[ring 82]",
    "notes": [
-    "Lot lines: what 34 of this lot's edges abut is not known (no lot or street found, or a parcel with no zone on record), so which setback they have is not known (?); the deepest is applied (see Lot lines).",
-    "Noise: needs 8 low-noise chillers: Trane RTAF 280 low-noise, Lw 98 dBA per 1,010 kW, 101 standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?); and a 4.9 m solid screen around the roof and yard plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 67–70 dBA (quieter–standard unit rating) at the property line of 12521 123 STREET NW (BE), 48 m away; limit 60 dBA…",
+    "Noise: needs 8 low-noise chillers: Trane RTAF 280 low-noise, Lw 98 dBA per 1,010 kW, 101 standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?); and a 4.9 m solid screen around the roof and yard plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 67–70 dBA (quieter–standard unit rating) at the property line of 12521 123 STREET NW (BE), 50 m away; limit 60 dBA…",
     "Noise: the plant would exceed the 50 dBA night limit at the property line of (no parcel record: residential limit assumed ?) (about 51 dBA (low-noise units: one rating) with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof and yard; NSW 2021, −8 dB), Bylaw 14600 s. 20(1)) if that lot takes the stricter limit; its zoning is not known, so this is a note, not a block."
    ],
    "warn": [],
@@ -662,7 +660,9 @@
      "road": null,
      "d": null,
      "alley": false,
-     "nbr": []
+     "nbr": [
+      "IH"
+     ]
     },
     "v1": {
      "street": "local",
@@ -688,7 +688,7 @@
    "yards": {
     "front": 0,
     "rear": 0,
-    "s0": 3,
+    "s0": 0,
     "s1": 0,
     "by": "abutting, per line",
     "src": [
@@ -705,9 +705,9 @@
       "kind": "side",
       "cand": null,
       "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 1.118034
      },
      {
@@ -719,9 +719,9 @@
       "kind": "side",
       "cand": null,
       "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5
      },
      {
@@ -733,9 +733,9 @@
       "kind": "rear",
       "cand": null,
       "why": "furthest from and opposite the Front Lot Line (s. 8.20 Rear Lot Line)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 4.716991
      },
      {
@@ -831,9 +831,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 74.969994
      },
      {
@@ -845,9 +845,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.385165
      },
      {
@@ -859,9 +859,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.385165
      },
      {
@@ -873,9 +873,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.385165
      },
      {
@@ -887,9 +887,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.59017
      },
      {
@@ -901,9 +901,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.59017
      },
      {
@@ -915,9 +915,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.385165
      },
      {
@@ -929,9 +929,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.59017
      },
      {
@@ -943,9 +943,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.830952
      },
      {
@@ -957,9 +957,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.408327
      },
      {
@@ -971,9 +971,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.59017
      },
      {
@@ -985,9 +985,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.408327
      },
      {
@@ -999,9 +999,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.830952
      },
      {
@@ -1013,9 +1013,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.700877
      },
      {
@@ -1027,9 +1027,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.408327
      },
      {
@@ -1041,9 +1041,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.700877
      },
      {
@@ -1055,9 +1055,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.700877
      },
      {
@@ -1069,9 +1069,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.315073
      },
      {
@@ -1083,9 +1083,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.700877
      },
      {
@@ -1097,9 +1097,9 @@
       "kind": "side",
       "cand": null,
       "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.656854
      },
      {
@@ -1111,9 +1111,9 @@
       "kind": "side",
       "cand": null,
       "why": "Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.315073
      },
      {
@@ -1125,9 +1125,9 @@
       "kind": "side",
       "cand": null,
       "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.656854
      },
      {
@@ -1139,9 +1139,9 @@
       "kind": "side",
       "cand": null,
       "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.656854
      },
      {
@@ -1153,9 +1153,9 @@
       "kind": "side",
       "cand": null,
       "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.656854
      },
      {
@@ -1167,9 +1167,9 @@
       "kind": "side",
       "cand": null,
       "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 6.020797
      },
      {
@@ -1181,9 +1181,9 @@
       "kind": "side",
       "cand": null,
       "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.315073
      },
      {
@@ -1195,9 +1195,9 @@
       "kind": "side",
       "cand": null,
       "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 6.020797
      },
      {
@@ -1209,9 +1209,9 @@
       "kind": "side",
       "cand": null,
       "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.700877
      },
      {
@@ -1223,9 +1223,9 @@
       "kind": "side",
       "cand": null,
       "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.700877
      },
      {
@@ -1237,9 +1237,9 @@
       "kind": "side",
       "cand": null,
       "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 5.408327
      },
      {
@@ -1251,21 +1251,21 @@
       "kind": "side",
       "cand": null,
       "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
-      "d": 3,
-      "abuts": "a parcel with no zone on record (?)",
-      "unA": true,
+      "d": 0,
+      "abuts": "lot (zone from the zoning map)",
+      "unA": false,
       "len": 6.103278
      }
     ],
     "unclear": 0,
-    "unAbut": 34
+    "unAbut": 0
    },
    "yardRect": "[ring 8]",
    "inset": "[ring 8]",
    "yardNote": "",
    "edgeYards": "[cycle]",
    "yardOff": "[ring 80]",
-   "yardLine": "[ring 80]",
+   "yardLine": "[ring 82]",
    "yardOffBad": false,
    "loadingNeed": {
     "n": 1,
@@ -1277,9 +1277,9 @@
     "basis": "1 loading space for 2,913 m² of floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site, with no backing onto streets or alleys (s. 5.80 subs. 7). Aisle: Vancouver's 6.1 m used as an assumption.",
     "src": "edmZB580"
    },
-   "loading": "[ring 12]",
+   "loading": "[ring 18]",
    "loadV": [
-    -49.634137,
+    -52.634137,
     52.634137
    ],
    "loadDepth": 15.1,
@@ -1289,7 +1289,7 @@
    "plantYardStart": -107.446167,
    "dir": 1,
    "v": [
-    -49.634137,
+    -52.634137,
     52.634137
    ],
    "uFront": 122.546167,
@@ -1459,7 +1459,7 @@
    "foot": "[ring 70]",
    "footRect": "[ring 8]",
    "simpleMass": true,
-   "footArea": 13105.842784,
+   "footArea": 13774.367417,
    "noise": {
     "lw": [
      109.8,
@@ -1467,8 +1467,8 @@
     ],
     "n": 5,
     "src": [
-     -2193.9,
-     4696.3
+     -2191.9,
+     4698
     ],
     "where": "roof and yard",
     "groups": [
@@ -1496,14 +1496,14 @@
     "bldOnly": 0,
     "block": null,
     "flag": "Noise: the plant would exceed the 50 dBA night limit at the property line of (no parcel record: residential limit assumed ?) (about 51 dBA (low-noise units: one rating) with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof and yard; NSW 2021, −8 dB), Bylaw 14600 s. 20(1)) if that lot takes the stricter limit; its zoning is not known, so this is a note, not a block.",
-    "req": "Noise: needs 8 low-noise chillers: Trane RTAF 280 low-noise, Lw 98 dBA per 1,010 kW, 101 standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?); and a 4.9 m solid screen around the roof and yard plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 67–70 dBA (quieter–standard unit rating) at the property line of 12521 123 STREET NW (BE), 48 m away; limit 60 dBA…",
+    "req": "Noise: needs 8 low-noise chillers: Trane RTAF 280 low-noise, Lw 98 dBA per 1,010 kW, 101 standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?); and a 4.9 m solid screen around the roof and yard plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 67–70 dBA (quieter–standard unit rating) at the property line of 12521 123 STREET NW (BE), 50 m away; limit 60 dBA…",
     "worst": {
      "addr": "12521 123 STREET NW",
      "zt": "BE",
      "lot": true,
-     "d": 48.1,
-     "lo": 67,
-     "hi": 70.3,
+     "d": 50.1,
+     "lo": 66.6,
+     "hi": 69.9,
      "L": 60,
      "Ls": 60,
      "sec": "Bylaw 14600 s. 22(1)"
@@ -1556,7 +1556,7 @@
    5
   ],
   "fpNote": "from the site setup: the most the zone allows, less setbacks, loading and the plant yard",
-  "fp": 11299.348468,
+  "fp": 11835.344756,
   "fpCalc": null,
   "indoorPlant": 0,
   "g": [
