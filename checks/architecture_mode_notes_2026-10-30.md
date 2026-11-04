@@ -187,4 +187,5 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - Applied: eStruxture VAN-3 10 MW and single 25 kV entrance; Qu EDM1 2.5 MW; Cologix VAN1 400 kW, VAN3 3 MW, VAN5 1 MW (sheets). TransLink bylaw adopted 8 Feb 2021; Meta federal review IAAC 90123 (records, not conflicts).
 - eStruxture VAN-3 status: operating (J.B., 4 Nov 2026; matches the operator index page).
 - M3 (111 E 5th Ave): 8,305 m² above grade, the City draft by-law figure (J.B., 4 Nov 2026); below grade ?.
-- Remaining conflicts without a sheet: see the chat of 4 Nov (TELUS Garden location, SFU PUE, Qu EDM2 sheet's own 2.5 vs 3 MW, Meta size, Wolfpaw sites).
+- TELUS Garden data centre: kept (BCUC orders), placed "next to TELUS Garden, address ?"; find the address in City permits (J.B., 4 Nov 2026).
+- Remaining conflicts without a sheet: see the chat of 4 Nov (SFU PUE, Qu EDM2 sheet's own 2.5 vs 3 MW, Meta size, Wolfpaw sites).
