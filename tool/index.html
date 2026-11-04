@@ -520,6 +520,8 @@ async function loadTile(city,key){
     if(t.P) for(const [pid,a] of t.P){ const r=decodeRing(a,ox,oy,q); T.par.push({id:pid,r,bb:bbox(r)}); }
     // Edmonton lot outlines: Alberta title mapping (c) Altalis, via Edmonton Public Schools GIS; academic use (separate files, not in git)
     if(city==='edm'){ try{ const l=await getJSON(`tiles/edm/l_${key}.json`); const [lx,ly]=l.o; l.L.forEach(([a,ids],n)=>{ const r=decodeRing(a,lx,ly,q); T.par.push({id:'L'+key+'_'+n,r,bb:bbox(r),ids}); }); }catch(e){} }
+    /* ELEV 4 Nov 2026: ground elevation per lot (tiles/<city>/g_<key>.json, tool/make_grade.py; not in git). Missing file: grade '?' */
+    try{ T.G=(await getJSON(`tiles/${city}/g_${key}.json`)).G||{}; }catch(e){ T.G={}; }
     if(t.E) for(const [pid,x,y] of t.E) T.pts.push({id:pid,x:ox+x/q,y:oy+y/q});
     for(const [h,a,f] of t.B){ const r=decodeRing(a,ox,oy,q); let hh=h, ff=f||0; if(city==='edm'&&ff===0&&h>40){ ff=6; hh=4; } /* M70: an unmeasured estimate over 40 m (up to 280 m on sheds) is not trusted: height not known, drawn one storey */ T.bld.push({h:hh,r,f:ff,c:centroid(r),a:area(r),hEst:ff===6?h:undefined}); }
     T.pPath=pathOf(T.par.map(p=>p.r)); T.bPath=pathOf(T.bld.filter(b=>b.f!==3).map(b=>b.r)); T.gPath=pathOf(T.bld.filter(b=>b.f===3).map(b=>b.r));
@@ -657,6 +659,9 @@ async function select(sel){
         parcels.push({r:p.r,bb:p.bb,zone:zc(rec),rec:!!rec,own}); } }
       const MZ=sel.city==='edm'&&S.meta.edm&&S.meta.edm.ovRaw?S.meta.edm:null, zoneAt=MZ?(x,y)=>{ for(const o of MZ.ovRaw){ const b=o.bb; if(x<b[0]||x>b[2]||y<b[1]||y>b[3]) continue; if(pip(x,y,o.r)) return String(MZ.zones[o.zi]||'').trim().split(/\s+/)[0].toUpperCase()||null; } return null; }:null; /* J.B. 4 Nov 2026: a parcel with no zone on record takes its zone from the City zoning map (tiles meta overview; register edmZoningGeo) */
       sel.edges=ST?BD.lotSide.lotEdges(sel.ring,{city:sel.city,streets:ST,parcels,classMap:LS.classes[sel.city],zoneAt}):null; }catch(e){ console.warn('lot sides',e); sel.edges=null; } }
+  /* ELEV 4 Nov 2026: lot grade (any loaded tile that holds this id) and the share of the lot in Vancouver's designated floodplain */
+  { const ids=sel.city==='edm'?[sel.id,...(sel.lotIds||[])]:[sel.id]; sel.grade=null; for(const id in S.tiles){ if(!id.startsWith(sel.city+':')) continue; const G=S.tiles[id].G||{}; const k=ids.find(i=>G[i]); if(k){ sel.grade=G[k]; break; } }
+    sel.floodD=sel.city==='van'?floodShare(sel,'designated'):0; }
   S.sel=sel; S.view2=null; window.BD&&BD.scene3d&&BD.scene3d.hide(); document.body.classList.remove('wide'); if(sel.city!==S.city) await setCity(sel.city,true);
   const c=sel.ring?centroid(sel.ring):sel.pt; if(c&&(S.view.s<1.2||Math.abs(c[0]-S.view.cx)*S.view.s>W/2||Math.abs(c[1]-S.view.cy)*S.view.s>H/2)) flyTo(c[0],c[1],Math.max(S.view.s,2));
   try{ const tk=sel.tile.replace(/-/g,'m'); history.replaceState(null,'','#'+sel.city+'-'+tk+'-'+sel.id); }catch(e){}
@@ -697,6 +702,10 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&S.sel&&document.ac
 $('#q').addEventListener('search',()=>{ if(!$('#q').value&&S.sel) clearSel(); });
 
 function inFeat(x,y,f){ const b=f.bb; if(x<b[0]||x>b[2]||y<b[1]||y>b[3]) return false; let n=0; for(const r of f.rings) if(pip(x,y,r)) n++; return n%2===1; }
+function floodPts(s){ const rings=s.rings&&s.rings.length?s.rings:[s.ring], pts=[];
+  for(const rg of rings){ let a=1e9,b=-1e9,c=1e9,d=-1e9; for(let i=0;i<rg.length;i+=2){ pts.push([rg[i],rg[i+1]]); a=Math.min(a,rg[i]); b=Math.max(b,rg[i]); c=Math.min(c,rg[i+1]); d=Math.max(d,rg[i+1]); }
+    const st=Math.max(1,Math.sqrt(Math.abs(area(rg)))/25); for(let x=a+st/2;x<b;x+=st) for(let y=c+st/2;y<d;y+=st) if(pip(x,y,rg)) pts.push([x,y]); } return pts; }
+function floodShare(s,cat){ const m=S.meta.van; if(!m||!m.fl||!m.fl.length||!s.ring) return 0; const pts=floodPts(s); if(!pts.length) return 0; return Math.round(100*pts.filter(p=>m.fl.some(f=>f.cat===cat&&inFeat(p[0],p[1],f))).length/pts.length); } /* same sampling as floodText */
 function floodText(s){ const m=S.meta.van; if(!m.fl||!m.fl.length||!s.ring) return '<span class="gap">not loaded</span>';
   /* finding I-09 (30 Oct 2026): test the whole lot, not just its corners — a grid of points inside every part of the lot, plus the corners */
   const rings=s.rings&&s.rings.length?s.rings:[s.ring], pts=[];

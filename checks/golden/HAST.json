@@ -665,6 +665,21 @@
      "short": "a plant room to the NSW 2021 terms (−25 dB)",
      "std": "none"
     }
+   },
+   "grade": {
+    "src": "van_lidar2022_ground",
+    "label": "City of Vancouver LiDAR 2022, ground points (class 2), 2 m cell means",
+    "datum": "?",
+    "base": {
+     "settled": false,
+     "rule": "Building height is measured from the base surface: the surface joining the official established building grades at all corners of the site, from the City Engineer; existing grades only where those cannot be obtained or the Director of Planning finds them incompatible (Zoning and Development By-law s. 2, 'Base Surface' p. 4, 'Building Height' p. 5). The official grades are not on file, so the lot grade shown is not the base (?).",
+     "src": "van_zdb_s2"
+    },
+    "min": 11.8,
+    "p10": 12.4,
+    "med": 16.1,
+    "max": 19.3,
+    "cover": 100
    }
   },
   "envAssumed": true,

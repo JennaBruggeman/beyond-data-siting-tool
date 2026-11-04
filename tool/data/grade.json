@@ -1,0 +1,10 @@
+{
+ "_note": "Ground elevation per lot (4 Nov 2026, ELEV_REDRAW brief part A). Per-lot values are in tiles/<city>/g_<tile>.json (tool/make_grade.py, our arithmetic; not in git). How each city measures height, and the flood construction level the lot grade is checked against.",
+ "van": {"src": "van_lidar2022_ground", "label": "City of Vancouver LiDAR 2022, ground points (class 2), 2 m cell means", "datum": "?"},
+ "edm": {"src": "nrcan_hrdem", "label": "NRCan HRDEM (CanElevation)", "datum": "CGVD2013 (?)"},
+ "height_base": {
+  "van": {"src": "van_zdb_s2", "settled": false, "rule": "Building height is measured from the base surface: the surface joining the official established building grades at all corners of the site, from the City Engineer; existing grades only where those cannot be obtained or the Director of Planning finds them incompatible (Zoning and Development By-law s. 2, 'Base Surface' p. 4, 'Building Height' p. 5). The official grades are not on file, so the lot grade shown is not the base (?)."},
+  "edm": {"src": "edm_bl20001", "settled": false, "rule": "Height is measured from Grade, a geodetic elevation the Development Planner sets by one of three methods (corners of the site, front-yard corners on steep residential lots, or the rear lot line corners for a building facing an alley) or an alternative method (Bylaw 20001 s. 5.70.2, pp. 826–828; 'Grade' p. 1036). Which method applies is not known, so the lot grade shown is not the base (?)."}
+ },
+ "fcl": {"v": 4.6, "src": "arch_hb_vbblFlood", "datum": "Greater Vancouver Regional District datum", "rule": "VBBL 2025 Div. A 1.4.1.2: underside of the floor or top of the slab of space for habitation, business or storage of goods not lower than 4.6 m, in the designated floodplain (Burrard Inlet, English Bay, False Creek and Fraser River); more may be required for wave run-up."}
+}

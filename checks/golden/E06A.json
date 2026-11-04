@@ -578,6 +578,17 @@
      "short": "a plant room to the NSW 2021 terms (−25 dB)",
      "std": "none"
     }
+   },
+   "grade": {
+    "src": "nrcan_hrdem",
+    "label": "NRCan HRDEM (CanElevation)",
+    "datum": "CGVD2013 (?)",
+    "base": {
+     "settled": false,
+     "rule": "Height is measured from Grade, a geodetic elevation the Development Planner sets by one of three methods (corners of the site, front-yard corners on steep residential lots, or the rear lot line corners for a building facing an alley) or an alternative method (Bylaw 20001 s. 5.70.2, pp. 826–828; 'Grade' p. 1036). Which method applies is not known, so the lot grade shown is not the base (?).",
+     "src": "edm_bl20001"
+    },
+    "none": true
    }
   },
   "envAssumed": false,
