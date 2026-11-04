@@ -584,13 +584,13 @@ async function optionsView(){
 }
 
 /* ---------- map layer: receivers, reach, networks ---------- */
-const RC={housing:'#c8c2b8',apartment:'#c8c2b8',office:'#d8b48a',hotel:'#d8b48a',commercial:'#d8b48a',school:'#a7b4d6',campus:'#a7b4d6',care:'#b9a3cf',hospital:'#b9a3cf',rec:'#7fb2c4',hall:'#7fb2c4',pool:'#7fb2c4',arena:'#9fb38a'};
+const RC={housing:'#B9B8B4',apartment:'#B9B8B4',office:'#A3A29D',hotel:'#A3A29D',commercial:'#A3A29D',school:'#8D8C87',campus:'#8D8C87',care:'#6E6E6B',hospital:'#6E6E6B',rec:'#6E6E6B',hall:'#6E6E6B',pool:'#6E6E6B',arena:'#6E6E6B'};
 BD.paintRecv=function(ctx,s,lw){
   const d=BD.recv[BD.S.city]; if(!d) return;
   for(const n of d.nets){ ctx.setLineDash([8/s,5/s]); ctx.strokeStyle='rgba(209,163,94,.85)'; ctx.lineWidth=lw(1.6); ctx.stroke(n.path); ctx.setLineDash([]); ctx.fillStyle='rgba(209,163,94,.06)'; ctx.fill(n.path); }
   if(s<0.35) return;
   const r=lw(4.5);
-  for(const p of d.pts){ ctx.fillStyle=RC[p.t]||'#9d9a94'; ctx.globalAlpha=.9; ctx.beginPath();
+  for(const p of d.pts){ ctx.fillStyle=RC[p.t]||'#6E6E6B'; ctx.globalAlpha=.9; ctx.beginPath();
     if(p.t==='housing') ctx.rect(p.x-r*.8,p.y-r*.8,r*1.6,r*1.6); else if(p.t==='school') { ctx.moveTo(p.x,p.y+r); ctx.lineTo(p.x+r,p.y-r*.8); ctx.lineTo(p.x-r,p.y-r*.8); ctx.closePath(); } else ctx.arc(p.x,p.y,r,0,7);
     ctx.fill(); ctx.globalAlpha=1; }
   const sel=BD.S.sel; if(sel&&BD.S.view2&&BD.S.view2!=='fits'){ const c=sel.ring?BD.centroid(sel.ring):sel.pt;
@@ -598,9 +598,9 @@ BD.paintRecv=function(ctx,s,lw){
     for(const [rad,col] of [[3000,'rgba(159,179,138,.6)']]){ /* the heat search's 3 km reach (J.B. 19 Oct); the Dutch 1–1.5 km circles are retired */ ctx.strokeStyle=col; ctx.beginPath(); ctx.arc(c[0],c[1],rad,0,7); ctx.stroke(); }
     ctx.setLineDash([]); }
 };
-BD.legendRecv=function(){ return `<div style="margin-top:6px"><i style="border:1px dashed #d1a35e"></i>District energy service area (NEU traced from its by-law; others approximate)</div>
- <div><i style="background:#c8c2b8;width:8px;height:8px"></i>Non-market housing <i style="background:#a7b4d6;width:8px;height:8px;margin-left:6px"></i>School</div>
- <div><i style="background:#b9a3cf;width:8px;height:8px;border-radius:50%"></i>Care, hospital <i style="background:#7fb2c4;width:8px;height:8px;border-radius:50%;margin-left:6px"></i>Recreation, pool <i style="background:#9fb38a;width:8px;height:8px;border-radius:50%;margin-left:6px"></i>Arena</div>`; };
+BD.legendRecv=function(){ return `<div style="margin-top:6px"><i style="border:1px dashed #D1A35E"></i>District energy service area (NEU traced from its by-law; others approximate)</div>
+ <div><i style="background:#B9B8B4;width:8px;height:8px"></i>Non-market housing <i style="background:#8D8C87;width:8px;height:8px;margin-left:6px"></i>School</div>
+ <div><i style="background:#6E6E6B;width:8px;height:8px;border-radius:50%"></i>Care, hospital <i style="background:#6E6E6B;width:8px;height:8px;border-radius:50%;margin-left:6px"></i>Recreation, pool <i style="background:#6E6E6B;width:8px;height:8px;border-radius:50%;margin-left:6px"></i>Arena</div>`; };
 
 /* ---------- the exchange tabs (J.B., 15 Oct): heat · energy · water · materials · social · options; each with a 3D view ---------- */
 const TABS=[['prec','Precedents'],['heat','Heat'],['energy','Energy'],['water','Water'],['materials','Materials'],['social','People'],['opps2','Opportunities'],['opts','Options'],['time','Over time'],['cities','Two cities']];

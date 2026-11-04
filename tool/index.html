@@ -473,7 +473,7 @@ function edmStatus(zraw){
   if(!STD.includes(z)) return {k:'site',t:'Special area',d:'A special area or legacy zone ('+esc(z)+') with its own use lists; these are not yet loaded into the tool.',src:['edm_bl']};
   return {k:'no',t:'Rezoning needed',d:'No industrial use is listed in this standard zone. A data centre here would need a rezoning, sometimes a plan amendment, and a Council public hearing.',src:['edm_matrix','edm_dc']};
 }
-const COL={yes:['#D7D7D4','#8D8C87'],case:['#E6E6E3','#B9B8B4'],site:['#F2F2F0','#D7D7D4'],low:['#F7F7F6','#E4E4E2'],no:[null,'#E4E4E2']}; /* drawing: zone bands (white interface, 3 Nov 2026) */
+const COL={yes:['#D7D7D4','#8D8C87'],case:['#E6E6E3','#B9B8B4'],site:['#F2F2F0','#D7D7D4'],low:['#F7F7F6','#E4E4E2'],no:[null,'#E4E4E2']}; /* drawing */ /* zone bands (white interface, 3 Nov 2026) */
 // small-scale housing zones (J.B., 16 Oct): a distinct tint, still selectable. Vancouver R1-1 and RT- districts; Edmonton RS, RSF, RR (Bylaw 20001)
 const LOWD={van:/^(R1-1|RT-\d+[A-Z]?)$/, edm:/^(RS|RSF|RR)$/};
 const lowD=(city,z)=>LOWD[city].test(String(z||'').trim().split(/\s+/)[0].toUpperCase());

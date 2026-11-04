@@ -1,14 +1,9 @@
-/* Restyle pass 1 (20 Oct 2026, J.B.: keep it dark but not fully dark; IBM Plex Sans; less "AI-esque").
+/* Restyle pass 1 (20 Oct 2026; IBM Plex Sans; less "AI-esque"). White interface from 3 Nov 2026 (J.B.): the colours come from index.html :root.
    An override layer on top of index.html's styles, so it can be compared or removed in one line.
    Rules: warm graphite, not near-black; off-white body text, grey only for sources; red only for findings;
    sentence-case labels, no tracked capitals; ruled rows instead of identical rounded cards; regular weight for reading. */
-:root{
-  --font:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --bg:#202124; --panel:#27292c; --panel-2:#2f3236; --line:#3b3e43; --line-2:#4a4e54;
-  --fg:#f2efea; --muted:#bdb9b2; --faint:#918d86;
-  --accent:#CC746C; --accent-2:#e7a39c;
-}
-body{font:400 14.5px/1.55 var(--font);background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased}
+/* tokens: index.html :root (white interface, 3 Nov 2026: one token set) */
+body{font:300 14.5px/1.55 var(--font);background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased}
 button,input,select,textarea{font-family:var(--font)}
 h1,h2,h3,h4{font-family:var(--font);text-wrap:balance}
 aside h2,#side h2{font-weight:500;letter-spacing:-.005em}
@@ -31,24 +26,24 @@ dl.lim{font-size:13px}
 /* tiles: ruled rows, not a grid of identical cards */
 .tiles{display:block;margin:4px 0 12px;border-top:1px solid var(--line)}
 .tile{display:grid;grid-template-columns:minmax(120px,34%) 1fr 12px;align-items:start;gap:12px;background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:11px 2px;width:100%}
-.tile:hover{background:rgba(255,255,255,.025);border-color:var(--line)}
+.tile:hover{background:var(--panel-2);border-color:var(--line)}
 .tile .tt{font-size:13px;color:var(--fg);font-weight:500}
 .tile .ta{font-size:13.5px;color:var(--muted);-webkit-line-clamp:2}
-#wc .tile.feat,.tile.feat{border-left:0!important;background:rgba(204,116,108,.06)!important;padding-left:8px!important}
+#wc .tile.feat,.tile.feat{border-left:0!important;background:transparent!important;padding-left:8px!important}
 .tile.feat .tt{color:var(--accent-2)} /* the finding: colour on the label, not a thick side bar (Impeccable craft floor) */
 
 /* pills and segmented controls: quieter shapes */
 .pill,.cls,.rd,.rs{border-radius:3px!important}
 .seg{border-radius:6px}
-.seg button[aria-pressed="true"]{color:#1d1715}
+.seg button[aria-pressed="true"]{color:var(--on-ink)}
 
 /* buttons: one primary, flat secondaries */
 .wbtns .pri,.flowfoot .pri,.rbtns .pri,.dnav .pri{border-radius:4px;font-weight:500}
 .wbtns .sec,.flowfoot .sec,.dnav .sec,.btn{border-radius:4px}
 
 /* panels: flatter, less glow */
-#wc .wcbox,#welcome .wcard{border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-#wc .wc3d{background:#1b1c1f}
+#wc .wcbox,#welcome .wcard{border-radius:6px;box-shadow:var(--shadow)}
+#wc .wc3d{background:var(--bg)}
 .legend,.status{border-radius:4px}
 
 /* the "N more here" box and stuck box: plain rules, not boxes in boxes */
@@ -58,10 +53,10 @@ dl.lim{font-size:13px}
 #side h2,#drawer h2{font-size:19px;font-weight:500;color:var(--fg);margin:10px 0 6px;line-height:1.3}
 #side .lead{font-size:15.5px!important;color:var(--fg)}
 /* browser surfaces themed from the palette */
-::selection{background:rgba(204,116,108,.35);color:#fff}
+::selection{background:rgba(204,116,108,.25);color:var(--fg)}
 *{scrollbar-color:var(--line-2) transparent;scrollbar-width:thin}
-input,textarea{caret-color:var(--accent-2)}
-:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
+input,textarea{caret-color:var(--fg)}
+:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
 a{text-underline-offset:2px}
 dd,td,.ta,.tile .ta{font-variant-numeric:tabular-nums}
 details.alld > summary::before{content:none!important}
@@ -74,3 +69,14 @@ details.alld > summary{text-decoration:underline dotted;text-underline-offset:3p
 #wc .tile.feat .tt{color:var(--accent-2);font-weight:500;font-size:13px}
 #wc .tile.feat .ta{font-size:15px;color:var(--fg)}
 #wc .tile.feat{display:grid!important;padding:12px 8px!important}
+
+/* White interface (J.B., 3 Nov 2026): plain and quiet. Hairlines, white panels, ink for the primary action; red only for selected or flagged. */
+.pill,.cls{background:transparent}
+input,select,textarea{background:var(--bg);color:var(--fg)}
+select{border-color:var(--line-2)}
+.flowfoot,#wc #side .flowfoot,#wc #side .dk .dnav{background:var(--bg)}
+#wc .wcbox{border-color:var(--line)}
+#wc .wchead,#wc .wcvis{border-color:var(--line)}
+.wbtns .pri,.flowfoot .pri,.rbtns .pri,.dnav .pri,.next button,.fbbtn,.navb .pri,#xp .xfoot .pri,#c3back{background:var(--fg)!important;color:var(--on-ink)!important;font-weight:400}
+.flowfoot .pri[disabled],.next button[disabled]{background:var(--line)!important;color:var(--muted)!important}
+#wc .tile.feat .tt,.tile.feat .tt{color:var(--accent-2)}

@@ -8,8 +8,8 @@
 'use strict';
 const BD=window.BD; const {esc,fmt}=BD;
 // v6 (19 Oct 2026, J.B.'s most recent booklet): paper, not dark; Barlow; heat in browns, cool in slate blue, notes in soft red
-const K={bg:'#f3f0ea',grid:'#e3ded4',ink:'#1d1e20',mute:'#5f5d58',dim:'#9a978f',faint:'#b9b6ae',ctrl:'#768466',heat:'#9b7946',warm:'#c9ab7c',hot:'#c4766c',cold:'#5e8491',
- f1:'#e2ddd3',f2:'#ece8e0',f3:'#f8f6f1',n1:'#ddd8ce',n2:'#e4e0d7',n3:'#ebe7df',e1:'#d2c7b5',e2:'#ddd2c1',e3:'#ece4d4',g1:'#c9c5bc',g2:'#d4d0c8',g3:'#e2dfd8'};
+const K={bg:'#FFFFFF',grid:'#E4E4E2',ink:'#1F2022',mute:'#6E6E6B',dim:'#8D8C87',faint:'#B9B8B4',ctrl:'#6E6E6B',heat:'#B49A6D',warm:'#C49F66',hot:'#D1A35E',cold:'#5D7F99',
+ f1:'#E2E2DF',f2:'#EEEEEC',f3:'#FFFFFF',n1:'#E2E2DF',n2:'#EEEEEC',n3:'#F7F7F6',e1:'#D7D7D4',e2:'#E2E2DF',e3:'#EEEEEC',g1:'#C9C8C4',g2:'#D7D7D4',g3:'#E6E6E3'}; /* drawing */ /* white interface (3 Nov 2026); heat on the heat scale */
 const C=Math.cos(Math.PI/6), S=0.5;
 const T=(x,y,t,o)=>{ o=o||{}; const L=Array.isArray(t)?t:[t]; return `<text x="${x.toFixed(2)}" y="${y.toFixed(2)}" font-size="${o.fs||7.5}" font-weight="${o.w||300}" fill="${o.c||K.ink}" ${o.a?`text-anchor="${o.a}"`:''} ${o.ls?`letter-spacing="${o.ls}"`:''} ${o.rot?`transform="rotate(${o.rot} ${x.toFixed(2)} ${y.toFixed(2)})"`:''} ${o.halo?`stroke="${K.bg}" stroke-width="3" stroke-linejoin="round" paint-order="stroke"`:''}>${L.map((l,i)=>`<tspan x="${x.toFixed(2)}" dy="${i?(o.fs||7.5)*1.32:0}">${esc(l)}</tspan>`).join('')}</text>`; };
 function wrap(t,n){ const w=String(t||'').split(/\s+/), out=[]; let cur=''; for(const x of w){ if((cur+' '+x).trim().length>n&&cur){ out.push(cur); cur=x; } else cur=(cur+' '+x).trim(); } if(cur) out.push(cur); return out; }
