@@ -1,124 +1,103 @@
 {
  "dbg": {
-  "a0": 10.39997365615536,
-  "uf": -31.47597365615536,
+  "a0": 23.999973656155362,
+  "uf": -32.97597365615536,
   "dir": -1,
   "v": [
    -30.456754563202594,
    30.456754563202594
   ],
-  "L": 41.87594731231072,
-  "hd": 39.78214994669524,
+  "L": 56.97594731231072,
+  "hd": 34.730620495464734,
   "F": [
    74.95194731231072,
    60.91350912640519
   ],
   "uBuild": [
-   22.37597365615536,
-   -31.47597365615536
+   37.47597365615536,
+   -32.97597365615536
   ],
-  "pyd": 11.975999999999999,
-  "front": -31.47597365615536,
+  "pyd": 13.475999999999999,
+  "front": -32.97597365615536,
   "bu": [
    [
-    -31.47597365615536,
-    -3.475973656155361
+    -32.97597365615536,
+    -16.97597365615536
    ],
    [
-    -3.475973656155361,
-    6.524026343844639
+    -32.97597365615536,
+    -22.97597365615536
    ],
    [
-    -31.47597365615536,
-    0.5240263438446391
+    -22.97597365615536,
+    9.024026343844639
+   ],
+   [
+    -32.97597365615536,
+    -18.97597365615536
+   ],
+   [
+    9.024026343844639,
+    19.02402634384464
+   ],
+   [
+    -22.97597365615536,
+    -2.975973656155361
    ]
   ],
   "plant": [
    [
     "standby generators",
     "yard",
-    12,
-    15,
-    -29,
-    -15
-   ],
-   [
-    "standby generators",
-    "yard",
-    17,
-    21,
-    -29,
-    -15
-   ],
-   [
-    "standby generators",
-    "yard",
-    12,
-    15,
+    25,
+    29,
     -13,
     0
    ],
    [
     "standby generators",
     "yard",
-    17,
-    21,
-    -13,
-    0
-   ],
-   [
-    "standby generators",
-    "yard",
-    12,
-    15,
+    25,
+    29,
     2,
     16
    ],
    [
     "standby generators",
     "yard",
-    17,
-    21,
-    2,
-    16
+    -31,
+    -18,
+    -23,
+    -20
+   ],
+   [
+    "standby generators",
+    "yard",
+    -31,
+    -18,
+    -18,
+    -14
    ]
   ],
   "yard": [
    [
-    10,
+    24,
     -30
    ],
    [
-    22,
+    37,
     -30
    ],
    [
-    22,
+    37,
     30
    ],
    [
-    10,
+    24,
     30
    ]
   ],
-  "load": [
-   [
-    23,
-    -30
-   ],
-   [
-    37,
-    -30
-   ],
-   [
-    37,
-    27
-   ],
-   [
-    23,
-    27
-   ]
-  ]
+  "load": null
  },
  "steps": [
   "site",
@@ -151,8 +130,8 @@
   [
    "refuge",
    [
-    -31,
-    -3
+    -33,
+    -17
    ],
    true,
    265,
@@ -164,10 +143,10 @@
   [
    "warming_shelter",
    [
-    -3,
-    7
+    -33,
+    -23
    ],
-   false,
+   true,
    100,
    100,
    0,
@@ -175,14 +154,53 @@
    6
   ],
   [
+   "clinic",
+   [
+    -23,
+    9
+   ],
+   false,
+   500,
+   500,
+   0,
+   0,
+   6
+  ],
+  [
    "spa",
    [
-    -31,
-    1
+    -33,
+    -19
    ],
    false,
    320,
    320,
+   1,
+   6,
+   6
+  ],
+  [
+   "ev_hub",
+   [
+    9,
+    19
+   ],
+   false,
+   150,
+   150,
+   0,
+   0,
+   6
+  ],
+  [
+   "greenhouse",
+   [
+    -23,
+    -3
+   ],
+   false,
+   190,
+   190,
    1,
    6,
    6
@@ -193,45 +211,51 @@
   12
  ],
  "hallPick": {
-  "tried": 3,
-  "passed": 3,
-  "n": 3,
+  "tried": 10,
+  "passed": 9,
+  "n": 10,
   "under": false,
   "best": {
-   "key": "2:-29.4,10.4:49.6",
+   "key": "2:-10.7,24.0:34.7",
    "k": 2,
    "st": 2,
    "top": 12,
-   "along": "side",
+   "along": "back",
    "a": 1,
-   "fa": 1973.8080000000002,
-   "drawn": 685
-  }
+   "fa": 1206.2160000000001,
+   "drawn": 1525
+  },
+  "fails": [
+   [
+    "1:-17.7,24.0:57.9",
+    "2 of 4 generators do not fit in the yard."
+   ]
+  ]
  },
  "hallUV": [
   [
-   -29,
-   10
+   -11,
+   24
   ],
   [
    -30,
-   19
+   4
   ]
  ],
  "hallStoreys": 2,
  "space": {
-  "hall": 3948,
-  "prog": 685,
+  "hall": 2412,
+  "prog": 1525,
   "cap": 7310.400000000001
  },
  "heat": {
   "avail": [
-   23881.76228571428,
-   36660.6
+   14252.019428571426,
+   21878.100000000002
   ],
   "need": [
-   42.4,
-   42.4
+   130.87,
+   168.17
   ],
   "unknown": [
    "spa",
@@ -240,34 +264,37 @@
  },
  "rules": [
   "bad: Public indoor pool: 1,065 m² is over the 500 m² this use may have in BE; not drawn. Its sourced minimum (815 m²) is over the cap, so it cannot go on a BE lot.",
-  "bad: Outpatient clinic: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 16 m limit (register edm_bl20001).",
-  "bad: EV charging hub: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 16 m limit (register edm_bl20001).",
-  "bad: Greenhouse: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 16 m limit (register edm_bl20001).",
-  "bad: Fish farm: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 16 m limit (register edm_bl20001).",
+  "bad: Fish farm: 685 m² would pass the programs' share of the floor (2,193 m², 668 m² left); not drawn. Edit ratios to give programs more.",
   "note: Refuge: A-2, 2 h fire separation from the data centre (F-2).",
   "q: Refuge: keep-apart rules not checked here: generators (no distance in the source).",
   "note: Warming shelter: A-2, 2 h fire separation from the data centre (F-2).",
   "q: Warming shelter: keep-apart rules not checked here: generators (no distance in the source).",
+  "q: Outpatient clinic: keep-apart rules not checked here: generators (no distance in the source).",
   "q: Bathhouse / Nordic spa in BE: zoning not confirmed (?) (none defined (Indoor Sales and Service or Minor Indoor Entertainment ?)).",
   "note: Bathhouse / Nordic spa: A-3, 2 h fire separation from the data centre (F-2).",
-  "q: Bathhouse / Nordic spa: keep-apart rules not checked here: generators (no distance in the source)."
+  "q: Bathhouse / Nordic spa: keep-apart rules not checked here: generators (no distance in the source).",
+  "q: EV charging hub in BE: zoning not confirmed (?) (no EV use (Vehicle Support Service ?)).",
+  "note: EV charging hub: F-3, 1.5 h fire separation from the data centre (F-2).",
+  "q: EV charging hub: keep-apart rules not checked here: intakes (not modelled).",
+  "q: Greenhouse: fire separation from the data centre (F-2) ? (occupancy ?).",
+  "q: Greenhouse: keep-apart rules not checked here: hall (no distance in the source); generators (no distance in the source)."
  ],
  "side": "Arrange",
  "ratios": {
   "ratio": {
-   "cover": 4207,
-   "dc": 54,
+   "cover": 4299,
+   "dc": 33,
    "prog": 30,
    "end": "low",
-   "mw": 6.2
+   "mw": 3.7
   },
   "base": {
    "lot": 4569,
-   "build": 4207,
+   "build": 4299,
    "floors": 2,
    "dataFl": 2,
    "fsr": 1.6,
-   "coverNone": false,
+   "coverNone": true,
    "perMW": [
     293.4,
     635.0999999999999
@@ -277,18 +304,18 @@
    "allowed": 7310,
    "by": "fsr",
    "dcMax": 7310,
-   "dcM2": 3948,
+   "dcM2": 2412,
    "progM2": 2193,
-   "unused": 1170,
+   "unused": 2705,
    "mw": [
-    6.22,
-    13.45
+    3.8,
+    8.22
    ],
-   "mwTest": 6.2
+   "mwTest": 3.7
   },
   "answers": {
-   "mw": 6.2,
-   "dcFloor": 3948
+   "mw": 3.7,
+   "dcFloor": 2412
   },
   "side": [
    "Ratios"
@@ -300,22 +327,22 @@
    "Compare (off)"
   ],
   "stuck": false,
-  "next": "Next: Programs"
+  "next": "Next: Programs →"
  },
- "split": "Data centre 54% · 3,948 m² · 6.2–13.4 MW (testing 6.2) · programs 30% · 2,193 m² · unused 16% arch_ratios Edit ratios",
+ "split": "Data centre 33% · 2,412 m² · 3.7–8.2 MW (testing 3.7) · programs 30% · 2,193 m² · unused 37% arch_ratios Edit ratios",
  "saved": [
   [
    "suggest",
-   5,
-   12,
-   9,
-   0.22015915119363394
+   2,
+   15,
+   27,
+   0.5130415561450045
   ],
   [
    "lot",
-   8,
-   15,
-   9,
+   7,
+   20,
+   27,
    0
   ]
  ],

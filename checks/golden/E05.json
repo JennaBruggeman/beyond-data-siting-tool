@@ -5,7 +5,7 @@
   "extent": "whole",
   "floor": "",
   "host": {},
-  "mw": 28.8,
+  "mw": 23.2,
   "foot": "max",
   "cover": 70,
   "hmode": "out",
@@ -148,6 +148,11 @@
     "city": "edm",
     "cl": [
      [
+      "Data centre",
+      "Minor Industrial Permitted; Major Industrial only where existing on 1 Jan 2024, so a large (Major) data centre does not fit (our reading); always Discretionary",
+      "IM ss. 2.3–2.4; s. 7.20 3.3.2"
+     ],
+     [
       "Floor area",
       "up to 2.0 × the lot",
       "Bylaw 20001, IM"
@@ -159,7 +164,7 @@
      ],
      [
       "Setbacks",
-      "3.0 m from a street; 6.0 m next to a non-industrial zone (neighbours not read, not applied); none to other industrial lots",
+      "3.0 m from a street; none to alleys or industrial lots; 6.0 m next to a lot in a non-industrial zone (applied from the neighbours' zones where a street was found)",
       "Bylaw 20001, IM"
      ],
      [
@@ -187,6 +192,7 @@
      "cl": [
       "[cycle]",
       "[cycle]",
+      "[cycle]",
       "[cycle]"
      ]
     },
@@ -202,23 +208,64 @@
     "yardsKnown": true,
     "userSet": false,
     "srcId": "edm_bl20001",
+    "vkey": "IM",
     "screen": null
    },
    "city": "edm",
    "lotArea": 8826,
    "ring": "[ring 10]",
    "notes": [
-    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 72–75 dBA (quieter–standard unit rating) at the property line of 8720 106A AVENUE NW (RM), 77 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1)).",
-    "Noise: with the standard (louder) unit rating the plant would exceed the 50 dBA night limit at the property line of 8720 106A AVENUE NW (RM) (about 47–50 dBA (quieter–standard unit rating), Bylaw 14600 s. 20(1)); 3 lots in all. With the quieter rating it is under, so this is not blocked: standard units would need low-noise chillers (Trane RTAF 280 LN, maker claim) + a plant room to the NSW 2021 terms (−25 dB)."
+    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 70–73 dBA (quieter–standard unit rating) at the property line of 8720 106A AVENUE NW (RM), 94 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1))."
    ],
    "warn": [],
    "F": {
     "cx": 1499,
     "cy": 1671.25,
-    "ux": 0.564684,
-    "uy": 0.825307,
-    "L": 115.608172,
-    "W": 75.993424
+    "ux": -0.825307,
+    "uy": 0.564684,
+    "L": 75.993424,
+    "W": 115.608172
+   },
+   "side": {
+    "rot": true,
+    "autoU1": true,
+    "any": true,
+    "u0": {
+     "street": null,
+     "road": null,
+     "d": null,
+     "alley": false,
+     "nbr": []
+    },
+    "u1": {
+     "street": "arterial",
+     "road": "Arterial",
+     "d": 9,
+     "alley": false,
+     "nbr": []
+    },
+    "v0": {
+     "street": null,
+     "road": null,
+     "d": null,
+     "alley": false,
+     "nbr": [
+      "IM"
+     ]
+    },
+    "v1": {
+     "street": null,
+     "road": null,
+     "d": null,
+     "alley": false,
+     "nbr": [
+      "BE"
+     ]
+    },
+    "src": [
+     "edmRoads2026",
+     "edmZoningGeo"
+    ]
    },
    "maxStoreys": 3,
    "H": 18,
@@ -227,6 +274,16 @@
     3,
     3
    ],
+   "yards": {
+    "front": 3,
+    "rear": 0,
+    "s0": 0,
+    "s1": 0,
+    "by": "side facts",
+    "src": [
+     "arch_hb_edmIM"
+    ]
+   },
    "yardRect": "[ring 8]",
    "inset": "[ring 8]",
    "yardNote": "",
@@ -242,30 +299,30 @@
    },
    "loading": "[ring 8]",
    "loadV": [
-    -37.521753,
-    34.672
+    -57.081535,
+    52.746229
    ],
    "loadDepth": 15.1,
    "loadSpaces": [
     "[ring 8]",
     "[ring 8]"
    ],
-   "plantYardStart": 42.704086,
-   "dir": -1,
+   "plantYardStart": -22.896712,
+   "dir": 1,
    "v": [
-    -37.996712,
-    37.996712
+    -57.804086,
+    57.804086
    ],
-   "uFront": -54.804086,
+   "uFront": 34.996712,
    "footMode": "max",
    "uBuild": [
-    42.704086,
-    -54.804086
+    -22.896712,
+    34.996712
    ],
-   "mwSized": 28.8,
+   "mwSized": 23.2,
    "plant": {
     "s": {
-     "Q": 44.64,
+     "Q": 35.96,
      "k": {
       "name": "air-cooled chillers",
       "L": 12.141,
@@ -281,8 +338,8 @@
        4.3
       ]
      },
-     "need": 30,
-     "n": 31,
+     "need": 25,
+     "n": 26,
      "g": {
       "name": "standby generators",
       "L": 13.493,
@@ -298,8 +355,8 @@
        2
       ]
      },
-     "gNeed": 23,
-     "gN": 24,
+     "gNeed": 18,
+     "gN": 19,
      "src": "Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit nearest the middle of …"
     },
     "boxes": [
@@ -454,125 +511,92 @@
       "base": 0,
       "kind": "yard",
       "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
      }
     ],
     "lines": [
-     "Sized for <b>29 MW</b> of servers: heat to reject ≈ 29 × PUE 1.55 = <b>44.6 MW</b> at peak.",
-     "30 air-cooled chillers carry it; with spares, <b>31</b>. Placed: 0 on the roof, 0 in the yard.",
+     "Sized for <b>23 MW</b> of servers: heat to reject ≈ 23 × PUE 1.55 = <b>36.0 MW</b> at peak.",
+     "25 air-cooled chillers carry it; with spares, <b>26</b>. Placed: 0 on the roof, 0 in the yard.",
      "Each unit about 12.141 × 2.362 m, 2.896 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
      "<span class=\"src\">Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit near…"
     ],
     "genLines": [
-     "23 generator sets of about 2 MW carry 44.6 MW; with spares, <b>24</b>. Placed: 0 on the roof, 24 in the yard.",
-     "Each about 13.493 × 3.488 m, 4.777 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).",
+     "18 generator sets of about 2 MW carry 36.0 MW; with spares, <b>19</b>. Placed: 0 on the roof, 19 in the yard.",
+     "Each about 13.493 × 3.488 m, 4.777 m high; 1.5 m from the building, 2 m between sets (1 m clear all round, CSA C282 6.5.1.1; register arch_csa_c282).",
+     "Fuel in each set's sub-base tank: about 6300 L. In the yard: 3 m from the property line and 1.5 m from the building (CSA B139.1.0 Table 2; register arch_csa_b139). On a roof: at most 1,250 L a tank and 2,500 L a supply line (B139.1.1 6.5.3). FM 5-32 (insurer guidance, not law): not on the roof or in a basement.",
      "<span class=\"src\">Standby diesel generator sets in Sound Level 2 enclosures with sub-base tanks. Basis units: Rehlko (Kohler) KD2000, 2,000 kW standby (data-centre continuous rating the same), 13.49 × 3.49 m, up to 4.78 m high (G5-626, rev 6/24); KD1000, 1,000 kW, 8.43 × 2.62 m, 3.71 m high with the 12 h tank (G6-154, 12/23). Both EPA Tier 2, cULus (UL 2200, CSA C22.2 No. 100); manufacturer claims. Chosen 29 Oct 2026 as the middle of Cat, Rehlko and Generac: 2 MW 18.5–38.4 m² per MW, 1 MW 19.5–22.4. 1 m clear around each set (Cummins application manual; not checked ?); 1.5 m from wall openings…"
     ],
     "short": "",
     "coolYard": 0,
     "coolRoof": 0,
-    "genYard": 24,
+    "genYard": 19,
     "genRoof": 0,
+    "genTank": {
+     "L": 6304.986667,
+     "bld": 1.5,
+     "pl": 3,
+     "over": false
+    },
     "yard": "[ring 8]",
     "yardU": [
-     8.776086,
-     42.704086
+     -22.896712,
+     -5.432712
     ],
-    "indoor": 2879.123202,
-    "coolRoofIndoor": 31,
+    "indoor": 2414.748492,
+    "coolRoofIndoor": 26,
     "miss": [],
     "placed": {
      "cr": 0,
      "cy": 0,
      "gr": 0,
-     "gy": 24
+     "gy": 19
     }
    },
-   "plantYardDepth": 33.928,
-   "foot": "[ring 12]",
+   "plantYardDepth": 17.464,
+   "foot": "[ring 8]",
    "footRect": "[ring 8]",
    "simpleMass": true,
    "serverFoot": "[ring 8]",
-   "footArea": 4875.280583,
+   "footArea": 4695.776237,
    "noise": {
     "lw": [
-     117.7,
-     121
+     116.9,
+     120.2
     ],
-    "n": 31,
+    "n": 26,
     "src": [
-     1488.1,
-     1652.8
+     1487.2,
+     1682
     ],
     "where": "indoors",
     "groups": [
      {
       "kind": "indoors",
-      "n": 31
+      "n": 26
      }
     ],
-    "tested": 4197,
+    "tested": 4239,
     "overQ": 0,
-    "overS": 3,
+    "overS": 0,
     "limit": 50,
     "sec": "Bylaw 14600 s. 20(1)",
     "beyond": true,
     "byCls": {
-     "quiet": 2,
+     "quiet": 0,
      "other": 0,
      "unknown": 0,
-     "assumed": 1
+     "assumed": 0
     },
     "bldOnly": 0,
     "block": null,
-    "flag": "Noise: with the standard (louder) unit rating the plant would exceed the 50 dBA night limit at the property line of 8720 106A AVENUE NW (RM) (about 47–50 dBA (quieter–standard unit rating), Bylaw 14600 s. 20(1)); 3 lots in all. With the quieter rating it is under, so this is not blocked: standard units would need low-noise chillers (Trane RTAF 280 LN, maker claim) + a plant room to the NSW 2021 terms (−25 dB).",
-    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 72–75 dBA (quieter–standard unit rating) at the property line of 8720 106A AVENUE NW (RM), 77 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1)).",
+    "flag": null,
+    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 70–73 dBA (quieter–standard unit rating) at the property line of 8720 106A AVENUE NW (RM), 94 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1)).",
     "worst": {
      "addr": "8720 106A AVENUE NW",
      "zt": "RM",
      "lot": true,
-     "d": 76.8,
-     "lo": 72,
-     "hi": 75.3,
+     "d": 93.7,
+     "lo": 69.5,
+     "hi": 72.8,
      "L": 50,
      "Ls": 50,
      "sec": "Bylaw 14600 s. 20(1)"
@@ -591,7 +615,7 @@
       "src": "arch_nz_nswDcNoise"
      },
      "short": "a plant room to the NSW 2021 terms (−25 dB)",
-     "std": "ln"
+     "std": "none"
     }
    }
   },
@@ -607,8 +631,8 @@
    "ground": false
   },
   "hallS": [
-   5593.84493,
-   8390.767395
+   5513.678561,
+   8270.517842
   ],
   "hallL": null,
   "floors": 3,
@@ -617,54 +641,54 @@
    3
   ],
   "fpNote": "from the site setup: the most the zone allows, less setbacks, loading and the plant yard",
-  "fp": 4875.280583,
+  "fp": 4695.776237,
   "fpCalc": null,
-  "indoorPlant": 2971.998144,
+  "indoorPlant": 2600.498376,
   "g": [
    17652,
    17652
   ],
   "G": [
-   11653.843604,
-   11653.843604
+   11486.830335,
+   11486.830335
   ],
   "fullCover": "",
   "heightCut": true,
   "yardCut": true,
   "gross": [
-   11653.843604,
-   11653.843604
+   11486.830335,
+   11486.830335
   ],
   "how": "lot 8,826 m² × floor-space ratio 2",
   "hallGross": [
-   11653.843604,
-   11653.843604
+   11486.830335,
+   11486.830335
   ],
   "density": "typical",
   "mwS": [
-   8.879119,
-   28.824371
+   8.751871,
+   25.791668
   ],
   "mwL": null,
   "hall": [
-   5593.84493,
-   8390.767395
+   5513.678561,
+   8270.517842
   ],
   "mw": [
-   8.879119,
-   28.824371
+   8.751871,
+   25.791668
   ],
   "m2MW": [
    290,
    630
   ],
   "mwCheck": [
-   10.508425,
-   23.076918
+   10.357827,
+   22.746199
   ],
-  "mwTopRaw": 28.933681,
+  "mwTopRaw": 28.519027,
   "mwCapped": true,
-  "plantFor": 28.824371
+  "plantFor": 25.791668
  },
  "model": "[cycle]",
  "errors": []
