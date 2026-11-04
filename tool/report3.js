@@ -285,7 +285,7 @@ function pSpec(D,no,n){ const R2=BD.report2, pal=R2.PAL.w1, c={m:D.m,f:D.f,d:D.d
 
 async function pOptions(D,no){ const {e,f,near,nets,A}=D; const opts=e.optionSet(f,near,nets).map(o=>Object.assign(o,{r:e.calc(o,f,near,nets)})); let s=''; const cw=(PW-2*M-20)/3; const keep=JSON.stringify(A);
   /* 2 Nov 2026 hard rules (exchanges F11): an option that breaks a hard rule (setupProblems) is not drawn; the rule is named instead */
-  try{ opts.forEach((o,i)=>{ A.mw=o.mw; A.inside=o.recover?'plate':'air'; BD.modelReset(); BD.model(); const x=M+i*(cw+10); const miss=BD.setupProblems?BD.setupProblems(true):[];
+  try{ opts.forEach((o,i)=>{ A.mw=o.mw; A.inside=o.recover?'plate':'air'; BD.modelReset(); BD.model(); const x=M+i*(cw+10); const miss=BD.setupProblems?BD.setupProblems():[] /* bugfix 4 Nov 2026: every rule, the floor check included */;
     if(!miss.length){ const iso=siteIso({x0:x,y0:110,x1:x+cw,y1:300},{pipe:o.recover,air:!o.recover,grid:false,pad:0.06}); s+=iso.s; } else s+=T(x,200,wrap(`Not drawn: at ${o.mw} MW this set-up breaks a hard rule.`,40).slice(0,2),{fs:6.6,c:K.mute});
     s+=T(x,318,`${o.id.toUpperCase()}. ${o.name}`,{fs:8,w:600})+T(x,330,wrap(o.gives,40).slice(0,3),{fs:6.4,c:K.mute}); if(miss.length) s+=T(x,358,wrap('Not allowed at this size: '+miss[0],40).slice(0,3),{fs:6.2,c:K.redT}); }); }
   finally{ Object.keys(A).forEach(k=>delete A[k]); Object.assign(A,JSON.parse(keep)); BD.modelReset(); BD.model(); }

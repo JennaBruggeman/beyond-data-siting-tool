@@ -548,6 +548,10 @@ function state(k){ return `<span class="st st-${k}" title="${esc({met:'met',chg:
 async function optionsView(){
   const f=siteFacts(); BD.S.view2='opts'; const d=await loadRecv(f.city); const near=nearby(f,d), nets=netsAt(f,d);
   const opts=optionSet(f,near,nets).map(o=>Object.assign(o,{r:calc(o,f,near,nets)}));
+  /* bugfix 4 Nov 2026 (retest rules 3): each option is checked against every hard rule at its size and cooling (setupProblems, the floor check included;
+     the same set-up the report draws), and one that fails is marked blocked, with the rule (E123: option A at 1.9 MW, the chillers do not fit on the roof). */
+  { const A=BD.S.answers, keep={mw:A.mw,inside:A.inside}; try{ for(const o of opts){ A.mw=o.mw; A.inside=o.recover?'plate':'air'; BD.modelReset&&BD.modelReset(); o.miss=BD.setupProblems?BD.setupProblems():[]; } }
+    finally{ A.mw=keep.mw; if(keep.inside===undefined) delete A.inside; else A.inside=keep.inside; BD.modelReset&&BD.modelReset(); } }
   const zs=f.status.k, zState=zs==='yes'?'met':zs==='case'?'chg':zs==='site'?'cj':'chg';
   const net=nets.find(n=>n.inside);
   const rows=[
@@ -575,8 +579,8 @@ async function optionsView(){
   const fut=o=>[['As planned','the table above'],['Tenant changes cooling',o.recover?'back to air: heat offered drops to none':'to liquid: heat could be offered'],['Tenant leaves',o.recover?'receivers fall back on their own heating at full peak':'nothing depends on it'],['Receiver leaves',o.recover?`all heat goes back to the ${BD.dryName()} — keep their full size`:'—']].map(([a,b])=>`<div><b>${a}</b> <span class="sub">${b}</span></div>`).join('');
   let h=tabBar('opts')+`<h2>Three options, side by side, in no order</h2>
   <p class="draft">Each option gains and gives up something.</p>
-  <div class="opts">${opts.map(o=>`<div class="opt"><div class="kind">${o.id.toUpperCase()}</div><b>${esc(o.name)}</b><div class="sub">${esc(o.gives)}</div></div>`).join('')}</div>
-  <div class="tt"><table><thead><tr><th></th>${opts.map(o=>`<th>${o.id.toUpperCase()}</th>`).join('')}</tr></thead><tbody>`;
+  <div class="opts">${opts.map(o=>`<div class="opt"><div class="kind">${o.id.toUpperCase()}${o.miss.length?' · blocked':''}</div><b>${esc(o.name)}</b><div class="sub">${esc(o.gives)}</div>${o.miss.length?`<div class="sub"><span class="k">Blocked here:</span> ${esc(o.miss[0])}${o.miss.length>1?` (and ${o.miss.length-1} more)`:''}</div>`:''}</div>`).join('')}</div>
+  <div class="tt"><table><thead><tr><th></th>${opts.map(o=>`<th>${o.id.toUpperCase()}${o.miss.length?' (blocked)':''}</th>`).join('')}</tr></thead><tbody>`;
   for(const [party,rr] of rows){ h+=`<tr class="party"><td colspan="${opts.length+1}">${esc(party)}</td></tr>`;
     for(const [lab,fn] of rr){ const c=opts.map(o=>fn(o)); h+=c.every(x=>x===c[0])?`<tr><td>${esc(lab)}</td><td colspan="${opts.length}">${c[0]}</td></tr>`:`<tr><td>${esc(lab)}</td>${c.map(x=>`<td>${x}</td>`).join('')}</tr>`; } }
   h+=`</tbody></table></div>
