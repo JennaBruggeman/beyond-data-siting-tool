@@ -176,3 +176,8 @@ All three offered in Architecture mode, no default; each shows its consequences 
 ## Templates (J.B., 3 Nov 2026)
 - Four templates only: Resident, Municipal, Engineering, Architecture. Community is dropped (tier id `community` to be removed from tiers.js, flow.js SKIP, templates.json and the register's tier tags; anything only it showed goes to Resident or Engineering).
 - Each template has its own report type, same white look, header and source style.
+
+## Reports per template (J.B., 3 Nov 2026; boards in the Design artifact)
+- Resident: select a data centre on the map, export a report with everything known about that one facility. Generic graphics by type: stand-alone, hyperscale, tower. Map with its location, still frames from the "how it works" video, plain answers on noise, heat, water, power. Board: VAN3 Cologix (2 pages).
+- Municipal: select a parcel, get its regulations; two-city comparison on the last page. Board: 339 1st Ave E (I-3) + comparison.
+- Open: how the three types map to the inventory's earlier types (tower; smaller urban; larger urban with secure perimeter).
