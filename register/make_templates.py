@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Tier templates (J.B. and Xun, 19 Oct 2026) → templates.json and tool/templates.json.
-Every diagram node gets: the parties it affects, and the lowest tier that SHOWS it (resident < community < full).
+Every diagram node gets: the parties it affects, and the lowest tier that SHOWS it (resident < arch < full).
+4 Nov 2026 (J.B. 3 Nov): four templates only, Resident, Municipal (not built yet), Engineering ('full'), Architecture ('arch');
+Community dropped. Its middle tag is now 'arch': shown in Architecture and Engineering, not to residents (the same nodes
+Architecture and Engineering showed before, so neither changes). Patch: register/patches/four_templates_2026_11_04.py.
 All nodes still RUN in every tier (facts are never switched off); a tier changes what is asked and shown.
 Judged by Claude from each node's meaning (no user testing yet) — a draft for J.B. to check; a sensitivity test comes later.
 Parties: diagram_data.json 'parties'."""
@@ -8,7 +11,7 @@ import json, os
 H = os.path.dirname(os.path.abspath(__file__))
 D = json.load(open(os.path.join(H, 'diagram_data.json')))
 # (tier, parties, reason). tier = lowest tier that shows the node.
-R = 'resident'; C = 'community'; F = 'full'
+R = 'resident'; C = 'arch'; F = 'full'  # C kept as the name of the middle tag (was 'community' to 3 Nov 2026)
 T = {
  # inputs
  'parcel': (R, 'host city neighbours', 'where: the one thing a resident always gives'),
@@ -138,10 +141,10 @@ rank = {R: 0, C: 1, F: 2, 'arch_only': 9}
 shows = lambda nt, tid: (nt == 'arch_only' or rank[nt] <= 1) if tid == 'arch' else rank[nt] <= rank[tid]
 out = {'date': '2026-10-19', 'status': 'draft: judged by Claude from each node\'s meaning; no user testing yet; sensitivity test to follow',
        'tiers': [{'id': 'resident', 'short': 'Everyday', 'name': 'What it means for me', 'who': 'residents and other laypeople', 'asks': 'where, and maybe how big; other answers assumed, shown and changeable'},
-                 {'id': 'community', 'short': 'Civic', 'name': 'What it means for the neighbourhood', 'who': 'councillors, community groups, receivers, policy planners', 'asks': 'every setup question'},
                  {'id': 'full', 'short': 'Engineering', 'name': 'How it is worked out', 'who': 'engineers, bylaw professionals', 'asks': 'every setup question'},
                  {'id': 'arch', 'short': 'Architecture', 'name': 'What it could hold', 'who': 'architects and designers', 'asks': 'every setup question; then programs, arrangement, comparison'}],
        'rule': 'every node runs in every tier; a tier sets what is asked and shown; facts are never switched off',
+       'tier_note': "node tier = the first template that shows it: 'resident' (every template), 'arch' (Architecture and Engineering), 'full' (Engineering only), 'arch_only' (Architecture only). Community dropped 3 Nov 2026 (J.B.); Municipal not built yet.",
        'nodes': {k: {'tier': t, 'parties': p.split(), 'why': r} for k, (t, p, r) in T.items()}}
 # the report each template gets (J.B. 20 Oct 2026: "3 different reports for each of the templates, and this should be diagrammed in the template").
 # Pages in order; a page is shown in a template's report when that template shows what the page is about (same rank rule as the nodes).
@@ -160,7 +163,7 @@ PAGES = [
  ('logic', F, 'How it is worked out', 'every part of the tool, by stage'),
  ('sources', R, 'Sources', 'as text'),
 ]
-out['reports'] = {tid: [{'id': i, 'title': t, 'what': w} for i, r, t, w in PAGES if rank[r] <= rank[tid]] for tid in ('resident', 'community', 'full')}
+out['reports'] = {tid: [{'id': i, 'title': t, 'what': w} for i, r, t, w in PAGES if rank[r] <= rank[tid]] for tid in ('resident', 'full')}
 out['reports']['arch'] = [{'id': i, 'title': t, 'what': w} for i, r, t, w in PAGES if i in ('cover', 'fits', 'flows', 'heat', 'sources')]  # 2 Nov 2026; an arrangements page comes with the report work
 # sensitivity test (step 7, 20 Oct 2026; audit/sensitivity_2026-10-20.md). J.B.'s rule: when a part a template hides moves a result it shows by 25% or
 # more (or 3 dB of sound), the card names that part in plain words as what most of the range comes from; 10–25% is listed as also behind the range;
@@ -195,7 +198,7 @@ _D = json.load(open(os.path.join(H, 'diagram_data.json')))
 out['graph'] = {'stages': [[s['id'], s['name']] for s in _D['stages']],
                 'nodes': [[n['id'], n['stage']] for n in _D['nodes']],
                 'edges': [[e['from'], e['to']] for e in _D['edges']]}
-for tid in ('resident', 'community', 'full', 'arch'):
+for tid in ('resident', 'full', 'arch'):
     out[tid + '_count'] = sum(1 for v in T.values() if shows(v[0], tid))
 # node details for the tool's logic panel (step 3, 20 Oct 2026): what each part is, how it is worked out, how sure, from what
 def _cut(t, n):
@@ -215,4 +218,4 @@ for on, rows in out_drivers['by_result'].items():
             out['nodes'][pn]['sens'] = (out['nodes'][pn].get('sens', '') + ('; ' if out['nodes'][pn].get('sens') else '') + t)
 for path in (os.path.join(H, 'templates.json'), os.path.join(H, '..', 'tool', 'templates.json')):
     json.dump(out, open(path, 'w'), ensure_ascii=False, indent=1)
-print({k: out[k + '_count'] for k in ('resident', 'community', 'full', 'arch')})
+print({k: out[k + '_count'] for k in ('resident', 'full', 'arch')})

@@ -153,7 +153,7 @@ async function expandOpps(){ const k=F.steps.findIndex(s=>s.k==='opps'); if(k<0)
   F.steps.splice(k,1,...add); }
 /* sweep 20 Oct 2026: a step whose every section is shown only in fuller templates is skipped there (residents: Real buildings, which was an empty page) */
 const DES=['arat','aprog','aarr','acmp'];
-const SKIP={resident:new Set(['prec',...DES]),community:new Set(DES),full:new Set(DES),
+const SKIP={resident:new Set(['prec',...DES]),full:new Set(DES), /* 4 Nov 2026: Community template dropped (J.B. 3 Nov) */
   arch:new Set(['prec','heat','energy','water','materials','opps','spec','opts','time','cities'])}; /* 2 Nov 2026: Architecture mode = site, set-up, what fits, then its own steps; the Exchanges stay in Engineering (J.B.). 3 Nov 2026: People (social) shown just before Design, context only, nothing scored (J.B.) */
 async function go(i){ { const t=(BD.tier&&BD.tier())||'full', dir=i>=F.i?1:-1; while(i>0&&i<F.steps.length-1&&SKIP[t]&&SKIP[t].has(F.steps[i].k)) i+=dir; }
   if(i<0||i>=F.steps.length) return; invalidate(); capture(); F.i=i; F.max=Math.max(F.max,i); document.body.classList.remove('wide');
@@ -208,7 +208,7 @@ function facts(){ const e=BD.eng, f=e.siteFacts(), A=BD.S.answers, a=BD.S.sel.a|
    ['Set-up',`${A.built==='existing'?'existing building':'new building'}, ${A.inside||'air'} cooling inside, ${(A.outside||'dry')==='dry'?((A.inside||'air')==='air'?'air-cooled chillers':'dry coolers'):(A.outside==='towers'?'cooling towers':'hybrid coolers')} outside`]]
    .concat(BD.tier&&BD.tier()==='resident'&&!A.residentEdit?[['Chosen for you','the size and set-up above are the tool\'s usual choices, not yours; change them in step 1 and the report follows']]:[]); }
 const ORDERG=['site','fits','ex','opps','opts','report'];
-const RK={resident:0,community:1,full:2,arch:1};
+const RK={resident:0,full:2,arch:1};
 /* the report follows the tier (J.B. and Xun, 19 Oct 2026): residents a plain page or two (what affects them, what was assumed); the neighbourhood
    who gains and loses, money, approvals, comparisons (with tables); professionals everything, each result with the parts it is worked out from.
    A section counts at a tier if any part behind it is drawn at that tier (logic.js); one the reader brought back with "Show more" stays in. */
@@ -216,7 +216,7 @@ function keepAt(tier,shown,tierAt,t){ if(!tier) return true; if(RK[tier]<=RK[t])
 function forTier(n,t,left){ const secs=[]; for(const r of n.secs){ if(keepAt(r[2],r[3],n.tierAt,t)) secs.push([r[0],r[1],t==='full'&&r[4]&&r[4].length?r[4]:null]); else left.push(r[0]); }
   const rows=[]; (n.rows||[]).forEach((r,i)=>{ const rt=(n.rowT||[])[i]||['',true]; if(keepAt(rt[0],rt[1],n.tierAt,t)) rows.push(r); else left.push(r.split(/\s+(?:not yet known|built here|built elsewhere|pilot|speculative)/)[0]); });
   return Object.assign({},n,{secs,rows,tables:t==='resident'?[]:n.tables}); }
-const RHEAD={resident:'What it would mean for you: what affects neighbours, and every choice the tool made for you.',community:'What it would mean for the neighbourhood: who gains and who gives up, money, approvals and comparisons.',full:'How it is worked out: every result, with the parts of the tool\'s logic each one comes from.'};
+const RHEAD={resident:'What it would mean for you: what affects neighbours, and every choice the tool made for you.',full:'How it is worked out: every result, with the parts of the tool\'s logic each one comes from.'};
 function reportData(){ const t=(BD.tier&&BD.tier())||'full', groups=[], left=[]; for(const [g,l] of GROUPS){ const items=F.steps.filter(s=>gOf(s,t)===g&&F.notes[s.k]).map(s=>Object.assign(forTier(F.notes[s.k],t,left),{k:s.k})); if(items.length) groups.push({g,l,items}); }
   const seen=new Set(), srcs=[]; for(const s of Object.values(F.notes).flatMap(n=>n.srcs)){ const key=s.toLowerCase().replace(/[^a-z0-9]/g,''); /* whole string: blocks sharing a preamble are kept (sweep M78) */ if(!seen.has(key)){ seen.add(key); srcs.push(s); } } return {facts:facts(),groups,srcs,date:new Date().toISOString().slice(0,10),tier:t,level:(BD.logic&&BD.logic.LEVEL[t])||'',left:[...new Set(left)]}; }
 const pathText=p=>p.length>14?p.slice(0,14).join(' · ')+` and ${p.length-14} more`:p.join(' · ');

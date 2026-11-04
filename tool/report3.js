@@ -308,7 +308,7 @@ function pCities(D,no){ const {refs,EC,worth,f}=D; let s=''; const here=refs.fin
   return page(D,no,'Two cities','The same data centre in Vancouver and Edmonton: the grid, the climate and the price of gas change what it gives.',s); }
 
 /* ---------- the report ---------- */
-const FALLBACK={resident:['cover','fits','flows','time','opps','spec','sources'],community:['cover','fits','flows','heat','power','water','time','opps','spec','options','cities','sources'],full:['cover','fits','flows','heat','power','water','time','opps','spec','options','cities','logic','sources']};
+const FALLBACK={resident:['cover','fits','flows','time','opps','spec','sources'],full:['cover','fits','flows','heat','power','water','time','opps','spec','options','cities','logic','sources']};
 const PAGES_T={cover:'The lot',fits:'What fits',flows:'What moves in and out',heat:'Heat',power:'Power',water:'Water',time:'Over time, and next door',opps:'Opportunities',spec:'Could become',options:'Three options',cities:'Two cities',logic:'How it is worked out',sources:'Sources'};
 function plan(t){ const R=BD.TPL&&BD.TPL.reports; return R&&R[t]?R[t].map(p=>p.id):FALLBACK[t]||FALLBACK.full; }
 async function pages(D){ const out=[]; let k=1; const nn=()=>String(k++).padStart(2,'0'); D.plan=plan(D.tier);
@@ -317,7 +317,7 @@ async function pages(D){ const out=[]; let k=1; const nn=()=>String(k++).padStar
     else if(id==='spec'){ for(const n of D.picks) out.push(pSpec(D,nn(),n)); } else if(id==='options') out.push(await pOptions(D,nn())); else if(id==='cities'){ const c=pCities(D,nn()); if(c) out.push(c); } else if(id==='logic') out.push(pLogic(D,nn())); }
   return out.filter(Boolean); }
 // the three templates and their reports, drawn small: this one lit (cover and the logic page)
-function templatesStrip(D,x,y,w){ const T0=[['resident','What it means for me'],['community','What it means for the neighbourhood'],['full','How it is worked out']]; let s=caps(x,y,'Three reports, one for each template; this one in ink'); y+=12; const TT=T0;
+function templatesStrip(D,x,y,w){ const T0=[['resident','What it means for me'],['full','How it is worked out'],['arch','What it could hold']]; let s=caps(x,y,'A report for each template; this one in ink'); /* 4 Nov 2026: Community dropped; Municipal not built yet */ y+=12; const TT=T0;
   const ids=Object.keys(PAGES_T); const cw=Math.min(28,(w-150)/ids.length);
   ids.forEach((id,i)=>{ s+=`<text transform="translate(${x+150+i*cw+3},${y+4}) rotate(-40)" font-size="5.2" fill="${K.mute}">${esc(PAGES_T[id])}</text>`; }); y+=10;
   for(const [t,nm] of TT){ const me=t===D.tier, L=plan(t); s+=T(x,y+6,nm,{fs:6.6,w:me?600:300,c:me?K.ink:K.mute});
@@ -330,11 +330,11 @@ function pLogic(D,no){ const G=BD.TPL&&BD.TPL.graph, N=BD.TPL&&BD.TPL.nodes; if(
   st.forEach(([c,name],j)=>{ const L=col[c]||[]; const key=id=>{ const f=(ins[id]||[]).map(k=>pos[k]).filter(Boolean); return f.length?f.reduce((a,q)=>a+q[1],0)/f.length:1e4+L.indexOf(id); }; const nc=Math.ceil(L.length/34), rows=Math.ceil(L.length/nc), gy=(Y1-Y0)/34;
     L.sort((a,b)=>key(a)-key(b)).forEach((id,i)=>{ pos[id]=[X0+j*cwid+10+(i%nc)*12, Y0+Math.floor(i/nc)*gy+(34-rows)*gy/2]; });
     s+=T(X0+j*cwid+6,Y0-22,wrap(name,16).slice(0,2),{fs:6.4,w:600}); s+=`<line x1="${X0+j*cwid}" y1="${Y0-30}" x2="${X0+j*cwid}" y2="${Y1+6}" stroke="${K.line}" stroke-width=".4"/>`; });
-  const TC={resident:K.ink,community:K.heat,full:K.faint,arch_only:K.faint}; const rank={resident:0,community:1,full:2,arch:1};
+  const TC={resident:K.ink,arch:K.heat,full:K.faint,arch_only:K.faint}; const rank={resident:0,full:2,arch:1};
   for(const [a,b] of G.edges){ const p=pos[a], q=pos[b]; if(!p||!q) continue; s+=`<path d="M${p[0]},${p[1]} C${(p[0]+q[0])/2},${p[1]} ${(p[0]+q[0])/2},${q[1]} ${q[0]},${q[1]}" fill="none" stroke="${K.dim}" stroke-width=".35" opacity=".5"/>`; }
   for(const [id,[x,y]] of Object.entries(pos)){ const t=(N[id]||{}).tier||'full'; s+=dot(x,y,2.2,TC[t]); }
   let y=Y1+30; s+=caps(M,y,'Each dot is one part of the tool; colour is the first report that shows it'); y+=14; let x=M;
-  for(const [t,l] of [['resident','in all three reports'],['community','neighbourhood and full reports'],['full','full report only']]){ const n=Object.values(N).filter(v=>v.tier===t).length; s+=dot(x+3,y-2.5,3,TC[t])+T(x+10,y,`${l} (${n})`,{fs:7}); x+=170; }
+  for(const [t,l] of [['resident','every report'],['arch','Architecture and Engineering'],['full','Engineering only'],['arch_only','Architecture only']]){ const n=Object.values(N).filter(v=>v.tier===t).length; s+=dot(x+3,y-2.5,3,TC[t])+T(x+10,y,`${l} (${n})`,{fs:7}); x+=135; }
   y+=24; s+=T(M,y,wrap('Every part runs in every report; a report only changes what is shown. The full report lists, for each result, the parts it is worked out from (see the appendix). Lines are what feeds what.',120),{fs:7.2});
   y+=40; const st2=templatesStrip(D,M,y,PW-2*M); s+=st2.s;
   return page(D,no,'How it is worked out',`${Object.keys(N).length} parts in ${st.length} stages, from the lot to what could become.`,s); }
