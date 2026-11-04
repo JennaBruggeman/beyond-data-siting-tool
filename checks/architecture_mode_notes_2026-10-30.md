@@ -172,3 +172,7 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - Architecture mode moves from free arranging to prebuilt program-sharing typologies: tested combinations with set adjacencies and size ratios, applied to any lot and adjusted to it. Less room for error; also a library showing people the options.
 - Build 2 (BUILD2_BRIEF) on hold for its Arrange parts (4, 5) until the typology plan is agreed; register, zones and lot-side parts still stand.
 - Mockup issues J.B. raised: programs read as separate buildings; chillers float above the hall roof (mockup drawing error); DC support rooms listed but not drawn.
+
+## Templates (J.B., 3 Nov 2026)
+- Four templates only: Resident, Municipal, Engineering, Architecture. Community is dropped (tier id `community` to be removed from tiers.js, flow.js SKIP, templates.json and the register's tier tags; anything only it showed goes to Resident or Engineering).
+- Each template has its own report type, same white look, header and source style.
