@@ -11,10 +11,10 @@ const draft=t=>`<span class="draft">${t}</span>`;
 let OPPS=null; async function opps(){ if(OPPS) return OPPS; try{ OPPS=await BD.getJSON('opps.json'); }catch(e){ OPPS={opportunities:{},addons:[],sources:{},label_systems:{readiness:{states:[]},rules:{states:[]}},source_kinds:{},source_check:{}}; } return OPPS; }
 BD.opps=opps; opps();
 const st=(sys,id)=>{ const L=OPPS&&OPPS.label_systems&&OPPS.label_systems[sys]; return (L&&L.states.find(s=>s.id===id))||{name:id,means:''}; };
-const RDC={built_here:'#8fb996',built_elsewhere:'#86ada7',pilot:'#cdb07a',speculative:'#CC746C',unknown:'#6b6964'};
-const RSC={allowed:'#8fb996',approval:'#cdb07a',not_allowed:'#b24f49',no_rule:'#9d9a94',unknown:'#6b6964',na:'#3c4148'};
-const rdPill=id=>{ const x=st('readiness',id); return `<span class="pill" style="border-color:${RDC[id]||'#6b6964'};color:${RDC[id]||'#9d9a94'}" title="${esc(x.means)}">${esc(x.name)}</span>`; };
-const rsPill=id=>{ const x=st('rules',id); return `<span class="pill" style="border-color:${RSC[id]||'#6b6964'};color:${RSC[id]||'#9d9a94'}" title="${esc(x.means)}">${esc(x.name)}</span>`; };
+const RDC={built_here:'#4F4F4C',built_elsewhere:'#4F4F4C',pilot:'#6F6E69',speculative:'#B5544B',unknown:'#6F6E69'};
+const RSC={allowed:'#4F4F4C',approval:'#6F6E69',not_allowed:'#B5544B',no_rule:'#6E6E6B',unknown:'#6F6E69',na:'#D7D7D4'};
+const rdPill=id=>{ const x=st('readiness',id); return `<span class="pill" style="border-color:${RDC[id]||'#6F6E69'};color:${RDC[id]||'#6E6E6B'}" title="${esc(x.means)}">${esc(x.name)}</span>`; };
+const rsPill=id=>{ const x=st('rules',id); return `<span class="pill" style="border-color:${RSC[id]||'#6F6E69'};color:${RSC[id]||'#6E6E6B'}" title="${esc(x.means)}">${esc(x.name)}</span>`; };
 function srcList(ids){ if(!ids||!ids.length) return ''; const S=(OPPS&&OPPS.sources)||{}, K=(OPPS&&OPPS.source_kinds)||{}, CK=(OPPS&&OPPS.source_check)||{};
   return '<ul class="csrc">'+[...new Set(ids)].map(i=>{ const t=S[i]; if(!t) return `<li><code>${esc(i)}</code></li>`; const m=t.match(/https?:\/\/\S+/); const txt=esc(t.replace(/\s*—?\s*https?:\/\/\S+$/,''));
     return `<li>${K[i]?`<span class="evb">${esc(K[i])}</span>`:''}${CK[i]==='agent'?'<span class="evb" style="color:var(--accent)">quote to check</span>':''}${txt}${m?` <a href="${m[0]}" target="_blank" rel="noopener">source</a>`:''}</li>`; }).join('')+'</ul>'; }
@@ -120,7 +120,7 @@ function heatEcon(f,p,offer){ const R=E().R, city=f.city, cop=R.cop; // offer: [
   else o.status='unknown';
   return o; }
 BD.heatEcon=heatEcon;
-const STATUS={within:['costs less than the heat is worth','#8fb996'],depends:['depends on the costs','#cdb07a'],beyond:['costs more than the heat is worth','#6b6964'],unknown:['demand not yet known','#9d9a94']}; // over the parts' life, at a utility's cost of capital (J.B., 19 Oct)
+const STATUS={within:['costs less than the heat is worth','#4F4F4C'],depends:['depends on the costs','#6F6E69'],beyond:['costs more than the heat is worth','#6F6E69'],unknown:['demand not yet known','#6E6E6B']}; // over the parts' life, at a utility's cost of capital (J.B., 19 Oct)
 /* receiver list grouped by kind (J.B., 16 Oct: "a lot of repetition"): the kind, the shared connection difficulty and the column labels are said
    once per group; a row shows only what differs — name, size, route, and a status word unless it is the greyed "costs more". */
 function groupRows(all,showB){ const by={}; all.forEach(p=>(by[p.t]=by[p.t]||[]).push(p)); const ord=['housing','apartment','office','hotel','commercial','school','campus','hospital','care','rec','hall','pool','arena'];
@@ -145,7 +145,7 @@ function difficulty(f,p,nets){ const nIn=nets.find(n=>BD.pip(p.x,p.y,n.r)), inNe
   if(p.de) return {k:'lift',t:'Has its own heating plant',why:p.de+(/steam/.test(p.de)?'. Steam this hot cannot take server heat without a large lift; how the plant could take outside heat is not published':'. How the plant would take outside heat is not published')};
   if(inNet) return {k:'ready',t:'Ready (on a network)',why:'inside a district-energy service area: the building has, or must have, an energy transfer station; the data centre\'s heat still needs lifting to the network\'s supply temperature (the NEU guidelines give 65 °C; not re-read for this tool)'};
   return {k:'unknown',t:'Not yet known',why:`depends on how it is heated now. Hot-water radiators and fan coils run at about 60 °C supply, 45 °C return; radiant floors 45/35 (Toronto District Energy Ready Guideline, 2016) — both need a heat-pump lift from server heat. Forced-air or electric baseboard heat needs a building retrofit. In the ${f.city==='van'?'Vancouver area, households heat mainly with a furnace 39%, electric baseboard or radiant 29%, a boiler 23%':'Edmonton area, households heat mainly with a furnace 75%, a boiler 19%; electric baseboard too unreliable to publish'} (NRCan Survey of Household Energy Use 2019, by census metropolitan area; boiler shares: use with caution; all homes, not this building). Boiler-heated buildings are the easier ones to connect.`}; }
-const DCOL={ready:'#8fb996',lift:'#cdb07a',retrofit:'#CC746C',unknown:'#9d9a94'};
+const DCOL={ready:'#4F4F4C',lift:'#6F6E69',retrofit:'#CC746C',unknown:'#6E6E6B'};
 
 /* ---------- heat: the index ---------- */
 /* energy used for space and water heating per m² of floor, by activity type (NRCan Comprehensive Energy Use Database, Commercial/Institutional,
@@ -363,8 +363,8 @@ function chart(x){ const W=380,Hh=190,ml=48,mr=10,mt=10,mb=30, D=3200; const vma
   [0.5,1].forEach(k=>{ const v=vmax*k; g+=`<text x="${ml-4}" y="${Y(v)+3}" fill="var(--faint)" font-size="10" text-anchor="end">$${(v/1e6).toFixed(1)}M</text>`; });
   g+=`<path d="M${X(0)},${Y(ECON.fixed)} L${X(D)},${Y(ECON.fixed+D*ECON.pipe[0])} L${X(D)},${Y(ECON.fixed+D*ECON.pipe[1])} Z" fill="var(--fg)" opacity=".10"/>`;
   g+=`<line x1="${X(0)}" y1="${Y(ECON.fixed)}" x2="${X(D)}" y2="${Y(ECON.fixed+D*ECON.pipe[1])}" stroke="var(--muted)"/><line x1="${X(0)}" y1="${Y(ECON.fixed)}" x2="${X(D)}" y2="${Y(ECON.fixed+D*ECON.pipe[0])}" stroke="var(--muted)" stroke-dasharray="3 3"/>`;
-  if(x.val){ const [a,b]=x.val; g+=`<rect x="${X(0)}" y="${Y(Math.max(a,b))}" width="${X(D)-X(0)}" height="${Math.max(1,Y(Math.min(a,b))-Y(Math.max(a,b)))}" fill="#CC746C" opacity=".22"/><text x="${X(D)-4}" y="${Y(Math.max(a,b))-4}" fill="#e39a93" font-size="10" text-anchor="end">what the heat can pay for over ${ECON.life.pipe} years</text>`; }
-  g+=`<line x1="${X(Math.min(D,x.route))}" x2="${X(Math.min(D,x.route))}" y1="${mt}" y2="${Hh-mb}" stroke="#e9e6e1" stroke-width="1.5"/><text x="${X(Math.min(D,x.route))+4}" y="${mt+10}" fill="#e9e6e1" font-size="10">this route</text>`;
+  if(x.val){ const [a,b]=x.val; g+=`<rect x="${X(0)}" y="${Y(Math.max(a,b))}" width="${X(D)-X(0)}" height="${Math.max(1,Y(Math.min(a,b))-Y(Math.max(a,b)))}" fill="#CC746C" opacity=".22"/><text x="${X(D)-4}" y="${Y(Math.max(a,b))-4}" fill="#B5544B" font-size="10" text-anchor="end">what the heat can pay for over ${ECON.life.pipe} years</text>`; }
+  g+=`<line x1="${X(Math.min(D,x.route))}" x2="${X(Math.min(D,x.route))}" y1="${mt}" y2="${Hh-mb}" stroke="#1F2022" stroke-width="1.5"/><text x="${X(Math.min(D,x.route))+4}" y="${mt+10}" fill="#1F2022" font-size="10">this route</text>`;
   g+=`<text x="${X(D)-4}" y="${Y(ECON.fixed+D*ECON.pipe[1])+12}" fill="var(--muted)" font-size="10" text-anchor="end">cost to connect</text></svg>`;
   return `<div class="cchart">${g}</div><p class="src">Where the shaded value meets the cost band is the break-even distance. ${x.val?'':'No value line: this building\'s demand is not known.'}</p>`; }
 

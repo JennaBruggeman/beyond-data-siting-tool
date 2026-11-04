@@ -2,12 +2,12 @@
    trade-offs … graphs, charts, pie charts where applicable"). One card per subject, a few steps each: a schematic animation of how the
    system works, then charts of what it means at this site, then the trade-off. Every number comes from the tool's own model and register
    (the same figures the panel shows); animations are schematic, never to scale. Optional: the path never requires opening one.
-   Chart colours: validated for the dark panel (dataviz validator, 17 Oct): heat #d0705f, water #3f97c6, power #b8861c, place #3fa57e,
-   materials #9184e0; grey for "everything else". Identity is never colour alone: every mark is labelled. */
+   Chart colours: validated for the dark panel (dataviz validator, 17 Oct): heat #D1A35E, water #5D7F99, power #4F4F4C, place #6E6E6B,
+   materials #8D8C87; grey for "everything else". Identity is never colour alone: every mark is labelled. */
 (function(){
 'use strict';
 const BD=window.BD; const {$,esc,fmt}=BD;
-const C={heat:'#d0705f',water:'#3f97c6',power:'#b8861c',place:'#3fa57e',mat:'#9184e0',other:'#6b6964',ink:'#e9e6e1',muted:'#9d9a94',line:'#3c4148',bg:'#17181a'};
+const C={heat:'#D1A35E',water:'#5D7F99',power:'#4F4F4C',place:'#6E6E6B',mat:'#8D8C87',other:'#6F6E69',ink:'#1F2022',muted:'#6E6E6B',line:'#D7D7D4',bg:'#FFFFFF'};
 const NS='http://www.w3.org/2000/svg';
 const K=t=>`<span class="k">${t}</span>`;
 const f1=v=>v>=100?fmt(Math.round(v)):v>=10?v.toFixed(0):v.toFixed(1);
@@ -64,26 +64,26 @@ function lineChart(host,o){ const W=560,H=280,L=48,Rr=W-20,T=14,B=H-34; const s=
   (o.marks||[]).forEach(m=>{ const x=X(m[0]); el('line',{x1:x,x2:x,y1:T,y2:B,stroke:o.c,'stroke-width':1,'stroke-dasharray':'2 3'},s); txt(s,x+4,T+12+(m[2]||0),m[1],{s:11}); });
   return s; }
 /* the year as one strip of hours, with a share marked */
-function yearStrip(host,share,lab,c,label,centre){ const W=560,H=centre!=null?110:90,L=20,Rr=W-20; const s=svg(host,W,H,label); el('rect',{x:L,y:40,width:Rr-L,height:22,rx:4,fill:'#26292e'},s);
+function yearStrip(host,share,lab,c,label,centre){ const W=560,H=centre!=null?110:90,L=20,Rr=W-20; const s=svg(host,W,H,label); el('rect',{x:L,y:40,width:Rr-L,height:22,rx:4,fill:'#F2F2F0'},s);
   const w=Math.max(2,(Rr-L)*share), x0=centre!=null?L+(Rr-L)*centre-w/2:L; el('rect',{x:x0,y:40,width:w,height:22,rx:4,fill:c},s); if(centre!=null) txt(s,x0+w/2,100,'mostly in summer (placement schematic)',{s:10.5,c:C.muted,a:'middle'}); ['Jan','Apr','Jul','Oct','Dec'].forEach((m,i)=>txt(s,L+(Rr-L)*i/4,82,m,{s:10.5,c:C.muted,a:i===4?'end':i?'middle':'start'})); txt(s,L,28,lab,{s:12}); return s; }
 
 /* ---------- schematic animations (not to scale) ---------- */
 function anim(kind){ return host=>{ const s=svg(host,560,300,'Schematic: '+kind); const b=el('g',{},s);
   // the hall, common to every drawing
-  rect(b,30,150,170,110,{s:C.line}); txt(b,40,170,'data hall',{s:11,c:C.muted}); for(let i=0;i<4;i++) rect(b,46+i*38,190,26,58,{s:'#55585d',r:2});
+  rect(b,30,150,170,110,{s:C.line}); txt(b,40,170,'data hall',{s:11,c:C.muted}); for(let i=0;i<4;i++) rect(b,46+i*38,190,26,58,{s:'#8D8C87',r:2});
   if(kind==='power'){ rect(b,30,40,90,46,{s:C.power}); txt(b,40,58,'grid',{s:11}); txt(b,40,74,'substation',{s:10.5,c:C.muted}); flow(b,'M75,86 V150',C.power,{w:2.5});
-    rect(b,250,150,110,46,{s:'#55585d'}); txt(b,262,170,'UPS, batteries',{s:11}); flow(b,'M200,172 H250',C.power,{rev:true}); rect(b,250,214,110,46,{s:'#55585d'}); txt(b,262,234,'standby',{s:11}); txt(b,262,250,'generators',{s:10.5,c:C.muted});
+    rect(b,250,150,110,46,{s:'#8D8C87'}); txt(b,262,170,'UPS, batteries',{s:11}); flow(b,'M200,172 H250',C.power,{rev:true}); rect(b,250,214,110,46,{s:'#8D8C87'}); txt(b,262,234,'standby',{s:11}); txt(b,262,250,'generators',{s:10.5,c:C.muted});
     flow(b,'M200,232 H250',C.power,{rev:true,slow:true}); flow(b,'M115,150 C160,100 330,90 420,90',C.heat,{}); txt(b,428,94,'→ heat',{s:11}); return; }
   // heat leaving the servers into a loop
   flow(b,'M200,180 C240,180 250,120 300,120',C.heat,{}); flow(b,'M300,140 C250,140 240,230 200,230',C.water,{rev:true});
   if(kind==='dry'){ rect(b,300,90,170,70,{s:C.heat}); txt(b,312,108,'dry cooler',{s:11.5}); txt(b,312,124,'fans pull air over the coil',{s:10.5,c:C.muted});
-    for(let i=0;i<3;i++){ el('circle',{cx:340+i*45,cy:142,r:11,fill:'none',stroke:'#8a8781',class:'xfan'},b); flow(b,`M${340+i*45},86 V40`,'#8a8781',{slow:true}); }
+    for(let i=0;i<3;i++){ el('circle',{cx:340+i*45,cy:142,r:11,fill:'none',stroke:'#8D8C87',class:'xfan'},b); flow(b,`M${340+i*45},86 V40`,'#8D8C87',{slow:true}); }
     txt(b,300,30,'warm air out; no water',{s:11}); }
   if(kind==='towers'){ rect(b,300,70,150,110,{s:C.water}); txt(b,312,88,'cooling tower',{s:11.5}); for(let i=0;i<5;i++) flow(b,`M${320+i*25},100 V168`,C.water,{w:1.4});
     flow(b,'M375,70 C365,40 395,30 385,10',C.muted,{slow:true}); txt(b,400,30,'vapour: water evaporates',{s:11}); flow(b,'M470,120 H450',C.water,{rev:true}); txt(b,474,124,'make-up',{s:10.5,c:C.muted});
     flow(b,'M375,180 V270 H480',C.water,{slow:true}); txt(b,420,288,'blowdown to the sewer',{s:10.5,c:C.muted}); }
   if(kind==='hybrid'){ rect(b,300,90,170,70,{s:C.heat}); txt(b,312,108,'hybrid cooler',{s:11.5}); txt(b,312,124,'dry most of the year',{s:10.5,c:C.muted});
-    for(let i=0;i<3;i++) el('circle',{cx:340+i*45,cy:142,r:11,fill:'none',stroke:'#8a8781',class:'xfan'},b);
+    for(let i=0;i<3;i++) el('circle',{cx:340+i*45,cy:142,r:11,fill:'none',stroke:'#8D8C87',class:'xfan'},b);
     const sp=el('g',{class:'xspray'},b); for(let i=0;i<6;i++) flow(sp,`M${310+i*28},80 v14`,C.water,{w:1.4}); txt(sp,300,66,'hot day: water sprayed on the inlet air',{s:11,c:C.water}); }
   if(kind==='recover'){ rect(b,300,90,110,70,{s:C.heat}); txt(b,310,108,'heat pump',{s:11.5}); txt(b,310,124,'lifts 25–35 °C to ~70 °C',{s:10.5,c:C.muted});
     rect(b,300,20,110,40,{s:C.power}); txt(b,310,44,'electricity in',{s:11}); flow(b,'M355,60 V90',C.power,{});

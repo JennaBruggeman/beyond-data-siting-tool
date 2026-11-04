@@ -7,11 +7,11 @@
 'use strict';
 const BD=window.BD; const {$,esc,fmt}=BD; const E=()=>BD.eng;
 const PAL={
- screen:{ink:'#e9e6e1',mute:'#a8a49d',faint:'#5d5b57',acc:'#CC746C',fill:'rgba(204,116,108,.20)',plant:'#7d7a74',gen:'#b9b5ae',bg:'none',lot:'rgba(255,255,255,.03)',ctx:'rgba(255,255,255,.07)',lotFill:'rgba(255,255,255,.02)',bfill:'rgba(204,116,108,.10)',equip:'rgba(255,255,255,.08)'},
- w1:{ink:'#1b1b1d',mute:'#616164',faint:'#bababc',acc:'#d4202b',fill:'#f5d1d5',plant:'#a8a8ab',gen:'#616164',bg:'#ffffff',lot:'#f5d1d5',ctx:'#ececec',lotFill:'#ffffff',bfill:'#f8dfe2',equip:'#f3f3f3'},
+ screen:{ink:'#1F2022',mute:'#6E6E6B',faint:'#B9B8B4',acc:'#CC746C',fill:'rgba(204,116,108,.14)',plant:'#8D8C87',gen:'#6E6E6B',bg:'none',lot:'#F7F7F6',ctx:'#EEEEEC',lotFill:'#FFFFFF',bfill:'#FFFFFF',equip:'#F2F2F0'}, /* drawing */ /* white interface (3 Nov 2026) */
+ w1:{ink:'#1F2022',mute:'#6E6E6B',faint:'#B9B8B4',acc:'#CC746C',fill:'#F5E3E1',plant:'#8D8C87',gen:'#6E6E6B',bg:'#FFFFFF',lot:'#F7F7F6',ctx:'#EEEEEC',lotFill:'#FFFFFF',bfill:'#FFFFFF',equip:'#F2F2F0'},
  v6:{ink:'#1d1e20',mute:'#5f5d58',faint:'#b9b6ae',acc:'#9b7946',fill:'#ebe2d2',plant:'#9a978f',gen:'#5f5d58',bg:'#f3f0ea',lot:'#f3f0ea',ctx:'#e3ded4',lotFill:'#f3f0ea',bfill:'#e9dfcd',equip:'#ebe7df'},
- print:{ink:'#222222',mute:'#6b6b6b',faint:'#c4c4c4',acc:'#CC746C',fill:'#f4dedb',plant:'#9a9a9a',gen:'#555555',bg:'#ffffff',lot:'#fafafa',ctx:'#ececeb',lotFill:'#ffffff',bfill:'#fbefed',equip:'#f2f2f2'}};
-const FONT=`font-family="Open Sans, Arial, sans-serif"`;
+ print:{ink:'#1F2022',mute:'#6E6E6B',faint:'#B9B8B4',acc:'#CC746C',fill:'#F5E3E1',plant:'#8D8C87',gen:'#6E6E6B',bg:'#FFFFFF',lot:'#F7F7F6',ctx:'#EEEEEC',lotFill:'#FFFFFF',bfill:'#FFFFFF',equip:'#F2F2F0'}};
+const FONT=`font-family="Open Sans, Arial, sans-serif"`; /* report3 swaps this for Barlow, embedded; IBM Plex Sans has no file in tool/fonts yet */
 const r1=v=>Math.round(v*10)/10;
 const rngT=(a,b,u)=>Math.abs(a-b)<1e-9*Math.max(1,a)?`${fmt(a)} ${u}`:`${fmt(a)}–${fmt(b)} ${u}`;
 function wrap(t,n){ const w=String(t||'').split(/\s+/), out=[]; let cur=''; for(const x of w){ if((cur+' '+x).trim().length>n&&cur){ out.push(cur); cur=x; } else cur=(cur+' '+x).trim(); } if(cur) out.push(cur); return out; }
@@ -227,8 +227,8 @@ const fname=(D,ext)=>`beyond-data-report-${D.facts[0][1].replace(/[^A-Za-z0-9]+/
 function docHTML(B){ const D=B.D;
   return `<!doctype html><html lang="en-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Beyond Data report: ${esc(D.facts[0][1])}</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap">
-<style>:root{--fg:#222;--muted:#6b6b6b;--line:#e2e2e2;--accent:#CC746C;--accent-2:#b4554d}body{font-family:'Open Sans',Arial,sans-serif;font-weight:300;color:#222;background:#fff;max-width:860px;margin:40px auto;padding:0 24px;line-height:1.5;font-size:14px}
-h1{font-weight:300;font-size:30px;margin:4px 0}h3{font-size:15px;font-weight:600;margin:18px 0 4px}.sub,.src{color:#6b6b6b;font-size:12.5px}.kick{font-size:11px;letter-spacing:.08em;color:#6b6b6b}ul{padding-left:18px}${CSS_R}@media print{h2,h3{break-after:avoid}figure,.spcard{break-inside:avoid}}</style></head><body>
+<style>:root{--fg:#1F2022;--muted:#6E6E6B;--line:#E4E4E2;--accent:#CC746C;--accent-2:#B5544B}body{font-family:'IBM Plex Sans','Open Sans',Arial,sans-serif;font-weight:300;color:#1F2022;background:#fff;max-width:860px;margin:40px auto;padding:0 24px;line-height:1.5;font-size:14px}
+h1{font-weight:300;font-size:30px;margin:4px 0}h3{font-size:15px;font-weight:600;margin:18px 0 4px}.sub,.src{color:#6E6E6B;font-size:12.5px}.kick{font-size:11px;letter-spacing:.08em;color:#6E6E6B}ul{padding-left:18px}${CSS_R}@media print{h2,h3{break-after:avoid}figure,.spcard{break-inside:avoid}}</style></head><body>
 <div class="kick">BEYOND DATA · ${esc(D.level.toUpperCase())} · ${D.date}</div><h1>${esc(D.facts[0][1])}</h1><p>${esc(RHEAD[D.tier])}.</p><div class="rp2">${bodyHTML(B,true)}</div></body></html>`; }
 
 /* ---------- PDF: Open Sans embedded; diagrams drawn to images ---------- */

@@ -8,9 +8,9 @@
 const BD=window.BD; const {esc,fmt}=BD; const E=()=>BD.eng;
 const PW=612, PH=792, M=36;
 /* J.B.'s booklet, white1 (20 Oct 2026): white paper, black linework, greys, red #d4202b, the site on pink, green landscape, blue water, ochre */
-const K={bg:'#ffffff',grid:'#efefef',ink:'#1b1b1d',mute:'#616164',dim:'#a8a8ab',faint:'#bababc',line:'#dedede',red:'#d4202b',heat:'#bf8a00',warm:'#dbbe73',cold:'#1f78c7',green:'#2e9d4e',panel:'#f3f3f3',pink:'#f5d1d5'};
-const STYW={nb:{l:'#f6f6f6',r:'#e9e9e9',t:'#ffffff',e:'#a8a8ab',w:0.3},dc:{l:'#ec9aa1',r:'#e0707a',t:'#f2f2f2',e:'#1b1b1d',w:0.6},eq:{l:'#ffffff',r:'#e8e8e8',t:'#f7f7f7',e:'#1b1b1d',w:0.45},gen:{l:'#c6c6c7',r:'#a3a3a5',t:'#dedede',e:'#1b1b1d',w:0.4}};
-const TYPEC={housing:'#bf8a00',apartment:'#dbbe73',office:'#1f78c7',hotel:'#bcd5ed',commercial:'#a8a8ab',school:'#2e9d4e',campus:'#7dc291',hospital:'#d4202b',care:'#ec9aa1',rec:'#7b3fb4',hall:'#c6c6c7',pool:'#7fb3e0',arena:'#616164'};
+const K={bg:'#FFFFFF',grid:'#F2F2F0',ink:'#1F2022',mute:'#6E6E6B',dim:'#8D8C87',faint:'#B9B8B4',line:'#E4E4E2',red:'#CC746C',redT:'#B5544B',heat:'#D1A35E',warm:'#B49A6D',cold:'#5D7F99',green:'#4F4F4C',panel:'#F2F2F0',pink:'#F5E3E1'}; /* drawing */ /* white interface tokens (3 Nov 2026); red = accent (redT for red text, AA), heat/warm/cold on the heat scale */
+const STYW={nb:{l:'#F7F7F6',r:'#EEEEEC',t:'#FFFFFF',e:'#B9B8B4',w:0.3},dc:{l:'#EEEEEC',r:'#E2E2DF',t:'#FFFFFF',e:'#CC746C',w:0.6},eq:{l:'#EEEEEC',r:'#E2E2DF',t:'#FFFFFF',e:'#8D8C87',w:0.45},gen:{l:'#E2E2DF',r:'#D7D7D4',t:'#EEEEEC',e:'#8D8C87',w:0.4}};
+const TYPEC={housing:'#4F4F4C',apartment:'#6E6E6B',office:'#8D8C87',hotel:'#A3A29D',commercial:'#B9B8B4',school:'#4F4F4C',campus:'#6E6E6B',hospital:'#4F4F4C',care:'#6E6E6B',rec:'#8D8C87',hall:'#B9B8B4',pool:'#A3A29D',arena:'#6E6E6B'}; /* drawing */ /* greys (white interface); each type is labelled */
 const TYPEN={housing:'non-market housing',apartment:'apartment',office:'office',hotel:'hotel',commercial:'commercial',school:'school',campus:'campus',hospital:'hospital',care:'care home',rec:'recreation centre',hall:'community hall',pool:'pool',arena:'arena'};
 const r1=v=>Math.round(v*10)/10, n0=v=>fmt(Math.round(v));
 const rng=(a,b,u,d)=>{ const f=v=>d?(+v).toFixed(d):fmt(Math.round(v)); return Math.abs(a-b)<1e-9?`${f(a)}${u?' '+u:''}`:`${f(a)}–${f(b)}${u?' '+u:''}`; };
@@ -30,7 +30,7 @@ function nest(svg,x,y,w){ if(!svg) return {s:'',h:0}; const m=/viewBox="0 0 ([\d
 function page(D,no,title,finding,body){ const a=D.site; return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${PW} ${PH}" width="100%" font-family="Barlow, Arial, sans-serif" role="img" aria-label="${esc(title)}">${D.font}
  <rect width="${PW}" height="${PH}" fill="${K.bg}"/>
  ${caps(M,34,'Beyond Data · site report')}${caps(PW-M,34,`${a.addr} · ${a.city}`,{a:'end'})}
- ${T(M,74,no,{fs:26,w:300})}${T(M+38,64,title,{fs:16.5,w:600})}${T(M+38,78,wrap(finding,96).slice(0,2),{fs:8,c:K.red})}
+ ${T(M,74,no,{fs:26,w:300})}${T(M+38,64,title,{fs:16.5,w:600})}${T(M+38,78,wrap(finding,96).slice(0,2),{fs:8,c:K.redT})}
  ${rule(M,96,PW-M,K.ink,0.5)}
  ${body}
  ${rule(M,PH-34,PW-M)}${T(M,PH-24,`${a.addr}, ${a.city} · ${D.level} · ${D.date}`,{fs:6,c:K.mute})}${T(PW-M,PH-24,no,{fs:6,c:K.mute,a:'end'})}</svg>`; }
@@ -98,7 +98,7 @@ async function collect(){ const e=E(), f=e.siteFacts(), A=BD.S.answers, m=BD.mod
 function pCover(D){ const {f,mw,r,rL,rec,heat,site}=D; const iso=siteIso({x0:M,y0:136,x1:PW-M,y1:500},{pipe:rec,air:!rec});
   const known=heat.filter(p=>p.econ&&p.econ.demand).length, within=heat.length, fac=[r.facMWh[0]/1000,r.facMWh[1]/1000];
   let s=`<rect width="${PW}" height="${PH}" fill="${K.bg}"/>${caps(M,34,'Beyond Data · site report')}${caps(PW-M,34,D.date,{a:'end'})}`;
-  s+=T(M,82,site.addr,{fs:30,w:600})+T(M,102,`${site.city} · ${f.zone||''} · ${fmt(f.lot||0)} m² lot`,{fs:10,c:K.mute})+T(M,120,`Report level: ${D.level}`,{fs:8.5,c:K.red});
+  s+=T(M,82,site.addr,{fs:30,w:600})+T(M,102,`${site.city} · ${f.zone||''} · ${fmt(f.lot||0)} m² lot`,{fs:10,c:K.mute})+T(M,120,`Report level: ${D.level}`,{fs:8.5,c:K.redT});
   s+=iso.s;
   // the lot's numbers
   const y=540; s+=rule(M,y-24,PW-M,K.ink,0.5);
@@ -118,13 +118,13 @@ function pSite(D,no){ const {f,m,mw,prec,fitMax}=D, R2=BD.report2, pal=R2.PAL.w1
   s+=caps(X0,y,'How much fits on this lot, MW of servers'); y+=16;
   s+=`<rect x="${px(f.mw[0])}" y="${y}" width="${px(f.mw[1])-px(f.mw[0])}" height="10" fill="${K.panel}" stroke="${K.faint}" stroke-width=".4"/>`+T(px(f.mw[0])-4,y+8,`floor space only, ${r1(f.mw[0])}–${r1(f.mw[1])}`,{fs:6,c:K.mute,a:'end'});
   if(fitMax!=null) s+=`<rect x="${X0}" y="${y+16}" width="${px(fitMax)-X0}" height="10" fill="${K.heat}"/>`+T(px(fitMax)+4,y+24,`${fitMax.toFixed(1)} with its plant and yard`,{fs:6,c:K.ink});
-  s+=`<line x1="${px(mw)}" y1="${y-4}" x2="${px(mw)}" y2="${y+32}" stroke="${K.red}" stroke-width="1"/>`+T(px(mw),y-7,`this report: ${r1(mw)} MW`,{fs:6.2,c:K.red,a:'middle'});
+  s+=`<line x1="${px(mw)}" y1="${y-4}" x2="${px(mw)}" y2="${y+32}" stroke="${K.red}" stroke-width="1"/>`+T(px(mw),y-7,`this report: ${r1(mw)} MW`,{fs:6.2,c:K.redT,a:'middle'});
   s+=`<line x1="${X0}" y1="${y+32}" x2="${X1}" y2="${y+32}" stroke="${K.dim}" stroke-width=".4"/>`+axisTicks(X0,X1,y+32,[0,0.25,0.5,0.75,1].map(p=>({p,v:p*top})),v=>fmt(v)); y+=62;
   // m² per MW against built data centres
   const pr=prec&&prec.summary&&prec.summary.gross_per_it_mw_benchmark; const here=m&&m.sizedTo&&m.sizedTo.floor?m.sizedTo.floor/Math.max(mw,0.1):(f.gross?((f.gross[0]+f.gross[1])/2)/Math.max(mw,0.1):null); /* sweep 20 Oct: the floor the servers need at this size (the 3D label's figure), not the zone's whole floor */
   if(pr){ s+=caps(X0,y,'Building area per MW, against built data centres'); y+=14; const lo=0, hi=nice(Math.max(pr.max,here||0)*1.05), q=v=>X0+(X1-X0)*(v-lo)/(hi-lo);
     s+=`<line x1="${q(pr.min)}" y1="${y+6}" x2="${q(pr.max)}" y2="${y+6}" stroke="${K.dim}" stroke-width=".6"/><rect x="${q(pr.p25)}" y="${y}" width="${q(pr.p75)-q(pr.p25)}" height="12" fill="${K.panel}" stroke="${K.dim}" stroke-width=".5"/><line x1="${q(pr.median)}" y1="${y}" x2="${q(pr.median)}" y2="${y+12}" stroke="${K.ink}" stroke-width="1"/>`;
-    if(here){ s+=dot(q(Math.min(here,hi)),y+6,3.4,K.red)+T(q(Math.min(here,hi)),y-4,`this lot, about ${n0(here)} m²/MW`,{fs:6,c:K.red,a:'middle'}); }
+    if(here){ s+=dot(q(Math.min(here,hi)),y+6,3.4,K.red)+T(q(Math.min(here,hi)),y-4,`this lot, about ${n0(here)} m²/MW`,{fs:6,c:K.redT,a:'middle'}); }
     s+=`<line x1="${X0}" y1="${y+20}" x2="${X1}" y2="${y+20}" stroke="${K.dim}" stroke-width=".4"/>`+axisTicks(X0,X1,y+20,[0,0.25,0.5,0.75,1].map(p=>({p,v:lo+p*(hi-lo)})),v=>n0(v));
     s+=T(X0,y+40,wrap(`${pr.n} benchmark buildings: median ${n0(pr.median)} m² of building per MW of IT, middle half ${n0(pr.p25)}–${n0(pr.p75)} (public records and operator claims).`,62),{fs:6.2,c:K.mute}); y+=66; }
   // the facts
@@ -180,8 +180,8 @@ function pHeat(D,no){ const {heat,best,worth,f,rec,r,rL,m,note}=D; let s=''; con
   s+=`<rect x="${X0}" y="${Y0}" width="${X1-X0}" height="${Y1-Y0}" fill="none" stroke="${K.line}" stroke-width=".5"/>`;
   s+=`<rect x="${X0}" y="${py(wv)}" width="${X1-X0}" height="${Y1-py(wv)}" fill="${K.heat}" opacity=".07"/>`;
   for(const p of pts0) s+=dot(px(p.econ.route),py(p.econ.lcohMid),p.t==='housing'||p.t==='apartment'?1.6:2.1,TYPEC[p.t]||K.dim);
-  s+=`<line x1="${X0}" y1="${py(wv)}" x2="${X1}" y2="${py(wv)}" stroke="${K.heat}" stroke-width="1"/>`+T(X1-4,py(wv)-4,`what the heat is worth (the gas it replaces): ${wvT}/MWh`,{fs:6.2,c:K.heat,a:'end',halo:true});
-  if(best){ const bx=px(best.len), by=py(best.mid.lcoh); s+=`<circle cx="${bx}" cy="${by}" r="5" fill="none" stroke="${K.red}" stroke-width="1"/>`+T(bx,by-9,`best set-up found: $${best.mid.lcoh.toFixed(0)}/MWh`,{fs:6.4,c:K.red,a:'middle',halo:true}); }
+  s+=`<line x1="${X0}" y1="${py(wv)}" x2="${X1}" y2="${py(wv)}" stroke="${K.heat}" stroke-width="1"/>`+T(X1-4,py(wv)-4,`what the heat is worth (the gas it replaces): ${wvT}/MWh`,{fs:6.2,c:K.ink,a:'end',halo:true});
+  if(best){ const bx=px(best.len), by=py(best.mid.lcoh); s+=`<circle cx="${bx}" cy="${by}" r="5" fill="none" stroke="${K.red}" stroke-width="1"/>`+T(bx,by-9,`best set-up found: $${best.mid.lcoh.toFixed(0)}/MWh`,{fs:6.4,c:K.redT,a:'middle',halo:true}); }
   s+=axisTicks(X0,X1,Y1,[0,0.25,0.5,0.75,1].map(p=>({p,v:p*xmax})),v=>fmt(v)+(v===xmax?' m':''));
   for(let v=ylo;v<=yhi*1.001;v*=10) for(const m of [1,3]){ const u=v*m; if(u>yhi*1.001) continue; s+=`<line x1="${X0}" y1="${py(u)}" x2="${X1}" y2="${py(u)}" stroke="${K.grid}" stroke-width=".4"/>`+T(X0-4,py(u)+2,`$${fmt(u)}`,{fs:5.6,c:K.mute,a:'end'}); }
   s+=T(X0-4,Y0-6,'$ per MWh (log scale)',{fs:5.6,c:K.mute,a:'start'});
@@ -251,7 +251,7 @@ function gateMark(x,y,v){ const r=4.4;
   if(v==='no') return `<circle cx="${x}" cy="${y}" r="${r}" fill="${K.red}"/><path d="M${x-1.8},${y-1.8} l3.6,3.6 M${x+1.8},${y-1.8} l-3.6,3.6" stroke="#fff" stroke-width="1.1" stroke-linecap="round"/>`;
   if(v==='nk') return `<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="${K.dim}" stroke-width=".7" stroke-dasharray="1.6 1.2"/>`+T(x,y+2.2,'?',{fs:6,c:K.mute,a:'middle',w:600});
   return `<line x1="${x-2.5}" y1="${y}" x2="${x+2.5}" y2="${y}" stroke="${K.faint}" stroke-width=".8"/>`; }
-function pOpps(D,no){ const {opps,picks}=D; let s=''; const fams=[...new Set(opps.map(o=>o.fam))]; const FC={Heat:K.heat,Electricity:K.cold,Water:'#7fa0ad','Land and time':K.green,People:K.red,Materials:K.mute};
+function pOpps(D,no){ const {opps,picks}=D; let s=''; const fams=[...new Set(opps.map(o=>o.fam))]; const FC={Heat:K.heat,Electricity:K.mute,Water:K.cold,'Land and time':K.green,People:K.red,Materials:K.mute};
   const GK=['physics','land','rules','demand','time','money']; const ST={yes:['Possible here',K.green],chg:['Possible with a change',K.heat],nk:['Not ruled out',K.mute],no:['Not here',K.red]};
   // the key, first
   let ky=112; s+=caps(M,ky,'How to read the dots: six tests on this lot'); ky+=14; const KEY=[['yes','passes'],['chg','passes with a change'],['nk','not yet known'],['no','fails'],['na','does not apply']];
@@ -287,7 +287,7 @@ async function pOptions(D,no){ const {e,f,near,nets,A}=D; const opts=e.optionSet
   /* 2 Nov 2026 hard rules (exchanges F11): an option that breaks a hard rule (setupProblems) is not drawn; the rule is named instead */
   try{ opts.forEach((o,i)=>{ A.mw=o.mw; A.inside=o.recover?'plate':'air'; BD.modelReset(); BD.model(); const x=M+i*(cw+10); const miss=BD.setupProblems?BD.setupProblems(true):[];
     if(!miss.length){ const iso=siteIso({x0:x,y0:110,x1:x+cw,y1:300},{pipe:o.recover,air:!o.recover,grid:false,pad:0.06}); s+=iso.s; } else s+=T(x,200,wrap(`Not drawn: at ${o.mw} MW this set-up breaks a hard rule.`,40).slice(0,2),{fs:6.6,c:K.mute});
-    s+=T(x,318,`${o.id.toUpperCase()}. ${o.name}`,{fs:8,w:600})+T(x,330,wrap(o.gives,40).slice(0,3),{fs:6.4,c:K.mute}); if(miss.length) s+=T(x,358,wrap('Not allowed at this size: '+miss[0],40).slice(0,3),{fs:6.2,c:K.red}); }); }
+    s+=T(x,318,`${o.id.toUpperCase()}. ${o.name}`,{fs:8,w:600})+T(x,330,wrap(o.gives,40).slice(0,3),{fs:6.4,c:K.mute}); if(miss.length) s+=T(x,358,wrap('Not allowed at this size: '+miss[0],40).slice(0,3),{fs:6.2,c:K.redT}); }); }
   finally{ Object.keys(A).forEach(k=>delete A[k]); Object.assign(A,JSON.parse(keep)); BD.modelReset(); BD.model(); }
   const groups=[['Servers','MW',o=>[o.mw,o.mw]],['Electricity a year','GWh',o=>[o.r.facMWh[0]/1000,o.r.facMWh[1]/1000]],['Heat offered a year','GWh',o=>o.recover?[o.r.avail[0]/1000,o.r.avail[1]/1000]:[0,0]],['Plant space','m²',o=>[o.r.plant[0],o.r.plant[1]]]];
   let y=390; const OC=[K.faint,K.heat,K.ink];
@@ -363,5 +363,5 @@ async function pdf(D,P){ if(!window.jspdf) await load(LIB); const {jsPDF}=window
   return doc.output('blob'); }
 BD.report3={collect,pages,pdf,view};
 BD.views=BD.views||{}; BD.views.report=view;
-{ const st=document.createElement('style'); st.textContent='.rpages{display:flex;flex-direction:column;gap:14px;margin:12px 0}.rpage{box-shadow:0 1px 6px rgba(0,0,0,.35);border-radius:2px;overflow:hidden;background:#fff}.rpage svg{display:block}'; document.head.appendChild(st); }
+{ const st=document.createElement('style'); st.textContent='.rpages{display:flex;flex-direction:column;gap:14px;margin:12px 0}.rpage{box-shadow:0 0 0 1px #E4E4E2,0 4px 14px rgba(31,32,34,.06);border-radius:2px;overflow:hidden;background:#fff}.rpage svg{display:block}'; document.head.appendChild(st); }
 })();

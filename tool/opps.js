@@ -6,7 +6,7 @@
 'use strict';
 const BD=window.BD; const {$,esc,fmt}=BD; const E=()=>BD.eng;
 const draft=t=>`<span class="draft">${t}</span>`;
-const GS={yes:['possible here','#8fb996'],chg:['possible with a change','#cdb07a'],no:['not here','#b24f49'],nk:['not yet known','#9d9a94']};
+const GS={yes:['possible here','#4F4F4C'],chg:['possible with a change','#6F6E69'],no:['not here','#B5544B'],nk:['not yet known','#6E6E6B']};
 const gp=k=>`<span class="cls" style="border-color:${GS[k][1]};color:${GS[k][1]}">${GS[k][0]}</span>`;
 const GATES=['physics','land','rules','demand','time','money'];
 /* receiving uses by zone, from the use tables (research pass, 16 Oct): Vancouver Zoning By-law s. 2 and schedules; Edmonton Bylaw 20001 s. 8.10 */

@@ -7,7 +7,7 @@
 'use strict';
 const BD=window.BD=window.BD||{};
 let T=null;
-const COL={body:0xf4f3f0,shade:0xe3e1dc,dark:0x55585d,edge:0x3b3d42,fan:0x2f3135,acc:0xCC746C,heat:0xC23B33,power:0xC9971C,water:0x3f97c6,pad:0xd8cfb8};
+const COL={body:0xFFFFFF,shade:0xE2E2DF,dark:0x8D8C87,edge:0xA9A8A4,fan:0x6E6E6B,acc:0xCC746C,heat:0xD1A35E,power:0x8D8C87,water:0x5D7F99,pad:0xE2E2DF}; /* drawing */ /* white interface (3 Nov 2026) */
 const M={}; // shared materials, made once three is loaded
 function mats(){ if(M.body) return M;
   const std=(c,o)=>new T.MeshStandardMaterial(Object.assign({color:c,roughness:.92,metalness:0,flatShading:true},o||{}));
