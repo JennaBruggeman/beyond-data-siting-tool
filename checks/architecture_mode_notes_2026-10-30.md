@@ -217,3 +217,4 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - Nine typologies + two add-ons: 1 Emergency hub (refuge, warming shelter, clinic; stacked/beside variants); 2 Warm bath (spa, therapy pool); 3 Community pool (pool, gym, shared change rooms); 4 Aquaponics (greenhouse, fish farm); 5 Food hub (greenhouse, community kitchen); 6 Conservatory (low biome); 7 Heat cascade (spa → pool → greenhouse → public edge); 8 Twin (overnight shelter, own building); 9 Shelter + laundry. Add-ons: heat hub; public edge (warm ground / EV charging).
 - Out for now (weak): work yard, winter garden, food drying alone.
 - Next: research per typology, then build.
+- Twin dropped (J.B. 4 Nov 2026: "makes things complicated"). Overnight shelter is out of the library; day-use warming room stays in Emergency hub. Library v1 is now 8 typologies + 2 add-ons.
