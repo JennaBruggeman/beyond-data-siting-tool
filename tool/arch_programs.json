@@ -2,7 +2,7 @@
  "meta": {
   "date": "2026-11-02",
   "built_from": "checks/research_arch_v1/ (architecture_mode_notes_2026-10-30.md, pool_laundry, greenhouse_solar, refuge_publicfloor, refuge_placement, adj_programs, adj_occupancy, adj_service, spatial_rules, servicing_social, prog_wet, prog_grow, prog_public, prog_housing, sys, fish_species, temps_public, zoning, handover, security_more, uploads_2026_11_02); src ids from register new_sources",
-  "note": "Data centre assumed F-2 (tool default). null + '?' = no source. 'our arithmetic' / 'our reading' labelled. Separation per register arch_nbc3131 (F-2 vs D, E, F-3 none; vs A, B, C 2 h). Check 3 applied 2 Nov 2026."
+  "note": "Data centre assumed F-2 (tool default). null + '?' = no source. 'our arithmetic' / 'our reading' labelled. Separation per register arch_nbc3131 (F-2 vs D, E, F-3 none; vs A, B, C 2 h). Check 3 applied 2 Nov 2026. 4 Nov 2026: clinic clear height, gym climbing figures, pool/therapy/spa ASHRAE design conditions added (uploads_4nov_b; ids arch_up4_*); floor_height_m untouched."
  },
  "programs": [
   {
@@ -421,9 +421,45 @@
     "src": [
      "arch_carbonTrustCTG009",
      "arch_benakcha2025",
-     "arch_bcPoolReg296"
+     "arch_bcPoolReg296",
+     "arch_up4_ashraeCh6Pools"
     ],
-    "note": "water 27–30 °C by use (UK benchmark), air ~1 °C above (≈28–31 °C); 416 = our arithmetic per m² usable, benchmark outside Canada (French preprint citing Yuan 2021), low conf."
+    "note": "water 27–30 °C by use (UK benchmark), air ~1 °C above (≈28–31 °C); 416 = our arithmetic per m² usable, benchmark outside Canada (French preprint citing Yuan 2021), low conf.",
+    "design_C": {
+     "src": [
+      "arch_up4_ashraeCh6Pools"
+     ],
+     "recreational": {
+      "air": [
+       24,
+       29
+      ],
+      "water": [
+       24,
+       29
+      ]
+     },
+     "competition": {
+      "air": [
+       26,
+       29
+      ],
+      "water": [
+       24,
+       28
+      ]
+     },
+     "rh_pct": [
+      50,
+      60
+     ],
+     "air_above_water_K": [
+      1,
+      2
+     ],
+     "air_max_C": 30,
+     "note": "ASHRAE 2023 HVAC Applications ch. 6 Table 2 (US benchmark); no heating load per m² of water and no hall height in the chapter: ?"
+    }
    },
    "zoning": {
     "van": {
@@ -540,7 +576,8 @@
     "AB: chlorine room 1 h, outward door to outside, no door into the building [arch_adj_abStandataCl]",
     "Edm BE 500 m² cap: needs a variance (3.18) [arch_zon_EdmZones]",
     "Pool covers cut total energy 10–30 % [arch_carbonTrustCTG009]",
-    "Sewer: non-domestic waste ≥65 °C prohibited (Metro Van) [arch_mvSewerBylaw299]"
+    "Sewer: non-domestic waste ≥65 °C prohibited (Metro Van) [arch_mvSewerBylaw299]",
+    "Pool hall at negative pressure 15–40 Pa; 4–6 air changes per hour [arch_up4_ashraeCh6Pools]"
    ]
   },
   {
@@ -912,9 +949,30 @@
      "arch_abPoolStd2014",
      "arch_r2_carbonTrustCTV058",
      "arch_wet_ncceh2026",
-     "arch_wet_abPoolStdSauna"
+     "arch_wet_abPoolStdSauna",
+     "arch_up4_ashraeCh6Pools"
     ],
-    "note": "hot water ≤40 °C (BC, AB), hydrotherapy 32–40 °C (UK); dry sauna 80–100 °C (AB cap 85), steam ≤60 °C"
+    "note": "hot water ≤40 °C (BC, AB), hydrotherapy 32–40 °C (UK); dry sauna 80–100 °C (AB cap 85), steam ≤60 °C",
+    "design_C": {
+     "src": [
+      "arch_up4_ashraeCh6Pools"
+     ],
+     "whirlpool_spa": {
+      "air": [
+       27,
+       29
+      ],
+      "water": [
+       36,
+       40
+      ]
+     },
+     "rh_pct": [
+      50,
+      60
+     ],
+     "note": "ASHRAE 2023 ch. 6 Table 2 (US benchmark)"
+    }
    },
    "zoning": {
     "van": {
@@ -1153,9 +1211,30 @@
     "lift_needed": null,
     "src": [
      "arch_wet_atacp2019",
-     "arch_bcPoolReg296"
+     "arch_bcPoolReg296",
+     "arch_up4_ashraeCh6Pools"
     ],
-    "note": "water 32–35.5 °C (ideal 34.5–35.5), air 25–30 °C, RH ≤60 % (ATACP, UK benchmark); BC cap 37 °C"
+    "note": "water 32–35.5 °C (ideal 34.5–35.5), air 25–30 °C, RH ≤60 % (ATACP, UK benchmark); BC cap 37 °C",
+    "design_C": {
+     "src": [
+      "arch_up4_ashraeCh6Pools"
+     ],
+     "therapeutic": {
+      "air": [
+       27,
+       29
+      ],
+      "water": [
+       29,
+       35
+      ]
+     },
+     "rh_pct": [
+      50,
+      60
+     ],
+     "note": "ASHRAE 2023 ch. 6 Table 2 (US benchmark)"
+    }
    },
    "zoning": {
     "van": {
@@ -3356,7 +3435,28 @@
        "arch_sup_calgaryRecFP2012"
       ]
      }
-    ]
+    ],
+    "climbing": {
+     "src": [
+      "arch_up4_en12572_2",
+      "arch_up4_en12572_1"
+     ],
+     "boulder_wall_max_m": 4.5,
+     "boulder_wall_max_if_standable_top_m": 4.0,
+     "boulder_impact_area_front_m": {
+      "wall_to_3m": 2.0,
+      "wall_over_3m": 2.5
+     },
+     "boulder_impact_area_side": "walls ≤10°, no side holds: 50 % of height (≤3 m) or 1.5 m (>3 m); walls >10°: 50 % of height",
+     "lead_first_protection_max_m": 3.1,
+     "lead_falling_space_m": {
+      "behind": 2.0,
+      "either_side": 1.5,
+      "below_protection_points": 8.0
+     },
+     "room_clear_height_m": null,
+     "note": "EN 12572-1/-2:2017 (European, benchmark outside Canada): wall heights are measured to the top of the impact area; neither part sets a room clear height or a lead-wall height: ?. Draft prEN 12572-2:2025 (not in force) swaps the side impact-area values in Table 2 [arch_up4_prEN12572_2]"
+    }
    },
    "occ": {
     "group": "A-2",
@@ -3476,7 +3576,8 @@
    "flags": [
     "Van: public fitness amenity excluded from floor area up to 100 m² [van_zdb_i3]",
     "Boulder impact area kept clear of obstructions [arch_pub_ifsc2025]",
-    "No gym row in occupant load table: AHJ [arch_pub_nbc31171]"
+    "No gym row in occupant load table: AHJ [arch_pub_nbc31171]",
+    "Bouldering wall ≤4.5 m (≤4.0 m if standable top); impact area 2.0–2.5 m in front [arch_up4_en12572_2]"
    ]
   },
   {
@@ -3759,7 +3860,14 @@
        "arch_sup_abGFNARooms"
       ]
      }
-    ]
+    ],
+    "clear_height_m": {
+     "v": 2.4,
+     "src": [
+      "arch_up4_csaZ8000_12"
+     ],
+     "note": "minimum ceiling (clear) height, CSA Z8000:24 12.2.2.1; mental-health bedrooms and secure rooms 2.75; specialized rooms per Table 9.3 (not read ?); floor-to-floor not given (Clause 12.3): ?"
+    }
    },
    "occ": {
     "group": "D",
@@ -3878,7 +3986,10 @@
    "flags": [
     "Not a Metro Van sensitive receptor (our reading) [arch_mv1329]",
     "Health-care HVAC to CSA Z317.2 (paywalled) [arch_adj_csaZ3172]",
-    "Edm 500 m² cap below 3 of 4 BC examples: variance [arch_zon_EdmZones]"
+    "Edm 500 m² cap below 3 of 4 BC examples: variance [arch_zon_EdmZones]",
+    "CSA Z8000:24 Table 9.2 net areas if programmed: physio/OT office 14.0 m², activity room 23.0, multi-purpose min 11.2 (1.5–2.0 m² per person), chiropody 13.0, telehealth 13.0, dental operatory 11.2; exam rooms per Table 13.1 (not read ?) [arch_up4_csaZ8000_9]",
+    "CSA Z8000:24: doors min 2100 mm high; overhead clearance 2.2 m on bed and stretcher paths; mechanical room floors ≥130 mm concrete [arch_up4_csaZ8000_12]",
+    "CSA Z8000:24 9.2.4.2.3: adult day program at street level when possible [arch_up4_csaZ8000_9]"
    ]
   },
   {
