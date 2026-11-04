@@ -249,12 +249,12 @@ function materialsIndex(){ const e=E(), f=e.siteFacts(), R=e.R, a=A(), mw=a.mw||
   e.show3d('materials',{site:f,trucks}); }
 
 /* ---------- people: stakeholders, sound, sight lines, the edge ---------- */
-function sightLines(f,G){ const M=f.M; if(!M||!M.plant||!BD.scene3d) return {lines:[],homes:[0,0],edge:[0,0]}; const st=BD.scene3d.state(); if(!st||!st.site) return {lines:[],homes:[0,0],edge:[0,0]};
-  const targets=M.plant.boxes.filter(b=>!/generator/.test(b.name)).slice(0,8).map(b=>{ const c=BD.centroid(b.ring); return [c[0],c[1],b.base+b.h]; });
-  if(!targets.length) return {lines:[],homes:[0,0],edge:[0,0]};
+function sightLines(f,G){ const M=f.M; if(!M) return {lines:[],homes:[0,0],edge:[0,0]}; const st=BD.scene3d&&BD.scene3d.state(); const ready=!!(M.plant&&st&&st.site); /* Build 2 part 6: the viewpoints run even when the plant test does not */
+  const targets=!ready?[]:M.plant.boxes.filter(b=>!/generator/.test(b.name)).slice(0,8).map(b=>{ const c=BD.centroid(b.ring); return [c[0],c[1],b.base+b.h]; });
   const S=BD.S, blds=[]; for(const id in S.tiles){ if(!id.startsWith(S.city+':')) continue; for(const b of S.tiles[id].bld){ if(b.f===3||(f.blds||[]).includes(b)) continue; const d=Math.hypot(b.c[0]-f.c[0],b.c[1]-f.c[1]); if(d<350) blds.push({b,d}); } }
   const blocked=(p,q,self)=>{ const n=Math.ceil(Math.hypot(q[0]-p[0],q[1]-p[1])/3); for(let i=1;i<n;i++){ const t=i/n, x=p[0]+(q[0]-p[0])*t, y=p[1]+(q[1]-p[1])*t, z=p[2]+(q[2]-p[2])*t;
       if(M.foot&&BD.pip(x,y,M.foot)&&z<M.H-0.05&&t<0.995) return true; for(const o of blds){ if(o.b===self) continue; const bb=o.b.bb||(o.b.bb=(()=>{ let a=1e9,b2=1e9,c=-1e9,d=-1e9; for(let k=0;k<o.b.r.length;k+=2){ a=Math.min(a,o.b.r[k]); b2=Math.min(b2,o.b.r[k+1]); c=Math.max(c,o.b.r[k]); d=Math.max(d,o.b.r[k+1]); } return [a,b2,c,d]; })()); if(x<bb[0]||x>bb[2]||y<bb[1]||y>bb[3]) continue; if(z<o.b.h&&BD.pip(x,y,o.b.r)) return true; } } return false; };
+  if(!targets.length){ const lines=[]; return {lines,homes:[0,0],edge:[0,0],vp:viewpoints(f,M,targets,lines,blocked)}; } /* Build 2 part 6: no plant outside (indoors), the viewpoints still test the massing */
   const homes=blds.filter(o=>o.b._cls==='quiet'||(o.b._cls==null&&lowRes(f,o.b))).sort((a,b)=>a.d-b.d).slice(0,60); const lines=[]; let seenH=0;
   for(const o of homes){ const r=o.b.r; let best=null; for(let k=0;k<r.length;k+=2){ const d=Math.hypot(r[k]-f.c[0],r[k+1]-f.c[1]); if(!best||d<best[2]) best=[r[k],r[k+1],d]; } const eye=[best[0],best[1],Math.max(1.6,Math.min(o.b.h-1.5,12))];
     let seen=false; for(const t of targets){ if(!blocked(eye,t,o.b)){ seen=true; lines.push({from:eye,to:t,seen:true}); break; } } if(!seen) lines.push({from:eye,to:targets[0],seen:false}); if(seen) seenH++; }
@@ -262,7 +262,23 @@ function sightLines(f,G){ const M=f.M; if(!M||!M.plant||!BD.scene3d) return {lin
   const pts=[]; if(G){ for(const g of G.segs){ for(let i=2;i+3<g.length;i+=2){ const x0=g[i],y0=g[i+1],x1=g[i+2],y1=g[i+3]; const L=Math.hypot(x1-x0,y1-y0); for(let s=0;s<L;s+=15){ const t=s/L, x=x0+(x1-x0)*t, y=y0+(y1-y0)*t; if(Math.hypot(x-f.c[0],y-f.c[1])<=200) pts.push([x,y,1.6]); } } } }
   else { const out=geoOffset(M.ring,4); for(let k=0;k<out.length;k+=2){ const j=(k+2)%out.length; const L=Math.hypot(out[j]-out[k],out[j+1]-out[k+1]); for(let s=0;s<L;s+=15){ const t=s/L; pts.push([out[k]+(out[j]-out[k])*t,out[k+1]+(out[j+1]-out[k+1])*t,1.6]); } } }
   let seenE=0; const edge=pts.filter(p=>!blds.some(o=>BD.pip(p[0],p[1],o.b.r))); for(const p of edge){ let seen=false; for(const t of targets){ if(!blocked(p,t,null)){ seen=true; lines.push({from:p,to:t,seen:true}); break; } } if(seen) seenE++; }
-  return {lines,homes:[seenH,homes.length],edge:[seenE,edge.length]}; }
+  return {lines,homes:[seenH,homes.length],edge:[seenE,edge.length],vp:viewpoints(f,M,targets,lines,blocked)}; }
+/* Build 2 (3 Nov 2026, part 6): named viewpoints for the lot (tool/data/viewpoints.json; register arch_vp_osmE06). The viewpoint's building is the
+   tallest tile building holding its point; the eye is at that building's corner nearest the lot, at its top floor (the homes' rule above, without
+   their 12 m cap). Lines run to every roof corner of the massing and are tested against the plant too. Context only, nothing scored. */
+function viewpoints(f,M,targets,lines,blocked){ const S=BD.S, mt=S.meta&&S.meta[f.city], out=[];
+  const list=(((BD.data.viewpoints||{}).lots)||{})[f.city+':'+(S.sel&&S.sel.id)]||[]; if(!mt||!M.foot) return out;
+  const kx=Math.cos(mt.lat0*Math.PI/180)*111320, ky=110540; /* same projection as engine.js P() */
+  for(const v of list){ const x=(v.pt[0]-mt.lon0)*kx, y=(v.pt[1]-mt.lat0)*ky; let hb=null;
+    for(const id in S.tiles){ if(!id.startsWith(f.city+':')) continue; for(const b of S.tiles[id].bld){ if(b.f!==3&&BD.pip(x,y,b.r)&&(!hb||b.h>hb.h)) hb=b; } }
+    if(!hb){ out.push({name:v.name,ask:v.ask,found:false}); continue; }
+    const r=hb.r; let best=null; for(let k=0;k<r.length;k+=2){ const d=Math.hypot(r[k]-f.c[0],r[k+1]-f.c[1]); if(!best||d<best[2]) best=[r[k],r[k+1],d]; }
+    const eye=[best[0],best[1],Math.max(1.6,hb.h-1.5)], c=BD.centroid(M.foot), mc=[];
+    for(let k=0;k<M.foot.length;k+=2) mc.push([M.foot[k]+(c[0]-M.foot[k])*0.02,M.foot[k+1]+(c[1]-M.foot[k+1])*0.02,M.H]); /* drawing: corners nudged 2 % inside so the roof edge itself does not block */
+    let sm=0, sp=0; for(const t of mc){ const s=!blocked(eye,t,hb); if(s) sm++; lines.push({from:eye,to:t,seen:s,vp:true}); }
+    for(const t of targets){ if(!blocked(eye,t,hb)) sp++; }
+    out.push({name:v.name,ask:v.ask,found:true,x,y,h:hb.h,eye:eye[2],d:best[2],mass:[sm,mc.length],plant:[sp,targets.length]}); }
+  return out; }
 function lowRes(f,b){ return false; }
 function peopleIndex(){ BD.afterSocial=peopleExtra; BD.tabOverride.social=null; BD.tabView('social'); BD.tabOverride.social=peopleIndex; }
 // runs after the engine's People tab renders (and again when the census arrives): the stakeholder index, cards and sight lines
@@ -274,12 +290,13 @@ function peopleExtra(){ const e=E(); if(BD.S.tab!=='social'){ BD.afterSocial=nul
    <h3>What is seen from homes and the street</h3><p class="sub" id="sightTxt">${BD._sight&&BD._sight.k===(BD.S.sel&&BD.S.sel.id)+JSON.stringify(A())?BD._sight.html:'Working out sight lines…'}</p><p class="src">Only the cooling plant and what is on the roof and the facade are tested; backup power, fuel, batteries and electrical equipment are never tested or drawn. Homes: neighbours in quiet (residential) zones within 350 m (our study radius), from the corner nearest the site at a top-floor window. Street: points every 15 m on the City street and lane (alley) centrelines within 200 m, at 1.6 m eye height, in both cities; if the street file does not load, points 4 m outside the lot.</p>`; /* 2 Nov 2026 fix pass: D-radius (350 m: our study radius) */
   const old=side.querySelector('#ppl-extra'); if(old) old.remove(); box.id='ppl-extra'; const dn=side.querySelector('.draftnote:last-of-type'); if(dn) dn.before(box); else side.appendChild(box);
   box.querySelectorAll('[data-pp]').forEach(b=>b.onclick=()=>{ const p=near.find(x=>x.id===+b.dataset.pp); personCard(f,p,TYPE); });
-  setTimeout(async()=>{ const G=await (BD.streets?BD.streets(f.city):null); const s=sightLines(f,G); s.street=!!G; /* sweep 20 Oct: the panel can be redrawn before this finishes (residents' template); fill every copy now and any drawn later */ const html=`Plant seen from <b style="font-weight:400">${s.homes[0]} of ${s.homes[1]}</b> nearby homes and from <b style="font-weight:400">${s.edge[0]} of ${s.edge[1]}</b> points ${s.street?'on the streets and lanes within 200 m (City centrelines, a proxy for where people walk)':'just outside the lot'}${A().vis&&A().vis!=='reveal'?` (with the plant ${esc({screen:'screened',enclose:'enclosed',indoors:'indoors'}[A().vis])}; the test does not yet model screens)`:''}. Drawn in 3D: solid lines are seen, dashed are blocked.`; BD._sight={k:(BD.S.sel&&BD.S.sel.id)+JSON.stringify(A()),html}; document.querySelectorAll('[id=sightTxt]').forEach(t=>t.innerHTML=html);
+  setTimeout(async()=>{ const G=await (BD.streets?BD.streets(f.city):null); const s=sightLines(f,G); s.street=!!G; /* sweep 20 Oct: the panel can be redrawn before this finishes (residents' template); fill every copy now and any drawn later */ const html=`Plant seen from <b style="font-weight:400">${s.homes[0]} of ${s.homes[1]}</b> nearby homes and from <b style="font-weight:400">${s.edge[0]} of ${s.edge[1]}</b> points ${s.street?'on the streets and lanes within 200 m (City centrelines, a proxy for where people walk)':'just outside the lot'}${A().vis&&A().vis!=='reveal'?` (with the plant ${esc({screen:'screened',enclose:'enclosed',indoors:'indoors'}[A().vis])}; the test does not yet model screens)`:''}. Drawn in 3D: solid lines are seen, dashed are blocked.`+(s.vp||[]).map(v=>v.found?`<br><b style="font-weight:400">${esc(v.name)}</b>: from its top floor (eye ${fmt(v.eye)} m up, ${fmt(v.d)} m from the lot's centre) ${v.mass[0]} of ${v.mass[1]} roof corners of the massing and ${v.plant[0]} of ${v.plant[1]} plant points are seen. ${esc(v.ask||'')}`:`<br>${esc(v.name)}: its building was not found in the building data. ${esc(v.ask||'')}`).join(''); BD._sight={k:(BD.S.sel&&BD.S.sel.id)+JSON.stringify(A()),html}; document.querySelectorAll('[id=sightTxt]').forEach(t=>t.innerHTML=html);
     const pb=(f.M&&f.M.plant&&f.M.plant.boxes)||[]; const psrc=pb.length?[pb.reduce((t,b)=>t+BD.centroid(b.ring)[0],0)/pb.length,pb.reduce((t,b)=>t+BD.centroid(b.ring)[1],0)/pb.length]:null;
     const NL=e.noiseLw(A().mw||(f.M&&f.M.mwSized)||1), n=NL.n, lw=NL.lw;
     const people=near.slice(0,20).map(p=>({x:p.x,y:p.y,n:p.n||TYPE[p.t],kind:TYPE[p.t],col:0xb9a3cf}));
-    const seenL=s.lines.filter(l=>l.seen), blk=s.lines.filter(l=>!l.seen); const draw=seenL.slice(0,40).concat(blk.slice(0,15));
-    BD.scene3d&&BD.scene3d.show('social',{site:f,noise:BD._noise||noiseFallback(f,lw,psrc),sight:A().vis==='indoors'?[]:draw,people}); },400); }
+    (s.vp||[]).filter(v=>v.found).forEach(v=>people.push({x:v.x,y:v.y,n:v.name,kind:'Hotel'})); /* Build 2 part 6: the named viewpoint, labelled */
+    const seenL=s.lines.filter(l=>l.seen&&!l.vp), blk=s.lines.filter(l=>!l.seen&&!l.vp); const draw=s.lines.filter(l=>l.vp).concat(seenL.slice(0,40),blk.slice(0,15));
+    BD.scene3d&&BD.scene3d.show('social',{site:f,noise:BD._noise||noiseFallback(f,lw,psrc),sight:A().vis==='indoors'?s.lines.filter(l=>l.vp):draw,people}); },400); }
 /* 2 Nov 2026 (J.B.; exchanges F12): no unsourced 50 dBA contour. Without the People tab's figures, the governing limit comes from the by-law
    check (engine noiseCheck: the binding lot's night limit, else the strictest limit among the neighbouring lots), with its section */
 function noiseFallback(f,lw,psrc){ const nc=f.M&&f.M.noise; if(!nc||nc.limit==null) return {lw,src:psrc,level:e=>E().noiseLevel(e)};
