@@ -138,6 +138,10 @@ function model(){
   const ftf=BD.eng?BD.eng.R.ftf:{ground:6,up:[5.5,6]};
   const nF=h=>[1+Math.max(0,Math.floor((h-ftf.ground)/ftf.up[1])),1+Math.max(0,Math.floor((h-ftf.ground)/ftf.up[0]))];
   if(A.built==='existing'){
+    /* bugfix 4 Nov 2026 (retest rules 2): a leased ground floor in a zone that keeps bulk data storage off the ground floor (I-2 s. 2.2.7, I-3 s. 2.2.11,
+       FC-2 s. 2.2.4; registers van_zdb_i2, van_zdb_i3, van_zdb_fc2) is a hard rule and blocks. It was applied only to a whole building, and a ground-floor
+       lease picked on another lot carried over unblocked. As for a whole building, not applied where the zone's limits are assumed (Z.assumed). */
+    if(A.extent==='part'&&A.floor==='ground'&&Z.ground&&!Z.assumed){ const c=(Z.cl||[]).find(x=>x[0]==='Ground floor'); m.warn.push(`Ground floor: zone ${Z.zone} does not permit bulk data storage at the ground floor, except for entrances (${c?c[2]:'zone schedule'}; register ${Z.srcId}). Lease an upper floor instead.`); }
     const hmax=blds.some(b=>b.h>0)?Math.max(...blds.filter(b=>b.h>0).map(b=>b.h)):4; m.hUnknown=blds.some(b=>!(b.h>0)||b.f===6); /* finding I-06: no recorded height → one storey at 4 m, labelled */ m.existing=true; m.H=hmax; m.nF=[Math.max(1,Math.floor(hmax/4)),Math.max(1,Math.floor(hmax/4))];
     { const big=blds.length?blds.reduce((x,b)=>b.a>x.a?b:x):null; m.foot=big?big.r:null; m.roofH=big?big.h:0; } // the roof the plant sits on is the largest part's own roof, at its own height
     m.feet=blds.map(b=>({r:b.r,h:b.h})); m.footArea=blds.reduce((t,b)=>t+b.a,0); // all parts (sweep M67: these sat inside the comment)
