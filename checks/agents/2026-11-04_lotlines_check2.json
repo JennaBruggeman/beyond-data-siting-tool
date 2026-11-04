@@ -1,0 +1,176 @@
+{
+ "lot_van_s2_lines": {
+  "by": "Claude (build agent; separate reading: pdftotext -raw of the PDFs, not the research text)",
+  "where": "sources/library/public/van_zdb_s2/full.pdf",
+  "claims": [
+   {
+    "claim": "Corner Site: A site located at the intersection or junction of 2 or more streets.",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Double Fronting Site: A site abutting 2 parallel or approximately parallel streets.",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Exterior Side Yard: That portion of a corner site extending from the front yard to the rear yard and lying between the side property line adjacent to the flanki",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Front Yard: That part of the site lying between the ultimate front property line and the front of the principal building, extending across the full width of the",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Lane: A public thoroughfare or way not more than 10.1 m in width that affords only a secondary means of access to a site, at the side or rear.",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Rear Yard: That part of the site lying between the ultimate rear property line and the rear of the principal building or rear building, extending across the ful",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Side Yard: The part of the site extending from the front yard to the rear yard and lying between the ultimate side property line and the closest side of the pri",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Site: An area of land consisting of 1 or more adjoining parcels or lots abutting on a street not being a lane ...",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Ultimate Property Line: The property line that results when an anticipated or partially dedicated lane or street abuts a site, and that becomes the property bou",
+    "verdict": "CONFIRMED"
+   }
+  ]
+ },
+ "lot_van_s10_frontage": {
+  "by": "Claude (build agent; separate reading: pdftotext -raw of the PDFs, not the research text)",
+  "where": "sources/library/public/vanZDBs10/full.pdf",
+  "claims": [
+   {
+    "claim": "or as required in other districts, that has a site at its rear that fronts on the flanking street",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "The building placement and design of all buildings on a double fronting site located in any district, other than an M or I district, requires the approval of th",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Where an area of land does not abut a street and therefore is not defined as a site, development may be permitted by the Director of Planning ...",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "The frontage of any site having more than 1 boundary on a street is: (a) where street boundary lengths are equal, as determined by the Director of Planning; (b)",
+    "verdict": "CONFIRMED"
+   }
+  ]
+ },
+ "lot_van_exterior_side": {
+  "by": "Claude (build agent; separate reading: pdftotext -raw of the PDFs, not the research text)",
+  "where": "sources/library/public/van_zdb_i2/full.pdf, sources/library/public/van_zdb_i3/full.pdf, sources/library/public/van_zdb_fc2/full.pdf",
+  "claims": [
+   {
+    "claim": "on a corner site, the exterior side yard and side setback requirements are the same as the front yard and front setback requirements in this section 3.2.",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "in the case of a corner site, the exterior side yard and side setback requirements are the same as the front yard and front setback requirements in this section",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "in the case of a corner site, the exterior side yard width and side setback requirements are the same as the front yard depth and front setback requirements ...",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "adjoins a site located in any R ... district, without the intervention of a lane",
+    "verdict": "CONFIRMED"
+   }
+  ]
+ },
+ "lot_edm_820_lines": {
+  "by": "Claude (build agent; separate reading: pdftotext -raw of the PDFs, not the research text)",
+  "where": "data/raw/edm/bylaw/Bylaw20001.pdf pp. 1020-1058",
+  "claims": [
+   {
+    "claim": "Abut means immediately contiguous to or physically touching. When used in reference to a Lot or a Site, Abut means that the Lot or Site physically touches anoth",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Alley means a narrow roadway primarily intended to give access to the rear of buildings and parcels of land.",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Corner Lot means a Lot that is: a. located at the intersection of 2 Streets, if the angle of the intersection is less than 135 degrees; or b. Abutting a Street ",
+    "verdict": "CONFIRMED (by eye: bylaw_1020_1058.txt l. 273-274: an OCR stray \".\" splits \"less than . 135 degrees\")"
+   },
+   {
+    "claim": "Corner Site means a Site where at least 1 Lot is a Corner Lot.",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Double Fronting Site means a Site that Abuts 2 Streets that are parallel or nearly parallel.",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Flanking Side Lot Line means a Lot line, other than a Front Lot Line, that Abuts a Street on a Corner Site.",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Flanking Street means a Street Abutting a Flanking Side Lot Line.",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Front Lot Line means: a. the Lot line separating a Lot from an Abutting Street; b. in the case of a Corner Lot, the Front Lot Line is the shorter of the Lot lin",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Interior Lot means a Lot other than a Corner Lot.",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Interior Side Lot Line means the Lot line other than a Front Lot Line, Flanking Side Lot Line or Rear Lot Line.",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Rear Lot Line means: a) the Lot line that is furthest from and opposite the Front Lot Line; or b) where there is no such Lot line, the point of intersection of ",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Setback means the distance that a development, or a specified portion of a development, must be from a Lot line. A Setback is not a Yard. ...",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Site means an area of land consisting of 1 or more Abutting Lots.",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Street means any public roadway other than an Alley ...",
+    "verdict": "CONFIRMED"
+   }
+  ]
+ },
+ "lot_edm_5130": {
+  "by": "Claude (build agent; separate reading: pdftotext -raw of the PDFs, not the research text)",
+  "where": "data/raw/edm/bylaw/Bylaw20001.pdf pp. 880-884, data/raw/edm/bylaw/Bylaw20001.pdf pp. 110-113",
+  "claims": [
+   {
+    "claim": "1. On Corner Sites consisting of more than 1 Lot, the Front Lot Line of the Site is the same as the Front Lot Line of the Corner Lot. 2. If the 2 Lot lines of a",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Minimum Setback Abutting a Street 3.0 m",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Abutting an Alley 0 m",
+    "verdict": "CONFIRMED"
+   },
+   {
+    "claim": "Abutting a Site in a non-industrial Zone 6.0 m",
+    "verdict": "CONFIRMED (by eye: bylaw_110_113.txt l. 89-90: table row 4.1.5 split, \"Abutting a Site in a 6.0 m C / non-industrial Zone\")"
+   },
+   {
+    "claim": "Abutting a Site in an industrial Zone 0 m",
+    "verdict": "CONFIRMED (by eye: bylaw_110_113.txt l. 91-92: table row 4.1.6 split, \"Abutting a Site in an Om D / industrial Zone\" (OCR \"Om\"))"
+   }
+  ]
+ }
+}
