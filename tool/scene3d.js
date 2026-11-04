@@ -22,7 +22,7 @@ function setup(){
   labels=document.createElement('div'); labels.style.cssText='position:absolute;inset:0;pointer-events:none;font:400 11.5px/1.3 "IBM Plex Sans",system-ui,sans-serif;color:#6E6E6B;overflow:hidden';
   tip=document.createElement('div'); tip.style.cssText='position:absolute;pointer-events:none;background:rgba(255,255,255,.96);border:1px solid #E4E4E2;border-radius:6px;padding:5px 8px;font:300 12px/1.35 "IBM Plex Sans",system-ui,sans-serif;color:#1F2022;box-shadow:0 4px 12px rgba(31,32,34,.08);display:none;max-width:260px;z-index:4';
   const bar=document.createElement('div'); bar.style.cssText='position:absolute;left:12px;top:12px;right:12px;display:flex;gap:6px;z-index:3;flex-wrap:wrap;pointer-events:none';
-  bar.innerHTML='<button id="v3map" style="pointer-events:auto;background:rgba(255,255,255,.92);border:1px solid #D7D7D4;border-radius:6px;padding:4px 10px;color:#1F2022;cursor:pointer;font-size:12px">← Map</button><button id="v3light" style="display:none;pointer-events:auto;background:rgba(255,255,255,.92);border:1px solid #D7D7D4;border-radius:6px;padding:4px 10px;color:#1F2022;cursor:pointer;font-size:12px">Light ground</button><span id="v3sl" style="pointer-events:auto;display:none;background:rgba(255,255,255,.92);border:1px solid #D7D7D4;border-radius:6px;padding:2px 4px 2px 10px;font-size:12px;color:#1F2022">Secure line <button data-sl="off">Off</button><button data-sl="on">On</button></span><span id="v3note" style="background:rgba(255,255,255,.92);border:1px solid #E4E4E2;border-radius:6px;padding:4px 10px;font-size:12px;color:#6E6E6B;max-width:640px"></span>';
+  bar.innerHTML='<button id="v3map" style="pointer-events:auto;background:rgba(255,255,255,.92);border:1px solid #D7D7D4;border-radius:6px;padding:4px 10px;color:#1F2022;cursor:pointer;font-size:12px">← Map</button><button id="v3light" style="display:none;pointer-events:auto;background:rgba(255,255,255,.92);border:1px solid #D7D7D4;border-radius:6px;padding:4px 10px;color:#1F2022;cursor:pointer;font-size:12px">Light ground</button><span id="v3sl" style="pointer-events:auto;display:none;background:rgba(255,255,255,.92);border:1px solid #D7D7D4;border-radius:6px;padding:2px 4px 2px 10px;font-size:12px;color:#1F2022">Secure line <button data-sl="off">Off</button><button data-sl="on">On</button></span><span id="v3dv" style="pointer-events:auto;display:none;background:rgba(255,255,255,.92);border:1px solid #D7D7D4;border-radius:6px;padding:2px 4px 2px 10px;font-size:12px;color:#1F2022">Data centre <button data-dv="massing">Massing</button><button data-dv="equip">Equipment</button></span><span id="v3note" style="background:rgba(255,255,255,.92);border:1px solid #E4E4E2;border-radius:6px;padding:4px 10px;font-size:12px;color:#6E6E6B;max-width:640px"></span>';
   const key=document.createElement('div'); key.id='v3key'; key.addEventListener('click',ev=>{ const t=ev.target.closest&&ev.target.closest('[data-sl]'); if(!t) return; state.secure=t.dataset.sl; secureDraw(); key.innerHTML=modelKey(); }); key.style.cssText='position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.92);border:1px solid #E4E4E2;border-radius:6px;padding:6px 10px;font:300 11.5px/1.5 "IBM Plex Sans",system-ui,sans-serif;color:#6E6E6B;z-index:3;max-width:320px';
   wrap.appendChild(labels); wrap.appendChild(bar); wrap.appendChild(key); wrap.appendChild(tip); map.appendChild(wrap); for(const ev of ['pointerdown','wheel']) wrap.addEventListener(ev,e=>e.stopPropagation()); // the 2D map captures the pointer on pointerdown, which swallowed clicks on ← Map; pointerup must reach the document, where the orbit control listens for the release
   const ren=new T.WebGLRenderer({antialias:true,preserveDrawingBuffer:true}); ren.setPixelRatio(Math.min(window.devicePixelRatio||1,2)); ren.setClearColor(C.bg);
@@ -34,6 +34,7 @@ function setup(){
   R.lights=[new T.HemisphereLight(0xffffff,0xb9b8b4,0.16),new T.DirectionalLight(0xffffff,0.26),new T.AmbientLight(0xffffff,0.72)]; /* drawing */ /* white massing, light grey sides, soft shadow */ { const d=R.lights[1]; d.position.set(-260,520,320); d.castShadow=true; d.shadow.mapSize.set(4096,4096);
     const c=d.shadow.camera; c.left=-NEAR; c.right=NEAR; c.top=NEAR; c.bottom=-NEAR; c.near=10; c.far=2000; d.shadow.bias=-0.0006; d.shadow.normalBias=0.6; }
   document.getElementById('v3map').onclick=()=>hide();
+  document.getElementById('v3dv').addEventListener('click',ev=>{ const t=ev.target.closest&&ev.target.closest('[data-dv]'); if(!t) return; BD.S.dcView=t.dataset.dv; dcView(); if(state.tab==='model'||!FN[state.tab]) show(state.tab||'model',{site:state.site}); });
   document.getElementById('v3sl').addEventListener('click',ev=>{ const t=ev.target.closest&&ev.target.closest('[data-sl]'); if(!t) return; state.secure=t.dataset.sl; secureDraw(); if(state.tab==='model'||!FN[state.tab]) document.getElementById('v3key').innerHTML=modelKey(); slButtons(); });
   document.getElementById('v3light').onclick=()=>{ BD.S.light3d=!BD.S.light3d; document.getElementById('v3light').textContent=BD.S.light3d?'Dark ground':'Light ground'; state.key=null; show(state.tab||'model',{site:state.site}); };
   const fit=()=>{ const b=wrap.getBoundingClientRect(); if(!b.width) return; ren.setSize(b.width,b.height,false); cam.aspect=b.width/b.height; cam.updateProjectionMatrix(); };
@@ -181,11 +182,28 @@ function buildSite(site,opt){
     if(vis==='enclose') roofB.forEach(b=>dc.add(prism(BD.geo.offset?BD.geo.offset(b.ring,0.6):b.ring,b.h+1.0,b.base,0xE2E2DF,C.edge,0.8,0.9))); /* drawing */ /* white interface: massing white, plant and screens light grey (3 Nov 2026) */
     if(vis==='indoors'&&P.coolRoofIndoor&&M.foot){ const z=Math.max(6,M.H-6); for(const dz of [1,2,3,4]) dc.add(ringLine(M.foot,z+dz,C.grey,false,0.5)); state.indoorZ=z; state.indoorRoom=!!(M.noise&&M.noise.mit&&M.noise.mit.room); } }
   // racks: the part replaced every five to six years, on the first hall floor (cut-away shell)
-  if(M&&M.foot&&!M.existing&&M.footArea>200) state.racks=racksFor(M);
+  if(M&&M.foot&&!M.existing&&M.footArea>200){ const dc0=state.dc; state.eqG=new T.Group(); dc0.add(state.eqG); state.dc=state.eqG; try{ state.racks=racksFor(M); } finally{ state.dc=dc0; } }
+  /* night build 4 Nov 2026 (part 3; J.B. 2 Nov: the data centre as its own massing items in every template): the hall, electrical (UPS) and Li-ion battery
+     rooms as masses sized from tool/data/dc_rooms.json (dcrooms.js). "Massing" (default) or "Equipment" (the racks, UPS and batteries above) in the bar. */
+  state.mass=dcMass(M); state.massG=null; if(state.mass){ const g=new T.Group(); state.massG=g; dc.add(g);
+    for(const p of state.mass.pieces) g.add(prism(p.ring,Math.max(0.2,p.h),p.base,p.id==='hall'?0xE2E2DF:p.id==='rest'||p.id==='gst'?0xF7F7F6:0xD7D7D4,p.id==='rest'||p.id==='gst'?C.edge:C.grey,0.9)); } /* drawing */ /* one mass per storey: the edges show the floors */
+  dcView();
   // camera
   const bb=foot?bbox(foot):[site.c[0]-40,site.c[1]-40,site.c[0]+40,site.c[1]+40]; const span=Math.max(60,Math.hypot(bb[2]-bb[0],bb[3]-bb[1]));
   R.cam.position.set(span*1.9,span*1.6+roof*1.3,span*2.2); R.ctl.target.set(0,roof*0.35,0); R.ctl.update(); state.span=span;
 }
+/* the hall's footprint, storeys and MW as the set-up draws them, for the room masses (dcrooms.js). Drawn at the high end of each room's m² per MW. */
+function dcMass(M){ if(!BD.dcRooms||!M||!M.F||M.existing||!M.serverFoot||!M.nF||!BD.eng) return null; const mw=BD.S.answers.mw||M.mwSized; if(!(mw>0)) return null;
+  const F=M.F, sf=M.serverFoot; let a=1e9,b=-1e9,c=1e9,d=-1e9; for(let i=0;i<sf.length;i+=2){ const [u,v]=F.toL(sf[i],sf[i+1]); a=Math.min(a,u); b=Math.max(b,u); c=Math.min(c,v); d=Math.max(d,v); }
+  const g0=M.Z&&M.Z.ground?1:0, fh=[]; let z0;
+  if(M.hallTop){ const ftf=BD.eng.R.ftf, k=Math.max(1,M.hallData||1); z0=g0?ftf.ground:0; for(let j=0;j<k;j++) fh.push(j===0&&!g0?ftf.ground:ftf.up[1]); } /* hall fix storeys (site.js hallOptions) */
+  else { const n=Math.max(1,M.nF[0]), h=M.H/n, k=Math.max(1,M.hallData||n-g0); z0=g0*h; for(let j=0;j<k;j++) fh.push(h); } /* as the envelope and the racks draw them (H/n) */
+  return BD.dcRooms.layout({F,u:[a,b],v:[c,d],z0,fh,mw,end:'hi',ground:z0}); }
+function dcView(){ const eq=(BD.S.dcView||'massing')==='equip', on=state.tab!=='arch'; if(state.massG) state.massG.visible=on&&!eq; if(state.eqG) state.eqG.visible=on&&(eq||!state.massG);
+  const g=document.getElementById('v3dv'); if(g){ g.style.display=on&&state.massG&&state.eqG?'':'none'; g.querySelectorAll('button').forEach(b=>{ const a=(b.dataset.dv==='equip')===eq; b.style.cssText=`font:inherit;font-size:12px;padding:2px 9px;margin-left:4px;border-radius:4px;cursor:pointer;color:#1F2022;border:1px solid ${a?'#CC746C':'#D7D7D4'};background:${a?'rgba(204,116,108,.25)':'transparent'}`; }); } }
+function massLabels(){ const L=state.mass; if(!L||!state.massG||!state.massG.visible) return; const seen=new Set();
+  for(const p of L.pieces.slice().reverse()){ if(seen.has(p.id)) continue; seen.add(p.id); if(p.id==='rest'&&p.m2<20) continue; /* drawing */ /* no label on a sliver */ const r=L.rooms.find(x=>x.id===p.id), c=BD.centroid(p.ring), top=V(c[0],c[1],p.base+p.h);
+    label(r?`${p.name} · ${BD.fmt(Math.round(r.m2))} m²${p.id==='hall'?'':' (first hall floor)'}`:p.name,top.clone().add(new T.Vector3(0,p.id==='hall'?8:14,0)),'#6E6E6B',{prio:p.id==='hall'?7:p.id==='rest'||p.id==='gst'?3:6,from:top}); } } /* drawing */
 /* the first hall floor, laid out to the register's rules (hall_layout, electrical_room; 29 Oct 2026):
    electrical room at one end (UPS against the end wall, working space, battery cabinets), room cooling units along the long walls with
    their service clearance, racks in back-to-back pairs with 1.2 m aisles, 1.1 m corridors at the row ends. Counts: register quantities. */
@@ -283,10 +301,10 @@ function slButtons(){ const g=document.getElementById('v3sl'); if(!g) return; co
 const sw=(c,t,dash)=>`<div><i style="display:inline-block;width:16px;height:0;border-top:1.5px ${dash?'dashed':'solid'} ${hex(c)};vertical-align:3px;margin-right:6px"></i>${t}</div>`;
 function heightsNote(){ return BD.S.city==='van'?'Heights: City of Vancouver LiDAR 2022':'Heights: City of Edmonton 3D buildings (measured) or floor area ÷ footprint (estimate)'; }
 
-function model(d){ plantLabels(); baseLabels(); const M=state.M, P=M&&M.plant;
-  note((P&&P.miss&&P.miss.length?'Doesn\'t fit: '+P.miss.join('; ')+'. ':'')+heightsNote()+'. Neighbours drawn to 1.5 km.');
+function model(d){ plantLabels(); baseLabels(); massLabels(); const M=state.M, P=M&&M.plant, ms=state.massG&&state.massG.visible;
+  note((P&&P.miss&&P.miss.length?'Doesn\'t fit: '+P.miss.join('; ')+'. ':'')+(ms?BD.dcRooms.note(state.mass)+' ':'')+heightsNote()+'. Neighbours drawn to 1.5 km.');
   key(modelKey()); }
-function modelKey(){ return sw(C.acc,'the lot; dashed red: the building envelope (not a design)')+sw(C.grey,'setbacks (yards) and plant yard',true)+sw(C.edge,'plant to makers\' sizes: solid = unit, dashed = clearance')+sw(C.mat,'loading spaces')+roomsKey()+secureKey(); }
+function modelKey(){ return sw(C.acc,'the lot; dashed red: the building envelope (not a design)')+sw(C.grey,'setbacks (yards) and plant yard',true)+sw(C.edge,'plant to makers\' sizes: solid = unit, dashed = clearance')+sw(C.mat,'loading spaces')+(state.massG&&state.massG.visible?sw(C.grey,'data hall (light) and its electrical and battery rooms (darker), as masses'):roomsKey())+secureKey(); }
 /* secure line (prototype, overnight 29 Oct 2026, for J.B. to review): where the security line sits.
    TODAY: at the lot line, as seen at Cologix VAN3 (fence with a gate intercom; register: security_layers, tour = observation, one site).
    30 Oct 2026 (J.B.): one fence only, toggled on or off; the 'proposed' line at the hall wall is dropped. */
@@ -370,13 +388,13 @@ function social(d){ plantLabels(C.senses); baseLabels();
 function opp(d){ baseLabels(); (d.boxes||[]).forEach(b=>{ R.ov.add(prism(b.ring,Math.max(0.1,b.h),b.base||0,0xEEEEEC,C.acc,0.85,b.h>1?0.25:0.6)); if(b.label){ const c=BD.centroid(b.ring); label(b.label,V(c[0],c[1],(b.base||0)+b.h+10),'#e39a93',{prio:9,from:V(c[0],c[1],(b.base||0)+b.h)}); } }); /* drawing */ /* white interface: massing white, plant and screens light grey (3 Nov 2026) */
   note((d.note?d.note+' ':'What this opportunity would occupy on this site, drawn generically. ')+heightsNote()+'.'); key(sw(C.acc,'the opportunity, generic')+sw(C.edge,'plant')); }
 function arch(d){ /* Architecture mode (2 Nov 2026): the hall and each program as simple boxes; explode pulls storeys apart with dashed drop lines; selected or flagged in red; the secure line dashed on the ground */
-  labels.style.display=BD.arch&&BD.arch.labels===false?'none':''; if(state.envG) state.envG.visible=false; if(state.racks&&state.racks.obj) state.racks.obj.visible=false; plantLabels();
+  labels.style.display=BD.arch&&BD.arch.labels===false?'none':''; if(state.envG) state.envG.visible=false; dcView(); plantLabels();
   const gap=d.explode?14:0, top=Math.max(0,...(d.boxes||[]).filter(b=>typeof b.level==='number').map(b=>b.level)), lift=b=>typeof b.level==='number'?b.level*gap:(b.level==='roof'||String(b.level).startsWith('top'))?(top+1+(+String(b.level).replace(/\D/g,'')||0))*gap:0;
-  (d.boxes||[]).forEach(b=>{ const z=b.base+lift(b), col=b.bad||b.sel?C.acc:b.hall?C.grey:C.edge; R.ov.add(prism(b.ring,Math.max(0.2,b.h),z,b.hall?0xE2E2DF:0xEEEEEC,col,b.bad||b.sel?1:0.8,light3d()?null:b.hall?0.55:0.35)); /* drawing */ /* opaque white massing */
+  (d.boxes||[]).forEach(b=>{ const z=b.base+lift(b), col=b.bad||b.sel?C.acc:b.hall||b.room?C.grey:C.edge; R.ov.add(prism(b.ring,Math.max(0.2,b.h),z,b.room?0xD7D7D4:b.hall?0xE2E2DF:b.rest?0xF7F7F6:0xEEEEEC,col,b.bad||b.sel?1:0.8,light3d()?null:b.hall?0.55:0.35)); /* drawing */ /* opaque white massing */
     if(gap&&lift(b)>0){ for(let i=0;i<b.ring.length;i+=2) R.ov.add(line([V(b.ring[i],b.ring[i+1],b.base),V(b.ring[i],b.ring[i+1],z)],C.faint,1.2,0.6)); }
     if(b.label){ const c=BD.centroid(b.ring); label(b.label,V(c[0],c[1],z+b.h+6),b.bad||b.sel?'#e39a93':'#c8c2b8',{prio:b.sel?9:5,from:V(c[0],c[1],z+b.h)}); } });
   (d.secure||[]).forEach(r=>R.ov.add(ringLine(r,0.45,C.grey,2.5,0.9))); if(state.M&&state.M.ring) R.ov.add(ringLine(state.M.ring,0.35,C.faint,false,0.9));
-  note('Simple massing: where each block sits is drawn by the tool, not a design. '+heightsNote()+'.'); key(sw(C.grey,'data hall; dashed: secure line')+sw(C.edge,'programs')+sw(C.acc,'selected or a rule flagged')); }
+  note('Simple massing: where each block sits is drawn by the tool, not a design. '+(d.roomNote?d.roomNote+' ':'')+heightsNote()+'.'); key(sw(C.grey,'data hall (light), electrical and battery rooms (darker); dashed: secure line')+sw(C.edge,'programs')+sw(C.acc,'selected or a rule flagged')); }
 const FN={model,heat,energy,water,materials,social,opp,arch};
 
 async function ensureTiles(c){ if(!BD.loadTile) return; const S=BD.S, m=S.meta[S.city]; if(!m) return; const T0=m.T, keys=[];
@@ -386,7 +404,7 @@ function siteKey(){ const S=BD.S, M=BD.model?BD.model():null; return S.city+'|'+
 async function show(tab,data){ await ensure(); if(!R) setup(); R.multi=null; if(R.cap){ R.cap.forEach(c=>c.remove()); R.cap=[]; } wrap.style.display=''; labels.style.display='';
   const site=data.site||(BD.eng?BD.eng.siteFacts():null); if(!site) return; await ensureTiles(site.c);
   const k=siteKey(); if(state.key!==k||!state.site){ buildSite(site); state.key=k; }
-  clearOverlay(); [state.envG,state.lotL,state.sfL].forEach(o=>{ if(o) o.visible=(tab!=='arch'); }); if(state.racks&&state.racks.obj) state.racks.obj.visible=(tab!=='arch'); const prev=state.tab; state.tab=tab; if(tab!=='heat'&&prev==='heat') frameSite(); (FN[tab]||model)(data||{}); if(R.card) applyCard(); }
+  clearOverlay(); [state.envG,state.lotL,state.sfL].forEach(o=>{ if(o) o.visible=(tab!=='arch'); }); const prev=state.tab; state.tab=tab; dcView(); if(tab!=='heat'&&prev==='heat') frameSite(); (FN[tab]||model)(data||{}); if(R.card) applyCard(); }
 /* three options side by side: one camera, three scenes sharing the site model (J.B., 15 Oct) */
 async function showOptions(opts,data){
   await show('model',{site:data.site}); clearOverlay(); R.scene.remove(R.ov);
