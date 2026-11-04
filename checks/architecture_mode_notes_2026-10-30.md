@@ -181,3 +181,8 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - Resident: select a data centre on the map, export a report with everything known about that one facility. Generic graphics by type: stand-alone, hyperscale, tower. Map with its location, still frames from the "how it works" video, plain answers on noise, heat, water, power. Board: VAN3 Cologix (2 pages).
 - Municipal: select a parcel, get its regulations; two-city comparison on the last page. Board: 339 1st Ave E (I-3) + comparison.
 - Open: how the three types map to the inventory's earlier types (tower; smaller urban; larger urban with secure perimeter).
+
+## Facility figures (J.B., 4 Nov 2026)
+- Report one number per figure. Where a spec sheet exists, its figure is the one shown; other operator figures stay in the register as conflicts, not shown.
+- Applied: eStruxture VAN-3 10 MW and single 25 kV entrance; Qu EDM1 2.5 MW; Cologix VAN1 400 kW, VAN3 3 MW, VAN5 1 MW (sheets). TransLink bylaw adopted 8 Feb 2021; Meta federal review IAAC 90123 (records, not conflicts).
+- Remaining conflicts without a sheet: see the chat of 4 Nov (VAN-3 status, M3 floor area, TELUS Garden location, SFU PUE, Qu EDM2 sheet's own 2.5 vs 3 MW, Meta size, Wolfpaw sites).
