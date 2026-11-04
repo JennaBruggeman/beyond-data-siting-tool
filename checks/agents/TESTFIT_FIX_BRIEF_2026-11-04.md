@@ -1,0 +1,10 @@
+# Fix the Emergency hub test fits (4 Nov 2026)
+
+Boards: /tmp/claude-0/-home-claude/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/scratchpad/whitemock/project/TestFit_EH_E06B.dc.html and TestFit_EH_V339.dc.html (keep names). Notes: checks/research_typ/testfit_emergency_hub.md, code_checklist.md, the 4 Nov notes in checks/architecture_mode_notes_2026-10-30.md. Do not publish; commit only the .md in the repo (author/trailer as REBUILD1_BRIEF_2026-11-03.md), never push.
+
+J.B.'s comments:
+1. "How does one access these corridors/lobbies?" On E06B storey 1 the clinic's east–west corridor strips dead-end at the hall's secure wall and at the street wall, and do not reach the shared lobby. Fix: one clinic corridor (≥1,100 mm, Z8000 12.2.3.5 / NBC widths per the checklist) from the shared lobby, every clinic room opening off it; a second exit for the clinic area that is outside the secure line (exterior door); same review for refuge, shelter, data-centre support and every storey on BOTH boards.
+2. "Each room should be its own block even if it's part of the same program." Draw every room from the room schedule as its own block (group tint shared, thin outline), to scale; label rooms with small numbers inside the block keyed to a room list beside the plan (number, name, m²); keep one group label per group with right-angled leaders, labels off the drawing.
+3. Add checks to the code list: "Connected" — every room reaches the lobby and an exit by a route outside the secure line (except data-centre rooms, which reach their own exits inside it); "Travel distance along the path" — measured along corridors (rectilinear path), worst room per storey, against 45 m sprinklered; "Two exits" per floor area where required, both reachable without passing through the secure line or another tenancy.
+4. Keep the readability: muted tints, accent #CC746C only for problems, leaders right-angled and not crossing. Screenshot with Playwright from /home/claude and LOOK at each storey; fix overlaps.
+Update testfit_emergency_hub.md (what changed, new checks, results). Reply under 120 words.

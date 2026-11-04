@@ -231,3 +231,4 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - J.B.: travel distance 44.3 of 45 m is fine at schematic stage ("tight is fine").
 - Fence (J.B. 4 Nov 2026): a fence is a design choice, not code. Fence height 1.9 m everywhere (meets Vancouver s. 10.10.3 in required yards); RCMP's 2.4 m shown as guidance only. Vancouver yard note dropped.
 - Secure line varies (J.B. 4 Nov 2026): it may have no fence at all, e.g. the building wall or a line inside the building (hall and support rooms). Typologies carry the secure line as a choice; plant outside the building then needs its own enclosure (?).
+- Test-fit drawing rules (J.B. 4 Nov 2026): every room is its own block, even within one program (group tint shared); circulation must actually connect: every room reaches the shared lobby and an exit by a path outside the secure line; travel distance measured along the real path. Clinic corridor strips on E06B were cut off (drawing error).
