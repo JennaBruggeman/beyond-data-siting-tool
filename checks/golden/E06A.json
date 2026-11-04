@@ -173,6 +173,69 @@
     "L": 74.951947,
     "W": 60.913509
    },
+   "lineCls": {
+    "lines": [
+     {
+      "e": [
+       0
+      ],
+      "nx": -0.743294,
+      "ny": -0.668965,
+      "len": 60.541308,
+      "street": false,
+      "alley": false,
+      "kind": "rear",
+      "cand": null,
+      "why": "furthest from and opposite the Front Lot Line (s. 8.20 Rear Lot Line)"
+     },
+     {
+      "e": [
+       1
+      ],
+      "nx": -0.662285,
+      "ny": 0.749252,
+      "len": 74.74122,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       2
+      ],
+      "nx": 0.746956,
+      "ny": 0.664873,
+      "len": 60.913874,
+      "street": true,
+      "alley": false,
+      "kind": "front",
+      "cand": null,
+      "why": "the only street line (s. 8.20 Front Lot Line (a))"
+     },
+     {
+      "e": [
+       3
+      ],
+      "nx": 0.658505,
+      "ny": -0.752577,
+      "len": 74.411021,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     }
+    ],
+    "f": {
+     "nx": 0.746956,
+     "ny": 0.664873
+    },
+    "corner": false,
+    "dbl": false,
+    "unclear": 0
+   },
    "side": {
     "rot": false,
     "autoU1": false,
@@ -228,14 +291,79 @@
     "rear": 0,
     "s0": 0,
     "s1": 0,
-    "by": "side facts",
+    "by": "abutting, per line",
     "src": [
-     "arch_hb_edmBE"
-    ]
+     "arch_hb_edmBE",
+     "lot_edm_820_lines"
+    ],
+    "edges": [
+     {
+      "i": 0,
+      "ax": -1512,
+      "ay": 3166,
+      "bx": -1552.5,
+      "by": 3211,
+      "kind": "rear",
+      "cand": null,
+      "why": "furthest from and opposite the Front Lot Line (s. 8.20 Rear Lot Line)",
+      "d": 0,
+      "abuts": "lot",
+      "unA": false,
+      "len": 60.541308
+     },
+     {
+      "i": 1,
+      "ax": -1552.5,
+      "ay": 3211,
+      "bx": -1496.5,
+      "by": 3260.5,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 0,
+      "abuts": "lot",
+      "unA": false,
+      "len": 74.74122
+     },
+     {
+      "i": 2,
+      "ax": -1496.5,
+      "ay": 3260.5,
+      "bx": -1456,
+      "by": 3215,
+      "kind": "front",
+      "cand": null,
+      "why": "the only street line (s. 8.20 Front Lot Line (a))",
+      "d": 4.5,
+      "abuts": "street",
+      "unA": false,
+      "len": 60.913874
+     },
+     {
+      "i": 3,
+      "ax": -1456,
+      "ay": 3215,
+      "bx": -1512,
+      "by": 3166,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 0,
+      "abuts": "lot",
+      "unA": false,
+      "len": 74.411021
+     }
+    ],
+    "unclear": 0,
+    "unAbut": 0
    },
    "yardRect": "[ring 8]",
    "inset": "[ring 8]",
    "yardNote": "",
+   "edgeYards": "[cycle]",
+   "yardOff": "[ring 8]",
+   "yardLine": "[ring 8]",
+   "yardOffBad": false,
    "loadingNeed": {
     "n": 1,
     "len": 9,
@@ -389,7 +517,7 @@
    "foot": "[ring 8]",
    "footRect": "[ring 8]",
    "simpleMass": true,
-   "footArea": 2660.256125,
+   "footArea": 2653.778485,
    "noise": {
     "lw": [
      109.8,
@@ -464,8 +592,8 @@
    "ground": false
   },
   "hallS": [
-   1740.8562,
-   2611.2843
+   1734.637666,
+   2601.956499
   ],
   "hallL": null,
   "floors": 2,
@@ -474,7 +602,7 @@
    2
   ],
   "fpNote": "from the site setup: the most the zone allows, less setbacks, loading and the plant yard",
-  "fp": 2324.204056,
+  "fp": 2317.726417,
   "fpCalc": null,
   "indoorPlant": 1021.624362,
   "g": [
@@ -482,46 +610,46 @@
    7310.4
   ],
   "G": [
-   3626.78375,
-   3626.78375
+   3613.828471,
+   3613.828471
   ],
   "fullCover": "",
   "heightCut": true,
   "yardCut": true,
   "gross": [
-   3626.78375,
-   3626.78375
+   3613.828471,
+   3613.828471
   ],
   "how": "lot 4,569 m² × floor-space ratio 1.6",
   "hallGross": [
-   3626.78375,
-   3626.78375
+   3613.828471,
+   3613.828471
   ],
   "density": "typical",
   "mwS": [
-   2.763264,
-   8.996759
+   2.753393,
+   8.944272
   ],
   "mwL": null,
   "hall": [
-   1740.8562,
-   2611.2843
+   1734.637666,
+   2601.956499
   ],
   "mw": [
-   2.763264,
-   8.996759
+   2.753393,
+   8.944272
   ],
   "m2MW": [
    290,
    630
   ],
   "mwCheck": [
-   3.270319,
-   7.18175
+   3.258637,
+   7.156096
   ],
-  "mwTopRaw": 9.004429,
+  "mwTopRaw": 8.972264,
   "mwCapped": true,
-  "plantFor": 8.996759
+  "plantFor": 8.944272
  },
  "model": "[cycle]",
  "errors": []

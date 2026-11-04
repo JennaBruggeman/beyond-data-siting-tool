@@ -8,7 +8,7 @@
    39.35988108921515
   ],
   "L": 60.48984775323796,
-  "hd": 24.37651223853269,
+  "hd": 24.093089321716477,
   "F": [
    85.50584775323796,
    78.7197621784303
@@ -29,16 +29,16 @@
     40.75292387661898
    ],
    [
-    -1.2470761233810208,
-    16.75292387661898
+    -3.247076123381021,
+    14.75292387661898
    ],
    [
-    -7.247076123381021,
-    16.75292387661898
-   ],
-   [
-    22.75292387661898,
+    16.75292387661898,
     40.75292387661898
+   ],
+   [
+    -3.247076123381021,
+    14.75292387661898
    ],
    [
     -3.247076123381021,
@@ -49,8 +49,8 @@
     -3.247076123381021
    ],
    [
-    14.75292387661898,
-    40.75292387661898
+    -3.247076123381021,
+    14.75292387661898
    ]
   ],
   "plant": [
@@ -59,7 +59,7 @@
     "roof",
     -17,
     -5,
-    -33,
+    -32,
     -30
    ],
    [
@@ -68,14 +68,14 @@
     -17,
     -5,
     -26,
-    -24
+    -23
    ],
    [
     "air-cooled chillers",
     "roof",
     -17,
     -5,
-    -20,
+    -19,
     -17
    ],
    [
@@ -205,8 +205,8 @@
   [
    "warming_shelter",
    [
-    -1,
-    17
+    -3,
+    15
    ],
    false,
    100,
@@ -218,27 +218,27 @@
   [
    "clinic",
    [
-    -7,
-    17
+    17,
+    41
    ],
    false,
    605,
    605,
    0,
-   0,
+   4,
    6
   ],
   [
    "spa",
    [
-    23,
-    41
+    -3,
+    15
    ],
    false,
    320,
    320,
    0,
-   4,
+   0,
    6
   ],
   [
@@ -270,14 +270,14 @@
   [
    "fish_farm",
    [
-    15,
-    41
+    -3,
+    15
    ],
    false,
    685,
    685,
-   0,
-   4,
+   1,
+   6,
    12
   ]
  ],
@@ -286,39 +286,35 @@
   18
  ],
  "hallPick": {
-  "tried": 10,
-  "passed": 5,
-  "n": 10,
+  "tried": 8,
+  "passed": 4,
+  "n": 8,
   "under": false,
   "best": {
-   "key": "2:-17.7,6.6:24.4",
+   "key": "2:-17.7,6.4:24.1",
    "k": 2,
    "st": 3,
    "top": 18,
    "along": "back",
    "a": 1,
-   "fa": 594.2143489153191,
+   "fa": 580.4769530642008,
    "drawn": 3380
   },
   "fails": [
    [
-    "2:-17.7,-4.0:43.3",
-    "Noise: the cooling plant (roof) would give about 66 dBA (low-noise units: one rating) at the point of reception beside 1147 GRANT ST (I-2, activity zone), 34 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). 2 neighbouring lots are over. No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
-   ],
-   [
-    "2:-17.7,12.1:19.9",
+    "2:-17.7,11.8:19.7",
     "Noise: the cooling plant (roof) would give about 66 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 37 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
    ],
    [
-    "2:-17.7,15.5:17.9",
+    "2:-17.7,12.5:19.2",
     "Noise: the cooling plant (roof) would give about 66 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 37 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
    ],
    [
-    "1:-17.7,10.4:42.2",
+    "1:-17.7,11.8:39.4",
     "Noise: the cooling plant (roof) would give about 66 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 37 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
    ],
    [
-    "1:-17.7,15.5:35.7",
+    "1:-17.7,12.5:38.4",
     "Noise: the cooling plant (roof) would give about 66 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 37 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
    ]
   ]
@@ -326,18 +322,18 @@
  "hallUV": [
   [
    -18,
-   7
+   6
   ],
   [
-   -35,
-   -11
+   -34,
+   -10
   ]
  ],
  "hallStoreys": 3,
  "space": {
-  "hall": 1188,
+  "hall": 1161,
   "prog": 3380,
-  "cap": 16977.552826151972
+  "cap": 16585.055801834307
  },
  "heat": {
   "avail": [
@@ -384,7 +380,7 @@
  "side": "Arrange",
  "ratios": {
   "ratio": {
-   "cover": 5659,
+   "cover": 5528,
    "dc": 7,
    "prog": 30,
    "end": "low",
@@ -392,7 +388,7 @@
   },
   "base": {
    "lot": 5882,
-   "build": 5659,
+   "build": 5528,
    "floors": 3,
    "dataFl": 2,
    "fsr": 3,
@@ -403,21 +399,21 @@
    ]
   },
   "calc": {
-   "allowed": 16978,
+   "allowed": 16585,
    "by": "envelope",
-   "dcMax": 11318,
-   "dcM2": 1188,
-   "progM2": 5093,
-   "unused": 10696,
+   "dcMax": 11057,
+   "dcM2": 1161,
+   "progM2": 4976,
+   "unused": 10449,
    "mw": [
-    1.87,
-    4.05
+    1.83,
+    3.96
    ],
    "mwTest": 1.8
   },
   "answers": {
    "mw": 1.8,
-   "dcFloor": 1188
+   "dcFloor": 1161
   },
   "side": [
    "Ratios"
@@ -431,14 +427,14 @@
   "stuck": false,
   "next": "Next: Programs →"
  },
- "split": "Data centre 7% · 1,188 m² · 1.8–4.0 MW (testing 1.8) · programs 30% · 5,093 m² · unused 63% arch_ratios Edit ratios",
+ "split": "Data centre 7% · 1,161 m² · 1.8–3.9 MW (testing 1.8) · programs 30% · 4,976 m² · unused 63% arch_ratios Edit ratios",
  "saved": [
   [
    "suggest",
    3,
    25,
    43,
-   0.6256242465989323
+   0.624246598932323
   ],
   [
    "lot",

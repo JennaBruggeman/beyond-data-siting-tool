@@ -16,6 +16,7 @@
   "gens": "yes",
   "genAt": "yard",
   "genSpares": "n1",
+  "mwPick": "large",
   "mwSite": "883345"
  },
  "sel": {
@@ -248,8 +249,9 @@
    "lotArea": 14565,
    "ring": "[ring 82]",
    "notes": [
-    "Noise: needs 8 low-noise chillers: Trane RTAF 280 low-noise, Lw 98 dBA per 1,010 kW, 101 standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?); and a 4.9 m solid screen around the roof and yard plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 66–69 dBA (quieter–standard unit rating) at the property line of 12311 126 AVENUE NW (IH), 54 m away; limit 60 dBA…",
-    "Noise: the plant would exceed the 50 dBA night limit at the property line of (no parcel record: residential limit assumed ?) (about 52 dBA (low-noise units: one rating) with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof and yard; NSW 2021, −8 dB), Bylaw 14600 s. 20(1)) if that lot takes the stricter limit; its zoning is not known, so this is a note, not a block."
+    "Lot lines: what 34 of this lot's edges abut is not known (no lot or street found, or a parcel with no zone on record), so which setback they have is not known (?); the deepest is applied (see Lot lines).",
+    "Noise: needs 8 low-noise chillers: Trane RTAF 280 low-noise, Lw 98 dBA per 1,010 kW, 101 standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?); and a 4.9 m solid screen around the roof and yard plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 67–70 dBA (quieter–standard unit rating) at the property line of 12521 123 STREET NW (BE), 48 m away; limit 60 dBA…",
+    "Noise: the plant would exceed the 50 dBA night limit at the property line of (no parcel record: residential limit assumed ?) (about 51 dBA (low-noise units: one rating) with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof and yard; NSW 2021, −8 dB), Bylaw 14600 s. 20(1)) if that lot takes the stricter limit; its zoning is not known, so this is a note, not a block."
    ],
    "warn": [],
    "F": {
@@ -259,6 +261,381 @@
     "uy": 0.422885,
     "L": 245.092333,
     "W": 105.268275
+   },
+   "lineCls": {
+    "lines": [
+     {
+      "e": [
+       0
+      ],
+      "nx": 0.894427,
+      "ny": 0.447214,
+      "len": 1.118034,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       1
+      ],
+      "nx": 0.8,
+      "ny": 0.6,
+      "len": 5,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       2
+      ],
+      "nx": 0.847998,
+      "ny": 0.529999,
+      "len": 4.716991,
+      "street": false,
+      "alley": false,
+      "kind": "rear",
+      "cand": null,
+      "why": "furthest from and opposite the Front Lot Line (s. 8.20 Rear Lot Line)"
+     },
+     {
+      "e": [
+       3
+      ],
+      "nx": 0,
+      "ny": -1,
+      "len": 146.5,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       4,
+       5
+      ],
+      "nx": -1,
+      "ny": 0,
+      "len": 58,
+      "street": true,
+      "alley": false,
+      "kind": "front",
+      "cand": null,
+      "why": "corner: the shorter street line (s. 8.20 Front Lot Line (b), (c))"
+     },
+     {
+      "e": [
+       6
+      ],
+      "nx": 0,
+      "ny": -1,
+      "len": 60.5,
+      "street": true,
+      "alley": false,
+      "kind": "flank",
+      "cand": null,
+      "why": "corner: Flanking Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       7,
+       8
+      ],
+      "nx": -1,
+      "ny": 0,
+      "len": 78,
+      "street": false,
+      "alley": true,
+      "kind": "side",
+      "cand": null,
+      "why": "faces the front's way but is not on a street: an Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       9,
+       10,
+       11,
+       12
+      ],
+      "nx": 0.345705,
+      "ny": 0.938343,
+      "len": 91.125488,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       13,
+       14
+      ],
+      "nx": 0.447214,
+      "ny": 0.894427,
+      "len": 11.18034,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       15
+      ],
+      "nx": 0.371391,
+      "ny": 0.928477,
+      "len": 5.385165,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       16
+      ],
+      "nx": 0.447214,
+      "ny": 0.894427,
+      "len": 5.59017,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       17
+      ],
+      "nx": 0.514496,
+      "ny": 0.857493,
+      "len": 5.830952,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       18
+      ],
+      "nx": 0.5547,
+      "ny": 0.83205,
+      "len": 5.408327,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       19
+      ],
+      "nx": 0.447214,
+      "ny": 0.894427,
+      "len": 5.59017,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       20
+      ],
+      "nx": 0.5547,
+      "ny": 0.83205,
+      "len": 5.408327,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       21
+      ],
+      "nx": 0.514496,
+      "ny": 0.857493,
+      "len": 5.830952,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       22
+      ],
+      "nx": 0.613941,
+      "ny": 0.789352,
+      "len": 5.700877,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       23
+      ],
+      "nx": 0.5547,
+      "ny": 0.83205,
+      "len": 5.408327,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       24,
+       25
+      ],
+      "nx": 0.613941,
+      "ny": 0.789352,
+      "len": 11.401754,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       26
+      ],
+      "nx": 0.658505,
+      "ny": 0.752577,
+      "len": 5.315073,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       27
+      ],
+      "nx": 0.613941,
+      "ny": 0.789352,
+      "len": 5.700877,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       28
+      ],
+      "nx": 0.707107,
+      "ny": 0.707107,
+      "len": 5.656854,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       29
+      ],
+      "nx": 0.658505,
+      "ny": 0.752577,
+      "len": 5.315073,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       30,
+       31,
+       32
+      ],
+      "nx": 0.707107,
+      "ny": 0.707107,
+      "len": 16.970563,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       33,
+       34,
+       35
+      ],
+      "nx": 0.748997,
+      "ny": 0.662574,
+      "len": 17.356667,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       36,
+       37
+      ],
+      "nx": 0.789352,
+      "ny": 0.613941,
+      "len": 11.401754,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       38,
+       39
+      ],
+      "nx": 0.825307,
+      "ny": 0.564684,
+      "len": 11.511605,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)"
+     }
+    ],
+    "f": {
+     "nx": -1,
+     "ny": 0
+    },
+    "corner": true,
+    "dbl": false,
+    "unclear": 0
    },
    "side": {
     "rot": false,
@@ -309,18 +686,587 @@
     5
    ],
    "yards": {
-    "front": 3,
+    "front": 0,
     "rear": 0,
-    "s0": 0,
-    "s1": 3,
-    "by": "side facts",
+    "s0": 3,
+    "s1": 0,
+    "by": "abutting, per line",
     "src": [
-     "arch_hb_edmIH"
-    ]
+     "arch_hb_edmIH",
+     "lot_edm_820_lines"
+    ],
+    "edges": [
+     {
+      "i": 0,
+      "ax": -2112,
+      "ay": 4646,
+      "bx": -2111.5,
+      "by": 4645,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 1.118034
+     },
+     {
+      "i": 1,
+      "ax": -2111.5,
+      "ay": 4645,
+      "bx": -2108.5,
+      "by": 4641,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5
+     },
+     {
+      "i": 2,
+      "ax": -2108.5,
+      "ay": 4641,
+      "bx": -2106,
+      "by": 4637,
+      "kind": "rear",
+      "cand": null,
+      "why": "furthest from and opposite the Front Lot Line (s. 8.20 Rear Lot Line)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 4.716991
+     },
+     {
+      "i": 3,
+      "ax": -2106,
+      "ay": 4637,
+      "bx": -2252.5,
+      "by": 4637,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 0,
+      "abuts": "lot",
+      "unA": false,
+      "len": 146.5
+     },
+     {
+      "i": 4,
+      "ax": -2252.5,
+      "ay": 4637,
+      "bx": -2252.5,
+      "by": 4685,
+      "kind": "front",
+      "cand": null,
+      "why": "corner: the shorter street line (s. 8.20 Front Lot Line (b), (c))",
+      "d": 3,
+      "abuts": "street",
+      "unA": false,
+      "len": 48
+     },
+     {
+      "i": 5,
+      "ax": -2252.5,
+      "ay": 4685,
+      "bx": -2252.5,
+      "by": 4695,
+      "kind": "front",
+      "cand": null,
+      "why": "corner: the shorter street line (s. 8.20 Front Lot Line (b), (c))",
+      "d": 3,
+      "abuts": "street",
+      "unA": false,
+      "len": 10
+     },
+     {
+      "i": 6,
+      "ax": -2252.5,
+      "ay": 4695,
+      "bx": -2313,
+      "by": 4695,
+      "kind": "flank",
+      "cand": null,
+      "why": "corner: Flanking Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "street",
+      "unA": false,
+      "len": 60.5
+     },
+     {
+      "i": 7,
+      "ax": -2313,
+      "ay": 4695,
+      "bx": -2313,
+      "by": 4735,
+      "kind": "side",
+      "cand": null,
+      "why": "faces the front's way but is not on a street: an Interior Side Lot Line (s. 8.20)",
+      "d": 0,
+      "abuts": "alley",
+      "unA": false,
+      "len": 40
+     },
+     {
+      "i": 8,
+      "ax": -2313,
+      "ay": 4735,
+      "bx": -2313,
+      "by": 4773,
+      "kind": "side",
+      "cand": null,
+      "why": "faces the front's way but is not on a street: an Interior Side Lot Line (s. 8.20)",
+      "d": 0,
+      "abuts": "lot",
+      "unA": false,
+      "len": 38
+     },
+     {
+      "i": 9,
+      "ax": -2313,
+      "ay": 4773,
+      "bx": -2242.5,
+      "by": 4747.5,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 74.969994
+     },
+     {
+      "i": 10,
+      "ax": -2242.5,
+      "ay": 4747.5,
+      "bx": -2237.5,
+      "by": 4745.5,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.385165
+     },
+     {
+      "i": 11,
+      "ax": -2237.5,
+      "ay": 4745.5,
+      "bx": -2232.5,
+      "by": 4743.5,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.385165
+     },
+     {
+      "i": 12,
+      "ax": -2232.5,
+      "ay": 4743.5,
+      "bx": -2227.5,
+      "by": 4741.5,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.385165
+     },
+     {
+      "i": 13,
+      "ax": -2227.5,
+      "ay": 4741.5,
+      "bx": -2222.5,
+      "by": 4739,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.59017
+     },
+     {
+      "i": 14,
+      "ax": -2222.5,
+      "ay": 4739,
+      "bx": -2217.5,
+      "by": 4736.5,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.59017
+     },
+     {
+      "i": 15,
+      "ax": -2217.5,
+      "ay": 4736.5,
+      "bx": -2212.5,
+      "by": 4734.5,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.385165
+     },
+     {
+      "i": 16,
+      "ax": -2212.5,
+      "ay": 4734.5,
+      "bx": -2207.5,
+      "by": 4732,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.59017
+     },
+     {
+      "i": 17,
+      "ax": -2207.5,
+      "ay": 4732,
+      "bx": -2202.5,
+      "by": 4729,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.830952
+     },
+     {
+      "i": 18,
+      "ax": -2202.5,
+      "ay": 4729,
+      "bx": -2198,
+      "by": 4726,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.408327
+     },
+     {
+      "i": 19,
+      "ax": -2198,
+      "ay": 4726,
+      "bx": -2193,
+      "by": 4723.5,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.59017
+     },
+     {
+      "i": 20,
+      "ax": -2193,
+      "ay": 4723.5,
+      "bx": -2188.5,
+      "by": 4720.5,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.408327
+     },
+     {
+      "i": 21,
+      "ax": -2188.5,
+      "ay": 4720.5,
+      "bx": -2183.5,
+      "by": 4717.5,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.830952
+     },
+     {
+      "i": 22,
+      "ax": -2183.5,
+      "ay": 4717.5,
+      "bx": -2179,
+      "by": 4714,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.700877
+     },
+     {
+      "i": 23,
+      "ax": -2179,
+      "ay": 4714,
+      "bx": -2174.5,
+      "by": 4711,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.408327
+     },
+     {
+      "i": 24,
+      "ax": -2174.5,
+      "ay": 4711,
+      "bx": -2170,
+      "by": 4707.5,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.700877
+     },
+     {
+      "i": 25,
+      "ax": -2170,
+      "ay": 4707.5,
+      "bx": -2165.5,
+      "by": 4704,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.700877
+     },
+     {
+      "i": 26,
+      "ax": -2165.5,
+      "ay": 4704,
+      "bx": -2161.5,
+      "by": 4700.5,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.315073
+     },
+     {
+      "i": 27,
+      "ax": -2161.5,
+      "ay": 4700.5,
+      "bx": -2157,
+      "by": 4697,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.700877
+     },
+     {
+      "i": 28,
+      "ax": -2157,
+      "ay": 4697,
+      "bx": -2153,
+      "by": 4693,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.656854
+     },
+     {
+      "i": 29,
+      "ax": -2153,
+      "ay": 4693,
+      "bx": -2149,
+      "by": 4689.5,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.315073
+     },
+     {
+      "i": 30,
+      "ax": -2149,
+      "ay": 4689.5,
+      "bx": -2145,
+      "by": 4685.5,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.656854
+     },
+     {
+      "i": 31,
+      "ax": -2145,
+      "ay": 4685.5,
+      "bx": -2141,
+      "by": 4681.5,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.656854
+     },
+     {
+      "i": 32,
+      "ax": -2141,
+      "ay": 4681.5,
+      "bx": -2137,
+      "by": 4677.5,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.656854
+     },
+     {
+      "i": 33,
+      "ax": -2137,
+      "ay": 4677.5,
+      "bx": -2133,
+      "by": 4673,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 6.020797
+     },
+     {
+      "i": 34,
+      "ax": -2133,
+      "ay": 4673,
+      "bx": -2129.5,
+      "by": 4669,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.315073
+     },
+     {
+      "i": 35,
+      "ax": -2129.5,
+      "ay": 4669,
+      "bx": -2125.5,
+      "by": 4664.5,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 6.020797
+     },
+     {
+      "i": 36,
+      "ax": -2125.5,
+      "ay": 4664.5,
+      "bx": -2122,
+      "by": 4660,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.700877
+     },
+     {
+      "i": 37,
+      "ax": -2122,
+      "ay": 4660,
+      "bx": -2118.5,
+      "by": 4655.5,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.700877
+     },
+     {
+      "i": 38,
+      "ax": -2118.5,
+      "ay": 4655.5,
+      "bx": -2115.5,
+      "by": 4651,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 5.408327
+     },
+     {
+      "i": 39,
+      "ax": -2115.5,
+      "ay": 4651,
+      "bx": -2112,
+      "by": 4646,
+      "kind": "side",
+      "cand": null,
+      "why": "faces away from the front but is not the furthest: an Interior Side Lot Line (s. 8.20)",
+      "d": 3,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 6.103278
+     }
+    ],
+    "unclear": 0,
+    "unAbut": 34
    },
    "yardRect": "[ring 8]",
    "inset": "[ring 8]",
    "yardNote": "",
+   "edgeYards": "[cycle]",
+   "yardOff": "[ring 80]",
+   "yardLine": "[ring 80]",
+   "yardOffBad": false,
    "loadingNeed": {
     "n": 1,
     "len": 9,
@@ -331,10 +1277,10 @@
     "basis": "1 loading space for 2,913 m² of floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site, with no backing onto streets or alleys (s. 5.80 subs. 7). Aisle: Vancouver's 6.1 m used as an assumption.",
     "src": "edmZB580"
    },
-   "loading": "[ring 18]",
+   "loading": "[ring 12]",
    "loadV": [
-    -52.634137,
-    49.634137
+    -49.634137,
+    52.634137
    ],
    "loadDepth": 15.1,
    "loadSpaces": [
@@ -343,14 +1289,14 @@
    "plantYardStart": -107.446167,
    "dir": 1,
    "v": [
-    -52.634137,
-    49.634137
+    -49.634137,
+    52.634137
    ],
-   "uFront": 119.546167,
+   "uFront": 122.546167,
    "footMode": "max",
    "uBuild": [
     -107.446167,
-    119.546167
+    122.546167
    ],
    "mwSized": 3.8,
    "plant": {
@@ -510,10 +1456,10 @@
     "floor": 2913.333333,
     "perMW": 766.666667
    },
-   "foot": "[ring 74]",
+   "foot": "[ring 70]",
    "footRect": "[ring 8]",
    "simpleMass": true,
-   "footArea": 14120.170516,
+   "footArea": 13105.842784,
    "noise": {
     "lw": [
      109.8,
@@ -521,8 +1467,8 @@
     ],
     "n": 5,
     "src": [
-     -2223.9,
-     4718.7
+     -2193.9,
+     4696.3
     ],
     "where": "roof and yard",
     "groups": [
@@ -535,7 +1481,7 @@
       "n": 2
      }
     ],
-    "tested": 3819,
+    "tested": 3826,
     "overQ": 0,
     "overS": 1,
     "limit": 50,
@@ -549,15 +1495,15 @@
     },
     "bldOnly": 0,
     "block": null,
-    "flag": "Noise: the plant would exceed the 50 dBA night limit at the property line of (no parcel record: residential limit assumed ?) (about 52 dBA (low-noise units: one rating) with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof and yard; NSW 2021, −8 dB), Bylaw 14600 s. 20(1)) if that lot takes the stricter limit; its zoning is not known, so this is a note, not a block.",
-    "req": "Noise: needs 8 low-noise chillers: Trane RTAF 280 low-noise, Lw 98 dBA per 1,010 kW, 101 standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?); and a 4.9 m solid screen around the roof and yard plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 66–69 dBA (quieter–standard unit rating) at the property line of 12311 126 AVENUE NW (IH), 54 m away; limit 60 dBA…",
+    "flag": "Noise: the plant would exceed the 50 dBA night limit at the property line of (no parcel record: residential limit assumed ?) (about 51 dBA (low-noise units: one rating) with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof and yard; NSW 2021, −8 dB), Bylaw 14600 s. 20(1)) if that lot takes the stricter limit; its zoning is not known, so this is a note, not a block.",
+    "req": "Noise: needs 8 low-noise chillers: Trane RTAF 280 low-noise, Lw 98 dBA per 1,010 kW, 101 standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?); and a 4.9 m solid screen around the roof and yard plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 67–70 dBA (quieter–standard unit rating) at the property line of 12521 123 STREET NW (BE), 48 m away; limit 60 dBA…",
     "worst": {
-     "addr": "12311 126 AVENUE NW",
-     "zt": "IH",
+     "addr": "12521 123 STREET NW",
+     "zt": "BE",
      "lot": true,
-     "d": 54.3,
-     "lo": 65.8,
-     "hi": 69.1,
+     "d": 48.1,
+     "lo": 67,
+     "hi": 70.3,
      "L": 60,
      "Ls": 60,
      "sec": "Bylaw 14600 s. 22(1)"
@@ -610,7 +1556,7 @@
    5
   ],
   "fpNote": "from the site setup: the most the zone allows, less setbacks, loading and the plant yard",
-  "fp": 12181.147855,
+  "fp": 11299.348468,
   "fpCalc": null,
   "indoorPlant": 0,
   "g": [

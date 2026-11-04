@@ -195,7 +195,8 @@
    "lotArea": 5882,
    "ring": "[ring 14]",
    "notes": [
-    "Noise: needs a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 68–72 dBA (quieter–standard unit rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 37 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii))."
+    "Lot lines: which yard one of this lot's edges has is not known (?); the deepest it could have is applied (see Lot lines).",
+    "Noise: needs a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 69–72 dBA (quieter–standard unit rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 35 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii))."
    ],
    "warn": [],
    "F": {
@@ -205,6 +206,98 @@
     "uy": -0.999932,
     "L": 85.505848,
     "W": 78.719762
+   },
+   "lineCls": {
+    "lines": [
+     {
+      "e": [
+       0
+      ],
+      "nx": 0.999792,
+      "ny": -0.020404,
+      "len": 24.505102,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "faces sideways (s. 2 Side Yard; our reading ?)"
+     },
+     {
+      "e": [
+       1
+      ],
+      "nx": -0.028973,
+      "ny": -0.99958,
+      "len": 34.51449,
+      "street": false,
+      "alley": false,
+      "kind": "unclear",
+      "cand": [
+       "side",
+       "rear"
+      ],
+      "why": "faces the front's way but is not on a street (a notch): not settled by s. 2 (?)"
+     },
+     {
+      "e": [
+       2
+      ],
+      "nx": 0.999966,
+      "ny": -0.008264,
+      "len": 60.502066,
+      "street": true,
+      "alley": false,
+      "kind": "flank",
+      "cand": null,
+      "why": "corner: the side property line on the flanking street (s. 2 Exterior Side Yard)"
+     },
+     {
+      "e": [
+       3
+      ],
+      "nx": 0.019105,
+      "ny": 0.999817,
+      "len": 78.51433,
+      "street": false,
+      "alley": false,
+      "kind": "rear",
+      "cand": null,
+      "why": "opposite the front and furthest from it (s. 2 yard diagram; our reading ?)"
+     },
+     {
+      "e": [
+       4
+      ],
+      "nx": -0.999932,
+      "ny": 0.011695,
+      "len": 85.505848,
+      "street": true,
+      "alley": false,
+      "kind": "flank",
+      "cand": null,
+      "why": "corner: the side property line on the flanking street (s. 2 Exterior Side Yard)"
+     },
+     {
+      "e": [
+       5
+      ],
+      "nx": 0,
+      "ny": -1,
+      "len": 44,
+      "street": true,
+      "alley": false,
+      "kind": "front",
+      "cand": null,
+      "why": "corner: the shortest boundary abutting a street (s. 10.26.1(b))"
+     }
+    ],
+    "f": {
+     "nx": 0,
+     "ny": -1
+    },
+    "corner": true,
+    "dbl": false,
+    "unclear": 1
    },
    "side": {
     "rot": false,
@@ -261,11 +354,112 @@
     "rear": 3.1,
     "s0": 0,
     "s1": 0,
-    "by": "zone"
+    "by": "lot lines",
+    "src": [
+     "van_zdb_i2",
+     "lot_van_s2_lines",
+     "lot_van_s10_frontage",
+     "lot_van_exterior_side"
+    ],
+    "edges": [
+     {
+      "i": 0,
+      "ax": 3054,
+      "ay": 2388,
+      "bx": 3054.5,
+      "by": 2412.5,
+      "kind": "side",
+      "cand": null,
+      "why": "faces sideways (s. 2 Side Yard; our reading ?)",
+      "d": 0,
+      "abuts": null,
+      "unA": false,
+      "len": 24.505102
+     },
+     {
+      "i": 1,
+      "ax": 3054.5,
+      "ay": 2412.5,
+      "bx": 3089,
+      "by": 2411.5,
+      "kind": "unclear",
+      "cand": [
+       "side",
+       "rear"
+      ],
+      "why": "faces the front's way but is not on a street (a notch): not settled by s. 2 (?)",
+      "d": 3.1,
+      "abuts": null,
+      "unA": false,
+      "len": 34.51449
+     },
+     {
+      "i": 2,
+      "ax": 3089,
+      "ay": 2411.5,
+      "bx": 3089.5,
+      "by": 2472,
+      "kind": "flank",
+      "cand": null,
+      "why": "corner: the side property line on the flanking street (s. 2 Exterior Side Yard)",
+      "d": 0,
+      "abuts": null,
+      "unA": false,
+      "len": 60.502066
+     },
+     {
+      "i": 3,
+      "ax": 3089.5,
+      "ay": 2472,
+      "bx": 3011,
+      "by": 2473.5,
+      "kind": "rear",
+      "cand": null,
+      "why": "opposite the front and furthest from it (s. 2 yard diagram; our reading ?)",
+      "d": 3.1,
+      "abuts": null,
+      "unA": false,
+      "len": 78.51433
+     },
+     {
+      "i": 4,
+      "ax": 3011,
+      "ay": 2473.5,
+      "bx": 3010,
+      "by": 2388,
+      "kind": "flank",
+      "cand": null,
+      "why": "corner: the side property line on the flanking street (s. 2 Exterior Side Yard)",
+      "d": 0,
+      "abuts": null,
+      "unA": false,
+      "len": 85.505848
+     },
+     {
+      "i": 5,
+      "ax": 3010,
+      "ay": 2388,
+      "bx": 3054,
+      "by": 2388,
+      "kind": "front",
+      "cand": null,
+      "why": "corner: the shortest boundary abutting a street (s. 10.26.1(b))",
+      "d": 0,
+      "abuts": null,
+      "unA": false,
+      "len": 44
+     }
+    ],
+    "unclear": 1,
+    "unAbut": 0
    },
    "yardRect": "[ring 8]",
    "inset": "[ring 8]",
    "yardNote": "",
+   "edgeYards": "[cycle]",
+   "yardOff": "[ring 12]",
+   "yardLine": "[ring 14]",
+   "yardOffBad": false,
    "loadingNeed": {
     "n": 2,
     "len": 10.2,
@@ -441,10 +635,10 @@
     "floor": 1456.666667,
     "perMW": 766.666667
    },
-   "foot": "[ring 18]",
+   "foot": "[ring 14]",
    "footRect": "[ring 8]",
    "simpleMass": true,
-   "footArea": 3923.661776,
+   "footArea": 3815.865813,
    "noise": {
     "lw": [
      107.6,
@@ -452,8 +646,8 @@
     ],
     "n": 3,
     "src": [
-     3031.2,
-     2436.5
+     3029.7,
+     2438
     ],
     "where": "roof",
     "groups": [
@@ -462,7 +656,7 @@
       "n": 3
      }
     ],
-    "tested": 5360,
+    "tested": 5352,
     "overQ": 0,
     "overS": 0,
     "limit": 55,
@@ -477,14 +671,14 @@
     "bldOnly": 0,
     "block": null,
     "flag": null,
-    "req": "Noise: needs a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 68–72 dBA (quieter–standard unit rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 37 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii)).",
+    "req": "Noise: needs a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 69–72 dBA (quieter–standard unit rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 35 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii)).",
     "worst": {
      "addr": "1345 CLARK DR",
      "zt": "I-2, activity zone",
      "lot": true,
-     "d": 36.6,
-     "lo": 68.3,
-     "hi": 71.6,
+     "d": 35.1,
+     "lo": 68.7,
+     "hi": 72,
      "L": 65,
      "Ls": 65,
      "sec": "Noise Control By-law 6555 s. 2.3(b)(ii)"
@@ -525,12 +719,12 @@
    "yards": "[cycle]"
   },
   "hallS": [
-   2865.340658,
-   4298.010987
+   2761.856534,
+   4142.784801
   ],
   "hallL": [
-   4298.010987,
-   5969.459705
+   4142.784801,
+   5753.867779
   ],
   "floors": 3,
   "floorsR": [
@@ -538,7 +732,7 @@
    3
   ],
   "fpNote": "from the site setup: the most the zone allows, less setbacks, loading and the plant yard",
-  "fp": 2984.729852,
+  "fp": 2876.933889,
   "fpCalc": null,
   "indoorPlant": 0,
   "g": [
@@ -546,52 +740,52 @@
    17646
   ],
   "G": [
-   8954.189557,
-   8954.189557
+   8630.801668,
+   8630.801668
   ],
   "fullCover": "",
   "heightCut": true,
   "yardCut": true,
   "gross": [
-   8954.189557,
-   8954.189557
+   8630.801668,
+   8630.801668
   ],
   "how": "lot 5,882 m² × floor-space ratio 3",
   "sc": [
    {
-    "G": 8954.189557,
-    "gr": 2984.729852,
-    "up": 5969.459705
+    "G": 8630.801668,
+    "gr": 2876.933889,
+    "up": 5753.867779
    },
    {
-    "G": 8954.189557,
-    "gr": 2984.729852,
-    "up": 5969.459705
+    "G": 8630.801668,
+    "gr": 2876.933889,
+    "up": 5753.867779
    }
   ],
   "ground": [
-   2984.729852,
-   2984.729852
+   2876.933889,
+   2876.933889
   ],
   "hallGross": [
-   5969.459705,
-   5969.459705
+   5753.867779,
+   5753.867779
   ],
   "density": "typical",
   "mwS": [
-   4.54816,
-   14.820728
+   4.383899,
+   14.285465
   ],
   "mwL": [
-   6.82224,
+   6.575849,
    18.049863
   ],
   "hall": [
-   2865.340658,
-   5969.459705
+   2761.856534,
+   5753.867779
   ],
   "mw": [
-   4.54816,
+   4.383899,
    18.049863
   ],
   "m2MW": [
@@ -599,10 +793,10 @@
    630
   ],
   "mwCheck": [
-   8.074111,
-   17.731068
+   7.782508,
+   17.090696
   ],
-  "mwTopRaw": 20.584344,
+  "mwTopRaw": 19.840923,
   "mwCapped": true,
   "plantFor": 18.049863
  },

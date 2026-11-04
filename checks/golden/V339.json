@@ -5,7 +5,7 @@
   "extent": "whole",
   "floor": "",
   "host": {},
-  "mw": 1.9,
+  "mw": 1.6,
   "foot": "max",
   "cover": 70,
   "hmode": "out",
@@ -161,8 +161,8 @@
    "lotArea": 4503,
    "ring": "[ring 12]",
    "notes": [
-    "Noise: needs a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 70–73 dBA (quieter–standard unit rating) at the point of reception beside 275 1ST AVE E (I-3, activity zone), 30 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii)).",
-    "Noise: with the standard (louder) unit rating the plant would exceed the 65 dBA night limit at the point of reception beside 336 1ST AVE E (IC-3, activity zone) (about 64–67 dBA (quieter–standard unit rating) with a 4.9 m solid screen (roof; NSW 2021, −8 dB), Noise Control By-law 6555 s. 2.3(b)(ii)); 6 lots in all. With the quieter rating it is under, so this is not blocked: standard units would need low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB)."
+    "Noise: needs a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 71–75 dBA (quieter–standard unit rating) at the point of reception beside 275 1ST AVE E (I-3, activity zone), 25 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii)).",
+    "Noise: with the standard (louder) unit rating the plant would exceed the 65 dBA night limit at the point of reception beside 275 1ST AVE E (I-3, activity zone) (about 63–67 dBA (quieter–standard unit rating) with a 4.9 m solid screen (roof; NSW 2021, −8 dB), Noise Control By-law 6555 s. 2.3(b)(ii)). With the quieter rating it is under, so this is not blocked: standard units would need low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB)."
    ],
    "warn": [],
    "F": {
@@ -172,6 +172,82 @@
     "uy": 0.755435,
     "L": 112.228302,
     "W": 46.096933
+   },
+   "lineCls": {
+    "lines": [
+     {
+      "e": [
+       0
+      ],
+      "nx": 0.755435,
+      "ny": -0.655224,
+      "len": 64.863318,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "faces sideways (s. 2 Side Yard; our reading ?)"
+     },
+     {
+      "e": [
+       1
+      ],
+      "nx": 0.971785,
+      "ny": -0.23587,
+      "len": 52.995283,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "faces sideways (s. 2 Side Yard; our reading ?)"
+     },
+     {
+      "e": [
+       2
+      ],
+      "nx": 0.329372,
+      "ny": 0.9442,
+      "len": 22.770595,
+      "street": false,
+      "alley": false,
+      "kind": "rear",
+      "cand": null,
+      "why": "opposite the front and furthest from it (s. 2 yard diagram; our reading ?)"
+     },
+     {
+      "e": [
+       3
+      ],
+      "nx": -0.751382,
+      "ny": 0.659868,
+      "len": 103.808718,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "faces sideways (s. 2 Side Yard; our reading ?)"
+     },
+     {
+      "e": [
+       4
+      ],
+      "nx": -0.650791,
+      "ny": -0.759257,
+      "len": 46.097722,
+      "street": true,
+      "alley": false,
+      "kind": "front",
+      "cand": null,
+      "why": "the only street line (s. 2 Front Yard; s. 10.26.1)"
+     }
+    ],
+    "f": {
+     "nx": -0.650791,
+     "ny": -0.759257
+    },
+    "corner": false,
+    "dbl": false,
+    "unclear": 0
    },
    "side": {
     "rot": false,
@@ -229,11 +305,95 @@
     "s0": 7.6,
     "s1": 7.6,
     "max": 61,
-    "by": "zone"
+    "by": "lot lines",
+    "src": [
+     "van_zdb_i3",
+     "lot_van_s2_lines",
+     "lot_van_s10_frontage",
+     "lot_van_exterior_side"
+    ],
+    "edges": [
+     {
+      "i": 0,
+      "ax": 1710,
+      "ay": 1988.5,
+      "bx": 1752.5,
+      "by": 2037.5,
+      "kind": "side",
+      "cand": null,
+      "why": "faces sideways (s. 2 Side Yard; our reading ?)",
+      "d": 7.6,
+      "abuts": null,
+      "unA": false,
+      "len": 64.863318
+     },
+     {
+      "i": 1,
+      "ax": 1752.5,
+      "ay": 2037.5,
+      "bx": 1765,
+      "by": 2089,
+      "kind": "side",
+      "cand": null,
+      "why": "faces sideways (s. 2 Side Yard; our reading ?)",
+      "d": 7.6,
+      "abuts": null,
+      "unA": false,
+      "len": 52.995283
+     },
+     {
+      "i": 2,
+      "ax": 1765,
+      "ay": 2089,
+      "bx": 1743.5,
+      "by": 2096.5,
+      "kind": "rear",
+      "cand": null,
+      "why": "opposite the front and furthest from it (s. 2 yard diagram; our reading ?)",
+      "d": 3.1,
+      "abuts": null,
+      "unA": false,
+      "len": 22.770595
+     },
+     {
+      "i": 3,
+      "ax": 1743.5,
+      "ay": 2096.5,
+      "bx": 1675,
+      "by": 2018.5,
+      "kind": "side",
+      "cand": null,
+      "why": "faces sideways (s. 2 Side Yard; our reading ?)",
+      "d": 7.6,
+      "abuts": null,
+      "unA": false,
+      "len": 103.808718
+     },
+     {
+      "i": 4,
+      "ax": 1675,
+      "ay": 2018.5,
+      "bx": 1710,
+      "by": 1988.5,
+      "kind": "front",
+      "cand": null,
+      "why": "the only street line (s. 2 Front Yard; s. 10.26.1)",
+      "d": 0.6,
+      "abuts": null,
+      "unA": false,
+      "len": 46.097722
+     }
+    ],
+    "unclear": 0,
+    "unAbut": 0
    },
    "yardRect": "[ring 8]",
    "inset": "[ring 8]",
    "yardNote": "",
+   "edgeYards": "[cycle]",
+   "yardOff": "[ring 10]",
+   "yardLine": "[ring 10]",
+   "yardOffBad": false,
    "loadingNeed": {
     "n": 2,
     "len": 10.2,
@@ -242,13 +402,13 @@
     "aisle": 6.1,
     "cls": "truck loading bay",
     "nC": 0,
-    "basis": "2 truck loading bays for 1,457 m² of floor. The Parking By-law calls this size Class B, its mid-size bay: 10.2 × 3.4 m with 3.8 m clearance (Class C is the 23.1 m bay for the largest trucks). The count uses row 5.2.5: the by-law does not name data centres, but the City classes them as a Transportation and Storage use (RTS 19744), which row 5.2.5 lists. Each bay is reached by a 6.1 m aisle (s. 5.4.1).",
+    "basis": "2 truck loading bays for 1,227 m² of floor. The Parking By-law calls this size Class B, its mid-size bay: 10.2 × 3.4 m with 3.8 m clearance (Class C is the 23.1 m bay for the largest trucks). The count uses row 5.2.5: the by-law does not name data centres, but the City classes them as a Transportation and Storage use (RTS 19744), which row 5.2.5 lists. Each bay is reached by a 6.1 m aisle (s. 5.4.1).",
     "src": "vanParking5"
    },
    "loading": "[ring 8]",
    "loadV": [
-    -12.358773,
-    15.448466
+    -5.986281,
+    14.096726
    ],
    "loadDepth": 16.3,
    "loadSpaces": [
@@ -267,10 +427,10 @@
     12.95,
     -31.75
    ],
-   "mwSized": 1.9,
+   "mwSized": 1.6,
    "plant": {
     "s": {
-     "Q": 2.945,
+     "Q": 2.48,
      "k": {
       "name": "air-cooled chillers",
       "L": 12.141,
@@ -366,15 +526,15 @@
      }
     ],
     "lines": [
-     "Sized for <b>1.9 MW</b> of servers: heat to reject ≈ 1.9 × PUE 1.55 = <b>2.9 MW</b> at peak.",
+     "Sized for <b>1.6 MW</b> of servers: heat to reject ≈ 1.6 × PUE 1.55 = <b>2.5 MW</b> at peak.",
      "2 air-cooled chillers carry it; with spares, <b>3</b>. Placed: 3 on the roof, 0 in the yard.",
      "Each unit about 12.141 × 2.362 m, 2.896 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
      "<span class=\"src\">Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit near…"
     ],
     "genLines": [
-     "3 generator sets of about 1 MW carry 2.9 MW; with spares, <b>4</b>. Placed: 0 on the roof, 4 in the yard.",
+     "3 generator sets of about 1 MW carry 2.5 MW; with spares, <b>4</b>. Placed: 0 on the roof, 4 in the yard.",
      "Each about 8.434 × 2.616 m, 3.706 m high; 1.5 m from the building, 2 m between sets (1 m clear all round, CSA C282 6.5.1.1; register arch_csa_c282).",
-     "Fuel in each set's sub-base tank: about 3100 L. In the yard: 3 m from the property line and 1.5 m from the building (CSA B139.1.0 Table 2; register arch_csa_b139). On a roof: at most 1,250 L a tank and 2,500 L a supply line (B139.1.1 6.5.3). FM 5-32 (insurer guidance, not law): not on the roof or in a basement.",
+     "Fuel in each set's sub-base tank: about 2600 L. In the yard: 3 m from the property line and 1.5 m from the building (CSA B139.1.0 Table 2; register arch_csa_b139). On a roof: at most 1,250 L a tank and 2,500 L a supply line (B139.1.1 6.5.3). FM 5-32 (insurer guidance, not law): not on the roof or in a basement.",
      "<span class=\"src\">Standby diesel generator sets in Sound Level 2 enclosures with sub-base tanks. Basis units: Rehlko (Kohler) KD2000, 2,000 kW standby (data-centre continuous rating the same), 13.49 × 3.49 m, up to 4.78 m high (G5-626, rev 6/24); KD1000, 1,000 kW, 8.43 × 2.62 m, 3.71 m high with the 12 h tank (G6-154, 12/23). Both EPA Tier 2, cULus (UL 2200, CSA C22.2 No. 100); manufacturer claims. Chosen 29 Oct 2026 as the middle of Cat, Rehlko and Generac: 2 MW 18.5–38.4 m² per MW, 1 MW 19.5–22.4. 1 m clear around each set (Cummins application manual; not checked ?); 1.5 m from wall openings…"
     ],
     "short": "",
@@ -383,7 +543,7 @@
     "genYard": 4,
     "genRoof": 0,
     "genTank": {
-     "L": 3098.14,
+     "L": 2608.96,
      "bld": 1.5,
      "pl": 3,
      "over": false
@@ -405,14 +565,14 @@
    "plantYardDepth": 10.232,
    "serverFoot": "[ring 8]",
    "sizedTo": {
-    "mw": 1.9,
-    "floor": 1456.666667,
+    "mw": 1.6,
+    "floor": 1226.666667,
     "perMW": 766.666667
    },
    "foot": "[ring 8]",
    "footRect": "[ring 8]",
    "simpleMass": true,
-   "footArea": 1073.513996,
+   "footArea": 1064.600785,
    "noise": {
     "lw": [
      107.6,
@@ -420,8 +580,8 @@
     ],
     "n": 3,
     "src": [
-     1723.4,
-     2028.1
+     1718.2,
+     2029.2
     ],
     "where": "roof",
     "groups": [
@@ -430,29 +590,29 @@
       "n": 3
      }
     ],
-    "tested": 3646,
+    "tested": 3647,
     "overQ": 0,
-    "overS": 6,
+    "overS": 1,
     "limit": 65,
     "sec": "Noise Control By-law 6555 s. 2.3(b)(ii)",
     "beyond": false,
     "byCls": {
-     "quiet": 1,
-     "other": 5,
+     "quiet": 0,
+     "other": 1,
      "unknown": 0,
      "assumed": 0
     },
     "bldOnly": 0,
     "block": null,
-    "flag": "Noise: with the standard (louder) unit rating the plant would exceed the 65 dBA night limit at the point of reception beside 336 1ST AVE E (IC-3, activity zone) (about 64–67 dBA (quieter–standard unit rating) with a 4.9 m solid screen (roof; NSW 2021, −8 dB), Noise Control By-law 6555 s. 2.3(b)(ii)); 6 lots in all. With the quieter rating it is under, so this is not blocked: standard units would need low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB).",
-    "req": "Noise: needs a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 70–73 dBA (quieter–standard unit rating) at the point of reception beside 275 1ST AVE E (I-3, activity zone), 30 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii)).",
+    "flag": "Noise: with the standard (louder) unit rating the plant would exceed the 65 dBA night limit at the point of reception beside 275 1ST AVE E (I-3, activity zone) (about 63–67 dBA (quieter–standard unit rating) with a 4.9 m solid screen (roof; NSW 2021, −8 dB), Noise Control By-law 6555 s. 2.3(b)(ii)). With the quieter rating it is under, so this is not blocked: standard units would need low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB).",
+    "req": "Noise: needs a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 71–75 dBA (quieter–standard unit rating) at the point of reception beside 275 1ST AVE E (I-3, activity zone), 25 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii)).",
     "worst": {
      "addr": "275 1ST AVE E",
      "zt": "I-3, activity zone",
      "lot": true,
-     "d": 30.1,
-     "lo": 70,
-     "hi": 73.3,
+     "d": 25.4,
+     "lo": 71.5,
+     "hi": 74.8,
      "L": 65,
      "Ls": 65,
      "sec": "Noise Control By-law 6555 s. 2.3(b)(ii)"
@@ -494,12 +654,12 @@
    "yards": "[cycle]"
   },
   "hallS": [
-   650.25273,
-   975.379094
+   645.678775,
+   968.518163
   ],
   "hallL": [
-   975.379094,
-   1354.693187
+   968.518163,
+   1345.164115
   ],
   "floors": 3,
   "floorsR": [
@@ -507,7 +667,7 @@
    3
   ],
   "fpNote": "from the site setup: the most the zone allows, less setbacks, loading and the plant yard",
-  "fp": 677.346593,
+  "fp": 672.582057,
   "fpCalc": null,
   "indoorPlant": 0,
   "g": [
@@ -515,52 +675,52 @@
    13509
   ],
   "G": [
-   2032.03978,
-   2032.03978
+   2017.746172,
+   2017.746172
   ],
   "fullCover": "",
   "heightCut": true,
   "yardCut": true,
   "gross": [
-   2032.03978,
-   2032.03978
+   2017.746172,
+   2017.746172
   ],
   "how": "lot 4,503 m² × floor-space ratio 3",
   "sc": [
    {
-    "G": 2032.03978,
-    "gr": 677.346593,
-    "up": 1354.693187
+    "G": 2017.746172,
+    "gr": 672.582057,
+    "up": 1345.164115
    },
    {
-    "G": 2032.03978,
-    "gr": 677.346593,
-    "up": 1354.693187
+    "G": 2017.746172,
+    "gr": 672.582057,
+    "up": 1345.164115
    }
   ],
   "ground": [
-   677.346593,
-   677.346593
+   672.582057,
+   672.582057
   ],
   "hallGross": [
-   1354.693187,
-   1354.693187
+   1345.164115,
+   1345.164115
   ],
   "density": "typical",
   "mwS": [
-   1.032147,
-   3.363376
+   1.024887,
+   3.339718
   ],
   "mwL": [
-   1.548221,
+   1.53733,
    3.851504
   ],
   "hall": [
-   650.25273,
-   1354.693187
+   645.678775,
+   1345.164115
   ],
   "mw": [
-   1.032147,
+   1.024887,
    3.851504
   ],
   "m2MW": [
@@ -568,10 +728,10 @@
    630
   ],
   "mwCheck": [
-   1.832317,
-   4.023841
+   1.819428,
+   3.995537
   ],
-  "mwTopRaw": 4.671356,
+  "mwTopRaw": 4.638497,
   "mwCapped": true,
   "plantFor": 3.851504
  },

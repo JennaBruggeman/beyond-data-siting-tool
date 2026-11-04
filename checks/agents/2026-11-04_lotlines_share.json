@@ -1,0 +1,226 @@
+{
+ "van": {
+  "zones": {
+   "FC-2": {
+    "available": 25,
+    "sampled": 25,
+    "lines": {
+     "flank": 19,
+     "unclear": 33,
+     "side": 36,
+     "front": 12,
+     "rear": 7
+    },
+    "lotsUnclear": 20
+   },
+   "I-1C": {
+    "available": 1,
+    "sampled": 1,
+    "lines": {
+     "rear": 1,
+     "side": 1,
+     "front": 1,
+     "flank": 2
+    },
+    "lotsUnclear": 0
+   },
+   "I-2": {
+    "available": 636,
+    "sampled": 60,
+    "lines": {
+     "unclear": 40,
+     "flank": 43,
+     "rear": 47,
+     "side": 98,
+     "front": 53
+    },
+    "lotsUnclear": 15
+   },
+   "I-3": {
+    "available": 32,
+    "sampled": 32,
+    "lines": {
+     "front": 38,
+     "side": 102,
+     "unclear": 31,
+     "flank": 19,
+     "rear": 30
+    },
+    "lotsUnclear": 12
+   }
+  },
+  "lots": 118,
+  "lines": {
+   "flank": 83,
+   "unclear": 104,
+   "side": 237,
+   "front": 104,
+   "rear": 85
+  },
+  "edges": {
+   "flank": 84,
+   "unclear": 105,
+   "side": 244,
+   "front": 105,
+   "rear": 87
+  },
+  "lotsUnclear": 47,
+  "lotsNoStreet": 1,
+  "edgesUnAbut": 0,
+  "lotsUnAbut": 0,
+  "edgesAll": 0,
+  "corner": 57,
+  "dbl": 23,
+  "unclearWhy": {
+   "corner with equal street lines: the Director of Planning decides": 24,
+   "double fronting: s. 10.26.1 sets no front for unequal parallel street lines on one lot": 25,
+   "corner and double fronting: front or rear not settled": 15,
+   "faces away from the front but is not the furthest": 14,
+   "the front is not settled, so the rear is not either": 11,
+   "faces the front's way but is not on a street": 12,
+   "no street found beside the lot: not a site": 3
+  }
+ },
+ "edm": {
+  "zones": {
+   "BE": {
+    "available": 1745,
+    "sampled": 60,
+    "lines": {
+     "front": 148,
+     "side": 140,
+     "flank": 111,
+     "rear": 52,
+     "unclear": 13
+    },
+    "lotsUnclear": 1
+   },
+   "EETB": {
+    "available": 0,
+    "sampled": 0,
+    "lines": {},
+    "lotsUnclear": 0
+   },
+   "EETC": {
+    "available": 11,
+    "sampled": 11,
+    "lines": {
+     "rear": 11,
+     "side": 30,
+     "front": 15,
+     "flank": 4
+    },
+    "lotsUnclear": 0
+   },
+   "EETIM": {
+    "available": 5,
+    "sampled": 5,
+    "lines": {
+     "front": 4,
+     "side": 11,
+     "rear": 5,
+     "unclear": 6
+    },
+    "lotsUnclear": 1
+   },
+   "EETL": {
+    "available": 2,
+    "sampled": 2,
+    "lines": {
+     "front": 3,
+     "side": 15,
+     "flank": 2,
+     "rear": 2
+    },
+    "lotsUnclear": 0
+   },
+   "EETM": {
+    "available": 5,
+    "sampled": 5,
+    "lines": {
+     "unclear": 4,
+     "side": 14,
+     "front": 5,
+     "rear": 4,
+     "flank": 2
+    },
+    "lotsUnclear": 1
+   },
+   "EIB": {
+    "available": 69,
+    "sampled": 60,
+    "lines": {
+     "side": 258,
+     "rear": 65,
+     "front": 215,
+     "flank": 232,
+     "unclear": 3
+    },
+    "lotsUnclear": 1
+   },
+   "EIM": {
+    "available": 7,
+    "sampled": 7,
+    "lines": {
+     "side": 20,
+     "rear": 6,
+     "front": 38,
+     "flank": 43,
+     "unclear": 4
+    },
+    "lotsUnclear": 1
+   },
+   "IH": {
+    "available": 335,
+    "sampled": 60,
+    "lines": {
+     "rear": 64,
+     "side": 260,
+     "front": 111,
+     "flank": 67,
+     "unclear": 36
+    },
+    "lotsUnclear": 2
+   },
+   "IM": {
+    "available": 2579,
+    "sampled": 60,
+    "lines": {
+     "front": 158,
+     "side": 245,
+     "rear": 58,
+     "flank": 101,
+     "unclear": 11
+    },
+    "lotsUnclear": 2
+   }
+  },
+  "lots": 270,
+  "lines": {
+   "front": 697,
+   "side": 993,
+   "flank": 562,
+   "rear": 267,
+   "unclear": 77
+  },
+  "edges": {
+   "front": 1036,
+   "side": 1594,
+   "flank": 902,
+   "rear": 431,
+   "unclear": 147
+  },
+  "lotsUnclear": 9,
+  "lotsNoStreet": 6,
+  "edgesUnAbut": 566,
+  "lotsUnAbut": 103,
+  "edgesAll": 4110,
+  "corner": 106,
+  "dbl": 25,
+  "unclearWhy": {
+   "corner with equal street lines: the Development Planner decides": 11,
+   "the front is not settled, so the rear is not either": 36,
+   "no street found beside the lot, so no Front Lot Line": 30
+  }
+ }
+}
