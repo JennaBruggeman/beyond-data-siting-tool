@@ -105,7 +105,7 @@ function waterFlow(c,pal){ const {f,A,e}=c; const L=(BD.compareRefs?BD.compareRe
 async function optionsBlock(c,pal){ const {e,f,near,nets,A}=c; const opts=e.optionSet(f,near,nets).map(o=>Object.assign(o,{r:e.calc(o,f,near,nets)}));
   const keep=JSON.stringify(A); const out=[];
   /* 2 Nov 2026 hard rules (exchanges F11): an option that breaks a hard rule (setupProblems: height, loading, plant that does not fit, fuel) is not drawn as a plan; the rule is named instead */
-  try{ for(const o of opts){ A.mw=o.mw; A.inside=o.recover?'plate':'air'; BD.modelReset(); const m=BD.model(); const miss=BD.setupProblems?BD.setupProblems(true):[]; out.push({o,svg:miss.length?null:planSVG(m,pal,{w:300,maxH:220}),miss}); } }
+  try{ for(const o of opts){ A.mw=o.mw; A.inside=o.recover?'plate':'air'; BD.modelReset(); const m=BD.model(); const miss=BD.setupProblems?BD.setupProblems():[] /* bugfix 4 Nov 2026: every rule, the floor check included */; out.push({o,svg:miss.length?null:planSVG(m,pal,{w:300,maxH:220}),miss}); } }
   finally{ Object.keys(A).forEach(k=>delete A[k]); Object.assign(A,JSON.parse(keep)); BD.modelReset(); BD.model(); }
   return out; }
 
