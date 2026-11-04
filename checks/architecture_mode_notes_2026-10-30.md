@@ -218,3 +218,5 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - Out for now (weak): work yard, winter garden, food drying alone.
 - Next: research per typology, then build.
 - Twin dropped (J.B. 4 Nov 2026: "makes things complicated"). Overnight shelter is out of the library; day-use warming room stays in Emergency hub. Library v1 is now 8 typologies + 2 add-ons.
+- Aquaponics (J.B. 4 Nov 2026): commercial ratio 111 m² greenhouse per t/yr of fish; greenhouse sized by the lot, fish farm sized to match.
+- Heat cascade order (J.B. 4 Nov 2026): the tool orders stages by sourced supply temperature, hottest first; pool vs greenhouse order "?" until the pool supply temperature is sourced.
