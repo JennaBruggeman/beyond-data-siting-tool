@@ -203,3 +203,4 @@ All three offered in Architecture mode, no default; each shows its consequences 
 
 ## Typology answers (J.B., 4 Nov 2026)
 - Q1: variants, not separate typologies. "Public front" = one typology with two variants: stacked (Plinth) and beside (Street row); the tool picks the one the zone allows, the user can switch where both pass.
+- Q2: research floor-to-floor heights by program (code minimums, provincial facility guides, filed Canadian permit drawings); until sourced a program height is "?" and it is not stacked on the hall. Queued after the typology questions.
