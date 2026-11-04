@@ -3026,7 +3026,8 @@
    "arch_inv_cologixVan1Sheet2026": "operator claim",
    "arch_inv_cologixVan5Sheet2026": "operator claim",
    "arch_inv_estruxVan2Sheet": "operator claim",
-   "arch_inv_cwhDcPage2026": "operator claim"
+   "arch_inv_cwhDcPage2026": "operator claim",
+   "arch_inv_spencerColo5": "operator claim"
   },
   "source_check": {
    "mfrDryCooler": "agent",
@@ -3957,7 +3958,8 @@
    "arch_inv_cologixVan1Sheet2026": "claude",
    "arch_inv_cologixVan5Sheet2026": "claude",
    "arch_inv_estruxVan2Sheet": "claude",
-   "arch_inv_cwhDcPage2026": "claude"
+   "arch_inv_cwhDcPage2026": "claude",
+   "arch_inv_spencerColo5": "claude"
   },
   "research_pass": {
    "date": "16 Oct 2026",
@@ -31339,6 +31341,15 @@
      "where": "J.B.'s three screenshots of the page",
      "what": "quotes read from the images"
     }
+   ],
+   "arch_inv_spencerColo5": [
+    {
+     "check": 1,
+     "by": "Claude",
+     "date": "3 Nov 2026",
+     "where": "page fetched 3 Nov 2026",
+     "what": "quotes from the page text"
+    }
    ]
   },
   "check_log_note": "check_log: CHECK 1 = first read (Claude, overnight pass 29 Oct 2026); CHECK 2 = independent agent re-read the same evening. 'confirmed' = both reads agree. 'fixed at check 2' = the second reader found a difference and the entry was corrected to the source wording it quoted: that new wording has one read, so it is the place for any third look. Items still marked '?' stay open. Back-fill (30 Oct 2026): sources read before per-source logging began (16 Oct) have a check-1 entry pointing to the research note that records them; sources with no trace in any note were re-read as check 1.",
@@ -47704,7 +47715,8 @@
   "arch_inv_cologixVan1Sheet2026": "OPERATOR CLAIM: Cologix, VAN1 Spec Sheet, VAN1.042026.R4 (file named May 2026), uploaded by J.B. 3 Nov 2026: 555 West Hastings Street; 'Site Capacity 400 kW' (web page 520 kW, arch_inv_cologixVan1Web: conflict kept); 'Site Type Cologix is a tenant'; 'DC Space 5K SQFT across 2 suites'; 'Building Office building; concrete and brick; seismic zone 4; outside of flood plain'; 'Cooling N+1 chilled water cooling, N+1 dry cooler (985), N+1 IRC'; 'Fire Suppression Dual interlocked pre-action dry pipe'; 'Generator + UPS N/N+1 Generator/UPS'; 'Power Usage Effectiveness (PUE) 1.2'; 'Meet-Me-Room (MMR) 3, controlled by landlord'; '13 diverse paths of building fiber' — local upload (not in repo)",
   "arch_inv_cologixVan5Sheet2026": "OPERATOR CLAIM: Cologix, VAN5 Spec Sheet, VAN5.E.062026.R3 (file named May 2026), uploaded by J.B. 3 Nov 2026: 555 West Hastings St; 'Site Capacity 1 MW' (web page 1.6 MW, arch_inv_cologixVan5Web: conflict kept); 'DC Space 10.8K SQFT'; 'Building Multi-story mixed use office building, concrete and brick, seismic zone 4, outside of flood plain'; 'Data Halls 2'; 'Cooling N+1/DX and chilled loop'; 'Fire Suppression In-room cross zoned VESDA with Nitrogen (N2) dry-pipe, pre-action system'; 'Generator + UPS N+1 UPS'; 'Load Design 4 kW'; 'Meet-Me-Rooms (MMR) 4, controlled by landlord'; PUE not stated — local upload (not in repo)",
   "arch_inv_estruxVan2Sheet": "OPERATOR CLAIM: eStruxture, VAN-2 Data Center datasheet EN-V5 (undated), uploaded by J.B. 3 Nov 2026: '555 West Hastings Street, Suite 2605'; 'Lat: 49.284680 | Long: -123.111890'; '14,500 sq. ft. of total space', '11,000 sq. ft. of white space'; 'Four Data Halls'; 'First data hall built in 2000'; '28 Floor multi-tenant building', '4 Data Halls on 2 different floors'; 'Ceiling clearance 10’ 2” to 11’ 8”'; 'Floor load ... 260 lbs. / sq. ft.'; 'Outside 100 year floodplain', 'Outside 500 year floodplain'; 'Ground level loading dock'; '2.14 MW total power capacity'; 'Up to 10 kW per cabinet'; 'Served by three utility feeds to building with single path electrical distribution to the data halls'; 'POWER PROVIDER BC Hydro'; 'UPS N and N+1'; 'BACKUP GENERATORS N'; 'FUEL RUN-TIME 48 Hours'; 'Tier I design N+1 UPS solution'; 'Closed glycol loop chilled water'; 'Total 422 RT'; 'REDUNDANCY N+1'; 'Double interlock pre-action dry pipe'; 'One Meet-Me-Room' — local upload (not in repo)",
-  "arch_inv_cwhDcPage2026": "OPERATOR CLAIM: Canadian Web Hosting, 'Canadian Data Centres - Toronto, Vancouver & Coquitlam' page, screenshots by J.B. 3 Nov 2026: Vancouver Data Centre, 'Our primary facility at 555 West Hastings'; 'Multi-level high-rise building with raised floor'; 'UPS and diesel generator backup power'; 'Pre-action dry pipe sprinkler fire suppression'; '24/7/365 NOC monitoring and on-site staff'; FAQ: 'All three facilities use UPS ... and diesel generators ... Power is delivered through multiple independent feeds'; spec table: Building Type Vancouver 'Multi-level high-rise', Coquitlam 'Custom 7,600 sq. ft.'; no MW, floor area (Vancouver), cooling type, PUE or heat reuse given — https://canadianwebhosting.com/company/canadian-data-centres"
+  "arch_inv_cwhDcPage2026": "OPERATOR CLAIM: Canadian Web Hosting, 'Canadian Data Centres - Toronto, Vancouver & Coquitlam' page, screenshots by J.B. 3 Nov 2026: Vancouver Data Centre, 'Our primary facility at 555 West Hastings'; 'Multi-level high-rise building with raised floor'; 'UPS and diesel generator backup power'; 'Pre-action dry pipe sprinkler fire suppression'; '24/7/365 NOC monitoring and on-site staff'; FAQ: 'All three facilities use UPS ... and diesel generators ... Power is delivered through multiple independent feeds'; spec table: Building Type Vancouver 'Multi-level high-rise', Coquitlam 'Custom 7,600 sq. ft.'; no MW, floor area (Vancouver), cooling type, PUE or heat reuse given — https://canadianwebhosting.com/company/canadian-data-centres",
+  "arch_inv_spencerColo5": "OPERATOR CLAIM: Spencer Building, 'Colo5 – Vancouver Carrier Hotel & Data Centre' page, read 3 Nov 2026 (copyright 2026): 'Phase 1, featuring 100kW capacity, has 12 full-size cabinets and 8 quarter cabinets'; '7kW per cabinet', 'Max 10kW per cabinet (requires approval)'; 'N+1 CRAC units with cold aisle containment'; 'Raised floor plenum provides cooling to cold aisle'; 'N+1 UPS with dual zinc battery cabinets'; 'VESDA and Pre-Action'; 'Two-factor access control and HD digital cameras'; '24/7 onsite security patrols'; 'Phase 2 set to roll out in Q1 2025' (status of Phase 2 ?); Phase 1 'selling out quickly'; space connected to 'MMR5'; address, generators, fuel, PUE, heat reuse not stated — https://spencerbuilding.com/colo5/"
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ (UCA default rates, ATCO Gas area); ATCO Gas North Mid Use variable delivery $1.045/GJ (ATCO Gas North Rate Schedules, p. 11, eff. 1 Jan 2026; riders T $1.289/GJ and L $0.087/GJ not included) → (1.045 + 1.458) × 3.6 ÷ 0.85 boiler efficiency ≈ $10.6/MWh heat at the October rate (our arithmetic; the tool uses the 12-month mean commodity, ≈ $13/MWh) — https://www.ucahelps.alberta.ca/regulated-rates.aspx ; https://gas.atco.com/content/dam/web/for-home/natural-gas/natural-gas-north-rate-schedule.pdf",
