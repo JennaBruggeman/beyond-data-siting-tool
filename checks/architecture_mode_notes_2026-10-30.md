@@ -191,4 +191,4 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - SFU Cedar: PUE 1.07 (SFU and BC Hydro), J.B. 4 Nov 2026; the engineer's 1.097 design target kept as a conflict.
 - Qu EDM2: 3 MW (Tier III, operator sheet), whole site; phases ≈2 MW + 1 MW from N+1 generators (our arithmetic). J.B. 4 Nov 2026.
 - Wolfpaw: EDM1 10060 Jasper Ave; EDM2 10200 102 Ave NW; EDM3 17204 114 Ave NW (J.B. 4 Nov 2026, from a search summary citing Data Center Map: directory lead, not a primary source). EDM2 and EDM3 share addresses with Qu EDM1 and Qu EDM2, so they are shown as Wolfpaw space inside those buildings, not new map points.
-- Remaining conflicts without a sheet: see the chat of 4 Nov (Meta size).
+- Meta (Sturgeon County): 970 MW Phase 1 grid allocation shown; 1,800 MW full build-out noted; Meta's "1 GW" kept as its claim (J.B. 4 Nov 2026). All conflicts settled.
