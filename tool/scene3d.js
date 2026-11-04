@@ -7,10 +7,9 @@
 const BD=window.BD;
 const TH='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
 const OC='https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js';
-const C={bg:0x17181a,face:0x1e2023,edge:0xe9e6e1,acc:0xCC746C,heat:0xd1a35e,power:0xa7b4d6,water:0x7fb2c4,mat:0x9fb38a,senses:0xb9a3cf,city:0xc8c2b8,ok:0x8fb996,bad:0xb24f49,faint:0x6b6964,grey:0x9d9a94};
-const DARK=Object.assign({},C), LIGHT=Object.assign({},C,{bg:0xFFFFFF,face:0xFFFFFF,edge:0xB9B8B4,grey:0x8D8C87,faint:0xB9B8B4,city:0x8D8C87,acc:0xCC746C,mat:0x8D8C87,senses:0x8D8C87,heat:0xD1A35E,power:0x6E6E6B,water:0x5D7F99,ok:0x4F4F4C,bad:0xCC746C,ink:0x6E6E6B}); /* drawing */ /* white interface tokens (3 Nov 2026) */
+const C={bg:0xFFFFFF,face:0xFFFFFF,edge:0xB9B8B4,acc:0xCC746C,heat:0xD1A35E,power:0x6E6E6B,water:0x5D7F99,mat:0x8D8C87,senses:0x8D8C87,city:0x8D8C87,ok:0x4F4F4C,bad:0xCC746C,faint:0xB9B8B4,grey:0x8D8C87,ink:0x6E6E6B}; /* drawing */ /* white interface tokens (3 Nov 2026); the dark palette was removed 4 Nov 2026 (white only) */
 const light3d=()=>true; // white only (J.B., 2-3 Nov 2026: white interface, no dark option); was dark by default from 30 Oct
-function applyTheme(){ Object.assign(C,light3d()?LIGHT:DARK); if(R) R.ren.setClearColor(C.bg); if(wrap) wrap.style.background=hex(C.bg); if(labels) labels.style.color=light3d()?'#6E6E6B':'#9d9a94'; }
+function applyTheme(){ if(R) R.ren.setClearColor(C.bg); if(wrap) wrap.style.background=hex(C.bg); if(labels) labels.style.color='#6E6E6B'; }
 const hex=c=>'#'+c.toString(16).padStart(6,'0');
 const RAD=1500, NEAR=420;
 let T=null, R=null, wrap=null, labels=null, tip=null, state={};

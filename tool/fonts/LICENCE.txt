@@ -1,3 +1,9 @@
+IBM Plex Sans (Light, Regular, SemiBold), copyright 2017 IBM Corp., Reserved Font Name "Plex", licensed under the SIL Open Font License, Version 1.1. Full licence text: IBMPlexSans-OFL.txt.
+- IBMPlexSans-<weight>-Latin1.woff2 and -Pi.woff2: IBM's own split files, unmodified, from the npm package @ibm/plex-sans 1.1.0 (fonts/split/woff2). Embedded in the report and site-sheet SVG pages.
+- IBMPlexSans-Light.ttf and IBMPlexSans-SemiBold.ttf: the Google Fonts build, unmodified, from the npm package @expo-google-fonts/ibm-plex-sans 0.2.3 (renamed from IBMPlexSans_300Light.ttf and IBMPlexSans_600SemiBold.ttf). Embedded in the report PDF text pages (jsPDF needs TrueType).
+Added 4 Nov 2026; the report and sheets use these since then.
+
+No longer used by the tool since 4 Nov 2026 (kept until J.B. removes them):
 Open Sans (Light, SemiBold), copyright The Open Sans Project Authors, licensed under the SIL Open Font License, Version 1.1 (https://openfontlicense.org).
 Files from the @expo-google-fonts/open-sans package (0.2.3). Used to embed the font in the report PDF.
 Barlow (Light, Regular, SemiBold), copyright The Barlow Project Authors, SIL Open Font License 1.1; from @expo-google-fonts/barlow 0.2.3. The .sub.woff2 files are Latin subsets embedded in the site sheets.
