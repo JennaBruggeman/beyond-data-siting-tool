@@ -1,4 +1,5 @@
-# Build 2 (3 Nov 2026): new sources into the register, lot-side facts for every lot, Ratios cap, public ground floor, Comfort Inn view
+# Build 2 (3 Nov 2026) — SCOPE NOW: parts 1, 2, 3, 6, 7 only. Parts 4 and 5 are ON HOLD (Architecture is moving to a typology library). Also add the ASHRAE 62.1-2022 Addendum ag PDF /root/.claude/uploads/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/fda2b3e6-62_1_2022_ag_20240430.pdf and J.B.'s 62.1-2022 screenshots (Table 5-1, s. 5.4) to the register. A parallel agent restyles the interface: git add only your files; retry on index.lock; do not edit CSS or colours.
+#: new sources into the register, lot-side facts for every lot, Ratios cap, public ground floor, Comfort Inn view
 
 Repo `/mnt/attach/outputs`, branch `overnight-2026-10-30` only; commit per part as in REBUILD1_BRIEF_2026-11-03.md (author, trailer). Never push. No made-up figures; "?" where no register id. Hard rules block. Don't commit uploaded documents or screenshots. Do not touch tool/data/zones.json zone rows (a parallel research round is collecting new zones; leave the table shape as is). Read first: checks/architecture_mode_notes_2026-10-30.md (all 3 Nov entries), checks/agents/2026-11-03_hallfix.md, checks/research_arch_v1/heights_basement.md + _sources.json + uploads_sources.json.
 
