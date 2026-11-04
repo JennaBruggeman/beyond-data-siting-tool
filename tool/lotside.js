@@ -29,7 +29,7 @@ function lotEdges(ring,ctx){ const out=[], n=ring.length/2, ccw=sarea(ring)>0, i
         const px=x0+ux*t, py=y0+uy*t, vx=px-mx, vy=py-my, d=Math.hypot(vx,vy); if(d>PROBE_STREET||d<1e-6) continue; if((vx*nx+vy*ny)<0.5*d) continue;
         if(!best||d<best.d){ if(inRec(mx+vx*0.5,my+vy*0.5)) continue; best={d,cls:(ctx.classMap||{})[cls[c]]||'unclassified',name:cls[c]}; } }
       e.street=best; }
-    for(const t of [0.25,0.5,0.75]){ const qx=ax+dx*t+nx*PROBE_LOT, qy=ay+dy*t+ny*PROBE_LOT, p=inAny(qx,qy); if(p&&p.zone&&!e.nbr.includes(p.zone)) e.nbr.push(p.zone); if(p&&!p.zone) e.lotNoZone=true; /* 4 Nov 2026: a lot is there but its zone is not known */ }
+    for(const t of [0.25,0.5,0.75]){ const qx=ax+dx*t+nx*PROBE_LOT, qy=ay+dy*t+ny*PROBE_LOT, p=inAny(qx,qy); if(p&&p.zone&&!e.nbr.includes(p.zone)) e.nbr.push(p.zone); if(p&&!p.zone){ /* 4 Nov 2026: a parcel with no zone on record. J.B. 4 Nov: read its zone from the City zoning map (ctx.zoneAt; Edmonton: register edmZoningGeo) */ const z=ctx.zoneAt?ctx.zoneAt(qx,qy):null; if(z){ if(!e.nbr.includes(z)) e.nbr.push(z); e.zoneFromMap=true; } else e.lotNoZone=true; } }
     out.push(e); }
   return out; }
 /* group the edges on the frame's four sides. F: {ux,uy} (site.js frameOf). A side's facts: the street of highest class along it, alley, neighbour zones */
