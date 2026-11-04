@@ -9,7 +9,7 @@
 "quantities": 201,
 "conditions": 100,
 "opportunities": 14,
-"sources": 1521
+"sources": 1522
 }
 },
 "stages": [
@@ -18970,7 +18970,8 @@
 "arch_inv_cologixVan4Sheet2026": "OPERATOR CLAIM: Cologix, VAN4 Spec Sheet, VAN4.E.052026.R2 (May 2026), uploaded by J.B. 3 Nov 2026: 175 West Cordova Street; 'Site Capacity 6.5 MW'; 'Site Type Leased building, single tenant'; 'DC Space 40K SQFT'; 'Building 4-story concrete frame'; 'Multiple data halls per floor'; 'Cooling Pumped refrigerant and air-cooled chilled water'; 'Fire Suppression Dual interlock pre-action with Nitrogen (N2) VESDA'; 'Fuel Storage 24 hours'; 'Generator + UPS 5-to-make-4, distributed redundant'; 'Load Design 6-8 kW per cabinet'; 'Power Usage Effectiveness (PUE) 1.5'; 'Dual-diverse MMRs'; '6 unique network providers' — local upload (not in repo)",
 "arch_inv_cologixVan2Sheet2026": "OPERATOR CLAIM: Cologix, VAN2 Spec Sheet (May 2026), uploaded by J.B. 3 Nov 2026: 1050 West Pender Street; 'Site Capacity 2 MW'; 'Site Type Multi-tenant office tower'; 'DC Space 15K SQFT'; 'Building Office tower; concrete and brick; seismic zone 4; outside of flood plain'; 'Data Halls 3 suites'; 'Cooling N+1, efficient heat management through ceiling plenum'; 'free cooling' chimney cabinets; 'Fire Suppression In-room, cross-zoned VESDA/Dual interlocked pre-action dry-pipe'; 'Fuel storage 6,000 liters'; 'Generator + UPS 1 power entrance facility/N+1 UPS and Generator'; 'Power Usage Effectiveness (PUE) 1.25' — local upload (not in repo)",
 "arch_inv_hut8VaultSheet2026": "OPERATOR CLAIM: Hut 8 Canada, Vancouver Vault Data Center (VAN1) spec sheet, 'Specifications as at Q3 2026', uploaded by J.B. 3 Nov 2026: '900 W Hastings Street, Vancouver, BC'; 'Designed power 1 MW'; '4,155 sq ft white space (≈ 386 m²), 6,210 sq ft total'; 'Built for the Bank of Canada', 'Acquired by Hut 8 in 2022'; '4.5 ft steel-reinforced walls, solid concrete floors', '1 m thick ceilings'; 'Generator 600 kW, >48 h at full load'; 'UPS 560 kW, N+1'; '5 × 50-tonne chillers (N+1), chilled-water closed loop, in-row cooling'; 'Hot aisle containment, 693 kW IT load at capacity'; '1.3 target PUE' (design target); 'Energy source Majority renewable hydroelectricity'; 'Tier I designed'; 'Failover Hut 8 Kelowna (KEL1)' — local upload (not in repo)",
-"arch_inv_hut8Van2Sheet2026": "OPERATOR CLAIM: Hut 8 Canada, Vancouver Data Center (VAN2) spec sheet, 'As-built, as at Q3 2026', uploaded by J.B. 3 Nov 2026: '701 West Georgia Street, Vancouver, BC'; 'Designed power 0.6 MW'; '2,900 sq ft total facility (≈ 269 m²)'; '118 tonnes of CRAC cooling (N+1), 329 kW IT load at capacity'; 'Hot aisle containment'; '2 generators (435 kW total), >24 h at full load'; 'UPS 900 kW per side, double conversion'; '2N UPS'; '1.3 target PUE' (design target); 'Majority renewable hydroelectricity'; 'Tier I designed, commissioned 2015'; 'Failover Hut 8 Kelowna (KEL1)' — local upload (not in repo)"
+"arch_inv_hut8Van2Sheet2026": "OPERATOR CLAIM: Hut 8 Canada, Vancouver Data Center (VAN2) spec sheet, 'As-built, as at Q3 2026', uploaded by J.B. 3 Nov 2026: '701 West Georgia Street, Vancouver, BC'; 'Designed power 0.6 MW'; '2,900 sq ft total facility (≈ 269 m²)'; '118 tonnes of CRAC cooling (N+1), 329 kW IT load at capacity'; 'Hot aisle containment'; '2 generators (435 kW total), >24 h at full load'; 'UPS 900 kW per side, double conversion'; '2N UPS'; '1.3 target PUE' (design target); 'Majority renewable hydroelectricity'; 'Tier I designed, commissioned 2015'; 'Failover Hut 8 Kelowna (KEL1)' — local upload (not in repo)",
+"arch_inv_estruxVan1Sheet": "OPERATOR CLAIM: eStruxture, VAN-1 datasheet EN-V5 (undated), uploaded by J.B. 3 Nov 2026: '55 East 7th Avenue, Vancouver'; 'Building - 10,000 sq. ft.', 'Land - 6,000 sq. ft.'; '7,500 sq. ft. of cabinet space'; '4 halls and 2.4MW of critical IT load'; 'Supports up to 30kW/cabinet'; 'YEAR BUILT 1974'; 'Single building with 3 floors of office and infrastructure space'; '12” thick seismic shear wall spanning its core'; 'FLOOD PLAIN 79’ (24 m) above sea level'; 'Single high voltage entry with a dedicated 2.5MVA unit substation'; 'Power feed from a single substation'; 'POWER PROVIDER BC Hydro'; 'Tier 1, N+1 UPS solution available'; 'UPS 2N solution available upon request'; 'Minimum of 28 hours on site fuel'; 'Hot aisle/cold aisle containment'; '40 Ton mechanical Loop1, N+1 250 Ton Mechanical Loop2' (as laid out in the PDF; reading of the two loops ?); 'N+1 mechanical redundancy'; 'Mechanical design based on optimal free cooling (8+ months / year)'; 'Novec clean agent fire suppression'; 'VESDA'; 'One Meet Me Room with 3 fiber entrances' — local upload (not in repo)"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -22138,7 +22139,8 @@
 "arch_inv_cologixVan4Sheet2026": "operator claim",
 "arch_inv_cologixVan2Sheet2026": "operator claim",
 "arch_inv_hut8VaultSheet2026": "operator claim",
-"arch_inv_hut8Van2Sheet2026": "operator claim"
+"arch_inv_hut8Van2Sheet2026": "operator claim",
+"arch_inv_estruxVan1Sheet": "operator claim"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -23074,7 +23076,8 @@
 "arch_inv_cologixVan4Sheet2026": "claude",
 "arch_inv_cologixVan2Sheet2026": "claude",
 "arch_inv_hut8VaultSheet2026": "claude",
-"arch_inv_hut8Van2Sheet2026": "claude"
+"arch_inv_hut8Van2Sheet2026": "claude",
+"arch_inv_estruxVan1Sheet": "claude"
 },
 "source_city": {
 "abgas": "edm",
@@ -24596,7 +24599,8 @@
 "arch_inv_cologixVan4Sheet2026": "gen",
 "arch_inv_cologixVan2Sheet2026": "gen",
 "arch_inv_hut8VaultSheet2026": "van",
-"arch_inv_hut8Van2Sheet2026": "van"
+"arch_inv_hut8Van2Sheet2026": "van",
+"arch_inv_estruxVan1Sheet": "van"
 },
 "city_gaps": {
 "van": [
