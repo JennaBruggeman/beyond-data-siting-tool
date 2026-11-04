@@ -220,3 +220,8 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - Twin dropped (J.B. 4 Nov 2026: "makes things complicated"). Overnight shelter is out of the library; day-use warming room stays in Emergency hub. Library v1 is now 8 typologies + 2 add-ons.
 - Aquaponics (J.B. 4 Nov 2026): commercial ratio 111 m² greenhouse per t/yr of fish; greenhouse sized by the lot, fish farm sized to match.
 - Heat cascade order (J.B. 4 Nov 2026): the tool orders stages by sourced supply temperature, hottest first; pool vs greenhouse order "?" until the pool supply temperature is sourced.
+
+## Schematic compliance per typology (J.B., 4 Nov 2026)
+- Each typology is worked through as one building, schematically: floor plans per storey, a section, cores (stairs, elevators, shafts), corridors and shared lobbies, rated walls and floors, entrances, loading and service routes, the full data centre (hall + all support rooms) inside the secure line, and a compliance table with clause per item ("?" where no source).
+- Method: one shared code checklist first (exits, travel distance, occupant load, fire separations, firewalls, spatial separation, accessibility, washrooms, mezzanines, sprinklers, service rooms, zoning envelope, plant distances, noise), then typology by typology; J.B. reviews each before the next. Start: Emergency hub on 64 Airport Rd NW and 339 1st Ave E.
+- Mockup issue it answers: blocks read as separate buildings, in-between space undefined, grey = hall only.
