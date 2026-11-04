@@ -7,7 +7,7 @@
 (function(){
 'use strict';
 const BD=window.BD=window.BD||{};
-const FILES=['envelope','size','equipment','noise','heat','water','plant_units','zones','addons','arch','dc_rooms','lotside']; // one per subject
+const FILES=['envelope','size','equipment','noise','heat','water','plant_units','zones','addons','arch','dc_rooms','lotside','viewpoints']; // one per subject
 const plain=o=>{
   if(Array.isArray(o)) return o.map(plain);
   if(o&&typeof o==='object'){

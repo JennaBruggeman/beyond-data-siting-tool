@@ -1,0 +1,18 @@
+{
+ "_about": "Build 2 (3 Nov 2026, part 6): named viewpoints for the People step, keyed city:lot id. Each is a point inside a building in the tool's building tiles; the eye sits at that building's corner nearest the lot, at its top floor (same rule as the homes' sight lines in addons.js). The sight line runs to the massing's roof corners and the cooling plant. Context only, nothing scored.",
+ "lots": {
+  "edm:146402": [
+   {
+    "name": "Hotel beside the lot",
+    "ask": "Comfort Inn (J.B., 3 Nov 2026): no Comfort Inn found in the building data or in OpenStreetMap near the lot (?). The one hotel there is the tower beside the lots (City 3D Buildings object 15434; its address is not in our building data), named 'Ramada' and 'Edmonton Inn' in OpenStreetMap. Shown here as the hotel; whether it is the one J.B. means: ?",
+    "pt": {
+     "v": [
+      -113.5230114,
+      53.5686294
+     ],
+     "src": "arch_vp_osmE06"
+    }
+   }
+  ]
+ }
+}
