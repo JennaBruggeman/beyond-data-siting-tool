@@ -214,7 +214,7 @@ function bodyHTML(B,forDoc){ const {D,fig,opts,spec,key,items,appx}=B; const byK
   if(appx.length&&D.tier==='full') h+=sec('Appendix: what each result is worked out from',`<dl>${appx.map(([k,v])=>`<dt>${esc(k)}</dt><dd class="sub">${esc(v)}</dd>`).join('')}</dl>`);
   if(D.srcs.length) h+=forDoc?sec('Sources',D.srcs.map(s=>`<p class="sub">${esc(s)}</p>`).join('')):`<details class="fp"><summary>Sources (${D.srcs.length})</summary>${D.srcs.map(s=>`<p class="src">${esc(s)}</p>`).join('')}</details>`;
   return h; }
-const RHEAD={resident:'What it would mean for you',community:'What it would mean for the neighbourhood',full:'How it is worked out'};
+const RHEAD={resident:'What it would mean for you',full:'How it is worked out'};
 async function reportView(){ BD.flow.capture&&BD.flow.capture(); BD.S.view2='tab'; BD.S.tab='report'; BD.scene3d&&BD.scene3d.hide(); document.body.classList.add('wide');
   $('#side').innerHTML='<h2>Report</h2><p class="sub">Drawing the report…</p>'; const B=await build(PAL.screen); const D=B.D;
   $('#side').innerHTML=`<h2>Report</h2><p class="lead">${esc(RHEAD[D.tier])}: <span class="k">${esc(D.facts[0][1])}</span>.</p><p class="sub">Written for: ${esc(D.level)}. Change “Showing” above for another level.</p>

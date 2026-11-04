@@ -1,6 +1,7 @@
 /* Beyond Data — tiers (J.B. and Xun, 19 Oct 2026; audit/template_ideas_2026-10-19.md).
-   Three ways through the same tool: residents ("What it means for me"), community and councillors ("What it means for the
-   neighbourhood"), professionals ("How it is worked out"). Every part of the diagram runs in every tier; a tier only changes what is
+   Ways through the same tool: residents ("What it means for me"), professionals ("How it is worked out", Engineering) and
+   architects (Architecture). 4 Nov 2026: the Community template is dropped (J.B. 3 Nov: Resident, Municipal, Engineering, Architecture;
+   Municipal not built yet). Every part of the diagram runs in every tier; a tier only changes what is
    asked and shown. The tier is chosen right after the landing page and can be changed at any time without losing the site.
    Residents are not asked the set-up questions: each answer is assumed, shown, and can be changed. Their size starts at 2.5 MW,
    typical of data centres already built inside Vancouver, Edmonton and Calgary (operator claims; audit/typical_size_sources_2026-10-19.md),
@@ -11,7 +12,6 @@ const BD=window.BD; const {$,esc}=BD;
 const KEY='bd-tier';
 const TIERS=[
  {id:'resident',short:'Everyday',name:'What it means for me',who:'For residents and neighbours',does:'Only where it is, and whether the plant sits on the roof or in the yard. Everything else is a typical choice, shown.'},
- {id:'community',short:'Civic',name:'What it means for the neighbourhood',who:'For councillors, community groups and receivers of heat',does:'Every set-up choice; who gains and loses, the money, the approvals.'},
  {id:'full',short:'Engineering',name:'How it is worked out',who:'For engineers and bylaw professionals',does:'Everything, with formulas, sources and confidence.'},
  {id:'arch',short:'Architecture',name:'What it could hold',who:'For architects and designers',does:'Place public programs with the data centre as simple massing, and test the space and heat they share. Nothing is scored.'}];
 const TYPICAL_MW=2.5;
@@ -25,8 +25,8 @@ BD.TPL=null;
 fetch('templates.json').then(r=>r.ok?r.json():null).then(d=>{ BD.TPL=d; }).catch(()=>{});
 /* 2 Nov 2026 fix pass: A-eng (J.B. triage 30 Oct 2026): an add-on whose register try_menu entry has tier 'full' (greywater, blackwater,
    blowdown recovery, condensate, cleaner backup fuel, hot or chilled water tank, buying new clean power) shows only in that template */
-BD.tierAllows=t=>{ const rank={resident:0,community:1,full:2,arch:1}; return !t||!(t in rank)||rank[t]<=rank[BD.tier()]; };
-BD.tierShows=(node,t)=>{ const T=BD.TPL; if(!T||!T.nodes[node]) return true; const rank={resident:0,community:1,full:2,arch:1}, nt=T.nodes[node].tier, tt=t||BD.tier(); return nt==='arch_only'?tt==='arch':rank[nt]<=rank[tt]; };
+BD.tierAllows=t=>{ const rank={resident:0,full:2,arch:1}; return !t||!(t in rank)||rank[t]<=rank[BD.tier()]; };
+BD.tierShows=(node,t)=>{ const T=BD.TPL; if(!T||!T.nodes[node]) return true; const rank={resident:0,full:2,arch:1}, nt=T.nodes[node].tier, tt=t||BD.tier(); return nt==='arch_only'?tt==='arch':rank[nt]<=rank[tt]; };
 
 /* ---------- the choice, inside the landing card ---------- */
 // thumbnail of the real diagram: one column per stage, the same wires; this tier's parts lit, the rest faded
@@ -39,7 +39,7 @@ function layout(){ const G=BD.TPL&&BD.TPL.graph; if(!G) return null; if(LAY) ret
     const nc=Math.ceil(L.length/MAXR), rows=Math.ceil(L.length/nc); /* drawing */
     L.sort((a,b)=>key(a)-key(b)).forEach((id,i)=>pos[id]=[x+(i%nc)*sub,6+Math.floor(i/nc)*gy+(MAXR-rows)*gy/2]); x+=(nc-1)*sub+gap; }); /* drawing */
   const H=12+(MAXR-1)*gy, W=x-gap+6; return LAY={pos,W,H,edges:G.edges}; } /* drawing */
-function preview(id){ const T=BD.TPL, Y=layout(); if(!T||!Y) return ''; const rank={resident:0,community:1,full:2,arch:1}; const lit=k=>T.nodes[k]&&(T.nodes[k].tier==='arch_only'?id==='arch':rank[T.nodes[k].tier]<=rank[id]); /* drawing */
+function preview(id){ const T=BD.TPL, Y=layout(); if(!T||!Y) return ''; const rank={resident:0,full:2,arch:1}; const lit=k=>T.nodes[k]&&(T.nodes[k].tier==='arch_only'?id==='arch':rank[T.nodes[k].tier]<=rank[id]); /* drawing */
   const ids=Object.keys(T.nodes), n=ids.length, on=ids.filter(lit).length; /* drawing */
   const wires=Y.edges.filter(([a,b])=>Y.pos[a]&&Y.pos[b]).map(([a,b])=>{ const [x1,y1]=Y.pos[a],[x2,y2]=Y.pos[b], on2=lit(a)&&lit(b); return `<path d="M${x1} ${y1}C${(x1+x2)/2} ${y1} ${(x1+x2)/2} ${y2} ${x2} ${y2}" fill="none" stroke="${on2?'var(--accent)':'var(--line-2)'}" stroke-opacity="${on2?.55:.35}" stroke-width=".5"/>`; }).join(''); /* drawing */
   const dots=ids.filter(k=>Y.pos[k]).map(k=>{ const [x,y]=Y.pos[k]; return `<circle cx="${x}" cy="${y}" r="1.6" fill="${lit(k)?'var(--accent)':'var(--line-2)'}"/>`; }).join(''); /* drawing */
@@ -102,7 +102,7 @@ function residentCard(){ const A=BD.S.answers, m=BD.model&&BD.model(); if(!m) re
    <p class="sub">Cooling units and backup generators together. ${A.resNote?esc(A.resNote)+' ':''}${A.resPlant?(A.resPlant==='roof'?'The yard stays as free as the lot allows.':'The building gets shorter to leave the yard for plant.'):whereNow||(where==='roof'?'The yard stays free; whatever the roof cannot hold is placed in the yard.':'The building gets shorter to leave the yard for plant.')}</p>
    ${nothing?`<p class="dwarn">Nothing fits on this lot with these choices: ${esc(probs.join(' '))} Change a choice below, or try another lot.</p>`:`
    <h3>How big</h3><p class="sub">${M&&M.sizedTo?`${esc(A.mw.toFixed(1))} MW of servers: ${store}, any shape (our arithmetic: 460 m² of hall per MW ÷ 0.6 hall share, the midpoints)${''/* 2 Nov 2026 fix pass: D-arith */}`:`The most the zone allows: ${store}, about ${f.mw[0].toFixed(1)}–${hi.toFixed(1)} MW of servers depending on how tightly racks are packed${hi>=40?' (the tool stops at 40 MW)':''}`}. "Typical" is the size of data centres already built inside Vancouver, Edmonton and Calgary, about 2–2.5 MW (operator claims)${hi<TYPICAL_MW?`; this lot fits only ${hi.toFixed(1)} MW`:''}.</p>`}
-   <h3>Everything else, chosen for you</h3><ul class="assumed">${rows}</ul><p class="sub">To change these, set "Showing" at the top to the neighbourhood or how-it-is-worked-out view.</p>
+   <h3>Everything else, chosen for you</h3><ul class="assumed">${rows}</ul><p class="sub">To change these, set "Showing" at the top to how it is worked out.</p>
    ${!nothing&&probs.length?`<div class="fstuck" role="alert"><b>This set-up doesn't work on this lot.</b><ul>${probs.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><div class="fsx"><button class="btn" id="rFit">Use the largest size that fits (${hi.toFixed(1)} MW)</button></div></div>`:''}
    <div class="dnav"><button class="sec" id="rB">← The site</button><button class="pri" id="rN" ${nothing||probs.length?'disabled':''}>${nothing||probs.length?'Fix the set-up to go on':'What fits here →'}</button></div></div>`;
   const sd=$('#side');

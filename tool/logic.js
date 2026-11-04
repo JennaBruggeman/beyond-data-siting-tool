@@ -8,9 +8,9 @@
 (function(){
 'use strict';
 const BD=window.BD; const {$,esc}=BD;
-const RANK={resident:0,community:1,full:2,arch:1,arch_only:9};
-const WHO={resident:'residents',community:'the neighbourhood',full:'engineers',arch:'architects',arch_only:'the Architecture template'};
-const LEVEL={resident:'What it means for me',community:'What it means for the neighbourhood',full:'How it is worked out'};
+const RANK={resident:0,full:2,arch:1,arch_only:9}; /* 4 Nov 2026: Community dropped; a node tagged 'arch' shows in Architecture and Engineering */
+const WHO={resident:'residents',full:'engineers',arch:'architects',arch_only:'the Architecture template'};
+const LEVEL={resident:'What it means for me',full:'How it is worked out'};
 let L=null, UP={}, ORDER={};
 fetch('logic.json').then(r=>r.ok?r.json():null).then(d=>{ if(!d) return; L=d; Object.keys(d.nodes).forEach((k,i)=>ORDER[k]=i); for(const [a,b] of d.edges) (UP[b]=UP[b]||[]).push(a); render(); }).catch(()=>{});
 const tierNow=()=>(BD.tier&&BD.tier())||'full';
@@ -63,7 +63,7 @@ const known=ids=>(ids||[]).filter(i=>!L||L.nodes[i]);
 function secNodes(step,title){ return known(SEC[step+':'+title]||null); }
 function oppNodes(name){ const o=O(); return known(o&&o.opp_quantities&&o.opp_quantities[name]); }
 function addonNodes(id){ const o=O(), a=o&&(o.addons||[]).find(x=>x.id===id||x.name===id); return known(a&&a.quantities); }
-function tierOf(ids){ if(!L||!ids||!ids.length) return null; let r=9; for(const i of ids){ const n=L.nodes[i]; if(n) r=Math.min(r,RANK[n.t]); } return r===9?null:['resident','community','full'][r]; }
+function tierOf(ids){ if(!L||!ids||!ids.length) return null; let r=9; for(const i of ids){ const n=L.nodes[i]; if(n) r=Math.min(r,RANK[n.t]); } return r===9?null:['resident','arch','full'][r]; }
 const shows=(ids,t)=>{ const x=tierOf(ids); return x===null||RANK[x]<=RANK[t||tierNow()]; };
 BD.shownMore=BD.shownMore||new Set();
 const siteKey=()=>{ const a=BD.S&&BD.S.sel&&BD.S.sel.a; return (a&&a[0])||''; };
@@ -175,7 +175,7 @@ function detail(k){ const n=L.nodes[k]; const src=(n.src||[]).map(s=>{ const o=O
   return `<button type="button" class="lgback" id="lgBack">← All the parts lit</button><h4>${esc(n.n)}</h4>
   <dl class="lgd">${n.f?`<dt>How</dt><dd>${esc(n.f)}</dd>`:''}${n.c?`<dt>Values</dt><dd>${esc(n.c)}</dd>`:''}${n.u?`<dt>Unit</dt><dd>${esc(n.u)}</dd>`:''}
   <dt>How sure</dt><dd>${n.q!=null?esc(n.q+'% — '+conf(n.q)):'not rated'}${n.st?' · '+esc(n.st):''}</dd>
-  <dt>Shown to</dt><dd>${n.t==='resident'?'everyone':n.t==='community'?'the neighbourhood and professionals':'professionals'}</dd><dt>Why</dt><dd>${esc(n.w)}</dd>
+  <dt>Shown to</dt><dd>${n.t==='resident'?'everyone':n.t==='arch'?'architects and engineers':n.t==='arch_only'?'architects':'engineers'}</dd><dt>Why</dt><dd>${esc(n.w)}</dd>
   ${n.st2?`<dt>From</dt><dd>${esc(n.st2)}</dd>`:''}</dl>${src?`<p class="lgs">Sources</p><ul class="lgsl">${src}</ul>`:''}`; }
 
 /* ---------- what is open now ---------- */

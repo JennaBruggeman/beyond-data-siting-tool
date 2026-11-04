@@ -33327,7 +33327,8 @@
    }
   },
   "fix_pass_log": {
-   "2 Nov 2026": "checks/fix_pass_2026-11-02_SPEC.md; report checks/fix_pass_2026-11-02_DONE.md"
+   "2 Nov 2026": "checks/fix_pass_2026-11-02_SPEC.md; report checks/fix_pass_2026-11-02_DONE.md",
+   "4 Nov 2026": "Community template dropped (four_templates_2026_11_04.py); report checks/agents/2026-11-04_night.md"
   },
   "dropped_programs": {
    "hospital": "J.B. 2 Nov 2026: cut (clinic instead)",
@@ -33342,6 +33343,26 @@
    "arch_up2_b52": "arch_csa_b52 (3 Nov 2026: one entry per standard)",
    "arch_up2_c448": "arch_csa_c448 (3 Nov 2026: one entry per standard)",
    "arch_up2_b805": "arch_csa_b805 (3 Nov 2026: one entry per standard)"
+  },
+  "templates": {
+   "date": "4 Nov 2026",
+   "decided": "J.B., 3 Nov 2026 (checks/architecture_mode_notes_2026-10-30.md, Templates)",
+   "templates": [
+    "resident",
+    "municipal (not built)",
+    "full (Engineering)",
+    "arch (Architecture)"
+   ],
+   "dropped": [
+    "community"
+   ],
+   "tier_tags": {
+    "resident": "every template",
+    "arch": "Architecture and Engineering (was community)",
+    "full": "Engineering only",
+    "arch_only": "Architecture only"
+   },
+   "where": "register/make_templates.py (T); tool/tiers.js, flow.js, logic.js, report.js, report3.js; register/diagram_template.html"
   }
  },
  "quantities": [

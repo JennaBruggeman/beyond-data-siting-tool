@@ -10,13 +10,6 @@
    "asks": "where, and maybe how big; other answers assumed, shown and changeable"
   },
   {
-   "id": "community",
-   "short": "Civic",
-   "name": "What it means for the neighbourhood",
-   "who": "councillors, community groups, receivers, policy planners",
-   "asks": "every setup question"
-  },
-  {
    "id": "full",
    "short": "Engineering",
    "name": "How it is worked out",
@@ -32,6 +25,7 @@
   }
  ],
  "rule": "every node runs in every tier; a tier sets what is asked and shown; facts are never switched off",
+ "tier_note": "node tier = the first template that shows it: 'resident' (every template), 'arch' (Architecture and Engineering), 'full' (Engineering only), 'arch_only' (Architecture only). Community dropped 3 Nov 2026 (J.B.); Municipal not built yet.",
  "nodes": {
   "parcel": {
    "tier": "resident",
@@ -51,7 +45,7 @@
    "why": "new, shared, retrofit or leased: assumed for residents, shown and changeable"
   },
   "receivers": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "receiver"
    ],
@@ -65,7 +59,7 @@
    "why": "engineering input"
   },
   "receptors": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "neighbours"
    ],
@@ -80,7 +74,7 @@
    "why": "what the land is zoned for"
   },
   "cooling_type": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "operator",
     "neighbours"
@@ -135,7 +129,7 @@
    "why": "zoning detail"
   },
   "host_building": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "host"
    ],
@@ -156,7 +150,7 @@
    "why": "engineering input"
   },
   "floor_area": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "host",
     "city"
@@ -186,7 +180,7 @@
    "why": "engineering"
   },
   "it_load_actual": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "operator",
     "utility",
@@ -202,7 +196,7 @@
    "why": "engineering"
   },
   "envelope": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "city",
     "neighbours"
@@ -234,7 +228,7 @@
    "why": "how big a data centre fits here"
   },
   "rack_count": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "operator"
    ],
@@ -269,7 +263,7 @@
    "why": "engineering"
   },
   "cooling_units": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "neighbours",
     "operator"
@@ -277,7 +271,7 @@
    "why": "the units on the roof or in the yard"
   },
   "generator_sets": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "neighbours",
     "operator"
@@ -320,7 +314,7 @@
    "why": "engineering"
   },
   "heat_pumps": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "receiver",
     "operator"
@@ -349,7 +343,7 @@
    "why": "engineering"
   },
   "hr_plant_room": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "receiver",
     "host"
@@ -357,7 +351,7 @@
    "why": "the room the heat plant needs"
   },
   "power_allocation": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "operator",
     "utility",
@@ -375,7 +369,7 @@
    "why": "engineering and regulation"
   },
   "refuge_services": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "neighbours",
     "city"
@@ -398,7 +392,7 @@
    "why": "what the refuge is for in each crisis"
   },
   "it_load_share": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "operator"
    ],
@@ -427,7 +421,7 @@
    "why": "engineering"
   },
   "security_layers": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "neighbours",
     "operator"
@@ -435,7 +429,7 @@
    "why": "how closed the building is"
   },
   "heat_rejected": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "receiver",
     "climate"
@@ -473,7 +467,7 @@
    "why": "engineering"
   },
   "heat_delivered": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "receiver"
    ],
@@ -507,7 +501,7 @@
    "sens": "moves size fit by up to 11%; moves it load actual by up to 10%; moves grid co2 by up to 10%"
   },
   "spare_capacity": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "utility",
     "ratepayers"
@@ -522,7 +516,7 @@
    "why": "engineering"
   },
   "flexible_load": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "utility",
     "ratepayers"
@@ -553,14 +547,14 @@
    "why": "engineering"
   },
   "water_behind_electricity": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "climate"
    ],
    "why": "water used to make its power"
   },
   "rainwater": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "utility"
    ],
@@ -575,7 +569,7 @@
    "why": "carbon from its electricity"
   },
   "generator_co2": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "climate"
    ],
@@ -589,14 +583,14 @@
    "why": "air near the site"
   },
   "embodied_it": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "climate"
    ],
    "why": "carbon in the servers"
   },
   "embodied_building": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "climate"
    ],
@@ -668,14 +662,14 @@
    "why": "engineering"
   },
   "pv_roof": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "climate"
    ],
    "why": "its own solar"
   },
   "pv_facade": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "climate",
     "neighbours"
@@ -712,7 +706,7 @@
    "why": "vibration"
   },
   "workload_control": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "operator",
     "public"
@@ -749,7 +743,7 @@
    "why": "operator's cost"
   },
   "water_supply": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "utility",
     "public"
@@ -757,7 +751,7 @@
    "why": "water the city can supply"
   },
   "existing_building": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "host",
     "city"
@@ -779,7 +773,7 @@
    "why": "operator's choice"
   },
   "reclaimed_makeup": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "utility"
    ],
@@ -816,7 +810,7 @@
    "why": "engineering"
   },
   "flood_exposure": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "city"
    ],
@@ -830,7 +824,7 @@
    "why": "engineering"
   },
   "offerable_area": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "host",
     "public"
@@ -868,7 +862,7 @@
    "sens": "moves lcoh by up to 67%"
   },
   "receiver_demand": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "receiver"
    ],
@@ -876,7 +870,7 @@
    "sens": "moves homes heated by up to 15%; moves lcoh by up to 18%"
   },
   "deprivation": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "neighbours",
     "public"
@@ -899,7 +893,7 @@
    "why": "buildings nearby that could use the heat"
   },
   "competing_sources": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "receiver",
     "utility"
@@ -940,7 +934,7 @@
    "why": "homes its heat could warm"
   },
   "greenhouse_area": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "receiver",
     "public"
@@ -948,7 +942,7 @@
    "why": "greenhouse"
   },
   "aquaculture_tonnes": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "receiver"
    ],
@@ -963,14 +957,14 @@
    "why": "EV charging nearby"
   },
   "ev_area": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "city"
    ],
    "why": "space for charging"
   },
   "stored_heat": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "receiver"
    ],
@@ -984,21 +978,21 @@
    "why": "engineering"
   },
   "sewage_heat": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "utility"
    ],
    "why": "a rival heat source"
   },
   "copper_tonnes": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "future"
    ],
    "why": "materials to recover"
   },
   "ewaste": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "future",
     "public"
@@ -1006,7 +1000,7 @@
    "why": "electronic waste"
   },
   "rare_earth": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "future",
     "nations"
@@ -1014,7 +1008,7 @@
    "why": "rare earths"
   },
   "battery": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "utility",
     "ratepayers"
@@ -1022,7 +1016,7 @@
    "why": "batteries for the grid"
   },
   "btes": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "receiver",
     "neighbours"
@@ -1045,7 +1039,7 @@
    "sens": "moves lcoh by up to 22%"
   },
   "price_floor": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "operator",
     "receiver"
@@ -1053,7 +1047,7 @@
    "why": "lowest price the operator could take"
   },
   "price_ceiling": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "receiver",
     "ratepayers"
@@ -1061,7 +1055,7 @@
    "why": "most a buyer would pay"
   },
   "window": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "operator",
     "receiver"
@@ -1077,7 +1071,7 @@
    "sens": "moves lcoh by up to 50%"
   },
   "lcoh": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "receiver",
     "ratepayers"
@@ -1092,7 +1086,7 @@
    "why": "investor's return"
   },
   "risk_term": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "receiver",
     "operator"
@@ -1100,7 +1094,7 @@
    "why": "what if the data centre leaves"
   },
   "capex_split": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "operator",
     "receiver",
@@ -1125,21 +1119,21 @@
    "why": "operator's cost"
   },
   "horizons": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "future"
    ],
    "why": "how long each part lasts"
   },
   "lead_time": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "utility"
    ],
    "why": "time to connect"
   },
   "grid_headroom": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "utility",
     "ratepayers"
@@ -1170,7 +1164,7 @@
    "why": "the noise rule that protects neighbours"
   },
   "licence_flag": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "utility",
     "nations"
@@ -1185,7 +1179,7 @@
    "why": "rules detail"
   },
   "row_cost": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "city",
     "public"
@@ -1193,7 +1187,7 @@
    "why": "cost of using the street"
   },
   "reserved_cost": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "ratepayers",
     "utility"
@@ -1201,7 +1195,7 @@
    "why": "cost of unused grid capacity"
   },
   "lrmc_bc": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "ratepayers"
    ],
@@ -1216,7 +1210,7 @@
    "why": "is it allowed here"
   },
   "rezoning_price": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "city",
     "public"
@@ -1268,7 +1262,7 @@
    "why": "engineering"
   },
   "displaced_source": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "receiver",
     "climate"
@@ -1288,7 +1282,7 @@
    "why": "counter-example for professionals"
   },
   "ledger": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "operator",
     "host",
@@ -1309,7 +1303,7 @@
    "why": "the trade-offs, in each tier's words"
   },
   "commitment": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "receiver",
     "operator"
@@ -1317,7 +1311,7 @@
    "why": "how firm the exchange is"
   },
   "futures": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "future",
     "public"
@@ -1325,7 +1319,7 @@
    "why": "what it could become"
   },
   "property_tax": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "city",
     "public"
@@ -1348,7 +1342,7 @@
    "why": "tax detail"
   },
   "afterlife": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "future",
     "public"
@@ -1356,7 +1350,7 @@
    "why": "what happens when it closes"
   },
   "heat_flux_site": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "neighbours",
     "climate"
@@ -1385,7 +1379,7 @@
    "why": "urban heat in the area"
   },
   "air_permit_trigger": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "city",
     "neighbours"
@@ -1416,7 +1410,7 @@
    "why": "what a drought would ask of it"
   },
   "restriction_history": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "utility",
     "public"
@@ -1446,7 +1440,7 @@
    "why": "whether it could shelter people after an earthquake"
   },
   "battery_code_path": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "city",
     "neighbours"
@@ -1461,7 +1455,7 @@
    "why": "whose lands these are"
   },
   "city_commitments": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "nations",
     "city"
@@ -1469,14 +1463,14 @@
    "why": "City commitments to the Nations"
   },
   "vibration_target": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "neighbours"
    ],
    "why": "vibration limit (reference)"
   },
   "embodied_rule": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "climate",
     "city"
@@ -1484,7 +1478,7 @@
    "why": "embodied carbon rule"
   },
   "heat_value_split": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "operator",
     "utility",
@@ -1501,7 +1495,7 @@
    "why": "effect on household power bills"
   },
   "ev_repay": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "neighbours",
     "operator"
@@ -1509,7 +1503,7 @@
    "why": "how much an EV port must sell to repay itself"
   },
   "pv_lcoe": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "operator"
    ],
@@ -1532,7 +1526,7 @@
    "why": "engineering"
   },
   "stormwater_volume": {
-   "tier": "community",
+   "tier": "arch",
    "parties": [
     "city",
     "neighbours"
@@ -1716,68 +1710,6 @@
     "id": "spec",
     "title": "Could become",
     "what": "one page for each one you chose"
-   },
-   {
-    "id": "sources",
-    "title": "Sources",
-    "what": "as text"
-   }
-  ],
-  "community": [
-   {
-    "id": "cover",
-    "title": "The lot",
-    "what": "address, the site drawn, four numbers"
-   },
-   {
-    "id": "fits",
-    "title": "What fits",
-    "what": "plan, section, how big"
-   },
-   {
-    "id": "flows",
-    "title": "What moves in and out",
-    "what": "electricity, heat, water, carbon"
-   },
-   {
-    "id": "heat",
-    "title": "Heat",
-    "what": "who could take it, at what cost"
-   },
-   {
-    "id": "power",
-    "title": "Power",
-    "what": "the meter, generators, the grid"
-   },
-   {
-    "id": "water",
-    "title": "Water",
-    "what": "evaporated against rain"
-   },
-   {
-    "id": "time",
-    "title": "Over time, and next door",
-    "what": "50 years; sound; who is within 1 km"
-   },
-   {
-    "id": "opps",
-    "title": "Opportunities",
-    "what": "six tests for each"
-   },
-   {
-    "id": "spec",
-    "title": "Could become",
-    "what": "one page for each one you chose"
-   },
-   {
-    "id": "options",
-    "title": "Three options",
-    "what": "what each gains and gives up"
-   },
-   {
-    "id": "cities",
-    "title": "Two cities",
-    "what": "the same design in both"
    },
    {
     "id": "sources",
@@ -4165,7 +4097,6 @@
   ]
  },
  "resident_count": 42,
- "community_count": 119,
  "full_count": 202,
  "arch_count": 135,
  "drivers": {

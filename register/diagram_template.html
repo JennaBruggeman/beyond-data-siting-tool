@@ -248,7 +248,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
     <button id="m-structure" aria-pressed="true">Structure</button>
     <button id="m-example" aria-pressed="false">Worked example</button>
     <span class="citysw"><button id="c-van" aria-pressed="false">Vancouver</button><button id="c-edm" aria-pressed="false">Edmonton</button><button id="c-both" aria-pressed="true">Both</button></span>
-    <span class="citysw tplsw" role="group" aria-label="Template"><button id="t-resident" aria-pressed="false" title="What it means for me">Everyday</button><button id="t-community" aria-pressed="false" title="What it means for the neighbourhood">Civic</button><button id="t-full" aria-pressed="true" title="How it is worked out">Technical</button></span><span id="tcount" class="tcount"></span>
+    <span class="citysw tplsw" role="group" aria-label="Template"><button id="t-resident" aria-pressed="false" title="What it means for me">Everyday</button><button id="t-full" aria-pressed="true" title="How it is worked out">Engineering</button><button id="t-arch" aria-pressed="false" title="What it could hold">Architecture</button></span><span id="tcount" class="tcount"></span>
   </div>
   <input id="q" class="logic-only" type="search" placeholder="Find a quantity, condition, party or source" aria-label="Search">
   <select id="heading" class="logic-only" aria-label="Filter conditions by heading"><option value="">All headings</option></select>
@@ -368,9 +368,9 @@ function ring(g,cx,cy,conf,r=9){ el('circle',{class:'ring-track',cx,cy,r},g); if
 function clip(s,n){s=String(s||'');return s.length>n?s.slice(0,n-1)+'…':s}
 let city='both'; const SC=D.source_city||{};
 // templates (step 6, 20 Oct 2026): the same templates.json the tool reads; a part above the chosen template is drawn faint and dashed (it still runs)
-const TPL=JSON.parse(document.getElementById('tpl').textContent||'null')||{nodes:{},tiers:[],reports:{}}; let tier='full'; const TR={resident:0,community:1,full:2};
-const TNAME={resident:'What it means for me',community:'What it means for the neighbourhood',full:'How it is worked out'};
-const onTier=id=>{ const t=TPL.nodes[id]; return !t||TR[t.tier]<=TR[tier]; };
+const TPL=JSON.parse(document.getElementById('tpl').textContent||'null')||{nodes:{},tiers:[],reports:{}}; let tier='full'; const TR={resident:0,arch:1,full:2}; /* 4 Nov 2026: Community dropped (J.B. 3 Nov); Architecture shows 'arch' and its own 'arch_only' parts */
+const TNAME={resident:'What it means for me',arch:'What it could hold (Architecture)',full:'How it is worked out (Engineering)',arch_only:'Architecture only'};
+const onTier=id=>{ const t=TPL.nodes[id]; return !t||(t.tier==='arch_only'?tier==='arch':TR[t.tier]<=TR[tier]); };
 function applyTier(){ [...gNodes.children].forEach(g=>g.classList.toggle('off',!onTier(g.dataset.id))); [...gWires.children].forEach(w=>w.classList.toggle('off',!onTier(w.dataset.from)||!onTier(w.dataset.to)));
   const ids=Object.keys(TPL.nodes), on=ids.filter(onTier).length; const tc=document.getElementById('tcount'); if(tc) tc.textContent=`${on} of ${ids.length} parts shown`; }
 function tierBlock(){ const T=(TPL.tiers||[]).find(x=>x.id===tier)||{}; const pages=(TPL.reports||{})[tier]||[]; const all=(TPL.reports||{}).full||[];
@@ -611,7 +611,7 @@ function renderInspector(){
       ${n.sources&&n.sources.length?citySources(n):''}</dl>`;
     }
   }
-  { const t=TPL.nodes[selected]; if(t) h+=`<div class="kind" style="margin-top:16px">Templates</div><p style="font-size:12.5px;margin:6px 0">Shown from: <b>${esc(TNAME[t.tier]||t.tier)}</b>${TR[t.tier]>0?` (and fuller)`:' (all three)'}. Affects: ${esc((t.parties||[]).join(', ')||'no party directly')}. Why: ${esc(t.why||'')}.${!onTier(selected)?' Not shown in the template chosen now; it still runs.':''}</p>${t.sens?`<p style="font-size:12.5px;margin:6px 0">Sensitivity test: ${esc(t.sens)}</p>`:''}`; }
+  { const t=TPL.nodes[selected]; if(t) h+=`<div class="kind" style="margin-top:16px">Templates</div><p style="font-size:12.5px;margin:6px 0">Shown from: <b>${esc(TNAME[t.tier]||t.tier)}</b>${t.tier==='arch_only'?'':t.tier==='arch'?' and Engineering':t.tier==='resident'?' (every template)':''}. Affects: ${esc((t.parties||[]).join(', ')||'no party directly')}. Why: ${esc(t.why||'')}.${!onTier(selected)?' Not shown in the template chosen now; it still runs.':''}</p>${t.sens?`<p style="font-size:12.5px;margin:6px 0">Sensitivity test: ${esc(t.sens)}</p>`:''}`; }
   insp.innerHTML=h; bindGo();
   insp.querySelectorAll('.mech .ctag').forEach(tg=>tg.classList.toggle('on',tg.dataset.q===selected));
   insp.querySelectorAll('[data-guide]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault(); e.stopPropagation(); window.__openGuide&&window.__openGuide(a.dataset.guide,selected);}));
@@ -646,8 +646,8 @@ function centreOn(id){ const p=posN[id]||condPos[id]; if(!p)return; vb.x=p.x+p.w
 function setMode(m){ mode=m; document.getElementById('m-structure').setAttribute('aria-pressed',m==='structure'); document.getElementById('m-example').setAttribute('aria-pressed',m==='example'); drawAll(); renderInspector(); }
 document.getElementById('m-structure').onclick=()=>setMode('structure');
 document.getElementById('m-example').onclick=()=>setMode('example');
-function setTier(t){ tier=t; ['resident','community','full'].forEach(k=>document.getElementById('t-'+k).setAttribute('aria-pressed',k===t)); applyTier(); renderInspector(); }
-['resident','community','full'].forEach(k=>document.getElementById('t-'+k).onclick=()=>setTier(k));
+function setTier(t){ tier=t; ['resident','full','arch'].forEach(k=>document.getElementById('t-'+k).setAttribute('aria-pressed',k===t)); applyTier(); renderInspector(); }
+['resident','full','arch'].forEach(k=>document.getElementById('t-'+k).onclick=()=>setTier(k));
 function setCity(c){ city=c; ['van','edm','both'].forEach(k=>document.getElementById('c-'+k).setAttribute('aria-pressed',k===c)); drawAll(); renderInspector(); }
 ['van','edm','both'].forEach(k=>document.getElementById('c-'+k).onclick=()=>setCity(k));
 document.getElementById('q').addEventListener('input',e=>{query=e.target.value; applyFilter();});
