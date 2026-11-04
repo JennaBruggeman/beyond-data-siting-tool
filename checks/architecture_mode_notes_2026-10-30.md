@@ -167,3 +167,8 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - 74 Airport Rd (E06A) kept as a hidden test lot.
 - View check for 64 Airport Rd: the Comfort Inn's view (People step, sight line).
 - Climbing wall kept (EN 12572-3 received).
+
+## Typology library (J.B., 3 Nov 2026) — proposed direction, not yet approved in detail
+- Architecture mode moves from free arranging to prebuilt program-sharing typologies: tested combinations with set adjacencies and size ratios, applied to any lot and adjusted to it. Less room for error; also a library showing people the options.
+- Build 2 (BUILD2_BRIEF) on hold for its Arrange parts (4, 5) until the typology plan is agreed; register, zones and lot-side parts still stand.
+- Mockup issues J.B. raised: programs read as separate buildings; chillers float above the hall roof (mockup drawing error); DC support rooms listed but not drawn.

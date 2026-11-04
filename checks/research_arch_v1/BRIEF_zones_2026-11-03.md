@@ -1,0 +1,9 @@
+# Research brief: zone rules for every zone where a data centre is permitted or conditional (3 Nov 2026)
+
+Rules as BRIEF.md / BRIEF_v2.md (primary sources only: by-law text with clause numbers; "?" where not found; no popular sources; never circumvent blocks). No commits.
+
+1. List every zone in Vancouver (Zoning and Development By-law, all district schedules incl. C-, M-, I-, FC-, MC-, CD-1 where a CD-1 by-law names data centre or bulk data storage) and Edmonton (Zoning Bylaw 20001, local copy data/raw/edm/bylaw/b.txt) where a data centre (Vancouver "Bulk Data Storage" / "Information Communication Technology"; Edmonton the use class the register already uses for data centres, see edm_dc, edm_matrix) is permitted, conditional or discretionary. Start from checks/research_arch_v1/municipal*.md and the register (ids van_zdb_*, edm_*), and the Vancouver C-2 schedule J.B. uploaded: /root/.claude/uploads/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/33735979-zoning-by-law-district-schedule-c-2.pdf.
+2. For each such zone, the rules the tool's zone table holds (see tool/data/zones.json ZV/ZE entries for the exact fields): FSR outright and with approval; height outright and with approval; front, side and rear yards (and how they change next to residential, or by road class); maximum building width or depth; site coverage (or "none"); ground-floor use restrictions; non-industrial floor area caps; storey height minimums; rooftop equipment height treatment; loading. Each value with clause and source id.
+3. Which zones permit the catalogue programs (tool/arch_programs.json ids), where the existing zoning entries don't cover the new zones.
+
+Output in checks/research_arch_v1/: zones.md (one table per zone) and zones_sources.json ({"<id>": "RULE: title, issuer, date: quoted figures with clause — URL or local path"}, reuse existing register ids where they exist). Reply under 150 words: zones found per city, gaps.
