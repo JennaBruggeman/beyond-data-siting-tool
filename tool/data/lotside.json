@@ -143,5 +143,60 @@
    "vanTax"
   ],
   "_note": "Vancouver residential districts read from the district names in the tax report's zoning field: our reading (?). Used for the lot-side facts only; no Vancouver yard in the tool depends on it yet."
+ },
+ "lines": {
+  "_about": "4 Nov 2026 (LOTLINES brief part 2): which lot line is front, flanking, rear or side, from what it faces (tool/lotside.js classify). Research: checks/research_arch_v1/lotlines.md. The 135 degree corner angle is Edmonton's (s. 8.20 Corner Lot); for Vancouver it is borrowed (our reading ?), as are the 45 degree bands for 'approximately parallel' and 'opposite' in both cities (the complement of 135; no source gives them a number ?).",
+  "cornerDeg": {
+   "v": 135,
+   "src": [
+    "lot_edm_820_lines"
+   ],
+   "_note": "Corner Lot: 'located at the intersection of 2 Streets, if the angle of the intersection is less than 135 degrees'"
+  },
+  "frontShortest": {
+   "src": [
+    "lot_van_s10_frontage",
+    "lot_edm_820_lines"
+   ],
+   "_note": "Vancouver s. 10.26.1(b) and Edmonton s. 8.20 Front Lot Line (b): on a corner, the shorter street line; equal: the Director of Planning (Van 10.26.1(a)) or the Development Planner (Edm 5.130.2) decides"
+  },
+  "doubleFront": {
+   "src": [
+    "lot_edm_5130",
+    "lot_van_s10_frontage"
+   ],
+   "_note": "Edmonton s. 5.130.4: 'Double Fronting Sites must have 2 Front Lot Lines'. Vancouver: s. 10.26.1 has no rule for a single-lot site on 2 unequal parallel streets (?); s. 10.6.1 Director's approval outside M and I districts"
+  },
+  "rear": {
+   "src": [
+    "lot_edm_820_lines",
+    "lot_van_s2_lines"
+   ],
+   "_note": "Edmonton s. 8.20 Rear Lot Line: 'furthest from and opposite the Front Lot Line'; every other line is an Interior Side Lot Line. Vancouver defines no rear or side property line: the s. 2 yard diagram (F street, S sides, R lane opposite) read the same way (our reading ?); a nearer line facing away (a notch) is unclear there"
+  },
+  "lane": {
+   "src": [
+    "lot_van_s2_lines",
+    "lot_edm_820_lines"
+   ],
+   "_note": "a lane (Van s. 2) or alley (Edm s. 8.20) is not a street, so never a front"
+  },
+  "vanFlankAsFront": {
+   "zones": [
+    "I-2B",
+    "I-3",
+    "FC-2",
+    "FC-2 A",
+    "FC-2 B",
+    "FC-2 C1",
+    "FC-2 C2",
+    "FC-2 D",
+    "FC-2 E"
+   ],
+   "src": [
+    "lot_van_exterior_side"
+   ],
+   "_note": "on a corner site the exterior side yard is the same as the front yard: I-2 s. 3.2.2.13 (sub-area B), I-3 s. 3.1.2.15, FC-2 ss. 3.1.2.10, 3.2.2.10, 3.3.2.10, 3.4.2.10. I-2 outside sub-area B and I-1C: no such clause found, the flanking line takes the side yard"
+  }
  }
 }

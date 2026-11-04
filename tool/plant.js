@@ -87,7 +87,7 @@ BD.plant={
   const put=(k,count,base,where)=>{ if(!count||!k) return 0; let got=[];
     if(where==='roof'){ got=pack(F,roofRing,[],ru0,ru1,rv0,rv1,k,count,false); // then turned 90° where the roof's shape suits that better (a C-shaped tower roof, 20 Oct)
       if(got.length<count){ const tk=got.map(p=>BD.geo.rectW(F,p.u-p.L/2-1,p.u+p.L/2+1,p.v-p.W/2-1,p.v+p.W/2+1)); const g2=pack(F,roofRing,tk,ru0,ru1,rv0,rv1,k,count-got.length,true); got=got.concat(g2); } }
-    else { const lotR=m.inset?BD.geo.clip(m.ring,m.inset):m.ring; const forbid=P.boxes.filter(b=>b.kind==='yard').map(b=>b.clear); if(m.existing) (m.feet||[]).forEach(f=>forbid.push(f.r)); else { if(bld) forbid.push(bld); if(m.loading) forbid.push(m.loading); }
+    else { const lotR=m.inset?(BD.buildArea?BD.buildArea(m):BD.geo.clip(m.ring,m.inset)):m.ring; /* LOTLINES 4 Nov 2026 */ const forbid=P.boxes.filter(b=>b.kind==='yard').map(b=>b.clear); if(m.existing) (m.feet||[]).forEach(f=>forbid.push(f.r)); else { if(bld) forbid.push(bld); if(m.loading) forbid.push(m.loading); }
       // yard: the reserved strip for a new building (units turned across it); anywhere in the usable lot for an existing one
       if(P.yard&&!m.existing){ const [a,b,c,d]=localBounds(F,P.yard); got=pack(F,lotR,forbid,a,b,c,d,k,count,true);
         if(got.length<count){ const taken=P.boxes.map(x=>x.clear).concat(got.map(p=>BD.geo.rectW(F,p.u-p.L/2-1,p.u+p.L/2+1,p.v-p.W/2-1,p.v+p.W/2+1))); const [a2,b2,c2,d2]=localBounds(F,lotR);

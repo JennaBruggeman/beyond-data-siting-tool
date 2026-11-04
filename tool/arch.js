@@ -102,7 +102,7 @@ function placeOnce(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W
   const bu0=um[0], bu1=um[1], bw=v1-v0, bl=bu1-bu0, cs=2, nU=Math.max(1,Math.floor(bl/cs)), nV=Math.max(1,Math.floor(bw/cs));
   // a 2 m height grid over the buildable area: the top of what stands on each cell, or no-go (review 2, N1: a block must rest flat on what is under it)
   /* a cell is taken if anything overlaps any part of it (not just its centre), and cells not wholly inside the lot are no-go (review of J.B.'s screenshot, 2 Nov 2026) */
-  const lotR=s.M.ring, inLot=(u,v)=>{ const w=F.toW(u,v); return inside(w,lotR); };
+  const lotR=s.M.yardOff||s.M.ring /* LOTLINES 4 Nov 2026: programs stay out of every lot line's yard */, inLot=(u,v)=>{ const w=F.toW(u,v); return inside(w,lotR); };
   const HG=(noKeep)=>{ const g=new Float64Array(nU*nV); for(let i=0;i<nU;i++) for(let j=0;j<nV;j++){ const ua=dir<0?bu0+i*cs:bu1-(i+1)*cs, ub=ua+cs, va=v0+j*cs, vb=va+cs; let t=0;
       if(!(inLot(ua+0.05,va+0.05)&&inLot(ub-0.05,va+0.05)&&inLot(ua+0.05,vb-0.05)&&inLot(ub-0.05,vb-0.05))){ g[i*nV+j]=Infinity; continue; }
       for(const o of occ){ const k=noKeep?0:(o[7]||0); if(ua<o[1]+k-0.01&&o[0]-k<ub-0.01&&va<o[3]+k-0.01&&o[2]-k<vb-0.01){ if(o[6]){ t=Infinity; break; } t=Math.max(t,o[5]); } } g[i*nV+j]=t; } return g; };
@@ -297,7 +297,7 @@ function heatHTML(B){ const H=B.heat; const seg=(v,of,c,t)=>of?`<i class="${c}" 
    no midpoint. Arrange tests one end of it (low end by default: the size the share holds even at the roomiest hall). Rooms with no size source are not counted. */
 const selId=()=>BD.S.sel?BD.S.sel.city+':'+BD.S.sel.id:'';
 function ratioBase(){ const M=BD.model&&BD.model(); if(!M||!M.F||M.existing||!M.ring) return null; const Z=M.Z||{}, code=zoneCode();
-  const yard=M.inset?BD.geo.clip(M.ring,M.inset):null, build=yard&&yard.length>=6?BD.area(yard):M.lotArea;
+  const yard=M.inset?(BD.buildArea?BD.buildArea(M):BD.geo.clip(M.ring,M.inset)):null, /* LOTLINES 4 Nov 2026 */ build=yard&&yard.length>=6?BD.area(yard):M.lotArea;
   const floors=Math.max(1,M.nF[0]), dataFl=Math.max(1,Z.ground?floors-1:floors), fsr=Z.fsr?Z.fsr[1]:null;
   const split=DR.rooms.filter(r=>r.split&&r.perMW), lo=split.reduce((t,r)=>t+r.perMW[0],0), hi=split.reduce((t,r)=>t+r.perMW[1],0);
   return {M,Z,code,lot:M.lotArea,build,yard,floors,dataFl,fsr,coverNone:(DR.coverLimit.none||[]).includes(code),coverZ:(BD.data.raw.dc_rooms.coverLimit.byZone||{})[code]||null,split,perMW:[lo,hi],city:M.city}; }

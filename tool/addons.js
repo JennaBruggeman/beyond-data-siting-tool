@@ -135,7 +135,7 @@ function monthly(m){ const W=380,H=150,ml=30,mb=22,mt=8, mx=Math.max(...m.latitu
   return `<div class="mbar">${g}</svg></div><p class="src"><span style="color:#8D8C87">■</span> latitude tilt <span style="color:#6E6E6B">■</span> south wall, kWh per kWp a month (NRCan municipal values)</p>`; }
 /* battery for the grid: containers in the yard, 3 m from lot lines and buildings (NFPA 855, 2026, 9.6.2.7.1 — a reference standard here) */
 function battLayout(f){ const M=f.M; if(!M||!M.ring||!BD.plant) return null; const F=M.F, P=M.plant, a=A(); const mwh=(a.battMW||1)*(a.battH||4), n=Math.ceil(mwh/5.0);
-  const k={name:'battery containers',L:6.06,W:2.44,H:2.9,wall:[3,3],gap:[0.9,0.9]}; const lotR=M.inset?BD.geo.clip(M.ring,M.inset):M.ring;
+  const k={name:'battery containers',L:6.06,W:2.44,H:2.9,wall:[3,3],gap:[0.9,0.9]}; const lotR=M.inset?(BD.buildArea?BD.buildArea(M):BD.geo.clip(M.ring,M.inset)):M.ring; /* LOTLINES 4 Nov 2026 */
   const forbid=[].concat(M.foot?[geoOffset(M.foot,3)]:[],(P&&P.boxes||[]).filter(b=>b.kind==='yard').map(b=>b.clear),M.loading?[M.loading]:[]);
   const [x0,x1,y0,y1]=BD.plant.localBounds(F,lotR); const got=BD.plant.pack(F,lotR,forbid,x0,x1,y0,y1,k,n,false);
   return {n,mwh,boxes:got.map(p=>BD.plant.boxOf(F,p,k,0,'yard')),placed:got.length}; }
