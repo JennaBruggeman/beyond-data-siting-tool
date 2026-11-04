@@ -211,3 +211,9 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - Q7: lumber drying and aquarium dropped (J.B. 4 Nov 2026). Outpatient clinic joins Public front (upper floor in Vancouver; BE variance flag in Edmonton). Conservatory, EV hub and covered plaza: being discussed.
 - Q7 cont.: conservatory kept, research a lower biome height and smaller Canadian conservatories. EV hub goes on the public side (Public front), not Work yard. Covered plaza: rethink as a designed public space on the leftover public-front ground (not just paving); options heated public area or EV charging; climate question (Edmonton vs Vancouver) under discussion.
 - Public edge (J.B. 4 Nov 2026): leftover public-front ground becomes designed public space, outside the secure line; user picks warm public ground (heated paths and seating, planting with soil warming, maybe a small warm shelter; not hardscape), EV charging (min ≈150 m²), or both. Edmonton: heat is the point (winter use). Vancouver: covered edge (rain shelter, shade and cooling in heat events). Replaces "covered plaza".
+
+## Typology library v1 (J.B., 4 Nov 2026)
+- Criteria for a strong typology: real heat use at a temperature the hall can supply; allowed (permitted/conditional) in data-centre zones of at least one city; sourced room sizes; plant works (noise, distances); clear public benefit.
+- Nine typologies + two add-ons: 1 Emergency hub (refuge, warming shelter, clinic; stacked/beside variants); 2 Warm bath (spa, therapy pool); 3 Community pool (pool, gym, shared change rooms); 4 Aquaponics (greenhouse, fish farm); 5 Food hub (greenhouse, community kitchen); 6 Conservatory (low biome); 7 Heat cascade (spa → pool → greenhouse → public edge); 8 Twin (overnight shelter, own building); 9 Shelter + laundry. Add-ons: heat hub; public edge (warm ground / EV charging).
+- Out for now (weak): work yard, winter garden, food drying alone.
+- Next: research per typology, then build.
