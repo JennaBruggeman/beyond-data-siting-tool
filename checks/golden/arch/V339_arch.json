@@ -30,7 +30,7 @@
    ],
    [
     -31.75,
-    -15.75
+    -5.75
    ],
    [
     -31.75,
@@ -38,7 +38,11 @@
    ],
    [
     -31.75,
-    -17.75
+    -15.75
+   ],
+   [
+    -31.75,
+    -19.75
    ]
   ],
   "plant": [
@@ -175,6 +179,19 @@
    6
   ],
   [
+   "clinic",
+   [
+    -32,
+    -6
+   ],
+   false,
+   605,
+   605,
+   1,
+   6,
+   12
+  ],
+  [
    "spa",
    [
     -32,
@@ -185,7 +202,7 @@
    320,
    0,
    0,
-   12
+   10
   ],
   [
    "ev_hub",
@@ -197,21 +214,21 @@
    150,
    150,
    1,
-   6,
-   6
+   10,
+   4
   ],
   [
    "greenhouse",
    [
     -32,
-    -18
+    -20
    ],
    false,
    190,
    190,
-   2,
-   12,
-   6
+   1,
+   6,
+   8
   ]
  ],
  "hall": [
@@ -231,7 +248,7 @@
    "along": "back",
    "a": 1,
    "fa": 312.1776036931977,
-   "drawn": 1025
+   "drawn": 1630
   },
   "fails": [
    [
@@ -265,7 +282,7 @@
  "hallStoreys": 3,
  "space": {
   "hall": 624,
-  "prog": 1025,
+  "prog": 1630,
   "cap": 5675.9564307854125
  },
  "heat": {
@@ -274,8 +291,8 @@
    5321.7
   ],
   "need": [
-   120.87,
-   153.17
+   132.97,
+   171.32
   ],
   "unknown": [
    "spa",
@@ -284,15 +301,18 @@
  },
  "rules": [
   "bad: Public indoor pool: not drawn. Stopped by minimum size or sides: no free area of its size with sides of at least 11 × 27 m is left beside the hall, the plant, the plant yard and loading.",
-  "bad: Outpatient clinic: not drawn. Stopped by height: the 18 m limit (register van_zdb_i3).",
+  "bad: Outpatient clinic: 605 m² does not fit on one floor here; drawn over 3 storeys only to show its size. Whether it can be split across floors is a design question.",
   "bad: Bathhouse / Nordic spa: 320 m² does not fit on one floor here; drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
-  "bad: Fish farm: 685 m² would pass the programs' share of the floor (1,703 m², 678 m² left); not drawn. Edit ratios to give programs more.",
+  "bad: Greenhouse: 190 m² does not fit on one floor here; drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
+  "bad: Fish farm: 685 m² would pass the programs' share of the floor (1,703 m², 73 m² left); not drawn. Edit ratios to give programs more.",
   "note: Refuge in I-3: conditional (Community Centre or Neighbourhood House; Social Service Centre).",
   "note: Refuge: A-2, 2 h fire separation from the data centre (F-2).",
   "q: Refuge: keep-apart rules not checked here: generators (no distance in the source).",
   "note: Warming shelter in I-3: conditional (Social Service Centre (day); overnight: no listed use ?).",
   "note: Warming shelter: A-2, 2 h fire separation from the data centre (F-2).",
   "q: Warming shelter: keep-apart rules not checked here: generators (no distance in the source).",
+  "note: Outpatient clinic in I-3: conditional (Health Care Office).",
+  "q: Outpatient clinic: keep-apart rules not checked here: generators (no distance in the source).",
   "note: Bathhouse / Nordic spa in I-3: conditional (Beauty and Wellness Centre (hydrotherapy, thermal therapy)).",
   "note: Bathhouse / Nordic spa: A-3, 2 h fire separation from the data centre (F-2).",
   "q: Bathhouse / Nordic spa: keep-apart rules not checked here: generators (no distance in the source).",
@@ -301,7 +321,8 @@
   "q: EV charging hub: keep-apart rules not checked here: intakes (not modelled).",
   "note: Greenhouse in I-3: conditional (Urban Farm - Class B).",
   "q: Greenhouse: fire separation from the data centre (F-2) ? (occupancy ?).",
-  "q: Greenhouse: keep-apart rules not checked here: hall (no distance in the source); generators (no distance in the source)."
+  "q: Greenhouse: keep-apart rules not checked here: hall (no distance in the source); generators (no distance in the source).",
+  "q: Roof plant reaches 20.9 m, over the 18.3 m height limit: allowed only if the Director of Planning permits it (s. 10.1.1), which is not known here (?)."
  ],
  "side": "Arrange",
  "ratios": {
@@ -318,7 +339,7 @@
    "floors": 3,
    "dataFl": 2,
    "fsr": 3,
-   "coverNone": false,
+   "coverNone": true,
    "perMW": [
     293.4,
     635.0999999999999
@@ -351,21 +372,21 @@
    "Compare (off)"
   ],
   "stuck": false,
-  "next": "Next: Programs"
+  "next": "Next: Programs →"
  },
  "split": "Data centre 11% · 624 m² · 0.9–2.1 MW (testing 0.9) · programs 30% · 1,703 m² · unused 59% arch_ratios Edit ratios",
  "saved": [
   [
    "suggest",
-   4,
-   19,
+   5,
+   23,
    27,
    0.7682845001118318
   ],
   [
    "lot",
-   8,
-   23,
+   10,
+   28,
    27,
    0
   ]

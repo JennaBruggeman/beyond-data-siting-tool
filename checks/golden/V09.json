@@ -155,6 +155,11 @@
     "city": "van",
     "cl": [
      [
+      "Data centre",
+      "\"Bulk Data Storage, only in sub-area A\" is a Conditional use; not allowed in sub-area B (the tool does not map the sub-areas: check the I-3 map)",
+      "I-3 s. 2.1 (June 2026)"
+     ],
+     [
       "Floor area",
       "up to 3.0 × the lot (the extra 2.0 does not apply to storage uses); sub-area A only",
       "I-3 District Schedule (June 2026)"
@@ -166,13 +171,13 @@
      ],
      [
       "Yards",
-      "front 0.6 m, sides 7.6 m, rear 3.1 m; building at most 61 m wide and deep",
-      "I-3 District Schedule (2022 draft figures)"
+      "front 0.6 m, sides 7.6 m, rear 3.1 m (less where the rear abuts a lane); deeper setbacks above 18.3 m (front 3.7 m, sides 10.7 m) and above 30.5 m (front 6.1 m, sides 12.2 m) not drawn; building at most 61.0 m wide and deep",
+      "I-3 ss. 3.1.2.2–8 (June 2026, adopted text)"
      ],
      [
       "Ground floor",
-      "6.0 m floor-to-floor; no data storage at the ground floor",
-      "I-3 District Schedule"
+      "first floor at least 6.0 m floor to floor, upper floors at least 4.0 m (new buildings); \"Bulk data storage is not permitted at the ground floor, except for entrances\"",
+      "I-3 ss. 2.2.11, 3.1.2.9"
      ],
      [
       "Roof equipment",
@@ -204,6 +209,7 @@
       "[cycle]",
       "[cycle]",
       "[cycle]",
+      "[cycle]",
       "[cycle]"
      ]
     },
@@ -219,13 +225,14 @@
     "yardsKnown": true,
     "userSet": false,
     "srcId": "van_zdb_i3",
+    "vkey": "I-3",
     "screen": null
    },
    "city": "van",
    "lotArea": 7865,
    "ring": "[ring 14]",
    "notes": [
-    "Noise: needs 5 low-noise chillers: Trane RTAF 280 low-noise, Lw 98 dBA per 1,010 kW, 101 standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?); and a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 74–77 dBA (quieter–standard unit rating) at the point of reception beside 320 INDUSTRIAL AVE (I-3, activity zone), 19 m awa…"
+    "Noise: needs a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 68–71 dBA (quieter–standard unit rating) at the point of reception beside 247 1ST AVE E (I-3, activity zone), 37 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii))."
    ],
    "warn": [],
    "F": {
@@ -236,6 +243,49 @@
     "L": 104.067546,
     "W": 88.288991
    },
+   "side": {
+    "rot": false,
+    "autoU1": true,
+    "any": true,
+    "u0": {
+     "street": null,
+     "road": null,
+     "d": null,
+     "alley": false,
+     "nbr": [
+      "I-3"
+     ]
+    },
+    "u1": {
+     "street": "local",
+     "road": "Residential",
+     "d": 10,
+     "alley": false,
+     "nbr": []
+    },
+    "v0": {
+     "street": null,
+     "road": null,
+     "d": null,
+     "alley": false,
+     "nbr": [
+      "I-3"
+     ]
+    },
+    "v1": {
+     "street": null,
+     "road": null,
+     "d": null,
+     "alley": false,
+     "nbr": [
+      "I-3"
+     ]
+    },
+    "src": [
+     "vanStreets2026",
+     "vanTax"
+    ]
+   },
    "maxStoreys": 3,
    "H": 18.3,
    "hmode": "outright",
@@ -243,6 +293,14 @@
     3,
     3
    ],
+   "yards": {
+    "front": 0.6,
+    "rear": 3.1,
+    "s0": 7.6,
+    "s1": 7.6,
+    "max": 61,
+    "by": "zone"
+   },
    "yardRect": "[ring 8]",
    "inset": "[ring 8]",
    "yardNote": "",
@@ -259,7 +317,7 @@
    },
    "loading": "[ring 8]",
    "loadV": [
-    -30.5,
+    -24.4,
     30.5
    ],
    "loadDepth": 16.3,
@@ -267,17 +325,17 @@
     "[ring 8]",
     "[ring 8]"
    ],
-   "plantYardStart": 12.95,
-   "dir": -1,
+   "plantYardStart": -12.95,
+   "dir": 1,
    "v": [
     -30.5,
     30.5
    ],
-   "uFront": -31.75,
+   "uFront": 31.75,
    "footMode": "max",
    "uBuild": [
-    12.95,
-    -31.75
+    -12.95,
+    31.75
    ],
    "mwSized": 1.9,
    "plant": {
@@ -385,7 +443,8 @@
     ],
     "genLines": [
      "3 generator sets of about 1 MW carry 2.9 MW; with spares, <b>4</b>. Placed: 0 on the roof, 4 in the yard.",
-     "Each about 8.434 × 2.616 m, 3.706 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).",
+     "Each about 8.434 × 2.616 m, 3.706 m high; 1.5 m from the building, 2 m between sets (1 m clear all round, CSA C282 6.5.1.1; register arch_csa_c282).",
+     "Fuel in each set's sub-base tank: about 3100 L. In the yard: 3 m from the property line and 1.5 m from the building (CSA B139.1.0 Table 2; register arch_csa_b139). On a roof: at most 1,250 L a tank and 2,500 L a supply line (B139.1.1 6.5.3). FM 5-32 (insurer guidance, not law): not on the roof or in a basement.",
      "<span class=\"src\">Standby diesel generator sets in Sound Level 2 enclosures with sub-base tanks. Basis units: Rehlko (Kohler) KD2000, 2,000 kW standby (data-centre continuous rating the same), 13.49 × 3.49 m, up to 4.78 m high (G5-626, rev 6/24); KD1000, 1,000 kW, 8.43 × 2.62 m, 3.71 m high with the 12 h tank (G6-154, 12/23). Both EPA Tier 2, cULus (UL 2200, CSA C22.2 No. 100); manufacturer claims. Chosen 29 Oct 2026 as the middle of Cat, Rehlko and Generac: 2 MW 18.5–38.4 m² per MW, 1 MW 19.5–22.4. 1 m clear around each set (Cummins application manual; not checked ?); 1.5 m from wall openings…"
     ],
     "short": "",
@@ -393,10 +452,16 @@
     "coolRoof": 3,
     "genYard": 4,
     "genRoof": 0,
+    "genTank": {
+     "L": 3098.14,
+     "bld": 1.5,
+     "pl": 3,
+     "over": false
+    },
     "yard": "[ring 8]",
     "yardU": [
-     7.334,
-     12.95
+     -12.95,
+     -7.334
     ],
     "indoor": 0,
     "miss": [],
@@ -414,10 +479,10 @@
     "floor": 1456.666667,
     "perMW": 766.666667
    },
-   "foot": "[ring 12]",
+   "foot": "[ring 8]",
    "footRect": "[ring 8]",
    "simpleMass": true,
-   "footArea": 2350.479428,
+   "footArea": 2403.284019,
    "noise": {
     "lw": [
      107.6,
@@ -425,8 +490,8 @@
     ],
     "n": 3,
     "src": [
-     1677.7,
-     2102.4
+     1665.3,
+     2084.8
     ],
     "where": "roof",
     "groups": [
@@ -435,7 +500,7 @@
       "n": 3
      }
     ],
-    "tested": 3470,
+    "tested": 3481,
     "overQ": 0,
     "overS": 0,
     "limit": 55,
@@ -450,20 +515,20 @@
     "bldOnly": 0,
     "block": null,
     "flag": null,
-    "req": "Noise: needs 5 low-noise chillers: Trane RTAF 280 low-noise, Lw 98 dBA per 1,010 kW, 101 standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?); and a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 74–77 dBA (quieter–standard unit rating) at the point of reception beside 320 INDUSTRIAL AVE (I-3, activity zone), 19 m awa…",
+    "req": "Noise: needs a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 68–71 dBA (quieter–standard unit rating) at the point of reception beside 247 1ST AVE E (I-3, activity zone), 37 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii)).",
     "worst": {
-     "addr": "320 INDUSTRIAL AVE",
+     "addr": "247 1ST AVE E",
      "zt": "I-3, activity zone",
      "lot": true,
-     "d": 19.4,
-     "lo": 73.8,
-     "hi": 77.1,
+     "d": 37.2,
+     "lo": 68.2,
+     "hi": 71.5,
      "L": 65,
      "Ls": 65,
      "sec": "Noise Control By-law 6555 s. 2.3(b)(ii)"
     },
     "mit": {
-     "option": "ln+scr",
+     "option": "scr",
      "tried": [
       "none",
       "ln",
@@ -477,14 +542,11 @@
       ],
       "src": "arch_nz_nswDcNoise"
      },
-     "ln": {
-      "n": 5,
-      "src": "traneRTAF"
-     },
+     "ln": null,
      "fan": null,
      "room": null,
-     "short": "low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB)",
-     "std": "ln+scr"
+     "short": "a 4.9 m solid screen (roof; NSW 2021, −8 dB)",
+     "std": "scr"
     }
    }
   },
@@ -502,12 +564,12 @@
    "yards": "[cycle]"
   },
   "hallS": [
-   1557.065493,
-   2335.59824
+   1607.757901,
+   2411.636852
   ],
   "hallL": [
-   2335.59824,
-   3243.886444
+   2411.636852,
+   3349.495627
   ],
   "floors": 3,
   "floorsR": [
@@ -515,7 +577,7 @@
    3
   ],
   "fpNote": "from the site setup: the most the zone allows, less setbacks, loading and the plant yard",
-  "fp": 1621.943222,
+  "fp": 1674.747814,
   "fpCalc": null,
   "indoorPlant": 0,
   "g": [
@@ -523,52 +585,52 @@
    23595
   ],
   "G": [
-   4865.829666,
-   4865.829666
+   5024.243441,
+   5024.243441
   ],
   "fullCover": "",
   "heightCut": true,
   "yardCut": true,
   "gross": [
-   4865.829666,
-   4865.829666
+   5024.243441,
+   5024.243441
   ],
   "how": "lot 7,865 m² × floor-space ratio 3",
   "sc": [
    {
-    "G": 4865.829666,
-    "gr": 1621.943222,
-    "up": 3243.886444
+    "G": 5024.243441,
+    "gr": 1674.747814,
+    "up": 3349.495627
    },
    {
-    "G": 4865.829666,
-    "gr": 1621.943222,
-    "up": 3243.886444
+    "G": 5024.243441,
+    "gr": 1674.747814,
+    "up": 3349.495627
    }
   ],
   "ground": [
-   1621.943222,
-   1621.943222
+   1674.747814,
+   1674.747814
   ],
   "hallGross": [
-   3243.886444,
-   3243.886444
+   3349.495627,
+   3349.495627
   ],
   "density": "typical",
   "mwS": [
-   2.471533,
-   8.053787
+   2.551997,
+   8.315989
   ],
   "mwL": [
-   3.707299,
+   3.827995,
    10.292735
   ],
   "hall": [
-   1557.065493,
-   3243.886444
+   1607.757901,
+   3349.495627
   ],
   "mw": [
-   2.471533,
+   2.551997,
    10.292735
   ],
   "m2MW": [
@@ -576,10 +638,10 @@
    630
   ],
   "mwCheck": [
-   4.387583,
-   9.635306
+   4.530427,
+   9.948997
   ],
-  "mwTopRaw": 11.185815,
+  "mwTopRaw": 11.549985,
   "mwCapped": true,
   "plantFor": 10.292735
  },

@@ -5,7 +5,7 @@
   "extent": "whole",
   "floor": "",
   "host": {},
-  "mw": 3.2,
+  "mw": 3.8,
   "foot": "max",
   "cover": 70,
   "hmode": "out",
@@ -181,6 +181,11 @@
     "city": "edm",
     "cl": [
      [
+      "Data centre",
+      "Major Industrial Permitted; Minor Industrial only where existing on 1 Jan 2024, so a small data centre fits only if deemed Major (?); always Discretionary",
+      "IH ss. 2.1–2.2; s. 7.20 3.3.2"
+     ],
+     [
       "Floor area",
       "up to 2.0 × the lot",
       "Zoning Bylaw 20001, IH"
@@ -220,6 +225,7 @@
      "cl": [
       "[cycle]",
       "[cycle]",
+      "[cycle]",
       "[cycle]"
      ]
     },
@@ -235,13 +241,14 @@
     "yardsKnown": true,
     "userSet": false,
     "srcId": "edm_bl20001",
+    "vkey": "IH",
     "screen": null
    },
    "city": "edm",
    "lotArea": 14565,
    "ring": "[ring 82]",
    "notes": [
-    "Noise: needs 8 low-noise chillers: Trane RTAF 280 low-noise, Lw 98 dBA per 1,010 kW, 101 standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?); and a 4.9 m solid screen around the roof and yard plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 66–69 dBA (quieter–standard unit rating) at the property line of 12311 126 AVENUE NW (IH), 52 m away; limit 60 dBA…",
+    "Noise: needs 8 low-noise chillers: Trane RTAF 280 low-noise, Lw 98 dBA per 1,010 kW, 101 standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?); and a 4.9 m solid screen around the roof and yard plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 66–69 dBA (quieter–standard unit rating) at the property line of 12311 126 AVENUE NW (IH), 54 m away; limit 60 dBA…",
     "Noise: the plant would exceed the 50 dBA night limit at the property line of (no parcel record: residential limit assumed ?) (about 52 dBA (low-noise units: one rating) with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof and yard; NSW 2021, −8 dB), Bylaw 14600 s. 20(1)) if that lot takes the stricter limit; its zoning is not known, so this is a note, not a block."
    ],
    "warn": [],
@@ -253,6 +260,47 @@
     "L": 245.092333,
     "W": 105.268275
    },
+   "side": {
+    "rot": false,
+    "autoU1": true,
+    "any": true,
+    "u0": {
+     "street": null,
+     "road": null,
+     "d": null,
+     "alley": false,
+     "nbr": []
+    },
+    "u1": {
+     "street": "local",
+     "road": "Local",
+     "d": 11,
+     "alley": true,
+     "nbr": [
+      "IH"
+     ]
+    },
+    "v0": {
+     "street": null,
+     "road": null,
+     "d": null,
+     "alley": false,
+     "nbr": []
+    },
+    "v1": {
+     "street": "local",
+     "road": "Local",
+     "d": 12,
+     "alley": false,
+     "nbr": [
+      "BE"
+     ]
+    },
+    "src": [
+     "edmRoads2026",
+     "edmZoningGeo"
+    ]
+   },
    "maxStoreys": 5,
    "H": 30,
    "hmode": "outright",
@@ -260,35 +308,54 @@
     5,
     5
    ],
+   "yards": {
+    "front": 3,
+    "rear": 0,
+    "s0": 0,
+    "s1": 3,
+    "by": "side facts",
+    "src": [
+     "arch_hb_edmIH"
+    ]
+   },
    "yardRect": "[ring 8]",
    "inset": "[ring 8]",
    "yardNote": "",
    "loadingNeed": {
-    "n": 0,
+    "n": 1,
     "len": 9,
     "wid": 3.3,
     "ht": 4,
     "aisle": 6.1,
     "cls": "loading space",
-    "basis": "0 loading spaces for 2,453 m² of floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site, with no backing onto streets or alleys (s. 5.80 subs. 7). Aisle: Vancouver's 6.1 m used as an assumption.",
+    "basis": "1 loading space for 2,913 m² of floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site, with no backing onto streets or alleys (s. 5.80 subs. 7). Aisle: Vancouver's 6.1 m used as an assumption.",
     "src": "edmZB580"
    },
-   "plantYardStart": 122.546167,
-   "dir": -1,
+   "loading": "[ring 18]",
+   "loadV": [
+    -52.634137,
+    49.634137
+   ],
+   "loadDepth": 15.1,
+   "loadSpaces": [
+    "[ring 8]"
+   ],
+   "plantYardStart": -107.446167,
+   "dir": 1,
    "v": [
     -52.634137,
-    52.634137
+    49.634137
    ],
-   "uFront": -119.546167,
+   "uFront": 119.546167,
    "footMode": "max",
    "uBuild": [
-    122.546167,
-    -119.546167
+    -107.446167,
+    119.546167
    ],
-   "mwSized": 3.2,
+   "mwSized": 3.8,
    "plant": {
     "s": {
-     "Q": 4.96,
+     "Q": 5.89,
      "k": {
       "name": "air-cooled chillers",
       "L": 12.141,
@@ -400,14 +467,15 @@
      }
     ],
     "lines": [
-     "Sized for <b>3.2 MW</b> of servers: heat to reject ≈ 3.2 × PUE 1.55 = <b>5.0 MW</b> at peak.",
+     "Sized for <b>3.8 MW</b> of servers: heat to reject ≈ 3.8 × PUE 1.55 = <b>5.9 MW</b> at peak.",
      "4 air-cooled chillers carry it; with spares, <b>5</b>. Placed: 3 on the roof, 2 in the yard.",
      "Each unit about 12.141 × 2.362 m, 2.896 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
      "<span class=\"src\">Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit near…"
     ],
     "genLines": [
-     "3 generator sets of about 2 MW carry 5.0 MW; with spares, <b>4</b>. Placed: 0 on the roof, 4 in the yard.",
-     "Each about 13.493 × 3.488 m, 4.777 m high; 1.5 m from the building, 2 m between sets (assumed from the 1 m service clearance).",
+     "3 generator sets of about 2 MW carry 5.9 MW; with spares, <b>4</b>. Placed: 0 on the roof, 4 in the yard.",
+     "Each about 13.493 × 3.488 m, 4.777 m high; 1.5 m from the building, 2 m between sets (1 m clear all round, CSA C282 6.5.1.1; register arch_csa_c282).",
+     "Fuel in each set's sub-base tank: about 6200 L. In the yard: 3 m from the property line and 1.5 m from the building (CSA B139.1.0 Table 2; register arch_csa_b139). On a roof: at most 1,250 L a tank and 2,500 L a supply line (B139.1.1 6.5.3). FM 5-32 (insurer guidance, not law): not on the roof or in a basement.",
      "<span class=\"src\">Standby diesel generator sets in Sound Level 2 enclosures with sub-base tanks. Basis units: Rehlko (Kohler) KD2000, 2,000 kW standby (data-centre continuous rating the same), 13.49 × 3.49 m, up to 4.78 m high (G5-626, rev 6/24); KD1000, 1,000 kW, 8.43 × 2.62 m, 3.71 m high with the 12 h tank (G6-154, 12/23). Both EPA Tier 2, cULus (UL 2200, CSA C22.2 No. 100); manufacturer claims. Chosen 29 Oct 2026 as the middle of Cat, Rehlko and Generac: 2 MW 18.5–38.4 m² per MW, 1 MW 19.5–22.4. 1 m clear around each set (Cummins application manual; not checked ?); 1.5 m from wall openings…"
     ],
     "short": "",
@@ -415,10 +483,16 @@
     "coolRoof": 3,
     "genYard": 4,
     "genRoof": 0,
+    "genTank": {
+     "L": 6196.28,
+     "bld": 1.5,
+     "pl": 3,
+     "over": false
+    },
     "yard": "[ring 8]",
     "yardU": [
-     109.496167,
-     122.546167
+     -107.446167,
+     -94.396167
     ],
     "indoor": 0,
     "miss": [],
@@ -432,14 +506,14 @@
    "plantYardDepth": 13.05,
    "serverFoot": "[ring 8]",
    "sizedTo": {
-    "mw": 3.2,
-    "floor": 2453.333333,
+    "mw": 3.8,
+    "floor": 2913.333333,
     "perMW": 766.666667
    },
-   "foot": "[ring 86]",
+   "foot": "[ring 74]",
    "footRect": "[ring 8]",
    "simpleMass": true,
-   "footArea": 14368.506217,
+   "footArea": 14120.170516,
    "noise": {
     "lw": [
      109.8,
@@ -447,8 +521,8 @@
     ],
     "n": 5,
     "src": [
-     -2227.1,
-     4719.1
+     -2223.9,
+     4718.7
     ],
     "where": "roof and yard",
     "groups": [
@@ -476,14 +550,14 @@
     "bldOnly": 0,
     "block": null,
     "flag": "Noise: the plant would exceed the 50 dBA night limit at the property line of (no parcel record: residential limit assumed ?) (about 52 dBA (low-noise units: one rating) with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof and yard; NSW 2021, −8 dB), Bylaw 14600 s. 20(1)) if that lot takes the stricter limit; its zoning is not known, so this is a note, not a block.",
-    "req": "Noise: needs 8 low-noise chillers: Trane RTAF 280 low-noise, Lw 98 dBA per 1,010 kW, 101 standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?); and a 4.9 m solid screen around the roof and yard plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 66–69 dBA (quieter–standard unit rating) at the property line of 12311 126 AVENUE NW (IH), 52 m away; limit 60 dBA…",
+    "req": "Noise: needs 8 low-noise chillers: Trane RTAF 280 low-noise, Lw 98 dBA per 1,010 kW, 101 standard (maker claim, traneRTAF). Drawn as the basis unit: its size is not in the register (?); and a 4.9 m solid screen around the roof and yard plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 66–69 dBA (quieter–standard unit rating) at the property line of 12311 126 AVENUE NW (IH), 54 m away; limit 60 dBA…",
     "worst": {
      "addr": "12311 126 AVENUE NW",
      "zt": "IH",
      "lot": true,
-     "d": 52.4,
-     "lo": 66.1,
-     "hi": 69.4,
+     "d": 54.3,
+     "lo": 65.8,
+     "hi": 69.1,
      "L": 60,
      "Ls": 60,
      "sec": "Bylaw 14600 s. 22(1)"
@@ -536,7 +610,7 @@
    5
   ],
   "fpNote": "from the site setup: the most the zone allows, less setbacks, loading and the plant yard",
-  "fp": 10910.378011,
+  "fp": 12181.147855,
   "fpCalc": null,
   "indoorPlant": 0,
   "g": [
