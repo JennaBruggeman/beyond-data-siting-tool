@@ -250,6 +250,7 @@
    "lotArea": 6294,
    "ring": "[ring 10]",
    "notes": [
+    "Lot lines: which yard 4 of this lot's edges have is not known (?); the deepest it could have is applied (see Lot lines).",
     "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 61–64 dBA (quieter–standard unit rating) at the point of reception beside 550 HASTINGS ST W (CD-1 (316), quiet zone), 69 m away; limit 55 dBA at night (Noise Control By-law 6555 s. 2.3(b)(i))."
    ],
    "warn": [],
@@ -260,6 +261,78 @@
     "uy": -0.703929,
     "L": 79.198334,
     "W": 79.195163
+   },
+   "lineCls": {
+    "lines": [
+     {
+      "e": [
+       0
+      ],
+      "nx": 0.707107,
+      "ny": -0.707107,
+      "len": 79.195959,
+      "street": true,
+      "alley": false,
+      "kind": "unclear",
+      "cand": [
+       "front",
+       "flank"
+      ],
+      "why": "corner with equal street lines: the Director of Planning decides (s. 10.26.1(a))"
+     },
+     {
+      "e": [
+       1
+      ],
+      "nx": 0.700765,
+      "ny": 0.713392,
+      "len": 79.199116,
+      "street": true,
+      "alley": false,
+      "kind": "unclear",
+      "cand": [
+       "front",
+       "flank"
+      ],
+      "why": "corner with equal street lines: the Director of Planning decides (s. 10.26.1(a))"
+     },
+     {
+      "e": [
+       2
+      ],
+      "nx": -0.710271,
+      "ny": 0.703929,
+      "len": 78.843199,
+      "street": true,
+      "alley": false,
+      "kind": "unclear",
+      "cand": [
+       "front",
+       "flank"
+      ],
+      "why": "corner with equal street lines: the Director of Planning decides (s. 10.26.1(a))"
+     },
+     {
+      "e": [
+       3
+      ],
+      "nx": -0.703929,
+      "ny": -0.710271,
+      "len": 78.843199,
+      "street": true,
+      "alley": false,
+      "kind": "unclear",
+      "cand": [
+       "front",
+       "flank"
+      ],
+      "why": "corner with equal street lines: the Director of Planning decides (s. 10.26.1(a))"
+     }
+    ],
+    "f": null,
+    "corner": true,
+    "dbl": false,
+    "unclear": 4
    },
    "side": {
     "rot": false,
@@ -352,13 +425,95 @@
    "footArea": 6038.64267,
    "yards": {
     "front": 0,
-    "rear": 3.1,
+    "rear": 0,
     "s0": 0,
     "s1": 0,
-    "by": "zone"
+    "by": "lot lines",
+    "src": [
+     "van_zdb_i2",
+     "lot_van_s2_lines",
+     "lot_van_s10_frontage",
+     "lot_van_exterior_side"
+    ],
+    "edges": [
+     {
+      "i": 0,
+      "ax": 589.5,
+      "ay": 3778,
+      "bx": 645.5,
+      "by": 3834,
+      "kind": "unclear",
+      "cand": [
+       "front",
+       "flank"
+      ],
+      "why": "corner with equal street lines: the Director of Planning decides (s. 10.26.1(a))",
+      "d": 0,
+      "abuts": null,
+      "unA": false,
+      "len": 79.195959
+     },
+     {
+      "i": 1,
+      "ax": 645.5,
+      "ay": 3834,
+      "bx": 589,
+      "by": 3889.5,
+      "kind": "unclear",
+      "cand": [
+       "front",
+       "flank"
+      ],
+      "why": "corner with equal street lines: the Director of Planning decides (s. 10.26.1(a))",
+      "d": 0,
+      "abuts": null,
+      "unA": false,
+      "len": 79.199116
+     },
+     {
+      "i": 2,
+      "ax": 589,
+      "ay": 3889.5,
+      "bx": 533.5,
+      "by": 3833.5,
+      "kind": "unclear",
+      "cand": [
+       "front",
+       "flank"
+      ],
+      "why": "corner with equal street lines: the Director of Planning decides (s. 10.26.1(a))",
+      "d": 0,
+      "abuts": null,
+      "unA": false,
+      "len": 78.843199
+     },
+     {
+      "i": 3,
+      "ax": 533.5,
+      "ay": 3833.5,
+      "bx": 589.5,
+      "by": 3778,
+      "kind": "unclear",
+      "cand": [
+       "front",
+       "flank"
+      ],
+      "why": "corner with equal street lines: the Director of Planning decides (s. 10.26.1(a))",
+      "d": 0,
+      "abuts": null,
+      "unA": false,
+      "len": 78.843199
+     }
+    ],
+    "unclear": 4,
+    "unAbut": 0
    },
    "inset": "[ring 8]",
    "yardRect": "[cycle]",
+   "edgeYards": "[cycle]",
+   "yardOff": "[ring 8]",
+   "yardLine": "[ring 12]",
+   "yardOffBad": false,
    "mwSized": 0.5,
    "plant": {
     "s": {

@@ -17,6 +17,7 @@
   "genAt": "yard",
   "genSpares": "n1",
   "vis": "indoors",
+  "mwPick": "large",
   "mwSite": "146402"
  },
  "sel": {
@@ -162,7 +163,8 @@
    "lotArea": 4284,
    "ring": "[ring 18]",
    "notes": [
-    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 62–65 dBA (quieter–standard unit rating) at the property line of 8065 CEDRIC MAH ROAD NW (BRH), 101 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1))."
+    "Lot lines: what one of this lot's edges abuts is not known (no lot or street found, or a parcel with no zone on record), so which setback it has is not known (?); the deepest is applied (see Lot lines).",
+    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 62–65 dBA (quieter–standard unit rating) at the property line of 8065 CEDRIC MAH ROAD NW (BRH), 98 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1))."
    ],
    "warn": [],
    "F": {
@@ -172,6 +174,109 @@
     "uy": -0.658505,
     "L": 74.411021,
     "W": 58.042478
+   },
+   "lineCls": {
+    "lines": [
+     {
+      "e": [
+       0
+      ],
+      "nx": 0.753113,
+      "ny": 0.657892,
+      "len": 57.76028,
+      "street": true,
+      "alley": false,
+      "kind": "front",
+      "cand": null,
+      "why": "the only street line (s. 8.20 Front Lot Line (a))"
+     },
+     {
+      "e": [
+       1
+      ],
+      "nx": 0.658505,
+      "ny": -0.752577,
+      "len": 42.520583,
+      "street": false,
+      "alley": true,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       2
+      ],
+      "nx": 0.496139,
+      "ny": -0.868243,
+      "len": 12.093387,
+      "street": false,
+      "alley": true,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       3
+      ],
+      "nx": 0.816968,
+      "ny": -0.576683,
+      "len": 10.404326,
+      "street": false,
+      "alley": true,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       4
+      ],
+      "nx": 0.67828,
+      "ny": -0.734803,
+      "len": 8.845903,
+      "street": false,
+      "alley": true,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     },
+     {
+      "e": [
+       5,
+       6
+      ],
+      "nx": -0.740719,
+      "ny": -0.671815,
+      "len": 58.052185,
+      "street": false,
+      "alley": false,
+      "kind": "rear",
+      "cand": null,
+      "why": "furthest from and opposite the Front Lot Line (s. 8.20 Rear Lot Line)"
+     },
+     {
+      "e": [
+       7
+      ],
+      "nx": -0.658505,
+      "ny": 0.752577,
+      "len": 74.411021,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)"
+     }
+    ],
+    "f": {
+     "nx": 0.753113,
+     "ny": 0.657892
+    },
+    "corner": false,
+    "dbl": false,
+    "unclear": 0
    },
    "side": {
     "rot": false,
@@ -223,17 +328,138 @@
    ],
    "yards": {
     "front": 4.5,
-    "rear": 0,
+    "rear": 6,
     "s0": 0,
     "s1": 0,
-    "by": "side facts",
+    "by": "abutting, per line",
     "src": [
-     "arch_hb_edmBE"
-    ]
+     "arch_hb_edmBE",
+     "lot_edm_820_lines"
+    ],
+    "edges": [
+     {
+      "i": 0,
+      "ax": -1456,
+      "ay": 3215,
+      "bx": -1418,
+      "by": 3171.5,
+      "kind": "front",
+      "cand": null,
+      "why": "the only street line (s. 8.20 Front Lot Line (a))",
+      "d": 4.5,
+      "abuts": "street",
+      "unA": false,
+      "len": 57.76028
+     },
+     {
+      "i": 1,
+      "ax": -1418,
+      "ay": 3171.5,
+      "bx": -1450,
+      "by": 3143.5,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 0,
+      "abuts": "alley",
+      "unA": false,
+      "len": 42.520583
+     },
+     {
+      "i": 2,
+      "ax": -1450,
+      "ay": 3143.5,
+      "bx": -1460.5,
+      "by": 3137.5,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 0,
+      "abuts": "alley",
+      "unA": false,
+      "len": 12.093387
+     },
+     {
+      "i": 3,
+      "ax": -1460.5,
+      "ay": 3137.5,
+      "bx": -1466.5,
+      "by": 3129,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 0,
+      "abuts": "alley",
+      "unA": false,
+      "len": 10.404326
+     },
+     {
+      "i": 4,
+      "ax": -1466.5,
+      "ay": 3129,
+      "bx": -1473,
+      "by": 3123,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 0,
+      "abuts": "alley",
+      "unA": false,
+      "len": 8.845903
+     },
+     {
+      "i": 5,
+      "ax": -1473,
+      "ay": 3123,
+      "bx": -1499,
+      "by": 3151.5,
+      "kind": "rear",
+      "cand": null,
+      "why": "furthest from and opposite the Front Lot Line (s. 8.20 Rear Lot Line)",
+      "d": 6,
+      "abuts": "a parcel with no zone on record (?)",
+      "unA": true,
+      "len": 38.577843
+     },
+     {
+      "i": 6,
+      "ax": -1499,
+      "ay": 3151.5,
+      "bx": -1512,
+      "by": 3166,
+      "kind": "rear",
+      "cand": null,
+      "why": "furthest from and opposite the Front Lot Line (s. 8.20 Rear Lot Line)",
+      "d": 0,
+      "abuts": "lot",
+      "unA": false,
+      "len": 19.474342
+     },
+     {
+      "i": 7,
+      "ax": -1512,
+      "ay": 3166,
+      "bx": -1456,
+      "by": 3215,
+      "kind": "side",
+      "cand": null,
+      "why": "Interior Side Lot Line (s. 8.20)",
+      "d": 0,
+      "abuts": "lot",
+      "unA": false,
+      "len": 74.411021
+     }
+    ],
+    "unclear": 0,
+    "unAbut": 1
    },
    "yardRect": "[ring 8]",
    "inset": "[ring 8]",
    "yardNote": "",
+   "edgeYards": "[cycle]",
+   "yardOff": "[ring 18]",
+   "yardLine": "[ring 20]",
+   "yardOffBad": false,
    "loadingNeed": {
     "n": 1,
     "len": 9,
@@ -246,14 +472,14 @@
    },
    "loading": "[ring 8]",
    "loadV": [
-    -29.021239,
-    23.216991
+    -28.295708,
+    23.942522
    ],
    "loadDepth": 15.1,
    "loadSpaces": [
     "[ring 8]"
    ],
-   "plantYardStart": 22.10551,
+   "plantYardStart": 16.10551,
    "dir": -1,
    "v": [
     -29.021239,
@@ -262,7 +488,7 @@
    "uFront": -32.70551,
    "footMode": "max",
    "uBuild": [
-    22.10551,
+    16.10551,
     -32.70551
    ],
    "mwSized": 3.8,
@@ -364,8 +590,8 @@
     },
     "yard": "[ring 8]",
     "yardU": [
-     10.12951,
-     22.10551
+     4.12951,
+     16.10551
     ],
     "indoor": 464.37471,
     "coolRoofIndoor": 5,
@@ -384,10 +610,10 @@
     "floor": 2913.333333,
     "perMW": 766.666667
    },
-   "foot": "[ring 12]",
+   "foot": "[ring 8]",
    "footRect": "[ring 8]",
    "simpleMass": true,
-   "footArea": 2494.170534,
+   "footArea": 2145.431139,
    "noise": {
     "lw": [
      109.8,
@@ -395,8 +621,8 @@
     ],
     "n": 5,
     "src": [
-     -1458.2,
-     3176.5
+     -1455.5,
+     3178.3
     ],
     "where": "indoors",
     "groups": [
@@ -405,7 +631,7 @@
       "n": 5
      }
     ],
-    "tested": 2483,
+    "tested": 2478,
     "overQ": 0,
     "overS": 0,
     "limit": 50,
@@ -420,14 +646,14 @@
     "bldOnly": 0,
     "block": null,
     "flag": null,
-    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 62–65 dBA (quieter–standard unit rating) at the property line of 8065 CEDRIC MAH ROAD NW (BRH), 101 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1)).",
+    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 62–65 dBA (quieter–standard unit rating) at the property line of 8065 CEDRIC MAH ROAD NW (BRH), 98 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1)).",
     "worst": {
      "addr": "8065 CEDRIC MAH ROAD NW",
      "zt": "BRH",
      "lot": true,
-     "d": 101.1,
-     "lo": 61.7,
-     "hi": 65,
+     "d": 98,
+     "lo": 62,
+     "hi": 65.3,
      "L": 50,
      "Ls": 50,
      "sec": "Bylaw 14600 s. 20(1)"
@@ -462,8 +688,8 @@
    "ground": false
   },
   "hallS": [
-   1643.77664,
-   2465.664961
+   1351.338993,
+   2027.00849
   ],
   "hallL": null,
   "floors": 2,
@@ -472,54 +698,54 @@
    2
   ],
   "fpNote": "from the site setup: the most the zone allows, less setbacks, loading and the plant yard",
-  "fp": 2176.642044,
+  "fp": 1825.582024,
   "fpCalc": null,
-  "indoorPlant": 928.74942,
+  "indoorPlant": 835.874478,
   "g": [
    6854.4,
    6854.4
   ],
   "G": [
-   3424.534667,
-   3424.534667
+   2815.28957,
+   2815.28957
   ],
   "fullCover": "",
   "heightCut": true,
   "yardCut": true,
   "gross": [
-   3424.534667,
-   3424.534667
+   2815.28957,
+   2815.28957
   ],
   "how": "lot 4,284 m² × floor-space ratio 1.6",
   "hallGross": [
-   3424.534667,
-   3424.534667
+   2815.28957,
+   2815.28957
   ],
   "density": "typical",
   "mwS": [
-   2.609169,
-   8.485459
+   2.144983,
+   6.954706
   ],
   "mwL": null,
   "hall": [
-   1643.77664,
-   2465.664961
+   1351.338993,
+   2027.00849
   ],
   "mw": [
-   2.609169,
-   8.485459
+   2.144983,
+   6.954706
   ],
   "m2MW": [
    290,
    630
   ],
   "mwCheck": [
-   3.087948,
-   6.781257
+   2.538584,
+   5.574831
   ],
-  "mwTopRaw": 8.502293,
+  "mwTopRaw": 6.989684,
   "mwCapped": true,
-  "plantFor": 8.485459
+  "plantFor": 6.954706
  },
  "model": "[cycle]",
  "errors": []

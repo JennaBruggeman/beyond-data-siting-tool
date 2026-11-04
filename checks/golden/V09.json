@@ -232,6 +232,7 @@
    "lotArea": 7865,
    "ring": "[ring 14]",
    "notes": [
+    "Lot lines: which yard 2 of this lot's edges have is not known (?); the deepest it could have is applied (see Lot lines).",
     "Noise: needs a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 68–71 dBA (quieter–standard unit rating) at the point of reception beside 247 1ST AVE E (I-3, activity zone), 37 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii))."
    ],
    "warn": [],
@@ -242,6 +243,101 @@
     "uy": -0.751697,
     "L": 104.067546,
     "W": 88.288991
+   },
+   "lineCls": {
+    "lines": [
+     {
+      "e": [
+       0
+      ],
+      "nx": 0.751382,
+      "ny": -0.659868,
+      "len": 103.808718,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "faces sideways (s. 2 Side Yard; our reading ?)"
+     },
+     {
+      "e": [
+       1
+      ],
+      "nx": 0.385251,
+      "ny": 0.922812,
+      "len": 55.807706,
+      "street": false,
+      "alley": false,
+      "kind": "rear",
+      "cand": null,
+      "why": "opposite the front and furthest from it (s. 2 yard diagram; our reading ?)"
+     },
+     {
+      "e": [
+       2
+      ],
+      "nx": 0.327111,
+      "ny": 0.944986,
+      "len": 13.756816,
+      "street": false,
+      "alley": false,
+      "kind": "unclear",
+      "cand": [
+       "rear",
+       "side"
+      ],
+      "why": "faces away from the front but is not the furthest (a notch): s. 2 defines no rear or side property line (?)"
+     },
+     {
+      "e": [
+       3
+      ],
+      "nx": 0.28,
+      "ny": 0.96,
+      "len": 25,
+      "street": false,
+      "alley": false,
+      "kind": "unclear",
+      "cand": [
+       "rear",
+       "side"
+      ],
+      "why": "faces away from the front but is not the furthest (a notch): s. 2 defines no rear or side property line (?)"
+     },
+     {
+      "e": [
+       4
+      ],
+      "nx": -0.751697,
+      "ny": 0.659508,
+      "len": 70.507092,
+      "street": false,
+      "alley": false,
+      "kind": "side",
+      "cand": null,
+      "why": "faces sideways (s. 2 Side Yard; our reading ?)"
+     },
+     {
+      "e": [
+       5
+      ],
+      "nx": -0.6573,
+      "ny": -0.753629,
+      "len": 88.23973,
+      "street": true,
+      "alley": false,
+      "kind": "front",
+      "cand": null,
+      "why": "the only street line (s. 2 Front Yard; s. 10.26.1)"
+     }
+    ],
+    "f": {
+     "nx": -0.6573,
+     "ny": -0.753629
+    },
+    "corner": false,
+    "dbl": false,
+    "unclear": 2
    },
    "side": {
     "rot": false,
@@ -299,11 +395,115 @@
     "s0": 7.6,
     "s1": 7.6,
     "max": 61,
-    "by": "zone"
+    "by": "lot lines",
+    "src": [
+     "van_zdb_i3",
+     "lot_van_s2_lines",
+     "lot_van_s10_frontage",
+     "lot_van_exterior_side"
+    ],
+    "edges": [
+     {
+      "i": 0,
+      "ax": 1675,
+      "ay": 2018.5,
+      "bx": 1743.5,
+      "by": 2096.5,
+      "kind": "side",
+      "cand": null,
+      "why": "faces sideways (s. 2 Side Yard; our reading ?)",
+      "d": 7.6,
+      "abuts": null,
+      "unA": false,
+      "len": 103.808718
+     },
+     {
+      "i": 1,
+      "ax": 1743.5,
+      "ay": 2096.5,
+      "bx": 1692,
+      "by": 2118,
+      "kind": "rear",
+      "cand": null,
+      "why": "opposite the front and furthest from it (s. 2 yard diagram; our reading ?)",
+      "d": 3.1,
+      "abuts": null,
+      "unA": false,
+      "len": 55.807706
+     },
+     {
+      "i": 2,
+      "ax": 1692,
+      "ay": 2118,
+      "bx": 1679,
+      "by": 2122.5,
+      "kind": "unclear",
+      "cand": [
+       "rear",
+       "side"
+      ],
+      "why": "faces away from the front but is not the furthest (a notch): s. 2 defines no rear or side property line (?)",
+      "d": 7.6,
+      "abuts": null,
+      "unA": false,
+      "len": 13.756816
+     },
+     {
+      "i": 3,
+      "ax": 1679,
+      "ay": 2122.5,
+      "bx": 1655,
+      "by": 2129.5,
+      "kind": "unclear",
+      "cand": [
+       "rear",
+       "side"
+      ],
+      "why": "faces away from the front but is not the furthest (a notch): s. 2 defines no rear or side property line (?)",
+      "d": 7.6,
+      "abuts": null,
+      "unA": false,
+      "len": 25
+     },
+     {
+      "i": 4,
+      "ax": 1655,
+      "ay": 2129.5,
+      "bx": 1608.5,
+      "by": 2076.5,
+      "kind": "side",
+      "cand": null,
+      "why": "faces sideways (s. 2 Side Yard; our reading ?)",
+      "d": 7.6,
+      "abuts": null,
+      "unA": false,
+      "len": 70.507092
+     },
+     {
+      "i": 5,
+      "ax": 1608.5,
+      "ay": 2076.5,
+      "bx": 1675,
+      "by": 2018.5,
+      "kind": "front",
+      "cand": null,
+      "why": "the only street line (s. 2 Front Yard; s. 10.26.1)",
+      "d": 0.6,
+      "abuts": null,
+      "unA": false,
+      "len": 88.23973
+     }
+    ],
+    "unclear": 2,
+    "unAbut": 0
    },
    "yardRect": "[ring 8]",
    "inset": "[ring 8]",
    "yardNote": "",
+   "edgeYards": "[cycle]",
+   "yardOff": "[ring 14]",
+   "yardLine": "[ring 14]",
+   "yardOffBad": false,
    "loadingNeed": {
     "n": 2,
     "len": 10.2,
@@ -317,7 +517,7 @@
    },
    "loading": "[ring 8]",
    "loadV": [
-    -24.4,
+    -12.2,
     30.5
    ],
    "loadDepth": 16.3,
