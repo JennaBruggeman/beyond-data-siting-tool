@@ -4,7 +4,7 @@ Kept by Claude; updated as research finds more. "Why" = what the tool needs from
 
 | Standard | Why | Where it's cited |
 |---|---|---|
-| ASHRAE 62.1-2022: OBTAINED 1 Nov 2026 (register ashrae621_2022). A later addendum has the generator row | Generator and cooling-unit exhaust distances to a refuge, pool or greenhouse intake | Architecture mode spatial rules |
+| ASHRAE 62.1-2022: OBTAINED 1 Nov 2026 (register ashrae621_2022; pp. 8-11 page images 3 Nov). Addendum ag (generator row): OBTAINED 3 Nov 2026 (register arch_ashrae621ag, local copy) | Generator and cooling-unit exhaust distances to a refuge, pool or greenhouse intake | Architecture mode spatial rules |
 | CSA C282 (emergency electrical power supply for buildings): PARTLY OBTAINED 3 Nov 2026 (Clauses 3–9, pp. 17–38; register arch_csa_c282). Scope Clause 1.1 and Annexes not uploaded | Whether it covers a data centre's IT generators (scope) | Generator testing; plant schedule |
 | NFPA 37 (2024) | PARTLY OBTAINED 1 Nov 2026 (pp. 37-8 to 37-12, register nfpa37_2024). Fuel rooms and exhaust chapter read too (pp. 37-13 to 37-18). Its exhaust rule sends you to NFPA 211 (low priority) | Plant clearances |
 | Canadian Electrical Code (CSA C22.1) | Working space; customer-owned substations | Plant schedule |
