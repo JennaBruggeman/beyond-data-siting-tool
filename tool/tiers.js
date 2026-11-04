@@ -87,9 +87,36 @@ function backLink(){ const sd=$('#side'), A=BD.S&&BD.S.answers; if(!sd||!A||BD.t
 const live=()=>{ const A=BD.S.answers; return BD.deck.DECK.filter(d=>!d.when||d.when(A)); };
 function sizeSet(which){ const A=BD.S.answers; A.mw=null; BD.modelReset&&BD.modelReset(); const f=BD.eng.siteFacts(), hi=f.mw[1];
   const fm=BD.fitMax?BD.fitMax():null, top=fm!=null?fm:hi; /* "as large as fits" = everything fits, not floor only (J.B. 20 Oct) */
-  const typ=Math.min(TYPICAL_MW,top); A.mw=which==='large'?+top.toFixed(1):which==='mid'?+((typ+top)/2).toFixed(1):+typ.toFixed(1); A.mwPick=which; A.mwSite=BD.S.sel&&BD.S.sel.id; BD.modelReset&&BD.modelReset(); }
+  const typ=Math.min(TYPICAL_MW,top); let v=which==='large'?+top.toFixed(1):which==='mid'?+((typ+top)/2).toFixed(1):+typ.toFixed(1);
+  /* bugfix 4 Nov 2026 (retest resident 1, 3): fitMax assumes a smaller size never needs more room, so the typical size can fail where the largest passes.
+     The size used is one that passes every hard rule: the wanted one, else the largest passing size below it (site.js fitNear). */
+  if(fm!=null&&BD.fitNear){ const p=BD.fitNear(v); if(p!=null) v=p; }
+  A.mw=v; A.mwPick=which; A.mwSite=BD.S.sel&&BD.S.sel.id; BD.modelReset&&BD.modelReset(); }
+/* bugfix 4 Nov 2026 (retest resident 1): a lot whose usual set-up fits no size (E05, E06B: the noise by-law) opens on the set-up the tool's own search
+   finds (flow.js findFit, the search worked examples use), at the typical size or the nearest size that passes. If no placement fits, the card says
+   which rules block them. Runs once per lot, and not after the resident has picked Roof or Yard. */
+const lotKey=()=>BD.S&&BD.S.sel?BD.S.sel.city+':'+BD.S.sel.id:'';
+let found='', foundWhy=null;
+const PW={roof:'on the roof',yard:'in the yard',split:'split between roof and yard'};
+function changedText(b,A){ const L=[];
+  if((b.plantAt||'roof')!==(A.plantAt||'roof')) L.push('cooling plant '+PW[A.plantAt||'roof']);
+  if(A.vis==='indoors'&&b.vis!=='indoors') L.push('the roof plant indoors, in a plant room');
+  if(A.gens==='none'&&b.gens!=='none') L.push('no backup generators');
+  else if(A.gens!=='none'&&(b.genAt||'yard')!==(A.genAt||'yard')) L.push('generators '+PW[A.genAt||'yard']);
+  return L.length?`The usual choices fit no size on this lot, so the tool chose: ${L.join('; ')}.`:''; }
+const ruleName=p=>{ const i=p.indexOf(':'); return i>0&&i<45?p.slice(0,i):p.replace(/\.$/,''); };
+function autoFind(){ const A=BD.S.answers, k=lotKey(); if(!k||found===k||A.resPlant||!BD.flow||!BD.flow.findFit) return; found=k; foundWhy=null;
+  if(BD.fitMax&&BD.fitMax()!=null) return;
+  const b={plantAt:A.plantAt,genAt:A.genAt,gens:A.gens,vis:A.vis}, why=[], best=BD.flow.findFit(why);
+  if(best){ sizeSet('typ'); A.resNote=changedText(b,A); } else { foundWhy={k,why}; sizeSet(A.mwPick||'typ'); } }
+/* no placement fits: the rules that block them, short, with the full reasons folded */
+function noneFits(probs){ const W=foundWhy&&foundWhy.k===lotKey()?foundWhy.why:null, all=W?W.flatMap(w=>w.p):probs, by=new Map();
+  all.forEach(p=>{ const n=ruleName(p); if(!by.has(n)) by.set(n,p); });
+  return `<p class="dwarn">Nothing fits on this lot.</p><p class="sub">${W?`The tool tried ${W.length} set-ups (cooling on the roof, in the yard or split; the roof plant indoors; generators in the yard, on the roof or none). `:''}What blocks ${W?'them':'it'}: <span class="k">${esc([...by.keys()].join('; '))}</span>. Try another lot.</p>
+   <details class="fp"><summary>The rules in full</summary>${[...by.values()].map(p=>`<p class="src">${esc(p)}</p>`).join('')}</details>`; }
 function residentCard(){ const A=BD.S.answers, m=BD.model&&BD.model(); if(!m) return;
   if(A.mw==null||!A.mwPick) sizeSet(A.mwPick||'typ');
+  autoFind();
   const f=BD.eng.siteFacts(), fm=BD.fitMax?BD.fitMax():null, hi=fm!=null?fm:0, L=live(); // largest size where everything fits (J.B. 20 Oct)
   const rows=L.map((d,j)=>{ const opts=d.opts(BD.model()), cur=d.k(A), o=opts.find(x=>x.v===cur)||opts[0]; const ot=d.id==='outside'&&o.v==='dry'&&(A.inside||'air')==='air'?'Air-cooled chillers':o.t; return `<li><span class="aq">${esc(d.q)}</span><span class="aa">${esc(ot)}</span></li>`; }).join('');
   const where=A.gens==='none'?(A.plantAt||'roof'):((A.plantAt||'roof')===(A.genAt||'yard')?A.plantAt:''), whereNow=where?'':`Now: cooling ${({roof:'on the roof',yard:'in the yard',split:'split'})[A.plantAt||'roof']}, generators ${({roof:'on the roof',yard:'in the yard'})[A.genAt||'yard']} (the tool's usual choice; which is more common is not sourced ?).`;
@@ -100,7 +127,7 @@ function residentCard(){ const A=BD.S.answers, m=BD.model&&BD.model(); if(!m) re
    <p>You chose where. Choose roof or yard for the plant; the rest is the tool's usual choices, <span class="k">a starting point, not a recommendation</span>.</p>
    <h3>Where the plant goes</h3><div class="dch" role="radiogroup">${[['roof','Roof'],['yard','Yard']].map(([v,t])=>`<button role="radio" data-pw="${v}" aria-checked="${(A.resPlant||where)===v}">${t}</button>`).join('')}</div>
    <p class="sub">Cooling units and backup generators together. ${A.resNote?esc(A.resNote)+' ':''}${A.resPlant?(A.resPlant==='roof'?'The yard stays as free as the lot allows.':'The building gets shorter to leave the yard for plant.'):whereNow||(where==='roof'?'The yard stays free; whatever the roof cannot hold is placed in the yard.':'The building gets shorter to leave the yard for plant.')}</p>
-   ${nothing?`<p class="dwarn">Nothing fits on this lot with these choices: ${esc(probs.join(' '))} Change a choice below, or try another lot.</p>`:`
+   ${nothing?noneFits(probs):`
    <h3>How big</h3><p class="sub">${M&&M.sizedTo?`${esc(A.mw.toFixed(1))} MW of servers: ${store}, any shape (our arithmetic: 460 m² of hall per MW ÷ 0.6 hall share, the midpoints)${''/* 2 Nov 2026 fix pass: D-arith */}`:`The most the zone allows: ${store}, about ${f.mw[0].toFixed(1)}–${hi.toFixed(1)} MW of servers depending on how tightly racks are packed${hi>=40?' (the tool stops at 40 MW)':''}`}. "Typical" is the size of data centres already built inside Vancouver, Edmonton and Calgary, about 2–2.5 MW (operator claims)${hi<TYPICAL_MW?`; this lot fits only ${hi.toFixed(1)} MW`:''}.</p>`}
    <h3>Everything else, chosen for you</h3><ul class="assumed">${rows}</ul><p class="sub">To change these, set "Showing" at the top to how it is worked out.</p>
    ${!nothing&&probs.length?`<div class="fstuck" role="alert"><b>This set-up doesn't work on this lot.</b><ul>${probs.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><div class="fsx"><button class="btn" id="rFit">Use the largest size that fits (${hi.toFixed(1)} MW)</button></div></div>`:''}
@@ -123,6 +150,6 @@ function patchSetup(){ if(!BD.setup||!BD.deck) return setTimeout(patchSetup,200)
   BD.setup.start=()=>{ if(BD.tier()==='resident'&&!BD.S.answers.residentEdit) residentCard(); else orig(); }; }
 patchSetup();
 // a new parcel: residents start again from the assumed set-up
-let lastSel=''; setInterval(()=>{ const k=BD.S&&BD.S.sel?BD.S.sel.city+':'+BD.S.sel.id:''; if(k!==lastSel){ lastSel=k; if(BD.S&&BD.S.answers){ delete BD.S.answers.residentEdit; delete BD.S.answers.mwPick; delete BD.S.answers.resPlant; delete BD.S.answers.resNote; } } },500);
+let lastSel=''; setInterval(()=>{ const k=BD.S&&BD.S.sel?BD.S.sel.city+':'+BD.S.sel.id:''; if(k!==lastSel){ lastSel=k; if(found!==k){ found=''; foundWhy=null; } if(BD.S&&BD.S.answers){ delete BD.S.answers.residentEdit; delete BD.S.answers.mwPick; delete BD.S.answers.resPlant; delete BD.S.answers.resNote; } } },500);
 BD.TIERS=TIERS;
 })();

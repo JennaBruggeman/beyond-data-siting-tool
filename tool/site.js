@@ -228,7 +228,7 @@ function yardsOf(m,Z,side,fl){ const y=Z.yards||{front:0,side:0,rear:0}, out={fr
   const S0=side.S, fe=fl>0?'u0':'u1', re=fl>0?'u1':'u0'; return {front:val(S0[fe]),rear:val(S0[re]),s0:val(S0.v0),s1:val(S0.v1),max:y.max,by:'side facts',src:((BD.data.raw.lotside||{edmSetback:{}}).edmSetback[Z.key]||{}).src||['?']}; }
 function setHall(m,o){ if(!o){ m.serverFoot=m.hallFull; delete m.hallTop; delete m.hallStoreys; delete m.hallData; delete m.hallOpt; m.hallFallback=true; return; }
   m.serverFoot=rectW(m.F,o.u[0],o.u[1],o.v[0],o.v[1]); m.hallTop=o.top; m.hallStoreys=o.st; m.hallData=o.k; m.hallOpt=o.key; m.hallFallback=false; }
-BD.siteGeo={rectW,inscribe,clip,frameOf}; BD.model=model; BD.modelReset=()=>{ cache.key=null; };
+BD.siteGeo={rectW,inscribe,clip,frameOf}; BD.model=model; BD.modelReset=()=>{ cache.key=null; fsCache.key=null; };
 /* a set-up that does not work (J.B. 20 Oct: "a set up that doesnt work shouldnt ever let you click next"): everything that stops it, in words */
 function setupProblems(noFloor){ const m=model(); if(!m||!m.F) return []; const p=(m.warn||[]).slice();
   if(m.plant&&m.plant.miss) p.push(...m.plant.miss.map(x=>x.charAt(0).toUpperCase()+x.slice(1)+'.'));
@@ -244,7 +244,21 @@ function fitMax(){ const A=BD.S.answers, keep=A.mw; A.mw=null; cache.key=null; l
   if(BD.eng&&A.gens!=='none'&&(A.genAt||'yard')==='roof'){ const R=BD.eng.R; top=Math.min(top,Math.floor(BD.data.equipment.roofTank.line/(R.pue[1]*1000*R.fuelHours*R.fuelLkWh)*10)); } /* Build 2: B139.1.1 6.5.3, one set (register arch_csa_b139) */
   if(top>=1&&ok(top/10)) best=top/10; else { let a=1, b=top-1; while(a<=b){ const mid=(a+b)>>1; if(ok(mid/10)){ best=mid/10; a=mid+1; } else b=mid-1; } }
   A.mw=keep; cache.key=null; return best; }
-BD.setupProblems=setupProblems; BD.fitMax=fitMax;
+/* bugfix 4 Nov 2026 (retest resident 1–3): fitMax's search assumes a smaller size never needs more room. That does not hold: once a size is set the
+   building shrinks to it, so a smaller size has a smaller roof (CLARK: 0.1–0.5 MW fail, 0.75–1.9 MW pass). The sizes that pass: each size-slider step
+   below fitMax, and fitMax itself, each checked against every hard rule (setupProblems). {ok, min, max}; ok is empty when nothing fits. No new figure. */
+let fsCache={key:null,v:null};
+function fitSizes(){ const A=BD.S.answers, keep=A.mw, B=Object.assign({},A); delete B.mw; delete B.mwPick; delete B.mwSite; delete B.resNote;
+  const key=JSON.stringify([BD.S.sel&&BD.S.sel.city,BD.S.sel&&BD.S.sel.id,B]); if(fsCache.key===key) return fsCache.v;
+  const fm=fitMax(), out={ok:[],min:null,max:null};
+  if(fm!=null){ const ST=(BD.eng&&BD.eng.R.steps)||[]; for(const v of ST.filter(s=>s<fm-1e-9).concat([fm])){ A.mw=v; cache.key=null; if(!setupProblems(true).length) out.ok.push(v); }
+    A.mw=keep; cache.key=null; }
+  if(out.ok.length){ out.min=out.ok[0]; out.max=out.ok[out.ok.length-1]; } fsCache={key,v:out}; return out; }
+/* does this size pass every hard rule, with the other answers as they are? */
+function sizePasses(v){ const A=BD.S.answers, keep=A.mw; A.mw=v; cache.key=null; let ok=false; try{ ok=!setupProblems().length; }finally{ A.mw=keep; cache.key=null; } return ok; }
+/* the passing size for a wanted one: itself if it passes, else the largest passing size below it, else the smallest that passes; null if none passes */
+function fitNear(want){ if(want!=null&&sizePasses(want)) return want; const S=fitSizes(); if(!S.ok.length) return null; const below=S.ok.filter(v=>v<=(want||0)+1e-9); return below.length?below[below.length-1]:S.ok[0]; }
+BD.setupProblems=setupProblems; BD.fitMax=fitMax; BD.fitSizes=fitSizes; BD.fitNear=fitNear; BD.sizePasses=sizePasses;
 
 /* ---------- the drawer (decision A, 16 Oct): over the map, beside the panel ---------- */
 const css=document.createElement('style'); css.textContent=`

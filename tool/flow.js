@@ -105,10 +105,11 @@ async function runExample(i){ const x=EXAMPLES[i]; reset(); F.exPending=true; Ob
    when the user's choices fit no size (lot test: default choices fit nothing on many small lots). Returns what changed, or null. */
 /* 3 Nov 2026 (noise mitigation): when no outdoor placement fits (the noise by-law blocks most), the roof plant brought indoors is tried next, before
    dropping the generators: a plant room to the NSW 2021 terms is credited 25 dB (engine NMIT; register arch_nz_nswDcNoise). It takes floor area (plant.js). */
-function findFit(){ if(!BD.S.sel||!BD.fitMax) return null; const A=BD.S.answers, base={plantAt:A.plantAt,genAt:A.genAt,gens:A.gens,vis:A.vis};
+/* bugfix 4 Nov 2026 (retest resident 1): `why`, if given, collects the problems of each placement that fits no size, so residents can be told which rule blocks them all */
+function findFit(why){ if(!BD.S.sel||!BD.fitMax) return null; const A=BD.S.answers, base={plantAt:A.plantAt,genAt:A.genAt,gens:A.gens,vis:A.vis};
   const IN={vis:'indoors',plantAt:'roof'}, tries=[{},{genAt:'roof'},{plantAt:'split'},{plantAt:'yard'},{plantAt:'split',genAt:'roof'},{plantAt:'yard',genAt:'roof'},
     Object.assign({},IN),Object.assign({genAt:'roof'},IN),{gens:'none'},{gens:'none',plantAt:'split'},{gens:'none',plantAt:'yard'},Object.assign({gens:'none'},IN)], lastG=7, lastOut=5;
-  let best=null; for(const [i,t] of tries.entries()){ if(base.vis==='indoors'&&t.vis) continue; Object.assign(A,base,t); BD.modelReset&&BD.modelReset(); const v=BD.fitMax(); if(!v) continue;
+  let best=null; for(const [i,t] of tries.entries()){ if(base.vis==='indoors'&&t.vis) continue; Object.assign(A,base,t); BD.modelReset&&BD.modelReset(); const v=BD.fitMax(); if(!v){ if(why) why.push({t,p:BD.setupProblems()}); continue; }
     if(!best) best={v,t}; else if(v>best.v+0.05&&!(best.t.gens!=='none'&&t.gens==='none')&&!(!best.t.vis&&t.vis)) best={v,t};
     if(i===0) break; if(best&&best.t.gens!=='none'&&(i===lastG||(i===lastOut&&!best.t.vis))) break; }
   Object.assign(A,base,best?best.t:{}); if(best){ A.mw=best.v; A.mwPick='large'; A.mwSite=BD.S.sel.id; } BD.modelReset&&BD.modelReset(); return best; }
