@@ -103,7 +103,18 @@ function model(){
   let ring=s.ring; if(!ring&&s.pt){ const r=Math.sqrt(Math.max(lotArea,900))/2; ring=new Float64Array([s.pt[0]-r,s.pt[1]-r,s.pt[0]+r,s.pt[1]-r,s.pt[0]+r,s.pt[1]+r,s.pt[0]-r,s.pt[1]+r]); }
   const m={Z,city,lotArea,ring,notes:[],warn:[]};
   if(!ring){ cache={key,m}; return m; }
-  const F=frameOf(ring); m.F=F;
+  let F=frameOf(ring);
+  /* Build 2 (3 Nov 2026, part 3): lot-side facts (tool/lotside.js; select() in index.html). The end that faces a street becomes the street front (the
+     higher class if both do); "Swap the ends" still swaps it. If no end faces a street but a long side does, the frame is turned so that side is an end
+     (a drawing choice). Edmonton BE, IM, IH: each side's setback follows what it faces (tool/data/lotside.json edmSetback; register arch_hb_edmBE,
+     arch_hb_edmIM, arch_hb_edmIH): BE 6.0 m to a street, 4.5 m to a Collector or Local Road, 6.0 m to a lot in a residential zone, 0 m to other lots and
+     alleys; IM 3.0 m to a street, 6.0 m to a lot in a non-industrial zone; IH 3.0 m to a street. With no street found, the zone's own yards stay. */
+  const LSD=BD.data.lotside; let side=null;
+  if(s.edges&&s.edges.length&&BD.lotSide&&!A.noSide){ const RK=BD.lotSide.RANK, has=(S0,k)=>!!S0[k].street; let S0=BD.lotSide.assign(s.edges,F), rot=false;
+    if(!has(S0,'u0')&&!has(S0,'u1')&&(has(S0,'v0')||has(S0,'v1'))){ const o=F, ux=-o.uy, uy=o.ux; F={cx:o.cx,cy:o.cy,ux,uy,L:o.W,W:o.L,toW:(a,b)=>[o.cx+a*ux-b*uy,o.cy+a*uy+b*ux],toL:(x,y)=>[(x-o.cx)*ux+(y-o.cy)*uy,-(x-o.cx)*uy+(y-o.cy)*ux]}; S0=BD.lotSide.assign(s.edges,F); rot=true; }
+    const r=k=>S0[k].street?1+RK[S0[k].street.cls]:0, any=['u0','u1','v0','v1'].some(k=>S0[k].street);
+    side={S:S0,rot,any,autoU1:r('u1')>r('u0'),src:s.city==='edm'?['edmRoads2026','edmZoningGeo']:['vanStreets2026','vanTax']}; }
+  m.F=F; if(side){ const c=f=>({street:f.street?f.street.cls:null,road:f.street?f.street.name:null,d:f.street?Math.round(f.street.d):null,alley:f.alley,nbr:f.nbr.slice()}); m.side={rot:side.rot,autoU1:side.autoU1,any:side.any,u0:c(side.S.u0),u1:c(side.S.u1),v0:c(side.S.v0),v1:c(side.S.v1),src:side.src}; }
   const blds=(s.blds||[]).filter(b=>b.f!==3);
   // height and storeys (6.0 m ground floor, 5.5–6.0 m data-hall floors — engine R.ftf)
   const ftf=BD.eng?BD.eng.R.ftf:{ground:6,up:[5.5,6]};
@@ -114,7 +125,7 @@ function model(){
     m.feet=blds.map(b=>({r:b.r,h:b.h})); m.footArea=blds.reduce((t,b)=>t+b.a,0); // all parts (sweep M67: these sat inside the comment)
     /* 2 Nov 2026 hard rules (site audit 16): yard plant beside an existing building stays out of the zone's required yards too (zone source: Z.srcId).
        The 61 m building width is not a yard and is not applied to an existing building. */
-    if(Z.yards){ const y=Z.yards, fl=A.flip?-1:1; m.inset=rectW(F,-F.L/2+(fl>0?y.front:y.rear),F.L/2-(fl>0?y.rear:y.front),-F.W/2+y.side,F.W/2-y.side); m.yardRect=m.inset; }
+    if(Z.yards){ const fl=!!(side&&side.autoU1)!==!!A.flip?-1:1, y=yardsOf(m,Z,side,fl); m.yards=y; m.inset=rectW(F,-F.L/2+(fl>0?y.front:y.rear),F.L/2-(fl>0?y.rear:y.front),-F.W/2+y.s0,F.W/2-y.s1); m.yardRect=m.inset; }
   } else {
     let H=Z.hOutright, hn='outright';
     if(A.hmode==='cond'&&Z.hx&&!A.userH){ H=Z.hx[0]; hn='conditional'; }
@@ -125,12 +136,12 @@ function model(){
       if(A.storeys>maxSt) m.hClamp={asked:A.storeys,st:maxSt,want,lim:Z.hOutright,src:Z.srcId,text:`${A.storeys} storeys need about ${want.toFixed(1)} m, above the ${Z.hOutright} m ${A.userH?'you set':'this zone allows outright'} (${A.userH?'your limits':`zone ${Z.zone}${Z.assumed?', as if rezoned':''}; register ${Z.srcId}`}). The tool uses ${maxSt} storeys (${H.toFixed(1)} m), the most that height holds.${Z.hx&&!A.userH?` Taller needs the City's approval: choose "With approval" (up to ${Z.hx[1]} m).`:A.userH?'':' Taller needs a rezoning: set your own limits.'}`}; }
     m.H=H; m.hmode=hn; m.nF=stU?[stU,stU]:nF(H);
     // setbacks
-    const y=Z.yards||{front:0,side:0,rear:0}; const fl=A.flip?-1:1;
-    let u0=-F.L/2+(fl>0?y.front:y.rear), u1=F.L/2-(fl>0?y.rear:y.front), v0=-F.W/2+y.side, v1=F.W/2-y.side;
+    const fl=!!(side&&side.autoU1)!==!!A.flip?-1:1, y=yardsOf(m,Z,side,fl); m.yards=y; /* Build 2: the street end is the front; "Swap the ends" swaps it */
+    let u0=-F.L/2+(fl>0?y.front:y.rear), u1=F.L/2-(fl>0?y.rear:y.front), v0=-F.W/2+y.s0, v1=F.W/2-y.s1;
     m.yardRect=Z.yards?rectW(F,u0,u1,v0,v1):null; /* 2 Nov 2026: the line of the required yards, before the 61 m width cap (the fence stands on it) */
     if(y.max){ if(u1-u0>y.max){ const c=(u0+u1)/2; u0=c-y.max/2; u1=c+y.max/2; } if(v1-v0>y.max){ const c=(v0+v1)/2; v0=c-y.max/2; v1=c+y.max/2; } }
     m.inset=rectW(F,u0,u1,v0,v1); m.yardNote=Z.yardsKnown?'':'Yards and setbacks for this zone are not yet read, so the building may cover the whole lot.';
-    // loading: rear end of the buildable area (the end with the rear yard; which end faces the street is not known in the tool)
+    // loading: rear end of the buildable area (the end with the rear yard; Build 2: the end away from the street when a street was found, BE s. 2.120 5.8 keeps loading from between a building and a street)
     // J.B. 20 Oct: once a size is set, loading is counted from the floor that size needs, not the most the zone allows (capped at that)
     const R0=BD.eng&&BD.eng.R, perMW0=R0?(R0.m2PerMW[0]+R0.m2PerMW[1])/2/((R0.hallShare[0]+R0.hallShare[1])/2):0;
     /* 3 Nov 2026 (Architecture Ratios): the data centre's floor-area share, when set for this lot, replaces MW × the per-MW guess (arch.js; register arch_ratios) */
@@ -202,6 +213,14 @@ function hallOptions(q,D,kMax,m,ftf,frontLo){ const g=m.Z&&m.Z.ground?1:0, Lq=q[
       const u=frontLo?[q[1]-du,q[1]]:[q[0],q[0]+du], v=[q[2],q[2]+dv], key=k+':'+u.map(x=>x.toFixed(1)).join(',')+':'+dv.toFixed(1); if(seen.has(key)) continue; seen.add(key);
       out.push({key,k,st:k+g,top,along,a,u,v,fa}); } }
   return out; }
+/* Build 2 (3 Nov 2026): the yards on each of the four sides. fl>0: the front is the u0 end. Z.yards gives front, side, rear; Edmonton BE, IM and IH take each
+   side's setback from what it faces (lot-side facts), when a street was found. Returns {front,rear,s0,s1,max,by} (by: 'side facts' or 'zone'). */
+function yardsOf(m,Z,side,fl){ const y=Z.yards||{front:0,side:0,rear:0}, out={front:y.front,rear:y.rear,s0:y.side,s1:y.side,max:y.max,by:'zone'}; const LSD=BD.data.lotside;
+  const SB=m.city==='edm'&&!Z.assumed&&!BD.S.answers.userFSR&&LSD&&LSD.edmSetback[Z.key]; if(!SB||!side||!side.any) return out;
+  const res=z=>LSD.edmResidential.part2.includes(z)||LSD.edmResidential.special.includes(z), ind=z=>LSD.edmIndustrial.zones.includes(z);
+  const val=f=>{ if(f.street) return Z.key==='BE'&&['collector','local'].includes(f.street.cls)?SB.streetCL:SB.street; if(f.alley) return SB.alley;
+    if(f.nbr.some(res)&&SB.res!=null) return SB.res; if(SB.nonInd!=null&&f.nbr.some(z=>!ind(z))) return SB.nonInd; return SB.site; };
+  const S0=side.S, fe=fl>0?'u0':'u1', re=fl>0?'u1':'u0'; return {front:val(S0[fe]),rear:val(S0[re]),s0:val(S0.v0),s1:val(S0.v1),max:y.max,by:'side facts',src:((BD.data.raw.lotside||{edmSetback:{}}).edmSetback[Z.key]||{}).src||['?']}; }
 function setHall(m,o){ if(!o){ m.serverFoot=m.hallFull; delete m.hallTop; delete m.hallStoreys; delete m.hallData; delete m.hallOpt; m.hallFallback=true; return; }
   m.serverFoot=rectW(m.F,o.u[0],o.u[1],o.v[0],o.v[1]); m.hallTop=o.top; m.hallStoreys=o.st; m.hallData=o.k; m.hallOpt=o.key; m.hallFallback=false; }
 BD.siteGeo={rectW,inscribe,clip,frameOf}; BD.model=model; BD.modelReset=()=>{ cache.key=null; };
@@ -224,7 +243,7 @@ BD.setupProblems=setupProblems; BD.fitMax=fitMax;
 
 /* ---------- the drawer (decision A, 16 Oct): over the map, beside the panel ---------- */
 const css=document.createElement('style'); css.textContent=`
-#drawer{position:absolute;top:0;left:0;bottom:0;width:min(440px,92%);background:var(--panel);border-right:1px solid var(--line-2);z-index:8;overflow:auto;padding:16px 18px 28px;box-shadow:8px 0 24px rgba(0,0,0,.35)}
+#drawer{position:absolute;top:0;left:0;bottom:0;width:min(440px,92%);background:var(--panel);border-right:1px solid var(--line-2);z-index:8;overflow:auto;padding:16px 18px 28px;box-shadow:var(--shadow)}
 #drawer[hidden]{display:none}
 #drawer .dx{float:right;background:transparent;border:1px solid var(--line-2);border-radius:6px;padding:2px 9px;cursor:pointer;color:var(--muted);font-size:12.5px}
 #drawer h2{font-size:18px;font-weight:400;margin:4px 0 6px;line-height:1.3}
@@ -233,8 +252,8 @@ const css=document.createElement('style'); css.textContent=`
 .choice{display:grid;gap:6px;margin:8px 0}.choice button{text-align:left;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;padding:8px 10px;cursor:pointer;color:var(--fg);font:inherit;font-size:13px}
 .choice button[aria-pressed="true"]{border-color:var(--accent)}.choice button small{display:block;color:var(--muted);font-size:12px;margin-top:2px}.choice button .def{float:right;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .cl{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}.cl td{border-top:1px solid var(--line);padding:5px 6px 5px 0;vertical-align:top}.cl td:first-child{color:var(--muted);width:92px}.cl td small{display:block;color:var(--faint);font-size:11px}
-.warnbox{border:1px solid #9a6f6a;border-radius:6px;padding:8px 10px;font-size:12.5px;margin:8px 0;color:var(--accent-2)}
-.navb{display:flex;gap:8px;margin-top:18px;align-items:center}.navb button{border-radius:6px;padding:7px 14px;cursor:pointer;font:inherit}.navb .pri{background:var(--accent);color:#1a1212;border:0;font-weight:600}.navb .sec{background:transparent;border:1px solid var(--line-2);color:var(--fg)}
+.warnbox{border:1px solid #CC746C;border-radius:6px;padding:8px 10px;font-size:12.5px;margin:8px 0;color:var(--accent-2)}
+.navb{display:flex;gap:8px;margin-top:18px;align-items:center}.navb button{border-radius:6px;padding:7px 14px;cursor:pointer;font:inherit}.navb .pri{background:var(--fg);color:var(--on-ink);border:0;font-weight:600}.navb .sec{background:transparent;border:1px solid var(--line-2);color:var(--fg)}
 .numin{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}.numin label{font-size:12.5px;color:var(--muted)}.numin input{width:84px;margin-left:6px;background:var(--bg);border:1px solid var(--line-2);border-radius:4px;padding:3px 6px;color:var(--fg)}
 .sumrow{display:grid;grid-template-columns:88px 1fr auto;gap:8px;font-size:12.5px;padding:5px 0;border-top:1px solid var(--line);align-items:baseline}.sumrow span:first-child{color:var(--muted)}.sumrow a{font-size:12px}
 .live{border:1px solid var(--line-2);border-radius:6px;padding:8px 10px;margin:10px 0;font-size:12.5px}.live b{font-weight:400;font-size:16px}
@@ -248,6 +267,11 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!dr.hidden){ e.sto
 /* ---------- the five setup cards ---------- */
 const STEPS=['What is being built','Footprint','Height','Cooling and where its plant goes','Standby power'];
 function ch(name,opts,val){ return `<div class="choice" data-q="${name}">${opts.map(o=>`<button data-v="${o.v}" aria-pressed="${String(o.v)===String(val)}">${o.def?'<span class="def">default</span>':''}${esc(o.t)}${o.s?`<small>${o.s}</small>`:''}</button>`).join('')}</div>`; }
+/* Build 2: what each side of the lot faces, in words (lot-side facts) */
+function sideHTML(m){ const S=m.side; if(!S) return ''; const fl=(S.autoU1)!==!!BD.S.answers.flip?-1:1, nm={u0:fl>0?'Front':'Rear',u1:fl>0?'Rear':'Front',v0:'Side',v1:'Other side'};
+  const t=f=>f.street?`${esc(f.street==='unclassified'?'a street (class ?)':(/^[aeiou]/.test(f.street)?'an ':'a ')+f.street+' street')} (City class "${esc(f.road||'?')}", centreline about ${f.d} m out)`:f.alley?'an alley or lane':f.nbr.length?(f.nbr.length>1?'lots':'a lot')+' zoned '+esc(f.nbr.join(', ')):'nothing in the street or zoning files (?)';
+  const y=m.yards, yv={u0:fl>0?y&&y.front:y&&y.rear,u1:fl>0?y&&y.rear:y&&y.front,v0:y&&y.s0,v1:y&&y.s1};
+  return `<table class="cl">${['u0','u1','v0','v1'].map(k=>`<tr><td>${nm[k]}</td><td>faces ${t(S[k])}${y&&y.by==='side facts'?` · setback ${yv[k]} m`:''}</td></tr>`).join('')}</table>${S.rot?'<p class="sub">The lot is turned so the street side is an end (a drawing choice).</p>':''}${y&&y.by==='side facts'?`<p class="src">Setbacks by what each side faces: ${esc(m.Z.key)} Table 4.1 (register ${esc(y.src.join(', '))}). Street class from the City's road file (register ${esc(S.src[0])}); neighbours' zones from the zoning map (register ${esc(S.src[1])}). Which zones count as residential: Bylaw 20001 Part 2 and Special Area zones named residential, row housing or apartment (the latter our reading ?).</p>`:''}`; }
 function clauses(Z){ return `<table class="cl">${Z.cl.map(c=>`<tr><td>${esc(c[0])}</td><td>${esc(c[1])}<small>${esc(c[2])}</small></td></tr>`).join('')}</table>`; }
 function setDefaults(){ const A=BD.S.answers; const d={foot:'max',cover:70,hmode:'out',plantAt:'roof',outside:'dry',inside:'air',spares:'n1',gens:'yes',genAt:'yard',genSpares:'n1'}; for(const k in d) if(A[k]==null) A[k]=d[k]; }
 function liveBox(){ const m=model(); if(!m||!BD.eng) return ''; const f=BD.eng.siteFacts(); const P=m.plant;
@@ -269,7 +293,7 @@ function card(step){
       ${A.foot==='cover'?`<div class="numin"><label>Coverage <input type="range" id="cov" min="20" max="100" step="5" value="${A.cover}"> <b id="covv">${A.cover}%</b></label></div>`:''}
       ${Z.key==='I-2'&&!Z.assumed?`<h3>Sub-area</h3><p class="sub">Part of the False Creek Flats (bounded by Prior St, Clark Dr, Great Northern Way and Main St) is split into sub-areas A and B, with different limits (I-2 s. 1.1, Map 1). The tool does not map them; check Map 1 of the I-2 District Schedule.</p>${ch('subB',[{v:'',t:'Not in sub-area B',def:true,s:'rear yard 3.1 m, no front yard, 30.5 m with approval'},{v:'1',t:'In sub-area B',s:'yards 0.6 / 7.6 / 3.1 m, building at most 61 m wide and deep, 36.5 m and FSR 4.0 with approval'}],A.subB||'')}`:''}
       <h3>Setbacks</h3>${m.yardNote?`<div class="warnbox">${esc(m.yardNote)}</div>`:''}${clauses({cl:Z.cl.filter(c=>/Yards|Setbacks/.test(c[0]))})}
-      <p class="sub" style="margin-top:6px">Which end faces the street is not known in the tool; the rear yard and loading are put at one end. <a href="#" id="flip">Swap the ends</a></p>
+      ${sideHTML(m)}<p class="sub" style="margin-top:6px">${m.side&&m.side.any?'The street end is the front; the rear yard and loading go to the other end.':'No street was found beside this lot in the City\'s street file, so which end faces the street is not known; the rear yard and loading are put at one end.'} <a href="#" id="flip">Swap the ends</a>${A.flip?' (swapped)':''}</p>
       <h3>Loading</h3><p class="sub">${esc(LN.basis)}</p>${ch('loadIn',[{v:'',t:'Outside, at the rear',def:true,s:`a strip ${(LN.len+LN.aisle).toFixed(1)} m deep: space plus aisle`},{v:'1',t:'Inside the building',s:'a loading bay on the ground floor; no strip'}],A.loadIn||'')}`; }
   }
   if(step===3){
@@ -316,7 +340,10 @@ function card(step){
   BD.showModel&&BD.showModel();
 }
 function changed(step){ const A=BD.S.answers; A.mw=null; if(A.built==='existing'&&A.foot==='max') {} BD.modelReset(); card(step); if(BD.S.view2==='fits') BD.fitsView(); else BD.card(); }
-BD.setup={card,model,STEPS,start:()=>card(1)};
+/* Build 2: the lot-side facts and "Swap the ends" for the decision card (decide.js, footprint) */
+function sideBox(){ const m=model(); if(!m||!m.F) return ''; const A=BD.S.answers;
+  return `<div class="dside"><h3>What each side faces</h3>${sideHTML(m)}<p class="sub">${m.side&&m.side.any?'The street end is the front; the rear yard and loading go to the other end.':'No street was found beside this lot in the City\'s street file, so which end faces the street is not known; the rear yard and loading are put at one end.'} <a href="#" id="flip">Swap the ends</a>${A.flip?' (swapped)':''}</p>${A.flip&&m.side&&m.side.any?`<div class="warnbox">Swapped: the rear yard and loading now face the street.${m.city==='edm'&&m.Z&&m.Z.key==='BE'?' BE s. 2.120 5.8 keeps loading from between a building and a street (register arch_hb_edmBE).':''}</div>`:''}</div>`; }
+BD.setup={card,model,STEPS,start:()=>card(1),sideBox};
 
 /* the site card's last section: a summary of the five cards, each with Change › */
 BD.setupHTML=function(st){ setDefaults(); const A=BD.S.answers, m=model(); if(!m) return '';
