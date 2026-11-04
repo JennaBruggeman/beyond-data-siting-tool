@@ -309,7 +309,16 @@ function modelKey(){ return sw(C.acc,'the lot; dashed red: the building envelope
    TODAY: at the lot line, as seen at Cologix VAN3 (fence with a gate intercom; register: security_layers, tour = observation, one site).
    30 Oct 2026 (J.B.): one fence only, toggled on or off; the 'proposed' line at the hall wall is dropped. */
 function secureKey(){ const M=state.M; if(!M||!M.ring||M.existing) return ''; const m=state.secure||'off', b=(v,t)=>`<button data-sl="${v}" style="font:inherit;font-size:11px;padding:1px 7px;margin:0 4px 0 0;border-radius:4px;cursor:pointer;border:1px solid ${m===v?'#CC746C':'#5a5d62'};background:${m===v?'rgba(204,116,108,.18)':'transparent'};color:inherit">${t}</button>`;
-  return m==='on'?`<div style="margin-top:6px">Secure line: one fence, 2.4 m anti-climb welded mesh, the RCMP's minimum for a security fence (GCPSG-009 s. 10.1; the US military asks 2.44 m, UFC 4-022-03). Tier III and IV set no fence (Uptime: Tiers do not prescribe security). Crash rating not drawn; post spacing not sourced (?). Register: security_layers. ${fenceWhy(M)}</div>`:''; }
+  return m==='on'?`<div style="margin-top:6px">${fenceYardNote(M)}Secure line: one fence, 2.4 m anti-climb welded mesh, the RCMP's minimum for a security fence (GCPSG-009 s. 10.1; the US military asks 2.44 m, UFC 4-022-03). Tier III and IV set no fence (Uptime: Tiers do not prescribe security). Crash rating not drawn; post spacing not sourced (?). Register: security_layers. ${fenceWhy(M)}</div>`:''; }
+/* bugfix 4 Nov 2026 (retest rules 1, V339): the line of the required yards is set in from the lot's bounding rectangle, so along an angled lot line the fence
+   stood on the lot line, inside the required yard (V339: 7.6 m into the 7.6 m side yard). Where it runs inside a required yard (site.js yardRuns):
+   Vancouver: drawn at 1.9 m, the most s. 10.10.3 allows there (register arch_per_vanS10), and flagged; 2.4 m there only with the Director of Planning's
+   permission (s. 10.10.6). Edmonton: flagged; a fence is a structure and setbacks apply to development (s. 8.20; register arch_per_edmFence; our reading ?). */
+const FENCE_YARD_MAX=1.9; /* Vancouver ZDB s. 10.10.3, register arch_per_vanS10 */
+function fenceRuns(M){ const FR=fenceLine(M); return BD.yardRuns?BD.yardRuns(M,FR):[]; }
+function fenceYardNote(M){ const RU=fenceRuns(M), inY=RU.filter(p=>p.yard); if(!inY.length) return ''; const len=Math.round(inY.reduce((s,p)=>s+p.len,0)), kinds=[...new Set(inY.map(p=>p.yard))].join(' and ');
+  return M.city==='van'?`<b class="k">Fence in a required yard:</b> about ${BD.fmt(len)} m of it runs inside the ${kinds} yard${kinds.includes(' and ')?'s':''}, where the lot line is angled. There it is drawn at 1.9 m, the most a fence in a required yard may be (Zoning and Development By-law s. 10.10.3; register arch_per_vanS10), below the RCMP's 2.4 m. Higher there only if the Director of Planning permits it (s. 10.10.6). Which lines of a notched lot are rear or side lot lines is our reading (?). `
+    :`<b class="k">Fence in a setback:</b> about ${BD.fmt(len)} m of it runs inside the ${kinds} setback, where the lot line is angled. A fence is a structure and setbacks apply to development (Bylaw 20001 s. 8.20; register arch_per_edmFence; our reading ?). `; }
 /* 2 Nov 2026 hard rules (site audit 11, 12): where the fence may stand.
    Vancouver Zoning and Development By-law s. 10.10.3: a fence in a required yard may be at most 1.9 m ("fence" includes walls and screens, s. 10.10.1;
    register arch_per_vanS10). The 2.4 m fence is drawn on the line of the required yards, behind them; where a yard is 0 m that line is the lot line.
@@ -322,13 +331,18 @@ function fenceWhy(M){ const y=(M.Z&&M.Z.yards)||null, any=y&&(y.front||y.side||y
 function secureDraw(){ const M=state.M; if(state.slG){ state.dc.remove(state.slG); state.slG=null; } const m=state.secure||'off'; if(!M||!M.ring||M.existing||m==='off') return;
   const g=new T.Group(); state.slG=g; state.dc.add(g); const hall=M.serverFoot||M.foot;
   if(m==='on'){ const fH=2.4; /* 30 Oct 2026, J.B.: one fence, the type expected at a Tier III/IV site: RCMP GCPSG-009 s. 10.1 minimum security fence 2.4 m; anti-climb welded mesh s. 9.5 */
-    const FR=fenceLine(M); for(const z of [0.15,fH]) g.add(ringLine(FR,z,C.acc,false,z<0.5?1:0.7));
+    const FR=fenceLine(M); g.add(ringLine(FR,0.15,C.acc,false,1));
     // the fence as a see-through wall on the lot line (J.B., 30 Oct 2026: 'we would need to model the fence'); VAN3 tour: 'K gate fence drilled 9 feet underground';
-    const r=FR, pos=[]; for(let i=0;i<r.length;i+=2){ const j=(i+2)%r.length; const a=V(r[i],r[i+1],0), b=V(r[j],r[j+1],0), a2=V(r[i],r[i+1],fH), b2=V(r[j],r[j+1],fH);
-      pos.push(a.x,a.y,a.z,b.x,b.y,b.z,b2.x,b2.y,b2.z, a.x,a.y,a.z,b2.x,b2.y,b2.z,a2.x,a2.y,a2.z); }
+    // bugfix 4 Nov 2026: drawn piece by piece (site.js yardRuns), at 1.9 m where a Vancouver fence runs inside a required yard (s. 10.10.3)
+    const RU=fenceRuns(M), hOf=p=>p.yard&&M.city==='van'?FENCE_YARD_MAX:fH, pos=[]; let run=[], rh=null, walk=0;
+    const flush=()=>{ if(run.length>1) g.add(line(run,C.acc,false,0.7)); run=[]; };
+    RU.forEach(p=>{ const h=hOf(p), a=V(p.x0,p.y0,0), b=V(p.x1,p.y1,0), a2=V(p.x0,p.y0,h), b2=V(p.x1,p.y1,h);
+      pos.push(a.x,a.y,a.z,b.x,b.y,b.z,b2.x,b2.y,b2.z, a.x,a.y,a.z,b2.x,b2.y,b2.z,a2.x,a2.y,a2.z);
+      if(h!==rh){ flush(); rh=h; } if(!run.length) run.push(a2); run.push(b2);
+      const n0=Math.floor(walk/3), n1=Math.floor((walk+p.len)/3); if(n1>n0||walk===0) g.add(line([a,a2],C.acc,false,0.5)); walk+=p.len; }); /* posts about every 3 m, as before (spacing not sourced ?) */
+    flush();
     const fg=new T.BufferGeometry(); fg.setAttribute('position',new T.Float32BufferAttribute(pos,3));
-    g.add(new T.Mesh(fg,new T.MeshBasicMaterial({color:C.acc,transparent:true,opacity:0.28,side:T.DoubleSide,depthWrite:false})));
-    for(let i=0;i<r.length;i+=2){ const j=(i+2)%r.length, L=Math.hypot(r[j]-r[i],r[j+1]-r[i+1]), n=Math.max(1,Math.floor(L/3)); for(let k=0;k<n;k++){ const t=k/n, x=r[i]+(r[j]-r[i])*t, y=r[i+1]+(r[j+1]-r[i+1])*t; g.add(line([V(x,y,0),V(x,y,fH)],C.acc,false,0.5)); } } }
+    g.add(new T.Mesh(fg,new T.MeshBasicMaterial({color:C.acc,transparent:true,opacity:0.28,side:T.DoubleSide,depthWrite:false}))); }
   if(R&&R.ren) R.dirty=true; }
 
 function roomsKey(){ const r=state.rooms; if(!r) return ''; const E=r.E, rg=a=>a[0]===a[1]?`${a[0]}`:`${a[0]}–${a[1]}`, gap=(k)=>r.got[k]<r.need[k]?` (${r.got[k]} drawn)`:'';

@@ -272,6 +272,24 @@ function sizePasses(v){ const A=BD.S.answers, keep=A.mw; A.mw=v; cache.key=null;
 /* the passing size for a wanted one: itself if it passes, else the largest passing size below it, else the smallest that passes; null if none passes */
 function fitNear(want){ if(want!=null&&sizePasses(want)) return want; const S=fitSizes(); if(!S.ok.length) return null; const below=S.ok.filter(v=>v<=(want||0)+1e-9); return below.length?below[below.length-1]:S.ok[0]; }
 BD.setupProblems=setupProblems; BD.fitMax=fitMax; BD.fitSizes=fitSizes; BD.fitNear=fitNear; BD.sizePasses=sizePasses;
+/* bugfix 4 Nov 2026 (retest rules 1, V339): the required yards are set in from the lot's bounding rectangle, so along an angled lot line the line of the
+   yards (the lot clipped to that rectangle) runs inside a required yard. Each lot edge takes the yard of the side it faces in the tool's own frame (front,
+   rear, sides: m.yards, as the 3 Nov rules sweep checked), and a point is in that yard when it is nearer the edge than the yard's depth, less 0.3 m
+   (a drawing tolerance). Which edges of a notch are rear or side lot lines is our reading (?). */
+function yardEdges(m){ const A=BD.S.answers, F=m.F, y=m.yards, r=m.ring; if(!F||!y||!r) return []; const fl=(!!(m.side&&m.side.autoU1))!==(!!A.flip)?-1:1, E=[];
+  for(let i=0;i<r.length;i+=2){ const j=(i+2)%r.length, ax=r[i], ay=r[i+1], bx=r[j], by=r[j+1], L=Math.hypot(bx-ax,by-ay); if(L<0.5) continue;
+    const mx=(ax+bx)/2, my=(ay+by)/2; let nx=-(by-ay)/L, ny=(bx-ax)/L; if(BD.pip(mx+nx*0.3,my+ny*0.3,r)){ nx=-nx; ny=-ny; }
+    const nu=nx*F.ux+ny*F.uy, nv=-nx*F.uy+ny*F.ux; let kind, d; if(Math.abs(nu)>=Math.abs(nv)){ kind=(nu<0)===(fl>0)?'front':'rear'; d=y[kind]; } else { kind='side'; d=nv<0?y.s0:y.s1; }
+    if(d>0) E.push({ax,ay,bx,by,kind,d}); }
+  return E; }
+function segDist(px,py,e){ const dx=e.bx-e.ax, dy=e.by-e.ay, L2=dx*dx+dy*dy; let t=L2?((px-e.ax)*dx+(py-e.ay)*dy)/L2:0; t=Math.max(0,Math.min(1,t)); return Math.hypot(px-(e.ax+t*dx),py-(e.ay+t*dy)); }
+/* a ring (the fence line) cut into pieces of at most 1 m, each marked with the required yard it stands in, if any */
+function yardRuns(m,R){ const out=[]; if(!m||!R) return out; const E=yardEdges(m);
+  for(let i=0;i<R.length;i+=2){ const j=(i+2)%R.length, ax=R[i], ay=R[i+1], bx=R[j], by=R[j+1], L=Math.hypot(bx-ax,by-ay), n=Math.max(1,Math.ceil(L));
+    for(let k=0;k<n;k++){ const x0=ax+(bx-ax)*k/n, y0=ay+(by-ay)*k/n, x1=ax+(bx-ax)*(k+1)/n, y1=ay+(by-ay)*(k+1)/n, cx=(x0+x1)/2, cy=(y0+y1)/2;
+      let e=null; for(const q of E) if(segDist(cx,cy,q)<q.d-0.3){ e=q; break; } out.push({x0,y0,x1,y1,len:L/n,yard:e?e.kind:null}); } }
+  return out; }
+BD.yardRuns=yardRuns;
 
 /* ---------- the drawer (decision A, 16 Oct): over the map, beside the panel ---------- */
 const css=document.createElement('style'); css.textContent=`
