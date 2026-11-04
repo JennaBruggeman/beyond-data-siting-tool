@@ -1,0 +1,1373 @@
+{
+ "_about": "Check 2 (independent agent, no part in check 1), 4 Nov 2026, of the 41 typ_* sources in checks/research_typ/*_sources.json. Verdicts per quoted figure: OK / WRONG / NOT FOUND / UNREACHABLE. new_text = corrected source entry (also written to the *_sources.json).",
+ "_counts_claims": {
+  "OK": 158,
+  "WRONG": 9
+ },
+ "_counts_sources": {
+  "OK": 38,
+  "WRONG": 7
+ },
+ "typ_aquaponics_bodenGH": {
+  "file": "aquaponics_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "'A 300-square-meter smart greenhouse'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'half-megawatt data center' operated by Genesis Digital Assets (GDA)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "greenhouse build by Nordmark AB",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "no date shown; no temperatures or crops",
+    "verdict": "OK",
+    "evidence": "page shows \"Published:\" with no date; no temperatures or crops",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_aquaponics_riseLettuce": {
+  "file": "aquaponics_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "29 May 2022",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "air 'about 30–45 °C'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "Containing Greens",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "up to 40 % of BTDC excess heat recovered for biomass drying",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'fish and insect farms'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "no m2 or kW",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_aquaponics_riseDCFarming": {
+  "file": "aquaponics_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "DC-Farming, LTU and The Food Print Lab, Vinnova",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'2019-01-01 t.o.m. 2020-12-31'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "budget '4762934', no currency",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "Region Norrbotten; no size, temperature or energy",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_aquaponics_vanUrbanFarmB": {
+  "file": "aquaponics_sources.json",
+  "where_read": "pdftotext of sources/library/public/van3575s2/full.pdf, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "Urban Farm - Class B definition, p. 46",
+    "verdict": "WRONG",
+    "evidence": "definition text re-found verbatim; it sits between the Page 46 and Page 47 footers, i.e. on p. 47",
+    "fix": "p. 47"
+   },
+   {
+    "claim": "no aquaculture/fish use; 'fish' only in manufacturing definitions",
+    "verdict": "OK",
+    "evidence": "aquacult: 0 hits; fish: 1 hit (Manufacturing Uses, p. 17)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": "RULE: City of Vancouver Zoning and Development By-law No. 3575, Section 2 Definitions, June 2026, p. 47 (same file as van3575s2): 'Urban Farm - Class B: The use of land or premises for the cultivation of fruits or vegetables for sale, and of which part or all of the use may take place in a greenhouse or other structure, and may include on-site sales'; no aquaculture or fish use defined (text search 'aquacult', 'fish': only in manufacturing definitions) — sources/library/public/van3575s2/full.pdf"
+ },
+ "typ_aquaponics_edmUrbanAg": {
+  "file": "aquaponics_sources.json",
+  "where_read": "data/raw/edm/bylaw/b.txt and Bylaw20001.pdf (pdftotext), 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "Urban Agriculture definition and typical examples incl. hydroponic or aquaponic systems",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "BE 2.25, IM 2.16 permitted",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "BE 3.16.1 / IM 3.8.1 within or on a building; variance 3.16.2 / 3.8.2 via ESA",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "not listed in IH s. 2",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_aquaponics_faoTP589": {
+  "file": "aquaponics_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "bibliographic data, 262 pp.",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "contents: 2.4.2 p. 17, 3.2.3 p. 24, Table 7.1 p. 109",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "body text not returned: ratio and temperatures ?",
+    "verdict": "OK",
+    "evidence": "reader again returned front matter only; entry correctly leaves the figures as ?",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_community_pool_bcPoolGuide51": {
+  "file": "community_pool_sources.json",
+  "where_read": "pdftotext -layout of the J.B. upload, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "change rooms within 60 m",
+    "verdict": "OK",
+    "evidence": "p. 21",
+    "fix": ""
+   },
+   {
+    "claim": "toilet/dressing → shower → pool",
+    "verdict": "OK",
+    "evidence": "p. 21",
+    "fix": ""
+   },
+   {
+    "claim": "ANSI/APSP/ICC-1 19.6: 2 shower heads for the first 100 users of each sex",
+    "verdict": "OK",
+    "evidence": "p. 21",
+    "fix": ""
+   },
+   {
+    "claim": "0.32 m²/bather (p. 21)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "drinking fountain 1 per 250 bathers (p. 22)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "clearance 'for chemical transporting equipment, such as forklifts' (p. 42)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_community_pool_vanS2Uses": {
+  "file": "community_pool_sources.json",
+  "where_read": "pdftotext of van3575s2 full.pdf; data/raw/van/i3.txt, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "Cultural and Recreational list incl. Club, Community Centre or Neighbourhood House, Fitness Centre classes, Swimming Pool, Theatre, Zoo or Botanical Garden",
+    "verdict": "OK",
+    "evidence": "list re-found (also lists Park or Playground and Plaza)",
+    "fix": ""
+   },
+   {
+    "claim": "no definition of Swimming Pool or Community Centre",
+    "verdict": "OK",
+    "evidence": "only in the use list",
+    "fix": ""
+   },
+   {
+    "claim": "Fitness Centre Class 1 ≤200 m2, Class 2 >200 m2 (p. 16)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "I-3 Community Centre or Neighbourhood House Conditional 2.2.1",
+    "verdict": "OK",
+    "evidence": "i3.txt line 184",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_conservatory_hamiltonGage": {
+  "file": "conservatory_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "title and 19 Jul 2017",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "area, height, rooms ?",
+    "verdict": "OK",
+    "evidence": "reader again returned only navigation and meta text; entry correctly leaves figures as ?",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_conservatory_saskatoon": {
+  "file": "conservatory_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "'year-round indoor garden facility … Mendel Building'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'closed until further notice'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "no size, height or heat figures",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_emergency_hub_vanFireHall5Report": {
+  "file": "emergency_hub_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "'a mixed-use six-storey building with a fire hall at grade'",
+    "verdict": "WRONG",
+    "evidence": "quote truncated: Report Summary p. 2 reads 'a mixed-use six-storey building with a fire hall at grade and second floor'",
+    "fix": "add 'and second floor'"
+   },
+   {
+    "claim": "'31 social housing units to be operated by the YWCA'",
+    "verdict": "OK",
+    "evidence": "Report Summary p. 2, adds \"on the third to sixth floors, inclusive\"",
+    "fix": ""
+   },
+   {
+    "claim": "24.1 m, FSR 2.74, 3,962 m2 (App. G)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'post disaster building' App. D p. 2",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'separate entry for the residential' (given with App. D p. 2)",
+    "verdict": "WRONG",
+    "evidence": "App. D p. 1 of 4",
+    "fix": "App. D p. 1"
+   }
+  ],
+  "kind_change": null,
+  "new_text": "GOVERNMENT (Council policy report): CD-1 rezoning, 3090 East 54th Avenue (Fire Hall No. 5 and YWCA housing), City of Vancouver, Council 23 Jun 2015: 'a mixed-use six-storey building with a fire hall at grade and second floor'; '31 social housing units to be operated by the YWCA on the third to sixth floors, inclusive'; height 24.1 m; FSR 2.74; 3,962 m2 (App. G); App. D p. 2: 'Since the application is considered a post disaster building it had some specific requirements'; App. D p. 1: 'there is an entry for the fire hall and a separate entry for the residential'; read through WebFetch; pages re-read at check 2 — https://council.vancouver.ca/20150623/documents/p3.pdf"
+ },
+ "typ_emergency_hub_vanFireHall5Page": {
+  "file": "emergency_hub_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "'a firehall on the first two levels, housing units on the top four, and a rooftop patio'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "City leases housing units to YWCA",
+    "verdict": "OK",
+    "evidence": "\"will lease the affordable housing units to YWCA Metro Vancouver\"",
+    "fix": ""
+   },
+   {
+    "claim": "'Summer 2019'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "3090 East 54th Avenue",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_emergency_hub_unepUspenski": {
+  "file": "emergency_hub_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "p. 3 'bomb shelter made of granite'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'2-megawatt data server'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'heating 500 homes in Helsinki'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "ITACUS; no date, references accessed to 4 Jul 2022",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "current shelter function not stated",
+    "verdict": "OK",
+    "evidence": "page calls it a \"former bomb shelter\" that \"has been given a new purpose\"",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_food_hub_vanK2": {
+  "file": "food_hub_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "DOC/2022/236330, Dec 2022",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "2a: 40 in above roof, 10'-0\" from property lines incl. lane/street",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "4: 10'-0\" from any air intake, NFPA 96 7.8.1–7.8.4",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "3a: 10'-0\" incl. city property lines if no ecology unit",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "openings approx. 32'-6\" above and 16'-0\" to the sides",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "approx. 11 ft above grade or a platform",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "fan housing outlet 5'-0\" from combustible structure",
+    "verdict": "OK",
+    "evidence": "in Item 2a",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_food_hub_vbbl6316": {
+  "file": "food_hub_sources.json",
+  "where_read": "data/raw/codes/vbbl2025_v1.txt, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "(1) NFPA 96",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "(2) ecology unit where wall termination within 3 m of lane, property line or street property line",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "(3) pedestrians, outdoor seating, Noise Control By-law",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "(4) 99.97 % grease, outlet ≤138 °C",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_food_hub_edmCustomMfg": {
+  "file": "food_hub_sources.json",
+  "where_read": "Bylaw20001.pdf (pdftotext, printed page footers) and b.txt, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "Custom Manufacturing definition and typical examples",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "printed p. 1012–1013",
+    "verdict": "WRONG",
+    "evidence": "definition starts on printed p. 1013 (PDF p. 1014) and runs onto p. 1014",
+    "fix": "pp. 1013–1014"
+   },
+   {
+    "claim": "BE 2.7, 3.6.1; 3.3.1 and 3.12.1 caps 500 m2",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "IM 2.6, 3.4.1 Public Space 150 m2",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "IH s. 2 not listed",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": "RULE: City of Edmonton Zoning Bylaw 20001 (as adopted; local text): 8.10 Custom Manufacturing 'manufactures or creates custom products that may be sold to customers or commercial businesses ... Products may be consumed on-Site where associated with food and beverage production'; 'Typical examples include: commercial kitchens, makerspaces, microbreweries ...' (printed pp. 1013–1014); BE 2.7 permitted, 3.6.1 'Manufacturing activities must be located within an enclosed building', no Floor Area cap (3.3.1 caps Bars, Food and Drink Services, Health Services, Major Indoor Entertainment at 500 m2; 3.12.1 Community Services 500 m2); IM 2.6 permitted, 3.4.1 'maximum Public Space area is 150 m2 per individual establishment'; IH s. 2 not listed — data/raw/edm/bylaw/b.txt"
+ },
+ "typ_food_hub_vanI3Fsr": {
+  "file": "food_hub_sources.json",
+  "where_read": "data/raw/van/i3.txt and J.B. upload of the I-3 schedule, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "3.1.1.1(a) 3.00 list",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "3.1.1.1(b) 1.00 for all other uses",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "Catering Establishment C, Urban Farm - Class B C",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_food_hub_greenBarn": {
+  "file": "food_hub_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "dtah with STANTEC, ERA, Blackwell Bowick, The Planning Partnership",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'2008 - present'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'280 m2 greenhouse'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'industrial kitchen that opens to a gathering/event space'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'A geothermal system provides most of the heat'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_heat_cascade_ashraeCh52T6": {
+  "file": "heat_cascade_sources.json",
+  "where_read": "pdftotext -layout of the J.B. upload, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "Table 6 p. 52.11: 2.0 mm/h Ar 0 210/203/197/191 W/m², tm 19/18/18/17",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "2.0 mm/h Ar 1 at −1 °C 239–298 W/m², tm 22–27",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "4.1 mm/h Ar 0 420–381, tm 38–34",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "6.4 mm/h Ar 0 656–596, tm 58–53",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "Eq. (17) tm = 0.089 qo + tf",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "p. 52.12 secondary sources / low-temperature waste / return piping (Brown 1999)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "Table 3 p. 52.6 Ar 0.5: Great Falls 37.0 + 380.4, Minneapolis 32.6 + 563.0, Seattle 3.0 + 33.0",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_heat_cascade_klamathSnowmelt": {
+  "file": "heat_cascade_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "GHC Quarterly Bulletin 16(4); no date or author on record",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'geothermal heated water on the return side'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "tubing under sidewalks, wheelchair ramps and crosswalks; no temperatures or areas",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_heat_cascade_brown1999": {
+  "file": "heat_cascade_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "Brian Brown Engineering, GHC QB 20(1), March 1999",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "1981, 14 government buildings",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "20 million Btu/hr (5.9 MWt)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'extensive areas of sidewalk snowmelt'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "1998–99 peaks 50–60 % of design",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_heat_cascade_lund2005": {
+  "file": "heat_cascade_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "'lower and lower water temperatures are used in successive steps'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "Sapporo: waste water 'retained at 65oC and reused for bathing'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "agriculture/aquaculture 'values from 25o to 90oC'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_heat_cascade_oro2018": {
+  "file": "heat_cascade_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "authors, title, SCS 36: 185–203, doi 10.1016/j.scs.2017.10.012",
+    "verdict": "OK",
+    "evidence": "metadata re-found; abstract still not read (entry already says ?)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_heat_cascade_terenius2023": {
+  "file": "heat_cascade_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "airflow 'about 30–40 °C' (p. 2)",
+    "verdict": "OK",
+    "evidence": "page reads 'At only 30–40 °C'; figure right, 'about' is not in the source (wording fixed)",
+    "fix": ""
+   },
+   {
+    "claim": "high-performance near 45 °C (p. 2)",
+    "verdict": "OK",
+    "evidence": "'may approach 45 °C'",
+    "fix": ""
+   },
+   {
+    "claim": "immersion 'can reach 50 °C or more' (p. 9)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'heating water for swimming pools or fish and lobster farming', 'heating greenhouses' (p. 5)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'should preferably be used as-is' (pp. 2, 5)",
+    "verdict": "WRONG",
+    "evidence": "re-found on pp. 16 and 19 ('To avoid conversion losses, waste heat should preferably be used as-is')",
+    "fix": "pp. 16, 19"
+   }
+  ],
+  "kind_change": null,
+  "new_text": "PEER-REVIEWED: Terenius, P., Garraghan, P., Harper, R. (2023). A material social view on data center waste heat: Novel uses and metrics. Frontiers in Sustainability 3:1008583: data centre airflow 'At only 30–40◦C', high-performance near 45 °C (p. 2); liquid immersion 'outgoing heat can reach 50◦C or more' (p. 9); uses incl. 'heating water for swimming pools or fish and lobster farming', 'heating greenhouses' (p. 5); heat 'should preferably be used as-is' (pp. 16, 19) — https://www.frontiersin.org/articles/10.3389/frsus.2022.1008583/pdf"
+ },
+ "typ_heat_hub_vanI3Utility": {
+  "file": "heat_hub_sources.json",
+  "where_read": "data/raw/van/i3.txt, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "Public Utility Conditional 2.2.1 (p. 5)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "3.1.1.1(a) utility and communication uses in 3.00",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_heat_hub_edmMinorUtility": {
+  "file": "heat_hub_sources.json",
+  "where_read": "data/raw/edm/bylaw/b.txt, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "Minor Utility 'minimal or no Nuisance', 'district heating plants'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "Major Utility 'major Nuisances', 'cooling plants', 'power generating stations'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "Minor Utility BE 2.22, IM 2.13, IH 2.5; Major Utility IH 2.4",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_public_edge_vanPlaza": {
+  "file": "public_edge_sources.json",
+  "where_read": "pdftotext of van3575s2 full.pdf; data/raw/van/i3.txt, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "Plaza definition, p. 31",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "I-3 lists Park or Playground (C) and Parking Uses (C), not Plaza",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_public_edge_edmUses": {
+  "file": "public_edge_sources.json",
+  "where_read": "data/raw/edm/bylaw/b.txt, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "Park definition, 'plazas'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "Parking Facility definition",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "Vehicle Support Service <4,600 kg GVWR, fuel stations, car washes",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "BE and IM list neither Park nor Parking Facility",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "Vehicle Support Service P BE 2.17, IM 2.10; 6.110",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "Special Event P BE 2.20, IM 2.11",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_shelter_laundry_edmDrainage": {
+  "file": "shelter_laundry_sources.json",
+  "where_read": "pdftotext -layout of the J.B. upload, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "App. B s. 5 'temperature greater than 75 degrees Celsius'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "App. B 75 °C at p. 42 of 45",
+    "verdict": "WRONG",
+    "evidence": "printed footer: p. 43 of 45 (App. B starts p. 42)",
+    "fix": "p. 43 of 45"
+   },
+   {
+    "claim": "App. C s. 5 'temperature greater than 60 degrees Celsius'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "App. C 60 °C at p. 44 of 45",
+    "verdict": "WRONG",
+    "evidence": "printed footer: p. 45 of 45 (App. C starts p. 44)",
+    "fix": "p. 45 of 45"
+   },
+   {
+    "claim": "consolidated 1 Jan 2024; site-specific limits in App. B preamble",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": "RULE: City of Edmonton Bylaw 19627, EPCOR Drainage Services and Wastewater Treatment Bylaw (consolidated 1 Jan 2024), Schedule 2 Terms and Conditions of Drainage Service: Appendix B (Restricted Wastes, Sanitary and Combined Sewers) s. 5 'temperature greater than 75 degrees Celsius' (p. 43 of 45); Appendix C (Storm Sewers and Watercourses) s. 5 'temperature greater than 60 degrees Celsius' (p. 45 of 45); EWSI may set site-specific limits (App. B preamble) — J.B. upload df71f5ff-epcor_drainage-services-and-wastewater-treatment_bylaw_-19627.pdf (same bylaw as register edmBylaw18100 / edm18100, different clauses)"
+ },
+ "typ_shelter_laundry_usaceLaundry": {
+  "file": "shelter_laundry_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "'1:25 ratio (PN:Washers)' and '1:2 ratio (Washer:Dryer)'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "no floor area; no date or office named",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_shelter_laundry_cfr654412": {
+  "file": "shelter_laundry_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "trays 1 per 25",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "washers 1 per 50 in lieu",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "min 1 tray per 100",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "hot and cold water under pressure",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_shelter_laundry_usAccessWashers": {
+  "file": "shelter_laundry_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "Chapter 6, Sept 2021",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "§611.2 centred on each appliance, parallel approach",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "§305 dimensions not given",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_shelter_laundry_mieleGuide": {
+  "file": "shelter_laundry_sources.json",
+  "where_read": "WebFetch of the URL, 4 Nov 2026 (tool returns quoted extracts)",
+  "claims": [
+   {
+    "claim": "no floor area or clearances",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "HTM 01-04 71 °C 3 min or 65 °C 10 min",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "undated",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_twin_vanI3Accessory": {
+  "file": "twin_sources.json",
+  "where_read": "pdftotext -layout of the J.B. upload, 4 Nov 2026 and data/raw/van/i3.txt",
+  "claims": [
+   {
+    "claim": "s. 2.1 Accessory Buildings Outright 2.2.2, 2.2.13 (p. 6)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "2.2.13 (p. 8) 3.7 m / 4.6 m; rear yard; 3.1 m from lane centre line; 10 % of site area",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "2.2.15 (p. 9) comparable-use conditional",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_twin_vanI2Accessory": {
+  "file": "twin_sources.json",
+  "where_read": "pdftotext -layout of the J.B. upload, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "Outright 2.2.2, 2.2.11; Conditional 2.2.1",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "2.2.11 3.7 m / 4.6 m; 10 % site area; no rear-yard clause",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_twin_vanFC2Accessory": {
+  "file": "twin_sources.json",
+  "where_read": "pdftotext -layout of the J.B. upload, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "2.2.9 (pp. 7–8): 3.7 m / 4.6 m, rear yard, 3.1 m from lane centre line, 10 % site area",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_twin_vanS2Accessory": {
+  "file": "twin_sources.json",
+  "where_read": "pdftotext of van3575s2 full.pdf, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "Accessory Building definition p. 1",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "'Principal Building' (given as p. 1)",
+    "verdict": "WRONG",
+    "evidence": "definition re-found on p. 31",
+    "fix": "p. 31"
+   },
+   {
+    "claim": "no human shelter use; only 'Animal Clinic or Shelter'",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": "RULE: Zoning and Development By-law Section 2 Definitions, City of Vancouver, June 2026, p. 1: 'Accessory Building: A building: (a) the use or intended use of which is ancillary to that of the principal building situated on the same site … or (b) that is ancillary to the principal use being made of the site'; p. 31: 'Principal Building: A building that contains the principal use being made of the site'; no human 'shelter' use defined (only 'Animal Clinic or Shelter') — sources/library/public/van3575s2 (local s2.txt)"
+ },
+ "typ_twin_nbcLimitingDist": {
+  "file": "twin_sources.json",
+  "where_read": "data/raw/codes/nbc.txt, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "Limiting distance definition, l. 1750–1753",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_twin_nbc3231": {
+  "file": "twin_sources.json",
+  "where_read": "data/raw/codes/nbc.txt, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "Tables -D (A, B, C, D, F-3) and -E (E, F-1, F-2), sprinklered",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "-E, 200 m2 or more: 0 % at 0 m, 8 % at 1.2 m, 10 % at 3 m, 50 % at 10 m, 100 % at 15 m (p. 3-85)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "3.2.3.5.(1)–(2)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_twin_nbc3237": {
+  "file": "twin_sources.json",
+  "where_read": "data/raw/codes/nbc.txt, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "0–10 %: A, B, C, D, F-3 1 h noncombustible + cladding",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "0–10 %: E, F-1, F-2 2 h noncombustible",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_twin_edmShelterDefs": {
+  "file": "twin_sources.json",
+  "where_read": "Bylaw20001.pdf (pdftotext, printed page footers) and b.txt, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "Community Service typical examples incl. Seasonal and Year-round Shelters (p. 1016)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "Seasonal Shelter definition text",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "Year-round Shelter definition text",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "general definitions pp. 1055–1056",
+    "verdict": "WRONG",
+    "evidence": "Seasonal Shelter on printed p. 1051 (PDF 1052); Year-round Shelter on printed p. 1057 (PDF 1058)",
+    "fix": "pp. 1051 and 1057"
+   },
+   {
+    "claim": "BE 3.12.1 500 m2 (p. 105), no shelter exception",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": "RULE: Charter Bylaw 20001 Zoning Bylaw, City of Edmonton, as adopted (local text bl.txt): Community Service 'Typical examples include: community halls, community league buildings, community recreation centres, Religious Assemblies, Seasonal Shelters, and Year-round Shelters' (use definitions p. 1016); 'Seasonal Shelter means a Community Service activity where the primary purpose is to provide accommodations not continuously throughout the year for people requiring shelter for a temporary duration'; 'Year-round Shelter … ongoing accommodations …' (general definitions p. 1051 and p. 1057); BE 3.12.1 'The maximum Floor Area is 500 m2 per individual establishment' (p. 105), no shelter exception in this text"
+ },
+ "typ_warm_bath_bcPoolGuide": {
+  "file": "warm_bath_sources.json",
+  "where_read": "pdftotext -layout of the J.B. upload, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "Version 3, April 2025, Health Protection Branch",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "fence 1.5 m strongly recommended (p. 4)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "60 m; 0.32 m²/bather; area excludes gang showers etc. (p. 21)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "hot water ≤49 °C, 32–43 °C (p. 22)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "RH 50–60 %, 4–8 ACH citing ASHRAE 2023 (p. 23)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "turnover ≤6 h public, ≤30 min hot tubs (p. 25)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "separate circulation; pool may fill hot tub, not vice versa (p. 26)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "60 cm bench per person (p. 34)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "only pool-related equipment in Equipment Rooms (p. 41)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "separate rooms for chlorine, acid; 110 % containment (pp. 41–42)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_warm_bath_ashraeCh6Evap": {
+  "file": "warm_bath_sources.json",
+  "where_read": "pdftotext -layout of the J.B. upload, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "Eq. (2) and (3), p. 6.5",
+    "verdict": "OK",
+    "evidence": "Eq. 3 prints \"4 × 105\" (exponent sign lost); units of Eq. 2 give 4 × 10^-5 kg/s per m² per kPa (our arithmetic agrees)",
+    "fix": ""
+   },
+   {
+    "claim": "Table 1 activity factors 0.5/0.65/0.8/1.0/1.0/1.5 min",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "air 1–2 K above water, not above 30 °C (p. 6.5)",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "Table 2 p. 6.6",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_warm_bath_satPressure": {
+  "file": "warm_bath_sources.json",
+  "where_read": "no source page: values re-computed with the IAPWS (Wagner–Pruss) saturation equation, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "3.78 / 4.01 / 5.32 / 6.63 kPa at 28 / 29 / 34 / 38 °C",
+    "verdict": "OK",
+    "evidence": "re-computed 3.783 / 4.009 / 5.325 / 6.633 kPa; still needs a page reference (ASHRAE Fundamentals ch. 1) before use; kept as ?",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": null
+ },
+ "typ_warm_bath_bcbc3131": {
+  "file": "warm_bath_sources.json",
+  "where_read": "data/raw/codes/bcbc2024.txt l. 7368–7415, 4 Nov 2026",
+  "claims": [
+   {
+    "claim": "A-2/A-3 1; A-3/A-3 —; A-3/D 1; A-3/F-2 2; A-2/F-2 2; A-3/F-3 1; D/F-2 —; F-2/F-3 —",
+    "verdict": "OK",
+    "evidence": "re-found on the page",
+    "fix": ""
+   },
+   {
+    "claim": "F-1 by 3.1.3.2.(1)",
+    "verdict": "OK",
+    "evidence": "true for A, B and C rows; table also gives D/F-1 3 h, E/F-1 3 h, F-1/F-2 2 h, F-1/F-3 2 h (added)",
+    "fix": ""
+   }
+  ],
+  "kind_change": null,
+  "new_text": "RULE: British Columbia Building Code 2024, Div. B Table 3.1.3.1 Major Occupancy Fire Separations (local text data/raw/codes/bcbc2024.txt, ~line 7368; same layout as NBC 2020): A-2/A-3 1 h; A-3/A-3 —; A-3/D 1; A-3/F-2 2; A-2/F-2 2; A-3/F-3 1; D/F-2 —; F-2/F-3 —; F-1 vs A, B, C by 3.1.3.2.(1); D/F-1 3 h; E/F-1 3 h; F-1/F-2 2; F-1/F-3 2. See also arch_nbc3131."
+ }
+}
