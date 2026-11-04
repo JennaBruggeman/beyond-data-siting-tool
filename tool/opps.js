@@ -120,6 +120,9 @@ function bestSetups(){ const A=BD.S.answers, keep=JSON.parse(JSON.stringify(A)),
       A.mw=null; BD.modelReset&&BD.modelReset(); const f=E().siteFacts(); const hi=f.mw?f.mw[1]:0; if(!(hi>0.05)) continue;
       const fm=BD.fitMax?BD.fitMax():null; if(fm==null) continue; const top=fm; /* a set-up is only counted at sizes where everything fits (J.B. 20 Oct) */
       const typ=Math.min(2.5,top); A.mw=+(c.size==='large'?top:c.size==='mid'?(typ+top)/2:typ).toFixed(1); A.mwPick=c.size; BD.modelReset&&BD.modelReset();
+      /* bugfix 4 Nov 2026 (retest resident 3): fitMax assumes a smaller size never needs more room (E123: plate, dry, split passes at 3.8 MW but not at 2.5).
+         A set-up is offered only at a size that passes every hard rule: the wanted size, else the nearest passing one below it (site.js fitNear); none, not offered. */
+      if(BD.setupProblems&&BD.setupProblems(true).length){ const v=BD.fitNear?BD.fitNear(A.mw):null; if(v==null) continue; A.mw=v; BD.modelReset&&BD.modelReset(); }
       const L=oppScreen(), k=L.map(o=>o.s).join(''); const n=cnt(L);
       const ch=['inside','outside','plantAt','gens'].filter(id=>{ const d=byId(id); return d&&d.k(keep)!==d.k(A); }).length+(A.mw!==keep.mw?1:0);
       const gk=k+'|'+L.map(o=>GATES.map(g=>o.G[g][0]).join('')).join(''); const prev=out.get(gk); if(!prev||ch<prev.ch) out.set(gk,{k:gk,counts:n,list:L,ch,ans:JSON.parse(JSON.stringify(A)),mw:A.mw}); } }
