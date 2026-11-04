@@ -200,3 +200,6 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - 45° band for "opposite": used in both cities, labelled our reading (from Edmonton's 135° corner test).
 - EETB/EETC: apply the street setback to flanking lines too.
 - Municipal report lists each lot edge's class and yard.
+
+## Typology answers (J.B., 4 Nov 2026)
+- Q1: variants, not separate typologies. "Public front" = one typology with two variants: stacked (Plinth) and beside (Street row); the tool picks the one the zone allows, the user can switch where both pass.
