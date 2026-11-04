@@ -342,7 +342,7 @@ function card(step){
     ${P.genLines?`<h3>Sized from the load</h3><ul class="lim">${P.genLines.map(l=>`<li>${l}</li>`).join('')}</ul>`:''}`;
   }
   if(m.warn.length) h+=m.warn.map(w=>`<div class="warnbox">${esc(w)}</div>`).join('');
-  if(m.notes&&m.notes.length) h+=m.notes.map(w=>`<p class="src nflag" style="border-left:2px solid var(--line-2);padding-left:8px">${esc(w)}</p>`).join(''); /* noise flag (2 Nov 2026): a note, not a block */
+  if(m.notes&&m.notes.length) h+=m.notes.map(w=>`<p class="nflag" data-tl="1">${esc(w)}</p>`).join(''); /* noise flag (2 Nov 2026): a note, not a block */
   h+=liveBox();
   h+=`<div class="navb">${step>1?'<button class="sec" id="sb">← Back</button>':''}<button class="pri" id="sn">${step<5?'Next →':'What fits here →'}</button><span class="sub">or keep the defaults</span></div>`;
   BD.drawer.open(h,el=>{
