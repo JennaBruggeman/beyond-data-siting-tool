@@ -247,8 +247,14 @@ function fitsView(){
   const ST=R.steps, snap=v=>ST.reduce((b,s)=>Math.abs(Math.log(s/v))<Math.abs(Math.log(b/v))?s:b,ST[0]);
   // start at the low end of what fits (snapped to a step), not a hidden midpoint
   // a size already set for this lot (a worked example's largest that fits, the fix button, the residents' choice) is kept, on a step or not (J.B. 20 Oct)
-  if(!A.mw||(A.mwSite&&A.mwSite!==BD.S.sel.id)){ A.mw=snap(Math.max(0.1,f.mw[0])); } A.mwSite=BD.S.sel.id;
+  if(!A.mw||(A.mwSite&&A.mwSite!==BD.S.sel.id)){ A.mw=snap(Math.max(0.1,f.mw[0])); const p=BD.fitNear?BD.fitNear(A.mw):null; if(p!=null) A.mw=p; /* bugfix 4 Nov 2026: start at a size that passes */ } A.mwSite=BD.S.sel.id;
   const pos01=v=>{ v=Math.max(ST[0],Math.min(ST[ST.length-1],v)); let i=0; while(i<ST.length-2&&ST[i+1]<v) i++; return (i+Math.log(v/ST[i])/Math.log(ST[i+1]/ST[i]))/(ST.length-1)*100; };
+  /* bugfix 4 Nov 2026 (retest resident 2): the slider offers only the sizes that pass every hard rule on this lot with this set-up (site.js fitSizes:
+     each slider step up to the largest that fits, and that size), from the smallest to the largest that passes. It sits under the same 0.1–40 MW scale,
+     spanning only that part, and starts at the size set (or the nearest passing size if that one is blocked). */
+  const VAL=((BD.fitSizes&&BD.fitSizes().ok)||[]).slice(); if(VAL.length&&!VAL.includes(A.mw)&&BD.sizePasses&&BD.sizePasses(A.mw)){ VAL.push(A.mw); VAL.sort((a,b)=>a-b); }
+  const pu=v=>Math.round(pos01(v)*10), vAt=p=>VAL.reduce((b,v)=>Math.abs(pu(v)-p)<Math.abs(pu(b)-p)?v:b,VAL[0]);
+  const thumb=VAL.includes(A.mw)?A.mw:VAL.length?((BD.fitNear&&BD.fitNear(A.mw))||VAL[0]):null;
   const cases=(R.cases[f.city]||[]);
   const near=v=>{ const c=cases.slice().sort((a,b)=>Math.abs(Math.log(a.mw/v))-Math.abs(Math.log(b.mw/v)))[0]; if(!c) return ''; const r=v/c.mw; return r>0.85&&r<1.18?`about the size of ${c.n} (${c.mw} MW)`:`${r.toFixed(r<10?1:0)} × ${c.n} (${c.mw} MW)`; };
   const over=v=>v>f.mw[1]?' — larger than this floor area holds even at the densest built layout':'';
@@ -290,9 +296,9 @@ function fitsView(){
   <div class="q"><div class="lab">Size to test: <b id="mwv">${mw}</b> MW of servers · <span id="mwn" class="sub">${esc(near(mw))}${over(mw)}</span></div>
    <div class="mwtrack"><div class="band" style="left:${pos01(f.mw[0])}%;width:${Math.max(1,pos01(f.mw[1])-pos01(f.mw[0]))}%" title="what fits here"></div>
    ${cases.map((c,i)=>`<div class="tick${i%2?' alt':''}" style="left:${pos01(c.mw)}%"><span>${esc(c.n)}</span></div>`).join('')}
-   <input id="mw" type="range" min="0" max="${ST.length-1}" step="1" value="${ST.indexOf(mw)}" aria-label="Size to test, MW" aria-valuetext="${mw} MW"></div>
+   ${VAL.length>1?`<input id="mw" type="range" min="${pu(VAL[0])}" max="${pu(VAL[VAL.length-1])}" step="1" value="${pu(thumb)}" style="margin-left:${pos01(VAL[0]).toFixed(2)}%;width:${(pos01(VAL[VAL.length-1])-pos01(VAL[0])).toFixed(2)}%" aria-label="Size to test, MW" aria-valuetext="${thumb} MW">`:''}</div>
    <div class="mwscale">${[0.1,1,10,40].map(v=>`<span style="left:${pos01(v)}%">${v}${v===40?' MW':''}</span>`).join('')}</div>
-   <div class="src">Bar under the track: what fits here. Ticks: built or proposed sites, operator or applicant figures. Steps widen as size grows.</div></div>
+   <div class="src">${VAL.length>1?`The slider runs from ${VAL[0]} to ${VAL[VAL.length-1]} MW: the sizes that pass every rule on this lot with this set-up.`:VAL.length?`Only ${VAL[0]} MW passes every rule on this lot with this set-up.`:'No size passes every rule on this lot with this set-up.'} Bar under the track: what the floor holds. Ticks: built or proposed sites, operator or applicant figures. Steps widen as size grows.</div></div>
   <h3>What that size needs</h3><dl>
   <dt>Power at full load</dt><dd>${rng(fac[0],fac[1],'MW')} at the meter (servers × PUE 1.4–1.55); this sizes the grid connection and the cooling plant</dd><dt>Power on average</dt><dd>${rng(fac[0]*R.lf,fac[1]*R.lf,'MW')} (about ${Math.round(R.lf*100)}% of full load over a year); this sets the yearly energy</dd>
   <dt>Plant space</dt><dd>${rng(pl[0]*mw,pl[1]*mw,'m²')} with ${coolerFor(false).name}; ${rng(plR[0]*mw,plR[1]*mw,'m²')} with heat recovery — equipment only, before clearances</dd>
@@ -305,8 +311,8 @@ function fitsView(){
   <div class="draftnote">Every range carries the register's confidence; nothing here is a design.</div>`;
   $('#side').innerHTML=h;
   $('#back').onclick=()=>{ BD.S.view2=null; BD.scene3d&&BD.scene3d.hide(); BD.card(); BD.draw(); };
-  $('#mw').oninput=e=>{ const v=ST[+e.target.value]; $('#mwv').textContent=v; $('#mwn').textContent=near(v)+over(v); e.target.setAttribute('aria-valuetext',v+' MW'); };
-  $('#mw').onchange=e=>{ A.mw=ST[+e.target.value]; fitsView(); };
+  { const sl=$('#mw'); if(sl){ sl.oninput=e=>{ const v=vAt(+e.target.value); $('#mwv').textContent=v; $('#mwn').textContent=near(v)+over(v); e.target.setAttribute('aria-valuetext',v+' MW'); };
+    sl.onchange=e=>{ A.mw=vAt(+e.target.value); fitsView(); }; } }
   $('#toRecv').onclick=()=>tabView('heat');
   $('#toPrec').onclick=e=>{ e.preventDefault(); tabView('prec'); };
   $('#toSens').onclick=e=>{ e.preventDefault(); BD.views.sens(); };
