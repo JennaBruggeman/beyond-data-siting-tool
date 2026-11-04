@@ -9,7 +9,7 @@
 "quantities": 201,
 "conditions": 100,
 "opportunities": 14,
-"sources": 1514
+"sources": 1515
 }
 },
 "stages": [
@@ -18963,7 +18963,8 @@
 "arch_vp_osmE06": "MAP DATA (crowd-sourced; position only, no figures used): OpenStreetMap extract for the E06 site pack, saved 26 Oct 2026 (chosen_sites/E06_74_64_Airport_Rd_NW/E06_osm_buildings_2026-10-26.osm): node 304182133 'name' = 'Ramada', 'tourism' = 'hotel', lat 53.5686294, lon -113.5230114 (edited 6 May 2024); node 304153682 'name' = 'Edmonton Inn', 'tourism' = 'hotel', lat 53.5686956, lon -113.5244619. Both fall inside City 3D Buildings object 15434 (E06_footprints.geojson). No 'Comfort Inn' in the extract (?).",
 "arch_inv_cologixVan3Sheet2026": "OPERATOR CLAIM: Cologix, VAN3 Spec Sheet, VAN3.E.052026.R3 (May 2026), uploaded by J.B. 3 Nov 2026: 'Site Capacity 3 MW' (web page read 2 Nov 2026 says 5 MW, arch_inv_cologixVan3Web: conflict kept); 'DC Space 42K SQFT'; 'Site Type 2-story building'; 'Building Concrete and brick; seismic zone 4; outside of flood plain'; 'Data Halls 2'; 'Cooling N+1, Air-cooled chillers'; 'Fire Suppression In-room cross zoned VESDA with nitrogen dry-pipe, pre-action system'; 'Fuel Storage 48 hours'; 'Generator + UPS 4 to make 3'; 'Up to 20 kW per cabinet'; 'Power Usage Effectiveness (PUE) 1.29'; 'K-rated perimeter fence'; 'Security Personnel 24/7/365'; 'Meet-Me-Rooms (MMRs) 2' — local upload (not in repo)",
 "arch_inv_cologixVan1Sheet2026": "OPERATOR CLAIM: Cologix, VAN1 Spec Sheet, VAN1.042026.R4 (file named May 2026), uploaded by J.B. 3 Nov 2026: 555 West Hastings Street; 'Site Capacity 400 kW' (web page 520 kW, arch_inv_cologixVan1Web: conflict kept); 'Site Type Cologix is a tenant'; 'DC Space 5K SQFT across 2 suites'; 'Building Office building; concrete and brick; seismic zone 4; outside of flood plain'; 'Cooling N+1 chilled water cooling, N+1 dry cooler (985), N+1 IRC'; 'Fire Suppression Dual interlocked pre-action dry pipe'; 'Generator + UPS N/N+1 Generator/UPS'; 'Power Usage Effectiveness (PUE) 1.2'; 'Meet-Me-Room (MMR) 3, controlled by landlord'; '13 diverse paths of building fiber' — local upload (not in repo)",
-"arch_inv_cologixVan5Sheet2026": "OPERATOR CLAIM: Cologix, VAN5 Spec Sheet, VAN5.E.062026.R3 (file named May 2026), uploaded by J.B. 3 Nov 2026: 555 West Hastings St; 'Site Capacity 1 MW' (web page 1.6 MW, arch_inv_cologixVan5Web: conflict kept); 'DC Space 10.8K SQFT'; 'Building Multi-story mixed use office building, concrete and brick, seismic zone 4, outside of flood plain'; 'Data Halls 2'; 'Cooling N+1/DX and chilled loop'; 'Fire Suppression In-room cross zoned VESDA with Nitrogen (N2) dry-pipe, pre-action system'; 'Generator + UPS N+1 UPS'; 'Load Design 4 kW'; 'Meet-Me-Rooms (MMR) 4, controlled by landlord'; PUE not stated — local upload (not in repo)"
+"arch_inv_cologixVan5Sheet2026": "OPERATOR CLAIM: Cologix, VAN5 Spec Sheet, VAN5.E.062026.R3 (file named May 2026), uploaded by J.B. 3 Nov 2026: 555 West Hastings St; 'Site Capacity 1 MW' (web page 1.6 MW, arch_inv_cologixVan5Web: conflict kept); 'DC Space 10.8K SQFT'; 'Building Multi-story mixed use office building, concrete and brick, seismic zone 4, outside of flood plain'; 'Data Halls 2'; 'Cooling N+1/DX and chilled loop'; 'Fire Suppression In-room cross zoned VESDA with Nitrogen (N2) dry-pipe, pre-action system'; 'Generator + UPS N+1 UPS'; 'Load Design 4 kW'; 'Meet-Me-Rooms (MMR) 4, controlled by landlord'; PUE not stated — local upload (not in repo)",
+"arch_inv_estruxVan2Sheet": "OPERATOR CLAIM: eStruxture, VAN-2 Data Center datasheet EN-V5 (undated), uploaded by J.B. 3 Nov 2026: '555 West Hastings Street, Suite 2605'; 'Lat: 49.284680 | Long: -123.111890'; '14,500 sq. ft. of total space', '11,000 sq. ft. of white space'; 'Four Data Halls'; 'First data hall built in 2000'; '28 Floor multi-tenant building', '4 Data Halls on 2 different floors'; 'Ceiling clearance 10’ 2” to 11’ 8”'; 'Floor load ... 260 lbs. / sq. ft.'; 'Outside 100 year floodplain', 'Outside 500 year floodplain'; 'Ground level loading dock'; '2.14 MW total power capacity'; 'Up to 10 kW per cabinet'; 'Served by three utility feeds to building with single path electrical distribution to the data halls'; 'POWER PROVIDER BC Hydro'; 'UPS N and N+1'; 'BACKUP GENERATORS N'; 'FUEL RUN-TIME 48 Hours'; 'Tier I design N+1 UPS solution'; 'Closed glycol loop chilled water'; 'Total 422 RT'; 'REDUNDANCY N+1'; 'Double interlock pre-action dry pipe'; 'One Meet-Me-Room' — local upload (not in repo)"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -22124,7 +22125,8 @@
 "arch_vp_osmE06": "map data (OpenStreetMap, crowd-sourced)",
 "arch_inv_cologixVan3Sheet2026": "operator claim",
 "arch_inv_cologixVan1Sheet2026": "operator claim",
-"arch_inv_cologixVan5Sheet2026": "operator claim"
+"arch_inv_cologixVan5Sheet2026": "operator claim",
+"arch_inv_estruxVan2Sheet": "operator claim"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -23053,7 +23055,8 @@
 "arch_vp_osmE06": "claude",
 "arch_inv_cologixVan3Sheet2026": "claude",
 "arch_inv_cologixVan1Sheet2026": "claude",
-"arch_inv_cologixVan5Sheet2026": "claude"
+"arch_inv_cologixVan5Sheet2026": "claude",
+"arch_inv_estruxVan2Sheet": "claude"
 },
 "source_city": {
 "abgas": "edm",
@@ -24568,7 +24571,8 @@
 "arch_vp_osmE06": "edm",
 "arch_inv_cologixVan3Sheet2026": "gen",
 "arch_inv_cologixVan1Sheet2026": "gen",
-"arch_inv_cologixVan5Sheet2026": "gen"
+"arch_inv_cologixVan5Sheet2026": "gen",
+"arch_inv_estruxVan2Sheet": "van"
 },
 "city_gaps": {
 "van": [
