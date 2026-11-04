@@ -61,7 +61,7 @@ function frameOf(r){ const h=hull(r); let best=null;
   return {cx,cy,ux,uy,L:u1-u0,W:v1-v0, toW:(a,b)=>[cx+a*ux-b*uy, cy+a*uy+b*ux], toL:(x,y)=>[(x-cx)*ux+(y-cy)*uy, -(x-cx)*uy+(y-cy)*ux]}; }
 function rectW(F,a0,a1,b0,b1){ const p=[F.toW(a0,b0),F.toW(a1,b0),F.toW(a1,b1),F.toW(a0,b1)]; return new Float64Array(p.flat()); }
 /* the largest simple rectangle (in the lot frame) that sits wholly inside the lot, within a1..a2 × b1..b2 (J.B., 16 Oct: "i just want simple massing") */
-function inscribe(F,ring,a0,a1,b0,b1){ const ua=Math.min(a0,a1), ub=Math.max(a0,a1), va=Math.min(b0,b1), vb=Math.max(b0,b1), W=ub-ua, H=vb-va; if(W<=0||H<=0) return null;
+function inscribe(F,ring,a0,a1,b0,b1,grid){ const ua=Math.min(a0,a1), ub=Math.max(a0,a1), va=Math.min(b0,b1), vb=Math.max(b0,b1), W=ub-ua, H=vb-va; if(W<=0||H<=0) return null;
   const L=[]; for(let i=0;i<ring.length;i+=2) L.push(F.toL(ring[i],ring[i+1]));
   const inLot=(u,v)=>{ const [x,y]=F.toW(u,v); return BD.pip(x,y,ring); };
   const ok=(u0,u1,v0,v1)=>{ for(let k=0;k<=4;k++){ const t=k/4; if(!inLot(u0+(u1-u0)*t,v0)||!inLot(u0+(u1-u0)*t,v1)||!inLot(u0,v0+(v1-v0)*t)||!inLot(u1,v0+(v1-v0)*t)) return false; }
@@ -72,6 +72,19 @@ function inscribe(F,ring,a0,a1,b0,b1){ const ua=Math.min(a0,a1), ub=Math.max(a0,
     if(best) return best;
     // also try keeping full depth or full width (long thin lots)
     for(const [w2,h2] of [[W,h],[w,H]]) for(let i=0;i<=8;i++) for(let j=0;j<=8;j++){ const u0=ua+(W-w2)*i/8, v0=va+(H-h2)*j/8; if(ok(u0,u0+w2,v0,v0+h2)) return [u0,u0+w2,v0,v0+h2]; } }
+  return grid?inscribeGrid(ua,ub,va,vb,inLot,ok):null; }
+/* bugfix 4 Nov 2026 (arch sweep 2, VI2L 1940 Glen Dr): on a bent or curved lot no scaled copy of the buildable box fits, so inscribe gave nothing, the set-up
+   had no hall footprint (serverFoot) and the hall was drawn as the clipped footprint's bounding box, 438 × 201 m, outside the lot. Fallback: the largest
+   rectangle of whole grid cells inside the lot (all four corners of each cell in the lot), checked with the same test as above, shrunk until it passes.
+   Used for the building's footprint only (not the loading strip, which keeps its clipped outline); only lots where the search above finds nothing are affected. Cell size and the 6 m least side (as hallOptions) are drawing choices, not rules. */
+function inscribeGrid(ua,ub,va,vb,inLot,ok){ const W=ub-ua, H=vb-va, c=Math.max(1,Math.sqrt(W*H/40000)), nu=Math.floor(W/c), nv=Math.floor(H/c), MIN=6; if(nu<1||nv<1) return null; /* drawing */
+  const P=[]; for(let j=0;j<=nv;j++){ const row=new Uint8Array(nu+1); for(let i=0;i<=nu;i++) row[i]=inLot(ua+i*c,va+j*c)?1:0; P.push(row); }
+  const h=new Int32Array(nu+1); let best=null;
+  for(let j=0;j<nv;j++){ for(let i=0;i<nu;i++) h[i]=P[j][i]&&P[j][i+1]&&P[j+1][i]&&P[j+1][i+1]?h[i]+1:0;
+    const st=[]; for(let i=0;i<=nu;i++){ while(st.length&&h[st[st.length-1]]>=h[i]){ const t=st.pop(), ht=h[t], left=st.length?st[st.length-1]+1:0, wd=i-left, a=ht*wd;
+        if(ht&&Math.min(ht,wd)*c>=MIN&&(!best||a>best.a)) best={a,i0:left,i1:i,j0:j+1-ht,j1:j+1}; } st.push(i); } }
+  if(!best) return null; let r=[ua+best.i0*c,ua+best.i1*c,va+best.j0*c,va+best.j1*c];
+  for(let k=0;k<8;k++){ if(ok(r[0],r[1],r[2],r[3])) return r; const d=c/2; r=[r[0]+d,r[1]-d,r[2]+d,r[3]-d]; if(Math.min(r[1]-r[0],r[3]-r[2])<MIN) return null; }
   return null; }
 function signedArea(r){ let s=0; for(let i=0,j=r.length-2;i<r.length;j=i,i+=2) s+=(r[j]*r[i+1]-r[i]*r[j+1]); return s/2; }
 function clip(subj,clipR){ // Sutherland–Hodgman: subject (any simple polygon) clipped by a convex polygon
@@ -167,7 +180,7 @@ function model(){
   if(BD.plant) BD.plant.place(m); // sizes units, may shorten the footprint to leave a plant yard, places roof and yard units
   if(!m.existing&&!m.foot&&m.uBuild){ let [a0,a1]=m.uBuild; if(m.plantYardDepth) a0=a0+m.dir*m.plantYardDepth;
     if(m.footMode==='cover'&&A.cover){ const want=lotArea*A.cover/100, wv=m.v[1]-m.v[0]; const len=Math.min(Math.abs(a1-a0),want/Math.max(wv,1)); a0=a1+Math.sign(a0-a1||1)*len; }
-    const q=inscribe(F,ring,a0,a1,m.v[0],m.v[1]); if(q&&A.dcFloor&&A.dcSite===BD.S.sel.id) m.hallRoom=(q[1]-q[0])*(q[3]-q[2]); /* Architecture Ratios: the footprint the hall can have */ if(q){
+    const q=inscribe(F,ring,a0,a1,m.v[0],m.v[1],true); /* bugfix 4 Nov 2026: grid fallback for the building only */ if(q&&A.dcFloor&&A.dcSite===BD.S.sel.id) m.hallRoom=(q[1]-q[0])*(q[3]-q[2]); /* Architecture Ratios: the footprint the hall can have */ if(q){
       // J.B., 16 Oct: "the server amount changes but the building doesnt shrink" — when a size is set, the building is only as big as that size needs:
       // floor = MW × 460 m² of hall per MW (built Canadian halls 290–630, operator claims) ÷ 0.6 hall share (48–72%), spread over the storeys; centred in the buildable rectangle
       if(A.mw&&m.footMode==='max'&&BD.eng){ const R=BD.eng.R, perMW=(R.m2PerMW[0]+R.m2PerMW[1])/2/((R.hallShare[0]+R.hallShare[1])/2), floors=Math.max(1,m.Z&&m.Z.ground?m.nF[0]-1:m.nF[0]), /* 29 Oct 2026: data floors only where the zone keeps the ground floor for other uses (as the 3D and the hall count already do) */ dcF=A.dcFloor&&A.dcSite===BD.S.sel.id?A.dcFloor:null, need=(dcF||A.mw*perMW)/floors, W=q[1]-q[0], H=q[3]-q[2];
