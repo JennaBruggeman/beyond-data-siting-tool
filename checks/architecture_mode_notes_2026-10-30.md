@@ -192,3 +192,11 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - Qu EDM2: 3 MW (Tier III, operator sheet), whole site; phases ≈2 MW + 1 MW from N+1 generators (our arithmetic). J.B. 4 Nov 2026.
 - Wolfpaw: EDM1 10060 Jasper Ave; EDM2 10200 102 Ave NW; EDM3 17204 114 Ave NW (J.B. 4 Nov 2026, from a search summary citing Data Center Map: directory lead, not a primary source). EDM2 and EDM3 share addresses with Qu EDM1 and Qu EDM2, so they are shown as Wolfpaw space inside those buildings, not new map points.
 - Meta (Sturgeon County): 970 MW Phase 1 grid allocation shown; 1,800 MW full build-out noted; Meta's "1 GW" kept as its claim (J.B. 4 Nov 2026). All conflicts settled.
+
+## Lot lines (J.B., 4 Nov 2026)
+- Vancouver rear/side: keep "rear = opposite and furthest from the front" (our reading, labelled); no City enquiry.
+- Neighbouring parcels with no zone on record: read their zone from the City zoning map instead of assuming the deepest yard.
+- Vancouver double frontage: both street lines stay "unclear", flagged.
+- 45° band for "opposite": used in both cities, labelled our reading (from Edmonton's 135° corner test).
+- EETB/EETC: apply the street setback to flanking lines too.
+- Municipal report lists each lot edge's class and yard.
