@@ -284,20 +284,20 @@ function yardsOfFrame(m,Z,side,fl){ const y=Z.yards||{front:0,side:0,rear:0}, ou
 function yardsOf(m,Z,side,fl){ const E=(BD.S.sel&&BD.S.sel.edges)||[], cls=side&&side.cls; if(!cls||!cls.lines.length||!E.length) return yardsOfFrame(m,Z,side,fl);
   const A=BD.S.answers, LSD=BD.data.lotside, F=m.F, y=Z.yards||{front:0,side:0,rear:0}, FLK=((LSD.lines||{}).vanFlankAsFront||{}).zones||[];
   const SB=m.city==='edm'&&!Z.assumed&&!A.userFSR&&LSD&&LSD.edmSetback[Z.key];
-  const dk={front:y.front,rear:y.rear,side:y.side,flank:m.city==='van'&&!Z.assumed&&FLK.includes(Z.vkey)?y.front:y.side};
+  const EFS=((LSD.lines||{}).edmFlankStreet||{}).zones||[], dk={front:y.front,rear:y.rear,side:y.side,flank:!Z.assumed&&(m.city==='van'?FLK.includes(Z.vkey):EFS.includes(Z.key))?y.front:y.side}; /* J.B. 4 Nov 2026: EETB, EETC street setback on flanking lines too */
   const res=z=>LSD.edmResidential.part2.includes(z)||LSD.edmResidential.special.includes(z), ind=z=>LSD.edmIndustrial.zones.includes(z);
   const ab=e=>{ if(e.street) return e.street.cls==='alley'?['alley',SB.alley]:['street',Z.key==='BE'&&['collector','local'].includes(e.street.cls)?SB.streetCL:SB.street];
-    if(e.nbr.some(res)&&SB.res!=null) return ['residential lot',SB.res]; if(SB.nonInd!=null&&e.nbr.some(z=>!ind(z))) return ['non-industrial lot',SB.nonInd]; if(e.nbr.length) return ['lot',SB.site];
+    const zm=e.zoneFromMap?' (zone from the zoning map)':''; if(e.nbr.some(res)&&SB.res!=null) return ['residential lot'+zm,SB.res]; if(SB.nonInd!=null&&e.nbr.some(z=>!ind(z))) return ['non-industrial lot'+zm,SB.nonInd]; if(e.nbr.length) return [e.zoneFromMap?'lot (zone from the zoning map)':'lot',SB.site];
     /* a parcel with no assessment record may be a road, lane or utility plan, not a titled lot: as with nothing found, every setback of the table is possible */
     const allD=Math.max(...['street','streetCL','alley','site','res','nonInd'].map(k=>SB[k]).filter(v=>typeof v==='number'));
-    return [e.lotNoZone?'a parcel with no zone on record (?)':'nothing found (?)',allD,allD!==SB.site]; };
+    return [e.lotNoZone?'a parcel with no zone on record or on the zoning map (?)':'nothing found (?)',allD,allD!==SB.site]; };
   const sw=k=>A.flip?(k==='front'?'rear':k==='rear'?'front':k):k, out=[], ins={u0:0,u1:0,v0:0,v1:0};
   for(const l of cls.lines) for(const k of l.e){ const e=E[k]; if(!e) continue; const kind=sw(l.kind), cand=l.cand?l.cand.map(sw):null; let d, abuts=null;
     let unA=false; if(SB){ const a=ab(e); abuts=a[0]; d=a[1]; unA=!!a[2]; } else d=kind==='unclear'?Math.max(...cand.map(c=>dk[c]||0)):(dk[kind]||0);
     out.push({i:e.i,ax:e.ax,ay:e.ay,bx:e.bx,by:e.by,kind,cand,why:l.why,d,abuts,unA,len:e.len});
     if(d>0){ const nu=e.nx*F.ux+e.ny*F.uy, nv=-e.nx*F.uy+e.ny*F.ux, side4=Math.abs(nu)>=Math.abs(nv)?(nu<0?'u0':'u1'):(nv<0?'v0':'v1'), p=F.toL(e.ax,e.ay), q=F.toL(e.bx,e.by), T=0.5; /* drawing tolerance */
       const touch={u0:Math.min(p[0],q[0])<=-F.L/2+T,u1:Math.max(p[0],q[0])>=F.L/2-T,v0:Math.min(p[1],q[1])<=-F.W/2+T,v1:Math.max(p[1],q[1])>=F.W/2-T}[side4]; if(touch) ins[side4]=Math.max(ins[side4],d); } }
-  const src=SB?(((BD.data.raw.lotside||{edmSetback:{}}).edmSetback[Z.key]||{}).src||['?']).concat(['lot_edm_820_lines']):[Z.srcId].concat(m.city==='van'?['lot_van_s2_lines','lot_van_s10_frontage']:['lot_edm_820_lines','lot_edm_5130']).concat(dk.flank!==y.side||m.city==='van'?['lot_van_exterior_side']:[]);
+  const src=SB?(((BD.data.raw.lotside||{edmSetback:{}}).edmSetback[Z.key]||{}).src||['?']).concat(['lot_edm_820_lines']):[Z.srcId].concat(m.city==='van'?['lot_van_s2_lines','lot_van_s10_frontage']:['lot_edm_820_lines','lot_edm_5130']).concat(m.city==='van'?['lot_van_exterior_side']:EFS.includes(Z.key)?['arch_zns_edmEETP']:[]).concat(m.city==='edm'?['edmZoningGeo']:[]);
   return {front:fl>0?ins.u0:ins.u1,rear:fl>0?ins.u1:ins.u0,s0:ins.v0,s1:ins.v1,max:y.max,by:SB?'abutting, per line':'lot lines',src:[...new Set(src.filter(Boolean))],edges:out,unclear:out.filter(e=>e.kind==='unclear').length,unAbut:out.filter(e=>e.unA).length}; }
 /* the line of the required yards (each lot line moved in by its own yard; m.yardLine, the fence's line), the buildable area (m.build, inside the 61 m cap too)
    and m.edgeYards for inscribe and the fence check. Where the offset folds (a yard deeper than a notch is wide) the lot clipped to the frame stands in (?). */

@@ -655,7 +655,8 @@ async function select(sel){
       for(const k of NBK){ const T2=S.tiles[sel.city+':'+k]; if(!T2) continue; for(const p of T2.par){ if(p.bb&&(p.bb[2]<bx0-PB||p.bb[0]>bx1+PB||p.bb[3]<by0-PB||p.bb[1]>by1+PB)) continue; const key=p.id+'|'+p.r.length+'|'+p.r[0]; if(seenP.has(key)) continue; seenP.add(key);
         const ids=sel.city==='edm'?(p.ids||[]):[p.id], rec=ids.map(recOf).find(Boolean)||null, own=sel.city==='edm'?(p.r===sel.ring||ids.includes(sel.id)):(p.id===sel.id);
         parcels.push({r:p.r,bb:p.bb,zone:zc(rec),rec:!!rec,own}); } }
-      sel.edges=ST?BD.lotSide.lotEdges(sel.ring,{city:sel.city,streets:ST,parcels,classMap:LS.classes[sel.city]}):null; }catch(e){ console.warn('lot sides',e); sel.edges=null; } }
+      const MZ=sel.city==='edm'&&S.meta.edm&&S.meta.edm.ovRaw?S.meta.edm:null, zoneAt=MZ?(x,y)=>{ for(const o of MZ.ovRaw){ const b=o.bb; if(x<b[0]||x>b[2]||y<b[1]||y>b[3]) continue; if(pip(x,y,o.r)) return String(MZ.zones[o.zi]||'').trim().split(/\s+/)[0].toUpperCase()||null; } return null; }:null; /* J.B. 4 Nov 2026: a parcel with no zone on record takes its zone from the City zoning map (tiles meta overview; register edmZoningGeo) */
+      sel.edges=ST?BD.lotSide.lotEdges(sel.ring,{city:sel.city,streets:ST,parcels,classMap:LS.classes[sel.city],zoneAt}):null; }catch(e){ console.warn('lot sides',e); sel.edges=null; } }
   S.sel=sel; S.view2=null; window.BD&&BD.scene3d&&BD.scene3d.hide(); document.body.classList.remove('wide'); if(sel.city!==S.city) await setCity(sel.city,true);
   const c=sel.ring?centroid(sel.ring):sel.pt; if(c&&(S.view.s<1.2||Math.abs(c[0]-S.view.cx)*S.view.s>W/2||Math.abs(c[1]-S.view.cy)*S.view.s>H/2)) flyTo(c[0],c[1],Math.max(S.view.s,2));
   try{ const tk=sel.tile.replace(/-/g,'m'); history.replaceState(null,'','#'+sel.city+'-'+tk+'-'+sel.id); }catch(e){}
