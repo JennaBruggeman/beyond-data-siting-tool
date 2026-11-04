@@ -250,7 +250,23 @@ function model(){
   m.notes=[]; if(m.yards&&m.yards.unAbut) m.notes.push(`Lot lines: what ${m.yards.unAbut>1?m.yards.unAbut+' of this lot\'s edges abut is':'one of this lot\'s edges abuts is'} not known (no lot or street found, or a parcel with no zone on record), so which setback ${m.yards.unAbut>1?'they have':'it has'} is not known (?); the deepest is applied (see Lot lines).`);
   if(m.yards&&m.yards.unclear) m.notes.push(`Lot lines: which yard ${m.yards.unclear>1?m.yards.unclear+' of this lot\'s edges have':'one of this lot\'s edges has'} is not known (?); the deepest it could have is applied (see Lot lines).`); /* LOTLINES 4 Nov 2026: unclear is flagged, not skipped */
   if(BD.eng&&BD.eng.noiseCheck){ let nc=null; try{ nc=BD.eng.noiseCheck(m); }catch(e){ console.warn(e); } m.noise=nc; if(nc&&nc.block) m.warn.push(nc.block); else { if(nc&&nc.req) m.notes.push(nc.req); if(nc&&nc.flag) m.notes.push(nc.flag); } }
+  m.grade=gradeInfo(s,A); /* ELEV 4 Nov 2026: lot grade, height base and flood level; shown on the set-up card only (no effect on any other result) */
   cache={key,m}; return m; }
+/* ELEV 4 Nov 2026 (part A): ground elevation per lot. s.grade = [q0,q10,...,q100 (dm), cover %] from tiles/<city>/g_<tile>.json (tool/make_grade.py,
+   our arithmetic on the register sources in data/grade.json). The by-laws measure height from the base surface (Vancouver) or Grade (Edmonton), not
+   from the median of the lot, so the median is shown but never used as the base (rule not settled, '?'). Flood (Vancouver): the lot's grade against
+   the flood construction level, where the lot is in the designated floodplain (s.floodD, share of the lot, select() in index.html). */
+function gradeInfo(s,A){ const G=BD.data.grade||{}, R=(BD.data.raw.grade||{}), C=G[s.city]||{}, q=s.grade;
+  const out={src:(R[s.city]||{}).src||'?',label:C.label||'?',datum:C.datum||'?',base:Object.assign({},(G.height_base||{})[s.city]||{},{src:(((R.height_base||{})[s.city])||{}).src||'?'})};
+  if(!q){ out.none=true; return out; }
+  const d=x=>Math.round(x)/10; Object.assign(out,{min:d(q[0]),p10:d(q[1]),med:d(q[5]),max:d(q[10]),cover:q[11]});
+  const FC=R.fcl; /* raw: BD.data.grade.fcl is the plain number (data.js unwraps {v,src}) */
+  if(s.city==='van'&&FC&&s.floodD){ const F=+FC.v, dm=F*10;
+    /* share of the lot below the level, read between the stored deciles (our arithmetic; to about 10 % of the lot) */
+    let below=0; if(dm>=q[10]) below=100; else if(dm>q[0]){ for(let i=0;i<10;i++){ if(dm<=q[i+1]){ below=10*i+(q[i+1]>q[i]?10*(dm-q[i])/(q[i+1]-q[i]):0); break; } } }
+    out.fcl={v:F,datum:FC.datum,src:FC.src,inShare:s.floodD,below:Math.round(below),raise:Math.max(0,d(dm-q[0])),
+      floor:A.built!=='existing'&&q[0]<dm, gens:A.gens!=='none'&&(A.genAt||'yard')==='yard'&&q[0]<dm}; }
+  return out; }
 /* hall fix (3 Nov 2026, HALLFIX brief): with a ratio set, the hall's footprint options. Its floor (the data centre's share) over k data storeys, k from the most the
    height holds down to 1; storey heights from the register (ground 6.0 m: envelope, van_zdb_i2/i3; hall floors 6.0 m: burlingtonPlans2026 — engine R.ftf).
    Where the zone keeps the ground floor for other uses (Z.ground: I-2, I-3, FC-2) the hall stands on one ground storey that is not data hall, as before.
@@ -485,7 +501,11 @@ BD.setupHTML=function(st){ setDefaults(); const A=BD.S.answers, m=model(); if(!m
    [3,'Height',A.built==='existing'?`${(m.H||0).toFixed(1)} m (existing)`:`${(m.H||0).toFixed(1)} m, ${m.nF[0]===m.nF[1]?m.nF[0]:m.nF[0]+'–'+m.nF[1]} storeys${A.userH||A.userFSR?' (your limits)':''}`],
    [4,'Cooling',`${lab.inside[A.inside]} inside; ${A.outside==='dry'&&BD.dryName?BD.dryName():lab.outside[A.outside]} ${lab.plantAt[A.plantAt]}`],
    [5,'Standby',A.gens==='none'?'no generators':`generators in the ${A.genAt}`]];
-  return `<h3>The site as set up</h3>${m.Z.warn?`<div class="warnbox">${m.Z.warn}</div>`:''}${rows.map(r=>`<div class="sumrow"><span>${r[1]}</span><span>${esc(r[2])}</span><a href="#" data-setup="${r[0]}">Change ›</a></div>`).join('')}
+  const g=m.grade||{}, gd=(g.none?'? (no ground data for this lot)':`${g.min.toFixed(1)}–${g.max.toFixed(1)} m, median ${g.med.toFixed(1)} m (datum ${g.datum}${g.cover<100?`; ${g.cover}% of the lot covered`:''})`)+(g.base&&g.base.settled===false?'; height base ?':'');
+  const fl=g.fcl, gflags=[]; if(fl){ if(fl.floor) gflags.push(`Grade is below the ${fl.v} m flood construction level on about ${fl.below}% of the lot: a ground floor there must be raised to ≥${fl.v} m (up to ${fl.raise.toFixed(1)} m).`); if(fl.gens) gflags.push(`Generators in the yard: where the yard is below ${fl.v} m, their pads must be raised to ≥${fl.v} m.`);
+    if(gflags.length) gflags.push(`Lot grade from LiDAR (datum ?) vs the level in ${fl.datum}: same datum not confirmed (?).`); }
+  const gradeHTML=`<div class="sumrow"><span>Grade</span><span>${esc(gd)}</span><span></span></div>${g.none?'':`<div class="src">Height base: ${esc(g.base.rule||'?')}</div>`}${gflags.length?`<div class="warnbox">${gflags.map(esc).join('<br>')}</div>`:''}<div class="src">Grade: ${esc(g.label)}; min–max and median of 2 m cells (our arithmetic).</div>`;
+  return `<h3>The site as set up</h3>${m.Z.warn?`<div class="warnbox">${m.Z.warn}</div>`:''}${rows.map(r=>`<div class="sumrow"><span>${r[1]}</span><span>${esc(r[2])}</span><a href="#" data-setup="${r[0]}">Change ›</a></div>`).join('')}${gradeHTML}
   <div class="next"><button id="fits">What fits here →</button><button id="setup1" style="background:transparent;border:1px solid var(--line-2);color:var(--fg)">Set up step by step</button></div>
   <div class="draftnote">Labelled defaults are used until you change them. </div>`; };
 BD.setupWire=function(){ document.querySelectorAll('#side [data-setup]').forEach(a=>a.onclick=e=>{ e.preventDefault(); BD.setup.card(+a.dataset.setup); }); const s1=$('#setup1'); if(s1) s1.onclick=()=>BD.setup.start(); };
