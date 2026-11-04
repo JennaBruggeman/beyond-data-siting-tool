@@ -18,7 +18,7 @@ Inputs from the tool (served from `outputs/tool`, run 4 Nov 2026 with Playwright
 ## Short answer
 
 - **E06B fits** as one 2-storey building: hub row on the street (1,021 m²), hall 2 × 1,168 m² behind, plant in the rear yard off the alley. No hard fail; 13 open items.
-- **V339 fits** in 18.0 m: refuge and shelter at grade, **clinic beside the hall on storey 2** (no hall storey lost), hall on storeys 2–3. Two fails: fence height in required yards, and flood (site grade vs 4.6 m FCL ?).
+- **V339 fits** in 18.0 m: refuge and shelter at grade, **clinic beside the hall on storey 2** (no hall storey lost), hall on storeys 2–3. Two fails, both fixed in the redraw (4 Nov): fence (now 1.9 m on the plant only) and flood (slab and pads at 5.0 m ≥ 4.6 m FCL; LiDAR datum ?).
 - The data centre with all its support rooms is far bigger than the tool's Ratios split: **+39 % (E06B), +118 % (V339)**.
 - Refuge and shelter need **11 WCs** by the table occupant load, not 3.
 
@@ -120,7 +120,8 @@ Inputs from the tool (served from `outputs/tool`, run 4 Nov 2026 with Playwright
 | Dock to air intakes | NBC Table 6.3.2.9 | refuge intakes (roof, drawing choice) ≥25 m ≥ 7.6 m | pass |
 | Nothing wet over the hall | FM 5-32 2.2.1.6 (insurer) | chillers, WCs, clinic not above the hall | pass |
 | Noise at the lot lines | Bylaw 14600 ss. 19–22 | not re-run for this layout | ? |
-| Secure line | notes 1 Nov 2026 | hall, UPS, battery, generators, fuel, dock inside; refuge, shelter, clinic outside; refuge opens with the hall locked | pass |
+| Secure line | notes 1 Nov 2026; J.B. 4 Nov 2026 | inside the building around the data centre and dock; generators and transformers in their own 1.9 m enclosures (fence 1.9 m, J.B. design choice); refuge, shelter, clinic outside | pass |
+| Site grade | Bylaw 20001 s. 5.70 | NRCan HRDEM not reached: grade, height base and flood ? | ? |
 
 ### Changed since the 4 Nov typology numbers
 
@@ -153,7 +154,7 @@ Inputs from the tool (served from `outputs/tool`, run 4 Nov 2026 with Playwright
 | Meet-me rooms | 2 (one site visit); size ? | ? | 2 × 8.4 m² | tourVAN3, arch_dc_ualbertaTelecom |
 | MV switchgear, main electrical | above the flood level (storey 3); size ? | ? | 26 m² | arch_up_fm0523, adj_service.md |
 | Transformers | ⌈2.33 MVA ÷ 2.5⌉ + 1 = 2 pads, 2.63 × 2.49 m; BC Hydro 1 m to building, 3 m in front | 2 pads | 2 pads | transformers, eatonCA022021, bchES54F |
-| Generators (yard) | ⌈1.5 × 1.55⌉ + 1 = 4 × 1,000 kW, 8.43 × 2.62 m; above the flood elevation | 4 sets | 4 sets (grade vs FCL ?) | generator_sets, rehlkoKD1000, arch_csa_c282 |
+| Generators (yard) | ⌈1.5 × 1.55⌉ + 1 = 4 × 1,000 kW, 8.43 × 2.62 m; above the flood elevation | 4 sets | 4 sets, pads 5.0 m (grade 4.7–5.1 m; datum ?) | generator_sets, rehlkoKD1000, arch_csa_c282, van_lidar2022_ground |
 | Fuel | 12 h × 2.10–2.33 MW × 0.263 L/kWh (claims); code floor 2 h | 6,630–7,340 L; 2 h: 1,105–1,225 L (our arithmetic) | sub-base tanks (drawing choice) | fuel_on_site, cat3516c, arch_csa_c282 |
 | Loading | Class B: 1 for 465 m² + 1 for the next 1,860 m² → 2 for ≈2,180 m² (our arithmetic); 10.2 × 3.4 × 3.8 m, aisle 6.1 m | 2 spaces | 2 bays, 69.4 m² | vanParking5 |
 | Shipping and receiving | filed plans 45 m² | 45 m² | 50.4 m² | burlingtonPlans2026 |
@@ -210,33 +211,34 @@ Inputs from the tool (served from `outputs/tool`, run 4 Nov 2026 with Playwright
 | Water closets, hub | Table 3.7.2.2.-A, -B | refuge + shelter 11; clinic 4 | pass |
 | Universal washroom on the entrance storey | VBBL 3.8.2.8.(4) | refuge bank and DC staff WC at grade | pass |
 | Every storey reached | VBBL 3.8.2.3.(2)(g) | E1 public to the clinic; E2 freight inside the secure line (accessible ?) | pass |
-| Accessible entrances | 3.8.2.2.(1) | refuge, shelter, lobby step-free | pass |
+| Accessible entrances | 3.8.2.2.(1) | refuge door grade 5.0 m, shelter 5.3 m: step-free at the 5.0 m slab; lobby door grade 5.7 m: 0.7 m above the slab (ramp ?) | ? |
+| Exit discharge levels | 3.4.6; site grading | S2 and the refuge side door open onto the low side yard (2.9–4.5 m): steps or regrading ? | ? |
 | FDC | VBBL 3.2.5.15.(2) | 3.0 m from the principal entrance, visible from the street | pass |
 | Principal entrance to street | 3.2.5.5.(1) | 0.6 m front yard; kerb distance along the path ? | ? |
 | Spatial separation, side lot lines | Table 3.2.3.1.-E, -D | 7.6 m side yards: about 28–34 % openings (F-2), 66–82 % (public) — glazing not drawn | ? |
-| Locked doors on exit paths | 3.4.6.16; VBBL (8) | S4 and S2 discharge into the secure yard; gate releases on alarm | ? |
+| Locked doors on exit paths | 3.4.6.16; VBBL (8) | S2 and S4 discharge outside the secure line; no yard gate on the exit path (redraw) | pass |
 | Zoning: use | I-3 2.1 | Bulk Data Storage (sub-area A ?), Community Centre / SSC, Health Care Office: all conditional | ? |
 | No data storage at grade | I-3 2.2.11 | hall on storeys 2–3; at grade: entrances, dock, SOC, ETS, spare 257 m² | pass |
 | Clinic not at grade | I-3 2.2.6 | clinic on storey 2, entrance and E1 at grade | pass |
 | Main entrance from a street, each use | Sec. 10.21.1 | refuge, shelter, lobby (clinic, data centre) on 1st Ave E | pass |
 | One principal building | Sec. 10.34.1 | one building | pass |
 | FSR · non-industrial cap | I-3 3.1.1.1 | 3,347 m² ÷ 4,503 m² = 0.74 ≤ 3.00 · hub 1,168 m² ≤ 4,503 m² (1.00 FSR) | pass |
-| Height | I-3 3.1.2.1 | 18.0 m ≤ 18.3 m; stair and elevator overruns: s. 10.1.1 discretion ? | pass |
+| Height | I-3 3.1.2.1; s. 2 Building Height, Base Surface | roof 23.0 m (slab 5.0 + 18.0) − base surface 5.03 m (lowest under the 18 m roof; linear surface over the existing corner grades 4.6, 5.1, 4.7, 4.6, 6.3 m; official grades ?) = 17.97 m ≤ 18.3 m; overruns: s. 10.1.1 ? | pass |
 | Floor-to-floor | I-3 3.1.2.9 | 6.0 / 6.0 / 6.0 m (≥6.0 ground, ≥4.0 upper) | pass |
 | Width · depth | I-3 3.1.2.7–8 | 30.9 m · 42.5 m ≤ 61.0 m | pass |
 | Yards | I-3 3.1.2.2–6 | front 0.6, sides 7.6, rear 3.1 m (tool lines) | pass |
-| Fence height in required yards | Sec. 10.10.3 | 2.4 m (RCMP) > 1.9 m cap | fail |
+| Fence height in required yards | Sec. 10.10.3 | plant enclosure fence 1.9 m ≤ 1.9 m cap; no fence on the lot lines; secure line inside the building (redraw 4 Nov) | pass |
 | Driveway in the side yard | I-3 3.1.2.4, 3.1.2.16 | side drive in the 7.6 m yard: allowed ? (yard can be decreased for loading) | ? |
 | Gate setback | arch_per_vanPkgSupp Table 3 | gate 19.8 m in: WB-17 held on site (≈17 m, our arithmetic) | pass |
 | Loading count and size | Parking By-law s. 5 | 2 Class B bays 10.2 × 3.4 × 3.8 m, aisle 6.1 m outside | pass |
-| Flood construction level | VBBL Div. A 1.4.1.2; CSA C282 6.2.1 | refuge, shelter, generators, transformers at grade; FCL 4.6 m vs site grade ? | fail |
+| Flood construction level | VBBL Div. A 1.4.1.2; CSA C282 6.2.1 | ground slab 5.0 m and generator and transformer pads 5.0 m ≥ 4.6 m (drawing choice); grade under the refuge 4.6–5.3 m, under the generators 4.7–5.1 m (City LiDAR 2022, our arithmetic); LiDAR datum vs GVRD datum ? | ? |
 | Generators to openings · intakes | NBC 6.3.3.1.(2); Table 6.3.2.9 | 5.7 m to the dock doors ≥3.0 m | pass |
 | Generators near care uses | Metro Vancouver 1329 s. 57 | clinic is outpatient, not a hospital or care facility (our reading) | ? |
 | Fuel truck | NFC 4.11.2.4; 4.11.3.2 | attended unloading 6.1 m from generators; no 15 m spot for an unattended truck | ? |
 | Transformers | BC Hydro ES54 F | pads 15.9 m from the building; 3 m clear in front; 1 m apart | pass |
 | Nothing wet over the hall | FM 5-32 2.2.1.6 (insurer) | chillers moved to the clinic roof; clinic beside, not over, the hall | pass |
 | Noise at the lot lines | By-law 6555 | not re-run for this layout | ? |
-| Secure line | notes 1 Nov 2026 | data centre, yard plant and dock inside; refuge, shelter, clinic outside; refuge opens with the hall locked | pass |
+| Secure line | notes 1 Nov 2026; J.B. 4 Nov 2026 | inside the building around the data centre and dock; plant in its own 1.9 m enclosure; refuge, shelter, clinic outside | pass |
 
 ### Changed since the 4 Nov typology numbers
 
@@ -249,9 +251,23 @@ Inputs from the tool (served from `outputs/tool`, run 4 Nov 2026 with Playwright
 
 ### What fails
 
-- Fence 2.4 m over the 1.9 m cap in required yards: needs the Director's relaxation, or the fence on the building wall.
-- Flood: refuge, generators and transformers at grade if the site is below the 4.6 m FCL (site grade ?).
+- ~~Fence 2.4 m over the 1.9 m cap~~ fixed in the redraw: secure line inside the building, plant enclosure 1.9 m.
+- ~~Flood~~ fixed in the drawing: slab and pads at 5.0 m ≥ 4.6 m FCL. Open only on the datum (LiDAR datum ?).
+- New open items from the grade: lobby door 0.7 m above the slab (ramp ?); S2 and refuge side door onto the low side yard (2.9–4.5 m).
 - Open: side drive in the side yard, roof overruns over 18.3 m, noise, secure-yard exit discharge.
+
+## Redraw (4 Nov 2026, ELEV_REDRAW brief part B)
+
+Boards redrawn with the same file names (`whitemock/project/TestFit_EH_E06B.dc.html`, `TestFit_EH_V339.dc.html`; scratchpad; generator `tf/redraw.py`). Same room geometry as above; nothing was moved except the secure line and the plant fence.
+
+- **Drawing:** rooms as soft tinted blocks in 7 groups (data hall; data-centre support; refuge + warming shelter; clinic; shared lobby and circulation; plant; public edge). One label per group per storey, leaders at 90°, labels off the drawing. Symbols only: entrance arrows (public, data centre, service), exit stairs, secure line, fence 1.9 m. Accent red only for problems.
+- **Secure line:** now inside the building, 1.2 m in from the data-centre walls (drawing choice; J.B. 4 Nov: the wall or inside). Plant outside it gets its own enclosure: fence 1.9 m, 1.5 m clear of the units (drawing choice). No lot-line fence.
+- **Beside the plan:** group table (m², rooms), code check as Passes (count) and Needs fixing (one line and clause each), room list collapsed.
+- **V339 grade (City LiDAR 2022, 2 m ground means, our arithmetic; datum ?):** lot 2.2–6.2 m, median 4.9 m; under the building 2.3–5.7 m (low ground along one side yard); refuge 4.6–5.3 m; generator yard 4.7–5.1 m; transformers 5.0–5.1 m; street doors: refuge 5.0, shelter 5.3, lobby 5.7 m; lot corners 4.6, 5.1, 4.7, 4.6, 6.3 m.
+- **V339 fixes:** ground slab 5.0 m (drawing choice: the refuge street-door grade), generator and transformer pads 5.0 m, both ≥ 4.6 m FCL. Height rechecked: 23.0 m roof − 5.03 m base surface = 17.97 m ≤ 18.3 m. The base surface uses existing corner grades joined linearly (our reading); the by-law uses the official grades from the City Engineer, which are not on file (?).
+- **Code check now:** E06B 28 pass, 14 to fix (all ?); V339 31 pass, 11 to fix (all ?, no fail).
+- **E06B:** grade ? (NRCan HRDEM not reachable from this session).
+- **Screens:** `checks/agents/elev_shots/TestFit_EH_<site>.png` at 1440 px; 0 leader crossings (script check) and checked by eye.
 
 ## Open questions for J.B.
 
@@ -259,8 +275,8 @@ Inputs from the tool (served from `outputs/tool`, run 4 Nov 2026 with Playwright
 - Data hall occupant load: designed staff load (≤10, our reading) or the 4.60 m² "process" row (508 persons)?
 - E06B: are refuge and shelter one Community Service use (374 m² ≤ 500) or two?
 - E06B: clinic waiting and offices drawn at 80 + 19.6 m² keep it under 500 m². Accept, or use the built 604 m² and the variance?
-- V339: site grade vs the 4.6 m FCL (decides the refuge, generators and transformers at grade).
-- V339: fence on the lot line needs a relaxation above 1.9 m. Use the building wall plus a 1.9 m yard fence, or ask?
+- V339: confirm the City LiDAR's vertical datum against the GVRD datum of the 4.6 m FCL (City LiDAR readme not reachable from here).
+- V339: ground slab at 5.0 m (drawing choice) leaves the lobby door 0.7 m above it. Ramp in the lobby, regrade the frontage, or a higher slab (5.3 m still ≤ 18.3 m: 18.27 m)?
 - Hub storey height in Edmonton: no source; drawn 6.0 m to line up with the hall. Keep?
 - Noise: re-run the tool's noise check on these yard layouts before the next typology?
 
