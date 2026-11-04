@@ -7,6 +7,7 @@ KIND = [('OPERATOR CLAIM','operator claim'),('MAKER CLAIM','manufacturer claim')
         ('PERMIT','rule'),('GOV','government'),('RULE','rule'),('REGULATOR','government'),('UTILITY','utility record'),('INSTITUTION','institution'),('ENG','engineer claim'),('LEAD','lead (not evidence)')]
 src = json.load(open(A / 'inv_specs_sources.json')); n = 0
 for k, v in src.items():
+    if k.startswith('_'): continue
     if k not in S: n += 1
     S[k] = v
     kind = next((kk for pre, kk in KIND if v.upper().startswith(pre)), 'named in our notes, not yet checked')

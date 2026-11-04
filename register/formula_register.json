@@ -3033,7 +3033,6 @@
    "arch_inv_hut8VaultSheet2026": "operator claim",
    "arch_inv_hut8Van2Sheet2026": "operator claim",
    "arch_inv_estruxVan1Sheet": "operator claim",
-   "_note": "named in our notes, not yet checked",
    "arch_inv2_estruxVan3Web": "operator claim",
    "arch_inv2_estruxBlogApr2026": "operator claim",
    "arch_inv2_equinixVa1Spec": "operator claim",
@@ -3997,7 +3996,6 @@
    "arch_inv_hut8VaultSheet2026": "claude",
    "arch_inv_hut8Van2Sheet2026": "claude",
    "arch_inv_estruxVan1Sheet": "claude",
-   "_note": "claude",
    "arch_inv2_estruxVan3Web": "claude",
    "arch_inv2_estruxBlogApr2026": "claude",
    "arch_inv2_equinixVa1Spec": "claude",
@@ -31460,15 +31458,6 @@
      "what": "all quotes read from the text layer; cooling table is two-column and its pairing is uncertain"
     }
    ],
-   "_note": [
-    {
-     "check": 1,
-     "by": "Claude (research agent)",
-     "date": "3 Nov 2026",
-     "where": "checks/research_arch_v1/inv_specs.md",
-     "what": "figures quoted in the source entry"
-    }
-   ],
    "arch_inv2_estruxVan3Web": [
     {
      "check": 1,
@@ -48074,7 +48063,6 @@
   "arch_inv_hut8VaultSheet2026": "OPERATOR CLAIM: Hut 8 Canada, Vancouver Vault Data Center (VAN1) spec sheet, 'Specifications as at Q3 2026', uploaded by J.B. 3 Nov 2026: '900 W Hastings Street, Vancouver, BC'; 'Designed power 1 MW'; '4,155 sq ft white space (≈ 386 m²), 6,210 sq ft total'; 'Built for the Bank of Canada', 'Acquired by Hut 8 in 2022'; '4.5 ft steel-reinforced walls, solid concrete floors', '1 m thick ceilings'; 'Generator 600 kW, >48 h at full load'; 'UPS 560 kW, N+1'; '5 × 50-tonne chillers (N+1), chilled-water closed loop, in-row cooling'; 'Hot aisle containment, 693 kW IT load at capacity'; '1.3 target PUE' (design target); 'Energy source Majority renewable hydroelectricity'; 'Tier I designed'; 'Failover Hut 8 Kelowna (KEL1)' — local upload (not in repo)",
   "arch_inv_hut8Van2Sheet2026": "OPERATOR CLAIM: Hut 8 Canada, Vancouver Data Center (VAN2) spec sheet, 'As-built, as at Q3 2026', uploaded by J.B. 3 Nov 2026: '701 West Georgia Street, Vancouver, BC'; 'Designed power 0.6 MW'; '2,900 sq ft total facility (≈ 269 m²)'; '118 tonnes of CRAC cooling (N+1), 329 kW IT load at capacity'; 'Hot aisle containment'; '2 generators (435 kW total), >24 h at full load'; 'UPS 900 kW per side, double conversion'; '2N UPS'; '1.3 target PUE' (design target); 'Majority renewable hydroelectricity'; 'Tier I designed, commissioned 2015'; 'Failover Hut 8 Kelowna (KEL1)' — local upload (not in repo)",
   "arch_inv_estruxVan1Sheet": "OPERATOR CLAIM: eStruxture, VAN-1 datasheet EN-V5 (undated), uploaded by J.B. 3 Nov 2026: '55 East 7th Avenue, Vancouver'; 'Building - 10,000 sq. ft.', 'Land - 6,000 sq. ft.'; '7,500 sq. ft. of cabinet space'; '4 halls and 2.4MW of critical IT load'; 'Supports up to 30kW/cabinet'; 'YEAR BUILT 1974'; 'Single building with 3 floors of office and infrastructure space'; '12” thick seismic shear wall spanning its core'; 'FLOOD PLAIN 79’ (24 m) above sea level'; 'Single high voltage entry with a dedicated 2.5MVA unit substation'; 'Power feed from a single substation'; 'POWER PROVIDER BC Hydro'; 'Tier 1, N+1 UPS solution available'; 'UPS 2N solution available upon request'; 'Minimum of 28 hours on site fuel'; 'Hot aisle/cold aisle containment'; '40 Ton mechanical Loop1, N+1 250 Ton Mechanical Loop2' (as laid out in the PDF; reading of the two loops ?); 'N+1 mechanical redundancy'; 'Mechanical design based on optimal free cooling (8+ months / year)'; 'Novec clean agent fire suppression'; 'VESDA'; 'One Meet Me Room with 3 fiber entrances' — local upload (not in repo)",
-  "_note": "Research pass 3 Nov 2026, brief BRIEF_inventory_specs_2026-11-03.md. Pages read through a fetch tool that returns quoted extracts; quotes are as returned. Where the tool paraphrased (marked 'paraphrase'), re-read the source before quoting it in the tool. Reused ids are listed in inv_specs.md, not repeated here.",
   "arch_inv2_estruxVan3Web": "OPERATOR CLAIM: eStruxture, VAN-3 facility page (read 3 Nov 2026, undated): 'a total capacity of 13MW'; '55,000 square feet'; '150kW+ per cabinet'; 'High-density air and liquid cooling options'; hot/cold aisle containment; 'N+1 free cooling design'; 'N+1 UPS solution'; 'Diesel generator backup'; '48 hours of fuel capacity'; 'multiple utility feeds'; PUE, fire suppression, seismic, flood, heat reuse, water and year not stated; datasheet behind a HubSpot form (not opened) — https://www.estruxture.com/data-centers/vancouver/van-3/",
   "arch_inv2_estruxBlogApr2026": "OPERATOR CLAIM: eStruxture blog, 'West Coast Power-Up: How eStruxture is Building B.C.'s Digital Future', 22 Apr 2026: VAN-3 still being built, 'our doors are opening soon'; 'air and liquid cooling instead of the local public water supply'; '100MW+ scale' (not tied to VAN-3); no MW, ft² or PUE for VAN-3 — https://www.estruxture.com/blog/west-coast-power-up-how-estruxture-is-building-b.c.s-digital-future",
   "arch_inv2_equinixVa1Spec": "OPERATOR CLAIM: Equinix, Vancouver VA1 specifications table (read 3 Nov 2026): '343 m2 (3,692 ft2)'; power distribution '120v / 208v'; minimum cabinet density '5kVA'; UPS 'N'; cooling 'N+1'; generator 'N+1', autonomy 'Unknown'; fire suppression 'Double Interlock Pre-Action'; detection 'Aspirated (HSSD/VESDA)'; '2-Story, Reinforced concrete'; flood plain 'Not Applicable'; PUE, utility, seismic, year not stated — https://www.equinix.com/data-centers/americas-colocation/canada-colocation/vancouver-data-centers/va1",
