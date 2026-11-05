@@ -85,7 +85,7 @@ Gate each step: tests pass, weaknesses reported, J.B. says "go" before the next.
 
 - **The repo is public** (since 28 Oct, for the mid-review page). Nothing course-only (Altalis lots, boards that show them) and no licensed files may go in. Source PDFs live in the private repo `beyond-data-sources`.
 - **Studio dates:** match a user by Nov 6; peer reviews Nov 13/17 and Nov 27; final Dec 10. User tests with practising architects (≈45 min) are being recruited, so the tool must run end to end before them.
-- **A separate build in Claude chat:** J.B. said on 3 Nov the tool had been built as a single-file artifact in Claude chat, with design fixes still going on there, to be moved into the repo after. Ask her where that version is before redoing interface work, so the two don't diverge.
+- **One build only:** the tool lives in this repo; the Cowork session is the only chat that worked on it (J.B., 5 Nov). Nothing to merge from elsewhere.
 - **Dropped items still in the data:** Twin is still a typology in `tool/data/arch.json` (dropped by J.B.; Ratios' hold-back can pick it); aquarium and lumber drying (dropped) and food drying and winter garden ("out for now") are still in `tool/arch_programs.json`. Remove or hide them. Climbing wall stays (J.B. kept it).
 - **Users moving blocks:** J.B. wants users to be able to arrange blocks themselves, with every check rerun (3 Nov). Arrange has no drag yet. The typology library supplies the starting layout; moving blocks comes after.
 - **On hold since 3 Nov:** public ground floor under the hall (Build 2 part 5) and basements. Decide with J.B. whether they become typology variants.
