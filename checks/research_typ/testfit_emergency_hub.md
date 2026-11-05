@@ -299,7 +299,67 @@ Results now: **E06B 31 pass, 15 to fix (all ?, no fail); V339 34 pass, 12 to fix
 
 Screens (scratchpad, 1440 px): `tf/TestFit_EH_E06B_v2.png`, `tf/TestFit_EH_V339_v2.png`.
 
+## Pass 3: DC staff entrance, grid, services, noise (4 Nov 2026, TESTFIT_FIX2 brief)
+
+Same file names. Scripts (scratchpad `tf3/`): `geom3.py` (patches the v2 geometry), `paths3.py`, `redraw3.py`, `noise_extract.js`, `noise3.py`. Clinic layout not reworked (waits for J.B.'s Z8000 pages).
+
+**1. DC staff entrance of its own**
+- E06B: exterior door on the alley side (v1 lot line) → staff vestibule 5.6 m² → portal 5.9 m² → secure corridor; guard point 6.7 m² at the vestibule. Old portal and guard room off the lobby removed.
+- V339: exterior door on the north side yard → vestibule 7.2 m² → portal 4.8 m² → service corridor; guard point 7.5 m² beside the dock. The south side yard was tried first: City LiDAR grade 2.4–2.9 m there, 2.1–2.6 m below the 5.0 m slab (our arithmetic). North side: 4.8–5.2 m, step-free (datum ?). DC break room moved into the spare ground floor (24 m², off the secure corridor).
+- Sources (federal benchmarks, not binding): reception zone at the entry (arch_acc_gcpsg015RZ); PZ → OZ through an RZ (arch_sec_gcpsg014 6.7). Sizes ? (no source).
+- Shared lobby now serves public rooms only. NBC 3.4.4.2: no storey-2 exit leads through the lobby; no F-2 room opens onto it ((2)(c) met). The lobby is not counted as an exit (our reading).
+- Vestibule + guard point need one door: 12.2 / 14.7 m² ≤ 200 m², 7.1 m ≤ 25 m (3.3.1.5.(1)(d)).
+- Freed space: E06B old guard room → programs mechanical room; old portal → first aid. V339 old guard room + refuge plant → programs mechanical room; old portal → public janitor.
+- E06B warming shelter rearranged at the north end: 56.3 m² (≥ 56).
+
+**2. Grid and services**
+- Column grid on every storey, light. **Drawing choice, ?**: no data-hall span or bay in the register. burlingtonPlans2026, arch_dc_missSitePlan, arch_dc_hkTpb480/510 and FM 5-32 give floor areas and heights, not spans. Burlington and Mississauga PDFs blocked here (403); not worked around.
+- Bays drawn: E06B hub 7.3 × 7.9 m, data centre 9.7 × 7.9 m; V339 9.5 × 7.7 m programs, 7.8 × 7.7 m data centre. No columns in stairs, lifts, shafts or the refuge main room.
+- Programs mechanical room (HVAC, emergency panel): size ?. CSA Z317.2:24 paywalled (arch_adj_csaZ3172). 1 h drawn (3.6.2.1.(1), (6); drawing choice).
+- Shafts (Table 3.6.3.1, 45 min with 1 h floors): E06B DC riser, storeys 1–2. V339 programs shaft, storeys 1–2 (new); DC riser, storeys 1–3 (new; hall corner, hall still 474 ≥ 472.5 m² a storey).
+- Ducts (drawing choice) run from the mechanical room along the corridors. Damper symbol where a duct crosses a rated separation:
+  - E06B: 3 crossings, 1 h, all combination smoke/fire (3.1.8.7.(1), (2)(c)).
+  - V339: 4 crossings (1 h, 45 min): 3 smoke/fire, 1 fire.
+  - None crosses into the data centre (FM 5-32 2.6.6.2.2: separate air paths). DC penetrations firestopped (3.1.9.1).
+
+**3. Noise re-run** (tool method, engine.js noiseCheck; receivers and limits read from the tool, 4 Nov; our arithmetic)
+- Lp = Lw − 20 log r − 8; r ≥ 5 m from the chiller group centre (noise_level).
+- Lw 102.8 / 106.1 dBA a unit, quieter / standard rating (vertivAFC). Night limit governs.
+- Options tried in the tool's order: low-noise chillers (traneRTAF, maker claim); NSW screen (arch_nz_nswDcNoise, arch_nz_fhwaNBDH); both.
+- Result: **none is enough on either lot.** Low-noise units take only 2.6–6 dB. The screen fails NSW's 20 m rule for the far receivers.
+- Mitigation used: **rooftop plant room** around the chillers, −25 dB (NSW 2021 s. 4.3, Table 4-5). Its walls are the units' box + 2.1 m maker wall clearance (drawing choice). Height about 3.9 m (drawing choice): below the BE 16.0 m and I-3 18.3 m heights.
+
+| | E06B (5 chillers, hub roof 6.0 m; Lw 109.8–113.1) | V339 (3 chillers, clinic roof 12.0 m; Lw 107.6–110.9) |
+|---|---|---|
+| Worst, no mitigation | 62.6–65.9 dBA at 8065 Cedric Mah Rd NW (BRH), 91 m, limit 50 (s. 20(1)); 73.1 at a no-record building, 40 m (50 ?) | 71.5–74.8 at 336 1st Ave E (IC-3), 25 m, limit 65 (s. 2.3(b)(ii)) |
+| With plant room | 37.6–48.1 ≤ limits | 46.5–49.8 ≤ 65 |
+| Nearest residential | 8065 Cedric Mah Rd NW, 91 m: 37.6–40.9 ≤ 50 | 455 Great Northern Way (CD-1, quiet), 154 m: 30.8–34.1 ≤ 55 (without: 55.8–59.1, over) |
+| At own lot lines, with plant room | street 53.0–56.3 (15.5 m); side (v0) 55.8–59.1 (11.2 m); alley side 40.2–46.7; rear 41.3–44.7. Neighbours BE: 60 | street 60.2–63.5 (5.2 m); south side 48.5–51.8; north side 46.3–49.6; rear 34.4–41.9. Neighbours I-3 / IC-3: 65 |
+| Flag | no-record building across the street: 44.8–48.1 at its outline vs 50 if residential (property line ?) | — |
+
+- Not modelled: generators (testing) and the programs mechanical room (no sound power on file ?). Plant-room airflow through louvres needs the maker's approval (?).
+- Compliance list: "Noise at the lot lines" → pass (with the plant room). New "?" rows: mitigation details, generator and programs plant noise.
+
+**4. Re-check** (0.25 m grid, along the path, our arithmetic)
+
+| | E06B | V339 |
+|---|---|---|
+| Connected | 71 rooms, 2 storeys: all | 72 rooms, 3 storeys: all |
+| Worst travel | L1 44.7 m (DC lockers → S1, unchanged); L2 38.9 m | L1 24.0; L2 31.1; L3 31.2 m |
+| Two exits | clinic 4, refuge 6, lobby 2, DC 8; L2 DC 2: all ≥ half diagonal | refuge 7, lobby 2, DC 7; L2 clinic 2, DC 2; L3 DC 2 |
+| Reception zone | 1 exterior door, 7.1 m | 1 exterior door, 7.1 m |
+
+- New rows: DC staff entrance; Reception-zone rooms, one door; Programs mechanical room (?); Vertical service spaces; Ducts across rated separations; Structural grid (?); Noise mitigation used (?); Generator and programs plant noise (?). Lobby used as an exit now cites 3.4.4.2.(1), (2)(c).
+- Results now: **E06B 36 pass, 18 to fix (all ?, no fail); V339 40 pass, 15 to fix (all ?, no fail).**
+- Screens checked by eye at 2× (scratchpad `tf3/p3_E06B.png`, `tf3/p3_V339.png`). 0 leader crossings (script).
+- Fixed after looking: rooftop plant room drawn as a rectangle (the convex hull read as a slanted wall); travel label kept on one line; damper wording.
+- Section not redrawn for the rooftop plant room (height ?).
+
 ## Open questions for J.B.
+
+- Pass 3: accept the rooftop plant rooms (−25 dB) or test fewer, quieter units or a yard position?
+- Pass 3: a sourced data-hall span or bay (Burlington or Mississauga drawings, or the Z8000 pages): can you download them? Grid is a drawing choice until then.
+- Pass 3: E06B mechanical room and janitor open onto the lobby (allowed, since it is not an exit). Keep, or give them a hub service corridor?
 
 - E06B storey 1: worst travel 44.7 m of 45 m (DC lockers behind the portal). Accept, or give those rooms their own exit?
 - Do the 6 m dead-end limits apply to corridors inside the secure line (E06B secure passage 12.0 m)?
@@ -325,4 +385,4 @@ Screens (scratchpad, 1440 px): `tf/TestFit_EH_E06B_v2.png`, `tf/TestFit_EH_V339_
 
 - E06B lot outline is Altalis (EPSB GIS, academic use only). The E06B board must not be published or shared outside the course.
 
-Check 1 only (this pass). Not yet checked by a second agent.
+Check 1 only (passes 2 and 3). Not yet checked by a second agent.
