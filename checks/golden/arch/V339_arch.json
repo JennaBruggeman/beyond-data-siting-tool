@@ -39,30 +39,6 @@
   ],
   "plant": [
    [
-    "air-cooled chillers",
-    "roof",
-    -12,
-    1,
-    -13,
-    -11
-   ],
-   [
-    "air-cooled chillers",
-    "roof",
-    -12,
-    1,
-    -7,
-    -4
-   ],
-   [
-    "air-cooled chillers",
-    "roof",
-    -12,
-    1,
-    0,
-    2
-   ],
-   [
     "standby generators",
     "yard",
     4,
@@ -275,7 +251,7 @@
  },
  "rules": [
   "bad: Refuge: 265 m² does not fit on one floor here along the street front (it needs its own street entrance); drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
-  "bad: Public indoor pool: not drawn. Stopped by minimum size or sides: no free area of its size with sides of at least 11 × 27 m is left beside the hall, the plant, the plant yard and loading.",
+  "bad: Public indoor pool: not drawn. Stopped by height: the 18 m limit (register van_zdb_i3).",
   "bad: Outpatient clinic: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 18 m limit (register van_zdb_i3).",
   "bad: Bathhouse / Nordic spa: 320 m² does not fit on one floor here; drawn over 3 storeys only to show its size. Whether it can be split across floors is a design question.",
   "bad: EV charging hub: 150 m² does not fit on one floor here; drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
@@ -292,8 +268,7 @@
   "q: Bathhouse / Nordic spa: keep-apart rules not checked here: generators (no distance in the source).",
   "note: EV charging hub in I-3: conditional (Parking Uses (may include retail sale of electricity)).",
   "note: EV charging hub: F-3, 1.5 h fire separation from the data centre (F-2).",
-  "q: EV charging hub: keep-apart rules not checked here: intakes (not modelled).",
-  "q: Roof plant reaches 20.9 m, over the 18.3 m height limit: allowed only if the Director of Planning permits it (s. 10.1.1), which is not known here (?)."
+  "q: EV charging hub: keep-apart rules not checked here: intakes (not modelled)."
  ],
  "side": "Arrange",
  "ratios": {
@@ -350,14 +325,14 @@
   [
    "suggest",
    7,
-   20,
+   19,
    15,
    0.7559830015656452
   ],
   [
    "lot",
    11,
-   24,
+   23,
    15,
    0
   ]

@@ -16,7 +16,6 @@
   "gens": "yes",
   "genAt": "roof",
   "genSpares": "n1",
-  "vis": "indoors",
   "mwSite": "59013407"
  },
  "sel": {
@@ -250,6 +249,7 @@
    "lotArea": 6294,
    "ring": "[ring 10]",
    "notes": [
+    "Noise: needs the roof cooling plant in an enclosed plant room. On the roof, even with low-noise chillers and a solid screen, it would give about 58 dBA at 550 HASTINGS ST W (CD-1 (316), quiet zone), 71 m away, over the 55 dBA night limit (Noise Control By-law 6555 s. 2.3(b)(i)). The plant room is the next measure, and the least that passes; its floor comes out of the building (register arch_nz_nswDcNoise).",
     "Lot lines: which yard 4 of this lot's edges have is not known (?); the deepest it could have is applied (see Lot lines).",
     "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 61–64 dBA (quieter–standard unit rating) at the point of reception beside 550 HASTINGS ST W (CD-1 (316), quiet zone), 69 m away; limit 55 dBA at night (Noise Control By-law 6555 s. 2.3(b)(i))."
    ],
@@ -680,6 +680,21 @@
     "med": 16.1,
     "max": 19.3,
     "cover": 100
+   },
+   "noiseRoom": {
+    "worst": {
+     "addr": "550 HASTINGS ST W",
+     "zt": "CD-1 (316), quiet zone",
+     "lot": true,
+     "d": 70.9,
+     "lo": 57.8,
+     "hi": 57.8,
+     "L": 55,
+     "Ls": 55,
+     "sec": "Noise Control By-law 6555 s. 2.3(b)(i)"
+    },
+    "block": "Noise: the cooling plant (roof) would give about 58 dBA (low-noise units: one rating) at the point of reception beside 550 HASTINGS ST W (CD-1 (316), quiet zone), 71 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 55 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(i); the plant runs 24 h, so the night limit governs). 2 neighbouring lots are over. No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it f…",
+    "src": "arch_nz_nswDcNoise"
    }
   },
   "envAssumed": true,

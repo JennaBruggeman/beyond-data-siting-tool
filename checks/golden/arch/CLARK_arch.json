@@ -1,14 +1,14 @@
 {
  "dbg": {
-  "a0": -17.73692387661898,
+  "a0": -16.86492387661898,
   "uf": 42.75292387661898,
   "dir": 1,
   "v": [
    -39.35988108921515,
    39.35988108921515
   ],
-  "L": 60.48984775323796,
-  "hd": 24.093089321716477,
+  "L": 59.61784775323796,
+  "hd": 22.3058663596601,
   "F": [
    85.50584775323796,
    78.7197621784303
@@ -17,7 +17,7 @@
    -23.35292387661898,
    42.75292387661898
   ],
-  "pyd": 5.616,
+  "pyd": 6.4879999999999995,
   "front": 42.75292387661898,
   "bu": [
    [
@@ -41,7 +41,7 @@
     14.75292387661898
    ],
    [
-    -3.247076123381021,
+    -7.247076123381021,
     8.75292387661898
    ],
    [
@@ -55,60 +55,28 @@
   ],
   "plant": [
    [
-    "air-cooled chillers",
-    "roof",
-    -17,
-    -5,
-    -32,
-    -30
-   ],
-   [
-    "air-cooled chillers",
-    "roof",
-    -17,
-    -5,
-    -26,
-    -23
-   ],
-   [
-    "air-cooled chillers",
-    "roof",
-    -17,
-    -5,
-    -19,
-    -17
-   ],
-   [
     "standby generators",
     "yard",
     -22,
-    -19,
-    -27,
-    -19
-   ],
-   [
-    "standby generators",
-    "yard",
+    -18,
     -22,
-    -19,
-    -17,
     -9
    ],
    [
     "standby generators",
     "yard",
     -22,
-    -19,
+    -18,
     -7,
-    2
+    7
    ],
    [
     "standby generators",
     "yard",
     -22,
-    -19,
-    4,
-    12
+    -18,
+    9,
+    22
    ]
   ],
   "yard": [
@@ -117,11 +85,11 @@
     -39
    ],
    [
-    -18,
+    -17,
     -39
    ],
    [
-    -18,
+    -17,
     39
    ],
    [
@@ -244,7 +212,7 @@
   [
    "ev_hub",
    [
-    -3,
+    -7,
     9
    ],
    false,
@@ -286,59 +254,41 @@
   18
  ],
  "hallPick": {
-  "tried": 8,
-  "passed": 4,
-  "n": 8,
+  "tried": 5,
+  "passed": 5,
+  "n": 5,
   "under": false,
   "best": {
-   "key": "2:-17.7,6.4:24.1",
+   "key": "2:-16.9,5.4:33.5",
    "k": 2,
    "st": 3,
    "top": 18,
    "along": "back",
-   "a": 1,
-   "fa": 580.4769530642008,
+   "a": 1.5,
+   "fa": 746.3275110825438,
    "drawn": 3380
-  },
-  "fails": [
-   [
-    "2:-17.7,11.8:19.7",
-    "Noise: the cooling plant (roof) would give about 66 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 37 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
-   ],
-   [
-    "2:-17.7,12.5:19.2",
-    "Noise: the cooling plant (roof) would give about 66 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 37 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
-   ],
-   [
-    "1:-17.7,11.8:39.4",
-    "Noise: the cooling plant (roof) would give about 66 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 37 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
-   ],
-   [
-    "1:-17.7,12.5:38.4",
-    "Noise: the cooling plant (roof) would give about 66 dBA (low-noise units: one rating) at the point of reception beside 1345 CLARK DR (I-2, activity zone), 37 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims); the roof plant indoors (Seen or hidden: Bring it indoors), credited 25 dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise). Unit housings (Enclose it) and silencers get no credit: no sourced figure for them (?)."
-   ]
-  ]
+  }
  },
  "hallUV": [
   [
-   -18,
-   6
+   -17,
+   5
   ],
   [
    -34,
-   -10
+   -1
   ]
  ],
  "hallStoreys": 3,
  "space": {
-  "hall": 1161,
+  "hall": 1493,
   "prog": 3380,
   "cap": 16585.055801834307
  },
  "heat": {
   "avail": [
-   6933.414857142857,
-   10643.4
+   8859.363428571427,
+   13599.899999999998
   ],
   "need": [
    576.01,
@@ -374,17 +324,16 @@
   "q: Greenhouse: fire separation from the data centre (F-2) ? (occupancy ?).",
   "q: Greenhouse: keep-apart rules not checked here: hall (no distance in the source); generators (no distance in the source).",
   "bad: Fish farm in I-2: rezoning (no use (Urban Farm excludes fish)).",
-  "q: Fish farm: keep-apart rules not checked here: generators (no distance in the source).",
-  "q: Roof plant reaches 20.9 m, over the 18.3 m height limit: allowed only if the Director of Planning permits it (s. 10.1.1), which is not known here (?)."
+  "q: Fish farm: keep-apart rules not checked here: generators (no distance in the source)."
  ],
  "side": "Arrange",
  "ratios": {
   "ratio": {
    "cover": 5528,
-   "dc": 7,
+   "dc": 9,
    "prog": 30,
    "end": "low",
-   "mw": 1.8
+   "mw": 2.3
   },
   "base": {
    "lot": 5882,
@@ -402,18 +351,18 @@
    "allowed": 16585,
    "by": "envelope",
    "dcMax": 11057,
-   "dcM2": 1161,
+   "dcM2": 1493,
    "progM2": 4976,
-   "unused": 10449,
+   "unused": 10117,
    "mw": [
-    1.83,
-    3.96
+    2.35,
+    5.09
    ],
-   "mwTest": 1.8
+   "mwTest": 2.3
   },
   "answers": {
-   "mw": 1.8,
-   "dcFloor": 1161
+   "mw": 2.3,
+   "dcFloor": 1493
   },
   "side": [
    "Ratios"
@@ -427,19 +376,19 @@
   "stuck": false,
   "next": "Next: Programs →"
  },
- "split": "Data centre 7% · 1,161 m² · 1.8–3.9 MW (testing 1.8) · programs 30% · 4,976 m² · unused 63% arch_ratios Edit ratios",
+ "split": "Data centre 9% · 1,493 m² · 2.3–5.0 MW (testing 2.3) · programs 30% · 4,976 m² · unused 61% arch_ratios Edit ratios",
  "saved": [
   [
    "suggest",
    3,
-   25,
+   24,
    43,
-   0.624246598932323
+   0.5851558463922851
   ],
   [
    "lot",
    9,
-   31,
+   30,
    43,
    0
   ]
