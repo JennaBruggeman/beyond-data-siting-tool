@@ -1,6 +1,6 @@
 # Beyond Data: instructions for Claude
 
-> **5 Nov 2026: read `START_HERE.md` first.** It has the current direction (Architecture mode as a typology library), tests, next steps and open decisions. Where the two differ, START_HERE.md wins. The phase table below is **out of date** (written 24 Oct, before the typology library); its standards and data rules still hold.
+> **5 Nov 2026: read `START_HERE.md` first, then work through `WORKLIST.md` in order.** It has the current direction (Architecture mode as a typology library), tests, next steps and open decisions. Where the two differ, START_HERE.md wins. The phase table below is **out of date** (written 24 Oct, before the typology library); its standards and data rules still hold.
 
 Read this file, then the build plan, before any work in this repo:
 **Build plan to Dec 10:** https://claude.ai/artifact/9127WfPaQqU8RbrGdhmLxd (a living doc; its Status table says where things stand).

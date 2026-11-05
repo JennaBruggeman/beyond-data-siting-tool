@@ -1,5 +1,7 @@
 # Beyond Data: start here (handover for Claude Code, 5 Nov 2026)
 
+**Work from `WORKLIST.md`:** every task in order, with owners and gates. This file is the background.
+
 J.B. (Jenna Bruggeman, UBC M.Arch) — Beyond Data siting tool, ARCH 540 and the GP1 thesis. Branch `overnight-2026-10-30`. Nothing merges to `main` without J.B.'s approval. Never push `backup/pre-purge-2026-10-28`.
 
 ## Standards (every change)
