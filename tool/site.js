@@ -133,7 +133,7 @@ function loadingNeed(city,gfa){
     basis:`${n} loading space${n===1?'':'s'} for ${fmt(gfa)} m² of floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site, with no backing onto streets or alleys (s. 5.80 subs. 7). Aisle: Vancouver's 6.1 m used as an assumption.`,src:'edmZB580'}; }
 
 /* the model the numbers and the 3D share */
-let cache={key:null,m:null};
+let cache={key:null,m:null}, roomTry=false, roomOff=false; /* dcshare 4 Nov 2026: the plant-room step of the noise ladder (model, fitMax) */
 function model(){
   const S=BD.S, s=S.sel, A=S.answers; if(!s) return null; if(!A.built) A.built='new'; if(!A.extent) A.extent='whole'; /* the labelled defaults (lot test 20 Oct) */
   { const a0=s.a||[], Z0=zoneLimits(s.city,s.city==='van'?(a0[1]||''):(a0[2]||a0[1]||'')); if(Z0.screen&&(!A.vis||A.vis==='reveal')) A.vis='screen'; } /* 2 Nov 2026 hard rules: screening required (Z.screen) */
@@ -250,6 +250,17 @@ function model(){
   m.notes=[]; if(m.yards&&m.yards.unAbut) m.notes.push(`Lot lines: what ${m.yards.unAbut>1?m.yards.unAbut+' of this lot\'s edges abut is':'one of this lot\'s edges abuts is'} not known (no lot or street found, or a parcel with no zone on record), so which setback ${m.yards.unAbut>1?'they have':'it has'} is not known (?); the deepest is applied (see Lot lines).`);
   if(m.yards&&m.yards.unclear) m.notes.push(`Lot lines: which yard ${m.yards.unclear>1?m.yards.unclear+' of this lot\'s edges have':'one of this lot\'s edges has'} is not known (?); the deepest it could have is applied (see Lot lines).`); /* LOTLINES 4 Nov 2026: unclear is flagged, not skipped */
   if(BD.eng&&BD.eng.noiseCheck){ let nc=null; try{ nc=BD.eng.noiseCheck(m); }catch(e){ console.warn(e); } m.noise=nc; if(nc&&nc.block) m.warn.push(nc.block); else { if(nc&&nc.req) m.notes.push(nc.req); if(nc&&nc.flag) m.notes.push(nc.flag); } }
+  /* dcshare 4 Nov 2026 (J.B. approved 4 Nov): the noise ladder's last step. noiseCheck (engine.js) already tries low-noise chillers and a solid screen, in
+     its sourced order (source measures before barriers: Ottawa ENCG). If the cooling plant on the roof still breaks the night limit, the next measure is
+     the roof plant in an enclosed plant room (Seen or hidden: Bring it indoors; NSW 2021 s. 4.3 plant room, −25 dB, register arch_nz_nswDcNoise), its
+     floor taken from the building (plant.js). The model is built again with it. If that passes the noise check it is the model, and the room is named
+     as required (m.noiseRoom), like the screen. The block stays only when no measure passes (2 Nov 2026 rule). The answer itself (A.vis) is not changed. */
+  if(!roomOff&&!roomTry&&m.noise&&m.noise.block&&A.vis!=='indoors'&&m.plant&&m.plant.coolRoof>0){ const keepV=A.vis; let m2=null; roomTry=true;
+    try{ A.vis='indoors'; cache.key=null; m2=model(); }catch(e){ console.warn(e); m2=null; } finally{ A.vis=keepV; roomTry=false; }
+    if(m2&&m2.noise&&!m2.noise.block){ const w=m.noise.worst;
+      m2.noiseRoom={worst:w,block:m.noise.block,src:'arch_nz_nswDcNoise'};
+      m2.notes.unshift(`Noise: needs the roof cooling plant in an enclosed plant room. On the roof, even with ${m.noise.mit&&m.noise.mit.tried&&m.noise.mit.tried.includes('ln+scr')?'low-noise chillers and a solid screen':'the modelled measures'}, it would give about ${w?Math.round(w.lo)+' dBA at '+(w.addr||'a neighbouring lot')+' ('+w.zt+'), '+Math.round(w.d)+' m away, over the '+w.Ls+' dBA night limit ('+w.sec+')':'more than the night limit'}. The plant room is the next measure, and the least that passes; its floor comes out of the building (register arch_nz_nswDcNoise).`);
+      cache={key,m:m2}; return m2; } }
   m.grade=gradeInfo(s,A); /* ELEV 4 Nov 2026: lot grade, height base and flood level; shown on the set-up card only (no effect on any other result) */
   cache={key,m}; return m; }
 /* ELEV 4 Nov 2026 (part A): ground elevation per lot. s.grade = [q0,q10,...,q100 (dm), cover %] from tiles/<city>/g_<tile>.json (tool/make_grade.py,
@@ -325,7 +336,7 @@ function clipYards(m,rr){ const c=clip(m.ring,rr); if(!m.yardOff||!m.edgeYards) 
 BD.buildArea=M=>M.inset?clipYards(M,M.inset):M.ring; BD.clipYards=clipYards;
 function setHall(m,o){ if(!o){ m.serverFoot=m.hallFull; delete m.hallTop; delete m.hallStoreys; delete m.hallData; delete m.hallOpt; m.hallFallback=true; return; }
   m.serverFoot=rectW(m.F,o.u[0],o.u[1],o.v[0],o.v[1]); m.hallTop=o.top; m.hallStoreys=o.st; m.hallData=o.k; m.hallOpt=o.key; m.hallFallback=false; }
-BD.siteGeo={rectW,inscribe,clip,frameOf}; BD.model=model; BD.modelReset=()=>{ cache.key=null; fsCache.key=null; };
+BD.siteGeo={rectW,inscribe,clip,frameOf}; BD.model=model; BD.modelReset=()=>{ cache.key=null; fsCache.key=null; fpCache.key=null; };
 /* a set-up that does not work (J.B. 20 Oct: "a set up that doesnt work shouldnt ever let you click next"): everything that stops it, in words */
 function setupProblems(noFloor){ const m=model(); if(!m||!m.F) return []; const p=(m.warn||[]).slice();
   if(m.plant&&m.plant.miss) p.push(...m.plant.miss.map(x=>x.charAt(0).toUpperCase()+x.slice(1)+'.'));
@@ -334,7 +345,8 @@ function setupProblems(noFloor){ const m=model(); if(!m||!m.F) return []; const 
   return p; }
 /* the largest size at which everything fits: servers, cooling plant, generators, loading (J.B. 20 Oct: worked examples open at it; "as large as fits" means it).
    Binary search to 0.1 MW between 0.1 and the most the floor holds; assumes a smaller size never needs more room. Returns null if nothing fits. */
-function fitMax(){ const A=BD.S.answers, keep=A.mw; A.mw=null; cache.key=null; let hi=0; try{ hi=BD.eng.siteFacts().mw[1]; }catch(e){}
+function fitMax(opt){ const asIs=!!(opt&&opt.asIs); if(asIs){ roomOff=true; cache.key=null; } try{ return fitMax0(); }finally{ if(asIs){ roomOff=false; cache.key=null; } } } /* dcshare: {asIs:true} = without the plant-room step (the set-up exactly as chosen) */
+function fitMax0(){ const A=BD.S.answers, keep=A.mw; A.mw=null; cache.key=null; let hi=0; try{ hi=BD.eng.siteFacts().mw[1]; }catch(e){}
   const ok=mw=>{ A.mw=mw; cache.key=null; return !setupProblems(true).length; };
   let lo=0, best=null, top=Math.floor((hi||0)*10);
   /* 2 Nov 2026 hard rules: with generators on the roof no size above the fuel limit passes (model(); Build 2: CSA B139.1.1 6.5.3), so the search starts there */
@@ -355,6 +367,24 @@ function fitSizes(){ const A=BD.S.answers, keep=A.mw, B=Object.assign({},A); del
 function sizePasses(v){ const A=BD.S.answers, keep=A.mw; A.mw=v; cache.key=null; let ok=false; try{ ok=!setupProblems().length; }finally{ A.mw=keep; cache.key=null; } return ok; }
 /* the passing size for a wanted one: itself if it passes, else the largest passing size below it, else the smallest that passes; null if none passes */
 function fitNear(want){ if(want!=null&&sizePasses(want)) return want; const S=fitSizes(); if(!S.ok.length) return null; const below=S.ok.filter(v=>v<=(want||0)+1e-9); return below.length?below[below.length-1]:S.ok[0]; }
+/* dcshare 4 Nov 2026: the measures a size depends on (noise ladder, least first), in words, for Ratios and the set-up card */
+function measureOf(m){ if(!m) return null; const A=BD.S.answers, mi=m.noise&&m.noise.mit, o=(mi&&mi.option)||'', t=[], id=[];
+  if(/ln/.test(o)){ t.push('low-noise chillers'); id.push('ln'); }
+  if(/fan/.test(o)){ t.push('night fan speed'); id.push('fan'); }
+  if(/scr/.test(o)&&mi.screen){ t.push(`a ${mi.screen.h.toFixed(1)} m solid screen`); id.push('scr'); }
+  const own=A.vis==='indoors'&&m.plant&&m.plant.coolRoofIndoor>0, room=!!m.noiseRoom||own;
+  if(room){ t.push(`an enclosed plant room${m.noiseRoom?' (needed for the noise by-law)':A.visDefault==='arch'?' (the Architecture default)':' (as set up)'}`); id.push('room'); }
+  return {id:id.join('+')||'none',room,auto:!!m.noiseRoom,t:t.length?'with '+t.join(' and '):'with no noise measure'}; }
+/* the largest size that passes and the measures it depends on; asIs: the largest without the plant-room step, when that is smaller */
+let fpCache={key:null,v:null};
+function fitPlan(){ const A=BD.S.answers, B=Object.assign({},A); delete B.mw; delete B.mwPick; delete B.mwSite; delete B.resNote;
+  const key=JSON.stringify([BD.S.sel&&BD.S.sel.city,BD.S.sel&&BD.S.sel.id,B]); if(fpCache.key===key) return fpCache.v;
+  const fm=fitMax(), v={mw:fm,measure:null,asIs:null};
+  if(fm!=null){ const keep=A.mw; A.mw=fm; cache.key=null; try{ v.measure=measureOf(model()); }finally{ A.mw=keep; cache.key=null; }
+    if(v.measure&&v.measure.auto){ v.asIs=fitMax({asIs:true}); } }
+  fpCache={key,v}; return v; }
+const planText=v=>v&&v.mw!=null?`up to ${v.mw.toFixed(1)} MW ${v.measure?v.measure.t:''}${v.measure&&v.measure.auto?`; ${v.asIs!=null?v.asIs.toFixed(1)+' MW':'no size'} with the plant on the roof as set up`:''}`:null;
+BD.measureOf=measureOf; BD.fitPlan=fitPlan; BD.planText=planText;
 BD.setupProblems=setupProblems; BD.fitMax=fitMax; BD.fitSizes=fitSizes; BD.fitNear=fitNear; BD.sizePasses=sizePasses;
 /* bugfix 4 Nov 2026 (retest rules 1, V339): the required yards are set in from the lot's bounding rectangle, so along an angled lot line the line of the
    yards (the lot clipped to that rectangle) runs inside a required yard. Each lot edge takes the yard of the side it faces in the tool's own frame (front,
@@ -499,8 +529,10 @@ BD.setupHTML=function(st){ setDefaults(); const A=BD.S.answers, m=model(); if(!m
   const rows=[[1,'Building',`${lab.built[A.built]}, ${lab.extent[A.extent]}${A.extent==='part'&&A.floor?' ('+A.floor+')':''}`],
    [2,'Footprint',A.built==='existing'?`${fmt(m.footArea)} m² (existing)`:`${fmt(m.footArea||0)} m², ${lab.foot[A.foot]}`],
    [3,'Height',A.built==='existing'?`${(m.H||0).toFixed(1)} m (existing)`:`${(m.H||0).toFixed(1)} m, ${m.nF[0]===m.nF[1]?m.nF[0]:m.nF[0]+'–'+m.nF[1]} storeys${A.userH||A.userFSR?' (your limits)':''}`],
-   [4,'Cooling',`${lab.inside[A.inside]} inside; ${A.outside==='dry'&&BD.dryName?BD.dryName():lab.outside[A.outside]} ${lab.plantAt[A.plantAt]}`],
+   [4,'Cooling',`${lab.inside[A.inside]} inside; ${A.outside==='dry'&&BD.dryName?BD.dryName():lab.outside[A.outside]} ${lab.plantAt[A.plantAt]}${A.vis==='indoors'&&A.plantAt!=='yard'?', the roof plant in an enclosed plant room'+(A.visDefault==='arch'?' (Architecture default)':''):m.noiseRoom?', the roof plant in an enclosed plant room (needed for the noise by-law at this size)':''}`],
    [5,'Standby',A.gens==='none'?'no generators':`generators in the ${A.genAt}`]];
+  /* dcshare 4 Nov 2026: the largest size that passes and the noise measure it depends on (fitPlan) */
+  { let fp=null; try{ fp=A.built==='new'?fitPlan():null; }catch(e){} if(fp) rows.push([4,'Largest that fits',fp.mw!=null?planText(fp):'none with this set-up (plant, generators, fuel or noise)']); }
   const g=m.grade||{}, gd=(g.none?'? (no ground data for this lot)':`${g.min.toFixed(1)}–${g.max.toFixed(1)} m, median ${g.med.toFixed(1)} m (datum ${g.datum}${g.cover<100?`; ${g.cover}% of the lot covered`:''})`)+(g.base&&g.base.settled===false?'; height base ?':'');
   const fl=g.fcl, gflags=[]; if(fl){ if(fl.floor) gflags.push(`Grade is below the ${fl.v} m flood construction level on about ${fl.below}% of the lot: a ground floor there must be raised to ≥${fl.v} m (up to ${fl.raise.toFixed(1)} m).`); if(fl.gens) gflags.push(`Generators in the yard: where the yard is below ${fl.v} m, their pads must be raised to ≥${fl.v} m.`);
     if(gflags.length) gflags.push(`Lot grade from LiDAR (datum ?) vs the level in ${fl.datum}: same datum not confirmed (?).`); }
