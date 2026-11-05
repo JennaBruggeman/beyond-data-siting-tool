@@ -91,6 +91,10 @@ Staged: cheap screen (zone allows the program, minimum ground, frontage), then f
 - [ ] J.B.: any further Engineering changes. **Ask before starting.**
 - [ ] Code: open bug: Resident list has no "indoors" row. ("Set-ups that open the most" is removed with the Engineering simplification.)
 
+## One idea per card, all four workflows (J.B. 5 Nov: cleaner, more digestible)
+
+- [ ] Code: Resident 9 cards (city; pick a data centre; what it is; noise; heat; water; power and backup; how it works; report), Skip to report on every card after "what it is". Municipal 11 cards (city; parcel; is a data centre allowed; height and floor area; yards by edge; storey heights and ground floor; loading; rooftop equipment and screening; approval process; two cities; report), every card shown on every lot ("no rule here" where none). Engineering 13 cards (city; parcel; size and cooling; backup power; what fits; heat; electricity; water; materials; three options; could become; two cities; report), the 3D equipment view on screen from size to options. Architecture 17 cards (see above). At most five chapters in each step bar. Cards only read what came before. Boards: Story_Resident, Story_Municipal, Story_Engineering, Story_Architecture.
+
 ## 8. Decisions waiting for J.B. (ask when the item they block comes up; don't block other work)
 
 - Plant room added automatically by the noise ladder vs asking first (recommended: automatic with a note).
