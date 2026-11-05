@@ -8,7 +8,7 @@
    39.35988108921515
   ],
   "L": 59.61784775323796,
-  "hd": 22.3058663596601,
+  "hd": 23.17532583579938,
   "F": [
    85.50584775323796,
    78.7197621784303
@@ -25,31 +25,27 @@
     40.75292387661898
    ],
    [
-    8.75292387661898,
+    10.75292387661898,
     40.75292387661898
+   ],
+   [
+    26.75292387661898,
+    40.75292387661898
+   ],
+   [
+    -9.24707612338102,
+    14.75292387661898
    ],
    [
     -3.247076123381021,
     14.75292387661898
    ],
    [
-    16.75292387661898,
+    24.75292387661898,
     40.75292387661898
    ],
    [
-    -3.247076123381021,
-    14.75292387661898
-   ],
-   [
-    -7.247076123381021,
-    8.75292387661898
-   ],
-   [
-    -13.24707612338102,
-    -3.247076123381021
-   ],
-   [
-    -3.247076123381021,
+    -9.24707612338102,
     14.75292387661898
    ]
   ],
@@ -77,6 +73,14 @@
     -18,
     9,
     22
+   ],
+   [
+    "standby generators",
+    "yard",
+    8,
+    22,
+    -32,
+    -29
    ]
   ],
   "yard": [
@@ -160,7 +164,7 @@
   [
    "pool",
    [
-    9,
+    11,
     41
    ],
    true,
@@ -168,15 +172,15 @@
    1065,
    0,
    0,
-   4
+   7
   ],
   [
    "warming_shelter",
    [
-    -3,
-    15
+    27,
+    41
    ],
-   false,
+   true,
    100,
    100,
    0,
@@ -186,14 +190,14 @@
   [
    "clinic",
    [
-    17,
-    41
+    -9,
+    15
    ],
    false,
    605,
    605,
    0,
-   4,
+   0,
    6
   ],
   [
@@ -205,48 +209,35 @@
    false,
    320,
    320,
-   0,
-   0,
+   1,
+   6,
    6
   ],
   [
    "ev_hub",
    [
-    -7,
-    9
+    25,
+    41
    ],
    false,
    150,
    150,
-   0,
-   0,
+   1,
+   6,
    6
   ],
   [
    "greenhouse",
    [
-    -13,
-    -3
-   ],
-   false,
-   190,
-   190,
-   0,
-   0,
-   6
-  ],
-  [
-   "fish_farm",
-   [
-    -3,
+    -9,
     15
    ],
    false,
-   685,
-   685,
+   190,
+   190,
    1,
    6,
-   12
+   6
   ]
  ],
  "hall": [
@@ -254,41 +245,41 @@
   18
  ],
  "hallPick": {
-  "tried": 5,
-  "passed": 5,
-  "n": 5,
+  "tried": 3,
+  "passed": 3,
+  "n": 3,
   "under": false,
   "best": {
-   "key": "2:-16.9,5.4:33.5",
+   "key": "2:-16.9,6.3:39.4",
    "k": 2,
    "st": 3,
    "top": 18,
    "along": "back",
-   "a": 1.5,
-   "fa": 746.3275110825438,
-   "drawn": 3380
+   "a": 2,
+   "fa": 912.1780691008869,
+   "drawn": 2695
   }
  },
  "hallUV": [
   [
    -17,
-   5
+   6
   ],
   [
    -34,
-   -1
+   5
   ]
  ],
  "hallStoreys": 3,
  "space": {
-  "hall": 1493,
-  "prog": 3380,
+  "hall": 1824,
+  "prog": 2695,
   "cap": 16585.055801834307
  },
  "heat": {
   "avail": [
-   8859.363428571427,
-   13599.899999999998
+   10785.312,
+   16556.399999999998
   ],
   "need": [
    576.01,
@@ -296,12 +287,12 @@
   ],
   "unknown": [
    "spa",
-   "fish_farm",
    "warming_shelter"
   ]
  },
  "rules": [
-  "bad: Fish farm: 685 m² does not fit on one floor here; drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
+  "bad: Public indoor pool: 1,065 m² does not fit on one floor here along the street front (it needs its own street entrance); drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
+  "bad: Fish farm: not drawn. Stopped by height: the 18 m limit (register van_zdb_i2).",
   "note: Refuge in I-2: conditional (Community Centre or Neighbourhood House; Social Service Centre).",
   "note: Refuge: A-2, 2 h fire separation from the data centre (F-2).",
   "q: Refuge: keep-apart rules not checked here: generators (no distance in the source).",
@@ -311,7 +302,6 @@
   "note: Warming shelter in I-2: conditional (Social Service Centre (day); overnight: no listed use ?).",
   "note: Warming shelter: A-2, 2 h fire separation from the data centre (F-2).",
   "q: Warming shelter: keep-apart rules not checked here: generators (no distance in the source).",
-  "note: Warming shelter needs its own street entrance; it is not on the street front here.",
   "note: Outpatient clinic in I-2: conditional (Health Care Office).",
   "q: Outpatient clinic: keep-apart rules not checked here: generators (no distance in the source).",
   "note: Bathhouse / Nordic spa in I-2: conditional (Beauty and Wellness Centre (hydrotherapy, thermal therapy)).",
@@ -322,18 +312,16 @@
   "q: EV charging hub: keep-apart rules not checked here: intakes (not modelled).",
   "note: Greenhouse in I-2: conditional (Urban Farm - Class B).",
   "q: Greenhouse: fire separation from the data centre (F-2) ? (occupancy ?).",
-  "q: Greenhouse: keep-apart rules not checked here: hall (no distance in the source); generators (no distance in the source).",
-  "bad: Fish farm in I-2: rezoning (no use (Urban Farm excludes fish)).",
-  "q: Fish farm: keep-apart rules not checked here: generators (no distance in the source)."
+  "q: Greenhouse: keep-apart rules not checked here: hall (no distance in the source); generators (no distance in the source)."
  ],
  "side": "Arrange",
  "ratios": {
   "ratio": {
    "cover": 5528,
-   "dc": 9,
+   "dc": 11,
    "prog": 30,
    "end": "low",
-   "mw": 2.3
+   "mw": 2.8
   },
   "base": {
    "lot": 5882,
@@ -351,18 +339,18 @@
    "allowed": 16585,
    "by": "envelope",
    "dcMax": 11057,
-   "dcM2": 1493,
+   "dcM2": 1824,
    "progM2": 4976,
-   "unused": 10117,
+   "unused": 9785,
    "mw": [
-    2.35,
-    5.09
+    2.87,
+    6.22
    ],
-   "mwTest": 2.3
+   "mwTest": 2.8
   },
   "answers": {
-   "mw": 2.3,
-   "dcFloor": 1493
+   "mw": 2.8,
+   "dcFloor": 1824
   },
   "side": [
    "Ratios"
@@ -376,20 +364,20 @@
   "stuck": false,
   "next": "Next: Programs →"
  },
- "split": "Data centre 9% · 1,493 m² · 2.3–5.0 MW (testing 2.3) · programs 30% · 4,976 m² · unused 61% arch_ratios Edit ratios",
+ "split": "Data centre 11% · 1,824 m² · 2.8–6.2 MW (testing 2.8) · programs 30% · 4,976 m² · unused 59% arch_ratios Edit ratios",
  "saved": [
   [
    "suggest",
    3,
-   24,
-   43,
-   0.5851558463922851
+   22,
+   34,
+   0.5379714138109178
   ],
   [
    "lot",
    9,
-   30,
-   43,
+   28,
+   34,
    0
   ]
  ],

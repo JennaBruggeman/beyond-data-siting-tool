@@ -8,7 +8,7 @@
    15.448466375143676
   ],
   "L": 34.468,
-  "hd": 15.223399503200653,
+  "hd": 22.34743323831333,
   "F": [
    112.22830165742971,
    46.09693275028735
@@ -22,19 +22,19 @@
   "bu": [
    [
     -31.75,
-    -17.75
+    -7.75
    ],
    [
     -31.75,
-    -13.75
-   ],
-   [
-    -31.75,
-    -13.75
+    -21.75
    ],
    [
     -31.75,
     -23.75
+   ],
+   [
+    -31.75,
+    -15.75
    ]
   ],
   "plant": [
@@ -140,7 +140,7 @@
    "refuge",
    [
     -32,
-    -18
+    -8
    ],
    true,
    265,
@@ -153,7 +153,7 @@
    "warming_shelter",
    [
     -32,
-    -14
+    -22
    ],
    true,
    100,
@@ -161,19 +161,6 @@
    0,
    0,
    6
-  ],
-  [
-   "spa",
-   [
-    -32,
-    -14
-   ],
-   false,
-   320,
-   320,
-   1,
-   6,
-   12
   ],
   [
    "ev_hub",
@@ -185,6 +172,19 @@
    150,
    150,
    1,
+   6,
+   8
+  ],
+  [
+   "greenhouse",
+   [
+    -32,
+    -16
+   ],
+   false,
+   190,
+   190,
+   1,
    10,
    8
   ]
@@ -194,68 +194,57 @@
   18
  ],
  "hallPick": {
-  "tried": 8,
+  "tried": 6,
   "passed": 6,
-  "n": 8,
+  "n": 6,
   "under": false,
   "best": {
-   "key": "2:-12.5,2.7:29.4",
+   "key": "2:-19.6,2.7:22.3",
    "k": 2,
    "st": 3,
    "top": 18,
    "along": "back",
-   "a": 2,
-   "fa": 446.83853314708523,
-   "drawn": 835
-  },
-  "fails": [
-   [
-    "1:-27.7,2.7:29.4",
-    "2 of 4 generators do not fit in the yard."
-   ],
-   [
-    "1:-30.0,2.7:27.3",
-    "2 of 4 generators do not fit in the yard."
-   ]
-  ]
+   "a": 1,
+   "fa": 499.40777234085994,
+   "drawn": 705
+  }
  },
  "hallUV": [
   [
-   -13,
+   -20,
    3
   ],
   [
    -15,
-   14
+   7
   ]
  ],
  "hallStoreys": 3,
  "space": {
-  "hall": 894,
-  "prog": 835,
+  "hall": 999,
+  "prog": 705,
   "cap": 5256.923919377473
  },
  "heat": {
   "avail": [
-   5392.656,
-   8278.199999999999
+   5777.845714285713,
+   8869.5
   ],
   "need": [
-   42.4,
-   42.4
+   120.87,
+   153.17
   ],
   "unknown": [
-   "spa",
    "warming_shelter"
   ]
  },
  "rules": [
   "bad: Refuge: 265 m² does not fit on one floor here along the street front (it needs its own street entrance); drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
-  "bad: Public indoor pool: not drawn. Stopped by height: the 18 m limit (register van_zdb_i3).",
+  "bad: Public indoor pool: not drawn. Stopped by minimum size or sides: no free area of its size with sides of at least 11 × 27 m is left beside the hall, the plant, the plant yard and loading.",
   "bad: Outpatient clinic: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 18 m limit (register van_zdb_i3).",
-  "bad: Bathhouse / Nordic spa: 320 m² does not fit on one floor here; drawn over 3 storeys only to show its size. Whether it can be split across floors is a design question.",
+  "bad: Bathhouse / Nordic spa: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 18 m limit (register van_zdb_i3).",
   "bad: EV charging hub: 150 m² does not fit on one floor here; drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
-  "bad: Greenhouse: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 18 m limit (register van_zdb_i3).",
+  "bad: Greenhouse: 190 m² does not fit on one floor here; drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
   "bad: Fish farm: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 18 m limit (register van_zdb_i3).",
   "note: Refuge in I-3: conditional (Community Centre or Neighbourhood House; Social Service Centre).",
   "note: Refuge: A-2, 2 h fire separation from the data centre (F-2).",
@@ -263,21 +252,21 @@
   "note: Warming shelter in I-3: conditional (Social Service Centre (day); overnight: no listed use ?).",
   "note: Warming shelter: A-2, 2 h fire separation from the data centre (F-2).",
   "q: Warming shelter: keep-apart rules not checked here: generators (no distance in the source).",
-  "note: Bathhouse / Nordic spa in I-3: conditional (Beauty and Wellness Centre (hydrotherapy, thermal therapy)).",
-  "note: Bathhouse / Nordic spa: A-3, 2 h fire separation from the data centre (F-2).",
-  "q: Bathhouse / Nordic spa: keep-apart rules not checked here: generators (no distance in the source).",
   "note: EV charging hub in I-3: conditional (Parking Uses (may include retail sale of electricity)).",
   "note: EV charging hub: F-3, 1.5 h fire separation from the data centre (F-2).",
-  "q: EV charging hub: keep-apart rules not checked here: intakes (not modelled)."
+  "q: EV charging hub: keep-apart rules not checked here: intakes (not modelled).",
+  "note: Greenhouse in I-3: conditional (Urban Farm - Class B).",
+  "q: Greenhouse: fire separation from the data centre (F-2) ? (occupancy ?).",
+  "q: Greenhouse: keep-apart rules not checked here: hall (no distance in the source); generators (no distance in the source)."
  ],
  "side": "Arrange",
  "ratios": {
   "ratio": {
    "cover": 1752,
-   "dc": 17,
+   "dc": 19,
    "prog": 30,
    "end": "low",
-   "mw": 1.4
+   "mw": 1.5
   },
   "base": {
    "lot": 4503,
@@ -295,18 +284,18 @@
    "allowed": 5257,
    "by": "envelope",
    "dcMax": 3505,
-   "dcM2": 894,
+   "dcM2": 999,
    "progM2": 1577,
-   "unused": 2786,
+   "unused": 2681,
    "mw": [
-    1.41,
-    3.05
+    1.57,
+    3.4
    ],
-   "mwTest": 1.4
+   "mwTest": 1.5
   },
   "answers": {
-   "mw": 1.4,
-   "dcFloor": 894
+   "mw": 1.5,
+   "dcFloor": 999
   },
   "side": [
    "Ratios"
@@ -320,20 +309,20 @@
   "stuck": false,
   "next": "Next: Programs →"
  },
- "split": "Data centre 17% · 894 m² · 1.4–3.0 MW (testing 1.4) · programs 30% · 1,577 m² · unused 53% arch_ratios Edit ratios",
+ "split": "Data centre 19% · 999 m² · 1.5–3.4 MW (testing 1.5) · programs 30% · 1,577 m² · unused 51% arch_ratios Edit ratios",
  "saved": [
   [
    "suggest",
    7,
    19,
-   15,
-   0.7559830015656452
+   16,
+   0.7441288302393201
   ],
   [
    "lot",
-   11,
-   23,
-   15,
+   10,
+   22,
+   16,
    0
   ]
  ],

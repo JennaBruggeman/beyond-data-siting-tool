@@ -13474,7 +13474,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "size",
 "name": "The data centre's rooms (Architecture mode)",
 "formula": "hall, electrical (UPS), battery (Li-ion): m² per MW; heat recovery: m² per MW of heat; transformers, generators, chillers or dry coolers, loading: by the counts the rest of the tool uses; energy transfer station: NEU table; portals: by unit; staff washrooms: by count. No size source: MV switchgear, telecom entrance and meet-me rooms, fire suppression, storage and staging, security control and guard room, offices and NOC, break room, janitor (shown as ?)",
-"coef": "figures and their ids: tool/data/dc_rooms.json; research: checks/research_arch_v1/dc_rooms.md (checks 1–3); support space as a share of the building ranges 13–52 % in six cases (not a rule, not used)",
+"coef": "figures and their ids: tool/data/dc_rooms.json; research: checks/research_arch_v1/dc_rooms.md (checks 1–3); support space as a share of the building ranges 13–52 % in six cases (not a rule); Ratios uses the 27–33 % median in its ground check (4 Nov 2026)",
 "unit": "list",
 "sources": [
 "burlingtonPlans2026",
@@ -13511,13 +13511,19 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "size",
 "name": "Site ratios: coverage, floor-area split, data-centre size (Architecture mode)",
-"formula": "allowed floor = min(lot × floor-space ratio, building footprint × storeys under the height limit); footprint up to the zone's coverage limit where the register has one, else the buildable area inside the yards; data centre share × allowed floor = hall + electrical + battery floor; MW = that floor ÷ (290–630 + 2.4–3.3 + 1.0–1.8) m² per MW, a range (no midpoint); programs share × allowed floor = the programs' space budget; rooms with no size source are not counted (?)",
-"coef": "J.B., 2 Nov 2026: the ratio splits floor area (all storeys), not footprint; the data centre's share sets its MW (J.B., 3 Nov 2026); Arrange tests one end of the MW range, chosen by the user (low end by default: the size the share holds even at 630 m² per MW); a coverage limit is in the register only for I-2 (none); every other zone shows ?",
+"formula": "allowed floor = min(lot × floor-space ratio, building footprint × storeys under the height limit); footprint up to the zone's coverage limit where the register has one, else the buildable area inside the yards; data centre share × allowed floor = hall + electrical + battery floor; MW = that floor ÷ (290–630 + 2.4–3.3 + 1.0–1.8) m² per MW, a range (no midpoint); programs share × allowed floor = the programs' space budget; rooms with no size source are not counted (?); ground check (4 Nov 2026): data centre floor on its storeys ≤ (footprint after loading and the plant yard − yard units over it − transformer pads × (depth + building clearance) − a drive to the rear where no other street reaches it − programs' ground) × hall storeys × (1 − support share); programs' ground = picked block programs beside the hall at their smallest size ÷ storeys, or before any pick the chosen typology's minimum ground (none chosen: the smallest in the library)",
+"coef": "J.B., 2 Nov 2026: the ratio splits floor area (all storeys), not footprint; the data centre's share sets its MW (J.B., 3 Nov 2026); Arrange tests one end of the MW range, chosen by the user (low end by default: the size the share holds even at 630 m² per MW); a coverage limit is in the register only for I-2 (none); every other zone shows ?; ground check: support 27–33 % of the data centre (median of six cases, our arithmetic; low end 33 %), transformer pads 2,500 kVA each + 1 (2.631 × 2.492 m, 1 m apart; 6.0 m from the building in Edmonton, 3 m in front in Vancouver), drive 6.1 m (the tool's loading aisle); typology hold-back is a default (coordinator recommendation, J.B. to confirm); within ±3 % of the Edmonton hand test fits with the Emergency hub (tool run)",
 "unit": "m² · %, MW",
 "sources": [
 "van_zdb_i2",
 "van_zdb_i3",
-"edm_bl20001"
+"edm_bl20001",
+"burlingtonPlans2026",
+"eatonCA022021",
+"epcor_ccg",
+"bchES54F",
+"vanParking5",
+"arch_edmEastglen2017"
 ],
 "source_roles": [],
 "conf": 55,
@@ -13529,14 +13535,16 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "arch_dc_hall",
 "arch_dc_electrical",
 "arch_dc_battery",
-"arch_space_budget"
+"arch_space_budget",
+"arch_dc_rooms",
+"transformers"
 ],
-"upstream": 40,
+"upstream": 35,
 "city": {
-"van": 2,
-"edm": 1,
+"van": 4,
+"edm": 3,
 "both": 0,
-"gen": 0
+"gen": 2
 }
 }
 ],
@@ -14911,6 +14919,14 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 },
 {
 "from": "arch_space_budget",
+"to": "arch_ratios"
+},
+{
+"from": "arch_dc_rooms",
+"to": "arch_ratios"
+},
+{
+"from": "transformers",
 "to": "arch_ratios"
 }
 ],

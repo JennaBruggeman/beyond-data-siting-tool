@@ -80,5 +80,106 @@
    "arch_up2_fm0532"
   ],
   "_note": "A basement counts toward floor area (Vancouver I-3 4.1.1; Edmonton FAR unless storage or service to the building) but not toward height or storeys (NBC 1.4.1.2; Edmonton Storey definition). FM 5-32 2.6.4.3.1 and 2.6.4.4.1.1 (insurer guidance): no generators or diesel tanks in basements or on the roof."
+ },
+ "ratioGround": {
+  "_note": "Ratios ground check (4 Nov 2026, dcshare): what takes the building's ground besides the hall. Compared with the Edmonton test fits (checks/research_typ/testfit_lots.md).",
+  "support": {
+   "v": [
+    0.27,
+    0.33
+   ],
+   "src": [
+    "burlingtonPlans2026",
+    "arch_dc_estruxCal1",
+    "cologixVAN4_2026",
+    "estruxtureVAN1ds",
+    "quEDM1_2026",
+    "abp317802"
+   ],
+   "_note": "support = gross minus data hall (rooms, corridors, stairs, lifts). Median of six whole-building cases 27–33 % (our arithmetic, checks/research_arch_v1/dc_rooms.md s. 19; range 13–52 %, not a rule). Low end of the MW range uses 33 %, high end 27 %."
+  },
+  "txKVA": {
+   "v": 2500,
+   "src": [
+    "transformers",
+    "eatonCA022021"
+   ],
+   "_note": "one pad per 2,500 kVA of facility peak, plus one spare (N+1); facility kW taken as kVA (register transformers)"
+  },
+  "txPad": {
+   "v": [
+    2.631,
+    2.492
+   ],
+   "src": [
+    "eatonCA022021"
+   ],
+   "_note": "2,500 kVA, 25/35 kV primary row (the larger), width × depth"
+  },
+  "txGap": {
+   "v": 1.0,
+   "src": [
+    "bchES54F"
+   ],
+   "_note": "1 m at the sides and between units (BC Hydro; used for Edmonton too, our reading)"
+  },
+  "txBld": {
+   "v": {
+    "edm": 6.0,
+    "van": 3.0
+   },
+   "src": [
+    "epcor_ccg",
+    "bchES54F"
+   ],
+   "_note": "Edmonton: clearance to buildings 'as high as 6.0 m' (EPCOR 6.4(g)); Vancouver: 1 m from buildings, 3 m clear in front (BC Hydro ES54 F), front taken to face the building (our reading)"
+  }
+ },
+ "typologies": {
+  "_note": "Typology library minimum ground (checks/research_typ). Before any programs are picked, Ratios holds back the chosen typology's minimum ground; with none chosen, the smallest (coordinator recommendation, 4 Nov 2026, J.B. to confirm). The tool has no typology picker yet.",
+  "list": [
+   {
+    "id": "heat_hub",
+    "name": "Heat hub (energy transfer room)",
+    "m2": {
+     "v": {
+      "edm": 27,
+      "van": 18
+     },
+     "src": [
+      "arch_dc_ets",
+      "arch_ho_breMultiUnit2025",
+      "neuETS"
+     ]
+    },
+    "_note": "Edmonton ETS 27–55 m² (low end); Vancouver NEU room 6 × 3 m (checks/research_typ/heat_hub.md)"
+   },
+   {
+    "id": "twin",
+    "name": "Twin (overnight shelter building)",
+    "m2": {
+     "v": 140,
+     "src": [
+      "arch_edmEastglen2017",
+      "arch_sup_torRespite"
+     ]
+    },
+    "_note": "140–161 m² gross, one storey (twin.md, our arithmetic)"
+   },
+   {
+    "id": "emergency_hub",
+    "name": "Emergency hub",
+    "m2": {
+     "v": 853,
+     "src": [
+      "arch_ahsReceptionCentres",
+      "arch_sup_torRespite",
+      "arch_hsg_abGFNA2021",
+      "arch_edmEastglen2017"
+     ]
+    },
+    "_note": "853–1,017 m² gross, all at grade in the beside variant (emergency_hub.md, our arithmetic)"
+   }
+  ]
  }
 }
