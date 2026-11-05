@@ -83,8 +83,9 @@ Staged: cheap screen (zone allows the program, minimum ground, frontage), then f
 - [ ] Cowork: TELUS Garden data centre address (City permits); M3 floor area below grade; how the three generic types map to the inventory types.
 - [ ] Code: Resident report from boards Resident1–2: select a data centre on the map, export; generic graphic by type (stand-alone, hyperscale, tower), location map, video stills, plain answers on noise, heat, water, power.
 - [ ] Code: Municipal report from boards Municipal1–2 and the plan doc (https://claude.ai/artifact/9WuA4zPVKKKe1SuhcpvoXr): select a parcel, get its regulations incl. each lot edge's class and yard; two-city comparison last.
-- [ ] J.B.: Engineering template changes (not given yet). **Ask before starting.**
-- [ ] Code: open bugs: Resident list has no "indoors" row; "Set-ups that open the most" takes ≈40 s on the main thread.
+- [ ] Code: simplify Engineering to six steps (J.B. 5 Nov, to cut bugs): Site → Set-up and what fits (one step; real buildings as a closed section) → Exchanges (one step, tabs Heat / Electricity / Water / Materials, each ending with its own opportunities) → Options (three set-ups; "Could become" as the last closed section, feeding the report) → Two cities → Report. Remove the Opportunities step, "Set-ups that open the most", Real buildings as a step, People, Over time. Build rules: one way through; no step changes an earlier answer; nothing on a timer; each step has its own test on the golden lots. Board: Story_Engineering. **Gate.**
+- [ ] J.B.: any further Engineering changes. **Ask before starting.**
+- [ ] Code: open bug: Resident list has no "indoors" row. ("Set-ups that open the most" is removed with the Engineering simplification.)
 
 ## 8. Decisions waiting for J.B. (ask when the item they block comes up; don't block other work)
 
