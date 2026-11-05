@@ -99,6 +99,7 @@ Staged: cheap screen (zone allows the program, minimum ground, frontage), then f
 
 ## Fifth workflow: Inside a data centre (J.B. 5 Nov, proposal)
 
+- Audience: students and anyone curious (J.B.). Each card asks one question in plain words, has one thing to try and a Words list for the terms on it; the report is a one-page summary. Everyday comparisons only where sourced (tennis court: ITF).
 - No lot: one generic air-cooled hall module sized by the tool's own rules (rack_count, hall_layout, room_cooling_type, room_cooling_units, ups_modules, battery_cabinets). Boards: Story_Interior (11 cards: Size 2, The hall 4, Power 2, Heat 2, Report 1) and style frame Final_G_Interior. Build only after J.B. approves the boards.
 - Example module: 120 racks (8 rows, runs of 5 + 3 empty places), 0.85–0.96 MW, hall 302 m², 262–295 W/ft² → thermal wall 2 + 1 spare, UPS 2 × 1,000 kW (N+1), 4 Li5 cabinets.
 - Drawing choices to confirm or source: storey 6.0 m; warm-aisle containment; electrical-room depth beyond UPS working space; air paths.
