@@ -465,7 +465,7 @@ function noiseCheck(m){ const s=BD.S.sel; if(!m||!m.plant||!m.plant.s||!s) retur
   const src=noiseSrc(s);
   /* plant groups: each placed group of cooling units at its own centre; units indoors at the centre of the building they sit in */
   const G=[]; for(const kind of ['roof','yard']){ const bx=cb.filter(b=>b.kind===kind); if(!bx.length) continue; const u=bx.map(b=>BD.centroid(b.ring));
-    let hull=null; try{ const pts=[]; bx.forEach(b=>{ for(let i=0;i<b.clear.length;i++) pts.push(b.clear[i]); }); hull=new Float64Array(BD.geo.hull(new Float64Array(pts)).flat()); if(BD.geo.offset) hull=BD.geo.offset(hull,0.5); }catch(e){ hull=null; }
+    let hull=null; try{ const pts=[]; bx.forEach(b=>{ for(let i=0;i<b.clear.length;i++) pts.push(b.clear[i]); }); hull=new Float64Array(BD.geo.hull(new Float64Array(pts)).flat()); if(BD.geo.offset) hull=BD.geo.offset(hull,-0.5); }catch(e){ hull=null; } /* dcshare 4 Nov 2026: BD.geo.offset moves a ring inward for d > 0 on either winding (addons.js geoOffset), so the screen 0.5 m outside the units' clearance is −0.5 (it sat 0.5 m inside it) */
     const H=Math.max(...bx.map(b=>b.h)); G.push({kind,n:bx.length,c:[u.reduce((t,p)=>t+p[0],0)/u.length,u.reduce((t,p)=>t+p[1],0)/u.length],u,base:bx[0].base,H,hull,hs:Math.ceil(Math.max(NMIT.scr.minH,H+2)*10)/10,room:0}); }
   if(ind){ const fr=(m.sizedTo&&m.serverFoot)||m.serverFoot||m.foot, c=fr?BD.centroid(fr):src.c; if(c) G.push({kind:'indoors',n:P.coolRoofIndoor,c,u:[c],room:NMIT.room.dB}); }
   if(!G.length){ const fr=m.serverFoot||m.foot, c=fr?BD.centroid(fr):src.c; if(!c) return null; G.push({kind:'roof',n,c,u:[c],room:0}); }
