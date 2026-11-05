@@ -71,7 +71,7 @@ function visCard(){ const a=A(), f=E().siteFacts(), M=f.M, P=M&&M.plant, k=P?P.s
   ${E().mathBox([`Screen height: unit ${(k?k.H:2.9)} m + 0.9 m = <b>${hS.toFixed(1)} m</b> (screens ideally 2–3 ft taller than the units: consultant claim, SM&W 2021, one US project).`,`Path difference δ = √(${a1}² + ${(hS-(k?k.H:2.9)/2).toFixed(2)}²) + √(${b1}² + ${hS.toFixed(1)}²) − ${a1+b1} = ${path.toFixed(3)} m; Fresnel number N = 2δ ÷ λ (0.686 m at 500 Hz) = ${N.toFixed(2)}.`,`Insertion loss = 10 log₁₀(3 + 20N) = <b>${IL.toFixed(1)} dB</b>, capped at 20 dB for one edge.`],'Maekawa–Tatge approximation (Bugaru et al. 2021); ISO 9613-2 caps as quoted in SoundPLAN and CadnaA documentation (not verified). Geometry is an illustration, not this site.')/* 2 Nov 2026 fix pass: D-screen (consultant claim) */}
   <h3>Sources</h3>${src(['arch_nz_nswDcNoise','arch_nz_fhwaNBDH','arch_nz_ottawaENCG','maekawaISO','yorkClearance2024','evapcoLayout2026','fhwaBarrier','cumminsF1493','edmZB5120','edmZB2120','vanZDBs10','thGlobalSwitch2025','abpHuntstown','bahnhofPionen'])}
   <div class="draftnote">Generators, fuel and electrical equipment are not part of this choice.</div>`,
-  el=>el.querySelectorAll('[data-vis]').forEach(b=>b.onclick=()=>{ if(req&&b.dataset.vis==='reveal') return; a.vis=b.dataset.vis; refresh(); visCard(); })); }
+  el=>el.querySelectorAll('[data-vis]').forEach(b=>b.onclick=()=>{ if(req&&b.dataset.vis==='reveal') return; a.vis=b.dataset.vis; delete a.visDefault; /* dcshare: a chosen visibility replaces the Architecture default */ refresh(); visCard(); })); }
 BD.visCard=visCard;
 
 /* ---------- add-ons: off by default, each with Add › (J.B., 16 Oct) ---------- */

@@ -136,6 +136,10 @@ function loadingNeed(city,gfa){
 let cache={key:null,m:null}, roomTry=false, roomOff=false; /* dcshare 4 Nov 2026: the plant-room step of the noise ladder (model, fitMax) */
 function model(){
   const S=BD.S, s=S.sel, A=S.answers; if(!s) return null; if(!A.built) A.built='new'; if(!A.extent) A.extent='whole'; /* the labelled defaults (lot test 20 Oct) */
+  /* dcshare 4 Nov 2026 (J.B. approved 4 Nov), part 2: in Architecture mode the typologies' default plant is the roof plant in an enclosed plant room
+     (Seen or hidden: Bring it indoors; −25 dB, NSW 2021, register arch_nz_nswDcNoise). A default choice, not a rule: only while no visibility has been
+     chosen, and named "(Architecture default)" where it shows. Choosing any visibility clears it. */
+  if(A.vis==null&&BD.tier&&BD.tier()==='arch'){ A.vis='indoors'; A.visDefault='arch'; }
   { const a0=s.a||[], Z0=zoneLimits(s.city,s.city==='van'?(a0[1]||''):(a0[2]||a0[1]||'')); if(Z0.screen&&(!A.vis||A.vis==='reveal')) A.vis='screen'; } /* 2 Nov 2026 hard rules: screening required (Z.screen) */
   const key=JSON.stringify([s.city,s.id,A.built,A.extent,A.floor,A.foot,A.cover,A.loadIn,A.flip,A.hmode,A.storeys,A.userFSR,A.userH,A.plantAt,A.outside,A.inside,A.spares,A.gens,A.genAt,A.genSpares,A.mw,A.vis,A.subB,A.fcSub,A.dcFloor,A.dcSite,A.hallOpt]);
   if(cache.key===key) return cache.m;
