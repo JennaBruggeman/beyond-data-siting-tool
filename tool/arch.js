@@ -306,7 +306,8 @@ function ratioCalc(b,r){ const cover=Math.min(r.cover,b.build), capF=b.fsr&&b.lo
   const mw=[dcM2/b.perMW[1],dcM2/b.perMW[0]], pick=r.end==='high'?mw[1]:mw[0], mwTest=Math.floor(pick*10+1e-9)/10;
   return {cover,allowed,capF,capE,by:capF<=capE?'fsr':'envelope',dcMax,dcM2,progM2,unused:Math.max(0,allowed-dcM2-progM2),mw,mwTest:mwTest>=0.1?mwTest:null}; }
 /* the largest size every hard rule allows with this set-up (site.js fitMax: plant, generators, fuel, noise), worked out without the ratio's floor */
-function fitNoRatio(){ const An=BD.S.answers, keep=An.dcFloor; delete An.dcFloor; BD.modelReset&&BD.modelReset(); let fm=null; try{ fm=BD.fitMax?BD.fitMax():null; }finally{ if(keep!=null) An.dcFloor=keep; BD.modelReset&&BD.modelReset(); } return fm; }
+function fitNoRatio(){ const An=BD.S.answers, keep=An.dcFloor; delete An.dcFloor; BD.modelReset&&BD.modelReset(); let fm=null; try{ fm=BD.fitMax?BD.fitMax():null; if(BD.fitPlan) fitNoRatio.plan=BD.fitPlan(); }finally{ if(keep!=null) An.dcFloor=keep; BD.modelReset&&BD.modelReset(); } return fm; }
+/* dcshare 4 Nov 2026: the fit search runs the noise ladder (low-noise units, screen, then an enclosed plant room: site.js model) before it caps a size; Ratios names the measure */
 /* the most of the floor the data centre may take: the hall off the ground floor where the zone says so, and no more MW than the hard rules allow at the end Arrange tests */
 function dcCapPct(b,r,fm){ const c=ratioCalc(b,Object.assign({},r,{dc:100,prog:0})), M=BD.model(), room=M&&M.hallRoom?M.hallRoom*b.dataFl:Infinity; // room: the hall footprint the set-up leaves after loading and the plant yard (site.js), on the floors data may use
   const geo=Math.floor(Math.min(c.dcMax,room)/c.allowed*100+1e-9), byRoom=room<c.dcMax; if(fm==null) return {pct:0,geo,fm,byRoom,room};
@@ -345,6 +346,7 @@ async function viewRatios(){ await ready(); BD.S.view2='tab'; const sd=$('#side'
     <input type="range" id="rDc" min="0" max="${pctDcMax}" step="1" value="${Math.min(r.dc,pctDcMax)}" aria-label="Data centre share, %">
     ${cap.byRoom&&cap.geo<100?`<p class="src">Loading and the plant yard leave room for ${n0(cap.room)} m² of hall${b.dataFl<b.floors?' (not on the ground floor here)':''}, so the data centre takes at most ${cap.geo}% ${chips(S)}.</p>`:b.dataFl<b.floors&&cap.geo<100?`<p class="src">The hall may not use the ground floor here, so the data centre takes at most ${cap.geo}% ${chips(S)}.</p>`:''}
     ${cap.fm==null?`<p class="src k">No size passes the hard rules with this set-up (plant, generators, fuel or noise). Change the set-up.</p>`:cap.pct<cap.geo?`<p class="src">Hard rules stop it at ${cap.fm} MW with this set-up (plant, generators, fuel, noise), so at most ${cap.pct}% at the ${r.end==='high'?'high':'low'} end. Change the set-up for more.</p>`:''}
+    ${cap.fm!=null&&fitNoRatio.plan&&fitNoRatio.plan.mw!=null?`<p class="src">Data centre: ${esc(BD.planText(fitNoRatio.plan))}. ${chips(['noise_limit','arch_nz_nswDcNoise'])}</p>`:''}
     <label class="arl"><span>Programs</span><span>${r.prog}% · ${n0(c.progM2)} m²</span></label>
     <input type="range" id="rPg" min="0" max="${100-r.dc}" step="1" value="${Math.min(r.prog,100-r.dc)}" aria-label="Programs share, %">
     <p class="sub">Unused ${n0(c.unused/c.allowed*100)}% · ${n0(c.unused)} m²</p>
