@@ -129,7 +129,7 @@ Not modelled: generators and the programs mechanical room (no sound power on fil
 - Corner: shorten the lobby or the refuge when the frontage is short? Screen the rear plant yard from the flank street?
 - Why does the tool's Ratios default give the data centre only 6–7 % on these lots?
 
-Check 1 only. Not yet checked by a second agent.
+Check 2 done (`testfit_check2.md`); its fixes are above.
 
 ## Vancouver: lots (1) SMALL and (2) NARROW (Vancouver agent, 4 Nov 2026)
 
@@ -156,18 +156,18 @@ Also run in the tool and not picked: 1245 Glen Dr, 1200 Raymur Ave, 1390 4th Ave
 ### What fit (short)
 
 - **V1330 fits, scaled, with one fail.** Storey 1 (6.1 m): refuge, shelter, lobby on Glen Dr, DC entrance, loading at the rear; storey 2 (4.5 m): clinic only; storey 3 (6.0 m): data centre only, hall 252 m² in one storey. 35 pass, 18 ?, **1 fail: loading** (2 Class B spaces needed, 1 fits).
-- **V8238 fits, scaled, no fail.** Storey 1 (5.0 m): refuge, shelter, lobby on Fraser St; 5-exam clinic; DC ground rooms and 2 loading spaces at the back. Storeys 2–3 (6.0 m): hall 2 × 529 m² in the east block, DC support in the west of storey 2; chillers in a plant room on the storey-2 roof. Plant yard at the local-street end. 34 pass, 20 ?.
+- **V8238 fits, scaled, no fail.** Storey 1 (5.0 m): refuge, shelter, lobby on Fraser St; 5-exam clinic; DC ground rooms and 2 loading spaces at the back. Storeys 2–3 (6.0 m): hall 2 × 529 m² in the east block, DC support in the west of storey 2; chillers in a plant room on the storey-2 roof. Plant yard at the local-street end. 33 pass, 21 ? (after check 2).
 
 ### What was scaled and why
 
 | | V1330 | V8238 |
 |---|---|---|
-| Refuge | 50 → **31 people** (109.9 m² drawn): the 6.1 m truck drive takes the north side, leaving a 19.4 m front shared with 2 stairs and the lobby | 50 → **41 people** (146.8 m²): the exit passage takes 1.13 m of the 15.5 m front |
-| Warming shelter | 16 → **6 guests** (21.1 m²) | 16 guests kept (56.1 m²) |
+| Refuge | 50 → **31 people** (109.9 m² drawn): the 6.1 m truck drive takes the north side, leaving a 19.4 m front shared with 2 stairs and the lobby | 50 → **41 people** (145.6 m²): the exit passage takes 1.13 m of the 15.5 m front |
+| Warming shelter | 16 → **6 guests** (21.1 m²) | 16 guests kept (56.0 m²) |
 | Clinic | 13 → **12 exam rooms** (512 m², storey 2) | 13 → **5 exam rooms** (335 m², storey 1): the hall needs storeys 2–3 and the lot is 15.5–19.5 m wide |
 | WCs (Table 3.7.2.2.-A, table load) | load 147 + 29 = 176 → 2 M + 4 F | load 196 + 75 = 271 → 3 M + 6 F |
 | Clinic WCs (Table 3.7.2.2.-B) | load 56 → 4 | load 36 → 2 |
-| DC support below the benchmarks | shipping 13.6 of 45 m²; storage/staging and garbage room not drawn (no room) | shipping 35.3 of 45 m² |
+| DC support below the benchmarks | shipping 13.6 of 45 m²; storage/staging and garbage room not drawn (no room) | shipping 29.4 of 45 m² |
 
 Steps: refuge 3.5 m² a person, shelter 3.5 m² a guest, clinic 17.3 m² an exam room (tool arch_programs.json). None has a sourced minimum (?), so each was scaled to what the plan holds.
 
@@ -203,10 +203,31 @@ New rule candidates for the automatic fit:
 | | V1330 | V8238 |
 |---|---|---|
 | Connected | 63 rooms, 3 storeys: all | 58 rooms, 3 storeys: all |
-| Worst travel | L1 22.1 · L2 23.4 · L3 29.0 m | L1 42.5 (clinic, to the passage) · L2 44.5 (MMR 1 to S1) · L3 24.0 m |
+| Worst travel | L1 22.1 · L2 23.4 · L3 29.0 m | L1 42.5 (clinic, to the passage) · L2 44.3 (MMR 1 to S1) · L3 24.0 m |
 | Noise, no mitigation | 75.7–79.0 dBA at 1268 Glen Dr, 12.8 m (limit 65) | 81.7–85.0 dBA at 8240 Fraser St, 7.8 m (limit 65) |
 | First option that passes (tool order) | low-noise chillers + screen: 64.7 dBA (0.3 dB margin; maker claim) | rooftop plant room (−25 dB): 56.7–60.0 dBA |
 | Nearest residential | 1328 Grant St (RM-4), 369 m: 35.4 ≤ 55 | 759 Marine Dr SE (R1-1), 147 m: 31.3–34.6 ≤ 55 |
+
+### Check 2 fixes (4 Nov 2026, testfit_check2.md)
+
+Patch at the end of `tfl/geomL.py`; rows in `tfl/buildL.py`. Re-run `tfl/go.sh`. Pre-fix copies: `tfl/*_pre_chk2.*` (scratchpad).
+
+- **V8238 Fraser St yard:** street face pulled back 0.19 m (u −46.66 → −46.47) on all storeys. The building is now inside the slanted 3.1 m yard line.
+  - Refuge 145.6 m² (41 people kept). Shelter 56.0 m²: its south wall moves 0.04 m, so lobby, universal WC, mechanical room and cot store each lose 0.04 m.
+  - FSR 2,719 m², 1.57; clinic cap 905 m²; building area 1,073 m².
+- **V8238 storey-1 data-centre exits:** the loading-space truck doors no longer count as exits. Those openings are removed; the service arrows still mark truck entry.
+  - New DC exit corridor (1.2 m, drawing choice) runs from the secure corridor past the MV room to an exterior exit door at the north end of the east wall, onto the drive. Shipping 35.3 → 29.4 m² and MV 14.7 → 10.8 m² (size ?).
+  - S2's door moved to the west end of the stair. Exits: S2 and the new door, **12.7 m apart ≥ 10.6 m** (½ zone diagonal; ≥ 9 m on the floor-area reading). Loading space 2 now opens into loading space 1.
+  - Worst DC travel on storey 1: 26.9 m (valve room; check-2 parser).
+  - To clear the door, the transformer fence now stops 0.7 m north of the pads (was 1.5 m). Side clearance not checked against BC Hydro ES54 F: **?** (new to-fix row).
+- **V8238 clinic second exit:** wording corrected. The second exit goes through the public corridor and shared lobby to the lobby street door.
+  - 3.4.4.2.(1) limits exits from floor areas above or below the first storey. The clinic is on the first storey, so the lobby route is access to exit. No storey-2 exit uses the lobby.
+  - Only the public corridor and shelter open onto the lobby, so (2)(c) is met if applied (our reading). Route not changed.
+- **V1330 building area:** 457 → **601 m²**, the largest footprint (storeys 2–3 overhang the truck drive). No limit affected.
+- **Plant group, both boards:** now includes the roof chillers, as the caption says. V1330 87 → **144 m²**; V8238 129 → **215 m²**.
+- Counts: V1330 35 pass, 19 to fix (incl. 1 fail), unchanged. V8238 33 pass, 21 to fix (was 34 / 20; + transformer side clearance ?).
+- Not changed (beyond the brief): the V8238 "2 h floor over the refuge and shelter" wording. Check 2 says the whole floor over the hub needs 2 h.
+- Screens checked by eye: `tfl/b_V1330.png`, `tfl/b_V8238.png`. 0 leader crossings (script).
 
 ### Open questions for J.B.
 
@@ -217,4 +238,4 @@ New rule candidates for the automatic fit:
 - V8238: accept one exit passage serving the clinic and both DC stairs?
 - Both: design to the refuge table load or a posted lower load (fewer WCs, bigger refuge)?
 
-Check 1 only. Not yet checked by a second agent.
+Check 2 done (`testfit_check2.md`); its fixes are above.
