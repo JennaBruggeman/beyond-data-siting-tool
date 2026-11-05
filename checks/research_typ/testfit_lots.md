@@ -4,6 +4,38 @@ Brief: `checks/agents/TESTFIT_LOTS_BRIEF_2026-11-04.md`. Each city agent appends
 
 ## Edmonton: lots (3) LARGE and (4) CORNER (Edmonton agent, 4 Nov 2026)
 
+### Redraw at the tool's new size (4 Nov 2026, after fe3b989)
+
+Boards redrawn in place (same files, banner removed). Scripts: scratchpad `tf5/` (copy of `tf4/`, new `lotgeom.py`). Screens `tf5/s_E14715.png`, `tf5/s_E4103.png` (2×), checked by eye; 0 leader crossings.
+
+- **Size:** the tool's Ratios low end with the plant room (Architecture default): **E14715 17.5 MW** (Ratios 17.5–38.0, DC 69 %), **E4103 7.6 MW** (7.6–16.5, 54 %). Both under the plant-included maximum (21.9, 9.0). Tool plant: 20 / 9 chillers, 15 / 7 × 2 MW generators (rehlkoKD2000), 12 / 6 transformers, racks 2,188–2,465 / 950–1,071.
+- **Result: neither lot fits the hall.**
+
+| | E14715 | E4103 |
+|---|---|---|
+| Hall needed (630 m²/MW, arch_dc_hall) | 11,025 m² | 4,788 m² |
+| Hall drawn, 2 storeys | **7,150 m² (65 %)** | **2,865 m² (60 %)** |
+| MW that drawn hall holds (our arithmetic) | about 11.3 | about 4.5 |
+| Floor area · FAR (with plant room) | 10,001 m² · 0.99 (1.13) ≤ 1.6 | 4,973 m² · 0.89 (1.01) ≤ 1.6 |
+| Worst travel along the path | 40.9 m (hall, both storeys) | 43.8 m (hall storey 2) |
+| Code check | 33 pass, 24 to fix (1 fail: hall size) | 33 pass, 24 to fix (1 fail: hall size) |
+
+- **Rule that stops it:** BE height 16.0 m allows 2 hall storeys at the tool's 6.0 m. The ground is shared with the 1-storey hub (refuge, clinic at grade) and a plant yard sized for the full MW. Floor area is not the limit (FAR 1.0–1.1 of 1.6).
+- **Finding for the tool:** the Ratios split counts floor area only. It does not set aside ground for the hub or the generator yard. So its low end overstates what fits on both lots.
+- **Kept from the first pass:** the hub (refuge 65 + shelter 30 on E14715, lobby shortened 1.4 m on E4103), plant at the rear, docks off the street, a separate DC staff entrance and a secure line inside the building.
+- **New placement rules learned:**
+  - Plant room on the hub roof, not over the hall (FM 5-32). On E14715, 20 chillers fit only with the long side across the hub (4 × 5, 1,350 m²; our drawing).
+  - Hall storey 2 may sit over the dock, ETS and garbage (nothing wet *over* the hall, our reading).
+  - Generators in one row at the rear, 3.0 m from lot lines (CSA B139). Transformers 6.0 m from the building (EPCOR).
+- **E14715 exit court:** the hub's DC rooms (lockers) were 49.5 m from an exit once the hall moved behind the DC rooms. Fixed with an open court beside the secure corridor and stair S6. The court leaves by a 1.65 m covered passage. Whether a court counts as outdoors is **?**.
+- **Noise** (tool method, plant room −25 dB): worst receiver 49.1 dBA (E14715, 14815 Yellowhead Trail NW, 48.4 m) and 48.9 dBA (E4103, 4143 97 Street NW, 33.4 m) ≤ 60. Own street lines reach 61.3 / 60.3 dBA (standard rating). They are not receiving lots (our reading).
+- Six stairs (E14715) and two stairs (E4103), each 7.0 × 2.6 m (our arithmetic), plus a freight elevator. Storey 2 access by the freight elevator is **?**.
+- Open for J.B.: should Ratios reserve ground for the hub and the yard? Hub on 2 storeys under the hall (needs > 16 m)?
+
+### Superseded: first pass at 1.7 / 0.8 MW (before fe3b989)
+
+Kept for the record. The sizes, plant counts, areas and noise below are out of date.
+
 Brief: `checks/agents/TESTFIT_LOTS_BRIEF_2026-11-04.md`. Boards (scratchpad, not published): `whitemock/project/TestFit_EH_E14715.dc.html`, `TestFit_EH_E4103.dc.html` (canvas y 9400, x 3080 and 4620). Scripts: scratchpad `tf4/` (`find.js` lot search, `lotgeom.py`, `lotcontent.py`, `lotboard.py`, `noise4.py`). Screens: `tf4/s_E14715.png`, `tf4/s_E4103.png` (2×), checked by eye; 0 leader crossings (script).
 
 Method as the 64 Airport Rd (E06B) pass 3 boards. The hub (clinic, lobby, refuge + shelter, DC rooms behind the lobby, DC staff entrance) is the E06B hub, mirrored to meet each street, with the changes named below. The data centre part is new. Labels: "our arithmetic", "our reading", "drawing choice"; **?** = no source. Lot outlines: Altalis (academic use only; noted on both boards).
@@ -25,7 +57,7 @@ Searched every Edmonton lot with a record in a zone where the tool allows a data
 | Plant (tool) | 4 × 1,000 kW gensets; 3 chillers; racks 213–240 | 3 × 1,000 kW; 2 chillers; racks 100–113 |
 
 - An IM large lot (10922 120 Street NW) was tried first. The tool says the warming shelter is not permitted in IM, and the refuge isn't either (Community Service is BE only, `arch_programs.json`; clinic in IM ?). That rule stops the typology on IM and IH, as `emergency_hub.md` says. Not drawn.
-- The tool's Ratios default gives the data centre only 6–7 % of the allowed floor area on both lots (E06B: 35 %). Why it starts so low is not traced (?). We used the tool's MW as the brief asks.
+- The tool's Ratios default gave the data centre only 6–7 % of the allowed floor area on both lots (E06B: 35 %): the noise by-law with the roof plant, traced in `checks/agents/2026-11-04_dcshare.md` and fixed in fe3b989.
 
 ### What fits
 
