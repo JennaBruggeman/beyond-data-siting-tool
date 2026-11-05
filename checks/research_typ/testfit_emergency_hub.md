@@ -17,7 +17,7 @@ Inputs from the tool (served from `outputs/tool`, run 4 Nov 2026 with Playwright
 
 ## Short answer
 
-- **E06B fits** as one 2-storey building: hub row on the street (1,021 m²), hall 2 × 1,168 m² behind, plant in the rear yard off the alley. No hard fail; 13 open items.
+- **E06B fits** as one 2-storey building: hub row on the street (1,021 m²), hall 2 × 1,168 m² behind, plant in the rear yard off the alley. No hard fail; 15 open items after the access fix (4 Nov, below).
 - **V339 fits** in 18.0 m: refuge and shelter at grade, **clinic beside the hall on storey 2** (no hall storey lost), hall on storeys 2–3. Two fails, both fixed in the redraw (4 Nov): fence (now 1.9 m on the plant only) and flood (slab and pads at 5.0 m ≥ 4.6 m FCL; LiDAR datum ?).
 - The data centre with all its support rooms is far bigger than the tool's Ratios split: **+39 % (E06B), +118 % (V339)**.
 - Refuge and shelter need **11 WCs** by the table occupant load, not 3.
@@ -269,7 +269,40 @@ Boards redrawn with the same file names (`whitemock/project/TestFit_EH_E06B.dc.h
 - **E06B:** grade ? (NRCan HRDEM not reachable from this session).
 - **Screens:** `checks/agents/elev_shots/TestFit_EH_<site>.png` at 1440 px; 0 leader crossings (script check) and checked by eye.
 
+## Fix: access, rooms as blocks, path checks (4 Nov 2026, TESTFIT_FIX brief)
+
+Same file names. Generator `tf/redraw2.py`; geometry `tf/geom2.py` (every room its own block, every door placed); checks `tf/paths.py`. Building outlines, hall, stairs, yard and areas unchanged (cover check: storeys tile with no gaps; 2,808 · 1,598 m² E06B, 1,311 · 1,311 · 725 m² V339).
+
+What changed:
+- **One clinic corridor from the lobby, per storey.** E06B storey 1: a ring (2.0 m, drawing choice; ≥1,100 mm, 3.3.1.9.(1)) entered from the shared lobby; all 27 clinic rooms open off it or the waiting room; second clinic exit is an exterior street door at the corridor's far leg, outside the secure line. V339 storey 2: ring along the stairs and street rooms from the lift lobby; exits S1 and S3.
+- **Refuge and shelter:** one refuge corridor (2.0 m) from the lobby to an exterior door; every support room opens off it; 6.0 m stubs.
+- **Lobby, E06B:** a second street door (13.0 m from the first ≥ 10.1 m, half its diagonal; drawing choice). Clinic waiting street door moved to v = −15.5 m.
+- **Data-centre rooms exit inside the secure line.** E06B rooms behind the portal now leave by the secure passage and secure corridor to S1 (not the lobby). V339: exterior door at the south end of the storey-1 secure corridor; a second hall door at each end of the storey-2 and 3 corridors (no secure dead end over 6 m). Strip 0.6 m of storey-1 service corridor merged into storage.
+- **Rooms drawn one by one:** group tint, thin outline, to scale; number in each block keyed to a list beside each plan (number, name, drawn m², **?** = no sourced size). One label per group per storey, leaders 90°, placed where they cross fewest rooms; 0 leader crossings (script) and checked by eye at 1× and 2×. Door gaps 0.9 m (drawing choice). Worst path per storey drawn dotted.
+- **Not a corridor width:** CSA Z8000 12.2.3.5 (arch_up4_csaZ8000_12) is stretcher **doors** ≥1,100 mm. Corridor width is NBC 3.3.1.9.(1). Door widths are not drawn: open item.
+
+New checks (our arithmetic; 0.25 m grid, walls block except at doors, rectilinear steps along rooms and corridors; racks and furniture not modelled):
+
+| Check | Clause | E06B | V339 | Result |
+|---|---|---|---|---|
+| Connected | J.B. 4 Nov; 3.3.1 | 70 rooms, 2 storeys: each reaches the lobby and an exit without the secure line; DC rooms reach DC exits | 70 rooms, 3 storeys: same | pass, pass |
+| Travel distance along the path | 3.4.2.5.(1), 45 m | L1 44.7 m (DC lockers → S1); L2 38.9 m (hall → S1) | L1 24.2 m (cot storage → S1); L2 31.1 m (battery HVAC → S4); L3 31.2 m (MV room → S4) | pass, pass |
+| Two exits | 3.4.2.1.(1); 3.4.2.3.(1) | L1: clinic 4 (32.0 ≥ 15.6 m), refuge 6 (35.4 ≥ 14.2), lobby 2 (13.0 ≥ 10.1), DC 8 (57.6 ≥ 34.9); L2: DC 2 (55.6 ≥ 31.1) | L1: refuge 7 (29.6 ≥ 16.0), lobby 2 (14.1 ≥ 10.2), DC 7 (35.2 ≥ 20.0); L2: clinic 2 (27.3 ≥ 18.1), DC 2 (31.7 ≥ 19.4); L3: DC 2 (31.7 ≥ 19.4) | pass, pass |
+| Public corridor width | 3.3.1.9.(1) | 2.0 m ≥ 1.1 m | 2.0 m ≥ 1.1 m | pass |
+| Dead-end public corridors | 3.3.1.9.(5), 6 m | stubs ≤ 6.0 m | stubs ≤ 6.0 m | pass |
+| Dead ends in the secure line | 3.3.1.9.(5) scope ? | secure passage 12.0 m; L2 service corridor 19.7 m (second way only through storage and hall) | none over 6 m | ?, pass |
+| Stretcher doors | CSA Z8000 12.2.3.5 | not drawn | not drawn | ? |
+
+"Two exits" counts exits reached without crossing the secure line or another program; the shared lobby counts for the rooms off it (our reading). Exit pairs: farthest pair vs half the zone's diagonal.
+
+Results now: **E06B 31 pass, 15 to fix (all ?, no fail); V339 34 pass, 12 to fix (all ?, no fail).** Replaced rows: Exits per storey, Exit separation, Travel distance (rectilinear) → the three new checks. Changed: Lobby used as an exit → pass (DC rooms no longer exit through it); Travel margin → 44.7 of 45 m (?); BE 500 m² per use → refuge + shelter 384 m² (?); V339 exit discharge → adds the secure-corridor end door (?).
+
+Screens (scratchpad, 1440 px): `tf/TestFit_EH_E06B_v2.png`, `tf/TestFit_EH_V339_v2.png`.
+
 ## Open questions for J.B.
+
+- E06B storey 1: worst travel 44.7 m of 45 m (DC lockers behind the portal). Accept, or give those rooms their own exit?
+- Do the 6 m dead-end limits apply to corridors inside the secure line (E06B secure passage 12.0 m)?
 
 - Refuge occupant load: design to the table load (233, 11 WCs) or show 50 and post a sign (3 WCs)?
 - Data hall occupant load: designed staff load (≤10, our reading) or the 4.60 m² "process" row (508 persons)?
