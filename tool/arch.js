@@ -99,6 +99,7 @@ function placeOnce(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W
     occ.push([e[0],e[1],e[2],e[3],0,1e9,true,k0]); } // NBC 6.3.2.9 and 6.3.2.15.(5) distances widen the no-go (code audit F5, F6); [7] = the widening, so a program stopped only by it can be named (hall fix)
   if(s.M.plant&&s.M.plant.yard){ const y=BD.geo.clip(s.M.ring,s.M.plant.yard); if(y&&y.length>=6){ const e=ext(y); occ.push([e[0],e[1],e[2],e[3],0,1e9,true]); } }
   if(s.M.loading){ const e=ext(s.M.loading); occ.push([e[0],e[1],e[2],e[3],0,1e9,true,kL]); }
+  if(s.M.loadInside) out.flags.push({t:`Loading: ${s.M.loadInside.n} bay${s.M.loadInside.n>1?'s':''} inside the building (${n0(s.M.loadInside.m2)} m² of ground storey; Architecture default, as the test fits draw it). Ratios takes this floor out of the ground; Arrange does not draw the dock yet.`,src:['arch_ratios'],sev:'note'});
   const bu0=um[0], bu1=um[1], bw=v1-v0, bl=bu1-bu0, cs=2, nU=Math.max(1,Math.floor(bl/cs)), nV=Math.max(1,Math.floor(bw/cs));
   // a 2 m height grid over the buildable area: the top of what stands on each cell, or no-go (review 2, N1: a block must rest flat on what is under it)
   /* a cell is taken if anything overlaps any part of it (not just its centre), and cells not wholly inside the lot are no-go (review of J.B.'s screenshot, 2 Nov 2026) */
@@ -337,7 +338,8 @@ function groundItems(b,M,r){ const RG=AD.ratioGround, F=M.F, P=M.plant||{}, out=
   if(RG&&P.s&&P.s.Q){ const n=Math.ceil(P.s.Q*1000/RG.txKVA-1e-9)+1, row=n*(RG.txPad[0]+RG.txGap), cl=RG.txBld[b.city]||0; out.tx={n,m2:row*(RG.txPad[1]+cl),cl}; }
   const street=(M.edgeYards||[]).some(e=>e.abuts==='street'&&e.kind!=='front'); /* a flank or rear street reaches the rear yard; otherwise a drive runs to it */
   if(!street&&M.uBuild&&M.loadingNeed){ const a0=M.uBuild[0]+(M.plantYardDepth?M.dir*M.plantYardDepth:0), len=Math.abs(M.uFront-a0), w=M.loadingNeed.aisle||0; out.drive={m2:w*len,w,len}; }
-  out.G=Math.max(0,out.G0-out.intr-out.tx.m2-out.drive.m2); return out; }
+  out.dock=M.loadInside?M.loadInside.m2:0; out.dockN=M.loadInside?M.loadInside.n:0; /* 5 Nov 2026: loading bays inside take ground-storey floor */
+  out.G=Math.max(0,out.G0-out.intr-out.tx.m2-out.drive.m2-out.dock); return out; }
 function dcCapPct(b,r,fm){ const c=ratioCalc(b,Object.assign({},r,{dc:100,prog:0})), M=BD.model(), pg=progGround(b), it=M&&M.foot?groundItems(b,M,r):null;
   const gr=it?Math.max(0,it.G-pg.m2):(M&&M.hallRoom?Math.max(0,M.hallRoom-pg.m2):null), s=it?it.s:0;
   /* I-2, I-3, FC-2 keep the ground storey for other uses: support rooms may sit there (the bylaws bar data storage at grade, not support; our reading), beside the programs that go under the hall */
@@ -364,7 +366,7 @@ function splitLine(RT){ if(!RT) return `<p class="sub asplit">Ratios not set for
 function groundLine(b,c,cap){ const G=cap.G, k=b.dataFl, it=G.it, pg=G.pg, s=it?it.s:0, need=c.dcM2/k/(1-s), st=`${k} hall storey${k>1?'s':''}${b.dataFl<b.floors?' over a ground storey kept for other uses':''} under the ${n0(b.M.H)} m height limit`;
   const ps=pg.why==='under'?'programs go on the ground storey under the hall':pg.why==='over'?`programs can sit over the hall (its top ${n0(pg.top)} m)`:pg.why==='typology'?`${n0(pg.m2)} m² held back for ${pg.typ.chosen?'the chosen typology':'programs: no programs or typology chosen, so the smallest library typology'} (${esc(pg.typ.name)}; a default, J.B. to confirm)`:pg.why==='none'?'no ground held for programs':
     `programs ${n0(pg.m2)} m² (${pg.items.map(x=>esc(x.name.split(' (')[0])+' '+n0(x.g)+(x.min?' at its minimum':' as set')).join('; ')})`;
-  const items=it?[`footprint after loading and the plant yard ${n0(it.G0)} m²`].concat(it.intr>0.5?[`yard units over it ${n0(it.intr)}`]:[]).concat(it.tx.n?[`${it.tx.n} transformer pads, ${it.tx.cl} m from the building, ${n0(it.tx.m2)}`]:[]).concat(it.drive.m2>0?[`a ${it.drive.w} m drive to the rear yard ${n0(it.drive.m2)} (no other street reaches it)`]:[]).concat([ps]):[ps];
+  const items=it?[`footprint after ${it.dock>0?'':'loading and '}the plant yard ${n0(it.G0)} m²`].concat(it.intr>0.5?[`yard units over it ${n0(it.intr)}`]:[]).concat(it.tx.n?[`${it.tx.n} transformer pads, ${it.tx.cl} m from the building, ${n0(it.tx.m2)}`]:[]).concat(it.dock>0?[`${it.dockN} loading bay${it.dockN>1?'s':''} inside ${n0(it.dock)}`]:[]).concat(it.drive.m2>0?[`a ${it.drive.w} m drive to the rear yard ${n0(it.drive.m2)} (no other street reaches it)`]:[]).concat([ps]):[ps];
   if(pg.under){ const gs=Math.max(0,G.ground-pg.under.m2); return `Hall needs ${n0(c.dcM2/k)} m² a storey (${st}); ${n0(G.ground)} m² available. Its support rooms (${n0(s*100)} % of the data centre, ${n0(c.dcM2*s/(1-s))} m²) take the ground storey first: ${n0(gs)} m² there after ${pg.under.why==='typology'?`${n0(pg.under.m2)} m² held back for programs (no programs or typology chosen: the smallest library typology, ${esc(pg.under.typ.name)}; a default, J.B. to confirm)`:`the programs' ${n0(pg.under.m2)} m²`}. Ground: ${items.slice(0,-1).join(' − ')}.`; }
   return `Hall and its support rooms need ${n0(need)} m² of ground per storey (${st}; support ${n0(s*100)} % of the data centre); ${n0(G.ground)} m² available. Ground: ${items.join(' − ')}.`; }
 async function viewRatios(){ await ready(); BD.S.view2='tab'; const sd=$('#side'); const b=ratioBase();

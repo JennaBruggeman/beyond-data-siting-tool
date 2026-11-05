@@ -1,20 +1,20 @@
 {
  "dbg": {
-  "a0": -16.86492387661898,
+  "a0": -33.16492387661898,
   "uf": 42.75292387661898,
   "dir": 1,
   "v": [
    -39.35988108921515,
    39.35988108921515
   ],
-  "L": 59.61784775323796,
-  "hd": 23.17532583579938,
+  "L": 75.91784775323796,
+  "hd": 33.35842355152991,
   "F": [
    85.50584775323796,
    78.7197621784303
   ],
   "uBuild": [
-   -23.35292387661898,
+   -39.65292387661898,
    42.75292387661898
   ],
   "pyd": 6.4879999999999995,
@@ -25,15 +25,15 @@
     40.75292387661898
    ],
    [
-    10.75292387661898,
+    -31.24707612338102,
+    14.75292387661898
+   ],
+   [
+    22.75292387661898,
     40.75292387661898
    ],
    [
-    26.75292387661898,
-    40.75292387661898
-   ],
-   [
-    -9.24707612338102,
+    -19.24707612338102,
     14.75292387661898
    ],
    [
@@ -41,39 +41,19 @@
     14.75292387661898
    ],
    [
-    24.75292387661898,
-    40.75292387661898
+    2.752923876618979,
+    22.75292387661898
    ],
    [
-    -9.24707612338102,
-    14.75292387661898
+    -29.24707612338102,
+    -19.24707612338102
+   ],
+   [
+    14.75292387661898,
+    40.75292387661898
    ]
   ],
   "plant": [
-   [
-    "standby generators",
-    "yard",
-    -22,
-    -18,
-    -22,
-    -9
-   ],
-   [
-    "standby generators",
-    "yard",
-    -22,
-    -18,
-    -7,
-    7
-   ],
-   [
-    "standby generators",
-    "yard",
-    -22,
-    -18,
-    9,
-    22
-   ],
    [
     "standby generators",
     "yard",
@@ -81,44 +61,59 @@
     22,
     -32,
     -29
+   ],
+   [
+    "standby generators",
+    "yard",
+    24,
+    37,
+    -32,
+    -29
+   ],
+   [
+    "standby generators",
+    "yard",
+    8,
+    22,
+    -27,
+    -23
+   ],
+   [
+    "standby generators",
+    "yard",
+    24,
+    37,
+    -27,
+    -23
+   ],
+   [
+    "standby generators",
+    "yard",
+    8,
+    22,
+    -21,
+    -18
    ]
   ],
   "yard": [
    [
-    -23,
+    -40,
     -39
    ],
    [
-    -17,
+    -33,
     -39
    ],
    [
-    -17,
+    -33,
     39
    ],
    [
-    -23,
+    -40,
     39
    ]
   ],
-  "load": [
-   [
-    -39,
-    -39
-   ],
-   [
-    -23,
-    -39
-   ],
-   [
-    -23,
-    36
-   ],
-   [
-    -39,
-    36
-   ]
-  ]
+  "load": null
  },
  "steps": [
   "site",
@@ -164,20 +159,20 @@
   [
    "pool",
    [
-    11,
-    41
+    -31,
+    15
    ],
-   true,
+   false,
    1065,
    1065,
    0,
    0,
-   7
+   4
   ],
   [
    "warming_shelter",
    [
-    27,
+    23,
     41
    ],
    true,
@@ -190,14 +185,14 @@
   [
    "clinic",
    [
-    -9,
+    -19,
     15
    ],
    false,
    605,
    605,
    0,
-   0,
+   4,
    6
   ],
   [
@@ -210,34 +205,47 @@
    320,
    320,
    1,
-   6,
+   10,
    6
   ],
   [
    "ev_hub",
    [
-    25,
-    41
+    3,
+    23
    ],
    false,
    150,
    150,
-   1,
-   6,
+   0,
+   0,
    6
   ],
   [
    "greenhouse",
    [
-    -9,
-    15
+    -29,
+    -19
    ],
    false,
    190,
    190,
+   0,
+   4,
+   6
+  ],
+  [
+   "fish_farm",
+   [
+    15,
+    41
+   ],
+   false,
+   685,
+   685,
    1,
    6,
-   6
+   12
   ]
  ],
  "hall": [
@@ -250,36 +258,36 @@
   "n": 3,
   "under": false,
   "best": {
-   "key": "2:-16.9,6.3:39.4",
+   "key": "2:-33.2,0.2:47.2",
    "k": 2,
    "st": 3,
    "top": 18,
    "along": "back",
-   "a": 2,
-   "fa": 912.1780691008869,
-   "drawn": 2695
+   "a": 1.5,
+   "fa": 1575.5803011742591,
+   "drawn": 3380
   }
  },
  "hallUV": [
   [
-   -17,
-   6
+   -33,
+   0
   ],
   [
-   -34,
-   5
+   -35,
+   12
   ]
  ],
  "hallStoreys": 3,
  "space": {
-  "hall": 1824,
-  "prog": 2695,
+  "hall": 3151,
+  "prog": 3380,
   "cap": 16585.055801834307
  },
  "heat": {
   "avail": [
-   10785.312,
-   16556.399999999998
+   18874.296,
+   28973.699999999997
   ],
   "need": [
    576.01,
@@ -287,18 +295,20 @@
   ],
   "unknown": [
    "spa",
+   "fish_farm",
    "warming_shelter"
   ]
  },
  "rules": [
-  "bad: Public indoor pool: 1,065 m² does not fit on one floor here along the street front (it needs its own street entrance); drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
-  "bad: Fish farm: not drawn. Stopped by height: the 18 m limit (register van_zdb_i2).",
+  "note: Loading: 3 bays inside the building (129 m² of ground storey; Architecture default, as the test fits draw it). Ratios takes this floor out of the ground; Arrange does not draw the dock yet.",
+  "bad: Fish farm: 685 m² does not fit on one floor here; drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
   "note: Refuge in I-2: conditional (Community Centre or Neighbourhood House; Social Service Centre).",
   "note: Refuge: A-2, 2 h fire separation from the data centre (F-2).",
   "q: Refuge: keep-apart rules not checked here: generators (no distance in the source).",
   "bad: Public indoor pool in I-2: rezoning (Swimming Pool (not listed)).",
   "note: Public indoor pool: A-3, 2 h fire separation from the data centre (F-2).",
   "q: Public indoor pool: keep-apart rules not checked here: hall (no distance in the source); intakes (not modelled); generators (no distance in the source).",
+  "note: Public indoor pool needs its own street entrance; it is not on the street front here.",
   "note: Warming shelter in I-2: conditional (Social Service Centre (day); overnight: no listed use ?).",
   "note: Warming shelter: A-2, 2 h fire separation from the data centre (F-2).",
   "q: Warming shelter: keep-apart rules not checked here: generators (no distance in the source).",
@@ -312,16 +322,18 @@
   "q: EV charging hub: keep-apart rules not checked here: intakes (not modelled).",
   "note: Greenhouse in I-2: conditional (Urban Farm - Class B).",
   "q: Greenhouse: fire separation from the data centre (F-2) ? (occupancy ?).",
-  "q: Greenhouse: keep-apart rules not checked here: hall (no distance in the source); generators (no distance in the source)."
+  "q: Greenhouse: keep-apart rules not checked here: hall (no distance in the source); generators (no distance in the source).",
+  "bad: Fish farm in I-2: rezoning (no use (Urban Farm excludes fish)).",
+  "q: Fish farm: keep-apart rules not checked here: generators (no distance in the source)."
  ],
  "side": "Arrange",
  "ratios": {
   "ratio": {
    "cover": 5528,
-   "dc": 11,
+   "dc": 19,
    "prog": 30,
    "end": "low",
-   "mw": 2.8
+   "mw": 4.9
   },
   "base": {
    "lot": 5882,
@@ -339,18 +351,18 @@
    "allowed": 16585,
    "by": "envelope",
    "dcMax": 11057,
-   "dcM2": 1824,
+   "dcM2": 3151,
    "progM2": 4976,
-   "unused": 9785,
+   "unused": 8458,
    "mw": [
-    2.87,
-    6.22
+    4.96,
+    10.74
    ],
-   "mwTest": 2.8
+   "mwTest": 4.9
   },
   "answers": {
-   "mw": 2.8,
-   "dcFloor": 1824
+   "mw": 4.9,
+   "dcFloor": 3151
   },
   "side": [
    "Ratios"
@@ -364,20 +376,20 @@
   "stuck": false,
   "next": "Next: Programs →"
  },
- "split": "Data centre 11% · 1,824 m² · 2.8–6.2 MW (testing 2.8) · programs 30% · 4,976 m² · unused 59% arch_ratios Edit ratios",
+ "split": "Data centre 19% · 3,151 m² · 4.9–10.7 MW (testing 4.9) · programs 30% · 4,976 m² · unused 51% arch_ratios Edit ratios",
  "saved": [
   [
    "suggest",
    3,
-   22,
-   34,
-   0.5379714138109178
+   25,
+   15,
+   0.5581195109350784
   ],
   [
    "lot",
    9,
-   28,
-   34,
+   31,
+   15,
    0
   ]
  ],
