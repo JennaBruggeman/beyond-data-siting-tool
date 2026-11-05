@@ -70,7 +70,7 @@ Staged: cheap screen (zone allows the program, minimum ground, frontage), then f
 - [ ] Code: Community pool, then Heat cascade (both hand-tested). **Gate after each.**
 - [ ] J.B.: which others to automate before 10 Dec (Warm bath, Aquaponics, Food hub, Conservatory, Shelter + laundry). The rest are hand-drawn on 64 Airport Rd and 339 1st Ave E in Cowork.
 - [ ] Code: add-ons Heat hub (ETS + heat pumps) and Public edge (Edmonton warm ground or EV, Vancouver covered edge).
-- [ ] Code: typology picker in the tool (typology, variant, add-ons).
+- [ ] Code: typology picker in the tool (typology, variant, add-ons). Each typology carries its tested data-centre share (plant included); **remove the free Ratios slider** and its settle loop (the source of the Ratios bugs). What fits becomes read-only: the range on this lot. (J.B. 5 Nov.)
 - [ ] Code: Program and Conditions views (plan and section, each room's needs), from Cowork boards.
 
 ## Interface graphics (all sections)
