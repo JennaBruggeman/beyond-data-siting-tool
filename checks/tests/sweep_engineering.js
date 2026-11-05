@@ -90,7 +90,7 @@ const CHECK = `async (k)=>{ const out={k,issues:[],info:{}}; const I=(sev,what)=
   const outFile = process.argv[2] || 'sweep_engineering.json', shotDir = process.argv[3] || 'shots'; fs.mkdirSync(shotDir, { recursive: true });
   const keys = process.argv.slice(4).length ? process.argv.slice(4) : Object.keys(LOTS);
   const res = fs.existsSync(outFile) ? JSON.parse(fs.readFileSync(outFile, 'utf8')) : {};
-  const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell', args: ['--use-gl=swiftshader', '--enable-webgl'] });
+  const b = await chromium.launch({ ...(process.env.PW_EXE?{executablePath:process.env.PW_EXE}:{}), args: ['--use-gl=swiftshader', '--enable-webgl'] });
   for (const key of keys) {
     const [lab, sub, sel, ans] = LOTS[key]; const R = { key, lab, sub, steps: [], pageErrors: [], console: [], t0: Date.now() };
     const p = await b.newPage({ viewport: { width: 1440, height: 900 } }); let cur = 'load';

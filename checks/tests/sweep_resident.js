@@ -93,7 +93,7 @@ async function settle(p, ms) { await p.waitForTimeout(ms); }
   const keys = process.argv.slice(3).length ? process.argv.slice(3) : Object.keys(LOTS);
   if (process.env.SWITCH) return switchTest(out);
   if (process.env.PROBE) return probe(out);
-  const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell', args: ['--use-gl=swiftshader', '--enable-webgl'] });
+  const b = await chromium.launch({ ...(process.env.PW_EXE?{executablePath:process.env.PW_EXE}:{}), args: ['--use-gl=swiftshader', '--enable-webgl'] });
   for (const key of keys) {
     const L = LOTS[key]; const R = { key, lab: L.lab, sub: L.sub, steps: [], setup: {}, errors: [], console: [], report: null, best: null };
     const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
@@ -213,7 +213,7 @@ async function settle(p, ms) { await p.waitForTimeout(ms); }
 
 // SWITCH=1: one page, lots picked one after another (the residents' state carried between lots), the fits slider, and "Use this set-up"
 async function switchTest(out) {
-  const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell', args: ['--use-gl=swiftshader', '--enable-webgl'] });
+  const b = await chromium.launch({ ...(process.env.PW_EXE?{executablePath:process.env.PW_EXE}:{}), args: ['--use-gl=swiftshader', '--enable-webgl'] });
   const p = await b.newPage({ viewport: { width: 1440, height: 900 } }); const R = { errors: [], seq: [] };
   p.on('pageerror', e => R.errors.push(e.message));
   const local = (re, file, type) => p.route(re, r => r.fulfill({ body: fs.readFileSync(path.join(NM, file)), contentType: type }));
@@ -248,7 +248,7 @@ async function switchTest(out) {
 
 // PROBE=1: V09 walked step by step; when each step's Next button appears, and every mention of the height limit or roof equipment residents see
 async function probe(out) {
-  const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell', args: ['--use-gl=swiftshader', '--enable-webgl'] });
+  const b = await chromium.launch({ ...(process.env.PW_EXE?{executablePath:process.env.PW_EXE}:{}), args: ['--use-gl=swiftshader', '--enable-webgl'] });
   const p = await b.newPage({ viewport: { width: 1440, height: 900 } }); const R = { errors: [], steps: [] };
   p.on('pageerror', e => R.errors.push(e.message));
   const local = (re, file, type) => p.route(re, r => r.fulfill({ body: fs.readFileSync(path.join(NM, file)), contentType: type }));

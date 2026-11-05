@@ -29,7 +29,7 @@ const CLEAN = `(o)=>{ const seen=new WeakSet(); return JSON.parse(JSON.stringify
 (async () => {
   const out = process.argv[2] || 'golden'; fs.mkdirSync(out, { recursive: true });
   const keys = process.argv.slice(3).length ? process.argv.slice(3) : Object.keys(LOTS);
-  const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell', args: ['--use-gl=swiftshader', '--enable-webgl'] });
+  const b = await chromium.launch({ ...(process.env.PW_EXE?{executablePath:process.env.PW_EXE}:{}), args: ['--use-gl=swiftshader', '--enable-webgl'] });
   for (const key of keys) {
     const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
     const errs = []; p.on('pageerror', e => errs.push(e.message));

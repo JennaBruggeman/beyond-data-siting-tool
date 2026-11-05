@@ -139,7 +139,7 @@ H.pick=id=>BD.arch.picks.find(q=>q.id===id);
   const outFile = process.argv[2] || 'sweep_arch.json', shotDir = process.argv[3] || 'shots'; fs.mkdirSync(shotDir, { recursive: true });
   const keys = process.argv.slice(4).length ? process.argv.slice(4) : Object.keys(LOTS);
   const res = fs.existsSync(outFile) ? JSON.parse(fs.readFileSync(outFile, 'utf8')) : {};
-  const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell', args: ['--use-gl=swiftshader', '--enable-webgl'] });
+  const b = await chromium.launch({ ...(process.env.PW_EXE?{executablePath:process.env.PW_EXE}:{}), args: ['--use-gl=swiftshader', '--enable-webgl'] });
   let li = 0;
   for (const key of keys) {
     const [lab, sub, sel, ans] = LOTS[key]; const R = { key, lab, sub, configs: [], issues: [], pageErrors: [], console: [], t0: Date.now() };

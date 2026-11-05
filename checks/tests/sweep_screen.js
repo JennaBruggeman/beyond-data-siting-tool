@@ -136,7 +136,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   const shots = process.env.SHOTDIR || out; fs.mkdirSync(shots, { recursive: true });
   const tpls = (process.env.TPL || 'resident,community,full,arch').split(',');
   const vps = (process.env.VP || 'desk,phone').split(',');
-  const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell', args: ['--use-gl=swiftshader', '--enable-webgl'] });
+  const b = await chromium.launch({ ...(process.env.PW_EXE?{executablePath:process.env.PW_EXE}:{}), args: ['--use-gl=swiftshader', '--enable-webgl'] });
   for (const vp of vps) for (const tpl of tpls) {
     const keys = process.env.LOTS ? process.env.LOTS.split(',') : (vp === 'phone' ? PHONE_LOTS : Object.keys(LOTS));
     const shotSeen = {};
