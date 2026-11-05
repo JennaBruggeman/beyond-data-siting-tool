@@ -98,3 +98,91 @@ Not modelled: generators and the programs mechanical room (no sound power on fil
 - Why does the tool's Ratios default give the data centre only 6–7 % on these lots?
 
 Check 1 only. Not yet checked by a second agent.
+
+## Vancouver: lots (1) SMALL and (2) NARROW (Vancouver agent, 4 Nov 2026)
+
+Boards (scratchpad, not published): `whitemock/project/TestFit_EH_V1330.dc.html`, `TestFit_EH_V8238.dc.html` (canvas y 9400, x 0 and 1540). Scripts: scratchpad `tfl/` (`cands.py` lot search, `extract.js` tool run, `geomL.py`, `pathsL.py`, `boardL.py`, `contentL.py`, `buildL.py`, `noise_extract.js`, `noiseL.py`, `go.sh`). Screens: `tfl/b_V1330.png`, `tfl/b_V8238.png` (2×), checked by eye per storey; 0 leader crossings (script).
+
+Method as the E06B / V339 boards (pass 3): every room its own numbered block, group tints, right-angled leaders off the drawing, secure line inside the building, separate DC staff entrance (vestibule, guard point, portal), plant in 1.9 m enclosures, connected corridors, travel along the path (0.25 m grid), two exits, column grid and ducts (drawing choices), noise re-run with the tool's method (receivers read from the tool), grade from City LiDAR 2022 (datum ?). Labels: "our arithmetic", "our reading", "drawing choice"; **?** = no source.
+
+### Why these lots
+
+Searched all 694 tool parcels in Vancouver data-centre zones (I-2, I-3, FC-2, I-1C; tool tiles, decodeRing); excluded V339, V09, CLARK, HAST.
+
+| | V1330: 1330 Glen Dr (I-2) | V8238: 8238 Fraser St (I-2) |
+|---|---|---|
+| Pick | SMALL: smallest single-street rectangle in a data-centre zone (1,041 m²) | NARROW: deepest rectangle-like lot with frontage ≤ 25 m (15.5 m on Fraser St, 99.5 m deep, ratio 5:1) |
+| Lot (tool measure · record) | 1,041 · 1,028 m², 25.5 × 40.7 m | 1,738 · 1,727 m², 15.5 m (Fraser St) to 19.5 m (local street) × 99.5 m |
+| Edges (tool lot lines) | one street (west), no lane; front 0, sides 0, rear 3.1 m | through lot: Fraser St (arterial) and a local street; front not settled (s. 10.26.1, double fronting): 3.1 m kept at both ends; sides 0 |
+| Corner | no | no (two streets at opposite ends) |
+| Grade (LiDAR) · FCL | 4.2–4.7 m · 4.6 m (whole lot in the floodplain) | 2.5–6.2 m (falls to the east) · 4.6 m (87 % in the floodplain) |
+| MW tested (plant-included, low end) | 0.4 (range 0.50–1.08) | 1.4 (range 1.46–3.16) |
+| Plant (tool counts) | 2 × 1,000 kW gens, 2 chillers, 2 transformer pads | 4 × 1,000 kW gens, 3 chillers, 2 pads |
+
+Also run in the tool and not picked: 1245 Glen Dr, 1200 Raymur Ave, 1390 4th Ave E (corner lots), 8750 Heather St, 8280 Manitoba St (narrow, but 0.4 MW), 2799 Renfrew St, 520 Industrial Ave (I-3: 7.6 m side yards on a 22.8 m lot; tool finds no data-centre split).
+
+### What fit (short)
+
+- **V1330 fits, scaled, with one fail.** Storey 1 (6.1 m): refuge, shelter, lobby on Glen Dr, DC entrance, loading at the rear; storey 2 (4.5 m): clinic only; storey 3 (6.0 m): data centre only, hall 252 m² in one storey. 35 pass, 18 ?, **1 fail: loading** (2 Class B spaces needed, 1 fits).
+- **V8238 fits, scaled, no fail.** Storey 1 (5.0 m): refuge, shelter, lobby on Fraser St; 5-exam clinic; DC ground rooms and 2 loading spaces at the back. Storeys 2–3 (6.0 m): hall 2 × 529 m² in the east block, DC support in the west of storey 2; chillers in a plant room on the storey-2 roof. Plant yard at the local-street end. 34 pass, 20 ?.
+
+### What was scaled and why
+
+| | V1330 | V8238 |
+|---|---|---|
+| Refuge | 50 → **31 people** (109.9 m² drawn): the 6.1 m truck drive takes the north side, leaving a 19.4 m front shared with 2 stairs and the lobby | 50 → **41 people** (146.8 m²): the exit passage takes 1.13 m of the 15.5 m front |
+| Warming shelter | 16 → **6 guests** (21.1 m²) | 16 guests kept (56.1 m²) |
+| Clinic | 13 → **12 exam rooms** (512 m², storey 2) | 13 → **5 exam rooms** (335 m², storey 1): the hall needs storeys 2–3 and the lot is 15.5–19.5 m wide |
+| WCs (Table 3.7.2.2.-A, table load) | load 147 + 29 = 176 → 2 M + 4 F | load 196 + 75 = 271 → 3 M + 6 F |
+| Clinic WCs (Table 3.7.2.2.-B) | load 56 → 4 | load 36 → 2 |
+| DC support below the benchmarks | shipping 13.6 of 45 m²; storage/staging and garbage room not drawn (no room) | shipping 35.3 of 45 m² |
+
+Steps: refuge 3.5 m² a person, shelter 3.5 m² a guest, clinic 17.3 m² an exam room (tool arch_programs.json). None has a sourced minimum (?), so each was scaled to what the plan holds.
+
+### What failed and the rule
+
+- **V1330 loading (fail):** Parking By-law s. 5 (vanParking5): 2 Class B spaces for ≈790 m² of data centre (466–2,325 m²). With no lane, the 6.1 m aisle has to run on the lot; it takes 24 % of the 25.5 m frontage and leaves room for 1 bay.
+- V1330 roof plant: the noise screen (4.9 m) reaches 21.8 m over the base surface, above 18.3 m (s. 10.1.1, Director ?).
+- V8238 height: east block 18.21 m ≤ 18.3 m with a 5.0 m ground storey. If the lot is in I-2 sub-area A (6.1 m ground minimum, s. 3.1.2.4; map not checked ?), the roof goes to 19.3 m: fail.
+- V8238 exits: no side yards, so the only exterior walls are the two ends. The clinic's second exit and both DC stairs use one 2 h exit passage (1.13 m) along the whole lot, with a door at each end. Reading of 3.4.2.3.(4) (stair discharges counted at the passage doors) **?**.
+- V8238 flood + slope: slab 4.6 m (FCL); the yard is 2.5–3.4 m, so pads, bays and the passage door sit 1.2–2.1 m above grade (fill or ramps ?).
+- V8238 storey 2 exits 25 m apart < ½ diagonal 33.8 m: passes only by 3.4.2.3.(2) (the hall's 2 h separation splits the storey) (our reading).
+
+### Placement rules: held or broke
+
+| Rule | V1330 | V8238 |
+|---|---|---|
+| Public front on the street edge | held, but only 19.4 m of 25.5 m (drive) | held on Fraser St; 1.1 m lost to the exit passage |
+| Plant at the rear | held; reached only by a 6.1 m drive along a side lot line | held; the second street makes it easy (service from the local street) |
+| Cores at the ends | broke: 4 stairs (2 public for the clinic, 2 DC) on a 23.6 × 25.5 m floor; public and DC zones stacked so no storey mixes them | broke: no stair can discharge mid-lot (0 m side yards), so stairs discharge into an exit passage |
+| Hall not at grade (I-2 s. 2.2.7) | held: hall on top | held: storeys 2–3 |
+| Nothing wet over the hall (FM 5-32) | held: hall on the top storey; chillers over the support half | held: chillers on the storey-2 roof over the support rooms |
+| Stacked vs beside | stacked by zone: public / clinic / data centre, one per storey | beside, stretched: public at the front, hall over the clinic and DC rooms behind |
+| Two exits ½ diagonal | eased by 3.4.2.3.(1)(a): 9 m is enough where a public corridor serves the floor area | same; storey 2 needs 3.4.2.3.(2) |
+
+New rule candidates for the automatic fit:
+- On a lot with no lane, reserve a 6.1 m aisle from the street to the yard before sizing the front (V1330).
+- On a 0 m side-yard lot deeper than about 45 m of travel, add an exit passage end to end, or the rear programs get no second exit (V8238).
+- Floodplain lots: add slab height (≥ FCL) to the height check before choosing storey heights (V1330 +0.4 m, V8238 +1.2 m at the low end).
+- I-2: check the health care office cap (greater of 235 m² or 33.3 % of floor area) and the 1.00 FSR non-industrial cap; both passed here (clinic 512 ≤ 552 m²; 335 ≤ 907 m²).
+
+### Exits, travel, noise (our arithmetic)
+
+| | V1330 | V8238 |
+|---|---|---|
+| Connected | 63 rooms, 3 storeys: all | 58 rooms, 3 storeys: all |
+| Worst travel | L1 22.1 · L2 23.4 · L3 29.0 m | L1 42.5 (clinic, to the passage) · L2 44.5 (MMR 1 to S1) · L3 24.0 m |
+| Noise, no mitigation | 75.7–79.0 dBA at 1268 Glen Dr, 12.8 m (limit 65) | 81.7–85.0 dBA at 8240 Fraser St, 7.8 m (limit 65) |
+| First option that passes (tool order) | low-noise chillers + screen: 64.7 dBA (0.3 dB margin; maker claim) | rooftop plant room (−25 dB): 56.7–60.0 dBA |
+| Nearest residential | 1328 Grant St (RM-4), 369 m: 35.4 ≤ 55 | 759 Marine Dr SE (R1-1), 147 m: 31.3–34.6 ≤ 55 |
+
+### Open questions for J.B.
+
+- V1330: accept 1 loading space (relaxation), or give up refuge frontage for a second bay?
+- V1330: DC staff walk the truck drive (no walkway). Accept?
+- V1330: plant room (50.7–54.0 dBA) instead of the 0.3 dB screen margin? Both go over 18.3 m.
+- V8238: is the lot in I-2 sub-area A (6.1 m ground storey)? If so, the 3-storey scheme fails height.
+- V8238: accept one exit passage serving the clinic and both DC stairs?
+- Both: design to the refuge table load or a posted lower load (fewer WCs, bigger refuge)?
+
+Check 1 only. Not yet checked by a second agent.
