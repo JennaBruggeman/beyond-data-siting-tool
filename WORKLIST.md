@@ -97,6 +97,14 @@ Staged: cheap screen (zone allows the program, minimum ground, frontage), then f
 
 - [ ] Code: Resident 9 cards (city; pick a data centre; what it is; noise; heat; water; power and backup; how it works; report), Skip to report on every card after "what it is". Municipal 11 cards (city; parcel; is a data centre allowed; height and floor area; yards by edge; storey heights and ground floor; loading; rooftop equipment and screening; approval process; two cities; report), every card shown on every lot ("no rule here" where none). Engineering 13 cards (city; parcel; size and cooling; backup power; what fits; heat; electricity; water; materials; three options; could become; two cities; report), the 3D equipment view on screen from size to options. Architecture 17 cards (see above). At most five chapters in each step bar. Cards only read what came before. Boards: Story_Resident, Story_Municipal, Story_Engineering, Story_Architecture.
 
+## Fifth workflow: Inside a data centre (J.B. 5 Nov, proposal)
+
+- No lot: one generic air-cooled hall module sized by the tool's own rules (rack_count, hall_layout, room_cooling_type, room_cooling_units, ups_modules, battery_cabinets). Boards: Story_Interior (11 cards: Size 2, The hall 4, Power 2, Heat 2, Report 1) and style frame Final_G_Interior. Build only after J.B. approves the boards.
+- Example module: 120 racks (8 rows, runs of 5 + 3 empty places), 0.85–0.96 MW, hall 302 m², 262–295 W/ft² → thermal wall 2 + 1 spare, UPS 2 × 1,000 kW (N+1), 4 Li5 cabinets.
+- Drawing choices to confirm or source: storey 6.0 m; warm-aisle containment; electrical-room depth beyond UPS working space; air paths.
+- Gaps (?): exit doors and travel distance in the hall; power distribution inside the hall (PDUs, busway); what liquid cooling changes in the drawing (CDUs are in the register).
+- Reuses the Engineering 3D equipment list (same instancing and speed budget). Landing page gets a fifth row.
+
 ## 8. Decisions waiting for J.B. (ask when the item they block comes up; don't block other work)
 
 - Plant room added automatically by the noise ladder vs asking first (recommended: automatic with a note).
