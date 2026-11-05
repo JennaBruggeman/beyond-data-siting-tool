@@ -81,6 +81,22 @@ Gate each step: tests pass, weaknesses reported, J.B. says "go" before the next.
 
 **Sourcing check on every step ("nodes"):** every new rule or figure gets a register id via a patch, shows in the logic diagram (`register/diagram_data.json`, `build_diagram.py`) and the templates after the rebuild, and `register_wiring.js` must pass (it reports numbers in `tool/data` not wired to the register and unmarked literals in `tool/*.js`).
 
+## Also open (found 5 Nov in memory, old files and the catalogue; check before building on them)
+
+- **The repo is public** (since 28 Oct, for the mid-review page). Nothing course-only (Altalis lots, boards that show them) and no licensed files may go in. Source PDFs live in the private repo `beyond-data-sources`.
+- **Studio dates:** match a user by Nov 6; peer reviews Nov 13/17 and Nov 27; final Dec 10. User tests with practising architects (≈45 min) are being recruited, so the tool must run end to end before them.
+- **A separate build in Claude chat:** J.B. said on 3 Nov the tool had been built as a single-file artifact in Claude chat, with design fixes still going on there, to be moved into the repo after. Ask her where that version is before redoing interface work, so the two don't diverge.
+- **Dropped items still in the data:** Twin is still a typology in `tool/data/arch.json` (dropped by J.B.; Ratios' hold-back can pick it); aquarium and lumber drying (dropped) and food drying and winter garden ("out for now") are still in `tool/arch_programs.json`. Remove or hide them. Climbing wall stays (J.B. kept it).
+- **Users moving blocks:** J.B. wants users to be able to arrange blocks themselves, with every check rerun (3 Nov). Arrange has no drag yet. The typology library supplies the starting layout; moving blocks comes after.
+- **On hold since 3 Nov:** public ground floor under the hall (Build 2 part 5) and basements. Decide with J.B. whether they become typology variants.
+- **Facility inventory for the Resident map:** the 4 Nov figure decisions are in `checks/research_arch_v1/inv_*.md` and the notes ("Facility figures"), not yet in the tool. Wolfpaw EDM2 and EDM3 show as space inside the Qu buildings; EDM1 at 10060 Jasper Ave. TELUS Garden data centre address still to find (City permits).
+- **Open source items, 28 Oct:** `checks/open_items_sorted_2026-10-28.csv`, 374 rows (23 for J.B., 46 may change a number). Not re-checked since; some were settled by check 2 (decisions 1–16 applied, 8179ccb). Re-sort before using.
+- **Paywalled standards:** `checks/paywalled_standards.md`. Remind J.B. of it now and then; she gets them through UBC Library.
+- **Older to-dos (Oct, status not re-checked):** tower floor areas (596 Vancouver towers on an estimate; BC Assessment gross area pending Jeremy Buhler's written OK); NEU sewage heat 3.2 vs 2.5 MW; LRMC range; Edmonton parking stall 23.4 m²; FortisBC 2026 gas cost; the ten electricity and water avenues J.B. wanted in the tool (19 Oct) — check which are built.
+- **Standing rule:** with every research addition, update all four templates, check whether it is relevant to each user group, and ask J.B. when unsure.
+- **Old archive:** `checks/archive_2026-10/` (check 2 decisions, fix lists, briefs). Historical; the notes file wins where they differ (e.g. old notes say a 2.4 m fence; it is now 1.9 m everywhere).
+- **Reminders:** remind J.B. to link her computer / push at the end of each work round and before reviews.
+
 ## Open decisions for J.B.
 
 - Loading inside the building as the Architecture default (assumed yes until she says otherwise).
