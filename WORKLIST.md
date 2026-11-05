@@ -49,6 +49,7 @@ Dates: match a user **6 Nov**; peer reviews **13/17 Nov** and **27 Nov**; archit
 
 ## 5. Emergency hub rule sheet (the first automatic typology)
 
+- [ ] Code + Cowork: **check the hand test fits before they become the reference** (J.B. 5 Nov: not convinced the plans work). Independent agent, plan by plan: every room reaches the lobby and two exits; travel measured along the path (NBC 3.4.2.5); corridor widths (NBC 3.3.1.9); dead ends; exit separation (½ diagonal); fire separations between occupancies; doors not opening into an exit path; washroom counts against occupant load; accessible route from the street; storey heights vs zone minimums; yards and height. A fail on a hand plan is fixed on the board (Cowork) before the automatic fit copies it. **Gate.**
 - [ ] Code: write the rule sheet: bands (forecourt → public → lobby → data centre → plant), one corridor spine along the long side (side-by-side bands on wide shallow lots), rooms with minimum / target / rank, fallback ladder (at grade → stack → over/under hall → drop lowest rank → "doesn't fit here" with the reason), the building as one rectangle on a grid, leftovers as yards (plant farthest from the street, forecourt at the front, slivers landscape only), plant never on the public edge or over the hall (FM 5-32 2.2.1.6), compliance table after every layout.
 - [ ] Code: section rules: slab at the flood level; step the ground floor where grade drops more than a storey; ramps per BCBC 3.8; fill "?".
 - [ ] Code: test on the six test lots (64 Airport Rd, 339 1st Ave E, 1330 Glen Dr, 8238 Fraser St, 14715 Yellowhead Trail, 4103 97 St) against J.B.'s hand test fits. Explain every difference.
@@ -64,6 +65,10 @@ Staged: cheap screen (zone allows the program, minimum ground, frontage), then f
 - [ ] Code: add-ons Heat hub (ETS + heat pumps) and Public edge (Edmonton warm ground or EV, Vancouver covered edge).
 - [ ] Code: typology picker in the tool (typology, variant, add-ons).
 - [ ] Code: Program and Conditions views (plan and section, each room's needs), from Cowork boards.
+
+## Interface graphics (all sections)
+
+- Graphics are designed in the Cowork chat as boards with J.B.; they are not settled yet. Code builds only boards J.B. has approved, from the short spec that comes with each (screen, what changes, what stays). Don't restyle on your own.
 
 ## 7. Resident, Municipal, Engineering
 
