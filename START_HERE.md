@@ -42,6 +42,7 @@ Commits: author "Jenna Bruggeman" <bangpowjenna@gmail.com>, with the Co-Authored
 - Decisions and history: `checks/architecture_mode_notes_2026-10-30.md` (the main record; read the 3–5 Nov entries first).
 - Agent briefs and reports: `checks/agents/`.
 - Research: `checks/research_arch_v1/` (zones, heights, uploads, facility conflicts), `checks/research_typ/` (one file per typology, code checklist, test fits).
+- Build plan to Dec 10 (Claude Doc linked in CLAUDE.md): written 24 Oct, **out of date**; this file's order replaces it.
 - Plan for the typologies, and the weak spots: Claude Doc "Beyond Data: Typology library (draft)", sections "Adjusting to any lot" and "Weak spots and their fixes".
 - Design boards (mockups, not the tool): Cowork design artifact "Beyond Data white interface". Each board says whether it is a mockup; test-fit boards carry OUT OF DATE / TO RE-CHECK banners (5 Nov).
 
@@ -51,15 +52,34 @@ Commits: author "Jenna Bruggeman" <bangpowjenna@gmail.com>, with the Co-Authored
 - **Cowork:** research, clause reads, design boards, the typology doc, decisions with J.B. Cowork no longer edits tool code; its notes arrive through the Claude Link folder for Claude Code to commit.
 - A board approved in Cowork comes with a short spec (screen, what changes, what stays). Build from that.
 
-## Next, in order
+## Next, in order (whole build to Dec 10)
 
+Gate each step: tests pass, weaknesses reported, J.B. says "go" before the next.
+
+**A. Architecture: fixes the sweep would inherit**
 1. Draw the inside loading dock in Arrange (a ground-storey block at the rear of the building on the drive side; the hall may sit over it). Today only Ratios counts it.
 2. Loading count: the tool counts loading from the data centre's floor only (64 Airport Rd: 2,399 m², under the 2,500 m² trigger) instead of the whole building. Re-read Bylaw 20001 Table 7.2 / s. 5.80 (whole building or each use?) before changing it.
-3. Sweep: for every lot in a data-centre zone (≈697 Vancouver, ≈5,232 Edmonton; ≈4,800 at ≥ 1,000 m²), the ground the one-rectangle fit wastes, plus lot depth and width. Read-only. A lighter run (no 3D, no screenshots, parallel pages) is needed for the time.
+
+**B. Architecture: typology library**
+3. Sweep: for every lot in a data-centre zone (≈697 Vancouver, ≈5,232 Edmonton; ≈4,800 at ≥ 1,000 m²), the ground the one-rectangle fit wastes, plus lot depth and width. Read-only. Needs a lighter run (no 3D, no screenshots, parallel pages).
 4. Zone rule: in Architecture mode, typologies only on lots where a data centre is permitted, conditional or discretionary; other lots say "not allowed here; rezoning needed".
 5. Clause reads (with Cowork): fire access width (NBC/BCBC 3.2.5.6), plant in side yards, LiDAR vs flood-level datum, lobby size from occupant load (NBC 3.1.17, 3.4.3).
 6. Emergency hub rule sheet: bands (forecourt → public → lobby → data centre → plant), one corridor spine, room minimum / target / rank, fallback ladder, leftovers become yards, plant never on the public edge, checks after every layout. Test on the six test lots against the hand test fits.
-7. Independent check, then the other typologies (staged: cheap screen, then full layouts; 300-lot sample before all).
+7. Independent check; then the other typologies, staged (cheap screen, then full layouts; 300-lot sample before all). Typologies: Emergency hub, Warm bath, Community pool, Aquaponics, Food hub, Conservatory, Heat cascade, Shelter + laundry; add-ons Heat hub and Public edge (`checks/research_typ/`, Typology library doc). Realistic for Dec 10: 2–3 automated, the rest hand-drawn on 64 Airport Rd and 339 1st Ave E (in Cowork).
+8. Program and Conditions views in Arrange (plan and section, each room's needs), from Cowork boards.
+9. Typology library in the tool (picker, variants, add-ons).
+
+**C. Other templates** (four only: Resident, Municipal, Engineering, Architecture; each its own report; same white look, header and source style; specs in the notes file, "Templates" and "Reports per template", 3 Nov)
+10. Remove the Community template (tier id `community` in tiers.js, flow.js SKIP, templates.json, register tier tags); move anything only it showed to Resident or Engineering.
+11. Resident: select a data centre on the map, export a report about that one facility: generic graphic by type (stand-alone, hyperscale, tower), location map, stills from the "how it works" video, plain answers on noise, heat, water, power. One number per figure (spec sheet first). Board: Resident1–2 (VAN3 Cologix). Facility figures: notes, "Facility figures" (4 Nov) and `checks/research_arch_v1/inv_*`.
+12. Municipal: select a parcel, get its regulations (incl. each lot edge's class and yard); two-city comparison on the last page. Plan: Claude Doc https://claude.ai/artifact/9WuA4zPVKKKe1SuhcpvoXr. Boards: Municipal1–2.
+13. Engineering: J.B. has changes in mind but hasn't given them yet. Ask before starting.
+
+**D. Finish**
+14. Full check round (golden, Architecture baseline, register wiring, every template's report), Excel recalculation check of the register templates, independent check.
+15. Publish to the live page only after J.B. reviews.
+
+**Sourcing check on every step ("nodes"):** every new rule or figure gets a register id via a patch, shows in the logic diagram (`register/diagram_data.json`, `build_diagram.py`) and the templates after the rebuild, and `register_wiring.js` must pass (it reports numbers in `tool/data` not wired to the register and unmarked literals in `tool/*.js`).
 
 ## Open decisions for J.B.
 
