@@ -79,6 +79,8 @@ Staged: cheap screen (zone allows the program, minimum ground, frontage), then f
 ## Interface graphics (all sections)
 
 - Graphics are designed in the Cowork chat as boards with J.B.; they are not settled yet. Code builds only boards J.B. has approved, from the short spec that comes with each (screen, what changes, what stays). Don't restyle on your own.
+- Street trees layer (J.B. 5 Nov). Sources: City of Vancouver open data "Public trees" and City of Edmonton open data "Trees" (both blocked from the Cowork cloud; download from her computer). Keep raw CSVs out of the repo; process into git-ignored tiles with location, height range and diameter where given (check each dataset's fields and licence first, add both to the register). Draw trees in the 3D and plan views. Canopy size: use the dataset field if one exists, otherwise a sourced rule per height class, else "?". Public street trees only: no private-lot trees.
+- Equipment drawn at booklet level (`equip` drawings on the boards): outer sizes sourced (Vertiv AFC, Rehlko KD2000, Eaton 2,500 kVA at 2.084 m); fans, louvres, doors, stack and fins are drawing choices. Carry the same detail into the 3D equipment list when it is built.
 
 ## 7. Resident, Municipal, Engineering
 
@@ -115,6 +117,7 @@ Staged: cheap screen (zone allows the program, minimum ground, frontage), then f
 - Burlington or Mississauga filed drawings (data-hall span and grid).
 - Three equipment spec sheets the night run couldn't reach (`checks/agents/2026-11-04_night.md`).
 - Her review of the clinic program.
+- Street-tree CSVs from both city portals into Claude Link (or Claude Code fetches them).
 - Paywalled standards still missing: `checks/paywalled_standards.md` (remind her now and then).
 
 ## 10. Older open items (status not re-checked)
