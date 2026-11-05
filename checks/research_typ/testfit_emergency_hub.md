@@ -36,7 +36,7 @@ Inputs from the tool (served from `outputs/tool`, run 4 Nov 2026 with Playwright
 | Battery room HVAC | HVAC separate from the equipment areas (insurer) | ? | 21.1 m² | arch_up_fm0528 |
 | Meet-me rooms | 2 (one site visit); size not public (TIA-942 paywalled) | ? | 2 × 28 m² | tourVAN3, arch_dc_ualbertaTelecom |
 | MV switchgear, main electrical | 1 h, apart from generators (insurer); size not public | ? | 55 m² | arch_up_fm0523, burlingtonPlans2026 |
-| Transformers | ⌈5.74 MVA ÷ 2.5⌉ + 1 = 4 pads, 2.63 × 2.49 m (25/35 kV unit; EPCOR voltage ?) | 4 pads | 4 pads, 14.1 m from building | transformers, eatonCA022021, epcor_ccg |
+| Transformers | ⌈5.74 MVA ÷ 2.5⌉ + 1 = 4 pads, 2.63 × 2.49 m (25/35 kV unit; EPCOR voltage ?) | 4 pads | 4 pads, 13.5 m from building | transformers, eatonCA022021, epcor_ccg |
 | Generators (yard) | ⌈3.7 × 1.55 ÷ 2⌉ + 1 = 4 × 2,000 kW, 13.49 × 3.49 m | 4 sets | 4 sets | generator_sets, rehlkoKD2000, fmDS0532 |
 | Fuel | 12 h × 5.18–5.74 MW × 0.263 L/kWh (claims); code floor 2 h | 16,350–18,110 L; 2 h: 2,730–3,020 L (our arithmetic) | sub-base tanks (drawing choice) | fuel_on_site, cat3516c, arch_csa_c282 |
 | Loading | BE: 1 space for 2,500–7,500 m², 9.0 × 3.0 × 4.0 m, not in a setback | 27 m² | bay 30.6 m² | edmZB580, arch_sec_edm580 |
@@ -104,7 +104,7 @@ Inputs from the tool (served from `outputs/tool`, run 4 Nov 2026 with Playwright
 | Spatial separation, side lot line | Tables 3.2.3.1.-E, 3.2.3.7 | 0 m: blank walls, 2 h (F-2), 1 h (clinic), noncombustible cladding | pass |
 | Lobby used as an exit | 3.4.4.2.(2)(c) | not used as an exit; DC rooms behind the portal exit through it (our reading) | ? |
 | Locked doors on exit paths | 3.4.6.16 | portal side door and yard gate release on alarm and power loss | pass |
-| Zoning: FAR | BE 4.1.2 | 4,357 m² ÷ 4,284 m² = 1.02 ≤ 1.6 | pass |
+| Zoning: FAR | BE 4.1.2 | 4,407 m² ÷ 4,284 m² = 1.03 ≤ 1.6 | pass |
 | Zoning: height | BE 4.1.1 | hall 12.0 m; chillers on the hub roof 8.9 m ≤ 16.0 m | pass |
 | Zoning: setbacks | BE Table 4.1 (tool, per line) | street 4.5 m (Collector); alley, sides, rear 0 m | pass |
 | BE 500 m² per use | BE 3.3.1, 3.12.1, 3.18 | clinic 484 m²; refuge + shelter 374 m² (one use or two ?) | ? |
@@ -115,8 +115,8 @@ Inputs from the tool (served from `outputs/tool`, run 4 Nov 2026 with Playwright
 | Generators: tanks to building · lot line | CSA B139 Table 2 | 2.7 m ≥ 1.5 m · 3.0 m ≥ 3.0 m | pass |
 | Generator exhaust to openings | NBC 6.3.3.1.(2); Table 6.3.2.9 | nearest exit door 4.1 m ≥ 3.0 m; refuge ≥32 m (exhaust outlet position ?) | pass |
 | Generator room | CSA C282 5.2; 3.6.2.8 | outdoor enclosures: whether the 2 h rule applies ? | ? |
-| Fuel truck | NFC 4.11.2.4; 4.11.3.2 | attended unloading 6.0 m from generators, 7.9 m from transformers; no 15 m spot for an unattended truck | ? |
-| Transformers | EPCOR 6.4 | 14.1 m ≥ 6.0 m from the building; right of way ? | pass |
+| Fuel truck | NFC 4.11.2.4; 4.11.3.2 | attended unloading 6.0 m from generators, 7.3 m from transformers; no 15 m spot for an unattended truck | ? |
+| Transformers | EPCOR 6.4 | 13.5 m ≥ 6.0 m from the building; right of way ? | pass |
 | Dock to air intakes | NBC Table 6.3.2.9 | refuge intakes (roof, drawing choice) ≥25 m ≥ 7.6 m | pass |
 | Nothing wet over the hall | FM 5-32 2.2.1.6 (insurer) | chillers, WCs, clinic not above the hall | pass |
 | Noise at the lot lines | Bylaw 14600 ss. 19–22 | not re-run for this layout | ? |
@@ -222,10 +222,10 @@ Inputs from the tool (served from `outputs/tool`, run 4 Nov 2026 with Playwright
 | Clinic not at grade | I-3 2.2.6 | clinic on storey 2, entrance and E1 at grade | pass |
 | Main entrance from a street, each use | Sec. 10.21.1 | refuge, shelter, lobby (clinic, data centre) on 1st Ave E | pass |
 | One principal building | Sec. 10.34.1 | one building | pass |
-| FSR · non-industrial cap | I-3 3.1.1.1 | 3,347 m² ÷ 4,503 m² = 0.74 ≤ 3.00 · hub 1,168 m² ≤ 4,503 m² (1.00 FSR) | pass |
+| FSR · non-industrial cap | I-3 3.1.1.1 | 3,320 m² ÷ 4,503 m² = 0.74 ≤ 3.00 · hub 1,159 m² ≤ 4,503 m² (1.00 FSR) | pass |
 | Height | I-3 3.1.2.1; s. 2 Building Height, Base Surface | roof 23.0 m (slab 5.0 + 18.0) − base surface 5.03 m (lowest under the 18 m roof; linear surface over the existing corner grades 4.6, 5.1, 4.7, 4.6, 6.3 m; official grades ?) = 17.97 m ≤ 18.3 m; overruns: s. 10.1.1 ? | pass |
 | Floor-to-floor | I-3 3.1.2.9 | 6.0 / 6.0 / 6.0 m (≥6.0 ground, ≥4.0 upper) | pass |
-| Width · depth | I-3 3.1.2.7–8 | 30.9 m · 42.5 m ≤ 61.0 m | pass |
+| Width · depth | I-3 3.1.2.7–8 | 30.6 m · 42.5 m ≤ 61.0 m | pass |
 | Yards | I-3 3.1.2.2–6 | front 0.6, sides 7.6, rear 3.1 m (tool lines) | pass |
 | Fence height in required yards | Sec. 10.10.3 | plant enclosure fence 1.9 m ≤ 1.9 m cap; no fence on the lot lines; secure line inside the building (redraw 4 Nov) | pass |
 | Driveway in the side yard | I-3 3.1.2.4, 3.1.2.16 | side drive in the 7.6 m yard: allowed ? (yard can be decreased for loading) | ? |
@@ -354,6 +354,22 @@ Same file names. Scripts (scratchpad `tf3/`): `geom3.py` (patches the v2 geometr
 - Screens checked by eye at 2× (scratchpad `tf3/p3_E06B.png`, `tf3/p3_V339.png`). 0 leader crossings (script).
 - Fixed after looking: rooftop plant room drawn as a rectangle (the convex hull read as a slanted wall); travel label kept on one line; damper wording.
 - Section not redrawn for the rooftop plant room (height ?).
+
+## Check 2 fixes (4 Nov 2026, testfit_check2.md)
+
+Same file names. Geometry patch at the end of `tf3/geom3.py`; plant total in `tf/redraw2.py`; figures in `tf/content.py`. Re-run `tf3/go3.sh`. Pre-fix copies: `tf3/*_pre_chk2.*` (scratchpad).
+
+- **E06B transformer fence:** pads moved 0.6 m toward the building. The fence was 0.39 m past the west lot line; it is now 0.21 m inside, still 1.5 m clear of the pads.
+  - Pads to the building: 14.1 → **13.5 m** (≥ 6.0 m, EPCOR 6.4). Fuel truck to the transformers: 7.9 → **7.3 m** (≥ 6 m, 4.11.3.2).
+- **E06B FAR:** 4,357 → **4,407 m²** (2,808 + 1,598 drawn), 1.03 ≤ 1.6. Still passes.
+- **V339 north side yard:** north wall pulled back 0.25 m (v 15.4 → 15.15) on all storeys. The building is now inside the 7.6 m yard line along its whole length.
+  - Stairs S1 and S4, lift E1 and the two loading bays keep their size and move 0.25 m south.
+  - The row behind them loses 0.25 m: public corridor and storey-2 lift lobby 2.15 m (≥ 2.0), lift E2 (size ?), WC, MMRs, janitor. Shipping and storage also lose 0.25 m. Column grid respaced (7.65 m bays).
+  - Results: FSR **3,320 m²**, 0.74; hub **1,159 m²** (1,168 − 9.5 m² lost from the lobby, waiting, corridors and janitor; our arithmetic); width **30.6 m**.
+- **V339 re-check:** worst travel L1 24.0 · L2 30.9 · L3 30.9 m. Exits and separations unchanged (S1, S4 move with the wall). Rooms tile with no gaps or overlaps.
+- **Plant group, both boards:** now includes the roof chillers, as the caption says. E06B 263 → **406 m²** (+5 chillers, 143 m²). V339 166 → **252 m²** (+3 chillers, 86 m²).
+- Pass/fix counts unchanged: E06B 36 / 18, V339 40 / 15.
+- Screens checked by eye: `tf3/p3_E06B.png`, `tf3/p3_V339.png`. 0 leader crossings (script).
 
 ## Open questions for J.B.
 
