@@ -119,6 +119,7 @@ function placeOnce(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W
   out.notDrawn=[]; const Hmax=s.H||Infinity, capF=s.fsr&&s.lot?s.lot*s.fsr[1]:null, code=zoneCode(); let floorUsed=s.hallM2+out.boxes.reduce((t,b)=>t+(b.q.m2||0),0), nonInd=out.boxes.reduce((t,b)=>t+(industrialUse(b.q,code)?0:(b.q.m2||0)),0);
   /* 3 Nov 2026 (Ratios, J.B.): the programs share the floor the ratios give them; the building covers no more of the lot than the coverage set */
   const RT=ratioNow(); out.ratio=RT; let progUsed=out.boxes.reduce((t,b)=>t+(b.q.m2||0),0), gUsed=(hu1-hu0)*(hv1-hv0);
+  if(RT&&RT.b&&RT.r){ const cp=dcCapPct(RT.b,RT.r,null); if(RT.r.dc>cp.geo&&cp.G&&cp.G.pg.m2>0) out.flags.push({t:`Data centre: its share (${RT.r.dc}%) leaves too little ground for the picked programs beside the hall. ${groundLine(RT.b,RT,cp).replace(/<[^>]+>/g,'')} Back in Ratios it takes at most ${cp.geo}%.`,src:['arch_ratios'],sev:'bad'}); } /* ratio ground, 4 Nov 2026 */
   if(RT&&s.hallM2<RT.dcM2-1) out.flags.push({t:`Data centre: its share (${n0(RT.dcM2)} m²) does not fit beside loading and the plant yard here; ${n0(s.hallM2)} m² drawn. Edit ratios or the set-up.`,src:['arch_ratios'],sev:'bad'});
   /* code limits block, they never just warn (J.B., 2 Nov 2026: "everything needs to follow the code"): no block above the zone's height limit,
      none past the floor-space ratio, none over an Edmonton BE area cap; setbacks and the hard distances are already no-go above */
@@ -309,9 +310,23 @@ function ratioCalc(b,r){ const cover=Math.min(r.cover,b.build), capF=b.fsr&&b.lo
 function fitNoRatio(){ const An=BD.S.answers, keep=An.dcFloor; delete An.dcFloor; BD.modelReset&&BD.modelReset(); let fm=null; try{ fm=BD.fitMax?BD.fitMax():null; if(BD.fitPlan) fitNoRatio.plan=BD.fitPlan(); }finally{ if(keep!=null) An.dcFloor=keep; BD.modelReset&&BD.modelReset(); } return fm; }
 /* dcshare 4 Nov 2026: the fit search runs the noise ladder (low-noise units, screen, then an enclosed plant room: site.js model) before it caps a size; Ratios names the measure */
 /* the most of the floor the data centre may take: the hall off the ground floor where the zone says so, and no more MW than the hard rules allow at the end Arrange tests */
-function dcCapPct(b,r,fm){ const c=ratioCalc(b,Object.assign({},r,{dc:100,prog:0})), M=BD.model(), room=M&&M.hallRoom?M.hallRoom*b.dataFl:Infinity; // room: the hall footprint the set-up leaves after loading and the plant yard (site.js), on the floors data may use
-  const geo=Math.floor(Math.min(c.dcMax,room)/c.allowed*100+1e-9), byRoom=room<c.dcMax; if(fm==null) return {pct:0,geo,fm,byRoom,room};
-  const per=r.end==='high'?b.perMW[0]:b.perMW[1]; return {pct:Math.min(geo,Math.floor(fm*per/c.allowed*100+1e-9)),geo,fm,byRoom,room}; }
+/* ratio ground (4 Nov 2026, testfit_lots.md Edmonton): the share was checked against floor area and the hall's ground after loading and the plant yard,
+   but not against the ground the picked programs need beside the hall. A program can sit over the hall only if the hall's top plus one program storey
+   stays under the height limit; where the zone keeps the ground storey for other uses (I-2, I-3, FC-2) programs go under the hall. Otherwise each picked
+   block program needs its ground: its smallest size (sourced minimum, else the size set in Arrange) over its storeys. Our reading of the tool's own placement rules. */
+function progGround(b){ const M=b.M||BD.model(), Z=(M&&M.Z)||{}, ftf=BD.eng.R.ftf, code=b.code;
+  const SM=b.city==='van'&&AD.storeyMin&&AD.storeyMin[code]||null, k=b.dataFl, top=(Z.ground?ftf.ground+k*ftf.up[1]:ftf.ground+(k-1)*ftf.up[1]);
+  const out={m2:0,items:[],why:null,top};
+  if(Z.ground){ out.why='under'; return out; }
+  if(top+(SM?SM.above:ftf.ground)<=(M.H||0)+0.01){ out.why='over'; return out; }
+  A.picks.forEach(q=>{ const p=CAT.byId[q.id]; if(!p||p.kind!=='mass'||q.place==='roof'||q.m2==null) return; if(q.id==='refuge'&&(!q.opt||q.opt==='under_hall')) return; // Arrange does not draw these beside the hall
+    { const cp=capOf(p); if(cp!=null&&q.m2>cp) return; } // over the BE area cap: Arrange blocks it, so it keeps no ground
+    const mn=minOf(p), m2=mn!=null?Math.min(mn,q.m2):q.m2; if(!(m2>0)) return;
+    const g=m2/Math.max(1,q.storeys||1); out.m2+=g; out.items.push({id:q.id,name:p.name,g,min:mn!=null}); });
+  out.why=out.items.length?'beside':'none'; return out; }
+function dcCapPct(b,r,fm){ const c=ratioCalc(b,Object.assign({},r,{dc:100,prog:0})), M=BD.model(), pg=progGround(b), gr=M&&M.hallRoom?Math.max(0,M.hallRoom-pg.m2):null, room=gr!=null?gr*b.dataFl:Infinity; // room: the hall footprint the set-up leaves after loading, the plant yard (site.js) and the programs' ground, on the floors data may use
+  const geo=Math.floor(Math.min(c.dcMax,room)/c.allowed*100+1e-9), byRoom=room<c.dcMax, G={hallRoom:M&&M.hallRoom||null,pg,ground:gr}; if(fm==null) return {pct:0,geo,fm,byRoom,room,G};
+  const per=r.end==='high'?b.perMW[0]:b.perMW[1]; return {pct:Math.min(geo,Math.floor(fm*per/c.allowed*100+1e-9)),geo,fm,byRoom,room,G}; }
 function ratioInit(b,fm){ const r={site:selId(),cover:b.build,dc:0,prog:0,end:'low'}, mw=BD.S.answers.mw, c=ratioCalc(b,Object.assign({},r,{dc:100,prog:0})), cap=dcCapPct(b,r,fm).pct;
   r.dc=mw?Math.max(Math.min(1,cap),Math.min(cap,Math.floor(mw*b.perMW[1]/c.allowed*100+1e-9))):cap; r.prog=100-r.dc; return r; } // starts at the set-up's own size (its MW at the low end), the rest to programs
 function ratioApply(){ const b=ratioBase(), r=A.ratio; if(!b||!r) return null; const c=ratioCalc(b,r), An=BD.S.answers;
@@ -326,10 +341,19 @@ function wireTabs(sd){ sd.querySelectorAll('[data-tab2]').forEach(b=>b.onclick=(
 function splitLine(RT){ if(!RT) return `<p class="sub asplit">Ratios not set for this lot: the space budget below is the zone's whole allowance. <a href="#" data-editr>Set ratios</a></p>`;
   const pc=v=>n0(v/RT.allowed*100)+'%';
   return `<p class="sub asplit">Data centre ${pc(RT.dcM2)} · ${n0(RT.dcM2)} m² · ${mwR(RT.mw.map(x=>Math.floor(x*10)/10))} (testing ${RT.mwTest}) · programs ${pc(RT.progM2)} · ${n0(RT.progM2)} m² · unused ${pc(RT.unused)} ${chips(['arch_ratios'])} <a href="#" data-editr>Edit ratios</a></p>`; }
+/* ratio ground: the reason line in Ratios ("hall needs X m² of ground per storey, Y available") */
+function groundLine(b,c,cap){ const G=cap.G, k=b.dataFl, need=c.dcM2/k, pg=G.pg, st=`${k} hall storey${k>1?'s':''}${b.dataFl<b.floors?' over a ground storey kept for other uses':''} under the ${n0(b.M.H)} m height limit`;
+  const ps=pg.why==='under'?' Programs go on the ground storey under the hall.':pg.why==='over'?` Programs can sit over the hall (its top ${n0(pg.top)} m).`:pg.why==='none'?` No programs picked yet, so none of the ground is kept for them; picks in Arrange take ground beside the hall (nothing fits over a ${n0(pg.top)} m hall).`:
+    ` Programs' ground ${n0(pg.m2)} m² (${pg.items.map(x=>esc(x.name.split(' (')[0])+' '+n0(x.g)+' m²'+(x.min?' at its minimum':' as set, no sourced minimum')).join('; ')}), beside the hall: nothing fits over a ${n0(pg.top)} m hall.`;
+  return `Hall needs ${n0(need)} m² of ground per storey (${st}); ${n0(G.ground)} m² available after ${pg.m2>0?`loading, the plant yard and the programs' ground (${n0(G.hallRoom)} m² before the programs)`:'loading and the plant yard'}.${ps}`; }
 async function viewRatios(){ await ready(); BD.S.view2='tab'; const sd=$('#side'); const b=ratioBase();
   if(!b){ sd.innerHTML=`${tabsHTML('arat')}<h2>Ratios</h2><p class="lead">Ratios need a new building on a lot with a known shape. Pick a lot and set it up as a new build.</p>`; wireTabs(sd); return; }
   const fm=fitNoRatio(), fresh=!A.ratio||A.ratio.site!==selId(); if(fresh) A.ratio=ratioInit(b,fm);
-  const r=A.ratio; let cap=null, c=null; for(let k=0;k<4;k++){ c=ratioApply()||ratioCalc(b,r); cap=dcCapPct(b,r,fm); if(r.dc<=cap.pct) break; r.dc=cap.pct; } // the plant yard moves with the MW: settle the cap
+  const r=A.ratio; let cap=null, c=null, cut=false; for(let k=0;k<4;k++){ c=ratioApply()||ratioCalc(b,r); cap=dcCapPct(b,r,fm); if(r.dc<=cap.pct) break; r.dc=cap.pct; cut=true; } // the plant yard moves with the MW: settle the cap
+  /* ratio ground (4 Nov 2026): a cut can land below the cap, since a smaller MW needs a smaller plant yard and so leaves more ground. Step back up to
+     the largest share that still passes at its own size (only after a cut, so a share the user chose lower is kept). Only where programs' ground is kept,
+     so lots with no picks keep the 4-pass result as before (one change at a time; the same lift there is an open question for J.B.). */
+  if(cut&&r.dc<cap.pct&&cap.G&&cap.G.pg.m2>0){ let ok=r.dc, hi=cap.pct; for(let k=0;k<8&&hi>ok;k++){ const t=Math.ceil((ok+hi)/2); r.dc=t; ratioApply(); const ct=dcCapPct(b,r,fm); if(t<=ct.pct){ ok=t; hi=Math.max(t,Math.min(hi,ct.pct)); } else hi=t-1; } r.dc=ok; c=ratioApply()||ratioCalc(b,r); cap=dcCapPct(b,r,fm); }
   r.prog=fresh?100-r.dc:Math.min(r.prog,100-r.dc); c=ratioApply()||ratioCalc(b,r); const M=BD.model(), S=b.city==='van'?(/I-2/.test(b.code)?['van_zdb_i2']:['van_zdb_i3']):['edm_bl20001'];
   const pctDcMax=cap.pct, mwH=c.mwTest?BD.eng.calc({mw:c.mwTest,recover:true},BD.eng.siteFacts(),[],[]):null;
   const rooms=b.split.map(x=>{ const raw=(BD.data.raw.dc_rooms.rooms.find(y=>y.id===x.id)||{}).perMW||{}; return `<span>${esc(x.name)}</span><span class="ar">${c.mwTest?rg([c.mwTest*x.perMW[0],c.mwTest*x.perMW[1]],'m²'):'?'} ${chips(raw.src)}</span>`; }).join('');
@@ -344,7 +368,8 @@ async function viewRatios(){ await ready(); BD.S.view2='tab'; const sd=$('#side'
     <p class="src">${c.by==='fsr'?`Floor-space ratio ${b.fsr} × ${n0(b.lot)} m² lot`:`Footprint × ${b.floors} storeys under the ${n0(M.H)} m height limit`} (the lower of the two) ${chips(S)}</p>
     <label class="arl"><span>Data centre</span><span>${r.dc}% · ${n0(c.dcM2)} m²</span></label>
     <input type="range" id="rDc" min="0" max="${pctDcMax}" step="1" value="${Math.min(r.dc,pctDcMax)}" aria-label="Data centre share, %">
-    ${cap.byRoom&&cap.geo<100?`<p class="src">Loading and the plant yard leave room for ${n0(cap.room)} m² of hall${b.dataFl<b.floors?' (not on the ground floor here)':''}, so the data centre takes at most ${cap.geo}% ${chips(S)}.</p>`:b.dataFl<b.floors&&cap.geo<100?`<p class="src">The hall may not use the ground floor here, so the data centre takes at most ${cap.geo}% ${chips(S)}.</p>`:''}
+    ${cap.G&&cap.G.ground!=null?`<p class="src">${groundLine(b,c,cap)} ${chips(S.concat(['arch_ratios']))}</p>`:''}
+    ${cap.byRoom&&cap.geo<100?`<p class="src">${cap.G&&cap.G.pg.m2>0?'Loading, the plant yard and the programs\' ground':'Loading and the plant yard'} leave room for ${n0(cap.room)} m² of hall${b.dataFl<b.floors?' (not on the ground floor here)':''}, so the data centre takes at most ${cap.geo}% ${chips(S)}.</p>`:b.dataFl<b.floors&&cap.geo<100?`<p class="src">The hall may not use the ground floor here, so the data centre takes at most ${cap.geo}% ${chips(S)}.</p>`:''}
     ${cap.fm==null?`<p class="src k">No size passes the hard rules with this set-up (plant, generators, fuel or noise). Change the set-up.</p>`:cap.pct<cap.geo?`<p class="src">Hard rules stop it at ${cap.fm} MW with this set-up (plant, generators, fuel, noise), so at most ${cap.pct}% at the ${r.end==='high'?'high':'low'} end. Change the set-up for more.</p>`:''}
     ${cap.fm!=null&&fitNoRatio.plan&&fitNoRatio.plan.mw!=null?`<p class="src">Data centre: ${esc(BD.planText(fitNoRatio.plan))}. ${chips(['noise_limit','arch_nz_nswDcNoise'])}</p>`:''}
     <label class="arl"><span>Programs</span><span>${r.prog}% · ${n0(c.progM2)} m²</span></label>
@@ -504,5 +529,5 @@ function plan(P){ const host=document.getElementById('v3d'); if(!host||!P) retur
 
 BD.views=BD.views||{}; BD.views.arat=viewRatios; BD.views.aprog=viewPrograms; BD.views.aarr=viewArrange; BD.views.acmp=viewCompare;
 BD.archHide=()=>{ const v=$('#aView'); if(v) v.style.display='none'; const p=$('#aPlan'); if(p) p.style.display='none'; };
-BD.archTest={place,budgets,rules,add,del,resize,CAT,ratioBase,ratioCalc,ratioNow};
+BD.archTest={place,budgets,rules,add,del,resize,CAT,ratioBase,ratioCalc,ratioNow,dcCapPct,progGround};
 })();
