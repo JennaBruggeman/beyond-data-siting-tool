@@ -140,6 +140,9 @@ function model(){
      (Seen or hidden: Bring it indoors; −25 dB, NSW 2021, register arch_nz_nswDcNoise). A default choice, not a rule: only while no visibility has been
      chosen, and named "(Architecture default)" where it shows. Choosing any visibility clears it. */
   if(A.vis==null&&BD.tier&&BD.tier()==='arch'){ A.vis='indoors'; A.visDefault='arch'; }
+  /* 5 Nov 2026 (Ratios loading fix): in Architecture mode loading defaults to a dock inside the building, as every hand test fit draws it
+     (testfit_lots.md: dock on a side drive or facing the rear yard). A default drawing choice, not a rule; "Outside, at the rear" keeps the strip. */
+  if(A.loadIn==null&&BD.tier&&BD.tier()==='arch'){ A.loadIn='1'; A.loadDefault='arch'; }
   { const a0=s.a||[], Z0=zoneLimits(s.city,s.city==='van'?(a0[1]||''):(a0[2]||a0[1]||'')); if(Z0.screen&&(!A.vis||A.vis==='reveal')) A.vis='screen'; } /* 2 Nov 2026 hard rules: screening required (Z.screen) */
   const key=JSON.stringify([s.city,s.id,A.built,A.extent,A.floor,A.foot,A.cover,A.loadIn,A.flip,A.hmode,A.storeys,A.userFSR,A.userH,A.plantAt,A.outside,A.inside,A.spares,A.gens,A.genAt,A.genSpares,A.mw,A.vis,A.subB,A.fcSub,A.dcFloor,A.dcSite,A.hallOpt]);
   if(cache.key===key) return cache.m;
@@ -208,6 +211,8 @@ function model(){
       m.loadSpaces=[]; const lv0=m.loadV[0], spanV=m.loadV[1]-m.loadV[0], k=Math.min(LN.n,Math.max(1,Math.floor(spanV/(LN.wid+0.6))));
       for(let i=0;i<k;i++){ const b0=lv0+0.6+i*(LN.wid+0.6); const s0=rearEnd+dir*0, s1=rearEnd+dir*LN.len; m.loadSpaces.push(rectW(F,Math.min(s0,s1),Math.max(s0,s1),b0,b0+LN.wid)); }
       if(k<LN.n) m.warn.push(`Only ${k} of ${LN.n} loading spaces fit across the lot.`); }
+    /* 5 Nov 2026: loading inside: the bays take ground-storey floor (spaces side by side, 0.6 m apart as the strip draws them); the aisle is the drive or lane outside */
+    else if(LN.n&&A.loadIn&&A.foot!=='existing') m.loadInside={n:LN.n,m2:LN.len*(LN.n*(LN.wid+0.6)+0.6),len:LN.len,wid:LN.wid};
     m.plantYardStart=cur; m.dir=dir; m.v=[v0,v1]; m.uFront=fl>0?u0:u1;
     // footprint
     if(A.foot==='existing'&&blds.length){ m.foot=blds.reduce((x,b)=>b.a>x.a?b:x).r; m.footMode='existing'; }
@@ -469,7 +474,7 @@ function card(step){
       ${Z.key==='I-2'&&!Z.assumed?`<h3>Sub-area</h3><p class="sub">Part of the False Creek Flats (bounded by Prior St, Clark Dr, Great Northern Way and Main St) is split into sub-areas A and B, with different limits (I-2 s. 1.1, Map 1). The tool does not map them; check Map 1 of the I-2 District Schedule.</p>${ch('subB',[{v:'',t:'Not in sub-area B',def:true,s:'rear yard 3.1 m, no front yard, 30.5 m with approval'},{v:'1',t:'In sub-area B',s:'yards 0.6 / 7.6 / 3.1 m, building at most 61 m wide and deep, 36.5 m and FSR 4.0 with approval'}],A.subB||'')}`:''}
       <h3>Setbacks</h3>${m.yardNote?`<div class="warnbox">${esc(m.yardNote)}</div>`:''}${clauses({cl:Z.cl.filter(c=>/Yards|Setbacks/.test(c[0]))})}
       ${sideHTML(m)}${linesHTML(m)}<p class="sub" style="margin-top:6px">${m.side&&m.side.any?'The street end is the front; the rear yard and loading go to the other end.':'No street was found beside this lot in the City\'s street file, so which end faces the street is not known; the rear yard and loading are put at one end.'} <a href="#" id="flip">Swap the ends</a>${A.flip?' (swapped)':''}</p>
-      <h3>Loading</h3><p class="sub">${esc(LN.basis)}</p>${ch('loadIn',[{v:'',t:'Outside, at the rear',def:true,s:`a strip ${(LN.len+LN.aisle).toFixed(1)} m deep: space plus aisle`},{v:'1',t:'Inside the building',s:'a loading bay on the ground floor; no strip'}],A.loadIn||'')}`; }
+      <h3>Loading</h3><p class="sub">${esc(LN.basis)}</p>${ch('loadIn',[{v:'',t:'Outside, at the rear',def:true,s:`a strip ${(LN.len+LN.aisle).toFixed(1)} m deep: space plus aisle`},{v:'1',t:'Inside the building'+(A.loadDefault==='arch'&&A.loadIn==='1'?' (Architecture default)':''),s:'a loading bay on the ground floor; no strip'}],A.loadIn||'')}`; }
   }
   if(step===3){
     if(A.built==='existing') h+=`<p class="sub">The existing building is ${m.H.toFixed(1)} m tall (${S.city==='van'?'City LiDAR 2022':'City 3D buildings or estimate'}), about ${m.nF[0]} storey${m.nF[0]>1?'s':''} at 4 m.${m.hUnknown?' <span class="draft">Some parts have no measured height; those are taken as one storey at 4 m (an assumption ?).</span>':''}</p>`;
