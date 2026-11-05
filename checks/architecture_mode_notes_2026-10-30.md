@@ -244,3 +244,4 @@ All three offered in Architecture mode, no default; each shows its consequences 
 - 5 Nov 2026 (J.B.): simplify Engineering to six steps so it builds without bugs: Site, Set-up and what fits, Exchanges (four tabs, opportunities inside each), Options (with Could become), Two cities, Report. Cut: Opportunities step, Set-ups that open the most, Real buildings step, People, Over time. The tool is for ARCH 540, not the thesis: thesis arguments don't keep steps in the tool.
 - 5 Nov 2026 (J.B.): equipment detail in Engineering stays at booklet level (the storyboard's level).
 - 5 Nov 2026 (J.B.): the typology library replaces the Ratios slider: each typology carries its tested data-centre share; What fits is read-only.
+- 5 Nov 2026 (J.B.): no ratio slider is a necessary loss of control. The user's design choices are: a different typology, its variant, and add-ons (public plaza / edge, solar, EV charging, heat hub).

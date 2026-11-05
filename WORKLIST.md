@@ -69,7 +69,7 @@ Dates: match a user **6 Nov**; peer reviews **13/17 Nov** and **27 Nov**; archit
 Staged: cheap screen (zone allows the program, minimum ground, frontage), then full layouts for the pairs that pass; a sample of screened-out pairs gets a full layout as a check.
 - [ ] Code: Community pool, then Heat cascade (both hand-tested). **Gate after each.**
 - [ ] J.B.: which others to automate before 10 Dec (Warm bath, Aquaponics, Food hub, Conservatory, Shelter + laundry). The rest are hand-drawn on 64 Airport Rd and 339 1st Ave E in Cowork.
-- [ ] Code: add-ons Heat hub (ETS + heat pumps) and Public edge (Edmonton warm ground or EV, Vancouver covered edge).
+- [ ] Code: add-ons, the user's design choices besides the typology and variant (J.B. 5 Nov): Heat hub (ETS + heat pumps), Public plaza / edge (Edmonton warm ground, Vancouver covered edge), Solar (roof, facade), EV charging (public side). Each add-on carries its own tested footprint and plant, so adding one never moves the typology's layout; where it can't fit, it says so.
 - [ ] Code: typology picker in the tool (typology, variant, add-ons). Each typology carries its tested data-centre share (plant included); **remove the free Ratios slider** and its settle loop (the source of the Ratios bugs). What fits becomes read-only: the range on this lot. (J.B. 5 Nov.)
 - [ ] Code: Program and Conditions views (plan and section, each room's needs), from Cowork boards.
 
