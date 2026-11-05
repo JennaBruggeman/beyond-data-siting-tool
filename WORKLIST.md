@@ -14,7 +14,7 @@ Dates: match a user **6 Nov**; peer reviews **13/17 Nov** and **27 Nov**; archit
 
 - [ ] Code: clone, add the bundle, unzip the tiles, install test tools (`Desktop\Claude Link\CLAUDE_CODE_FIRST_STEPS.md`).
 - [ ] Code: run golden + Architecture baseline; both must match `checks/golden/` before any change.
-- [ ] Code: push `overnight-2026-10-30` (12 commits after ade54ea) with J.B.'s OK.
+- [ ] Code: push `overnight-2026-10-30` (all commits after ade54ea) with J.B.'s OK.
 - [ ] Code: read START_HERE.md, CLAUDE.md, the 3–5 Nov notes. Then tell J.B. in 5 lines what you understood and what looks wrong or missing. **Gate.**
 
 ## 1. Clean-up of decisions already made
