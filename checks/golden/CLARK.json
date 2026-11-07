@@ -5,7 +5,7 @@
   "extent": "whole",
   "floor": "",
   "host": {},
-  "mw": 6.9,
+  "mw": 9,
   "foot": "max",
   "cover": 70,
   "hmode": "out",
@@ -195,10 +195,10 @@
    "lotArea": 5882,
    "ring": "[ring 14]",
    "notes": [
-    "Noise: needs the roof cooling plant in an enclosed plant room. On the roof, even with low-noise chillers and a solid screen, it would give about 70 dBA at 1375 VERNON DR (I-2, activity zone), 39 m away, over the 65 dBA night limit (Noise Control By-law 6555 s. 2.3(b)(ii)). The plant room is the next measure, and the least that passes; its floor comes out of the building (register arch_nz_nswDcNoise).",
+    "Noise: needs the roof cooling plant in an enclosed plant room. On the roof, even with low-noise chillers and a solid screen, it would give about 73 dBA at 1147 GRANT ST (I-2, activity zone), 31 m away, over the 65 dBA night limit (Noise Control By-law 6555 s. 2.3(b)(ii)). The plant room is the next measure, and the least that passes; its floor comes out of the building (register arch_nz_nswDcNoise).",
     "Generator test (Noise By-law 6555 s. 4.1(c)): one set at a time is about 79.2 dB(A) at 6.1 m (the nearest lot line is 3 m away, closer than 6.1 m, so measured at 6.1 m), within the 80 dB(A) test limit (78 dB(A) at 7 m, Kohler G6-154, maker claim; free field, our arithmetic). Sets tested together would be louder. Running in a power cut as emergency works (s. 4.3(c)): our reading (?).",
     "Lot lines: which yard one of this lot's edges has is not known (?); the deepest it could have is applied (see Lot lines).",
-    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 63–66 dBA (quieter–standard unit rating) at the point of reception beside 1328 GRANT ST (RM-4, quiet zone), 120 m away; limit 55 dBA at night (Noise Control By-law 6555 s. 2.3(b)(i))."
+    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 64–67 dBA (quieter–standard unit rating) at the point of reception beside 1328 GRANT ST (RM-4, quiet zone), 120 m away; limit 55 dBA at night (Noise Control By-law 6555 s. 2.3(b)(i))."
    ],
    "warn": [],
    "F": {
@@ -464,8 +464,8 @@
    "yardOffBad": false,
    "sideDrive": null,
    "loadingNeed": {
-    "n": 3,
-    "nDC": 3,
+    "n": 4,
+    "nDC": 4,
     "nProg": 0,
     "len": 10.2,
     "wid": 3.4,
@@ -473,7 +473,7 @@
     "aisle": 6.1,
     "cls": "truck loading bay",
     "nC": 2,
-    "basis": "3 truck loading bays: 3 for the data centre's 5,290 m² of floor. Each class of use is counted separately and the counts added (Parking By-law s. 5.1, Multi-Use Developments). The by-law calls this size Class B, its mid-size bay: 10.2 × 3.4 m with 3.8 m clearance (Class C is the 23.1 m bay for the largest trucks). The data centre uses row 5.2.5: the by-law does not name data centres, but the City classes them as a Transportation and Storage use (RTS 19744), which row 5.2.5 lists. Each bay is reached by a 6.1 m aisle (s. 5.4.1). If the City reads a data centre as a storage warehouse, 2 Class C s…",
+    "basis": "4 truck loading bays: 4 for the data centre's 6,900 m² of floor. Each class of use is counted separately and the counts added (Parking By-law s. 5.1, Multi-Use Developments). The by-law calls this size Class B, its mid-size bay: 10.2 × 3.4 m with 3.8 m clearance (Class C is the 23.1 m bay for the largest trucks). The data centre uses row 5.2.5: the by-law does not name data centres, but the City classes them as a Transportation and Storage use (RTS 19744), which row 5.2.5 lists. Each bay is reached by a 6.1 m aisle (s. 5.4.1). If the City reads a data centre as a storage warehouse, 2 Class C s…",
     "src": "vanParking5"
    },
    "loading": "[ring 8]",
@@ -483,6 +483,7 @@
    ],
    "loadDepth": 16.3,
    "loadSpaces": [
+    "[ring 8]",
     "[ring 8]",
     "[ring 8]",
     "[ring 8]"
@@ -499,10 +500,10 @@
     -23.352924,
     42.752924
    ],
-   "mwSized": 6.9,
+   "mwSized": 9,
    "plant": {
     "s": {
-     "Q": 10.695,
+     "Q": 13.95,
      "k": {
       "name": "air-cooled chillers",
       "L": 12.141,
@@ -518,8 +519,8 @@
        4.3
       ]
      },
-     "need": 8,
-     "n": 9,
+     "need": 10,
+     "n": 11,
      "g": {
       "name": "standby generators",
       "L": 13.493,
@@ -535,8 +536,8 @@
        2
       ]
      },
-     "gNeed": 6,
-     "gN": 7,
+     "gNeed": 7,
+     "gN": 8,
      "src": "Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit nearest the middle of …"
     },
     "boxes": [
@@ -595,27 +596,35 @@
       "base": 0,
       "kind": "yard",
       "name": "standby generators"
+     },
+     {
+      "ring": "[ring 8]",
+      "clear": "[ring 8]",
+      "h": 4.777,
+      "base": 0,
+      "kind": "yard",
+      "name": "standby generators"
      }
     ],
     "lines": [
-     "Sized for <b>6.9 MW</b> of servers: heat to reject ≈ 6.9 × PUE 1.55 = <b>10.7 MW</b> at peak.",
-     "8 air-cooled chillers carry it; with spares, <b>9</b>. Placed: 0 on the roof, 0 in the yard.",
+     "Sized for <b>9.0 MW</b> of servers: heat to reject ≈ 9.0 × PUE 1.55 = <b>14.0 MW</b> at peak.",
+     "10 air-cooled chillers carry it; with spares, <b>11</b>. Placed: 0 on the roof, 0 in the yard.",
      "Each unit about 12.141 × 2.362 m, 2.896 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
      "<span class=\"src\">Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit near…"
     ],
     "genLines": [
-     "6 generator sets of about 2 MW carry 10.7 MW; with spares, <b>7</b>. Placed: 0 on the roof, 7 in the yard.",
+     "7 generator sets of about 2 MW carry 14.0 MW; with spares, <b>8</b>. Placed: 0 on the roof, 8 in the yard.",
      "Each about 13.493 × 3.488 m, 4.777 m high; 1.5 m from the building, 2 m between sets (1 m clear all round, CSA C282 6.5.1.1; register arch_csa_c282).",
-     "Fuel in each set's sub-base tank: about 5600 L. In the yard: 3 m from the property line and 1.5 m from the building (CSA B139.1.0 Table 2; register arch_csa_b139). On a roof: at most 1,250 L a tank and 2,500 L a supply line (B139.1.1 6.5.3). FM 5-32 (insurer guidance, not law): not on the roof or in a basement.",
+     "Fuel in each set's sub-base tank: about 6300 L. In the yard: 3 m from the property line and 1.5 m from the building (CSA B139.1.0 Table 2; register arch_csa_b139). On a roof: at most 1,250 L a tank and 2,500 L a supply line (B139.1.1 6.5.3). FM 5-32 (insurer guidance, not law): not on the roof or in a basement.",
      "<span class=\"src\">Standby diesel generator sets in Sound Level 2 enclosures with sub-base tanks. Basis units: Rehlko (Kohler) KD2000, 2,000 kW standby (data-centre continuous rating the same), 13.49 × 3.49 m, up to 4.78 m high (G5-626, rev 6/24); KD1000, 1,000 kW, 8.43 × 2.62 m, 3.71 m high with the 12 h tank (G6-154, 12/23). Both EPA Tier 2, cULus (UL 2200, CSA C22.2 No. 100); manufacturer claims. Chosen 29 Oct 2026 as the middle of Cat, Rehlko and Generac: 2 MW 18.5–38.4 m² per MW, 1 MW 19.5–22.4. 1 m clear around each set (Cummins application manual; not checked ?); 1.5 m from wall openings…"
     ],
     "short": "",
     "coolYard": 0,
     "coolRoof": 0,
-    "genYard": 7,
+    "genYard": 8,
     "genRoof": 0,
     "genTank": {
-     "L": 5625.57,
+     "L": 6289.457143,
      "bld": 1.5,
      "pl": 3,
      "over": false
@@ -630,14 +639,15 @@
      -11.376924
     ],
     "truckRing": null,
-    "indoor": 835.874478,
-    "coolRoofIndoor": 9,
+    "indoor": 1021.624362,
+    "coolRoofIndoor": 11,
+    "genTestPlaced": null,
     "miss": [],
     "placed": {
      "cr": 0,
      "cy": 0,
      "gr": 0,
-     "gy": 7
+     "gy": 8
     }
    },
    "plantYardDepth": 11.976,
@@ -656,10 +666,10 @@
    },
    "noise": {
     "lw": [
-     112.3,
-     115.6
+     113.2,
+     116.5
     ],
-    "n": 9,
+    "n": 11,
     "src": [
      3031.3,
      2415.4
@@ -668,7 +678,7 @@
     "groups": [
      {
       "kind": "indoors",
-      "n": 9
+      "n": 11
      }
     ],
     "tested": 5374,
@@ -686,14 +696,14 @@
     "bldOnly": 0,
     "block": null,
     "flag": null,
-    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 63–66 dBA (quieter–standard unit rating) at the point of reception beside 1328 GRANT ST (RM-4, quiet zone), 120 m away; limit 55 dBA at night (Noise Control By-law 6555 s. 2.3(b)(i)).",
+    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 64–67 dBA (quieter–standard unit rating) at the point of reception beside 1328 GRANT ST (RM-4, quiet zone), 120 m away; limit 55 dBA at night (Noise Control By-law 6555 s. 2.3(b)(i)).",
     "worst": {
      "addr": "1328 GRANT ST",
      "zt": "RM-4, quiet zone",
      "lot": true,
      "d": 120.3,
-     "lo": 62.7,
-     "hi": 66,
+     "lo": 63.6,
+     "hi": 66.9,
      "L": 55,
      "Ls": 55,
      "sec": "Noise Control By-law 6555 s. 2.3(b)(i)"
@@ -742,17 +752,17 @@
    },
    "noiseRoom": {
     "worst": {
-     "addr": "1375 VERNON DR",
+     "addr": "1147 GRANT ST",
      "zt": "I-2, activity zone",
      "lot": true,
-     "d": 39.4,
-     "lo": 69.5,
-     "hi": 69.5,
+     "d": 30.7,
+     "lo": 72.6,
+     "hi": 72.6,
      "L": 65,
      "Ls": 65,
      "sec": "Noise Control By-law 6555 s. 2.3(b)(ii)"
     },
-    "block": "Noise: the cooling plant (roof) would give about 70 dBA (low-noise units: one rating) at the point of reception beside 1375 VERNON DR (I-2, activity zone), 39 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). 7 neighbouring lots are over. No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further…",
+    "block": "Noise: the cooling plant (roof) would give about 73 dBA (low-noise units: one rating) at the point of reception beside 1147 GRANT ST (I-2, activity zone), 31 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). 19 neighbouring lots are over. No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further…",
     "src": "arch_nz_nswDcNoise"
    }
   },
