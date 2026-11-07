@@ -40,8 +40,8 @@ Dates: match a user **6 Nov**; peer reviews **13/17 Nov** and **27 Nov**; archit
 ## 3. Size of the problem
 
 - [x] Code: zone rule: in Architecture mode typologies only on lots where a data centre is permitted, conditional or discretionary; others say "not allowed here; rezoning needed". 573ace3: not-allowed lots say so on every Architecture tab; 'as if rezoned' is a flagged opt-in.
-- [ ] Code: build the lighter test run (no 3D, no screenshots, parallel pages) and time it.
-- [ ] Code: sweep every data-centre-zone lot (≈697 Vancouver, ≈5,232 Edmonton): ground wasted by the one-rectangle fit, leftover shape, lot depth and width, minimum lot size that holds anything. Report the distribution. **Gate.**
+- [x] Code: build the lighter test run (no 3D, no screenshots, parallel pages) and time it. 77c385f: sweep_ground.js, ≈0.16 s a lot with 4 pages (5,932 lots in 326 s).
+- [x] Code: sweep every data-centre-zone lot (≈697 Vancouver, ≈5,232 Edmonton): ground wasted by the one-rectangle fit, leftover shape, lot depth and width, minimum lot size that holds anything. Report the distribution. **Gate.** checks/agents/2026-11-07_ground_sweep.md (aggregates only). Median 6–7 % of buildable unused, p90 23–25 %; leftover shape not measured.
 
 ## 4. Clause reads (Cowork does the reading, Code wires the results)
 
