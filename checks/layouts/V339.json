@@ -1,0 +1,529 @@
+{
+ "lot": {
+  "key": "63819485",
+  "city": "van",
+  "zone": "I-3",
+  "area_m2": 4503,
+  "outline": [
+   [
+    -55.84,
+    -23.05
+   ],
+   [
+    9.02,
+    -23.05
+   ],
+   [
+    56.11,
+    1.25
+   ],
+   [
+    47.69,
+    22.41
+   ],
+   [
+    -56.11,
+    23.05
+   ],
+   [
+    -55.84,
+    -23.05
+   ]
+  ],
+  "frame": {
+   "L": 112.23,
+   "W": 46.1,
+   "front": "low u",
+   "uFront": -31.75
+  },
+  "yardLine": [
+   -55.51,
+   53.01,
+   -15.45,
+   15.45
+  ],
+  "buildable": [
+   [
+    -31.75,
+    15.3
+   ],
+   [
+    -31.75,
+    -15.45
+   ],
+   [
+    7.17,
+    -15.45
+   ],
+   [
+    29.25,
+    -4.06
+   ],
+   [
+    29.25,
+    14.92
+   ]
+  ],
+  "edges": [
+   {
+    "kind": "side",
+    "abuts": "lot",
+    "len": 64.86,
+    "yard": 7.6
+   },
+   {
+    "kind": "side",
+    "abuts": "lot",
+    "len": 53,
+    "yard": 7.6
+   },
+   {
+    "kind": "rear",
+    "abuts": "lot",
+    "len": 22.77,
+    "yard": 3.1
+   },
+   {
+    "kind": "side",
+    "abuts": "lot",
+    "len": 103.81,
+    "yard": 7.6
+   },
+   {
+    "kind": "front",
+    "abuts": "street",
+    "len": 46.1,
+    "yard": 0.6
+   }
+  ]
+ },
+ "size": {
+  "mw": 1.1,
+  "dcShare": 14,
+  "dcFloor_m2": 735.97,
+  "storeys": 3,
+  "hallStoreys": 3,
+  "ground_m": 6
+ },
+ "dataCentre": [
+  {
+   "id": "gst",
+   "name": "Ground storey, other uses (zone)",
+   "level": -1,
+   "base_m": 0,
+   "h_m": 6,
+   "m2": 172.32,
+   "rect": [
+    -17.93,
+    -8.95,
+    -15.45,
+    3.73
+   ],
+   "outline": null
+  },
+  {
+   "id": "gst",
+   "name": "Ground storey, other uses (zone)",
+   "level": -1,
+   "base_m": 0,
+   "h_m": 6,
+   "m2": 26.35,
+   "rect": [
+    -8.95,
+    1.25,
+    1.15,
+    3.73
+   ],
+   "outline": null
+  },
+  {
+   "id": "hall",
+   "name": "Data hall",
+   "level": 0,
+   "base_m": 6,
+   "h_m": 6,
+   "m2": 50.87,
+   "rect": [
+    -16.03,
+    1.25,
+    -15.45,
+    -12.5
+   ],
+   "outline": null
+  },
+  {
+   "id": "hall",
+   "name": "Data hall",
+   "level": 0,
+   "base_m": 6,
+   "h_m": 6,
+   "m2": 295.63,
+   "rect": [
+    -16.96,
+    1.25,
+    -12.5,
+    3.73
+   ],
+   "outline": null
+  },
+  {
+   "id": "electrical",
+   "name": "Electrical room (UPS)",
+   "level": 0,
+   "base_m": 6,
+   "h_m": 6,
+   "m2": 3.63,
+   "rect": [
+    -17.93,
+    -16.03,
+    -15.45,
+    -13.54
+   ],
+   "outline": null
+  },
+  {
+   "id": "battery",
+   "name": "Battery room (Li-ion)",
+   "level": 0,
+   "base_m": 6,
+   "h_m": 6,
+   "m2": 1.98,
+   "rect": [
+    -17.93,
+    -16.03,
+    -13.54,
+    -12.5
+   ],
+   "outline": null
+  },
+  {
+   "id": "rest",
+   "name": "Other rooms, size ?",
+   "level": 0,
+   "base_m": 6,
+   "h_m": 6,
+   "m2": 15.87,
+   "rect": [
+    -17.93,
+    -16.96,
+    -12.5,
+    3.73
+   ],
+   "outline": null
+  },
+  {
+   "id": "hall",
+   "name": "Data hall",
+   "level": 1,
+   "base_m": 12,
+   "h_m": 6,
+   "m2": 346.5,
+   "rect": [
+    -16.81,
+    1.25,
+    -15.45,
+    3.73
+   ],
+   "outline": null
+  },
+  {
+   "id": "rest",
+   "name": "Other rooms, size ?",
+   "level": 1,
+   "base_m": 12,
+   "h_m": 6,
+   "m2": 21.48,
+   "rect": [
+    -17.93,
+    -16.81,
+    -15.45,
+    3.73
+   ],
+   "outline": null
+  },
+  {
+   "id": "dock",
+   "name": "Loading dock",
+   "level": -1,
+   "base_m": 0,
+   "h_m": 6,
+   "m2": 169.32,
+   "rect": [
+    -8.95,
+    1.25,
+    -15.45,
+    1.15
+   ],
+   "outline": null
+  }
+ ],
+ "programs": [
+  {
+   "id": "refuge",
+   "name": "Refuge (warming, cooling, cleaner-air room)",
+   "m2": 265,
+   "storeys": 1,
+   "base_m": 0,
+   "h_m": 6,
+   "rect": [
+    -31.75,
+    -3.75,
+    4.55,
+    14.02
+   ],
+   "streetFront": true,
+   "underHall": false
+  },
+  {
+   "id": "warming_shelter",
+   "name": "Warming shelter",
+   "m2": 100,
+   "storeys": 1,
+   "base_m": 0,
+   "h_m": 6,
+   "rect": [
+    -31.75,
+    -21.75,
+    -15.45,
+    -5.45
+   ],
+   "streetFront": true,
+   "underHall": false
+  },
+  {
+   "id": "clinic",
+   "name": "Outpatient clinic (urgent and primary care)",
+   "m2": 605,
+   "storeys": 3,
+   "base_m": 6,
+   "h_m": 12,
+   "rect": [
+    -31.75,
+    -5.75,
+    4.55,
+    12.31
+   ],
+   "streetFront": false,
+   "underHall": false
+  }
+ ],
+ "notDrawn": [],
+ "plant": [
+  {
+   "name": "standby generators",
+   "where": "yard",
+   "rect": [
+    12.17,
+    14.78,
+    -3.51,
+    4.92
+   ],
+   "clear": [
+    10.67,
+    16.28,
+    -5.01,
+    6.42
+   ],
+   "base_m": 0,
+   "h_m": 3.71
+  },
+  {
+   "name": "standby generators",
+   "where": "yard",
+   "rect": [
+    16.78,
+    19.4,
+    -3.51,
+    4.92
+   ],
+   "clear": [
+    15.28,
+    20.9,
+    -5.01,
+    6.42
+   ],
+   "base_m": 0,
+   "h_m": 3.71
+  },
+  {
+   "name": "standby generators",
+   "where": "yard",
+   "rect": [
+    21.4,
+    24.02,
+    -3.51,
+    4.92
+   ],
+   "clear": [
+    19.9,
+    25.52,
+    -5.01,
+    6.42
+   ],
+   "base_m": 0,
+   "h_m": 3.71
+  }
+ ],
+ "plantYard": [
+  1.44,
+  27,
+  -15.45,
+  15.45
+ ],
+ "truckRoute": {
+  "type": "along",
+  "rect": [
+   1.44,
+   7.54,
+   -16.45,
+   16.45
+  ]
+ },
+ "sideDrive": {
+  "width_m": 6.1,
+  "inSideYard_m": 6.1,
+  "narrowed_m": 0,
+  "rect": [
+   -56.11,
+   29.25,
+   -23.05,
+   -16.95
+  ]
+ },
+ "dock": {
+  "bays": 4,
+  "m2": 169.32,
+  "rect": [
+   -8.95,
+   1.25,
+   -15.45,
+   1.15
+  ]
+ },
+ "loading": {
+  "bays": 4,
+  "basis": "4 truck loading bays: 2 for the data centre's 1,098 m² of floor (hall, UPS and battery rooms 736 m² plus support rooms at 33 %, the safer reading). Plus 1 for the refuge, warming shelter (365 m², row 5.2.3: one for each 2,800 m²; which programs fall in this row is our reading ?). Plus 1 for the outpatient clinic (605 m², row 5.2.9 Office Uses, Class B: a Health Care Office is an Office Use, our reading). Each class of use is counted separately and the counts added (Parking By-law s. 5.1, Multi-Use Developments). The by-law calls this size Class B, its mid-size bay: 10.2 × 3.4 m with 3.8 m clearance (Class C is the 23.1 m bay for the largest trucks). The data centre uses row 5.2.5: the by-law does not name data centres, but the City classes them as a Transportation and Storage use (RTS 19744), which row 5.2.5 lists. Each bay is reached by a 6.1 m aisle (s. 5.4.1)."
+ },
+ "rules": [
+  {
+   "sev": "note",
+   "text": "Loading: 4 bays inside the building (169 m² of ground storey; Architecture default, as the test fits draw it). Ratios takes this floor out of the ground; Arrange draws it on the ground storey at the rear end of the building (drawing choice).",
+   "src": [
+    "arch_ratios"
+   ]
+  },
+  {
+   "sev": "bad",
+   "text": "Outpatient clinic: 605 m² does not fit on one floor here; drawn over 3 storeys only to show its size. Whether it can be split across floors is a design question.",
+   "src": []
+  },
+  {
+   "sev": "note",
+   "text": "Generator test: one set about 74.5 dB(A) at 10.5 m, within the 80 dB(A) limit (By-law 6555 s. 4.1(c); 78 dB(A) at 7 m, maker claim; our arithmetic).",
+   "src": [
+    "van6555s41c",
+    "kohlerG6154sound"
+   ]
+  },
+  {
+   "sev": "q",
+   "text": "Loading: no street or lane at the rear or sides, so a 6.1 m drive runs from the front street along the side to the dock; 6.1 m of it lies in the required side yard: a flagged option, the Director may allow a reduced side yard for loading and vehicular access (I-3 3.1.2.16) (drawing choice; Edmonton gives no aisle width, 6.1 m used ?).",
+   "src": [
+    "vanParking5"
+   ]
+  },
+  {
+   "sev": "note",
+   "text": "Loading dock: trucks reach it by the 6.1 m drive from the front street along the side (6.1 m aisle; geometry only, turning not checked ?).",
+   "src": [
+    "vanParking5"
+   ]
+  },
+  {
+   "sev": "note",
+   "text": "Refuge in I-3: conditional (Community Centre or Neighbourhood House; Social Service Centre).",
+   "src": [
+    "van_zdb_i2",
+    "van_zdb_i3",
+    "van_zdb_i1c",
+    "van_zdb_fc2"
+   ]
+  },
+  {
+   "sev": "note",
+   "text": "Refuge: A-2, 2 h fire separation from the data centre (F-2).",
+   "src": [
+    "arch_nbc3131",
+    "arch_ref_part3Scope",
+    "arch_pub_nbcA3121"
+   ]
+  },
+  {
+   "sev": "q",
+   "text": "Refuge: keep-apart rules not checked here: generators (no distance in the source).",
+   "src": [
+    "arch_hcCleanerAirSpaces"
+   ]
+  },
+  {
+   "sev": "note",
+   "text": "Warming shelter in I-3: conditional (Social Service Centre (day); overnight: no listed use ?).",
+   "src": [
+    "van_zdb_i2",
+    "van_zdb_i3",
+    "van_zdb_i1c",
+    "van_zdb_fc2",
+    "arch_ref_vanSec2SSC"
+   ]
+  },
+  {
+   "sev": "note",
+   "text": "Warming shelter: A-2, 2 h fire separation from the data centre (F-2).",
+   "src": [
+    "arch_pub_nbcA3121",
+    "arch_pub_nbc3131full",
+    "arch_pub_nbcDefs"
+   ]
+  },
+  {
+   "sev": "q",
+   "text": "Warming shelter: keep-apart rules not checked here: generators (no distance in the source).",
+   "src": [
+    "arch_mv1329"
+   ]
+  },
+  {
+   "sev": "note",
+   "text": "Outpatient clinic in I-3: conditional (Health Care Office).",
+   "src": [
+    "van_zdb_i2",
+    "van_zdb_i3",
+    "van_zdb_i1c",
+    "van_zdb_fc2"
+   ]
+  },
+  {
+   "sev": "q",
+   "text": "Outpatient clinic: keep-apart rules not checked here: generators (no distance in the source).",
+   "src": [
+    "arch_mv1329"
+   ]
+  }
+ ],
+ "walls": null,
+ "doors": null,
+ "stairs": null,
+ "exits": null,
+ "corridors": null,
+ "notYet": "Walls, doors (position and width), stairs, exits and corridors come with the section 5 rule sheet; not generated by the tool yet.",
+ "made": {
+  "date": "2026-11-07",
+  "by": "checks/tests/export_layout.js",
+  "picks": [
+   "refuge",
+   "warming_shelter",
+   "clinic"
+  ],
+  "pageErrors": []
+ }
+}
