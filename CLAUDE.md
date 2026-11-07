@@ -16,7 +16,7 @@ Beyond Data is J.B.'s siting tool for urban data centres as neighbours (UBC M.Ar
 - **Operator and industry figures are claims** (trust 50), labelled as such.
 - **Don't circumvent paywalls or blocked sites.** Say what's behind them and that J.B. can get it through UBC Library.
 - **Downloading needs J.B.'s explicit OK:** file name, source and size.
-- **With every addition, update the templates** (resident, community, full), check whether it's relevant to each user group, and ask J.B. if unsure.
+- **With every addition, update the templates** (four: Resident, Municipal, Engineering, Architecture; Community was dropped 3 Nov 2026), check whether it's relevant to each user group, and ask J.B. if unsure.
 - **Ask when uncertain.** One question, options, a recommendation.
 - **Writing:** Canadian spelling. Short, plain text. No long paragraphs. J.B. is not an engineer.
 - **Style:** IBM Plex Sans; red #CC746C only for key words; greys; plain and professional; nothing that reads as AI-made.
@@ -37,11 +37,13 @@ A part's trust is the lowest of its inputs. Ranges, not points. Burdens are reco
 
 ## 4. Source of truth
 
-- `register/formula_register.json` holds every part (195), formula, coefficient, source and trust rating.
+- `register/formula_register.json` holds every part (195 on 24 Oct; more since), formula, coefficient, source and trust rating.
 - Generated from it, never hand-edited: `formula_register.md`, `diagram_data.json`, `templates.json` (+ copies in `tool/`), `workflow-map.html`. Rebuild steps are in `README.md`.
 - Every register change is a dated script in `register/patches/` and is noted in the build plan's decisions log.
 
-## 5. How work proceeds (from the build plan)
+## 5. How work proceeds (from the build plan) — OUT OF DATE
+
+> Written 24 Oct 2026, before the typology library. Kept for its principles only; the order of work is `WORKLIST.md`.
 
 Phases, in order. Don't start one until the previous gate has passed and J.B. has said "go".
 
@@ -88,9 +90,9 @@ Large multi-agent runs use a lot of usage. Run them stage by stage, and tell J.B
 
 ## 8. Git
 
-- Repo: `JennaBruggeman/beyond-data-siting-tool` (private).
+- Repo: `JennaBruggeman/beyond-data-siting-tool`. **Public since 28 Oct 2026** (for the mid-review page): nothing course-only (Altalis lot lines, boards that show them) and no licensed files (NFPA, CSA, ASHRAE, BSI/IEC PDFs or screenshots) may go in. Check every push for them.
 - Commit as `Jenna Bruggeman <bangpowjenna@gmail.com>`, one commit per finished step, plain messages.
-- Pushes go from J.B.'s computer through the Claude Link folder. Never print credentials.
+- Pushes go from J.B.'s computer, only with her OK; never `backup/pre-purge-2026-10-28`, nothing to `main` without her approval. Never print credentials.
 - Never commit raw data, BC Assessment or Altalis files, map tiles, video or audio (see `.gitignore`).
 - `lot_proforma/` is a separate project and stays out of this repo.
 
