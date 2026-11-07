@@ -7,7 +7,7 @@
 //   env TPL=resident,community,full,arch  VP=desk,phone  LOTS=V09,E05  SHOTDIR=<dir>
 // Needs the tool served at http://localhost:8766. One browser, one page at a time.
 const fs = require('fs'), path = require('path');
-const NM = (process.env.NODE_PATH || '').split(':')[0];
+const NM = (process.env.NODE_PATH || '').split(require('path').delimiter)[0];
 const { chromium } = require('playwright');
 
 const G = (lab, sub, city, tile, id, ans) => ({ lab, sub, sel: { city, tile, id }, ans: ans || { built: 'new', extent: 'whole', floor: '' } });

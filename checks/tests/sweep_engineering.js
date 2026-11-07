@@ -2,7 +2,7 @@
 // Usage (from checks/tests/): NODE_PATH=<node_modules with playwright> node sweep_engineering.js <outjson> <shotdir> [lotKey ...]
 // Needs the tool served at http://localhost:8766. Setup copied from golden_run.js. One browser, one page at a time.
 const fs = require('fs'), path = require('path');
-const NM = (process.env.NODE_PATH || '').split(':')[0];
+const NM = (process.env.NODE_PATH || '').split(require('path').delimiter)[0];
 const { chromium } = require('playwright');
 const N = { built: 'new', extent: 'whole', floor: '' }, X = { built: 'existing', extent: 'whole', floor: '' };
 const LOTS = {

@@ -2,7 +2,7 @@
 // Usage (from checks/tests/): NODE_PATH=<node_modules with playwright> node sweep_community.js <outdir> [lotKey ...]
 // Needs the tool at http://localhost:8766. Writes <outdir>/<lot>.json (every step's text, errors, checks); screenshots of failures in $SHOTDIR.
 const fs = require('fs'), path = require('path');
-const NM = (process.env.NODE_PATH || '').split(':')[0];
+const NM = (process.env.NODE_PATH || '').split(require('path').delimiter)[0];
 const { chromium } = require('playwright');
 const L = (city, tile, id, lab, o) => Object.assign({ sel: { city, tile, id }, lab }, o || {});
 const LOTS = {
