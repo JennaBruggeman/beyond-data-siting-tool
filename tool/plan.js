@@ -43,29 +43,47 @@ function build(P){ if(!P||!P.s) return null; const A=BD.archTest, s=P.s, M=s.M, 
      1.0 m beside the strip), and the corridor runs between them, so every room along it opens onto it */
   const strip=alongU?(lowSide?[H[2],H[2]+cw,H[2]+sa]:[H[3]-cw,H[3],H[3]-sa]):(lowSide?[H[0],H[0]+cw,H[0]+sa]:[H[1]-cw,H[1],H[1]-sa]); /* [corridor from, to, stair inner edge] */
   const sLo=Math.min(strip[0],strip[2]), sHi=Math.max(strip[1],strip[2]);
-  const cor=alongU?[H[0]+sb,H[1]-sb,strip[0],strip[1]]:[strip[0],strip[1],H[2]+sb,H[3]-sb];
-  const sA=alongU?[H[0],H[0]+sb,sLo,sHi]:[sLo,sHi,H[2],H[2]+sb], sB=alongU?[H[1]-sb,H[1],sLo,sHi]:[sLo,sHi,H[3]-sb,H[3]];
+  const DP0=DP?DP.L.pieces:[], avoid=DP0.filter(q=>q.r&&(q.id==='electrical'||q.id==='battery'||q.id==='dock')).map(q=>q.r), clash=r=>avoid.reduce((t,a)=>t+(over(r,a)?(Math.min(r[1],a[1])-Math.max(r[0],a[0]))*(Math.min(r[3],a[3])-Math.max(r[2],a[2])):0),0);
+  /* 7 Nov 2026 (Cowork, V339 boards: the stair doors were 7.2 m apart across a 7 m corridor against the 13.6 m needed): exits from a floor area must be at least
+     half its greatest diagonal apart (NBC 3.4.2.3; with the 9 m figure as WORKLIST 5 states it, the larger used; clause text not in the repo ?). Measured here
+     straight between the nearest door edges, which is never longer than the path (the path-based check 8 is still to come). Option 1: the two stairs in line
+     at the ends of the corridor. Where that is too close, option 2: one stair at the far corner of the floor, across from the corridor, reached by a 2.0 m spur
+     corridor along the end wall; the corner that takes least of the UPS, battery and dock rooms is used (drawing choice). */
+  const need=Math.max(Math.hypot(H[1]-H[0],H[3]-H[2])/2,9), apart=(a,b)=>r2(Math.max(0,Math.hypot(a.u-b.u,a.v-b.v)-(a.w+b.w)/2));
+  const opt1=()=>{ const cor=[H[0]+sb,H[1]-sb,strip[0],strip[1]], sA=[H[0],H[0]+sb,sLo,sHi], sB=[H[1]-sb,H[1],sLo,sHi]; return {cors:[{id:'dc_corridor',r:cor}],sA,sB,dA:doorOn(shared(sA,cor),0.5,RULES.door.w),dB:doorOn(shared(sB,cor),0.5,RULES.door.w),cA:'dc_corridor',cB:'dc_corridor',kind:'in line at the corridor ends'}; };
+  /* the far stair may slide along the far side wall, past the UPS, battery and dock rooms at that end, so it takes none of them (drawing choice) */
+  const opt2=(endA,off)=>{ const fl=lowSide?[H[3]-sb,H[3]]:[H[2],H[2]+sb], sA=endA?[H[1]-off-sa,H[1]-off,fl[0],fl[1]]:[H[0]+off,H[0]+off+sa,fl[0],fl[1]];
+    const spU=endA?[H[1]-off-sa-cw,H[1]-off-sa]:[H[0]+off+sa,H[0]+off+sa+cw], spur=[spU[0],spU[1],Math.min(fl[0],strip[0]),Math.max(fl[1],strip[1])];
+    const sB=endA?[H[0],H[0]+sb,sLo,sHi]:[H[1]-sb,H[1],sLo,sHi], cor=endA?[H[0]+sb,spU[1],strip[0],strip[1]]:[spU[0],H[1]-sb,strip[0],strip[1]];
+    const shA=shared(sA,spur), shB=shared(sB,cor); if(!shA||!shB) return null;
+    return {cors:[{id:'dc_corridor',r:cor},{id:'dc_spur',r:spur}],sA,sB,dA:doorOn(shA,0.5,RULES.door.w),dB:doorOn(shB,0.5,RULES.door.w),cA:'dc_spur',cB:'dc_corridor',kind:'one in line, one at the far corner by a spur corridor',clash:clash(sA)}; };
+  let CO=opt1(); CO.apart=apart(CO.dA,CO.dB);
+  const offs=e=>[0,...avoid.map(a=>e?H[1]-a[0]:a[1]-H[0]).filter(x=>x>0.01&&x<(H[1]-H[0])/2)];
+  if(CO.apart<need){ const c2=[0,1].flatMap(e=>offs(e).map(o=>opt2(e,o))).filter(Boolean).map(c=>Object.assign(c,{apart:apart(c.dA,c.dB)})).filter(c=>c.apart>=need).sort((a,b)=>a.clash-b.clash||b.apart-a.apart)[0]; if(c2) CO=c2; }
+  const sA=CO.sA, sB=CO.sB, CORS=CO.cors.map(c=>c.r);
+  const exitSep=[{block:'data centre',stairs:CO.kind,apart_m:CO.apart,need_m:r2(need),ok:CO.apart>=need,how:'straight between the nearest door edges (never longer than the path; check 8 to come)'}];
+  if(CO.apart<need) flags.push(`Data centre: its stair doors are ${CO.apart} m apart, less than the ${r2(need)} m needed (half the floor's diagonal, NBC 3.4.2.3), with either stair arrangement (?)`);
   const dcLevels=DP?[...new Set(DP.out.map(q=>Math.round(q.base*10)/10))].sort((a,b)=>a-b):[];
   const dcGround=dcLevels.length?dcLevels[0]:null;
   dcLevels.forEach(z=>{ const S=st(z), pcs=DP.L.pieces.filter(q=>Math.round(q.base*10)/10===z);
-    S.corridors.push({id:'dc_corridor',block:'data centre',rect:R(cor),w:cw});
+    CO.cors.forEach(c=>S.corridors.push({id:c.id,block:'data centre',rect:R(c.r),w:cw}));
     [sA,sB].forEach((r,i)=>S.stairs.push({id:'dc_stair_'+(i?'B':'A'),block:'data centre',rect:R(r)}));
     pcs.forEach((q,qi)=>{ if(!q.r){ S.rooms.push({id:q.id,name:q.name,block:'data centre',outline:true,m2:r2(q.m2),note:'not a rectangle: not subdivided (?)'}); flags.push(`${q.name} on storey ${z} m is not a rectangle: left whole, no door placed (?)`); return; }
-      subAll([q.r],[cor,sA,sB]).forEach((r,k)=>S.rooms.push({id:q.id,name:q.name,block:'data centre',room:q.id,rect:R(r),m2:r2(area(r)),part:k})); });
-    /* doors: the parts of one room (a room cut by the corridor or a stair) are one room. A room with a part on the corridor gets its door(s) there; a room
+      subAll([q.r],CORS.concat([sA,sB])).forEach((r,k)=>S.rooms.push({id:q.id,name:q.name,block:'data centre',room:q.id,rect:R(r),m2:r2(area(r)),part:k})); });
+    /* doors: the parts of one room (a room cut by the corridor or a stair) are one room. A room with a part on a corridor gets its door(s) there; a room
        without one opens into a neighbouring room that is reached (repeated until none is left), flagged; one that still has no way in is flagged */
     const rooms=S.rooms.filter(x=>x.block==='data centre'&&x.rect), keys=[...new Set(rooms.map(x=>x.room))], reached=new Set();
-    keys.forEach(k=>{ const parts=rooms.filter(x=>x.room===k), best=parts.map(x=>({x,sh:shared(x.rect,cor)})).filter(o=>o.sh).sort((a,b)=>(b.sh.to-b.sh.from)-(a.sh.to-a.sh.from))[0];
+    keys.forEach(k=>{ const parts=rooms.filter(x=>x.room===k), best=parts.flatMap(x=>CO.cors.map(c=>({x,c,sh:shared(x.rect,c.r)}))).filter(o=>o.sh).sort((a,b)=>(b.sh.to-b.sh.from)-(a.sh.to-a.sh.from))[0];
       if(!best) return; const m2=parts.reduce((t,x)=>t+x.m2,0), two=m2>=RULES.bigRoom.m2&&best.sh.to-best.sh.from>4; reached.add(k);
-      (two?[0.25,0.75]:[0.5]).forEach(t=>S.doors.push(Object.assign({from:best.x.id,room:k,to:'dc_corridor'},doorOn(best.sh,t,RULES.door.w)))); });
+      (two?[0.25,0.75]:[0.5]).forEach(t=>S.doors.push(Object.assign({from:best.x.id,room:k,to:best.c.id},doorOn(best.sh,t,RULES.door.w)))); });
     for(let pass=0;pass<4;pass++) keys.filter(k=>!reached.has(k)).forEach(k=>{ const parts=rooms.filter(x=>x.room===k); let hit=null;
       for(const x of parts){ for(const y of rooms){ if(!reached.has(y.room)||y.room===k) continue; const sh=shared(x.rect,y.rect); if(sh&&sh.to-sh.from>=1.2){ hit={x,y,sh}; break; } } if(hit) break; }
       if(hit){ reached.add(k); S.doors.push(Object.assign({from:hit.x.id,room:k,to:hit.y.id,through:true},doorOn(hit.sh,0.5,RULES.door.w))); flags.push(`${hit.x.name} (storey ${z} m) opens into ${hit.y.name}, not onto the corridor (drawing choice ?)`); } });
     keys.filter(k=>!reached.has(k)).forEach(k=>{ const x=rooms.find(y=>y.room===k); flags.push(`${x.name} (storey ${z} m) has no way in: it touches neither the corridor nor a room that is reached (?)`); });
-    [sA,sB].forEach((r,i)=>{ const sh=shared(r,cor); if(sh) S.doors.push(Object.assign({from:'dc_stair_'+(i?'B':'A'),to:'dc_corridor'},doorOn(sh,0.5,RULES.door.w))); });
-    if(z===dcGround) [sA,sB].forEach((r,i)=>{ const out=alongU?[r[i?1:0],r[i?1:0],r[2],r[3]]:[r[0],r[1],r[i?3:2],r[i?3:2]], s2=alongU?{axis:'u',at:r[i?1:0],from:r[2],to:r[3]}:{axis:'v',at:r[i?3:2],from:r[0],to:r[1]};
+    S.doors.push(Object.assign({from:'dc_stair_A',to:CO.cA},CO.dA),Object.assign({from:'dc_stair_B',to:CO.cB},CO.dB));
+    if(z===dcGround) [sA,sB].forEach((r,i)=>{ const eU=Math.abs(r[0]-H[0])<0.01||Math.abs(r[1]-H[1])<0.01, s2=eU?{axis:'u',at:Math.abs(r[0]-H[0])<0.01?r[0]:r[1],from:r[2],to:r[3]}:{axis:'v',at:Math.abs(r[2]-H[2])<0.01?r[2]:r[3],from:r[0],to:r[1]}; /* out through the end wall, or the side wall where the stair slid along it */
       S.exits.push(Object.assign({id:'dc_exit_'+(i?'B':'A'),block:'data centre',via:'dc_stair_'+(i?'B':'A'),to:'outside'},doorOn(s2,0.5,RULES.door.w))); });
-    S.walls.push(...walls(S.rooms.filter(x=>x.rect&&x.block==='data centre').map(x=>x.rect).concat([cor,sA,sB]),[H])); });
+    S.walls.push(...walls(S.rooms.filter(x=>x.rect&&x.block==='data centre').map(x=>x.rect).concat(CORS,[sA,sB]),[H])); });
   if(dcGround!=null&&dock){ const S=st(dcGround); const sh=alongU?{axis:'u',at:s.dir<0?dock[1]:dock[0],from:dock[2],to:dock[3]}:null; if(sh) S.exits.push(Object.assign({id:'dock_door',block:'data centre',via:'dock',to:'truck route',kind:'loading'},doorOn(sh,0.5,r2(sh.to-sh.from-0.6)))); }
   /* 2. program blocks: one room per storey; a block on more than one storey gets a stair at each end and a lift beside the first (Vancouver: every storey) */
   const prog=[];
@@ -88,6 +106,8 @@ function build(P){ if(!P||!P.s) return null; const A=BD.archTest, s=P.s, M=s.M, 
         S.exits.push(Object.assign({id:b.id+'_back',block:b.id,to:'outside'},doorOn({axis:'u',at:bu,from:B[2],to:B[3]},0.5,RULES.door.w)));
         if(!b.front) flags.push(`${b.p.name}: not on the street front, so its main door is not a street entrance (?)`); }
       S.walls.push(...walls(rs.concat(cuts),[B])); }
+    if(n>1){ const d=[pA,pB].map(c=>{ const x=subAll([B],cuts).map(r=>shared(r,c)).find(Boolean); return x?doorOn(x,0.5,RULES.door.w):null; }); if(d[0]&&d[1]){ const nd=Math.max(Math.hypot(B[1]-B[0],B[3]-B[2])/2,9), ap=apart(d[0],d[1]);
+      exitSep.push({block:b.p.name,stairs:'at opposite corners',apart_m:ap,need_m:r2(nd),ok:ap>=nd,how:'straight between the nearest door edges'}); if(ap<nd) flags.push(`${b.p.name}: its stair doors are ${ap} m apart, less than the ${r2(nd)} m needed (NBC 3.4.2.3 ?)`); } }
     prog.push({id:b.id,name:b.p.name,storeys:n,storeyH:r2(sh),gross:r2(area(B)*n),net:r2(net),asked:Math.round(b.q.m2||0),cores:n>1?['2 stairs','1 lift']:[],short:r2(Math.max(0,(b.q.m2||0)-net))});
     if(n>1&&(b.q.m2||0)-net>0.5) flags.push(`${b.p.name}: on ${n} storeys, ${Math.round(net)} m² net after its stairs and lift, ${Math.round((b.q.m2||0)-net)} m² short of its ${Math.round(b.q.m2||0)} m²`); });
   /* 3. step-free entrances: the ground storey slab against the street at each street door */
@@ -95,6 +115,6 @@ function build(P){ if(!P||!P.s) return null; const A=BD.archTest, s=P.s, M=s.M, 
   const entrances=Object.values(storeys).flatMap(S=>S.exits.filter(e=>e.entrance).map(e=>({id:e.id,block:e.block,u:e.u,v:e.v,slab_m:slab!=null?r2(slab):null,slabWhy:fcl?`at least the flood construction level ${fcl.v} m (${fcl.datum}; datum against the LiDAR not confirmed ?)`:'?',
     streetGrade_m:null,stepFree:'?',rule:RULES.ramp.why+(g.min!=null?`. Lot grade ${g.min}–${g.max} m, median ${g.med} m (datum ${g.datum}): if the street at the door differs from the slab by Δh, a 1:12 ramp of 12 × Δh m (plus landings, ?) runs inside the entrance; a lowered entrance floor at street grade is the alternative where the street is below the slab`:'')})));
   const out=Object.values(storeys).sort((a,b)=>a.z-b.z);
-  return {rules:RULES,storeys:out,programs:prog,entrances,flags,version:'rule sheet v0 (7 Nov 2026)'}; }
+  return {rules:RULES,storeys:out,programs:prog,entrances,exitSep,flags,version:'rule sheet v0.1 (7 Nov 2026)'}; }
 BD.plan={build,RULES};
 })();

@@ -227,7 +227,10 @@ function model(){
     const fl=!!(side&&side.autoU1)!==!!A.flip?-1:1, y=yardsOf(m,Z,side,fl); m.yards=y; /* Build 2: the street end is the front; "Swap the ends" swaps it */
     let u0=-F.L/2+(fl>0?y.front:y.rear), u1=F.L/2-(fl>0?y.rear:y.front), v0=-F.W/2+y.s0, v1=F.W/2-y.s1;
     m.yardRect=Z.yards?rectW(F,u0,u1,v0,v1):null; /* 2 Nov 2026: the line of the required yards, before the 61 m width cap (the fence stands on it) */
-    if(y.max){ if(u1-u0>y.max){ const c=(u0+u1)/2; u0=c-y.max/2; u1=c+y.max/2; } if(v1-v0>y.max){ const c=(v0+v1)/2; v0=c-y.max/2; v1=c+y.max/2; } }
+    /* 7 Nov 2026 (Cowork, V339 boards: 'the building front sits about 24 m behind the front lot line'): the zone's greatest building depth (I-2/I-3 61 m)
+       was centred on the lot, so on a deep lot the building stood back from the street. It is now counted from the front yard line (a drawing choice:
+       the by-law sets the depth, not where it starts). Across the lot (v) it stays centred. The ground behind it is left open (yard plant beyond it: ?). */
+    if(y.max){ if(u1-u0>y.max){ m.capRear=u1-u0-y.max; if(fl>0) u1=u0+y.max; else u0=u1-y.max; } if(v1-v0>y.max){ const c=(v0+v1)/2; v0=c-y.max/2; v1=c+y.max/2; } }
     m.inset=rectW(F,u0,u1,v0,v1); m.yardNote=Z.yardsKnown?'':'Yards and setbacks for this zone are not yet read, so the building may cover the whole lot.'; yardLines(m); const YE=m.edgeYards;
     /* J.B. 7 Nov 2026 (section 3 gate): an inside dock with no street or lane at the rear or sides gets a 6.1 m drive from the front lot line along the
        v0 side (the dock's side) to the rear. Vancouver: inside the side yard as far as it goes (a flagged option: the Director may allow a reduced side yard for loading and vehicular access, I-3 3.1.2.16);

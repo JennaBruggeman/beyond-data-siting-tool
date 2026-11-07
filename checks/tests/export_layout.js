@@ -48,7 +48,7 @@ const LOTS = {
       rules: R.map(x => ({ sev: x.sev, text: x.t, src: x.src || [] })),
       plan: PL,
       heatNetworks: { nets, note: 'From the trace in the tool of By-law 9552 Schedule A (register van9552, neuTraced; ±45 m). vanNEU2025 (the utility web page) gives no boundary. Inside the area, connection is compulsory for new buildings (By-law 9552 s. 2.1, condition r_de_compulsory).' },
-      notYet: 'Rule sheet v0 only: no bands, no fallback ladder, no shared lobby (its size has no code source), no path-based checks 8 and 9 yet (WORKLIST 5).'
+      notYet: 'Rule sheet v0.1: no bands, no fallback ladder, no shared lobby (its size has no code source); exit separation measured straight between doors (plan.exitSep), path-based checks 8 and 9 not yet (WORKLIST 5).'
     };
   }, picks);
   r.made = { date: new Date().toISOString().slice(0, 10), by: 'checks/tests/export_layout.js', picks, pageErrors: errs };

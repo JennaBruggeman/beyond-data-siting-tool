@@ -11,7 +11,7 @@ const BD=window.BD; const {$,esc}=BD;
 const CAT={list:null,byId:{},src:{},kind:{}};
 const AD=BD.data.arch; // lean refactor 3 Nov 2026: arch.js's own figures with their register ids (tool/data/arch.json)
 const DR=BD.data.dc_rooms; // 3 Nov 2026: the data centre's rooms with their register ids (tool/data/dc_rooms.json; register arch_dc_rooms)
-const A=BD.arch={picks:[],secure:'suggest',view:'3d',explode:false,labels:true /* Labels on/off (white interface, 3 Nov 2026) */,heat:null,storey:0,sel:null,saved:[],ready:null,ratio:null};
+const A=BD.arch={bands:false /* 7 Nov 2026 (J.B.): programs as bands of one building. UNFINISHED and off: plan.js does not draw the lobby, spine and cores yet; paused for the lot-type study (J.B. 7 Nov) */,picks:[],secure:'suggest',view:'3d',explode:false,labels:true /* Labels on/off (white interface, 3 Nov 2026) */,heat:null,storey:0,sel:null,saved:[],ready:null,ratio:null};
 const n0=v=>v==null||!isFinite(v)?'?':Math.round(v).toLocaleString('en-CA');
 const rg=(a,u)=>!a?'?':(a[0]===a[1]?n0(a[0]):n0(a[0])+'–'+n0(a[1]))+(u?' '+u:'');
 const mid=a=>a?(a[0]+a[1])/2:null;
@@ -69,7 +69,11 @@ function place(){ const An=BD.S.answers; if(!ratioNow()){ hallPick.key=null; ret
   const key=JSON.stringify([selId(),A.picks,A.ratio,Object.assign({},An,{hallOpt:null})]);
   if(hallPick.key!==key){ let info={tried:0,passed:0,n:0,under,best:null};
     if(under){ An.hallOpt='full'; }
-    else { An.hallOpt=null; BD.modelReset(); const M0=BD.model(), opts=(M0&&M0.hallOpts)||[]; info.n=opts.length; let best=null;
+    else { An.hallOpt=null; BD.modelReset(); const M0=BD.model(); let opts=(M0&&M0.hallOpts)||[];
+      /* 7 Nov 2026 (J.B.: 'programs must never be separate buildings'): in band mode the hall spans the full buildable width at the back, so the hall and the
+         program bands in front of it make one rectangle (WORKLIST 5, card 11: street → public programs → shared lobby → spine → data centre → plant yard) */
+      if(A.bands&&opts.length){ const wM=Math.max(...opts.map(o=>o.v[1]-o.v[0])); opts=opts.filter(o=>o.v[1]-o.v[0]>=wM-0.01); info.bands=true; }
+      info.n=opts.length; let best=null;
       for(const o of opts){ An.hallOpt=o.key; BD.modelReset(); info.tried++; { const pr=BD.setupProblems(true); if(pr.length){ (info.fails=info.fails||[]).push([o.key,pr[0]]); continue; } } const P=placeOnce(); if(!P||!P.s.M.hallOpt) continue; info.passed++;
         const sc=hallScore(P); if(!best||sc[0]>best.sc[0]+0.5||(Math.abs(sc[0]-best.sc[0])<=0.5&&(sc[1]<best.sc[1]||(sc[1]===best.sc[1]&&sc[2]<best.sc[2]-0.01)))) best={o,sc}; }
       An.hallOpt=best?best.o.key:'full'; info.best=best&&{key:best.o.key,k:best.o.k,st:best.o.st,top:best.o.top,along:best.o.along,a:best.o.a,fa:best.o.fa,drawn:best.sc[0]}; }
@@ -131,6 +135,7 @@ function placeOnce(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W
   if(RT&&s.hallM2<RT.dcM2-1) out.flags.push({t:`Data centre: its share (${n0(RT.dcM2)} m²) does not fit beside loading and the plant yard here; ${n0(s.hallM2)} m² drawn. Edit ratios or the set-up.`,src:['arch_ratios'],sev:'bad'});
   /* code limits block, they never just warn (J.B., 2 Nov 2026: "everything needs to follow the code"): no block above the zone's height limit,
      none past the floor-space ratio, none over an Edmonton BE area cap; setbacks and the hard distances are already no-go above */
+  const SPN=2.0 /* drawing: the spine, the 2.0 m public corridor (code minimum 1.1 m, arch_nbc3432) */, hF=dir<0?hu0:hu1, BANDS=!!(A.bands&&RT&&!under&&Math.abs(hv0-v0)<0.05&&Math.abs(hv1-v1)<0.05&&Math.abs(hF-uf)>=SPN+6), bandQ=[];
   for(const x of masses){ const {q,p}=x, nm=p.name.split(' (')[0];
     if(q.m2==null){ out.flags.push({t:`${nm}: no sourced typical size; type one to place it.`,src:p.size&&p.size.src,sev:'q'}); continue; }
     if(q.id==='refuge'&&!q.opt){ out.flags.push({t:'Refuge: choose a placement (own building, side by side, or under the hall). There is no default (J.B., 1 Nov 2026).',src:[],sev:'q'}); out.notDrawn.push(q.id); continue; }
@@ -141,8 +146,11 @@ function placeOnce(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W
     if(RT&&progUsed+q.m2>RT.progM2+0.5){ out.flags.push({t:`${nm}: ${n0(q.m2)} m² would pass the programs' share of the floor (${n0(RT.progM2)} m², ${n0(Math.max(0,RT.progM2-progUsed))} m² left); not drawn. Edit ratios to give programs more.`,src:['arch_ratios'],sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
     if(capF!=null&&floorUsed+q.m2>capF+0.5){ out.flags.push({t:`${nm}: ${n0(q.m2)} m² would pass the floor-space ratio (${n0(capF)} m² on this lot, ${n0(Math.max(0,capF-floorUsed))} m² left); not drawn.`,src:s.city==='van'?['van_zdb_i2','van_zdb_i3']:['edm_bl20001'],sev:'bad',id:q.id}); out.notDrawn.push(q.id); continue; }
     const grade=p.place&&p.place.grade, mustSt=s.city==='van'&&p.place&&p.place.street_entrance&&!(q.id==='refuge'&&q.opt==='side_by_side'&&false), atG=grade==='at grade'||mustSt, notG=grade==='not at grade'&&notAtGradeHere(p), roof=q.place==='roof';
+    if(BANDS&&!roof&&!(q.id==='refuge'&&q.opt==='own_building')){ bandQ.push({q,p,nm,atG,mustSt,notG,own0:p.size&&p.size.floor_height_m,md:minDims(q.id,s.city)}); floorUsed+=q.m2; progUsed+=q.m2; if(!industrialUse(q,code)) nonInd+=q.m2; continue; } /* placed below as bands */
     /* Build 2 (3 Nov 2026): on Vancouver I-3 lots a program's storeys are drawn at the schedule's minimums, 6.0 m on the first floor and 4.0 m above (s. 3.1.2.9; tool/data/arch.json storeyMin, register arch_hb_vanI3), or its own sourced height if taller. Elsewhere the hall's 6.0 m storey (ftf.ground), the hall's figure, not a program's (?). */
-    const own0=p.size&&p.size.floor_height_m, SM=s.city==='van'&&AD.storeyMin&&AD.storeyMin[code]||null, sh=(own0||ftf.ground), hOf=(b0,n)=>SM?(b0<0.01?Math.max(own0||0,SM.ground)+Math.max(own0||0,SM.above)*(n-1):Math.max(own0||0,SM.above)*n):sh*n, own=q.id==='refuge'&&q.opt==='own_building', gc=own?2:0; // own building: one 2 m cell clear all round (drawn, not a rule)
+    /* 7 Nov 2026 (Cowork, V339 boards: clinic storeys 4 m against the data centre's 6 m): above the ground storey a program's storeys are drawn at the hall's
+       storey height where that is taller than the minimum, so the floors line up and the blocks share floor levels (a drawing choice; 4.0 m stays the I-3 minimum) */
+    let hallSH=out.hall&&out.hall.storeys?out.hall.h/out.hall.storeys:0; const own0=p.size&&p.size.floor_height_m, SM=s.city==='van'&&AD.storeyMin&&AD.storeyMin[code]||null, sh=(own0||ftf.ground), hOf=(b0,n)=>SM?(b0<0.01?Math.max(own0||0,SM.ground)+Math.max(own0||0,SM.above,hallSH)*(n-1):Math.max(own0||0,SM.above,hallSH)*n):sh*n, own=q.id==='refuge'&&q.opt==='own_building', gc=own?2:0; // own building: one 2 m cell clear all round (drawn, not a rule)
     const st0=Math.max(1,q.storeys||1), [mA,mB]=minDims(q.id,s.city); // short and long sides a program needs to work
     /* the search; why records what stopped the spots it tried (hall fix, 3 Nov 2026: a program not drawn names the rule) */
     const search=(g,why)=>{ let best=null, st=st0;
@@ -157,7 +165,9 @@ function placeOnce(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W
         }
         if(best) break; }
       return best?Object.assign(best,{st}):null; };
-    const why={}; let best=search(HG(),why), st=best?best.st:st0;
+    const why={}; let best=search(HG(),why), st=best?best.st:st0, unaligned=false;
+    /* where storeys at the hall's height leave no spot (the height limit), the program is drawn at the minimums and its floors flagged as not lining up */
+    if(!best&&SM&&hallSH>Math.max(own0||0,SM.above)+0.01){ const keep=hallSH; hallSH=0; const w2={}; const b2=search(HG(),w2); if(b2){ best=b2; st=b2.st; unaligned=keep; } else hallSH=keep; }
     if(!best){ /* name what stops it, each with its register id */ const R=[], src=[]; const add=(t,ids)=>{ R.push(t); (ids||[]).forEach(x=>{ if(!src.includes(x)) src.push(x); }); };
       const zs=s.M.Z&&s.M.Z.srcId?[s.M.Z.srcId]:(s.city==='van'?['van_zdb_i2','van_zdb_i3']:['edm_bl20001']);
       const sideSrc=q.id==='pool'?['arch_fina_FR2020','arch_sportEngPoolsDGN',s.city==='edm'?'arch_sup_nbcAE7Pools':'arch_bcPoolDesign2025']:null;
@@ -176,9 +186,93 @@ function placeOnce(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W
     /* 7 Nov 2026 (J.B.): a block on several storeys is drawn as real storeys: each floor its own room, with two stairs and a lift (plan.js, rule sheet v0).
        The clinic may sit on upper floors in Vancouver (J.B. 4 Nov 2026, Q7): a note. For other programs, splitting across floors stays a design question. */
     if(st>st0) out.flags.push({t:`${nm}: ${n0(q.m2)} m² on ${st} storeys of about ${n0(q.m2/st)} m² each${mustSt?' (it does not fit on one floor along the street front, where it needs its own entrance)':' (it does not fit on one floor here)'}, with two stairs and a lift (plan layer; their floor comes out of the program's, net floor in the plan).${q.id==='clinic'?' A clinic may sit on upper floors (J.B. 4 Nov 2026).':' Whether this program can be split across floors is a design question.'}`,src:q.id==='clinic'?['arch_ratios']:[],sev:q.id==='clinic'?'note':'q',id:q.id});
+    if(unaligned&&st>1) out.flags.push({t:`${nm}: its upper floors are drawn ${n0(SM.above*10)/10} m apart (the ${code} minimum), not at the data centre's ${n0(unaligned*10)/10} m storeys, because ${n0(st)} storeys at that height pass the ${n0(Hmax)} m limit; floors that do not line up share no door (drawing choice ?).`,src:['arch_hb_vanI3'],sev:'q',id:q.id});
     const {base,i,j,dc,wc}=best, hh=hOf(base,st), spread=st>st0, uA=dir<0?bu0+i*cs:bu1-(i+dc)*cs, uB=uA+dc*cs, vA=v0+j*cs, vB=vA+Math.min(wc*cs,q.m2/st/(dc*cs)), gap=gc*cs; // exact area: full cells along u, the width trimmed to the size
     floorUsed+=q.m2; progUsed+=q.m2; if(base===0) gUsed+=q.m2/st; if(!industrialUse(q,code)) nonInd+=q.m2; occ.push([uA,uB,vA,vB,base,base+hh,false]); if(own) occ.push([uA-gap,uB+gap,vA-gap,vB+gap,0,1e9,true]);
     out.boxes.push({id:q.id,p,q,ring:G.rectW(F,uA,uB,vA,vB),base,h:hh,storeys:st,sh:hh/st,shSrc:SM?['arch_hb_vanI3']:own0?(p.size.src||[]):null,front:base===0&&Math.abs((dir<0?uA:uB)-uf)<cs+0.01,top:base>=hallTop-0.01,roof,u:[uA,uB],v:[vA,vB],gap,own,spread}); }
+  /* 7 Nov 2026 (J.B.: 'programs must never be separate buildings'; WORKLIST 5 card 11): bands inside one building outline. From the street: the public
+     programs side by side, each reaching the street, with the shared lobby between the first two; behind them the spine (a 2.0 m public corridor across the full
+     width) against the data centre's front face, the 2 h wall (NBC Table 3.1.3.1); then the data centre; then the plant yard. Upper storeys stack on the same
+     outline at the data centre's storey height (floors line up); a core (exit stair and lift) rises in the lobby's column and a second exit stair at the
+     outline's side. A program on several storeys keeps the same columns on each. Drawing choices: lobby 6.0 m wide, slices at least 6 m wide (minDims), the
+     floor left over is drawn as "floor not assigned (?)". What does not fit is not drawn, with the reason (the fallback ladder is still to come). */
+  out.band=null; if(BANDS){ const lo=dir<0, inL=r=>inLot(r[0]+0.05,r[2]+0.05)&&inLot(r[1]-0.05,r[2]+0.05)&&inLot(r[0]+0.05,r[3]-0.05)&&inLot(r[1]-0.05,r[3]-0.05);
+    const sp=lo?[hF-SPN,hF]:[hF,hF+SPN]; let uF=uf; { const back=lo?sp[0]:sp[1]; for(let k=0;k<200;k++){ const r=lo?[uF,back,hv0,hv1]:[back,uF,hv0,hv1]; if(inL(r)) break; uF+=lo?0.05:-0.05; } } /* the front face: the front yard line, or as near as a slanted line allows */
+    const bu=lo?[uF,sp[0]]:[sp[1],uF], d=bu[1]-bu[0], W=hv1-hv0, LW=6.0 /* drawing */, gH=Math.max(ftf.ground,(s.city==='van'&&AD.storeyMin&&AD.storeyMin[code]||{}).ground||0), hallSH0=out.hall.h/Math.max(1,out.hall.storeys||1);
+    const SMb=s.city==='van'&&AD.storeyMin&&AD.storeyMin[code]||null, cover=RT&&RT.cover?RT.cover:Infinity;
+    const run=uH=>{ const kMax=Math.max(0,Math.floor((Hmax-gH)/uH+1e-6)), boxes=[], miss=[], notes=[];
+      /* ground: street programs first (in the masses order), each a full-depth slice; the lobby after the first */
+      const gq=bandQ.filter(x=>!x.notG), slices=[]; let vC=hv0, lobby=null, gArea=0; const g0=(hu1-hu0)*(hv1-hv0);
+      const place0=x=>{ const w=Math.max(x.q.m2/d,Math.min(x.md[0],W)); if(vC+w>hv1+0.01) return false; if(Math.min(w,d)<Math.min(x.md[0],6)-0.01||Math.max(w,d)<x.md[1]-0.01) return false; if(g0+gArea+w*d>cover+0.5) return false;
+        slices.push({x,v:[vC,vC+w]}); vC+=w; gArea+=w*d; return true; };
+      for(const x of gq){ if(!x.atG&&!x.mustSt&&slices.length&&lobby) continue; /* programs that may go up wait for the upper storeys once the street ones are down */
+        if(place0(x)&&!lobby&&vC+LW<=hv1+0.01){ lobby=[vC,vC+LW]; vC+=LW; } }
+      if(!lobby&&vC+LW<=hv1+0.01){ lobby=[vC,vC+LW]; vC+=LW; } if(!lobby) return null;
+      /* programs not placed yet: ground if a street/at-grade one still fits, else upper storeys */
+      const upQ=[]; for(const x of bandQ){ if(slices.some(s2=>s2.x===x)) continue; if((x.atG||x.mustSt)&&!x.notG){ if(!place0(x)) miss.push([x,'ground: no street-front slice of its size is left in the band']); continue; }
+        if(!x.notG&&place0(x)) continue; upQ.push(x); }
+      /* upper storeys: an interval per storey around the lobby column (the core's), grown outward */
+      const core=[lobby[0],lobby[1]], coreA=3.0*6.0+2.5*2.5, iv=[]; for(let k=1;k<=kMax;k++) iv.push(null);
+      const ups=[];
+      for(const x of upQ){ let ok=null;
+        for(let n=1;n<=kMax&&!ok;n++){ if(x.atG||x.mustSt) break; if(n>1&&x.p.kind==='mass'&&x.q.id==='pool') break;
+          for(let k0=1;k0+n-1<=kMax&&!ok;k0++){ const ks=Array.from({length:n},(_,i)=>k0+i), empty=ks.every(k=>!iv[k-1]);
+            const w=(x.q.m2/n+(empty?coreA:0))/d; if(w>W+0.01||Math.min(w,d)<Math.min(x.md[0],6)-0.01||Math.max(w,d)<x.md[1]-0.01) continue;
+            let r=null; if(empty){ const c=(core[0]+core[1])/2; let a=Math.max(hv0,Math.min(c-w/2,hv1-w)); r=[a,a+w]; if(r[0]>core[0]+0.01||r[1]<core[1]-0.01) r=null; }
+            else if(ks.every(k=>iv[k-1])){ const A0=Math.min(...ks.map(k=>iv[k-1][0])), B0=Math.max(...ks.map(k=>iv[k-1][1])); if(A0-w>=hv0-0.01) r=[A0-w,A0]; else if(B0+w<=hv1+0.01) r=[B0,B0+w]; }
+            if(r){ ok={ks,r}; } } }
+        if(!ok){ miss.push([x,`upper storeys: no ${kMax?'run of storeys':'storey'} at ${uH} m under the ${n0(Hmax)} m limit holds it beside the others`]); continue; }
+        ok.ks.forEach(k=>{ const c=iv[k-1]; iv[k-1]=c?[Math.min(c[0],ok.r[0]),Math.max(c[1],ok.r[1])]:ok.r.slice(); }); ups.push({x,...ok}); }
+      const mk=(x,v,base,n,sh,front)=>{ const u=bu.slice(); return {id:x.q.id,p:x.p,q:x.q,ring:G.rectW(F,u[0],u[1],v[0],v[1]),base,h:n*sh,storeys:n,sh,shSrc:SMb?['arch_hb_vanI3']:null,front,top:false,roof:false,u,v:v.slice(),gap:0,own:false,spread:n>1,band:true,drawnM2:(v[1]-v[0])*d*n}; };
+      slices.forEach(s2=>boxes.push(mk(s2.x,s2.v,0,1,gH,true)));
+      ups.forEach(o=>boxes.push(mk(o.x,o.r,gH+(o.ks[0]-1)*uH,o.ks.length,uH,false)));
+      /* the floor in the outline no program takes: ground right of the slices; upper storeys outside each interval are open (the outline steps back), gaps inside an interval are not assigned */
+      const free=[]; if(vC<hv1-0.05) free.push({base:0,h:gH,v:[vC,hv1]});
+      iv.forEach((c,i)=>{ if(!c) return; const base=gH+i*uH; const used=ups.filter(o=>o.ks.includes(i+1)).map(o=>o.r).sort((a,b)=>a[0]-b[0]); let cur=c[0]; for(const r of used){ if(r[0]>cur+0.05) free.push({base,h:uH,v:[cur,r[0]]}); cur=Math.max(cur,r[1]); } if(cur<c[1]-0.05) free.push({base,h:uH,v:[cur,c[1]]}); });
+      return {boxes,miss,notes,lobby,core,iv,free,uH,kMax,gArea}; };
+    let B=run(hallSH0||gH), split=false; if(B&&B.miss.length&&SMb&&SMb.above<B.uH-0.01){ const B2=run(Math.max(SMb.above,...bandQ.map(x=>x.own0||0))); if(B2&&B2.miss.length<B.miss.length){ B=B2; split=true; } }
+    if(B){ B.boxes.forEach(b=>{ out.boxes.push(b); occ.push([b.u[0],b.u[1],b.v[0],b.v[1],b.base,b.base+b.h,false]); if(b.base===0) gUsed+=(b.u[1]-b.u[0])*(b.v[1]-b.v[0]); });
+      B.boxes.forEach(b=>{ const ex=b.drawnM2-(b.q.m2||0); if(ex>1) out.flags.push({t:`${b.p.name.split(' (')[0]}: drawn at ${n0(b.drawnM2)} m², ${n0(ex)} m² more than its ${n0(b.q.m2)} m², because a slice of the band is at least ${n0(Math.min(b.v[1]-b.v[0],6))} m wide (drawing choice).`,src:[],sev:'q',id:b.id}); });
+      B.miss.forEach(([x,why])=>{ out.flags.push({t:`${x.nm}: not drawn. Stopped by the bands: ${why} (the fallback ladder is still to come).`,src:[],sev:'bad',id:x.q.id,stop:[why]}); out.notDrawn.push(x.q.id); });
+      if(split) out.flags.push({t:`Programs above the ground storey: drawn at ${B.uH} m storeys (the ${code} minimum), not at the data centre's ${n0(hallSH0*10)/10} m, so more fit under the ${n0(Hmax)} m limit: a split level. The floors do not line up with the data centre's; they share no door with it (drawing choice ?).`,src:['arch_hb_vanI3'],sev:'q'});
+      const upTop=B.iv.reduce((t,c,i)=>c?gH+(i+1)*B.uH:t,gH);
+      out.band={u:bu,spine:sp,v:[hv0,hv1],uF,d,lobby:B.lobby,core:B.core,storeys:[{base:0,h:gH,iv:[hv0,hv1]}].concat(B.iv.map((c,i)=>c?{base:gH+i*B.uH,h:B.uH,iv:c}:null).filter(Boolean)),free:B.free,uH:B.uH,gH,split,top:upTop,hallSH:hallSH0,
+        why:'bands: street → public programs → shared lobby → spine → data centre → plant yard (WORKLIST 5, card 11); the spine-to-data-centre wall is 2 h (NBC Table 3.1.3.1)'};
+      out.flags.push({t:`Bands: one building. ${B.boxes.filter(b=>b.base===0).length} program${B.boxes.filter(b=>b.base===0).length===1?'':'s'} along the street with the shared lobby (${n0(LW)} m wide, drawing choice), a ${SPN} m spine behind them against the data centre (2 h wall, NBC Table 3.1.3.1)${B.boxes.some(b=>b.base>0)?`, ${B.boxes.filter(b=>b.base>0).length} above on the same outline at ${B.uH} m storeys`:''}. Street to back: ${n0(d)} m of programs, ${SPN} m spine, ${n0(Math.abs(hu1-hu0))} m data centre.`,src:['arch_ratios'],sev:'note'}); }
+    else bandQ.forEach(x=>{ out.flags.push({t:`${x.nm}: not drawn. Stopped by the bands: the shared lobby does not fit across the front (the fallback ladder is still to come).`,src:[],sev:'bad',id:x.q.id}); out.notDrawn.push(x.q.id); }); }
+  /* 7 Nov 2026 (Cowork, V339 boards: 'the refuge, warming shelter and data centre don't touch: 0.82 m between the data centre and the refuge'): the 2 m grid
+     leaves slivers between blocks. A block within JOIN (6) m of the hall (or of another block at the same height) is stretched to touch it, its other side
+     trimmed so its floor stays the same; the shared face is a fire separation (the rules give its rating). A block that cannot be stretched (minimum
+     sides, the lot, plant, loading, a block resting on it, its street front) stays apart and is flagged for the spatial separation check (NBC 3.2.3, not done).
+     The street front: a front block is also stretched to the front yard line. JOIN is a drawing choice. */
+  { const JOIN=6 /* drawing */, hallR=[hu0,hu1,hv0,hv1,hallBase,hallTop], zOv=(a0,a1,b0,b1)=>Math.min(a1,b1)-Math.max(a0,b0)>0.01, ar=r=>(r[1]-r[0])*(r[3]-r[2]);
+    const hit=(r,b)=>{ /* r overlaps a no-go, another block at an overlapping height, or the hall */ const z0=b.base, z1=b.base+b.h;
+      for(const o of occ){ if(o===b.occ) continue; if(r[0]<o[1]-0.01&&o[0]<r[1]-0.01&&r[2]<o[3]-0.01&&o[2]<r[3]-0.01&&(o[6]||zOv(z0,z1,o[4],o[5]))) return true; } return false; };
+    const inL=r=>inLot(r[0]+0.05,r[2]+0.05)&&inLot(r[1]-0.05,r[2]+0.05)&&inLot(r[0]+0.05,r[3]-0.05)&&inLot(r[1]-0.05,r[3]-0.05);
+    const onTop=b=>out.boxes.filter(x=>x!==b&&Math.abs(x.base-(b.base+b.h))<0.01&&x.u[0]<b.u[1]-0.01&&b.u[0]<x.u[1]-0.01&&x.v[0]<b.v[1]-0.01&&b.v[0]<x.v[1]-0.01);
+    const restsOn=(r,b)=>{ if(b.base<0.01) return true; const S=[hallR].concat(out.boxes.filter(x=>x!==b).map(x=>[x.u[0],x.u[1],x.v[0],x.v[1],x.base,x.base+x.h])).filter(o=>Math.abs(o[5]-b.base)<0.01||(o[4]<b.base-0.01&&o[5]>b.base+0.01));
+      return S.some(o=>r[0]>=o[0]-0.01&&r[1]<=o[1]+0.01&&r[2]>=o[2]-0.01&&r[3]<=o[3]+0.01); };
+    out.boxes.forEach(b=>{ b.occ=occ.find(o=>Math.abs(o[0]-b.u[0])<1e-6&&Math.abs(o[2]-b.v[0])<1e-6&&Math.abs(o[4]-b.base)<1e-6); });
+    const fFace=dir<0?0:1; /* index of the front face along u */
+    out.boxes.forEach(b=>{ if(b.underHall||b.band) return; const z0=b.base, z1=b.base+b.h, area=ar([b.u[0],b.u[1],b.v[0],b.v[1]]), [mA,mB]=minDims(b.id,s.city);
+      const tgt=[hallR].concat(out.boxes.filter(x=>x!==b).map(x=>[x.u[0],x.u[1],x.v[0],x.v[1],x.base,x.base+x.h])).filter(o=>zOv(z0,z1,o[4],o[5]));
+      const gaps=[]; /* [side 0..3 (u0,u1,v0,v1), gap, to the hall] */
+      for(const o of tgt){ const isH=o===hallR; const ovV=Math.min(b.v[1],o[3])-Math.max(b.v[0],o[2]), ovU=Math.min(b.u[1],o[1])-Math.max(b.u[0],o[0]);
+        if(ovV>2){ if(o[0]>=b.u[1]-0.01) gaps.push([1,o[0]-b.u[1],isH]); if(o[1]<=b.u[0]+0.01) gaps.push([0,b.u[0]-o[1],isH]); }
+        if(ovU>2){ if(o[2]>=b.v[1]-0.01) gaps.push([3,o[2]-b.v[1],isH]); if(o[3]<=b.v[0]+0.01) gaps.push([2,b.v[0]-o[3],isH]); } }
+      /* the hall first: a block within JOIN of the data centre joins it even when it already touches another block */
+      const touchH=gaps.some(g=>g[2]&&g[1]<0.02), touching=gaps.some(g=>g[1]<0.02), near=gaps.filter(g=>g[1]>=0.02&&g[1]<=JOIN&&!(b.front&&g[0]===fFace)&&(touchH?false:touching?g[2]:true)).sort((a,c)=>(c[2]-a[2])||(a[1]-c[1]));
+      const r0=[b.u[0],b.u[1],b.v[0],b.v[1]], tops=onTop(b);
+      const short0=Math.min(b.u[1]-b.u[0],b.v[1]-b.v[0]), tryR=r=>r[1]-r[0]>0&&r[3]-r[2]>0&&Math.min(r[1]-r[0],r[3]-r[2])>=Math.min(mA,short0)-0.01&&Math.max(r[1]-r[0],r[3]-r[2])>=mB-0.01&&inL(r)&&!hit(r,b)&&restsOn(r,b)&&tops.every(x=>x.u[0]>=r[0]-0.01&&x.u[1]<=r[1]+0.01&&x.v[0]>=r[2]-0.01&&x.v[1]<=r[3]+0.01);
+      const stretch=(r,side,d)=>{ const n=r.slice(); if(side===0) n[0]-=d; else if(side===1) n[1]+=d; else if(side===2) n[2]-=d; else n[3]+=d;
+        const out2=[]; if(side<2){ const w=area/(n[1]-n[0]); out2.push([n[0],n[1],n[2],n[2]+w],[n[0],n[1],n[3]-w,n[3]]); } else { const w=area/(n[3]-n[2]); out2.push([n[0],n[0]+w,n[2],n[3]],[n[1]-w,n[1],n[2],n[3]]); } return out2; };
+      let r=r0, done=false;
+      if(b.front&&b.base<0.01){ const fd=dir<0?r[0]-uf:uf-r[1]; /* as far as the front yard line lets it (a slanted front line stops it short) */ for(let d=fd;d>0.02&&fd<=cs+0.01;d-=0.05){ const c=stretch(r,fFace,d).find(tryR); if(c){ r=c; break; } } }
+      const keepF=c=>!(b.front&&b.base<0.01)||Math.abs(c[fFace]-r[fFace])<0.01; /* a street-front block keeps its front face */
+      for(const [side,g] of near){ for(const c of stretch(r,side,g)) if(keepF(c)&&tryR(c)){ r=c; done=true; break; } if(done) break; }
+      if(r!==r0){ b.u=[r[0],r[1]]; b.v=[r[2],r[3]]; b.ring=G.rectW(F,r[0],r[1],r[2],r[3]); if(b.occ){ b.occ[0]=r[0]; b.occ[1]=r[1]; b.occ[2]=r[2]; b.occ[3]=r[3]; } if(b.front!=null&&b.base<0.01) b.front=Math.abs((dir<0?r[0]:r[1])-uf)<cs+0.01; }
+      b.joined=touching||done||(b.base>0.01&&restsOn(r0,b)); /* a block standing on another (or on the hall) is joined to it */ b.joinedHall=touchH||(done&&near.some(g=>g[2])); if(!b.joined){ const g=gaps.length?Math.min(...gaps.map(x=>x[1])):null; b.apart=g; out.flags.push({t:`${b.p.name.split(' (')[0]}: stands ${g!=null?(Math.round(g*10)/10)+' m':'apart'} from the nearest block and could not be joined to it (drawing rule: blocks within ${JOIN} m are stretched to touch, keeping their floor, sides, street front and anything standing on them); spatial separation between them (NBC 3.2.3) is not checked (?).`,src:['nbc2020_v1'],sev:'q',id:b.id}); } });
+    out.boxes.forEach(b=>{ delete b.occ; }); }
   const top=Math.max(hallTop,...out.boxes.map(b=>b.base+b.h));
   if(s.H&&top>s.H+0.01) out.flags.push({t:`Check: something is drawn to ${n0(top)} m, over this zone's ${n0(s.H)} m limit. This should not happen; please report it.`,src:s.city==='van'?['van_zdb_i2','van_zdb_i3']:['edm_bl20001'],sev:'bad'});
   out.boxes.forEach(b=>{ const sh=b.sh||ftf.ground; b.level=Math.floor(b.base/ftf.ground+0.01); b.levels=[...new Set(Array.from({length:b.storeys||1},(_,k)=>Math.floor((b.base+k*sh)/ftf.ground+0.01)))]; }); // plan storeys by height, each storey at its own height (review 2, N12)

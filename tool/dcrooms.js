@@ -27,10 +27,20 @@ function layout(o){ const R=RAW(), F=o.F; if(!F||!o.mw||!(o.mw>0)||!o.fh||!o.fh.
   const [u0,u1]=o.u, [v0,v1]=o.v, L=u1-u0, W=v1-v0, k=o.fh.length, fp=L*W; if(!(L>0&&W>0)) return null;
   const ring=pts=>{ const a=new Float64Array(pts.length*2); pts.forEach(([u,v],j)=>{ const [x,y]=F.toW(u,v); a[2*j]=x; a[2*j+1]=y; }); return a; };
   const rect=(a,b,c,d)=>ring([[a,c],[b,c],[b,d],[a,d]]), rr=(a,b,c,d)=>({ring:rect(a,b,c,d),r:[a,b,c,d]});
-  const Hh=rooms[0].m2||0, Ae=rooms[1].m2||0, Ab=rooms[2].m2||0, Rm=Ae+Ab;
-  const h=Math.min(fp,Hh/k); // hall floor on each storey
-  let d=Math.sqrt(Math.max(Ae,Ab)); if(d>0&&Rm/d>W) d=Rm/W; d=Math.min(d,L); /* drawing */ /* rooms about square, side by side */
-  const we=d>0?Ae/d:0, wb=d>0?Ab/d:0, pieces=[]; let z=o.z0;
+  /* 7 Nov 2026 (Cowork, V339 boards: 'UPS 3.6 m² and battery 2.0 m² are far below a real size'): the per-MW figures are equipment only. The rooms are now
+     drawn by count, as the register's electrical_room formula says ('area = their footprints + working space in front + clearances'): UPS frames side by side
+     against one wall (Galaxy VX 1000 kW, 3.6 × 0.9 m; count from engine equip(), with spares) and 1.5 m working space in front (CEC 2-310 2)); Li-ion cabinets
+     side by side against one wall (Vertiv EnergyCore Li5, 0.6 × 0.75 m, 25 mm off the wall, 0.914 m clear in front); each room 1.1 m longer for its door
+     (the 1,100 mm egress aisle, NFC 2.7.1.2, register hall_layout; a drawing choice). Room HVAC, fire suppression and switchgear are not counted (?).
+     The per-MW figures stay the basis of Ratios' MW (equipment only); what the rooms take beyond them comes out of the hall floor and is reported. */
+  const E=BD.eng&&BD.eng.equip?BD.eng.equip(o.mw):null, SP=BD.kit&&BD.kit.SPEC, LY=BD.eng&&BD.eng.R&&BD.eng.R.layout, DOOR=1.1; /* drawing */
+  let byCount=null; if(E&&SP&&SP.ups&&SP.battery&&LY){ const nu=E.ups, nb=E.batt[1], le=nu*SP.ups.L+DOOR, de=SP.ups.W+LY.upsFront, lb=nb*SP.battery.L+DOOR, db=LY.battWall+SP.battery.W+LY.battFront;
+    byCount={nu,nb,le,de,lb,db,why:`${nu} UPS frame${nu>1?'s':''} (3.6 × 0.9 m, with spares) + 1.5 m working space (CEC 2-310) + 1.1 m door end; ${nb} Li-ion cabinet${nb>1?'s':''} (0.6 × 0.75 m) + 0.914 m in front + 1.1 m door end`}; }
+  const Hh=rooms[0].m2||0, pieces=[]; let z=o.z0, Ae=rooms[1].m2||0, Ab=rooms[2].m2||0, d, we, wb;
+  if(byCount&&byCount.le+byCount.lb<=W&&Math.max(byCount.de,byCount.db)<=L){ d=Math.max(byCount.de,byCount.db); we=byCount.le; wb=byCount.lb; Ae=d*we; Ab=d*wb; rooms[1].m2=Ae; rooms[2].m2=Ab; rooms[1].byCount=rooms[2].byCount=byCount.why; } /* both rooms one strip deep, each its own length along the end wall */
+  else { if(byCount){ Ae=Math.max(Ae,byCount.le*byCount.de); Ab=Math.max(Ab,byCount.lb*byCount.db); rooms[1].m2=Ae; rooms[2].m2=Ab; rooms[1].byCount=rooms[2].byCount=byCount.why+' (re-proportioned to fit the end wall, ?)'; }
+    d=Math.sqrt(Math.max(Ae,Ab)); if(d>0&&(Ae+Ab)/d>W) d=(Ae+Ab)/W; d=Math.min(d,L); /* drawing */ /* rooms about square, side by side */ we=d>0?Ae/d:0; wb=d>0?Ab/d:0; }
+  const Rm=Ae+Ab, h=Math.min(fp,Hh/k); // hall floor on each storey
   for(let j=0;j<k;j++){ const hz=o.fh[j];
     if(j===0&&Rm>0){ const hf=Math.max(0,Math.min(h,fp-Rm)), dh=hf/W;
       if(dh+d<=L+1e-6){ const ur=u1-dh; if(hf>0.5) pieces.push({id:'hall',...rr(ur,u1,v0,v1),base:z,h:hz,m2:hf,level:j});
@@ -44,6 +54,7 @@ function layout(o){ const R=RAW(), F=o.F; if(!F||!o.mw||!(o.mw>0)||!o.fh||!o.fh.
         if(ux>u0+1e-6&&(ux-u0)*(W-we-wb)>0.5) pieces.push({id:'rest',...rr(u0,ux,v0+we+wb,v1),base:z,h:hz,m2:(ux-u0)*(W-we-wb),level:j}); } }
     else { if(h>0.5) pieces.push({id:'hall',...rr(u1-h/W,u1,v0,v1),base:z,h:hz,m2:h,level:j}); if(fp-h>0.5) pieces.push({id:'rest',...rr(u0,u1-h/W,v0,v1),base:z,h:hz,m2:fp-h,level:j}); }
     z+=hz; }
+  const hallShort=Math.max(0,Hh-pieces.filter(p=>p.id==='hall').reduce((s,p)=>s+p.m2,0)); /* 7 Nov 2026: hall floor the rooms by count leave short of the MW's need */
   if(o.ground>0) pieces.unshift({id:'gst',...rr(u0,u1,v0,v1),base:o.z0-o.ground,h:o.ground,m2:fp,level:-1}); /* the storey under the hall the zone keeps for other uses, so the hall stands on it */
   /* loading dock inside (7 Nov 2026): cut out of the ground storey (the zone's ground storey where there is one, else the hall's first floor) at the rear end,
      v0 corner (drawing choice); bays side by side, 0.6 m apart, as site.js counts them. What it takes from the hall on that storey is reported, not hidden. */
@@ -59,11 +70,11 @@ function layout(o){ const R=RAW(), F=o.F; if(!F||!o.mw||!(o.mw>0)||!o.fh||!o.fh.
       cut.hall=(cut.hall||0)+p.m2; if(touch(p.r,D)){ p.id='dock'; extra.push(p.m2); } else p.id='rest'; }
     if(at){ pieces.length=0; pieces.push(...keep); const dm2=ar(D)+extra.reduce((t,x)=>t+x,0); dock={id:'dock',...rr(...D),base:at.base,h:at.h,m2:ar(D),level:lv,n:o.dock.n,cut,m2All:dm2,hallLost:cut.hall||0}; pieces.push(dock); } }
   pieces.forEach(p=>p.name=SHORT[p.id]);
-  return {pieces,rooms,end:o.end==='lo'?'lo':'hi',mw:o.mw,full:rect(u0,u1,v0,v1),fp,k,dock}; }
+  return {pieces,rooms,end:o.end==='lo'?'lo':'hi',mw:o.mw,full:rect(u0,u1,v0,v1),fp,k,dock,hallShort,byCount}; }
 const fmt0=v=>v==null||!isFinite(v)?'?':Math.round(v).toLocaleString('en-CA');
 /* one line for the drawing's note: what is drawn, at which end, and what is not drawn */
 function note(Lr){ if(!Lr) return ''; const N=notDrawn(), e=Lr.end==='lo'?'low':'high';
   const rs=Lr.rooms.map(r=>`${r.name.split(' (')[0].toLowerCase()} ${fmt0(r.m2)} m²`).join(', ');
-  return `Rooms drawn at the ${e} end of their m² per MW, ${Lr.mw} MW: ${rs} (${Lr.rooms.map(r=>r.src[0]).join(', ')}). Placement is a drawing choice. Not drawn, no size rule (?): ${N.q.join(', ')}. Only with a heat exchange: ${N.ex.join(', ')}.${Lr.dock?` Loading dock: ${Lr.dock.n} bay${Lr.dock.n>1?'s':''}, ${fmt0(Lr.dock.m2All)} m², on the ground storey at the rear end (drawing choice; the floor above sits over it)${(Lr.dock.cut.hall||0)>0.5?`; it takes ${fmt0(Lr.dock.cut.hall)} m² of the hall's floor on that storey (with any strip under 3 m beside it), which comes out of the hall and the MW tested`:''}.`:''}`; }
+  return `Rooms drawn at the ${e} end of their m² per MW, ${Lr.mw} MW: ${rs} (${Lr.rooms.map(r=>r.src[0]).join(', ')}). ${Lr.rooms[1]&&Lr.rooms[1].byCount?'UPS and battery rooms by count: '+Lr.rooms[1].byCount+' (register electrical_room). ':''}${Lr.hallShort>0.5?'The hall is '+fmt0(Lr.hallShort)+' m² short of its need after them (Ratios counts equipment only, ?). ':''}Placement is a drawing choice. Not drawn, no size rule (?): ${N.q.join(', ')}. Only with a heat exchange: ${N.ex.join(', ')}.${Lr.dock?` Loading dock: ${Lr.dock.n} bay${Lr.dock.n>1?'s':''}, ${fmt0(Lr.dock.m2All)} m², on the ground storey at the rear end (drawing choice; the floor above sits over it)${(Lr.dock.cut.hall||0)>0.5?`; it takes ${fmt0(Lr.dock.cut.hall)} m² of the hall's floor on that storey (with any strip under 3 m beside it), which comes out of the hall and the MW tested`:''}.`:''}`; }
 BD.dcRooms={layout,notDrawn,note,SHORT};
 })();

@@ -236,9 +236,9 @@
    "ring": "[ring 14]",
    "notes": [
     "Noise: needs the roof cooling plant in an enclosed plant room. On the roof, even with low-noise chillers and a solid screen, it would give about 72 dBA at 247 1ST AVE E (I-3, activity zone), 27 m away, over the 65 dBA night limit (Noise Control By-law 6555 s. 2.3(b)(ii)). The plant room is the next measure, and the least that passes; its floor comes out of the building (register arch_nz_nswDcNoise).",
-    "Generator test (Noise By-law 6555 s. 4.1(c)): one set at a time is about 72.8 dB(A) at 12.8 m (the nearest lot line), within the 80 dB(A) test limit (78 dB(A) at 7 m, Kohler G6-154, maker claim; free field, our arithmetic). Sets tested together would be louder. Running in a power cut as emergency works (s. 4.3(c)): our reading (?).",
+    "Generator test (Noise By-law 6555 s. 4.1(c)): one set at a time is about 71.3 dB(A) at 15.1 m (the nearest lot line), within the 80 dB(A) test limit (78 dB(A) at 7 m, Kohler G6-154, maker claim; free field, our arithmetic). Sets tested together would be louder. Running in a power cut as emergency works (s. 4.3(c)): our reading (?).",
     "Lot lines: which yard 2 of this lot's edges have is not known (?); the deepest it could have is applied (see Lot lines).",
-    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 71–74 dBA (quieter–standard unit rating) at the point of reception beside 247 1ST AVE E (I-3, activity zone), 44 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii))."
+    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 72–76 dBA (quieter–standard unit rating) at the point of reception beside 294 1ST AVE E (IC-3, activity zone), 37 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii))."
    ],
    "warn": [],
    "F": {
@@ -503,6 +503,7 @@
     "unAbut": 0
    },
    "yardRect": "[ring 8]",
+   "capRear": 39.367546,
    "inset": "[ring 8]",
    "yardNote": "",
    "edgeYards": "[cycle]",
@@ -525,7 +526,7 @@
    },
    "loading": "[ring 8]",
    "loadV": [
-    -12.2,
+    -30.5,
     30.5
    ],
    "loadDepth": 16.3,
@@ -534,17 +535,17 @@
     "[ring 8]",
     "[ring 8]"
    ],
-   "plantYardStart": -12.95,
+   "plantYardStart": 6.733773,
    "dir": 1,
    "v": [
     -30.5,
     30.5
    ],
-   "uFront": 31.75,
+   "uFront": 51.433773,
    "footMode": "max",
    "uBuild": [
-    -12.95,
-    31.75
+    6.733773,
+    51.433773
    ],
    "mwSized": 6.3,
    "plant": {
@@ -665,8 +666,8 @@
     "bigYard": 0,
     "yard": "[ring 8]",
     "yardU": [
-     -12.95,
-     -0.974
+     6.733773,
+     18.709773
     ],
     "truckRing": null,
     "indoor": 742.999536,
@@ -685,12 +686,12 @@
    "footRect": "[ring 8]",
    "simpleMass": true,
    "serverFoot": "[ring 8]",
-   "footArea": 2012.206178,
+   "footArea": 2004.243501,
    "genNoise": {
     "city": "van",
-    "d": 12.766036,
-    "at": 12.766036,
-    "L": 72.78084,
+    "d": 15.144496,
+    "at": 15.144496,
+    "L": 71.296865,
     "ok": true,
     "near": false
    },
@@ -701,8 +702,8 @@
     ],
     "n": 8,
     "src": [
-     1665.9,
-     2074.9
+     1653.1,
+     2060.4
     ],
     "where": "indoors",
     "groups": [
@@ -711,7 +712,7 @@
       "n": 8
      }
     ],
-    "tested": 3481,
+    "tested": 3465,
     "overQ": 0,
     "overS": 0,
     "limit": 55,
@@ -726,14 +727,14 @@
     "bldOnly": 0,
     "block": null,
     "flag": null,
-    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 71–74 dBA (quieter–standard unit rating) at the point of reception beside 247 1ST AVE E (I-3, activity zone), 44 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii)).",
+    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 72–76 dBA (quieter–standard unit rating) at the point of reception beside 294 1ST AVE E (IC-3, activity zone), 37 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii)).",
     "worst": {
-     "addr": "247 1ST AVE E",
-     "zt": "I-3, activity zone",
+     "addr": "294 1ST AVE E",
+     "zt": "IC-3, activity zone",
      "lot": true,
-     "d": 44.1,
-     "lo": 70.9,
-     "hi": 74.2,
+     "d": 37,
+     "lo": 72.5,
+     "hi": 75.8,
      "L": 65,
      "Ls": 65,
      "sec": "Noise Control By-law 6555 s. 2.3(b)(ii)"
@@ -792,7 +793,7 @@
      "Ls": 65,
      "sec": "Noise Control By-law 6555 s. 2.3(b)(ii)"
     },
-    "block": "Noise: the cooling plant (roof) would give about 72 dBA (low-noise units: one rating) at the point of reception beside 247 1ST AVE E (I-3, activity zone), 27 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). 7 neighbouring lots are over. No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further …",
+    "block": "Noise: the cooling plant (roof) would give about 72 dBA (low-noise units: one rating) at the point of reception beside 247 1ST AVE E (I-3, activity zone), 27 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). 6 neighbouring lots are over. No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further …",
     "src": "arch_nz_nswDcNoise"
    }
   },
@@ -810,12 +811,12 @@
    "yards": "[cycle]"
   },
   "hallS": [
-   1280.838105,
-   1921.257158
+   1273.193936,
+   1909.790904
   ],
   "hallL": [
-   1921.257158,
-   2668.412719
+   1909.790904,
+   2652.487366
   ],
   "floors": 3,
   "floorsR": [
@@ -823,7 +824,7 @@
    3
   ],
   "fpNote": "from the site setup: the most the zone allows, less setbacks, loading and the plant yard",
-  "fp": 1674.747814,
+  "fp": 1666.785137,
   "fpCalc": null,
   "indoorPlant": 1021.624362,
   "g": [
@@ -831,65 +832,65 @@
    23595
   ],
   "G": [
-   4002.619079,
-   4002.619079
+   3978.731049,
+   3978.731049
   ],
   "fullCover": "",
   "heightCut": true,
   "yardCut": true,
   "gross": [
-   4002.619079,
-   4002.619079
+   3978.731049,
+   3978.731049
   ],
   "how": "lot 7,865 m² × floor-space ratio 3",
   "sc": [
    {
-    "G": 4002.619079,
-    "gr": 1334.20636,
-    "up": 2668.412719
+    "G": 3978.731049,
+    "gr": 1326.243683,
+    "up": 2652.487366
    },
    {
-    "G": 4002.619079,
-    "gr": 1334.20636,
-    "up": 2668.412719
+    "G": 3978.731049,
+    "gr": 1326.243683,
+    "up": 2652.487366
    }
   ],
   "ground": [
-   1334.20636,
-   1334.20636
+   1326.243683,
+   1326.243683
   ],
   "hallGross": [
-   2668.412719,
-   2668.412719
+   2652.487366,
+   2652.487366
   ],
   "density": "typical",
   "mwS": [
-   2.033076,
-   6.625025
+   2.020943,
+   6.585486
   ],
   "mwL": [
-   3.049615,
-   9.156074
+   3.031414,
+   9.102658
   ],
   "hall": [
-   1280.838105,
-   2668.412719
+   1273.193936,
+   2652.487366
   ],
   "mw": [
-   2.033076,
-   9.156074
+   2.020943,
+   9.102658
   ],
   "m2MW": [
    290,
    630
   ],
   "mwCheck": [
-   3.609215,
-   7.925978
+   3.587675,
+   7.878675
   ],
-  "mwTopRaw": 9.201423,
+  "mwTopRaw": 9.146508,
   "mwCapped": true,
-  "plantFor": 9.156074
+  "plantFor": 9.102658
  },
  "model": "[cycle]",
  "errors": []
