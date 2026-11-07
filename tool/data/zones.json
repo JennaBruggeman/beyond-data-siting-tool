@@ -1080,6 +1080,27 @@
      "vanParking5"
     ],
     "_note": "s. 5.4.1"
+   },
+   "assembly": {
+    "ids": [
+     "refuge",
+     "warming_shelter",
+     "gym",
+     "pool"
+    ],
+    "per": {
+     "v": 2800,
+     "src": [
+      "arch_up3_vanPkg5"
+     ]
+    },
+    "min": {
+     "v": 100,
+     "src": [
+      "arch_up3_vanPkg5"
+     ]
+    },
+    "_note": "Parking By-law s. 5.1 'Multi-Use Developments': each class of use counted separately and summed. Row 5.2.3 (community centre, activity centre or similar place of assembly; fitness centre; pool): Class B, one space for each 2 800 m², none under 100 m². Which programs fall in this row is our reading (?): refuge and warming shelter as a similar place of assembly, gym as a fitness centre, pool (no spectator seating) taken with them. Programs not listed in s. 5.2 (greenhouse, fish farm, spa, clinic, kitchen, laundry and others) are set by the Director of Planning (s. 5.1 'Uses Not Listed'): shown as '?', not counted."
    }
   },
   "edm": {
@@ -1117,7 +1138,8 @@
      "vanParking5"
     ],
     "_note": "Vancouver's 6.1 m aisle (s. 5.4.1) used in Edmonton as an assumption, as the tool says"
-   }
+   },
+   "_note": "Table 7.2 counts 'Floor Area in the case of non-Residential Uses': one threshold on the building's non-residential floor area, no split by use (Bylaw 20001 s. 5.80 subs. 7.2, PDF p. 844; 'Floor Area means the area of a building', s. 8.20). In Architecture the data centre and its programs are one building, so their floor is added (our reading of 'a building')."
   }
  }
 }
