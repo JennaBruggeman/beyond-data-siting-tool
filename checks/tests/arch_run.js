@@ -3,7 +3,7 @@
 // Needs the tool served at http://localhost:8766 (python3 -m http.server 8766 -d tool).
 // Libraries the page loads from CDNs are served locally from NODE_PATH (three, jspdf).
 const fs = require('fs'), path = require('path');
-const NM = (process.env.NODE_PATH || '').split(':')[0];
+const NM = (process.env.NODE_PATH || '').split(require('path').delimiter)[0];
 const { chromium } = require('playwright');
 
 const LOTS = {
@@ -51,6 +51,8 @@ const CLEAN = `(o)=>{ const seen=new WeakSet(); return JSON.parse(JSON.stringify
     const rat = await p.evaluate(async(SPLIT)=>{ await BD.arch.ready; BD.flow.to('arat'); await new Promise(r=>setTimeout(r,1500));
       /* 3 Nov 2026 (hall fix): SPLIT=dc/prog sets the floor-area split (e.g. 60/30); the Ratios view caps the DC share at what the hard rules allow */
       if(SPLIT){ const [d,g]=SPLIT.split('/').map(Number); BD.arch.ratio.dc=d; BD.arch.ratio.prog=g; await BD.views.arat(); await new Promise(r=>setTimeout(r,1000)); }
+      /* 7 Nov 2026: restyle.js drops trailing arrows from buttons 60 ms after the DOM settles; wait for that (up to 4 s) so the settled label is read, not a race */
+      for(let i=0;i<40;i++){ const n=document.getElementById('fNext'); if(!n||!/\s*[→›]\s*$/.test(n.textContent)) break; await new Promise(r=>setTimeout(r,100)); }
       const b=BD.archTest.ratioBase(), RT=BD.archTest.ratioNow();
       return {ratio:BD.arch.ratio&&{cover:Math.round(BD.arch.ratio.cover),dc:BD.arch.ratio.dc,prog:BD.arch.ratio.prog,end:BD.arch.ratio.end,mw:BD.arch.ratio.mw}, base:b&&{lot:Math.round(b.lot),build:Math.round(b.build),floors:b.floors,dataFl:b.dataFl,fsr:b.fsr,coverNone:b.coverNone,perMW:b.perMW},
         calc:RT&&{allowed:Math.round(RT.allowed),by:RT.by,dcMax:Math.round(RT.dcMax),dcM2:Math.round(RT.dcM2),progM2:Math.round(RT.progM2),unused:Math.round(RT.unused),mw:RT.mw.map(x=>Math.round(x*100)/100),mwTest:RT.mwTest},
