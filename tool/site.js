@@ -229,6 +229,13 @@ function model(){
     m.yardRect=Z.yards?rectW(F,u0,u1,v0,v1):null; /* 2 Nov 2026: the line of the required yards, before the 61 m width cap (the fence stands on it) */
     if(y.max){ if(u1-u0>y.max){ const c=(u0+u1)/2; u0=c-y.max/2; u1=c+y.max/2; } if(v1-v0>y.max){ const c=(v0+v1)/2; v0=c-y.max/2; v1=c+y.max/2; } }
     m.inset=rectW(F,u0,u1,v0,v1); m.yardNote=Z.yardsKnown?'':'Yards and setbacks for this zone are not yet read, so the building may cover the whole lot.'; yardLines(m); const YE=m.edgeYards;
+    /* J.B. 7 Nov 2026 (section 3 gate): an inside dock with no street or lane at the rear or sides gets a 6.1 m drive from the front lot line along the
+       v0 side (the dock's side) to the rear. Vancouver: inside the side yard as far as it goes (flagged: driveway in a side yard ?, I-3 3.1.2.16 not read);
+       the building narrows by the rest. Edmonton: the building narrows by the full width (the setback stays clear). Aisle width as the loading data. */
+    m.sideDrive=null; if(A.loadIn&&A.foot!=='existing'&&BD.tier&&BD.tier()==='arch'&&!(YE||[]).some(e=>(e.abuts==='street'||e.abuts==='alley')&&e.kind!=='front')){
+      const w=(LD[city]&&LD[city].aisle)||6.1, sy=Math.max(0,y.s0||0), uf0=fl>0?-F.L/2:F.L/2, ur=fl>0?u1:u0, ua=Math.min(uf0,ur), ub=Math.max(uf0,ur);
+      if(city==='van'){ const inY=Math.min(w,sy), d0=v0-sy; m.sideDrive={w,city,inYard:inY,narrow:w-inY,ring:rectW(F,ua,ub,d0,d0+w)}; v0=Math.max(v0,d0+w); }
+      else { m.sideDrive={w,city,inYard:0,narrow:w,ring:rectW(F,ua,ub,v0,v0+w)}; v0=v0+w; } }
     // loading: rear end of the buildable area (the end with the rear yard; Build 2: the end away from the street when a street was found, BE s. 2.120 5.8 keeps loading from between a building and a street)
     // J.B. 20 Oct: once a size is set, loading is counted from the floor that size needs, not the most the zone allows (capped at that)
     const R0=BD.eng&&BD.eng.R, perMW0=R0?(R0.m2PerMW[0]+R0.m2PerMW[1])/2/((R0.hallShare[0]+R0.hallShare[1])/2):0;
@@ -287,7 +294,7 @@ function model(){
      Over only with the standard rating: a note, not a block (m.notes).
      3 Nov 2026: sourced mitigation (engine NMIT): blocked only when no modelled option brings the quieter rating under; an option that does is named as
      required (nc.req, in m.notes, before the flag). */
-  m.notes=[]; if(m.plant&&m.plant.bigYard) m.notes.push(`Generators: ${m.plant.placed?m.plant.placed.gy:m.plant.genYard} sets in a ${m.plant.bigYard} m deep plant yard, deeper than any test lot's. Their noise at the lot lines is not checked: the tool has no sourced sound level for the sets (?), and whether the noise by-laws exempt standby generators is not read (?).`); /* 7 Nov 2026 */
+  m.notes=[]; if(m.plant&&m.plant.bigYard) m.notes.push(`Generators: ${m.plant.placed?m.plant.placed.gy:m.plant.genYard} sets in a ${m.plant.bigYard} m deep plant yard: beyond the tested range (no test lot's is deeper than 21.7 m), so this size is not offered as a fit. Their noise at the lot lines is not checked: the tool has no sourced sound level for the sets (?), and whether the noise by-laws exempt standby generators is not read (?).`); /* 7 Nov 2026 */
   if(m.yards&&m.yards.unAbut) m.notes.push(`Lot lines: what ${m.yards.unAbut>1?m.yards.unAbut+' of this lot\'s edges abut is':'one of this lot\'s edges abuts is'} not known (no lot or street found, or a parcel with no zone on record), so which setback ${m.yards.unAbut>1?'they have':'it has'} is not known (?); the deepest is applied (see Lot lines).`);
   if(m.yards&&m.yards.unclear) m.notes.push(`Lot lines: which yard ${m.yards.unclear>1?m.yards.unclear+' of this lot\'s edges have':'one of this lot\'s edges has'} is not known (?); the deepest it could have is applied (see Lot lines).`); /* LOTLINES 4 Nov 2026: unclear is flagged, not skipped */
   if(BD.eng&&BD.eng.noiseCheck){ let nc=null; try{ nc=BD.eng.noiseCheck(m); }catch(e){ console.warn(e); } m.noise=nc; if(nc&&nc.block) m.warn.push(nc.block); else { if(nc&&nc.req) m.notes.push(nc.req); if(nc&&nc.flag) m.notes.push(nc.flag); } }
@@ -389,14 +396,17 @@ function setupProblems(noFloor){ const m=model(); if(!m||!m.F) return []; const 
 /* the largest size at which everything fits: servers, cooling plant, generators, loading (J.B. 20 Oct: worked examples open at it; "as large as fits" means it).
    Binary search to 0.1 MW between 0.1 and the most the floor holds; assumes a smaller size never needs more room. Returns null if nothing fits. */
 function fitMax(opt){ const asIs=!!(opt&&opt.asIs); if(asIs){ roomOff=true; cache.key=null; } try{ return fitMax0(); }finally{ if(asIs){ roomOff=false; cache.key=null; } } } /* dcshare: {asIs:true} = without the plant-room step (the set-up exactly as chosen) */
-function fitMax0(){ const A=BD.S.answers, keep=A.mw; A.mw=null; cache.key=null; let hi=0; try{ hi=BD.eng.siteFacts().mw[1]; }catch(e){}
+function fitMax0(){ fitMax0.beyond=false; const A=BD.S.answers, keep=A.mw; A.mw=null; cache.key=null; let hi=0; try{ hi=BD.eng.siteFacts().mw[1]; }catch(e){}
   /* 7 Nov 2026 (Clark Dr hand check follow-up; J.B.: the conservative end): a size fails if the footprint left beside the plant yard cannot hold the data
      centre's floor at the conservative m² per MW the tool pairs with the tested (low) MW: hall + UPS + battery rooms at the high end of dc_rooms.json
      (≈635 m² per MW; register arch_dc_hall, arch_dc_electrical, arch_dc_battery). The dense end (≈293) only sets the top of the MW range shown.
-     Support rooms (27–33 %) are not added here (?), so the check is still a little lenient. */
+     J.B. 7 Nov 2026 (gate 3): support rooms added at the conservative end: the register's 'median of six whole-building cases 27–33 %' (tool/data/arch.json
+     ratioGround.support; range 13–52 %, not a rule; the test fits ≈30 %), so the floor needed is mw × 635 ÷ (1 − 0.33). Also a size whose generators need a
+     plant yard deeper than the tested range (21.7 m, plant.js bigYard) is not a fit: the largest size inside the tested range is reported instead. */
   const perHi=(()=>{ const R=(BD.data.dc_rooms&&BD.data.dc_rooms.rooms)||[]; const v=R.filter(r=>r.split&&r.perMW).reduce((t,r)=>t+r.perMW[1],0); return v>0?v:630; })();
-  const roomOK=mw=>{ const m=model(); if(!m||m.existing||!m.foot||!BD.eng) return true; const floors=Math.max(1,m.Z&&m.Z.ground?(m.nF?m.nF[0]:1)-1:(m.nF?m.nF[0]:1));
-    return BD.area(m.foot)*floors>=mw*perHi-0.5; };
+  const supHi=(()=>{ const g=BD.data.arch&&BD.data.arch.ratioGround&&BD.data.arch.ratioGround.support; return g&&g[1]>0&&g[1]<1?g[1]:0.33; })();
+  const roomOK=mw=>{ const m=model(); if(!m||m.existing||!m.foot||!BD.eng) return true; if(m.plant&&m.plant.bigYard){ fitMax0.beyond=true; return false; } const floors=Math.max(1,m.Z&&m.Z.ground?(m.nF?m.nF[0]:1)-1:(m.nF?m.nF[0]:1));
+    return BD.area(m.foot)*floors>=mw*perHi/(1-supHi)-0.5; };
   const ok=mw=>{ A.mw=mw; cache.key=null; return !setupProblems(true).length&&roomOK(mw); };
   let lo=0, best=null, top=Math.floor((hi||0)*10);
   /* 2 Nov 2026 hard rules: with generators on the roof no size above the fuel limit passes (model(); Build 2: CSA B139.1.1 6.5.3), so the search starts there */
@@ -435,7 +445,7 @@ function fitPlan(){ const A=BD.S.answers, B=Object.assign({},A); delete B.mw; de
   fpCache={key,v}; return v; }
 const planText=v=>v&&v.mw!=null?`up to ${v.mw.toFixed(1)} MW ${v.measure?v.measure.t:''}${v.measure&&v.measure.auto?`; ${v.asIs!=null?v.asIs.toFixed(1)+' MW':'no size'} with the plant on the roof as set up`:''}`:null;
 BD.measureOf=measureOf; BD.fitPlan=fitPlan; BD.planText=planText;
-BD.setupProblems=setupProblems; BD.fitMax=fitMax; BD.fitSizes=fitSizes; BD.fitNear=fitNear; BD.sizePasses=sizePasses;
+BD.setupProblems=setupProblems; BD.fitMax=fitMax; BD.fitBeyond=()=>!!fitMax0.beyond; BD.fitSizes=fitSizes; BD.fitNear=fitNear; BD.sizePasses=sizePasses;
 /* bugfix 4 Nov 2026 (retest rules 1, V339): the required yards are set in from the lot's bounding rectangle, so along an angled lot line the line of the
    yards (the lot clipped to that rectangle) runs inside a required yard. Each lot edge takes the yard of the side it faces in the tool's own frame (front,
    rear, sides: m.yards, as the 3 Nov rules sweep checked), and a point is in that yard when it is nearer the edge than the yard's depth, less 0.3 m
@@ -582,7 +592,7 @@ BD.setupHTML=function(st){ setDefaults(); const A=BD.S.answers, m=model(); if(!m
    [4,'Cooling',`${lab.inside[A.inside]} inside; ${A.outside==='dry'&&BD.dryName?BD.dryName():lab.outside[A.outside]} ${lab.plantAt[A.plantAt]}${A.vis==='indoors'&&A.plantAt!=='yard'?', the roof plant in an enclosed plant room'+(A.visDefault==='arch'?' (Architecture default)':''):m.noiseRoom?', the roof plant in an enclosed plant room (needed for the noise by-law at this size)':''}`],
    [5,'Standby',A.gens==='none'?'no generators':`generators in the ${A.genAt}`]];
   /* dcshare 4 Nov 2026: the largest size that passes and the noise measure it depends on (fitPlan) */
-  { let fp=null; try{ fp=A.built==='new'?fitPlan():null; }catch(e){} if(fp) rows.push([4,'Largest that fits',fp.mw!=null?planText(fp):'none with this set-up (plant, generators, fuel or noise)']); }
+  { let fp=null; try{ fp=A.built==='new'?fitPlan():null; }catch(e){} if(fp) rows.push([4,'Largest that fits',(fp.mw!=null?planText(fp):'none with this set-up (plant, generators, fuel or noise)')+(fitMax0.beyond?'; larger sizes are beyond the tested range (a generator yard deeper than the 21.7 m of the test lots)':'')]); }
   const g=m.grade||{}, gd=(g.none?'? (no ground data for this lot)':`${g.min.toFixed(1)}–${g.max.toFixed(1)} m, median ${g.med.toFixed(1)} m (datum ${g.datum}${g.cover<100?`; ${g.cover}% of the lot covered`:''})`)+(g.base&&g.base.settled===false?'; height base ?':'');
   const fl=g.fcl, gflags=[]; if(fl){ if(fl.floor) gflags.push(`Grade is below the ${fl.v} m flood construction level on about ${fl.below}% of the lot: a ground floor there must be raised to ≥${fl.v} m (up to ${fl.raise.toFixed(1)} m).`); if(fl.gens) gflags.push(`Generators in the yard: where the yard is below ${fl.v} m, their pads must be raised to ≥${fl.v} m.`);
     if(gflags.length) gflags.push(`Lot grade from LiDAR (datum ?) vs the level in ${fl.datum}: same datum not confirmed (?).`); }

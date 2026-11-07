@@ -109,7 +109,9 @@ async function runExample(i){ const x=EXAMPLES[i]; reset(); F.exPending=true; Ob
 function findFit(why){ if(!BD.S.sel||!BD.fitMax) return null; const A=BD.S.answers, base={plantAt:A.plantAt,genAt:A.genAt,gens:A.gens,vis:A.vis};
   const IN={vis:'indoors',plantAt:'roof'}, tries=[{},{genAt:'roof'},{plantAt:'split'},{plantAt:'yard'},{plantAt:'split',genAt:'roof'},{plantAt:'yard',genAt:'roof'},
     Object.assign({},IN),Object.assign({genAt:'roof'},IN),{gens:'none'},{gens:'none',plantAt:'split'},{gens:'none',plantAt:'yard'},Object.assign({gens:'none'},IN)], lastG=7, lastOut=5;
-  let best=null; for(const [i,t] of tries.entries()){ if(base.vis==='indoors'&&t.vis) continue; Object.assign(A,base,t); BD.modelReset&&BD.modelReset(); const v=BD.fitMax(); if(!v){ if(why) why.push({t,p:BD.setupProblems()}); continue; }
+  /* 7 Nov 2026 (J.B., section 3 gate): if the set-ups with generators fail only because their yard would be beyond the tested range, the search does not
+     fall back to no generators (that showed 40 MW on 12603 123 St NW): the lot shows no size, and the set-up says the yard is beyond the tested range */
+  let beyond=false; let best=null; for(const [i,t] of tries.entries()){ if(base.vis==='indoors'&&t.vis) continue; if(beyond&&t.gens==='none'&&base.gens!=='none') continue; Object.assign(A,base,t); BD.modelReset&&BD.modelReset(); const v=BD.fitMax(); if(BD.fitBeyond&&BD.fitBeyond()&&t.gens!=='none') beyond=true; if(!v){ if(why) why.push({t,p:BD.setupProblems()}); continue; }
     if(!best) best={v,t}; else if(v>best.v+0.05&&!(best.t.gens!=='none'&&t.gens==='none')&&!(!best.t.vis&&t.vis)) best={v,t};
     if(i===0) break; if(best&&best.t.gens!=='none'&&(i===lastG||(i===lastOut&&!best.t.vis))) break; }
   Object.assign(A,base,best?best.t:{}); if(best){ A.mw=best.v; A.mwPick='large'; A.mwSite=BD.S.sel.id; } BD.modelReset&&BD.modelReset(); return best; }
