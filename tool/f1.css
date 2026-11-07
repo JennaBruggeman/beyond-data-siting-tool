@@ -105,7 +105,63 @@
   .f1v-head{flex-wrap:wrap;height:auto;padding:10px 16px;gap:10px 16px}
   .f1v-head .f1v-chap{order:5;flex-basis:100%}
   .f1v-body{flex-direction:column}
-  .f1v-main{padding:16px}
+  .f1v-main{padding:16px;flex:0 0 auto;overflow:visible}
+  .f1v-body{flex:0 0 auto}
   .f1v-panel{flex:0 0 auto;border-left:0;border-top:1px solid var(--f-hair);padding:22px 16px}
   .f1v-strip{padding:10px 16px}
 }
+/* ---------- How it works: the logic view (job sheet §3d) ---------- */
+#f1l{position:fixed;inset:0;z-index:2100;background:var(--f-bg);color:var(--f-ink);font-family:var(--f-font);font-variant-numeric:tabular-nums;font-size:var(--f-t-body);line-height:1.45;display:flex;flex-direction:column}
+#f1l *{box-sizing:border-box}
+#f1l button{font-family:inherit;cursor:pointer}
+#f1l a{color:#B5544B}
+.f1l-tabs{display:flex;gap:6px;flex:1 1 auto;min-width:0;overflow-x:auto}
+.f1l-tabs button{background:none;border:1px solid var(--f-rule);border-radius:999px;padding:6px 12px;font-size:12.5px;color:var(--f-ink2);white-space:nowrap}
+.f1l-tabs button[aria-selected="true"]{background:var(--f-ink);border-color:var(--f-ink);color:#fff}
+.f1l-box{flex:1 1 auto;overflow:auto;border:1px solid var(--f-hair);min-height:0}
+.f1l-box svg{display:block}
+.f1l-box .sh{font-size:12px;fill:var(--f-ink2)}
+.f1l-box .ss{font-size:11px;fill:var(--f-mute)}
+.f1l-box .we path{fill:none;stroke:var(--f-hair);stroke-width:1}
+.f1l-box .wl path{fill:none;stroke:#CC746C;stroke-width:1.2}
+.f1l-box .lp{cursor:pointer;outline:none}
+.f1l-box .lp rect{fill:#fff;stroke:var(--f-rule);stroke-width:1}
+.f1l-box .lp text{font-size:13px;fill:var(--f-faint)}
+.f1l-box .lp.lit rect{stroke:#CC746C}
+.f1l-box .lp.lit text{fill:var(--f-ink)}
+.f1l-box .lp.gap rect{stroke-dasharray:4 3}
+.f1l-box .lp.sel rect{stroke:var(--f-ink);stroke-width:1.8}
+.f1l-box .lp.sel text{fill:var(--f-ink)}
+.f1l-box .lp:hover text,.f1l-box .lp:focus text{fill:var(--f-ink)}
+.f1l-box .lp:focus rect{stroke:var(--f-ink)}
+#f1l:not(:has(.lp.lit)) .f1l-box .lp text{fill:var(--f-ink)}
+.f1l-key{display:flex;gap:22px;font-size:12px;color:var(--f-mute);flex-wrap:wrap}
+.f1l-key .k{display:inline-block;width:18px;height:12px;border:1px solid var(--f-rule);border-radius:2px;margin-right:7px;vertical-align:-2px;background:#fff}
+.f1l-key .k.sel{border:1.8px solid var(--f-ink)}
+.f1l-key .k.lit{border-color:#CC746C}
+.f1l-key .k.gap{border-style:dashed;border-color:var(--f-mute)}
+#f1l .f1v-panel h3{font-size:12px;font-weight:400;color:var(--f-mute);margin:0 0 6px}
+#f1l .f1v-panel section{border-top:1px solid var(--f-hair);padding-top:12px}
+.f1l-hero{border-top:1px solid var(--f-rule);padding-top:14px}
+.f1l-hero .hv{font-size:30px;font-weight:300;line-height:1.1}
+.f1l-hero .hv span{font-size:14px;color:var(--f-mute);margin-left:6px}
+.f1l-hero .hl{font-size:11.5px;color:var(--f-mute);margin-top:4px}
+.f1l-red{color:var(--f-red)}
+.f1l-f{margin:0;font-size:13px;color:var(--f-ink2);line-height:1.55;overflow-wrap:anywhere}
+.f1l-in{margin:8px 0 0;font-size:13px;color:var(--f-ink2)}
+.f1l-a{background:none;border:0;padding:0;font-size:13px;color:#B5544B;text-decoration:underline;text-underline-offset:2px}
+.f1l-meter .trk{height:4px;background:var(--f-hair);border-radius:2px;width:100%;max-width:328px}
+.f1l-meter .bar{height:4px;background:var(--f-ink);border-radius:2px}
+.f1l-meter .cap{display:flex;justify-content:space-between;max-width:328px;font-size:11.5px;color:var(--f-mute);margin-top:6px;gap:12px}
+.f1l-src{margin:0;padding:0;list-style:none;font-size:12px;color:var(--f-ink2);line-height:1.5}
+.f1l-src li{padding:6px 0;border-bottom:1px solid var(--f-hair);overflow-wrap:anywhere}
+.f1l-kind{display:inline-block;font-size:11px;color:var(--f-ink2);border:1px solid var(--f-rule);border-radius:999px;padding:0 7px;margin-right:6px}
+.f1l-none,.f1l-note{font-size:12px;color:var(--f-mute);margin:0}
+.f1l-flag{font-size:12.5px;color:var(--f-ink2);margin:0;border-left:2px solid #CC746C;padding-left:10px}
+.f1v-how{background:none;border:0;padding:0;font-size:12px;color:var(--f-ink2);text-decoration:underline;text-underline-offset:2px;text-decoration-color:var(--f-rule)}
+@media (max-width:760px){
+  #f1l{overflow-y:auto}
+  #f1l .f1v-body{flex-direction:column}
+  .f1l-box{flex:0 0 auto;height:60vh}
+}
+#f1l .f1-app{color:var(--f-ink);text-decoration:none}

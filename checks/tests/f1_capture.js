@@ -27,6 +27,12 @@ const PAN = { hero: 30, engineering: 30, resident: 30, municipal: 10, architectu
     /* framing: the camera pans sideways so the lot sits in the middle of the 3-D panel (view only; nothing in the model moves) */
     await p.evaluate(k => { const R = BD.scene3d.rig(); if (!R || !R.cam || !R.ctl) return; const T = window.THREE, right = new T.Vector3(); R.cam.getWorldDirection(right); right.cross(R.cam.up).normalize();
       const d = right.multiplyScalar(-k); R.cam.position.add(d); R.ctl.target.add(d); R.ctl.update(); }, PAN[file] || 0);
+    /* STYLE.md: red only for findings (J.B. gate 1). The tool draws the lot line and the building outline in its accent red; for these images every line or
+       surface in that red is drawn in INK instead (the copy in this page only; the tool's colours are unchanged) */
+    const n = await p.evaluate(() => { const R = BD.scene3d.rig(), T = window.THREE, red = new T.Color('#CC746C'), ink = new T.Color('#16181B'); let k = 0; if (!R || !R.scene) return -1;
+      R.scene.traverse(o => { const ms = o.material ? (Array.isArray(o.material) ? o.material : [o.material]) : []; for (const m of ms) { if (!m || !m.color) continue; const c = m.color;
+        if (Math.abs(c.r - red.r) + Math.abs(c.g - red.g) + Math.abs(c.b - red.b) < 0.12) { c.copy(ink); m.needsUpdate = true; k++; } } }); if (R.ren) R.ren.render(R.scene, R.cam); return k; });
+    console.log(file, 'recoloured', n);
     await p.waitForTimeout(1500);
     const el = await p.$('#v3d') || await p.$('#map');
     await el.screenshot({ path: path.join(out, file + '.png') }); console.log(file, 'errors', errs.length, errs.slice(0, 2).join(' | '));

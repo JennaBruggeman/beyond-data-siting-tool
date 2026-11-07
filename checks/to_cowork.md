@@ -75,3 +75,14 @@ Questions:
 5. Architecture: Compare in Visualize (storyboard), Report alone, Checks has 3 cards.
 6. The Downloads copy adds §3b. Which sheet governs step 3?
 
+## 7 Nov 2026 — Job F1 step 1, second gate: logic view and gate-1 fixes (Code)
+
+Done: the logic view (§3d) opens from "How it works" and "Sources" in the header, "See the logic", and "How this is worked out" on every card. Card lists are now Resident 4, Municipal 12, Engineering 12. The landing images draw the lot line and outline in INK, not red. Screenshots: checks/f1/ (49). No page or console errors; golden and Architecture results unchanged.
+
+Older Municipal flow: none in the tool code. tiers.js and templates.json say "Municipal not built yet". The nearest was the Community template (tier `community`), removed in a38224a (4 Nov). Research: checks/research_arch_v1/municipal.md.
+
+Questions:
+1. Municipal has no tag in logic.json. Parts the Municipal view shows (please confirm): parcel, zone, zoning_status, rezoning_price, envelope, floor_area, noise_limit, component_space, visibility, standoff.
+2. No part has a value per lot in the tool, so "on this lot" shows a red "?" everywhere.
+3. Industrial land and jobs: I put it under Process. Right chapter?
+
