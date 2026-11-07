@@ -1,0 +1,111 @@
+/* Beyond Data — F1 site shell (CODE_JOB_F1_site_build.md, step 1, 7 Nov 2026). Tokens and sizes from docs/STYLE.md (§1, §2, §4, §8).
+   Scoped to #f1 (landing) and #f1v (card viewer) so the old tool behind them keeps its own styles. */
+:root{
+  --f-ink:#16181B; --f-ink2:#4A4D52; --f-mute:#7B7E83; --f-faint:#A9ABAF;
+  --f-rule:#DDDEDF; --f-hair:#ECECEC; --f-bg:#FFFFFF; --f-panel:#FAFAFA; --f-plant:#E6E4E0;
+  --f-dc:#3268A6; --f-dc-sup:#A9C0DA; --f-pub:#B0802A; --f-clin:#22927A; --f-neut:#C9CACC; --f-red:#CC746C;
+  --f-fill-hall:#B9CCE1; --f-fill-sup:#E2EAF3; --f-fill-pub:#E7D9BF; --f-fill-clin:#C1E0DA;
+  --f-font:'IBM Plex Sans',system-ui,sans-serif;
+  --f-t-title:28px; --f-t-section:15px; --f-t-body:13px; --f-t-note:11.5px;
+}
+#f1,#f1v{position:fixed;inset:0;z-index:2000;background:var(--f-bg);color:var(--f-ink);font-family:var(--f-font);font-variant-numeric:tabular-nums;font-size:var(--f-t-body);line-height:1.45;-webkit-font-smoothing:antialiased}
+#f1{overflow-y:auto}
+#f1 *,#f1v *{box-sizing:border-box}
+#f1 a,#f1v a{color:inherit}
+#f1 button,#f1v button{font-family:inherit;cursor:pointer}
+.f1-wrap{max-width:1312px;margin:0 auto;padding:0 64px}
+/* header */
+.f1-head{display:flex;align-items:center;justify-content:space-between;height:72px}
+.f1-app{font-size:14px;font-weight:500;letter-spacing:0;color:var(--f-ink);text-decoration:none}
+.f1-nav{display:flex;gap:36px;font-size:var(--f-t-body)}
+.f1-nav a{color:var(--f-ink2);text-decoration:none}
+.f1-nav a:hover{color:var(--f-ink)}
+.f1-nav .f1-old{color:var(--f-mute)}
+/* hero */
+.f1-hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px;align-items:center;min-height:600px}
+.f1-hero h1{font-size:60px;line-height:1.08;font-weight:300;letter-spacing:-.01em;margin:0 0 26px}
+.f1-lead{font-size:17px;line-height:1.6;color:var(--f-ink2);max-width:440px;margin:0 0 32px}
+.f1-acts{display:flex;align-items:center;gap:28px}
+.f1-btn{background:var(--f-ink);color:#fff;border:0;border-radius:2px;font-size:13.5px;padding:13px 22px}
+.f1-btn:hover{background:#000}
+.f1-btn[disabled]{background:var(--f-faint);cursor:not-allowed}
+.f1-link{background:none;border:0;padding:0 0 2px;font-size:var(--f-t-body);color:var(--f-ink);border-bottom:1px solid var(--f-ink);text-decoration:none}
+.f1-link.quiet{color:var(--f-ink2);border-bottom-color:var(--f-rule)}
+.f1-heroimg{margin:0;min-width:0}
+.f1-heroimg img{width:100%;height:auto;display:block}
+.f1-cap{font-size:var(--f-t-note);color:var(--f-mute);margin-top:12px}
+/* four lines */
+.f1-lines{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;border-top:1px solid var(--f-ink);padding:28px 0 72px;margin-top:28px}
+.f1-lines p{margin:0;font-size:14px;line-height:1.55;color:var(--f-ink2)}
+/* workflows */
+.f1-sechead{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:22px;border-bottom:1px solid var(--f-hair)}
+.f1-sechead h2{font-size:var(--f-t-section);font-weight:500;margin:0}
+.f1-sechead span{font-size:var(--f-t-note);color:var(--f-mute)}
+.f1-row{display:grid;grid-template-columns:3fr 4.5fr 1.6fr 3.6fr;gap:32px;align-items:center;padding:28px 0;border-bottom:1px solid var(--f-hair)}
+.f1-row h3{font-size:34px;font-weight:300;margin:0}
+.f1-row .who{font-size:14px;line-height:1.6;color:var(--f-ink2);margin:0 0 18px}
+.f1-row .meta{font-size:var(--f-t-note);color:var(--f-mute);line-height:1.8}
+.f1-row .ract{display:flex;gap:22px;align-items:center}
+.f1-row img{width:100%;aspect-ratio:9/5;object-fit:cover;object-position:center 55%;display:block;background:var(--f-panel)}
+.f1-row .note{font-size:var(--f-t-note);color:var(--f-mute);margin-top:10px}
+/* how it works */
+.f1-how{background:#F4F3F0;margin:80px 0 0;padding:72px 56px;display:grid;grid-template-columns:4fr 6fr;gap:40px;align-items:center}
+.f1-how h2{font-size:36px;font-weight:300;margin:0 0 18px}
+.f1-how p{font-size:14px;line-height:1.65;color:var(--f-ink2);max-width:390px;margin:0 0 22px}
+.f1-how svg{width:100%;height:auto}
+.f1-foot{display:flex;justify-content:space-between;gap:24px;font-size:var(--f-t-note);color:var(--f-mute);padding:28px 0 40px}
+/* ---------- card viewer (STYLE.md §4) ---------- */
+#f1v{display:flex;flex-direction:column}
+.f1v-head{flex:0 0 60px;display:flex;align-items:center;gap:26px;padding:0 28px;border-bottom:1px solid var(--f-hair);min-width:0}
+.f1v-head .tpl{color:var(--f-mute);font-size:14px}
+.f1v-chap{display:flex;gap:22px;font-size:var(--f-t-body);flex:1 1 auto;min-width:0;overflow-x:auto}
+.f1v-chap button{background:none;border:0;padding:6px 0;color:var(--f-faint);font-size:var(--f-t-body);white-space:nowrap;border-bottom:1.5px solid transparent}
+.f1v-chap button.past{color:var(--f-ink2)}
+.f1v-chap button.now{color:var(--f-ink);border-bottom-color:var(--f-ink)}
+.f1v-where{font-size:var(--f-t-body);color:var(--f-ink2);white-space:nowrap}
+.f1v-city{display:flex;border:1px solid var(--f-rule);border-radius:999px;overflow:hidden}
+.f1v-city button{background:none;border:0;font-size:12.5px;padding:5px 12px;color:var(--f-ink2)}
+.f1v-city button[aria-pressed="true"]{background:var(--f-ink);color:#fff}
+.f1v-x{background:none;border:0;font-size:var(--f-t-body);color:var(--f-ink2);padding:6px 0}
+.f1v-body{flex:1 1 auto;display:flex;min-height:0}
+.f1v-main{flex:1 1 1040px;min-width:0;padding:22px 40px 16px;display:flex;flex-direction:column;gap:14px;overflow:auto}
+.f1v-chips{display:flex;gap:12px;align-items:center}
+.f1v-chip{font-size:12px;color:var(--f-ink2);border:1px solid var(--f-rule);border-radius:999px;padding:3px 10px}
+.f1v-draw{flex:1 1 auto;display:flex;align-items:center;justify-content:center;min-height:240px}
+.f1v-empty{max-width:420px;text-align:center;color:var(--f-mute);font-size:var(--f-t-body);line-height:1.6}
+.f1v-src{font-size:12px;color:var(--f-mute);max-width:880px}
+.f1v-src summary{cursor:pointer}
+.f1v-panel{flex:0 0 400px;background:var(--f-panel);border-left:1px solid var(--f-hair);padding:30px 36px 26px;display:flex;flex-direction:column;gap:22px;overflow:auto}
+.f1v-panel .chap{font-size:12px;color:var(--f-mute)}
+.f1v-panel h2{font-size:var(--f-t-title);font-weight:300;line-height:1.2;margin:0}
+.f1v-panel .lead{font-size:14px;line-height:1.55;color:var(--f-ink2);margin:0}
+.f1v-panel .grow{flex:1 1 auto}
+.f1v-nav{display:flex;align-items:center;justify-content:space-between}
+.f1v-back{background:none;border:0;font-size:var(--f-t-body);color:var(--f-ink2);padding:0}
+.f1v-back[disabled]{color:var(--f-faint);cursor:default}
+.f1v-no{font-size:12px;color:var(--f-faint);text-align:right}
+.f1v-strip{flex:0 0 auto;display:flex;gap:8px;padding:10px 28px 14px;border-top:1px solid var(--f-hair);overflow-x:auto}
+.f1v-strip button{flex:0 0 112px;height:64px;background:var(--f-bg);border:1px solid var(--f-hair);border-radius:2px;padding:7px 8px;text-align:left;font-size:11px;line-height:1.3;color:var(--f-ink2);display:flex;flex-direction:column;justify-content:space-between}
+.f1v-strip button .n{color:var(--f-faint);font-size:11px}
+.f1v-strip button[aria-current="true"]{border-color:var(--f-ink);color:var(--f-ink)}
+/* phone width: cards stack, drawing above, panel below (job sheet §2.5) */
+@media (max-width:760px){
+  .f1-wrap{padding:0 16px}
+  .f1-nav{gap:16px}
+  .f1-nav a:not(.f1-old){display:none}
+  .f1-hero{grid-template-columns:1fr;min-height:0;padding:16px 0 0}
+  .f1-hero h1{font-size:38px}
+  .f1-lines{grid-template-columns:1fr 1fr;gap:20px}
+  .f1-row{grid-template-columns:1fr;gap:12px}
+  .f1-row h3{font-size:28px}
+  .f1-row img{order:-1}
+  .f1-how{grid-template-columns:1fr;padding:36px 20px}
+  .f1-foot{flex-direction:column}
+  #f1v{overflow-y:auto}
+  .f1v-head{flex-wrap:wrap;height:auto;padding:10px 16px;gap:10px 16px}
+  .f1v-head .f1v-chap{order:5;flex-basis:100%}
+  .f1v-body{flex-direction:column}
+  .f1v-main{padding:16px}
+  .f1v-panel{flex:0 0 auto;border-left:0;border-top:1px solid var(--f-hair);padding:22px 16px}
+  .f1v-strip{padding:10px 16px}
+}

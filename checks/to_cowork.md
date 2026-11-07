@@ -63,3 +63,15 @@ Five lots: 339 1st Ave E narrow_deep (aspect 2.43, buildable 2,762 m²); 275 1st
 
 Ground export: held until the LiDAR datum is read from the dataset's metadata.
 
+## 7 Nov 2026 — Job F1 step 1: landing page and card shell, gate (Code)
+
+Branch site-f1. The landing page (Final_F_Landing) is the first screen; the old tool sits behind "Old tool". Each template row has Start and See the cards. See the cards opens the card shell (STYLE.md §4) on 339 1st Ave E or 64 Airport Rd NW, with a city switch, Back / Next and a strip to jump. Screenshots: checks/f1/ (46, both lots, 1440 and 390 px). No page or console errors; golden and Architecture unchanged.
+
+Questions:
+1. The cards come in steps 2–4, so each one says "not built yet". Fine for this gate?
+2. The old tool has no Municipal template, so Municipal Start is off until step 3. The other three open the old tool. OK?
+3. The board's hero is 64 Airport Rd (Altalis lot lines). I used 339 1st Ave E, Vancouver open data, so the page can be published. Its lot line is red (old style). Keep?
+4. With no Sources page yet, "Sources" opens the logic diagram.
+5. Architecture: Compare in Visualize (storyboard), Report alone, Checks has 3 cards.
+6. The Downloads copy adds §3b. Which sheet governs step 3?
+
