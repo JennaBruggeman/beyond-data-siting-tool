@@ -164,6 +164,7 @@
    "lotArea": 4503,
    "ring": "[ring 12]",
    "notes": [
+    "Generator test (Noise By-law 6555 s. 4.1(c)): one set at a time is about 75.7 dB(A) at 9.1 m (the nearest lot line), within the 80 dB(A) test limit (78 dB(A) at 7 m, Kohler G6-154, maker claim; free field, our arithmetic). Sets tested together would be louder. Running in a power cut as emergency works (s. 4.3(c)): our reading (?).",
     "Noise: needs a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 71–74 dBA (quieter–standard unit rating) at the point of reception beside 275 1ST AVE E (I-3, activity zone), 27 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii)).",
     "Noise: with the standard (louder) unit rating the plant would exceed the 65 dBA night limit at the point of reception beside 275 1ST AVE E (I-3, activity zone) (about 63–66 dBA (quieter–standard unit rating) with a 4.9 m solid screen (roof; NSW 2021, −8 dB), Noise Control By-law 6555 s. 2.3(b)(ii)). With the quieter rating it is under, so this is not blocked: standard units would need low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB)."
    ],
@@ -585,6 +586,14 @@
    "footRect": "[ring 8]",
    "simpleMass": true,
    "footArea": 848.498422,
+   "genNoise": {
+    "city": "van",
+    "d": 9.1,
+    "at": 9.1,
+    "L": 75.721133,
+    "ok": true,
+    "near": false
+   },
    "noise": {
     "lw": [
      107.6,
