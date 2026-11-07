@@ -31,7 +31,9 @@ Dates: match a user **6 Nov**; peer reviews **13/17 Nov** and **27 Nov**; archit
 - [x] Code: draw the inside loading dock in Arrange (ground-storey block at the rear, drive side; the hall may sit over it). f7a3d94 (dcrooms.js; rear end, v0 corner as a drawing choice: which side the drive is on is not checked ?). On Edmonton lots the dock takes ~40 m² of hall floor on the ground storey, said in the room note.
 - [x] Code: loading count uses the data centre's floor only. Re-read Bylaw 20001 Table 7.2 / s. 5.80 and Vancouver Parking By-law s. 5 (whole building or each use?), then fix. 630178f: Edmonton Table 7.2 is one threshold on the building's non-residential floor (data centre + programs); Vancouver s. 5.1 counts each class separately and adds them. E06A's bay is back; E06B gains one (3.5 → 3.4 MW); CLARK 3 → 4 and V339 2 → 3 after picks. Re-baselined 7bfbc49.
 - [ ] Code: hand-check 1425 Clark Dr (2.8 → 4.9 MW after the loading fix) by an independent agent: re-measure ground, plant yard, bays, drive.
-- [ ] J.B.: inside loading dock as the Architecture default — yes or no? **Gate.**
+- [x] J.B.: inside loading dock as the Architecture default — yes or no? **Gate.** Yes (J.B. 7 Nov 2026).
+- [ ] Open (7 Nov): which side the trucks' drive is on. The dock is drawn in the v0 corner at the rear as a drawing choice; nothing checks that a truck can reach it from a lane or drive. Settle with the section 5 rule sheet (bands, service routes).
+- [ ] Open (7 Nov): 74 Airport Rd (E06A) clinic is off the street front since the hold-back change (b86cfba). The section 5 bands rule (forecourt → public → lobby → data centre → plant) should put the clinic back on the street front; check it there.
 
 ## 3. Size of the problem
 
