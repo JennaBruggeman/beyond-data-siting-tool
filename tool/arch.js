@@ -228,9 +228,11 @@ function dockAccess(P){ const DP=dcPieces(P), D=DP&&DP.L.dock; if(!D) return nul
   /* straight out at the rear */ { let u=hi?ub:ua; const st=hi?0.5:-0.5; let n=0; while(inLot(u,(e0+e1)/2)&&n<80){ u+=st; n++; } const e=edgeAt(u,(e0+e1)/2); if(open(e)&&!hit(Math.min(u,hi?ub:ua),Math.max(u,hi?ub:ua),e0,e1)) return {ok:true,how:'straight out to the '+e.abuts+' at the rear'}; }
   /* along the rear to a side edge */ for(const dirV of [-1,1]){ let v=dirV<0?e0:e1, n=0; while(inLot((ua+ub)/2,v)&&n<400){ v+=dirV*0.5; n++; } const va=Math.min(v,dirV<0?e0:e1), vb=Math.max(v,dirV<0?e0:e1);
     if(!hit(ua,ub,va,vb)){ const e=edgeAt((ua+ub)/2,v); if(open(e)) return {ok:true,how:'along the rear to the '+e.abuts+' on the '+(e.kind||'side')}; } }
+  if(M.sideDrive){ const [s0,s1,t0,t1]=lb(M.sideDrive.ring); if(!hit(ua,ub,Math.min(t1,e0),Math.max(t1,e0))) return {ok:true,how:'by the 6.1 m drive from the front street along the side'}; return {ok:false,why:'the run along the rear from the side drive to the dock is blocked'}; }
   if(!(M.edgeYards||[]).some(e=>open(e)&&e.kind!=='front')) return {ok:false,why:'no street or lane reaches the rear: trucks would need a drive from the front street along a side, which Ratios counts as ground but the layout does not draw'};
   return {ok:false,why:'no clear 6.1 m run from the dock to a street or lane past the plant yard and the building'}; }
 function rules(P){ const s=P.s, M=s.M, city=s.city, code=zoneCode(), out=[...P.flags];
+  if(M.sideDrive){ const D=M.sideDrive; out.push({t:`Loading: no street or lane at the rear or sides, so a ${D.w} m drive runs from the front street along the side to the dock${D.narrow>0.05?`; the building is ${D.narrow.toFixed(1)} m narrower for it`:''}${D.inYard>0.05?`; ${D.inYard.toFixed(1)} m of it lies in the required side yard: driveway in a side yard ? (I-3 3.1.2.16, not read)`:''} (drawing choice; Edmonton gives no aisle width, 6.1 m used ?).`,src:[city==='van'?'vanParking5':'edmZB580'],sev:D.inYard>0.05?'q':'note'}); }
   { const da=dockAccess(P); P.dockAccess=da; if(da&&!da.ok) out.push({t:`Loading dock: trucks cannot reach it here (${da.why}). Route it another way (a gap in the plant yard, a dock on the side street) or test a smaller size; geometry only, turning not checked (?).`,src:['vanParking5'],sev:'bad'}); else if(da&&da.ok) out.push({t:`Loading dock: trucks reach it ${da.how} (6.1 m aisle; geometry only, turning not checked ?).`,src:['vanParking5'],sev:'note'}); } const PR=plantRings(M), sec=secureRing(P); const evap=(M.plant&&M.plant.boxes||[]).filter(b=>/tower|evapor|adiabatic/i.test(b.name)).map(b=>b.ring); P.secRing=sec;
   const cen=r=>BD.centroid(r);
   const need=[['plant yard',PR.yard],['loading',PR.loading],['generators',PR.gens[0]]].filter(x=>x[1]);
@@ -365,7 +367,8 @@ function groundItems(b,M,r){ const RG=AD.ratioGround, F=M.F, P=M.plant||{}, out=
   if(RG&&P.s&&P.s.Q){ const n=Math.ceil(P.s.Q*1000/RG.txKVA-1e-9)+1, row=n*(RG.txPad[0]+RG.txGap), cl=RG.txBld[b.city]||0; out.tx={n,m2:row*(RG.txPad[1]+cl),cl}; }
   /* a flank or rear street, or a lane, reaches the rear yard; otherwise a drive runs to it (7 Nov 2026: lanes count; Vancouver edges now carry abuts) */
   const street=(M.edgeYards||[]).some(e=>(e.abuts==='street'||e.abuts==='alley')&&e.kind!=='front'); out.reach=street?(M.edgeYards||[]).filter(e=>(e.abuts==='street'||e.abuts==='alley')&&e.kind!=='front').map(e=>e.abuts+' ('+e.kind+')'):null;
-  if(!street&&M.uBuild&&M.loadingNeed){ const a0=M.uBuild[0]+(M.plantYardDepth?M.dir*M.plantYardDepth:0), len=Math.abs(M.uFront-a0), w=M.loadingNeed.aisle||0; out.drive={m2:w*len,w,len}; }
+  if(M.sideDrive) out.drive={m2:0,w:0,len:0,side:true}; /* the side drive's ground is already out of the footprint (building narrowed) or in the side yard */
+  else if(!street&&M.uBuild&&M.loadingNeed){ const a0=M.uBuild[0]+(M.plantYardDepth?M.dir*M.plantYardDepth:0), len=Math.abs(M.uFront-a0), w=M.loadingNeed.aisle||0; out.drive={m2:w*len,w,len}; }
   out.dock=M.loadInside?M.loadInside.m2:0; out.dockN=M.loadInside?M.loadInside.n:0; /* 5 Nov 2026: loading bays inside take ground-storey floor */
   out.G=Math.max(0,out.G0-out.intr-out.tx.m2-out.drive.m2-out.dock); return out; }
 function dcCapPct(b,r,fm){ const c=ratioCalc(b,Object.assign({},r,{dc:100,prog:0})), M=BD.model(), pg=progGround(b), it=M&&M.foot?groundItems(b,M,r):null;
