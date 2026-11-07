@@ -5,7 +5,7 @@
   "extent": "whole",
   "floor": "",
   "host": {},
-  "mw": 1.9,
+  "mw": 1.7,
   "foot": "max",
   "cover": 70,
   "hmode": "out",
@@ -164,7 +164,7 @@
    "lotArea": 4503,
    "ring": "[ring 12]",
    "notes": [
-    "Noise: needs a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 71–74 dBA (quieter–standard unit rating) at the point of reception beside 275 1ST AVE E (I-3, activity zone), 28 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii)).",
+    "Noise: needs a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 71–74 dBA (quieter–standard unit rating) at the point of reception beside 275 1ST AVE E (I-3, activity zone), 27 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii)).",
     "Noise: with the standard (louder) unit rating the plant would exceed the 65 dBA night limit at the point of reception beside 275 1ST AVE E (I-3, activity zone) (about 63–66 dBA (quieter–standard unit rating) with a 4.9 m solid screen (roof; NSW 2021, −8 dB), Noise Control By-law 6555 s. 2.3(b)(ii)). With the quieter rating it is under, so this is not blocked: standard units would need low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB)."
    ],
    "warn": [],
@@ -397,6 +397,7 @@
    "yardOff": "[ring 10]",
    "yardLine": "[ring 10]",
    "yardOffBad": false,
+   "sideDrive": null,
    "loadingNeed": {
     "n": 2,
     "nDC": 2,
@@ -407,7 +408,7 @@
     "aisle": 6.1,
     "cls": "truck loading bay",
     "nC": 0,
-    "basis": "2 truck loading bays: 2 for the data centre's 1,457 m² of floor. Each class of use is counted separately and the counts added (Parking By-law s. 5.1, Multi-Use Developments). The by-law calls this size Class B, its mid-size bay: 10.2 × 3.4 m with 3.8 m clearance (Class C is the 23.1 m bay for the largest trucks). The data centre uses row 5.2.5: the by-law does not name data centres, but the City classes them as a Transportation and Storage use (RTS 19744), which row 5.2.5 lists. Each bay is reached by a 6.1 m aisle (s. 5.4.1).",
+    "basis": "2 truck loading bays: 2 for the data centre's 1,303 m² of floor. Each class of use is counted separately and the counts added (Parking By-law s. 5.1, Multi-Use Developments). The by-law calls this size Class B, its mid-size bay: 10.2 × 3.4 m with 3.8 m clearance (Class C is the 23.1 m bay for the largest trucks). The data centre uses row 5.2.5: the by-law does not name data centres, but the City classes them as a Transportation and Storage use (RTS 19744), which row 5.2.5 lists. Each bay is reached by a 6.1 m aisle (s. 5.4.1).",
     "src": "vanParking5"
    },
    "loading": "[ring 8]",
@@ -432,10 +433,10 @@
     12.95,
     -31.75
    ],
-   "mwSized": 1.9,
+   "mwSized": 1.7,
    "plant": {
     "s": {
-     "Q": 2.945,
+     "Q": 2.635,
      "k": {
       "name": "air-cooled chillers",
       "L": 12.141,
@@ -531,15 +532,15 @@
      }
     ],
     "lines": [
-     "Sized for <b>1.9 MW</b> of servers: heat to reject ≈ 1.9 × PUE 1.55 = <b>2.9 MW</b> at peak.",
+     "Sized for <b>1.7 MW</b> of servers: heat to reject ≈ 1.7 × PUE 1.55 = <b>2.6 MW</b> at peak.",
      "2 air-cooled chillers carry it; with spares, <b>3</b>. Placed: 3 on the roof, 0 in the yard.",
      "Each unit about 12.141 × 2.362 m, 2.896 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
      "<span class=\"src\">Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit near…"
     ],
     "genLines": [
-     "3 generator sets of about 1 MW carry 2.9 MW; with spares, <b>4</b>. Placed: 0 on the roof, 4 in the yard.",
+     "3 generator sets of about 1 MW carry 2.6 MW; with spares, <b>4</b>. Placed: 0 on the roof, 4 in the yard.",
      "Each about 8.434 × 2.616 m, 3.706 m high; 1.5 m from the building, 2 m between sets (1 m clear all round, CSA C282 6.5.1.1; register arch_csa_c282).",
-     "Fuel in each set's sub-base tank: about 3100 L. In the yard: 3 m from the property line and 1.5 m from the building (CSA B139.1.0 Table 2; register arch_csa_b139). On a roof: at most 1,250 L a tank and 2,500 L a supply line (B139.1.1 6.5.3). FM 5-32 (insurer guidance, not law): not on the roof or in a basement.",
+     "Fuel in each set's sub-base tank: about 2800 L. In the yard: 3 m from the property line and 1.5 m from the building (CSA B139.1.0 Table 2; register arch_csa_b139). On a roof: at most 1,250 L a tank and 2,500 L a supply line (B139.1.1 6.5.3). FM 5-32 (insurer guidance, not law): not on the roof or in a basement.",
      "<span class=\"src\">Standby diesel generator sets in Sound Level 2 enclosures with sub-base tanks. Basis units: Rehlko (Kohler) KD2000, 2,000 kW standby (data-centre continuous rating the same), 13.49 × 3.49 m, up to 4.78 m high (G5-626, rev 6/24); KD1000, 1,000 kW, 8.43 × 2.62 m, 3.71 m high with the 12 h tank (G6-154, 12/23). Both EPA Tier 2, cULus (UL 2200, CSA C22.2 No. 100); manufacturer claims. Chosen 29 Oct 2026 as the middle of Cat, Rehlko and Generac: 2 MW 18.5–38.4 m² per MW, 1 MW 19.5–22.4. 1 m clear around each set (Cummins application manual; not checked ?); 1.5 m from wall openings…"
     ],
     "short": "",
@@ -548,7 +549,7 @@
     "genYard": 4,
     "genRoof": 0,
     "genTank": {
-     "L": 3098.14,
+     "L": 2772.02,
      "bld": 1.5,
      "pl": 3,
      "over": false
@@ -576,8 +577,8 @@
    "plantYardDepth": 17.248,
    "serverFoot": "[ring 8]",
    "sizedTo": {
-    "mw": 1.9,
-    "floor": 1456.666667,
+    "mw": 1.7,
+    "floor": 1303.333333,
     "perMW": 766.666667
    },
    "foot": "[ring 8]",
@@ -591,8 +592,8 @@
     ],
     "n": 3,
     "src": [
-     1717,
-     2024.5
+     1716.8,
+     2025.5
     ],
     "where": "roof",
     "groups": [
@@ -601,7 +602,7 @@
       "n": 3
      }
     ],
-    "tested": 3644,
+    "tested": 3645,
     "overQ": 0,
     "overS": 1,
     "limit": 65,
@@ -616,14 +617,14 @@
     "bldOnly": 0,
     "block": null,
     "flag": "Noise: with the standard (louder) unit rating the plant would exceed the 65 dBA night limit at the point of reception beside 275 1ST AVE E (I-3, activity zone) (about 63–66 dBA (quieter–standard unit rating) with a 4.9 m solid screen (roof; NSW 2021, −8 dB), Noise Control By-law 6555 s. 2.3(b)(ii)). With the quieter rating it is under, so this is not blocked: standard units would need low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB).",
-    "req": "Noise: needs a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 71–74 dBA (quieter–standard unit rating) at the point of reception beside 275 1ST AVE E (I-3, activity zone), 28 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii)).",
+    "req": "Noise: needs a 4.9 m solid screen around the roof plant, no gaps, ≥ 20 kg/m²: −8 dB, NSW 2021 method (arch_nz_nswDcNoise), never more than FHWA's line-of-sight rule gives (arch_nz_fhwaNBDH). Taller than the units, so EVAPCO's wall rule needs more space or the maker's approval (?). Without it: about 71–74 dBA (quieter–standard unit rating) at the point of reception beside 275 1ST AVE E (I-3, activity zone), 27 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii)).",
     "worst": {
      "addr": "275 1ST AVE E",
      "zt": "I-3, activity zone",
      "lot": true,
-     "d": 27.6,
-     "lo": 70.8,
-     "hi": 74.1,
+     "d": 26.8,
+     "lo": 71,
+     "hi": 74.3,
      "L": 65,
      "Ls": 65,
      "sec": "Noise Control By-law 6555 s. 2.3(b)(ii)"

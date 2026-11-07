@@ -4,11 +4,11 @@
   "uf": -32.97597365615536,
   "dir": -1,
   "v": [
-   -30.456754563202594,
+   -24.356754563202593,
    30.456754563202594
   ],
   "L": 44.83794731231072,
-  "hd": 31.415028250822964,
+  "hd": 25.65026315654479,
   "F": [
    74.95194731231072,
    60.91350912640519
@@ -30,19 +30,19 @@
    ],
    [
     -30.97597365615536,
-    1.024026343844639
+    -14.975973656155361
    ],
    [
     -30.97597365615536,
-    -12.975973656155361
-   ],
-   [
-    -30.97597365615536,
-    -20.97597365615536
+    -24.97597365615536
    ],
    [
     -8.975973656155361,
-    11.024026343844639
+    3.024026343844639
+   ],
+   [
+    -24.97597365615536,
+    -14.975973656155361
    ]
   ],
   "plant": [
@@ -51,42 +51,42 @@
     "yard",
     24,
     28,
-    -27,
-    -14
+    -21,
+    -8
    ],
    [
     "standby generators",
     "yard",
     30,
     33,
-    -27,
-    -14
+    -21,
+    -8
    ],
    [
     "standby generators",
     "yard",
     24,
     28,
-    -12,
-    2
+    -6,
+    8
    ],
    [
     "standby generators",
     "yard",
     30,
     33,
-    -12,
-    2
+    -6,
+    8
    ]
   ],
   "yard": [
    [
     12,
-    -30
+    -24
    ],
    [
     37,
-    -30
+    -24
    ],
    [
     37,
@@ -157,7 +157,7 @@
    "clinic",
    [
     -31,
-    1
+    -15
    ],
    true,
    500,
@@ -170,7 +170,7 @@
    "spa",
    [
     -31,
-    -13
+    -25
    ],
    false,
    320,
@@ -182,10 +182,10 @@
   [
    "ev_hub",
    [
-    -31,
-    -21
+    -9,
+    3
    ],
-   true,
+   false,
    150,
    150,
    0,
@@ -195,14 +195,14 @@
   [
    "greenhouse",
    [
-    -9,
-    11
+    -25,
+    -15
    ],
    false,
    190,
    190,
-   0,
-   0,
+   1,
+   6,
    6
   ]
  ],
@@ -211,29 +211,29 @@
   12
  ],
  "hallPick": {
-  "tried": 10,
-  "passed": 10,
-  "n": 10,
+  "tried": 8,
+  "passed": 8,
+  "n": 8,
   "under": false,
   "best": {
-   "key": "2:-20.4,11.0:31.4",
+   "key": "2:-14.6,11.0:38.5",
    "k": 2,
    "st": 2,
    "top": 12,
    "along": "back",
-   "a": 1,
+   "a": 1.5,
    "fa": 986.9040000000001,
    "drawn": 1525
   }
  },
  "hallUV": [
   [
-   -20,
+   -15,
    11
   ],
   [
-   -30,
-   1
+   -24,
+   14
   ]
  ],
  "hallStoreys": 2,
@@ -258,10 +258,11 @@
  },
  "rules": [
   "note: Loading: 1 bay inside the building (41 m² of ground storey; Architecture default, as the test fits draw it). Ratios takes this floor out of the ground; Arrange draws it on the ground storey at the rear end of the building (drawing choice).",
-  "bad: Data centre: its share (27%) leaves too little ground for the picked programs beside the hall. Hall and its support rooms need 1,473 m² of ground per storey (2 hall storeys under the 16 m height limit; support 33 % of the data centre); 127 m² available. Ground: footprint after the plant yard 2,743 m² − 3 transformer pads, 6 m from the building, 93 − 1 loading bay inside 41 − a 6.1 m drive to the rear yard 274 (no other street reaches it) − programs 2,210 m² (Refuge 265 as set; Greenhouse 190 as set; Outpatient clinic 500 as set; Bathhouse / Nordic spa 320 as set; Fish farm 685 as set; Warming shelter 100 as set; EV charging hub 150 at its minimum). Back in Ratios it takes at most 2%.",
+  "bad: Data centre: its share (27%) leaves too little ground for the picked programs beside the hall. Hall and its support rooms need 1,473 m² of ground per storey (2 hall storeys under the 16 m height limit; support 33 % of the data centre); 126 m² available. Ground: footprint after the plant yard 2,469 m² − 3 transformer pads, 6 m from the building, 93 − 1 loading bay inside 41 − programs 2,210 m² (Refuge 265 as set; Greenhouse 190 as set; Outpatient clinic 500 as set; Bathhouse / Nordic spa 320 as set; Fish farm 685 as set; Warming shelter 100 as set; EV charging hub 150 at its minimum). Back in Ratios it takes at most 2%.",
   "bad: Public indoor pool: 1,065 m² is over the 500 m² this use may have in BE; not drawn. Its sourced minimum (815 m²) is over the cap, so it cannot go on a BE lot.",
   "bad: Fish farm: 685 m² would pass the programs' share of the floor (2,193 m², 668 m² left); not drawn. Edit ratios to give programs more.",
-  "bad: Loading dock: trucks cannot reach it here (no street or lane reaches the rear: trucks would need a drive from the front street along a side, which Ratios counts as ground but the layout does not draw). Route it another way (a gap in the plant yard, a dock on the side street) or test a smaller size; geometry only, turning not checked (?).",
+  "note: Loading: no street or lane at the rear or sides, so a 6.1 m drive runs from the front street along the side to the dock; the building is 6.1 m narrower for it (drawing choice; Edmonton gives no aisle width, 6.1 m used ?).",
+  "note: Loading dock: trucks reach it by the 6.1 m drive from the front street along the side (6.1 m aisle; geometry only, turning not checked ?).",
   "note: Refuge: A-2, 2 h fire separation from the data centre (F-2).",
   "q: Refuge: keep-apart rules not checked here: generators (no distance in the source).",
   "note: Warming shelter: A-2, 2 h fire separation from the data centre (F-2).",
@@ -330,15 +331,15 @@
  "saved": [
   [
    "suggest",
-   4,
-   18,
+   3,
+   19,
    52,
-   0.44606542882404954
+   0.4803271441202476
   ],
   [
    "lot",
-   9,
-   23,
+   8,
+   24,
    52,
    0
   ]
