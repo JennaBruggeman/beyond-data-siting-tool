@@ -1,14 +1,14 @@
 {
  "dbg": {
-  "a0": 23.729510344571167,
+  "a0": 22.679510344571167,
   "uf": -32.70551034457117,
   "dir": -1,
   "v": [
    -29.021238789634026,
    29.021238789634026
   ],
-  "L": 56.435020689142334,
-  "hd": 33.11652155646807,
+  "L": 55.38502068914234,
+  "hd": 37.93974169653759,
   "F": [
    74.41102068914233,
    58.04247757926805
@@ -17,7 +17,7 @@
    37.20551034457117,
    -32.70551034457117
   ],
-  "pyd": 13.475999999999999,
+  "pyd": 14.526,
   "front": -32.70551034457117,
   "bu": [
    [
@@ -29,71 +29,79 @@
     -22.705510344571167
    ],
    [
-    -22.705510344571167,
-    9.294489655428833
+    -32.70551034457117,
+    -0.7055103445711666
    ],
    [
     -32.70551034457117,
-    -18.705510344571167
+    -8.705510344571167
    ],
    [
-    9.294489655428833,
-    19.294489655428833
+    -32.70551034457117,
+    -16.705510344571167
    ],
    [
-    -22.705510344571167,
-    -2.7055103445711666
+    -0.7055103445711666,
+    13.294489655428833
    ]
   ],
   "plant": [
    [
     "standby generators",
     "yard",
-    25,
-    29,
-    -12,
-    1
-   ],
-   [
-    "standby generators",
-    "yard",
-    25,
-    29,
-    3,
-    17
-   ],
-   [
-    "standby generators",
-    "yard",
-    -31,
-    -18,
-    -22,
-    -19
-   ],
-   [
-    "standby generators",
-    "yard",
-    -31,
-    -18,
-    -17,
+    24,
+    28,
+    -26,
     -13
+   ],
+   [
+    "standby generators",
+    "yard",
+    30,
+    33,
+    -26,
+    -13
+   ],
+   [
+    "standby generators",
+    "yard",
+    24,
+    28,
+    -11,
+    3
+   ],
+   [
+    "standby generators",
+    "yard",
+    30,
+    33,
+    -11,
+    3
+   ],
+   [
+    "standby generators",
+    "yard",
+    24,
+    28,
+    5,
+    18
    ]
   ],
   "yard": [
    [
-    24,
+    23,
     -29
    ],
    [
-    37,
+    36,
     -29
    ],
    [
-    37,
+    36,
     29
    ],
    [
-    24,
+    23,
     29
    ]
   ],
@@ -156,10 +164,10 @@
   [
    "clinic",
    [
-    -23,
-    9
+    -33,
+    -1
    ],
-   false,
+   true,
    500,
    500,
    0,
@@ -170,7 +178,7 @@
    "spa",
    [
     -33,
-    -19
+    -9
    ],
    false,
    320,
@@ -182,10 +190,10 @@
   [
    "ev_hub",
    [
-    9,
-    19
+    -33,
+    -17
    ],
-   false,
+   true,
    150,
    150,
    0,
@@ -195,14 +203,14 @@
   [
    "greenhouse",
    [
-    -23,
-    -3
+    -1,
+    13
    ],
    false,
    190,
    190,
-   1,
-   6,
+   0,
+   0,
    6
   ]
  ],
@@ -212,46 +220,40 @@
  ],
  "hallPick": {
   "tried": 10,
-  "passed": 9,
+  "passed": 10,
   "n": 10,
   "under": false,
   "best": {
-   "key": "2:-9.7,23.4:33.1",
+   "key": "2:-15.6,22.3:37.9",
    "k": 2,
    "st": 2,
    "top": 12,
    "along": "back",
    "a": 1,
-   "fa": 1096.7040000000002,
+   "fa": 1439.424,
    "drawn": 1525
-  },
-  "fails": [
-   [
-    "1:-16.4,23.4:55.1",
-    "2 of 4 generators do not fit in the yard."
-   ]
-  ]
+  }
  },
  "hallUV": [
   [
-   -10,
-   23
+   -16,
+   22
   ],
   [
-   -29,
-   4
+   -28,
+   10
   ]
  ],
  "hallStoreys": 2,
  "space": {
-  "hall": 2193,
+  "hall": 2879,
   "prog": 1525,
   "cap": 6854.400000000001
  },
  "heat": {
   "avail": [
-   12711.26057142857,
-   19512.899999999998
+   16948.347428571426,
+   26017.199999999997
   ],
   "need": [
    130.87,
@@ -264,9 +266,10 @@
  },
  "rules": [
   "note: Loading: 1 bay inside the building (41 m² of ground storey; Architecture default, as the test fits draw it). Ratios takes this floor out of the ground; Arrange draws it on the ground storey at the rear end of the building (drawing choice).",
-  "bad: Data centre: its share (32%) leaves too little ground for the picked programs beside the hall. Hall and its support rooms need 1,637 m² of ground per storey (2 hall storeys under the 16 m height limit; support 33 % of the data centre); 331 m² available. Ground: footprint after the plant yard 3,263 m² − yard units over it 214 − 4 transformer pads, 6 m from the building, 123 − 1 loading bay inside 41 − a 6.1 m drive to the rear yard 344 (no other street reaches it) − programs 2,210 m² (Refuge 265 as set; Greenhouse 190 as set; Outpatient clinic 500 as set; Bathhouse / Nordic spa 320 as set; Fish farm 685 as set; Warming shelter 100 as set; EV charging hub 150 at its minimum). Back in Ratios it takes at most 6%.",
+  "bad: Data centre: its share (42%) leaves too little ground for the picked programs beside the hall. Hall and its support rooms need 2,148 m² of ground per storey (2 hall storeys under the 16 m height limit; support 33 % of the data centre); 829 m² available. Ground: footprint after the plant yard 3,203 m² − 4 transformer pads, 6 m from the building, 123 − 1 loading bay inside 41 − programs 2,210 m² (Refuge 265 as set; Greenhouse 190 as set; Outpatient clinic 500 as set; Bathhouse / Nordic spa 320 as set; Fish farm 685 as set; Warming shelter 100 as set; EV charging hub 150 at its minimum). Back in Ratios it takes at most 16%.",
   "bad: Public indoor pool: 1,065 m² is over the 500 m² this use may have in BE; not drawn. Its sourced minimum (815 m²) is over the cap, so it cannot go on a BE lot.",
   "bad: Fish farm: 685 m² would pass the programs' share of the floor (2,056 m², 531 m² left); not drawn. Edit ratios to give programs more.",
+  "bad: Loading dock: trucks cannot reach it here (plant units stand in front of the dock face). Route it another way (a gap in the plant yard, a dock on the side street) or test a smaller size; geometry only, turning not checked (?).",
   "note: Refuge: A-2, 2 h fire separation from the data centre (F-2).",
   "q: Refuge: keep-apart rules not checked here: generators (no distance in the source).",
   "note: Warming shelter: A-2, 2 h fire separation from the data centre (F-2).",
@@ -285,10 +288,10 @@
  "ratios": {
   "ratio": {
    "cover": 4022,
-   "dc": 32,
+   "dc": 42,
    "prog": 30,
    "end": "low",
-   "mw": 3.4
+   "mw": 4.5
   },
   "base": {
    "lot": 4284,
@@ -306,18 +309,18 @@
    "allowed": 6854,
    "by": "fsr",
    "dcMax": 6854,
-   "dcM2": 2193,
+   "dcM2": 2879,
    "progM2": 2056,
-   "unused": 2605,
+   "unused": 1919,
    "mw": [
-    3.45,
-    7.48
+    4.53,
+    9.81
    ],
-   "mwTest": 3.4
+   "mwTest": 4.5
   },
   "answers": {
-   "mw": 3.4,
-   "dcFloor": 2193
+   "mw": 4.5,
+   "dcFloor": 2879
   },
   "side": [
    "Ratios"
@@ -331,20 +334,20 @@
   "stuck": false,
   "next": "Next: Programs"
  },
- "split": "Data centre 32% · 2,193 m² · 3.3–7.3 MW (testing 3.3) · programs 30% · 2,056 m² · unused 38% arch_ratios Edit ratios",
+ "split": "Data centre 42% · 2,879 m² · 4.4–9.6 MW (testing 4.4) · programs 30% · 2,056 m² · unused 28% arch_ratios Edit ratios",
  "saved": [
   [
    "suggest",
-   3,
-   17,
-   27,
-   0.5181347150259067
+   4,
+   18,
+   52,
+   0.4783325482807348
   ],
   [
    "lot",
-   8,
-   22,
-   27,
+   9,
+   23,
+   52,
    0
   ]
  ],
