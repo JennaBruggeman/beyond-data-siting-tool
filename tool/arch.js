@@ -76,6 +76,11 @@ function place(){ const An=BD.S.answers; if(!ratioNow()){ hallPick.key=null; ret
     BD.modelReset(); hallPick={key,opt:An.hallOpt,info}; }
   else if(An.hallOpt!==hallPick.opt){ An.hallOpt=hallPick.opt; BD.modelReset(); }
   const P=placeOnce(); if(!P) return P; P.hallPick=hallPick.info;
+  /* J.B. 7 Nov 2026: the hall floor the dock takes comes out of the MW: feed it back to Ratios once and place again (the footprint stays: dcFloor is unchanged) */
+  /* J.B. 7 Nov 2026: loading counts only the programs Arrange draws (site.js progFloor reads A.drawn); the rest are named in the loading note */
+  const dk=JSON.stringify([selId(),P.boxes.map(x=>x.id).sort()]), drawnNew=!A.drawn||A.drawn.key!==dk; if(drawnNew) A.drawn={key:dk,site:selId(),ids:P.boxes.map(x=>x.id),not:(P.notDrawn||[]).slice()};
+  if(A.ratio&&!place.again){ const DP=dcPieces(P), lost=DP&&DP.L.dock?Math.round(DP.L.dock.hallLost||0):0, had=A.ratio.dockSite===A.ratio.site?(A.ratio.dockLost||0):0, lostNew=Math.abs(lost-had)>0.5;
+    if(lostNew||drawnNew){ if(lostNew){ A.ratio.dockLost=lost; A.ratio.dockSite=A.ratio.site; ratioApply(); } else BD.modelReset(); place.again=true; try{ return place(); } finally{ place.again=false; } } }
   if(!under&&An.hallOpt==='full') P.flags.unshift({t:`Data hall: none of its ${hallPick.info.n} footprint options passes the set-up here (plant on its roof, loading, fuel or noise), so it is drawn full width at the back, to the height limit, as before (a drawing choice, not a rule).`,src:['arch_ratios'],sev:'note'});
   return P; }
 function hallScore(P){ const drawn=P.boxes.reduce((t,b)=>t+(b.q.m2||0),0), spread=P.boxes.filter(b=>b.spread).length;
@@ -305,8 +310,10 @@ function ratioBase(){ const M=BD.model&&BD.model(); if(!M||!M.F||M.existing||!M.
   return {M,Z,code,lot:M.lotArea,build,yard,floors,dataFl,fsr,coverNone:(DR.coverLimit.none||[]).includes(code),coverZ:(BD.data.raw.dc_rooms.coverLimit.byZone||{})[code]||null,split,perMW:[lo,hi],city:M.city}; }
 function ratioCalc(b,r){ const cover=Math.min(r.cover,b.build), capF=b.fsr&&b.lot?b.lot*b.fsr:Infinity, capE=cover*b.floors, allowed=Math.min(capF,capE);
   const dcMax=Math.min(allowed,cover*b.dataFl), dcM2=Math.min(dcMax,r.dc/100*allowed), progM2=Math.min(allowed-dcM2,r.prog/100*allowed);
-  const mw=[dcM2/b.perMW[1],dcM2/b.perMW[0]], pick=r.end==='high'?mw[1]:mw[0], mwTest=Math.floor(pick*10+1e-9)/10;
-  return {cover,allowed,capF,capE,by:capF<=capE?'fsr':'envelope',dcMax,dcM2,progM2,unused:Math.max(0,allowed-dcM2-progM2),mw,mwTest:mwTest>=0.1?mwTest:null}; }
+  /* J.B. 7 Nov 2026: hall floor the inside dock takes on a hall storey (with any strip under 3 m beside it; dcrooms.js) comes out of the MW, not the footprint */
+  const lost=r.dockLost&&r.dockSite===r.site?Math.min(dcM2,r.dockLost):0, hallM2=dcM2-lost;
+  const mw=[hallM2/b.perMW[1],hallM2/b.perMW[0]], pick=r.end==='high'?mw[1]:mw[0], mwTest=Math.floor(pick*10+1e-9)/10;
+  return {cover,allowed,capF,capE,by:capF<=capE?'fsr':'envelope',dcMax,dcM2,dockLost:lost,progM2,unused:Math.max(0,allowed-dcM2-progM2),mw,mwTest:mwTest>=0.1?mwTest:null}; }
 /* the largest size every hard rule allows with this set-up (site.js fitMax: plant, generators, fuel, noise), worked out without the ratio's floor */
 function fitNoRatio(){ const An=BD.S.answers, keep=An.dcFloor; delete An.dcFloor; BD.modelReset&&BD.modelReset(); let fm=null; try{ fm=BD.fitMax?BD.fitMax():null; if(BD.fitPlan) fitNoRatio.plan=BD.fitPlan(); }finally{ if(keep!=null) An.dcFloor=keep; BD.modelReset&&BD.modelReset(); } return fm; }
 /* dcshare 4 Nov 2026: the fit search runs the noise ladder (low-noise units, screen, then an enclosed plant room: site.js model) before it caps a size; Ratios names the measure */
