@@ -41,10 +41,10 @@ const LOTS = {
 const SETS = [
   ['refuge', 'pool', 'greenhouse', 'clinic', 'ev_hub', 'warming_shelter', 'public_ground', 'gym'],
   ['refuge', 'warming_shelter', 'spa', 'therapy_pool', 'community_kitchen', 'fish_farm', 'conservatory', 'laundry', 'ev_hub'],
-  ['refuge', 'pool', 'greenhouse', 'heat_plant', 'ev_hub', 'clinic', 'covered_plaza', 'roof_solar', 'winter_garden', 'food_drying'],
-  ['refuge', 'clinic', 'pool', 'warming_shelter', 'greenhouse', 'aquarium'],
+  ['refuge', 'pool', 'greenhouse', 'heat_plant', 'ev_hub', 'clinic', 'covered_plaza', 'roof_solar'], // 7 Nov 2026: winter garden, food drying hidden (out for now)
+  ['refuge', 'clinic', 'pool', 'warming_shelter', 'greenhouse', 'conservatory'], // 7 Nov 2026: aquarium dropped (J.B. 4 Nov)
 ];
-const TYPE = { laundry: 150, heat_plant: 88, covered_plaza: 300, winter_garden: 250, food_drying: 120, lumber_drying: 200 };
+const TYPE = { laundry: 150, heat_plant: 88, covered_plaza: 300, winter_garden: 250, food_drying: 120 };
 
 // ---------- in-page helpers (installed once per page) ----------
 const HELP = `(()=>{ const H=window.__H={};
@@ -73,7 +73,7 @@ H.check=(tag)=>{ const I=[]; const iss=(sev,what)=>I.push([sev,tag+': '+what]);
   const zoneH=Z.hOutright!=null?Math.max(Z.hOutright,M.hmode==='conditional'&&Z.hx?Z.hx[0]:0):null;
   const hallTop=P.hall.base+P.hall.h; if(zoneH!=null&&hallTop>zoneH+0.01) iss('high','hall drawn to '+hallTop.toFixed(1)+' m, over the zone height '+zoneH+' m');
   if(M.H&&hallTop>M.H+0.01) iss('high','hall drawn to '+hallTop.toFixed(1)+' m, over the set-up height '+M.H.toFixed(1)+' m');
-  let floor=s.hallM2, nonInd=0; const ind=(q)=>['heat_plant','food_drying','lumber_drying','ev_hub'].includes(q.id)||(/I-2/.test(code)&&(q.id==='community_kitchen'||(q.id==='laundry'&&q.opt==='commercial')));
+  let floor=s.hallM2, nonInd=0; const ind=(q)=>['heat_plant','food_drying','ev_hub'].includes(q.id)||(/I-2/.test(code)&&(q.id==='community_kitchen'||(q.id==='laundry'&&q.opt==='commercial')));
   const drawn=new Set();
   for(const b of P.boxes){ const nm=b.id+(b.underHall?' (under hall)':''); drawn.add(b.id);
     // in the lot, outside the required yards

@@ -12536,7 +12536,7 @@
 "stage": "decide",
 "name": "Programs a site could hold (Architecture mode)",
 "formula": "for each program: typical and minimum size, size steps, storeys, NBC major occupancy and fire separation from F-2, room and supply temperature, yearly heat per m², zoning status per city, placement needs, adjacency rules with distances, options, who it serves",
-"coef": "25 programs (20 masses, 2 surfaces, 3 systems) in tool/arch_programs.json; every value from a checked source or null with '?'; dropped by J.B. 2 Nov 2026: hospital, housing, seniors' care, sludge drying, cold-water fish, winter market (meta.dropped_programs)",
+"coef": "23 programs (18 masses, 2 surfaces, 3 systems) in tool/arch_programs.json, 2 of them hidden ('out for now', J.B. 4 Nov 2026: food drying, winter garden); aquarium and lumber drying removed 7 Nov 2026 (dropped by J.B. 4 Nov 2026); every value from a checked source or null with '?'; dropped by J.B. 2 Nov 2026: hospital, housing, seniors' care, sludge drying, cold-water fish, winter market (meta.dropped_programs)",
 "unit": "per program",
 "sources": [
 "abDirective",
