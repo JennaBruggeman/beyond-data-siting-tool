@@ -173,7 +173,9 @@ function placeOnce(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W
           add(`keep-apart: the free room left is within ${ka.join(', ')} (register ${kaS.join(', ')||'?'})`,kaS); }
         else add(`minimum size or sides: no free area of its size with sides of at least ${sides} is left beside the hall, the plant, the plant yard and loading`,sideSrc); }
       out.flags.push({t:`${nm}: not drawn. Stopped by ${R.join('; ')}.`,src,sev:'bad',id:q.id,stop:R}); out.notDrawn.push(q.id); continue; }
-    if(st>st0) out.flags.push({t:`${nm}: ${n0(q.m2)} m² does not fit on one floor here${mustSt?' along the street front (it needs its own street entrance)':''}; drawn over ${st} storeys only to show its size. Whether it can be split across floors is a design question.`,src:[],sev:'bad',id:q.id});
+    /* 7 Nov 2026 (J.B.): a block on several storeys is drawn as real storeys: each floor its own room, with two stairs and a lift (plan.js, rule sheet v0).
+       The clinic may sit on upper floors in Vancouver (J.B. 4 Nov 2026, Q7): a note. For other programs, splitting across floors stays a design question. */
+    if(st>st0) out.flags.push({t:`${nm}: ${n0(q.m2)} m² on ${st} storeys of about ${n0(q.m2/st)} m² each${mustSt?' (it does not fit on one floor along the street front, where it needs its own entrance)':' (it does not fit on one floor here)'}, with two stairs and a lift (plan layer; their floor comes out of the program's, net floor in the plan).${q.id==='clinic'?' A clinic may sit on upper floors (J.B. 4 Nov 2026).':' Whether this program can be split across floors is a design question.'}`,src:q.id==='clinic'?['arch_ratios']:[],sev:q.id==='clinic'?'note':'q',id:q.id});
     const {base,i,j,dc,wc}=best, hh=hOf(base,st), spread=st>st0, uA=dir<0?bu0+i*cs:bu1-(i+dc)*cs, uB=uA+dc*cs, vA=v0+j*cs, vB=vA+Math.min(wc*cs,q.m2/st/(dc*cs)), gap=gc*cs; // exact area: full cells along u, the width trimmed to the size
     floorUsed+=q.m2; progUsed+=q.m2; if(base===0) gUsed+=q.m2/st; if(!industrialUse(q,code)) nonInd+=q.m2; occ.push([uA,uB,vA,vB,base,base+hh,false]); if(own) occ.push([uA-gap,uB+gap,vA-gap,vB+gap,0,1e9,true]);
     out.boxes.push({id:q.id,p,q,ring:G.rectW(F,uA,uB,vA,vB),base,h:hh,storeys:st,sh:hh/st,shSrc:SM?['arch_hb_vanI3']:own0?(p.size.src||[]):null,front:base===0&&Math.abs((dir<0?uA:uB)-uf)<cs+0.01,top:base>=hallTop-0.01,roof,u:[uA,uB],v:[vA,vB],gap,own,spread}); }
@@ -596,5 +598,5 @@ function plan(P){ const host=document.getElementById('v3d'); if(!host||!P) retur
 
 BD.views=BD.views||{}; BD.views.arat=viewRatios; BD.views.aprog=viewPrograms; BD.views.aarr=viewArrange; BD.views.acmp=viewCompare;
 BD.archHide=()=>{ const v=$('#aView'); if(v) v.style.display='none'; const p=$('#aPlan'); if(p) p.style.display='none'; };
-BD.archTest={place,budgets,rules,add,del,resize,CAT,ratioBase,ratioCalc,ratioNow,dcCapPct,progGround,ratioApply,groundItems};
+BD.archTest={place,budgets,rules,add,del,resize,CAT,ratioBase,ratioCalc,ratioNow,dcCapPct,progGround,ratioApply,groundItems,dcPieces};
 })();

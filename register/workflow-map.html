@@ -276,7 +276,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "counts": {
 "inputs": 17,
 "quantities": 201,
-"conditions": 109,
+"conditions": 110,
 "opportunities": 14,
 "sources": 1675
 }
@@ -15574,6 +15574,28 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "arch_hb_vbblFlood"
 ],
 "next_action": "J.B. or Code: read the LiDAR datum and a GVRD datum note"
+},
+{
+"id": "r_plan_v0",
+"heading": "2 Spatial",
+"name": "Plan layer: corridors, stairs, doors, exits (rule sheet v0)",
+"test": "each storey of the data-centre block gets a 2.0 m corridor on the side away from the dock with an exit stair in line at each end; rooms open onto it or, where they cannot, into a reached neighbour (flagged); program blocks on several storeys get two stairs and a lift, carried down to the ground where the block sits over another; doors 0.9 m (≥ 850 mm), public street doors 1.8 m; exits at the stair feet, the program doors and the dock",
+"quantities": [
+"arch_ratios"
+],
+"move": [
+"choice"
+],
+"parties": [
+"operator",
+"city"
+],
+"constraint": false,
+"note": "Drawing choices (tool/plan.js RULES): corridor 2.0 m, stair 3.0 × 6.0 m, lift 2.5 × 2.5 m, two doors for rooms ≥ 150 m². Code minimums: doorway 850 mm, corridor 1 100 mm, stair 1 100 mm (arch_nbc3432). Not yet: bands, the shared lobby (no code size), the fallback ladder, path-based checks 8 and 9, occupant-load door widths (check 10), ramp slope for step-free entrances (BCBC 3.8 not in the repo ?), street grade at the door (?).",
+"sources": [
+"arch_nbc3432"
+],
+"next_action": "full rule sheet (WORKLIST 5); checks 8 and 9 along the plan"
 },
 {
 "id": "tm_profile",
