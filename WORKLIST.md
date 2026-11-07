@@ -30,14 +30,14 @@ Dates: match a user **6 Nov**; peer reviews **13/17 Nov** and **27 Nov**; archit
 
 - [x] Code: draw the inside loading dock in Arrange (ground-storey block at the rear, drive side; the hall may sit over it). f7a3d94 (dcrooms.js; rear end, v0 corner as a drawing choice: which side the drive is on is not checked ?). On Edmonton lots the dock takes ~40 m² of hall floor on the ground storey, said in the room note.
 - [x] Code: loading count uses the data centre's floor only. Re-read Bylaw 20001 Table 7.2 / s. 5.80 and Vancouver Parking By-law s. 5 (whole building or each use?), then fix. 630178f: Edmonton Table 7.2 is one threshold on the building's non-residential floor (data centre + programs); Vancouver s. 5.1 counts each class separately and adds them. E06A's bay is back; E06B gains one (3.5 → 3.4 MW); CLARK 3 → 4 and V339 2 → 3 after picks. Re-baselined 7bfbc49.
-- [ ] Code: hand-check 1425 Clark Dr (2.8 → 4.9 MW after the loading fix) by an independent agent: re-measure ground, plant yard, bays, drive.
+- [x] Code: hand-check 1425 Clark Dr (2.8 → 4.9 MW after the loading fix) by an independent agent: re-measure ground, plant yard, bays, drive. Done 7 Nov (checks/agents/2026-11-07_clark_handcheck.md): lot, yards, buildable area and floor arithmetic agree; the MW does not follow from the ground. Fixes waiting for J.B.: (1) generator plant yard square to the frame on a skewed rear line, no B139 3.0 m row-end distance, so the sets fall to the front and cap 5.1 MW; (2) 463 m² drive charged on every Vancouver lot (edge 'abuts' set only for Edmonton; confirmed in code); (3) the dock is reached only through the empty plant yard; (4) hallRoom 2,151 vs 3,754 m²; (5) loading: clinic as Office Use (5.2.9) +1, by-law rounding to nearest (our reading), data centre support rooms in its floor; (6) notch edge yard (our reading).
 - [x] J.B.: inside loading dock as the Architecture default — yes or no? **Gate.** Yes (J.B. 7 Nov 2026).
 - [ ] Open (7 Nov): which side the trucks' drive is on. The dock is drawn in the v0 corner at the rear as a drawing choice; nothing checks that a truck can reach it from a lane or drive. Settle with the section 5 rule sheet (bands, service routes).
 - [ ] Open (7 Nov): 74 Airport Rd (E06A) clinic is off the street front since the hold-back change (b86cfba). The section 5 bands rule (forecourt → public → lobby → data centre → plant) should put the clinic back on the street front; check it there.
 
 ## 3. Size of the problem
 
-- [ ] Code: zone rule: in Architecture mode typologies only on lots where a data centre is permitted, conditional or discretionary; others say "not allowed here; rezoning needed".
+- [x] Code: zone rule: in Architecture mode typologies only on lots where a data centre is permitted, conditional or discretionary; others say "not allowed here; rezoning needed". 573ace3: not-allowed lots say so on every Architecture tab; 'as if rezoned' is a flagged opt-in.
 - [ ] Code: build the lighter test run (no 3D, no screenshots, parallel pages) and time it.
 - [ ] Code: sweep every data-centre-zone lot (≈697 Vancouver, ≈5,232 Edmonton): ground wasted by the one-rectangle fit, leftover shape, lot depth and width, minimum lot size that holds anything. Report the distribution. **Gate.**
 
