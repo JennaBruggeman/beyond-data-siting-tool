@@ -19,7 +19,7 @@ const mwR=a=>!a||!(a[1]>0)?'?':a[0].toFixed(1)+'–'+a[1].toFixed(1)+' MW'; // a
 
 /* ---------- data ---------- */
 A.ready=Promise.all([fetch('arch_programs.json').then(r=>r.json()),fetch('opps.json').then(r=>r.ok?r.json():{}).catch(()=>({}))]).then(([P,O])=>{
-  CAT.list=P.programs; P.programs.forEach(p=>CAT.byId[p.id]=p); CAT.src=O.sources||{}; CAT.kind=O.source_kinds||{}; CAT.meta=P.meta; }).catch(e=>console.warn('arch data',e));
+  CAT.list=P.programs.filter(p=>!p.hidden); /* 7 Nov 2026: 'out for now' programs (hidden) stay in the catalogue, not in the list */  P.programs.forEach(p=>CAT.byId[p.id]=p); CAT.src=O.sources||{}; CAT.kind=O.source_kinds||{}; CAT.meta=P.meta; }).catch(e=>console.warn('arch data',e));
 function chips(ids){ if(!ids||!ids.length) return '<span class="asrc q" title="no source">?</span>';
   return ids.map(i=>`<span class="asrc" tabindex="0" title="${esc((CAT.kind[i]?CAT.kind[i].toUpperCase()+': ':'')+(CAT.src[i]||'(source text not in this build)'))}">${esc(i)}</span>`).join(''); }
 const GROUP=[['care','Care and refuge'],['wet','Water'],['grow','Growing and drying'],['public','Public and heated'],['energy','Energy'],['system','Systems (feed the budgets; not drawn as blocks)']];
@@ -53,7 +53,7 @@ function site(){ const M=BD.model&&BD.model(); const G=BD.siteGeo; if(!M||!M.F||
 /* Vancouver I-2 / I-3 s. 3.1.1.1: 3.00 FSR for industrial-type uses, 1.00 for all other uses combined (van_zdb_i2, van_zdb_i3). Which bucket a program is in
    is our reading of the use it would be: utility (heat plant), manufacturing (drying), parking (EV hub), and in I-2 the listed service uses catering
    (community kitchen) and laundry or cleaning plant (commercial laundry). Everything else counts against the 1.00. */
-function industrialUse(q,code){ if(['heat_plant','food_drying','lumber_drying','ev_hub'].includes(q.id)) return true; if(/I-2/.test(code)&&(q.id==='community_kitchen'||(q.id==='laundry'&&q.opt==='commercial'))) return true; return false; }
+function industrialUse(q,code){ if(['heat_plant','food_drying','ev_hub'].includes(q.id)) return true; if(/I-2/.test(code)&&(q.id==='community_kitchen'||(q.id==='laundry'&&q.opt==='commercial'))) return true; return false; }
 /* the smallest side lengths a block may have. Pool: the 25 × 8.5 m tank (4 lanes; arch_fina_FR2020, arch_sportEngPoolsDGN) plus the deck all round:
    1.8 m in Alberta (NBC(AE) 7.2.3.15, arch_sup_nbcAE7Pools), 1.2 m in BC (arch_bcPoolDesign2025 s. 3.2). Every other block: 6 m, a drawing rule, not a code rule. */
 function minDims(id,city){ if(id==='pool'){ const d=AD.poolDeck[city==='edm'?'edm':'van']; return [AD.poolTank[0]+2*d,AD.poolTank[1]+2*d]; } return [6,6]; } // pool: tool/data/arch.json
