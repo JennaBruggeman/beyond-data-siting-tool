@@ -40,6 +40,10 @@ function sizeFor(mw,A){
 let EDGE=null; // {ring, d}: the lot ring and the least distance a unit may come to it
 function segD(px,py,ax,ay,bx,by){ const dx=bx-ax, dy=by-ay, L2=dx*dx+dy*dy; let t=L2?((px-ax)*dx+(py-ay)*dy)/L2:0; t=Math.max(0,Math.min(1,t)); return Math.hypot(px-ax-t*dx,py-ay-t*dy); }
 function edgeD(x,y,r){ let d=1e9; for(let i=0;i<r.length;i+=2){ const j=(i+2)%r.length; d=Math.min(d,segD(x,y,r[i],r[i+1],r[j],r[j+1])); } return d; }
+/* 7 Nov 2026: EDGE.segs = per-line distances (Edmonton generator test, C14600 s. 19(3), 21(3)); every line keeps its own */
+const segsOK=(x,y)=>!EDGE||!EDGE.segs||EDGE.segs.every(e=>segD(x,y,e.ax,e.ay,e.bx,e.by)>=e.d-1e-6);
+/* the distance at which one generator set meets a test limit: 78 dB(A) at 7 m (Kohler G6-154), free field, our arithmetic */
+const testD=lim=>{ const G=BD.data.noise&&BD.data.noise.gen; return G?7*Math.pow(10,(G.lp7-lim)/20):0; };
 /* pack w × d rectangles (long side along the frame's u axis unless rot) inside a region, with wall and unit clearances */
 function pack(F,region,forbid,u0,u1,v0,v1,k,count,rot){
   const L=rot?k.W:k.L, W=rot?k.L:k.W, wu=rot?k.wall[1]:k.wall[0], wv=rot?k.wall[0]:k.wall[1], gu=rot?k.gap[1]:k.gap[0], gv=rot?k.gap[0]:k.gap[1];
@@ -48,7 +52,7 @@ function pack(F,region,forbid,u0,u1,v0,v1,k,count,rot){
   for(let v=v0+wv+W/2; v<=v1-wv-W/2+1e-6 && out.length<count; v+=W+gv)
     for(let u=u0+wu+L/2; u<=u1-wu-L/2+1e-6 && out.length<count; u+=L+gu){
       const cs=[[u-L/2-wu+e,v-W/2-wv+e],[u+L/2+wu-e,v-W/2-wv+e],[u+L/2+wu-e,v+W/2+wv-e],[u-L/2-wu+e,v+W/2+wv-e],[u,v],[u-L/2,v],[u+L/2,v],[u,v-W/2],[u,v+W/2]];
-      if(cs.every(([a,b])=>okPt(a,b))&&(!((k.evap||k.lotSep)&&EDGE)||[[u-L/2,v-W/2],[u+L/2,v-W/2],[u+L/2,v+W/2],[u-L/2,v+W/2],[u-L/2,v],[u+L/2,v],[u,v-W/2],[u,v+W/2]].every(([a,b])=>{ const [x,y]=F.toW(a,b); return BD.pip(x,y,EDGE.ring)&&edgeD(x,y,EDGE.ring)>=EDGE.d-1e-6; }))) out.push({u,v,L,W}); }
+      if(cs.every(([a,b])=>okPt(a,b))&&(!((k.evap||k.lotSep)&&EDGE)||[[u-L/2,v-W/2],[u+L/2,v-W/2],[u+L/2,v+W/2],[u-L/2,v+W/2],[u-L/2,v],[u+L/2,v],[u,v-W/2],[u,v+W/2]].every(([a,b])=>{ const [x,y]=F.toW(a,b); return BD.pip(x,y,EDGE.ring)&&edgeD(x,y,EDGE.ring)>=EDGE.d-1e-6&&segsOK(x,y); }))) out.push({u,v,L,W}); }
   return out; }
 function boxOf(F,p,k,base,kind){ const r=BD.geo.rectW(F,p.u-p.L/2,p.u+p.L/2,p.v-p.W/2,p.v+p.W/2);
   const wu=p.L===k.L?k.wall[0]:k.wall[1], wv=p.L===k.L?k.wall[1]:k.wall[0];
@@ -72,7 +76,8 @@ BD.plant={
     /* 7 Nov 2026 (Clark Dr hand check, checks/agents/2026-11-07_clark_handcheck.md): a row of generator sets keeps the B139 tank distance from the side
        property lines at its ends (as put() below enforces), not only the 1.5 m wall clearance; sy = the narrowest side yard, so the distance is to the lot line */
     const syL=(m.edgeYards||[]).filter(e=>e.kind!=='front'&&e.kind!=='rear').map(e=>e.d||0).filter(x=>isFinite(x)), sy=syL.length?Math.min(...syL):0;
-    const endD=k=>k===s.g&&gt&&gt.pl!=null?Math.max(k.wall[0],gt.pl-(isFinite(sy)?sy:0)):k.wall[0];
+    const GNe=BD.data.noise&&BD.data.noise.gen&&BD.data.noise.gen.edm, plE=gt&&gt.pl!=null?(m.city==='edm'&&GNe?Math.max(gt.pl,testD(GNe.nonTest1h)):gt.pl):null; /* 7 Nov 2026: Edmonton sets at the test distance from non-residential lines */
+    const endD=k=>k===s.g&&plE!=null?Math.max(k.wall[0],plE-(isFinite(sy)?sy:0)):k.wall[0];
     const rowDepth=(k,n)=>{ const e=endD(k), per=Math.max(0,Math.floor((wv-2*e+k.gap[0])/(k.L+k.gap[0]))); if(!per) return null; const r=Math.ceil(n/per); return 2*k.wall[1]+r*k.W+(r-1)*k.gap[1]; };
     /* the real rear yard line may be skewed against the frame: push the strip in until it lies wholly inside the buildable area (units stay square to the building) */
     const lotR=m.inset?(BD.buildArea?BD.buildArea(m):m.ring):m.ring; let skew=0;
@@ -104,7 +109,7 @@ BD.plant={
       const step=s.g&&P.genYard?s.g.W+s.g.gap[1]:s.k.W+s.k.gap[1]; let tries=0; while(!m.mwProvisional&&depth>0&&trial(depth)>0&&depth+step<=capD&&tries<20){ depth+=step; tries++; } if(tries) P.deepened=tries; } /* not for the provisional size (no size chosen yet): that is the zone's most, and a yard sized for it would leave no building */
     if(depth>capD){ P.short+='The plant yard would leave less than a 12 m deep building. '; depth=capD; }
     /* generator noise at the lot lines is not modelled (no sourced sound level for the sets, ?): flag yards deeper than the test lots' deepest (21.7 m) */
-    { const gd=depth+skew-(P.truck&&P.truck.type==='along'?P.truck.aisle:0); P.bigYard=s.g&&P.genYard&&gd>21.7?Math.round(gd):0; } /* the units' part of the yard, without the truck lane */
+    { const gd=depth+skew-(P.truck&&P.truck.type==='along'?P.truck.aisle:0); P.bigYard=s.g&&P.genYard&&gd>21.72?Math.round(gd):0; } /* 21.72 = the 21.714 m measured on 339 1st Ave E at 1.8 MW, rounded up, so the lot that sets the range is inside it */ /* the units' part of the yard, without the truck lane */
     m.plantYardDepth=depth+skew; const a0=m.plantYardStart+m.dir*skew, a1=a0+m.dir*depth; P.yard=BD.geo.rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); P.yardU=[Math.min(a0,a1),Math.max(a0,a1)];
     P.truckRing=truckR(a0,depth); if(P.truck&&P.truck.type==='along') P.truck.u=[Math.min(a1-m.dir*P.truck.aisle,a1),Math.max(a1-m.dir*P.truck.aisle,a1)];
   }
@@ -137,7 +142,15 @@ BD.plant={
   // generators: never on top of coolers; roof sets go where coolers left room
   let gr=0; if(P.genRoof){ const used=P.boxes.filter(b=>b.kind==='roof').map(b=>b.clear); let got=pack(F,roofRing,used,ru0,ru1,rv0,rv1,s.g,P.genRoof,false); if(got.length<P.genRoof) got=got.concat(pack(F,roofRing,used.concat(got.map(p=>BD.geo.rectW(F,p.u-p.L/2-1,p.u+p.L/2+1,p.v-p.W/2-1,p.v+p.W/2+1))),ru0,ru1,rv0,rv1,s.g,P.genRoof-got.length,true)); got.forEach(p=>P.boxes.push(boxOf(F,p,s.g,roofH,'roof'))); gr=got.length; }
   /* Build 2: yard sets kept the B139 Table 2 distance from the property line (genTank; register arch_csa_b139); the building distance is the larger of it and the 1.5 m clearance */
-  const gt=P.genTank||genTank(m.mwSized,s); let gy=0; if(s.g&&P.genYard){ const keepW=s.g.wall; if(gt&&gt.bld!=null) s.g.wall=keepW.map(w=>Math.max(w,gt.bld)); EDGE=gt&&gt.pl!=null&&m.ring?{ring:m.ring,d:gt.pl}:null; s.g.lotSep=!!EDGE; gy=put(s.g,P.genYard,0,'yard'); s.g.wall=keepW; delete s.g.lotSep; } EDGE=null;
+  const gt=P.genTank||genTank(m.mwSized,s); let gy=0; if(s.g&&P.genYard){ const keepW=s.g.wall; if(gt&&gt.bld!=null) s.g.wall=keepW.map(w=>Math.max(w,gt.bld)); EDGE=gt&&gt.pl!=null&&m.ring?{ring:m.ring,d:gt.pl}:null; s.g.lotSep=!!EDGE;
+    /* 7 Nov 2026 (J.B.): in Edmonton, place the sets where one meets the daytime test at every line (≥ 3.13 m from non-residential, ≥ 9.9 m from residential
+       lines, C14600 s. 21(3), 19(3)) if the yard has room; only if it has not, fall back to the B139 minimum, and the noise check flags the test */
+    const GNe=BD.data.noise&&BD.data.noise.gen&&BD.data.noise.gen.edm, E2=(m.edgeYards||[]).filter(e=>isFinite(e.ax)); P.genTestPlaced=null;
+    if(EDGE&&m.city==='edm'&&GNe&&E2.length){ const n0=P.boxes.length, res=e=>/^residential/.test(e.abuts||'');
+      EDGE.segs=E2.map(e=>({ax:e.ax,ay:e.ay,bx:e.bx,by:e.by,d:Math.max(gt.pl,res(e)?testD(GNe.resTest1h):testD(GNe.nonTest1h))})); gy=put(s.g,P.genYard,0,'yard');
+      if(gy<P.genYard){ P.boxes.length=n0; delete EDGE.segs; gy=put(s.g,P.genYard,0,'yard'); P.genTestPlaced=false; } else P.genTestPlaced=true; }
+    else gy=put(s.g,P.genYard,0,'yard');
+    s.g.wall=keepW; delete s.g.lotSep; } EDGE=null;
   const kname=s.k.name, miss=[];
   if(cr<P.coolRoof) miss.push(`${P.coolRoof-cr} of ${P.coolRoof} ${kname} do not fit on the roof`);
   if(cy<P.coolYard) miss.push(`${P.coolYard-cy} of ${P.coolYard} ${kname} do not fit in the yard`);

@@ -230,7 +230,7 @@ function model(){
     if(y.max){ if(u1-u0>y.max){ const c=(u0+u1)/2; u0=c-y.max/2; u1=c+y.max/2; } if(v1-v0>y.max){ const c=(v0+v1)/2; v0=c-y.max/2; v1=c+y.max/2; } }
     m.inset=rectW(F,u0,u1,v0,v1); m.yardNote=Z.yardsKnown?'':'Yards and setbacks for this zone are not yet read, so the building may cover the whole lot.'; yardLines(m); const YE=m.edgeYards;
     /* J.B. 7 Nov 2026 (section 3 gate): an inside dock with no street or lane at the rear or sides gets a 6.1 m drive from the front lot line along the
-       v0 side (the dock's side) to the rear. Vancouver: inside the side yard as far as it goes (flagged: driveway in a side yard ?, I-3 3.1.2.16 not read);
+       v0 side (the dock's side) to the rear. Vancouver: inside the side yard as far as it goes (a flagged option: the Director may allow a reduced side yard for loading and vehicular access, I-3 3.1.2.16);
        the building narrows by the rest. Edmonton: the building narrows by the full width (the setback stays clear). Aisle width as the loading data. */
     m.sideDrive=null; if(A.loadIn&&A.foot!=='existing'&&BD.tier&&BD.tier()==='arch'&&!(YE||[]).some(e=>(e.abuts==='street'||e.abuts==='alley')&&e.kind!=='front')){
       const w=(LD[city]&&LD[city].aisle)||6.1, sy=Math.max(0,y.s0||0), uf0=fl>0?-F.L/2:F.L/2, ur=fl>0?u1:u0, ua=Math.min(uf0,ur), ub=Math.max(uf0,ur);
@@ -418,8 +418,12 @@ function fitMax0(){ fitMax0.beyond=false; const A=BD.S.answers, keep=A.mw; A.mw=
      plant yard deeper than the tested range (21.7 m, plant.js bigYard) is not a fit: the largest size inside the tested range is reported instead. */
   const perHi=(()=>{ const R=(BD.data.dc_rooms&&BD.data.dc_rooms.rooms)||[]; const v=R.filter(r=>r.split&&r.perMW).reduce((t,r)=>t+r.perMW[1],0); return v>0?v:630; })();
   const supHi=(()=>{ const g=BD.data.arch&&BD.data.arch.ratioGround&&BD.data.arch.ratioGround.support; return g&&g[1]>0&&g[1]<1?g[1]:0.33; })();
-  const roomOK=mw=>{ const m=model(); if(!m||m.existing||!m.foot||!BD.eng) return true; if(m.plant&&m.plant.bigYard){ fitMax0.beyond=true; return false; } const floors=Math.max(1,m.Z&&m.Z.ground?(m.nF?m.nF[0]:1)-1:(m.nF?m.nF[0]:1));
-    return BD.area(m.foot)*floors>=mw*perHi/(1-supHi)-0.5; };
+  /* 7 Nov 2026 (J.B.: 339 1st Ave E fell to 0.5 MW): where the zone keeps the ground storey from data storage (I-2 2.2.7, I-3 2.2.11, FC-2), only the
+     racks are barred at grade: hall + UPS + battery must fit on the upper storeys, and the whole data centre with its support rooms on the upper storeys
+     plus the ground storey (as Ratios already does; the 4 Nov V339 test fit puts support on the ground storey). Before, support was forced upstairs too. */
+  const roomOK=mw=>{ const m=model(); if(!m||m.existing||!m.foot||!BD.eng) return true; if(m.plant&&m.plant.bigYard){ fitMax0.beyond=true; return false; }
+    const all=m.nF?m.nF[0]:1, g=!!(m.Z&&m.Z.ground), up=Math.max(1,g?all-1:all), fa=BD.area(m.foot);
+    return fa*up>=mw*perHi-0.5&&fa*(g?up+1:up)>=mw*perHi/(1-supHi)-0.5; };
   const ok=mw=>{ A.mw=mw; cache.key=null; return !setupProblems(true).length&&roomOK(mw); };
   let lo=0, best=null, top=Math.floor((hi||0)*10);
   /* 2 Nov 2026 hard rules: with generators on the roof no size above the fuel limit passes (model(); Build 2: CSA B139.1.1 6.5.3), so the search starts there */
