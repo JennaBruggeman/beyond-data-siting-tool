@@ -47,3 +47,19 @@ Questions (not chosen):
 3. narrow_deep at 2.0, not 2.5 (no break at 2.5; 339 is 2.43)?
 4. Buildable: inside the yard lines, or with the 61 m depth limit (275 1st Ave E: 6,090 vs 3,743)?
 
+## 7 Nov 2026 — Job A1 lot types: frozen (Code)
+
+Applied your gate reply as J.B. approved it. Files: checks/lot_types_2026-11-07.csv (5,928 rows, ids and measures only) and checks/lot_types_2026-11-07.md (ranges, two representatives and a corner example per type and city).
+
+Lots: Vancouver 696 (three lots listed in two tiles were counted twice at the gate), Edmonton 5,232.
+
+Types (Van / Edm): irregular 70 / 573, small 276 / 622, large 100 / 1,912, narrow_deep 56 / 595, wide_shallow 23 / 119, regular 171 / 1,411. Corner flag 330 / 2,186.
+
+Multipart: 100 Vancouver, 3 Edmonton, measured on the framed part; 18 change type, mostly to irregular.
+
+Depth limit: clause found. I-2 sub-area B ss. 3.2.2.1–8 and I-3 sub-area A ss. 3.1.2.1–8, 'maximum depth and width 61.0 m' (van_zdb_i2, van_zdb_i3). buildable_depthlim_m2 is filled only there.
+
+Five lots: 339 1st Ave E narrow_deep (aspect 2.43, buildable 2,762 m²); 275 1st Ave E large (6,090); 1425 Clark Dr regular, corner (5,528); 74 and 64 Airport Rd regular (4,293; 4,022).
+
+Ground export: held until the LiDAR datum is read from the dataset's metadata.
+
