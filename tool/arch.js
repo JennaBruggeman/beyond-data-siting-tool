@@ -99,7 +99,7 @@ function placeOnce(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W
     occ.push([e[0],e[1],e[2],e[3],0,1e9,true,k0]); } // NBC 6.3.2.9 and 6.3.2.15.(5) distances widen the no-go (code audit F5, F6); [7] = the widening, so a program stopped only by it can be named (hall fix)
   if(s.M.plant&&s.M.plant.yard){ const y=BD.geo.clip(s.M.ring,s.M.plant.yard); if(y&&y.length>=6){ const e=ext(y); occ.push([e[0],e[1],e[2],e[3],0,1e9,true]); } }
   if(s.M.loading){ const e=ext(s.M.loading); occ.push([e[0],e[1],e[2],e[3],0,1e9,true,kL]); }
-  if(s.M.loadInside) out.flags.push({t:`Loading: ${s.M.loadInside.n} bay${s.M.loadInside.n>1?'s':''} inside the building (${n0(s.M.loadInside.m2)} m² of ground storey; Architecture default, as the test fits draw it). Ratios takes this floor out of the ground; Arrange does not draw the dock yet.`,src:['arch_ratios'],sev:'note'});
+  if(s.M.loadInside) out.flags.push({t:`Loading: ${s.M.loadInside.n} bay${s.M.loadInside.n>1?'s':''} inside the building (${n0(s.M.loadInside.m2)} m² of ground storey; Architecture default, as the test fits draw it). Ratios takes this floor out of the ground; Arrange draws it on the ground storey at the rear end of the building (drawing choice)${out.hall.base>0?'; not drawn here, because the refuge takes the ground floor under the hall':''}.`,src:['arch_ratios'],sev:'note'});
   const bu0=um[0], bu1=um[1], bw=v1-v0, bl=bu1-bu0, cs=2, nU=Math.max(1,Math.floor(bl/cs)), nV=Math.max(1,Math.floor(bw/cs));
   // a 2 m height grid over the buildable area: the top of what stands on each cell, or no-go (review 2, N1: a block must rest flat on what is under it)
   /* a cell is taken if anything overlaps any part of it (not just its centre), and cells not wholly inside the lot are no-go (review of J.B.'s screenshot, 2 Nov 2026) */
@@ -506,8 +506,9 @@ function warmCool(t){ if(t==null) return null; const k=Math.max(0,Math.min(1,(t-
    the ground floor for other uses (I-2, I-3, FC-2), that storey of the box is drawn on its own. Drawing only: placement, budgets and rules are unchanged. */
 function dcPieces(P){ if(!BD.dcRooms) return null; const s=P.s, RT=P.ratio, An=BD.S.answers, mw=RT&&RT.mwTest?RT.mwTest:(An.mw||s.M.mwSized), end=RT&&RT.r&&RT.r.end==='high'?'lo':'hi';
   const nf=Math.max(1,(P.hall.storeys||s.floors)-(P.hall.base>0?1:0)), fh=P.hall.h/nf, lv0=P.hall.base>0?1:0, g=s.Z&&s.Z.ground&&P.hall.base===0&&nf>1?1:0;
-  const L=BD.dcRooms.layout({F:s.F,u:P.hall.u,v:P.hall.v,z0:P.hall.base+g*fh,fh:Array(nf-g).fill(fh),mw,end,ground:g*fh}); if(!L) return null;
-  const out=L.pieces.map(p=>({ring:p.ring,base:p.base,h:p.h,hall:p.id==='hall',room:p.id==='electrical'||p.id==='battery',rest:p.id==='rest'||p.id==='gst',level:lv0+g+p.level,name:p.name,id:p.id,m2:p.m2}));
+  const LI=s.M.loadInside, dock=LI&&P.hall.base===0?{n:LI.n,len:LI.len,wid:LI.wid,rearHi:s.dir<0}:null; /* 7 Nov 2026: the inside loading dock is drawn (rear end; site.js dir<0: rear at the high-u end) */
+  const L=BD.dcRooms.layout({F:s.F,u:P.hall.u,v:P.hall.v,z0:P.hall.base+g*fh,fh:Array(nf-g).fill(fh),mw,end,ground:g*fh,dock}); if(!L) return null;
+  const out=L.pieces.map(p=>({ring:p.ring,base:p.base,h:p.h,hall:p.id==='hall',room:p.id==='electrical'||p.id==='battery'||p.id==='dock',rest:p.id==='rest'||p.id==='gst',level:lv0+g+p.level,name:p.name,id:p.id,m2:p.m2}));
   return {L,out,nf,fh,lv0,g}; }
 async function draw3d(P){ P=P||place(); if(!P||!BD.scene3d) return; if(!P.secRing) rules(P);
   const nf=Math.max(1,(P.hall.storeys||P.s.floors)-(P.hall.base>0?1:0)), fh=P.hall.h/nf /* hall fix: the hall's own storeys */, lv0=P.hall.base>0?1:0;
