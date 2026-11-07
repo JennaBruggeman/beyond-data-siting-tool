@@ -8,7 +8,7 @@
    30.456754563202594
   ],
   "L": 56.97594731231072,
-  "hd": 22.10761866935667,
+  "hd": 28.357432888045274,
   "F": [
    74.95194731231072,
    60.91350912640519
@@ -21,28 +21,28 @@
   "front": -32.97597365615536,
   "bu": [
    [
+    -30.97597365615536,
+    -24.97597365615536
+   ],
+   [
     -32.97597365615536,
+    -22.97597365615536
+   ],
+   [
+    -24.97597365615536,
     -8.975973656155361
    ],
    [
     -30.97597365615536,
-    -20.97597365615536
-   ],
-   [
-    -30.97597365615536,
-    1.024026343844639
-   ],
-   [
-    -30.97597365615536,
-    -6.975973656155361
-   ],
-   [
-    -8.975973656155361,
-    1.024026343844639
-   ],
-   [
-    -32.97597365615536,
     -12.975973656155361
+   ],
+   [
+    -24.97597365615536,
+    -4.975973656155361
+   ],
+   [
+    -30.97597365615536,
+    -16.97597365615536
    ]
   ],
   "plant": [
@@ -67,24 +67,16 @@
     "yard",
     -16,
     -2,
-    -23,
-    -20
+    15,
+    18
    ],
    [
     "standby generators",
     "yard",
-    -16,
-    -2,
-    -18,
-    -14
-   ],
-   [
-    "standby generators",
-    "yard",
-    -16,
-    -2,
-    -12,
-    -9
+    0,
+    13,
+    15,
+    18
    ]
   ],
   "yard": [
@@ -138,8 +130,8 @@
   [
    "refuge",
    [
-    -33,
-    -9
+    -31,
+    -25
    ],
    true,
    265,
@@ -151,8 +143,8 @@
   [
    "warming_shelter",
    [
-    -31,
-    -21
+    -33,
+    -23
    ],
    true,
    100,
@@ -164,10 +156,10 @@
   [
    "clinic",
    [
-    -31,
-    1
+    -25,
+    -9
    ],
-   true,
+   false,
    500,
    500,
    0,
@@ -178,7 +170,7 @@
    "spa",
    [
     -31,
-    -7
+    -13
    ],
    false,
    320,
@@ -190,8 +182,8 @@
   [
    "ev_hub",
    [
-    -9,
-    1
+    -25,
+    -5
    ],
    false,
    150,
@@ -203,8 +195,8 @@
   [
    "greenhouse",
    [
-    -33,
-    -13
+    -31,
+    -17
    ],
    false,
    190,
@@ -220,54 +212,46 @@
  ],
  "hallPick": {
   "tried": 10,
-  "passed": 7,
+  "passed": 9,
   "n": 10,
   "under": false,
   "best": {
-   "key": "2:1.9,24.0:57.9",
+   "key": "2:-4.4,24.0:42.5",
    "k": 2,
    "st": 2,
    "top": 12,
    "along": "back",
-   "a": 3,
-   "fa": 1279.32,
+   "a": 1.5,
+   "fa": 1206.2160000000001,
    "drawn": 1525
   },
   "fails": [
    [
-    "2:-1.3,24.0:50.6",
-    "2 of 5 generators do not fit in the yard."
-   ],
-   [
-    "1:-26.6,24.0:50.6",
-    "3 of 5 generators do not fit in the yard."
-   ],
-   [
-    "1:-20.2,24.0:57.9",
-    "3 of 5 generators do not fit in the yard."
+    "1:-17.7,24.0:57.9",
+    "2 of 4 generators do not fit in the yard."
    ]
   ]
  },
  "hallUV": [
   [
-   2,
+   -4,
    24
   ],
   [
    -30,
-   27
+   12
   ]
  ],
  "hallStoreys": 2,
  "space": {
-  "hall": 2559,
+  "hall": 2412,
   "prog": 1525,
   "cap": 7310.400000000001
  },
  "heat": {
   "avail": [
-   15407.588571428569,
-   23652
+   14252.019428571426,
+   21878.100000000002
   ],
   "need": [
    130.87,
@@ -280,7 +264,7 @@
  },
  "rules": [
   "note: Loading: 1 bay inside the building (41 m² of ground storey; Architecture default, as the test fits draw it). Ratios takes this floor out of the ground; Arrange does not draw the dock yet.",
-  "bad: Data centre: its share (35%) leaves too little ground for the picked programs beside the hall. Hall and its support rooms need 1,909 m² of ground per storey (2 hall storeys under the 16 m height limit; support 33 % of the data centre); 443 m² available. Ground: footprint after the plant yard 3,486 m² − yard units over it 321 − 4 transformer pads, 6 m from the building, 123 − 1 loading bay inside 41 − a 6.1 m drive to the rear yard 348 (no other street reaches it) − programs 2,210 m² (Refuge 265 as set; Greenhouse 190 as set; Outpatient clinic 500 as set; Bathhouse / Nordic spa 320 as set; Fish farm 685 as set; Warming shelter 100 as set; EV charging hub 150 at its minimum). Back in Ratios it takes at most 8%.",
+  "bad: Data centre: its share (33%) leaves too little ground for the picked programs beside the hall. Hall and its support rooms need 1,800 m² of ground per storey (2 hall storeys under the 16 m height limit; support 33 % of the data centre); 550 m² available. Ground: footprint after the plant yard 3,486 m² − yard units over it 214 − 4 transformer pads, 6 m from the building, 123 − 1 loading bay inside 41 − a 6.1 m drive to the rear yard 348 (no other street reaches it) − programs 2,210 m² (Refuge 265 as set; Greenhouse 190 as set; Outpatient clinic 500 as set; Bathhouse / Nordic spa 320 as set; Fish farm 685 as set; Warming shelter 100 as set; EV charging hub 150 at its minimum). Back in Ratios it takes at most 10%.",
   "bad: Public indoor pool: 1,065 m² is over the 500 m² this use may have in BE; not drawn. Its sourced minimum (815 m²) is over the cap, so it cannot go on a BE lot.",
   "bad: Fish farm: 685 m² would pass the programs' share of the floor (2,193 m², 668 m² left); not drawn. Edit ratios to give programs more.",
   "note: Refuge: A-2, 2 h fire separation from the data centre (F-2).",
@@ -353,14 +337,14 @@
    "suggest",
    3,
    17,
-   37,
-   0.47723253757736517
+   54,
+   0.51105216622458
   ],
   [
    "lot",
    8,
    22,
-   37,
+   54,
    0
   ]
  ],
