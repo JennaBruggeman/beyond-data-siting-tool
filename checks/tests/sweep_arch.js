@@ -5,7 +5,7 @@
 // independently of arch.js (lot ring, required yards, zone height, floor-space ratio, I-2/I-3 1.00 non-industrial cap, flat bases,
 // no overlap with hall / plant / plant yard / loading, drawn area = size, not-permitted uses not drawn, red flags, source chips).
 const fs = require('fs'), path = require('path');
-const NM = (process.env.NODE_PATH || '').split(':')[0];
+const NM = (process.env.NODE_PATH || '').split(require('path').delimiter)[0];
 const { chromium } = require('playwright');
 const N = { built: 'new', extent: 'whole', floor: '' }, X = { built: 'existing', extent: 'whole', floor: '' };
 const LOTS = {

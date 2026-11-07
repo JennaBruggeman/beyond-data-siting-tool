@@ -3,7 +3,7 @@
 // Needs the tool served at http://localhost:8766 (python3 -m http.server 8766 -d tool).
 // Libraries the page loads from CDNs are served locally from NODE_PATH (three, jspdf).
 const fs = require('fs'), path = require('path');
-const NM = (process.env.NODE_PATH || '').split(':')[0];
+const NM = (process.env.NODE_PATH || '').split(require('path').delimiter)[0];
 const { chromium } = require('playwright');
 
 const LOTS = {

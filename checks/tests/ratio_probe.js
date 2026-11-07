@@ -2,7 +2,7 @@
 // Usage (from checks/tests/, tool served on :8766): EXPR="<async js>" NODE_PATH=<node_modules> node ratio_probe.js [lotKey ...]
 // Writes ex_<lot>.json in the current folder. Lots: E14715, E4103, E06B, V339, E05.
 const fs=require('fs'),path=require('path');
-const NM=(process.env.NODE_PATH||'').split(':')[0]; // node_modules with three, jspdf
+const NM=(process.env.NODE_PATH || '').split(require('path').delimiter)[0]; // node_modules with three, jspdf
 const {chromium}=require('playwright');
 const LOTS={E14715:{lab:'14715 Yellowhead Trail NW',sub:'BE · new building',sel:{city:'edm',tile:'-2_1',id:'150388'},ans:{built:'new',extent:'whole',floor:''}},E4103:{lab:'4103 97 Street NW',sub:'BE · new building',sel:{city:'edm',tile:'0_-3',id:'904935'},ans:{built:'new',extent:'whole',floor:''}},
 E06B: { lab: '64 Airport Rd NW', sub: 'BE', sel: { city: 'edm', tile: '-1_1', id: '146402' }, ans: { built: 'new', extent: 'whole', floor: '' } },V339:{lab:'339 1st Ave E',sub:'I-3',sel:{city:'van',tile:'1_1',id:'63819485'},ans:{built:'new',extent:'whole',floor:''}},E05:{lab:'8803 Stadium Rd NW',sub:'IM',sel:{city:'edm',tile:'0_0',id:'51053'},ans:{built:'new',extent:'whole',floor:''}}};

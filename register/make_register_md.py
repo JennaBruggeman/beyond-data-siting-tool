@@ -17,7 +17,7 @@ def upstream(i,seen=None):
 usedby={}
 for c in r['conditions']:
     for x in c['quantities']: usedby.setdefault(x,[]).append(c['name'])
-d=datetime.date.today().strftime('%-d %b %Y')
+_t=datetime.date.today(); d=f"{_t.day} {_t.strftime('%b %Y')}"  # portable (Windows has no %-d)
 L=[f"# Beyond Data — formula register\n\nGenerated {d} from `formula_register.json` (the diagram reads the JSON; edit that, then run `make_register_md.py`).\n",
 f"**Scale.** {r['meta']['confidence_scale']}\n", f"**Rule.** {r['meta']['rule']}\n", f"**Verification.** {r['meta']['verified']}\n",
 f"**Counts.** {len(r['quantities'])} quantities · {len(r['conditions'])} conditions under 10 headings · {len(r['opportunity_quantities'])} opportunities quantified.\n",

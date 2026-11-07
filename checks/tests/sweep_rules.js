@@ -8,7 +8,7 @@
 //  B. the three options and the report options at their sizes;
 //  C. ways past a block in the UI, in each template: Next, the step bar, the deck's last card, the resident card, the tier switch.
 const fs = require('fs'), path = require('path');
-const NM = (process.env.NODE_PATH || '').split(':')[0];
+const NM = (process.env.NODE_PATH || '').split(require('path').delimiter)[0];
 const { chromium } = require('playwright');
 const N = { built: 'new', extent: 'whole', floor: '' }, X = { built: 'existing', extent: 'whole', floor: '' };
 const LOTS = {
