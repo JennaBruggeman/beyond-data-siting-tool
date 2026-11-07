@@ -234,9 +234,9 @@
  "rules": [
   "note: Loading: 4 bays inside the building (169 m² of ground storey; Architecture default, as the test fits draw it). Ratios takes this floor out of the ground; Arrange draws it on the ground storey at the rear end of the building (drawing choice).",
   "bad: Public indoor pool: not drawn. Stopped by minimum size or sides: no free area of its size with sides of at least 11 × 27 m is left beside the hall, the plant, the plant yard and loading.",
-  "bad: Outpatient clinic: 605 m² does not fit on one floor here; drawn over 3 storeys only to show its size. Whether it can be split across floors is a design question.",
-  "bad: Bathhouse / Nordic spa: 320 m² does not fit on one floor here; drawn over 4 storeys only to show its size. Whether it can be split across floors is a design question.",
-  "bad: EV charging hub: 150 m² does not fit on one floor here; drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
+  "note: Outpatient clinic: 605 m² on 3 storeys of about 202 m² each (it does not fit on one floor here), with two stairs and a lift (plan layer; their floor comes out of the program's, net floor in the plan). A clinic may sit on upper floors (J.B. 4 Nov 2026).",
+  "q: Bathhouse / Nordic spa: 320 m² on 4 storeys of about 80 m² each (it does not fit on one floor here), with two stairs and a lift (plan layer; their floor comes out of the program's, net floor in the plan). Whether this program can be split across floors is a design question.",
+  "q: EV charging hub: 150 m² on 2 storeys of about 75 m² each (it does not fit on one floor here), with two stairs and a lift (plan layer; their floor comes out of the program's, net floor in the plan). Whether this program can be split across floors is a design question.",
   "bad: Greenhouse: 190 m² would pass the programs' share of the floor (1,577 m², 137 m² left); not drawn. Edit ratios to give programs more.",
   "bad: Fish farm: 685 m² would pass the programs' share of the floor (1,577 m², 137 m² left); not drawn. Edit ratios to give programs more.",
   "note: Generator test: one set about 74.5 dB(A) at 10.5 m, within the 80 dB(A) limit (By-law 6555 s. 4.1(c); 78 dB(A) at 7 m, maker claim; our arithmetic).",
@@ -311,14 +311,14 @@
  "saved": [
   [
    "suggest",
-   6,
+   3,
    24,
    29,
    0.7414448669201521
   ],
   [
    "lot",
-   11,
+   8,
    29,
    29,
    0

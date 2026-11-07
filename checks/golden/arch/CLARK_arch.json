@@ -308,8 +308,8 @@
  "rules": [
   "note: Lot lines: one edge (35 m) is neither clearly a side nor a rear line; the deeper yard (3.1 m) is applied, the safer reading. Read as a side line it would leave more ground (our reading ?).",
   "note: Loading: 6 bays inside the building (251 m² of ground storey; Architecture default, as the test fits draw it). Ratios takes this floor out of the ground; Arrange draws it on the ground storey at the rear end of the building (drawing choice).",
-  "bad: Public indoor pool: 1,065 m² does not fit on one floor here along the street front (it needs its own street entrance); drawn over 3 storeys only to show its size. Whether it can be split across floors is a design question.",
-  "bad: Outpatient clinic: 605 m² does not fit on one floor here; drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
+  "q: Public indoor pool: 1,065 m² on 3 storeys of about 355 m² each (it does not fit on one floor along the street front, where it needs its own entrance), with two stairs and a lift (plan layer; their floor comes out of the program's, net floor in the plan). Whether this program can be split across floors is a design question.",
+  "note: Outpatient clinic: 605 m² on 2 storeys of about 303 m² each (it does not fit on one floor here), with two stairs and a lift (plan layer; their floor comes out of the program's, net floor in the plan). A clinic may sit on upper floors (J.B. 4 Nov 2026).",
   "bad: Fish farm: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 18 m limit (register van_zdb_i2).",
   "note: Generator test: one set about 79.2 dB(A) at 6.1 m, within the 80 dB(A) limit (By-law 6555 s. 4.1(c); 78 dB(A) at 7 m, maker claim; our arithmetic); the nearest lot line is closer than 6.1 m.",
   "note: Loading dock: trucks reach it along the rear to the street on the flank (6.1 m aisle; geometry only, turning not checked ?).",
@@ -388,14 +388,14 @@
  "saved": [
   [
    "suggest",
-   4,
+   2,
    27,
    42,
    0.3008438091957982
   ],
   [
    "lot",
-   10,
+   8,
    33,
    42,
    0
