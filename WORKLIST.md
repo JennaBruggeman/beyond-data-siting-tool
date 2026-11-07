@@ -46,7 +46,7 @@ Dates: match a user **6 Nov**; peer reviews **13/17 Nov** and **27 Nov**; archit
 - [ ] Cowork: LiDAR vertical datum vs flood-level datum (Vancouver). Partly done 7 Nov (§4): FCL 4.6 m GVRD datum read; LiDAR datum and GVRD↔CGVD link still ? (retrieval).
 - [x] Cowork: lobby size from occupant load and exit width (NBC 3.1.17, 3.4.3). Done 7 Nov (§2): no code lobby area; NEW rule 3.4.4.2.(2)(c); doorways 850 mm.
 - [x] Cowork: which lots are in I-3 sub-area A; CD-1 by-laws naming data centres. Done 7 Nov (§5): 31 of 32 I-3 lots in A, 370 Prior St in B; CD-1 (818) found, other CD-1s not searched.
-- [ ] Code: add each result to the register by patch and use it.
+- [ ] Code: add each result to the register by patch and use it. 7 Nov: register done (43f2ba1: sources + 5 conditions); 370 Prior St flagged sub-area B (f866712); plant already packed outside required yards (plant.js), no test yet; no 800 mm doorway found. Left: checks 8, 10, 15 and 18 use the conditions when section 5 builds them; CD-1 (818) not in the zone table: 720 Beatty St and 701 Expo Blvd are not in the Vancouver tiles (searched 7 Nov); datum retrieval open.
 
 ## 5. Emergency hub rule sheet (the first automatic typology)
 
