@@ -68,11 +68,29 @@ BD.plant={
   P.genYard=s.g&&genAt==='yard'?s.gN:0; P.genRoof=s.g&&genAt==='roof'?s.gN:0;
   // reserve a strip for yard plant on a new building whose footprint the tool sets
   if(!m.existing&&m.uBuild&&(P.coolYard||P.genYard)){ const wv=m.v[1]-m.v[0]; let depth=0;
-    const rowDepth=(k,n)=>{ const per=Math.max(0,Math.floor((wv-2*k.wall[0]+k.gap[0])/(k.L+k.gap[0]))); if(!per) return null; const r=Math.ceil(n/per); return 2*k.wall[1]+r*k.W+(r-1)*k.gap[1]; };
     const gt=genTank(mw,s); P.genTank=gt; /* Build 2: B139 Table 2 (register arch_csa_b139) */
+    /* 7 Nov 2026 (Clark Dr hand check, checks/agents/2026-11-07_clark_handcheck.md): a row of generator sets keeps the B139 tank distance from the side
+       property lines at its ends (as put() below enforces), not only the 1.5 m wall clearance; sy = the narrowest side yard, so the distance is to the lot line */
+    const syL=(m.edgeYards||[]).filter(e=>e.kind!=='front'&&e.kind!=='rear').map(e=>e.d||0).filter(x=>isFinite(x)), sy=syL.length?Math.min(...syL):0;
+    const endD=k=>k===s.g&&gt&&gt.pl!=null?Math.max(k.wall[0],gt.pl-(isFinite(sy)?sy:0)):k.wall[0];
+    const rowDepth=(k,n)=>{ const e=endD(k), per=Math.max(0,Math.floor((wv-2*e+k.gap[0])/(k.L+k.gap[0]))); if(!per) return null; const r=Math.ceil(n/per); return 2*k.wall[1]+r*k.W+(r-1)*k.gap[1]; };
+    /* the real rear yard line may be skewed against the frame: push the strip in until it lies wholly inside the buildable area (units stay square to the building) */
+    const lotR=m.inset?(BD.buildArea?BD.buildArea(m):m.ring):m.ring; let skew=0;
+    /* columns where the buildable area does not reach the rear within 3 m (an irregular lot: no buildable ground there at all) are left out; the packer keeps units off them */
+    for(let v=m.v[0]+0.25; v<=m.v[1]-0.25+1e-9; v+=0.5){ let k=0; for(; k<=60; k++){ const [x,y]=F.toW(m.plantYardStart+m.dir*k*0.05,v); if(BD.pip(x,y,lotR)) break; } if(k<=60) skew=Math.max(skew,k*0.05); }
+    P.skew=skew; P.endExtra=s.g&&gt&&gt.pl!=null?Math.max(0,endD(s.g)-s.g.wall[0]):0; /* rows of sets start this much further in at each end */
     for(const [k,n] of [[s.k,P.coolYard],[s.g,P.genYard]]){ if(!n||!k) continue; let d=rowDepth(k,n); if(d!=null&&k===s.g&&gt&&gt.pl!=null&&!m.loading){ const rearY=Math.abs(m.plantYardStart-(m.dir<0?F.L/2:-F.L/2)); d+=Math.max(0,gt.pl-rearY-k.wall[1]); } if(d==null){ P.short+=`The lot is too narrow for a ${k.L} m ${k.name.replace(/s$/,'')} across it. `; continue; } depth+=d; }
-    const avail=Math.abs(m.uBuild[1]-m.uBuild[0]); if(depth>avail*0.9){ P.short+='The plant yard would take almost the whole buildable area. '; depth=Math.min(depth,avail*0.9); }
-    m.plantYardDepth=depth; const a0=m.plantYardStart, a1=a0+m.dir*depth; P.yard=BD.geo.rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); P.yardU=[Math.min(a0,a1),Math.max(a0,a1)];
+    const avail=Math.abs(m.uBuild[1]-m.uBuild[0]);
+    /* 7 Nov 2026: on a lot that narrows towards the rear the rows sized on the full width do not fit: deepen the yard a row at a time until the yard units
+       actually pack into it (same packer and distances as roof() below), up to the 90 % cap; what still does not fit is reported there */
+    { const a00=m.plantYardStart+m.dir*skew, ex=P.endExtra||0, trial=dep=>{ const a1=a00+m.dir*dep, u0=Math.min(a00,a1), u1=Math.max(a00,a1); let n=0, used=[];
+        for(const [k,c] of [[s.k,P.coolYard],[s.g,P.genYard]]){ if(!c||!k) continue; const isG=k===s.g, keepW=k.wall; if(isG&&gt&&gt.bld!=null) k.wall=keepW.map(w=>Math.max(w,gt.bld));
+          EDGE=isG&&gt&&gt.pl!=null&&m.ring?{ring:m.ring,d:gt.pl}:(k.evap&&m.ring?{ring:m.ring,d:k.evap}:null); if(isG) k.lotSep=!!EDGE;
+          const got=pack(F,lotR,used,u0,u1,m.v[0]+(isG?ex:0),m.v[1]-(isG?ex:0),k,c,true); k.wall=keepW; delete k.lotSep; EDGE=null;
+          n+=c-got.length; used=used.concat(got.map(q=>BD.geo.rectW(F,q.u-q.L/2-1,q.u+q.L/2+1,q.v-q.W/2-1,q.v+q.W/2+1))); } return n; };
+      const step=s.g&&P.genYard?s.g.W+s.g.gap[1]:s.k.W+s.k.gap[1]; let tries=0; while(!m.mwProvisional&&depth>0&&trial(depth)>0&&depth+step<=avail*0.9&&tries<20){ depth+=step; tries++; } if(tries) P.deepened=tries; } /* not for the provisional size (no size chosen yet): that is the zone's most, and a yard sized for it would leave no building */
+    if(depth>avail*0.9){ P.short+='The plant yard would take almost the whole buildable area. '; depth=Math.min(depth,avail*0.9); }
+    m.plantYardDepth=depth+skew; const a0=m.plantYardStart+m.dir*skew, a1=a0+m.dir*depth; P.yard=BD.geo.rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); P.yardU=[Math.min(a0,a1),Math.max(a0,a1)];
   }
  },
  /* after the footprint: put units on the roof and in the yard, and report what does not fit */
@@ -89,9 +107,10 @@ BD.plant={
       if(got.length<count){ const tk=got.map(p=>BD.geo.rectW(F,p.u-p.L/2-1,p.u+p.L/2+1,p.v-p.W/2-1,p.v+p.W/2+1)); const g2=pack(F,roofRing,tk,ru0,ru1,rv0,rv1,k,count-got.length,true); got=got.concat(g2); } }
     else { const lotR=m.inset?(BD.buildArea?BD.buildArea(m):BD.geo.clip(m.ring,m.inset)):m.ring; /* LOTLINES 4 Nov 2026 */ const forbid=P.boxes.filter(b=>b.kind==='yard').map(b=>b.clear); if(m.existing) (m.feet||[]).forEach(f=>forbid.push(f.r)); else { if(bld) forbid.push(bld); if(m.loading) forbid.push(m.loading); }
       // yard: the reserved strip for a new building (units turned across it); anywhere in the usable lot for an existing one
-      if(P.yard&&!m.existing){ const [a,b,c,d]=localBounds(F,P.yard); got=pack(F,lotR,forbid,a,b,c,d,k,count,true);
-        if(got.length<count){ const taken=P.boxes.map(x=>x.clear).concat(got.map(p=>BD.geo.rectW(F,p.u-p.L/2-1,p.u+p.L/2+1,p.v-p.W/2-1,p.v+p.W/2+1))); const [a2,b2,c2,d2]=localBounds(F,lotR);
-          got=got.concat(pack(F,lotR,forbid.concat(taken),a2,b2,c2,d2,k,count-got.length,false)); } }
+      /* 7 Nov 2026 (Clark Dr hand check): a new building's yard units go in the reserved plant yard only, as the header says; whatever does not fit there is
+         reported, no longer dropped on open ground elsewhere (that let the MW rest on ground the plant yard did not account for). Rows of generator sets start
+         P.endExtra further in at each end, so the first slot keeps the B139 property-line distance. */
+      if(P.yard&&!m.existing){ const [a,b,c,d]=localBounds(F,P.yard), ex=k===s.g?(P.endExtra||0):0; got=pack(F,lotR,forbid,a,b,c+ex,d-ex,k,count,true); }
       else { const [a,b,c,d]=localBounds(F,lotR); got=pack(F,lotR,forbid,a,b,c,d,k,count,false); if(got.length<count) got=got.concat(pack(F,lotR,forbid.concat(got.map(p=>BD.geo.rectW(F,p.u-p.L/2-1,p.u+p.L/2+1,p.v-p.W/2-1,p.v+p.W/2+1))),a,b,c,d,k,count-got.length,true)); } }
     got.forEach(p=>P.boxes.push(boxOf(F,p,k,base,where)));
     return got.length; };

@@ -1101,7 +1101,37 @@
      ]
     },
     "_note": "Parking By-law s. 5.1 'Multi-Use Developments': each class of use counted separately and summed. Row 5.2.3 (community centre, activity centre or similar place of assembly; fitness centre; pool): Class B, one space for each 2 800 m², none under 100 m². Which programs fall in this row is our reading (?): refuge and warming shelter as a similar place of assembly, gym as a fitness centre, pool (no spectator seating) taken with them. Programs not listed in s. 5.2 (greenhouse, fish farm, spa, clinic, kitchen, laundry and others) are set by the Director of Planning (s. 5.1 'Uses Not Listed'): shown as '?', not counted."
-   }
+   },
+   "office": {
+    "ids": [
+     "clinic"
+    ],
+    "bands": {
+     "v": [
+      [
+       500,
+       0
+      ],
+      [
+       5000,
+       1
+      ],
+      [
+       10000,
+       2
+      ],
+      [
+       28000,
+       3
+      ]
+     ],
+     "src": [
+      "arch_up3_vanPkg5"
+     ]
+    },
+    "_note": "Row 5.2.9 Office Uses, Class B: none under 500 m², one at 500–5 000 m², two to 10 000, three to 28 000 (Class A starts at 1 000 m²). The outpatient clinic is read as a Health Care Office, which s. 2 lists under Office Uses: our reading (J.B. 7 Nov 2026: accept, labelled)."
+   },
+   "_rounding": "s. 5.1 'Rounding of Fractional Numbers' (p. 5-1): 'the nearest whole number above zero shall be taken … a fraction of one-half shall be rounded up to the next whole number'. Applied to the per-2,325 m² and per-2,800 m² terms; 'any portion of the next 1 860 m²' is a whole space by its own words."
   },
   "edm": {
    "spaces": {
@@ -1140,6 +1170,18 @@
     "_note": "Vancouver's 6.1 m aisle (s. 5.4.1) used in Edmonton as an assumption, as the tool says"
    },
    "_note": "Table 7.2 counts 'Floor Area in the case of non-Residential Uses': one threshold on the building's non-residential floor area, no split by use (Bylaw 20001 s. 5.80 subs. 7.2, PDF p. 844; 'Floor Area means the area of a building', s. 8.20). In Architecture the data centre and its programs are one building, so their floor is added (our reading of 'a building')."
+  },
+  "dcSupport": {
+   "v": 0.33,
+   "src": [
+    "burlingtonPlans2026",
+    "arch_dc_estruxCal1",
+    "cologixVAN4_2026",
+    "estruxtureVAN1ds",
+    "quEDM1_2026",
+    "abp317802"
+   ],
+   "_note": "The data centre's floor for loading includes its support rooms (J.B. 7 Nov 2026: the safer reading): hall + UPS + battery floor ÷ (1 − 0.33), the high end of the 27–33 % support share (tool/data/arch.json ratioGround.support)."
   }
  }
 }

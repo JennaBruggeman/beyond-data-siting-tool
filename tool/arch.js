@@ -87,6 +87,7 @@ function hallScore(P){ const drawn=P.boxes.reduce((t,b)=>t+(b.q.m2||0),0), sprea
   const street=P.boxes.filter(b=>b.p.place&&b.p.place.street_entrance).reduce((t,b)=>t+Math.min(Math.abs(b.u[0]-P.s.uf),Math.abs(b.u[1]-P.s.uf)),0)+(P.notDrawn||[]).filter(id=>{ const p=CAT.byId[id]; return p&&p.place&&p.place.street_entrance; }).length*1e4;
   return [drawn,spread,street]; }
 function placeOnce(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,uf,ftf}=s; const out={s,boxes:[],flags:[],hall:null,levels:[]};
+  { const Y=s.M.yards, U=(s.M.edgeYards||[]).filter(e=>e.kind==='unclear'); if(Y&&Y.unclear&&U.length) out.flags.push({t:`Lot lines: ${U.length>1?U.length+' edges are':'one edge ('+Math.round(U[0].len||0)+' m) is'} neither clearly a side nor a rear line; the deeper yard (${Math.max(...U.map(e=>e.d||0))} m) is applied, the safer reading. Read as a side line it would leave more ground (our reading ?).`,src:[(s.M.Z&&s.M.Z.srcId)||'edm_bl20001'],sev:'note'}); } /* 7 Nov 2026 (J.B.): keep the safer yard, flag it */
   { const z=zoneOK(); if(!z.ok) out.flags.push({t:`Not allowed here; rezoning needed. ${String(z.why).replace(/<[^>]+>/g,'')} Shown as if rezoned: a flagged option, not a prediction.`,src:[(s.M.Z&&s.M.Z.srcId)||'edm_bl20001'],sev:'bad'}); } /* WORKLIST 3 zone rule */
   const refuge=pickOf('refuge'), under=refuge&&refuge.opt==='under_hall';
   const toL=r=>{ const o=[]; for(let k=0;k<r.length;k+=2) o.push(F.toL(r[k],r[k+1])); return o; }, ext=r=>{ const L=toL(r); return [Math.min(...L.map(p=>p[0])),Math.max(...L.map(p=>p[0])),Math.min(...L.map(p=>p[1])),Math.max(...L.map(p=>p[1]))]; };
@@ -212,7 +213,24 @@ function secArea(P){ /* the union of the secure line's parts, sampled on a 1 m g
 function zoneMatch(str,code){ /* "BE only (IM, IH not permitted)", "I-2, I-3 (A), FC-2; I-1C Social Service Centre only", "not listed in I-2, I-3, FC-2" */
   if(!str||!code) return '?'; const re=new RegExp('(^|[^A-Z0-9-])'+code.replace(/[-]/g,'\\-')+'(?![A-Z0-9])'); const segs=String(str).toUpperCase().split(/[;(]/);
   const seg=segs.find(x=>re.test(x)); if(/^\s*NONE\s*$/i.test(str)) return 'rezoning'; if(!seg){ return /\bONLY\b/i.test(str)?'no':'?'; } if(/\bONLY\b/.test(seg)&&seg.replace(re,'').trim().length>4) return 'only'; if(/NOT PERMITTED|\bNP\b/.test(seg)) return 'no'; if(/NOT LISTED/.test(seg)) return 'rezoning'; return 'yes'; }
-function rules(P){ const s=P.s, M=s.M, city=s.city, code=zoneCode(), out=[...P.flags]; const PR=plantRings(M), sec=secureRing(P); const evap=(M.plant&&M.plant.boxes||[]).filter(b=>/tower|evapor|adiabatic/i.test(b.name)).map(b=>b.ring); P.secRing=sec;
+/* 7 Nov 2026 (Clark Dr hand check, item 3): can a truck reach the inside dock once the generators stand in the plant yard? A 6.1 m aisle (Parking By-law
+   5.4.1, used in both cities) must be clear in front of the dock face, and from it either the rear lot line abuts a street or lane, or a clear run of the
+   aisle's width along the rear reaches a side edge that abuts a street or lane. Plant units and the building block the run. Geometry only (our reading):
+   turning paths are not checked (?). Returns null when no dock is drawn. */
+function dockAccess(P){ const DP=dcPieces(P), D=DP&&DP.L.dock; if(!D) return null; const s=P.s, M=s.M, F=M.F, aisle=(M.loadingNeed&&M.loadingNeed.aisle)||6.1, hi=s.dir<0;
+  const lb=r=>{ let a=1e9,b=-1e9,c=1e9,d=-1e9; for(let i=0;i<r.length;i+=2){ const [u,v]=F.toL(r[i],r[i+1]); a=Math.min(a,u); b=Math.max(b,u); c=Math.min(c,v); d=Math.max(d,v); } return [a,b,c,d]; };
+  const blocks=(M.plant&&M.plant.boxes||[]).filter(b=>b.kind==='yard').map(b=>lb(b.ring)).concat([lb(P.hall.ring)]).concat(P.boxes.filter(b=>b.base===0).map(b=>lb(b.ring)));
+  const hit=(a,b,c,d)=>blocks.some(q=>q[0]<b-0.01&&q[1]>a+0.01&&q[2]<d-0.01&&q[3]>c+0.01);
+  const [d0,d1,e0,e1]=D.r, ua=hi?d1:d0-aisle, ub=hi?d1+aisle:d0; if(hit(ua,ub,e0,e1)) return {ok:false,why:'plant units stand in front of the dock face'};
+  const inLot=(u,v)=>{ const [x,y]=F.toW(u,v); return BD.pip(x,y,M.ring); };
+  const edgeAt=(u,v)=>{ const [x,y]=F.toW(u,v); let best=null, bd=1e9; for(const e of (M.edgeYards||[])){ const dx=e.bx-e.ax, dy=e.by-e.ay, L2=dx*dx+dy*dy; let t=L2?((x-e.ax)*dx+(y-e.ay)*dy)/L2:0; t=Math.max(0,Math.min(1,t)); const dd=Math.hypot(x-e.ax-t*dx,y-e.ay-t*dy); if(dd<bd){ bd=dd; best=e; } } return best; };
+  const open=e=>e&&(e.abuts==='street'||e.abuts==='alley');
+  /* straight out at the rear */ { let u=hi?ub:ua; const st=hi?0.5:-0.5; let n=0; while(inLot(u,(e0+e1)/2)&&n<80){ u+=st; n++; } const e=edgeAt(u,(e0+e1)/2); if(open(e)&&!hit(Math.min(u,hi?ub:ua),Math.max(u,hi?ub:ua),e0,e1)) return {ok:true,how:'straight out to the '+e.abuts+' at the rear'}; }
+  /* along the rear to a side edge */ for(const dirV of [-1,1]){ let v=dirV<0?e0:e1, n=0; while(inLot((ua+ub)/2,v)&&n<400){ v+=dirV*0.5; n++; } const va=Math.min(v,dirV<0?e0:e1), vb=Math.max(v,dirV<0?e0:e1);
+    if(!hit(ua,ub,va,vb)){ const e=edgeAt((ua+ub)/2,v); if(open(e)) return {ok:true,how:'along the rear to the '+e.abuts+' on the '+(e.kind||'side')}; } }
+  return {ok:false,why:'no clear 6.1 m run from the dock to a street or lane past the plant yard and the building'}; }
+function rules(P){ const s=P.s, M=s.M, city=s.city, code=zoneCode(), out=[...P.flags];
+  { const da=dockAccess(P); P.dockAccess=da; if(da&&!da.ok) out.push({t:`Loading dock: trucks cannot reach it here (${da.why}). Route it another way (a gap in the plant yard, a dock on the side street) or test a smaller size; geometry only, turning not checked (?).`,src:['vanParking5'],sev:'bad'}); else if(da&&da.ok) out.push({t:`Loading dock: trucks reach it ${da.how} (6.1 m aisle; geometry only, turning not checked ?).`,src:['vanParking5'],sev:'note'}); } const PR=plantRings(M), sec=secureRing(P); const evap=(M.plant&&M.plant.boxes||[]).filter(b=>/tower|evapor|adiabatic/i.test(b.name)).map(b=>b.ring); P.secRing=sec;
   const cen=r=>BD.centroid(r);
   const need=[['plant yard',PR.yard],['loading',PR.loading],['generators',PR.gens[0]]].filter(x=>x[1]);
   const inAny=r=>{ for(let i=0;i<r.length;i+=2) if(insideAny([r[i],r[i+1]],sec)) return true; return insideAny(cen(r),sec); }; const outReq=A.secure==='suggest'?[]:need.filter(([n,r])=>!inAny(r)).map(x=>x[0]); // suggested line holds them by construction (review 2, N4) if(outReq.length) out.push({t:`Outside the secure line: ${outReq.join(', ')}. The suggested line keeps the hall, plant and loading inside.`,src:['arch_sec_gcpsg015AppC'],sev:'bad'});
@@ -344,7 +362,8 @@ function groundItems(b,M,r){ const RG=AD.ratioGround, F=M.F, P=M.plant||{}, out=
   const lb=R=>{ let a=1e9,b2=-1e9,c=1e9,d=-1e9; for(let i=0;i<R.length;i+=2){ const [u,v]=F.toL(R[i],R[i+1]); a=Math.min(a,u); b2=Math.max(b2,u); c=Math.min(c,v); d=Math.max(d,v); } return [a,b2,c,d]; };
   if(M.foot){ const f=lb(M.foot); (P.boxes||[]).filter(x=>x.kind==='yard'&&x.clear).forEach(x=>{ const q=lb(x.clear), du=Math.min(f[1],q[1])-Math.max(f[0],q[0]), dv=Math.min(f[3],q[3])-Math.max(f[2],q[2]); if(du>0&&dv>0) out.intr+=du*dv; }); }
   if(RG&&P.s&&P.s.Q){ const n=Math.ceil(P.s.Q*1000/RG.txKVA-1e-9)+1, row=n*(RG.txPad[0]+RG.txGap), cl=RG.txBld[b.city]||0; out.tx={n,m2:row*(RG.txPad[1]+cl),cl}; }
-  const street=(M.edgeYards||[]).some(e=>e.abuts==='street'&&e.kind!=='front'); /* a flank or rear street reaches the rear yard; otherwise a drive runs to it */
+  /* a flank or rear street, or a lane, reaches the rear yard; otherwise a drive runs to it (7 Nov 2026: lanes count; Vancouver edges now carry abuts) */
+  const street=(M.edgeYards||[]).some(e=>(e.abuts==='street'||e.abuts==='alley')&&e.kind!=='front'); out.reach=street?(M.edgeYards||[]).filter(e=>(e.abuts==='street'||e.abuts==='alley')&&e.kind!=='front').map(e=>e.abuts+' ('+e.kind+')'):null;
   if(!street&&M.uBuild&&M.loadingNeed){ const a0=M.uBuild[0]+(M.plantYardDepth?M.dir*M.plantYardDepth:0), len=Math.abs(M.uFront-a0), w=M.loadingNeed.aisle||0; out.drive={m2:w*len,w,len}; }
   out.dock=M.loadInside?M.loadInside.m2:0; out.dockN=M.loadInside?M.loadInside.n:0; /* 5 Nov 2026: loading bays inside take ground-storey floor */
   out.G=Math.max(0,out.G0-out.intr-out.tx.m2-out.drive.m2-out.dock); return out; }
@@ -389,10 +408,10 @@ function wireGate(sd,view){ const b=sd.querySelector('#aRezone'); if(b) b.onclic
 async function viewRatios(){ await ready(); BD.S.view2='tab'; const sd=$('#side'); { const zg=zoneGate('arat','Ratios'); if(zg&&!zg.on){ sd.innerHTML=zg.html; wireGate(sd,viewRatios); return; } } const b=ratioBase();
   if(!b){ sd.innerHTML=`${tabsHTML('arat')}<h2>Ratios</h2><p class="lead">Ratios need a new building on a lot with a known shape. Pick a lot and set it up as a new build.</p>`; wireTabs(sd); return; }
   const fm=fitNoRatio(), fresh=!A.ratio||A.ratio.site!==selId(); if(fresh) A.ratio=ratioInit(b,fm);
-  const r=A.ratio; let cap=null, c=null, cut=fresh&&!!r.capped; for(let k=0;k<4;k++){ c=ratioApply()||ratioCalc(b,r); cap=dcCapPct(b,r,fm); if(r.dc<=cap.pct) break; r.dc=cap.pct; cut=true; } // the plant yard moves with the MW: settle the cap
-  /* ratio ground (4 Nov 2026): a cut can land below the cap, since a smaller MW needs a smaller plant yard and so leaves more ground. Step back up to
-     the largest share that still passes at its own size (only on a fresh start or after a cut, so a share the user chose lower is kept). */
-  if(cut&&r.dc<cap.pct){ let ok=r.dc, hi=cap.pct; for(let k=0;k<8&&hi>ok;k++){ const t=Math.ceil((ok+hi)/2); r.dc=t; ratioApply(); const ct=dcCapPct(b,r,fm); if(t<=ct.pct){ ok=t; hi=Math.max(t,Math.min(hi,ct.pct)); } else hi=t-1; } r.dc=ok; c=ratioApply()||ratioCalc(b,r); cap=dcCapPct(b,r,fm); }
+  /* the plant yard moves with the MW, so the cap depends on the share tested. 7 Nov 2026: bisect for the largest share that passes at its own size, between
+     0 and the share asked for (replaces jump-to-the-cap then step back up, which stuck at 0 % when a large trial share made a deep plant yard; 339 1st Ave E) */
+  const r=A.ratio; let cap=null, c=null, cut=fresh&&!!r.capped; c=ratioApply()||ratioCalc(b,r); cap=dcCapPct(b,r,fm);
+  if(r.dc>cap.pct){ cut=true; let lo=0, hi=r.dc-1; for(let k=0;k<9&&hi>lo;k++){ const t=Math.ceil((lo+hi)/2); r.dc=t; ratioApply(); const ct=dcCapPct(b,r,fm); if(t<=ct.pct) lo=t; else hi=t-1; } r.dc=lo; c=ratioApply()||ratioCalc(b,r); cap=dcCapPct(b,r,fm); }
   r.prog=fresh?100-r.dc:Math.min(r.prog,100-r.dc); c=ratioApply()||ratioCalc(b,r); const M=BD.model(), S=b.city==='van'?(/I-2/.test(b.code)?['van_zdb_i2']:['van_zdb_i3']):['edm_bl20001'];
   const pctDcMax=cap.pct, mwH=c.mwTest?BD.eng.calc({mw:c.mwTest,recover:true},BD.eng.siteFacts(),[],[]):null;
   const rooms=b.split.map(x=>{ const raw=(BD.data.raw.dc_rooms.rooms.find(y=>y.id===x.id)||{}).perMW||{}; return `<span>${esc(x.name)}</span><span class="ar">${c.mwTest?rg([c.mwTest*x.perMW[0],c.mwTest*x.perMW[1]],'m²'):'?'} ${chips(raw.src)}</span>`; }).join('');

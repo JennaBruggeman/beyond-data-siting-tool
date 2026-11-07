@@ -72,12 +72,18 @@ function inscribe(F,ring,a0,a1,b0,b1,grid,ye){ const ua=Math.min(a0,a1), ub=Math
   const ok=(u0,u1,v0,v1)=>{ for(let k=0;k<=4;k++){ const t=k/4; if(!inLot(u0+(u1-u0)*t,v0)||!inLot(u0+(u1-u0)*t,v1)||!inLot(u0,v0+(v1-v0)*t)||!inLot(u1,v0+(v1-v0)*t)) return false; }
     for(const [u,v] of L) if(u>u0+0.01&&u<u1-0.01&&v>v0+0.01&&v<v1-0.01) return false; return clear(u0,u1,v0,v1); };
   if(ok(ua,ub,va,vb)) return [ua,ub,va,vb];
+  /* 7 Nov 2026 (Clark Dr hand check: 2,151 m² found where 3,754 m² fits): the scaled search returns the first scaled copy that fits, not the largest.
+     For the building (grid), also run the largest-rectangle grid search with the yard lines in the cell test, and keep the larger of the two. */
+  const sc0=scaled(); if(!grid) return sc0; const ptClear=(u,v)=>{ if(!inLot(u,v)) return false; if(!YE.length) return true; const [x,y]=F.toW(u,v); for(const e of YE) if(segPt(x,y,e)<e.d-1e-3) return false; return true; };
+  const g=inscribeGrid(ua,ub,va,vb,ptClear,ok), ar=r=>r?(r[1]-r[0])*(r[3]-r[2]):0; if(ar(g)>ar(sc0)) return g; return sc0||inscribeGrid(ua,ub,va,vb,inLot,ok);
+  function scaled(){
   for(let sc=0.95;sc>=0.2;sc-=0.05){ const w=W*sc, h=H*sc; let best=null;
     for(let i=0;i<=8;i++) for(let j=0;j<=8;j++){ const u0=ua+(W-w)*i/8, v0=va+(H-h)*j/8; if(ok(u0,u0+w,v0,v0+h)){ best=[u0,u0+w,v0,v0+h]; break; } }
     if(best) return best;
     // also try keeping full depth or full width (long thin lots)
     for(const [w2,h2] of [[W,h],[w,H]]) for(let i=0;i<=8;i++) for(let j=0;j<=8;j++){ const u0=ua+(W-w2)*i/8, v0=va+(H-h2)*j/8; if(ok(u0,u0+w2,v0,v0+h2)) return [u0,u0+w2,v0,v0+h2]; } }
-  return grid?inscribeGrid(ua,ub,va,vb,inLot,ok):null; }
+  return null; } }
+function segPt(x,y,e){ const dx=e.bx-e.ax, dy=e.by-e.ay, L2=dx*dx+dy*dy; let t=L2?((x-e.ax)*dx+(y-e.ay)*dy)/L2:0; t=Math.max(0,Math.min(1,t)); return Math.hypot(x-e.ax-t*dx,y-e.ay-t*dy); }
 /* bugfix 4 Nov 2026 (arch sweep 2, VI2L 1940 Glen Dr): on a bent or curved lot no scaled copy of the buildable box fits, so inscribe gave nothing, the set-up
    had no hall footprint (serverFoot) and the hall was drawn as the clipped footprint's bounding box, 438 × 201 m, outside the lot. Fallback: the largest
    rectangle of whole grid cells inside the lot (all four corners of each cell in the lot), checked with the same test as above, shrunk until it passes.
@@ -132,17 +138,21 @@ function offsetRing(r0,D0){ const V=[], D=[], m0=r0.length/2; for(let i=0;i<m0;i
    Vancouver s. 5.1 'Multi-Use Developments': each class of use counted separately and summed; the data centre stays in row 5.2.5, programs add their own class (zones.json loading.van.assembly). */
 const PNAME=id=>{ const p=BD.archTest&&BD.archTest.CAT&&BD.archTest.CAT.byId[id]; return p?p.name.split(' (')[0].toLowerCase():id.replace(/_/g,' '); };
 function loadingNeed(city,gfa,prog){
-  if(city==='van'){ const L=LD.van, n0=gfa<100?0:1+(gfa>L.bayFirst?1:0)+Math.max(0,Math.ceil((gfa-L.bayEach)/L.bayEach)); const nC=gfa<L.classC[0]?0:gfa<=L.classC[1]?1:2; // tool/data/zones.json loading (vanParking5); under 100 m² no bay: unsourced list
+  /* 7 Nov 2026: Vancouver s. 5.1 rounding: nearest whole number, one-half up (rh); Edmonton 1.17.2: a tenth of 0.5 or more rounds up (thresholds, no fractions) */
+  const rh=x=>Math.floor(x+0.5);
+  if(city==='van'){ const L=LD.van, n0=gfa<100?0:1+(gfa>L.bayFirst?1:0)+Math.max(0,rh((gfa-L.bayEach)/L.bayEach)); const nC=gfa<L.classC[0]?0:gfa<=L.classC[1]?1:2; // tool/data/zones.json loading (vanParking5); under 100 m² no bay: unsourced list
     const As=L.assembly, U=prog&&prog.uses?prog.uses.filter(u=>u[1]>0):[], inA=U.filter(u=>As&&As.ids.includes(u[0])), unl=U.filter(u=>!(As&&As.ids.includes(u[0]))), aM2=inA.reduce((t,u)=>t+u[1],0);
-    const nA=As&&aM2>=As.min?Math.ceil(aM2/As.per):0, n=n0+nA; // s. 5.1 rounding: a fraction goes up to the next whole number
-    const pTxt=prog&&prog.m2>0?(prog.uses?(nA?` Plus ${nA} for the ${inA.map(u=>PNAME(u[0])).join(', ')} (${fmt(aM2)} m², row 5.2.3: one for each 2,800 m²; which programs fall in this row is our reading ?).`:'')+(unl.length?` Not counted, set by the Director of Planning because s. 5.2 does not list them (?): ${unl.map(u=>PNAME(u[0])).join(', ')}.`:'')
+    const nA=As&&aM2>=As.min?Math.max(1,rh(aM2/As.per)):0; // s. 5.1 rounding: nearest whole number above zero, one-half up
+    const Of=L.office, inO=Of?unl.filter(u=>Of.ids.includes(u[0])):[], oM2=inO.reduce((t,u)=>t+u[1],0), nO=Of&&oM2>0?(Of.bands.find(b=>oM2<b[0])||Of.bands[Of.bands.length-1])[1]:0; /* row 5.2.9 Class B (clinic as a Health Care Office, our reading) */
+    const unl2=unl.filter(u=>!(Of&&Of.ids.includes(u[0]))), n=n0+nA+nO;
+    const pTxt=prog&&prog.m2>0?(prog.uses?(nA?` Plus ${nA} for the ${inA.map(u=>PNAME(u[0])).join(', ')} (${fmt(aM2)} m², row 5.2.3: one for each 2,800 m²; which programs fall in this row is our reading ?).`:'')+(nO?` Plus ${nO} for the ${inO.map(u=>PNAME(u[0])).join(', ')} (${fmt(oM2)} m², row 5.2.9 Office Uses, Class B: a Health Care Office is an Office Use, our reading).`:'')+(unl2.length?` Not counted, set by the Director of Planning because s. 5.2 does not list them (?): ${unl2.map(u=>PNAME(u[0])).join(', ')}.`:'')
       :` The programs' floor (${fmt(prog.m2)} m²) needs its own loading by class of use (s. 5.1, Multi-Use Developments), not counted until programs are picked (?).`):'';
-    return {n,nDC:n0,nProg:nA,len:L.len,wid:L.wid,ht:L.ht,aisle:L.aisle,cls:'truck loading bay',nC,
-      basis:`${n} truck loading bay${n===1?'':'s'}: ${n0} for the data centre's ${fmt(gfa)} m² of floor.${pTxt}${prog&&prog.skip&&prog.skip.length?` Picked but not drawn, so not counted: ${prog.skip.map(PNAME).join(', ')}.`:''} Each class of use is counted separately and the counts added (Parking By-law s. 5.1, Multi-Use Developments). The by-law calls this size Class B, its mid-size bay: 10.2 × 3.4 m with 3.8 m clearance (Class C is the 23.1 m bay for the largest trucks). The data centre uses row 5.2.5: the by-law does not name data centres, but the City classes them as a Transportation and Storage use (RTS 19744), which row 5.2.5 lists. Each bay is reached by a 6.1 m aisle (s. 5.4.1).${nC?` If the City reads a data centre as a storage warehouse, ${nC} Class C space${nC>1?'s':''} (23.1 × 3.6 m, 14.0 m aisle) would also be needed.`:''}`,src:'vanParking5'}; }
+    return {n,nDC:n0,nProg:nA+nO,len:L.len,wid:L.wid,ht:L.ht,aisle:L.aisle,cls:'truck loading bay',nC,
+      basis:`${n} truck loading bay${n===1?'':'s'}: ${n0} for the data centre's ${fmt(gfa)} m² of floor${prog&&prog.dcSup?` (hall, UPS and battery rooms ${fmt(prog.dcSup[0])} m² plus support rooms at ${Math.round(prog.dcSup[1]*100)} %, the safer reading)`:''}.${pTxt}${prog&&prog.skip&&prog.skip.length?` Picked but not drawn, so not counted: ${prog.skip.map(PNAME).join(', ')}.`:''} Each class of use is counted separately and the counts added (Parking By-law s. 5.1, Multi-Use Developments). The by-law calls this size Class B, its mid-size bay: 10.2 × 3.4 m with 3.8 m clearance (Class C is the 23.1 m bay for the largest trucks). The data centre uses row 5.2.5: the by-law does not name data centres, but the City classes them as a Transportation and Storage use (RTS 19744), which row 5.2.5 lists. Each bay is reached by a 6.1 m aisle (s. 5.4.1).${nC?` If the City reads a data centre as a storage warehouse, ${nC} Class C space${nC>1?'s':''} (23.1 × 3.6 m, 14.0 m aisle) would also be needed.`:''}`,src:'vanParking5'}; }
   const SK=prog&&prog.skip&&prog.skip.length?` Picked but not drawn, so not counted: ${prog.skip.map(PNAME).join(', ')}.`:'';
   const pm=prog&&prog.m2>0?prog.m2:0, tot=gfa+pm, L=LD.edm, n=tot<L.spaces[0]?0:tot<=L.spaces[1]?1:2; // tool/data/zones.json loading (edmZB580; aisle vanParking5)
   return {n,len:L.len,wid:L.wid,ht:L.ht,aisle:L.aisle,cls:'loading space',
-    basis:`${n} loading space${n===1?'':'s'} for ${fmt(tot)} m² of non-residential floor area${pm?` in the whole building (data centre ${fmt(gfa)} m² plus programs ${fmt(pm)} m²${prog.uses?'':', the programs\' share before any are picked'}; Table 7.2 sets one threshold for the building's non-residential floor, our reading of 'a building')`:''} (Table 7.2).${SK} Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site; backing and turning must not interfere with traffic on abutting streets or alleys (s. 5.80 subs. 7.1). Aisle: Vancouver's 6.1 m used as an assumption.`,src:'edmZB580'}; }
+    basis:`${n} loading space${n===1?'':'s'} for ${fmt(tot)} m² of non-residential floor area${pm?` in the whole building (data centre ${fmt(gfa)} m²${prog&&prog.dcSup?` with its support rooms at ${Math.round(prog.dcSup[1]*100)} %`:''} plus programs ${fmt(pm)} m²${prog.uses?'':', the programs\' share before any are picked'}; Table 7.2 sets one threshold for the building's non-residential floor, our reading of 'a building')`:''} (Table 7.2).${SK} Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site; backing and turning must not interfere with traffic on abutting streets or alleys (s. 5.80 subs. 7.1). Aisle: Vancouver's 6.1 m used as an assumption.`,src:'edmZB580'}; }
 /* the programs that share the building (Architecture only): picked block programs, or before any pick the Ratios programs' share of the floor */
 function progFloor(s){ const A=BD.S.answers; if(!(BD.tier&&BD.tier()==='arch')) return null;
   const P0=(BD.arch&&BD.arch.picks||[]).filter(q=>q.m2>0&&BD.archTest&&BD.archTest.CAT.byId[q.id]&&BD.archTest.CAT.byId[q.id].kind==='mass');
@@ -225,7 +235,8 @@ function model(){
     /* 3 Nov 2026 (Architecture Ratios): the data centre's floor-area share, when set for this lot, replaces MW × the per-MW guess (arch.js; register arch_ratios) */
     const dcF=A.dcFloor&&A.dcSite===s.id?A.dcFloor:null;
     const gfaGuess=dcF?Math.min(lotArea*Z.fsr[1],dcF):A.mw&&perMW0?Math.min(lotArea*Z.fsr[1],A.mw*perMW0):lotArea*Z.fsr[1];
-    const LN=loadingNeed(city,gfaGuess,dcF?PF:null); m.loadingNeed=LN;
+    const sup=dcF&&LD.dcSupport?LD.dcSupport:0, PF2=dcF?Object.assign({},PF||{m2:0,uses:null},{dcSup:sup?[gfaGuess,sup]:null}):null; /* 7 Nov 2026 (J.B.): the data centre's support rooms count in its floor */
+    const LN=loadingNeed(city,dcF&&sup?gfaGuess/(1-sup):gfaGuess,PF2); m.loadingNeed=LN;
     const rearEnd=fl>0?u1:u0, dir=fl>0?-1:1; let cur=rearEnd;
     if(LN.n&&!A.loadIn&&A.foot!=='existing'){ const dep=LN.len+LN.aisle; const a0=cur, a1=cur+dir*dep; { const q=inscribe(F,ring,a0,a1,v0,v1,false,YE); m.loading=q?rectW(F,q[0],q[1],q[2],q[3]):clipYards(m,rectW(F,Math.min(a0,a1),Math.max(a0,a1),v0,v1)); m.loadV=q?[q[2],q[3]]:[v0,v1]; } m.loadDepth=dep; cur=a1;
       m.loadSpaces=[]; const lv0=m.loadV[0], spanV=m.loadV[1]-m.loadV[0], k=Math.min(LN.n,Math.max(1,Math.floor(spanV/(LN.wid+0.6))));
@@ -349,7 +360,9 @@ function yardsOf(m,Z,side,fl){ const E=(BD.S.sel&&BD.S.sel.edges)||[], cls=side&
     return [e.lotNoZone?'a parcel with no zone on record or on the zoning map (?)':'nothing found (?)',allD,allD!==SB.site]; };
   const sw=k=>A.flip?(k==='front'?'rear':k==='rear'?'front':k):k, out=[], ins={u0:0,u1:0,v0:0,v1:0};
   for(const l of cls.lines) for(const k of l.e){ const e=E[k]; if(!e) continue; const kind=sw(l.kind), cand=l.cand?l.cand.map(sw):null; let d, abuts=null;
-    let unA=false; if(SB){ const a=ab(e); abuts=a[0]; d=a[1]; unA=!!a[2]; } else d=kind==='unclear'?Math.max(...cand.map(c=>dk[c]||0)):(dk[kind]||0);
+    let unA=false; if(SB){ const a=ab(e); abuts=a[0]; d=a[1]; unA=!!a[2]; } else { d=kind==='unclear'?Math.max(...cand.map(c=>dk[c]||0)):(dk[kind]||0);
+      /* 7 Nov 2026 (Clark Dr hand check): what the edge abuts, for every lot (it was set only where Edmonton setbacks apply, so no Vancouver street ever reached the rear) */
+      abuts=e.street?(e.street.cls==='alley'?'alley':'street'):(e.nbr&&e.nbr.length?'lot':null); }
     out.push({i:e.i,ax:e.ax,ay:e.ay,bx:e.bx,by:e.by,kind,cand,why:l.why,d,abuts,unA,len:e.len});
     if(d>0){ const nu=e.nx*F.ux+e.ny*F.uy, nv=-e.nx*F.uy+e.ny*F.ux, side4=Math.abs(nu)>=Math.abs(nv)?(nu<0?'u0':'u1'):(nv<0?'v0':'v1'), p=F.toL(e.ax,e.ay), q=F.toL(e.bx,e.by), T=0.5; /* drawing tolerance */
       const touch={u0:Math.min(p[0],q[0])<=-F.L/2+T,u1:Math.max(p[0],q[0])>=F.L/2-T,v0:Math.min(p[1],q[1])<=-F.W/2+T,v1:Math.max(p[1],q[1])>=F.W/2-T}[side4]; if(touch) ins[side4]=Math.max(ins[side4],d); } }
@@ -376,7 +389,11 @@ function setupProblems(noFloor){ const m=model(); if(!m||!m.F) return []; const 
    Binary search to 0.1 MW between 0.1 and the most the floor holds; assumes a smaller size never needs more room. Returns null if nothing fits. */
 function fitMax(opt){ const asIs=!!(opt&&opt.asIs); if(asIs){ roomOff=true; cache.key=null; } try{ return fitMax0(); }finally{ if(asIs){ roomOff=false; cache.key=null; } } } /* dcshare: {asIs:true} = without the plant-room step (the set-up exactly as chosen) */
 function fitMax0(){ const A=BD.S.answers, keep=A.mw; A.mw=null; cache.key=null; let hi=0; try{ hi=BD.eng.siteFacts().mw[1]; }catch(e){}
-  const ok=mw=>{ A.mw=mw; cache.key=null; return !setupProblems(true).length; };
+  /* 7 Nov 2026 (Clark Dr hand check follow-up): a size also fails if the footprint left beside the plant yard cannot hold even the smallest floor that size
+     could need (low m² per MW ÷ high hall share; register size_fit, hall_area). Before, the plant yard could grow at a large size and leave no building. */
+  const roomOK=mw=>{ const m=model(); if(!m||m.existing||!m.foot||!BD.eng) return true; const R=BD.eng.R, floors=Math.max(1,m.Z&&m.Z.ground?(m.nF?m.nF[0]:1)-1:(m.nF?m.nF[0]:1));
+    return BD.area(m.foot)*floors>=mw*R.m2PerMW[0]/R.hallShare[1]-0.5; };
+  const ok=mw=>{ A.mw=mw; cache.key=null; return !setupProblems(true).length&&roomOK(mw); };
   let lo=0, best=null, top=Math.floor((hi||0)*10);
   /* 2 Nov 2026 hard rules: with generators on the roof no size above the fuel limit passes (model(); Build 2: CSA B139.1.1 6.5.3), so the search starts there */
   if(BD.eng&&A.gens!=='none'&&(A.genAt||'yard')==='roof'){ const R=BD.eng.R; top=Math.min(top,Math.floor(BD.data.equipment.roofTank.line/(R.pue[1]*1000*R.fuelHours*R.fuelLkWh)*10)); } /* Build 2: B139.1.1 6.5.3, one set (register arch_csa_b139) */
