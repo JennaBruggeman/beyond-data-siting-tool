@@ -317,11 +317,10 @@ function secureKey(){ const M=state.M; if(!M||!M.ring||M.existing) return ''; co
 const FENCE_YARD_MAX=1.9; /* Vancouver ZDB s. 10.10.3, register arch_per_vanS10 */
 function fenceRuns(M){ const FR=fenceLine(M); return BD.yardRuns?BD.yardRuns(M,FR):[]; }
 function fenceYardNote(M){ if(M.city==='van') return ''; /* J.B. 4 Nov 2026: the fence is 1.9 m everywhere, so a Vancouver yard needs no note */ const RU=fenceRuns(M), inY=RU.filter(p=>p.yard); if(!inY.length) return ''; const len=Math.round(inY.reduce((s,p)=>s+p.len,0)), kinds=[...new Set(inY.map(p=>p.yard==='unclear'?'unclear (?)':p.yard==='flank'?'flanking side':p.yard))].join(' and ');
-  return M.city==='van'?`<b class="k">Fence in a required yard:</b> about ${BD.fmt(len)} m of it runs inside the ${kinds} yard${kinds.includes(' and ')?'s':''}, where the lot line is angled. There it is drawn at 1.9 m, the most a fence in a required yard may be (Zoning and Development By-law s. 10.10.3; register arch_per_vanS10), below the RCMP's 2.4 m. Higher there only if the Director of Planning permits it (s. 10.10.6). Each lot line's yard follows its class (see Lot lines); an unclear line takes the deepest yard it could have (?). `
-    :`<b class="k">Fence in a setback:</b> about ${BD.fmt(len)} m of it runs inside the ${kinds} setback, where the lot line is angled. A fence is a structure and setbacks apply to development (Bylaw 20001 s. 8.20; register arch_per_edmFence; our reading ?). `; }
+  return `<b class="k">Fence in a setback:</b> about ${BD.fmt(len)} m of it runs inside the ${kinds} setback, where the lot line is angled. A fence is a structure and setbacks apply to development (Bylaw 20001 s. 8.20; register arch_per_edmFence; our reading ?). `; }
 /* 2 Nov 2026 hard rules (site audit 11, 12): where the fence may stand.
    Vancouver Zoning and Development By-law s. 10.10.3: a fence in a required yard may be at most 1.9 m ("fence" includes walls and screens, s. 10.10.1;
-   register arch_per_vanS10). The 2.4 m fence is drawn on the line of the required yards, behind them; where a yard is 0 m that line is the lot line.
+   register arch_per_vanS10). The fence (1.9 m everywhere since 4 Nov 2026, J.B.) is drawn on the line of the required yards, behind them; where a yard is 0 m that line is the lot line.
    Edmonton Bylaw 20001 s. 8.20: a fence is a structure, and setbacks apply to development (register arch_per_edmFence): drawn behind the street setback
    (our reading ?). */
 function fenceLine(M){ return M.yardLine&&M.yardLine.length>=6?M.yardLine:M.yardRect?BD.geo.clip(M.ring,M.yardRect):M.ring; } /* LOTLINES 4 Nov 2026: the line of each lot line's own yard (site.js yardLines) */
