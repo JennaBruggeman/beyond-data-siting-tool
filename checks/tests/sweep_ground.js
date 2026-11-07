@@ -37,9 +37,11 @@ function lots() { const out = [], want = process.env.LOTS ? new Set(process.env.
           try { await BD.views.arat(); } catch (e) { base.ratErr = String(e.message || e).slice(0, 120); }
           M = BD.model(); const P = M.plant || {}, yard = P.yard ? ar(BD.clipYards ? BD.clipYards(M, P.yard) : P.yard) : 0;
           const build = M.inset ? ar(BD.buildArea(M)) : M.lotArea, rect = M.hallRoom || 0, strip = M.loading ? ar(M.loading) : 0, r0 = BD.arch.ratio || {};
-          return Object.assign(base, { build, rect, yard, strip, dock: M.loadInside ? M.loadInside.m2 : 0, unused: Math.max(0, build - rect - yard - strip), mw: r0.mw || 0, dc: r0.dc || 0,
+          /* the side drive (where no street or lane reaches the rear) is in use, not unused: its part inside the buildable area is taken off */
+          let drv = 0; if (M.sideDrive && M.sideDrive.ring) { const bl = BD.buildArea(M); try { drv = ar(BD.geo.clip(bl, M.sideDrive.ring)); } catch (e) { drv = 0; } /* clip: the drive rectangle (convex) clips the buildable area */ }
+          return Object.assign(base, { build, rect, yard, strip, dock: M.loadInside ? M.loadInside.m2 : 0, driveIn: drv, unused: Math.max(0, build - rect - yard - strip - drv), mw: r0.mw || 0, dc: r0.dc || 0,
             gens: P.placed ? P.placed.gy : null, miss: (P.miss || []).length, truck: P.truck ? P.truck.type : null, bigYard: P.bigYard || 0,
-            reach: (M.edgeYards || []).some(e => (e.abuts === 'street' || e.abuts === 'alley') && e.kind !== 'front'), yardD: M.plantYardDepth || 0 }); }, x); }
+            reach: (M.edgeYards || []).some(e => (e.abuts === 'street' || e.abuts === 'alley') && e.kind !== 'front'), yardD: M.plantYardDepth || 0, side: M.sideDrive ? (M.sideDrive.inYard > 0.05 ? 'yard' : 'narrow') : null, beyond: BD.fitBeyond ? BD.fitBeyond() : null, gn: M.genNoise ? (M.genNoise.city === 'van' ? { ok: M.genNoise.ok, near: M.genNoise.near } : { test: M.genNoise.test, night: M.genNoise.night, res: M.genNoise.dr < 1e9 }) : null }); }, x); }
       catch (e) { r = { err: String(e.message || e).slice(0, 160) }; }
       const row = Object.assign({ city: x.city, tile: x.tile, id: x.id, zone: x.zone, ms: Date.now() - ts, errs: errs.length }, r);
       for (const k of ['lot', 'len', 'wid', 'build', 'rect', 'yard', 'strip', 'dock', 'unused']) if (typeof row[k] === 'number') row[k] = Math.round(row[k] * 10) / 10;
