@@ -96,6 +96,7 @@ Gate each step: tests pass, weaknesses reported, J.B. says "go" before the next.
 - **Paywalled standards:** `checks/paywalled_standards.md`. Remind J.B. of it now and then; she gets them through UBC Library.
 - **Older to-dos (Oct, status not re-checked):** tower floor areas (596 Vancouver towers on an estimate; BC Assessment gross area pending Jeremy Buhler's written OK); NEU sewage heat 3.2 vs 2.5 MW; LRMC range; Edmonton parking stall 23.4 m²; FortisBC 2026 gas cost; the ten electricity and water avenues J.B. wanted in the tool (19 Oct) — check which are built.
 - **Standing rule:** with every research addition, update all four templates, check whether it is relevant to each user group, and ask J.B. when unsure.
+- **Old prompt files at the repo root** (`PROMPT_*_26Oct.md`, `PROMPT_booklet_changes_27Oct.md`): briefs for October chats, done or replaced. Don't act on them; WORKLIST.md is the job list.
 - **Old archive:** `checks/archive_2026-10/` (check 2 decisions, fix lists, briefs). Historical; the notes file wins where they differ (e.g. old notes say a 2.4 m fence; it is now 1.9 m everywhere).
 - **Reminders:** remind J.B. to link her computer / push at the end of each work round and before reviews.
 
