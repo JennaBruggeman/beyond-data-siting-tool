@@ -87,6 +87,7 @@ function hallScore(P){ const drawn=P.boxes.reduce((t,b)=>t+(b.q.m2||0),0), sprea
   const street=P.boxes.filter(b=>b.p.place&&b.p.place.street_entrance).reduce((t,b)=>t+Math.min(Math.abs(b.u[0]-P.s.uf),Math.abs(b.u[1]-P.s.uf)),0)+(P.notDrawn||[]).filter(id=>{ const p=CAT.byId[id]; return p&&p.place&&p.place.street_entrance; }).length*1e4;
   return [drawn,spread,street]; }
 function placeOnce(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,uf,ftf}=s; const out={s,boxes:[],flags:[],hall:null,levels:[]};
+  { const z=zoneOK(); if(!z.ok) out.flags.push({t:`Not allowed here; rezoning needed. ${String(z.why).replace(/<[^>]+>/g,'')} Shown as if rezoned: a flagged option, not a prediction.`,src:[(s.M.Z&&s.M.Z.srcId)||'edm_bl20001'],sev:'bad'}); } /* WORKLIST 3 zone rule */
   const refuge=pickOf('refuge'), under=refuge&&refuge.opt==='under_hall';
   const toL=r=>{ const o=[]; for(let k=0;k<r.length;k+=2) o.push(F.toL(r[k],r[k+1])); return o; }, ext=r=>{ const L=toL(r); return [Math.min(...L.map(p=>p[0])),Math.max(...L.map(p=>p[0])),Math.min(...L.map(p=>p[1])),Math.max(...L.map(p=>p[1]))]; };
   // the hall where the set-up's model puts it (centred in the buildable area; its roof plant sits on it)
@@ -363,7 +364,7 @@ function ratioApply(){ const b=ratioBase(), r=A.ratio; if(!b||!r) return null; c
 function ratioNow(){ const r=A.ratio; if(!r||r.site!==selId()||!r.mw||BD.S.answers.mw!==r.mw) return null; const b=ratioBase(); if(!b) return null; const c=ratioCalc(b,r); return Object.assign(c,{r,b}); }
 function tabsHTML(k){ const F=BD.flow, T=[['arat','Ratios',['arat']],['aprog','Arrange',['aprog','aarr']],['aexc','Exchange',[]],['acmp','Compare',['acmp']]];
   return `<div class="atabs" role="tablist" aria-label="Design">${T.map(([to,l,ks])=>{ const i=F?F.steps.findIndex(s=>s.k===to):-1, on=ks.includes(k), ok=i>=0&&i<=F.max;
-    return `<button role="tab" data-tab2="${to}" aria-selected="${on}" ${ks.length&&ok?'':'disabled'} ${ks.length?'':'title="Exchange: the on-site exchange step comes next in the build"'}>${l}</button>`; }).join('')}</div>`; }
+    return `<button role="tab" data-tab2="${to}" aria-selected="${on}" ${ks.length&&ok?'':'disabled'} ${ks.length?'':'title="Exchange: the on-site exchange step comes next in the build"'}>${l}</button>`; }).join('')}</div>${A.rezone&&A.rezone[selId()]&&!zoneOK().ok?zoneGate(k,'').html:''}`; }
 function wireTabs(sd){ sd.querySelectorAll('[data-tab2]').forEach(b=>b.onclick=()=>{ if(!b.disabled&&BD.flow) BD.flow.to(b.dataset.tab2); }); }
 function splitLine(RT){ if(!RT) return `<p class="sub asplit">Ratios not set for this lot: the space budget below is the zone's whole allowance. <a href="#" data-editr>Set ratios</a></p>`;
   const pc=v=>n0(v/RT.allowed*100)+'%';
@@ -376,7 +377,16 @@ function groundLine(b,c,cap){ const G=cap.G, k=b.dataFl, it=G.it, pg=G.pg, s=it?
   const items=it?[`footprint after ${it.dock>0?'':'loading and '}the plant yard ${n0(it.G0)} m²`].concat(it.intr>0.5?[`yard units over it ${n0(it.intr)}`]:[]).concat(it.tx.n?[`${it.tx.n} transformer pads, ${it.tx.cl} m from the building, ${n0(it.tx.m2)}`]:[]).concat(it.dock>0?[`${it.dockN} loading bay${it.dockN>1?'s':''} inside ${n0(it.dock)}`]:[]).concat(it.drive.m2>0?[`a ${it.drive.w} m drive to the rear yard ${n0(it.drive.m2)} (no other street reaches it)`]:[]).concat([ps]):[ps];
   if(pg.under){ const gs=Math.max(0,G.ground-pg.under.m2); return `Hall needs ${n0(c.dcM2/k)} m² a storey (${st}); ${n0(G.ground)} m² available. Its support rooms (${n0(s*100)} % of the data centre, ${n0(c.dcM2*s/(1-s))} m²) take the ground storey first: ${n0(gs)} m² there after ${pg.under.why==='typology'?`${n0(pg.under.m2)} m² held back for programs (no programs or typology chosen: the smallest library typology, ${esc(pg.under.typ.name)}; a default, J.B. to confirm)`:`the programs' ${n0(pg.under.m2)} m²`}. Ground: ${items.slice(0,-1).join(' − ')}.`; }
   return `Hall and its support rooms need ${n0(need)} m² of ground per storey (${st}; support ${n0(s*100)} % of the data centre); ${n0(G.ground)} m² available. Ground: ${items.join(' − ')}.`; }
-async function viewRatios(){ await ready(); BD.S.view2='tab'; const sd=$('#side'); const b=ratioBase();
+/* WORKLIST 3 (zone rule, 7 Nov 2026): typologies only where a data centre is permitted, conditional or discretionary (zones.json has a row for the zone,
+   and the lot is not in I-3 sub-area B). Elsewhere: "Not allowed here; rezoning needed." A rezoning is a flagged option, not a block (START_HERE standards):
+   the user may look on as if rezoned, and every screen and the rules then carry the flag. */
+function zoneOK(){ const M=BD.model&&BD.model(), Z=M&&M.Z; if(!Z) return {ok:true}; if(Z.notAllowed) return {ok:false,why:Z.warn}; if(Z.assumed) return {ok:false,why:`Zone ${esc(Z.zone||'(none recorded)')} does not list a data centre (no row in the tool's zone table).`}; return {ok:true}; }
+A.rezone=A.rezone||{};
+function zoneGate(k,title){ const z=zoneOK(); if(z.ok) return null; const on=!!A.rezone[selId()];
+  const box=`<div class="warnbox"><b>Not allowed here; rezoning needed.</b> ${z.why} ${on?'Shown as if rezoned: a flagged option, not a prediction.':'The typologies are not laid out here unless you choose to look as if the lot were rezoned.'}</div>`;
+  if(on) return {html:box,on:true}; return {html:`${tabsHTML(k)}<h2>${title}</h2>${box}<button class="sec" id="aRezone">Show it as if rezoned (flagged)</button>`,on:false}; }
+function wireGate(sd,view){ const b=sd.querySelector('#aRezone'); if(b) b.onclick=()=>{ A.rezone[selId()]=true; view(); }; wireTabs(sd); }
+async function viewRatios(){ await ready(); BD.S.view2='tab'; const sd=$('#side'); { const zg=zoneGate('arat','Ratios'); if(zg&&!zg.on){ sd.innerHTML=zg.html; wireGate(sd,viewRatios); return; } } const b=ratioBase();
   if(!b){ sd.innerHTML=`${tabsHTML('arat')}<h2>Ratios</h2><p class="lead">Ratios need a new building on a lot with a known shape. Pick a lot and set it up as a new build.</p>`; wireTabs(sd); return; }
   const fm=fitNoRatio(), fresh=!A.ratio||A.ratio.site!==selId(); if(fresh) A.ratio=ratioInit(b,fm);
   const r=A.ratio; let cap=null, c=null, cut=fresh&&!!r.capped; for(let k=0;k<4;k++){ c=ratioApply()||ratioCalc(b,r); cap=dcCapPct(b,r,fm); if(r.dc<=cap.pct) break; r.dc=cap.pct; cut=true; } // the plant yard moves with the MW: settle the cap
@@ -439,7 +449,7 @@ function ratioPlan(b,c){ const host=document.getElementById('v3d'); if(!host) re
 
 /* ---------- steps ---------- */
 async function ready(){ css(); await A.ready; if(!CAT.list) throw new Error('arch_programs.json did not load'); }
-async function viewPrograms(){ await ready(); BD.S.view2='tab'; const sd=$('#side');
+async function viewPrograms(){ await ready(); BD.S.view2='tab'; const sd=$('#side'); { const zg=zoneGate('aprog','Programs'); if(zg&&!zg.on){ sd.innerHTML=zg.html; wireGate(sd,viewPrograms); return; } }
   const groups=GROUP.map(([g,l])=>{ const L=CAT.list.filter(p=>p.group===g); if(!L.length) return ''; return `<div class="agrp"><h4 class="spf">${esc(l)}</h4>${L.map(p=>{ const on=!!pickOf(p.id); const s=p.size||{};
       return `<div class="apick"><span>${esc(p.name)}<br><small>${p.kind==='mass'?(s.typical_m2!=null?'typical '+n0(s.typical_m2)+' m²':'size ?'):esc(p.kind)} · ${esc((p.occ&&p.occ.group)||'?')}</small></span><button data-add="${p.id}" aria-pressed="${on}">${on?'Added':'Add'}</button></div>`; }).join('')}</div>`; }).join('');
   sd.innerHTML=`${tabsHTML('aprog')}<h2>Programs</h2><p class="lead">Pick what the site could hold with the data centre. Each starts at a sourced typical size; you set it in the next step.</p>
@@ -447,7 +457,7 @@ async function viewPrograms(){ await ready(); BD.S.view2='tab'; const sd=$('#sid
   sd.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>{ const id=b.dataset.add; pickOf(id)?del(id):add(id); viewPrograms(); });
   wireTabs(sd);
   draw3d(); }
-async function viewArrange(){ await ready(); BD.S.view2='tab'; const sd=$('#side'); const P=place();
+async function viewArrange(){ await ready(); BD.S.view2='tab'; const sd=$('#side'); { const zg=zoneGate('aarr','Arrange'); if(zg&&!zg.on){ sd.innerHTML=zg.html; wireGate(sd,viewArrange); return; } } const P=place();
   if(!P){ sd.innerHTML=`${tabsHTML('aarr')}<h2>Arrange</h2><p class="lead">Architecture mode needs a new building on a lot with a known shape. Pick a lot and set it up as a new build.</p>`; return; }
   const B=budgets(P), RL=rules(P); A.last={P,B,RL};
   const presets=[['suggest','Suggested'],['lot','Lot line'],['wall','Building wall'],['hall','Hall wall']];
@@ -491,7 +501,7 @@ function resize(id,v){ const q=pickOf(id), p=CAT.byId[id]; if(!q) return; const 
 function snapshot(){ const L=A.last; if(!L) return; const P=L.P, B=L.B, s=P.s; const [m,n]=secArea(P);
   const front=P.boxes.filter(b=>b.front&&b.p.place&&b.p.place.public&&b.v).reduce((t,b)=>t+Math.abs(b.v[1]-b.v[0]),0);
   A.saved.push({n:A.saved.length+1,secure:A.secure,picks:JSON.parse(JSON.stringify(A.picks)),space:B.space,heat:B.heat,bad:L.RL.filter(r=>r.sev==='bad').length,notes:L.RL.length,front,W:s.W,pubShare:n?(n-m)/n:null}); }
-async function viewCompare(){ await ready(); BD.S.view2='tab'; const sd=$('#side'); const S=A.saved;
+async function viewCompare(){ await ready(); BD.S.view2='tab'; const sd=$('#side'); { const zg=zoneGate('acmp','Compare'); if(zg&&!zg.on){ sd.innerHTML=zg.html; wireGate(sd,viewCompare); return; } } const S=A.saved;
   const row=(l,f)=>`<tr><th>${l}</th>${S.map(x=>`<td>${f(x)}</td>`).join('')}</tr>`;
   sd.innerHTML=`${tabsHTML('acmp')}<h2>Compare</h2><p class="lead">Saved arrangements side by side. No total score: each row is a different kind of good.</p>
    ${S.length?`<div style="overflow-x:auto"><table class="acmp"><tr><th></th>${S.map(x=>`<th>Arrangement ${x.n}</th>`).join('')}</tr>
