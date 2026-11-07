@@ -325,7 +325,7 @@ function progGround(b,opt){ const M=b.M||BD.model(), Z=(M&&M.Z)||{}, ftf=BD.eng.
     const mn=minOf(p), m2=mn!=null?Math.min(mn,q.m2):q.m2; if(!(m2>0)) return;
     const g=m2/Math.max(1,q.storeys||1); out.m2+=g; out.items.push({id:q.id,name:p.name,g,min:mn!=null}); });
   if(!out.items.length){ /* dcshare follow-up (4 Nov 2026; coordinator recommendation, J.B. to confirm; a default): before any programs are picked, hold back the
-     chosen typology's minimum ground; with none chosen, the smallest in the library (tool/data/arch.json typologies). The tool has no typology picker yet. */
+     chosen typology's minimum ground; with none chosen, the smallest typology in the library (tool/data/arch.json typologies.list; add-ons such as Heat hub are kept apart and never held back, J.B. 7 Nov 2026). The tool has no typology picker yet. */
     const L=(AD.typologies&&AD.typologies.list)||[], m2=t=>t.m2&&typeof t.m2==='object'?t.m2[b.city]:t.m2, ch=L.find(t=>t.id===A.typology);
     const t=ch||L.slice().sort((x,y)=>m2(x)-m2(y))[0]; if(t&&m2(t)>0){ out.m2=m2(t); out.typ={name:t.name,m2:m2(t),chosen:!!ch}; out.why='typology'; return out; } }
   out.why=out.items.length?'beside':'none'; return out; }

@@ -136,8 +136,24 @@
   }
  },
  "typologies": {
-  "_note": "Typology library minimum ground (checks/research_typ). Before any programs are picked, Ratios holds back the chosen typology's minimum ground; with none chosen, the smallest (coordinator recommendation, 4 Nov 2026, J.B. to confirm). The tool has no typology picker yet.",
+  "_note": "Typology library minimum ground (checks/research_typ). Before any programs are picked, Ratios holds back the chosen typology's minimum ground; with none chosen, the smallest typology (J.B. 7 Nov 2026: the smallest typology, not an add-on; was the smallest entry, then Heat hub). The tool has no typology picker yet.",
   "list": [
+   {
+    "id": "emergency_hub",
+    "name": "Emergency hub",
+    "m2": {
+     "v": 853,
+     "src": [
+      "arch_ahsReceptionCentres",
+      "arch_sup_torRespite",
+      "arch_hsg_abGFNA2021",
+      "arch_edmEastglen2017"
+     ]
+    },
+    "_note": "853–1,017 m² gross, all at grade in the beside variant (emergency_hub.md, our arithmetic)"
+   }
+  ],
+  "addons": [
    {
     "id": "heat_hub",
     "name": "Heat hub (energy transfer room)",
@@ -153,21 +169,8 @@
      ]
     },
     "_note": "Edmonton ETS 27–55 m² (low end); Vancouver NEU room 6 × 3 m (checks/research_typ/heat_hub.md)"
-   },
-   {
-    "id": "emergency_hub",
-    "name": "Emergency hub",
-    "m2": {
-     "v": 853,
-     "src": [
-      "arch_ahsReceptionCentres",
-      "arch_sup_torRespite",
-      "arch_hsg_abGFNA2021",
-      "arch_edmEastglen2017"
-     ]
-    },
-    "_note": "853–1,017 m² gross, all at grade in the beside variant (emergency_hub.md, our arithmetic)"
    }
-  ]
+  ],
+  "_addons": "Add-ons (J.B. 4 Nov 2026, Q5): never the hold-back. Heat hub moved here 7 Nov 2026."
  }
 }
