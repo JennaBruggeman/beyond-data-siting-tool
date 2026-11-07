@@ -102,8 +102,7 @@ For each: Cowork draws **real-drawing boards in the A2 style** for every card (r
 - **Resident** (9 cards): city; pick a data centre; what it is; noise; heat; water; power and backup; how it works; report.
 - **Municipal** (11 cards): city; parcel; is a data centre allowed; height and floor area; yards by edge; storey heights and ground floor; loading; rooftop equipment and screening; approval process; two cities; report.
 - **Engineering** (six steps / 13 cards): city; parcel; size and cooling; backup power; what fits; heat; electricity; water; materials; three options; could become; two cities; report.
-- **Inside a data centre** (fifth workflow, learner audience): cards per WORKLIST "Fifth workflow".
-Order: Municipal (closest to the layout work), Engineering, Resident, Inside. Can run alongside Phases B–D: boards are Cowork's work, building waits for Code.
+Order: Municipal (closest to the layout work), Engineering, Resident. (Inside a data centre dropped by J.B., 7 Nov: no time.) Can run alongside Phases B–D: boards are Cowork's work, building waits for Code.
 
 ---
 
