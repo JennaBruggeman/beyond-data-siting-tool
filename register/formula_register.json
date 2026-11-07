@@ -49084,6 +49084,33 @@
     "arch_up3_vanPkg5"
    ],
    "next_action": "independent check of the 1425 Clark Dr and E06A/E06B bays (WORKLIST 2)"
+  },
+  {
+   "id": "r_arch_zone_allowed",
+   "heading": "6 Regulatory",
+   "name": "Typologies only where a data centre is allowed",
+   "test": "Architecture lays out typologies only on lots whose zone permits a data centre, conditionally or at discretion (Vancouver I-1C, I-2, I-3 sub-area A, FC-2; Edmonton IH, IM, BE, EETB, EETC, EETL, EETM, EETIM, EIB, EIM); elsewhere 'Not allowed here; rezoning needed', with an as-if-rezoned view flagged on every screen",
+   "quantities": [
+    "arch_ratios"
+   ],
+   "move": [
+    "policy"
+   ],
+   "parties": [
+    "operator",
+    "city"
+   ],
+   "constraint": true,
+   "note": "Size limits inside allowed zones (e.g. IH Minor Industrial only where existing on 1 Jan 2024) stay flags on the zone's clauses. CD-1 lots are not read (?): they count as not allowed until a CD-1 by-law naming Bulk Data Storage is in the zone table (CD-1 (818) found, not in the tiles).",
+   "sources": [
+    "van_zdb_i3",
+    "van_zdb_i2",
+    "van_zdb_fc2",
+    "edm_bl20001",
+    "arch_zns_edmEETP",
+    "arch_zns_edmEllerslie"
+   ],
+   "next_action": "sweep (WORKLIST 3): count lots per zone"
   }
  ],
  "opportunity_quantities": {
