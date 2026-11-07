@@ -28,8 +28,8 @@ Dates: match a user **6 Nov**; peer reviews **13/17 Nov** and **27 Nov**; archit
 
 ## 2. Architecture fixes the sweep would inherit
 
-- [ ] Code: draw the inside loading dock in Arrange (ground-storey block at the rear, drive side; the hall may sit over it).
-- [ ] Code: loading count uses the data centre's floor only. Re-read Bylaw 20001 Table 7.2 / s. 5.80 and Vancouver Parking By-law s. 5 (whole building or each use?), then fix.
+- [x] Code: draw the inside loading dock in Arrange (ground-storey block at the rear, drive side; the hall may sit over it). f7a3d94 (dcrooms.js; rear end, v0 corner as a drawing choice: which side the drive is on is not checked ?). On Edmonton lots the dock takes ~40 m² of hall floor on the ground storey, said in the room note.
+- [x] Code: loading count uses the data centre's floor only. Re-read Bylaw 20001 Table 7.2 / s. 5.80 and Vancouver Parking By-law s. 5 (whole building or each use?), then fix. 630178f: Edmonton Table 7.2 is one threshold on the building's non-residential floor (data centre + programs); Vancouver s. 5.1 counts each class separately and adds them. E06A's bay is back; E06B gains one (3.5 → 3.4 MW); CLARK 3 → 4 and V339 2 → 3 after picks. Re-baselined 7bfbc49.
 - [ ] Code: hand-check 1425 Clark Dr (2.8 → 4.9 MW after the loading fix) by an independent agent: re-measure ground, plant yard, bays, drive.
 - [ ] J.B.: inside loading dock as the Architecture default — yes or no? **Gate.**
 
