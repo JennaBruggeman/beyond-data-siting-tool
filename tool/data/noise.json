@@ -92,5 +92,56 @@
     ]
    }
   }
+ },
+ "gen": {
+  "_note": "Generator noise (7 Nov 2026, checks/research_arch_v1/noise_reads_2026-11-07.md). One KD2000 set in a Sound Level 2 enclosure: 78 dB(A) at 7 m, full load (maker claim). Lp(r) = Lp7 − 20 log10(r / 7), free field, no screening, one set (our arithmetic).",
+  "lp7": {
+   "v": 78,
+   "src": [
+    "kohlerG6154sound"
+   ]
+  },
+  "van": {
+   "test": {
+    "v": 80,
+    "src": [
+     "van6555s41c"
+    ]
+   },
+   "testAt": {
+    "v": 6.1,
+    "src": [
+     "van6555s41c"
+    ]
+   },
+   "_note": "s. 4.1(c): lawful testing ≤ 80 dBA at the point of reception or at least 6.1 m from the source, whichever is the greater; once a month, ≤ 60 min, daytime, plus once a year ≤ 180 min. Running in a power cut as emergency works, s. 4.3(c): our reading (?)."
+  },
+  "edm": {
+   "resTest1h": {
+    "v": 75,
+    "src": [
+     "edm14600s19to24"
+    ]
+   },
+   "nonTest1h": {
+    "v": 85,
+    "src": [
+     "edm14600s19to24"
+    ]
+   },
+   "resNight": {
+    "v": 50,
+    "src": [
+     "edm14600s19to24"
+    ]
+   },
+   "nonNight": {
+    "v": 60,
+    "src": [
+     "edm14600s19to24"
+    ]
+   },
+   "_note": "C14600 s. 19(3), 21(3): daytime, up to 1 hour a day, 75 dB(A) at residential and 85 at non-residential property lines; ss. 20, 22: overnight 50 and 60, no allowance; s. 24: no generator exemption (a flag, not a block)."
+  }
  }
 }

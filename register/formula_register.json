@@ -3182,7 +3182,10 @@
    "arch_vbbl32563": "rule",
    "arch_nbc3432": "rule",
    "arch_nbc3442": "rule",
-   "arch_van_cd1_818": "rule"
+   "arch_van_cd1_818": "rule",
+   "kohlerG6154sound": "operator",
+   "van6555s41c": "rule",
+   "edm14600s19to24": "rule"
   },
   "source_check": {
    "mfrDryCooler": "agent",
@@ -4269,7 +4272,10 @@
    "arch_vbbl32563": "claude",
    "arch_nbc3432": "claude",
    "arch_nbc3442": "claude",
-   "arch_van_cd1_818": "claude"
+   "arch_van_cd1_818": "claude",
+   "kohlerG6154sound": "claude",
+   "van6555s41c": "claude",
+   "edm14600s19to24": "claude"
   },
   "research_pass": {
    "date": "16 Oct 2026",
@@ -34098,6 +34104,33 @@
      "where": "checks/research_arch_v1/clause_reads_2026-11-07.md",
      "what": "s. 5(h), s. 6"
     }
+   ],
+   "kohlerG6154sound": [
+    {
+     "check": 1,
+     "by": "Claude (Cowork)",
+     "date": "7 Nov 2026",
+     "where": "checks/research_arch_v1/noise_reads_2026-11-07.md",
+     "what": "78 dB(A) at 7 m SL2"
+    }
+   ],
+   "van6555s41c": [
+    {
+     "check": 1,
+     "by": "Claude (Cowork)",
+     "date": "7 Nov 2026",
+     "where": "checks/research_arch_v1/noise_reads_2026-11-07.md",
+     "what": "s. 4.1(c), 4.3(c)"
+    }
+   ],
+   "edm14600s19to24": [
+    {
+     "check": 1,
+     "by": "Claude (Cowork)",
+     "date": "7 Nov 2026",
+     "where": "checks/research_arch_v1/noise_reads_2026-11-07.md",
+     "what": "ss. 19–22, 24"
+    }
    ]
   },
   "check_log_note": "check_log: CHECK 1 = first read (Claude, overnight pass 29 Oct 2026); CHECK 2 = independent agent re-read the same evening. 'confirmed' = both reads agree. 'fixed at check 2' = the second reader found a difference and the entry was corrected to the source wording it quoted: that new wording has one read, so it is the place for any third look. Items still marked '?' stay open. Back-fill (30 Oct 2026): sources read before per-source logging began (16 Oct) have a check-1 entry pointing to the research note that records them; sources with no trace in any note were re-read as check 1.",
@@ -46745,7 +46778,7 @@
    "id": "arch_ratios",
    "name": "Site ratios: coverage, floor-area split, data-centre size (Architecture mode)",
    "unit": "m² · %, MW",
-   "formula": "allowed floor = min(lot × floor-space ratio, building footprint × storeys under the height limit); footprint up to the zone's coverage limit where the register has one, else the buildable area inside the yards; data centre share × allowed floor = hall + electrical + battery floor; MW = that floor ÷ (290–630 + 2.4–3.3 + 1.0–1.8) m² per MW, a range (no midpoint); programs share × allowed floor = the programs' space budget; rooms with no size source are not counted (?); ground check (4 Nov 2026): data centre floor on its storeys ≤ (footprint after loading and the plant yard − yard units over it − transformer pads × (depth + building clearance) − a drive to the rear where no other street reaches it − programs' ground) × hall storeys × (1 − support share); programs' ground = picked block programs beside the hall at their smallest size ÷ storeys, or before any pick the chosen typology's minimum ground (none chosen: the smallest typology in the library, add-ons excluded; J.B. 7 Nov 2026); loading inside (5 Nov 2026): with the Architecture default the bays take ground-storey floor, length × (n × (width + 0.6) + 0.6), subtracted from the ground; no strip across the rear (the aisle is the drive or lane outside); loading count (7 Nov 2026): Edmonton counts the whole building's non-residential floor (data centre + programs: picked block programs, or before any pick the Ratios programs' share; Table 7.2); Vancouver counts each class separately and adds them (s. 5.1): the data centre in row 5.2.5, picked refuge, warming shelter, gym and pool in row 5.2.3 (our reading), other programs '?' (Director of Planning); dock on a hall storey (7 Nov 2026, J.B.): the hall floor it takes, with any hall strip under 3 m beside it (given to the dock), comes out of the MW: MW = (data centre floor − that floor) ÷ m² per MW; the footprint is unchanged; plant yard (7 Nov 2026, Clark Dr check): pushed in past a skewed rear yard line, rows of generator sets keep the B139 property-line distance at their ends, deepened a row at a time until its units pack (not for the provisional size), and units that do not fit are reported, never placed on other ground; a flank or rear street or a lane reaching the rear removes the drive (Vancouver edges now carry what they abut); the building's rectangle is the larger of the scaled search and a largest-rectangle grid search with the yard lines; a size fails if the footprint left cannot hold mw × 290 ÷ 0.72 m²; the share is bisected for the largest that passes at its own size; 7 Nov 2026 (J.B.): the size test uses ≈635 m² per MW (hall + UPS + battery, high end; support rooms not added, ?); plant yard capped at the buildable depth less 12 m; a truck lane to the dock is reserved in the plant yard (straight from a rear lane or street, else 6.1 m along the rear face); section 3 gate (7 Nov 2026, J.B.): size test floor = mw × 635 ÷ (1 − 0.33) (support rooms at the conservative end of 27–33 %); sizes beyond the tested generator-yard depth (21.7 m) are not fits ('beyond the tested range'); no rear or side access: a 6.1 m side drive from the front street (Vancouver in the side yard, flagged; Edmonton by narrowing the building), which replaces the drive charged as ground",
+   "formula": "allowed floor = min(lot × floor-space ratio, building footprint × storeys under the height limit); footprint up to the zone's coverage limit where the register has one, else the buildable area inside the yards; data centre share × allowed floor = hall + electrical + battery floor; MW = that floor ÷ (290–630 + 2.4–3.3 + 1.0–1.8) m² per MW, a range (no midpoint); programs share × allowed floor = the programs' space budget; rooms with no size source are not counted (?); ground check (4 Nov 2026): data centre floor on its storeys ≤ (footprint after loading and the plant yard − yard units over it − transformer pads × (depth + building clearance) − a drive to the rear where no other street reaches it − programs' ground) × hall storeys × (1 − support share); programs' ground = picked block programs beside the hall at their smallest size ÷ storeys, or before any pick the chosen typology's minimum ground (none chosen: the smallest typology in the library, add-ons excluded; J.B. 7 Nov 2026); loading inside (5 Nov 2026): with the Architecture default the bays take ground-storey floor, length × (n × (width + 0.6) + 0.6), subtracted from the ground; no strip across the rear (the aisle is the drive or lane outside); loading count (7 Nov 2026): Edmonton counts the whole building's non-residential floor (data centre + programs: picked block programs, or before any pick the Ratios programs' share; Table 7.2); Vancouver counts each class separately and adds them (s. 5.1): the data centre in row 5.2.5, picked refuge, warming shelter, gym and pool in row 5.2.3 (our reading), other programs '?' (Director of Planning); dock on a hall storey (7 Nov 2026, J.B.): the hall floor it takes, with any hall strip under 3 m beside it (given to the dock), comes out of the MW: MW = (data centre floor − that floor) ÷ m² per MW; the footprint is unchanged; plant yard (7 Nov 2026, Clark Dr check): pushed in past a skewed rear yard line, rows of generator sets keep the B139 property-line distance at their ends, deepened a row at a time until its units pack (not for the provisional size), and units that do not fit are reported, never placed on other ground; a flank or rear street or a lane reaching the rear removes the drive (Vancouver edges now carry what they abut); the building's rectangle is the larger of the scaled search and a largest-rectangle grid search with the yard lines; a size fails if the footprint left cannot hold mw × 290 ÷ 0.72 m²; the share is bisected for the largest that passes at its own size; 7 Nov 2026 (J.B.): the size test uses ≈635 m² per MW (hall + UPS + battery, high end; support rooms not added, ?); plant yard capped at the buildable depth less 12 m; a truck lane to the dock is reserved in the plant yard (straight from a rear lane or street, else 6.1 m along the rear face); section 3 gate (7 Nov 2026, J.B.): size test floor = mw × 635 ÷ (1 − 0.33) (support rooms at the conservative end of 27–33 %); sizes beyond the tested generator-yard depth (21.7 m) are not fits ('beyond the tested range'); no rear or side access: a 6.1 m side drive from the front street (Vancouver in the side yard, flagged; Edmonton by narrowing the building), which replaces the drive charged as ground; generator noise (7 Nov 2026): test level at the lot lines checked (Vancouver 6555 s. 4.1(c); Edmonton C14600 s. 19(3), 21(3)), Edmonton overnight outage flagged",
    "inputs": [
     "envelope",
     "arch_dc_hall",
@@ -49138,8 +49171,8 @@
   {
    "id": "r_generator_noise_unchecked",
    "heading": "1 Technical",
-   "name": "Generator noise at the lot lines not checked",
-   "test": "the noise check covers the cooling plant only; where the generators' part of the plant yard is deeper than the test lots' deepest (21.7 m), the set-up says their noise at the lot lines is not checked; sizes needing a deeper yard are shown as beyond the tested range, not as fits (J.B. 7 Nov 2026); where every set-up with generators is beyond it, the example no longer falls back to no generators (12603 123 St NW: 40 MW before, no size now: its rear line is diagonal, so the rear plant yard cannot hold 3 sets within 21.7 m; section 5: plant on awkward ground)",
+   "name": "Generator noise at the lot lines (checked from 7 Nov 2026; id kept so earlier patches stay re-runnable)",
+   "test": "one KD2000 SL2 set, 78 dB(A) at 7 m (maker claim), Lp(r) = 78 − 20 log10(r / 7), free field, one set at a time (our arithmetic). Vancouver: test ≤ 80 dB(A) at the point of reception or 6.1 m, whichever is farther (6555 s. 4.1(c)); running in a power cut as emergency works, s. 4.3(c), our reading (?). Edmonton: daytime test ≤ 1 h ≤ 75 dB(A) at residential and ≤ 85 at non-residential lines (C14600 s. 19(3), 21(3)); an overnight outage over 50 / 60 is flagged, not blocked (ss. 20, 22, 24: no generator exemption)",
    "quantities": [
     "arch_ratios"
    ],
@@ -49151,12 +49184,13 @@
     "city"
    ],
    "constraint": false,
-   "note": "No sourced sound level for the tool's 2 MW sets (Rehlko KD2000, Sound Level 2 enclosure): the register has MTU DS2250 (98.7 dBA at 7 m, open) and Cummins S-1443 (72–91.3 dB(A) at 7 m, 250–1,000 kW) only. Whether the Vancouver and Edmonton noise by-laws exempt standby generators or limit test runs is not read (?).",
+   "note": "Property lines are this lot's own, classed by what they abut (our reading). Cooling plant noise in normal operation is unchanged (the existing noise screen). 7 Nov 2026.",
    "sources": [
-    "mtuDS2250",
-    "cumminsS1443"
+    "kohlerG6154sound",
+    "van6555s41c",
+    "edm14600s19to24"
    ],
-   "next_action": "J.B.: KD2000 Sound Level 2 spec sheet (dB(A) at 7 m); read By-law 6555 and Bylaw 14600 on standby generators"
+   "next_action": "sound power level (Lw) for ISO 9613 use, if a fuller noise model is wanted (?)"
   }
  ],
  "opportunity_quantities": {
@@ -50864,7 +50898,10 @@
   "arch_vbbl32563": "RULE: Vancouver Building By-law 2025, Div. B 3.2.5.6.(3) (local copy data/raw/codes/): firefighter path from the curb to the main entrance and to every access opening 'no less than 1.2 m in width' (900 mm for one dwelling unit), surfaced with concrete, asphalt or similar. Read 7 Nov 2026 (Cowork).",
   "arch_nbc3432": "RULE: NBC 2020 Div. B 3.4.3.2 and Table 3.4.3.2.-A (same in BCBC 2024 p. 3-236, read as an image; NBC(AE) 2023; VBBL 2025): (1)(a) exit width = occupant load × 6.1 mm a person for doorways, corridors and passageways; (b) 8 mm a person for stairs with rise ≤ 180 mm and run ≥ 280 mm; (7) with more than one exit, each counts for at most half. Minimum widths for Groups A, B-1, C, D, E, F: corridors and passageways 1 100 mm, ramps 1 100 mm, stairs 900 mm (≤ 2 storeys above / 1 below the exit level) or 1 100 mm, doorways 850 mm. Read 7 Nov 2026 (Cowork).",
   "arch_nbc3442": "RULE: NBC 2020 Div. B 3.4.4.2 (same in BCBC 2024, NBC(AE) 2023, VBBL 2025): (1) no exit from a floor area above or below the first storey may lead through a lobby, except as in (2); (2) one exit only may lead through a lobby, and only if (a) the lobby floor is ≤ 4.5 m above grade, (b) the path through the lobby to outdoors is ≤ 15 m, and (c) 'the adjacent rooms or premises having direct access to the lobby do not contain a care, residential or industrial occupancy'. Read 7 Nov 2026 (Cowork).",
-  "arch_van_cd1_818": "RULE: City of Vancouver CD-1 (818), 720 Beatty St and 701 Expo Blvd, By-law 13399 as amended to 13918 (27 Feb 2024), https://cd1-bylaws.vancouver.ca/CD-1(818).pdf: s. 5(h) permits 'Transportation and Storage Uses, limited to Bulk Data Storage'; s. 6 floor area sub-area A 59 233 m², sub-area B 3 961 m²; subject to Council approval of the form of development. Other CD-1 by-laws not searched (?). Read 7 Nov 2026 (Cowork)."
+  "arch_van_cd1_818": "RULE: City of Vancouver CD-1 (818), 720 Beatty St and 701 Expo Blvd, By-law 13399 as amended to 13918 (27 Feb 2024), https://cd1-bylaws.vancouver.ca/CD-1(818).pdf: s. 5(h) permits 'Transportation and Storage Uses, limited to Bulk Data Storage'; s. 6 floor area sub-area A 59 233 m², sub-area B 3 961 m²; subject to Council approval of the form of development. Other CD-1 by-laws not searched (?). Read 7 Nov 2026 (Cowork).",
+  "kohlerG6154sound": "MAKER: Kohler/Rehlko G6-154 9/23r, Aluminum Sound Enclosures and Subbase Fuel Tank, p. 11 sound data, KD2000/2250/2500 (KD62V12 and KD62V12A engines): SL1 enclosure 90 dB(A), SL2 enclosure 78 dB(A), 'Sound Pressure Level at 60 Hz with Full Load', 'Log average sound pressure level of 8 measured positions around the perimeter of the unit at a distance of 7 m (23 ft.)' — https://resources.kohler.com/power/kohler/industrial/pdf/KD800-2500_G6154.pdf (read through a web reader twice, not seen as an image; manufacturer claim; one value for 2,000–2,500 kW; no sound power level, ?)",
+  "van6555s41c": "RULE: City of Vancouver Noise Control By-law 6555 (consolidated to 14 Jul 2026), s. 4.1(c): the zone limits and 3.1(j) 'do not apply to noise or sound made … as a consequence of the lawful testing of an emergency generator provided that it is not operated more than once a month during the daytime, and for a maximum of 60 minutes, plus once a year for a maximum of 180 minutes, and its continuous sound level does not exceed a rating of 80 dBA on an approved sound meter when measured at the point of reception or at least 6.1 m from its source, whichever is the greater'; s. 4.3(c): sound may exceed the levels when 'performing works of an emergency nature for the preservation or protection of property, life or health'. Standby power in a power cut as such works: our reading (?).",
+  "edm14600s19to24": "RULE: City of Edmonton Community Standards Bylaw C14600 (consolidated 17 Mar 2026, PDF supplied by J.B.): residential property line 65 dB(A) 7 a.m.–10 p.m. (s. 19(1)), s. 19(3) up to 70 for ≤ 2 h, 75 for ≤ 1 h, 80 for ≤ 30 min, 85 for ≤ 15 min in any one day; 50 overnight (s. 20); non-residential 75 daytime (s. 21(1)), s. 21(3) 80 for ≤ 2 h, 85 for ≤ 1 h a day; 60 overnight (s. 22); s. 24 exceptions only for City snow and ice management and a City Manager permit: no exemption for emergency or standby generators; s. 14 disturbance applies whether or not a limit is exceeded; s. 55(d) repeals Bylaw 7255."
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ (UCA default rates, ATCO Gas area); ATCO Gas North Mid Use variable delivery $1.045/GJ (ATCO Gas North Rate Schedules, p. 11, eff. 1 Jan 2026; riders T $1.289/GJ and L $0.087/GJ not included) → (1.045 + 1.458) × 3.6 ÷ 0.85 boiler efficiency ≈ $10.6/MWh heat at the October rate (our arithmetic; the tool uses the 12-month mean commodity, ≈ $13/MWh) — https://www.ucahelps.alberta.ca/regulated-rates.aspx ; https://gas.atco.com/content/dam/web/for-home/natural-gas/natural-gas-north-rate-schedule.pdf",
