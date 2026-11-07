@@ -261,6 +261,8 @@
   "bad: Data centre: its share (30%) leaves too little ground for the picked programs beside the hall. Hall and its support rooms need 1,535 m² of ground per storey (2 hall storeys under the 16 m height limit; support 33 % of the data centre); 205 m² available. Ground: footprint after the plant yard 2,548 m² − 3 transformer pads, 6 m from the building, 93 − 1 loading bay inside 41 − programs 2,210 m² (Refuge 265 as set; Greenhouse 190 as set; Outpatient clinic 500 as set; Bathhouse / Nordic spa 320 as set; Fish farm 685 as set; Warming shelter 100 as set; EV charging hub 150 at its minimum). Back in Ratios it takes at most 4%.",
   "bad: Public indoor pool: 1,065 m² is over the 500 m² this use may have in BE; not drawn. Its sourced minimum (815 m²) is over the cap, so it cannot go on a BE lot.",
   "bad: Fish farm: 685 m² would pass the programs' share of the floor (2,056 m², 531 m² left); not drawn. Edit ratios to give programs more.",
+  "bad: Generator test (daytime, up to 1 h): over 75 dB(A) at residential and 85 at non-residential lines (C14600 s. 19(3), 21(3); 78 dB(A) at 7 m, maker claim; our arithmetic).",
+  "q: Generators in an overnight power cut: over the night limit (50 dB(A) residential, 60 non-residential; C14600 ss. 20, 22); the bylaw has no generator exemption (s. 24). Flagged, not blocked.",
   "note: Loading dock: trucks reach it along the rear to the alley on the side (6.1 m aisle; geometry only, turning not checked ?).",
   "note: Refuge: A-2, 2 h fire separation from the data centre (F-2).",
   "q: Refuge: keep-apart rules not checked here: generators (no distance in the source).",
@@ -330,15 +332,15 @@
  "saved": [
   [
    "suggest",
-   3,
-   18,
+   4,
+   20,
    55,
    0.4218087611869995
   ],
   [
    "lot",
-   8,
-   23,
+   9,
+   25,
    55,
    0
   ]
