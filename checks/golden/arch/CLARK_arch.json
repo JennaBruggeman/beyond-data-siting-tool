@@ -1,14 +1,14 @@
 {
  "dbg": {
-  "a0": -27.076923876618977,
+  "a0": -20.976923876618976,
   "uf": 42.75292387661898,
   "dir": 1,
   "v": [
    -39.35988108921515,
    39.35988108921515
   ],
-  "L": 69.82984775323796,
-  "hd": 41.00000000000026,
+  "L": 63.729847753237955,
+  "hd": 34.46245361420108,
   "F": [
    85.50584775323796,
    78.7197621784303
@@ -17,7 +17,7 @@
    -39.65292387661898,
    42.75292387661898
   ],
-  "pyd": 12.575999999999999,
+  "pyd": 18.676000000000002,
   "front": 42.75292387661898,
   "bu": [
    [
@@ -41,12 +41,12 @@
     40.75292387661898
    ],
    [
-    -5.247076123381021,
-    14.75292387661898
+    24.75292387661898,
+    40.75292387661898
    ],
    [
-    20.75292387661898,
-    40.75292387661898
+    16.75292387661898,
+    26.75292387661898
    ]
   ],
   "plant": [
@@ -121,11 +121,11 @@
     -39
    ],
    [
-    -27,
+    -21,
     -39
    ],
    [
-    -27,
+    -21,
     39
    ],
    [
@@ -231,27 +231,27 @@
   [
    "ev_hub",
    [
-    -5,
-    15
+    25,
+    41
    ],
    false,
    150,
    150,
-   0,
-   0,
+   1,
+   6,
    6
   ],
   [
    "greenhouse",
    [
-    21,
-    41
+    17,
+    27
    ],
    false,
    190,
    190,
-   1,
-   6,
+   2,
+   12,
    6
   ]
  ],
@@ -260,41 +260,41 @@
   18
  ],
  "hallPick": {
-  "tried": 3,
-  "passed": 3,
-  "n": 3,
+  "tried": 2,
+  "passed": 2,
+  "n": 2,
   "under": false,
   "best": {
-   "key": "2:-27.1,13.9:68.8",
+   "key": "2:-21.0,13.5:77.0",
    "k": 2,
    "st": 3,
    "top": 18,
-   "along": "side",
-   "a": 1,
-   "fa": 2819.4594863118323,
+   "along": "back",
+   "a": 3,
+   "fa": 2653.608928293489,
    "drawn": 2695
   }
  },
  "hallUV": [
   [
-   -27,
-   14
+   -21,
+   13
   ],
   [
    -38,
-   30
+   39
   ]
  ],
  "hallStoreys": 3,
  "space": {
-  "hall": 5639,
+  "hall": 5307,
   "prog": 2695,
   "cap": 16585.055801834307
  },
  "heat": {
   "avail": [
-   33896.69485714285,
-   52034.399999999994
+   31970.74628571428,
+   49077.899999999994
   ],
   "need": [
    576.01,
@@ -307,11 +307,11 @@
  },
  "rules": [
   "note: Lot lines: one edge (35 m) is neither clearly a side nor a rear line; the deeper yard (3.1 m) is applied, the safer reading. Read as a side line it would leave more ground (our reading ?).",
-  "note: Loading: 7 bays inside the building (292 m² of ground storey; Architecture default, as the test fits draw it). Ratios takes this floor out of the ground; Arrange draws it on the ground storey at the rear end of the building (drawing choice).",
+  "note: Loading: 6 bays inside the building (251 m² of ground storey; Architecture default, as the test fits draw it). Ratios takes this floor out of the ground; Arrange draws it on the ground storey at the rear end of the building (drawing choice).",
   "bad: Public indoor pool: 1,065 m² does not fit on one floor here along the street front (it needs its own street entrance); drawn over 3 storeys only to show its size. Whether it can be split across floors is a design question.",
   "bad: Outpatient clinic: 605 m² does not fit on one floor here; drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
-  "bad: Fish farm: not drawn. Stopped by height: the 18 m limit (register van_zdb_i2).",
-  "bad: Loading dock: trucks cannot reach it here (plant units stand in front of the dock face). Route it another way (a gap in the plant yard, a dock on the side street) or test a smaller size; geometry only, turning not checked (?).",
+  "bad: Fish farm: not drawn. Stopped by room at grade: no free area of its size with sides of at least 6 × 6 m (a drawing rule, not a code rule: register id ?) is left beside the hall, the plant, the plant yard and loading; height: the 18 m limit (register van_zdb_i2).",
+  "note: Loading dock: trucks reach it along the rear to the street on the flank (6.1 m aisle; geometry only, turning not checked ?).",
   "note: Refuge in I-2: conditional (Community Centre or Neighbourhood House; Social Service Centre).",
   "note: Refuge: A-2, 2 h fire separation from the data centre (F-2).",
   "q: Refuge: keep-apart rules not checked here: generators (no distance in the source).",
@@ -337,10 +337,10 @@
  "ratios": {
   "ratio": {
    "cover": 5528,
-   "dc": 34,
+   "dc": 32,
    "prog": 30,
    "end": "low",
-   "mw": 8.8
+   "mw": 8.3
   },
   "base": {
    "lot": 5882,
@@ -358,18 +358,18 @@
    "allowed": 16585,
    "by": "envelope",
    "dcMax": 11057,
-   "dcM2": 5639,
+   "dcM2": 5307,
    "progM2": 4976,
-   "unused": 5971,
+   "unused": 6302,
    "mw": [
-    8.88,
-    19.22
+    8.36,
+    18.09
    ],
-   "mwTest": 8.8
+   "mwTest": 8.3
   },
   "answers": {
-   "mw": 8.8,
-   "dcFloor": 5639
+   "mw": 8.3,
+   "dcFloor": 5307
   },
   "side": [
    "Ratios"
@@ -383,18 +383,18 @@
   "stuck": false,
   "next": "Next: Programs"
  },
- "split": "Data centre 34% · 5,639 m² · 8.8–19.2 MW (testing 8.8) · programs 30% · 4,976 m² · unused 36% arch_ratios Edit ratios",
+ "split": "Data centre 32% · 5,307 m² · 8.3–18.0 MW (testing 8.3) · programs 30% · 4,976 m² · unused 38% arch_ratios Edit ratios",
  "saved": [
   [
    "suggest",
-   5,
+   4,
    26,
    42,
-   0.3552608920268641
+   0.3008438091957982
   ],
   [
    "lot",
-   11,
+   10,
    32,
    42,
    0
