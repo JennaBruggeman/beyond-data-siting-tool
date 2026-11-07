@@ -350,7 +350,7 @@ function dcCapPct(b,r,fm){ const c=ratioCalc(b,Object.assign({},r,{dc:100,prog:0
 function ratioInit(b,fm){ const r={site:selId(),cover:b.build,dc:0,prog:0,end:'low'}, mw=BD.S.answers.mw, c=ratioCalc(b,Object.assign({},r,{dc:100,prog:0})), cap=dcCapPct(b,r,fm).pct;
   const want=mw?Math.floor(mw*b.perMW[1]/c.allowed*100+1e-9):Infinity; r.dc=mw?Math.max(Math.min(1,cap),Math.min(cap,want)):cap; r.capped=want>cap; r.prog=100-r.dc; return r; } // starts at the set-up's own size (its MW at the low end), the rest to programs
 function ratioApply(){ const b=ratioBase(), r=A.ratio; if(!b||!r) return null; const c=ratioCalc(b,r), An=BD.S.answers;
-  if(c.mwTest){ An.mw=c.mwTest; An.dcFloor=c.dcM2; An.dcSite=BD.S.sel.id; An.mwPick='ratio'; An.mwSite=BD.S.sel.id; r.mw=c.mwTest; } else { delete An.dcFloor; r.mw=null; }
+  if(c.mwTest){ An.mw=c.mwTest; An.dcFloor=c.dcM2; An.progFloor=c.progM2; /* 7 Nov 2026: programs share the building's loading count (site.js loadingNeed) */ An.dcSite=BD.S.sel.id; An.mwPick='ratio'; An.mwSite=BD.S.sel.id; r.mw=c.mwTest; } else { delete An.dcFloor; delete An.progFloor; r.mw=null; }
   BD.modelReset&&BD.modelReset(); return c; }
 /* the ratios in force for Arrange: only when set for this lot and the size has not been changed elsewhere since */
 function ratioNow(){ const r=A.ratio; if(!r||r.site!==selId()||!r.mw||BD.S.answers.mw!==r.mw) return null; const b=ratioBase(); if(!b) return null; const c=ratioCalc(b,r); return Object.assign(c,{r,b}); }

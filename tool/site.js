@@ -127,13 +127,26 @@ function offsetRing(r0,D0){ const V=[], D=[], m0=r0.length/2; for(let i=0;i<m0;i
 
 /* loading spaces: Vancouver Parking By-law 6059 s. 5 (Class B; row 5.2.5 as the "similar use" — the Director of Planning decides, s. 5.1.4);
    Edmonton Bylaw 20001 s. 5.80 subs. 7. Aisle: Vancouver's 6.1 m (s. 5.4.1) used in both cities as an assumption. */
-function loadingNeed(city,gfa){
-  if(city==='van'){ const L=LD.van, n=gfa<100?0:1+(gfa>L.bayFirst?1:0)+Math.max(0,Math.ceil((gfa-L.bayEach)/L.bayEach)); const nC=gfa<L.classC[0]?0:gfa<=L.classC[1]?1:2; // tool/data/zones.json loading (vanParking5); under 100 m² no bay: unsourced list
-    return {n,len:L.len,wid:L.wid,ht:L.ht,aisle:L.aisle,cls:'truck loading bay',nC,
-      basis:`${n} truck loading bays for ${fmt(gfa)} m² of floor. The Parking By-law calls this size Class B, its mid-size bay: 10.2 × 3.4 m with 3.8 m clearance (Class C is the 23.1 m bay for the largest trucks). The count uses row 5.2.5: the by-law does not name data centres, but the City classes them as a Transportation and Storage use (RTS 19744), which row 5.2.5 lists. Each bay is reached by a 6.1 m aisle (s. 5.4.1).${nC?` If the City reads a data centre as a storage warehouse, ${nC} Class C space${nC>1?'s':''} (23.1 × 3.6 m, 14.0 m aisle) would also be needed.`:''}`,src:'vanParking5'}; }
-  const L=LD.edm, n=gfa<L.spaces[0]?0:gfa<=L.spaces[1]?1:2; // tool/data/zones.json loading (edmZB580; aisle vanParking5)
+/* 7 Nov 2026 (WORKLIST 2, loading count): whole building or each use? prog = the programs sharing the building in Architecture ({m2, uses:[[id,m2]] or null before picks}).
+   Edmonton Table 7.2 counts 'Floor Area in the case of non-Residential Uses': one threshold on the building's non-residential floor, so the programs' floor is added.
+   Vancouver s. 5.1 'Multi-Use Developments': each class of use counted separately and summed; the data centre stays in row 5.2.5, programs add their own class (zones.json loading.van.assembly). */
+const PNAME=id=>{ const p=BD.archTest&&BD.archTest.CAT&&BD.archTest.CAT.byId[id]; return p?p.name.split(' (')[0].toLowerCase():id.replace(/_/g,' '); };
+function loadingNeed(city,gfa,prog){
+  if(city==='van'){ const L=LD.van, n0=gfa<100?0:1+(gfa>L.bayFirst?1:0)+Math.max(0,Math.ceil((gfa-L.bayEach)/L.bayEach)); const nC=gfa<L.classC[0]?0:gfa<=L.classC[1]?1:2; // tool/data/zones.json loading (vanParking5); under 100 m² no bay: unsourced list
+    const As=L.assembly, U=prog&&prog.uses?prog.uses.filter(u=>u[1]>0):[], inA=U.filter(u=>As&&As.ids.includes(u[0])), unl=U.filter(u=>!(As&&As.ids.includes(u[0]))), aM2=inA.reduce((t,u)=>t+u[1],0);
+    const nA=As&&aM2>=As.min?Math.ceil(aM2/As.per):0, n=n0+nA; // s. 5.1 rounding: a fraction goes up to the next whole number
+    const pTxt=prog&&prog.m2>0?(prog.uses?(nA?` Plus ${nA} for the ${inA.map(u=>PNAME(u[0])).join(', ')} (${fmt(aM2)} m², row 5.2.3: one for each 2,800 m²; which programs fall in this row is our reading ?).`:'')+(unl.length?` Not counted, set by the Director of Planning because s. 5.2 does not list them (?): ${unl.map(u=>PNAME(u[0])).join(', ')}.`:'')
+      :` The programs' floor (${fmt(prog.m2)} m²) needs its own loading by class of use (s. 5.1, Multi-Use Developments), not counted until programs are picked (?).`):'';
+    return {n,nDC:n0,nProg:nA,len:L.len,wid:L.wid,ht:L.ht,aisle:L.aisle,cls:'truck loading bay',nC,
+      basis:`${n} truck loading bay${n===1?'':'s'}: ${n0} for the data centre's ${fmt(gfa)} m² of floor.${pTxt} Each class of use is counted separately and the counts added (Parking By-law s. 5.1, Multi-Use Developments). The by-law calls this size Class B, its mid-size bay: 10.2 × 3.4 m with 3.8 m clearance (Class C is the 23.1 m bay for the largest trucks). The data centre uses row 5.2.5: the by-law does not name data centres, but the City classes them as a Transportation and Storage use (RTS 19744), which row 5.2.5 lists. Each bay is reached by a 6.1 m aisle (s. 5.4.1).${nC?` If the City reads a data centre as a storage warehouse, ${nC} Class C space${nC>1?'s':''} (23.1 × 3.6 m, 14.0 m aisle) would also be needed.`:''}`,src:'vanParking5'}; }
+  const pm=prog&&prog.m2>0?prog.m2:0, tot=gfa+pm, L=LD.edm, n=tot<L.spaces[0]?0:tot<=L.spaces[1]?1:2; // tool/data/zones.json loading (edmZB580; aisle vanParking5)
   return {n,len:L.len,wid:L.wid,ht:L.ht,aisle:L.aisle,cls:'loading space',
-    basis:`${n} loading space${n===1?'':'s'} for ${fmt(gfa)} m² of floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site, with no backing onto streets or alleys (s. 5.80 subs. 7). Aisle: Vancouver's 6.1 m used as an assumption.`,src:'edmZB580'}; }
+    basis:`${n} loading space${n===1?'':'s'} for ${fmt(tot)} m² of non-residential floor area${pm?` in the whole building (data centre ${fmt(gfa)} m² plus programs ${fmt(pm)} m²${prog.uses?'':', the programs\' share before any are picked'}; Table 7.2 sets one threshold for the building's non-residential floor, our reading of 'a building')`:''} (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site; backing and turning must not interfere with traffic on abutting streets or alleys (s. 5.80 subs. 7.1). Aisle: Vancouver's 6.1 m used as an assumption.`,src:'edmZB580'}; }
+/* the programs that share the building (Architecture only): picked block programs, or before any pick the Ratios programs' share of the floor */
+function progFloor(s){ const A=BD.S.answers; if(!(BD.tier&&BD.tier()==='arch')) return null;
+  const P=(BD.arch&&BD.arch.picks||[]).filter(q=>q.m2>0&&BD.archTest&&BD.archTest.CAT.byId[q.id]&&BD.archTest.CAT.byId[q.id].kind==='mass');
+  if(P.length) return {m2:P.reduce((t,q)=>t+q.m2,0),uses:P.map(q=>[q.id,q.m2])};
+  return A.progFloor&&A.dcSite===s.id?{m2:A.progFloor,uses:null}:null; }
 
 /* the model the numbers and the 3D share */
 let cache={key:null,m:null}, roomTry=false, roomOff=false; /* dcshare 4 Nov 2026: the plant-room step of the noise ladder (model, fitMax) */
@@ -147,7 +160,8 @@ function model(){
      (testfit_lots.md: dock on a side drive or facing the rear yard). A default drawing choice, not a rule; "Outside, at the rear" keeps the strip. */
   if(A.loadIn==null&&BD.tier&&BD.tier()==='arch'){ A.loadIn='1'; A.loadDefault='arch'; }
   { const a0=s.a||[], Z0=zoneLimits(s.city,s.city==='van'?(a0[1]||''):(a0[2]||a0[1]||'')); if(Z0.screen&&(!A.vis||A.vis==='reveal')) A.vis='screen'; } /* 2 Nov 2026 hard rules: screening required (Z.screen) */
-  const key=JSON.stringify([s.city,s.id,A.built,A.extent,A.floor,A.foot,A.cover,A.loadIn,A.flip,A.hmode,A.storeys,A.userFSR,A.userH,A.plantAt,A.outside,A.inside,A.spares,A.gens,A.genAt,A.genSpares,A.mw,A.vis,A.subB,A.fcSub,A.dcFloor,A.dcSite,A.hallOpt]);
+  const PF=progFloor(s); /* 7 Nov 2026: programs sharing the building count toward loading (Architecture) */
+  const key=JSON.stringify([PF,s.city,s.id,A.built,A.extent,A.floor,A.foot,A.cover,A.loadIn,A.flip,A.hmode,A.storeys,A.userFSR,A.userH,A.plantAt,A.outside,A.inside,A.spares,A.gens,A.genAt,A.genSpares,A.mw,A.vis,A.subB,A.fcSub,A.dcFloor,A.dcSite,A.hallOpt]);
   if(cache.key===key) return cache.m;
   const a=s.a||[], city=s.city, zraw=city==='van'?(a[1]||''):(a[2]||a[1]||'');
   const Z=zoneLimits(city,zraw);
@@ -208,7 +222,7 @@ function model(){
     /* 3 Nov 2026 (Architecture Ratios): the data centre's floor-area share, when set for this lot, replaces MW × the per-MW guess (arch.js; register arch_ratios) */
     const dcF=A.dcFloor&&A.dcSite===s.id?A.dcFloor:null;
     const gfaGuess=dcF?Math.min(lotArea*Z.fsr[1],dcF):A.mw&&perMW0?Math.min(lotArea*Z.fsr[1],A.mw*perMW0):lotArea*Z.fsr[1];
-    const LN=loadingNeed(city,gfaGuess); m.loadingNeed=LN;
+    const LN=loadingNeed(city,gfaGuess,dcF?PF:null); m.loadingNeed=LN;
     const rearEnd=fl>0?u1:u0, dir=fl>0?-1:1; let cur=rearEnd;
     if(LN.n&&!A.loadIn&&A.foot!=='existing'){ const dep=LN.len+LN.aisle; const a0=cur, a1=cur+dir*dep; { const q=inscribe(F,ring,a0,a1,v0,v1,false,YE); m.loading=q?rectW(F,q[0],q[1],q[2],q[3]):clipYards(m,rectW(F,Math.min(a0,a1),Math.max(a0,a1),v0,v1)); m.loadV=q?[q[2],q[3]]:[v0,v1]; } m.loadDepth=dep; cur=a1;
       m.loadSpaces=[]; const lv0=m.loadV[0], spanV=m.loadV[1]-m.loadV[0], k=Math.min(LN.n,Math.max(1,Math.floor(spanV/(LN.wid+0.6))));
