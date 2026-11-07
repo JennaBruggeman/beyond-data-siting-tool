@@ -1,14 +1,14 @@
 {
  "dbg": {
-  "a0": 1.436,
+  "a0": 6.052,
   "uf": -31.75,
   "dir": -1,
   "v": [
    -15.448466375143676,
    15.448466375143676
   ],
-  "L": 33.186,
-  "hd": 19.8562154992665,
+  "L": 37.802,
+  "hd": 6.782188753975787,
   "F": [
    112.22830165742971,
    46.09693275028735
@@ -17,7 +17,7 @@
    29.25,
    -31.75
   ],
-  "pyd": 27.814,
+  "pyd": 23.198,
   "front": -31.75,
   "bu": [
    [
@@ -26,30 +26,14 @@
    ],
    [
     -31.75,
-    -21.75
+    -1.75
    ],
    [
     -31.75,
-    -5.75
-   ],
-   [
-    -31.75,
-    -23.75
-   ],
-   [
-    -31.75,
-    -23.75
+    -15.75
    ]
   ],
   "plant": [
-   [
-    "standby generators",
-    "yard",
-    12,
-    15,
-    -4,
-    5
-   ],
    [
     "standby generators",
     "yard",
@@ -69,7 +53,7 @@
   ],
   "yard": [
    [
-    1,
+    6,
     -15
    ],
    [
@@ -81,7 +65,7 @@
     15
    ],
    [
-    1,
+    6,
     15
    ]
   ],
@@ -129,56 +113,30 @@
    6
   ],
   [
-   "warming_shelter",
+   "pool",
    [
     -32,
-    -22
+    -2
    ],
    true,
-   100,
-   100,
+   1065,
+   1065,
    0,
    0,
-   6
-  ],
-  [
-   "clinic",
-   [
-    -32,
-    -6
-   ],
-   false,
-   605,
-   605,
-   1,
-   6,
-   12
-  ],
-  [
-   "spa",
-   [
-    -32,
-    -24
-   ],
-   true,
-   320,
-   320,
-   0,
-   0,
-   18
+   10
   ],
   [
    "ev_hub",
    [
     -32,
-    -24
+    -16
    ],
    false,
    150,
    150,
    1,
    6,
-   8
+   4
   ]
  ],
  "hall": [
@@ -186,71 +144,64 @@
   18
  ],
  "hallPick": {
-  "tried": 10,
-  "passed": 10,
-  "n": 10,
+  "tried": 18,
+  "passed": 18,
+  "n": 18,
   "under": false,
   "best": {
-   "key": "2:-18.6,1.3:19.9",
+   "key": "2:-1.5,5.3:27.1",
    "k": 2,
    "st": 3,
    "top": 18,
    "along": "back",
-   "a": 1,
-   "fa": 394.26929395331047,
-   "drawn": 1440
+   "a": 4,
+   "fa": 183.99233717821156,
+   "drawn": 1480
   }
  },
  "hallUV": [
   [
-   -19,
-   1
+   -2,
+   5
   ],
   [
    -15,
-   4
+   12
   ]
  ],
  "hallStoreys": 3,
  "space": {
-  "hall": 789,
-  "prog": 1440,
+  "hall": 368,
+  "prog": 1480,
   "cap": 5256.923919377473
  },
  "heat": {
   "avail": [
-   4622.2765714285715,
-   7095.599999999999
+   1925.948571428571,
+   2956.5
   ],
   "need": [
-   54.5,
-   60.55
+   485.44,
+   485.44
   ],
-  "unknown": [
-   "spa",
-   "warming_shelter"
-  ]
+  "unknown": []
  },
  "rules": [
-  "note: Loading: 4 bays inside the building (169 m² of ground storey; Architecture default, as the test fits draw it). Ratios takes this floor out of the ground; Arrange draws it on the ground storey at the rear end of the building (drawing choice).",
-  "bad: Public indoor pool: not drawn. Stopped by minimum size or sides: no free area of its size with sides of at least 11 × 27 m is left beside the hall, the plant, the plant yard and loading.",
-  "bad: Outpatient clinic: 605 m² does not fit on one floor here; drawn over 3 storeys only to show its size. Whether it can be split across floors is a design question.",
-  "bad: Bathhouse / Nordic spa: 320 m² does not fit on one floor here; drawn over 4 storeys only to show its size. Whether it can be split across floors is a design question.",
-  "bad: EV charging hub: 150 m² does not fit on one floor here; drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
-  "bad: Greenhouse: 190 m² would pass the programs' share of the floor (1,577 m², 137 m² left); not drawn. Edit ratios to give programs more.",
-  "bad: Fish farm: 685 m² would pass the programs' share of the floor (1,577 m², 137 m² left); not drawn. Edit ratios to give programs more.",
-  "bad: Loading dock: trucks cannot reach it here (no street or lane reaches the rear: trucks would need a drive from the front street along a side, which Ratios counts as ground but the layout does not draw). Route it another way (a gap in the plant yard, a dock on the side street) or test a smaller size; geometry only, turning not checked (?).",
+  "note: Loading: 3 bays inside the building (129 m² of ground storey; Architecture default, as the test fits draw it). Ratios takes this floor out of the ground; Arrange draws it on the ground storey at the rear end of the building (drawing choice).",
+  "bad: Public indoor pool: 1,065 m² does not fit on one floor here along the street front (it needs its own street entrance); drawn over 2 storeys only to show its size. Whether it can be split across floors is a design question.",
+  "bad: Warming shelter: not drawn. Stopped by height: the 18 m limit (register van_zdb_i3); street entrance: it must sit on the street front (Vancouver 10.21.1; register arch_up_vanZDB10).",
+  "bad: Outpatient clinic: 605 m² would pass the programs' share of the floor (1,577 m², 247 m² left); not drawn. Edit ratios to give programs more.",
+  "bad: Bathhouse / Nordic spa: 320 m² would pass the programs' share of the floor (1,577 m², 247 m² left); not drawn. Edit ratios to give programs more.",
+  "bad: Greenhouse: 190 m² would pass the programs' share of the floor (1,577 m², 97 m² left); not drawn. Edit ratios to give programs more.",
+  "bad: Fish farm: 685 m² would pass the programs' share of the floor (1,577 m², 97 m² left); not drawn. Edit ratios to give programs more.",
+  "q: Loading: no street or lane at the rear or sides, so a 6.1 m drive runs from the front street along the side to the dock; 6.1 m of it lies in the required side yard: driveway in a side yard ? (I-3 3.1.2.16, not read) (drawing choice; Edmonton gives no aisle width, 6.1 m used ?).",
+  "note: Loading dock: trucks reach it by the 6.1 m drive from the front street along the side (6.1 m aisle; geometry only, turning not checked ?).",
   "note: Refuge in I-3: conditional (Community Centre or Neighbourhood House; Social Service Centre).",
   "note: Refuge: A-2, 2 h fire separation from the data centre (F-2).",
   "q: Refuge: keep-apart rules not checked here: generators (no distance in the source).",
-  "note: Warming shelter in I-3: conditional (Social Service Centre (day); overnight: no listed use ?).",
-  "note: Warming shelter: A-2, 2 h fire separation from the data centre (F-2).",
-  "q: Warming shelter: keep-apart rules not checked here: generators (no distance in the source).",
-  "note: Outpatient clinic in I-3: conditional (Health Care Office).",
-  "q: Outpatient clinic: keep-apart rules not checked here: generators (no distance in the source).",
-  "note: Bathhouse / Nordic spa in I-3: conditional (Beauty and Wellness Centre (hydrotherapy, thermal therapy)).",
-  "note: Bathhouse / Nordic spa: A-3, 2 h fire separation from the data centre (F-2).",
-  "q: Bathhouse / Nordic spa: keep-apart rules not checked here: generators (no distance in the source).",
+  "bad: Public indoor pool in I-3: rezoning (Swimming Pool (not listed)).",
+  "note: Public indoor pool: A-3, 2 h fire separation from the data centre (F-2).",
+  "q: Public indoor pool: keep-apart rules not checked here: hall (no distance in the source); intakes (not modelled); generators (no distance in the source).",
   "note: EV charging hub in I-3: conditional (Parking Uses (may include retail sale of electricity)).",
   "note: EV charging hub: F-3, 1.5 h fire separation from the data centre (F-2).",
   "q: EV charging hub: keep-apart rules not checked here: intakes (not modelled)."
@@ -259,10 +210,10 @@
  "ratios": {
   "ratio": {
    "cover": 1752,
-   "dc": 15,
+   "dc": 7,
    "prog": 30,
    "end": "low",
-   "mw": 1.2
+   "mw": 0.5
   },
   "base": {
    "lot": 4503,
@@ -280,18 +231,18 @@
    "allowed": 5257,
    "by": "envelope",
    "dcMax": 3505,
-   "dcM2": 789,
+   "dcM2": 368,
    "progM2": 1577,
-   "unused": 2891,
+   "unused": 3312,
    "mw": [
-    1.24,
-    2.69
+    0.58,
+    1.25
    ],
-   "mwTest": 1.2
+   "mwTest": 0.5
   },
   "answers": {
-   "mw": 1.2,
-   "dcFloor": 789
+   "mw": 0.5,
+   "dcFloor": 368
   },
   "side": [
    "Ratios"
@@ -305,20 +256,20 @@
   "stuck": false,
   "next": "Next: Programs"
  },
- "split": "Data centre 15% · 789 m² · 1.2–2.6 MW (testing 1.2) · programs 30% · 1,577 m² · unused 55% arch_ratios Edit ratios",
+ "split": "Data centre 7% · 368 m² · 0.5–1.2 MW (testing 0.5) · programs 30% · 1,577 m² · unused 63% arch_ratios Edit ratios",
  "saved": [
   [
    "suggest",
    7,
-   22,
-   29,
-   0.7356296130619548
+   18,
+   27,
+   0.81480653097741
   ],
   [
    "lot",
-   12,
+   10,
+   21,
    27,
-   29,
    0
   ]
  ],
