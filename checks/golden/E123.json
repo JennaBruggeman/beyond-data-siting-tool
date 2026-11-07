@@ -249,6 +249,7 @@
    "ring": "[ring 82]",
    "notes": [
     "Noise: needs the roof cooling plant in an enclosed plant room. On the roof, even with low-noise chillers and a solid screen, it would give about 73 dBA at 12311 126 AVENUE NW (IH), 57 m away, over the 60 dBA night limit (Bylaw 14600 s. 22(1)). The plant room is the next measure, and the least that passes; its floor comes out of the building (register arch_nz_nswDcNoise).",
+    "Generators: 32 sets in a 86 m deep plant yard, deeper than any test lot's. Their noise at the lot lines is not checked: the tool has no sourced sound level for the sets (?), and whether the noise by-laws exempt standby generators is not read (?).",
     "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 77–80 dBA (quieter–standard unit rating) at the property line of 12311 126 AVENUE NW (IH), 52 m away; limit 60 dBA at night (Bylaw 14600 s. 22(1))."
    ],
    "warn": [],
@@ -1622,12 +1623,15 @@
     },
     "skew": 3,
     "endExtra": 1.5,
+    "truck": null,
     "deepened": 9,
+    "bigYard": 86,
     "yard": "[ring 8]",
     "yardU": [
      -104.446167,
      -21.126167
     ],
+    "truckRing": null,
     "indoor": 3993.622506,
     "coolRoofIndoor": 43,
     "miss": [],

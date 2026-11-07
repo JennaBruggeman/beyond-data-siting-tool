@@ -5,7 +5,7 @@
   "extent": "whole",
   "floor": "",
   "host": {},
-  "mw": 8.4,
+  "mw": 6.8,
   "foot": "max",
   "cover": 70,
   "hmode": "out",
@@ -466,7 +466,7 @@
     "ht": 4,
     "aisle": 6.1,
     "cls": "loading space",
-    "basis": "1 loading space for 6,440 m² of non-residential floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site; backing and turning must not interfere with traffic on abutting streets or alleys (s. 5.80 subs. 7.1). Aisle: Vancouver's 6.1 m used as an assumption.",
+    "basis": "1 loading space for 5,213 m² of non-residential floor area (Table 7.2). Each 9.0 × 3.0–3.3 m, 4.0 m clear, wholly on site; backing and turning must not interfere with traffic on abutting streets or alleys (s. 5.80 subs. 7.1). Aisle: Vancouver's 6.1 m used as an assumption.",
     "src": "edmZB580"
    },
    "loading": "[ring 8]",
@@ -490,10 +490,10 @@
     22.10551,
     -32.70551
    ],
-   "mwSized": 8.4,
+   "mwSized": 6.8,
    "plant": {
     "s": {
-     "Q": 13.02,
+     "Q": 10.54,
      "k": {
       "name": "air-cooled chillers",
       "L": 12.141,
@@ -509,8 +509,8 @@
        4.3
       ]
      },
-     "need": 9,
-     "n": 10,
+     "need": 8,
+     "n": 9,
      "g": {
       "name": "standby generators",
       "L": 13.493,
@@ -526,8 +526,8 @@
        2
       ]
      },
-     "gNeed": 7,
-     "gN": 8,
+     "gNeed": 6,
+     "gN": 7,
      "src": "Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit nearest the middle of …"
     },
     "boxes": [
@@ -586,54 +586,49 @@
       "base": 0,
       "kind": "yard",
       "name": "standby generators"
-     },
-     {
-      "ring": "[ring 8]",
-      "clear": "[ring 8]",
-      "h": 4.777,
-      "base": 0,
-      "kind": "yard",
-      "name": "standby generators"
      }
     ],
     "lines": [
-     "Sized for <b>8.4 MW</b> of servers: heat to reject ≈ 8.4 × PUE 1.55 = <b>13.0 MW</b> at peak.",
-     "9 air-cooled chillers carry it; with spares, <b>10</b>. Placed: 0 on the roof, 0 in the yard.",
+     "Sized for <b>6.8 MW</b> of servers: heat to reject ≈ 6.8 × PUE 1.55 = <b>10.5 MW</b> at peak.",
+     "8 air-cooled chillers carry it; with spares, <b>9</b>. Placed: 0 on the roof, 0 in the yard.",
      "Each unit about 12.141 × 2.362 m, 2.896 m high, with 0.9–2.1 m to walls and 1.8–4.3 m between units (dashed in 3D).",
      "<span class=\"src\">Air-cooled chillers with free-cooling coils (air cooling): an air-cooled hall needs chilled water at about 13 °C or warmer (NREL for DOE FEMP, Best Practices Guide 2024, s. 5.2.1), and a dry cooler cannot cool water below the outdoor air (rated units leave it 3–11 K above), so chillers carry the full load in summer. Basis unit: Vertiv Liebert AFC FIZ135, 12.14 × 2.36 m, 2.90 m high, 1,489 kW at 35 °C ambient, 27.8 → 18.9 °C fluid, 30% glycol, with oversized free-cooling coils (Vertiv SL-71060 R09/24, \"Preliminary data\"; manufacturer claim). Chosen 29 Oct 2026 as the unit near…"
     ],
     "genLines": [
-     "7 generator sets of about 2 MW carry 13.0 MW; with spares, <b>8</b>. Placed: 0 on the roof, 8 in the yard.",
+     "6 generator sets of about 2 MW carry 10.5 MW; with spares, <b>7</b>. Placed: 0 on the roof, 7 in the yard.",
      "Each about 13.493 × 3.488 m, 4.777 m high; 1.5 m from the building, 2 m between sets (1 m clear all round, CSA C282 6.5.1.1; register arch_csa_c282).",
-     "Fuel in each set's sub-base tank: about 5900 L. In the yard: 3 m from the property line and 1.5 m from the building (CSA B139.1.0 Table 2; register arch_csa_b139). On a roof: at most 1,250 L a tank and 2,500 L a supply line (B139.1.1 6.5.3). FM 5-32 (insurer guidance, not law): not on the roof or in a basement.",
+     "Fuel in each set's sub-base tank: about 5500 L. In the yard: 3 m from the property line and 1.5 m from the building (CSA B139.1.0 Table 2; register arch_csa_b139). On a roof: at most 1,250 L a tank and 2,500 L a supply line (B139.1.1 6.5.3). FM 5-32 (insurer guidance, not law): not on the roof or in a basement.",
      "<span class=\"src\">Standby diesel generator sets in Sound Level 2 enclosures with sub-base tanks. Basis units: Rehlko (Kohler) KD2000, 2,000 kW standby (data-centre continuous rating the same), 13.49 × 3.49 m, up to 4.78 m high (G5-626, rev 6/24); KD1000, 1,000 kW, 8.43 × 2.62 m, 3.71 m high with the 12 h tank (G6-154, 12/23). Both EPA Tier 2, cULus (UL 2200, CSA C22.2 No. 100); manufacturer claims. Chosen 29 Oct 2026 as the middle of Cat, Rehlko and Generac: 2 MW 18.5–38.4 m² per MW, 1 MW 19.5–22.4. 1 m clear around each set (Cummins application manual; not checked ?); 1.5 m from wall openings…"
     ],
     "short": "",
     "coolYard": 0,
     "coolRoof": 0,
-    "genYard": 8,
+    "genYard": 7,
     "genRoof": 0,
     "genTank": {
-     "L": 5870.16,
+     "L": 5544.04,
      "bld": 1.5,
      "pl": 3,
      "over": false
     },
     "skew": 0,
     "endExtra": 1.5,
+    "truck": null,
+    "bigYard": 0,
     "yard": "[ring 8]",
     "yardU": [
      4.64151,
      22.10551
     ],
-    "indoor": 928.74942,
-    "coolRoofIndoor": 10,
+    "truckRing": null,
+    "indoor": 835.874478,
+    "coolRoofIndoor": 9,
     "miss": [],
     "placed": {
      "cr": 0,
      "cy": 0,
      "gr": 0,
-     "gy": 8
+     "gy": 7
     }
    },
    "plantYardDepth": 17.464,
@@ -644,10 +639,10 @@
    "footArea": 2175.27129,
    "noise": {
     "lw": [
-     112.8,
-     116.1
+     112.3,
+     115.6
     ],
-    "n": 10,
+    "n": 9,
     "src": [
      -1454.6,
      3177.7
@@ -656,7 +651,7 @@
     "groups": [
      {
       "kind": "indoors",
-      "n": 10
+      "n": 9
      }
     ],
     "tested": 2478,
@@ -680,8 +675,8 @@
      "zt": "BRH",
      "lot": true,
      "d": 97.6,
-     "lo": 65,
-     "hi": 68.3,
+     "lo": 64.6,
+     "hi": 67.9,
      "L": 50,
      "Ls": 50,
      "sec": "Bylaw 14600 s. 20(1)"
@@ -719,14 +714,14 @@
      "addr": "8065 CEDRIC MAH ROAD NW",
      "zt": "BRH",
      "lot": true,
-     "d": 93.2,
-     "lo": 62.4,
-     "hi": 62.4,
+     "d": 92.6,
+     "lo": 62.1,
+     "hi": 62.1,
      "L": 50,
      "Ls": 50,
      "sec": "Bylaw 14600 s. 20(1)"
     },
-    "block": "Noise: the cooling plant (roof) would give about 62 dBA (low-noise units: one rating) at the property line of 8065 CEDRIC MAH ROAD NW (BRH), 93 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 50 dBA night limit with the quieter rating (Bylaw 14600 s. 20(1); the plant runs 24 h, so the night limit governs). 10 neighbouring lots are over. No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling in…",
+    "block": "Noise: the cooling plant (roof) would give about 62 dBA (low-noise units: one rating) at the property line of 8065 CEDRIC MAH ROAD NW (BRH), 93 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 50 dBA night limit with the quieter rating (Bylaw 14600 s. 20(1); the plant runs 24 h, so the night limit governs). 8 neighbouring lots are over. No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling ins…",
     "src": "arch_nz_nswDcNoise"
    }
   },
