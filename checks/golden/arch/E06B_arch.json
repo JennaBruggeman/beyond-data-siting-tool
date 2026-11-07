@@ -8,7 +8,7 @@
    29.021238789634026
   ],
   "L": 56.435020689142334,
-  "hd": 34.63408725518859,
+  "hd": 33.11652155646807,
   "F": [
    74.41102068914233,
    58.04247757926805
@@ -216,42 +216,42 @@
   "n": 10,
   "under": false,
   "best": {
-   "key": "2:-11.3,23.4:34.6",
+   "key": "2:-9.7,23.4:33.1",
    "k": 2,
    "st": 2,
    "top": 12,
    "along": "back",
    "a": 1,
-   "fa": 1199.52,
+   "fa": 1096.7040000000002,
    "drawn": 1525
   },
   "fails": [
    [
-    "1:-20.1,23.4:55.1",
+    "1:-16.4,23.4:55.1",
     "2 of 4 generators do not fit in the yard."
    ]
   ]
  },
  "hallUV": [
   [
-   -11,
+   -10,
    23
   ],
   [
    -29,
-   6
+   4
   ]
  ],
  "hallStoreys": 2,
  "space": {
-  "hall": 2399,
+  "hall": 2193,
   "prog": 1525,
   "cap": 6854.400000000001
  },
  "heat": {
   "avail": [
-   14252.019428571426,
-   21878.100000000002
+   13096.450285714283,
+   20104.199999999997
   ],
   "need": [
    130.87,
@@ -263,7 +263,8 @@
   ]
  },
  "rules": [
-  "bad: Data centre: its share (35%) leaves too little ground for the picked programs beside the hall. Hall and its support rooms need 1,790 m² of ground per storey (2 hall storeys under the 16 m height limit; support 33 % of the data centre); 371 m² available. Ground: footprint after loading and the plant yard 3,263 m² − yard units over it 214 − 4 transformer pads, 6 m from the building, 123 − a 6.1 m drive to the rear yard 344 (no other street reaches it) − programs 2,210 m² (Refuge 265 as set; Greenhouse 190 as set; Outpatient clinic 500 as set; Bathhouse / Nordic spa 320 as set; Fish farm 685 as set; Warming shelter 100 as set; EV charging hub 150 at its minimum). Back in Ratios it takes at most 7%.",
+  "note: Loading: 1 bay inside the building (41 m² of ground storey; Architecture default, as the test fits draw it). Ratios takes this floor out of the ground; Arrange does not draw the dock yet.",
+  "bad: Data centre: its share (32%) leaves too little ground for the picked programs beside the hall. Hall and its support rooms need 1,637 m² of ground per storey (2 hall storeys under the 16 m height limit; support 33 % of the data centre); 331 m² available. Ground: footprint after the plant yard 3,263 m² − yard units over it 214 − 4 transformer pads, 6 m from the building, 123 − 1 loading bay inside 41 − a 6.1 m drive to the rear yard 344 (no other street reaches it) − programs 2,210 m² (Refuge 265 as set; Greenhouse 190 as set; Outpatient clinic 500 as set; Bathhouse / Nordic spa 320 as set; Fish farm 685 as set; Warming shelter 100 as set; EV charging hub 150 at its minimum). Back in Ratios it takes at most 6%.",
   "bad: Public indoor pool: 1,065 m² is over the 500 m² this use may have in BE; not drawn. Its sourced minimum (815 m²) is over the cap, so it cannot go on a BE lot.",
   "bad: Fish farm: 685 m² would pass the programs' share of the floor (2,056 m², 531 m² left); not drawn. Edit ratios to give programs more.",
   "note: Refuge: A-2, 2 h fire separation from the data centre (F-2).",
@@ -284,10 +285,10 @@
  "ratios": {
   "ratio": {
    "cover": 4022,
-   "dc": 33,
+   "dc": 32,
    "prog": 30,
    "end": "low",
-   "mw": 3.5
+   "mw": 3.4
   },
   "base": {
    "lot": 4284,
@@ -305,18 +306,18 @@
    "allowed": 6854,
    "by": "fsr",
    "dcMax": 6854,
-   "dcM2": 2262,
+   "dcM2": 2193,
    "progM2": 2056,
-   "unused": 2536,
+   "unused": 2605,
    "mw": [
-    3.56,
-    7.71
+    3.45,
+    7.48
    ],
-   "mwTest": 3.5
+   "mwTest": 3.4
   },
   "answers": {
-   "mw": 3.5,
-   "dcFloor": 2262
+   "mw": 3.4,
+   "dcFloor": 2193
   },
   "side": [
    "Ratios"
@@ -330,19 +331,19 @@
   "stuck": false,
   "next": "Next: Programs"
  },
- "split": "Data centre 33% · 2,262 m² · 3.5–7.7 MW (testing 3.5) · programs 30% · 2,056 m² · unused 37% arch_ratios Edit ratios",
+ "split": "Data centre 32% · 2,193 m² · 3.4–7.4 MW (testing 3.4) · programs 30% · 2,056 m² · unused 38% arch_ratios Edit ratios",
  "saved": [
   [
    "suggest",
    3,
-   16,
+   17,
    27,
-   0.49411210551106927
+   0.5181347150259067
   ],
   [
    "lot",
    8,
-   21,
+   22,
    27,
    0
   ]
