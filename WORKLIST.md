@@ -12,18 +12,19 @@ Dates: match a user **6 Nov**; peer reviews **13/17 Nov** and **27 Nov**; archit
 
 ## 0. Set-up (first session)
 
-- [ ] Code: clone, add the bundle, unzip the tiles, install test tools (`Desktop\Claude Link\CLAUDE_CODE_FIRST_STEPS.md`).
-- [ ] Code: run golden + Architecture baseline; both must match `checks/golden/` before any change.
-- [ ] Code: push `overnight-2026-10-30` (all commits after ade54ea) with J.B.'s OK.
-- [ ] Code: read START_HERE.md, CLAUDE.md, the 3–5 Nov notes. Then tell J.B. in 5 lines what you understood and what looks wrong or missing. **Gate.**
+- [x] Code (7 Nov): clone, add the bundle, unzip the tiles, install test tools (`Desktop\Claude Link\CLAUDE_CODE_FIRST_STEPS.md`).
+- [x] Code (7 Nov): run golden + Architecture baseline; both must match `checks/golden/` before any change. Matched apart from the known mwPick race and the Next-label race (fixed 75ca761).
+- [x] Code: push `overnight-2026-10-30` (all commits after ade54ea) with J.B.'s OK. Pushed 7 Nov, ade54ea..971ed92.
+- [x] Code (7 Nov): read START_HERE.md, CLAUDE.md, the 3–5 Nov notes. Then tell J.B. in 5 lines what you understood and what looks wrong or missing. **Gate.**
 
 ## 1. Clean-up of decisions already made
 
-- [ ] Code: remove Twin from `tool/data/arch.json` typologies (dropped by J.B.). Check the Ratios hold-back still picks the right smallest typology.
-- [ ] Code: remove aquarium and lumber drying from `tool/arch_programs.json` (dropped); hide food drying and winter garden ("out for now"). Keep the climbing wall.
-- [ ] Code: remove the Community template (tiers.js, flow.js SKIP, templates.json, register tier tags); move anything only it showed to Resident or Engineering.
-- [ ] Code: check the old 2.4 m fence wording is gone everywhere (now 1.9 m everywhere; notes line 40 is historical).
-- [ ] Code: Arrange stays automatic: no drag, no free arranging (J.B. 5 Nov). Remove any leftover "arrange it yourself" wording. **Gate.**
+- [x] Code: remove Twin from `tool/data/arch.json` typologies (dropped by J.B.). Check the Ratios hold-back still picks the right smallest typology. 94d622e. Hold-back picks Heat hub (an add-on, not a typology): J.B. to decide.
+- [x] Code: remove aquarium and lumber drying from `tool/arch_programs.json` (dropped); hide food drying and winter garden ("out for now"). Keep the climbing wall. 9f97412.
+- [x] Code: remove the Community template (tiers.js, flow.js SKIP, templates.json, register tier tags); move anything only it showed to Resident or Engineering. Already done 4 Nov (a38224a); left: `checks/tests/sweep_community.js` still runs the dropped tier (delete with J.B.'s OK).
+- [x] Code: check the old 2.4 m fence wording is gone everywhere (now 1.9 m everywhere; notes line 40 is historical). e8895ac (register security_layers, scene3d.js).
+- [x] Code: Arrange stays automatic: no drag, no free arranging (J.B. 5 Nov). Remove any leftover "arrange it yourself" wording. None found; the Arrange lead still offers resize and lock, which the tool still has (J.B.: remove now or with the typology picker?).
+- [x] Code: CLAUDE.md: repo is public, four templates, phase table marked out of date. 6d7ca1b. **Gate.**
 
 ## 2. Architecture fixes the sweep would inherit
 
