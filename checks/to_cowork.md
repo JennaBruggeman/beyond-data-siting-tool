@@ -33,3 +33,17 @@ Out of date (redraw before use as references): all V339 boards, E14715, E4103, t
 
 checks/layouts/V339.json re-exported. (1) Stairs: the data-centre stairs are now 25 m apart against 17.9 m needed (one in line, one at the far corner by a spur; plan.exitSep lists each block). (2) Gaps: the refuge, warming shelter and clinic now touch the data centre (blocks within 6 m are stretched; one building outline with a shared lobby is the next step, paused until your typology specs). (3) The 24 m: the I-3 61 m greatest building depth was centred on the 108 m lot; it now starts at the front yard line. V339 now tests 1.8 MW at Ratios' defaults (was 1.1). (4) UPS 28.6 m² and Li-ion 12.7 m² at 1.8 MW: equipment plus working space and a door end (register electrical_room). (5) The clinic's 3 upper storeys at 6 m would pass the 18 m limit, so it is drawn at 4 m and flagged as not lining up (a split level).
 
+## 7 Nov 2026 — Job A1 lot types: gate report (Code)
+
+Full report: checks/lot_types_2026-11-07.md. Read 382,581 lots; 5,931 qualify (Vancouver 699, Edmonton 5,232; 370 Prior St left out, I-3 sub-area B). All measured.
+
+Starting cut-offs (Van / Edm): irregular 66 / 585, corner 344 / 2,679, small 171 / 274, large 28 / 652, narrow_deep 5 / 184, wide_shallow 15 / 51, regular 70 / 807.
+
+Five check lots (aspect, irregularity, buildable m²): 339 1st Ave E 2.43, 0.87, 2,762 (regular); 275 1st Ave E 1.18, 0.86, 6,090 (large); 1425 Clark Dr 1.09, 0.87, 5,528 (corner); 74 Airport Rd 1.23, 1.00, 4,293 (regular); 64 Airport Rd 1.28, 0.99, 4,022 (regular).
+
+Questions (not chosen):
+1. 98 Vancouver lots: lot area counts every part of the tax coordinate, frame and edges only one part (irregularity up to 15). Which area?
+2. Corner by edge count counts one street in several segments twice. Use street lines ≥ 45° apart (Van 296, Edm 1,854)? Or corner as a flag?
+3. narrow_deep at 2.0, not 2.5 (no break at 2.5; 339 is 2.43)?
+4. Buildable: inside the yard lines, or with the 61 m depth limit (275 1st Ave E: 6,090 vs 3,743)?
+
