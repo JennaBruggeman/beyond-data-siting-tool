@@ -53,13 +53,17 @@ function layout(o){ const R=RAW(), F=o.F; if(!F||!o.mw||!(o.mw>0)||!o.fh||!o.fh.
     const ar=r=>(r[1]-r[0])*(r[3]-r[2]); const cut={}; let at=null; const keep=[];
     for(const p of pieces){ if(p.level!==lv||!p.r){ keep.push(p); continue; } at=at||p; const parts=sub(p.r,D), lost=ar(p.r)-parts.reduce((t,r)=>t+ar(r),0); if(lost<0.01){ keep.push(p); continue; }
       cut[p.id]=(cut[p.id]||0)+lost*(p.m2/ar(p.r)); parts.forEach(r=>keep.push(Object.assign({},p,{ring:rect(...r),r,m2:p.m2*ar(r)/ar(p.r)}))); }
-    if(at){ pieces.length=0; pieces.push(...keep); dock={id:'dock',...rr(...D),base:at.base,h:at.h,m2:ar(D),level:lv,n:o.dock.n,cut}; pieces.push(dock); } }
+    /* J.B. 7 Nov 2026: no hall sliver under 3 m beside the dock: one that touches the dock goes to the dock, any other to the support rooms; both come out of the hall */
+    const SL=3, touch=(a,b)=>{ const ou=Math.min(a[1],b[1])-Math.max(a[0],b[0]), ov=Math.min(a[3],b[3])-Math.max(a[2],b[2]); return (Math.abs(ou)<0.01&&ov>0.01)||(Math.abs(ov)<0.01&&ou>0.01); };
+    const extra=[]; for(const p of keep){ if(p.id!=='hall'||p.level!==lv||!p.r) continue; if(Math.min(p.r[1]-p.r[0],p.r[3]-p.r[2])>=SL) continue;
+      cut.hall=(cut.hall||0)+p.m2; if(touch(p.r,D)){ p.id='dock'; extra.push(p.m2); } else p.id='rest'; }
+    if(at){ pieces.length=0; pieces.push(...keep); const dm2=ar(D)+extra.reduce((t,x)=>t+x,0); dock={id:'dock',...rr(...D),base:at.base,h:at.h,m2:ar(D),level:lv,n:o.dock.n,cut,m2All:dm2,hallLost:cut.hall||0}; pieces.push(dock); } }
   pieces.forEach(p=>p.name=SHORT[p.id]);
   return {pieces,rooms,end:o.end==='lo'?'lo':'hi',mw:o.mw,full:rect(u0,u1,v0,v1),fp,k,dock}; }
 const fmt0=v=>v==null||!isFinite(v)?'?':Math.round(v).toLocaleString('en-CA');
 /* one line for the drawing's note: what is drawn, at which end, and what is not drawn */
 function note(Lr){ if(!Lr) return ''; const N=notDrawn(), e=Lr.end==='lo'?'low':'high';
   const rs=Lr.rooms.map(r=>`${r.name.split(' (')[0].toLowerCase()} ${fmt0(r.m2)} m²`).join(', ');
-  return `Rooms drawn at the ${e} end of their m² per MW, ${Lr.mw} MW: ${rs} (${Lr.rooms.map(r=>r.src[0]).join(', ')}). Placement is a drawing choice. Not drawn, no size rule (?): ${N.q.join(', ')}. Only with a heat exchange: ${N.ex.join(', ')}.${Lr.dock?` Loading dock: ${Lr.dock.n} bay${Lr.dock.n>1?'s':''}, ${fmt0(Lr.dock.m2)} m², on the ground storey at the rear end (drawing choice; the floor above sits over it)${(Lr.dock.cut.hall||0)>0.5?`; it takes ${fmt0(Lr.dock.cut.hall)} m² of the hall's floor on that storey, so that much hall is not drawn (Ratios counts the dock's floor; the room layout does not yet move it)`:''}.`:''}`; }
+  return `Rooms drawn at the ${e} end of their m² per MW, ${Lr.mw} MW: ${rs} (${Lr.rooms.map(r=>r.src[0]).join(', ')}). Placement is a drawing choice. Not drawn, no size rule (?): ${N.q.join(', ')}. Only with a heat exchange: ${N.ex.join(', ')}.${Lr.dock?` Loading dock: ${Lr.dock.n} bay${Lr.dock.n>1?'s':''}, ${fmt0(Lr.dock.m2All)} m², on the ground storey at the rear end (drawing choice; the floor above sits over it)${(Lr.dock.cut.hall||0)>0.5?`; it takes ${fmt0(Lr.dock.cut.hall)} m² of the hall's floor on that storey (with any strip under 3 m beside it), which comes out of the hall and the MW tested`:''}.`:''}`; }
 BD.dcRooms={layout,notDrawn,note,SHORT};
 })();
