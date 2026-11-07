@@ -47,7 +47,7 @@ function layout(o){ const R=RAW(), F=o.F; if(!F||!o.mw||!(o.mw>0)||!o.fh||!o.fh.
   if(o.ground>0) pieces.unshift({id:'gst',...rr(u0,u1,v0,v1),base:o.z0-o.ground,h:o.ground,m2:fp,level:-1}); /* the storey under the hall the zone keeps for other uses, so the hall stands on it */
   /* loading dock inside (7 Nov 2026): cut out of the ground storey (the zone's ground storey where there is one, else the hall's first floor) at the rear end,
      v0 corner (drawing choice); bays side by side, 0.6 m apart, as site.js counts them. What it takes from the hall on that storey is reported, not hidden. */
-  let dock=null; if(o.dock&&o.dock.n>0){ const dd=Math.min(o.dock.len,L), dw=Math.min(o.dock.n*(o.dock.wid+0.6)+0.6,W), D=o.dock.rearHi?[u1-dd,u1,v0,v0+dw]:[u0,u0+dd,v0,v0+dw], lv=o.ground>0?-1:0;
+  let dock=null; if(o.dock&&o.dock.n>0){ const dd=Math.min(o.dock.len,L), dw=Math.min(o.dock.n*(o.dock.wid+0.6)+0.6,W), dv0=o.dock.v?Math.max(v0,Math.min(v1-dw,o.dock.v[0])):v0 /* 7 Nov 2026: inside the truck corridor where one runs straight to a rear lane */, D=o.dock.rearHi?[u1-dd,u1,dv0,dv0+dw]:[u0,u0+dd,dv0,dv0+dw], lv=o.ground>0?-1:0;
     const sub=(a,b)=>{ const [a0,a1,b0,b1]=a, [c0,c1,e0,e1]=b; if(c0>=a1||c1<=a0||e0>=b1||e1<=b0) return [a]; const o2=[]; if(c0>a0) o2.push([a0,c0,b0,b1]); if(c1<a1) o2.push([c1,a1,b0,b1]);
       const m0=Math.max(a0,c0), m1=Math.min(a1,c1); if(e0>b0) o2.push([m0,m1,b0,e0]); if(e1<b1) o2.push([m0,m1,e1,b1]); return o2.filter(r=>(r[1]-r[0])*(r[3]-r[2])>0.01); };
     const ar=r=>(r[1]-r[0])*(r[3]-r[2]); const cut={}; let at=null; const keep=[];

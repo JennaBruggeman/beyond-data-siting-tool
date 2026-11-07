@@ -287,7 +287,8 @@ function model(){
      Over only with the standard rating: a note, not a block (m.notes).
      3 Nov 2026: sourced mitigation (engine NMIT): blocked only when no modelled option brings the quieter rating under; an option that does is named as
      required (nc.req, in m.notes, before the flag). */
-  m.notes=[]; if(m.yards&&m.yards.unAbut) m.notes.push(`Lot lines: what ${m.yards.unAbut>1?m.yards.unAbut+' of this lot\'s edges abut is':'one of this lot\'s edges abuts is'} not known (no lot or street found, or a parcel with no zone on record), so which setback ${m.yards.unAbut>1?'they have':'it has'} is not known (?); the deepest is applied (see Lot lines).`);
+  m.notes=[]; if(m.plant&&m.plant.bigYard) m.notes.push(`Generators: ${m.plant.placed?m.plant.placed.gy:m.plant.genYard} sets in a ${m.plant.bigYard} m deep plant yard, deeper than any test lot's. Their noise at the lot lines is not checked: the tool has no sourced sound level for the sets (?), and whether the noise by-laws exempt standby generators is not read (?).`); /* 7 Nov 2026 */
+  if(m.yards&&m.yards.unAbut) m.notes.push(`Lot lines: what ${m.yards.unAbut>1?m.yards.unAbut+' of this lot\'s edges abut is':'one of this lot\'s edges abuts is'} not known (no lot or street found, or a parcel with no zone on record), so which setback ${m.yards.unAbut>1?'they have':'it has'} is not known (?); the deepest is applied (see Lot lines).`);
   if(m.yards&&m.yards.unclear) m.notes.push(`Lot lines: which yard ${m.yards.unclear>1?m.yards.unclear+' of this lot\'s edges have':'one of this lot\'s edges has'} is not known (?); the deepest it could have is applied (see Lot lines).`); /* LOTLINES 4 Nov 2026: unclear is flagged, not skipped */
   if(BD.eng&&BD.eng.noiseCheck){ let nc=null; try{ nc=BD.eng.noiseCheck(m); }catch(e){ console.warn(e); } m.noise=nc; if(nc&&nc.block) m.warn.push(nc.block); else { if(nc&&nc.req) m.notes.push(nc.req); if(nc&&nc.flag) m.notes.push(nc.flag); } }
   /* dcshare 4 Nov 2026 (J.B. approved 4 Nov): the noise ladder's last step. noiseCheck (engine.js) already tries low-noise chillers and a solid screen, in
@@ -389,10 +390,13 @@ function setupProblems(noFloor){ const m=model(); if(!m||!m.F) return []; const 
    Binary search to 0.1 MW between 0.1 and the most the floor holds; assumes a smaller size never needs more room. Returns null if nothing fits. */
 function fitMax(opt){ const asIs=!!(opt&&opt.asIs); if(asIs){ roomOff=true; cache.key=null; } try{ return fitMax0(); }finally{ if(asIs){ roomOff=false; cache.key=null; } } } /* dcshare: {asIs:true} = without the plant-room step (the set-up exactly as chosen) */
 function fitMax0(){ const A=BD.S.answers, keep=A.mw; A.mw=null; cache.key=null; let hi=0; try{ hi=BD.eng.siteFacts().mw[1]; }catch(e){}
-  /* 7 Nov 2026 (Clark Dr hand check follow-up): a size also fails if the footprint left beside the plant yard cannot hold even the smallest floor that size
-     could need (low m² per MW ÷ high hall share; register size_fit, hall_area). Before, the plant yard could grow at a large size and leave no building. */
-  const roomOK=mw=>{ const m=model(); if(!m||m.existing||!m.foot||!BD.eng) return true; const R=BD.eng.R, floors=Math.max(1,m.Z&&m.Z.ground?(m.nF?m.nF[0]:1)-1:(m.nF?m.nF[0]:1));
-    return BD.area(m.foot)*floors>=mw*R.m2PerMW[0]/R.hallShare[1]-0.5; };
+  /* 7 Nov 2026 (Clark Dr hand check follow-up; J.B.: the conservative end): a size fails if the footprint left beside the plant yard cannot hold the data
+     centre's floor at the conservative m² per MW the tool pairs with the tested (low) MW: hall + UPS + battery rooms at the high end of dc_rooms.json
+     (≈635 m² per MW; register arch_dc_hall, arch_dc_electrical, arch_dc_battery). The dense end (≈293) only sets the top of the MW range shown.
+     Support rooms (27–33 %) are not added here (?), so the check is still a little lenient. */
+  const perHi=(()=>{ const R=(BD.data.dc_rooms&&BD.data.dc_rooms.rooms)||[]; const v=R.filter(r=>r.split&&r.perMW).reduce((t,r)=>t+r.perMW[1],0); return v>0?v:630; })();
+  const roomOK=mw=>{ const m=model(); if(!m||m.existing||!m.foot||!BD.eng) return true; const floors=Math.max(1,m.Z&&m.Z.ground?(m.nF?m.nF[0]:1)-1:(m.nF?m.nF[0]:1));
+    return BD.area(m.foot)*floors>=mw*perHi-0.5; };
   const ok=mw=>{ A.mw=mw; cache.key=null; return !setupProblems(true).length&&roomOK(mw); };
   let lo=0, best=null, top=Math.floor((hi||0)*10);
   /* 2 Nov 2026 hard rules: with generators on the roof no size above the fuel limit passes (model(); Build 2: CSA B139.1.1 6.5.3), so the search starts there */

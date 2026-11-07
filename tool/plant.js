@@ -80,17 +80,33 @@ BD.plant={
     for(let v=m.v[0]+0.25; v<=m.v[1]-0.25+1e-9; v+=0.5){ let k=0; for(; k<=60; k++){ const [x,y]=F.toW(m.plantYardStart+m.dir*k*0.05,v); if(BD.pip(x,y,lotR)) break; } if(k<=60) skew=Math.max(skew,k*0.05); }
     P.skew=skew; P.endExtra=s.g&&gt&&gt.pl!=null?Math.max(0,endD(s.g)-s.g.wall[0]):0; /* rows of sets start this much further in at each end */
     for(const [k,n] of [[s.k,P.coolYard],[s.g,P.genYard]]){ if(!n||!k) continue; let d=rowDepth(k,n); if(d!=null&&k===s.g&&gt&&gt.pl!=null&&!m.loading){ const rearY=Math.abs(m.plantYardStart-(m.dir<0?F.L/2:-F.L/2)); d+=Math.max(0,gt.pl-rearY-k.wall[1]); } if(d==null){ P.short+=`The lot is too narrow for a ${k.L} m ${k.name.replace(/s$/,'')} across it. `; continue; } depth+=d; }
+    /* 7 Nov 2026 (J.B.): trucks must reach the inside dock (Vancouver Parking By-law s. 5.4.3: 'unobstructed access by vehicles to all off-street loading
+       spaces by means of a minimum 6.1 metre wide manoeuvring aisle … from any lane abutting the site, or from a street where … no lane is present';
+       Edmonton 20001 s. 5.80 7.1.1, 7.1.3 give no aisle width, so Vancouver's 6.1 m is used there too, ?). Where a lane or street is on the rear line,
+       a straight corridor runs from it to the dock and the units sit beside it; otherwise a 6.1 m truck lane runs along the building's rear face, the
+       full width, with the units behind it (the yard is that much deeper). */
+    P.truck=null; { const LI=m.loadInside; if(LI&&LI.n&&(P.coolYard||P.genYard)){ const aisle=(m.loadingNeed&&m.loadingNeed.aisle)||6.1, open=e=>e&&(e.abuts==='street'||e.abuts==='alley');
+      const rear=(m.edgeYards||[]).filter(e=>e.kind==='rear'&&open(e)); if(rear.length){ const w=Math.max(aisle,LI.n*(LI.wid+0.6)+0.6); P.truck={type:'straight',v:[m.v[0],Math.min(m.v[1],m.v[0]+w)],aisle,to:rear[0].abuts}; }
+      else { P.truck={type:'along',aisle}; depth+=aisle; } } }
     const avail=Math.abs(m.uBuild[1]-m.uBuild[0]);
+    /* 7 Nov 2026 (J.B.): the yard never takes the ground a building needs: at most the buildable depth less 12 m, the tool's minimum hall depth (site.js
+       serverFoot; a drawing choice), and never more than 90 % of it. Units that still do not fit are reported (roof() below), so the size fails. */
+    const capD=Math.max(0,Math.min(avail*0.9,avail-12-skew));
     /* 7 Nov 2026: on a lot that narrows towards the rear the rows sized on the full width do not fit: deepen the yard a row at a time until the yard units
        actually pack into it (same packer and distances as roof() below), up to the 90 % cap; what still does not fit is reported there */
-    { const a00=m.plantYardStart+m.dir*skew, ex=P.endExtra||0, trial=dep=>{ const a1=a00+m.dir*dep, u0=Math.min(a00,a1), u1=Math.max(a00,a1); let n=0, used=[];
+    const truckR=(a00,dep)=>{ const T=P.truck; if(!T) return null; const a1=a00+m.dir*dep; if(T.type==='straight') return BD.geo.rectW(F,Math.min(m.plantYardStart,a1),Math.max(m.plantYardStart,a1),T.v[0],T.v[1]);
+      const b0=a1-m.dir*T.aisle; return BD.geo.rectW(F,Math.min(b0,a1),Math.max(b0,a1),m.v[0]-1,m.v[1]+1); };
+    { const a00=m.plantYardStart+m.dir*skew, ex=P.endExtra||0, trial=dep=>{ const a1=a00+m.dir*dep, u0=Math.min(a00,a1), u1=Math.max(a00,a1); let n=0, used=[]; { const tr=truckR(a00,dep); if(tr) used.push(tr); }
         for(const [k,c] of [[s.k,P.coolYard],[s.g,P.genYard]]){ if(!c||!k) continue; const isG=k===s.g, keepW=k.wall; if(isG&&gt&&gt.bld!=null) k.wall=keepW.map(w=>Math.max(w,gt.bld));
           EDGE=isG&&gt&&gt.pl!=null&&m.ring?{ring:m.ring,d:gt.pl}:(k.evap&&m.ring?{ring:m.ring,d:k.evap}:null); if(isG) k.lotSep=!!EDGE;
           const got=pack(F,lotR,used,u0,u1,m.v[0]+(isG?ex:0),m.v[1]-(isG?ex:0),k,c,true); k.wall=keepW; delete k.lotSep; EDGE=null;
           n+=c-got.length; used=used.concat(got.map(q=>BD.geo.rectW(F,q.u-q.L/2-1,q.u+q.L/2+1,q.v-q.W/2-1,q.v+q.W/2+1))); } return n; };
-      const step=s.g&&P.genYard?s.g.W+s.g.gap[1]:s.k.W+s.k.gap[1]; let tries=0; while(!m.mwProvisional&&depth>0&&trial(depth)>0&&depth+step<=avail*0.9&&tries<20){ depth+=step; tries++; } if(tries) P.deepened=tries; } /* not for the provisional size (no size chosen yet): that is the zone's most, and a yard sized for it would leave no building */
-    if(depth>avail*0.9){ P.short+='The plant yard would take almost the whole buildable area. '; depth=Math.min(depth,avail*0.9); }
+      const step=s.g&&P.genYard?s.g.W+s.g.gap[1]:s.k.W+s.k.gap[1]; let tries=0; while(!m.mwProvisional&&depth>0&&trial(depth)>0&&depth+step<=capD&&tries<20){ depth+=step; tries++; } if(tries) P.deepened=tries; } /* not for the provisional size (no size chosen yet): that is the zone's most, and a yard sized for it would leave no building */
+    if(depth>capD){ P.short+='The plant yard would leave less than a 12 m deep building. '; depth=capD; }
+    /* generator noise at the lot lines is not modelled (no sourced sound level for the sets, ?): flag yards deeper than the test lots' deepest (21.7 m) */
+    { const gd=depth+skew-(P.truck&&P.truck.type==='along'?P.truck.aisle:0); P.bigYard=s.g&&P.genYard&&gd>21.7?Math.round(gd):0; } /* the units' part of the yard, without the truck lane */
     m.plantYardDepth=depth+skew; const a0=m.plantYardStart+m.dir*skew, a1=a0+m.dir*depth; P.yard=BD.geo.rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); P.yardU=[Math.min(a0,a1),Math.max(a0,a1)];
+    P.truckRing=truckR(a0,depth); if(P.truck&&P.truck.type==='along') P.truck.u=[Math.min(a1-m.dir*P.truck.aisle,a1),Math.max(a1-m.dir*P.truck.aisle,a1)];
   }
  },
  /* after the footprint: put units on the roof and in the yard, and report what does not fit */
@@ -105,7 +121,7 @@ BD.plant={
   const put=(k,count,base,where)=>{ if(!count||!k) return 0; let got=[];
     if(where==='roof'){ got=pack(F,roofRing,[],ru0,ru1,rv0,rv1,k,count,false); // then turned 90° where the roof's shape suits that better (a C-shaped tower roof, 20 Oct)
       if(got.length<count){ const tk=got.map(p=>BD.geo.rectW(F,p.u-p.L/2-1,p.u+p.L/2+1,p.v-p.W/2-1,p.v+p.W/2+1)); const g2=pack(F,roofRing,tk,ru0,ru1,rv0,rv1,k,count-got.length,true); got=got.concat(g2); } }
-    else { const lotR=m.inset?(BD.buildArea?BD.buildArea(m):BD.geo.clip(m.ring,m.inset)):m.ring; /* LOTLINES 4 Nov 2026 */ const forbid=P.boxes.filter(b=>b.kind==='yard').map(b=>b.clear); if(m.existing) (m.feet||[]).forEach(f=>forbid.push(f.r)); else { if(bld) forbid.push(bld); if(m.loading) forbid.push(m.loading); }
+    else { const lotR=m.inset?(BD.buildArea?BD.buildArea(m):BD.geo.clip(m.ring,m.inset)):m.ring; /* LOTLINES 4 Nov 2026 */ const forbid=P.boxes.filter(b=>b.kind==='yard').map(b=>b.clear).concat(P.truckRing?[P.truckRing]:[]); if(m.existing) (m.feet||[]).forEach(f=>forbid.push(f.r)); else { if(bld) forbid.push(bld); if(m.loading) forbid.push(m.loading); }
       // yard: the reserved strip for a new building (units turned across it); anywhere in the usable lot for an existing one
       /* 7 Nov 2026 (Clark Dr hand check): a new building's yard units go in the reserved plant yard only, as the header says; whatever does not fit there is
          reported, no longer dropped on open ground elsewhere (that let the MW rest on ground the plant yard did not account for). Rows of generator sets start

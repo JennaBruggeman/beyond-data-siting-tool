@@ -228,6 +228,7 @@ function dockAccess(P){ const DP=dcPieces(P), D=DP&&DP.L.dock; if(!D) return nul
   /* straight out at the rear */ { let u=hi?ub:ua; const st=hi?0.5:-0.5; let n=0; while(inLot(u,(e0+e1)/2)&&n<80){ u+=st; n++; } const e=edgeAt(u,(e0+e1)/2); if(open(e)&&!hit(Math.min(u,hi?ub:ua),Math.max(u,hi?ub:ua),e0,e1)) return {ok:true,how:'straight out to the '+e.abuts+' at the rear'}; }
   /* along the rear to a side edge */ for(const dirV of [-1,1]){ let v=dirV<0?e0:e1, n=0; while(inLot((ua+ub)/2,v)&&n<400){ v+=dirV*0.5; n++; } const va=Math.min(v,dirV<0?e0:e1), vb=Math.max(v,dirV<0?e0:e1);
     if(!hit(ua,ub,va,vb)){ const e=edgeAt((ua+ub)/2,v); if(open(e)) return {ok:true,how:'along the rear to the '+e.abuts+' on the '+(e.kind||'side')}; } }
+  if(!(M.edgeYards||[]).some(e=>open(e)&&e.kind!=='front')) return {ok:false,why:'no street or lane reaches the rear: trucks would need a drive from the front street along a side, which Ratios counts as ground but the layout does not draw'};
   return {ok:false,why:'no clear 6.1 m run from the dock to a street or lane past the plant yard and the building'}; }
 function rules(P){ const s=P.s, M=s.M, city=s.city, code=zoneCode(), out=[...P.flags];
   { const da=dockAccess(P); P.dockAccess=da; if(da&&!da.ok) out.push({t:`Loading dock: trucks cannot reach it here (${da.why}). Route it another way (a gap in the plant yard, a dock on the side street) or test a smaller size; geometry only, turning not checked (?).`,src:['vanParking5'],sev:'bad'}); else if(da&&da.ok) out.push({t:`Loading dock: trucks reach it ${da.how} (6.1 m aisle; geometry only, turning not checked ?).`,src:['vanParking5'],sev:'note'}); } const PR=plantRings(M), sec=secureRing(P); const evap=(M.plant&&M.plant.boxes||[]).filter(b=>/tower|evapor|adiabatic/i.test(b.name)).map(b=>b.ring); P.secRing=sec;
@@ -542,7 +543,7 @@ function warmCool(t){ if(t==null) return null; const k=Math.max(0,Math.min(1,(t-
    the ground floor for other uses (I-2, I-3, FC-2), that storey of the box is drawn on its own. Drawing only: placement, budgets and rules are unchanged. */
 function dcPieces(P){ if(!BD.dcRooms) return null; const s=P.s, RT=P.ratio, An=BD.S.answers, mw=RT&&RT.mwTest?RT.mwTest:(An.mw||s.M.mwSized), end=RT&&RT.r&&RT.r.end==='high'?'lo':'hi';
   const nf=Math.max(1,(P.hall.storeys||s.floors)-(P.hall.base>0?1:0)), fh=P.hall.h/nf, lv0=P.hall.base>0?1:0, g=s.Z&&s.Z.ground&&P.hall.base===0&&nf>1?1:0;
-  const LI=s.M.loadInside, dock=LI&&P.hall.base===0?{n:LI.n,len:LI.len,wid:LI.wid,rearHi:s.dir<0}:null; /* 7 Nov 2026: the inside loading dock is drawn (rear end; site.js dir<0: rear at the high-u end) */
+  const LI=s.M.loadInside, TK=s.M.plant&&s.M.plant.truck, dock=LI&&P.hall.base===0?{n:LI.n,len:LI.len,wid:LI.wid,rearHi:s.dir<0,v:TK&&TK.type==='straight'?TK.v:null}:null; /* 7 Nov 2026: the inside loading dock is drawn (rear end; site.js dir<0: rear at the high-u end) */
   const L=BD.dcRooms.layout({F:s.F,u:P.hall.u,v:P.hall.v,z0:P.hall.base+g*fh,fh:Array(nf-g).fill(fh),mw,end,ground:g*fh,dock}); if(!L) return null;
   const out=L.pieces.map(p=>({ring:p.ring,base:p.base,h:p.h,hall:p.id==='hall',room:p.id==='electrical'||p.id==='battery'||p.id==='dock',rest:p.id==='rest'||p.id==='gst',level:lv0+g+p.level,name:p.name,id:p.id,m2:p.m2}));
   return {L,out,nf,fh,lv0,g}; }
