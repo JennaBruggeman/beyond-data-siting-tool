@@ -159,3 +159,26 @@ Segments within 150 m named (lanes apart): 339 1st Ave E 8 of 23; 275 1st Ave E 
 On the plans: 339 and 64 Airport unchanged (one street each, own address). 1425 Clark Dr (corner): the east edge is named Clark Dr; the south (front) and west edges stay "?" (votes split or none).
 Question: the register says the City's Vancouver street file is "by hundred block" (likely a name field); the tool's copy dropped it and the raw file is not on this computer. Re-run make_streets.py with names if J.B. still has it?
 Golden identical; register unrecorded 0.
+
+## 8 Nov 2026 — F2 job plan: Emergency hub layout from spec Part 3 (Code; waiting for J.B.'s OK)
+
+Base: eh/specs/emergency_hub.md parts 1–3 (final), Part 7, eh/reach.py, eh/deadend.py. Nothing built yet.
+
+**What changes.** A new layout module, tool/hub.js (rule sheet v1), builds the Emergency hub. plan.js v0.1 stays for the other typologies. hub.js output has the same shape as plan.js (storeys, rooms, doors, cores, exits, walls), plus a kind and a line on every room (rule 15a). The Rooms, Separations and Exits cards draw it unchanged.
+
+**Steps** (one commit each, golden and the other typologies unchanged at every step):
+0. Diff the final spec's source ids against the register; add any missing ones (standing rule).
+1. Tests first. Port reach.py and deadend.py to JS (tool/treach.js, so the tool can also show the result) and add checks/tests/t_reach.js. They must give the same results as Cowork's Python on the seven hand fits: the three Vancouver fits PASS, the negative test finds R2, R5, R5, and dead ends match to 0.1 m.
+2. Bands and one outline (rules 1–2), the shared lobby (15c), ground floor by zone (4), and the stacked and beside variants with the hub cap (≤ 2,325 m² of data centre, one hall storey).
+3. Corridors and dead ends ≤ 6 m (15b), cores, doors on shared walls, the secure and public lines (15a), and exits (rule 6). Travel along the path is measured on a 0.25 m grid; this replaces the F1c "?".
+4. Plant (rule 9): Vertiv clear zones (1.5 / 2.1 / 2.5 m; 3.0 / 4.2 m between units), panel end to the access path, pad fronts to the aisle. Drains and the A2L leak distance stay "?". Edmonton is flagged.
+5. Loading (10), entrances (11), step-free 13 mm (12), yards (13), and the fallback ladder (14) with "doesn't fit" and its limiting rule.
+6. Part 7 check: the 19 steps on 339 1st Ave E, one row each with the tool's figure against Part 7's and every difference explained. Run T-reach and dead ends on both example lots.
+7. Gate: screenshots, one Architecture re-base (what moved listed), independent re-measure on a sample.
+
+**Questions for J.B. (I won't choose):**
+1. Variants in this job: stacked, beside, side drive, small and clinic ≤ 500 only, with corner, through, turned and height-capped next? (my suggestion)
+2. Step-free and height use LiDAR street and corner grades (Claude Link lidar_ground2m). The tool doesn't hold them. Add them to the tool, or show "?"?
+3. Edmonton hand-fit geometry for the test fixtures may rest on Altalis lot lines. Keep it local, uncommitted?
+4. Spec Q5: in BE, is the refuge Community Service (500 m² cap) or Emergency Service (no cap)? Until you answer, both are flagged.
+5. What counts as a Part 7 match: counts and pass/fail exact, areas within 10 %?
