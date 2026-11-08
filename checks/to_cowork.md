@@ -188,3 +188,16 @@ Base: eh/specs/emergency_hub.md parts 1–3 (final), Part 7, eh/reach.py, eh/dea
 public-streets.csv (J.B.'s 16 Oct download) is back in data/raw/van (data/ stays out of git). Licence confirmed on the portal: Open Government Licence – Vancouver v1.0 (register vanStreets2026). tool/add_street_names.py adds HBLOCK without the block range to streets_van.json; segment geometry checked identical. 17,069 of 17,073 street segments named; lanes unnamed. The portal file was modified 2 Nov 2026, after the download (not re-downloaded).
 Named within 150 m (lanes apart): 339 1st Ave E 23 of 23; 275 1st Ave E 23 of 23; 1425 Clark Dr 23 of 23 (all City); 74 Airport Rd NW 8 of 17; 64 Airport Rd NW 9 of 23 (address method, unchanged).
 Plans now show the City's spelling ("E 1st Av", "Clark Drive"). 1425 Clark Dr: Clark Drive, Vernon Drive, Grant St (the tool's front is Grant St, while the address is on Clark Drive). Golden identical.
+
+## 8 Nov 2026 — F4 pre-checks (Code; nothing built)
+
+**Trees:** neither city tree CSV is in Claude Link yet. I'll check size, columns, date and licence when they arrive.
+
+**Edmonton buildings** (both City of Edmonton open data; both already feed the tool's Edmonton tiles via make_tiles.py, edm_heights.py and edm_3d_add.py; **neither has its own register entry**, a gap):
+- Rooflines_20261014.csv (138.5 MB; zip 45.3 MB): 320,182 outlines, columns the_geom, OBJECTID, TAX_ROLL_N, CENTROID_X/Y, AREA, COMMENT, Shape_Leng, Shape_Area. No heights. It matches portal dataset "Rooflines" (8zxj-vxqb), rows last updated 25 Jun 2021; the dataset states no coverage year and no licence. The portal also has "Rooflines (as of 2019)" (jpxi-a9a5) with rooftop and ground elevation and height.
+- 3dBuildings.gdb.zip (225.4 MB, same byte size as the portal file): "3D Buildings" (78sz-qcfr), built from the 2019 rooflines and 2019 LiDAR. "Static… newer buildings may not be present". Updated 25 May 2023, public 15 Jun 2023.
+- Licence: the portal's terms page is "Open Government Licence – Edmonton" v1.0 (July 2022); neither dataset lists a licence. Label: City 3D buildings as of 2019; outlines of unknown year.
+
+**How the public build shows Edmonton lots:** not in git (tool/tiles/ ignored, no GitHub Pages). But two published claude.ai tool artifacts contain the Altalis lot files (tiles/edm/l_*.json): "Beyond Data" GCCZtgddsc9bY8ey8REkX8 (3 Nov, 135 files) and EBxWgBawKaDps5z245GpAn (20 Oct). KjjapFALf9sUejWZFB6diB (23 Oct) has none: it shows Edmonton lots from the City parcels only. Artifacts are private unless shared: has J.B. shared either? Fix (needs J.B.'s OK): republish both without l_*.json, or delete them.
+
+F3: starts with F2, once J.B. OKs the F2 plan.
