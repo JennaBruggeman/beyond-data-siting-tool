@@ -223,3 +223,13 @@ Display only: golden identical; Architecture cards 1–2 render unchanged. Vanco
 - (b) Landing "Logic diagram →" per template: missing. Added (opens the diagram on that template's tab).
 - (c) Tapping a figure: missing everywhere (only the per-card "How this is worked out" button). Added: every hero figure and row value opens the diagram at the card's nodes, or at one node where the card names it (hero k / row [2]; no card names one yet). Cards with no nodes mapped, so a tap opens the template tab with nothing lit (28 of 49): Resident all 4; Municipal Industrial land and jobs, Report; Engineering Your city, Your parcel, Report; Architecture 19 of 22 (only 3 have nodes mapped).
 - docs/STYLE.md updated from Claude Link (§7 Terms).
+
+## F2 plan addendum: minimum widths (Code, 8 Nov 2026; still waiting for J.B.'s OK to build)
+
+Source: eh/specs/room_minimums_rule_2026-11-08.md, "Minimum widths" (register rule_roomMinimums, spec only).
+- **Sizing (steps 2–3):** hub.js sizes every room to its minimum area **and** its minimum clear width (short side of the room's main rectangle). A room that can't reach both shrinks or drops by rank (Part 1 ladder), never by going long and thin. Refuge parts under 2.4 m wide are drawn but not counted toward the 175 m².
+- **Test (step 1, with T-reach and the dead-end check):** T-width, checks/tests/t_width.js (logic in tool/treach.js). Rule per room kind and name from the spec table. Output PASS or one line per room: storey, room, width against the minimum, basis. The universal WC is tested as its own case (1,700 mm circle clear of the WC and its 900 mm transfer space).
+- **Check against Cowork:** run it on the same hand fits as eh/audit_rooms.py. It must flag the same rooms (janitor, valve, battery HVAC, meet-me, MV, exam and consult, 4103 first aid, the 339 refuge strips, the 8980 refuge second room) and must not flag 1330's exit passage.
+- **Part 7 check:** a T-width row for 339 1st Ave E.
+
+Question 6: audit_rooms.py also sets widths the spec table doesn't list: data hall 6.0, dock and lobby 2.4, vestibule 1.8, lift 2.0, WCs 1.5, mechanical 1.0, corridor 1.8. Should T-width fail on those too, or only note them? My suggestion: note only, and fail on the spec table plus Part 3.
