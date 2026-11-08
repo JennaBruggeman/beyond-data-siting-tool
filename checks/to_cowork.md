@@ -233,3 +233,13 @@ Source: eh/specs/room_minimums_rule_2026-11-08.md, "Minimum widths" (register ru
 - **Part 7 check:** a T-width row for 339 1st Ave E.
 
 Question 6: audit_rooms.py also sets widths the spec table doesn't list: data hall 6.0, dock and lobby 2.4, vestibule 1.8, lift 2.0, WCs 1.5, mechanical 1.0, corridor 1.8. Should T-width fail on those too, or only note them? My suggestion: note only, and fail on the spec table plus Part 3.
+
+## 8 Nov 2026 — Altalis river purge, artifacts, receivers (Code)
+
+- **Edmonton river:** tool/shore.json's Edmonton part now comes from NRCan CanVec 50K Hydro, Alberta (register canvecHydroAB, OGL – Canada; tool/make_shore_edm_canvec.py). CanVec labels the river's polygons near Edmonton "Not Identified" and puts the name on its flow lines, so the rule is: permanent water polygons a "North Saskatchewan River" flow line runs through (our rule). 6 rings, source maps 1977; median 9–10 m from the old outline. Vancouver part unchanged. make_shore.py no longer reads the EPSB file. Golden identical.
+- **Artifacts:** the three tool artifacts (GCCZ…, EBxWg…, KjjapF…) now serve the CanVec shore.json (checked: same file, no Altalis text).
+- **History purge (prepared, not run):** checks/purge/purge_altalis_2026-11-08.sh removes the two historical shore.json versions with the EPSB river from main, overnight-2026-10-30 and site-f1 (tested on a clone: about 4 min; afterwards only the CanVec version exists; main and overnight lose shore.json entirely, because theirs was the Altalis one). J.B. runs, in Git Bash:
+  `cd ~/Projects/beyond-data-siting-tool && git checkout site-f1 && bash checks/purge/purge_altalis_2026-11-08.sh`
+  then `git push --force origin main overnight-2026-10-30` (site-f1 is not on GitHub yet: push only when J.B. says). Local backup branches backup/pre-altalis-purge-2026-11-08-*: never push. GitHub keeps old commits reachable by their hash until GitHub Support removes them (sensitive-data removal request); forks and other clones keep copies.
+- **Also found (J.B. to decide):** the public overnight-2026-10-30 branch holds 181 Edmonton tool screenshots (checks/agents/*_shots, e.g. lotlines_shots/E06B_card.png shows 64 Airport Rd's Altalis lot outline). The same script can drop them in the same pass: EXTRA_PATHS="checks/agents/*/E0* checks/agents/*/*/E0*" (to confirm per folder before running).
+- **BC Assessment receivers:** the 683 vanBCA receivers' coordinates are representative points of the City of Vancouver property parcels (open data, data/vancouver_parcels_2026.geojson, matched by tax coordinate; tool/make_bigrecv.py), not BC Assessment geometry. No change.
