@@ -118,7 +118,12 @@
 .f1l-tabs{display:flex;gap:6px;flex:1 1 auto;min-width:0;overflow-x:auto}
 .f1l-tabs button{background:none;border:1px solid var(--f-rule);border-radius:999px;padding:6px 12px;font-size:12.5px;color:var(--f-ink2);white-space:nowrap}
 .f1l-tabs button[aria-selected="true"]{background:var(--f-ink);border-color:var(--f-ink);color:#fff}
-.f1l-box{flex:1 1 auto;overflow:auto;border:1px solid var(--f-hair);min-height:0}
+.f1l-wrap{position:relative;flex:1 1 auto;min-height:0;display:flex}
+.f1l-box{flex:1 1 auto;overflow:auto;overflow-x:scroll;border:1px solid var(--f-hair);min-height:0;scrollbar-color:var(--f-faint) var(--f-hair)}
+.f1l-wrap::before,.f1l-wrap::after{content:'';position:absolute;top:1px;bottom:16px;width:56px;pointer-events:none;opacity:0;transition:opacity .2s}
+.f1l-wrap::after{right:1px;background:linear-gradient(to right,rgba(255,255,255,0),#fff)}
+.f1l-wrap::before{left:1px;background:linear-gradient(to left,rgba(255,255,255,0),#fff);z-index:1}
+.f1l-wrap.more-r::after,.f1l-wrap.more-l::before{opacity:1}
 .f1l-box svg{display:block}
 .f1l-box .sh{font-size:12px;fill:var(--f-ink2)}
 .f1l-box .ss{font-size:11px;fill:var(--f-mute)}
@@ -162,6 +167,8 @@
 @media (max-width:760px){
   #f1l{overflow-y:auto}
   #f1l .f1v-body{flex-direction:column}
-  .f1l-box{flex:0 0 auto;height:60vh}
+  .f1l-wrap{flex:0 0 auto;height:60vh}
 }
 #f1l .f1-app{color:var(--f-ink);text-decoration:none}
+.f1l-nv{font-size:13px;color:var(--f-mute);margin-top:4px}
+.f1l-more summary{cursor:pointer;font-size:12px;color:var(--f-ink2);padding:6px 0}

@@ -39,14 +39,16 @@ function diagram(){ const keys=Object.keys(L.nodes).filter(shown).sort((a,b)=>OR
   const heads=st.map((s,i)=>`<text class="sh" x="${16+i*cw}" y="20">${esc(L.stages[i][1])}</text><text class="ss" x="${16+i*cw}" y="36">${(cols[s]||[]).length} part${(cols[s]||[]).length===1?'':'s'}</text>`).join('');
   return {svg:`<svg width="${W}" height="${H+10}" viewBox="0 0 ${W} ${H+10}" role="img" aria-label="The tool's logic: ${keys.length} parts in ${st.length} stages${focus.length?', '+A.size+' lit':''}"><g>${heads}</g><g class="we">${ed}</g><g class="wl">${el}</g>${keys.map(box).join('')}</svg>`,n:keys.length,lit:[...A].filter(k=>V.has(k)).length}; }
 function srcList(ids){ if(!ids||!ids.length) return '<p class="f1l-none">No source listed for this part.</p>';
-  return '<ul class="f1l-src">'+ids.map(id=>{ const t=(O.sources||{})[id]||id, k=(O.source_kinds||{})[id], m=String(t).match(/https?:\/\/\S+$/), tx=String(t).replace(/\s*[—-]\s*https?:\/\/\S+$/,'');
-    return `<li>${k?`<span class="f1l-kind">${esc(k)}</span>`:''}${esc(tx.length>260?tx.slice(0,257)+'…':tx)}${m?` <a href="${esc(m[0])}" target="_blank" rel="noopener">link</a>`:''}</li>`; }).join('')+'</ul>'; }
+  const one=id=>{ const t=(O.sources||{})[id]||id, k=(O.source_kinds||{})[id], m=String(t).match(/https?:\/\/\S+$/), tx=String(t).replace(/\s*[—-]\s*https?:\/\/\S+$/,'');
+    return `<li>${k?`<span class="f1l-kind">${esc(k)}</span>`:''}${esc(tx.length>260?tx.slice(0,257)+'…':tx)}${m?` <a href="${esc(m[0])}" target="_blank" rel="noopener">link</a>`:''}</li>`; };
+  /* the first source shown; the rest under "More sources" (gate 2) */
+  return `<ul class="f1l-src">${one(ids[0])}</ul>`+(ids.length>1?`<details class="f1l-more"><summary>More sources (${ids.length-1})</summary><ul class="f1l-src">${ids.slice(1).map(one).join('')}</ul></details>`:''); }
 function panel(){ if(!S.sel){ const t=TABS.find(x=>x[0]===S.tab)[1];
     return `<div class="chap">How it works</div><h2>${S.label?esc(S.label):'The logic under every card'}</h2><p class="lead">${S.label?'The parts this card is worked out from are lit. Click a part for its formula, trust and sources.':'One logic runs under all four workflows. Every part has a formula, a source and a trust rating. Click a part to see them.'}</p>`+
       (S.tab==='municipal'?'<p class="f1l-flag">Municipal has no tag in the logic yet. These are the parts its cards read, our list for Cowork to confirm.</p>':'')+`<p class="f1l-note">${t}: ${diagram().n} parts shown.</p>`; }
   const k=S.sel, n=L.nodes[k], stg=(L.stages.find(s=>s[0]===n.s)||[])[1]||n.s, q=n.q, ins=(UP[k]||[]).filter(x=>L.nodes[x]);
   return `<div class="chap">${esc(stg)}</div><h2>${esc(n.n)}</h2>${n.w?`<p class="lead">${esc(n.w.charAt(0).toUpperCase()+n.w.slice(1))}.</p>`:''}
-   <div class="f1l-hero"><div><div class="hv f1l-red">?${n.u?`<span>${esc(n.u)}</span>`:''}</div><div class="hl">On this lot: not in the tool yet</div></div></div>
+   ${S.lot?`<div class="f1l-hero"><div class="hl">On this lot (${esc(S.lot)})</div><div class="f1l-nv">not in the tool yet</div></div>`:''}
    <section><h3>How it is worked out</h3><p class="f1l-f">${esc(n.f||'Read or asked; no formula.')}</p>${ins.length?`<p class="f1l-in">From: ${ins.map(x=>`<button class="f1l-a" data-k="${x}">${esc(L.nodes[x].n)}</button>`).join(', ')}</p>`:''}</section>
    <section><h3>Trust</h3><div class="f1l-meter"><div class="trk"><div class="bar" style="width:${q==null?0:q}%"></div></div><div class="cap"><span>${q==null?'not rated':q+' of 100'}</span><span>${esc(word(q))}</span></div></div></section>
    <section><h3>Status</h3><p class="f1l-f">${esc(n.st||'?')}${n.st2?` · ${esc(n.st2)}`:''}</p></section>
@@ -55,11 +57,14 @@ function draw(){ const W=document.getElementById('f1l'); if(!W||!L) return; cons
   W.innerHTML=`<header class="f1v-head"><a class="f1-app" href="#" data-close="home">Beyond Data</a><span class="tpl">How it works</span>
      <div class="f1l-tabs" role="tablist" aria-label="Template">${TABS.map(([id,nm])=>`<button role="tab" data-tab="${id}" aria-selected="${S.tab===id}">${nm}</button>`).join('')}</div>
      <span class="f1v-where">${S.label?esc(S.label)+' · ':''}${D.lit?D.lit+' of ':''}${D.n} parts</span><button class="f1v-x" data-close>Close</button></header>
-   <div class="f1v-body"><main class="f1v-main"><div class="f1l-box">${D.svg}</div>
+   <div class="f1v-body"><main class="f1v-main"><div class="f1l-wrap"><div class="f1l-box">${D.svg}</div></div>
      <div class="f1l-key"><span><i class="k sel"></i>selected</span><span><i class="k lit"></i>feeds the selection</span><span><i class="k gap"></i>gap (?)</span><span><i class="k"></i>the rest</span></div>
      <details class="f1v-src"><summary>Sources and assumptions</summary><p>Parts, wires, formulas, trust and template tags: tool/logic.json (built from the register by make_templates.py). Source texts and kinds: tool/opps.json. Trust words: CLAUDE.md §3. Display only.</p></details></main>
-    <aside class="f1v-panel">${panel()}</aside></div>`; }
-async function open(o){ o=o||{}; await load(); S.tab=o.tab||S.tab; S.sel=null; S.label=o.label||''; S.lit=(o.ids||[]).filter(k=>L.nodes[k]);
+    <aside class="f1v-panel">${panel()}</aside></div>`;
+  /* not every stage fits at 1440 px: the box scrolls sideways with a visible bar and a fade on the edge that has more (gate 2) */
+  const box=W.querySelector('.f1l-box'), wr=W.querySelector('.f1l-wrap'), fade=()=>{ wr.classList.toggle('more-r',box.scrollLeft+box.clientWidth<box.scrollWidth-2); wr.classList.toggle('more-l',box.scrollLeft>2); };
+  box.addEventListener('scroll',fade,{passive:true}); fade(); }
+async function open(o){ o=o||{}; await load(); S.tab=o.tab||S.tab; S.sel=null; S.label=o.label||''; S.lot=o.lot||''; /* "On this lot" only when opened from a card that has a lot */ S.lit=(o.ids||[]).filter(k=>L.nodes[k]);
   let W=document.getElementById('f1l'); if(!W){ W=document.createElement('div'); W.id='f1l'; W.setAttribute('role','dialog'); W.setAttribute('aria-modal','true'); document.body.appendChild(W);
     W.addEventListener('click',e=>{ const t=e.target.closest('[data-k],[data-tab],[data-close]'); if(!t) return; e.preventDefault();
       if(t.dataset.close!=null){ W.remove(); return; } if(t.dataset.tab){ S.tab=t.dataset.tab; if(S.sel&&!shown(S.sel)) S.sel=null; draw(); return; }

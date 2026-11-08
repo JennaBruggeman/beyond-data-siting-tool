@@ -5,7 +5,7 @@
    are built in steps 2–4, so each card says which step builds it (no figure, no placeholder drawing).
    Card lists: job sheet §3 as updated 7 Nov (Resident 4, Municipal 12, Engineering 12; two cities parked). Chapters: Architecture from WORKLIST (Compare under
    Visualize, as Story_Architecture has it); the others from their storyboards (Story_Municipal, Story_Engineering, Story_Resident, 5 Nov 2026); Municipal's
-   'Industrial land and jobs' under Process is our reading (question to Cowork). 'How it works' opens the logic view (f1logic.js, §3d).
+   'Industrial land and jobs' in Use, after 'Is a data centre allowed?' (gate 2, 7 Nov). 'How it works' opens the logic view (f1logic.js, §3d).
    Images: the tool's own 3-D view of 339 1st Ave E (checks/tests/f1_capture.js; City of Vancouver open data only). */
 (function(){
 'use strict';
@@ -16,7 +16,7 @@ const TPL=[
  {id:'resident',name:'Resident',tier:'resident',tab:'resident',step:5,who:'For people who live near a data centre. Where data centres are, how one operates with the information there is, and a report on it.',img:'resident',
   cards:[...C('Find',['Your city','Find a data centre']),...C('The facility',['What it is']),...C('Report',['Report'])]},
  {id:'municipal',name:'Municipal',tier:null,tab:'municipal',step:3,who:'For planners and councillors. One parcel’s rules, one rule per card: limits, not designs.',img:'municipal',
-  cards:[...C('Site',['Your city','Your parcel']),...C('Use',['Is a data centre allowed?']),...C('Building rules',['Height and floor area','Yards by edge','Noise limits by edge','Storey heights, ground floor and street frontage','Loading','Rooftop equipment and screening']),...C('Process',['Industrial land and jobs','Approval process']),...C('Report',['Report'])]},
+  cards:[...C('Site',['Your city','Your parcel']),...C('Use',['Is a data centre allowed?','Industrial land and jobs']),...C('Building rules',['Height and floor area','Yards by edge','Noise limits by edge','Storey heights, ground floor and street frontage','Loading','Rooftop equipment and screening']),...C('Process',['Approval process']),...C('Report',['Report'])]},
  {id:'engineering',name:'Engineering',tier:'full',tab:'full',step:4,who:'For engineers and operators. The equipment, what it could exchange with the city, and three options.',img:'engineering',
   cards:[...C('Site',['Your city','Your parcel']),...C('Set-up',['Size and cooling','Backup power','What fits']),...C('Exchanges',['Heat','Electricity','Water','Materials']),...C('Options',['Three options','Could become']),...C('Report',['Report'])]},
  {id:'architecture',name:'Architecture',tier:'arch',tab:'arch',step:2,who:'For architects. A data centre and public programs on one lot, laid out from a library and checked against the main code moves.',img:'architecture',
@@ -66,7 +66,7 @@ async function loadLot(city){ const S=LOTS[city]; V.where='…'; draw();
 const titleCase=s=>String(s).toLowerCase().replace(/\b([a-z])/g,c=>c.toUpperCase()).replace(/\b(\d+)(St|Nd|Rd|Th)\b/g,(m,n,x)=>n+x.toLowerCase()).replace(/\b(Nw|Ne|Sw|Se)\b/g,m=>m.toUpperCase());
 function viewer(id){ V.t=TPL.find(x=>x.id===id); V.i=0; let W=document.getElementById('f1v'); if(!W){ W=document.createElement('div'); W.id='f1v'; W.setAttribute('role','dialog'); W.setAttribute('aria-modal','true'); document.body.appendChild(W);
     W.addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; const d=b.dataset;
-      if(d.x!=null){ W.remove(); return; } if(d.how){ const c=V.t.cards[V.i]; if(BD.f1logic) BD.f1logic.open(d.how==='all'?{tab:V.t.tab}:{tab:V.t.tab,label:c.t,ids:BD.f1logic.cardIds(c.t)}); return; } if(d.city){ if(d.city!==V.city){ V.city=d.city; loadLot(V.city); } return; }
+      if(d.x!=null){ W.remove(); return; } if(d.how){ const c=V.t.cards[V.i]; if(BD.f1logic) BD.f1logic.open(d.how==='all'?{tab:V.t.tab}:{tab:V.t.tab,label:c.t,ids:BD.f1logic.cardIds(c.t),lot:V.where}); return; } if(d.city){ if(d.city!==V.city){ V.city=d.city; loadLot(V.city); } return; }
       if(d.to!=null){ V.i=+d.to; draw(); return; } if(d.chap!=null){ V.i=V.t.cards.findIndex(c=>c.chap===d.chap); draw(); return; }
       if(d.step==='back'&&V.i>0){ V.i--; draw(); } if(d.step==='next'&&V.i<V.t.cards.length-1){ V.i++; draw(); } });
     document.addEventListener('keydown',e=>{ if(!document.getElementById('f1v')) return; if(e.key==='Escape') document.getElementById('f1v').remove(); if(e.key==='ArrowRight'&&V.i<V.t.cards.length-1){ V.i++; draw(); } if(e.key==='ArrowLeft'&&V.i>0){ V.i--; draw(); } }); }
