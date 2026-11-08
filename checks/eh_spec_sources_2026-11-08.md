@@ -19,7 +19,7 @@ The other tokens are file names or units (formula_register, dc_rooms, room_minim
 | VBBL Table 3.1.3.1 | NBC (arch_nbc3131, arch_hb_nbc3131) | VBBL 2025 text |
 | VBBL 3.8.2.3 | NBC (arch_acc_nbcAccessible) | VBBL 2025 text |
 | VBBL Table 6.3.2.9 | NBC (arch_nbc6329) | VBBL 2025 text |
-| CSA C282 6.5.1.1 (1 m clear round a generator) | only that buildings follow C282 (arch_open_nbc3275, bcbc2024_3275); C282 is paywalled | the clause itself (unread) |
+| CSA C282 6.5.1.1 (1 m clear round a generator) | arch_csa_c282 (CSA C282:24, J.B.'s licensed copy, p. 22) | none (corrected 8 Nov: the first search missed it) |
 | CSA Z8000, ANSI/TIA-942 | scope and secondary entries (arch_up4_csaZ8000_*, tia942) | the clauses (paywalled, unread, as the spec says) |
 | VBBL 3.4.2.3, 3.3.1.5, 3.7.2.2.-B, 3.8.3.5, 3.8.3.12–17, WorkSafeBC first aid, Vertiv AFC | added 8 Nov (vbbl25_*, wsbc_firstAid, vertivAFC_*) | none |
 | Parking By-law 5.1.5, 5.2.5, 5.2.9; By-law 6555 s. 4.1(c); Bylaw 14600 s. 21; CSA B139 Table 2; FM 5-32; Zoning Bylaw 20001 s. 2.120 | in the register | none |

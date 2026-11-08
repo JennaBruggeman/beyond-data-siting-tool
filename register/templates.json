@@ -59,6 +59,13 @@
    ],
    "why": "the lowest storey heights the zone allows"
   },
+  "chiller_winter_range": {
+   "tier": "full",
+   "parties": [
+    "operator"
+   ],
+   "why": "whether the chiller works in a design winter (the maker's stated range)"
+  },
   "typology_spec_rules": {
    "tier": "arch_only",
    "parties": [
@@ -2766,6 +2773,10 @@
    [
     "typology_spec_rules",
     "test"
+   ],
+   [
+    "chiller_winter_range",
+    "test"
    ]
   ],
   "edges": [
@@ -4172,11 +4183,19 @@
    [
     "massing",
     "typology_spec_rules"
+   ],
+   [
+    "cooling_type",
+    "chiller_winter_range"
+   ],
+   [
+    "weather",
+    "chiller_winter_range"
    ]
   ]
  },
  "resident_count": 42,
- "full_count": 205,
+ "full_count": 206,
  "arch_count": 139,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",

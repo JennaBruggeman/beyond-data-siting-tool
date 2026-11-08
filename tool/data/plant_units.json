@@ -385,5 +385,36 @@
    "rehlkoKD2000"
   ],
   "_note": "2,000 kW sets when the facility load is above 3 MW, otherwise 1,000 kW"
+ },
+ "chillAmbient": {
+  "min": {
+   "v": -28.9,
+   "src": [
+    "vertivAFC_limits"
+   ],
+   "note": "widest stated; varies by model"
+  },
+  "minR1234ze": {
+   "v": -20,
+   "src": [
+    "vertivAFC_limits"
+   ]
+  }
+ },
+ "winterDesign": {
+  "van": {
+   "v": -7,
+   "src": [
+    "arch_bcbcAppC"
+   ],
+   "note": "January 2.5 %, BCBC App. C Table C-2 (City Hall)"
+  },
+  "edm": {
+   "v": -30,
+   "src": [
+    "nbc20_climate"
+   ],
+   "note": "January 2.5 %, NBC 2020 App. C"
+  }
  }
 }
