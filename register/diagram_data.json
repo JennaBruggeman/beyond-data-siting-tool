@@ -9,7 +9,7 @@
 "quantities": 206,
 "conditions": 111,
 "opportunities": 14,
-"sources": 1688
+"sources": 1689
 }
 },
 "stages": [
@@ -2204,7 +2204,8 @@
 "arch_nz_cnossosDiv",
 "arch_nz_cnossosDiff",
 "arch_nz_hkEpdEM",
-"arch_nz_piercyISO"
+"arch_nz_piercyISO",
+"van6555_por"
 ],
 "source_roles": [
 {
@@ -2427,7 +2428,7 @@
 ],
 "upstream": 50,
 "city": {
-"van": 1,
+"van": 2,
 "edm": 1,
 "both": 0,
 "gen": 26
@@ -5408,7 +5409,8 @@
 "src_fill_van6555s21",
 "arch_nz_van6555s44",
 "arch_nz_edm14600s14",
-"arch_nz_ottawaENCG"
+"arch_nz_ottawaENCG",
+"van6555_por"
 ],
 "source_roles": [
 {
@@ -5482,7 +5484,7 @@
 ],
 "upstream": 50,
 "city": {
-"van": 5,
+"van": 6,
 "edm": 3,
 "both": 0,
 "gen": 1
@@ -18113,7 +18115,7 @@
 "mvReclaimed": "Metro Vancouver Interim Reclaimed Water Policy UT-019 (29 Sep 2023): industrial uses case-by-case; no rates — https://metrovancouver.org/boards/Policies/interim-reclaimed-water.pdf ‖ CHECK 2 (30 Oct 2026, ok): overreach: Interim board policy, not a supply entitlement: 'will consider' and 'pending evaluation'. Treat as a possible route, not a rule granting supply.; roles: partly supported",
 "vanOfficeConv": "City of Vancouver, Office Conversion Policy (adopted Jun 2009, amended Oct 2009): applies to buildings with ≥50,000 sq ft of office in DODP Areas C2, C3, G, H, L1, L2, M and N, ≥30,000 sq ft in HA-2 (Gastown) and HA-3 (Yaletown); addresses conversion to residential only (triggers a report to Council); not a rule for office-to-data-centre conversion — https://guidelines.vancouver.ca/policy-downtown-office-conversion.pdf ‖ CHECK 2 fixes applied (30 Oct 2026): DODP areas named (C2, C3, G, H, L1, L2, M, N); added residential-only, not a data-centre rule",
 "edmPermits": "City of Edmonton General Building Permits (open data 24uj-dj8v): 'DATA CENT' records incl. a new data centre inside an office (2009), alterations to data centres in offices (2011), an addition to an industrial building for a data centre (17204 114 Ave NW, 2015) and the expansion of a data centre into an empty warehouse there (2020); dataset id not in the export ?, and a 2021 demolition of a 'Sobeys Data Centre'; occupancy dates for non-residential permits completed since 2024 — https://data.edmonton.ca/d/24uj-dj8v ‖ CHECK 2 fixes applied (30 Oct 2026): 2011 = alterations, not new; only 2020 is warehouse expansion, 2015 an industrial addition; '?' settled",
-"van6555zones": "Vancouver Noise Control By-law 6555 (consolidated to 14 Jul 2026, By-law 14786, per the saved copy), continuous sound ss.2.1–2.3: quiet→quiet 55 day / 45 night; activity→quiet 60 / 55; intermediate→quiet 60 / 50; quiet→intermediate/activity/event 60 day / 55 night (s. 2.1(a)(ii), (b)(ii); src_fill_van6555s21, added 2 Nov 2026); intermediate/activity→other 70 / 65; 'background noise' appears only in s.3.1(b)(i): amplified sound in commercial premises ≤ 3 dBA above background (a limit, not a credit; not for mechanical equipment); no ambient credit for equipment (our reading: not stated) — https://bylaws.vancouver.ca/6555c.PDF ‖ CHECK 2 fixes applied (30 Oct 2026): s.3.1(b) is a +3 dBA limit for amplified sound, not a background credit; consolidation date settled from saved copy ‖ 8 Nov 2026: 375 1st Ave E (lot 63819495, CD-1 (402)) is a quiet zone: s. 1.2 \"quiet zone\" means any portion of the city not defined as an activity zone, intermediate zone or event zone; CD-1 402 is not in Schedule A, B or G, and the lot lies outside the B.1 outline (tool vZone). It adjoins 339 1st Ave E (0 m). The tool's noise check tests only lots holding a building; 375's only outline is not found in LiDAR 2022, so its 55 dBA line is not tested (gap, ?).",
+"van6555zones": "Vancouver Noise Control By-law 6555 (consolidated to 14 Jul 2026, By-law 14786, per the saved copy), continuous sound ss.2.1–2.3: quiet→quiet 55 day / 45 night; activity→quiet 60 / 55; intermediate→quiet 60 / 50; quiet→intermediate/activity/event 60 day / 55 night (s. 2.1(a)(ii), (b)(ii); src_fill_van6555s21, added 2 Nov 2026); intermediate/activity→other 70 / 65; 'background noise' appears only in s.3.1(b)(i): amplified sound in commercial premises ≤ 3 dBA above background (a limit, not a credit; not for mechanical equipment); no ambient credit for equipment (our reading: not stated) — https://bylaws.vancouver.ca/6555c.PDF ‖ CHECK 2 fixes applied (30 Oct 2026): s.3.1(b) is a +3 dBA limit for amplified sound, not a background credit; consolidation date settled from saved copy ‖ 8 Nov 2026: 375 1st Ave E (lot 63819495, CD-1 (402)) is a quiet zone: s. 1.2 \"quiet zone\" means any portion of the city not defined as an activity zone, intermediate zone or event zone; CD-1 402 is not in Schedule A, B or G, and the lot lies outside the B.1 outline (tool vZone). It adjoins 339 1st Ave E (0 m). Since 8 Nov 2026 the check tests every neighbouring lot, with or without a building (van6555_por, our reading): 375 is tested at its lot line, 49-52 dBA with the required plant room against 55 dBA, and is the worst case for 339 1st Ave E.",
 "lbnlLife": "Shehabi et al. 2024 (LBNL) p. 30: 'the lifetime assumption for 2000–2019 is 4.4 years', increasing to 5 years in 2020, and to 5.7 years by 2023' (US installed-base modelling assumption) — https://climate.mit.edu/sites/default/files/2025-02/lbnl-2024-united-states-data-center-energy-usage-report.pdf (an MIT-hosted copy; LBNL record https://eta-publications.lbl.gov/bibcite/reference/36455 ?) ‖ CHECK 2 fixes applied (30 Oct 2026): p. 31 → p. 30; labelled a US modelling assumption",
 "tenK_life": "Company filings on server useful life: Microsoft FY2022 four → six years (?: one check reads FY2023, decided Jul 2022); Alphabet FY2023 servers four → six (network equipment five → six); Amazon six (2024 ?: filing and section not found), a subset back to five (2025, 'increased pace of technology development'); Meta 4–5 → 5.5 years for most servers and network assets (2025; prior range ?) — SEC filings (OPERATOR FILING) ‖ CHECK 2 fixes applied (30 Oct 2026): Amazon six years (2024) marked '?' (not found in FY2024 10-K text)",
 "ashraeLife": "ASHRAE Handbook HVAC Applications 2015, ch.37 Table 3 (median service life): centrifugal chiller >25 yr; cooling tower metal >22; Table 4 (Akalin 1978, which ASHRAE footnotes as possibly outdated): air-cooled condenser 20; commercial water-to-air heat pump >24 (Abramson 2005; Akalin 1978: 19); base-mounted pump 20; shell-and-tube heat exchanger 24; transformer 30. Survey medians for commercial buildings, not design lives for data-centre plant — https://handbook.ashrae.org/Handbooks/A15/IP/A15_CH37/a15_ch37_ip.aspx ‖ CHECK 2 fixes applied (30 Oct 2026): heat pump >24 attributed to Abramson 2005 (Akalin: 19); 'survey medians, commercial buildings' qualifier added",
@@ -19589,7 +19591,7 @@
 "kohlerG6154sound": "MAKER: Kohler/Rehlko G6-154 9/23r, Aluminum Sound Enclosures and Subbase Fuel Tank, p. 11 sound data, KD2000/2250/2500 (KD62V12 and KD62V12A engines): SL1 enclosure 90 dB(A), SL2 enclosure 78 dB(A), 'Sound Pressure Level at 60 Hz with Full Load', 'Log average sound pressure level of 8 measured positions around the perimeter of the unit at a distance of 7 m (23 ft.)' — https://resources.kohler.com/power/kohler/industrial/pdf/KD800-2500_G6154.pdf (read through a web reader twice, not seen as an image; manufacturer claim; one value for 2,000–2,500 kW; no sound power level, ?)",
 "van6555s41c": "RULE: City of Vancouver Noise Control By-law 6555 (consolidated to 14 Jul 2026), s. 4.1(c): the zone limits and 3.1(j) 'do not apply to noise or sound made … as a consequence of the lawful testing of an emergency generator provided that it is not operated more than once a month during the daytime, and for a maximum of 60 minutes, plus once a year for a maximum of 180 minutes, and its continuous sound level does not exceed a rating of 80 dBA on an approved sound meter when measured at the point of reception or at least 6.1 m from its source, whichever is the greater'; s. 4.3(c): sound may exceed the levels when 'performing works of an emergency nature for the preservation or protection of property, life or health'. Standby power in a power cut as such works: our reading (?).",
 "edm14600s19to24": "RULE: City of Edmonton Community Standards Bylaw C14600 (consolidated 17 Mar 2026, PDF supplied by J.B.): residential property line 65 dB(A) 7 a.m.–10 p.m. (s. 19(1)), s. 19(3) up to 70 for ≤ 2 h, 75 for ≤ 1 h, 80 for ≤ 30 min, 85 for ≤ 15 min in any one day; 50 overnight (s. 20); non-residential 75 daytime (s. 21(1)), s. 21(3) 80 for ≤ 2 h, 85 for ≤ 1 h a day; 60 overnight (s. 22); s. 24 exceptions only for City snow and ice management and a City Manager permit: no exemption for emergency or standby generators; s. 14 disturbance applies whether or not a limit is exceeded; s. 55(d) repeals Bylaw 7255.",
-"edm_dc_major": "GUIDANCE (government web page): City of Edmonton, \"Data Centre Development\", https://www.edmonton.ca/business_economy/economic_investment/data-centre-development, saved by J.B. as PDF 8 Nov 2026 (9:05 am; Downloads \"Data Centre Development _ City of Edmonton.pdf\"): \"Large-scale data centres are considered a Major Industrial Use in Edmonton's Zoning Bylaw and would only be allowed in areas designated for these uses. An applicant would be required to apply for a rezoning and, in some cases, a land use plan amendment ... to build a large-scale data centre in an area that doesn't currently allow major industrial uses.\" Quote as read by Cowork (Claude Link edmonton_data_centre_use_class_2026-11-08.md); Code could not read the PDF text layer. No size threshold is given. Decision (J.B., 8 Nov 2026): every data centre in Edmonton is treated as Major Industrial. With Zoning Bylaw 20001 (J.B.'s copy, read 8 Nov 2026): Major Industrial permitted in IH s. 2.140 2.1 and EETC s. 3.52 2.1; IM s. 2.130 2.3 only those existing on 1 Jan 2024 (new = rezoning); not listed in BE s. 2.120, EETB, EETL, EETM, EETIM, EIB, EIM, FD s. 2.240 (rezoning). Trust 80 (government guidance, not bylaw text). ‖ 8 Nov 2026 (register_additions): same page (proposed id edm_dcPage). Trust 80 (City guidance, not bylaw).",
+"edm_dc_major": "GUIDANCE (government web page): City of Edmonton, \"Data Centre Development\", https://www.edmonton.ca/business_economy/economic_investment/data-centre-development, saved by J.B. as PDF 8 Nov 2026 (9:05 am; Downloads \"Data Centre Development _ City of Edmonton.pdf\"): \"Large-scale data centres are considered a Major Industrial Use in Edmonton's Zoning Bylaw and would only be allowed in areas designated for these uses. An applicant would be required to apply for a rezoning and, in some cases, a land use plan amendment ... to build a large-scale data centre in an area that doesn't currently allow major industrial uses.\" Quote as read by Cowork (Claude Link edmonton_data_centre_use_class_2026-11-08.md); Code could not read the PDF text layer. No size threshold is given. Decision (J.B., 8 Nov 2026): every data centre in Edmonton is treated as Major Industrial. With Zoning Bylaw 20001 (J.B.'s copy, read 8 Nov 2026): Major Industrial permitted in IH s. 2.140 2.1 and EETC s. 3.52 2.1; IM s. 2.130 2.3 only those existing on 1 Jan 2024 (new = rezoning); not listed in BE s. 2.120, EETB, EETL, EETM, EETIM, EIB, EIM, FD s. 2.240 (rezoning). Trust 80 (government guidance, not bylaw text). ‖ 8 Nov 2026 (register_additions): same page (proposed id edm_dcPage). Trust 80 (City guidance, not bylaw). ‖ 8 Nov 2026 (zone search): Code searched the whole Bylaw 20001 text (J.B.'s copy): Major Industrial is permitted only in IH (2.140, 2.1) and EETC (3.52, 2.1); IM only where existing on 1 Jan 2024 (2.130, 2.3); FD (2.240) and all other standard and special-area zones do not list it; Direct Control zones are site by site (?). J.B. 8 Nov 2026: keep EETC; the rule is wherever Major Industrial is permitted.",
 "vbbl25_3423": "RULE: Vancouver Building By-law 2025, vol. 1, Div. B 3.4.2.3.(1)-(5): exits apart at least the lesser of half the diagonal and 9 m where served by a public corridor, the greater of half the diagonal and 9 m otherwise; the smoke-travel measure; an exterior stair discharges at least 9 m away (6 m sprinklered, within 15 m of a street). Read once by Cowork from J.B.'s PDF of the Vancouver Building By-law 2025 (Claude Link register_additions_2026-11-08.md); no second check. Trust 90.",
 "vbbl25_3315": "RULE: Vancouver Building By-law 2025, Div. B 3.3.1.5.(1)(b), (2): a room for more than 60 people needs 2 egress doorways, at least one third of the diagonal apart. Read once by Cowork from J.B.'s PDF of the Vancouver Building By-law 2025 (Claude Link register_additions_2026-11-08.md); no second check. Trust 90. Spec, not live yet (refuge; Emergency hub spec).",
 "vbbl25_3722B": "RULE: Vancouver Building By-law 2025, Div. B Table 3.7.2.2.-B and 3.7.2.2.(15): water closets for business and personal services; two universal (unisex) rooms for a floor area up to 200 m2 and up to 60 people. Read once by Cowork from J.B.'s PDF of the Vancouver Building By-law 2025 (Claude Link register_additions_2026-11-08.md); no second check. Trust 90. Spec, not live yet (clinic).",
@@ -19601,7 +19603,8 @@
 "vertivAFC_siting": "MAKER (installer guide): Vertiv Liebert AFC installer guide SL-70790 (c) 2026, s. 4.1-4.2, p. 34 (J.B.'s screenshots, Claude Link eh/vertiv_AFC_SL-70790_p33-34.png, eh/vertiv_AFC_SL-70790_p34-35_fig4-1.png): refrigerant R1234ze, safety group A2L (ASHRAE 34); location class III (open air), access category C, authorized personnel only (ASHRAE 15); away from medium-high voltage power lines (no distance given); at least 5 m (16.4 ft) from drains and manholes, in free airflow; leaked gas is heavier than air and pools below the unit; keep safety distances from openings (no distance given). Fig. 4.1: slab high-point marking only. Trust 50 (maker claim). Spec, not live yet (chiller siting, Emergency hub spec rule 9).",
 "vertivAFC_weights_location": "MAKER (installer guide): Vertiv Liebert AFC installer guide SL-70790 (c) 2026, s. 4.2.3 p. 36 and s. 4.3 Tables 4.1-4.2 p. 38 (J.B.'s screenshots, Claude Link eh/vertiv_AFC_SL-70790_p35-36_location.png, eh/vertiv_AFC_SL-70790_p38_weights.png): outdoors only; level surface that carries the weight; good airflow; clean air, away from loose dirt. Shipping weights FH3 090-175: 19,600-30,750; CH3 120-175: 21,250-25,750 (12-20 fans); unit not printed (likely lb ?); operating weight: consult factory. Trust 50 (maker claim). Spec, not live yet (chiller siting; roof loads: Architecture stays at massing, flag only).",
 "vertivAFC_limits": "MAKER (installer guide): Vertiv Liebert AFC Packaged Air Cooled Free Cooling Chiller Installer/User Guide SL-70790 (c) 2026, s. 1.4.3 Operating Limits and Table 1.1 Ambient Conditions, p. 10 (J.B.'s screenshots 8 Nov 2026, Claude Link eh/vertiv_AFC_SL-70790_p8-9_limits.png, eh/vertiv_AFC_SL-70790_p10_operating_range.png; read by Code): ambient temperature '-20 F - 113 F (-28.9 C - 45 C) [Min and Max air temperatures can vary by model and chiller design.]'; 'NOTE: The ambient temperature must not go below -4 F (-20 C), because in this condition R1234ze pressure is below the ambient ones.' The operating-range chart is 'a guide and reference only'; its chiller-only versions (all refrigerants) stop near -10 C (read off the chart: our reading). s. 1.4.2: outdoor installation; supply fluid about 12.2-25 C; altitude under 2,000 m. Trust 50 (maker claim).",
-"nbc20_climate": "RULE: National Building Code of Canada 2020, Div. B Appendix C, Climatic and Seismic Information for Building Design, Table C-2: Edmonton January 2.5 % design temperature -30 C (value as J.B. gives it, 8 Nov 2026; the same figure is read from the local NBC(AE) 2023 text, register arch_pg_abClimateEdm). Trust 90 (regulation)."
+"nbc20_climate": "RULE: National Building Code of Canada 2020, Div. B Appendix C, Climatic and Seismic Information for Building Design, Table C-2: Edmonton January 2.5 % design temperature -30 C (value as J.B. gives it, 8 Nov 2026; the same figure is read from the local NBC(AE) 2023 text, register arch_pg_abClimateEdm). Trust 90 (regulation).",
+"van6555_por": "RULE: City of Vancouver Noise Control By-law 6555 (consolidated to 14 Jul 2026, By-law 14786), s. 1.2: '\"point of reception\" means: (a) a point in a lane or street, adjacent to but outside of the property occupied by the recipient of the noise or sound, that represents the shortest distance between that property and the source of the noise; (b) where no lane, street, or other public property exists between the recipient and the source, any point outside the property line of the real property from which the noise or sound emanates; or (c) in the case of noise emanating from inside Rogers Arena, ...' (saved copy, Claude Link beyond-data-sources/public/bylaw6555/full.pdf; read by Code 8 Nov 2026). Trust 90. Applied to every neighbouring lot, with or without a building: that an empty lot is a \"property occupied by the recipient\" is our reading (J.B., 8 Nov 2026). The tool measures at the receiving lot's point nearest the plant."
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -22935,7 +22938,8 @@
 "vertivAFC_siting": "maker",
 "vertivAFC_weights_location": "maker",
 "vertivAFC_limits": "maker",
-"nbc20_climate": "rule"
+"nbc20_climate": "rule",
+"van6555_por": "rule"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -25714,7 +25718,8 @@
 "vertivAFC_siting": "gen",
 "vertivAFC_weights_location": "gen",
 "vertivAFC_limits": "gen",
-"nbc20_climate": "edm"
+"nbc20_climate": "edm",
+"van6555_por": "van"
 },
 "city_gaps": {
 "van": [

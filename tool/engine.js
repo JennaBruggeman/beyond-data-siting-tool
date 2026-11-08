@@ -443,9 +443,23 @@ function noiseRecv(){ const S=BD.S, s=S.sel; if(!s) return []; const city=s.city
           Rv=Object.assign({ring:hit.r,bb:hit.bb,lot:true,addr:a&&a[0]?String(a[0]).trim():'',blds:[]},noiseLimitAt(src,z,b.c[0],b.c[1])); byP.set(hit,Rv); list.push(Rv); } Rv.blds.push(b); }
       else { let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9; for(let i=0;i<b.r.length;i+=2){ x0=Math.min(x0,b.r[i]); y0=Math.min(y0,b.r[i+1]); x1=Math.max(x1,b.r[i]); y1=Math.max(y1,b.r[i+1]); }
         list.push(Object.assign({ring:b.r,bb:[x0,y0,x1,y1],lot:false,addr:'',blds:[b]},noiseLimitAt(src,null,b.c[0],b.c[1]))); } } }
-  NREC={key,list}; return list; }
+  /* 8 Nov 2026 (J.B., Engineering gate): every neighbouring lot is a receiver, with or without a building. By-law 6555 s. 1.2 'point of reception': a point in the
+     lane or street 'adjacent to but outside of the property occupied by the recipient', or, with no public property between, 'any point outside the property line'
+     of the source; that an empty lot has a point of reception is our reading (register van6555_por). Edmonton Bylaw 14600 measures at 'the property line of a
+     property zoned for' a use, building or not. Lots already holding a receiver are skipped; one entry per lot (smallest outline first, a lot whose centre falls in
+     one already added is skipped, so Edmonton city parcels and lot outlines are not counted twice). Screens get no credit there (no receiver height). */
+  NREC.skipped=0; { const have=[...byP.keys()], cand=[], seen=new Set(), ctr=r=>BD.centroid(r);
+    for(const k in S.tiles){ if(!k.startsWith(city+':')) continue; for(const p of S.tiles[k].par){ if(far(p.bb,NRAD)||mine(p)) continue; const key=(p.ids?p.ids[0]:p.id)+':'+p.r[0]; if(seen.has(key)) continue; seen.add(key); cand.push(p); } }
+    cand.sort((a,b)=>BD.area(a.r)-BD.area(b.r));
+    const taken=have.slice(); const inTaken=(x,y)=>taken.some(q=>x>=q.bb[0]&&x<=q.bb[2]&&y>=q.bb[1]&&y<=q.bb[3]&&BD.pip(x,y,q.r));
+    for(const p of cand){ if(byP.has(p)) continue; const c=ctr(p.r); if(inTaken(c[0],c[1])) continue; taken.push(p);
+      const id=p.ids?p.ids[0]:p.id, a=id!=null?aRec(city,id):null, z=a?(city==='van'?((a[1]||'').trim()||null):(a[2]||a[1]||null)):null;
+      if(!z){ NREC.skipped=(NREC.skipped||0)+1; continue; } /* an empty outline with no zoning record (a road, lane or remnant, most likely): not a premises the tool can name, so not tested; counted (noiseCheck noRec) */
+      list.push(Object.assign({ring:p.r,bb:p.bb,lot:true,noBld:true,key:(p.ids?p.ids[0]:p.id)+':'+p.r[0],addr:a&&a[0]?String(a[0]).trim():'',blds:[]},noiseLimitAt(src,z,c[0],c[1]))); } }
+  for(const [p,Rv] of byP) Rv.key=(p.ids?p.ids[0]:p.id)+':'+p.r[0];
+  NREC={key,list,skipped:NREC.skipped||0}; return list; }
 /* the check for one model (one size and set-up): a small summary; the level at each neighbouring building goes to NLEV for the 3D */
-const NLEV=new WeakMap();
+const NLEV=new WeakMap(), NLOT=new Map(); /* NLOT: the level at each tested lot, by lot key ('<id>:<first x>'), with or without a building (8 Nov 2026) */
 /* ---------- sourced mitigation (3 Nov 2026; research checks/research_arch_v1/noise_mitigation.md, checks 1–3 applied; register noise_level, noise_limit) ----------
    Only reductions a source gives with numbers. Path: (1) a solid screen around outdoor cooling plant: the LOWER of NSW 2021 s. 4.3 (8 dB if solid, within 20 m
    of the source, at least 4 m above the source floor, breaking line of sight to the receiver; register arch_nz_nswDcNoise) and FHWA s. 3.5.1 (5 dB at
@@ -484,7 +498,7 @@ function noiseCheck(m){ const s=BD.S.sel; if(!m||!m.plant||!m.plant.s||!s) retur
       if(ok&&e>=0) c=Math.min(NMIT.scr.dB,NMIT.scr.fh0+NMIT.scr.fhM*e,NMIT.scr.cap); }
     return r.sc[i]=c; };
   const lev=(r,rho,o,noRoom)=>{ let e=0; G.forEach((g,i)=>{ e+=Math.pow(10,(lwG(g,rho,o)+r.gd[i].t+(noRoom?g.room:0)-(o.scr?scrAt(r,i):0))/10); }); return 10*Math.log10(e)-(o.fan||0); };
-  const list0=noiseRecv(), list=[]; let nIn=0;
+  const list0=noiseRecv(), list=[]; let nIn=0; NLOT.clear();
   for(const r of list0){ const bb=r.bb, lb=Math.max(0,bb[0]-pc[0],pc[0]-bb[2])**2+Math.max(0,bb[1]-pc[1],pc[1]-bb[3])**2; if(lb>NRAD*NRAD) continue; nIn++;
     r.gd=G.map(g=>{ const [d0,px,py]=ringD(g.c[0],g.c[1],r.ring); return {d0,px,py,t:-20*Math.log10(Math.max(5,d0))-8-g.room}; }); r.sc=null;
     const hs=r.blds.map(b=>b.h).filter(h=>h>0); r.zr=hs.length?Math.max(...hs):null; list.push(r); }
@@ -502,14 +516,14 @@ function noiseCheck(m){ const s=BD.S.sel; if(!m||!m.plant||!m.plant.s||!s) retur
   let wQ=null, wS=null, nQ=0, nS=0, strict=null; const bc={quiet:0,other:0,unknown:0,assumed:0}; let nB=0; const rNeed=Math.pow(10,(lw[1]-8-45)/20);
   let w0=null; /* the receiver that sets the mitigation: worst without it, quieter rating */
   for(const r of list){ const lo=lev(r,0,Fo), hi=lev(r,1,Fo), lo0=lev(r,0,{id:'none'},true), hi0=lev(r,1,{id:'none'},true); const d0=Math.min(...r.gd.map(x=>x.d0)), gi=r.gd.findIndex(x=>x.d0===d0), pt=[r.gd[gi].px,r.gd[gi].py];
-    const v={lo,hi,lo0,hi0,L:r.L,Ls:r.Ls,sec:r.sec,lot:r.lot,d:d0,mit:Fo.id!=='none'||ind}; r.blds.forEach(b=>NLEV.set(b,v));
+    const v={lo,hi,lo0,hi0,L:r.L,Ls:r.Ls,sec:r.sec,lot:r.lot,noBld:!!r.noBld,d:d0,mit:Fo.id!=='none'||ind}; r.blds.forEach(b=>NLEV.set(b,v)); if(r.key) NLOT.set(r.key,Object.assign({addr:r.addr,zt:r.zt,cls:r.cls},v));
     if(!strict||r.L<strict.L) strict={L:r.L,sec:r.sec};
     if(!w0||lo0-r.Ls>w0.ex) w0={r,lo:lo0,hi:hi0,d:d0,ex:lo0-r.Ls,pt};
     if(hi>r.L){ bc[r.cls]=(bc[r.cls]||0)+1; if(!r.lot) nB++; }
     if(lo>r.Ls){ nQ++; if(!wQ||lo-r.Ls>wQ.ex) wQ={r,lo,hi,d:d0,ex:lo-r.Ls,pt}; }
     else if(hi>r.L){ nS++; if(!wS||hi-r.L>wS.ex) wS={r,lo,hi,d:d0,ex:hi-r.L,pt}; } }
   const roomNeed=ind&&list.some(r=>lev(r,0,Fo,true)>r.Ls);
-  const lab=w=>`${w.r.addr?w.r.addr+' ':''}(${w.r.zt})${w.r.lot?'':' (building, not property line: reads low ?)'}`;
+  const lab=w=>`${w.r.addr?w.r.addr+' ':''}(${w.r.zt})${w.r.noBld?' (no building on record: point of reception at its lot line, our reading)':w.r.lot?'':' (building, not property line: reads low ?)'}`;
   const at=w=>w.r.lot?(s.city==='van'?'at the point of reception beside':'at the property line of'):'at';
   const lvl=w=>Math.abs(w.hi-w.lo)<0.05?`about ${Math.round(w.lo)} dBA (low-noise units: one rating)`:`about ${Math.round(w.lo)}–${Math.round(w.hi)} dBA (quieter–standard unit rating)`;
   const scrG=o=>o.scr?outG:[];
@@ -526,7 +540,7 @@ function noiseCheck(m){ const s=BD.S.sel; if(!m||!m.plant||!m.plant.s||!s) retur
   const mit={option:need?need.id:null,tried:O.map(o=>o.id),screen:need&&need.scr?{h:Math.max(...outG.map(g=>g.hs)),on:outG.map(g=>g.kind),src:'arch_nz_nswDcNoise'}:null,
     ln:need&&need.ln?{n:G.reduce((a,g)=>a+lnN(g),0),src:'traneRTAF'}:null,fan:need&&need.fan?{ratio:need.ratio,dB:Math.round(need.fan*10)/10,src:'arch_nz_amcaMathson'}:null,room:roomNeed?{dB:NMIT.room.dB,src:'arch_nz_nswDcNoise'}:null,
     short:needS.join(' + ')||null,std:sd?sd.o.id:null};
-  const out={lw:lw.map(x=>Math.round(x*10)/10),n,src:pc.map(x=>Math.round(x*10)/10),where,groups:G.map(g=>({kind:g.kind,n:g.n})),tested:nIn,overQ:nQ,overS:nS,limit:govern?govern.L:null,sec:govern?govern.sec:null,beyond:rNeed>NRAD,byCls:bc,bldOnly:nB,block:null,flag:null,req:null,worst:null,mit};
+  const out={noRec:NREC.skipped||0,lw:lw.map(x=>Math.round(x*10)/10),n,src:pc.map(x=>Math.round(x*10)/10),where,groups:G.map(g=>({kind:g.kind,n:g.n})),tested:nIn,overQ:nQ,overS:nS,limit:govern?govern.L:null,sec:govern?govern.sec:null,beyond:rNeed>NRAD,byCls:bc,bldOnly:nB,block:null,flag:null,req:null,worst:null,mit};
   const fixes=['a smaller size (fewer units)',`the cooling plant ${{roof:'in the yard or split',yard:'on the roof or split','roof and yard':'all on the roof or all in the yard',indoors:'in the yard','roof and indoors':'all indoors or in the yard'}[where]}, if that moves it further from this lot`];
   if(chill) fixes.push('liquid cooling inside, which uses dry coolers (rated about 4 dBA quieter a unit; maker claims)');
   if(!ind&&rf) fixes.push(`the roof plant indoors (Seen or hidden: Bring it indoors), credited ${NMIT.room.dB} dB as a plant room to the NSW 2021 terms (register arch_nz_nswDcNoise)`);
@@ -883,6 +897,6 @@ async function precView(){
 }
 /* sweep 20 Oct 2026: air-cooled halls get air-cooled chillers, not dry coolers (plant.js, sweep M31); every 'dry coolers' a user reads says which */
 BD.dryName=()=>{ const A=BD.S.answers; return (A.inside||'air')==='air'&&(A.outside||'dry')==='dry'?'air-cooled chillers':'dry coolers'; };
-BD.eng={R,NMIT,vZone,noiseLimitAt,noiseZones:{res:EDM_RES,mix:EDM_MIX},siteFacts,plantPerMW,coolUnits,equip,noiseLw,noiseCheck,noiseLevel:b=>NLEV.get(b)||null,calc,rng,f1,n0,n1,mathBox,tabBar,wireTabs,show3d,nearby,netsAt,loadRecv,badge,src,s3,rangeBar,state,roofArea,optionSet};
+BD.eng={noiseLot:k=>NLOT.get(k)||null,R,NMIT,vZone,noiseLimitAt,noiseZones:{res:EDM_RES,mix:EDM_MIX},siteFacts,plantPerMW,coolUnits,equip,noiseLw,noiseCheck,noiseLevel:b=>NLEV.get(b)||null,calc,rng,f1,n0,n1,mathBox,tabBar,wireTabs,show3d,nearby,netsAt,loadRecv,badge,src,s3,rangeBar,state,roofArea,optionSet};
 BD.fitsView=fitsView; BD.recvView=recvView; BD.optionsView=optionsView; BD.tabView=tabView;
 })();

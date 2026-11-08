@@ -17,6 +17,7 @@
   "genAt": "yard",
   "genSpares": "n1",
   "vis": "screen",
+  "mwPick": "large",
   "mwSite": "176767"
  },
  "sel": {
@@ -166,7 +167,7 @@
    "notes": [
     "Noise: needs the roof cooling plant in an enclosed plant room. On the roof, even with low-noise chillers and a solid screen, it would give about 77 dBA at 11830 KINGSWAY NW (BE), 14 m away, over the 60 dBA night limit (Bylaw 14600 s. 22(1)). The plant room is the next measure, and the least that passes; its floor comes out of the building (register arch_nz_nswDcNoise).",
     "Generator test (Community Standards Bylaw C14600 s. 19(3), 21(3), daytime, up to 1 h): one set is about (no residential line on this lot) and 85 dB(A) at the nearest non-residential line (3.1 m, limit 85): within the limits (78 dB(A) at 7 m, Kohler G6-154, maker claim; free field, our arithmetic). Overnight power cut: one set is over the 60 dB(A) non-residential night limit (ss. 20, 22); the bylaw has no generator exemption (s. 24): flagged, not blocked.",
-    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 74–77 dBA (quieter–standard unit rating) at the property line of 11830 KINGSWAY NW (BE), 30 m away; limit 60 dBA at night (Bylaw 14600 s. 22(1))."
+    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 65–69 dBA (quieter–standard unit rating) at the property line of 8079 CEDRIC MAH ROAD NW (BRH) (no building on record: point of reception at its lot line, our reading), 79 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1))."
    ],
    "warn": [],
    "F": {
@@ -555,6 +556,7 @@
     "night": true
    },
    "noise": {
+    "noRec": 146,
     "lw": [
      111.3,
      114.6
@@ -571,7 +573,7 @@
       "n": 7
      }
     ],
-    "tested": 2464,
+    "tested": 3112,
     "overQ": 0,
     "overS": 0,
     "limit": 50,
@@ -586,17 +588,17 @@
     "bldOnly": 0,
     "block": null,
     "flag": null,
-    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 74–77 dBA (quieter–standard unit rating) at the property line of 11830 KINGSWAY NW (BE), 30 m away; limit 60 dBA at night (Bylaw 14600 s. 22(1)).",
+    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 65–69 dBA (quieter–standard unit rating) at the property line of 8079 CEDRIC MAH ROAD NW (BRH) (no building on record: point of reception at its lot line, our reading), 79 m away; limit 50 dBA at night (Bylaw 14600 s. 20(1)).",
     "worst": {
-     "addr": "11830 KINGSWAY NW",
-     "zt": "BE",
+     "addr": "8079 CEDRIC MAH ROAD NW",
+     "zt": "BRH",
      "lot": true,
-     "d": 30,
-     "lo": 73.7,
-     "hi": 77,
-     "L": 60,
-     "Ls": 60,
-     "sec": "Bylaw 14600 s. 22(1)"
+     "d": 79.3,
+     "lo": 65.3,
+     "hi": 68.6,
+     "L": 50,
+     "Ls": 50,
+     "sec": "Bylaw 14600 s. 20(1)"
     },
     "mit": {
      "option": "none",
@@ -638,7 +640,7 @@
      "Ls": 60,
      "sec": "Bylaw 14600 s. 22(1)"
     },
-    "block": "Noise: the cooling plant (roof) would give about 77 dBA (low-noise units: one rating) at the property line of 11830 KINGSWAY NW (BE), 14 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 60 dBA night limit with the quieter rating (Bylaw 14600 s. 22(1); the plant runs 24 h, so the night limit governs). 5 neighbouring lots are over. No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, wh…",
+    "block": "Noise: the cooling plant (roof) would give about 77 dBA (low-noise units: one rating) at the property line of 11830 KINGSWAY NW (BE), 14 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 60 dBA night limit with the quieter rating (Bylaw 14600 s. 22(1); the plant runs 24 h, so the night limit governs). 202 neighbouring lots are over. No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further from this lot; liquid cooling inside, …",
     "src": "arch_nz_nswDcNoise"
    }
   },

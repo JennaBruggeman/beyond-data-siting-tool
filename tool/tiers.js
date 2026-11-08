@@ -150,6 +150,6 @@ function patchSetup(){ if(!BD.setup||!BD.deck) return setTimeout(patchSetup,200)
   BD.setup.start=()=>{ if(BD.tier()==='resident'&&!BD.S.answers.residentEdit) residentCard(); else orig(); }; }
 patchSetup();
 // a new parcel: residents start again from the assumed set-up
-let lastSel=''; setInterval(()=>{ const k=BD.S&&BD.S.sel?BD.S.sel.city+':'+BD.S.sel.id:''; if(k!==lastSel){ lastSel=k; if(found!==k){ found=''; foundWhy=null; } if(BD.S&&BD.S.answers){ delete BD.S.answers.residentEdit; delete BD.S.answers.mwPick; delete BD.S.answers.resPlant; delete BD.S.answers.resNote; } } },500);
+let lastSel=''; setInterval(()=>{ const k=BD.S&&BD.S.sel?BD.S.sel.city+':'+BD.S.sel.id:''; if(k!==lastSel){ lastSel=k; if(found!==k){ found=''; foundWhy=null; } if(BD.S&&BD.S.answers){ const An=BD.S.answers; delete An.residentEdit; if(String(An.mwSite||'')!==String(BD.S.sel?BD.S.sel.id:'')) delete An.mwPick; delete An.resPlant; delete An.resNote; } } },500); /* 8 Nov 2026 (E05 flake): a size picked for this lot (mwSite = this lot, set with mwPick) stays; before, the 500 ms poll could land after findFit and drop it */
 BD.TIERS=TIERS;
 })();

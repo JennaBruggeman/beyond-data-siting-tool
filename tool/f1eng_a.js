@@ -73,21 +73,16 @@ function plan(x,M,o){ o=o||{}; const r=arr(x.sel.ring), b=C.bbox(r), cx=(b[0]+b[
 const keyItem=(bg,t,o)=>`<span><i style="background:${bg};${o||''}"></i>${esc(t)}</span>`;
 
 /* ===== 3 What fits ===== */
-const perHi=()=>{ const R=(BD.data.dc_rooms&&BD.data.dc_rooms.rooms)||[]; const v=R.filter(r=>r.split&&r.perMW).reduce((t,r)=>t+r.perMW[1],0); return v>0?v:630; };
-const supHi=()=>{ const g=BD.data.arch&&BD.data.arch.ratioGround&&BD.data.arch.ratioGround.support; return g&&g[1]>0&&g[1]<1?g[1]:0.33; };
 C.add(T,'What fits',{async build(x){
   const M=await x.eng(); if(!M||!M.ring) return {draw:'<p class="f1v-empty">No lot loaded.</p>'};
   const A=BD.S.answers, f=BD.eng.siteFacts(), fm=BD.fitMax(), fp=BD.fitPlan(), tested=M.mwSized, lo=f.mw[0], hi=f.mw[1];
   const step=(BD.eng.R.steps||[]).find(s=>s>fm+1e-9), nextMw=step!=null?Math.min(step,Math.round((fm+0.1)*10)/10):Math.round((fm+0.1)*10)/10, nxt=Math.round((fm+0.1)*10)/10;
-  /* what stops the next size up: the tool's own tests at fitMax + 0.1 MW (site.js fitMax0: setupProblems, the generator yard depth, the floor test) */
-  const why=fm==null?null:await x.withAnswers({mw:nxt},m=>{ const p=BD.setupProblems(true), g=!!(m.Z&&m.Z.ground), all=m.nF?m.nF[0]:1, up=Math.max(1,g?all-1:all), fa=m.foot?BD.area(m.foot):0, pH=perHi(), sH=supHi();
-    return {p,big:m.plant&&m.plant.bigYard,fa,up,g,need1:nxt*pH,have1:fa*up,need2:nxt*pH/(1-sH),have2:fa*(g?up+1:up),pH,sH,nF:all}; });
+  /* what stops the next size up: the engine names it (site.js fitMax, BD.fitWhy; J.B. 8 Nov 2026: the engine returns it, the card does not rebuild it) */
+  const why=fm==null?null:BD.fitWhy();
   let bind=null, bindSrc='';
   if(fm==null) bind='No size fits with these choices.';
-  else if(why.p.length){ bind=why.p[0]; bindSrc='the tool’s set-up check (site.js setupProblems)'; }
-  else if(why.big){ bind=`At ${n1(nxt)} MW the generators need a plant yard ${n1(why.big)} m deep, deeper than the 21.7 m of the tested lots.`; bindSrc='plant.js bigYard, site.js fitMax'; }
-  else if(why.have1<why.need1-0.5||why.have2<why.need2-0.5){ bind=`At ${n1(nxt)} MW the hall, UPS and battery rooms need about ${n0(why.have1<why.need1-0.5?why.need1:why.need2)} m²; the footprint of ${n0(why.fa)} m² over the ${n0(why.have1<why.need1-0.5?why.up:(why.g?why.up+1:why.up))} usable storeys gives ${n0(why.have1<why.need1-0.5?why.have1:why.have2)} m².`; bindSrc=`floor test, site.js fitMax (${n0(why.pH)} m² per MW at the conservative end${why.have1<why.need1-0.5?'':', support rooms added at '+Math.round(why.sH*100)+'%'}); our arithmetic`; }
-  else { bind=`Above ${n1(fm)} MW the tool’s checks stop passing; the rule that fails first is not named by the tool.`; bindSrc='site.js fitMax'; }
+  else if(why&&why.t){ bind=`At ${n1(why.mw)} MW: ${why.t.replace(/\.$/,'')}.`; bindSrc={setup:'the tool’s set-up check (site.js setupProblems)',yard:'plant.js bigYard, site.js fitMax',floor:'floor test, site.js fitMax (dc_rooms.json, arch.json ratioGround)',range:'site.js fitMax, siteFacts'}[why.k]||'site.js fitMax'; }
+  else { bind=`Above ${n1(fm)} MW the tool’s checks stop passing; the engine names no rule (?).`; bindSrc='site.js fitMax'; }
   const pl=plan(x,M,{aria:'The lot with its building and plant',box:q=>q.name==='standby generators'?K.dcSup:K.dc,
     leaders:[{pts:[BD.centroid(arr(x.sel.ring))],lines:[x.addr,`${n0(x.sel.lotArea)} m² · ${x.zone}`]},
       ...(M.plant&&M.plant.boxes&&M.plant.boxes.length?[{pts:M.plant.boxes.map(q=>BD.centroid(arr(q.ring))),lines:[`${M.plant.boxes.length} ${M.plant.boxes[0].name}`,'in the yard']}]:[]),
@@ -193,10 +188,12 @@ async function noiseData(x,M){ const s=x.sel, nc=M.noise, pc=nc&&nc.src, r=arr(s
   const lots=[], seen=new Set(), blds=new Set(), adj=[];
   for(const k in BD.S.tiles){ if(!k.startsWith(x.city+':')) continue; const t=BD.S.tiles[k];
     for(const p of t.par||[]){ if(isMine(x,p)) continue; const key=(p.id||p.ids)+':'+p.r[0]; if(seen.has(key)) continue; seen.add(key); const bb=p.bb||C.bbox(p.r); if(bb[0]>pc[0]+NR||bb[2]<pc[0]-NR||bb[1]>pc[1]+NR||bb[3]<pc[1]-NR) continue;
-      const id=p.ids?p.ids[0]:p.id, a=t.A[id]||[]; lots.push({r:arr(p.r),id,a,addr:a[0]?C.titleCase(a[0]):'',zone:x.city==='van'?String(a[1]||'').trim():String(a[2]||a[1]||'').trim(),v:null,nb:0}); } }
+      const id=p.ids?p.ids[0]:p.id, a=t.A[id]||[]; lots.push({k2:(p.ids?p.ids[0]:p.id)+':'+p.r[0],r:arr(p.r),id,a,addr:a[0]?C.titleCase(a[0]):'',zone:x.city==='van'?String(a[1]||'').trim():String(a[2]||a[1]||'').trim(),v:null,nb:0}); } }
   for(const k in BD.S.tiles){ if(!k.startsWith(x.city+':')) continue; for(const q of BD.S.tiles[k].bld||[]){ if(blds.has(q)) continue; blds.add(q); const v=BD.eng.noiseLevel(q); if(!v) continue; const c=cen(arr(q.r)); if(Math.hypot(c[0]-pc[0],c[1]-pc[1])>NR) continue;
       const lot=lots.find(l=>pip(c[0],c[1],l.r)); if(!lot) continue; lot.nb++; if(!lot.v||v.d<lot.v.d) lot.v=Object.assign({},v); if(v.hi>lot.v.hi) lot.v.hi=v.hi; q.__eng=v; } }
-  /* adjoining lots with no tested building: the tool skips them */
+  /* lots with no building on record: the tool tests them at their lot line since 8 Nov 2026 (engine noiseLot; point of reception: our reading) */
+  for(const l of lots){ if(l.v) continue; const v=BD.eng.noiseLot&&BD.eng.noiseLot(l.k2); if(v) l.v=Object.assign({},v); }
+  /* adjoining lots still without a level (e.g. an outline the engine merged into another lot): shown as not tested */
   for(const l of lots){ if(l.v) continue; if(ringNear(r,l.r)<3) adj.push(l); }
   return {lots:lots.filter(l=>l.v).sort((a,b)=>a.v.d-b.v.d),untested:adj,pc,nc}; }
 C.add(T,'Noise',{async build(x){
@@ -206,7 +203,6 @@ C.add(T,'Noise',{async build(x){
   const worst=nc.worst, ok=!nc.block;
   const bad=l=>l.v.hi>l.v.L, over=l=>l.v.lo>l.v.Ls;
   const shade=l=>over(l)?K.red:bad(l)?'#E8C3BF':(l.v.hi>l.v.L-10?K.dcSup:K.fillHall);
-  const un375=D.untested.filter(l=>String(l.id)==='63819495');
   const gen=(M.notes||[]).filter(n=>/^Generator test/.test(n))[0]||'';
   const GN=(BD.data.raw.noise||{}).gen||{}, gv=GN.van, ge=GN.edm;
   const genRule=city==='van'?(gv?`Generator testing: up to ${gv.test.v} dBA at the point of reception, or 6.1 m from the source if that is farther, once a month for up to 60 minutes in the daytime, plus once a year for up to 180 minutes. By-law 6555 s. 4.1(c).`:null):(ge?`Generator testing, daytime: up to one hour a day at ${ge.resTest1h.v} dB(A) at residential lines and ${ge.nonTest1h.v} at non-residential. At night: ${ge.resNight.v} and ${ge.nonNight.v}, no allowance. Bylaw 14600 ss. 19(3), 21(3), 20, 22; s. 24 has no generator exemption.`:null);
@@ -214,16 +210,15 @@ C.add(T,'Noise',{async build(x){
   const pl=plan(x,M,{half:Math.max(120,Math.min(NR,(LOT[3]?LOT[3].v.d:80)*1.35+60)),W:620,H:300,aria:'Predicted plant noise at the neighbouring lots against each limit',
     under:(P)=>{ let s=''; for(const l of LOT.slice(0,200)){ s+=`<path d="${C.pathOf([l.r],P)}" fill="${shade(l)}" fill-opacity="0.55" stroke="#fff" stroke-width="0.6"><title>${esc((l.addr||'lot')+' · '+n0(l.v.lo)+'–'+n0(l.v.hi)+' dBA · limit '+l.v.L)}</title></path>`; } return s; },
     after:(P)=>{ const [px,py]=P(D.pc[0],D.pc[1]); let s=`<g stroke="${K.ink}" stroke-width="1.6"><line x1="${px-6}" y1="${py}" x2="${px+6}" y2="${py}"/><line x1="${px}" y1="${py-6}" x2="${px}" y2="${py+6}"/></g>`;
-      for(const u of D.untested){ const c=cen(u.r), [ux,uy]=P(c[0],c[1]); s+=`<path d="${C.pathOf([u.r],P)}" fill="none" stroke="${K.red}" stroke-width="1.2" stroke-dasharray="4 3"/>`; if(String(u.id)==='63819495'||D.untested.length<4) s+=`<text x="${ux.toFixed(1)}" y="${(uy+9).toFixed(1)}" text-anchor="middle" font-size="26" font-weight="500" fill="${K.red}">?</text>`; }
+      for(const u of D.untested){ const c=cen(u.r), [ux,uy]=P(c[0],c[1]); s+=`<path d="${C.pathOf([u.r],P)}" fill="none" stroke="${K.red}" stroke-width="1.2" stroke-dasharray="4 3"/>`; if(D.untested.length<4) s+=`<text x="${ux.toFixed(1)}" y="${(uy+9).toFixed(1)}" text-anchor="middle" font-size="26" font-weight="500" fill="${K.red}">?</text>`; }
       return s; },
     leaders:[
       ...(worst?[{pts:(()=>{ const w=LOT.find(l=>(l.addr||'').toUpperCase()===(worst.addr||'').toUpperCase()); return w?[cen(w.r)]:[]; })(),lines:[C.titleCase(worst.addr||'worst case'),`${n0(nc.worst.lo)}–${n0(nc.worst.hi)} dBA without the measure`,`limit ${worst.L} dBA`]}]:[]),
-      ...(un375.length?[{pts:[cen(un375[0].r)],lines:[C.titleCase(un375[0].addr),'not tested: no building on record','(LiDAR 2022); quiet zone, 55 dBA']}]:[]),
       {pts:[BD.centroid(arr(x.sel.ring))],lines:[x.addr,`plant: ${nc.where}`]}]});
   const key=`<div class="f1c-key">${keyItem(K.fillHall,'lot: level well under its limit')}${keyItem(K.dcSup,'within 10 dBA of the limit')}${keyItem('#E8C3BF','over the limit with standard-rating units')}${keyItem(K.red,'over the limit with the quieter rating')}<span><b style="font-weight:500">+</b> plant centre</span>${D.untested.length?`<span><b class="f1c-q">?</b> not tested</span>`:''}</div>`;
   const tbl=`<div class="f1c-eng-a-mt"><h4>Predicted level at the nearest lots, against each lot’s limit</h4><table class="f1c-eng-a-tbl"><tr><th>Lot (point of reception)</th><th>Zone</th><th>Distance</th><th>Level, with the measure</th><th>Without it</th><th>Night limit</th></tr>
-    ${LOT.slice(0,5).map(l=>`<tr><td>${esc(l.addr||'no address on record')}</td><td>${esc(l.zone||'?')}</td><td>${n0(l.v.d)} m</td><td class="${bad(l)?'r':''}">${n0(l.v.lo)}–${n0(l.v.hi)} dBA</td><td>${n0(l.v.lo0)}–${n0(l.v.hi0)} dBA</td><td>${l.v.L===l.v.Ls?l.v.L:l.v.L+' / '+l.v.Ls} dBA</td></tr>`).join('')}
-    ${D.untested.slice(0,1).map(u=>`<tr><td>${esc(u.addr||'lot')}</td><td>${esc(u.zone||'?')}</td><td>adjoins</td><td class="r" colspan="3"><b class="f1c-q">?</b> not tested: no building on record${String(u.id)==='63819495'?' (LiDAR 2022); quiet zone, 55 dBA':''}</td></tr>`).join('')}</table>
+    ${LOT.slice(0,5).map(l=>`<tr><td>${esc(l.addr||'no address on record')}${l.v.noBld?'<small style="display:block;color:#7B7E83">no building on record: tested at its lot line (our reading)</small>':''}</td><td>${esc(l.zone||'?')}</td><td>${n0(l.v.d)} m</td><td class="${bad(l)?'r':''}">${n0(l.v.lo)}–${n0(l.v.hi)} dBA</td><td>${n0(l.v.lo0)}–${n0(l.v.hi0)} dBA</td><td>${l.v.L===l.v.Ls?l.v.L:l.v.L+' / '+l.v.Ls} dBA</td></tr>`).join('')}
+    ${D.untested.slice(0,1).map(u=>`<tr><td>${esc(u.addr||'lot')}</td><td>${esc(u.zone||'?')}</td><td>adjoins</td><td class="r" colspan="3"><b class="f1c-q">?</b> not tested</td></tr>`).join('')}</table>
     <p class="f1c-eng-a-note">Levels at a lot are at its point nearest the plant, from the tool’s own check; the limit is that lot’s night limit (${esc(nc.sec||'')}). Where two limits show, the first is for the quieter-rated units, the second for standard units.</p></div>`;
   /* the lot's own lines: the nearest tested lot beyond each */
   const eY=M.edgeYards||[], lineRows=eY.map(e=>{ let b=null; for(const l of LOT){ let d=1e9; for(let i=0,j=l.r.length-2;i<l.r.length;j=i,i+=2) d=Math.min(d,segD(l.r[i],l.r[i+1],e.ax,e.ay,e.bx,e.by),segD(e.ax,e.ay,l.r[j],l.r[j+1],l.r[i],l.r[i+1])); if(!b||d<b.d) b={l,d}; } return {e,b}; });
@@ -236,6 +231,6 @@ C.add(T,'Noise',{async build(x){
     hero:[{v:worst?`${n0(worst.lo)}–${n0(worst.hi)}`:C.q(),u:' dBA',l:'worst case without a measure'},{v:worst?String(worst.L):C.q(),u:' dBA',l:'its night limit'},{v:worst?String(Math.round(worst.d)):C.q(),u:' m',l:'from the plant'},{v:meas?meas.split(' (')[0]:'none',l:'measure the tool requires'+(meas&&meas.includes(' (')?': '+meas.split(' (')[1].replace(')',''):''),red:false}],
     rows:[['Worst case',worstTxt],['What the tool requires',mitTxt.replace(/^Noise: /,'')],['Cooling plant sits',nc.where],['Sound power of the plant',`${n0(nc.lw[0])}–${n0(nc.lw[1])} dBA (${nc.n} units; maker claims)`],['Lots tested',`${n0(nc.tested)} receivers within the check’s radius`],['Generator testing',gen?gen.replace(/^Generator test \(/,'(').split(': ').slice(1).join(': ').slice(0,200):'?']],
     more:[['The lot’s own lines',lineTbl],['Generator test',`<p>${esc(genRule||'not in the tool')}</p>${gen?`<p>${esc(gen)}</p>`:''}`],['Method',`<p>Lp = Lw − 20 log r − 8 (free field over hard ground), r the distance from the plant to the lot’s nearest point, at least 5 m; groups of units are summed in dB. Unit ratings are maker claims (a quieter and a standard rating are both tried). Measures are tried in order: none, low-noise chillers or night fan speed, a screen, then a plant room (−${nc.mit&&nc.mit.room?nc.mit.room.dB:BD.eng.NMIT.room.dB} dB, NSW 2021 terms). Unit housings and silencers get no credit.</p>`]],
-    src:['Levels and limits: engine.js noiseCheck and noiseLevel (Lp = Lw − 20 log r − 8; limits from the receiving lot’s zone: '+(city==='van'?'Noise Control By-law 6555 s. 2.3(b)':'Bylaw 14600 ss. 20, 22')+').','Unit Lw: tool/data/noise.json (lwUnit, lwUnitDry; manufacturer claims).','Plant room −25 dB: register arch_nz_nswDcNoise (NSW 2021 Table 4-5).','Generator testing: tool/data/noise.json gen (van6555s41c; edm14600s19to24); the note above is the tool’s own check.','Lots, zones and buildings: loaded tiles as the tool holds them.'+(city==='van'?' 375 1st Ave E (CD-1 (402), By-law 6555 s. 1.2) is not tested: its only building is not found in LiDAR 2022.':''),C.CONTEXT_SRC(city)],
-    missing:[...(D.untested.length?[`${D.untested.length} adjoining lot(s) with no building on record are not tested by the tool`]:[]),'level at the own lot lines (the tool tests receiving lots, not the lot’s own lines)']}; }});
+    src:['Levels and limits: engine.js noiseCheck and noiseLevel (Lp = Lw − 20 log r − 8; limits from the receiving lot’s zone: '+(city==='van'?'Noise Control By-law 6555 s. 2.3(b)':'Bylaw 14600 ss. 20, 22')+').','Unit Lw: tool/data/noise.json (lwUnit, lwUnitDry; manufacturer claims).','Plant room −25 dB: register arch_nz_nswDcNoise (NSW 2021 Table 4-5).','Generator testing: tool/data/noise.json gen (van6555s41c; edm14600s19to24); the note above is the tool’s own check.','Lots, zones and buildings: loaded tiles as the tool holds them.'+(city==='van'?' Every neighbouring lot is tested, with or without a building (8 Nov 2026): By-law 6555 s. 1.2 puts the point of reception outside “the property occupied by the recipient”; that an empty lot has one is our reading (register van6555_por).':''),C.CONTEXT_SRC(city)],
+    missing:[...(D.untested.length?[`${D.untested.length} adjoining lot(s) not tested`]:[]),'level at the own lot lines (the tool tests receiving lots, not the lot’s own lines)']}; }});
 })();

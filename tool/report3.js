@@ -308,7 +308,7 @@ function pCities(D,no){ const {refs,EC,worth,f}=D; let s=''; const here=refs.fin
   return page(D,no,'Two cities','The same data centre in Vancouver and Edmonton: the grid, the climate and the price of gas change what it gives.',s); }
 
 /* ---------- the report ---------- */
-const FALLBACK={resident:['cover','fits','flows','time','opps','spec','sources'],full:['cover','fits','flows','heat','power','water','time','opps','spec','options','cities','logic','sources']};
+const FALLBACK={resident:['cover','fits','flows','time','opps','spec','sources'],full:['cover','fits','flows','heat','power','water','time','opps','options','cities','logic','sources']}; /* 8 Nov 2026: 'Could become' dropped from the Engineering report (J.B.) */
 const PAGES_T={cover:'The lot',fits:'What fits',flows:'What moves in and out',heat:'Heat',power:'Power',water:'Water',time:'Over time, and next door',opps:'Opportunities',spec:'Could become',options:'Three options',cities:'Two cities',logic:'How it is worked out',sources:'Sources'};
 function plan(t){ const R=BD.TPL&&BD.TPL.reports; return R&&R[t]?R[t].map(p=>p.id):FALLBACK[t]||FALLBACK.full; }
 async function pages(D){ const out=[]; let k=1; const nn=()=>String(k++).padStart(2,'0'); D.plan=plan(D.tier);

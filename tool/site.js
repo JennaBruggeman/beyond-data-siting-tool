@@ -426,14 +426,22 @@ function fitMax0(){ fitMax0.beyond=false; const A=BD.S.answers, keep=A.mw; A.mw=
   /* 7 Nov 2026 (J.B.: 339 1st Ave E fell to 0.5 MW): where the zone keeps the ground storey from data storage (I-2 2.2.7, I-3 2.2.11, FC-2), only the
      racks are barred at grade: hall + UPS + battery must fit on the upper storeys, and the whole data centre with its support rooms on the upper storeys
      plus the ground storey (as Ratios already does; the 4 Nov V339 test fit puts support on the ground storey). Before, support was forced upstairs too. */
-  const roomOK=mw=>{ const m=model(); if(!m||m.existing||!m.foot||!BD.eng) return true; if(m.plant&&m.plant.bigYard){ fitMax0.beyond=true; return false; }
-    const all=m.nF?m.nF[0]:1, g=!!(m.Z&&m.Z.ground), up=Math.max(1,g?all-1:all), fa=BD.area(m.foot);
-    return fa*up>=mw*perHi-0.5&&fa*(g?up+1:up)>=mw*perHi/(1-supHi)-0.5; };
+  /* 8 Nov 2026 (J.B., Engineering gate item 4): roomWhy names the failing test (null = passes); fitMax0.why holds why the next size up fails (BD.fitWhy) */
+  const roomWhy=mw=>{ const m=model(); if(!m||m.existing||!m.foot||!BD.eng) return null; if(m.plant&&m.plant.bigYard){ fitMax0.beyond=true; return {k:'yard',depth:m.plant.bigYard,lim:21.7,t:`the generators need a plant yard ${m.plant.bigYard} m deep, deeper than the 21.7 m of the tested lots (plant.js bigYard)`}; }
+    const all=m.nF?m.nF[0]:1, g=!!(m.Z&&m.Z.ground), up=Math.max(1,g?all-1:all), fa=BD.area(m.foot), n1=mw*perHi, n2=mw*perHi/(1-supHi), h1=fa*up, h2=fa*(g?up+1:up);
+    if(h1<n1-0.5) return {k:'floor',need:n1,have:h1,t:`the hall, UPS and battery rooms need about ${Math.round(n1).toLocaleString('en-CA')} m² on the ${up} storey${up>1?'s':''} that may hold them; the building gives ${Math.round(h1).toLocaleString('en-CA')} m²`};
+    if(h2<n2-0.5) return {k:'floor',need:n2,have:h2,t:`the data centre with its support rooms needs about ${Math.round(n2).toLocaleString('en-CA')} m²; the building gives ${Math.round(h2).toLocaleString('en-CA')} m²`};
+    return null; };
+  const roomOK=mw=>!roomWhy(mw);
   const ok=mw=>{ A.mw=mw; cache.key=null; return !setupProblems(true).length&&roomOK(mw); };
   let lo=0, best=null, top=Math.floor((hi||0)*10);
   /* 2 Nov 2026 hard rules: with generators on the roof no size above the fuel limit passes (model(); Build 2: CSA B139.1.1 6.5.3), so the search starts there */
   if(BD.eng&&A.gens!=='none'&&(A.genAt||'yard')==='roof'){ const R=BD.eng.R; top=Math.min(top,Math.floor(BD.data.equipment.roofTank.line/(R.pue[1]*1000*R.fuelHours*R.fuelLkWh)*10)); } /* Build 2: B139.1.1 6.5.3, one set (register arch_csa_b139) */
   if(top>=1&&ok(top/10)) best=top/10; else { let a=1, b=top-1; while(a<=b){ const mid=(a+b)>>1; if(ok(mid/10)){ best=mid/10; a=mid+1; } else b=mid-1; } }
+  /* why the next size up (best + 0.1 MW) fails: the set-up check's own words first, then the yard or floor test; above the floor-space range, that */
+  fitMax0.why=null; try{ const nx=best!=null?Math.round((best+0.1)*10)/10:0.1;
+    if(nx>(hi||0)+1e-9) fitMax0.why={mw:nx,k:'range',t:`${nx} MW is beyond what the building's floor space holds (up to ${(hi||0).toFixed(1)} MW)`};
+    else { A.mw=nx; cache.key=null; const p=setupProblems(true); fitMax0.why=p.length?{mw:nx,k:'setup',t:p[0],all:p}:Object.assign({mw:nx},roomWhy(nx)||{k:'none',t:null}); } }catch(e){ fitMax0.why=null; }
   A.mw=keep; cache.key=null; return best; }
 /* bugfix 4 Nov 2026 (retest resident 1–3): fitMax's search assumes a smaller size never needs more room. That does not hold: once a size is set the
    building shrinks to it, so a smaller size has a smaller roof (CLARK: 0.1–0.5 MW fail, 0.75–1.9 MW pass). The sizes that pass: each size-slider step
@@ -467,7 +475,7 @@ function fitPlan(){ const A=BD.S.answers, B=Object.assign({},A); delete B.mw; de
   fpCache={key,v}; return v; }
 const planText=v=>v&&v.mw!=null?`up to ${v.mw.toFixed(1)} MW ${v.measure?v.measure.t:''}${v.measure&&v.measure.auto?`; ${v.asIs!=null?v.asIs.toFixed(1)+' MW':'no size'} with the plant on the roof as set up`:''}`:null;
 BD.measureOf=measureOf; BD.fitPlan=fitPlan; BD.planText=planText;
-BD.setupProblems=setupProblems; BD.fitMax=fitMax; BD.fitBeyond=()=>!!fitMax0.beyond; BD.fitSizes=fitSizes; BD.fitNear=fitNear; BD.sizePasses=sizePasses;
+BD.fitWhy=()=>{ fitMax(); return fitMax0.why; }; BD.setupProblems=setupProblems; BD.fitMax=fitMax; BD.fitBeyond=()=>!!fitMax0.beyond; BD.fitSizes=fitSizes; BD.fitNear=fitNear; BD.sizePasses=sizePasses;
 /* bugfix 4 Nov 2026 (retest rules 1, V339): the required yards are set in from the lot's bounding rectangle, so along an angled lot line the line of the
    yards (the lot clipped to that rectangle) runs inside a required yard. Each lot edge takes the yard of the side it faces in the tool's own frame (front,
    rear, sides: m.yards, as the 3 Nov rules sweep checked), and a point is in that yard when it is nearer the edge than the yard's depth, less 0.3 m

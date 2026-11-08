@@ -173,7 +173,7 @@ PAGES = [
  ('logic', F, 'How it is worked out', 'every part of the tool, by stage'),
  ('sources', R, 'Sources', 'as text'),
 ]
-out['reports'] = {tid: [{'id': i, 'title': t, 'what': w} for i, r, t, w in PAGES if rank[r] <= rank[tid]] for tid in ('resident', 'full')}
+out['reports'] = {tid: [{'id': i, 'title': t, 'what': w} for i, r, t, w in PAGES if rank[r] <= rank[tid] and not (tid == 'full' and i == 'spec')] for tid in ('resident', 'full')}  # 8 Nov 2026 (J.B., Engineering gate): 'Could become' dropped from the Engineering report
 out['reports']['arch'] = [{'id': i, 'title': t, 'what': w} for i, r, t, w in PAGES if i in ('cover', 'fits', 'flows', 'heat', 'sources')]  # 2 Nov 2026; an arrangements page comes with the report work
 # sensitivity test (step 7, 20 Oct 2026; audit/sensitivity_2026-10-20.md). J.B.'s rule: when a part a template hides moves a result it shows by 25% or
 # more (or 3 dB of sound), the card names that part in plain words as what most of the range comes from; 10–25% is listed as also behind the range;

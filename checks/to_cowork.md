@@ -128,3 +128,13 @@ Done (local, not pushed): F1b answers; Edmonton Major Industrial rule; 8 Nov reg
 - **Edmonton:** allowed lots 5,232 → 386 (IH 375, EETC 11). EETC permits Major Industrial (s. 3.52, 2.1) but J.B. said "outright only in IH": keep EETC? FD: rezoning.
 - **Engineering:** plans, not 3-D (wanted?). Heat cards assume liquid cooling while the default is air: shown with a note. Card 3's binding rule is rebuilt from site.js (the tool does not expose it): acceptable? No building is cheaper than its heat in either city.
 - **Spec check:** six VBBL 2025 clauses are held only as NBC entries (checks/eh_spec_sources_2026-11-08.md).
+
+## 8 Nov 2026 — Engineering gate fixes (Code)
+
+1. Noise: every neighbouring lot is tested, building or not (By-law 6555 s. 1.2 quoted in register van6555_por; empty lots: our reading). 375 1st Ave E governs for 339: 49–52 dBA with the plant room vs 55 (74–77 without). Empty outlines with no zoning record (roads, remnants) are not tested, only counted: OK?
+2. Heat cards follow the air pick (no figure for air reuse, "?"); liquid shown as a labelled comparison.
+3. "Could become" removed from the Engineering report (templates.json, report3.js).
+4. Card 3's limiting reason now comes from the engine (BD.fitWhy).
+5. E05 flake: a 500 ms timer (tiers.js) dropped mwPick when it ran after findFit. Fixed; two golden runs identical.
+6. Only IH and EETC permit Major Industrial (IM: existing only; FD and all other zones: no; DC zones: site by site ?).
+Golden re-based once: noise worst cases and counts only; no size, fit or block moved.

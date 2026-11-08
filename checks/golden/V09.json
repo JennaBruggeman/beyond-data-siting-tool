@@ -16,6 +16,7 @@
   "gens": "yes",
   "genAt": "yard",
   "genSpares": "n1",
+  "mwPick": "large",
   "mwSite": "63819363"
  },
  "sel": {
@@ -238,7 +239,7 @@
     "Noise: needs the roof cooling plant in an enclosed plant room. On the roof, even with low-noise chillers and a solid screen, it would give about 72 dBA at 247 1ST AVE E (I-3, activity zone), 27 m away, over the 65 dBA night limit (Noise Control By-law 6555 s. 2.3(b)(ii)). The plant room is the next measure, and the least that passes; its floor comes out of the building (register arch_nz_nswDcNoise).",
     "Generator test (Noise By-law 6555 s. 4.1(c)): one set at a time is about 71.3 dB(A) at 15.1 m (the nearest lot line), within the 80 dB(A) test limit (78 dB(A) at 7 m, Kohler G6-154, maker claim; free field, our arithmetic). Sets tested together would be louder. Running in a power cut as emergency works (s. 4.3(c)): our reading (?).",
     "Lot lines: which yard 2 of this lot's edges have is not known (?); the deepest it could have is applied (see Lot lines).",
-    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 72–76 dBA (quieter–standard unit rating) at the point of reception beside 294 1ST AVE E (IC-3, activity zone), 37 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii))."
+    "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 65–68 dBA (quieter–standard unit rating) at the point of reception beside 375 1ST AVE E (CD-1 (402), quiet zone) (no building on record: point of reception at its lot line, our reading), 90 m away; limit 55 dBA at night (Noise Control By-law 6555 s. 2.3(b)(i))."
    ],
    "warn": [],
    "F": {
@@ -696,6 +697,7 @@
     "near": false
    },
    "noise": {
+    "noRec": 11,
     "lw": [
      111.8,
      115.1
@@ -712,7 +714,7 @@
       "n": 8
      }
     ],
-    "tested": 3465,
+    "tested": 4580,
     "overQ": 0,
     "overS": 0,
     "limit": 55,
@@ -727,17 +729,17 @@
     "bldOnly": 0,
     "block": null,
     "flag": null,
-    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 72–76 dBA (quieter–standard unit rating) at the point of reception beside 294 1ST AVE E (IC-3, activity zone), 37 m away; limit 65 dBA at night (Noise Control By-law 6555 s. 2.3(b)(ii)).",
+    "req": "Noise: needs a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 65–68 dBA (quieter–standard unit rating) at the point of reception beside 375 1ST AVE E (CD-1 (402), quiet zone) (no building on record: point of reception at its lot line, our reading), 90 m away; limit 55 dBA at night (Noise Control By-law 6555 s. 2.3(b)(i)).",
     "worst": {
-     "addr": "294 1ST AVE E",
-     "zt": "IC-3, activity zone",
+     "addr": "375 1ST AVE E",
+     "zt": "CD-1 (402), quiet zone",
      "lot": true,
-     "d": 37,
-     "lo": 72.5,
-     "hi": 75.8,
-     "L": 65,
-     "Ls": 65,
-     "sec": "Noise Control By-law 6555 s. 2.3(b)(ii)"
+     "d": 90.1,
+     "lo": 64.7,
+     "hi": 68,
+     "L": 55,
+     "Ls": 55,
+     "sec": "Noise Control By-law 6555 s. 2.3(b)(i)"
     },
     "mit": {
      "option": "none",
@@ -793,7 +795,7 @@
      "Ls": 65,
      "sec": "Noise Control By-law 6555 s. 2.3(b)(ii)"
     },
-    "block": "Noise: the cooling plant (roof) would give about 72 dBA (low-noise units: one rating) at the point of reception beside 247 1ST AVE E (I-3, activity zone), 27 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). 6 neighbouring lots are over. No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further …",
+    "block": "Noise: the cooling plant (roof) would give about 72 dBA (low-noise units: one rating) at the point of reception beside 247 1ST AVE E (I-3, activity zone), 27 m away, even with low-noise chillers (Trane RTAF 280 LN, maker claim) + a 4.9 m solid screen (roof; NSW 2021, −8 dB): over the 65 dBA night limit with the quieter rating (Noise Control By-law 6555 s. 2.3(b)(ii); the plant runs 24 h, so the night limit governs). 11 neighbouring lots are over. No modelled option brings it under. To bring it under: a smaller size (fewer units); the cooling plant in the yard or split, if that moves it further…",
     "src": "arch_nz_nswDcNoise"
    }
   },
