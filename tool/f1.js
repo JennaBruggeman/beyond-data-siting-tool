@@ -17,8 +17,8 @@ const TPL=[
   cards:[...C('Find',['Your city','Find a data centre']),...C('The facility',['What it is']),...C('Report',['Report'])]},
  {id:'municipal',name:'Municipal',tier:null,tab:'municipal',step:3,who:'For planners and councillors. One parcel’s rules, one rule per card: limits, not designs.',img:'municipal',
   cards:[...C('Site',['Your city','Your parcel']),...C('Use',['Is a data centre allowed?','Industrial land and jobs']),...C('Building rules',['Height and floor area','Yards by edge','Noise limits around the lot','Storeys and street frontage','Loading']),...C('Process',['Approval process']),...C('Report',['Report'])]},
- {id:'engineering',name:'Engineering',tier:'full',tab:'full',step:4,who:'For engineers and operators. The equipment, what it could exchange with the city, and three options.',img:'engineering',
-  cards:[...C('Site',['Your city','Your parcel']),...C('Set-up',['Size and cooling','Backup power','What fits']),...C('Exchanges',['Heat','Electricity','Water','Materials']),...C('Options',['Three options','Could become']),...C('Report',['Report'])]},
+ {id:'engineering',name:'Engineering',tier:'full',tab:'full',step:4,who:'For engineers and operators. What fits on the lot, the cooling and backup choices, and what it could exchange with the city.',img:'engineering',
+  cards:[...C('Site',['Your city','Your parcel']),...C('Set-up',['What fits','Cooling','Backup power','Noise']),...C('Exchanges',['Heat offered','Who could take it','Electricity','Water','Materials']),...C('Report',['Report'])]}, /* 12 cards (job sheet, J.B. 8 Nov): three options folded into Cooling, could become dropped */
  {id:'architecture',name:'Architecture',tier:'arch',tab:'arch',step:2,who:'For architects. A data centre and public programs on one lot, laid out from a library and checked against the main code moves.',img:'architecture',
   cards:[...C('Site',['Your city','Your parcel','People nearby','Programs nearby','Heat receivers nearby','What the lot allows','Ground and flood','Neighbours and views']),
    ...C('Typology',['Pick a typology','Variant and add-ons','The governing principle','The numbers','What’s left for neighbours']),

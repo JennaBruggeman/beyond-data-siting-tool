@@ -120,3 +120,11 @@ Engineering, before I build:
 3. The job sheet lists 12 cards (heat offered + who could take it); J.B.'s message said 11 (one heat card). Which?
 4. Its cooling row includes electricity; J.B. said leave it out (one PUE line). I'll leave it out unless you say otherwise.
 
+
+## 8 Nov 2026 — Engineering gate (Code)
+
+Done (local, not pushed): F1b answers; Edmonton Major Industrial rule; 8 Nov register additions; the 12 Engineering cards. Gate: 109 screenshots, 0 errors, no NaN. Golden and Architecture unchanged after the one Edmonton re-base.
+- **375 1st Ave E** is CD-1 (402), a quiet zone (By-law 6555 s. 1.2). The noise check does **not** test 55 dBA at its line: it tests only lots holding a building, and 375's building is not in LiDAR 2022. Card 6 marks it "not tested ?". By the tool's formula: 50–53 dBA with the required plant room (75–78 without). Test empty lots too?
+- **Edmonton:** allowed lots 5,232 → 386 (IH 375, EETC 11). EETC permits Major Industrial (s. 3.52, 2.1) but J.B. said "outright only in IH": keep EETC? FD: rezoning.
+- **Engineering:** plans, not 3-D (wanted?). Heat cards assume liquid cooling while the default is air: shown with a note. Card 3's binding rule is rebuilt from site.js (the tool does not expose it): acceptable? No building is cheaper than its heat in either city.
+- **Spec check:** six VBBL 2025 clauses are held only as NBC entries (checks/eh_spec_sources_2026-11-08.md).

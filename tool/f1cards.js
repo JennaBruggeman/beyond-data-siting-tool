@@ -65,17 +65,31 @@ function render(res,dr,pb,srcEl){ dr.innerHTML=res.draw||'';
    The example typology is the Emergency hub (the first in the library); the typology picker is not built (Phase D), so this is the tool's state today. */
 const AR={key:null,P:null,busy:null};
 const EXAMPLE_PICKS=['refuge','warming_shelter','clinic'];
-async function arch(){ const s=BD.S.sel; if(!s) return null; const key=s.city+':'+s.id; if(AR.key===key&&AR.P) return AR.P; if(AR.busy&&AR.bkey===key) return AR.busy;
+async function arch(){ const s=BD.S.sel; if(!s) return null; const key=s.city+':'+s.id; if(AR.key===key&&AR.P&&AR.gen===GEN) return AR.P; /* eng() since? set it up again */ if(AR.busy&&AR.bkey===key) return AR.busy;
   AR.bkey=key; AR.busy=(async()=>{ const keepT=BD.tier&&BD.tier(), wait=ms=>new Promise(r=>setTimeout(r,ms));
     try{ if(BD.setTier) BD.setTier('arch'); await BD.arch.ready; const An=BD.S.answers; for(const k of Object.keys(An)) delete An[k]; Object.assign(An,{built:'new',extent:'whole',floor:'',mw:null});
       BD.modelReset(); if(BD.flow.findFit) BD.flow.findFit(); /* the largest size where everything fits, as a worked example opens (flow.js findFit) */
       BD.arch.ratio=null; BD.arch.picks=[]; BD.arch.rezone=BD.arch.rezone||{}; BD.arch.rezone[key]=true; /* a lot that needs a rezoning (e.g. Edmonton BE, edm_dc_major) is shown as if rezoned: the tool's flagged option */ BD.modelReset(); await BD.views.arat(); await wait(300);
       const A=BD.arch; A.picks=[]; EXAMPLE_PICKS.forEach(id=>BD.archTest.add(id)); const rf=A.picks.find(q=>q.id==='refuge'); if(rf) rf.opt='side_by_side';
-      BD.modelReset(); const P=BD.archTest.place(); AR.key=key; AR.P=P; return P; }
+      BD.modelReset(); const P=BD.archTest.place(); AR.key=key; AR.P=P; GEN++; AR.gen=GEN; return P; }
     finally{ if(keepT&&BD.setTier&&keepT!=='arch') BD.setTier(keepT); AR.busy=null; } })();
   return AR.busy; }
+/* the Engineering state the cards read (job F1 step 3, Engineering): the tool's own Engineering tier ('full') with its defaults, the lot sized as a worked
+   example opens (flow.js findFit: the largest size where everything fits, with the set-up that gets there). Default cooling: site.js setDefaults
+   (air inside, dry coolers outside, plant on the roof). Re-run whenever another setup (arch) has changed the answers since. Returns BD.model(). */
+const EG={key:null,gen:-1,M:null,busy:null}; let GEN=0;
+async function eng(){ const s=BD.S.sel; if(!s) return null; const key=s.city+':'+s.id; if(EG.key===key&&EG.gen===GEN&&EG.M) return EG.M; if(EG.busy&&EG.bkey===key) return EG.busy;
+  EG.bkey=key; EG.busy=(async()=>{ try{ if(BD.setTier) BD.setTier('full'); const An=BD.S.answers; for(const k of Object.keys(An)) delete An[k]; Object.assign(An,{built:'new',extent:'whole',floor:'',mw:null});
+      BD.modelReset(); if(BD.flow.findFit) BD.flow.findFit(); BD.modelReset(); GEN++; EG.key=key; EG.gen=GEN; EG.M=BD.model(); EG.A=Object.assign({},An); return EG.M; }
+    finally{ EG.busy=null; } })();
+  return EG.busy; }
+/* read-only what-if for the cooling comparison (J.B. 8 Nov: swap and restore): set some answers, run fn(model), put the answers back and rebuild the model.
+   Nothing the user picked is changed; the Engineering state is restored exactly. */
+async function withAnswers(over,fn){ await eng(); const A=BD.S.answers, keep={}; for(const k in over) keep[k]=A[k];
+  try{ Object.assign(A,over); BD.modelReset(); return await fn(BD.model()); }
+  finally{ for(const k in keep){ if(keep[k]===undefined) delete A[k]; else A[k]=keep[k]; } BD.modelReset(); EG.M=BD.model(); } }
 /* the context a card reads: the example lot, as the tool models it */
 function ctx(city){ const M=BD.model(), sel=BD.S.sel||{}, a=sel.a||[], key=zoneKey(city,a);
-  return {city,M,sel,a,key,addr:a[0]?titleCase(a[0]):'?',zone:key,status:dcStatus(city,key),arch,K,n0,n1,q,esc,frame,pathOf,bbox,hit,scaleBar,allowed,zoneKey,titleCase}; }
-BD.f1cards={context,CONTEXT_SRC,arch,EXAMPLE_PICKS,add,has,get:(tpl,title)=>REG[tpl]&&REG[tpl][title],render,ctx,K,meter,frame,pathOf,bbox,hit,scaleBar,allowed,zoneKey,dcStatus,q,n0,n1,esc,titleCase};
+  return {city,M,sel,a,key,addr:a[0]?titleCase(a[0]):'?',zone:key,status:dcStatus(city,key),arch,eng,withAnswers,K,n0,n1,q,esc,frame,pathOf,bbox,hit,scaleBar,allowed,zoneKey,titleCase}; }
+BD.f1cards={context,CONTEXT_SRC,arch,eng,withAnswers,EXAMPLE_PICKS,add,has,get:(tpl,title)=>REG[tpl]&&REG[tpl][title],render,ctx,K,meter,frame,pathOf,bbox,hit,scaleBar,allowed,zoneKey,dcStatus,q,n0,n1,esc,titleCase};
 })();
