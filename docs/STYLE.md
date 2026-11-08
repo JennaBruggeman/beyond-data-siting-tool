@@ -47,7 +47,7 @@ Hues are made with `tint(hue, t) = 255 − (255 − c) × t` per channel.
 | plant | `#E6E4E0` | — | plant yard |
 
 ### Findings
-RED `#CC746C` (3.3:1). Only for a value that fails, a gap or clash in a drawing, a "?" that needs an answer, and the "n to fix" count. Never a program, never emphasis, never draft wording.
+RED `#CC746C` (3.3:1). Exception: in the logic view ("How it works") it is the highlight colour for lit parts and wires (J.B., 7 Nov). Everywhere else: only for a value that fails, a gap or clash in a drawing, a "?" that needs an answer, and the "n to fix" count. Never a program, never emphasis, never draft wording.
 
 ### Rules
 1. A key whenever two or more colours appear.
@@ -113,7 +113,7 @@ Pick the form by the job. No 3-D, no dual axes, no pie, no gradients.
 5. Every figure on a card is sourced (clause, file, "our arithmetic") in "Sources and assumptions", or shown as "?" in RED with a note saying what is missing.
 6. Say when a drawing is from a draft plan (status chip, e.g. "Draft plan · rule sheet v0").
 7. **Massing and program diagrams** (separations, program blocks): flat tint fills, **no outline** around a block (an outline reads as a wall). Each block named inside it in 13.5 px INK; when a block or room is too small to hold its name, the name goes off the drawing with a right-angled leader (J.B., 7 Nov). Only the thing the card is about gets a line (e.g. the 2 h separation, drawn along the shared edge). Rooms and walls appear only on cards that are about rooms.
-8. Leaders never cross a block to reach a label (J.B., 7 Nov, card 15).
+8. Leaders never cross a block to reach a label (J.B., 7 Nov, card 15). Exception on maps: a leader may cross background buildings, never the lot or another labelled item (J.B., 7 Nov, gate 3).
 9. **No jogs** (J.B., 7 Nov, card 10). A leader to a side label is one straight horizontal line: the label sits at the anchor's height. If labels would collide, move the anchor along its object, not the line. One 90° turn only for labels above or below the drawing. Never a staircase.
 10. **At most four leaders per drawing** (J.B., 7 Nov). Programs and other categories go in the key, never on leaders. Leaders are for one specific thing, mostly findings. Anything that can't take a straight leader goes in the panel list instead.
 11. Automatic check before any board is shown: zero jogs, zero leaders crossing a block, four leaders or fewer. A board that fails is not published.
