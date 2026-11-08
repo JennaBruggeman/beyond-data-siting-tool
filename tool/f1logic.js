@@ -2,17 +2,15 @@
    and opps.json (source texts, kinds); changes no part, value or register entry. Restyled to STYLE.md: stages as columns, parts as white boxes,
    today's accent colours kept for what is lit (#CC746C) and for links (#B5544B), the selected part with a 1.8 px INK border, the rest FAINT.
    A gap (trust 0 or not rated) is a dashed border and "?", not a colour. Template switch: Resident · Municipal · Engineering · Architecture · All,
-   filtered by each part's template tag as logic.js does. logic.json has no Municipal tag: the Municipal view shows the parts the Municipal cards read
-   (MUNI below, our list for Cowork to confirm), labelled as such. */
+   filtered by each part's template tag as logic.js does. Municipal: the parts tagged 'm' in logic.json (8 Nov 2026). */
 (function(){
 'use strict';
 const BD=window.BD; const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const RANK={resident:0,arch:1,full:2,arch_only:9};
 const TABS=[['resident','Resident'],['municipal','Municipal'],['full','Engineering'],['arch','Architecture'],['all','All']];
-/* Municipal: no tag in logic.json (gap). The parts its cards read, by card (our reading, to confirm): parcel and zone (city, parcel), zoning status (allowed),
-   envelope and floor area (height and floor area, storey heights), lot lines and yards are inside 'parcel'/'envelope', noise limit (noise by edge),
-   loading inside component_space (loading), plant on the roof (rooftop) */
-const MUNI=['parcel','zone','zoning_status','rezoning_price','envelope','floor_area','noise_limit','component_space','visibility','standoff'];
+/* Municipal: the parts tagged 'm' in logic.json (make_templates.py MUNI; Cowork's reply on municipal_logic_parts.md, 8 Nov 2026) */
+const MUNI_CARD={'Your city':['parcel','zone'],'Your parcel':['parcel','zone'],'Is a data centre allowed?':['zoning_status'],'Height and floor area':['envelope','floor_area'],'Yards by edge':['envelope'],
+ 'Noise limits by edge':['noise_limit'],'Storey heights, ground floor and street frontage':['storey_min'],'Loading':['loading_need'],'Rooftop equipment and screening':['roof_equipment_rule'],'Approval process':['rezoning_price']};
 /* parts lit by a card ("How this is worked out"), from logic.js's step lists where a card matches a step; the other cards light nothing yet */
 const CARD={ 'Size and cooling':'setup','Backup power':'setup','What fits':'fits','Heat':'heat','Electricity':'energy','Water':'water','Materials':'materials','Three options':'opts','Could become':'opps','Heat receivers nearby':'heat','People nearby':'social','Neighbours and views':'social' };
 const WORD=[[100,'arithmetic'],[90,'regulation, tariff or standard read directly'],[80,'government dataset'],[70,'peer-reviewed coefficient from another context'],[60,'derived with a stated assumption'],[50,'operator or industry claim'],[40,'proxy'],[20,'judged'],[0,'gap']]; /* CLAUDE.md §3 */
@@ -20,7 +18,7 @@ const word=q=>{ if(q==null) return 'not rated'; for(const [v,w] of WORD) if(q>=v
 let L=null, O=null, UP={}, ORDER={}; const S={tab:'full',sel:null,lit:[],label:''};
 const load=async()=>{ if(!L){ L=await fetch('logic.json').then(r=>r.json()); Object.keys(L.nodes).forEach((k,i)=>ORDER[k]=i); for(const [a,b] of L.edges) (UP[b]=UP[b]||[]).push(a); }
   if(!O) O=await fetch('opps.json').then(r=>r.json()).catch(()=>({sources:{},source_kinds:{}})); };
-const shown=k=>{ const t=L.nodes[k].t; if(S.tab==='all') return true; if(S.tab==='municipal') return MUNI.includes(k); if(t==='arch_only') return S.tab==='arch'; return RANK[t]<=RANK[S.tab]; };
+const shown=k=>{ const t=L.nodes[k].t; if(S.tab==='all') return true; if(S.tab==='municipal') return !!L.nodes[k].m; if(t==='arch_only') return S.tab==='arch'; return RANK[t]<=RANK[S.tab]; };
 function ancestors(ids){ const s=new Set(), st=[...ids]; while(st.length){ const x=st.pop(); if(s.has(x)) continue; s.add(x); (UP[x]||[]).forEach(p=>st.push(p)); } return s; }
 function visParents(id,V){ const out=new Set(), seen=new Set(), st=[...(UP[id]||[])]; while(st.length){ const x=st.pop(); if(seen.has(x)) continue; seen.add(x); if(V.has(x)) out.add(x); else (UP[x]||[]).forEach(p=>st.push(p)); } return out; }
 const wrap=(t,n)=>{ const w=String(t).split(/\s+/), out=['']; for(const x of w){ const c=out[out.length-1]; if((c+' '+x).trim().length>n&&c){ if(out.length===2){ out[1]=(out[1]+' '+x).trim(); continue; } out.push(x); } else out[out.length-1]=(c+' '+x).trim(); }
@@ -45,7 +43,7 @@ function srcList(ids){ if(!ids||!ids.length) return '<p class="f1l-none">No sour
   return `<ul class="f1l-src">${one(ids[0])}</ul>`+(ids.length>1?`<details class="f1l-more"><summary>More sources (${ids.length-1})</summary><ul class="f1l-src">${ids.slice(1).map(one).join('')}</ul></details>`:''); }
 function panel(){ if(!S.sel){ const t=TABS.find(x=>x[0]===S.tab)[1];
     return `<div class="chap">How it works</div><h2>${S.label?esc(S.label):'The logic under every card'}</h2><p class="lead">${S.label?'The parts this card is worked out from are lit. Click a part for its formula, trust and sources.':'One logic runs under all four workflows. Every part has a formula, a source and a trust rating. Click a part to see them.'}</p>`+
-      (S.tab==='municipal'?'<p class="f1l-flag">Municipal has no tag in the logic yet. These are the parts its cards read, our list for Cowork to confirm.</p>':'')+`<p class="f1l-note">${t}: ${diagram().n} parts shown.</p>`; }
+`<p class="f1l-note">${t}: ${diagram().n} parts shown.</p>`; }
   const k=S.sel, n=L.nodes[k], stg=(L.stages.find(s=>s[0]===n.s)||[])[1]||n.s, q=n.q, ins=(UP[k]||[]).filter(x=>L.nodes[x]);
   return `<div class="chap">${esc(stg)}</div><h2>${esc(n.n)}</h2>${n.w?`<p class="lead">${esc(n.w.charAt(0).toUpperCase()+n.w.slice(1))}.</p>`:''}
    ${S.lot?`<div class="f1l-hero"><div class="hl">On this lot (${esc(S.lot)})</div><div class="f1l-nv">not in the tool yet</div></div>`:''}
@@ -72,6 +70,6 @@ async function open(o){ o=o||{}; await load(); S.tab=o.tab||S.tab; S.sel=null; S
     W.addEventListener('keydown',e=>{ if(e.key==='Escape') W.remove(); const g=e.target.closest&&e.target.closest('g[data-k]'); if(g&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); S.sel=g.dataset.k; draw(); } }); }
   draw(); }
 /* the parts a card lights: logic.js's step list for the matching step */
-function cardIds(title){ const k=CARD[title]; return k&&BD.logic&&BD.logic.stepNodes?BD.logic.stepNodes(k):[]; }
-BD.f1logic={open,cardIds,MUNI};
+function cardIds(title,tab){ if(tab==='municipal') return MUNI_CARD[title]||[]; const k=CARD[title]; return k&&BD.logic&&BD.logic.stepNodes?BD.logic.stepNodes(k):[]; }
+BD.f1logic={open,cardIds};
 })();

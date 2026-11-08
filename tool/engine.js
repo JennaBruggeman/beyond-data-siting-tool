@@ -883,6 +883,6 @@ async function precView(){
 }
 /* sweep 20 Oct 2026: air-cooled halls get air-cooled chillers, not dry coolers (plant.js, sweep M31); every 'dry coolers' a user reads says which */
 BD.dryName=()=>{ const A=BD.S.answers; return (A.inside||'air')==='air'&&(A.outside||'dry')==='dry'?'air-cooled chillers':'dry coolers'; };
-BD.eng={R,NMIT,vZone,siteFacts,plantPerMW,coolUnits,equip,noiseLw,noiseCheck,noiseLevel:b=>NLEV.get(b)||null,calc,rng,f1,n0,n1,mathBox,tabBar,wireTabs,show3d,nearby,netsAt,loadRecv,badge,src,s3,rangeBar,state,roofArea,optionSet};
+BD.eng={R,NMIT,vZone,noiseLimitAt,noiseZones:{res:EDM_RES,mix:EDM_MIX},siteFacts,plantPerMW,coolUnits,equip,noiseLw,noiseCheck,noiseLevel:b=>NLEV.get(b)||null,calc,rng,f1,n0,n1,mathBox,tabBar,wireTabs,show3d,nearby,netsAt,loadRecv,badge,src,s3,rangeBar,state,roofArea,optionSet};
 BD.fitsView=fitsView; BD.recvView=recvView; BD.optionsView=optionsView; BD.tabView=tabView;
 })();

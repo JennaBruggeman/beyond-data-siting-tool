@@ -38,16 +38,22 @@ def typ(r, irr='irr'):
     if r['aspect'] <= 0.8: return 'wide_shallow'
     return 'regular'
 T = ['irregular', 'small', 'large', 'narrow_deep', 'wide_shallow', 'regular']
-for r in q: r['type'] = typ(r); r['type_full'] = typ(r, 'irr_full')
-assert all(r['type'] in T for r in q) and len({(r['city'], r['id']) for r in q}) == len(q)   # exactly one type per lot
+# not_a_site (Cowork notes 8 Nov 2026, J.B.): no frontage (no lot line classed front) or a framed part under 200 m²: flagged, not typed
+for r in q: r['nas'] = (r['frontage'] or 0) < 0.5 or r['partArea'] < 200
+OLD = {}
+try:
+    for row in csv.DictReader(open(os.path.join(root, 'checks', f'lot_types_{date}.csv'), encoding='utf-8')): OLD[(row['city'], row['key'])] = row['type']
+except FileNotFoundError: pass
+for r in q: r['type'] = '' if r['nas'] else typ(r); r['type_full'] = '' if r['nas'] else typ(r, 'irr_full')
+assert all(r['type'] in T or r['nas'] for r in q) and len({(r['city'], r['id']) for r in q}) == len(q)   # exactly one type per lot
 rd = lambda x, d=2: '' if x is None else round(x, d)
 cols = ['key', 'city', 'zone', 'subarea', 'status', 'address', 'area_m2', 'part_area_m2', 'multipart', 'frontage_m', 'n_street_edges', 'n_street_segments', 'corner', 'lane',
-        'depth_m', 'width_m', 'aspect', 'bbox_m2', 'irregularity', 'buildable_m2', 'buildable_depthlim_m2', 'buildable_w_m', 'buildable_d_m', 'height_m', 'ground_storey_m', 'upper_storey_m', 'type', 'no_rear_access']
+        'depth_m', 'width_m', 'aspect', 'bbox_m2', 'irregularity', 'buildable_m2', 'buildable_depthlim_m2', 'buildable_w_m', 'buildable_d_m', 'height_m', 'ground_storey_m', 'upper_storey_m', 'type', 'no_rear_access', 'not_a_site']
 with open(os.path.join(root, 'checks', f'lot_types_{date}.csv'), 'w', encoding='utf-8', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(cols)
     for r in sorted(q, key=lambda r: (r['city'], r['zone'], r['id'])):
         w.writerow([r['id'], r['city'], r['zone'], sub(r), r['status'], r['addr'], rd(r['area'], 1), rd(r['partArea'], 1), r['multipart'], rd(r['frontage']), r['nLines'], r['nStreet'], r['corner'], r['lane'],
-                    rd(r['depth']), rd(r['width']), rd(r['aspect'], 3), rd(r['bbox'], 1), rd(r['irr'], 3), rd(r['build'], 1), rd(r['dlim'], 1), rd(r['bw']), rd(r['bd']), rd(r['height'], 1), r['ground'] or '', r['upper'] or '', r['type'], r['nra']])
+                    rd(r['depth']), rd(r['width']), rd(r['aspect'], 3), rd(r['bbox'], 1), rd(r['irr'], 3), rd(r['build'], 1), rd(r['dlim'], 1), rd(r['bw']), rd(r['bd']), rd(r['height'], 1), r['ground'] or '', r['upper'] or '', r['type'], r['nra'], r['nas']])
 def f(x):
     return '–' if x is None else (f'{x:,.0f}' if abs(x) >= 100 else f'{x:.2f}')
 def rank(vals):
@@ -62,6 +68,16 @@ P('**Rules.** Types, first that applies: irregular (part area ÷ bounding rectan
   'All cut-offs are drawing choices (Cowork), except 853 m² (the smallest typology).\n')
 nv, ne = sum(r['city'] == 'van' for r in q), sum(r['city'] == 'edm' for r in q)
 P(f'Lots: {nv:,} Vancouver, {ne:,} Edmonton (I-3 sub-area B left out: 370 Prior St; {dup} lots listed in two tiles counted once, so Vancouver is not the 699 of the gate report). Not measured: {len(bad)}. Every lot has exactly one type.\n')
+nas = [r for r in q if r['nas']]
+P(f"**Not a site** (flag, not a type; Cowork notes 8 Nov): {sum(r['city']=='van' for r in nas):,} Vancouver, {sum(r['city']=='edm' for r in nas):,} Edmonton. "
+  f"No frontage (no lot line classed front): {sum((r['frontage'] or 0)<0.5 for r in q):,}; framed part under 200 m²: {sum(r['partArea']<200 for r in q):,}; both: {sum((r['frontage'] or 0)<0.5 and r['partArea']<200 for r in q):,}. "
+  f"The note's 161 counts the full lot area (area_m2 under 200: {sum(r['area']<200 for r in q):,}); this file uses the framed part, as the note says (question to Cowork).\n")
+if OLD:
+    P('| Type | Vancouver before | Vancouver now | Edmonton before | Edmonton now |\n|---|---|---|---|---|')
+    for k in T + ['']:
+        b = lambda c: sum(1 for (cc, _), v in OLD.items() if cc == c and v == k); n = lambda c: sum(1 for r in q if r['city'] == c and r['type'] == k)
+        P(f"| {k or 'not a site (no type)'} | {b('van'):,} | {n('van'):,} | {b('edm'):,} | {n('edm'):,} |")
+    P('')
 t = collections.Counter((r['city'], r['type']) for r in q)
 P('| Type | Vancouver | Edmonton | of which corner (Van / Edm) | no rear access (Van / Edm) |\n|---|---|---|---|---|')
 for k in T:

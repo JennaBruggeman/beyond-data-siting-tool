@@ -85,7 +85,7 @@ BD.plant={
     for(let v=m.v[0]+0.25; v<=m.v[1]-0.25+1e-9; v+=0.5){ let k=0; for(; k<=60; k++){ const [x,y]=F.toW(m.plantYardStart+m.dir*k*0.05,v); if(BD.pip(x,y,lotR)) break; } if(k<=60) skew=Math.max(skew,k*0.05); }
     P.skew=skew; P.endExtra=s.g&&gt&&gt.pl!=null?Math.max(0,endD(s.g)-s.g.wall[0]):0; /* rows of sets start this much further in at each end */
     for(const [k,n] of [[s.k,P.coolYard],[s.g,P.genYard]]){ if(!n||!k) continue; let d=rowDepth(k,n); if(d!=null&&k===s.g&&gt&&gt.pl!=null&&!m.loading){ const rearY=Math.abs(m.plantYardStart-(m.dir<0?F.L/2:-F.L/2)); d+=Math.max(0,gt.pl-rearY-k.wall[1]); } if(d==null){ P.short+=`The lot is too narrow for a ${k.L} m ${k.name.replace(/s$/,'')} across it. `; continue; } depth+=d; }
-    /* 7 Nov 2026 (J.B.): trucks must reach the inside dock (Vancouver Parking By-law s. 5.4.3: 'unobstructed access by vehicles to all off-street loading
+    /* 7 Nov 2026 (J.B.): trucks must reach the inside dock (Vancouver Parking By-law s. 5.4.1: 'unobstructed access by vehicles to all off-street loading
        spaces by means of a minimum 6.1 metre wide manoeuvring aisle … from any lane abutting the site, or from a street where … no lane is present';
        Edmonton 20001 s. 5.80 7.1.1, 7.1.3 give no aisle width, so Vancouver's 6.1 m is used there too, ?). Where a lane or street is on the rear line,
        a straight corridor runs from it to the dock and the units sit beside it; otherwise a 6.1 m truck lane runs along the building's rear face, the

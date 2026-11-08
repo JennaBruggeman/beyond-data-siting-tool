@@ -36,6 +36,29 @@
    ],
    "why": "where: the one thing a resident always gives"
   },
+  "loading_need": {
+   "tier": "arch",
+   "parties": [
+    "city",
+    "neighbours"
+   ],
+   "why": "how many loading spaces the zone asks for"
+  },
+  "roof_equipment_rule": {
+   "tier": "arch",
+   "parties": [
+    "city",
+    "neighbours"
+   ],
+   "why": "what may stand on the roof above the height limit"
+  },
+  "storey_min": {
+   "tier": "arch",
+   "parties": [
+    "city"
+   ],
+   "why": "the lowest storey heights the zone allows"
+  },
   "start_case": {
    "tier": "resident",
    "parties": [
@@ -2719,6 +2742,18 @@
    [
     "arch_ratios",
     "size"
+   ],
+   [
+    "loading_need",
+    "size"
+   ],
+   [
+    "roof_equipment_rule",
+    "test"
+   ],
+   [
+    "storey_min",
+    "size"
    ]
   ],
   "edges": [
@@ -4101,12 +4136,32 @@
    [
     "transformers",
     "arch_ratios"
+   ],
+   [
+    "zone",
+    "loading_need"
+   ],
+   [
+    "floor_area",
+    "loading_need"
+   ],
+   [
+    "zone",
+    "roof_equipment_rule"
+   ],
+   [
+    "envelope",
+    "roof_equipment_rule"
+   ],
+   [
+    "zone",
+    "storey_min"
    ]
   ]
  },
  "resident_count": 42,
- "full_count": 202,
- "arch_count": 135,
+ "full_count": 205,
+ "arch_count": 138,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {

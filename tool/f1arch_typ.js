@@ -6,13 +6,13 @@
 const BD=window.BD, C=BD.f1cards, K=C.K, esc=C.esc, T='architecture', n0=C.n0, n1=C.n1, q=C.q;
 const CHIP='Draft plan · rule sheet v0', FONT='IBM Plex Sans,system-ui,sans-serif';
 if(!document.getElementById('f1c-typ')){ const st=document.createElement('style'); st.id='f1c-typ'; st.textContent=`
-.f1c-typ-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;width:100%;max-width:900px}
-.f1c-typ-tile{border:1px solid ${K.rule};background:#fff;padding:14px 16px 12px;display:flex;flex-direction:column;gap:6px;min-height:236px}
+.f1c-typ-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;width:100%;max-width:900px}
+.f1c-typ-tile{border:1px solid ${K.rule};background:#fff;padding:14px 16px 12px;display:flex;flex-direction:column;gap:6px;min-height:0}
 .f1c-typ-tile.on{border:1.8px solid ${K.ink}}
 .f1c-typ-tile.off{color:${K.faint};border-style:dashed}
 .f1c-typ-tile .h{font-size:15px;color:${K.ink}}
 .f1c-typ-tile.off .h{color:${K.mute}}
-.f1c-typ-tile .art{height:118px;display:flex;align-items:center;justify-content:center}
+.f1c-typ-tile .art{height:88px;display:flex;align-items:center;justify-content:center}
 .f1c-typ-tile .s{font-size:12.5px;color:${K.ink2};line-height:1.45}
 .f1c-typ-tile .n{font-size:11.5px;color:${K.mute};line-height:1.45}
 .f1c-typ-tile .n.red,.f1c-typ-tile .s.red{color:${K.red}}
@@ -67,11 +67,11 @@ C.add(T,'Pick a typology',{chip:CHIP,async build(x){
   const city=x.city, L=typs(), cover=P.ratio&&P.ratio.cover, ok=C.allowed(city,x.key), cat=CAT();
   const picks=C.EXAMPLE_PICKS.map(id=>cat.byId[id]&&String(cat.byId[id].name).split(' (')[0]).filter(Boolean);
   const tiles=L.map((t,i)=>{ const m=m2of(t,city), isEx=t.id==='emergency_hub', fits=ok&&m!=null&&cover!=null&&m<=cover, why=!ok?`not allowed here: ${x.status.word==='?'?'zone has no data-centre row':'zone '+x.zone}`:(m!=null&&cover!=null&&m>cover?`needs ${n0(m)} m² of ground, the lot's building can cover ${n0(cover)} m²`:'');
-    const art=isEx?planSVG(P,{W:210,H:112,level:0,pad:4,aria:'Plan of the Emergency hub on this lot'}).svg:`<span class="n">no layout drawing in the tool</span>`;
+    const art=isEx?planSVG(P,{W:210,H:84,level:0,pad:4,aria:'Plan of the Emergency hub on this lot'}).svg:`<span class="n">no layout drawing in the tool</span>`;
     return `<div class="f1c-typ-tile ${isEx&&fits?'on':fits?'':'off'}"><div class="art">${art}</div><div class="h">${esc(t.name)}</div>
       <div class="s">${isEx?esc(picks.join(', ').toLowerCase()):'?'}</div>
       <div class="n">minimum ground ${m==null?'<b class="f1c-q">?</b>':n0(m)+' m²'}${fits?` · fits (${n0(cover)} m² can be covered)`:''}</div>${why?`<div class="n red">${esc(why)}</div>`:''}</div>`; }).join('');
-  const more=`<div class="f1c-typ-tile off"><div class="art"><span class="n">?</span></div><div class="h">Other typologies</div><div class="s">?</div><div class="n"><b class="f1c-q">?</b> not in the tool yet: the library holds ${L.length} so far</div></div>`;
+  const more=['Community pool','Heat cascade','Warm bath','Aquaponics','Food hub','Conservatory','Shelter + laundry'].map(n=>`<div class="f1c-typ-tile off"><div class="h">${esc(n)}</div><div class="n">not in the tool yet</div></div>`).join('');
   const draw=`<div class="f1c-typ-wrap"><div class="f1c-typ-tiles">${tiles}${more}</div>
     <div class="f1c-key" style="max-width:900px"><span><i style="background:${K.fillHall}"></i>data centre</span><span><i style="background:${K.fillPub}"></i>public programs</span><span><i style="background:${K.fillClin}"></i>clinic</span><span class="f1c-note">Plans show the ground storey as Arrange places it on this lot. The picker is not built; the Emergency hub is the typology the tool uses.</span></div></div>`;
   const ex=L.find(t=>t.id==='emergency_hub')||L[0], em=m2of(ex,city);
@@ -80,12 +80,12 @@ C.add(T,'Pick a typology',{chip:CHIP,async build(x){
     rows:[['In the tool now',ex?ex.name:'?'],['Programs',picks.join(', ')||'?'],['Data centre here',x.status.word],['Building can cover',cover==null?q():`${n0(cover)} m²`],['Typology picker',q('not built yet')]],
     more:[['What the minimum ground does',`<p>Before any program is picked, Ratios holds back the chosen typology's minimum ground; with none chosen, the smallest in the library (arch.json, “typologies”). Add-ons are never held back.</p>`]],
     src:[`Typology library and minimum ground: tool/data/arch.json “typologies” (${srcTxt(ex&&ex.m2&&ex.m2.src)}; ${esc(ex&&ex._note||'')}).`,'Fit test: minimum ground against the building cover Ratios allows on this lot (BD.archTest, P.ratio.cover); our arithmetic.','Allowed here: tool/data/zones.json.','Programs: Arrange’s example picks (tool/arch_programs.json).'],
-    missing:['the other typologies of the library (not in tool/data/arch.json yet, so no tiles, sizes or fit tests)','typology picker (Phase D)']}; }});
+    missing:['the other seven typologies (named in MASTER_PLAN Phase B order; not in tool/data/arch.json, so no sizes or fit tests)','typology picker (Phase D)']}; }});
 
 /* ---------- 10 Variant and add-ons ---------- */
 C.add(T,'Variant and add-ons',{chip:CHIP,async build(x){
   const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'};
-  const cat=CAT(), city=x.city, rf=cat.byId.refuge, picks=BD.arch.picks||[], rq=picks.find(p=>p.id==='refuge'), cur=rq&&rq.opt, opts=(rf&&rf.options)||[];
+  const cat=CAT(), city=x.city, rf=cat.byId.refuge, picks=BD.arch.picks||[], rq=picks.find(p=>p.id==='refuge'), cur=rq&&rq.opt, opts=((rf&&rf.options)||[]).filter(o=>o.id!=='own_building');
   const items=planItems(P), lv=[...(P.levels||[0])], up=lv.filter(l=>l>0), W=330,H=250;
   const a=planSVG(P,{W,H,level:0,labels:true,street:true,frame:items,aria:'Ground storey of the example layout'});
   const b=up.length?planSVG(P,{W,H,level:up[0],labels:true,street:true,frame:items,aria:'Upper storeys of the example layout'}):null;
@@ -142,7 +142,12 @@ C.add(T,'The numbers',{chip:CHIP,async build(x){
   const svg=`<svg viewBox="0 0 ${BWd} 124" width="${BWd}" height="124" font-family="${FONT}" role="img" aria-label="Floor area by use, one bar, all storeys, against the envelope this lot allows"><text x="0" y="14" font-size="15" fill="${K.ink}">Floor area by use · ${n0(tot)} m²</text>${grid}${bar}${lim}</svg>`;
   const tbl=all.map(p=>`<i style="background:${p.c}"></i><span>${esc(p.n)}</span><span class="r">${n0(p.v)} m²</span><span class="r">${n0(100*p.v/tot)} %</span>`).join('');
   const heatMade=B.heat&&B.heat.avail, need=B.heat&&B.heat.need;
-  const heatM=need&&heatMade?C.meter({l:'Heat used, against heat made',v:need[1],lim:heatMade[0],pass:need[1]<=heatMade[0],unit:'MWh/yr',cap:`${n0(need[0])}–${n0(need[1])} used · ${n0(heatMade[0])}–${n0(heatMade[1])} made, MWh/yr`,src:'budgets'}):'';
+  let heatM=''; if(need&&heatMade){ const hm=heatMade, u=need[1], W2=940, sc=v=>v/hm[1]*(W2-2), uw=Math.max(2,sc(u));
+    heatM=`<svg viewBox="0 0 ${W2} 92" width="${W2}" height="92" font-family="${FONT}" role="img" aria-label="Heat used by the programs against heat made, one scale"><text x="0" y="14" font-size="15" fill="${K.ink}">Heat used and heat made · MWh a year</text>
+      <rect x="1" y="26" width="${sc(hm[0]).toFixed(1)}" height="16" rx="2" fill="${K.dcSup}"><title>made, low end: ${n0(hm[0])} MWh/yr</title></rect><rect x="${(sc(hm[0])+2).toFixed(1)}" y="26" width="${Math.max(0,sc(hm[1])-sc(hm[0])-2).toFixed(1)}" height="16" rx="2" fill="${K.fillSup}"><title>made, up to the high end: ${n0(hm[1])} MWh/yr</title></rect>
+      <rect x="1" y="26" width="${uw.toFixed(1)}" height="16" rx="2" fill="${K.ink}"><title>used by the programs: ${n0(need[0])}–${n0(need[1])} MWh/yr</title></rect>
+      <text x="1" y="62" font-size="12" fill="${K.ink2}">used ${n0(need[0])}–${n0(need[1])}</text><text x="${sc(hm[0]).toFixed(1)}" y="62" text-anchor="end" font-size="12" fill="${K.ink2}">made, low end ${n0(hm[0])}</text><text x="${W2-1}" y="62" text-anchor="end" font-size="12" fill="${K.ink2}">made, high end ${n0(hm[1])}</text>
+      <g font-size="11.5" fill="${K.mute}"><rect x="1" y="74" width="12" height="12" rx="2" fill="${K.ink}"/><text x="19" y="84">used by the programs</text><rect x="170" y="74" width="12" height="12" rx="2" fill="${K.dcSup}"/><text x="188" y="84">made, low end</text><rect x="300" y="74" width="12" height="12" rx="2" fill="${K.fillSup}"/><text x="318" y="84">made, up to the high end</text></g></svg>`; }
   const stats=`<div class="f1c-typ-stats"><div><div class="l">Data centre</div><div class="v">${share==null?'?':n0(share)}<span>%</span></div></div><div><div class="l">IT load tested</div><div class="v">${mwT==null?'?':n1(mwT)}<span>MW</span></div></div></div>`;
   const draw=`<div class="f1c-typ-wrap"><div style="width:100%;max-width:940px">${svg}</div><div class="f1c-typ-row"><div class="f1c-typ-tbl">${tbl}</div>${stats}</div><div style="width:100%;max-width:940px;margin-top:14px">${heatM}</div></div>`;
   const ex=pl.exitSep||[], meters=ex.map(e=>({l:`Exit doors apart, ${String(e.block).toLowerCase().replace(/ \(.*/,'')}`,v:e.apart_m,lim:e.need_m,pass:e.ok,unit:'m',cap:`${n1(e.apart_m)} m apart · needed ${n1(e.need_m)} m`,src:'NBC 3.4.2.3'}));

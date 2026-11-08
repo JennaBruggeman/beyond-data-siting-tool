@@ -12,9 +12,16 @@ H = os.path.dirname(os.path.abspath(__file__))
 D = json.load(open(os.path.join(H, 'diagram_data.json')))
 # (tier, parties, reason). tier = lowest tier that shows the node.
 R = 'resident'; C = 'arch'; F = 'full'  # C kept as the name of the middle tag (was 'community' to 3 Nov 2026)
+# Municipal template (8 Nov 2026, Cowork's reply on municipal_logic_parts.md, J.B.): a second tag beside the tier, since a node has one tier.
+# The parts the Municipal cards read; shown by the logic view's Municipal tab (logic.json 'm': 1). Limits only, never design performance.
+MUNI = {'parcel', 'zone', 'zoning_status', 'rezoning_price', 'envelope', 'floor_area', 'noise_limit', 'loading_need', 'roof_equipment_rule', 'storey_min'}
 T = {
  # inputs
  'parcel': (R, 'host city neighbours', 'where: the one thing a resident always gives'),
+ # 8 Nov 2026: Municipal and Architecture (Cowork's reply on municipal_logic_parts.md)
+ 'loading_need': (C, 'city neighbours', 'how many loading spaces the zone asks for'),
+ 'roof_equipment_rule': (C, 'city neighbours', 'what may stand on the roof above the height limit'),
+ 'storey_min': (C, 'city', 'the lowest storey heights the zone allows'),
  'start_case': (R, 'host operator', 'new, shared, retrofit or leased: assumed for residents, shown and changeable'),
  'receivers': (C, 'receiver', 'who could take the heat'), 'receiver_temp': (F, 'receiver', 'engineering input'),
  'receptors': (C, 'neighbours', 'who is close enough to hear it'), 'zone': (R, 'city neighbours', 'what the land is zoned for'),
@@ -208,7 +215,7 @@ _L = {'nodes': {}, 'edges': [[e['from'], e['to']] for e in _D['edges']], 'stages
 for n in _D['nodes']:
     _L['nodes'][n['id']] = {'n': n['name'], 's': n['stage'], 'k': n.get('kind', 'quantity'), 'f': _cut(n.get('formula', ''), 300), 'c': _cut(n.get('coef', ''), 1500),
                             'u': n.get('unit', ''), 'q': n.get('conf'), 'st': n.get('status', ''), 'src': n.get('sources', []), 'st2': _cut(n.get('source_text', ''), 300),
-                            't': T[n['id']][0], 'p': T[n['id']][1].split(), 'w': T[n['id']][2]}
+                            't': T[n['id']][0], 'p': T[n['id']][1].split(), 'w': T[n['id']][2], **({'m': 1} if n['id'] in MUNI else {})}
 json.dump(_L, open(os.path.join(H, '..', 'tool', 'logic.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
 out['drivers'] = out_drivers
 for on, rows in out_drivers['by_result'].items():

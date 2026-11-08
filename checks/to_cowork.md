@@ -98,3 +98,13 @@ Questions:
 3. Neighbours and views: leaders cross building footprints, against STYLE.md rule 8. Allow on maps, or move the labels?
 4. Drawing styles: keep 3-D as "?", or allow a still from the tool's own renderer?
 
+## 8 Nov 2026 — Job F1 step 3a: Municipal cards, gate (Code)
+
+All 12 Municipal cards are rule diagrams (no massing) and draw on both lots with no errors. Screenshots: checks/f1/ (Vancouver only; Edmonton kept local, Altalis lots).
+
+Folded in: card 4 policy read (draft: J.B. to confirm; designation ?); noise limits read from engine.js (one export line, nothing moved); Municipal tag and three new parts in the logic (register patch); Vancouver LiDAR datum (register, grade.json, card 7, V339_ground.json); not_a_site flag (455 lots); clause fixes (5.4.1; Health Care Office s. 2; office row already 5.2.9). Golden: only grade.datum moved on the four Vancouver lots (re-based); Architecture unchanged.
+
+Item 8: 1330 Glen Dr (22260652, 0.4 MW): the massing starts at grade, but the ground storey holds only the loading dock and "other uses"; the hall starts at 6 m. The dock is the one data-centre support room at grade on I-2 and I-3, and fails the strict reading. No layout change.
+
+Engineering: cooling card as you set it; Three options removed with it.
+

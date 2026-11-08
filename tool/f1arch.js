@@ -8,6 +8,7 @@ const META={}; /* city overview (zone polygons, City open data) as the map uses 
 async function meta(city){ if(META[city]) return META[city]; const m=await BD.getJSON(`tiles/${city}/meta.json`), Q=m.Q||1;
   const dec=a=>{ const r=new Float64Array(a.length); let x=0,y=0; for(let i=0;i<a.length;i+=2){ x+=a[i]; y+=a[i+1]; r[i]=x/Q; r[i+1]=y/Q; } return r; };
   m.ovd=m.overview.map(([zi,a])=>({z:m.zones[zi],r:dec(a)})); delete m.overview; return META[city]=m; }
+const LOTS_A1={van:696,edm:5232}; /* checks/lot_types_2026-11-07.csv, rows per city (job A1, frozen 7 Nov 2026) */
 const zkey=(city,z)=>city==='van'?String(z||'').trim():String(z||'').trim().split(/\s+/)[0].toUpperCase();
 
 /* A01 Your city: both cities at the same scale, streets light, the zones where a data centre is allowed in DC blue (§3b: no lot outlines) */
@@ -21,9 +22,10 @@ C.add(T,'Your city',{async build(x){
   const draw=`<div class="f1c-two">${out.map(o=>`<figure><figcaption>${o.city==='van'?'Vancouver':'Edmonton'}</figcaption>${o.svg}</figure>`).join('')}</div>
    <div class="f1c-key"><span><i style="background:${K.dc}"></i>zones where a data centre is allowed</span><span><i class="ln" style="border-color:${K.rule}"></i>streets</span><span class="f1c-note">Edmonton and Vancouver drawn to fit; lot outlines are not shown (Edmonton's are licensed for course use).</span></div>`;
   return {draw,lead:'The tool covers two cities to the same depth. Pick one to start; the same design can be compared in the other city at the end.',
-    rows:[['Vancouver, lots where it is allowed',C.q()],['Edmonton, lots where it is allowed',C.q()],['Allowed means','permitted, conditional or discretionary']],
-    src:['Zones: City of Vancouver and City of Edmonton zoning, as the tool’s city overview (tiles/<city>/meta.json); allowed = the zones listed in tool/data/zones.json (permitted, conditional or discretionary).','Streets: City of Vancouver and City of Edmonton street centrelines (tool/streets_<city>.json).'],
-    missing:['lots allowed per city (counted in checks/lot_types_2026-11-07.csv: Vancouver 696, Edmonton 5,232; the tool does not count them)']}; }});
+    /* lots per city: counted in job A1 (checks/lot_types_2026-11-07.csv, one row per lot in a zone where a data centre is allowed; gate 3, J.B. 7 Nov) */
+    rows:[['Vancouver, lots where it is allowed',LOTS_A1.van.toLocaleString('en-CA')],['Edmonton, lots where it is allowed',LOTS_A1.edm.toLocaleString('en-CA')],['Allowed means','permitted, conditional or discretionary']],
+    src:['Zones: City of Vancouver and City of Edmonton zoning, as the tool’s city overview (tiles/<city>/meta.json); allowed = the zones listed in tool/data/zones.json (permitted, conditional or discretionary).','Streets: City of Vancouver and City of Edmonton street centrelines (tool/streets_<city>.json).','Lots where a data centre is allowed: checks/lot_types_2026-11-07.csv (job A1, 7 Nov 2026): every lot in the tool’s lot files in a zone listed in tool/data/zones.json, I-3 sub-area B left out, each lot counted once.'],
+    }; }});
 
 /* A02 Your parcel: the lots around the picked lot, those where a data centre is allowed tinted, buildings light, the lot outlined with one straight leader */
 C.add(T,'Your parcel',{async build(x){

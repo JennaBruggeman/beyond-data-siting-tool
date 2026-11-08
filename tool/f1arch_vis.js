@@ -153,6 +153,17 @@ C.add(T,'Program diagram',{chip:CHIP,async build(x){ const P=await x.arch(); if(
     src:['Blocks and storeys: the tool’s placement P (BD.archTest.place; data centre by BD.archTest.dcPieces, programs from P.boxes), Emergency hub example: refuge side by side, warming shelter, clinic; draft plan, rule sheet v0.','Programs asked for: BD.archTest.budgets(P).space.prog. Net in the plan: BD.plan.build(P).programs[].net. Floors of pieces: dcPieces m2 (our arithmetic).','Flags: BD.archTest.rules(P); each carries its own sources in the list.','Height limit: the zone (BD.model, P.s.H).'],
     missing:[]}; }});
 
+/* the tool's own 3-D view of Arrange, read-only: the old flow draws it behind the cards, a still is taken from its renderer, accent red drawn in INK for the still only, then restored */
+let STILL={key:null,url:null};
+async function still3d(P){ const key=BD.S.sel.city+':'+BD.S.sel.id; if(STILL.key===key) return STILL.url; const wait=ms=>new Promise(r=>setTimeout(r,ms)), keepT=BD.tier&&BD.tier();
+  try{ if(BD.setTier&&keepT!=='arch') BD.setTier('arch'); await BD.arch.ready; BD.flow.to('arat'); await wait(1200); BD.flow.to('aarr'); await wait(3500);
+    const R=BD.scene3d&&BD.scene3d.rig&&BD.scene3d.rig(), T=window.THREE; if(!R||!R.scene||!R.ren||!T) return null;
+    const red=new T.Color('#CC746C'), ink=new T.Color('#16181B'), saved=[]; R.scene.traverse(o=>{ const ms=o.material?(Array.isArray(o.material)?o.material:[o.material]):[]; ms.forEach(m=>{ if(m&&m.color&&Math.abs(m.color.r-red.r)+Math.abs(m.color.g-red.g)+Math.abs(m.color.b-red.b)<0.12){ saved.push([m,m.color.clone()]); m.color.copy(ink); m.needsUpdate=true; } }); });
+    let url=null; try{ R.ren.render(R.scene,R.cam); url=R.ren.domElement.toDataURL('image/png'); } finally{ saved.forEach(([m,c])=>{ m.color.copy(c); m.needsUpdate=true; }); try{ R.ren.render(R.scene,R.cam); }catch(e){} }
+    if(url&&url.length>2000){ STILL={key,url}; return url; } return null; }
+  catch(e){ console.warn('3-D still',e); return null; }
+  finally{ if(keepT&&BD.setTier&&keepT!=='arch') BD.setTier(keepT); } }
+
 /* ================= 19 Drawing styles ================= */
 function axon(G,o){ const k=o.k, zk=k*0.9, c=0.866*k, s5=0.5*k, SXa=(d,xx)=>(xx+d)*c, SYa=(d,xx)=>(xx-d)*s5; const lv=G.levels, gapY=o.gap, polys=[]; let body=''; const boxes=[];
   lv.forEach((z,li)=>{ const dy=-li*gapY; G.items.filter(i=>Math.abs(i.z-z)<0.06).sort((a,b)=>((b.d0+b.d1)-(b.x0+b.x1))-((a.d0+a.d1)-(a.x0+a.x1))).forEach(i=>{ const th=Math.min(i.h,6)*zk, f=FAMC[i.fam], P4=(d,xx)=>[SXa(d,xx),SYa(d,xx)+dy];
@@ -162,7 +173,7 @@ function axon(G,o){ const k=o.k, zk=k*0.9, c=0.866*k, s5=0.5*k, SXa=(d,xx)=>(xx+
     body+=`<polygon points="${pt(front)}" fill="${mix(f,0.10)}"/><polygon points="${pt(right)}" fill="${mix(f,0.2)}"/><polygon points="${pt(top)}" fill="${f}"/>`; boxes.push({li,pts:[...top,...front,...right]});
     [top,front,right].forEach(a=>polys.push({o:'L'+li,pts:a})); }); });
   return {body,polys,SXa,SYa}; }
-C.add(T,'Drawing styles',{chip:CHIP,async build(x){ const P=await x.arch(); if(!P) return noP(); const G=geom(P), fl=flagIds(P), W=960;
+C.add(T,'Drawing styles',{chip:CHIP,async build(x){ const P=await x.arch(); if(!P) return noP(); const G=geom(P), fl=flagIds(P), W=960, still=await still3d(P);
   /* plan: the whole site, every block at its footprint, plant yard in grey */
   const pp=plan(G,{w:560,h:420,items:G.items,plant:true,fs:13,noNames:false}), planSvg=`<svg viewBox="0 0 560 420" width="560" height="420" font-family="${FONT}" role="img" aria-label="Plan of the site: every block at its footprint">${pp.svg}${C.scaleBar(14,396,10,pp.k,'10 m')}</svg>`;
   const sec=section(G,{W,H:340,lab:200,labL:200,gap:34,flags:fl,flagWants:Object.keys(fl).map(id=>{ const b=(P.boxes||[]).find(b=>b.id===id); return b?{o:id,t:short(b.p.name),d:'to check (?)',red:true}:null; }).filter(Boolean)});
@@ -181,15 +192,15 @@ C.add(T,'Drawing styles',{chip:CHIP,async build(x){ const P=await x.arch(); if(!
    ${pane('plan',`<div style="display:flex;justify-content:center">${planSvg}</div><p class="f1c-note" style="text-align:center;margin:6px 0 0">Every block at its footprint, street at the bottom; the plant yard in grey. One storey at a time is on the Program diagram card.</p>`)}
    ${pane('section',secSvg,true)}
    ${pane('exploded',`<div style="display:flex;justify-content:center">${exSvg}</div>`,true)}
-   ${pane('3d',`<p class="f1c-vis-q"><b class="f1c-q">?</b> The tool’s own 3-D view (scene3d.js) is not captured here yet.<br><span class="f1c-note">It draws into the full-page viewer, which this card does not open. The tool’s 3-D views of the plant and the neighbours are on the Neighbours and views card.</span></p>`,true)}
+   ${pane('3d',still?`<div style="display:flex;flex-direction:column;align-items:center;gap:6px"><img src="${still}" alt="The tool's own 3-D view of the arrangement on the lot" style="max-width:100%;max-height:520px;border:1px solid ${K.hair}"><span class="f1c-note">tool's 3-D view, rule sheet v0</span></div>`:`<p class="f1c-vis-q"><b class="f1c-q">?</b> The tool's 3-D view could not be captured this time.</p>`,true)}
    ${keyHtml(famsOf(G),`<span><i style="background:${K.plant};border-color:${K.plant}"></i>plant yard (plan only)</span>`)}</div>`;
-  return {draw,lead:'The same scheme in the styles the tool can draw today: plan, section and an exploded view, all from one placement. Use the switch above the drawing. The tool’s own 3-D view is not on this card yet.',
+  return {draw,lead:'The same scheme in the styles the tool can draw today: plan, section and an exploded view, all from one placement. Use the switch above the drawing. The 3-D pane is a still from the tool’s own renderer.',
     hero:[{v:String(G.levels.length),l:'storeys, by floor level'},{v:n1(P.s.H),u:'m',l:'height limit'}],
-    rows:[['Styles drawn','plan · section · exploded'],['3-D massing (the tool’s scene)',q('not captured on this card')],['Storeys, with their height',G.levels.map(z=>n0(z)+' m').join(' · ')]],
+    rows:[['Styles drawn','plan · section · exploded'],['3-D massing (the tool’s scene)',still?'still from the tool':q('could not be captured')],['Storeys, with their height',G.levels.map(z=>n0(z)+' m').join(' · ')]],
     more:[['What each style is for',`<p>Plan: where blocks stand on the lot. Section: how they stack against the height limit. Exploded: which program sits on which storey.</p>`],
       ['The exploded view',`<p>Storeys are pulled apart for reading only; blocks keep their footprints and, for a block over 6 m, its slab is drawn 6 m thick.${nmiss>0?` ${nmiss} storey label${nmiss>1?'s':''} could not take a straight leader and ${nmiss>1?'are':'is'} left off; the storeys are listed in the panel.`:''}</p>`]],
-    src:['Plan, section and exploded view: drawn here from the tool’s placement P (BD.archTest.place, dcPieces) for the example lot; draft plan, rule sheet v0.','Height limit: BD.model (zone), P.s.H.','Plant yard: BD.model().plant (the tool’s plant layout).'],
-    missing:['3-D massing as the tool’s own scene (scene3d.js draws into the full-page #v3d viewer; a still needs the viewer opened, which this card does not do)','heat-flow style (see card 17)']}; }});
+    src:['3-D pane: a still from the tool2019s own 3-D renderer (scene3d.js, Arrange step), read-only; lot line and outline accent red redrawn in ink for the still only.','Plan, section and exploded view: drawn here from the tool’s placement P (BD.archTest.place, dcPieces) for the example lot; draft plan, rule sheet v0.','Height limit: BD.model (zone), P.s.H.','Plant yard: BD.model().plant (the tool’s plant layout).'],
+    missing:(still?[]:['3-D still from the tool’s scene (capture failed)']).concat(['heat-flow style (see card 17)'])}; }});
 
 /* ================= 20 Compare ================= */
 const LOTS={van:{tile:'1_1',id:'63819485',name:'Vancouver'},edm:{tile:'-1_1',id:'146402',name:'Edmonton'}}, CACHE={};

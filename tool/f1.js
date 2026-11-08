@@ -66,7 +66,7 @@ async function loadLot(city){ const S=LOTS[city]; V.where='…'; V.ready=false; 
 const titleCase=s=>String(s).toLowerCase().replace(/\b([a-z])/g,c=>c.toUpperCase()).replace(/\b(\d+)(St|Nd|Rd|Th)\b/g,(m,n,x)=>n+x.toLowerCase()).replace(/\b(Nw|Ne|Sw|Se)\b/g,m=>m.toUpperCase());
 function viewer(id){ V.t=TPL.find(x=>x.id===id); V.i=0; let W=document.getElementById('f1v'); if(!W){ W=document.createElement('div'); W.id='f1v'; W.setAttribute('role','dialog'); W.setAttribute('aria-modal','true'); document.body.appendChild(W);
     W.addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; const d=b.dataset;
-      if(d.x!=null){ W.remove(); return; } if(d.how){ const c=V.t.cards[V.i]; if(BD.f1logic) BD.f1logic.open(d.how==='all'?{tab:V.t.tab}:{tab:V.t.tab,label:c.t,ids:BD.f1logic.cardIds(c.t),lot:V.where}); return; } if(d.city){ if(d.city!==V.city){ V.city=d.city; loadLot(V.city); } return; }
+      if(d.x!=null){ W.remove(); return; } if(d.how){ const c=V.t.cards[V.i]; if(BD.f1logic) BD.f1logic.open(d.how==='all'?{tab:V.t.tab}:{tab:V.t.tab,label:c.t,ids:BD.f1logic.cardIds(c.t,V.t.tab),lot:V.where}); return; } if(d.city){ if(d.city!==V.city){ V.city=d.city; loadLot(V.city); } return; }
       if(d.to!=null){ V.i=+d.to; draw(); return; } if(d.chap!=null){ V.i=V.t.cards.findIndex(c=>c.chap===d.chap); draw(); return; }
       if(d.step==='back'&&V.i>0){ V.i--; draw(); } if(d.step==='next'&&V.i<V.t.cards.length-1){ V.i++; draw(); } });
     document.addEventListener('keydown',e=>{ if(!document.getElementById('f1v')) return; if(e.key==='Escape') document.getElementById('f1v').remove(); if(e.key==='ArrowRight'&&V.i<V.t.cards.length-1){ V.i++; draw(); } if(e.key==='ArrowLeft'&&V.i>0){ V.i--; draw(); } }); }
