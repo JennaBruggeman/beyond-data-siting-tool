@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """Water edges for 'Cooling from the inlet or river' (distance from a site to the water). Out: tool/shore.json.
-Edmonton: North Saskatchewan River polygon, Altalis Base Features Hydrography via Edmonton Public Schools GIS
-  (azimuth.epsb.ca, layer 98; J.B. download 19 Oct 2026; data/raw/hydro/nsr_epsb.geojson; same terms as the lots: academic use).
-  Outer ring only (islands are inside the river), kept within 30 km of the tool's centre, simplified to 5 m.
+Edmonton: kept from shore.json; built by make_shore_edm_canvec.py (NRCan CanVec 50K Hydro, Alberta; 8 Nov 2026).
 Vancouver: NRCan CanVec 50K Hydro, BC (waterbody_2, Open Government Licence – Canada; J.B. download 20 Oct 2026), extracted on J.B.'s computer to
   data/raw/hydro/canvec_van_water_extract.json (box -123.40 to -122.80, 49.05 to 49.42): 'Ocean' polygons (Burrard Inlet, English Bay, False Creek, the Strait)
   the 'Fraser River' watercourse polygons and the side channels (the Fraser's North Arm and others); creeks, lakes and reservoirs left out (not cooling sources). Rings kept whole: CanVec cuts polygons at map-sheet
@@ -23,19 +21,13 @@ def dp(pts, tol):
         if bi is not None and best > tol: keep.append(bi); stack += [(a, bi), (bi, b)]
     return [pts[i] for i in sorted(set(keep))]
 out = {'src': {}, 'lines': {}}
-meta = json.load(open(os.path.join(H, 'tiles', 'edm', 'meta.json')))
-g = json.load(open(os.path.join(D, 'nsr_epsb.geojson')))['features'][0]['geometry']['coordinates'][0]
-xy = [fwd(meta, lon, lat) for lon, lat in g]
-runs, cur = [], []
-for p in xy:
-    if math.hypot(*p) <= 30000: cur.append(p)
-    elif cur: runs.append(cur); cur = []
-if cur: runs.append(cur)
-out['lines']['edm'] = [[round(v, 1) for p in dp(r, 5.0) for v in p] for r in runs if len(r) > 1]
-out['src']['edm'] = 'North Saskatchewan River outline: Altalis Base Features Hydrography, shared by Edmonton Public Schools (azimuth.epsb.ca), downloaded 19 Oct 2026'
+# Edmonton (8 Nov 2026, J.B.): the river now comes from CanVec Alberta, tool/make_shore_edm_canvec.py (run it after this script); the Altalis outline
+# is not for redistribution and is no longer read. This script keeps the Edmonton part already in shore.json.
+prev = json.load(open(os.path.join(H, 'shore.json'))) if os.path.exists(os.path.join(H, 'shore.json')) else {'lines': {}, 'src': {}, 'kinds': {}}
+out['lines']['edm'] = prev['lines'].get('edm', []); out['src']['edm'] = prev['src'].get('edm', '?')
 vm = json.load(open(os.path.join(H, 'tiles', 'van', 'meta.json')))
 V = json.load(open(os.path.join(D, 'canvec_van_water_extract.json')))
-out['lines']['van'], out['kinds'] = [], {'edm': ['river'] * len(out['lines']['edm']), 'van': []}
+out['lines']['van'], out['kinds'] = [], {'edm': prev.get('kinds', {}).get('edm', ['river'] * len(out['lines']['edm'])), 'van': []}
 for w in V:
     if w['t'] != 'Ocean' and w['n'] != 'Fraser River' and w['t'] != 'Side Channel': continue  # side channels here are the Fraser's arms (the North Arm is one)
     for ring in w['r']:

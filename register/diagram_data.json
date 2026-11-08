@@ -9,7 +9,7 @@
 "quantities": 206,
 "conditions": 111,
 "opportunities": 14,
-"sources": 1692
+"sources": 1693
 }
 },
 "stages": [
@@ -6285,7 +6285,8 @@
 "hawaiiSWAC2002",
 "dfoScreen",
 "epsbNSR",
-"canvecHydroBC"
+"canvecHydroBC",
+"canvecHydroAB"
 ],
 "source_roles": [
 {
@@ -6328,7 +6329,7 @@
 "upstream": 40,
 "city": {
 "van": 6,
-"edm": 5,
+"edm": 6,
 "both": 1,
 "gen": 3
 }
@@ -19610,7 +19611,8 @@
 "van6555_por": "RULE: City of Vancouver Noise Control By-law 6555 (consolidated to 14 Jul 2026, By-law 14786), s. 1.2: '\"point of reception\" means: (a) a point in a lane or street, adjacent to but outside of the property occupied by the recipient of the noise or sound, that represents the shortest distance between that property and the source of the noise; (b) where no lane, street, or other public property exists between the recipient and the source, any point outside the property line of the real property from which the noise or sound emanates; or (c) in the case of noise emanating from inside Rogers Arena, ...' (saved copy, Claude Link beyond-data-sources/public/bylaw6555/full.pdf; read by Code 8 Nov 2026). Trust 90. Applied to every neighbouring lot, with or without a building: that an empty lot is a \"property occupied by the recipient\" is our reading (J.B., 8 Nov 2026). The tool measures at the receiving lot's point nearest the plant.",
 "method_streetNamesAddr": "DERIVED (our method, J.B. 8 Nov 2026): street names on the Architecture plans, named from fronting lot addresses. The tool's street files (vanStreets2026, edmRoads2026) hold no names. A street segment takes the street part of the addresses of the lots that front it (an edge 0.5 m or longer facing the segment within 35 m, no other addressed lot between: the lotside.js probe), one vote per address, only from lots on one street; named when at least 2 votes and more than half agree. Lanes, segments fronted only by corner lots, and split votes stay 'street name ?'. A lot on one street keeps its own address. tool/streetnames.js. Trust 60 (derived with a stated assumption: that most lots on a single street are addressed on it). ‖ 8 Nov 2026 (licence, names): since 8 Nov 2026 Vancouver segments take the City's name (vanStreets2026, HBLOCK); this method names only Edmonton segments and Vancouver segments the City file leaves unnamed.",
 "edm_3dBuildings": "City of Edmonton Open Data, 3D Buildings (dataset 78sz-qcfr; file 3dBuildings.gdb.zip, 225,442,192 bytes, J.B. download 14 Oct 2026, Claude Link; same byte size as the portal file): 'a 3D model of the City of Edmonton, based on the 2019 building outlines ... and 2019 LiDAR data'; 'a static dataset based on data from 2019, so newer buildings may not be present'. Updated 25 May 2023, made public 15 Jun 2023; coordinate system 3TM114-83; layer Building_MP_Merge, 383,329 multipatch parts (tool/edm_heights.py). Used for Edmonton building heights (height = highest − lowest point of the parts inside an outline; flags 5 and 7 in the tiles). Trust 80. Licence: Open Government Licence – Edmonton v1.0 (July 2022; the portal's terms page, https://data.edmonton.ca/stories/s/City-of-Edmonton-Open-Data-Terms-of-Use/msh8-if28); the dataset page names none (J.B., 8 Nov 2026: use it).",
-"edm_rooflines": "City of Edmonton Open Data, Rooflines (dataset 8zxj-vxqb; file Rooflines_20261014.csv, 138.5 MB, J.B. download 14 Oct 2026, Claude Link): 320,182 building outlines; columns the_geom, OBJECTID, TAX_ROLL_N, CENTROID_X, CENTROID_Y, AREA, COMMENT, Shape_Leng, Shape_Area; no heights. Rows last updated 25 Jun 2021; the dataset states no coverage year (?). Used as the Edmonton building outlines in the tiles (make_tiles.py). The portal also holds 'Rooflines (as of 2019)' (jpxi-a9a5) with rooftop and ground elevations, not used. Trust 80. Licence: Open Government Licence – Edmonton v1.0 (July 2022; the portal's terms page, https://data.edmonton.ca/stories/s/City-of-Edmonton-Open-Data-Terms-of-Use/msh8-if28); the dataset page names none (J.B., 8 Nov 2026: use it)."
+"edm_rooflines": "City of Edmonton Open Data, Rooflines (dataset 8zxj-vxqb; file Rooflines_20261014.csv, 138.5 MB, J.B. download 14 Oct 2026, Claude Link): 320,182 building outlines; columns the_geom, OBJECTID, TAX_ROLL_N, CENTROID_X, CENTROID_Y, AREA, COMMENT, Shape_Leng, Shape_Area; no heights. Rows last updated 25 Jun 2021; the dataset states no coverage year (?). Used as the Edmonton building outlines in the tiles (make_tiles.py). The portal also holds 'Rooflines (as of 2019)' (jpxi-a9a5) with rooftop and ground elevations, not used. Trust 80. Licence: Open Government Licence – Edmonton v1.0 (July 2022; the portal's terms page, https://data.edmonton.ca/stories/s/City-of-Edmonton-Open-Data-Terms-of-Use/msh8-if28); the dataset page names none (J.B., 8 Nov 2026: use it).",
+"canvecHydroAB": "NRCan, CanVec 50K Hydro, Alberta (shapefile zip canvec_50K_AB_Hydro_shp.zip, 683,080,663 bytes, J.B. download 19 Oct 2026, Claude Link; files dated 1 Oct 2018): waterbody_2 (501,070 polygons) and water_linear_flow_1_2 (698,545 flow lines). Near Edmonton the North Saskatchewan's water polygons carry no name (definition 'Not Identified', permanent) and are cut at map-sheet edges; the name is on the flow lines. Kept: outer rings of permanent waterbody polygons that a flow line named 'North Saskatchewan River' runs through, within 30 km of the tool's Edmonton centre (our rule): 8 polygons, 6 rings, source date 1977. Checked against the old outline: median 9-10 m apart, 90th percentile 35-47 m. Licence: Open Government Licence - Canada (as for canvecHydroBC, open.canada.ca dataset 9d96e8c9-22fe-4ad2-b5e8-94a6991b744b; the zip's Read_me does not state it). Trust 80. Source maps from 1977: the river's banks may have moved (?)."
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -22948,7 +22950,8 @@
 "van6555_por": "rule",
 "method_streetNamesAddr": "derived (our method)",
 "edm_3dBuildings": "government data",
-"edm_rooflines": "government data"
+"edm_rooflines": "government data",
+"canvecHydroAB": "government data"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -25731,7 +25734,8 @@
 "van6555_por": "van",
 "method_streetNamesAddr": "both",
 "edm_3dBuildings": "edm",
-"edm_rooflines": "edm"
+"edm_rooflines": "edm",
+"canvecHydroAB": "edm"
 },
 "city_gaps": {
 "van": [
