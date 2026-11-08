@@ -145,3 +145,9 @@ Rooms, Separations and the new Exits card (Architecture is now 22 cards) share o
 - Corridor finding: 339 1st Ave E, 6 rooms without corridor access, 2 of 5 storeys with no corridor or lobby; 64 Airport Rd NW, 4 rooms. Layout untouched (F2).
 - Exits: spacing drawn from plan.js exitSep (VBBL / NBC 3.4.2.3): data centre 23.4 m of 17.9 m needed, clinic 16.1 of 13.4. Worst travel path not computed: "?", not drawn.
 - "?": leftover room sizes, exit stair shaft ratings, names of streets other than the front one (the street file has no names: is there a source?).
+
+## 8 Nov 2026 — F1c gate items (Code)
+
+1. Exits card, clinic row: "(our reading: the clinic corridor is inside the suite, not a public corridor, so max(½ diagonal, 9 m))" added. Dimension stays diagonal.
+2. NBD_Roads_GPKG.zip (BC and AB files read): it is ISED broadband availability by road segment. Fields are road_id_route, colour and availability flags only; no street-name field and no licence file in the zip. Not used, not added to the register; "street name ?" stays.
+Waiting for the Emergency hub spec (parts 1–3 final) before F2.
