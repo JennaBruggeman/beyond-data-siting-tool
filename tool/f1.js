@@ -22,7 +22,7 @@ const TPL=[
  {id:'architecture',name:'Architecture',tier:'arch',tab:'arch',step:2,who:'For architects. A data centre and public programs on one lot, laid out from a library and checked against the main code moves.',img:'architecture',
   cards:[...C('Site',['Your city','Your parcel','People nearby','Programs nearby','Heat receivers nearby','What the lot allows','Ground and flood','Neighbours and views']),
    ...C('Typology',['Pick a typology','Variant and add-ons','The governing principle','The numbers','What’s left for neighbours']),
-   ...C('Checks',['Rooms','Separations','Plant and site']),...C('Visualize',['Heat flow','Program diagram','Drawing styles','Compare']),...C('Report',['Report'])]}];
+   ...C('Checks',['Rooms','Separations','Exits','Plant and site']),...C('Visualize',['Heat flow','Program diagram','Drawing styles','Compare']),...C('Report',['Report'])]}];
 TPL.forEach(t=>t.chaps=[...new Set(t.cards.map(c=>c.chap))]);
 const STEPNAME={2:'step 2 (Architecture cards)',3:'step 3 (Municipal cards)',4:'step 3 (Engineering cards)',5:'step 3 (Resident cards, after the facility inventory)'};
 

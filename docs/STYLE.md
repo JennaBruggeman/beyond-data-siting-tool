@@ -117,6 +117,15 @@ Pick the form by the job. No 3-D, no dual axes, no pie, no gradients.
 
 **Site views: white model (J.B., 8 Nov, later job).** Parcel views come from the 3-D model with real context (roads, neighbouring buildings, street trees), rendered as a white model, not flat SVG shapes.
 
+**Schematic floor plan: rooms by zone (J.B., 8 Nov: "great"; from the Emergency hub test fits).** For any card or board about rooms (test fits, Architecture Rooms).
+- One plan per storey, titled "Storey n · height", with a one-line note of what that storey holds.
+- Rooms as flat program tints (STYLE §1 plan fills); thin INK walls (rooms are the subject, rule 7). Circulation and lobby white; plant and yards PANEL grey; site and drives dashed.
+- Each room carries a **number**, not a name or leader. A **room schedule** under the plan lists number · name · m², three columns, m² right-aligned; a red "?" after an area with no sourced size (drawing choice). Plant items numbered P1, P2…
+- Exterior exit doors as short ticks on the outline; door gaps in walls; stairs hatched.
+- Street names along their edges, north arrow and a 10 m scale bar under the plan.
+- One key above all storeys (programs, unassigned, exit door, roof equipment dashed).
+- No leaders on these plans: the numbers and schedule do that job.
+
 **Not in the kit yet** (needed later, to be designed when a card needs them): line chart over time (heat, electricity), small multiples of plans, map keys.
 
 ## 6. Drawing rules (J.B.'s standards)

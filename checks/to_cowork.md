@@ -138,3 +138,10 @@ Done (local, not pushed): F1b answers; Edmonton Major Industrial rule; 8 Nov reg
 5. E05 flake: a 500 ms timer (tiers.js) dropped mwPick when it ran after findFit. Fixed; two golden runs identical.
 6. Only IH and EETC permit Major Industrial (IM: existing only; FD and all other zones: no; DC zones: site by site ?).
 Golden re-based once: noise worst cases and counts only; no size, fit or block moved.
+
+## 8 Nov 2026 — F1c room plans (Code)
+
+Rooms, Separations and the new Exits card (Architecture is now 22 cards) share one schematic plan per storey (STYLE §5), drawn once per layout. Golden and Architecture unchanged; gate 111 screenshots, no errors.
+- Corridor finding: 339 1st Ave E, 6 rooms without corridor access, 2 of 5 storeys with no corridor or lobby; 64 Airport Rd NW, 4 rooms. Layout untouched (F2).
+- Exits: spacing drawn from plan.js exitSep (VBBL / NBC 3.4.2.3): data centre 23.4 m of 17.9 m needed, clinic 16.1 of 13.4. Worst travel path not computed: "?", not drawn.
+- "?": leftover room sizes, exit stair shaft ratings, names of streets other than the front one (the street file has no names: is there a source?).
