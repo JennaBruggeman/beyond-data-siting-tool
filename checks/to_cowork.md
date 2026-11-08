@@ -243,3 +243,19 @@ Question 6: audit_rooms.py also sets widths the spec table doesn't list: data ha
   then `git push --force origin main overnight-2026-10-30` (site-f1 is not on GitHub yet: push only when J.B. says). Local backup branches backup/pre-altalis-purge-2026-11-08-*: never push. GitHub keeps old commits reachable by their hash until GitHub Support removes them (sensitive-data removal request); forks and other clones keep copies.
 - **Also found (J.B. to decide):** the public overnight-2026-10-30 branch holds 181 Edmonton tool screenshots (checks/agents/*_shots, e.g. lotlines_shots/E06B_card.png shows 64 Airport Rd's Altalis lot outline). The same script can drop them in the same pass: EXTRA_PATHS="checks/agents/*/E0* checks/agents/*/*/E0*" (to confirm per folder before running).
 - **BC Assessment receivers:** the 683 vanBCA receivers' coordinates are representative points of the City of Vancouver property parcels (open data, data/vancouver_parcels_2026.geojson, matched by tax coordinate; tool/make_bigrecv.py), not BC Assessment geometry. No change.
+
+## 8 Nov 2026 — F5 part 2: terms pass (STYLE §7) (Code)
+Strings changed (file: old → new):
+- f1.js: “Workflows” → “Templates”
+- f1.js: “Choose a workflow” → “Choose a template”
+- f1.js: “Four workflows, each ending in its own report.” → “Four templates, each a workflow that ends in its own report.”
+- f1.js: “WorkflowsEach one shows one idea per card, then makes a report.” → “TemplatesEach template’s workflow shows one idea per card, then makes a report.”
+- f1.js: “See the cards” → “See the workflow”
+- f1.js: “One logic runs under all four workflows. Every number in it is tied to a source and a check status, so a reader can follow any figure back to where it came from.See the logic” → “One logic runs under all four templates. Every number in it is tied to a source and a check status, so a reader can follow any figure back to where it came from.Open the interactive logic diagram”
+- f1.js: “How this is worked out” → “This card in the interactive logic diagram”
+- f1logic.js: “The logic under every card” → “The interactive logic diagram”
+- f1logic.js: “One logic runs under all four workflows. Every part has a formula, a source and a trust rating. Click a part to see them.” → “One logic runs under all four templates. Every part has a formula, a source and a trust rating. Click a part to see them.”
+- f1logic.js: “How this is worked out” → “This card in the interactive logic diagram”
+- tiers.js: “aria-label="The tool's logic diagram:” → “aria-label="The interactive logic diagram:”
+- logic.js: “b.textContent=open?'Hide the logic':'The logic” → “b.textContent=open?'Hide the interactive logic diagram':'Interactive logic diagram”
+Kept: “How it works” (top bar; opens the interactive logic diagram, as the storyboard names it); “template” already used for Resident, Municipal, Engineering, Architecture in the logic view tabs. Code comments not changed.

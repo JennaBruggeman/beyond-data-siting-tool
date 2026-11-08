@@ -144,8 +144,8 @@ function ancestors(ids){ const s=new Set(), st=[...ids]; while(st.length){ const
 function visParents(id,V){ const out=new Set(), seen=new Set(), st=[...(UP[id]||[])]; while(st.length){ const x=st.pop(); if(seen.has(x)) continue; seen.add(x); if(V.has(x)) out.add(x); else (UP[x]||[]).forEach(p=>st.push(p)); } return out; }
 function panelEl(){ const vis=document.querySelector('#wc .wcvis'); if(!vis) return null; let p=$('#wcLogic');
   if(!p){ p=document.createElement('div'); p.className='wclogic'; p.id='wcLogic'; p.hidden=!open; const c3=$('#wc3d'); if(c3) c3.after(p); else vis.prepend(p); }
-  if(!$('#wcLogicB')&&$('#wc3d')){ const b=document.createElement('button'); b.className='logicb'; b.id='wcLogicB'; b.setAttribute('aria-pressed',open); b.setAttribute('aria-controls','wcLogic'); b.textContent=open?'Hide the logic':'The logic';
-    b.onclick=()=>{ open=!open; try{ localStorage.setItem('bd-logic',open?'1':'0'); }catch(e){} b.setAttribute('aria-pressed',open); b.textContent=open?'Hide the logic':'The logic'; p.hidden=!open; render(); window.dispatchEvent(new Event('resize')); };
+  if(!$('#wcLogicB')&&$('#wc3d')){ const b=document.createElement('button'); b.className='logicb'; b.id='wcLogicB'; b.setAttribute('aria-pressed',open); b.setAttribute('aria-controls','wcLogic'); b.textContent=open?'Hide the interactive logic diagram':'Interactive logic diagram';
+    b.onclick=()=>{ open=!open; try{ localStorage.setItem('bd-logic',open?'1':'0'); }catch(e){} b.setAttribute('aria-pressed',open); b.textContent=open?'Hide the interactive logic diagram':'Interactive logic diagram'; p.hidden=!open; render(); window.dispatchEvent(new Event('resize')); };
     $('#wc3d').appendChild(b); }
   return p; }
 function render(){ const p=panelEl(); if(!p||!L) return; p.hidden=!open; if(!open) return; const t=tierNow();

@@ -45,7 +45,7 @@ function preview(id){ const T=BD.TPL, Y=layout(); if(!T||!Y) return ''; const ra
   const dots=ids.filter(k=>Y.pos[k]).map(k=>{ const [x,y]=Y.pos[k]; return `<circle cx="${x}" cy="${y}" r="1.6" fill="${lit(k)?'var(--accent)':'var(--line-2)'}"/>`; }).join(''); /* drawing */
   const RP=T.reports&&T.reports[id]; const pg=RP?RP.filter(p=>p.id!=='sources'):[]; /* drawing */
   const strip=pg.length?`<span class="trep"><svg viewBox="0 0 ${pg.length*9} 11" width="${pg.length*9}" height="11" aria-hidden="true">${pg.map((p,i)=>`<rect x="${i*9+0.5}" y=".5" width="7" height="10" rx=".8" fill="none" stroke="var(--accent)" stroke-width=".8"><title>${esc(p.title)}</title></rect>`).join('')}</svg> Report: ${pg.length} sections, ${esc(pg.map(p=>p.title).join(', '))}</span>`:''; /* drawing */
-  return strip+`<svg class="tprev" viewBox="0 0 ${Y.W} ${Y.H}" role="img" aria-label="The tool's logic diagram: ${on} of ${n} parts shown in this choice">${wires}${dots}</svg><span class="tcount">${on} of ${n} parts shown</span>`; }
+  return strip+`<svg class="tprev" viewBox="0 0 ${Y.W} ${Y.H}" role="img" aria-label="The interactive logic diagram: ${on} of ${n} parts shown in this choice">${wires}${dots}</svg><span class="tcount">${on} of ${n} parts shown</span>`; }
 function chooser(card,cont){
   card.innerHTML=`<div class="kind">Beyond Data</div><h2 id="wTitle">What do you want to know?</h2>
    <p class="sub">Every choice runs the same tool. It changes what you are asked and what you see. You can switch at any time.</p>

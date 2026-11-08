@@ -11,7 +11,7 @@ const TABS=[['resident','Resident'],['municipal','Municipal'],['full','Engineeri
 /* Municipal: the parts tagged 'm' in logic.json (make_templates.py MUNI; Cowork's reply on municipal_logic_parts.md, 8 Nov 2026) */
 const MUNI_CARD={'Your city':['parcel','zone'],'Your parcel':['parcel','zone'],'Is a data centre allowed?':['zoning_status'],'Height and floor area':['envelope','floor_area','roof_equipment_rule'],'Yards by edge':['envelope'],
  'Noise limits around the lot':['noise_limit'],'Storeys and street frontage':['storey_min'],'Loading':['loading_need'],'Approval process':['rezoning_price']};
-/* parts lit by a card ("How this is worked out"), from logic.js's step lists where a card matches a step; the other cards light nothing yet */
+/* parts lit by a card ("This card in the interactive logic diagram"), from logic.js's step lists where a card matches a step; the other cards light nothing yet */
 const CARD={ 'Cooling':'setup','Noise':'setup','Backup power':'setup','What fits':'fits','Heat offered':'heat','Who could take it':'heat','Electricity':'energy','Water':'water','Materials':'materials', /* Engineering's 12 cards (8 Nov 2026) */'Heat receivers nearby':'heat','People nearby':'social','Neighbours and views':'social' };
 const WORD=[[100,'arithmetic'],[90,'regulation, tariff or standard read directly'],[80,'government dataset'],[70,'peer-reviewed coefficient from another context'],[60,'derived with a stated assumption'],[50,'operator or industry claim'],[40,'proxy'],[20,'judged'],[0,'gap']]; /* CLAUDE.md §3 */
 const word=q=>{ if(q==null) return 'not rated'; for(const [v,w] of WORD) if(q>=v) return w; return 'gap'; };
@@ -42,7 +42,7 @@ function srcList(ids){ if(!ids||!ids.length) return '<p class="f1l-none">No sour
   /* the first source shown; the rest under "More sources" (gate 2) */
   return `<ul class="f1l-src">${one(ids[0])}</ul>`+(ids.length>1?`<details class="f1l-more"><summary>More sources (${ids.length-1})</summary><ul class="f1l-src">${ids.slice(1).map(one).join('')}</ul></details>`:''); }
 function panel(){ if(!S.sel){ const t=TABS.find(x=>x[0]===S.tab)[1];
-    return `<div class="chap">How it works</div><h2>${S.label?esc(S.label):'The logic under every card'}</h2><p class="lead">${S.label?'The parts this card is worked out from are lit. Click a part for its formula, trust and sources.':'One logic runs under all four workflows. Every part has a formula, a source and a trust rating. Click a part to see them.'}</p>`+
+    return `<div class="chap">How it works</div><h2>${S.label?esc(S.label):'The interactive logic diagram'}</h2><p class="lead">${S.label?'The parts this card is worked out from are lit. Click a part for its formula, trust and sources.':'One logic runs under all four templates. Every part has a formula, a source and a trust rating. Click a part to see them.'}</p>`+
 `<p class="f1l-note">${t}: ${diagram().n} parts shown.</p>`; }
   const k=S.sel, n=L.nodes[k], stg=(L.stages.find(s=>s[0]===n.s)||[])[1]||n.s, q=n.q, ins=(UP[k]||[]).filter(x=>L.nodes[x]);
   return `<div class="chap">${esc(stg)}</div><h2>${esc(n.n)}</h2>${n.w?`<p class="lead">${esc(n.w.charAt(0).toUpperCase()+n.w.slice(1))}.</p>`:''}
