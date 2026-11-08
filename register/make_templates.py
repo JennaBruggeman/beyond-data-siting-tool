@@ -22,6 +22,8 @@ T = {
  'loading_need': (C, 'city neighbours', 'how many loading spaces the zone asks for'),
  'roof_equipment_rule': (C, 'city neighbours', 'what may stand on the roof above the height limit'),
  'storey_min': (C, 'city', 'the lowest storey heights the zone allows'),
+ # 8 Nov 2026: sources a typology spec uses (register_additions_2026-11-08.md), spec, not live yet
+ 'typology_spec_rules': ('arch_only', 'operator neighbours', 'rules a typology spec will apply: spec, not live yet'),
  'start_case': (R, 'host operator', 'new, shared, retrofit or leased: assumed for residents, shown and changeable'),
  'receivers': (C, 'receiver', 'who could take the heat'), 'receiver_temp': (F, 'receiver', 'engineering input'),
  'receptors': (C, 'neighbours', 'who is close enough to hear it'), 'zone': (R, 'city neighbours', 'what the land is zoned for'),

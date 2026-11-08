@@ -59,6 +59,14 @@
    ],
    "why": "the lowest storey heights the zone allows"
   },
+  "typology_spec_rules": {
+   "tier": "arch_only",
+   "parties": [
+    "operator",
+    "neighbours"
+   ],
+   "why": "rules a typology spec will apply: spec, not live yet"
+  },
   "start_case": {
    "tier": "resident",
    "parties": [
@@ -2754,6 +2762,10 @@
    [
     "storey_min",
     "size"
+   ],
+   [
+    "typology_spec_rules",
+    "test"
    ]
   ],
   "edges": [
@@ -4156,12 +4168,16 @@
    [
     "zone",
     "storey_min"
+   ],
+   [
+    "massing",
+    "typology_spec_rules"
    ]
   ]
  },
  "resident_count": 42,
  "full_count": 205,
- "arch_count": 138,
+ "arch_count": 139,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {
