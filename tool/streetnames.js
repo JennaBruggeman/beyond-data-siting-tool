@@ -7,6 +7,8 @@
    number, the first token holding a digit, is dropped); corner lots do not vote, since which of their streets the address is on is not known.
    A segment takes a name only when at least 2 addresses vote and the leading name holds more than half the votes; otherwise, and for every
    lane or alley, its name stays '?'. A segment fronted only by corner lots therefore stays '?'.
+   8 Nov 2026 (J.B.): where the street file carries the City's name (Vancouver: HBLOCK without the block range, tool/add_street_names.py; G.names,
+   G.nameOf), that name is used (src 'city'); the address method fills only the segments without one (src 'addr'), and every Edmonton segment.
    Pure functions over the loaded tiles and the street file; no data of its own. */
 (function(root){
 'use strict';
@@ -41,12 +43,14 @@ function nameNear(G,tiles,city,cx,cy,R){ const RP=R+PROBE+120, P=piecesNear(G,cx
   const out=new Map();
   for(const si of new Set(P.map(p=>p[4]))){ const lane=isLane(si), m=V.get(si), votes={}; if(m) for(const s of m.values()) votes[s]=(votes[s]||0)+1;
     const n=Object.values(votes).reduce((a,b)=>a+b,0), top=Object.entries(votes).sort((a,b)=>b[1]-a[1])[0];
-    const name=!lane&&top&&top[1]>=MIN_VOTES&&top[1]>n/2?fmt(top[0]):null; out.set(si,{name,lane,votes,n}); }
+    const cn=G.nameOf&&G.names&&G.nameOf[si]>=0?G.names[G.nameOf[si]]:null;
+    if(cn&&!lane){ out.set(si,{name:fmt(cn),src:'city',lane,votes,n}); continue; }
+    const name=!lane&&top&&top[1]>=MIN_VOTES&&top[1]>n/2?fmt(top[0]):null; out.set(si,{name,src:name?'addr':null,lane,votes,n}); }
   return out; }
 /* for a lot ring: each edge -> {si, name, lane} (null when it faces no segment) */
 function edgeNames(G,tiles,city,ring,R){ let cx=0,cy=0; const n=ring.length/2; for(let i=0;i<n;i++){ cx+=ring[2*i]; cy+=ring[2*i+1]; } cx/=n; cy/=n;
   const N=nameNear(G,tiles,city,cx,cy,R||200), P=piecesNear(G,cx,cy,(R||200)+PROBE), ccw=sarea(ring)>0;
-  const at=(ax,ay,bx,by)=>{ const f=facing(P,ax,ay,bx,by,ccw,null); if(!f) return null; const v=N.get(f.si)||{}; return {si:f.si,name:v.name||null,lane:!!v.lane,votes:v.votes,n:v.n}; };
+  const at=(ax,ay,bx,by)=>{ const f=facing(P,ax,ay,bx,by,ccw,null); if(!f) return null; const v=N.get(f.si)||{}; return {si:f.si,name:v.name||null,src:v.src||null,lane:!!v.lane,votes:v.votes,n:v.n}; };
   /* the lot's own street segments (lanes aside): with one, its own address names it (the front street, as before) */
   const own=new Set(); for(let i=0;i<n;i++){ const j=(i+1)%n, f=facing(P,ring[2*i],ring[2*i+1],ring[2*j],ring[2*j+1],ccw,null); if(f&&!N.get(f.si)?.lane) own.add(f.si); }
   return {N,at,cx,cy,ownSegs:own.size}; }

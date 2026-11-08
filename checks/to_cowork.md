@@ -182,3 +182,9 @@ Base: eh/specs/emergency_hub.md parts 1–3 (final), Part 7, eh/reach.py, eh/dea
 3. Edmonton hand-fit geometry for the test fixtures may rest on Altalis lot lines. Keep it local, uncommitted?
 4. Spec Q5: in BE, is the refuge Community Service (500 m² cap) or Emergency Service (no cap)? Until you answer, both are flagged.
 5. What counts as a Part 7 match: counts and pass/fail exact, areas within 10 %?
+
+## 8 Nov 2026 — Vancouver street names from the City file (Code)
+
+public-streets.csv (J.B.'s 16 Oct download) is back in data/raw/van (data/ stays out of git). Licence confirmed on the portal: Open Government Licence – Vancouver v1.0 (register vanStreets2026). tool/add_street_names.py adds HBLOCK without the block range to streets_van.json; segment geometry checked identical. 17,069 of 17,073 street segments named; lanes unnamed. The portal file was modified 2 Nov 2026, after the download (not re-downloaded).
+Named within 150 m (lanes apart): 339 1st Ave E 23 of 23; 275 1st Ave E 23 of 23; 1425 Clark Dr 23 of 23 (all City); 74 Airport Rd NW 8 of 17; 64 Airport Rd NW 9 of 23 (address method, unchanged).
+Plans now show the City's spelling ("E 1st Av", "Clark Drive"). 1425 Clark Dr: Clark Drive, Vernon Drive, Grant St (the tool's front is Grant St, while the address is on Clark Drive). Golden identical.

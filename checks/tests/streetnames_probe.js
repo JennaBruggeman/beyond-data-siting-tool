@@ -28,10 +28,10 @@ const LOTS = {
     await p.waitForTimeout(8000);
     res[key] = await p.evaluate(async R => { const s = BD.S.sel, G = await BD.streets(s.city), SN = BD.streetNames, ring = s.ring;
       const E = SN.edgeNames(G, BD.S.tiles, s.city, ring, R); const seg = [...E.N.values()];
-      const near = { segments: seg.length, named: seg.filter(v => v.name).length, lanes: seg.filter(v => v.lane).length, unnamed: seg.filter(v => !v.lane && !v.name).length,
+      const near = { segments: seg.length, named: seg.filter(v => v.name).length, byCity: seg.filter(v => v.src === 'city').length, byAddr: seg.filter(v => v.src === 'addr').length, lanes: seg.filter(v => v.lane).length, unnamed: seg.filter(v => !v.lane && !v.name).length,
         unnamedWithVotes: seg.filter(v => !v.lane && !v.name && v.n).length, names: [...new Set(seg.filter(v => v.name).map(v => v.name))].sort() };
       const ey = (BD.model() || {}).edgeYards || [];
-      const edges = ey.filter(e => e.abuts === 'street' || e.abuts === 'alley').map(e => { const a = E.at(e.ax, e.ay, e.bx, e.by); return { kind: e.kind, abuts: e.abuts, len: Math.round(e.len * 10) / 10, name: a ? a.name : null, votes: a ? a.votes : null }; });
+      const edges = ey.filter(e => e.abuts === 'street' || e.abuts === 'alley').map(e => { const a = E.at(e.ax, e.ay, e.bx, e.by); return { kind: e.kind, abuts: e.abuts, len: Math.round(e.len * 10) / 10, name: a ? a.name : null, src: a ? a.src : null, votes: a ? a.votes : null }; });
       return { addr: s.a && s.a[0], R, ownSegs: E.ownSegs, near, edges }; }, R);
     res[key].errors = errs; console.log(key, JSON.stringify(res[key].near), JSON.stringify(res[key].edges)); await p.close();
   }

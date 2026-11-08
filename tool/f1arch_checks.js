@@ -94,7 +94,7 @@ const PLANC={};
    do not agree (at least 2, more than half), stay 'street name ?' */
 const SG={}; async function sgReady(x){ if(!(x.city in SG)) SG[x.city]=BD.streets?await BD.streets(x.city):null; }
 const SNCAP=' · other street names: named from fronting lot addresses (our method)';
-const SNSRC='Street names: a lot on one street takes it from its own address; other streets, and every street of a corner lot, are named from fronting lot addresses (our method: tool/streetnames.js; only lots on one street vote; a segment takes the street most of them (at least 2) are addressed on; otherwise, and for lanes, “street name ?”). The City street files hold no names.';
+const SNSRC='Street names: Vancouver, the City’s Public streets file (HBLOCK, block range dropped; vanStreets2026); where it has none, and in Edmonton, a lot on one street takes it from its own address; other streets, and every street of a corner lot, are named from fronting lot addresses (our method: tool/streetnames.js; only lots on one street vote; a segment takes the street most of them (at least 2) are addressed on; otherwise, and for lanes, “street name ?”). The City street files hold no names.';
 function planFor(x,P){
   const key=[x.city,(BD.S.sel||{}).id,P.s.dir,JSON.stringify([P.hall.u,P.hall.v,P.hall.base,P.hall.storeys,P.hall.h]),JSON.stringify((P.boxes||[]).map(b=>[b.id,b.u,b.v,b.base,b.storeys,b.h,b.front])),(P.s.M.ring||[]).slice(0,4).join(',')].join('|');
   if(PLANC.k===key&&PLANC.v) return PLANC.v;
@@ -142,7 +142,7 @@ function planFor(x,P){
     const cx=lotPts.reduce((t,p)=>t+p[0],0)/lotPts.length, cy=lotPts.reduce((t,p)=>t+p[1],0)/lotPts.length; let o=''; const done=[];
     ey.slice(0,4).forEach(e=>{ const a=g.F.toL(e.ax,e.ay), c=g.F.toL(e.bx,e.by), pa=pt(a[0],a[1]), pc=pt(c[0],c[1]), mx=(pa[0]+pc[0])/2, my=(pa[1]+pc[1])/2; let nx=mx-cx, ny=my-cy; const l=Math.hypot(nx,ny)||1; nx/=l; ny/=l;
       const vert=Math.abs(pc[1]-pa[1])>Math.abs(pc[0]-pa[0]); let px=mx+nx*11, py=my+ny*11; px=Math.max(ox+10,Math.min(ox+mp.W-10,px)); py=Math.max(14,Math.min(mp.H-8,py));
-      const sn=SNE&&e.abuts!=='alley'?SNE.at(e.ax,e.ay,e.bx,e.by):null, lab=e.abuts==='alley'?'lane':(e.kind==='front'&&nm&&(!SNE||SNE.ownSegs<=1)?nm:(sn&&sn.name?(snUsed=true,sn.name):'street name ?')), red=lab==='street name ?';
+      const sn=SNE&&e.abuts!=='alley'?SNE.at(e.ax,e.ay,e.bx,e.by):null, lab=e.abuts==='alley'?'lane':(sn&&sn.src==='city'?sn.name:(e.kind==='front'&&nm&&(!SNE||SNE.ownSegs<=1)?nm:(sn&&sn.name?(snUsed=true,sn.name):'street name ?'))), red=lab==='street name ?';
       if(done.some(d=>d[0]===lab&&Math.hypot(d[1]-px,d[2]-py)<70)) return; done.push([lab,px,py]);
       o+=`<text x="${f1(px)}" y="${f1(py)}" text-anchor="middle" font-size="11.5" fill="${red?K.red:K.mute}" stroke="#fff" stroke-width="3" paint-order="stroke"${vert?` transform="rotate(-90 ${f1(px)} ${f1(py)})"`:''}>${esc(lab)}</text>`; }); return o; })();
   const v={PL,g,M,mp,ox,W,H:mp.H,LW,zs,stor,pt,pr,lotP,streets,snUsed,layer,doorLine,tick,treads,fillOf,DP,centre,f1,counts:{nNoAcc,nNoCorr,nRooms}};

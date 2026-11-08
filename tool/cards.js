@@ -68,7 +68,7 @@ const ST={};
 async function streets(city){ if(ST[city]!==undefined) return ST[city]; try{ const d=await BD.getJSON('streets_'+city+'.json'); const N=new Map(), adj=[], xy=[];
     const node=(x,y)=>{ const k=Math.round(x)+','+Math.round(y); let i=N.get(k); if(i==null){ i=xy.length/2; N.set(k,i); xy.push(x,y); adj.push([]); } return i; };
     for(const g of d.segs){ const c=g[0]+(g[1]?0:100); for(let i=2;i+3<g.length;i+=2){ const a=node(g[i],g[i+1]), b=node(g[i+2],g[i+3]); const L=Math.hypot(g[i+2]-g[i],g[i+3]-g[i+1]); adj[a].push([b,L,c]); adj[b].push([a,L,c]); } }
-    ST[city]={adj,xy,classes:d.classes,segs:d.segs}; return ST[city]; }catch(e){ ST[city]=null; return null; } }
+    ST[city]={adj,xy,classes:d.classes,segs:d.segs,names:d.names||null,nameOf:d.nameOf||null}; return ST[city]; }catch(e){ ST[city]=null; return null; } }
 BD.streets=streets;
 function nearestNode(G,x,y){ let best=-1,bd=1e12; for(let i=0;i<G.xy.length;i+=2){ const d=(G.xy[i]-x)**2+(G.xy[i+1]-y)**2; if(d<bd){ bd=d; best=i/2; } } return [best,Math.sqrt(bd)]; }
 function dijkstra(G,src,maxD){ const n=G.adj.length, dist=new Float64Array(n).fill(Infinity), prev=new Int32Array(n).fill(-1), pc=new Int16Array(n).fill(-1); dist[src]=0; const H=[[0,src]];
