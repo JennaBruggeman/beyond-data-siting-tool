@@ -201,3 +201,10 @@ Plans now show the City's spelling ("E 1st Av", "Clark Drive"). 1425 Clark Dr: C
 **How the public build shows Edmonton lots:** not in git (tool/tiles/ ignored, no GitHub Pages). But two published claude.ai tool artifacts contain the Altalis lot files (tiles/edm/l_*.json): "Beyond Data" GCCZtgddsc9bY8ey8REkX8 (3 Nov, 135 files) and EBxWgBawKaDps5z245GpAn (20 Oct). KjjapFALf9sUejWZFB6diB (23 Oct) has none: it shows Edmonton lots from the City parcels only. Artifacts are private unless shared: has J.B. shared either? Fix (needs J.B.'s OK): republish both without l_*.json, or delete them.
 
 F3: starts with F2, once J.B. OKs the F2 plan.
+
+## 8 Nov 2026 — J.B.'s items: artifacts, front line, register (Code)
+
+- **Artifacts:** "Beyond Data" GCCZtgddsc9bY8ey8REkX8 (v24) and EBxWgBawKaDps5z245GpAn (v130) republished at the same URLs without the 135 tiles/edm/l_*.json files. Edmonton lots now come from the City parcels, as in the 23 Oct build (both pages skip a missing lot file). Earlier versions in each artifact's history still hold the files (owner only). Audit of the other artifacts: to follow.
+- **Front lot line (1425 Clark Dr):** the tool does not use the address. Z&D s. 2 defines no front, rear or side property line (register lot_van_s2_lines: only Front Yard, from the "front property line"). The rule the tool applies is s. 10.26.1(b): on a corner site the frontage is "the shortest boundary abutting on a street, or as otherwise determined by the Director of Planning". Clark Dr's street lines are Grant St 44.0 m, Clark Drive 60.5 m and Vernon Drive 85.5 m, so the front is Grant St; Clark and Vernon are flanks. Clark and Vernon are also roughly parallel (a corner double-fronting site); s. 10.6.1 (Director's approval of placement) excludes I districts, so I-2 is not caught. The Director may decide otherwise (10.26.1).
+- **Register:** edm_3dBuildings and edm_rooflines added (OGL – Edmonton v1.0; dates and columns as reported), on floor_area. unrecorded 0.
+- **F2 plan** copied to Claude Link F2_plan_from_code.md. F3 starting.

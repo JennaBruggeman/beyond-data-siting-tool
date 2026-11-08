@@ -3199,7 +3199,9 @@
    "vertivAFC_limits": "maker",
    "nbc20_climate": "rule",
    "van6555_por": "rule",
-   "method_streetNamesAddr": "derived (our method)"
+   "method_streetNamesAddr": "derived (our method)",
+   "edm_3dBuildings": "government data",
+   "edm_rooflines": "government data"
   },
   "source_check": {
    "mfrDryCooler": "agent",
@@ -34315,6 +34317,24 @@
      "where": "checks/tests/streetnames_probe.js on the five check lots",
      "what": "segments within 150 m named: 339 1st Ave E 8 of 23, 275 1st Ave E 7 of 23, 1425 Clark Dr 7 of 23, 74 Airport Rd NW 8 of 17, 64 Airport Rd NW 9 of 23 (lanes not counted)"
     }
+   ],
+   "edm_3dBuildings": [
+    {
+     "check": 1,
+     "by": "Code",
+     "date": "8 Nov 2026",
+     "where": "data.edmonton.ca dataset metadata and terms page; file header and size",
+     "what": "dates, columns and size confirmed; no dataset-level licence; portal licence OGL – Edmonton v1.0"
+    }
+   ],
+   "edm_rooflines": [
+    {
+     "check": 1,
+     "by": "Code",
+     "date": "8 Nov 2026",
+     "where": "data.edmonton.ca dataset metadata and terms page; file header and size",
+     "what": "dates, columns and size confirmed; no dataset-level licence; portal licence OGL – Edmonton v1.0"
+    }
    ]
   },
   "check_log_note": "check_log: CHECK 1 = first read (Claude, overnight pass 29 Oct 2026); CHECK 2 = independent agent re-read the same evening. 'confirmed' = both reads agree. 'fixed at check 2' = the second reader found a difference and the entry was corrected to the source wording it quoted: that new wording has one read, so it is the place for any third look. Items still marked '?' stay open. Back-fill (30 Oct 2026): sources read before per-source logging began (16 Oct) have a check-1 entry pointing to the research note that records them; sources with no trace in any note were re-read as check 1.",
@@ -36012,7 +36032,9 @@
     "edmParcel",
     "vanFoot",
     "bcaExtract",
-    "vanEnergyReport"
+    "vanEnergyReport",
+    "edm_3dBuildings",
+    "edm_rooflines"
    ],
    "conf": 70,
    "status": "Edmonton open; Vancouver via licensed BCA extract — field list confirmed from BCA user guide (data/BCA_…User_Guide.pdf); extract itself pending Abacus access; City property-tax report has no area field (schema checked) — fallback is footprint × storeys",
@@ -51255,7 +51277,9 @@
   "vertivAFC_limits": "MAKER (installer guide): Vertiv Liebert AFC Packaged Air Cooled Free Cooling Chiller Installer/User Guide SL-70790 (c) 2026, s. 1.4.3 Operating Limits and Table 1.1 Ambient Conditions, p. 10 (J.B.'s screenshots 8 Nov 2026, Claude Link eh/vertiv_AFC_SL-70790_p8-9_limits.png, eh/vertiv_AFC_SL-70790_p10_operating_range.png; read by Code): ambient temperature '-20 F - 113 F (-28.9 C - 45 C) [Min and Max air temperatures can vary by model and chiller design.]'; 'NOTE: The ambient temperature must not go below -4 F (-20 C), because in this condition R1234ze pressure is below the ambient ones.' The operating-range chart is 'a guide and reference only'; its chiller-only versions (all refrigerants) stop near -10 C (read off the chart: our reading). s. 1.4.2: outdoor installation; supply fluid about 12.2-25 C; altitude under 2,000 m. Trust 50 (maker claim).",
   "nbc20_climate": "RULE: National Building Code of Canada 2020, Div. B Appendix C, Climatic and Seismic Information for Building Design, Table C-2: Edmonton January 2.5 % design temperature -30 C (value as J.B. gives it, 8 Nov 2026; the same figure is read from the local NBC(AE) 2023 text, register arch_pg_abClimateEdm). Trust 90 (regulation).",
   "van6555_por": "RULE: City of Vancouver Noise Control By-law 6555 (consolidated to 14 Jul 2026, By-law 14786), s. 1.2: '\"point of reception\" means: (a) a point in a lane or street, adjacent to but outside of the property occupied by the recipient of the noise or sound, that represents the shortest distance between that property and the source of the noise; (b) where no lane, street, or other public property exists between the recipient and the source, any point outside the property line of the real property from which the noise or sound emanates; or (c) in the case of noise emanating from inside Rogers Arena, ...' (saved copy, Claude Link beyond-data-sources/public/bylaw6555/full.pdf; read by Code 8 Nov 2026). Trust 90. Applied to every neighbouring lot, with or without a building: that an empty lot is a \"property occupied by the recipient\" is our reading (J.B., 8 Nov 2026). The tool measures at the receiving lot's point nearest the plant.",
-  "method_streetNamesAddr": "DERIVED (our method, J.B. 8 Nov 2026): street names on the Architecture plans, named from fronting lot addresses. The tool's street files (vanStreets2026, edmRoads2026) hold no names. A street segment takes the street part of the addresses of the lots that front it (an edge 0.5 m or longer facing the segment within 35 m, no other addressed lot between: the lotside.js probe), one vote per address, only from lots on one street; named when at least 2 votes and more than half agree. Lanes, segments fronted only by corner lots, and split votes stay 'street name ?'. A lot on one street keeps its own address. tool/streetnames.js. Trust 60 (derived with a stated assumption: that most lots on a single street are addressed on it). ‖ 8 Nov 2026 (licence, names): since 8 Nov 2026 Vancouver segments take the City's name (vanStreets2026, HBLOCK); this method names only Edmonton segments and Vancouver segments the City file leaves unnamed."
+  "method_streetNamesAddr": "DERIVED (our method, J.B. 8 Nov 2026): street names on the Architecture plans, named from fronting lot addresses. The tool's street files (vanStreets2026, edmRoads2026) hold no names. A street segment takes the street part of the addresses of the lots that front it (an edge 0.5 m or longer facing the segment within 35 m, no other addressed lot between: the lotside.js probe), one vote per address, only from lots on one street; named when at least 2 votes and more than half agree. Lanes, segments fronted only by corner lots, and split votes stay 'street name ?'. A lot on one street keeps its own address. tool/streetnames.js. Trust 60 (derived with a stated assumption: that most lots on a single street are addressed on it). ‖ 8 Nov 2026 (licence, names): since 8 Nov 2026 Vancouver segments take the City's name (vanStreets2026, HBLOCK); this method names only Edmonton segments and Vancouver segments the City file leaves unnamed.",
+  "edm_3dBuildings": "City of Edmonton Open Data, 3D Buildings (dataset 78sz-qcfr; file 3dBuildings.gdb.zip, 225,442,192 bytes, J.B. download 14 Oct 2026, Claude Link; same byte size as the portal file): 'a 3D model of the City of Edmonton, based on the 2019 building outlines ... and 2019 LiDAR data'; 'a static dataset based on data from 2019, so newer buildings may not be present'. Updated 25 May 2023, made public 15 Jun 2023; coordinate system 3TM114-83; layer Building_MP_Merge, 383,329 multipatch parts (tool/edm_heights.py). Used for Edmonton building heights (height = highest − lowest point of the parts inside an outline; flags 5 and 7 in the tiles). Trust 80. Licence: Open Government Licence – Edmonton v1.0 (July 2022; the portal's terms page, https://data.edmonton.ca/stories/s/City-of-Edmonton-Open-Data-Terms-of-Use/msh8-if28); the dataset page names none (J.B., 8 Nov 2026: use it).",
+  "edm_rooflines": "City of Edmonton Open Data, Rooflines (dataset 8zxj-vxqb; file Rooflines_20261014.csv, 138.5 MB, J.B. download 14 Oct 2026, Claude Link): 320,182 building outlines; columns the_geom, OBJECTID, TAX_ROLL_N, CENTROID_X, CENTROID_Y, AREA, COMMENT, Shape_Leng, Shape_Area; no heights. Rows last updated 25 Jun 2021; the dataset states no coverage year (?). Used as the Edmonton building outlines in the tiles (make_tiles.py). The portal also holds 'Rooflines (as of 2019)' (jpxi-a9a5) with rooftop and ground elevations, not used. Trust 80. Licence: Open Government Licence – Edmonton v1.0 (July 2022; the portal's terms page, https://data.edmonton.ca/stories/s/City-of-Edmonton-Open-Data-Terms-of-Use/msh8-if28); the dataset page names none (J.B., 8 Nov 2026: use it)."
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ (UCA default rates, ATCO Gas area); ATCO Gas North Mid Use variable delivery $1.045/GJ (ATCO Gas North Rate Schedules, p. 11, eff. 1 Jan 2026; riders T $1.289/GJ and L $0.087/GJ not included) → (1.045 + 1.458) × 3.6 ÷ 0.85 boiler efficiency ≈ $10.6/MWh heat at the October rate (our arithmetic; the tool uses the 12-month mean commodity, ≈ $13/MWh) — https://www.ucahelps.alberta.ca/regulated-rates.aspx ; https://gas.atco.com/content/dam/web/for-home/natural-gas/natural-gas-north-rate-schedule.pdf",
