@@ -208,3 +208,11 @@ F3: starts with F2, once J.B. OKs the F2 plan.
 - **Front lot line (1425 Clark Dr):** the tool does not use the address. Z&D s. 2 defines no front, rear or side property line (register lot_van_s2_lines: only Front Yard, from the "front property line"). The rule the tool applies is s. 10.26.1(b): on a corner site the frontage is "the shortest boundary abutting on a street, or as otherwise determined by the Director of Planning". Clark Dr's street lines are Grant St 44.0 m, Clark Drive 60.5 m and Vernon Drive 85.5 m, so the front is Grant St; Clark and Vernon are flanks. Clark and Vernon are also roughly parallel (a corner double-fronting site); s. 10.6.1 (Director's approval of placement) excludes I districts, so I-2 is not caught. The Director may decide otherwise (10.26.1).
 - **Register:** edm_3dBuildings and edm_rooflines added (OGL – Edmonton v1.0; dates and columns as reported), on floor_area. unrecorded 0.
 - **F2 plan** copied to Claude Link F2_plan_from_code.md. F3 starting.
+
+## 8 Nov 2026 — F3 gate: approval path on the Municipal map (Code)
+
+Municipal cards 1 and 2 have their own drawings now (Architecture and Engineering keep A01, A02). Three-way key (Permitted outright, DC blue; Conditional / approval, DCS; Needs a rezoning, grey hatch shown with the toggle "Show lots that need a rezoning"); Edmonton Direct Control as a fourth, dotted, "site by site (?)". The key carries the lines "No Vancouver zone allows a data centre outright. Edmonton: permitted only in IH and EETC (Major Industrial)." and the outright weakness; the large-scale line stays. Hover: zone (card 1) or lot (card 2), class, clause.
+Lots per class (property records in the tiles, counted as job A1; checks/tests/approval_counts.py → tool/data/approval_counts.json):
+- Vancouver: permitted 0 · conditional 696 · rezoning 92,705 (no zone 362, not counted).
+- Edmonton: permitted 386 · conditional 0 · rezoning 280,113 · Direct Control 8,228 (?) (no zone 11).
+Display only: golden identical; Architecture cards 1–2 render unchanged. Vancouver screenshots: checks/f1/F3_*.png; Edmonton (lot lines) local only.

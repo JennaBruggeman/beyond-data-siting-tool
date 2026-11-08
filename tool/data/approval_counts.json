@@ -1,0 +1,20 @@
+{
+ "_about": "F3 (CODE_JOB_F3_approval_map.md, 8 Nov 2026): lots per approval class, per city, for Municipal cards 1 and 2. Lots = the property records in the tool's tiles (tool/tiles/<city>/t_*.json, field A; City open data), each id counted once, as job A1 counted them. Class: permitted or conditional = the lots in checks/lot_types_2026-11-07.csv (job A1: zones in tool/data/zones.json that allow a data centre, I-3 sub-area B left out; Edmonton re-counted 8 Nov to IH and EETC), classed by today's zone row (path); Direct Control (Edmonton DC, DC1, DC2, DC/...) = '?' (site provisions not in the bylaw copy); every other lot with a zone on record = rezoning; no zone on record = not counted. Writes tool/data/approval_counts.json (counts only: no ids, no geometry).",
+ "date": "8 Nov 2026",
+ "van": {
+  "permitted": 0,
+  "conditional": 696,
+  "rezoning": 92705,
+  "dc": 0,
+  "noZone": 362,
+  "lots": 93763
+ },
+ "edm": {
+  "permitted": 386,
+  "conditional": 0,
+  "rezoning": 280113,
+  "dc": 8228,
+  "noZone": 11,
+  "lots": 288738
+ }
+}

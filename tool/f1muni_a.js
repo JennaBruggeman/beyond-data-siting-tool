@@ -4,12 +4,76 @@
 (function(){
 'use strict';
 const BD=window.BD, C=BD.f1cards, K=C.K, esc=C.esc, T='municipal';
-/* M1, M2: the same city and parcel maps as Architecture (job sheet §3b: as A01, A02); both are rule maps (zones, lots), no massing */
-C.add(T,'Your city',C.get('architecture','Your city'));
-C.add(T,'Your parcel',C.get('architecture','Your parcel'));
+/* M1, M2 (job F3, 8 Nov 2026: CODE_JOB_F3_approval_map.md): the city and parcel maps with the approval path in three classes, a toggle for the lots
+   that need a rezoning, counts per class and a hover line per zone or lot. Display only. Class from tool/data/zones.json: 'permitted' = the zone lists
+   a data centre as permitted (Edmonton IH, EETC: Major Industrial); 'conditional' = listed with the City deciding (Vancouver I-2, I-3, FC-2, I-1C);
+   'rezoning' = every other zone (Edmonton IM and BE included); Edmonton Direct Control (DC...) = '?': site provisions are not in the bylaw copy.
+   Counts: tool/data/approval_counts.json (checks/tests/approval_counts.py). Architecture keeps its own A01, A02. */
+const CLS={permitted:{name:'Permitted outright',sub:'a permit, no discretion on the use'},conditional:{name:'Conditional / approval',sub:'the City decides'},rezoning:{name:'Needs a rezoning',sub:'Council, public hearing'},dc:{name:'Direct Control',sub:'site by site (?)'}};
+const ZROWS=city=>((city==='van'?BD.data.raw.zones.ZV:BD.data.raw.zones.ZE)||{});
+const clsOf=(city,key)=>{ const k=String(key||'').trim(); if(city==='edm'&&/^DC/.test(k)) return 'dc'; const row=ZROWS(city)[k];
+  if(!row||row.path==='rezoning') return 'rezoning'; const w=C.dcStatus(city,k).word; return row.path==='permitted'||/permitted/.test(w)?'permitted':'conditional'; };
+const clauseOf=(city,key,c)=>c==='dc'?'Direct Control: site provisions not in the bylaw copy (?)':(ZROWS(city)[key]?(C.dcStatus(city,key).clause||'?'):'the zone does not list a data centre');
+let CNT=null; async function counts(){ if(CNT) return CNT; try{ CNT=await BD.getJSON('data/approval_counts.json'); }catch(e){ CNT={}; } return CNT; }
+const FILL={permitted:K.dc,conditional:K.dcSup};
+const PAT=id=>`<pattern id="${id}" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#fff"/><line x1="0" y1="0" x2="0" y2="6" stroke="${K.neut}" stroke-width="1.2"/></pattern><pattern id="${id}d" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#fff"/><circle cx="3" cy="3" r="0.9" fill="${K.mute}"/></pattern>`;
+const LINE1='No Vancouver zone allows a data centre outright.', LINE2='Edmonton: permitted only in IH and EETC (Major Industrial).';
+const OUTRIGHT='“Outright” in Edmonton means a permitted use under Bylaw 20001: it still needs a development permit and must meet the zone’s rules.';
+const LARGE='The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre.';
+const keyHtml=(id,hasDc)=>`<div class="f1c-mua-ak"><span><i style="background:${K.dc};border-color:${K.dc}"></i>${CLS.permitted.name} <em>${CLS.permitted.sub}</em></span><span><i style="background:${K.dcSup};border-color:${K.dcSup}"></i>${CLS.conditional.name} <em>${CLS.conditional.sub}</em></span><span><i style="background:repeating-linear-gradient(45deg,#fff 0 2px,${K.neut} 2px 3px);border-color:${K.neut}"></i>${CLS.rezoning.name} <em>${CLS.rezoning.sub}</em></span>${hasDc?`<span><i style="background:radial-gradient(${K.mute} 0.9px,#fff 1px) 0 0/5px 5px;border-color:${K.rule}"></i>${CLS.dc.name} <em>${CLS.dc.sub}</em></span>`:''}<label class="f1c-mua-tg"><input type="checkbox" data-rz="${id}"> Show lots that need a rezoning</label></div><p class="f1c-mua-al">${LINE1} ${LINE2}</p>`;
+/* the toggle shows the rezoning layer of the drawing it sits with (no other state) */
+if(!window.__f1cRz){ window.__f1cRz=true; document.addEventListener('change',e=>{ const t=e.target; if(!t||!t.matches||!t.matches('input[data-rz]')) return; document.querySelectorAll(`[data-rzl="${t.getAttribute('data-rz')}"]`).forEach(g=>g.style.display=t.checked?'':'none'); }); }
+const cntRows=(city,cn)=>{ const c=(cn||{})[city]||{}, f=v=>v==null?'?':Number(v).toLocaleString('en-CA'), nm=city==='van'?'Vancouver':'Edmonton';
+  return [[`${nm}: permitted outright`,f(c.permitted)+' lots'],[`${nm}: conditional / approval`,f(c.conditional)+' lots'],[`${nm}: needs a rezoning`,f(c.rezoning)+' lots'],...(city==='edm'?[[`${nm}: Direct Control (?)`,f(c.dc)+' lots']]:[])]; };
+const CNT_SRC='Lots per class: tool/data/approval_counts.json (checks/tests/approval_counts.py, 8 Nov 2026): the property records in the tool’s tiles (City open data), each counted once as in job A1 (strata units count one each); permitted and conditional = job A1’s lots (checks/lot_types_2026-11-07.csv) classed by today’s zone row; rezoning = every other record with a zone; Direct Control counted apart (?); records with no zone not counted (Vancouver 362, Edmonton 11).';
+const CLS_SRC='Classes: tool/data/zones.json (Vancouver: “Bulk Data Storage” conditional in I-2, I-2B, I-3 sub-area A, FC-2, I-1C; Edmonton: Major Industrial permitted in IH s. 2.140, 2.1 and EETC s. 3.52, 2.1; IM only where existing on 1 Jan 2024, s. 2.130, 2.3, so new = rezoning; register edm_dc_major). Direct Control: Bylaw 20001 DC1, DC2 site provisions are not in the bylaw copy (?).';
+C.add(T,'Your city',{async build(x){
+  const W=470, H=520, out=[], id='mua1'+Math.random().toString(36).slice(2,6), cn=await counts();
+  for(const city of ['van','edm']){ const m=await meta(city), st=await BD.streets(city), ext=m.ext, bb=[ext[0],ext[1],ext[2],ext[3]], f=C.frame(bb,W,H,8), by={};
+    for(const o of m.ovd){ const k=zkey(city,o.z); (by[k]||(by[k]=[])).push(o.r); }
+    let sd=''; if(st) for(const g of st.segs){ let d=''; for(let i=2;i+1<g.length;i+=2){ const [a,b]=f.P(g[i],g[i+1]); d+=(i>2?'L':'M')+a.toFixed(1)+' '+b.toFixed(1); } sd+=d; }
+    let on='', rz=''; for(const k in by){ const c=clsOf(city,k), t=`${k} · ${CLS[c].name} · ${clauseOf(city,k,c)}`, d=C.pathOf(by[k],f.P);
+      if(c==='permitted'||c==='conditional') on+=`<path d="${d}" fill="${FILL[c]}" stroke="none"><title>${esc(t)}</title></path>`; else rz+=`<path d="${d}" fill="url(#${id}${city}${c==='dc'?'d':''})" stroke="none"><title>${esc(t)}</title></path>`; }
+    out.push({city,svg:`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${city==='van'?'Vancouver':'Edmonton'}: zones by the approval path for a data centre"><defs>${PAT(id+city)}</defs><g data-rzl="${id}" style="display:none">${rz}</g><path d="${sd}" fill="none" stroke="${K.rule}" stroke-width="0.5" pointer-events="none"/>${on}</svg>`}); }
+  const draw=`<div class="f1c-two">${out.map(o=>`<figure><figcaption>${o.city==='van'?'Vancouver':'Edmonton'}</figcaption>${o.svg}</figure>`).join('')}</div>${keyHtml(id,true)}<p class="f1c-note">Hover a zone for its class and clause. Lot outlines are not shown (Edmonton’s are licensed for course use).</p>`;
+  return {noZoneFlag:true,draw,lead:`Where a data centre can go, by who decides. ${LINE1} ${LINE2} ${OUTRIGHT}`,
+    rows:[...cntRows('van',cn),...cntRows('edm',cn)],
+    more:[['What “outright” means',`<p>${OUTRIGHT} ${LARGE}</p>`],['Direct Control zones','<p>Edmonton’s Direct Control zones (DC1, DC2) carry their own site provisions, which are not in the bylaw copy the tool reads: whether a data centre is allowed is site by site (?).</p>']],
+    src:[CLS_SRC,CNT_SRC,'Zones: City of Vancouver and City of Edmonton zoning, as the tool’s city overview (tiles/<city>/meta.json). Streets: tool/streets_<city>.json.'],
+    missing:['Direct Control zones: site provisions (?)']}; }});
+C.add(T,'Your parcel',{async build(x){
+  const sel=x.sel, r=sel.ring; if(!r) return {draw:'<p class="f1v-empty">No lot loaded.</p>'};
+  const city=x.city, cn=await counts(), b=C.bbox(r), cx=(b[0]+b[2])/2, cy=(b[1]+b[3])/2, R=340, bb=[cx-R,cy-R,cx+R,cy+R], W=640, H=640, f=C.frame(bb,W,H,0), id='mua2'+Math.random().toString(36).slice(2,6);
+  let on='', rz='', other='', blds=''; const seen=new Set(), n={permitted:0,conditional:0,rezoning:0,dc:0};
+  for(const k in BD.S.tiles){ if(!k.startsWith(city+':')) continue; const t=BD.S.tiles[k];
+    for(const p of t.par||[]){ if(seen.has(p.id+':'+p.r[0])) continue; seen.add(p.id+':'+p.r[0]); const pb=C.bbox(p.r); if(!C.hit(bb,pb)) continue;
+      const a=t.A[p.id]||(p.ids&&p.ids.map(i=>t.A[i]).find(Boolean))||[], zk=C.zoneKey(city,a), d=C.pathOf([p.r],f.P);
+      if(!zk||zk==='?'){ other+=d; continue; } const c=clsOf(city,zk); n[c]++; const tt=`${a[0]?C.titleCase(String(a[0])):'lot'} · ${zk} · ${CLS[c].name} · ${clauseOf(city,zk,c)}`;
+      if(c==='permitted'||c==='conditional') on+=`<path d="${d}" fill="${FILL[c]}" fill-opacity="${c==='permitted'?0.75:1}" stroke="#fff" stroke-width="0.6"><title>${esc(tt)}</title></path>`;
+      else { other+=d; rz+=`<path d="${d}" fill="url(#${id}${c==='dc'?'d':''})" stroke="${K.hair}" stroke-width="0.6"><title>${esc(tt)}</title></path>`; } }
+    for(const q of t.bld||[]){ const qb=C.bbox(q.r); if(!C.hit(bb,qb)) continue; blds+=C.pathOf([q.r],f.P); } }
+  const [lx,ly]=f.P(cx,cy), lab=`${x.addr}`, c0=clsOf(city,x.key), sub=`${x.zone} · ${CLS[c0].name} · ${C.n0(sel.lotArea)} m²`;
+  const svg=`<svg viewBox="0 0 ${W+260} ${H}" width="${W+260}" height="${H}" role="img" aria-label="The lots around ${esc(lab)} by the approval path for a data centre">
+    <defs><clipPath id="${id}c"><rect width="${W}" height="${H}"/></clipPath>${PAT(id)}</defs><rect width="${W}" height="${H}" fill="${K.ground}"/>
+    <g clip-path="url(#${id}c)"><path d="${other}" fill="#fff" stroke="${K.hair}" stroke-width="0.6"/><g data-rzl="${id}" style="display:none">${rz}</g>${on}<path d="${blds}" fill="${K.bld}" fill-opacity="0.8" stroke="none" pointer-events="none"/>
+    <path d="${C.pathOf([r],f.P)}" fill="none" stroke="${K.ink}" stroke-width="1.8" pointer-events="none"/></g>
+    <circle cx="${lx}" cy="${ly}" r="2" fill="${K.ink}"/><line x1="${lx}" y1="${ly}" x2="${W+16}" y2="${ly}" stroke="${K.ink}" stroke-width="0.5"/>
+    <text x="${W+22}" y="${ly-2}" font-size="13" font-weight="500" fill="${K.ink}">${esc(lab)}</text><text x="${W+22}" y="${ly+14}" font-size="11.5" fill="${K.mute}">${esc(sub)}</text>
+    ${C.scaleBar(18,H-34,200,f.s,'200 m')}</svg>`;
+  const st=x.status;
+  return {draw:svg+keyHtml(id,city==='edm')+'<p class="f1c-note">Hover a lot for its zone, class and clause. Buildings are drawn light over the lots.</p>',lead:`This lot: ${CLS[c0].name.toLowerCase()}${c0==='rezoning'?'':' ('+st.word+')'}. ${city==='van'?LINE1:LINE2}${city==='edm'?' '+OUTRIGHT:''}`,
+    rows:[['Address',x.addr],['Zone',x.zone+(x.zone==='I-3'?', sub-area A':'')],['Approval class',CLS[c0].name],['Clause',st.clause||'?'],['Lots in this view',`${n.permitted} permitted · ${n.conditional} conditional · ${n.rezoning} rezoning${city==='edm'?` · ${n.dc} Direct Control`:''}`],...cntRows(city,cn)],
+    more:[['What the classes mean',`<p>${CLS.permitted.name}: the zone lists a data centre as permitted; a development permit is still needed. ${CLS.conditional.name}: the zone lists it and the City decides. ${CLS.rezoning.name}: the zone does not list it; Council decides at a public hearing. ${city==='edm'?OUTRIGHT+' '+LARGE:LINE1}</p>`]],
+    src:[CLS_SRC,CNT_SRC,`Lots and buildings: ${city==='van'?'City of Vancouver property parcels and building footprints (open data)':'City of Edmonton parcels as the tool shows them (lot outlines: Altalis, academic use only)'}; lots in this view: our count.`],
+    missing:city==='edm'?['Direct Control zones: site provisions (?)']:[]}; }});
 
 /* styles for these cards, injected once */
 if(!document.getElementById('f1c-mua')){ const st=document.createElement('style'); st.id='f1c-mua'; st.textContent=`
+.f1c-mua-ak{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;font-size:12.5px;color:var(--f-ink2);margin-top:14px}
+.f1c-mua-ak span{display:inline-flex;align-items:center;gap:7px}.f1c-mua-ak em{font-style:normal;color:var(--f-mute)}
+.f1c-mua-ak i{display:inline-block;width:14px;height:10px;border:1px solid}
+.f1c-mua-tg{display:inline-flex;align-items:center;gap:6px;margin-left:auto;font-size:12.5px;color:var(--f-ink);cursor:pointer}
+.f1c-mua-al{margin:8px 0 0;font-size:12.5px;color:var(--f-ink)}
 .f1c-mua-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;width:100%}
 .f1c-mua-tile{border:1px solid var(--f-hair);padding:22px 22px 20px;display:flex;flex-direction:column;gap:10px;min-height:290px;color:var(--f-faint);background:#fff}
 .f1c-mua-tile h4{margin:0;font-size:17px;font-weight:400}
