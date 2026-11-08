@@ -9,8 +9,8 @@ const BD=window.BD; const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&'
 const RANK={resident:0,arch:1,full:2,arch_only:9};
 const TABS=[['resident','Resident'],['municipal','Municipal'],['full','Engineering'],['arch','Architecture'],['all','All']];
 /* Municipal: the parts tagged 'm' in logic.json (make_templates.py MUNI; Cowork's reply on municipal_logic_parts.md, 8 Nov 2026) */
-const MUNI_CARD={'Your city':['parcel','zone'],'Your parcel':['parcel','zone'],'Is a data centre allowed?':['zoning_status'],'Height and floor area':['envelope','floor_area'],'Yards by edge':['envelope'],
- 'Noise limits by edge':['noise_limit'],'Storey heights, ground floor and street frontage':['storey_min'],'Loading':['loading_need'],'Rooftop equipment and screening':['roof_equipment_rule'],'Approval process':['rezoning_price']};
+const MUNI_CARD={'Your city':['parcel','zone'],'Your parcel':['parcel','zone'],'Is a data centre allowed?':['zoning_status'],'Height and floor area':['envelope','floor_area','roof_equipment_rule'],'Yards by edge':['envelope'],
+ 'Noise limits around the lot':['noise_limit'],'Storeys and street frontage':['storey_min'],'Loading':['loading_need'],'Approval process':['rezoning_price']};
 /* parts lit by a card ("How this is worked out"), from logic.js's step lists where a card matches a step; the other cards light nothing yet */
 const CARD={ 'Size and cooling':'setup','Backup power':'setup','What fits':'fits','Heat':'heat','Electricity':'energy','Water':'water','Materials':'materials','Three options':'opts','Could become':'opps','Heat receivers nearby':'heat','People nearby':'social','Neighbours and views':'social' };
 const WORD=[[100,'arithmetic'],[90,'regulation, tariff or standard read directly'],[80,'government dataset'],[70,'peer-reviewed coefficient from another context'],[60,'derived with a stated assumption'],[50,'operator or industry claim'],[40,'proxy'],[20,'judged'],[0,'gap']]; /* CLAUDE.md §3 */

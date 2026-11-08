@@ -108,3 +108,15 @@ Item 8: 1330 Glen Dr (22260652, 0.4 MW): the massing starts at grade, but the gr
 
 Engineering: cooling card as you set it; Three options removed with it.
 
+## 8 Nov 2026 — Job F1b: Municipal redraw, gate (Code)
+
+Done: the height card with rooftop folded in, so Municipal is 11 cards; storey stack; noise limits around the lot; loading step chart; one-page report; site context on every lot plan (Municipal 6, 7, 9; Architecture 4, 5, 6, 8, 14, 15, 16); dock-at-grade finding on Rooms (I-2, I-3). Leaders: 0 jogs, 0 crossings, at most 4 per card. No errors; golden and Architecture unchanged. Screenshots re-shot: checks/f1/ (Edmonton kept local).
+
+Notes:
+1. Noise: the tool finds a quiet-zone lot (375 1st Ave E, CD-1 402) adjoining 339 at 0 m; the board says 131 m. The tool's lot lines also show 339 abutting CD-1 (402).
+2. Loading: 7 bays assume the zone's most floor space (13,509 m²), said on the card. Edmonton BE has no storey rule.
+
+Engineering, before I build:
+3. The job sheet lists 12 cards (heat offered + who could take it); J.B.'s message said 11 (one heat card). Which?
+4. Its cooling row includes electricity; J.B. said leave it out (one PUE line). I'll leave it out unless you say otherwise.
+

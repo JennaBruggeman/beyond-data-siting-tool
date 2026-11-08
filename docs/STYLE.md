@@ -103,6 +103,20 @@ Pick the form by the job. No 3-D, no dual axes, no pie, no gradients.
 
 **Stacked bars: compare parts across storeys (or options).** Horizontal, one row per storey (34 px pitch, bar 16 px, radius 2), top storey first, **one scale for every row**. Segments in program colours with 2 px gaps. Row label left (12 INK2), total right of the bar (12 INK). Gridlines every 200 m² in HAIR with 11 px MUTE axis numbers.
 
+**Bullet graph: a limit with bands (J.B., 8 Nov).** One vertical bar on a metre scale: the outright limit as a solid DC bar from 0; each "with approval" step as a lighter DC band above it (DCS, then DCS at 45 % opacity). A straight horizontal leader from each band top to its label and clause. Something with no stated maximum (rooftop equipment) is a dashed INK arrow up from the limit line, never a band.
+
+**Bars on one scale: a multiple of something (J.B., 8 Nov).** Two horizontal bars, 26 px tall, on one shared axis: the base (lot area) in FAINT, the result (floor space allowed) in DC split into equal segments marked "1×, 2×, 3×", each as long as the base bar. Values at the bar ends, axis ticks in 11 px MUTE. Never draw the lot shape repeated (J.B.: "weird").
+
+**Storey stack: how many fit (J.B., 8 Nov).** One column per height limit, storeys as stacked blocks at their minimum heights (ground storey DC, storeys above DCS), 2 px white gaps, height inside each block. The limit is a 1.2 px INK line with "n storeys" above; "x m spare" under the column. Notes sit to the right on straight leaders that start at the right-most column's edge and never cross a column.
+
+**Limit map: limits around the lot (J.B., 8 Nov).** Neighbouring lots filled by the limit that applies at them (point of reception), not by lot edge: lighter fill for the higher limit, DCS-type blue for the stricter one (quiet zone). The lot itself in INK outline. Name the nearest strict receiver and its distance. Hover: zone and limit.
+
+**Range bars: a low-to-high estimate.** Dark segment to the low end, light segment to the high end, one scale per row; both values printed.
+
+**Ripple (Engineering noise only).** Rings from the source in INK at falling opacity, CSS animation, off under prefers-reduced-motion; the rings stop at the computed limit distances.
+
+**Site views: white model (J.B., 8 Nov, later job).** Parcel views come from the 3-D model with real context (roads, neighbouring buildings, street trees), rendered as a white model, not flat SVG shapes.
+
 **Not in the kit yet** (needed later, to be designed when a card needs them): line chart over time (heat, electricity), small multiples of plans, map keys.
 
 ## 6. Drawing rules (J.B.'s standards)

@@ -5,7 +5,7 @@
    are built in steps 2–4, so each card says which step builds it (no figure, no placeholder drawing).
    Card lists: job sheet §3 as updated 7 Nov (Resident 4, Municipal 12, Engineering 12; two cities parked). Chapters: Architecture from WORKLIST (Compare under
    Visualize, as Story_Architecture has it); the others from their storyboards (Story_Municipal, Story_Engineering, Story_Resident, 5 Nov 2026); Municipal's
-   'Industrial land and jobs' in Use, after 'Is a data centre allowed?' (gate 2, 7 Nov). 'How it works' opens the logic view (f1logic.js, §3d).
+   'Industrial land and jobs' in Use, after 'Is a data centre allowed?' (gate 2, 7 Nov). Job F1b (8 Nov): 11 cards; rooftop equipment folded into Height and floor area. 'How it works' opens the logic view (f1logic.js, §3d).
    Images: the tool's own 3-D view of 339 1st Ave E (checks/tests/f1_capture.js; City of Vancouver open data only). */
 (function(){
 'use strict';
@@ -16,7 +16,7 @@ const TPL=[
  {id:'resident',name:'Resident',tier:'resident',tab:'resident',step:5,who:'For people who live near a data centre. Where data centres are, how one operates with the information there is, and a report on it.',img:'resident',
   cards:[...C('Find',['Your city','Find a data centre']),...C('The facility',['What it is']),...C('Report',['Report'])]},
  {id:'municipal',name:'Municipal',tier:null,tab:'municipal',step:3,who:'For planners and councillors. One parcel’s rules, one rule per card: limits, not designs.',img:'municipal',
-  cards:[...C('Site',['Your city','Your parcel']),...C('Use',['Is a data centre allowed?','Industrial land and jobs']),...C('Building rules',['Height and floor area','Yards by edge','Noise limits by edge','Storey heights, ground floor and street frontage','Loading','Rooftop equipment and screening']),...C('Process',['Approval process']),...C('Report',['Report'])]},
+  cards:[...C('Site',['Your city','Your parcel']),...C('Use',['Is a data centre allowed?','Industrial land and jobs']),...C('Building rules',['Height and floor area','Yards by edge','Noise limits around the lot','Storeys and street frontage','Loading']),...C('Process',['Approval process']),...C('Report',['Report'])]},
  {id:'engineering',name:'Engineering',tier:'full',tab:'full',step:4,who:'For engineers and operators. The equipment, what it could exchange with the city, and three options.',img:'engineering',
   cards:[...C('Site',['Your city','Your parcel']),...C('Set-up',['Size and cooling','Backup power','What fits']),...C('Exchanges',['Heat','Electricity','Water','Materials']),...C('Options',['Three options','Could become']),...C('Report',['Report'])]},
  {id:'architecture',name:'Architecture',tier:'arch',tab:'arch',step:2,who:'For architects. A data centre and public programs on one lot, laid out from a library and checked against the main code moves.',img:'architecture',

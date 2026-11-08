@@ -188,13 +188,12 @@ C.add(T,'Report',{async build(x){
    <h5>${esc(x.addr)}: what the rules allow</h5><div class="ld">A data centre is a ${esc(st.word)} here: ${city==='van'?'the City decides':'the Development Planner decides'}.</div>
    <div class="top"><div>${mp}</div><div><div class="lb">Zone</div><div class="big">${esc(x.zone)}</div><div class="lb">Lot</div><div class="big">${esc(C.n0(sel.lotArea))} m²</div><div class="lb">Data centre</div><div class="big">${esc(st.word)}</div></div></div>
    <table><tr><th>Rule</th><th>What it says</th><th>Source</th></tr>${rules}</table></div>`;
-  const off=(n,t)=>`<div class="f1c-mua-pg"><div class="cap">Page ${n}</div><div class="f1c-mua-sheet f1c-mua-off"><div>${esc(t)}<br><b class="f1c-q" style="font-size:20px;font-weight:400">?</b><br>not built yet</div></div></div>`;
-  const draw=`<div class="f1c-mua-pages"><div class="f1c-mua-pg"><div class="cap">Page 1 · Parcel and rules (preview, drawn from this lot)</div>${sheet}</div>${off(2,'Lot edges: yards, noise limits and loading by edge')}${off(3,'Two cities: Vancouver and Edmonton side by side')}</div>
-   <button class="f1c-mua-print" type="button" onclick="window.print()">Print page 1</button>`;
-  return {draw,lead:'The report is three pages and a sources list. Page 1 is built from this lot’s rule rows; pages 2 and 3 wait for the edge and two-city cards.',
-   hero:[{v:'1 of 3',l:'pages built'}],
-   rows:[['Page 1 · Parcel and rules','built (board Municipal1)'],['Page 2 · Lot edges','not built'],['Page 3 · Two cities',C.q('not built')],['Sources','the clauses named on each row']],
-   more:[['What is missing from page 1','<p>Rows for noise, building code and generators are on the Municipal1 board but are not in the zone rows; they come from the by-law cards that group b builds.</p>'],['Print','<p>The print button uses the browser’s print dialog (window.print) and prints page 1 only. Choose “Save as PDF” there.</p>']],
-   src:['Page 1: tool/data/zones.json, '+x.zone+' rows and clauses; city overview tiles/'+city+'/meta.json. Layout: board Municipal1.png.','tool/templates.json has no Municipal report; the three pages are from Story_Municipal (M11 Report preview: “3 pages + sources”).'],
-   missing:['Municipal report definition in tool/templates.json','page 2 Lot edges','page 3 Two cities','noise, building code and generator rows for page 1']}; }});
+  const draw=`<div class="f1c-mua-pages"><div class="f1c-mua-pg"><div class="cap">Page 1 · What the rules allow (preview, drawn from this lot)</div>${sheet}</div></div>
+   <button class="f1c-mua-print" type="button" onclick="window.print()">Print the report</button>`;
+  return {draw,lead:'The report is one page plus its sources, built from this lot’s rule rows.',
+   hero:[{v:'1',l:'page, plus sources'}],
+   rows:[['Page 1 · What the rules allow','zone, lot, data-centre path, one row per rule with its clause (board Municipal1)'],['Sources','the clauses named on each row']],
+   more:[['What is missing from page 1','<p>Rows for noise, building code and generators are on the Municipal1 board but are not in the zone rows; they come from the by-law cards (Noise limits around the lot, Height and floor area, Loading) that group b builds.</p>'],['Print','<p>The print button uses the browser’s print dialog (window.print). Choose “Save as PDF” there.</p>']],
+   src:['Page 1: tool/data/zones.json, '+x.zone+' rows and clauses; city overview tiles/'+city+'/meta.json. Layout: board Municipal1.png.','tool/templates.json has no Municipal report; the one-page report follows board Municipal1.'],
+   missing:['Municipal report definition in tool/templates.json','noise, building code and generator rows for page 1']}; }});
 })();

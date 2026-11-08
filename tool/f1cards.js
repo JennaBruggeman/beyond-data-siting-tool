@@ -21,11 +21,28 @@ const allowed=(city,key)=>!!(city==='van'?ZR().ZV:ZR().ZE)[key];
 const dcStatus=(city,key)=>{ const r=(city==='van'?ZR().ZV:ZR().ZE)[key]||{}, c=(r.cl||[]).find(x=>/data centre/i.test(x[0])), t=c?c[1]:''; return {word:/discretionary/i.test(t)?'discretionary use':/conditional/i.test(t)?'conditional use':/permitted/i.test(t)?'permitted use':'?',clause:c?c[2]:'',text:t,src:r.src||[]}; };
 /* small SVG map kit: world metres (the tool's frame, y north) → screen */
 function frame(bb,w,h,pad){ pad=pad||0; const sx=(w-2*pad)/(bb[2]-bb[0]), sy=(h-2*pad)/(bb[3]-bb[1]), s=Math.min(sx,sy), ox=pad+((w-2*pad)-(bb[2]-bb[0])*s)/2, oy=pad+((h-2*pad)-(bb[3]-bb[1])*s)/2;
-  return {s,P:(x,y)=>[ox+(x-bb[0])*s, oy+(bb[3]-y)*s]}; }
+  return {s,P:(x,y)=>[ox+(x-bb[0])*s, oy+(bb[3]-y)*s],I:(sx,sy)=>[bb[0]+(sx-ox)/s, bb[3]-(sy-oy)/s]}; }
 function pathOf(rings,P){ let d=''; for(const r of rings){ for(let i=0;i<r.length;i+=2){ const [x,y]=P(r[i],r[i+1]); d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1); } d+='Z'; } return d; }
 function bbox(r){ let a=1e18,b=1e18,c=-1e18,d=-1e18; for(let i=0;i<r.length;i+=2){ a=Math.min(a,r[i]); b=Math.min(b,r[i+1]); c=Math.max(c,r[i]); d=Math.max(d,r[i+1]); } return [a,b,c,d]; }
 const hit=(b,q)=>!(q[0]>b[2]||q[2]<b[0]||q[1]>b[3]||q[3]<b[1]);
 function scaleBar(x,y,m,s,lab){ const L=m*s; return `<g font-family="IBM Plex Sans,system-ui,sans-serif" font-size="11" fill="${K.mute}"><rect x="${x}" y="${y}" width="${(L/2).toFixed(1)}" height="4" fill="${K.ink}"/><rect x="${(x+L/2).toFixed(1)}" y="${y}" width="${(L/2).toFixed(1)}" height="4" fill="#fff" stroke="${K.ink}" stroke-width="0.8"/><text x="${x}" y="${y+16}">0</text><text x="${(x+L).toFixed(1)}" y="${y+16}" text-anchor="end">${lab||m+' m'}</text><text x="${x}" y="${y-8}">N ↑</text></g>`; }
+/* the site context every parcel drawing sits on (job F1b item 7, J.B. 8 Nov: parcels must not float): the ground, the neighbouring lots and the building
+   footprints, drawn as the "Your parcel" card draws them, clipped to the drawing's box [x, y, w, h] in screen px, at the drawing's own scale.
+   P = a world→screen map; I = its inverse (C.frame gives both; a card with its own projection passes both). Only data the tool already holds (loaded tiles).
+   Edmonton lot outlines are Altalis data: they show in-app as the tool shows them today; screenshots of them stay local. o.tint: tint the lots where a data
+   centre is allowed (as "Your parcel"); o.skip: a lot id to leave out (the picked lot, drawn by the card). Returns an SVG <g>. */
+let CTXN=0;
+function context(x,P,I,box,o){ o=o||{}; const [X,Y,W,H]=box, a=I(X,Y), b=I(X+W,Y+H), wb=[Math.min(a[0],b[0]),Math.min(a[1],b[1]),Math.max(a[0],b[0]),Math.max(a[1],b[1])];
+  const pth=r=>{ let d=''; for(let i=0;i<r.length;i+=2){ const [u,v]=P(r[i],r[i+1]); d+=(i?'L':'M')+u.toFixed(1)+' '+v.toFixed(1); } return d+'Z'; };
+  let lots='', alw='', blds=''; const seen=new Set();
+  for(const k in BD.S.tiles){ if(!k.startsWith(x.city+':')) continue; const t=BD.S.tiles[k];
+    for(const p of t.par||[]){ const key=p.id+':'+p.r[0]; if(seen.has(key)) continue; seen.add(key); if(o.skip&&p.id===o.skip) continue; if(!hit(wb,p.bb||bbox(p.r))) continue;
+      const ok=o.tint&&allowed(x.city,zoneKey(x.city,t.A[p.id]||[])); if(ok) alw+=pth(p.r); else lots+=pth(p.r); }
+    for(const q of t.bld||[]){ if(!hit(wb,q.bb||bbox(q.r))) continue; blds+=pth(q.r); } }
+  const id='f1c-ctx'+(++CTXN);
+  return `<g class="f1c-ctx"><defs><clipPath id="${id}"><rect x="${X}" y="${Y}" width="${W}" height="${H}"/></clipPath></defs><g clip-path="url(#${id})"><rect x="${X}" y="${Y}" width="${W}" height="${H}" fill="${K.ground}"/>`+
+    `<path d="${lots}" fill="#fff" stroke="${K.hair}" stroke-width="0.6"/>${alw?`<path d="${alw}" fill="${K.fillSup}" stroke="${K.dcSup}" stroke-width="0.6"/>`:''}<path d="${blds}" fill="${K.bld}" stroke="none"/></g></g>`; }
+const CONTEXT_SRC=c=>`Site context (streets as the ground between lots, neighbouring lots and building footprints): ${c==='van'?'City of Vancouver property parcels and building footprints (open data)':'City of Edmonton parcels as the tool shows them (lot outlines: Altalis, academic use only) and building footprints'}, as the "Your parcel" card draws them.`;
 /* the meter of STYLE.md §5: one value against a limit */
 function meter(m){ const max=m.max||(m.lim?m.lim/0.87:Math.max(1,m.v||1)), pct=x=>Math.max(0,Math.min(100,100*x/max)), pass=m.pass!==false, col=pass?K.ink:K.red;
   return `<div class="f1c-m"><div class="t"><span>${esc(m.l)}</span><span style="color:${col}">${m.v==null?'<b class="f1c-q">?</b>':pass?'pass':'to fix'}</span></div>
@@ -59,5 +76,5 @@ async function arch(){ const s=BD.S.sel; if(!s) return null; const key=s.city+':
 /* the context a card reads: the example lot, as the tool models it */
 function ctx(city){ const M=BD.model(), sel=BD.S.sel||{}, a=sel.a||[], key=zoneKey(city,a);
   return {city,M,sel,a,key,addr:a[0]?titleCase(a[0]):'?',zone:key,status:dcStatus(city,key),arch,K,n0,n1,q,esc,frame,pathOf,bbox,hit,scaleBar,allowed,zoneKey,titleCase}; }
-BD.f1cards={arch,EXAMPLE_PICKS,add,has,get:(tpl,title)=>REG[tpl]&&REG[tpl][title],render,ctx,K,meter,frame,pathOf,bbox,hit,scaleBar,allowed,zoneKey,dcStatus,q,n0,n1,esc,titleCase};
+BD.f1cards={context,CONTEXT_SRC,arch,EXAMPLE_PICKS,add,has,get:(tpl,title)=>REG[tpl]&&REG[tpl][title],render,ctx,K,meter,frame,pathOf,bbox,hit,scaleBar,allowed,zoneKey,dcStatus,q,n0,n1,esc,titleCase};
 })();

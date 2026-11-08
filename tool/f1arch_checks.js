@@ -35,8 +35,9 @@ function geo(P){ const M=P.s.M, F=M.F, dir=P.s.dir<0?-1:1, w0=F.toW(0,0), wu=F.t
 /* box = [u0,u1,v0,v1]; the scale is fixed by the height H; the width follows */
 function mapper(g,box,H,pad){ const du=box[1]-box[0], dv=box[3]-box[2], s=(H-2*pad)/du, Wp=Math.round(dv*s+2*pad);
   const lp=(u,v)=>[pad+(g.sg>0?(v-box[2]):(box[3]-v))*s, pad+(g.dir<0?(box[1]-u):(u-box[0]))*s];
+  const inv=(X,Y)=>[g.dir<0?box[1]-(Y-pad)/s:box[0]+(Y-pad)/s, g.sg>0?box[2]+(X-pad)/s:box[3]-(X-pad)/s];
   const rect=r=>{ const a=lp(r[0],r[2]), b=lp(r[1],r[3]); return {x:Math.min(a[0],b[0]),y:Math.min(a[1],b[1]),w:Math.abs(a[0]-b[0]),h:Math.abs(a[1]-b[1])}; };
-  return {s,lp,rect,W:Wp,H}; }
+  return {s,lp,inv,rect,W:Wp,H,pad}; }
 const ringPts=(ring,g,mp)=>{ const o=[]; for(let i=0;i<ring.length;i+=2){ const [u,v]=g.F.toL(ring[i],ring[i+1]); o.push(mp.lp(u,v)); } return o; };
 const poly=pts=>pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join('')+'Z';
 const rc=(r,fill,extra)=>`<rect x="${r.x.toFixed(1)}" y="${r.y.toFixed(1)}" width="${r.w.toFixed(1)}" height="${r.h.toFixed(1)}" fill="${fill}"${extra||''}/>`;
@@ -57,6 +58,17 @@ const leaderSvg=L=>L.out.map(l=>{ const lx=l.side==='R'?l.x1+6:l.x1-6, an=l.side
 /* fit a name in a room: one or two lines, or null */
 function fitName(name,w,h,fs){ const cw=fs*0.56, one=name.length*cw; if(h<fs*1.6) return null; if(one<=w-8) return [name]; const wd=name.split(' '); if(wd.length<2||h<fs*2.8) return null;
   let best=null; for(let i=1;i<wd.length;i++){ const a=wd.slice(0,i).join(' '), b=wd.slice(i).join(' '), m=Math.max(a.length,b.length)*cw; if(m<=w-8&&(!best||m<best.m)) best={m,l:[a,b]}; } return best?best.l:null; }
+
+
+/* the shared site context under a plan (F1b item 7): world → this drawing's screen and back, drawn by BD.f1cards.context */
+function ctxG(x,P,g,mp,ox){ const Pw=(X,Y)=>{ const [u,v]=g.F.toL(X,Y), q=mp.lp(u,v); return [q[0]+ox,q[1]]; }, Iw=(sx,sy)=>{ const [u,v]=mp.inv(sx-ox,sy); return g.F.toW(u,v); };
+  return C.context(x,Pw,Iw,[ox,0,mp.W,mp.H],{skip:BD.S.sel&&BD.S.sel.id}); }
+/* north arrow (the frame has the street at the bottom, so north is not up) and a scale bar */
+function northScale(g,mp,ox,sx,sy,m){ const c=g.F.toW(0,0), n=g.F.toW(0,0); const w=g.M.ring; const X=w[0],Y=w[1], a=g.F.toL(X,Y), b=g.F.toL(X,Y+1), da=mp.lp(a[0],a[1]), db=mp.lp(b[0],b[1]); let dx=db[0]-da[0], dy=db[1]-da[1]; const l=Math.hypot(dx,dy)||1; dx/=l; dy/=l;
+  const cx=30, cy=40, x1=cx+dx*14, y1=cy+dy*14, x0=cx-dx*14, y0=cy-dy*14, px=-dy, py=dx;
+  const L=m*mp.s;
+  return `<g ${FONT} font-size="11" fill="${K.mute}"><line x1="${x0.toFixed(1)}" y1="${y0.toFixed(1)}" x2="${x1.toFixed(1)}" y2="${y1.toFixed(1)}" stroke="${K.ink}" stroke-width="1"/><path d="M${x1.toFixed(1)} ${y1.toFixed(1)}L${(x1-dx*6+px*3).toFixed(1)} ${(y1-dy*6+py*3).toFixed(1)}L${(x1-dx*6-px*3).toFixed(1)} ${(y1-dy*6-py*3).toFixed(1)}Z" fill="${K.ink}"/><text x="${(x1+dx*9-3.5).toFixed(1)}" y="${(y1+dy*9+4).toFixed(1)}" fill="${K.ink2}">N</text>
+  <rect x="${sx}" y="${sy}" width="${(L/2).toFixed(1)}" height="4" fill="${K.ink}"/><rect x="${(sx+L/2).toFixed(1)}" y="${sy}" width="${(L/2).toFixed(1)}" height="4" fill="#fff" stroke="${K.ink}" stroke-width="0.8"/><text x="${sx}" y="${sy+16}">0</text><text x="${(sx+L).toFixed(1)}" y="${sy+16}" text-anchor="end">${m} m</text></g>`; }
 
 const storeyLabel=z=>z<0.05?'Ground':n1(z)+' m';
 const tabsHtml=(zs)=>`<div class="${NS}tabs" role="group" aria-label="Storeys">${zs.map((z,i)=>`<button type="button" data-z="${z}" aria-pressed="${i===0}">${storeyLabel(z)}</button>`).join('')}</div>`;
@@ -106,24 +118,24 @@ C.add(T,'Rooms',{chip:CHIP,async build(x){
     const L=leaders(flagged.slice(0,4),rects,ox-14,ox+mp.W+14); dropAll.push(...L.dropped,...flagged.slice(4));
     s+=names.join('')+leaderSvg(L);
     groups+=`<g data-z="${S.z}" style="${i?'display:none':''}">${s}</g>`; });
-  const lotCtx=`<clipPath id="${id}"><rect x="${ox}" y="0" width="${mp.W}" height="${mp.H}"/></clipPath><g clip-path="url(#${id})"><path d="${lotP}" fill="none" stroke="${K.mute}" stroke-width="0.5"/></g>`;
-  const svg=`<svg viewBox="0 0 ${W} ${mp.H}" width="${W}" height="${mp.H}" ${FONT} role="img" aria-label="Plan of each storey: rooms, walls, doors, stairs and exits">${lotCtx}${groups}${C.scaleBar(ox+8,mp.H-30,10,mp.s,'10 m')}</svg>`;
+  const lotCtx=`<clipPath id="${id}"><rect x="${ox}" y="0" width="${mp.W}" height="${mp.H}"/></clipPath>${ctxG(x,P,g,mp,ox)}<g clip-path="url(#${id})"><path d="${lotP}" fill="#fff" stroke="${K.mute}" stroke-width="0.8"/></g>`;
+  const svg=`<svg viewBox="0 0 ${W} ${mp.H}" width="${W}" height="${mp.H}" ${FONT} role="img" aria-label="Plan of each storey: rooms, walls, doors, stairs and exits">${lotCtx}${groups}${northScale(g,mp,ox,ox+8,mp.H-30,10)}</svg>`;
   const key=KEY([sw(K.fillHall,'data hall'),sw(K.fillSup,'data-centre support'),sw(K.fillPub,'public programs'),sw(K.fillClin,'clinic'),`<span><i style="background:#fff;border:1px solid ${K.faint}"></i>corridor, stair, lift</span>`,`<span><i style="background:${K.ink};border-radius:50%;width:7px;height:7px;border:0"></i>exit door</span>`,`<span><i class="ln" style="border-color:${K.mute}"></i>lot line</span>`]);
   const draw=`<div class="${NS}wrap">${tabsHtml(zs)}<p class="${NS}cap">Storeys by floor height · street at the bottom</p>${svg}${key}</div>`;
   /* panel */
   const mw=P.ratio&&P.ratio.mwTest, DP=BD.archTest.dcPieces(P), hallM2=DP?DP.L.pieces.filter(q=>q.id==='hall').reduce((t,q)=>t+q.m2,0):null, dock=DP&&DP.L.dock;
   const meters=PL.programs.filter(p=>p.storeys>1).map(p=>({l:short(p.name)+', floor after stairs and lift',v:p.net,lim:p.asked,max:p.asked*1.15,unit:'m²',pass:p.short<=0.5,cap:`${n0(p.net)} of ${n0(p.asked)} m² · needed ${n0(p.asked)} m²`,src:'plan.js net floor'}));
   const tbl=zs.map(z=>{ const rr=roomRows.filter(r=>r[0]===z); return `<tr><th colspan="2">${storeyLabel(z)} storey</th></tr>`+rr.map(r=>`<tr><td>${esc(r[1])}</td><td>${n0(r[2])} m²</td></tr>`).join(''); }).join('');
-  const nfl=PL.flags.length;
+  const nfl=PL.flags.length, zk=String(x.zone||''), dockGrade=dock&&Math.abs(dock.base||0)<0.1&&(/^I-2/.test(zk)||zk==='I-3')?{why:`strict reading of ${zk==='I-3'?'I-3 s. 2.2.11':'I-2 s. 2.2.7'} allows only entrances; the Emergency hub spec settles it`}:null;
   return {draw,lead:'Every room of the tool’s plan, one storey at a time. The public blocks stand at the street; the data centre sits behind, with its own corridor and stairs.',
     hero:[{v:mw!=null?mw.toFixed(1):C.q(),u:mw!=null?'MW':'',l:'IT load tested'},{v:String(nRooms),l:'rooms on '+zs.length+' storeys'},{v:String(nExit),l:'exit doors drawn'},{v:String(nfl),l:'drawing choices to check',red:nfl>0}],
-    rows:[['Data hall',hallM2!=null?`${n0(hallM2)} m², ${P.hall.storeys} storeys`:C.q()],['Loading bays inside',dock?String(dock.n):'none drawn'],['Doors drawn',String(nDoors)],['Shared lobby',C.q('no code source for its size')]],
+    rows:[['Data hall',hallM2!=null?`${n0(hallM2)} m², ${P.hall.storeys} storeys`:C.q()],['Loading bays inside',dock?String(dock.n):'none drawn'],['Doors drawn',String(nDoors)],['Shared lobby',C.q('no code source for its size')]].concat(dockGrade?[['Loading dock at grade',C.q(dockGrade.why)]]:[]),
     meters,
     more:[['Every room and its source',`<table class="${NS}tbl">${tbl}</table><p style="margin-top:8px;color:${K.mute}">Sizes: Arrange’s placement (tool/arch.js) and the data-centre rooms (tool/dcrooms.js); walls, doors, stairs and exits: tool/plan.js.</p>`],
       ['What the rule sheet chose',`<p>${Object.values(PL.rules).map(r=>esc(r.why)).join('</p><p style="margin-top:6px">')}</p>`],
       ['What the plan flags',`<p>${PL.flags.length?PL.flags.map(esc).join('</p><p style="margin-top:6px">'):'Nothing.'}</p>`]],
-    src:[`Plan layer: ${PL.version} (tool/plan.js, register arch_nbc3432). Doorway 0.85 m, corridor 1.1 m and stair 1.1 m are NBC Table 3.4.3.2.-A minimums; every other size is a drawing choice named in the rule sheet.`,'Rooms and blocks: Arrange’s placement of the Emergency hub (refuge side by side, warming shelter, clinic) at Ratios’ defaults (tool/arch.js, tool/dcrooms.js).',`Rooms too small for their name, and not flagged by the plan, are listed in “Every room and its source”.${dropAll.length?' Not labelled on the drawing (no clear straight leader): '+dropAll.map(d=>d.t).join(', ')+'.':''}`],
-    missing:['shared lobby (no code source for its size)','door widths from occupant load (check 10)']}; }});
+    src:[C.CONTEXT_SRC(x.city),`Plan layer: ${PL.version} (tool/plan.js, register arch_nbc3432). Doorway 0.85 m, corridor 1.1 m and stair 1.1 m are NBC Table 3.4.3.2.-A minimums; every other size is a drawing choice named in the rule sheet.`,'Rooms and blocks: Arrange’s placement of the Emergency hub (refuge side by side, warming shelter, clinic) at Ratios’ defaults (tool/arch.js, tool/dcrooms.js).',`Rooms too small for their name, and not flagged by the plan, are listed in “Every room and its source”.${dropAll.length?' Not labelled on the drawing (no clear straight leader): '+dropAll.map(d=>d.t).join(', ')+'.':''}`],
+    missing:['shared lobby (no code source for its size)','door widths from occupant load (check 10)',...(dockGrade?['loading dock at grade: strict reading of I-2 s. 2.2.7 / I-3 s. 2.2.11 allows only entrances, to be settled by the Emergency hub spec']:[])]}; }});
 
 /* ======================= 15 Separations ======================= */
 const gapOf=(a,b)=>{ const dx=Math.max(0,b[0]-a[1],a[0]-b[1]), dy=Math.max(0,b[2]-a[3],a[2]-b[3]); return Math.hypot(dx,dy); };
@@ -155,7 +167,7 @@ C.add(T,'Separations',{chip:CHIP,async build(x){
         const pts=[0.5,0.15,0.85,0.3,0.7].map(t=>horiz?{x:q.x+q.w*t,y:q.y+q.h/2}:{x:q.x+q.w/2,y:q.y+q.h*t}); items.push({k:'gap|'+p.id,t:short(p.name)+': '+n1(best.gp)+' m apart',s:(h!=null?h+' h needed':'rating ?')+' · blocks do not touch',red:true,pts}); } });
     const L=leaders(items.slice(0,3),rects,ox-14,ox+mp.W+14); s+=names.join('')+leaderSvg(L); if(L.dropped.length) pairs._dropped=(pairs._dropped||[]).concat(L.dropped.map(d=>d.t));
     groups+=`<g data-z="${z}" style="${i?'display:none':''}">${s}</g>`; });
-  const svg=`<svg viewBox="0 0 ${W} ${mp.H}" width="${W}" height="${mp.H}" ${FONT} role="img" aria-label="Blocks on each storey and the fire separations between the data centre and the public blocks"><clipPath id="${id}"><rect x="${ox}" y="0" width="${mp.W}" height="${mp.H}"/></clipPath><g clip-path="url(#${id})"><path d="${lotP}" fill="none" stroke="${K.mute}" stroke-width="0.5"/></g>${groups}${C.scaleBar(ox+8,mp.H-30,10,mp.s,'10 m')}</svg>`;
+  const svg=`<svg viewBox="0 0 ${W} ${mp.H}" width="${W}" height="${mp.H}" ${FONT} role="img" aria-label="Blocks on each storey and the fire separations between the data centre and the public blocks"><clipPath id="${id}"><rect x="${ox}" y="0" width="${mp.W}" height="${mp.H}"/></clipPath>${ctxG(x,P,g,mp,ox)}<g clip-path="url(#${id})"><path d="${lotP}" fill="#fff" stroke="${K.mute}" stroke-width="0.8"/></g>${groups}${northScale(g,mp,ox,ox+8,mp.H-30,10)}</svg>`;
   const sepLine=(w,c,d)=>`<svg width="22" height="8" style="vertical-align:middle;margin-right:6px"><line x1="0" y1="4" x2="22" y2="4" stroke="${c}" stroke-width="${w}"${d?` stroke-dasharray="${d}"`:''}/></svg>`;
   const key=KEY([sw(K.fillHall,'data hall'),sw(K.fillSup,'data-centre support'),sw(K.fillPub,'public programs'),sw(K.fillClin,'clinic'),`<span>${sepLine(3.4,K.ink)}2 h separation</span>`,`<span>${sepLine(2,K.red)}gap between blocks</span>`,`<span>${sepLine(1.6,K.red,'5 3')}separation, rating ?</span>`]);
   const draw=`<div class="${NS}wrap">${tabsHtml(zs)}<p class="${NS}cap">Storeys by floor height · street at the bottom · only the separations are drawn as lines</p>${svg}${key}</div>`;
@@ -202,7 +214,7 @@ C.add(T,'Plant and site',{chip:CHIP,async build(x){
   const failLot=gt&&gt.pl!=null&&dLot!=null&&dLot<gt.pl-1e-9;
   const L=leaders(items.slice(0,4),brects,ox-18,ox+mp.W+18), fe=(M.edgeYards||[]).find(e=>e.kind==='front'), sy=mp.lp(lotBox(g,3)[g.dir<0?0:1]+(g.dir<0?3:-3),0)[1]+6, street=fe&&fe.abuts==='street'?`<line x1="${ox}" y1="${sy.toFixed(1)}" x2="${ox+mp.W}" y2="${sy.toFixed(1)}" stroke="${K.faint}" stroke-width="1" stroke-dasharray="6 4"/><text x="${ox+mp.W/2}" y="${(sy+14).toFixed(1)}" text-anchor="middle" font-size="11.5" fill="${K.mute}">street</text>`:'';
   const svg=`<svg viewBox="0 0 ${W} ${mp.H+22}" width="${W}" height="${mp.H+22}" ${FONT} role="img" aria-label="Site plan: lot, building, plant yard, generators, truck aisle and side drive"><clipPath id="${id}"><rect x="${ox}" y="0" width="${mp.W}" height="${mp.H}"/></clipPath>
-    <g clip-path="url(#${id})">${aisleSvg}${s}${setback}${yardP}${eqSvg}</g><path d="${poly(lot)}" fill="none" stroke="${K.ink}" stroke-width="1.2"/>${street}${leaderSvg(L)}${C.scaleBar(12,mp.H-30,20,mp.s,'20 m')}</svg>`;
+    ${ctxG(x,P,g,mp,ox)}<path d="${poly(lot)}" fill="#fff" stroke="none"/><g clip-path="url(#${id})">${aisleSvg}${s}${setback}${yardP}${eqSvg}</g><path d="${poly(lot)}" fill="none" stroke="${K.ink}" stroke-width="1.2"/>${street}${leaderSvg(L)}${northScale(g,mp,ox,12,mp.H-30,20)}</svg>`;
   const key=KEY([sw(K.fillHall,'data centre'),sw(K.fillPub,'public programs'),sw(K.fillClin,'clinic'),sw(K.plant,'plant yard (fenced)'),sw(K.neut,'generators and coolers'),sw(K.hair,'truck aisle, side drive'),`<span><i class="ln" style="border-color:${K.mute};border-style:dashed"></i>yard setback</span>`]);
   const draw=`<div class="${NS}wrap">${svg}${key}</div>`;
   /* panel: meters and rows */
@@ -224,7 +236,7 @@ C.add(T,'Plant and site',{chip:CHIP,async build(x){
     hero:[{v:String(nGen),l:'generator sets in the yard'},{v:yardArea!=null?n0(yardArea):C.q(),u:yardArea!=null?'m²':'',l:'plant yard'},{v:da?(da.ok?'yes':'no'):'–',l:'trucks reach the dock',red:!!(da&&!da.ok)},{v:fcl?n1(fcl.v):C.q(),u:fcl?'m':'',l:'flood construction level'}],
     rows,meters,
     more:[['Rules this card draws on',rl.map(r=>`<p style="margin-bottom:6px">${esc(r.t)} <span style="color:${K.mute}">[${esc((r.src||[]).join(', ')||'no source')}]</span></p>`).join('')||'<p>None.</p>']],
-    src:['Plant yard, generators, truck aisle, side drive: the site model (tool/site.js, tool/plant.js) at the Ratios size Arrange tests.','Generator to lot line and to building: B139.1.0 Table 2 for the fuel one set holds (register arch_csa_b139, tool/data/equipment.json); distances are our arithmetic from the placed rectangles.',noteNoise+' Our arithmetic from the tool’s generator sound data (tool/data/noise.json).',`Flood construction level: ${fcl?`${fcl.datum}, register ${fcl.src}${slab!=null?`; slab ${n1(slab)} m, datum against the LiDAR not confirmed (?)`:''}`:'not on file'}.`,`Trucks: ${da?'Arrange’s dock-access test, geometry only, turning not checked (?)':'no dock drawn'} (Parking By-law 5.4.1, register vanParking5).`],
+    src:[C.CONTEXT_SRC(x.city),'Plant yard, generators, truck aisle, side drive: the site model (tool/site.js, tool/plant.js) at the Ratios size Arrange tests.','Generator to lot line and to building: B139.1.0 Table 2 for the fuel one set holds (register arch_csa_b139, tool/data/equipment.json); distances are our arithmetic from the placed rectangles.',noteNoise+' Our arithmetic from the tool’s generator sound data (tool/data/noise.json).',`Flood construction level: ${fcl?`${fcl.datum}, register ${fcl.src}${slab!=null?`; slab ${n1(slab)} m, datum against the LiDAR not confirmed (?)`:''}`:'not on file'}.`,`Trucks: ${da?'Arrange’s dock-access test, geometry only, turning not checked (?)':'no dock drawn'} (Parking By-law 5.4.1, register vanParking5).`],
     missing:['fire department access and FDC distances (NBC 3.2.5.5, VBBL 3.2.5.15)','transformer distances (BC Hydro ES54)','fuel truck spot (NFC 4.11.2.4)',...(fcl?[]:['flood construction level for this lot'])]}; }});
 
 /* ======================= 21 Report ======================= */
