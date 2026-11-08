@@ -151,3 +151,11 @@ Rooms, Separations and the new Exits card (Architecture is now 22 cards) share o
 1. Exits card, clinic row: "(our reading: the clinic corridor is inside the suite, not a public corridor, so max(½ diagonal, 9 m))" added. Dimension stays diagonal.
 2. NBD_Roads_GPKG.zip (BC and AB files read): it is ISED broadband availability by road segment. Fields are road_id_route, colour and availability flags only; no street-name field and no licence file in the zip. Not used, not added to the register; "street name ?" stays.
 Waiting for the Emergency hub spec (parts 1–3 final) before F2.
+
+## 8 Nov 2026 — street names from fronting lot addresses (Code)
+
+Plans (Rooms, Separations, Exits) now name each street segment from the addresses of the lots that front it: "named from fronting lot addresses (our method)", tool/streetnames.js, register method_streetNamesAddr (trust 60). Only lots on one street vote (a corner lot's address could be on either street); a name needs at least 2 votes and more than half. Lanes, corner-only segments and split votes stay "street name ?". A lot on one street keeps its own address street. No new data.
+Segments within 150 m named (lanes apart): 339 1st Ave E 8 of 23; 275 1st Ave E 7 of 23; 1425 Clark Dr 7 of 23; 74 Airport Rd NW 8 of 17; 64 Airport Rd NW 9 of 23.
+On the plans: 339 and 64 Airport unchanged (one street each, own address). 1425 Clark Dr (corner): the east edge is named Clark Dr; the south (front) and west edges stay "?" (votes split or none).
+Question: the register says the City's Vancouver street file is "by hundred block" (likely a name field); the tool's copy dropped it and the raw file is not on this computer. Re-run make_streets.py with names if J.B. still has it?
+Golden identical; register unrecorded 0.

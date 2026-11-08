@@ -89,6 +89,12 @@ const RQ=`<b style="color:${K.red};font-weight:500">?</b>`;
 
 /* ======================= the shared plan (one per layout; Rooms, Separations and Exits all draw from it) ======================= */
 const PLANC={};
+/* street names (J.B. 8 Nov 2026): the street files carry no names; the front street takes the street part of the lot's own address, and any other
+   street segment (every street of a corner lot) is named from the addresses of the lots that front it (tool/streetnames.js, our method); lanes, and segments whose fronting addresses
+   do not agree (at least 2, more than half), stay 'street name ?' */
+const SG={}; async function sgReady(x){ if(!(x.city in SG)) SG[x.city]=BD.streets?await BD.streets(x.city):null; }
+const SNCAP=' · other street names: named from fronting lot addresses (our method)';
+const SNSRC='Street names: a lot on one street takes it from its own address; other streets, and every street of a corner lot, are named from fronting lot addresses (our method: tool/streetnames.js; only lots on one street vote; a segment takes the street most of them (at least 2) are addressed on; otherwise, and for lanes, “street name ?”). The City street files hold no names.';
 function planFor(x,P){
   const key=[x.city,(BD.S.sel||{}).id,P.s.dir,JSON.stringify([P.hall.u,P.hall.v,P.hall.base,P.hall.storeys,P.hall.h]),JSON.stringify((P.boxes||[]).map(b=>[b.id,b.u,b.v,b.base,b.storeys,b.h,b.front])),(P.s.M.ring||[]).slice(0,4).join(',')].join('|');
   if(PLANC.k===key&&PLANC.v) return PLANC.v;
@@ -130,15 +136,16 @@ function planFor(x,P){
     if(col){ S.exits.filter(e=>e.kind!=='loading').forEach(e=>{ s+=tick(S,e,9,K.ink,2.4); });
       st.rooms.filter(o=>o.drawn).forEach(o=>{ const big=o.parts.slice().sort((a,c)=>(c.m2||0)-(a.m2||0))[0], q=pr(big.rect), sm=Math.min(q.w,q.h)<16; s+=`<text x="${f1(q.x+q.w/2)}" y="${f1(q.y+q.h/2+(sm?3.5:4.5))}" text-anchor="middle" font-size="${sm?10:12.5}" font-weight="500" fill="${K.ink}">${o.n}</text>`; }); }
     return s; };
-  /* street names along their edges (the tool holds street centrelines without names; the front street takes the street part of the address, any other street shows a red ?) */
-  const streets=(()=>{ const ey=(M.edgeYards||[]).filter(e=>e.abuts==='street'||e.abuts==='alley'); if(!ey.length) return ''; const nm=String(x.addr||'').replace(/^\s*\S*\d\S*\s+/,'').replace(/,.*$/,'').trim();
+  /* street names along their edges (see SNSRC above) */
+  let snUsed=false; const streets=(()=>{ const ey=(M.edgeYards||[]).filter(e=>e.abuts==='street'||e.abuts==='alley'); if(!ey.length) return ''; const nm=String(x.addr||'').replace(/^\s*\S*\d\S*\s+/,'').replace(/,.*$/,'').trim();
+    const SNE=SG[x.city]&&BD.streetNames?BD.streetNames.edgeNames(SG[x.city],BD.S.tiles,x.city,M.ring,150):null;
     const cx=lotPts.reduce((t,p)=>t+p[0],0)/lotPts.length, cy=lotPts.reduce((t,p)=>t+p[1],0)/lotPts.length; let o=''; const done=[];
     ey.slice(0,4).forEach(e=>{ const a=g.F.toL(e.ax,e.ay), c=g.F.toL(e.bx,e.by), pa=pt(a[0],a[1]), pc=pt(c[0],c[1]), mx=(pa[0]+pc[0])/2, my=(pa[1]+pc[1])/2; let nx=mx-cx, ny=my-cy; const l=Math.hypot(nx,ny)||1; nx/=l; ny/=l;
       const vert=Math.abs(pc[1]-pa[1])>Math.abs(pc[0]-pa[0]); let px=mx+nx*11, py=my+ny*11; px=Math.max(ox+10,Math.min(ox+mp.W-10,px)); py=Math.max(14,Math.min(mp.H-8,py));
-      const lab=e.abuts==='alley'?'lane':(e.kind==='front'&&nm?nm:'street name ?'), red=lab==='street name ?';
+      const sn=SNE&&e.abuts!=='alley'?SNE.at(e.ax,e.ay,e.bx,e.by):null, lab=e.abuts==='alley'?'lane':(e.kind==='front'&&nm&&(!SNE||SNE.ownSegs<=1)?nm:(sn&&sn.name?(snUsed=true,sn.name):'street name ?')), red=lab==='street name ?';
       if(done.some(d=>d[0]===lab&&Math.hypot(d[1]-px,d[2]-py)<70)) return; done.push([lab,px,py]);
       o+=`<text x="${f1(px)}" y="${f1(py)}" text-anchor="middle" font-size="11.5" fill="${red?K.red:K.mute}" stroke="#fff" stroke-width="3" paint-order="stroke"${vert?` transform="rotate(-90 ${f1(px)} ${f1(py)})"`:''}>${esc(lab)}</text>`; }); return o; })();
-  const v={PL,g,M,mp,ox,W,H:mp.H,LW,zs,stor,pt,pr,lotP,streets,layer,doorLine,tick,treads,fillOf,DP,centre,f1,counts:{nNoAcc,nNoCorr,nRooms}};
+  const v={PL,g,M,mp,ox,W,H:mp.H,LW,zs,stor,pt,pr,lotP,streets,snUsed,layer,doorLine,tick,treads,fillOf,DP,centre,f1,counts:{nNoAcc,nNoCorr,nRooms}};
   PLANC.k=key; PLANC.v=v; return v; }
 /* the svg around the storey groups: site context, lot, storeys, street names, north arrow, scale bar */
 function planSvg(x,P,pl,id,label,groups){ const {g,mp,ox,W}=pl;
@@ -148,7 +155,7 @@ const stTitle=(pl,st)=>{ const blocks=[]; st.rooms.forEach(o=>{ const b=o.block=
 
 /* ======================= 14 Rooms ======================= */
 C.add(T,'Rooms',{chip:CHIP,async build(x){
-  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; const pl=BD.plan&&planFor(x,P); if(!pl) return {draw:'<p class="f1v-empty">The tool has no plan for this lot (no layout placed).</p>'};
+  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; await sgReady(x); const pl=BD.plan&&planFor(x,P); if(!pl) return {draw:'<p class="f1v-empty">The tool has no plan for this lot (no layout placed).</p>'};
   const {PL,mp,zs,stor}=pl; let nDoors=0, nExit=0; const roomRows=[];
   let groups='', titles='', sched='';
   stor.forEach(st=>{ const S=st.S; groups+=`<g data-z="${st.z}" style="${st.i?'display:none':''}">${pl.layer(st,'color')}</g>`; titles+=stTitle(pl,st);
@@ -158,7 +165,7 @@ C.add(T,'Rooms',{chip:CHIP,async build(x){
     sched+=`<div data-z="${st.z}" class="${NS}sch" style="${st.i?'display:none':''}"><table><thead><tr><th>No.</th><th>Room</th><th>m²</th></tr></thead><tbody>${st.noCorr?`<tr class="warn"><td></td><td colspan="2">No corridor or shared lobby on this storey ${RQ}</td></tr>`:''}${rows}</tbody></table></div>`; });
   const hasStarred=stor.some(st=>st.rooms.some(o=>!o.drawn));
   const key=KEY([sw(K.fillHall,'data hall'),sw(K.fillSup,'data-centre support'),sw(K.fillPub,'public programs'),sw(K.fillClin,'clinic'),`<span><i style="background:#fff;border:1px solid ${K.faint}"></i>corridor, lobby</span>`,`<span><i style="background:${HATCH};border:1px solid ${K.mute}"></i>stair (lift: cross)</span>`,`<span><i style="width:3px;height:11px;background:${K.ink};border:0;border-radius:1px"></i>exit door</span>`,`<span>${RQ}&nbsp;no sourced size, or no corridor access</span>`]);
-  const draw=`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Rooms are numbered; the schedule under the plan names them · street at the bottom${hasStarred?' · * not a rectangle, listed but not drawn':''}</p>${titles}${planSvg(x,P,pl,'f1c-a14','Plan of each storey: numbered rooms, walls, doors, stairs and exits',groups)}${sched}</div>`;
+  const draw=`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Rooms are numbered; the schedule under the plan names them · street at the bottom${hasStarred?' · * not a rectangle, listed but not drawn':''}${pl.snUsed?SNCAP:''}</p>${titles}${planSvg(x,P,pl,'f1c-a14','Plan of each storey: numbered rooms, walls, doors, stairs and exits',groups)}${sched}</div>`;
   const mw=P.ratio&&P.ratio.mwTest, hallM2=pl.DP?pl.DP.L.pieces.filter(q=>q.id==='hall').reduce((t,q)=>t+q.m2,0):null, dock=pl.DP&&pl.DP.L.dock;
   const meters=PL.programs.filter(p=>p.storeys>1).map(p=>({l:short(p.name)+', floor after stairs and lift',v:p.net,lim:p.asked,max:p.asked*1.15,unit:'m²',pass:p.short<=0.5,cap:`${n0(p.net)} of ${n0(p.asked)} m² · needed ${n0(p.asked)} m²`,src:'plan.js net floor'}));
   const tbl=zs.map(z=>{ const rr=roomRows.filter(r=>r[0]===z); return `<tr><th colspan="2">${storeyLabel(z)} storey</th></tr>`+rr.map(r=>`<tr><td>${esc(r[1])}</td><td>${n0(r[2])} m²</td></tr>`).join(''); }).join('');
@@ -173,8 +180,8 @@ C.add(T,'Rooms',{chip:CHIP,async build(x){
       ['Every room and its source',`<table class="${NS}tbl">${tbl}</table><p style="margin-top:8px;color:${K.mute}">Sizes: Arrange’s placement (tool/arch.js) and the data-centre rooms (tool/dcrooms.js); walls, doors, stairs and exits: tool/plan.js.</p>`],
       ['What the rule sheet chose',`<p>${Object.values(PL.rules).map(r=>esc(r.why)).join('</p><p style="margin-top:6px">')}</p>`],
       ['What the plan flags',`<p>${PL.flags.length?PL.flags.map(esc).join('</p><p style="margin-top:6px">'):'Nothing.'}</p>`]],
-    src:[C.CONTEXT_SRC(x.city),`Plan layer: ${PL.version} (tool/plan.js, register arch_nbc3432). Doorway 0.85 m, corridor 1.1 m and stair 1.1 m are NBC Table 3.4.3.2.-A minimums; every other size is a drawing choice named in the rule sheet.`,'Rooms and blocks: Arrange’s placement of the Emergency hub (refuge side by side, warming shelter, clinic) at Ratios’ defaults (tool/arch.js, tool/dcrooms.js).',`Area marked ? has no sourced size (the tool has no per-MW figure or requested area for it): ${unsrc.length?unsrc.join(', '):'none'}.`,'Street names: the tool’s street lines carry no names; the front street is the street part of the address, other streets are shown as ? (tool/streets_<city>.json).'],
-    missing:['shared lobby (no code source for its size)','door widths from occupant load (check 10)','names of streets other than the front street',...(unsrc.length?['sourced sizes for: '+unsrc.join(', ')]:[]),...(dockGrade?['loading dock at grade: strict reading of I-2 s. 2.2.7 / I-3 s. 2.2.11 allows only entrances, to be settled by the Emergency hub spec']:[])]}; }});
+    src:[C.CONTEXT_SRC(x.city),SNSRC,`Plan layer: ${PL.version} (tool/plan.js, register arch_nbc3432). Doorway 0.85 m, corridor 1.1 m and stair 1.1 m are NBC Table 3.4.3.2.-A minimums; every other size is a drawing choice named in the rule sheet.`,'Rooms and blocks: Arrange’s placement of the Emergency hub (refuge side by side, warming shelter, clinic) at Ratios’ defaults (tool/arch.js, tool/dcrooms.js).',`Area marked ? has no sourced size (the tool has no per-MW figure or requested area for it): ${unsrc.length?unsrc.join(', '):'none'}.`,'Street names: the tool’s street lines carry no names; the front street is the street part of the address, other streets are shown as ? (tool/streets_<city>.json).'],
+    missing:['shared lobby (no code source for its size)','door widths from occupant load (check 10)','names of street segments whose fronting lot addresses do not agree',...(unsrc.length?['sourced sizes for: '+unsrc.join(', ')]:[]),...(dockGrade?['loading dock at grade: strict reading of I-2 s. 2.2.7 / I-3 s. 2.2.11 allows only entrances, to be settled by the Emergency hub spec']:[])]}; }});
 
 /* ======================= 15 Separations ======================= */
 const gapOf=(a,b)=>{ const dx=Math.max(0,b[0]-a[1],a[0]-b[1]), dy=Math.max(0,b[2]-a[3],a[2]-b[3]); return Math.hypot(dx,dy); };
@@ -188,7 +195,7 @@ function gapStrip(a,b){ const du=Math.max(b[0]-a[1],a[0]-b[1]), dv=Math.max(b[2]
 const sepHours=(R,id)=>{ const r=R.find(q=>q.id===id&&/fire separation from the data centre/i.test(q.t)&&!/\?/.test(q.t.replace(/\(F-2\)/,''))), m=r&&/(\d+(?:\.\d+)?) h fire separation/.exec(r.t); return m?+m[1]:null; };
 
 C.add(T,'Separations',{chip:CHIP,async build(x){
-  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; const pl=BD.plan&&planFor(x,P); if(!pl) return {draw:'<p class="f1v-empty">The tool has no plan for this lot (no layout placed).</p>'};
+  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; await sgReady(x); const pl=BD.plan&&planFor(x,P); if(!pl) return {draw:'<p class="f1v-empty">The tool has no plan for this lot (no layout placed).</p>'};
   const {mp,ox,zs,stor,pt,pr}=pl, R=BD.archTest.rules(P), f1=pl.f1;
   const lineSh=(a,col,w,dash)=>{ const p=pt(a[0],a[2]), q=pt(a[1],a[3]); return `<line x1="${f1(p[0])}" y1="${f1(p[1])}" x2="${f1(q[0])}" y2="${f1(q[1])}" stroke="${col}" stroke-width="${w}"${dash?` stroke-dasharray="${dash}"`:''}/>`; };
   let groups='', titles=''; const pairs={}, hrs=new Set();
@@ -205,7 +212,7 @@ C.add(T,'Separations',{chip:CHIP,async build(x){
   const sepLine=(w,c,d)=>`<svg width="22" height="8" style="vertical-align:middle;margin-right:6px"><line x1="0" y1="4" x2="22" y2="4" stroke="${c}" stroke-width="${w}"${d?` stroke-dasharray="${d}"`:''}/></svg>`;
   const ratings=[...hrs].sort((a,b)=>b-a).map(h=>`<span>${sepLine(h>=2?4:2,K.ink)}${h} h separation</span>`);
   const key=KEY([...(ratings.length?ratings:[`<span>${sepLine(4,K.ink)}2 h separation</span>`]),`<span>${sepLine(2,K.red)}gap between blocks</span>`,`<span>${sepLine(1.8,K.red,'5 3')}separation, rating ?</span>`,`<span><i style="background:#F2F2F2;border:1px solid #C4C5C7"></i>plan, greyed back</span>`]);
-  const draw=`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Same plan as Rooms · street at the bottom · only the separations are drawn on top</p>${titles}${svg}</div>`;
+  const draw=`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Same plan as Rooms · street at the bottom · only the separations are drawn on top${pl.snUsed?SNCAP:''}</p>${titles}${svg}</div>`;
   const list=Object.values(pairs).filter(p=>p&&p.name), n2=list.filter(p=>p.h>=2).length, nGap=list.filter(p=>!p.touch&&p.gap>0.05).length;
   const rows=[]; list.forEach(p=>rows.push([short(p.name),(p.h!=null?p.h+' h from the data centre':C.q('rating not in the tool'))])); /* val() shows a string or a ? */
   list.forEach(p=>rows.push([short(p.name)+', distance',p.touch?'touching':n1(p.gap)+' m apart']));
@@ -215,12 +222,12 @@ C.add(T,'Separations',{chip:CHIP,async build(x){
     hero:[{v:String(n2),l:'blocks needing a 2 h separation'},{v:String(nGap),l:'blocks not touching the data centre',red:nGap>0},{v:C.q(),l:'exit stair shafts rated'}],
     rows,
     more:[['The rules behind each line',rl.map(r=>`<p style="margin-bottom:6px">${esc(r.t)} <span style="color:${K.mute}">[${esc((r.src||[]).join(', ')||'no source')}]</span></p>`).join('')||'<p>No separation rules for this layout.</p>']],
-    src:[C.CONTEXT_SRC(x.city),'Ratings: BD.archTest.rules(P), from each program’s occupancy group in tool/data/arch.json (NBC Table 3.1.3.1; registers arch_nbc3131, arch_pub_nbcA3121).','Positions and gaps: Arrange’s placement; gap is our arithmetic between the blocks’ rectangles on the same storey (tool/arch.js). Plan underneath: tool/plan.js, the same drawing as Rooms.',pairs._dropped&&pairs._dropped.length?'Gaps with no clear straight leader are listed in the panel: '+pairs._dropped.join('; ')+'.':'A line is drawn only where the tool has a rating: a dashed red line means the rating is not in the tool.'],
+    src:[C.CONTEXT_SRC(x.city),SNSRC,'Ratings: BD.archTest.rules(P), from each program’s occupancy group in tool/data/arch.json (NBC Table 3.1.3.1; registers arch_nbc3131, arch_pub_nbcA3121).','Positions and gaps: Arrange’s placement; gap is our arithmetic between the blocks’ rectangles on the same storey (tool/arch.js). Plan underneath: tool/plan.js, the same drawing as Rooms.',pairs._dropped&&pairs._dropped.length?'Gaps with no clear straight leader are listed in the panel: '+pairs._dropped.join('; ')+'.':'A line is drawn only where the tool has a rating: a dashed red line means the rating is not in the tool.'],
     missing:['exit stair shaft ratings (NBC 3.4.4.1)','battery and UPS room ratings (NFPA 855 / NBC 3.6.2.1)','spatial separation between blocks that do not touch (NBC 3.2.3, not applied)']}; }});
 
 /* ======================= 16 Exits ======================= */
 C.add(T,'Exits',{chip:CHIP,async build(x){
-  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; const pl=BD.plan&&planFor(x,P); if(!pl) return {draw:'<p class="f1v-empty">The tool has no plan for this lot (no layout placed).</p>'};
+  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; await sgReady(x); const pl=BD.plan&&planFor(x,P); if(!pl) return {draw:'<p class="f1v-empty">The tool has no plan for this lot (no layout placed).</p>'};
   const {PL,mp,zs,stor,pt}=pl, f1=pl.f1, van=x.city==='van', clause=van?'VBBL 3.4.2.3':'NBC 3.4.2.3', reg=van?'register vbbl25_3423':'register arch_nbc3432';
   const ES=PL.exitSep||[]; let groups='', titles='', nExit=0, nDim=0; const dropped=[];
   stor.forEach(st=>{ const S=st.S; let s=pl.layer(st,'grey');
@@ -240,7 +247,7 @@ C.add(T,'Exits',{chip:CHIP,async build(x){
   nExit=stor.reduce((t,st)=>t+st.S.exits.filter(e=>e.kind!=='loading').length,0);
   const svg=planSvg(x,P,pl,'f1c-a16','Plan of each storey, greyed back, with exit doors, exit stairs and the spacing between the two exits of each block',groups);
   const key=KEY([`<span><i style="width:3px;height:11px;background:${K.ink};border:0;border-radius:1px"></i>exit door</span>`,`<span><i style="background:${K.ink};opacity:.2;border:1px solid ${K.ink}"></i>exit stair</span>`,`<span><svg width="26" height="10" style="vertical-align:middle;margin-right:6px"><line x1="2" y1="5" x2="24" y2="5" stroke="${K.ink}" stroke-width="1"/><line x1="2" y1="1" x2="2" y2="9" stroke="${K.ink}"/><line x1="24" y1="1" x2="24" y2="9" stroke="${K.ink}"/></svg>spacing of the two exits (door edge to door edge)</span>`,`<span><i style="background:#F2F2F2;border:1px solid #C4C5C7"></i>plan, greyed back</span>`,`<span>${RQ}&nbsp;worst travel path: not computed, so not drawn</span>`]);
-  const draw=`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Same plan as Rooms · street at the bottom · straight-line spacing, never longer than the path</p>${titles}${svg}</div>`;
+  const draw=`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Same plan as Rooms · street at the bottom · straight-line spacing, never longer than the path${pl.snUsed?SNCAP:''}</p>${titles}${svg}</div>`;
   const nPass=ES.filter(e=>e.ok).length, nFail=ES.length-nPass;
   const meters=ES.map(e=>({l:'Exit spacing, '+short(e.block),v:e.apart_m,lim:e.need_m,max:Math.max(e.need_m*1.4,e.apart_m*1.1),unit:'m',pass:e.ok,cap:`${n1(e.apart_m)} m apart · needed ${n1(e.need_m)} m`,src:clause}));
   const cn=pl.counts;
@@ -249,7 +256,7 @@ C.add(T,'Exits',{chip:CHIP,async build(x){
     rows:[['Worst travel path to an exit',C.q('check 8 to come: the path-based check is not in the tool')]].concat(ES.map(e=>[(t=>t[0].toUpperCase()+t.slice(1))(short(e.block)+', exit spacing'),`${n1(e.apart_m)} m, needs ${n1(e.need_m)} m`+(/clinic/i.test(e.block)?' (our reading: the clinic corridor is inside the suite, not a public corridor, so max(½ diagonal, 9 m))':'')]),[['Rooms without corridor access',String(cn.nNoAcc)],['Exit stair shaft ratings (NBC 3.4.4.1)',C.q()]]),
     meters,
     more:[['How the spacing is measured',`<p>${esc(ES[0]?ES[0].how:'')}. Stair arrangement: ${esc(ES.map(e=>short(e.block)+' '+e.stairs).join('; '))}. The need is half the floor’s greatest diagonal, or 9 m if that is more (${clause}; clause text not in the repo, ?).</p>${dropped.length?`<p style="margin-top:6px">Not drawn (more than four on a storey): ${esc(dropped.join(', '))}.</p>`:''}`]],
-    src:[C.CONTEXT_SRC(x.city),`Exit doors, stairs and spacing: tool/plan.js exitSep (${PL.version}), ${clause} (${reg}); the clause text is not in the repo (?). Spacing is measured straight between the nearest door edges.`,'Plan underneath: the same drawing as Rooms (tool/plan.js, Arrange’s placement).','Worst travel path to an exit: not computed by the tool (plan.js: path-based check 8 to come); no path is drawn or estimated.'],
+    src:[C.CONTEXT_SRC(x.city),SNSRC,`Exit doors, stairs and spacing: tool/plan.js exitSep (${PL.version}), ${clause} (${reg}); the clause text is not in the repo (?). Spacing is measured straight between the nearest door edges.`,'Plan underneath: the same drawing as Rooms (tool/plan.js, Arrange’s placement).','Worst travel path to an exit: not computed by the tool (plan.js: path-based check 8 to come); no path is drawn or estimated.'],
     missing:['worst travel path to an exit (path-based check 8)',`clause text of ${clause} (not in the repo)`,'exit stair shaft ratings (NBC 3.4.4.1)']}; }});
 
 /* ======================= 17 Plant and site ======================= */
