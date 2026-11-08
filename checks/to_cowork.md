@@ -249,13 +249,12 @@ Strings changed (file: old → new):
 - f1.js: “Workflows” → “Templates”
 - f1.js: “Choose a workflow” → “Choose a template”
 - f1.js: “Four workflows, each ending in its own report.” → “Four templates, each a workflow that ends in its own report.”
-- f1.js: “WorkflowsEach one shows one idea per card, then makes a report.” → “TemplatesEach template’s workflow shows one idea per card, then makes a report.”
+- f1.js: “Workflows” / “Each one shows one idea per card, then makes a report.” → “Templates” / “Each template’s workflow shows one idea per card, then makes a report.”
 - f1.js: “See the cards” → “See the workflow”
-- f1.js: “One logic runs under all four workflows. Every number in it is tied to a source and a check status, so a reader can follow any figure back to where it came from.See the logic” → “One logic runs under all four templates. Every number in it is tied to a source and a check status, so a reader can follow any figure back to where it came from.Open the interactive logic diagram”
+- f1.js: “One logic runs under all four workflows. Every number in it is tied to a source and a check status, so a reader can follow any figure back to where it came from.” / “See the logic” → “One logic runs under all four templates. Every number in it is tied to a source and a check status, so a reader can follow any figure back to where it came from.” / “Open the interactive logic diagram”
 - f1.js: “How this is worked out” → “This card in the interactive logic diagram”
 - f1logic.js: “The logic under every card” → “The interactive logic diagram”
 - f1logic.js: “One logic runs under all four workflows. Every part has a formula, a source and a trust rating. Click a part to see them.” → “One logic runs under all four templates. Every part has a formula, a source and a trust rating. Click a part to see them.”
-- f1logic.js: “How this is worked out” → “This card in the interactive logic diagram”
 - tiers.js: “aria-label="The tool's logic diagram:” → “aria-label="The interactive logic diagram:”
 - logic.js: “b.textContent=open?'Hide the logic':'The logic” → “b.textContent=open?'Hide the interactive logic diagram':'Interactive logic diagram”
-Kept: “How it works” (top bar; opens the interactive logic diagram, as the storyboard names it); “template” already used for Resident, Municipal, Engineering, Architecture in the logic view tabs. Code comments not changed.
+Kept: “How it works” (top bar; opens the interactive logic diagram, as the storyboard names it); “template” already used for Resident, Municipal, Engineering, Architecture in the logic view tabs. One code comment in f1logic.js updated to match; other comments not changed.
