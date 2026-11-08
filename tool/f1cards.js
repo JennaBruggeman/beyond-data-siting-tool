@@ -17,8 +17,8 @@ const titleCase=s=>String(s).toLowerCase().replace(/\b([a-z])/g,c=>c.toUpperCase
 /* the zones where a data centre is permitted, conditional or discretionary: the rows of tool/data/zones.json (the same test as the zone rule and job A1) */
 const ZR=()=>(BD.data&&BD.data.raw&&BD.data.raw.zones)||{ZV:{},ZE:{}};
 const zoneKey=(city,a)=>city==='van'?String(a[1]||'').trim():String(a[2]||a[1]||'').trim().split(/\s+/)[0].toUpperCase();
-const allowed=(city,key)=>!!(city==='van'?ZR().ZV:ZR().ZE)[key];
-const dcStatus=(city,key)=>{ const r=(city==='van'?ZR().ZV:ZR().ZE)[key]||{}, c=(r.cl||[]).find(x=>/data centre/i.test(x[0])), t=c?c[1]:''; return {word:/discretionary/i.test(t)?'discretionary use':/conditional/i.test(t)?'conditional use':/permitted/i.test(t)?'permitted use':'?',clause:c?c[2]:'',text:t,src:r.src||[]}; };
+const allowed=(city,key)=>{ const r=(city==='van'?ZR().ZV:ZR().ZE)[key]; return !!r&&r.path!=='rezoning'; }; /* Edmonton rows with path 'rezoning' (8 Nov 2026, edm_dc_major) keep their limits but do not allow a data centre */
+const dcStatus=(city,key)=>{ const r=(city==='van'?ZR().ZV:ZR().ZE)[key]||{}, c=(r.cl||[]).find(x=>/data centre/i.test(x[0])), t=c?c[1]:''; return {word:r.path==='rezoning'?'rezoning needed':r.path==='permitted'?'permitted use':/discretionary/i.test(t)?'discretionary use':/conditional/i.test(t)?'conditional use':/permitted/i.test(t)?'permitted use':'?',clause:c?c[2]:'',text:t,src:r.src||[]}; };
 /* small SVG map kit: world metres (the tool's frame, y north) → screen */
 function frame(bb,w,h,pad){ pad=pad||0; const sx=(w-2*pad)/(bb[2]-bb[0]), sy=(h-2*pad)/(bb[3]-bb[1]), s=Math.min(sx,sy), ox=pad+((w-2*pad)-(bb[2]-bb[0])*s)/2, oy=pad+((h-2*pad)-(bb[3]-bb[1])*s)/2;
   return {s,P:(x,y)=>[ox+(x-bb[0])*s, oy+(bb[3]-y)*s],I:(sx,sy)=>[bb[0]+(sx-ox)/s, bb[3]-(sy-oy)/s]}; }
@@ -56,7 +56,8 @@ function render(res,dr,pb,srcEl){ dr.innerHTML=res.draw||'';
   const rows=(res.rows||[]).length?`<dl class="f1c-rows">${res.rows.map(r=>`<dt>${esc(r[0])}</dt><dd>${val(r[1])}</dd>`).join('')}</dl>`:'';
   const met=(res.meters||[]).map(meter).join('');
   const more=(res.more||[]).map(m=>`<details class="f1c-more"><summary>${esc(m[0])}</summary><div>${m[1]}</div></details>`).join('');
-  pb.innerHTML=(res.lead?`<p class="lead">${esc(res.lead)}</p>`:'')+hero+rows+met+more;
+  let M0=null; try{ M0=BD.model(); }catch(e){} const nz=M0&&M0.Z&&M0.Z.notAllowed&&!res.noZoneFlag; /* the zone needs a rezoning (I-3 sub-area B; Edmonton zones without Major Industrial): every card says it is shown as if rezoned */
+  pb.innerHTML=(nz?`<p class="f1c-zflag"><span class="f1c-q">?</span> Not allowed here; rezoning needed. Shown as if rezoned: a flagged option, not a prediction.</p>`:'')+(res.lead?`<p class="lead">${esc(res.lead)}</p>`:'')+hero+rows+met+more;
   if(srcEl) srcEl.innerHTML=`<summary>Sources and assumptions</summary><ul>${(res.src||[]).map(s=>`<li>${esc(s)}</li>`).join('')}${(res.missing||[]).length?`<li class="f1c-miss">Not in the tool yet: ${esc(res.missing.join('; '))}</li>`:''}</ul>`; }
 /* the Architecture state the cards read (Ratios at the tool's defaults, the Emergency hub's programs, Arrange's placement), set up once per lot as
    checks/tests/export_layout.js does it: the lot sized as a worked example (flow.js findFit), Ratios at its own defaults, then the programs picked (refuge side by side,
@@ -68,7 +69,7 @@ async function arch(){ const s=BD.S.sel; if(!s) return null; const key=s.city+':
   AR.bkey=key; AR.busy=(async()=>{ const keepT=BD.tier&&BD.tier(), wait=ms=>new Promise(r=>setTimeout(r,ms));
     try{ if(BD.setTier) BD.setTier('arch'); await BD.arch.ready; const An=BD.S.answers; for(const k of Object.keys(An)) delete An[k]; Object.assign(An,{built:'new',extent:'whole',floor:'',mw:null});
       BD.modelReset(); if(BD.flow.findFit) BD.flow.findFit(); /* the largest size where everything fits, as a worked example opens (flow.js findFit) */
-      BD.arch.ratio=null; BD.arch.picks=[]; BD.modelReset(); await BD.views.arat(); await wait(300);
+      BD.arch.ratio=null; BD.arch.picks=[]; BD.arch.rezone=BD.arch.rezone||{}; BD.arch.rezone[key]=true; /* a lot that needs a rezoning (e.g. Edmonton BE, edm_dc_major) is shown as if rezoned: the tool's flagged option */ BD.modelReset(); await BD.views.arat(); await wait(300);
       const A=BD.arch; A.picks=[]; EXAMPLE_PICKS.forEach(id=>BD.archTest.add(id)); const rf=A.picks.find(q=>q.id==='refuge'); if(rf) rf.opt='side_by_side';
       BD.modelReset(); const P=BD.archTest.place(); AR.key=key; AR.P=P; return P; }
     finally{ if(keepT&&BD.setTier&&keepT!=='arch') BD.setTier(keepT); AR.busy=null; } })();

@@ -581,8 +581,8 @@
    "cl": [
     [
      "Data centre",
-     "Major Industrial Permitted; Minor Industrial only where existing on 1 Jan 2024, so a small data centre fits only if deemed Major (?); always Discretionary",
-     "IH ss. 2.1–2.2; s. 7.20 3.3.2"
+     "Major Industrial is Permitted. The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre.",
+     "IH s. 2.140, 2.1; City \"Data Centre Development\" (edm_dc_major)"
     ],
     [
      "Floor area",
@@ -605,8 +605,10 @@
     "edm_bl20001",
     "arch_zon_EdmZones",
     "arch_zon_Edm720",
-    "edmLDA26"
-   ]
+    "edmLDA26",
+    "edm_dc_major"
+   ],
+   "path": "permitted"
   },
   "IM": {
    "fsr": [
@@ -625,8 +627,8 @@
    "cl": [
     [
      "Data centre",
-     "Minor Industrial Permitted; Major Industrial only where existing on 1 Jan 2024, so a large (Major) data centre does not fit (our reading); always Discretionary",
-     "IM ss. 2.3–2.4; s. 7.20 3.3.2"
+     "Major Industrial only where it existed on 1 Jan 2024, so a new data centre needs a rezoning. The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre.",
+     "IM s. 2.130, 2.3; edm_dc_major"
     ],
     [
      "Floor area",
@@ -649,8 +651,10 @@
     "edm_bl20001",
     "arch_zon_EdmZones",
     "arch_zon_Edm720",
-    "edmLDA26"
-   ]
+    "edmLDA26",
+    "edm_dc_major"
+   ],
+   "path": "rezoning"
   },
   "BE": {
    "fsr": [
@@ -669,8 +673,8 @@
    "cl": [
     [
      "Data centre",
-     "Minor Industrial is Permitted (in an enclosed building); a data centre is deemed into it and is always Discretionary",
-     "BE s. 2.3, 3.2.1; s. 7.20 3.3.2"
+     "Major Industrial is not listed, so a data centre needs a rezoning. The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre.",
+     "BE s. 2.120, 2; edm_dc_major"
     ],
     [
      "Floor area",
@@ -698,8 +702,10 @@
     "edm_bl20001",
     "arch_zon_EdmZones",
     "arch_zon_Edm720",
-    "edmLDA26"
-   ]
+    "edmLDA26",
+    "edm_dc_major"
+   ],
+   "path": "rezoning"
   },
   "EETB": {
    "fsr": [
@@ -718,8 +724,8 @@
    "cl": [
     [
      "Data centre",
-     "Minor Industrial is Permitted; a data centre is deemed into it and is always Discretionary",
-     "EETB s. 2.7; s. 7.20 3.3.2"
+     "Major Industrial is not listed, so a data centre needs a rezoning. The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre.",
+     "EETB s. 2; edm_dc_major"
     ],
     [
      "Floor area",
@@ -746,8 +752,10 @@
     "envelope",
     "arch_zns_edmEETP",
     "arch_zon_Edm720",
-    "edmLDA26"
-   ]
+    "edmLDA26",
+    "edm_dc_major"
+   ],
+   "path": "rezoning"
   },
   "EETC": {
    "fsr": null,
@@ -763,8 +771,8 @@
    "cl": [
     [
      "Data centre",
-     "Major Industrial Permitted (no significant nuisance inside the 1.5 km Risk Buffer); Minor Industrial only inside the Risk Buffer; always Discretionary",
-     "EETC ss. 2.1–2.2, 4.1–4.2; s. 7.20 3.3.2"
+     "Major Industrial is Permitted (no significant nuisance inside the 1.5 km Risk Buffer, 4.1–4.2). The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre.",
+     "EETC s. 3.52, 2.1, 4.1–4.2; edm_dc_major"
     ],
     [
      "Floor area",
@@ -786,12 +794,14 @@
     "envelope",
     "arch_zns_edmEETP",
     "arch_zon_Edm720",
-    "edmLDA26"
+    "edmLDA26",
+    "edm_dc_major"
    ],
    "q": [
     "fsr",
     "h"
-   ]
+   ],
+   "path": "permitted"
   },
   "EETL": {
    "fsr": [
@@ -813,8 +823,8 @@
    "cl": [
     [
      "Data centre",
-     "Minor Industrial is Permitted; a data centre is deemed into it and is always Discretionary",
-     "EETL s. 2.4; s. 7.20 3.3.2"
+     "Major Industrial is not listed, so a data centre needs a rezoning. The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre.",
+     "EETL s. 2; edm_dc_major"
     ],
     [
      "Floor area",
@@ -836,8 +846,10 @@
     "envelope",
     "arch_zns_edmEETP",
     "arch_zon_Edm720",
-    "edmLDA26"
-   ]
+    "edmLDA26",
+    "edm_dc_major"
+   ],
+   "path": "rezoning"
   },
   "EETM": {
    "fsr": [
@@ -859,8 +871,8 @@
    "cl": [
     [
      "Data centre",
-     "Minor Industrial is Permitted; a data centre is deemed into it and is always Discretionary",
-     "EETM s. 2.2; s. 7.20 3.3.2"
+     "Major Industrial is not listed, so a data centre needs a rezoning. The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre.",
+     "EETM s. 2; edm_dc_major"
     ],
     [
      "Floor area",
@@ -882,8 +894,10 @@
     "envelope",
     "arch_zns_edmEETP",
     "arch_zon_Edm720",
-    "edmLDA26"
-   ]
+    "edmLDA26",
+    "edm_dc_major"
+   ],
+   "path": "rezoning"
   },
   "EETIM": {
    "fsr": [
@@ -905,8 +919,8 @@
    "cl": [
     [
      "Data centre",
-     "Minor Industrial Permitted; Major Industrial not listed, so a large data centre does not fit (City: edmLDA26); always Discretionary",
-     "EETIM s. 2.1; s. 7.20 3.3.2"
+     "Major Industrial is not listed, so a data centre needs a rezoning. The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre.",
+     "EETIM s. 2; edm_dc_major"
     ],
     [
      "Floor area",
@@ -933,8 +947,10 @@
     "envelope",
     "arch_zns_edmEETP",
     "arch_zon_Edm720",
-    "edmLDA26"
-   ]
+    "edmLDA26",
+    "edm_dc_major"
+   ],
+   "path": "rezoning"
   },
   "EIB": {
    "fsr": [
@@ -956,8 +972,8 @@
    "cl": [
     [
      "Data centre",
-     "Minor Industrial (not fleet services or recycling depots) Permitted; always Discretionary",
-     "EIB s. 2.6; s. 7.20 3.3.2"
+     "Major Industrial is not listed, so a data centre needs a rezoning. The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre.",
+     "EIB s. 2; edm_dc_major"
     ],
     [
      "Floor area",
@@ -984,8 +1000,10 @@
     "envelope",
     "arch_zns_edmEllerslie",
     "arch_zon_Edm720",
-    "edmLDA26"
-   ]
+    "edmLDA26",
+    "edm_dc_major"
+   ],
+   "path": "rezoning"
   },
   "EIM": {
    "fsr": [
@@ -1004,8 +1022,8 @@
    "cl": [
     [
      "Data centre",
-     "Minor Industrial (not fleet services or recycling depots) Permitted; always Discretionary",
-     "EIM s. 2.3; s. 7.20 3.3.2"
+     "Major Industrial is not listed, so a data centre needs a rezoning. The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre.",
+     "EIM s. 2; edm_dc_major"
     ],
     [
      "Floor area",
@@ -1027,8 +1045,10 @@
     "envelope",
     "arch_zns_edmEllerslie",
     "arch_zon_Edm720",
-    "edmLDA26"
-   ]
+    "edmLDA26",
+    "edm_dc_major"
+   ],
+   "path": "rezoning"
   }
  },
  "loading": {

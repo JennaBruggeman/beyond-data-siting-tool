@@ -60,9 +60,9 @@
   "envNote": "",
   "blds": [],
   "status": {
-   "k": "case",
-   "t": "Smaller only",
-   "d": "Minor Industrial is permitted in BE; Major Industrial is not. A large data centre is treated by the City as Major Industrial. A smaller one whose noise, emissions and fuel or battery hazards stay inside the site could be argued as Minor Industrial — the Development Planner decides.",
+   "k": "no",
+   "t": "Rezoning needed",
+   "d": "Major Industrial is not listed in BE (s. 2.120), so a data centre needs a rezoning. The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre.",
    "env": "Height 16.0 m. Floor area up to 1.6 × the lot. Setbacks 6.0 m from a street (4.5 m on a collector or local road), 6.0 m next to a residential zone, none to other sites or alleys.",
    "src": [
     "edm_matrix",
@@ -87,8 +87,8 @@
     "cl": [
      [
       "Data centre",
-      "Minor Industrial is Permitted (in an enclosed building); a data centre is deemed into it and is always Discretionary",
-      "BE s. 2.3, 3.2.1; s. 7.20 3.3.2"
+      "Major Industrial is not listed, so a data centre needs a rezoning. The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre.",
+      "BE s. 2.120, 2; edm_dc_major"
      ],
      [
       "Floor area",
@@ -116,7 +116,7 @@
       "Bylaw 20001 s. 5.70 cl. 1.9.5"
      ]
     ],
-    "warn": "",
+    "warn": "Zone BE does not permit Major Industrial for a new building, and the City treats large-scale data centres as Major Industrial (no size threshold given, so the tool applies it to every data centre): rezoning needed (register edm_dc_major). The numbers below use BE's own limits, for comparison only.",
     "assumed": false,
     "base": {
      "fsr": [
@@ -138,7 +138,8 @@
       "[cycle]",
       "[cycle]",
       "[cycle]"
-     ]
+     ],
+     "path": "rezoning"
     },
     "mods": {},
     "fsr": [
@@ -153,6 +154,7 @@
     "userSet": false,
     "srcId": "edm_bl20001",
     "vkey": "BE",
+    "notAllowed": "majorInd",
     "screen": {
      "src": "arch_ezbLoad",
      "why": "Edmonton BE s. 5.2: mechanical and electrical equipment, transformers and cooling towers \"must be screened from view from Abutting Streets and Sites in non-industrial Zones\" (register arch_ezbLoad). The plant is screened by default; \"leave it seen\" is not offered here."

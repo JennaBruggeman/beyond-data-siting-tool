@@ -48,7 +48,7 @@ const CLEAN = `(o)=>{ const seen=new WeakSet(); return JSON.parse(JSON.stringify
     await p.waitForTimeout(9000);
     const shot=process.env.SHOTDIR||out;
     /* 3 Nov 2026 (rebuild part 1): the Ratios step first, at its defaults (the set-up's own size, the rest to programs; low end of the MW range) */
-    const rat = await p.evaluate(async(SPLIT)=>{ await BD.arch.ready; BD.flow.to('arat'); await new Promise(r=>setTimeout(r,1500));
+    const rat = await p.evaluate(async(SPLIT)=>{ await BD.arch.ready; /* 8 Nov 2026 (edm_dc_major): a lot whose zone needs a rezoning is tested as if rezoned, the tool's flagged option */ if(BD.S.sel){ BD.arch.rezone=BD.arch.rezone||{}; BD.arch.rezone[BD.S.sel.city+':'+BD.S.sel.id]=true; } BD.flow.to('arat'); await new Promise(r=>setTimeout(r,1500));
       /* 3 Nov 2026 (hall fix): SPLIT=dc/prog sets the floor-area split (e.g. 60/30); the Ratios view caps the DC share at what the hard rules allow */
       if(SPLIT){ const [d,g]=SPLIT.split('/').map(Number); BD.arch.ratio.dc=d; BD.arch.ratio.prog=g; await BD.views.arat(); await new Promise(r=>setTimeout(r,1000)); }
       /* 7 Nov 2026: restyle.js drops trailing arrows from buttons 60 ms after the DOM settles; wait for that (up to 4 s) so the settled label is read, not a race */

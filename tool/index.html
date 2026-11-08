@@ -463,10 +463,14 @@ const EDM_ENV={
 };
 function edmStatus(zraw){
   const z=String(zraw||'').trim().split(/\s+/)[0].toUpperCase();
-  const minorNote='A large data centre is treated by the City as Major Industrial. A smaller one whose noise, emissions and fuel or battery hazards stay inside the site could be argued as Minor Industrial — the Development Planner decides.';
-  if(z==='IH') return {k:'yes',t:'Allowed',d:'Major Industrial is a permitted use in IH, which is where the City says large-scale data centres belong.',env:EDM_ENV.IH,src:['edm_matrix','edm_bl','edm_dc']};
-  if(z==='IM') return {k:'case',t:'Smaller only',d:'Minor Industrial is permitted; Major Industrial only where it existed on 1 January 2024. '+minorNote+' A large data centre here needs a rezoning to IH.',env:EDM_ENV.IM,src:['edm_matrix','edm_bl','edm_dc']};
-  if(z==='BE') return {k:'case',t:'Smaller only',d:'Minor Industrial is permitted in BE; Major Industrial is not. '+minorNote,env:EDM_ENV.BE,src:['edm_matrix','edm_dc']};
+  /* 8 Nov 2026 (J.B.; register edm_dc_major): every data centre is treated as Major Industrial. The City names only large-scale data centres and gives no size
+     threshold, so the tool applies it to every one. Major Industrial is permitted in IH (s. 2.140, 2.1) and EETC (s. 3.52, 2.1); elsewhere a new one needs a rezoning. */
+  const MAJ='The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre.';
+  if(z==='IH') return {k:'yes',t:'Allowed',d:'Major Industrial is a permitted use in IH (s. 2.140, 2.1). '+MAJ,env:EDM_ENV.IH,src:['edm_matrix','edm_bl','edm_dc']};
+  if(z==='EETC') return {k:'yes',t:'Allowed',d:'Major Industrial is a permitted use in EETC (s. 3.52, 2.1), with no significant nuisance inside the 1.5 km Risk Buffer. '+MAJ,src:['edm_bl','edm_dc']};
+  if(z==='IM') return {k:'no',t:'Rezoning needed',d:'Major Industrial is listed in IM only where it existed on 1 January 2024 (s. 2.130, 2.3), so a new data centre needs a rezoning. '+MAJ,env:EDM_ENV.IM,src:['edm_matrix','edm_bl','edm_dc']};
+  if(z==='BE') return {k:'no',t:'Rezoning needed',d:'Major Industrial is not listed in BE (s. 2.120), so a data centre needs a rezoning. '+MAJ,env:EDM_ENV.BE,src:['edm_matrix','edm_dc']};
+  if(['EETB','EETL','EETM','EETIM','EIB','EIM'].includes(z)) return {k:'no',t:'Rezoning needed',d:'Major Industrial is not listed in '+z+', so a data centre needs a rezoning. '+MAJ,src:['edm_bl','edm_dc']};
   // verification sweep 17 Oct (C3), checked against Bylaw 20001 s. 2.210 and Appendix IV: UI's permitted uses list no industrial use
   if(z==='UI') return {k:'no',t:'Rezoning needed',d:'No industrial use is permitted in UI. Minor Industrial appears only on the NAIT Main Campus (Appendix IV, Sub-Area 2), and there only as storage. A data centre here would need a rezoning.',src:['edm_bl','edm_dc']};
   // FD s. 2.240: Minor Industrial only as temporary outdoor storage, no permanent structures

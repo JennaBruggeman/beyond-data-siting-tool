@@ -78,19 +78,19 @@ const gcite=(Z,x)=>x.city==='van'?'Zoning and Development By-law':'Zoning Bylaw 
 
 /* ===== M5 Height and floor area (job F1b item 1: bullet graph, rooftop equipment arrow, bars on one scale; item 2: holds the old rooftop card's screening row) ===== */
 const niceStep=(max,n)=>{ const raw=max/n, p=Math.pow(10,Math.floor(Math.log10(raw))), m=raw/p; return (m<=1?1:m<=2?2:m<=5?5:10)*p; };
-C.add(T,'Height and floor area',{async build(x){
-  const M=x.M, Z=M&&M.Z; if(!Z||!x.sel.ring) return noLot(); const city=x.city;
-  const hq=hasQ(Z,'h'), fq=hasQ(Z,'fsr'), H0=hq?null:Z.hOutright, hx=hq||!Z.hx?null:Z.hx, fsr=fq?null:Z.fsr, hc=clause(Z,/^Height/i), fc=clause(Z,/^Floor area/i), area=x.sel.lotArea;
-  const AR=(BD.data.raw.arch||{}).roofEquip||{}, mode=AR[city], rn=clause(Z,/^Roof equipment/i), sc=clause(Z,/^(Screening|Equipment)$/i), scr=Z.screen;
-  const topV=Math.max(H0||0,hx?hx[1]:0,20), topM=Math.ceil(topV*1.06/5)*5, Y0=470, SC=400/topM, y=h=>Y0-h*SC, W=980, H=560, GS=niceStep(topM,5);
-  let s=`<text x="60" y="40" font-size="12" fill="${K.mute}">Height, metres above ground</text>`;
+/* the height bullet graph (job F1b item 1), shared with Architecture card 6 (J.B. 8 Nov: both templates draw height the same way).
+   o.Y0: ground line y; o.PH: plot height; o.dx: shift right; o.wrapN: wrap width of the equipment note. Returns svg text. */
+function hBullet(x,Z,o){ o=o||{}; const city=x.city, hq=hasQ(Z,'h'), H0=hq?null:Z.hOutright, hx=hq||!Z.hx?null:Z.hx, hc=clause(Z,/^Height/i);
+  const AR=(BD.data.raw.arch||{}).roofEquip||{}, mode=AR[city], rn=clause(Z,/^Roof equipment/i);
+  const topV=Math.max(H0||0,hx?hx[1]:0,20), topM=Math.ceil(topV*1.06/5)*5, Y0=o.Y0||470, SC=(o.PH||400)/topM, y=h=>Y0-h*SC, GS=niceStep(topM,5);
+  let s=`<text x="60" y="${Y0-(o.PH||400)-30}" font-size="12" fill="${K.mute}">Height, metres above ground</text>`;
   for(let h=0;h<=topM+0.01;h+=GS) s+=`<line x1="70" y1="${y(h)}" x2="190" y2="${y(h)}" stroke="${K.hair}"/><text x="60" y="${y(h)+4}" font-size="11" fill="${K.mute}" text-anchor="end">${h}</text>`;
   const BX=100, BW=60, RX=248;
   const lead=(yy,t,sub)=>`<line x1="160" y1="${yy}" x2="240" y2="${yy}" stroke="#8E8D88" stroke-width="0.6"/>`+tb(RX,yy-1,[t,{t:sub||''}]);
   if(H0){ if(hx&&hx[1]>hx[0]) s+=`<rect x="${BX}" y="${y(hx[1])}" width="${BW}" height="${(y(hx[0])-y(hx[1])).toFixed(1)}" fill="${K.fillHall}" opacity="0.45"/>`;
     if(hx&&hx[0]>H0) s+=`<rect x="${BX}" y="${y(hx[0])}" width="${BW}" height="${(y(H0)-y(hx[0])).toFixed(1)}" fill="${K.fillHall}"/>`;
     s+=`<rect x="${BX}" y="${y(H0)}" width="${BW}" height="${(Y0-y(H0)).toFixed(1)}" fill="${K.dc}"/>`;
-    const cs=shortS(hc&&hc.s);
+    const cs=hClause(x,Z);
     if(hx&&hx[1]>hx[0]) s+=lead(y(hx[1]),{t:`Up to ${n1(hx[1])} m with approval`,fs:13,w:400,c:K.ink},cs);
     if(hx&&hx[0]>H0) s+=lead(y(hx[0]),{t:`Up to ${n1(hx[0])} m with approval`,fs:13,w:400,c:K.ink},cs);
     s+=lead(y(H0),{t:`Height limit ${n1(H0)} m, outright`,fs:13,w:400,c:K.ink},cs);
@@ -98,9 +98,17 @@ C.add(T,'Height and floor area',{async build(x){
     s+=`<line x1="170" y1="${y(H0)}" x2="170" y2="${y(H0)-26}" stroke="${K.ink}" stroke-width="1" stroke-dasharray="3 3"/><polygon points="166,${y(H0)-22} 174,${y(H0)-22} 170,${y(H0)-30}" fill="${K.ink}"/>`;
     const e1=mode==='discretion'?`Rooftop equipment may rise above ${n1(H0)} m`:mode==='exempt'?'Rooftop equipment is not counted in the height limit':'Rooftop equipment: no rule read';
     const e2=mode==='discretion'?`by the Director’s permission, no stated maximum (${rn?rn.s.replace('Zoning and Development By-law','ZDBL'):'?'})`:rn?`${rn.t.replace(/^./,c=>c.toUpperCase())}; no stated maximum (${rn.s})`:'';
-    const e2l=wrap(e2,64); s+=tb(RX,y(H0)-26-e2l.length*14,[{t:e1,fs:12,w:400,c:K.ink2},...e2l.map(t=>({t}))]);
+    const e2l=wrap(e2,o.wrapN||64); s+=tb(RX,y(H0)+38,[{t:e1,fs:12,w:400,c:K.ink2},...e2l.map(t=>({t}))]); /* under the outright label, clear of the approval labels above */
   } else s+=tb(BX,y(topM*0.5),[{html:`Height limit ${redQ}`,fs:13,w:500,c:K.ink},{t:Z.assumed?'no data-centre limit in the tool for this zone':'the by-law gives none for this zone'}]);
   s+=`<line x1="66" y1="${Y0}" x2="210" y2="${Y0}" stroke="${K.ink}" stroke-width="1.4"/><text x="100" y="${Y0+18}" font-size="11" fill="${K.mute}">ground (which grade the by-law measures from: not settled <tspan fill="${RED}">?</tspan>)</text>`;
+  return o.dx?`<g transform="translate(${o.dx},0)">${s}</g>`:s; }
+const hKey=(x,Z)=>{ const mode=((BD.data.raw.arch||{}).roofEquip||{})[x.city], hx=hasQ(Z,'h')?null:Z.hx; return {hx:!!hx,eq:mode==='exempt'?'equipment not counted':'equipment by permission'}; };
+C.hBullet=hBullet; C.hKey=hKey;
+C.add(T,'Height and floor area',{async build(x){
+  const M=x.M, Z=M&&M.Z; if(!Z||!x.sel.ring) return noLot(); const city=x.city;
+  const hq=hasQ(Z,'h'), fq=hasQ(Z,'fsr'), H0=hq?null:Z.hOutright, hx=hq||!Z.hx?null:Z.hx, fsr=fq?null:Z.fsr, hc=clause(Z,/^Height/i), fc=clause(Z,/^Floor area/i), area=x.sel.lotArea;
+  const AR=(BD.data.raw.arch||{}).roofEquip||{}, mode=AR[city], rn=clause(Z,/^Roof equipment/i), sc=clause(Z,/^(Screening|Equipment)$/i), scr=Z.screen;
+  const W=980, H=560; let s=hBullet(x,Z,{Y0:470,PH:400});
   /* floor space: two bars on one scale, the lot in FAINT, the floor space in DC split into 1x, 2x, 3x */
   const FX=660, FW=300, fmax=fsr?fsr[1]:0, tot=fsr&&area?fmax*area:null;
   s+=`<text x="${FX}" y="40" font-size="12" fill="${K.mute}">Floor space allowed, m²</text>`;
@@ -190,6 +198,7 @@ C.add(T,'Noise limits around the lot',{async build(x){
     src:[city==='van'?'Limits: Vancouver Noise Control By-law 6555 s. 2.3(b) (the tool’s noise rule, BD.eng.noiseLimitAt in tool/engine.js: 55 dBA at a quiet-zone lot, 65 at an intermediate or activity-zone lot, for an activity-zone source), at the receiving lot’s point of reception.':'Limits: Edmonton Bylaw 14600 ss. 20, 22 (50 dBA residential, 60 non-residential at night; the tool’s noise rule, BD.eng.noiseLimitAt), at the receiving lot’s property line.','Generator testing: tool/data/noise.json gen (van6555s41c; edm14600s19to24).',`Receiving lots: parcels within ${NR} m edge to edge of the picked lot, with their zones from the loaded tiles; the point of reception is the receiving lot’s corner nearest the picked lot (our reading). Distances: our arithmetic.`,srcZone(x),C.CONTEXT_SRC(city)],missing:miss}; }});
 
 /* ===== M8 Storeys and street frontage (job F1b item 3): a storey stack per height limit, at the minimum heights ===== */
+const hClause=(x,Z)=>x.city==='edm'&&(Z.vkey||Z.key)==='BE'?'Zoning Bylaw 20001 s. 2.120, 4.1.1':shortS((clause(Z,/^Height/i)||{}).s)||'?'; /* BE clause as J.B. gave it, 8 Nov 2026 */
 const num=(s,re)=>{ const m=re.exec(s||''); return m?+m[1]:null; };
 function storeyRule(Z){ const cs=((Z&&Z.cl)||[]).filter(c=>/^(Ground floor|Floor heights)$/i.test(c[0])), txt=cs.map(c=>c[1]).join(' ; '), notApplied=/not applied/i.test(txt);
   const g=notApplied?null:num(txt,/first floor (?:at least )?([\d.]+) m/i), u=notApplied?null:num(txt,/upper floors? (?:at least )?([\d.]+) m/i), s2=notApplied?null:num(txt,/second (?:at least )?([\d.]+) m/i);
@@ -207,6 +216,8 @@ C.add(T,'Storeys and street frontage',{async build(x){
       for(let k=0;k<nAbove;k++){ const b0=g+k*u, yy=y(b0+u); s+=`<rect x="${X}" y="${(yy+1).toFixed(1)}" width="${CW}" height="${(u*SC-2).toFixed(1)}" rx="2" fill="${K.fillHall}"/><text x="${X+CW/2}" y="${(y(b0+u/2)+4).toFixed(1)}" font-size="11" fill="${K.ink}" text-anchor="middle">${n1(u)} m</text>`; }
       s+=`<line x1="${X-14}" y1="${y(c.h)}" x2="${X+CW+14}" y2="${y(c.h)}" stroke="${K.ink}" stroke-width="1.2"/><text x="${X+CW/2}" y="${y(c.h)-10}" font-size="13" fill="${K.ink}" text-anchor="middle">${n} storeys</text>`;
       s+=`<text x="${X+CW/2}" y="${Y0+22}" font-size="12" fill="${K.ink2}" text-anchor="middle">${c.l}</text><text x="${X+CW/2}" y="${Y0+37}" font-size="11" fill="${K.mute}" text-anchor="middle">${n1(spare)} m spare</text>`; }
+    else if(!R.notApplied){ /* no storey rule in this zone (J.B. 8 Nov: keep "no rule here"; the height limit is the one line) */
+      s+=`<rect x="${X}" y="${y(c.h)}" width="${CW}" height="${(c.h*SC).toFixed(1)}" rx="2" fill="none" stroke="${K.rule}" stroke-dasharray="4 3"/><line x1="${X-14}" y1="${y(c.h)}" x2="${X+CW+14}" y2="${y(c.h)}" stroke="${K.ink}" stroke-width="1.2"/><text x="${X+CW/2}" y="${y(c.h)-10}" font-size="13" fill="${K.ink}" text-anchor="middle">height limit ${c.h.toFixed(1)} m</text><text x="${X+CW/2}" y="${Y0+22}" font-size="12" fill="${K.ink2}" text-anchor="middle">${c.l}</text>`; }
     else { s+=`<rect x="${X}" y="${y(c.h)}" width="${CW}" height="${(c.h*SC).toFixed(1)}" rx="2" fill="none" stroke="${K.rule}" stroke-dasharray="4 3"/><line x1="${X-14}" y1="${y(c.h)}" x2="${X+CW+14}" y2="${y(c.h)}" stroke="${K.ink}" stroke-width="1.2"/><text x="${X+CW/2}" y="${y(c.h)-10}" font-size="13" fill="${RED}" text-anchor="middle">? storeys</text><text x="${X+CW/2}" y="${Y0+22}" font-size="12" fill="${K.ink2}" text-anchor="middle">${c.l}</text>`; } });
   const GX=cols.length?XS[0]-14:100, GE=cols.length?XS[cols.length-1]+CW:500; s+=`<line x1="${XS[0]-20}" y1="${Y0}" x2="${GE+20}" y2="${Y0}" stroke="${K.ink}" stroke-width="1.4"/>`;
   /* notes on the right: the ground-floor rule on a straight leader from the right-most column's edge, level with the ground storey */
@@ -215,7 +226,8 @@ C.add(T,'Storeys and street frontage',{async build(x){
   if(R.useTxt){ note+=`<line x1="${lastX}" y1="${gy}" x2="${NX-8}" y2="${gy}" stroke="#8E8D88" stroke-width="0.6"/><circle cx="${lastX-1}" cy="${gy}" r="2.2" fill="${K.ink}"/>`+tb(NX,gy-8,[...wrap('Ground storey: '+R.useTxt.replace(/^./,c=>c.toLowerCase()).replace(/^bulk data storage/i,'data storage').replace(/^"/,''),46).map((t,i)=>({t,fs:13,w:400,c:K.ink})),{t:`${shortS((R.useClause||{}).s)}`}]); }
   else note+=tb(NX,gy-8,[{t:'Ground storey: no use rule here',fs:13,w:400,c:K.ink},{t:`none in ${zoneName(x)}`}]);
   if(have) note+=tb(NX,y(g+u*2.5)-6,[{t:'Minimum floor to floor',fs:13,w:400,c:K.ink},{t:`ground storey ${n1(g)} m · each storey above ${n1(u)} m`,fs:12,c:K.ink2},{t:`${shortS((R.fh||R.useClause||{}).s)}, new buildings`}]);
-  else note+=tb(NX,y(14),[{html:`Minimum storey heights ${R.notApplied?redQ:'· no rule here'}`,fs:13,w:400,c:K.ink},{t:R.notApplied?'apply in sub-area A only; the tool does not map it':`none in ${zoneName(x)}`},{t:shortS((R.fh||{}).s)}]);
+  else if(R.notApplied) note+=tb(NX,y(14),[{html:`Minimum storey heights ${redQ}`,fs:13,w:400,c:K.ink},{t:'apply in sub-area A only; the tool does not map it'},{t:shortS((R.fh||{}).s)}]);
+  else note+=tb(NX,y(Math.min(14,(H0||14)*0.9)),[{t:'Minimum storey heights · no rule here',fs:13,w:400,c:K.ink},{t:`none in ${zoneName(x)}`},...(H0?[{t:`Height limit ${H0.toFixed(1)} m (${hClause(x,Z)})`,fs:12,c:K.ink2}]:[])]);
   const key=`g transform="translate(100,${H-30})"`;
   s+=note+`<g transform="translate(100,${H-20})" font-size="11.5" fill="${K.ink2}"><rect x="0" y="-9" width="11" height="11" fill="${K.dc}"/><text x="16" y="1">ground storey</text><rect x="120" y="-9" width="11" height="11" fill="${K.fillHall}"/><text x="136" y="1">storeys above, at the minimum height</text><line x1="380" y1="-4" x2="404" y2="-4" stroke="${K.ink}" stroke-width="1.2"/><text x="410" y="1">height limit</text></g>`;
   const svg=`<svg style="max-width:100%;height:auto" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(x.addr)}: how many storeys fit under each height limit at the minimum storey heights">${s}</svg>`;
@@ -224,8 +236,8 @@ C.add(T,'Storeys and street frontage',{async build(x){
   const sm=AD&&AD['I-3']&&x.city==='van'&&(Z.vkey||Z.key)==='I-3'?AD['I-3']:null;
   const frontText=R.useTxt?R.useTxt.replace(/^./,c=>c.toUpperCase()):'no ground-floor use rule here';
   return {draw:`<div class="f1c-mb-wrap">${svg}</div>`,lead:'How many storeys the minimum heights leave room for, and what may sit at street level.',
-    hero:cols.map(c=>({v:c.n!=null?String(c.n):C.q(),l:`storeys ${c.l.replace(', outright','').replace(', with approval',' (with approval)')}`})).concat(have?[{v:n1(g),u:' m',l:'ground storey, at least'},{v:n1(u),u:' m',l:uRule!=null?'storeys above, at least':'second storey minimum, used for each storey above (?)'}]:[]),
-    rows:[['At street level',R.useTxt?'entrances only for data storage':'no rule here'],['Front yard',fd!=null?`${n1(fd)} m`:'no front line found'],['Ground storey, floor to floor',g!=null?`at least ${n1(g)} m`:R.notApplied?C.q():'no rule here'],['Storeys above, floor to floor',uRule!=null?`at least ${n1(uRule)} m`:R.s2!=null?`second storey at least ${n1(R.s2)} m`:R.notApplied?C.q():'no rule here']],
+    hero:!have&&!R.notApplied?[{v:H0?H0.toFixed(1):C.q(),u:H0?' m':'',l:'height limit; no storey rule here'}]:cols.map(c=>({v:c.n!=null?String(c.n):C.q(),l:`storeys ${c.l.replace(', outright','').replace(', with approval',' (with approval)')}`})).concat(have?[{v:n1(g),u:' m',l:'ground storey, at least'},{v:n1(u),u:' m',l:uRule!=null?'storeys above, at least':'second storey minimum, used for each storey above (?)'}]:[]),
+    rows:[...(!have&&!R.notApplied&&H0?[['Height limit',`${H0.toFixed(1)} m (${hClause(x,Z)})`]]:[]),['At street level',R.useTxt?'entrances only for data storage':'no rule here'],['Front yard',fd!=null?`${n1(fd)} m`:'no front line found'],['Ground storey, floor to floor',g!=null?`at least ${n1(g)} m`:R.notApplied?C.q():'no rule here'],['Storeys above, floor to floor',uRule!=null?`at least ${n1(uRule)} m`:R.s2!=null?`second storey at least ${n1(R.s2)} m`:R.notApplied?C.q():'no rule here']],
     more:[['Each rule and its clause',`<table class="f1c-mb-ed">${R.cs.concat(yc?[[yc.k,yc.t,yc.s]]:[]).map(c=>`<tr><td style="width:90px">${esc(c[0])}</td><td>${esc(c[1])}<small>${esc(c[2])}</small></td></tr>`).join('')||'<tr><td>no ground-floor or storey-height rule in this zone’s row</td></tr>'}</table>`],['How the storeys are counted',`<p>The ground storey at its minimum, then as many storeys above it at their minimum as fit under the limit. This is our arithmetic at the minimum heights; real storeys may be taller, so fewer fit.</p>`]],
     src:[srcZone(x),'Storey heights and the ground-floor use rule: the "Ground floor" and "Floor heights" clauses of the zone row (figures read from the clause text); '+(sm?`Vancouver I-3 minimums also in tool/data/arch.json storeyMin (${sm.ground} m and ${sm.above} m, register arch_hb_vanI3).`:'no figure in tool/data/arch.json storeyMin for this zone.'),'Storey counts: our arithmetic at the minimum heights: floor((limit − ground storey) ÷ upper storey) + 1; spare = what is left.','Street frontage: the ground-floor use clause and the front yard from the lot-line reading (M.edgeYards).','Height limits: Z.hOutright and Z.hx.'],missing:miss}; }});
 

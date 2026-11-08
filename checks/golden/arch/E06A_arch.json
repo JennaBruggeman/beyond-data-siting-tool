@@ -257,6 +257,7 @@
   ]
  },
  "rules": [
+  "bad: Not allowed here; rezoning needed. Zone BE does not permit Major Industrial for a new building, and the City treats large-scale data centres as Major Industrial (no size threshold given, so the tool applies it to every data centre): rezoning needed (register edm_dc_major). The numbers below use BE's own limits, for comparison only. Shown as if rezoned: a flagged option, not a prediction.",
   "note: Loading: 1 bay inside the building (41 m² of ground storey; Architecture default, as the test fits draw it). Ratios takes this floor out of the ground; Arrange draws it on the ground storey at the rear end of the building (drawing choice).",
   "bad: Data centre: its share (27%) leaves too little ground for the picked programs beside the hall. Hall and its support rooms need 1,473 m² of ground per storey (2 hall storeys under the 16 m height limit; support 33 % of the data centre); 126 m² available. Ground: footprint after the plant yard 2,469 m² − 3 transformer pads, 6 m from the building, 93 − 1 loading bay inside 41 − programs 2,210 m² (Refuge 265 as set; Greenhouse 190 as set; Outpatient clinic 500 as set; Bathhouse / Nordic spa 320 as set; Fish farm 685 as set; Warming shelter 100 as set; EV charging hub 150 at its minimum). Back in Ratios it takes at most 2%.",
   "bad: Public indoor pool: 1,065 m² is over the 500 m² this use may have in BE; not drawn. Its sourced minimum (815 m²) is over the cap, so it cannot go on a BE lot.",
@@ -333,15 +334,15 @@
  "saved": [
   [
    "suggest",
-   3,
-   21,
+   4,
+   22,
    46,
    0.48010610079575594
   ],
   [
    "lot",
-   8,
-   26,
+   9,
+   27,
    46,
    0
   ]

@@ -155,7 +155,7 @@
   "status": {
    "k": "yes",
    "t": "Allowed",
-   "d": "Major Industrial is a permitted use in IH, which is where the City says large-scale data centres belong.",
+   "d": "Major Industrial is a permitted use in IH (s. 2.140, 2.1). The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre.",
    "env": "Height 30.0 m (the City may vary it for operating features). Floor area up to 2.0 × the lot. Minimum site 1.0 ha. Street setback 3.0 m.",
    "src": [
     "edm_matrix",
@@ -181,8 +181,8 @@
     "cl": [
      [
       "Data centre",
-      "Major Industrial Permitted; Minor Industrial only where existing on 1 Jan 2024, so a small data centre fits only if deemed Major (?); always Discretionary",
-      "IH ss. 2.1–2.2; s. 7.20 3.3.2"
+      "Major Industrial is Permitted. The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre.",
+      "IH s. 2.140, 2.1; City \"Data Centre Development\" (edm_dc_major)"
      ],
      [
       "Floor area",
@@ -226,7 +226,8 @@
       "[cycle]",
       "[cycle]",
       "[cycle]"
-     ]
+     ],
+     "path": "permitted"
     },
     "mods": {},
     "fsr": [
