@@ -92,7 +92,10 @@ function hallScore(P){ const drawn=P.boxes.reduce((t,b)=>t+(b.q.m2||0),0), sprea
   return [drawn,spread,street]; }
 function placeOnce(){ const s=site(); if(!s) return null; const {F,G,dir,v0,v1,W,a0,uf,ftf}=s; const out={s,boxes:[],flags:[],hall:null,levels:[]};
   { const Y=s.M.yards, U=(s.M.edgeYards||[]).filter(e=>e.kind==='unclear'); if(Y&&Y.unclear&&U.length) out.flags.push({t:`Lot lines: ${U.length>1?U.length+' edges are':'one edge ('+Math.round(U[0].len||0)+' m) is'} neither clearly a side nor a rear line; the deeper yard (${Math.max(...U.map(e=>e.d||0))} m) is applied, the safer reading. Read as a side line it would leave more ground (our reading ?).`,src:[(s.M.Z&&s.M.Z.srcId)||'edm_bl20001'],sev:'note'}); } /* 7 Nov 2026 (J.B.): keep the safer yard, flag it */
-  { const z=zoneOK(); if(!z.ok) out.flags.push({t:`Not allowed here; rezoning needed. ${String(z.why).replace(/<[^>]+>/g,'')} Shown as if rezoned: a flagged option, not a prediction.`,src:[(s.M.Z&&s.M.Z.srcId)||'edm_bl20001'],sev:'bad'}); } /* WORKLIST 3 zone rule */
+  /* 8 Nov 2026 (J.B.; register r_edm_mix_rezoning): in Edmonton no zone allows a data centre (Major Industrial: IH, EETC) together with public uses (Community,
+     Health or Emergency Service: BE, not IH or EETC), so a typology with any public program needs a rezoning on every Edmonton lot; this flag replaces the zone flag there */
+  { const z=zoneOK(), mix=mixRezone(); if(mix) out.flags.push({t:mix,src:['edm_dc_major','arch_hb_edmIH','arch_edmZB20001_BE'],sev:'bad'});
+    else if(!z.ok) out.flags.push({t:`Not allowed here; rezoning needed. ${String(z.why).replace(/<[^>]+>/g,'')} Shown as if rezoned: a flagged option, not a prediction.`,src:[(s.M.Z&&s.M.Z.srcId)||'edm_bl20001'],sev:'bad'}); } /* WORKLIST 3 zone rule */
   const refuge=pickOf('refuge'), under=refuge&&refuge.opt==='under_hall';
   const toL=r=>{ const o=[]; for(let k=0;k<r.length;k+=2) o.push(F.toL(r[k],r[k+1])); return o; }, ext=r=>{ const L=toL(r); return [Math.min(...L.map(p=>p[0])),Math.max(...L.map(p=>p[0])),Math.min(...L.map(p=>p[1])),Math.max(...L.map(p=>p[1]))]; };
   // the hall where the set-up's model puts it (centred in the buildable area; its roof plant sits on it)
@@ -503,6 +506,8 @@ function groundLine(b,c,cap){ const G=cap.G, k=b.dataFl, it=G.it, pg=G.pg, s=it?
 /* WORKLIST 3 (zone rule, 7 Nov 2026): typologies only where a data centre is permitted, conditional or discretionary (zones.json has a row for the zone,
    and the lot is not in I-3 sub-area B). Elsewhere: "Not allowed here; rezoning needed." A rezoning is a flagged option, not a block (START_HERE standards):
    the user may look on as if rezoned, and every screen and the rules then carry the flag. */
+const MIXTXT='Needs rezoning: no Edmonton zone allows a data centre with public uses. A data centre is Major Industrial, permitted only in IH and EETC, which list no Community, Health or Emergency Service use; BE allows those uses but not Major Industrial (Zoning Bylaw 20001 ss. 2.120, 2.140, 3.52; City guidance, register edm_dc_major). Shown as if rezoned: a flagged option, not a prediction.';
+function mixRezone(){ const s=BD.S&&BD.S.sel; return s&&s.city==='edm'&&(A.picks||[]).length?MIXTXT:null; }
 function zoneOK(){ const M=BD.model&&BD.model(), Z=M&&M.Z; if(!Z) return {ok:true}; if(Z.notAllowed) return {ok:false,why:Z.warn}; if(Z.assumed) return {ok:false,why:`Zone ${esc(Z.zone||'(none recorded)')} does not list a data centre (no row in the tool's zone table).`}; return {ok:true}; }
 A.rezone=A.rezone||{};
 function zoneGate(k,title){ const z=zoneOK(); if(z.ok) return null; const on=!!A.rezone[selId()];
@@ -692,5 +697,5 @@ function plan(P){ const host=document.getElementById('v3d'); if(!host||!P) retur
 
 BD.views=BD.views||{}; BD.views.arat=viewRatios; BD.views.aprog=viewPrograms; BD.views.aarr=viewArrange; BD.views.acmp=viewCompare;
 BD.archHide=()=>{ const v=$('#aView'); if(v) v.style.display='none'; const p=$('#aPlan'); if(p) p.style.display='none'; };
-BD.archTest={place,budgets,rules,add,del,resize,CAT,ratioBase,ratioCalc,ratioNow,dcCapPct,progGround,ratioApply,groundItems,dcPieces};
+BD.archTest={mixRezone,place,budgets,rules,add,del,resize,CAT,ratioBase,ratioCalc,ratioNow,dcCapPct,progGround,ratioApply,groundItems,dcPieces};
 })();

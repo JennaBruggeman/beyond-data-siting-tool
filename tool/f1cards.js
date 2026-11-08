@@ -51,13 +51,13 @@ function meter(m){ const max=m.max||(m.lim?m.lim/0.87:Math.max(1,m.v||1)), pct=x
 const q=(why)=>({q:true,why:why||'not in the tool yet'});
 const val=v=>v&&v.q?`<b class="f1c-q" title="${esc(v.why)}">?</b><span class="f1c-qn">${esc(v.why)}</span>`:esc(v);
 /* render a built card into the shell's drawing area and panel body */
-function render(res,dr,pb,srcEl){ dr.innerHTML=res.draw||'';
+function render(res,dr,pb,srcEl,tpl){ dr.innerHTML=res.draw||'';
   const hero=(res.hero||[]).length?`<div class="f1c-hero">${res.hero.map(h=>`<div><div class="v${h.red?' red':''}">${h.v&&h.v.q?'<b class="f1c-q">?</b>':esc(h.v)}${h.u?`<span>${esc(h.u)}</span>`:''}</div><div class="l">${esc(h.l)}${h.v&&h.v.q?' · not in the tool yet':''}</div></div>`).join('')}</div>`:'';
   const rows=(res.rows||[]).length?`<dl class="f1c-rows">${res.rows.map(r=>`<dt>${esc(r[0])}</dt><dd>${val(r[1])}</dd>`).join('')}</dl>`:'';
   const met=(res.meters||[]).map(meter).join('');
   const more=(res.more||[]).map(m=>`<details class="f1c-more"><summary>${esc(m[0])}</summary><div>${m[1]}</div></details>`).join('');
-  let M0=null; try{ M0=BD.model(); }catch(e){} const nz=M0&&M0.Z&&M0.Z.notAllowed&&!res.noZoneFlag; /* the zone needs a rezoning (I-3 sub-area B; Edmonton zones without Major Industrial): every card says it is shown as if rezoned */
-  pb.innerHTML=(nz?`<p class="f1c-zflag"><span class="f1c-q">?</span> Not allowed here; rezoning needed. Shown as if rezoned: a flagged option, not a prediction.</p>`:'')+(res.lead?`<p class="lead">${esc(res.lead)}</p>`:'')+hero+rows+met+more;
+  let M0=null; try{ M0=BD.model(); }catch(e){} const mix=tpl==='architecture'&&!res.noZoneFlag&&BD.archTest&&BD.archTest.mixRezone&&BD.archTest.mixRezone(), nz=!mix&&M0&&M0.Z&&M0.Z.notAllowed&&!res.noZoneFlag; /* Edmonton: a typology with public uses needs a rezoning on every lot (r_edm_mix_rezoning) */ /* the zone needs a rezoning (I-3 sub-area B; Edmonton zones without Major Industrial): every card says it is shown as if rezoned */
+  pb.innerHTML=(mix?`<p class="f1c-zflag"><span class="f1c-q">?</span> Needs rezoning: no Edmonton zone allows a data centre with public uses (IH and EETC: no Community, Health or Emergency Service; BE: no Major Industrial). Shown as if rezoned: a flagged option, not a prediction.</p>`:nz?`<p class="f1c-zflag"><span class="f1c-q">?</span> Not allowed here; rezoning needed. Shown as if rezoned: a flagged option, not a prediction.</p>`:'')+(res.lead?`<p class="lead">${esc(res.lead)}</p>`:'')+hero+rows+met+more;
   if(srcEl) srcEl.innerHTML=`<summary>Sources and assumptions</summary><ul>${(res.src||[]).map(s=>`<li>${esc(s)}</li>`).join('')}${(res.missing||[]).length?`<li class="f1c-miss">Not in the tool yet: ${esc(res.missing.join('; '))}</li>`:''}</ul>`; }
 /* the Architecture state the cards read (Ratios at the tool's defaults, the Emergency hub's programs, Arrange's placement), set up once per lot as
    checks/tests/export_layout.js does it: the lot sized as a worked example (flow.js findFit), Ratios at its own defaults, then the programs picked (refuge side by side,
