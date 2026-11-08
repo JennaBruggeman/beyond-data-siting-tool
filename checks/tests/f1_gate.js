@@ -14,8 +14,8 @@ const { chromium } = require('playwright');
     const local = (re, f, type) => p.route(re, r => r.fulfill({ body: fs.readFileSync(path.join(NM, f)), contentType: type }));
     await local(/three\.min\.js/, 'three/build/three.min.js', 'application/javascript'); await local(/OrbitControls\.js/, 'three/examples/js/controls/OrbitControls.js', 'application/javascript');
     await p.goto('http://localhost:8766/index.html?x=' + Date.now()); await p.waitForSelector('#f1', { timeout: 20000 }); await p.waitForTimeout(2500); return p; }
-  const textCheck = async (p, where) => { const t = await p.evaluate(() => { const e = document.getElementById('f1v') || document.getElementById('f1'); return e ? e.innerText : ''; });
-    if (/\bNaN\b|\bundefined\b/.test(t)) bad.push(where + ': NaN or undefined in the text'); };
+  const textCheck = async (p, where) => { const t = await p.evaluate(() => { const e = document.getElementById('f1v') || document.getElementById('f1'); return e ? e.innerText + ' ' + [...e.querySelectorAll('svg text')].map(x => x.textContent).join(' ') : ''; });
+    if (/\bNaN\b|\bundefined\b|\bnull\b|Infinity/.test(t)) bad.push(where + ': NaN, undefined, null or Infinity in the text'); if (/could not be drawn/.test(t)) bad.push(where + ': card could not be drawn'); };
   for (const [w, h, tag] of [[1440, 900, '1440'], [390, 844, '390']]) {
     const p = await page(w, h); await textCheck(p, 'landing ' + tag);
     await p.screenshot({ path: path.join(out, `landing_${tag}.png`), fullPage: true }); shots++;
@@ -25,7 +25,7 @@ const { chromium } = require('playwright');
       for (const city of (tag === '1440' ? ['van', 'edm'] : ['van'])) {
         if (city === 'edm') { await p.click('#f1v [data-city="edm"]'); await p.waitForTimeout(4000); }
         const idx = tag === '390' ? [0] : all ? t.cards.map((_, k) => k) : t.cards.map((c, k) => k).filter(k => k === 0 || t.cards[k] !== t.cards[k - 1]);
-        for (const k of idx) { await p.click(`#f1v [data-to="${k}"]`); await p.evaluate(() => { document.getElementById('f1v').scrollTop = 0; }); await p.waitForTimeout(150); await textCheck(p, `${t.id} ${city} card ${k + 1} ${tag}`);
+        for (const k of idx) { await p.click(`#f1v [data-to="${k}"]`); await p.evaluate(() => { document.getElementById('f1v').scrollTop = 0; }); await p.waitForFunction(() => { const d = document.querySelector('#f1v .f1v-draw'); return d && !/Drawing…/.test(d.innerText); }, null, { timeout: 90000 }).catch(() => bad.push(`${t.id} ${city} card ${k + 1} ${tag}: still drawing after 90 s`)); await p.waitForTimeout(400); await p.evaluate(() => { document.getElementById('f1v').scrollTop = 0; }); await textCheck(p, `${t.id} ${city} card ${k + 1} ${tag}`);
           await p.screenshot({ path: path.join(out, `${t.id}_${city}_${String(k + 1).padStart(2, '0')}_${tag}.png`) }); shots++; }
         if (city === 'edm') { await p.click('#f1v [data-city="van"]'); await p.waitForTimeout(3000); } }
       await p.click('#f1v [data-x]'); await p.waitForTimeout(300); }

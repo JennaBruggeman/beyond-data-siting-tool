@@ -86,3 +86,15 @@ Questions:
 2. No part has a value per lot in the tool, so "on this lot" shows a red "?" everywhere.
 3. Industrial land and jobs: I put it under Process. Right chapter?
 
+## 7 Nov 2026 — Job F1 step 2: Architecture cards, gate (Code)
+
+All 21 Architecture cards are built and draw on both example lots. No page or console errors; golden and Architecture results unchanged. Screenshots: checks/f1/ (Vancouver). The Edmonton cards stay local: several show Altalis lot lines. Gate-2 fold-ins done; municipal_logic_parts.md is in Claude Link.
+
+Shown as red "?" (not in the tool yet): lots allowed per city; clinics and shelters nearby; Edmonton libraries, ground heights and flood level; the LiDAR datum; the other seven typologies; add-on fit; longest walk to an exit; stair-shaft and battery-room ratings; fire access, transformers, fuel truck spot; the warming shelter's heat; a 3-D still on Drawing styles.
+
+Questions:
+1. The library holds one typology, so Pick a typology shows one tile, not eight. OK?
+2. Rooms shows plans with storey tabs, not the board's axon. OK?
+3. Neighbours and views: leaders cross building footprints, against STYLE.md rule 8. Allow on maps, or move the labels?
+4. Drawing styles: keep 3-D as "?", or allow a still from the tool's own renderer?
+
