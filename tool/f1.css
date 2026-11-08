@@ -172,3 +172,40 @@
 #f1l .f1-app{color:var(--f-ink);text-decoration:none}
 .f1l-nv{font-size:13px;color:var(--f-mute);margin-top:4px}
 .f1l-more summary{cursor:pointer;font-size:12px;color:var(--f-ink2);padding:6px 0}
+/* ---------- built cards (f1cards.js) ---------- */
+.f1v-draw{overflow:auto}
+.f1v-draw svg{max-width:100%;height:auto}
+.f1c-body{display:flex;flex-direction:column;gap:18px}
+.f1c-hero{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px;border-top:1px solid var(--f-rule);padding-top:16px}
+.f1c-hero .v{font-size:30px;font-weight:300;line-height:1.1}
+.f1c-hero .v span{font-size:14px;color:var(--f-mute);margin-left:5px}
+.f1c-hero .v.red{color:var(--f-red)}
+.f1c-hero .l{font-size:11.5px;color:var(--f-mute);margin-top:4px}
+.f1c-rows{display:grid;grid-template-columns:auto 1fr;gap:0;margin:0;border-top:1px solid var(--f-rule)}
+.f1c-rows dt,.f1c-rows dd{margin:0;padding:8px 0;border-bottom:1px solid var(--f-hair);font-size:13px}
+.f1c-rows dt{color:var(--f-mute);padding-right:16px}
+.f1c-rows dd{color:var(--f-ink);text-align:right}
+.f1c-q{color:var(--f-red);font-weight:400}
+.f1c-qn{display:block;font-size:11.5px;color:var(--f-red)}
+.f1c-m{border-bottom:1px solid var(--f-hair);padding:10px 0}
+.f1c-m .t{display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px}
+.f1c-m .trk{position:relative;height:4px;background:var(--f-hair);border-radius:2px;max-width:328px}
+.f1c-m .bar{height:4px;border-radius:2px}
+.f1c-m .trk i{position:absolute;top:-5px;width:1.2px;height:14px;background:var(--f-ink)}
+.f1c-m .c{display:flex;justify-content:space-between;gap:10px;font-size:11.5px;color:var(--f-mute);margin-top:7px;max-width:328px}
+.f1c-more{border-bottom:1px solid var(--f-hair)}
+.f1c-more summary{cursor:pointer;font-size:13px;padding:9px 0;color:var(--f-ink)}
+.f1c-more div{font-size:12.5px;color:var(--f-ink2);line-height:1.55;padding-bottom:10px}
+.f1c-more p{margin:0}
+.f1c-key{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:12px;color:var(--f-ink2);margin-top:12px}
+.f1c-key i{display:inline-block;width:12px;height:12px;border-radius:2px;border:1px solid var(--f-rule);vertical-align:-2px;margin-right:6px}
+.f1c-key i.ln{height:0;border-width:1px 0 0;border-radius:0;vertical-align:3px;width:16px}
+.f1c-note{color:var(--f-mute);font-size:11.5px}
+.f1c-two{display:flex;gap:28px;justify-content:center;width:100%}
+.f1c-two figure{margin:0;flex:1 1 0;min-width:0}
+.f1c-two svg{width:100%;height:auto}
+.f1c-two figcaption{font-size:13px;color:var(--f-ink);margin-bottom:6px}
+.f1v-src ul{margin:6px 0 0;padding-left:16px}
+.f1v-src li{margin:3px 0}
+.f1c-miss{color:var(--f-red)}
+.f1v-draw{flex-direction:column}

@@ -58,11 +58,11 @@ function landing(){ let L=document.getElementById('f1'); if(L) L.remove(); L=doc
 
 /* ---------- card viewer (STYLE.md §4 shell) ---------- */
 const V={t:null,i:0,city:'van',where:''};
-async function loadLot(city){ const S=LOTS[city]; V.where='…'; draw();
+async function loadLot(city){ const S=LOTS[city]; V.where='…'; V.ready=false; draw();
   try{ if(BD.S.city!==city&&BD.setCity) await BD.setCity(city,true); await BD.select({city:S.city,tile:S.tile,id:S.id,quiet:true}); BD.modelReset(); const M=BD.model(), a=BD.S.sel&&BD.S.sel.a;
     V.where=[a&&a[0]?titleCase(a[0]):S.id, M&&M.Z&&(M.Z.zone||M.Z.key)].filter(Boolean).join(' · '); }
   catch(e){ V.where=S.id+' (lot not loaded: '+String(e.message||e).slice(0,60)+')'; }
-  draw(); }
+  V.ready=true; draw(); }
 const titleCase=s=>String(s).toLowerCase().replace(/\b([a-z])/g,c=>c.toUpperCase()).replace(/\b(\d+)(St|Nd|Rd|Th)\b/g,(m,n,x)=>n+x.toLowerCase()).replace(/\b(Nw|Ne|Sw|Se)\b/g,m=>m.toUpperCase());
 function viewer(id){ V.t=TPL.find(x=>x.id===id); V.i=0; let W=document.getElementById('f1v'); if(!W){ W=document.createElement('div'); W.id='f1v'; W.setAttribute('role','dialog'); W.setAttribute('aria-modal','true'); document.body.appendChild(W);
     W.addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; const d=b.dataset;
@@ -71,19 +71,23 @@ function viewer(id){ V.t=TPL.find(x=>x.id===id); V.i=0; let W=document.getElemen
       if(d.step==='back'&&V.i>0){ V.i--; draw(); } if(d.step==='next'&&V.i<V.t.cards.length-1){ V.i++; draw(); } });
     document.addEventListener('keydown',e=>{ if(!document.getElementById('f1v')) return; if(e.key==='Escape') document.getElementById('f1v').remove(); if(e.key==='ArrowRight'&&V.i<V.t.cards.length-1){ V.i++; draw(); } if(e.key==='ArrowLeft'&&V.i>0){ V.i--; draw(); } }); }
   draw(); loadLot(V.city); }
-function draw(){ const W=document.getElementById('f1v'); if(!W||!V.t) return; const t=V.t, c=t.cards[V.i], n=t.cards.length, ci=t.chaps.indexOf(c.chap);
+function draw(){ const W=document.getElementById('f1v'); if(!W||!V.t) return; const t=V.t, c=t.cards[V.i], n=t.cards.length, ci=t.chaps.indexOf(c.chap), spec=BD.f1cards&&BD.f1cards.get(t.id,c.t);
   W.innerHTML=`<header class="f1v-head"><span class="f1-app">Beyond Data</span><span class="tpl">${t.name}</span>
      <nav class="f1v-chap" aria-label="Chapters">${t.chaps.map((h,k)=>`<button data-chap="${esc(h)}" class="${k<ci?'past':k===ci?'now':''}"${k===ci?' aria-current="step"':''}>${esc(h)}</button>`).join('')}</nav>
      <span class="f1v-where">${esc(V.where)}</span>
      <div class="f1v-city" role="group" aria-label="Example lot">${Object.values(LOTS).map(l=>`<button data-city="${l.city}" aria-pressed="${l.city===V.city}">${l.name}</button>`).join('')}</div>
      <button class="f1v-how" data-how="all">How it works</button><button class="f1v-x" data-x aria-label="Close the cards">Close</button></header>
-   <div class="f1v-body"><main class="f1v-main"><div class="f1v-chips"><span class="f1v-chip">Preview · not built yet</span></div>
-     <div class="f1v-draw"><p class="f1v-empty">This card’s drawing and figures are built in ${STEPNAME[t.step]} of the site build. It will read the example lot above and what the cards before it chose.</p></div>
+   <div class="f1v-body"><main class="f1v-main"><div class="f1v-chips"><span class="f1v-chip">${spec?esc(spec.chip||'Example lot · read-only'):'Preview · not built yet'}</span></div>
+     <div class="f1v-draw">${spec?'<p class="f1v-empty">Drawing…</p>':''}${spec?'':`<p class="f1v-empty">This card’s drawing and figures are built in ${STEPNAME[t.step]} of the site build. It will read the example lot above and what the cards before it chose.</p>`}</div>
      <button class="f1v-how" data-how="card">How this is worked out</button><details class="f1v-src"><summary>Sources and assumptions</summary><p>Nothing on this card yet. Every figure will come from the tool, with its source here, or show as a red “?”.</p></details></main>
-    <aside class="f1v-panel"><div class="chap">${esc(c.chap)}</div><h2>${esc(c.t)}</h2><p class="lead">${t.name} · card ${V.i+1} of ${n}.</p><div class="grow"></div>
+    <aside class="f1v-panel"><div class="chap">${esc(c.chap)}</div><h2>${esc(c.t)}</h2><div class="f1c-body">${spec?'':`<p class="lead">${t.name} · card ${V.i+1} of ${n}.</p>`}</div><div class="grow"></div>
      <div class="f1v-nav"><button class="f1v-back" data-step="back"${V.i?'':' disabled'}>Back</button><button class="f1-btn" data-step="next"${V.i<n-1?'':' disabled'}>${V.i<n-1?'Next':'Last card'}</button></div><div class="f1v-no">${V.i+1} / ${n}</div></aside></div>
    <nav class="f1v-strip" aria-label="All cards">${t.cards.map((x,k)=>`<button data-to="${k}"${k===V.i?' aria-current="true"':''}><span class="n">${k+1}</span><span>${esc(x.t)}</span></button>`).join('')}</nav>`;
-  const cur=W.querySelector('.f1v-strip [aria-current="true"]'), sp=W.querySelector('.f1v-strip'); if(cur&&sp) sp.scrollLeft=Math.max(0,cur.offsetLeft-sp.clientWidth/2+cur.offsetWidth/2); } /* the strip scrolls to the card; the page does not move */
+  const cur=W.querySelector('.f1v-strip [aria-current="true"]'), sp=W.querySelector('.f1v-strip'); if(cur&&sp) sp.scrollLeft=Math.max(0,cur.offsetLeft-sp.clientWidth/2+cur.offsetWidth/2); /* the strip scrolls to the card; the page does not move */
+  /* a built card (f1cards.js) draws once the example lot is loaded; a newer draw wins */
+  if(spec&&V.ready){ const tok=V.tok=(V.tok||0)+1, dr=W.querySelector('.f1v-draw'), pb=W.querySelector('.f1c-body'), se=W.querySelector('.f1v-src');
+    Promise.resolve().then(()=>spec.build(BD.f1cards.ctx(V.city))).then(res=>{ if(tok!==V.tok||!res) return; BD.f1cards.render(res,dr,pb,se); W.dataset.built=c.t; })
+      .catch(e=>{ if(tok!==V.tok) return; dr.innerHTML=`<p class="f1v-empty">This card could not be drawn: ${esc(String(e&&e.message||e).slice(0,160))}</p>`; console.error('f1 card',c.t,e); }); } }
 
 /* first screen: the landing page, unless a parcel link was opened, ?old is in the address, or a script asked to skip it (f1_capture.js) */
 function boot(){ if(!BD||!BD.S||!BD.select) return setTimeout(boot,200); let skip=false; try{ skip=localStorage.getItem('bd-f1-skip')==='1'; }catch(e){}

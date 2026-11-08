@@ -106,6 +106,7 @@ async function runExample(i){ const x=EXAMPLES[i]; reset(); F.exPending=true; Ob
 /* 3 Nov 2026 (noise mitigation): when no outdoor placement fits (the noise by-law blocks most), the roof plant brought indoors is tried next, before
    dropping the generators: a plant room to the NSW 2021 terms is credited 25 dB (engine NMIT; register arch_nz_nswDcNoise). It takes floor area (plant.js). */
 /* bugfix 4 Nov 2026 (retest resident 1): `why`, if given, collects the problems of each placement that fits no size, so residents can be told which rule blocks them all */
+F.findFit=w=>findFit(w); /* F1 cards (7 Nov 2026): the example lot is sized as a worked example is, read-only use */
 function findFit(why){ if(!BD.S.sel||!BD.fitMax) return null; const A=BD.S.answers, base={plantAt:A.plantAt,genAt:A.genAt,gens:A.gens,vis:A.vis};
   const IN={vis:'indoors',plantAt:'roof'}, tries=[{},{genAt:'roof'},{plantAt:'split'},{plantAt:'yard'},{plantAt:'split',genAt:'roof'},{plantAt:'yard',genAt:'roof'},
     Object.assign({},IN),Object.assign({genAt:'roof'},IN),{gens:'none'},{gens:'none',plantAt:'split'},{gens:'none',plantAt:'yard'},Object.assign({gens:'none'},IN)], lastG=7, lastOut=5;
