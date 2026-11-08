@@ -181,6 +181,7 @@
 .f1c-hero .v span{font-size:14px;color:var(--f-mute);margin-left:5px}
 .f1c-hero .v.red{color:var(--f-red)}
 .f1c-hero .l{font-size:11.5px;color:var(--f-mute);margin-top:4px}
+[data-fig]{cursor:pointer}[data-fig]:hover .v,dd[data-fig]:hover{color:var(--f-dc,#3268A6)}[data-fig]:focus-visible{outline:1px solid #3268A6;outline-offset:2px}
 .f1c-rows{display:grid;grid-template-columns:auto 1fr;gap:0;margin:0;border-top:1px solid var(--f-rule)}
 .f1c-rows dt,.f1c-rows dd{margin:0;padding:8px 0;border-bottom:1px solid var(--f-hair);font-size:13px}
 .f1c-rows dt{color:var(--f-mute);padding-right:16px}

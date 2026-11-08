@@ -216,3 +216,10 @@ Lots per class (property records in the tiles, counted as job A1; checks/tests/a
 - Vancouver: permitted 0 · conditional 696 · rezoning 92,705 (no zone 362, not counted).
 - Edmonton: permitted 386 · conditional 0 · rezoning 280,113 · Direct Control 8,228 (?) (no zone 11).
 Display only: golden identical; Architecture cards 1–2 render unchanged. Vancouver screenshots: checks/f1/F3_*.png; Edmonton (lot lines) local only.
+
+## 8 Nov 2026 — F5 part 1: checks (Code)
+
+- (a) "How it works" in a template's cards opens the interactive logic diagram on that template's tab (only its nodes shown); on the landing page it opens the full diagram. Existed; no change.
+- (b) Landing "Logic diagram →" per template: missing. Added (opens the diagram on that template's tab).
+- (c) Tapping a figure: missing everywhere (only the per-card "How this is worked out" button). Added: every hero figure and row value opens the diagram at the card's nodes, or at one node where the card names it (hero k / row [2]; no card names one yet). Cards with no nodes mapped, so a tap opens the template tab with nothing lit (28 of 49): Resident all 4; Municipal Industrial land and jobs, Report; Engineering Your city, Your parcel, Report; Architecture 19 of 22 (all but What fits / Cooling-type cards mapped via CARD).
+- docs/STYLE.md updated from Claude Link (§7 Terms).

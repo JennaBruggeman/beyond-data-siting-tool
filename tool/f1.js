@@ -41,12 +41,13 @@ function landing(){ let L=document.getElementById('f1'); if(L) L.remove(); L=doc
     <figure class="f1-heroimg"><img src="f1/img/hero.png" alt="339 1st Ave E, Vancouver, in the tool's 3-D view: the data centre's equipment and its yard among the neighbouring buildings"><figcaption class="f1-cap">339 1st Ave E, Vancouver. The tool's 3-D view: a data centre's equipment and plant yard among its neighbours.</figcaption></figure></section>
    <div class="f1-lines"><p>Vancouver and Edmonton, built to the same depth.</p><p>Four workflows, each ending in its own report.</p><p>Every figure has a source, or a “?” where it doesn’t yet.</p><p>Trade-offs, not verdicts. Code limits block; options are flagged.</p></div>
    <section id="f1-work"><div class="f1-sechead"><h2>Workflows</h2><span>Each one shows one idea per card, then makes a report.</span></div>
-    ${TPL.map(t=>`<div class="f1-row"><h3>${t.name}</h3><div><p class="who">${esc(t.who)}</p><div class="ract"><button class="f1-btn" data-start="${t.id}"${t.tier?'':' disabled'}>Start</button><button class="f1-link" data-see="${t.id}">See the cards</button></div>${t.tier?'':'<div class="note">Start opens when the Municipal cards are built.</div>'}</div>
+    ${TPL.map(t=>`<div class="f1-row"><h3>${t.name}</h3><div><p class="who">${esc(t.who)}</p><div class="ract"><button class="f1-btn" data-start="${t.id}"${t.tier?'':' disabled'}>Start</button><button class="f1-link" data-see="${t.id}">See the cards</button><button class="f1-link" data-logic="${t.tab}">Logic diagram →</button></div>${t.tier?'':'<div class="note">Start opens when the Municipal cards are built.</div>'}</div>
       <div class="meta">${t.cards.length} steps<br>report</div><img src="f1/img/${t.img}.png" alt="${t.name}: the tool's 3-D view of 339 1st Ave E, Vancouver" loading="lazy"></div>`).join('')}</section>
    <section class="f1-how" id="f1-how"><div><h2>How it works</h2><p>One logic runs under all four workflows. Every number in it is tied to a source and a check status, so a reader can follow any figure back to where it came from.</p><button class="f1-link" data-go="logic">See the logic</button></div>${howSvg()}</section>
    <footer class="f1-foot"><span>Beyond Data · ARCH 540, UBC School of Architecture and Landscape Architecture · 2026</span><span>Data: City of Vancouver and City of Edmonton open data. Maker and operator figures are labelled as claims.</span></footer></div>`;
   document.body.appendChild(L);
-  L.addEventListener('click',e=>{ const g=e.target.closest('[data-go],[data-start],[data-see]'); if(!g) return;
+  L.addEventListener('click',e=>{ const g=e.target.closest('[data-go],[data-start],[data-see],[data-logic]'); if(!g) return;
+    if(g.dataset.logic){ e.preventDefault(); if(BD.f1logic) BD.f1logic.open({tab:g.dataset.logic}); return; } /* F5 1(b), 8 Nov 2026: the template's interactive logic diagram */
     if(g.dataset.go==='old'){ e.preventDefault(); L.remove(); return; }
     if(g.dataset.go==='logic'){ e.preventDefault(); if(BD.f1logic) BD.f1logic.open({tab:'all'}); return; }
     if(g.dataset.go==='work'){ L.querySelector('#f1-work').scrollIntoView({behavior:'smooth'}); return; }
@@ -65,7 +66,9 @@ async function loadLot(city){ const S=LOTS[city]; V.where='…'; V.ready=false; 
   V.ready=true; draw(); }
 const titleCase=s=>String(s).toLowerCase().replace(/\b([a-z])/g,c=>c.toUpperCase()).replace(/\b(\d+)(St|Nd|Rd|Th)\b/g,(m,n,x)=>n+x.toLowerCase()).replace(/\b(Nw|Ne|Sw|Se)\b/g,m=>m.toUpperCase());
 function viewer(id){ V.t=TPL.find(x=>x.id===id); V.i=0; let W=document.getElementById('f1v'); if(!W){ W=document.createElement('div'); W.id='f1v'; W.setAttribute('role','dialog'); W.setAttribute('aria-modal','true'); document.body.appendChild(W);
-    W.addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; const d=b.dataset;
+    W.addEventListener('click',e=>{ const fg=e.target.closest('[data-fig]'); if(fg&&BD.f1logic){ const c=V.t.cards[V.i], k=fg.dataset.k||'', ids=k?[k]:BD.f1logic.cardIds(c.t,V.t.tab);
+        BD.f1logic.open({tab:V.t.tab,label:c.t+' · '+(fg.dataset.fig||''),ids,lot:V.where,sel:k||null}); return; } /* F5 1(c), 8 Nov 2026 */
+      const b=e.target.closest('button'); if(!b) return; const d=b.dataset;
       if(d.x!=null){ W.remove(); return; } if(d.how){ const c=V.t.cards[V.i]; if(BD.f1logic) BD.f1logic.open(d.how==='all'?{tab:V.t.tab}:{tab:V.t.tab,label:c.t,ids:BD.f1logic.cardIds(c.t,V.t.tab),lot:V.where}); return; } if(d.city){ if(d.city!==V.city){ V.city=d.city; loadLot(V.city); } return; }
       if(d.to!=null){ V.i=+d.to; draw(); return; } if(d.chap!=null){ V.i=V.t.cards.findIndex(c=>c.chap===d.chap); draw(); return; }
       if(d.step==='back'&&V.i>0){ V.i--; draw(); } if(d.step==='next'&&V.i<V.t.cards.length-1){ V.i++; draw(); } });

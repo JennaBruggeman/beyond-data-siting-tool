@@ -62,7 +62,7 @@ function draw(){ const W=document.getElementById('f1l'); if(!W||!L) return; cons
   /* not every stage fits at 1440 px: the box scrolls sideways with a visible bar and a fade on the edge that has more (gate 2) */
   const box=W.querySelector('.f1l-box'), wr=W.querySelector('.f1l-wrap'), fade=()=>{ wr.classList.toggle('more-r',box.scrollLeft+box.clientWidth<box.scrollWidth-2); wr.classList.toggle('more-l',box.scrollLeft>2); };
   box.addEventListener('scroll',fade,{passive:true}); fade(); }
-async function open(o){ o=o||{}; await load(); S.tab=o.tab||S.tab; S.sel=null; S.label=o.label||''; S.lot=o.lot||''; /* "On this lot" only when opened from a card that has a lot */ S.lit=(o.ids||[]).filter(k=>L.nodes[k]);
+async function open(o){ o=o||{}; await load(); S.tab=o.tab||S.tab; S.sel=null; S.label=o.label||''; S.lot=o.lot||''; /* "On this lot" only when opened from a card that has a lot */ S.lit=(o.ids||[]).filter(k=>L.nodes[k]); if(o.sel&&L.nodes[o.sel]){ S.sel=o.sel; if(!shown(o.sel)) S.tab='all'; } /* F5 1(c): open at a figure's node */
   let W=document.getElementById('f1l'); if(!W){ W=document.createElement('div'); W.id='f1l'; W.setAttribute('role','dialog'); W.setAttribute('aria-modal','true'); document.body.appendChild(W);
     W.addEventListener('click',e=>{ const t=e.target.closest('[data-k],[data-tab],[data-close]'); if(!t) return; e.preventDefault();
       if(t.dataset.close!=null){ W.remove(); return; } if(t.dataset.tab){ S.tab=t.dataset.tab; if(S.sel&&!shown(S.sel)) S.sel=null; draw(); return; }

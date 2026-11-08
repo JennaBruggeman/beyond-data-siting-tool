@@ -142,6 +142,8 @@ Pick the form by the job. No 3-D, no dual axes, no pie, no gradients.
 11. Automatic check before any board is shown: zero jogs, zero leaders crossing a block, four leaders or fewer. A board that fails is not published.
 
 ## 7. Text rules
+**Terms (J.B., 8 Nov), use them everywhere in the interface:** *template* = Resident, Municipal, Engineering or Architecture; *workflow* = a template's steps (the cards, in the strip along the bottom); *interactive logic diagram* = the node view of sources, sums and confidence ("How it works"). Don't call the logic diagrams "templates".
+
 Canadian spelling. Short lines, no chunky paragraphs. No decorative labels, no "1, 2, 3" numbering on cards. Plain, professional; nothing that reads as generated.
 
 ## 8. CSS tokens (for Code)
