@@ -11,7 +11,7 @@ function check() {
   const T = JSON.parse(fs.readFileSync(path.join(ROOT, 'tool/data/typologies.json'), 'utf8'));
   const dir = path.join(ROOT, 'tool/f1/specs');
   const copies = fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => f.endsWith('.md')) : [];
-  const listed = T.list.filter(t => t.spec);
+  const listed = T.list.filter(t => t.spec && t.spec.file);   /* a spec with no file (draft, not published yet) has no copy to compare */
   for (const f of copies) if (!listed.some(t => t.spec.file === f)) bad.push(`spec copy tool/f1/specs/${f} is not listed in typologies.json (list[].spec)`);
   if (listed.length && !fs.existsSync(LINK)) bad.push(`Claude Link folder not found (${LINK}): the spec copies can't be compared; set CLAUDE_LINK`);
   else for (const t of listed) {
