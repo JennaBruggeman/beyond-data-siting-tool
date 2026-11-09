@@ -29,6 +29,7 @@ const RULES = {
   street: { w: 1.8, why: 'street doors 1.8 m (spec 15c, drawing choice)' },
   lobby: { w: 6.0, m2: 20, why: 'shared lobby ≥ 20 m² (spec 15c, drawing choice), 6.0 m wide on the street (drawing choice)' },
   band: { why: 'bands street → rear (spec rule 1): hub front row (refuge, shelter, lobby on the street) → public corridor → hub service row → data-centre entrance row and loading → covered truck court → plant yard' },
+  rowB: { d: 5.0, why: 'beside variant: service rows 5.0 m deep (drawing choice; keeps a 5-exam clinic under 500 m², BE 3.3.1)' },
   rowR: { d: 6.9, why: 'hub service row as deep as a stair (6.9 m, drawing choice) so the clinic stairs and lift sit in it' },
   wcMod: { w: 0.9, why: 'washroom rooms 0.9 m of wall per WC, stalls along the room depth (drawing choice; counts from VBBL Table 3.7.2.2.-A/-B)' },
   smallRoom: { w: 1.6, why: 'small rooms (cot storage, single WC, storage) 1.6 m wide (drawing choice; T-width minimum 1.5 m, spec)' },
@@ -157,6 +158,8 @@ function layout(S0) {
   if (variant.notBuilt.length) flags.push(`Not built yet: the ${variant.notBuilt.join(', ')} variant (J.B. 8 Nov: not this pass); drawn as ${variant.main}`);
   if (drive && van && I3 && S.sideDrive.inYard > 0.1) flags.push('Side drive in the I-3 side yard: flagged approval (I-3 3.1.2.16: the Director may decrease the side yard for loading access)');
   if (drive && van && I2) flags.push('Side drive in I-2 (0 m side yards): it takes frontage from the hub');
+  if (!van) { const rs = sum(out.rooms[1].filter(x => x.block === 'hub' && x.kind === 'proom' && /^(ref|shel)/.test(x.id)).map(x => sum(x.r.map(ra))));
+    flags.push(`Refuge and day shelter as Community Service (Bylaw 20001 s. 8.10, our reading): ${Math.round(rs)} m² ${rs <= 500 ? '≤' : '>'} 500 m² per establishment (3.12.1)`); }
   Object.assign(res, out, { variant, ground });
   res.toUV = (a, b) => [r2(uf - dir * (a0 + a)), r2(res.bOrigin + sv * b)];
   finish(res, S);
@@ -375,7 +378,7 @@ function besideW(C, W) {
   const aC = dF, aR = r2(dF + cw);
   /* back row: hub rooms behind the public corridor, clinic rooms behind the clinic corridor */
   const areaRS = sum(F.filter(x => x.k === 'refuge' || x.k === 'shelter').map(x => ra(x.rr))), load = Math.ceil(areaRS / 0.75), [nM, nF] = wcA(Math.ceil(load / 2));
-  const dR = 6.0;
+  const dR = RULES.rowB.d;
   const hubR = [{ id: 'pmec', n: 'Programs mechanical, emergency panel', k: 'plant', w: PRG.pmec.w }, { id: 'wcw', n: `WC women (${nF})`, k: 'proom', w: Math.max(sm, r2(nF * wcm)) }, { id: 'wcm', n: `WC men (${nM})`, k: 'proom', w: Math.max(sm, r2(nM * wcm)) },
     { id: 'uwc', n: 'Universal WC', k: 'proom', w: PRG.uwc.w }, { id: 'sho', n: 'Universal shower', k: 'proom', w: PRG.sho.w }, { id: 'fa', n: 'First aid', k: 'proom', w: PRG.fa.w, m2: PRG.fa.m2 },
     { id: 'off', n: 'Staff office (shared)', k: 'proom', w: PRG.off.w, m2: PRG.off.m2 }, { id: 'cot', n: 'Cot and supply storage', k: 'proom', w: sm, grow: true }];
@@ -387,19 +390,20 @@ function besideW(C, W) {
       cR = [{ id: 'cons', n: 'Consult room', w: PRG.cons.w, m2: PRG.cons.m2, p: 'cons' }, { id: 'med', n: 'Medication room', w: PRG.med.w, m2: PRG.med.m2, p: 'med' }, { id: 'cln', n: 'Clean supply', w: PRG.cln.w, m2: PRG.cln.m2, p: 'cln' },
         { id: 'soil', n: 'Soiled holding', w: PRG.soil.w, m2: PRG.soil.m2, p: 'soil' }, { id: 'hk', n: 'Housekeeping', w: PRG.hk.w, m2: PRG.hk.m2, p: 'hk' }]
         .concat(Array.from({ length: Math.max(0, 2 * nwc - 1) }, (_, i) => ({ id: 'cwc' + (i + 1), n: 'Clinic WC ' + (i + 1), w: sm, p: 'cwc' })))
-        .concat([{ id: 'cuw', n: 'Clinic universal WC', w: PRG.uwc.w, p: 'uwc' }, { id: 'cst', n: 'Clinic storage', w: PRG.cst.w, p: 'cst', grow: true }]);
+        .concat([{ id: 'cuw', n: 'Clinic universal WC', w: PRG.uwc.w, p: 'uwc' }, { id: 'cst', n: 'Clinic storage', w: PRG.cst.w, p: 'cst' }, { id: 'cspare', n: 'Unassigned (no use yet), off the clinic corridor', w: 0, grow: true, spare: true }]);
       pc = pack(cR, r2(W - bLob), dR); if (pc.fail) return { fail: `clinic back row needs ${pc.fail} m; ${r2(W - bLob)} m` };
       const est = (W - bLob) * (dF + cw + dR); const n2 = wcB(Math.ceil(est / 9.3)); if (n2 === nwc) break; nwc = n2;
     }
-    Rc = place(cR, pc.ws, bLob, aR, r2(aR + dR));
-    clin = r2((W - bLob) * (dF + cw + dR) - pw * dF);
+    Rc = place(cR, pc.ws, bLob, aR, r2(aR + dR)).filter(x => x.rr[3] - x.rr[2] > 0.01);
+    clin = r2((W - bLob) * (dF + cw) - pw * dF + sum(Rc.filter(x => !x.spare).map(x => ra(x.rr))));
+    if (clin > 500) return { fail: `clinic ${Math.round(clin)} m² over 500 m² (${van ? 'Parking By-law 5.2.9: a loading space' : 'BE 3.3.1: Health Service 500 m² per establishment'}; clinic ≤ 500 variant)` };
   }
   const aB = r2(aR + dR);
   F.forEach(x => R.push(room(1, x.id, x.n, x.k === 'croom' ? 'clin' : x.k === 'lobby' || x.k === 'exitpas' ? 'circ' : 'pub', x.k === 'refuge' || x.k === 'shelter' ? 'proom' : x.k, [x.rr], { block: x.k === 'croom' || x.id === 'pas2' ? 'clinic' : 'hub', prog: x.p || x.k })));
   R.push(room(1, 'cor', 'Public corridor', 'circ', 'pcor', [[aC, aR, 0, bLob]], { block: 'hub', corridor: true }));
   if (st.exams > 0) R.push(room(1, 'ccor', 'Clinic corridor', 'clin', 'ccor', [[aC, aR, bLob, W]], { block: 'clinic', corridor: true }));
   place(hubR, ph.ws, 0, aR, aB).forEach(x => R.push(room(1, x.id, x.n, x.k === 'plant' ? 'plant' : 'pub', x.k, [x.rr], { block: 'hub', prog: x.id })));
-  Rc.forEach(x => R.push(room(1, x.id, x.n, 'clin', 'croom', [x.rr], { block: 'clinic', prog: x.p })));
+  Rc.forEach(x => R.push(x.spare ? room(1, x.id, x.n, 'spare', 'spare', [x.rr], { block: 'spare' }) : room(1, x.id, x.n, 'clin', 'croom', [x.rr], { block: 'clinic', prog: x.p })));
   if (!(st.exams > 0)) { R.push(room(1, 'sparef', 'Unassigned (no use yet)', 'spare', 'spare', [[0, aB, bLob, W]], { block: 'spare' })); }
   const hubArea = sum(R.filter(x => x.block === 'hub').map(x => sum(x.r.map(ra))));
   /* data centre behind: hall | secure corridor | support row with the dock, bay and vestibule at the rear (truck aisle) */
@@ -521,7 +525,7 @@ function finish(res, S) {
     ext(1, 'pas', 'a0', 0.5); door(1, 'pas', 'cor', 0.5);
     ['pmec', 'wcw', 'wcm', 'uwc', 'sho', 'fa', 'off', 'cot'].forEach(id => door(1, id, 'cor', 0.5));
     if (by(1, 'ccor')) { ext(1, 'pas2', 'a0', 0.5); door(1, 'pas2', 'ccor', 0.5); ext(1, 'ccor', 'b1', 0.5, sW); door(1, 'wait', 'lob', 0.5, 1.8); door(1, 'wait', 'ccor', 0.5);
-      R[1].filter(x => x.kind === 'croom' && x.id !== 'wait').forEach(x => door(1, x.id, 'ccor', 0.5)); }
+      R[1].filter(x => (x.kind === 'croom' || (x.kind === 'spare' && x.id === 'cspare')) && x.id !== 'wait').forEach(x => door(1, x.id, 'ccor', 0.5)); }
     if (by(1, 'sparef')) door(1, 'sparef', 'lob', 0.5);
     door(1, 'hall', 'scor', 0.15); door(1, 'hall', 'scor', 0.5); door(1, 'hall', 'scor', 0.85);
     ext(1, 'scor', 'b1', 0.5); door(1, 'pas3', 'scor', 0.5); ext(1, 'pas3', 'a1', 0.5); if (by(1, 'pas4')) { door(1, 'pas4', 'scor', 0.5); ext(1, 'pas4', 'a1', 0.5); }
