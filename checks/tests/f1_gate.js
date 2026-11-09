@@ -7,6 +7,7 @@ const { chromium } = require('playwright');
 (async () => {
   const out = process.argv[2] || 'f1'; const all = process.argv[3] === 'all'; fs.mkdirSync(out, { recursive: true });
   const b = await chromium.launch({ args: ['--use-gl=swiftshader', '--enable-webgl'] }); const bad = []; let shots = 0;
+  const ss = require('./spec_sync.js').check(); bad.push(...ss.bad); console.log('spec copies same as Claude Link:', ss.ok.join(', ') || 'none');   /* J.B. 9 Nov: no stale spec copy */
   async function page(w, h) { const p = await b.newPage({ viewport: { width: w, height: h } }); p.errs = [];
     p.on('pageerror', e => p.errs.push('pageerror: ' + e.message)); p.on('console', m => { if (m.type() === 'error' && !/status of 404/.test(m.text())) p.errs.push('console: ' + m.text()); });
     /* 404s are checked by URL: the old tool asks for Edmonton ground tiles (tiles/edm/g_*.json) that were never built (no HRDEM file, tool/make_grade.py); known, reported, not an F1 error */

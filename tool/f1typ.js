@@ -91,6 +91,7 @@ function md(src){ const L=src.replace(/\r/g,'').split('\n'); let h='', par=[], s
 async function specHtml(id){ const t=T.list.find(x=>x.id===id); const src=await fetch('f1/specs/'+id+'.md').then(r=>r.ok?r.text():'');
   return `<div class="f1t-wrap"><button class="f1t-back" data-typ="${esc(id)}">← ${esc(t?t.name:'Typology')}</button>
    <p class="f1t-q" style="max-width:980px">The typology spec as Cowork wrote it, published with the tool by J.B.’s decision (9 Nov 2026); copied unchanged from her working folder. Source ids are register entries (Logic diagram). File paths (eh/…, checks/…) are working files, not on this site; the Edmonton hand fits’ plans are not published (licensed lot lines).</p>
+   ${t&&t.spec&&t.spec.gate==='approved'?'':`<div class="f1t-draft" role="note"><b>Draft:</b> not yet approved by J.B. Figures and rules may change.</div>`}
    <article class="f1t-spec">${src?md(src):'<p>The spec file is missing.</p>'}</article></div>`; }
 
 async function draw(){ const W=document.getElementById('f1t'); if(!W) return; await load();
