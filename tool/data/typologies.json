@@ -1,0 +1,54 @@
+{
+ "_about": "F7 (CODE_JOB_F7_typologies.md, 8 Nov 2026): the typology library. One entry per typology, in MASTER_PLAN Phase B order. Figures come from each typology's spec (Emergency hub: Claude Link eh/specs/emergency_hub.md, parts 1-4, 9 Nov 2026) with register ids; a typology whose spec has not passed J.B.'s gate shows no figures. Status: specified (spec parts 1-3 final), in progress (spec being written; test-fit boards exist), not started (research file only, checks/research_typ/). Update this file when a spec changes.",
+ "_icons": "tool/f1/icons/*.svg (copied from Claude Link docs/icons, first pass, 8 Nov): servers, refuge, clinic, pool, greenhouse. Programs without a drawn model show their name only.",
+ "list": [
+  {"id": "emergency_hub", "name": "Emergency hub", "status": "specified", "statusNote": "spec parts 1–3 final; 8 test lots",
+   "programs": [{"icon": "servers", "name": "data centre"}, {"icon": "refuge", "name": "refuge + shelter"}, {"icon": "clinic", "name": "clinic"}],
+   "shares": "backup power",
+   "lead": "A data centre whose backup power keeps a refuge, a warming shelter and a small clinic running for its neighbours. The refuge is the core; the warming shelter stays with it; the clinic shrinks first, then drops.",
+   "card": [
+    {"lo": 0.41, "hi": 1.83, "u": "MW", "l": "data centre, 8 test lots", "src": ["spec_emergencyHub"]},
+    {"lo": 50, "u": "people", "l": "refuge, at least", "src": ["spec_emergencyHub", "arch_ahsReceptionCentres", "refuge_people"]}
+   ]},
+  {"id": "community_pool", "name": "Community pool", "status": "in progress", "statusNote": "spec being written; test-fit boards exist", "programs": [{"icon": "servers", "name": "data centre"}, {"icon": "pool", "name": "community pool"}]},
+  {"id": "heat_cascade", "name": "Heat cascade", "status": "in progress", "statusNote": "spec being written; test-fit boards exist", "programs": [{"icon": "servers", "name": "data centre"}, {"name": "heat cascade"}]},
+  {"id": "warm_bath", "name": "Warm bath", "status": "not started", "statusNote": "research file only", "programs": [{"icon": "servers", "name": "data centre"}, {"name": "warm bath"}]},
+  {"id": "aquaponics", "name": "Aquaponics", "status": "not started", "statusNote": "research file only", "programs": [{"icon": "servers", "name": "data centre"}, {"name": "aquaponics"}]},
+  {"id": "food_hub", "name": "Food hub", "status": "not started", "statusNote": "research file only", "programs": [{"icon": "servers", "name": "data centre"}, {"name": "food hub"}]},
+  {"id": "conservatory", "name": "Conservatory", "status": "not started", "statusNote": "research file only", "programs": [{"icon": "servers", "name": "data centre"}, {"name": "conservatory"}]},
+  {"id": "shelter_laundry", "name": "Shelter + laundry", "status": "not started", "statusNote": "research file only", "programs": [{"icon": "servers", "name": "data centre"}, {"name": "shelter + laundry"}]}
+ ],
+ "pages": {
+  "emergency_hub": {
+   "capacities": [
+    {"l": "Data centre", "lo": 0.41, "hi": 1.83, "u": "MW", "note": "across the 8 test lots; capped at", "cap": 2325, "capU": "m² of data-centre floor and one hall storey on every lot (drawing choice, J.B. 8 Nov)", "src": ["spec_emergencyHub", "vanParking5"]},
+    {"l": "Electricity at the meter", "pueLo": 1.4, "pueHi": 1.55, "note": "× the data centre's MW (PUE; the tool uses the same range for every cooling type ?)", "src": ["pue", "uptime2025", "lbnl2024"]},
+    {"l": "Heat offered", "text": "depends on the cooling picked: see the Engineering template", "src": ["heat_delivered"]},
+    {"l": "Refuge", "lo": 50, "u": "people at least", "area": 175, "rate": 3.5, "fitsLo": 50, "fitsHi": 166, "note": "refuge people in the 8 test fits", "src": ["spec_emergencyHub", "arch_ahsReceptionCentres", "arch_edmExtremeWeather", "refuge_people"]},
+    {"l": "Warming shelter", "lo": 16, "u": "guests, day use", "area": 56, "note": "overnight only where the zone lists the use", "src": ["spec_emergencyHub", "arch_pub_vanWarm2021"]},
+    {"l": "Clinic", "text": "none, 5 exam rooms or 13", "r5lo": 236, "r5hi": 306, "r13lo": 484, "r13hi": 604, "note": "shrinks first, then drops; under 500 m² in Edmonton BE and to need no loading space in Vancouver", "src": ["spec_emergencyHub", "arch_hsg_vchUpccNV", "arch_hsg_abGFNA2021"]},
+    {"l": "Approval", "text": "Vancouver I-2, I-3: conditional use (the City decides). Edmonton: every hub needs a rezoning (a data centre is Major Industrial, not allowed in BE; IH does not allow the refuge, shelter or clinic).", "src": ["van_zdb_i2", "van_zdb_i3", "edm_bl20001", "edm_matrix"]}
+   ],
+   "variants": [
+    {"id": "stacked", "name": "Stacked", "trigger": "Vancouver I-2, I-3: no data storage at grade except entrances", "lot": "339 1st Ave E", "fit": "v339", "mw": 1.83, "status": "fits outright (side-yard drive by approval)", "src": ["spec_emergencyHub"]},
+    {"id": "small", "name": "Small", "trigger": "small lots: refuge with the merged shelter; clinic shrinks or drops", "lot": "1330 Glen Dr", "fit": "v1330", "mw": 0.41, "status": "doesn't fit outright: the drive is 4.9 m (6.1 m aisle, Parking By-law 5.4.1)", "src": ["spec_emergencyHub"]},
+    {"id": "height_capped", "name": "Through, height-capped", "trigger": "two streets; one hall storey to stay under the height limit", "lot": "8238 Fraser St", "fit": "v8238", "mw": 0.94, "status": "fits outright, clinic dropped", "src": ["spec_emergencyHub"]},
+    {"id": "turned", "name": "Turned", "trigger": "wide, shallow lots: bands along the street", "lot": "1353 Pender St E", "fit": "v1353", "mw": 1.64, "status": "fits outright", "src": ["spec_emergencyHub"]},
+    {"id": "raised", "name": "Irregular, flood plain", "trigger": "slab at the flood construction level; plant limits the size", "lot": "8980 Oak St", "fit": "v8980", "mw": 0.94, "status": "fits outright, smaller than the hub cap", "src": ["spec_emergencyHub"]},
+    {"id": "beside", "name": "Beside (Edmonton)", "trigger": "hall beside the hub at grade", "lot": "64 Airport Rd NW", "fit": "tool", "mw": 1.68, "status": "needs rezoning", "src": ["spec_emergencyHub"]},
+    {"id": "corner", "name": "Corner (Edmonton)", "trigger": "service, loading and plant from the side street", "lot": "4103 97 St NW", "mw": 1.68, "status": "needs rezoning", "src": ["spec_emergencyHub"]},
+    {"id": "large", "name": "Large lot (Edmonton)", "trigger": "hub-sized data centre; the rest of the land left open", "lot": "14715 Yellowhead Trail NW", "mw": 1.68, "status": "needs rezoning", "src": ["spec_emergencyHub"]}
+   ],
+   "fits": "? (Phase C: the citywide count is not run yet)",
+   "notChecked": [
+    "Plans are hand fits by Cowork, self-checked after the last fixes; the tool checks them again (T-reach, dead ends, room widths, egress doorways: all 8 pass, 9 Nov).",
+    "Detailed design is not checked (J.B., 9 Nov): fixture layouts, door swings, intake and exhaust placement, finishes. Results within 0.5 m of a limit are 'tight: check in design'.",
+    "Room sizes: most are drawing choices; clinic minimums are an Alberta guideline; CSA Z8000 and TIA-942 are unread.",
+    "The 6.0 m hall storey carries every height and MW result and has no source (drawing choice).",
+    "Edmonton cooling: the chiller model is outside its maker's stated range at −30 °C: a placeholder.",
+    "Noise, air intakes, drains, refrigerant-leak distances, fire access and truck turning are '?' on every fit.",
+    "Edmonton hand fits use licensed lot lines, so their plans are not shown here; 64 Airport Rd NW is shown from the tool's own layout on City parcels."
+   ]
+  }
+ }
+}

@@ -34,7 +34,7 @@ function howSvg(){ /* the logic in eight parts (board Final_F_Landing): boxes an
   return `<svg viewBox="0 0 630 270" role="img" aria-label="How the tool's logic runs: lot and zoning feed size, equipment and neighbours, which feed heat and rules, which feed the report">${E.map(path).join('')}${Object.values(N).map(([x,y,t])=>`<rect x="${x-w/2}" y="${y-h/2}" width="${w}" height="${h}" rx="3" fill="#fff" stroke="#16181B" stroke-width="1"/><text x="${x}" y="${y+4.5}" text-anchor="middle" font-size="12.5" fill="#16181B" font-family="IBM Plex Sans,system-ui,sans-serif">${t}</text>`).join('')}</svg>`; }
 function landing(){ let L=document.getElementById('f1'); if(L) L.remove(); L=document.createElement('div'); L.id='f1';
   L.innerHTML=`<div class="f1-wrap">
-   <header class="f1-head"><a class="f1-app" href="#" data-go="top">Beyond Data</a><nav class="f1-nav" aria-label="Site"><a href="#f1-work">Templates</a><a href="#" data-go="logic">How it works</a><a href="#" data-go="logic">Sources</a><a href="#" class="f1-old" data-go="old">Old tool</a></nav></header>
+   <header class="f1-head"><a class="f1-app" href="#" data-go="top">Beyond Data</a><nav class="f1-nav" aria-label="Site"><a href="#f1-work">Templates</a><a href="#" data-go="typ">Typologies</a><a href="#" data-go="logic">How it works</a><a href="#" data-go="logic">Sources</a><a href="#" class="f1-old" data-go="old">Old tool</a></nav></header>
    <section class="f1-hero"><div><h1>What could a data centre give the city around it?</h1>
      <p class="f1-lead">Test real lots in Vancouver and Edmonton: what a data centre could share with its neighbours, and what stands in the way.</p>
      <div class="f1-acts"><button class="f1-btn" data-go="work">Choose a template</button><button class="f1-link" data-go="logic">How it works</button><button class="f1-link quiet" data-go="intro">Watch the intro</button></div></div>
@@ -42,12 +42,14 @@ function landing(){ let L=document.getElementById('f1'); if(L) L.remove(); L=doc
    <div class="f1-lines"><p>Vancouver and Edmonton, built to the same depth.</p><p>Four templates, each a workflow that ends in its own report.</p><p>Every figure has a source, or a “?” where it doesn’t yet.</p><p>Trade-offs, not verdicts. Code limits block; options are flagged.</p></div>
    <section id="f1-work"><div class="f1-sechead"><h2>Templates</h2><span>Each template’s workflow shows one idea per card, then makes a report.</span></div>
     ${TPL.map(t=>`<div class="f1-row"><h3>${t.name}</h3><div><p class="who">${esc(t.who)}</p><div class="ract"><button class="f1-btn" data-start="${t.id}"${t.tier?'':' disabled'}>Start</button><button class="f1-link" data-see="${t.id}">See the workflow</button><button class="f1-link" data-logic="${t.tab}">Logic diagram →</button></div>${t.tier?'':'<div class="note">Start opens when the Municipal cards are built.</div>'}</div>
-      <div class="meta">${t.cards.length} steps<br>report</div><img src="f1/img/${t.img}.png" alt="${t.name}: the tool's 3-D view of 339 1st Ave E, Vancouver" loading="lazy"></div>`).join('')}</section>
+      <div class="meta">${t.cards.length} steps<br>report</div><img src="f1/img/${t.img}.png" alt="${t.name}: the tool's 3-D view of 339 1st Ave E, Vancouver" loading="lazy"></div>`).join('')}
+    <div class="f1-typstrip"><span>8 typologies: data centres that share their building with the city</span><button data-go="typ">See the typologies →</button></div></section>
    <section class="f1-how" id="f1-how"><div><h2>How it works</h2><p>One logic runs under all four templates. Every number in it is tied to a source and a check status, so a reader can follow any figure back to where it came from.</p><button class="f1-link" data-go="logic">Open the interactive logic diagram</button></div>${howSvg()}</section>
    <footer class="f1-foot"><span>Beyond Data · ARCH 540, UBC School of Architecture and Landscape Architecture · 2026</span><span>Data: City of Vancouver and City of Edmonton open data. Maker and operator figures are labelled as claims.</span></footer></div>`;
   document.body.appendChild(L);
   L.addEventListener('click',e=>{ const g=e.target.closest('[data-go],[data-start],[data-see],[data-logic]'); if(!g) return;
     if(g.dataset.logic){ e.preventDefault(); if(BD.f1logic) BD.f1logic.open({tab:g.dataset.logic}); return; } /* F5 1(b), 8 Nov 2026: the template's interactive logic diagram */
+    if(g.dataset.go==='typ'){ e.preventDefault(); if(BD.f1typ) BD.f1typ.open('lib'); return; } /* F7, 8 Nov 2026: the typology library, one click away */
     if(g.dataset.go==='intro'){ e.preventDefault(); if(BD.f1intro) BD.f1intro.play(); return; } /* F5 §3, 8 Nov 2026: the intro (f1intro.js) */
     if(g.dataset.go==='old'){ e.preventDefault(); L.remove(); return; }
     if(g.dataset.go==='logic'){ e.preventDefault(); if(BD.f1logic) BD.f1logic.open({tab:'all'}); return; }
