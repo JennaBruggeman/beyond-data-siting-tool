@@ -1,0 +1,31 @@
+{
+ "_about": "Landing intro (CODE_JOB_F5_intro.md §3, 8 Nov 2026; board Story_Intro). Captions are J.B.'s drafts, kept here so they can be edited without touching code (tool/f1intro.js reads this file). Scene 2 has no caption in the job sheet: its caption is the board's. Counts are not written here: scene 2 reads tool/data/approval_counts.json at run time. 's' = seconds the scene runs.",
+ "skip": "Skip intro",
+ "watch": "Watch the intro",
+ "scenes": [
+  {"id": "question", "title": "The question", "s": 7,
+   "captions": ["Data centres are infrastructure the modern world runs on.",
+                "How could better planning, siting, design and engineering make them give back more than digital services?"],
+   "labels": ["heat", "space", "power"]},
+  {"id": "cities", "title": "Two cities", "s": 5,
+   "captions": ["Two cities. Every lot where one could go."],
+   "count": "lots where a data centre is allowed",
+   "key": "zones where a data centre is allowed",
+   "source": "Counts read by the tool from tool/data/approval_counts.json (permitted and conditional lots); zones from tool/data/zones.json on the City zoning maps. No lot outlines are drawn."},
+  {"id": "templates", "title": "Four templates", "s": 15,
+   "captions": ["Four templates. Pick the one that matches your question."],
+   "lines": {
+    "resident": "Data centres near you: where, what type, how they run",
+    "municipal": "The rules on any lot: zoning, height, noise, approvals",
+    "engineering": "Size one on a lot, and what it could share: heat, power",
+    "architecture": "What could be built with it: programs, layout"}},
+  {"id": "workflow", "title": "The workflow", "s": 10,
+   "captions": ["Each template has a workflow: its steps are in the strip along the bottom. Click any step to jump to it."],
+   "template": "municipal",
+   "steps": [2, 3, 4, 5]},
+  {"id": "logic", "title": "The interactive logic diagrams", "s": 8,
+   "captions": ["Each template has an interactive logic diagram: the sources, sums and confidence behind every figure. Open it from How it works."]},
+  {"id": "start", "title": "Where to start", "s": 7,
+   "captions": ["Start a template's workflow, or open its interactive logic diagram."]}
+ ]
+}

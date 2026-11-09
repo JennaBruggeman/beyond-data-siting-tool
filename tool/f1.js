@@ -37,7 +37,7 @@ function landing(){ let L=document.getElementById('f1'); if(L) L.remove(); L=doc
    <header class="f1-head"><a class="f1-app" href="#" data-go="top">Beyond Data</a><nav class="f1-nav" aria-label="Site"><a href="#f1-work">Templates</a><a href="#" data-go="logic">How it works</a><a href="#" data-go="logic">Sources</a><a href="#" class="f1-old" data-go="old">Old tool</a></nav></header>
    <section class="f1-hero"><div><h1>What could a data centre give the city around it?</h1>
      <p class="f1-lead">Test real lots in Vancouver and Edmonton: what a data centre could share with its neighbours, and what stands in the way.</p>
-     <div class="f1-acts"><button class="f1-btn" data-go="work">Choose a template</button><button class="f1-link" data-go="logic">How it works</button></div></div>
+     <div class="f1-acts"><button class="f1-btn" data-go="work">Choose a template</button><button class="f1-link" data-go="logic">How it works</button><button class="f1-link quiet" data-go="intro">Watch the intro</button></div></div>
     <figure class="f1-heroimg"><img src="f1/img/hero.png" alt="339 1st Ave E, Vancouver, in the tool's 3-D view: the data centre's equipment and its yard among the neighbouring buildings"><figcaption class="f1-cap">339 1st Ave E, Vancouver. The tool's 3-D view: a data centre's equipment and plant yard among its neighbours.</figcaption></figure></section>
    <div class="f1-lines"><p>Vancouver and Edmonton, built to the same depth.</p><p>Four templates, each a workflow that ends in its own report.</p><p>Every figure has a source, or a “?” where it doesn’t yet.</p><p>Trade-offs, not verdicts. Code limits block; options are flagged.</p></div>
    <section id="f1-work"><div class="f1-sechead"><h2>Templates</h2><span>Each template’s workflow shows one idea per card, then makes a report.</span></div>
@@ -48,6 +48,7 @@ function landing(){ let L=document.getElementById('f1'); if(L) L.remove(); L=doc
   document.body.appendChild(L);
   L.addEventListener('click',e=>{ const g=e.target.closest('[data-go],[data-start],[data-see],[data-logic]'); if(!g) return;
     if(g.dataset.logic){ e.preventDefault(); if(BD.f1logic) BD.f1logic.open({tab:g.dataset.logic}); return; } /* F5 1(b), 8 Nov 2026: the template's interactive logic diagram */
+    if(g.dataset.go==='intro'){ e.preventDefault(); if(BD.f1intro) BD.f1intro.play(); return; } /* F5 §3, 8 Nov 2026: the intro (f1intro.js) */
     if(g.dataset.go==='old'){ e.preventDefault(); L.remove(); return; }
     if(g.dataset.go==='logic'){ e.preventDefault(); if(BD.f1logic) BD.f1logic.open({tab:'all'}); return; }
     if(g.dataset.go==='work'){ L.querySelector('#f1-work').scrollIntoView({behavior:'smooth'}); return; }
@@ -55,7 +56,8 @@ function landing(){ let L=document.getElementById('f1'); if(L) L.remove(); L=doc
     if(g.dataset.start){ const t=TPL.find(x=>x.id===g.dataset.start); if(!t||!t.tier) return; /* step 1: the cards are not built, so Start opens the old tool in this template, at its site picker */
       if(BD.setTier) BD.setTier(t.tier); L.remove(); return; }
     if(g.dataset.see) viewer(g.dataset.see); });
-  L.querySelectorAll('a[href^="#f1-"]').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); const s=L.querySelector(a.getAttribute('href')); if(s) s.scrollIntoView({behavior:'smooth'}); })); }
+  L.querySelectorAll('a[href^="#f1-"]').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); const s=L.querySelector(a.getAttribute('href')); if(s) s.scrollIntoView({behavior:'smooth'}); }));
+  if(BD.f1intro) BD.f1intro.first(); /* the intro plays by itself on the first visit only (f1intro.js; not under automation) */ }
 
 /* ---------- card viewer (STYLE.md §4 shell) ---------- */
 const V={t:null,i:0,city:'van',where:''};
