@@ -6,7 +6,6 @@
   "1:ref": "proom",
   "1:rst": "exitpas",
   "1:lob": "lobby",
-  "1:rx": "proom",
   "1:cor": "pcor",
   "1:fa": "proom",
   "1:off": "proom",
@@ -59,7 +58,7 @@
    "corridor": "cor",
    "kind": "pcor",
    "exits": 2,
-   "deadEnd_m": 0.0,
+   "deadEnd_m": 1.0,
    "exitNames": [
     "lob",
     "pas"
@@ -70,7 +69,7 @@
    "corridor": "dcor",
    "kind": "scor",
    "exits": 2,
-   "deadEnd_m": 5.2,
+   "deadEnd_m": 6.0,
    "exitNames": [
     "s2",
     "s4"
@@ -82,509 +81,577 @@
    "st": 1,
    "id": "ref",
    "n": "Refuge with the day warming shelter (one room, 50 + people)",
-   "A": 174.0,
+   "A": 179.8,
+   "Acount": 176.6,
    "w": 8.6,
-   "L": 12.0,
+   "L": 12,
    "issue": [],
-   "basis": "rows of cots 1.9 + aisle; our judgment ?"
+   "basis": "J.B. 8 Nov: 4.0 m refuge and shelter (waiting: our judgment ?)",
+   "note": "3.2 m2 under 2.4 m wide, not counted (counts 176.6)"
   },
   {
    "st": 1,
    "id": "rst",
    "n": "Exit steps: landing at sidewalk level, 3 risers up 0.5 m",
    "A": 3.6,
+   "Acount": 3.6,
    "w": 1.8,
    "L": 2.0,
    "issue": [],
-   "basis": "VBBL 3.3.1.9 / 3.4.3.2 1.1 m"
+   "basis": "VBBL 3.3.1.9 / 3.4.3.2 1.1 m",
+   "note": ""
   },
   {
    "st": 1,
    "id": "lob",
    "n": "Shared lobby with 1:12 ramp (0.4 m)",
    "A": 36.1,
+   "Acount": 36.1,
    "w": 4.4,
    "L": 8.2,
    "issue": [],
-   "basis": "two people passing with a trolley; our judgment ?"
-  },
-  {
-   "st": 1,
-   "id": "rx",
-   "n": "Refuge alcove",
-   "A": 5.8,
-   "w": 2.4,
-   "L": 2.4,
-   "issue": [
-    "main width 2.40 < 4.0"
-   ],
-   "basis": "rows of cots 1.9 + aisle; our judgment ?"
+   "basis": "two people passing with a trolley; our judgment ?",
+   "note": ""
   },
   {
    "st": 1,
    "id": "cor",
    "n": "Public corridor",
    "A": 28.2,
+   "Acount": 28.2,
    "w": 2.0,
    "L": 14.1,
    "issue": [],
-   "basis": "spec 2.0 public/secure, 1.8 clinic; code 1.1"
+   "basis": "spec 15b public and secure 2.0 m (Cowork fix 9 Nov)",
+   "note": ""
   },
   {
    "st": 1,
    "id": "fa",
    "n": "First aid",
-   "A": 9.6,
-   "w": 2.4,
-   "L": 4.0,
-   "issue": [
-    "main width 2.40 < 2.7"
-   ],
-   "basis": "WorkSafeBC 9.3 m2; cot + access width our judgment ?"
+   "A": 12.7,
+   "Acount": 12.7,
+   "w": 2.7,
+   "L": 4.7,
+   "issue": [],
+   "basis": "J.B. 8 Nov: 2.7 m (step 6); WorkSafeBC 9.3 m2",
+   "note": ""
   },
   {
    "st": 1,
    "id": "off",
    "n": "Staff office (shared)",
-   "A": 9.2,
-   "w": 2.3,
-   "L": 4.0,
-   "issue": [
-    "main width 2.30 < 2.4"
-   ],
-   "basis": "desk + chair + passage; our judgment ?"
+   "A": 11.3,
+   "Acount": 11.3,
+   "w": 2.4,
+   "L": 4.7,
+   "issue": [],
+   "basis": "J.B. 8 Nov: 2.4 m (step 6)",
+   "note": ""
   },
   {
    "st": 1,
    "id": "cot",
    "n": "Cot and supply storage",
-   "A": 7.7,
-   "w": 2.4,
-   "L": 3.2,
+   "A": 5.7,
+   "Acount": 5.7,
+   "w": 2.1,
+   "L": 2.7,
    "issue": [],
-   "basis": "shelving 0.6 + 0.9 access; our judgment ?"
+   "basis": "J.B. 8 Nov: 1.5 m (step 6)",
+   "note": ""
   },
   {
    "st": 1,
    "id": "mec",
    "n": "Programs mechanical, emergency panel",
-   "A": 7.4,
-   "w": 2.3,
-   "L": 3.2,
+   "A": 4.2,
+   "Acount": 4.2,
+   "w": 2.0,
+   "L": 2.1,
    "issue": [],
-   "basis": "access; our judgment ?"
+   "basis": "access; our judgment ?",
+   "note": ""
   },
   {
    "st": 1,
    "id": "s4",
    "n": "Stair S4 (data centre)",
    "A": 20.7,
+   "Acount": 20.7,
    "w": 3.0,
    "L": 6.9,
    "issue": [],
-   "basis": "two 1.1 m flights side by side (VBBL 3.4.3.2) ~2.4 m; our arithmetic ?"
+   "basis": "two 1.1 m flights side by side ~2.4 m; our arithmetic ?",
+   "note": ""
   },
   {
    "st": 1,
    "id": "wcw",
    "n": "WC women (5)",
-   "A": 19.5,
+   "A": 15.6,
+   "Acount": 15.6,
    "w": 3.0,
-   "L": 6.5,
+   "L": 5.2,
    "issue": [],
-   "basis": "single row of stalls 0.9-1.5 deep + 1.1 aisle ~2.6 if multi-fixture; single WC 1.5; our judgment ?"
+   "basis": "single WC 1.5; our judgment ?",
+   "note": ""
   },
   {
    "st": 1,
    "id": "wcm",
    "n": "WC men (3)",
    "A": 10.8,
+   "Acount": 10.8,
    "w": 3.0,
    "L": 3.6,
    "issue": [],
-   "basis": "single row of stalls 0.9-1.5 deep + 1.1 aisle ~2.6 if multi-fixture; single WC 1.5; our judgment ?"
+   "basis": "single WC 1.5; our judgment ?",
+   "note": ""
   },
   {
    "st": 1,
    "id": "uwc",
    "n": "Universal WC",
-   "A": 5.7,
-   "w": 1.9,
-   "L": 3.0,
+   "A": 9.6,
+   "Acount": 9.6,
+   "w": 3.0,
+   "L": 3.2,
    "issue": [],
-   "basis": "1.7 m turning circle + WC transfer (VBBL 3.8.3.13) ~1.9 x 2.5; our arithmetic"
+   "basis": "J.B.: 1,700 mm circle clear of the WC and its 900 mm transfer space (VBBL 3.8.3.13): 1.7 x 3.2 at least, our arithmetic",
+   "note": ""
   },
   {
    "st": 1,
    "id": "sho",
    "n": "Universal shower",
    "A": 4.5,
+   "Acount": 4.5,
    "w": 1.5,
    "L": 3.0,
    "issue": [],
-   "basis": "VBBL 3.8.3.17 1.5 x 0.9 + 0.9 clear"
+   "basis": "VBBL 3.8.3.17 1.5 x 0.9 + 0.9 clear",
+   "note": ""
   },
   {
    "st": 1,
    "id": "pas",
    "n": "Exit passage to the truck drive (corridor far end)",
    "A": 5.7,
+   "Acount": 5.7,
    "w": 1.9,
    "L": 3.0,
-   "issue": [
-    "main width 1.90 < 6.1"
-   ],
-   "basis": "6.1 m aisle (5.4.1)"
+   "issue": [],
+   "basis": "VBBL 3.3.1.9 / 3.4.3.2 1.1 m",
+   "note": ""
   },
   {
    "st": 1,
    "id": "s2",
    "n": "Stair S2 (data centre)",
    "A": 17.7,
+   "Acount": 17.7,
    "w": 2.6,
    "L": 6.8,
    "issue": [],
-   "basis": "two 1.1 m flights side by side (VBBL 3.4.3.2) ~2.4 m; our arithmetic ?"
+   "basis": "two 1.1 m flights side by side ~2.4 m; our arithmetic ?",
+   "note": ""
   },
   {
    "st": 1,
    "id": "e2",
    "n": "Freight lift E2 (passenger-rated)",
    "A": 8.8,
+   "Acount": 8.8,
    "w": 2.6,
    "L": 3.4,
    "issue": [],
-   "basis": "spec 2.5 x 3.4 car (drawing choice)"
+   "basis": "spec car 2.5 x 3.4 is the car, shaft drawn 2.4+ (drawing choice ?)",
+   "note": ""
   },
   {
    "st": 1,
    "id": "lv",
    "n": "Loading vestibule (entrance)",
    "A": 8.8,
+   "Acount": 8.8,
    "w": 2.5,
    "L": 3.5,
    "issue": [],
-   "basis": "1.8 m portal (GCPSG-015)"
+   "basis": "1.8 m portal (GCPSG-015)",
+   "note": ""
   },
   {
    "st": 1,
    "id": "ves",
    "n": "DC staff entrance: vestibule, guard point, portal",
    "A": 16.8,
+   "Acount": 16.8,
    "w": 2.5,
    "L": 6.7,
    "issue": [],
-   "basis": "1.8 m portal (GCPSG-015)"
+   "basis": "1.8 m portal (GCPSG-015)",
+   "note": ""
   },
   {
    "st": 1,
    "id": "b1",
    "n": "Loading space 1, Class B 10.2 x 3.4 m",
    "A": 34.7,
+   "Acount": 34.7,
    "w": 3.4,
    "L": 10.2,
    "issue": [],
-   "basis": "Class B 3.4 m (Parking By-law 5.5.1.2)"
+   "basis": "Class B 3.4 m (Parking By-law 5.5.1.2)",
+   "note": ""
   },
   {
    "st": 1,
    "id": "b2",
    "n": "Loading space 2, Class B",
    "A": 34.7,
+   "Acount": 34.7,
    "w": 3.4,
    "L": 10.2,
    "issue": [],
-   "basis": "Class B 3.4 m (Parking By-law 5.5.1.2)"
+   "basis": "Class B 3.4 m (Parking By-law 5.5.1.2)",
+   "note": ""
   },
   {
    "st": 1,
    "id": "b3",
    "n": "Loading space 3, Class B",
    "A": 34.7,
+   "Acount": 34.7,
    "w": 3.4,
    "L": 10.2,
    "issue": [],
-   "basis": "Class B 3.4 m (Parking By-law 5.5.1.2)"
+   "basis": "Class B 3.4 m (Parking By-law 5.5.1.2)",
+   "note": ""
   },
   {
    "st": 2,
    "id": "spare",
    "n": "Unassigned (clinic dropped: refuge minimum, see board)",
    "A": 280.6,
-   "w": 7.2,
+   "Acount": 280.6,
+   "w": 10.6,
    "L": 22.3,
    "issue": [],
-   "basis": "rows of cots 1.9 + aisle; our judgment ?"
+   "basis": "no rule",
+   "note": ""
   },
   {
    "st": 2,
    "id": "garb",
    "n": "Garbage and recycling",
    "A": 10.5,
+   "Acount": 10.5,
    "w": 3.0,
    "L": 3.5,
    "issue": [],
-   "basis": "shelving 0.6 + 0.9 access; our judgment ?"
+   "basis": "J.B. 8 Nov: 1.5 m (step 6)",
+   "note": ""
   },
   {
    "st": 2,
    "id": "ris",
    "n": "DC riser, electrical closet",
    "A": 3.6,
+   "Acount": 3.6,
    "w": 1.2,
    "L": 3.0,
-   "issue": [
-    "main width 1.20 < 3.0"
-   ],
-   "basis": "equipment 1.0 deep + 1.0 working space each side; our arithmetic ?"
+   "issue": [],
+   "basis": "access; our judgment ?",
+   "note": ""
   },
   {
    "st": 2,
    "id": "valv",
    "n": "Sprinkler valve room",
    "A": 9.6,
+   "Acount": 9.6,
    "w": 3.0,
    "L": 3.2,
    "issue": [],
-   "basis": "shelving 0.6 + 0.9 access; our judgment ?"
+   "basis": "J.B. 8 Nov: 1.5 m (step 6)",
+   "note": ""
   },
   {
    "st": 2,
    "id": "s4",
    "n": "Stair S4 (data centre)",
    "A": 20.7,
+   "Acount": 20.7,
    "w": 3.0,
    "L": 6.9,
    "issue": [],
-   "basis": "two 1.1 m flights side by side (VBBL 3.4.3.2) ~2.4 m; our arithmetic ?"
+   "basis": "two 1.1 m flights side by side ~2.4 m; our arithmetic ?",
+   "note": ""
   },
   {
    "st": 2,
    "id": "s2",
    "n": "Stair S2 (data centre)",
    "A": 17.7,
+   "Acount": 17.7,
    "w": 2.6,
    "L": 6.8,
    "issue": [],
-   "basis": "two 1.1 m flights side by side (VBBL 3.4.3.2) ~2.4 m; our arithmetic ?"
+   "basis": "two 1.1 m flights side by side ~2.4 m; our arithmetic ?",
+   "note": ""
   },
   {
    "st": 2,
    "id": "e2",
    "n": "Freight lift E2",
    "A": 8.8,
+   "Acount": 8.8,
    "w": 2.6,
    "L": 3.4,
    "issue": [],
-   "basis": "spec 2.5 x 3.4 car (drawing choice)"
+   "basis": "spec car 2.5 x 3.4 is the car, shaft drawn 2.4+ (drawing choice ?)",
+   "note": ""
   },
   {
    "st": 2,
    "id": "ship",
    "n": "Shipping and receiving",
    "A": 38.5,
+   "Acount": 38.5,
    "w": 3.7,
    "L": 10.4,
    "issue": [],
-   "basis": "no rule"
+   "basis": "trolley + aisle; our judgment ?",
+   "note": ""
   },
   {
    "st": 2,
    "id": "stag",
    "n": "Storage and staging",
    "A": 109.6,
+   "Acount": 109.6,
    "w": 9.0,
    "L": 10.4,
    "issue": [],
-   "basis": "shelving 0.6 + 0.9 access; our judgment ?"
+   "basis": "J.B. 8 Nov: 1.5 m (step 6)",
+   "note": ""
   },
   {
    "st": 2,
    "id": "dcor",
    "n": "Secure corridor",
    "A": 59.2,
+   "Acount": 59.2,
    "w": 2.0,
    "L": 29.6,
    "issue": [],
-   "basis": "spec 2.0 public/secure, 1.8 clinic; code 1.1"
+   "basis": "spec 15b public and secure 2.0 m (Cowork fix 9 Nov)",
+   "note": ""
   },
   {
    "st": 2,
    "id": "doff",
    "n": "DC offices",
    "A": 27.1,
+   "Acount": 27.1,
    "w": 4.1,
    "L": 6.6,
    "issue": [],
-   "basis": "desk + chair + passage; our judgment ?"
+   "basis": "J.B. 8 Nov: 2.4 m (step 6)",
+   "note": ""
   },
   {
    "st": 2,
    "id": "brk",
    "n": "DC break room",
    "A": 24.2,
+   "Acount": 24.2,
    "w": 4.1,
    "L": 5.9,
    "issue": [],
-   "basis": "desk + chair + passage; our judgment ?"
+   "basis": "J.B. 8 Nov: 2.4 m (step 6)",
+   "note": ""
   },
   {
    "st": 2,
    "id": "dwc",
    "n": "DC staff WC, shower",
    "A": 8.6,
+   "Acount": 8.6,
    "w": 2.1,
    "L": 4.1,
    "issue": [],
-   "basis": "VBBL 3.8.3.17 1.5 x 0.9 + 0.9 clear"
+   "basis": "VBBL 3.8.3.17 1.5 x 0.9 + 0.9 clear",
+   "note": ""
   },
   {
    "st": 2,
    "id": "jan",
    "n": "Janitor (DC)",
-   "A": 5.3,
-   "w": 1.3,
+   "A": 6.2,
+   "Acount": 6.2,
+   "w": 1.5,
    "L": 4.1,
-   "issue": [
-    "main width 1.30 < 1.5"
-   ],
-   "basis": "shelving 0.6 + 0.9 access; our judgment ?"
+   "issue": [],
+   "basis": "J.B. 8 Nov: 1.5 m (step 6)",
+   "note": ""
   },
   {
    "st": 2,
    "id": "noc",
    "n": "Security control room / NOC",
-   "A": 29.9,
+   "A": 29.1,
+   "Acount": 29.1,
    "w": 4.1,
-   "L": 7.3,
+   "L": 7.1,
    "issue": [],
-   "basis": "desk + chair + passage; our judgment ?"
+   "basis": "J.B. 8 Nov: 2.4 m (step 6)",
+   "note": ""
   },
   {
    "st": 2,
    "id": "mmr1",
    "n": "Meet-me room 1",
-   "A": 13.1,
-   "w": 3.2,
+   "A": 12.3,
+   "Acount": 12.3,
+   "w": 3.0,
    "L": 4.1,
    "issue": [],
-   "basis": "desk + chair + passage; our judgment ?"
+   "basis": "J.B. 8 Nov: 2.4 m (step 6)",
+   "note": ""
   },
   {
    "st": 2,
    "id": "mmr2",
    "n": "Meet-me room 2",
-   "A": 9.0,
-   "w": 2.2,
+   "A": 9.8,
+   "Acount": 9.8,
+   "w": 2.4,
    "L": 4.1,
-   "issue": [
-    "main width 2.20 < 2.4"
-   ],
-   "basis": "desk + chair + passage; our judgment ?"
+   "issue": [],
+   "basis": "J.B. 8 Nov: 2.4 m (step 6)",
+   "note": ""
   },
   {
    "st": 2,
    "id": "mv",
    "n": "MV switchgear, main electrical",
    "A": 36.9,
+   "Acount": 36.9,
    "w": 4.1,
    "L": 9.0,
    "issue": [],
-   "basis": "equipment 1.0 deep + 1.0 working space each side; our arithmetic ?"
+   "basis": "J.B. 8 Nov: 3.0 m (CEC 2-308 second-hand ?)",
+   "note": ""
   },
   {
    "st": 3,
    "id": "hall",
    "n": "Data hall (one storey)",
    "A": 258.1,
-   "w": 7.2,
+   "Acount": 258.1,
+   "w": 10.6,
    "L": 22.3,
    "issue": [],
-   "basis": "two rack rows 1.2 + aisles 1.2 = 6.0 m minimum; our arithmetic ?"
+   "basis": "two rack rows + aisles 6.0 m; our arithmetic ?",
+   "note": ""
   },
   {
    "st": 3,
    "id": "s4",
    "n": "Stair S4 (data centre)",
    "A": 20.7,
+   "Acount": 20.7,
    "w": 3.0,
    "L": 6.9,
    "issue": [],
-   "basis": "two 1.1 m flights side by side (VBBL 3.4.3.2) ~2.4 m; our arithmetic ?"
+   "basis": "two 1.1 m flights side by side ~2.4 m; our arithmetic ?",
+   "note": ""
   },
   {
    "st": 3,
    "id": "ups",
    "n": "UPS room (2 modules, N+1)",
-   "A": 17.4,
+   "A": 15.0,
+   "Acount": 15.0,
    "w": 3.0,
-   "L": 5.8,
+   "L": 5.0,
    "issue": [],
-   "basis": "equipment 1.0 deep + 1.0 working space each side; our arithmetic ?"
+   "basis": "J.B. 8 Nov: 3.0 m (CEC 2-308 second-hand ?)",
+   "note": ""
   },
   {
    "st": 3,
    "id": "bat",
    "n": "Battery room, Li-ion (2 cabinets)",
-   "A": 8.7,
-   "w": 2.9,
+   "A": 9.0,
+   "Acount": 9.0,
+   "w": 3.0,
    "L": 3.0,
-   "issue": [
-    "main width 2.90 < 3.0"
-   ],
-   "basis": "equipment 1.0 deep + 1.0 working space each side; our arithmetic ?"
+   "issue": [],
+   "basis": "J.B. 8 Nov: 3.0 m (CEC 2-308 second-hand ?)",
+   "note": ""
   },
   {
    "st": 3,
    "id": "bhv",
    "n": "Battery room HVAC (separate)",
-   "A": 6.9,
-   "w": 2.3,
+   "A": 9.0,
+   "Acount": 9.0,
+   "w": 3.0,
    "L": 3.0,
-   "issue": [
-    "main width 2.30 < 3.0"
-   ],
-   "basis": "equipment 1.0 deep + 1.0 working space each side; our arithmetic ?"
+   "issue": [],
+   "basis": "J.B. 8 Nov: 3.0 m (CEC 2-308 second-hand ?)",
+   "note": ""
   },
   {
    "st": 3,
    "id": "ris3",
    "n": "DC riser shaft",
    "A": 3.6,
+   "Acount": 3.6,
    "w": 1.2,
    "L": 3.0,
    "issue": [],
-   "basis": "access; our judgment ?"
+   "basis": "access; our judgment ?",
+   "note": ""
   },
   {
    "st": 3,
    "id": "cyl",
    "n": "Fire suppression cylinders",
    "A": 9.6,
+   "Acount": 9.6,
    "w": 3.0,
    "L": 3.2,
    "issue": [],
-   "basis": "no rule"
+   "basis": "cylinders + access; our judgment ?",
+   "note": ""
   },
   {
    "st": 3,
    "id": "s2",
    "n": "Stair S2 (data centre)",
    "A": 17.7,
+   "Acount": 17.7,
    "w": 2.6,
    "L": 6.8,
    "issue": [],
-   "basis": "two 1.1 m flights side by side (VBBL 3.4.3.2) ~2.4 m; our arithmetic ?"
+   "basis": "two 1.1 m flights side by side ~2.4 m; our arithmetic ?",
+   "note": ""
   },
   {
    "st": 3,
    "id": "e2",
    "n": "Freight lift E2",
    "A": 8.8,
+   "Acount": 8.8,
    "w": 2.6,
    "L": 3.4,
    "issue": [],
-   "basis": "spec 2.5 x 3.4 car (drawing choice)"
+   "basis": "spec car 2.5 x 3.4 is the car, shaft drawn 2.4+ (drawing choice ?)",
+   "note": ""
   }
  ]
 }

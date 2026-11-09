@@ -7,7 +7,7 @@
 #   <fixtures>/eh/<fit>.json, expected_<fit>.json         Vancouver fits (committed: rooms and doors only, no lot outline)
 #   <fixtures>/eh_local/<fit>.json, expected_<fit>.json   Edmonton fits (Altalis-derived lots: never committed, .gitignore)
 # Cowork's scripts are read, never edited: reach.py and deadend.py are imported from the eh folder; audit_rooms.py is
-# executed from its text with three in-memory substitutions (base folder, fit list, output file), see audit().
+# loaded as a module and its audit_geom() called per fit (its own fits map picks each fit's geometry file), see audit().
 import sys, os, json, runpy, io, contextlib, types, tempfile, math
 
 VAN = ['v339', 'v1330', 'v8238', 'v1353', 'v8980']
@@ -15,16 +15,24 @@ EDM = ['e06b', 'e4103', 'e14715']
 ROOM_KEYS = ('id', 'n', 'g', 'r', 'core', 'stair', 'kind')   # all the three scripts read from a room
 
 
+def geomfile(eh, fit):
+    """the geometry file Cowork's audit_rooms.py audits for this fit (8 Nov: 8238 is geom_mid.py, the outright option with the south exit passage)"""
+    A = audit_mod(eh)
+    for fold, gf in A['fits'].values():
+        if fold == fit: return gf
+    return 'geom.py'
+
+
 def load(eh, fit):
     d = os.path.join(eh, fit); cwd = os.getcwd(); os.chdir(d); sys.path.insert(0, d)
     try:
         with contextlib.redirect_stdout(io.StringIO()):
-            return runpy.run_path(os.path.join(d, 'geom.py'), run_name='geomexport')
+            return runpy.run_path(os.path.join(d, geomfile(eh, fit)), run_name='geomexport')
     finally:
         os.chdir(cwd); sys.path.remove(d)
 
 
-def fixture(g, fit):
+def fixture(g, fit, gfile='geom.py'):
     S = {}
     extra = set()
     for st, rooms in g['S'].items():
@@ -34,7 +42,7 @@ def fixture(g, fit):
             S[str(st)].append({k: ([list(r) for r in x[k]] if k == 'r' else x[k]) for k in ROOM_KEYS if k in x})
     D = [list(d) for d in g['D']]
     return {'fit': fit, 'city': 'edm' if fit.startswith('e') else 'van',
-            'source': f'Claude Link/eh/{fit}/geom.py (Cowork hand fit); rooms and doors only, lot outline stripped',
+            'source': f'Claude Link/eh/{fit}/{gfile} (Cowork hand fit); rooms and doors only, lot outline stripped',
             'S': S, 'D': D}, sorted(extra)
 
 
@@ -42,19 +50,19 @@ def fin(x):   # json-safe number (deadend gives inf for a corridor with no exit)
     return None if isinstance(x, float) and math.isinf(x) else x
 
 
-def audit(eh, fit):
-    src = open(os.path.join(eh, 'audit_rooms.py'), encoding='utf-8').read()
-    out = os.path.join(tempfile.mkdtemp(), 'out.json')
-    subs = [("base=os.path.expanduser('~/mnt/Claude Link/eh')", 'base=_EH'),
-            ("open(os.path.expanduser('~/aud/out.json'),'w')", "open(_OUT,'w')")]
-    for a, b in subs:
-        assert src.count(a) == 1, a
-        src = src.replace(a, b)
-    i = src.index('fits={'); j = src.index('\n', i)
-    src = src[:i] + 'fits={_FIT:_FIT}' + src[j:]
-    with contextlib.redirect_stdout(io.StringIO()):
-        exec(compile(src, 'audit_rooms.py', 'exec'), {'_EH': eh, '_OUT': out, '_FIT': fit, '__name__': 'audit'})
-    return json.load(open(out))[fit]
+_AUD = {}
+def audit_mod(eh):
+    """Cowork's eh/audit_rooms.py (updated 8 Nov to the approved minimum widths), loaded as a module: its __main__ block does not run"""
+    if eh not in _AUD:
+        with contextlib.redirect_stdout(io.StringIO()):
+            _AUD[eh] = runpy.run_path(os.path.join(eh, 'audit_rooms.py'), run_name='audit')
+    return _AUD[eh]
+
+
+def audit(eh, g, fit):
+    A = audit_mod(eh)
+    name = next((k for k, (fold, gf) in A['fits'].items() if fold == fit), fit)
+    return A['audit_geom'](g.get('S', {}), name, fit)
 
 
 def expected(eh, g, fit):
@@ -66,7 +74,7 @@ def expected(eh, g, fit):
          for x in deadend.corridors(G)]
     kinds = {f'{st}:{i}': k for (st, i), k in K.items()}
     return {'fit': fit, 'by': 'Cowork eh/reach.py, eh/deadend.py, eh/audit_rooms.py (run by checks/tests/eh_fixtures_export.py)',
-            'reach': r, 'kinds': kinds, 'deadend': c, 'audit': audit(eh, fit)}
+            'reach': r, 'kinds': kinds, 'deadend': c, 'audit': audit(eh, g, fit)}
 
 
 def main():
@@ -74,7 +82,7 @@ def main():
     sys.path.insert(0, eh)
     for fit in VAN + EDM:
         g = load(eh, fit)
-        f, extra = fixture(g, fit)
+        f, extra = fixture(g, fit, geomfile(eh, fit))
         od = os.path.join(fx, 'eh' if fit in VAN else 'eh_local'); os.makedirs(od, exist_ok=True)
         json.dump(f, open(os.path.join(od, fit + '.json'), 'w'), indent=None, separators=(',', ':'))
         e = expected(eh, g, fit)

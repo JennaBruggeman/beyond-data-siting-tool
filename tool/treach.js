@@ -226,6 +226,50 @@
     return D;
   }
 
+  // centreline of one corridor rectangle (both axes when nearly square: a waiting bay or landing) = deadend.py _cline
+  function cline(r) {
+    const a0 = pyRound(r[0] / G0), a1 = pyRound(r[1] / G0), b0 = pyRound(r[2] / G0), b1 = pyRound(r[3] / G0);
+    const am = Math.floor((a0 + a1 - 1) / 2), bm = Math.floor((b0 + b1 - 1) / 2), w = r[1] - r[0], h = r[3] - r[2], out = [];
+    if (w >= h / 1.5) for (let a = a0; a < a1; a++) out.push([a, bm]);
+    if (h >= w / 1.5) for (let b = b0; b < b1; b++) if (!out.some(c => c[0] === am && c[1] === b)) out.push([am, b]);
+    return out;
+  }
+  function lpath(p, q) {   // = _lpath: along a, then along b
+    const out = []; let a = p[0]; const b = p[1];
+    let step = q[0] >= a ? 1 : -1; while (a !== q[0]) { out.push([a, b]); a += step; }
+    let bb = b; step = q[1] >= bb ? 1 : -1; while (bb !== q[1]) { out.push([a, bb]); bb += step; }
+    out.push(q); return out;
+  }
+  function centreline(rs) {   // = deadend.py centreline(): each rectangle's centreline, joined through the middle of every shared edge
+    const CL = rs.map(r => [r, cline(r)]), cells = new Set();
+    for (const [, cc] of CL) for (const c of cc) cells.add(ck(c[0], c[1]));
+    for (let i = 0; i < CL.length; i++) for (let j = i + 1; j < CL.length; j++) {
+      const [r, ci] = CL[i], [q, cj] = CL[j];
+      const ovu = Math.min(r[1], q[1]) - Math.max(r[0], q[0]), ovv = Math.min(r[3], q[3]) - Math.max(r[2], q[2]);
+      let m = null;
+      if ((Math.abs(r[1] - q[0]) < 1e-6 || Math.abs(q[1] - r[0]) < 1e-6) && ovv > 0.3) { const ue = Math.abs(r[1] - q[0]) < 1e-6 ? r[1] : r[0]; m = [ue, (Math.max(r[2], q[2]) + Math.min(r[3], q[3])) / 2]; }
+      else if ((Math.abs(r[3] - q[2]) < 1e-6 || Math.abs(q[3] - r[2]) < 1e-6) && ovu > 0.3) { const ve = Math.abs(r[3] - q[2]) < 1e-6 ? r[3] : r[2]; m = [(Math.max(r[0], q[0]) + Math.min(r[1], q[1])) / 2, ve]; }
+      if (!m) continue;
+      for (const [rr, cc] of [[r, ci], [q, cj]]) {
+        if (!cc.length) continue;
+        const ma = Math.min(Math.max(Math.floor(m[0] / G0), pyRound(rr[0] / G0)), pyRound(rr[1] / G0) - 1);
+        const mb = Math.min(Math.max(Math.floor(m[1] / G0), pyRound(rr[2] / G0)), pyRound(rr[3] / G0) - 1);
+        let tgt = cc[0]; for (const c of cc) if (Math.abs(c[0] - ma) + Math.abs(c[1] - mb) < Math.abs(tgt[0] - ma) + Math.abs(tgt[1] - mb)) tgt = c;
+        for (const c of lpath([ma, mb], tgt)) cells.add(ck(c[0], c[1]));
+      }
+    }
+    return { cells, CL };
+  }
+  function project(CL, u, v) {   // a door's point on the centreline: nearest centreline cell of the rectangle whose wall holds the door
+    let best = null;
+    for (const [r, cc] of CL) {
+      if (!(r[0] - 1e-6 <= u && u <= r[1] + 1e-6 && r[2] - 1e-6 <= v && v <= r[3] + 1e-6) || !cc.length) continue;
+      for (const c of cc) { const dd = Math.hypot((c[0] + 0.5) * G0 - u, (c[1] + 0.5) * G0 - v); if (!best || dd < best[0] - 1e-9) best = [dd, c, false]; else if (Math.abs(dd - best[0]) <= 1e-9 && (c[0] !== best[1][0] || c[1] !== best[1][1])) best[2] = true; }
+    }
+    if (best && best[2]) project.tie = true;   // the door sits on a cell boundary: two cells equally near (deadend.py picks by set order)
+    return best ? ck(best[1][0], best[1][1]) : null;
+  }
+
   function deadEnds(G) {
     const out = [];
     for (const st of storeys(G)) {
@@ -235,8 +279,7 @@
       for (const x of rs) { const k = K.get(x.id); if (k === 'pcor' || k === 'ccor' || k === 'scor') { if (!groups.has(k)) groups.set(k, []); groups.get(k).push(x); } }
       for (const [k, xs] of groups) {
         const xid = xs.map(y => y.id).join('+'), xr = xs.flatMap(y => y.r), ids = new Set(xs.map(y => y.id));
-        const cells = new Set();
-        for (const r of xr) for (let a = pyRound(r[0] / G0); a < pyRound(r[1] / G0); a++) for (let b = pyRound(r[2] / G0); b < pyRound(r[3] / G0); b++) cells.add(ck(a, b));
+        const { cells, CL } = centreline(xr); project.tie = false;   // J.B. 8 Nov: measured along the corridor centreline (strict), as deadend.py
         const ex = new Map(), idn = new Map();
         for (const d of G.D) {
           if (d[0] !== st) continue;
@@ -246,15 +289,9 @@
           const [, , , u, v, o] = d, half = (d.length > 6 && d[6] != null ? d[6] : 0.9) / 2;
           const ident = exitIdent(G, rs, K, st, other, d, k);
           if (!ident.size) continue;
-          const span = [];
-          if (o === 'v') {
-            for (let kk = Math.floor((v - half) / G0); kk < Math.ceil((v + half) / G0); kk++)
-              for (const a of [pyRound(u / G0) - 1, pyRound(u / G0)]) if (cells.has(ck(a, kk))) span.push(ck(a, kk));
-          } else {
-            for (let kk = Math.floor((u - half) / G0); kk < Math.ceil((u + half) / G0); kk++)
-              for (const b of [pyRound(v / G0) - 1, pyRound(v / G0)]) if (cells.has(ck(kk, b))) span.push(ck(kk, b));
-          }
-          if (!span.length) continue;
+          const c0 = project(CL, u, v);
+          if (c0 === null) continue;
+          const span = [c0];
           const kname = `${other}|${r2(u)}|${r2(v)}`;
           ex.set(kname, { other, span }); idn.set(kname, ident);
         }
@@ -268,13 +305,7 @@
           for (const c of cells) if (a.has(c) && b.has(c) && a.get(c) + b.get(c) <= L + 1e-6) two.add(c);
         }
         if (two.size) {
-          for (const n of names) for (const c of ex.get(n).span) two.add(c);
-          for (const r of xr) {   // a two-way point covers the corridor's full width
-            const a0 = pyRound(r[0] / G0), a1 = pyRound(r[1] / G0), b0 = pyRound(r[2] / G0), b1 = pyRound(r[3] / G0);
-            const inr = [...two].map(c => c.split(',').map(Number)).filter(([a, b]) => a0 <= a && a < a1 && b0 <= b && b < b1);
-            if ((r[1] - r[0]) >= (r[3] - r[2])) { for (const [a] of inr) for (let b = b0; b < b1; b++) two.add(ck(a, b)); }
-            else { for (const [, b] of inr) for (let a = a0; a < a1; a++) two.add(ck(a, b)); }
-          }
+          for (const n of names) for (const c of ex.get(n).span) two.add(c);   // every exit point counts as two-way (centreline: no spread across the width)
           // a loop of corridor that rejoins the two-way path at two separate places is two-way too
           const rest = new Set([...cells].filter(c => !two.has(c))), seen = new Set();
           for (const c0 of rest) {
@@ -299,19 +330,21 @@
           worst = dt.size ? Math.max(...dt.values()) : 0;
         } else if (names.length) worst = Math.max(...dmap.get(names[0]).values());
         else worst = Infinity;
-        const w = Number.isFinite(worst) ? r1(worst) : null;
+        const w = Number.isFinite(worst) ? r1(worst + (names.length ? G0 : 0)) : null;   // deadend.py adds one cell (the walk ends at the far wall's half cell)
         out.push({ storey: st, corridor: xid, kind: k, exits: names.length, exitNames: [...new Set(names.map(n => ex.get(n).other))].sort(),
-          deadEnd_m: w, ok: w !== null && w <= DEAD_LIMIT, limit_m: DEAD_LIMIT, basis: DEAD_BASIS });
+          deadEnd_m: w, tie: !!project.tie, ok: w !== null && w <= DEAD_LIMIT, limit_m: DEAD_LIMIT, basis: DEAD_BASIS });
       }
     }
     return out;
   }
 
   // ---------- room widths (audit_rooms.py, with J.B.'s 8 Nov rule: fail only on the spec table and Part 3) ----------
-  // main width = short side of the room's largest rectangle (as audit_rooms.py). First matching rule wins (as audit_rooms.py).
+  // clear width = side of the largest square that fits in the room (audit_rooms.py max_square, 0.05 m raster; re-measure 8 Nov).
+  // First matching rule wins (as audit_rooms.py); 'Unassigned' rooms have no rule (Cowork fix).
   // fail: spec "Minimum widths" table (room_minimums_rule_2026-11-08.md) or Part 3 code/spec widths. note: everything else.
   const SPEC = 'room_minimums_rule_2026-11-08.md, Minimum widths';
   const WRULES = [
+    { rx: /^unassigned/, none: true },
     { rx: /loading space/, sev: 'fail', min: G => (G.city === 'edm' ? 3.3 : 3.4),
       basis: G => (G.city === 'edm' ? 'Edmonton space 9.0 x 3.3 m (Zoning Bylaw 20001 s. 5.80; spec Part 3 rule 10)' : 'Class B 10.2 x 3.4 m (Parking By-law 5.5.1.2; spec Part 3 rule 10)') },
     { rx: /exit passage|exit steps/, sev: 'fail', min: 1.1, basis: 'exit passage >= 1.1 m (VBBL 3.3.1.9; spec Part 3 rule 15b)' },
@@ -322,7 +355,7 @@
         : 'corridor >= 1.1 m (VBBL 3.3.1.9)') },
     { rx: /stair/, sev: 'fail', min: 1.1, basis: 'exit stair >= 1.1 m (VBBL 3.4.3.2)',
       also: { min: 2.4, basis: 'two 1.1 m flights side by side ~2.4 m (audit_rooms.py; our arithmetic ?)' } },
-    { rx: /freight lift|lift e2/, sev: 'fail', min: 2.5, basis: 'freight lift car ~2.5 x 3.4 m (spec 1b, drawing choice)' },
+    { rx: /freight lift|lift e2/, sev: 'note', min: 2.5, basis: 'freight lift car ~2.5 x 3.4 m (spec 1b, drawing choice; not in the widths table or Part 3, so a note: J.B. 8 Nov answer 6)' },
     { rx: /lift/, sev: 'note', min: 2.0, basis: 'accessible car ~1.7 m + shaft (our judgment ?)' },
     { rx: /universal wc|universal washroom/, sev: 'fail', circle: true, min: 1.7, area: 4.8,
       basis: '1,700 mm turning circle clear of the WC and its 900 mm transfer space (VBBL 3.8.3.13; ' + SPEC + ')' },
@@ -359,38 +392,62 @@
     return false;
   }
 
+  const STEP = 0.05;
+  function grid(rs) {   // 0.05 m cells of the union of rects, as audit_rooms.py cells()
+    let a0 = Infinity, a1 = -Infinity, b0 = Infinity, b1 = -Infinity;
+    const R = rs.map(r => [pyRound(r[0] / STEP), pyRound(r[1] / STEP), pyRound(r[2] / STEP), pyRound(r[3] / STEP)]);
+    for (const r of R) { a0 = Math.min(a0, r[0]); a1 = Math.max(a1, r[1]); b0 = Math.min(b0, r[2]); b1 = Math.max(b1, r[3]); }
+    const nu = Math.max(0, a1 - a0), nv = Math.max(0, b1 - b0), C = new Uint8Array(nu * nv);
+    for (const r of R) for (let a = r[0]; a < r[1]; a++) for (let b = r[2]; b < r[3]; b++) C[(a - a0) * nv + (b - b0)] = 1;
+    return { C, nu, nv };
+  }
+  function maxSquare(rs) {
+    const { C, nu, nv } = grid(rs); if (!nu || !nv) return 0;
+    const dp = new Uint16Array(nu * nv); let best = 0;
+    for (let a = 0; a < nu; a++) for (let b = 0; b < nv; b++) { const i = a * nv + b; if (!C[i]) continue;
+      const v = 1 + Math.min(a ? dp[i - nv] : 0, b ? dp[i - 1] : 0, a && b ? dp[i - nv - 1] : 0); dp[i] = v; if (v > best) best = v; }
+    return best * STEP;
+  }
+  function thinArea(rs, lim) {   // area of cells whose clear width there (min of the row and column runs through it) is under lim, as audit_rooms.py local_width
+    const { C, nu, nv } = grid(rs), H = new Float64Array(nu * nv), V = new Float64Array(nu * nv);
+    for (let b = 0; b < nv; b++) for (let a = 0; a < nu;) { if (!C[a * nv + b]) { a++; continue; } let e = a; while (e < nu && C[e * nv + b]) e++; for (let k = a; k < e; k++) H[k * nv + b] = (e - a) * STEP; a = e; }
+    for (let a = 0; a < nu; a++) for (let b = 0; b < nv;) { if (!C[a * nv + b]) { b++; continue; } let e = b; while (e < nv && C[a * nv + e]) e++; for (let k = b; k < e; k++) V[a * nv + k] = (e - b) * STEP; b = e; }
+    let n = 0; for (let i = 0; i < C.length; i++) if (C[i] && Math.min(H[i], V[i]) < lim - 1e-6) n++;
+    return n * STEP * STEP;
+  }
+
   function tWidth(G) {
     const rows = [], refuge = [];
     for (const st of storeys(G)) for (const x of rooms(G, st)) {
       const rs = x.r, k = kindOf(x), nm = String(x.n || ''), l = nm.toLowerCase();
       const A = rs.reduce((s, r) => s + ra(r), 0);
       let big = rs[0]; for (const r of rs) if (ra(r) > ra(big)) big = r;
-      const w = rw(big), L = rl(big);
+      const w = +maxSquare(rs).toFixed(2), L = rl(big);
       const row = (min, basis, sev, what, wv) => rows.push({ storey: st, room: x.id, name: nm, width_m: +(wv === undefined ? w : wv).toFixed(2), min_m: min, basis, sev, what });
       const ru = WRULES.find(R => R.rx.test(l) && (!R.kinds || R.kinds.includes(k)));   // refuge rule: public rooms only (not 'Unassigned (... refuge minimum ...)')
-      if (ru) {
+      if (ru && !ru.none) {
         const min = val(ru.min, G, x, k), basis = val(ru.basis, G, x, k);
         if (ru.circle) {
           const keep = x.wc ? [x.wc].concat(x.wcTransfer ? [x.wcTransfer] : []) : null;
           if (!circleFits(rs, 1.7, keep)) row(min, basis, ru.sev, keep ? '1.7 m circle does not fit clear of the WC and transfer space' : '1.7 m circle does not fit (WC position not drawn)');
           else if (!keep) row(min, basis, 'note', '1.7 m circle fits; WC position not drawn, so not tested clear of the WC and transfer space');
-        } else if (w + 1e-6 < min) row(min, basis, ru.sev, `main width ${w.toFixed(2)} < ${pyNum(min)}`);
-        if (ru.also && w + 1e-6 < ru.also.min) row(ru.also.min, ru.also.basis, 'note', `main width ${w.toFixed(2)} < ${pyNum(ru.also.min)}`);
+        } else if (w + 1e-6 < min) row(min, basis, ru.sev, `clear width ${w.toFixed(2)} < ${pyNum(min)}`);
+        if (ru.also && w + 1e-6 < ru.also.min) row(ru.also.min, ru.also.basis, 'note', `clear width ${w.toFixed(2)} < ${pyNum(ru.also.min)}`);
         if (ru.area && A + 1e-6 < ru.area) row(ru.area, 'area (audit_rooms.py; not a width)', 'note', `area ${A.toFixed(1)} < ${pyNum(ru.area)}`);
         if (ru.refuge) {
-          const counted = rs.filter(r => rw(r) >= 2.4 - 1e-6).reduce((s, r) => s + ra(r), 0);
+          const counted = A - thinArea(rs, 2.4);   // cells where the room is under 2.4 m wide do not count (audit_rooms.py local_width)
           refuge.push({ storey: st, room: x.id, name: nm, area_m2: +A.toFixed(1), counted_m2: +counted.toFixed(1), basis: 'parts under 2.4 m wide do not count (' + SPEC + ')' });
         }
       }
       // shape notes, as audit_rooms.py
       const sl = rs.filter(r => r !== big && rw(r) < 1.2 && ra(r) > 0.5).map(r => +rw(r).toFixed(2));
       if (sl.length && !/corridor|lobby|passage/.test(l)) row(null, 'audit_rooms.py shape check (our judgment ?)', 'note', `slivers [${sl.map(pyNum).join(', ')}] m wide`);
-      if (L / w > 6 && !/corridor|passage|stair|aisle|drive|shaft|riser|lift/.test(l)) row(null, 'audit_rooms.py shape check (our judgment ?)', 'note', `very long and thin (${L.toFixed(1)} x ${w.toFixed(1)})`);
+      if (rs.length === 1 && L / rw(big) > 6 && !/corridor|passage|stair|aisle|drive|shaft|riser|lift/.test(l)) row(null, 'audit_rooms.py shape check (our judgment ?)', 'note', `very long and thin (${L.toFixed(1)} x ${rw(big).toFixed(1)})`);
     }
     return { rows, refuge };
   }
 
-  const api = { tReach, deadEnds, tWidth, inferKind, kindOf, circleFits, DEAD_LIMIT };
+  const api = { tReach, deadEnds, tWidth, inferKind, kindOf, circleFits, maxSquare, DEAD_LIMIT };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (root) { root.BD = root.BD || {}; root.BD.treach = api; }
 })(typeof window !== 'undefined' ? window : null);

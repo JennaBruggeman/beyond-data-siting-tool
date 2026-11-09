@@ -59,24 +59,26 @@ function parity(fit, G, E, res) {
     const j = res.de.find(c => c.storey === p.storey && c.corridor === p.corridor);
     if (!j) { fail(`dead end st${p.storey} ${p.corridor} missing in js`); continue; }
     const same = p.deadEnd_m === j.deadEnd_m || (p.deadEnd_m !== null && j.deadEnd_m !== null && Math.abs(p.deadEnd_m - j.deadEnd_m) < 0.05 + 1e-9);
+    if (!same && j.tie && p.deadEnd_m !== null && j.deadEnd_m !== null && Math.abs(p.deadEnd_m - j.deadEnd_m) <= 0.25 + 0.05 + 1e-9 && p.exits === j.exits && JSON.stringify(p.exitNames) === JSON.stringify(j.exitNames)) {
+      console.log(`    tie st${p.storey} ${p.corridor}: py ${p.deadEnd_m} m, js ${j.deadEnd_m} m: a door sits on a 0.25 m cell boundary, so its nearest centreline cell is a tie (Python picks by set order); one cell apart, explained`); continue; }
     if (!same || p.exits !== j.exits || JSON.stringify(p.exitNames) !== JSON.stringify(j.exitNames)) fail(`dead end st${p.storey} ${p.corridor}: py ${p.deadEnd_m} m ${p.exits} [${p.exitNames}] js ${j.deadEnd_m} m ${j.exits} [${j.exitNames}]`);
     else dm++;
   }
   console.log(`    dead ends: ${dm}/${E.deadend.length} corridors match to 0.1 m, kinds ${kd ? kd + ' differ' : 'all match'}`);
-  // widths: every Python main-width flag on a spec-table / Part 3 room is a js fail; list every difference with its reason
+  // widths: every Python clear-width flag on a spec-table / Part 3 room is a js fail; list every difference with its reason
   const diffs = [];
   for (const p of E.audit) {
-    const mw = p.issue.find(s => s.startsWith('main width'));
+    const mw = p.issue.find(s => s.startsWith('clear width'));
     const js = res.w.rows.filter(x => x.storey === p.st && x.room === p.id);
     const jf = js.filter(x => x.sev === 'fail');
     if (mw && !jf.length) {
-      const jn = js.find(x => x.what && x.what.startsWith('main width'));
+      const jn = js.find(x => x.what && x.what.startsWith('clear width'));
       diffs.push(`st${p.st} ${p.id} "${p.n.slice(0, 34)}": py ${mw} (${p.basis.slice(0, 40)}); js ${jn ? 'note: ' + jn.what + ' [' + jn.basis + ']' : js.length ? js.map(x => x.sev + ': ' + x.what).join('; ') : 'no flag'}`);
     }
     if (!mw && jf.length) diffs.push(`st${p.st} ${p.id} "${p.n.slice(0, 34)}": py no width flag (${p.w} vs ${p.basis.slice(0, 30)}); js fail: ${jf.map(x => x.what + ' [' + x.basis + ']').join('; ')}`);
-    for (const s of p.issue.filter(s => !s.startsWith('main width'))) if (!js.some(x => x.what === s)) fail(`width st${p.st} ${p.id}: py "${s}" not reported by js`);
+    for (const s of p.issue.filter(s => !s.startsWith('clear width'))) if (!js.some(x => x.what === s)) fail(`width st${p.st} ${p.id}: py "${s}" not reported by js`);
   }
-  console.log(`    widths: ${E.audit.filter(p => p.issue.some(s => s.startsWith('main width'))).length} python main-width flags; ${diffs.length} differences`);
+  console.log(`    widths: ${E.audit.filter(p => p.issue.some(s => s.startsWith('clear width'))).length} python clear-width flags; ${diffs.length} differences`);
   for (const d of diffs) console.log('      diff ' + d);
   return diffs;
 }
@@ -90,17 +92,26 @@ function negative(G0) {
     const A = room(st, a), B = room(st, b); [A.id, B.id] = [b, a]; [A.n, B.n] = [B.n, A.n];
     for (const d of G.D) if (d[0] === st) for (const i of [1, 2]) d[i] = d[i] === a ? b : d[i] === b ? a : d[i];
   };
+  const wallDoor = (st, a, b) => {   // a door at the middle of the longest wall the two rooms share (fixtures are re-planned by Cowork: no fixed points)
+    let best = null;
+    for (const r of room(st, a).r) for (const q of room(st, b).r) {
+      for (const [x1, x2] of [[r[1], q[0]], [r[0], q[1]]]) if (Math.abs(x1 - x2) < 1e-6) { const f = Math.max(r[2], q[2]), t = Math.min(r[3], q[3]); if (t - f > 1 && (!best || t - f > best.len)) best = { len: t - f, d: [st, a, b, x1, (f + t) / 2, 'v'] }; }
+      for (const [y1, y2] of [[r[3], q[2]], [r[2], q[3]]]) if (Math.abs(y1 - y2) < 1e-6) { const f = Math.max(r[0], q[0]), t = Math.min(r[1], q[1]); if (t - f > 1 && (!best || t - f > best.len)) best = { len: t - f, d: [st, a, b, (f + t) / 2, y1, 'h'] }; }
+    }
+    if (!best) throw new Error(`negative test: ${a} and ${b} share no wall in this fixture`);
+    return best.d;
+  };
   // 1. the vestibule gets a front part on the lobby's street wall (u = 0.85), with a door from the lobby
   room(1, 'ves').r.push([-1.5, 0.85, 22.0, 24.0]);
   G.D.push([1, 'lob', 'ves', 0.85, 23.0, 'v']);
   // 2. exam room 5 moves next to the waiting room (swap with the procedure room); waiting loses its corridor door
   swapIds(2, 'ex5', 'proc');
   G.D = G.D.filter(d => !(d[0] === 2 && [d[1], d[2]].includes('wait') && [d[1], d[2]].includes('ccor')));
-  G.D.push([2, 'wait', 'ex5', 3.0, 22.1, 'h']);
+  G.D.push(wallDoor(2, 'wait', 'ex5'));
   // 3. the consult room moves next to the clinic WCs (swap with soiled holding); the WCs lose their corridor door
   swapIds(2, 'cons', 'soil');
   G.D = G.D.filter(d => !(d[0] === 2 && [d[1], d[2]].includes('cwc') && [d[1], d[2]].includes('ccor')));
-  G.D.push([2, 'cwc', 'cons', 10.5, 26.4, 'h']);
+  G.D.push(wallDoor(2, 'cwc', 'cons'));
   const r = T.tReach(G);
   console.log('\n=== Negative test (spec 15d) on a copy of v339');
   for (const o of r) console.log(`    ${o.rule}  st${o.storey} ${o.room}: ${o.reason}`);

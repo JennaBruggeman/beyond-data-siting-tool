@@ -42,7 +42,7 @@ const RULES = {
   hallPerMW: { v: 630, why: 'data hall 630 m² a MW (spec 1b: fits use the tool’s low-MW end; dc_rooms.json arch_dc_hall)' },
   cap: { m2: 2325, why: 'hub cap: data centre ≤ 2,325 m² and one hall storey on every lot, smaller where the lot can’t hold it (J.B. 8 Nov, drawing choice; Vancouver Parking By-law 5.2.5 step)' },
   grid: { g: 0.25, why: 'travel along the path on a 0.25 m grid, 8 directions, through the doors (spec rule 6); ≤ 45 m sprinklered (VBBL 3.4.2.5)' },
-  base: { why: 'base surface: the corner grades joined by a fan of triangles from the first corner (Z&D s. 2 joins the corner grades; the triangulation is our reading ?)' },
+  base: { why: 'base surface: the corner grades joined by triangles; both triangulations computed (fans from neighbouring corners: on a four-corner lot the two diagonals) and the lower surface used under the building (Z&D s. 2 joins the corner grades; J.B. 8 Nov, our reading)' },
 };
 /* program minimums (spec Part 1; step = room_minimums_rule step) */
 const PRG = {
@@ -82,7 +82,7 @@ const PRG = {
 /* VBBL Table 3.7.2.2.-A, WCs a sex (M, F) by persons of that sex (spec Part 1) */
 const TA = [[25, 1, 1], [50, 1, 2], [75, 2, 3], [100, 2, 4], [125, 3, 5], [150, 3, 6], [175, 4, 7], [200, 4, 8], [250, 5, 9], [300, 5, 10], [350, 6, 11], [400, 6, 12]];
 function wcA(n) { for (const r of TA) if (n <= r[0]) return [r[1], r[2]]; return [7 + Math.ceil((n - 400) / 200), 13 + Math.ceil((n - 400) / 100)]; }
-function wcB(p) { return p <= 25 ? 1 : p <= 50 ? 2 : p <= 100 ? 3 : 3 + Math.ceil((p - 100) / 50); }   // VBBL Table 3.7.2.2.-B ('3 + 1 per extra 50', our reading)
+function wcB(p) { return p <= 25 ? 1 : p <= 50 ? 2 : 3 + Math.ceil((p - 50) / 50); }   // VBBL Table 3.7.2.2.-B ('over 50: 3 + 1 per extra 50'): a partial increment counts, so 51–100 → 4 (J.B. 8 Nov: our reading, conservative)
 
 /* ---------- geometry helpers on the lot ---------- */
 function inPoly(p, ring) { let c = false; for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) { const [xi, yi] = ring[i], [xj, yj] = ring[j]; if ((yi > p[1]) !== (yj > p[1]) && p[0] < (xj - xi) * (p[1] - yi) / (yj - yi) + xi) c = !c; } return c; }
@@ -118,7 +118,7 @@ function layout(S0) {
   /* drive side: the side drive, else a lane along a side, else the low-v side (drawing choice) */
   const vs = ring.map(p => p[1]), vMid = (Math.min(...vs) + Math.max(...vs)) / 2;
   let sv = -1, driveWhy = 'no lane or side drive: the drive side is taken as the low-v side (drawing choice)';
-  if (drive) { sv = (drive[2] + drive[3]) / 2 > vMid ? 1 : -1; driveWhy = `side drive ${S.sideDrive.w} m ${S.sideDrive.inYard > 0.1 ? 'in the side yard' : 'taking frontage'} (site.js)`; }
+  if (drive) { sv = (drive[2] + drive[3]) / 2 > vMid ? 1 : -1; driveWhy = `side drive ${S.sideDrive.w} m ${S.sideDrive.inYard > 0.1 ? 'in the side yard' : 'taking frontage'} (site.js); the side is the site model's choice (drawing choice, accepted by J.B. 8 Nov)`; }
   else { const al = S.edges.find(e => e.abuts === 'alley' && e.kind !== 'front'); if (al) { sv = (al.a[1] + al.b[1]) / 2 > vMid ? 1 : -1; driveWhy = 'the lane along the side'; } }
   const dir = S.dir, uf = S.uf, uOf = a => uf - dir * a;
   /* across-span of the yard at depth a (v interval, 0.05 m samples), the drive cut out */
@@ -154,7 +154,10 @@ function layout(S0) {
     if (L.plant && !L.plant.ok) { why.push(`step ${st.k} (${st.t}): plant does not fit (${L.plant.why})`); continue; }
     out = L; out.ladder = { step: st.k, what: st.t, limiting: why.slice() }; break;
   }
-  if (!out) { res.doesntFit = { limiting: why }; flags.push('Doesn’t fit here (ladder step 7): ' + why.join('; ')); return res; }
+  if (!out) { res.doesntFit = { limiting: why }; flags.push('Doesn’t fit here (ladder step 7): ' + why.join('; '));
+    const front = streets.find(e => e.kind === 'front'), fw = front ? Math.hypot(front.b[0] - front.a[0], front.b[1] - front.a[1]) : null;
+    if (fw && fw > aMax) flags.push(`Not built yet: the turned variant (bands along the street, spec Part 2) might fit this wide, shallow lot (frontage ${Math.round(fw)} m, depth ${Math.round(aMax)} m) (?)`);
+    return res; }
   if (variant.notBuilt.length) flags.push(`Not built yet: the ${variant.notBuilt.join(', ')} variant (J.B. 8 Nov: not this pass); drawn as ${variant.main}`);
   if (drive && van && I3 && S.sideDrive.inYard > 0.1) flags.push('Side drive in the I-3 side yard: flagged approval (I-3 3.1.2.16: the Director may decrease the side yard for loading access)');
   if (drive && van && I2) flags.push('Side drive in I-2 (0 m side yards): it takes frontage from the hub');
@@ -623,14 +626,17 @@ function grades(L, S) { const out = { datum: S.gradeDatum || '?' };
   if (street != null && out.slab != null) { const dz = r2(out.slab - street);
     out.rise = dz; out.stepFree = dz <= 0.013 ? (dz <= 0.0 ? 'level (LiDAR reads the street at the slab: 0.0–0.1 m, sloped floor ≤ 1:20 over 2.0 m drawn, survey before design)' : 'level') : dz <= 0.1 ? 'sloped floor ≤ 1:20 over the first 2.0 m inside the door (LiDAR 0.1 m steps: survey before design)' : `ramp ≤ 1:12 inside the lobby: ${r2(12 * dz)} m plus landings (VBBL 3.8.3.5) (?)`;
     if (dz <= 0.0) out.stepFree = 'sloped floor ≤ 1:20 over the first 2.0 m inside the door: LiDAR reads 0.0–0.1 m (0.1 m steps cannot show 13 mm), survey before design'; }
-  /* base surface: corner grades joined by a fan of triangles (our reading), lowest point under the building footprint */
+  /* base surface: corner grades joined by triangles, both triangulations, the lower surface; lowest point under the building footprint (our reading) */
   const C = S.grade.corners.filter(c => c[2] != null); out.corners = C.length;
   if (C.length >= 3 && out.slab != null) {
-    const zAt = (u, v) => { for (let i = 1; i < C.length - 1; i++) { const A = C[0], B = C[i], Cc = C[i + 1], d = (B[1] - Cc[1]) * (A[0] - Cc[0]) + (Cc[0] - B[0]) * (A[1] - Cc[1]); if (Math.abs(d) < 1e-9) continue;
+    const zFan = (k, u, v) => { const n = C.length; for (let i = 1; i < n - 1; i++) { const A = C[k], B = C[(k + i) % n], Cc = C[(k + i + 1) % n], d = (B[1] - Cc[1]) * (A[0] - Cc[0]) + (Cc[0] - B[0]) * (A[1] - Cc[1]); if (Math.abs(d) < 1e-9) continue;
       const l1 = ((B[1] - Cc[1]) * (u - Cc[0]) + (Cc[0] - B[0]) * (v - Cc[1])) / d, l2 = ((Cc[1] - A[1]) * (u - Cc[0]) + (A[0] - Cc[0]) * (v - Cc[1])) / d, l3 = 1 - l1 - l2;
       if (l1 >= -1e-6 && l2 >= -1e-6 && l3 >= -1e-6) return l1 * A[2] + l2 * B[2] + l3 * Cc[2]; } return null; };
+    /* both triangulations: fans from corner 0 and corner 1 (four corners: the two diagonals); the lower surface at each point (J.B. 8 Nov) */
+    const zAt = (u, v) => { const a = zFan(0, u, v), b = zFan(1, u, v); return a == null ? b : b == null ? a : Math.min(a, b); };
+    const zFan0 = (u, v) => zFan(0, u, v);
     let lo = 1e9, at = null; for (let a = 0; a <= L.Da + 1e-9; a += 1) for (let b = 0; b <= L.W + 1e-9; b += 1) { const [u, v] = L.toUV(Math.min(a, L.Da), Math.min(b, L.W)), z = zAt(u, v); if (z != null && z < lo) { lo = z; at = [a, b]; } }
-    if (at) { out.base = r2(lo); out.baseAt = at; out.roof = r2(out.slab + roofRel); out.height = r2(out.roof - lo); out.hLimit = S.hLimit; out.heightOk = S.hLimit ? out.height <= S.hLimit + 1e-6 : null; out.baseWhy = RULES.base.why; }
+    if (at) { out.base = r2(lo); out.baseAt = at; out.roof = r2(out.slab + roofRel); out.height = r2(out.roof - lo); out.hLimit = S.hLimit; out.heightOk = S.hLimit ? out.height <= S.hLimit + 1e-6 : null; out.baseWhy = RULES.base.why; let lo0 = 1e9; for (let a = 0; a <= L.Da + 1e-9; a += 1) for (let b = 0; b <= L.W + 1e-9; b += 1) { const [u, v] = L.toUV(Math.min(a, L.Da), Math.min(b, L.W)), z = zFan0(u, v); if (z != null && z < lo0) lo0 = z; } out.baseFan0 = lo0 < 1e9 ? r2(lo0) : null; }
   }
   return out; }
 
@@ -667,6 +673,11 @@ function toPlan(L, S) {
   const programs = [];
   const T = L.treach, flags = L.flags.slice();
   if (L.plant && !L.plant.ok) flags.push('Plant: ' + L.plant.why);
+  if (L.kind === 'stacked') flags.push('Section: ground storey, 4.0 m support storey, one hall storey: the spec’s height-capped section, drawn on every lot by the hub cap (J.B. 8 Nov)');
+  if (L.grades && L.grades.heightOk === false) flags.push(`Not built yet: ${L.grades.height} m is over the ${L.grades.hLimit} m limit even with the height-capped section; a lower section is not built (?)`);
+  if (L.kind === 'stacked') flags.push('Refuge at 50 people, the minimum; the ground floor behind the hub stays the data-centre entrance row and covered truck court (J.B. 8 Nov)');
+  if (L.kind === 'stacked' && L.clin > 0) flags.push('Clinic grows into the spare floor over the hub (spare-floor order: the refuge grows only at grade; clinic kept under 500 m², J.B. 8 Nov)');
+  if (L.plant && L.plant.items.some(it => it.kind === 'chiller' && it.roof)) flags.push('Chillers on the hub roof, over the refuge: A2L refrigerant pools below a leak; no safe distance in the maker’s guide (?)');
   if (S.city !== 'van') flags.push('Edmonton cooling: the Liebert AFC is outside Vertiv’s stated range at −30 °C (SL-70790 pp. 9–10): chillers are a placeholder (?)');
   const entrances = [{ id: 'lob_out', block: 'hub', slab_m: L.grades.slab, street_m: L.grades.street, stepFree: L.grades.stepFree }];
   return { version: RULES.version, rules: RULES, storeys, exitSep, flags, programs, entrances, hub: L, typology: 'emergency_hub' };
