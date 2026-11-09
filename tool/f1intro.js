@@ -28,7 +28,7 @@ const CSS=`
 #f1i .f1i-cap p{margin:0;font-size:26px;font-weight:300;line-height:1.35;transition:opacity .45s}
 #f1i .f1i-cap p+p{margin-top:10px}
 #f1i .f1i-cap p.hide{opacity:0}
-#f1i.dock .f1i-cap{bottom:auto;width:auto;max-width:620px;text-align:left;background:#fff;border:1px solid var(--f-rule,#DDDEDF);border-left:3px solid ${DC};border-radius:2px;padding:14px 18px;box-shadow:0 8px 24px rgba(22,24,27,.08)}
+#f1i.dock .f1i-cap{bottom:auto;width:auto;max-width:620px;text-align:left;background:#fff;border:1px solid var(--f-rule,#DDDEDF);border-radius:2px;padding:14px 18px;box-shadow:0 8px 24px rgba(22,24,27,.08)}
 #f1i.dock .f1i-cap p{font-size:16px;font-weight:400;line-height:1.5}
 #f1i.float .f1i-cap{top:auto;bottom:44px;left:50%;transform:translateX(-50%);text-align:center}
 #f1i.dock:not(.float) .f1i-skip{top:72px}
