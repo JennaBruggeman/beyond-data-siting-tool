@@ -24,5 +24,8 @@ for city in ('van', 'edm'):
             elif not k or k == '?': c['noZone'] += 1
             elif city == 'edm' and k.startswith('DC'): c['dc'] += 1
             else: c['rezoning'] += 1
-    c['lots'] = len(seen); out[city] = c; print(city, c)
+    c['lots'] = len(seen)
+    # register ids for every count (standing rule: every figure sourced; 8 Nov 2026): the lots, their zone, and the zone rows that class them
+    c['src'] = ['vanTax', 'vanZoningLayer', 'van_zdb_i2', 'van_zdb_i3', 'vanDistricts'] if city == 'van' else ['edmPropInfo2026', 'edmZoningGeo', 'edm_matrix', 'edm_bl20001']
+    out[city] = c; print(city, c)
 json.dump(out, open(os.path.join(R, 'tool', 'data', 'approval_counts.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)

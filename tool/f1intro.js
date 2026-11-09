@@ -2,7 +2,7 @@
    Six scenes, about 52 s, built in the page from the real interface: scene 2 draws both city maps as the 'Your city' card does (tiles/<city>/meta.json
    zones, streets_<city>.json) with counts read from tool/data/approval_counts.json at run time; scene 3 the four templates from BD.f1.TPL and the landing's
    own images; scenes 4–5 drive the real card viewer (BD.f1.viewer) on 339 1st Ave E and the real interactive logic diagram (BD.f1logic.open); scene 6
-   is the real landing page. Captions: tool/data/intro.json. Pointers in DC blue. No sound, no video.
+   is the real landing page. Captions and timing: tool/f1/intro.json (presentation settings, not figures: kept out of tool/data, where every number needs a register id). Pointers in DC blue. No sound, no video.
    Plays by itself on the first visit only (localStorage 'bd-f1-intro', in try/catch). Never by itself under automation (navigator.webdriver, as in the
    Playwright checks), with ?nointro or window.BD_NO_INTRO; ?old and 'bd-f1-skip' skip the landing and so the intro. prefers-reduced-motion: still slides.
    BD.f1intro.play() runs it (still slides under reduced motion), .still() shows the slides, .first() is the first-visit call from the landing page. */
@@ -100,7 +100,7 @@ body.f1i-fade #f1v,body.f1i-fade #f1l{opacity:0;transition:opacity .6s}
 function css(){ if(document.getElementById('f1i-css')) return; const s=document.createElement('style'); s.id='f1i-css'; s.textContent=CSS; document.head.appendChild(s); }
 
 /* ---------- data ---------- */
-async function text(){ if(!TXT) TXT=await fetch('data/intro.json').then(r=>r.json()); return TXT; }
+async function text(){ if(!TXT) TXT=await fetch('f1/intro.json').then(r=>r.json()); return TXT; }
 async function counts(){ if(!COUNTS) COUNTS=await fetch('data/approval_counts.json').then(r=>r.json()).catch(()=>null); return COUNTS; }
 const lotsAllowed=(c,city)=>{ const r=c&&c[city]; return r&&isFinite(r.permitted)&&isFinite(r.conditional)?r.permitted+r.conditional:null; };
 const zkey=(city,z)=>city==='van'?String(z||'').trim():String(z||'').trim().split(/\s+/)[0].toUpperCase(); /* as f1arch.js 'Your city' */
