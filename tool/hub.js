@@ -33,6 +33,7 @@ const RULES = {
   rowR: { d: 6.9, why: 'hub service row as deep as a stair (6.9 m, drawing choice) so the clinic stairs and lift sit in it' },
   wcMod: { w: 0.9, why: 'washroom rooms 0.9 m of wall per WC, stalls along the room depth (drawing choice; counts from VBBL Table 3.7.2.2.-A/-B)' },
   smallRoom: { w: 1.6, why: 'small rooms (cot storage, single WC, storage) 1.6 m wide (drawing choice; T-width minimum 1.5 m, spec)' },
+  clinicWC: { w: 1.5, why: 'clinic single WC rooms 1.5 m wide: the width-table minimum for a single WC (J.B. 8 Nov); the universal WC keeps its own rule (1,700 mm circle)' },
   dcFront: { d: 3.6, why: 'storey-2 data-centre front row 3.6 m deep, as the freight lift (drawing choice)' },
   ves: { w: 2.6, l: 6.0, why: 'staff vestibule, guard point and portal 2.6 × 6.0 m (portal 1.8 × 1.8 m, arch_acc_gcpsg015RZ; rest drawing choice)' },
   dock: { l: 6.0, why: 'dock and lift lobby 6.0 m deep (drawing choice)' },
@@ -265,7 +266,7 @@ function stackedRest(C, B, W, Da) {
     for (let it = 0; it < 3; it++) {
       bI = [{ id: 'p2', fix: SW }, { id: 'e1', fix: RULES.e1.w }, { id: 'cons', n: 'Consult room', w: PRG.cons.w, m2: PRG.cons.m2, p: 'cons' }, { id: 'med', n: 'Medication room', w: PRG.med.w, m2: PRG.med.m2, p: 'med' },
         { id: 'cln', n: 'Clean supply', w: PRG.cln.w, m2: PRG.cln.m2, p: 'cln' }, { id: 'soil', n: 'Soiled holding', w: PRG.soil.w, m2: PRG.soil.m2, p: 'soil' }, { id: 'hk', n: 'Housekeeping', w: PRG.hk.w, m2: PRG.hk.m2, p: 'hk' }]
-        .concat(Array.from({ length: Math.max(0, 2 * nwc - 1) }, (_, i) => ({ id: 'cwc' + (i + 1), n: 'Clinic WC ' + (i + 1), w: sm, p: 'cwc' })))
+        .concat(Array.from({ length: Math.max(0, 2 * nwc - 1) }, (_, i) => ({ id: 'cwc' + (i + 1), n: 'Clinic WC ' + (i + 1), w: RULES.clinicWC.w, p: 'cwc' })))
         .concat([{ id: 'cuw', n: 'Clinic universal WC', w: PRG.uwc.w, p: 'uwc' }, { id: 'cspare', n: 'Unassigned (no use yet), off the clinic corridor', w: 0, grow: true, spare: true }, { id: 'p1', fix: SW }]);
       pb = pack(bI, W, RULES.rowR.d); if (pb.fail) return { fail: `clinic back row needs ${pb.fail} m; ${W} m available` };
       const est = W * dF + W * cw + sum(bI.map((x, i) => (x.p ? pb.ws[i] : 0))) * RULES.rowR.d;
@@ -392,7 +393,7 @@ function besideW(C, W) {
     for (let it = 0; it < 3; it++) {
       cR = [{ id: 'cons', n: 'Consult room', w: PRG.cons.w, m2: PRG.cons.m2, p: 'cons' }, { id: 'med', n: 'Medication room', w: PRG.med.w, m2: PRG.med.m2, p: 'med' }, { id: 'cln', n: 'Clean supply', w: PRG.cln.w, m2: PRG.cln.m2, p: 'cln' },
         { id: 'soil', n: 'Soiled holding', w: PRG.soil.w, m2: PRG.soil.m2, p: 'soil' }, { id: 'hk', n: 'Housekeeping', w: PRG.hk.w, m2: PRG.hk.m2, p: 'hk' }]
-        .concat(Array.from({ length: Math.max(0, 2 * nwc - 1) }, (_, i) => ({ id: 'cwc' + (i + 1), n: 'Clinic WC ' + (i + 1), w: sm, p: 'cwc' })))
+        .concat(Array.from({ length: Math.max(0, 2 * nwc - 1) }, (_, i) => ({ id: 'cwc' + (i + 1), n: 'Clinic WC ' + (i + 1), w: RULES.clinicWC.w, p: 'cwc' })))
         .concat([{ id: 'cuw', n: 'Clinic universal WC', w: PRG.uwc.w, p: 'uwc' }, { id: 'cst', n: 'Clinic storage', w: PRG.cst.w, p: 'cst' }, { id: 'cspare', n: 'Unassigned (no use yet), off the clinic corridor', w: 0, grow: true, spare: true }]);
       pc = pack(cR, r2(W - bLob), dR); if (pc.fail) return { fail: `clinic back row needs ${pc.fail} m; ${r2(W - bLob)} m` };
       const est = (W - bLob) * (dF + cw + dR); const n2 = wcB(Math.ceil(est / 9.3)); if (n2 === nwc) break; nwc = n2;
