@@ -305,3 +305,19 @@ Confirmed, with omissions added to the register: 3.3.1.9 (p. 268), 3.4.2.5 (p. 2
 1. **Dead ends inside a suite (3.3.1.9.(5)):** "Except for a dead-end corridor that is entirely within a suite…". If the clinic is a suite, its corridor's dead ends aren't limited to 6 m. The tool applies 6 m to every corridor, which is conservative. Keep it?
 2. **Two egress doorways by area (3.3.1.5.(1)(d)):** in a floor area sprinklered throughout, a room or suite larger than Table 3.3.1.5.-B needs 2 egress doorways at least ⅓ of its diagonal apart. The limits are A 200 m², D 300 m², F-2 200 m². That covers the data hall (F-2, about 1,130 m²), the clinic suite (D, 464 m²) and any refuge room over 200 m², whatever their load. The tool's exit checks are per zone (exits apart, VBBL 3.4.2.3), not per room. Add a per-room egress-doorway check (2 doors, ⅓ diagonal) to hub.js?
 3. **Table 3.7.2.2.-B counts persons of each sex:** 3.7.2.2.(1) splits the load equally, so the table applies to half the load. The tool and Part 7 apply it to the total: the clinic's 50 persons give 2 WCs a sex, where the code gives 25 a sex → 1. That over-provides. Also, (2) lets a single WC serve both sexes up to 25 persons. And (15) allows two unisex rooms up to 200 m² and 60 persons, which doesn't apply here (the clinic is 464 m²). Apply the table per sex, as written?
+
+## Code-check level and J.B.'s three answers (9 Nov 2026)
+- **Code-check level** (CODE_LEVEL_RULE_2026-11-09.md, register `rule_codeLevel`):
+  - `tool/treach.js` `judge()` marks a result within 0.5 m (lengths) or 5 % (other quantities) of its limit as "tight: check in design". Tight passes; only a miss by more than that fails.
+  - It applies to dead ends, travel, exits apart, exterior discharges, height and egress doorways.
+  - Room widths: only a room under its minimum by 0.5 m or less becomes tight. Rooms drawn at exactly their minimum are not flagged, because the layout sizes them to the minimum on purpose.
+  - Tight results show on the cards and in one plan flag. No fixture-level checks were added.
+- **1. Dead ends inside a suite:** 6 m everywhere, as before.
+- **2. Egress doorways:** new `treach.js` `egressDoors()` (part `egress_doorways`, VBBL 3.3.1.5.(1)(b), (d), (2)).
+  - Rule: a room with a load over 60, or larger than Table 3.3.1.5.-B (A 200 m², D 300 m², F-2 200 m²), needs 2 doorways at least ⅓ of its diagonal apart.
+  - Load: refuge, shelter and waiting rooms ÷ 0.75 m² (Part 1); clinic rooms ÷ 9.3 m². Washrooms, storage and service rooms are tested by area only.
+  - `hub.js` adds the second door on a wall shared with a public room or corridor.
+  - Tool: on 339 and 64 Airport Rd, the refuge, shelter and hall all pass. 64 Airport Rd's shelter gained a second door, into the refuge.
+  - **Hand fits:** the shelter has 1 door in 7 of 8 fits (loads 76–160): v1353, v339, v8238, v8980, e06b, e4103, e14715. 8238's refuge rooms ref2 (load 183) and ref3 (load 68) also have 1 door each. Only v1330 passes. For Cowork to re-plan, or to confirm the shelter's load basis (÷ 0.75 m² as Part 1).
+- **3. Table 3.7.2.2.-B:** `hub.js` `wcBload` applies it per sex, with the load split equally and a partial increment counting. 339's clinic is 48 persons (24 a sex): 1 WC a sex, so 1 WC room plus the universal WC; the clinic is now 443 m². Part 7's own 32 persons would be 16 a sex → 1, not the 2 it shows. Part 7 row 9 explains this.
+- Part 7 is unchanged: 14 match, 3 partly, 2 differ. Golden and Architecture are identical.

@@ -26,18 +26,21 @@ function fixtures() {
 const fkey = o => `${o.rule}|${o.storey}|${o.room}`;
 
 function report(fit, G) {
-  const r = T.tReach(G), de = T.deadEnds(G), w = T.tWidth(G);
+  const r = T.tReach(G), de = T.deadEnds(G), w = T.tWidth(G), eg = T.egressDoors(G);
   console.log(`\n=== ${fit}`);
   console.log(`  T-reach: ${r.length ? r.length + ' findings' : 'PASS'}`);
   for (const o of r) console.log(`    ${o.rule}  st${o.storey} ${o.room}: ${o.reason}`);
   console.log('  Dead ends (limit 6.0 m):');
-  for (const c of de) console.log(`    st${c.storey} ${c.corridor.padEnd(16)} ${c.kind}  exits ${c.exits} [${c.exitNames.join(', ')}]  dead end ${c.deadEnd_m === null ? 'no exit' : c.deadEnd_m.toFixed(1) + ' m'}  ${c.ok ? 'ok' : 'FAIL'}`);
-  const fails = w.rows.filter(x => x.sev === 'fail'), notes = w.rows.filter(x => x.sev === 'note');
-  console.log(`  T-width: ${fails.length} fails, ${notes.length} notes`);
+  for (const c of de) console.log(`    st${c.storey} ${c.corridor.padEnd(16)} ${c.kind}  exits ${c.exits} [${c.exitNames.join(', ')}]  dead end ${c.deadEnd_m === null ? 'no exit' : c.deadEnd_m.toFixed(1) + ' m'}  ${c.status === 'tight' ? 'tight: check in design' : c.ok ? 'ok' : 'FAIL'}`);
+  const fails = w.rows.filter(x => x.sev === 'fail'), notes = w.rows.filter(x => x.sev === 'note'), tight = w.rows.filter(x => x.sev === 'tight');
+  console.log(`  T-width: ${fails.length} fails, ${tight.length} tight, ${notes.length} notes`);
+  for (const x of tight) console.log(`    tight st${x.storey} ${x.room.padEnd(5)} ${x.name.slice(0, 40).padEnd(40)} ${x.what} (within 0.5 m: check in design)`);
   for (const x of fails) console.log(`    FAIL st${x.storey} ${x.room.padEnd(5)} ${x.name.slice(0, 40).padEnd(40)} ${x.what}  [${x.basis}]`);
   if (!quiet) for (const x of notes) console.log(`    note st${x.storey} ${x.room.padEnd(5)} ${x.name.slice(0, 40).padEnd(40)} ${x.what}`);
   for (const x of w.refuge) console.log(`    refuge st${x.storey} ${x.room}: ${x.area_m2} m2 drawn, ${x.counted_m2} m2 counted (parts >= 2.4 m wide)`);
-  return { r, de, w };
+  console.log(`  Egress doorways (VBBL 3.3.1.5: load over 60, or area over Table 3.3.1.5.-B): ${eg.length} rooms need 2`);
+  for (const e of eg) console.log(`    ${e.status === 'fail' ? 'FAIL ' : e.status === 'tight' ? 'tight' : 'ok   '} st${e.storey} ${e.room.padEnd(6)} ${e.name.slice(0, 34).padEnd(34)} ${e.why}: ${e.doors} doors${e.apart_m != null ? ', ' + e.apart_m + ' m apart' : ''}, needs ${e.need_m} m`);
+  return { r, de, w, eg };
 }
 
 function parity(fit, G, E, res) {
@@ -127,13 +130,13 @@ for (const { fit, G, E } of all) {
   const diffs = E ? parity(fit, G, E, res) : (console.log('  (no expected_ file: parity skipped)'), null);
   summary.push([fit, res.r.length ? res.r.map(o => o.rule).join(',') : 'PASS',
     res.de.map(c => `${c.corridor}:${c.deadEnd_m === null ? '-' : c.deadEnd_m}`).join(' '),
-    res.w.rows.filter(x => x.sev === 'fail').length, res.w.rows.filter(x => x.sev === 'note').length, diffs ? diffs.length : '-']);
+    res.w.rows.filter(x => x.sev === 'fail').length, res.w.rows.filter(x => x.sev === 'note').length, diffs ? diffs.length : '-', res.eg.filter(e => !e.ok).map(e => e.room).join(',') || 'PASS']);
 }
 const v339 = all.find(f => f.fit === 'v339');
 if (v339) { const G = negative(v339.G); if (process.env.TREACH_NEG_OUT) fs.writeFileSync(process.env.TREACH_NEG_OUT, JSON.stringify(G)); }
 else { bad++; console.log('negative test: v339 fixture missing'); }
 
-console.log('\n fit      T-reach      dead ends (m)                                   width fails  notes  width diffs vs py');
-for (const s of summary) console.log(` ${String(s[0]).padEnd(8)} ${String(s[1]).padEnd(12)} ${String(s[2]).padEnd(48)} ${String(s[3]).padStart(5)} ${String(s[4]).padStart(9)} ${String(s[5]).padStart(8)}`);
+console.log('\n fit      T-reach      dead ends (m)                                   width fails  notes  width diffs vs py  egress doorways');
+for (const s of summary) console.log(` ${String(s[0]).padEnd(8)} ${String(s[1]).padEnd(12)} ${String(s[2]).padEnd(48)} ${String(s[3]).padStart(5)} ${String(s[4]).padStart(9)} ${String(s[5]).padStart(8)}   ${s[6]}`);
 console.log(bad ? `\n${bad} PARITY/NEGATIVE FAILURES` : '\nparity: T-reach and dead ends match the Python on every fixture; negative test OK');
 process.exit(bad ? 1 : 0);

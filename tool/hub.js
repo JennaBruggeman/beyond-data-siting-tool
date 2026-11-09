@@ -83,7 +83,8 @@ const PRG = {
 /* VBBL Table 3.7.2.2.-A, WCs a sex (M, F) by persons of that sex (spec Part 1) */
 const TA = [[25, 1, 1], [50, 1, 2], [75, 2, 3], [100, 2, 4], [125, 3, 5], [150, 3, 6], [175, 4, 7], [200, 4, 8], [250, 5, 9], [300, 5, 10], [350, 6, 11], [400, 6, 12]];
 function wcA(n) { for (const r of TA) if (n <= r[0]) return [r[1], r[2]]; return [7 + Math.ceil((n - 400) / 200), 13 + Math.ceil((n - 400) / 100)]; }
-function wcB(p) { return p <= 25 ? 1 : p <= 50 ? 2 : 3 + Math.ceil((p - 50) / 50); }   // VBBL Table 3.7.2.2.-B ('over 50: 3 + 1 per extra 50'): a partial increment counts, so 51–100 → 4 (J.B. 8 Nov: our reading, conservative)
+function wcB(p) { return p <= 25 ? 1 : p <= 50 ? 2 : 3 + Math.ceil((p - 50) / 50); }   // VBBL Table 3.7.2.2.-B, p = persons OF EACH SEX ('over 50: 3 + 1 per extra 50'): a partial increment counts, so 51–100 → 4 (J.B. 8 Nov: our reading, conservative)
+const wcBload = load => wcB(Math.ceil(load / 2));   // 3.7.2.2.(1): the load split equally between the sexes; Table B per sex (J.B. 9 Nov, as the code reads)
 
 /* ---------- geometry helpers on the lot ---------- */
 function inPoly(p, ring) { let c = false; for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) { const [xi, yi] = ring[i], [xj, yj] = ring[j]; if ((yi > p[1]) !== (yj > p[1]) && p[0] < (xj - xi) * (p[1] - yi) / (yj - yi) + xi) c = !c; } return c; }
@@ -270,7 +271,7 @@ function stackedRest(C, B, W, Da) {
         .concat([{ id: 'cuw', n: 'Clinic universal WC', w: PRG.uwc.w, p: 'uwc' }, { id: 'cspare', n: 'Unassigned (no use yet), off the clinic corridor', w: 0, grow: true, spare: true }, { id: 'p1', fix: SW }]);
       pb = pack(bI, W, RULES.rowR.d); if (pb.fail) return { fail: `clinic back row needs ${pb.fail} m; ${W} m available` };
       const est = W * dF + W * cw + sum(bI.map((x, i) => (x.p ? pb.ws[i] : 0))) * RULES.rowR.d;
-      const n2 = wcB(Math.ceil(est / 9.3)); if (n2 === nwc) break; nwc = n2;
+      const n2 = wcBload(Math.ceil(est / 9.3)); if (n2 === nwc) break; nwc = n2;
     }
     const Fc = place(fI, pf.ws, 0, 0, dF), Bc = place(bI, pb.ws, 0, aR, aB);
     Fc.forEach(x => R2.push(room(2, x.id, x.n, 'clin', 'croom', [x.rr], { block: 'clinic', prog: x.p })));
@@ -396,7 +397,7 @@ function besideW(C, W) {
         .concat(Array.from({ length: Math.max(0, 2 * nwc - 1) }, (_, i) => ({ id: 'cwc' + (i + 1), n: 'Clinic WC ' + (i + 1), w: RULES.clinicWC.w, p: 'cwc' })))
         .concat([{ id: 'cuw', n: 'Clinic universal WC', w: PRG.uwc.w, p: 'uwc' }, { id: 'cst', n: 'Clinic storage', w: PRG.cst.w, p: 'cst' }, { id: 'cspare', n: 'Unassigned (no use yet), off the clinic corridor', w: 0, grow: true, spare: true }]);
       pc = pack(cR, r2(W - bLob), dR); if (pc.fail) return { fail: `clinic back row needs ${pc.fail} m; ${r2(W - bLob)} m` };
-      const est = (W - bLob) * (dF + cw + dR); const n2 = wcB(Math.ceil(est / 9.3)); if (n2 === nwc) break; nwc = n2;
+      const est = (W - bLob) * (dF + cw + dR); const n2 = wcBload(Math.ceil(est / 9.3)); if (n2 === nwc) break; nwc = n2;
     }
     Rc = place(cR, pc.ws, bLob, aR, r2(aR + dR)).filter(x => x.rr[3] - x.rr[2] > 0.01);
     clin = r2((W - bLob) * (dF + cw) - pw * dF + sum(Rc.filter(x => !x.spare).map(x => ra(x.rr))));
@@ -537,13 +538,27 @@ function finish(res, S) {
     door(1, 'ves', 'scor', 0.5); ext(1, 'ves', 'a1', 0.5); door(1, 'dock', 'scor', 0.5);
     const bays = R[1].filter(x => x.kind === 'bay'); if (bays.length) door(1, 'dock', bays[bays.length - 1].id, 0.5);
   }
+  /* VBBL 3.3.1.5 (J.B. 9 Nov): a room with a load over 60 or an area over Table 3.3.1.5.-B gets a second egress doorway, on a wall it shares
+     with a room or corridor on its own line (public rooms: the lobby, the public corridor or another public room), as far from its first door
+     as the wall allows. Rooms of the data centre and clinic are left to the test (their layouts already give them 2 or more). */
+  { const T0 = TR(); if (T0 && T0.egressDoors) {
+      const G0 = { S: {}, D, city: S.city }; Object.keys(R).forEach(k => { G0.S[k] = R[k].map(x => ({ id: x.id, n: x.n, g: x.g, kind: x.kind, r: x.r, core: !!x.core, stair: !!x.stair })); });
+      for (const e of T0.egressDoors(G0).filter(e => e.doors < 2 && e.group === 'A')) {
+        const st = e.storey, X = by(st, e.room), d0 = D.find(d => d[0] === st && (d[1] === e.room || d[2] === e.room)); if (!X || !d0) continue;
+        const have = new Set(D.filter(d => d[0] === st && (d[1] === e.room || d[2] === e.room)).map(d => d[1] === e.room ? d[2] : d[1]));
+        let best = null;
+        for (const Y of R[st].filter(y => y.id !== e.room && !have.has(y.id) && (y.kind === 'proom' || y.kind === 'lobby' || y.kind === 'pcor' || y.kind === 'refuge2'))) {
+          for (const t of [0.1, 0.5, 0.9]) { const n0 = D.length; const fl = L.flags.length; door(st, e.room, Y.id, t); L.flags.length = fl; if (D.length === n0) break;
+            const dn = D.pop(), dist = Math.hypot(dn[3] - d0[3], dn[4] - d0[4]); if (!best || dist > best.dist) best = { dist, d: dn }; } }
+        if (best) D.push(best.d); else L.flags.push(`Egress doorways: ${X.n} needs a second door and shares no wall with a public room or corridor (?)`);
+      } } }
   L.D = D;
   /* the T-reach graph, in the local frame */
   const G = { S: {}, D, city: S.city };
   Object.keys(R).forEach(k => { G.S[k] = R[k].map(x => ({ id: x.id, n: x.n, g: x.g, kind: x.kind, r: x.r, core: !!x.core, stair: !!x.stair })); });
   L.G = G;
   const T = TR();
-  if (T) { L.treach = { reach: T.tReach(G), dead: T.deadEnds(G), width: T.tWidth(G) }; }
+  if (T) { L.treach = { reach: T.tReach(G), dead: T.deadEnds(G), width: T.tWidth(G), egress: T.egressDoors ? T.egressDoors(G) : [] }; }
   /* travel along the path, exits apart, exterior discharges */
   L.zones = zonesOf(L);
   L.travel = L.zones.map(z => travel(L, z));
@@ -599,16 +614,18 @@ function travel(L, z) {
       const nd = d + c * g; if (nd < (dist.has(n) ? dist.get(n) : Infinity) - 1e-9) { dist.set(n, nd); prev.set(n, k); push(n, nd); } } }
   let worst = -1, wk = null, unreached = 0; for (const k of cell.keys()) { if (!dist.has(k)) { unreached++; continue; } if (dist.get(k) > worst) { worst = dist.get(k); wk = k; } }
   const path = []; for (let k = wk; k; k = prev.get(k)) { const [i, j] = k.split(',').map(Number); path.push([r2((i + 0.5) * g), r2((j + 0.5) * g)]); }
-  return { zone: z.name, st: z.st, worst: r2(worst), ok: worst <= 45, limit: 45, path, unreached, basis: RULES.grid.why };
+  const status = TR() ? TR().judge(worst, 45, 'max', 'm') : (worst <= 45 ? 'pass' : 'fail');
+  return { zone: z.name, st: z.st, worst: r2(worst), status, ok: status !== 'fail', limit: 45, path, unreached, basis: RULES.grid.why };
 }
 function apart(L, z) { const ex = exitsOf(L, z), R = L.rooms[z.st].filter(x => z.ids.includes(x.id));
   let a = [1e9, -1e9, 1e9, -1e9]; R.forEach(x => x.r.forEach(r => { a = [Math.min(a[0], r[0]), Math.max(a[1], r[1]), Math.min(a[2], r[2]), Math.max(a[3], r[3])]; }));
   const diag = Math.hypot(a[1] - a[0], a[3] - a[2]), need = z.pubCor ? Math.min(diag / 2, 9) : Math.max(diag / 2, 9);
   let best = null; for (let i = 0; i < ex.length; i++) for (let j = i + 1; j < ex.length; j++) { const d = Math.hypot(ex[i].u - ex[j].u, ex[i].v - ex[j].v); if (!best || d > best.d) best = { d, a: ex[i], b: ex[j] }; }
-  return { zone: z.name, st: z.st, exits: ex.length, apart_m: best ? r2(best.d) : null, need_m: r2(need), ok: !!best && best.d >= need - 1e-6, rule: z.pubCor ? 'with a public corridor: ≥ min(½ diagonal, 9 m)' : '≥ max(½ diagonal, 9 m)', a: best && best.a, b: best && best.b, how: 'door to door as a stand-in (VBBL 3.4.2.3.(1), (3))' }; }
+  return { zone: z.name, st: z.st, exits: ex.length, apart_m: best ? r2(best.d) : null, need_m: r2(need), status: best ? (TR() ? TR().judge(best.d, need, 'min', 'm') : (best.d >= need - 1e-6 ? 'pass' : 'fail')) : 'fail', ok: !!best && (TR() ? TR().judge(best.d, need, 'min', 'm') !== 'fail' : best.d >= need - 1e-6), rule: z.pubCor ? 'with a public corridor: ≥ min(½ diagonal, 9 m)' : '≥ max(½ diagonal, 9 m)', a: best && best.a, b: best && best.b, how: 'door to door as a stand-in (VBBL 3.4.2.3.(1), (3))' }; }
 function discharges(L) { const out = [], st = L.rooms[1].filter(x => x.stair), ex = L.D.filter(d => d[0] === 1 && d[2] === 'OUT' && st.some(x => x.id === d[1]));
   for (let i = 0; i < ex.length; i++) for (let j = i + 1; j < ex.length; j++) { const p = ex[i], q = ex[j], d = Math.hypot(p[3] - q[3], p[4] - q[4]), near = p[3] <= 15 && q[3] <= 15, need = near ? 6 : 9;
-    out.push({ a: p[1], b: q[1], d: r2(d), need, ok: d >= need - 1e-6, why: near ? 'sprinklered, both within 15 m of the street: 6 m (VBBL 3.4.2.3.(4))' : '9 m (VBBL 3.4.2.3.(4))' }); }
+    const status = TR() ? TR().judge(d, need, 'min', 'm') : (d >= need - 1e-6 ? 'pass' : 'fail');
+    out.push({ a: p[1], b: q[1], d: r2(d), need, status, ok: status !== 'fail', why: near ? 'sprinklered, both within 15 m of the street: 6 m (VBBL 3.4.2.3.(4))' : '9 m (VBBL 3.4.2.3.(4))' }); }
   return out; }
 function loadingOf(L, S) { const van = S.city === 'van';
   if (van) return { n: L.nb, why: L.shared ? 'shared by approval (5.1.5)' : `data centre ${Math.round(L.dcArea)} m² → ${L.kind === 'stacked' ? L.nDC : '?'} (5.2.5); refuge and shelter rooms ${Math.round(L.hubArea)} m² → ${L.nRef} (5.2.3, our reading of the use); clinic ${Math.round(L.clin)} m² → ${L.nCl} (5.2.9)`, size: 'Class B 10.2 × 3.4 × 3.8 m (5.5.1.2)', aisle: '6.1 m (5.4.1)' };
@@ -637,7 +654,7 @@ function grades(L, S) { const out = { datum: S.gradeDatum || '?' };
     const zAt = (u, v) => { const a = zFan(0, u, v), b = zFan(1, u, v); return a == null ? b : b == null ? a : Math.min(a, b); };
     const zFan0 = (u, v) => zFan(0, u, v);
     let lo = 1e9, at = null; for (let a = 0; a <= L.Da + 1e-9; a += 1) for (let b = 0; b <= L.W + 1e-9; b += 1) { const [u, v] = L.toUV(Math.min(a, L.Da), Math.min(b, L.W)), z = zAt(u, v); if (z != null && z < lo) { lo = z; at = [a, b]; } }
-    if (at) { out.base = r2(lo); out.baseAt = at; out.roof = r2(out.slab + roofRel); out.height = r2(out.roof - lo); out.hLimit = S.hLimit; out.heightOk = S.hLimit ? out.height <= S.hLimit + 1e-6 : null; out.baseWhy = RULES.base.why; let lo0 = 1e9; for (let a = 0; a <= L.Da + 1e-9; a += 1) for (let b = 0; b <= L.W + 1e-9; b += 1) { const [u, v] = L.toUV(Math.min(a, L.Da), Math.min(b, L.W)), z = zFan0(u, v); if (z != null && z < lo0) lo0 = z; } out.baseFan0 = lo0 < 1e9 ? r2(lo0) : null; }
+    if (at) { out.base = r2(lo); out.baseAt = at; out.roof = r2(out.slab + roofRel); out.height = r2(out.roof - lo); out.hLimit = S.hLimit; out.heightStatus = S.hLimit ? (TR() ? TR().judge(out.height, S.hLimit, 'max', 'm') : (out.height <= S.hLimit + 1e-6 ? 'pass' : 'fail')) : null; out.heightOk = S.hLimit ? out.heightStatus !== 'fail' : null; out.baseWhy = RULES.base.why; let lo0 = 1e9; for (let a = 0; a <= L.Da + 1e-9; a += 1) for (let b = 0; b <= L.W + 1e-9; b += 1) { const [u, v] = L.toUV(Math.min(a, L.Da), Math.min(b, L.W)), z = zFan0(u, v); if (z != null && z < lo0) lo0 = z; } out.baseFan0 = lo0 < 1e9 ? r2(lo0) : null; }
   }
   return out; }
 
@@ -667,13 +684,25 @@ function toPlan(L, S) {
       else { const xa = rs.find(y => y.id === a); S1.doors.push(Object.assign({}, rec, { from: xa && xa.stair ? stairName(xa) : a })); } });
     S1.walls = wallsOf(rs.flatMap(x => x.r), R2uv);
     return S1; });
-  const exitSep = L.apart.map(z => ({ block: z.zone, stairs: `${z.exits} exits`, apart_m: z.apart_m, need_m: z.need_m, ok: z.ok, how: z.how + '; ' + z.rule, a: z.a ? Object.assign({}, z.a, { uv: toUV(z.a.u, z.a.v) }) : null, b: z.b ? Object.assign({}, z.b, { uv: toUV(z.b.u, z.b.v) }) : null, st: z.st }));
+  const exitSep = L.apart.map(z => ({ block: z.zone, stairs: `${z.exits} exits`, apart_m: z.apart_m, need_m: z.need_m, status: z.status, ok: z.ok, how: z.how + '; ' + z.rule, a: z.a ? Object.assign({}, z.a, { uv: toUV(z.a.u, z.a.v) }) : null, b: z.b ? Object.assign({}, z.b, { uv: toUV(z.b.u, z.b.v) }) : null, st: z.st }));
   L.travel.forEach(t => { if (t.path) t.pathUV = t.path.map(p => toUV(p[0], p[1])); });
   if (L.plant) L.plant.items.forEach(it => { it.rect = R2uv(it.r); it.zoneUV = R2uv(it.z); });
   if (L.truck) { L.truck.courtUV = R2uv(L.truck.court); }
   const programs = [];
   const T = L.treach, flags = L.flags.slice();
   if (L.plant && !L.plant.ok) flags.push('Plant: ' + L.plant.why);
+  if (T) (T.egress || []).filter(e => !e.ok).forEach(e => flags.push(`Egress doorways: ${e.name} (storey ${e.storey}) needs 2, ${e.doors < 2 ? 'has ' + e.doors : e.apart_m + ' m apart, needs ' + e.need_m + ' m'} (${e.why}; VBBL 3.3.1.5)`));
+  { /* J.B. 9 Nov (CODE_LEVEL_RULE_2026-11-09.md): results within 0.5 m (or 5 %) of a limit: tight, check in design (not re-planned) */
+    const tg = [];
+    (L.travel || []).filter(t => t.status === 'tight').forEach(t => tg.push(`travel, ${t.zone} ${t.worst} m of 45 m`));
+    (L.apart || []).filter(z => z.status === 'tight').forEach(z => tg.push(`exits apart, ${z.zone} ${z.apart_m} m, needs ${z.need_m} m`));
+    (L.discharge || []).filter(d => d.status === 'tight').forEach(d => tg.push(`exterior discharges ${d.a}–${d.b} ${d.d} m, needs ${d.need} m`));
+    if (T) (T.dead || []).filter(c => c.status === 'tight').forEach(c => tg.push(`dead end, storey ${c.storey} ${c.corridor} ${c.deadEnd_m} m of 6 m`));
+    if (T) (T.width.rows || []).filter(r => r.sev === 'tight').forEach(r => tg.push(`width, ${r.name} ${r.width_m} m of ${r.min_m} m`));
+    if (T) (T.egress || []).filter(e => e.status === 'tight').forEach(e => tg.push(`egress doorways, ${e.name} ${e.apart_m} m apart, needs ${e.need_m} m`));
+    if (L.grades && L.grades.heightStatus === 'tight') tg.push(`height ${L.grades.height} m of ${L.grades.hLimit} m`);
+    if (tg.length) flags.push('Tight, check in design (within 0.5 m or 5 % of the limit, J.B. 9 Nov): ' + tg.join('; '));
+  }
   if (L.kind === 'stacked') flags.push('Section: ground storey, 4.0 m support storey, one hall storey: the spec’s height-capped section, drawn on every lot by the hub cap (J.B. 8 Nov)');
   if (L.grades && L.grades.heightOk === false) flags.push(`Not built yet: ${L.grades.height} m is over the ${L.grades.hLimit} m limit even with the height-capped section; a lower section is not built (?)`);
   if (L.kind === 'stacked') flags.push('Refuge at 50 people, the minimum; the ground floor behind the hub stays the data-centre entrance row and covered truck court (J.B. 8 Nov)');
@@ -697,7 +726,7 @@ function wallsOf(rects, R2uv) { const segs = [], key = s => [s.axis, s.at, s.fro
       if (!segs.some(t => key(t) === key(s))) segs.push(s); } }); });
   return segs; }
 
-const api = { build, fromSite, siteOf, layout, RULES, PRG, wcA, wcB };
+const api = { build, fromSite, siteOf, layout, RULES, PRG, wcA, wcB, wcBload };
 if (typeof module !== 'undefined' && module.exports) module.exports = api;
 if (root) { root.BD = root.BD || {}; root.BD.hub = api; }
 })(typeof window !== 'undefined' ? window : null);

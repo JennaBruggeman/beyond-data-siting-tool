@@ -44,8 +44,8 @@ function context(x,P,I,box,o){ o=o||{}; const [X,Y,W,H]=box, a=I(X,Y), b=I(X+W,Y
     `<path d="${lots}" fill="#fff" stroke="${K.hair}" stroke-width="0.6"/>${alw?`<path d="${alw}" fill="${K.fillSup}" stroke="${K.dcSup}" stroke-width="0.6"/>`:''}<path d="${blds}" fill="${K.bld}" stroke="none"/></g></g>`; }
 const CONTEXT_SRC=c=>`Site context (streets as the ground between lots, neighbouring lots and building footprints): ${c==='van'?'City of Vancouver property parcels and building footprints (open data)':'City of Edmonton parcels as the tool shows them (lot outlines: Altalis, academic use only) and building footprints'}, as the "Your parcel" card draws them.`;
 /* the meter of STYLE.md §5: one value against a limit */
-function meter(m){ const max=m.max||(m.lim?m.lim/0.87:Math.max(1,m.v||1)), pct=x=>Math.max(0,Math.min(100,100*x/max)), pass=m.pass!==false, col=pass?K.ink:K.red;
-  return `<div class="f1c-m"><div class="t"><span>${esc(m.l)}</span><span style="color:${col}">${m.v==null?'<b class="f1c-q">?</b>':pass?'pass':'to fix'}</span></div>
+function meter(m){ const max=m.max||(m.lim?m.lim/0.87:Math.max(1,m.v||1)), pct=x=>Math.max(0,Math.min(100,100*x/max)), pass=m.pass!==false, col=pass?K.ink:K.red;   /* m.tight: within 0.5 m (or 5 %) of the limit, J.B. 9 Nov: passes, labelled */
+  return `<div class="f1c-m"><div class="t"><span>${esc(m.l)}</span><span style="color:${col}">${m.v==null?'<b class="f1c-q">?</b>':pass?(m.tight?'tight: check in design':'pass'):'to fix'}</span></div>
    <div class="trk">${m.v==null?'':`<div class="bar" style="width:${pct(m.v)}%;background:${col}"></div>`}${m.lim!=null?`<i style="left:${pct(m.lim)}%"></i>`:''}</div>
    <div class="c"><span>${m.v==null?'not in the tool yet':esc(m.cap||`${n1(m.v)} ${m.unit||''} · limit ${n1(m.lim)} ${m.unit||''}`)}</span><span>${esc(m.src||'')}</span></div></div>`; }
 const q=(why)=>({q:true,why:why||'not in the tool yet'});

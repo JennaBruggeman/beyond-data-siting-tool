@@ -142,6 +142,13 @@
    ],
    "why": "whether the exits are far enough apart"
   },
+  "egress_doorways": {
+   "tier": "arch_only",
+   "parties": [
+    "operator"
+   ],
+   "why": "whether large rooms have two doors far enough apart"
+  },
   "plant_clearances": {
    "tier": "arch_only",
    "parties": [
@@ -2934,6 +2941,10 @@
    [
     "step_free_entry",
     "test"
+   ],
+   [
+    "egress_doorways",
+    "test"
    ]
   ],
   "edges": [
@@ -4452,12 +4463,16 @@
    [
     "hub_layout",
     "step_free_entry"
+   ],
+   [
+    "hub_layout",
+    "egress_doorways"
    ]
   ]
  },
  "resident_count": 42,
  "full_count": 210,
- "arch_count": 153,
+ "arch_count": 154,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {

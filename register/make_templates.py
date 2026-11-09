@@ -34,6 +34,7 @@ T = {
  'fire_separations': ('arch_only', 'operator city', 'how long walls and floors hold back a fire'),
  'travel_distance': ('arch_only', 'operator', 'how far anyone walks to an exit'),
  'exit_separation': ('arch_only', 'operator', 'whether the exits are far enough apart'),
+ 'egress_doorways': ('arch_only', 'operator', 'whether large rooms have two doors far enough apart'),
  'plant_clearances': ('arch_only', 'operator neighbours', 'the clear space the plant needs around it'),
  'building_height': ('arch_only', 'city neighbours', 'how tall the building is, measured as the bylaw says'),
  'step_free_entry': ('arch_only', 'neighbours', 'whether the front door is step-free'),

@@ -180,6 +180,14 @@
   }
 
   // ---------- dead-end corridors (deadend.py corridors), VBBL 3.3.1.9.(5), 6 m, strict reading (J.B. 8 Nov) ----------
+  // J.B. 9 Nov 2026 (Claude Link CODE_LEVEL_RULE_2026-11-09.md): the tool checks the big moves only; a result within 0.5 m (lengths) or 5 % (other
+  // quantities) of a limit is 'tight: check in design', not a fail; re-plan only when a rule fails by more than that.
+  const TIGHT = { m: 0.5, rel: 0.05, label: 'tight: check in design', basis: 'within 0.5 m (or 5 %) of the limit: tight, check in design, not a fail (J.B. 9 Nov 2026, CODE_LEVEL_RULE_2026-11-09.md)' };
+  function judge(v, lim, dir, unit) {   // dir 'max': v ≤ lim; 'min': v ≥ lim. Returns 'pass' | 'tight' | 'fail'
+    if (v == null || lim == null || !Number.isFinite(v)) return 'fail';
+    const margin = dir === 'max' ? lim - v : v - lim, tol = unit === 'm' ? TIGHT.m : TIGHT.rel * Math.abs(lim);
+    return margin < -tol - 1e-9 ? 'fail' : margin <= tol + 1e-9 ? 'tight' : 'pass';
+  }
   const G0 = 0.25, DEAD_LIMIT = 6.0, DEAD_BASIS = 'VBBL 3.3.1.9.(5) 6 m; strict reading (J.B. 8 Nov; the code text gives no definition)';
   const ck = (a, b) => a + ',' + b;
   const N4 = [[1, 0], [-1, 0], [0, 1], [0, -1]];
@@ -332,7 +340,7 @@
         else worst = Infinity;
         const w = Number.isFinite(worst) ? r1(worst + (names.length ? G0 : 0)) : null;   // deadend.py adds one cell (the walk ends at the far wall's half cell)
         out.push({ storey: st, corridor: xid, kind: k, exits: names.length, exitNames: [...new Set(names.map(n => ex.get(n).other))].sort(),
-          deadEnd_m: w, tie: !!project.tie, ok: w !== null && w <= DEAD_LIMIT, limit_m: DEAD_LIMIT, basis: DEAD_BASIS });
+          deadEnd_m: w, tie: !!project.tie, status: judge(w, DEAD_LIMIT, 'max', 'm'), ok: judge(w, DEAD_LIMIT, 'max', 'm') !== 'fail', limit_m: DEAD_LIMIT, basis: DEAD_BASIS });
       }
     }
     return out;
@@ -431,7 +439,7 @@
           const keep = x.wc ? [x.wc].concat(x.wcTransfer ? [x.wcTransfer] : []) : null;
           if (!circleFits(rs, 1.7, keep)) row(min, basis, ru.sev, keep ? '1.7 m circle does not fit clear of the WC and transfer space' : '1.7 m circle does not fit (WC position not drawn)');
           else if (!keep) row(min, basis, 'note', '1.7 m circle fits; WC position not drawn, so not tested clear of the WC and transfer space');
-        } else if (w + 1e-6 < min) row(min, basis, ru.sev, `clear width ${w.toFixed(2)} < ${pyNum(min)}`);
+        } else if (w + 1e-6 < min) row(min, basis, ru.sev === 'fail' && judge(w, min, 'min', 'm') === 'tight' ? 'tight' : ru.sev, `clear width ${w.toFixed(2)} < ${pyNum(min)}`);   // tight: under the minimum by 0.5 m or less (J.B. 9 Nov)
         if (ru.also && w + 1e-6 < ru.also.min) row(ru.also.min, ru.also.basis, 'note', `clear width ${w.toFixed(2)} < ${pyNum(ru.also.min)}`);
         if (ru.area && A + 1e-6 < ru.area) row(ru.area, 'area (audit_rooms.py; not a width)', 'note', `area ${A.toFixed(1)} < ${pyNum(ru.area)}`);
         if (ru.refuge) {
@@ -447,7 +455,32 @@
     return { rows, refuge };
   }
 
-  const api = { tReach, deadEnds, tWidth, inferKind, kindOf, circleFits, maxSquare, DEAD_LIMIT };
+  // ---------- egress doorways per room (VBBL 3.3.1.5.(1)(b), (d) and (2); J.B. 9 Nov: add the check, within 0.5 m = tight) ----------
+  // A room needs 2 egress doorways if its occupant load is over 60, or (floor area sprinklered throughout) its area is over Table 3.3.1.5.-B:
+  // Group A 200 m2, D 300 m2, F-2 200 m2. The two doorways at least 1/3 of the room's maximum overall diagonal apart (here: its bounding box),
+  // door to door as a stand-in for the smoke path. Groups by room kind: public hub rooms A (A-2), clinic rooms D, data-centre rooms and the hall F-2;
+  // unassigned floor, plant, loading, stairs, corridors and shafts are not tested. Load: A area / 0.75 m2 (spec Part 1; Table 3.1.17.1 non-fixed
+  // seats) for refuge, shelter and waiting rooms only (washrooms, first aid, offices and storage by area only), D area / 9.3 m2 (offices); F-2 by area only. The clinic as a suite (D, over 300 m2) is the clinic zone's exits-apart check.
+  const EGB = { A: 200, D: 300, 'F-2': 200 }, EGBASIS = 'VBBL 3.3.1.5.(1)(b), (d) and (2); Table 3.3.1.5.-B (sprinklered)';
+  const groupOf = k => (k === 'proom' || k === 'refuge2') ? 'A' : k === 'croom' ? 'D' : (k === 'hall' || k === 'sroom' || k === 'dock') ? 'F-2' : null;
+  function egressDoors(G) {
+    const out = [];
+    for (const st of storeys(G)) for (const x of rooms(G, st)) {
+      const k = kindOf(x), grp = groupOf(k); if (!grp || /^unassigned/i.test(String(x.n || ''))) continue;
+      const A = x.r.reduce((s, r) => s + ra(r), 0), nm = String(x.n || '').toLowerCase(), assembly = /refuge|shelter|waiting|rest area/.test(nm) && !/staff|storage/.test(nm);
+      const load = grp === 'A' ? (assembly ? Math.ceil(A / 0.75) : null) : grp === 'D' && !/wc|washroom|storage|soiled|clean supply|housekeeping|medication/.test(nm) ? Math.ceil(A / 9.3) : null;   // washrooms, storage and service rooms: by area only
+      const byArea = A > EGB[grp] + 1e-6, byLoad = load != null && load > 60; if (!byArea && !byLoad) continue;
+      const u0 = Math.min(...x.r.map(r => r[0])), u1 = Math.max(...x.r.map(r => r[1])), v0 = Math.min(...x.r.map(r => r[2])), v1 = Math.max(...x.r.map(r => r[3]));
+      const need = Math.hypot(u1 - u0, v1 - v0) / 3, ds = G.D.filter(d => +d[0] === +st && (d[1] === x.id || d[2] === x.id));
+      let best = 0, pair = null; for (let i = 0; i < ds.length; i++) for (let j = i + 1; j < ds.length; j++) { const d = Math.hypot(ds[i][3] - ds[j][3], ds[i][4] - ds[j][4]); if (d > best) { best = d; pair = [ds[i], ds[j]]; } }
+      const status = ds.length < 2 ? 'fail' : judge(best, need, 'min', 'm');
+      out.push({ storey: st, room: x.id, name: String(x.n || x.id), group: grp, area_m2: +A.toFixed(1), load, why: [byLoad ? `load ${load} > 60` : null, byArea ? `${Math.round(A)} m² > ${EGB[grp]} m² (Group ${grp})` : null].filter(Boolean).join('; '),
+        doors: ds.length, apart_m: ds.length >= 2 ? +best.toFixed(2) : null, need_m: +need.toFixed(2), status, ok: status !== 'fail', pair: pair && pair.map(d => [d[3], d[4]]), basis: EGBASIS });
+    }
+    return out;
+  }
+
+  const api = { tReach, deadEnds, tWidth, egressDoors, inferKind, kindOf, circleFits, maxSquare, judge, TIGHT, DEAD_LIMIT };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (root) { root.BD = root.BD || {}; root.BD.treach = api; }
 })(typeof window !== 'undefined' ? window : null);

@@ -34462,6 +34462,15 @@
      "where": "docs/retrieval_guide.md N4, N4b; tool/make_tiles.py",
      "what": "dataset ids, receipt date and the fields the tool keeps; licence as the City portal (read 8 Nov for edm_3dBuildings)"
     }
+   ],
+   "rule_codeLevel": [
+    {
+     "check": 1,
+     "by": "Code",
+     "date": "9 Nov 2026",
+     "where": "Claude Link CODE_LEVEL_RULE_2026-11-09.md",
+     "what": "read whole"
+    }
    ]
   },
   "check_log_note": "check_log: CHECK 1 = first read (Claude, overnight pass 29 Oct 2026); CHECK 2 = independent agent re-read the same evening. 'confirmed' = both reads agree. 'fixed at check 2' = the second reader found a difference and the entry was corrected to the source wording it quoted: that new wording has one read, so it is the place for any third look. Items still marked '?' stay open. Back-fill (30 Oct 2026): sources read before per-source logging began (16 Oct) have a check-1 entry pointing to the research note that records them; sources with no trace in any note were re-read as check 1.",
@@ -47346,10 +47355,11 @@
    "inputs": [
     "hub_layout"
    ],
-   "coef": "fail on the spec width table and Part 3; other widths are notes (J.B. 8 Nov)",
+   "coef": "fail on the spec width table and Part 3; other widths are notes (J.B. 8 Nov); within 0.5 m of the limit: 'tight: check in design', not a fail (J.B. 9 Nov)",
    "sources": [
     "rule_roomMinimums",
-    "vbbl25_3831x"
+    "vbbl25_3831x",
+    "rule_codeLevel"
    ],
    "conf": 20,
    "status": "in hand (rows range from code, 90, to judgment, 20)"
@@ -47379,10 +47389,11 @@
    "inputs": [
     "hub_layout"
    ],
-   "coef": "6 m; strict reading (J.B. 8 Nov)",
+   "coef": "6 m; strict reading (J.B. 8 Nov); within 0.5 m of the limit: 'tight: check in design', not a fail (J.B. 9 Nov)",
    "sources": [
     "vbbl25_3319",
-    "nbcAB2023"
+    "nbcAB2023",
+    "rule_codeLevel"
    ],
    "conf": 90,
    "status": "in hand"
@@ -47414,10 +47425,11 @@
    "inputs": [
     "hub_layout"
    ],
-   "coef": "45 m, sprinklered throughout",
+   "coef": "45 m, sprinklered throughout; within 0.5 m of the limit: 'tight: check in design', not a fail (J.B. 9 Nov)",
    "sources": [
     "vbbl25_3425",
-    "nbcAB2023"
+    "nbcAB2023",
+    "rule_codeLevel"
    ],
    "conf": 90,
    "status": "in hand"
@@ -47431,11 +47443,12 @@
    "inputs": [
     "hub_layout"
    ],
-   "coef": "door to door as a stand-in (spec)",
+   "coef": "door to door as a stand-in (spec); within 0.5 m of the limit: 'tight: check in design', not a fail (J.B. 9 Nov)",
    "sources": [
     "vbbl25_3423",
     "arch_sec_nbcExits",
-    "nbcAB2023"
+    "nbcAB2023",
+    "rule_codeLevel"
    ],
    "conf": 90,
    "status": "in hand"
@@ -47473,10 +47486,11 @@
     "hub_layout",
     "envelope"
    ],
-   "coef": "Z&D s. 2 base surface (our reading: existing grades where official grades are not on file)",
+   "coef": "Z&D s. 2 base surface (our reading: existing grades where official grades are not on file); within 0.5 m of the limit: 'tight: check in design', not a fail (J.B. 9 Nov)",
    "sources": [
     "van3575s2",
-    "van_lidar2022_ground"
+    "van_lidar2022_ground",
+    "rule_codeLevel"
    ],
    "conf": 60,
    "status": "in hand (Vancouver; Edmonton '?')"
@@ -47500,6 +47514,24 @@
    ],
    "conf": 60,
    "status": "in hand (Vancouver; Edmonton '?')"
+  },
+  {
+   "id": "egress_doorways",
+   "name": "Two egress doorways from large rooms",
+   "stage": "test",
+   "unit": "doors, m apart vs m needed",
+   "formula": "a room with an occupant load over 60, or larger than Table 3.3.1.5.-B (sprinklered: Group A 200 m², D 300 m², F-2 200 m²), has 2 egress doorways at least 1/3 of its maximum overall diagonal apart, door to door (tool/treach.js egressDoors; tool/hub.js adds the second door)",
+   "inputs": [
+    "hub_layout"
+   ],
+   "coef": "load: refuge, shelter and waiting rooms area ÷ 0.75 m² (spec Part 1), clinic rooms ÷ 9.3 m²; within 0.5 m: tight (J.B. 9 Nov)",
+   "sources": [
+    "vbbl25_3315",
+    "vbbl25_31171",
+    "rule_codeLevel"
+   ],
+   "conf": 90,
+   "status": "in hand (9 Nov 2026, J.B.'s answer 2)"
   }
  ],
  "conditions": [
@@ -51701,7 +51733,7 @@
   "edm_dc_major": "GUIDANCE (government web page): City of Edmonton, \"Data Centre Development\", https://www.edmonton.ca/business_economy/economic_investment/data-centre-development, saved by J.B. as PDF 8 Nov 2026 (9:05 am; Downloads \"Data Centre Development _ City of Edmonton.pdf\"): \"Large-scale data centres are considered a Major Industrial Use in Edmonton's Zoning Bylaw and would only be allowed in areas designated for these uses. An applicant would be required to apply for a rezoning and, in some cases, a land use plan amendment ... to build a large-scale data centre in an area that doesn't currently allow major industrial uses.\" Quote as read by Cowork (Claude Link edmonton_data_centre_use_class_2026-11-08.md); Code could not read the PDF text layer. No size threshold is given. Decision (J.B., 8 Nov 2026): every data centre in Edmonton is treated as Major Industrial. With Zoning Bylaw 20001 (J.B.'s copy, read 8 Nov 2026): Major Industrial permitted in IH s. 2.140 2.1 and EETC s. 3.52 2.1; IM s. 2.130 2.3 only those existing on 1 Jan 2024 (new = rezoning); not listed in BE s. 2.120, EETB, EETL, EETM, EETIM, EIB, EIM, FD s. 2.240 (rezoning). Trust 80 (government guidance, not bylaw text). ‖ 8 Nov 2026 (register_additions): same page (proposed id edm_dcPage). Trust 80 (City guidance, not bylaw). ‖ 8 Nov 2026 (zone search): Code searched the whole Bylaw 20001 text (J.B.'s copy): Major Industrial is permitted only in IH (2.140, 2.1) and EETC (3.52, 2.1); IM only where existing on 1 Jan 2024 (2.130, 2.3); FD (2.240) and all other standard and special-area zones do not list it; Direct Control zones are site by site (?). J.B. 8 Nov 2026: keep EETC; the rule is wherever Major Industrial is permitted.",
   "vbbl25_3423": "RULE: Vancouver Building By-law 2025, vol. 1, Div. B 3.4.2.3.(1)-(5): exits apart at least the lesser of half the diagonal and 9 m where served by a public corridor, the greater of half the diagonal and 9 m otherwise; the smoke-travel measure; an exterior stair discharges at least 9 m away (6 m sprinklered, within 15 m of a street). Read once by Cowork from J.B.'s PDF of the Vancouver Building By-law 2025 (Claude Link register_additions_2026-11-08.md); no second check. Trust 90. ‖ 8 Nov 2026 (check 2, Code): PDF p. 296: (1)(a) and (b) read as above (half the maximum diagonal, need not be more than 9 m with a public corridor; not less than 9 m otherwise); (3) the distance is the shortest path smoke would travel, not through an intervening fire separation; (4) exterior discharges 9 m, or 6 m sprinklered and within 15 m of a street. Left out by the first read: (2) Sentence (1) need not apply where at least one third of the floor area is on each side of a fire separation that must be passed to go from one exit to the other.",
   "vbbl25_3315": "RULE: Vancouver Building By-law 2025, Div. B 3.3.1.5.(1)(b), (2): a room for more than 60 people needs 2 egress doorways, at least one third of the diagonal apart. Read once by Cowork from J.B.'s PDF of the Vancouver Building By-law 2025 (Claude Link register_additions_2026-11-08.md); no second check. Trust 90. Spec, not live yet (refuge; Emergency hub spec). ‖ 8 Nov 2026 (check 2, Code): PDF p. 267: (1)(b) and (2) read as above (2 egress doorways, at least one third of the maximum overall diagonal apart, measured as smoke would travel). Left out by the first read: (1)(d) in a floor area sprinklered throughout (no high-hazard industrial occupancy), 2 egress doorways are also needed where travel to an egress doorway is more than 25 m or the room or suite is larger than Table 3.3.1.5.-B: Group A 200 m2, B-1 100, C 150, D 300, E 200, F-2 200, F-3 300. So the data hall (F-2) and any refuge room over 200 m2 (A) need 2 doorways whatever their load.",
-  "vbbl25_3722B": "RULE: Vancouver Building By-law 2025, Div. B Table 3.7.2.2.-B and 3.7.2.2.(15): water closets for business and personal services; two universal (unisex) rooms for a floor area up to 200 m2 and up to 60 people. Read once by Cowork from J.B.'s PDF of the Vancouver Building By-law 2025 (Claude Link register_additions_2026-11-08.md); no second check. Trust 90. Spec, not live yet (clinic). ‖ 8 Nov 2026 (check 2, Code): PDF p. 327: Table 3.7.2.2.-B rows are 'Number of Persons of Each Sex': 1–25: 1; 26–50: 2; over 50: '3, plus 1 for each additional increment of 50 persons of each sex in excess of 50'. 3.7.2.2.(1): the occupant load is taken as equally divided between the sexes. (2): one WC may serve both sexes where the load is 25 or fewer. (15) in full: two unisex toilet rooms may serve an assembly, business and personal services, mercantile or industrial occupancy where the suite is at most 200 m2, the load at most 60, each room has one WC and one lavatory, and one complies with 3.8.3.13. (16): three unisex rooms for 61–100 persons in an assembly occupancy. Finding: the tool and Part 7 apply Table B to the clinic's total head count, not to each sex (conservative; J.B. to decide).",
+  "vbbl25_3722B": "RULE: Vancouver Building By-law 2025, Div. B Table 3.7.2.2.-B and 3.7.2.2.(15): water closets for business and personal services; two universal (unisex) rooms for a floor area up to 200 m2 and up to 60 people. Read once by Cowork from J.B.'s PDF of the Vancouver Building By-law 2025 (Claude Link register_additions_2026-11-08.md); no second check. Trust 90. Spec, not live yet (clinic). ‖ 8 Nov 2026 (check 2, Code): PDF p. 327: Table 3.7.2.2.-B rows are 'Number of Persons of Each Sex': 1–25: 1; 26–50: 2; over 50: '3, plus 1 for each additional increment of 50 persons of each sex in excess of 50'. 3.7.2.2.(1): the occupant load is taken as equally divided between the sexes. (2): one WC may serve both sexes where the load is 25 or fewer. (15) in full: two unisex toilet rooms may serve an assembly, business and personal services, mercantile or industrial occupancy where the suite is at most 200 m2, the load at most 60, each room has one WC and one lavatory, and one complies with 3.8.3.13. (16): three unisex rooms for 61–100 persons in an assembly occupancy. Finding: the tool and Part 7 apply Table B to the clinic's total head count, not to each sex (conservative; J.B. to decide). ‖ 9 Nov 2026 (J.B.): applied per sex with the load split equally (3.7.2.2.(1)), a partial increment counts: tool/hub.js wcBload.",
   "vbbl25_3835": "RULE: Vancouver Building By-law 2025, Div. B 3.8.3.5.(1): ramps at most 1:12, at least 1,000 mm wide, level areas 1,700 mm, a landing at most every 9 m. Read once by Cowork from J.B.'s PDF of the Vancouver Building By-law 2025 (Claude Link register_additions_2026-11-08.md); no second check. Trust 90. Spec, not live yet (step-free entrances). ‖ 8 Nov 2026 (check 2, Code): PDF p. 338: 3.8.3.5.(1) read as above: clear width at least 1 000 mm, uniform slope not more than 1 in 12, level areas at least 1 700 x 1 700 mm at the top and bottom and at doors (latch-side extension 600 / 300 mm); intermediate level areas at least 1 350 mm long every 9 m and at abrupt turns; handrails 865–965 mm high; guards. (4) cross slope at most 1 in 50.",
   "vbbl25_3831x": "RULE: Vancouver Building By-law 2025, Div. B 3.8.3.12, 3.8.3.13, 3.8.3.16, 3.8.3.17: accessible water-closet stall, universal washroom, lavatory and shower dimensions. Read once by Cowork from J.B.'s PDF of the Vancouver Building By-law 2025 (Claude Link register_additions_2026-11-08.md); no second check. Trust 90. Spec, not live yet (room minimums).",
   "wsbc_firstAid": "GUIDANCE (regulator web page): WorkSafeBC, 'First aid facilities': a first aid room at least 9.3 m2; a dressing station 4.2 m2 (worded 'should'). Read once by Cowork on the web (Claude Link register_additions_2026-11-08.md). Trust 80 (regulator guidance). Spec, not live yet (room minimums).",
@@ -51721,7 +51753,8 @@
   "vanZoningLayer": "City of Vancouver Open Data: the zoning district of every parcel (property tax report field zoning_district, vanTax, joined to the property parcel polygons), dissolved by zone in tool/make_tiles.py into the zone areas the tool draws (tool/tiles/van/meta.json, overview zones). 2026 exports on J.B.'s computer. Licence: Open Government Licence – Vancouver v1.0 (attribution). Zone areas are the parcels' areas, so streets and lanes are not counted (our reading of 'zoned area'). Trust 80.",
   "spec_emergencyHub": "DECISION (J.B., 8 Nov 2026): Claude Link eh/specs/emergency_hub.md, parts 1–3 final (program, variants, layout rules 1–15, the T-reach test 15d, the fallback ladder, the hub cap) and her F2 answers of 8 Nov (Code's F2_plan_from_code.md). A decision, not a source: no trust rating (n/a). Each figure in it cites its own code, bylaw or maker source, registered separately.",
   "vbbl25_31171": "RULE: Vancouver Building By-law 2025, vol. 1, Div. B 3.1.17.1 and Table 3.1.17.1 (PDF pp. 174–175): occupant load = the number of persons the area is designed for, but not less than the table, unless it can be shown the area will hold fewer (then a permanent posted sign, (2)); rooms used for different occupancies at different times take the value giving the most persons ((4)). Areas per person: assembly space with non-fixed seats 0.75 m2, non-fixed seats and tables 0.95, standing 0.40, dining 1.20; dormitories 4.60; personal services shops 4.60; offices 9.30; care, treatment and sleeping room areas 10.00; kitchens 9.30; storage 46.00. First read by Cowork (Claude Link register_additions_2026-11-08.md, row vbbl25_31171; not added to the register then); second check by Code from J.B.'s copy, 8 Nov 2026. Trust 90.",
-  "edmPropInfo2026": "City of Edmonton Open Data, Property Information (Current Calendar Year), https://data.edmonton.ca/d/dkk9-cj3x, full export received 13 Oct 2026 (439,696 accounts as points; docs/retrieval_guide.md N4), joined on account number with Property Assessment Data (Current Calendar Year), q7d6-ambg (N4b): data/edmonton_properties_2026.csv (raw data, not in git). The tool's Edmonton lot points, addresses and zones (tool/make_tiles.py) and the Edmonton lot counts in tool/data/approval_counts.json. Licence: Open Government Licence – Edmonton v1.0 (as edm_3dBuildings). Trust 80."
+  "edmPropInfo2026": "City of Edmonton Open Data, Property Information (Current Calendar Year), https://data.edmonton.ca/d/dkk9-cj3x, full export received 13 Oct 2026 (439,696 accounts as points; docs/retrieval_guide.md N4), joined on account number with Property Assessment Data (Current Calendar Year), q7d6-ambg (N4b): data/edmonton_properties_2026.csv (raw data, not in git). The tool's Edmonton lot points, addresses and zones (tool/make_tiles.py) and the Edmonton lot counts in tool/data/approval_counts.json. Licence: Open Government Licence – Edmonton v1.0 (as edm_3dBuildings). Trust 80.",
+  "rule_codeLevel": "DECISION (J.B., 9 Nov 2026): Claude Link CODE_LEVEL_RULE_2026-11-09.md, how far the code checks go. Check the big moves: use and approval; envelope (height, floor area, yards, depth, flood construction level); separations (2 h between data centre and public programs, nothing wet over the hall); exits (two per zone, travel 45 m, exits apart, dead ends 6 m, egress doors for rooms over 60 people, exit width by load, no public exits through data-centre space or plant yards); room minimum area and width; washroom counts by load (VBBL 3.7.2.2) and one universal washroom per hub; loading counts; plant clearances; step-free entry. Not checked (detailed design): fixture layouts, accessible stalls, door swings, grab bars, edge-vs-centre measurement and other sub-0.5 m refinements, finishes, hardware, signage, lighting, intake and exhaust placement. Tolerance: a result within 0.5 m (or 5 %) of a limit is 'tight: check in design', not re-planned; re-plan only when a big-move rule fails by more. A decision, not a source: no trust rating (n/a)."
  },
  "old_sources": {
   "abgas": "Alberta DERS gas Oct 2026 $1.458/GJ (UCA default rates, ATCO Gas area); ATCO Gas North Mid Use variable delivery $1.045/GJ (ATCO Gas North Rate Schedules, p. 11, eff. 1 Jan 2026; riders T $1.289/GJ and L $0.087/GJ not included) → (1.045 + 1.458) × 3.6 ÷ 0.85 boiler efficiency ≈ $10.6/MWh heat at the October rate (our arithmetic; the tool uses the 12-month mean commodity, ≈ $13/MWh) — https://www.ucahelps.alberta.ca/regulated-rates.aspx ; https://gas.atco.com/content/dam/web/for-home/natural-gas/natural-gas-north-rate-schedule.pdf",
