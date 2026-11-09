@@ -37,7 +37,7 @@ function capRow(c){ let v='';
 function pageHtml(id){ const t=T.list.find(x=>x.id===id), P=T.pages[id]; if(!t||!P) return libHtml();
   return `<div class="f1t-wrap"><button class="f1t-back" data-lib>← All typologies</button>
   <section class="f1t-top"><div><h1>${esc(t.name)}</h1><p class="f1t-st">${chip(t.status)} ${esc(t.statusNote)}</p><p class="f1t-lead">${esc(t.lead)}</p>
-    <div class="f1t-acts"><button class="f1-btn" data-try>Try it on a lot →</button><button class="f1-link" data-logic>Logic diagram →</button><button class="f1-link" disabled title="The spec is in J.B.'s Claude Link folder; not published with the tool yet (?)">Read the spec (not published yet ?)</button></div></div>${models(t)}</section>
+    <div class="f1t-acts"><button class="f1-btn" data-try>Try it on a lot →</button><button class="f1-link" data-logic>Logic diagram →</button><button class="f1-link" data-spec="${esc(t.id)}">Read the spec →</button></div></div>${models(t)}</section>
   <section><div class="f1t-h"><h2>Capacities</h2><span>ranges, each with its source</span></div><table class="f1t-cap"><tbody>${P.capacities.map(capRow).join('')}</tbody></table></section>
   <section><div class="f1t-h"><h2>Variants</h2><span>each opens its schematic floor plans on its test lot</span></div><div class="f1t-vars">${P.variants.map(v=>`<article class="f1t-var"><h3>${esc(v.name)}</h3><p>${esc(v.trigger)}</p>
     <dl><dt>test lot</dt><dd>${esc(v.lot)}</dd><dt>data centre</dt><dd>${n2(v.mw)} MW</dd><dt>status</dt><dd>${esc(v.status)}</dd></dl>
@@ -63,14 +63,45 @@ async function planHtml(fit,name){ const F=await fetch('f1/eh_fits/'+fit+'.json'
    <div class="f1t-plans">${sts.join('')}</div>
    <table class="f1t-sched"><thead><tr><th>No.</th><th>Storey</th><th>Room</th><th>m²</th></tr></thead><tbody>${sched.map(r=>`<tr><td>${r[0]}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td>${n0(r[3])}</td></tr>`).join('')}</tbody></table></div>`; }
 
+/* the typology spec, published with the tool (J.B., 9 Nov 2026): tool/f1/specs/<id>.md, a verbatim copy of Cowork's spec, rendered here.
+   Small Markdown reader: headings, tables, nested lists (numbers kept as written), paragraphs, bold, struck-through, code, rules. */
+function inl(s){ return esc(s).replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/~~([^~]+)~~/g,'<s>$1</s>'); }
+function md(src){ const L=src.replace(/\r/g,'').split('\n'); let h='', par=[], st=[], i=0;
+  const flush=()=>{ if(par.length){ h+=`<p>${inl(par.join(' '))}</p>`; par=[]; } };
+  const closeTo=n=>{ while(st.length>n){ const t=st.pop(); h+=`</li></${t.t}>`; } };
+  const cells=r=>r.trim().replace(/^\||\|$/g,'').split('|').map(c=>c.trim());
+  while(i<L.length){ const l=L[i], t=l.trim(), ind=l.length-l.trimStart().length;
+    if(!t){ flush(); i++; continue; }
+    if(t.startsWith('|')){ flush(); closeTo(0); const rows=[]; while(i<L.length&&L[i].trim().startsWith('|')) rows.push(L[i++]);
+      const head=cells(rows[0]), body=rows.slice(rows[1]&&/^[\s|:-]+$/.test(rows[1])?2:1);
+      h+=`<div class="f1t-tw"><table><thead><tr>${head.map(c=>`<th>${inl(c)}</th>`).join('')}</tr></thead><tbody>${body.map(r=>`<tr>${cells(r).map(c=>`<td>${inl(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`; continue; }
+    let m=t.match(/^(#{1,4})\s+(.*)$/); if(m){ flush(); closeTo(0); const n=Math.min(m[1].length+1,5); h+=`<h${n}>${inl(m[2])}</h${n}>`; i++; continue; }
+    if(/^---+$/.test(t)){ flush(); closeTo(0); h+='<hr>'; i++; continue; }
+    m=t.match(/^(\d+)\.\s+(.*)$/)||t.match(/^-\s+(.*)$/);
+    if(m){ flush(); const ty=/^\d/.test(t)?'ol':'ul', txt=ty==='ol'?m[2]:m[1];
+      while(st.length&&st[st.length-1].i>ind) closeTo(st.length-1);
+      const top=st[st.length-1];
+      if(top&&top.i===ind&&top.t!==ty) closeTo(st.length-1);
+      const tp=st[st.length-1];
+      if(tp&&tp.i===ind) h+='</li>'; else { h+=`<${ty}>`; st.push({t:ty,i:ind}); }
+      h+=`<li${ty==='ol'?` value="${m[1]}"`:''}>${inl(txt)}`; i++; continue; }
+    if(st.length&&ind>0){ flush(); h+=`<p>${inl(t)}</p>`; i++; continue; }
+    closeTo(0); par.push(t); i++; }
+  flush(); closeTo(0); return h; }
+async function specHtml(id){ const t=T.list.find(x=>x.id===id); const src=await fetch('f1/specs/'+id+'.md').then(r=>r.ok?r.text():'');
+  return `<div class="f1t-wrap"><button class="f1t-back" data-typ="${esc(id)}">← ${esc(t?t.name:'Typology')}</button>
+   <p class="f1t-q" style="max-width:980px">The typology spec as Cowork wrote it, published with the tool by J.B.’s decision (9 Nov 2026); copied unchanged from her working folder. Source ids are register entries (Logic diagram). File paths (eh/…, checks/…) are working files, not on this site; the Edmonton hand fits’ plans are not published (licensed lot lines).</p>
+   <article class="f1t-spec">${src?md(src):'<p>The spec file is missing.</p>'}</article></div>`; }
+
 async function draw(){ const W=document.getElementById('f1t'); if(!W) return; await load();
-  const body=S.page==='lib'?libHtml():S.page.startsWith('fit:')?await planHtml(S.page.split(':')[1],S.name||''):pageHtml(S.page);
+  const body=S.page==='lib'?libHtml():S.page.startsWith('fit:')?await planHtml(S.page.split(':')[1],S.name||''):S.page.startsWith('spec:')?await specHtml(S.page.slice(5)):pageHtml(S.page);
   W.innerHTML=`<header class="f1v-head"><a class="f1-app" href="#" data-close="home">Beyond Data</a><span class="tpl">Typologies</span><span class="f1v-where"></span><button class="f1v-x" data-close>Close</button></header><div class="f1t-main">${body}</div>`;
   W.querySelector('.f1t-main').scrollTop=0; }
 async function open(page,name){ let W=document.getElementById('f1t'); if(!W){ W=document.createElement('div'); W.id='f1t'; W.setAttribute('role','dialog'); W.setAttribute('aria-modal','true'); document.body.appendChild(W);
     W.addEventListener('click',e=>{ const b=e.target.closest('button,a'); if(!b) return; const d=b.dataset;
       if(d.close!=null){ e.preventDefault(); W.remove(); return; }
       if(d.lib!=null){ S.page='lib'; draw(); return; } if(d.typ){ S.page=d.typ; draw(); return; }
+      if(d.spec){ S.page='spec:'+d.spec; draw(); return; }
       if(d.fit){ S.page='fit:'+d.fit; S.name=d.name; draw(); return; }
       if(d.logic!=null){ if(BD.f1logic) BD.f1logic.open({tab:'arch',label:'Emergency hub',ids:['hub_layout','t_reach','dead_ends','room_widths','egress_doorways','travel_distance','exit_separation','fire_separations','plant_clearances','building_height','step_free_entry']}); return; }
       if(d.try!=null||d.edm!=null){ W.remove(); if(BD.arch) BD.arch.typology='emergency_hub'; BD.f1.viewer('architecture');   /* the library holds one typology: the Emergency hub is the one drawn */

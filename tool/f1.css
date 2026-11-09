@@ -257,5 +257,10 @@
 .f1t-key{display:flex;gap:18px;flex-wrap:wrap;font-size:var(--f-t-note);color:var(--f-ink2);margin:12px 0} .f1t-key i{display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-2px}
 .f1t-plans{display:flex;flex-wrap:wrap;gap:28px} .f1t-plan{margin:0} .f1t-plan figcaption{font-size:12px;font-weight:500;margin-bottom:6px} .f1t-plan svg{max-width:100%;height:auto;display:block}
 .f1t-sched{border-collapse:collapse;margin-top:20px;font-size:12px;min-width:420px} .f1t-sched th,.f1t-sched td{text-align:left;padding:4px 18px 4px 0;border-bottom:1px solid var(--f-hair)} .f1t-sched th{font-weight:500;color:var(--f-mute)} .f1t-sched td:last-child{text-align:right}
+.f1t-spec{max-width:980px;font-size:13.5px;line-height:1.55;color:var(--f-ink)}
+.f1t-spec h2{font-size:var(--f-t-title);font-weight:300;margin:8px 0 12px} .f1t-spec h3{font-size:var(--f-t-section);font-weight:500;margin:32px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--f-hair)} .f1t-spec h4{font-size:14px;font-weight:500;margin:22px 0 8px}
+.f1t-spec p{margin:0 0 10px} .f1t-spec ul,.f1t-spec ol{margin:0 0 12px;padding-left:22px} .f1t-spec li{margin-bottom:5px} .f1t-spec li>ul,.f1t-spec li>ol{margin:5px 0 0}
+.f1t-spec code{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--f-ink2)} .f1t-spec s{color:var(--f-faint)} .f1t-spec hr{border:0;border-top:1px solid var(--f-hair);margin:28px 0}
+.f1t-tw{overflow-x:auto;margin:6px 0 16px} .f1t-tw table{border-collapse:collapse;font-size:12px;min-width:560px} .f1t-tw th,.f1t-tw td{text-align:left;vertical-align:top;padding:6px 12px 6px 0;border-bottom:1px solid var(--f-hair)} .f1t-tw th{font-weight:500;color:var(--f-mute)}
 @media (max-width:900px){.f1t-grid,.f1t-vars{grid-template-columns:repeat(2,minmax(0,1fr))}.f1t-top{grid-template-columns:1fr}.f1t-wrap{padding:24px 16px 48px}}
 @media (max-width:560px){.f1t-grid,.f1t-vars{grid-template-columns:1fr}.f1t-cap th,.f1t-cap td{display:block;width:auto;padding:4px 0}.f1t-cap tr{display:block;padding:10px 0;border-bottom:1px solid var(--f-hair)}.f1t-cap th,.f1t-cap td{border:0}.f1t-cap td:nth-child(2),.f1t-cap th{width:auto}}
