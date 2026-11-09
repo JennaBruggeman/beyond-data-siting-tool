@@ -95,10 +95,19 @@ const PLANC={};
 const SG={}; async function sgReady(x){ if(!(x.city in SG)) SG[x.city]=BD.streets?await BD.streets(x.city):null; }
 const SNCAP=' · other street names: named from fronting lot addresses (our method)';
 const SNSRC='Street names: Vancouver, the City’s Public streets file (HBLOCK, block range dropped; vanStreets2026); where it has none, and in Edmonton, a lot on one street takes it from its own address; other streets, and every street of a corner lot, are named from fronting lot addresses (our method: tool/streetnames.js; only lots on one street vote; a segment takes the street most of them (at least 2) are addressed on; otherwise, and for lanes, “street name ?”). The City street files hold no names.';
+/* F2 (8 Nov 2026): the Emergency hub's own layout (tool/hub.js, rule sheet v1) replaces plan.js v0.1 when the typology is the Emergency hub
+   (the cards' example: Arrange with the hub's programs); plan.js stays for other typologies */
+const hubOn=P=>!!(BD.hub&&P&&(P.boxes||[]).some(b=>b.id==='refuge')&&(!BD.arch||!BD.arch.typology||BD.arch.typology==='emergency_hub'));
+const PLC=new WeakMap();
+function planOf(P){ if(!P) return null; if(PLC.has(P)) return PLC.get(P); const v=hubOn(P)?BD.hub.build(P):(BD.plan?BD.plan.build(P):null); PLC.set(P,v); return v; }
+const tLine=H=>{ if(!H||!H.treach) return null; const T=H.treach, de=T.dead.filter(c=>!c.ok), wf=T.width.rows.filter(r=>r.sev==='fail');
+  return {reach:T.reach.length?T.reach.map(o=>`${o.rule} storey ${o.storey} ${o.room}: ${o.reason}`).join('; '):'PASS',
+    dead:de.length?de.map(c=>`storey ${c.storey} ${c.corridor} ${c.deadEnd_m==null?'no exit':c.deadEnd_m+' m'}`).join('; '):`PASS (worst ${Math.max(0,...T.dead.map(c=>c.deadEnd_m||0)).toFixed(1)} m ≤ 6 m)`,
+    width:wf.length?wf.map(r=>`storey ${r.storey} ${r.name}: ${r.what}`).join('; '):`PASS (${T.width.rows.length} notes)`}; };
 function planFor(x,P){
   const key=[x.city,(BD.S.sel||{}).id,P.s.dir,JSON.stringify([P.hall.u,P.hall.v,P.hall.base,P.hall.storeys,P.hall.h]),JSON.stringify((P.boxes||[]).map(b=>[b.id,b.u,b.v,b.base,b.storeys,b.h,b.front])),(P.s.M.ring||[]).slice(0,4).join(',')].join('|');
   if(PLANC.k===key&&PLANC.v) return PLANC.v;
-  const A=BD.archTest, PL=BD.plan&&BD.plan.build(P); if(!PL||!PL.storeys.length) return null;
+  const A=BD.archTest, PL=planOf(P); if(!PL||!PL.storeys.length) return null;
   const g=geo(P), M=g.M, zs=PL.storeys.map(s=>s.z);
   let b=[1e9,-1e9,1e9,-1e9]; PL.storeys.forEach(S=>S.rooms.forEach(r=>{ if(r.rect) b=[Math.min(b[0],r.rect[0]),Math.max(b[1],r.rect[1]),Math.min(b[2],r.rect[2]),Math.max(b[3],r.rect[3])]; }));
   const mg=5, mp=mapper(g,[b[0]-mg,b[1]+mg,b[2]-mg,b[3]+mg],440,12), LW=240, W=mp.W+2*LW, ox=LW;
@@ -113,8 +122,8 @@ function planFor(x,P){
   const stor=PL.storeys.map((S,i)=>{
     const rooms=[], by=new Map();
     S.rooms.forEach(r=>{ const k=r.block+'|'+r.id; let o=by.get(k); if(!o){ o={k,block:r.block,id:r.id,name:r.name,m2:0,parts:[]}; by.set(k,o); rooms.push(o); } o.m2+=r.m2||0; if(r.rect) o.parts.push(r); });
-    const thr=new Map(S.doors.filter(d=>d.through).map(d=>[d.room,d.to])), hasD=new Set(S.doors.map(d=>d.room).filter(Boolean)), noCorr=S.corridors.length===0;
-    rooms.forEach((o,j)=>{ o.n=j+1; o.drawn=o.parts.length>0; o.sourced=o.block==='data centre'?srcd.has(o.id):!!progSrc[o.id];
+    const thr=new Map(S.doors.filter(d=>d.through).map(d=>[d.room,d.to])), hasD=new Set((PL.hub?S.doors.flatMap(d=>[d.room,d.to]).concat(S.exits.map(e=>e.via)):S.doors.map(d=>d.room)).filter(Boolean)), noCorr=S.corridors.length===0&&!PL.hub;
+    rooms.forEach((o,j)=>{ o.n=j+1; o.drawn=o.parts.length>0; o.sourced=PL.hub?!!(o.parts[0]&&o.parts[0].min&&o.parts[0].min.step<6):o.block==='data centre'?srcd.has(o.id):!!progSrc[o.id];
       o.flag=o.block==='data centre'?(thr.has(o.id)?'through':(o.drawn&&!hasD.has(o.id)?'noway':null)):(noCorr?'nocorr':null);
       if(o.flag==='through'){ const t=rooms.find(q=>q.id===thr.get(o.id)&&q.block==='data centre'); o.via=t?short(t.name):'another room'; } });
     nRooms+=rooms.length; nNoAcc+=rooms.filter(o=>o.flag).length; if(noCorr) nNoCorr++;
@@ -155,7 +164,7 @@ const stTitle=(pl,st)=>{ const blocks=[]; st.rooms.forEach(o=>{ const b=o.block=
 
 /* ======================= 14 Rooms ======================= */
 C.add(T,'Rooms',{chip:CHIP,async build(x){
-  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; await sgReady(x); const pl=BD.plan&&planFor(x,P); if(!pl) return {draw:'<p class="f1v-empty">The tool has no plan for this lot (no layout placed).</p>'};
+  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; await sgReady(x); const pl=planFor(x,P); if(!pl) return {draw:'<p class="f1v-empty">The tool has no plan for this lot (no layout placed).</p>'};
   const {PL,mp,zs,stor}=pl; let nDoors=0, nExit=0; const roomRows=[];
   let groups='', titles='', sched='';
   stor.forEach(st=>{ const S=st.S; groups+=`<g data-z="${st.z}" style="${st.i?'display:none':''}">${pl.layer(st,'color')}</g>`; titles+=stTitle(pl,st);
@@ -169,6 +178,21 @@ C.add(T,'Rooms',{chip:CHIP,async build(x){
   const mw=P.ratio&&P.ratio.mwTest, hallM2=pl.DP?pl.DP.L.pieces.filter(q=>q.id==='hall').reduce((t,q)=>t+q.m2,0):null, dock=pl.DP&&pl.DP.L.dock;
   const meters=PL.programs.filter(p=>p.storeys>1).map(p=>({l:short(p.name)+', floor after stairs and lift',v:p.net,lim:p.asked,max:p.asked*1.15,unit:'m²',pass:p.short<=0.5,cap:`${n0(p.net)} of ${n0(p.asked)} m² · needed ${n0(p.asked)} m²`,src:'plan.js net floor'}));
   const tbl=zs.map(z=>{ const rr=roomRows.filter(r=>r[0]===z); return `<tr><th colspan="2">${storeyLabel(z)} storey</th></tr>`+rr.map(r=>`<tr><td>${esc(r[1])}</td><td>${n0(r[2])} m²</td></tr>`).join(''); }).join('');
+  const HB=PL.hub, TL=tLine(HB);
+  if(HB&&HB.rooms){ const lob=pl.stor[0].rooms.find(o=>o.id==='lob'), ppl=Math.floor(pl.stor[0].rooms.filter(o=>/^ref/.test(o.id)).reduce((t,o)=>t+o.m2,0)/3.5);
+    const hubRows=[['Variant',`${HB.variant.main}${HB.variant.sideDrive?', side drive':''}${HB.variant.notBuilt.length?' · not built yet: '+HB.variant.notBuilt.join(', '):''}`],['Fallback ladder',`step ${HB.ladder.step}: ${HB.ladder.what}${HB.ladder.limiting.length?' · limiting: '+HB.ladder.limiting[HB.ladder.limiting.length-1].replace(/^step \d+ \([^)]*\): /,''):''}`],
+      ['Hall and MW',`${n0(HB.hall)} m² ÷ 630 m²/MW = ${HB.MW.toFixed(2)} MW · data centre ${n0(HB.dcArea)} m² (cap 2,325)`],['Refuge people',`${ppl} at 3.5 m² (minimum 50)`],['Clinic',HB.clin?`${n0(HB.clin)} m²`:'none'],
+      ['T-reach (rule 15d)',TL.reach],['Dead ends (VBBL 3.3.1.9.(5), 6 m)',TL.dead],['T-width (room widths)',TL.width],['Shared lobby',lob?`${n0(lob.m2)} m² (drawing choice; ≥ 20 m², spec 15c)`:C.q()]];
+    const cn=pl.counts, mins=pl.stor.flatMap(st=>st.rooms.filter(o=>o.parts[0]&&o.parts[0].min).map(o=>{ const m=o.parts[0].min; return `<tr><td>${esc(storeyLabel(st.z))} · ${esc(o.name)}</td><td>${n0(o.m2)} m² · min ${m.m2!=null?n0(m.m2)+' m²':'?'}${m.w!=null?', '+m.w+' m wide':''} · step ${m.step}${m.rank?' · rank '+m.rank:''}</td></tr>`; })).join('');
+    return {draw,lead:'One plan per storey from the Emergency hub rule sheet: bands from the street back, one outline per storey, the public and secure lines kept apart. Every room numbered, with a schedule under it.',
+      hero:[{v:HB.MW.toFixed(1),u:'MW',l:'one hall storey'},{v:String(cn.nRooms),l:'rooms on '+zs.length+' storeys'},{v:TL.reach==='PASS'?'PASS':'fail',l:'T-reach',red:TL.reach!=='PASS'},{v:String(HB.ladder.step),l:'ladder step'}],
+      rows:hubRows,meters:[],
+      more:[['T-reach, dead ends and room widths',`<p>T-reach: ${esc(TL.reach)}</p><p style="margin-top:6px">Dead ends: ${esc(TL.dead)}</p><p style="margin-top:6px">T-width: ${esc(TL.width)}</p><p style="margin-top:8px;color:${K.mute}">tool/treach.js (Cowork’s reach.py, deadend.py, audit_rooms.py), run on this layout.</p>`],
+        ['Room minimums: area, width, step, source',`<table class="${NS}tbl">${mins}</table><p style="margin-top:8px;color:${K.mute}">Steps (room minimums rule, J.B. 8 Nov): 1 code · 2 equipment and clearances · 3 guideline · 4 per-person rate × J.B.’s count · 5 precedent · 6 none (drawing choice).</p>`],
+        ['What the rule sheet chose',`<p>${Object.values(PL.rules).filter(r=>r&&r.why).map(r=>esc(r.why)).join('</p><p style="margin-top:6px">')}</p>`],
+        ['What the plan flags',`<p>${PL.flags.length?PL.flags.map(esc).join('</p><p style="margin-top:6px">'):'Nothing.'}</p>`]],
+      src:[C.CONTEXT_SRC(x.city),SNSRC,`Plan: ${PL.version} (tool/hub.js) from spec Claude Link/eh/specs/emergency_hub.md parts 1–3 (final) and the room minimums rule (8 Nov 2026). Every size is a code or spec figure, or a drawing choice named in the rule sheet.`,'Checks: tool/treach.js (T-reach, dead ends, T-width).'],
+      missing:['outdoor air intakes (rule 9, not drawn)','truck turning (not checked)','fire department access and FDC','exterior steps at exits where the yard is lower']}; }
   const cn=pl.counts, zk=String(x.zone||''), dockGrade=dock&&Math.abs(dock.base||0)<0.1&&(/^I-2/.test(zk)||zk==='I-3')?{why:`strict reading of ${zk==='I-3'?'I-3 s. 2.2.11':'I-2 s. 2.2.7'} allows only entrances; the Emergency hub spec settles it`}:null;
   const noAccList=stor.flatMap(st=>st.rooms.filter(o=>o.flag).map(o=>`${esc(o.name)} (${storeyLabel(st.z)}): ${o.flag==='through'?'opens through '+esc(o.via):o.flag==='noway'?'no way in':'storey has no corridor or shared lobby'}`));
   const unsrc=[...new Set(stor.flatMap(st=>st.rooms.filter(o=>!o.sourced).map(o=>short(o.name))))];
@@ -195,8 +219,26 @@ function gapStrip(a,b){ const du=Math.max(b[0]-a[1],a[0]-b[1]), dv=Math.max(b[2]
 const sepHours=(R,id)=>{ const r=R.find(q=>q.id===id&&/fire separation from the data centre/i.test(q.t)&&!/\?/.test(q.t.replace(/\(F-2\)/,''))), m=r&&/(\d+(?:\.\d+)?) h fire separation/.exec(r.t); return m?+m[1]:null; };
 
 C.add(T,'Separations',{chip:CHIP,async build(x){
-  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; await sgReady(x); const pl=BD.plan&&planFor(x,P); if(!pl) return {draw:'<p class="f1v-empty">The tool has no plan for this lot (no layout placed).</p>'};
+  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; await sgReady(x); const pl=planFor(x,P); if(!pl) return {draw:'<p class="f1v-empty">The tool has no plan for this lot (no layout placed).</p>'};
   const {mp,ox,zs,stor,pt,pr}=pl, R=BD.archTest.rules(P), f1=pl.f1;
+  if(pl.PL.hub&&pl.PL.hub.rooms){ /* hub: 2 h where data-centre rooms (F-2) share a wall with the hub (A-2), 1 h hub to clinic (A-2 to D); clinic beside F-2: none (VBBL Table 3.1.3.1, spec rule 8) */
+    const shE=(a,b)=>{ const e=0.03; if(Math.abs(a[1]-b[0])<e||Math.abs(a[0]-b[1])<e){ const at=Math.abs(a[1]-b[0])<e?a[1]:a[0], f=Math.max(a[2],b[2]), t=Math.min(a[3],b[3]); if(t-f>0.3) return [at,at,f,t]; }
+      if(Math.abs(a[3]-b[2])<e||Math.abs(a[2]-b[3])<e){ const at=Math.abs(a[3]-b[2])<e?a[3]:a[2], f=Math.max(a[0],b[0]), t=Math.min(a[1],b[1]); if(t-f>0.3) return [f,t,at,at]; } return null; };
+    const grp=o=>o.block==='data centre'?'F':o.block==='hub'?'A':o.block==='clinic'?'D':null, need={AF:2,FA:2,AD:1,DA:1};
+    let groups='', titles='', n2=0, n1h=0; const ln=(a,w,col)=>{ const p=pt(a[0],a[2]), q=pt(a[1],a[3]); return `<line x1="${f1(p[0])}" y1="${f1(p[1])}" x2="${f1(q[0])}" y2="${f1(q[1])}" stroke="${col}" stroke-width="${w}"/>`; };
+    stor.forEach(st=>{ let s=pl.layer(st,'grey'); const all=[...st.S.rooms,...st.S.corridors,...st.S.stairs,...st.S.lifts];
+      for(let i=0;i<all.length;i++) for(let j=i+1;j<all.length;j++){ const ga=grp(all[i]), gb=grp(all[j]), h=need[ga+gb]; if(!h) continue; const e=shE(all[i].rect,all[j].rect); if(!e) continue; s+=ln(e,h>=2?4:2,K.ink); if(h>=2) n2++; else n1h++; }
+      groups+=`<g data-z="${st.z}" style="${st.i?'display:none':''}">${s}</g>`; titles+=stTitle(pl,st); });
+    const HB=pl.PL.hub, over=HB.kind==='stacked'?'The hall storey sits over the clinic (D under F-2: none); no data-centre room sits over the hub (A-2) in this plan.':'One storey: no floor separations.';
+    const svg=planSvg(x,P,pl,'f1c-a15','Plan of each storey, greyed back, with the fire separations between the data centre, the hub and the clinic',groups);
+    const sepLine=(w,c)=>`<svg width="22" height="8" style="vertical-align:middle;margin-right:6px"><line x1="0" y1="4" x2="22" y2="4" stroke="${c}" stroke-width="${w}"/></svg>`;
+    const key=KEY([`<span>${sepLine(4,K.ink)}2 h (F-2 beside A-2)</span>`,`<span>${sepLine(2,K.ink)}1 h (A-2 beside D)</span>`,`<span><i style="background:#F2F2F2;border:1px solid #C4C5C7"></i>plan, greyed back</span>`]);
+    return {draw:`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Same plan as Rooms · street at the bottom · only the separations are drawn on top${pl.snUsed?SNCAP:''}</p>${titles}${svg}</div>`,
+      lead:'Which walls hold back fire between the data centre, the hub and the clinic, storey by storey (spec rule 8).',
+      hero:[{v:String(n2),l:'wall stretches at 2 h'},{v:String(n1h),l:'wall stretches at 1 h'},{v:C.q(),l:'exit stair shafts rated'}],
+      rows:[['Data centre (F-2) beside the hub (A-2)','2 h (VBBL Table 3.1.3.1)'],['Hub (A-2) beside the clinic (D)','1 h'],['Clinic (D) beside or under F-2','none'],['Floors',over],['Exit stair shafts, rating (NBC 3.4.4.1)',C.q()],['Battery room','2 h room kept (NFPA 855; spec 1b)']],
+      src:[C.CONTEXT_SRC(x.city),SNSRC,`Separations: spec rule 8 (VBBL Table 3.1.3.1; same text in NBC 2020); plan ${pl.PL.version} (tool/hub.js).`],
+      missing:['exit stair shaft ratings (NBC 3.4.4.1)','spatial separation to the lot lines (NBC 3.2.3)']}; }
   const lineSh=(a,col,w,dash)=>{ const p=pt(a[0],a[2]), q=pt(a[1],a[3]); return `<line x1="${f1(p[0])}" y1="${f1(p[1])}" x2="${f1(q[0])}" y2="${f1(q[1])}" stroke="${col}" stroke-width="${w}"${dash?` stroke-dasharray="${dash}"`:''}/>`; };
   let groups='', titles=''; const pairs={}, hrs=new Set();
   stor.forEach(st=>{ const z=st.z, B=blocksAt(P,z), dcs=B.filter(q=>q.dc), pubs=B.filter(q=>!q.dc), rects=[]; let s=pl.layer(st,'grey'); const items=[];
@@ -227,9 +269,32 @@ C.add(T,'Separations',{chip:CHIP,async build(x){
 
 /* ======================= 16 Exits ======================= */
 C.add(T,'Exits',{chip:CHIP,async build(x){
-  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; await sgReady(x); const pl=BD.plan&&planFor(x,P); if(!pl) return {draw:'<p class="f1v-empty">The tool has no plan for this lot (no layout placed).</p>'};
-  const {PL,mp,zs,stor,pt}=pl, f1=pl.f1, van=x.city==='van', clause=van?'VBBL 3.4.2.3':'NBC 3.4.2.3', reg=van?'register vbbl25_3423':'register arch_nbc3432';
+  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; await sgReady(x); const pl=planFor(x,P); if(!pl) return {draw:'<p class="f1v-empty">The tool has no plan for this lot (no layout placed).</p>'};
+  const {PL,mp,zs,stor,pt}=pl, f1=pl.f1, van=x.city==='van', RULES_GRID=(PL.rules&&PL.rules.grid&&PL.rules.grid.why)||'', clause=van?'VBBL 3.4.2.3':'NBC 3.4.2.3', reg=van?'register vbbl25_3423':'register arch_nbc3432';
   const ES=PL.exitSep||[]; let groups='', titles='', nExit=0, nDim=0; const dropped=[];
+  if(PL.hub&&PL.hub.rooms){ const HB=PL.hub, TL=tLine(HB);
+    stor.forEach(st=>{ const S=st.S, sn=st.i+1; let s=pl.layer(st,'grey');
+      S.stairs.forEach(c=>{ const q=pl.pr(c.rect); s+=rc(q,K.ink,' fill-opacity="0.16"')+pl.treads(c.rect,K.ink2)+`<rect x="${f1(q.x)}" y="${f1(q.y)}" width="${f1(q.w)}" height="${f1(q.h)}" fill="none" stroke="${K.ink}" stroke-width="1"/>`; });
+      S.exits.forEach(e=>{ if(e.kind==='loading') return; s+=pl.doorLine(e,K.ink,3.4)+pl.tick(S,e,12,K.ink,2.6); });
+      HB.travel.filter(t=>t.st===sn&&t.pathUV&&t.pathUV.length>1).forEach(t=>{ const P2=t.pathUV.map(p=>pt(p[0],p[1])), col=t.ok?K.red:K.red, a=P2[0];
+        s+=`<polyline points="${P2.map(p=>f1(p[0])+','+f1(p[1])).join(' ')}" fill="none" stroke="${col}" stroke-width="1.6" stroke-dasharray="5 3"/><circle cx="${f1(a[0])}" cy="${f1(a[1])}" r="3" fill="${col}"/><text x="${f1(a[0]+6)}" y="${f1(a[1]-6)}" font-size="12" font-weight="500" fill="${col}" stroke="#fff" stroke-width="3.5" paint-order="stroke">${n1(t.worst)} m · ${esc(t.zone)}</text>`; });
+      ES.filter(e=>e.st===sn&&e.a&&e.b).forEach(e=>{ const p0=pt(e.a.uv[0],e.a.uv[1]), p1=pt(e.b.uv[0],e.b.uv[1]), col=e.ok?K.ink:K.red, mx=(p0[0]+p1[0])/2, my=(p0[1]+p1[1])/2; nDim++;
+        s+=`<line x1="${f1(p0[0])}" y1="${f1(p0[1])}" x2="${f1(p1[0])}" y2="${f1(p1[1])}" stroke="${col}" stroke-width="1"/><circle cx="${f1(p0[0])}" cy="${f1(p0[1])}" r="2.2" fill="${col}"/><circle cx="${f1(p1[0])}" cy="${f1(p1[1])}" r="2.2" fill="${col}"/><text x="${f1(mx)}" y="${f1(my-6)}" text-anchor="middle" font-size="12" font-weight="500" fill="${col}" stroke="#fff" stroke-width="3.5" paint-order="stroke">${n1(e.apart_m)} m <tspan font-weight="400">of ${n1(e.need_m)} m</tspan></text>`; });
+      groups+=`<g data-z="${st.z}" style="${st.i?'display:none':''}">${s}</g>`; titles+=stTitle(pl,st); });
+    nExit=stor.reduce((t,st)=>t+st.S.exits.filter(e=>e.kind!=='loading').length,0);
+    const svg=planSvg(x,P,pl,'f1c-a16','Plan of each storey, greyed back, with exit doors, exit stairs, the worst travel path and the spacing of each zone’s exits',groups);
+    const key=KEY([`<span><i style="width:3px;height:11px;background:${K.ink};border:0;border-radius:1px"></i>exit door</span>`,`<span><i style="background:${K.ink};opacity:.2;border:1px solid ${K.ink}"></i>exit stair</span>`,`<span><svg width="26" height="10" style="vertical-align:middle;margin-right:6px"><line x1="2" y1="5" x2="24" y2="5" stroke="${K.red}" stroke-width="1.6" stroke-dasharray="5 3"/></svg>worst travel path to an exit</span>`,`<span><svg width="26" height="10" style="vertical-align:middle;margin-right:6px"><line x1="2" y1="5" x2="24" y2="5" stroke="${K.ink}" stroke-width="1"/></svg>exits apart (door to door)</span>`,`<span><i style="background:#F2F2F2;border:1px solid #C4C5C7"></i>plan, greyed back</span>`]);
+    const draw=`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Same plan as Rooms · street at the bottom · travel on a 0.25 m grid through 0.9 m doors${pl.snUsed?SNCAP:''}</p>${titles}${svg}</div>`;
+    const worst=HB.travel.filter(t=>t.worst!=null).sort((a,b)=>b.worst-a.worst)[0], nOk=ES.filter(e=>e.ok).length;
+    const rows=HB.travel.map(t=>[`Worst travel, ${t.zone}`,t.worst==null?C.q(t.why):`${n1(t.worst)} m of 45 m${t.ok?'':' (over)'}`]).concat(ES.map(e=>[`Exits apart, ${e.block}`,e.apart_m==null?C.q('one exit'):`${n1(e.apart_m)} m, needs ${n1(e.need_m)} m`]),
+      HB.discharge.map(d=>[`Exterior discharges ${d.a.toUpperCase()}–${d.b.toUpperCase()}`,`${n1(d.d)} m, needs ${d.need} m`]),[['T-reach (rule 15d)',TL.reach],['Dead ends',TL.dead],['Exit stair shaft ratings (NBC 3.4.4.1)',C.q()]]);
+    const meters=HB.travel.filter(t=>t.worst!=null).map(t=>({l:'Travel to an exit, '+t.zone,v:t.worst,lim:45,max:Math.max(50,t.worst*1.1),unit:'m',pass:t.ok,cap:`${n1(t.worst)} m · limit 45 m`,src:van?'VBBL 3.4.2.5':'NBC 3.4.2.5'}));
+    return {draw,lead:'Where people leave each zone, the longest walk to an exit along the path, and how far apart each zone’s exits are.',
+      hero:[{v:String(nExit),l:'exit doors drawn'},{v:worst?n1(worst.worst):C.q(),u:worst?'m':'',l:'worst travel path ('+(worst?worst.zone:'?')+')',red:!!(worst&&!worst.ok)},{v:`${nOk} of ${ES.length}`,l:'zones with exits far enough apart',red:nOk<ES.length}],
+      rows,meters,
+      more:[['How it is measured',`<p>Travel: ${esc(RULES_GRID)}. Exits apart: ${esc(clause)}.(1): a floor area with a public corridor needs min(½ diagonal, 9 m), every other max(½ diagonal, 9 m); measured door to door as a stand-in for the smoke path (3.4.2.3.(3)). Exterior stair discharges 9 m apart, or 6 m sprinklered and both within 15 m of a street (3.4.2.3.(4)).</p>`]],
+      src:[C.CONTEXT_SRC(x.city),SNSRC,`Exits, travel and spacing: ${PL.version} (tool/hub.js), ${clause} (${reg}).`,'Plan underneath: the same drawing as Rooms.'],
+      missing:['exit stair shaft ratings (NBC 3.4.4.1)','smoke path between exits (door to door used as a stand-in)']}; }
   stor.forEach(st=>{ const S=st.S; let s=pl.layer(st,'grey');
     S.stairs.forEach(c=>{ const q=pl.pr(c.rect); s+=rc(q,K.ink,' fill-opacity="0.16"')+pl.treads(c.rect,K.ink2)+`<rect x="${f1(q.x)}" y="${f1(q.y)}" width="${f1(q.w)}" height="${f1(q.h)}" fill="none" stroke="${K.ink}" stroke-width="1"/>`; });
     S.doors.filter(d=>/_stair_[AB]$/.test(d.from||'')).forEach(d=>{ s+=pl.doorLine(d,K.ink,3); });
@@ -262,7 +327,28 @@ C.add(T,'Exits',{chip:CHIP,async build(x){
 /* ======================= 17 Plant and site ======================= */
 const segRectDist=(p,q,r)=>{ /* distance from segment pq to rectangle r=[u0,u1,v0,v1] (0 if it crosses) */ const N=24; let m=1e9; for(let i=0;i<=N;i++){ const t=i/N, u=p[0]+(q[0]-p[0])*t, v=p[1]+(q[1]-p[1])*t, du=Math.max(0,r[0]-u,u-r[1]), dv=Math.max(0,r[2]-v,v-r[3]); m=Math.min(m,Math.hypot(du,dv)); } return m; };
 C.add(T,'Plant and site',{chip:CHIP,async build(x){
-  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; const g=geo(P), M=g.M, F=g.F, PLT=M.plant||{}, DP=BD.archTest.dcPieces(P), R=BD.archTest.rules(P), PL=BD.plan&&BD.plan.build(P);
+  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; const g=geo(P), M=g.M, F=g.F, PLT=M.plant||{}, DP=BD.archTest.dcPieces(P), R=BD.archTest.rules(P), PL=planOf(P);
+  if(PL&&PL.hub&&PL.hub.rooms){ const HB=PL.hub, PT=HB.plant, mp=mapper(g,lotBox(g,3),470,10), LW=300, W=mp.W+2*LW, ox=LW, id='f1c-a17h', P2=r=>{ const q=mp.rect(r); q.x+=ox; return q; };
+    const lot=ringPts(M.ring,g,mp).map(p=>[p[0]+ox,p[1]]); let s='';
+    PL.storeys[0].rooms.concat(PL.storeys[0].corridors,PL.storeys[0].stairs,PL.storeys[0].lifts).forEach(o=>{ s+=rc(P2(o.rect),o.block==='data centre'?(o.id==='hall'?K.fillHall:K.fillSup):o.block==='clinic'?K.fillClin:K.fillPub); });
+    if(HB.truck&&HB.truck.courtUV) s+=rc(P2(HB.truck.courtUV),'none',` stroke="${K.faint}" stroke-width="0.8" stroke-dasharray="6 4"`);
+    if(M.sideDrive){ const sd=[]; for(let i=0;i<M.sideDrive.ring.length;i+=2) sd.push(F.toL(M.sideDrive.ring[i],M.sideDrive.ring[i+1])); const bb=[Math.min(...sd.map(p=>p[0])),Math.max(...sd.map(p=>p[0])),Math.min(...sd.map(p=>p[1])),Math.max(...sd.map(p=>p[1]))]; s+=rc(P2(bb),K.hair,` stroke="${K.faint}" stroke-width="0.5" stroke-dasharray="6 4"`); }
+    (PT?PT.items:[]).forEach(it=>{ if(it.kind==='chiller') s+=rc(P2(it.zoneUV),'none',` stroke="${K.mute}" stroke-width="0.8" stroke-dasharray="3 2"`); s+=rc(P2(it.rect),it.kind==='chiller'?K.neut:it.kind==='gen'?K.ink2:K.mute); });
+    let setback=''; try{ if(M.inset&&BD.buildArea){ const ba=BD.buildArea(M); if(ba&&ba.length>=6) setback=`<path d="${poly(ringPts(ba,g,mp).map(p=>[p[0]+ox,p[1]]))}" fill="none" stroke="${K.mute}" stroke-width="0.5" stroke-dasharray="4 3"/>`; } }catch(e){}
+    const svg=`<svg viewBox="0 0 ${W} ${mp.H}" width="${W}" height="${mp.H}" ${FONT} role="img" aria-label="Site plan: the hub at grade, truck court, generators, transformer pads and chillers with their clear zones"><clipPath id="${id}"><rect x="${ox}" y="0" width="${mp.W}" height="${mp.H}"/></clipPath>${ctxG(x,P,g,mp,ox)}<path d="${poly(lot)}" fill="#fff" stroke="none"/><g clip-path="url(#${id})">${s}${setback}</g><path d="${poly(lot)}" fill="none" stroke="${K.ink}" stroke-width="1.2"/>${northScale(g,mp,ox,12,mp.H-30,20)}</svg>`;
+    const key=KEY([sw(K.fillHall,'data hall'),sw(K.fillSup,'data-centre rooms'),sw(K.fillPub,'hub'),sw(K.fillClin,'clinic'),sw(K.ink2,'generators'),sw(K.mute,'transformer pads'),sw(K.neut,'chillers'),`<span><i style="background:#fff;border:1px dashed ${K.mute}"></i>chiller clear zone</span>`,`<span><i style="background:#fff;border:1px dashed ${K.faint}"></i>truck court, aisle, side drive</span>`]);
+    const G2=HB.grades||{}, LD=HB.loading||{}, roofC=(PT?PT.items:[]).filter(i=>i.roof).length;
+    const rows=[['Plant (tool rules, spec 1c)',PT?`Q = ${HB.MW.toFixed(2)} × 1.55 = ${PT.Q} MW → ${PT.nG} generators (${PT.setKW.toLocaleString('en-CA')} kW), ${PT.nC} chillers, ${PT.nT} transformer pads`:C.q()],
+      ['Chillers',PT?(roofC?`${roofC} on the hub roof (a lower roof, not over the hall); the rest at grade`:'all at grade, clear zones 1.5 / 2.1 m, 3.0 / 4.2 m apart'):C.q()],['Generator tank',PT?`${n0(PT.tank)} L a set: 1.5 m to the building, 3.0 m to lot lines (CSA B139 Table 2)`:C.q()],
+      ['Chiller drains, A2L leak, MV/HV distance',C.q('drains not drawn; no figure for the leak or MV distance (Vertiv p. 34)')],
+      ['Loading',`${LD.n} · ${LD.why||''}`],['Street at the lobby door',G2.street!=null?`${n1(G2.street)} m (${G2.datum})`:C.q(G2.why)],['Slab',G2.slab!=null?`${n1(G2.slab)} m`:C.q()],['Step-free entrance',G2.stepFree||C.q()],
+      ['Height',G2.height!=null?`roof ${n1(G2.roof)} − base surface ${n1(G2.base)} = ${n1(G2.height)} m (limit ${G2.hLimit})`:C.q(G2.why)]];
+    if(x.city!=='van') rows.push(['Edmonton cooling',C.q('placeholder: the AFC is outside Vertiv\u2019s range at −30 °C')]);
+    return {draw:`<div class="${NS}wrap">${svg}${key}</div>`,lead:'The hub on its lot: the truck court, and the plant packed behind the building with the codes\u2019 distances and the chillers\u2019 clear zones.',
+      hero:[{v:PT?String(PT.nG):C.q(),l:'generator sets'},{v:PT?String(PT.nC):C.q(),l:'chillers'},{v:String(LD.n),l:'loading spaces'},{v:G2.height!=null?n1(G2.height):C.q(),u:G2.height!=null?'m':'',l:'height'}],
+      rows,meters:[],more:[['Plant rules',`<p>${(PT?PT.rules:[]).map(esc).join('</p><p style="margin-top:6px">')}</p>`]],
+      src:[C.CONTEXT_SRC(x.city),`Plant, loading, grades and height: ${PL.version} (tool/hub.js); spec rules 7, 9, 10, 12. Grades: tool/data/grade_points_van.json (City LiDAR 2022, CGVD28).`],
+      missing:['outdoor air intakes','truck turning','fire department access and FDC','fuel truck spot']}; }
   const lb=ring=>{ let a=1e9,b=-1e9,c=1e9,d=-1e9; for(let i=0;i<ring.length;i+=2){ const [u,v]=F.toL(ring[i],ring[i+1]); a=Math.min(a,u);b=Math.max(b,u);c=Math.min(c,v);d=Math.max(d,v); } return [a,b,c,d]; };
   const mp=mapper(g,lotBox(g,3),470,10), LW=300, W=mp.W+2*LW, ox=LW, id='f1c-a16'; const P2=r=>{ const q=mp.rect(r); q.x+=ox; return q; };
   const lot=ringPts(M.ring,g,mp).map(p=>[p[0]+ox,p[1]]); let s='';
@@ -317,7 +403,7 @@ C.add(T,'Plant and site',{chip:CHIP,async build(x){
 
 /* ======================= 21 Report ======================= */
 C.add(T,'Report',{chip:CHIP,async build(x){
-  const P=await x.arch(); const PL=P&&BD.plan?BD.plan.build(P):null, R=P?BD.archTest.rules(P):[];
+  const P=await x.arch(); const PL=P?planOf(P):null, R=P?BD.archTest.rules(P):[];
   let TP=BD.TPL; if(!TP||!TP.reports){ try{ TP=await BD.getJSON('templates.json'); }catch(e){} }
   const built=(TP&&TP.reports&&TP.reports.arch)||[]; const bi=built.map(p=>({t:p.title,w:p.what,built:true}));
   const todo=[{t:'Plans',w:'one plan per storey, from the tool’s plan layer'},{t:'Code checks',w:'every rule with its result: pass, flagged or ?'}];
