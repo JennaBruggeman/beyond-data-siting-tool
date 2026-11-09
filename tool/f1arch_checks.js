@@ -4,7 +4,7 @@
    The lot frame (u along the lot's long axis, v across) is turned so the street front is at the bottom and north-handedness is kept (a mirror image of the lot would mislead). */
 (function(){
 'use strict';
-const BD=window.BD, C=BD.f1cards, K=C.K, esc=C.esc, n0=C.n0, n1=C.n1, T='architecture', CHIP='Draft plan · rule sheet v0';
+const BD=window.BD, C=BD.f1cards, K=C.K, esc=C.esc, n0=C.n0, n1=C.n1, T='architecture', CHIP='Draft plan · rule sheet v1';
 const FONT='font-family="IBM Plex Sans,system-ui,sans-serif"', NS='f1c-checks-';
 
 /* ---------- styles and the two small behaviours the drawings need (storey tabs, print) ---------- */
