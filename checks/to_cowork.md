@@ -271,3 +271,21 @@ tool/treach.js (BD.treach: tReach, deadEnds, tWidth) and checks/tests/t_reach.js
 
 tool/f1intro.js with captions in tool/data/intro.json (J.B. edits there). Six scenes, about 54 s, built from the real interface: (1) skyline, one block fills DC blue, dashed lines to heat, space, power; (2) both city maps as "Your city" draws them (zones, no lot outlines), counts read at run time from tool/data/approval_counts.json; (3) the four template cards from the landing lift in turn with their lines; (4) the real viewer on 339 1st Ave E, strip outlined in blue, a blue pointer steps 2–5; (5) "How it works" outlined, the real interactive logic diagram opens at a figure's part; (6) zoom out to the landing, both ways in outlined. First visit only (localStorage bd-f1-intro, try/catch), Skip intro and Esc, reduced motion = six still slides, "Watch the intro" on the landing. Never autoplays under automation (navigator.webdriver), also ?nointro: the test scripts are unaffected. Frames: checks/f5/.
 Differences from the storyboard: scene 2 lights zones at city scale, not lots (Edmonton lot outlines are licensed); scene 2's caption is the board's ("Two cities. Every lot where one could go."), as the job sheet gives none; scene 3 uses the landing images, not each template's first card.
+
+## 8 Nov 2026 — F2 steps 2–7: the Emergency hub layout in the tool (Code)
+
+tool/hub.js (rule sheet v1, BD.hub.build) lays the hub out on the tool's lot from spec parts 1–3 and the room minimums rule; the Architecture cards (Rooms, Separations, Exits, Plant and site) draw it when the typology is the Emergency hub; plan.js v0.1 stays for the rest. Register: r_hub_v1 (patch hub_rule_sheet_2026_11_08.py).
+- **339 1st Ave E** (stacked, side drive, ladder step 2): 1.80 MW, hall 1,134 m², data centre 1,924 m², clinic 5 exams 488 m², 3 bays, height 16.2 m. Part 7: 14 of 19 rows match (5 on pass/fail with other distances), 3 partly, 2 differ: checks/hub/part7_V339.md.
+- **64 Airport Rd NW** (beside, ladder step 2): 1.87 MW, data centre 1,978 m², clinic 482 m², 1 loading space, 3 chillers on the hub roof (the yard holds the generators and pads only).
+- Both lots: T-reach PASS, dead ends ≤ 6 m (worst 4.0 m), no T-width fail; travel ≤ 33.3 m; every zone's exits far enough apart.
+- **Architecture re-base:** nothing moved: `SPLIT=60/30 arch_run.js CLARK E06A E06B V339` gives the same results as checks/golden/arch (rooms, blocks, MW, height identical): arch.js placement is unchanged and arch_run does not read the plan layer, so no re-base was made. The hub plan is drawn by the cards only.
+- Golden: golden_run.js on all 8 lots identical to checks/golden.
+
+Differences from Part 7, and the path taken (each a question):
+1. **No second refuge room.** In the bands the ground floor behind the hub is the data-centre entrance row and a covered truck court (bays open to it), so there is no enclosed spare floor at grade; refuge 177 m² = 50 people (Part 7: 114). The spare rule says refuge first at grade: should the covered court area be enclosed as refuge floor where the bays don't need it? Taken: covered court (conservative for loading), flagged in Part 7 rows 4, 10, 11, 17.
+2. **Clinic 488 m² (Part 7 296).** The clinic sits over the hub's front row (9.4 m deep: refuge 175 + shelter 56 + lobby across 30.6 m), corridor and service row, and grows into that floor (spare rule: clinic upstairs). Still < 500 m² (no loading). OK, or keep the clinic at its minimum and leave the rest unassigned?
+3. **Side drive on the SE side.** site.js places it there; the hub follows the tool (Part 7: NW). The lobby then sits at the SE end, street 4.8 m (LiDAR), slab 4.8 ≥ FCL 4.6: sloped floor, survey before design.
+4. **Table 3.7.2.2.-B "over 50: 3 + 1 per extra 50"**: read as 51–100 → 3, 101–150 → 4. Confirm.
+5. **Base surface**: corner grades joined by a fan of triangles from the first corner (our reading): 339 lowest 4.63 m under the building (Part 7 4.9).
+6. **Edmonton hub cap**: the tool's 3.0 MW is capped by the lot (plant behind the building, 0 m side yards) to 1.87 MW, one hall storey; chillers on the hub roof (rule 1: a lower roof not over the hall); Edmonton chillers a placeholder (Vertiv range).
+7. Not built yet (flagged when a lot needs them): corner, through, turned, height-capped.

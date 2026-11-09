@@ -229,7 +229,7 @@ C.add(T,'Separations',{chip:CHIP,async build(x){
     stor.forEach(st=>{ let s=pl.layer(st,'grey'); const all=[...st.S.rooms,...st.S.corridors,...st.S.stairs,...st.S.lifts];
       for(let i=0;i<all.length;i++) for(let j=i+1;j<all.length;j++){ const ga=grp(all[i]), gb=grp(all[j]), h=need[ga+gb]; if(!h) continue; const e=shE(all[i].rect,all[j].rect); if(!e) continue; s+=ln(e,h>=2?4:2,K.ink); if(h>=2) n2++; else n1h++; }
       groups+=`<g data-z="${st.z}" style="${st.i?'display:none':''}">${s}</g>`; titles+=stTitle(pl,st); });
-    const HB=pl.PL.hub, over=HB.kind==='stacked'?'The hall storey sits over the clinic (D under F-2: none); no data-centre room sits over the hub (A-2) in this plan.':'One storey: no floor separations.';
+    const HB=pl.PL.hub, over=HB.kind==='stacked'?'Clinic (D) over the hub (A-2): 1 h floor. The hall storey (F-2) over the clinic: none. No data-centre room sits over the hub in this plan (the data-centre rooms on storey 2 sit over the entrance row and the truck court).':'One storey: no floor separations.';
     const svg=planSvg(x,P,pl,'f1c-a15','Plan of each storey, greyed back, with the fire separations between the data centre, the hub and the clinic',groups);
     const sepLine=(w,c)=>`<svg width="22" height="8" style="vertical-align:middle;margin-right:6px"><line x1="0" y1="4" x2="22" y2="4" stroke="${c}" stroke-width="${w}"/></svg>`;
     const key=KEY([`<span>${sepLine(4,K.ink)}2 h (F-2 beside A-2)</span>`,`<span>${sepLine(2,K.ink)}1 h (A-2 beside D)</span>`,`<span><i style="background:#F2F2F2;border:1px solid #C4C5C7"></i>plan, greyed back</span>`]);
