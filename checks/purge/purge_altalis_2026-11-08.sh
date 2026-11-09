@@ -11,8 +11,9 @@ BAD="29c291535d03dc480a9b6e1717a7316ca90da755 7ec4aa42a74f87061e9087cc9e9b511c6d
 BRANCHES="${BRANCHES:-main overnight-2026-10-30 site-f1}"
 test -z "$(git status --porcelain --untracked-files=no)" || { echo "working tree not clean: commit or stash first"; exit 1; }
 git fetch origin
-for b in main overnight-2026-10-30; do   # local copies must match GitHub before the rewrite
-  if git show-ref -q --verify refs/heads/$b; then test "$(git rev-parse $b)" = "$(git rev-parse origin/$b)" || { echo "$b differs from origin/$b: sync it first"; exit 1; }
+for b in main overnight-2026-10-30; do   # local copies must contain GitHub's tip before the rewrite
+  if git show-ref -q --verify refs/heads/$b; then git merge-base --is-ancestor origin/$b $b || { echo "$b lacks commits that are on origin/$b: pull them first"; exit 1; }
+    ahead=$(git rev-list --count origin/$b..$b); [ "$ahead" = 0 ] || echo "note: $b is $ahead commit(s) ahead of origin/$b; the force-push will publish them too"
   else git branch $b origin/$b; fi
 done
 STAMP=pre-altalis-purge-2026-11-08
