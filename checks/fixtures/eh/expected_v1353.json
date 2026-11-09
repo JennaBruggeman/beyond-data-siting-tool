@@ -14,6 +14,7 @@
   "1:wc2m": "proom",
   "1:wc2w": "proom",
   "1:cor": "pcor",
+  "1:pasW": "exitpas",
   "1:pmec": "plant",
   "1:wcw": "proom",
   "1:wcm": "proom",
@@ -86,8 +87,8 @@
    "exits": 2,
    "deadEnd_m": 5.0,
    "exitNames": [
-    "OUT",
-    "lob"
+    "lob",
+    "pasW"
    ]
   },
   {
@@ -130,10 +131,10 @@
    "st": 1,
    "id": "ref",
    "n": "Refuge main room",
-   "A": 238.8,
-   "Acount": 238.8,
+   "A": 211.2,
+   "Acount": 211.2,
    "w": 12.0,
-   "L": 18.8,
+   "L": 17.6,
    "issue": [],
    "basis": "J.B. 8 Nov: 4.0 m refuge and shelter (waiting: our judgment ?)",
    "note": ""
@@ -238,22 +239,34 @@
    "st": 1,
    "id": "cor",
    "n": "Public corridor",
-   "A": 74.6,
-   "Acount": 74.6,
+   "A": 60.8,
+   "Acount": 60.8,
    "w": 2.0,
    "L": 30.38,
    "issue": [],
-   "basis": "spec 15b public and secure 2.0 m (Cowork fix 9 Nov)",
+   "basis": "spec Part 3: 2.0 public/secure, 1.8 clinic; code 1.1",
+   "note": ""
+  },
+  {
+   "st": 1,
+   "id": "pasW",
+   "n": "Exit passage (2 h) from the public corridor to Pender St",
+   "A": 27.6,
+   "Acount": 27.6,
+   "w": 3.8,
+   "L": 5.1,
+   "issue": [],
+   "basis": "VBBL 3.3.1.9 / 3.4.3.2 1.1 m",
    "note": ""
   },
   {
    "st": 1,
    "id": "pmec",
    "n": "Programs mechanical, emergency panel",
-   "A": 14.0,
-   "Acount": 14.0,
-   "w": 2.0,
-   "L": 7.0,
+   "A": 27.9,
+   "Acount": 27.9,
+   "w": 4.0,
+   "L": 7,
    "issue": [],
    "basis": "access; our judgment ?",
    "note": ""
@@ -555,7 +568,7 @@
    "w": 2.0,
    "L": 24.2,
    "issue": [],
-   "basis": "spec 15b clinic 1.8-2.0 m",
+   "basis": "spec Part 3: 2.0 public/secure, 1.8 clinic; code 1.1",
    "note": ""
   },
   {
@@ -723,7 +736,7 @@
    "w": 2.0,
    "L": 40.5,
    "issue": [],
-   "basis": "spec 15b public and secure 2.0 m (Cowork fix 9 Nov)",
+   "basis": "spec Part 3: 2.0 public/secure, 1.8 clinic; code 1.1",
    "note": ""
   },
   {
@@ -771,7 +784,7 @@
    "w": 12.0,
    "L": 12.0,
    "issue": [],
-   "basis": "no rule: unassigned floor (Cowork fix 9 Nov)",
+   "basis": "no rule",
    "note": ""
   },
   {

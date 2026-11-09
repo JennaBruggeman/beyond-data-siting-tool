@@ -318,6 +318,6 @@ Confirmed, with omissions added to the register: 3.3.1.9 (p. 268), 3.4.2.5 (p. 2
   - Load: refuge, shelter and waiting rooms ÷ 0.75 m² (Part 1); clinic rooms ÷ 9.3 m². Washrooms, storage and service rooms are tested by area only.
   - `hub.js` adds the second door on a wall shared with a public room or corridor.
   - Tool: on 339 and 64 Airport Rd, the refuge, shelter and hall all pass. 64 Airport Rd's shelter gained a second door, into the refuge.
-  - **Hand fits:** the shelter has 1 door in 7 of 8 fits (loads 76–160): v1353, v339, v8238, v8980, e06b, e4103, e14715. 8238's refuge rooms ref2 (load 183) and ref3 (load 68) also have 1 door each. Only v1330 passes. For Cowork to re-plan, or to confirm the shelter's load basis (÷ 0.75 m² as Part 1).
+  - **Hand fits:** all 8 pass, on the fixtures re-exported 9 Nov (after Cowork's egress fixes); this agrees with Cowork's egress2.py and egress3.py. An earlier run on the 8 Nov copies showed one-door shelters; those were fixed by Cowork, so no action is needed.
 - **3. Table 3.7.2.2.-B:** `hub.js` `wcBload` applies it per sex, with the load split equally and a partial increment counting. 339's clinic is 48 persons (24 a sex): 1 WC a sex, so 1 WC room plus the universal WC; the clinic is now 443 m². Part 7's own 32 persons would be 16 a sex → 1, not the 2 it shows. Part 7 row 9 explains this.
 - Part 7 is unchanged: 14 match, 3 partly, 2 differ. Golden and Architecture are identical.
