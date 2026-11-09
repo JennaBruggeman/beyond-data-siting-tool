@@ -187,6 +187,24 @@
    ],
    "why": "rules a typology spec will apply: spec, not live yet"
   },
+  "heat_cascade_spec_rules": {
+   "tier": "arch_only",
+   "parties": [
+    "operator",
+    "neighbours",
+    "city"
+   ],
+   "why": "rules the Heat cascade spec will apply: spec, not live yet"
+  },
+  "community_pool_spec_rules": {
+   "tier": "arch_only",
+   "parties": [
+    "operator",
+    "neighbours",
+    "city"
+   ],
+   "why": "rules the Community pool spec will apply: spec, not live yet"
+  },
   "start_case": {
    "tier": "resident",
    "parties": [
@@ -2945,6 +2963,14 @@
    [
     "egress_doorways",
     "test"
+   ],
+   [
+    "heat_cascade_spec_rules",
+    "test"
+   ],
+   [
+    "community_pool_spec_rules",
+    "test"
    ]
   ],
   "edges": [
@@ -4467,12 +4493,20 @@
    [
     "hub_layout",
     "egress_doorways"
+   ],
+   [
+    "massing",
+    "heat_cascade_spec_rules"
+   ],
+   [
+    "massing",
+    "community_pool_spec_rules"
    ]
   ]
  },
  "resident_count": 42,
  "full_count": 210,
- "arch_count": 154,
+ "arch_count": 156,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {
