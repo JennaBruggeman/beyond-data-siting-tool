@@ -14,7 +14,7 @@ D = json.load(open(os.path.join(H, 'diagram_data.json')))
 R = 'resident'; C = 'arch'; F = 'full'  # C kept as the name of the middle tag (was 'community' to 3 Nov 2026)
 # Municipal template (8 Nov 2026, Cowork's reply on municipal_logic_parts.md, J.B.): a second tag beside the tier, since a node has one tier.
 # The parts the Municipal cards read; shown by the logic view's Municipal tab (logic.json 'm': 1). Limits only, never design performance.
-MUNI = {'parcel', 'zone', 'zoning_status', 'rezoning_price', 'envelope', 'floor_area', 'noise_limit', 'loading_need', 'roof_equipment_rule', 'storey_min'}
+MUNI = {'parcel', 'zone', 'zoning_status', 'rezoning_price', 'envelope', 'floor_area', 'noise_limit', 'loading_need', 'roof_equipment_rule', 'storey_min', 'zoned_land', 'industrial_jobs'}
 T = {
  # inputs
  'parcel': (R, 'host city neighbours', 'where: the one thing a resident always gives'),
@@ -22,6 +22,21 @@ T = {
  'loading_need': (C, 'city neighbours', 'how many loading spaces the zone asks for'),
  'roof_equipment_rule': (C, 'city neighbours', 'what may stand on the roof above the height limit'),
  'storey_min': (C, 'city', 'the lowest storey heights the zone allows'),
+ # 8 Nov 2026 (job F6): parts for the cards that had none (checks/f6_missing_parts.md; patch f6_card_parts_2026_11_08.py)
+ 'zoned_land': (C, 'city', 'how much of the city a data centre is allowed on'),
+ 'industrial_jobs': (C, 'city', 'jobs on that land: not in the tool yet'),
+ 'programs_nearby': (C, 'neighbours city', 'libraries, community centres and recreation close to the lot'),
+ 'site_grade': (C, 'operator neighbours', 'how high the ground is, for the entrance and the height'),
+ 'hub_layout': ('arch_only', 'operator city neighbours', 'how the Emergency hub is laid out on this lot'),
+ 'room_widths': ('arch_only', 'operator', 'whether each room is wide enough to use'),
+ 't_reach': ('arch_only', 'operator neighbours', 'whether every room is reached the right way'),
+ 'dead_ends': ('arch_only', 'operator', 'how far a corridor runs past its last two-way point'),
+ 'fire_separations': ('arch_only', 'operator city', 'how long walls and floors hold back a fire'),
+ 'travel_distance': ('arch_only', 'operator', 'how far anyone walks to an exit'),
+ 'exit_separation': ('arch_only', 'operator', 'whether the exits are far enough apart'),
+ 'plant_clearances': ('arch_only', 'operator neighbours', 'the clear space the plant needs around it'),
+ 'building_height': ('arch_only', 'city neighbours', 'how tall the building is, measured as the bylaw says'),
+ 'step_free_entry': ('arch_only', 'neighbours', 'whether the front door is step-free'),
  'chiller_winter_range': (F, 'operator', "whether the chiller works in a design winter (the maker's stated range)"),
  # 8 Nov 2026: sources a typology spec uses (register_additions_2026-11-08.md), spec, not live yet
  'typology_spec_rules': ('arch_only', 'operator neighbours', 'rules a typology spec will apply: spec, not live yet'),

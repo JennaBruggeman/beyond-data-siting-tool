@@ -68,8 +68,8 @@ async function loadLot(city){ const S=LOTS[city]; V.where='…'; V.ready=false; 
   V.ready=true; draw(); }
 const titleCase=s=>String(s).toLowerCase().replace(/\b([a-z])/g,c=>c.toUpperCase()).replace(/\b(\d+)(St|Nd|Rd|Th)\b/g,(m,n,x)=>n+x.toLowerCase()).replace(/\b(Nw|Ne|Sw|Se)\b/g,m=>m.toUpperCase());
 function viewer(id){ V.t=TPL.find(x=>x.id===id); V.i=0; let W=document.getElementById('f1v'); if(!W){ W=document.createElement('div'); W.id='f1v'; W.setAttribute('role','dialog'); W.setAttribute('aria-modal','true'); document.body.appendChild(W);
-    W.addEventListener('click',e=>{ const fg=e.target.closest('[data-fig]'); if(fg&&BD.f1logic){ const c=V.t.cards[V.i], k=fg.dataset.k||'', ids=k?[k]:BD.f1logic.cardIds(c.t,V.t.tab);
-        BD.f1logic.open({tab:V.t.tab,label:c.t+' · '+(fg.dataset.fig||''),ids,lot:V.where,sel:k||null}); return; } /* F5 1(c), 8 Nov 2026 */
+    W.addEventListener('click',e=>{ const fg=e.target.closest('[data-fig]'); if(fg&&BD.f1logic){ const c=V.t.cards[V.i], k=fg.dataset.k||'', ids=k?[k]:(BD.f1logic.figIds?BD.f1logic.figIds(c.t,V.t.tab,fg.dataset.fig||''):BD.f1logic.cardIds(c.t,V.t.tab));
+        BD.f1logic.open({tab:V.t.tab,label:c.t+' · '+(fg.dataset.fig||''),ids,lot:V.where,sel:k||(ids.length===1?ids[0]:null),val:(fg.querySelector('.v')||fg).innerText.replace(/\s+/g,' ').trim()}); return; } /* F5 1(c), 8 Nov 2026; F6: a figure with one part opens at that part */
       const b=e.target.closest('button'); if(!b) return; const d=b.dataset;
       if(d.x!=null){ W.remove(); return; } if(d.how){ const c=V.t.cards[V.i]; if(BD.f1logic) BD.f1logic.open(d.how==='all'?{tab:V.t.tab}:{tab:V.t.tab,label:c.t,ids:BD.f1logic.cardIds(c.t,V.t.tab),lot:V.where}); return; } if(d.city){ if(d.city!==V.city){ V.city=d.city; loadLot(V.city); } return; }
       if(d.to!=null){ V.i=+d.to; draw(); return; } if(d.chap!=null){ V.i=V.t.cards.findIndex(c=>c.chap===d.chap); draw(); return; }

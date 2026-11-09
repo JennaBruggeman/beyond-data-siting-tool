@@ -46,3 +46,24 @@ Already linked once these exist: Plant and site's generators, chillers and loadi
 1. Each new part takes its trust from its lowest input (CLAUDE.md §3). Are the proposed ratings right?
 2. Four sources are marked "id ?": the Vancouver zoning layer, VBBL 3.3.1.9 and 3.4.2.5, and the room-minimums rule. Should they be registered as new sources in the same patch?
 3. Report page counts: link them to the report step, or show them without a link?
+
+## Step 2: built (J.B.'s OK, 8 Nov 2026)
+- Patch `register/patches/f6_card_parts_2026_11_08.py` adds 14 parts and registers 4 sources:
+  - `vbbl25_3319` and `vbbl25_3425`: from J.B.'s VBBL 2025 copy, read by Cowork; the same wording as NBC 2020, which Code read on 30 Oct.
+  - `vanZoningLayer`: City open data.
+  - `spec_emergencyHub`: J.B.'s decision. This is a fifth entry: T-reach and the hub layout need the spec itself as their source.
+  - `rule_roomMinimums` was already registered, with its minimum widths.
+- `flood_level` was dropped from the list: `flood_exposure` and `flood_area` already hold the flood construction level. Programs nearby searches 2 km, not 1 km (corrected).
+- Trust is the lowest source:
+  - 90: `dead_ends`, `travel_distance`, `exit_separation`.
+  - 80: `zoned_land`, `programs_nearby`, `site_grade`.
+  - 60: `building_height`, `step_free_entry`.
+  - 50: `plant_clearances`, `fire_separations`.
+  - 20: `hub_layout`, `room_widths`.
+  - 100: `t_reach` (an arithmetic test).
+  - 0: `industrial_jobs` (gap).
+  - The four layout checks take `hub_layout` as their input, so their results are only as sure as the layout.
+- Links: `tool/f1logic.js` FIG gives each card its parts, and each figure label its own part (`figIds`). Report cards link to the report step.
+  - A figure with one part opens with that part selected and shows the figure's value "as the card shows it".
+  - Where the template's tab hides a figure's parts (the Municipal report step, hall heat temperature, the Edmonton chiller range), the view opens on the all-parts tab.
+- Gate (`checks/tests/f6_links.js`): 387 figures on 46 cards all open a part. The 3 Resident cards with no figures wait for the Resident build.

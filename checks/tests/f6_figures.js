@@ -14,7 +14,7 @@ const fs = require('fs'); const { chromium } = require('playwright');
       await p.waitForTimeout(800);
       const r = await p.evaluate(() => {
         const title = (document.querySelector('#f1v h2, #f1v .f1v-title') || {}).innerText || '';
-        const figs = [...document.querySelectorAll('#f1v [data-fig]')].map(e => ({ k: e.dataset.k || '', t: e.innerText.replace(/\s+/g, ' ').trim().slice(0, 120) }));
+        const figs = [...document.querySelectorAll('#f1v [data-fig]')].map(e => ({ k: e.dataset.k || '', f: e.dataset.fig || '', t: e.innerText.replace(/\s+/g, ' ').trim().slice(0, 120) }));
         const rows = [...document.querySelectorAll('#f1v .f1v-side tr, #f1v .f1v-rows > div, #f1v dl > div')].map(e => e.innerText.replace(/\s+/g, ' ').trim().slice(0, 140));
         return { title, figs, rows };
       });

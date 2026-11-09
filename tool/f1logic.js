@@ -46,7 +46,7 @@ function panel(){ if(!S.sel){ const t=TABS.find(x=>x[0]===S.tab)[1];
 `<p class="f1l-note">${t}: ${diagram().n} parts shown.</p>`; }
   const k=S.sel, n=L.nodes[k], stg=(L.stages.find(s=>s[0]===n.s)||[])[1]||n.s, q=n.q, ins=(UP[k]||[]).filter(x=>L.nodes[x]);
   return `<div class="chap">${esc(stg)}</div><h2>${esc(n.n)}</h2>${n.w?`<p class="lead">${esc(n.w.charAt(0).toUpperCase()+n.w.slice(1))}.</p>`:''}
-   ${S.lot?`<div class="f1l-hero"><div class="hl">On this lot (${esc(S.lot)})</div><div class="f1l-nv">not in the tool yet</div></div>`:''}
+   ${S.lot?`<div class="f1l-hero"><div class="hl">On this lot (${esc(S.lot)})</div><div class="f1l-nv${S.val&&S.sel===S.valFor?' has':''}">${S.val&&S.sel===S.valFor?esc(S.val)+' <span class="f1l-vsrc">(as the card shows it)</span>':'not in the tool yet'}</div></div>`:''}
    <section><h3>How it is worked out</h3><p class="f1l-f">${esc(n.f||'Read or asked; no formula.')}</p>${ins.length?`<p class="f1l-in">From: ${ins.map(x=>`<button class="f1l-a" data-k="${x}">${esc(L.nodes[x].n)}</button>`).join(', ')}</p>`:''}</section>
    <section><h3>Trust</h3><div class="f1l-meter"><div class="trk"><div class="bar" style="width:${q==null?0:q}%"></div></div><div class="cap"><span>${q==null?'not rated':q+' of 100'}</span><span>${esc(word(q))}</span></div></div></section>
    <section><h3>Status</h3><p class="f1l-f">${esc(n.st||'?')}${n.st2?` · ${esc(n.st2)}`:''}</p></section>
@@ -62,7 +62,7 @@ function draw(){ const W=document.getElementById('f1l'); if(!W||!L) return; cons
   /* not every stage fits at 1440 px: the box scrolls sideways with a visible bar and a fade on the edge that has more (gate 2) */
   const box=W.querySelector('.f1l-box'), wr=W.querySelector('.f1l-wrap'), fade=()=>{ wr.classList.toggle('more-r',box.scrollLeft+box.clientWidth<box.scrollWidth-2); wr.classList.toggle('more-l',box.scrollLeft>2); };
   box.addEventListener('scroll',fade,{passive:true}); fade(); }
-async function open(o){ o=o||{}; await load(); S.tab=o.tab||S.tab; S.sel=null; S.label=o.label||''; S.lot=o.lot||''; /* "On this lot" only when opened from a card that has a lot */ S.lit=(o.ids||[]).filter(k=>L.nodes[k]); if(o.sel&&L.nodes[o.sel]){ S.sel=o.sel; if(!shown(o.sel)) S.tab='all'; } /* F5 1(c): open at a figure's node */
+async function open(o){ o=o||{}; await load(); S.tab=o.tab||S.tab; S.sel=null; S.label=o.label||''; S.lot=o.lot||''; S.val=o.val||''; S.valFor=o.sel||null; /* "On this lot" only when opened from a card that has a lot */ S.lit=(o.ids||[]).filter(k=>L.nodes[k]); if(o.sel&&L.nodes[o.sel]){ S.sel=o.sel; if(!shown(o.sel)) S.tab='all'; } if(S.lit.length&&!S.lit.some(k=>shown(k))) S.tab='all';   /* F6: a figure whose parts this template's tab hides opens on the all-parts tab */ /* F5 1(c): open at a figure's node */
   let W=document.getElementById('f1l'); if(!W){ W=document.createElement('div'); W.id='f1l'; W.setAttribute('role','dialog'); W.setAttribute('aria-modal','true'); document.body.appendChild(W);
     W.addEventListener('click',e=>{ const t=e.target.closest('[data-k],[data-tab],[data-close]'); if(!t) return; e.preventDefault();
       if(t.dataset.close!=null){ W.remove(); return; } if(t.dataset.tab){ S.tab=t.dataset.tab; if(S.sel&&!shown(S.sel)) S.sel=null; draw(); return; }
@@ -70,6 +70,33 @@ async function open(o){ o=o||{}; await load(); S.tab=o.tab||S.tab; S.sel=null; S
     W.addEventListener('keydown',e=>{ if(e.key==='Escape') W.remove(); const g=e.target.closest&&e.target.closest('g[data-k]'); if(g&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); S.sel=g.dataset.k; draw(); } }); }
   draw(); }
 /* the parts a card lights: logic.js's step list for the matching step */
-function cardIds(title,tab){ if(tab==='municipal') return MUNI_CARD[title]||[]; const k=CARD[title]; return k&&BD.logic&&BD.logic.stepNodes?BD.logic.stepNodes(k):[]; }
-BD.f1logic={open,cardIds};
+/* F6 (8 Nov 2026, J.B.): every figure on every card links to its part. Per card: '_' = the card's parts; f = [label pattern, parts] for single figures
+   (first match wins; a figure no pattern matches opens the card's parts). Cards not listed here use MUNI_CARD / CARD above. checks/f6_missing_parts.md */
+const SITE={'Your city':{_:['zoning_status','zone']},
+ 'Your parcel':{_:['parcel','zone','zoning_status'],f:[[/address|lot area/i,['parcel']],[/^zone/i,['zone']],[/data centre|approval|clause/i,['zoning_status']]]}};
+const FIG={
+ municipal:{'Industrial land and jobs':{_:['zoned_land','industrial_jobs'],f:[[/jobs/i,['industrial_jobs']],[/lot zone/i,['zone']],[/lot area/i,['parcel']],[/designation|policy/i,['zoned_land','zoning_status']],[/./,['zoned_land']]]}},
+ full:Object.assign({},SITE),
+ arch:Object.assign({},SITE,{
+ 'Programs nearby':{_:['programs_nearby']},
+ 'What the lot allows':{_:['envelope','floor_area','storey_min'],f:[[/height/i,['envelope']],[/floor space ratio|floor area/i,['floor_area','plot_ratio']],[/yard/i,['envelope']],[/ground floor/i,['storey_min','zoning_status']]]},
+ 'Ground and flood':{_:['site_grade','flood_exposure'],f:[[/flood|slab/i,['flood_exposure','flood_area']],[/ground|datum/i,['site_grade']]]},
+ 'Pick a typology':{_:['arch_program_catalogue','typology_spec_rules'],f:[[/minimum ground|cover/i,['arch_space_budget']],[/data centre here/i,['zoning_status']],[/./,['arch_program_catalogue','typology_spec_rules']]]},
+ 'Variant and add-ons':{_:['arch_placement','arch_space_budget'],f:[[/refuge/i,['arch_placement','refuge_people']],[/heat hub/i,['arch_space_budget','arch_dc_ets']],[/solar/i,['pv_roof']],[/ev charging/i,['ev_stalls']],[/fit/i,['arch_space_budget']]]},
+ 'The governing principle':{_:['hub_layout'],f:[[/ground floor/i,['storey_min','zoning_status']]]},
+ 'The numbers':{_:['floor_area','size_fit','heat_delivered'],f:[[/floor area/i,['floor_area']],[/it load/i,['size_fit']],[/envelope/i,['envelope']],[/heat/i,['heat_delivered']]]},
+ 'What’s left for neighbours':{_:['arch_heat_budget','receivers_nearby'],f:[[/heat made/i,['heat_delivered']],[/left|used by/i,['arch_heat_budget']],[/homes/i,['homes_heated']],[/district energy/i,['competing_sources']],[/demand/i,['receiver_demand']],[/receivers/i,['receivers_nearby']]]},
+ 'Rooms':{_:['hub_layout'],f:[[/t-reach/i,['t_reach']],[/dead end/i,['dead_ends']],[/t-width|width/i,['room_widths']],[/refuge people/i,['refuge_people','hub_layout']],[/hall/i,['arch_dc_hall','hub_layout']]]},
+ 'Separations':{_:['fire_separations'],f:[[/battery/i,['fire_separations','battery_code_path']]]},
+ 'Exits':{_:['travel_distance','exit_separation'],f:[[/t-reach/i,['t_reach']],[/dead end/i,['dead_ends']],[/stair shaft/i,['fire_separations']],[/travel/i,['travel_distance']],[/apart|discharge/i,['exit_separation']],[/exit doors/i,['hub_layout']]]},
+ 'Plant and site':{_:['plant_clearances'],f:[[/generator tank/i,['fuel_on_site','plant_clearances']],[/generator/i,['generator_sets','plant_clearances']],[/edmonton cooling/i,['chiller_winter_range']],[/chiller/i,['cooling_units','plant_clearances']],[/loading/i,['loading_need']],[/height/i,['building_height']],[/street|slab|step-free/i,['step_free_entry','site_grade']]]},
+ 'Heat flow':{_:['heat_delivered','arch_heat_budget'],f:[[/offers/i,['heat_delivered']],[/size tested/i,['size_fit']],[/temperature/i,['heat_temp']],[/./,['arch_heat_budget']]]},
+ 'Program diagram':{_:['hub_layout','arch_space_budget'],f:[[/asked for/i,['arch_space_budget','arch_program_catalogue']],[/net in the plan|storeys/i,['hub_layout']],[/data hall|data-centre floor/i,['arch_dc_hall']],[/"\?"/i,['typology_spec_rules']],[/height limit/i,['envelope']]]},
+ 'Drawing styles':{_:['storey_min','envelope'],f:[[/height limit/i,['envelope']],[/storeys/i,['storey_min','hub_layout']],[/./,['massing']]]},
+ 'Compare':{_:['heat_delivered','arch_heat_budget'],f:[[/offered/i,['heat_delivered']],[/not placed/i,['arch_placement']],[/./,['arch_heat_budget']]]}})};
+const step=k=>BD.logic&&BD.logic.stepNodes?BD.logic.stepNodes(k):[];
+function cardIds(title,tab){ const F=FIG[tab]&&FIG[tab][title]; if(F) return F._; if(title==='Report') return step('report');   /* report pages: the report step (J.B. 8 Nov) */
+  if(tab==='municipal') return MUNI_CARD[title]||[]; const k=CARD[title]; return k?step(k):[]; }
+function figIds(title,tab,label){ const F=FIG[tab]&&FIG[tab][title]; if(F&&F.f) for(const [rx,ids] of F.f) if(rx.test(label||'')) return ids; return cardIds(title,tab); }
+BD.f1logic={open,cardIds,figIds,FIG};
 })();

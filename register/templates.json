@@ -59,6 +59,112 @@
    ],
    "why": "the lowest storey heights the zone allows"
   },
+  "zoned_land": {
+   "tier": "arch",
+   "parties": [
+    "city"
+   ],
+   "why": "how much of the city a data centre is allowed on"
+  },
+  "industrial_jobs": {
+   "tier": "arch",
+   "parties": [
+    "city"
+   ],
+   "why": "jobs on that land: not in the tool yet"
+  },
+  "programs_nearby": {
+   "tier": "arch",
+   "parties": [
+    "neighbours",
+    "city"
+   ],
+   "why": "libraries, community centres and recreation close to the lot"
+  },
+  "site_grade": {
+   "tier": "arch",
+   "parties": [
+    "operator",
+    "neighbours"
+   ],
+   "why": "how high the ground is, for the entrance and the height"
+  },
+  "hub_layout": {
+   "tier": "arch_only",
+   "parties": [
+    "operator",
+    "city",
+    "neighbours"
+   ],
+   "why": "how the Emergency hub is laid out on this lot"
+  },
+  "room_widths": {
+   "tier": "arch_only",
+   "parties": [
+    "operator"
+   ],
+   "why": "whether each room is wide enough to use"
+  },
+  "t_reach": {
+   "tier": "arch_only",
+   "parties": [
+    "operator",
+    "neighbours"
+   ],
+   "why": "whether every room is reached the right way"
+  },
+  "dead_ends": {
+   "tier": "arch_only",
+   "parties": [
+    "operator"
+   ],
+   "why": "how far a corridor runs past its last two-way point"
+  },
+  "fire_separations": {
+   "tier": "arch_only",
+   "parties": [
+    "operator",
+    "city"
+   ],
+   "why": "how long walls and floors hold back a fire"
+  },
+  "travel_distance": {
+   "tier": "arch_only",
+   "parties": [
+    "operator"
+   ],
+   "why": "how far anyone walks to an exit"
+  },
+  "exit_separation": {
+   "tier": "arch_only",
+   "parties": [
+    "operator"
+   ],
+   "why": "whether the exits are far enough apart"
+  },
+  "plant_clearances": {
+   "tier": "arch_only",
+   "parties": [
+    "operator",
+    "neighbours"
+   ],
+   "why": "the clear space the plant needs around it"
+  },
+  "building_height": {
+   "tier": "arch_only",
+   "parties": [
+    "city",
+    "neighbours"
+   ],
+   "why": "how tall the building is, measured as the bylaw says"
+  },
+  "step_free_entry": {
+   "tier": "arch_only",
+   "parties": [
+    "neighbours"
+   ],
+   "why": "whether the front door is step-free"
+  },
   "chiller_winter_range": {
    "tier": "full",
    "parties": [
@@ -2772,6 +2878,62 @@
    [
     "chiller_winter_range",
     "test"
+   ],
+   [
+    "zoned_land",
+    "place"
+   ],
+   [
+    "industrial_jobs",
+    "characterise"
+   ],
+   [
+    "programs_nearby",
+    "characterise"
+   ],
+   [
+    "site_grade",
+    "characterise"
+   ],
+   [
+    "hub_layout",
+    "size"
+   ],
+   [
+    "room_widths",
+    "test"
+   ],
+   [
+    "t_reach",
+    "test"
+   ],
+   [
+    "dead_ends",
+    "test"
+   ],
+   [
+    "fire_separations",
+    "test"
+   ],
+   [
+    "travel_distance",
+    "test"
+   ],
+   [
+    "exit_separation",
+    "test"
+   ],
+   [
+    "plant_clearances",
+    "test"
+   ],
+   [
+    "building_height",
+    "test"
+   ],
+   [
+    "step_free_entry",
+    "test"
    ]
   ],
   "edges": [
@@ -4186,12 +4348,116 @@
    [
     "weather",
     "chiller_winter_range"
+   ],
+   [
+    "zone",
+    "zoned_land"
+   ],
+   [
+    "zoning_status",
+    "zoned_land"
+   ],
+   [
+    "zoned_land",
+    "industrial_jobs"
+   ],
+   [
+    "parcel",
+    "programs_nearby"
+   ],
+   [
+    "parcel",
+    "site_grade"
+   ],
+   [
+    "envelope",
+    "hub_layout"
+   ],
+   [
+    "storey_min",
+    "hub_layout"
+   ],
+   [
+    "arch_dc_hall",
+    "hub_layout"
+   ],
+   [
+    "arch_space_budget",
+    "hub_layout"
+   ],
+   [
+    "refuge_people",
+    "hub_layout"
+   ],
+   [
+    "loading_need",
+    "hub_layout"
+   ],
+   [
+    "hub_layout",
+    "room_widths"
+   ],
+   [
+    "hub_layout",
+    "t_reach"
+   ],
+   [
+    "hub_layout",
+    "dead_ends"
+   ],
+   [
+    "hub_layout",
+    "fire_separations"
+   ],
+   [
+    "hub_layout",
+    "travel_distance"
+   ],
+   [
+    "hub_layout",
+    "exit_separation"
+   ],
+   [
+    "generator_sets",
+    "plant_clearances"
+   ],
+   [
+    "cooling_units",
+    "plant_clearances"
+   ],
+   [
+    "hub_layout",
+    "plant_clearances"
+   ],
+   [
+    "site_grade",
+    "building_height"
+   ],
+   [
+    "hub_layout",
+    "building_height"
+   ],
+   [
+    "envelope",
+    "building_height"
+   ],
+   [
+    "site_grade",
+    "step_free_entry"
+   ],
+   [
+    "flood_exposure",
+    "step_free_entry"
+   ],
+   [
+    "hub_layout",
+    "step_free_entry"
    ]
   ]
  },
  "resident_count": 42,
- "full_count": 206,
- "arch_count": 139,
+ "full_count": 210,
+ "arch_count": 153,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {
