@@ -55,7 +55,7 @@ Rank: 1 never drops; higher numbers drop first. A target can be larger than the 
 - **Shared lobby:** no sourced size (step 6, drawing choice; 20–64 m² in the fits). It serves every public program.
 - **Loading:** one bay can serve the refuge and the data centre only by approval (Parking By-law 5.1.5). Without approval, each class counts separately.
 
-**Spare floor** (J.B., 8 Nov). Floor the stack creates beyond the program goes, in order: (1) refuge, then warming shelter, at grade; (2) clinic, upstairs; (3) whatever is left is drawn and labelled **"unassigned"**.
+**Spare floor** (J.B., 8 Nov). Floor the stack creates beyond the program goes, in order: (1) refuge, then warming shelter, at grade; (2) clinic, upstairs; (3) whatever is left is drawn and labelled **"unassigned"**. **Edmonton BE (hard limit, J.B., 9 Nov):** the refuge, shelter and their rooms (lobby excluded) are one Community Service establishment capped at 500 m² (Zoning Bylaw 20001 s. 2.120 3.12.1; Q5). Growing the refuge stops at the cap; the overflow goes to the next item: the clinic (its own 500 m² Health Service cap, 3.3.1), then unassigned. A fit over either cap fails T-reach R8.
 
 ### 1b. Data centre (the host)
 
@@ -243,6 +243,7 @@ Each rule has its dimension and source. "Drawing choice" means no rule; the valu
     - **R5** Every room that is not circulation opens off circulation, or uses an allowance in 15a (parent named there, and the parent opens off circulation). Bays: the row of touching bays touches the dock lobby.
     - **R6** There is a lobby with a street door, and it has a door or opening into the public corridor.
     - **R7** No corridor has a dead end over 6 m, measured as in 15b (`eh/deadend.py`).
+    - **R8** No capped use is over its per-establishment cap. Each fit lists its caps (geometry field CAPS); Edmonton BE: Community Service (refuge, shelter and their rooms) 500 m², Health Service (clinic) 500 m² (J.B., 9 Nov, hard limit). Area = the rooms of that use on all storeys, lobby and circulation excluded.
     - Output: PASS, or one line per finding: rule, storey, room, reason.
     - Reference script: `eh/reach.py` (Cowork, 8 Nov). Run on all eight fits: all PASS (re-run 9 Nov, after the last fixes). Not tested by the script: a passage serving both sides (checked by hand) and exits onto a drive or yard shared with trucks (rule 6, checked by hand). Negative test (lobby door into the staff vestibule; waiting only through an exam room; clinic WC only through the consult room): R2, R5, R5 found.
 
@@ -262,7 +263,16 @@ One board per variant per lot type, on the representative lots in `eh/reps.json`
 | 64 Airport Rd NW (BE) | beside, one storey | 1.68 MW, 6.0 m | 52 + 16 | 336 m², 5 exams | **needs rezoning** | walkway; tanks; pads; chillers; rooms at minimum width; Community Service cap 483 / 500 m² |
 | 14715 Yellowhead Trail NW (BE, large) | beside, hub cap | 1.68 MW, 6.0 m | 52 + 16 | 336 m², 5 exams | **needs rezoning** | walkway; tanks; pads; chillers; rooms at minimum width; Community Service cap 483 / 500 m² |
 
-All eight pass T-reach (R0–R7, re-run 9 Nov), the room-width audit, egress doors (by load and by room area), walkway loads and dead ends (Edmonton secure exits into the plant yard count through a drawn street gate, Q24). Final independent check 9 Nov: `eh/remeasure10/`. Every board still lists its "?" items (noise, intakes, drains, refrigerant-leak distances, fire access, truck turning, steps at doors that drop to grade).
+**Not drawn yet (open, J.B., 9 Nov: not this round): Edmonton small, narrow-deep, wide-shallow and irregular.** Edmonton has beside, corner and large only. Candidate lots in `eh/reps.json` (two each, no pick made ?):
+
+| Edmonton lot type | Candidates in `eh/reps.json` (BE) |
+|---|---|
+| Small | 10004 167 St NW (436 m² buildable, corner, lane) · 6912 82 Ave NW (484 m², lane) |
+| Narrow-deep | 15231 118 Ave NW · 15311 118 Ave NW (3,240 m² buildable each, 38 × 95 m) |
+| Wide-shallow | 16075 Fort Rd NW (3,858 m², 87 × 59 m) · 1415 78 Ave NW (3,793 m², 82 × 58 m) |
+| Irregular | 10003 63 Ave NW (8,037 m², corner) · 7903 18 St NW (6,036 m², corner) |
+
+All eight drawn fits pass T-reach (R0–R8, re-run 9 Nov), the room-width audit, egress doors (by load and by room area), walkway loads and dead ends (Edmonton secure exits into the plant yard count through a drawn street gate, Q24). Final independent check 9 Nov: `eh/remeasure10/`. Every board still lists its "?" items (noise, intakes, drains, refrigerant-leak distances, fire access, truck turning, steps at doors that drop to grade).
 
 ## 5. Pass/fail tests
 Each test returns **pass**, **tight** (within 0.5 m or 5 % of the limit: "check in design"), **fail**, or **?** (not measurable from the massing). Scripts in `eh/`; every board runs them through `eh/tfboard.py`.
@@ -274,7 +284,7 @@ Each test returns **pass**, **tight** (within 0.5 m or 5 % of the limit: "check 
 | T-ground | rule 4 | at grade the data centre has entrance rooms only (I-2/I-3 strict reading) | board row (hand) |
 | T-stack, T-wet | rules 5, 8 | 2 h floor between data centre and public programs; nothing wet over the hall | board rows (hand) |
 | T-rooms | Part 1 | every room ≥ its minimum area and minimum clear width (largest square); refuge main room ≥ 175 m² counted | `audit_rooms.py` |
-| T-reach | rule 15d | R0–R7 pass (doors on shared walls, lines kept apart, step-free reach, through-room limits, lobby, dead ends) | `reach.py` |
+| T-reach | rule 15d | R0–R8 pass (doors on shared walls, lines kept apart, step-free reach, through-room limits, lobby, dead ends, area caps) | `reach.py` |
 | T-exits | rule 6 | two exits per zone, exits apart, travel ≤ 45 m, stair discharges apart (edge to edge) | `tfboard.measure` |
 | T-deadend | rule 15b | every public, clinic and secure corridor ≤ 6 m along the centreline; a secure exit into a plant yard counts only with a drawn street gate that opens from inside without a key (Q24), with a clear 1.1 m route to it | `deadend.py`, `yardgate.py` |
 | T-egress | rule 6 | refuge and shelter rooms over 60 people (0.75 m²) have two egress doors ≥ ⅓ diagonal apart, edge to edge | `egress2.py` |
@@ -332,10 +342,10 @@ Code checks its steps against these numbers. Source: `eh/v339/geom.py`, `run.py`
 | 19 | Floor area | I-3 3.1.1.1 | 3,300 m² ÷ 4,503 m² site = 0.73 ≤ 3.00 |
 
 ## 8. Open questions for J.B.
-24. ~~Secure exit into the plant yard~~: counts if the yard gate to the street is drawn and opens from inside without a key; label "our reading". Public and clinic exits still never go through a plant yard (rule 6) (J.B., 9 Nov, final gate). Gates drawn on 4103, 64 Airport Rd and 14715. Was: Rule 15b as first written excluded exits into a plant yard for every corridor; rule 6 bans them for public and clinic corridors only. On the three Edmonton fits the secure corridor's second exit passage ends in the plant yard: counted, the dead end is 0.2 m; not counted, 40.2 m (fails). The yard's gate to the street is not drawn either way. Does a secure-line exit into the data centre's own fenced plant yard count, if the yard has a gate to the street? (Boards show it as "to approve".)
+24. ~~Secure exit into the plant yard~~: counts if the yard gate to the street is drawn and opens from inside without a key; label "our reading". Public and clinic exits still never go through a plant yard (rule 6) (J.B., 9 Nov, final gate). Gates drawn on 4103, 64 Airport Rd and 14715 (1.1 m: tight). Independent check of the routes (9 Nov, `eh/remeasure11/`): routes ≥ 1.1 m from every secure yard door, including the DC staff entrance on 64 Airport Rd and 14715 that the first script missed; `eh/yardgate.py` rewritten to read the drawn gates and to fail public or clinic doors into a yard. The check also found the 14715 yard polygon copied from 64 Airport Rd and the drive and apron crossing the yard fence: 14715's yard redrawn, vehicle gates drawn on both. Was: Rule 15b as first written excluded exits into a plant yard for every corridor; rule 6 bans them for public and clinic corridors only. On the three Edmonton fits the secure corridor's second exit passage ends in the plant yard: counted, the dead end is 0.2 m; not counted, 40.2 m (fails). The yard's gate to the street is not drawn either way. Does a secure-line exit into the data centre's own fenced plant yard count, if the yard has a gate to the street? (Boards show it as "to approve".)
 25. ~~Data-centre support room sizes~~: offices, break room, shipping and storage are reference sizes, not minimums (J.B., 9 Nov, final gate). Was: Part 1b's offices, break room, shipping and storage figures come from one filed plan (burlingtonPlans2026). Several fits draw them smaller (offices 24–60 m² vs 100; break 22.5 vs 24; 1330 shipping 38.5 vs 45). Now labelled reference sizes, not minimums; confirm.
 
-Still open: 7 (pads below the FCL, research), 11 (paywalled standards), the 1330 Glen Dr drive (aisle relaxation, Part 4), and the Edmonton lot shapes (J.B., 9 Nov: kept open; not yet written in this spec ?). Everything else is decided.
+Still open: 7 (pads below the FCL, research), 11 (paywalled standards), the 1330 Glen Dr drive (aisle relaxation, Part 4), and the Edmonton lot shapes not drawn yet: small, narrow-deep, wide-shallow, irregular (Part 4). Everything else is decided.
 1. ~~Large-lot rule~~: (a) with Vancouver's cap in both cities (J.B., 8 Nov).
 2. ~~Spare floor~~: refuge and shelter first, then clinic, then "unassigned" (J.B., 8 Nov).
 3. ~~Overnight shelter~~: day size only in I-2/I-3; overnight only where listed or as a flagged rezoning variant (J.B., 8 Nov).
