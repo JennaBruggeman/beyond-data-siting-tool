@@ -330,6 +330,12 @@ function stackedRows(C) {
   Object.assign(L, { W, Da, bOrigin });
   /* hub cap: data centre ≤ 2,325 m² */
   let guard = 0; while (L.dcArea > RULES.cap.m2 + 0.5 && guard++ < 60) { const Da2 = r2(L.Da - 0.5); if (Da2 < minDa) break; const L2 = stackedRest(C, B, W, Da2); if (L2.fail) break; Object.assign(L2, { W, Da: Da2, bOrigin }); Object.assign(L, L2); L.capped = true; }
+  /* 10 Nov 2026 fix (J.B.: the cap holds on every lot; 1515 Boundary Rd was 3,392 m²): where the depth can't come down further, the building narrows
+     1 m at a time from the far side (the drive side stays; the rest of the land stays open, as the large-lot rule); if it still can't, the hub doesn't fit */
+  if (L.dcArea > RULES.cap.m2 + 0.5) { let W2 = W; const Da0 = L.Da;
+    while (L.dcArea > RULES.cap.m2 + 0.5 && guard++ < 260) { W2 = r2(W2 - 1); if (W2 < 15) break; const B2 = build(W2, Da0); if (B2.fail) continue; const L2 = stackedRest(C, B2, W2, Da0); if (L2.fail) continue;
+      Object.assign(L2, { W: W2, Da: Da0, bOrigin }); Object.assign(L, L2); L.capped = true; L.capW = { from: W, to: W2 }; }
+    if (L.dcArea > RULES.cap.m2 + 0.5) return { fail: `the data centre stays ${Math.round(L.dcArea)} m² at the smallest depth and width tried, over the hub cap of ${RULES.cap.m2} m² (J.B. 8 Nov)` }; }
   return L;
 }
 function stackedRest(C, B, W, Da) {
@@ -1003,6 +1009,7 @@ function toPlan(L, S) {
   if (L.kind === 'stacked') flags.push('Section: ground storey, 4.0 m support storey, one hall storey: the spec’s height-capped section, drawn on every lot by the hub cap (J.B. 8 Nov)');
   if (L.grades && L.grades.heightOk === false) flags.push(`Not built yet: ${L.grades.height} m is over the ${L.grades.hLimit} m limit even with the height-capped section; a lower section is not built (?)`);
   if (L.kind === 'stacked' && !L.narrow) flags.push('Refuge at 50 people, the minimum; the ground floor behind the hub stays the data-centre entrance row and covered truck court (J.B. 8 Nov)');
+  if (L.capW) flags.push(`Hub cap (2,325 m² of data centre, J.B. 8 Nov): at its smallest depth the building was still over the cap, so it narrows from ${L.capW.from} m to ${L.capW.to} m wide; the rest of the land stays open (drawing choice, 10 Nov 2026)`);
   if (L.narrow) { const n = L.narrow;
     flags.push(`Narrow lot (F2b, 10 Nov 2026): the hub bands run back from the street (refuge strip ${n.Wr} m | public corridor | service strip), the data-centre entrance and ${L.nb} bays at the rear; ${n.drive ? 'the corridor ends in an exit passage to the side drive' : 'an exit passage (2 h) runs from the corridor along the lot line to the truck court'} (drawing choices, as the 1330 Glen Dr and 8238 Fraser St hand fits)`);
     flags.push(`Refuge ${n.refuge} m² (${Math.floor(n.refuge / 3.5)} people at 3.5 m²), held at the spec size (J.B. 10 Nov); washrooms for a load of ${n.load} (refuge and shelter, Table 3.7.2.2.-A)` + (n.overflow.length ? `; ${n.overflow.join(', ')} moved into a pocket of the refuge strip on the corridor` : ''));
