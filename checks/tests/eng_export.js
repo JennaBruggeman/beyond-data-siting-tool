@@ -79,7 +79,7 @@ const LOTS = { V339: { city: 'van', golden: '../golden/V339.json' } };   /* the 
     /* the drawing's text (charts, comparisons), and the option comparison as a list where the card has one (Cooling: inside and outside options) */
     card.drawText = got.draw.split(/\r?\n/).map(x => x.trim()).filter(Boolean);
     /* a comparison block: a title line, a subtitle line, then option / value pairs ("Air (pick)", "none: all to the air", ...) */
-    const OPT = ['Air', 'Liquid to the chip', 'Immersion', 'Dry coolers', 'Cooling towers', 'Hybrid coolers'], D = card.drawText, comp = [];
+    const OPT = ['Air', 'Liquid to the chip', 'Immersion', 'Dry coolers', 'Air-cooled chillers', 'Cooling towers', 'Hybrid coolers'], D = card.drawText, comp = [];
     const isOpt = l => OPT.includes(String(l || '').replace(/ \(pick\)$/, ''));
     let g = null;
     for (let i = 0; i < D.length; i++) { if (!isOpt(D[i])) continue;

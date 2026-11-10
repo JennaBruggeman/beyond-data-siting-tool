@@ -1,8 +1,8 @@
 {
  "lot": "V339",
  "address": "339 1st Ave E",
- "made": "2026-11-10T23:22:06.820Z",
- "commit": "1901761",
+ "made": "2026-11-10T23:37:46.352Z",
+ "commit": "bc38a8d",
  "toolDirty": false,
  "by": "checks/tests/eng_export.js (F9)",
  "answers": {
@@ -387,7 +387,7 @@
     {
      "kind": "hero",
      "label": "outside, now",
-     "value": "Dry coolers",
+     "value": "Air-cooled chillers",
      "unit": null,
      "key": null,
      "red": false,
@@ -425,7 +425,7 @@
     {
      "kind": "row",
      "label": "Picked outside",
-     "value": "Dry coolers; with an air-cooled hall the tool uses air-cooled chillers",
+     "value": "Air-cooled chillers (the dry option: with an air-cooled hall the tool places air-cooled chillers, not dry coolers)",
      "key": null,
      "range": null,
      "numbers": []
@@ -488,7 +488,7 @@
     }
    ],
    "drawText": [
-    "Inside: how the heat leaves the servers · outside held at dry coolers",
+    "Inside: how the heat leaves the servers · outside held at air-cooled chillers",
     "Heat captured in liquid",
     "share of the servers’ heat, and MW at this size",
     "Air (pick)",
@@ -508,7 +508,7 @@
     "Outside: how the heat leaves the building · inside held at air",
     "Water used",
     "make-up water, m³ a year",
-    "Dry coolers (pick)",
+    "Air-cooled chillers (pick)",
     "none for cooling",
     "Cooling towers",
     "36,661–61,101 m³/yr",
@@ -516,7 +516,7 @@
     "4,546–7,577 m³/yr",
     "Plant noise",
     "sound power of the cooling units, dBA; the bar starts at 90",
-    "Dry coolers (pick)",
+    "Air-cooled chillers (pick)",
     "108.8–112.1 dBAneeds a plant room to the NSW 2021 terms (−25 dB)",
     "Cooling towers",
     "107.6–110.9 dBAneeds a plant room to the NSW 2021 terms (−25 dB)",
@@ -524,7 +524,7 @@
     "111.3–114.6 dBAneeds a plant room to the NSW 2021 terms (−25 dB)",
     "Plant space",
     "m² for UPS, batteries, cooling units",
-    "Dry coolers (pick)",
+    "Air-cooled chillers (pick)",
     "66–131 m²",
     "Cooling towers",
     "25–77 m²",
@@ -585,7 +585,7 @@
      "sub": "make-up water, m³ a year",
      "options": [
       {
-       "option": "Dry coolers",
+       "option": "Air-cooled chillers",
        "picked": true,
        "value": "none for cooling"
       },
@@ -606,7 +606,7 @@
      "sub": "sound power of the cooling units, dBA; the bar starts at 90",
      "options": [
       {
-       "option": "Dry coolers",
+       "option": "Air-cooled chillers",
        "picked": true,
        "value": "108.8–112.1 dBAneeds a plant room to the NSW 2021 terms (−25 dB)"
       },
@@ -627,7 +627,7 @@
      "sub": "m² for UPS, batteries, cooling units",
      "options": [
       {
-       "option": "Dry coolers",
+       "option": "Air-cooled chillers",
        "picked": true,
        "value": "66–131 m²"
       },
@@ -644,7 +644,7 @@
      ]
     }
    ],
-   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nInside: how the heat leaves the servers · outside held at dry coolers\nHeat captured in liquid\nshare of the servers’ heat, and MW at this size\nAir (pick)\nnone: all to the air\nLiquid to the chip\n1.4–1.9 MW57–75% of the heat\nImmersion\n2.5 MW100% of the heat\nPlant space\nm² for UPS, batteries, cooling units (and heat pump, liquid loop)\nAir (pick)\n66–131 m²\nLiquid to the chip\n92–172 m²\nImmersion\n92–172 m²\nOutside: how the heat leaves the building · inside held at air\nWater used\nmake-up water, m³ a year\nDry coolers (pick)\nnone for cooling\nCooling towers\n36,661–61,101 m³/yr\nHybrid coolers\n4,546–7,577 m³/yr\nPlant noise\nsound power of the cooling units, dBA; the bar starts at 90\nDry coolers (pick)\n108.8–112.1 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nCooling towers\n107.6–110.9 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nHybrid coolers\n111.3–114.6 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nPlant space\nm² for UPS, batteries, cooling units\nDry coolers (pick)\n66–131 m²\nCooling towers\n25–77 m²\nHybrid coolers\n94–207 m²\nyour pick (the tool’s default, kept here)\nthe others\nrange, low to high\n\nAir-cooled chillers in design winter: within the maker’s stated range: design −7 °C (BCBC App. C Table C-2, January 2.5 %); stated down to −28.9 °C at widest, −20 °C with R1234ze.\n\nElectricity is not compared. The tool uses one PUE range for every cooling type (R.pue, 1.4–1.55): per-type figures ?\nnot in the tool yet\n\nThis card in the interactive logic diagram\nSources and assumptions\nSet-up\nCooling\n\nTrade-offs, not a verdict. Each side is compared with the other held at the current pick; the pick drives every later card. Here the tool’s default pick stays.\n\nAir\ninside, now\nDry coolers\noutside, now\n4 air-cooled chillers\ncooling units placed\nChillers in design winter\nwithin the stated range\nPicked inside\nAir (the tool’s default)\nPicked outside\nDry coolers; with an air-cooled hall the tool uses air-cooled chillers\nSize tested\n2.5 MW of servers\nFail the fit check here\nnone\nHow each figure is found\nBack\nNext\n4 / 12\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nMaterials\n12\nReport"
+   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nInside: how the heat leaves the servers · outside held at air-cooled chillers\nHeat captured in liquid\nshare of the servers’ heat, and MW at this size\nAir (pick)\nnone: all to the air\nLiquid to the chip\n1.4–1.9 MW57–75% of the heat\nImmersion\n2.5 MW100% of the heat\nPlant space\nm² for UPS, batteries, cooling units (and heat pump, liquid loop)\nAir (pick)\n66–131 m²\nLiquid to the chip\n92–172 m²\nImmersion\n92–172 m²\nOutside: how the heat leaves the building · inside held at air\nWater used\nmake-up water, m³ a year\nAir-cooled chillers (pick)\nnone for cooling\nCooling towers\n36,661–61,101 m³/yr\nHybrid coolers\n4,546–7,577 m³/yr\nPlant noise\nsound power of the cooling units, dBA; the bar starts at 90\nAir-cooled chillers (pick)\n108.8–112.1 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nCooling towers\n107.6–110.9 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nHybrid coolers\n111.3–114.6 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nPlant space\nm² for UPS, batteries, cooling units\nAir-cooled chillers (pick)\n66–131 m²\nCooling towers\n25–77 m²\nHybrid coolers\n94–207 m²\nyour pick (the tool’s default, kept here)\nthe others\nrange, low to high\n\nAir-cooled chillers in design winter: within the maker’s stated range: design −7 °C (BCBC App. C Table C-2, January 2.5 %); stated down to −28.9 °C at widest, −20 °C with R1234ze.\n\nElectricity is not compared. The tool uses one PUE range for every cooling type (R.pue, 1.4–1.55): per-type figures ?\nnot in the tool yet\n\nThis card in the interactive logic diagram\nSources and assumptions\nSet-up\nCooling\n\nTrade-offs, not a verdict. Each side is compared with the other held at the current pick; the pick drives every later card. Here the tool’s default pick stays.\n\nAir\ninside, now\nAir-cooled chillers\noutside, now\n4 air-cooled chillers\ncooling units placed\nChillers in design winter\nwithin the stated range\nPicked inside\nAir (the tool’s default)\nPicked outside\nAir-cooled chillers (the dry option: with an air-cooled hall the tool places air-cooled chillers, not dry coolers)\nSize tested\n2.5 MW of servers\nFail the fit check here\nnone\nHow each figure is found\nBack\nNext\n4 / 12\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nMaterials\n12\nReport"
   },
   {
    "n": 5,
