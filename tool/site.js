@@ -176,7 +176,7 @@ function model(){
   if(A.loadIn==null&&BD.tier&&BD.tier()==='arch'){ A.loadIn='1'; A.loadDefault='arch'; }
   { const a0=s.a||[], Z0=zoneLimits(s.city,s.city==='van'?(a0[1]||''):(a0[2]||a0[1]||'')); if(Z0.screen&&(!A.vis||A.vis==='reveal')) A.vis='screen'; } /* 2 Nov 2026 hard rules: screening required (Z.screen) */
   const PF=progFloor(s); /* 7 Nov 2026: programs sharing the building count toward loading (Architecture) */
-  const key=JSON.stringify([PF,s.city,s.id,A.built,A.extent,A.floor,A.foot,A.cover,A.loadIn,A.flip,A.hmode,A.storeys,A.userFSR,A.userH,A.plantAt,A.outside,A.inside,A.spares,A.gens,A.genAt,A.genSpares,A.mw,A.vis,A.subB,A.fcSub,A.dcFloor,A.dcSite,A.hallOpt]);
+  const key=JSON.stringify([PF,s.city,s.id,A.built,A.extent,A.floor,A.foot,A.cover,A.loadIn,A.flip,A.hmode,A.storeys,A.userFSR,A.userH,A.plantAt,A.outside,A.inside,A.spares,A.gens,A.genAt,A.genSpares,A.mw,A.vis,A.subB,A.fcSub,A.dcFloor,A.dcSite,A.hallOpt,A.front]);
   if(cache.key===key) return cache.m;
   const a=s.a||[], city=s.city, zraw=city==='van'?(a[1]||''):(a[2]||a[1]||'');
   const Z=zoneLimits(city,zraw);
@@ -232,7 +232,10 @@ function model(){
     /* 7 Nov 2026 (Cowork, V339 boards: 'the building front sits about 24 m behind the front lot line'): the zone's greatest building depth (I-2/I-3 61 m)
        was centred on the lot, so on a deep lot the building stood back from the street. It is now counted from the front yard line (a drawing choice:
        the by-law sets the depth, not where it starts). Across the lot (v) it stays centred. The ground behind it is left open (yard plant beyond it: ?). */
-    if(y.max){ if(u1-u0>y.max){ m.capRear=u1-u0-y.max; if(fl>0) u1=u0+y.max; else u0=u1-y.max; } if(v1-v0>y.max){ const c=(v0+v1)/2; v0=c-y.max/2; v1=c+y.max/2; } }
+    /* F8 (10 Nov 2026, behind the flag A.front==='yard'; SPEC_NOTE_front_public_yard; J.B.'s gate passed 10 Nov): the building sits against the plant yard;
+       the zone's greatest depth is counted from the plant-yard edge toward the street (after plant.js), so the cap is not applied here. Default: as before */
+    const yardMode=A.front==='yard'; if(yardMode) m.frontMode='yard';
+    if(y.max){ if(u1-u0>y.max){ if(yardMode) m.depthMax=y.max; else { m.capRear=u1-u0-y.max; if(fl>0) u1=u0+y.max; else u0=u1-y.max; } } if(v1-v0>y.max){ const c=(v0+v1)/2; v0=c-y.max/2; v1=c+y.max/2; } }
     m.inset=rectW(F,u0,u1,v0,v1); m.yardNote=Z.yardsKnown?'':'Yards and setbacks for this zone are not yet read, so the building may cover the whole lot.'; yardLines(m); const YE=m.edgeYards;
     /* J.B. 7 Nov 2026 (section 3 gate): an inside dock with no street or lane at the rear or sides gets a 6.1 m drive from the front lot line along the
        v0 side (the dock's side) to the rear. Vancouver: inside the side yard as far as it goes (a flagged option: the Director may allow a reduced side yard for loading and vehicular access, I-3 3.1.2.16);
@@ -249,7 +252,12 @@ function model(){
     const gfaGuess=dcF?Math.min(lotArea*Z.fsr[1],dcF):A.mw&&perMW0?Math.min(lotArea*Z.fsr[1],A.mw*perMW0):lotArea*Z.fsr[1];
     const sup=dcF&&LD.dcSupport?LD.dcSupport:0, PF2=dcF?Object.assign({},PF||{m2:0,uses:null},{dcSup:sup?[gfaGuess,sup]:null}):null; /* 7 Nov 2026 (J.B.): the data centre's support rooms count in its floor */
     const LN=loadingNeed(city,dcF&&sup?gfaGuess/(1-sup):gfaGuess,PF2); m.loadingNeed=LN;
-    const rearEnd=fl>0?u1:u0, dir=fl>0?-1:1; let cur=rearEnd;
+    const dir=fl>0?-1:1; let rearEnd=fl>0?u1:u0;
+    /* F8 flag: with no depth cap the frame's rear can be a wedge of a skewed lot (339 1st Ave E); the rear band (loading, plant yard) starts where the
+       lot inside the yard line is its full width, 1 m on (5 points across the width, 0.5 m steps); the wedge behind stays open (drawing choice) */
+    if(yardMode){ const RY=m.yardOff&&!m.yardOffBad?m.yardOff:ring, full=u=>[0.02,0.25,0.5,0.75,0.98].every(t=>{ const [x,yy]=F.toW(u,v0+(v1-v0)*t); return BD.pip(x,yy,RY); });
+      let u=rearEnd, k=0; for(;k<300&&!(full(u)&&full(u+dir*1));k++) u+=dir*0.5; if(k<300){ m.rearTrim=Math.abs(u-rearEnd); rearEnd=u; } }   /* never full width: the rear stays */
+    let cur=rearEnd;
     if(LN.n&&!A.loadIn&&A.foot!=='existing'){ const dep=LN.len+LN.aisle; const a0=cur, a1=cur+dir*dep; { const q=inscribe(F,ring,a0,a1,v0,v1,false,YE); m.loading=q?rectW(F,q[0],q[1],q[2],q[3]):clipYards(m,rectW(F,Math.min(a0,a1),Math.max(a0,a1),v0,v1)); m.loadV=q?[q[2],q[3]]:[v0,v1]; } m.loadDepth=dep; cur=a1;
       m.loadSpaces=[]; const lv0=m.loadV[0], spanV=m.loadV[1]-m.loadV[0], k=Math.min(LN.n,Math.max(1,Math.floor(spanV/(LN.wid+0.6))));
       for(let i=0;i<k;i++){ const b0=lv0+0.6+i*(LN.wid+0.6); const s0=rearEnd+dir*0, s1=rearEnd+dir*LN.len; m.loadSpaces.push(rectW(F,Math.min(s0,s1),Math.max(s0,s1),b0,b0+LN.wid)); }
@@ -264,7 +272,10 @@ function model(){
   }
   if(BD.plant) BD.plant.place(m); // sizes units, may shorten the footprint to leave a plant yard, places roof and yard units
   if(!m.existing&&!m.foot&&m.uBuild){ let [a0,a1]=m.uBuild; if(m.plantYardDepth) a0=a0+m.dir*m.plantYardDepth;
-    if(m.footMode==='cover'&&A.cover){ const want=lotArea*A.cover/100, wv=m.v[1]-m.v[0]; const len=Math.min(Math.abs(a1-a0),want/Math.max(wv,1)); a0=a1+Math.sign(a0-a1||1)*len; }
+    /* F8 flag: the greatest depth from the plant-yard edge toward the street; the rest at the front is left open */
+    if(m.frontMode==='yard'&&m.depthMax&&Math.abs(a1-a0)>m.depthMax){ m.capFront=Math.abs(a1-a0)-m.depthMax; a1=a0+Math.sign(a1-a0)*m.depthMax; }
+    if(m.footMode==='cover'&&A.cover){ const want=lotArea*A.cover/100, wv=m.v[1]-m.v[0]; const len=Math.min(Math.abs(a1-a0),want/Math.max(wv,1)); if(m.frontMode==='yard') a1=a0+Math.sign(a1-a0||1)*len; else a0=a1+Math.sign(a0-a1||1)*len; }   /* F8 flag: against the plant yard */
+    if(m.frontMode==='yard') m.uFace=a1;
     const q=inscribe(F,ring,a0,a1,m.v[0],m.v[1],true,m.edgeYards); /* bugfix 4 Nov 2026: grid fallback for the building only */ if(q&&A.dcFloor&&A.dcSite===BD.S.sel.id) m.hallRoom=(q[1]-q[0])*(q[3]-q[2]); /* Architecture Ratios: the footprint the hall can have */ if(q){
       // J.B., 16 Oct: "the server amount changes but the building doesnt shrink" — when a size is set, the building is only as big as that size needs:
       // floor = MW × 460 m² of hall per MW (built Canadian halls 290–630, operator claims) ÷ 0.6 hall share (48–72%), spread over the storeys; centred in the buildable rectangle
@@ -273,11 +284,12 @@ function model(){
             Hall fix (3 Nov 2026, HALLFIX brief): this is now only the fallback ("full"). The hall's footprint options (hallOptions) are tried below, before the roof plant is placed. */
           const du=need/H, frontLo=Math.abs(q[0]-m.uFront)<=Math.abs(q[1]-m.uFront), ua=frontLo?q[1]-du:q[0], ub=frontLo?q[1]:q[0]+du; m.serverFoot=rectW(F,ua,ub,q[2],q[3]); m.sizedTo={mw:A.mw,floor:dcF,perMW:dcF/A.mw,ratio:true};
           m.hallFull=m.serverFoot; m.hallOpts=hallOptions(q,dcF,floors,m,ftf,frontLo); }
-        else if(need<W*H*0.98){ const k=Math.sqrt(need/(W*H)), cu=(q[0]+q[1])/2, cv=(q[2]+q[3])/2; let w=W*k, h=H*k; if(h<12){ h=Math.min(H,12); w=need/h; } m.serverFoot=rectW(F,cu-w/2,cu+w/2,cv-h/2,cv+h/2); m.sizedTo=dcF?{mw:A.mw,floor:dcF,perMW:dcF/A.mw,ratio:true}:{mw:A.mw,floor:A.mw*perMW,perMW}; } }
+        else if(need<W*H*0.98){ const k=Math.sqrt(need/(W*H)), cv=(q[2]+q[3])/2; let w=W*k, h=H*k; if(h<12){ h=Math.min(H,12); w=need/h; } const fLo=Math.abs(q[0]-m.uFront)<=Math.abs(q[1]-m.uFront), cu=m.frontMode==='yard'?(fLo?q[1]-w/2:q[0]+w/2):(q[0]+q[1])/2;   /* F8 flag: against the plant-yard side */ m.serverFoot=rectW(F,cu-w/2,cu+w/2,cv-h/2,cv+h/2); m.sizedTo=dcF?{mw:A.mw,floor:dcF,perMW:dcF/A.mw,ratio:true}:{mw:A.mw,floor:A.mw*perMW,perMW}; } }
       // capacity is always worked out on the most the lot allows; the drawn floor is only the chosen size (no feedback into "what fits")
       const rr=rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); m.foot=clipYards(m,rr); m.footRect=rr; m.simpleMass=true;
       if(!m.serverFoot) m.serverFoot=rectW(F,q[0],q[1],q[2],q[3]); } else { const r=rectW(F,Math.min(a0,a1),Math.max(a0,a1),m.v[0],m.v[1]); m.foot=clipYards(m,r); m.footRect=r; } }
   if(m.foot&&!m.footArea) m.footArea=BD.area(m.foot);
+  if(m.frontMode==='yard'&&m.foot&&!m.existing&&m.uBuild) frontYard(m);
   if(m.foot&&!m.existing&&m.footArea<20) m.warn.push('After setbacks, loading and plant there is almost no room left for a building on this lot.');
   if(BD.plant&&BD.plant.roof){
     /* hall fix (3 Nov 2026): with a ratio set, the hall takes the option Arrange chose (A.hallOpt). With none chosen, the first option, smallest footprint first,
@@ -367,6 +379,19 @@ function yardsOfFrame(m,Z,side,fl){ const y=Z.yards||{front:0,side:0,rear:0}, ou
   const val=f=>{ if(f.street) return Z.key==='BE'&&['collector','local'].includes(f.street.cls)?SB.streetCL:SB.street; if(f.alley) return SB.alley;
     if(f.nbr.some(res)&&SB.res!=null) return SB.res; if(SB.nonInd!=null&&f.nbr.some(z=>!ind(z))) return SB.nonInd; return SB.site; };
   const S0=side.S, fe=fl>0?'u0':'u1', re=fl>0?'u1':'u0'; return {front:val(S0[fe]),rear:val(S0[re]),s0:val(S0.v0),s1:val(S0.v1),max:y.max,by:'side facts',src:((BD.data.raw.lotside||{edmSetback:{}}).edmSetback[Z.key]||{}).src||['?']}; }
+/* F8 (10 Nov 2026, flag A.front==='yard'): the ground between the front yard line and the building's street face. Depth sampled every 0.5 m across the
+   building's width (from the face toward the street until the yard line, or the lot line where no yard line is drawn); area = Σ depth × 0.5 m.
+   A front public yard where it is at least 6 m deep everywhere (J.B. 10 Nov, drawing choice); under 6 m it is a deeper front yard. Our arithmetic. */
+function frontYard(m){ const F=m.F, dir=m.dir, sf=m.serverFoot&&m.sizedTo&&!m.sizedTo.ratio?m.serverFoot:m.foot, P=[];   /* the building: the massing, or the building sized to its MW (not the hall inside a ratio-set building) */ if(!F||!sf) return;
+  for(let i=0;i<sf.length;i+=2) P.push(F.toL(sf[i],sf[i+1]));
+  const face=dir<0?Math.min(...P.map(p=>p[0])):Math.max(...P.map(p=>p[0])), vs=P.map(p=>p[1]), vA=Math.min(...vs), vB=Math.max(...vs);
+  const R=m.yardOff&&!m.yardOffBad?m.yardOff:m.ring, D=[];
+  for(let v=vA+0.25; v<=vB-0.25+1e-9; v+=0.5){ let d=0; for(; d<200; d+=0.1){ const [x,y]=F.toW(face+dir*(d+0.1),v); if(!BD.pip(x,y,R)) break; } D.push(Math.round(d*10)/10); }
+  if(!D.length) return;
+  const fr=(m.edgeYards||[]).find(e=>e.kind==='front'), dMin=Math.min(...D), dMax=Math.max(...D), m2=Math.round(D.reduce((a,b)=>a+b,0)*0.5);
+  m.frontYard={m2,dMin,dMax,public:dMin>=6,toStreet:fr?fr.abuts==='street':null,beside:!!m.sideDrive,capFront:m.capFront||0,
+    heat:'covered beds and heated paths fed by data-centre heat (J.B. gate 10 Nov; figures ? until the heat cascade research)', why:'F8 (J.B.’s gate passed 10 Nov 2026, GATE_front_public_yard): building against the plant yard; depth from the building face to the front yard line, every 0.5 m across the building (our arithmetic); public yard ≥ 6 m deep (J.B. 10 Nov, drawing choice); maximum front setback not read (?); noise at the yard not checked (?)'}; }
+
 /* LOTLINES 4 Nov 2026 (part 2): the yard of every lot line, from its class (lotside.js classify). Vancouver, and Edmonton zones without a by-abutment table:
    front, rear and side from the zone; a flanking line takes the front yard where the schedule says so (I-2 sub-area B, I-3, FC-2; register
    lot_van_exterior_side; tool/data/lotside.json lines.vanFlankAsFront), else the side yard. Edmonton BE, IM, IH, EIB, EIM: by what the line abuts (Table 4.1,

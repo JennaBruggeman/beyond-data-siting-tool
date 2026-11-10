@@ -411,3 +411,35 @@ Golden identical (one V339 noise count flaked 4,729 → 4,728 once; two re-runs 
    - All six Vancouver test lots front onto their address street. Negative test (8980 given the address W Kent Ave North): refused, naming the flank line.
    - Edmonton: no street names in the file (edmRoads2026 has classes only), so it's flagged "not checked (?)".
 
+
+## F8: building against the plant yard, front public yard (Code, 10 Nov 2026; gate passed 10 Nov, `GATE_front_public_yard_2026-11-10.md`)
+Job `CODE_JOB_F8_front_public_yard.md`, spec note `SPEC_NOTE_front_public_yard_2026-11-10.md`. Committed **off by default** (`?front=yard` in the address or `localStorage bd-front=yard` turns it on; `A.front='yard'` in the site model). Default on in Architecture waits for J.B. to see the before-and-after screenshots.
+- Gate addition: every front yard gets "covered beds and heated paths fed by data-centre heat", figures ? until the heat cascade research. Shown as a line on the hub flag and the card row; nothing sized or drawn.
+
+What the flag does:
+- `site.js`: the zone's greatest depth (61 m) is counted from the plant-yard edge toward the street. The building sized to its MW sits against the plant-yard side (it was centred). `m.frontYard = {m2, dMin, dMax, public, toStreet, beside}`.
+- `site.js`, new drawing choice: with no depth cap, the frame's rear can be a wedge of a skewed lot (339). The rear band (loading, plant yard) now starts where the lot inside the yard line is its full width; the wedge behind stays open.
+- `hub.js`: a second pass moves the whole hub (building, truck court, plant) back by the spare depth. It keeps the move only if the hub is the same (kind, narrow or not, ladder step, variant), the MW isn't lower, and there's no new T-reach finding or travel fail. Otherwise it bisects to the largest move that works, down to 0.5 m.
+- Cards: a "Front public yard" row on Municipal (lot allows) and Architecture (What the lot allows).
+
+| Lot | Hub, flag off | Hub, flag on | Front yard (hub) | Site model's building |
+|---|---|---|---|---|
+| 339 1st Ave E | 1.80 MW | 1.80 MW | moved 17.5 m; about 533 m², public | 236 m², 10.2–10.3 m |
+| 1515 Boundary Rd | 3.23 MW | **5.07 MW** | moved 40.5 m; about 3,172 m², public | 1,430 m², 25.6–25.9 m |
+| 8238 Fraser St | 0.68 MW | 0.70 MW | moved 10 m; about 160 m², public | 318 m², 26.5 m |
+| 8980 Oak St | 0.68 MW | 0.84 MW | moved 2 m (not public) | none |
+| 1353 Pender St E | 2.13 MW | 2.13 MW | no move (reaches the rear yard) | none |
+| 1330, 1360 | doesn't fit | doesn't fit | | |
+| 64 Airport Rd NW | 1.87 MW | 1.87 MW | moved 2 m (not public) | 4.8 m (not public) |
+| 4103 97 St NW | 2.39 MW | 2.54 MW | moved 4 m (not public) | 6.4–6.9 m, public |
+| 14715 Yellowhead Tr NW | 2.54 MW | 2.54 MW | moved 28.5 m; about 1,710 m², public | 14.8–16 m, public |
+
+Not settled by the spec note (questions):
+1. **MW rises on some lots** (1515, 8980, 4103, 8238): moved back, the lot is wider, or (1515) the site model's size search finds a higher MW because the plant yard is now a clean rectangle (site model 4.6 → 8.8 MW). On 1515 the hub's hall then fails travel (46.7 m > 45). Should the move keep the flag-off MW (same building, only moved), or take what the new place allows?
+2. **Two models disagree** on the front yard (4103: hub 4 m, site model 6.4 m). The hub's own building is the one drawn on the hub cards. Report the hub's figure there, and the site model's elsewhere?
+3. **1515 Boundary Rd has no depth limit in the site model** (I-2: `Z.yards.max` empty; 339's I-3 has 61 m). Is that right for I-2?
+4. Travel to the street is the worst hub travel plus the yard depth, a straight add, not a path. Step-free across the yard, its grades and the fence or kerb to the side drive are not drawn or checked (?).
+
+Also from the Municipal report (main chat):
+- **Buildable area** on the cards is now the area inside the yard line itself (each lot line moved in by its own yard), not clipped to the rectangular frame. A second row gives the area within the zone's depth of the front yard line. The 3D fence line is unchanged. Golden is unaffected (these are card figures).
+- **Loading rounding:** `site.js` already rounds 5.2.5's third step to the nearest whole number (5.1.7). The hub rounded up (`bays5_2_5`, and 5.2.3 for the refuge). Fixed to nearest, one-half up, at least 1 above zero. No test lot changes: the hub caps the data centre at 2,325 m², so the third step never applies to it.

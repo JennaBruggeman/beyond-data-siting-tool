@@ -117,7 +117,7 @@ function siteOf(P) { const s = P.s, M = s.M, F = M.F, L = (X, Y) => F.toL(X, Y).
   return { city: M.city, id: sel.id || null, addr: sel.a ? sel.a[0] : null, zone: String(Z.zone || '').toUpperCase(), dir: s.dir < 0 ? -1 : 1, uf: s.uf, ring, edges,
     sideDrive: M.sideDrive ? { w: M.sideDrive.w, inYard: M.sideDrive.inYard, r: bb(M.sideDrive.ring) } : null, maxDepth: base.yards && base.yards.max || null,
     hLimit: M.H || null, mw: (P.ratio && P.ratio.mwTest) || An.mw || M.mwSized || null, fcl: M.grade && M.grade.fcl ? { v: M.grade.fcl.v, datum: M.grade.fcl.datum, src: M.grade.fcl.src } : null,
-    gradeDatum: M.grade ? M.grade.datum : null, grade, lotType: lotTypeOf(M.city, sel.id) };
+    gradeDatum: M.grade ? M.grade.datum : null, grade, lotType: lotTypeOf(M.city, sel.id), frontYard: An.front === 'yard' };   /* F8 flag (10 Nov 2026) */
 }
 
 /* ---------- the core ---------- */
@@ -158,8 +158,12 @@ function layout(S0) {
     if (best) { setBack = best.k; a0 = r2(a0 + best.k); aMax = best.am;
       flags.push(`Irregular front: the front lot line is slanted, so the building line steps back ${best.k} m from the front to the setback with the largest building; the lobby is reached by a walkway from the street (drawing choice; walkway not drawn ?)`); }
     else flags.push(`Irregular front: the lot is under 10 m wide within ${RULES.setBack.max} m of the front line the site model picked (${(fr0 => fr0 ? Math.round(Math.hypot(fr0.b[0] - fr0.a[0], fr0.b[1] - fr0.a[1])) + ' m long' : '?')(S.edges.find(e => e.abuts === 'street' && e.kind === 'front'))}); a hub laid out from another street line is not built (?)`); }
+  const aFull = r2(aMax);   /* F8: the depth to the rear before the zone's depth limit */
   if (S.maxDepth) aMax = Math.min(aMax, S.maxDepth);
-  const res = { site: { a0, aMax: r2(aMax), driveSide: sv > 0 ? 'high v' : 'low v', driveWhy }, flags, notes };
+  /* F8 (10 Nov 2026, flag; J.B.'s gate passed 10 Nov): second pass, the whole hub (building, truck court, plant) moved back by S.frontShift so the plant
+     yard sits at the rear yard line; the ground in front is the front public yard. The building's depth limit still holds (the first pass was capped) */
+  if (S.frontShift) { a0 = r2(a0 + S.frontShift); aMax = r2(Math.min(aFull - S.frontShift, S.maxDepth || 1e9)); }
+  const res = { site: { a0, aMax: r2(aMax), aFull, driveSide: sv > 0 ? 'high v' : 'low v', driveWhy }, flags, notes };
 
   /* variants (spec Part 2). F2b (9 Nov 2026): corner and through from the lot's streets; large, irregular, small, wide-shallow from the job A1 lot type */
   const streets = S.edges.filter(e => e.abuts === 'street');
@@ -927,10 +931,37 @@ function grades(L, S) { const out = { datum: S.gradeDatum || '?' };
 /* ---------- public entry: P → the plan shape the Architecture cards draw ---------- */
 function build(P) { if (!P || !P.s || !P.s.M || !P.s.M.F) return null; const S = siteOf(P); return fromSite(S); }
 function fromSite(S) {
-  const L = layout(S);
+  let L = layout(S);
+  if (S.frontYard && L.rooms) L = pushBack(S, L);
   if (!L.rooms) return { version: RULES.version, rules: RULES, storeys: [], flags: L.flags, exitSep: [], programs: [], entrances: [], hub: L };
   return toPlan(L, S);
 }
+/* F8 (10 Nov 2026, flag A.front==='yard'; SPEC_NOTE_front_public_yard, gate passed 10 Nov): the hub against the plant yard. The deepest thing the first pass drew
+   (rooms, truck court, plant and its clear zones) sets how far back the whole hub can move; it is re-laid out there (the lot's width can change with
+   depth). The largest move, 1 m less at a time, that still fits at the same MW is kept. A front public yard where the move is ≥ 6 m (J.B. 10 Nov). */
+function pushBack(S, L) {
+  const ends = [L.Da || 0];
+  Object.values(L.rooms).forEach(rs => rs.forEach(x => x.r.forEach(r => ends.push(r[1]))));
+  if (L.truck && L.truck.court) ends.push(L.truck.court[1]);
+  if (L.plant) L.plant.items.filter(it => !it.pseudo).forEach(it => { ends.push(it.r[1]); if (it.z && !it.roof) ends.push(it.z[1]); });
+  const used = Math.max(...ends), room = Math.floor((L.site.aFull - used) * 2) / 2;
+  if (room < 0.5) { L.frontYard = { depth: 0, why: 'the hub already reaches the rear yard line' }; return L; }
+  /* the largest move that keeps the same hub: the full move first, then halving to 0.5 m (assumes a smaller move fits where a larger one does) */
+  const nF = X => ((X.treach && X.treach.reach) || []).length + (X.travel || []).filter(t => t.status === 'fail').length;
+  const ok = X => X.rooms && X.kind === L.kind && !!X.narrow === !!L.narrow && (X.ladder && X.ladder.step) === (L.ladder && L.ladder.step) && JSON.stringify(X.variant && X.variant.flags) === JSON.stringify(L.variant && L.variant.flags) && nF(X) <= nF(L) && !(X.MW < L.MW - 0.01);
+  const tryS = sh => layout(Object.assign({}, S, { frontShift: sh }));
+  let best = null; { const Lh = tryS(room); if (ok(Lh)) best = [room, Lh]; }
+  if (!best) { let lo = 0, hi = room;   /* bisection on a 0.5 m grid: lo always fits (0 = the first pass), hi does not */
+    while (hi - lo > 0.5 + 1e-9) { let mid = Math.round(lo + hi) / 2; if (mid <= lo) mid = r2(lo + 0.5); if (mid >= hi) mid = r2(hi - 0.5); const Lm = tryS(mid); if (ok(Lm)) { lo = mid; best = [mid, Lm]; } else hi = mid; } }
+  for (const [sh, L2] of best ? [best] : []) {
+    {   /* the same hub moved back: same kind, narrow or not, ladder step and variant; no new T-reach finding or travel fail; MW not lower */ const d = r2(sh), pub = d >= 6, worst = Math.max(0, ...(L2.travel || []).filter(t => /hub/.test(t.zone)).map(t => t.worst || 0));
+      L2.frontYard = { depth: d, m2: Math.round(d * (L2.W || 0)), public: pub, hubToStreet: worst ? r2(worst + d) : null, used: r2(used), aFull: L.site.aFull };
+      L2.flags.push(pub ? `Front public yard (F8, J.B.’s gate 10 Nov 2026): the hub moved ${d} m back against the plant yard; about ${L2.frontYard.m2} m² in front of the hub, ${d} m deep. The lobby, refuge and stair S1 street doors open onto the yard; from the hub’s exits to the street is ${d} m further across it` + (worst ? ` (worst hub travel ${worst} m to an exit, about ${r2(worst + d)} m to the street)` : '') + `; step-free across the yard and its grades not checked (?); maximum front setback not read (?); noise at the yard not checked (?); covered beds and heated paths fed by data-centre heat (J.B. gate 10 Nov; figures ? until the heat cascade research)`
+        : `Front yard ${d} m deep (under 6 m: a deeper front yard, not a public yard; F8)`);
+      if (S.sideDrive) L2.flags.push('Front public yard: the side drive runs beside it: fence or kerb between them (spec note rule 4; not drawn ?)');
+      return L2; } }
+  L.frontYard = { depth: 0, why: `moving the hub back by even 0.5 m (of ${room} m) changes the hub (its fit, layout, MW or a check); left at the front` };
+  L.flags.push(`F8 flag: the hub stays at the front: ${L.frontYard.why}`); return L; }
 function toPlan(L, S) {
   const toUV = L.toUV;
   const R2uv = r => { const p = toUV(r[0], r[2]), q = toUV(r[1], r[3]); return [Math.min(p[0], q[0]), Math.max(p[0], q[0]), Math.min(p[1], q[1]), Math.max(p[1], q[1])]; };

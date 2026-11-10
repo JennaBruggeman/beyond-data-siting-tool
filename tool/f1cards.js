@@ -65,9 +65,12 @@ function render(res,dr,pb,srcEl,tpl){ dr.innerHTML=res.draw||'';
    The example typology is the Emergency hub (the first in the library); the typology picker is not built (Phase D), so this is the tool's state today. */
 const AR={key:null,P:null,busy:null};
 const EXAMPLE_PICKS=['refuge','warming_shelter','clinic'];
+/* F8 (10 Nov 2026): the front-public-yard rule (SPEC_NOTE_front_public_yard; gate passed 10 Nov) is behind this switch */
+function frontFlag(){ try{ if(new URLSearchParams(location.search).get('front')==='yard') return true; return localStorage.getItem('bd-front')==='yard'; }catch(e){ return false; } }
+BD.frontFlag=frontFlag;
 async function arch(){ const s=BD.S.sel; if(!s) return null; const key=s.city+':'+s.id; if(AR.key===key&&AR.P&&AR.gen===GEN) return AR.P; /* eng() since? set it up again */ if(AR.busy&&AR.bkey===key) return AR.busy;
   AR.bkey=key; AR.busy=(async()=>{ const keepT=BD.tier&&BD.tier(), wait=ms=>new Promise(r=>setTimeout(r,ms));
-    try{ if(BD.setTier) BD.setTier('arch'); await BD.arch.ready; const An=BD.S.answers; for(const k of Object.keys(An)) delete An[k]; Object.assign(An,{built:'new',extent:'whole',floor:'',mw:null});
+    try{ if(BD.setTier) BD.setTier('arch'); await BD.arch.ready; const An=BD.S.answers; for(const k of Object.keys(An)) delete An[k]; Object.assign(An,{built:'new',extent:'whole',floor:'',mw:null},frontFlag()?{front:'yard'}:{});   /* F8 flag (10 Nov 2026): off unless ?front=yard or localStorage bd-front=yard; default on only once J.B.'s gate passes */
       BD.modelReset(); if(BD.flow.findFit) BD.flow.findFit(); /* the largest size where everything fits, as a worked example opens (flow.js findFit) */
       BD.arch.ratio=null; BD.arch.picks=[]; BD.arch.rezone=BD.arch.rezone||{}; BD.arch.rezone[key]=true; /* a lot that needs a rezoning (e.g. Edmonton BE, edm_dc_major) is shown as if rezoned: the tool's flagged option */ BD.modelReset(); await BD.views.arat(); await wait(300);
       const A=BD.arch; A.picks=[]; EXAMPLE_PICKS.forEach(id=>BD.archTest.add(id)); const rf=A.picks.find(q=>q.id==='refuge'); if(rf) rf.opt='side_by_side';
@@ -79,7 +82,7 @@ async function arch(){ const s=BD.S.sel; if(!s) return null; const key=s.city+':
    (air inside, dry coolers outside, plant on the roof). Re-run whenever another setup (arch) has changed the answers since. Returns BD.model(). */
 const EG={key:null,gen:-1,M:null,busy:null}; let GEN=0;
 async function eng(){ const s=BD.S.sel; if(!s) return null; const key=s.city+':'+s.id; if(EG.key===key&&EG.gen===GEN&&EG.M) return EG.M; if(EG.busy&&EG.bkey===key) return EG.busy;
-  EG.bkey=key; EG.busy=(async()=>{ try{ if(BD.setTier) BD.setTier('full'); const An=BD.S.answers; for(const k of Object.keys(An)) delete An[k]; Object.assign(An,{built:'new',extent:'whole',floor:'',mw:null});
+  EG.bkey=key; EG.busy=(async()=>{ try{ if(BD.setTier) BD.setTier('full'); const An=BD.S.answers; for(const k of Object.keys(An)) delete An[k]; Object.assign(An,{built:'new',extent:'whole',floor:'',mw:null},frontFlag()?{front:'yard'}:{});   /* F8 flag: the same model on every card */
       BD.modelReset(); if(BD.flow.findFit) BD.flow.findFit(); BD.modelReset(); GEN++; EG.key=key; EG.gen=GEN; EG.M=BD.model(); EG.A=Object.assign({},An); return EG.M; }
     finally{ EG.busy=null; } })();
   return EG.busy; }

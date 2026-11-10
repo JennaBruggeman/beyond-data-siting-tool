@@ -11,6 +11,11 @@ Open bugs that can change a checked result. Each has the steps to reproduce. New
 - So one lot went missing from the list of candidates. It was not skipped as "no record".
 - Two re-runs straight after gave 4,729. Five more on 10 Nov afternoon, run one after another: all 4,729, `noRec` 13. Not reproduced yet.
 
+**Also seen (10 Nov, evening): 64 Airport Rd NW (E06B), `noRec` 157 against golden 158**, `tested` 3,133 in every run.
+- On the committed code (93cfe25): 1 run in 8 gave 157.
+- With the F8 changes (flag off): 6 runs in 8 gave 157. The flag-off code path is unchanged, so this is most likely timing (when a tile or its records arrive), not a result change. The higher rate isn't explained.
+- So the same family as above: an outline with no zoning record is counted or not depending on what has loaded.
+
 **Why it matters.** If a lot can drop out while tiles load, then:
 - golden can fail without a real change, or pass when a real change is hidden by a dropped lot;
 - a viewer of the tool can see a count one lot short.

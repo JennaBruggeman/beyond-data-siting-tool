@@ -39,7 +39,7 @@ function stepOf(p){ const s=p.size||{}; return s.step&&s.step.m2_per_unit?s.step
 /* ---------- the site, from the model the rest of the tool uses ---------- */
 function site(){ const M=BD.model&&BD.model(); const G=BD.siteGeo; if(!M||!M.F||!G||M.existing||!M.uBuild) return null;
   const R=BD.eng.R, ftf=R.ftf, Z=M.Z||{}, F=M.F, dir=M.dir, v0=M.v[0], v1=M.v[1], W=v1-v0;
-  let a0=M.uBuild[0]; if(M.plantYardDepth) a0+=dir*M.plantYardDepth; const uf=M.uFront, L=Math.abs(uf-a0);
+  let a0=M.uBuild[0]; if(M.plantYardDepth) a0+=dir*M.plantYardDepth; const uf=M.uFace!=null?M.uFace:M.uFront, L=Math.abs(uf-a0);   /* F8 flag: the building face, where the depth is counted from the plant yard */
   const floors=Math.max(1,M.nF[0]), sf=M.serverFoot?BD.area(M.serverFoot):(M.footArea||0);
   const hallM2=M.sizedTo?M.sizedTo.floor:sf*floors;
   return {M,F,G,R,ftf,Z,dir,v0,v1,W,a0,uf,L,floors,hallM2,hallFoot:sf,H:M.H,lot:M.lotArea,fsr:Z.fsr||null,city:M.city}; }
