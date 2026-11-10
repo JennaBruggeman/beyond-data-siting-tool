@@ -388,3 +388,11 @@ Still open: 7 (pads below the FCL, research), 11 (paywalled standards), the 1330
 on the yard fence or a remote box beside truck ground keeps the fuel truck out of the yard; a fill inside the yard is allowed only
 on a truck route that enters through a drawn vehicle gate (a "runs beside, never enters" route does not count). Hose reach and
 remote-fill pipe limits: ? (not sourced) → "tight: check in design".
+
+**Script fix batch (J.B. 10 Nov, late; rules-vs-scripts check, D1–D4; `eh/ic26/FIXBATCH_REPORT_2026-11-10.md`).** T-reach R5
+applies 15a in full (no storey exemption; D4: data-centre rooms and unassigned floor off a secure corridor, the hall only for
+rooms serving it alone); a T-reach row and a "two exits from every zone" row are on every hub board. Rule 6 public exits:
+the whole route to a street or lane is tested, ≥ 1.1 m clear, off all truck ground (D2), using the geometry field
+`STREET_EDGES` (lot-line segments on a street or lane). Yard gates must lead to a street or lane; gates may sit on vertical
+fence edges `(u, v0, v1, 'v')`. Tight on both sides of a limit (D1, `tfboard._st`). Refuges checked on every storey; shelter
+56 m² minimum; egress doors over 45 m². Plant rows (pads, generators, chiller zones) and wet rooms over the hall scripted.
