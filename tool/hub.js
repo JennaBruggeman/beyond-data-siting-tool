@@ -954,13 +954,13 @@ function pushBack(S, L) {
   if (room < 0.5) { L.frontYard = { depth: 0, why: 'the hub already reaches the rear yard line' }; return L; }
   /* the largest move that keeps the same hub: the full move first, then halving to 0.5 m (assumes a smaller move fits where a larger one does) */
   const nF = X => ((X.treach && X.treach.reach) || []).length + (X.travel || []).filter(t => t.status === 'fail').length;
-  const ok = X => X.rooms && X.kind === L.kind && !!X.narrow === !!L.narrow && (X.ladder && X.ladder.step) === (L.ladder && L.ladder.step) && JSON.stringify(X.variant && X.variant.flags) === JSON.stringify(L.variant && L.variant.flags) && nF(X) <= nF(L) && !(X.MW < L.MW - 0.01);
+  const ok = X => X.rooms && X.kind === L.kind && !!X.narrow === !!L.narrow && (X.ladder && X.ladder.step) === (L.ladder && L.ladder.step) && JSON.stringify(X.variant && X.variant.flags) === JSON.stringify(L.variant && L.variant.flags) && nF(X) <= nF(L) && Math.abs(X.MW - L.MW) <= 0.01;   /* same MW (J.B. 10 Nov: same building, moved) */
   const tryS = sh => layout(Object.assign({}, S, { frontShift: sh }));
   let best = null; { const Lh = tryS(room); if (ok(Lh)) best = [room, Lh]; }
   if (!best) { let lo = 0, hi = room;   /* bisection on a 0.5 m grid: lo always fits (0 = the first pass), hi does not */
     while (hi - lo > 0.5 + 1e-9) { let mid = Math.round(lo + hi) / 2; if (mid <= lo) mid = r2(lo + 0.5); if (mid >= hi) mid = r2(hi - 0.5); const Lm = tryS(mid); if (ok(Lm)) { lo = mid; best = [mid, Lm]; } else hi = mid; } }
   for (const [sh, L2] of best ? [best] : []) {
-    {   /* the same hub moved back: same kind, narrow or not, ladder step and variant; no new T-reach finding or travel fail; MW not lower */ const d = r2(sh), pub = d >= 6, worst = Math.max(0, ...(L2.travel || []).filter(t => /hub/.test(t.zone)).map(t => t.worst || 0));
+    {   /* the same hub moved back: same kind, narrow or not, ladder step and variant; no new T-reach finding or travel fail; same MW */ const d = r2(sh), pub = d >= 6, worst = Math.max(0, ...(L2.travel || []).filter(t => /hub/.test(t.zone)).map(t => t.worst || 0));
       L2.frontYard = { depth: d, m2: Math.round(d * (L2.W || 0)), public: pub, hubToStreet: worst ? r2(worst + d) : null, used: r2(used), aFull: L.site.aFull };
       L2.flags.push(pub ? `Front public yard (F8, J.B.’s gate 10 Nov 2026): the hub moved ${d} m back against the plant yard; about ${L2.frontYard.m2} m² in front of the hub, ${d} m deep. The lobby, refuge and stair S1 street doors open onto the yard; from the hub’s exits to the street is ${d} m further across it` + (worst ? ` (worst hub travel ${worst} m to an exit, about ${r2(worst + d)} m to the street)` : '') + `; step-free across the yard and its grades not checked (?); maximum front setback not read (?); noise at the yard not checked (?); covered beds and heated paths fed by data-centre heat (J.B. gate 10 Nov; figures ? until the heat cascade research)`
         : `Front yard ${d} m deep (under 6 m: a deeper front yard, not a public yard; F8)`);

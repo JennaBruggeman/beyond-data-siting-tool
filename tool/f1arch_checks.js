@@ -111,6 +111,9 @@ function planFor(x,P){
   const A=BD.archTest, PL=planOf(P); if(!PL||!PL.storeys.length) return null;
   const g=geo(P), M=g.M, zs=PL.storeys.map(s=>s.z);
   let b=[1e9,-1e9,1e9,-1e9]; PL.storeys.forEach(S=>S.rooms.forEach(r=>{ if(r.rect) b=[Math.min(b[0],r.rect[0]),Math.max(b[1],r.rect[1]),Math.min(b[2],r.rect[2]),Math.max(b[3],r.rect[3])]; }));
+  /* F8 (10 Nov 2026): the hub's front yard (a from −depth to 0 across the hub's width), drawn on the ground storey; the frame takes it in so the street stays in view */
+  const FY=PL.hub&&PL.hub.frontYard&&PL.hub.frontYard.depth>0&&PL.hub.toUV?(()=>{ const H=PL.hub, d=H.frontYard.depth, p=H.toUV(-d,0), q=H.toUV(0,H.W||0); return {d,m2:H.frontYard.m2,pub:H.frontYard.public,rect:[Math.min(p[0],q[0]),Math.max(p[0],q[0]),Math.min(p[1],q[1]),Math.max(p[1],q[1])]}; })():null;
+  if(FY) b=[Math.min(b[0],FY.rect[0]),Math.max(b[1],FY.rect[1]),Math.min(b[2],FY.rect[2]),Math.max(b[3],FY.rect[3])];
   const mg=5, mp=mapper(g,[b[0]-mg,b[1]+mg,b[2]-mg,b[3]+mg],440,12), LW=240, W=mp.W+2*LW, ox=LW;
   const pt=(u,v)=>{ const q=mp.lp(u,v); return [q[0]+ox,q[1]]; }, pr=r=>{ const q=mp.rect(r); q.x+=ox; return q; };
   const f1=v=>v.toFixed(1);
@@ -136,6 +139,7 @@ function planFor(x,P){
     return `<line x1="${f1(p[0])}" y1="${f1(p[1])}" x2="${f1(p[0]+dx)}" y2="${f1(p[1]+dy)}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/>`; };
   const treads=(r,col)=>{ const q=pr(r), vert=q.h>=q.w, n=Math.max(4,Math.round((vert?q.h:q.w)/(0.28*mp.s))); let s=''; for(let k=1;k<n;k++){ const t=(vert?q.y+q.h*k/n:q.x+q.w*k/n); s+=vert?`<line x1="${f1(q.x)}" y1="${f1(t)}" x2="${f1(q.x+q.w)}" y2="${f1(t)}" stroke="${col}" stroke-width="0.5"/>`:`<line x1="${f1(t)}" y1="${f1(q.y)}" x2="${f1(t)}" y2="${f1(q.y+q.h)}" stroke="${col}" stroke-width="0.5"/>`; } return s; };
   const layer=(st,mode)=>{ const S=st.S, col=mode==='color', wc=col?K.ink:'#C4C5C7'; let s='';
+    if(FY&&st.i===0){ const q=pr(FY.rect); s+=rc(q,col?K.ground:'#F7F7F7',` stroke="${col?K.mute:'#D5D6D8'}" stroke-width="0.6" stroke-dasharray="4 3"`)+(q.w>60&&q.h>14?`<text x="${f1(q.x+q.w/2)}" y="${f1(q.y+q.h/2+4)}" text-anchor="middle" font-size="11" fill="${col?K.ink2||K.ink:'#9A9B9D'}">${FY.pub?'Front public yard':'Front yard'}, ${f1(FY.d)} m deep</text>`:''); }
     st.rooms.forEach(o=>o.parts.forEach(r=>{ s+=rc(pr(r.rect),col?fillOf(o):'#F2F2F2'); }));
     S.corridors.forEach(c=>{ s+=rc(pr(c.rect),'#fff'); });
     S.stairs.forEach(c=>{ s+=rc(pr(c.rect),'#fff')+treads(c.rect,col?K.mute:'#D5D6D8'); });

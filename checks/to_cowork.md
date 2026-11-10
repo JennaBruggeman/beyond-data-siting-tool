@@ -443,3 +443,23 @@ Not settled by the spec note (questions):
 Also from the Municipal report (main chat):
 - **Buildable area** on the cards is now the area inside the yard line itself (each lot line moved in by its own yard), not clipped to the rectangular frame. A second row gives the area within the zone's depth of the front yard line. The 3D fence line is unchanged. Golden is unaffected (these are card figures).
 - **Loading rounding:** `site.js` already rounds 5.2.5's third step to the nearest whole number (5.1.7). The hub rounded up (`bays5_2_5`, and 5.2.3 for the refuge). Fixed to nearest, one-half up, at least 1 above zero. No test lot changes: the hub caps the data centre at 2,325 m², so the third step never applies to it.
+
+### F8b: J.B.'s answers applied; on by default in Architecture (10 Nov 2026)
+1. **Moving back keeps the MW** (same building, moved). The Architecture size search runs with the rule off; the rule is then switched on, keeping that MW. The hub moves back only where its MW stays within 0.01. Any MW gain is a separate decision.
+2. **Hub cap fixed on every lot:** where the depth can't come down further, the stacked building narrows 1 m at a time; if it still can't, the hub doesn't fit. 1515 Boundary Rd: 3,392 m² → 2,285 m², 3.23 → 2.18 MW, 53.3 m wide; all travel checks now pass.
+3. **1515 has no 61 m limit:** correct (I-2: s. 3.2 sub-area B only, 3.2.2.7–8; J.B.).
+4. **On by default in Architecture** (`?front=off` turns it off). Engineering and Municipal stay off unless `?front=yard`. "What the lot allows" in Architecture shows the hub's own yard, so it agrees with the hub's plans.
+
+| Lot | MW (off → on) | Front yard (hub) |
+|---|---|---|
+| 339 1st Ave E | 1.80 → 1.80 | 17.5 m, about 533 m², public |
+| 1515 Boundary Rd | 2.18 → 2.18 | 70.5 m, about 3,758 m², public |
+| 8238 Fraser St | 0.68 → 0.69 | 6 m, about 95 m², public |
+| 8980 Oak St, 4103 97 St NW | unchanged | stay at the front (any move changes the MW) |
+| 1353 Pender St E | unchanged | no move (reaches the rear yard) |
+| 64 Airport Rd NW | 1.87 → 1.87 | 2 m (under 6 m) |
+| 14715 Yellowhead Trail NW | 2.54 → 2.54 | 28.5 m, about 1,710 m², public |
+
+Golden identical; T-check parity; Part 7 (339, 64 Airport Rd) unchanged.
+- 1515's plan card is clipped at the top with the 70.5 m yard (the drawing is taller than its frame): to fix in the Phase C sweep.
+- Pool, cascade and garden notes stay with those chats. Yardgate v6/v7 goes into `tool/treach.js` after the hub's fix-list batch (`FIXLIST_rules_vs_scripts_2026-11-10.md`) lands.

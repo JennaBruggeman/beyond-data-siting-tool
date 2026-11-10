@@ -66,13 +66,16 @@ function render(res,dr,pb,srcEl,tpl){ dr.innerHTML=res.draw||'';
 const AR={key:null,P:null,busy:null};
 const EXAMPLE_PICKS=['refuge','warming_shelter','clinic'];
 /* F8 (10 Nov 2026): the front-public-yard rule (SPEC_NOTE_front_public_yard; gate passed 10 Nov) is behind this switch */
-function frontFlag(){ try{ if(new URLSearchParams(location.search).get('front')==='yard') return true; return localStorage.getItem('bd-front')==='yard'; }catch(e){ return false; } }
+function frontFlag(dflt){ try{ const q=new URLSearchParams(location.search).get('front')||localStorage.getItem('bd-front'); return q==='yard'?true:q==='off'?false:!!dflt; }catch(e){ return !!dflt; } }   /* ?front=yard / ?front=off (or localStorage bd-front) override the default */
 BD.frontFlag=frontFlag;
 async function arch(){ const s=BD.S.sel; if(!s) return null; const key=s.city+':'+s.id; if(AR.key===key&&AR.P&&AR.gen===GEN) return AR.P; /* eng() since? set it up again */ if(AR.busy&&AR.bkey===key) return AR.busy;
   AR.bkey=key; AR.busy=(async()=>{ const keepT=BD.tier&&BD.tier(), wait=ms=>new Promise(r=>setTimeout(r,ms));
-    try{ if(BD.setTier) BD.setTier('arch'); await BD.arch.ready; const An=BD.S.answers; for(const k of Object.keys(An)) delete An[k]; Object.assign(An,{built:'new',extent:'whole',floor:'',mw:null},frontFlag()?{front:'yard'}:{});   /* F8 flag (10 Nov 2026): off unless ?front=yard or localStorage bd-front=yard; default on only once J.B.'s gate passes */
+    try{ if(BD.setTier) BD.setTier('arch'); await BD.arch.ready; const An=BD.S.answers; for(const k of Object.keys(An)) delete An[k]; Object.assign(An,{built:'new',extent:'whole',floor:'',mw:null});
       BD.modelReset(); if(BD.flow.findFit) BD.flow.findFit(); /* the largest size where everything fits, as a worked example opens (flow.js findFit) */
       BD.arch.ratio=null; BD.arch.picks=[]; BD.arch.rezone=BD.arch.rezone||{}; BD.arch.rezone[key]=true; /* a lot that needs a rezoning (e.g. Edmonton BE, edm_dc_major) is shown as if rezoned: the tool's flagged option */ BD.modelReset(); await BD.views.arat(); await wait(300);
+      /* F8: on by default in Architecture (J.B.'s gate 10 Nov 2026). The size is found with the rule off and kept: moving back keeps the MW (same building,
+         moved; J.B. 10 Nov: any MW gain is a separate decision) */
+      if(frontFlag(true)){ const M0=BD.model(), mw0=An.mw||(M0&&M0.mwSized)||null; An.front='yard'; if(mw0&&!An.mw) An.mw=mw0; BD.modelReset(); }
       const A=BD.arch; A.picks=[]; EXAMPLE_PICKS.forEach(id=>BD.archTest.add(id)); const rf=A.picks.find(q=>q.id==='refuge'); if(rf) rf.opt='side_by_side';
       BD.modelReset(); const P=BD.archTest.place(); AR.key=key; AR.P=P; GEN++; AR.gen=GEN; return P; }
     finally{ if(keepT&&BD.setTier&&keepT!=='arch') BD.setTier(keepT); AR.busy=null; } })();
@@ -82,7 +85,7 @@ async function arch(){ const s=BD.S.sel; if(!s) return null; const key=s.city+':
    (air inside, dry coolers outside, plant on the roof). Re-run whenever another setup (arch) has changed the answers since. Returns BD.model(). */
 const EG={key:null,gen:-1,M:null,busy:null}; let GEN=0;
 async function eng(){ const s=BD.S.sel; if(!s) return null; const key=s.city+':'+s.id; if(EG.key===key&&EG.gen===GEN&&EG.M) return EG.M; if(EG.busy&&EG.bkey===key) return EG.busy;
-  EG.bkey=key; EG.busy=(async()=>{ try{ if(BD.setTier) BD.setTier('full'); const An=BD.S.answers; for(const k of Object.keys(An)) delete An[k]; Object.assign(An,{built:'new',extent:'whole',floor:'',mw:null},frontFlag()?{front:'yard'}:{});   /* F8 flag: the same model on every card */
+  EG.bkey=key; EG.busy=(async()=>{ try{ if(BD.setTier) BD.setTier('full'); const An=BD.S.answers; for(const k of Object.keys(An)) delete An[k]; Object.assign(An,{built:'new',extent:'whole',floor:'',mw:null},frontFlag(false)?{front:'yard'}:{});   /* F8: Engineering (and the Municipal cards that read its model) off unless switched on */
       BD.modelReset(); if(BD.flow.findFit) BD.flow.findFit(); BD.modelReset(); GEN++; EG.key=key; EG.gen=GEN; EG.M=BD.model(); EG.A=Object.assign({},An); return EG.M; }
     finally{ EG.busy=null; } })();
   return EG.busy; }
