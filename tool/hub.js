@@ -42,6 +42,7 @@ const RULES = {
   pexit: { w: 1.2, why: 'exit passages 1.2 m (≥ 1.1 m, VBBL 3.3.1.9; 2 h)' },
   storeyH: { hall: 6.0, up: 4.0, why: 'hall storey 6.0 m (drawing choice, TIA-942 unread); upper storeys 4.0 m (I-2 3.2.2.9 / I-3 3.1.2.9 minimum); ground 6.1 m I-2 (3.1.2.4), 6.0 m I-3 (3.1.2.9); Edmonton one storey at 6.0 m (no storey minimum in BE, drawing choice)' },
   hallPerMW: { v: 630, why: 'data hall 630 m² a MW (spec 1b: fits use the tool’s low-MW end; dc_rooms.json arch_dc_hall)' },
+  setBack: { max: 6, why: 'irregular fronts: the building line steps back at most 6 m from a slanted front line, so the lobby stays on the main street (spec 15c; drawing choice, F2b 9 Nov 2026)' },
   largeW: { w: 60, why: 'beside variant: the building takes at most 60 m of frontage; on wider lots the rest of the land stays open (spec Part 2 large lot; drawing choice, F2b 9 Nov 2026: at 85 m the data-centre travel on 14715 Yellowhead Trail was 46.7 m, over 45 m)' },
   cap: { m2: 2325, why: 'hub cap: data centre ≤ 2,325 m² and one hall storey on every lot, smaller where the lot can’t hold it (J.B. 8 Nov, drawing choice; Vancouver Parking By-law 5.2.5 step)' },
   grid: { g: 0.25, why: 'travel along the path on a 0.25 m grid, 8 directions, through the doors (spec rule 6); ≤ 45 m sprinklered (VBBL 3.4.2.5)' },
@@ -141,7 +142,19 @@ function layout(S0) {
   let a0 = 0; { const ref = span(3); for (let a = 0; a < 3; a += 0.05) { const sp = span(a); if (sp && ref && sp[1] - sp[0] >= ref[1] - ref[0] - 0.06) { a0 = r2(a); break; } } }
   const spanOver = (a1, a2) => { let lo = -1e9, hi = 1e9; for (let a = a1; a <= a2 + 1e-9; a += 0.5) { const sp = span(a0 + Math.min(a, a2)); if (!sp) return null; lo = Math.max(lo, sp[0]); hi = Math.min(hi, sp[1]); } return [r2(lo + 0.02), r2(hi - 0.02)]; };
   /* depth available for the building: the yard, and the zone's depth limit (I-3 3.1.2.7 61 m) */
-  let aMax = 0; for (let a = 0; a < 200; a += 0.5) { const sp = span(a0 + a); if (!sp || sp[1] - sp[0] < 10) break; aMax = a; }
+  const depthFrom = f => { let am = 0; for (let a = 0; a < 200; a += 0.5) { const sp = span(f + a); if (!sp || sp[1] - sp[0] < 10) break; am = a; } return am; };
+  let aMax = depthFrom(a0), setBack = 0;
+  /* F2b (9 Nov 2026), irregular lots: where the front lot line is slanted the lot is under 10 m wide at the front building line, so there is no
+     depth from it (8980 Oak St). The building line steps back from the front, 0.5 m at a time up to RULES.setBack.max, to the setback with the largest
+     building area (width over the first 40 m × depth, the depth limit applied); the lobby is then reached by a walkway from the street (?).
+     Drawing choice. */
+  if (aMax < 15) { let best = null;
+    for (let k = 0.5; k <= RULES.setBack.max + 1e-9; k = r2(k + 0.5)) { let am = depthFrom(a0 + k); if (S.maxDepth) am = Math.min(am, S.maxDepth); if (am < 15) continue;
+      let lo = -1e9, hi = 1e9; for (let a = 0; a <= Math.min(40, am) + 1e-9; a += 0.5) { const sp = span(a0 + k + a); if (!sp) { lo = 1; hi = 0; break; } lo = Math.max(lo, sp[0]); hi = Math.min(hi, sp[1]); }
+      const score = Math.max(0, hi - lo) * am; if (!best || score > best.score + 1) best = { k, am, score }; }
+    if (best) { setBack = best.k; a0 = r2(a0 + best.k); aMax = best.am;
+      flags.push(`Irregular front: the front lot line is slanted, so the building line steps back ${best.k} m from the front to the setback with the largest building; the lobby is reached by a walkway from the street (drawing choice; walkway not drawn ?)`); }
+    else flags.push(`Irregular front: the lot is under 10 m wide within ${RULES.setBack.max} m of the front line the site model picked (${(fr0 => fr0 ? Math.round(Math.hypot(fr0.b[0] - fr0.a[0], fr0.b[1] - fr0.a[1])) + ' m long' : '?')(S.edges.find(e => e.abuts === 'street' && e.kind === 'front'))}); a hub laid out from another street line is not built (?)`); }
   if (S.maxDepth) aMax = Math.min(aMax, S.maxDepth);
   const res = { site: { a0, aMax: r2(aMax), driveSide: sv > 0 ? 'high v' : 'low v', driveWhy }, flags, notes };
 

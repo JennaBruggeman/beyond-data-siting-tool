@@ -341,3 +341,9 @@ Also from the check, for information:
 - ES54 alcoves and slabs are only for buildings "built to the property line", each with BC Hydro designer approval and a right-of-way. F0-02 and F3-08 do cover pads over a parkade; roofs are not mentioned.
 - Parking By-law 5.2.3 also lists "Community centre … or similar place of assembly" and "Fitness Centre", so the pool may not need the similar-use route.
 - Not read (rows held with trust "?"): Sport England Appendix 2; the HPAC 2014 article on ASHRAE classes; the BC Pool Operations guideline (URL 404; its 37 °C and 40 °C limits are confirmed in the Pool Regulation, ss. 10(2)(b) and 16(b)).
+
+## F2b: which line is the front of 8980 Oak St? (Code, 10 Nov 2026)
+- The tool's site model takes the slanted 57.5 m street line as the front of 8980 Oak St and the 77.5 m line as the flanking street. The lot is addressed on Oak St.
+- From that front the lot is under 10 m wide for the first 6 m, so the tool's hub does not fit (it now says so, with this reason). Stepping the building back far enough to fit would put the lobby 28 m from the street, which breaks spec 15c (lobby on the main street), so Code capped the step-back at 6 m (drawing choice) instead.
+- The Part 4 hand fit draws the hub from a different street line, with the building moved 2.1 m for a walkway.
+- **Question:** for the tool, should the hub be laid out from the street line the hand fit uses (which one: Oak St?), even where the site model calls another line the front? Code has not changed the site model.
